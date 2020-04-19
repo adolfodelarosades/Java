@@ -233,22 +233,133 @@ En este nivel estudiaremos la tecnología de los Servlets y JSP's para el desarr
 
 Hibernate y JPA son dos tecnologías que permiten agilizar el desarrollo en la Capa de Datos en aplicaciones Java Estándar, Web y Empresariales, también conocidos como frameworks ORM (Object Relational Mapping). Aplicaremos las mejores prácticas para persistir información.   
 
-### 6.1 
+### 6.1 Comenzando: Introducción a Hibernate y JPA
 
+* Introducción a Hibernate y JPA
+* ORM
+* Arquitectura de 3 capas con Java Empresarial
+* Rol de Hibernate y JPA dentro de la arquitectura empresarial
+* Instalación de herramientas
+* HolaMunco con Hibernate y JPA
+
+### 6.2 Las Bases: Operaciones Básicas con Hibernate y JPA
+
+* Operaciones Básicas con Hibernate y JPA
+   * Listar datos
+   * Insertar datos
+   * Modificar datos
+   * Eliminar datos
+   
+### 6.3 Relaciones: Manejo de Asociaciones con Hibernate y JPA
+
+* Manejo de Asociaciones con Hibernate y JPA
+* Esquema Entidad-Relación 
+* Tipos de asociaciones
+* Relaciones uno a uno
+* Relaciones uno a muchos
+* Relaciones muchos a muchos
+
+### 6.4 Manejo de Estados: Ciclo de Vida en Hibernate y JPA
+
+* Ciclo de Vida de los objetos de entidad
+* Persistir un objeto
+* Recuperar un objeto
+* Modificar un objeto
+* Eliminar un objeto 
+
+### 6.5 Más Temas: Persistencia en Cascada con Hibernate y JPA
+
+* Persistencia en Cascada
+
+### 6.6 Consultas: Consultas con Hibernate y JPA
+
+* Consultas HQL (Hibernate)
+* Consultas JPQL (JPA)
+
+### 6.7 Más Consultas: API de Criteria con Hibernate y JPA
+
+* API de Criteria
+* Queries dinamícos
+
+### 6.8 Integrando Todo: Aplicación Web del Mundo Real con Hibernate y JPA
+
+* Sistema de Gestión de Alumnos SGA con arquitectura de 3 capas definiendo el rol de cada tecnología usada.
 
 ## 7. Spring Framework
 
 En este nivel estudiaremos el desarrollo de aplicaciones empresariales con Spring. Este framework permite agilizar y simplificar en gran medida el desarrollo de aplicaciones Java EE. 
 
+### 7.1 
+
+### 7.2
+
+### 7.3
+
+### 7.4
+
+### 7.5
+
+### 7.6
+
+### 7.7
+
+### 7.8
+
 ## 8. JavaServer Faces
 
 La tecnología de los JavaServer Faces (JSF) permite agilizar el desarrollo en la capa de presentación aplicando el patrón de diseño MVC. Utilizaremos Glassfish para poder publicar nuestras aplicaciones con JSF.
+
+### 8.1
+
+### 8.2
+
+### 8.3
+
+### 8.4
+
+### 8.5
+
+### 8.6
+
+### 8.7
+
+### 8.8
 
 ## 9 y 10. Java Empresarial
 
 En este nivel estudiaremos la tecnologíade Java EE. Estudiaremos desde los EJB's, JPA, Web Services, Seguridad, Integración de JSF con PrimeFaces. Este nivel abarca 2 cursos.
 
+### 9.1
 
+### 9.2
+
+### 9.3
+
+### 9.4
+
+### 9.5
+
+### 9.6
+
+### 9.7
+
+### 9.8
+
+### 10.1
+
+### 10.2
+
+### 10.3
+
+### 10.4
+
+### 10.5
+
+### 10.6
+
+### 10.7
+
+### 10.8
    
    
 
