@@ -61,5 +61,26 @@ En este nivel estudiaremos los Fundamentos del lenguaje de Programación Java, a
 
 En este nivel estudiaremos los conceptos de la Programación Orientada a Objetos utilizando el lenguaje de programación Java. Estudiaremos a detalle temas como Herencia, Polimorfismo, Encapsulamiento, entre muchos temas más.
 
+### 2.1 Variaciones en el comportamiento: Polimorfismo
+
+* Polimorfismo
+* `this`
+* `super`
+
+### 2.2 Tipos Conversiones y Más: Manejo Avanzado de Objetos
+
+* `instanceOf`
+* Conversiones de tipo
+* Clase `Object`
+   * Método `equals()`
+   * Método `toString()`
+   * Método `hash()`
+   
+### 2.3 Entendiendo la Estructura: Manejo de Bloques de Código
+
+* Bloques de código
+   * Bloques de inicialización
+   
+
 
 
