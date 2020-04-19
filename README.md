@@ -2,8 +2,9 @@
 
 Esta es una serie de varios cursos Java que se listan a continuación.
 
-* 1. Fundamentos de Java
-* 2. Programación con Java
+1. Fundamentos de Java
+2. Programación con Java
+3. Java con JDBC
 
 ## 1. Fundamentos de Java
 
@@ -123,16 +124,32 @@ En este nivel estudiaremos los conceptos de la Programación Orientada a Objetos
 * Lectura de archivos
 * Escritura de archivos
 
+## 3. Java con JDBC
+
+Aprenderemos la tecnología JDBC de Java. Instalaremos distintos motores de bases de datos, como MySql y Oracle. Además estudiaremos patrones de diseño tales como DTO, DAO y Factory, así como las mejores prácticas al usar JDBC.
+
+### 
+
+## 5. Servlets y JSP's
+
+En este nivel estudiaremos la tecnología de los Servlets y JSP's para el desarrollo de aplicaciones Web con Java. Utilizaremos Glassfish para publicar nuestras aplicaciones. Además aplicaremos patrones de diseño tales como MVC, DAO y DTO.
+
+## 6. Hibernate y JPA
+
+Hibernate y JPA son dos tecnologías que permiten agilizar el desarrollo en la Capa de Datos en aplicaciones Java Estándar, Web y Empresariales, también conocidos como frameworks ORM (Object Relational Mapping). Aplicaremos las mejores prácticas para persistir información.   
 
 
+## 7. Spring Framework
 
-   
+En este nivel estudiaremos el desarrollo de aplicaciones empresariales con Spring. Este framework permite agilizar y simplificar en gran medida el desarrollo de aplicaciones Java EE. 
 
+## 8. JavaServer Faces
 
+La tecnología de los JavaServer Faces (JSF) permite agilizar el desarrollo en la capa de presentación aplicando el patrón de diseño MVC. Utilizaremos Glassfish para poder publicar nuestras aplicaciones con JSF.
 
+## 9 y 10. Java Empresarial
 
-
-
+En este nivel estudiaremos la tecnologíade Java EE. Estudiaremos desde los EJB's, JPA, Web Services, Seguridad, Integración de JSF con PrimeFaces. Este nivel abarca 2 cursos.
 
 
    
