@@ -2,6 +2,161 @@
 
 Esta es una serie de varios cursos Java que se listan a continuación.
 
+# OPENWEBINARS
+
+## Java 8 desde Cero
+
+Aprende programación en Java realizando esta formación Java online, y comienza a crear aplicaciones web, aplicaciones móviles y aplicaciones de escritorio.
+
+**Duración:** 9:02:50
+
+## CONTENIDOS 
+  
+1. Comienza con Java 59m 
+   * Presentación del profesor y curso 5:12 
+   * Instalación de Java 16:13 
+   * Posibles entornos de desarrollo 13:46 
+   * Hola Mundo 10:49 
+   * Algunos elementos de sintaxis 13:01 
+   * Contenido adicional 4
+
+2. Tipos de datos, operadores y estructuras de control 110m
+   * Variables 16:58 
+   * Manipulación de números, caracteres y otros valores I 8:28 
+   * Manipulación de números, caracteres y otros valores II 15:39 
+   * Manipulación de números, caracteres y otros valores III 8:13 
+   * Manipulación de números, caracteres y otros valores IV 15:52 
+   * Estructura de decisión 21:22 
+   * Estructura de repetición 13:01 
+   * Práctica: Creando una calculadora 11:13 
+   * Contenido adicional  7
+   
+3. Clases y objetos 58m
+   * Orientación de objetos 22:58 
+   * Los constructores 9:07 
+   * Getters y setters 14:28 
+   * Ciclo de vida de un objeto 6:27 
+   * Uso de clases envoltorio 5:31 
+   * Contenido adicional 5
+
+4. Manipulación y tratamiento de datos 77m
+   * Conoce Java API Docs 9:57 
+   * Uso de la clase String 13:03 
+   * Manejo de Arrays 23:09 
+   * Práctica: Creando el juego de hundir la flota 31:16 
+   * Contenido adicional 4
+
+5. Revisitando clases y objetos 49m
+   * Argumento de un método y tipos de retorno 13:36 
+   * Paso de argumento por valor y referencia 8:18 
+   * Modificadores de acceso 12:39 
+   * Métodos estáticos y variables estáticas 8:19 
+   * Sobrecarga de métodos y constructores 7:07 
+   * Contenido adicional 5
+
+6. Uso de herencia 64m
+   * Qué es la herencia y los beneficios que aporta 15:52 
+   * Polimorfismo 9:43 
+   * Uso de super para acceder a un objeto y sus constructores 8:42 
+   * Clases abstractas e interfaces I 20:52 
+   * Clases abstractas e interfaces II 9:48 
+   * Contenido adicional 5
+   
+7. Manejo de excepciones 39m
+   * Excepciones y errores 9:28 
+   * Tratamiento de excepciones 13:36 
+   * Excepciones más comunes 4:49 
+   * Lanzamiento y propagación de excepciones 11:25 
+   * Contenido adicional 4
+   
+8. Algunas clases del API de Java 82m
+   * Manipulación de datos con Stringbuilder 8:01 
+   * Manejo de fechas 17:31 
+   * Colecciones ArrayList 11:30 
+   * Introducción a las expresiones lambda 20:21 
+   * Práctica: Creando un gestor de aparcamiento de coches 25:16 
+   * Contenido adicional 6
+   
+9. Contenido extra
+   * https://github.com/OpenWebinarsNet/Curso-Java-desde-0/
+   
+## Java8 para programadores Java
+
+Aprende a programar con Java 8, la nueva versión de uno de los lenguajes más usados por las grandes empresas.
+
+**Duración:** 8:40:18
+
+## Contenido
+
+1. Introducción al diseño de clases en Java 73m
+   * Presentación del profesor y curso 7:36 
+   * Implementación de la encapsulación 12:31 
+   * Implementación de herencia con modificadores de acceso y composición 9:55 
+   * Polimorfismo 10:37 
+   * Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
+   * Uso del ámbito static para variables, métodos y clases 9:30 
+   * Clases singleton y clases de inmutables 9:09 
+   * Contenido adicional 10
+
+2. Diseño avanzado de clases 43m
+   * Clases y métodos abstractos 9:13 
+   * Código que usa final 7:22 
+   * Clases internas, locales y anónimas 19:25 
+   * Uso de enumeraciones 7:18 
+   * Contenido adicional  4
+
+3. Clases genéricas y colecciones 37m
+   * Creación de una clase genérica 10:22 
+   * Creación y uso de list, set y map 18:19 
+   * Interfaces Comparable y Comparator 9:07 
+   * Contenido adicional 3
+
+4. Expresiones lambda e interfaces funcionales 21m
+   * Interfaces funcionales 8:01 
+   * Predicate, consumer, function y supplier 13:22 
+   * Contenido adicional 2
+
+5. Java Stream API 106m
+   * Introducción al API Stream 16:04 
+   * Métodos de búsqueda de datos 6:27 
+   * Métodos de datos, cálculo y ordenación 10:25 
+   * Uso de Map y flapMap 12:04 
+   * Uso de la clase Collector 19:28 
+   * Uso de streams y filtros 8:27 
+   * Referencias a métodos con stream 10:55 
+   * Práctica: Todos los elementos del API stream trabajando conjuntamente 22:25 
+   * Contenido adicional 7
+
+6. Java I/O y NIO.2 105m
+   * Uso de flujos de salida 19:34 
+   * Uso de flujos de entrada 22:13 
+   * Trabajar con la clase file 7:09 
+   * Trabajar con la interfaz path 13:30 
+   * Utilizar métodos de la clase files 13:55 
+   * Uso de API Stream con NIO.2 9:07 
+   * Práctica de uso de Java NIO.2 19:51 
+   * Contenido adicional 21
+
+7. Concurrencia en Java 65m
+   * Programación concurrente 12:51 
+   * Programación concurrente 14:07 
+   * Runnable, Callable, y ExecutorService 15:16 
+   * Código sincronizado y uso de valores atómicos 12:49 
+   * Colecciones concurrentes 10:19 
+   * Contenido adicional 5
+
+8. Bases de datos y Java 66m
+   * Conexión con una base de datos 20:27 
+   * Lanzar consultas y procesar resultados 28:52 
+   * Uso de RowSet 17:30 
+   * Contenido adicional 3
+
+9. Contenido extra
+
+   https://github.com/OpenWebinarsNet/Curso-java-8-para-programadores-java
+   
+
+
 # AEPI
 
 ## CURSO PROGRAMADOR – ANALISTA JAVA DE APLICACIONES EMPRESARIALES
