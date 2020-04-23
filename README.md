@@ -5,13 +5,17 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 # OPENWEBINARS
 
 * [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/101_Java_8_desde_Cero.md)
-
 * [102 Java8 para programadores Java](https://github.com/adolfodelarosades/Java/blob/master/102_Java8_para_programadores_Java.md)
+* [110 Desarrollo Web con Java EE](https://github.com/adolfodelarosades/Java/blob/master/110_Desarrollo_Web_con_Java_EE.md)
+* [120 Curso JavaServer Faces](https://github.com/adolfodelarosades/Java/blob/master/120_Curso_JavaServer_Faces.md)
+* [130 Hibernate y JPA](https://github.com/adolfodelarosades/Java/blob/master/130_Hibernate_y_JPA.md)
+* [140 Spring Framework](https://github.com/adolfodelarosades/Java/blob/master/140_Spring_Framework.md)
+
+
 
 # AEPI
 
 * [201 CURSO PROGRAMADOR – ANALISTA JAVA DE APLICACIONES EMPRESARIALES](https://github.com/adolfodelarosades/Java/blob/master/201_CURSO_PROGRAMADOR%E2%80%93ANALISTA_JAVA_DE_APLICACIONES_EMPRESARIALES.md)
-
 * [202 Curso profesional de Spring Boot 2.2](https://github.com/adolfodelarosades/Java/blob/master/202_Curso_profesional_de_Spring_Boot_2-2.md)
 
 # UNIVERSIDAD JAVA
