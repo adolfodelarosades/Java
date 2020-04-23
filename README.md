@@ -4,9 +4,9 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # OPENWEBINARS
 
-* 101 Java 8 desde Cero
+* [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/101_Java_8_desde_Cero.md)
 
-* 102 Java8 para programadores Java
+* [102 Java8 para programadores Java](https://github.com/adolfodelarosades/Java/blob/master/102_Java8_para_programadores_Java.md)
 
 # AEPI
 
