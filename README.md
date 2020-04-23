@@ -4,7 +4,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # OPENWEBINARS
 
-## Java 8 desde Cero
+## 101 Java 8 desde Cero
 
 Aprende programación en Java realizando esta formación Java online, y comienza a crear aplicaciones web, aplicaciones móviles y aplicaciones de escritorio.
 
