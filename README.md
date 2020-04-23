@@ -4,7 +4,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # OPENWEBINARS
 
-* [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/101_Java_8_desde_Cero.md)
+* [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero.md)
 * [102 Java8 para programadores Java](https://github.com/adolfodelarosades/Java/blob/master/102_Java8_para_programadores_Java.md)
 * [110 Desarrollo Web con Java EE](https://github.com/adolfodelarosades/Java/blob/master/110_Desarrollo_Web_con_Java_EE.md)
 * [120 Curso JavaServer Faces](https://github.com/adolfodelarosades/Java/blob/master/120_Curso_JavaServer_Faces.md)
