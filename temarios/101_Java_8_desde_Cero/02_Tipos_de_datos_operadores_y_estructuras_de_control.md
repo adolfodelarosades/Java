@@ -189,7 +189,7 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 
 #### 6.3.1 Operadores lógicos condicionales
 
-![06_Manipulación-13](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-13)
+![06_Manipulación-13](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-13.png)
 
 * `!`: realiza la negación del valor.
 * `&&`: realiza un AND condicional de los dos operandos.
