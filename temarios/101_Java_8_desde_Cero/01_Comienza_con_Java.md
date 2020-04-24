@@ -36,19 +36,37 @@
 
 ### 1.1 ¿Qué es Java?
 
+![01_Instalación_de_Java-2](01_Instalación_de_Java-2.png)
+
 Java no es más que una plataforma sobre la cual ejecutar aplicaciones que están desarrolladas en ese mismo lenguaje de programación, es decir, Java. Además, esta plataforma pone a nuestra disposición cantidades ingenentes de código que podemos utilizar.
+
+![01_Instalación_de_Java-3](01_Instalación_de_Java-3.png)
+
+![01_Instalación_de_Java-4](01_Instalación_de_Java-4.png)
 
 ### 1.2 Java Virtual Machine
 
+![01_Instalación_de_Java-5](01_Instalación_de_Java-5.png)
+
 Una de las principales características de Java con respecto a otros lenguajes, como C, C++ o Python es que los programas producidos en este lenguaje no se ejecutan directamente por el sistema operativo; sobre este, existe un entorno, llamado *Java Virtual Machine*. Podríamos asemejarlo a un ordenador virtual que está capacitado para ejectuar aplicaciones Java. De esta manera, como programadores nos desprendemos de la mayoría de los detalles asociados a la plataforma concreta sobre la cual estamos programando.
+
+![01_Instalación_de_Java-6](01_Instalación_de_Java-6.png)
 
 La JVM está disponible para la casi totalidad de arquitecturas y sistemas operativos existentes en el mercado. Desde Oracle, la propietaria de Java, se jactan de que se pueden ejecutar aplicaciones java en 3.000 millones de dispositivos, desde sistemas de vuelo, cajeros automáticos a robots o routers.
 
 ### 1.3 Java Bytecode
 
+![01_Instalación_de_Java-7](01_Instalación_de_Java-7.png)
+
 Como consecuencia de tener un entorno especial de ejecución, la JVM, tenemos que al compilar y enlazar (link) nuestro código Java, no vamos a obtener el clásico *código objeto* producido, por ejemplo, al trabajar con C o C++. En este caso, tenemos un código objeto especial, llamado **java bytecode**, y que solo es capaz de ser ejecutado por la Java Virtual Machine.
 
+![01_Instalación_de_Java-8](01_Instalación_de_Java-8.png)
+
+![01_Instalación_de_Java-9](01_Instalación_de_Java-9.png)
+
 ### 1.4 JRE vs JDK
+
+![01_Instalación_de_Java-10](01_Instalación_de_Java-10.png)
 
 Al empezar a trabajar con Java, nos encontramos con dos conceptos que es necesario diferenciar, y que son JRE (*Java Runtinme Environment*) y JDK (*Java Development Kit*)
 
@@ -57,6 +75,8 @@ Al empezar a trabajar con Java, nos encontramos con dos conceptos que es necesar
 * **JDK**: Se trata de un conjunto de ficheros y programas que nos permiten crear, compilar y ejecutar aplicaciones Java. Es necesario si además de ejecutar aplicaciones Java, queremos desarrolarlas.
 
 Es interesante apreciar que al instalar en nuestro PC el kit de desarrollo (JDK), también estamos instalando en entorno de ejecución (JRE.)
+
+![01_Instalación_de_Java-11](01_Instalación_de_Java-11.png)
 
 ### 1.5 Instalación de JDK 8
 
@@ -71,6 +91,7 @@ Para instalar la última versión de JDK, tan solo tenemos que escribir en googl
 * En el caso de Mac, …
 
 ### 1.6 Java 9
+
 En el momento de comenzar a escribir estas líneas, la primera versión de Java 9 ha sido liberada, si bien muchos programas (como por ejemplo, el propio entorno de desarrollo Eclipse) aun no soportan dicha versión.
 
 ## Posibles entornos de desarrollo 13:46 
