@@ -25,7 +25,7 @@ Este curso se ofreció anteriormente como un Massive Open Online Course (MOOC) y
 6. Lección 4: Expresiones Lambda
 7. Aprendizaje adicional
 
-### 1. Bienvenido a Java Coding & Concepts with a Game: Java Puzzle Ball
+## Bienvenido a Java Coding & Concepts with a Game: Java Puzzle Ball
 
 **Java Puzzle Ball** es una solución de aprendizaje basada en un juego utilizado a lo largo de este curso. Cada lección coincide con una serie de rompecabezas. Mientras juegas, construirás un modelo mental sólido para un concepto de programación Java subyacente particular. Esto es seguido por videos de conferencias que informan y contextualizan sus observaciones. Hemos descubierto que los detalles técnicos realmente "hacen clic" con los estudiantes durante el proceso de información. Esto también debería traducirse en un mejor rendimiento y capacidad de resolución de problemas cuando intente los laboratorios de codificación. Los temas incluyen:
 
@@ -44,8 +44,7 @@ Este curso está destinado a:
 
 [Video Presentación](https://www.youtube.com/watch?v=7a0f15diiPU&feature=youtu.be)
 
-
-### 2. Instrucciones de configuración para Java y NetBeans
+## Instrucciones de configuración para Java y NetBeans
 
 ¿Tiene Java y NetBeans configurados en su máquina? Los necesitarás para ejecutar el juego y editar el código Java. Esta sección proporciona instrucciones de instalación.
  
@@ -56,7 +55,6 @@ Esta sección lo guía a través del proceso de instalación:
 
 Esta sección también proporciona información de fondo opcional sobre Java y los componentes que ha instalado.
 
-
 #### Instructional Material
 
 * Lección 0: [Información general sobre Java](pdfs/Lesson_0.pdf)
@@ -64,8 +62,28 @@ Esta sección también proporciona información de fondo opcional sobre Java y l
 * [NetBeans and JDK Bundle](https://www.oracle.com/java/technologies/javase-downloads.html)
 * [HelloWorld.zip](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Setup/HelloWorld.zip)
 
-### 3. Lección 1: Pensamiento orientado a objetos y diseño de clase
-### 4. Lección 2: Variables estáticas vs de instancia
-### 5. Lección 3: Herencia
-### 6. Lección 4: Expresiones Lambda
-### 7. Aprendizaje adicional
+## Lección 1: Pensamiento orientado a objetos y diseño de clase
+
+#### Instructional Materials
+
+[video Lesson 1-1: Educational Games	duration 7 Min](https://www.youtube.com/watch?v=6dD0ACeXX48&feature=emb_logo)
+
+[Java Puzzle Ball (Basic Puzzles 1-5)](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/JavaPuzzleBall.jar)	
+
+[video Lesson 1-2: Objects and Classes	duration 5 Min](https://www.youtube.com/watch?v=Syjmpp2mFKM&feature=emb_logo)
+
+[video Lesson 1-3: Editing Java Code	duration 6 Min](https://www.youtube.com/watch?v=9OYbUBXC8mY&feature=emb_logo)
+
+[read Lab 1 Instructions	duration 60 Min](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/Lab1%20Instructions.pdf)
+
+[readLab 1 Start State](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/JPB_MOOC_Lab1.zip)
+
+[readLab 1 Solution](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/JPB_MOOC_Lab1_Soln.zip)
+
+quiz Quiz 1
+
+
+## Lección 2: Variables estáticas vs de instancia
+## Lección 3: Herencia
+## Lección 4: Expresiones Lambda
+## Aprendizaje adicional
