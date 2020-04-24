@@ -98,9 +98,17 @@ En el momento de comenzar a escribir estas líneas, la primera versión de Java 
 
 [Posibles entornos de desarrollo](pdfs/02_Posibles_entornos_de_desarrollo.pdf)
 
+![02_Posibles_entornos_de_desarrollo-2](images/02_Posibles_entornos_de_desarrollo-2.png)
+
 ### 2.1 Tareas a la hora de desarrollar software
 
-Desarrollar software puede llegar a ser, para aplicaciones no excesivamente *grandes*, una empresa titánica, ya que conlleva múltiples tareas. De forma clásica, el desarrollo de software se ha dividido en 4 grandes fases:
+![02_Posibles_entornos_de_desarrollo-3](images/02_Posibles_entornos_de_desarrollo-3.png)
+
+Desarrollar software puede llegar a ser, para aplicaciones no excesivamente *grandes*, una empresa titánica, ya que conlleva múltiples tareas. 
+
+![02_Posibles_entornos_de_desarrollo-4](images/02_Posibles_entornos_de_desarrollo-4.png)
+
+De forma clásica, el desarrollo de software se ha dividido en 4 grandes fases:
 
 * Análisis: ¿qué problema vamos a resolver?
 * Diseño: ¿cómo resolvemos el problema?
@@ -113,11 +121,15 @@ Si bien se puede desarrollar software en Java con un simple editor de texto plan
 
 ### 2.2 IDEs más conocidos para Java
 
+![02_Posibles_entornos_de_desarrollo-6](images/02_Posibles_entornos_de_desarrollo-6.png)
+
 * Eclipse: será el que utilicemos nosotros. Es gratuito y el más utilizado en el mercado. Está disponible para trabajar con diferentes versiones de Java (SE, EE, …) y otros lenguajes de programación (C, C++, PHP, Python, …).
 
 * Netbeans: el el entorno que nos propone Oracle, la propietaria de Java. También la podemos utilizar gratuitamente.
 
 * IntelliJ: la empresa JetBrains nos ofrece IntelliJ, que en los últimos años ha tomado cierto auge debido a que también es la proveedora de IDEs estándar o muy utilizados para otros lenguajes, como Android Studio (Android), PyCharm (Python) o WebStorm (para Javascript). Podemos obtener licencias *community* o para estudiante.
+
+![02_Posibles_entornos_de_desarrollo-5](images/02_Posibles_entornos_de_desarrollo-5.png)
 
 ### 2.3 Descarga e instalación de Eclipse
 
