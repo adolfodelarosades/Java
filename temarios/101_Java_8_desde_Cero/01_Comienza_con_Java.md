@@ -172,6 +172,8 @@ BUILD SUCCESS
 
 Cualquier programa básico Java estará compuesto de un fichero `.java`, que contendrá dentro una clase (con el mismo nombre que el fichero) y un método main:
 
+***HolaMundo.java***
+
 ```java
 /**
  * Nuestro primer programa en Java
