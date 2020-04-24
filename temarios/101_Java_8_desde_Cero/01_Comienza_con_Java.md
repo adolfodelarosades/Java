@@ -106,10 +106,10 @@ Desarrollar software puede llegar a ser, para aplicaciones no excesivamente *gra
 
 De forma clásica, el desarrollo de software se ha dividido en 4 grandes fases:
 
-* Análisis: ¿qué problema vamos a resolver?
-* Diseño: ¿cómo resolvemos el problema?
-* Codificación: *construcción* de la solución
-* Mantenimiento: correcciones y actualizaciones.
+* **Análisis**: ¿qué problema vamos a resolver?
+* **Diseño**: ¿cómo resolvemos el problema?
+* **Codificación**: *construcción* de la solución
+* **Mantenimiento**: correcciones y actualizaciones.
 
 ![02_Posibles_entornos_de_desarrollo-4](images/02_Posibles_entornos_de_desarrollo-4.png)
 
@@ -121,11 +121,11 @@ Si bien se puede desarrollar software en Java con un simple editor de texto plan
 
 ![02_Posibles_entornos_de_desarrollo-6](images/02_Posibles_entornos_de_desarrollo-6.png)
 
-* Eclipse: será el que utilicemos nosotros. Es gratuito y el más utilizado en el mercado. Está disponible para trabajar con diferentes versiones de Java (SE, EE, …) y otros lenguajes de programación (C, C++, PHP, Python, …).
+* **Eclipse**: será el que utilicemos nosotros. Es gratuito y el más utilizado en el mercado. Está disponible para trabajar con diferentes versiones de Java (SE, EE, …) y otros lenguajes de programación (C, C++, PHP, Python, …).
 
-* Netbeans: el el entorno que nos propone Oracle, la propietaria de Java. También la podemos utilizar gratuitamente.
+* **Netbeans**: el el entorno que nos propone Oracle, la propietaria de Java. También la podemos utilizar gratuitamente.
 
-* IntelliJ: la empresa JetBrains nos ofrece IntelliJ, que en los últimos años ha tomado cierto auge debido a que también es la proveedora de IDEs estándar o muy utilizados para otros lenguajes, como Android Studio (Android), PyCharm (Python) o WebStorm (para Javascript). Podemos obtener licencias *community* o para estudiante.
+* **IntelliJ**: la empresa JetBrains nos ofrece IntelliJ, que en los últimos años ha tomado cierto auge debido a que también es la proveedora de IDEs estándar o muy utilizados para otros lenguajes, como Android Studio (Android), PyCharm (Python) o WebStorm (para Javascript). Podemos obtener licencias *community* o para estudiante.
 
 ![02_Posibles_entornos_de_desarrollo-5](images/02_Posibles_entornos_de_desarrollo-5.png)
 
