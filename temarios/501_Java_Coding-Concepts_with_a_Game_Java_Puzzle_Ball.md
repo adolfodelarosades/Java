@@ -82,6 +82,15 @@ Esta sección también proporciona información de fondo opcional sobre Java y l
 
 quiz Quiz 1
 
+#### Additional Resources
+
+[readTroubleshooting Java Puzzle Ball](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/JPB_Troubleshooting.pdf)
+
+[readSlides for Lesson 1-1](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/Lesson%201-1.pdf)
+
+[readSlides for Lesson 1-2](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/Lesson%201-2.pdf)	
+
+[readSlides for Lesson 1-3](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/Lesson%201-3.pdf)
 
 ## Lección 2: Variables estáticas vs de instancia
 ## Lección 3: Herencia
