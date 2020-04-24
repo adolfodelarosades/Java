@@ -66,13 +66,13 @@ Esta sección también proporciona información de fondo opcional sobre Java y l
 
 #### Instructional Materials
 
-[video Lesson 1-1: Educational Games	duration 7 Min](https://www.youtube.com/watch?v=6dD0ACeXX48&feature=emb_logo)
+[VIDEO Lesson 1-1: Educational Games	duration 7 Min](https://www.youtube.com/watch?v=6dD0ACeXX48&feature=emb_logo)
 
 [Java Puzzle Ball (Basic Puzzles 1-5)](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/JavaPuzzleBall.jar)	
 
-[video Lesson 1-2: Objects and Classes	duration 5 Min](https://www.youtube.com/watch?v=Syjmpp2mFKM&feature=emb_logo)
+[VIDEO Lesson 1-2: Objects and Classes	duration 5 Min](https://www.youtube.com/watch?v=Syjmpp2mFKM&feature=emb_logo)
 
-[video Lesson 1-3: Editing Java Code	duration 6 Min](https://www.youtube.com/watch?v=9OYbUBXC8mY&feature=emb_logo)
+[VIDEO Lesson 1-3: Editing Java Code	duration 6 Min](https://www.youtube.com/watch?v=9OYbUBXC8mY&feature=emb_logo)
 
 [read Lab 1 Instructions	duration 60 Min](https://www.oracle.com/webfolder/technetwork/tutorials/JavaPuzzleBall/Lesson1/Lab1%20Instructions.pdf)
 
