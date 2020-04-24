@@ -14,7 +14,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Algunos elementos de sintaxis 13:01 
    * Contenido adicional 4
 
-2. [Tipos de datos, operadores y estructuras de control](02_Tipos_de_datos_operadores_y_estructuras_de_control.md) 110m
+2. [Tipos de datos, operadores y estructuras de control](101_Java_8_desde_Cero/02_Tipos_de_datos_operadores_y_estructuras_de_control.md) 110m
    * Variables 16:58 
    * Manipulación de números, caracteres y otros valores I 8:28 
    * Manipulación de números, caracteres y otros valores II 15:39 
