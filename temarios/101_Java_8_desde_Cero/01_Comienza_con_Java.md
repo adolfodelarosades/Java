@@ -6,7 +6,7 @@
 
 ## Instalación de Java 16:13 
 
-[Instalación de Java](pdf/01_Instalación_de_Java.pdf)
+[Instalación de Java](pdfs/01_Instalación_de_Java.pdf)
 
 ### 1.1 ¿Qué es Java?
 
@@ -49,7 +49,7 @@ En el momento de comenzar a escribir estas líneas, la primera versión de Java 
 
 ## Posibles entornos de desarrollo 13:46 
 
-[Posibles entornos de desarrollo](pdf/02_Posibles_entornos_de_desarrollo.pdf)
+[Posibles entornos de desarrollo](pdfs/02_Posibles_entornos_de_desarrollo.pdf)
 
 ### 2.1 Tareas a la hora de desarrollar software
 
@@ -105,7 +105,7 @@ BUILD SUCCESS
 ```
 ## Algunos elementos de sintaxis 13:01 
 
-[Algunos elementos de sintaxis](pdf/04_Algunos_elementos_de_sintaxis.pdf)
+[Algunos elementos de sintaxis](pdfs/04_Algunos_elementos_de_sintaxis.pdf)
 
 ### 4.1 Estructura de un programa básico
 
@@ -165,9 +165,9 @@ Si posteriormente abrimos la vista de tareas (Window -> Show View -> Task), ecli
 
 [Presentación](pdfs/00_Presentación.pdf)
 
-[Instalación de Java](pdf/01_Instalación_de_Java.pdf)
+[Instalación de Java](pdfs/01_Instalación_de_Java.pdf)
 
-[Posibles entornos de desarrollo](pdf/02_Posibles_entornos_de_desarrollo.pdf)
+[Posibles entornos de desarrollo](pdfs/02_Posibles_entornos_de_desarrollo.pdf)
 
-[Algunos elementos de sintaxis](pdf/04_Algunos_elementos_de_sintaxis.pdf)
+[Algunos elementos de sintaxis](pdfs/04_Algunos_elementos_de_sintaxis.pdf)
 
