@@ -6,13 +6,19 @@
 
 ### 5.1 Datos
 
+![05_Variables-1](images/05_Variables-1.png)
+
 Un dato es un registro de un hecho de la naturaleza, una idea, un objeto…. Podemos considerar como datos un número, una imagen, un sonido, un caracter, ….
 
 ### 5.2 Variable
 
+![05_Variables-2](images/05_Variables-2.png)
+
 En el mundo de la programación, una variable es la forma de almacenar en memoria un dato de un programa. Aunque como hemos visto, un dato puede representar un texto o una imagen, a nivel físico, estos se almacenan como 0 y 1.
 
 Por tanto, podemos concluir que una variable será una región delimitada de memoria, a la que se le asigna un nombre y un tipo de dato.
+
+![05_Variables-3](images/05_Variables-3.png)
 
 ### 5.2 Tipos de datos primitivos
 
@@ -21,6 +27,8 @@ Cualquier lenguaje de programación, Java incluido, ofrece una serie de tipos de
 <img src="images/tipo_de_datos.jpg">
 
 ### 5.3 Declaración e inicialización de variables
+
+![05_Variables-4](images/05_Variables-4.png)
 
 Para poder usar una variable, previamente tenemos que haberla declarado. Es decir, tenemos que haber indicado que la vamos a usar. Para ello, basta con indicar el tipo de dato y el nombre de la variable:
 
@@ -36,6 +44,8 @@ final int NUM_HORAS = 8;
 En muchas ocasiones, acompañaremos la declaración de la variable de su correspondiente inicialización; es decir, de la asignación de un valor inicial.
 
 ### 5.4 Como nombrar las variables
+
+![05_Variables-5](images/05_Variables-5.png)
 
 La tarea de dar un nombre a una variable no es sencilla, como iremos descubriendo poco a poco. Debemos seguir las suigientes reglas, que suele cumplir todo buen programador Java:
 
@@ -53,6 +63,8 @@ Los valores constantes (declarados como `final`), se suelen escribir en mayúscu
 
 ### 5.5 Vida (o ámbito) de una variable
 
+![05_Variables-6](images/05_Variables-6.png)
+
 Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que las variables tienen un ámbito, es decir, un período de vida. Como norma general, el ámbito de una variable es el bloque donde ha sido definida la misma.
 
 ## Manipulación de números, caracteres y otros valores I 8:28 
@@ -61,9 +73,13 @@ Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que 
 
 ### 6.1 Tipos de datos primitivos en Java
 
+![06_Manipulación-1](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-1)
+
 Son solamente 8: `boolean, char, byte, short, int, long, float, double`. A estos, se suele añadir el objeto `java.lang.String`, ya que es muy usual.
 
 ### 6.1.1 Valores literales
+
+![06_Manipulación-2](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-2)
 
 Un valor literal es la representación de un valor fijo, que se escribe directamente en el código:
 
@@ -75,6 +91,8 @@ int i = 100000;
 String str = "CADENA";
 ```
 
+![06_Manipulación-3](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-3)
+
 Desde Java SE 7, se puede usar el guión bajo `_` para delimitar partes en un literal, sin que java lo procese:
 
 ```java
@@ -82,6 +100,8 @@ long creditCardNumber = 1234_5678_9012_3456L;
 ```
 
 ### 6.1.2 Operadores de asignación
+
+![06_Manipulación-4](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-4)
 
 El principal operador de asignación en java es`=`, y nos permite establecer el valor de una variable.
 
@@ -91,7 +111,11 @@ El principal operador de asignación en java es`=`, y nos permite establecer el 
 
 ### 6.2 Tipos de datos numéricos
 
+![06_Manipulación-5](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-5)
+
 #### 6.2.1 Tipos de datos enteros
+
+![06_Manipulación-6](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-6)
 
 Para manejar números enteros, tenemos 4 tipos de datos primitivos:
 
@@ -102,12 +126,16 @@ Para manejar números enteros, tenemos 4 tipos de datos primitivos:
 
 #### 6.2.2 Tipos de datos reales
 
+![06_Manipulación-7](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-7)
+
 Ambos tipos numéricos se representan mediante la notación IEEE 754, en la que se descompone un número en su mantisa, base y exponente.
 
 * `float`: ocupa 32 bits
 * `double`: ocupa 64 bits
 
 #### 6.2.3 Operadores numéricos
+
+![06_Manipulación-8](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-8)
 
 Java es muy rico en cuanto a operadores se refiere:
 
@@ -118,6 +146,8 @@ Java es muy rico en cuanto a operadores se refiere:
 * `<<`, `>>`, `>>>`: desplazamiento a nivel de bits.
 
 #### 6.2.4 Operadores numéricos de asignación abreviada
+
+![06_Manipulación-9](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-9)
 
 Estos son operadores que nos permiten asignar el valor de una variable al primer operando. Por ejemplo:
 
@@ -132,6 +162,8 @@ Los operadores son `+=`, `-=`, `*=`, `/=` y `%=`.
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
 #### 6.2.5 Operadores numéricos a nivel de bits
+
+![06_Manipulación-10](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-10)
 
 Estos son los menos usuales de todos, pero los presentamos también por si en alguna ocasión fueran necesarios:
 
@@ -149,9 +181,15 @@ Estos son los menos usuales de todos, pero los presentamos también por si en al
 
 ### 6.3 Tipos de datos lógicos o booleanos
 
+![06_Manipulación-11](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-11)
+
 Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `false`).
 
+![06_Manipulación-12](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-12)
+
 #### 6.3.1 Operadores lógicos condicionales
+
+![06_Manipulación-13](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-13)
 
 * `!`: realiza la negación del valor.
 * `&&`: realiza un AND condicional de los dos operandos.
@@ -159,6 +197,8 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 * `?` :: Si el primer operando es verdadero, devuelve el valor del segundo; en otro caso, devuelve el tercero.
 
 #### 6.3.2 Operadores lógicos relacionales
+
+![06_Manipulación-14](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-14)
 
 * `==`: devuelve verdadero si ambos valores son verdaderos
 * `!=`: devuelve el valor inverso a ==
@@ -168,6 +208,8 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 * `<=`: devuelve verdadero si el valor de la izquierda es menor o igual que el de la derecha.
 
 ### 6.4 Tipos de datos para caracteres
+
+![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15)
 
 Como tipo de dato primitivo para el manejo de caracteres, Java solamente nos ofrece `char`, el cual nos permite almacenar un solo caracter (letra, signo de puntuación, …).
 
@@ -185,9 +227,15 @@ String str = "Cadena de caracteres";
 
 #### 6.4.1 Operadores con cadenas de caracteres
 
+![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16)
+
 El principal operador para cadenas de caracteres es `+`, que nos permite concatenar dos textos, es decir, *poner* el segundo tras el primero.
 
 ### 6.5 Castings o transformaciones explícitas de tipos
+
+![06_Manipulación-17](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-17)
+
+![06_Manipulación-18](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-18)
 
 En ocasiones, nos puede interesar realizar un cambio explicito de un tipo de dato.
 
