@@ -25,12 +25,12 @@ Cualquier lenguaje de programación, Java incluido, ofrece una serie de tipos de
 Para poder usar una variable, previamente tenemos que haberla declarado. Es decir, tenemos que haber indicado que la vamos a usar. Para ello, basta con indicar el tipo de dato y el nombre de la variable:
 
 ```java
-    //Declaración e inicialización de dos variables
-        int numero = 7;        
-        char letra = 'a';
+//Declaración e inicialización de dos variables
+int numero = 7;        
+char letra = 'a';
 
-        //Declaración e inicialización de una constante
-        final int NUM_HORAS = 8;
+//Declaración e inicialización de una constante
+final int NUM_HORAS = 8;
 ```
 
 En muchas ocasiones, acompañaremos la declaración de la variable de su correspondiente inicialización; es decir, de la asignación de un valor inicial.
@@ -263,13 +263,13 @@ class BlockDemo {
 Permite evaluar una expresión como verdadera o falsa, y ejecutar en caso de que sea verdadera un bloque de código
 
 ```java
-    int num1 = 3, num2 = 4;
+int num1 = 3, num2 = 4;
 
-        if (num1 > num2) {
-            System.out.println("num1 es mayor que num2");
-        }
+if (num1 > num2) {
+   System.out.println("num1 es mayor que num2");
+}
 
-        System.out.println("Este mensaje se imprime siempre");
+System.out.println("Este mensaje se imprime siempre");
 ```
 
 #### 7.2.2 Estructura `if-else`
@@ -277,15 +277,15 @@ Permite evaluar una expresión como verdadera o falsa, y ejecutar en caso de que
 Permite evaluar una expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta otro diferente:
 
 ```java
-    if (puntuacion >= 9) {
-            System.out.println("Tienes un SOBRESALIENTE");
-        } else if (puntuacion >= 7) {
-            System.out.println("Tienes un NOTABLE");
-        } else if (puntuacion >= 5) {
-            System.out.println("Tienes un APROBADO");
-        } else {
-            System.out.println("Estás SUSPENSO. Lo siento");
-        }
+if (puntuacion >= 9) {
+   System.out.println("Tienes un SOBRESALIENTE");
+} else if (puntuacion >= 7) {
+   System.out.println("Tienes un NOTABLE");
+} else if (puntuacion >= 5) {
+   System.out.println("Tienes un APROBADO");
+} else {
+   System.out.println("Estás SUSPENSO. Lo siento");
+}
 ```
 
 #### 7.2.3 Estructura `switch`
@@ -293,34 +293,34 @@ Permite evaluar una expresión como verdadera o falsa; si el valor es verdadero 
 Permite evaluar si una expresión se corresponde con alguno de los valores de una serie de casos. Se puede usar con valores `byte`, `short`, `char`, `int` y `String`, entre otros. También existe la posibilidad de tener un caso por defecto (parecido a `else`).
 
 ```java
-      switch (mes) {
-            case 1:  mesString = "Enero";
-                     break;
-            case 2:  mesString = "Febrero";
-                     break;
-            case 3:  mesString = "Marzo";
-                     break;
-            case 4:  mesString = "Abril";
-                     break;
-            case 5:  mesString = "Mayo";
-                     break;
-            case 6:  mesString = "Junio";
-                     break;
-            case 7:  mesString = "Julio";
-                     break;
-            case 8:  mesString = "Agosto";
-                     break;
-            case 9:  mesString = "Septiembre";
-                     break;
-            case 10: mesString = "Octubre";
-                     break;
-            case 11: mesString = "Noviembre";
-                     break;
-            case 12: mesString = "Diciembre";
-                     break;
-            default: mesString = "Mes no válido";
-                     break;
-        }
+switch (mes) {
+   case 1:  mesString = "Enero";
+      break;
+   case 2:  mesString = "Febrero";
+      break;
+   case 3:  mesString = "Marzo";
+      break;
+   case 4:  mesString = "Abril";
+      break;
+   case 5:  mesString = "Mayo";
+      break;
+   case 6:  mesString = "Junio";
+      break;
+   case 7:  mesString = "Julio";
+      break;
+   case 8:  mesString = "Agosto";
+      break;
+   case 9:  mesString = "Septiembre";
+      break;
+   case 10: mesString = "Octubre";
+      break;
+   case 11: mesString = "Noviembre";
+      break;
+   case 12: mesString = "Diciembre";
+      break;
+   default: mesString = "Mes no válido";
+      break;
+}
 ```
 
 ## Estructura de repetición 13:01 
@@ -332,10 +332,10 @@ Permite evaluar si una expresión se corresponde con alguno de los valores de un
 Nos permite repetir la ejecución de un bloque de sentencias. La repetición se realiza durante un número indeterminado de veces, mientras una expresión sea cierta. Una de las sentencias del cuerpo del bucle debe modificar alguna de las variables de la condición, para que, en alguna ocasión, la expresión sea falsa.
 
 ```java
-    while (condicion) {
-        ...
-        ...      
-    }
+while (condicion) {
+   ...
+   ...      
+}
 ```  
 
 ### 8.2 Bucle `do-while`
@@ -343,10 +343,10 @@ Nos permite repetir la ejecución de un bloque de sentencias. La repetición se 
 Nos permite repetir la ejecución de un bloque de sentencias. La condición, a diferencia de la estructura while, se evalúa al final del bucle. El cuerpo del bucle se ejecuta siempre, al menos, una vez.
 
 ```java
-    do {
-        ...
-        ...      
-    } while (condicion);
+do {
+   ...
+   ...      
+} while (condicion);
 ```
 
 ### 8.3 Bucle `for`
@@ -354,9 +354,9 @@ Nos permite repetir la ejecución de un bloque de sentencias. La condición, a d
 Nos permite repetir un bloque de código un número conocido a priori de veces. Suele ser el más utilizado de los 3. Se podría implementar un bucle for con un while. Cuando trabajemos con colecciones o arrays, podremos usar su variante llamada *for-each*.
 
 ```java
-    for(declaracion; condicion; incremento) {
-      ...
-    }
+for(declaracion; condicion; incremento) {
+   ...
+}
 ```    
 
 ### 8.4 Sentencias `break` y `continue`
