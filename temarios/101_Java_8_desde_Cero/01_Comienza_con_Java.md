@@ -4,6 +4,10 @@
 
 [Presentación](pdfs/00_Presentación.pdf)
 
+
+![00_Presentacion-1](images/00_Presentacion-1.png)
+
+
 ## Instalación de Java 16:13 
 
 [Instalación de Java](pdfs/01_Instalación_de_Java.pdf)
