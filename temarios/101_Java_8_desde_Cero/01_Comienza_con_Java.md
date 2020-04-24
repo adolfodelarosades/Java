@@ -106,14 +106,14 @@ En el momento de comenzar a escribir estas líneas, la primera versión de Java 
 
 Desarrollar software puede llegar a ser, para aplicaciones no excesivamente *grandes*, una empresa titánica, ya que conlleva múltiples tareas. 
 
-![02_Posibles_entornos_de_desarrollo-4](images/02_Posibles_entornos_de_desarrollo-4.png)
-
 De forma clásica, el desarrollo de software se ha dividido en 4 grandes fases:
 
 * Análisis: ¿qué problema vamos a resolver?
 * Diseño: ¿cómo resolvemos el problema?
 * Codificación: *construcción* de la solución
 * Mantenimiento: correcciones y actualizaciones.
+
+![02_Posibles_entornos_de_desarrollo-4](images/02_Posibles_entornos_de_desarrollo-4.png)
 
 El *picar código* (como se conoce comunmente) es solamente un apartado de la fase de codificación, pero no la única. A la vez, tenemos que realizar test, para verificar que el software cumple con las especificaciones y no produce fallos. En ocasiones, para encontrar los fallos tendremos que depurar. Para proyectos grandes, tendremos que organizar nuestro código…
 
