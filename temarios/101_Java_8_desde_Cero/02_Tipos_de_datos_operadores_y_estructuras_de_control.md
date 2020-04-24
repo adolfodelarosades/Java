@@ -73,13 +73,13 @@ Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que 
 
 ### 6.1 Tipos de datos primitivos en Java
 
-![06_Manipulación-1](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-1)
+![06_Manipulación-1](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-1.png)                     
 
 Son solamente 8: `boolean, char, byte, short, int, long, float, double`. A estos, se suele añadir el objeto `java.lang.String`, ya que es muy usual.
 
 ### 6.1.1 Valores literales
 
-![06_Manipulación-2](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-2)
+![06_Manipulación-2](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-2.png)
 
 Un valor literal es la representación de un valor fijo, que se escribe directamente en el código:
 
@@ -91,7 +91,7 @@ int i = 100000;
 String str = "CADENA";
 ```
 
-![06_Manipulación-3](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-3)
+![06_Manipulación-3](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-3.png)
 
 Desde Java SE 7, se puede usar el guión bajo `_` para delimitar partes en un literal, sin que java lo procese:
 
@@ -101,7 +101,7 @@ long creditCardNumber = 1234_5678_9012_3456L;
 
 ### 6.1.2 Operadores de asignación
 
-![06_Manipulación-4](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-4)
+![06_Manipulación-4](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-4.png)
 
 El principal operador de asignación en java es`=`, y nos permite establecer el valor de una variable.
 
@@ -111,11 +111,11 @@ El principal operador de asignación en java es`=`, y nos permite establecer el 
 
 ### 6.2 Tipos de datos numéricos
 
-![06_Manipulación-5](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-5)
+![06_Manipulación-5](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-5.png)
 
 #### 6.2.1 Tipos de datos enteros
 
-![06_Manipulación-6](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-6)
+![06_Manipulación-6](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-6.png)
 
 Para manejar números enteros, tenemos 4 tipos de datos primitivos:
 
@@ -126,7 +126,7 @@ Para manejar números enteros, tenemos 4 tipos de datos primitivos:
 
 #### 6.2.2 Tipos de datos reales
 
-![06_Manipulación-7](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-7)
+![06_Manipulación-7](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-7.png)
 
 Ambos tipos numéricos se representan mediante la notación IEEE 754, en la que se descompone un número en su mantisa, base y exponente.
 
@@ -135,7 +135,7 @@ Ambos tipos numéricos se representan mediante la notación IEEE 754, en la que 
 
 #### 6.2.3 Operadores numéricos
 
-![06_Manipulación-8](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-8)
+![06_Manipulación-8](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-8.png)
 
 Java es muy rico en cuanto a operadores se refiere:
 
@@ -147,7 +147,7 @@ Java es muy rico en cuanto a operadores se refiere:
 
 #### 6.2.4 Operadores numéricos de asignación abreviada
 
-![06_Manipulación-9](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-9)
+![06_Manipulación-9](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-9.png)
 
 Estos son operadores que nos permiten asignar el valor de una variable al primer operando. Por ejemplo:
 
@@ -163,7 +163,7 @@ Los operadores son `+=`, `-=`, `*=`, `/=` y `%=`.
 
 #### 6.2.5 Operadores numéricos a nivel de bits
 
-![06_Manipulación-10](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-10)
+![06_Manipulación-10](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-10.png)
 
 Estos son los menos usuales de todos, pero los presentamos también por si en alguna ocasión fueran necesarios:
 
@@ -181,11 +181,11 @@ Estos son los menos usuales de todos, pero los presentamos también por si en al
 
 ### 6.3 Tipos de datos lógicos o booleanos
 
-![06_Manipulación-11](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-11)
+![06_Manipulación-11](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-11.png)
 
 Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `false`).
 
-![06_Manipulación-12](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-12)
+![06_Manipulación-12](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-12.png)
 
 #### 6.3.1 Operadores lógicos condicionales
 
@@ -198,7 +198,7 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 
 #### 6.3.2 Operadores lógicos relacionales
 
-![06_Manipulación-14](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-14)
+![06_Manipulación-14](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-14.png)
 
 * `==`: devuelve verdadero si ambos valores son verdaderos
 * `!=`: devuelve el valor inverso a ==
@@ -209,7 +209,7 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 
 ### 6.4 Tipos de datos para caracteres
 
-![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15)
+![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15.png)
 
 Como tipo de dato primitivo para el manejo de caracteres, Java solamente nos ofrece `char`, el cual nos permite almacenar un solo caracter (letra, signo de puntuación, …).
 
@@ -227,15 +227,15 @@ String str = "Cadena de caracteres";
 
 #### 6.4.1 Operadores con cadenas de caracteres
 
-![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16)
+![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16.png)
 
 El principal operador para cadenas de caracteres es `+`, que nos permite concatenar dos textos, es decir, *poner* el segundo tras el primero.
 
 ### 6.5 Castings o transformaciones explícitas de tipos
 
-![06_Manipulación-17](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-17)
+![06_Manipulación-17](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-17.png)
 
-![06_Manipulación-18](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-18)
+![06_Manipulación-18](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-18.png)
 
 En ocasiones, nos puede interesar realizar un cambio explicito de un tipo de dato.
 
