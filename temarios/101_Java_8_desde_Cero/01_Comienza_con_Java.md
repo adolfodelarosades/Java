@@ -7,8 +7,6 @@
 
 ![00_Presentacion-1](images/00_Presentacion-1.png)
 
-![00_Presentacion-2](images/00_Presentacion-2.png)
-
 ![00_Presentacion-3](images/00_Presentacion-3.png)
 
 ![00_Presentacion-4](images/00_Presentacion-4.png)
