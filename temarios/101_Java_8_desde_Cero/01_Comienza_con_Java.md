@@ -149,7 +149,9 @@ Nos van a permitir documentar nuestro código, o realizar ciertas aclaraciones s
 * Para varias líneas: delimitado por `/* .... */`
 * Para una sola línea: delimitado por `// ...`
 
-Si además, queremos indicar que dejamos una tarea pendiente (ToDo en inglés) lo podemos hacer de la siguiente forma:
+### 4.5 Tareas ToDo
+
+Si además, queremos indicar que dejamos una **tarea pendiente (ToDo en inglés)** lo podemos hacer de la siguiente forma:
 
 ```java
 public static void main(String[] args) {
@@ -158,7 +160,7 @@ public static void main(String[] args) {
 }
 ```
 
-Si posteriormente abrimos la vista de tareas (Window -> Show View -> Task), eclipse se encarga de escanear el código buscando estos comentarios, para localizarlos después fácilmente, y saber que tareas tenemos pendientes sobre el código.
+Si posteriormente abrimos la vista de tareas **(Window -> Show View -> Task)**, eclipse se encarga de escanear el código buscando estos comentarios, para localizarlos después fácilmente, y saber que tareas tenemos pendientes sobre el código.
 
 ## Contenido adicional 4
 
