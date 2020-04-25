@@ -252,6 +252,26 @@ Consultor [horas=20, tarifa=1000.0, getNombre()=Steve Jobs, getPuesto()=Consulto
 20000.0
 ```
 
+*ClaseFinal.java*
+
+```java
+package herencia;
+
+public final class ClaseFinal {
+
+}
+```
+
+*ClaseExtendida.java*
+
+```java
+package herencia;
+
+/*public class ClaseExtendida extends ClaseFinal {
+
+}*/
+```
+
 ## 23. Polimorfismo 9:43 
 
 [Polimorfismo](pdfs/23_Polimorfismo.pdf)
