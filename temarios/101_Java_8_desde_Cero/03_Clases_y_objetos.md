@@ -17,7 +17,7 @@
 
 ![09_Orientacion_a_objetos-1](images/09_Orientacion_a_objetos-1.png)
 
-Un paradigma es un modelo, una manera de entender las cosas. El paradigma de programación orientada a objetos es aquel por el cual todos los elementos que manejamos en nuestro programa son objetos. Estos no son más que instancias construidas a través de un molde, que llamamos clase.
+**Un *paradigma* es un modelo, una manera de entender las cosas. El *paradigma de programación orientada a objetos* es aquel por el cual todos los elementos que manejamos en nuestro programa son *objetos*. Estos no son más que *instancias* construidas a través de un molde, que llamamos *clase*.**
 
 ![09_Orientacion_a_objetos-2](images/09_Orientacion_a_objetos-2.png)
 
