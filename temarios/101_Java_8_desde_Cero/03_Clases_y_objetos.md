@@ -695,10 +695,11 @@ public class ClasesEnvoltorio {
 		System.out.println(Boolean.logicalXor(true, true));
 	}
 }
+```
 
+**SALIDA:**
 
-SALIDA:
-
+```sh
 12345
 12346
 11000000111001
