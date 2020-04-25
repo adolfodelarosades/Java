@@ -99,10 +99,10 @@ Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra dispos
 
 Modificador | Descripción
 ------------|------------
-`public`: |  es el menos restrictivo. Cualquiera puede acceder a esa clase o método.
+`public`: |  Es el menos restrictivo. Cualquiera puede acceder a esa clase o método.
 `protected`:  | Solo puede acceder a ese método o atributo la propia clase, o una que herede de ella.
-`private`: | solo puede acceder a ese método o atributo la propia clase.
-`default`: | (es decir, sin modificador de acceso): pueden acceder a esa clase todas las del mismo *paquete*.
+`private`: | Solo puede acceder a ese método o atributo la propia clase.
+`default`: | Es decir, sin modificador de acceso - pueden acceder a esa clase todas las del mismo *paquete*.
 
 ### 9.7 Paquete
 
