@@ -278,7 +278,11 @@ Lo anterior no es posible nos marcaría : `The type ClaseExtendida cannot subcla
 
 [Polimorfismo](pdfs/23_Polimorfismo.pdf)
 
+![23_Polimorfismo-1](images/23_Polimorfismo-1.png)
+
 ### 23.1 Referencias y subclases
+
+![23_Polimorfismo-2](images/23_Polimorfismo-2.png)
 
 Una subclase puede ser accedida a través de una referencia de su superclase. Esto es muy útil si pensamos pasar parámetros a un método, para que sea más versátil.
 
@@ -289,6 +293,11 @@ public static void saludar(Trabajador t) {
 ```
 
 ### 23.2 Ocultación de métodos y polimorfismo
+
+![23_Polimorfismo-3](images/23_Polimorfismo-3.png)
+
+![23_Polimorfismo-4](images/23_Polimorfismo-4.png)
+
 Ya hemos visto que una clase extendida puede *ocultar* métodos o atributos de la clase base, creando uno igual con el mismo nombre. ¿Qué sucede si tenemos un método ocultado, pero accedemos desde una referencia de la superclase?
 
 ```java
@@ -298,6 +307,240 @@ empleado.calcularPaga();
 ```
 
 La máquina virtual de java es capaz de detectar el tipo del objeto, siendo este quien tenga prioridad sobre el tipo de la referencia usada. A esto lo llamamos polimorfismo.
+
+### 23.3 Código
+
+*Trabajador.java*
+
+```java
+package polimorfismo;
+
+public class Trabajador {
+	
+	private String nombre;
+	private String Puesto;
+	private String direccion;
+	private String telefono;
+	private String nSS; //Número Seguridad Social
+	
+	private static final double SALARIO_BASE = 30000.0;
+	
+	
+	public Trabajador(String nombre, String puesto, String direccion, String telefono, String nSS) {
+		this.nombre = nombre;
+		Puesto = puesto;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.nSS = nSS;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getPuesto() {
+		return Puesto;
+	}
+
+
+	public void setPuesto(String puesto) {
+		Puesto = puesto;
+	}
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+
+	public String getnSS() {
+		return nSS;
+	}
+
+
+	public void setnSS(String nSS) {
+		this.nSS = nSS;
+	}
+	
+	public double calcularPaga() {
+		return SALARIO_BASE;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Trabajador [nombre=" + nombre + ", Puesto=" + Puesto + ", direccion=" + direccion + ", telefono="
+				+ telefono + ", nSS=" + nSS + "]";
+	}
+}
+```
+
+*Consultor.java*
+
+```java
+package polimorfismo;
+
+public class Consultor extends Trabajador {
+	
+	private int horas;
+	private double tarifa;
+	
+	
+	public Consultor(String nombre, String puesto, String direccion, String telefono, String nSS, int horas, double tarifa) {
+		super(nombre, puesto, direccion, telefono, nSS);
+		this.horas = horas;
+		this.tarifa = tarifa;
+	}
+
+
+	public int getHoras() {
+		return horas;
+	}
+
+
+	public void setHoras(int horas) {
+		this.horas = horas;
+	}
+
+
+	public double getTarifa() {
+		return tarifa;
+	}
+
+
+	public void setTarifa(double tarifa) {
+		this.tarifa = tarifa;
+	}
+	
+	public double calcularPaga() {
+		return horas*tarifa;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Consultor [horas=" + horas + ", tarifa=" + tarifa + ", getNombre()=" + getNombre() + ", getPuesto()="
+				+ getPuesto() + ", getDireccion()=" + getDireccion() + ", getTelefono()=" + getTelefono()
+				+ ", getnSS()=" + getnSS() + "]";
+	}
+}
+```
+
+*Empleado.java*
+
+```java
+package polimorfismo;
+
+public class Empleado extends Trabajador {
+	
+	private double sueldo;
+	private double impuestos;
+	
+	private final int PAGAS = 14;
+	
+	public Empleado(String nombre, String puesto, String direccion, String telefono, String nSS, double sueldo, double impuestos) {
+		//Profundizamos en "super" en las próximas lecciones
+		super(nombre, puesto, direccion, telefono, nSS);
+		this.sueldo = sueldo;
+		this.impuestos = impuestos;
+	}
+
+	public double getSueldo() {
+		return sueldo;
+	}
+
+	public void setSueldo(double sueldo) {
+		this.sueldo = sueldo;
+	}
+
+	public double getImpuestos() {
+		return impuestos;
+	}
+
+	public void setImpuestos(double impuestos) {
+		this.impuestos = impuestos;
+	}
+	
+	public double calcularPaga() {
+		return (sueldo-impuestos) / PAGAS;
+	}
+
+	@Override
+	public String toString() {
+		return "Empleado [sueldo=" + sueldo + ", impuestos=" + impuestos + ", PAGAS=" + PAGAS + ", getNombre()="
+				+ getNombre() + ", getPuesto()=" + getPuesto() + ", getDireccion()=" + getDireccion()
+				+ ", getTelefono()=" + getTelefono() + ", getnSS()=" + getnSS() + "]";
+	}
+}
+```
+
+*Polimorfismo.java*
+
+```java
+package polimorfismo;
+
+public class Polimorfismo {
+
+	public static void main(String[] args) {
+		
+		Trabajador trabajador;
+		Trabajador empleado;
+		Trabajador consultor;
+		
+		trabajador = new Trabajador("Bill Gates", "Presidente", "Redmond", "", "");
+		empleado = new Empleado("Larry Ellison", "Presidente", "Redwood", "", "", 100000.0, 1000.0);
+		consultor = new Consultor("Steve Jobs", "Consultor Jefe", "Cupertino", "", "", 20, 1000.0);
+		
+		saludar(trabajador);
+		saludar(empleado);
+		saludar(consultor);
+		
+		imprimirNombreYPaga(trabajador);
+		imprimirNombreYPaga(empleado);
+		imprimirNombreYPaga(consultor);
+	}
+	
+	public static void saludar(Trabajador t) {
+		System.out.println("Hola, " + t.getNombre());
+	}
+	
+	public static void imprimirNombreYPaga(Trabajador t) {
+		System.out.printf("El trabajador %s tiene una paga de %.2f€ %n", t.getNombre(), t.calcularPaga());
+	}
+}
+
+
+SALIDA:
+
+Hola, Bill Gates
+Hola, Larry Ellison
+Hola, Steve Jobs
+El trabajador Bill Gates tiene una paga de 30000,00€ 
+El trabajador Larry Ellison tiene una paga de 7071,43€ 
+El trabajador Steve Jobs tiene una paga de 20000,00€
+```
 
 ## Uso de super para acceder a un objeto y sus constructores 8:42 
 
