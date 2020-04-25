@@ -580,14 +580,79 @@ Persona [nombre=María, apellidos=Gómez, edad=0, altura=0, peso=0.0]
 Persona [nombre=Antonio, apellidos=Muñoz, edad=0, altura=0, peso=0.0]
 Persona [nombre=María, apellidos=Pérez, edad=0, altura=0, peso=0.0]
 Persona [nombre=Luis, apellidos=Muñoz, edad=0, altura=0, peso=0.0]
+
+OTRA EJCUCIÓN(Genera otros datos):
+
+Persona [nombre=Leticia, apellidos=Gómez, edad=0, altura=0, peso=0.0]
+Persona [nombre=Antonio, apellidos=Muñoz, edad=0, altura=0, peso=0.0]
+Persona [nombre=Antonio, apellidos=Muñoz, edad=0, altura=0, peso=0.0]
+Persona [nombre=José, apellidos=Pérez, edad=0, altura=0, peso=0.0]
+Persona [nombre=Luis, apellidos=Gómez, edad=0, altura=0, peso=0.0]
 ```
 
 *.java*
 
 ```java
+package arrays.bidimensionales;
+
+import java.util.Random;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class ManejoArrays04 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		//No tiene porqué ser cuadrado
+		int[][] bidimensional = new int[10][20];
+		final int TOPE = 100;
+		
+		for(int i = 0; i < bidimensional.length; i++) {
+			for(int j = 0; j < bidimensional[0].length; j++) {
+				bidimensional[i][j] = aleatorio(TOPE);
+			}
+		}
+				
+
+		for(int i = 0; i < bidimensional.length; i++) {
+			for(int j = 0; j < bidimensional[0].length; j++) {
+				System.out.print(bidimensional[i][j]+ "\t");
+			}
+			System.out.println("");
+		}
+
+	}
+	
+	/*
+	 * ESTE MÉTODO DEVUELVE UN NÚMERO ALEATORIO ENTRE
+	 * 0 y TOPE-1.
+	 */
+	public static int aleatorio(int tope) {
+		Random r = new Random();		
+		return r.nextInt(tope-1);
+	}
+
+}
 
 
 SALIDA:
+
+40	68	58	68	96	12	36	91	38	45	30	90	13	4	63	34	2	11	20	84	
+22	39	73	66	57	76	87	16	71	24	15	81	39	95	52	9	47	1	92	0	
+48	47	2	54	49	79	97	18	66	85	64	3	48	66	64	75	58	94	54	50	
+52	96	77	79	10	55	85	45	80	20	15	18	5	33	56	26	89	26	39	8	
+40	75	4	73	28	86	20	22	34	50	53	36	39	29	45	13	20	61	82	72	
+68	97	65	14	94	73	36	67	39	39	28	41	71	45	63	55	84	13	56	36	
+73	95	9	11	21	78	46	98	58	37	33	35	56	82	73	60	53	43	9	5	
+4	12	11	73	81	2	22	54	1	40	30	86	80	8	11	91	79	92	40	79	
+70	80	57	91	10	15	5	84	6	28	37	79	69	92	64	77	70	15	30	59	
+28	70	86	3	4	33	35	65	39	4	53	12	60	62	27	51	98	76	54	30	
+
 
 ```
 
