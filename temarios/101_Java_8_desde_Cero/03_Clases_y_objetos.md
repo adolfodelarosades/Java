@@ -95,12 +95,14 @@ Los objetos suelen interactuar los unos con los otros. Esto lo realizan mediante
 
 ![09_Orientacion_a_objetos-17](images/09_Orientacion_a_objetos-17.png)
 
-Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra disposición una serie de modificadores de acceso, que harán que no cualquier clase pueda acceder a otra.
+Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra disposición una serie de **modificadores de acceso**, que harán que no cualquier clase pueda acceder a otra.
 
-* `public`: es el menos restrictivo. Cualquiera puede acceder a esa clase o método.
-* `protected`: Solo puede acceder a ese método o atributo la propia clase, o una que herede de ella.
-* `private`: solo puede acceder a ese método o atributo la propia clase.
-* Por defecto (es decir, sin modificador de acceso): pueden acceder a esa clase todas las del mismo *paquete*.
+Modificador | Descripción
+------------|------------
+`public`: |  es el menos restrictivo. Cualquiera puede acceder a esa clase o método.
+`protected`:  | Solo puede acceder a ese método o atributo la propia clase, o una que herede de ella.
+`private`: | solo puede acceder a ese método o atributo la propia clase.
+`default`: | (es decir, sin modificador de acceso): pueden acceder a esa clase todas las del mismo *paquete*.
 
 ### 9.7 Paquete
 
