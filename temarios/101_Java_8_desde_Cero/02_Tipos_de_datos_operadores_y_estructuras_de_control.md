@@ -4,6 +4,8 @@
 
 [Variables](pdfs/05_Variables.pdf)
 
+![05_Variables-0](images/05_Variables-0.png)
+
 ### 5.1 Datos
 
 ![05_Variables-1](images/05_Variables-1.png)
@@ -70,6 +72,8 @@ Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que 
 ## 6. Manipulación de números, caracteres y otros valores I 8:28 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
+
+![06_Manipulación-0](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-0.png) 
 
 ### 6.1 Tipos de datos primitivos en Java
 
@@ -255,6 +259,8 @@ En este caso, el resultado será 0.55555555556
 
 [Estructura de decisión](pdfs/07_Estructuras_de_decisión.pdf)
 
+![07_Estructuras_de_decision-0](images/07_Estructuras_de_decision-0.png)
+
 ### 7.1 Repaso sobre sentencias, bloques y expresiones
 
 ![07_Estructuras_de_decision-1](images/07_Estructuras_de_decision-1.png)
@@ -350,13 +356,11 @@ if (num1 > num2) {
 System.out.println("Este mensaje se imprime siempre");
 ```
 
-
 #### 7.2.3 Estructura `if-else-if`
 
 ![07_Estructuras_de_decision-8](images/07_Estructuras_de_decision-8.png)
 
 Permite evaluar varias expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta el último bloque de código correspondiente al else:
-
 
 ```java
 if (puntuacion >= 9) {
@@ -411,7 +415,13 @@ switch (mes) {
 
 [Estructura de repetición](pdfs/08_Estructuras_de_repeticion.pdf)
 
+![08_Estructuras_de_repeticion-0](images/08_Estructuras_de_repeticion-0.png)
+
 ### 8.1 Bucle `while`
+
+![08_Estructuras_de_repeticion-1](images/08_Estructuras_de_repeticion-1.png)
+
+![08_Estructuras_de_repeticion-2](images/08_Estructuras_de_repeticion-2.png)
 
 Nos permite repetir la ejecución de un bloque de sentencias. La repetición se realiza durante un número indeterminado de veces, mientras una expresión sea cierta. Una de las sentencias del cuerpo del bucle debe modificar alguna de las variables de la condición, para que, en alguna ocasión, la expresión sea falsa.
 
@@ -424,6 +434,10 @@ while (condicion) {
 
 ### 8.2 Bucle `do-while`
 
+![08_Estructuras_de_repeticion-3](images/08_Estructuras_de_repeticion-3.png)
+
+![08_Estructuras_de_repeticion-4](images/08_Estructuras_de_repeticion-4.png)
+
 Nos permite repetir la ejecución de un bloque de sentencias. La condición, a diferencia de la estructura while, se evalúa al final del bucle. El cuerpo del bucle se ejecuta siempre, al menos, una vez.
 
 ```java
@@ -434,6 +448,10 @@ do {
 ```
 
 ### 8.3 Bucle `for`
+
+![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-5.png)
+
+![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-6.png)
 
 Nos permite repetir un bloque de código un número conocido a priori de veces. Suele ser el más utilizado de los 3. Se podría implementar un bucle for con un while. Cuando trabajemos con colecciones o arrays, podremos usar su variante llamada *for-each*.
 
