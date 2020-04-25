@@ -246,15 +246,15 @@ Java 8 incorpora algunos métodos paralelos, que aprovechan mejor el rendimiento
 
 [Práctica: Creando el juego de hundir la flota](pdfs/Hundir_la_flota.pdf)
 
-![Hundir_la_flota-1](images/Hundir_la_flota-1)
+![Hundir_la_flota-1](images/Hundir_la_flota-1.png)
 
 En esta sesión práctica veremos como crear el juego de hundir la flota, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0/tree/master/16bis_HundirFlota).
 
-![Hundir_la_flota-2](images/Hundir_la_flota-2)
+![Hundir_la_flota-2](images/Hundir_la_flota-2.png)
 
-![Hundir_la_flota-3](images/Hundir_la_flota-3)
+![Hundir_la_flota-3](images/Hundir_la_flota-3.png)
 
-![Hundir_la_flota-4](images/Hundir_la_flota-4)
+![Hundir_la_flota-4](images/Hundir_la_flota-4.png)
 
 ## Contenido adicional 4   
 
