@@ -119,24 +119,19 @@ La clase `String` nos proporciona muchos métodos para comparar cadenas y fragme
 
 [Manejo de Arrays](pdfs/16_Arrays.pdf)
 
-16_Arrays-1
 ![16_Arrays-1](images/16_Arrays-1.png)
-![16_Arrays-2](images/16_Arrays-2.png)
-![16_Arrays-3](images/16_Arrays-3.png)
-![16_Arrays-4](images/16_Arrays-4.png)
-![16_Arrays-5](images/16_Arrays-5.png)
-![16_Arrays-6](images/16_Arrays-6.png)
-![16_Arrays-7](images/16_Arrays-7.png)
-![16_Arrays-8](images/16_Arrays-8.png)
-![16_Arrays-9](images/16_Arrays-9.png)
-![16_Arrays-10](images/16_Arrays-10.png)
-![16_Arrays-11](images/16_Arrays-11.png)
 
 ### 16.1 Arrays
 
+![16_Arrays-2](images/16_Arrays-2.png)
+
 Un array es un contenedor de elementos de un mismo tipo, con un tamaño fijo que hay que conocer a la hora de crearlo. A la hora de recorrerlo, las posiciones comienzan a contar en cero.
 
+![16_Arrays-3](images/16_Arrays-3.png)
+
 ### 16.2 Creación de un array
+
+![16_Arrays-4](images/16_Arrays-4.png)
 
 Usamos el operador `new`, y tenemos que conocer el tipo de dato y el tamaño:
 
@@ -145,6 +140,8 @@ int[] unArray = new int[10];
 ```
 
 ### 16.3 Acceso de lectura y escritura
+
+![16_Arrays-5](images/16_Arrays-5.png)
 
 El operador `[ ]` nos permite acceder a las posiciones de un array, para leer su valor, o también para modificarlo.
 
@@ -162,6 +159,8 @@ System.out.println(unArray[1]);
 
 ### 16.4 Inicialización de un array
 
+![16_Arrays-6](images/16_Arrays-6.png)
+
 Tenemos varias formas de hacerlo:
 
 1. Manualmente, asignando cada una de las posiciones
@@ -171,6 +170,8 @@ Tenemos varias formas de hacerlo:
 3. Atajo con la sintaxis `{ }`.
 
 ### 16.5 Reocorrido de un array
+
+![16_Arrays-7](images/16_Arrays-7.png)
 
 Todo array tiene una propiedad pública, `length`, que son permite consultar su número de elementos. Utilizándola, podemos usar un bucle para recorrer un array:
 
@@ -190,6 +191,8 @@ for(int i : unArray) {
 
 ### 16.6 Arrays de objetos
 
+![16_Arrays-8](images/16_Arrays-8.png)
+
 No solamente podemos crear arrays de tipos primitivos, sino que también lo podemos hacer de instancias de alguna clase que hayamos definido previamente.
 
 ```java
@@ -200,12 +203,16 @@ unArray[1] = new Persona(…);
 
 ### 16.7 Arrays multidimensionales
 
+![16_Arrays-9](images/16_Arrays-9.png)
+
 Podemos crear arrays que tengan más de una dimensión. Tan solo tenemos que añadir otra pareja de corchetes.
 
 ```java
 int[][] biArray = new int[10][20];
 biArray[3][4] = 78;
 ```
+
+![16_Arrays-10](images/16_Arrays-10.png)
 
 Para recorrerlos necesitaremos *anidar* otro bucle for:
 
@@ -218,6 +225,8 @@ for(int i = 0; i < biArray.length; i++) {
 ```
 
 ### 16.8 Manipulación de arrays
+
+![16_Arrays-11](images/16_Arrays-11.png)
 
 Java nos provee de una clase, `java.util.Arrays`, que posee una serie de métodos para realizar operaciones rápidas con arrays. Entre otros:
 
@@ -237,7 +246,15 @@ Java 8 incorpora algunos métodos paralelos, que aprovechan mejor el rendimiento
 
 [Práctica: Creando el juego de hundir la flota](pdfs/Hundir_la_flota.pdf)
 
+![Hundir_la_flota-1](images/Hundir_la_flota-1)
+
 En esta sesión práctica veremos como crear el juego de hundir la flota, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0/tree/master/16bis_HundirFlota).
+
+![Hundir_la_flota-2](images/Hundir_la_flota-2)
+
+![Hundir_la_flota-3](images/Hundir_la_flota-3)
+
+![Hundir_la_flota-4](images/Hundir_la_flota-4)
 
 ## Contenido adicional 4   
 
