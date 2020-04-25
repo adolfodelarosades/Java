@@ -593,7 +593,7 @@ Persona [nombre=Pepe, apellidos=Perez, edad=25, altura=180, peso=75.5]
 ```
 
 
-## Ciclo de vida de un objeto 6:27 
+## 12. Ciclo de vida de un objeto 6:27 
 
 [Ciclo de vida de un objeto](pdfs/12_Ciclo_de_vida.pdf)
 
@@ -621,7 +621,7 @@ Un objeto está vivo, accesible y en uso mientras dure el ámbito en el que fue 
 
 Cuando finaliza el ámbito donde fue definido un método, este se marca como *no util* y es candidato a ser liberado por el *garbage collector*, un proceso de baja prioridad de la JVM que se encarga de liberar la memoria ocupada por estos objetos.
 
-## Uso de clases envoltorio 5:31 
+## 13. Uso de clases envoltorio 5:31 
 
 [Uso de clases envoltorio](pdfs/13_Uso_de_las_clases_envoltorio.pdf)
 
@@ -647,6 +647,67 @@ double | Double
 ![13_Uso_de_las_clases_envoltorio-3](images/13_Uso_de_las_clases_envoltorio-3.png)
 
 Entre otras funcionalidades, nos ofrecen muchos métodos para transformar y operar con los tipos primitivos. Además, más adelante comprobaremos que son útiles con las colecciones y otros contenedores de objetos.
+
+### 13.2 Código
+
+*ClasesEnvoltorio.java*
+
+```java
+/**
+ *  CLASES ENVOLTORIO PARA TIPOS PRIMITIVOS
+ */
+package envoltorio;
+
+/**
+ * @author 
+ *
+ */
+public class ClasesEnvoltorio {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//Podemos procesar una cadena de caracteres
+		//para obtener un valor int
+		int x = Integer.parseInt("12345");		
+		System.out.println(x);
+				
+		//Podemos obtener el máximo entre dos enteros
+		System.out.println(Integer.max(x, 12346));
+		
+		//Podemos obtener la representación binaria, hexadecimal u octal de un número entero
+		System.out.println(Integer.toBinaryString(x));
+		
+		//Podemos obtener instancias de cualquier tipo con los métodos valueOf(...).
+		Long l = Long.valueOf("34597623495729346");
+		Double d = Double.valueOf("3.141592");
+		System.out.println(l);
+		System.out.println(d);
+		
+		//Podemos saber si un caracter es una letra o un número
+		char c = 'a';
+		System.out.println(Character.isAlphabetic(c));
+		System.out.println(Character.isDigit(c));
+		
+		//Podemos realizar operaciones lógicas con valores booleanos
+		System.out.println(Boolean.logicalXor(true, true));
+	}
+}
+
+
+SALIDA:
+
+12345
+12346
+11000000111001
+34597623495729346
+3.141592
+true
+false
+false
+```
 
 ## Contenido adicional 5
 
