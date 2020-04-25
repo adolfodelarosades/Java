@@ -249,19 +249,19 @@ Se trata de un método especial, que sirve para obtener, en un solo valor de tip
 
 ![12_Ciclo_de_vida-4](images/12_Ciclo_de_vida-4.png)
 
-![12_Ciclo_de_vida-5](images/12_Ciclo_de_vida-5.png)
-
-![12_Ciclo_de_vida-6](images/12_Ciclo_de_vida-6.png)
-
-![12_Ciclo_de_vida-7](images/12_Ciclo_de_vida-7.png)
-
 ### 12.1 Ciclo de vida de un objeto
 
 En Java, cualquier objeto tiene un ciclo de vida, pasado por los estados de creación, uso y destrucción.
 
+![12_Ciclo_de_vida-5](images/12_Ciclo_de_vida-5.png)
+
 Para la creación, solo tenemos que hacer uso del operador `new`. Es Java quien se encarga de realizar todas las operaciones necesarias en memoria.
 
+![12_Ciclo_de_vida-6](images/12_Ciclo_de_vida-6.png)
+
 Un objeto está vivo, accesible y en uso mientras dure el ámbito en el que fue creado. Si creamos un objeto en el método `main` de una aplicación, estará *vivo* hasta que finalice la ejecución del mismo. Si por el contrario, lo creamos en el método de una otra clase, finalizará cuanto termine la ejecución del mismo.
+
+![12_Ciclo_de_vida-7](images/12_Ciclo_de_vida-7.png)
 
 Cuando finaliza el ámbito donde fue definido un método, este se marca como *no util* y es candidato a ser liberado por el *garbage collector*, un proceso de baja prioridad de la JVM que se encarga de liberar la memoria ocupada por estos objetos.
 
