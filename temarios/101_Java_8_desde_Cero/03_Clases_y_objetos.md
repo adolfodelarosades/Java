@@ -7,15 +7,43 @@
 * Uso de clases envoltorio 5:31 
 * Contenido adicional 5
 
-## Orientación de objetos 22:58
+## 9. Orientación de objetos 22:58
 
 [Orientación de objetos](pdfs/09_Orientación_a_objetos.pdf)
 
+![09_Orientacion_a_objetos-0](images/09_Orientacion_a_objetos-0)
+
 ### 9.1 Paradigma de programación Orientada a Objetos
+
+![09_Orientacion_a_objetos-1](images/09_Orientacion_a_objetos-1)
 
 Un paradigma es un modelo, una manera de entender las cosas. El paradigma de programación orientada a objetos es aquel por el cual todos los elementos que manejamos en nuestro programa son objetos. Estos no son más que instancias construidas a través de un molde, que llamamos clase.
 
+![09_Orientacion_a_objetos-2](images/09_Orientacion_a_objetos-2)
+
+![09_Orientacion_a_objetos-3](images/09_Orientacion_a_objetos-3)
+
+![09_Orientacion_a_objetos-4](images/09_Orientacion_a_objetos-4)
+
+![09_Orientacion_a_objetos-5](images/09_Orientacion_a_objetos-5)
+
+![09_Orientacion_a_objetos-6](images/09_Orientacion_a_objetos-6)
+
+![09_Orientacion_a_objetos-7](images/09_Orientacion_a_objetos-7)
+
+![09_Orientacion_a_objetos-8](images/09_Orientacion_a_objetos-8)
+
+![09_Orientacion_a_objetos-9](images/09_Orientacion_a_objetos-9)
+
+![09_Orientacion_a_objetos-10](images/09_Orientacion_a_objetos-10)
+
+![09_Orientacion_a_objetos-11](images/09_Orientacion_a_objetos-11)
+
+![09_Orientacion_a_objetos-12](images/09_Orientacion_a_objetos-12)
+
 ### 9.2 Clases en Java
+
+![09_Orientacion_a_objetos-13](images/09_Orientacion_a_objetos-13)
 
 Una clase en Java tiene la siguiente estructura:
 
@@ -39,6 +67,8 @@ Una clase en Java tiene la siguiente estructura:
 
 ### 9.3 Objetos
 
+![09_Orientacion_a_objetos-14](images/09_Orientacion_a_objetos-14)
+
 Los objetos, que no son más que instancias de clases, tienen que ser creados (instanciados) por el programador, y almacenados en una referencia (muy similar a una variable).
 
 ```java
@@ -46,6 +76,8 @@ Persona persona = new Persona();
 ```
 
 ### 9.4 Valor null
+
+![09_Orientacion_a_objetos-15](images/09_Orientacion_a_objetos-15)
 
 Si declaramos una referencia, pero no construimos ningún objeto en ese momento, obtenemos una referencia nula, o con valor `null`. Además, es una palabra reservada que podemos usar para comparar.
 
@@ -55,9 +87,13 @@ Persona persona;
 
 ### 9.5 Interacción entre objetos
 
+![09_Orientacion_a_objetos-16](images/09_Orientacion_a_objetos-16)
+
 Los objetos suelen interactuar los unos con los otros. Esto lo realizan mediante un mecanismo llamado *paso de mensajes*, que en la práctica es que, desde el cuerpo de una clase, estamos invocando a un método de otra clase.
 
 ### 9.6 Modificadores de acceso
+
+![09_Orientacion_a_objetos-17](images/09_Orientacion_a_objetos-17)
 
 Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra disposición una serie de modificadores de acceso, que harán que no cualquier clase pueda acceder a otra.
 
@@ -67,6 +103,8 @@ Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra dispos
 * Por defecto (es decir, sin modificador de acceso): pueden acceder a esa clase todas las del mismo *paquete*.
 
 ### 9.7 Paquete
+
+![09_Orientacion_a_objetos-18](images/09_Orientacion_a_objetos-18)
 
 Es una agrupación de clases. Indicamos que una clase pertenece a un paquete mediante la palabra reservada `package` en la primera línea de código de la clase:
 
@@ -84,7 +122,12 @@ class Clase {
 
 [Los constructores](pdfs/10_Los_constructores.pdf)
 
+![10_Los_constructores-1](images/10_Los_constructores-1)
+
 ### 10.1 Construcción de objetos
+
+![10_Los_constructores-2](images/10_Los_constructores-2)
+![10_Los_constructores-3](images/10_Los_constructores-3)
 
 En orientación a objetos, la construcción de un objeto implica la inicialización de cero o más variables miembros de ese mismo objeto que estamos construyendo. Java, por sí mismo, solamente hace las gestiones oportunas en memoria; sin embargo, si queremos que ese nuevo objeto recién creado tenga valores inicializados, se los podemos proporcionar mediante un constructor.
 
@@ -97,6 +140,8 @@ En orientación a objetos, la construcción de un objeto implica la inicializaci
 Nuestro IDE, eclipse, posee un asistente que nos puede ayudar a generar el código de constructores con parámetros.
 
 ### 10.3 *Puntero* `this`
+
+![10_Los_constructores-4](images/10_Los_constructores-4)
 
 Se trata de una forma de referenciar desde un objeto a sí mismo, tanto a sus variables miembro como a sus métodos. También nos sirve para poder utilizar un constructor desde otro. Por ejemplo:
 
@@ -125,13 +170,20 @@ El segundo constructor de este código utiliza el primer constructor. De esta fo
 
 [Getters y setters](pdfs/11_Propiedades_y_metodos.pdf)
 
+![11_Propiedades_y_metodos-1](images/11_Propiedades_y_metodos-1)
+
 ### 11.1 Métodos y atributos
+
+![11_Propiedades_y_metodos-2](images/11_Propiedades_y_metodos-2)
+![11_Propiedades_y_metodos-3](images/11_Propiedades_y_metodos-3)
 
 Tal y como hemos aprendido en lecciones anteriores, los métodos se corresponden con el *comportamiento* de una clase, y los atributos (o propiedades) con su *estructura*.
 
 La encapsulación nos recomienda que el trato con los objetos sea siempre a través de métodos; y dado que la estructura interna de un objeto solamente la conoce el mismo, los atributos se deberían consultar o editar siempre a través de métodos.
 
 ### 11.2 Propiedades o atributos
+
+![11_Propiedades_y_metodos-4](images/11_Propiedades_y_metodos-4)
 
 Tienen la siguiente sintaxis genérica:
 
@@ -148,6 +200,10 @@ donde:
 * `nombreAtributo` debería estar escrito en notación *camelCase* y ser autodescriptivo.
 
 ### 11.3 Métodos
+
+![11_Propiedades_y_metodos-5](images/11_Propiedades_y_metodos-5)
+
+![11_Propiedades_y_metodos-6](images/11_Propiedades_y_metodos-6)
 
 Tienen la siguiente sintaxis genérica:
 
@@ -169,15 +225,33 @@ donde:
 
 #### 11.3.1 Métodos getters/setters
 
+![11_Propiedades_y_metodos-7](images/11_Propiedades_y_metodos-7)
+
 Son unos métodos especiales, pero sencillos, que nos permiten consultar cualquier atributo de una clase, así como asignarle un nuevo valor. Pueden autogenerarse con Eclipse.
 
 #### 11.3.2 `toString()`
+
+![11_Propiedades_y_metodos-8](images/11_Propiedades_y_metodos-8)
 
 Se trata de un método especial, que sirve para obtener, en un solo valor de tipo String, una representación de un objeto. Eclipse también incluye un asistente para generarlo, si nos fuera preciso.
 
 ## Ciclo de vida de un objeto 6:27 
 
 [Ciclo de vida de un objeto](pdfs/12_Ciclo_de_vida.pdf)
+
+![12_Ciclo_de_vida-1](images/12_Ciclo_de_vida-1)
+
+![12_Ciclo_de_vida-2](images/12_Ciclo_de_vida-2)
+
+![12_Ciclo_de_vida-3](images/12_Ciclo_de_vida-3)
+
+![12_Ciclo_de_vida-4](images/12_Ciclo_de_vida-4)
+
+![12_Ciclo_de_vida-5](images/12_Ciclo_de_vida-5)
+
+![12_Ciclo_de_vida-6](images/12_Ciclo_de_vida-6)
+
+![12_Ciclo_de_vida-7](images/12_Ciclo_de_vida-7)
 
 ### 12.1 Ciclo de vida de un objeto
 
@@ -195,6 +269,10 @@ Cuando finaliza el ámbito donde fue definido un método, este se marca como *no
 
 ### 13.1 Clases envoltorio
 
+![13_Uso_de_las_clases_envoltorio-1](images/13_Uso_de_las_clases_envoltorio-1)
+
+![13_Uso_de_las_clases_envoltorio-2](images/13_Uso_de_las_clases_envoltorio-2)
+
 Java nos ofrece una clase para cada uno de los tipos primitivos:
 
 Tipo Primitivo | Clase Envoltorio
@@ -207,6 +285,8 @@ int | Integer
 long | Long
 float | Float
 double | Double
+
+![13_Uso_de_las_clases_envoltorio-3](images/13_Uso_de_las_clases_envoltorio-3)
 
 Entre otras funcionalidades, nos ofrecen muchos métodos para transformar y operar con los tipos primitivos. Además, más adelante comprobaremos que son útiles con las colecciones y otros contenedores de objetos.
 
@@ -221,5 +301,3 @@ Entre otras funcionalidades, nos ofrecen muchos métodos para transformar y oper
 [Ciclo de vida de un objeto](pdfs/12_Ciclo_de_vida.pdf)
 
 [Uso de clases envoltorio](pdfs/13_Uso_de_las_clases_envoltorio.pdf)
-
-
