@@ -5,17 +5,29 @@
    * Práctica: Creando el juego de hundir la flota 31:16 
    * Contenido adicional 4
    
-## Conoce Java API Docs 9:57 
+## 14. Conoce Java API Docs 9:57 
 
-[Conoce Java API Docs](pdfs/14_Conoce_JAVA_API_DOCS.pdf)
+[Conoce Java API Docs-1](pdfs/14_Conoce_JAVA_API_DOCS-1.pdf)
+
+![14_Conoce_JAVA_API_DOCS-1](images/14_Conoce_JAVA_API_DOCS-1.png)
 
 Conoce más Java y descubre la documentación de Java para ver todos los paquetes y clases que contiene Java
+
+![14_Conoce_JAVA_API_DOCS-2](images/14_Conoce_JAVA_API_DOCS-2.png)
+
+![14_Conoce_JAVA_API_DOCS-3](images/14_Conoce_JAVA_API_DOCS-3.png)
+
+![14_Conoce_JAVA_API_DOCS-4](images/14_Conoce_JAVA_API_DOCS-4.png)
 
 ## 15. Uso de la clase String 13:03 
 
 [Uso de la clase String](pdfs/15_Uso_de_la_clase_String.pdf)
 
-### 15.1 Creación de cadenas
+![15_Uso_de_la_clase_String-1](images/15_Uso_de_la_clase_String-1.png)
+
+### 15.1 Creación de Strings
+
+![15_Uso_de_la_clase_String-2](images/15_Uso_de_la_clase_String-2.png)
 
 La forma más fácil de crear una cadena de caracteres es a partir de un literal con dobles comillas
 
@@ -31,6 +43,8 @@ Como comprobaremos más adelante, Java ofrece un tipo de sucesión o colección 
 
 ### 15.2 Concatenación
 
+![15_Uso_de_la_clase_String-3](images/15_Uso_de_la_clase_String-3.png)
+
 Concatenar dos cadenas es poner una cadena a continuación de la otra. Lo podemos hacer de varias formas:
 
 * operador `+`: es la forma más cómoda: `"Cadena " + "concatenada"`.
@@ -39,6 +53,8 @@ Concatenar dos cadenas es poner una cadena a continuación de la otra. Lo podemo
 
 ### 15.3 Longitud, mayúsculas y minúsculas
 
+![15_Uso_de_la_clase_String-4](images/15_Uso_de_la_clase_String-4.png)
+
 Podemos obtener el número de caracteres de un `String` mediante el método `.length()`.
 
 ```java
@@ -46,9 +62,13 @@ String saludo = "Hola Mundo!";
 System.out.println(saludo.length()); //Debe imprimir 11
 ```
 
+![15_Uso_de_la_clase_String-5](images/15_Uso_de_la_clase_String-5.png)
+
 Podemos pasar toda la cadena a minúsculas con `toLowerCase()`, o a mayúsculas con `toUpperCase()`.
 
 ### 15.4 Creación de cadenas formateadas
+
+![15_Uso_de_la_clase_String-6](images/15_Uso_de_la_clase_String-6.png)
 
 En ocasiones, podemos querer crear una cadena de caracteres concatenando varios literales de cadena, con otra serie de valores. En estos casos, puede resultar tedioso hacerlo:
 
@@ -79,6 +99,8 @@ El ejemplo anterior quedaría:
 
 ### 15.5 Comparaciones de cadenas y fragmentos de cadenas
 
+![15_Uso_de_la_clase_String-7](images/15_Uso_de_la_clase_String-7.png)
+
 La clase `String` nos proporciona muchos métodos para comparar cadenas y fragmentos de cadenas:
 
 * `endsWith`, para comparar si una cadena termina igual que un sufijo proporcionado.
@@ -96,6 +118,19 @@ La clase `String` nos proporciona muchos métodos para comparar cadenas y fragme
 ## 16. Manejo de Arrays 23:09 
 
 [Manejo de Arrays](pdfs/16_Arrays.pdf)
+
+16_Arrays-1
+![16_Arrays-1](images/16_Arrays-1.png)
+![16_Arrays-2](images/16_Arrays-2.png)
+![16_Arrays-3](images/16_Arrays-3.png)
+![16_Arrays-4](images/16_Arrays-4.png)
+![16_Arrays-5](images/16_Arrays-5.png)
+![16_Arrays-6](images/16_Arrays-6.png)
+![16_Arrays-7](images/16_Arrays-7.png)
+![16_Arrays-8](images/16_Arrays-8.png)
+![16_Arrays-9](images/16_Arrays-9.png)
+![16_Arrays-10](images/16_Arrays-10.png)
+![16_Arrays-11](images/16_Arrays-11.png)
 
 ### 16.1 Arrays
 
