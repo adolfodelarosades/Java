@@ -40,7 +40,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Práctica: Creando el juego de hundir la flota 31:16 
    * Contenido adicional 4
 
-5. Revisitando clases y objetos 49m
+5. [Revisitando clases y objetos](101_Java_8_desde_Cero/05_Revisitando_clases_y_objetos.md) 49m
    * Argumento de un método y tipos de retorno 13:36 
    * Paso de argumento por valor y referencia 8:18 
    * Modificadores de acceso 12:39 
@@ -48,7 +48,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Sobrecarga de métodos y constructores 7:07 
    * Contenido adicional 5
 
-6. Uso de herencia 64m
+6. [Uso de herencia](101_Java_8_desde_Cero/06_Uso_de_herencia.md) 64m
    * Qué es la herencia y los beneficios que aporta 15:52 
    * Polimorfismo 9:43 
    * Uso de super para acceder a un objeto y sus constructores 8:42 
@@ -56,14 +56,14 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Clases abstractas e interfaces II 9:48 
    * Contenido adicional 5
    
-7. Manejo de excepciones 39m
+7. [Manejo de excepciones](101_Java_8_desde_Cero/07_Manejo_de_excepciones.md) 39m
    * Excepciones y errores 9:28 
    * Tratamiento de excepciones 13:36 
    * Excepciones más comunes 4:49 
    * Lanzamiento y propagación de excepciones 11:25 
    * Contenido adicional 4
    
-8. Algunas clases del API de Java 82m
+8. [Algunas clases del API de Java](101_Java_8_desde_Cero/08_Algunas_clases_del_API_de_Java.md) 82m
    * Manipulación de datos con Stringbuilder 8:01 
    * Manejo de fechas 17:31 
    * Colecciones ArrayList 11:30 
