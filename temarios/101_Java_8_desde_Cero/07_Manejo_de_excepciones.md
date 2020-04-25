@@ -97,7 +97,7 @@ Se ejecuta siempre, tanto si hemos terminado correctamente el bloque `try` como 
 
 ## Excepciones más comunes 4:49 
 
-[Excepciones más comunes](pdfs/28_Clases_de_excepción_más_comunes.pdf)
+[Excepciones más comunes](pdfs/28_Clases_de_excepción_más_comunes.pdf)
 
 CLASE DE EXCEPCIÓN | USO
 -------------------|----
@@ -113,7 +113,7 @@ StringIndexOutOfBounds | Índice usado en String fuera de los límites
 
 ## Lanzamiento y propagación de excepciones 11:25 
 
-[Lanzamiento y propagación de excepciones](pdfs/29_Lanzamiento_y_propagación_de_excepciones.pdf)
+[Lanzamiento y propagación de excepciones](pdfs/29_Lanzamiento_y_propagación_de_excepciones.pdf)
 
 ### 29.1 Lanzamiento de excepciones
 
@@ -162,6 +162,6 @@ public class SaldoNegativoException extends Exception {
 
 [Tratamiento de excepciones](pdfs/27_Tratamiento_de_excepciones.pdf)
 
-[Excepciones más comunes](pdfs/28_Clases_de_excepción_más_comunes.pdf)
+[Excepciones más comunes](pdfs/28_Clases_de_excepción_más_comunes.pdf)
 
-[Lanzamiento y propagación de excepciones](pdfs/29_Lanzamiento_y_propagación_de_excepciones.pdf)
+[Lanzamiento y propagación de excepciones](pdfs/29_Lanzamiento_y_propagación_de_excepciones.pdf)
