@@ -6,7 +6,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
 
 ## CONTENIDOS 
   
-1. [Comienza con Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero/01_Comienza_con_Java.md) 59m 
+1. [Comienza con Java](101_Java_8_desde_Cero/01_Comienza_con_Java.md) 59m 
    * Presentación del profesor y curso 5:12 
    * Instalación de Java 16:13 
    * Posibles entornos de desarrollo 13:46 
@@ -25,7 +25,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Práctica: Creando una calculadora 11:13 
    * Contenido adicional  7
    
-3. Clases y objetos 58m
+3. [Clases y objetos](101_Java_8_desde_Cero/03_Clases_y_objetos.md) 58m
    * Orientación de objetos 22:58 
    * Los constructores 9:07 
    * Getters y setters 14:28 
