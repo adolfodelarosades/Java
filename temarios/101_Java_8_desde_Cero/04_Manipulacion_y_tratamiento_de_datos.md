@@ -11,7 +11,7 @@
 
 Conoce más Java y descubre la documentación de Java para ver todos los paquetes y clases que contiene Java
 
-## Uso de la clase String 13:03 
+## 15. Uso de la clase String 13:03 
 
 [Uso de la clase String](pdfs/15_Uso_de_la_clase_String.pdf)
 
@@ -93,7 +93,7 @@ La clase `String` nos proporciona muchos métodos para comparar cadenas y fragme
 
 * `contains`, para comparar si una cadena está contenida en otra.
 
-## Manejo de Arrays 23:09 
+## 16. Manejo de Arrays 23:09 
 
 [Manejo de Arrays](pdfs/16_Arrays.pdf)
 
