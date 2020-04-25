@@ -139,7 +139,7 @@ En orientación a objetos, la construcción de un objeto implica la inicializaci
 * Un constructor se llama **siempre** igual que el nombre de la clase a la cual construye.
 * Pueden tener cero o más argumentos.
 
-Nuestro IDE, eclipse, posee un asistente que nos puede ayudar a generar el código de constructores con parámetros.
+Nuestro IDE Eclipse, posee un asistente que nos puede ayudar a generar el código de constructores con parámetros.
 
 ### 10.3 *Puntero* `this`
 
