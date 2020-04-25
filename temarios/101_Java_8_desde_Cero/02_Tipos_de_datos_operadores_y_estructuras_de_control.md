@@ -1,6 +1,6 @@
 # 2. Tipos de datos, operadores y estructuras de control 110m
 
-## Variables 16:58 
+## 5. Variables 16:58 
 
 [Variables](pdfs/05_Variables.pdf)
 
@@ -67,7 +67,7 @@ Los valores constantes (declarados como `final`), se suelen escribir en mayúscu
 
 Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que las variables tienen un ámbito, es decir, un período de vida. Como norma general, el ámbito de una variable es el bloque donde ha sido definida la misma.
 
-## Manipulación de números, caracteres y otros valores I 8:28 
+## 6. Manipulación de números, caracteres y otros valores I 8:28 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
@@ -211,6 +211,8 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 
 ![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15.png)
 
+![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16.png)
+
 Como tipo de dato primitivo para el manejo de caracteres, Java solamente nos ofrece `char`, el cual nos permite almacenar un solo caracter (letra, signo de puntuación, …).
 
 ```java
@@ -226,8 +228,6 @@ String str = "Cadena de caracteres";
 ```
 
 #### 6.4.1 Operadores con cadenas de caracteres
-
-![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16.png)
 
 El principal operador para cadenas de caracteres es `+`, que nos permite concatenar dos textos, es decir, *poner* el segundo tras el primero.
 
@@ -251,15 +251,19 @@ System.out.println((double)5/9);
 
 En este caso, el resultado será 0.55555555556
 
-## Estructura de decisión 21:22 
+## 7. Estructura de decisión 21:22 
 
 [Estructura de decisión](pdfs/07_Estructuras_de_decisión.pdf)
 
 ### 7.1 Repaso sobre sentencias, bloques y expresiones
 
+![07_Estructuras_de_decision-1](images/07_Estructuras_de_decision-1.png)
+
 En el capítulo 4 veíamos que podíamos asemejar una sentencia a una *línea de código*, y un bloque a una agrupación de sentencias con una determinada misión. Repasemos esos conceptos y, vistos los capítulos 5 y 6, conzcamos mejor el de expresión.
 
 #### 7.1.1 Expresión
+
+![07_Estructuras_de_decision-2](images/07_Estructuras_de_decision-2.png)
 
 Se trata de una construcción hecha con variables, operadores y llamadas a funciones, que sigue la sintaxis del lenguaje, y que se evalúa produciendo un solo valor.
 
@@ -284,9 +288,13 @@ numero = (1 + 2) * 3;
 
 #### 7.1.2 Sentencia
 
+![07_Estructuras_de_decision-3](images/07_Estructuras_de_decision-3.png)
+
 Tras conocer una expresión, podemos decir que una sentencia es una expresión que termina en `;`
 
 #### 7.1.3 Bloque de código
+
+![07_Estructuras_de_decision-4](images/07_Estructuras_de_decision-4.png)
 
 Un bloque será un grupo de cero o más sentencias, delimitadas por un `{ }`. Por ejemplo:
 
@@ -306,7 +314,11 @@ class BlockDemo {
 
 ### 7.2 Estructuras de decisión
 
+![07_Estructuras_de_decision-5](images/07_Estructuras_de_decision-5.png)
+
 #### 7.2.1 Estructura `if-then`
+
+![07_Estructuras_de_decision-6](images/07_Estructuras_de_decision-6.png)
 
 Permite evaluar una expresión como verdadera o falsa, y ejecutar en caso de que sea verdadera un bloque de código
 
@@ -322,7 +334,29 @@ System.out.println("Este mensaje se imprime siempre");
 
 #### 7.2.2 Estructura `if-else`
 
+![07_Estructuras_de_decision-7](images/07_Estructuras_de_decision-7.png)
+
 Permite evaluar una expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta otro diferente:
+
+```java
+int num1 = 3, num2 = 4;
+
+if (num1 > num2) {
+   System.out.println("num1 es mayor que num2");
+}else {
+   System.out.println("num1 NO es mayor que num2");
+}
+
+System.out.println("Este mensaje se imprime siempre");
+```
+
+
+#### 7.2.3 Estructura `if-else-if`
+
+![07_Estructuras_de_decision-8](images/07_Estructuras_de_decision-8.png)
+
+Permite evaluar varias expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta el último bloque de código correspondiente al else:
+
 
 ```java
 if (puntuacion >= 9) {
@@ -336,7 +370,9 @@ if (puntuacion >= 9) {
 }
 ```
 
-#### 7.2.3 Estructura `switch`
+#### 7.2.4 Estructura `switch`
+
+![07_Estructuras_de_decision-9](images/07_Estructuras_de_decision-9.png)
 
 Permite evaluar si una expresión se corresponde con alguno de los valores de una serie de casos. Se puede usar con valores `byte`, `short`, `char`, `int` y `String`, entre otros. También existe la posibilidad de tener un caso por defecto (parecido a `else`).
 
