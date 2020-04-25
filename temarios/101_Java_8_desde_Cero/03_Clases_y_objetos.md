@@ -120,7 +120,89 @@ class Clase {
 }
 ```
 
-## Los constructores 9:07
+### 9.8 Código
+
+*Persona.java*
+
+```java
+package objetos;
+
+/**
+ * @author 
+ *
+ */
+class Persona {
+	
+	//Estructura, conocida como  propiedades o atributos
+	String nombre;
+	String apellidos;
+	int edad;
+	int altura;
+	float peso;
+	
+	//Comportamiento, conocido como métodos
+	void caminar() {
+		System.out.println("Estoy caminando");
+	}
+	
+	void hablar() {
+		System.out.println("Estoy hablando");
+	}
+	
+	void nacer() {
+		System.out.println("¡¡¡Acabo de nacer!!!");
+	}
+	
+	void morir() {
+		System.out.println("¡Hasta más ver!");
+	}
+}
+```
+
+*OrientacionObjetos.java*
+
+```java
+package objetos;
+
+/**
+ * @author 
+ *
+ */
+public class OrientacionObjetos {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Persona persona = new Persona();
+		Persona persona2 = new Persona();
+		Persona persona3 = new Persona(); 
+		
+		persona.nacer();
+		persona.hablar();
+		persona.caminar();
+		persona.morir();
+		
+		persona2.nacer();
+		
+		persona3.caminar();	
+	}
+}
+```
+
+**SALIDA**:
+
+```sh
+¡¡¡Acabo de nacer!!!
+Estoy hablando
+Estoy caminando
+¡Hasta más ver!
+¡¡¡Acabo de nacer!!!
+Estoy caminando
+```
+
+## 10. Los constructores 9:07
 
 [Los constructores](pdfs/10_Los_constructores.pdf)
 
@@ -168,7 +250,119 @@ public class Persona {
 
 El segundo constructor de este código utiliza el primer constructor. De esta forma reutilizamos código.
 
-## Getters y setters 14:28 
+### 10.4 Código
+
+*Persona.java*
+
+```java
+/**
+ * Definición e implementación de una clase
+ */
+package constructores;
+
+/**
+ * @author 
+ *
+ */
+public class Persona {
+
+	// Estructura, conocida como propiedades o atributos
+	private String nombre;
+	private String apellidos;
+	private int edad;
+	private int altura;
+	private float peso;
+
+	// Constructor vacóo
+	public Persona() {
+		this.nombre = "desconocido";
+		this.apellidos = "desconocido";
+		this.edad = 0;
+	}
+
+	// Constructor con algunos parámetros
+	public Persona(String nombre, String apellidos) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
+	
+	public Persona(String nombre, String apellidos, int edad) {
+		this(nombre, apellidos);
+		this.edad = edad;
+	}
+	
+	
+
+	public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.edad = edad;
+		this.altura = altura;
+		this.peso = peso;
+	}
+
+	// Comportamiento, conocido como métodos
+	void caminar() {
+		System.out.println("Estoy caminando");
+	}
+
+	void hablar() {
+		System.out.println("Estoy hablando");
+	}
+
+	void nacer() {
+		System.out.println("¡¡¡Acabo de nacer!!!");
+	}
+
+	void morir() {
+		System.out.println("¡Hasta más ver!");
+	}
+
+	void presentacion() {
+		System.out.println(
+				"Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad.");
+	}
+
+}
+```
+
+*Constructores.java*
+
+```java
+package constructores;
+
+/**
+ * @author 
+ *
+ */
+public class Constructores {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Persona johndoe = new Persona();		
+		johndoe.presentacion();
+		
+		Persona manuel = new Persona("Manuel", "Ruiz González");		
+		manuel.presentacion();
+		
+		Persona antonio = new Persona("Antonio", "Castillo Real", 31);
+		antonio.presentacion();
+	}
+}
+```
+
+**SALIDA**:
+
+```sh
+Mi nombre es desconocido desconocido, y tengo 0 años de edad.
+Mi nombre es Manuel Ruiz González, y tengo 0 años de edad.
+Mi nombre es Antonio Castillo Real, y tengo 31 años de edad.
+```
+
+## 11. Getters y setters 14:28 
 
 [Getters y setters](pdfs/11_Propiedades_y_metodos.pdf)
 
@@ -236,6 +430,168 @@ Son unos métodos especiales, pero sencillos, que nos permiten consultar cualqui
 ![11_Propiedades_y_metodos-8](images/11_Propiedades_y_metodos-8.png)
 
 Se trata de un método especial, que sirve para obtener, en un solo valor de tipo String, una representación de un objeto. Eclipse también incluye un asistente para generarlo, si nos fuera preciso.
+
+
+### 11.4 Código
+
+*Persona.java*
+
+```java
+/**
+ * Definición e implementación de una clase
+ */
+package propiedadesymetodos;
+
+/**
+ * @author
+ *
+ */
+public class Persona {
+
+	// Estructura, conocida como propiedades o atributos
+	private String nombre;
+	private String apellidos;
+	private int edad;
+	private int altura;
+	private float peso;
+
+	// Constructor vacío
+	public Persona() {
+		this.nombre = "desconocido";
+		this.apellidos = "desconocido";
+		this.edad = 0;
+	}
+
+	// Constructor con algunos parámetros
+	public Persona(String nombre, String apellidos) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
+
+	public Persona(String nombre, String apellidos, int edad) {
+		this(nombre, apellidos);
+		this.edad = edad;
+	}
+
+	// Comportamiento, conocido como métodos
+	public void caminar() {
+		System.out.println("Estoy caminando");
+	}
+
+	public void hablar() {
+		System.out.println("Estoy hablando");
+	}
+
+	public void nacer() {
+		System.out.println("¡¡¡Acabo de nacer!!!");
+	}
+
+	public void morir() {
+		System.out.println("¡Hasta más ver!");
+	}
+
+	public void presentacion() {
+		System.out.println(
+				"Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad.");
+	}
+	
+	public void saludo(String mensaje) {
+		System.out.println("Hola, soy " + this.nombre + " " + this.apellidos + ", y quiero saludarte diciéndote " + mensaje);
+	}
+	
+	public String obtenerNombreCompleto() {
+		return this.nombre + " " + this.apellidos;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+
+	public float getPeso() {
+		return peso;
+	}
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" + altura
+				+ ", peso=" + peso + "]";
+	}
+}
+
+```
+
+*PropiedadesMetodos.java*
+
+```java
+/**
+ *  PROPIEDADES Y MÉTODOS DE UNA CLASE
+ */
+package propiedadesymetodos;
+
+
+/**
+ * @author 
+ *
+ */
+
+public class PropiedadesMetodos {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Persona p = new Persona();
+		
+		p.setNombre("Pepe");
+		p.setApellidos("Perez");
+		p.setAltura(180);
+		p.setEdad(25);
+		p.setPeso(75.5f);
+		
+		System.out.println(p);
+	}
+}
+```
+
+**SALIDA:**
+
+```sh
+Persona [nombre=Pepe, apellidos=Perez, edad=25, altura=180, peso=75.5]
+```
+
 
 ## Ciclo de vida de un objeto 6:27 
 
