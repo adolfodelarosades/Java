@@ -149,7 +149,7 @@ public class Punto {
 }
 ```
 
-*.java*
+*Rectangulo.java*
 
 ```java
 package argumentos;
