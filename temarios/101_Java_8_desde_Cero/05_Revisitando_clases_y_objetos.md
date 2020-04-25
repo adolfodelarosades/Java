@@ -24,11 +24,11 @@ Un método puede volver al código desde donde se invocó de varias maneras:
 
 ![17_Argumentos_y_tipos_de_retorno-3](images/17_Argumentos_y_tipos_de_retorno-3.png)
 
-### 17.1.1 Métodos que no devuelven ningún valor
+#### 17.1.1 Métodos que no devuelven ningún valor
 
 Si un método no devuelve ningún valor, el tipo de retorno será `void`. Si tratamos de devolver algún valor (con `return`) en un método marcado como `void`, obtendremos un error de compilación.
 
-### 17.1.2 Métodos que devuelven un tipo primitivo
+#### 17.1.2 Métodos que devuelven un tipo primitivo
 
 ![17_Argumentos_y_tipos_de_retorno-4](images/17_Argumentos_y_tipos_de_retorno-4.png)
 
@@ -45,7 +45,7 @@ public class Rectangulo {
 }
 ```
 
-### 17.1.3.Métodos que devuelven un objeto
+#### 17.1.3 Métodos que devuelven un objeto
 
 ![17_Argumentos_y_tipos_de_retorno-5](images/17_Argumentos_y_tipos_de_retorno-5.png)
 
@@ -71,52 +71,7 @@ public class Rectangulo {
 }
 ```
 
-### 17.2 Paso de argumentos
-
-![17_Argumentos_y_tipos_de_retorno-6](images/17_Argumentos_y_tipos_de_retorno-6.png)
-
-![17_Argumentos_y_tipos_de_retorno-7](images/17_Argumentos_y_tipos_de_retorno-7.png)
-
-
-Un método puede recibir cuantos argumentos necesitemos para realizar una operación. Estos pueden ser:
-
-* De un tipo primitivo
-* Un array (multidimensional)
-* De una clase definida por Java o por nosotros mismos.
-
-```java
-public Rectangulo rectanguloDePuntos(Punto[] esquinas) {
-    //...cuerpo del método...
-}
-```
-
-### 17.2.1 Número *arbitrario* de argumentos
-
-![17_Argumentos_y_tipos_de_retorno-8](images/17_Argumentos_y_tipos_de_retorno-8.png)
-
-Desde hace algunas versiones, Java incluye la opción de usar *varargs* para indicar que un método recibirá un número arbitrario de argumentos de un tipo. Estos son útiles cuando no sabemos a priori la cantidad de argumentos que recibiremos.
-
-Para usarlos usaremos la sintaxis de tres puntos seguidos (`...`), justo después del tipo de dato, y separados por un espacio del nombre del argumento.
-
-```java
-public Poligono poligonoDePuntos(Punto... esquinas) {
-    int numeroLados = esquinas.length;
-    double raizDelLado1, longitudLado1;
-    raizDelLado1 = (corners[1].x - corners[0].x)
-                     * (corners[1].x - corners[0].x)
-                     + (corners[1].y - corners[0].y)
-                     * (corners[1].y - corners[0].y);
-    longitudLado1 = Math.sqrt(raizDelLado1);
-
-    // continuación del cuerpo del método
-}
-```
-
-Dentro del método, un *varargs* se trata igual que un array.
-
-***¡IMPORTANTE!** Un método que reciba varios argumentos de diferentes tipos, y además, un varargs, debe incluir este como el último en orden de recepción. De otra forma, sería imposible identificar el número de argumentos recibidos mediante el varargs.*
-
-### 17.3 Código
+#### 17.1.4 Código
 
 *ArgumentosTiposRetorno.java*
 
@@ -232,6 +187,50 @@ public class Rectangulo {
 }
 ```
 
+### 17.2 Paso de argumentos
+
+![17_Argumentos_y_tipos_de_retorno-6](images/17_Argumentos_y_tipos_de_retorno-6.png)
+
+![17_Argumentos_y_tipos_de_retorno-7](images/17_Argumentos_y_tipos_de_retorno-7.png)
+
+Un método puede recibir cuantos argumentos necesitemos para realizar una operación. Estos pueden ser:
+
+* De un tipo primitivo
+* Un array (multidimensional)
+* De una clase definida por Java o por nosotros mismos.
+
+```java
+public Rectangulo rectanguloDePuntos(Punto[] esquinas) {
+    //...cuerpo del método...
+}
+```
+
+#### 17.2.1 Número *arbitrario* de argumentos
+
+![17_Argumentos_y_tipos_de_retorno-8](images/17_Argumentos_y_tipos_de_retorno-8.png)
+
+Desde hace algunas versiones, Java incluye la opción de usar *varargs* para indicar que un método recibirá un número arbitrario de argumentos de un tipo. Estos son útiles cuando no sabemos a priori la cantidad de argumentos que recibiremos.
+
+Para usarlos usaremos la sintaxis de tres puntos seguidos (`...`), justo después del tipo de dato, y separados por un espacio del nombre del argumento.
+
+```java
+public Poligono poligonoDePuntos(Punto... esquinas) {
+    int numeroLados = esquinas.length;
+    double raizDelLado1, longitudLado1;
+    raizDelLado1 = (corners[1].x - corners[0].x)
+                     * (corners[1].x - corners[0].x)
+                     + (corners[1].y - corners[0].y)
+                     * (corners[1].y - corners[0].y);
+    longitudLado1 = Math.sqrt(raizDelLado1);
+
+    // continuación del cuerpo del método
+}
+```
+
+Dentro del método, un *varargs* se trata igual que un array.
+
+***¡IMPORTANTE!** Un método que reciba varios argumentos de diferentes tipos, y además, un varargs, debe incluir este como el último en orden de recepción. De otra forma, sería imposible identificar el número de argumentos recibidos mediante el varargs.*
+
 ## 18. Paso de argumento por valor y referencia 8:18 
 
 [Paso de argumento por valor y referencia](pdfs/18_Paso_por_valor_y_referencia.pdf)
@@ -303,6 +302,156 @@ moveCircle(myCircle, 23, 56)
 
 Primero, modificamos los valores X e X del círculo, y posteriormente, asignamos la referencia a una nueva instancia. Si verificamos el objeto tras la ejecución del método, comprobaremos que la referencia *apunta* al objeto inicial, y sus valores sí se han visto modificados.
 
+### 18.4 Código
+
+*PasoPorValor.java*
+
+```java
+package valoryreferencia;
+
+/**
+ * @author 
+ *
+ */
+public class PasoPorValor {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		int x = 3;
+		System.out.println("Antes de invocar pasoPorValor, x = " + x);
+
+		// invocamos el argumento y le pasamos x
+		pasoPorValor(x);
+
+		// imprimimos x y vemos si el parámetro ha cambiado
+		System.out.println("Después de invocar pasoPorValor, x = " + x);
+
+	}
+
+	// cambiamos el valor en el método
+	public static void pasoPorValor(int p) {
+		p = 10;
+		System.out.println("Cambiamos el valor en el método, x = " + p);
+	}
+}
+
+
+SALIDA:
+
+Antes de invocar pasoPorValor, x = 3
+Cambiamos el valor en el método, x = 10
+Después de invocar pasoPorValor, x = 3
+```
+
+*Circle.java*
+
+```java
+package valoryreferencia;
+
+public class Circle {
+	
+	private int x;
+	private int y;
+	private int radius;
+	
+	public Circle(int x, int y) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.radius = 1;
+	}
+
+
+	public Circle(int x, int y, int radius) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+	}
+
+
+	public int getX() {
+		return x;
+	}
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+	public int getY() {
+		return y;
+	}
+
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+	public int getRadius() {
+		return radius;
+	}
+
+
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Circle [x=" + x + ", y=" + y + ", radius=" + radius + "]";
+	}
+}
+```
+
+*PasoPorReferencia.java*
+
+```java
+package valoryreferencia;
+
+/**
+ * @author 
+ *
+ */
+public class PasoPorReferencia {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Circle circle = new Circle(2,3);
+		
+		System.out.println(circle);
+		
+		moveCircle(circle, 23, 56);
+		
+		System.out.println(circle);
+
+	}
+	
+	public static void moveCircle(Circle circle, int deltaX, int deltaY) {
+	    // code to move origin of circle to x+deltaX, y+deltaY
+	    circle.setX(circle.getX() + deltaX);
+	    circle.setY(circle.getY() + deltaY);
+
+	    // code to assign a new reference to circle
+	    circle = new Circle(0, 0);
+	}
+}
+
+
+SALIDA:
+
+Circle [x=2, y=3, radius=1]
+Circle [x=25, y=59, radius=1]
+```
+
 ## 19. Modificadores de acceso 12:39 
 
 [Modificadores de acceso](pdfs/19_Modificadores_de_acceso.pdf)
@@ -338,13 +487,143 @@ Para métodos y atributos, intentemos siempre escoger la versión más restricti
 
 Deben ser `private` salvo para constantes (que deben ser `public`). Los atributos no privados aumentan el acoplamiento del código y limitan la flexibilidad para cambiar código en el futuro.
 
+### 19.5 Código
+
+![19-Estructura_Proyecto](images/19-Estructura_Proyecto.png)
+
+
+*B.java*
+
+```java
+package modificadores;
+
+class B {
+	
+	String b;
+	
+	B() {
+		b = "Hola desde B";
+	}
+
+	String getB() {
+		return b;
+	}
+
+	void setB(String b) {
+		this.b = b;
+	}
+	
+	/*String aMasB(A a) {
+		return a.getA() + b;  
+	}*/
+}
+```
+
+*Modificadores.java*
+
+```java
+/**
+ * 
+ */
+package modificadores;
+
+import paquetec.C;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class Modificadores {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//A a = new A();  //A no es accesible, aunque está en un subpaquete
+		B b = new B();		
+		System.out.println(b.b); //Esta opción no suele ser recomendable
+		System.out.println(b.getB());
+		
+		C c = new C();
+		//System.out.println(c.c); //Si intentamos acceder al atributo, error
+		System.out.println(c.getC());
+		
+		
+
+	}
+
+}
+
+
+SALIDA:
+
+Hola desde B
+Hola desde B
+Hola desde C
+```
+
+*A.java*
+
+```java
+package modificadores.paquetea;
+
+class A {
+	
+	String a;
+	
+	A() {
+		a = "Hola desde A";
+	}
+	
+	void setA(String a) {
+		this.a = a;
+	}
+	
+	String getA() { return this.a; }
+}
+```
+
+*D.java*
+
+```java
+package modificadores.paquetea;
+
+public class D {
+	// Dentro del mismo paquete sí que podemos usar A
+	A a;
+
+}
+```
+
+*C.java*
+
+```java
+package paquetec;
+
+public class C {
+	
+	private String c;
+	
+	public C() {
+		c = "Hola desde C";
+	}
+
+	public String getC() {
+		return c;
+	}
+
+	public void setC(String c) {
+		this.c = c;
+	}
+}
+```
+
 ## 20. Métodos estáticos y variables estáticas 8:19 
 
 [Métodos estáticos y variables estáticas](pdfs/20_Métodos_y_variables_estáticas.pdf)
 
 ![20_Metodos_y_variables_estaticas-1](images/20_Metodos_y_variables_estaticas-1.png)
-
-
 
 ### 20.1 Atributos de objeto y de clase
 
@@ -376,6 +655,123 @@ Se pueden definir como `static`.
 
 ```java
 static final PI = 3.141592653589793;
+```
+
+### 20.4 Código
+
+*Bicicleta.java*
+
+```java
+package bicicleta;
+
+public class Bicicleta {
+	
+	private int numMarchas;
+	private int diametroRueda;
+	private int velocidad;
+	private int id;
+	
+	
+	//Variable estática
+	//Compartida para todas las instancias.
+	private static int numeroDeBiciletas = 0;
+	
+	public static int getNumeroDeBicicletas() {
+		//No podemos usar this
+		//return this.numeroDeBiciletas;
+		return numeroDeBiciletas;
+	}
+
+
+	public Bicicleta(int numMarchas, int diametroRueda, int velocidad) {
+		this.numMarchas = numMarchas;
+		this.diametroRueda = diametroRueda;
+		this.velocidad = velocidad;
+		id = ++numeroDeBiciletas;
+	}
+
+
+	public int getNumMarchas() {
+		return numMarchas;
+	}
+
+
+	public void setNumMarchas(int numMarchas) {
+		this.numMarchas = numMarchas;
+	}
+
+
+	public int getDiametroRueda() {
+		return diametroRueda;
+	}
+
+
+	public void setDiametroRueda(int diametroRueda) {
+		this.diametroRueda = diametroRueda;
+	}
+
+
+	public int getVelocidad() {
+		return velocidad;
+	}
+
+
+	public void setVelocidad(int velocidad) {
+		this.velocidad = velocidad;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Bicicleta [numMarchas=" + numMarchas + ", diametroRueda=" + diametroRueda + ", velocidad=" + velocidad
+				+ ", id=" + id + "]";
+	}
+}
+```
+
+*Estaticos.java*
+
+```java
+package bicicleta;
+
+/**
+ * @author 
+ *
+ */
+public class Estaticos {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Bicicleta bici1 = new Bicicleta(21, 27, 0);
+		Bicicleta bici2 = new Bicicleta(18, 24, 0);
+		
+		System.out.println(bici1);
+		System.out.println(bici2);
+		
+		//bici1.getNumeroDeBicicletas();
+		System.out.println(Bicicleta.getNumeroDeBicicletas());
+	}
+}
+
+
+SALIDA:
+
+Bicicleta [numMarchas=21, diametroRueda=27, velocidad=0, id=1]
+Bicicleta [numMarchas=18, diametroRueda=24, velocidad=0, id=2]
+2
 ```
 
 ## 21. Sobrecarga de métodos y constructores 7:07 
@@ -455,6 +851,163 @@ public class Persona {
 
   //...
 }
+```
+
+### 21.3 Código
+
+*Artista.java*
+
+```java
+package sobrecarga;
+
+public class Artista {
+	
+	
+	public void dibuja(String s) {
+		System.out.println(s);
+	}
+	
+	public void dibuja(int i) {
+		System.out.println(i);
+	}
+	
+	public void dibuja(double f) {
+		System.out.println(f);
+	}
+	
+	public void dibuja(int i, double f) {
+		System.out.println(i);
+		System.out.println(f);
+	}
+}
+```
+
+*Persona.java*
+
+```java
+package sobrecarga;
+
+public class Persona {
+
+	private String nombre;
+	private String apellidos;
+	private int edad;
+	private int altura;
+	private float peso;
+	
+	
+	public Persona() {
+	}
+	
+	public Persona(String nombre, String apellidos) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
+	
+
+	public Persona(String nombre, String apellidos, int edad) {
+//		this.nombre = nombre;
+//		this.apellidos = apellidos;
+		this(nombre, apellidos);
+		this.edad = edad;
+	}
+	
+	public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
+//		this.nombre = nombre;
+//		this.apellidos = apellidos;
+//		this.edad = edad;
+		this(nombre, apellidos, edad);
+		this.altura = altura;
+		this.peso = peso;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	public int getAltura() {
+		return altura;
+	}
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+	public float getPeso() {
+		return peso;
+	}
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+	
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" + altura
+				+ ", peso=" + peso + "]";
+	}
+}
+```
+
+*Sobrecarga.java*
+
+```java
+/**
+ * 
+ */
+package sobrecarga;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class Sobrecarga {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Artista artista = new Artista();
+		
+		artista.dibuja("Hola");
+		artista.dibuja(7);
+		artista.dibuja(7, 8.3f);
+		
+		
+		Persona perso1 = new Persona();
+		Persona perso2 = new Persona("Pepe", "Pérez");
+		Persona perso3 = new Persona("Alejandro", "Ruiz", 33);
+		Persona perso4 = new Persona("Miguel", "Gómez", 25, 180, 75f);
+		
+		System.out.println(perso1);
+		System.out.println(perso2);
+		System.out.println(perso3);
+		System.out.println(perso4);	
+	}
+}
+
+
+SALIDA:
+
+Hola
+7
+7
+8.300000190734863
+Persona [nombre=null, apellidos=null, edad=0, altura=0, peso=0.0]
+Persona [nombre=Pepe, apellidos=Pérez, edad=0, altura=0, peso=0.0]
+Persona [nombre=Alejandro, apellidos=Ruiz, edad=33, altura=0, peso=0.0]
+Persona [nombre=Miguel, apellidos=Gómez, edad=25, altura=180, peso=75.0]
 ```
 
 ## Contenido adicional 5   
