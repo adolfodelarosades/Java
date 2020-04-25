@@ -95,7 +95,7 @@ Los objetos suelen interactuar los unos con los otros. Esto lo realizan mediante
 
 ![09_Orientacion_a_objetos-17](images/09_Orientacion_a_objetos-17.png)
 
-Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra disposición una serie de **modificadores de acceso**, que harán que no cualquier clase pueda acceder a otra.
+Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra disposición una serie de *modificadores de acceso*, que harán que no cualquier clase pueda acceder a otra.
 
 Modificador | Descripción
 ------------|------------
