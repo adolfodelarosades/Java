@@ -160,6 +160,6 @@ En esta sesión práctica veremos como crear un gestor de aparcamiento de coches
 
 [Introducción a las expresiones lambda](pdfs/33_ExpresionesLambda.pdf)
 
-[Proyecto_Final.pptx](pdfs/Proyecto_Final.pptx)
+[Proyecto_Final.pptx](otros/Proyecto_Final.pptx)
 
-[Gráfico.xlsx](pdfs/Gráfico.xlsx)
+[Gráfico.xlsx](otros/Gráfico.xlsx)
