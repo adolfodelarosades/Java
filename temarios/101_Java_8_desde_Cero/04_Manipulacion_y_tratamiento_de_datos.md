@@ -115,6 +115,100 @@ La clase `String` nos proporciona muchos métodos para comparar cadenas y fragme
 
 * `contains`, para comparar si una cadena está contenida en otra.
 
+### 15.6 Código
+
+*EjemplosString.java*
+
+```java
+/**
+ * USO DE LA CLASE STRING
+ */
+package string;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class EjemplosString {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		//CONCATENAR
+		System.out.println("***** CONCATENAR *****");
+		System.out.println(" 2 Formas diferentes: ");
+		String nombre = "Mi nombre es ".concat("Pepe");
+		String nombre2 = "Mi nombre es " + "Pepe";
+		System.out.println(nombre);
+		System.out.println(nombre2);
+		System.out.println();
+		
+		// MAYÁSCULAS-MINÚSCULAS
+		System.out.println("***** MAYÁSCULAS-MINÚSCULAS *****");
+		String cadena = "En un lugar de La Mancha";
+		System.out.println(cadena);
+		System.out.println(cadena.toLowerCase());
+		System.out.println(cadena.toUpperCase());
+		System.out.println();
+		
+		
+		//STRING FORMAT
+		System.out.println("***** STRING FORMAT *****");
+		System.out.println(" 3 Formas diferentes: ");
+		String nombre3 = "Pepe";
+		String apellidos3 = "Pérez";
+		String mensaje3 = "¿qué tal estás?";
+		System.out.println("Hola, soy " + nombre3 + " " + apellidos3 + ", y quiero saludarte diciéndote " + mensaje3);
+		
+		String nombre4 = "Pepe";
+		String apellidos4 = "Pérez";
+		String mensaje4 = "¿qué tal estás?";
+		String str = String.format("Hola, soy %s %s, y quiero saludarte diciéndote %s", nombre4, apellidos4, mensaje4);
+		System.out.println(str);
+		
+		System.out.printf("Hola, soy %s %s, y quiero saludarte diciéndote %s", nombre4, apellidos4, mensaje4);
+		System.out.println();
+		System.out.println();
+		
+		//MÉTODOS DE COMPARACIÓN
+		System.out.println("***** MÉTODOS DE COMPARACIÓN *****");
+		String quijote = "En un lugar de La Mancha";
+		System.out.println(quijote.endsWith("La Mancha"));		
+		System.out.println(quijote.startsWith("En un lugar"));		
+		System.out.println(quijote.contains("lugar"));
+		
+	}
+
+}
+```
+
+**SALIDA:**
+
+```sh
+***** CONCATENAR *****
+ 2 Formas diferentes: 
+Mi nombre es Pepe
+Mi nombre es Pepe
+
+***** MAYÁSCULAS-MINÚSCULAS *****
+En un lugar de La Mancha
+en un lugar de la mancha
+EN UN LUGAR DE LA MANCHA
+
+***** STRING FORMAT *****
+ 3 Formas diferentes: 
+Hola, soy Pepe Pérez, y quiero saludarte diciéndote ¿qué tal estás?
+Hola, soy Pepe Pérez, y quiero saludarte diciéndote ¿qué tal estás?
+Hola, soy Pepe Pérez, y quiero saludarte diciéndote ¿qué tal estás?
+
+***** MÉTODOS DE COMPARACIÓN *****
+true
+true
+true
+```
+
 ## 16. Manejo de Arrays 23:09 
 
 [Manejo de Arrays](pdfs/16_Arrays.pdf)
@@ -241,6 +335,288 @@ Java 8 incorpora algunos métodos paralelos, que aprovechan mejor el rendimiento
 * `parallelSort(...)`
 
 * `parallelSetAll(...)`
+
+### 16.9 Código
+
+*ManejoArrays01.java*
+
+```java
+/**
+ * 
+ */
+package arrays;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class ManejoArrays01 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//CREACIÓN E INICIALIZACIÓN ELEMENTO A ELEMENTO
+		int[] unArray = new int[10];
+		
+        unArray[0] = 100;
+        unArray[1] = 200;
+        unArray[2] = 300;
+        unArray[3] = 400;
+        unArray[4] = 500;
+        unArray[5] = 600;
+        unArray[6] = 700;
+        unArray[7] = 800;
+        unArray[8] = 900;
+        unArray[9] = 1000;
+        
+        //RECORRIDO DE TODOS LOS VALORES DE UN ARRAY
+        for(int i = 0; i < unArray.length; i++) {
+        	System.out.println(unArray[i]);
+        }    
+	}
+
+}
+
+
+SALIDA:
+
+100
+200
+300
+400
+500
+600
+700
+800
+900
+1000
+```
+
+*ManejoArrays02.java*
+
+```java
+package arrays;
+
+/**
+ * @author 
+ *
+ */
+public class ManejoArrays02 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//CREACIÓN E INICIALIZACIÓN CON EL ATAJO { }
+		//En este caso, el tamaño lo determina la cantidad 
+		//de valores que inicializamos
+		int[] unArray = { 
+			    100, 200, 300,
+			    400, 500, 600, 
+			    700, 800, 900, 1000
+		};
+        
+    //RECORRIDO DE TODOS LOS VALORES DE UN ARRAY
+		//CON EL BUCLE FOR MEJORADO
+    for(int i : unArray) {
+        	System.out.println(i);
+    }
+	}
+}
+
+
+SALIDA:
+
+100
+200
+300
+400
+500
+600
+700
+800
+900
+1000
+```
+
+*Persona.java*
+
+```java
+package arrays.objetos;
+
+public class Persona {
+	
+	private String nombre;
+	private String apellidos;
+	private int edad;
+	private int altura;
+	private float peso;
+	
+	public Persona() {}
+	
+	public Persona(String nombre, String apellidos) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
+
+	public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.edad = edad;
+		this.altura = altura;
+		this.peso = peso;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+
+	public float getPeso() {
+		return peso;
+	}
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" + altura
+				+ ", peso=" + peso + "]";
+	}
+}
+```
+
+*ManejoArrays03.java*
+
+```java
+package arrays.objetos;
+
+import java.util.Random;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class ManejoArrays03 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//Estos dos arrays nos permitirán obtener valores aleatorios para inicializar los datos
+		String[] nombres = {"José", "Antonio", "Martín", "Luis", "María", "Leticia", "Luisa"};
+		String[] apellidos = {"Pérez", "Gómez", "López", "García", "Muñoz", "Martínez"};
+		
+		//Creamos nuestro array de 5 elementos de tipo Persona
+		Persona[] personas = new Persona[5];
+		
+		//Inicializamos los valores
+		for(int i = 0; i < personas.length; i++) {
+			//Obtenemos un nombre de una posición aleatoria
+			String nombre = nombres[aleatorio(nombres.length)];
+			//Obtenemos un apellido de una posición aleatoria			
+			String apellido = apellidos[aleatorio(nombres.length)];
+			//Los usamos para crear una nueva persona
+			personas[i]= new Persona(nombre, apellido);
+		}
+		
+		//Recorremos de nuevo el array, esta vez
+		//para imprimir sus valores.
+		for(Persona p : personas) {
+			System.out.println(p);
+		}
+
+	}
+
+	/*
+	 * ESTE MÉTODO DEVUELVE UN NÚMERO ALEATORIO ENTRE
+	 * 0 y TOPE-1.
+	 */
+	public static int aleatorio(int tope) {
+		Random r = new Random();		
+		return r.nextInt(tope-1);
+	}
+
+}
+
+
+SALIDA:
+
+Persona [nombre=Luis, apellidos=Gómez, edad=0, altura=0, peso=0.0]
+Persona [nombre=María, apellidos=Gómez, edad=0, altura=0, peso=0.0]
+Persona [nombre=Antonio, apellidos=Muñoz, edad=0, altura=0, peso=0.0]
+Persona [nombre=María, apellidos=Pérez, edad=0, altura=0, peso=0.0]
+Persona [nombre=Luis, apellidos=Muñoz, edad=0, altura=0, peso=0.0]
+```
+
+*.java*
+
+```java
+
+
+SALIDA:
+
+```
+
+*.java*
+
+```java
+
+
+SALIDA:
+
+```
+
+*.java*
+
+```java
+
+
+SALIDA:
+
+```
+
+*.java*
+
+```java
+
+
+SALIDA:
+
+```
 
 ## Práctica: Creando el juego de hundir la flota 31:16 
 
