@@ -1163,19 +1163,366 @@ public class HundirLaFlota {
 	}
 
 }
-
-
-SALIDA:
-
 ```
 
-*.java*
+**SALIDA:**
 
-```java
+```sh
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  5   .   .   .   .   .   .   .   .   .   
+[B]  5   5   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   3   3   3   .   1   .   .   
+[E]  5   .   .   .   1   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   1   .   .   
+[I]  .   .   .   .   .   .   3   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL JUGADOR: 24
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+A1
+AGUA
 
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   .   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   .   .   .   .   .   .   .   .   
+[F]  .   .   .   .   .   .   .   .   .   .   
+[G]  .   .   .   .   .   .   .   .   .   .   
+[H]  .   .   .   .   .   .   .   .   .   .   
+[I]  .   .   .   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 24
 
-SALIDA:
+TURNO DEL ORDENADOR
+HAS ALCANZADO A ALGÚN BARCO
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  5   .   .   .   .   .   .   .   .   .   
+[B]  5   5   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   1   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   1   .   .   
+[I]  .   .   .   .   .   .   3   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL JUGADOR: 23
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+B7
+AGUA
 
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   .   .   .   .   .   .   .   .   
+[F]  .   .   .   .   .   .   .   .   .   .   
+[G]  .   .   .   .   .   .   .   .   .   .   
+[H]  .   .   .   .   .   .   .   .   .   .   
+[I]  .   .   .   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 24
+
+TURNO DEL ORDENADOR
+HAS ALCANZADO A ALGÚN BARCO
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  5   .   .   .   .   .   .   .   .   .   
+[B]  5   5   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   1   .   .   
+[I]  .   .   .   .   .   .   3   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL JUGADOR: 22
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+E3
+AGUA
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   .   A   .   .   .   .   .   .   
+[F]  .   .   .   .   .   .   .   .   .   .   
+[G]  .   .   .   .   .   .   .   .   .   .   
+[H]  .   .   .   .   .   .   .   .   .   .   
+[I]  .   .   .   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 24
+
+TURNO DEL ORDENADOR
+AGUA
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  5   .   .   .   .   .   .   .   .   .   
+[B]  5   5   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   1   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL JUGADOR: 22
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+H2
+HAS ALCANZADO A ALGÚN BARCO
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   .   A   .   .   .   .   .   .   
+[F]  .   .   .   .   .   .   .   .   .   .   
+[G]  .   .   .   .   .   .   .   .   .   .   
+[H]  .   .   X   .   .   .   .   .   .   .   
+[I]  .   .   .   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 23
+
+TURNO DEL ORDENADOR
+HAS ALCANZADO A ALGÚN BARCO
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  5   .   .   .   .   .   .   .   .   .   
+[B]  5   5   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   X   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL JUGADOR: 21
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+G2
+HAS ALCANZADO A ALGÚN BARCO
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   .   A   .   .   .   .   .   .   
+[F]  .   .   .   .   .   .   .   .   .   .   
+[G]  .   .   X   .   .   .   .   .   .   .   
+[H]  .   .   X   .   .   .   .   .   .   .   
+[I]  .   .   .   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 22
+
+TURNO DEL ORDENADOR
+HAS ALCANZADO A ALGÚN BARCO
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  5   .   .   .   .   .   .   .   .   .   
+[B]  5   X   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   X   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL JUGADOR: 20
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+F2
+HAS ALCANZADO A ALGÚN BARCO
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   .   A   .   .   .   .   .   .   
+[F]  .   .   X   .   .   .   .   .   .   .   
+[G]  .   .   X   .   .   .   .   .   .   .   
+[H]  .   .   X   .   .   .   .   .   .   .   
+[I]  .   .   .   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 21
+
+TURNO DEL ORDENADOR
+AGUA
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  5   .   .   .   .   .   .   .   .   .   
+[B]  5   X   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   X   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   .   .   .   .   .   .   .   A   
+PUNTOS RESTANTES DEL JUGADOR: 20
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+E2
+HAS ALCANZADO A ALGÚN BARCO
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   X   A   .   .   .   .   .   .   
+[F]  .   .   X   .   .   .   .   .   .   .   
+[G]  .   .   X   .   .   .   .   .   .   .   
+[H]  .   .   X   .   .   .   .   .   .   .   
+[I]  .   .   .   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 20
+
+TURNO DEL ORDENADOR
+HAS ALCANZADO A ALGÚN BARCO
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  X   .   .   .   .   .   .   .   .   .   
+[B]  5   X   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   1   .   .   .   3   X   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   .   .   .   .   .   .   .   A   
+PUNTOS RESTANTES DEL JUGADOR: 19
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+I2
+HAS ALCANZADO A ALGÚN BARCO
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   X   A   .   .   .   .   .   .   
+[F]  .   .   X   .   .   .   .   .   .   .   
+[G]  .   .   X   .   .   .   .   .   .   .   
+[H]  .   .   X   .   .   .   .   .   .   .   
+[I]  .   .   X   .   .   .   .   .   .   .   
+[J]  .   .   .   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 19
+
+TURNO DEL ORDENADOR
+HAS ALCANZADO A ALGÚN BARCO
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  X   .   .   .   .   .   .   .   .   .   
+[B]  5   X   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   X   .   .   .   3   X   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   .   .   .   .   .   .   .   A   
+PUNTOS RESTANTES DEL JUGADOR: 18
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+J2
+AGUA
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   .   .   .   .   .   .   .   .   
+[E]  .   .   X   A   .   .   .   .   .   .   
+[F]  .   .   X   .   .   .   .   .   .   .   
+[G]  .   .   X   .   .   .   .   .   .   .   
+[H]  .   .   X   .   .   .   .   .   .   .   
+[I]  .   .   X   .   .   .   .   .   .   .   
+[J]  .   .   A   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 19
+
+TURNO DEL ORDENADOR
+AGUA
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  X   .   .   .   .   .   .   .   .   .   
+[B]  5   X   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   X   .   .   .   3   X   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   A   .   .   .   .   .   .   A   
+PUNTOS RESTANTES DEL JUGADOR: 18
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
+D2
+AGUA
+
+REGISTRO DEL MAPA DEL ORDENADOR
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  .   A   .   .   .   .   .   .   .   .   
+[B]  .   .   .   .   .   .   .   A   .   .   
+[C]  .   .   .   .   .   .   .   .   .   .   
+[D]  .   .   A   .   .   .   .   .   .   .   
+[E]  .   .   X   A   .   .   .   .   .   .   
+[F]  .   .   X   .   .   .   .   .   .   .   
+[G]  .   .   X   .   .   .   .   .   .   .   
+[H]  .   .   X   .   .   .   .   .   .   .   
+[I]  .   .   X   .   .   .   .   .   .   .   
+[J]  .   .   A   .   .   .   .   .   .   .   
+PUNTOS RESTANTES DEL ORDENADOR: 19
+
+TURNO DEL ORDENADOR
+AGUA
+MAPA DEL USUARIO
+    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] 
+[A]  X   .   .   A   .   .   .   .   .   .   
+[B]  5   X   5   5   5   5   .   .   .   .   
+[C]  5   .   1   .   .   .   .   .   .   .   
+[D]  5   .   .   X   3   3   .   1   .   .   
+[E]  5   .   .   .   X   .   .   .   .   .   
+[F]  .   .   .   .   .   3   3   3   .   .   
+[G]  .   .   .   .   .   .   3   .   .   .   
+[H]  .   .   X   .   .   .   3   X   .   .   
+[I]  .   .   .   .   .   .   3   .   A   .   
+[J]  .   .   A   .   .   .   .   .   .   A   
+PUNTOS RESTANTES DEL JUGADOR: 18
+TURNO DEL JUGADOR
+Introduzca la casilla (por ejemplo B4): 
 ```
 
 ## Contenido adicional 4   
