@@ -16,7 +16,7 @@ Es un mecanismo fundamental de la Programación Orientada a Objetos, que nos per
 
 En Java, a diferencia de otros lenguajes, solo está permitida la **herencia simple**, de forma que cada clase tiene, como mucho, una clase base. Solo hay una clase especial, `Object`, que no tiene clase base. El resto de clases ya creadas, o por crear, tienen en esta el nivel más básico de su jerarquía (es decir, una clase que no heredia de nadie, realmente está heredando de `Object`).
 
-<img src="images/c6/Jerarquia_de_clases.gif">
+<img src="images/Jerarquia_de_clases.gif">
 
 La sintaxis para indicar que una clase hereda de otra es:
 
