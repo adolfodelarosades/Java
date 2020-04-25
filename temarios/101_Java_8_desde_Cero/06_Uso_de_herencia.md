@@ -542,9 +542,13 @@ El trabajador Larry Ellison tiene una paga de 7071,43€
 El trabajador Steve Jobs tiene una paga de 20000,00€
 ```
 
-## Uso de super para acceder a un objeto y sus constructores 8:42 
+## 24. Uso de super para acceder a un objeto y sus constructores 8:42 
 
 [Uso de super para acceder a un objeto y sus constructores](pdfs/24_Super.pdf)
+
+![24_Super-1](images/24_Super-1.png)
+![24_Super-2](images/24_Super-2.png)
+![24_Super-3](images/24_Super-3.png)
 
 ### 24.1 Acceso a la superclase
 
