@@ -442,7 +442,7 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 package tiposdatos;
 
 /**
- * @author Openwebinars
+ * @author
  *
  */
 @SuppressWarnings("all")
@@ -1300,18 +1300,18 @@ public class Calculadora {
 	public static void main(String[] args) {
 		
 		//Variable donde almacenamos el valor seleccionado
-		//del men�
+		//del menú
 		int opcion = 0;
 		//Por ahora, es normal si no se comprenden estas dos
-		//l�neas de c�digo.
+		//líneas de código.
 		Scanner sc;
 		sc = new Scanner(System.in);
 		
 		do {
 
-			//Imprimimos por consola el men�
+			//Imprimimos por consola el menú
 			System.out.println("\n"); //Este caracter especial nos permite imprimir una línea en blanco
-			System.out.println("***** CALCULADORA OPENWEBINARS *****");
+			System.out.println("***** CALCULADORA CUARENTENA *****");
 			System.out.println();
 			System.out.println("1. Sumar");
 			System.out.println("2. Restar");
@@ -1332,7 +1332,7 @@ public class Calculadora {
 			//Si la opcion es menor que 0 o mayor que 5, no es una
 			//opción válida
 			if (opcion < 0 || opcion > 5) {
-				System.out.println("Opci�n no válida. Vuelva a escoger");
+				System.out.println("Opción no válida. Vuelva a escoger");
 				//Si la opcion es diferente a cero, solicitamos los 
 				//dos operandos
 			} else if (opcion != 0) {
@@ -1358,10 +1358,10 @@ public class Calculadora {
 					System.out.println("El resultado de la resta es " + (operando1 - operando2));
 					break;
 				case 3: //Multiplicación
-					System.out.println("El resultado de la multiplicaci�n es " + (operando1 * operando2));
+					System.out.println("El resultado de la multiplicación es " + (operando1 * operando2));
 					break;
 				case 4: //División
-					System.out.println("El resultado de la divisi�n es " + (operando1 / operando2));
+					System.out.println("El resultado de la división es " + (operando1 / operando2));
 					break;
 				case 5: //Resto
 					System.out.println("El resto de dividir " +operando1 + " entre " + operando2 + " es "+ (operando1 % operando2));
@@ -1384,9 +1384,10 @@ public class Calculadora {
 
 ```
 
+**SALIDA:**
 
 ```sh
-***** CALCULADORA OPENWEBINARS *****
+***** CALCULADORA CUARENTENA *****
 
 1. Sumar
 2. Restar
@@ -1405,7 +1406,7 @@ Introduzca el segundo operando: 7
 El resultado de la suma es 17.0
 
 
-***** CALCULADORA OPENWEBINARS *****
+***** CALCULADORA CUARENTENA *****
 
 1. Sumar
 2. Restar
@@ -1424,7 +1425,7 @@ Introduzca el segundo operando: 7
 El resultado de la resta es 3.0
 
 
-***** CALCULADORA OPENWEBINARS *****
+***** CALCULADORA CUARENTENA *****
 
 1. Sumar
 2. Restar
@@ -1440,10 +1441,10 @@ Introduzca el primer operando: 10
 Introduzca el segundo operando: 7
 
 
-El resultado de la multiplicaci�n es 70.0
+El resultado de la multiplicación es 70.0
 
 
-***** CALCULADORA OPENWEBINARS *****
+***** CALCULADORA CUARENTENA *****
 
 1. Sumar
 2. Restar
@@ -1459,10 +1460,10 @@ Introduzca el primer operando: 10
 Introduzca el segundo operando: 7
 
 
-El resultado de la divisi�n es 1.4285715
+El resultado de la división es 1.4285715
 
 
-***** CALCULADORA OPENWEBINARS *****
+***** CALCULADORA CUARENTENA *****
 
 1. Sumar
 2. Restar
@@ -1481,7 +1482,7 @@ Introduzca el segundo operando: 7
 El resto de dividir 10.0 entre 7.0 es 3.0
 
 
-***** CALCULADORA OPENWEBINARS *****
+***** CALCULADORA CUARENTENA *****
 
 1. Sumar
 2. Restar
