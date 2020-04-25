@@ -661,7 +661,7 @@ if (num1 > num2) {
 System.out.println("Este mensaje se imprime siempre");
 ```
 
-##### 7.2.1.2 Código
+##### 7.2.1.1 Código
 
 *Decision01.java*
 
@@ -753,7 +753,7 @@ if (num1 > num2) {
 
 System.out.println("Este mensaje se imprime siempre");
 ```
-##### 7.2.2.2 Código
+##### 7.2.2.1 Código
 
 *Decision03.java*
 
@@ -809,7 +809,7 @@ if (puntuacion >= 9) {
 }
 ```
 
-##### 7.2.3.2 Código
+##### 7.2.3.1 Código
 
 *Decision04.java*
 
@@ -888,7 +888,7 @@ switch (mes) {
 }
 ```
 
-##### 7.2.4.2 Código
+##### 7.2.4.1 Código
 
 *Decision05.java*
 
@@ -1148,7 +1148,6 @@ Contador vale: 9
 Contador vale: 10
 ```
 
-
 ### 8.2 Bucle `do-while`
 
 ![08_Estructuras_de_repeticion-3](images/08_Estructuras_de_repeticion-3.png)
@@ -1175,7 +1174,7 @@ do {
 package repeticion;
 
 /**
- * @author Openwebinars
+ * @author 
  *
  */
 public class Repeticion02 {
@@ -1191,7 +1190,6 @@ public class Repeticion02 {
         } while (contador < 11);
 
 	}
-
 }
 
 
@@ -1234,7 +1232,7 @@ for(declaracion; condicion; incremento) {
 package repeticion;
 
 /**
- * @author Openwebinars
+ * @author 
  *
  */
 public class Repeticion03 {
@@ -1272,6 +1270,229 @@ Su uso no es demasiado recomendable, ya que puede producir un efecto conocido co
 ## Práctica: Creando una calculadora 11:13 
 
 En esta sesión práctica veremos como crear una calculadora, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0).
+
+***Calculadora.java***
+
+```java
+/**
+ * Ejemplo más complejo que nos permite utilizar
+ * 
+ *  - Variables numéricas
+ *  - Operadores
+ *  - Expresiones
+ *  - Estructuras de decisión
+ *  - Estructuras de repetición
+ * 
+ */
+package calculadora;
+
+import java.util.Scanner;
+
+/**
+ * @author 
+ *
+ */
+public class Calculadora {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//Variable donde almacenamos el valor seleccionado
+		//del men�
+		int opcion = 0;
+		//Por ahora, es normal si no se comprenden estas dos
+		//l�neas de c�digo.
+		Scanner sc;
+		sc = new Scanner(System.in);
+		
+		do {
+
+			//Imprimimos por consola el men�
+			System.out.println("\n"); //Este caracter especial nos permite imprimir una línea en blanco
+			System.out.println("***** CALCULADORA OPENWEBINARS *****");
+			System.out.println();
+			System.out.println("1. Sumar");
+			System.out.println("2. Restar");
+			System.out.println("3. Multiplicar");
+			System.out.println("4. Dividir");
+			System.out.println("5. Resto");
+			System.out.println("0. Salir del programa");
+			System.out.println();
+			System.out.print("Introduzca una opción válida: ");
+			
+			//Estas líneas de código nos permiten leer del teclado
+			//y transformar el valor leído de String a int
+			
+			// 1) Recoger el valor escrito en el teclado
+			// 2) Transformar esa cadena de caracteres en un valor entero
+			opcion = Integer.parseInt(sc.nextLine());
+			
+			//Si la opcion es menor que 0 o mayor que 5, no es una
+			//opción válida
+			if (opcion < 0 || opcion > 5) {
+				System.out.println("Opci�n no válida. Vuelva a escoger");
+				//Si la opcion es diferente a cero, solicitamos los 
+				//dos operandos
+			} else if (opcion != 0) {
+
+				System.out.println("\n");
+				
+				float operando1, operando2;
+				
+				System.out.print("Introduzca el primer operando: ");
+				operando1 = Float.parseFloat(sc.nextLine());
+				
+				System.out.print("Introduzca el segundo operando: ");
+				operando2 = Float.parseFloat(sc.nextLine());
+
+				
+				System.out.println("\n");
+				switch(opcion) {
+				
+				case 1: //Suma
+					System.out.println("El resultado de la suma es " + (operando1 + operando2));
+					break;
+				case 2: //Resta
+					System.out.println("El resultado de la resta es " + (operando1 - operando2));
+					break;
+				case 3: //Multiplicación
+					System.out.println("El resultado de la multiplicaci�n es " + (operando1 * operando2));
+					break;
+				case 4: //División
+					System.out.println("El resultado de la divisi�n es " + (operando1 / operando2));
+					break;
+				case 5: //Resto
+					System.out.println("El resto de dividir " +operando1 + " entre " + operando2 + " es "+ (operando1 % operando2));
+					break;
+					
+				}
+				
+			}
+			
+		} while (opcion != 0); //opcion == 0 implicar salir del programa
+		
+		//Indicamos que no vamos a leer ningún valor más por teclado.
+		sc.close();
+		
+		System.out.println("Finalizando la ejecución de la calculadora");
+
+	}
+
+}
+
+```
+
+
+```sh
+***** CALCULADORA OPENWEBINARS *****
+
+1. Sumar
+2. Restar
+3. Multiplicar
+4. Dividir
+5. Resto
+0. Salir del programa
+
+Introduzca una opción válida: 1
+
+
+Introduzca el primer operando: 10
+Introduzca el segundo operando: 7
+
+
+El resultado de la suma es 17.0
+
+
+***** CALCULADORA OPENWEBINARS *****
+
+1. Sumar
+2. Restar
+3. Multiplicar
+4. Dividir
+5. Resto
+0. Salir del programa
+
+Introduzca una opción válida: 2
+
+
+Introduzca el primer operando: 10
+Introduzca el segundo operando: 7
+
+
+El resultado de la resta es 3.0
+
+
+***** CALCULADORA OPENWEBINARS *****
+
+1. Sumar
+2. Restar
+3. Multiplicar
+4. Dividir
+5. Resto
+0. Salir del programa
+
+Introduzca una opción válida: 3
+
+
+Introduzca el primer operando: 10
+Introduzca el segundo operando: 7
+
+
+El resultado de la multiplicaci�n es 70.0
+
+
+***** CALCULADORA OPENWEBINARS *****
+
+1. Sumar
+2. Restar
+3. Multiplicar
+4. Dividir
+5. Resto
+0. Salir del programa
+
+Introduzca una opción válida: 4
+
+
+Introduzca el primer operando: 10
+Introduzca el segundo operando: 7
+
+
+El resultado de la divisi�n es 1.4285715
+
+
+***** CALCULADORA OPENWEBINARS *****
+
+1. Sumar
+2. Restar
+3. Multiplicar
+4. Dividir
+5. Resto
+0. Salir del programa
+
+Introduzca una opción válida: 5
+
+
+Introduzca el primer operando: 10
+Introduzca el segundo operando: 7
+
+
+El resto de dividir 10.0 entre 7.0 es 3.0
+
+
+***** CALCULADORA OPENWEBINARS *****
+
+1. Sumar
+2. Restar
+3. Multiplicar
+4. Dividir
+5. Resto
+0. Salir del programa
+
+Introduzca una opción válida: 0
+Finalizando la ejecución de la calculadora
+```
 
 ## Contenido adicional  4
 
