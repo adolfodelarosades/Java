@@ -69,6 +69,55 @@ Los valores constantes (declarados como `final`), se suelen escribir en mayúscu
 
 Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que las variables tienen un ámbito, es decir, un período de vida. Como norma general, el ámbito de una variable es el bloque donde ha sido definida la misma.
 
+### 5.6 Código
+
+*Variables.java*
+
+```java
+package variables;
+
+/**
+ * @author 
+ *
+ */
+public class Variables {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//Declaración e inicialización de dos variables
+		int numero = 7;		
+		char letra = 'a';		
+		
+		//Declaración e inicialización de una constante
+		final int NUM_HORAS = 8;	
+		
+		//Impresión por consola de los 3 valores
+		System.out.println(numero);
+		
+		System.out.println(letra);
+		
+		System.out.println(NUM_HORAS);
+		
+		int otroNumeroMasQueEscribimosEnNotacionCamelCase = 1;
+		
+		System.out.println(otroNumeroMasQueEscribimosEnNotacionCamelCase);
+
+	}
+
+}
+
+
+SALIDA:
+
+7
+a
+8
+1
+```
+
 ## 6. Manipulación de números, caracteres y otros valores I 8:28 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
@@ -183,6 +232,177 @@ Estos son los menos usuales de todos, pero los presentamos también por si en al
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
+#### 6.2.6 Código
+
+*TiposDatosNumericos.java*
+
+```java
+package tiposdatos;
+
+/**
+ * @author 
+ *
+ */
+@SuppressWarnings("all")
+public class TiposDatosNumericos {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		/*
+		 * LITERALES
+		 */
+		
+		//Valor booleano VERDADERO
+		boolean resultado = true;
+		//Letra C
+		char letraMayuscula = 'C';
+		//Número 100
+		byte by = 100;
+		//Número 1000
+		short sh = 1000;
+		//Número 1000000
+		int in = 1000000;
+		
+		//Valor 26, en decimal
+		int decVal = 26;
+		//Valor 26, en hexadecimal
+		int hexVal = 0x1a;
+		//Valor 26, en binario
+		int binVal = 0b11010;
+		
+		//String s = "Hola Mundo";
+		
+		/*
+		 * TIPOS DE DATOS NUMÉRICOS
+		 */
+		
+		//TIPOS DE DATOS ENTEROS
+		//[-128,127]
+		byte b = 28;
+		//[-32768,32767]
+		short s = 3458;
+		//[-2^31,(2^31)-1]
+		int i = 33456;
+		//[-2^63,(2^63)-1]
+		long l = 3_000_000_000L;
+		
+		
+		//TIPOS DE DATOS REALES
+		//Precisión simple
+		float f = 0.25f;
+		//Precisión doble
+		double Pi = Math.PI;
+		
+		
+		
+		//OPERADORES NUMÉRICOS
+		int x = 7;
+		int y = 5;
+		
+		//Suma
+		int z = x + y;
+		System.out.print("Suma ");
+		System.out.println(z);
+		
+		//Resta
+		z = x - y;
+		System.out.print("Resta ");
+		System.out.println(z);
+		
+		//Multiplicación
+		z = x * y;
+		System.out.print("Multipliación ");		
+		System.out.println(z);
+		
+		
+		//División (entera)
+		z = x / y;
+		System.out.print("División entera ");		
+		System.out.println(z);
+		
+		//División (no entera)
+		double j = Pi/f;
+		System.out.println("División con decimales ");
+		System.out.println(j);
+				
+		//Resto
+		z = x % y;
+		System.out.print("Módulo o resto ");		
+		System.out.println(z);
+		
+		//Incremento
+		z = x++;
+		System.out.print("Incremento ");		
+		System.out.println(z);
+		System.out.println(x);
+		
+		
+		
+		//OPERADORES A NIVEL DE BITS
+		int bitmask = 0b0011; 
+		int val = 0b1111; 
+		
+		int res = val & bitmask; //0011
+		System.out.print("AND ");
+		System.out.println(Integer.toBinaryString(res));
+		
+		res = val ^ bitmask; //1100
+		System.out.print("OR exclusivo ");		
+		System.out.println(Integer.toBinaryString(res));
+				
+		res = val | bitmask; //1111
+		System.out.print("OR inclusivo ");
+		System.out.println(Integer.toBinaryString(res));
+		
+		// 0b1111
+		
+		res = val << 1; //11110
+		System.out.print("left shift ");		
+		System.out.println(Integer.toBinaryString(res));
+				
+		res = val >> 2; //0011
+		System.out.print("Signed rigth shift ");		
+		System.out.println(Integer.toBinaryString(res));
+		
+		
+		res = (-val) >> 2; //11111111111111111111111111111100
+		System.out.print("Signed rigth shift ");		
+		System.out.println(Integer.toBinaryString(res));
+				
+		res = val >>> 1; //111
+		System.out.print("Unsigned rigth shift ");		
+		System.out.println(Integer.toBinaryString(res));
+		
+		res = ~val; //11111111111111111111111111110000
+		System.out.print("Inverso o complementario ");
+		System.out.println(Integer.toBinaryString(res));
+
+//		int a = 5;
+//		int b = 9;
+//		
+//		System.out.println((double)a/b);
+		
+	}
+
+}
+
+
+SALIDA:
+
+8
+AND 11
+OR exclusivo 1100
+OR inclusivo 1111
+left shift 11110
+Signed rigth shift 11
+Signed rigth shift 11111111111111111111111111111100
+Unsigned rigth shift 111
+Inverso o complementario 11111111111111111111111111110000
+```
+
 ### 6.3 Tipos de datos lógicos o booleanos
 
 ![06_Manipulación-11](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-11.png)
@@ -211,6 +431,72 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 * `<`: devuelve verdadero si el valor de la izquierda es menor estricto que el de la derecha.
 * `<=`: devuelve verdadero si el valor de la izquierda es menor o igual que el de la derecha.
 
+#### 6.3.3 Código
+
+*TiposDatosLogicos.java*
+
+```java
+/**
+ * 
+ */
+package tiposdatos;
+
+/**
+ * @author Openwebinars
+ *
+ */
+@SuppressWarnings("all")
+public class TiposDatosLogicos {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		//OPERADORES LÓGICOS CONDICIONALES
+		int valor1 = 1;
+        int valor2 = 2;
+        //En el próximo capítulo profundizamos en las sentencias condicionales
+        if((valor1 == 1) && (valor2 == 2))
+            System.out.println("valor1 es 1 AND valor2 es 2");
+        if((valor1 == 1) || (valor2 == 1))
+            System.out.println("valor1 es 1 OR valor2 es 1");
+		
+        
+        //OPERADOR "TERNARIO"
+        int result;
+        boolean someCondition = false;
+        result = someCondition ? valor1 : valor2;
+        System.out.println(result);
+        
+        
+        //OPERADORES LÓGICOS RELACIONALES
+        //En el próximo capítulo profundizamos en las sentencias condicionales
+        if(valor1 == valor2)
+            System.out.println("valor1 == valor2");
+        if(valor1 != valor2)
+            System.out.println("valor1 != valor2");
+        if(valor1 > valor2)
+            System.out.println("valor1 > valor2");
+        if(valor1 < valor2)
+            System.out.println("valor1 < valor2");
+        if(valor1 <= valor2)
+            System.out.println("valor1 <= valor2");
+        
+	}
+}
+
+
+SALIDA:
+
+valor1 es 1 AND valor2 es 2
+valor1 es 1 OR valor2 es 1
+2
+valor1 != valor2
+valor1 < valor2
+valor1 <= valor2
+```
+
 ### 6.4 Tipos de datos para caracteres
 
 ![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15.png)
@@ -234,6 +520,43 @@ String str = "Cadena de caracteres";
 #### 6.4.1 Operadores con cadenas de caracteres
 
 El principal operador para cadenas de caracteres es `+`, que nos permite concatenar dos textos, es decir, *poner* el segundo tras el primero.
+
+#### 6.4.1 Código
+
+*TiposDatosCaracteres.java*
+
+```java
+package tiposdatos;
+
+/**
+ * @author 
+ *
+ */
+public class TiposDatosCaracteres {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		char a = 'a';
+		System.out.println(a);
+		
+		String str = "Cadena de caracteres";
+		System.out.println(str);
+		
+		String str2 = " más larga";
+		System.out.println(str + str2); // Cadena de caracteres más larga
+	}
+}
+
+
+SALIDA:
+
+a
+Cadena de caracteres
+Cadena de caracteres más larga
+```
 
 ### 6.5 Castings o transformaciones explícitas de tipos
 
@@ -338,6 +661,81 @@ if (num1 > num2) {
 System.out.println("Este mensaje se imprime siempre");
 ```
 
+##### 7.2.1.2 Código
+
+*Decision01.java*
+
+```java
+/**
+ * Ejemplo de uso de la estructura IF
+ */
+package decision;
+
+/**
+ * @author 
+ *
+ */
+public class Decision01 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+//		int num1 = 3;
+//		int num2 = 4;
+		int num1 = 5, num2 = 4;
+		
+		if (num1 > num2) {
+			System.out.println("num1 es mayor que num2");
+		}
+		
+		System.out.println("Este mensaje se imprime siempre");
+
+	}
+}
+
+
+SALIDA:
+
+num1 es mayor que num2
+Este mensaje se imprime siempre
+```
+
+*Decision02.java*
+
+```java
+/**
+ *  Ejemplo de uso de la estructura IF con una condición más compleja
+ */
+package decision;
+
+/**
+ * @author 
+ *
+ */
+public class Decision02 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		int num1 = 4, num2 = 9, num3 = 7;
+
+		if (num3 > num1 && num3 < num2) {
+			System.out.println("num1 es menor que num3, y este es menor que num2");
+		}
+	}
+}
+
+
+SALIDA:
+
+num1 es menor que num3, y este es menor que num2
+
+```
+
 #### 7.2.2 Estructura `if-else`
 
 ![07_Estructuras_de_decision-7](images/07_Estructuras_de_decision-7.png)
@@ -354,6 +752,43 @@ if (num1 > num2) {
 }
 
 System.out.println("Este mensaje se imprime siempre");
+```
+##### 7.2.2.2 Código
+
+*Decision03.java*
+
+```java
+/**
+ * Ejemplo de uso de la estructura IF-ELSE
+ */
+package decision;
+
+/**
+ * @author 
+ *
+ */
+public class Decision03 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		int num1 = 25;
+		int num2 = 21;
+		if (num1 > num2) {
+			System.out.println("El número mayor es " + num1); 
+		} else { 			
+			System.out.println("El número mayor es " + num2);
+		}
+
+	}
+}
+
+
+SALIDA:
+
+El número mayor es 25
 ```
 
 #### 7.2.3 Estructura `if-else-if`
@@ -372,6 +807,48 @@ if (puntuacion >= 9) {
 } else {
    System.out.println("Estás SUSPENSO. Lo siento");
 }
+```
+
+##### 7.2.3.2 Código
+
+*Decision04.java*
+
+```java
+/**
+ * Ejemplo de uso de varias estructuras IF-ELSE-IF
+ * anidadas
+ */
+package decision;
+
+/**
+ * @author 
+ *
+ */
+public class Decision04 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		float puntuacion = 7.6f;
+		
+		if (puntuacion >= 9) {
+			System.out.println("Tienes un SOBRESALIENTE");
+		} else if (puntuacion >= 7) {
+			System.out.println("Tienes un NOTABLE");
+		} else if (puntuacion >= 5) {
+			System.out.println("Tienes un APROBADO");
+		} else {
+			System.out.println("Estás SUSPENSO. Lo siento");
+		}
+	}
+}
+
+
+SALIDA:
+
+Tienes un NOTABLE
 ```
 
 #### 7.2.4 Estructura `switch`
@@ -411,6 +888,200 @@ switch (mes) {
 }
 ```
 
+##### 7.2.4.2 Código
+
+*Decision05.java*
+
+```java
+/**
+ * Ejemplo de uso de estructura Switch
+ */
+package decision;
+
+/**
+ * @author 
+ *
+ */
+public class Decision05 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		int mes = 4;
+        String mesString;
+        switch (mes) {
+            case 1:  mesString = "Enero"; // mes == 1 -> true
+                     break;
+            case 2:  mesString = "Febrero";
+                     break;
+            case 3:  mesString = "Marzo";
+                     break;
+            case 4:  mesString = "Abril";
+                     break;
+            case 5:  mesString = "Mayo";
+                     break;
+            case 6:  mesString = "Junio";
+                     break;
+            case 7:  mesString = "Julio";
+                     break;
+            case 8:  mesString = "Agosto";
+                     break;
+            case 9:  mesString = "Septiembre";
+                     break;
+            case 10: mesString = "Octubre";
+                     break;
+            case 11: mesString = "Noviembre";
+                     break;
+            case 12: mesString = "Diciembre";
+                     break;
+            default: mesString = "Mes no válido";
+                     break;
+        }
+        System.out.println(mesString);
+
+	}
+
+}
+
+
+SALIDA:
+
+Abril
+```
+
+
+*Decision06.java*
+
+```java
+/**
+ * Ejemplo más complejo de uso de SWITCH
+ */
+package decision;
+
+/**
+ * @author 
+ *
+ */
+public class Decision06 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int mes = 4;
+		int numDias = 0;
+
+		switch (mes) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			numDias = 31;
+			break;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			numDias = 30;
+			break;
+		case 2:
+			// No tenemos en cuenta si el año es bisiesto
+			// para no hacer más complejo el ejemplo
+			numDias = 28;
+			break;
+		default:
+			System.out.println("Mes no válido");
+			break;
+		}
+		System.out.println("Número de días = " + numDias);
+	}
+
+}
+
+
+SALIDA:
+
+Número de días = 30
+```
+
+*Decision07.java*
+
+```java
+/* Uso de la estructura Switch con cadenas de caracteres
+ */
+package decision;
+
+/**
+ * @author 
+ */
+public class Decision07 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int mesNumero = 4;
+		String mes = "abril";
+
+		switch (mes) {
+		case "enero":
+			mesNumero = 1;
+			break;
+		case "febrero":
+			mesNumero = 2;
+			break;
+		case "marzo":
+			mesNumero = 3;
+			break;
+		case "abril":
+			mesNumero = 4;
+			break;
+		case "mayo":
+			mesNumero = 5;
+			break;
+		case "junio":
+			mesNumero = 6;
+			break;
+		case "julio":
+			mesNumero = 7;
+			break;
+		case "agosto":
+			mesNumero = 8;
+			break;
+		case "septiembre":
+			mesNumero = 9;
+			break;
+		case "octubre":
+			mesNumero = 10;
+			break;
+		case "noviembre":
+			mesNumero = 11;
+			break;
+		case "diciembre":
+			mesNumero = 12;
+			break;
+		default:
+			mesNumero = 0;
+			break;
+		}
+
+		System.out.println("El mes de " + mes + " se corresponde con el número " + mesNumero );
+
+	}
+
+}
+
+
+SALIDA:
+
+El mes de abril se corresponde con el número 4
+```
+
 ## Estructura de repetición 13:01 
 
 [Estructura de repetición](pdfs/08_Estructuras_de_repeticion.pdf)
@@ -430,7 +1101,53 @@ while (condicion) {
    ...
    ...      
 }
-```  
+``` 
+
+#### 8.1.1 Código
+
+*Repeticion01.java*
+
+```java
+/**
+ *  Ejemplo de uso del bucle while
+ */
+package repeticion;
+
+/**
+ * @author 
+ *
+ */
+public class Repeticion01 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int contador = 1;
+        while (contador < 11) {
+            System.out.println("Contador vale: " + contador);
+            contador++;
+        }
+
+	}
+
+}
+
+
+SALIDA:
+
+Contador vale: 1
+Contador vale: 2
+Contador vale: 3
+Contador vale: 4
+Contador vale: 5
+Contador vale: 6
+Contador vale: 7
+Contador vale: 8
+Contador vale: 9
+Contador vale: 10
+```
+
 
 ### 8.2 Bucle `do-while`
 
@@ -447,6 +1164,51 @@ do {
 } while (condicion);
 ```
 
+#### 8.2.1 Código
+
+*Repeticion02.java*
+
+```java
+/**
+ * Ejemplo de uso del bucle do-while
+ */
+package repeticion;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class Repeticion02 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int contador = 1;
+        do {
+            System.out.println("Contador vale: " + contador);
+            contador++;
+        } while (contador < 11);
+
+	}
+
+}
+
+
+SALIDA:
+
+Contador vale: 1
+Contador vale: 2
+Contador vale: 3
+Contador vale: 4
+Contador vale: 5
+Contador vale: 6
+Contador vale: 7
+Contador vale: 8
+Contador vale: 9
+Contador vale: 10
+```
+
 ### 8.3 Bucle `for`
 
 ![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-5.png)
@@ -460,6 +1222,42 @@ for(declaracion; condicion; incremento) {
    ...
 }
 ```    
+
+#### 8.3.1 Código
+
+*Repeticion03.java*
+
+```java
+/**
+ * Ejemplo de uso del bucle FOR
+ */
+package repeticion;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class Repeticion03 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		for(int contador = 4; contador < 11; contador+=2) {
+			System.out.println(contador);
+		}
+	}
+}
+
+
+SALIDA:
+
+4
+6
+8
+10
+```
 
 ### 8.4 Sentencias `break` y `continue`
 
