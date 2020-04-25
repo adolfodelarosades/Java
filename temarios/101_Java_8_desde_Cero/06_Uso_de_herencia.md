@@ -272,6 +272,8 @@ package herencia;
 }*/
 ```
 
+Lo anterior no es posible nos marcaría : `The type ClaseExtendida cannot subclass the final class ClaseFinal`
+
 ## 23. Polimorfismo 9:43 
 
 [Polimorfismo](pdfs/23_Polimorfismo.pdf)
