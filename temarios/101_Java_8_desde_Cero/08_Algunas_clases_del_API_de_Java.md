@@ -144,9 +144,9 @@ lista
 
 ## Práctica: Creando un gestor de aparcamiento de coches 25:16 
 
-[Proyecto_Final.pptx](pdfs/Proyecto_Final.pptx)
+[Proyecto_Final.pptx](otros/Proyecto_Final.pptx)
 
-[Gráfico.xlsx](pdfs/Gráfico.xlsx)
+[Gráfico.xlsx](otros/Gráfico.xlsx)
 
 En esta sesión práctica veremos como crear un gestor de aparcamiento de coches, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0/tree/master/Final_Parking).
 
@@ -162,4 +162,4 @@ En esta sesión práctica veremos como crear un gestor de aparcamiento de coches
 
 [Proyecto_Final.pptx](otros/Proyecto_Final.pptx)
 
-[Gráfico.xlsx](otros/Gráfico.xlsx)
+[Gráfico.xlsx](otros/Gráfico.xlsx)
