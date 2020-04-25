@@ -547,10 +547,10 @@ El trabajador Steve Jobs tiene una paga de 20000,00€
 [Uso de super para acceder a un objeto y sus constructores](pdfs/24_Super.pdf)
 
 ![24_Super-1](images/24_Super-1.png)
-![24_Super-2](images/24_Super-2.png)
-![24_Super-3](images/24_Super-3.png)
 
 ### 24.1 Acceso a la superclase
+
+![24_Super-2](images/24_Super-2.png)
 
 Podemos acceder a los elementos de nuestra clase base a través de la palabra `super`. En particular, podemos acceder a los métodos, aunque estos hayan sido sobrescritos:
 
@@ -563,6 +563,8 @@ public void printMethod() {
 ```
 
 ### 24.2 Constructores y `super`
+
+![24_Super-3](images/24_Super-3.png)
 
 Cuando construimos una instancia de una clase derivada, tenemos que construir también la parte correspondiente a su clase base. Por defecto, Java espera que hayamos incluido un constructor sin parámetros en la clase base, y él se encargará de todo.
 
