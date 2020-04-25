@@ -116,6 +116,122 @@ Dentro del método, un *varargs* se trata igual que un array.
 
 ***¡IMPORTANTE!** Un método que reciba varios argumentos de diferentes tipos, y además, un varargs, debe incluir este como el último en orden de recepción. De otra forma, sería imposible identificar el número de argumentos recibidos mediante el varargs.*
 
+### 17.3 Código
+
+*ArgumentosTiposRetorno.java*
+
+```java
+package argumentos;
+
+/**
+ * @author 
+ *
+ */
+public class ArgumentosTiposRetorno {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		imprimeMensajes("En un lugar", "de La Mancha");
+		imprimeMensajes("de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo");
+		imprimeMensajes("...");
+		imprimeMensajes();
+	}
+	
+	public static void imprimeMensajes(String... mensajes) {
+		
+		for(String mensaje : mensajes) {
+			System.out.print(mensaje + " ");
+		}
+		System.out.println("");
+		
+	}
+
+}
+
+SALIDA: 
+
+En un lugar de La Mancha 
+de cuyo nombre no quiero acordarme no ha mucho tiempo 
+... 
+```
+
+*Punto.java*
+
+```java
+package argumentos;
+
+public class Punto {
+	
+	float x, y;
+
+	public Punto(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	@Override
+	public String toString() {
+		return "Punto [x=" + x + ", y=" + y + "]";
+	}
+}
+```
+
+*.java*
+
+```java
+package argumentos;
+
+import java.util.Arrays;
+
+/**
+ * @author 
+ *
+ */
+public class Rectangulo {
+	
+	private Punto[] puntos;
+	
+	public Rectangulo(Punto p1, Punto p2, Punto p3, Punto p4) {
+		puntos = new Punto[]{p1, p2, p3, p4};
+	}
+
+	public Rectangulo(Punto[] puntos) {
+		this.puntos = puntos;
+	}
+
+	public Punto[] getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(Punto[] puntos) {
+		this.puntos = puntos;
+	}
+
+	@Override
+	public String toString() {
+		return "Rectangulo [puntos=" + Arrays.toString(puntos) + "]";
+	}
+}
+```
+
 ## 18. Paso de argumento por valor y referencia 8:18 
 
 [Paso de argumento por valor y referencia](pdfs/18_Paso_por_valor_y_referencia.pdf)
