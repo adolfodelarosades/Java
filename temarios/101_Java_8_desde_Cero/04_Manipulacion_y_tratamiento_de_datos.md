@@ -9,15 +9,15 @@
 
 [Conoce Java API Docs-1](pdfs/14_Conoce_JAVA_API_DOCS-1.pdf)
 
-![14_Conoce_JAVA_API_DOCS-1](images/14_Conoce_JAVA_API_DOCS-1.png)
+![14_Conoce_JAVA_API_DOCS-1](images/14_Conoce_JAVA_API_DOC-1.png)
 
 Conoce más Java y descubre la documentación de Java para ver todos los paquetes y clases que contiene Java
 
-![14_Conoce_JAVA_API_DOCS-2](images/14_Conoce_JAVA_API_DOCS-2.png)
+![14_Conoce_JAVA_API_DOCS-2](images/14_Conoce_JAVA_API_DOC-2.png)
 
-![14_Conoce_JAVA_API_DOCS-3](images/14_Conoce_JAVA_API_DOCS-3.png)
+![14_Conoce_JAVA_API_DOCS-3](images/14_Conoce_JAVA_API_DOC-3.png)
 
-![14_Conoce_JAVA_API_DOCS-4](images/14_Conoce_JAVA_API_DOCS-4.png)
+![14_Conoce_JAVA_API_DOCS-4](images/14_Conoce_JAVA_API_DOC-4.png)
 
 ## 15. Uso de la clase String 13:03 
 
