@@ -578,7 +578,7 @@ public Empleado(…) {
 }
 ```
 
-## Clases abstractas e interfaces I 20:52 
+## 25. Clases abstractas e interfaces I 20:52 
 
 [Clases abstractas e interfaces](pdfs/25_Interfaces_y_clases_abstractas.pdf)
 
@@ -647,7 +647,7 @@ public interface Interfaz {
 
 Las clases que implementen esta interfaz no tienen porqué dar una nueva implementación si no la necesitan.
 
-## Clases abstractas e interfaces II 9:48 
+## 25. Clases abstractas e interfaces II 9:48 
 
 [Clases abstractas e interfaces](pdfs/25_Interfaces_y_clases_abstractas.pdf)
 
