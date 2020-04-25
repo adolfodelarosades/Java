@@ -6,11 +6,23 @@
    * Clases abstractas e interfaces II 9:48 
    * Contenido adicional 5
    
-## Qué es la herencia y los beneficios que aporta 15:52 
+## 22. Qué es la herencia y los beneficios que aporta 15:52 
 
 [Herencia](pdfs/22_Herencia.pdf)
 
+![22_Herencia-1](images/22_Herencia-1.png)
+
 ### 22.1 Herencia
+
+![22_Herencia-2](images/22_Herencia-2.png)
+
+![22_Herencia-3](images/22_Herencia-3.png)
+
+![22_Herencia-4](images/22_Herencia-4.png)
+
+![22_Herencia-5](images/22_Herencia-5.png)
+
+![22_Herencia-6](images/22_Herencia-6.png)
 
 Es un mecanismo fundamental de la Programación Orientada a Objetos, que nos permite que una clase pueda extender el comportamiento o la funcionalidad de otra. De esta forma podemos formar una jerarquía de clases.
 
@@ -39,7 +51,208 @@ public final class ClaseFinal {
 }
 ```
 
-## Polimorfismo 9:43 
+### 22.2 Código
+
+*Trabajador.java*
+
+```java
+package herencia;
+
+public class Trabajador {
+	
+	private String nombre;
+	private String puesto;
+	private String direccion;
+	private String telefono;
+	private String nSS; //Número Seguridad Social
+	
+	public Trabajador(String nombre, String puesto, String direccion, String telefono, String nSS) {
+		this.nombre = nombre;
+		this.puesto = puesto;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.nSS = nSS;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getPuesto() {
+		return puesto;
+	}
+
+	public void setPuesto(String puesto) {
+		this.puesto = puesto;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getnSS() {
+		return nSS;
+	}
+
+	public void setnSS(String nSS) {
+		this.nSS = nSS;
+	}
+
+	@Override
+	public String toString() {
+		return "Trabajador [nombre=" + nombre + ", puesto=" + this.puesto + ", direccion=" + direccion + ", telefono="
+				+ telefono + ", nSS=" + nSS + "]";
+	}
+}
+```
+
+*Consultor.java*
+
+```java
+package herencia;
+
+public class Consultor extends Trabajador {
+	
+	private int horas;
+	private double tarifa;
+	
+	public Consultor(String nombre, String puesto, String direccion, String telefono, String nSS, int horas, double tarifa) {
+		super(nombre, puesto, direccion, telefono, nSS);
+		this.horas = horas;
+		this.tarifa = tarifa;
+	}
+
+	public int getHoras() {
+		return horas;
+	}
+
+	public void setHoras(int horas) {
+		this.horas = horas;
+	}
+
+	public double getTarifa() {
+		return tarifa;
+	}
+
+	public void setTarifa(double tarifa) {
+		this.tarifa = tarifa;
+	}
+	
+	public double calcularPaga() {
+		return horas*tarifa;
+	}
+
+	@Override
+	public String toString() {
+		return "Consultor [horas=" + horas + ", tarifa=" + tarifa + ", getNombre()=" + getNombre() + ", getPuesto()="
+				+ getPuesto() + ", getDireccion()=" + getDireccion() + ", getTelefono()=" + getTelefono()
+				+ ", getnSS()=" + getnSS() + "]";
+	}
+}
+```
+
+*Empleado.java*
+
+```java
+package herencia;
+
+public class Empleado extends Trabajador {
+	
+	private double sueldo;
+	private double impuestos;
+	
+	private final int PAGAS = 14;
+	
+	public Empleado(String nombre, String puesto, String direccion, String telefono, String nSS, double sueldo, double impuestos) {
+		//Profundizamos en "super" en las próximas lecciones
+		super(nombre, puesto, direccion, telefono, nSS);
+		this.sueldo = sueldo;
+		this.impuestos = impuestos;
+	}
+
+	public double getSueldo() {
+		return sueldo;
+	}
+
+	public void setSueldo(double sueldo) {
+		this.sueldo = sueldo;
+	}
+
+	public double getImpuestos() {
+		return impuestos;
+	}
+
+	public void setImpuestos(double impuestos) {
+		this.impuestos = impuestos;
+	}
+	
+	public double calcularPaga() {
+		return (sueldo-impuestos) / PAGAS;
+	}
+
+	@Override
+	public String toString() {
+		return "Empleado [sueldo=" + sueldo + ", impuestos=" + impuestos + ", getNombre()=" + getNombre()
+				+ ", getPuesto()=" + getPuesto() + ", getDireccion()=" + getDireccion() + ", getTelefono()="
+				+ getTelefono() + ", getnSS()=" + getnSS() + "]";
+	}
+}
+```
+
+*Herencia.java*
+
+```java
+package herencia;
+
+public class Herencia {
+
+	public static void main(String[] args) {
+		
+		Trabajador trabajador;
+		Empleado empleado;
+		Consultor consultor;
+		
+		trabajador = new Trabajador("Bill Gates", "Presidente", "Redmond", "", "");
+		empleado = new Empleado("Larry Ellison", "Presidente", "Redwood", "", "", 100000.0, 1000.0);
+		consultor = new Consultor("Steve Jobs", "Consultor Jefe", "Cupertino", "", "", 20, 1000.0);
+		
+		System.out.println(trabajador);
+		System.out.println(empleado);
+		System.out.println(empleado.calcularPaga());
+		System.out.println(consultor);
+		System.out.println(consultor.calcularPaga());
+	}
+
+}
+
+
+SALIDA:
+
+Trabajador [nombre=Bill Gates, puesto=Presidente, direccion=Redmond, telefono=, nSS=]
+Empleado [sueldo=100000.0, impuestos=1000.0, getNombre()=Larry Ellison, getPuesto()=Presidente, getDireccion()=Redwood, getTelefono()=, getnSS()=]
+7071.428571428572
+Consultor [horas=20, tarifa=1000.0, getNombre()=Steve Jobs, getPuesto()=Consultor Jefe, getDireccion()=Cupertino, getTelefono()=, getnSS()=]
+20000.0
+```
+
+## 23. Polimorfismo 9:43 
 
 [Polimorfismo](pdfs/23_Polimorfismo.pdf)
 
