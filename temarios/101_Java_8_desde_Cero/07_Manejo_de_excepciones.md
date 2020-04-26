@@ -598,6 +598,247 @@ public class SaldoNegativoException extends Exception {
 }
 ```
 
+### 29.3 Código
+
+### Primer Programa
+
+*.java*
+
+```java
+```
+
+### Primer Programa
+
+*.java*
+
+```java
+```
+
+### Primer Programa
+
+*EjemploSinThrows.java*
+
+```java
+package conthrows;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/**
+ * @author 
+ *
+ */
+public class EjemploSinThrows {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		writeList();
+		System.out.println("Fichero escrito correctamente");
+	}
+
+	public static void writeList() {
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(new FileWriter("OutFile.txt"));
+
+			for (int i = 0; i < 10; i++) {
+				out.println("Mensaje nº " + i);
+			}
+		} catch (IOException ex) {
+			System.err.println("Error al abrir o escribir en el fichero");
+		} finally {
+			out.close();
+		}
+	}
+}
+```
+
+**SALIDA**
+
+```sh
+Fichero escrito correctamente
+```
+
+*OutFile.txt*
+
+```text
+Mensaje nº 0
+Mensaje nº 1
+Mensaje nº 2
+Mensaje nº 3
+Mensaje nº 4
+Mensaje nº 5
+Mensaje nº 6
+Mensaje nº 7
+Mensaje nº 8
+Mensaje nº 9
+```
+
+### Segundo Programa
+
+*.java*
+
+```java
+package conthrows;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/**
+ * 
+ */
+
+/**
+ * @author 
+ *
+ */
+public class EjemploConThrows {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+			try {
+				writeList();
+				System.out.println("Fichero escrito correctamente");
+			} catch (IOException e) {
+				System.out.println("Error al intentar abrir un fichero de texto");
+			}
+	}
+	
+	public static void writeList() throws IOException {
+		PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
+		
+		for(int i = 0; i < 15; i++) {
+			out.println("Mensaje nº " + i);
+		}
+		
+		out.close();
+	}
+}
+```
+
+```sh
+Fichero escrito correctamente
+```
+
+*OutFile.txt*
+
+```text
+Mensaje nº 0
+Mensaje nº 1
+Mensaje nº 2
+Mensaje nº 3
+Mensaje nº 4
+Mensaje nº 5
+Mensaje nº 6
+Mensaje nº 7
+Mensaje nº 8
+Mensaje nº 9
+Mensaje nº 10
+Mensaje nº 11
+Mensaje nº 12
+Mensaje nº 13
+Mensaje nº 14
+```
+
+### Tercer Programa
+
+
+*SaldoNegativoException.java*
+
+```java
+package misexcepciones;
+
+public class SaldoNegativoException extends Exception {
+
+	public SaldoNegativoException(double saldo) {
+		super("La cuenta ha quedado en descubierto (" + Double.toString(saldo) + ")");
+	}
+
+}
+```
+
+*CuentaCorriente.java*
+
+```java
+package misexcepciones;
+
+public class CuentaCorriente {
+	
+	private String propietario;
+	private double saldo;
+	
+	public CuentaCorriente(String propietario, double saldo) {
+		this.propietario = propietario;
+		this.saldo = saldo;
+	}
+
+	public String getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+	
+	public void ingresarDinero(double cantidad) {
+		saldo += cantidad;
+	}
+	
+	public void sacarDinero(double cantidad) throws SaldoNegativoException {
+		saldo -= cantidad;
+		if (saldo < 0) {
+			throw new SaldoNegativoException(saldo);
+		}
+	}
+}
+```
+
+*Banco.java*
+
+```java
+package misexcepciones;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class Banco {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		CuentaCorriente cc = new CuentaCorriente("Luis Miguel", 100.0);
+		
+		try {
+			cc.sacarDinero(160.0);
+			System.out.println("Saldo actual " + cc.getSaldo());
+		} catch (SaldoNegativoException e) {
+			System.err.println(e.getMessage());
+			System.err.println("Póngase en contacto con su banco");
+		}
+	}
+}
+
+
+SALIDA:
+
+La cuenta ha quedado en descubierto (-60.0)
+Póngase en contacto con su banco
+```
+
 ## Contenido adicional 4   
 
 [Excepciones y errores](pdfs/26_Excepciones_y_errores.pdf)
