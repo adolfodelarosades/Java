@@ -612,13 +612,6 @@ public class SaldoNegativoException extends Exception {
 
 ### Primer Programa
 
-*.java*
-
-```java
-```
-
-### Primer Programa
-
 *EjemploSinThrows.java*
 
 ```java
