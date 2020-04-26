@@ -578,6 +578,99 @@ public Empleado(…) {
 }
 ```
 
+### 24.2 Código
+
+*ClaseBase.java*
+
+```java
+package usodesuper;
+
+public class ClaseBase {
+	
+	private String mensaje;
+	
+	public ClaseBase() {
+		this.mensaje = "Saludo desde la clase base";
+	}
+	
+	public ClaseBase(String s) {
+		this.mensaje = s;
+	}
+	
+	public void imprimir() {
+		//System.out.println("Saludo desde la clase base");
+		System.out.println(mensaje);
+	}
+
+}
+```
+
+*ClaseDerivada.java*
+
+```java
+package usodesuper;
+
+
+public class ClaseDerivada extends ClaseBase {
+	
+	private String otroMensaje;
+	
+	public ClaseDerivada() {
+		super("Desde la clase derivada");
+	}
+	
+	public ClaseDerivada(String mensaje, String otro) {
+		super(mensaje);
+		this.otroMensaje = otro;
+	}
+	
+	
+	public void imprimir() {
+		super.imprimir();
+		//System.out.println("Saludo desde la clase derivada");
+		System.out.println(otroMensaje);
+	}
+}
+```
+
+
+*UsoDeSuper.java*
+
+```java
+package usodesuper;
+
+/**
+ * @author 
+ *
+ */
+public class UsoDeSuper {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		ClaseBase base = new ClaseBase();
+//		ClaseDerivada derivada = new ClaseDerivada();
+		ClaseDerivada derivada = new ClaseDerivada("Hola Mundo!"," desde una clase derivada");
+		
+		base.imprimir();
+		System.out.println("");
+		derivada.imprimir();
+	}
+}
+
+
+SALIDA:
+
+Saludo desde la clase base
+
+Hola Mundo!
+ desde una clase derivada
+```
+
+
+
 ## 25. Clases abstractas e interfaces I 20:52 
 
 [Clases abstractas e interfaces](pdfs/25_Interfaces_y_clases_abstractas.pdf)
