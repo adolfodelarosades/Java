@@ -107,6 +107,8 @@ daba le arroz al a zorra elabaD
 
 [Manejo de fechas](pdfs/31_Manejo_de_fechas.pdf)
 
+![31_Manejo_de_fechas-1](images/31_Manejo_de_fechas-1.png)
+
 El API de fechas de Java 8 posee varias clases para manejarlas, pero la mayoría de ellas sigue esta convención sobre el nombre de los métodos que sirven para manejarlas.
 
 Nombre | Tipo     | Uso
@@ -123,9 +125,118 @@ Nombre | Tipo     | Uso
 `to`   | instancia | Convertir el objeto en otro Tipo
 `at`   | instancia | Combinar el objeto con otro objeto
 
+![31_Manejo_de_fechas-2](images/31_Manejo_de_fechas-2.png)
+
+![31_Manejo_de_fechas-3](images/31_Manejo_de_fechas-3.png)
+
+![31_Manejo_de_fechas-4](images/31_Manejo_de_fechas-4.png)
+
+![31_Manejo_de_fechas-5](images/31_Manejo_de_fechas-5.png)
+
+![31_Manejo_de_fechas-6](images/31_Manejo_de_fechas-6.png)
+
+### 31.1 Código
+
+*.java*
+
+```java
+```
+
+*.java*
+
+```java
+```
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
+*.java*
+
+```java
+```
+
+
 ## 32. Colecciones ArrayList 11:30 
 
 [Colecciones ArrayList](pdfs/32_Arraylist.pdf)
+
+![32_Arraylist-1](images/32_Arraylist-1.png)
+![32_Arraylist-2](images/32_Arraylist-2.png)
+![32_Arraylist-3](images/32_Arraylist-3.png)
+![32_Arraylist-4](images/32_Arraylist-4.png)
+![32_Arraylist-5](images/32_Arraylist-5.png)
+![32_Arraylist-6](images/32_Arraylist-6.png)
+![32_Arraylist-7](images/32_Arraylist-7.png)
+![32_Arraylist-8](images/32_Arraylist-8.png)
 
 ### 32.1 Desventajas del uso de arrays
 
