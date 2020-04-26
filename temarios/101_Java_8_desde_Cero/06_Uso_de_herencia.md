@@ -53,6 +53,8 @@ public final class ClaseFinal {
 
 ### 22.2 Código
 
+#### Primer Programa
+
 *Trabajador.java*
 
 ```java
@@ -251,6 +253,7 @@ Empleado [sueldo=100000.0, impuestos=1000.0, getNombre()=Larry Ellison, getPuest
 Consultor [horas=20, tarifa=1000.0, getNombre()=Steve Jobs, getPuesto()=Consultor Jefe, getDireccion()=Cupertino, getTelefono()=, getnSS()=]
 20000.0
 ```
+#### Segundo Programa
 
 *ClaseFinal.java*
 
@@ -681,7 +684,6 @@ Hola Mundo!
 ![25_Interfaces_y_clases_abstractas-2](images/25_Interfaces_y_clases_abstractas-2.png)
 
 ![25_Interfaces_y_clases_abstractas-3](images/25_Interfaces_y_clases_abstractas-3.png)
-
 
 Una interfaz es un contrato de comportamiento que adquiere una clase, es decir, un conjunto de operaciones que se compromete a implementar. Hasta Java 7, las interfaces definían solamente la firma de estos métodos, pero con Java 8, también pueden incluir implementaciones por defecto.
 
