@@ -27,9 +27,81 @@ Conoce el tipo de cadena Stringbuilder en esta lección
 
 ### Código
 
+#### Primer Programa
+
+*PalindromosString.java*
+
+```java
+package usodestringbuilder;
+
+/**
+ * @author 
+ *
+ */
+public class PalindromosString {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		String palindromo = "Dabale arroz a la zorra el abad";
+		int longitud = palindromo.length();
+		char[] tempCharArray = new char[longitud];
+		char[] charArray = new char[longitud];
+
+		// transformamos el string en un array de char
+		for (int i = 0; i < longitud; i++) {
+			tempCharArray[i] = palindromo.charAt(i);
+		}
+
+		// lo invertimos
+		for (int j = 0; j < longitud; j++) {
+			charArray[j] = tempCharArray[longitud - 1 - j];
+		}
+
+		String palindromoInvertido = new String(charArray);
+		System.out.println(palindromoInvertido);	
+	}
+}
 
 
+SALIDA:
 
+daba le arroz al a zorra elabaD
+
+```
+
+#### Segundo Programa
+
+*PalindromosStringBuilder.java*
+
+```java
+package usodestringbuilder;
+
+/**
+ * @author 
+ *
+ */
+public class PalindromosStringBuilder {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		    String palindromo = "Dabale arroz a la zorra el abad";
+        StringBuilder sb = new StringBuilder(palindromo);
+        sb.reverse();  // lo invertimos
+        System.out.println(sb); //llamada implícita a sb.toString().        
+	}
+}
+
+
+SALIDA:
+
+daba le arroz al a zorra elabaD
+```
 
 ## 31. Manejo de fechas 17:31 
 
@@ -51,7 +123,7 @@ Nombre | Tipo     | Uso
 `to`   | instancia | Convertir el objeto en otro Tipo
 `at`   | instancia | Combinar el objeto con otro objeto
 
-## Colecciones ArrayList 11:30 
+## 32. Colecciones ArrayList 11:30 
 
 [Colecciones ArrayList](pdfs/32_Arraylist.pdf)
 
@@ -85,7 +157,7 @@ Para conocer mejor los métodos, podemos acceder a la documentación del api:
 
 https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
 
-## Introducción a las expresiones lambda 20:21 
+## 33. Introducción a las expresiones lambda 20:21 
 
 [Introducción a las expresiones lambda](pdfs/33_ExpresionesLambda.pdf)
 
