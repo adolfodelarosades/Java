@@ -557,11 +557,17 @@ StringIndexOutOfBounds | Índice usado en String fuera de los límites
 
 [Lanzamiento y propagación de excepciones](pdfs/29_Lanzamiento_y_propagación_de_excepciones.pdf)
 
+![29_Lanzamiento_y_propagacion_de_excepciones-1](images/29_Lanzamiento_y_propagacion_de_excepciones-1.png)
+
 ### 29.1 Lanzamiento de excepciones
+
+![29_Lanzamiento_y_propagacion_de_excepciones-2](images/29_Lanzamiento_y_propagacion_de_excepciones-2.png)
 
 Cualquier código puede lanzar excepciones (hecho por java, por nosotros o de terceros). Si no vamos a tratar las excepciones en un método, tenemos que indicar que se relanzarán hacia arriba (`throws`).
 
 #### 29.1.1 Uso de `throws`
+
+![29_Lanzamiento_y_propagacion_de_excepciones-3](images/29_Lanzamiento_y_propagacion_de_excepciones-3.png)
 
 Un método cuyo código puede producir excepciones puede capturarlas y tratarlas, o relanzarlas para que sea otro quien las trate. `throws` se escribe a continuación de la firma del método y antes de la apertura del cuerpo, y espera la excepción o excepciones (lista separada por comas) que se pueden lanzar.
 
@@ -572,6 +578,8 @@ public static void writeList() throws IOException {
 ```
 
 #### 29.1.2 Uso de `throw`
+
+![29_Lanzamiento_y_propagacion_de_excepciones-5](images/29_Lanzamiento_y_propagacion_de_excepciones-5.png)
 
 Nos permite lanzar una excepción en un momento determinado. También se puede usar en el bloque catch, para tratar una excepción, pero aun así relanzarla.
 
@@ -586,6 +594,8 @@ public void sacarDinero(double cantidad) throws SaldoNegativoException {
 
 ### 29.2 Excepciones propias
 
+![29_Lanzamiento_y_propagacion_de_excepciones-4](images/29_Lanzamiento_y_propagacion_de_excepciones-4.png)
+
 Podemos crear nuestros propios tipos, extendiendo a `Exception`. Nos permiten manejar nuestras propias situaciones. Es buena práctica añadir el sufijo `...Exception`.
 
 ```java
@@ -599,13 +609,6 @@ public class SaldoNegativoException extends Exception {
 ```
 
 ### 29.3 Código
-
-### Primer Programa
-
-*.java*
-
-```java
-```
 
 ### Primer Programa
 
@@ -748,7 +751,6 @@ Mensaje nº 14
 ```
 
 ### Tercer Programa
-
 
 *SaldoNegativoException.java*
 
