@@ -1030,13 +1030,21 @@ Opción no válida. Introduzca una opción válida, por favor.
 
 [Introducción a las expresiones lambda](pdfs/33_ExpresionesLambda.pdf)
 
+![33_ExpresionesLambda-1](images/33_ExpresionesLambda-1.png)
+
 ### 33.1 Paradigma de programación funcional
+
+![33_ExpresionesLambda-2](images/33_ExpresionesLambda-2.png)
+
+![33_ExpresionesLambda-3](images/33_ExpresionesLambda-3.png)
 
 A la hora de programar, existen más paradigmas (formas de entender la programación) que la orientación a objetos: imperativa, lógica, orientada a aspectos, ... Uno de ellos, que está muy de moda, es la **programación funcional**. Su origen está en un lenguaje matemático formal, y si lo tenemos que resumir en una frase, podríamos decir que en él, la salida de una función depende solo de los parámetros de entrada.
 
 Los lenguajes funcionales son más expresivos (es decir, hacen más con menos código) y más elegantes. Este tipo de expresiones ya estaban presentes en muchos lenguajes de programación, y era algo que la comunidad demandaba a Java, que lo ha incluido en su versión Java SE 8.
 
 ### 33.2 Expresión lambda
+
+![33_ExpresionesLambda-4](images/33_ExpresionesLambda-4.png)
 
 Una expresión lamba no va a ser más que una función anónima, un método abstracto. Su sintaxis es sencilla:
 
@@ -1047,6 +1055,8 @@ Una expresión lamba no va a ser más que una función anónima, un método abst
 
 (p1, p2, ...) -> { sentencia1; sentencia2; .....;}
 ```
+
+![33_ExpresionesLambda-5](images/33_ExpresionesLambda-5.png)
 
 Algunos ejemplos de expresiones lambda podrían ser:
 
@@ -1061,9 +1071,14 @@ Algunos ejemplos de expresiones lambda podrían ser:
 
 ### 33.3 Interfaz funcional
 
+![33_ExpresionesLambda-6](images/33_ExpresionesLambda-6.png)
+
 Se trata de cualquier interfaz que tenga un solo método (además de métodos `default`, `static`, `equals`, ...). Están muy ligadas a las expresiones lambda ya que allá donde se espere una instancia de un objeto que implemente una interfaz funcional, podremos utilizar una expresión de este tipo.
 
 ### 33.4 Colecciones y el método forEach
+
+![33_ExpresionesLambda-7](images/33_ExpresionesLambda-7.png)
+
 
 En Java SE 8 las colecciones nos proveen de un método, `.forEach`, que acepta una instancia de un objeto que implementa una interfaz funcional, llamada `Consumer<T>`, que nos permitirá facilmente recorrer el bucle usando expresiones lambda.
 
@@ -1072,6 +1087,8 @@ lista.forEach(System.out::println);
 ```
 
 ### 33.5 Acceso a métodos
+
+![33_ExpresionesLambda-8](images/33_ExpresionesLambda-8.png)
 
 El operador `::` nos permite abreviar más la sintaxis, de forma que podemos acceder a métodos directamente:
 
@@ -1089,6 +1106,8 @@ System.out::println
 
 ### 33.6 API Stream
 
+![33_ExpresionesLambda-9](images/33_ExpresionesLambda-9.png)
+
 Se trata de una nueva funcionalidad, que nos permite trabajar con colecciones como si se trataran de flujos de datos. Esto nos dará gran versatilidad, junto con las expresiones lambda, para filtrar, transformar, ordenar, agrupar y presentar datos.
 
 
@@ -1099,6 +1118,289 @@ lista
   .stream()
   .filter((x) -> x >= 5)
   .forEach(System.out::println);
+```
+
+### 33.7 Código
+
+### Primer Programa Versión 1
+
+*A_Lambda.java*
+
+```java
+/**
+ * EJEMPLO DE USO DE EXPRESIONES LAMBDA PARA ORDENAR
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		for (Integer i : lista)
+			System.out.println(i);		
+	}
+}
+
+
+SALIDA:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+### Primer Programa Versión 2
+
+*MayorAMenor.java*
+
+```java
+package lambda;
+
+import java.util.Comparator;
+
+public class MayorAMenor implements Comparator<Integer> {
+
+	/*
+	 * ESTE MÉTODO SOBREESCRIBE EL "ORDEN NATURAL"
+	 * DE LOS NÚMEROS DE FORMA QUE:
+	 * 
+	 * - Si el primer número es menor que el segundo, devuelve un valor positivo.
+	 * - Si son iguales devuelve un cero.
+	 * - Si el primer número es mayor que el segundo, devuelve un valor negativo.  
+	 */
+	
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		return -(o1.compareTo(o2));
+	}
+}
+```
+
+*A_Lambda.java* 
+
+```java
+/**
+ * EJEMPLO DE USO DE EXPRESIONES LAMBDA PARA ORDENAR
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//1er. Forma: una clase que implementa comparator
+		lista.sort(new MayorAMenor());
+		
+		for (Integer i : lista)
+			System.out.println(i);		
+	}
+}
+
+
+SALIDA:
+
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+```
+
+### Primer Programa Versión 3
+
+*A_Lambda.java* 
+
+```java
+/**
+ * EJEMPLO DE USO DE EXPRESIONES LAMBDA PARA ORDENAR
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//2da. Forma: una clase "anónima"
+		//¿Qué tal si ponemos el cursor sobre la instanciación de la clase
+		//anónima y pulsamos Ctrl+1?
+		//Eclipse permite convertir esto en una expresión lambda automóticamente
+		lista.sort(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return -(o1.compareTo(o2));
+			}
+			
+		});
+		
+		for (Integer i : lista)
+			System.out.println(i);		
+	}
+}
+
+
+SALIDA:
+
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+```
+
+### Primer Programa Versión 4
+
+*A_Lambda.java* 
+
+```java
+/**
+ * EJEMPLO DE USO DE EXPRESIONES LAMBDA PARA ORDENAR
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//3er. Forma: una expresion lambda
+		//Los tipos de datos ¡no son obligatorios! Se infieren del contexto		
+		lista.sort((Integer n1, Integer n2) -> -(n1.compareTo(n2))); 
+		
+		for (Integer i : lista)
+			System.out.println(i);		
+	}
+}
+
+
+SALIDA:
+
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+```
+
+### Primer Programa Versión 5
+
+*A_Lambda.java* 
+
+```java
+/**
+ * EJEMPLO DE USO DE EXPRESIONES LAMBDA PARA ORDENAR
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//3er. Forma: una expresion lambda
+		//Los tipos de datos ¡no son obligatorios! Se infieren del contexto		
+		//lista.sort((Integer n1, Integer n2) -> -(n1.compareTo(n2))); 
+		lista.sort((n1, n2) -> -(n1.compareTo(n2)));
+		
+		for (Integer i : lista)
+			System.out.println(i);		
+	}
+}
+
+
+SALIDA:
+
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+```
+
+
+### Segundo Programa
+
+*.java*
+
+```java
+```
+
+### Primer Programa
+
+*.java*
+
+```java
+```
+
+### Primer Programa
+
+*.java*
+
+```java
+```
+
+### Primer Programa
+
+*.java*
+
+```java
+```
+
+### Primer Programa
+
+*.java*
+
+```java
 ```
 
 ## Práctica: Creando un gestor de aparcamiento de coches 25:16 
