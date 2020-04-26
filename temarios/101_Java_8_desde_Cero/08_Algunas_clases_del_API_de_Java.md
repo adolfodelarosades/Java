@@ -5,8 +5,7 @@
    * Introducción a las expresiones lambda 20:21 
    * Práctica: Creando un gestor de aparcamiento de coches 25:16 
    * Contenido adicional 6
-   
-   
+      
 ## 30. Manipulación de datos con Stringbuilder 8:01 
 
 [Manipulación de datos con Stringbuilder](pdfs/30_StringBuilder.pdf)
@@ -1367,41 +1366,177 @@ SALIDA:
 1
 ```
 
+### Segundo Programa Versión 1
 
-### Segundo Programa
+*B_Foreach.java*
 
-*.java*
+```java
+/**
+ * EJEMPLO DE USO DEL MÉTODO FOREACH JUNTO CON EXPRESIONES LAMBDA
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//1er Forma clásica de imprimir los elementos de una lista
+		for(Integer i: lista)
+			System.out.println(i);
+	}
+}
+
+
+SALIDA:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+### Segundo Programa Versión 2
+
+*B_Foreach.java*
+
+```java
+/**
+ * EJEMPLO DE USO DEL MÉTODO FOREACH JUNTO CON EXPRESIONES LAMBDA
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//2da. Uso de forEach
+		lista.forEach(e -> System.out.println(e));
+	}
+}
+
+
+SALIDA:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+### Segundo Programa Versión 3
+
+*B_Foreach.java*
+
+```java
+/**
+ * EJEMPLO DE USO DEL MÉTODO FOREACH JUNTO CON EXPRESIONES LAMBDA
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//2da. Uso de forEach
+		//lista.forEach(e -> System.out.println(e));
+		
+		//3er. Uso de referencias a métodos con ::
+		lista.forEach(System.out::println);
+	}
+}
+
+
+SALIDA:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+### Segundo Programa Versión 4
+
+*B_Foreach.java*
+
+```java
+/**
+ * EJEMPLO DE USO DEL MÉTODO FOREACH JUNTO CON EXPRESIONES LAMBDA
+ */
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+
+	public static void main(String[] args) {
+		
+		List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		//4to. Uso de un bloque de sentencias que transforma los elementos de la lista
+		lista.forEach((e) -> {
+			e = e*2;
+			System.out.println(e);
+		});
+	}
+}
+
+
+SALIDA:
+
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+```
+
+### Tecer Programa Versión 1
+
+*C_ApiStream.java*
 
 ```java
 ```
 
-### Primer Programa
 
-*.java*
-
-```java
-```
-
-### Primer Programa
-
-*.java*
-
-```java
-```
-
-### Primer Programa
-
-*.java*
-
-```java
-```
-
-### Primer Programa
-
-*.java*
-
-```java
-```
 
 ## Práctica: Creando un gestor de aparcamiento de coches 25:16 
 
