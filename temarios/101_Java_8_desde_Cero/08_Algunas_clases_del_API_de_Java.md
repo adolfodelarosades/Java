@@ -7,13 +7,31 @@
    * Contenido adicional 6
    
    
-## Manipulación de datos con Stringbuilder 8:01 
+## 30. Manipulación de datos con Stringbuilder 8:01 
 
 [Manipulación de datos con Stringbuilder](pdfs/30_StringBuilder.pdf)
 
 Conoce el tipo de cadena Stringbuilder en esta lección
 
-## Manejo de fechas 17:31 
+![30_StringBuilder-1](images/30_StringBuilder-1.png)
+
+![30_StringBuilder-2](images/30_StringBuilder-2.png)
+
+![30_StringBuilder-3](images/30_StringBuilder-3.png)
+
+![30_StringBuilder-4](images/30_StringBuilder-4.png)
+
+![30_StringBuilder-5](images/30_StringBuilder-5.png)
+
+![30_StringBuilder-6](images/30_StringBuilder-6.png)
+
+### Código
+
+
+
+
+
+## 31. Manejo de fechas 17:31 
 
 [Manejo de fechas](pdfs/31_Manejo_de_fechas.pdf)
 
