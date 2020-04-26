@@ -633,7 +633,6 @@ public class ClaseDerivada extends ClaseBase {
 }
 ```
 
-
 *UsoDeSuper.java*
 
 ```java
@@ -669,17 +668,26 @@ Hola Mundo!
  desde una clase derivada
 ```
 
-
-
 ## 25. Clases abstractas e interfaces I 20:52 
 
 [Clases abstractas e interfaces](pdfs/25_Interfaces_y_clases_abstractas.pdf)
 
+25_Interfaces_y_clases_abstractas-
+
+![25_Interfaces_y_clases_abstractas-1](images/25_Interfaces_y_clases_abstractas-1.png)
+
 ### 25.1 Interfaces
+
+![25_Interfaces_y_clases_abstractas-2](images/25_Interfaces_y_clases_abstractas-2.png)
+
+![25_Interfaces_y_clases_abstractas-3](images/25_Interfaces_y_clases_abstractas-3.png)
+
 
 Una interfaz es un contrato de comportamiento que adquiere una clase, es decir, un conjunto de operaciones que se compromete a implementar. Hasta Java 7, las interfaces definían solamente la firma de estos métodos, pero con Java 8, también pueden incluir implementaciones por defecto.
 
 #### 25.1.1 Definición
+
+![25_Interfaces_y_clases_abstractas-4](images/25_Interfaces_y_clases_abstractas-4.png)
 
 Las interfaces siguen las mismas normas de nomenclatura y modificadores de acceso que las clases:
 
@@ -697,6 +705,8 @@ public interface GroupedInterface extends Interface1, Interface2  {
 Las interfaces también pueden heredar de otra. En este caso, sí que se permite la herencia múltiple.
 
 #### 25.1.2 Implementación
+
+![25_Interfaces_y_clases_abstractas-5](images/25_Interfaces_y_clases_abstractas-5.png)
 
 Una clase puede implementar una o varias interfaces:
 
@@ -717,6 +727,8 @@ public class RectanglePlus implements Relatable {
 
 #### 25.1.3 Interfaces como tipos de referencias
 
+![25_Interfaces_y_clases_abstractas-6](images/25_Interfaces_y_clases_abstractas-6.png)
+
 Podemos utilizar una interfaz para almacenar una referencia a un objeto de una clase que implemente dicha interfaz:
 
 ```java
@@ -725,6 +737,10 @@ Relatable rectangleTwo = new RectanglePlus(20, 10);
 ```
 
 #### 25.1.4 Métodos por defecto y estáticos
+
+![25_Interfaces_y_clases_abstractas-7](images/25_Interfaces_y_clases_abstractas-7.png)
+
+![25_Interfaces_y_clases_abstractas-8](images/25_Interfaces_y_clases_abstractas-8.png)
 
 Java 8 incluye la posibilidad de que las interfaces proporcionen el cuerpo de un método, siempre y cuando este esté marcado como `default` o `static`:
 
@@ -744,7 +760,11 @@ Las clases que implementen esta interfaz no tienen porqué dar una nueva impleme
 
 [Clases abstractas e interfaces](pdfs/25_Interfaces_y_clases_abstractas.pdf)
 
+![25_Interfaces_y_clases_abstractas-9](images/25_Interfaces_y_clases_abstractas-9.png)
+
 ### 25.2 Clases abstractas
+
+![25_Interfaces_y_clases_abstractas-10](images/25_Interfaces_y_clases_abstractas-10.png)
 
 Son clases definidas como `abstract`. Tienen las siguientes características:
 
@@ -763,6 +783,8 @@ public abstract class AbstractaSencilla {
 
 #### 25.2.1 Métodos `abstract`
 
+![25_Interfaces_y_clases_abstractas-11](images/25_Interfaces_y_clases_abstractas-11.png)
+
 Son métodos que están definidos en una clase `abstract`. Definen la firma del método, pero no su implementación. Las subclases de esta clase base deben aportar su implementación. Pueden convivir con métodos normales.
 
 ```java
@@ -777,6 +799,12 @@ public abstract class AbstractaConMetodos {
 ```
 
 ### 25.3 Clases abstractas vs Interfaces
+
+![25_Interfaces_y_clases_abstractas-12](images/25_Interfaces_y_clases_abstractas-12.png)
+
+![25_Interfaces_y_clases_abstractas-13](images/25_Interfaces_y_clases_abstractas-13.png)
+
+![25_Interfaces_y_clases_abstractas-14](images/25_Interfaces_y_clases_abstractas-14.png)
 
 ¿Cuándo usar una u otra?
 
