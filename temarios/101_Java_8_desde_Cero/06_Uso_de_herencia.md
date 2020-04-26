@@ -756,6 +756,233 @@ public interface Interfaz {
 
 Las clases que implementen esta interfaz no tienen porqué dar una nueva implementación si no la necesitan.
 
+#### 25.1.5 Código
+
+##### Primer Programa
+
+*MyInterface.java*
+
+```java
+package interfaces;
+
+public interface MyInterface {
+	
+	void print();
+
+}
+```
+
+*Relatable.java*
+
+```java
+package interfaces;
+
+
+public interface Relatable {
+	
+	/*
+	 * Método que nos va a permitir si un objeto
+	 * de este tipo es más grande que otro
+	 * 
+	 */
+	public int isLargerThan(Relatable other);
+
+}
+```
+
+*RectanglePlus.java*
+
+```java
+package interfaces;
+
+import java.awt.Point;
+
+public class RectanglePlus implements Relatable, MyInterface {
+	
+    public int width = 0;
+    public int height = 0;
+    public Point origin;
+
+    // four constructors
+    public RectanglePlus() {
+        origin = new Point(0, 0);
+    }
+    public RectanglePlus(Point p) {
+        origin = p;
+    }
+    public RectanglePlus(int w, int h) {
+        origin = new Point(0, 0);
+        width = w;
+        height = h;
+    }
+    public RectanglePlus(Point p, int w, int h) {
+        origin = p;
+        width = w;
+        height = h;
+    }
+
+    // a method for moving the rectangle
+    public void move(int x, int y) {
+        origin.x = x;
+        origin.y = y;
+    }
+
+    // a method for computing
+    // the area of the rectangle
+    public int getArea() {
+        return width * height;
+    }
+    
+    @Override
+	public String toString() {
+		return "RectanglePlus [width=" + width + ", height=" + height + ", origin=" + origin + "]";
+	}
+	// a method required to implement
+    // the Relatable interface
+    public int isLargerThan(Relatable other) {
+        RectanglePlus otherRect = (RectanglePlus) other;
+        if (this.getArea() < otherRect.getArea())
+            return -1;
+        else if (this.getArea() > otherRect.getArea())
+            return 1;
+        else
+            return 0;               
+    }
+	@Override
+	public void print() {
+		System.out.println(this.toString());		
+	}
+}
+```
+
+*ComparadorRectangulos.java*
+
+```java
+package interfaces;
+
+public class ComparadorRectangulos {
+
+	public static void main(String[] args) {
+
+		RectanglePlus rectangleOne = new RectanglePlus(10, 20);
+		Relatable rectangleTwo = new RectanglePlus(20, 10);
+		
+		rectangleOne.print();
+		MyInterface rectangle2 = (MyInterface) rectangleTwo;
+		rectangle2.print();
+		
+		switch (rectangleOne.isLargerThan(rectangleTwo)) {
+		case -1:
+			System.out.println("Es menor");
+			break;
+		case 0:
+			System.out.println("Son iguales");
+			break;
+		case 1:
+			System.out.println("Es mayor");
+			break;
+		}
+	}
+}
+
+
+SALIDA:
+
+RectanglePlus [width=10, height=20, origin=java.awt.Point[x=0,y=0]]
+RectanglePlus [width=20, height=10, origin=java.awt.Point[x=0,y=0]]
+Son iguales
+```
+
+##### Segundo Programa
+
+*Interfaz.java*
+
+```java
+package interfaces.defecto;
+
+public interface Interfaz {
+	
+	public void metodo();
+	
+	default public void metodoPorDefecto() {
+		System.out.println("Este es uno de los nuevos métodos por defecto");
+	}
+	
+	public static void metodoEstatico() {
+		System.out.println("Método estático en un interfaz");
+	}
+}
+```
+
+*Clase.java*
+
+```java
+package interfaces.defecto;
+
+public class Clase implements Interfaz {
+
+	@Override
+	public void metodo() {
+		System.out.println("método");
+	}
+
+}
+```
+
+
+*Clase2.java*
+
+```java
+package interfaces.defecto;
+
+public class Clase2 implements Interfaz {
+
+	@Override
+	public void metodo() {
+		System.out.println("Otro método");
+	}
+
+	@Override
+	public void metodoPorDefecto() {
+		System.out.println("Mi propia implementación del método por defecto");
+	}
+}
+```
+
+
+*InterfacesPorDefecto.java*
+
+```java
+package interfaces.defecto;
+
+public class InterfacesPorDefecto {
+
+	public static void main(String[] args) {
+		
+		Clase c1 = new Clase();
+		
+		c1.metodo();
+		c1.metodoPorDefecto();
+		
+		Clase2 c2 = new Clase2();
+		
+		c2.metodo();
+		c2.metodoPorDefecto();
+		
+		Interfaz.metodoEstatico();
+	}
+}
+
+
+SALIDA:
+
+método
+Este es uno de los nuevos métodos por defecto
+Otro método
+Mi propia implementación del método por defecto
+Método estático en un interfaz
+```
+
 ## 25. Clases abstractas e interfaces II 9:48 
 
 [Clases abstractas e interfaces](pdfs/25_Interfaces_y_clases_abstractas.pdf)
