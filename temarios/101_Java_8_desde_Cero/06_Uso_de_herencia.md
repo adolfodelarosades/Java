@@ -1110,6 +1110,69 @@ SALIDA:
 Hola mundo!!!
 ```
 
+#### Segundo Programa
+
+*AbstractaConMetodos.java*
+
+```java
+package abstractas.conmetodos;
+
+public abstract class AbstractaConMetodos {
+	
+	public abstract void saludo(String s);
+	
+	public void saludar() {
+		System.out.println("Hola mundo!!!");
+	}
+}
+```
+
+*DerivadaConMetodos.java*
+
+```java
+package abstractas.conmetodos;
+
+public class DerivadaConMetodos extends AbstractaConMetodos {
+
+	@Override
+	public void saludo(String s) {
+		System.out.println("Hola " + s);		
+	}
+}
+```
+
+*EjemploAbstractaConMetodos.java*
+
+```java
+/**
+ * 
+ */
+package abstractas.conmetodos;
+
+/**
+ * @author 
+ *
+ */
+public class EjemploAbstractaConMetodos {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		DerivadaConMetodos derivada = new DerivadaConMetodos();
+		derivada.saludar();
+		derivada.saludo("Pepe");
+	}
+}
+
+
+SALIDA:
+
+Hola mundo!!!
+Hola Pepe
+```
+
 ## Contenido adicional 4   
 
 [Herencia](pdfs/22_Herencia.pdf)
