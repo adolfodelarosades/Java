@@ -690,21 +690,15 @@ SALIDA:
 Llegada a : 26 abr 2020 15:39 
 ```
 
-
 ## 32. Colecciones ArrayList 11:30 
 
 [Colecciones ArrayList](pdfs/32_Arraylist.pdf)
 
 ![32_Arraylist-1](images/32_Arraylist-1.png)
-![32_Arraylist-2](images/32_Arraylist-2.png)
-![32_Arraylist-3](images/32_Arraylist-3.png)
-![32_Arraylist-4](images/32_Arraylist-4.png)
-![32_Arraylist-5](images/32_Arraylist-5.png)
-![32_Arraylist-6](images/32_Arraylist-6.png)
-![32_Arraylist-7](images/32_Arraylist-7.png)
-![32_Arraylist-8](images/32_Arraylist-8.png)
 
 ### 32.1 Desventajas del uso de arrays
+
+![32_Arraylist-2](images/32_Arraylist-2.png)
 
 El uso de arrays nos aportan una serie de **desventajas**:
 
@@ -723,6 +717,10 @@ Java nos provee de una serie de colecciones con algunos beneficios:
 
 ### 32.2 ArrayList
 
+![32_Arraylist-3](images/32_Arraylist-3.png)
+
+![32_Arraylist-4](images/32_Arraylist-4.png)
+
 De todas las colecciones de Java es quizá la más usada de todas. Permite algunas operaciones típicas de las colecciones **secuenciales**:
 
 * Acceso posicional
@@ -730,9 +728,303 @@ De todas las colecciones de Java es quizá la más usada de todas. Permite algun
 * Iteración
 * Tomar un fragmento
 
+![32_Arraylist-5](images/32_Arraylist-5.png)
+
+![32_Arraylist-6](images/32_Arraylist-6.png)
+
+![32_Arraylist-7](images/32_Arraylist-7.png)
+
+![32_Arraylist-8](images/32_Arraylist-8.png)
+
 Para conocer mejor los métodos, podemos acceder a la documentación del api:
 
 https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
+
+### 32.3 código
+
+*Persona.java*
+
+```java
+package usoarraylist;
+
+public class Persona {
+	
+	private String nombre;
+	private String apellidos;
+	private String telefono;
+	
+	public Persona() {}
+	
+	public Persona(String nombre, String apellidos, String telefono) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.telefono = telefono;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono + "]";
+	}
+}
+```
+
+*UsoArrayList.java*
+
+```java
+package usoarraylist;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class UsoArrayList {
+
+	/**
+	 * @param args
+	 */
+
+	//Declaramos estas dos referencias como estáticas, para poder usarlas en todos los métodos
+	static Scanner sc;
+	static ArrayList<Persona> listaPersonas;
+
+	public static void main(String[] args) {
+
+		//Inicializamos la lista y la lectura por teclado
+		listaPersonas = new ArrayList<>();
+		sc = new Scanner(System.in);
+		int opcion;
+
+		do {
+			//Al inicio de cada iteración mostramos el menú, y recogemos la opción
+			menu();
+			opcion = Integer.parseInt(sc.nextLine());
+
+			switch (opcion) {
+			case 1:
+				listarPersonas();
+				break;
+			case 2:
+				aniadirPersona();
+				break;
+			case 3:
+				eliminarPersona();
+				break;
+			case 4:
+				eliminarTodas();
+				break;
+
+			default:
+				System.out.println("Opción no válida. Introduzca una opción válida, por favor.");
+			}
+
+		} while (opcion != 0);
+		
+		sc.close();
+
+	}
+
+	/*
+	 * MÉTODO QUE IMPRIME EL MENÚ
+	 */
+	public static void menu() {
+		System.out.println("AGENDA DE CONTACTOS");
+		System.out.println("===================");
+		System.out.println("1. Listar todos los contactos");
+		System.out.println("2. Añadir un contacto");
+		System.out.println("3. Eliminar un contacto");
+		System.out.println("4. Eliminar todos los contactos");
+		System.out.println("0. Salir del programa\n\n");
+		System.out.print("Introduzca una opción: ");
+	}
+
+	/*
+	 * MÉTODO QUE LISTA TODOS LOS CONTACTOS DE LA AGENDA
+	 * O MUESTRA UN MENSAJE SI NO HAY NINGUNO QUE MOSTRAR
+	 */
+	public static void listarPersonas() {
+		if (listaPersonas.isEmpty()) {
+			System.out.println("La agenda no tiene contactos\n");
+		} else {
+			for (int i = 0; i < listaPersonas.size(); i++) {
+				Persona p = listaPersonas.get(i);
+				System.out.printf("%d %s %s (%s) %n", i, p.getNombre(), p.getApellidos(), p.getTelefono());
+			}
+			System.out.println("");
+		}
+	}
+
+	/*
+	 * MÉTODO QUE RECOGE LOS DATOS DEL USUARIO
+	 * PARA AÑADIR UNA NUEVA PERSONA, Y LA INSERTA EN LA LISTA
+	 */
+	public static void aniadirPersona() {
+		System.out.println("\n\nAÑADIR NUEVO CONTACTO");
+		System.out.print("Introduzca el nombre: ");
+		String nombre = sc.nextLine();
+		System.out.print("Introduzca los apellidos: ");
+		String apellidos = sc.nextLine();
+		System.out.print("Introduzca su número de teléfono: ");
+		String telefono = sc.nextLine();
+
+		listaPersonas.add(new Persona(nombre, apellidos, telefono));
+		
+		System.out.println("");
+		
+	}
+
+	/*
+	 * MÉTODO QUE ELIMINA UNA PERSONA DE LA AGENDA
+	 * EN FUNCIÓN DE UNA POSICIÓN RECOGIDA DEL TECLADO
+	 */
+	public static void eliminarPersona() {
+		System.out.println("\n\nELIMINAR CONTACTO");
+		System.out.print("Introduzca la posición del contacto: ");
+		int posicion = Integer.parseInt(sc.nextLine());
+		if (posicion < 0 || posicion >= listaPersonas.size()) {
+			System.out.println("Posición erronea");
+		} else {
+			System.out.print("¿Está usted seguro de querer eliminar el contacto? (S/N): ");
+			String siono = sc.nextLine();
+			if (siono.equalsIgnoreCase("S")) {
+				listaPersonas.remove(posicion);
+			}
+		}
+		System.out.println("");
+	}
+
+	/*
+	 * MÉTODO QUE ELIMINA TODOS LOS CONTACTOS DE LA AGENDA
+	 * PREVIA CONFIRMACIÓN DE LA OPERACIÓN
+	 */
+	public static void eliminarTodas() {
+		System.out.println("\n\nELIMINAR CONTACTO");
+		System.out.print("¿Está usted seguro de querer eliminar el contacto? (S/N): ");
+		String siono = sc.nextLine();
+		if (siono.equalsIgnoreCase("S")) {
+			listaPersonas.clear();
+		}
+		System.out.println("");
+	}
+}
+```
+
+**SALIDA:**
+
+```sh
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 2
+
+
+AÑADIR NUEVO CONTACTO
+Introduzca el nombre: Adolfo
+Introduzca los apellidos: De la Rosa Peña
+Introduzca su número de teléfono: 666554433
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 2
+
+
+AÑADIR NUEVO CONTACTO
+Introduzca el nombre: Gina
+Introduzca los apellidos: Soto
+Introduzca su número de teléfono: 666889911
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 1
+0 Adolfo De la Rosa Peña (666554433) 
+1 Gina Soto (666889911) 
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 3
+
+
+ELIMINAR CONTACTO
+Introduzca la posición del contacto: 0
+¿Está usted seguro de querer eliminar el contacto? (S/N): S
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 1
+0 Gina Soto (666889911) 
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 0
+Opción no válida. Introduzca una opción válida, por favor.
+```
 
 ## 33. Introducción a las expresiones lambda 20:21 
 
