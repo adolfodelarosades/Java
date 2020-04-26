@@ -5,13 +5,21 @@
    * Lanzamiento y propagación de excepciones 11:25 
    * Contenido adicional 4
    
-## Excepciones y errores 9:28
+## 26 Excepciones y errores 9:28
 
 [Excepciones y errores](pdfs/26_Excepciones_y_errores.pdf)
 
+![26_Excepciones_y_errores-1](images/26_Excepciones_y_errores-1.png)
+
 ### 26.1 Excepciones
 
+![26_Excepciones_y_errores-2](images/26_Excepciones_y_errores-2.png)
+
+![26_Excepciones_y_errores-3](images/26_Excepciones_y_errores-3.png)
+
 El término excepción es una abreviatura de *situación excepcional*. Se trata de una situación que altera la ejecución normal de un programa. Por ejemplo, en una calculadura, un usuario intenta realiza la división `2 / 0`. En ese momento, el sistema crea un objeto, que se llama *objeto de excepción* y lo pasa de una llamada de método a otra, buscando quien pueda hacerse cargo. Si no existe nadie, será la propia JVM quien lo haga.
+
+![26_Excepciones_y_errores-4](images/26_Excepciones_y_errores-4.png)
 
 El uso de excepciones tiene varias ventajas:
 
@@ -22,6 +30,10 @@ El uso de excepciones tiene varias ventajas:
 
 ### 26.2 Tipos de Excepciones
 
+![26_Excepciones_y_errores-5](images/26_Excepciones_y_errores-5.png)
+
+![26_Excepciones_y_errores-6](images/26_Excepciones_y_errores-6.png)
+
 Podemos agrupar las excepciones en 3 grandes tipos:
 
 * Excepciones comprobadas (*checked exceptions*): son aquellas excepciones que pueden surgir internamente en un programa, pero que al estar bien escrito, podemos tratar y de las que nos podremos recuperar.
@@ -30,11 +42,66 @@ Podemos agrupar las excepciones en 3 grandes tipos:
 
 * Errores de ejecución (*Runtime errors*): son situaciones interas de la aplicación, de las que probablemente no podamos recuperarnos. Son un tipo no comprobado (*unchecked*).
 
+### 26.3 Código
+
+*SituacionExcepcional.java*
+
+```java
+package excepciones;
+
+public class SituacionExcepcional {
+	
+	public static void main(String[] args) {
+		
+		
+		//El IDE nos previene de algunas
+//		String name;
+		//System.out.println(name);
+		/*
+		 * Multiple markers at this line
+	       - name cannot be resolved to a variable
+	       - 1 changed line
+		 */
+		
+//		String name = null;
+		//System.out.println(name);
+		/*
+		 * Multiple markers at this line
+	       - name cannot be resolved to a variable
+	       - 2 changed lines
+		 */
+		//System.out.println(name.length());
+		/*
+		 * name cannot be resolved
+		 */
+		
+//		
+//		//Otras no es posible controlarlas.
+		int a = 2;
+		int b = 0;
+		System.out.println(a/b); //Error de división entre 0
+	}
+}
+```
+
+**SALIDA:**
+
+```sh
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at excepciones.SituacionExcepcional.main(SituacionExcepcional.java:33)
+```
+
 ## Tratamiento de excepciones 13:36 
 
 [Tratamiento de excepciones](pdfs/27_Tratamiento_de_excepciones.pdf)
 
+![27_Tratamiento_de_excepciones-1](images/27_Tratamiento_de_excepciones-1.png)
+
 ### 27.1 Tratamiento de excepciones
+
+![27_Tratamiento_de_excepciones-2](images/27_Tratamiento_de_excepciones-2.png)
+
+![27_Tratamiento_de_excepciones-3](images/27_Tratamiento_de_excepciones-3.png)
 
 Se realiza utilizando la siguiente sintaxis:
 
@@ -52,6 +119,8 @@ try {
 
 ### 27.2 Bloque `try`
 
+![27_Tratamiento_de_excepciones-4](images/27_Tratamiento_de_excepciones-4.png)
+
 Debe envolver las sentencias que son susceptibles de provocar uno o varios tipos de excepción. Debemos agrupar las sentencias que vayan a tener un tratamiento idéntico de la situación excepcional.
 
 ```java
@@ -66,6 +135,8 @@ Debe envolver las sentencias que son susceptibles de provocar uno o varios tipos
 ```
 
 ### 27.3 Bloque `catch`
+
+![27_Tratamiento_de_excepciones-5](images/27_Tratamiento_de_excepciones-5.png)
 
 Sirven como manejadores de las situaciones excepcionales. Puede haber más de uno. Cada bloque puede manejar uno o más tipos de excepciones:
 
@@ -93,9 +164,380 @@ Sirven como manejadores de las situaciones excepcionales. Puede haber más de un
 
 ### 27.4 Bloque `finally`
 
+![27_Tratamiento_de_excepciones-6](images/27_Tratamiento_de_excepciones-6.png)
+
 Se ejecuta siempre, tanto si hemos terminado correctamente el bloque `try` como el bloque `catch`. Se suele utilizar como código que asegura el cierre de recursos abiertos (ficheros, bases de datos, ...).
 
-## Excepciones más comunes 4:49 
+### 27.5 Código
+
+#### Primer Programa
+
+*EjemploTratamientoExcepciones.java*
+
+```java
+package excepciones;
+
+/**
+ * @author 
+ *
+ */
+public class EjemploTratamientoExcepciones {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int a = 2, b = 0;
+		
+//		try {
+			System.out.println(a/b);
+//		} catch(Exception ex) {
+//			//ex.printStackTrace();
+//			System.out.println("Error de división entre cero");
+//		}
+		
+		System.out.println("La aplicación continua");
+
+	}
+}
+
+
+SALIDA:
+
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at excepciones.EjemploTratamientoExcepciones.main(EjemploTratamientoExcepciones.java:19)
+```
+
+#### Segunda Programa
+
+*EjemploTratamientoExcepciones.java*
+
+```java
+package excepciones;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class EjemploTratamientoExcepciones {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int a = 2, b = 0;
+		
+		try {
+			System.out.println(a/b);
+		} catch(Exception ex) {
+			//ex.printStackTrace();
+			System.out.println("Error de división entre cero");
+		}
+		
+		System.out.println("La aplicación continua");
+
+	}
+}
+
+
+SALIDA:
+
+Error de división entre cero
+La aplicación continua
+```
+
+#### Tercer Programa
+
+*TratamientoExcepciones01.java*
+
+```java
+package excepciones;
+
+/**
+ * @author 
+ *
+ */
+public class TratamientoExcepciones01 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+  
+		try {
+			int a = 2;
+			int b = 0;
+			System.out.println(a/b); //Error de división entre 0			
+		} catch(ArithmeticException ex) {
+			//ex.printStackTrace();
+			System.err.println("Error: " + ex.getMessage());
+		}
+		
+		System.out.println("\nMensaje tras la división");
+	}
+}
+
+
+SALIDA:
+
+Error: / by zero
+
+Mensaje tras la división
+```
+
+####  Cuarto Programa
+
+*TratamientoExcepciones02.java*
+
+```java
+package excepciones;
+
+/**
+ * @author 
+ *
+ */
+public class TratamientoExcepciones02 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			int a = 2;
+			int b = 0;
+			System.out.println(a/b); //Error de división entre 0			
+		} catch(ArithmeticException ex) {
+			//ex.printStackTrace();
+			System.err.println("Error: " + ex.getMessage());
+		} finally {
+			System.out.println("\nEstas instrucciones son muy importantes. Deben ejecutarse tanto si no ha habido excepciones, como si las ha habido");
+		}
+	}
+}
+
+
+SALIDA:
+
+Error: / by zero
+
+Estas instrucciones son muy importantes. Deben ejecutarse tanto si no ha habido excepciones, como si las ha habido
+```
+
+####  Quinto Programa
+
+*TratamientoExcepciones03.java*
+
+```java
+package excepciones;
+
+/**
+ * @author 
+ *
+ */
+public class TratamientoExcepciones03 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		try {
+			int a = 2;
+			int b = 2; //Si ponemos 0 entra al primer catch
+			int resultado = a/b;
+			String mensaje = null;
+			System.out.println(mensaje.length()); //Error de división entre 0			
+		} catch(ArithmeticException ex) {
+			//ex.printStackTrace();
+			System.err.println("Error: " + ex.getMessage());
+		} catch(Exception ex) {
+			System.out.println("Se ha producido un error no esperado");
+		}
+	}
+}
+
+
+SALIDA:
+
+Se ha producido un error no esperado
+```
+
+####  Sexto Programa
+
+*TratamientoExcepciones04.java*
+
+```java
+package excepciones;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class TratamientoExcepciones04 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		String[] mensajes = { "En un lugar", "de La Mancha", "de cuyo nombre", "no quiero acordarme" };
+		//String[] mensajes = { "En un lugar", null, "de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo vivía" };
+
+		try {
+			for (int i = 0; i < 5; i++) {
+				System.out.println(mensajes[i].toUpperCase());
+			}
+		} catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
+			System.err.println("Tratamiento común a las excepciones");
+		}
+		
+		System.out.println("Mensaje final");
+
+	}
+}
+
+
+SALIDA:
+
+EN UN LUGAR
+Tratamiento común a las excepciones
+DE LA MANCHA
+DE CUYO NOMBRE
+NO QUIERO ACORDARME
+Mensaje final
+```
+
+####  Sexto Programa Modificado
+
+*TratamientoExcepciones04.java*
+
+```java
+package excepciones;
+
+/**
+ * @author 
+ *
+ */
+public class TratamientoExcepciones04 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		//String[] mensajes = { "En un lugar", "de La Mancha", "de cuyo nombre", "no quiero acordarme" };
+		String[] mensajes = { "En un lugar", null, "de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo vivía" };
+
+		try {
+			for (int i = 0; i < 5; i++) {
+				System.out.println(mensajes[i].toUpperCase());
+			}
+		} catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
+			System.err.println("Tratamiento común a las excepciones");
+		}
+		
+		System.out.println("Mensaje final");
+	}
+}
+
+
+SALIDA:
+
+EN UN LUGAR
+Tratamiento común a las excepciones
+Mensaje final
+```
+
+#### Septimo Programa
+
+*TratamientoExcepciones04bis.java*
+
+```java
+package excepciones;
+
+/**
+ * @author 
+ *
+ */
+public class TratamientoExcepciones04bis {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		String[] mensajes = { "En un lugar", "de La Mancha", "de cuyo nombre", "no quiero acordarme" };
+		//String[] mensajes = { "En un lugar", null, "de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo vivía" };
+
+		try {
+			for (int i = 0; i < 5; i++) {
+				System.out.println(mensajes[i].toUpperCase());
+			}
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			System.err.println("Tratamiento particular a las excepción ArrayIndex...");
+		} catch (NullPointerException ex) {
+			System.err.println("Tratamiento particular a la excepción NullPointer...");
+		}
+		
+		System.out.println("Mensaje final");
+	}
+}
+
+
+SALIDA:
+
+EN UN LUGAR
+Tratamiento particular a las excepción ArrayIndex...
+DE LA MANCHA
+DE CUYO NOMBRE
+NO QUIERO ACORDARME
+Mensaje final
+```
+
+#### Septimo Programa Modificado
+
+*TratamientoExcepciones04bis.java*
+
+```java
+package excepciones;
+
+/**
+ * @author 
+ *
+ */
+public class TratamientoExcepciones04bis {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		//String[] mensajes = { "En un lugar", "de La Mancha", "de cuyo nombre", "no quiero acordarme" };
+		String[] mensajes = { "En un lugar", null, "de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo vivía" };
+
+		try {
+			for (int i = 0; i < 5; i++) {
+				System.out.println(mensajes[i].toUpperCase());
+			}
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			System.err.println("Tratamiento particular a las excepción ArrayIndex...");
+		} catch (NullPointerException ex) {
+			System.err.println("Tratamiento particular a la excepción NullPointer...");
+		}
+		
+		System.out.println("Mensaje final");
+	}
+}
+
+
+SALIDA:
+
+EN UN LUGAR
+Tratamiento particular a la excepción NullPointer...
+Mensaje final
+```
+
+## 28. Excepciones más comunes 4:49 
 
 [Excepciones más comunes](pdfs/28_Clases_de_excepción_más_comunes.pdf)
 
@@ -111,7 +553,7 @@ NullPointerException | Uso de referencia nula
 NumberFormatException | Formato de número incorrecto
 StringIndexOutOfBounds | Índice usado en String fuera de los límites
 
-## Lanzamiento y propagación de excepciones 11:25 
+## 29. Lanzamiento y propagación de excepciones 11:25 
 
 [Lanzamiento y propagación de excepciones](pdfs/29_Lanzamiento_y_propagación_de_excepciones.pdf)
 
