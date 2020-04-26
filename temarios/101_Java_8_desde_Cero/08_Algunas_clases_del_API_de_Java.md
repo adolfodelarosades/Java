@@ -1682,7 +1682,6 @@ SALIDA:
 45
 ```
 
-
 ## Práctica: Creando un gestor de aparcamiento de coches 25:16 
 
 [Proyecto_Final.pptx](otros/Proyecto_Final.pptx)
