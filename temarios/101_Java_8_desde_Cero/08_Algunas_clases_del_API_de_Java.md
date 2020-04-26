@@ -164,6 +164,7 @@ public class A_FechaHoy {
 }
 
 
+
 SALIDA:
 
 La fecha actual es : 2020-04-26
@@ -198,6 +199,7 @@ public class B_DiaMesAnio {
 }
 
 
+
 SALIDA:
 
 Año : 2020 Mes : 4 Día : 26
@@ -229,6 +231,7 @@ public class C_FechaConcreta {
 		System.out.println("Tu fecha de nacimiento es : " + nacimiento);
 	}
 }
+
 
 
 SALIDA:
@@ -265,6 +268,7 @@ public class D_FechasIguales {
 		}
 	}
 }
+
 
 
 SALIDA:
@@ -305,69 +309,385 @@ public class E_EventosRecurrentes {
 }
 
 
+
 SALIDA:
 
 Lo siento, pero no es tu cumpleaños
 ```
 
-
-*.java*
+*F_HoraActual.java*
 
 ```java
+/**
+ * Ejemplo de como obtener la hora actual, incluidos hasta los nanosegundos
+ */
+package fechas;
+
+import java.time.LocalTime;
+
+/**
+ * @author 
+ *
+ */
+public class F_HoraActual {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LocalTime time = LocalTime.now();
+		System.out.println("La hora actual es : " + time);
+	}
+}
+
+
+
+SALIDA:
+
+La hora actual es : 15:20:53.106
 ```
 
-
-*.java*
+*G_AniadirHoras.java*
 
 ```java
+/**
+ * Ejemplo de como añadir horas a una hora en particular
+ */
+package fechas;
+
+import java.time.LocalTime;
+
+/**
+ * @author 
+ *
+ */
+public class G_AniadirHoras {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LocalTime time = LocalTime.now();
+		LocalTime newTime = time.plusHours(2); // añadiendo dos horas 
+		System.out.println("Hora, después de 2 horas : " + newTime);
+	}
+}
+
+
+
+SALIDA:
+
+Hora, después de 2 horas : 17:23:16.324
 ```
 
-
-*.java*
+*H_UnaSemanaDespues.java*
 
 ```java
+/**
+ * Ejemplo de como añadir una cantidad de tiempo a una fecha
+ */
+package fechas;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+/**
+ * @author 
+ *
+ */
+public class H_UnaSemanaDespues {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		LocalDate nextWeek = LocalDate.now().plus(1, ChronoUnit.WEEKS);
+		System.out.println("Hoy es : " + LocalDate.now());
+		System.out.println("Dentro de 1 semana: " + nextWeek);
+	}
+}
+
+
+
+SALIDA:
+
+Hoy es : 2020-04-26
+Dentro de 1 semana: 2020-05-03
 ```
 
-
-*.java*
+*I_FechaHaceUnAnio.java*
 
 ```java
+/**
+ * Ejemplo de como añadir o restar una cantidad de tiempo a una fecha
+ */
+package fechas;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class I_FechaHaceUnAnio {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		LocalDate today = LocalDate.now();
+		LocalDate previousYear = today.minus(1, ChronoUnit.YEARS);
+		System.out.println("Fecha hace un año: " + previousYear);
+		LocalDate nextYear = today.plus(1, ChronoUnit.YEARS);
+		System.out.println("Fecha dentro de 1 año : " + nextYear);
+	}
+}
+
+
+
+SALIDA:
+
+Fecha hace un año: 2019-04-26
+Fecha dentro de 1 año : 2021-04-26
 ```
 
-
-*.java*
+*J_CompararFechas.java*
 
 ```java
+/**
+ * Ejemplo de como comparar si una fecha es anterior o posterior a otra
+ */
+package fechas;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+/**
+ * @author 
+ *
+ */
+public class J_CompararFechas {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		LocalDate today = LocalDate.now();
+		LocalDate otraFecha = LocalDate.of(2017, 12, 24);
+		if (otraFecha.isAfter(today)) {
+			System.out.println("La otra fecha es posterior a la de hoy");
+		}
+		LocalDate ayer = today.minus(1, ChronoUnit.DAYS);
+		if (ayer.isBefore(today)) {
+			System.out.println("Ayer es anterior a hoy");
+		}
+	}
+}
+
+
+
+SALIDA:
+
+Ayer es anterior a hoy
 ```
 
-
-*.java*
+*K_FechasFijas.java*
 
 ```java
+/**
+ * Ejemplo de como usar fechas fijas (mes y año), como la fecha de caducidad de una tarjeta de crédito,
+ * haciendo uso de la clase YearMonth.
+ */
+package fechas;
+
+import java.time.Month;
+import java.time.YearMonth;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class K_FechasFijas {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		YearMonth anioYMesActual = YearMonth.now();
+		System.out.printf("Días en la clase MonthYear %s: %d%n", anioYMesActual, anioYMesActual.lengthOfMonth());
+		YearMonth caducidadTarjetaCredito = YearMonth.of(2018, Month.FEBRUARY);
+		System.out.printf("Su tarjeta de crédito caduca en %s ", caducidadTarjetaCredito);
+	}
+}
+
+
+
+SALIDA:
+
+Días en la clase MonthYear 2020-04: 30
+Su tarjeta de crédito caduca en 2018-02 
 ```
 
-
-*.java*
+*L_Bisiesto.java*
 
 ```java
+/**
+ * Ejemplo de como verificar si el año de una fecha es bisiesto
+ */
+package fechas;
+
+import java.time.LocalDate;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class L_Bisiesto {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		LocalDate today = LocalDate.now();
+		if (today.isLeapYear()) {
+			System.out.println("Este año es bisiesto");
+		} else {
+			System.out.println("Este año no es bisiesto");
+		}
+	}
+}
+
+
+
+SALIDA:
+
+Este año es bisiesto
 ```
 
-
-*.java*
+*M_Periodo.java*
 
 ```java
+/**
+ * Ejemplo de como manejar la cantidad de tiempo que hay entre dos fechas
+ */
+package fechas;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class M_Periodo {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LocalDate java8Release = LocalDate.of(2014, Month.MARCH, 14);
+		LocalDate java9Release = LocalDate.of(2017, Month.SEPTEMBER, 27);
+		Period periodToNextJavaRelease = Period.between(java8Release, java9Release);
+		System.out.println("Meses transcurridos entre la liberación de Java 8 y Java 9 : " + periodToNextJavaRelease.toTotalMonths());
+	}
+}
+
+
+
+SALIDA:
+
+Meses transcurridos entre la liberación de Java 8 y Java 9 : 42
 ```
 
-
-*.java*
+*N_ParseFormat.java*
 
 ```java
+package fechas;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+/**
+ * @author 
+ *
+ */
+public class N_ParseFormat {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		String diaDespuesDeHoy = "20171112";
+		LocalDate formateada = LocalDate.parse(diaDespuesDeHoy, DateTimeFormatter.BASIC_ISO_DATE);
+		System.out.printf("La fecha generada de un String %s es %s %n", diaDespuesDeHoy, formateada);
+
+		String viernes = "18/04/2014";
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate holiday = LocalDate.parse(viernes, formatter);
+			System.out.printf("Cadena formateada correctamente %s, la fecha es %s%n", viernes, holiday);
+		} catch (DateTimeParseException ex) {
+			System.out.printf("%s no es parseable!%n", viernes);
+			ex.printStackTrace();
+		}
+	}
+}
+
+
+
+SALIDA:
+
+La fecha generada de un String 20171112 es 2017-11-12 
+Cadena formateada correctamente 18/04/2014, la fecha es 2014-04-18
 ```
 
-
-*.java*
+*O_FechaAString.java*
 
 ```java
+/**
+ * Ejemplo de como transformar una fecha en una cadena de caracteres
+ */
+package fechas;
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+/**
+ * @author 
+ *
+ */
+public class O_FechaAString {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LocalDateTime fechaLlegada = LocalDateTime.now();
+		try {
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+			String landing = fechaLlegada.format(format);
+			System.out.printf("Llegada a : %s %n", landing);
+		} catch (DateTimeException ex) {
+			System.out.printf("%s no puede ser formateada!%n", fechaLlegada);
+			ex.printStackTrace();
+		}
+	}
+}
+
+
+
+SALIDA:
+
+Llegada a : 26 abr 2020 15:39 
 ```
 
 
