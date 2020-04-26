@@ -949,7 +949,6 @@ public class Clase2 implements Interfaz {
 }
 ```
 
-
 *InterfacesPorDefecto.java*
 
 ```java
@@ -1040,6 +1039,74 @@ INTERFACES |	CLASES ABSTRACTAS
 Clases no relacionadas podrán implementar los métodos. | Compartir código con clases muy relacionadas.
 Si se quiere indicar que existe un tipo de comportamiento, pero no sabemos quien lo implementa.	| Las clases derivadas usarán métodos protected o private.
 Si necesitamos tener herencia múltiple.	| Queremos definir atributos que no sean estáticos o constantes.
+
+### 25.4 Código
+
+#### Primer Programa
+
+*AbstractaSencilla.java*
+
+```java
+public abstract class AbstractaSencilla {
+	
+	public void saluda() {
+		System.out.println("Hola mundo!!!");
+	}
+
+}
+```
+
+*Derivada.java*
+
+```java
+package abstractas;
+
+public class Derivada extends AbstractaSencilla {
+
+}
+```
+
+*EjemploAbstractas.java*
+
+```java
+package abstractas;
+
+/**
+ * @author 
+ *
+ */
+public class EjemploAbstractas {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//AbstractaSencilla abstracta = new AbstractaSencilla();
+		
+		/*
+		 * NO ES POSIBLE INSTANCIAR UNA CLASE ABASTRACTA
+		 * Nos marcaría los siguientes errores
+		 * Multiple markers at this line
+	       - Occurrence of 'AbstractaSencilla'
+	       - Occurrence of 'AbstractaSencilla'
+	       - This block of commented-out lines of code should be removed.
+	       - Cannot instantiate the type AbstractaSencilla
+	       - 1 changed line
+		 */
+		
+		//Se instancia indirectamente
+		AbstractaSencilla derivada = new Derivada();
+		
+		derivada.saluda();
+	}
+}
+
+
+SALIDA:
+
+Hola mundo!!!
+```
 
 ## Contenido adicional 4   
 
