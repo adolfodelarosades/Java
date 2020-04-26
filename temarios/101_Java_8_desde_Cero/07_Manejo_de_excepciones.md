@@ -675,7 +675,7 @@ Mensaje nº 9
 
 ### Segundo Programa
 
-*.java*
+*EjemploConThrows.java*
 
 ```java
 package conthrows;
@@ -683,10 +683,6 @@ package conthrows;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-/**
- * 
- */
 
 /**
  * @author 
@@ -755,7 +751,6 @@ public class SaldoNegativoException extends Exception {
 	public SaldoNegativoException(double saldo) {
 		super("La cuenta ha quedado en descubierto (" + Double.toString(saldo) + ")");
 	}
-
 }
 ```
 
@@ -805,7 +800,7 @@ public class CuentaCorriente {
 package misexcepciones;
 
 /**
- * @author Openwebinars
+ * @author 
  *
  */
 public class Banco {
