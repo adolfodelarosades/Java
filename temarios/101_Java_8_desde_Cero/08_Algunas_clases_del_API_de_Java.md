@@ -2432,6 +2432,353 @@ public class Utils {
 }
 ```
 
+**SALIDA:**
+
+```sh
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 1
+
+1. Coche o moto
+2. Furgoneta
+3. Autobús
+Introduzca el tipo de vehículo: 1
+Introduzca la marca del vehículo: Ford
+Introduzca la matrícula del vehículo: 123ABC
+
+  1 L   20 L   21 O   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 L   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 1
+
+1. Coche o moto
+2. Furgoneta
+3. Autobús
+Introduzca el tipo de vehículo: 2
+Introduzca la marca del vehículo: PickUp Chevrolet
+Introduzca la matrícula del vehículo: 898SDR
+Introduzca la longitud en metros de la furgoneta (puede incluir decimales): 9
+
+  1 L   20 L   21 O   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 O   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 1
+
+1. Coche o moto
+2. Furgoneta
+3. Autobús
+Introduzca el tipo de vehículo: 3
+Introduzca la marca del vehículo: Mercedes Benz
+Introduzca la matrícula del vehículo: 333LPU
+Introduzca el número de plazas del autobús: 52
+
+  1 L   20 O   21 O   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 O   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 3
+
+Hay 97 plazas disponibles 
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 4
+
+  1 L   20 O   21 O   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 O   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 6
+
+Vehiculo [matricula=123ABC, marca=FORD, fechaEntrada=2020-04-26T17:17:07.800, minutos=0]
+Furgoneta [longitud=9.0, matricula=898SDR, marca=PickUp Chevrolet, fechaEntrada=2020-04-26T16:57:28.571, minutos=0]
+Autobus [numPlazas=52, matricula=333LPU, marca=Mercedes Benz, fechaEntrada=2020-04-26T19:08:44.591, minutos=0]
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 2
+
+
+Introduzca la matrícula del veh�culo: 333LPU
+TICKET DE SALIDA: 
+Matrícula 333LPU 
+Fecha y hora de llegada: 26-abr-2020 19:08:44 
+Fecha y hora de salida: 26-abr-2020 22:06:45 
+Minutos de estancia: 179
+Núm. de plazas del autobús: 52 
+Importe total de la estancia: 20,16€ 
+
+  1 L   20 L   21 O   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 O   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 4
+
+  1 L   20 L   21 O   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 O   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 5
+
+El saldo acumulado es de 20,16BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 6
+
+Vehiculo [matricula=123ABC, marca=FORD, fechaEntrada=2020-04-26T17:17:07.800, minutos=0]
+Furgoneta [longitud=9.0, matricula=898SDR, marca=PickUp Chevrolet, fechaEntrada=2020-04-26T16:57:28.571, minutos=0]
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 2
+
+
+Introduzca la matrícula del veh�culo: 123ABC
+TICKET DE SALIDA: 
+Matrícula 123ABC 
+Fecha y hora de llegada: 26-abr-2020 17:17:07 
+Fecha y hora de salida: 26-abr-2020 22:07:42 
+Minutos de estancia: 291
+
+Importe total de la estancia: 11,64€ 
+
+  1 L   20 L   21 L   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 O   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 6
+
+Furgoneta [longitud=9.0, matricula=898SDR, marca=PickUp Chevrolet, fechaEntrada=2020-04-26T16:57:28.571, minutos=0]
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 2
+
+
+Introduzca la matrícula del veh�culo: 898SDR
+TICKET DE SALIDA: 
+Matrícula 898SDR 
+Fecha y hora de llegada: 26-abr-2020 16:57:28 
+Fecha y hora de salida: 26-abr-2020 22:09:14 
+Minutos de estancia: 312
+Longitud de la furgoneta 9,00 
+Importe total de la estancia: 14,28€ 
+
+  1 L   20 L   21 L   40 L   41 L   60 L   61 L   80 L   81 L  100 L  
+  2 L   19 L   22 L   39 L   42 L   59 L   62 L   79 L   82 L   99 L  
+  3 L   18 L   23 L   38 L   43 L   58 L   63 L   78 L   83 L   98 L  
+  4 L   17 L   24 L   37 L   44 L   57 L   64 L   77 L   84 L   97 L  
+  5 L   16 L   25 L   36 L   45 L   56 L   65 L   76 L   85 L   96 L  
+  6 L   15 L   26 L   35 L   46 L   55 L   66 L   75 L   86 L   95 L  
+  7 L   14 L   27 L   34 L   47 L   54 L   67 L   74 L   87 L   94 L  
+  8 L   13 L   28 L   33 L   48 L   53 L   68 L   73 L   88 L   93 L  
+  9 L   12 L   29 L   32 L   49 L   52 L   69 L   72 L   89 L   92 L  
+ 10 L   11 L   30 L   31 L   50 L   51 L   70 L   71 L   90 L   91 L  
+
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 3
+
+Hay 100 plazas disponibles 
+BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 5
+
+El saldo acumulado es de 46,08BIENVENIDO AL PARKING CORONAVIRUS
+==================================
+
+0. Salir del programa
+1. Registrar la entrada de un vehículo
+2. Registrar la salida de un vehículo
+3. Número de plazas disponibles
+4. Imprimir estado del parking
+5. Saldo acumulado del día
+6. Imprimir la lista de vehiculos que hay en el parking
+Introduzca la opción seleccionada: 0
+
+Introduzca una opción correcta
+```
+
 ## Contenido adicional 6   
 
 [Manipulación de datos con Stringbuilder](pdfs/30_StringBuilder.pdf)
