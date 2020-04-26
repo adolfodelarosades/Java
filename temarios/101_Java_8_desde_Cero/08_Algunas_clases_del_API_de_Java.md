@@ -109,6 +109,16 @@ daba le arroz al a zorra elabaD
 
 ![31_Manejo_de_fechas-1](images/31_Manejo_de_fechas-1.png)
 
+![31_Manejo_de_fechas-2](images/31_Manejo_de_fechas-2.png)
+
+![31_Manejo_de_fechas-3](images/31_Manejo_de_fechas-3.png)
+
+![31_Manejo_de_fechas-4](images/31_Manejo_de_fechas-4.png)
+
+![31_Manejo_de_fechas-5](images/31_Manejo_de_fechas-5.png)
+
+![31_Manejo_de_fechas-6](images/31_Manejo_de_fechas-6.png)
+
 El API de fechas de Java 8 posee varias clases para manejarlas, pero la mayoría de ellas sigue esta convención sobre el nombre de los métodos que sirven para manejarlas.
 
 Nombre | Tipo     | Uso
@@ -125,43 +135,179 @@ Nombre | Tipo     | Uso
 `to`   | instancia | Convertir el objeto en otro Tipo
 `at`   | instancia | Combinar el objeto con otro objeto
 
-![31_Manejo_de_fechas-2](images/31_Manejo_de_fechas-2.png)
-
-![31_Manejo_de_fechas-3](images/31_Manejo_de_fechas-3.png)
-
-![31_Manejo_de_fechas-4](images/31_Manejo_de_fechas-4.png)
-
-![31_Manejo_de_fechas-5](images/31_Manejo_de_fechas-5.png)
-
-![31_Manejo_de_fechas-6](images/31_Manejo_de_fechas-6.png)
-
 ### 31.1 Código
 
-*.java*
+*A_FechaHoy.java*
 
 ```java
+/**
+ * Ejemplo de como obtener la fecha actual
+ */
+package fechas;
+
+import java.time.LocalDate;
+
+/**
+ * @author 
+ *
+ */
+public class A_FechaHoy {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		LocalDate hoy = LocalDate.now();
+		System.out.println("La fecha actual es : " + hoy);
+	}
+}
+
+
+SALIDA:
+
+La fecha actual es : 2020-04-26
 ```
 
-*.java*
+*B_DiaMesAnio.java*
 
 ```java
+/**
+ * Ejemplo de como obtener, por separado, las cifras correspondientes al día, mes y año.
+ */
+package fechas;
+
+import java.time.LocalDate;
+
+/**
+ * @author 
+ *
+ */
+public class B_DiaMesAnio {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LocalDate hoy = LocalDate.now();
+		int year = hoy.getYear();
+		int month = hoy.getMonthValue();
+		int day = hoy.getDayOfMonth();
+		System.out.printf("Año : %d Mes : %d Día : %d \t %n", year, month, day);
+	}
+}
+
+
+SALIDA:
+
+Año : 2020 Mes : 4 Día : 26
 ```
 
-*.java*
+*C_FechaConcreta.java*
 
 ```java
+/**
+ * Ejemplo de como obtener una fecha concreta a partir
+ * de su día, mes y año.
+ */
+package fechas;
+
+import java.time.LocalDate;
+
+/**
+ * @author 
+ *
+ */
+public class C_FechaConcreta {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		LocalDate nacimiento = LocalDate.of(1982, 9, 18);
+		System.out.println("Tu fecha de nacimiento es : " + nacimiento);
+	}
+}
+
+
+SALIDA:
+
+Tu fecha de nacimiento es : 1982-09-18
 ```
 
-
-*.java*
+*D_FechasIguales.java*
 
 ```java
+/**
+ * Ejemplo de como testear si dos fechas son iguales
+ */
+package fechas;
+
+import java.time.LocalDate;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class D_FechasIguales {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LocalDate fecha = LocalDate.of(2017, 11, 11);
+		LocalDate hoy = LocalDate.now();
+		if (fecha.equals(hoy)) {
+			System.out.printf("Hoy %s y la fecha %s son la misma fecha ", hoy, fecha);
+		} else {
+			System.out.printf("Las fechas %s y %s no son iguales ", hoy, fecha);
+		}
+	}
+}
+
+
+SALIDA:
+
+Las fechas 2020-04-26 y 2017-11-11 no son iguales 
 ```
 
-
-*.java*
+*E_EventosRecurrentes.java*
 
 ```java
+/**
+ * Ejemplo de uso de la clase MonthDay, para representar eventos recurrentes de forma anual
+ */
+package fechas;
+
+import java.time.LocalDate;
+import java.time.MonthDay;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class E_EventosRecurrentes {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LocalDate nacimiento = LocalDate.of(2017, 11, 11);
+		MonthDay diaNacimiento = MonthDay.of(nacimiento.getMonth(), nacimiento.getDayOfMonth());
+		MonthDay diaMesHoy = MonthDay.from(LocalDate.now());
+		if (diaMesHoy.equals(diaNacimiento)) {
+			System.out.println("Muchas felicidades, porque es tu cumpleaños");
+		} else {
+			System.out.println("Lo siento, pero no es tu cumpleaños");
+		}
+	}
+}
+
+
+SALIDA:
+
+Lo siento, pero no es tu cumpleaños
 ```
 
 
