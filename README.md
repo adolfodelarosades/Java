@@ -65,3 +65,13 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 ### Descargar Tomcat 6
 
 * [Descargar Tomcat 6](https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.48/bin/)
+
+## MySQL
+
+### Instalar MySQL
+
+* [How to Install MySQL on Mac OSX](https://medium.com/employbl/how-to-install-mysql-on-mac-osx-5b266cfab3b6)
+
+### Desinstalar MySQL
+
+* [Desinstalar MySQL en Mac](https://community.jaspersoft.com/wiki/uninstall-mysql-mac-os-x)
