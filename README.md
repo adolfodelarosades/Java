@@ -68,6 +68,10 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 ## MySQL
 
+### Descargar MySQL
+
+[Descarga MySQL 5.1.72](http://mysql.linux.cz/Downloads/MySQL-5.1/?C=M;O=A)
+
 ### Instalar MySQL
 
 * [How to Install MySQL on Mac OSX](https://medium.com/employbl/how-to-install-mysql-on-mac-osx-5b266cfab3b6)
