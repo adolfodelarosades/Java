@@ -45,10 +45,20 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # Enlaces Interesantes Java
 
-## Instalación Java
+## Java
 
-### Mac
+### Instalación Java
+
+#### Mac
 
 * [java_home and JAVA_HOME on macOS](https://medium.com/notes-for-geeks/java-home-and-java-home-on-macos-f246cab643bd)
 
+## Tomcat 
+
+### Instalación Tomcat 6
+
+#### Mac
+
+* [TomcatInstallationMacOSX.wiki](https://github.com/gbif/ipt/wiki/TomcatInstallationMacOSX.wiki)
+* [How to install Tomcat 6 on Mac OS X Snow Leopard](https://wiki.base22.com/btg/how-to-install-tomcat-6-on-mac-os-x-snow-leopard-48595164.html)
 
