@@ -43,5 +43,12 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [501 Java Coding & Concepts with a Game: Java Puzzle Ball](https://github.com/adolfodelarosades/Java/blob/master/temarios/501_Java_Coding-Concepts_with_a_Game_Java_Puzzle_Ball.md)
 
 
+# Enlaces Interesantes Java
+
+## Instalación Java
+
+### Mac
+
+* [java_home and JAVA_HOME on macOS](https://medium.com/notes-for-geeks/java-home-and-java-home-on-macos-f246cab643bd)
 
 
