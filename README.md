@@ -79,3 +79,38 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 ### Desinstalar MySQL
 
 * [Desinstalar MySQL en Mac](https://community.jaspersoft.com/wiki/uninstall-mysql-mac-os-x)
+
+### Cargar MySQL
+
+```mysql
+mini-de-adolfo:tmp adolfodelarosa$ sudo /usr/local/mysql/bin/mysql -u root -p
+Password:
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.20 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0,00 sec)
+
+mysql> quit
+Bye
+mini-de-adolfo:tmp adolfodelarosa$ 
+
+```
