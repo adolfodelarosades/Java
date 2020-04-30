@@ -16,7 +16,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
 
 ## Contenido del curso 09:00:51
 
-#### 1. Introducción 40:13
+#### 1. [Introducción](601_Desarrollo_Web_con_JSP_y_Servlets/01_Introduccion.md) 40:13
 
    * Instalación de las Herramientas de Desarollo 06:45
    * Creación del primer Servlet 13:12
