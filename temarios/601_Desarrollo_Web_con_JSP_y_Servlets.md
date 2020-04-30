@@ -16,7 +16,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
 
 ## Contenido del curso 09:00:51
 
-1. Introducción 40:13
+#### 1. Introducción 40:13
 
    * Instalación de las Herramientas de Desarollo 06:45
    * Creación del primer Servlet 13:12
@@ -24,7 +24,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Diferencia en la ejecución de una página HTML y una JSP 04:37
    * El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
 
-2. Creación de un Diseño MVC 55:43
+#### 2. Creación de un Diseño MVC 55:43
 
    * El archivo WEB.xml 06:35
    * Añadiendo más vistas al controlador 06:57
@@ -34,14 +34,14 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Uso de parámetros iniciales en el Servlet 07:10
    * Mejorando el Controlador con un nuevo método de redirección 06:19
 
-3. Bases de Datos 26:30
+#### 3. Bases de Datos 26:30
 
    * Introducción 02:45
    * Diseño de un diagrama E-R sencillo 09:35
    * Generación del script SQL 06:22
    * Configuración de la BD mediante JNDI 07:48
 
-4. Implementación del Modelo 01:01:06
+#### 4. Implementación del Modelo 01:01:06
 
    * Configuración de Log4J 06:14
    * Preparación de la Vista 04:44
@@ -52,7 +52,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Como cerrar la sesión de un usuario 03:50
    * Uso de cookies 11:17
 
-5. JSTL 01:11:31
+#### 5. JSTL 01:11:31
 
    * Introducción a JSTL 07:25
    * Mi primer mensaje con c:out 04:35
@@ -65,14 +65,14 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Inserción de un registro en la B.D. con JSTL 07:41
    * Funciones en JSTL 05:04
 
-6. Envío de correos electrónicos 40:42
+#### 6. Envío de correos electrónicos 40:42
 
    * Configuración previa 04:18
    * Creación de una clase manejadora de correos 17:13
    * Implementación de envío de correos electrónicos en la Vista y el Controlador 12:34
    * Completando el código de envío de correos 06:37
 
-7. Implementación de un Logger a través de Filtros 01:02:17
+#### 7. Implementación de un Logger a través de Filtros 01:02:17
 
    * Creación de la tabla de Log 04:32
    * Definición y creación de un SerlvetFilter básico 06:17
@@ -80,7 +80,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Implementación del Logger en el SerlvetFilter 19:49
    * Completando el módulo de Logging 18:51
 
-8. Creación de un módulo de registro de administradores 46:43
+#### 8. Creación de un módulo de registro de administradores 46:43
 
    * Introducción 02:01
    * Modificación de la Base de Datos 02:24
@@ -89,7 +89,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Código del controlador para procesar la petición de registro 14:22
    * Creación de un mecanismo para evitar administradores duplicados 07:43
 
-9. AJAX 01:24:27
+#### 9. AJAX 01:24:27
 
    * Introducción 02:01
    * Creación del script AJAX para enviar una petición HTTP 12:41
@@ -101,30 +101,30 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Almacenando la ruta de la imagen en la Base de Datos 10:59
    * Mostrando al usuario la imagen almacenada en el servidor 06:54
 
-10. Validación de Datos 34:57
+#### 10. Validación de Datos 34:57
 
    * Comprobando la integridad de los datos en el servidor 16:02
    * Validando los datos en el cliente con JQuery 18:55
 
-11. Google ReCaptcha 13:37
+#### 11. Google ReCaptcha 13:37
 
    * Como crear una cuenta y obtener Google ReCaptcha 02:36
    * Mostrando el ReCaptcha al usuario 04:14
    * Verificando la respuesta del usuario 06:47
 
-12. Conclusión 02:30
+#### 12. Conclusión 02:30
 
    * Algunas palabras finales 02:30
 
-13. Recursos 00:05
+#### 13. Recursos 00:05
 
    * Código fuente del curso 00:05
 
-14. Bibliografía recomendada 00:29
+#### 14. Bibliografía recomendada 00:29
 
    * Beginning JSP, JSF and Tomcat 00:00
    * Core Servlets and JavaServer Pages 00:29
 
-15. Extras 00:00
+#### 15. Extras 00:00
 
    * Oferta para todos los cursos 00:00
