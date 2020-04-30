@@ -2,7 +2,7 @@
 
 Aprende a desarrollar aplicaciones web con la robusta, segura y flexible tecnología J2EE de Java.
 
-### Descripción
+### Descripción
 
 Este curso está enfocado en el uso de las tecnologías definidas en el estándar J2EE de Java (Java Servlets, Java Beans, JSP, JSTL, etc.) para el desarrollo de aplicaciones web. Todas estas tecnologías de desarrollo son complementadas con herramientas tales como: JavaScript, JQuery y AJAX para lograr como resultado un conocimiento completo en la programación web en Java. Desde la configuración del ambiente de desarrollo hasta como desplegar una aplicación web en un servidor es cubierto durante esta serie de video tutoriales totalmente en español.
 
@@ -17,7 +17,6 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
 ## Contenido del curso 09:00:51
 
 1. Introducción 40:13
-
 * Instalación de las Herramientas de Desarollo 06:45
 * Creación del primer Servlet 13:12
 * Añadiendo contenido dinámico con JSP 07:47
@@ -25,7 +24,6 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
 * El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
 
 2. Creación de un Diseño MVC 55:43
-
 * El archivo WEB.xml 06:35
 * Añadiendo más vistas al controlador 06:57
 * Control de parámetros HTTP GET con Scriplets 09:24
@@ -35,7 +33,6 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
 * Mejorando el Controlador con un nuevo método de redirección 06:19
 
 3. Bases de Datos 26:30
-
 * Introducción 02:45
 * Diseño de un diagrama E-R sencillo 09:35
 * Generación del script SQL 06:22
