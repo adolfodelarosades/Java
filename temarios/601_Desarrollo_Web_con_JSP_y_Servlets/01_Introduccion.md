@@ -162,6 +162,102 @@ Al ejecutarlo tenemos:
 
 ## Añadiendo contenido dinámico con JSP 07:47
 
+![1-jsp](images/1-jsp.png)
+
+![1-scriptlers](images/1-scriptlers.png)
+
+JSP combina los *Scriptlets*, *directivas JSP* más código HTML para generar contenido dinámico.
+
+Vamos a crear un JSP:
+
+![1-new-jsp](images/1-new-jsp.png)
+
+![1-new-jsp-2](images/1-new-jsp-2.png)
+
+![1-new-jsp-3](images/1-new-jsp-3.png)
+
+*index.jsp*
+
+Hemos creado nuestro JSP `index.jsp` con el siguiente código:
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+Es un código HTML pero que incluye una directiva al inicio, que nos indica que en esta página va a ver código Java con texto HTML y con un juego de carácteres UTF-8.
+
+Vamos a scribir el siguiente *Scriptlet* dentro del tag `body`:
+
+```jsp
+ <%
+ 	String s = "Este mensaje no es muy dinámico";
+   	out.println(s);
+ %>
+```
+
+Y vamos a ejecutar el archivo `index.jsp` con:
+
+![1-jsp-ejecucion-1](images/1-jsp-ejecucion-1.png)
+
+![1-jsp-ejecucion-2](images/1-jsp-ejecucion-2.png)
+
+Como vemos por default la ejecución se muestra dentro del mismo Eclipse pero se puede configurar para que la ejecución se haga en nuestro navegador preferido con:
+
+![1-navegador](images/1-navegador.png)
+
+Si no aparcere tu navegador preferido se puede añadir entrando a las *Preferencias > General > Web Browser* :
+
+![1-navegador-2](images/1-navegador-2.png)
+
+![1-navegador-3](images/1-navegador-3.png)
+
+![1-navegador-4](images/1-navegador-4.png)
+
+Y ahora cuando se ejecute nuestro archivo lo hara en Chrome:
+
+![1-navegador-5](images/1-navegador-5.png)
+
+Vamos a dejar nuestro archivo `index.jsp` con el siguiente código:
+
+```jsp
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <%
+   	String s = "Este mensaje no es muy dinámico";
+   	out.println(s);
+   %>
+   
+    <p>Este mensaje tampoco es muy dinámico</p>
+   
+   <%
+   	out.println("Este mensaje SI es muy dinámico <br><br>" + request.getHeader("USER-AGENT"));
+   %>
+</body>
+</html>
+```
+
+Y lo ejecutamos:
+
+![1-navegador-6](images/1-navegador-6.png)
+
 ## Diferencia en la ejecución de una página HTML y una JSP 04:37
 
 ## El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
