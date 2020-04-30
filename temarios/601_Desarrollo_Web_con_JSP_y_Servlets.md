@@ -103,8 +103,8 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
 
 #### 10. Validación de Datos 34:57
 
-   * Comprobando la integridad de los datos en el servidor 16:02
-   * Validando los datos en el cliente con JQuery 18:55
+* Comprobando la integridad de los datos en el servidor 16:02
+* Validando los datos en el cliente con JQuery 18:55
 
 #### 11. Google ReCaptcha 13:37
 
