@@ -6,27 +6,21 @@
 * Diferencia en la ejecución de una página HTML y una JSP 04:37
 * El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
 
+![1-portada](images/1-portada.png)
+
 ## Instalación de las Herramientas de Desarollo 06:45
 
-Yo soy Avram de nobeles y en este curso vamos a desarrollar una aplicación web dinámica basada en JSP
+En este curso vamos a desarrollar una aplicación web dinámica basada en *JSP* y *Servlets* implementando una arquitectura conocida como MVC Modelo Vista Controlador.
 
-y servlets implementando una arquitectura conocida como MVC Modelo Vista Controlador este video es parte
+Al final de este curso vamos a desplegar nuestra aplicación en un servidor web gratuito para que conozcas cómo se configura y cómo desplegarlo con una URL real.
 
-de un curso más extenso si tú deseas conocerlo te recomiendo que visites el enlace que anexo a la descripción
+![1-herramientas](images/1-herramientas.png)
 
-del video.
+Vamos a instalar nuestras herramientas de desarrollo para nuestra aplicación web las cuales van a ser:
 
-Al final de este curso vamos a desplegar nuestra aplicación en un servidor web gratuito para que conozcas
-
-cómo se configura y cómo desplegarlo con una R.L real vamos a instalar nuestras herramientas de desarrollo
-
-para nuestra aplicación web las cuales van a ser Eclipse en la versión extendida de nuestro IDE Mahi
-
-Esquivel server.
-
-Para crear una base de datos Esquivel Workbench para diseñar nuestra base de datos y Apache Tomcat para
-
-desplegar un pequeño servidor web local
+* Eclipse en la versión extendida de nuestro IDE Mahi Esquivel server.
+* Para crear una base de datos Esquivel Workbench para diseñar nuestra base de datos
+* Apache Tomcat para desplegar un pequeño servidor web local
 
 visita por favor Eclipse punto org diagonal downloads y aquí vamos a ver que hay bastantes versiones
 
