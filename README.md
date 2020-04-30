@@ -44,7 +44,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # Udemy
 
-* [601 Desarrollo Web con JSP y Servlets](https://www.udemy.com/course/desarrollo-web-con-jsp-y-servlets/)
+* [601 Desarrollo Web con JSP y Servlets](https://github.com/adolfodelarosades/Java/blob/master/temarios/601_Desarrollo_Web_con_JSP_y_Servlets.md)
 
 # Enlaces Interesantes Java
 
