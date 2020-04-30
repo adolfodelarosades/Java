@@ -17,11 +17,12 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
 ## Contenido del curso 09:00:51
 
 1. Introducción 40:13
-* Instalación de las Herramientas de Desarollo 06:45
-* Creación del primer Servlet 13:12
-* Añadiendo contenido dinámico con JSP 07:47
-* Diferencia en la ejecución de una página HTML y una JSP 04:37
-* El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
+
+   * Instalación de las Herramientas de Desarollo 06:45
+   * Creación del primer Servlet 13:12
+   * Añadiendo contenido dinámico con JSP 07:47
+   * Diferencia en la ejecución de una página HTML y una JSP 04:37
+   * El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
 
 2. Creación de un Diseño MVC 55:43
 * El archivo WEB.xml 06:35
