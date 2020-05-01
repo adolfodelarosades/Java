@@ -325,7 +325,11 @@ El modelo MVC es recomendable por ser robusto, segura y facíl de mantener.
 
 ### Ejemplo 04-JSPServlet
 
-Vamos a crear un proyecto y lo llamaremos 04-JSPServlet.
+Vamos a crear un proyecto y lo llamaremos 04-JSPServlet, dentro de este proyecto creamos un Servlet llmado `Servlet.java` y un JSP llmado `index.jsp`.
+
+Nuestro Servlet será el Controlador y nuestro JSP será la Vista. Vamos a insertar el código dentro de estos dos archivos, en el JSP simplemente vamos a insertar el encabezado:
+
+`<h1>Modelo Vista Controlador MVC</h1>`
 
 
 
