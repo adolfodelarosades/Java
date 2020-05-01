@@ -246,6 +246,13 @@ Al Ejecutar nuestra aplicación tenemos el siguiente flujo, observe los diferent
 
 ## Control de parámetros HTTP GET con Scriplets 09:24
 
+En esta lección vamos a controlar el paso de parámetros HTTP GET con Scriplets dentro de una vista JSP.
+
+Modificaremos nuestra vista `login.jsp` para que reciba un *usuario* y un *password* y cuando pulsemos el botón de aceptar nos lleve a una vista que nos muestre los datos introducidos. Esta nueva vista la llamaremos `postLogin.jsp`.
+
+
+
+
 ## Control de parámetros HTTP POST mediante el Servlet 05:29
 
 ## Paso de parámetros desde Servlet hacia una vista JSP 13:49
