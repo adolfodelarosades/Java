@@ -350,16 +350,5 @@ Para ejecutar este proyecto ya no lo vamos a hacer sobre el archivo `Servlet.jav
 
 ![1-ejecucion-mvc-2](images/1-ejecucion-mvc-2.png)
 
-La URL que estamos ejecutando es: `http://localhost:8080/04-JSPServlet/` es importante que al final ya no pone *el nombre del archivo* `Servlet` o `index.html`, solo esta el Protocolo, Dominio y la ruta * contexto el cual podríamos eliminar si entramos a los *Web Modules* de Tomcat.
-
-
-
-
-
-
-
-
-
-
-
+La URL que estamos ejecutando es: `http://localhost:8080/04-JSPServlet/` es importante observar que al final ya no pone *el nombre del archivo* `Servlet` o `index.html`, solo esta el Protocolo, Dominio y la ruta o contexto, el cual podríamos eliminar si entramos a los *Web Modules* de Tomcat.
 
