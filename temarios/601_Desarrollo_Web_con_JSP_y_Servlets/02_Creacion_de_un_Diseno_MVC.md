@@ -248,10 +248,122 @@ Al Ejecutar nuestra aplicación tenemos el siguiente flujo, observe los diferent
 
 En esta lección vamos a controlar el paso de parámetros HTTP GET con Scriplets dentro de una vista JSP.
 
-Modificaremos nuestra vista `login.jsp` para que reciba un *usuario* y un *password* y cuando pulsemos el botón de aceptar nos lleve a una vista que nos muestre los datos introducidos. Esta nueva vista la llamaremos `postLogin.jsp`.
+Modificaremos nuestra vista `login.jsp` para que reciba un *usuario* y un *password* y cuando pulsemos el botón de aceptar nos lleve a una vista que nos muestre los datos introducidos, para lo cual también debemos modificar el controlador para que tenga una nueva opción para redireccionar a la nueva vista que llamaremos `postLogin.jsp`.
+
+Vemos los códigos:
+
+```java
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+   String accion = request.getParameter("accion");
+				
+   if (accion != null) {
+      if(accion.equals("inicio")) {
+         getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+      } else  if(accion.equals("login")) {
+         getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+      } else  if(accion.equals("iniciarSesion")) {
+         getServletContext().getRequestDispatcher("/jsp/postLogin.jsp").forward(request, response);
+      }
+   }else {
+      getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+   }
+}
+```
+
+*Servlet.java*
+
+Aquí solo hemos añadido un `else if` para el caso donde la `accion=iniciarSesion` nos rediriga a la vista `postLogin.jsp`.
+
+```java
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Iniciar Sessión</title>
+</head>
+<body>
+
+   <h1 align="center">Iniciar Sessión</h1>
+		
+   <form method="get">
+      <table>
+         <tr>
+	    <td>Usuario: </td>
+	    <td><input type="text" name="usuario" /></td>
+	 </tr>
+	 <tr>
+	    <td>Contraseña: </td>
+	    <td><input type="password" name="contrasena" /></td>
+	 </tr>
+	 <tr>
+	    <td><input type="hidden" name="accion" value="iniciarSesion"/></td>
+	    <td><input type="submit" value="Iniciar Sesión" /></td>
+	 </tr>
+      </table>	
+   </form>
+	
+   <p>
+      <a href="?accion=inicio">&#60;&#60; Regresar</a>
+   </p>
+   
+</body>
+</html>
+```
+
+*login.jsp*
+
+Aquí hemos añadido el formulario para leer los campos `usuario` y `contraseña`, además tenemos un campo adicional ***oculto** para envíar el párametro `accion` con el valor `iniciarSesion`.
 
 
+```java
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>PostLogin</title>
+</head>
+<body>
 
+   <h1>Sesión Iniciada</h1>
+	
+   <p>Los datos ingresados son:</p>
+	
+   <p>
+   <%
+      out.println("Usuario: " + request.getParameter("usuario"));
+   %>
+   </p>
+	
+   <!--  Otra forma de imprimir en un Scripler es la siguiente -->
+   <p><%= "Contraseña: " + request.getParameter("contrasena") %></p>
+
+</body>
+</html>
+```
+
+*postLogin.jsp*
+
+En esta vista mostramos los datos que se ingresarón en la vista `login.jsp` y que se mandan como parámetros a esta vista, si observamos el URL generado podemos verlos todos ya que se estan mandado a través de un método *get*. Otra cosa a recalcar se muestran dos formas de imprimir datos dentro de los de los scriplers, `<%= ...  %>` implicitamente tiene un `out.println` por lo que no es necesario ponerlo.
+
+
+Al ejecutar nuestra aplicación tenemos:
+
+`http://localhost:8080/`
+
+![2-ejecucion-2-1](images/2-ejecucion-2-1.png)
+
+`http://localhost:8080/?accion=login`
+
+![2-ejecucion-2-2](images/2-ejecucion-2-2.png)
+
+`http://localhost:8080/?usuario=adolfo%40gmail.com&contrasena=1234ABC&accion=iniciarSesion`
+
+![2-ejecucion-2-3](images/2-ejecucion-2-3.png)
 
 ## Control de parámetros HTTP POST mediante el Servlet 05:29
 
