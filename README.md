@@ -42,7 +42,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 * [501 Java Coding & Concepts with a Game: Java Puzzle Ball](https://github.com/adolfodelarosades/Java/blob/master/temarios/501_Java_Coding-Concepts_with_a_Game_Java_Puzzle_Ball.md)
 
-# Udemy
+# Novellius
 
 * [601 Desarrollo Web con JSP y Servlets](https://github.com/adolfodelarosades/Java/blob/master/temarios/601_Desarrollo_Web_con_JSP_y_Servlets.md)
 
