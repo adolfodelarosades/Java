@@ -164,17 +164,76 @@ Listo, lo que hara nuestra aplicación es iniciar con la vista `index.jsp` y des
 Por lo que el código de nuestros archivos es el siguiente:
 
 ```java
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String accion = request.getParameter("accion");
+		
+		if (accion != null) {
+			if(accion.equals("inicio")) {
+				getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+			} else  if(accion.equals("login")) {
+				getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+			}
+			
+		}else {
+			getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+		}
+	}
+```
+*Servlet.java*
+
+```java
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ménu</title>
+</head>
+<body>
+	<h1 align="center">Ménu</h1>
+	
+	<ol>
+		<li><a href="?accion=login">Iniciar Sesión</a></li>
+	</ol>
+</body>
+</html>
 ```
 *index.jsp*
 
 ```java
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Iniciar Sessión</title>
+</head>
+<body>
+	<h1 align="center">Iniciar Sessión</h1>
+	
+	<p>
+		<a href="?accion=inicio">&#60;&#60; Regresar</a>
+	</p>
+</body>
+</html>
 ```
 *login.jsp*
 
+Al Ejecutar nuestra aplicación tenemos el siguiente flujo, observe los diferentes URLs:
 
-```java
-```
-*Servlet.java*
+`http://localhost:8080`
+
+![2-menu](images/2-menu.png)
+
+`http://localhost:8080/?accion=login`
+![2-login](images/2-login.png)
+
+`http://localhost:8080/?accion=inicio`
+![2-menu-2](images/2-menu-2.png)
+
 
 ## Control de parámetros HTTP GET con Scriplets 09:24
 
