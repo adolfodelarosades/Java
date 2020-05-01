@@ -350,7 +350,6 @@ Aquí hemos añadido el formulario para leer los campos `usuario` y `contraseña
 
 En esta vista mostramos los datos que se ingresarón en la vista `login.jsp` y que se mandan como parámetros a esta vista, si observamos el URL generado podemos verlos todos ya que se estan mandado a través de un método *get*. Otra cosa a recalcar se muestran dos formas de imprimir datos dentro de los de los scriplers, `<%= ...  %>` implicitamente tiene un `out.println` por lo que no es necesario ponerlo.
 
-
 Al ejecutar nuestra aplicación tenemos:
 
 `http://localhost:8080/`
@@ -366,6 +365,108 @@ Al ejecutar nuestra aplicación tenemos:
 ![2-ejecucion-2-3](images/2-ejecucion-2-3.png)
 
 ## Control de parámetros HTTP POST mediante el Servlet 05:29
+
+En está lección vamos a ver como pasar parámetros HTTP POST al Servlet. Por lo cual tendremos que modificar nuestra vista `login.jsp` para que en lugar de usar el método `get` usar el método `post`, además de algunos cambios mas.
+
+Vemos los códigos:
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Iniciar Sessión</title>
+</head>
+<body>
+   
+   <h1 align="center">Iniciar Sessión</h1>
+		
+   <form method="post" action="?accion=iniciarSesion">
+      <table>
+         <tr>
+	    <td>Usuario: </td>
+	    <td><input type="text" name="usuario" /></td>
+	 </tr>
+	 <tr>
+	    <td>Contraseña: </td>
+	    <td><input type="password" name="contrasena" /></td>
+	 </tr>
+	 <tr>
+	    <td>&nbsp;</td>
+	    <td><input type="submit" value="Iniciar Sesión" /></td>
+	 </tr>
+      </table>	
+   </form>
+	
+   <p>
+      <a href="?accion=inicio">&#60;&#60; Regresar</a>
+   </p>
+   
+</body>
+</html>
+```
+
+*login.jsp*
+
+Básicamente hemos realizado dos cambios, cambiar el método `get` por `post` y hemos puesto el atributo `action="?accion=iniciarSesion"` dentro de el tag `form` por lo que eliminamos el campo oculto que hacia esa labor con `get`.
+
+
+```java
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+   String accion = request.getParameter("accion");
+		
+   if (accion != null) {
+      if(accion.equals("inicio")) {
+         getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+      } else  if(accion.equals("login")) {
+         getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+      }
+   }else {
+      getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+   }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+      String accion = request.getParameter("accion");
+				
+      if (accion != null) {
+         if(accion.equals("iniciarSesion")) {
+	    System.out.println("Usuario: " + request.getParameter("usuario"));
+	    System.out.println("Contraseña: " + request.getParameter("contrasena"));
+	 }
+      }else {
+         getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+      }
+		
+}
+```
+
+*Servlet.java*
+
+Aquí hemos eliminado del `doGet()` el manejo de la acción `iniciarSesion` que hemos implementado dentro del método `doPost()`, en caso de que esa opción sea invocada se pintarán en la conosola los parámetros `usuario` y `contrasena`, **no estamos redirigiendo a ninguna vista**.
+
+Al ejecutar nuestra aplicación tenemos:
+
+`http://localhost:8080/`
+
+![2-ejecucion-2-1](images/2-ejecucion-2-1.png)
+
+`http://localhost:8080/?accion=login`
+
+![2-ejecucion-2-2](images/2-ejecucion-2-2.png)
+
+`http://localhost:8080/?accion=iniciarSesion`
+
+![2-ejecucion-2-4](images/2-ejecucion-2-4.png)
+
+La última vista esta totalmente en blanco, al pulsar el botón en `login.jsp` invocamos al URL `http://localhost:8080/?accion=iniciarSesion` con el método Post y en nuestro Servlet hemos indicado que pinte en la consola los parámetros enviados como lo muestra la siguiente imagen.
+
+![2-ejecucion-2-5](images/2-ejecucion-2-5.png)
+
 
 ## Paso de parámetros desde Servlet hacia una vista JSP 13:49
 
