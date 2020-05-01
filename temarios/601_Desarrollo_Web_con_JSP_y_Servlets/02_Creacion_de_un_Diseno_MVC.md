@@ -459,14 +459,15 @@ Al ejecutar nuestra aplicación tenemos:
 
 ![2-ejecucion-2-2](images/2-ejecucion-2-2.png)
 
+Al pulsar el botón `Iniciar Sesión` invocamos el método `post` para el URL `http://localhost:8080/?accion=iniciarSesion`, es importante observar que como se esta usando el método `post` los parárametros `usuario` y `contrasena` ya no se muestran en el URL, solo se muestra `?accion=iniciarSesion` que es el valor del atributo `action` del tag `form`.
+
 `http://localhost:8080/?accion=iniciarSesion`
 
 ![2-ejecucion-2-4](images/2-ejecucion-2-4.png)
 
-La última vista esta totalmente en blanco, al pulsar el botón en `login.jsp` invocamos al URL `http://localhost:8080/?accion=iniciarSesion` con el método Post y en nuestro Servlet hemos indicado que pinte en la consola los parámetros enviados como lo muestra la siguiente imagen.
+Esta vista esta totalmente en blanco por que realmente no se invoco ningun JSP, solo se mando pintar los parámetros recibidos en la consola como podemos ver en la siguiente imágen.
 
 ![2-ejecucion-2-5](images/2-ejecucion-2-5.png)
-
 
 ## Paso de parámetros desde Servlet hacia una vista JSP 13:49
 
