@@ -260,5 +260,40 @@ Y lo ejecutamos:
 
 ## Diferencia en la ejecución de una página HTML y una JSP 04:37
 
+![1-pag-html](images/1-pag-html.png)
+
+Cuando ejecutamos una página HTML el cliente que es el navegador Web, envia una petición HTTP al servidor.
+
+Creación de una página HTML.
+
+![1-new-html](images/1-new-html.png)
+
+![1-new-html-2](images/1-new-html-2.png)
+
+Nos crea el siguiente código:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+Vamos a meter el encabezado `<h1>Index.html</h1>` en el body y ejecutamos el archivo.
+
+![1-new-html-3](images/1-new-html-3.png)
+
+Cuando escribiendo el URL `http://localhost:8080/01-JSPServlets/index.html` en el navegador y pulsamos enter, el navegador web hace una petición HTTP al servidor el cual contiene un *servidor web* en este caso Tomcat, el servidor busca el recurso solicitado la página `index.html` y cuando la encuentra envía una respuesta HTTP al navegador, es cuando vemos el resultado.
+
+![1-ejecucion-jsp](images/1-ejecucion-jsp.png)
+
+Cuando ejecutamos un JSP es diferente, el cliente o navegador web hace la petición HTTP al introducir un URL por ejemplo `http://localhost:8080/01-JSPServlets/index.jsp`, la petición HTTP llega al servidor web **el cual debe ser compoatible con JSP y Servlets** por ejemplo Tomcat, Glassfish, Jetty, JBOSS, el servidor recibe la petición HTTP y la redirige a un motor JSP el cual busca la página JSP cuando la encuentra la transforma en un Servlet a través de un motor de Servlets y cuando ya la tiene la regresa al navegador el cual se encarga de renderizar el Servlet que recibio como respuesta.
+
 ## El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
 
