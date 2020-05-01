@@ -325,11 +325,39 @@ El modelo MVC es recomendable por ser robusto, segura y facíl de mantener.
 
 ### Ejemplo 04-JSPServlet
 
-Vamos a crear un proyecto y lo llamaremos 04-JSPServlet, dentro de este proyecto creamos un Servlet llmado `Servlet.java` y un JSP llmado `index.jsp`.
+Vamos a crear un proyecto y lo llamaremos 04-JSPServlet, dentro de este proyecto creamos un Servlet llmado `Servlet.java` y un JSP llmado `index.jsp`. Nuestro Servlet será el Controlador y nuestro JSP será la Vista. 
 
-Nuestro Servlet será el Controlador y nuestro JSP será la Vista. Vamos a insertar el código dentro de estos dos archivos, en el JSP simplemente vamos a insertar el encabezado:
+Vamos a insertar el código dentro de estos dos archivos, en el JSP simplemente vamos a insertar el encabezado:
 
 `<h1>Modelo Vista Controlador MVC</h1>`
+
+En el Servlet dentro del método `doGet()` vamos a insertar el siguiente código:
+
+```java
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);		
+
+}
+```
+* `getServletContext()`: Retorna un objeto ServletContext que guarda la información referente al servidor.
+* `getRequestDispatcher()`: Método que acepta una ruta como parámetro.
+* `forward(request, response)`: Método que redirige a la ruta indicada.
+
+Para ejecutar este proyecto ya no lo vamos a hacer sobre el archivo `Servlet.java` o sobre el archivo `Index.jsp`, lo que haremos es ejecutar el proyecto en el servidor:
+
+![1-ejecucion-mvc](images/1-ejecucion-mvc.png)
+
+![1-ejecucion-mvc-2](images/1-ejecucion-mvc-2.png)
+
+La URL que estamos ejecutando es: `http://localhost:8080/04-JSPServlet/` es importante que al final ya no pone *el nombre del archivo* `Servlet` o `index.html`, solo esta el Protocolo, Dominio y la ruta * contexto el cual podríamos eliminar si entramos a los *Web Modules* de Tomcat.
+
+
+
+
+
+
+
 
 
 
