@@ -120,9 +120,35 @@ Los siguientes enlaces nos cargarán nuestro proyecto.
 
 ![2-ejecucion-6](images/2-ejecucion-6.png)
 
+Pero si usamos `http://localhost:8080/admin2` tendremos problemas:
 
-El Servlet puede enmascarar esta ruta para que sea sustituida por otro texto que deseemos 
- 
+![2-ejecucion-7](images/2-ejecucion-7.png)
+
+Si no quisiera tener ningún tipo de mapeo y me acepte cualquier cosa podemos poner simplemente:
+
+```xml
+<servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>//*</url-pattern>
+</servlet-mapping>
+```
+
+Con esto los únicos URL válidos son 
+
+`http://localhost:8080`
+
+`http://localhost:8080/`
+
+![2-ejecucion-8](images/2-ejecucion-8.png)
+
+Cualquier otro URL no nos permitira cargar nuestro Servlet:
+
+![2-ejecucion-9](images/2-ejecucion-9.png)
+
+El descriptor `web.xml` también nos va a permitir acceso a JNDI que nos permite acceder a una BD de forma sencilla, recordemos que para tener el archivo `web.xml` debemos crear nuestro proyecto con la versión 2.5 para el **Dynamic web module version**, si selecciónamos la versión 3.0 en lugar de el archivo `web.xml` usaremos notaciones, esto lo permite a partir de Tomcat 7, con Tomcat 6 no se permiten versiones superiores a 2.5.
+
+![2-2-5](images/2-2-5.png)
+
 ## Añadiendo más vistas al controlador 06:57
 
 ## Control de parámetros HTTP GET con Scriplets 09:24
