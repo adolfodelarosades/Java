@@ -151,6 +151,31 @@ El descriptor `web.xml` también nos va a permitir acceso a JNDI que nos permite
 
 ## Añadiendo más vistas al controlador 06:57
 
+en esta lección vamos a añadir un segundo JSP llamado `login.jsp`, actualmente tenemos el JSP `index.jsp` dentro de la carpeta `WebContent`.
+
+![2-webcontent](images/2-webcontent.png)
+
+Para organizar un poco nuestros JSPs dentro de la carpeta `WebContent` crearemos la carpeta `jsp` dentro de la cual moveremos el JSP `index.jsp` y crearemos el nuevo JSP `login.jsp`.
+
+![2-webcontent-2](images/2-webcontent-2.png)
+
+Listo, lo que hara nuestra aplicación es iniciar con la vista `index.jsp` y desde aquí nos permita movernos a la vista `login.jsp` una vez aquí tenemos tener la posibilidad de regresar a la vista `index.jsp`, todo esto siempre controlado por nuestro "Controlador".
+
+Por lo que el código de nuestros archivos es el siguiente:
+
+```java
+```
+*index.jsp*
+
+```java
+```
+*login.jsp*
+
+
+```java
+```
+*Servlet.java*
+
 ## Control de parámetros HTTP GET con Scriplets 09:24
 
 ## Control de parámetros HTTP POST mediante el Servlet 05:29
