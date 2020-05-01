@@ -188,15 +188,17 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Ménu</title>
+   <meta charset="UTF-8">
+   <title>Ménu</title>
 </head>
 <body>
+
    <h1 align="center">Ménu</h1>
  	
    <ol>
       <li><a href="?accion=login">Iniciar Sesión</a></li>
    </ol>
+   
 </body>
 </html>
 ```
@@ -208,10 +210,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Iniciar Sessión</title>
+   <meta charset="UTF-8">
+   <title>Iniciar Sessión</title>
 </head>
 <body>
+
    <h1 align="center">Iniciar Sessión</h1>
 	
    <p>
@@ -234,7 +237,6 @@ Al Ejecutar nuestra aplicación tenemos el siguiente flujo, observe los diferent
 
 `http://localhost:8080/?accion=inicio`
 ![2-menu-2](images/2-menu-2.png)
-
 
 ## Control de parámetros HTTP GET con Scriplets 09:24
 
