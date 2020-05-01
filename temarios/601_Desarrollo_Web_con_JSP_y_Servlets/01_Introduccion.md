@@ -297,3 +297,37 @@ Cuando ejecutamos un JSP es diferente, el cliente o navegador web hace la petici
 
 ## El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
 
+Existen dos modelos para la arquitectura de aplicaciones JSP.
+
+* Modelo 1
+* Modelo Vista Controlador MVC
+
+### Modelo 1 JSP
+
+![1-modelo-1](images/1-modelo-1.png)
+
+El Modelo 1 propone una vista y un modelo, la vista es una página JSP la cual maneja las peticiones hechas a través de URLs y el modelo que son clases Java y JavaBeans que tienen acceso a la BD.
+
+Este modelo esta bien para sitios web pequeños, para sitios grandes se complica la códificación y mantenimento.
+
+### Modelo MVC
+
+![1-modelo-2](images/1-modelo-2.png)
+
+En el Modelo MVC el que atiende las peticiones ya no es un JSP es directamente un Servlet llamando **Controlador (Controller)** el cual tiene dos funciones principales:
+
+* El Controlador decidira que **Vista** (JSP) debe mostrarse de acuerdo a la solicitud recibida
+* El Controlador puede instanciar objetos JavaBeans que interactuen con la BD y recibir los datos procesados para proporcionarselos a los JSP y sean pintados en la vista.
+
+Por lo que en resumen el **Controlador** es un Servlet que controla de acuerdo a ciertas acciones que Vista será devuelta, la **Vista** es todo el conjuto de páginas JSPs y el **Modelo** son clases Java y JavaBeans que interactuan con la BD.
+
+El modelo MVC es recomendable por ser robusto, segura y facíl de mantener.
+
+### Ejemplo 04-JSPServlet
+
+Vamos a crear un proyecto y lo llamaremos 04-JSPServlet.
+
+
+
+
+
