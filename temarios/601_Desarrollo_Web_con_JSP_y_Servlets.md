@@ -24,7 +24,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Diferencia en la ejecución de una página HTML y una JSP 04:37
    * El Modelo 1 VS el Modelo Vista Controlador (MVC) 07:52
 
-#### 2. Creación de un Diseño MVC 55:43
+#### 2. [Creación de un Diseño MVC](601_Desarrollo_Web_con_JSP_y_Servlets/02_Creacion_de_un_Diseno_MVC.md) 55:43
 
    * El archivo WEB.xml 06:35
    * Añadiendo más vistas al controlador 06:57
