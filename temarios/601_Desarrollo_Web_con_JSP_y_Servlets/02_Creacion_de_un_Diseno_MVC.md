@@ -57,7 +57,7 @@ Cuando ejecutamos un proyecto se carga un URL por ejemplo:
 
 ### `http://localhost:8080/04-JSPServlet/`
 
-En este caso la raíz de contexto es **`/04-JSPServlet/`** la cual puede servir para identificar alguna sección de la aplicación Web. Ya habíamos mencionado que esta ra´z de contexto la podemos eliminar, vamos a hacerlo:
+En este caso la ***raíz de contexto*** es **`/04-JSPServlet/`** la cual puede servir para identificar alguna sección de la aplicación Web. Ya habíamos mencionado que esta ra´z de contexto la podemos eliminar, vamos a hacerlo:
 
 ![2-web-module-1](images/2-web-module-1.png)
 
