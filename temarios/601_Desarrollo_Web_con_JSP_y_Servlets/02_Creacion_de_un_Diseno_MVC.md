@@ -71,7 +71,6 @@ Al ejecutar el proyecto nuestra URL ya no presenta la raíz de contexto.
 
 ![2-ejecucion-1](images/2-ejecucion-1.png)
 
-
 Volviendo a nuestro `web.xml` observemos nuestro tag `<servlet-mapping>` actual:
 
 ```xml
@@ -182,6 +181,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 ```
 *Servlet.java*
 
+Con `String accion = request.getParameter("accion");` recuperamos el parámetro `accion` que se envie al Servlet, y de acuerdo al valor recuperado redirecciona a una u otra Vista. 
+
+
 ```java
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -204,6 +206,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 ```
 *index.jsp*
 
+Con `href="?accion=login"` envíamos el parámetro `accion` con valor `login`.
+
 ```java
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -225,6 +229,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 </html>
 ```
 *login.jsp*
+
+Con `href="?accion=inicio"` envíamos el parámetro `accion` con valor `inicio`.
 
 Al Ejecutar nuestra aplicación tenemos el siguiente flujo, observe los diferentes URLs:
 
