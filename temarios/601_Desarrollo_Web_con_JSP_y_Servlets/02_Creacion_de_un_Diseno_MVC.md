@@ -151,7 +151,7 @@ El descriptor `web.xml` también nos va a permitir acceso a JNDI que nos permite
 
 ## Añadiendo más vistas al controlador 06:57
 
-en esta lección vamos a añadir un segundo JSP llamado `login.jsp`, actualmente tenemos el JSP `index.jsp` dentro de la carpeta `WebContent`.
+En esta lección vamos a añadir un segundo JSP llamado `login.jsp`, actualmente tenemos el JSP `index.jsp` dentro de la carpeta `WebContent`.
 
 ![2-webcontent](images/2-webcontent.png)
 
@@ -166,19 +166,19 @@ Por lo que el código de nuestros archivos es el siguiente:
 ```java
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String accion = request.getParameter("accion");
+   String accion = request.getParameter("accion");
 		
-		if (accion != null) {
-			if(accion.equals("inicio")) {
-				getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
-			} else  if(accion.equals("login")) {
-				getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
-			}
-			
-		}else {
-			getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
-		}
-	}
+   if (accion != null) {
+      if(accion.equals("inicio")) {
+         getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+      } else  if(accion.equals("login")) {
+         getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+      }
+		
+   }else {
+      getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+   }
+}
 ```
 *Servlet.java*
 
@@ -192,11 +192,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 <title>Ménu</title>
 </head>
 <body>
-	<h1 align="center">Ménu</h1>
-	
-	<ol>
-		<li><a href="?accion=login">Iniciar Sesión</a></li>
-	</ol>
+   <h1 align="center">Ménu</h1>
+ 	
+   <ol>
+      <li><a href="?accion=login">Iniciar Sesión</a></li>
+   </ol>
 </body>
 </html>
 ```
@@ -212,11 +212,12 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 <title>Iniciar Sessión</title>
 </head>
 <body>
-	<h1 align="center">Iniciar Sessión</h1>
+   <h1 align="center">Iniciar Sessión</h1>
 	
-	<p>
-		<a href="?accion=inicio">&#60;&#60; Regresar</a>
-	</p>
+   <p>
+      <a href="?accion=inicio">&#60;&#60; Regresar</a>
+   </p>
+   
 </body>
 </html>
 ```
