@@ -72,7 +72,7 @@ Al ejecutar el proyecto nuestra URL ya no presenta la raíz de contexto.
 ![2-ejecucion-1](images/2-ejecucion-1.png)
 
 
-Volviendo a nuestro `web.xml` vamos a poner un mapeo para nuestro Servlet en el tag `<servlet-mapping>`:
+Volviendo a nuestro `web.xml` observemos nuestro tag `<servlet-mapping>` actual:
 
 ```xml
 <servlet-mapping>
@@ -81,6 +81,44 @@ Volviendo a nuestro `web.xml` vamos a poner un mapeo para nuestro Servlet en el 
 </servlet-mapping>
 ```
 
+Podemos ver que el `<url-pattern>` esta mapeado con `/Servlet` por lo que si ejecutamos el URL `http://localhost:8080/Servlet` también se ejecutara nuestro proyecto:
+
+![2-ejecucion-2](images/2-ejecucion-2.png)
+
+Pero si usamos otro texto ya no encontrara nuestro Servlet y nos marcara lo siguiente:
+
+`http://localhost:8080/OtraCosa`
+
+![2-ejecucion-3](images/2-ejecucion-3.png)
+
+En el mapeo que realicemos podemos poner un texto personalizado, si el Servlet lo usamos para Administrar nuestra web podríamos poner el siguiente mapeo:
+
+```xml
+<servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/admin/*</url-pattern>
+</servlet-mapping>
+```
+
+Tenemos `/admin/*` vemos que este mapeo a añadido `/*` lo cual permite insertar cualquier cosa despues de `/admin` esto por ejemplo nos permitira enviar parámetros. 
+
+Los siguientes enlaces nos cargarán nuestro proyecto.
+
+`http://localhost:8080`
+
+![2-ejecucion-3-2](images/2-ejecucion-3-2.png)
+
+`http://localhost:8080/admin`
+
+![2-ejecucion-4](images/2-ejecucion-4.png)
+
+`http://localhost:8080/admin?accion=inicio`
+
+![2-ejecucion-5](images/2-ejecucion-5.png)
+
+`http://localhost:8080/admin/contabilida`
+
+![2-ejecucion-6](images/2-ejecucion-6.png)
 
 
 El Servlet puede enmascarar esta ruta para que sea sustituida por otro texto que deseemos 
