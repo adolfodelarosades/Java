@@ -12,7 +12,7 @@
 
 Cuando creamos el proyecto de la lección anterior se creo el archivo **web.xml** con el siguiente contenido.
 
-```xml
+```html
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>04-JSPServlet</display-name>
@@ -73,7 +73,7 @@ Al ejecutar el proyecto nuestra URL ya no presenta la raíz de contexto.
 
 Volviendo a nuestro `web.xml` observemos nuestro tag `<servlet-mapping>` actual:
 
-```xml
+```html
 <servlet-mapping>
     <servlet-name>Servlet</servlet-name>
     <url-pattern>/Servlet</url-pattern>
@@ -92,7 +92,7 @@ Pero si usamos otro texto ya no encontrara nuestro Servlet y nos marcara lo sigu
 
 En el mapeo que realicemos podemos poner un texto personalizado, si el Servlet lo usamos para Administrar nuestra web podríamos poner el siguiente mapeo:
 
-```xml
+```html
 <servlet-mapping>
     <servlet-name>Servlet</servlet-name>
     <url-pattern>/admin/*</url-pattern>
@@ -125,7 +125,7 @@ Pero si usamos `http://localhost:8080/admin2` tendremos problemas:
 
 Si no quisiera tener ningún tipo de mapeo y me acepte cualquier cosa podemos poner simplemente:
 
-```xml
+```html
 <servlet-mapping>
     <servlet-name>Servlet</servlet-name>
     <url-pattern>//*</url-pattern>
@@ -179,6 +179,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
    }
 }
 ```
+
 *Servlet.java*
 
 Con `String accion = request.getParameter("accion");` recuperamos el parámetro `accion` que se envie al Servlet, y de acuerdo al valor recuperado redirecciona a una u otra Vista. 
@@ -204,6 +205,7 @@ Con `String accion = request.getParameter("accion");` recuperamos el parámetro 
 </body>
 </html>
 ```
+
 *index.jsp*
 
 Con `href="?accion=login"` envíamos el parámetro `accion` con valor `login`.
@@ -228,6 +230,7 @@ Con `href="?accion=login"` envíamos el parámetro `accion` con valor `login`.
 </body>
 </html>
 ```
+
 *login.jsp*
 
 Con `href="?accion=inicio"` envíamos el parámetro `accion` con valor `inicio`.
@@ -239,9 +242,11 @@ Al Ejecutar nuestra aplicación tenemos el siguiente flujo, observe los diferent
 ![2-menu](images/2-menu.png)
 
 `http://localhost:8080/?accion=login`
+
 ![2-login](images/2-login.png)
 
 `http://localhost:8080/?accion=inicio`
+
 ![2-menu-2](images/2-menu-2.png)
 
 ## Control de parámetros HTTP GET con Scriplets 09:24
@@ -473,9 +478,9 @@ Esta vista esta totalmente en blanco por que realmente no se invoco ningun JSP, 
 
 En esta lección vamos a ver como pasar parámetros desde el Servlet a los JSPs, de tres formas distintas:
 
-* Paso de parámetros por el ***Ambito del Request***, solo sirve para una petición 
-* Paso de parámetros por el ***Ambito de la Session***, es decir mientras la ventana del navegador este abierta o hasta destruir la sesión 
-* Paso de parámetros por el ***Ambito del contexto o la aplicación***, hasta que el servlet no ejecute el método `Detroy`
+* Paso de parámetros por el ***Ambito del Request***, los parámetros solo estan disponibles para una petición 
+* Paso de parámetros por el ***Ambito de la Session***, los parámetros estarán disponibles mientras la ventana del navegador este abierta o hasta destruir la sesión 
+* Paso de parámetros por el ***Ambito del contexto o la aplicación***, los parámetros estarán disponibles hasta que el Servlet no ejecute el método `destroyer`
 
 Vemos los códigos:
 
@@ -520,7 +525,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 *Servlet.java*
 
-Los cambios los hemos hecho en el método `doPost()`, recuperamos los parámetros y los ponemos en los ambitos del request, sesión y contexto con el método `setAttribute` posteriormente redirigimos a la vista `postLogin.jsp`
+Hemos modificado el método `doPost()`, recuperamos los parámetros, los ponemos en los ambitos del request, sesión y contexto con el método `setAttribute` posteriormente redirigimos a la vista `postLogin.jsp`.
 
 
 ```html
@@ -577,7 +582,7 @@ Los cambios los hemos hecho en el método `doPost()`, recuperamos los parámetro
 
 *postLogin.jsp*
 
-En esta vista recuperamos los parametros para cada ámbito con el método `getAttribute()` ya no usamos `getParameter`
+En esta vista recuperamos los parametros para cada ámbito con el método `getAttribute()`. Recordemos que cuando pasabamos los paarámetros a través del método `doGt()` para recuperarlos en la vista usamos `getParameter` ya que los parámetros se pasaban en la URL. Al usar `doPost` no podemos usar `getParameter` por que los parámetros no viajan en la URL, lo que hacemos es ponerlos en el ambito ya sea del Request, Sesión o Contexto y desde la vista podemos recuperarlos con el método `getAttribute()`.
 
 Al ejecutar nuestra aplicación tenemos:
 
@@ -593,12 +598,14 @@ Al ejecutar nuestra aplicación tenemos:
 
 ![2-ejecucion-2-6](images/2-ejecucion-2-6.png)
 
-Si volvemos a cargar directamete el URL `http://localhost:8080/?accion=iniciarSesion` ¿Por qué
+Si refrescamos el navegador o volvemos a cargar directamete el URL `http://localhost:8080/?accion=iniciarSesion` ¿Por qué
  nos muestra la vista en blanco?
 
 ![2-ejecucion-2-7](images/2-ejecucion-2-7.png)
 
-#### Nota 
+Esto sucede por que estamos haciendo una petición GET y en nuestro método `doGet` no tenemos ninguna redirección a ninguna vista.  
+
+#### Nota 
 
 Una cosa importante al modificar nuestro código en la parte de los **src** será necesario reiniciar el servidor para que tome los cambios, cuando las modificaciones las hagamos en la sección **WebContent** con recargar el navegador será
 ![2-ejecucion-2-7](images/2-ejecucion-2-7.png) suficiente.
