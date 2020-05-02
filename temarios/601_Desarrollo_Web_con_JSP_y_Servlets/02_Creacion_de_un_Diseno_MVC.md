@@ -791,7 +791,133 @@ public class Servlet extends HttpServlet {
 
 *Servlet.java*
 
+La ventaja de usar un parámetro inicial en lugar de un valor fijo es que si decidieramos cambiar el nombre de la carpeta donde se almacenan los JSPs solo tendríamos que hacer un cambio y se haría extensivo a toda la aplicación.
 
 Si ejecutamos la aplicación todo sigue funcionando exactamente igual.
 
 ## Mejorando el Controlador con un nuevo método de redirección 06:19
+
+En esta lección vamos a crear un método para la redirección de nuestro Servlet para no estrar una instrucción tan larga cada que necesitamos hacer una redirección de una vista como por ejemplo:
+
+`getServletContext().getRequestDispatcher(rutaJsp +  "index.jsp").forward(request, response);`
+
+El método que vamos a crear regresará un objeto RequestDispatcher al cual le aplicaremos el método `forward(request, response)`.
+
+```java
+public RequestDispatcher setRespuestaControlador(String vista) {
+   String url = rutaJsp + vista + ".jsp";
+   return getServletContext().getRequestDispatcher(url);
+}
+```
+
+Ahora remplacemos el uso de nuestro método `setRespuestaControlador` por esas extensas redirecciones.
+
+
+Vemos el código de nuestro Servlet:
+
+```java
+package com.novellius;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class Servlet
+ */
+public class Servlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+	
+   private String rutaJsp;
+       
+   /**
+   * @see HttpServlet#HttpServlet()
+   */
+   public Servlet() {
+      super();
+      // TODO Auto-generated constructor stub
+   }
+
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      // TODO Auto-generated method stub
+      super.init(config);
+		
+      //System.out.println(config.getInitParameter("rutaJsp"));
+      rutaJsp = config.getInitParameter("rutaJsp");
+  }
+
+   /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+      String accion = request.getParameter("accion");
+				
+      if (accion != null) {
+         if(accion.equals("inicio")) {
+            setRespuestaControlador("index").forward(request, response);
+	 } else  if(accion.equals("login")) {
+	    setRespuestaControlador(accion).forward(request, response);
+	 }
+      }else {
+         setRespuestaControlador("index").forward(request, response);
+      }
+   }
+
+   /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+      String accion = request.getParameter("accion");
+			
+      if (accion != null) {
+			
+         if(accion.equals("iniciarSesion")) {
+				
+	    //System.out.println("Usuario: " + request.getParameter("usuario"));
+	    //System.out.println("Contraseña: " + request.getParameter("contrasena"));
+				
+	    String usuario = request.getParameter("usuario");
+	    String contrasena = request.getParameter("contrasena");
+				
+	    // Ámbito Request
+	    request.setAttribute("usuario", usuario);
+	    request.setAttribute("contrasena", contrasena);
+				
+	    // Ámbito Sesión
+	    HttpSession sesion = request.getSession();
+	    sesion.setAttribute("usuario", usuario);
+	    sesion.setAttribute("contrasena", contrasena);
+				
+	    // Ámbito Contexto
+	    ServletContext contexto = getServletContext();
+	    contexto.setAttribute("usuario", usuario);
+	    contexto.setAttribute("contrasena", contrasena);
+			
+	    setRespuestaControlador("postLogin").forward(request, response);
+	 }
+	   
+      }else {
+	 setRespuestaControlador("index").forward(request, response);
+      }		
+   }
+	
+   public RequestDispatcher setRespuestaControlador(String vista) {
+      String url = rutaJsp + vista + ".jsp";
+      return getServletContext().getRequestDispatcher(url);
+   }
+}
+```
+
+*Servlet.java*
+
+Si ejecutamos la aplicación todo sigue funcionando exactamente igual.
