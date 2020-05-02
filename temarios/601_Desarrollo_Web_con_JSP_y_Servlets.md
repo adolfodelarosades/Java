@@ -34,14 +34,14 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Uso de parámetros iniciales en el Servlet 07:10
    * Mejorando el Controlador con un nuevo método de redirección 06:19
 
-#### 3. Bases de Datos 26:30
+#### 3. [Bases de Datos](601_Desarrollo_Web_con_JSP_y_Servlets/03_Bases_de_Datos.md) 26:30
 
    * Introducción 02:45
    * Diseño de un diagrama E-R sencillo 09:35
    * Generación del script SQL 06:22
    * Configuración de la BD mediante JNDI 07:48
 
-#### 4. Implementación del Modelo 01:01:06
+#### 4. [Implementación del Modelo](601_Desarrollo_Web_con_JSP_y_Servlets/04_Implementacion_del_Modelo.md) 01:01:06
 
    * Configuración de Log4J 06:14
    * Preparación de la Vista 04:44
@@ -52,7 +52,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Como cerrar la sesión de un usuario 03:50
    * Uso de cookies 11:17
 
-#### 5. JSTL 01:11:31
+#### 5. [JSTL](601_Desarrollo_Web_con_JSP_y_Servlets/05_JSTL.md) 01:11:31
 
    * Introducción a JSTL 07:25
    * Mi primer mensaje con c:out 04:35
@@ -65,7 +65,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Inserción de un registro en la B.D. con JSTL 07:41
    * Funciones en JSTL 05:04
 
-#### 6. Envío de correos electrónicos 40:42
+#### 6. [Envío de correos electrónicos](601_Desarrollo_Web_con_JSP_y_Servlets/06_Envio_de_correos_electronicos.md) 40:42
 
    * Configuración previa 04:18
    * Creación de una clase manejadora de correos 17:13
