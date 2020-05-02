@@ -795,6 +795,18 @@ La ventaja de usar un parámetro inicial en lugar de un valor fijo es que si dec
 
 Si ejecutamos la aplicación todo sigue funcionando exactamente igual.
 
+`http://localhost:8080/`
+
+![2-ejecucion-2-1](images/2-ejecucion-2-1.png)
+
+`http://localhost:8080/?accion=login`
+
+![2-ejecucion-2-2](images/2-ejecucion-2-2.png)
+
+`http://localhost:8080/?accion=iniciarSesion`
+
+![2-ejecucion-2-6](images/2-ejecucion-2-6.png)
+
 ## Mejorando el Controlador con un nuevo método de redirección 06:19
 
 En esta lección vamos a crear un método para la redirección de nuestro Servlet para no estrar una instrucción tan larga cada que necesitamos hacer una redirección de una vista como por ejemplo:
@@ -921,3 +933,15 @@ public class Servlet extends HttpServlet {
 *Servlet.java*
 
 Si ejecutamos la aplicación todo sigue funcionando exactamente igual.
+
+`http://localhost:8080/`
+
+![2-ejecucion-2-1](images/2-ejecucion-2-1.png)
+
+`http://localhost:8080/?accion=login`
+
+![2-ejecucion-2-2](images/2-ejecucion-2-2.png)
+
+`http://localhost:8080/?accion=iniciarSesion`
+
+![2-ejecucion-2-6](images/2-ejecucion-2-6.png)
