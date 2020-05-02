@@ -158,7 +158,125 @@ Observamos que al crear la relación nos ha insertado el campo `pregunta_idpregu
 
 ![3-modelo-10](images/3-modelo-10.png)
 
-## Generación del script SQL 06:22
+### Generación del script SQL 06:22
+
+En esta lección crearemos el Script para generar la BD a partir del modelo creado, para lo cual nos vamos al menú *Database > Forward Engineer*
+
+![3-script-1](images/3-script-1.png)
+
+Al seleccionarla nos aparece:
+
+![3-script-2](images/3-script-2.png)
+
+Esta opción lo que hara es **crear el Script SQL y ejecutarlo sobre una conexión creada anteriormente** 
+
+![3-script-3](images/3-script-3.png)
+
+![3-script-4](images/3-script-4.png)
+
+![3-script-5](images/3-script-5.png)
+
+Finalmente nos crea el Script SQL el cual podemos salvar en un archivo o copiar.
+
+![3-script-6](images/3-script-6.png)
+
+Este es el Script generado:
+
+```sql
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema administradores
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema administradores
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `administradores` DEFAULT CHARACTER SET utf8 ;
+USE `administradores` ;
+
+-- -----------------------------------------------------
+-- Table `administradores`.`pregunta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `administradores`.`pregunta` (
+  `idpregunta` INT NOT NULL AUTO_INCREMENT,
+  `pregunta` VARCHAR(45) NULL,
+  PRIMARY KEY (`idpregunta`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `administradores`.`administrador`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `administradores`.`administrador` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NULL,
+  `contrasena` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) NULL,
+  `estado` VARCHAR(45) NULL,
+  `idpregunta` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_administrador_pregunta_idx` (`idpregunta` ASC) VISIBLE,
+  CONSTRAINT `fk_administrador_pregunta`
+    FOREIGN KEY (`idpregunta`)
+    REFERENCES `administradores`.`pregunta` (`idpregunta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+```
+
+Al presionar continue me resume las tareas que ha realizado
+
+![3-script-7](images/3-script-7.png)
+
+* Conectarse a la BD
+* Ejecuta el Script SQL
+* Lee cambios hechos en en el servidor
+* Salva el estado de sincronización
+
+como podemos ver todo se ha ejecutado correctamente en caso de algún posible error tenemos el botón `Show log` para ver el log y solucionar el problema.
+
+![3-script-8](images/3-script-8.png)
+
+Cerramos el popup.
+
+Una vez hecho todo esto podemos regresar a la sección de conexiones y entrar a nuestra conexión **administradores**, donde podremos ver que las tablas han sido creadas en nuetra BD.
+
+![3-table-1](images/3-table-1.png)
+
+### Insertar datos en la tabla preguntas
+
+Para insertar datos en una tabla lo haremos a través de sentencias `insert` de `SQL`, vamos a insertar lo siguiente:
+
+```sql
+insert into pregunta(idpregunta, pregunta) values(1, 'Nombre de la primer mascota');
+insert into pregunta(idpregunta, pregunta) values(2, 'Apellido de soltera de la madre');
+```
+
+Una vez que insertemos las instrucciones las podemos ejecutar.
+
+![3-sql-1](images/3-sql-1.png)
+
+También podríamos guardar las el script pulsando el botón `Save script to file`
+
+![3-sql-2](images/3-sql-2.png)
+
+Para ver los datos insertados en la tabla podemos dar el `select` automatico que tenemos en el contexto de la tabla.
+
+![3-sql-3](images/3-sql-4.png)
+
+![3-sql-3](images/3-sql-4.png)
+
+
 
 ## Configuración de la BD mediante JNDI 07:48
 
