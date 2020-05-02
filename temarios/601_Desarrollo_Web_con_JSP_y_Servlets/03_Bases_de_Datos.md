@@ -35,9 +35,63 @@ Vamos entrar a la conexión por defecto `Local instance 3306`, nos pedirá la co
 
 Esta conexión por default esta alojada en `127.0.0.1:3306` tiene un usuario `root` con contraseña `password` y esta asociada a una BD test. En la realidad no es aconsejable usar un usuario `root` y deberiamos tener una contraseña robusta, ademas de tener una ruta y puerto diferente por cuestiones de seguridad.
 
-Una vez que ingresamos los datos nos muestra lo siguiente:
+Una vez que ingresamos los datos de acceso muestra lo siguiente:
 
 ![3-workbeanch-2](images/3-workbeanch-2.png)
+
+### Crear una Base de Datos
+
+Para crear una nueva base de datos pulsamos sobre el icono de *Create New Schema...*
+
+![3-new-schema](images/3-new-schema.png)
+
+Nos pide un nombre para el nuevo esquema, introducimos `administradores` y presionamos el botón `Apply`
+
+![3-administradores](images/3-administradores.png)
+
+Me genera el Script para generar el nuevo esquema presionamos el botón `Apply` para aplicarlo.
+
+![3-administradores-2](images/3-administradores-2.png)
+
+Finalmente me indica que todo se a ejecutado correctamente.
+
+![3-administradores-3](images/3-administradores-3.png)
+
+Y en la lista de esquemas ya me aparece el de `administradores`.
+
+![3-administradores-4](images/3-administradores-4.png)
+
+### Crear la conexión con la Base de Datos
+
+Retornamos al inicio en Workbeanch y vamos a presionar el simbolo de **+** en **MySQL Connections.
+
+![3-workbeanch](images/3-workbeanch.png)
+
+Nos muestra la siguiente pantalla.
+
+![3-conexion-1](images/3-conexion-1.png)
+
+Aquí vamos a meter los datos para nuestra nueva conexión, solo metemos `administradores` en el nombre del esquema y esquema por default. 
+
+![3-conexion-2](images/3-conexion-2.png)
+
+Vamos a presionar el botón `Test Connection` para probar la conexión, nos pide los accesos.
+
+![3-conexion-3](images/3-conexion-3.png)
+
+Y nos indica que la conexión a ido perfecta.
+
+![3-conexion-4](images/3-conexion-4.png)
+
+Por lo que presionamos el boton `OK` y nos aparecerá una conexión directa a `administradores`.
+
+![3-conexion-5](images/3-conexion-5.png)
+
+Si la presionamos entraremos directamente a la base de datos `administradores` activada para poder usarla.
+
+![3-conexion-6](images/3-conexion-6.png)
+
+
 
 
 
