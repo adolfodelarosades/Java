@@ -272,11 +272,25 @@ También podríamos guardar las el script pulsando el botón `Save script to fil
 
 Para ver los datos insertados en la tabla podemos dar el `select` automatico que tenemos en el contexto de la tabla.
 
-![3-sql-3](images/3-sql-4.png)
+![3-sql-3](images/3-sql-3.png)
 
-![3-sql-3](images/3-sql-4.png)
+![3-sql-4](images/3-sql-4.png)
 
+También podemos insertar directamente registros en la tabla 
 
+![3-sql-5](images/3-sql-5.png)
+
+Al presionar el botón `Apply` nos presenta el Script necesario para insertar el registro, presionamos nuevamente el botón `Apply`.
+
+![3-sql-6](images/3-sql-6.png)
+
+Nos indica que todo ha ido bien.
+
+![3-sql-7](images/3-sql-7.png)
+
+Y ya podemos ver la tabla con los tres registros insertados.
+
+![3-sql-8](images/3-sql-8.png)
 
 ## Configuración de la BD mediante JNDI 07:48
 
