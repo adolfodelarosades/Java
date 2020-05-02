@@ -316,18 +316,18 @@ En el **punto dos** nos indica que debemos abrir el archivo **`context.xml`** qu
 
 ```html
 <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
-               maxActive="100" maxIdle="30" maxWait="10000"
-               username="javauser" password="javadude" driverClassName="com.mysql.jdbc.Driver"
-               url="jdbc:mysql://localhost:3306/javatest"/>
+          maxActive="100" maxIdle="30" maxWait="10000"
+          username="javauser" password="javadude" driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://localhost:3306/javatest"/>
 ```
 
 Este código será necesario personalizarlo para indicar con que `name` vamos a identificar nuestra conexión el `username` y   `password` para acceder, así como la localización y nombre de la BD. Vamos a cambiar el código para que quede con la información necesaria:
 
 ```html
 <Resource name="jdbc/novellius" auth="Container" type="javax.sql.DataSource"
-               maxActive="100" maxIdle="30" maxWait="10000"
-               username="root" password="password" driverClassName="com.mysql.jdbc.Driver"
-               url="jdbc:mysql://localhost:3306/administradores"/>
+          maxActive="100" maxIdle="30" maxWait="10000"
+          username="root" password="password" driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://localhost:3306/administradores"/>
 ```
 
 Esta parte en teoría se haría en la parte del Servidor por lo que los desarrolladores desconocerían estos detalles. Pero como estamos trabajando localmente tenemos el servidor y el proyecto en el mismo sitio por lo que nosotros tenemos que cambiar el archivo `context.xml`.
