@@ -607,9 +607,191 @@ Esto sucede por que estamos haciendo una petición GET y en nuestro método `doG
 
 #### Nota 
 
-Una cosa importante al modificar nuestro código en la parte de los **src** será necesario reiniciar el servidor para que tome los cambios, cuando las modificaciones las hagamos en la sección **WebContent** con recargar el navegador será
-![2-ejecucion-2-7](images/2-ejecucion-2-7.png) suficiente.
+Una cosa importante al modificar nuestro código en la parte de los **src** será necesario reiniciar el servidor para que tome los cambios, cuando las modificaciones las hagamos en la sección **WebContent** con recargar el navegador será suficiente.
 
 ## Uso de parámetros iniciales en el Servlet 07:10
+
+En esta lección veremos el uso de parámetros iniciales en el Servlet, los cuales se definen el descriptor `web.xml` y nos van a permitir definir constantes con valores especificos, algunos ejemplos pueden ser nombre de la base de datos, nombre de usuario y password, puerto, etc. valores que generalmente no cambian pero que si fuera necesario solo cambiariamos su valor en nuestro `web.xml` y se reflejara en toda la aplicación.
+
+Nosotros vamos a definir un parámetros iniciales para la ruta donde tenemos almacenados todos los JSPs, esto se hace a través de una clave (`param-name`) y valor (`param-value`) usando el tag `<init-param>` la cual se debe insertar dentro del tag `<servlet>`.
+
+```html
+<init-param>
+   <param-name>rutaJsp</param-name>
+   <param-value>/jsp/</param-value>
+</init-param>
+```
+
+Una vez hecho este cambio en `web.xml`, debemos modificar nuestro `Servlet.java` para que use este parámetro inicial. Dentro del ciclo de vida de un Servlet tenemos el método `init` el cual se ejecuta solo una vez y es allí donde recuperaremos el parámetro inicial, para poder usarlo a través del código del Servlet.
+
+Eclipse nos ayuda a insertar el método `init` para lo cual en nuestro archivo `Servlet.java` nos posicionamos después del constructor y pulsamos un click derecho y seleccionamos *Source > Override/Implement Methods*
+
+![2-source](images/2-source.png)
+
+De las opciones que nos salen seleccionamos *GenericServlet > init(ServletConfig)*:
+
+![2-source-2](images/2-source-2.png)
+
+Esto nos inserta la implementación del método `init(ServletConfig)`:
+
+```java
+@Override
+public void init(ServletConfig config) throws ServletException {
+   // TODO Auto-generated method stub
+   super.init(config);
+}
+```
+
+Para empezar simplemente vamos añadir una instrucción a este método para que imprima nuestro parámetro inicial:
+
+```java
+@Override
+public void init(ServletConfig config) throws ServletException {
+   // TODO Auto-generated method stub
+   super.init(config);
+   System.out.println(config.getInitParameter("rutaJsp"));
+}
+```
+
+El método `getInitParameter("rutaJsp")` del objeto `config` nos permite recuperar el valor del párametro que le pasemos. El método `init(ServletConfig config)` solo se ejecuta la primera vez que se carga la aplicación así que ejecutemosla para ver si imprime el valor del parámetro inicial.
+
+Efectivamente al ejecutar nuestra aplicación en la consola se muestra el valor recuperado:
+
+![2-consola-ruta](images/2-consola-ruta.png)
+
+Pues lo que sigue será asignar ese valor a una variable y usarla en todos los sitios donde hayamos puesto HardCodedo ese valor. 
+
+Vemos los códigos de los dos archivos cambiados:
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>04-JSPServlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Servlet</display-name>
+    <servlet-name>Servlet</servlet-name>
+    <servlet-class>com.novellius.Servlet</servlet-class>
+    <init-param>
+    	<param-name>rutaJsp</param-name>
+    	<param-value>/jsp/</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>//*</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+
+*web.xml*
+
+```java
+package com.novellius;
+
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class Servlet
+ */
+public class Servlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+	
+   private String rutaJsp;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+	// TODO Auto-generated method stub
+	super.init(config);
+		
+	//System.out.println(config.getInitParameter("rutaJsp"));
+	rutaJsp = config.getInitParameter("rutaJsp");
+   }
+
+   /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+      String accion = request.getParameter("accion");
+		
+      if (accion != null) {
+         if(accion.equals("inicio")) {
+	    getServletContext().getRequestDispatcher(rutaJsp +  "index.jsp").forward(request, response);
+         } else  if(accion.equals("login")) {
+            getServletContext().getRequestDispatcher(rutaJsp +  "login.jsp").forward(request, response);
+         }
+      }else {
+         getServletContext().getRequestDispatcher(rutaJsp +  "index.jsp").forward(request, response);
+      }
+   }
+
+   /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+      String accion = request.getParameter("accion");
+			
+      if (accion != null) {
+         if(accion.equals("iniciarSesion")) {	
+	    //System.out.println("Usuario: " + request.getParameter("usuario"));
+	    //System.out.println("Contraseña: " + request.getParameter("contrasena"));
+				
+	    String usuario = request.getParameter("usuario");
+	    String contrasena = request.getParameter("contrasena");
+				
+	    // Ámbito Request
+	    request.setAttribute("usuario", usuario);
+	    request.setAttribute("contrasena", contrasena);
+				
+	    // Ámbito Sesión
+	    HttpSession sesion = request.getSession();
+	    sesion.setAttribute("usuario", usuario);
+	    sesion.setAttribute("contrasena", contrasena);
+				
+	    // Ámbito Contexto
+	    ServletContext contexto = getServletContext();
+	    contexto.setAttribute("usuario", usuario);
+	    contexto.setAttribute("contrasena", contrasena);
+				
+	    getServletContext().getRequestDispatcher(rutaJsp +  "postLogin.jsp").forward(request, response);
+	}
+			
+      }else {
+         getServletContext().getRequestDispatcher(rutaJsp +  "index.jsp").forward(request, response);
+      }	
+   }
+}
+```
+
+*Servlet.java*
+
+
+Si ejecutamos la aplicación todo sigue funcionando exactamente igual.
 
 ## Mejorando el Controlador con un nuevo método de redirección 06:19
