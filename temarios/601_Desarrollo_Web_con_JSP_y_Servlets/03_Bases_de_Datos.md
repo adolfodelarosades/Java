@@ -294,3 +294,143 @@ Y ya podemos ver la tabla con los tres registros insertados.
 
 ## Configuración de la BD mediante JNDI 07:48
 
+En esta lección vamos a configurar la BD mediante la interfaz JNDI, es una forma sencilla y útil de conectarnos a la BD ya que nos permite dar acceso a los desarrolladores sin que estos conozcan los detalles de los datos de conexión necesarios como usuario y password para acceder a la BD.
+
+### ¿Qué es JNDI?
+
+[¿Qué es JNDI?](https://docs.oracle.com/javase/tutorial/jndi/index.html)
+
+Java Naming and Directory Interface™ (JNDI) es una interfaz de programación de aplicaciones (API) que proporciona funciones de nomenclatura y directorio a aplicaciones escritas usando el lenguaje de programación Java ™. Se define para ser independiente de cualquier implementación específica del servicio de directorio. Por lo tanto, se puede acceder a una variedad de directorios nuevos, emergentes y ya implementados de una manera común.
+
+### Como implementar JNDI en Tomcat 6
+
+En la documentación oficial de Tomcat 6 tenemos una guía para implementar JNDI con diferentes BD.
+
+[JNDI en Tomcat 6](https://tomcat.apache.org/tomcat-6.0-doc/jndi-datasource-examples-howto.html)
+
+En esta guía estan todos los pasos necesarios para implementar JNDI, en esta lección nos fijaremos en los siguientes dos puntos:
+
+![3-jndi-1](images/3-jndi-1.png)
+
+En el **punto dos** nos indica que debemos abrir el archivo **`context.xml`** que se encuentra en el servidor y debemos insertar el código:
+
+```html
+<Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="javauser" password="javadude" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/javatest"/>
+```
+
+Este código será necesario personalizarlo para indicar con que `name` vamos a identificar nuestra conexión el `username` y   `password` para acceder, así como la localización y nombre de la BD. Vamos a cambiar el código para que quede con la información necesaria:
+
+```html
+<Resource name="jdbc/novellius" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="root" password="password" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/administradores"/>
+```
+
+Esta parte en teoría se haría en la parte del Servidor por lo que los desarrolladores desconocerían estos detalles. Pero como estamos trabajando localmente tenemos el servidor y el proyecto en el mismo sitio por lo que nosotros tenemos que cambiar el archivo `context.xml`.
+
+En el **punto tres** nos indica que debemos configurar nuestro descriptor `web.xml` nos pide que insertemos la referencia al recurso es decir el siguiente código:
+
+```html
+<resource-ref>
+   <description>DB Connection</description>
+   <res-ref-name>jdbc/TestDB</res-ref-name>
+   <res-type>javax.sql.DataSource</res-type>
+   <res-auth>Container</res-auth>
+</resource-ref>
+```
+
+Aquí lo único que debemos personalizar es el nombre del recurso y ponerlo en el tag `<res-ref-name>` como desarrolladores es el único dato que recibiriamos y no sabríamos ni `usuario`, `password`, nombre de la BD, ubicación de la BD, etc. Para este caso el código personalizado queda así:
+
+```html
+<resource-ref>
+   <description>DB Connection</description>
+   <res-ref-name>jdbc/novellius</res-ref-name>
+   <res-type>javax.sql.DataSource</res-type>
+   <res-auth>Container</res-auth>
+</resource-ref>
+```
+
+En resumen para hacer la configuración JNDI de la BD hemos modificado dos archivos `context.xml` y `web.xml` veamos el código completo de ambos archivos.
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- The contents of this file will be loaded for each web application --><Context>
+
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+	
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+
+    <!-- Uncomment this to enable Comet connection tacking (provides events
+         on session expiration as well as webapp lifecycle) -->
+    <!--
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+    -->
+    
+    <Resource name="jdbc/novellius" auth="Container" type="javax.sql.DataSource"
+              maxActive="100" maxIdle="30" maxWait="10000"
+              username="root" password="password" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/administradores"/>
+</Context>
+```
+
+*context.xml*
+
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>04-JSPServlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Servlet</display-name>
+    <servlet-name>Servlet</servlet-name>
+    <servlet-class>com.novellius.Servlet</servlet-class>
+    <init-param>
+    	<param-name>rutaJsp</param-name>
+    	<param-value>/jsp/</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>//*</url-pattern>
+  </servlet-mapping>
+  <resource-ref>
+   <description>DB Connection</description>
+   <res-ref-name>jdbc/novellius</res-ref-name>
+   <res-type>javax.sql.DataSource</res-type>
+   <res-auth>Container</res-auth>
+</resource-ref>
+```
+
+*web.xml*
