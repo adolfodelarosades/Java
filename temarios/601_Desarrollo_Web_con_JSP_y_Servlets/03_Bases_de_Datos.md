@@ -92,6 +92,62 @@ Si la presionamos entraremos directamente a la base de datos `administradores` a
 ![3-conexion-6](images/3-conexion-6.png)
 
 
+### Crear el Diagrama Entidad-Relación de la Base de Datos
+
+Podríamos crear la BD con Scrips SQL directamente pero lo haremos de una forma distinta creando un diagrama E-R. Vamos al inicio de Workbeanch y en la parte lateral izquierda el segundo icono nos permitira acceder a la seccion de los modelos.
+
+![3-modelo-1](images/3-modelo-1.png)
+
+Vamos a presionar el icono de los Modelos.
+
+![3-modelo-2](images/3-modelo-2.png)
+
+Tenemos un modelo llamado `sakilla_full` el cual a sido creado al instalar MySQL. Nosotros presionamos en el signo de **+** para crear nuestro modelo.
+
+![3-modelo-3](images/3-modelo-3.png)
+
+Vamos a dar doble click en el icono `mydb` para cambiar el nombre y poner `administradores`.
+
+![3-modelo-4](images/3-modelo-4.png)
+
+Ahora podemos dar doble click en `Add Diagram` y nos aparecera la interfaz para crear mi diagrama E-R. 
+
+![3-modelo-5](images/3-modelo-5.png)
+
+Podemos ver la BD administradores en los paneles de la izquierda donde se listan tablas, vistas y procedimientos almacenados. por ahora todo esta vacío. 
+
+En la parte central tenemos varios botones que nos permitiran crear tablas, vistas, procedimientos almacenados, relaciones entre las tablas, podemos insertar imagenes, textos, etc. Usaremos algunos de estos botones para crear nuestro diagrama, vamos a seguir los siguientes pasos:
+
+##### Crear tabla administrador
+
+* Pulsar en el botón `New Table` y pulsamos en la rejilla, aparecerá una tabla.
+* Editemos la tabla dandole doble click
+* Podremos el nombre de `administrador` a la tabla.
+* Vamos a insertar los campos:
+   * `id` Con los atributos PK, NN y AI
+   * `email`
+   * `contrasena`
+   * `nombre`
+
+![3-modelo-6](images/3-modelo-6.png)
+
+* Salvamos nuestro diagrama pulsando el botón `Savel Model`, nospide el nombre y sitio en el que lo queremos guardar.
+
+![3-modelo-7](images/3-modelo-7.png)
+
+##### Crear tabla pregunta
+
+* Pulsar en el botón `New Table` y pulsamos en la rejilla, aparecerá una tabla.
+* Editemos la tabla dandole doble click
+* Podremos el nombre de `pregunta` a la tabla.
+* Vamos a insertar los campos:
+   * `id` Con los atributos PK, NN y AI
+   * `pregunta` tipo `TEXT`
+
+
+   
+
+
 
 
 
