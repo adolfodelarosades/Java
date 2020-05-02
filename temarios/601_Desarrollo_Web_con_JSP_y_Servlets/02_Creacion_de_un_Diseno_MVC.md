@@ -471,6 +471,138 @@ Esta vista esta totalmente en blanco por que realmente no se invoco ningun JSP, 
 
 ## Paso de parámetros desde Servlet hacia una vista JSP 13:49
 
+En esta lección vamos a ver como pasar parámetros desde el Servlet a los JSPs, de tres formas distintas:
+
+* Paso de parámetros por el ***Ambito del Request***, solo sirve para una petición 
+* Paso de parámetros por el ***Ambito de la Session***, es decir mientras la ventana del navegador este abierta o hasta destruir la sesión 
+* Paso de parámetros por el ***Ambito del contexto o la aplicación***, hasta que el servlet no ejecute el método `Detroy`
+
+Vemos los códigos:
+
+```java
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+   String accion = request.getParameter("accion");
+				
+   if (accion != null) {
+			
+      if(accion.equals("iniciarSesion")) {
+				
+         //System.out.println("Usuario: " + request.getParameter("usuario"));
+	 //System.out.println("Contraseña: " + request.getParameter("contrasena"));
+				
+	 String usuario = request.getParameter("usuario");
+	 String contrasena = request.getParameter("contrasena");
+				
+	 // Ámbito Request
+	 request.setAttribute("usuario", usuario);
+	 request.setAttribute("contrasena", contrasena);
+				
+	 // Ámbito Sesión
+	 HttpSession sesion = request.getSession();
+	 sesion.setAttribute("usuario", usuario);
+	 sesion.setAttribute("contrasena", contrasena);
+				
+	 // Ámbito Contexto
+	 ServletContext contexto = getServletContext();
+	 contexto.setAttribute("usuario", usuario);
+	 contexto.setAttribute("contrasena", contrasena);
+				
+	 getServletContext().getRequestDispatcher("/jsp/postLogin.jsp").forward(request, response);
+      }
+			
+   }else {
+      getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+   }
+		
+}
+```
+
+*Servlet.java*
+
+Los cambios los hemos hecho en el método `doPost()`, recuperamos los parámetros y los ponemos en los ambitos del request, sesión y contexto con el método `setAttribute` posteriormente redirigimos a la vista `postLogin.jsp`
+
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PostLogin</title>
+</head>
+<body>
+	<h1>Sesión Iniciada</h1>
+	
+	<p>Los datos ingresados son:</p>
+	
+	<h2>Request</h2>
+	
+	<p>
+	<%
+		out.println("Usuario: " + request.getAttribute("usuario"));
+	%>
+	</p>
+	
+	<!--  Otra forma de imprimir en un Scripler es la siguiente -->
+	<p><%= "Contraseña: " + request.getAttribute("contrasena") %></p>
+	
+	<h2>Sesión</h2>
+	
+	<p>
+	<%
+		out.println("Usuario: " + session.getAttribute("usuario"));
+	%>
+	</p>
+	
+	<!--  Otra forma de imprimir en un Scripler es la siguiente -->
+	<p><%= "Contraseña: " + session.getAttribute("contrasena") %></p>
+	
+	
+	<h2>Contexto</h2>
+	
+	<p>
+	<%
+		out.println("Usuario: " + application.getAttribute("usuario"));
+	%>
+	</p>
+	
+	<!--  Otra forma de imprimir en un Scripler es la siguiente -->
+	<p><%= "Contraseña: " + application.getAttribute("contrasena") %></p>
+
+</body>
+</html>
+```
+
+*postLogin.jsp*
+
+En esta vista recuperamos los parametros para cada ámbito con el método `getAttribute()` ya no usamos `getParameter`
+
+Al ejecutar nuestra aplicación tenemos:
+
+`http://localhost:8080/`
+
+![2-ejecucion-2-1](images/2-ejecucion-2-1.png)
+
+`http://localhost:8080/?accion=login`
+
+![2-ejecucion-2-2](images/2-ejecucion-2-2.png)
+
+`http://localhost:8080/?accion=iniciarSesion`
+
+![2-ejecucion-2-6](images/2-ejecucion-2-6.png)
+
+Si volvemos a cargar directamete el URL `http://localhost:8080/?accion=iniciarSesion` ¿Por qué
+ nos muestra la vista en blanco?
+
+![2-ejecucion-2-7](images/2-ejecucion-2-7.png)
+
+#### Nota 
+
+Una cosa importante al modificar nuestro código en la parte de los **src** será necesario reiniciar el servidor para que tome los cambios, cuando las modificaciones las hagamos en la sección **WebContent** con recargar el navegador será
+![2-ejecucion-2-7](images/2-ejecucion-2-7.png) suficiente.
+
 ## Uso de parámetros iniciales en el Servlet 07:10
 
 ## Mejorando el Controlador con un nuevo método de redirección 06:19
