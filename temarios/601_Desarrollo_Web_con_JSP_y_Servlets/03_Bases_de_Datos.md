@@ -128,6 +128,7 @@ En la parte central tenemos varios botones que nos permitiran crear tablas, vist
    * `email`
    * `contrasena`
    * `nombre`
+   * `estado`
 
 ![3-modelo-6](images/3-modelo-6.png)
 
@@ -141,17 +142,21 @@ En la parte central tenemos varios botones que nos permitiran crear tablas, vist
 * Editemos la tabla dandole doble click
 * Podremos el nombre de `pregunta` a la tabla.
 * Vamos a insertar los campos:
-   * `id` Con los atributos PK, NN y AI
-   * `pregunta` tipo `TEXT`
+   * `idpregunta` Con los atributos PK, NN y AI
+   * `pregunta`
 
+![3-modelo-8](images/3-modelo-8.png)
 
-   
+##### Crear relación entre las tablas
 
+* Vamos a seleccionar una Relación No-Identificada (segundo botón de las relaciones)
+* Damos clic en la tabla `administrador` y después en la tabla `pregunta` para que nos cree la relación.
 
+![3-modelo-9](images/3-modelo-9.png)
 
+Observamos que al crear la relación nos ha insertado el campo `pregunta_idpregunta` dentro de la tabla `administrador`, lo cual nos permite claramente ver la relación entre las tablas. Podemos cambiar el nombre de ese campo le pondremos simplemente `idpregunta`, podemos salvar nuestro modelo.
 
-
-
+![3-modelo-10](images/3-modelo-10.png)
 
 ## Generación del script SQL 06:22
 
