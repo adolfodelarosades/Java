@@ -404,6 +404,122 @@ Ejecución del código:
 
 ## Creación de un JavaBean 04:55
 
+[JavaBeans Component API](https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html)
+
+En esta lección vamos a crear dos JavaBeans que representarán a las dos entidades que tenemos en nuestra BD, `administrador` y `pregunta`. 
+
+### ¿Qué es un JavaBean?
+
+Java Bean es una clase Java normal que tiene propiedades privadas con su método público getter y setter.
+
+Los Java Beans se usan generalmente como clase auxiliar.
+
+### Creación de un JavaBean
+
+Vamos a crear una nuevo paquete llamado `beans` y alli vamos a crear el JavaBean `Administrador`.
+
+![4-paquete-1](images/4-paquete-1.png)
+
+![4-paquete-2](images/4-paquete-2.png)
+
+Dentro de este nuevo paquete crearemos el JavaBean `Administrador`, que es una clase Java.
+
+![4-new-class](images/4-new-class.png)
+
+![4-new-class2](images/4-new-class-2.png)
+
+![4-new-class3](images/4-new-class-3.png)
+
+Dentro de esta clase vamos a crear las propiedades equivalentes a los campos de la Tabla Administrador que creamos en la BD.
+
+![4-modelo](images/4-modelo.png)
+
+![4-propiedades](images/4-propiedades.png)
+
+Ahora vamos a generar los getters y setters de nuestras propiedades para lo cual nos auxiliamos de Eclipse que nos ayuda a crearlas.
+
+![4-getset](images/4-getset.png)
+
+![4-getset-2](images/4-getset-2.png)
+
+![4-getset-3](images/4-getset-3.png)
+
+También vamos a generar un Constructor ayudandonos nuevamente de Eclipse.
+
+![4-constructor](images/4-constructor.png)
+
+No vamos a incluir la propiedad `idAdministrador` por que representa un campo autogenerado.
+
+![4-constructor-2](images/4-constructor-2.png)
+
+Nos inserta el código del constructor.
+
+![4-constructor-3](images/4-constructor-3.png)
+
+Vamos a quitarle el `super` que ha insertado, con esto tenemos listo nuestro JavaBean `Administrador` veamos el código completo:
+
+```java
+package com.novellius.beans;
+
+public class Administrador {
+	
+	private int idAdministrador;
+	private String email;
+	private String contrasena;
+	private String nombre;
+	private String estado;
+	private int idPregunta;
+	
+	public Administrador(String email, String contrasena, String nombre, String estado, int idPregunta) {
+		this.email = email;
+		this.contrasena = contrasena;
+		this.nombre = nombre;
+		this.estado = estado;
+		this.idPregunta = idPregunta;
+	}
+	
+	public int getIdAdministrador() {
+		return idAdministrador;
+	}
+	public void setIdAdministrador(int idAdministrador) {
+		this.idAdministrador = idAdministrador;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getContrasena() {
+		return contrasena;
+	}
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public int getIdPregunta() {
+		return idPregunta;
+	}
+	public void setIdPregunta(int idPregunta) {
+		this.idPregunta = idPregunta;
+	}
+	
+}
+```
+
+*Administrador.java*
+
 ## Creación de una consulta a través del Modelo 09:48
 
 ## Código del Controlador para validar el Login 10:53
