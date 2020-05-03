@@ -522,6 +522,83 @@ public class Administrador {
 
 ## Creación de una consulta a través del Modelo 09:48
 
+En esta lección vamos a crear una clase que forma parte del modelo y que nos va a permitir validar los datos del usuario haciendo una consulta a la BD para ver si sus datos de acceso son correctos.
+
+Crearemos un paquete `modelo`, dentro crearemos la clase `Cuenta` y también crearemos el paquete `beans` arrastraremos aquí el bean `Administrador` y eliminaremos el otro paquete `beans`, nuestra estructura quedará así:
+
+![4-estructura](images/4-estructura.png)
+
+El código de nuestra clase `Cuenta` es el siguiente:
+
+```java
+package com.novellius.modelo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+public class Cuenta {
+	
+	private static final Logger log = LogManager.getLogger("Cuenta: ");
+	private Connection con;
+
+	public Cuenta(Connection con) {
+		this.con = con;
+	}
+	
+	public boolean login(String email, String contrasena) {
+		
+		
+		// El uso de los comodines (?) en lugar de la concatenación, nos permite evitar la SQL INYECTION (; delete database) 
+		String sql = "SELECT count(*) as count FROM administrador WHERE email = ? AND contrasena = ? ";
+		
+		//Permite saber si encontro o no el registro en la BD
+		int noRegistros = 0;
+		
+		try {
+			//Preparar la sentencia
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			//Pasar valores a los dos comodines
+			st.setString(1, email);
+			st.setString(2, contrasena);
+			
+			// Ejecutar la consulta y almacenarla en un ResultSet
+			ResultSet rs = st.executeQuery();
+			
+			//Comprobar que la consulta obtuvo resultados
+			if(rs.next()) {
+				noRegistros = rs.getInt("count");
+			}
+			
+			//Cerrar el Result Set
+			rs.close();
+		} catch (SQLException e) {
+			log.error("Al realizar Login: " + e.getMessage());
+			// Si hay una excepción retornamos false
+			return false;
+		}
+		
+		// Verificamos si hubo coincidencias en la BD
+		if (noRegistros == 0 ) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+}
+```
+
+Mietras desarrollabamos el código Eclipse nos avisaba de que un grupo de instrucciones necesitaban un `try`, nos hemos ayudado de Eclipse para rodear un grupo de instrucciones un un `try-catch` usando la siguiente opcion:
+
+
+![4-try](images/4-try.png)
+
+
 ## Código del Controlador para validar el Login 10:53
 
 ## Completando el código del controlador para implementar el Login 09:25
