@@ -203,6 +203,205 @@ Al ejecutar el proyecto en la consola vemos lo siguiente:
 		
 ## Preparación de la Vista 04:44
 
+En esta lección vamos a modificar nuestra vista, la pantalla de Login debe ser la primer vista que mostraremos y una vez que se logee el usuario mostraremos la página de bienvenida al sistema, en este momento tenemos 3 JSPs `index.jsp`, `login.jsp` y `postLogin.jsp`, al final de la lección estro habrá cambiado para adecuarlo a nuestro objetivo.
+
+Veamos el código:
+
+```java
+package com.novellius;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+/**
+ * Servlet implementation class Servlet
+ */
+public class Servlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+	
+   private static final Logger log = LogManager.getLogger("Servlet: ");
+	
+   private String rutaJsp;
+       
+   /**
+   * @see HttpServlet#HttpServlet()
+   */
+   public Servlet() {
+      super();
+      // TODO Auto-generated constructor stub
+   }
+
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      // TODO Auto-generated method stub
+      super.init(config);
+		
+      //System.out.println(config.getInitParameter("rutaJsp"));
+      rutaJsp = config.getInitParameter("rutaJsp");
+		
+      //Configurar Logger
+      BasicConfigurator.configure();   
+   }
+
+
+
+   /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+      String accion = request.getParameter("accion");
+			
+      if (accion != null) {
+         if(accion.equals("login")) {
+	    setRespuestaControlador(accion).forward(request, response);
+	  }
+      }else {
+         setRespuestaControlador("login").forward(request, response);
+      }
+   }
+
+   /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+      String accion = request.getParameter("accion");
+			
+      if (accion != null) {
+			
+         if(accion.equals("iniciarSesion")) {
+				
+      	    String usuario = request.getParameter("usuario");
+	    String contrasena = request.getParameter("contrasena");
+				
+	    // Ámbito Request
+	    request.setAttribute("usuario", usuario);
+	    request.setAttribute("contrasena", contrasena);
+				
+	    // Ámbito Sesión
+	    HttpSession sesion = request.getSession();
+	    sesion.setAttribute("usuario", usuario);
+	    sesion.setAttribute("contrasena", contrasena);
+				
+	    // Ámbito Contexto
+	    ServletContext contexto = getServletContext();
+	    contexto.setAttribute("usuario", usuario);
+	    contexto.setAttribute("contrasena", contrasena);
+				
+	    setRespuestaControlador("postLogin").forward(request, response);
+	 }
+			
+      }else {
+	 setRespuestaControlador("login").forward(request, response);
+      }
+		
+   }
+	
+   public RequestDispatcher setRespuestaControlador(String vista) {
+      String url = rutaJsp + vista + ".jsp";
+      return getServletContext().getRequestDispatcher(url);
+   }
+}
+```
+
+*Servlet.java*
+
+Como hemos borrado el JSP `index.jsp` eliminamos sus referencias y hacemos que `login.jsp` sea la primer vista en cargarse.
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Iniciar Sessión</title>
+</head>
+<body>
+   <h1 align="center">Iniciar Sessión</h1>
+	
+   <form method="post" action="?accion=iniciarSesion">
+      <table>
+	 <tr>
+	    <td>Usuario: </td>
+	    <td><input type="text" name="usuario" size="35"/></td>
+	 </tr>
+	 <tr>
+	    <td>Contraseña: </td>
+	    <td><input type="password" name="contrasena" size="35" /></td>
+	 </tr>
+	 <tr>
+	    <td>&nbsp;</td>
+	    <td><input type="checkbox" checked="checked" />Recordar mis datos.</td>
+	 </tr>
+	 <tr>
+	    <td>&nbsp;</td>
+	    <td><input type="submit" value="Iniciar Sesión" /></td>
+	 </tr>
+      </table>	
+   </form>
+	
+</body>
+</html>
+```
+
+*login.jsp*
+
+Hemos añadido el tamaño en nuestros dos input de usuario y password, y hemos añadido un check para recordar los datos.
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PostLogin</title>
+</head>
+<body>
+   <h1>Sesión Iniciada</h1>
+	
+   <p>Ingresado como: <%= request.getAttribute("usuario") %></p>
+	   
+   <table>
+      <tr>
+	 <td>Cerrar sesión</td> 
+      </tr>
+      <tr>
+	 <td>Consultar administradores</td>
+      </tr>
+   </table>
+   <p>
+      Contenido Principal
+   </p>
+	
+</body>
+</html>
+```
+
+*postLogin.jsp*
+
+Cambios en lo que presenta al Logearse.
+
+Ejecución del código:
+
+![4-ejecucion-1](images/4-ejecucion-1.png)
+
+![4-ejecucion-2](images/4-ejecucion-2.png)
+
 ## Creación de un JavaBean 04:55
 
 ## Creación de una consulta a través del Modelo 09:48
