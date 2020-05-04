@@ -595,11 +595,52 @@ public class Cuenta {
 
 Mietras desarrollabamos el código Eclipse nos avisaba de que un grupo de instrucciones necesitaban un `try`, nos hemos ayudado de Eclipse para rodear un grupo de instrucciones un un `try-catch` usando la siguiente opcion:
 
-
 ![4-try](images/4-try.png)
 
-
 ## Código del Controlador para validar el Login 10:53
+
+En esta lección vamos a códificar el Servlet para que realice el loggin del usuario desde la vista `login.jsp`..
+
+En el método `init()` haremos la configuración JNDI.
+
+```java
+//Confuguración JNDI
+try {
+   InitialContext initContext = new InitialContext();
+   Context env = (Context) initContext.lookup("java:comp/env");
+   ds = (DataSource) env.lookup("jdbc/novellius");
+} catch (NamingException e) {
+   log.error("Al configurar JNDI: " + e.getMessage());
+}
+```
+
+En el metodo `doPost()` haremos la conexión y la desconexión
+
+```java
+//Conexión a la BD
+try {
+   con = ds.getConnection();
+} catch (SQLException e) {
+   log.error("Error al crear conexión: " + e.getMessage());
+}
+
+. . .
+
+//Conexión a la BD
+try {
+   con.close();
+} catch (SQLException e) {
+   //Enviar a una vista de error
+   log.error("Error al cerrar conexión: " + e.getMessage());
+}
+```
+
+Luego de hacer la colección vamos a invocar al metodo `login` de la clase `Cuenta` para ver si encuentra los datos ingresados en la BD. Por lo cual será neceario ingresar un registro en la tabla `administrador` de nuestra BD.
+
+
+
+
+
 
 ## Completando el código del controlador para implementar el Login 09:25
 
