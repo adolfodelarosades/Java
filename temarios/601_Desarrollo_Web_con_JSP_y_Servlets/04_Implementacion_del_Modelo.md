@@ -638,6 +638,28 @@ try {
 Luego de hacer la colección vamos a invocar al metodo `login` de la clase `Cuenta` para ver si encuentra los datos ingresados en la BD. Por lo cual será neceario ingresar un registro en la tabla `administrador` de nuestra BD.
 
 
+![4-new-registro](images/4-new-registro.png)
+
+Al hacer nuestra primer prueba nos manda un primer error:
+
+![4-sin-driver-jdbc](images/4-sin-driver-jdbc.png)
+
+El error extacto es:
+
+### Incluir Driver JDBC
+
+`0 [http-8080-2] ERROR Servlet:   - Error al crear conexión: Cannot load JDBC driver class 'com.mysql.jdbc.Driver'`
+
+Este error lo que nos indica que no pudo cargar el Driver JDBC, debemos añadir el jar de ese driver. Para descargarlo entramos a [MySQL Connectors](https://www.mysql.com/products/connector/). Descargaremos **JDBC Driver for MySQL (Connector/J)** Seleccionamos la plataforma independiente para usarlo en MAC.
+
+![4-sin-driver-jdbc-2](images/4-sin-driver-jdbc-2.png)
+
+Nos descarga el archivo `mysql-connector-java-8.0.20.zip` lo descomprimimos y copiamos el archivo `mysql-connector-java-8.0.20.jar` para incluirlo en la carpeta `WEB-INF/lib` y lo añadimos en el Build-Path.
+
+![4-sin-driver-jdbc-3](images/4-sin-driver-jdbc-3.png)
+
+
+
 
 
 
