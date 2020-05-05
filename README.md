@@ -65,6 +65,8 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [TomcatInstallationMacOSX.wiki](https://github.com/gbif/ipt/wiki/TomcatInstallationMacOSX.wiki)
 * [How to install Tomcat 6 on Mac OS X Snow Leopard](https://wiki.base22.com/btg/how-to-install-tomcat-6-on-mac-os-x-snow-leopard-48595164.html)
 
+* [Installing Tomcat 9.x on macOS 10.15 Catalina](https://wolfpaulus.com/tomcat/)
+
 ### Descargar Tomcat 6
 
 * [Descargar Tomcat 6](https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.48/bin/)
