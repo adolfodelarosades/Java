@@ -658,11 +658,25 @@ Nos descarga el archivo `mysql-connector-java-8.0.20.zip` lo descomprimimos y co
 
 ![4-sin-driver-jdbc-3](images/4-sin-driver-jdbc-3.png)
 
+**NOTA: Fue necesario instalar Tomcat 9, ya que al usar el driver `mysql-connector-java-8.0.20.jar`, que es el más actual a la fecha (05/2020) la versión de Tomcat 6 no lo soportabá**
 
+### Ejecutar el Código
 
+Reinciamos el servidor y ejecutamos el proyecto, primero vamos simplemente a pulsar el botón sin ingresar ningún dato.
 
+![4-login-nulo](images/4-login-nulo.png)
 
+En la consola se nos indica que:
 
+![4-login-error](images/4-login-error.png)
+
+Ahora vamos a intentarlo nuevamente ingresado los mismos datos que el registro que insertamos en la BD.
+
+![4-login-2](images/4-login-2.png)
+
+El Login es correcto:
+
+![4-login-correcto](images/4-login-correcto.png)
 
 ## Completando el código del controlador para implementar el Login 09:25
 
