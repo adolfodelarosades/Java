@@ -680,6 +680,30 @@ El Login es correcto:
 
 ## Completando el código del controlador para implementar el Login 09:25
 
+En esta lección seguiremos afinando nuestro código de Login.
+
+Vamos a empezar metiendo un Scriptler en nuestro `login.jsp` para que muestre un error en caso de que el lógin no sea correcto.
+
+```jsp
+<%= request.getAttribute("error") %>
+```
+
+Este error lo alimentamos desde nuestro `Servlet.java` y será necesario indicar también que en caso de que exista un error se quede en la misma vista de login, por que si no ponemos nada mostrará una pantalla en blanco al pulsar el botón de `iniciar sesión` y no veremos nuestro mensaje, por lo que redirigimos la vista al mismo `login.jsp`
+
+```java
+request.setAttribute("error", "Nombre de usuario o contraseña incorrectos.");
+setRespuestaControlador("postLogin").forward(request, response);
+```
+
+Usando `request` solo mandamos el atributo una sola vez. Lo que si guardaremos en sesión es al usuario y redirigimos a la siguiente vista.
+
+```java
+sesion.setAttribute("usuario", usuario);
+setRespuestaControlador("postLogin").forward(request, response);
+```
+
+
+
 ## Como cerrar la sesión de un usuario 03:50
 
 ## Uso de cookies 11:17
