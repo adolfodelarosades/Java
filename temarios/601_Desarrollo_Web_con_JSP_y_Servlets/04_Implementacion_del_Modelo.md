@@ -1289,3 +1289,51 @@ public class Servlet extends HttpServlet {
 
 
 ## Uso de cookies 11:17
+
+En esta lección aprenderemos el uso de Cookies en Java. Guardaremos los datos de acceso cuando estos sean correctos, para que en próximas ejecuciones de nuestra aplicación nos los coloque previamente y evitar que estar escribiendolos cada vez. 
+
+El check que tenemos en nuestro formulario juega un papel importante, hasta ahora era un simple adorno pero ahora nos servira para saber si queremos realmente recordar los datos de acceso. Empezaremos por ponerle un nombre para poder identificarlo, pero sobre todo para poder recuperarlo como parámetro, los parámetros deben tener el atributo `name`.
+
+```html
+<td><input name="ckbox" type="checkbox" checked="checked" />Recordar mis datos.</td>
+```
+
+El Cookie lo crearemos en el momento de presinar el botón `Iniciar Sesión` y esto se maneja en nuestro método `doPost()` con la acción `iniciarSesion`.
+
+El componente Input de tipo `checkbox` nos regresa el valor `on` en caso de estar seleccionado y `null` en caso de no estarlo, por lo que debemos manejar esta posibilidad para evitar un `NillPointerException`. En el caso de que nuestro check este seleccionado crearemos la Cookie solo cuando metemos datos de acceso correctos:
+
+
+```java
+// Creación de la Cookie
+try {
+   if (request.getParameter("chbox").equals("on")) {
+      // Creo Cookies
+      Cookie cookieUsurio = new Cookie("usuario", usuario);
+      Cookie cookieContrasena = new Cookie("contrasena", contrasena);
+	
+      // Tiempo de vida 1 día
+      cookieUsurio.setMaxAge(60 * 60 * 24);
+      cookieContrasena.setMaxAge(60 * 60 * 24);
+	
+      // Añado las cookies
+      response.addCookie(cookieUsurio);
+      response.addCookie(cookieContrasena);
+   }
+} catch (NullPointerException e) {
+   log.info("chbox vacio");
+}
+```
+
+Lo que tenemos que hacer ahora es que en la vista `login.jsp` es recuperar las cookies y pintarlas en los input text en caso de existir.
+
+
+
+
+
+
+
+
+
+
+
+
