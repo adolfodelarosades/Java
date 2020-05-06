@@ -1035,7 +1035,7 @@ Entramos a nuestra siguiente vista
 
 ![4-ej-9](images/4-ej-9.png)
 
-Si en este momento volvemos a cargar la cista de login tenemos:
+Si en este momento volvemos a cargar la vista de login tenemos:
 
 ![4-ej-10](images/4-ej-10.png)
 
@@ -1043,11 +1043,9 @@ el valor `usuario` de la sesión ya tiene un valor y lo muestra, si regresamos a
 
 ![4-ej-9](images/4-ej-9.png)
 
-y pulsamos en la opción de `Cerrar sesión` volvemos a estrar como al inicio.
+y pulsamos en la opción de `Cerrar sesión` volvemos a estar como al inicio.
 
 ![4-ej-11](images/4-ej-11.png)
-
-
 
 #### Ver código completo
 
