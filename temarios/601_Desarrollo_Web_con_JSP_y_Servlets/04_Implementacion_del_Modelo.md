@@ -1430,3 +1430,261 @@ Y si abro otra sesión del navegador me carga los datos incorrectos también
 
 Ya dependerá de la aplicación si solo queremos almacenar las cookies cuando la clave es válida.
 
+#### Ver código completo
+
+```java
+package com.novellius;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.novellius.modelo.Cuenta;
+
+/**
+ * Servlet implementation class Servlet
+ */
+public class Servlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+	
+   private static final Logger log = LogManager.getLogger("Servlet: ");
+   private String rutaJsp;
+	
+   //Variables para interctuar con la BD
+   private DataSource ds;
+   private Connection con;
+       
+   /**
+    * @see HttpServlet#HttpServlet()
+    */
+   public Servlet() {
+       super();
+       // TODO Auto-generated constructor stub
+   }
+
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      // TODO Auto-generated method stub
+      super.init(config);
+		
+      //System.out.println(config.getInitParameter("rutaJsp"));
+      rutaJsp = config.getInitParameter("rutaJsp");
+		
+      //Configurar Logger
+      BasicConfigurator.configure();
+      
+	
+      //Confuguración JNDI
+      try {
+         InitialContext initContext = new InitialContext();
+         Context env = (Context) initContext.lookup("java:comp/env");
+         ds = (DataSource) env.lookup("jdbc/novellius");
+      } catch (NamingException e) {
+         log.error("Al configurar JNDI: " + e.getMessage());
+      }
+   }
+
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+      String accion = request.getParameter("accion");
+      HttpSession sesion = request.getSession();
+		
+		
+      if (accion != null) {
+         if(accion.equals("login")) {
+            setRespuestaControlador(accion).forward(request, response);
+         }else if(accion.equals("logout")) {
+	    sesion.invalidate();
+	    log.info("Sesión destruida");
+	    setRespuestaControlador("login").forward(request, response);
+	 }
+      }else {
+         setRespuestaControlador("login").forward(request, response);
+      }
+   }
+
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+      String accion = request.getParameter("accion");
+      HttpSession sesion = request.getSession();
+		
+      //Conexión a la BD
+      try {
+         con = ds.getConnection();
+      } catch (SQLException e) {
+         //Enviar a una vista de error
+         log.error("Error al crear conexión: " + e.getMessage());
+      }
+			
+      if (accion != null) {
+			
+         if(accion.equals("iniciarSesion")) {
+				
+            String usuario = request.getParameter("usuario");
+	    String contrasena = request.getParameter("contrasena");
+	    
+	    
+	    // Creación de la Cookie
+            Cookie cookieUsurio = new Cookie("usuario", usuario);
+            Cookie cookieContrasena = new Cookie("contrasena", contrasena);
+			
+            try {
+   
+               if (request.getParameter("ckbox").equals("on")) {
+				
+            	  // Tiempo de vida 1 día
+            	  cookieUsurio.setMaxAge(60 * 60 * 24);
+            	  cookieContrasena.setMaxAge(60 * 60 * 24);
+            	  // Añado las cookies
+            	  response.addCookie(cookieUsurio);
+            	  response.addCookie(cookieContrasena);
+				
+            	  System.out.println("Cookies añadidos");
+               }
+            } catch (NullPointerException e) { //Se pou usar también un if en el caso de que valga null
+               log.info("chbox vacio");
+							
+               // Expira las cookies
+               cookieUsurio.setMaxAge(0);
+               cookieContrasena.setMaxAge(0);
+               // Añado las cookies
+               response.addCookie(cookieUsurio);
+               response.addCookie(cookieContrasena);
+            }
+		
+            //Invocar consulta SQL
+            Cuenta cuenta = new Cuenta(con);
+				
+            if(cuenta.login(usuario, contrasena)) {
+               log.info("Ingresado correctamente como: " + usuario);
+								
+	       // Ámbito sesión
+	       sesion.setAttribute("usuario", usuario);
+	       setRespuestaControlador("postLogin").forward(request, response);
+					
+            } else {
+               log.error("Error de login");
+               request.setAttribute("error", "Nombre de usuario o contraseña incorrectos.");
+               setRespuestaControlador("login").forward(request, response);
+            }
+         }
+			
+      }else {
+         setRespuestaControlador("login").forward(request, response);
+      }
+		
+      //Conexión a la BD
+      try {
+	 con.close();
+      } catch (SQLException e) {
+	 //Enviar a una vista de error
+	 log.error("Error al cerrar conexión: " + e.getMessage());
+      }	
+   }
+	
+   public RequestDispatcher setRespuestaControlador(String vista) {
+      String url = rutaJsp + vista + ".jsp";
+      return getServletContext().getRequestDispatcher(url);
+   }
+}
+```
+
+*Servlet.java*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Iniciar Sessión</title>
+</head>
+<body>
+   <h1 align="center">Iniciar Sessión</h1>
+   <%= session.getAttribute("usuario") %>
+	
+   <p style="color: red; font-weight: bold;">
+   <%
+      String error = (String) request.getAttribute("error");
+	
+      if (error != null){
+         out.println(error);
+      }
+	
+   %>
+   </p>
+	   
+   <form method="post" action="?accion=iniciarSesion">
+	   
+      <%
+         String usuario = "";
+	 String contrasena = "";	
+		   
+	 //Leyendo Cookies
+	 Cookie[] cookies = request.getCookies();
+	 if (cookies != null){
+				
+	    // Si existen cookies recorremos el array
+	    for(Cookie cookie : cookies){
+		//Busca las cookies de usuario y contraeña
+		if(cookie.getName().equals("usuario")){
+	 	   usuario = cookie.getValue();   
+		}else if(cookie.getName().equals("contrasena")){
+		   contrasena = cookie.getValue();   
+		}
+	    }
+	 }
+		   
+      %>
+	      
+      <table>
+         <tr>
+	    <td>Usuario: </td>
+	    <td><input type="text" name="usuario" size="35" value="<%= usuario %>" /></td>
+	 </tr>
+	 <tr>
+	    <td>Contraseña: </td>
+	    <td><input type="password" name="contrasena" size="35" value="<%= contrasena %>" /></td>
+	 </tr>
+	 <tr>
+	    <td>&nbsp;</td>
+	    <td><input type="checkbox" checked="checked" />Recordar mis datos.</td>
+	 </tr>
+         <tr>
+	    <td>&nbsp;</td>
+	    <td><input type="submit" value="Iniciar Sesión" /></td>
+	 </tr>
+      </table>	
+   </form>
+	
+</body>
+</html>
+```
+
+*login.jsp*
+
