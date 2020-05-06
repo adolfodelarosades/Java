@@ -1416,3 +1416,17 @@ Pero si abro una nueva sesión ya no me aparecen los datos en los text por que l
 
 ![4-ej-2-9](images/4-ej-2-9.png)
 
+En caso de meter datos de acceso incorrectos
+
+![4-ej-2-10](images/4-ej-2-10.png)
+
+Me lo indica
+
+![4-ej-2-11](images/4-ej-2-11.png)
+
+Y si abro otra sesión del navegador me carga los datos incorrectos también
+
+![4-ej-2-12](images/4-ej-2-12.png)
+
+Ya dependerá de la aplicación si solo queremos almacenar las cookies cuando la clave es válida.
+
