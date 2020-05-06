@@ -1300,40 +1300,99 @@ El check que tenemos en nuestro formulario juega un papel importante, hasta ahor
 
 El Cookie lo crearemos en el momento de presinar el botón `Iniciar Sesión` y esto se maneja en nuestro método `doPost()` con la acción `iniciarSesion`.
 
-El componente Input de tipo `checkbox` nos regresa el valor `on` en caso de estar seleccionado y `null` en caso de no estarlo, por lo que debemos manejar esta posibilidad para evitar un `NillPointerException`. En el caso de que nuestro check este seleccionado crearemos la Cookie solo cuando metemos datos de acceso correctos:
+El componente Input de tipo `checkbox` nos regresa el valor `on` en caso de estar seleccionado y `null` en caso de no estarlo, por lo que debemos manejar esta posibilidad para evitar un `NullPointerException`. En el caso de que nuestro check este seleccionado crearemos la Cookie y si no lo esta las eliminaremos:
 
 
 ```java
 // Creación de la Cookie
+Cookie cookieUsurio = new Cookie("usuario", usuario);
+Cookie cookieContrasena = new Cookie("contrasena", contrasena);
+			
 try {
-   if (request.getParameter("chbox").equals("on")) {
-      // Creo Cookies
-      Cookie cookieUsurio = new Cookie("usuario", usuario);
-      Cookie cookieContrasena = new Cookie("contrasena", contrasena);
-	
-      // Tiempo de vida 1 día
-      cookieUsurio.setMaxAge(60 * 60 * 24);
-      cookieContrasena.setMaxAge(60 * 60 * 24);
-	
-      // Añado las cookies
-      response.addCookie(cookieUsurio);
-      response.addCookie(cookieContrasena);
+   
+   if (request.getParameter("ckbox").equals("on")) {
+				
+	// Tiempo de vida 1 día
+	cookieUsurio.setMaxAge(60 * 60 * 24);
+	cookieContrasena.setMaxAge(60 * 60 * 24);
+	// Añado las cookies
+	response.addCookie(cookieUsurio);
+	response.addCookie(cookieContrasena);
+				
+	System.out.println("Cookies añadidos");
    }
-} catch (NullPointerException e) {
+} catch (NullPointerException e) { //Se pou usar también un if en el caso de que valga null
    log.info("chbox vacio");
+							
+   // Expira las cookies
+   cookieUsurio.setMaxAge(0);
+   cookieContrasena.setMaxAge(0);
+   // Añado las cookies
+   response.addCookie(cookieUsurio);
+   response.addCookie(cookieContrasena);
 }
+
 ```
 
-Lo que tenemos que hacer ahora es que en la vista `login.jsp` es recuperar las cookies y pintarlas en los input text en caso de existir.
+Una vez hecho esto en la parte de la vista `login.jsp` tenemos que recuperar las cookies las cuales se devuelven en un array tenemos que recuperar la de usuario y la de contraseña y colocar su valor en los text.
 
+```html
+<%
+   String usuario = "";
+   String contrasena = "";	
+		   
+   //Leyendo Cookies
+   Cookie[] cookies = request.getCookies();
+   if (cookies != null){
+				
+      // Si existen cookies recorremos el array
+      for(Cookie cookie : cookies){
+	 //Busca las cookies de usuario y contraeña
+	 if (cookie.getName().equals("usuario")){
+	    usuario = cookie.getValue();   
+	 }else if(cookie.getName().equals("contrasena")){
+	    contrasena = cookie.getValue();   
+	 }
+      }
+   }		   
+%>
+<table>
+   <tr>
+      <td>Usuario: </td>
+      <td><input type="text" name="usuario" size="35" value="<%= usuario %>" /></td>
+   </tr>
+   <tr>
+      <td>Contraseña: </td>
+      <td><input type="password" name="contrasena" size="35" value="<%= contrasena %>" /></td> 
+   </tr>
+   <tr>
+      <td>&nbsp;</td>
+      <td><input name="ckbox" type="checkbox" checked="checked" />Recordar mis datos.</td>
+   </tr>
+   <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" value="Iniciar Sesión" /></td>
+   </tr>
+</table>	
+```
 
+#### Ejecutar el código
 
+![4-ej-2-1](images/4-ej-2-1.png)
 
+![4-ej-2-2](images/4-ej-2-2.png)
 
+![4-ej-2-3](images/4-ej-2-3.png)
 
+![4-ej-2-4](images/4-ej-2-4.png)
 
+![4-ej-2-5](images/4-ej-2-5.png)
 
+![4-ej-2-6](images/4-ej-2-6.png)
 
+![4-ej-2-7](images/4-ej-2-7.png)
 
+![4-ej-2-8](images/4-ej-2-8.png)
 
+![4-ej-2-9](images/4-ej-2-9.png)
 
