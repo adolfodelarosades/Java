@@ -1380,19 +1380,39 @@ Una vez hecho esto en la parte de la vista `login.jsp` tenemos que recuperar las
 
 ![4-ej-2-1](images/4-ej-2-1.png)
 
+Si metemos una clave incorrecta nos lo indica
+
 ![4-ej-2-2](images/4-ej-2-2.png)
+
+Metamos la clave correcta
 
 ![4-ej-2-3](images/4-ej-2-3.png)
 
+Se inicializa la sesión
+
+![4-ej-2-3](images/4-ej-2-3-4.png)
+
+Si abro una nueva pestaña del navegador esta ya me cargara los datos en los text gracias a las Cookies
+
 ![4-ej-2-4](images/4-ej-2-4.png)
+
+Si ingreso datos incorrectos
 
 ![4-ej-2-5](images/4-ej-2-5.png)
 
+Me lo indica y me vuelve a cargar los datos en los text gracias a las Cookies
+
 ![4-ej-2-6](images/4-ej-2-6.png)
+
+Si desmarco el check
 
 ![4-ej-2-7](images/4-ej-2-7.png)
 
+Entra a la sesión
+
 ![4-ej-2-8](images/4-ej-2-8.png)
+
+Pero si abro una nueva sesión ya no me aparecen los datos en los text por que las Cookies se eliminarón previamente.
 
 ![4-ej-2-9](images/4-ej-2-9.png)
 
