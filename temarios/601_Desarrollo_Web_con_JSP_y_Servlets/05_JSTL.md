@@ -53,17 +53,17 @@ En resumen debemos descargar dos archivos jar `jstl-api-1.2.jar` y `jstl-impl-1.
 
 ![5-tagslibs-3](images/5-tagslibs-3.png)
 
-## Mi primer mensaje con c:out 04:35
+## Mi primer mensaje con `c:out 04:35
 
 En esta lección vamos a remplazar el Scripler que utilizamos para enviar el mensaje de error cuando los datos de acceso no son correctos, con JSTL.
 
 ```html
 <%
-   String error = (String) request.getAttribute("error");
+String error = (String) request.getAttribute("error");
 	
-   if (error != null){
-			out.println(error);
-	 }
+if (error != null){
+   out.println(error);
+}
 %>
 ```
 
@@ -352,7 +352,7 @@ public ArrayList<Administrador> consultarAdministradores(){
 
 Este método retorna un `ArrayList` de `Administrador`, hace una consulta a la tabla `administrador`, recorre lo recuperado con un `while` con cada registro recuperado construye un objeto `Administrador` que va insertando en el `ArrayList` y cuando finaliza el ciclo nos devuelve el `ArrayList` con todos los `Administradores` encontrados.
 
-## Iteraciones con c:foreach 13:15
+## Iteraciones con `c:foreach 13:15
 
 En esta lección vamos a iterar el `ArrayList` creado usando el taglib `c:foreach`.
 
@@ -799,7 +799,7 @@ En caso de no existir registros se nos presenta el siguiente mensaje
 
 ![5-ej-4](images/5-ej-4.png)
 
-## Creación de una consulta con JSTL 08:44
+## Creación de una consulta en JSTL con `sql:query` 08:44
 
 En esta lección vamos a aprender como hacer una consulta con JSTL, por lo que vamosa usar la directiva:
 
@@ -863,7 +863,7 @@ Ejecución del Programa.
 
 ![5-ej-5](images/5-ej-5.png)
 
-## Manejo de excepciones en JSTL 04:19
+## Manejo de excepciones en JSTL con `c:catch` 04:19
 
 En esta lección vamos a ver como manejar una excepciones en JSTL, usando la taglibs `<c:catch var="">`. Vamos a modificar el código para generar una excepción y manejarla.
 
@@ -921,5 +921,7 @@ Ejecución del Programa.
 ![5-ej-6](images/5-ej-6.png)
 
 ## Manejo de parámetros HTTP con param 08:00
+
+En esta lección vamos a ver como manejar parámetros HTTP 
 ## Inserción de un registro en la B.D. con JSTL 07:41
 ## Funciones en JSTL 05:04
