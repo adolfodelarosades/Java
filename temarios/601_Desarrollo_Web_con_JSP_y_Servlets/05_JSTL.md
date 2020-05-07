@@ -384,12 +384,420 @@ Este link lo debemos manejar en el método `doGet()` de nuestro `Servlet.java`.
 }
 ```
 
-En resumen lo que hacemos es crear un `ArrayList administradores` y lo llenamos con lo que nos regrese el método `consultarAdministradores()` de la clase `Cuenta`, dependiendo de si contiene o no valores mandamos un mensaje al ambito del request, ademas si existen administradores los colocamos en el ambito de la sesión, finalmente vamos a redirigir a una nueva vista que llamaremos `consultaAdministradores.jsp`.
+En resumen lo que hacemos es crear un `ArrayList administradores` y lo llenamos con lo que nos regrese el método `consultarAdministradores()` de la clase `Cuenta`, dependiendo de si contiene o no valores mandamos un mensaje al ambito del request, ademas si existen administradores los colocamos en el ambito de la sesión, finalmente vamos a redirigir a una nueva vista que llamaremos `consultaAdministradores.jsp`. Debemos añadir la conexión al método `doGet()` para poder usarla.
+
+En la carpeta `/jsp` creamos la nueva vista `consultaAdministradores.jsp`, aquí vamos a mostrar el mensaje e iterar la lista de administradores encontrada con la taglib `c:foreach`.
+
+```html
+<c:out value="${requestScope.mensaje}" />
+	
+<c:forEach var="admin" items="${sessionScope.administradores }">
+   <p><c:out value="${admin.email}" /> ${admin.contrasena} ${admin.nombre} ${admin.estado} ${admin.idPregunta} </p>
+</c:forEach>
+```
+
+### Ver código modificado.
+
+```java
+package com.novellius.modelo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.novellius.modelo.beans.Administrador;
+
+public class Cuenta {
+	
+	private static final Logger log = LogManager.getLogger("Cuenta: ");
+	private Connection con;
+
+	public Cuenta(Connection con) {
+		this.con = con;
+	}
+	
+	public boolean login(String email, String contrasena) {
+		
+		
+		// El uso de los comodines (?) en lugar de la concatenación, nos permite evitar la SQL INYECTION (; delete database) 
+		String sql = "SELECT count(*) as count FROM administrador WHERE email = ? AND contrasena = ? ";
+		
+		//Permite saber si encontro o no el registro en la BD
+		int noRegistros = 0;
+		
+		try {
+			//Preparar la sentencia
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			//Pasar valores a los dos comodines
+			st.setString(1, email);
+			st.setString(2, contrasena);
+			
+			// Ejecutar la consulta y almacenarla en un ResultSet
+			ResultSet rs = st.executeQuery();
+			
+			//Comprobar que la consulta obtuvo resultados
+			if(rs.next()) {
+				noRegistros = rs.getInt("count");
+			}
+			
+			//Cerrar el Result Set
+			rs.close();
+		} catch (SQLException e) {
+			log.error("Al realizar Login: " + e.getMessage());
+			// Si hay una excepción retornamos false
+			return false;
+		}
+		
+		// Verificamos si hubo coincidencias en la BD
+		if (noRegistros == 0 ) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
+	public ArrayList<Administrador> consultarAdministradores(){
+		
+		ArrayList<Administrador> administradores = new ArrayList<Administrador>();
+		
+		String sql = "SELECT * FROM administrador";
+		
+		try {
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+				
+				Administrador administrador = new Administrador(
+						rs.getString("email"),
+						rs.getString("contrasena"),
+						rs.getString("nombre"),
+						rs.getString("estado"),
+						rs.getInt("idPregunta")
+				);
+				
+				administradores.add(administrador);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			administradores.clear();
+			log.error("Al consultar administradores: " + e.getMessage());
+		}
+		
+		return administradores;
+	}
+}
+```
+
+*Cuenta.java*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PostLogin</title>
+</head>
+<body>
+	<h1>Sesión Iniciada</h1>
+	
+	<p>Ingresado como: <%= session.getAttribute("usuario") %></p>
+	
+	
+	<table>
+		<tr>
+			<td><a href="?accion=consultarAdministradores" >Consultar administradores</a></td>
+		</tr>
+		<tr>
+			<td><a href="?accion=logout">Cerrar sesión</a></td>
+		</tr>
+	</table>
+	<p>
+		Contenido Principal
+	</p>
+
+</body>
+</html>
+```
+
+*postLogin.jsp*
 
 
+```java
+package com.novellius;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.novellius.modelo.Cuenta;
+import com.novellius.modelo.beans.Administrador;
+
+/**
+ * Servlet implementation class Servlet
+ */
+public class Servlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger log = LogManager.getLogger("Servlet: ");
+	private String rutaJsp;
+
+	// Variables para interctuar con la BD
+	private DataSource ds;
+	private Connection con;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Servlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		super.init(config);
+
+		// System.out.println(config.getInitParameter("rutaJsp"));
+		rutaJsp = config.getInitParameter("rutaJsp");
+
+		// Configurar Logger
+		BasicConfigurator.configure();
+
+		// Confuguración JNDI
+		try {
+			InitialContext initContext = new InitialContext();
+			Context env = (Context) initContext.lookup("java:comp/env");
+			ds = (DataSource) env.lookup("jdbc/novellius");
+		} catch (NamingException e) {
+			log.error("Al configurar JNDI: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String accion = request.getParameter("accion");
+		HttpSession sesion = request.getSession();
+		
+		// Conexión a la BD
+		try {
+		   con = ds.getConnection();
+		} catch (SQLException e) {
+		   // Enviar a una vista de error
+		  log.error("Error al crear conexión: " + e.getMessage());
+		}
+
+		if (accion != null) {
+			if (accion.equals("login")) {
+				setRespuestaControlador(accion).forward(request, response);
+			} else if (accion.equals("logout")) {
+				sesion.invalidate();
+				log.info("Sesión destruida");
+				setRespuestaControlador("login").forward(request, response);
+			} else if (accion.equals("consultarAdministradores")) {
+				
+				//Intanciación anónima me evito 
+				//Cuenta cuenta = new Cuenta(con);
+				ArrayList<Administrador> administradores = new Cuenta(con).consultarAdministradores();
+				
+				if(administradores.isEmpty()) {
+					request.setAttribute("mensaje", "No se encotrarón administradores");
+				}else {
+					request.setAttribute("mensaje", "Administradores encontrados");
+					// Vamos a cargar los administradores encontrados en la sesión
+					sesion.setAttribute("administradores", administradores);
+				}
+				setRespuestaControlador("consultaAdministradores").forward(request, response);
+			}
+		} else {
+			setRespuestaControlador("login").forward(request, response);
+		}
+		
+		// Conexión a la BD
+		try {
+		   con.close();
+		} catch (SQLException e) {
+		   // Enviar a una vista de error
+		   log.error("Error al cerrar conexión: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String accion = request.getParameter("accion");
+		HttpSession sesion = request.getSession();
+
+		// Conexión a la BD
+		try {
+			con = ds.getConnection();
+		} catch (SQLException e) {
+			// Enviar a una vista de error
+			log.error("Error al crear conexión: " + e.getMessage());
+
+		}
+
+		if (accion != null) {
+
+			if (accion.equals("iniciarSesion")) {
+
+				String usuario = request.getParameter("usuario");
+				String contrasena = request.getParameter("contrasena");
+				
+				
+				// Creación de la Cookie
+				Cookie cookieUsurio = new Cookie("usuario", usuario);
+				Cookie cookieContrasena = new Cookie("contrasena", contrasena);
+				
+				try {
+						
+				   if (request.getParameter("ckbox").equals("on")) {
+						
+						// Tiempo de vida 1 día
+						cookieUsurio.setMaxAge(60 * 60 * 24);
+						cookieContrasena.setMaxAge(60 * 60 * 24);
+						// Añado las cookies
+						response.addCookie(cookieUsurio);
+						response.addCookie(cookieContrasena);
+						
+						System.out.println("Cookies añadidos");
+					}
+				} catch (NullPointerException e) {
+					log.info("chbox vacio");
+					
+					
+					// Expira las cookies
+					cookieUsurio.setMaxAge(0);
+					cookieContrasena.setMaxAge(0);
+					// Añado las cookies
+					response.addCookie(cookieUsurio);
+					response.addCookie(cookieContrasena);
+				}
+
+				// Invocar consulta SQL
+				Cuenta cuenta = new Cuenta(con);
+
+				if (cuenta.login(usuario, contrasena)) {
+					log.info("Ingresado correctamente como: " + usuario);
 
 
+					// Ámbito sesión
+					sesion.setAttribute("usuario", usuario);
+					setRespuestaControlador("postLogin").forward(request, response);
 
+				} else {
+					log.error("Error de login");
+					request.setAttribute("error", "Nombre de usuario o contraseña incorrectos.");
+					
+					setRespuestaControlador("login").forward(request, response);
+				}
+			}
+
+		} else {
+			setRespuestaControlador("login").forward(request, response);
+		}
+
+		// Conexión a la BD
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// Enviar a una vista de error
+			log.error("Error al cerrar conexión: " + e.getMessage());
+		}
+
+	}
+
+	public RequestDispatcher setRespuestaControlador(String vista) {
+		String url = rutaJsp + vista + ".jsp";
+		return getServletContext().getRequestDispatcher(url);
+	}
+}
+```
+
+*Servlet.java*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Consulta de Administradores</title>
+</head>
+<body>
+	<h1>Consulta de Administradores</h1>
+	
+	<c:out value="${requestScope.mensaje}" />
+	
+	<c:forEach var="admin" items="${sessionScope.administradores }">
+		<p><c:out value="${admin.email}" /> ${admin.contrasena} ${admin.nombre} ${admin.estado} ${admin.idPregunta} </p>
+	</c:forEach>
+
+</body>
+</html>
+```
+
+*consultaadministradores.jsp*
+
+#### Ejecución
+
+El ciclo que sigue la aplicación al ejecutarse es el siguiente:
+
+![5-ej-1](images/5-ej-1.png)
+
+Seleccionamos la opción de consultar los administradores
+
+![5-ej-2](images/5-ej-2.png)
+
+Aquí tenemos la lista de los administradores
+
+![5-ej-3](images/5-ej-3.png)
+
+En caso de no existir registros se nos presenta el siguiente mensaje
+
+![5-ej-4](images/5-ej-4.png)
 
 ## Creación de una consulta con JSTL 08:44
 ## Manejo de excepciones en JSTL 04:19
