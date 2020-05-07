@@ -171,9 +171,127 @@ En esta lección vamos a aprender a manejar condiciones con JSTL.
 
 Para el manejo de condicines tenemos dos tagslibs `c:if` y `c:choose`, veamos un ejemplo de cada una:
 
+**El tagslib `c:if`** funciona como un if pero solo tiene el caso verdadero, es decir no hay else. En el ejemplo verifica que error sea diferente de `null`y si es así lo imprime (ESTO YA LO HACE POR SI SOLO `c:out`)
+
 ```html
+<c:if test="${requestScope.error != null}">
+   <c:out value="${requestScope.error}" />
+</c:if>
+```
+**El tagslib `c:choose`** se parece un poco más a un `switch`.
+
+```html
+<c:choose>
+   <c:when test="${requestScope.error != null}">
+      <c:out value="${requestScope.error}" />
+   </c:when>
+   <c:otherwise>
+      ;)
+   </c:otherwise>
+</c:choose>
+```
+
+En el nuestra vista `login.jsp` tenemos todas las opciones como podemos ver en el siguiente código:
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Iniciar Sessión</title>
+</head>
+<body>
+	<h1 align="center">Iniciar Sessión</h1>
+	
+	<p style="color: red; font-weight: bold;">
+	<c:out value="${requestScope.error}" />
+	</p>
+	
+	<p style="color: red; font-weight: bold;">
+	<c:if test="${requestScope.error != null}">
+		<c:out value="${requestScope.error}" />
+	</c:if>
+	</p>
+	
+	<p style="color: red; font-weight: bold;">
+	<c:choose>
+	   <c:when test="${requestScope.error != null}">
+		  <c:out value="${requestScope.error}" />
+	   </c:when>
+	   <c:otherwise>
+	      ;)
+	   </c:otherwise>
+	</c:choose>
+	</p>
+	
+	<p style="color: red; font-weight: bold;">
+	<%
+		String error = (String) request.getAttribute("error");
+	
+		if (error != null){
+			out.println(error);
+		}
+	%>
+	</p>
+	<form method="post" action="?accion=iniciarSesion">
+	
+		<%
+		   String usuario = "";
+		   String contrasena = "";	
+		   
+		   //Leyendo Cookies
+		   Cookie[] cookies = request.getCookies();
+		   if (cookies != null){
+				
+		       // Si existen cookies recorremos el array
+			   for(Cookie cookie : cookies){
+					//Busca las cookies de usuario y contraeña
+					if(cookie.getName().equals("usuario")){
+						usuario = cookie.getValue();   
+					}else if(cookie.getName().equals("contrasena")){
+						contrasena = cookie.getValue();   
+					}
+			    }
+		    }
+		   
+		%>
+		<table>
+			<tr>
+				<td>Usuario: </td>
+				<td><input type="text" name="usuario" size="35" value="<%= usuario %>" /></td>
+			</tr>
+			<tr>
+				<td>Contraseña: </td>
+				<td><input type="password" name="contrasena" size="35" value="<%= contrasena %>" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input name="ckbox" type="checkbox" checked="checked" />Recordar mis datos.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="Iniciar Sesión" /></td>
+			</tr>
+		</table>	
+	</form>
+	
+</body>
+</html>
 
 ```
+
+*login.jsp*
+
+Al ejecutar el código tenemos:
+
+![5-tagslibs-decision](images/5-tagslibs-decision.png)
+
+
+
 
 
 ## Creación de una consulta en el modelo 08:34
