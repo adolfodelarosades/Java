@@ -45,17 +45,126 @@ En nuestro caso copiaremos la directiva en la vista `login.jsp`
 
 ![5-tagslibs-2](images/5-tagslibs-2.png)
 
-Cuando lo añadimos en la vista nos marca un error esto es debido a que como es un recurso de un tercero, necesito añadir el **.jar** correspondiente para poder utilizarlo, podemos ayudarnos de los repositorios de Maven para poder descargar `jstl-api-1.2.jar`.
+Cuando lo añadimos en la vista nos marca un error esto es debido a que como es un recurso de un tercero, necesito añadir el **.jar** correspondiente para poder utilizarlo, podemos ayudarnos de los repositorios de Maven para poder descargar los jars necesarios, el siguiente enlace nos ayuda a resolver algunos problemas encontrados:
 
-[JSTL](https://mvnrepository.com/artifact/jstl/jstl)
+[Tomcat 7 y JSTL](https://www.it-swarm.dev/es/java/tomcat-7-y-jstl/972781429/)
 
-[JavaServer Pages(TM) Standard Tag Library » 1.2](https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api/1.2)
+En resumen debemos descargar dos archivos jar `jstl-api-1.2.jar` y `jstl-impl-1.2.jar` los copiamos a nuestra libreria y los añadimos al Build Path.
 
-Una vez que hemos descargado el archivo jar `jstl-api-1.2.jar` lo copiamos a nuestra libreria y lo añadimos al Build Path.
-
-
+![5-tagslibs-3](images/5-tagslibs-3.png)
 
 ## Mi primer mensaje con c:out 04:35
+
+En esta lección vamos a remplazar el Scripler que utilizamos para enviar el mensaje de error cuando los datos de acceso no son correctos, con JSTL.
+
+```html
+<%
+   String error = (String) request.getAttribute("error");
+	
+   if (error != null){
+			out.println(error);
+	 }
+%>
+```
+
+Lo primero que tenemos que ver es como manejar el `request` en JSTL. Nos podemos apoyar en la siguiente documentación:
+
+[Expression Language Support](https://docs.oracle.com/javaee/1.3/tutorial/doc/JSTL4.html)
+
+[Java Platform, Enterprise Edition: The Java EE Tutorial (Java EE) 7](https://docs.oracle.com/javaee/7/tutorial/index.html)
+
+JSTL expression language define un conjunto de objetos implicitos:
+
+![5-implicit-objects](images/5-implicit-objects.png)
+
+El objeto `requestScope` mapea los atributos en el ambito Request. Por lo que el Scriplet anterior lo podemos simplemente reemplazar por:
+
+```html
+<c:out value="${requestScope.error}" />
+```
+
+Con esta etiqueta nos ahorramos muchas líneas de código que usabamos con el Scriptler para hacer exactamente lo mismo.
+
+![5-out](images/5-out.png)
+
+Un mensaje corresponde al Scripler y otro al JSTL.
+
+#### Ver código final
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Iniciar Sessión</title>
+</head>
+<body>
+	<h1 align="center">Iniciar Sessión</h1>
+	
+	
+	<p style="color: red; font-weight: bold;">
+	<c:out value="${requestScope.error}" />
+	</p>
+	
+	<p style="color: red; font-weight: bold;">
+	<%
+		String error = (String) request.getAttribute("error");
+	
+		if (error != null){
+			out.println(error);
+		}
+	%>
+	</p>
+	<form method="post" action="?accion=iniciarSesion">
+	
+		<%
+		   String usuario = "";
+		   String contrasena = "";	
+		   
+		   //Leyendo Cookies
+		   Cookie[] cookies = request.getCookies();
+		   if (cookies != null){
+				
+		       // Si existen cookies recorremos el array
+			   for(Cookie cookie : cookies){
+					//Busca las cookies de usuario y contraeña
+					if(cookie.getName().equals("usuario")){
+						usuario = cookie.getValue();   
+					}else if(cookie.getName().equals("contrasena")){
+						contrasena = cookie.getValue();   
+					}
+			    }
+		    }
+		   
+		%>
+		<table>
+			<tr>
+				<td>Usuario: </td>
+				<td><input type="text" name="usuario" size="35" value="<%= usuario %>" /></td>
+			</tr>
+			<tr>
+				<td>Contraseña: </td>
+				<td><input type="password" name="contrasena" size="35" value="<%= contrasena %>" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input name="ckbox" type="checkbox" checked="checked" />Recordar mis datos.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="Iniciar Sesión" /></td>
+			</tr>
+		</table>	
+	</form>
+	
+</body>
+</html>
+```
+
 ## Uso de las etiquetas c:if y c:choose 03:54
 ## Creación de una consulta en el modelo 08:34
 ## Iteraciones con c:foreach 13:15
