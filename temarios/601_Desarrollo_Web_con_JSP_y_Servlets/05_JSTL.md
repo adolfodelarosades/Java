@@ -857,11 +857,69 @@ Lo mejor es insertar todos los cambios en el código.
 </html>
 ```
 
+*consultaAdministradores.jsp*
+
 Ejecución del Programa.
 
 ![5-ej-5](images/5-ej-5.png)
 
 ## Manejo de excepciones en JSTL 04:19
+
+En esta lección vamos a ver como manejar una excepciones en JSTL, usando la taglibs `<c:catch var="">`. Vamos a modificar el código para generar una excepción y manejarla.
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%> 
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Consulta de Administradores</title>
+</head>
+<body>
+   <h1>Consulta de Administradores</h1>
+	
+   <c:out value="${requestScope.mensaje}" />
+	
+   <c:forEach var="admin" items="${sessionScope.administradores }">
+		
+      <p>
+         <c:out value="${admin.email}" /> ${admin.contrasena} ${admin.nombre} ${admin.estado} ${admin.idPregunta} 
+         <!-- Crea la variable id -->
+         <c:set var="id" value="${admin.idPregunta}" />
+		
+         <c:catch var="ex">
+            <!-- Ejecutar query, usa la variable creada para formar el query -->
+            <sql:query var="rs" dataSource="jdbc/novellius">
+               SELECT pregunta FROM pregunta WHERE idpregunta = id;
+            </sql:query>
+		
+            <!--  Recorre los datos recuperados y pinta el campo pregunta -->
+            <c:forEach var="row" items="${rs.rows}">
+               ${row.pregunta}
+            </c:forEach>
+         </c:catch>
+		
+         <c:if test="${ex != null}">
+            <span style="color:red;">*** Error en la conexión con la tabla "pregunta" ***</span>
+         </c:if>
+      </p>
+   
+   </c:forEach>
+
+</body>
+</html>
+```
+
+*consultaAdministradores.jsp*
+
+Ejecución del Programa.
+
+![5-ej-6](images/5-ej-6.png)
+
 ## Manejo de parámetros HTTP con param 08:00
 ## Inserción de un registro en la B.D. con JSTL 07:41
 ## Funciones en JSTL 05:04
