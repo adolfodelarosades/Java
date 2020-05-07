@@ -293,7 +293,104 @@ Al ejecutar el código tenemos:
 ![5-tagslibs-decision-2](images/5-tagslibs-decision-2.png)
 
 ## Creación de una consulta en el modelo 08:34
+
+En esta lección crearemos una consulta en el modelo. 
+
+Lo primero que vamos hacer es insertar varios registros en la tabla `administrador` :
+
+```sql
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('2', 'adolfo@hotmail.com', '1234', 'Adolfo', 'Madrid', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('3', 'gina@gmail.com', '1234', 'Gina', 'León', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('4', 'tomas@hotmail.com', '1234', 'Tomas', 'Ciudad México', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('5', 'rodrigo@hotmail.com', '1234', 'Rodrigo', 'Madrid', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('6', 'basi@gmail.com', '1234', 'Basi', 'Madrid', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('7', 'deisy@gmail.com', '1234', 'Deisy', 'Madrid', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('8', 'alicia@hotmail.com', '1234', 'Alicia', 'Sevilla', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('9', 'juan@gmail.com', '1234', 'Juan', 'Toledo', '1');
+INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nombre`, `estado`, `idpregunta`) VALUES ('10', 'tifany@gmail.com', '1234', 'Tifany', 'Guadalajara', '1');
+```
+
+![5-registros](images/5-registros.png)
+
+Una vez insertados los registros vamos a crear una consulta que recupere la lista de administradores. Ya contamos con una clase de  Modelo **`Cuenta`**, este tipo de clases también se conocen como **DAO** Objetos de Acceso a los Datos. Por lo tanto vamos a crear un método en la clase `Cuenta` que recupere la lista de administradores.
+
+```java
+public ArrayList<Administrador> consultarAdministradores(){
+		
+   ArrayList<Administrador> administradores = new ArrayList<Administrador>();
+		
+   String sql = "SELECT * FROM administrador";
+		
+   try {
+      PreparedStatement st = con.prepareStatement(sql);
+			
+      ResultSet rs = st.executeQuery();
+			
+      while(rs.next()) {
+				
+         Administrador administrador = new Administrador(
+	    rs.getString("email"),
+	    rs.getString("contrasena"),
+	    rs.getString("nombre"),
+	    rs.getString("estado"),
+	    rs.getInt("idPregunta")
+	 );
+				
+	 administradores.add(administrador);
+      }
+      
+      rs.close();
+      
+   } catch (SQLException e) {
+      administradores.clear();
+      log.error("Al consultar administradores: " + e.getMessage());
+   }
+		
+   return administradores;
+}
+```
+
+Este método retorna un `ArrayList` de `Administrador`, hace una consulta a la tabla `administrador`, recorre lo recuperado con un `while` con cada registro recuperado construye un objeto `Administrador` que va insertando en el `ArrayList` y cuando finaliza el ciclo nos devuelve el `ArrayList` con todos los `Administradores` encontrados.
+
 ## Iteraciones con c:foreach 13:15
+
+En esta lección vamos a iterar el `ArrayList` creado usando el taglib `c:foreach`.
+
+En nuesta vista `postLogin.jsp` pondremos un link que nos lleva a la consulta de los administradores:
+
+```html
+<tr>
+   <td><a href="?accion=consultarAdministradores" >Consultar administradores</a></td>
+</tr>
+```
+
+Este link lo debemos manejar en el método `doGet()` de nuestro `Servlet.java`.
+
+```java
+} else if (accion.equals("consultarAdministradores")) {
+				
+   //Intanciación anónima me evito 
+   //Cuenta cuenta = new Cuenta(con);
+   ArrayList<Administrador> administradores = new Cuenta(con).consultarAdministradores();
+				
+   if (administradores.isEmpty()) {
+      request.setAttribute("mensaje", "No se encotrarón administradores");
+   }else {
+      request.setAttribute("mensaje", "Administradores encontrados");
+      // Vamos a cargar los administradores encontrados en la sesión
+      sesion.setAttribute("administradores", administradores);
+   }
+   setRespuestaControlador("consultaAdministradores").forward(request, response);
+}
+```
+
+En resumen lo que hacemos es crear un `ArrayList administradores` y lo llenamos con lo que nos regrese el método `consultarAdministradores()` de la clase `Cuenta`, dependiendo de si contiene o no valores mandamos un mensaje al ambito del request, ademas si existen administradores los colocamos en el ambito de la sesión, finalmente vamos a redirigir a una nueva vista que llamaremos `consultaAdministradores.jsp`.
+
+
+
+
+
+
 ## Creación de una consulta con JSTL 08:44
 ## Manejo de excepciones en JSTL 04:19
 ## Manejo de parámetros HTTP con param 08:00
