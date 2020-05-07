@@ -288,11 +288,9 @@ En el nuestra vista `login.jsp` tenemos todas las opciones como podemos ver en e
 
 Al ejecutar el código tenemos:
 
-![5-tagslibs-decision](images/5-tagslibs-decision.png)
+![5-tagslibs-decision-1](images/5-tagslibs-decision-1.png)
 
-
-
-
+![5-tagslibs-decision-2](images/5-tagslibs-decision-2.png)
 
 ## Creación de una consulta en el modelo 08:34
 ## Iteraciones con c:foreach 13:15
