@@ -166,6 +166,16 @@ Un mensaje corresponde al Scripler y otro al JSTL.
 ```
 
 ## Uso de las etiquetas c:if y c:choose 03:54
+
+En esta lección vamos a aprender a manejar condiciones con JSTL.
+
+Para el manejo de condicines tenemos dos tagslibs `c:if` y `c:choose`, veamos un ejemplo de cada una:
+
+```html
+
+```
+
+
 ## Creación de una consulta en el modelo 08:34
 ## Iteraciones con c:foreach 13:15
 ## Creación de una consulta con JSTL 08:44
