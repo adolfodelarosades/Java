@@ -800,6 +800,67 @@ En caso de no existir registros se nos presenta el siguiente mensaje
 ![5-ej-4](images/5-ej-4.png)
 
 ## Creación de una consulta con JSTL 08:44
+
+En esta lección vamos a aprender como hacer una consulta con JSTL, por lo que vamosa usar la directiva:
+
+```html
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
+```
+
+Lo que haremos es que en lugar de desplegar el `idPregunta` mostraremos la pregunata. Haremos uso de la etiqueta 
+
+`<sql:query var="" dataSource="">` 
+
+En el `dataSource` vamos a poner el name de la conexión a la BD `jdbc/novellius` y en var vamos a poner la referencia a los resultados que obtenga en el query que vayamos a ejecutar.
+
+Lo mejor es insertar todos los cambios en el código.
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%> 
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Consulta de Administradores</title>
+</head>
+<body>
+   <h1>Consulta de Administradores</h1>
+	
+   <c:out value="${requestScope.mensaje}" />
+	
+   <c:forEach var="admin" items="${sessionScope.administradores }">
+	   
+      <p>
+      <c:out value="${admin.email}" /> ${admin.contrasena} ${admin.nombre} ${admin.estado} ${admin.idPregunta} 
+      
+      <!-- Crea la variable id -->		
+      <c:set var="id" value="${admin.idPregunta}" />
+
+      <!-- Ejecutar query, usa la variable creada para formar el query -->
+      <sql:query var="rs" dataSource="jdbc/novellius">
+         SELECT pregunta FROM pregunta WHERE idpregunta = ${id};
+      </sql:query>
+	
+      <!--  Recorre los datos recuperados y pinta el campo pregunta -->
+      <c:forEach var="row" items="${rs.rows}">
+	 ${row.pregunta}
+      </c:forEach>  
+      </p>
+	   
+    </c:forEach>
+
+</body>
+</html>
+```
+
+Ejecución del Programa.
+
+![5-ej-5](images/5-ej-5.png)
+
 ## Manejo de excepciones en JSTL 04:19
 ## Manejo de parámetros HTTP con param 08:00
 ## Inserción de un registro en la B.D. con JSTL 07:41
