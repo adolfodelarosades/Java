@@ -839,7 +839,284 @@ public class TestManejadorCorreos {
 ```
 *TestManejadorCorreo.java*
 
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%> 
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Consulta de Administradores</title>
+</head>
+<body>
+	<h1>Consulta de Administradores</h1>
+	
+	<c:out value="${requestScope.mensaje}" />
+	
+	<c:forEach var="admin" items="${sessionScope.administradores }">
+		
+		<p>
+		<c:out value="${admin.email}" /> ${admin.contrasena} ${admin.nombre} ${admin.estado} ${admin.idPregunta} 
+		<!-- Crea la variable id -->
+		<c:set var="id" value="${admin.idPregunta}" />
+		
+		<c:catch var="ex">
+		   <!-- Ejecutar query, usa la variable creada para formar el query -->
+		   <sql:query var="rs" dataSource="jdbc/novellius">
+		      SELECT pregunta FROM pregunta WHERE idpregunta = id;
+		   </sql:query>
+		
+		   <!--  Recorre los datos recuperados y pinta el campo pregunta -->
+		   <c:forEach var="row" items="${rs.rows}">
+		      ${row.pregunta}
+		   </c:forEach>
+		</c:catch>
+		
+		<c:if test="${ex != null}">
+		   <span style="color:red;">*** Error en la conexión con la tabla "pregunta" ***</span>
+		</c:if>
+		</p>
+	</c:forEach>
 
+</body>
+</html>
+```
+*consultaAdministradores.jsp*
 
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Enviar Correo</title>
+</head>
+<body>
+    <h1>Enviar Correo electrónico</h1>
+	<form method="post" action="?accion=enviarCorreo">
+		
+		<p>Para: <input type="text" name="destinatario" size="35" /></p>
+		<p>Asunto: <input type="text" name="asunto" size="35" /></p>
+		<p>Mensaje: <input type="text" name="mensaje" size="35" /></p>
+		
+		<input type="submit" value="Enviar Correo" />
+	</form>
+</body>
+</html>
+```
+*enviarCorreo.jsp*
 
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Error correo</title>
+</head>
+<body>
+   <h1>Ocurrió un error al enviar el correo</h1>
+   
+   <p>Ha habido un error al enviar el email</p>
+   
+   <a href="?accion="menu"> &lt;&lt;Regresar</a>
+
+</body>
+</html>
+```
+*errorCorreo.jsp*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insertar Pregunta Secreta</title>
+</head>
+<body>
+	<h1>Insertar Pregunta Secreta</h1>
+	
+	<c:set var="pregunta" value="${param.pregunta}" />
+	<p>La pregunta secreta capturada es:</p>
+	"${pregunta}" con una longitud de ${fn:length(pregunta)} carácteres
+	
+	
+	<c:catch var="ex">
+	    <!-- Insertar registro-->
+		<sql:update var="row" dataSource="jdbc/novellius" sql="INSERT INTO pregunta (pregunta) VALUES (?)">
+		   <sql:param value="${param.pregunta}" />
+		</sql:update>
+		<!-- Analiza la respuesta de la ejecución del query-->
+		<c:choose>
+			<c:when test="${row != 0 }"> <p>Pregunta registrada correctamente.</p></c:when>
+			<c:otherwise><p>Error al registrar la pregunta</p></c:otherwise>
+		</c:choose>
+	</c:catch>
+	
+	<!-- En caso de una excepción envía mensaje -->
+	<c:if test="${ex != null}">
+		<p style="color:red;">Error en la conexión a la BD.</p>
+	</c:if>
+</body>
+</html>
+```
+*insertarPregunta.jsp*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Iniciar Sessión</title>
+</head>
+<body>
+	<h1 align="center">Iniciar Sessión</h1>
+	
+	
+	<p style="color: red; font-weight: bold;">
+	<c:out value="${requestScope.error}" />
+	</p>
+	
+	<form method="post" action="?accion=iniciarSesion">
+	
+		<%
+		   String usuario = "";
+		   String contrasena = "";	
+		   
+		   //Leyendo Cookies
+		   Cookie[] cookies = request.getCookies();
+		   if (cookies != null){
+				
+		       // Si existen cookies recorremos el array
+			   for(Cookie cookie : cookies){
+					//Busca las cookies de usuario y contraeña
+					if(cookie.getName().equals("usuario")){
+						usuario = cookie.getValue();   
+					}else if(cookie.getName().equals("contrasena")){
+						contrasena = cookie.getValue();   
+					}
+			    }
+		    }
+		   
+		%>
+		<table>
+			<tr>
+				<td>Usuario: </td>
+				<td><input type="text" name="usuario" size="35" value="<%= usuario %>" /></td>
+			</tr>
+			<tr>
+				<td>Contraseña: </td>
+				<td><input type="password" name="contrasena" size="35" value="<%= contrasena %>" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input name="ckbox" type="checkbox" checked="checked" />Recordar mis datos.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="Iniciar Sesión" /></td>
+			</tr>
+		</table>	
+	</form>
+	
+</body>
+</html>
+```
+*login.jsp*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Correo Enviado</title>
+</head>
+<body>
+	<h1>Correo Enviado</h1>
+	<p>Destinatario: ${param.destinatario}</p>
+	<p>Asunto: ${param.asunto}</p>
+	<p>Mensaje: ${param.mensaje}</p>
+</body>
+</html>
+```
+*postEnvioCorreo.jsp*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PostLogin</title>
+</head>
+<body>
+	<h1>Sesión Iniciada</h1>
+	
+	<p>Ingresado como: <%= session.getAttribute("usuario") %></p>
+	
+	
+	<table>
+		<tr>
+			<td><a href="?accion=consultarAdministradores" >Consultar administradores</a></td>
+		</tr>
+		<tr>
+			<td><a href="?accion=registrarPregunta" >Registrar pregunta</a></td>
+		</tr>
+		<tr>
+			<td><a href="?accion=enviarCorreo" >Enviar correo electrónico</a></td>
+		</tr>
+		<tr>
+			<td><a href="?accion=logout">Cerrar sesión</a></td>
+		</tr>
+	</table>
+	<p>
+		Contenido Principal
+	</p>
+
+</body>
+</html>
+```
+*postLogin.jsp*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registrar Pregunta</title>
+</head>
+<body>
+	<h1>Registrar Pregunta Secreta</h1>
+	<form>
+		<p>Captura la pregunta secreta:</p>
+		<input type="text" name="pregunta" size="35" /> <br/>
+		<input type="hidden" name="accion" value="insertarPregunta" />
+		
+		<input type="submit" value="Registrar" />
+	</form>
+</body>
+</html>
+```
+*registrarPregunta.jsp*
 
