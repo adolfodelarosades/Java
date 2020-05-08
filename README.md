@@ -125,3 +125,15 @@ mini-de-adolfo:tmp adolfodelarosa$
 ## 
 
 ##  [MySQL Community Downloads - MySQL Workbench 8.0.20](https://dev.mysql.com/downloads/workbench/)
+
+## Tutoriales
+
+[The Java™ Tutorials](https://docs.oracle.com/javase/tutorial/)
+
+[Java Platform, Enterprise Edition: The Java EE Tutorial](https://docs.oracle.com/javaee/7/tutorial/)
+
+[tutorialspoint](https://www.tutorialspoint.com/index.htm)
+
+[Java Developer Zone](https://javadeveloperzone.com/)
+
+[Journal Dev](https://www.journaldev.com/)
