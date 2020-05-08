@@ -200,22 +200,23 @@ Creamos la nueva vista `enviarCorreo.jsp`
 Tenemos una nueva acción `enviarCorreo` que debemos manejar en el método `doPost()` del Servlet. Hemos agregado el conjunto de caracteres UTF-8 al método `doPost()` para que los emails lleguen con acentos.
 
 ```java
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+   //Establecer un juego de carácteres para los parámetros que llegan al método POST
+   request.setCharacterEncoding("UTF-8");
 
-//Establecer un juego de carácteres para los parámetros que llegan al método POST
-request.setCharacterEncoding("UTF-8");
+   ....
 
-....
-
-} else if(accion.contentEquals("enviarCorreo")) {
-   ManejadorCorreos manejadorCorreos = new ManejadorCorreos();
-   try {
-      manejadorCorreos.enviarCorreos(request.getParameter("destinatario"), request.getParameter("asunto"), request.getParameter("mensaje"));
-      log.info("correo enviado correctamente");
-   } catch (Exception e) {
-      log.error("Al enviar correo: " + e.getMessage());
-      e.printStackTrace();
-      setRespuestaControlador("errorCorreo").forward(request, response);
-   }
+   } else if(accion.contentEquals("enviarCorreo")) {
+      ManejadorCorreos manejadorCorreos = new ManejadorCorreos();
+      try {
+         manejadorCorreos.enviarCorreos(request.getParameter("destinatario"), request.getParameter("asunto"), request.getParameter("mensaje"));
+         log.info("correo enviado correctamente");
+      } catch (Exception e) {
+         log.error("Al enviar correo: " + e.getMessage());
+         e.printStackTrace();
+         setRespuestaControlador("errorCorreo").forward(request, response);
+      }
 }
 ```
 
@@ -235,7 +236,7 @@ Vamos a crear la nueva vista `errorCorreo.jsp`
    
    <p>Ha habido un error al enviar el email</p>
    
-   <a href="?accion="menu"></a>
+   <a href="?accion="menu">&lt;&lt;Regresar</a>
 
 </body>
 </html>
@@ -255,13 +256,27 @@ Metemos en el método `doGet()` la acción de `menu`:
 
 ![6-ejecutar-2-2](images/6-ejecutar-2-2.png)
 
+Ingresamos los datos de destinatario, asunto y mensaje.
+
 ![6-ejecutar-2-3](images/6-ejecutar-2-3.png)
+
+Aparece una pantalla en blanco por que no estamos redirigiendo a ninguna vista.
 
 ![6-ejecutar-2-4](images/6-ejecutar-2-4.png)
 
+Pero en la consola vemos el mensaje de que el correo se ha enviado.
+
+![6-ejecutar-2-4-2](images/6-ejecutar-2-4-2.png)
+
+Si abrimos el correo vemos que el correo ha llegado
+
 ![6-ejecutar-2-5](images/6-ejecutar-2-5.png)
 
+Si abrimos el contenido del email vemos exactamente lo que se metio en el formulario.
+
 ![6-ejecutar-2-6](images/6-ejecutar-2-6.png)
+
+En caso de que ubiese un error nos manda a la vista `errorCorreo.jsp`
 
 ![6-ejecutar-2-7](images/6-ejecutar-2-7.png)
 
