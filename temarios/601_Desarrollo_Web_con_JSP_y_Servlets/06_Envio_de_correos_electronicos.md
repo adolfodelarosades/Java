@@ -349,6 +349,9 @@ Esta es la estructura de todos los archivos que tenemos hasta el momento en nuet
 
 ![6-fin-1](images/6-fin-1.png)
 
+A continuación se lista cada uno de los archivos en el orden que se muetra en la estructura.
+
+*Servlet.java*
 ```java
 package com.novellius;
 
@@ -594,8 +597,8 @@ public class Servlet extends HttpServlet {
 	}
 }
 ```
-*Servlet.java*
 
+*Cuenta.java*
 ```java
 package com.novellius.modelo;
 
@@ -693,8 +696,8 @@ public class Cuenta {
 	}
 }
 ```
-*Cuenta.java*
 
+*Administrador.java*
 ```java
 package com.novellius.modelo.beans;
 
@@ -754,8 +757,8 @@ public class Administrador {
 	
 }
 ```
-*Administrador.java*
 
+*ManejadorCorreo.java*
 ```java
 package com.novellius.util;
 
@@ -814,8 +817,8 @@ public class ManejadorCorreos {
 
 }
 ```
-*ManejadorCorreo.java*
 
+*TestManejadorCorreo.java*
 ```java
 package com.novellius.util;
 
@@ -837,8 +840,8 @@ public class TestManejadorCorreos {
 	}
 }
 ```
-*TestManejadorCorreo.java*
 
+*consultaAdministradores.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -884,8 +887,8 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*consultaAdministradores.jsp*
 
+*enviarCorreo.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -908,8 +911,8 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*enviarCorreo.jsp*
 
+*errorCorreo.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -929,8 +932,8 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*errorCorreo.jsp*
 
+*insertarPregunta.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -972,8 +975,8 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*insertarPregunta.jsp*
 
+*login.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -1038,8 +1041,8 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*login.jsp*
 
+*postEnvioCorreo.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -1057,8 +1060,8 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*postEnvioCorreo.jsp*
 
+*postLogin.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -1095,8 +1098,8 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*postLogin.jsp*
 
+*registrarPregunta.jsp*
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
@@ -1118,5 +1121,5 @@ public class TestManejadorCorreos {
 </body>
 </html>
 ```
-*registrarPregunta.jsp*
+
 
