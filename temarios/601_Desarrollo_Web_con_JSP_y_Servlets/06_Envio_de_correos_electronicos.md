@@ -197,16 +197,48 @@ Creamos la nueva vista `enviarCorreo.jsp`
 </form>
 ```
 
-Tenemos una nueva acción `enviarCorreo` que debemos manejar en el método `doPost()` del Servlet.
+Tenemos una nueva acción `enviarCorreo` que debemos manejar en el método `doPost()` del Servlet. Hemos agregado el conjunto de caracteres UTF-8 al método `doPost()` para que los emails lleguen con acentos.
 
 ```java
 
+//Establecer un juego de carácteres para los parámetros que llegan al método POST
+request.setCharacterEncoding("UTF-8");
+
+....
+
+} else if(accion.contentEquals("enviarCorreo")) {
+   ManejadorCorreos manejadorCorreos = new ManejadorCorreos();
+   try {
+      manejadorCorreos.enviarCorreos(request.getParameter("destinatario"), request.getParameter("asunto"), request.getParameter("mensaje"));
+      log.info("correo enviado correctamente");
+   } catch (Exception e) {
+      log.error("Al enviar correo: " + e.getMessage());
+      e.printStackTrace();
+      setRespuestaControlador("errorCorreo").forward(request, response);
+   }
+}
 ```
 
 Vamos a crear la nueva vista `errorCorreo.jsp` 
 
 ```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Error correo</title>
+</head>
+<body>
+   <h1>Ocurrió un error al enviar el correo</h1>
+   
+   <p>Ha habido un error al enviar el email</p>
+   
+   <a href="?accion="menu"></a>
 
+</body>
+</html>
 ```
 
 Metemos en el método `doGet()` la acción de `menu`:
@@ -216,5 +248,21 @@ Metemos en el método `doGet()` la acción de `menu`:
    setRespuestaControlador("postLogin").forward(request, response);
 }
 ```
+
+### Ejecución de la aplicación
+
+![6-ejecutar-2-1](images/6-ejecutar-2-1.png)
+
+![6-ejecutar-2-2](images/6-ejecutar-2-2.png)
+
+![6-ejecutar-2-3](images/6-ejecutar-2-3.png)
+
+![6-ejecutar-2-4](images/6-ejecutar-2-4.png)
+
+![6-ejecutar-2-5](images/6-ejecutar-2-5.png)
+
+![6-ejecutar-2-6](images/6-ejecutar-2-6.png)
+
+![6-ejecutar-2-7](images/6-ejecutar-2-7.png)
 
 ## Completando el código de envío de correos 06:37
