@@ -72,7 +72,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Implementación de envío de correos electrónicos en la Vista y el Controlador 12:34
    * Completando el código de envío de correos 06:37
 
-#### 7. Implementación de un Logger a través de Filtros 01:02:17
+#### 7. [Implementación de un Logger a través de Filtros](601_Desarrollo_Web_con_JSP_y_Servlets/07_Implementacion_de_un_Logger_a_traves_de_Filtros.md) 01:02:17
 
    * Creación de la tabla de Log 04:32
    * Definición y creación de un SerlvetFilter básico 06:17
@@ -80,7 +80,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Implementación del Logger en el SerlvetFilter 19:49
    * Completando el módulo de Logging 18:51
 
-#### 8. Creación de un módulo de registro de administradores 46:43
+#### 8. [Creación de un módulo de registro de administradores](601_Desarrollo_Web_con_JSP_y_Servlets/08_Creacion_de_un_modulo_de_registro_de_administradores.md) 46:43
 
    * Introducción 02:01
    * Modificación de la Base de Datos 02:24
@@ -89,7 +89,7 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Código del controlador para procesar la petición de registro 14:22
    * Creación de un mecanismo para evitar administradores duplicados 07:43
 
-#### 9. AJAX 01:24:27
+#### 9. [AJAX](601_Desarrollo_Web_con_JSP_y_Servlets/09_AJAX.md) 01:24:27
 
    * Introducción 02:01
    * Creación del script AJAX para enviar una petición HTTP 12:41
@@ -101,26 +101,26 @@ Este curso está enfocado en el uso de las tecnologías definidas en el estánda
    * Almacenando la ruta de la imagen en la Base de Datos 10:59
    * Mostrando al usuario la imagen almacenada en el servidor 06:54
 
-#### 10. Validación de Datos 34:57
+#### 10. [Validación de Datos](601_Desarrollo_Web_con_JSP_y_Servlets/10_Validacion_de_Datos.md) 34:57
 
 * Comprobando la integridad de los datos en el servidor 16:02
 * Validando los datos en el cliente con JQuery 18:55
 
-#### 11. Google ReCaptcha 13:37
+#### 11. [Google ReCaptcha](601_Desarrollo_Web_con_JSP_y_Servlets/11_Google_ReCaptcha.md) 13:37
 
    * Como crear una cuenta y obtener Google ReCaptcha 02:36
    * Mostrando el ReCaptcha al usuario 04:14
    * Verificando la respuesta del usuario 06:47
 
-#### 12. Conclusión 02:30
+#### 12. [Conclusión](601_Desarrollo_Web_con_JSP_y_Servlets/12_Conclusion.md) 02:30
 
    * Algunas palabras finales 02:30
 
-#### 13. Recursos 00:05
+#### 13. [Recursos](601_Desarrollo_Web_con_JSP_y_Servlets/13_Recursos.md) 00:05
 
    * Código fuente del curso 00:05
 
-#### 14. Bibliografía recomendada 00:29
+#### 14. [Bibliografía recomendada](601_Desarrollo_Web_con_JSP_y_Servlets/14_Bibliografia.md) 00:29
 
    * Beginning JSP, JSF and Tomcat 00:00
    * Core Servlets and JavaServer Pages 00:29
