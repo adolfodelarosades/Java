@@ -281,3 +281,53 @@ En caso de que ubiese un error nos manda a la vista `errorCorreo.jsp`
 ![6-ejecutar-2-7](images/6-ejecutar-2-7.png)
 
 ## Completando el código de envío de correos 06:37
+
+Finalmente lo que vamos a hacer es crear una vista para mostrar un aviso de que el email a sido enviado y no nos salga solo la pantalla en blanco, la llamaremos `postEnvioCorreo.jsp`
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Correo Enviado</title>
+</head>
+<body>
+   <h1>Correo Enviado</h1>
+   <p>Destinatario: ${param.destinatario}</p>
+   <p>Asunto: ${param.asunto}</p>
+   <p>Mensaje: ${param.mensaje}</p>
+</body>
+</html>
+```
+
+*postEnvioCorreo.jsp*
+
+
+En nuetro Servlet debemos reenviar a esta nueva vista cuando el correo se envíe correctamente:
+
+```java
+} else if(accion.contentEquals("enviarCorreo")) {
+   ManejadorCorreos manejadorCorreos = new ManejadorCorreos();
+   try {
+      manejadorCorreos.enviarCorreos(request.getParameter("destinatario"), request.getParameter("asunto"), request.getParameter("mensaje"));
+      log.info("correo enviado correctamente");
+      setRespuestaControlador("postEnviocorreo").forward(request, response);
+   } catch (Exception e) {
+   
+   . . .
+```
+
+Al ejecutar el programa:
+
+![6-ejecutar-3-1](images/6-ejecutar-3-1.png)
+
+![6-ejecutar-3-2](images/6-ejecutar-3-2.png)
+
+![6-ejecutar-3-3](images/6-ejecutar-3-3.png)
+
+![6-ejecutar-3-4](images/6-ejecutar-3-4.png)
+
+
+
