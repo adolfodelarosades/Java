@@ -53,7 +53,7 @@ En resumen debemos descargar dos archivos jar `jstl-api-1.2.jar` y `jstl-impl-1.
 
 ![5-tagslibs-3](images/5-tagslibs-3.png)
 
-## Mi primer mensaje con `c:out 04:35
+## Mi primer mensaje con `c:out` 04:35
 
 En esta lección vamos a remplazar el Scripler que utilizamos para enviar el mensaje de error cuando los datos de acceso no son correctos, con JSTL.
 
