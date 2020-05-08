@@ -46,6 +46,11 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 * [601 Desarrollo Web con JSP y Servlets](https://github.com/adolfodelarosades/Java/blob/master/temarios/601_Desarrollo_Web_con_JSP_y_Servlets.md)
 
+
+# BOOKS
+
+* [90001 Java EE 8 Development with Eclipse](https://github.com/adolfodelarosades/Java/blob/master/temarios/90001_Java_EE_8_Development_with_Eclipse.md)
+
 # Enlaces Interesantes Java
 
 ## Java
