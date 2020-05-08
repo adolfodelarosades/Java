@@ -1300,13 +1300,75 @@ public class Servlet extends HttpServlet {
 
 *mostrarPregunta.jsp*
 
-## Inserción de un registro en la B.D. con JSTL 07:41
+## Inserción de un registro en la BD en JSTL con `sql:update` 07:41
 
-Hasta aquí la pregunta no la estamos insertando en la BD, solo estamos insertandola en el formulario y la mostramos en la vista `mostrarPregunta.jsp`, vamos a hacer algunos cambios para que en lugar de mostrar la pregunta la inserte en la BD a través de JSTL. Lo primero que haremos es cambiar el nombre de la vista `mostrarPregunta.jsp` por `insertarPregunta.jsp`, debemos cambiar todas las referencias a `mostrarPregunta` por `insertarPregunta`. Una vez hecho esto modificamos la vista `insertarPregunta.jsp` para que en lugar de mostrar la vista la inserte en la BD. Actualmente solo tenemos 2 preguntas.
+Hasta aquí la pregunta no la estamos insertando en la BD, solo estamos insertandola en el formulario y la mostramos en la vista `mostrarPregunta.jsp`.
+
+Vamos a hacer algunos cambios para que en lugar de mostrar la pregunta la inserte en la BD a través de JSTL. Lo primero que haremos es cambiar el nombre de la vista `mostrarPregunta.jsp` por `insertarPregunta.jsp`, debemos cambiar todas las referencias a `mostrarPregunta` por `insertarPregunta`. 
+
+Una vez hecho esto modificamos la vista `insertarPregunta.jsp` para que en lugar de mostrar la vista la inserte en la BD, actualmente solo tenemos 2 preguntas.
 
 ![5-tabla-preguntas-1](images/5-tabla-preguntas-1.png)
 
+Nuestra vista `insertarPregunta.jsp` queda así:
 
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%> 
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insertar Pregunta Secreta</title>
+</head>
+<body>
+   <h1>Insertar Pregunta Secreta</h1>
+	
+   <p>La pregunta secreta capturada es:</p>
+   <c:out value="${param.pregunta}"></c:out>
+		
+   <c:catch var="ex">
+      <!-- Insertar registro-->	   
+      <sql:update var="row" dataSource="jdbc/novellius" sql="INSERT INTO pregunta (pregunta) VALUES (?)">
+	 <sql:param value="${param.pregunta}" />
+      </sql:update>
+      <!-- Analiza la respuesta de la ejecución del query-->	   
+      <c:choose>
+	 <c:when test="${row != 0 }"> <p>Pregunta registrada correctamente.</p></c:when>
+	 <c:otherwise><p>Error al registrar la pregunta</p></c:otherwise>
+      </c:choose>
+   </c:catch>
 
+   <!-- En caso de una excepción envía mensaje -->	
+   <c:if test="${ex != null}">
+      <p style="color:red;">Error en la conexión a la BD.</p>
+   </c:if>
+</body>
+</html>
+```
+
+#### Ejecución del código
+
+![5-param-1](images/5-param-1.png)
+
+Seleccionamos la opción de Registrar pregunta.
+
+![5-param-2](images/5-param-2.png)
+
+Capturamos la pregunta y presionamos el botón `Registrar`.
+
+![5-insert-1](images/5-insert-1.png)
+
+Muestra la pregunta capturada y nos indica que ha sido insertada
+
+![5-insert-1](images/5-insert-1.png)
+
+En la tambla se inserto la pregunta
+
+![5-insert-1](images/5-insert-1.png)
 
 ## Funciones en JSTL 05:04
