@@ -925,6 +925,380 @@ Ejecución del Programa.
 
 En esta lección vamos a ver como manejar parámetros HTTP enviados de una página web a otra mediante JSTL.
 
+Vamos a empezar por añadir una opción a nuestro "menú" en la vista `postLogi.jsp`
+
+```html
+<td><a href="?accion=registrarPregunta" >Registrar pregunta</a></td>
+```
+
+En nuestro `Servlet.java` vamos a manejar esta opción en el método `doGet()`.
+
+```java
+} else if (accion.contentEquals("registrarPregunta")) {
+   setRespuestaControlador(accion).forward(request, response);
+}
+```
+
+Vamos a crear la nueva vista `registrarPregunta.jsp` en la carpeta `/jsp`. En esta vista tendremos un formulario para capturar una nueva pregunta secreta y la enviará a otra vista.
+
+```html
+<h1>Registrar Pregunta Secreta</h1>
+<form>
+   <p>Captura la pregunta secreta:</p>
+   <input type="text" name="pregunta" size="35" />
+   <input type="hidden" name="accion" value="mostrarPregunta" />
+		
+   <input type="submit" value="Registrar" />
+</form>
+```
+
+Este formulario, genera una petición GET con `accion=mostrarPregunta`, por lo que en nuestro `Servlet.java` debemos manejar esta opción:
+
+```java
+} else if (accion.contentEquals("mostrarPregunta")) {
+   setRespuestaControlador(accion).forward(request, response);
+}
+```
+
+Por lo cual tenemos que crear una nueva vista llamada `mostrarPregunta.jsp` en `/jsp` 
+
+```html
+<h1>Mostrar Pregunta Secreta</h1>
+	
+<p>La pregunta secreta capturada es:</p>
+<c:out value="$param.pregunta"></c:out>
+```
+
+**Aquí lo importante es ver que los parámetros viajan entre las diferentes páginas webs a través del objeto `param`, no necesitamos capturar el parámetro en el Servlet, subirlo como un atributo en algun ambito y después leerlo en la otra vista,  todo lo hace implicitamente a través de `param`**
+
+
+#### Ejecutar la aplicación 
+
+![5-param-1](images/5-param-1.png)
+
+Seleccionamos la opción de Registrar pregunta.
+
+![5-param-2](images/5-param-2.png)
+
+Capturamos la pregunta y presionamos el botón `Registrar`.
+
+![5-param-3](images/5-param-3.png)
+
+En la siguiente vista se muestra la pregunta que se capturo.
+
+![5-param-4](images/5-param-4.png)
+
+#### Código
+
+```java
+package com.novellius;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.novellius.modelo.Cuenta;
+import com.novellius.modelo.beans.Administrador;
+
+/**
+ * Servlet implementation class Servlet
+ */
+public class Servlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger log = LogManager.getLogger("Servlet: ");
+	private String rutaJsp;
+
+	// Variables para interctuar con la BD
+	private DataSource ds;
+	private Connection con;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Servlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		super.init(config);
+
+		// System.out.println(config.getInitParameter("rutaJsp"));
+		rutaJsp = config.getInitParameter("rutaJsp");
+
+		// Configurar Logger
+		BasicConfigurator.configure();
+
+		// Confuguración JNDI
+		try {
+			InitialContext initContext = new InitialContext();
+			Context env = (Context) initContext.lookup("java:comp/env");
+			ds = (DataSource) env.lookup("jdbc/novellius");
+		} catch (NamingException e) {
+			log.error("Al configurar JNDI: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String accion = request.getParameter("accion");
+		HttpSession sesion = request.getSession();
+		
+		// Conexión a la BD
+		try {
+		   con = ds.getConnection();
+		} catch (SQLException e) {
+		   // Enviar a una vista de error
+		  log.error("Error al crear conexión: " + e.getMessage());
+		}
+
+		if (accion != null) {
+			if (accion.equals("login")) {
+				setRespuestaControlador(accion).forward(request, response);
+			} else if (accion.equals("logout")) {
+				sesion.invalidate();
+				log.info("Sesión destruida");
+				setRespuestaControlador("login").forward(request, response);
+			} else if (accion.equals("consultarAdministradores")) {
+				
+				//Intanciación anónima me evito 
+				//Cuenta cuenta = new Cuenta(con);
+				ArrayList<Administrador> administradores = new Cuenta(con).consultarAdministradores();
+				
+				if(administradores.isEmpty()) {
+					request.setAttribute("mensaje", "No se encotrarón administradores");
+				}else {
+					request.setAttribute("mensaje", "Administradores encontrados");
+					// Vamos a cargar los administradores encontrados en la sesión
+					sesion.setAttribute("administradores", administradores);
+				}
+				setRespuestaControlador("consultaAdministradores").forward(request, response);
+			} else if (accion.contentEquals("registrarPregunta")) {
+				setRespuestaControlador(accion).forward(request, response);
+			} else if (accion.contentEquals("mostrarPregunta")) {
+				setRespuestaControlador(accion).forward(request, response);
+			}
+		} else {
+			setRespuestaControlador("login").forward(request, response);
+		}
+		
+		// Conexión a la BD
+		try {
+		   con.close();
+		} catch (SQLException e) {
+		   // Enviar a una vista de error
+		   log.error("Error al cerrar conexión: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String accion = request.getParameter("accion");
+		HttpSession sesion = request.getSession();
+
+		// Conexión a la BD
+		try {
+			con = ds.getConnection();
+		} catch (SQLException e) {
+			// Enviar a una vista de error
+			log.error("Error al crear conexión: " + e.getMessage());
+
+		}
+
+		if (accion != null) {
+
+			if (accion.equals("iniciarSesion")) {
+
+				String usuario = request.getParameter("usuario");
+				String contrasena = request.getParameter("contrasena");
+				
+				
+				// Creación de la Cookie
+				Cookie cookieUsurio = new Cookie("usuario", usuario);
+				Cookie cookieContrasena = new Cookie("contrasena", contrasena);
+				
+				try {
+						
+				   if (request.getParameter("ckbox").equals("on")) {
+						
+						// Tiempo de vida 1 día
+						cookieUsurio.setMaxAge(60 * 60 * 24);
+						cookieContrasena.setMaxAge(60 * 60 * 24);
+						// Añado las cookies
+						response.addCookie(cookieUsurio);
+						response.addCookie(cookieContrasena);
+						
+						System.out.println("Cookies añadidos");
+					}
+				} catch (NullPointerException e) {
+					log.info("chbox vacio");
+					
+					
+					// Expira las cookies
+					cookieUsurio.setMaxAge(0);
+					cookieContrasena.setMaxAge(0);
+					// Añado las cookies
+					response.addCookie(cookieUsurio);
+					response.addCookie(cookieContrasena);
+				}
+
+				// Invocar consulta SQL
+				Cuenta cuenta = new Cuenta(con);
+
+				if (cuenta.login(usuario, contrasena)) {
+					log.info("Ingresado correctamente como: " + usuario);
+
+
+					// Ámbito sesión
+					sesion.setAttribute("usuario", usuario);
+					setRespuestaControlador("postLogin").forward(request, response);
+
+				} else {
+					log.error("Error de login");
+					request.setAttribute("error", "Nombre de usuario o contraseña incorrectos.");
+					
+					setRespuestaControlador("login").forward(request, response);
+				}
+			}
+
+		} else {
+			setRespuestaControlador("login").forward(request, response);
+		}
+
+		// Conexión a la BD
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// Enviar a una vista de error
+			log.error("Error al cerrar conexión: " + e.getMessage());
+		}
+
+	}
+
+	public RequestDispatcher setRespuestaControlador(String vista) {
+		String url = rutaJsp + vista + ".jsp";
+		return getServletContext().getRequestDispatcher(url);
+	}
+}
+
+```
+
+*Servlet.java*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PostLogin</title>
+</head>
+<body>
+   <h1>Sesión Iniciada</h1>
+	
+   <p>Ingresado como: <%= session.getAttribute("usuario") %></p>
+		
+   <table>
+      <tr>
+         <td><a href="?accion=consultarAdministradores" >Consultar administradores</a></td>
+      </tr>
+      <tr>
+         <td><a href="?accion=registrarPregunta" >Registrar pregunta</a></td>
+      </tr>
+      <tr>
+         <td><a href="?accion=logout">Cerrar sesión</a></td>
+      </tr>
+   </table>
+   <p>
+      Contenido Principal
+   </p>
+
+</body>
+</html>
+```
+
+*postLogin.jsp*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registrar Pregunta</title>
+</head>
+<body>
+   <h1>Registrar Pregunta Secreta</h1>
+   <form>
+      <p>Captura la pregunta secreta:</p>
+      <input type="text" name="pregunta" size="35" /> <br/>
+      <input type="hidden" name="accion" value="mostrarPregunta" />
+		
+      <input type="submit" value="Registrar" />
+   </form>
+</body>
+</html>
+```
+
+*registrarPregunta.jsp*
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mostrar Pregunta Secreta</title>
+</head>
+<body>
+   <h1>Mostrar Pregunta Secreta</h1>
+	
+   <p>La pregunta secreta capturada es:</p>
+   <c:out value="${param.pregunta}"></c:out>
+</body>
+</html>
+```
+
+*mostrarPregunta.jsp*
 
 
 ## Inserción de un registro en la B.D. con JSTL 07:41
