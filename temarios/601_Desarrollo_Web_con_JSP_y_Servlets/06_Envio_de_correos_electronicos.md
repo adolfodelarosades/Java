@@ -41,7 +41,20 @@ el cual lo añadimos en la carpeta `lib` y lo añadimos al Build Path.
 
 ![6-lib-email](images/6-lib-email.png)
 
-
 ## Creación de una clase manejadora de correos 17:13
+
+En esta lección vamos a crear una clase manejadora de correos. 
+
+La nueva clase la crearemos en un nuevo paquete llamado `util` dentro de este paquete crearemos la clase `ManejadorCorreos.java` esta clase tiene que hacer los siguientes pasos:
+
+* Iniciarlizar las propiedades de conexión como Host, Puerto, Usuario, Autenticación
+* Inicializar una sesión de email con todas las propiedades previamente definidas
+* Composición del mensaje pasando como parámetro la sesión. Establece emisor, destinatario, asunto y mensaje
+* Crear un objeto que modela un objeto para el transportedel transporte, crea un canal de comunicación para el mensaje. 
+
+Una vez hecho todo esto crearemos una clase de prueba `TestManejadorCorreos.java` para el envio de correos, con un método ``.
+
+
+
 ## Implementación de envío de correos electrónicos en la Vista y el Controlador 12:34
 ## Completando el código de envío de correos 06:37
