@@ -165,7 +165,7 @@ Un mensaje corresponde al Scripler y otro al JSTL.
 </html>
 ```
 
-## Uso de las etiquetas c:if y c:choose 03:54
+## Uso de las etiquetas `c:if` y `c:choose` 03:54
 
 En esta lección vamos a aprender a manejar condiciones con JSTL.
 
@@ -352,7 +352,7 @@ public ArrayList<Administrador> consultarAdministradores(){
 
 Este método retorna un `ArrayList` de `Administrador`, hace una consulta a la tabla `administrador`, recorre lo recuperado con un `while` con cada registro recuperado construye un objeto `Administrador` que va insertando en el `ArrayList` y cuando finaliza el ciclo nos devuelve el `ArrayList` con todos los `Administradores` encontrados.
 
-## Iteraciones con `c:foreach 13:15
+## Iteraciones con `c:foreach` 13:15
 
 En esta lección vamos a iterar el `ArrayList` creado usando el taglib `c:foreach`.
 
@@ -508,22 +508,23 @@ public class Cuenta {
 <title>PostLogin</title>
 </head>
 <body>
-	<h1>Sesión Iniciada</h1>
+   <h1>Sesión Iniciada</h1>
 	
-	<p>Ingresado como: <%= session.getAttribute("usuario") %></p>
+   <p>Ingresado como: <%= session.getAttribute("usuario") %></p>
 	
 	
-	<table>
-		<tr>
-			<td><a href="?accion=consultarAdministradores" >Consultar administradores</a></td>
-		</tr>
-		<tr>
-			<td><a href="?accion=logout">Cerrar sesión</a></td>
-		</tr>
-	</table>
-	<p>
-		Contenido Principal
-	</p>
+   <table>
+      <tr>
+	 <td><a href="?accion=consultarAdministradores" >Consultar administradores</a></td>
+      </tr>
+      <tr>
+	 <td><a href="?accion=logout">Cerrar sesión</a></td>
+      </tr>
+   </table>
+   
+   <p>
+      Contenido Principal
+   </p>
 
 </body>
 </html>
@@ -920,8 +921,11 @@ Ejecución del Programa.
 
 ![5-ej-6](images/5-ej-6.png)
 
-## Manejo de parámetros HTTP con param 08:00
+## Manejo de parámetros HTTP con `param` 08:00
 
-En esta lección vamos a ver como manejar parámetros HTTP 
+En esta lección vamos a ver como manejar parámetros HTTP enviados de una página web a otra mediante JSTL.
+
+
+
 ## Inserción de un registro en la B.D. con JSTL 07:41
 ## Funciones en JSTL 05:04
