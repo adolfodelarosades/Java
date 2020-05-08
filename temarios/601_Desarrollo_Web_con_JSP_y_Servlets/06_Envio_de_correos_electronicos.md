@@ -32,6 +32,16 @@ Para poder envíar correos en Java hay que configurar una cuenta de correos desd
 
 ![6-email-8](images/6-email-8.png)
 
+### Configigurar JavaMail API (compat) » 1.4.7
+
+[JavaMail API (compat) » 1.4.7](https://mvnrepository.com/artifact/javax.mail/mail/1.4.7)
+
+Necesitamos descargar la librería `javax.mail.jar`, en enlace abterior nos permite descargar `mail-1.4.7.jar`
+el cual lo añadimos en la carpeta `lib` y lo añadimos al Build Path.
+
+![6-lib-email](images/6-lib-email.png)
+
+
 ## Creación de una clase manejadora de correos 17:13
 ## Implementación de envío de correos electrónicos en la Vista y el Controlador 12:34
 ## Completando el código de envío de correos 06:37
