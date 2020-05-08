@@ -93,47 +93,46 @@ import javax.mail.internet.MimeMessage;
 
 public class ManejadorCorreos {
 	
-	// Propiedades de la clase
-	private Properties props; // Datos del correo que va a enviar el mensaje HOST, PUERTO, EMAIL, AUTENTICACIÓN
-	private Session sesion; // Sesión de javax.mail, una vez que se implementa la conexión esta sesión se conecta a ella para establecer un canal y poder enviar el mensaje y después cierra la conexión 
-	private Transport transport; // Crean las conexiones para el email
-	private MimeMessage msg; // Aquí se compone el cuerpo del mensaje
+   // Propiedades de la clase
+   private Properties props; // Datos del correo que va a enviar el mensaje HOST, PUERTO, EMAIL, AUTENTICACIÓN
+   private Session sesion; // Sesión de javax.mail, una vez que se implementa la conexión esta sesión se conecta a ella para establecer un canal y poder enviar el mensaje y después cierra la conexión 
+   private Transport transport; // Crean las conexiones para el email
+   private MimeMessage msg; // Aquí se compone el cuerpo del mensaje
 	
-	//Constructor
-	public ManejadorCorreos() {
+   //Constructor
+   public ManejadorCorreos() {
 		
-		// Inicializar y llenar las propiedades básicas para poder conectar y enviar un correo
-		props = new Properties();
-		props.setProperty("mail.smtp.host", "mail.bskdance.com"); // Host del correo saliente
-		props.setProperty("mail.smtp.port", "26"); // Puerto del correo saliente
-		props.setProperty("mail.smtp.user", "adolfo@bskdance.com"); // Usuario del correo saliente
-		props.setProperty("mail.smtp.auth", "true"); // Autenticación
+      // Inicializar y llenar las propiedades básicas para poder conectar y enviar un correo
+      props = new Properties();
+      props.setProperty("mail.smtp.host", "mail.bskdance.com"); // Host del correo saliente
+      props.setProperty("mail.smtp.port", "26"); // Puerto del correo saliente
+      props.setProperty("mail.smtp.user", "adolfo@bskdance.com"); // Usuario del correo saliente
+      props.setProperty("mail.smtp.auth", "true"); // Autenticación
 		
-	}
+   }
 	
-	//Método para enviar el correo
-	//Dispara las excepciones hacia arriba para que el Servlet maneje la excepción y 
-	//redirija a una vista que muestre un mensaje de error
-	public void enviarCorreos(String destinatario, String asunto, String mensaje) throws MessagingException, NoSuchProviderException {
+   //Método para enviar el correo
+   //Dispara las excepciones hacia arriba para que el Servlet maneje la excepción y 
+   //redirija a una vista que muestre un mensaje de error
+   public void enviarCorreos(String destinatario, String asunto, String mensaje) throws MessagingException, NoSuchProviderException {
 		
-		//Inicializar sesión con las propiedades definidas
-		sesion = Session.getDefaultInstance(props);
+      //Inicializar sesión con las propiedades definidas
+      sesion = Session.getDefaultInstance(props);
 		
-		//Composición del mensaje, establece emisor, destinatario, asunto y mensaje
-		msg = new MimeMessage(sesion);
-		msg.setFrom(new InternetAddress("adolfo@bskdance.com"));
-		msg.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
-		msg.setSubject(asunto);
-		msg.setText("<h1>Mensaje</h1>"
-		          +	"<p>" + mensaje + "</p>", "UTF-8", "html"); //Puedi mandar texto plano o html
+      //Composición del mensaje, establece emisor, destinatario, asunto y mensaje
+      msg = new MimeMessage(sesion);
+      msg.setFrom(new InternetAddress("adolfo@bskdance.com"));
+      msg.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+      msg.setSubject(asunto);
+      msg.setText("<h1>Mensaje</h1>"
+               +  "<p>" + mensaje + "</p>", "UTF-8", "html"); //Puedi mandar texto plano o html
 	
-		// Crear un objeto que modela un objeto para el transportedel transporte, crea un canal de comunicación para el mensaje. 
-		transport = sesion.getTransport("smtp"); // Protocolo para enviar emails
-		transport.connect("adolfo@bskdance.com", "1234ABCD"); //Claves de autenticación
-		transport.sendMessage(msg, msg.getAllRecipients()); // Envío del correo (se puede envíar a varios destinatarios si son un array)
-		transport.close(); // Cerrar la conexión
-	}
-
+      // Crear un objeto que modela un objeto para el transportedel transporte, crea un canal de comunicación para el mensaje. 
+      transport = sesion.getTransport("smtp"); // Protocolo para enviar emails
+      transport.connect("adolfo@bskdance.com", "1234ABCD"); //Claves de autenticación
+      transport.sendMessage(msg, msg.getAllRecipients()); // Envío del correo (se puede envíar a varios destinatarios si son un array)
+      transport.close(); // Cerrar la conexión
+   }
 }
 ```
 
@@ -147,22 +146,75 @@ import javax.mail.NoSuchProviderException;
 
 public class TestManejadorCorreos {
 	
-	public static void main(String[] args) {
-		ManejadorCorreos manejadorCorreos = new ManejadorCorreos();
-		try {
-			manejadorCorreos.enviarCorreos("adolfodelarosa2012@gmail.com", "Test de envío de Email desde Java", "Test de envío de Email desde Java" );
-			System.out.println("Correo envíado");
-		} catch (NoSuchProviderException e) {
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-	}
+   public static void main(String[] args) {
+      ManejadorCorreos manejadorCorreos = new ManejadorCorreos();
+      try {
+         manejadorCorreos.enviarCorreos("adolfodelarosa2012@gmail.com", "Test de envío de Email desde Java", "Test de envío de Email desde Java" );
+         System.out.println("Correo envíado");
+      } catch (NoSuchProviderException e) {
+         e.printStackTrace();
+      } catch (MessagingException e) {
+         e.printStackTrace();
+      }
+   }
 }
 ```
 
 *TestManejadorCorreos.java*
 
-
 ## Implementación de envío de correos electrónicos en la Vista y el Controlador 12:34
+
+En esta lección vamos a implementar el envío de correos electrónicos en la Vista y el Controlador. 
+
+Lo primero que haremos es incluir una opción a nuestro menú en la vista `postLogin.jsp`.
+
+```html
+<tr>
+   <td><a href="?accion=enviarCorreo" >Enviar correo electrónico</a></td>
+</tr>
+```
+
+Manejamos esta nueva acción en nuestro Servlet.
+
+```java
+} else if (accion.contentEquals("enviarCorreo")) {
+   setRespuestaControlador(accion).forward(request, response);
+}
+```
+
+Creamos la nueva vista `enviarCorreo.jsp`
+
+```html
+<h1>Enviar Correo electrónico</h1>
+
+<form method="post" action="?accion=enviarCorreo">
+		
+   <p>Para: <input type="text" name="destinatario" size="35" /></p>
+   <p>Asunto: <input type="text" name="asunto" size="35" /></p>
+   <p>Mensaje: <input type="text" name="destinatario" size="35" /></p>
+		
+   <input type="submit" value="Enviar Correo" />
+</form>
+```
+
+Tenemos una nueva acción `enviarCorreo` que debemos manejar en el método `doPost()` del Servlet.
+
+```java
+
+```
+
+Vamos a crear la nueva vista `errorCorreo.jsp` 
+
+```html
+
+```
+
+Metemos en el método `doGet()` la acción de `menu`:
+
+```java
+} else if (accion.equals("menu")) {
+   setRespuestaControlador("postLogin").forward(request, response);
+}
+```
+
 ## Completando el código de envío de correos 06:37
