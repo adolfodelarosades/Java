@@ -1300,6 +1300,13 @@ public class Servlet extends HttpServlet {
 
 *mostrarPregunta.jsp*
 
-
 ## Inserción de un registro en la B.D. con JSTL 07:41
+
+Hasta aquí la pregunta no la estamos insertando en la BD, solo estamos insertandola en el formulario y la mostramos en la vista `mostrarPregunta.jsp`, vamos a hacer algunos cambios para que en lugar de mostrar la pregunta la inserte en la BD a través de JSTL. Lo primero que haremos es cambiar el nombre de la vista `mostrarPregunta.jsp` por `insertarPregunta.jsp`, debemos cambiar todas las referencias a `mostrarPregunta` por `insertarPregunta`. Una vez hecho esto modificamos la vista `insertarPregunta.jsp` para que en lugar de mostrar la vista la inserte en la BD. Actualmente solo tenemos 2 preguntas.
+
+![5-tabla-preguntas-1](images/5-tabla-preguntas-1.png)
+
+
+
+
 ## Funciones en JSTL 05:04
