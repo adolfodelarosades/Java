@@ -59,7 +59,7 @@ Packt Upsell
 
 * PacktPub.com
 
-Introducing JEE and Eclipse
+### Introducing JEE and Eclipse
 
 * JEE
 
@@ -75,548 +75,548 @@ Introducing JEE and Eclipse
 
       * Enterprise JavaBeans
 
-The enterprise integration layer
+   * The enterprise integration layer
 
-Java Database Connectivity 
+      * Java Database Connectivity 
 
-The Java Persistence API
+      * The Java Persistence API
 
-Java Connector Architecture
+      * Java Connector Architecture
 
-Web services
+      * Web services
 
-Eclipse IDE
+   * Eclipse IDE
 
-Workspace
+      * Workspace
 
-Plugin
+      * Plugin
 
-Editors and views
+      * Editors and views
 
-Perspective
+      * Perspective
 
-Eclipse preferences
+      * Eclipse preferences
 
-Installing products
+* Installing products
 
-Installing Eclipse
+   * Installing Eclipse
 
-Installing the Tomcat server
+   * Installing the Tomcat server
 
-Installing the GlassFish server
+   * Installing the GlassFish server
 
-Installing MySQL
+   * Installing MySQL
 
-Installing MySQL on Windows
+      * Installing MySQL on Windows
 
-Installing MySQL on macOS X
+      * Installing MySQL on macOS X
 
-Installing MySQL on Linux
+      * Installing MySQL on Linux
 
-Creating MySQL users
+      * Creating MySQL users
 
-Summary
+* Summary
 
-Creating a Simple JEE Web Application
+### Creating a Simple JEE Web Application
 
-Configuring Tomcat in Eclipse
+* Configuring Tomcat in Eclipse
 
-JavaServer Pages
+* JavaServer Pages
 
-Creating a dynamic web project
+   * Creating a dynamic web project
 
-Creating JSP
+   * Creating JSP
 
-Running JSP in Tomcat
+   * Running JSP in Tomcat
 
-Using JavaBeans in JSP
+   * Using JavaBeans in JSP
 
-Using JSTL
+   * Using JSTL
 
-Java Servlet
+* Java Servlet
 
-Creating WAR
+* Creating WAR
 
-JavaServer Faces
+* JavaServer Faces
 
-Using Maven for project management
+* Using Maven for project management
 
-Maven views and preferences in Eclipse JEE
+   * Maven views and preferences in Eclipse JEE
 
-Creating a Maven project
+   * Creating a Maven project
 
-Maven archetype
+      * Maven archetype
 
-Exploring the POM
+   * Exploring the POM
 
-Adding Maven dependencies
+   * Adding Maven dependencies
 
-Maven project structure
+   * Maven project structure
 
-Creating a WAR file using Maven
+   * Creating a WAR file using Maven
 
-Summary
+* Summary
 
-Source Control Management in Eclipse
+### Source Control Management in Eclipse
 
-The Eclipse subversion plugin
+* The Eclipse subversion plugin
 
-Installing the Eclipse Subversion plugin
+   * Installing the Eclipse Subversion plugin
 
-Adding projects to an SVN repository
+   * Adding projects to an SVN repository
 
-Committing changes to an SVN repository
+   * Committing changes to an SVN repository
 
-Synchronizing with an SVN repository
+   * Synchronizing with an SVN repository
 
-Checking out a project from SVN
+   * Checking out a project from SVN
 
-Eclipse Git plugin
+* Eclipse Git plugin
 
-Adding a project to Git
+   * Adding a project to Git
 
-Committing files in the Git repository
+   * Committing files in the Git repository
 
-Viewing file differences after modifications
+   * Viewing file differences after modifications
 
-Creating a new branch
+   * Creating a new branch
 
-Committing a project to a remote repository
+   * Committing a project to a remote repository
 
-Pulling changes from a remote repository
+   * Pulling changes from a remote repository
 
-Cloning a remote repository
+   * Cloning a remote repository
 
-Summary
+* Summary
 
-Creating JEE Database Applications
+### Creating JEE Database Applications
 
-Creating database schema
+* Creating database schema
 
-Script to create tables and relationships
+   * Script to create tables and relationships
 
-Creating tables in MySQL
+   * Creating tables in MySQL
 
-Creating a database application using JDBC
+* Creating a database application using JDBC
 
-Creating a project and setting up Maven dependencies
+   * Creating a project and setting up Maven dependencies
 
-Creating JavaBeans for data storage
+   * Creating JavaBeans for data storage
 
-Creating JSP to add a course
+   * Creating JSP to add a course
 
-JDBC concepts
+   * JDBC concepts
 
-Creating database connections
+      * Creating database connections
 
-Executing SQL statements
+      * Executing SQL statements
 
-Handling transactions
+      * Handling transactions
 
-Using a JDBC database connection pool
+   * Using a JDBC database connection pool
 
-Saving courses in database tables using JDBC
+   * Saving courses in database tables using JDBC
 
-Getting courses from database tables using JDBC
+   * Getting courses from database tables using JDBC
 
-Completing add course functionality
+   * Completing add course functionality
 
-Using Eclipse Data Source Explorer
+   * Using Eclipse Data Source Explorer
 
-Creating database applications using JPA
+* Creating database applications using JPA
 
-Creating user interfaces for adding courses using JSF
+   * Creating user interfaces for adding courses using JSF
 
-JPA concepts
+   * JPA concepts
 
-Entity
+      * Entity
 
-EntityManager
+      * EntityManager
 
-EntityManagerFactory
+      * EntityManagerFactory
 
-Creating a JPA application
+   * Creating a JPA application
 
-Creating a new MySQL schema
+   * Creating a new MySQL schema
 
-Setting up a Maven dependency for JPA
+   * Setting up a Maven dependency for JPA
 
-Converting a project into a JPA project
+   * Converting a project into a JPA project
 
-Creating entities
+   * Creating entities
 
-Configuring entity relationships
+   * Configuring entity relationships
 
-Configuring many-to-one relationships
+      * Configuring many-to-one relationships
 
-Configuring many-to-many relationships
+      * Configuring many-to-many relationships
 
-Creating database tables from entities
+   * Creating database tables from entities
 
-Using JPA APIs to manage data
+   * Using JPA APIs to manage data
 
-Wiring user interface with JPA service classes
+   * Wiring user interface with JPA service classes
 
-Summary
+* Summary
 
-Unit Testing
+### Unit Testing
 
-Introducing JUnit
+* Introducing JUnit
 
-Creating and executing unit tests using Eclipse JEE
+* Creating and executing unit tests using Eclipse JEE
 
-Creating unit test cases
+   * Creating unit test cases
 
-Running unit test cases
+   * Running unit test cases
 
-Running unit test cases using Maven
+      * Running unit test cases using Maven
 
-Mocking external dependencies for unit tests
+* Mocking external dependencies for unit tests
 
-Using Mockito
+   * Using Mockito
 
-Calculating unit test coverage
+* Calculating unit test coverage
 
-Summary
+* Summary
 
-Debugging the JEE Application
+### Debugging the JEE Application
 
-Debugging a remote Java application
+* Debugging a remote Java application
 
-Debugging a web application using Tomcat in Eclipse EE
+* Debugging a web application using Tomcat in Eclipse EE
 
-Starting Tomcat in Debug mode
+   * Starting Tomcat in Debug mode
 
-Setting breakpoints
+   * Setting breakpoints
 
-Running the application in Debug mode
+   * Running the application in Debug mode
 
-Performing step operations and inspecting variables
+   * Performing step operations and inspecting variables
 
-Inspecting variable values
+   * Inspecting variable values
 
-Debugging an application in an externally configured Tomcat
+* Debugging an application in an externally configured Tomcat
 
-Using the debugger to know the status of program execution
+* Using the debugger to know the status of program execution
 
-Summary
+* Summary
 
-Creating JEE Applications with EJB
+### Creating JEE Applications with EJB
 
-Types of EJB
+* Types of EJB
 
-Session beans
+   * Session beans
 
-Stateful session beans
+      * Stateful session beans
 
-Stateless session beans
+      * Stateless session beans
 
-Singleton session beans
+      * Singleton session beans
 
-Accessing session beans from a client
+   * Accessing session beans from a client
 
-Creating a no-interface session bean
+      * Creating a no-interface session bean
 
-Accessing session beans using dependency injection
+      * Accessing session beans using dependency injection
 
-Creating session beans using local business interface
+      * Creating session beans using local business interface
 
-Accessing session beans using JNDI lookup
+      * Accessing session beans using JNDI lookup
 
-Creating session beans using remote business interface
+      * Creating session beans using remote business interface
 
-Accessing remote session beans
+      * Accessing remote session beans
 
-Configuring the GlassFish Server in Eclipse
+* Configuring the GlassFish Server in Eclipse
 
-Creating a Course Management application using EJB
+* Creating a Course Management application using EJB
 
-Creating EJB projects in Eclipse
+   * Creating EJB projects in Eclipse
 
-Configuring datasources in GlassFish
+   * Configuring datasources in GlassFish
 
-Configuring JPA in an Eclipse project
+   * Configuring JPA in an Eclipse project
 
-Creating a JPA entity
+   * Creating a JPA entity
 
-Creating stateless EJB
+   * Creating stateless EJB
 
-Creating JSF and managed beans
+   * Creating JSF and managed beans
 
-Running the example
+   * Running the example
 
-Creating EAR for deployment outside Eclipse
+   * Creating EAR for deployment outside Eclipse
 
-Creating a JEE project using Maven
+* Creating a JEE project using Maven
 
-Summary
+* Summary
 
-Creating Web Applications with Spring MVC
+### Creating Web Applications with Spring MVC
 
-Dependency injection
+* Dependency injection
 
-Dependency injection in Spring
+* Dependency injection in Spring
 
-Component scopes
+   * Component scopes
 
-Installing Spring Tool Suite
+* Installing Spring Tool Suite
 
-Creating a Spring MVC application
+* Creating a Spring MVC application
 
-Creating a Spring project
+   * Creating a Spring project
 
-Understanding files created by the Spring MVC project template
+      * Understanding files created by the Spring MVC project template
 
-Building the Spring MVC application using JDBC
+   * Building the Spring MVC application using JDBC
 
-Configuring a datasource
+      * Configuring a datasource
 
-Using the Spring JDBCTemplate class
+      * Using the Spring JDBCTemplate class
 
-Creating the Spring MVC Controller
+      * Creating the Spring MVC Controller
 
-Creating View
+      * Creating View
 
-Mapping data using @ModelAttribute
+      * Mapping data using @ModelAttribute
 
-Using parameters in @RequestMapping
+      * Using parameters in @RequestMapping
 
-Using Spring interceptors
+      * Using Spring interceptors
 
-Spring MVC application using JPA
+   * Spring MVC application using JPA
 
-Configuring JPA
+      * Configuring JPA
 
-Creating the Course entity
+      * Creating the Course entity
 
-Creating CourseDAO and Controller
+      * Creating CourseDAO and Controller
 
-Creating the course list view
+      * Creating the course list view
 
-Summary
+* Summary
 
-Creating Web Services
+### Creating Web Services
 
-What is a web service?
+* What is a web service?
 
-JAXB
+* JAXB
 
-A JAXB example
+   * A JAXB example
 
-JSON-B
+* JSON-B
 
-A JSON-B example
+   * A JSON-B example
 
-RESTful web services
+* RESTful web services
 
-Creating RESTful web services using Jersey
+   * Creating RESTful web services using Jersey
 
-Implementing a REST GET request
+   * Implementing a REST GET request
 
-Testing the REST GET request in the browser
+   * Testing the REST GET request in the browser
 
-Creating a Java client for the REST GET web service
+   * Creating a Java client for the REST GET web service
 
-Implementing a REST POST request
+   * Implementing a REST POST request
 
-Writing a Java client for the REST POST web service
+   * Writing a Java client for the REST POST web service
 
-Invoking a POST RESTful web service from JavaScript
+   * Invoking a POST RESTful web service from JavaScript
 
-Creating a RESTful web service with form POST
+   * Creating a RESTful web service with form POST
 
-Creating a Java client for a form-encoded RESTful web service
+   * Creating a Java client for a form-encoded RESTful web service
 
-A RESTful web service using JSON-B
+   * A RESTful web service using JSON-B
 
-SOAP web services
+* SOAP web services
 
-SOAP
+   * SOAP
 
-WSDL
+   * WSDL
 
-UDDI
+   * UDDI
 
-Developing web services in Java
+   * Developing web services in Java
 
-Creating a web service implementation class
+      * Creating a web service implementation class
 
-Using JAX-WS reference implementation (Glassfish Metro)
+      * Using JAX-WS reference implementation (Glassfish Metro)
 
-Inspecting WSDL
+      * Inspecting WSDL
 
-Implementing a web service using an interface
+      * Implementing a web service using an interface
 
-Consuming a web service using JAX-WS
+      * Consuming a web service using JAX-WS
 
-Specifying an argument name in a web service operation
+      * Specifying an argument name in a web service operation
 
-Inspecting SOAP messages
+      * Inspecting SOAP messages
 
-Handling interfaces in RPC-style web services
+      * Handling interfaces in RPC-style web services
 
-Handling exceptions
+      * Handling exceptions
 
-Summary
+* Summary
 
-Asynchronous Programming with JMS
+### Asynchronous Programming with JMS
 
-Steps to send and receive messages using JMS
+* Steps to send and receive messages using JMS
 
-Creating queues and topics in GlassFish
+* Creating queues and topics in GlassFish
 
-Creating JEE project for a JMS application
+* Creating JEE project for a JMS application
 
-Creating JMS application using JSP and JSP bean
+*  Creating JMS application using JSP and JSP bean
 
-Executing addCourse.jsp
+   * Executing addCourse.jsp
 
-Implementing JMS queue sender class
+   * Implementing JMS queue sender class
 
-Implementing JMS queue receiver class
+   * Implementing JMS queue receiver class
 
-Adding multiple queue listeners
+      * Adding multiple queue listeners
 
-Implementing JMS topic publisher
+   * Implementing JMS topic publisher
 
-Implementing JMS topic subscriber
+   * Implementing JMS topic subscriber
 
-Creating JMS application using JSF and CDI beans
+* Creating JMS application using JSF and CDI beans
 
-Consuming JMS messages using MDBs
+* Consuming JMS messages using MDBs
 
-Summary
+* Summary
 
-Java CPU Profiling and Memory Tracking
+### Java CPU Profiling and Memory Tracking
 
-Creating a sample Java project for profiling
+* Creating a sample Java project for profiling
 
-Profiling the Java application
+* Profiling the Java application
 
-Identifying resource contention
+   * Identifying resource contention
 
-Memory tracking
+   * Memory tracking
 
-Eclipse plugins for profiling memory
+* Eclipse plugins for profiling memory
 
-Summary
+* Summary
 
-Microservices
+### Microservices
 
-What is a microservice?
+* What is a microservice?
 
-Eclipse MicroProfile
+* Eclipse MicroProfile
 
-Setting up a database for a microservice project
+* Setting up a database for a microservice project
 
-Implementing microservices using WildFly Swarm
+* Implementing microservices using WildFly Swarm
 
-Creating a WildFly Swarm project
+   * Creating a WildFly Swarm project
 
-Configuring JPA
+   * Configuring JPA
 
-Creating a course entity bean and a JPA factory
+   * Creating a course entity bean and a JPA factory
 
-Implementing microservices using Spring Boot
+* Implementing microservices using Spring Boot
 
-Deploying microservices in a Docker container
+* Deploying microservices in a Docker container
 
-What is Docker?
+   * What is Docker?
 
-How to get Docker
+   * How to get Docker
 
-How to use Docker
+   * How to use Docker
 
-Dockerfile
+      * Dockerfile
 
-Docker commands
+      * Docker commands
 
-Setting up Docker Tooling in Eclipse
+   * Setting up Docker Tooling in Eclipse
 
-Creating a Docker network
+   * Creating a Docker network
 
-Creating MySQL container
+   * Creating MySQL container
 
-Deploying microservices in a Docker container
+   * Deploying microservices in a Docker container
 
-Running containers using Docker Compose
+* Running containers using Docker Compose
 
-Summary
+* Summary
 
-Deploying JEE Applications in the Cloud
+### Deploying JEE Applications in the Cloud
 
-Deploying in the cloud
+* Deploying in the cloud
 
-Deploying in AWS Cloud
+* Deploying in AWS Cloud
 
-Creating the user group and user
+   * Creating the user group and user
 
-Installing the AWS Toolkit for Eclipse
+   * Installing the AWS Toolkit for Eclipse
 
-Launching the EC2 instance
+   * Launching the EC2 instance
 
-Installing the CourseManagement EJB application in the EC2 instance
+   * Installing the CourseManagement EJB application in the EC2 instance
 
-Installing the GlassFish 5 Server
+      * Installing the GlassFish 5 Server
 
-Installing the MySQL server
+      * Installing the MySQL server
 
-Configuring the datasource in the GlassFish 5 Server
+      * Configuring the datasource in the GlassFish 5 Server
 
-Installing the CourseManagmenet REST service using Elastic Beanstalk
+   * Installing the CourseManagmenet REST service using Elastic Beanstalk
 
-Creating Elastic Beanstalk application from Eclipse
+      * Creating Elastic Beanstalk application from Eclipse
 
-Deploying in Google Cloud
+* Deploying in Google Cloud
 
-Setting up Google Cloud Tools
+   * Setting up Google Cloud Tools
 
-Installing the Google Cloud SDK
+      * Installing the Google Cloud SDK
 
-Installing Java extensions for the App Engine SDK
+      * Installing Java extensions for the App Engine SDK
 
-Installing Google Cloud Tools for Eclipse
+      * Installing Google Cloud Tools for Eclipse
 
-Setting Eclipse Preferences for Google Cloud Tools
+      * Setting Eclipse Preferences for Google Cloud Tools
 
-Deploying the application in Google Compute Engine
+   * Deploying the application in Google Compute Engine
 
-Creating a VM instance in Google Compute Engine
+      * Creating a VM instance in Google Compute Engine
 
-Installing Docker in a VM instance
+      * Installing Docker in a VM instance
 
-Deploying the application in Google App Engine
+   * Deploying the application in Google App Engine
 
-Summary
+* Summary
 
-Securing JEE Applications
+### Securing JEE Applications
 
-Authentication and authorization in JEE
+* Authentication and authorization in JEE
 
-Modifying a database to save authentication information
+* Modifying a database to save authentication information
 
-Securing applications in GlassFish
+* Securing applications in GlassFish
 
-Protecting access to folders in web applications
+   * Protecting access to folders in web applications
 
-Configuring a JDBC realm in GlassFish
+   * Configuring a JDBC realm in GlassFish
 
-Basic authentication with the JDBC realm in GlassFish
+   * Basic authentication with the JDBC realm in GlassFish
 
-Form-based authentication with a JDBC realm in GlassFish
+   * Form-based authentication with a JDBC realm in GlassFish
 
-Securing applications in Tomcat
+* Securing applications in Tomcat
 
-Securing servlets using annotations
+* Securing servlets using annotations
 
-Securing web services
+* Securing web services
 
-Security enhancements in JEE 8
+* Security enhancements in JEE 8
 
-Implementing portable security in JEE 8
+   * Implementing portable security in JEE 8
 
-Summary
+* Summary
 
-Other Books You May Enjoy
+### Other Books You May Enjoy
 
-Leave a review - let other readers know what you think
+* Leave a review - let other readers know what you think
