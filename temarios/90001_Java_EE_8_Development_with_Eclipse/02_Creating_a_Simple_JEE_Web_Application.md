@@ -38,40 +38,40 @@
 
 * Summary
 
-## Configuring Tomcat in Eclipse
+# Configuring Tomcat in Eclipse
 
-## JavaServer Pages
+# JavaServer Pages
 
-### Creating a dynamic web project
+## Creating a dynamic web project
 
-### Creating JSP
+## Creating JSP
 
-### Running JSP in Tomcat
+## Running JSP in Tomcat
 
-### Using JavaBeans in JSP
+## Using JavaBeans in JSP
 
-### Using JSTL
+## Using JSTL
 
-## Java Servlet
+# Java Servlet
 
-## Creating WAR
+# Creating WAR
 
-## JavaServer Faces
+# JavaServer Faces
 
-## Using Maven for project management
+# Using Maven for project management
 
-### Maven views and preferences in Eclipse JEE
+## Maven views and preferences in Eclipse JEE
 
-### Creating a Maven project
+## Creating a Maven project
 
-#### Maven archetype
+### Maven archetype
 
-### Exploring the POM
+## Exploring the POM
 
-### Adding Maven dependencies
+## Adding Maven dependencies
 
-### Maven project structure
+## Maven project structure
 
-### Creating a WAR file using Maven
+## Creating a WAR file using Maven
 
-## Summary
+# Summary
