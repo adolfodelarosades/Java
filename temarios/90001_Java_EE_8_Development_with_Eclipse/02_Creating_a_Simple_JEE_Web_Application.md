@@ -317,6 +317,45 @@ charset=UTF-8">
 
 ## Running JSP in Tomcat
 
+Para ejecutar el JSP que creamos en la sección anterior en el navegador web, deberá implementar la aplicación en un contenedor de servlet. Ya hemos visto cómo configurar Tomcat en Eclipse. Asegúrese de que Tomcat se esté ejecutando verificando su estado en la vista Servidores de Eclipse:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-15.png)
+
+Figura 2.15: Tomcat se inició en la vista Servidores
+
+Hay dos formas de agregar un proyecto a un servidor configurado para que la aplicación se pueda ejecutar en el servidor:
+
+1. Haga clic derecho en el Servers view y seleccione la opción Add and Remove option . Seleccione su proyecto de la lista de la izquierda ( Available resources ) y haga clic en Add para moverlo a la lista Configurada . Haz clic en Finalizar.
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-16.png)
+
+Figura 2.16: Agregar un proyecto al servidor
+
+2. El otro método para agregar un proyecto al servidor es hacer clic derecho en el proyecto en el Project Explorer y seleccionar Properties. Esto abre el cuadro de diálogo Project Properties. Haga clic en Servidor en la lista y seleccione el servidor en el que desea implementar este proyecto. Haga clic en OK o Apply.
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-17.png)
+
+Figura 2.17: Seleccionar servidor en las propiedades del proyecto
+
+En el primer método, el proyecto se implementa inmediatamente en el servidor. En el segundo método, se implementará solo cuando ejecute el proyecto en el servidor.
+
+3. Para ejecutar la aplicación, haga clic derecho en el proyecto en Project Explorer y selecione Run As | Run on Server. La primera vez se le pedirá que reinicie el servidor. Una vez que se implementa la aplicación, la verá en el servidor seleccionado en la vista Servidores :
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-18.png)
+
+Figura 2.18: Proyecto implementado en el servidor
+
+4. Ingrese algún texto que no sea `admin` en los cuadros de username y password
+y haga clic en Submit . Debería ver el mensaje de error y volver a mostrar el mismo formulario.
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-19.png)
+
+Figura 2.19: Proyecto ejecutándose en el navegador incorporado en Eclipse
+
+5. Ahora ingrese `admin` como username y password y luego envíe el formulario. Deberías ver el mensaje de bienvenida.
+
+Los JSP se compilan dinámicamente en clases Java, por lo que si realiza algún cambio en la página, en la mayoría de los casos, no tiene que reiniciar el servidor; simplemente actualice la página, y Tomcat volverá a compilar la página si ha cambiado y se mostrará la página modificada. En los casos en que necesite reiniciar el servidor para aplicar sus cambios, Eclipse le preguntará si desea reiniciar el servidor.
+
 ## Using JavaBeans in JSP
 
 ## Using JSTL
