@@ -217,7 +217,6 @@ Object name | Type
 `response`  | `HttpServletResponse` (http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletResponse.html). Use esto para enviar una response (respuesta).
 `out`       | `JSPWriter` (http://docs.oracle.com/javaee/7/api/javax/servlet/jsp/JspWriter.html). Use esto para generar una respuesta de texto.
 `session`   | `HttpSession` (http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpSession.html). Use esto para obtener o poner objetos en la sesión.
-
 `application` | `ServletContext` (http://docs.oracle.com/javaee/7/api/javax/servlet/ServletContext.html). Use esto para obtener o poner objetos en el contexto, que se comparten entre todos los JSP y servlets en la misma aplicación.
 
 En este ejemplo, vamos a hacer uso de los objetos `request` y `out`. Primero verificaremos si el formulario se envía utilizando el método `POST`. Si es verdadero, obtendremos valores de campos de username y password . Si las credenciales son válidas (en este ejemplo, vamos a codificar el username y password  como `admin`), imprimiremos un mensaje de bienvenida:
@@ -246,10 +245,75 @@ En este ejemplo, vamos a hacer uso de los objetos `request` y `out`. Primero ver
   } 
 %> 
 ```
-************AQUI
-Hemos utilizado dos objetos integrados en el código anterior requesty out. Primero verificamos si se envió el formulario "POST".equalsIgnoreCase(request.getMethod(). Luego, verificamos si el botón de enviar se utilizó para publicar el formulario request.getParameter("submit") != null.
 
-Luego obtenemos el nombre de usuario y la contraseña llamando al  request.getParametermétodo. Para mantener el código simple, los comparamos con los valores codificados. En la aplicación real, lo más probable es que valide las credenciales en una base de datos o algún servicio de nombres y carpetas. Si las credenciales son válidas, imprimimos un mensaje utilizando el objeto out( JSPWriter). Si las credenciales no son válidas, establecemos un mensaje de error. Imprimiremos el mensaje de error, si lo hay, justo antes del formulario de inicio de sesión:
+Hemos utilizado dos objetos integrados en el código anterior `request` y `out`. Primero verificamos si se envió el formulario  `"POST".equalsIgnoreCase(request.getMethod()`. Luego, verificamos si el botón de enviar se utilizó para publicar el formulario `request.getParameter("submit") != null`.
+
+Luego obtenemos el nombre de usuario y la contraseña llamando al método `request.getParameter`. Para mantener el código simple, los comparamos con los valores codificados. En la aplicación real, lo más probable es que valide las credenciales en una base de datos o algún servicio de nombres y carpetas. Si las credenciales son válidas, imprimimos un mensaje utilizando el objeto `out`( `JSPWriter` ). Si las credenciales no son válidas, establecemos un mensaje de error. Imprimiremos el mensaje de error, si lo hay, justo antes del formulario de inicio de sesión:
+
+```html
+<h2>Login:</h2> 
+  <!-- Check error message. If it is set, then display it --> 
+  <%if (errMsg != null) { %> 
+    <span style="color: red;"><%=;"><%=;"><%=errMsg %></span> 
+  <%} %> 
+  <form method="post"> 
+  ... 
+  </form> 
+```
+
+Aquí, comenzamos otro bloque de código Java usando `<%%>`. Si un mensaje de error no es nulo, lo mostramos usando la etiqueta `span`. Observe cómo se imprime el valor del mensaje de error `<%=errMsg %>`. Esta es una sintaxis corta para `<%out.print(errMsg);%>`. Observe también que la llave que comenzó en el primer bloque de código Java se completa en el siguiente bloque de código Java separado. Entre estos dos bloques de código, puede agregar cualquier código HTML y se incluirá en la respuesta solo si la expresión condicional en el sentencia `if` se evalúa como verdadera.
+
+Aquí está el código completo del JSP que creamos en esta sección:
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+ "http://www.w3.org/TR/html4/loose.dtd"> 
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; 
+charset=UTF-8"> 
+<title>Login</title> 
+</head> 
+<% 
+  String errMsg = null; 
+  //first check whether the form was submitted 
+  if ("POST".equalsIgnoreCase(request.getMethod()) && 
+   request.getParameter("submit") != null) 
+  { 
+    //form was submitted 
+    String userName = request.getParameter("userName"); 
+    String password = request.getParameter("password"); 
+    if ("admin".equalsIgnoreCase(userName) && 
+     "admin".equalsIgnoreCase(password)) 
+    { 
+      //valid user 
+      out.println("Welcome admin !"); 
+      return; 
+    } 
+    else 
+    { 
+      //invalid user. Set error message 
+      errMsg = "Invalid user id or password. Please try again"; 
+    } 
+  } 
+%> 
+<body> 
+  <h2>Login:</h2> 
+  <!-- Check error message. If it is set, then display it --> 
+  <%if (errMsg != null) { %> 
+    <span style="color: red;"><%out.print(errMsg); %></span> 
+  <%} %> 
+  <form method="post"> 
+    User Name: <input type="text" name="userName"><br> 
+    Password: <input type="password" name="password"><br> 
+    <button type="submit" name="submit">Submit</button> 
+    <button type="reset">Reset</button> 
+  </form> 
+</body> 
+</html> 
+```
 
 ## Running JSP in Tomcat
 
