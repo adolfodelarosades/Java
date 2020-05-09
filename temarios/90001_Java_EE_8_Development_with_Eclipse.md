@@ -1,5 +1,8 @@
 # 90001 Java EE 8 Development with Eclipse
 
+
+![JavaEEDevelopmentWithEclipse](images/JavaEEDevelopmentWithEclipse.jpeg)
+
 Ram Kulkarni
 June 28, 2018
 596 pages
