@@ -171,13 +171,41 @@ Las anteriores son solo algunas de las especificaciones que forman parte de JEE.
 
 ## Eclipse IDE
 
-### Workspace
+Un buen IDE es esencial para una mejor productividad durante la codificación. Eclipse es uno de esos IDE, que tiene excelentes características de editor y muchos puntos de integración con tecnologías JEE. El objetivo principal de este libro es mostrarle cómo desarrollar aplicaciones JEE utilizando Eclipse. Entonces, la siguiente es una introducción rápida a Eclipse, si aún no está familiarizado con él.
+
+Eclipse es un IDE de código abierto para desarrollar aplicaciones en muchos lenguajes de programación diferentes. Es bastante popular para desarrollar muchos tipos diferentes de aplicaciones Java. Su arquitectura es conectable: hay un componente IDE central y se le pueden agregar muchos complementos diferentes. De hecho, el soporte para muchos idiomas se agrega como complementos de Eclipse, incluido el soporte para Java.
+
+Junto con el soporte del editor, Eclipse tiene complementos para interactuar con muchos de los sistemas externos utilizados durante el desarrollo. Los ejemplos incluyen sistemas de control de fuente como SVN y Git, herramientas de compilación como Apache Ant y Maven, exploradores de archivos para sistemas remotos que usan FTP, servidores de administración como Tomcat y GlassFish, exploradores de bases de datos, memoria y perfiladores de CPU. Veremos muchas de estas características en los capítulos siguientes. La siguiente captura de pantalla muestra la vista predeterminada de Eclipse para el desarrollo de aplicaciones JEE:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-2.png)
+
+Figura 1.2: Vista de Eclipse predeterminada
+
+Al trabajar con Eclipse, es bueno comprender los siguientes términos.
+
+CopiarAgregar resaltadoAñadir la nota
+
+### Workspace (Espacio de trabajo)
+
+El Workspace de Eclipse es una colección de proyectos, configuraciones y preferencias. Es una carpeta donde Eclipse almacena esta información. Debe crear un espacio de trabajo para comenzar a usar Eclipse. Puede crear múltiples espacios de trabajo, pero solo una instancia en ejecución de Eclipse puede abrir  uno a la vez . Sin embargo, puede iniciar varias instancias de Eclipse con diferentes Workspaces. 
 
 ### Plugin
 
+Eclipse tiene una arquitectura conectable. Muchas de las características de Eclipse se implementan como complementos, por ejemplo, complementos de editor para Java y muchos otros idiomas, complementos para SVN y Git, y muchos más. La instalación predeterminada de Eclipse viene con muchos complementos incorporados y puede agregar más complementos para las funciones que desee más adelante.
+
 ### Editors and views
 
+La mayoría de las ventanas en Eclipse se pueden clasificar como editor o como vista. Un editor es algo donde puede cambiar la información que se muestra en él. Una vista solo muestra la información y no le permite cambiarla. Un ejemplo de un editor es el editor de Java donde escribes código. Un ejemplo de una vista es la vista de esquema que muestra la estructura jerárquica del código que está editando (en el caso de un editor Java, muestra clases y métodos en el archivo que se está editando).
+
+Para ver todas las vistas en una instalación de Eclipse dada, abra la `Window | Show View | Other menu`:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-3.png)
+
+Figura 1.3: Mostrar todas las vistas de Eclipse
+
 ### Perspective
+
+La perspectiva es una colección de editores y vistas, y cómo se presentan u organizan en la ventana principal de Eclipse. En diferentes etapas de desarrollo, necesita diferentes vistas para mostrar. Por ejemplo, cuando está editando el código, necesita ver las  vistas Explorador de proyectos y Tarea , pero cuando está depurando una aplicación, no necesita esas vistas, sino que desea ver vistas de punto de corte y variable. Por lo tanto, la perspectiva de edición muestra, entre otras vistas y editores, las vistas  Explorador de proyectos y Tareas , y la perspectiva Depuración muestra vistas y editores relevantes para las actividades de depuración. Puede cambiar las perspectivas predeterminadas para adaptarlas a sus propósitos.
 
 ### Eclipse preferences
 
