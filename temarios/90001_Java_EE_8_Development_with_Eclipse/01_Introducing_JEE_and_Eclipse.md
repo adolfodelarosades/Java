@@ -341,8 +341,71 @@ Figura 1.14: My SQL Workbench
 
 ### Installing MySQL on macOS X
 
+Las versiones de OS X anteriores a la 10.7 tenían instalado MySQL Server por defecto. Si está utilizando OS X 10.7 o posterior, deberá descargar e instalar MySQL Community Server desde http://dev.mysql.com/downloads/mysql/ .
+
+Hay muchas formas diferentes de instalar MySQL en OS X. Consulte http://dev.mysql.com/doc/refman/5.7/en/osx-installation.html para obtener instrucciones de instalación para OS X. Tenga en cuenta que los usuarios de OS X deben tener privilegios de administrador para instalar MySQL Server.
+
+Una vez que instale el servidor, puede iniciarlo desde el símbolo del sistema o desde las preferencias del sistema:
+
+1. Para iniciarlo desde el símbolo del sistema, ejecute el siguiente comando en la Terminal:
+
+```sh
+sudo /usr/local/mysql/support-files/mysql.server start  
+```
+
+2. Para iniciarlo desde Preferencias del sistema , abra las preferencias y haga clic en el icono de MySQL:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-15.png)
+
+Figura 1.15: Preferencias del sistema MySQL - OS X
+
+Haga clic en el  botón Iniciar servidor MySQL .
+
 ### Installing MySQL on Linux
+
+Hay muchas formas diferentes de instalar MySQL en Linux. Consulte  https://dev.mysql.com/doc/refman/5.7/en/linux-installation.html para obtener más detalles.
 
 ### Creating MySQL users
 
+Puede crear usuarios de MySQL desde el símbolo del sistema o utilizando MySQL Workbench:
+
+1. Para ejecutar SQL y otros comandos desde el símbolo del sistema, abra la Terminal y escriba el siguiente comando:
+
+```sh
+mysql -u root -p<root_password> 
+```
+
+2. Una vez que haya iniciado sesión correctamente, verá el símbolo del sistema `mysql`:
+
+```sh
+mysql>  
+```
+
+3. Para crear un usuario, primero seleccione la mysqlbase de datos:
+
+```sh
+mysql>use mysql;
+Database changed
+mysql>create user 'user1'@'%' identified by 'user1_pass';  
+mysql>grant all privileges on *.* to 'user1'@'%' with grant option
+```
+
+El comando anterior creará un usuario `'user1'` con contraseña `'user1_pass'` que tenga todos los privilegios, por ejemplo, para insertar, actualizar y seleccionar de la base de datos. Y debido a que hemos especificado el host como `'%'`, este usuario puede acceder al servidor desde cualquier host.
+
+
+*Consulte https://dev.mysql.com/doc/refman/5.7/en/adding-users.html para obtener más detalles sobre cómo agregar usuarios a la base de datos MySQL*
+
+
+Si prefiere una **interfaz gráfica de usuario - graphical user interface (GUI)** para administrar a los usuarios, ejecute MySQL Workbench, conéctese al servidor MySQL local (consulte la Figura 1.13 Conexiones de MySQL Workbench) y luego haga clic en Usuarios y privilegios en la sección Administración :
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-16.png)
+
+Figura 1.16: Crear un usuario en MySQL Workbench
+
+Una vez instalados todos los productos anteriores, debe estar en condiciones de comenzar a desarrollar aplicaciones JEE. Es posible que necesitemos un software adicional, pero veremos cómo instalarlo y configurarlo en el momento adecuado.
+
 # Summary
+
+En este capítulo, tuvimos una breve introducción a las diferentes especificaciones JEE para la capa de presentación, la capa empresarial y la capa de integración empresarial. Aprendimos algunas de las terminologías importantes en Eclipse IDE. Luego aprendimos cómo instalar Eclipse, Tomcat, Glassfish, MySQL y MySQL Workbench. Vamos a utilizar estos productos en este libro para desarrollar aplicaciones JEE.
+
+En el próximo capítulo, configuraremos el servidor JEE y crearemos una aplicación simple utilizando servlets, JSP y JSF. También aprenderemos cómo usar Maven para compilar y empaquetar las aplicaciones JEE.
