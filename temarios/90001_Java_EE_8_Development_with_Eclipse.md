@@ -59,7 +59,7 @@ Packt Upsell
 
 * PacktPub.com
 
-### Introducing JEE and Eclipse
+### 1. Introducing JEE and Eclipse
 
 * JEE
 
@@ -117,7 +117,7 @@ Packt Upsell
 
 * Summary
 
-### Creating a Simple JEE Web Application
+### 2. Creating a Simple JEE Web Application
 
 * Configuring Tomcat in Eclipse
 
@@ -157,7 +157,7 @@ Packt Upsell
 
 * Summary
 
-### Source Control Management in Eclipse
+### 3. Source Control Management in Eclipse
 
 * The Eclipse subversion plugin
 
@@ -189,7 +189,7 @@ Packt Upsell
 
 * Summary
 
-### Creating JEE Database Applications
+### 4. Creating JEE Database Applications
 
 * Creating database schema
 
@@ -259,7 +259,7 @@ Packt Upsell
 
 * Summary
 
-### Unit Testing
+### 5. Unit Testing
 
 * Introducing JUnit
 
@@ -279,7 +279,7 @@ Packt Upsell
 
 * Summary
 
-### Debugging the JEE Application
+### 6. Debugging the JEE Application
 
 * Debugging a remote Java application
 
@@ -301,7 +301,7 @@ Packt Upsell
 
 * Summary
 
-### Creating JEE Applications with EJB
+### 7. Creating JEE Applications with EJB
 
 * Types of EJB
 
@@ -351,7 +351,7 @@ Packt Upsell
 
 * Summary
 
-### Creating Web Applications with Spring MVC
+### 8. Creating Web Applications with Spring MVC
 
 * Dependency injection
 
@@ -395,7 +395,7 @@ Packt Upsell
 
 * Summary
 
-### Creating Web Services
+### 9. Creating Web Services
 
 * What is a web service?
 
@@ -459,7 +459,7 @@ Packt Upsell
 
 * Summary
 
-### Asynchronous Programming with JMS
+### 10. Asynchronous Programming with JMS
 
 * Steps to send and receive messages using JMS
 
@@ -487,7 +487,7 @@ Packt Upsell
 
 * Summary
 
-### Java CPU Profiling and Memory Tracking
+### 11. Java CPU Profiling and Memory Tracking
 
 * Creating a sample Java project for profiling
 
@@ -501,7 +501,7 @@ Packt Upsell
 
 * Summary
 
-### Microservices
+### 12. Microservices
 
 * What is a microservice?
 
@@ -543,7 +543,7 @@ Packt Upsell
 
 * Summary
 
-### Deploying JEE Applications in the Cloud
+### 13. Deploying JEE Applications in the Cloud
 
 * Deploying in the cloud
 
@@ -589,7 +589,7 @@ Packt Upsell
 
 * Summary
 
-### Securing JEE Applications
+### 14. Securing JEE Applications
 
 * Authentication and authorization in JEE
 
@@ -617,6 +617,6 @@ Packt Upsell
 
 * Summary
 
-### Other Books You May Enjoy
+### 15. Other Books You May Enjoy
 
 * Leave a review - let other readers know what you think
