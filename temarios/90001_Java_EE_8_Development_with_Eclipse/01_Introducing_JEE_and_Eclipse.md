@@ -57,7 +57,7 @@
 * Summary
 
 
-## Introduciendo JEE y Eclipse
+# Introduciendo JEE y Eclipse
 
 Java Enterprise Edition (JEE, que anteriormente se llamaba J2EE) existe desde hace muchos años. Es una plataforma muy robusta para desarrollar aplicaciones empresariales. J2EE se lanzó por primera vez en 1999, pero sufrió cambios importantes con el lanzamiento de la versión 5 en 2006. Desde la versión 5, se ha renombrado **Java Enterprise Edition ( JEE )**. Las versiones recientes de JEE han hecho que desarrollar una aplicación distribuida de múltiples niveles sea mucho más fácil. J2EE se había centrado en los servicios básicos y había dejado las tareas que hacían que el desarrollo de aplicaciones fuera más fácil para los marcos externos, por ejemplo, MVC y marcos persistentes. Pero JEE ha incorporado muchos de estos marcos a los servicios principales. Junto con el soporte para anotaciones, estos servicios simplifican el desarrollo de aplicaciones en gran medida.
 
@@ -73,7 +73,7 @@ El objetivo de este libro es mostrar cómo puede desarrollar eficientemente apli
 
 *En 2017, Oracle acordó entregar el control de Java EE a Eclipse Foundation. En abril de 2018, la Fundación Eclipse renombró Java EE como Yakarta EE. Puede encontrar más información sobre Jakarta EE en  https://jakarta.ee/ . Al momento de escribir, la última versión de Java EE es 8. Pero todas las futuras versiones de Java EE se llamarán Jakarta EE.*
 
-## JEE
+# JEE
 
 JEE es una colección de muchos de los programas de Java Community Process ( https://www.jcp.org ). Actualmente, JEE está en la Versión 8. Sin embargo, las diferentes especificaciones de JEE están en sus propias versiones diferentes.
 
@@ -97,33 +97,33 @@ La mayoría de las aplicaciones JEE no triviales acceden a sistemas externos, co
 
 Las siguientes secciones proporcionan una breve descripción de cada una de las especificaciones JEE en diferentes capas. Veremos cómo usar estas especificaciones y sus API en más detalle en los capítulos siguientes. Sin embargo, tenga en cuenta que la siguiente no es la lista exhaustiva de todas las especificaciones en JEE. Veremos las especificaciones más utilizadas aquí. Para obtener una lista exhaustiva, visite http://www.oracle.com/technetwork/java/javaee/tech/index.html .
 
-### The presentation layer (La capa de presentación)
+## The presentation layer (La capa de presentación)
 
 Las especificaciones o tecnologías JEE en esta capa reciben solicitudes del servidor web y envían la respuesta, generalmente en formato HTML. Sin embargo, también es posible devolver solo datos de la capa de presentación, por ejemplo, en **JavaScript Object Notation ( JSON )** o en formato de **Lenguaje de marcado extensible ( XML )**, que podrían ser consumidos por  llamadas **Asynchronous JavaScript y XML ( AJAX )** para actualizar solo una parte de la página, en lugar de representar la página HTML completa. Las clases en la capa de presentación se ejecutan principalmente en el contenedor web; es una parte del servidor de aplicaciones que maneja las solicitudes web. Tomcat es un ejemplo de un contenedor web popular.
 
 Ahora echemos un vistazo a algunas de las especificaciones de esta capa.
 
-#### Java Servlets
+### Java Servlets
 
 Los Java Servlets son módulos del lado del servidor, que se utilizan generalmente para procesar solicitudes y enviar respuestas en aplicaciones web. Los servlets son útiles para manejar solicitudes que no generan grandes respuestas de marcado HTML. Por lo general, se usan como controladores en los marcos de **Model View Controller ( MVC )** , para reenviar / redirigir solicitudes o para generar respuestas que no son HTML, como PDF. Para generar una respuesta HTML desde el servlet, debe incrustar código HTML (como una cadena Java) en el código Java. Por lo tanto, no es la opción más conveniente para generar grandes respuestas HTML. **JEE 8 contiene servlet API 4.0**. 
 
-#### JavaServer Pages
+### JavaServer Pages
 
 Al igual que los servlets, las **JavaServer Pages (JSPs)** también son módulos del lado del servidor que se utilizan para procesar solicitudes web. Los JSP son excelentes para manejar solicitudes que generan grandes respuestas de marcado HTML. En las páginas JSP, el código Java o las etiquetas JSP se pueden mezclar con otro código HTML, como las etiquetas HTML, JavaScript y CSS. Dado que el código Java está incrustado en el código HTML más grande, es más fácil (que los servlets) generar una respuesta HTML desde las páginas JSP. **La especificación JSP 2.3 se incluye en JEE 8**.
 
-#### JavaServer Faces
+### JavaServer Faces
 
 JavaServer Faces (JSFs) hace que la creación de una interfaz de usuario en el lado del servidor sea modular al incorporar el patrón de diseño MVC en su implementación. También proporciona etiquetas fáciles de usar para controles de interfaz de usuario comunes que pueden guardar estados en múltiples intercambios de solicitud-respuesta entre el cliente y el servidor. Por ejemplo, si tiene una página que publica datos de formulario desde un navegador, puede hacer que un JSF guarde esos datos en un bean Java para que pueda usarse posteriormente en la respuesta a la misma solicitud o a otra diferente. Los JSF también facilitan el manejo de eventos de IU en el lado del servidor y especifican la navegación de página en una aplicación.
 
 Usted escribe el código JSF en JSP, utilizando etiquetas JSP personalizadas creadas para JSF. **JavaServer Faces API 2.3 es parte de JEE 8.**
 
-### The business layer (La capa empresarial)
+## The business layer (La capa empresarial)
 
 La capa empresarial es donde normalmente escribe código para manejar la lógica empresarial de su aplicación. Las solicitudes a esta capa pueden provenir de la capa de presentación, directamente de la aplicación del cliente o de la capa intermedia que consiste en, pero no se limita a, servicios web. Las clases en esta capa se ejecutan en la parte del contenedor de la aplicación del servidor JEE. GlassFish y WebSphere son ejemplos de contenedores web más contenedores de aplicaciones.
 
 Hagamos un recorrido por algunas de las especificaciones de este grupo.
 
-#### Enterprise JavaBeans
+### Enterprise JavaBeans
 
 **Enterprise JavaBeans ( EJB )** son las clases de Java donde puede escribir su lógica de negocios. Aunque no es un requisito estricto utilizar EJB para escribir la lógica empresarial, sí proporcionan muchos de los servicios que son esenciales en las aplicaciones empresariales. Estos servicios son seguridad, gestión de transacciones, búsqueda de componentes, agrupación de objetos, etc.
 
@@ -138,44 +138,65 @@ JMS y beans controlados por mensajes se pueden usar para manejar solicitudes asi
 
 **Java EE 8 contiene la especificación 3.2 de EJB y la especificación 2.0 de JMS.**
 
-### The enterprise integration layer
+## The enterprise integration layer (La capa de integración empresarial)
 
-#### Java Database Connectivity 
+Las API de esta capa se utilizan para interactuar con sistemas externos (a la aplicación JEE) en la empresa. La mayoría de las aplicaciones necesitarían acceder a una base de datos y a las API para acceder a ese grupo.
 
-#### The Java Persistence API
+### Java Database Connectivity 
 
-#### Java Connector Architecture
+**Java Database Connectivity ( JDBC )** es una especificación para acceder a una base de datos relacional de una manera común y consistente. Con JDBC, puede ejecutar sentencias SQL y obtener resultados en diferentes bases de datos utilizando API comunes. Un controlador específico de la base de datos se ubica entre la llamada JDBC y la base de datos, y traduce las llamadas JDBC a llamadas API específicas del proveedor de la base de datos. JDBC se puede usar tanto en la presentación como en las capas empresariales directamente, pero se recomienda separar las llamadas a la base de datos de la IU y del código comercial. Por lo general, esto se realiza mediante la creación de **Data Access Objects (DAOs)** que encapsulan la lógica para acceder a la base de datos. JDBC es en realidad una parte de Java Standard Edition. **Java SE 8 contiene JDBC 4.2**.
 
-#### Web services
+### The Java Persistence API
 
-### Eclipse IDE
+Uno de los problemas de usar las API de JDBC directamente es que debe asignar constantemente los datos entre los objetos de Java y los datos en columnas o filas en la base de datos relacional. Los marcos como Hibernate y Spring han simplificado este proceso mediante el uso de un concepto conocido como **Object Relational Mapping ( ORM )**. ORM se incorpora en JEE en forma de la **Java Persistence API (JPA)**.
 
-#### Workspace
+JPA le brinda la flexibilidad de asignar objetos a tablas en la base de datos relacional y ejecutar consultas con o sin el uso de **Structured Query Language (SQL)**. Cuando se usa en el contenido de JPA, el lenguaje de consulta se llama **Java Persistence Query Language**. **La especificación 2.2 de JPA es parte de JEE8**.
 
-#### Plugin
+### Java Connector Architecture
 
-#### Editors and views
+**Java Connector Architecture (JCA)** APIs se pueden usar en aplicaciones JEE para comunicarse con sistemas de integración empresarial ( EIS ), como SAP y Salesforce. Al igual que tiene controladores de base de datos para negociar la comunicación entre las API JDBC y las bases de datos relacionales, tiene adaptadores JCA entre llamadas JCA y EIS. La mayoría de las aplicaciones EIS ahora proporcionan API REST, que son livianas y fáciles de usar, por lo que REST podría reemplazar a JCA en algunos casos. Sin embargo, si usa JCA, obtiene soporte de transacciones y agrupación del servidor de aplicaciones JEE.
 
-#### Perspective
+### Web services
 
-#### Eclipse preferences
+Los servicios web son componentes de aplicaciones remotas y exponen API autónomas. Los servicios web se pueden clasificar en términos generales según los siguientes dos estándares:
 
-## Installing products
+* **Protocolo simple de acceso a objetos ( SOAP )**
+* **Transferencia de estado representativo ( REST )**
 
-### Installing Eclipse
+Los servicios web pueden desempeñar un papel importante en la integración de aplicaciones dispares, porque están basadas en estándares y son independientes de la plataforma.
 
-### Installing the Tomcat server
+JEE proporciona muchas especificaciones para simplificar el desarrollo y el consumo de ambos tipos de servicios web, por ejemplo, JAX-WS (Java API para XML — servicios web) y JAX-RS (Java API para servicios web RESTful).
 
-### Installing the GlassFish server
+Las anteriores son solo algunas de las especificaciones que forman parte de JEE. Hay muchas otras especificaciones independientes y muchas especificaciones habilitadoras, como la inyección de dependencia y las utilidades de concurrencia, que veremos en capítulos posteriores.
 
-### Installing MySQL
+## Eclipse IDE
 
-#### Installing MySQL on Windows
+### Workspace
 
-#### Installing MySQL on macOS X
+### Plugin
 
-#### Installing MySQL on Linux
+### Editors and views
 
-#### Creating MySQL users
+### Perspective
 
-## Summary
+### Eclipse preferences
+
+# Installing products
+
+## Installing Eclipse
+
+## Installing the Tomcat server
+
+## Installing the GlassFish server
+
+## Installing MySQL
+
+### Installing MySQL on Windows
+
+### Installing MySQL on macOS X
+
+### Installing MySQL on Linux
+
+### Creating MySQL users
+
+# Summary
