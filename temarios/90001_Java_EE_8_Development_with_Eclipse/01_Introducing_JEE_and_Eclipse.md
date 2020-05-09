@@ -269,7 +269,7 @@ Figura 1.6: La aplicación web predeterminada de Tomcat
 
 Haga clic en el botón de la aplicación Manager a la derecha. Se le pedirá el nombre de usuario y la contraseña. Introduzca el nombre de usuario y la contraseña que configuró en `tomcat-users.xml` para `manager-gui`, como se describió anteriormente. Una vez que haya iniciado sesión correctamente, verá la  página del Administrador de aplicaciones web de Tomcat , como se muestra en la Figura 1.7 . Puede ver todas las aplicaciones implementadas en Tomcat en esta página. También puede implementar sus aplicaciones desde esta página:
 
-![JavaEEDevelopmentWithEclipse](images/Figura1-6.png)
+![JavaEEDevelopmentWithEclipse](images/Figura1-7.png)
 
 Figura 1.7: Tomcat Web Application Manager
 
@@ -277,9 +277,67 @@ Para detener el servidor Tomcat, presione *Ctrl/cmd + C* o ejecute el script shu
 
 ## Installing the GlassFish server
 
+Descargue GlassFish desde https://glassfish.java.net/download.html . GlassFish viene en dos sabores: perfil web y plataforma completa. Web Profile es como Tomcat, que no incluye soporte EJB. Así que descarga la plataforma completa.
+
+Descomprima el archivo descargado en una carpeta. El puerto predeterminado del servidor GlassFish es `8080`. Si desea cambiar eso, ábra `glassfish/domains/domain1/config/domain.xml` en un editor de texto (también puede abrirlo en Eclipse, usando la  opción de menú File | Open File ) y busque `8080`. Deberías verlo en uno de los `<network-listener>`. Cambie el puerto si lo desea (que puede ser el caso si alguna otra aplicación ya está usando ese puerto).
+
+Para iniciar el servidor, ejecute el script `startserv` (`.bat` o `.sh` según el sistema operativo que utilice). Una vez que el servidor se ha iniciado, abra un navegador web y busque `http://localhost:8080`. Debería ver una página como la siguiente:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-8.png)
+
+Figura 1.8: La aplicación web predeterminada de Glassfish
+
+Esta página está ubicada en `glassfish/domains/domain1/docroot/index.html`. Haga clic en el enlace Ir a la Consola de administración en la página para abrir el administrador de GlassFish (vea la siguiente captura de pantalla):
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-9.png)
+
+Figura 1.9: El administrador de Glassfish
+
+*Para obtener detalles sobre la administración del servidor GlassFish, consulte  https://javaee.github.io/glassfish/doc/5.0/administration-guide.pdf*.
+
+Para detener el servidor GlassFish, ejecute el script `stopserv` en la carpeta `glassfish/bin`.
+
 ## Installing MySQL
 
+Utilizaremos una base de datos MySQL para muchos de los ejemplos de este libro. Las siguientes secciones describen cómo instalar y configurar MySQL para diferentes plataformas.
+
+También nos gustaría instalar MySQL Workbench, que es una aplicación cliente para administrar MySQL Server. Descargue MySQL Workbench desde  https://dev.mysql.com/downloads/workbench/ .
+
 ### Installing MySQL on Windows
+
+Descargue MySQL Community Server desde http://dev.mysql.com/downloads/mysql/ . Puede descargar el instalador web o el instalador todo en uno. El instalador web descargará solo los componentes que haya seleccionado. Las siguientes instrucciones muestran las opciones de descarga mediante el instalador web.
+
+El instalador web primero descarga una pequeña aplicación y le brinda opciones para seleccionar los componentes que desea instalar:
+
+1. Seleccione la opción Personalizada y haga clic en Siguiente :
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-10.png)
+
+Figura 1.10: Instalador MySQL para Windows
+
+2. Seleccione los productos  MySQL Server y MySQL Workbench y complete la instalación. Durante la instalación del servidor, se le pedirá que establezca la contraseña `root` y se le dará la opción de agregar más usuarios. Siempre es una buena idea agregar un usuario que no sea root para que las aplicaciones lo usen:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-11.png)
+
+Figura 1.11: Seleccione los productos y características de MySQL para instalar
+
+3. Asegúrese de seleccionar Todos los hosts al agregar un usuario para que pueda acceder a la base de datos MySQL desde cualquier máquina remota que tenga acceso de red a la máquina donde está instalado MySQL:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-12.png)
+
+Figura 1.12: Agregar usuario MySQL
+
+4. Ejecute MySQL Workbench después de la instalación. Encontrará que la conexión predeterminada a la instancia local de MySQL ya está creada para usted:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-13.png)
+
+Figura 1.13: Conexiones de MySQL Workbench
+
+5. Haga clic en la conexión local y se le pedirá que ingrese la contraseña `root`. Ingrese la contraseña `root` que escribió durante la instalación de MySQL Server. MySQL Workbench se abre y muestra el esquema de prueba predeterminado:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-14.png)
+
+Figura 1.14: My SQL Workbench
 
 ### Installing MySQL on macOS X
 
