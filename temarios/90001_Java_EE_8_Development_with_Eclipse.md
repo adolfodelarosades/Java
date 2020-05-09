@@ -49,31 +49,31 @@ Title Page
 
 Copyright and Credits
 
-Java EE 8 Development with Eclipse Third Edition
+* Java EE 8 Development with Eclipse Third Edition
 
 Dedication
 
 Packt Upsell
 
-Why subscribe?
+* Why subscribe?
 
-PacktPub.com
+* PacktPub.com
 
 Introducing JEE and Eclipse
 
-JEE
+* JEE
 
-The presentation layer
+   * The presentation layer
 
-Java Servlets
+      * Java Servlets
 
-JavaServer Pages
+      * JavaServer Pages
 
-JavaServer Faces
+      * JavaServer Faces
 
-The business layer
+   * The business layer
 
-Enterprise JavaBeans
+      * Enterprise JavaBeans
 
 The enterprise integration layer
 
