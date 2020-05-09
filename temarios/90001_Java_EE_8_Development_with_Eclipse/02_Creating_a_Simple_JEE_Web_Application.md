@@ -60,7 +60,7 @@ Figura 2.1: La pestaña Servidores en Eclipse JEE
 
 2. Haga clic en el enlace en la pestaña Servidores para agregar un nuevo servidor.
 
-3. Expanda el Apachegrupo y seleccione la versión de Tomcat que ya ha instalado. Si Eclipse y el servidor Tomcat están en la misma máquina, deje el nombre de host del servidor como localhost. De lo contrario, ingrese el nombre de host o la dirección IP del servidor Tomcat. Haga clic en siguiente :
+3. Expanda el grupo `Apache` y seleccione la versión de Tomcat que ya ha instalado. Si Eclipse y el servidor Tomcat están en la misma máquina, deje el nombre de host del servidor como `localhost`. De lo contrario, ingrese el nombre de host o la dirección IP del servidor Tomcat. Haga clic en siguiente :
 
 ![JavaEEDevelopmentWithEclipse](images/Figura2-2.png)
 
@@ -68,7 +68,7 @@ Figura 2.2: Seleccionar un servidor en el asistente de Nuevo servidor
 
 4. Haga clic en el  botón Examinar ... y seleccione la carpeta donde está instalado Tomcat.
 
-5. Haga clic en Siguiente hasta completar el asistente. Al final, verá el servidor Tomcat agregado a la  vista Servidores . Si Tomcat aún no se ha iniciado, verá el estado como detenido.
+5. Haga clic en Siguiente hasta completar el asistente. Al final, verá el servidor Tomcat agregado a la  vista Servidores. Si Tomcat aún no se ha iniciado, verá el estado como detenido.
 
 ![JavaEEDevelopmentWithEclipse](images/Figura2-3.png)
 
@@ -80,17 +80,17 @@ Figura 2.3: Configuración de la carpeta Tomcat en el asistente de Nuevo servido
 
 Figura 2.4: El servidor Tomcat agregado a la vista Servidores
 
-Una vez que el servidor se inicia correctamente, verá el estado cambiado a Started. Si hace clic en la  pestaña Consola , verá mensajes de consola que el servidor Tomcat envía durante el inicio.
+Una vez que el servidor se inicia correctamente, verá el estado cambiado a `Started`. Si hace clic en la  pestaña Consola , verá mensajes de consola que el servidor Tomcat envía durante el inicio.
 
 Si expande el grupo Servidores en la  vista Explorador de proyectos , verá el servidor Tomcat que acaba de agregar. Expanda el nodo del servidor Tomcat para ver los archivos de configuración. Esta es una manera fácil de editar la configuración de Tomcat para que no tenga que buscar los archivos de configuración en el sistema de archivos.
 
-Haga doble clic server.xmlpara abrirlo en el editor XML. Obtiene la  vista Diseño , así como la  vista Fuente (dos pestañas en la parte inferior del editor). Hemos aprendido cómo cambiar el puerto predeterminado de Tomcat en el último capítulo. Puede cambiar eso fácilmente en el editor de Eclipse abriendo server.xmly yendo al nodo Conector . Si necesita buscar el texto, puede cambiar a la pestaña Fuente (en la parte inferior del editor).
+Haga doble clic `server.xml` para abrirlo en el editor XML. Obtiene la  vista Diseño , así como la  vista Fuente (dos pestañas en la parte inferior del editor). Hemos aprendido cómo cambiar el puerto predeterminado de Tomcat en el último capítulo. Puede cambiar eso fácilmente en el editor de Eclipse abriendo `server.xml` y yendo al nodo Conector. Si necesita buscar el texto, puede cambiar a la pestaña Fuente (en la parte inferior del editor).
 
 ![JavaEEDevelopmentWithEclipse](images/Figura2-5.png)
 
 Figura 2.5: Abra server.xml
 
-También puede editar fácilmente tomcat-users.xmlpara agregar / editar usuarios de Tomcat. Recuerde que agregamos un usuario Tomcat en el Capítulo 1 , Introducción a JEE y Eclipse , para administrar el servidor Tomcat.
+También puede editar fácilmente `tomcat-users.xml` para agregar/editar usuarios de Tomcat. Recuerde que agregamos un usuario Tomcat en el Capítulo 1 , *Introducción a JEE y Eclipse*, para administrar el servidor Tomcat.
 
 De manera predeterminada, Eclipse no cambia nada en la carpeta de instalación de Tomcat cuando agrega el servidor en Eclipse. En su lugar, crea una carpeta en el espacio de trabajo y copia los archivos de configuración de Tomcat a esta carpeta. Las aplicaciones que se implementan en Tomcat también se copian y publican desde esta carpeta. Esto funciona bien en el desarrollo, cuando no desea modificar la configuración de Tomcat o cualquier aplicación implementada en el servidor. Sin embargo, si desea utilizar la carpeta de instalación real de Tomcat, debe modificar la configuración del servidor en Eclipse. Haga doble clic en el servidor en la vista Servidores para abrirlo en el editor.
 
