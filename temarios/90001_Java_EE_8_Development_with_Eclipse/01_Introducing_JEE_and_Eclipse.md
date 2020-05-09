@@ -209,11 +209,71 @@ La perspectiva es una colección de editores y vistas, y cómo se presentan u or
 
 ### Eclipse preferences
 
+La ventana de Preferencias de Eclipse ( Figura 1.4 ) es donde personaliza muchos complementos / características. Las preferencias están disponibles en el  menú Ventana en las instalaciones de Windows y Linux de Eclipse, y en el menú Eclipse en Mac:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-4.png)
+
+Figura 1.4: Preferencias de Eclipse
+
 # Installing products
+
+En los capítulos siguientes, aprenderemos cómo desarrollar aplicaciones JEE en Eclipse. Pero las aplicaciones van a necesitar un servidor de aplicaciones JEE y una base de datos. Usaremos el contenedor web Tomcat en los primeros capítulos y luego usaremos el servidor de aplicaciones GlassFish JEE. Vamos a usar una base de datos MySQL.
+
+Vamos a necesitar estos productos para muchas de las aplicaciones que vamos a desarrollar. Entonces, las siguientes secciones describen cómo instalar y configurar Eclipse, Tomcat, GlassFish y MySQL.
 
 ## Installing Eclipse
 
+Descargue la última versión de Eclipse desde https://eclipse.org/downloads/ . Verá muchos paquetes diferentes para Eclipse. Asegúrese de instalar el paquete Eclipse IDE para desarrolladores de Java EE . Seleccione un paquete apropiado basado en su sistema operativo y arquitectura JVM (32 o 64 bits). Es posible que desee ejecutar el comando `java -version` para saber si la JVM es de 32 bits o de 64 bits.
+
+*Si planea usar Eclipse para el desarrollo de AWS, se recomienda descargar Eclipse desde el instalador de Oomph. Consulte  https://wiki.eclipse.org/Eclipse_Installer y  https://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/setup-install.html*.
+
+Descomprima el archivo ZIP descargado y luego ejecute la aplicación Eclipse (debe instalar JDK antes de ejecutar Eclipse). La primera vez que ejecute Eclipse, se le pedirá que especifique un espacio de trabajo. Cree una nueva carpeta en su sistema de archivos y selecciónela como la carpeta inicial del espacio de trabajo. Si tiene la intención de usar la misma carpeta para el espacio de trabajo en cada lanzamiento de Eclipse, marque la casilla Usar esto como predeterminada y no volver a preguntar:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-5.png)
+
+Figura 1.5: Seleccione el espacio de trabajo de Eclipse
+
+Luego verá la perspectiva predeterminada de Java EE de Eclipse como se muestra en la Figura 1.2 .
+
 ## Installing the Tomcat server
+
+Tomcat es un contenedor web. Admite API en la capa de presentación descrita anteriormente. Además, es compatible con JDBC y JPA. Es fácil de configurar y podría ser una buena opción si no desea utilizar EJB.
+
+Descargue la última versión de Tomcat de http://tomcat.apache.org/ . Descomprima el archivo descargado en una carpeta. Establezca la variable de entorno `JAVA_HOME` para que apunte a la carpeta donde está instalado JDK (la ruta de la carpeta debe ser la carpeta JDK, que tiene `bin` como una de las subcarpetas). Para iniciar el servidor, ejecute `startup.bat` en símbolo del sistema en Windows y `startup.sh` en una ventana de Terminal en Mac y Linux. Si no hay errores, entonces debería ver el mensaje `Server startup in --ms` o `Tomcat started`.
+
+La instalación predeterminada de Tomcat está configurada para usar el puerto `8080`. Si desea cambiar el puerto, abra `server.xml` en la carpeta `conf` y busque una declaración `connector` como la siguiente:
+
+```sh
+<Connector port="8080" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8443" /> 
+```               
+               
+Cambie el valor del puerto a cualquier número de puerto que desee, aunque en este libro usaremos el puerto predeterminado 8080. Antes de abrir la página predeterminada de Tomcat, agregaremos un usuario para la administración del servidor Tomcat. Abra `tomcat-users.xml` en la carpeta `conf` con cualquier editor de texto. Al final del archivo, verá un ejemplo comentado de cómo agregar usuarios. Agregue la siguiente configuración antes del cierre del tag `</tomcat-users>`:
+
+```sh
+<role rolename="manager-gui"/> 
+<user username="admin" password="admin" roles="manager-gui"/> 
+```
+
+Aquí, estamos agregando un usuario `admin`, con contraseña también `admin`, para un rol llamado `manager-gui`. Este rol tiene acceso a páginas web para administrar una aplicación en Tomcat. Este y otros roles de seguridad se definen en `web.xml` de la aplicación `manager`. Lo puedes encontrar en` webapps/manager/WEB-INF/web.xml`.
+
+
+*Para obtener más información sobre la administración del servidor Tomcat, consulte  http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html*.
+
+Después de realizar los cambios anteriores, abra un navegador web y busque http://localhost:8080 (modifique el número de puerto si ha cambiado el puerto predeterminado). Verá la siguiente página predeterminada de Tomcat:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-6.png)
+
+Figura 1.6: La aplicación web predeterminada de Tomcat
+
+Haga clic en el botón de la aplicación Manager a la derecha. Se le pedirá el nombre de usuario y la contraseña. Introduzca el nombre de usuario y la contraseña que configuró en `tomcat-users.xml` para `manager-gui`, como se describió anteriormente. Una vez que haya iniciado sesión correctamente, verá la  página del Administrador de aplicaciones web de Tomcat , como se muestra en la Figura 1.7 . Puede ver todas las aplicaciones implementadas en Tomcat en esta página. También puede implementar sus aplicaciones desde esta página:
+
+![JavaEEDevelopmentWithEclipse](images/Figura1-6.png)
+
+Figura 1.7: Tomcat Web Application Manager
+
+Para detener el servidor Tomcat, presione *Ctrl/cmd + C* o ejecute el script shutdown en la carpeta `bin`.
 
 ## Installing the GlassFish server
 
