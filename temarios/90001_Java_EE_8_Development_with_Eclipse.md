@@ -1,7 +1,7 @@
 # 90001 Java EE 8 Development with Eclipse
 
 
-![JavaEEDevelopmentWithEclipse](images/JavaEEDevelopmentWithEclipse.jpeg)
+![JavaEEDevelopmentWithEclipse](90001_Java_EE_8_Development_with_Eclipse/images/JavaEEDevelopmentWithEclipse.jpeg)
 
 Ram Kulkarni
 June 28, 2018
