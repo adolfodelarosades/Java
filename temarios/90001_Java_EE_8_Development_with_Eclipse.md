@@ -62,7 +62,7 @@ Packt Upsell
 
 * PacktPub.com
 
-### 1. Introducing JEE and Eclipse
+### 1. [Introducing JEE and Eclipse](90001_Java_EE_8_Development_with_Eclipse/01_Introducing_JEE_and_Eclipse.md)
 
 * JEE
 
@@ -120,7 +120,7 @@ Packt Upsell
 
 * Summary
 
-### 2. Creating a Simple JEE Web Application
+### 2. [Creating a Simple JEE Web Application](90001_Java_EE_8_Development_with_Eclipse/02_Creating_a_Simple_JEE_Web_Application.md)
 
 * Configuring Tomcat in Eclipse
 
@@ -160,7 +160,7 @@ Packt Upsell
 
 * Summary
 
-### 3. Source Control Management in Eclipse
+### 3. [Source Control Management in Eclipse](90001_Java_EE_8_Development_with_Eclipse/03_Source_Control_Management_in_Eclipse.md)
 
 * The Eclipse subversion plugin
 
@@ -192,7 +192,7 @@ Packt Upsell
 
 * Summary
 
-### 4. Creating JEE Database Applications
+### 4. [Creating JEE Database Applications](90001_Java_EE_8_Development_with_Eclipse/04_Creating_JEE_Database_Applications.md)
 
 * Creating database schema
 
@@ -262,7 +262,7 @@ Packt Upsell
 
 * Summary
 
-### 5. Unit Testing
+### 5. [Unit Testing](90001_Java_EE_8_Development_with_Eclipse/05_Unit_Testing.md)
 
 * Introducing JUnit
 
@@ -282,7 +282,7 @@ Packt Upsell
 
 * Summary
 
-### 6. Debugging the JEE Application
+### 6. [Debugging the JEE Application](90001_Java_EE_8_Development_with_Eclipse/06_Debugging_the_JEE_Application.md)
 
 * Debugging a remote Java application
 
