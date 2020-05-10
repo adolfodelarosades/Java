@@ -840,6 +840,24 @@ Como puede ver, no es muy conveniente escribir HTML markup en servlet. Por lo ta
 
 # Creating WAR
 
+Hasta ahora, hemos estado ejecutando nuestra aplicación web desde Eclipse, que hace todo el trabajo de implementar la aplicación en el servidor Tomcat. Esto funciona bien durante el desarrollo, pero cuando desea implementarlo en servidores de prueba o producción, debe crear un web application archive (WAR). Veremos cómo crear una WAR desde Eclipse. Sin embargo, primero desinstalaremos las aplicaciones existentes de Tomcat.
+
+1. Vaya a la Servers view, seleccione la aplicación, haga clic con el botón derecho y seleccione la opción Remove :
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-23.png)
+
+Figura 2.23 Desinstalar una aplicación web del servidor
+
+Luego, haga clic derecho en el proyecto en el Project Explorer y seleccione Export | WAR file. Seleccione el destino para el archivo WAR:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-24.png)
+
+Figura 2.24 WAR de exportación
+
+Para implementar el archivo WAR en Tomcat, cópielo en la carpeta `<tomcat_home>/webapps`. Luego, inicie el servidor si aún no se está ejecutando. Si Tomcat ya se está ejecutando, no necesita reiniciarlo.
+
+Tomcat monitorea la carpeta `webapps` y cualquier archivo WAR copiado se implementa automáticamente. Puede verificar esto abriendo la URL de su aplicación en el navegador, por ejemplo http://localhost:8080/LoginServletApp/login,.
+
 # JavaServer Faces
 
 # Using Maven for project management
