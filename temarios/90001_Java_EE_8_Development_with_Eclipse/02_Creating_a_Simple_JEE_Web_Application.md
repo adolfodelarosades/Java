@@ -1113,9 +1113,70 @@ La versión Eclipse JEE tiene Maven incorporado, por lo que no necesita descarga
 
 ## Maven views and preferences in Eclipse JEE
 
+Antes de crear un proyecto Maven, exploremos las vistas y preferencias específicas de Maven en Eclipse:
+
+1. Seleccione la Window | Show View | Other... menu.
+
+2. Escriba `Maven` en el cuadro de filtro. Verá dos vistas para Maven :
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-25.png)
+
+Figura 2.25: Vistas de Maven
+
+3. Seleccione Maven Repositories view y haga clic en OK. Esta vista se abre en la ventana de la pestaña inferior de Eclipse. Puede ver la ubicación de los repositorios locales y remotos.
+
+4. Haga clic derecho en un repositorio global para ver las opciones para indexar el repositorio:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-26.png)
+
+Figura 2.26: La vista de repositorios Maven
+
+5. Abra Preferencias de Eclipse y escriba `Maven` en el cuadro de filtro para ver todas las preferencias de Maven:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-27.png)
+
+Figura 2.27: Preferencias de Maven
+
+Debe configurar las preferencias de Maven para actualizar los índices del repositorio al inicio, de modo que las últimas libraries estén disponibles cuando agregue dependencias a su proyecto (en breve aprenderemos cómo agregar dependencias).
+
+6. Haga clic en el nodo Maven en Preferencias y configure las siguientes opciones:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-28.png)
+
+Figura 2.28: Preferencias de Maven para actualizar índices al inicio
+
+CopiarAgregar resaltadoAñadir la nota
+
 ## Creating a Maven project
 
+En los siguientes pasos, veremos cómo crear un proyecto Maven en Eclipse:
+
+Seleccione New | Maven Project menu:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-29.png)
+
+Figura 2.29: Maven New Project wizard
+
+Acepte todas las opciones predeterminadas y haga clic en Next . Escriba `webapp` en el cuadro de filtro y seleccione maven-archetype-webapp :
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-30.png)
+
+Figura 2.30: New Maven project - select archetype
+
 ### Maven archetype
+
+Seleccionamos maven-archetype-webapp en el asistente anterior. Un arquetipo es una plantilla de proyecto. Cuando utiliza un arquetipo para su proyecto, todas las dependencias y otras configuraciones de proyecto de Maven definidas en la plantilla (arquetipo) se importan a su proyecto.
+
+*Consulte más información sobre el arquetipo de Maven en http://maven.apache.org/guides/introduction/introduction-to-archetypes.html*.
+
+
+1. Continuando con el asistente New Maven Project , haga clic en Next. En el campo Group Id, ingrese `packt.book.jee_eclipse`. En el campo Artifact Id, ingrese `maven_jsf_web_app`:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-31.png)
+
+Figura 2.31: Nuevo proyecto Maven - parámetros de arquetipo
+
+Haz clic en Finish. Se agrega un  proyecto `maven_jsf_web_app` en Project Explorer .
 
 ## Exploring the POM
 
