@@ -1214,10 +1214,10 @@ Echemos un vistazo a las diferentes etiquetas en detalle, que se utilizan en el 
 * `artifactId`: Este es el nombre del proyecto.
 * `version`: Este es el número de versión del proyecto. Los números de versión son importantes al especificar dependencias. Puede tener múltiples versiones de un proyecto, y puede especificar diferentes dependencias de versión en diferentes proyectos. Maven también agrega el número de versión a los archivos JAR, WAR o EAR que crea para el proyecto.
 * `packaging`: Esto le dice a Maven qué tipo de resultado final queremos cuando se construye el proyecto. En este libro, utilizaremos los tipos de empaque JAR, WAR y EAR, aunque existen más tipos.
-* `name`: Este es realmente el nombre del proyecto, pero Eclipse se muestra artifactidcomo el nombre del proyecto en Project Explorer .
+* `name`: Este es realmente el nombre del proyecto, pero Eclipse se muestra `artifactid` como el nombre del proyecto en Project Explorer .
 * `url`: Esta es la URL de su proyecto si aloja la información del proyecto en la web. El valor predeterminado es la URL de Maven.
 * `dependencies`: Esta sección es donde especificamos las bibliotecas (u otros artefactos de Maven) de las que depende el proyecto. El arquetipo que seleccionamos para este proyecto ha agregado la dependencia predeterminada de JUnit a nuestro proyecto. Aprenderemos más sobre JUnit en el Capítulo 5 , Pruebas unitarias .
-* `finalName`: Esta etiqueta en la  buildetiqueta indica el nombre del archivo de salida (JAR, WAR o EAR) que Maven genera para su proyecto.
+* `finalName`: Esta etiqueta en la etiqueta `build` indica el nombre del archivo de salida (JAR, WAR o EAR) que Maven genera para su proyecto.
 
 ## Adding Maven dependencies
 
