@@ -358,6 +358,117 @@ Los JSP se compilan dinámicamente en clases Java, por lo que si realiza algún 
 
 ## Using JavaBeans in JSP
 
+El JSP que creamos anteriormente no sigue las mejores prácticas de JSP. En general, es una mala idea tener scriptlets (código Java) en JSP. En la mayoría de las organizaciones grandes, el diseñador y programador de la interfaz de usuario son roles diferentes desempeñados por diferentes personas. Por lo tanto, se recomienda que JSP contenga principalmente etiquetas de marcado para que sea fácil para los diseñadores trabajar en el diseño de la página. El código Java debe estar en clases separadas. También tiene sentido desde un punto de vista de reutilización mover el código Java fuera de JSP.
+
+Puede delegar el procesamiento de la lógica de negocios a JavaBeans desde JSP. JavaBeans son simples objetos Java con atributos y métodos getters y setters. La convención de nomenclatura para los métodos getter/setter en JavaBeans es el prefijo `get`/`set` seguido del nombre del atributo, con la primera letra de cada palabra en mayúscula, también conocida como **CamelCase**. Por ejemplo, si tiene un atributo de clase llamado `firstName`, entonces el método getter será `getFirstName` y el setter será `setFirstName`.
+
+JSP tiene una etiqueta especial para usar JavaBeans— `jsp:useBean`:
+
+```html
+<jsp:useBean id="name_of_variable" class="name_of_bean_class" 
+ scope="scope_of_bean"/>
+```
+
+El **Scope** indica la vida útil del bean. Los valores válidos son `application`, `page`, `request`, y `session`.
+
+Scope name | Descripción
+-----------|------------
+`page`     | El Bean solo se puede usar en la página actual.
+`request`  | El Bean se puede utilizar en cualquier página en el procesamiento de la misma solicitud (request). Una solicitud web puede ser manejada por múltiples JSP si una página reenvía la solicitud a otra página.
+`session`  | El Bean se puede usar en la misma sesión HTTP. La sesión es útil si su aplicación desea guardar los datos del usuario por interacción con la aplicación, por ejemplo, para guardar artículos en el carrito de compras en una aplicación de tienda en línea.
+`application` | El Bean se puede usar en cualquier página de la misma aplicación web. Por lo general, las aplicaciones web se implementan en un contenedor de aplicaciones web como archivos de archivo de aplicaciones web ( WAR ) **web application archive (WAR)**. En el ámbito de aplicación, todos los JSP en el archivo WAR pueden usar JavaBeans.
+
+Vamos a mover el código para validar a los usuarios en nuestro ejemplo de inicio de sesión a la clase JavaBean. Primero, necesitamos crear una clase JavaBean:
+
+1. En Project Explorer, haga clic derecho en la carpeta `src` New | Package menu option.
+2. Crea un paquete llamado `packt.book.jee_eclipse.ch2.bean`.
+3. Haga clic derecho en el paquete y seleccione  New | Class menu option.
+4. Crea una clase llamada `LoginBean`.
+5. Cree dos miembros privados `String` de la siguiente manera:
+
+```java
+public class LoginBean { 
+  private String userName; 
+  private String password; 
+} 
+```
+
+6. Haga clic derecho en cualquier lugar dentro de la clase (en el editor) y seleccione Source | Generate Getters and Setters menu option:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-20.png)
+
+Figura 2.20: Generar getters y setters
+
+7. Queremos generar getters y setters para todos los miembros de la clase. Por lo tanto, haga clic en el botón Select All y seleccione Last member  de la lista desplegable para Insertion point, porque queremos insertar los getters y setters después de declarar todas las variables miembro.
+
+7. Queremos generar getters y setters para todos los miembros de la clase. Por lo tanto, haga clic en el botón Select All y seleccione Last member  de la lista desplegable para Insertion point, porque queremos insertar los getters y setters después de declarar todas las variables miembro.
+
+La clase `LoginBean` ahora debería ser la siguiente:
+
+```java
+public class LoginBean { 
+  
+  private String userName; 
+  private String password; 
+  
+  public String getUserName() { 
+    return userName; 
+  } 
+  public void setUserName(String userName) { 
+    this.userName = userName; 
+  } 
+  public String getPassword() { 
+    return password; 
+  } 
+  public void setPassword(String password) { 
+    this.password = password; 
+  } 
+} 
+```
+
+8. Agregaremos un método más para validar username y password:
+
+```java
+public boolean isValidUser() 
+  { 
+    //Validation can happen here from a number of sources 
+    //for example, database and LDAP 
+    //We are just going to hardcode a valid username and 
+    //password here. 
+    return "admin".equals(this.userName) && 
+            "admin".equals(this.password); 
+  } 
+```
+
+Esto completa nuestro JavaBean para almacenar información y validación del usuario.
+Ahora usaremos este bean en nuestro JSP y delegaremos la tarea de validar a los usuarios a este bean. Abra `index.jsp`. Reemplace el scriptlet Java justo arriba del tag `<body>` en el código anterior con lo siguiente:
+
+```html
+<%String errMsg = null; %> 
+<%if ("POST".equalsIgnoreCase(request.getMethod()) && request.getParameter("submit") != null) {%> 
+  <jsp:useBean id="loginBean" 
+   class="packt.book.jee_eclipse.ch2.bean.LoginBean"> 
+    <jsp:setProperty name="loginBean" property="*"/> 
+  </jsp:useBean> 
+  <% 
+    if (loginBean.isValidUser()) 
+    { 
+      //valid user 
+      out.println("<h2>Welcome admin !</h2>"); 
+      out.println("You are successfully logged in"); 
+    } 
+    else 
+    { 
+ 
+      errMsg = "Invalid user id or password. Please try again"; 
+ 
+    } 
+  %> 
+<%} %> 
+```
+
+Antes de analizar lo que ha cambiado en el código anterior, tenga en cuenta que también puede invocar y obtener asistencia de código para los atributos y valores de las <jsp:*>etiquetas. Si no está seguro de si el asistente de código está disponible, simplemente pulse Ctrl / Cmd + C .
+
 ## Using JSTL
 
 # Java Servlet
