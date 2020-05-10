@@ -1097,6 +1097,20 @@ Visite http://docs.oracle.com/cd/E11035_01/workshop102/webapplications/jsf/jsf-a
 
 # Using Maven for project management
 
+En los proyectos que hemos creado hasta ahora en este capítulo, hemos gestionado muchas tareas de gestión de proyectos, como descargar bibliotecas de las que depende nuestro proyecto, agregarlas a la carpeta correspondiente para que la aplicación web pueda encontrarlo y exportar el proyecto para crear el archivo WAR para su implementación. Estas son solo algunas de las tareas de gestión de proyectos que hemos realizado hasta ahora, pero hay muchas más, que veremos en los capítulos siguientes. Es útil que una herramienta realice muchas de las tareas de gestión de proyectos para que podamos centrarnos en el desarrollo de aplicaciones. Hay algunas herramientas de gestión de compilación conocidas disponibles para Java, por ejemplo, Apache Ant ( http://ant.apache.org/ ) y Maven ( http://maven.apache.org/ ).
+
+En esta sección, veremos cómo usar Maven como herramienta de gestión de proyectos. Al seguir la convención para crear la estructura del proyecto y permitir que los proyectos definan la jerarquía, Maven hace que la gestión de proyectos sea más fácil que Ant. Ant es principalmente una herramienta de compilación, mientras que Maven es una herramienta de gestión de proyectos, que también gestiona la compilación. Consulte http://maven.apache.org/what-is-maven.html para comprender lo que Maven puede hacer.
+
+En particular, Maven simplifica la gestión de dependencias. En el proyecto JSF anterior en este capítulo, primero descargamos los archivos `.jar` apropiados para JSF y los copiamos a la carpeta `lib`. Maven puede automatizar esto. Puede configurar los ajustes de Maven en `pom.xml`. **POM** son las siglas de **Project Object Model**.
+
+Antes de usar Maven, es importante entender cómo funciona. Maven usa repositorios. Los repositorios contienen complementos para muchas librerias/proyectos conocidos. Un complemento incluye la información de configuración del proyecto, los archivos `.jar` necesarios para usar este proyecto en su propio proyecto y cualquier otro artefacto de soporte. El repositorio predeterminado de Maven es una colección de complementos. Puede encontrar la lista de complementos en el repositorio predeterminado de Maven en http://maven.apache.org/plugins/index.html . También puede navegar por el contenido del repositorio de Maven en http://search.maven.org/#browse. Maven también mantiene un repositorio local en su máquina. Este repositorio local contiene solo aquellos complementos de los que sus proyectos tienen dependencias específicas. En Windows, encontrará el repositorio local en `C:/Users /<username>.m2`, y en macOS X, se encuentra en `~/.m2`.
+
+Usted define complementos de los que depende su proyecto en la sección `dependencies` de `pom.xml` (veremos la estructura en `pom.xml` breve cuando creamos un proyecto Maven). Por ejemplo, podemos especificar una dependencia en JSF. Cuando ejecuta la herramienta Maven, primero inspecciona todas las dependencias en `pom.xml`. Luego verifica si los complementos dependientes con las versiones requeridas ya están descargados en el repositorio local. Si no, los descarga del repositorio central (remoto). También puede especificar repositorios para buscar. Si no especifica ningún repositorio, las dependencias se buscan en el repositorio central de Maven.
+
+Crearemos un proyecto Maven y exploraremos `pom.xml` con más detalle. Sin embargo, si tiene curiosidad por saber qué es `pom.xml`, visite http://maven.apache.org/pom.html#What_is_the_POM .
+
+La versión Eclipse JEE tiene Maven incorporado, por lo que no necesita descargarlo. Sin embargo, si planea usar Maven desde fuera de Eclipse, descárguelo de http://maven.apache.org/download.cgi . 
+
 ## Maven views and preferences in Eclipse JEE
 
 ## Creating a Maven project
