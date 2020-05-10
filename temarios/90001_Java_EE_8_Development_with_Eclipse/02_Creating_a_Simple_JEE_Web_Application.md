@@ -860,6 +860,120 @@ Tomcat monitorea la carpeta `webapps` y cualquier archivo WAR copiado se impleme
 
 # JavaServer Faces
 
+Cuando trabajamos con JSP, vimos que no es una buena idea mezclar scriptlets con el marcado HTML. Resolvimos este problema usando JavaBean. JavaServer Faces lleva este diseño más allá. Además de admitir JavaBeans, JSF proporciona etiquetas integradas para controles de usuario HTML, que son conscientes del contexto, pueden realizar la validación y pueden preservar el estado entre las solicitudes. Ahora crearemos la aplicación de inicio de sesión utilizando JSF:
+
+1. Cree una aplicación web dinámica en Eclipse; Vamos a nombrarla `LoginJSFApp`. En la última página del asistente, asegúrese de marcar la casilla Generate web.xml deployment descriptor.
+
+2. Descargue las bibliotecas JSF de https://maven.java.net/content/repositories/releases/org/glassfish/javax.faces/2.2.9/javax.faces-2.2.9.jar y cópielas en la carpeta `WEB-INF/lib` de su proyecto.
+
+3. JSF sigue el patrón MVC. En el patrón MVC, el código para generar la interfaz de usuario (vista) está separado del contenedor de los datos (modelo). El controlador actúa como la interfaz entre la vista y el modelo. Selecciona el modelo para procesar una solicitud en función de la configuración, y una vez que el modelo procesa la solicitud, selecciona la vista que se generará y devolverá al cliente, en función del resultado del procesamiento en el modelo. La ventaja de MVC es que existe una clara separación de la interfaz de usuario y la lógica de negocios (que requiere un conjunto diferente de experiencia) para que puedan desarrollarse de forma independiente, en gran medida. En JSP, la implementación de MVC es opcional, pero JSF aplica el diseño de MVC.
+
+Las vistas son JSF creadas como archivos `xhtml`. El controlador es un servlet de la biblioteca JSF y los modelos son **managed beans** (JavaBeans)
+
+Primero configuraremos un controlador para JSF. Agregaremos la configuración del servlet y la asignación en `web.xml`. Abra `web.xml` desde la carpeta `WEB-INF` del proyecto (`web.xml` debería haber sido creado para usted por el asistente del proyecto si marcó la casilla  Generate web.xml deployment descriptor; 
+
+1). Agregue el siguiente fragmento de XML antes </web-app>:
+
+```html
+<servlet> 
+  <servlet-name>JSFServlet</servlet-name> 
+  <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
+  <load-on-startup>1</load-on-startup> 
+</servlet> 
+ 
+<servlet-mapping> 
+  <servlet-name>JSFServlet</servlet-name> 
+  <url-pattern>*.xhtml</url-pattern> 
+</servlet-mapping> 
+```
+
+Tenga en cuenta que usted puede conseguir el asistente de código al crear los elementos anteriores pulsando *Ctrl/Cmd + C*.
+
+Puede especificar cualquier nombre como `servlet-name`; solo asegúrate de usar el mismo nombre `servlet-mapping`. La clase para el servlet es `javax.faces.webapp.FacesServlet`, que está en el archivo JAR que descargamos como la biblioteca JSF y copiamos en `WEB-INF/lib`. Además, hemos asignado cualquier solicitud que termine con `.xhtml` a este servlet.
+
+A continuación, crearemos un bean administrado para nuestra página de inicio de sesión. Esto es lo mismo que JavaBean que habíamos creado anteriormente, pero con la adición de anotaciones específicas de JSF:
+
+1. Haga clic derecho en la carpeta `src` en `Java Resources` del proyecto en Project Explorer .
+2. Seleccione el New | Class menu option.
+3. Cree JavaBean, `LoginBean` como se describe en la sección Uso de JavaBeans en JSP de este capítulo.
+4. Crea dos miembros para `userName` y `password`.
+5. Crea los getters y setters para ellos. Luego, agregue dos anotaciones de la siguiente manera:
+
+```java
+package packt.book.jee_eclipse.bean; 
+import javax.faces.bean.ManagedBean; 
+import javax.faces.bean.RequestScoped; 
+ 
+@ManagedBean(name="loginBean") 
+@RequestScoped 
+public class LoginBean { 
+  private String userName; 
+  private String password; 
+  public String getUserName() { 
+    return userName; 
+  } 
+  public void setUserName(String userName) { 
+    this.userName = userName; 
+  } 
+  public String getPassword() { 
+    return password; 
+  } 
+  public void setPassword(String password) { 
+    this.password = password; 
+  } 
+}
+```
+
+(También puede obtener asistencia de código para las anotaciones. Escriba `@` y presione *Ctrl/Cmd + C.*. La asistencia de código también funciona para los pares de atributos `key-value` por ejemplo, para el atributo `name` de la anotación `ManagedBean`).
+
+6. Cree un nuevo archivo llamado `index.xhtml` dentro de la carpeta `WebContent` del proyecto seleccionando File | New | File menu option. Cuando use JSF, debe agregar algunas declaraciones de espacio de nombres en la parte superior del archivo:
+
+```html
+<html xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:f="http://java.sun.com/jsf/core" 
+  xmlns:h="http://java.sun.com/jsf/html"> 
+```
+
+Aquí, estamos declarando namespaces para las `tag` bibliotecas integradas de JSF . Accederemos a las etiquetas en la `tag` biblioteca JSF principal con el prefijo `f` y las etiquetas HTML con el prefijo `h`.
+
+7. Agregue el título y comience la etiqueta `body`:
+
+```html
+<head> 
+<title>Login</title> 
+</head> 
+<body> 
+  <h2>Login</h2> 
+```
+
+Hay etiquetas JSF correspondientes para el `head` y el `body`, pero no utilizamos ningún atributo específico de JSF; por lo tanto, hemos usado etiquetas HTML simples.
+
+8. Luego agregamos el código para mostrar el mensaje de error, si no es nulo:
+
+   ```html
+   <h:outputText value="#{loginBean.errorMsg}" 
+              rendered="#{loginBean.errorMsg != null}" 
+              style="color:red;"/> 
+   ```
+
+   Aquí, usamos una etiqueta específica para JSF y expression language para mostrar el valor del mensaje de error. La etiqueta `OutputText` es similar a la etiqueta que vimos en JSTL. También hemos agregado una condición para representarlo solo si el mensaje de error en el managed bean no es `null`. Además, hemos establecido el color de este texto de salida. 
+
+9. Todavía no hemos agregado el miembro `errorMsg` al managed bean. Por lo tanto, agreguemos la declaración, el getter y el  setter. Abra la clase `LoginBean` y agregue el siguiente código:
+
+```java
+private String errorMsg; 
+public String getErrorMsg() { 
+  return errorMsg; 
+} 
+public void setErrorMsg(String errorMsg) { 
+  this.errorMsg = errorMsg; 
+} 
+```
+
+Tenga en cuenta que accedemos al bean administrado en JSF utilizando el valor del name atributo de la ManagedBean anotación. Además, a diferencia de JavaBean en JSP, no lo creamos utilizando la  <jsp:useBean> etiqueta. El tiempo de ejecución JSF crea el bean si aún no está en el ámbito requerido, en este caso, el Request ámbito.
+
+Volvamos a la edición index.xhtml. Ahora agregaremos el siguiente formulario:
+
 # Using Maven for project management
 
 ## Maven views and preferences in Eclipse JEE
