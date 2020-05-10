@@ -677,6 +677,167 @@ Una última nota antes de dejar el tema de JSP. En las aplicaciones del mundo re
 
 # Java Servlet
 
+Ahora veremos cómo implementar una aplicación de inicio de sesión utilizando Java Servlet. Cree una nueva aplicación web dinámica en Eclipse como se describe en la sección anterior. Llamaremos a esto `LoginServletApp`:
+
+1. Haga clic derecho en la carpeta `src` en `Java Resources` del proyecto en Project Explorer . Seleccione el  New | Servlet menu option.
+
+2. En el asistente Create Servlet, ingrese el nombre del paquete como `packt.book.jee_eclipse.book.servlet` y el nombre de la clase como `LoginServlet`. Luego, haga clic en Finish .
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-22.png)
+
+Figura 2.22: Create Servlet wizard
+
+El asistente de servlet crea la clase para usted. Observe la anotación `@WebServlet("/LoginServlet")` justo arriba de la declaración de clase. Antes de JEE 5, tenía que declarar servlets `web.xml` en la carpeta `WEB-INF`. Todavía puede hacerlo, pero puede omitir esta declaración si usa las anotaciones adecuadas. Usando `WebServlet`, le estamos diciendo al contenedor de servlet que `LoginServlet` es un servlet, y lo estamos asignando a la ruta URL `/LoginServlet`. Por lo tanto, estamos evitando las siguientes dos entradas `web.xml` al usar esta anotación: `<servlet>` y `<servlet-mapping>`.
+
+Ahora cambiaremos la asignación de `/LoginServleta` solo por `/login`. Por lo tanto, modificaremos la anotación de la siguiente manera:
+
+```java
+@WebServlet("/login") 
+public class LoginServlet extends HttpServlet {...} 
+```
+
+4. El asistente también creó los métodos `doGet` y `doPost`. Estos métodos se redefinen partir de la siguiente clase base: `HttpServlet`. Se llama al método `doGet` para crear una respuesta para la solicitud `Get` y `doPost` se llama para crear una respuesta para la solicitud `Post`.
+
+Crearemos un formulario de inicio de sesión en el método `doGet` y procesaremos los datos del formulario ( `Post` ) en el método `doPost`. Sin embargo, debido a que `doPost` puede necesitar mostrar el formulario, en caso de que las credenciales del usuario no sean válidas, escribiremos un método `createForm`, que podría llamarse desde ambos métodos  d`doGet` y `doPost`.
+
+5. Agregue un método `createForm` de la siguiente manera:
+
+```java
+protected String createForm(String errMsg) { 
+ StringBuilder sb = new StringBuilder("<h2>Login</h2>"); 
+//check whether error message is to be displayed 
+  if (errMsg != null) { 
+    sb.append("<span style='color: red;'>") 
+      .append(errMsg) 
+      .append("</span>"); 
+  } 
+  //create form 
+  sb.append("<form method='post'>n") 
+    .append("User Name: <input type='text' 
+     name='userName'><br>n")    .append("Password: <input type='password' 
+     name='password'><br>n")    .append("<button type='submit' 
+     name='submit'>Submit</button>n") 
+    .append("<button type='reset'>Reset</button>n") 
+    .append("</form>"); 
+ 
+  return sb.toString(); 
+} 
+```
+
+6. Ahora modificaremos un método `doGet` para llamar a un método `createForm` y devolver la respuesta:
+
+```html
+protected void doGet(HttpServletRequest request, 
+ HttpServletResponse response) 
+  throws ServletException, IOException { 
+  response.getWriter().write(createForm(null)); 
+} 
+```
+
+Llamamos al método `getWrite` en el objeto `response` y le escribimos el contenido del formulario llamando a la función `createForm`. Tenga en cuenta que cuando mostramos el formulario, inicialmente, no hay ningún mensaje de error, por lo que pasamos un argumento `null` a `createForm`.
+
+7. Modificaremos `doPost` para procesar el contenido del formulario cuando el usuario publique el formulario haciendo clic en el botón Submit :
+
+```java
+protected void doPost(HttpServletRequest request, 
+HttpServletResponse response) 
+  throws ServletException, IOException { 
+    String userName = request.getParameter("userName"); 
+    String password = request.getParameter("password"); 
+ 
+  //create StringBuilder to hold response string 
+  StringBuilder responseStr = new StringBuilder(); 
+  if ("admin".equals(userName) && "admin".equals(password)) { 
+    responseStr.append("<h2>Welcome admin !</h2>") 
+    .append("You are successfully logged in"); 
+  } 
+  else { 
+    //invalid user credentials 
+    responseStr.append(createForm("Invalid user id or password. 
+     Please try again")); 
+  } 
+ 
+  response.getWriter().write(responseStr.toString()); 
+} 
+```
+
+Primero obtenemos el username y password del objeto `request` llamando al método `request.getParameter`. Si las credenciales son válidas, agregamos un mensaje de bienvenida a la cadena `response`; o bien, llamamos a `createForm` con un mensaje de error y agregamos un valor de retorno (markup para el formulario) a la cadena `response`.
+
+Finalmente, obtenemos el objeto `Writer` de la cadena `response` y escribimos la respuesta.
+
+8. Haga clic derecho en el archivo `LoginServlet.java` en el Project Explorer y seleccione the Run As | Run on Server option. No hemos agregado este proyecto al servidor Tomcat. Por lo tanto, Eclipse le preguntará si desea usar el servidor configurado para ejecutar este servlet. Haga clic en el  botón Finish del asistente.
+
+9. Tomcat necesita reiniciarse porque  se implementa una nueva aplicación web en el servidor . Eclipse le pedirá que reinicie el servidor. Haz clic en  OK .
+
+Cuando el servlet se ejecuta en el navegador interno de Eclipse, observe la URL; termina con `/login`, que es la asignación que especificamos en la anotación de servlet. Sin embargo, observará que en lugar de representar el formulario HTML, la página muestra el texto marcado. Esto se debe a que perdimos una configuración importante en el objeto `response`. No le dijimos al navegador el tipo de contenido que estamos devolviendo, por lo que el navegador asumió que era texto y lo presentó como texto sin formato. Necesitamos decirle al navegador que es contenido HTML. Hacemos esto llamando `response.setContentType("text/html")` tanto en el método `doGet` como en `doPost`. Aquí está el código fuente completo:
+
+```java
+package packt.book.jee_eclipse.book.servlet; 
+
+// skipping imports to save space
+ 
+/** 
+ * Servlet implementation class LoginServlet 
+ */ 
+@WebServlet("/login") 
+public class LoginServlet extends HttpServlet { 
+  private static final long serialVersionUID = 1L; 
+ 
+  public LoginServlet() { 
+    super(); 
+  } 
+  //Handles HTTP Get requests 
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)  
+    throws ServletException, IOException { 
+  response.setContentType("text/html"); 
+  response.getWriter().write(createForm(null)); 
+  } 
+  //Handles HTTP POST requests 
+  protected void doPost(HttpServletRequest request, 
+   HttpServletResponse response) 
+      throws ServletException, IOException { 
+    String userName = request.getParameter("userName"); 
+    String password = request.getParameter("password"); 
+ 
+    //create StringBuilder to hold response string 
+    StringBuilder responseStr = new StringBuilder(); 
+    if ("admin".equals(userName) && "admin".equals(password)) { 
+      responseStr.append("<h2>Welcome admin !</h2>") 
+        .append("You're are successfully logged in"); 
+    } else { 
+      //invalid user credentials 
+      responseStr.append(createForm("Invalid user id or password. 
+       Please try again")); 
+    } 
+    response.setContentType("text/html"); 
+    response.getWriter().write(responseStr.toString()); 
+  }
+
+ 
+  //Creates HTML Login form 
+  protected String createForm(String errMsg) { 
+    StringBuilder sb = new StringBuilder("<h2>Login</h2>"); 
+    //check if error message to be displayed 
+    if (errMsg != null) { 
+      sb.append("<span style='color: red;'>") 
+        .append(errMsg) 
+        .append("</span>"); 
+    } 
+    //create form 
+    sb.append("<form method='post'>n") 
+      .append("User Name: <input type='text' 
+       name='userName'><br>n")      .append("Password: <input type='password' 
+       name='password'><br>n")      .append("<button type='submit' 
+       name='submit'>Submit</button>n") 
+      .append("<button type='reset'>Reset</button>n") 
+      .append("</form>"); 
+    return sb.toString(); 
+  } 
+} 
+```
+
+Como puede ver, no es muy conveniente escribir HTML markup en servlet. Por lo tanto, si está creando una página con mucho marcado HTML, entonces es mejor usar JSP o HTML sin formato. Los servlets son buenos para procesar solicitudes que no necesitan generar demasiado marcado, por ejemplo, controladores en  marcos de **Model-View-Controller (MVC)**, para procesar solicitudes que generan una respuesta que no es de texto, o para crear un web service o WebSocket endpoints.
+
 # Creating WAR
 
 # JavaServer Faces
