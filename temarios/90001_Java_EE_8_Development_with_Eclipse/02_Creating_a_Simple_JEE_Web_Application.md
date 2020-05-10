@@ -510,6 +510,136 @@ Aunque hemos movido la validación de los usuarios a `LoginBean`, todavía tenem
 
 ## Using JSTL
 
+Las etiquetas JSTL se pueden usar para reemplazar gran parte de los scriptlets de Java en JSP. Las etiquetas JSTL se clasifican en cinco grandes grupos:
+
+* **Core**: Cubre el control de flujo y el soporte de variable, entre otras cosas
+* **XML**: Etiquetas para procesar documentos XML
+* **i18n** : Etiquetas para apoyar la internacionalización
+* **SQL** : Etiquetas para acceder a la base de datos
+* **Funciones** : Etiquetas para realizar algunas de las operaciones de cadena comunes
+
+Consulte http://docs.oracle.com/javaee/5/tutorial/doc/bnake.html para obtener más detalles sobre JSTL.
+
+Modificaremos el JSP de inicio de sesión para usar JSTL, de modo que no haya scriptlets Java en él:
+
+1. Descargue las bibliotecas JSTL para API y su implementación. Al momento de escribir, los archivos `.jar` más recientes son `javax.servlet.jsp.jstl-api-1.2.1.jar` ( http://search.maven.org/remotecontent?filepath=javax/servlet/jsp/jstl/javax.servlet.jsp.jstl-api/1.2.1/javax.servlet .jsp.jstl-api-1.2.1.jar ) y `javax.servlet.jsp.jstl-1.2.1.jar` ( http://search.maven.org/remotecontent?filepath=org/glassfish/web/javax.servlet.jsp.jstl/1.2.1/javax.servlet .jsp.jstl-1.2.1.jar ). Asegúrese de copiar estos archivos WEB-INF/lib. Todos los archivos `.jar` en esta carpeta se agregan a la classpath aplicación web.
+
+AQUY*********************
+
+Necesitamos agregar una declaración para JSTL en nuestro JSP. Agregue la siguiente taglibdeclaración debajo de la declaración de la primera página ( <%@ page language="java" ...>):
+<% @ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%> 
+La  taglib declaración contiene la URL de la  tag biblioteca y  prefix. tagSe accede a todas las etiquetas de la biblioteca mediante  prefix JSP.
+
+Reemplace  <%String errMsg = null; %> con la  set etiqueta de JSTL:
+<c: set var = "errMsg" value = "$ {null}" /> 
+<c: set var = "displayForm" value = "$ {true}" /> 
+Hemos incluido el valor en  ${}. Esto se llama  lenguaje de expresión  ( EL ). Encierra la expresión Java en JSTL en  ${}.
+
+Reemplace el siguiente código:
+<% if ("POST" .equalsIgnoreCase (request.getMethod ()) && 
+request.getParameter ("submit")! = null) {%> 
+Con la ifetiqueta de JSTL:
+
+<c: if test = "$ {" POST ".equalsIgnoreCase (pageContext.request 
+.method) && pageContext.request.getParameter ("submit")! = 
+null} ">
+Se  request accede al objeto en la etiqueta JSTL a través de  pageContext.
+
+Las etiquetas JavaBean van dentro de la if etiqueta. No hay cambios en este código:
+<jsp: useBean id = "loginBean" 
+  class = "packt.book.jee_eclipse.ch2.bean.LoginBean"> 
+  <jsp: setProperty name = "loginBean" property = "*" /> 
+</ jsp: useBean> 
+ Luego agregamos etiquetas a la llamada loginBean.isValidUser()y, en función de su valor de retorno, para configurar los mensajes. Sin embargo, no podemos usar la  ifetiqueta de JSTL aquí, porque también necesitamos escribir la  elsedeclaración. JSTL no tiene una etiqueta para else. En cambio, para varias if...elsedeclaraciones, debe usar la choosedeclaración, que es algo similar a la  switchdeclaración:
+<c: elegir> 
+  <c: when test = "$ {! loginBean.isValidUser ()}"> 
+    <c: set var = "errMsg" value = "Identificación de usuario o contraseña no válidas. Vuelva a 
+     intentarlo" />
+  </ c: cuando> 
+  <c: de lo contrario> 
+    <h2> <c: out value = "¡Bienvenido administrador!" /> </h2> 
+    <c: out value = "Ha iniciado sesión correctamente" /> 
+    <c: set var = "displayForm" value = "$ {false}" /> 
+  </ c: de lo contrario> 
+</ c: elegir>
+Si las credenciales de usuario no son válidas, configuramos el mensaje de error. O (en la etiqueta), imprimimos el mensaje de bienvenida y configuramos la bandera en . No queremos mostrar el formulario de inicio de sesión si el usuario ha iniciado sesión correctamente. c:otherwise  displayForm  false
+
+Ahora reemplazaremos otro ifcódigo de scriptlet por <%if%>etiqueta. Reemplace el siguiente fragmento de código:
+<% if (errMsg! = null) {%> 
+  <span style = "color: red;"> <% out.print (errMsg); %> </span>
+<%}%> 
+Con el siguiente código:
+
+<c: if test = "$ {errMsg! = null}"> 
+  <span style = "color: red;"> 
+    <c: out value = "$ {errMsg}"> </ c: out> 
+  </span> 
+</ c: si>
+Tenga en cuenta que hemos utilizado la  outetiqueta para imprimir un mensaje de error.
+
+ Finalmente, incluimos todo el <body>contenido en otra ifetiqueta JSTL :
+<c: if test = "$ {displayForm}"> 
+<cuerpo> 
+   ... 
+</body> 
+</ c: si> 
+Aquí está el código fuente completo de la JSP:
+
+<% @ page language = "java" contentType = "text / html; charset = UTF-8" 
+    pageEncoding = "UTF-8"%> 
+<% @ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%> 
+ 
+<! DOCTYPE html PUBLIC "- // W3C // DTD HTML 4.01 Transitional // ES" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html> 
+<head> 
+<meta http-equiv = "Content-Type" content = "text / html; charset = UTF- 
+8">
+<title> Iniciar sesión </title> 
+</head> 
+ 
+<c: set var = "errMsg" value = "$ {null}" /> 
+<c: set var = "displayForm" value = "$ {true}" /> 
+<c: if test = "$ {" POST ".equalsIgnoreCase (pageContext.request.method) 
+&& pageContext.request.getParameter ("submit")! = null} "> 
+  <jsp: useBean id = "loginBean" 
+   class = "packt.book.jee_eclipse.ch2.bean.LoginBean">
+    <jsp: setProperty name = "loginBean" property = "*" /> 
+  </ jsp: useBean> 
+  <c: elegir> 
+    <c: when test = "$ {! loginBean.isValidUser ()}"> 
+      <c: set var = "errMsg" value = "Identificación de usuario o contraseña no válidas. 
+       Vuelva a intentarlo" />
+    </ c: cuando> 
+    <c: de lo contrario> 
+    <h2> <c: out value = "¡Bienvenido administrador!" /> </h2> 
+      <c: out value = "Ha iniciado sesión correctamente" /> 
+      <c: set var = "displayForm" value = "$ {false}" /> 
+    </ c: de lo contrario> 
+  </ c: elegir> 
+</ c: si> 
+ 
+<c: if test = "$ {displayForm}"> 
+<cuerpo> 
+  <h2> Inicio de sesión: </h2> 
+  <! - Comprobar mensaje de error. Si está configurado, muéstrelo ->
+  <c: if test = "$ {errMsg! = null}"> 
+    <span style = "color: red;"> 
+      <c: out value = "$ {errMsg}"> </ c: out> 
+    </span> 
+  </ c: si> 
+  <form method = "post"> 
+    Nombre de usuario: <input type = "text" name = "userName"> <br> 
+    Contraseña: <input type = "password" name = "password"> <br> 
+    <button type = "submit" name = "submit"> Enviar </button> 
+    <button type = "reset"> Restablecer </button> 
+  </form> 
+</body> 
+</ c: si> 
+</html> 
+Como puede ver, no hay scriptlets Java en el código anterior. Todos ellos, del código anterior, son reemplazados por etiquetas. Esto facilita a los diseñadores web editar la página sin preocuparse por los scriptlets de Java.
+
+Una última nota antes de dejar el tema de JSP. En las aplicaciones del mundo real, probablemente reenvíe la solicitud a otra página después de que el usuario inicie sesión correctamente, en lugar de solo mostrar un mensaje de bienvenida en la misma página. Podrías usar la  <jsp:forward>etiqueta para lograr esto.
+
 # Java Servlet
 
 # Creating WAR
