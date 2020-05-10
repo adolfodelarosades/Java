@@ -1221,6 +1221,66 @@ Echemos un vistazo a las diferentes etiquetas en detalle, que se utilizan en el 
 
 ## Adding Maven dependencies
 
+El arquetipo que seleccionamos para el proyecto no incluye algunas de las dependencias requeridas para un proyecto web JEE. Por lo tanto, puede ver marcadores de error en `index.jsp`. Arreglaremos esto agregando dependencias para las bibliotecas JEE:
+
+1. Con `pom.xml` abierto en el editor, haga clic en la  pestaña Dependencies.
+2. Haz clic en el  botón Add . Esto abre el cuadro de diálogo Select Dependency.
+3. En el cuadro de filtro, escriba `javax.servlet` (queremos usar API de servlet en el proyecto).
+4. Seleccione la última versión de la API y haga clic en el botón OK.
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-32.png)
+
+Figura 2.32: Agregar dependencia de API de servlet
+
+Sin embargo, necesitamos archivos JAR para las API de servlet solo en el momento de la compilación; en tiempo de ejecución, estas API son proporcionadas por Tomcat. Podemos indicar esto especificando el alcance de la dependencia; en este caso, configurándolo como provisto, lo que le dice a Maven que evalúe esta dependencia solo para compilación y que no la empaquete en el archivo WAR. Consulte http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html para obtener más información sobre los ámbitos de dependencia.
+
+5. Para establecer el alcance de la dependencia, seleccione dependency de la pestaña Dependencies del editor POM.
+6. Haz clic en el  botón Properties. Luego, seleccione el  alcance proporcionado de la lista desplegable:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-33.png)
+
+Figura 2.33: Configuración del alcance de dependencia de Maven
+
+7. Ahora necesitamos agregar dependencias para las API JSF y su implementación. Haga clic en el botón Add nuevamente y escriba `jsf` en el cuadro de búsqueda.
+8. De la lista, seleccione `jsf-api` con Group Id `com.sun.faces` y haga clic en el botón OK:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-34.png)
+
+Figura 2.34: Agregar dependencias de Maven para JSF
+
+Del mismo modo, agregue una dependencia para `jsf-impl` con Group Id `com.sun.faces`. La sección de dependencias en su `pom.xml` debe verse de la siguiente manera:
+
+```html
+<dependencies> 
+    <dependency> 
+      <groupId>junit</groupId> 
+      <artifactId>junit</artifactId> 
+      <version>3.8.1</version> 
+      <scope>test</scope> 
+    </dependency> 
+    <dependency> 
+      <groupId>javax.servlet</groupId> 
+      <artifactId>javax.servlet-api</artifactId> 
+      <version>3.1.0</version> 
+      <scope>provided</scope> 
+    </dependency> 
+    <dependency> 
+      <groupId>com.sun.faces</groupId> 
+      <artifactId>jsf-api</artifactId> 
+      <version>2.2.16</version> 
+      </dependency> 
+    <dependency> 
+      <groupId>com.sun.faces</groupId> 
+      <artifactId>jsf-impl</artifactId> 
+      <version>2.2.16</version> 
+    </dependency> 
+  </dependencies> 
+```
+
+Si Tomcat lanza una excepción por no encontrar `javax.faces.webapp.FacesServlet`, entonces puede que tenga que descargar `jsf-api-2.2.16.jarjsf-impl-2.2.16.jar`( http://central.maven.org/maven2/com/sun/faces/jsf-impl/2.2.16/jsf-impl-2.2.16.jar ) y  ( http://central.maven.org/maven2/com/sun/faces/jsf-impl/2.2.16/jsf-impl-2.2.16.jar ) y cópielos en la carpeta 
+`<tomcat-install-folder>/lib`.
+
+
 ## Maven project structure
 
 ## Creating a WAR file using Maven
