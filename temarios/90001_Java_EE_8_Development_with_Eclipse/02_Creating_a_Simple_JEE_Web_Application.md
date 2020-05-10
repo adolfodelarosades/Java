@@ -1280,8 +1280,23 @@ Del mismo modo, agregue una dependencia para `jsf-impl` con Group Id `com.sun.fa
 Si Tomcat lanza una excepción por no encontrar `javax.faces.webapp.FacesServlet`, entonces puede que tenga que descargar `jsf-api-2.2.16.jarjsf-impl-2.2.16.jar`( http://central.maven.org/maven2/com/sun/faces/jsf-impl/2.2.16/jsf-impl-2.2.16.jar ) y  ( http://central.maven.org/maven2/com/sun/faces/jsf-impl/2.2.16/jsf-impl-2.2.16.jar ) y cópielos en la carpeta 
 `<tomcat-install-folder>/lib`.
 
-
 ## Maven project structure
+
+El asistente de proyectos de Maven crea las carpetas `src` y target en la carpeta principal del proyecto. Como su nombre lo indica, todos los archivos source van en `src`. Sin embargo, la estructura del paquete Java comienza en la carpeta `main`. Por convención, Maven espera archivos fuente Java en la carpeta `java`. Por lo tanto, cree una carpeta `java` debajo de `src/main`. La estructura del paquete de Java se inicia desde la carpeta `java`, es decir, `src/main/java/<java-packages>`. El contenido web como HTML, JS, CSS y JSP va en la carpeta `webapp` debajo `src/main`. Las clases compiladas y otros archivos de salida generados por el proceso de compilación de Maven se almacenan en la carpeta `target`:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-35.png)
+
+Figura 2.35: Estructura del proyecto de la aplicación web Maven
+
+El código fuente de nuestra página JSF de inicio de sesión es el mismo que en el ejemplo anterior de `LoginJSFApp`. Por lo tanto, copie la carpeta `packt` de la carpeta `src` de ese proyecto a la carpeta `src/main/java` de este proyecto de Maven. Esto añade `LoginBean.java` al proyecto. Luego, copie `web.xml` de la carpeta `WEB-INF` a la carpeta `src/main/webapp/WEB-INF` de este proyecto. Copiar `index.xhtml` y `welcome.xhtml` a la carpeta `src/main/webapp`:
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-36.png)
+
+Figura 2.36: Estructura del proyecto después de agregar archivos de origen
+
+No se requiere ningún cambio en el código fuente. Para ejecutar la aplicación, haga clic derecho `index.xhtml` y seleccione Run As | Run on Server.
+
+Usaremos Maven para la gestión de proyectos en el resto de este libro.
 
 ## Creating a WAR file using Maven
 
