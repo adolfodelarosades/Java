@@ -970,9 +970,130 @@ public void setErrorMsg(String errorMsg) {
 } 
 ```
 
-Tenga en cuenta que accedemos al bean administrado en JSF utilizando el valor del name atributo de la ManagedBean anotación. Además, a diferencia de JavaBean en JSP, no lo creamos utilizando la  <jsp:useBean> etiqueta. El tiempo de ejecución JSF crea el bean si aún no está en el ámbito requerido, en este caso, el Request ámbito.
+Tenga en cuenta que accedemos al managed bean en JSF utilizando el valor del atributo `name` de la anotación `ManagedBean`. Además, a diferencia de JavaBean en JSP, no lo creamos utilizando la etiqueta `<jsp:useBean>`. El tiempo de ejecución JSF crea el bean si aún no está en el ámbito requerido, en este caso, el ámbito(scope) `Request`.
 
-Volvamos a la edición index.xhtml. Ahora agregaremos el siguiente formulario:
+10. Volvamos a la edición `index.xhtml`. Ahora agregaremos el siguiente formulario:
+
+```html
+<h:form> 
+  User Name: <h:inputText id="userName" 
+                value="#{loginBean.userName}"/><br/> 
+  Password: <h:inputSecret id="password" 
+                value="#{loginBean.password}"/><br/> 
+  <h:commandButton value="Submit" 
+   action="#{loginBean.validate}"/> 
+</h:form> 
+```
+
+Muchas cosas están sucediendo aquí. Primero, hemos usado la etiqueta `inputText` de JSF para crear cuadros de texto para username y password.. Hemos establecido sus valores con los miembros correspondientes de `loginBean`. Hemos utilizado la  etiqueta `commandButton` de JSF para crear un  botón Submit . Cuando el usuario hace clic en el  botón Submit, lo hemos configurado para que llame al método `loginBean.validate` (usando el atributo `action`).
+
+11. No hemos definido un método `validate` en `loginBean`, así que agreguemos eso. Abra la clase `LoginBean` y agregue el siguiente código:
+
+```java
+public String validate() 
+{ 
+  if ("admin".equals(userName) && "admin".equals(password)) { 
+    errorMsg = null; 
+    return "welcome"; 
+  } else { 
+    errorMsg = "Invalid user id or password. Please try 
+     again"; 
+    return null; 
+  } 
+}
+```
+
+Tenga en cuenta que el método `validate` devuelve una cadena. ¿Cómo se usa el valor de retorno? Se utiliza para fines de navegación en JSF. El tiempo de ejecución JSF busca el archivo JSF con el mismo nombre que el valor de cadena devuelto después de evaluar la expresión en el atributo `action` de `commandButton`. En el método `validate`, devolvemos `welcome` si las credenciales de usuario son válidas. En este caso, le estamos diciendo al tiempo de ejecución JSF que navegue a `welcome.xhtml`. Si las credenciales no son válidas, configuramos el mensaje de error y lo devolvemos `null`, en cuyo caso, el tiempo de ejecución de JSF muestra la misma página.
+
+Ahora agregaremos la página `welcome.xhml`. Simplemente contiene el mensaje de bienvenida:
+
+```html
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"> 
+  <body> 
+    <h2>Welcome admin !</h2> 
+      You are successfully logged in 
+  </body> 
+</html> 
+```
+
+Aquí está el código fuente completo de `index.html`:
+
+```html
+<html xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:f="http://java.sun.com/jsf/core" 
+  xmlns:h="http://java.sun.com/jsf/html"> 
+ 
+  <head> 
+    <title>Login</title> 
+  </head> 
+  <body> 
+  <h2>Login</h2> 
+  <h:outputText value="#{loginBean.errorMsg}" 
+  rendered="#{loginBean.errorMsg != null}" 
+  style="color:red;"/> 
+  <h:form> 
+    User Name: <h:inputText id="userName" 
+     value="#{loginBean.userName}"/><br/>    Password: <h:inputSecret id="password" 
+     value="#{loginBean.password}"/><br/> 
+  <h:commandButton value="Submit" action="#{loginBean.validate}"/> 
+  </h:form> 
+</body> 
+</html>
+```
+
+Aquí está el código fuente de la clase `LoginBean`:
+
+```java
+package packt.book.jee_eclipse.bean; 
+import javax.faces.bean.ManagedBean; 
+import javax.faces.bean.RequestScoped; 
+ 
+@ManagedBean(name="loginBean") 
+@RequestScoped 
+public class LoginBean { 
+  private String userName; 
+  private String password; 
+  private String errorMsg; 
+  public String getUserName() { 
+    return userName; 
+  } 
+  public void setUserName(String userName) { 
+    this.userName = userName; 
+  } 
+  public String getPassword() { 
+    return password; 
+  } 
+  public void setPassword(String password) { 
+    this.password = password; 
+  } 
+  public String getErrorMsg() { 
+    return errorMsg; 
+  } 
+  public void setErrorMsg(String errorMsg) { 
+    this.errorMsg = errorMsg; 
+  } 
+  public String validate() 
+  { 
+    if ("admin".equals(userName) && "admin".equals(password)) { 
+      errorMsg = null; 
+      return "welcome"; 
+    } 
+    else { 
+      errorMsg = "Invalid user id or password. Please try again"; 
+      return null; 
+    } 
+  } 
+} 
+```
+
+Para ejecutar la aplicación, haga clic con el botón derecho en `index.xhtml` Project Explorer and select the Run As | Run on Server option.
+
+JSF puede hacer mucho más de lo que hemos visto en este pequeño ejemplo: tiene el soporte para validar una entrada y crear plantillas de página también. Sin embargo, estos temas están más allá del alcance de este libro.
+
+
+Visite http://docs.oracle.com/cd/E11035_01/workshop102/webapplications/jsf/jsf-app-tutorial/Introduction.html para un tutorial de JSF.
 
 # Using Maven for project management
 
