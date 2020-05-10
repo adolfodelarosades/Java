@@ -1235,7 +1235,7 @@ Figura 2.32: Agregar dependencia de API de servlet
 Sin embargo, necesitamos archivos JAR para las API de servlet solo en el momento de la compilación; en tiempo de ejecución, estas API son proporcionadas por Tomcat. Podemos indicar esto especificando el alcance de la dependencia; en este caso, configurándolo como provisto, lo que le dice a Maven que evalúe esta dependencia solo para compilación y que no la empaquete en el archivo WAR. Consulte http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html para obtener más información sobre los ámbitos de dependencia.
 
 5. Para establecer el alcance de la dependencia, seleccione dependency de la pestaña Dependencies del editor POM.
-6. Haz clic en el  botón Properties. Luego, seleccione el  alcance proporcionado de la lista desplegable:
+6. Haz clic en el  botón Properties. Luego, seleccione el provided scope de la lista desplegable:
 
 ![JavaEEDevelopmentWithEclipse](images/Figura2-33.png)
 
