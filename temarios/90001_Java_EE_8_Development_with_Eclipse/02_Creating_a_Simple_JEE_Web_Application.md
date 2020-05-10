@@ -401,8 +401,6 @@ Figura 2.20: Generar getters y setters
 
 7. Queremos generar getters y setters para todos los miembros de la clase. Por lo tanto, haga clic en el botón Select All y seleccione Last member  de la lista desplegable para Insertion point, porque queremos insertar los getters y setters después de declarar todas las variables miembro.
 
-7. Queremos generar getters y setters para todos los miembros de la clase. Por lo tanto, haga clic en el botón Select All y seleccione Last member  de la lista desplegable para Insertion point, porque queremos insertar los getters y setters después de declarar todas las variables miembro.
-
 La clase `LoginBean` ahora debería ser la siguiente:
 
 ```java
@@ -467,7 +465,48 @@ Ahora usaremos este bean en nuestro JSP y delegaremos la tarea de validar a los 
 <%} %> 
 ```
 
-Antes de analizar lo que ha cambiado en el código anterior, tenga en cuenta que también puede invocar y obtener asistencia de código para los atributos y valores de las <jsp:*>etiquetas. Si no está seguro de si el asistente de código está disponible, simplemente pulse Ctrl / Cmd + C .
+Antes de analizar lo que ha cambiado en el código anterior, tenga en cuenta que también puede invocar y obtener asistencia de código para los atributos y valores de las etiquetas `<jsp:*>`. Si no está seguro de si el asistente de código está disponible, simplemente pulse *Ctrl / Cmd + C*.
+
+![JavaEEDevelopmentWithEclipse](images/Figura2-21.png)
+
+Figura 2.21: Código de asistencia en etiquetas JSP
+
+Observe que Eclipse muestra la asistencia de código para JavaBean que acabamos de agregar.
+
+Ahora entendamos lo que cambiamos en el JSP:
+
+* Creamos múltiples scriptlets, uno para la declaración de la variable `errMsg` y dos más para bloques `if` separados. 
+
+* Agregamos una etiqueta `<jsp:useBean` en la primera condición `if`. El bean se crea cuando una condición en la declaración `if` es verdadera, es decir, cuando el formulario se publica haciendo clic en el  botón Submit(Enviar).
+
+* Usamos la etiqueta `<jsp:setProperty>` para establecer los atributos del bean:
+
+
+```html
+<jsp:setProperty name="loginBean" property="*"/> 
+```
+
+Estamos estableciendo valores de variables miembro de `loginBean`. Además, estamos estableciendo valores de todas las variables miembro al especificar `property="*"`. Sin embargo, ¿dónde especificamos los valores? Los valores se especifican implícitamente porque hemos nombrado miembros `LoginBean` para que sean los mismos que los campos en el formulario. Entonces, el tiempo de ejecución JSP obtiene parámetros del objeto `request` y asigna valores a los miembros JavaBean con el mismo nombre.
+Si los nombres de los miembros de JavaBean no coinciden con los parámetros de la solicitud, debe establecer los valores explícitamente:
+
+```html
+<jsp:setProperty name="loginBean" property="userName" 
+  value="<%=request.getParameter("userName")%>"/> 
+<jsp:setProperty name="loginBean" property="password" 
+  value="<%=request.getParameter("password")%>"/> 
+```
+
+* Luego verificamos si el usuario es válido llamando `loginBean.isValidUser()`. El código para manejar los mensajes de error no ha cambiado.
+
+Para probar la página, realice los siguientes pasos:
+
+1. Haga clic derecho en `index.jsp` en el Project Explorer .
+2. Seleccione el Run As | Run on Server menu option. Eclipse le pedirá que reinicie el servidor Tomcat.
+3. Haga clic en el  botón OK para reiniciar el servidor.
+
+La página se mostrará en el navegador interno de Eclipse. Debería comportarse de la misma manera que en el ejemplo anterior.
+
+Aunque hemos movido la validación de los usuarios a `LoginBean`, todavía tenemos mucho código en los scriptlets de Java. Idealmente, deberíamos tener la menor cantidad posible de scriptlets Java en JSP. Todavía tenemos scriptlets para verificar condiciones y para asignaciones variables. Podemos escribir el mismo código usando etiquetas para que sea coherente con el código restante basado en etiquetas en JSP y sea más fácil para los diseñadores web trabajar con él. Esto se puede lograr utilizando **JSP Standard Tag Library ( JSTL )**.
 
 ## Using JSTL
 
