@@ -1180,6 +1180,45 @@ Haz clic en Finish. Se agrega un  proyecto `maven_jsf_web_app` en Project Explor
 
 ## Exploring the POM
 
+Abra `pom.xml` en el editor y vaya a la pestaña `pom.xml`. El archivo debe tener el siguiente contenido:
+
+```html
+<project xmlns = "http://maven.apache.org/POM/4.0.0" xmlns: xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+  xsi: schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion> 4.0.0 </modelVersion> 
+  <groupId> packt.book.jee_eclipse </groupId> 
+  <artifactId> maven_jsf_web_app </artifactId> 
+  <packaging> guerra </packaging> 
+  <version> 0.0.1-SNAPSHOT </version> 
+  <name> maven_jsf_web_app Maven Webapp </name> 
+  <url> http://maven.apache.org </url> 
+  <dependencias> 
+    <dependencia> 
+      <groupId> junit </groupId> 
+      <artifactId> junit </artifactId> 
+      <version> 3.8.1 </version> 
+      <scope> prueba </scope> 
+    </dependency> 
+  </dependencies> 
+  <construcción> 
+    <finalName> maven_jsf_web_app </finalName> 
+  </build> 
+</project> 
+```
+
+Echemos un vistazo a las diferentes etiquetas en detalle, que se utilizan en el fragmento de código anterior:
+
+* `modelVersion`: Esta en el archivo `pom.xml` es la versión de Maven.
+* `groupId`: Esta es la ID común utilizada en la unidad de negocio u organización bajo la cual se agrupan los proyectos. Aunque no es necesario usar el formato de estructura de paquete para la ID de grupo, generalmente se usa.
+* `artifactId`: Este es el nombre del proyecto.
+* `version`: Este es el número de versión del proyecto. Los números de versión son importantes al especificar dependencias. Puede tener múltiples versiones de un proyecto, y puede especificar diferentes dependencias de versión en diferentes proyectos. Maven también agrega el número de versión a los archivos JAR, WAR o EAR que crea para el proyecto.
+* `packaging`: Esto le dice a Maven qué tipo de resultado final queremos cuando se construye el proyecto. En este libro, utilizaremos los tipos de empaque JAR, WAR y EAR, aunque existen más tipos.
+* `name`: Este es realmente el nombre del proyecto, pero Eclipse se muestra artifactidcomo el nombre del proyecto en Project Explorer .
+* `url`: Esta es la URL de su proyecto si aloja la información del proyecto en la web. El valor predeterminado es la URL de Maven.
+* `dependencies`: Esta sección es donde especificamos las bibliotecas (u otros artefactos de Maven) de las que depende el proyecto. El arquetipo que seleccionamos para este proyecto ha agregado la dependencia predeterminada de JUnit a nuestro proyecto. Aprenderemos más sobre JUnit en el Capítulo 5 , Pruebas unitarias .
+* `finalName`: Esta etiqueta en la  buildetiqueta indica el nombre del archivo de salida (JAR, WAR o EAR) que Maven genera para su proyecto.
+
 ## Adding Maven dependencies
 
 ## Maven project structure
