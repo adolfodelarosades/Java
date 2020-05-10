@@ -1300,4 +1300,12 @@ Usaremos Maven para la gestión de proyectos en el resto de este libro.
 
 ## Creating a WAR file using Maven
 
+En un ejemplo anterior, creamos el archivo WAR utilizando la opción Export de Eclipse.. En un proyecto de Maven, puede crear un WAR invocando el  Maven Install plugin . Haga clic derecho en el proyecto y seleccione  Run As | Maven install option . El archivo WAR se crea en la carpeta `target`. Luego puede implementar el archivo WAR en Tomcat copiándolo en la  carpeta `webapps` de Tomcat.
+
 # Summary
+
+En este capítulo, aprendimos cómo configurar Tomcat en Eclipse. Aprendimos cómo se puede implementar la misma página web utilizando tres tecnologías diferentes, a saber, JSP, Servlet y JSF. Todos ellos pueden usarse para desarrollar cualquier aplicación web dinámica. Sin embargo, JSP y JSF son más adecuados para páginas que requieren más UI, y los servlets son más adecuados para controladores y como puntos finales para servicios web y WebSockets. JSF aplica el diseño MVC y proporciona muchos servicios adicionales en comparación con JSP.
+
+También aprendimos a usar Maven para muchas tareas de gestión de proyectos.
+
+En el próximo capítulo, aprenderemos cómo configurar y usar sistemas de administración de control de fuente, particularmente SVN y Git.
