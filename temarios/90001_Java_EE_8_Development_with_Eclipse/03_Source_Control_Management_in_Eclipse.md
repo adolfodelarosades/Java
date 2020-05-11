@@ -142,7 +142,31 @@ Figura 3.12: Agregar archivos a un repositorio SVN
 
 ## Synchronizing with an SVN repository
 
+Para sincronizar su proyecto local con el repositorio remoto, haga clic derecho en el proyecto y seleccione Team | Synchronize with Repository. Esto actualizará el proyecto con archivos en el repositorio remoto, mostrará los archivos que son nuevos en la carpeta local y también mostrará los archivos modificados:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-13.png)
+
+Figura 3.13: La Synchronize view
+
+Puede filtrar la lista como modo entrante (cambios desde el repositorio remoto), modo saliente (cambios en su directorio de trabajo) o ambos. Como puede ver en la *Figura 3.13*, tenemos dos archivos que se cambian en el directorio de trabajo; uno modificado y uno nuevo. Para confirmar los cambios, haga clic en el proyecto y seleccione Commit ... . Si desea confirmar desde Navigator o Package Explorer , haga clic con el botón derecho en el proyecto y seleccione Team | Commit.... Ingrese el comentario de registro y haga clic en OK. Para actualizar el proyecto (recibir todos los cambios desde el repositorio remoto), haga clic derecho en el proyecto y seleccione Equipo | Actualizar.
+
+Para ver el historial de revisiones del archivo o carpeta, haga clic con el botón derecho en Navigator o Package Explorer  y seleccione Team | Show History:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-14.png)
+
+Figura 3.14: Historial de revisión de archivos SVN
+
 ## Checking out a project from SVN
+
+Es fácil retirar proyectos de un repositorio SVN a un nuevo espacio de trabajo. En la vista SVN Repositories, haga clic en el proyecto que desea retirar y seleccione la opción Check Out:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-15.png)
+
+Figura 3.15: Historial de revisión de archivos SVN
+
+Esta opción desprotege el proyecto en el espacio de trabajo actual. También puede usar la opción Import project para ver el proyecto desde SVN. Seleccione el File | Import de menú option y luego seleccione la  opción SVN | Project from SVN.
+
+Hay muchas otras características de SVN que puede usar desde Eclipse. Consulte  http://www.eclipse.org/subversive/documentation.php .
 
 # Eclipse Git plugin
 
