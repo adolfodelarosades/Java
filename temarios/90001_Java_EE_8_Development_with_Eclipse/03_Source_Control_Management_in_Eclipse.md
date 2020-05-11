@@ -170,13 +170,122 @@ Hay muchas otras características de SVN que puede usar desde Eclipse. Consulte 
 
 # Eclipse Git plugin
 
+Las versiones recientes de Eclipse están preinstaladas con el Eclipse **Git plugin (EGit)**. Si no, puede instalar el plugin desde Eclipse Marketplace . Seleccione la opción Help | Eclipse Marketplace... y escriba `egit` en el Find textbox:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-16.png)
+
+Figura 3.16: Búsqueda del complemento EGit en Eclipse Marketplace
+
+Si el plugin ya está instalado, se marcará como Instalado .
+
 ## Adding a project to Git
+
+Git es un repositorio distribuido. A diferencia de algunos de los otros sistemas de administración de fuentes, Git también mantiene el repositorio local completo. Por lo tanto, puede realizar actividades como el check-out y el check-in en el repositorio local sin conectarse a ningún repositorio remoto. Cuando esté listo para mover su código a un repositorio remoto, puede conectarse a él y enviar sus archivos al repositorio remoto.
+
+
+*Si es nuevo en Git, eche un vistazo a la siguiente documentación y tutorial:
+https://git-scm.com/doc y  https://www.atlassian.com/git/tutorials/.*
+
+Para aprender a agregar un proyecto a Git, creemos un proyecto Java simple en el espacio de trabajo. Nuevamente, como en la sección anterior, qué código escribes en este proyecto no es importante por ahora:
+
+1. Crea una clase Java en el proyecto.
+2. Para agregar este proyecto a Git, haga clic derecho en el proyecto en Package Explorer o Navigator y seleccione Team | Share Project...:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-17.png)
+
+Figura 3.17: Compartir un proyecto de Eclipse con Git
+
+3. Seleccione Git y haga clic en Next. Marque la casilla Use or create repository in parent folder of project.
+4. Seleccione el proyecto (marque la casilla para el project) y haga clic en el botón Create Repository. Luego haga clic en  Finish:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-18.png)
+
+Figura 3.18: Crear un repositorio Git para un proyecto
+
+5. Esto crea un nuevo repositorio Git en la carpeta del proyecto. Cambie a la perspectiva Git (o abra la  vista Repositorios Git desde la opción Window | Show View | Other) y debería ver el proyecto listado en la  vista Repositorios Git (vea la siguiente captura de pantalla):
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-19.png)
+
+Figura 3.19: Vista de repositorios Git
 
 ## Committing files in the Git repository
 
+En Git, los archivos nuevos o modificados se preparan para la confirmación. Para ver los archivos organizados, haga clic en la  pestaña Git Staging en la perspectiva de Git :
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-20.png)
+
+Figura 3.20: La vista Git Staging
+
+Si no desea agregar un archivo al repositorio de Git, haga clic con el botón derecho en ese archivo (o selección de varios archivos) y seleccione la  opción Ignore. Antes de enviar(commit) archivos a Git, debe mover Unstaged Changes a Staged Changes. Vamos a agregar todos los archivos a Git. Así que selecciona todos los archivos de la vista Unstaged Changes y arrastrar y soltarlos en la vista Staged Changes. También se recomienda establecer el nombre del autor y el committer . Suele estar en formato `Name <email>`. Para configurar esta opción a nivel global en Eclipse (para que no tenga que configurar estos campos en cada confirmación), vaya a Eclipse Preferences y busque `Git`. Entonces ve a la página Team | Git | Configuration  y haga clic en el Add Entry... button:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-21.png)
+
+Figura 3.21: Agregar una entrada de configuración de Git
+
+Del mismo modo, agregue la entrada `user.email`:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-22.png)
+
+Figura 3.22: Configuraciones de Git en Preferencias
+
+Volviendo a la vista Git Staging, introducir Author, Committer, and Commit Message. Luego haga clic en el botón Commit.
+
 ## Viewing file differences after modifications
 
+Modifiquemos la única clase Java creada en el proyecto anterior. Si va a la  vista Git Staging después de realizar cambios en el archivo, verá que el archivo aparece en la lista Unstaged Changes. Para ver qué cambios se han realizado en el archivo desde la última confirmación (commit), haga doble clic en el archivo en la vista Git Staging .
+
+Para confirmar estos cambios, muévalo a la vista Staged Changes, ingrese Commit Message, y haga clic en el botón Commit. También puede ver las diferencias de archivo haciendo clic en el archivo en el Package Explorer y seleccionando Compare With | Head Revision:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-23.png)
+
+Figura 3.23: Ver una diferencia de archivo
+
+Para ver el historial de cambios en el proyecto o archivo(s)/carpeta(s), haga clic derecho y seleccione Team | Shown in History:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-24.png)
+
+Figura 3.24: Vista del historial de Git
+
 ## Creating a new branch
+
+Es típico cuando usa la administración de control de código fuente para crear ramas separadas para funciones o incluso para la corrección de errores. La idea es que la rama principal o la rama maestra siempre deben tener el código de trabajo y usted debe desarrollar en las ramas que pueden no ser estables. Cuando finaliza una función o corrige un error y sabe que la rama es estable, combina el código de esa rama con la rama maestra.
+
+Para crear una nueva rama, vaya a la vista Git Repositories y haga clic derecho en el repositorio que desea bifurcar(branch). Luego seleccione la opción Switch To | New Branch...:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-25.png)
+
+Figura 3.25: Crear una nueva branch
+
+Tenga en cuenta que la casilla Checkout new branch debe estar marcada. Debido a esta opción, la nueva rama se convierte en la rama activa una vez que se crea. Cualquier cambio que confirme estará en esta rama y la rama maestra no se verá afectada. Haga clic en Finish  para crear la rama.
+
+Hagamos algunos cambios en el código, digamos en el método `main` de la clase `GitTestApp`:
+
+```java
+public class GitTestApp { 
+ 
+  public static void main(String[] args) { 
+    System.out.println("Hello Git, from branch bug#1234 !!"); 
+  } 
+} 
+```
+
+Commit los cambios anteriores en la nueva rama.
+
+Ahora veamos la rama maestra(master branch). Haga clic con el botón derecho en el repositorio en la  vista Git Repositories y seleccione Switch To | master. Abra el archivo que modificó en la nueva rama. Observará que los cambios que realizó en el archivo no están presentes. Como se mencionó anteriormente, los cambios que realice en las ramas no se comprometen con la rama maestra. Debe fusionar explícitamente los cambios.
+
+Para fusionar(merge) los cambios de la rama bug#1234 a la master branch, haga clic con el botón derecho en el repositorio en la  vista Git Repositories y seleccione Merge...:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-26.png)
+
+Figura 3.26: Merge Git braches
+
+Seleccione branch bug#1234. Esta rama se fusionará en la rama maestra. Haz clic en Merge . Git mostrará un resumen de la fusión(merge). Haga clic en OK para completar la operación de fusión. Ahora el archivo en la master branch contendrá los cambios realizados en branch bug#1234.
+
+Hemos fusionado todos los cambios del error de branch bug#1234 al master y ya no lo necesitamos. Entonces, eliminemos el error de branch bug#1234. Expanda el nodo Ramas en la  vista Repositorios de Git y haga clic con el botón derecho en la rama que se va a eliminar (la rama seleccionada no debe ser la rama activa al eliminar). Luego seleccione la  opción de menú Delete Branch:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-27.png)
+
+Figura 3.27: Deleting Git branch
 
 ## Committing a project to a remote repository
 
