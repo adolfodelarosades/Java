@@ -176,7 +176,7 @@ Las versiones recientes de Eclipse están preinstaladas con el Eclipse **Git plu
 
 Figura 3.16: Búsqueda del complemento EGit en Eclipse Marketplace
 
-Si el plugin ya está instalado, se marcará como Instalado .
+Si el plugin ya está instalado, se marcará como Installed.
 
 ## Adding a project to Git
 
