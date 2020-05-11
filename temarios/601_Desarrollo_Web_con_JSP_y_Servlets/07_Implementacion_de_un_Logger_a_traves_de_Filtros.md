@@ -60,8 +60,23 @@ INSERT INTO `administrador` (`id`,`email`,`contrasena`,`nombre`,`estado`,`idpreg
 INSERT INTO `administrador` (`id`,`email`,`contrasena`,`nombre`,`estado`,`idpregunta`) VALUES (9,'juan@gmail.com','1234','Juan','Toledo',1);
 INSERT INTO `administrador` (`id`,`email`,`contrasena`,`nombre`,`estado`,`idpregunta`) VALUES (10,'tifany@gmail.com','1234','Tifany','Guadalajara',1);
 ```
-
 ## Definición y creación de un SerlvetFilter básico 06:17
+
+En esta lección veremos que es un Filtro y crearemos un SerlvetFilter básico.
+
+### ¿Qué es un Filter?
+
+El filter es una capa entre el cliente y el Servlet cada que se hace un request/response.
+
+![7-Logger](images/7-filter.gif)
+
+En el filter podemos realizar tareas intermedias de acuerdo a las peticiones o respuestas que se hagan, para nuestro ejemplo iinterceptaremos la "acción" que se realiza y la registraremos en la BD.
+
+### Creación del Filter.
+
+1. Creamos el paquete `com.novellius.controlador`
+
+
 ## Código del modelo para crear el Logger 12:48
 ## Implementación del Logger en el SerlvetFilter 19:49
 ## Completando el módulo de Logging 18:51
