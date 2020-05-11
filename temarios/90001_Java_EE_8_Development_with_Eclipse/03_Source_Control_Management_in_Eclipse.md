@@ -289,8 +289,83 @@ Figura 3.27: Deleting Git branch
 
 ## Committing a project to a remote repository
 
+Hasta ahora, hemos estado trabajando en el repositorio local de Git. Pero es posible que desee llevar su proyecto a un repositorio remoto si desea compartir su código y / o asegurarse de no perder sus cambios locales. Entonces, en esta sección, aprenderemos cómo llevar un proyecto local a un repositorio Git remoto. Si no tiene acceso a un repositorio de Git, puede crear uno en http://www.github.com .
+
+1. Cree un nuevo repositorio en el servidor remoto de Git, llamado `GitPluginTest`.
+2. En la vista Git Repositories, haga clic en el nodo Remotes y seleccione la opción Create Remoto ...:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-28.png)
+
+Figura 3.28: Agregar un repositorio Git remoto
+
+3. Por convención, el nombre del repositorio remoto es `origin`. Haz clic en OK. En la página next, establezca la configuración para push. Haga clic en el  botón Change junto al cuadro de texto URI:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-29.png)
+
+Figura 3.29: Configuración de un URI de Git remoto
+
+4. Ingrese el URI del repositorio remoto de Git. El asistente extracts host, repository path, y protocol del URI. Ingrese su ID de usuario y contraseña y haga clic en Finish :
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-30.png)
+
+Figura 3.30: Configuración de un Git push
+
+Haga clic en Save and Push. Esto envía archivos en la rama maestra local al repositorio Git remoto.
+
 ## Pulling changes from a remote repository
+
+Mientras trabaja en un equipo, los miembros de su equipo también realizarán cambios en el repositorio remoto. Cuando desee que los cambios se realicen en el repositorio remoto a su repositorio local, use la opción Pull. Pero antes de realizar la operación Pull (de extracción), debe configurarla.
+
+En el  Explorador de paquetes , haga clic con el botón derecho en el proyecto y seleccione Team | Remote | Configure Fetch from Upstream...:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-31.png)
+
+Figura 3.31: Configuración de Git Fetch
+
+*En Git, tanto  Pull  como  Fetch  pueden obtener los cambios desde un repositorio remoto. Sin embargo, la   operación Fetch no combina los cambios en el repositorio local. La operación Pull primero recupera los cambios y luego se fusiona en el repositorio local. Si desea inspeccionar los archivos antes de fusionarlos, seleccione la opción Fetch.*
+
+Necesitamos mapear la rama maestra local con una rama en el repositorio remoto. Esto le dice a la operación Pull para buscar a los cambios de la rama en el repositorio remoto y fusionarla en el (en este caso, maestro) repositorio local determinado. Haga clic en el  botón Add ...:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-32.png)
+
+Figura 3.32: Configuración de Git Fetch
+
+Comience a escribir el nombre de la rama en el cuadro de texto de origen y el asistente obtendrá la información de la rama del repositorio remoto y la completará automáticamente. Haga clic en Next y luego en Finish. Esto lo lleva de regreso a la página Configure Fetch con mapeo de las ramas agregadas:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-33.png)
+
+Figura 3.33: Configuración de Git Fetch con mapeo agregado
+
+Haga clic en Save and Fetch para extraer (pull) los cambios del repositorio remoto.
 
 ## Cloning a remote repository
 
+Hemos aprendido cómo comenzar el desarrollo utilizando un repositorio Git local y luego enviar los cambios a un repositorio remoto. Aprendamos ahora cómo podemos obtener un repositorio Git remoto existente y crear una copia local; en otras palabras, aprenderemos cómo clonar un repositorio Git remoto. La opción más fácil es importar el proyecto Git remoto. Seleccionar File | Import... desde el menú principal y luego Git | Projects from Git | Clone URI.
+
+El asistente mostrará una página similar a la Figura 3.29 . Ingrese el URI del repositorio remoto, nombre de usuario y contraseña, y luego haga clic en Next . Seleccione remote branch y haga clic en Next:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-34.png)
+
+Figura 3.34: Selección de una rama remota para clonar
+
+Haga clic en el  botón Next en la branch selection page:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-35.png)
+
+Figura 3.35: Selección de la ubicación del proyecto clonado
+
+Seleccione la ubicación donde se guardará el proyecto y haga clic en Next:
+
+![JavaEEDevelopmentWithEclipse](images/Figura3-36.png)
+
+Figura 3.36: Opciones para importar el proyecto clonado
+
+Hay tres opciones para importar el proyecto clonado. Si el repositorio remoto contiene todo el proyecto Eclipse, seleccione Import existing Eclipse projects o seleccione cualquiera de las dos opciones restantes. Como hemos verificado el proyecto Eclipse en el repositorio remoto, seleccionaremos la primera opción. Haga clic en Next y luego en Finish.
+
+Para obtener más información sobre el complemento Eclipse Git, consulte https://wiki.eclipse.org/EGit/User_Guide.
+
 # Summary
+
+Hay plugins de Eclipse disponibles para una amplia variedad de sistemas SCM. En este capítulo, aprendimos cómo usar los complementos de Eclipse para SVN y Git. Con estos complementos, puede realizar muchas de las operaciones típicas de SCM, como verificar el origen, comparar versiones y confirmar cambios, directamente dentro del IDE de Eclipse. Esto proporciona una gran comodidad y puede mejorar su productividad.
+
+En el próximo capítulo, veremos cómo crear aplicaciones de base de datos JEE utilizando JDBC y JDO.
