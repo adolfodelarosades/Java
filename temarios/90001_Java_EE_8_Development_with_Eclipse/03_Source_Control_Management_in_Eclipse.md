@@ -256,7 +256,7 @@ Para crear una nueva rama, vaya a la vista Git Repositories y haga clic derecho 
 
 Figura 3.25: Crear una nueva branch
 
-Tenga en cuenta que la casilla Checkout new branch debe estar marcada. Debido a esta opción, la nueva rama se convierte en la rama activa una vez que se crea. Cualquier cambio que confirme estará en esta rama y la rama maestra no se verá afectada. Haga clic en Finish  para crear la rama.
+Tenga en cuenta que la casilla Check out new branch debe estar marcada. Debido a esta opción, la nueva rama se convierte en la rama activa una vez que se crea. Cualquier cambio que confirme estará en esta rama y la rama maestra no se verá afectada. Haga clic en Finish  para crear la rama.
 
 Hagamos algunos cambios en el código, digamos en el método `main` de la clase `GitTestApp`:
 
