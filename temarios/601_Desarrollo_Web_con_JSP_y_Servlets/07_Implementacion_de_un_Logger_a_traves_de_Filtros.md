@@ -139,40 +139,38 @@ package com.novellius.modelo.beans;
 
 public class Log {
 	
-	private int idLog;
-	private String accionLog;
-	private int idAdministrador;
+   private int idLog;
+   private String accionLog;
+   private int idAdministrador;
 	
-	public Log() {
+   public Log() {
+   }
 		
-	}
+   public Log(int idLog, String accionLog, int idAdministrador) {
+      super();
+      this.idLog = idLog;
+      this.accionLog = accionLog;
+      this.idAdministrador = idAdministrador;
+   }
 	
-	
-	public Log(int idLog, String accionLog, int idAdministrador) {
-		super();
-		this.idLog = idLog;
-		this.accionLog = accionLog;
-		this.idAdministrador = idAdministrador;
-	}
-	
-	public int getIdLog() {
-		return idLog;
-	}
-	public void setIdLog(int idLog) {
-		this.idLog = idLog;
-	}
-	public String getAccionLog() {
-		return accionLog;
-	}
-	public void setAccionLog(String accionLog) {
-		this.accionLog = accionLog;
-	}
-	public int getIdAdministrador() {
-		return idAdministrador;
-	}
-	public void setIdAdministrador(int idAdministrador) {
-		this.idAdministrador = idAdministrador;
-	}
+   public int getIdLog() {
+      return idLog;
+   }
+   public void setIdLog(int idLog) {
+      this.idLog = idLog;
+   }
+   public String getAccionLog() {
+      return accionLog;
+   }
+   public void setAccionLog(String accionLog) {
+      this.accionLog = accionLog;
+   }
+   public int getIdAdministrador() {
+      return idAdministrador;
+   }
+   public void setIdAdministrador(int idAdministrador) {
+      this.idAdministrador = idAdministrador;
+   }
 }
 ```
 
@@ -190,32 +188,31 @@ import org.apache.log4j.Logger;
 
 public class Logging {
 
-	private static final Logger log = LogManager.getLogger("Logging: ");
-	private Connection con;
+   private static final Logger log = LogManager.getLogger("Logging: ");
+   private Connection con;
 
-	public Logging(Connection con) {
-		this.con = con;
-	}
+   public Logging(Connection con) {
+      this.con = con;
+   }
 	
-	public boolean registrarLog(String accionLog, int idAdministrador) {
+   public boolean registrarLog(String accionLog, int idAdministrador) {
 		
-		try {
-			PreparedStatement st = con.prepareStatement("INSERT INTO log (accionLog, idadministrador) VALUES (?, ?)");
-			st.setString(1, accionLog);
-			st.setInt(2,  idAdministrador);
-			st.executeUpdate();
+      try {
+         PreparedStatement st = con.prepareStatement("INSERT INTO log (accionLog, idadministrador) VALUES (?, ?)");
+	 st.setString(1, accionLog);
+	 st.setInt(2,  idAdministrador);
+	 st.executeUpdate();
 			
-			st.close();
+	 st.close();
 			
-			return true;
+	 return true;
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+	 e.printStackTrace();
+         return false;
+      }
+   }	
 }
 ```
 
@@ -227,10 +224,10 @@ if (cuenta.login(usuario, contrasena)) {
    log.info("Ingresado correctamente como: " + usuario);
 
    // Ámbito sesión
-	 sesion.setAttribute("usuario", usuario);
+   sesion.setAttribute("usuario", usuario);
    //sesion.setAttribute("id", id);
-	 sesion.setAttribute("id", new Cuenta(con).obtenerIdAdmin(usuario));
-	 setRespuestaControlador("postLogin").forward(request, response);
+   sesion.setAttribute("id", new Cuenta(con).obtenerIdAdmin(usuario));
+   setRespuestaControlador("postLogin").forward(request, response);
 } 
 ```
 
@@ -241,30 +238,28 @@ if (cuenta.login(usuario, contrasena)) {
 ```java
 public int obtenerIdAdmin(String emailAdmin) {
 		
-		try {
-			PreparedStatement st = con.prepareStatement("SELECT id FROM administrador WHERE email = ?");
-			st.setString(1, emailAdmin);
+   try {
+      PreparedStatement st = con.prepareStatement("SELECT id FROM administrador WHERE email = ?");
+      st.setString(1, emailAdmin);
 			
-			ResultSet rs = st.executeQuery();
+      ResultSet rs = st.executeQuery();
 			
-			/*
-			if(rs.next()) {
-				return rs.getInt("id");
-			} else {
-				return 0;
-			}
-			*/
+      /*
+      if(rs.next()) {
+         return rs.getInt("id");
+      } else {
+         return 0;
+      }
+      */
 			
-			return (rs.next()) ? rs.getInt("id") : 0;
-
+      return (rs.next()) ? rs.getInt("id") : 0;
 		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return 0;
-		}
-		
-	}
+   } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      return 0;
+   }		
+}
 ```
 
 ## Implementación del Logger en el SerlvetFilter 19:49
