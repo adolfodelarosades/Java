@@ -298,7 +298,31 @@ En esta lección vamos a crear el código del controlador para registrar la peti
 3. Procesar la petición de registrar administrador en el método `doPost()` del `Servlet.java`
 
 ```java
-
+} else if(accion.contentEquals("registrarAdministrador")) {
+				
+	Administrador administrador = new Administrador();
+	administrador.setEmail(request.getParameter("email"));
+	administrador.setContrasena(request.getParameter("contrasena"));
+	administrador.setNombre(request.getParameter("nombre"));
+	administrador.setRespuesta(request.getParameter("respuesta"));
+	// administrador.setUrlImagen(request.getParameter("urlImagen"));
+	administrador.setIdPregunta(Integer.parseInt(request.getParameter("idPregunta")));
+				
+	//Forma normal
+	//Cuenta cuenta = new Cuenta(con);
+	//cuenta.registrarAdministrador(administrador);
+				
+	//Insertar en la BD
+	//forma anónima
+	if(new Cuenta(con).registrarAdministrador(administrador)) {
+		request.setAttribute("msg", "Administrador creado correctamente");
+	}else {
+		request.setAttribute("msg", "Error al crear Administrador");
+	}
+				
+	//Redirige a la misma página
+	setRespuestaControlador("registroadministrador");
+}
 ```
 
 
