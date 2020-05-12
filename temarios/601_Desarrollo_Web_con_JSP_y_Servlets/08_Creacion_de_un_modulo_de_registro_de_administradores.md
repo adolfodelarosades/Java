@@ -47,7 +47,7 @@ INSERT INTO `administradores`.`administrador` (`id`, `email`, `contrasena`, `nom
 
 ## Creación de la vista 11:51
 
-En esta lección crearemos la vista `registrarAdministrador.jsp` para que el administrador se pueda registrar.
+En esta lección crearemos la vista `registroAdministrador.jsp` para que el administrador se pueda registrar.
 
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -130,7 +130,7 @@ En esta lección crearemos la vista `registrarAdministrador.jsp` para que el adm
 
 En esta lección vamos a crear el modelo para insertar el administrador en la BD. Como hemos cambiado la tabla `administrador` tendremos que modificar nuestro JavaBean `administrador.java` y nuestra vista `consultaAdministradores.jsp` y crear el método para insertar el administrador. 
 
-1. Abrimos la clase `Administrador.java` vamos a eliminar la propiedad `estado`, y agregar las propiedades `respuesta` y `urlImagen` y creamos sus getters y setters, generar el método `toString()`, generar dos constructores.
+1. Abrimos la clase `Administrador.java` vamos a eliminar la propiedad `estado`, y agregar las propiedades `respuesta` y `urlImagen` y creamos sus getters y setters, generar el método `toString()`, generar 3 constructores.
 
 ```java
 package com.novellius.modelo.beans;
@@ -144,6 +144,10 @@ public class Administrador {
 	private String respuesta;
 	private String urlImagen;
 	private int idPregunta;
+	
+	public Administrador() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Administrador(String email, String contrasena, String nombre, String respuesta, String urlImagen,
 			int idPregunta) {
@@ -279,7 +283,7 @@ En esta lección vamos a crear el código del controlador para registrar la peti
 
 ```html
 <tr>
-   <td><a href="?accion=registrarAdministrador" >Registrar administradores</a></td>
+   <td><a href="?accion=registroAdministrador" >Registrar administradores</a></td>
 </tr>
 ```
 
@@ -290,4 +294,12 @@ En esta lección vamos a crear el código del controlador para registrar la peti
    setRespuestaControlador(accion).forward(request, response);
 } 
 ```
+
+3. Procesar la petición de registrar administrador en el método `doPost()` del `Servlet.java`
+
+```java
+
+```
+
+
 ## Creación de un mecanismo para evitar administradores duplicados 07:43
