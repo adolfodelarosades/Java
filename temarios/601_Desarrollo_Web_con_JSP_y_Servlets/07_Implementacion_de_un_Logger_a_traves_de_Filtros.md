@@ -286,6 +286,64 @@ try {
 2. En el método `doFilter()` vamos a abrir la conexión de la BD, detectaremos la acción ejecutada, la insertaremos en la BD y cerraremos la conexión a la BD.
 
 ```java
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
+   log.info("Petición ha pasado por el filtro");
+		
+   // Conexión a la BD
+   try {
+      con = ds.getConnection();
+   } catch (SQLException e) {
+      // Enviar a una vista de error
+      log.error("Error al crear conexión: " + e.getMessage());
+   }
+		
+   //Necesitamos recuperar el parámetro "accion" que se hace con request.getParameter("accion"); (En Servlet.java)
+   //Donde request es un HttpServletRequest, pero aquí el request es un ServletRequest Por lo que 
+   //Necesito hacer cast entre HttpServletRequest - ServletRequest y HttpServletResponse - ServletResponse
+   // por que son diferentes tipos entre Servlet y Filter
+   HttpServletRequest servletRequest = (HttpServletRequest) request;
+   HttpServletResponse  servletResponse = (HttpServletResponse) response;
+		
+   //Recuperar parámetro accion
+   String accion = servletRequest.getParameter("accion");
+		
+   log.debug("accion: " + accion);
+		
+   //Recuperamos instancia de session para poder recuperar los atributos que se subierón a la sesión
+   HttpSession sesion = servletRequest.getSession();
+		
+   if(accion != null) {
+      //Si hay usuario logeado
+      if(sesion.getAttribute("usuario") != null) {
+	 int idAdmin = (int) sesion.getAttribute("id");
+			
+	 if(accion.equals("consultarAdministradores")) {
+	    	
+	     log.debug("email: " + sesion.getAttribute("usuario") + ", id: " + idAdmin);
+					
+	     if(new Logging(con).registrarLog("Consulta de administradores", idAdmin)) {
+		 log.info("Log creado correctamente");
+	     } else {
+		 log.error("Error al crear el log");
+	     }
+					
+	   }			
+       }
+   }
+		 
+		
+   // Cerrar Conexión a la BD
+   try {
+      con.close();
+   } catch (SQLException e) {
+      // Enviar a una vista de error
+     log.error("Error al cerrar conexión: " + e.getMessage());
+   }
+				
+   // pass the request along the filter chain
+   chain.doFilter(request, response);
+}
 ```
 
 ## Completando el módulo de Logging 18:51
