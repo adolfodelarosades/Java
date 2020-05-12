@@ -346,4 +346,20 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 }
 ```
 
+Ejecutar la aplicación:
+
+![7-Logger](images/7-ejecucion-1.png)
+
+Seleccionamos la opción de Consultra Administradores
+
+![7-Logger](images/7-ejecucion-2.png)
+
+Antes de mostrar la lista de los Administradores se ejcuta el filtro quien registra la Acción en la BD.
+
+![7-Logger](images/7-ejecucion-3.png)
+
+Si consultamos la BD observamos el nuevo registro.
+
+![7-Logger](images/7-ejecucion-4.png)
+
 ## Completando el módulo de Logging 18:51
