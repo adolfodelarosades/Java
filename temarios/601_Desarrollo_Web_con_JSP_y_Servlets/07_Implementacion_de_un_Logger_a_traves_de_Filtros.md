@@ -468,18 +468,110 @@ public class Util {
 2. En `FiltroLogging` vamos a añadir nuevas entradas:
 
 ```java
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
+   log.info("Petición ha pasado por el filtro");
+		
+   // Conexión a la BD
+   try {
+      con = ds.getConnection();
+   } catch (SQLException e) {
+      // Enviar a una vista de error
+      log.error("Error al crear conexión: " + e.getMessage());
+   }
+		
+   //Necesitamos recuperar el parámetro "accion" que se hace con request.getParameter("accion"); (En Servlet.java)
+   //Donde request es un HttpServletRequest, pero aquí el request es un ServletRequest Por lo que 
+   //Necesito hacer cast entre HttpServletRequest - ServletRequest y HttpServletResponse - ServletResponse
+   // por que son diferentes tipos entre Servlet y Filter
+   HttpServletRequest servletRequest = (HttpServletRequest) request;
+   HttpServletResponse  servletResponse = (HttpServletResponse) response;
+		
+   //Recuperar parámetro accion
+   String accion = servletRequest.getParameter("accion");
+		
+   log.debug("accion: " + accion);
+		
+   //Recuperamos instancia de session para poder recuperar los atributos que se subierón a la sesión
+   HttpSession sesion = servletRequest.getSession();
+		
+   if(accion != null) {
+      //Si hay usuario logeado
+      if(sesion.getAttribute("usuario") != null) {
+				
+         Util util = new Util();
+	 String fechaYHora = util.getAnio() + "/" + util.getMes() + "/" + util.getDia() + ". " + util.getHora();
+			
+	 int idAdmin = (int) sesion.getAttribute("id");
+				
+	 if(accion.equals("consultarAdministradores")) {
+	 				
+	    log.debug("email: " + sesion.getAttribute("usuario") + ", id: " + idAdmin);
+					
+	    if(new Logging(con).registrarLog("Consulta de administradores. " + fechaYHora, idAdmin)) {
+	       log.info("Log creado correctamente");
+	    } else {
+	       log.error("Error al crear el log");
+	    }
+					
+	 }else if(accion.equals("registrarPregunta")) {
+					
+	    log.debug("email: " + sesion.getAttribute("usuario") + ", id: " + idAdmin);
+					
+	    if(new Logging(con).registrarLog("Muestra del formulario para registrar pregunta secreta.  " + fechaYHora, idAdmin)) {
+	       log.info("Log creado correctamente");
+ 	    } else {
+	       log.error("Error al crear el log");
+	    }
+	 }else if(accion.equals("enviarCorreo")) {
+					
+	    log.debug("email: " + sesion.getAttribute("usuario") + ", id: " + idAdmin);
+					
+	    if(new Logging(con).registrarLog("Envíar correo electrónico.  " + fechaYHora, idAdmin)) {
+	      log.info("Log creado correctamente");
+	    } else {
+	      log.error("Error al crear el log");
+	    }
+	 }
+      }
+   }
+		 
+		
+   // Cerrar Conexión a la BD
+   try {
+      con.close();
+   } catch (SQLException e) {
+      // Enviar a una vista de error
+      log.error("Error al cerrar conexión: " + e.getMessage());
+   }
+				
+   // pass the request along the filter chain
+   chain.doFilter(request, response);
+}
 ```
 
 Ejecución de la aplicación:
 
+Iniciamos sesión con usuario diferente:
+
 ![7-Logger](images/7-ejecucion-2-1.png)
+
+Vamos a seleccionar Consulta de administradores
 
 ![7-Logger](images/7-ejecucion-2-2.png)
 
+Se registra la acción en el Logger.
+
 ![7-Logger](images/7-ejecucion-2-3.png)
+
+Ahora con Registrar Pregunta
 
 ![7-Logger](images/7-ejecucion-2-4.png)
 
+Seguimos con Envíar Correo
+
 ![7-Logger](images/7-ejecucion-2-5.png)
+
+Vemos como en la BD se va registrando cada acción.
 
 ![7-Logger](images/7-ejecucion-2-6.png)
