@@ -263,4 +263,29 @@ public int obtenerIdAdmin(String emailAdmin) {
 ```
 
 ## Implementación del Logger en el SerlvetFilter 19:49
+
+En esta lección vamos a implementar el Logger en el SerlvetFilter, es decir vamos a detectar que acción se esta ejecutando y la vamos a registrar en la BD. Como trabajaremos con la BD necesitamos implementar el JNDI, abrir conexiciones a la BD,  insertar registros en la tabla `log` y cerrar la conexión, vamos a seguir los siguientes pasos.
+
+1. En el método `init()` de `FiltroLogging.java` implementamos JNDI.
+
+```java
+...
+private DataSource ds;
+....
+
+// Confuguración JNDI
+try {
+      InitialContext initContext = new InitialContext();
+      Context env = (Context) initContext.lookup("java:comp/env");
+      ds = (DataSource) env.lookup("jdbc/novellius");
+   } catch (NamingException e) {
+      log.error("Al configurar JNDI: " + e.getMessage());
+   }
+```
+
+2. En el método `doFilter()` vamos a abrir la conexión de la BD, detectaremos la acción ejecutada, la insertaremos en la BD y cerraremos la conexión a la BD.
+
+```java
+```
+
 ## Completando el módulo de Logging 18:51
