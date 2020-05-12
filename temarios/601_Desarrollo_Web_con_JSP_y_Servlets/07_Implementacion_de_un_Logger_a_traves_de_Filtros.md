@@ -375,17 +375,20 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Util {
-	
+
 	private Calendar calendar;
-	
+
 	public Util() {
 		calendar = new GregorianCalendar();
 	}
-	
+	public String getAnio() {
+		return String.valueOf(calendar.get(Calendar.YEAR));
+	}
+
 	public String getMes() {
 		int mesEntero = Calendar.MONTH + 1;
 		String mes = "";
-		
+
 		switch (mesEntero) {
 		case 1: {
 			mes = "ENERO";
@@ -435,28 +438,48 @@ public class Util {
 			mes = "DICIEMBRE";
 			break;
 		}
-		
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + mesEntero);
 		}
-		
+
+		return mes;
+
 	}
-	
+
 	public String getDia() {
-		if(calendar.get(Calendar.DAY_OF_MONTH) <= 9) {
+		if (calendar.get(Calendar.DAY_OF_MONTH) <= 9) {
 			return "0" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-		}else  {
+		} else {
 			return String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
 		}
 	}
 
 	public String getHora() {
-		if(calendar.get(Calendar.MINUTE) <= 9) {
-			
-			return String.valueOf(calendar.get(Calendar.HOUR_OF_DAY) + "0:" + String.valueOf(calendar.get(Calendar.MINUTE)));
+		if (calendar.get(Calendar.MINUTE) <= 9) {
+
+			return String
+					.valueOf(calendar.get(Calendar.HOUR_OF_DAY) + "0:" + String.valueOf(calendar.get(Calendar.MINUTE)));
 		} else {
-			return String.valueOf(calendar.get(Calendar.HOUR_OF_DAY) + ":" + String.valueOf(calendar.get(Calendar.MINUTE)));
+			return String
+					.valueOf(calendar.get(Calendar.HOUR_OF_DAY) + ":" + String.valueOf(calendar.get(Calendar.MINUTE)));
 		}
 	}
 }
 ```
+
+2. En `FiltroLogging` vamos a añadir nuevas entradas:
+
+```java
+```
+
+Ejecución de la aplicación:
+
+![7-Logger](images/7-ejecucion-2-1.png)
+
+![7-Logger](images/7-ejecucion-2-2.png)
+
+![7-Logger](images/7-ejecucion-2-3.png)
+
+![7-Logger](images/7-ejecucion-2-4.png)
+
+![7-Logger](images/7-ejecucion-2-5.png)
+
+![7-Logger](images/7-ejecucion-2-6.png)
