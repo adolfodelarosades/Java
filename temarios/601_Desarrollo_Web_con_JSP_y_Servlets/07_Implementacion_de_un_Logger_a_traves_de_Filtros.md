@@ -363,3 +363,100 @@ Si consultamos la BD observamos el nuevo registro.
 ![7-Logger](images/7-ejecucion-4.png)
 
 ## Completando el módulo de Logging 18:51
+
+En esta lección vamos a crear nuevas entradas para nuestro Logger y añadiremos fecha y hora en que se realizan.
+
+1. En el paquete `com.novellius.util` vamos a crear la clase `Util.java` 
+
+```java
+package com.novellius.util;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Util {
+	
+	private Calendar calendar;
+	
+	public Util() {
+		calendar = new GregorianCalendar();
+	}
+	
+	public String getMes() {
+		int mesEntero = Calendar.MONTH + 1;
+		String mes = "";
+		
+		switch (mesEntero) {
+		case 1: {
+			mes = "ENERO";
+			break;
+		}
+		case 2: {
+			mes = "FEBRERO";
+			break;
+		}
+		case 3: {
+			mes = "MARZO";
+			break;
+		}
+		case 4: {
+			mes = "ABRIL";
+			break;
+		}
+		case 5: {
+			mes = "MAYO";
+			break;
+		}
+		case 6: {
+			mes = "JUNIO";
+			break;
+		}
+		case 7: {
+			mes = "JULIO";
+			break;
+		}
+		case 8: {
+			mes = "AGOSTO";
+			break;
+		}
+		case 9: {
+			mes = "SEPTIEMBRE";
+			break;
+		}
+		case 10: {
+			mes = "OCTUBRE";
+			break;
+		}
+		case 11: {
+			mes = "NOVIEMBRE";
+			break;
+		}
+		case 12: {
+			mes = "DICIEMBRE";
+			break;
+		}
+		
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + mesEntero);
+		}
+		
+	}
+	
+	public String getDia() {
+		if(calendar.get(Calendar.DAY_OF_MONTH) <= 9) {
+			return "0" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+		}else  {
+			return String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+		}
+	}
+
+	public String getHora() {
+		if(calendar.get(Calendar.MINUTE) <= 9) {
+			
+			return String.valueOf(calendar.get(Calendar.HOUR_OF_DAY) + "0:" + String.valueOf(calendar.get(Calendar.MINUTE)));
+		} else {
+			return String.valueOf(calendar.get(Calendar.HOUR_OF_DAY) + ":" + String.valueOf(calendar.get(Calendar.MINUTE)));
+		}
+	}
+}
+```
