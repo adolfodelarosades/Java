@@ -65,7 +65,8 @@ En esta lección crearemos la vista `registroAdministrador.jsp` para que el admi
 </head>
 <body>
 	<h1>Registro de Administrador</h1>
-	<form action="?accion=registrarAdmin" method="post">
+	
+	<form action="?accion=registrarAdministrador" method="post">
 	
 		<table>
 			<tr>
@@ -97,7 +98,7 @@ En esta lección crearemos la vista `registroAdministrador.jsp` para que el admi
 					   <!--  Recorre los datos recuperados y pinta el campo pregunta -->
             <select name="pregunta">
 					      <c:forEach var="row" items="${rs.rows}">
-					     		<option value="${row.id}">${row.pregunta}</option>
+					     		<option value="${row.idpregunta}">${row.pregunta}</option>
                 </c:forEach>
 					   </select>		
 					   
@@ -116,12 +117,13 @@ En esta lección crearemos la vista `registroAdministrador.jsp` para que el admi
 				<td>Selecciona una fotografía: </td>
 				<td></td>
 			</tr>
-      <tr>
-				<td><input type="summit" value="Crear" /></td>
+      			<tr>
+				<td><input type="submit" value="Crear" /></td>
 				<td></td>
 			</tr>
 		</table>
 	</form>
+	<c:out value="${requestScope.msg}" />
 </body>
 </html>
 ```
@@ -248,18 +250,20 @@ while(rs.next()) {
 3. También en `Cuenta.java` vamos a crear nuestro método de inserción.
 
 ```java
-public boolean registrarAdministrador(Administrador administrador) {
+	public boolean registrarAdministrador(Administrador administrador) {
 		try {
 			PreparedStatement st = con.prepareStatement("INSERT INTO administrador ("
-					+ "email, contrasena, nombre, respuesta, urlImagen, id ) "
-					+ "VALUES (?,?,?,?,?,?");
+					+ "email, contrasena, nombre, respuesta, urlImagen, idpregunta ) "
+					+ "VALUES (?,?,?,?,?,?) ");
 			
 			st.setString( 1, administrador.getEmail());
 			st.setString( 2, administrador.getContrasena());
 			st.setString( 3, administrador.getNombre());
 			st.setString( 4, administrador.getRespuesta());
 			st.setString( 5, administrador.getUrlImagen());
-			st.setInt(6, administrador.getIdAdministrador());
+			st.setInt(6, administrador.getIdPregunta());
+			
+			log.debug("SQL : " + st.toString());
 			
 			st.executeUpdate();
 			
@@ -306,7 +310,7 @@ En esta lección vamos a crear el código del controlador para registrar la peti
 	administrador.setNombre(request.getParameter("nombre"));
 	administrador.setRespuesta(request.getParameter("respuesta"));
 	// administrador.setUrlImagen(request.getParameter("urlImagen"));
-	administrador.setIdPregunta(Integer.parseInt(request.getParameter("idPregunta")));
+	administrador.setIdPregunta(Integer.parseInt(request.getParameter("pregunta")));
 				
 	//Forma normal
 	//Cuenta cuenta = new Cuenta(con);
@@ -321,9 +325,35 @@ En esta lección vamos a crear el código del controlador para registrar la peti
 	}
 				
 	//Redirige a la misma página
-	setRespuestaControlador("registroadministrador");
+	setRespuestaControlador("registroAdministrador").forward(request, response);
 }
 ```
+
+4. Vamos a modificar `FiltroLogging.java` por que según el profesor da problemas de cache.
+
+```java
+if(sesion.getAttribute("usuario") != null && sesion.getAttribute("id") != null ) {
+```
+
+Ejecutando la Aplicación:
+
+
+![7-Logger](images/8-ej-1.png)
+
+Seleccionamos la opción de Registrar administrador. 
+
+![7-Logger](images/8-ej-2.png)
+
+Ingresamos los datos del administrador nuevo 
+
+![7-Logger](images/8-ej-3.png)
+
+Una vez registrado el administrador regresa a la misma página y nos indica con un mensaje que el administrador ha sido insertado.
+![7-Logger](images/8-ej-4.png)
+
+Vemos que el administrador se ha almacenado enla BD
+![7-Logger](images/8-ej-5.png)
+
 
 
 ## Creación de un mecanismo para evitar administradores duplicados 07:43
