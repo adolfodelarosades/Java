@@ -337,7 +337,6 @@ if(sesion.getAttribute("usuario") != null && sesion.getAttribute("id") != null )
 
 Ejecutando la Aplicación:
 
-
 ![7-Logger](images/8-ej-1.png)
 
 Seleccionamos la opción de Registrar administrador. 
@@ -354,6 +353,70 @@ Una vez registrado el administrador regresa a la misma página y nos indica con 
 Vemos que el administrador se ha almacenado enla BD
 ![7-Logger](images/8-ej-5.png)
 
-
-
 ## Creación de un mecanismo para evitar administradores duplicados 07:43
+
+En esta lección vamos a crear un mecanismo para evitar administradores duplicados, una posibilidad de duplicado se puede dar cuando refrescamos la página.
+
+1. En `cuenta.java` vamos a crear el método `existeAdministrador(String email)`.
+
+```java
+public boolean existeAdministrador(String email) {
+		
+	try {
+		PreparedStatement st = con.prepareStatement("SELECT * FROM administrador WHERE email = ? ");
+		st.setString(1, email);
+			
+		ResultSet rs = st.executeQuery();
+			
+		return(rs.next()) ? true : false;
+		
+	} catch (SQLException e) {
+		log.error("Al consultar existencia de administrador: " + e.getMessage());
+		e.printStackTrace();
+		return false;
+	}	
+}
+```
+
+2. En `Servlet.java` vamos a meter la validación.
+
+```java
+....
+if (! new Cuenta(con).existeAdministrador(request.getParameter("email"))) {
+	//Insertar en la BD
+	//forma anonima
+	if (new Cuenta(con).registrarAdministrador(administrador)) {
+		request.setAttribute("msg", "Administrador creado correctamente");
+	} else {
+		request.setAttribute("msg", "Error al crear Administrador");
+	} 
+}else {
+	request.setAttribute("msg", "¡El Administrador ya existe!");
+}
+
+//Redirige a la misma página
+setRespuestaControlador("registroAdministrador").forward(request, response);
+
+....
+```
+
+Ejecución de la aplicación:
+![7-Logger](images/8-ej-1.png)
+
+Seleccionamos la opción de Registrar administrador. 
+
+![7-Logger](images/8-ej-2.png)
+
+Ingresamos los datos del administrador nuevo 
+
+![7-Logger](images/8-ej-6.png)
+
+![7-Logger](images/8-ej-7.png)
+
+![7-Logger](images/8-ej-8.png)
+
+![7-Logger](images/8-ej-9.png)
+
+![7-Logger](images/8-ej-10.png)
+
+![7-Logger](images/8-ej-11.png)
