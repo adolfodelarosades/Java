@@ -217,8 +217,38 @@ public String cargarImagen(HttpServletRequest request, String urlDestino) {
 6. Hacer la llamada a nuestro método `cargarImagen()` cuando invocamos la acción `cargarImagen`
 
 ```java
-
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+   String accion = request.getParameter("accion");
+		
+   if(accion != null) {
+      if(accion.equals("cargarImagen")) {
+	 // "/users/adolfodelarosa/archivos" es una carpeta en nuestro ordenador
+	 String s = cargarImagen(request, "/users/adolfodelarosa/archivos");
+	 log.info(s);
+      }
+   }
+}
 ```
+
+![7-Logger](images/9-ruta.png)
+
+### Ejecutar nuestra aplicación
+
+![7-Logger](images/9-ej-2-1.png)
+
+![7-Logger](images/9-ej-2-2.png)
+
+![7-Logger](images/9-ej-2-3.png)
+
+![7-Logger](images/9-ej-2-4.png)
+
+![7-Logger](images/9-ej-2-5.png)
+
+![7-Logger](images/9-ej-2-6.png)
+
+![7-Logger](images/9-ej-2-7.png)
+
 
 ## Informando al usuario el resultado de la carga de la imagen 10:43
 ## Como solucionar problemas de caché en Tomcat 02:53
