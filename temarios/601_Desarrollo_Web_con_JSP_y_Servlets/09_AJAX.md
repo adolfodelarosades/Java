@@ -133,14 +133,93 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 ![7-Logger](images/9-ej-1.png)
 
+Del menú seleccionamos registrar Administrador
+
 ![7-Logger](images/9-ej-2.png)
+
+Podemos ver los dos nuevos inputs insertados.
 
 ![7-Logger](images/9-ej-3.png)
 
+Si presionamos el botón `cargar` nos aparece el `alert` que pusimos en nuestro script en `ajax.js` el cual a su vez invoca el `ServletAjax` el cual pinta en la consola el mensaje `Petición AJAX recibida correctamente`. 
+
 ![7-Logger](images/9-ej-4.png)
 
-
 ## Creación de un método para validar una imagen y su tamaño máximo 12:14
+
+En esta lección vamos a crear un método para cargar un archivo en una ruta dada. 
+
+Vamos a usar dos APIs 
+
+* [Commons FileUpload](http://commons.apache.org/proper/commons-fileupload/)
+
+   El paquete Commons FileUpload facilita agregar capacidad robusta y de alto rendimiento de carga de archivos a sus servlets y aplicaciones web.
+
+   FileUpload analiza las solicitudes HTTP que cumplen con RFC 1867, "Form-based File Upload in HTML". Es decir, si se envía una solicitud HTTP utilizando el método POST, y con un tipo de contenido de "multipart/form-data", FileUpload puede analizar esa solicitud y hacer que los resultados estén disponibles de manera fácil para el llamante.
+
+* [Commons IO](https://commons.apache.org/proper/commons-io/)
+
+   Commons IO es una biblioteca de utilidades para ayudar con el desarrollo de la funcionalidad IO.
+
+   Hay seis áreas principales incluidas:
+
+   * Utility classes - con métodos estáticos para realizar tareas comunes
+   * Input - implementaciones útiles de  Input Stream y Reader
+   * Output - implementaciones útiles de Output Stream y Writer
+   * Filters - diversas implementaciones de filtros de archivos
+   * Comparators - varias implementaciones de java.util.Comparator para archivos
+   * File Monitor - un componente para monitorear eventos del file system
+
+1. Descargamos el zip `commons-fileupload-1.4-bin.zip` de el API Commons FileUpload.
+2. Descomprimimos el zip y copiamos `commons-fileupload-1.4.jar` en la carpeta `lib` y lo añadimos en el Build path.
+3. Descargamos el zip `commons-io-2.6-bin.zip` de el API Commons IO
+4. Descomprimimos el zip y copiamos `commons-io-2.6.jar` en la carpeta `lib` y lo añadimos en el Build path.
+
+![7-Logger](images/9-libs.png)
+
+5. Crear el método `cargarImagen()` en `Servletajax.java`
+
+```java
+public String cargarImagen(HttpServletRequest request, String urlDestino) {
+		
+   String valorRetorno = "";
+		
+   //Objeto FileItem del API commons-fileupload recibe a través de POST un tipo "multipart/form-data"  
+   //donde se pueden seleccionar varios archivos.
+   //Todos los objetos que viajan por el objeto request del Servlet se tiene que obtener en forma de 
+   //lista 		  
+   // La clase ServletFileUpload maneja una serie de archivos en un widget HTML 		
+   // La clase DiskFileItemFactory es una fabrica de File Items que los mantiene en memoria y si son muy grandes en disco
+   try {
+      List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+			
+      //Ya que tengo la lista de todos los archivos que me llegan la itero
+      for(FileItem item : items) {
+				
+         String nombreImagen = item.getName();
+         long tamanioImagen = item.getSize();
+				
+         //Validar archivo de imágen y tamaño máximo
+			
+         File archivoCargado = new File(urlDestino, nombreImagen);
+         item.write(archivoCargado);
+      }
+   } catch (Exception e) {
+      log.error("Error al cargar imágen: " + e.getMessage());
+      e.printStackTrace();
+      valorRetorno ="*error al cargar imágen*";
+   }
+		
+   return valorRetorno;
+}
+```
+
+6. Hacer la llamada a nuestro método `cargarImagen()` cuando invocamos la acción `cargarImagen`
+
+```java
+
+```
+
 ## Informando al usuario el resultado de la carga de la imagen 10:43
 ## Como solucionar problemas de caché en Tomcat 02:53
 ## Almacenando la ruta de la imagen en la Base de Datos 10:59
