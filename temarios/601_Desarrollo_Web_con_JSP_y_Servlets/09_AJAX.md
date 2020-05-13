@@ -119,14 +119,14 @@ NOTA: Por mi configuración lo tuve que meter manualmente.
 ```java
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String accion = request.getParameter("accion");
+   String accion = request.getParameter("accion");
 		
-		if(accion != null) {
-			if(accion.equals("cargarImagen")) {
-				System.out.println("Petición AJAX recibida correctamente");
-			}
-		}
-	}
+   if(accion != null) {
+      if(accion.equals("cargarImagen")) {
+	 System.out.println("Petición AJAX recibida correctamente");
+      }
+   }
+}
 ```
 
 
