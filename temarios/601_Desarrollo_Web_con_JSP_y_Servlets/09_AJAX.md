@@ -645,13 +645,23 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 ![7-Logger](images/9-ej-5-4.png)
 
+Metemos todos los datos del administrador
+
 ![7-Logger](images/9-ej-5-5.png)
+
+Al presionar el botón `crear` se registra el administrador incluyendo la imágen
 
 ![7-Logger](images/9-ej-5-6.png)
 
+Tenemos que refrescar la carpeta `imagen` para ver la imágen que se ha subido
+
 ![7-Logger](images/9-ej-5-7.png)
 
+Si cargamos el URL de la imágen podemos ver la imágen
+
 ![7-Logger](images/9-ej-5-7-2.png)
+
+Si vemos la BD vemos que en el nuevo registro tiene el urlImagen lleno
 
 ![7-Logger](images/9-ej-5-8.png)
 
