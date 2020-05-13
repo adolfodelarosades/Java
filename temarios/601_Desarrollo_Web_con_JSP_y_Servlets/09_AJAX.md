@@ -355,6 +355,148 @@ Si vemos la carpeta destino vemos el nuevo archivo almacenado en dicha carpeta.
 ![7-Logger](images/9-ej-3-14.png)
 
 ## Informando al usuario el resultado de la carga de la imagen 10:43
+
+En esta lección vamos a informar al usuario el resultado de la carga de la imágen en lugar de solo mostrar el mensaje por consola.
+
+1. Vamos a modificar la vista `registroAdministrador.jsp` para que muestre el mensaje:
+
+```html
+<tr>
+   <td>Selecciona una fotografía: </td>
+   <td>
+      <p> 
+	 <input type="file" id="file"/> 
+	 <input type="button" value="cargar" onclick="cargarImagen();" />
+      </p>
+      <p id="respuesta" style="font-weight:bold;"></p>
+   </td>
+</tr>
+```
+
+2. El mensaje `respuesta` se lo debe mandar el `ServletAjax` a la petición AJAX echa en el Script JS.
+
+```java
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+   //Establecer un juego de carácteres para los parámetros que llegan al método POST
+   request.setCharacterEncoding("UTF-8");
+   response.setContentType("text/html; charset-UTF-8"); 
+   PrintWriter out = response.getWriter();
+						
+   String accion = request.getParameter("accion");
+		
+   if(accion != null) {
+      if(accion.equals("cargarImagen")) {
+	 // /users/adolfodelarosa/archivos es una carpeta en nuestro ordenador
+	 String s = cargarImagen(request, "/users/adolfodelarosa/archivos");
+	 log.info(s);
+	 //Esto regresa un mensaje
+	 out.println(s);
+      }
+   }
+}
+```
+
+3. Damos un formato a los mensajes retornados:
+
+```java
+public String cargarImagen(HttpServletRequest request, String urlDestino) {
+		
+   String valorRetorno = "";
+		
+   //Objeto FileItem del API commons-fileupload recibe a través de POST un tipo "multipart/form-data"  
+   //donde se pueden seleccionar varios archivos.
+   //Todos los objetos que viajan por el objeto request del Servlet se tiene que obtener en forma de 
+   //lista 		
+   // La clase ServletFileUpload maneja una serie de archivos en un widget HTML 		
+   // La clase DiskFileItemFactory es una fabrica de File Items que los mantiene en memoria y si son muy grandes en disco
+   try {
+      List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+			
+      //Ya que tengo la lista de todos los archivos que me llegan la itero
+      for(FileItem item : items) {
+				
+         String nombreImagen = item.getName();
+	 long tamanioImagen = item.getSize();
+				
+	 //Validar archivo de imágen y tamaño máximo (5MB)
+	 if(isImagenValido(item)) {
+					
+	    if( tamanioImagen > 0 && tamanioImagen < 5242880 ) {
+				
+	       File archivoCargado = new File(urlDestino, nombreImagen);
+	       item.write(archivoCargado);
+	       valorRetorno ="<span style=\"color: green;\">* Imágen cargada correctamente *</span>";
+	    }else {
+	       valorRetorno ="<span style=\"color: red;\">* El Tamaño máximo de Imágen es de 5MB *</span>";
+	    }
+	 } else {
+	    valorRetorno ="<span style=\"color: red;\">* El archivo a cargar no es una Imágen *</span>";
+	 }
+      }
+   } catch (Exception e) {
+      log.error("Error al cargar imágen: " + e.getMessage());
+      e.printStackTrace();
+      valorRetorno ="<span style=\"color: red;\">*error al cargar imágen*</span>";
+   }
+		
+   return valorRetorno;
+}
+```
+
+4. En el Script `ajax.js` recuperamos el mensaje que devuelve `ServletAjax` y lo desplegamos en la vista:
+
+```js
+function cargarImagen(){
+	
+   document.getElementById("respuesta").innerHTML = "Cargando imágen, espere ...";
+	
+   //Crea un formulario con código
+   var formdata = new FormData();
+   //Permite elejir un archivo del ordenador.
+   formdata.append("file", document.getElementById("file").files[0]); //0 indica que selecciona el primer archivo seleccionado
+	
+   //Construye petición HTTP
+   var xhr = new XMLHttpRequest();
+   //Establecer parámetros de la petición HTTP, método, url, asyncrono
+   xhr.open("post", "/ServletAjax?accion=cargarImagen", true);
+   //Enviar el formulario a a la petición
+   xhr.send(formdata);
+	
+   //Analisa el resultado de la petición
+   xhr.onload = function(){
+      if(this.status == 200){
+         //El método cargarImagen() del ServletAjax devuelve texto
+         //Recupera la respuesta del Servlet y la muestra en el mensaje de respuesta
+         document.getElementById("respuesta").innerHTML = xhr.responseText;
+      }
+   };
+}
+```
+
+### Ejecutar la aplicación
+
+![7-Logger](images/9-ej-4-1.png)
+
+![7-Logger](images/9-ej-4-2.png)
+
+![7-Logger](images/9-ej-4-3.png)
+
+![7-Logger](images/9-ej-4-4.png)
+
+![7-Logger](images/9-ej-4-5.png)
+
+![7-Logger](images/9-ej-4-6.png)
+
+![7-Logger](images/9-ej-4-7.png)
+
+![7-Logger](images/9-ej-4-8.png)
+
+![7-Logger](images/9-ej-4-9.png)
+
+![7-Logger](images/9-ej-4-10.png)
+
 ## Como solucionar problemas de caché en Tomcat 02:53
 ## Almacenando la ruta de la imagen en la Base de Datos 10:59
 ## Mostrando al usuario la imagen almacenada en el servidor 06:54
