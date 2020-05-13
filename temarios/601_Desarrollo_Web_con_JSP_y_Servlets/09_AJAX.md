@@ -28,7 +28,7 @@ AJAX es el sueño de un desarrollador, porque puedes:
 * Leer datos de un servidor web: después de que la página se haya cargado
 * Actualizar una página web sin volver a cargar la página
 * Enviar datos a un servidor web: en segundo plano
-
+
 ## Creación del script AJAX para enviar una petición HTTP 12:41
 
 En esta lección vamos a crear un archivo JS donde codificaremos una función para crear una petición HTTP y envviarla a un Servlet. 
@@ -542,4 +542,69 @@ En ocaciones tenemos problemas de caché en Tomcat y no se ejecuta bien nuestra 
 5. Si todo esto no funciona cierre y abra Eclipse  y repita los pasos anteriores.
 
 ## Almacenando la ruta de la imagen en la Base de Datos 10:59
+
+En esta lección vamos a almacenar la ruta de la imágen en la BD.
+
+Actualmente estamos almacenando nuestras imágenes en una carpeta externa a nuestro proyecto `/users/adolfodelarosa/archivos` vamos a cambiar esa ruta para que sea interna a nuetro proyecto y y que el proyecto la pueda leer como un recurso más de la aplicación y poder mostrar la imágen asociada a cada administrador.
+
+1. En `WebContent` vamos a crear la carpeta `imagenes`
+2. Vamos a copiar una imágen `emoji-mujer-1.png` dentro de la carpeta `imagenes`.
+3. Vamos a acceder a esa imágen en nuestro servidor con la ruta `http://localhost:8080/imagenes/emoji-mujer-1.png`
+
+![7-Logger](images/9-emoji-mujer-1.png)
+
+Una vez visto esto nosotros tenemos que almacenar en la BD en el campo `urlImagen` de la tabla `administrador` algo como `/imagenes/emoji-mujer-1.png` ya que lo restante (contexto) lo puedo recuperar con la etiqueta `<c:out`
+
+4. En `ServletAjax` cambiamos la ruta `/users/adolfodelarosa/archivos` por la nueva ruta donde se van a guardar mis imagenes dentro del proyecto `/Users/adolfodelarosa/Documents/Udemy2020/Cursos/UDEMY/UDEMY_Desarrollo_Web_con_JSP_y_Servlets/eclipse-workspace4/04-JSPServlets/WebContent/imagenes`.
+
+5. En `ServletAjax` en el método `cargarImagen` vamos a guardar en una nueva propiedad `nombreImagen` el nombre de la imágen.
+
+```java
+... 
+if(isImagenValido(item)) {
+					
+   if( tamanioImagen > 0 && tamanioImagen < 5242880 ) {
+   				
+      File archivoCargado = new File(urlDestino, nombreImagen);
+      item.write(archivoCargado);
+      this.nombreImagen = nombreImagen;
+...
+```
+
+
+6. En `ServletAjax` vamos a guardar en sesión la ruta y nombre de la imágen:
+
+```java
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+   //Establecer un juego de carácteres para los parámetros que llegan al método POST
+   request.setCharacterEncoding("UTF-8");
+   response.setContentType("text/html; charset-UTF-8"); 
+   PrintWriter out = response.getWriter();
+						
+   String accion = request.getParameter("accion");
+		
+   HttpSession sesion = request.getSesion();
+		
+   if(accion != null) {
+      if(accion.equals("cargarImagen")) {
+	 // /users/adolfodelarosa/archivos es una carpeta en nuestro ordenador
+	 String s = cargarImagen(request, 
+	            "/Users/adolfodelarosa/Documents/Udemy2020/Cursos/UDEMY/UDEMY_Desarrollo_Web_con_JSP_y_Servlets/eclipse-workspace4/04-JSPServlets/WebContent/imagenes");
+	 sesion.setAttribute("urlImagen", "/imagenes/" + nombreImagen);
+	 log.info(s);
+	 //Esto regresa un mensaje
+	 out.println(s);
+      }
+   }
+}
+```
+
+7. En `Servlet.java` en el manejo de la acción `registrarAdministrador` recuperamos de la sesión el `urlImagen` y se lo asignamos a la propiedad `urlImagen`.
+
+
+
+
+
 ## Mostrando al usuario la imagen almacenada en el servidor 06:54
