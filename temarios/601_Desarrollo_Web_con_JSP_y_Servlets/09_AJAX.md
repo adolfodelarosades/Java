@@ -310,6 +310,35 @@ for(FileItem item : items) {
    }
 }
 ```
+### Ejecución del Código
+
+![7-Logger](images/9-ej-3-1.png)
+
+![7-Logger](images/9-ej-3-2.png)
+
+![7-Logger](images/9-ej-3-3.png)
+
+![7-Logger](images/9-ej-3-4.png)
+
+![7-Logger](images/9-ej-3-5.png)
+
+![7-Logger](images/9-ej-3-6.png)
+
+![7-Logger](images/9-ej-3-7.png)
+
+![7-Logger](images/9-ej-3-8.png)
+
+![7-Logger](images/9-ej-3-9.png)
+
+![7-Logger](images/9-ej-3-10.png)
+
+![7-Logger](images/9-ej-3-11.png)
+
+![7-Logger](images/9-ej-3-12.png)
+
+![7-Logger](images/9-ej-3-13.png)
+
+![7-Logger](images/9-ej-3-14.png)
 
 ## Informando al usuario el resultado de la carga de la imagen 10:43
 ## Como solucionar problemas de caché en Tomcat 02:53
