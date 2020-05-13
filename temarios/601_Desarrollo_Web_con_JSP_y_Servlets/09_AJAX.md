@@ -112,7 +112,7 @@ El primer input de tipo file nos permite cargar un archivo del ordenador, el id 
   </servlet-mapping>
 ```
 
-NOTA: Por mi configuración lo tuve que meter manualmente.
+NOTA: Por mi configuración lo tuve que meter manualmente, por que al crear el Servlet le metio la anotación `@WebServlet("/ServletAjax")` que quite para tratarlo tradicionalmente.
 
 5. Ingresar el siguiente código en el método `doPost()` de `ServletAjax.java`
 
@@ -129,6 +129,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 }
 ```
 
+### Probar la aplicación.
+
+![7-Logger](images/9-ej-1.png)
+
+![7-Logger](images/9-ej-2.png)
+
+![7-Logger](images/9-ej-3.png)
+
+![7-Logger](images/9-ej-4.png)
 
 
 ## Creación de un método para validar una imagen y su tamaño máximo 12:14
