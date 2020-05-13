@@ -326,7 +326,7 @@ Comenzamos cargando un archivo tipo `doc`
 
 ![7-Logger](images/9-ej-3-6.png)
 
-Se nos indica que no es un archovo tipo Imágen
+Se nos indica que no es un archivo tipo Imágen
 
 ![7-Logger](images/9-ej-3-7.png)
 
@@ -346,7 +346,7 @@ Intentamos cargar una Imágen menor de 5MB
 
 ![7-Logger](images/9-ej-3-12.png)
 
-Se nos indica que la imágen ha sudo cargada correctamente
+Se nos indica que la imágen ha sido cargada correctamente
 
 ![7-Logger](images/9-ej-3-13.png)
 
