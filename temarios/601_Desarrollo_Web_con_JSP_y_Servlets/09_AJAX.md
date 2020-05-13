@@ -515,7 +515,31 @@ Lo podemos ver en la carpeta de almacenamiento de las imágenes
 
 ![7-Logger](images/9-ej-4-11.png)
 
-
 ## Como solucionar problemas de caché en Tomcat 02:53
+
+En ocaciones tenemos problemas de caché en Tomcat y no se ejecuta bien nuestra aplicación, cuando pase eso podemos seguir los siguientes pasos:
+
+1. Parar el servidor Tomcat
+
+![7-Logger](images/9-cache-1.png)
+
+2. Limpiar el Proyecto
+
+![7-Logger](images/9-cache-2.png)
+
+![7-Logger](images/9-cache-3.png)
+
+3. Limpiar el directorio de trabajo de Tomcat
+
+![7-Logger](images/9-cache-4.png)
+
+![7-Logger](images/9-cache-5.png)
+
+4. También puede Remover y luego añadir nuevamente el proyecto
+
+![7-Logger](images/9-cache-6.png)
+
+5. Si todo esto no funciona cierre y abra Eclipse  y repita los pasos anteriores.
+
 ## Almacenando la ruta de la imagen en la Base de Datos 10:59
 ## Mostrando al usuario la imagen almacenada en el servidor 06:54
