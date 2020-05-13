@@ -651,6 +651,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 ![7-Logger](images/9-ej-5-7.png)
 
+![7-Logger](images/9-ej-5-7-2.png)
+
 ![7-Logger](images/9-ej-5-8.png)
 
 
