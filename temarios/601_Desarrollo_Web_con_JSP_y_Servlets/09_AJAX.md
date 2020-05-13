@@ -318,25 +318,39 @@ for(FileItem item : items) {
 
 ![7-Logger](images/9-ej-3-3.png)
 
+Comenzamos cargando un archivo tipo `doc`
+
 ![7-Logger](images/9-ej-3-4.png)
 
 ![7-Logger](images/9-ej-3-5.png)
 
 ![7-Logger](images/9-ej-3-6.png)
 
+Se nos indica que no es un archovo tipo Imágen
+
 ![7-Logger](images/9-ej-3-7.png)
+
+Intentamos cargar una Imágen mayor de 5MB
 
 ![7-Logger](images/9-ej-3-8.png)
 
 ![7-Logger](images/9-ej-3-9.png)
 
+Se nos indica que el archivo excede el tamaño máximo de 5MB.
+
 ![7-Logger](images/9-ej-3-10.png)
+
+Intentamos cargar una Imágen menor de 5MB
 
 ![7-Logger](images/9-ej-3-11.png)
 
 ![7-Logger](images/9-ej-3-12.png)
 
+Se nos indica que la imágen ha sudo cargada correctamente
+
 ![7-Logger](images/9-ej-3-13.png)
+
+Si vemos la carpeta destino vemos el nuevo archivo almacenado en dicha carpeta.
 
 ![7-Logger](images/9-ej-3-14.png)
 
