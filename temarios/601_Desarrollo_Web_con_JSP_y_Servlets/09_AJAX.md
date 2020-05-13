@@ -67,9 +67,6 @@ function cargarImagen(){
 
 ## Enviando una petición asíncrona a un Servlet 11:36
 
-
-## Creación de una función para cargar un archivo 14:26
-
 En esta lección probaremos el Script hecho en `ajax.js` 
 
 1. Añadiremos dos inputs en `registroAdministrador.jsp`
@@ -77,10 +74,10 @@ En esta lección probaremos el Script hecho en `ajax.js`
 ```html
 <tr>
    <td>Selecciona una fotografía: </td>
-	 <td>
-	    <input type="file" id="file"/> 
-			<input type="button" value="cargar" onclick="cargarImagen();" />
-	 </td>
+   <td>
+      <input type="file" id="file"/> 
+      <input type="button" value="cargar" onclick="cargarImagen();" />
+   </td>
 </tr>
 ```
 
@@ -145,7 +142,7 @@ Si presionamos el botón `cargar` nos aparece el `alert` que pusimos en nuestro 
 
 ![7-Logger](images/9-ej-4.png)
 
-## Creación de un método para validar una imagen y su tamaño máximo 12:14
+## Creación de una función para cargar un archivo 14:26
 
 En esta lección vamos a crear un método para cargar un archivo en una ruta dada. 
 
@@ -257,6 +254,7 @@ Pero si revisamos la carpeta del ordenador vemos como se ha escrito el archivo c
 
 ![7-Logger](images/9-ej-2-7.png)
 
+## Creación de un método para validar una imagen y su tamaño máximo 12:14
 
 ## Informando al usuario el resultado de la carga de la imagen 10:43
 ## Como solucionar problemas de caché en Tomcat 02:53
