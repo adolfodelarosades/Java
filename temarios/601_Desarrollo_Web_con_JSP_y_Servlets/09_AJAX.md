@@ -256,6 +256,58 @@ Pero si revisamos la carpeta del ordenador vemos como se ha escrito el archivo c
 
 ## Creación de un método para validar una imagen y su tamaño máximo 12:14
 
+En esta lección vamos a validar que el archivo cargado sea una imágen y que tenga un tamaño máximo.
+
+1. Crear en `ServletAjax.java` el método `isImagenValida()`.
+
+```java
+public boolean isImagenValido(FileItem archivo) {
+		
+   String nombre = archivo.getName();
+		
+   if(! nombre.isEmpty()) {
+      String extension3 = nombre.substring(nombre.length() - 3, nombre.length()).toLowerCase();
+      String extension4 = nombre.substring(nombre.length() - 4, nombre.length()).toLowerCase();
+			
+      if( extension3.equals("jpg") || extension3.equals("bmp") || extension3.equals("png") || 
+          extension3.equals("xcf") || extension3.equals("gif") || extension3.equals("eps") || 
+          extension3.equals("pcx") || extension3.equals("dng") || extension3.equals("wmp") || 
+          extension3.equals("psb") || extension3.equals("jp2") ||
+          extension4.equals("tiff") || extension4.equals("jpeg") ){
+				
+	 return true;
+				
+      } else {
+         return false;
+      }
+			
+   }else {
+      return false;
+   }
+}
+```
+
+2. Validar el archivo antes de cargarlo.
+
+```java
+//Ya que tengo la lista de todos los archivos que me llegan la itero
+for(FileItem item : items) {
+				
+   String nombreImagen = item.getName();
+   long tamanioImagen = item.getSize();
+				
+   //Validar archivo de imágen y tamaño máximo
+   if(isImagenValido(item)) {
+				
+      File archivoCargado = new File(urlDestino, nombreImagen);
+      item.write(archivoCargado);
+      valorRetorno ="* Imágen cargada correctamente *";
+   } else {
+      valorRetorno ="* El archivo a cargar no es una Imágen *";
+   }
+}
+```
+
 ## Informando al usuario el resultado de la carga de la imagen 10:43
 ## Como solucionar problemas de caché en Tomcat 02:53
 ## Almacenando la ruta de la imagen en la Base de Datos 10:59
