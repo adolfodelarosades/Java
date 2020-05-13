@@ -298,10 +298,13 @@ for(FileItem item : items) {
 				
    //Validar archivo de imágen y tamaño máximo
    if(isImagenValido(item)) {
-				
-      File archivoCargado = new File(urlDestino, nombreImagen);
-      item.write(archivoCargado);
-      valorRetorno ="* Imágen cargada correctamente *";
+      if( tamanioImagen > 0 && tamanioImagen < 5242880 ) {			
+         File archivoCargado = new File(urlDestino, nombreImagen);
+	 item.write(archivoCargado);
+	 valorRetorno ="* Imágen cargada correctamente *";
+      }else {
+	 valorRetorno ="* El amaño máximo de Imágen es de 5MB *";
+      }
    } else {
       valorRetorno ="* El archivo a cargar no es una Imágen *";
    }
