@@ -571,7 +571,6 @@ if(isImagenValido(item)) {
 ...
 ```
 
-
 6. En `ServletAjax` vamos a guardar en sesión la ruta y nombre de la imágen:
 
 ```java
@@ -603,8 +602,56 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 7. En `Servlet.java` en el manejo de la acción `registrarAdministrador` recuperamos de la sesión el `urlImagen` y se lo asignamos a la propiedad `urlImagen`.
 
+```java
+} else if(accion.contentEquals("registrarAdministrador")) {
+				
+   Administrador administrador = new Administrador();
+   administrador.setEmail(request.getParameter("email"));
+   administrador.setContrasena(request.getParameter("contrasena"));
+   administrador.setNombre(request.getParameter("nombre"));
+   administrador.setRespuesta(request.getParameter("respuesta"));
+   if( ! sesion.getAttribute("urlImagen").equals("")) {
+      administrador.setUrlImagen((String)sesion.getAttribute("urlImagen"));
+   }
+   administrador.setIdPregunta(Integer.parseInt(request.getParameter("pregunta")));
+				
+   //Forma normal
+   //Cuenta cuenta = new Cuenta(con);
+   //cuenta.registrarAdministrador(administrador);
+				
+   if (! new Cuenta(con).existeAdministrador(request.getParameter("email"))) {
+      //Insertar en la BD
+      //forma anonima
+      if (new Cuenta(con).registrarAdministrador(administrador)) {
+         request.setAttribute("msg", "Administrador creado correctamente");
+      } else {
+         request.setAttribute("msg", "Error al crear Administrador");
+      } 
+   }else {
+      request.setAttribute("msg", "¡El Administrador ya existe!");
+   }
+   //Redirige a la misma página
+   setRespuestaControlador("registroAdministrador").forward(request, response);
+}
+```
 
+### Ejecutando la Aplicación
 
+![7-Logger](images/9-ej-5-1.png)
+
+![7-Logger](images/9-ej-5-2.png)
+
+![7-Logger](images/9-ej-5-3.png)
+
+![7-Logger](images/9-ej-5-4.png)
+
+![7-Logger](images/9-ej-5-5.png)
+
+![7-Logger](images/9-ej-5-6.png)
+
+![7-Logger](images/9-ej-5-7.png)
+
+![7-Logger](images/9-ej-5-8.png)
 
 
 ## Mostrando al usuario la imagen almacenada en el servidor 06:54
