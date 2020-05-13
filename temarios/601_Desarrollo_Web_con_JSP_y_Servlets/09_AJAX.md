@@ -241,11 +241,19 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 ![7-Logger](images/9-ej-2-3.png)
 
+Hemos seleccionado la imágen `MiFoto`
+
 ![7-Logger](images/9-ej-2-4.png)
+
+La petición al Script se ha hecho correctamente
 
 ![7-Logger](images/9-ej-2-5.png)
 
+Y se ha invocado a `ServletAjax.java` pero hemos quitado el mensaje en la consola
+
 ![7-Logger](images/9-ej-2-6.png)
+
+Pero si revisamos la carpeta del ordenador vemos como se ha escrito el archivo cargado
 
 ![7-Logger](images/9-ej-2-7.png)
 
