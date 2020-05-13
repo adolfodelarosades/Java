@@ -483,19 +483,38 @@ function cargarImagen(){
 
 ![7-Logger](images/9-ej-4-3.png)
 
+Si presionamos el botón `cargar` sin seleccionar ningún archivo nos muestra un mensaje de error.
+
 ![7-Logger](images/9-ej-4-4.png)
+
+Si seleccionamos un archivo más grande de 5MB.
 
 ![7-Logger](images/9-ej-4-5.png)
 
+Nos muestra el mensaje de error `*El Tamaño máximo de Imágen es de 5MB*`
+
 ![7-Logger](images/9-ej-4-6.png)
+
+Si seleccionamos un archivo de tipo `doc`
 
 ![7-Logger](images/9-ej-4-7.png)
 
+Nos muestra el mensaje de error `* El archivo a cargar no es una Imágen *`
+
 ![7-Logger](images/9-ej-4-8.png)
+
+Si seleccionamos un archivo de imágen menor de 5MB
 
 ![7-Logger](images/9-ej-4-9.png)
 
+Nos indica que `* Imágen cargada correctamente *`
+
 ![7-Logger](images/9-ej-4-10.png)
+
+Lo podemos ver en la carpeta de almacenamiento de las imágenes
+
+![7-Logger](images/9-ej-4-11.png)
+
 
 ## Como solucionar problemas de caché en Tomcat 02:53
 ## Almacenando la ruta de la imagen en la Base de Datos 10:59
