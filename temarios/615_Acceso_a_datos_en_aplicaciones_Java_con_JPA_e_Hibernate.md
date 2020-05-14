@@ -22,7 +22,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 
 * Presentación del curso 03:07
 
-#### Introducción a la persistencia con JPA 29:16
+#### Introducción a la persistencia con JPA 29:16
 
 * Introducción a la persistencia 04:49
 * Java persistence API 04:09
