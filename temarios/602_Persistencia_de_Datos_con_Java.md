@@ -22,7 +22,7 @@ No lo pienses más y aprende hoy mismo estas dos herramientas indispensables de 
 
 ## Contenido del curso 48 clases 05:57:22
 
-#### 1. [Introducción]() 29:13
+#### 1. [Introducción](602_Persistencia_de_Datos_con_Java/01_Introduccion.md) 29:13
 
 * Presentación 06:13
 * Instalación de Herramientas de Desarrollo 08:13
