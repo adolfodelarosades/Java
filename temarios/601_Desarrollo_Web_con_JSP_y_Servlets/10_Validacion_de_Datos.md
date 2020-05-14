@@ -151,3 +151,128 @@ Y vemos el registro en la BD.
 ![10-validaciones](images/10-ej-12.png)
 
 ## Validando los datos en el cliente con JQuery 18:55
+
+En esta lección vamos a hacer validaciones de los datos en el cliente con JQuery. Nos vasaremos en el siguiente proyecto para hacerlo igual en nuestro formulario de registrar Administradores.
+
+[A jQuery inline form validation, because validation is a mess](http://www.position-absolute.com/articles/jquery-form-validator-because-form-validation-is-a-mess/)
+
+[Descargar el proyecto](https://github.com/posabsolute/jQuery-Validation-Engine)
+
+1. Copiar de la carpeta descargada los archivos `jquery-1.8.2.min.js`, `jquery.validationEngine-es.js` y  `jquery.validationEngine.js`.
+
+2. Crear la carpeta `css` dentro de nuestra carpeta `WebContent`.
+
+3. Copiar en css el archivo `validationEngine.jquery.css`.
+
+4. En nuestro `registroAdministrador.jsp` importamos los `js` y `css` copiados.
+
+```html
+script type="text/javascript" src='<c:url value="/js/jquery-1.8.2.min.js" />'> </script>
+<script type="text/javascript" src='<c:url value="/js/jquery.validationEngine-es.js" />'> </script>
+<script type="text/javascript" src='<c:url value="/js/jquery.validationEngine.js" />'> </script>
+
+<link rel="stylesheet" href='<c:url value="/css/validationEngine.jquery.css" />' type="text/css"/>
+```
+
+5. Insertar el siguiente código en el tag `head`.
+
+```html
+<script>
+jQuery(document).ready(function(){
+   // binds form submission and fields to the validation engine
+   jQuery("#formValidado").validationEngine();
+});
+
+</script>
+```
+
+6. Identificar mi formulario con el `id=formValidado`
+
+`<form action="?accion=registrarAdministrador" method="post" id="formValidado">`
+
+7. Meter las clases a los campos que quiero validar
+
+```html
+<form action="?accion=registrarAdministrador" method="post" id="formValidado">
+	
+		<table>
+			<tr>
+				<td>Correo electrónico: </td>
+				<td><input class="validate[required,custom[email]]" type="text" name="email" size="40"></td>
+			</tr>
+			<tr>
+				<td>Contraseña: </td>
+				<td><input type="password" class="validate[required,minSize[4]]" name="contrasena" size="40"></td>
+			</tr>
+			<tr>
+				<td>Repite tu contraseña: </td>
+				<td><input class="validate[required,equals[contrasena]]" type="password" size="40"></td>
+			</tr>
+			<tr>
+				<td>Nombre completo: </td>
+				<td><input class="validate[required,custom[onlyLetterNumber]]" type="text" name="nombre" size="40"></td>
+			</tr>
+			<tr>
+				
+				<td>Elije una pregunta secreta: </td>
+				<td>
+					<c:catch var="ex">
+					   <!-- Ejecutar query, usa la variable creada para formar el query -->
+					   <sql:query var="rs" dataSource="jdbc/novellius">
+					      SELECT * FROM pregunta;
+					   </sql:query>
+					
+					   <!--  Recorre los datos recuperados y pinta el campo pregunta -->
+					   <select name="pregunta">
+					   		<c:forEach var="row" items="${rs.rows}">
+					     		<option value="${row.idpregunta}">${row.pregunta}</option>
+					   		</c:forEach>
+					   </select>
+					</c:catch>
+					
+					<c:if test="${ex != null}">
+					   <span style="color:red;">*** Error en la conexión con la tabla "pregunta" ***</span>
+					</c:if>
+				</td>
+			</tr>
+			<tr>
+				<td>Captura tu respuesta secreta: </td>
+				<td><input class="validate[required]" type="text" name="respuesta" size="40"></td>
+			</tr>
+			<tr>
+				<td>Selecciona una fotografía: </td>
+				<td>
+					<p> 
+				    <input type="file" id="file"/> 
+				    <input type="button" value="cargar" onclick="cargarImagen();" />
+				    </p>
+				    <p id="respuesta" style="font-weight:bold;"></p>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Crear" /></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+```
+
+### Probar la Aplicación
+
+Podemos ver los diferentes mensajes según los datos que se introduzcan
+
+![10-validaciones](images/10-ej-2-1.png)
+
+![10-validaciones](images/10-ej-2-2.png)
+
+![10-validaciones](images/10-ej-2-3.png)
+
+![10-validaciones](images/10-ej-2-4.png)
+
+![10-validaciones](images/10-ej-2-5.png)
+
+![10-validaciones](images/10-ej-2-6.png)
+
+![10-validaciones](images/10-ej-2-7.png)
+
+![10-validaciones](images/10-ej-2-8.png)
