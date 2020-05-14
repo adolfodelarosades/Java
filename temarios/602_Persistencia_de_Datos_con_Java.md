@@ -20,7 +20,7 @@ No lo pienses más y aprende hoy mismo estas dos herramientas indispensables de 
 * Realizar consultas desde básicas a complejas sin una sóla línea de código SQL
 
 
-## Contenido del curso 05:57:22
+## Contenido del curso 48 clases 05:57:22
 
 #### 1. [Introducción]() 29:13
 
