@@ -6,6 +6,8 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 * [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero.md)
 * [102 Java8 para programadores Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/102_Java8_para_programadores_Java.md)
+* [104 Manejo de colecciones en Java]()
+* [106 Java 9: Nueva filosofía y funcionalidades]()
 * [110 Desarrollo Web con Java EE](https://github.com/adolfodelarosades/Java/blob/master/temarios/110_Desarrollo_Web_con_Java_EE.md)
 * [120 Curso JavaServer Faces](https://github.com/adolfodelarosades/Java/blob/master/temarios/120_Curso_JavaServer_Faces.md)
 * [130 Hibernate y JPA](https://github.com/adolfodelarosades/Java/blob/master/temarios/130_Hibernate_y_JPA.md)
@@ -15,7 +17,8 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [143 Curso de desarrollo de una API REST con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot.md)
 * [144 Curso de elementos avanzados en tu API REST con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot.md)
 * [145 Curso de seguridad en tu API REST con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/145_Curso_de_seguridad_en_tu_API_REST_con_Spring_Boot.md)
-
+* [150 Curso de Introducción a Thymeleaf]()
+* [152 Curso de Thymeleaf intermedio]()
 
 # AEPI
 
