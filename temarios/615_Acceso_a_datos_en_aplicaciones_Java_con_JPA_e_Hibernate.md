@@ -1,4 +1,4 @@
-# 615 Acceso a datos en aplicaciones Java con JPA e Hibernate
+# 615 Acceso a datos en aplicaciones Java con JPA e Hibernate
 
 Creación y manipulación de objetos de datos en Java
 
