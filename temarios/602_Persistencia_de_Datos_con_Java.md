@@ -22,7 +22,7 @@ No lo pienses más y aprende hoy mismo estas dos herramientas indispensables de 
 
 ## Contenido del curso 05:57:22
 
-#### [Introducción]() 29:13
+#### 1. [Introducción]() 29:13
 
 * Presentación 06:13
 * Instalación de Herramientas de Desarrollo 08:13
@@ -32,7 +32,7 @@ No lo pienses más y aprende hoy mismo estas dos herramientas indispensables de 
 * Bases de Datos Relacionales III 03:44
 * Frameworks de Persistencia de Datos 03:26
 
-#### Hibernate 02:40:14
+#### 2. [Hibernate]() 02:40:14
 
 * Creación de la B.D. 06:25
 * Creación del Proyecto en Eclipse 04:39
@@ -58,13 +58,13 @@ No lo pienses más y aprende hoy mismo estas dos herramientas indispensables de 
 * Creación de consultas para clases anotadas con @ManyToMany 10:49
 * Actualizaciones en clases anotadas con @ManyToMany 10:49
 
-#### El Patrón de Diseño DAO 26:31
+#### 3. [El Patrón de Diseño DAO]() 26:31
 
 * El Patrón de Diseño DAO 05:06
 * Creación del DAO para Inmueble 10:44
 * Creación y uso de la capa de Servicio 10:41
 
-#### Spring Data JPA 01:31:39
+#### 4. [Spring Data JPA]() 01:31:39
 
 * Introducción 06:45
 * Configuración previa de Spring Data JPA  21:58
@@ -75,18 +75,18 @@ No lo pienses más y aprende hoy mismo estas dos herramientas indispensables de 
 * Uso de QueryDSL para realizar reuniones naturales 10:38
 * Otra forma de realizar consultas con reuiniones naturales con Spring Data 10:10
 
-#### Paginación 19:56
+#### 5. [Paginación]() 19:56
 
 * Creación de una paginación simple 12:08
 * Paginación desde una consulta personalizada 07:48
 
-#### Relaciones @ManyToMany con un campo extra 29:49
+#### 6. [Relaciones @ManyToMany con un campo extra]() 29:49
 
 * Actualizando la BD a la versión 4 02:18
 * Configuración de la relación n:m con un campo extra 11:35
 * Prueba de la relación nm con un campo extra 15:56
 
-#### Extras 00:00
+#### 7. [Extras]() 00:00
 
 * Oferta para todos los cursos 00:00
 * Ejemplos con Hibernate 4 00:00
