@@ -94,26 +94,26 @@ public String getErrorForm() {
 ### Ejecución de la Aplicación
 
 
-![10-validaciones](images10-ej-1.png)
+![10-validaciones](images/10-ej-1.png)
 
-![10-validaciones](images10-ej-2.png)
+![10-validaciones](images/10-ej-2.png)
 
-![10-validaciones](images10-ej-3.png)
+![10-validaciones](images/10-ej-3.png)
 
-![10-validaciones](images10-ej-4.png)
+![10-validaciones](images/10-ej-4.png)
 
-![10-validaciones](images10-ej-5.png)
+![10-validaciones](images/10-ej-5.png)
 
-![10-validaciones](images10-ej-6.png)
+![10-validaciones](images/10-ej-6.png)
 
-![10-validaciones](images10-ej-7.png)
+![10-validaciones](images/10-ej-7.png)
 
-![10-validaciones](images10-ej-8.png)
+![10-validaciones](images/10-ej-8.png)
 
-![10-validaciones](images10-ej-9.png)
+![10-validaciones](images/10-ej-9.png)
 
-![10-validaciones](images10-ej-10.png)
+![10-validaciones](images/10-ej-10.png)
 
-![10-validaciones](images10-ej-11.png)
+![10-validaciones](images/10-ej-11.png)
 
 ## Validando los datos en el cliente con JQuery 18:55
