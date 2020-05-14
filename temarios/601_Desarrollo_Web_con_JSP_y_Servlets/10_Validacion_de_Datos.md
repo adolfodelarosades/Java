@@ -107,7 +107,6 @@ public String getErrorForm() {
 
 ### Ejecución de la Aplicación
 
-
 ![10-validaciones](images/10-ej-1.png)
 
 ![10-validaciones](images/10-ej-2.png)
