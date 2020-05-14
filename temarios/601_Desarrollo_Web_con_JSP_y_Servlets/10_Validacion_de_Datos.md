@@ -35,13 +35,13 @@ public boolean isValidAdministrador() {
 		}
 		
 		if(contrasena.equals("")) {
-			sb.append("<p style='color: red'>* Contraseña debe contener mínimo 4 caracteres.<p>");
-			return false;
+			sb.append("* Contraseña debe contener mínimo 4 caracteres");
+			valorRetorno =  false;
 		}
 		
 		if(nombre.equals("")) {
-			sb.append("<p style='color: red'>* Nombre no puede estar vacío.<p>");
-			return false;
+			sb.append("* Nombre no puede estar vacío.");
+			valorRetorno =  false;
 		}
 		
 		if(sb.length() == 0) {
