@@ -195,66 +195,65 @@ jQuery(document).ready(function(){
 ```html
 <form action="?accion=registrarAdministrador" method="post" id="formValidado">
 	
-		<table>
-			<tr>
-				<td>Correo electrónico: </td>
-				<td><input class="validate[required,custom[email]]" type="text" name="email" size="40"></td>
-			</tr>
-			<tr>
-				<td>Contraseña: </td>
-				<td><input type="password" class="validate[required,minSize[4]]" name="contrasena" size="40"></td>
-			</tr>
-			<tr>
-				<td>Repite tu contraseña: </td>
-				<td><input class="validate[required,equals[contrasena]]" type="password" size="40"></td>
-			</tr>
-			<tr>
-				<td>Nombre completo: </td>
-				<td><input class="validate[required,custom[onlyLetterNumber]]" type="text" name="nombre" size="40"></td>
-			</tr>
-			<tr>
-				
-				<td>Elije una pregunta secreta: </td>
-				<td>
-					<c:catch var="ex">
-					   <!-- Ejecutar query, usa la variable creada para formar el query -->
-					   <sql:query var="rs" dataSource="jdbc/novellius">
-					      SELECT * FROM pregunta;
-					   </sql:query>
+   <table>
+      <tr>
+         <td>Correo electrónico: </td>
+         <td><input class="validate[required,custom[email]]" type="text" name="email" size="40"></td>
+      </tr>
+      <tr>
+         <td>Contraseña: </td>
+         <td><input type="password" class="validate[required,minSize[4]]" name="contrasena" size="40"></td>
+      </tr>
+      <tr>
+         <td>Repite tu contraseña: </td>
+         <td><input class="validate[required,equals[contrasena]]" type="password" size="40"></td>
+      </tr>
+      <tr>
+         <td>Nombre completo: </td>
+         <td><input class="validate[required,custom[onlyLetterNumber]]" type="text" name="nombre" size="40"></td>
+      </tr>
+      <tr>			
+         <td>Elije una pregunta secreta: </td>
+         <td>
+            <c:catch var="ex">
+               <!-- Ejecutar query, usa la variable creada para formar el query -->
+               <sql:query var="rs" dataSource="jdbc/novellius">
+		  SELECT * FROM pregunta;
+	       </sql:query>
 					
-					   <!--  Recorre los datos recuperados y pinta el campo pregunta -->
-					   <select name="pregunta">
-					   		<c:forEach var="row" items="${rs.rows}">
-					     		<option value="${row.idpregunta}">${row.pregunta}</option>
-					   		</c:forEach>
-					   </select>
-					</c:catch>
-					
-					<c:if test="${ex != null}">
-					   <span style="color:red;">*** Error en la conexión con la tabla "pregunta" ***</span>
-					</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td>Captura tu respuesta secreta: </td>
-				<td><input class="validate[required]" type="text" name="respuesta" size="40"></td>
-			</tr>
-			<tr>
-				<td>Selecciona una fotografía: </td>
-				<td>
-					<p> 
-				    <input type="file" id="file"/> 
-				    <input type="button" value="cargar" onclick="cargarImagen();" />
-				    </p>
-				    <p id="respuesta" style="font-weight:bold;"></p>
-				</td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Crear" /></td>
-				<td></td>
-			</tr>
-		</table>
-	</form>
+	       <!--  Recorre los datos recuperados y pinta el campo pregunta -->
+	       <select name="pregunta">
+		  <c:forEach var="row" items="${rs.rows}">
+		     <option value="${row.idpregunta}">${row.pregunta}</option>
+		  </c:forEach>
+	       </select>
+	    </c:catch>
+	
+	    <c:if test="${ex != null}">
+	       <span style="color:red;">*** Error en la conexión con la tabla "pregunta" ***</span>
+	    </c:if>
+         </td>
+      </tr>
+      <tr>
+         <td>Captura tu respuesta secreta: </td>
+         <td><input class="validate[required]" type="text" name="respuesta" size="40"></td>
+      </tr>
+      <tr>
+         <td>Selecciona una fotografía: </td>
+         <td>
+            <p> 
+               <input type="file" id="file"/> 
+	       <input type="button" value="cargar" onclick="cargarImagen();" />
+	    </p>
+	    <p id="respuesta" style="font-weight:bold;"></p>
+	</td>
+      </tr>
+      <tr>
+         <td><input type="submit" value="Crear" /></td>
+         <td></td>
+      </tr>
+   </table>
+</form>
 ```
 
 ### Probar la Aplicación
