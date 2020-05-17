@@ -26,12 +26,12 @@ Backend
 
 ## Contenido
 
-### Introducción al curso  5m
+### 1. Introducción al curso  5m
 
 * Presentación 5:27 
 * Contenido adicional 1
 
-### Spring Boot 57m
+### 2. Spring Boot 57m
 
 * Introducción a Spring Boot 11:16 
 * Convención sobre configuración 5:27 
@@ -42,7 +42,7 @@ Backend
 * Autoconfiguración y uso de la anotación @SpringBootAplication 6:36 
 * Contenido adicional 7
 
-### Spring Web MVC 266m
+### 3. Spring Web MVC 266m
 
 * ¿Cómo funciona una aplicación web? 13:07 
 * Algunos patrones de diseño 10:55 
@@ -66,7 +66,7 @@ Backend
 * Integración de Spring Session en nuestro proyecto 11:10 
 * Contenido adicional 17
 
-### Spring Data JPA 84m
+### 4. Spring Data JPA 84m
 
 * Introducción a Spring Data 12:28 
 * Entidades 11:09 
@@ -77,7 +77,7 @@ Backend
 * Otras consultas 12:40 
 * Contenido adicional 4
 
-### Proyecto de ejemplo 99m
+### 5. Proyecto de ejemplo 99m
 
 * Presentación del proyecto de ejemplo 4:43 
 * Creación de las entidades 8:54 
