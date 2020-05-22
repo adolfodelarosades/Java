@@ -6,7 +6,7 @@
 * Inyeccion automática 9:22 
 * Contenido adicional  4
 
-# Contenedor de IoC 13:01 
+# 06 Contenedor de IoC 13:01 
 
 [PDF ](pdfs/)
 
@@ -16,7 +16,7 @@ No existe.
 
 ## Transcripción
 
-# Mi primer Bean 6:49 
+# 07 Mi primer Bean 6:49 
 
 [PDF ](pdfs/)
 
@@ -26,7 +26,7 @@ No existe.
 
 ## Transcripción
 
-# Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
+# 08 Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
 
 [PDF ](pdfs/)
 
@@ -36,7 +36,7 @@ No existe.
 
 ## Transcripción
 
-# Inyeccion automática 9:22 
+# 09 Inyeccion automática 9:22 
 
 [PDF ](pdfs/)
 
@@ -46,5 +46,5 @@ No existe.
 
 ## Transcripción
 
-# Contenido adicional  4
+# 10 Contenido adicional  4
 
