@@ -8,7 +8,7 @@
 
 # 06 Contenedor de IoC 13:01 
 
-[PDF 2-1_Contenedor_de_IoC.pdf](pdfs/)
+[PDF 2-1_Contenedor_de_IoC.pdf](pdfs/2-1_Contenedor_de_IoC.pdf)
 
 ## Resumen Profesor
 
@@ -42,7 +42,7 @@ En esta lección hemos visto el uso de ambas clases. Durante el resto de leccion
 
 # 07 Mi primer Bean 6:49 
 
-[PDF ](pdfs/)
+[PDF 2-2_Mi_primer_bean.pdf](pdfs/2-2_Mi_primer_bean.pdf)
 
 ## Resumen Profesor
 
@@ -68,11 +68,65 @@ Durante este ejemplo solo utilizaremos algunas de las propiedades necesarias de 
 
 # 08 Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
 
-[PDF ](pdfs/)
+[PDF 2-3_Inyeccion_de_dependencias.pdf](pdfs/2-3_Inyeccion_de_dependencias.pdf)
 
 ## Resumen Profesor
 
-No existe.
+### *Inner beans* (beans anidados)
+
+En ocasiones, podemos crear beans anidados (o internos) a otros beans, en lugar de referenciarlos. **¿Cuál sería la ventaja de un *inner bean* frente a otro referenciado?**. La respuesta no es difícil: el bean anidados no será accesible desde fuera el bean externo, mientras que el referenciado puede ser accedido por otros beans.
+
+```html
+<bean id="outer" class="...">
+    <!-- instead of using a reference to a target bean, simply define the target bean inline -->
+    <property name="target">
+        <bean class="com.example.Person"> <!-- this is the inner bean -->
+            <property name="name" value="Fiona Apple"/>
+            <property name="age" value="25"/>
+        </bean>
+    </property>
+</bean>
+```
+
+En este ejemplo, el bean de tipo `Person` solo podría ser accedido por el bean `outer`.
+
+### Colecciones
+
+Spring nos ofrece la posibilidad de inyectar valores dentro de una colección. Los tipos soportados son `<list>` (`java.util.List`), `<set>` (`java.util.Set`), `<map>` (`java.util.Map`), `<props>` (`java.util.Properties`).
+
+```html
+<bean id="moreComplexObject" class="example.ComplexObject">
+    <!-- results in a setAdminEmails(java.util.Properties) call -->
+    <property name="adminEmails">
+        <props>
+            <prop key="administrator">administrator@example.org</prop>
+            <prop key="support">support@example.org</prop>
+            <prop key="development">development@example.org</prop>
+        </props>
+    </property>
+    <!-- results in a setSomeList(java.util.List) call -->
+    <property name="someList">
+        <list>
+            <value>a list element followed by a reference</value>
+            <ref bean="myDataSource" />
+        </list>
+    </property>
+    <!-- results in a setSomeMap(java.util.Map) call -->
+    <property name="someMap">
+        <map>
+            <entry key="an entry" value="just some string"/>
+            <entry key ="a ref" value-ref="myDataSource"/>
+        </map>
+    </property>
+    <!-- results in a setSomeSet(java.util.Set) call -->
+    <property name="someSet">
+        <set>
+            <value>just some string</value>
+            <ref bean="myDataSource" />
+        </set>
+    </property>
+</bean>
+```
 
 ## Transcripción
 
@@ -88,3 +142,6 @@ No existe.
 
 # Contenido adicional  4
 
+* [PDF 2-1_Contenedor_de_IoC.pdf](pdfs/2-1_Contenedor_de_IoC.pdf)
+* [PDF 2-2_Mi_primer_bean.pdf](pdfs/2-2_Mi_primer_bean.pdf)
+* [PDF 2-3_Inyeccion_de_dependencias.pdf](pdfs/2-3_Inyeccion_de_dependencias.pdf)
