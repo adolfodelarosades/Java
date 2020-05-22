@@ -10,7 +10,7 @@
 
 # Introducción a MovieAdvisor 7:46 
 
-[PDF ](pdfs/)
+[PDF 6-1_Proyecto_de_ejemplo.pdf](pdfs/6-1_Proyecto_de_ejemplo.pdf)
 
 ## Resumen Profesor
 
@@ -20,8 +20,6 @@ No existe.
 
 # Creación del proyecto y modelo de datos 5:49 
 
-[PDF ](pdfs/)
-
 ## Resumen Profesor
 
 No existe.
@@ -29,8 +27,6 @@ No existe.
 ## Transcripción
 
 # Repositorio y acceso a datos (Parte I) 12:55 
-
-[PDF ](pdfs/)
 
 ## Resumen Profesor
 
@@ -40,8 +36,6 @@ No existe.
 
 # Repositorio y acceso a datos (Parte II) 9:30 
 
-[PDF ](pdfs/)
-
 ## Resumen Profesor
 
 No existe.
@@ -49,8 +43,6 @@ No existe.
 ## Transcripción
 
 # Servicios 13:28 
-
-[PDF ](pdfs/)
 
 ## Resumen Profesor
 
@@ -60,8 +52,6 @@ No existe.
 
 # Ejecución de la app 22:28 
 
-[PDF ](pdfs/)
-
 ## Resumen Profesor
 
 No existe.
@@ -69,3 +59,5 @@ No existe.
 ## Transcripción
 
 # Contenido adicional 1
+
+[PDF 6-1_Proyecto_de_ejemplo.pdf](pdfs/6-1_Proyecto_de_ejemplo.pdf)
