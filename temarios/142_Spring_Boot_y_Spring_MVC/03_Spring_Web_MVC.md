@@ -1,4 +1,4 @@
-# 3. Spring Web MVC 266m
+# 3. Spring Web MVC - 04:26
 
 * ¿Cómo funciona una aplicación web? 13:07 
 * Algunos patrones de diseño 10:55 
