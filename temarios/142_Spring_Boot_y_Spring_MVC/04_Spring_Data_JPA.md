@@ -1,12 +1,12 @@
 # 4. Spring Data JPA 01:24
 
-* Introducción a Spring Data 12:28 
-* Entidades 11:09 
-* Integración de las entidades en nuestro proyecto 4:06 
-* Repositorios 10:43 
-* Integración de los repositorios en nuestro proyecto 13:21 
-* Consultas básicas 19:36 
-* Otras consultas 12:40 
+* 29 Introducción a Spring Data 12:28 
+* 30 Entidades 11:09 
+* 31 Integración de las entidades en nuestro proyecto 4:06 
+* 32 Repositorios 10:43 
+* 33 Integración de los repositorios en nuestro proyecto 13:21 
+* 34 Consultas básicas 19:36 
+* 35 Otras consultas 12:40 
 * Contenido adicional 4
 
 # 29 Introducción a Spring Data 12:28
