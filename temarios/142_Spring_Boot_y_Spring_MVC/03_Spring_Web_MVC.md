@@ -150,7 +150,7 @@ Tipo de dato | Descripción
 `@RequestBody` | Acceso al cuerpo de la petición HTTP. El cuerpo es convertido según la implementación del `HttpMessageConverter` configurado.
 `@HttpEntity<B>` | Acceso a los encabezados y cuerpo de la petición.
 `@RequestPart` | Acceso a una parte de una petición `multipart/form-data`.
-`java.util.Map`, `org.springframework.ui.Model`, `org.springframework.ui.ModelMap`	Acceso al modelo que es expuesto a las plantillas para el renderizado de vistas.
+`java.util.Map`, `org.springframework.ui.Model`, `org.springframework.ui.ModelMap` | Acceso al modelo que es expuesto a las plantillas para el renderizado de vistas.
 `RedirectAttributes` | Especifica atributos en caso de redirección.
 `@ModelAttribute` | Para acceder a algún atributo existente en el modelo, con conexión de datos y validación aplicada.
 `Error`, `BindingResult`| Para acceder a los errores de validación y la conexión de datos de un *command object*, o los errores de validación de un objeto `@RequestBody`.
@@ -187,7 +187,29 @@ Fuente: https://docs.spring.io/spring/docs/current/spring-framework-reference/we
 
 ## Resumen Profesor
 
-No existe.
+### Cargar una vista vs. Redirigir a otro controlador
+
+Como hemos visto, la forma más sencilla de que un controlador nos lleve a una vista es devolviendo el nombre de la plantilla a renderizar como un `String`:
+
+```java
+@GetMapping("/")
+public String welcome(Model model) {
+    model.addAttribute("mensaje", "¡Hola a todos!");
+    return "index";
+}
+```
+
+Sin embargo, habrá ocasiones en las que nos interes que un controlador nos lleve directamente a otro. Un escenario típico es, tras haber procesado un formulario (por ejemplo, de inserción de un nuevo registro); posiblemente, después de procesar esa petición, queramos visualizar el listado completo de registros, y así comprobar que el nuevo registro ha sido insertado.
+
+Para poder hacer una redirección, incluimos la palabra `redirect:` en el valor de retorno del método, seguido de la ruta del controlador al cual queremos redirigirnos.
+
+```java
+@PostMapping("/empleado/new/submit")
+public String nuevoEmpleadoSubmit(@ModelAttribute("empleadoForm") Empleado nuevoEmpleado) {
+    servicio.add(nuevoEmpleado);
+    return "redirect:/empleado/list";
+}
+```
 
 ## Transcripción
 
@@ -197,7 +219,28 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### `@PathVariable` y `@RequestMapping`
+
+Podemos declarar variables en el path a nivel de método y a nivel de clase (haciendo uso de `@RequestMapping`):
+
+```java
+@Controller
+@RequestMapping("/owners/{ownerId}")
+public class OwnerController {
+
+    @GetMapping("/pets")
+    public Pet findAll(@PathVariable Long ownerId) {
+        // ...
+    }
+
+    @GetMapping("/pets/{petId}")
+    public Pet findPet(@PathVariable Long ownerId, @PathVariable Long petId) {
+        // ...
+    }
+}
+```
+
+De esta forma, necesitaríamos inyectar la variable a través de `@PathVariable` en cada método.
 
 ## Transcripción
 
@@ -225,7 +268,29 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Dependencias maven más utilizadas
+
+Tan solo cambiando la versión, podemos tener diferentes versiones de bootstrap, jquery, o la librería que estemos vinculando.
+
+```html
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>bootstrap</artifactId>
+    <version>3.3.7-1</version>
+</dependency>
+ 
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>jquery</artifactId>
+    <version>3.3.1-1</version>
+</dependency>
+ 
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>webjars-locator</artifactId>
+    <version>0.34</version>
+</dependency>
+```
 
 ## Transcripción
 
@@ -237,7 +302,136 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Código utilizado en el ejemplo
+
+#### Clase `Empleado`
+
+```java
+public class Empleado {
+
+    private long id;
+    private String nombre;
+    private String email;
+    private String telefono;
+
+    //constructores, getters y setters
+
+}
+```
+
+#### Clase `EmpleadoService`
+
+```java
+package com.openwebinars.spring.servicios;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Service;
+
+import com.openwebinars.spring.modelo.Empleado;
+
+@Service
+public class EmpleadoService {
+
+    private List<Empleado> repositorio = new ArrayList<>();
+
+
+    public Empleado add(Empleado e) {
+        repositorio.add(e);
+        return e;
+    }
+
+    public List<Empleado> findAll() {
+        return repositorio;
+    }
+
+    @PostConstruct
+    public void init() {
+        repositorio.addAll(
+                Arrays.asList(new Empleado(1,"Antonio García", "antonio.garcia@openwebinars.net", "954000000"),
+                        new Empleado(2,"María López", "maria.lopez@openwebinars.net", "954000000"),
+                        new Empleado(3,"Ángel Antúnez", "angel.antunez@openwebinars.net", "954000000")                        
+                        )
+                );
+    }
+
+}
+```
+
+#### Plantilla `list.html`
+
+```java
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/starter-template.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Miempresa.com</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Inicio</a></li>
+            <li><a href="/empleado/new">Nuevo empleado</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Listado de empleados de la empresa</h1>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+```
+
+Puedes descargar estos tres ficheros pulsando [aquí](pdfs/ficheros.zip).
 
 ## Transcripción
 
@@ -257,7 +451,41 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Validación
+
+Spring permite usar el estándar *JSR-303/JSR-380 Bean Validation API*. Spring Boot configura por defecto la implementación de este estándar realizada por *hibernate*.
+Permite realizar la validación añadiendo anotaciones en nuestras clases modelo.
+
+### Algunas anotaciones de validación:
+
+* `@NotNull`: el atributo no puede ser nulo
+* `@Min`, `@Max`: mayor o igual (o menor o igual) que un valor determinado.
+* `@NotEmpty`: el atributo no puede estar vacío (Strings, colecciones, arrays, …)
+* `@Email`: el atributo debe ser un email válido.
+* `@Size`: el atributo tiene que tener un tamaño según el indicado.
+
+Puedes consultar toda la documentación en https://beanvalidation.org/2.0/spec/#builtinconstraints
+
+### Visualización de errores con Thymeleaf
+
+Thymeleaf nos ofrece algunos elementos para gestionar los errores:
+
+* Algunas funciones del objeto `#fields`: `#fields.hasError(‘...’)` y `#fields.errors(‘...’)`
+* Atributos: `th:errors` y `th:errorclass`
+
+Todo esto lo podemos conjugar con el uso de Bootstrap para la visualización de errores:
+
+```html
+<div class="form-group"    th:classappend="${#fields.hasErrors('id')} ? 'has-error'">
+    <label for="id">ID</label> 
+    <input type="text" class="form-control" id="id" placeholder="1"
+        th:field="*{id}" th:attrappend="readonly=${empleadoForm.id != 0} ? 'readonly' : null" />
+    <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="help-block" id="id-error">Errores</span>
+</div>
+```
+
+* `th:classappend="${#fields.hasErrors('id')} ? 'has-error'"` nos permite añadir la clase css `has-error`, propia de bootstrap.
+* Con `<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="help-block" id="id-error">Errores</span>` añadimos, justo debajo del campo del formulario, el/los mensaje/s de error.
 
 ## Transcripción
 
@@ -267,7 +495,90 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Formularios multiparte
+
+Para que un formulario sea capaz de enviar ficheros, debemos cambiar su tipo de codificación a `multipart/form-data`. Ello lo hacemos mediante la propiedad `enctype`.
+
+```html
+<form method="post" enctype="multipart/form-data" action="#"
+    th:action="${empleadoForm.id != 0} ? @{/empleado/edit/submit} : @{/empleado/new/submit}"
+    th:object="${empleadoForm}">
+```    
+
+Si queremos adjuntar un fichero al envío del formulario, lo hacemos mediante un campo de tipo `file`
+
+```html
+<div class="form-group">
+    <label for="file">Avatar</label>
+    <input id="filebutton" name="file" class="form-control input-file" type="file">
+</div>
+```
+
+### Uso de `@ConfigurationProperties`
+
+Podemos inyectar el valor de una propiedad (por ejemplo, declarada en el fichero `application.properties`) a través de la anotación `@Value`
+
+```java
+@Value("{prefijo.propiedad}")
+private String cadena;
+```
+
+En ocasiones, es posible que nos interese encapsular estas propiedades a través de una clase que:
+
+* Nos ofrezca métodos convenientes para obtener el valor de las propiedades
+* Nos permita usar la validación de beans para asegurarnos que las propiedades están correctamente inicializadas.
+
+Para ello, podemos crear una clase, que encapsule las propiedades, y que esté anotada con `@ConfigurationProperties`.
+
+```java
+@ConfigurationProperties(prefix="storage")
+public class StorageProperties {
+
+
+    private String location = "upload-dir";
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+}
+```
+
+De esta forma, podemos capturar la propiedad `storage.location` que puede ser definida en un fichero de properties.
+
+Para que esto funcione correctamente, tenemos que habilitar dicha clase mediante la anotación `@EnableConfigurationProperties` en una clase `@Configuration` o en la propia `@SpringBootApplication`.
+
+```java
+@Configuration
+@EnableConfigurationProperties(StorageProperties.class)
+public class MyConfig {
+
+    //... contenido de la clase
+
+}
+```
+
+### Algunos aspectos de Thymeleaf
+#### Operador elvis
+
+En este ejemplo hemos utilizado un operador de Thymeleaf, llamado operador elvis (`?:`), para montar la URL de la imagen del avatar del empleado.
+
+```html
+<img th:src="@{${empleado.imagen}?: 'http://api.adorable.io/avatars/64/{email}.png'(email=${empleado.email})}" width="64px">
+```
+
+Esta expresión significa:
+
+* Si `${empleado.imagen}` es diferente de `null`, devuelve el valor de `${empleado.imagen}`.
+* En otro caso, devuelve la cadena de caracteres que viene después de `?:`
+
+Además, en este valor, hemos usado la potencia de Thymeleaf para incluir el email del empleado como una variable en la propia URL.
+
+Si quieres saber más sobre como montar URLs con Thymeleaf, puedes visitar nuestro **Curso de introducción a Thymeleaf**.
 
 ## Transcripción
 
@@ -297,7 +608,143 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Dependencias
+
+La dependencia *starter* de Spring Security es:
+
+```html
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+Y la de los extras de Thymeleaf para Spring Security:
+
+```html
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+    <version>3.0.4.RELEASE</version>
+</dependency>
+```
+
+### Código de la plantilla de login
+
+El formulario de login lo hemos implementado con una de las plantillas de ejemplo de Bootstrap 3. En particular, el que puedes encontrar en https://getbootstrap.com/docs/3.3/examples/signin/.
+
+A continuación tienes el código algo tuneado, y que se utiliza en el proyecto de ejemplo del vídeo:
+
+* CSS: nuevo fichero `src/main/resources/static/css/signin.css`
+
+```css
+@charset "UTF-8";
+
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+.form-signin {
+  background-color: #eee;
+}
+
+  max-width: 330px;
+.form-signin .form-signin-heading,
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+}
+.form-signin .form-control {
+     -moz-box-sizing: border-box;
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+.form-signin .form-control:focus {
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+  z-index: 2;
+}
+  border-bottom-left-radius: 0;
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+}
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+```  
+  
+  
+* Nueva plantilla en `/src/main/resources/templates/login.html`
+
+La plantilla está un poco modificada, con las webjars incluidas y eliminando algún elemento que sobraba.
+
+```html
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulario de login</title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+
+<!-- Bootstrap core CSS -->
+<!-- Custom styles for this template -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="/css/signin.css" rel="stylesheet">
+
+
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+            <label for="username" class="sr-only">Username</label> <input
+</head>
+
+<body>
+
+    <div class="container">
+
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <h2 class="form-signin-heading">Por favor, introduzca sus datos</h2>
+                for="password" class="sr-only">Password</label> <input
+                type="text" id="username" name="username" class="form-control"
+                placeholder="Username" required autofocus> <label
+                type="password" name="password"  id="password" class="form-control"
+    ================================================== -->
+                placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+                in</button>
+        </form>
+
+    </div>
+    <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+</html>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+```
+
+### CSRF (*Cross-site request forgery*)
+Aunque lo hemos utilizado en el proyecto de ejemplo, el conocimiento en profundidad de este problema de seguridad queda fuera del ámbito del curso. Si te animas a leer algo más sobre exte posible *exploit*, puedes hacerlo en wikipedia: https://es.wikipedia.org/wiki/Cross-site_request_forgery.
 
 ## Transcripción
 
