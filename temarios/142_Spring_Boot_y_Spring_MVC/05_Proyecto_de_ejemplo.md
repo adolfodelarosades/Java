@@ -38,7 +38,23 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Otras formas de generar la base de datos e insertar datos de ejemplo
+
+Como muchos podréis suponer, la forma en que hemos ido generando la base de datos e insertando datos de ejemplo no es la más ortodoxa, aunque es muy útil mientras aprendemos a desarrollar. Sin embargo, con un sistema en producción, dicho esquema de trabajo no sería el más viable.
+
+En el caso de usar un SGBD más potente y remoto, lo normal es generar el esquema de la base de datos utilizando *scripts* de sql. Estos scripts suelen ser acumulativos; es decir, para la versión 3, lo que hará el script es modificar lo necesario de la versión 2, y añadir todos los elementos nuevos. Además, también se suelen usar scripts de sql para hacer la inserción de los datos iniciales.
+
+Spring Boot, como en otras ocasiones, nos ofrece facilidades para la creación del esquema y la inserción de datos iniciales.
+
+* La propiedad `spring.jpa.hibernate.ddl-auto` (la cual es un atajo de la propiedad de hibernate `hibernate.hbm2ddl.auto`) toma el valor `create-drop` cuando se utiliza una base de datos embebida (por ejemplo H2) y no se le indica otra forma de trabajar. En otro caso, tomar el valor `none`. Si quisiéramos gestionar nosotros la creación de la base de datos, ese sería el valor que tendríamos que indicar
+
+```html
+spring.jpa.hibernate.ddl-auto=none
+```
+
+* El script de creación de la base de datos debe llamarse `schema.sql` y debe colocarse en algún lugar del classpath. Un buen sitio para ello podría ser la ruta `src/main/resources/`, donde está el propio fichero `application.properties`.
+
+* El script de inicialización de datos debe llamarse `data.sql` y debe colocarse en el mismo lugar del fichero anterior.
 
 ## Transcripción
 
@@ -66,7 +82,9 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Plantillas
+
+Puedes descargar el código fuente de las plantillas pulsando [aquí](pdfs/plantillas.zip)
 
 ## Transcripción
 
@@ -116,7 +134,17 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Posibles mejoras del proyecto que puedes hacer tú
+
+* Añadir categorías a los productos (como una nueva entidad).
+* Añadir la validación de entidades
+* Añadir el tratamiento de errores
+* Añadir asociaciones bidireccionales
+* Definir más consultas, para tener mejores filtros.
+* Utilizar Bootstrap 4 en lugar de 3.
+* En la lista de compras, visualizar número de productos e importe total.
+* Para l@s más valientes, implementar algún método de pago (¿qué tal Paypal?)
+* Para l@s más valientes, implementar un servicio de subida de ficheros en la nube. (si van a ser imágenes, ¿qué tal imgur?)
 
 ## Transcripción
 
