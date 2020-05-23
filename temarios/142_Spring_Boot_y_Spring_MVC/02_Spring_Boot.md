@@ -252,7 +252,7 @@ En nuestros ejemplos, podrás encontrar `com.openwebinars` en lugar de `net.open
 
 ## Transcripción
 
-# 08 Autoconfiguración y uso de la anotación `@SpringBootAplication 6:36 
+# 08 Autoconfiguración y uso de la anotación `@SpringBootAplication` 6:36 
 
 [PDF Autoconfiguración_y_uso_de_SpringBootApplication.pdf](pdfs/07._Autoconfiguración_y_uso_de_SpringBootApplication.pdf)
 
