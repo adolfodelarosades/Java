@@ -66,11 +66,11 @@ En la siguiente pantalla, los datos serán:
 
 Lo siguiente es solucionar el warning, provocado por el arquetipo elegido, cambiando en el *Build Path* la versión de java, de la 1.5 a 1.8.
 
-<img src="/images/1-path-1.jpg">
+<img src="images/1-path-1.jpg">
 
-<img src="/images/1-path-2.jpg">
+<img src="images/1-path-2.jpg">
 
-<img src="/images/1-path-3.jpg">
+<img src="images/1-path-3.jpg">
 
 ### 3.3.2 Configuración del fichero `pom.xml`
 
