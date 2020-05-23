@@ -6,7 +6,7 @@
 * 05 Estructura de un proyecto Spring Boot 7:49 
 * 06 Starter poms 5:27 
 * 07 Estructuración del código 4:13 
-* 08 Autoconfiguración y uso de la anotación @SpringBootAplication 6:36 
+* 08 Autoconfiguración y uso de la anotación `@SpringBootAplication` 6:36 
 * Contenido adicional 7
 
 # 02 Introducción a Spring Boot 11:16 
@@ -252,7 +252,7 @@ En nuestros ejemplos, podrás encontrar `com.openwebinars` en lugar de `net.open
 
 ## Transcripción
 
-# 08 Autoconfiguración y uso de la anotación @SpringBootAplication 6:36 
+# 08 Autoconfiguración y uso de la anotación `@SpringBootAplication 6:36 
 
 [PDF Autoconfiguración_y_uso_de_SpringBootApplication.pdf](pdfs/07._Autoconfiguración_y_uso_de_SpringBootApplication.pdf)
 
