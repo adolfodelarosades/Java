@@ -1,4 +1,4 @@
-8. Proyecto: Crear un blog completo 61m
+# 8. Proyecto: Crear un blog completo 61m
    * Presentación y requisitos del proyecto 8:16 
    * Creación y configuración del proyecto 9:07 
    * Diseño de la aplicación 6:07 
