@@ -681,8 +681,7 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 ```  
-  
-  
+
 * Nueva plantilla en `/src/main/resources/templates/login.html`
 
 La plantilla está un poco modificada, con las webjars incluidas y eliminando algún elemento que sobraba.
@@ -762,7 +761,56 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Dependencias Maven
+
+Necesitamos dos dependencias
+
+```html
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
+
+Esta primera dependencia es de Spring Data (en concreto, específicamente para Redis), el API de Spring que nos permite manejar datos en diferentes orígenes (bases de datos relacionales, NoSQL, …) a través de repositorios. Esta dependencia es usada por la siguiente.
+
+```html
+<dependency>
+   <groupId>org.springframework.session</groupId>
+   <artifactId>spring-session-data-redis</artifactId>
+</dependency>
+```
+
+Esta es la dependencia específica para incluir Spring Session Core y el almacenamiento de sesiones en Redis.
+
+### Instalación de Redis
+
+Para usar Redis vamos a trabajar con Docker. Si quieres saber más sobre esta tecnología, puedes visitar nuestro **Curso de Introducción a Docker** y también nuestro **Curso de Docker para Desarrolladores**.
+
+Una vez instalado docker, el comando para descargar, instalar y lanzar Redis es:
+
+```sh
+$ docker run -d --name myredis -p 6379:6379 redis
+```
+
+*Si trabajas con Linux, posiblemente necesites poner antes `sudo` para poder ejecutarlo.*
+
+También puedes descargar Redis desde su web: https://redis.io/download.
+
+### Conexión al cliente de Redis
+
+Si quieres conectar con el cliente de Redis lo puedes hacer de la siguiente forma:
+
+```sh
+$ docker exec -ti myredis bash
+$ redis-cli
+```
+
+También lo puedes hacer en una sola línea de código
+
+```sh
+$ docker exec -ti myredis redis-cli
+```
 
 ## Transcripción
 
