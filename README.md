@@ -59,6 +59,10 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [615 Acceso a datos en aplicaciones Java con JPA e Hibernate](https://github.com/adolfodelarosades/Java/blob/master/temarios/615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate.md)
 * [616 Microservicios con Spring Boot y Cloud]()
 
+# Cursos Madrid
+
+* [701 Desarrollo de aplicaciones con Java IFCT034PO]
+
 # BOOKS
 
 * [90001 Java EE 8 Development with Eclipse](https://github.com/adolfodelarosades/Java/blob/master/temarios/90001_Java_EE_8_Development_with_Eclipse.md)
