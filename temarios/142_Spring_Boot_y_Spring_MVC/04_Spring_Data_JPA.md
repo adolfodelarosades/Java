@@ -76,3 +76,9 @@ No existe.
 ## Transcripción
 
 # Contenido adicional 4
+
+* [PDF Introducción_a_Spring_Data.pdf](pdfs/21._Introducción_a_Spring_Data.pdf)
+* [PDF Entidades.pdf](pdfs/22._Entidades.pdf)
+* [PDF Repositorios.pdf](pdfs/23._Repositorios.pdf)
+* [PDF Consultas.pdf](pdfs/24._Consultas.pdf)
+
