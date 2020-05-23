@@ -212,10 +212,11 @@ $ java -jar myproject-0.0.1-SNAPSHOT.jar
 
 La lista con los starters oficiales la podemos encontrar [aquí](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-build-systems).
 
-Todos deben seguir la nomenclatura en el nombre de, spring-boot-starter-* donde * es un tipo particular de aplicación.
+Todos deben seguir la nomenclatura en el nombre de, `spring-boot-starter-*` donde `*` es un tipo particular de aplicación.
 
-Starters de terceros
-Cualquier programador puede crear su propio starter para añadir algunas librerías o algún tipo de código de autoconfiguración. En tal caso, el starter creado debería un nombre según la siguiente nomenclatura: si el proyecto se llama myproject, el starter debería nombrare myproject-spring-boot-starter
+### *Starters de terceros*
+
+Cualquier programador puede crear su propio starter para añadir algunas librerías o algún tipo de código de autoconfiguración. En tal caso, el starter creado debería un nombre según la siguiente nomenclatura: si el proyecto se llama `myproject`, el starter debería nombrare `myproject-spring-boot-starter`
 
 ## Transcripción
 
@@ -225,7 +226,29 @@ Cualquier programador puede crear su propio starter para añadir algunas librer�
 
 ## Resumen Profesor
 
-No existe.
+### Nombrado de paquetes
+
+Históricamente, el nombre de los paquetes en Java ha sido el dominio, a la inversa, de la empresa, organización o grupo que está creándolo. De esta forma, si nuestro dominio es:
+
+```sh
+www.openwebinars.net
+```
+
+Todos nuestros paquetes deberían comenzar por:
+
+```sh
+net.openwebinars.
+```
+
+Las tres w no se incluyen.
+
+El resto del nombre debería ser de la propia estructura del proyecto. Si estamos implementando una entidad dentro de un proyecto llamado `myproject`, el nombre del paquete podría ser:
+
+```sh
+package net.openwebinars.myproject.model;
+```
+
+En nuestros ejemplos, podrás encontrar `com.openwebinars` en lugar de `net.openwebinars`, por ser `com` más habitual que `net`, y así no confundir al alumnado.
 
 ## Transcripción
 
