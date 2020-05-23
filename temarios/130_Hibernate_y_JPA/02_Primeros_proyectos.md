@@ -68,7 +68,7 @@ Lo siguiente es solucionar el warning, provocado por el arquetipo elegido, cambi
 
 <img src="images/1-path-1.jpg">
 
-<img src="images/1-path-2.jpg">
+<img src="images/1-path-2.jpeg">
 
 <img src="images/1-path-3.jpg">
 
