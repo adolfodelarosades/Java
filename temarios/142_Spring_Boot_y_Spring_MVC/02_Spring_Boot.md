@@ -1,12 +1,12 @@
 # 2. Spring Boot 57m
 
-* Introducción a Spring Boot 11:16 
-* Convención sobre configuración 5:27 
-* Uso de Spring Initializr 16:15 
-* Estructura de un proyecto Spring Boot 7:49 
-* Starter poms 5:27 
-* Estructuración del código 4:13 
-* Autoconfiguración y uso de la anotación @SpringBootAplication 6:36 
+* 02 Introducción a Spring Boot 11:16 
+* 03 Convención sobre configuración 5:27 
+* 04 Uso de Spring Initializr 16:15 
+* 05 Estructura de un proyecto Spring Boot 7:49 
+* 06 Starter poms 5:27 
+* 07 Estructuración del código 4:13 
+* 08 Autoconfiguración y uso de la anotación @SpringBootAplication 6:36 
 * Contenido adicional 7
 
 # 02 Introducción a Spring Boot 11:16 
