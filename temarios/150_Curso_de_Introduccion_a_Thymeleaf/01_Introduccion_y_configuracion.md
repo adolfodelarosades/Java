@@ -113,7 +113,7 @@ No existe.
 
 # 07 Configuración de Thymeleaf vía JavaConfig 12:34 
 
-[PDF ](pdfs/)
+[PDF 03_Configuracion_de_Thymeleaf.pdf](pdfs/03_Configuracion_de_Thymeleaf.pdf)
 
 ## Resumen Profesor
 
