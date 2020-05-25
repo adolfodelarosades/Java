@@ -15,7 +15,7 @@ Aprende a usar Thymeleaf, el mejor motor de plantillas para utilizar junto a Spr
 
 ## CONTENIDOS 
   
-1. Introducción y configuración 1:08
+1. Introducción y configuración 1:08m
    * 01 Presentación del curso y profesor 6:07 
    * 02 ¿Qué es Thymeleaf? Concepto de Natural Templating 11:40 
    * 03 Conceptos de Spring 10:25 
@@ -25,7 +25,7 @@ Aprende a usar Thymeleaf, el mejor motor de plantillas para utilizar junto a Spr
    * 07 Configuración de Thymeleaf vía JavaConfig 12:34 
    * Contenido adicional  7
 
-2. Sintaxis básica 1:04
+2. [Sintaxis básica](150_Curso_de_Introduccion_a_Thymeleaf/02_Sintaxis_basica.md) 1:04m
    * 08 Texto y variables 10:57 
    * 09 Sintaxis básica: Expresiones 12:19 
    * 10 Sintaxis básica: Expresiones de utilidad 5:07 
@@ -34,7 +34,7 @@ Aprende a usar Thymeleaf, el mejor motor de plantillas para utilizar junto a Spr
    * 13 Presentación del proyecto de ejemplo 11:01 
    * Contenido adicional 8
 
-3. Presentación de la información 1:00
+3. [Presentación de la información](150_Curso_de_Introduccion_a_Thymeleaf/03_Presentacion_de_la_informacion.md) 1:00m
    * 14 Listados básicos 9:52 
    * 15 Listados complejos 16:16 
    * 16 Construcción de URLs 10:33 
