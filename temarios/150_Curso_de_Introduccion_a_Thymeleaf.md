@@ -15,7 +15,7 @@ Aprende a usar Thymeleaf, el mejor motor de plantillas para utilizar junto a Spr
 
 ## CONTENIDOS 
   
-1. Introducción y configuración 1:08m
+1. [Introducción y configuración](150_Curso_de_Introduccion_a_Thymeleaf/01_Introduccion_y_configuracion.md) 1:08m
    * 01 Presentación del curso y profesor 6:07 
    * 02 ¿Qué es Thymeleaf? Concepto de Natural Templating 11:40 
    * 03 Conceptos de Spring 10:25 
@@ -43,7 +43,7 @@ Aprende a usar Thymeleaf, el mejor motor de plantillas para utilizar junto a Spr
    * 19 Manejo de CSS 7:45 
    * Contenido adicional 6
 
-4. Manejo de formularios 55m
+4. [Manejo de formularios](150_Curso_de_Introduccion_a_Thymeleaf/04_Manejo_de_formularios.md) 55m
    * 20 Introducción al manejo de formularios 6:39 
    * 21 Campos de texto 8:25 
    * 22 Checkbox y radiobutton 8:52 
