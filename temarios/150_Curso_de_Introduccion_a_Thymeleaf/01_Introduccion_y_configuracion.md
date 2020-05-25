@@ -1,4 +1,5 @@
-1. Introducción y configuración 1:08
+# 1. Introducción y configuración 1:08
+   
    * 01 Presentación del curso y profesor 6:07 
    * 02 ¿Qué es Thymeleaf? Concepto de Natural Templating 11:40 
    * 03 Conceptos de Spring 10:25 
