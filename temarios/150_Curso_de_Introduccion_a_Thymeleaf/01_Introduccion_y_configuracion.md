@@ -83,8 +83,6 @@ Os recomendamos encarecidamente que podáis visitar nuestro **curso de Spring** 
 
 # 04 Primer proyecto con Thymeleaf 11:55 
 
-[PDF ](pdfs/)
-
 ## Resumen Profesor
 
 No existe.
@@ -93,8 +91,6 @@ No existe.
 
 # 05 Plantilla base de BootStrap 4:19 
 
-[PDF ](pdfs/)
-
 ## Resumen Profesor
 
 No existe.
@@ -102,8 +98,6 @@ No existe.
 ## Transcripción
 
 # 06 Implementación del controlador 11:49 
-
-[PDF ](pdfs/)
 
 ## Resumen Profesor
 
