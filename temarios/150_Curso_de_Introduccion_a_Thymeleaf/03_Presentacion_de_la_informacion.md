@@ -270,7 +270,7 @@ Thymeleaf nos ofrece algunas posibilidades para manejar el CSS a aplicar:
 
 ## Transcripción
 
-# Contenido adicional 6   
+# Contenido adicional 5   
 
 * [PDF 09_Listados_basicos.pdf](pdfs/09_Listados_basicos.pdf)
 * [PDF 10_Listados_avanzados.pdf](pdfs/10_Listados_avanzados.pdf)
