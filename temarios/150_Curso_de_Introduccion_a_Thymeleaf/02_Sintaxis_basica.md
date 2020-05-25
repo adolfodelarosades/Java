@@ -164,7 +164,7 @@ Mediante el uso del operador *condición ? valor si verdadero : valor si falso*
 
 ```html
 <p th:text="${not #lists.isEmpty(lista)} ? |Nombre del producto: ${lista[0].nombre}| : 'No hay productos disponibles en la lista'">nombre</p>
-
+```
 
 ### Expresiones por defecto
 
