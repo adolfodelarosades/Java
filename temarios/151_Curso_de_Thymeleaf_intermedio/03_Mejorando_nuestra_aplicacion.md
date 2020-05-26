@@ -11,7 +11,7 @@
    
 # 11 ¿Qué necesito saber de Spring Security? 10:09
 
-[PDF ](pdfs/)
+[PDF Que_necesito_saber_de_Spring_Security.pdf](pdfs/10_Que_necesito_saber_de_Spring_Security.pdf)
 
 ## Resumen Profesor
 
@@ -21,7 +21,7 @@ No existe.
 
 # 12 Integración con Spring Security 19:10 
 
-[PDF ](pdfs/)
+[PDF Integracion_con_Spring_Security.pdf](pdfs/11_Integracion_con_Spring_Security.pdf)
 
 ## Resumen Profesor
 
@@ -31,7 +31,7 @@ No existe.
 
 # 13 Uso de enumeraciones 16:07 
 
-[PDF ](pdfs/)
+[PDF Uso_de_enumeraciones.pdf](pdfs/12_Uso_de_enumeraciones.pdf)
 
 ## Resumen Profesor
 
@@ -41,7 +41,7 @@ No existe.
 
 # 14 Manejo de fechas en Java 8 9:43 
 
-[PDF ](pdfs/)
+[PDF Manejo_de_fechas_de_Java_8.pdf](pdfs/13_Manejo_de_fechas_de_Java_8.pdf)
 
 ## Resumen Profesor
 
@@ -51,7 +51,7 @@ No existe.
 
 # 15 Paginación de resultados: Consulta 13:13
 
-[PDF ](pdfs/)
+[PDF Paginacion_de_resultados_I.pdf](pdfs/14_Paginacion_de_resultados_I.pdf)
 
 ## Resumen Profesor
 
@@ -61,7 +61,7 @@ No existe.
 
 # 16 Paginación de resultados: Navegación 12:43 
 
-[PDF ](pdfs/)
+[PDF Paginacion_de_resultados_II.pdf](pdfs/15_Paginacion_de_resultados_II.pdf)
 
 ## Resumen Profesor
 
@@ -71,7 +71,7 @@ No existe.
 
 # 17 Atributos de HTML5 11:01 
 
-[PDF ](pdfs/)
+[PDF Atributos_HTML5.pdf](pdfs/16_Atributos_HTML5.pdf)
 
 ## Resumen Profesor
 
@@ -80,3 +80,11 @@ No existe.
 ## Transcripción
 
 # Contenido adicional 7   
+
+* [PDF Que_necesito_saber_de_Spring_Security.pdf](pdfs/10_Que_necesito_saber_de_Spring_Security.pdf)
+* [PDF Integracion_con_Spring_Security.pdf](pdfs/11_Integracion_con_Spring_Security.pdf)
+* [PDF Uso_de_enumeraciones.pdf](pdfs/12_Uso_de_enumeraciones.pdf)
+* [PDF Manejo_de_fechas_de_Java_8.pdf](pdfs/13_Manejo_de_fechas_de_Java_8.pdf)
+* [PDF Paginacion_de_resultados_I.pdf](pdfs/14_Paginacion_de_resultados_I.pdf)
+* [PDF Paginacion_de_resultados_II.pdf](pdfs/15_Paginacion_de_resultados_II.pdf)
+* [PDF Atributos_HTML5.pdf](pdfs/16_Atributos_HTML5.pdf)
