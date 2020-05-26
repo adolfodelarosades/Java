@@ -41,30 +41,31 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 * 14 Contenido adicional 6
 * 15 Manejo de errores y excepciones 64m
 
-### 3. Manejo básico de errores 14:40 
+### 3. [Manejo de errores y excepciones](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/03_Manejo_basico_de_errores.md) 64m
 
-* 16 Modelo para la respuesta de un error 4:58 
-* 17 Manejo de errores con @ExceptionHandler 12:25 
-* 18 Manejo de errores con @ControllerAdvice (Parte I) 11:22 
-* 19 Manejo de errores con @ControllerAdvice (Parte II) 8:06 
-* 20 Novedades en Spring 5: ResponseStatusException 12:39 
+* 16 Manejo básico de errores 14:40 
+* 17 Modelo para la respuesta de un error 4:58 
+* 18 Manejo de errores con @ExceptionHandler 12:25 
+* 19 Manejo de errores con @ControllerAdvice (Parte I) 11:22 
+* 20 Manejo de errores con @ControllerAdvice (Parte II) 8:06 
+* 21 Novedades en Spring 5: ResponseStatusException 12:39 
 * Contenido adicional 6
 
-### 4. Manejo de CORS 19m
+### 4. [Manejo de CORS](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/04_Manejo_de_CORS.md) 19m
 
-* 21 ¿Qué es CORS y por qué me va a dar problemas? 6:28 
-* 22 ¿Cómo habilitar a nivel de método? 4:51 
-* 23 Configuración CORS global 8:22 
+* 22 ¿Qué es CORS y por qué me va a dar problemas? 6:28 
+* 23 ¿Cómo habilitar a nivel de método? 4:51 
+* 24 Configuración CORS global 8:22 
 * Contenido adicional 3
 
-### 5. Subida de ficheros 31m
+### 5. [Subida de ficheros](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/05_Subida_de_ficheros.md) 31m
 
-* 24 Servicio de subida 8:07 
-* 25 Implementación de la subida de ficheros 17:45 
-* 26 Uso del servicio 5:13 
+* 25 Servicio de subida 8:07 
+* 26 Implementación de la subida de ficheros 17:45 
+* 27 Uso del servicio 5:13 
 * Contenido adicional 3
 
-### 6. Documentando nuestra API REST 22m
+### 6. [Documentando nuestra API REST](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/06_Documentando_nuestra_API_REST.md) 22m
 
 * 27 ¿Qué es Swagger? 5:43 
 * 28 ¿Cómo incluir Swagger en nuestra API? 17:13 
