@@ -128,7 +128,7 @@ Puede ser interesante fijarse en algunas de sus subclases:
 * `NotAcceptableStatusException`: excepción que encaja con el código de respuesta 406
 * `ServerErrorException`: excepción para el código 500 que expone información extra.
 * `ServerWebInputException`: excepción que encaja con el código de respuesta 400 para ser usada en aplicaciones web.
-* `UnsupportedMediaTypeStatusException: excepción que encaja con el código de respuesta 415.
+* `UnsupportedMediaTypeStatusException`: excepción que encaja con el código de respuesta 415.
 
 ## Transcripción
 
