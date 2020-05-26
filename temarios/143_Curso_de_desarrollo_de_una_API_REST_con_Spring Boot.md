@@ -2,8 +2,6 @@
 
 Aprende con este curso a desarrollar una API REST utilizando para ello Spring Boot, desde cero hasta la documentación final de la misma.
 
-Backend
-
 **Duración**: 4:34:51
 
 **Profesor**: Luis Miguel López Magaña Experto en Java
@@ -11,19 +9,12 @@ Backend
 #### Con este curso aprenderás
 
 * Conocerás las características de la arquitectura REST.
-
 * Aprenderás a generar un proyecto de Spring Boot para una API REST.
-
 * Utilizarás librerías como Lombok.
-
 * Serás capaz de reconocer la estructura de un controlador REST.
-
 * Aprenderás a utilizar el patrón DTO (Data Transfer Object).
-
 * Serás capaz de manejar errores y excepciones.
-
 * Conocerás cómo manejar la subida de ficheros.
-
 * Aprenderás a documentar tu API REST con Swagger.
 
 ## Contenido
