@@ -30,7 +30,7 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 * 07 Soporte de Spring Boot para servicios REST 6:34 
 * Contenido adicional  7
 
-### 2. Primer servicio REST con Spring Boot 76m
+### 2. [Primer servicio REST con Spring Boot](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/02_Primer_servicio_REST_con_Spring_Boot.md) 76m
 
 * 08 Mi primer servicio REST 9:33 
 * 09 Puesta en marcha de la aplicación 7:48 
@@ -41,7 +41,7 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 * 14 Contenido adicional 6
 * 15 Manejo de errores y excepciones 64m
 
-### Manejo básico de errores 14:40 
+### 3. Manejo básico de errores 14:40 
 
 * 16 Modelo para la respuesta de un error 4:58 
 * 17 Manejo de errores con @ExceptionHandler 12:25 
@@ -50,21 +50,21 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 * 20 Novedades en Spring 5: ResponseStatusException 12:39 
 * Contenido adicional 6
 
-### Manejo de CORS 19m
+### 4. Manejo de CORS 19m
 
 * 21 ¿Qué es CORS y por qué me va a dar problemas? 6:28 
 * 22 ¿Cómo habilitar a nivel de método? 4:51 
 * 23 Configuración CORS global 8:22 
 * Contenido adicional 3
 
-### Subida de ficheros 31m
+### 5. Subida de ficheros 31m
 
 * 24 Servicio de subida 8:07 
 * 25 Implementación de la subida de ficheros 17:45 
 * 26 Uso del servicio 5:13 
 * Contenido adicional 3
 
-### Documentando nuestra API REST 22m
+### 6. Documentando nuestra API REST 22m
 
 * 27 ¿Qué es Swagger? 5:43 
 * 28 ¿Cómo incluir Swagger en nuestra API? 17:13 
