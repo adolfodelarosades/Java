@@ -364,7 +364,342 @@ Como decíamos antes, el estilo jerárquico utiliza un dialecto específico, el 
 
 ## Resumen Profesor
 
-No existe.
+Thymeleaf permite definir fragmentos como si fueran funciones; es decir, fragmentos definidos con `th:fragment` y que pueden recibir una serie de argumentos.
+
+```html
+<div th:fragment="frag(v1, v2)">
+    <p th:text="${v1}">...</p>
+    <a th:href="@{v2}">...</a>
+</div>
+```
+
+Esto nos obliga a utilizar alguna de estas dos expresiones a la hora de insertar/reemplazar este fragmento
+
+```html
+<div th:replace="::frag(${valor1},${valor2})">...</div>
+<div th:replace="::frag(v1=${valor1}, v2=${valor2})">...</div>
+```
+
+*La segunda sintaxis, además, nos permite modificar el orden de los argumentos, si es que así lo necesitamos.*
+
+### Validación de argumentos de un fragmento
+
+Thymeleaf nos provee del atributo `th:assert`, muy útil con los fragmentos. Recibe como argumento una lista separada por comas de expresiones booleanas. Todas deben evaluarse y dar como resultado verdadero; en otro caso, se lanza una excepción. Son muy válidas para comprobar los argumentos de un fragmento con parámetros.
+
+```html
+<header th:fragment="encabezado(titulo)" th:assert="${!#strings.isEmpty(titulo)}">...</header>
+```
+
+### Diseños flexibles
+
+Los fragmentos parametrizables son solo admiten como parámetros valores textuales, números o *beans*. Es muy interesante que también pueden recibir *otros fragmentos*, con lo cual podemos realizar auténticos diseños flexibles. De hecho, podemos crear layouts extensibles sin necesidad de utilizar el *Thymeleaf Layout Dialect*.
+
+Podemos ver este siguiente ejemplo de la documentación oficial de Thymeleaf:
+
+Supongamos un bloque de código en el fichero `base.html`
+
+```html
+<head th:fragment="common_header(title,links)">
+
+  <title th:replace="${title}">The awesome application</title>
+
+  <!-- Estilos y scripts comunes -->
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/awesomeapp.css}">
+  <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+  <script type="text/javascript" th:src="@{/sh/scripts/codebase.js}"></script>
+
+  <!--/* Estilos o elementos adiocionales para una página concreta */-->
+  <th:block th:replace="${links}" />
+
+</head>
+```
+
+Podemos ver como el fragmento definido, `common_header`, espera dos argumentos, llamados `title` y `links`, de manera que el título será reemplazado con el argumento `title` que proporcionemos, y el bloque final será reemplazado con el argumento `links`.
+
+*Como indicábamos más arriba, los argumentos de un fragmento con parámetros pueden ser a su vez otros fragmentos.*
+
+Este fragmento lo podemos utilizar desde otra plantilla (supongoamos `index.html`) de la siguiente forma:
+
+```html
+...
+<head th:replace="base :: common_header(~{::title},~{::link})">
+
+  <title>Awesome - Main</title>
+
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/themes/smoothness/jquery-ui.css}">
+
+</head>
+...
+```
+
+Como podemos apreciar, aquí suceden varias cosas:
+
+* En esta plantilla, el bloque `<head>` se sustituye con el fragmento `common_header` de la plantilla `base.html`.
+* Se le proporcionan los dos argumentos esperados.
+   * El primer argumento es el fragmento `<title>` de esta misma plantilla.
+   * El segundo argumento es el conjunto de todos los `<link>` de esta misma plantilla.
+   
+*Cabe recordar que a la hora de invocar fragmentos, la sintaxis habitual es `~{plantilla::selector}`, donde si el fragmento está en la misma plantilla, se puede usar `this` u omitir el nombre de la misma; y el selector no tiene por qué ser un fragmento definido con `th:fragment`, sino que pueden ser etiquetas HTML de la plantilla.*
+
+Así, el resultado final que se enviaría al navegador sería:
+
+```html
+...
+<head>
+
+  <title>Awesome - Main</title>
+
+  <!-- Estilos y scripts comunes -->
+  <link rel="stylesheet" type="text/css" media="all" href="/awe/css/awesomeapp.css">
+  <link rel="shortcut icon" href="/awe/images/favicon.ico">
+  <script type="text/javascript" src="/awe/sh/scripts/codebase.js"></script>
+
+  <link rel="stylesheet" href="/awe/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/awe/themes/smoothness/jquery-ui.css">
+
+</head>
+...
+```
+
+### Fragmento vacío y token de no-operación
+
+En algunos casos, dado el caso de utilizar un fragmento con parámetros, es posible que queramos pasar un **fragmento vacío**, sin contenido de marcado; pensemos por ejemplo, en el caso anterior, que no quisiéramos añadir ningún elemento `<link>` más a los estilos comunes. Podemos utilizar la expresión `~{}`, que denota un fragmento vacío.
+
+```html
+...
+<head th:replace="base :: common_header(~{::title},~{})">
+
+  <title>Awesome - Main</title>
+
+</head>
+...
+```
+
+Tendríamos entonces este resultado:
+
+```html
+...
+<head>
+
+  <title>Awesome - Main</title>
+
+  <!-- Estilos y scripts comunes -->
+  <link rel="stylesheet" type="text/css" media="all" href="/awe/css/awesomeapp.css">
+  <link rel="shortcut icon" href="/awe/images/favicon.ico">
+  <script type="text/javascript" src="/awe/sh/scripts/codebase.js"></script>
+
+</head>
+...
+```
+
+También podemos utilizar el **token de no-operación** (que también se puede utilizar en otro tipo de expresiones) si queremos dejar que se utilice el valor por defecto de un bloque. Fijémonos en este caso, en el `<title>`:
+
+```html
+...
+<head th:replace="base :: common_header(_,~{::link})">
+
+  <title>Awesome - Main</title>
+
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/themes/smoothness/jquery-ui.css}">
+
+</head>
+...
+```
+
+Como en el fragmento `common_header`, teníamos esta etiqueta:
+
+```html
+<title th:replace="${title}">The awesome application</title>
+```
+
+El resultado sería el siguiente:
+
+```html
+...
+<head>
+
+  <title>The awesome application</title>
+
+  <!-- Estilos y scripts comunes -->
+  <link rel="stylesheet" type="text/css" media="all" href="/awe/css/awesomeapp.css">
+  <link rel="shortcut icon" href="/awe/images/favicon.ico">
+  <script type="text/javascript" src="/awe/sh/scripts/codebase.js"></script>
+
+  <link rel="stylesheet" href="/awe/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/awe/themes/smoothness/jquery-ui.css">
+
+</head>
+...
+```
+
+### Eliminar fragmentos
+
+Supongamos que queremos maquetar una tabla en la que visualizar los elementos de una lista:
+
+```html
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>PVP</th>
+    <th>Valoración</th>
+    <th>Disponibilidad de stock</th>
+  </tr>
+  <tr th:each="prod : ${prods}" th:class="${prodStat.odd}? 'odd'">
+    <td th:text="${prod.nombre}">Macbook Pro</td>
+    <td th:text="${prod.pvp}">1999</td>
+    <td th:text="${prod.valoracion}">4.5/5</td>
+    <td th:text="${prod.inStock}? #{si} : #{no}">Sí</td>
+  </tr>
+</table>
+```
+
+Este código es válido como plantilla para procesar una lista de productos pero, ¿qué pasa si queremos maquetar primero sin el procesamiento de Thymeleaf? No sería lo más apropiado, ya que se muestra solamente una fila, y tenemos estilos que se alternan en filas pares o impares. Es decir, necesitamos más filas. Para ello, podríamos hacer lo siguiente:
+
+```html
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>PVP</th>
+    <th>Valoración</th>
+    <th>Disponibilidad de stock</th>
+  </tr>
+  <tr th:each="prod : ${prods}" th:class="${prodStat.odd}? 'odd'">
+    <td th:text="${prod.nombre}">Macbook Pro</td>
+    <td th:text="${prod.pvp}">1999</td>
+    <td th:text="${prod.valoracion}">4.5/5</td>
+    <td th:text="${prod.inStock}? #{si} : #{no}">Sí</td>
+  </tr>
+  <tr class="odd">
+    <td>Dell XPS 9570</td>
+    <td>1500</td>
+    <td>4.6/5</td>
+    <td>Sí</td>
+  </tr>
+  <tr>
+    <td>Lenovo ThinkPad X1 Carbon Gen 7</td>
+    <td>1300</td>
+    <td>4.4/5</td>
+    <td>No</td>
+  </tr>
+</table>
+```
+
+En este caso ya tendríamos 3 filas, y la tabla parecería más realista como prototipo estático. Pero, ¿y si ahora procesamos con Thymeleaf? Tendríamos tantos productos, como el tamaño de la lista `prods`, además de los dos últimos productos. Ya que las dos últimas filas son parte del prototipo, pero no queremos que aparezcan en el resultado final, *necesitaríamos eliminarlas*. **Esto lo podemos hacer mediante el atributo** `th:remove`.
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>PVP</th>
+      <th>Valoración</th>
+      <th>Disponibilidad de stock</th>
+    </tr>
+  </thead>
+  <tbody th:remove="all-but-first">
+    <tr th:each="prod : ${prods}" th:class="${prodStat.odd}? 'odd'">
+      <td th:text="${prod.nombre}">Macbook Pro</td>
+      <td th:text="${prod.pvp}">1999</td>
+      <td th:text="${prod.valoracion}">4.5/5</td>
+      <td th:text="${prod.inStock}? #{si} : #{no}">Sí</td>
+    </tr>
+    <tr class="odd">
+      <td>Dell XPS 9570</td>
+      <td>1500</td>
+      <td>4.6/5</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <td>Lenovo ThinkPad X1 Carbon Gen 7</td>
+      <td>1300</td>
+      <td>4.4/5</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+Esto permitiría que Thymeleaf respete solo la primera línea (que precisamente es la que es capaz de procesar la lista de productos) y elimine las demás. Las opciones de `th:remove` son:
+
+* `all`: Elimina el contenido de la etiqueta y sus etiquetas hija.
+* `body`: No elimina el contenido de la etiqueta, pero si elimina toda las etiquetas hija.
+* `tag`: Elimina la etiqueta contenedora, pero no elimina las hijas.
+* `all-but-first`: Elimina todos los hijos menos el primero.
+* `none`: No elimina ninguno. Es útil en caso de una evaluación dinámica a través de una expresión.
+
+### Herencia de layout
+
+Aunque en la lección anterior aprendíamos como usando el *Thymeleaf Layout Dialect* podíamos crear una jerarquía de layouts que eran decorados por plantillas concretas, también es cierto que podemos utilizar los **fragmentos con parámetros para tener una plantilla base, y jugar con los argumentos que reciba para construir nuestras plantillas**.
+
+Supongamos nuestro layout base, definido en `base.html`:
+
+```html
+<!DOCTYPE html>
+<html th:fragment="layout(titulo, contenido)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:replace="${titulo}">Título</title>
+</head>
+<body>
+    <h1>Layout H1</h1>
+    <div th:replace="${contenido}">
+        <p>Contenido del layout</p>
+    </div>
+    <footer>
+        Pie del layout
+    </footer>
+</body>
+</html>
+```
+
+Hemos definido un fragmento que ocupa toda la plantilla (por estar definido en la etiqueta `html`) y que espera dos argumentos, que usará para reemplazar el título y el contenido.
+
+Este puede ser usado en otro documento, por ejemplo, `index.html`, de la siguiente forma:
+
+```html
+<!DOCTYPE html>
+<html th:replace="~{base :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Título de la pagina</title>
+</head>
+<body>
+<section>
+    <p>Contenido de la página</p>
+    <div>...</div>
+    <img src="..." />
+</section>
+</body>
+</html>
+```
+
+Aquí suceden varias cosas:
+
+* La etiqueta `<html>` de `index.html` y todo su contenido quedan sustituidas por la etiqueta correspondiente del fichero `base.html`.
+* El título de `base.html` se reemplaza con el contenido de `<title>` de `index.html`.
+* El contenido (etiqueta `<div>`) de `base.html` queda sustituido por la etiqueta `<section>` (y todo su contenido) de `index.html`.
+
+En definitiva, el resultado procesado sería:
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+     <title>Título de la pagina</title>
+</head>
+<body>
+    <h1>Layout H1</h1>
+    <section>
+      <p>Contenido de la página</p>
+      <div>...</div>
+      <img src="..." />
+    </section>
+    <footer>
+        Layout footer
+    </footer>
+</body>
+</html>
+```
 
 ## Transcripción
 
@@ -374,7 +709,17 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+Thymeleaf ofrece la posibilidad de renderizar, en lugar de una plantilla completa, una parte de ella, es decir, un fragmento.
+
+Si se utiliza con Spring, podemos hacer uso del valor de retorno de un controlador:
+
+```html
+@RequestMapping("/showContentPart")
+public String showContentPart() {
+    ...
+    return "index :: content";
+}
+```
 
 ## Transcripción
 
