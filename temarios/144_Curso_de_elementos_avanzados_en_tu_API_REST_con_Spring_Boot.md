@@ -24,47 +24,47 @@ Backend
 
 ## Contenido
 
-### Introducción 18m
+### 1. [Introducción](144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot/01_Introduccion.md) 18m
 
-* Presentación 8:42 
-* Proyecto de ejemplo 9:58 
+* 01 Presentación 8:42 
+* 02 Proyecto de ejemplo 9:58 
 * Contenido adicional 1
 
-### Algunas mejoras para nuestra API 62m
+### 2. [Algunas mejoras para nuestra API](144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot/02_Algunas_mejoras_para_nuestra_API.md) 62m
 
-* Paginación de resultados 20:46 
-* Manejo de parámetros en el Query (Parte I) 16:49 
-* Manejo de parámetros en el Query (Parte II) 17:25 
-* Soporte para XML 7:19 
+* 03 Paginación de resultados 20:46 
+* 04 Manejo de parámetros en el Query (Parte I) 16:49 
+* 05 Manejo de parámetros en el Query (Parte II) 17:25 
+* 06 Soporte para XML 7:19 
 * Contenido adicional 4
 
-### Modelos de datos más complejos 77m
+### 3. [Modelos de datos más complejos](144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot/03_Modelos_de_datos_mas_complejos.md) 77m
 
-* Uso del patrón DTO en peticiones y respuestas 15:31 
-* Ajustando nuestras clases con JSONView 11:42 
-* Asociaciones many-to-one 8:42 
-* Asociaciones one-to-many 24:31 
-* Asociaciones many-to-many 17:13 
+* 07 Uso del patrón DTO en peticiones y respuestas 15:31 
+* 08 Ajustando nuestras clases con JSONView 11:42 
+* 09 Asociaciones many-to-one 8:42 
+* 10 Asociaciones one-to-many 24:31 
+* 11 Asociaciones many-to-many 17:13 
 * Contenido adicional 5
 
-### HATEOAS y Spring Data REST 69m
+### 4. [HATEOAS y Spring Data REST](144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot/04_HATEOAS_y_Spring_Data_REST.md) 69m
 
-* ¿Qué es HATEOAS? ¿y HAL? 13:37 
-* Spring Data REST 3:52 
-* Primer ejemplo con Spring Data REST 13:31 
-* Configuración de algunos parámetros 11:22 
-* Paginación y búsqueda 9:28 
-* Proyecciones 8:15 
-* Excerpts: Composición de modelos 9:22 
+* 12 ¿Qué es HATEOAS? ¿y HAL? 13:37 
+* 13 Spring Data REST 3:52 
+* 14 Primer ejemplo con Spring Data REST 13:31 
+* 15 Configuración de algunos parámetros 11:22 
+* 16 Paginación y búsqueda 9:28 
+* 17 Proyecciones 8:15 
+* 18 Excerpts: Composición de modelos 9:22 
 * Contenido adicional 7
 
-### Elementos orientados a producción 72m
+### 5 [Elementos orientados a producción](144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot/05_Elementos_orientados_a_produccion.md) 72m
 
-* Añadir una base de datos real: Postgresql 18:03 
-* Creación de un nuevo perfil de configuración 11:01 
-* Monitorización con Actuator 8:54 
-* Dockerización de nuestra aplicación 17:48 
-* Despliegue en Heroku 16:18 
+* 19 Añadir una base de datos real: Postgresql 18:03 
+* 20 Creación de un nuevo perfil de configuración 11:01 
+* 21 Monitorización con Actuator 8:54 
+* 22 Dockerización de nuestra aplicación 17:48 
+* 23 Despliegue en Heroku 16:18 
 * Contenido adicional 5
 
 ### Contenido extra
