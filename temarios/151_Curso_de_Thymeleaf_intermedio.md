@@ -15,7 +15,7 @@ Completa tu formación previa con el curso de Thymeleaf intermedio y serás capa
 
 ## CONTENIDOS 
 
-1. [Introducción](/151_Curso_de_Thymeleaf_intermedio/01_Introduccion.md) 34m
+1. [Introducción](151_Curso_de_Thymeleaf_intermedio/01_Introduccion.md) 34m
 
    * 01 Presentación 5:25 
    * 02 ¿Qué puede hacer Thymeleaf por mi? 9:28 
