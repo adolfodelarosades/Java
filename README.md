@@ -18,7 +18,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [144 Curso de elementos avanzados en tu API REST con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot.md)
 * [145 Curso de seguridad en tu API REST con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/145_Curso_de_seguridad_en_tu_API_REST_con_Spring_Boot.md)
 * [150 Curso de Introducción a Thymeleaf](https://github.com/adolfodelarosades/Java/blob/master/temarios/150_Curso_de_Introduccion_a_Thymeleaf.md)
-* [151 Curso de Thymeleaf intermedio]()
+* [151 Curso de Thymeleaf intermedio](https://github.com/adolfodelarosades/Java/blob/master/temarios/151_Curso_de_Thymeleaf_intermedio.md)
 
 # AEPI
 
