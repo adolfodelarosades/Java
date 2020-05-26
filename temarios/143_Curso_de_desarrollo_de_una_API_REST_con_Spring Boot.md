@@ -28,55 +28,55 @@ Backend
 
 ## Contenido
 
-### Introducción 60m
+### 1. Introducción 60m
 
-* Presentación 6:01 
-* ¿Qué es un servicio REST? 15:06 
-* Protocolo HTTP 7:37 
-* Algunos elementos de HTTP 7:57 
-* Nuestro entorno de desarrollo 9:34 
-* Uso de la librería Lombok 7:22 
-* Soporte de Spring Boot para servicios REST 6:34 
+* 01 Presentación 6:01 
+* 02 ¿Qué es un servicio REST? 15:06 
+* 03 Protocolo HTTP 7:37 
+* 04 Algunos elementos de HTTP 7:57 
+* 05 Nuestro entorno de desarrollo 9:34 
+* 06 Uso de la librería Lombok 7:22 
+* 07 Soporte de Spring Boot para servicios REST 6:34 
 * Contenido adicional  7
 
-### Primer servicio REST con Spring Boot 76m
+### 2. Primer servicio REST con Spring Boot 76m
 
-* Mi primer servicio REST 9:33 
-* Puesta en marcha de la aplicación 7:48 
-* Estructura de las rutas 15:31 
-* Clases y anotaciones de Spring 14:25 
-* Uso del patrón Data Transfer Object (DTO) 11:25 
-* Implementando DTO con ModelMapper 17:58 
-* Contenido adicional 6
-* Manejo de errores y excepciones 64m
+* 08 Mi primer servicio REST 9:33 
+* 09 Puesta en marcha de la aplicación 7:48 
+* 10 Estructura de las rutas 15:31 
+* 11 Clases y anotaciones de Spring 14:25 
+* 12 Uso del patrón Data Transfer Object (DTO) 11:25 
+* 13 Implementando DTO con ModelMapper 17:58 
+* 14 Contenido adicional 6
+* 15 Manejo de errores y excepciones 64m
 
 ### Manejo básico de errores 14:40 
 
-* Modelo para la respuesta de un error 4:58 
-* Manejo de errores con @ExceptionHandler 12:25 
-* Manejo de errores con @ControllerAdvice (Parte I) 11:22 
-* Manejo de errores con @ControllerAdvice (Parte II) 8:06 
-* Novedades en Spring 5: ResponseStatusException 12:39 
+* 16 Modelo para la respuesta de un error 4:58 
+* 17 Manejo de errores con @ExceptionHandler 12:25 
+* 18 Manejo de errores con @ControllerAdvice (Parte I) 11:22 
+* 19 Manejo de errores con @ControllerAdvice (Parte II) 8:06 
+* 20 Novedades en Spring 5: ResponseStatusException 12:39 
 * Contenido adicional 6
 
 ### Manejo de CORS 19m
 
-* ¿Qué es CORS y por qué me va a dar problemas? 6:28 
-* ¿Cómo habilitar a nivel de método? 4:51 
-* Configuración CORS global 8:22 
+* 21 ¿Qué es CORS y por qué me va a dar problemas? 6:28 
+* 22 ¿Cómo habilitar a nivel de método? 4:51 
+* 23 Configuración CORS global 8:22 
 * Contenido adicional 3
 
 ### Subida de ficheros 31m
 
-* Servicio de subida 8:07 
-* Implementación de la subida de ficheros 17:45 
-* Uso del servicio 5:13 
+* 24 Servicio de subida 8:07 
+* 25 Implementación de la subida de ficheros 17:45 
+* 26 Uso del servicio 5:13 
 * Contenido adicional 3
 
 ### Documentando nuestra API REST 22m
 
-* ¿Qué es Swagger? 5:43 
-* ¿Cómo incluir Swagger en nuestra API? 17:13 
+* 27 ¿Qué es Swagger? 5:43 
+* 28 ¿Cómo incluir Swagger en nuestra API? 17:13 
 * Contenido adicional 2
 
 ### Contenido extra
