@@ -1,4 +1,4 @@
-### 3. Manejo de errores y excepciones
+# 3. Manejo de errores y excepciones
 
 * 16 Manejo básico de errores 14:40 
 * 17 Modelo para la respuesta de un error 4:58 
