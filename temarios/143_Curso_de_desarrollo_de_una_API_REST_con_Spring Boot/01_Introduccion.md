@@ -239,3 +239,11 @@ Spring Boot ofrece una serie de instancias de `HttpMessageCoverter` por defecto 
 ## Transcripción
 
 # Contenido adicional  7
+
+* [PDF Presentacion.pdf](pdfs/00._Presentacion.pdf)
+* [PDF Qué_es_un_servicio_REST.pdf](pdfs/01_Qué_es_un_servicio_REST.pdf)
+* [PDF 02_HTTP.pdf](pdfs/02_HTTP.pdf)
+* [PDF Algunos_elementos_de_HTTP.pdf](pdfs/03_Algunos_elementos_de_HTTP.pdf)
+* [PDF Nuestro_entorno.pdf](pdfs/04_Nuestro_entorno.pdf)
+* [PDF Project_Lombok.pdf](pdfs/05_Project_Lombok.pdf)
+* [PDF Soporte_de_Spring_Boot_para_REST](pdfs/06_Soporte_de_Spring_Boot_para_REST.pdf)
