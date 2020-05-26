@@ -14,7 +14,7 @@
 
 ## Resumen Profesor
 
-No existe.
+La información sobre la anotación `@ResponseStatus` la puedes encontrar aquí :https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html.
 
 ## Transcripción
 
@@ -24,8 +24,63 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Modelo de error más complejo
 
+Algunos autores, como `Bruno Leite`, proponen una implementación del modelo de respuesta más complejo como esta:
+
+```java
+class ApiError {
+
+   private HttpStatus status;
+   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+   private LocalDateTime timestamp;
+   private String message;
+   private String debugMessage;
+   private List<ApiSubError> subErrors;
+
+   private ApiError() {
+       timestamp = LocalDateTime.now();
+   }
+
+   ApiError(HttpStatus status) {
+       this();
+       this.status = status;
+   }
+
+   ApiError(HttpStatus status, Throwable ex) {
+       this();
+       this.status = status;
+       this.message = "Unexpected error";
+       this.debugMessage = ex.getLocalizedMessage();
+   }
+
+   ApiError(HttpStatus status, String message, Throwable ex) {
+       this();
+       this.status = status;
+       this.message = message;
+       this.debugMessage = ex.getLocalizedMessage();
+   }
+}
+ 
+abstract class ApiSubError {
+
+}
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+class ApiValidationError extends ApiSubError {
+   private String object;
+   private String field;
+   private Object rejectedValue;
+   private String message;
+
+   ApiValidationError(String object, String message) {
+       this.object = object;
+       this.message = message;
+   }
+}
+```
 ## Transcripción
 
 # 18 Manejo de errores con `@ExceptionHandler` 12:25 
@@ -34,7 +89,7 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+La información sobre la anotación `@ExceptionHandler` la puedes encontrar aquí: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ExceptionHandler.html.
 
 ## Transcripción
 
@@ -44,7 +99,7 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+La información sobre la clase `ResponseEntityExceptionHandler` la puedes encontrar aquí: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html
 
 ## Transcripción
 
@@ -64,7 +119,16 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+La información sobre la clase `ResponseStatusException` la puedes encontrar aquí: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/server/ResponseStatusException.html.
+
+Puede ser interesante fijarse en algunas de sus subclases:
+
+* `MediaTypeNotSupportedStatusException`: excepción que encaja con el código de respuesta 415.
+* `MethodNotAllowedException`: excepción que encaja con el código de respuesta 405.
+* `NotAcceptableStatusException`: excepción que encaja con el código de respuesta 406
+* `ServerErrorException`: excepción para el código 500 que expone información extra.
+* `ServerWebInputException`: excepción que encaja con el código de respuesta 400 para ser usada en aplicaciones web.
+* `UnsupportedMediaTypeStatusException: excepción que encaja con el código de respuesta 415.
 
 ## Transcripción
 
