@@ -1,4 +1,4 @@
-# 104 Manejo de colecciones en Java
+# 104 Manejo de colecciones en Java
 
 Mediante este taller serás capaz de conocer las similitudes y diferencias entre los diferentes tipos de colecciones, y en qué caso debes aplicar cada una de ellas.
 
