@@ -112,7 +112,41 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+### Token `signWith`
+
+La librería JJWT ha cambiado en sus últimas versiones, sobre todo con respecto a firmar el token.
+
+Con el siguiente código, podemos generar una clave aleatoria:
+
+```sh
+Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+String jws = Jwts.builder().setSubject("Joe").signWith(key).compact();
+```
+
+Según la documentación, podemos la librería puede encargarse de determinar el mejor algoritmo en función de la longitud en bytes de la misma. Por ejemplo, si llamamos a `signWith` con una `SecretKey` de 32 bytes, no será suficientemente fuerte para el algoritmo `HS384` o `HS512`, por lo que la librería aplicará el algoritmo `HS256`. Además, cuando se firma, automáticamente se añade el algoritmo en el parámetro `alg` en el encabezado.
+
+El método utilizado en el ejemplo es `HS512`, porque la longitud de la clave lo permite:
+
+```java
+return Jwts.builder.signWith(Keys.hmacShaKeyFor(jwtSecreto.getBytes()), SignatureAlgorithm.HS512)...
+```
+
+El método `hmacShaKeyFor` crea una nueva `SecretKey` para usar con algoritmos basados en HMAC-SHA, recibiendo la clave como un array de bytes.
+
+### Descifrado del token
+
+Podemos descifrar el token aplicamos de nuevo la clave secreta, y a partir de ahí podemos obtener el claim que necesitemos:
+
+```java
+public Long getUserIdFromJWT(String token) {
+    Claims claims = Jwts.parser()
+                        .setSigningKey(Keys.hmacShaKeyFor(jwtSecreto.getBytes()))
+                        .parseClaimsJws(token)
+                        .getBody();
+
+    return Long.parseLong(claims.getSubject());
+}
+```
 
 ## Transcripción
 
@@ -122,7 +156,21 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+Según la documentación de Spring Security, para realizar la autenticación basada en *usuario* y *contraseña*, podemos utilizar una instancia de `UsernamePasswordAuthenticationToken`. Se trata de una implementación de `Authentication`.
+
+Si la autenticación se realiza correctamente (en nuestro caso, si el token es validado), debemos almacenar en el contexto de seguridad una instancia de dicha clase:
+
+```java
+if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
+    Long userId = tokenProvider.getUserIdFromJWT(token);
+
+    UserEntity user = (UserEntity) userDetailsService.loadUserById(userId);
+    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, user.getRoles(), user.getAuthorities());
+    authentication.setDetails(new WebAuthenticationDetails(request));
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+}
+```
 
 ## Transcripción
 
@@ -147,8 +195,6 @@ No existe.
 ## Transcripción
 
 # 24 Despliegue y pruebas con JWT 4:12 
-
-[PDF ](pdfs/)
 
 ## Resumen Profesor
 
