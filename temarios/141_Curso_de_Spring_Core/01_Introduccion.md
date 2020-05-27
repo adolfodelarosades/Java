@@ -223,8 +223,6 @@ $ umake ide spring-tools-suite
 
 <img src="images/3-16.png">
 
-
-
 # 04 Estructura de una aplicación empresarial y patrones de diseño 12:55
 
 [PDF 1-4_Estructura_y_patrones.pdf](pdfs/1-4_Estructura_y_patrones.pdf)
@@ -234,6 +232,30 @@ $ umake ide spring-tools-suite
 No existe.
 
 ## Transcripción
+
+<img src="images/4-01.png">
+
+<img src="images/4-02.png">
+
+<img src="images/4-03.png">
+
+<img src="images/4-04.png">
+
+<img src="images/4-05.png">
+
+<img src="images/4-06.png">
+
+<img src="images/4-07.png">
+
+<img src="images/4-08.png">
+
+<img src="images/4-09.png">
+
+<img src="images/4-10.png">
+
+<img src="images/4-11.png">
+
+<img src="images/4-12.png">
 
 # 05 Inversión de control e inyección de dependencias 15:09 
 
