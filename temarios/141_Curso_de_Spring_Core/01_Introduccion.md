@@ -328,6 +328,36 @@ No existe.
 
 ## Transcripción
 
+<img src="images/5-01.png">
+
+<img src="images/5-02.png">
+
+<img src="images/5-03.png">
+
+<img src="images/5-04.png">
+
+<img src="images/5-05.png">
+
+<img src="images/5-06.png">
+
+<img src="images/5-07.png">
+
+<img src="images/5-08.png">
+
+<img src="images/5-09.png">
+
+<img src="images/5-10.png">
+
+<img src="images/5-11.png">
+
+<img src="images/5-12.png">
+
+<img src="images/5-13.png">
+
+<img src="images/5-14.png">
+
+<img src="images/5-15.png">
+
 # Contenido adicional  5
 
 * [PDF 1-1_Presentacion_del_curso.pdf](pdfs/1-1_Presentacion_del_curso.pdf)
