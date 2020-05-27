@@ -73,9 +73,122 @@ Es todo un ecosistema de clases que nos van a permitir construir ese __*Contened
 
 <img src="images/6-05.png">
 
+El contenedor lo que va a gestionar son *Beans*, un *Bean* no es más que un *objeto* gestionado por el contenedor de Inversión de Control, y que defineremos a partir de una serie de Metadatos, es decir es un como un objeto empoderado.
+
 <img src="images/6-06.png">
 
+Comenzaremos con XML.
+
 <img src="images/6-07.png">
+
+En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura parecida a esta:
+
+* Inicializaremos el contexto.
+* Utilizaremos los beans.
+* Cerraremos el contexto.
+
+### Pasos para crear primer ejemplo
+
+* Crear un nuevo proyecto Maven.
+   
+   <img src="images/6-08.png">
+   
+* No seleccionamos ningún arquetipo. Un arquetipo es un esqueleto de proyecto ya definido. 
+
+   <img src="images/6-09.png">
+
+* Maven se basa en la creación de artefactos y los artefactos se basan en un Group Id y un Artifact Id.
+
+   <img src="images/6-10.png">
+
+* Se crea la estructura de nuestro proyecto Maven
+
+   <img src="images/6-11.png">
+
+   Maven arrastra de cierta manera el uso de Java 5.
+
+* Cambiamos a Java 8 pulsando en el proyecto con el botón derecho.
+
+   <img src="images/6-12.png">
+
+   <img src="images/6-13.png">
+   
+   <img src="images/6-14.png">
+   
+* Como proyecto Maven se nos genero el archivo `pom.xml` con el siguiente contenido: 
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.openwebinars</groupId>
+  <artifactId>141-01-PrimerEjemplo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>141-01-PrimerEjemplo</name>
+  <description>Primer ejemplo de uso de Spring</description>
+</project>    
+```
+
+* Debemos añadir la dependencias de `Spring Context` la podemos obtener de [mvnrepository](https://mvnrepository.com/)
+
+   <img src="images/6-15.png">
+   
+   <img src="images/6-16.png">
+   
+   <img src="images/6-17.png">
+
+   Tenemos que incluir:
+   
+   ```js
+   <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+   <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.2.6.RELEASE</version>
+   </dependency>
+   ```
+   
+* Por lo que el archivo `pom.xml` quedara así:
+
+```js
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.openwebinars</groupId>
+	<artifactId>141-01-PrimerEjemplo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>141-01-PrimerEjemplo</name>
+	<description>Primer ejemplo de uso de Spring</description>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.2.6.RELEASE</version>
+		</dependency>
+
+	</dependencies>
+</project>
+```
+
+   Es importante saber que inmediatamente cuando se inserta una nueva dependencia en `pom.xml` y se salva el archivo se descargan automaticamente todos los `jars` necesarios dentro de la carpeta `Maven Dependencies` y reconstruye el proyecto.
+   
+   <img src="images/6-18.png">
+
+* Otra parte importante de la estructura creada es que existe una carpeta `src/main/java` donde colocaremos los archivos java y la carpeta `src/main/resources` donde colocaremos nuestross recursos como archivos `html`, `css`, `js`, `properties`, etc.
+
+* Dentro de `src/main/java` creamos un nuevo paquete llamado `com.openwebinars.spring`
+
+   <img src="images/6-19.png">
+   
+   <img src="images/6-20.png">
+
+* Dentro del nuevo paquete creamos la clase llamada `App` con un `main`.
+
+   <img src="images/6-21.png">
+   
+   <img src="images/6-22.png">
+   
 
 # 07 Mi primer Bean 6:49 
 
