@@ -4,6 +4,8 @@ Mediante este taller serás capaz de conocer las similitudes y diferencias entre
 
 **Duración:** 1:27:25
 
+[PDF Manejo_de_colecciones_en_Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/104_Manejo_de_colecciones_en_Java/Manejo_de_colecciones_en_Java.pdf)
+
 ### Con este taller aprenderás
 
 * Tipos de colecciones en Java
@@ -13,5 +15,4 @@ Mediante este taller serás capaz de conocer las similitudes y diferencias entre
 * Colecciones y API Stream
 * Librerías de colecciones disponibles en el mercado
 
-[PDF Manejo_de_colecciones_en_Java](pdfs/Manejo_de_colecciones_en_Java.pdf)
 
