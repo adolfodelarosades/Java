@@ -73,6 +73,69 @@ https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Fr
 
 <img src="images/2-10.png">
 
+[Spring Projects](https://spring.io/projects)
+
+### Spring Framework
+
+Spring Framework proporciona un modelo integral de programación y configuración para aplicaciones empresariales modernas basadas en Java, en cualquier tipo de plataforma de implementación.
+
+Un elemento clave de Spring es el soporte de infraestructura a nivel de aplicación: Spring se enfoca en la "plomería" de aplicaciones empresariales para que los equipos puedan enfocarse en la lógica de negocios a nivel de aplicación, sin vínculos innecesarios con entornos de implementación específicos.
+
+#### Caracteristicas
+
+* [Core technologies](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html): dependency injection, events, resources, i18n, validation, data binding, type conversion, SpEL, AOP.
+* [Testing](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html): mock objects, TestContext framework, Spring MVC Test, WebTestClient.
+* [Data Access](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html): transactions, DAO support, JDBC, ORM, Marshalling XML.
+* [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html) y [Spring WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html) web frameworks.
+* [Integration](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/integration.html): remoting, JMS, JCA, JMX, email, tasks, scheduling, cache.
+* [Languages](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/languages.html): Kotlin, Groovy, dynamic languages.
+
+### Spring Boot
+
+Spring Boot facilita la creación de aplicaciones independientes basadas en Spring de grado de producción que puede "simplemente ejecutar".
+
+Tomamos una visión obstinada de la plataforma Spring y las bibliotecas de terceros para que pueda comenzar con un mínimo de alboroto. La mayoría de las aplicaciones Spring Boot necesitan una configuración mínima de Spring.
+
+#### Caracteristicas
+
+* Crear aplicaciones independientes de Spring
+* Incrusta Tomcat, Jetty o Undertow directamente (no es necesario implementar archivos WAR)
+* Proporcione dependencias "iniciales" obstinadas para simplificar su configuración de compilación
+* Configura automáticamente las bibliotecas de Spring y de terceros siempre que sea posible
+* Proporciona funciones listas para producción, como métricas, comprobaciones de estado y configuración externa.
+* Absolutamente ninguna generación de código y ningún requisito para la configuración XML
+
+### Spring Data
+
+La misión de Spring Data es proporcionar un modelo de programación familiar y consistente basado en Spring para el acceso a los datos, al mismo tiempo que conserva los rasgos especiales del almacén de datos subyacente.
+
+Facilita el uso de tecnologías de acceso a datos, bases de datos relacionales y no relacionales, marcos de reducción de mapas y servicios de datos basados en la nube. Este es un proyecto general que contiene muchos subproyectos que son específicos de una base de datos determinada. Los proyectos se desarrollan trabajando en conjunto con muchas de las compañías y desarrolladores que están detrás de estas emocionantes tecnologías.
+
+#### Caracteristicas
+
+* Potente repositorio y abstracciones personalizadas de mapeo de objetos
+* Consulta dinámica derivada de nombres de métodos de repositorio
+* Implementación de clases base de dominio que proporcionan propiedades básicas
+* Soporte para auditorías transparentes (creado, modificado por última vez)
+* Posibilidad de integrar código de repositorio personalizado
+* Fácil integración de Spring a través de JavaConfig y espacios de nombres XML personalizados
+* Integración avanzada con controladores Spring MVC
+* Soporte experimental para la persistencia entre tiendas
+
+### Spring Security 
+
+Spring Security es un marco de autenticación y control de acceso potente y altamente personalizable. Es el estándar de facto para asegurar aplicaciones basadas en Spring.
+
+Spring Security es un marco que se centra en proporcionar autenticación y autorización a las aplicaciones Java. Al igual que todos los proyectos de Spring, el verdadero poder de Spring Security se encuentra en la facilidad con que se puede extender para cumplir con los requisitos personalizados.
+
+#### Caracteristicas
+
+* Soporte completo y extensible para autenticación y autorización
+* Protección contra ataques como session fixation, clickjacking, cross site request forgery, etc
+* Integración API Servlet
+* Integración opcional con Spring Web MVC
+* Mucho más...
+
 <img src="images/2-11.png">
 
 <img src="images/2-12.png">
