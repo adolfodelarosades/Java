@@ -189,7 +189,62 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
    
    <img src="images/6-22.png">
    
+* Una vez que tenemos creada nuestra clase de aplicación, como hemos visto antes el algoritmp básico es 
 
+   * Levantar el contexto (*Usaremos la clase `ClassPathXmlApplicationContext`*
+   * Utilizar los beans
+   * Cerrar el contexto (La interfaz `ApplicationContext` no tiene método `close` pero si las clases que lo implementan )
+   * Definir dentro del Classpath un fichero descriptor XML donde definamos nuestros beans (`src/main/resources`).
+   
+   Nuestro código queda asi:
+   
+   ```java
+   package com.openwebinars.spring;
+
+   import org.springframework.context.ApplicationContext;
+   import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+   public class App {
+
+	public static void main(String[] args) {
+		
+		//Abrir contexto
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+		
+		
+		//Cerrar contexto
+		((ClassPathXmlApplicationContext) appContext).close();
+
+	}
+
+   }
+   ```
+   
+   Para crear el archivo XML damos:
+   
+   <img src="images/6-23.png">
+   
+   <img src="images/6-24.png">
+   
+   <img src="images/6-25.png">
+   
+   No seleccionamos ninguno de ellos por que no usaremos en este ejemplo ningún bean
+   
+   <img src="images/6-26.png">
+   
+   Ya tenemos nuestro fichero XML.
+   
+   **NOTA:** La importación rápida se hace con Ctrl+Mayus+O
+
+* Ejecutamos la aplicación, aunque no pasara gran cosa:
+
+   <img src="images/6-27.png">
+   
+   Simplemente se levanta el contenedor y se cierra.
+   
+   
+   **ESTE SERA EL ESQUEMA QUE UTILIZAREMOS EN LOS PRÓXIMOS EJEMPLOS**
+   
 # 07 Mi primer Bean 6:49 
 
 [PDF 2-2_Mi_primer_bean.pdf](pdfs/2-2_Mi_primer_bean.pdf)
