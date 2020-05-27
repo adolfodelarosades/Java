@@ -17,6 +17,22 @@ No existe.
 
 ## Transcripción
 
+<img src="images/1-01.png">
+
+<img src="images/1-02.png">
+
+<img src="images/1-03.png">
+
+<img src="images/1-04.png">
+
+<img src="images/1-05.png">
+
+<img src="images/1-06.png">
+
+<img src="images/1-07.png">
+
+<img src="images/1-08.png">
+
 # 02 Introducción a Spring 14:25
 
 [PDF 1-2_Introduccion_a_Spring.pdf](pdfs/1-2_Introduccion_a_Spring.pdf)
