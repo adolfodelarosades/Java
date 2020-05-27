@@ -191,6 +191,40 @@ $ umake ide spring-tools-suite
 
 ## Transcripción
 
+<img src="images/3-01.png">
+
+<img src="images/3-02.png">
+
+<img src="images/3-03.png">
+
+<img src="images/3-04.png">
+
+<img src="images/3-05.png">
+
+<img src="images/3-06.png">
+
+<img src="images/3-07.png">
+
+<img src="images/3-08.png">
+
+<img src="images/3-09.png">
+
+<img src="images/3-10.png">
+
+<img src="images/3-11.png">
+
+<img src="images/3-12.png">
+
+<img src="images/3-13.png">
+
+<img src="images/3-14.png">
+
+<img src="images/3-15.png">
+
+<img src="images/3-16.png">
+
+
+
 # 04 Estructura de una aplicación empresarial y patrones de diseño 12:55
 
 [PDF 1-4_Estructura_y_patrones.pdf](pdfs/1-4_Estructura_y_patrones.pdf)
