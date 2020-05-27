@@ -12,4 +12,4 @@ Muchos desarrolladores Java se han quedado anquilosados en la versión 8 de este
 * Nuevas funcionalidades
 * Otras novedades
 
-[PDF Java_9_Nueva_filosofia_y_funcionalidades](pdfs/Java_9_Nueva_filosofia_y_funcionalidades.pdf)
+[PDF Java_9_Nueva_filosofia_y_funcionalidades](https://github.com/adolfodelarosades/Java/blob/master/temarios/106_Java-9_Nueva_filosofia_y_funcionalidades/Java_9_Nueva_filosofia_y_funcionalidades.pdf)
