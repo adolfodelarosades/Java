@@ -69,7 +69,7 @@ Diagrama de clases que vamos poder tener a nuestra disposición.
 * `WebApplicationContext`: Interfaz para aplicaciones Web.
 * `XMLBeanFactory` Esta no la usaremos
 
-Es todo un ecosistema de clases que nos van a permitir construir ese ***Contenedor de Inversión de Control***.
+Es todo un ecosistema de clases que nos van a permitir construir ese __*Contenedor de Inversión de Control*__.
 
 <img src="images/6-05.png">
 
