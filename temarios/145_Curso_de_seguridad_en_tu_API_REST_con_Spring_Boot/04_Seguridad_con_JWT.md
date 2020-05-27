@@ -203,3 +203,13 @@ No existe.
 ## Transcripción
 
 # Contenido adicional 9
+
+* [PDF JWT_en_qué_consiste.pdf](pdfs/14_JWT_en_qué_consiste.pdf)
+* [PDF JWT_Liberías_necesarias.pdf](pdfs/15_JWT_Liberías_necesarias.pdf)
+* [PDF JWT_seguridad.pdf](pdfs/16_JWT_seguridad.pdf)
+* [PDF JWT_AuthenticationEntryPoint.pdf](pdfs/17_JWT_AuthenticationEntryPoint.pdf)
+* [PDF JWT_Users.pdf](pdfs/18_JWT_Users.pdf)
+* [PDF JWT_manejo_del_token.pdf](pdfs/19_JWT_manejo_del_token.pdf)
+* [PDF JWT_AuthorizationFilter.pdf](pdfs/20_JWT_AuthorizationFilter.pdf)
+* [PDF JWT_Modelo_de_login_y_respuesta.pdf](pdfs/21_JWT_Modelo_de_login_y_respuesta.pdf)
+* [PDF JWT_Controladores.pdf](pdfs/22_JWT_Controladores.pdf)
