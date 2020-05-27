@@ -18,7 +18,19 @@
 
 ## Resumen Profesor
 
-No existe.
+La documentación oficial sobre OAuth 2.0 la podemos encontrar en https://oauth.net/2/.
+
+En ella, se indican algunos RFCs útiles sobre dicho framework:
+
+* RFC 6749: OAuth 2.0 Framework https://tools.ietf.org/html/rfc6749
+* RFC 6750: Bearer Tokens https://oauth.net/2/bearer-tokens/
+* RFC 6819: Threat Model and Security Considerations https://oauth.net/2/security-considerations/
+
+Sobre Tokens y su gestión
+
+* RFC 7662: Token Introspection https://oauth.net/2/token-introspection/
+* RFC 7009: Token revocation https://oauth.net/2/token-revocation/
+* RFC 7519: Json Web token https://oauth.net/2/jwt/
 
 ## Transcripción
 
@@ -58,7 +70,16 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+La dependencia necesaria para implementar nuestro servidor de autenticación es la siguiente:
+
+```html
+<dependency>
+    <groupId>org.springframework.security.oauth.boot</groupId>    <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+    <version>2.X.Y.RELEASE</version>
+</dependency>
+```
+
+donde `2.X.Y.RELEASE` es la versión de Spring Boot.
 
 ## Transcripción
 
@@ -98,7 +119,81 @@ No existe.
 
 ## Resumen Profesor
 
-No existe.
+En el siguiente enlace podemos encontrar el DDL necesario para generar las tablas para persistir la información asociada a OAuth2.0: clientes, tokens, …
+
+https://github.com/spring-projects/spring-security-oauth/blob/master/spring-security-oauth2/src/test/resources/schema.sql
+
+```sql
+-- used in tests that use HSQL
+create table oauth_client_details (
+  client_id VARCHAR(256) PRIMARY KEY,
+  resource_ids VARCHAR(256),
+  client_secret VARCHAR(256),
+  scope VARCHAR(256),
+  authorized_grant_types VARCHAR(256),
+  web_server_redirect_uri VARCHAR(256),
+  authorities VARCHAR(256),
+  access_token_validity INTEGER,
+  refresh_token_validity INTEGER,
+  additional_information VARCHAR(4096),
+  autoapprove VARCHAR(256)
+);
+
+create table oauth_client_token (
+  token_id VARCHAR(256),
+  token LONGVARBINARY,
+  authentication_id VARCHAR(256) PRIMARY KEY,
+  user_name VARCHAR(256),
+  client_id VARCHAR(256)
+);
+
+create table oauth_access_token (
+  token_id VARCHAR(256),
+  token LONGVARBINARY,
+  authentication_id VARCHAR(256) PRIMARY KEY,
+  user_name VARCHAR(256),
+  client_id VARCHAR(256),
+  authentication LONGVARBINARY,
+  refresh_token VARCHAR(256)
+);
+
+create table oauth_refresh_token (
+  token_id VARCHAR(256),
+  token LONGVARBINARY,
+  authentication LONGVARBINARY
+);
+
+create table oauth_code (
+  code VARCHAR(256), authentication LONGVARBINARY
+);
+
+create table oauth_approvals (
+    userId VARCHAR(256),
+    clientId VARCHAR(256),
+    scope VARCHAR(256),
+    status VARCHAR(10),
+    expiresAt TIMESTAMP,
+    lastModifiedAt TIMESTAMP
+);
+
+
+-- customized oauth_client_details table
+create table ClientDetails (
+  appId VARCHAR(256) PRIMARY KEY,
+  resourceIds VARCHAR(256),
+  appSecret VARCHAR(256),
+  scope VARCHAR(256),
+  grantTypes VARCHAR(256),
+  redirectUrl VARCHAR(256),
+  authorities VARCHAR(256),
+  access_token_validity INTEGER,
+  refresh_token_validity INTEGER,
+  additionalInformation VARCHAR(4096),
+  autoApproveScopes VARCHAR(256)
+);
+```
+
+En esta web se indica que se ha probado con HSQL, y también funciona en H2.
 
 ## Transcripción
 
