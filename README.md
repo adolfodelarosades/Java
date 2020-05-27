@@ -6,8 +6,8 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 * [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero.md)
 * [102 Java8 para programadores Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/102_Java8_para_programadores_Java.md)
-* [104 Manejo de colecciones en Java]()
-* [106 Java 9: Nueva filosofía y funcionalidades]()
+* [104 Manejo de colecciones en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/104_Manejo_de_colecciones_en_Java.md)
+* [106 Java 9: Nueva filosofía y funcionalidades](https://github.com/adolfodelarosades/Java/blob/master/temarios/106_Java-9_Nueva_filosofia_y_funcionalidades.md)
 * [110 Desarrollo Web con Java EE](https://github.com/adolfodelarosades/Java/blob/master/temarios/110_Desarrollo_Web_con_Java_EE.md)
 * [120 Curso JavaServer Faces](https://github.com/adolfodelarosades/Java/blob/master/temarios/120_Curso_JavaServer_Faces.md)
 * [130 Hibernate y JPA](https://github.com/adolfodelarosades/Java/blob/master/temarios/130_Hibernate_y_JPA.md)
