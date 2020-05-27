@@ -2,21 +2,15 @@
 
 Aprende con el curso de Spring Core 5 a utilizar el motor de Spring para crear las mejores aplicaciones empresariales.
  
-4 horas y 7 minutos
+**Duración:** 4:07 
 
-#### Profesor
-
-Luis Miguel López EXPERTO EN JAVA
-
-Ingeniero Técnico Informático. Formador en bases de datos, aplicaciones empresariales y desarrollo de aplicaciones móviles, web y multiplataforma.
-
-#### Requisitos del Curso
+### Requisitos del Curso
 
 Para empezar este curso de Spring Core 5, recomendamos tener conocimientos sólidos en Java, si lo necesitas, puedes realizar nuestro cursos de Java desde cero y Java para desarrolladores,
 
 Conocer conceptos de metodología de programación orientada a objetos, tales como el manejo de clases, interfaces, herencia o polimorfismo. Además es recomendable tener conocimientos de Java EE 7, Maven y también sobre patrones de diseño.
 
-## Temario
+## Contenido
 
 ### 1. [Introducción](141_Curso_de_Spring_Core/01_Introduccion.md)  60m
 
