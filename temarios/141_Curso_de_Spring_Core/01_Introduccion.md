@@ -352,16 +352,31 @@ El concepto de Inversión de Contro (IoC) lo acuño Martin Fowler. La idea es de
 
 Una librería es un conjuto de algoritmos, de utilidades que ayudan a realizar algunas operaciones por ejemplo una librería matématica que ayudan a realizar todo tipo de calculos matématicos. Sin embargo un Framework ademas de proporcionar un conjunto de algoritmos y de utilidades suele proporcionar **una metodología de trabajo, una forma de trabajar y una estructura en donde nosotros vamos a encajar nuestro código** 
 
-
 <img src="images/5-06.png">
+
+**Nosostros perdemos el control, lo delegamos en un Framework y es ese Framework el que va a llevar, va a orquestar los pasos que se tienen que seguir**. Nosotros solo incrustamos ciertos bloques de código que el Framework ejecutara en cierto momento.
 
 <img src="images/5-07.png">
 
+Un ejemplo podría ser pulsar un botón, *qué sucede cuando se pulsa el botón*, nosostros decimos que sucede el botón pero no controlamos imperativamente el momento en que va a suceder. 
+
+**La Inyección de Dependencias es una forma de Inversión de Control** 
+
 <img src="images/5-08.png">
+
+En un *Modelo tradicional* si un objeto necesita de otros dos o *n* objetos el mismo pude invocar la construcción de los mismos.
+
+En un *Modelo de Inversión de Control con Inyección de Dependencias* lo único que hariamos es declar en nuestro objeto aquellos objetos que van a ser necesarios, es decir nuestras dependencias, de forma que un componente exterior se encargara de proporcionarnos las referencias a los mismos, es decir que nos proporcinara esas dependencias.
 
 <img src="images/5-09.png">
 
+En este ejemplo podemos tener la posibilidad de listar una serie de películas siempre y cuando allan sido dirigidas por un director en partícular. El *meoyo* se encuentra en el objeto `finder`. Como podemos conectra buestra clase `MovieLister` con el objeto `finder` en particular. 
+
+Sería maravilloso que la manera de listar las películas fuera independiente de como han sido almacenadas, de forma que nuestro método hiciera referencia a `finder`, que lo único que tiene es un método llamado `findAll()` definido en una interfaz pero que no dijera nada más sobre este objeto ni donde estan almacenadas.  
+
 <img src="images/5-10.png">
+
+Esto lo hacemos creando una Interfaz 
 
 <img src="images/5-11.png">
 
