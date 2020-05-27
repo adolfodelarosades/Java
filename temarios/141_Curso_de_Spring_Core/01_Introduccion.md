@@ -73,9 +73,9 @@ https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Fr
 
 <img src="images/2-10.png">
 
-[Spring Projects](https://spring.io/projects)
+### [Spring Projects](https://spring.io/projects)
 
-### Spring Framework
+### [Spring Framework](https://spring.io/projects/spring-framework)
 
 Spring Framework proporciona un modelo integral de programación y configuración para aplicaciones empresariales modernas basadas en Java, en cualquier tipo de plataforma de implementación.
 
@@ -90,7 +90,7 @@ Un elemento clave de Spring es el soporte de infraestructura a nivel de aplicaci
 * [Integration](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/integration.html): remoting, JMS, JCA, JMX, email, tasks, scheduling, cache.
 * [Languages](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/languages.html): Kotlin, Groovy, dynamic languages.
 
-### Spring Boot
+### [Spring Boot](https://spring.io/projects/spring-boot)
 
 Spring Boot facilita la creación de aplicaciones independientes basadas en Spring de grado de producción que puede "simplemente ejecutar".
 
@@ -105,7 +105,7 @@ Tomamos una visión obstinada de la plataforma Spring y las bibliotecas de terce
 * Proporciona funciones listas para producción, como métricas, comprobaciones de estado y configuración externa.
 * Absolutamente ninguna generación de código y ningún requisito para la configuración XML
 
-### Spring Data
+### [Spring Data](https://spring.io/projects/spring-data)
 
 La misión de Spring Data es proporcionar un modelo de programación familiar y consistente basado en Spring para el acceso a los datos, al mismo tiempo que conserva los rasgos especiales del almacén de datos subyacente.
 
@@ -122,7 +122,7 @@ Facilita el uso de tecnologías de acceso a datos, bases de datos relacionales y
 * Integración avanzada con controladores Spring MVC
 * Soporte experimental para la persistencia entre tiendas
 
-### Spring Security 
+### [Spring Security](https://spring.io/projects/spring-security) 
 
 Spring Security es un marco de autenticación y control de acceso potente y altamente personalizable. Es el estándar de facto para asegurar aplicaciones basadas en Spring.
 
@@ -138,9 +138,13 @@ Spring Security es un marco que se centra en proporcionar autenticación y autor
 
 <img src="images/2-11.png">
 
+[Framework Modules](https://docs.spring.io/spring/docs/5.0.0.RC2/spring-framework-reference/overview.html#overview-modules)
+
 <img src="images/2-12.png">
 
 <img src="images/2-13.png">
+
+Actualmente 5.2.6 GA 27/05/2020
 
 <img src="images/2-14.png">
 
