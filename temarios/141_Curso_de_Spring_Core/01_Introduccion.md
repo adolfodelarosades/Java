@@ -241,9 +241,70 @@ No existe.
 
 <img src="images/4-04.png">
 
+Algunos autores dividen una aplicación empresarial en varios bloques:
+
+* Personas
+   * Propietarios del sistema
+   * Usuarios
+   * Diseñadores
+   * Desarrolladores
+   * ...
+* Datos: Materia prima usada por el sistema de información, permiten
+   * Crear información útil
+   * Toma de desiciones
+   * etc.
+* Procesos: Todas aquellas actividades que se llevan dentro de la empresa 
+   * Procesan datos
+   * Generan información
+* Redes: Aquellos canales que vamos a utilizar y diferenciar a la hora de desplegar y utilizar la aplicación
+   * Centros de produción
+   * Oficinas
+   * etc.
+* Tecnología que soporta nuestro sistema de información
+   * Hardware
+   * Software
+   
 <img src="images/4-05.png">
 
+A nivel de capas una aplicación empresarial esta formada por:
+
+* Infraestructura del hardware
+   * En que servidor va a recidir nuestra aplicación
+   * Que tipo de conectividad tenemos para acceder a el
+   * Plataforma que hay sobre ese hardware
+* Infraestructura de la plataforma
+   * Sistema operativo, versión de maquinas virtuales
+* Datos
+   * Relacional o no relacional
+* Aplicación
+* Interfaz de usuario
+
+**Spring trabaja sobre todo el nivel de aplicación y sus fronteras**
+
 <img src="images/4-06.png">
+
+Aquí podemos verlo desglosado en aquellos componentes que seran habituales en Spring.
+
+### Datos
+
+Para acceder a la capa de Datos existen varias formas de hacerlo, existen dos grandes tipos:
+
+* Relacionales
+* NoSQL
+
+En la frontera ente la capa de *Datos* y *Aplicación* vamos a tener unas clases especiales lladados ***Repositorios*** que nos permiten acceder a los datos desde la *Aplicación*.
+
+### Aplicación
+
+Dentro de la aplicación podemos dividirlos en tres grandes tipos:
+
+* **Entidades** modelan el dominio de nuestra aplicación.
+* **Servicios** tienen la lógica de negocio de nuestra aplicación
+* **Controladores** son los que reciben las peticiones y son capaces de despacharlas delegando el trabajo en los servicios que sean necesarios.
+
+### Interfaz de Usuario
+
+Los *sistemas de plantillas* conectan la *Aplicación* y la *Interfaz de Usuario*.
 
 <img src="images/4-07.png">
 
