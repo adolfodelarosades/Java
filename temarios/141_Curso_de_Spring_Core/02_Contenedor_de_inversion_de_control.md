@@ -44,9 +44,32 @@ En esta lección hemos visto el uso de ambas clases. Durante el resto de leccion
 
 <img src="images/6-02.png">
 
+Tenemos el modulo del *Core Container* el curso esta basado en este modulo sobre todo en la parte de `Context`.
+
 <img src="images/6-03.png">
 
+El Contenedor de Inversión de Control de Spring se basa en el uso de dos paquetes:
+
+* `org.springframework.beans`
+* `org.springframework.context`
+
+Los elementos más básicos que utilizaremos seran:
+
+* `BeanFactory` lo más elemental para poder manejar cualquier bean - objeto.
+* `ApplicationContext` (la que usaremos) es una interfaz superset de `BeanFactory` que añade más funcionalidades.
+
 <img src="images/6-04.png">
+
+Diagrama de clases que vamos poder tener a nuestra disposición.
+
+* `BeanFactory` Partimos de la raíz el más sencillo de todos.
+* `ApplicationContext`: Trabajaremos con esta Interfaz y tiene dos clases principales que la implementan, aun que existen otras.
+* `ClassPathXMLApplicatioContext`: Se encargara de cargar el contexto desde un archivo XML que esta ubicado dentro del classpath
+* `FileSystemXMLApplicationContext`: Busca la configuración en el sistema de ficheros.
+* `WebApplicationContext`: Interfaz para aplicaciones Web.
+* `XMLBeanFactory` Esta no la usaremos
+
+Es todo un ecosistema de clases que nos van a permitir construir ese ***Contenedor de Inversión de Control**.
 
 <img src="images/6-05.png">
 
