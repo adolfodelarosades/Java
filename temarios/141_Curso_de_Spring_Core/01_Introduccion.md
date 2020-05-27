@@ -364,21 +364,21 @@ Un ejemplo podría ser pulsar un botón, *qué sucede cuando se pulsa el botón*
 
 <img src="images/5-08.png">
 
+<img src="images/5-09.png">
+
 En un *Modelo tradicional* si un objeto necesita de otros dos o *n* objetos el mismo pude invocar la construcción de los mismos.
 
 En un *Modelo de Inversión de Control con Inyección de Dependencias* lo único que hariamos es declar en nuestro objeto aquellos objetos que van a ser necesarios, es decir nuestras dependencias, de forma que un componente exterior se encargara de proporcionarnos las referencias a los mismos, es decir que nos proporcinara esas dependencias.
 
-<img src="images/5-09.png">
+<img src="images/5-10.png">
 
 En este ejemplo podemos tener la posibilidad de listar una serie de películas siempre y cuando allan sido dirigidas por un director en partícular. El *meoyo* se encuentra en el objeto `finder`. Como podemos conectra buestra clase `MovieLister` con el objeto `finder` en particular. 
 
 Sería maravilloso que la manera de listar las películas fuera independiente de como han sido almacenadas, de forma que nuestro método hiciera referencia a `finder`, que lo único que tiene es un método llamado `findAll()` definido en una interfaz pero que no dijera nada más sobre este objeto ni donde estan almacenadas.  
 
-<img src="images/5-10.png">
+<img src="images/5-11.png">
 
 Esto lo hacemos creando una Interfaz 
-
-<img src="images/5-11.png">
 
 <img src="images/5-12.png">
 
