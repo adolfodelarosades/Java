@@ -378,15 +378,31 @@ Sería maravilloso que la manera de listar las películas fuera independiente de
 
 <img src="images/5-11.png">
 
-Esto lo hacemos creando una Interfaz 
+Esto lo hacemos creando una Interfaz donde nos comprometemos a tener el método `findAll()`. De manera que la referencia en nuestra clase `MovieLister` es de tipo `finder`.
+
+¿Como podriamos después nosotros tener un objeto en partícular? Lo podemos crear en el constructor de `MovieLister` que lo lee de un archivo `cvs`. Si en un futuro quisieramos usar una BD como MySQL o en un fichero XML. Por un lado tendríamos que crear una clase alternativa a `CSVMovieFinder` por ejemplo `BDMovieFinder` o `XMLMovieFinder` y como segundo paso tendrámos que modificar la clase `MovieLister` para cambiar este constructor.
+
+Esto hace que se genere un gran acoplamiento entre la clase `MovieLister` y `finder` en particular que vamos a utilizar.
 
 <img src="images/5-12.png">
 
+como podemos comprobar en este diagrama de clases aun que `MovieLister` ocupa la Interfaz `MovieFinder` en definitiva tiene que crear esa clase.  
+
 <img src="images/5-13.png">
+
+Sin embargo si pasamos a un esquema de Inyección de dependencias podriamos tener otro objeto el cual podríamos llamar `Ensamblador` o `Contenedor`, ese `Ensamblador` es el que se encargaría de crear el objeto que implemente el interfaz `MovieFinder` y de proporcionar la referencia de ese objeto a la clase `MovieLister`, de manera que nosotros solo  hemos dicho que tenemos una dependencia con un objeto de tipo `MovieFinder` pero que no dice nada de como se va a crear. De esta manera se nos estará inyectando esa dependencia que nosotros queremos. 
 
 <img src="images/5-14.png">
 
+De esa forma nuestra clase `MovieLister` se quedaría totalmente desacoplada de lo que sería la implementación final del acceso a datos. El código muestra una posible implementación de la clase `CSVMovieFinder` que implementaria esa Interfaz y la dependencia `MovieLister` la proporcionariamos a través de Setters del método `setFinder()`.
+
 <img src="images/5-15.png">
+
+Como se orquesta esto a través de este `Ensamblador`, Spring lo hace de varias formas una es a traves de un fichero XML que permite indicar que objetos existen, esos objetos se llamarán *beans* y como se pueden referenciar los unos con los otros.
+
+En el código podemos comprobar que el objeto `MovieLister` dice que tiene una propiedad llamada `finder` y hace referencia a otro objeto (`MovieFinder`) que es clase tipo `CSVMovieFinder`.
+
+Si el día de mañana quisieramos implementar la clase `SQLMovieFinder` solamente tedríamos que cambiar este fichero XML indicando que la clase es de otro tipo, darle las propiedades adecuadas y de esa manera nuestro objeto desacoplado seguira teniendo sus dependencias satisfechas y hemos podido cambiar nuestro código de una manera bastante menos costosa y elegante. De esta forma hemos podido hacer la Inyección de Dependencia a un nivel teorico. 
 
 # Contenido adicional  5
 
