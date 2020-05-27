@@ -53,6 +53,34 @@ https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Fr
 
 ### Transcripción
 
+<img src="images/2-01.png">
+
+<img src="images/2-02.png">
+
+<img src="images/2-03.png">
+
+<img src="images/2-04.png">
+
+<img src="images/2-05.png">
+
+<img src="images/2-06.png">
+
+<img src="images/2-07.png">
+
+<img src="images/2-08.png">
+
+<img src="images/2-09.png">
+
+<img src="images/2-10.png">
+
+<img src="images/2-11.png">
+
+<img src="images/2-12.png">
+
+<img src="images/2-13.png">
+
+<img src="images/2-14.png">
+
 # 03 Instalación del entorno de trabajo 13:55
 
 [PDF 1-3_Instalacion_del_entorno.pdf](pdfs/1-3_Instalacion_del_entorno.pdf)
