@@ -334,9 +334,24 @@ No existe.
 
 <img src="images/5-03.png">
 
+*Desacoplar objetos* quiere decir que dos objetos puedan colaborar entre si, pero que la interferencia que uno haga sobre el otro sea la mínima, de forma que si en un futuro tenemos que refactorizar, es decir cambiar alguno de esos objetos en su funcionamiento, **NO TENGAMOS QUE CAMBIAR AMBOS**, solo refactorizar uno.
+
+Por ejemplo un sistema donde los datos no cambian, pero la interfaz de usuario, si que lo ha hecho.
+
+**La Inversion de Control es un pricipio que tiene como objetivo que los objetos esten poco acoplados**
+
 <img src="images/5-04.png">
 
+La Inversion de Control se va a regir bajo este principio.
+
 <img src="images/5-05.png">
+
+El concepto de Inversión de Contro (IoC) lo acuño Martin Fowler. La idea es dejar que sea otro el que controle el flujo del programa, por ejemplo un Framework.
+
+### Diferencia entre Librería y Framework
+
+Una librería es un conjuto de algoritmos, de utilidades que ayudan a realizar algunas operaciones por ejemplo una librería matématica que ayudan a realizar todo tipo de calculos matématicos. Sin embargo un Framework ademas de proporcionar un conjunto de algoritmos y de utilidades suele proporcionar **una metodología de trabajo, una forma de trabajar y una estructura en donde nosotros vamos a encajar nuestro código** 
+
 
 <img src="images/5-06.png">
 
