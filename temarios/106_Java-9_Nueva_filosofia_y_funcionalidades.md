@@ -4,6 +4,8 @@ Muchos desarrolladores Java se han quedado anquilosados en la versión 8 de este
 
 **Duración:** 54:57
 
+[PDF Java_9_Nueva_filosofia_y_funcionalidades](https://github.com/adolfodelarosades/Java/blob/master/temarios/106_Java-9_Nueva_filosofia_y_funcionalidades/Java_9_Nueva_filosofia_y_funcionalidades.pdf)
+
 ### Con este taller aprenderás
 
 * Cambio de filosofía en Java
@@ -12,4 +14,3 @@ Muchos desarrolladores Java se han quedado anquilosados en la versión 8 de este
 * Nuevas funcionalidades
 * Otras novedades
 
-[PDF Java_9_Nueva_filosofia_y_funcionalidades](https://github.com/adolfodelarosades/Java/blob/master/temarios/106_Java-9_Nueva_filosofia_y_funcionalidades/Java_9_Nueva_filosofia_y_funcionalidades.pdf)
