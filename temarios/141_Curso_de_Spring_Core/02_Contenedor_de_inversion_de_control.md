@@ -40,6 +40,20 @@ En esta lección hemos visto el uso de ambas clases. Durante el resto de leccion
 
 ## Transcripción
 
+<img src="images/6-01.png">
+
+<img src="images/6-02.png">
+
+<img src="images/6-03.png">
+
+<img src="images/6-04.png">
+
+<img src="images/6-05.png">
+
+<img src="images/6-06.png">
+
+<img src="images/6-07.png">
+
 # 07 Mi primer Bean 6:49 
 
 [PDF 2-2_Mi_primer_bean.pdf](pdfs/2-2_Mi_primer_bean.pdf)
