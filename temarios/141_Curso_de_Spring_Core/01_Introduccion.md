@@ -336,13 +336,13 @@ No existe.
 
 *Desacoplar objetos* quiere decir que dos objetos puedan colaborar entre si, pero que la interferencia que uno haga sobre el otro sea la mínima, de forma que si en un futuro tenemos que refactorizar, es decir cambiar alguno de esos objetos en su funcionamiento, **NO TENGAMOS QUE CAMBIAR AMBOS**, solo refactorizar uno.
 
-Por ejemplo un sistema donde los datos no cambian, pero la interfaz de usuario, si que lo ha hecho.
+En la imagen vemos un ejemplo de un sistema donde los datos no cambian, pero la interfaz de usuario si que lo ha hecho. Nos interesaria que solo tuvieramos que cambiar la parte de la interfaz gráfica y que nuestra lógica de negocio no se viera alterada. Con esto estamos hablando de **DESACOPLAMIENTO**.
 
-**La Inversion de Control es un pricipio que tiene como objetivo que los objetos esten poco acoplados**
+***La Inversion de Control es un pricipio que tiene como objetivo que los objetos esten poco acoplados***
 
 <img src="images/5-04.png">
 
-La Inversion de Control se va a regir bajo este principio.
+La Inversion de Control se rige bajo este principio de Hollywood.
 
 <img src="images/5-05.png">
 
@@ -354,11 +354,13 @@ Una librería es un conjuto de algoritmos, de utilidades que ayudan a realizar a
 
 <img src="images/5-06.png">
 
+Ralph Johnson y Brian Foote.
+
 **Nosostros perdemos el control, lo delegamos en un Framework y es ese Framework el que va a llevar, va a orquestar los pasos que se tienen que seguir**. Nosotros solo incrustamos ciertos bloques de código que el Framework ejecutara en cierto momento.
 
 <img src="images/5-07.png">
 
-Un ejemplo podría ser pulsar un botón, *qué sucede cuando se pulsa el botón*, nosostros decimos que sucede el botón pero no controlamos imperativamente el momento en que va a suceder. 
+Un ejemplo podría ser pulsar un botón, *qué sucede cuando se pulsa el botón*, nosostros decimos que sucede al pulsar el botón pero no controlamos imperativamente el momento en que va a suceder. 
 
 **La Inyección de Dependencias es una forma de Inversión de Control** 
 
@@ -366,43 +368,43 @@ Un ejemplo podría ser pulsar un botón, *qué sucede cuando se pulsa el botón*
 
 <img src="images/5-09.png">
 
-En un *Modelo tradicional* si un objeto necesita de otros dos o *n* objetos el mismo pude invocar la construcción de los mismos.
+En un *Modelo tradicional* si un objeto necesita de otros dos o *n* objetos, el mismo pude invocar la construcción de los mismos.
 
 En un *Modelo de Inversión de Control con Inyección de Dependencias* lo único que hariamos es declar en nuestro objeto aquellos objetos que van a ser necesarios, es decir nuestras dependencias, de forma que un componente exterior se encargara de proporcionarnos las referencias a los mismos, es decir que nos proporcinara esas dependencias.
 
 <img src="images/5-10.png">
 
-En este ejemplo podemos tener la posibilidad de listar una serie de películas siempre y cuando allan sido dirigidas por un director en partícular. El *meoyo* se encuentra en el objeto `finder`. Como podemos conectra buestra clase `MovieLister` con el objeto `finder` en particular. 
+En este ejemplo podemos tener la posibilidad de listar una serie de películas siempre y cuando hayan sido dirigidas por un director en partícular. El *meolloo* se encuentra en el objeto `finder` o como podemos conectar nuestra clase `MovieLister` con el objeto `finder` en particular. 
 
-Sería maravilloso que la manera de listar las películas fuera independiente de como han sido almacenadas, de forma que nuestro método hiciera referencia a `finder`, que lo único que tiene es un método llamado `findAll()` definido en una interfaz pero que no dijera nada más sobre este objeto ni donde estan almacenadas.  
+Sería maravilloso que la manera de listar las películas fuera independiente de como han sido almacenadas, de forma que nuestro método hiciera referencia a `finder`, que lo único que tiene es un método llamado `findAll()`, definido en una interfaz, pero que no dijera nada más sobre este objeto ni donde estan almacenadas.  
 
 <img src="images/5-11.png">
 
 Esto lo hacemos creando una Interfaz donde nos comprometemos a tener el método `findAll()`. De manera que la referencia en nuestra clase `MovieLister` es de tipo `finder`.
 
-¿Como podriamos después nosotros tener un objeto en partícular? Lo podemos crear en el constructor de `MovieLister` que lo lee de un archivo `cvs`. Si en un futuro quisieramos usar una BD como MySQL o en un fichero XML. Por un lado tendríamos que crear una clase alternativa a `CSVMovieFinder` por ejemplo `BDMovieFinder` o `XMLMovieFinder` y como segundo paso tendrámos que modificar la clase `MovieLister` para cambiar este constructor.
+¿Cómo podriamos después nosotros tener un objeto en partícular? Lo podemos crear en el constructor de `MovieLister` que lo lee de un archivo `txt`. Si en un futuro quisieramos usar una BD como MySQL o en un fichero XML. Por un lado tendríamos que crear una clase alternativa a `CSVMovieFinder` por ejemplo `BDMovieFinder` o `XMLMovieFinder` y como segundo paso tendrámos que modificar la clase `MovieLister` para cambiar este constructor.
 
-Esto hace que se genere un gran acoplamiento entre la clase `MovieLister` y `finder` en particular que vamos a utilizar.
+**Esto hace que se genere un gran acoplamiento entre la clase `MovieLister` y `finder` en particular que vamos a utilizar.**
 
 <img src="images/5-12.png">
 
-como podemos comprobar en este diagrama de clases aun que `MovieLister` ocupa la Interfaz `MovieFinder` en definitiva tiene que crear esa clase.  
+Como podemos comprobar en este diagrama de clases, aun que `MovieLister` ocupa la Interfaz `MovieFinder`, en definitiva tiene que crear esa clase.  
 
 <img src="images/5-13.png">
 
-Sin embargo si pasamos a un esquema de Inyección de dependencias podriamos tener otro objeto el cual podríamos llamar `Ensamblador` o `Contenedor`, ese `Ensamblador` es el que se encargaría de crear el objeto que implemente el interfaz `MovieFinder` y de proporcionar la referencia de ese objeto a la clase `MovieLister`, de manera que nosotros solo  hemos dicho que tenemos una dependencia con un objeto de tipo `MovieFinder` pero que no dice nada de como se va a crear. De esta manera se nos estará inyectando esa dependencia que nosotros queremos. 
+Sin embargo si pasamos a un esquema de *Inyección de dependencias* podriamos tener otro objeto, al cual podríamos llamar `Ensamblador` o `Contenedor`. Ese `Ensamblador` es el que se encargaría de crear el objeto que implemente el interfaz `MovieFinder` y de proporcionar la referencia de ese objeto a la clase `MovieLister`, de manera nosotros solo hemos dicho que tenemos una dependencia con un objeto de tipo `MovieFinder`, pero que no dice nada de como se va a crear. De esta manera se nos estará *inyectando* esa dependencia que nosotros queremos. 
 
 <img src="images/5-14.png">
 
-De esa forma nuestra clase `MovieLister` se quedaría totalmente desacoplada de lo que sería la implementación final del acceso a datos. El código muestra una posible implementación de la clase `CSVMovieFinder` que implementaria esa Interfaz y la dependencia `MovieLister` la proporcionariamos a través de Setters del método `setFinder()`.
+De esa forma nuestra clase `MovieLister` se quedaría *totalmente desacoplada* de lo que sería la implementación final del acceso a datos. El código muestra una posible implementación de la clase `CSVMovieFinder` que implementaria esa Interfaz y la dependencia `MovieLister` la proporcionariamos a través de Setters, del método `setFinder()`.
 
 <img src="images/5-15.png">
 
-Como se orquesta esto a través de este `Ensamblador`, Spring lo hace de varias formas una es a traves de un fichero XML que permite indicar que objetos existen, esos objetos se llamarán *beans* y como se pueden referenciar los unos con los otros.
+Como se orquesta esto a través de este `Ensamblador`, Spring lo hace de varias formas, una es a traves de un fichero XML que permite indicar que objetos existen, en el mundo de Spring esos objetos se llamarán *beans* y como se pueden referenciar los unos con los otros.
 
-En el código podemos comprobar que el objeto `MovieLister` dice que tiene una propiedad llamada `finder` y hace referencia a otro objeto (`MovieFinder`) que es clase tipo `CSVMovieFinder`.
+En el código podemos comprobar que el objeto `MovieLister` dice que tiene una propiedad llamada `finder` y hace referencia a otro objeto (`MovieFinder`) que es una clase de tipo `CSVMovieFinder`.
 
-Si el día de mañana quisieramos implementar la clase `SQLMovieFinder` solamente tedríamos que cambiar este fichero XML indicando que la clase es de otro tipo, darle las propiedades adecuadas y de esa manera nuestro objeto desacoplado seguira teniendo sus dependencias satisfechas y hemos podido cambiar nuestro código de una manera bastante menos costosa y elegante. De esta forma hemos podido hacer la Inyección de Dependencia a un nivel teorico. 
+Si el día de mañana quisieramos implementar la clase `SQLMovieFinder` solamente tedríamos que cambiar esta inyeccción en el fichero XML, indicando que la clase es de otro tipo, darle las propiedades adecuadas y de esa manera nuestro objeto desacoplado seguira teniendo sus dependencias satisfechas y hemos podido cambiar nuestro código de una manera bastante menos costosa y elegante. De esta forma hemos podido hacer la Inyección de Dependencia a un nivel teórico. 
 
 # Contenido adicional  5
 
