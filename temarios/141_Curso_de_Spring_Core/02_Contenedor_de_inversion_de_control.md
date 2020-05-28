@@ -454,7 +454,33 @@ Probando el caso 3 tenemos:
 
 <img src="images/7-07.png">
 
+En este ultimo caso estamos haciendolo a sabiendas de que no existe otro bean con la misma clase, podríamos comprobar que pasa si creamos otro bean que apunte también a `Saludator`
 
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="saludator" class="com.openwebinars.beans.Saludator"></bean>
+	<bean id="otro" class="com.openwebinars.beans.Saludator" />
+
+</beans>
+```
+
+Probando nuevamente el caso 3 tenemos:
+
+<img src="images/7-08.png">
+
+Nos genera una excepción `No qualifying bean of type 'com.openwebinars.beans.Saludator' available: expected single matching bean but found 2: saludator,otro` ya que no es capaz de identificar cual de los dos beans queremos ejecutar, no le basta unicamente con la clase.
+
+Sin embargo si ejecutamos la versión 2 no existe problema por que el bean se identifica tanto con el `id` como con el `class`.
+
+Probando nuevamente el caso 2 tenemos:
+
+<img src="images/7-09.png">
+
+Inclusive la versión 1 tampoco tendría problemas.
 
 # 08 Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
 
