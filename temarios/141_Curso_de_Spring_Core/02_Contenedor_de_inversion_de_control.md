@@ -472,7 +472,7 @@ Probando nuevamente el caso 3 tenemos:
 
 <img src="images/7-08.png">
 
-Nos genera una excepción `No qualifying bean of type 'com.openwebinars.beans.Saludator' available: expected single matching bean but found 2: saludator,otro` ya que no es capaz de identificar cual de los dos beans queremos ejecutar, no le basta unicamente con la clase.
+Nos genera una excepción `No qualifying bean of type 'com.openwebinars.beans.Saludator' available: expected single matching bean but found 2: saludator,otro` ya que no es capaz de identificar cual de los dos beans queremos ejecutar, no le basta unicamente con la clase (Hay algunas estrategias para solventar este problema).
 
 Sin embargo si ejecutamos la versión 2 no existe problema por que el bean se identifica tanto con el `id` como con el `class`.
 
@@ -480,7 +480,16 @@ Probando nuevamente el caso 2 tenemos:
 
 <img src="images/7-09.png">
 
-Inclusive la versión 1 tampoco tendría problemas.
+Inclusive la versión 1 tampoco tendría problemas. 
+
+### Resumen
+
+En esta lección hemos aprendido:
+
+* Como levantar nuestro Contenedor de Inversión de Control
+* Como registrar la metainformación de uno o varios beans
+* Como recuperar los beans dentro de nuestro código Java para utilizarlos
+* Como cerrar el Contenedor de Inversión de Control
 
 # 08 Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
 
