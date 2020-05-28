@@ -81,6 +81,8 @@ Comenzaremos con XML.
 
 <img src="images/6-07.png">
 
+### 1er EJEMPLO
+
 En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura parecida a esta:
 
 * Inicializaremos el contexto.
@@ -244,7 +246,10 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
    
    
    **ESTE SERA EL ESQUEMA QUE UTILIZAREMOS EN LOS PRÓXIMOS EJEMPLOS**
-   
+
+### 2do EJEMPLO
+
+
 # 07 Mi primer Bean 6:49 
 
 [PDF 2-2_Mi_primer_bean.pdf](pdfs/2-2_Mi_primer_bean.pdf)
