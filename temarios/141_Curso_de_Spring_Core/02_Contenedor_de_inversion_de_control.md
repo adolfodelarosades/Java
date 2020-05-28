@@ -404,7 +404,6 @@ La interfaz `appContext` nos proporciona un método que esta sobre-escrito que e
 
 En nuestro archivo `App.java` vamos a meter el código para los tres casos e iremos probando uno a uno:
 
-
 *`App.java`*
 
 ```java
@@ -687,6 +686,15 @@ En resumen esta es la Inyección vía Setter donde se hace teniendo:
 ### Inyección vía Constructor
 
 <img src="images/8-05.png">
+
+Ahora hablemos de la Inyección vía Constructor la cual es también muy sencilla, en esta inyección en lugar de proporcionar la dependencia a través de un Setter lo hariamos a través de un Constructor en nuestra clase `Saludator` es un cosntructor común y corriente. El secreto se encuentra dentro de la declaración de nuestro `bean` donde hemos cambiado el elemento `property` por el elemento `constructor-arg` donde con el atributo `name` indicamos el argumento que recibe el constructor y con el atributo `value` le asignamos un valor. Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes incluso podemos añadir elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
+
+### Proyecto Inyección Vía Constructor
+
+
+
+
+
 
 <img src="images/8-06.png">
 
