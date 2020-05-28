@@ -687,13 +687,90 @@ En resumen esta es la Inyección vía Setter donde se hace teniendo:
 
 <img src="images/8-05.png">
 
-Ahora hablemos de la Inyección vía Constructor la cual es también muy sencilla, en esta inyección en lugar de proporcionar la dependencia a través de un Setter lo hariamos a través de un Constructor en nuestra clase `Saludator` es un cosntructor común y corriente. El secreto se encuentra dentro de la declaración de nuestro `bean` donde hemos cambiado el elemento `property` por el elemento `constructor-arg` donde con el atributo `name` indicamos el argumento que recibe el constructor y con el atributo `value` le asignamos un valor. Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes incluso podemos añadir elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
+Ahora hablemos de la Inyección vía Constructor la cual es también muy sencilla.
 
-### Proyecto Inyección Vía Constructor
+En esta inyección vía Constructor, en lugar de proporcionar la dependencia a través de un Setter lo haremos a través de un Constructor en nuestra clase `Saludator`, el cual es un constructor común y corriente.
 
+El secreto se encuentra dentro de la declaración de nuestro `bean` donde hemos cambiado el elemento `property` por el elemento `constructor-arg`, con el atributo `name` indicamos el argumento que recibe el constructor y con el atributo `value` le asignamos un valor. 
 
+Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes, incluso podemos añadir elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
 
+### Ejemplo Proyecto Inyección Vía Constructor
 
+<img src="images/8-12.png">
+
+En nuestro `beans.xml` hemos cambiado el elemento `property` por `constructor-arg`:
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <constructor-arg name="str" value="Hola alumnos de openwebinars"></constructor-arg>
+	</bean>
+	
+</beans>
+```
+
+Así mismo en nuestra clase `Saludator` hemos sustituido el método setter por un constructor:
+
+*`Saludator.java`*
+
+```java
+package com.openwebinars.beans;
+
+public class Saludator {
+	
+   private String mensaje;
+	
+   public Saludator(String str) {
+      this.mensaje = str;
+   }
+	
+   public String saludo() {
+      return (mensaje == null) ? "Hola mundo!!!" : mensaje;
+   }
+
+}
+```
+
+Nuestra clase de la aplicación no ha sufrido ningún cambio.
+
+*`App.java`*
+
+```java
+package com.openwebinars.beans;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+		
+      Saludator saludador = null;
+		
+      saludador = appContext.getBean(Saludator.class);
+		
+      System.out.println(saludador.saludo());
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+}
+```
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/8-13.png">
 
 
 <img src="images/8-06.png">
