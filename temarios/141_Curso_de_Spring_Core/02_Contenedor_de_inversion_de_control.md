@@ -971,8 +971,6 @@ public class EmailService implements IEmailService{
 }
 ```
 
-
-
 *`App.java`*
 
 ```java
@@ -1007,11 +1005,11 @@ public class App {
 }
 ```
 
-En esta clase es donde se notan más los cambios de usar la Interfaz que la clase. Al momento de rescatar el bean `emailService` lo estamos rescatando de la Interface no de la Clase. Spring se encargara de buscar dentro de nuestro contenedor clases que implementen la interfaz `IEmailService` para poder devolvernos una. 
+En esta clase es donde se notan más los cambios de usar la Interfaz que la clase. Al momento de rescatar el bean `emailService` lo estamos rescatando de la Interface no de la Clase. Spring se encargara de buscar dentro de nuestro contenedor clases que implementen la interfaz `IEmailService` para poder devolvernos una. Tanto es así que si tuvieramos dos clases diferentes que implementen esta interfaz tendríamos un potencial error por duplicación. Pero aun así el uso de Interfaces de esta manera va a hacer muy potente por que nos va a permitir desacoplar a un más nuestras clases a travez del uso de interfaces.
 
-Tanto es así que si tuvieramos dos clases diferentes que implementen esta interfaz tendríamos un potencial error por duplicación.
+Al ejecutar la aplicación tenemos la misma salida que en el ejemplo que usabamos las Clases.
 
-Pero aun así el uso de Interfaces de esta manera va a hacer muy potente por que nos va a permitir desacoplar a un más nuestras clases a travez del uso de interfaces.
+<img src="images/8-16.png">
 
 <img src="images/8-08.png">
 
