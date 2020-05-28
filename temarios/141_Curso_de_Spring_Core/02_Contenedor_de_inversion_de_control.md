@@ -249,6 +249,50 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
 
 ### 2do EJEMPLO
 
+Nuestro segundo ejemplo lo crearemos de la forma como creamos el primero. La estructurta es la siguiente:
+
+<img src="images/6-28.png">
+
+Hemos creado solo dos archivos:
+
+* `App.java`
+* `beans.xml`
+
+*`App.java`*
+
+```java
+package com.openwebinars.spring;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+public class App {
+
+	public static void main(String[] args) {
+		//Abrir contexto
+		ApplicationContext appContext = new FileSystemXmlApplicationContext("beans.xml");
+		
+		//Cerrar contexto
+		((FileSystemXmlApplicationContext) appContext).close();
+	}
+
+}
+```
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+</beans>
+```
+
+
+### Pasos para crear primer ejemplo
 
 # 07 Mi primer Bean 6:49 
 
