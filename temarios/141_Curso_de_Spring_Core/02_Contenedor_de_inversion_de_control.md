@@ -417,6 +417,22 @@ Spring nos ofrece la posibilidad de inyectar valores dentro de una colección. L
 
 ## Transcripción
 
+<img src="images/8-01.png">
+
+<img src="images/8-02.png">
+
+<img src="images/8-03.png">
+
+<img src="images/8-04.png">
+
+<img src="images/8-05.png">
+
+<img src="images/8-06.png">
+
+<img src="images/8-07.png">
+
+<img src="images/8-08.png">
+
 # 09 Inyeccion automática 9:22 
 
 [PDF 2-4_Inyeccion_automatica.pdf](pdfs/2-4_Inyeccion_automatica.pdf)
@@ -430,6 +446,22 @@ Podemos excluir un bean de ser *candidato* a inyectarse automáticamente mediant
 También podemos limitar los candidatos a ser autoinyectados utilizando un patrón sobre los nombres de los beans y el atributo `default-autowired-candidates` (***este es solo aplicable al elemento raiz `<beans>`***). Por ejemplo, para que todos ellos incluyeran el nombre repository, podríamos usar el patrón `*Repository`.
 
 ## Transcripción
+
+<img src="images/9-01.png">
+
+<img src="images/9-02.png">
+
+<img src="images/9-03.png">
+
+<img src="images/9-04.png">
+
+<img src="images/9-05.png">
+
+<img src="images/9-06.png">
+
+<img src="images/9-07.png">
+
+<img src="images/9-08.png">
 
 # Contenido adicional  4
 
