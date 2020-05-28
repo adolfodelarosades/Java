@@ -345,6 +345,14 @@ Durante este ejemplo solo utilizaremos algunas de las propiedades necesarias de 
 
 ## Transcripción
 
+<img src="images/7-01.png">
+
+<img src="images/7-02.png">
+
+<img src="images/7-03.png">
+
+<img src="images/7-04.png">
+
 # 08 Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
 
 [PDF 2-3_Inyeccion_de_dependencias.pdf](pdfs/2-3_Inyeccion_de_dependencias.pdf)
