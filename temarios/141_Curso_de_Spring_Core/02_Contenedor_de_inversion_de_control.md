@@ -693,7 +693,7 @@ En esta inyección vía Constructor, en lugar de proporcionar la dependencia a t
 
 El secreto se encuentra dentro de la declaración de nuestro `bean` donde hemos cambiado el elemento `property` por el elemento `constructor-arg`, con el atributo `name` indicamos el argumento que recibe el constructor y con el atributo `value` le asignamos un valor. 
 
-Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes, incluso podemos añadir elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
+Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes, incluso podemos añadir los elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
 
 ### Ejemplo Proyecto Inyección Vía Constructor
 
@@ -715,6 +715,7 @@ En nuestro `beans.xml` hemos cambiado el elemento `property` por `constructor-ar
 	
 </beans>
 ```
+En este caso podríamos eliminar `name="str"` y funcionaria igual. Pero si lo ponemos el nombre debe coincidir con el nombre del argumento en el constructor de la clase ` Saludator`.
 
 Así mismo en nuestra clase `Saludator` hemos sustituido el método setter por un constructor:
 
@@ -772,10 +773,138 @@ Al ejecutar la aplicación tenemos:
 
 <img src="images/8-13.png">
 
-
 <img src="images/8-06.png">
 
+Otro caso que podemos tener es cuando un *bean* hace referencia a otro bean, es decir a otra clase que hayamos definido.
+
+Supongamos que a la hora de saludar deseamos también a la vez enviar un email de saludo para el cual contariamos con la clase `EmailService`. Esta clase `EmailService` tiene una dependencia con `Saludator` para poder enviar el mensaje de saludo a nuestros clientes.
+
+¿Cómo podemos referenciar un bean dentro de otro?
+
+La manera más sencilla que tenemos la podemos ver en el código de la lamina, en este ejemplo lo hacemos vía setter. 
+
+La clase o bean `EmailService` tiene una propiedad llamada `saludator` de tipo `Saludator` y *a través del atributo **ref** le decimos que busque otro bean que estará dentro del contenedor que se llama **saludator**, el que abajo esta identificado con `id=saludator`*.
+
+De esta forma tenemos la posibilidad de inyectar un bean dentro de otro.
+
+### Ejemplo Proyecto Referencias
+
+<img src="images/8-14.png">
+
+En nuestro archivo `beans.xml` vemos la definición de los dos beans.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="emailService" class="com.openwebinars.beans.EmailService">
+	   <property name="saludator" ref="saludator"></property>
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+</beans>
+```
+
+Ahora mostramos ambas clases que definen a cada uno de los beans.
+
+*`EmailService.java`*
+
+```java
+package com.openwebinars.beans;
+
+public class EmailService {
+	
+   private Saludator saludator;
+	
+   public void setSaludator(Saludator saludator) {
+      this.saludator = saludator;
+   }
+	
+   public void enviarEmailSaludo(String destinatario) {
+      System.out.println("Enviando email a " + destinatario);
+      System.out.println("Mensaje: " + saludator.saludo());
+   }
+
+}
+```
+
+Esta clase `EmailService` tiene una propiedad `saludator` que como hemos visto hace referencia al bean `Saludator` y como vimos en la definición de los beans estamos usando el elemento `property` aquí necesitamos definir el método `setSaludator(Saludator saludator)`.
+
+Y contamos con el método `enviarEmailSaludo(...)` que es el que realmente realiza la acción en esta clase.
+
+*`Saludator.java`*
+
+```java
+package com.openwebinars.beans;
+
+public class Saludator {
+	
+   private String mensaje;
+	
+   public void setMensaje(String str) {
+      this.mensaje = str; 
+   }
+	
+   public String saludo() {
+      return (mensaje == null) ? "Hola mundo!!!" : mensaje;
+   }
+
+}
+```
+
+Y finalmente en nuestra clase principal tenemos:
+
+*`App.java`*
+
+```java
+package com.openwebinars.beans;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+		
+      Saludator saludador = null;
+		
+      saludador = appContext.getBean(Saludator.class);		
+      System.out.println(saludador.saludo() + "\n\n");
+		
+      EmailService emailService = null;
+		
+      emailService = appContext.getBean(EmailService.class);
+      emailService.enviarEmailSaludo("adolfo@gmail.com");
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+Aquí podemos seguir usando nuestro bean `Saludator` y también podemos usar el bean `EmailService` que poder debajo utiliza la dependencia del bean `Saludator`.
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/8-15.png">
+
+Vemos claramente la salida que realiza cada uno de los beans. En el caso de `EmailService` vemos claramente como referencia a su vez a `Saludator`.
+
 <img src="images/8-07.png">
+
+En el ejemplo anterior realizamos la referencia con clases, pero también lo podemos realizar con Interfaces.
 
 <img src="images/8-08.png">
 
