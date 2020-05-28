@@ -345,13 +345,116 @@ Durante este ejemplo solo utilizaremos algunas de las propiedades necesarias de 
 
 ## Transcripción
 
+En esta lección aprenderemos a crear un *bean* para poderlo utilizar.
+
 <img src="images/7-01.png">
 
 <img src="images/7-02.png">
 
+Un bean no deja de ser un simple objeto, una clase *pojo* manejada por el Contenedor de IoC, ademas de la clase *pojo* necesitamos proporcionar unos *metadatos* para que este objeto pueda ser un *bean*, en estos primeros ejemplos lo haremos con XML. Podemos proporcionarle un id único dentro del contenedor, tambien debemos indicar la *clase* sobre la cual se define ese *bean*.
+
 <img src="images/7-03.png">
 
+En XML aquí tenemos un ejemplo muy básico de una clase llamada `Saludator` la cual será un servicio encargada de saludar. Se utiliza la etiqueta `<bean>` con el atributo `id` identificamos al bean y con el atributo `class` proporcinamos la ruta completa de la clase 
+
+### Practica Beans 
+
+<img src="images/7-05.png">
+
+En nuestro archivo `beans.xml` declaramos nuestro bean como se explico anteriormente:
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="saludator" class="com.openwebinars.beans.Saludator"></bean>
+
+</beans>
+```
+
+Nuestra clase *Pojo* es una clase francamente sencilla, solo tiene un método `saludo()` que retorna un `String` para saludar.
+
+*`Saludator.java`*
+
+```java
+package com.openwebinars.beans;
+
+public class Saludator {
+	
+   public String saludo() {
+      return "Hola mundo!!!";
+   }
+
+}
+```
+
+Con esto ya tenemos creado nuestro primer *Bean* pero ¿cómo podemos utilizarlo?
+
 <img src="images/7-04.png">
+
+La interfaz `appContext` nos proporciona un método que esta sobre-escrito que es `getBean()` que nos permite obtener un bean de diferentes maneras:
+
+* `appContext.getBean(id)`: Busca unicamente por el `id`, devuelve un `object` por lo que NOS OBLIGA A realizar un *casting*
+* `appContext.getBean(id, class)` Busca por el `id` y por `class`, devuelve directamente la clase (no necesita casting)
+* `appContext.getBean(class)` Busca  unicamente por `class`, devuelve directamente la clase, es la más atractiva de las 3 opciones. Tiene como desventaja que si un tipo de bean de una clase en particular se encuentra repetido, cosa que puede pasar, se produciría una excepción.
+
+En nuestro archivo `App.java` vamos a meter el código para los tres casos e iremos probando uno a uno:
+
+
+*`App.java`*
+
+```java
+package com.openwebinars.beans;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+			
+      Saludator saludator = null;
+		
+      // 1. getBean con ID y casting
+      //saludador = (Saludator) appContext.getBean("saludator");
+		
+      // 2. getBean con ID y tipo (clase)
+      //saludador = appContext.getBean("saludator", Saludator.class);
+			
+      // 3. getBean con tipo (clase)
+      //saludador = appContext.getBean(Saludator.class);
+
+      System.out.println(saludador.saludo());
+      
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+}
+```
+
+Lo que queremos es que se imprima el saludo y comprobar que se puede hacer de estas 3 maneras.
+
+Probando el caso 1 tenemos:
+
+<img src="images/7-05.png">
+
+Probando el caso 2 tenemos:
+
+<img src="images/7-06.png">
+
+Probando el caso 3 tenemos:
+
+<img src="images/7-07.png">
+
+
 
 # 08 Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
 
