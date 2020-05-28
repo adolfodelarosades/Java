@@ -249,14 +249,50 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
 
 ### 2do EJEMPLO
 
-Nuestro segundo ejemplo lo crearemos de la forma como creamos el primero. La estructurta es la siguiente:
+Nuestro segundo ejemplo lo crearemos de la misma forma como creamos el primero. La estructurta generada es la siguiente:
 
 <img src="images/6-28.png">
 
-Hemos creado solo dos archivos:
+Hemos trabajado sobre tres archivos:
 
-* `App.java`
+* `pom.xml`
 * `beans.xml`
+* `App.java`
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.openwebinars</groupId>
+	<artifactId>141-02-FileSystemXMLApplicationContext</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>141-02-FileSystemXMLApplicationContext</name>
+	<description>Ejemplo usando FileSystemXMLApplicationContext</description>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.2.6.RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+</beans>
+```
 
 *`App.java`*
 
@@ -279,20 +315,9 @@ public class App {
 }
 ```
 
-*`beans.xml`*
+En este ejemplo en lugar de utilizar la clase `ClassPathXmlApplicationContext` usamos `FileSystemXmlApplicationContext` esto lo unico que nos permite es que el fichero XML no tenga por que estar dentro del `Classpath` sino que pueda estar en una ubicación del sistema de ficheros, en este caso lo hemos puesto en la raíz del proyecto. 
 
-```html
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-
-</beans>
-```
-
-
-### Pasos para crear primer ejemplo
+Si ejecutamos la aplicación abre y cierra el contexto anagolamente como en el ejemplo anterior pero usando `FileSystemXmlApplicationContext`.
 
 # 07 Mi primer Bean 6:49 
 
