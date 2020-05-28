@@ -81,7 +81,7 @@ Comenzaremos con XML.
 
 <img src="images/6-07.png">
 
-### :computer: Ejemplo Proyecto con `ClassPathXmlApplicationContext
+### :computer: Ejemplo Proyecto con `ClassPathXmlApplicationContext`
 
 En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura parecida a esta:
 
@@ -900,11 +900,118 @@ Al ejecutar la aplicación tenemos:
 
 <img src="images/8-15.png">
 
-Vemos claramente la salida que realiza cada uno de los beans. En el caso de `EmailService` vemos claramente como referencia a su vez a `Saludator`.
+Vemos claramente la salida que realiza cada uno de los beans. En el caso de `EmailService`, vemos claramente como referencía a su vez a `Saludator` para mostrar el mensaje. De esta forma estamos referenciado a un bean desde otro.
 
 <img src="images/8-07.png">
 
-En el ejemplo anterior realizamos la referencia con clases, pero también lo podemos realizar con Interfaces.
+En el ejemplo anterior realizamos la referencia con clases, pero también lo podemos realizar con Interfaces. 
+
+Podemos tener beans que implementan Interfaces, de manera que podemos declarar posteriormente referencias a esos beans del tipo de la interface. Esto va a hacer muy potente, lo usaremos en lecciones posteriores para casos en que quermos definir un *contrato* a través de una interfaz, por ejemplo los DAO de acceso a datos y que posteriormente nos van a permitir tener varios DAOs que implementen esa interfaz y los podamos utilizar en una versión inicial para acceder datos en un fichero, en la versión de desarrollo con una BD embebida, en la versión en producción que acceda a un servidor remoto, pero siempre haciendo refererencía a esa interfaz. 
+
+Todo esto lo tenemos en el siguiente ejemplo.
+
+### :computer: Ejemplo Proyecto Referencias con Interfaces
+
+<img src="images/8-16.png">
+
+La declaración de beans es identica que el ejemplo anterior.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="emailService" class="com.openwebinars.beans.EmailService">
+	   <property name="saludator" ref="saludator"></property>
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+</beans>
+```
+
+Hemos añadido la interfaz `IEmailService` en la cual solo hemos definido un método. 
+
+*`IEmailService`*
+
+```java
+package com.openwebinars.beans;
+
+public interface IEmailService {
+	
+   public void enviarEmailSaludo(String str);
+
+}
+```
+
+Nuestra clase `EmailService` implementa la interfaz `IEmailService`
+
+*`EmailService`*
+
+```java
+
+public class EmailService implements IEmailService{
+	
+   private Saludator saludator;
+	
+   public void setSaludator(Saludator saludator) {
+      this.saludator = saludator;
+   }
+	
+   public void enviarEmailSaludo(String destinatario) {
+      System.out.println("Enviando email a " + destinatario);
+      System.out.println("Mensaje: " + saludator.saludo());
+   }
+
+}
+```
+
+
+
+*`App.java`*
+
+```java
+package com.openwebinars.beans;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+		
+      Saludator saludador = null;
+		
+      saludador = appContext.getBean(Saludator.class);
+		
+      System.out.println(saludador.saludo() + "\n\n");
+		
+      IEmailService emailService = null;
+		
+      emailService = appContext.getBean(IEmailService.class);
+      emailService.enviarEmailSaludo("adolfo@gmail.com");
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+En esta clase es donde se notan más los cambios de usar la Interfaz que la clase. Al momento de rescatar el bean `emailService` lo estamos rescatando de la Interface no de la Clase. Spring se encargara de buscar dentro de nuestro contenedor clases que implementen la interfaz `IEmailService` para poder devolvernos una. 
+
+Tanto es así que si tuvieramos dos clases diferentes que implementen esta interfaz tendríamos un potencial error por duplicación.
+
+Pero aun así el uso de Interfaces de esta manera va a hacer muy potente por que nos va a permitir desacoplar a un más nuestras clases a travez del uso de interfaces.
 
 <img src="images/8-08.png">
 
