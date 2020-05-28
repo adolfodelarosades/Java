@@ -1009,10 +1009,22 @@ En esta clase es donde se notan más los cambios de usar la Interfaz que la clas
 
 Al ejecutar la aplicación tenemos la misma salida que en el ejemplo que usabamos las Clases.
 
-<img src="images/8-16.png">
+<img src="images/8-17.png">
 
 <img src="images/8-08.png">
 
+Otros aspectos que se mencionarán pero que no se tratarán y que se explican un poco en el Resumen del Profesor son:
+
+* Inner beans (beans anidados)
+
+   Una es que podemos tener más referencias entre beans con *beans anidados*, en lugar de tener un bean que referencie a otro, podemos definir un bean dentro de otro. Esto nos permite que el ambito sea más restrictivo alla donde lo tengamos que utilizar, por que ese *bean interno* solo puede ser utilizado por el *bean externo* y si el bean externo no articula lo necesario para exponerlo no se podría utilizar desde fuera.
+   
+* Colecciones
+
+   También tenemos la posibilidad de inyectar los valores desde una colección a traves de los elementos `<list>`, `<set>`, `<map>`,`<props>`
+   
+En el resumen del profesor hay más información para complementar.   
+   
 # 09 Inyeccion automática 9:22 
 
 [PDF 2-4_Inyeccion_automatica.pdf](pdfs/2-4_Inyeccion_automatica.pdf)
