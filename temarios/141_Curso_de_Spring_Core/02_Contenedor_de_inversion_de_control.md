@@ -559,9 +559,132 @@ Spring nos ofrece la posibilidad de inyectar valores dentro de una colección. L
 
 <img src="images/8-02.png">
 
+Si recordamos cuando hablamos sobre la Inyección de dependencias haciamos referencia a que si un objeto necesita de otros dos 
+objetos no va a tener que instanciarlos, sino que va a tener que tiene dos dependencias y espera que alguien se las proporcione.
+
 <img src="images/8-03.png">
 
+Con Spring podemos crear esas dependencias de varias maneras:
+
+* Vía Setters
+* Vía Constructor
+* Referencias entre beans
+
+### Inyección vía Setter
+
 <img src="images/8-04.png">
+
+La Inyección vía Setter es muy sencilla, pensemos que en nuesta clase `Saludator` tenemos un mensaje que reciba un valor y será con el que saludaremos a nuestro publico.
+
+Como se observa en el código estamos declarando la dependencia(el mensaje) como `private String mensaje;` y para hacer la *Inyección vía Setter* declaramos un método setter para esa propiedad `setMensaje(String str){`, donde recibimos el valor en la referencia `str` y se la asignamos a nuestro mensaje. 
+
+*¿Cómo declaramos esa Inyección de Dependencia en XML?*
+
+Lo hacemos anidando dentro del elemento `bean` el elemento `property` que hace referencia mediante su atributo `name` al nombre de la propiedad y mediante `value` el valor que va a ser inyectado. De esta forma cuando se carge el Contenedor de IoC podremos comprobar como `mensaje` a través de el setter `setMensaje(String str)` Spring asigna el valor y ya podemos hacer con el lo que corresponda.
+
+### Ejemplo Proyecto Setter
+
+<img src="images/8-09.png">
+
+En este proyecto tenemos nuestro archivo `beans.xml`:
+
+```js
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+</beans>
+```
+
+Hemos añadido el elemento `property` al bean para asignar un valor a la propiedad `mensaje` de la clase `Saludator`.
+
+
+Por lo tanto la clase `Saludator` cuenta con la propiedad `mensaje` y el método `setMensaje(String str)` para asignarle un valor.
+
+*`Saludator`*
+
+```java
+package com.openwebinars.beans;
+
+public class Saludator {
+	
+   private String mensaje;
+	
+   public void setMensaje(String str) {
+      this.mensaje = str;
+   }
+	
+   public String saludo() {
+      return (mensaje == null) ? "Hola mundo!!!" : mensaje;
+   }
+
+}
+```
+
+En el método `saludo()` preveemos posibles errores en caso de que no se inyecte un mensaje mandamos uno por default y en caso de que si se reciba lo enviamos.
+
+La clase de Aplicación no tiene ningún cambio (solo se usa el get para la clase)
+
+*`App.java`*
+
+```java
+package com.openwebinars.beans;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+			
+      Saludator saludador = null;
+		
+      saludador = appContext.getBean(Saludator.class);
+		
+      System.out.println(saludador.saludo());
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+}
+```
+
+Si ejecutamos la aplicación tenemos:
+
+<img src="images/8-10.png">
+
+***La salida que obtenemos es el valor que se ha inyectado vía setter.***
+
+Esto nos permite añadir algo de lógica en el método setter, aun que no es lo más usual. Por ejemplo podríamos tener:
+
+```java
+public void setMensaje(String str) {
+   this.mensaje = str.toUpperCase();
+}
+```
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/8-11.png">
+
+Aunque como decimos no es lo más usual, por lo que revertimos ese cambio.
+
+En resumen esta es la Inyección vía Setter donde se hace teniendo:
+
+* Una propiedad
+* Un método setter
+* El elemento `property` dentro de `bean`
+
+### Inyección vía Constructor
 
 <img src="images/8-05.png">
 
