@@ -1043,13 +1043,37 @@ También podemos limitar los candidatos a ser autoinyectados utilizando un patr�
 
 <img src="images/9-02.png">
 
+Spring permite que no tengamos que declarar explicitamente que bean va a ser inyectado dentro de otro en el archivo XML, sino que el solo se puede encargar de buscar que candidato puede satisfacer esa dependencia que nosotros hemos declarado e inyectar el más adecuado.
+
+Esos candidatos se buscan siempre del contexto del Contenedor de IoC.
+
+Esto tiene unas ciertas ventajas:
+
+* Reduce la configuración necesaria 
+* Durante el desarrollo permitite utilizar objetos sin configurarlos explicitamente.
+
 <img src="images/9-03.png">
 
+Todo esto lo hacemos a través de la propiedad *`autowire`* del bean que tiene dependencias y que necesita de otros beans, en el caso del ejemplo que venimos arrastrando estamos hablando del bean `EmailService` que necesita del `Saludator` para realizar su tarea. 
+
+Cuando indicamos que se auto-inyecten todas las dependencias necesarias como vemos en el código de la lamina ya no tenemos dentro del bean ninguna `property` o `constructor-arg` que haga referencia al bean `Saludator` simplemente esta vacío, ya que mediante el atributo *`autowire`* se encarga de buscar las dependencias necesarias en este caso del tipo (`byType`) de la referencia mediante la cual hemos declarado la dependencia y de inyectarla.
+
 <img src="images/9-04.png">
+
+Los tipos de AUTOWIRED que tenemos son:
+
+* `no`: sin autocableado es decir que necesitamos hacer nosotros la inyección de forma explícita.
+* `byName`: Si tenemos un atributo con un nombre determinado buscaria beans con ese `id` o con ese `name`
+* `byType`: Es la más usual 
+* `constructor`: Es analoga a byType
 
 <img src="images/9-05.png">
 
 <img src="images/9-06.png">
+
+AQUI EJEMPLO 
+
+
 
 <img src="images/9-07.png">
 
