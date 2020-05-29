@@ -37,7 +37,7 @@ En este ejemplo tenemos tres beans que hacen referencia al bean `accountDao`, es
 
 Para poder indicarlo explícitamente, a un que como ya dijimos para el caso de singleton es el comportamiento por defecto, se hace con el atributo `scope=singleton` de manera que reforzamos la idea de que de este bean solo va existir una instancia compartida para todos.
 
-### :computer: Ejemplo Proyecto Singleto
+### :computer: Ejemplo Proyecto Singleton
 
 <img src="images/10-07.png">
 
@@ -60,7 +60,7 @@ Para poder indicarlo explícitamente, a un que como ya dijimos para el caso de s
 </beans>
 ```
 
-Aquí reforzamos que el ambito sea singleton.
+Aquí reforzamos que el ámbito sea singleton, pero es el comportamiento por default por lo que podríamos eliminar `scope="singleton"` y el resultado sería el mismo.
 
 *`Saludator.java`*
 
@@ -147,13 +147,164 @@ public class App {
 
 Al requerir un objeto siempre será el mismo.
 
-Al ejecutar la aplicatición tenemos.
+Al ejecutar la aplicación tenemos.
 
 <img src="images/10-08.png">
 
+Hemos creado dos referencias de tipo `IEmailService` mediante el método `getBean(IEmailService.class)` hemos pedido que se inyecte la dependencia, podemos comprobar como ambos objetos son exactamente el mismo, aun que sean dos referencias diferentes.
+
+Este es el comportamiento que podemos encontrar.
+
 <img src="images/10-05.png">
 
+Frente al ambito Singleton tenemos el ambito Prototype, en este caso cada vez que hagamos referencia al bean, cada vez que lo requiramos se creara una nueva instancia. Esta instancia además se va a crear en tiempo de ejecución y lo hariamos con `scope="prototype"`. Este uso es muy  poco usual.
+
 <img src="images/10-06.png">
+
+### :computer: Ejemplo Proyecto Prototype
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean id="emailService" class="com.openwebinars.beans.EmailService" scope="prototype">
+	   <property name="saludator" ref="saludator"></property>
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+</beans>
+```
+
+Usamos `scope="prototype"`.
+
+*`Saludator.java`*
+
+```java
+package com.openwebinars.beans;
+
+public class Saludator {
+	
+   private String mensaje;
+	
+   public void setMensaje(String str) {
+      this.mensaje = str; 
+   }
+	
+   public String saludo() {
+      return (mensaje == null) ? "Hola mundo!!!" : mensaje;
+   }
+
+}
+```
+
+Este archivo sigue sindo igual.
+
+*`IEmailService.java`*
+
+```java
+package com.openwebinars.beans;
+
+public interface IEmailService {
+	
+   public void enviarEmailSaludo();
+   public void enviarEmailSaludo(String str);
+   public void setDestinatarioPorDefecto(String destinatario);
+	
+}
+```
+
+La interfaz declara tres métodos.
+
+*`EmailService.java`*
+
+```java
+package com.openwebinars.beans;
+
+public class EmailService implements IEmailService{
+	
+   private Saludator saludator;
+   private String destinatarioPorDefecto;
+ 	
+   public void setSaludator(Saludator saludator) {
+      this.saludator = saludator;
+   }
+	
+   public void setDestinatarioPorDefecto(String destinatario) {
+      this.destinatarioPorDefecto = destinatario;
+   }
+	
+   public void enviarEmailSaludo() {
+		
+      if( destinatarioPorDefecto != null)
+         enviarEmailSaludo(destinatarioPorDefecto);
+      else
+	 System.out.println("Configure un destinatario por defecto para poder enviar los mensajes");
+   }
+	
+   public void enviarEmailSaludo(String destinatario) {
+      System.out.println("Enviando email a " + destinatario);
+      System.out.println("Mensaje: " + saludator.saludo());
+   }
+
+}
+```
+
+Se implementan los tres métodos declarados en la interfaz.
+
+*`App.java`*
+
+```java
+package com.openwebinars.beans;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+			
+      IEmailService emailService1 = appContext.getBean(IEmailService.class);
+      emailService1.setDestinatarioPorDefecto("adolfo@gmail.com");
+      emailService1.enviarEmailSaludo();
+		
+      System.out.println("");
+      IEmailService emailService2 = appContext.getBean(IEmailService.class);
+      emailService2.enviarEmailSaludo();
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+      
+   }
+
+}
+```
+
+Aquí creamos dos `emailService`, en uno de ellos en la implementación podemos marcar un destinatario por defecto a la hora de enviar los emails. 
+
+Estamos definiendo el destinatario por defecto en la referencia 1 pero no en la 2, por lo que en este último no tendremos destinatario por defecto.
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/10-09.png">
+
+En el primer caso se ha enviado el email pero en el segundo caso como no hemos establecido un destinatario, ni hay un destinatario por defecto no se ha podido enviar.
+
+Si el alcance lo tuvieramos como `scope="singleton"` si los mensajes si se enviarían dos veces, por que realmente estamos utilizando el mismo bean por detras.
+
+<img src="images/10-10.png">
+
+Aquí la idea es ilustrar `scope="prototype"` para comprobar que cada que requiramos un bean se crea una nueva instancia caso contrario con `scope="singleton"` donde se usa la misma instancia.
 
 # 11 Otros ámbitos 4:25 
 
