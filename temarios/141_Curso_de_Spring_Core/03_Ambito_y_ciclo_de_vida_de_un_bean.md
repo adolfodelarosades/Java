@@ -320,11 +320,30 @@ No existe.
 
 <img src="images/11-02.png">
 
+Aquí hablaremos de otros ambitos que existen en este caso sobre la Web. Estos ámbitos diferentes a `singleton` y `prototype` los encontraremos cuando trabajemos en un contexto Web, el cual se inicia con `XmlWebApplicationContext`.
+
+Los ámbitos para contextos web son:
+
+* `Request`
+* `Session`
+* `Application`
+* `WebSocket`
+
+Si los usaramos dentro del contexto `ClassPathXmlApplicationContext` se producirá una excepción.
+
 <img src="images/11-03.png">
+
+El ámbito Request permite decir que un objeto va a tener como ciclo o ámbito de vida va a ser cada petición. Por cada nueva petición que nosotros hagamnos se creara una nueva petición y cuando esa petición finalice se descartara el objeto.
+
+Por ejemplo cada vez que hagamos un Login se lanza la petición con un ambito request mediante `scope="request"`.
 
 <img src="images/11-04.png">
 
+Si lo que necesitamos es tener un bean que tenga una vida mayor a la de una petición y que dure a lo largo de toda una sesión de un usuario tenemos el `scope="session"`. Por ejemplo para mantener las preferencias de un usuario a traves de usar una aplicación determinada. Marcando el bean con `scope="session"`, el bean se instanciara cuando la sesión comience y tendra vida a lo largo de diferentes peticiones, no se destruye al finalizar una request, sino que tendrá vida hasta que la sesión se destruya, en ese momento se descarta el objeto.
+
 <img src="images/11-05.png">
+
+Finalmente el que vamos a ver es el de ámbito `application`, usamos `scope="application"`, en este caso se creara un solo objeto por cada `ServletContext` que nosotros creemos, en la práctica se trata de un objeto por cada ejecución de la aplicación que nosotros hagamos. Por ejemplo para una serie de preferencias globales de la aplicación, por ejemplo textos que salgan en los encabezados o pies de página de toda la aplicación.  
 
 # 12 Manejo del ciclo de vida de un bean 9:16 
 
