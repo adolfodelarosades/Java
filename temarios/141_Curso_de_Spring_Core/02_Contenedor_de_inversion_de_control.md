@@ -1063,15 +1063,82 @@ Cuando indicamos que se auto-inyecten todas las dependencias necesarias como vem
 Los tipos de AUTOWIRED que tenemos son:
 
 * `no`: sin autocableado es decir que necesitamos hacer nosotros la inyección de forma explícita.
-* `byName`: Si tenemos un atributo con un nombre determinado buscaria beans con ese `id` o con ese `name`
-* `byType`: Es la más usual 
-* `constructor`: Es analoga a byType
+* `byName`: Va en función del tipo de la propiedad requerida. Si tenemos un atributo con un nombre determinado buscaria beans con ese `id` o con ese `name`
+* `byType`: Es la más usual. En función del tipo de la propiedad requerida. Si hay más de un bean de este tipo, se produce una excepción.
+* `constructor`: Es analoga a byType, pero para argumentos del constructor.
 
 <img src="images/9-05.png">
 
 <img src="images/9-06.png">
 
-AQUI EJEMPLO 
+### :computer: Ejemplo Proyecto Autowired
+
+<img src="images/9-09.png">
+
+El único archivo que sufre cambios en comparación con el ejemplo antterior es `beans.xml`.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	   
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+</beans>
+```
+
+Estamos haciendo una auto-inyección `byType` de forma que la dependencia `Saludator` que tiene `EmailService` va a ser satisfecha de manera automática, de forma que no tenemos que declararla explicitamente.
+
+*Todos los demas archivos no cambian nada en comparación del ejemplo anterior*
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/9-10.png">
+
+Esto funciona como antes pero Spring es el que se ha encargado de la auto-inyección.
+
+Si el bean `saludator` fuera uno de esos *beans conflictivos* de los que hablabamos lo podríamos marcar como `autowire-candidate="false"`.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	   
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator" autowire-candidate="false">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+</beans>
+```
+
+De forma que al ejecutar la aplicación tenemos:
+
+<img src="images/9-11.png">
+
+Por lo que sería necesario declarar explicitamente la propiedad en el bean que tiene la dependencia:
+
+De forma que al ejecutar la aplicación tenemos:
+
+<img src="images/9-12.png">
+
+
+
 
 
 
