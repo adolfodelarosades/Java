@@ -1106,7 +1106,7 @@ Al ejecutar la aplicación tenemos:
 
 Esto funciona como antes pero Spring es el que se ha encargado de la auto-inyección.
 
-Si el bean `saludator` fuera uno de esos *beans conflictivos* de los que hablabamos lo podríamos marcar como `autowire-candidate="false"`.
+Si el bean `saludator` fuera uno de esos *beans conflictivos* de los que hablabamos, lo podríamos marcar como `autowire-candidate="false"`.
 
 *`beans.xml`*
 
@@ -1131,18 +1131,149 @@ De forma que al ejecutar la aplicación tenemos:
 
 <img src="images/9-11.png">
 
-Por lo que sería necesario declarar explicitamente la propiedad en el bean que tiene la dependencia:
+Tendríamos que se ha cargado el bean `Saludator` cuando lo requerimos individualmente, pero sin embargo `EmailService` que tiene la dependencia de `Saludator` al no poder satisfacerla se ha quedado como `null` y conado lo invocamos con el método `enviarEmailSaludo` que es donde hace referencia a `saludator.saludo()` al ser una referencia nula a provocado un `NullPoiterException` por que no se ha provocado la auto-inyección automática.
 
-De forma que al ejecutar la aplicación tenemos:
+*`EmailService.java`*
+
+```java
+package com.openwebinars.beans;
+
+public class EmailService implements IEmailService{
+	
+   private Saludator saludator;
+	
+   public void setSaludator(Saludator saludator) {
+      this.saludator = saludator;
+   }
+	
+   public void enviarEmailSaludo(String destinatario) {
+      System.out.println("Enviando email a " + destinatario);
+      System.out.println("Mensaje: " + saludator.saludo());
+   }
+
+}
+```
+
+Por lo en este ejemplo concreto sería necesario declarar explícitamente a la propiedad.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	   <property name="saludator" ref="saludator"></property>
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator" autowire-candidate="false">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+</beans>
+```
+
+De forma que al ejecutar la aplicación todo vuelve a funcionar.
 
 <img src="images/9-12.png">
 
-
-
-
-
-
 <img src="images/9-07.png">
+
+### :computer: Ejemplo Proyecto Primary
+
+<img src="images/9-13.png">
+
+En ocaciones puede que tengamos dos beans del mismo tipo. Por ejemplo tenemos dos `Saludator` uno para saludar en Inglés y otro en Castellano.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	   
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+	<bean id="englishSaludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hello world!!!"></property>
+	</bean>
+	
+</beans>
+```
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/9-14.png">
+
+Esto provoca una excepción `Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException` por que nos indica que existe más de un bean, esto se puede solventar de varias maneras, por ejeplo seleccionar ademas de la class el id adecuado, pero en este caso utilizaremos la opción `primary=true` que nos permite definir un bean que tiene preferencia sobre los demas del mismo tipo. 
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	   
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator" primary="true">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+	<bean id="englishSaludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hello world!!!"></property>
+	</bean>
+	
+</beans>
+```
+
+De forma que si ahora ejecutamos:
+
+<img src="images/9-15.png">
+
+Podríamos poner como primary el otro bean.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	   
+	</bean>
+	
+	<bean id="saludator" class="com.openwebinars.beans.Saludator">
+	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+	</bean>
+	
+	<bean id="englishSaludator" class="com.openwebinars.beans.Saludator" primary="true">
+	   <property name="mensaje" value="Hello world!!!"></property>
+	</bean>
+	
+</beans>
+```
+
+De forma que si ahora ejecutamos el saludo será en Inglés:
+
+<img src="images/9-16.png">
 
 <img src="images/9-08.png">
 
