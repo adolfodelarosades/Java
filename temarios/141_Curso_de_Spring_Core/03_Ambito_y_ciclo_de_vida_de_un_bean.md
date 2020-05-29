@@ -359,7 +359,25 @@ No existe.
 
 <img src="images/12-02.png">
 
+Vamos a hablar ahora del ciclo de vida de un bean y como podemos manejarlo. 
+
+Nosotros podemos interactuar con el ciclo de vida de un bean que tiene un ciclo de vida sencillo en el cual los métodos se instancian, son gestionados por el controlador y en un momento determinado pueden desaparecer y podemos interactuar en ese ciclo de vida mediante *callbacks* justo después de que se instancie y justo antes de que se destruya. 
+
+Lo podemos hacer mediante varias maneras que vamos a aprender aquí. Puede ser a través de Interfaces, de XML o incluso a través de anotaciones. 
+
+Aquí, como realmente no realizamos la construcción de los objetos tal cual, aun que podemos tener inyección a través de constructores, pero como podemos tener otra serie de dependencias que se encargan el contenedor de satisfacer, puede ser interesante que justo antes de hacer todas esas operaciones de instanciar, inyectar dependencias, etc. podamos tener algún método normalmente de *inicialización* y justo antes que se destruya un objeto si tiene asociados recursos, ficheros abiertos, conexiones a BD podemos tratarlos justo antes de que se destruya el objeto para liberar recursos.
+
 <img src="images/12-03.png">
+
+Si queremos trabajarlo a través de la Interface Spring pone a nuestra disposición las interfaces:
+
+* `InitializingBean`
+* `DisponsableBean`
+
+Son dos interfaces que nuestros beans deben implementar y por el mero hecho de implementar una u otra con el método que nos obliga a implementar esa interfaz, ese método sse ejecutaria en el momento adecuado del ciclo de vida del bean. En el caso de 
+`InitializingBean` justo después de haberse creado el bean y en el caso de `DisponsableBean` justo antes de que se destruya ese bean.
+
+La ventaja es que la interfaz nos ofrece un contrato, nos da la firma del método que tenemos que implementar, pero la desventaja es que algún elemento de configuración como el decir que método o que se va a realizar durante la inicialización o la destrucción del bean y la implementació *irian unidos*. Esto aumenta el acoplamionto.
 
 <img src="images/12-04.png">
 
