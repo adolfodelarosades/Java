@@ -1106,7 +1106,9 @@ Al ejecutar la aplicación tenemos:
 
 Esto funciona como antes pero Spring es el que se ha encargado de la auto-inyección.
 
-Si el bean `saludator` fuera uno de esos *beans conflictivos* de los que hablabamos, lo podríamos marcar como `autowire-candidate="false"`.
+<img src="images/9-07.png">
+
+Si el bean `saludator` fuera uno de esos *beans conflictivos*, lo podríamos marcar como `autowire-candidate="false"`.
 
 *`beans.xml`*
 
@@ -1179,7 +1181,7 @@ De forma que al ejecutar la aplicación todo vuelve a funcionar.
 
 <img src="images/9-12.png">
 
-<img src="images/9-07.png">
+<img src="images/9-08.png">
 
 ### :computer: Ejemplo Proyecto Primary
 
@@ -1274,8 +1276,6 @@ Podríamos poner como primary el otro bean.
 De forma que si ahora ejecutamos el saludo será en Inglés:
 
 <img src="images/9-16.png">
-
-<img src="images/9-08.png">
 
 # Contenido adicional  4
 
