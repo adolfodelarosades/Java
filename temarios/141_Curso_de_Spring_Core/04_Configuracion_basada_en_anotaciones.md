@@ -412,6 +412,8 @@ Esta anotación tiene el mismo efecto que la configuración del auto cableado, d
 
 <img src="images/14-03.png">
 
+<img src="images/14-04.png">
+
 La anotación `@autowired` la podemos usar en un método setter, lo podemos usar en la propia definición de la propiedad de la declaración de la misma o también lo podemos usar a nivel de constructor.
 
 Incluso podemos mezclar los tres tipos de `autowired`, en la propiedad es realmente cómodo, cómo podemos comprobar en la imágen, si tenemos una clase que tiene dos o tres dependencia, en la declaración de referencia, poner directamente el `autowired` es francamente comodo.
@@ -505,18 +507,31 @@ Ejecución vía constructor:
 
 <img src="images/14-11.png">
 
-En los tres casos no arroja el mismo resultado.
-
-<img src="images/14-04.png">
-
-El uso de autowired francamente podemos usar autowave con sobre métodos con un número de argumentos que sea mayor que 1 es decir que no tiene que ser ni un setter o sobre un constructor o un método que reciba más de un argumento supongamos que este de aquí donde vamos a tener dos dependencias movie catalog customer presentado y bueno queremos autoinyector las preferencias a través de este método bueno pues podríamos declarar mediante autoescuela anotar perdón este método y si nos indicarían estas dos dependencias vale también podemos utilizar autowave para varios objetos de un impuesto también va a ser muy cómodo porque si tenemos declarado varios beans de un tipo hemos visto en lecciones anteriores que si queremos inyectar una dependencia en base al tipo producir una infección porque tenemos varios candidatos solamente si tuviéramos primary no puedes elegiría a uno sobre los demás y si lo que queremos es rescatarnos todo bueno pues lo podemos rescatar directamente autoinyectable todos en un array o en una colección de tipo de tipo c o de tipo imagino que tenemos varios catálogos de películas por ejemplo un catálogo de películas clásicas y un catálogo de película actual y nosotros queremos en nuestro lado fundirlo todo todo aquellos catálogos que estén definidos y solamente uno y si no pues todos ellos pues podríamos anotar por ejemplo de películas catálogo de películasno encuentra ningún candidato se puede producir una una excepción aunque podemos modificar este comportamiento mediante bonos la propiedad a Fox the good wife anotando también con nullable a partir de spring 5 y si estamos utilizando Java 8 también podemos usar la clase opcional vale donde no podemos ya la conocéis sobre todo hecho en nuestro curso de Java dónde bueno podemos puede que esté contenedor opcional tenga algún valor o no lo tengo de esa manera si la dependencia no es satisfecha este autoway con recuerda a false en este caso sería más recomendable que usar el conjunto de las anotaciones autowey y recuerda que este pin está indica que no es poder hablar de la obligación con respecto al auto cableado pero no con respecto a la necesidad de ser inyectado vale vamos a ver algún ejemplo de anotación
-
+En los tres casos no arroja el mismo resultado como era de esperarse pero la inyección se ha echo de 3 tres formas diferentes.
 
 <img src="images/14-05.png">
 
+Podemos usar `autowired` sobre métodos con un número de argumentos que sea mayor que 1, es decir que no tiene que ser ni un setter o sobre un constructor o un método que reciba más de un argumento, supongamos el del ejemplo donde vamos a tener dos dependencias `MovieCatalog` y `CustomerPreferenceDao` y queremos autoinyector las dos dependencias a través del método `prepare`, podríamos anotar este método con `@Autowired` y se nos inyectarían las dos dependencias.
+
 <img src="images/14-06.png">
 
+También podemos utilizar `autowired` para varios objetos de un mismo tipo, también va a ser muy cómodo, porque si tenemos declarado varios beans de un tipo, hemos visto en lecciones anteriores que si queremos inyectar una dependencia en base al tipo produciría una excepción, porque tenemos varios candidatos, solamente si tuviéramos `primary` elegiría a uno sobre los demás.
+
+¿Y si lo que queremos es rescatarnos todos? bueno pues lo podemos rescatar directamente, autoinyectar todos en un array o en una colección de tipo `List`, `Set` o `Map`.
+
+Imaginemos que tenemos varios catálogos de películas, por ejemplo un catálogo de películas clásicas y un catálogo de película actual y nosotros queremos en nuestro DAO fundirlos todos, todo aquellos catálogos que estén definidos, si solamente hay uno, pues ese y si hay más de uno pues todos ellos. 
+
+Podríamos anotar con `@Autowired` por ejemplo el `Set` catálogo de películas, y con `@Autowired` se nos inyectarían los  beans `catalogoclasicas` y `catalogoActuales` dentro del `Set`, esto es francamente muy comodo a la hora de poder trabajar en escenarios como este.
+
 <img src="images/14-07.png">
+
+Por último decir que si `Autowired` no encuentra ningun bean candidato se puede producir una excepción aun que podemos modificar este comportamiento mediante la propiedad `required=false` de `@Autowired`. Anotando también con `@Nullable` (Spring 5) y si usamos Java 8 podemos usar `Optional<?>` donde el contenedor `Optional` tenga algun valor o no lo tenga. De esa manera si la dependencia no es satisfecha lo podemos comprobar con `isEmpty`.
+
+El `@Autowired(required=false)` en este caso sería más recomendable que usar el conjunto de las anotaciones autowey y recuerda que este pin está indica que no es poder hablar de la obligación con respecto al auto cableado pero no con respecto a la necesidad de ser inyectado vale vamos a ver algún ejemplo de anotación
+
+
+
+
 
 *.java*
 
