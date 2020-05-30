@@ -732,11 +732,11 @@ Al ejecutar la aplicación Spring se encarga mediante a la metainformación ejec
 
 <img src="images/12-13.png">
 
+En el caso de `destroy` es muy similar a `init` pero se ejecutará justo antes de destruir el bean.
+
 ### :computer: Ejemplo Proyecto Destroy
 
 <img src="images/12-14.png">
-
-En el caso de `destroy` es muy similar a `init` pero se ejecutará justo antes de destruir el bean.
 
 *`beans.xml`*
 
@@ -811,37 +811,36 @@ Al ejecutar el proyecto tenemos:
 
 <img src="images/12-15.png">
 
+<img src="images/12-06.png">
 
-### :computer: Ejemplo Proyecto 
+Si vamos a tener más de un bean que va a requerir de manejar su ciclo de vida podemos usar las opciones de `default-init-method` y `default-destroy-method` que pertenece a la etiqueta `<beans>`, la raíz, que nos permite definir un nombre de inicialización por defecto para todos nuestros beans y también un nombre de destrucción. Esto nos permite no estar declarando estos métodos en cada uno de los beans como lo hemos hecho hasta ahora, por lo que se podría usar en más de una clase que represente al bean.
+
+<img src="images/12-07.png">
+
+
+### :computer: Ejemplo Proyecto Default Init-Destroy
+
+<img src="images/12-16.png">
+
+Declaramos de forma "global" los nombres de los metodos de inicalización y destrucción para todos los beans que tengamos declarados (en este caso solo tenemos uno).
 
 *`beans.xml`*
 
 ```html
-```
-*`.java`*
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="init" default-destroy-method="destroy"	>
 
-```java
-```
-
-*`.java`*
-
-```java
-```
-
-*`.java`*
-
-```java
+	<bean id="personaDao" class="com.openwebinars.lifecycle.PersonaDAOImplMemory" />
+	
+</beans>
 ```
 
-*`.java`*
+Al ejecutar la aplicación tenemos:
 
-```java
-```
-
-
-<img src="images/12-06.png">
-
-<img src="images/12-07.png">
+<img src="images/12-17.png">
 
 # Contenido adicional 3
 
