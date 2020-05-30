@@ -25,23 +25,23 @@ No importa la elección, Spring puede acomodar ambos estilos e incluso mezclarlo
 
 ## Transcripción
 
-<img src="images/13-01">
+<img src="images/13-01.png">
 
-<img src="images/13-02">
+<img src="images/13-02.png">
 
-<img src="images/13-03">
+<img src="images/13-03.png">
 
-<img src="images/13-04">
+<img src="images/13-04.png">
 
-<img src="images/13-05">
+<img src="images/13-05.png">
 
-<img src="images/13-06">
+<img src="images/13-06.png">
 
-<img src="images/13-07">
+<img src="images/13-07.png">
 
-<img src="images/13-08">
+<img src="images/13-08.png">
 
-<img src="images/13-09">
+<img src="images/13-09.png">
 
 # 14 Uso de @Autowired 10:58 
 
@@ -86,19 +86,19 @@ public class SimpleMovieLister {
 
 ## Transcripción
 
-<img src="images/14-01">
+<img src="images/14-01.png">
 
-<img src="images/14-02">
+<img src="images/14-02.png">
 
-<img src="images/14-03">
+<img src="images/14-03.png">
 
-<img src="images/14-04">
+<img src="images/14-04.png">
 
-<img src="images/14-05">
+<img src="images/14-05.png">
 
-<img src="images/14-06">
+<img src="images/14-06.png">
 
-<img src="images/14-07">
+<img src="images/14-07.png">
 
 
 # 15 Uso de Primary y @Qualifier 7:04 
@@ -135,23 +135,23 @@ Aunque la creación de anotaciones propias (en general) queda fuera del ámbito 
 
 ## Transcripción
 
-<img src="images/15-01">
+<img src="images/15-01.png">
 
-<img src="images/15-02">
+<img src="images/15-02.png">
 
-<img src="images/15-03">
+<img src="images/15-03.png">
 
-<img src="images/15-04">
+<img src="images/15-04.png">
 
-<img src="images/15-05">
+<img src="images/15-05.png">
 
-<img src="images/15-06">
+<img src="images/15-06.png">
 
-<img src="images/15-07">
+<img src="images/15-07.png">
 
-<img src="images/15-08">
+<img src="images/15-08.png">
 
-<img src="images/15-09">
+<img src="images/15-09.png">
 
 # 16 Uso de @PostConstruct y @PreDestroy 3:28 
 
@@ -163,11 +163,11 @@ No existe.
 
 ## Transcripción
 
-<img src="images/16-01">
+<img src="images/16-01.png">
 
-<img src="images/16-02">
+<img src="images/16-02.png">
 
-<img src="images/16-03">
+<img src="images/16-03.png">
 
 # 17 Uso de estereotipos 7:51 
 
@@ -194,19 +194,19 @@ A continuación tenemos un ejemplo:
 
 ## Transcripción
 
-<img src="images/17-01">
+<img src="images/17-01.png">
 
-<img src="images/17-02">
+<img src="images/17-02.png">
 
-<img src="images/17-03">
+<img src="images/17-03.png">
 
-<img src="images/17-04">
+<img src="images/17-04.png">
 
-<img src="images/17-05">
+<img src="images/17-05.png">
 
-<img src="images/17-06">
+<img src="images/17-06.png">
 
-<img src="images/17-07">
+<img src="images/17-07.png">
 
 
 # Contenido adicional  5
