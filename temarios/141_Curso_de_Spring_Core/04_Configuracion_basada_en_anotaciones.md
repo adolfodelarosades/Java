@@ -66,6 +66,8 @@ Esta anotacion es `<context:annotation-config>` y declarando esto nada más, Spr
 
 ### :computer: Ejemplo Proyecto Anotaciones
 
+**ESTE EJEMPLO ES EL PRIMERO QUE USA UN SERVICE**
+
 Aplicación CRUD muy sencilla sobre películas.
 
 <img src="images/13-10.png">
@@ -275,7 +277,38 @@ La anotación `@Required` tiene una utilización muy básica y es que nos permit
 
 Se va a producir una excepción, esto nos permite evitar errores de tipo `NullPointerException` porque esta sesión se va a producir a lo largo de la carga del contenedor y no de la ejecución del programa. Esto nos permite prevenir posibles errores que vayamos a tener con objetos que sean críticos y que necesiten dependencias que estén totalmente satisfechas en ese momento.
 
-La utilización sería muy sencilla en el bean `PeliculaService` que es el que permite interactuar con `PeliculaDao`, es capaz de devolvernos las películas por genero. Este bean tiene como dependencia en bean `PeliculaDao` la anotación `@Request` se asocia al método `setPeliculaDao` pero inclusive se podría asociar a la propiedad `peliculaDao`, *de manera que si no hacemos esa referencia entr los beans nos dara un error*. 
+La utilización sería muy sencilla en el bean `PeliculaService` que es el que permite interactuar con `PeliculaDao`, es capaz de devolvernos las películas por genero. Este bean tiene como dependencia en bean `PeliculaDao` la anotación `@Request` se asocia al método `setPeliculaDao` pero inclusive se podría asociar a la propiedad `peliculaDao`, *de manera que si no hacemos esa referencia entre los beans nos dara un error*. 
+
+*`PeliculaService.java`*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Required;
+
+public class PeliculaService {
+	
+   private PeliculaDao peliculaDao;
+	
+   @Required
+   public void setPeliculaDao(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+	
+   public List<Pelicula> pelisPorGenero(String genero) {
+      return peliculaDao
+		.findAll()
+		.stream()
+		.filter(p -> p.getGenero().equalsIgnoreCase(genero))
+		.collect(Collectors.toCollection(ArrayList::new));
+   }
+   
+}
+```
 
 Podemos comprobando quitando `autowire="byType"` de nuestro archivo `beans.xml` y al ejecutar la aplicación tendríamos un error.
 
@@ -389,7 +422,95 @@ Ahora veremos un ejemplo lo vamos a ver primero y después os comento alguna cos
 
 ### :computer: Ejemplo Proyecto Autowired
 
+<img src="images/14-08.png">
+
+Es muy similar al ejemplo anterior con pequeños cambios que se describen a continuación.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		            http://www.springframework.org/schema/beans/spring-beans.xsd
+			    http://www.springframework.org/schema/context 
+			    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:annotation-config />
+
+	<bean id="peliculaDaoMemory"
+		class="com.openwebinars.annotation.PeliculaDaoImplMemory"
+		init-method="init" />
+		
+	<bean id="peliculaService"	
+	      class="com.openwebinars.annotation.PeliculaService" />
+
+</beans>
+```
+
+Hemos eliminado `autowire="byType"` del bean `peliculaService`, esto implica que ya no se hara la auto-inyección vía XML.
+
+La Inyección se hara vía anotacion en `PeliculaService`, la cual como podemos ver la podemos poner en la propiedad, en el setter o en el constructor.
+
+*PeliculaService.java*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaService {
+	
+   @Autowired
+   private PeliculaDao peliculaDao;
+		
+   //@Autowired
+   public void setPeliculaDao(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+		
+   public PeliculaService() { }
+		
+   //@Autowired
+   public PeliculaService(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+
+   public List<Pelicula> pelisPorGenero(String genero) {
+      return peliculaDao
+		.findAll()
+		.stream()
+		.filter(p -> p.getGenero().equalsIgnoreCase(genero))
+		.collect(Collectors.toCollection(ArrayList::new));
+   }
+	
+}
+```
+
+Ejecución vía Propiedad:
+
+<img src="images/14-09.png">
+
+Ejecución vía Setter:
+
+<img src="images/14-10.png">
+
+Ejecución vía constructor:
+
+<img src="images/14-11.png">
+
+En los tres casos no arroja el mismo resultado.
+
 <img src="images/14-04.png">
+
+El uso de autowired francamente podemos usar autowave con sobre métodos con un número de argumentos que sea mayor que 1 es decir que no tiene que ser ni un setter o sobre un constructor o un método que reciba más de un argumento supongamos que este de aquí donde vamos a tener dos dependencias movie catalog customer presentado y bueno queremos autoinyector las preferencias a través de este método bueno pues podríamos declarar mediante autoescuela anotar perdón este método y si nos indicarían estas dos dependencias vale también podemos utilizar autowave para varios objetos de un impuesto también va a ser muy cómodo porque si tenemos declarado varios beans de un tipo hemos visto en lecciones anteriores que si queremos inyectar una dependencia en base al tipo producir una infección porque tenemos varios candidatos solamente si tuviéramos primary no puedes elegiría a uno sobre los demás y si lo que queremos es rescatarnos todo bueno pues lo podemos rescatar directamente autoinyectable todos en un array o en una colección de tipo de tipo c o de tipo imagino que tenemos varios catálogos de películas por ejemplo un catálogo de películas clásicas y un catálogo de película actual y nosotros queremos en nuestro lado fundirlo todo todo aquellos catálogos que estén definidos y solamente uno y si no pues todos ellos pues podríamos anotar por ejemplo de películas catálogo de películasno encuentra ningún candidato se puede producir una una excepción aunque podemos modificar este comportamiento mediante bonos la propiedad a Fox the good wife anotando también con nullable a partir de spring 5 y si estamos utilizando Java 8 también podemos usar la clase opcional vale donde no podemos ya la conocéis sobre todo hecho en nuestro curso de Java dónde bueno podemos puede que esté contenedor opcional tenga algún valor o no lo tengo de esa manera si la dependencia no es satisfecha este autoway con recuerda a false en este caso sería más recomendable que usar el conjunto de las anotaciones autowey y recuerda que este pin está indica que no es poder hablar de la obligación con respecto al auto cableado pero no con respecto a la necesidad de ser inyectado vale vamos a ver algún ejemplo de anotación
+
 
 <img src="images/14-05.png">
 
