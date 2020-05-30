@@ -25,6 +25,24 @@ No importa la elección, Spring puede acomodar ambos estilos e incluso mezclarlo
 
 ## Transcripción
 
+<img src="images/13-01">
+
+<img src="images/13-02">
+
+<img src="images/13-03">
+
+<img src="images/13-04">
+
+<img src="images/13-05">
+
+<img src="images/13-06">
+
+<img src="images/13-07">
+
+<img src="images/13-08">
+
+<img src="images/13-09">
+
 # 14 Uso de @Autowired 10:58 
 
 [PDF 4-2_Uso_de_Autowired.pdf](pdfs/4-2_Uso_de_Autowired.pdf)
@@ -68,6 +86,21 @@ public class SimpleMovieLister {
 
 ## Transcripción
 
+<img src="images/14-01">
+
+<img src="images/14-02">
+
+<img src="images/14-03">
+
+<img src="images/14-04">
+
+<img src="images/14-05">
+
+<img src="images/14-06">
+
+<img src="images/14-07">
+
+
 # 15 Uso de Primary y @Qualifier 7:04 
 
 [PDF 4-3_Uso_de_Primary_y_Qualifier.pdf](pdfs/4-3_Uso_de_Primary_y_Qualifier.pdf)
@@ -102,6 +135,24 @@ Aunque la creación de anotaciones propias (en general) queda fuera del ámbito 
 
 ## Transcripción
 
+<img src="images/15-01">
+
+<img src="images/15-02">
+
+<img src="images/15-03">
+
+<img src="images/15-04">
+
+<img src="images/15-05">
+
+<img src="images/15-06">
+
+<img src="images/15-07">
+
+<img src="images/15-08">
+
+<img src="images/15-09">
+
 # 16 Uso de @PostConstruct y @PreDestroy 3:28 
 
 [PDF 4-4_PostConstruct_y_PreDestroy.pdf](pdfs/4-4_PostConstruct_y_PreDestroy.pdf)
@@ -111,6 +162,12 @@ Aunque la creación de anotaciones propias (en general) queda fuera del ámbito 
 No existe.
 
 ## Transcripción
+
+<img src="images/16-01">
+
+<img src="images/16-02">
+
+<img src="images/16-03">
 
 # 17 Uso de estereotipos 7:51 
 
@@ -136,6 +193,21 @@ A continuación tenemos un ejemplo:
 ```
 
 ## Transcripción
+
+<img src="images/17-01">
+
+<img src="images/17-02">
+
+<img src="images/17-03">
+
+<img src="images/17-04">
+
+<img src="images/17-05">
+
+<img src="images/17-06">
+
+<img src="images/17-07">
+
 
 # Contenido adicional  5
 
