@@ -383,12 +383,461 @@ La ventaja es que la interfaz nos ofrece un contrato, nos da la firma del métod
 
 ### :computer: Ejemplo Proyecto usando `InitializingBean`
 
+<img src="images/12-08.png">
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="personaDao" class="com.openwebinars.lifecycle.PersonaDAOImplMemory" />
+	
+</beans>
+```
 
 
+Tenemos la clase modelo Persona.
 
+*`Persona.java`*
 
+```java
+package com.openwebinars.lifecycle;
+
+public class Persona {
+	
+   private String nombre;
+   private int edad;
+	
+   public Persona() {
+   }
+
+   public Persona(String nombre, int edad) {
+      this.nombre = nombre;
+      this.edad = edad;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public int getEdad() {
+      return edad;
+   }
+
+   public void setEdad(int edad) {
+      this.edad = edad;
+   }
+
+   @Override
+   public String toString() {
+      return "Persona [nombre=" + nombre + ", edad=" + edad + "]";
+   }
+
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + edad;
+      result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Persona other = (Persona) obj;
+      if (edad != other.edad)
+         return false;
+      if (nombre == null) {
+         if (other.nombre != null)
+	    return false;
+      } else if (!nombre.equals(other.nombre))
+         return false;
+      return true;
+   }
+}
+```
+
+Tenemos una Interfaz `PersonaDAO` que nos va a permitir interactuar con el repositorio de datos.
+
+*`PersonaDAO.java`*
+
+```java
+package com.openwebinars.lifecycle;
+
+import java.util.List;
+
+public interface PersonaDAO {
+	
+   public Persona findByIndex(int index);
+   public List<Persona> findAll();
+   public void insert(Persona persona);
+   public void edit(int index, Persona persona);
+   public void delete(int index);
+   public void delete(Persona persona);
+
+}
+```
+
+La clase `PersonaDAOImplMemory` que implementa la Interfaz `PersonaDAO` y que representa a nuestro bean, construye el repositorio de datos en memoria que se almacena en un `ArrayList`.
+
+El bean `PersonaDAOImplMemory` es sobre el cual queremos manejar su ciclo de vida por lo que implementamos la interfaz `InitializingBean`, y que nos obliga a darle cuerpo al método `afterPropertiesSet()` *que se ejecuta justo después de que se crea el bean* y en este caso inserta una serie de datos en la lista.
+
+*`PersonaDAOImplMemory.java`*
+
+```java
+package com.openwebinars.lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.InitializingBean;
+
+public class PersonaDAOImplMemory implements PersonaDAO, InitializingBean {
+	
+   List<Persona> personas = new ArrayList<Persona>();
+
+   public Persona findByIndex(int index) {
+      return personas.get(index);
+   }
+
+   public List<Persona> findAll() {
+      return personas;
+   }
+
+   public void insert(Persona persona) {
+      personas.add(persona);
+   }
+
+   public void edit(int index, Persona persona) {
+      personas.remove(index);
+      personas.add(index, persona);
+   }
+
+   public void delete(int index) {
+      personas.remove(index);
+   }
+
+   public void delete(Persona persona) {
+      personas.remove(persona);
+   }
+	
+   @Override
+   public void afterPropertiesSet() throws Exception {
+      insert(new Persona("Luismi", 35));
+      insert(new Persona("Ana", 32));
+      insert(new Persona("Pepe", 34));
+      insert(new Persona("Julia", 39));		
+   }
+   
+}
+```
+
+Nuestra clase principal `App` requiere la interfaz `PersonaDAO`, por lo que Spring busca una clase que implemente esta Interfaz en este caso `PersonaDAOImplMemory` la cual inicializa la lista gracias a que maneja el ciclo de vida de este bean.
+Una vez creado el bean despliega los valores dentro de la lista.
+
+*`App.java`*
+
+```java
+package com.openwebinars.lifecycle;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+			
+      PersonaDAO personaDAO = appContext.getBean(PersonaDAO.class);
+		
+      personaDAO.findAll().forEach(System.out::println);
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/12-09.png">
+
+<img src="images/12-04.png">
+
+Analogamente tenemos tenemos la interfgaz `DisposableBean` que nos permite a traves del método `destroy()` realizar alguna tarea justo antes de que se destuya el bean.
+
+### :computer: Ejemplo Proyecto usando `DisposableBean`
+
+<img src="images/12-10.png">
+
+El proyecto es muy similar al anterior solo se implementa la interfaz `DisposableBean` que nos obliga a definir el método `destroy()` que lo usaremos para limpiar la lista. 
+
+*`PersonaDAOImplMemory.java`*
+
+```java
+package com.openwebinars.lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.InitializingBean;
+
+public class PersonaDAOImplMemory implements PersonaDAO, InitializingBean, DisposableBean {
+	
+   List<Persona> personas = new ArrayList<Persona>();
+
+   public Persona findByIndex(int index) {
+      return personas.get(index);
+   }
+
+   public List<Persona> findAll() {
+      return personas;
+   }
+
+   public void insert(Persona persona) {
+      personas.add(persona);
+   }
+
+   public void edit(int index, Persona persona) {
+      personas.remove(index);
+      personas.add(index, persona);
+   }
+
+   public void delete(int index) {
+      personas.remove(index);
+   }
+
+   public void delete(Persona persona) {
+      personas.remove(persona);
+   }
+	
+   @Override
+   public void afterPropertiesSet() throws Exception {
+      insert(new Persona("Luismi", 35));
+      insert(new Persona("Ana", 32));
+      insert(new Persona("Pepe", 34));
+      insert(new Persona("Julia", 39));		
+   }
+   
+   @Override
+   public void destroy() throws Exception {
+      System.out.println("");
+      System.out.println("Limpiando los datos de la lista");
+      personas.clear();
+   }
+   
+}
+```
+
+Al ejecutal la aplicación tenemos:
+
+<img src="images/12-11.png">
 
 <img src="images/12-05.png">
+
+También tenemos la posibilidad de configurar el ciclo de vida vía XML usando las propiedades `init-method` y `destroy-method` las cuales aceptan un String con el nombre del método que queremos utilizar como *calback* del ciclo de vida de un bean.
+
+Esto ayuda a rebajar el acoplamiento ya que si definimos el método pero en el xml no hacemos referencia a que un método es de inicialización simplemente es un método más en nuestra clase bean pero que no se invocaría en ese momento. Sin embargo si lo configuramos con XML si que se ejecutaría.
+
+### :computer: Ejemplo Proyecto Init
+
+<img src="images/12-12.png">
+
+A comparación de los ejemplos solo vamos a poner los archivos que han cambiado.
+
+En nuestro archivo `beans.xml` hemos colocado el atributo `init-method="init"` dentro de nuestro bean para indicar que el método inicial de este bean se llama `init`.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="personaDao" class="com.openwebinars.lifecycle.PersonaDAOImplMemory" init-method="init" />
+	
+</beans>
+```
+
+En la implementación de nuestro bean tenemos una clase que *ya no implementa ninguna interfaz*, pero implementa el método `init()` según las reglas antes indicadas y la tarea que hace es inicializar la lista. 
+
+*`PersonaDAOImplMemory.java`*
+
+```java
+package com.openwebinars.lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.InitializingBean;
+
+public class PersonaDAOImplMemory implements PersonaDAO {
+	
+   List<Persona> personas = new ArrayList<Persona>();
+
+   public Persona findByIndex(int index) {
+      return personas.get(index);
+   }
+
+   public List<Persona> findAll() {
+      return personas;
+   }
+
+   public void insert(Persona persona) {
+      personas.add(persona);
+   }
+
+   public void edit(int index, Persona persona) {
+      personas.remove(index);
+      personas.add(index, persona);
+   }
+
+   public void delete(int index) {
+      personas.remove(index);
+   }
+
+   public void delete(Persona persona) {
+      personas.remove(persona);
+   }
+	   
+   public void init() throws Exception {
+      insert(new Persona("Luismi", 35));
+      insert(new Persona("Ana", 32));
+      insert(new Persona("Pepe", 34));
+      insert(new Persona("Julia", 39));
+   }
+   
+}
+```
+
+Al ejecutar la aplicación Spring se encarga mediante a la metainformación ejecutar el método `init()` en el momento adecuado.
+
+<img src="images/12-13.png">
+
+### :computer: Ejemplo Proyecto Destroy
+
+<img src="images/12-14.png">
+
+En el caso de `destroy` es muy similar a `init` pero se ejecutará justo antes de destruir el bean.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="personaDao" class="com.openwebinars.lifecycle.PersonaDAOImplMemory" 
+			init-method="init" destroy-method="destroy" />
+		
+</beans>
+```
+
+*`PersonaDAOImplMemory.java`*
+
+```java
+package com.openwebinars.lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.InitializingBean;
+
+public class PersonaDAOImplMemory implements PersonaDAO {
+	
+   List<Persona> personas = new ArrayList<Persona>();
+
+   public Persona findByIndex(int index) {
+      return personas.get(index);
+   }
+
+   public List<Persona> findAll() {
+      return personas;
+   }
+
+   public void insert(Persona persona) {
+      personas.add(persona);
+   }
+
+   public void edit(int index, Persona persona) {
+      personas.remove(index);
+      personas.add(index, persona);
+   }
+
+   public void delete(int index) {
+      personas.remove(index);
+   }
+
+   public void delete(Persona persona) {
+      personas.remove(persona);
+   }
+	   
+   public void init() throws Exception {
+      insert(new Persona("Luismi", 35));
+      insert(new Persona("Ana", 32));
+      insert(new Persona("Pepe", 34));
+      insert(new Persona("Julia", 39));
+   }
+   
+   public void destroy() throws Exception {
+      System.out.println("");
+      System.out.println("Limpiando los datos de la lista");
+      personas.clear();
+   }
+   
+}
+```
+
+Al ejecutar el proyecto tenemos:
+
+<img src="images/12-15.png">
+
+
+### :computer: Ejemplo Proyecto 
+
+*`beans.xml`*
+
+```html
+```
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
 
 <img src="images/12-06.png">
 
