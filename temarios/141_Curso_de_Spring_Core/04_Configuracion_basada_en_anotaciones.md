@@ -281,7 +281,7 @@ Podemos comprobando quitando `autowire="byType"` de nuestro archivo `beans.xml` 
 
 <img src="images/13-12.png">
 
-(El error adecuado debería indicar que el bean `PeliculaDao` es requerido.
+(El error adecuado debería indicar que el bean `PeliculaDao` es requerido)
 
 Si comentamos el `@Require` en `PeliculaService` al ejecutarlo tendríamos:
 
@@ -291,7 +291,7 @@ El error que se muestra es `NullPointerException`.
 
 Pero si lo dejamos todo como lo programamos inicialmente, tenemos que nuestro archivo de Aplicación recupera las películas cuyo genero sea Drama.
 
-*.java*
+*App.java*
 
 ```java
 package com.openwebinars.annotation;
@@ -371,13 +371,30 @@ public class SimpleMovieLister {
 
 <img src="images/14-01.png">
 
+Vamos a seguir trabajando con las anotaciones en este caso con `@autowired`.
+
 <img src="images/14-02.png">
+
+Esta anotación tiene el mismo efecto que la configuración del auto cableado, del `autowire="..."` vía XML. Busca un bean adecuado y lo inyectan en la dependencia, el tipo de inyección que se realiza con la anotación `@autowired` es `byType` en base al tipo de referencia de la clase o interfaz que hayamos definido.
 
 <img src="images/14-03.png">
 
+La anotación `@autowired` la podemos usar en un método setter, lo podemos usar en la propia definición de la propiedad de la declaración de la misma o también lo podemos usar a nivel de constructor.
+
 <img src="images/14-04.png">
 
+Incluso podemos mezclar los tres tipos de `autowired`, en la propiedad es realmente cómodo, cómo podemos comprobar en la imágen, si tenemos una clase que tiene dos o tres dependencia, en la declaración de referencia, poner directamente el `autowired` es francamente comodo.
+
 <img src="images/14-05.png">
+
+El método setter nos va a permitir que si tiene algún tipo de lógica especial, algún tipo de adaptación, inicializacion cualquier cosa, lo podríamos incluir ahí y para atributos de tipo final alguno de ellos que no queremos que sean modificables después, pues la inyección se lo podríamos plantear vía constructor, para que esa referencia no se podrá modificar.
+
+Ahora veremos un ejemplo lo vamos a ver primero y después os comento alguna cosa más
+
+
+
+
+
 
 <img src="images/14-06.png">
 
