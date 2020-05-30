@@ -64,20 +64,267 @@ Para que nosotros podamos utilizar la configuración a través de anotaciones te
 
 Esta anotacion es `<context:annotation-config>` y declarando esto nada más, Spring se va a encargar de registrar los `BeanPostProcessor` necesarios para que nosotros podamos trabajar con las anotaciones. Como podemos comprobar esto es francamente comodo, mucho más que si nosotros tuviéramos que que registrar todos los `BeanPostProcessor` necesarios para poder trabajar con las anotaciones.
 
-AQUI
+### :computer: Ejemplo Proyecto Anotaciones
 
-cómo añadir está nota cine sencillo vale tenemos aquí añadido este nuevo espacio de nombres context y no tendríamos que hacer muchas más cosas en este caso pues el resto de elementos del ejemplo lo tenemos que declarar vía XML vale lo vamos a utilizar esto sería una aplicación muy sencilla sobre películas vale un título años y manejadas por un lado vale también muy sencillo con una implementación también memoria muy sencilla y con unos datos de ejemplo vale esto ya nos permitiría que comenzamos a trabajar con anotaciones la primera que vamos a aprender a usar es recuerda está notación tiene una utilización básica y es que nos permite indicar que una inyección se tiene que realizar que no podemos dejar esa dependencia no satisfecha no implica que nosotros hagamos esa inyección por varias vías en este caso lo vamos a hacer vía autowire vale con configuración XML qué sucede si no se satisface esta dependencia se va a producir una excepción esto nos permite evitar errores de excepción porque esta sesión se va a producir a lo largo de la carga del contenedor sino de la ejecución del programa vale esto nos permite prevenir posibles errores que vayamos a tener con objetos que sean críticos y que necesiten dependencias que estén totalmente satisfecha en ese momento la utilización sería muy sencilla en el INEM película service qué es el que nos va a permitir interactuar con película dado y que me este caso no es capaz de devolvernos las películas por género tenemos como dependencia película dado la dependencia la podemos asociar o incluso podríamos hacer a la misma propiedad de manera que si no hacemos esa referencia entre los mismos pues nos dará un error vamos a comprobar como auto inyección cómo mola tener comprobar cómo ha sucedido un error de inicializacion bueno pues no tuviéramos este mail cómo lo que sucede realmente sería un error de tipo NullPointerException de esta manera fue lo estamos evitando de alguna manera añadimos aquí el autobús aplicación tiene que servir para mostrarnos todas las películas del género drama que hemos definido dentro de nuestro almacén dentro de los programas que tenemos la lista de schindler en Madrid de esta manera la anotación request obligada a que está dependencia este satisfecha vamos a terminar ahora este vídeo para poder seguir en los siguientes con alguna anotaciones más que nos van a ir permitiendo configurar mejor Machu Picchu
+Aplicación CRUD muy sencilla sobre películas.
+
+<img src="images/13-10.png">
+
+Como indicamos anteriormente marcamos en la pestaña *NameSpaces* la opción de *Context*
+
+<img src="images/13-11.png">
+
+Lo cual añade en nuestro elemento `beans` lo siguiente:
+
+```html
+     http://www.springframework.org/schema/context 
+	 http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+```
+
+Nuestro archivo completo es:
+
+*`beans.xml`*
+
+```html
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<context:annotation-config />
+
+	<bean id="peliculaDaoMemory"
+		class="com.openwebinars.annotation.PeliculaDaoImplMemory"
+		init-method="init" />
+		
+	<bean id="peliculaService"
+		class="com.openwebinars.annotation.PeliculaService" autowire="byType" />
+	
+</beans>
+```
+
+Al añadir `<context:annotation-config />` no tendríamos que hacer mucho más cosas, estamos listos para usar las anotaciones. Los beans que vamos a usar en la aplicación si es necesario declararlos en el XML, en este caso tenemos dos `peliculaDaoMemory` y  `peliculaService`.
+
+Tenemos la entidad `Pelicula`.
+
+*Pelicula.java*
+
+```java
+package com.openwebinars.annotation;
+
+public class Pelicula {
+	
+	private String titulo;
+	private String anyo;
+	private String genero;
+	
+	public Pelicula() {	}
+	
+	public Pelicula(String titulo, String anyo, String genero) {
+		this.titulo = titulo;
+		this.anyo = anyo;
+		this.genero = genero;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	
+	public String getAnyo() {
+		return anyo;
+	}
+
+	public void setAnyo(String anyo) {
+		this.anyo = anyo;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((anyo == null) ? 0 : anyo.hashCode());
+		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pelicula other = (Pelicula) obj;
+		if (anyo == null) {
+			if (other.anyo != null)
+				return false;
+		} else if (!anyo.equals(other.anyo))
+			return false;
+		if (genero == null) {
+			if (other.genero != null)
+				return false;
+		} else if (!genero.equals(other.genero))
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Pelicula [titulo=" + titulo + ", anyo=" + anyo + ", genero=" + genero + "]";
+	}
+
+}
+```
+
+Manejada por una interfaz `DAO`
+
+*PeliculaDao.java*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.Collection;
 
 
+public interface PeliculaDao {
+	
+	public Pelicula findById(int id);
+	public Collection<Pelicula> findAll();
+	public void insert(Pelicula pelicula);
+	public void edit(Pelicula antigua, Pelicula nueva);
+	public void delete(Pelicula pelicula);
+}
+```
 
+Con una implementación en memoría muy sencilla.
 
+*PeliculaDaoImplMemory.java*
 
+```java
+package com.openwebinars.annotation;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+private List<Pelicula> peliculas = new ArrayList<>();
+	
+	public Pelicula findById(int id) {
+		return peliculas.get(id);
+	}
+
+	public Collection<Pelicula> findAll() {
+		return peliculas;
+	}
+
+	public void insert(Pelicula pelicula) {
+		peliculas.add(pelicula);
+	}
+
+	public void edit(Pelicula antigua, Pelicula nueva) {		
+		peliculas.remove(antigua);
+		peliculas.add(nueva);		
+	}
+
+	public void delete(Pelicula pelicula) {
+		peliculas.remove(pelicula);
+	}
+	
+	public void init() {
+		insert(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+		insert(new Pelicula("La lista de Schindler","1993","Drama"));
+		insert(new Pelicula("El Padrino", "1972", "Drama"));
+		insert(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+		insert(new Pelicula("Gladiator", "2000", "Acción"));
+		insert(new Pelicula("El Gran Dictador","1940","Comedia"));	
+	}
+    
+}
+```
+
+Esto ya nos permitiría que comenzamos a trabajar con anotaciones la primera que vamos a aprender a usar es `@Required`.
 
 <img src="images/13-08.png">
 
 <img src="images/13-09.png">
+
+La anotación `@Required` tiene una utilización muy básica y es que nos permite indicar que una inyección se tiene que realizar, es decir que no podemos dejar esa dependencia no satisfecha, no implica que nosotros hagamos esa inyección por varias vías, en este caso lo vamos a hacer vía `autowire`, con configuración XML. 
+
+¿Qué sucede si no se satisface esta dependencia?
+
+Se va a producir una excepción, esto nos permite evitar errores de tipo `NullPointerException` porque esta sesión se va a producir a lo largo de la carga del contenedor y no de la ejecución del programa. Esto nos permite prevenir posibles errores que vayamos a tener con objetos que sean críticos y que necesiten dependencias que estén totalmente satisfechas en ese momento.
+
+La utilización sería muy sencilla en el bean `PeliculaService` que es el que permite interactuar con `PeliculaDao`, es capaz de devolvernos las películas por genero. Este bean tiene como dependencia en bean `PeliculaDao` la anotación `@Request` se asocia al método `setPeliculaDao` pero inclusive se podría asociar a la propiedad `peliculaDao`, *de manera que si no hacemos esa referencia entr los beans nos dara un error*. 
+
+Podemos comprobando quitando `autowire="byType"` de nuestro archivo `beans.xml` y al ejecutar la aplicación tendríamos un error.
+
+<img src="images/13-12.png">
+
+(El error adecuado debería indicar que el bean `PeliculaDao` es requerido.
+
+Si comentamos el `@Require` en `PeliculaService` al ejecutarlo tendríamos:
+
+<img src="images/13-13.png">
+
+El error que se muestra es `NullPointerException`.
+
+Pero si lo dejamos todo como lo programamos inicialmente, tenemos que nuestro archivo de Aplicación recupera las películas cuyo genero sea Drama.
+
+*.java*
+
+```java
+package com.openwebinars.annotation;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+		
+      PeliculaService peliculaService = appContext.getBean(PeliculaService.class);
+      
+      peliculaService.pelisPorGenero("Drama").forEach(System.out::println);
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/13-14.png">
+
+Nos muestra las dos películas con el genero Drama.
+
+Se esta manera la anotación `@Require` ha obligada a que está dependencia este satisfecha.
 
 # 14 Uso de @Autowired 10:58 
 
@@ -135,6 +382,27 @@ public class SimpleMovieLister {
 <img src="images/14-06.png">
 
 <img src="images/14-07.png">
+
+*.java*
+
+```java
+```
+
+
+
+
+
+-----------------------
+*`beans.xml`*
+
+```html
+```
+
+*.java*
+
+```java
+```
+
 
 
 # 15 Uso de Primary y @Qualifier 7:04 
