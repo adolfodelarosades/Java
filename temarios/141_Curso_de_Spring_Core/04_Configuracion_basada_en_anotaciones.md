@@ -381,20 +381,17 @@ Esta anotación tiene el mismo efecto que la configuración del auto cableado, d
 
 La anotación `@autowired` la podemos usar en un método setter, lo podemos usar en la propia definición de la propiedad de la declaración de la misma o también lo podemos usar a nivel de constructor.
 
-<img src="images/14-04.png">
-
 Incluso podemos mezclar los tres tipos de `autowired`, en la propiedad es realmente cómodo, cómo podemos comprobar en la imágen, si tenemos una clase que tiene dos o tres dependencia, en la declaración de referencia, poner directamente el `autowired` es francamente comodo.
-
-<img src="images/14-05.png">
 
 El método setter nos va a permitir que si tiene algún tipo de lógica especial, algún tipo de adaptación, inicializacion cualquier cosa, lo podríamos incluir ahí y para atributos de tipo final alguno de ellos que no queremos que sean modificables después, pues la inyección se lo podríamos plantear vía constructor, para que esa referencia no se podrá modificar.
 
 Ahora veremos un ejemplo lo vamos a ver primero y después os comento alguna cosa más
 
+### :computer: Ejemplo Proyecto Autowired
 
+<img src="images/14-04.png">
 
-
-
+<img src="images/14-05.png">
 
 <img src="images/14-06.png">
 
