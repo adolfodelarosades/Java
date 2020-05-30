@@ -381,6 +381,13 @@ La ventaja es que la interfaz nos ofrece un contrato, nos da la firma del métod
 
 <img src="images/12-04.png">
 
+### :computer: Ejemplo Proyecto usando `InitializingBean`
+
+
+
+
+
+
 <img src="images/12-05.png">
 
 <img src="images/12-06.png">
