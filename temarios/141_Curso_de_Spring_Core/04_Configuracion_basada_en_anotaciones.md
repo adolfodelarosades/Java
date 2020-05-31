@@ -1640,7 +1640,162 @@ Hablemos primero del Escaneo automático, nos hemos dado cuenta hasta ahora que 
 
 <img src="images/17-04.png">
 
-Eso lo hacemos mediante un nuevo elemento (anotación), los candidatos serán clases específicas, incluso podríamos aportar algún criterio de busqueda si fuesen necesarios, si tuviesemos un proyecto muy grande con muchas clases, en las cuales queremos que unas clases sean gestionadas y otras no y las clases van a necesitar tener una metainformación.    
+Eso lo hacemos mediante un nuevo elemento (anotación), los candidatos serán clases específicas, incluso podríamos aportar algún criterio de busqueda si fuesen necesarios, si tuviesemos un proyecto muy grande con muchas clases, en las cuales queremos que unas clases sean gestionadas y otras no y las clases van a necesitar tener una metainformación necesaria a través de otra anotación especial.
+
+Aquí tenemos la anotación que es:
+
+`component-scan` 
+
+Que se encargará de hacer el escaneo de componentes y a la cual le tenemos que proporcionar un paquete base sobre el cual dentro de ese paquete y sus subpaquetes realizara la busqueda de componentes.
+
+### :computer: Ejemplo Proyecto EscaneoComponentes
+
+<img src="images/17-09.png">
+
+Aquí tenemos nuestro archivo `beans.xml` el cual contiene `component-scan` indicando que el paquete base es `com.openwebinars.stereotypes`.
+
+Spring hace varias cosas, lo primero es que incorpora todo el comportamiento que ya hemos tenido al incorporar `<context:annotation-config />` por eso ya no es necesario ponerlo. Segundo ya no declaramos explicitamente los beans por que ya con el paquete indicado pueden ser detectados.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			    http://www.springframework.org/schema/beans/spring-beans.xsd
+			    http://www.springframework.org/schema/context 
+			    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<!-- Esta anotación ya no es necesaria. La anotación de escaneo de componentes 
+		incluye su funcionamiento -->
+	<!--<context:annotation-config /> -->
+
+	<context:component-scan
+		base-package="com.openwebinars.stereotypes" />
+
+	<!-- <bean id="peliculaDaoMemory" class="com.openwebinars.annotation.PeliculaDaoImplMemory" 
+		/> <bean id="peliculaService" class="com.openwebinars.annotation.PeliculaService" 
+		/> <bean id="catalogoClasicas" class="com.openwebinars.annotation.CatalogoPeliculasClasicas" 
+		/> <bean id="catalogoActuales" class="com.openwebinars.annotation.CatalogoPeliculasActuales" 
+		primary="true" /> -->
+
+
+</beans>
+```
+
+<img src="images/17-05.png">
+
+Para que puedan ser detectados al menos debemos usar un estereotipo que el más básico de todos es `@Component`. Toda clase que este anotada con `@Component` será un componente que si esta dentro de los paquetes definidos como paquete para escanear será encontrado por Spring, por el Contenedor de Inversor de Control y se encargará de crear un bean asociado a el.
+
+Podemos ver como `PeliculaService` lo hemos anotado con `@Component`:
+
+*`PeliculaService.java`*
+
+```java
+mport java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PeliculaService {
+	
+   @Autowired
+   private PeliculaDao peliculaDao;
+	
+   public void setPeliculaDao(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+		
+   public List<Pelicula> pelisPorGenero(String genero) {
+      return peliculaDao
+	  	.findAll()
+		.stream()
+		.filter(p -> p.getGenero().equalsIgnoreCase(genero))
+		.collect(Collectors.toCollection(ArrayList::new));
+   }
+	
+}
+```
+
+Podemos ver como `PeliculaDaoImplMemory` también lo hemos anotado con `@Component`:
+
+*`PeliculaDaoImplMemory.java`*
+
+```java
+package com.openwebinars.stereotypes;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   private Set<CatalogoPeliculas> catalogosPeliculas;
+	
+   @PostConstruct
+   public void init() {
+      peliculas = catalogosPeliculas
+			.stream()
+			.map(catalogo -> catalogo.getPeliculas())
+			.flatMap(lista -> lista.stream())
+			.collect(Collectors.toCollection(ArrayList::new));
+   }
+	
+   @PreDestroy
+   public void destroy() {
+      peliculas.clear();
+   }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+
+}
+```
+
+La interface `PeliculaDao` y la entidad `Pelicula.java` no necesitan ser anotada, permanecen igual.
+
+Los catalogos de película también serían componentes es decir los marcamos con `@Component`.
+
+
+
+
+Tampoco 
 
 En la cual hemos comenzado a conocerla concluir esta sección del curso en la cual hemos comenzado a conocerla anotaciones para configurar y vamos a hablar de estereotipos y de automático de componentes automáticos hasta ahora una palabradetectar qué clases son candidatos a hacer pins eso lo hacemos los candidatos serán clase física criterio de búsqueda aquí tenemos la natación que en este caso sería component-scan tenemos que proporcionar un paquete primaria varias cosas lo primero incorporaría todo el comportamiento que ya hemos tenido con context annotation digo que le invitamos al parque te vas Scottcomo para que te parezca bueno pues será encontrado el contenedor de inversión de control asociado película service la interfaz no la podríamos en este caso la película tampoco es necesaria y también serían componentes vale en este caso pues tampoco sería necesaria la clase app también hemos visto como si vemos tenemos las mismas notaciones que estaban antes vale para el lado en el servicio para todos los catálogos de películas yakima pues de manera explícita películas de ciencia ficción funcionará pues ya lo creo que sí y de esta manera nos hemos evitado declarar de esa manera tan verbos en el XML y lo hemos hecho anotando cada una de la clase esto sobre todo cuando no estamos iniciando en el desarrollo es que podemos que vamos a poder encontrar y los demás son derivados de pero si es cierto que en determinados contextos será mejor que utilicemos los derivados para poder indicar los más usuales son service repository controller service es un estereotipo que nos servirá para dar aquellos componentes que estén orientados a clase servicio lógica de negocio aquellas clases auténticamente currante que se encarguen de plasmar la lógica de negocio de nuestra aplicación con arroba repository tendremos la posibilidad de indicar que una clase es algo así como una clase que no permite acceso a datos por ejemplo utilizamos spring data rest que es capaz de poner como un servicio es un repositorio con arroba controller pues estamos diciendo que una clase es un componente orientado a gestionar las peticiones que se reciben todas estas son buenos los estereotipos que se suelen utilizar vamos a comprobar cómo podemos modificar mínimamente pp película lado pues sería un repositorio en este caso lo mismo nos sucede las clásicas y las podemos comprobar también como podemos proporcionar un nombre Alvin que ha creado vale a través de anotaciones indicando que está en la colección la colección de películas clásicas de manera que si quisiéramos inyectar los tipos más adecuados a cada una de las clases que hemos venido utiliza con esto cerramos configuración a la configuración a través de
 
@@ -1653,7 +1808,7 @@ En la cual hemos comenzado a conocerla concluir esta sección del curso en la cu
 
 
 
-<img src="images/17-05.png">
+
 
 <img src="images/17-06.png">
 
