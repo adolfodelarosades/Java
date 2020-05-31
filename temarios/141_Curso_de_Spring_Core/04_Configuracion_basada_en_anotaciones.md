@@ -527,20 +527,349 @@ Podríamos anotar con `@Autowired` por ejemplo el `Set` catálogo de películas,
 
 Por último decir que si `Autowired` no encuentra ningun bean candidato se puede producir una excepción aun que podemos modificar este comportamiento mediante la propiedad `required=false` de `@Autowired`. Anotando también con `@Nullable` (Spring 5) y si usamos Java 8 podemos usar `Optional<?>` donde el contenedor `Optional` tenga algun valor o no lo tenga. De esa manera si la dependencia no es satisfecha lo podemos comprobar con `isEmpty`.
 
-El `@Autowired(required=false)` en este caso sería más recomendable que usar el conjunto de las anotaciones autowey y recuerda que este pin está indica que no es poder hablar de la obligación con respecto al auto cableado pero no con respecto a la necesidad de ser inyectado vale vamos a ver algún ejemplo de anotación
+El `@Autowired(required=false)` en este caso sería más recomendable que usar el conjunto de las anotaciones `@Autowired` y `@Required` ya que `@Autowired(required=false)` puede hablar de la obligación con respecto al auto cableado pero no con respecto a la necesidad de ser inyectado.
 
+Vamos a ver algún ejemplo de anotación `@Autowired`.
 
+### :computer: Ejemplo Proyecto Autowired Multiple 
 
+<img src="images/14-12.png">
 
+En este ejemplo vamos a contar con varios catalogos diferentes de películas para traernos una colección.
 
-*.java*
+*`beans.xml`*
 
-```java
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	default-init-method="init">
+
+	<context:annotation-config />
+
+	<bean id="peliculaDaoMemory"
+		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+		
+	<bean id="peliculaService"  class="com.openwebinars.annotation.PeliculaService" />
+	
+	<bean id="catalogoClasicas" class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+
+	<bean id="catalogoActuales" class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
+
+</beans>
 ```
 
+* Tenemos un bean para un catalogo de películas clasicas `catalogoClasicas`.
+* Tenemos un bean para un catalogo de películas actuales `catalogoActuales`.
+* Tenemos el bean `peliculaDaoMemory`
+* Tenemos el bean `peliculaService`
+* Hemos definido globalmente el método inicial para todos los métodos con `default-init-method="init"`
+* Y hemos puesto la el elemento `<context:annotation-config />` para poder usar las anotaciones.
+
+Tenemos nuestra entidad `Pelicula`
+
+*Pelicula.java*
+
+```java
+package com.openwebinars.annotation;
+
+public class Pelicula {
+	
+	private String titulo;
+	private String anyo;
+	private String genero;
+	
+	public Pelicula() {	}
+	
+	public Pelicula(String titulo, String anyo, String genero) {
+		this.titulo = titulo;
+		this.anyo = anyo;
+		this.genero = genero;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	
+	public String getAnyo() {
+		return anyo;
+	}
+
+	public void setAnyo(String anyo) {
+		this.anyo = anyo;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((anyo == null) ? 0 : anyo.hashCode());
+		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pelicula other = (Pelicula) obj;
+		if (anyo == null) {
+			if (other.anyo != null)
+				return false;
+		} else if (!anyo.equals(other.anyo))
+			return false;
+		if (genero == null) {
+			if (other.genero != null)
+				return false;
+		} else if (!genero.equals(other.genero))
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Pelicula [titulo=" + titulo + ", anyo=" + anyo + ", genero=" + genero + "]";
+	}
+}
+```
+
+Tenemos la interfaz `CatalogoPeliculas` la cual declara el método `getPeliculas()` 
+
+*CatalogoPeliculas.java*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.Collection;
+
+public interface CatalogoPeliculas {
+	
+   public Collection<Pelicula> getPeliculas();
+
+}
+```
+
+Tenemos el catalogo de películas `CatalogoPeliculasActuales` que implementa la interfaz `CatalogoPeliculas` y por otro lado inicializa su catalogo.
+
+*CatalogoPeliculasActuales.java*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class CatalogoPeliculasActuales implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   public void init() {
+      peliculas.add(new Pelicula("Vengadores: Infinity War", "2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Black Panther","2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Han Solo", "2018", "Acción"));
+      peliculas.add(new Pelicula("Ocean's 8", "2018", "Acción"));
+      peliculas.add(new Pelicula("Tom Raider", "2018", "Aventuras"));
+      peliculas.add(new Pelicula("Campeones","2018","Comedia"));
+   }
+
+}
+```
+
+También enemos el catalogo de películas `CatalogoPeliculasClasicas` que implementa la interfaz `CatalogoPeliculas` y por otro lado inicializa su catalogo.
+
+*CatalogoPeliculasClasicas.java*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class CatalogoPeliculasClasicas implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   public void init() {
+      peliculas.add(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+      peliculas.add(new Pelicula("La lista de Schindler","1993","Drama"));
+      peliculas.add(new Pelicula("El Padrino", "1972", "Drama"));
+      peliculas.add(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+      peliculas.add(new Pelicula("Gladiator", "2000", "Acción"));
+      peliculas.add(new Pelicula("El Gran Dictador","1940","Comedia"));
+   }
+}
+```
+
+Por otro lado tenemos la interfaz `PeliculaDao` que declaran todas las acciones que se pueden realizar sobre las peliculas.
+
+*PeliculaDao.java*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.Collection;
 
 
+public interface PeliculaDao {
+	
+   public Pelicula findById(int id);
+   public Collection<Pelicula> findAll();
+   public void insert(Pelicula pelicula);
+   public void edit(Pelicula antigua, Pelicula nueva);
+   public void delete(Pelicula pelicula);
+   
+}
+```
 
+Tenemos `PeliculaDaoImplMemory` que es la implementación de la interfaz `PeliculaDao`. Podemos observar que tiene la dependencia del `Set<CatalogoPeliculas>` la cual se autoinyecta con `@Autowired` y sirve para inicializar los valores de las películas mediante el método `init()`.
+
+*PeliculaDaoImplMemory.java*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   private Set<CatalogoPeliculas> catalogosPeliculas;
+	
+   public void init() {
+      for (CatalogoPeliculas c : catalogosPeliculas) {
+	 peliculas.addAll(c.getPeliculas());
+      }
+   }
+
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+
+}
+```
+
+Tenemos `PeliculaService` que tiene la dependencia de `PeliculaDao` la cual autoinyecta con `@Autowired`. Tiene el método `pelisPorGenero(String genero)` que recupera una lista de películas de `peliculaDao` por genero.
+
+*`PeliculaService`*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaService {
+	
+   @Autowired
+   private PeliculaDao peliculaDao;
+	
+   public void setPeliculaDao(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+		
+   public List<Pelicula> pelisPorGenero(String genero) {
+      return peliculaDao
+	 .findAll()
+	 .stream()
+ 	 .filter(p -> p.getGenero().equalsIgnoreCase(genero))
+	 .collect(Collectors.toCollection(ArrayList::new));
+   }
+	
+}
+```
+
+Finalmente en nuestra clase de aplicación `App`.
+
+*App.java*
+
+```java
+package com.openwebinars.annotation;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+		
+      PeliculaService peliculaService = appContext.getBean(PeliculaService.class);
+		
+      peliculaService.pelisPorGenero("Ciencia ficción").forEach(System.out::println);
+		
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+Esta clase recupera el bean `PeliculaService` que como ya vimos inyecta la dependencia 
 
 -----------------------
 *`beans.xml`*
