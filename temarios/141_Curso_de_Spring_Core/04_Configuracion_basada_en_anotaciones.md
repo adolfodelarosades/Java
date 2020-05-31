@@ -1630,11 +1630,28 @@ A continuación tenemos un ejemplo:
 
 <img src="images/17-01.png">
 
+Vamos a concluir esta sección del curso en la cual hemos empezado a conocer las aotaciones para configurar nuestros beans y vamos a hablar de Estereotipos y del Escaneo automático de componentes.
+
 <img src="images/17-02.png">
 
 <img src="images/17-03.png">
 
+Hablemos primero del Escaneo automático, nos hemos dado cuenta hasta ahora que aun que usemos anotaciones hemos tenido que declarar en el archivo XML todos y cada uno de los beans que ibamos a utilizar, esto es muy *verboso* requiere de mucho texto, de mucha configuración de nuestra parte. Las anotaciones nos van a permitir ahorrarnos parte de esa configuración siempre y cuando le digamos a spring que se encargue de detectar que clases son candidatos a ser beans gestionados por el contenedor.
+
 <img src="images/17-04.png">
+
+Eso lo hacemos mediante un nuevo elemento (anotación), los candidatos serán clases específicas, incluso podríamos aportar algún criterio de busqueda si fuesen necesarios, si tuviesemos un proyecto muy grande con muchas clases, en las cuales queremos que unas clases sean gestionadas y otras no y las clases van a necesitar tener una metainformación.    
+
+En la cual hemos comenzado a conocerla concluir esta sección del curso en la cual hemos comenzado a conocerla anotaciones para configurar y vamos a hablar de estereotipos y de automático de componentes automáticos hasta ahora una palabradetectar qué clases son candidatos a hacer pins eso lo hacemos los candidatos serán clase física criterio de búsqueda aquí tenemos la natación que en este caso sería component-scan tenemos que proporcionar un paquete primaria varias cosas lo primero incorporaría todo el comportamiento que ya hemos tenido con context annotation digo que le invitamos al parque te vas Scottcomo para que te parezca bueno pues será encontrado el contenedor de inversión de control asociado película service la interfaz no la podríamos en este caso la película tampoco es necesaria y también serían componentes vale en este caso pues tampoco sería necesaria la clase app también hemos visto como si vemos tenemos las mismas notaciones que estaban antes vale para el lado en el servicio para todos los catálogos de películas yakima pues de manera explícita películas de ciencia ficción funcionará pues ya lo creo que sí y de esta manera nos hemos evitado declarar de esa manera tan verbos en el XML y lo hemos hecho anotando cada una de la clase esto sobre todo cuando no estamos iniciando en el desarrollo es que podemos que vamos a poder encontrar y los demás son derivados de pero si es cierto que en determinados contextos será mejor que utilicemos los derivados para poder indicar los más usuales son service repository controller service es un estereotipo que nos servirá para dar aquellos componentes que estén orientados a clase servicio lógica de negocio aquellas clases auténticamente currante que se encarguen de plasmar la lógica de negocio de nuestra aplicación con arroba repository tendremos la posibilidad de indicar que una clase es algo así como una clase que no permite acceso a datos por ejemplo utilizamos spring data rest que es capaz de poner como un servicio es un repositorio con arroba controller pues estamos diciendo que una clase es un componente orientado a gestionar las peticiones que se reciben todas estas son buenos los estereotipos que se suelen utilizar vamos a comprobar cómo podemos modificar mínimamente pp película lado pues sería un repositorio en este caso lo mismo nos sucede las clásicas y las podemos comprobar también como podemos proporcionar un nombre Alvin que ha creado vale a través de anotaciones indicando que está en la colección la colección de películas clásicas de manera que si quisiéramos inyectar los tipos más adecuados a cada una de las clases que hemos venido utiliza con esto cerramos configuración a la configuración a través de
+
+
+
+
+
+
+
+
+
 
 <img src="images/17-05.png">
 
