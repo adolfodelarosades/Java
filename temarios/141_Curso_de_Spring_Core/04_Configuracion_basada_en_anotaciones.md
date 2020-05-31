@@ -1416,23 +1416,192 @@ No existe.
 
 ## Transcripción
 
+Vamos a continuar trabajando y configurarlo nuestros beans mediante anotaciones.
+
 <img src="images/16-01.png">
+
+Vamos a volver ahora a trabajar con el ciclo de vida de nuestros beans mediante las anotaciones `@PostConstruct` y `@PreDestroy`.
 
 <img src="images/16-02.png">
 
+Ya hemos visto en alguna lección anterior cómo manejar el ciclo de vida de los beans de mediante XML.
+
 <img src="images/16-03.png">
 
---------
+Pero vamos a ver ahora cómo podemos hacerlo mediante antotaciones, estas anotaciones, decir que no son propias de Spring, sino que son de la especificación de Java JSR 250, lo que pasa que Spring les proporciona funcionalidad, y nos permiten anotar un método que se llamará como queramos y que simplemente regresa `void` y no recibe ningún argumento. 
+
+Simplemente estar anotado con `@PostConstruct` o `@PreDestroy` estando en el bean que esten, ya se encargará Spring de ejecutar ese método en el momento adecuado del ciclo de vida del bean, es decir justo después de construirlo o justo antes de destruirlo.
+
+### :computer: Ejemplo Proyecto PostConstruct-PreDestroy
+
+<img src="images/16-04.png">
+
+Vamos a iniciar nuestros catalogos de película mediante el método `init()` precedido de la anotación `@PostConstruct` pero que no se le hace ninguna referencia en el archivo `beans.xml`.
 
 *`beans.xml`*
 
 ```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:annotation-config />
+
+	<bean id="peliculaDaoMemory"
+		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+
+	<bean id="peliculaService"
+		class="com.openwebinars.annotation.PeliculaService" />
+
+	<bean id="catalogoClasicas"
+		class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+
+	<bean id="catalogoActuales"
+		class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
+
+</beans>
 ```
 
-*`.java`*
+*`CatalogoPeliculasActuales.java`*
 
 ```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+public class CatalogoPeliculasActuales implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("Vengadores: Infinity War", "2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Black Panther","2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Han Solo", "2018", "Acción"));
+      peliculas.add(new Pelicula("Ocean's 8", "2018", "Acción"));
+      peliculas.add(new Pelicula("Tom Raider", "2018", "Aventuras"));
+      peliculas.add(new Pelicula("Campeones","2018","Comedia"));
+   }
+
+}
 ```
+
+*`CatalogoPeliculasClasicas.java`*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+public class CatalogoPeliculasClasicas implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+      peliculas.add(new Pelicula("La lista de Schindler","1993","Drama"));
+      peliculas.add(new Pelicula("El Padrino", "1972", "Drama"));
+      peliculas.add(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+      peliculas.add(new Pelicula("Gladiator", "2000", "Acción"));
+      peliculas.add(new Pelicula("El Gran Dictador","1940","Comedia"));
+   }
+
+}
+```
+
+En el archivo `PeliculaDaoImplMemory` hemos vuelto a la versión en que se auto-inyectan los dos beans de catalogo de películas en el `Set`. Además usa las notaciones `@PostConstruct` para cargar ambos catalogos y `@PreDestroy` para limpiar el catalogo de películas justo antes de destruir el bean.
+
+*`PeliculaDaoImplMemory.java`*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   private Set<CatalogoPeliculas> catalogosPeliculas;
+	
+   @PostConstruct
+   public void init() {
+      peliculas = catalogosPeliculas
+         		.stream()
+			.map(catalogo -> catalogo.getPeliculas())
+			.flatMap(lista -> lista.stream())
+			.collect(Collectors.toCollection(ArrayList::new));
+		
+   }
+	
+   @PreDestroy
+   public void destroy() {
+      System.out.println("");
+      System.out.println("Limpiando el almacén de películas");
+      peliculas.clear();
+   }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+   
+}
+```
+
+Hemos tuneado un poco el método `init()` para usar el API de Stream, sobre todos los catalogos de películas, hemos mapeado cada catalogo para obtener todas las películas, con `flapMap` hemos unido en un solo Stream todas las películas y las hemos almacenado en una lista de películas.  
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/16-05.png">
 
 # 17 Uso de estereotipos 7:51 
 
@@ -1472,6 +1641,18 @@ A continuación tenemos un ejemplo:
 <img src="images/17-06.png">
 
 <img src="images/17-07.png">
+
+--------
+
+*`beans.xml`*
+
+```html
+```
+
+*`.java`*
+
+```java
+```
 
 
 # Contenido adicional  5
