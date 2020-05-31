@@ -1761,6 +1761,8 @@ public class PeliculaDaoImplMemory implements PeliculaDao {
 	
    @PreDestroy
    public void destroy() {
+      System.out.println("");
+      System.out.println("Limpiando el almacén de películas");
       peliculas.clear();
    }
 	
@@ -1788,31 +1790,92 @@ public class PeliculaDaoImplMemory implements PeliculaDao {
 }
 ```
 
-La interface `PeliculaDao` y la entidad `Pelicula.java` no necesitan ser anotada, permanecen igual.
-
 Los catalogos de película también serían componentes es decir los marcamos con `@Component`.
 
+*`CatalogoPeliculasClasicas.java`*
 
+```java
+package com.openwebinars.stereotypes;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-Tampoco 
+import javax.annotation.PostConstruct;
 
-En la cual hemos comenzado a conocerla concluir esta sección del curso en la cual hemos comenzado a conocerla anotaciones para configurar y vamos a hablar de estereotipos y de automático de componentes automáticos hasta ahora una palabradetectar qué clases son candidatos a hacer pins eso lo hacemos los candidatos serán clase física criterio de búsqueda aquí tenemos la natación que en este caso sería component-scan tenemos que proporcionar un paquete primaria varias cosas lo primero incorporaría todo el comportamiento que ya hemos tenido con context annotation digo que le invitamos al parque te vas Scottcomo para que te parezca bueno pues será encontrado el contenedor de inversión de control asociado película service la interfaz no la podríamos en este caso la película tampoco es necesaria y también serían componentes vale en este caso pues tampoco sería necesaria la clase app también hemos visto como si vemos tenemos las mismas notaciones que estaban antes vale para el lado en el servicio para todos los catálogos de películas yakima pues de manera explícita películas de ciencia ficción funcionará pues ya lo creo que sí y de esta manera nos hemos evitado declarar de esa manera tan verbos en el XML y lo hemos hecho anotando cada una de la clase esto sobre todo cuando no estamos iniciando en el desarrollo es que podemos que vamos a poder encontrar y los demás son derivados de pero si es cierto que en determinados contextos será mejor que utilicemos los derivados para poder indicar los más usuales son service repository controller service es un estereotipo que nos servirá para dar aquellos componentes que estén orientados a clase servicio lógica de negocio aquellas clases auténticamente currante que se encarguen de plasmar la lógica de negocio de nuestra aplicación con arroba repository tendremos la posibilidad de indicar que una clase es algo así como una clase que no permite acceso a datos por ejemplo utilizamos spring data rest que es capaz de poner como un servicio es un repositorio con arroba controller pues estamos diciendo que una clase es un componente orientado a gestionar las peticiones que se reciben todas estas son buenos los estereotipos que se suelen utilizar vamos a comprobar cómo podemos modificar mínimamente pp película lado pues sería un repositorio en este caso lo mismo nos sucede las clásicas y las podemos comprobar también como podemos proporcionar un nombre Alvin que ha creado vale a través de anotaciones indicando que está en la colección la colección de películas clásicas de manera que si quisiéramos inyectar los tipos más adecuados a cada una de las clases que hemos venido utiliza con esto cerramos configuración a la configuración a través de
+import org.springframework.stereotype.Component;
 
+@Component
+public class CatalogoPeliculasClasicas implements CatalogoPeliculas {
 
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+      peliculas.add(new Pelicula("La lista de Schindler","1993","Drama"));
+      peliculas.add(new Pelicula("El Padrino", "1972", "Drama"));
+      peliculas.add(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+      peliculas.add(new Pelicula("Gladiator", "2000", "Acción"));
+      peliculas.add(new Pelicula("El Gran Dictador","1940","Comedia"));
+   }
 
+}
+```
 
+*`CatalogoPeliculasActuales.java`*
 
+```java
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 
+import org.springframework.stereotype.Component;
 
+@Component
+public class CatalogoPeliculasActuales implements CatalogoPeliculas {
 
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("Vengadores: Infinity War", "2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Black Panther","2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Han Solo", "2018", "Acción"));
+      peliculas.add(new Pelicula("Ocean's 8", "2018", "Acción"));
+      peliculas.add(new Pelicula("Tom Raider", "2018", "Aventuras"));
+      peliculas.add(new Pelicula("Campeones","2018","Comedia"));
+   }
 
+}
+```
 
+La interfaces `PeliculaDao`, `CatalogoPeliculas`, la entidad `Pelicula.java` y la clase `App` no necesitan ser anotadas, permanecen igual .
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/17-09.png">
+
+Hemos visto como hemos declarado una serie de componentes que utilizamos y hemos quitado la declaración de los beans en nuestro archivo xml. Seguimos usando las auto-inyecciones y el ciclo de vida de los beans con anotaciones.
+
+De esta manera nos hemos evitado declarar de una manera tan *verbosa* en el XML todos los beans y lo hemos hecho anotando cada una de las clases que van a ser gestionadas por el contenedor de inversión de control.
 
 <img src="images/17-06.png">
 
 <img src="images/17-07.png">
+
+
+
 
 --------
 
