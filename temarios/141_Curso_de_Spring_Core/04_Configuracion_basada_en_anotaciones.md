@@ -807,6 +807,8 @@ public class PeliculaDaoImplMemory implements PeliculaDao {
 }
 ```
 
+El método `init()` refunde todos los catalogos en uno solo en un listado de películas 
+
 Tenemos `PeliculaService` que tiene la dependencia de `PeliculaDao` la cual autoinyecta con `@Autowired`. Tiene el método `pelisPorGenero(String genero)` que recupera una lista de películas de `peliculaDao` por genero.
 
 *`PeliculaService`*
@@ -869,7 +871,13 @@ public class App {
 }
 ```
 
-Esta clase recupera el bean `PeliculaService` que como ya vimos inyecta la dependencia 
+Esta clase recupera el bean `PeliculaService` que como ya vimos inyecta la dependencia `PeliculaDao` que corresponde a la Interfaz, por lo que Spring busca la clase que implementa dicha Interfaz que en este caso es `PeliculaDaoImplMemory` esta clase a su vez tiene la dependencia `Set<CatalogoPeliculas>` la cual autoinyecta con los valores que se recupera no de uno sino de dos catalogos (por eso lo de multiple).
+
+Por lo que finalmente el resultado que tenemos al ejecutar la aplicación es el siguiente:
+
+<img src="images/14-13.png">
+
+De esta forma como hemos visto se ha inyectado dentro de una colección una serie de beans que estaban declarados independientemente, por que son de un mismo tipo.
 
 -----------------------
 *`beans.xml`*
