@@ -1165,14 +1165,120 @@ Utiliza el catalogo de películas actual para poder realizar la busqueda de los 
 
 <img src="images/15-04.png">
 
-En otra ocasión nos permitirá el perdón necesitaremos afinar mucho más el auto cableado indicando bueno pues si sabemos que hay más de un bendecido de un tipo particular pues que queremos uno concreto lo podemos seleccionar mediante la anotación qualify que en su comportamiento más sencilla nos permite indicar el nombre o un alias del Bing asociado siempre al uso de la anotación automail de esta manera aunque ninguno de ellos tenga raymarine como le estamos diciendo exactamente entre los Prince del mismo tipo cuál queremos pues funcionará ninguno de ellos pero vamos que tenemos en este caso el catálogo de películas clásicas con lo cual cuando vaya a hacer una búsqueda sobre las película de ciencia ficción volver a la película de la guerra de las galaxias lugar de ello le indicamos que queremos el catálogo de películas actuales proyecto lotería búsqueda de películas de ciencia ficción en el catálogo de películas actuales en lugar del catálogo de películas clase podemos hacer mucho más usando qualify tanto es así que como sucede con otro tipo de anotaciones la vamos a poder incluso tunear qualify también lo podemos utilizar a nivel de argumento del metro en el caso que veíamos en el vídeo anterior de que con autoway quedamos bueno pues anotar un método que empiecen a más de un objeto si uno de ellos necesita ser calificado allí lo podremos utilizar también el valor de qualifier lo podemos indicar explícitamente con en XML vale con el elemento qualify si no lo indicamos el valor que se utilizara será el Lidl vale que el que nosotros hemos utilizado en nuestra gente y también decir que bueno pues si vamos a utilizar muchas veces con cualificador de interés de crear nuestra propia anotación vale teniendo actualizar para ellos no podríamos hacer mediante este este código vale en el que creamos nuestra propia arroba interface vale para crear nuestra notación que vamos a llamar época que va a tener un solo valor y en el que nosotros vamos a poder decir oye pues mira quiero que me autoinyectables el catálogo de época clásica vale frente al de época actual vale lo podríamos crear y de esta manera el código sería bastante más legible que el anterior sino que requiere un poco más de esfuerzo por nuestra parte aquí tenemos el ejemplo de extensión de qualify mediante el que nosotros tendríamos que crear nuestra anotación vale esto se crea mediante una arroba interface de decimos que bueno que está Spotify vale bueno dónde se puede utilizar cuando se aplica etcétera de forma que nosotros aquí ya podríamos decirle oye que queremos que nos autoinyectores el catálogo de películas clásicas que hemos calificado aquí indicando que usamos el de tipo época clásica vuelve tipo actuales vale que lo podíamos cambiar perfectamente películas clásicas más y más cercana
-
-
-
-
-
+En otra ocasión necesitaremos afinar mucho más el auto cableado indicando si sabemos que hay más de un bean de un tipo particular indicar que queremos uno concreto.
 
 <img src="images/15-05.png">
+
+Lo podemos seleccionar mediante la anotación `@Qualifier` que en su comportamiento más sencillo, nos permite indicar el nombre o un alias del bean, asociado siempre al uso de la anotación `@Autowired`. De esta manera, aunque ninguno de ellos tenga `primary`, como le estamos diciendo exactamente entre los beans del mismo tipo, cuál queremos funcionará.
+
+### :computer: Ejemplo Proyecto Qualifier
+
+<img src="images/15-12.png">
+
+Este proyecto es muy similar al anterior solo ponemos los archivos que han cambiado.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	default-init-method="init">
+
+	<context:annotation-config />
+
+	<bean id="peliculaDaoMemory"
+		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+
+	<bean id="peliculaService"
+		class="com.openwebinars.annotation.PeliculaService" />
+
+	<bean id="catalogoClasicas"
+		class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+
+	<bean id="catalogoActuales"
+		class="com.openwebinars.annotation.CatalogoPeliculasActuales"/>
+
+</beans>
+```
+
+*`PeliculaDaoImplMemory.java`*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   @Qualifier("catalogoClasicas")
+   private CatalogoPeliculas catalogoPeliculas;
+		
+   public void init() {
+      peliculas.addAll(catalogoPeliculas.getPeliculas());	
+   }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+
+}
+```
+
+Aquí indicamos explicitamente con `@Qualifier("catalogoClasicas")` que deseamos trabajar con el bean `catalogoClasicas` al ejecutar la aplicación tenemos:
+
+<img src="images/15-13.png">
+
+Si en lugar de ello indicamos que queremos `catalogoActuales` el resultado es:
+
+<img src="images/15-14.png">
+
+El resultado son las películas de Ciencia ficción en el catalogo de películas actuales.
+
+Como podemos observar afinamos mucho más usando `@Qualifier`.
+
+AQUI
+
+
+
+ninguno de ellos pero vamos que tenemos en este caso el catálogo de películas clásicas con lo cual cuando vaya a hacer una búsqueda sobre las película de ciencia ficción volver a la película de la guerra de las galaxias lugar de ello le indicamos que queremos el catálogo de películas actuales proyecto lotería búsqueda de películas de ciencia ficción en el catálogo de películas actuales en lugar del catálogo de películas clase podemos hacer mucho más usando qualify tanto es así que como sucede con otro tipo de anotaciones la vamos a poder incluso tunear qualify también lo podemos utilizar a nivel de argumento del metro en el caso que veíamos en el vídeo anterior de que con autoway quedamos bueno pues anotar un método que empiecen a más de un objeto si uno de ellos necesita ser calificado allí lo podremos utilizar también el valor de qualifier lo podemos indicar explícitamente con en XML vale con el elemento qualify si no lo indicamos el valor que se utilizara será el Lidl vale que el que nosotros hemos utilizado en nuestra gente y también decir que bueno pues si vamos a utilizar muchas veces con cualificador de interés de crear nuestra propia anotación vale teniendo actualizar para ellos no podríamos hacer mediante este este código vale en el que creamos nuestra propia arroba interface vale para crear nuestra notación que vamos a llamar época que va a tener un solo valor y en el que nosotros vamos a poder decir oye pues mira quiero que me autoinyectables el catálogo de época clásica vale frente al de época actual vale lo podríamos crear y de esta manera el código sería bastante más legible que el anterior sino que requiere un poco más de esfuerzo por nuestra parte aquí tenemos el ejemplo de extensión de qualify mediante el que nosotros tendríamos que crear nuestra anotación vale esto se crea mediante una arroba interface de decimos que bueno que está Spotify vale bueno dónde se puede utilizar cuando se aplica etcétera de forma que nosotros aquí ya podríamos decirle oye que queremos que nos autoinyectores el catálogo de películas clásicas que hemos calificado aquí indicando que usamos el de tipo época clásica vuelve tipo actuales vale que lo podíamos cambiar perfectamente películas clásicas más y más cercana
+
+
+
+
+
+
+
 
 <img src="images/15-06.png">
 
@@ -1189,7 +1295,7 @@ En otra ocasión nos permitirá el perdón necesitaremos afinar mucho más el au
 ```html
 ```
 
-*.java*
+*`.java`*
 
 ```java
 ```
