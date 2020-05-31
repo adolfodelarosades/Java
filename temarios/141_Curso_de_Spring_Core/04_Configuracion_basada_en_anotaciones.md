@@ -930,6 +930,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 
 public class PeliculaDaoImplMemory implements PeliculaDao {
 
@@ -998,22 +999,21 @@ En este ejemplo tenemos tres casos diferentes:
    
    <img src="images/14-16.png">
 
-   Lo que sucede aquí es que se ha cambiado un poco la lógica del método `init()` pero no existe ningún problema al tener la autoinyección como `required=false`.
+   Lo que sucede aquí es que se ha cambiado un poco la lógica del método `init()` pero no existe ningún problema al tener la autoinyección como `required=false` no se lanza ningún tipo de excepción.
    
+* 2do. Caso   
    
+   En el segundo caso lo que hacemos es que tenemos nuestra propiedad `catalogosPeliculas` pero le indicamos que ese catalogo de películas puede ser nulo con `@Nullable`, al pasarlo como argumento en el método constructor `PeliculaDaoImplMemory(@Nullable Set<CatalogoPeliculas> catalogosPeliculas)`. Al ejecutarlo tenemos:
    
+   <img src="images/14-17.png">
    
---------
+   el comportamiento es el mismo al anterior.
+   
+* 3er. Caso   
 
-*`beans.xml`*
-
-```html
-```
-
-*.java*
-
-```java
-```
+   Nos podemos apoyar de la clase `Optional` de Java 8 para implantar una lógica que nos evite generar una excepción. Si el `Optional` esta vacío lo que hacemos es asignarle nulo para que nuestro método de inicialización siga funcionando igual. Al no ser satisfecha la dependencia sucede el mismo comportamiento.
+   
+   <img src="images/14-18.png">
 
 # 15 Uso de Primary y @Qualifier 7:04 
 
@@ -1066,6 +1066,18 @@ Aunque la creación de anotaciones propias (en general) queda fuera del ámbito 
 <img src="images/15-08.png">
 
 <img src="images/15-09.png">
+
+--------
+
+*`beans.xml`*
+
+```html
+```
+
+*.java*
+
+```java
+```
 
 # 16 Uso de @PostConstruct y @PreDestroy 3:28 
 
