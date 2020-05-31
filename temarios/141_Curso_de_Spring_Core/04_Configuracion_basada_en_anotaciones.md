@@ -1874,21 +1874,212 @@ De esta manera nos hemos evitado declarar de una manera tan *verbosa* en el XML 
 
 <img src="images/17-07.png">
 
+`@Component` Es el estereotipo más básico que encontramos en Spring los demás son derivados de él, pero en determinados contextos será mejor utilizar los derivados para poder indicar algún tipo de comportamiento adicional. Los más usuales son:
 
+* `@Service`: Es un estereotipo que nos permite anotar aquellos componentes que esten orientadas a clase de Servicio, lógica de negocio, aquellas clases currantes que se encargan de plasmar la lógica de negocio de nuestra aplicación. 
+* `@Repository`: Con esta anotación tenemos la oportunidad de indicar que una clase representa un DAO, una clase que nos permite acceso a datos, muy útil al usar *Spring Data* o *Spring Data REST* que expone un servicio web completo con todos los métodos CRUD necesarios con solo anotarla con este esteretipo.
+* `@Controller`: Clase orientada a gestionar las peticiones que recibe, muy usada en aplicaciones web.
 
+### :computer: Ejemplo Proyecto Estereotipos
 
---------
+<img src="images/17-10.png">
+
+Tenemos nuestro archivo `beans.xml` lo más limpio posible
 
 *`beans.xml`*
 
 ```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan
+		base-package="com.openwebinars.stereotypes" />
+
+</beans>
 ```
 
-*`.java`*
+Nuestro archivo `PeliculaService` marcado con `@Service` en lugar de `@Component` como en el ejemplo anterior
+
+*`PeliculaService.java`*
 
 ```java
+package com.openwebinars.stereotypes;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PeliculaService {
+	
+   @Autowired
+   private PeliculaDao peliculaDao;
+	
+   public void setPeliculaDao(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+		
+   public List<Pelicula> pelisPorGenero(String genero) {
+      return peliculaDao
+		.findAll()
+		.stream()
+		.filter(p -> p.getGenero().equalsIgnoreCase(genero))
+		.collect(Collectors.toCollection(ArrayList::new));
+   }
+	
+}
 ```
 
+Nuestro archivo `PeliculaDaoImplMemory` sería un `Repository`.
+
+*`PeliculaDaoImplMemory.java`*
+
+```java
+package com.openwebinars.stereotypes;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   private Set<CatalogoPeliculas> catalogosPeliculas;
+	
+   @PostConstruct
+   public void init() {
+      peliculas = catalogosPeliculas
+			.stream()
+			.map(catalogo -> catalogo.getPeliculas())
+			.flatMap(lista -> lista.stream())
+			.collect(Collectors.toCollection(ArrayList::new));
+		
+   }
+	
+   @PreDestroy
+   public void destroy() {
+      peliculas.clear();
+   }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+
+}
+```
+
+Lo mismo sucede con los catalogos son `Repository` además le proporcionamos un nombre al bean que se esta creando.
+
+*`CatalogoPeliculasClasicas.java`*
+
+```java
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("clasicas")
+public class CatalogoPeliculasClasicas implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+      peliculas.add(new Pelicula("La lista de Schindler","1993","Drama"));
+      peliculas.add(new Pelicula("El Padrino", "1972", "Drama"));
+      peliculas.add(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+      peliculas.add(new Pelicula("Gladiator", "2000", "Acción"));
+      peliculas.add(new Pelicula("El Gran Dictador","1940","Comedia"));
+   }
+
+}
+```
+
+*`CatalogoPeliculasActuales.java`*
+
+```java
+package com.openwebinars.stereotypes;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("actuales")
+public class CatalogoPeliculasActuales implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("Vengadores: Infinity War", "2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Black Panther","2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Han Solo", "2018", "Acción"));
+      peliculas.add(new Pelicula("Ocean's 8", "2018", "Acción"));
+      peliculas.add(new Pelicula("Tom Raider", "2018", "Aventuras"));
+      peliculas.add(new Pelicula("Campeones","2018","Comedia"));
+   }
+
+}
+```
+
+Al ejecutar nuestra aplicación esta funcionara igual.
+
+<img src="images/17-11.png">
+
+Pero es verdad que hemos utilizado los estereotipos más adecuados en cada una de las clases que hemos venido utilizando 
 
 # Contenido adicional  5
 
