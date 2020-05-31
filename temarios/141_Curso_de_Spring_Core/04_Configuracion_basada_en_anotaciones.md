@@ -1267,38 +1267,144 @@ El resultado son las películas de Ciencia ficción en el catalogo de películas
 
 Como podemos observar afinamos mucho más usando `@Qualifier`.
 
-AQUI
-
-
-
-ninguno de ellos pero vamos que tenemos en este caso el catálogo de películas clásicas con lo cual cuando vaya a hacer una búsqueda sobre las película de ciencia ficción volver a la película de la guerra de las galaxias lugar de ello le indicamos que queremos el catálogo de películas actuales proyecto lotería búsqueda de películas de ciencia ficción en el catálogo de películas actuales en lugar del catálogo de películas clase podemos hacer mucho más usando qualify tanto es así que como sucede con otro tipo de anotaciones la vamos a poder incluso tunear qualify también lo podemos utilizar a nivel de argumento del metro en el caso que veíamos en el vídeo anterior de que con autoway quedamos bueno pues anotar un método que empiecen a más de un objeto si uno de ellos necesita ser calificado allí lo podremos utilizar también el valor de qualifier lo podemos indicar explícitamente con en XML vale con el elemento qualify si no lo indicamos el valor que se utilizara será el Lidl vale que el que nosotros hemos utilizado en nuestra gente y también decir que bueno pues si vamos a utilizar muchas veces con cualificador de interés de crear nuestra propia anotación vale teniendo actualizar para ellos no podríamos hacer mediante este este código vale en el que creamos nuestra propia arroba interface vale para crear nuestra notación que vamos a llamar época que va a tener un solo valor y en el que nosotros vamos a poder decir oye pues mira quiero que me autoinyectables el catálogo de época clásica vale frente al de época actual vale lo podríamos crear y de esta manera el código sería bastante más legible que el anterior sino que requiere un poco más de esfuerzo por nuestra parte aquí tenemos el ejemplo de extensión de qualify mediante el que nosotros tendríamos que crear nuestra anotación vale esto se crea mediante una arroba interface de decimos que bueno que está Spotify vale bueno dónde se puede utilizar cuando se aplica etcétera de forma que nosotros aquí ya podríamos decirle oye que queremos que nos autoinyectores el catálogo de películas clásicas que hemos calificado aquí indicando que usamos el de tipo época clásica vuelve tipo actuales vale que lo podíamos cambiar perfectamente películas clásicas más y más cercana
-
-
-
-
-
-
-
-
 <img src="images/15-06.png">
+
+Tanto es así que como sucede con otro tipo de anotaciones la vamos a poder incluso tunear, `@Qualifier` también la podemos utilizar a nivel de argumento de un método, en el caso que veíamos en la lección anterior, de que con `autowired` queramos  anotar un método que inyecte más de un objeto, si uno de ellos necesita ser cualificado, allí lo podremos utilizar también.
 
 <img src="images/15-07.png">
 
+El valor de `@Qualifier` lo podemos indicar explícitamente en XML, con el elemento `<qualifier>` si bien, si no lo indicamos, el valor que se utilizara será el `id`, que es el que nosotros hemos utilizado en nuestro ejemplo.
+
 <img src="images/15-08.png">
+
+Y también decir que si vamos a utilizar muchas veces un cualificador, nos podría interesar crear nuestra propia anotación extendiendo a `qualifier` para ellos lo podríamos hacer mediante el código en la lamina, en el que creamos nuestra propia `@interface Epoca` para crear nuestra anotación, que vamos a llamar época, que va a tener un solo valor. 
 
 <img src="images/15-09.png">
 
---------
+Y en el que nosotros vamos a poder decir, oye pues mira quiero que me auto-inyectes el catálogo de época clásica, frente al de época actual, lo podríamos crear y de esta manera el código sería bastante más legible que el anterior, si bien requiere un poco más de esfuerzo por nuestra parte.
+
+Aquí tenemos el ejemplo de extensión de `qualifier` mediante el que nosotros tendríamos que crear nuestra anotación.
+
+### :computer: Ejemplo Proyecto Qualifier Extendido
+
+<img src="images/15-15.png">
+
+Este proyecto es muy similar al anterior solo ponemos los archivos que han cambiado.
 
 *`beans.xml`*
 
 ```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	default-init-method="init">
+
+	<context:annotation-config />
+
+	<bean id="peliculaDaoMemory"
+		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+
+	<bean id="peliculaService"
+		class="com.openwebinars.annotation.PeliculaService" />
+
+	<bean id="catalogoClasicas"
+		class="com.openwebinars.annotation.CatalogoPeliculasClasicas">
+		<qualifier type="Epoca" value="clasicas" />
+	</bean>
+
+	<bean id="catalogoActuales"
+		class="com.openwebinars.annotation.CatalogoPeliculasActuales">
+		<qualifier type="Epoca" value="actuales" />	
+	</bean>
+
+</beans>
 ```
 
-*`.java`*
+Aquí cualificamos cada uno de los beans de tipo `Epoca` y con su valor correspondiente. Ese valor es lo que se ocupa para cualificar en `PeliculaDaoImplMemory.java` y saber si se usará el bean `catalogoClasicas` con `clasicas` o el bean `catalogoActuales` con `actuales`.
+
+*`Epoca.java`*
 
 ```java
+package com.openwebinars.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
+@Qualifier
+public @interface Epoca {
+   String value();
+}
 ```
+
+Aquí hemos creado nuestra anotación que se crea mediante `@interface`
+
+
+*`PeliculaDaoImplMemory.java`*
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   @Epoca("clasicas")
+   private CatalogoPeliculas catalogoPeliculas;
+		
+   public void init() {
+      peliculas.addAll(catalogoPeliculas.getPeliculas());
+   }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+}
+```
+
+Aquí indicamos que queremos que nos auto-inyecte el catalogo de películas clasicas. al ejecutar la aplicación tenemos:
+
+<img src="images/15-16.png">
+
+y si cambiamos a `actuales` tenemos:
+
+<img src="images/15-17.png">
+
+Como podemos ver la anotación `@Epoca(actuales)` es más cercana y concreta al dominio de este problema que estamos resolviendo. 
 
 # 16 Uso de @PostConstruct y @PreDestroy 3:28 
 
@@ -1315,6 +1421,18 @@ No existe.
 <img src="images/16-02.png">
 
 <img src="images/16-03.png">
+
+--------
+
+*`beans.xml`*
+
+```html
+```
+
+*`.java`*
+
+```java
+```
 
 # 17 Uso de estereotipos 7:51 
 
