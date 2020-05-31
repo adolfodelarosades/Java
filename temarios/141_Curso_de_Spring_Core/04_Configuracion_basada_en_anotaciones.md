@@ -879,7 +879,132 @@ Por lo que finalmente el resultado que tenemos al ejecutar la aplicación es el 
 
 De esta forma como hemos visto se ha inyectado dentro de una colección una serie de beans que estaban declarados independientemente, por que son de un mismo tipo.
 
------------------------
+
+Vamos a ver otro ejemplo de lo que pasa cuando no sea obligatorio entre comillas satisfacer la dependencia.
+
+### :computer: Ejemplo Proyecto Autowired RNO
+
+<img src="images/14-14.png">
+
+Solo vamos a poner los dos archivos que han cambiado en comporaración al ejemplo anterior.
+
+En nuestro archivo XML los catalogos no existen.
+
+*`beans.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	default-init-method="init">
+
+	<context:annotation-config />
+
+	<bean id="peliculaDaoMemory"
+		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+		
+	<bean id="peliculaService"	class="com.openwebinars.annotation.PeliculaService" />
+	
+	<!--  
+	<bean id="catalogoClasicas" class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+
+	<bean id="catalogoActuales" class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
+	-->
+</beans>
+```
+
+`*PeliculaDaoImplMemory.java*`
+
+```java
+package com.openwebinars.annotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   // 1er Caso
+   @Autowired(required=false)
+   private Set<CatalogoPeliculas> catalogosPeliculas;
+	
+   // 2do Caso	
+// private Set<CatalogoPeliculas> catalogosPeliculas;
+//	
+//     @Autowired
+//     public PeliculaDaoImplMemory(@Nullable Set<CatalogoPeliculas> catalogosPeliculas) {
+//     this.catalogosPeliculas = catalogosPeliculas;
+// }
+	
+   // 3er Caso
+// private Set<CatalogoPeliculas> catalogosPeliculas;
+// @Autowired
+// public void setCatalogosPeliculas(Optional<Set<CatalogoPeliculas>> catalogosPeliculas) {
+//    this.catalogosPeliculas = catalogosPeliculas.orElse(null);
+// }
+	
+   public void init() {
+      if (catalogosPeliculas != null)
+	 for (CatalogoPeliculas c : catalogosPeliculas) {
+	    peliculas.addAll(c.getPeliculas());
+	 }
+   }
+
+   public PeliculaDaoImplMemory() { }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+}
+```
+
+En este ejemplo tenemos tres casos diferentes:
+
+* 1er. Caso
+
+   Cuando no es obligatorio entre comillas que sea satisfecho por que sino se produciría una excepción. Vamos a comprobar si solo dejamos `@Autowired` y como los beans estan comentados se produce una excepción por no satisfacer la dependencia.
+   
+   <img src="images/14-15.png">
+   
+   La excepción `org.springframework.beans.factory.NoSuchBeanDefinitionException` lo que nos esta indicando que no tenemos ningún bean para inyectar. Sin embargo si le añadimos `@Autowired(required=false)` la ejecución es la siguiente:
+   
+   <img src="images/14-16.png">
+
+   Lo que sucede aquí es que se ha cambiado un poco la lógica del método `init()` pero no existe ningún problema al tener la autoinyección como `required=false`.
+   
+   
+   
+   
+--------
+
 *`beans.xml`*
 
 ```html
@@ -889,8 +1014,6 @@ De esta forma como hemos visto se ha inyectado dentro de una colección una seri
 
 ```java
 ```
-
-
 
 # 15 Uso de Primary y @Qualifier 7:04 
 
