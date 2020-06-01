@@ -103,13 +103,15 @@ Vamos a continuar creando todo el esqueleto de nuestro proyecto de ejemplo para 
 
 <img src="images/21-01.png">
 
+Podemos evitar el uso de cualquier arquetipo porque no lo vamos a necesitar.
+
 <img src="images/21-02.png">
 
 <img src="images/21-03.png">
 
 <img src="images/21-04.png">
 
-Vamos a cambiar la versión de Java ya que Maven lo crea con la versión 1.5.
+Recordemos que Eclipse a la hora de crear los proyectos con Java 5, tenemos que cambiar para qué en lugar de Java 5 podamos usar Java 8.
 
 <img src="images/21-05.png">
 
@@ -127,7 +129,62 @@ También debemos cambiarlo en Java Compiler.
 
 <img src="images/21-11.png">
 
-muy bien podemos evitar el uso de cualquier arquetipo porque no lo vamos a necesitar lo vamos a llamar móvil Advisorcon nuestro proyecto creado con recuerdo que como no sucedía con la persiana de utilizar eclipse de la hora de crear los proyectos tenemos que cambiar para qué lugar de Java 5 podemos usar Java 8 y a partir de aquí vamos a incluir en el pon la dependencia que necesitamos si recordáis tenemos que añadir el elemento raíz dentix y para poder buscar la dependencia nos podríamos ir a repository spring context male versión 508 y no te volvería a la dependencia yo si me permitís la tengo por aquí vale que sería estar aquí o en punto spring framework spring context y la versión 508 lyrics estupendo ya la tenemos por aquí lo siguiente que podríamos hacer vale de una manera sencilla sería incluir dentro de nuestra carpeta rizos en fichero con todos los datos de la película de las películas que hemos visto antes vale o podríamos copiar con control usted y directamente pegar con control v el fichero parece que no pero bueno es a sus 16 megas porque son muchísimos los registros que tiene millones de películas y si no me equivocado yo algo no podríamos incluir aquí directamente ya lo tendríamos disponible vale copiado dentro de nuestro proyecto incluso si lo queremos abrir desde aquí lo podríamos abrir con el con el editor de texto vale aunque es posible que no tengo cierto la veo porque ya digo que es bastante bastante grande lo que sea interesante que conozcamos su estructura y hemos visto que tiene un que tiene un título el año de estreno y que también tiene un listado con los diferentes géneros que conforman o los géneros que a los que pertenece la película bueno pues para ello vamos a crear nuestra clase no lo hemos preocupado mucho en los proyectos anteriores de los la estructuración en paquetes porque realmente tampoco hemos tenido ninguna aplicación compleja aunque aquí como vamos a hacer más grande la parte práctica pues sí que lo vamos a ir creando vamos a crear un nuevo paquete quesería con open móvil Advisor model vale vamos a crear nuestra nueva va a tener un nivel que lo vamos a guardar en un long el título por no complicarnos tampoco con el manejo de fechas y usamos en manejo de fecha anterior a Java 8 el manejo de fechas en Java 8 otra librería como yo la time lo guardaremos dentro de una cadena de caracteres y si después tenemos que hacer algún tipo de transformación la podemos hacer invitado necesario bueno se trata de una clase de las de manual vamos a crear constructor con los parámetros generar getter y setter igual vale lo típico que podríamos necesitar de de una clase podríamos utilizar alguna otra variante usar por ejemplo permiten incluirpara poder empezar desde abajo hacia arriba es decir vamos a empezar a codificar primero la parte de los dados para poder rescatar los datos a partir de ahí iremos subiendo hacia los servicios etcétera etcétera y lo vamos a ir haciendo poco a poco en lo siguiente
+A partir de aquí vamos a comenzar a códificar nuestra aplicación.
+
+Vamos a incluir en el `pom.xml` la dependencia que necesitamos.
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.openwebinars</groupId>
+  <artifactId>MovieAdvisor</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>MovieAdvisor</name>
+  <description>Un gran recomendador de películas</description>
+  
+  <dependencies>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.2.6.RELEASE</version>
+		</dependency>
+		<!-- Necesaria por usar Java 14 -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+Recordar que podemos buscar la dependencia en [Maven Repository](https://mvnrepository.com/) y buscar `spring context`.
+
+Estupendo ya la tenemos, lo siguiente que podríamos hacer de una manera sencilla sería incluir dentro de nuestra carpeta `resources` el fichero con todos los datos de las películas que hemos visto antes, el archivo se llama `imdb_data.csv` y pesa 16MB porque son muchísimos los registros que tiene millones de películas, al incluir aquí directamente ya lo tendríamos disponible en nuestro proyecto. Incluso si lo queremos abrir desde aquí lo podríamos abrir con el con el editor de texto.
+
+<img src="images/21-12.png">
+
+Lo que es interesante que conozcamos su estructura y hemos visto que tiene un Id, un título, el año de estreno y que también tiene un listado con los diferentes géneros que conforman o los géneros a los que pertenece la película.
+
+Vamos a crear nuestra clase que represente esa entidad, hasta ahora no nos hemos preocupado mucho en los proyectos anteriores de la estructuración en paquetes, porque realmente tampoco hemos tenido ninguna aplicación compleja, aunque aquí vamos a hacer más grande la parte práctica, sí lo vamos a estructura.
+
+Vamos a crear un nuevo paquete llamado `com.openwebinars.movieadvisor.model`
+
+<img src="images/21-13.png">
+
+Dentro de este package vamos a crear nuestra nueva clase `Film`.
+
+<img src="images/21-14.png">
+
+<img src="images/21-15.png">
+
+
+
+
+va a tener un nivel que lo vamos a guardar en un long el título por no complicarnos tampoco con el manejo de fechas y usamos en manejo de fecha anterior a Java 8 el manejo de fechas en Java 8 otra librería como yo la time lo guardaremos dentro de una cadena de caracteres y si después tenemos que hacer algún tipo de transformación la podemos hacer invitado necesario bueno se trata de una clase de las de manual vamos a crear constructor con los parámetros generar getter y setter igual vale lo típico que podríamos necesitar de de una clase podríamos utilizar alguna otra variante usar por ejemplo permiten incluirpara poder empezar desde abajo hacia arriba es decir vamos a empezar a codificar primero la parte de los dados para poder rescatar los datos a partir de ahí iremos subiendo hacia los servicios etcétera etcétera y lo vamos a ir haciendo poco a poco en lo siguiente
 
 # 22 Repositorio y acceso a datos (Parte I) 12:55 
 
