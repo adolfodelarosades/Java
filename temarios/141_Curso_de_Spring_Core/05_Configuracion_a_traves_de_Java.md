@@ -787,69 +787,109 @@ Aun que lo más usual es usar una combinación de Java Config con anotaciones.
 
 <img src="images/19-11.png">
 
+Hasta ahora con anotaciones hemos inyectado siempre objetos pero que pasa con valores de tipo primitivo como por ejemplo `String`. Para ello tenemos otra anotación que es `@Value` y es muy útil ya que nos permite inyectar un valor literal o valores del entorno, valores por defecto, fichero de properties, etc.
 
-
-
-a estamos usando la notación aquí que bueno igual que la María bueno pues si juntamos esta aplicación podremos ver que funciona exactamente igual que la que la anterior es aunque la configuración has ido con Javi si quisiéramos hacer una configuración en Java que fuese totalmente ortogonal es decir que no tuviese nada que ver con nuestro código no interfiera nada en el pues métodos como este lo tendríamos que declarar en el catálogo de películas actuales cuando tendríamos que declarar aquí como mínimo eso vale de manera que bueno pues fuese un una configuración total vale ya veremos qué bueno salvo algunos el esquema cuando se utilizaba de suele ser de los más usuales ejemplo de nivel de un bin dea partir de entorno valor por defecto un fichero de properties etcétera etcétera de hecho en una notación potente ya que nos permite inyectar no solamente sino clases vaper lista etcétera nosotros la inyección de una propiedad que va en un fichero de properties externo para utilizarlo dentro de un componente cómo podemos comprobarlo hacemos mediante las anotaciones roba valium y bueno la sintaxis qué se utiliza en bastante útil vale similar a expression language mediante la cual bueno pues decimos que busque dentro del entorno una propiedad llamada mensaje vale y aquí lo que indicaría sería el valor de mensaje mediante celular y la propia vamos a ver un ejemplo podemos ver como hemos creado dentro de la carpeta rizos un fichero de properties dónde tenemos una propiedad los ficheros de properties ono ficheros muy sencillos que nos permiten crear un listado de pares clave valor vale dentro de un fichero textual dónde se pone primero la clave igual y el valor o podemos probar incluso no es necesario que pongamos con ellas a las a las cadenas de caracteres bueno si nos venimos a nuestro APP confi utilizar el mensaje en primera instancia o hemos visto no le podemos indicar un valor que sería literal sin lo que nos interesa nosotros usar esa property cómo podemos configurar el uso de las property en este caso tan sencillo lo podríamos hacer me voy a enterar anotación property shows en la cual le podemos indicar dentro que busque el fichero de properties y dónde podemos utilizar algunas palabras reservadas cómo classpath para que haga esa búsqueda dentro del plasma como sabemos esta carpeta está dentro del classpad no lo tenemos dentro de ningún paquete por lo cual están en el Clash para cargar el fichero de properties y nos permitiría utilizar retrovisor de Aitor es un componente properties podemos comprobar como se está cargando desde el fichero de propiedades vale y de esta manera este es el mensaje que estamos el mensaje que estamos lanza con esto terminamos la configuración a través de Java con si ya en el siguiente bloque vamos a ver un ejemplo un poco más extenso de cómo utilizar la mayoría de los conceptos con los que hemos venido trabajando a lo largo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<img src="images/19-11.png">
+De hecho es una anotación potente ya que nos permite inyectar no solamente Strings sino clases wrappers, lista, etc.
 
 <img src="images/19-12.png">
 
-*`.java`*
+Nosotros vamos a ver un ejemplo de como crear la inyección de una propiedad que va a estar definida en un fichero de properties externo para utilizarlo dentro de un componente. Cómo podemos comprobarlo hacemos mediante la anotacion `@Value`  y la sintaxis qué se utiliza en bastante útil, similar a Spring expression language, decimos que busque dentro del entorno una propiedad llamada `mensaje` y aquí lo que indicaría sería el valor de mensaje mediante `@Value("${mensaje}")`
 
-```java
+Vamos a ver el ejemplo.
+
+### :computer: Ejemplo Proyecto Value
+
+<img src="images/19-15.png">
+
+Dentro de la carpeta `resources` hemos creado el fichero de properties llamado `ejemplo.properties`.
+
+*`ejemplo.properties`*
+
+```txt
+mensaje=Hola a todos desde un fichero de propiedades!
 ```
 
-*`.java`*
+Dónde tenemos una propiedad, los ficheros de properties son ficheros muy sencillos que nos permiten crear un listado de pares clave-valor, dentro de un fichero textual dónde se pone primero la clave = y el valor, incluso no es necesario que pongamos comillas a las a las cadenas de caracteres.
+
+Para configurar el uso de las properties usamos la anotación `@PropertySource("classpath:/ejemplo.properties")` donde indicamos como parámetro el fichero de properties, usamos la palabra `classpath` para que busque el archivo dentro del class path de la aplicación. 
+
+*`AppConfig.java`*
 
 ```java
+package com.openwebinars.values;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+@Configuration
+@ComponentScan(basePackages="com.openwebinars.values")
+@PropertySource("classpath:/ejemplo.properties")
+public class AppConfig {
+
+}
 ```
 
-*`.java`*
+Con esto carga el fichero de properties y ya podemos usarlo.
+
+En la clase `Saludator` que es un componente, es donde vamos a inyectar el valor del mensaje:
+
+*`Saludator.java`*
 
 ```java
+package com.openwebinars.values;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Saludator {
+	
+   //@Value("Hola mundo")
+   @Value("${mensaje}")
+   private String mensaje;
+	
+   public String saludo() {
+      return mensaje;
+   }
+
+}
 ```
 
-*`.java`*
+Podemos ver comentado como le inyectaríamos un valor literal y abajo vemos como le inyectamos el valor tomado del archivo properties.
+
+Nuestra clase de aplicación contiene lo siguiente:
+
+*`App.java`*
 
 ```java
+package com.openwebinars.values;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+      Saludator s = appContext.getBean(Saludator.class);
+		
+      System.out.println(s.saludo());
+				
+      ((AnnotationConfigApplicationContext) appContext).close();
+
+   }
+
+}
 ```
 
-*`.java`*
+Recupera el bean `Saludator` y manda el saludo, la salida que tenemos es: 
 
-```java
-```
+<img src="images/19-16.png">
 
-*`.java`*
-
-```java
-```
-
-*`.java`*
-
-```java
-```
-
-*`.java`*
-
-```java
-```
-
-
+Podemos comprobar como el mensaje se está cargando desde el fichero de propiedades y de esta manera este es el mensaje que se muestra.
 
 # Contenido adicional 2
 
