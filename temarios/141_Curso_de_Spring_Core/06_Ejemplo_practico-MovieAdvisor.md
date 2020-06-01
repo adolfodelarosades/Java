@@ -181,7 +181,6 @@ Dentro de este package vamos a crear nuestra nueva clase `Film`.
 
 <img src="images/21-15.png">
 
-
 Nuestra clase `Film` va a tener un `id` de tipo `long`, `title` de tipo `String`, `year` de tipo `String` por no complicarnos el manejo de fechas si usamos el manejo de fecha anterior a Java 8 o el manejo de fechas en Java 8, otra librería como [Joda Time](https://www.joda.org/joda-time/) por eso lo guardaremos dentro de una cadena de caracteres y si después tenemos que hacer algún tipo de transformación la podemos hacer y por último tendríamos el listado de los generos de tipo `List<String>`.
 
 Como se trata de una clase de las de manual, vamos a crear su constructor vacío y otro constructor con los parámetros, generar getter y setter, hashcode, equals, toString, lo típico que podríamos necesitar de de una clase modelo.
@@ -299,10 +298,6 @@ public class Film {
 }
 ```
 
-
-
-
-
 Teniendo este modelo ya tenemos ya tenemos todo lo necesario para poder empezar desde abajo hacia arriba, es decir vamos a empezar a codificar primero la parte de los DAO, para poder rescatar los datos, a partir de ahí iremos subiendo hacia los servicios, etcétera etcétera y lo vamos a ir haciendo poco a poco en las siguiente lecciones.
 
 # 22 Repositorio y acceso a datos (Parte I) 12:55 
@@ -313,7 +308,138 @@ No existe.
 
 ## Transcripción
 
-Paquete que va a contener la configuración a la clase de configuración será solamente una pero podríamos tener para ello creamos aquí una nueva clase y también vamos a indicar que vamos a escanear los componentes un esquema mixto y y el uso de anotaciones webinars todos los pins que se encuentren en esos paquetes o por debajo por ahora no vamos a necesitar nada más ya volveremos vamos a crear entonces la interfaz dado para poder trabajar con almacén con un repositorio de decir cómo crear un nuevo paquete y dentro de este paquete vamos a crear una nueva interfaz llamada interfaz va a tener los métodos que debería implementar cualquier clase que quiera hacer un lado de películas vale sencillo que nos devuelva todas las películas en una colección que películas pues por si acaso necesitamos más adelante insertar editar esto sería como decía nosotros vamos a crear una clase que implemente memoria bueno pues que sea capaz de cargar el fichero memoria y que nos permita tener todas las películas dado su implementación en memoria vamos a necesitar como decía si vamos es que el proyecto quizá todavía aunque le hemos indicado que tiene Java 8 pero es posible que no lo tenga cargado el nivel en el compilador directamente que coja que no nos de castigo vale pues vamos a ver cómo podemos cargar nosotros ahora todas las películas no podemos hacer manejando el ciclo de vida de este link que por cierto es repositorio al ser un vamos a poder manejar su ciclo de vida no podríamos hacer a través de métodos químicos en el quad vamos a intentar cargar las películas desde algún sitio para ello vamos a crear una nueva clase en este caso no lo voy a crear como un bin sino que lo voy a dejar para que lo podáis hacer vosotros que sería la encargada de cargar de procesar el fichero film protectorsi alguien quiere que pudiera ser capaces de leer el fichero está separación es porque este implementación del dado es memoria decírselo a tener pero no sabe de dónde surgen los datos vale y bueno si lo hiciera y otro pues podrían surgir de otro sitio que no fue suficiente para que vosotros podáis que va a devolver películas y qué vas a recibir tres alumnos el path del fichero que ahora veremos que lo podemos colocar en el fichero de properties que vamos a crear separador de CSV que vamos a utilizar para las listas que haya dentro de una columna como sucede con los gemelos lo tendríamos por aquí tendríamos que poco a poco problemas aquí sería hacerlo de esta manera problema podemos con todo lo necesario en medio vamos añadir el formatter porque vamos a incluir aquí el uso de API streaming y expresiones lambda y nos va a dar un poco de estructuras y formateamos el código sagrado nosotros vamos a utilizar estos si os perdéis un poco en esta parte os recomiendo que visitéis nuestro curso de Java 8 donde se explica con abundancia en cómo trabajar con fichero y el cómo usar el API spring nosotros queremos a través de la clase files usar el método online esto no te vuelve un string de string en decir que va a ir leyendo línea a línea en fichero y no lo va a devolver dentro de este lo tenemos que proporcionar nosotros y bueno se lo pasará aquí lo que sucede es que para poder cargar convenientemente el fichero en lugar de acceder vía la sistema de ficheros lo vamos a hacer a través de la clase vale y su método getfield de una manera más conveniente este fichero es lo que sucede que lo devuelve como un tipo que no podemos utilizar y si lo podemos transformar a una URI p la primera línea es la que tiene el encabezado y bueno vamos a querer procesar este CSV para irte de películas vamos a querer que cada línea se hace una transformación como compleja la vamos a hacer y por último lo vamos a querer correr perdón recoger todo listado de almacén haremos y ahora ya nos podemos centrar en el mapa pero este se parece por aumentar un poquito la velocidad de codificación os lo dejo por aquí y os lo explico y ahora veremos qué hace falta cada línea del fichero incluye todos los datos de una película lo que tenemos que hacer es explicarles decir trocearla por el separador que utilizamos en primera instancia en primera instancia del público ellos no devolverá un array de string cada uno de los valores el primer valor qué es un long tenemos que pasar para obtenerlo serie nivel el siguiente es el título de la película el siguiente sería el año y por último tendríamos que tener en estado con los géneros para ello el procesamiento que hacemos también ejercicios por la coma qué es el separador de estado toda la columna te y lo que hacemos es construir con arrays aslist construimos una lista de string con cada uno de los géneros todo ello se lo pasamos al constructor con parámetros y lo devolvemos de forma y manera que este este bloque leerá línea líneas fichero y profesora todas las películas almacenando en el estado todo ello nos obliga a que pongamos un bloque try catch vale porque tenemos posibilidad de tener algún problemilla a la hora de leer el fichero o a la hora de cualquiera cualquier cosa podríamos indicar aquí los errores de lectura y vamos en tal caso incluso podremos terminar directamente la aplicación si no queremos mostrar la traza de la pila podríamos mostrar un mensaje de error como este de aquí no error leyendo el fichero de datos y directamente podríamos podríamos ir incluso nos podemos quedar solamente con el lío excepción que incluye el delfín not found eso ya lo vamos a hacer en el próximo
+Vamos a continuar con nuestro proyecto MovieAdvisor, vamos a crear un nuevo paquete que va a contener la configuración de la clase o clases de configuración, en nuestro caso será solamente una, pero podríamos tener más de una clase. Para ello creamos el paquete `com.openwebinars.movieadvisor.config` 
+
+<img src="images/21-16.png">
+
+Aquí creamos una nueva clase que llamaremos `Appconfig`
+
+<img src="images/21-17.png">
+
+Debemos indicar que es una clase de configuración con la anotación `@Configuration` ya que estamos usando Java Config, también vamos a indicar que vamos a escanear los componentes indicando el paquete base con `@PropertySource("classpath:/movieadvisor.properties")` escaneará todos los beans que se encuentren en este paquete o por debajo, esto nos va a permitir un sistema de configuración mixto de Java Config con Anotaciones. Por ahora esto es todo lo que necesitamos.
+
+*`AppConfig.java`*
+
+```java
+package com.openwebinars.movieadvisor.config;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages="com.openwebinars.movieadvisor")
+@PropertySource("classpath:/movieadvisor.properties")
+public class AppConfig {
+
+}
+```
+
+Ahora vamos a crear la interfaz DAO para poder trabajar con un repositorio de Film, vamos a crear un nuevo paquete `com.openwebinars.movieadvisor.dao`
+
+<img src="images/21-18.png">
+
+y dentro de este paquete vamos a crear una nueva interfaz llamada `FilmDao`
+
+<img src="images/21-19.png">
+
+Esta interfaz va a tener los métodos que debería implementar cualquier clase que quiera ser un DAO de películas.
+
+Van a ser métodos sencillos, clásicos, como poder buscar una película por su Id, devolver todas las películas en una colección de esta manera no nos casamos tanto con las listas. Podríamos incluso plantearnos un iterable si la estructura que tuvieramos en memoría fuera diferente, de todos modos usar una lista tampoco supondría ningún problema. Y aun que no lo haremos desde aquí por que esta aplicación no se va a dedicar a gestionar películas por si acaso necesitamos más adelante incluiremos las opciones de insertar, editar y borrar. Esta sería nuestra interfaz.
+
+*`FilmDao`*
+
+```java
+package com.openwebinars.movieadvisor.dao;
+
+import java.util.Collection;
+
+import com.openwebinars.movieadvisor.model.Film;
+
+/**
+ * Interfaz que nos indica las posibles acciones que podemos
+ * realizar con un repositorio de Film.
+ */
+public interface FilmDao {
+	
+	public Film findById(long id);
+	public Collection<Film> findAll();
+	public void insert(Film film);
+	public void edit(Film film);
+	public void delete(long id);
+
+}
+```
+
+Ahora vamos a crear una clase que implemente en memoria, que sea capaz de cargar el fichero en memoria y que nos permita tener todas las películas.
+
+Vamos a crear una nueva clase llamada `FilmDaoImplMemory` 
+
+<img src="images/21-20.png">
+
+Si pulsamos en `Add` podemos indicar la interfaz que queremos implementar
+
+<img src="images/21-21.png">
+
+<img src="images/21-22.png">
+
+Esto nos inserta la estructura de los métodos que debemos implementar por la implementación de `FilmDao`
+
+*`FilmDaoImplMemory`*
+
+```java
+package com.openwebinars.movieadvisor.dao;
+
+import java.util.Collection;
+
+import com.openwebinars.movieadvisor.model.Film;
+
+public class FilmDaoImplMemory implements FilmDao {
+
+	@Override
+	public Film findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<Film> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insert(Film film) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void edit(Film film) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+```
+
+Ademas de lo que pone vamos a necesitar una lista de películas usando el operador diamont de Java 7. 
+
+
+```java
+public List<Film> pelicula = new ArrayList<>();
+```
+
+Tambien indicaremos que este es un bean anotandolo con la atotación `@Repository`
+
+Como esto es un bean podemos usar el ciclo de beans para poder cargar todas las películas.
+
+dado su implementación en memoria vamos a necesitar como decía si vamos es que el proyecto quizá todavía aunque le hemos indicado que tiene Java 8 pero es posible que no lo tenga cargado el nivel en el compilador directamente que coja que no nos de castigo vale pues vamos a ver cómo podemos cargar nosotros ahora todas las películas no podemos hacer manejando el ciclo de vida de este link que por cierto es repositorio al ser un vamos a poder manejar su ciclo de vida no podríamos hacer a través de métodos químicos en el quad vamos a intentar cargar las películas desde algún sitio para ello vamos a crear una nueva clase en este caso no lo voy a crear como un bin sino que lo voy a dejar para que lo podáis hacer vosotros que sería la encargada de cargar de procesar el fichero film protectorsi alguien quiere que pudiera ser capaces de leer el fichero está separación es porque este implementación del dado es memoria decírselo a tener pero no sabe de dónde surgen los datos vale y bueno si lo hiciera y otro pues podrían surgir de otro sitio que no fue suficiente para que vosotros podáis que va a devolver películas y qué vas a recibir tres alumnos el path del fichero que ahora veremos que lo podemos colocar en el fichero de properties que vamos a crear separador de CSV que vamos a utilizar para las listas que haya dentro de una columna como sucede con los gemelos lo tendríamos por aquí tendríamos que poco a poco problemas aquí sería hacerlo de esta manera problema podemos con todo lo necesario en medio vamos añadir el formatter porque vamos a incluir aquí el uso de API streaming y expresiones lambda y nos va a dar un poco de estructuras y formateamos el código sagrado nosotros vamos a utilizar estos si os perdéis un poco en esta parte os recomiendo que visitéis nuestro curso de Java 8 donde se explica con abundancia en cómo trabajar con fichero y el cómo usar el API spring nosotros queremos a través de la clase files usar el método online esto no te vuelve un string de string en decir que va a ir leyendo línea a línea en fichero y no lo va a devolver dentro de este lo tenemos que proporcionar nosotros y bueno se lo pasará aquí lo que sucede es que para poder cargar convenientemente el fichero en lugar de acceder vía la sistema de ficheros lo vamos a hacer a través de la clase vale y su método getfield de una manera más conveniente este fichero es lo que sucede que lo devuelve como un tipo que no podemos utilizar y si lo podemos transformar a una URI p la primera línea es la que tiene el encabezado y bueno vamos a querer procesar este CSV para irte de películas vamos a querer que cada línea se hace una transformación como compleja la vamos a hacer y por último lo vamos a querer correr perdón recoger todo listado de almacén haremos y ahora ya nos podemos centrar en el mapa pero este se parece por aumentar un poquito la velocidad de codificación os lo dejo por aquí y os lo explico y ahora veremos qué hace falta cada línea del fichero incluye todos los datos de una película lo que tenemos que hacer es explicarles decir trocearla por el separador que utilizamos en primera instancia en primera instancia del público ellos no devolverá un array de string cada uno de los valores el primer valor qué es un long tenemos que pasar para obtenerlo serie nivel el siguiente es el título de la película el siguiente sería el año y por último tendríamos que tener en estado con los géneros para ello el procesamiento que hacemos también ejercicios por la coma qué es el separador de estado toda la columna te y lo que hacemos es construir con arrays aslist construimos una lista de string con cada uno de los géneros todo ello se lo pasamos al constructor con parámetros y lo devolvemos de forma y manera que este este bloque leerá línea líneas fichero y profesora todas las películas almacenando en el estado todo ello nos obliga a que pongamos un bloque try catch vale porque tenemos posibilidad de tener algún problemilla a la hora de leer el fichero o a la hora de cualquiera cualquier cosa podríamos indicar aquí los errores de lectura y vamos en tal caso incluso podremos terminar directamente la aplicación si no queremos mostrar la traza de la pila podríamos mostrar un mensaje de error como este de aquí no error leyendo el fichero de datos y directamente podríamos podríamos ir incluso nos podemos quedar solamente con el lío excepción que incluye el delfín not found eso ya lo vamos a hacer en el próximo
 
 # 23 Repositorio y acceso a datos (Parte II) 9:30 
 
