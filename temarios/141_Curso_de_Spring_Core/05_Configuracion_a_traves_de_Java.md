@@ -494,25 +494,314 @@ La anotación `@Bean` tiene como atributos los mismos atributos que tenía el el
 * `destroy-method`
 * `autowiring`
 
-aunque con este enfoque posible que nos interesa en una combinación de acciones para poder configurar para declarar un bien lo que tenemos que hacer es crear un método anotado con la ropa bien donde el tipo de retorno será el tipo del Bing y el nombre del Bing será el nombre del método aquí tenemos una comparativa de lo que sería hacerlo con XML que lo tenemos abajo y con arrobamiento lo tendríamos arriba con nombre transfer service dónde vamos una clase de tipo transfer service in vale el día de ese tipo y se llamaría transfer service el tipo de retorno no tiene porqué ser la clase concreta sino que puede ser alguna interfaz algún superpippo vale de manera que bueno aquí estamos devolviendo un bien de tipo transfer service si bien la clase una clase más concreta vale a estilo de cómo lo hemos utilizado antes que requerimos un bin de de una interfaz y se nos devolvía la instancia de una clase un método anotado con a Robin puede recibir 0 o más parámetros vale aunque también podremos ver que puede tener médico lo usual es que pueda tener más de uno y esos parámetros que se reciben son dependencias del Bing de manera que el contenedor se encargará de inyectar veámoslo con un ejemplo el método transfer service necesita hacer uso de la clase a con repositorio de una referencia vale pues al indicar aquí un argumento en este método un parámetro lo que estamos declarando realmente es una dependencia de manera que es el contenedor el que se encarga de anotar dentro de este parámetro inyectar inyectar la dependencia correspondiente para que podamos utilizar podemos utilizar también los ámbitos a través de la anotaciones con escoba singleton prototype y las derivadas en application también podemos usar la notación primary vamos a ir viendo algunos de los ejemplos que hemos creado para ilustrarlo este primer ejemplo hemos cambiado radicalmente y bueno hemos pasado de alguna manera de usar el escaneo de componentes para crear crear todos nuestros pins de manera que se creen dentro de esta clase de configuración y no tengamos ninguna anotación de tipo de estereotipo sobre ningún vale ninguno de ellos tienen otro tipo de anotaciones lo bueno intentando sin tampoco acomplejar demasiado vale hacer una una configuración con jabón a estamos usando la notación aquí que bueno igual que la María bueno pues si juntamos esta aplicación podremos ver que funciona exactamente igual que la que la anterior es aunque la configuración has ido con Javi si quisiéramos hacer una configuración en Java que fuese totalmente ortogonal es decir que no tuviese nada que ver con nuestro código no interfiera nada en el pues métodos como este lo tendríamos que declarar en el catálogo de películas actuales cuando tendríamos que declarar aquí como mínimo eso vale de manera que bueno pues fuese un una configuración total vale ya veremos qué bueno salvo algunos el esquema cuando se utilizaba de suele ser de los más usuales ejemplo de nivel de un bin dea partir de entorno valor por defecto un fichero de properties etcétera etcétera de hecho en una notación potente ya que nos permite inyectar no solamente sino clases vaper lista etcétera nosotros la inyección de una propiedad que va en un fichero de properties externo para utilizarlo dentro de un componente cómo podemos comprobarlo hacemos mediante las anotaciones roba valium y bueno la sintaxis qué se utiliza en bastante útil vale similar a expression language mediante la cual bueno pues decimos que busque dentro del entorno una propiedad llamada mensaje vale y aquí lo que indicaría sería el valor de mensaje mediante celular y la propia vamos a ver un ejemplo podemos ver como hemos creado dentro de la carpeta rizos un fichero de properties dónde tenemos una propiedad los ficheros de properties ono ficheros muy sencillos que nos permiten crear un listado de pares clave valor vale dentro de un fichero textual dónde se pone primero la clave igual y el valor o podemos probar incluso no es necesario que pongamos con ellas a las a las cadenas de caracteres bueno si nos venimos a nuestro APP confi utilizar el mensaje en primera instancia o hemos visto no le podemos indicar un valor que sería literal sin lo que nos interesa nosotros usar esa property cómo podemos configurar el uso de las property en este caso tan sencillo lo podríamos hacer me voy a enterar anotación property shows en la cual le podemos indicar dentro que busque el fichero de properties y dónde podemos utilizar algunas palabras reservadas cómo classpath para que haga esa búsqueda dentro del plasma como sabemos esta carpeta está dentro del classpad no lo tenemos dentro de ningún paquete por lo cual están en el Clash para cargar el fichero de properties y nos permitiría utilizar retrovisor de Aitor es un componente properties podemos comprobar como se está cargando desde el fichero de propiedades vale y de esta manera este es el mensaje que estamos el mensaje que estamos lanza con esto terminamos la configuración a través de Java con si ya en el siguiente bloque vamos a ver un ejemplo un poco más extenso de cómo utilizar la mayoría de los conceptos con los que hemos venido trabajando a lo largo
-
-
+Aunque con este enfoque es posible que nos interese hacer una combinación entre Java Config  y las anotaciones para poder configurar estos aspectos. Si quisieramos hacer una configuración Java totalmente pura también lo podriamos hacer de esta manera.
 
 <img src="images/19-03.png">
 
+Para declarar un bean lo que tenemos que hacer es crear un método, anotado con `@Bean` donde el tipo de retorno será el tipo del Bean y el nombre del Bean será el nombre del método.
+
+Aquí tenemos una comparativa de lo que sería hacerlo con XML que lo tenemos abajo y con `@Bean` que lo tendríamos arriba. Creariamos un bean con nombre `transferService` dónde instanciariamos una clase de tipo `TransferServiceImpl` el bean sería de ese tipo y se llamaría `transferService`.
+
 <img src="images/19-04.png">
+
+El tipo de retorno no tiene porqué ser la clase concreta, sino que puede ser alguna interfaz, algún supertipo. De manera que  aquí estamos devolviendo un bean de tipo `TransferService` si bien la clase es una clase más concreta `TransferServiceImpl`. Al estilo de cómo lo hemos utilizado antes que requerimos un bean de de una interfaz y se nos devolvía la instancia de una clase. 
 
 <img src="images/19-05.png">
 
+Un método anotado con `@Bean` puede recibir 0 o más parámetros, aunque lo usual es que puede tener más de uno y esos parámetros que se reciben son dependencias del bean, de manera que el contenedor se encargará de inyectarlos.
+
 <img src="images/19-06.png">
+
+Veámoslo con un el ejemplo, el método `transferService` necesita hacer uso de la clase `AccountRepository` a través de una referencia, pues al indicar aquí un argumento en este método un parámetro, lo que estamos declarando realmente es una dependencia, de manera que es el contenedor el que se encarga de inyectar dentro de este parámetro, la dependencia correspondiente para que podamos utilizar este tipo de objeto. 
+
+Podemos utilizar también los ámbitos a través de las anotaciones con `Scope, singleton, prototype` y las derivadas `Request, Session, Application`.
 
 <img src="images/19-07.png">
 
+Ejemplo de `@Primary` con `@Component`
+
 <img src="images/19-08.png">
+
+Ejemplo de `@Primary` con `@Bean`
 
 <img src="images/19-09.png">
 
-<img src="images/19-10.png">
+También podemos usar la anotación `@Primary` la cual sirve igual que el atributo `primary` en XML para definir un candidato *primus inter pares*, es decir el primario sobre otros iguales.
+
+Vamos a ir viendo algunos de los ejemplos que hemos creado para ilustrarlo.
+
+### :computer: Ejemplo Proyecto JavaConfig Bean
+
+<img src="images/19-13.png">
+
+En este primer ejemplo hemos cambiado radicalmente hemos pasado de de usar el escaneo de componentes a crear todos nuestros beans, de manera que se creen dentro de esta clase de configuración.
+
+*`AppConfig.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+@Configuration
+public class AppConfig {
+	
+   @Bean
+   @Primary
+   public CatalogoPeliculas catalogoActuales() {
+      return new CatalogoPeliculasActuales();
+   }
+	
+   @Bean
+   public CatalogoPeliculas catalogoClasicas() {
+      return new CatalogoPeliculasClasicas();
+   }
+	
+   @Bean
+   public PeliculaDao peliculaDaoImplMemory() {
+      return new PeliculaDaoImplMemory();
+   }
+	
+   @Bean
+   public PeliculaService peliculaService() {
+      return new PeliculaService();
+   }
+
+}
+
+```
+
+Y no tengamos ninguna anotación de tipo de estereotipo sobre ninguna clase.
+
+Las clases que estaban anotadas con esteotipos y ya no lo estan son las siguientes:
+
+*`CatalogoPeliculasActuales.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+public class CatalogoPeliculasActuales implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("Vengadores: Infinity War", "2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Black Panther","2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Han Solo", "2018", "Acción"));
+      peliculas.add(new Pelicula("Ocean's 8", "2018", "Acción"));
+      peliculas.add(new Pelicula("Tom Raider", "2018", "Aventuras"));
+      peliculas.add(new Pelicula("Campeones","2018","Comedia"));
+   }
+
+}
+```
+
+*`CatalogoPeliculasClasicas.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+public class CatalogoPeliculasClasicas implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+      peliculas.add(new Pelicula("La lista de Schindler","1993","Drama"));
+      peliculas.add(new Pelicula("El Padrino", "1972", "Drama"));
+      peliculas.add(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+      peliculas.add(new Pelicula("Gladiator", "2000", "Acción"));
+      peliculas.add(new Pelicula("El Gran Dictador","1940","Comedia"));
+   }
+
+}
+```
+
+*`PeliculaDaoImplMemory.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   private Set<CatalogoPeliculas> catalogosPeliculas;
+	
+   @PostConstruct
+   public void init() {
+      peliculas = catalogosPeliculas
+			.stream()
+			.map(catalogo -> catalogo.getPeliculas())
+			.flatMap(lista -> lista.stream())
+			.collect(Collectors.toCollection(ArrayList::new));		
+   }
+	
+   @PreDestroy
+   public void destroy() {
+      System.out.println("");
+      System.out.println("Limpiando el almacén de películas");
+      peliculas.clear();
+   }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+
+}
+```
+
+*`PeliculaService.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class PeliculaService {
+	
+   @Autowired
+   private PeliculaDao peliculaDao;
+	
+   public void setPeliculaDao(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+		
+   public List<Pelicula> pelisPorGenero(String genero) {
+      return peliculaDao
+		.findAll()
+		.stream()
+		.filter(p -> p.getGenero().equalsIgnoreCase(genero))
+		.collect(Collectors.toCollection(ArrayList::new));
+   }
+	
+}
+```
+
+De manera que con Java Config también podemos usar la configuración de Estereotipo que habiamos usado con las anotaciones.
+
+*`App.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+      PeliculaService peliculaService = appContext.getBean(PeliculaService.class);
+		
+      peliculaService.pelisPorGenero("Ciencia ficción").forEach(System.out::println);
+				
+      ((AnnotationConfigApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/19-14.png">
+
+Intentando sin tampoco acomplejar demasiado, hacer una una configuración con Java más pura.
+
+Si quisieramos hacer con Java una configuración totalmente ortogonal, es decir que en nuestro código de las clases no tuviera ninguna anotación como `@Autowired`, `@PostConstruct`, `@PreDestroy` los métodos como `init()` los tendríamos que declarar en el catalogo de películas actuales:
+
+
+```java
+@Bean(initMethod=init)
+@Primary
+public CatalogoPeliculas catalogoActuales() {
+   return new CatalogoPeliculasActuales();
+}
+```
+
+Asi también con todos los demas métodos para que no tuvieramos ningun tipo de dependencia. `Autowired` la tendríamos que declarar a través de constructores y que fuese Java Config el encargado de inyectar las dependencias.
+
+Aun que lo más usual es usar una combinación de Java Config con anotaciones.
+
+<img src="images/19-11.png">
+
+
+
+
+a estamos usando la notación aquí que bueno igual que la María bueno pues si juntamos esta aplicación podremos ver que funciona exactamente igual que la que la anterior es aunque la configuración has ido con Javi si quisiéramos hacer una configuración en Java que fuese totalmente ortogonal es decir que no tuviese nada que ver con nuestro código no interfiera nada en el pues métodos como este lo tendríamos que declarar en el catálogo de películas actuales cuando tendríamos que declarar aquí como mínimo eso vale de manera que bueno pues fuese un una configuración total vale ya veremos qué bueno salvo algunos el esquema cuando se utilizaba de suele ser de los más usuales ejemplo de nivel de un bin dea partir de entorno valor por defecto un fichero de properties etcétera etcétera de hecho en una notación potente ya que nos permite inyectar no solamente sino clases vaper lista etcétera nosotros la inyección de una propiedad que va en un fichero de properties externo para utilizarlo dentro de un componente cómo podemos comprobarlo hacemos mediante las anotaciones roba valium y bueno la sintaxis qué se utiliza en bastante útil vale similar a expression language mediante la cual bueno pues decimos que busque dentro del entorno una propiedad llamada mensaje vale y aquí lo que indicaría sería el valor de mensaje mediante celular y la propia vamos a ver un ejemplo podemos ver como hemos creado dentro de la carpeta rizos un fichero de properties dónde tenemos una propiedad los ficheros de properties ono ficheros muy sencillos que nos permiten crear un listado de pares clave valor vale dentro de un fichero textual dónde se pone primero la clave igual y el valor o podemos probar incluso no es necesario que pongamos con ellas a las a las cadenas de caracteres bueno si nos venimos a nuestro APP confi utilizar el mensaje en primera instancia o hemos visto no le podemos indicar un valor que sería literal sin lo que nos interesa nosotros usar esa property cómo podemos configurar el uso de las property en este caso tan sencillo lo podríamos hacer me voy a enterar anotación property shows en la cual le podemos indicar dentro que busque el fichero de properties y dónde podemos utilizar algunas palabras reservadas cómo classpath para que haga esa búsqueda dentro del plasma como sabemos esta carpeta está dentro del classpad no lo tenemos dentro de ningún paquete por lo cual están en el Clash para cargar el fichero de properties y nos permitiría utilizar retrovisor de Aitor es un componente properties podemos comprobar como se está cargando desde el fichero de propiedades vale y de esta manera este es el mensaje que estamos el mensaje que estamos lanza con esto terminamos la configuración a través de Java con si ya en el siguiente bloque vamos a ver un ejemplo un poco más extenso de cómo utilizar la mayoría de los conceptos con los que hemos venido trabajando a lo largo
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <img src="images/19-11.png">
 
