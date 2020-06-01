@@ -138,7 +138,7 @@ public class DatabaseConfig {
     private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
 }
-
+```
 
 ## Transcripción
 
