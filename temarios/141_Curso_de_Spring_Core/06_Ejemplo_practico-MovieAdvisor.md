@@ -18,15 +18,15 @@ No existe.
 
 ## Transcripción
 
-<img src="images/20-01">
+<img src="images/20-01.png">
 
-<img src="images/20-02">
+<img src="images/20-02.png">
 
-<img src="images/20-03">
+<img src="images/20-03.png">
 
-<img src="images/20-04">
+<img src="images/20-04.png">
 
-<img src="images/20-05">
+<img src="images/20-05.png">
 
 # 21 Creación del proyecto y modelo de datos 5:49 
 
