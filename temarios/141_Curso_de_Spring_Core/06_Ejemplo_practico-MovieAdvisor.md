@@ -109,11 +109,15 @@ Vamos a continuar creando todo el esqueleto de nuestro proyecto de ejemplo para 
 
 <img src="images/21-04.png">
 
+Vamos a cambiar la versión de Java ya que Maven lo crea con la versión 1.5.
+
 <img src="images/21-05.png">
 
 <img src="images/21-06.png">
 
 <img src="images/21-07.png">
+
+También debemos cambiarlo en Java Compiler.
 
 <img src="images/21-08.png">
 
