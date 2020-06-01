@@ -117,12 +117,239 @@ Y nos damos cuenta de que no hemos utilizado nuestro fichero XML absolutamente p
 
 <img src="images/18-06.png">
 
-si queremos hacer uso de los estereotipos también que si queremos podemos utilizar el constructor vacío y mediante el método registro y registrando las clases de configuración y refrescando el contexto vale para mí bueno pues resulta algo más cómodo utilizar el constructor dónde se le pasan los argumentos decía que podemos utilizar también el escaneo de componente con la anotación component-scan vale que tendría el comportamiento idéntico al XML también lo podemos hacer programaticamente aunque te digo a mí me gusta algo más a través de la natación lo tendremos por aquí vale en la cual la anotación app-config vale cañería el paquete Java config encontraría pues todas las clases que tenemos anotada y que dejamos en alguno de los capítulos anteriores algunos de los ejemplos anteriores como el de los estereotipos no nuestro servicio repositorio y el resto de componentes que hemos declarado aquí de manera que bueno pues a través de Java config también podemos utilizar la anotación estereotipo que hemos visto que resultaban ciertamente útiles de esta forma podríamos tener un comportamiento muy parecido al del ejemplo 16.2 pero sin la necesidad de manejar Java con esto vamos a terminar de ver bueno pues la configuración a secas y vamos a meternos de lleno en bueno cómo se utiliza la notación a Robin y las posibilidades que tiene
-
-
+Decir también que si queremos podemos utilizar el constructor vacío y mediante el método `register` y registrando las clases de configuración y refrescando el contexto. Resulta algo más cómodo utilizar el constructor dónde se le pasan los argumentos.
 
 <img src="images/18-07.png">
 
+Podemos activar también el escaneo de componentes con la anotación `@ComponentScan` que tendría el comportamiento idéntico al XML.
+
+También lo podemos hacer programaticamente aunque te digo a mí me gusta algo más a través de la anotación.
+
+Lo tendremos en el siguiente ejemplo.
+
+### :computer: Ejemplo Proyecto JavaConfigScan
+
+<img src="images/18-10.png">
+
+La configuración de `AppConfig` escanearía el paquete `com.openwebinars.javaconfig` y encontraría todas las clases anotadas.
+
+*`AppConfig.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages="com.openwebinars.javaconfig")
+public class AppConfig {
+
+}
+```
+
+Las clases anotadas son las siguientes:
+
+*`CatalogoPeliculasActuales.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("actuales")
+public class CatalogoPeliculasActuales implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("Vengadores: Infinity War", "2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Black Panther","2018","Ciencia ficción"));
+      peliculas.add(new Pelicula("Han Solo", "2018", "Acción"));
+      peliculas.add(new Pelicula("Ocean's 8", "2018", "Acción"));
+      peliculas.add(new Pelicula("Tom Raider", "2018", "Aventuras"));
+      peliculas.add(new Pelicula("Campeones","2018","Comedia"));
+   }
+
+}
+```
+
+*`CatalogoPeliculasClasicas.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("clasicas")
+public class CatalogoPeliculasClasicas implements CatalogoPeliculas {
+
+   public List<Pelicula> peliculas = new ArrayList<>();
+	
+   public Collection<Pelicula> getPeliculas() {
+      return peliculas;
+   }
+	
+   @PostConstruct
+   public void init() {
+      peliculas.add(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+      peliculas.add(new Pelicula("La lista de Schindler","1993","Drama"));
+      peliculas.add(new Pelicula("El Padrino", "1972", "Drama"));
+      peliculas.add(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+      peliculas.add(new Pelicula("Gladiator", "2000", "Acción"));
+      peliculas.add(new Pelicula("El Gran Dictador","1940","Comedia"));
+   }
+
+}
+```
+
+*`PeliculaDaoImplMemory.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class PeliculaDaoImplMemory implements PeliculaDao {
+
+   private List<Pelicula> peliculas = new ArrayList<>();
+	
+   @Autowired
+   private Set<CatalogoPeliculas> catalogosPeliculas;
+	
+   @PostConstruct
+   public void init() {
+      peliculas = catalogosPeliculas
+			.stream()
+			.map(catalogo -> catalogo.getPeliculas())
+			.flatMap(lista -> lista.stream())
+			.collect(Collectors.toCollection(ArrayList::new));		
+   }
+	
+   @PreDestroy
+   public void destroy() {
+      System.out.println("");
+      System.out.println("Limpiando el almacén de películas");
+      peliculas.clear();
+   }
+	
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
+
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
+
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
+
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
+
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
+
+}
+```
+
+*`PeliculaService.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PeliculaService {
+	
+   @Autowired
+   private PeliculaDao peliculaDao;
+	
+   public void setPeliculaDao(PeliculaDao peliculaDao) {
+      this.peliculaDao = peliculaDao;
+   }
+		
+   public List<Pelicula> pelisPorGenero(String genero) {
+      return peliculaDao
+		.findAll()
+		.stream()
+		.filter(p -> p.getGenero().equalsIgnoreCase(genero))
+		.collect(Collectors.toCollection(ArrayList::new));
+   }
+	
+}
+```
+
+De manera que con Java Config también podemos usar la configuración de Estereotipo que habiamos usado con las anotaciones.
+
+*`App.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+      PeliculaService peliculaService = appContext.getBean(PeliculaService.class);
+		
+      peliculaService.pelisPorGenero("Ciencia ficción").forEach(System.out::println);
+				
+      ((AnnotationConfigApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+Al ejecutar la aplicación tenemos:
+
+<img src="images/18-11.png">
+
+De esta forma podríamos tener un comportamiento muy parecido al del ejemplo 16-02 pero sin la necesidad de manejar XML.
 
 # 19 Uso de @Bean 9:49 
 
@@ -277,6 +504,48 @@ Vamos a ver cómo podemos usar la notación arroba bien y algunas cositas asocia
 <img src="images/19-11.png">
 
 <img src="images/19-12.png">
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+*`.java`*
+
+```java
+```
+
+
 
 # Contenido adicional 2
 
