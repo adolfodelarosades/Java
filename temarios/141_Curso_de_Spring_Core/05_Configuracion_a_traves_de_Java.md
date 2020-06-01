@@ -514,19 +514,21 @@ Un método anotado con `@Bean` puede recibir 0 o más parámetros, aunque lo usu
 
 Veámoslo con un el ejemplo, el método `transferService` necesita hacer uso de la clase `AccountRepository` a través de una referencia, pues al indicar aquí un argumento en este método un parámetro, lo que estamos declarando realmente es una dependencia, de manera que es el contenedor el que se encarga de inyectar dentro de este parámetro, la dependencia correspondiente para que podamos utilizar este tipo de objeto. 
 
-Podemos utilizar también los ámbitos a través de las anotaciones con `Scope, singleton, prototype` y las derivadas `Request, Session, Application`.
-
 <img src="images/19-07.png">
 
-Ejemplo de `@Primary` con `@Component`
+Podemos utilizar también los ámbitos a través de las anotaciones con `Scope, singleton, prototype` y las derivadas `Request, Session, Application`.
 
 <img src="images/19-08.png">
 
-Ejemplo de `@Primary` con `@Bean`
+También podemos usar la anotación `@Primary` la cual sirve igual que el atributo `primary` en XML para definir un candidato *primus inter pares*, es decir el primario sobre otros iguales.
+
+Ejemplo de `@Primary` con `@Component`
 
 <img src="images/19-09.png">
 
-También podemos usar la anotación `@Primary` la cual sirve igual que el atributo `primary` en XML para definir un candidato *primus inter pares*, es decir el primario sobre otros iguales.
+Ejemplo de `@Primary` con `@Bean`
+
+<img src="images/19-10.png">
 
 Vamos a ir viendo algunos de los ejemplos que hemos creado para ilustrarlo.
 
