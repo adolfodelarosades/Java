@@ -1,7 +1,7 @@
 # 5. Configuración a través de Java 14m
 
-* Uso de @Configuration 4:48 
-* Uso de @Bean 9:49 
+* 18 Uso de @Configuration 4:48 
+* 19 Uso de @Bean 9:49 
 * Contenido adicional 2
 
 # 18 Uso de @Configuration 4:48 
@@ -13,6 +13,21 @@
 No existe.
 
 ## Transcripción
+
+<img src="images/18-01">
+
+<img src="images/18-02">
+
+<img src="images/18-03">
+
+<img src="images/18-04">
+
+<img src="images/18-05">
+
+<img src="images/18-06">
+
+<img src="images/18-07">
+
 
 # 19 Uso de @Bean 9:49 
 
@@ -141,6 +156,30 @@ public class DatabaseConfig {
 ```
 
 ## Transcripción
+
+<img src="images/19-01">
+
+<img src="images/19-02">
+
+<img src="images/19-03">
+
+<img src="images/19-04">
+
+<img src="images/19-05">
+
+<img src="images/19-06">
+
+<img src="images/19-07">
+
+<img src="images/19-08">
+
+<img src="images/19-09">
+
+<img src="images/19-10">
+
+<img src="images/19-11">
+
+<img src="images/19-12">
 
 # Contenido adicional 2
 
