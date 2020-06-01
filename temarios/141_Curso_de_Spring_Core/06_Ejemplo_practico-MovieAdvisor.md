@@ -18,18 +18,78 @@ No existe.
 
 ## Transcripción
 
-hola a todos vamos a finalizar nuestro curso de spring Core con una sucesión de vídeo en la que iremos construyendo poco a poco una aplicación sencilla pero que integra la mayoría de los conceptos con los que hemos trabajado a lo largo del curso este proyecto lo vamos a llamar y va a ser un sencillo recomendador de películas vamos a trabajar con un fichero que fácilmente descargable yo lo he tuneado un poco con datos de casi todas las películas de la historia vale gracias y MDB a Internet para ofrecer estos datos y luego no hemos tomado un poco para que puedan ser utilizado lo que vamos a desarrollar es una herramienta de línea de comandos que bueno veremos después que sintaxis queremos tener a la hora de invocarla aunque nosotros fuera por no emborronar un poco el curso con cosas que no no son parte del pues lo mismo queremos directamente desde clips los datos los tendremos en un fichero CSV Vane que ya digo que hemos procesado y que lo tendréis disponible en el código fuente y que tiene bueno pues los gatos muy sencillos para cada película tiene asignado un y de su título en el idioma original de la película el año en el que fue estrenada y bueno una sucesión separada por comas de los géneros en los cuales podemos enmarcar esa película cómo ver el separador de datos de columnas sería el punto y, y como lo género es un listado tendríamos la coma para hacer de separador dentro de esa columna el diagrama de clases completo de nuestra aplicación va a ser este si quisiéramos solamente en el diagrama el modelo de noche aplicación sería muy sencillo porque sería tan solo una clase la clase vale la clase película que va a guardar los datos de una película cómo lo has visto antes no subiré el título el año de estreno y una lista con los géneros que incluye almacenando los géneros como este pentonces diagrama cobra un poco más de sentido y aunque no es extremadamente complejo pero si es verdad que tenemos que ver cómo lo podemos interpretar como como punto de entrada quién tendrá el método main será una clase móvil Advisor appun método que será el que tenga el algoritmo de la aplicación el que es capaz de procesar los argumentos verificar si la sintaxis correcta en los distintos servicios como decíamos esta clase que es la que tiene el método men lo que hace es cargar el contexto para ellos bueno pues vamos a utilizar la configuración mixta de Java config con anotaciones pues tendrá que usar la clase app-config para cargar ese contexto además la clase en el caso de que queramos visualizar la ayuda a crear otro componente más tenemos la clase muy Advisor gel que será la encargada de cargar desde un fichero de texto la sintaxis de la ayuda vale para que la podamos imprimir por consola a partir de aquí digamos que esta clase esté bien que tiene el algoritmo nuclear de la aplicación va a jugar con dos servicios uno de ellos para que veas que podemos crear tranquilamente sobre una clase se llama service digamos que un servicio de alto nivel con operaciones bastante de alto nivel con alto nivel de abstracción es decir que directamente nos da la posibilidad de obtener pues las películas que tengamos en nuestro almacén de datos por una serie de criterios y por otro lado tenemos realizar implementada por esta clase de aquí que nos va a permitir definir consultas algo más compleja sobre nuestro almacén de datos ambos services in query service utilizan la interfaz feel that vale que es bueno pues de alguna manera el contrato sobre nuestro repositorio que en este caso lo vamos a implementar en memoria y que será la que almacenará todos estos datos veremos como esto lo cargamos desde fichero a través de un método estático que será la encargada de leer este fichero modelo vamos a ponernos manos a la obra vamos a ver qué sintaxis vamos a utilizar para poder luego implementarla de manera correcta la idea que nosotros pudiéramos empaquetar esta aplicación en un bar y pudiéramos proporcionarle una serie de opciones la primera opción más sencilla sería listar los géneros diferentes de todas las películas que tenemos por si queremos saberlo y utilizarlo como criterio de búsqueda madera a partir de aquí podemos utilizar cuatro opciones distintas que serían a g en decir que la película incluya o pertenezca alguno de los géneros que se vistan aquí podríamos poner más de uno separado por comas siempre y cuando no tenga un espacio menos TG que en lugar de indicar que la película pertenece a algún género la película tiene que pertenecer a todos los géneros que incluyamos otro parámetro que se podría añadir serían menos y año vale para ver películas estrenadas en dicho año o bien menos ve desde para ver las películas estrenadas en un intervalo año de inicio y fin y la opción de de un título el decir que el título de la película contenga la cadena de caracteres que nosotros proponemos aquí siempre sin espacio vale por último la opción menos h que mostrara el mensaje me ayuda yo digo una aplicación que es sencilla aunque nuestro primer proyecto completo después tendrá una complejidad media y que además haremos un buen uso de la piscina de Java 8 para poder hacer los filtrados la búsqueda mapeo etcétera etcétera con esto terminamos la presentación del proyecto de ejemplo vamos a hacer en el próximo vídeo la creación del proyecto y de toda la estructura para que podemos empezar a conducir
-
-
 <img src="images/20-01.png">
+
+Vamos a finalizar nuestro curso de Spring Core con una sucesión de lecciones en la que iremos construyendo poco a poco una aplicación sencilla, pero que integre la mayoría de los conceptos con los que hemos trabajado a lo largo del curso. A este proyecto lo vamos a llamar MovieAdvisor y va a ser un sencillo recomendador de películas.
 
 <img src="images/20-02.png">
 
+Vamos a trabajar con un fichero que es fácilmente descargable, yo lo he tuneado un poco, con datos de casi todas las películas de la historia. Gracias [IMDB](https://www.imdb.com/) por ofrecer estos datos. 
+
+Lo que vamos a desarrollar es una herramienta de línea de comandos, veremos después que sintaxis queremos tener a la hora de invocarla, aunque nosotros fuera por no emborronar un poco lo mismo invocaremos directamente desde Eclipse.
+
+Los datos los tendremos en un fichero CSV que hemos procesado y que lo tendréis disponible en el código fuente y que para cada película tiene asignado un `id` identificador, `title` en idioma original, `year` año y `genres` una sucesión separada por comas de los géneros en los cuales podemos enmarcar esa película, cómo vemos el separador de datos de columnas sería (`;`) como separador de géneros tendríamos la coma (`,`) para hacer de separador dentro de esa columna.
+
+
+```txt
+id;title;year;genres
+9;Miss Jerry;1894;Romance
+147;The Corbett-Fitzsimmons Fight;1897;Documentary,News,Sport
+229676;Reproduction of the Corbett and Fitzsimmons Fight;1897;Documentary,News,Sport
+138342;O Campo Grande;1898;Documentary
+138349;O Carnaval em Lisboa;1898;Documentary
+138759;A Rua Augusta em Dia de Festa;1898;Documentary
+138774;Saída dos Operários do Arsenal da Marinha;1898;Documentary
+221032;Branding Cattle;1898;Documentary,Sci-Fi
+221040;Buck Dance, Ute Indians;1898;Documentary
+235357;Dressing Paper Dolls;1898;Documentary
+236940;69th Regiment Passing in Review;1898;Documentary
+237775;The Startled Lover;1898;Romance
+138382;O Cortejo da Procissão da Senhora da Saúde;1899;Documentary
+...
+```
+
 <img src="images/20-03.png">
+
+El diagrama de clases completo de nuestra aplicación va a ser este, si quisiéramos solamente plasmar en el diagrama el modelo de nuestra aplicación sería muy sencillo, porque sería tan solo una clase la clase `Film`. La clase película que va a guardar los datos de una película cómo lo hemos visto antes, el id, el título, el año de estreno y una lista con los géneros que incluye.
+
+Sin embargo hemos querido poner un diagrama de clases del diseño donde se ven todas las demas clases e interfaces que van a intervenir para ver quien usa quien y por ende ver quien tiene una dependencia con quien, entonces el diagrama cobra un poco más de sentido y aunque no es extremadamente complejo, pero si es verdad que tenemos que ver cómo lo podemos interpretar.
+
+Como punto de entrada quién tendrá el método main, será la clase `MovieAdvisorApp` si bien esta clase será algo de "cascarilla" ya que simplemente lo que hará será cargar el contexto y lanzar el método `run` quien tendrá la clase `movieAdvisorRunApp` quien será el que tenga el algoritmo de la aplicación, el que es capaz de procesar los argumentos, verificar si la sintaxis es correcta e invocar a los distintos servicios.
+
+Como decíamos la clase `MovieAdvisorApp` que es la que tiene el método `main`, lo que hace es cargar el contexto para ello,  vamos a utilizar la configuración mixta de Java Config con anotaciones, entonces tendrá que usar la clase `AppConfig` para cargar ese contexto.
+
+Además la clase `MovieAdvisorRunApp` en el caso de que queramos visualizar la ayuda, por crear otro componente más tenemos la clase `MovieAdvisorHelp` que será la encargada de cargar desde un fichero de texto, la sintaxis de la ayuda, para que la podamos imprimir por consola. 
+
+A partir de `MovieAdvisorRunApp` esta clase, esté bean que tiene el algoritmo nuclear de la aplicación, va a jugar con dos servicios, uno de ellos, para que veas que podemos crear tranquilamente sobre una clase se llama `FilmService` digamos que un servicio de alto nivel, con operaciones bastante de alto nivel, con alto nivel nos referimos de abstracción, es decir que directamente nos da la posibilidad de obtener las películas que tengamos en nuestro almacén de datos, por una serie de criterios.
+
+Y por otro lado tenemos la interfaz `FilmQueryService` implementada por la clase `FilmQueryServiceImpl` que nos va a permitir definir consultas algo más compleja sobre nuestro almacén de datos. 
+
+Ambos servicios `FilmService` y `FilmQueryService` utilizan la interfaz `FilmDao` que es de alguna manera el contrato sobre nuestro repositorio, que en este caso lo vamos a implementar en memoria con `FilmDaoImpMemory` y que será la que almacenará todos estos datos, veremos como esto lo cargamos desde el fichero a través de un método estático, que será la encargada de leer este fichero modelo.
+
+Y como es natural la interfaz `FilmDao` utiliza nuestro modelo `Film`.
+
+Vamos a ponernos manos a la obra, vamos a ver qué sintaxis vamos a utilizar para poder luego implementarla de manera correcta. 
 
 <img src="images/20-04.png">
 
+La idea que nosotros pudiéramos empaquetar esta aplicación en un `JAR` y pudiéramos proporcionarle una serie de opciones, la primera opción más sencilla sería listar los géneros diferentes (`-lg`) de todas las películas que tenemos, por si queremos saberlo y utilizarlo como criterio de búsqueda más adelante. 
+
+A partir de aquí podemos utilizar cuatro opciones distintas que serían `-ag` es decir que la película incluya o pertenezca a alguno de los géneros que se listen, podríamos poner más de uno separado por comas, siempre y cuando no tenga un espacio.
+
+`-tg` que en lugar de indicar que la película pertenece a algún género, la película tiene que pertenecer a todos los géneros que incluyamos.
+
 <img src="images/20-05.png">
+
+Otro parámetro que se podría añadir serían `-y año` para ver películas estrenadas en dicho año.
+
+O bien `-b desde,hasta` para ver las películas estrenadas en un intervalo, con un año de inicio y de fin.
+
+Y la opción de de un título `-t titulo`, el decir que el título de la película contenga la cadena de caracteres que nosotros proponemos aquí, siempre sin espacio.
+
+Por último la opción `-h` que mostrara el mensaje me ayuda.
+
+Ya digo una aplicación que es sencilla, aunque si es nuestro primer proyecto Spring completo tendrá una complejidad media y además haremos un buen uso del API Strem de Java 8, para poder hacer los filtrados, las búsquedas, los mapeo, etcétera etcétera. 
 
 # 21 Creación del proyecto y modelo de datos 5:49 
 
