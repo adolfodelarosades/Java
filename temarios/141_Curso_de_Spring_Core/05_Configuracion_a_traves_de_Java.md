@@ -14,20 +14,112 @@ No existe.
 
 ## Transcripción
 
-hola a todos vamos a continuar con una nueva sección en la que vamos a aprender a configurar nuestra aplicaciones stream a través de Java soportales de la versión 3 la configuración de código Java lo cual nos permite prescindir por completo del uso de XML de hecho podemos utilizar la configuración Java de manera exclusiva o incluso combinarla con otro tipo de configuración cómo sería por ejemplo el uso de anotaciones que sería bastante usual para poder usar la configuración con Java config tenemos que utilizar dos anotaciones concretamente que son configuration a nivel de clase indica que una clase va a tener aspectos de configuración en particular que va a reunir más de un método anotado con a Robin y Robin qué se utiliza nivel de método y qué es equivalente a la declaración de un bien en el XML aquí tenemos un ejemplo de cada comes bastante básico en el que tendríamos una clase anotada con configuración con un método anotado con a Robin qué bueno pues lo que haría en este caso sería crear un nuevo pin el tipo sería el tipo de retorno del método y el objeto creado pues sería este que tenemos aquí dentro vale este objeto que nosotros devolvemos aquí para salir a ser gestionado por nuestra nuestro contenedor de inversión de control cambio en nuestra clase principal en lugar de usar XML application configconfiguration la clase o las clases porque me podremos indicar más de una y de esa manera podremos seguir trabajando y como hemos venido utilizando hasta ahora lo podemos comprobar aquí ejemplo del principio en el que tenemos un vino una clase pollo totalmente sin ningún tipo de anotación y mediante la clase app-config decimos que queremos crear nuevo de tipo saludito invocando el constructor el nombre del vencerá levantamos el contexto haciendo referencia a esta clase de configuración obtenemos el bien y esto funcionará pues tal cual y nos damos cuenta de que no hemos utilizado nuestro fichero XML absolutamente para nada si queremos hacer uso de los estereotipos también que si queremos podemos utilizar el constructor vacío y mediante el método registro y registrando las clases de configuración y refrescando el contexto vale para mí bueno pues resulta algo más cómodo utilizar el constructor dónde se le pasan los argumentos decía que podemos utilizar también el escaneo de componente con la anotación component-scan vale que tendría el comportamiento idéntico al XML también lo podemos hacer programaticamente aunque te digo a mí me gusta algo más a través de la natación lo tendremos por aquí vale en la cual la anotación app-config vale cañería el paquete Java config encontraría pues todas las clases que tenemos anotada y que dejamos en alguno de los capítulos anteriores algunos de los ejemplos anteriores como el de los estereotipos no nuestro servicio repositorio y el resto de componentes que hemos declarado aquí de manera que bueno pues a través de Java config también podemos utilizar la anotación estereotipo que hemos visto que resultaban ciertamente útiles de esta forma podríamos tener un comportamiento muy parecido al del ejemplo 16.2 pero sin la necesidad de manejar Java con esto vamos a terminar de ver bueno pues la configuración a secas y vamos a meternos de lleno en bueno cómo se utiliza la notación a Robin y las posibilidades que tiene
-
-
 <img src="images/18-01.png">
+
+Vamos a continuar con una nueva sección en la que vamos a aprender a configurar nuestras aplicaciones Spring a través de Java.
 
 <img src="images/18-02.png">
 
+Spring soporta desde la versión 3 la configuración de código Java, lo cual nos permite prescindir por completo del uso de XML, de hecho podemos utilizar la configuración Java de manera exclusiva o incluso combinarla con otro tipo de configuración cómo sería por ejemplo el uso de anotaciones que sería bastante usual.
+
 <img src="images/18-03.png">
+
+Para poder usar la configuración con Java Config tenemos que utilizar dos anotaciones concretamente que son:
+
+* `@Configuration`: se utiliza a nivel de clase, indica que una clase va a tener aspectos de configuración, en particular que va a reunir más de un método anotado con `@Bean`.
+* `@Bean`: se utiliza nivel de método y qué es equivalente a la declaración de un bien en el XML.
 
 <img src="images/18-04.png">
 
+Aquí tenemos un ejemplo de Java Config bastante básico, en el que tendríamos una clase anotada con `@Configuration` con un método anotado con `@Bean`, lo que haría en este caso sería, crear un nuevo bean, el tipo sería el tipo de retorno del método `Saludator` y el objeto creado sería `new Saludator()`, este objeto que nosotros devolvemos pasaría a ser gestionado por nuestro contenedor de inversión de control.
+
 <img src="images/18-05.png">
 
+Más cambios en nuestra clase principal, en lugar de usar `ClassPathXmlApplicationContext(beans.xml)` como venismos utilizando hasta ahora, como ya no tenemos archivo XML, tendríamos que usar la clase `AnnotationConfigApplicationContext` de manera que le podemos indicar cual es la clase anotada con `@Configuration`, la clase o las clases porque le podremos indicar más de una y de esa manera podremos seguir trabajando y obtener los beans como hemos venido utilizando hasta ahora.
+
+Lo podemos comprobar en el siguiente ejemplo.
+
+### :computer: Ejemplo Proyecto JavaConfig
+
+<img src="images/18-08.png">
+
+Volvemos al ejemplo del principio (*Ej. 141-03-Bean*), en el que tenemos un bean, una clase pojo totalmente sin ningún tipo de anotación.
+
+*`Saludator.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+public class Saludator {
+	
+	public String saludo() {
+		return "Hola mundo!!!";
+	}
+
+}
+```
+
+Y mediante la clase `AppConfig` decimos que queremos crear nuevo bean de tipo `Saludator` invocando el constructor, el nombre del bean será el nombre del método en este caso `saludator()`.
+
+*`AppConfig.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+	
+	@Bean
+	public Saludator saludator() {
+		return new Saludator();
+	}
+
+}
+```
+
+De esta manera levantamos el contexto haciendo referencia a la clase de configuración `AnnotationConfigApplicationContext` y  obtenemos el bean.
+
+*`App.java`*
+
+```java
+package com.openwebinars.javaconfig;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App {
+
+   public static void main(String[] args) {
+		
+      ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+	  Saludator saludator = appContext.getBean(Saludator.class);
+		
+	  System.out.println(saludator.saludo());
+		
+	  ((AnnotationConfigApplicationContext) appContext).close();
+
+   }
+
+}
+```
+
+OBSERVECE QUE YA NO TENEMOS EL FAMOSO ARCHIVO XML (beans.xml).
+
+Esto funcionará pues tal cual.
+
+<img src="images/18-09.png">
+
+Y nos damos cuenta de que no hemos utilizado nuestro fichero XML absolutamente para nada.
+
 <img src="images/18-06.png">
+
+si queremos hacer uso de los estereotipos también que si queremos podemos utilizar el constructor vacío y mediante el método registro y registrando las clases de configuración y refrescando el contexto vale para mí bueno pues resulta algo más cómodo utilizar el constructor dónde se le pasan los argumentos decía que podemos utilizar también el escaneo de componente con la anotación component-scan vale que tendría el comportamiento idéntico al XML también lo podemos hacer programaticamente aunque te digo a mí me gusta algo más a través de la natación lo tendremos por aquí vale en la cual la anotación app-config vale cañería el paquete Java config encontraría pues todas las clases que tenemos anotada y que dejamos en alguno de los capítulos anteriores algunos de los ejemplos anteriores como el de los estereotipos no nuestro servicio repositorio y el resto de componentes que hemos declarado aquí de manera que bueno pues a través de Java config también podemos utilizar la anotación estereotipo que hemos visto que resultaban ciertamente útiles de esta forma podríamos tener un comportamiento muy parecido al del ejemplo 16.2 pero sin la necesidad de manejar Java con esto vamos a terminar de ver bueno pues la configuración a secas y vamos a meternos de lleno en bueno cómo se utiliza la notación a Robin y las posibilidades que tiene
+
+
 
 <img src="images/18-07.png">
 
