@@ -760,16 +760,138 @@ public void insert(Film film) {
 }
 ```
 
-Para editar y borrar vamos a crear un nuevo método, 
+Para editar y borrar vamos a crear un nuevo método privado que sea capaz de regresarnos el índice de una película dentro del listado en base a su `id`, sería un algoritmo de búsqueda muy sencillo, nada eficiente pero que nos puede ilustrar como hacerlo.
 
-AQUIIIIIIIIII
-
-
-esta vez sí me voy a parar un poco a crear el código para que lo podáis ver cómo crear un método privado que sea capaz de devolvernos el índice de una ver una película dentro del listado en base a sweet algoritmo de búsqueda muy sencillo nada eficiente pero bueno que nos puede ilustrar de conocerlo y el index menor que bueno si la película el índice en una búsqueda lineal de las de toda la vida ese live quiero decir que lo hemos encontrado y en otro caso para devolver bueno pues devolvemos si encontrado = true devolvemos el índice y en otro caso de volvemos menos 1 vale de esta manera podríamos trabajar ahora con el método edit vale que nos permita este es tan sencillo que lo vamos a copiar buscar el índice en base al Lidl que no debería cambiar un crédito en la película y si el índice es distinto de menos 1 o lo que hacemos cambiar el elemento que hay en ese índice por la nueva película y en el caso de ritmo pues no prácticamente igual pero en lugar de si ese índice realmente aquí si quisiéramos podríamos utilizar directamente el índice de esta manera vamos a comprar un poco si existe o no existe no bueno pues con esto tenemos nuestra clase lado implementada tenemos toda nuestra capa de repositorio implementada en el siguiente vídeo vamos a crear los diferentes servicios que lo van a utilizar
 
 ```java
+private int getIndexOf(long id) {
+   boolean encontrado = false;
+   int index = 0;
+		
+   while (!encontrado && index < peliculas.size()) {
+      if (peliculas.get(index).getId() == id)
+         encontrado = true;
+      else
+	 index++;
+   }
+		
+   return (encontrado) ? index : -1;
+}
 ```
 
+Busca el índice de un id de película que reciba como argumento, recorre el listado de películas mientras no lo encuentre y el tamaño del listado sea mayor al indice. Si el id de la película con índice actual es igual al id que se paso como argumento, significa que la película ha sido encontrada y pone `encontrado = true;` y sino incrementa el índice y continua buscando. Si encuentra el id se devuelve el índice y si no se devuelve -1.
+
+Este método lo vamos a usar dentro de nuestro método `edit()`
+
+```java
+public void edit(Film film) {
+   int index = getIndexOf(film.getId());
+   if (index != -1)
+      peliculas.set(index, film);
+}
+```
+
+Busca el índice en base al id del Film que recibe como argumento, y si el índice es distinto de -1 que significa que encontro la posición de la película, lo que hacemos con `set(` es cambiar lo que este en esa posición por el film que recibe de argumento.
+
+En el caso del método `delete()` vamos a recibir como argumento el id, buscamos el índice en base al id y si existe removemos la película en esa posición.
+
+```java
+public void delete(long id) {
+   int index = getIndexOf(id);
+   if (index != -1)
+      peliculas.remove(index);
+
+}
+```
+
+La clase `` completa es:
+
+```java
+package com.openwebinars.movieadvisor.dao;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.openwebinars.movieadvisor.config.AppConfig;
+import com.openwebinars.movieadvisor.model.Film;
+
+/**
+ * Implementación en memoria de la interfaz FilmDao.
+ * Además, incluye la lectura de los datos, a través de un método estático,
+ * desde un fichero CSV.
+ * 
+ * 
+ * @author OpenWebinars
+ *
+ */
+@Repository
+public class FilmDaoImplMemory implements FilmDao {
+	
+   public List<Film> peliculas = new ArrayList<>();
+	
+   @Autowired
+   private AppConfig appConfig;
+	
+   @PostConstruct
+   public void init() {
+      peliculas = UtilFilmFileReader.readFile(appConfig.getFile(), appConfig.getSeparator(), appConfig.getListSeparator());
+   }
+
+   public Film findById(long id) {
+		
+      Optional<Film> result = peliculas
+	 			.stream()
+				.filter(f -> f.getId() == id)
+				.findFirst();
+      return result.orElse(null);	
+	
+   }
+
+   public Collection<Film> findAll() {		
+      return peliculas;
+   }
+
+   public void insert(Film film) {
+      peliculas.add(film);
+   }
+
+   public void edit(Film film) {
+      int index = getIndexOf(film.getId());
+      if (index != -1)
+	 peliculas.set(index, film);
+   }
+
+   public void delete(long id) {
+      int index = getIndexOf(id);
+      if (index != -1)
+	 peliculas.remove(index);
+   }
+	
+   private int getIndexOf(long id) {
+      boolean encontrado = false;
+      int index = 0;
+		
+      while (!encontrado && index < peliculas.size()) {
+	 if (peliculas.get(index).getId() == id)
+	    encontrado = true;
+	 else
+	    index++;
+      }
+		
+      return (encontrado) ? index : -1;
+   }
+
+}
+```
+
+Con esto tenemos nuestra clase DAO implementada, tenemos toda nuestra capa de repositorio implementada. En la siguiente sección vamos a crear los diferentes servicios que lo van a utilizar.
 
 # 24 Servicios 13:28 
 
