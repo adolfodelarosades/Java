@@ -629,11 +629,122 @@ Lo salvamos con el nombre `movieadvisor.properties` en la carpeta resource.
 
 <img src="images/21-26.png">
 
-Ahora lo que tenemos que hacerlo es cargarlo desde nuestra clase de configuración `Appconfig` usando la anotación `@PropertySource()` al cual le debemos pasar la ruta y nombre del archivo properties. Y lo que vamos a hacer es lo siguiente, en lugar de que recojamos el valor directamente en los beans donde los vayamos a utilizar,  vamos a dejar que la clase `AppCpnfig` funcione algo así como una especie de componente de configuración, es decir los valores los recojeremos aquí y esta clase tendrá unos métodos getters y allá donde lo necesitemos, lo que haremos será en lugar de inyectar los valores sueltos inyectaremos la clase `AppConfig`.
+Ahora lo que tenemos que hacerlo es cargarlo desde nuestra clase de configuración `Appconfig` usando la anotación `@PropertySource()` al cual le debemos pasar la ruta y nombre del archivo properties. 
+
+`@PropertySource("classpath:/movieadvisor.properties")`
+
+Y lo que vamos a hacer es lo siguiente, en lugar de que recojamos el valor directamente en los beans donde los vayamos a utilizar,  vamos a dejar que la clase `AppCpnfig` funcione algo así como una especie de componente de configuración, es decir los valores los recojeremos aquí y esta clase tendrá unos métodos getters y allá donde lo necesitemos, lo que haremos será en lugar de inyectar los valores sueltos inyectaremos la clase `AppConfig`.
+
+Para ello creamos tres campos y con la ayuda de la anotación `@Value` y la sintaxis que tenemos para poder usar las properties les inyectamos el valor.
+
+```java
+@Value("${file.path}")
+private String file;
+	
+@Value("${file.csv.separator}")
+private String separator;
+
+@Value("${file.csv.list_separator}")
+private String listSeparator;
+```
+
+Y ahora lo que hacemos es crear los métodos getters para estas 3 propiedades.
+
+```java
+public String getFile() {
+   return file;
+}
+	
+public String getSeparator() {
+   return separator;
+}
+	
+public String getListSeparator() {
+   return listSeparator;
+}
+```
+
+Nuestra clase `AppConfig` completa es:
+
+```java
+package com.openwebinars.movieadvisor.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+@Configuration
+@ComponentScan(basePackages="com.openwebinars.movieadvisor")
+@PropertySource("classpath:/movieadvisor.properties")
+public class AppConfig {
+	
+   @Value("${file.path}")
+   private String file;
+	
+   @Value("${file.csv.separator}")
+   private String separator;
+	
+   @Value("${file.csv.list_separator}")
+   private String listSeparator;
+	
+   public String getFile() {
+      return file;
+   }
+	
+   public String getSeparator() {
+      return separator;
+   }
+	
+   public String getListSeparator() {
+      return listSeparator;
+   }
+	
+}
+```
+
+De esta manera cuando queramos utilizar los valores de configuración simplemente inyectamos la clase `AppConfig` y ya podemos usar los valores de las propiedades. Volvemos a nuestra clase `FilmDaoImplMemory` para completar el método `init()`.
 
 
+```java
+@Autowired
+private AppConfig appConfig;
+	
+public void init() {
+   peliculas = UtilFilmFileReader.readFile(appConfig.getFile(), appConfig.getSeparator(), appConfig.getListSeparator());
+}
+```
 
-y estaremos la clase app lo que vamos a hacer que tenemos para poder usar las property no podríamos crear así esto sería dólar PSV tractor list separator y ahora lo que haríamos sería crear bueno pues los metodos getter para estos tres balones pueden ser privados vamos a crear los getters vale y ya lo tendríamos por aquí de esta manera cuando queramos utilizar los valores de configuración pues simplemente nos tendríamos que venir a esta clase inyectarhemos ido pasando a través de la clase app-config hasta este método que hemos programado bueno pues tanto la ruta como los valores las expresiones regulares que va utilizar split a la hora de separar el fichero nos quedaría implementar nuestra clase dado que ahora mismo está vacía por completo y si parece p**** alargar más lo voy poco a poco copiando el código y explicando cómo funciona haría y me detengo allá donde bueno pues sea algo más usando el app y stream y a través de la lista de película los métodos de búsqueda pues eran parecidos a este también podemos utilizar si queréis expresiones estupendo cómo vamos a conseguir que nos devuelva una película por dentro de esta lista bueno pues vamos sin tramo y nos quedamos con aquella no vamos a tener ningún y de repetir pues algo así con una clave primaria con lo cual nos quedaríamos solamente con una aún así pues le pedimos que nos devuelva la primera y este método de Friends no te vuelven no cenar queremos evitar el uso de opcional tampoco por no hacer más complejas nuestra aplicación bueno pues devolvemos si he encontrado el primero tendrá el valor y si no pues devolvemos el resto de métodos algunos son muy sencillos aquí lo único que tenemos que hacer devolver todas las películas el listado completo a la hora de insertar pues también podemos hacerlo sencillos y bueno para editar y borrar vamos a crear un nuevo método esta vez sí me voy a parar un poco a crear el código para que lo podáis ver cómo crear un método privado que sea capaz de devolvernos el índice de una ver una película dentro del listado en base a sweet algoritmo de búsqueda muy sencillo nada eficiente pero bueno que nos puede ilustrar de conocerlo y el index menor que bueno si la película el índice en una búsqueda lineal de las de toda la vida ese live quiero decir que lo hemos encontrado y en otro caso para devolver bueno pues devolvemos si encontrado = true devolvemos el índice y en otro caso de volvemos menos 1 vale de esta manera podríamos trabajar ahora con el método edit vale que nos permita este es tan sencillo que lo vamos a copiar buscar el índice en base al Lidl que no debería cambiar un crédito en la película y si el índice es distinto de menos 1 o lo que hacemos cambiar el elemento que hay en ese índice por la nueva película y en el caso de ritmo pues no prácticamente igual pero en lugar de si ese índice realmente aquí si quisiéramos podríamos utilizar directamente el índice de esta manera vamos a comprar un poco si existe o no existe no bueno pues con esto tenemos nuestra clase lado implementada tenemos toda nuestra capa de repositorio implementada en el siguiente vídeo vamos a crear los diferentes servicios que lo van a utilizar
+De esta manera desde las properties hemos ido pasando a través de la clase `AppConfig` hasta el método `readFile(final String path, final String separator, final String listSeparator)` que hemos programado en la clase `UtilFilmFileReader` para que reciba los valores necesarios para recuperar los datos y recuperar una lista de películas.
+
+Nos quedaría implementar nuestra clase DAO `FilmDaoImplMemory` que ahora mismo esta vacía por completo.
+
+Usando el API Stream y usando la lista de películas que ya recuperamos en `peliculas` en el método `init()`, vamos a empezar por códificar el método `findById(long id)`.
+
+¿Cómo vamos a lograr que nos devuelva una película por Id de la lista de películas?
+
+* Lo que hacemos es transformar el listado `peliculas` en un Stream con `.stream()`
+* Filtramos y nos quedamos con el `id` que le indiquemos usando `.filter(f -> f.getId() == id)`, sabemos que no existen ids repetidos.
+* Pedimos que nos devuelva la primera con `.findFirst()` que nos devuelve un `Optional`
+
+Como queremos evitar un `Optional` para no hacer más compleja nuestra aplicación, lo que hacemos es que si ha encontrado el primero en `result` tendremos el valor y sino retornamos `null`.
+
+```java
+public Film findById(long id) {
+		
+   // @formatter:off
+   Optional<Film> result = peliculas
+				.stream()
+				.filter(f -> f.getId() == id)
+				.findFirst();
+   // @formatter:on
+		
+   return result.orElse(null);
+		
+}
+```
+
+hasta este método que hemos programado bueno pues tanto la ruta como los valores las expresiones regulares que va utilizar split a la hora de separar el fichero nos quedaría implementar nuestra clase dado que ahora mismo está vacía por completo y si parece p**** alargar más lo voy poco a poco copiando el código y explicando cómo funciona haría y me detengo allá donde bueno pues sea algo más usando el app y stream y a través de la lista de película los métodos de búsqueda pues eran parecidos a este también podemos utilizar si queréis expresiones estupendo cómo vamos a conseguir que nos devuelva una película por dentro de esta lista bueno pues vamos sin tramo y nos quedamos con aquella no vamos a tener ningún y de repetir pues algo así con una clave primaria con lo cual nos quedaríamos solamente con una aún así pues le pedimos que nos devuelva la primera y este método de Friends no te vuelven no cenar queremos evitar el uso de opcional tampoco por no hacer más complejas nuestra aplicación bueno pues devolvemos si he encontrado el primero tendrá el valor y si no pues devolvemos el resto de métodos algunos son muy sencillos aquí lo único que tenemos que hacer devolver todas las películas el listado completo a la hora de insertar pues también podemos hacerlo sencillos y bueno para editar y borrar vamos a crear un nuevo método esta vez sí me voy a parar un poco a crear el código para que lo podáis ver cómo crear un método privado que sea capaz de devolvernos el índice de una ver una película dentro del listado en base a sweet algoritmo de búsqueda muy sencillo nada eficiente pero bueno que nos puede ilustrar de conocerlo y el index menor que bueno si la película el índice en una búsqueda lineal de las de toda la vida ese live quiero decir que lo hemos encontrado y en otro caso para devolver bueno pues devolvemos si encontrado = true devolvemos el índice y en otro caso de volvemos menos 1 vale de esta manera podríamos trabajar ahora con el método edit vale que nos permita este es tan sencillo que lo vamos a copiar buscar el índice en base al Lidl que no debería cambiar un crédito en la película y si el índice es distinto de menos 1 o lo que hacemos cambiar el elemento que hay en ese índice por la nueva película y en el caso de ritmo pues no prácticamente igual pero en lugar de si ese índice realmente aquí si quisiéramos podríamos utilizar directamente el índice de esta manera vamos a comprar un poco si existe o no existe no bueno pues con esto tenemos nuestra clase lado implementada tenemos toda nuestra capa de repositorio implementada en el siguiente vídeo vamos a crear los diferentes servicios que lo van a utilizar
 
 ```java
 ```
