@@ -445,13 +445,155 @@ public void init() {
 }
  ```
  
-Para ello vamos a crear una nueva clase, en este caso no lo voy a crear como un bean, sino que lo voy a dejar para que lo podáis hacer vosotros, que sería la encargada de cargar o de procesar el fichero, la clase se llamará `UtilFilmFileReader` 
+Para ello vamos a crear una nueva clase, en este caso no lo voy a crear como un bean, sino que lo voy a dejar para que lo podáis hacer vosotros, que sería la encargada de cargar o de procesar el fichero, la clase se llamará `UtilFilmFileReader` dentro del paquete `com.openwebinars.movieadvisor.dao`, va a ser una clase con un método estático.  
+
+<img src="images/21-23.png">
+
+Si alguien quiere, se podría transformar esto en un bean que pudiera ser capaz de leer el fichero. Está separación es porque este implementación del DAO es en memoria, es decír sabe que lo va a tener, pero no sabe de dónde surgen los datos. Si lo hiciera con otro bean los datos podrían surgir de otro sitio que no fuese un fichero `csv` eso también lo dejo para que ustedes puedan tener cancha.
+
+En este caso vamos a crear un método estatico `readFile` que va a devolver una lista de películas, podriamos ponerla también como colección, va a recibir tres argumentos `path`, `separator` y `listSeparator`. Ahora veremos que los podemos colocar en el fichero de properties que vamos a crear.
+
+`public static List<Film> readFile(final String path, final String separator, final String listSeparator) {`
+
+Dentro de nuestro método `readFile` vamos a usar un esquema clásico para que no nos de problemas.
+
+```java
+List<Film> result = new ArrayList<>();
+
+return result;
+```
+
+En medio de esto podemos códificar todo lo necesario, vamos a añadir el `// @formatter:off` y `// @formatter:on` porque vamos a incluir el uso de API Stream y expresiones lamdas para que no la reformatea a Java. Si nos perdemos en esta parte repasar el curso de Java 8 donde se explica con abundancia en cómo trabajar con fichero y el cómo usar el API Streams y expresiones lambdas. 
+
+Nosotros queremos a través de la clase `Files` usar el método `lines` que nos devuelve un Stream de Strings, es decir va ir leyendo línea a línea el fichero y lo va a devolver dentro de un Stream. El `Path` lo tenemos que proporcionar nosotros que es uno de los argumentos que recibimos, pero para poder cargar convenientemente el fichero en lugar de acceder vía el sistema de ficheros lo vamos a hacer a través de la clase `ResourceUtils.getFile(path)` que va a cargar de una más conveniente este fichero, esto lo devuelve como un tipo que no podemos utilizar por eso lo transformamos a una URI con `.toURI()` que nos será más útil para poderlo usar. Todo lo explicado aquí equivale a la línea:
+
+`result = Files.lines(Paths.get(ResourceUtils.getFile(path).toURI()))`
+
+A partir de aquí si hemos visto el fichero nos vamos a querer saltar la primera línea, es la que tiene el encabezado para lo cual usamos 
+
+`.skip(1)`
+
+y bueno vamos a querer procesar este CSV para ir transformandolo todo en un listado de películas, para ello usamos el método `map()` vamos a querer que en cada línea se haga una transformación, como es algo compleja la vamos a dejarla vacía por ahora:
+
+```java
+.map(line -> {
+
+})
+```
+
+y por último lo vamos a querer recoger todo en un listado que almacenaremos en `result`:
+
+```java
+// @formatter:off
+result = Files.lines(Paths.get(ResourceUtils.getFile(path).toURI()))
+     .skip(1)
+     .map(line -> {
+		
+     }).collect(Collectors.toList());
+// @formatter:on
+```
+
+y ahora ya nos podemos centrar en el mapeo, que queda asi:
+
+```java
+.map(line -> {
+     String[] values = line.split(separator);
+     return new Film(Long.parseLong(values[0]), values[1], values[2], Arrays.asList(values[3].split(listSeparator)));
+})
+```
+
+Cada línea del fichero incluye todos los datos de una película, lo que tenemos que hacer es "splitiarlos" es decir trocearlos, por el separador que utilizamos, que en primera instancia es el punto y coma (;), esto nos devolverá un array de Strings el cual ammacenamos en `values`. Por lo que en `value[0]` tendríamos el `id` (como String) pero nosotros lo declaramos como `long` por lo que tendíamos que hacer un cast `Long.parseLong(values[0])`, en `value[1]` tendríamos el título de la película, en `value[2]` tendríamos el año de la película (como String) y en el último `value[3]` tendríamos el listado con los generos, por lo que si queremos obtener cada uno de ellos tendriamos que "splitiarlos" por la coma que es el separador de los generos, `Arrays.asList(values[3].split(listSeparator))` y lo que hacemos es construir con `Arrays.asList` una lista de Strings con cada uno de los generos. Todo esto se lo pasamos al constructor con parámetros `Film(...)` y es lo que devolvemos, por cada línea devolvemos un objeto `Film`.
 
 
-AQUUI
+```java
+// @formatter:off
+result = Files.lines(Paths.get(ResourceUtils.getFile(path).toURI()))
+   .skip(1)
+   .map(line -> {
+	String[] values = line.split(separator);
+	return new Film(Long.parseLong(values[0]), values[1], values[2], Arrays.asList(values[3].split(listSeparator)));
+   }).collect(Collectors.toList());
+// @formatter:on
+```
+
+Este bloque leerá línea a línea el fichero y procesara todas las películas almacenandolas en el listado.
+
+Pero se nos obliga a que pongamos un bloque try catch sobre el bloque, porque tenemos posibilidad de tener algún problemilla a la hora de leer el fichero o a la hora de cualquier cosa, podríamos indicar un mensaje de error y con `System.exit(-1)` podemos indicar que hemos salido de manera erronea de la aplicación.
+
+El código completo de nuestra clase `UtilFilmFileReader` es el siguiente:
+
+*`UtilFilmFileReader`*
+
+```java
+package com.openwebinars.movieadvisor.dao;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.util.ResourceUtils;
+
+import com.openwebinars.movieadvisor.model.Film;
+
+/**
+ * Clase de utilidad, que incluye un método estático para la lectura
+ * y procesamiento del fichero CSV que incluye todos los datos.
+ * 
+ * PROPUESTA: ¿Serías capaz de cambiar el código necesario para
+ * que fuera un bean?
+ *
+ */
+public class UtilFilmFileReader {
+
+	public static List<Film> readFile(final String path, final String separator, final String listSeparator) {
+		List<Film> result = new ArrayList<>();
 
 
-film protectorsi alguien quiere que pudiera ser capaces de leer el fichero está separación es porque este implementación del dado es memoria decírselo a tener pero no sabe de dónde surgen los datos vale y bueno si lo hiciera y otro pues podrían surgir de otro sitio que no fue suficiente para que vosotros podáis que va a devolver películas y qué vas a recibir tres alumnos el path del fichero que ahora veremos que lo podemos colocar en el fichero de properties que vamos a crear separador de CSV que vamos a utilizar para las listas que haya dentro de una columna como sucede con los gemelos lo tendríamos por aquí tendríamos que poco a poco problemas aquí sería hacerlo de esta manera problema podemos con todo lo necesario en medio vamos añadir el formatter porque vamos a incluir aquí el uso de API streaming y expresiones lambda y nos va a dar un poco de estructuras y formateamos el código sagrado nosotros vamos a utilizar estos si os perdéis un poco en esta parte os recomiendo que visitéis nuestro curso de Java 8 donde se explica con abundancia en cómo trabajar con fichero y el cómo usar el API spring nosotros queremos a través de la clase files usar el método online esto no te vuelve un string de string en decir que va a ir leyendo línea a línea en fichero y no lo va a devolver dentro de este lo tenemos que proporcionar nosotros y bueno se lo pasará aquí lo que sucede es que para poder cargar convenientemente el fichero en lugar de acceder vía la sistema de ficheros lo vamos a hacer a través de la clase vale y su método getfield de una manera más conveniente este fichero es lo que sucede que lo devuelve como un tipo que no podemos utilizar y si lo podemos transformar a una URI p la primera línea es la que tiene el encabezado y bueno vamos a querer procesar este CSV para irte de películas vamos a querer que cada línea se hace una transformación como compleja la vamos a hacer y por último lo vamos a querer correr perdón recoger todo listado de almacén haremos y ahora ya nos podemos centrar en el mapa pero este se parece por aumentar un poquito la velocidad de codificación os lo dejo por aquí y os lo explico y ahora veremos qué hace falta cada línea del fichero incluye todos los datos de una película lo que tenemos que hacer es explicarles decir trocearla por el separador que utilizamos en primera instancia en primera instancia del público ellos no devolverá un array de string cada uno de los valores el primer valor qué es un long tenemos que pasar para obtenerlo serie nivel el siguiente es el título de la película el siguiente sería el año y por último tendríamos que tener en estado con los géneros para ello el procesamiento que hacemos también ejercicios por la coma qué es el separador de estado toda la columna te y lo que hacemos es construir con arrays aslist construimos una lista de string con cada uno de los géneros todo ello se lo pasamos al constructor con parámetros y lo devolvemos de forma y manera que este este bloque leerá línea líneas fichero y profesora todas las películas almacenando en el estado todo ello nos obliga a que pongamos un bloque try catch vale porque tenemos posibilidad de tener algún problemilla a la hora de leer el fichero o a la hora de cualquiera cualquier cosa podríamos indicar aquí los errores de lectura y vamos en tal caso incluso podremos terminar directamente la aplicación si no queremos mostrar la traza de la pila podríamos mostrar un mensaje de error como este de aquí no error leyendo el fichero de datos y directamente podríamos podríamos ir incluso nos podemos quedar solamente con el lío excepción que incluye el delfín not found eso ya lo vamos a hacer en el próximo
+		try {
+			// @formatter:off
+			result = Files
+						.lines(Paths.get(ResourceUtils.getFile(path).toURI()))
+						.skip(1)
+						.map(line -> {
+							String[] values = line.split(separator);
+							return new Film(Long.parseLong(values[0]), values[1], values[2], 
+									Arrays.asList(values[3].split(listSeparator)));
+					}).collect(Collectors.toList());
+ 			// @formatter:on
+
+
+		} catch (Exception e) {
+			System.err.println("Error de lectura del fichero de datos: imdb_data");
+			System.exit(-1);
+		}
+
+		return result;
+
+	}
+
+}
+```
+
+Teniendo completa nuestra clase `UtilFilmFileReader` ya podríamos devolver el listado y lo podemos rescatar en el método `init()` de nuestro bean `FilmDaoImplMemory` que dejamos a medio construir:
+
+```java
+public void init() {
+   // peliculas = ....
+}
+```
+
+Esto lo cambiamos por :
+
+```java
+public void init() {
+   peliculas = UtilFilmFileReader.readFile(path, separator, listSeparator);
+}
+```
+
+Pero nos falta saber de donde vamos a recuperar el valor para cada uno de los parámetros. Lo veremos en la próxima lección
 
 # 23 Repositorio y acceso a datos (Parte II) 9:30 
 
@@ -462,6 +604,10 @@ No existe.
 ## Transcripción
 
 hola a todos vamos a continuar con nuestro ejemplo por dónde lo hemos dejado recordemos que necesitamos aquí estos tres valores y habíamos pensado que la mejor manera es proporcionar lo a través de un fichero de properties para ellos línea y no sé vosotros pero cuando veo una línea errónea me da un poco de pánico para ellos nos vamos a venir a la carpeta recursos y no existe un asistente para crear fichero de properties con lo cual podemos usar directamente un fichero de texto vale en este fichero de texto vamos añadir tres propiedades por la dejo copiadas por aquí que es el path del fichero vale que en principio va a estar en la raíz del Clash vale el separador de CSV que vamos a utilizar qué es el punto y coma y el separador de listas que sería la coja salvamos esto lo hacemos en nuestro proyecto muy bien by so many reasons y lo llamamos móvil Advisor. Properties ya lo tendremos nuestro fichero de properties ahora lo que tenemos que hacer es cargarlo desde nuestra clase de configuración para ello bueno pues podemos utilizar directamente la anotación property souls vale pasamos la ruta sure properties lo que vamos a hacer es lo siguiente en lugar de que recojamos el valor directamente en los vinos de los vayamos a utilizar vamos a dejar que la clase app como funciona también algo así como una especie de componente de configuración los colores los recogeremos aquí y esta clase tendrá un método que te y allá donde lo necesitemos lo que haremos será en lugar de inyectar lo suelto y estaremos la clase app lo que vamos a hacer que tenemos para poder usar las property no podríamos crear así esto sería dólar PSV tractor list separator y ahora lo que haríamos sería crear bueno pues los metodos getter para estos tres balones pueden ser privados vamos a crear los getters vale y ya lo tendríamos por aquí de esta manera cuando queramos utilizar los valores de configuración pues simplemente nos tendríamos que venir a esta clase inyectarhemos ido pasando a través de la clase app-config hasta este método que hemos programado bueno pues tanto la ruta como los valores las expresiones regulares que va utilizar split a la hora de separar el fichero nos quedaría implementar nuestra clase dado que ahora mismo está vacía por completo y si parece p**** alargar más lo voy poco a poco copiando el código y explicando cómo funciona haría y me detengo allá donde bueno pues sea algo más usando el app y stream y a través de la lista de película los métodos de búsqueda pues eran parecidos a este también podemos utilizar si queréis expresiones estupendo cómo vamos a conseguir que nos devuelva una película por dentro de esta lista bueno pues vamos sin tramo y nos quedamos con aquella no vamos a tener ningún y de repetir pues algo así con una clave primaria con lo cual nos quedaríamos solamente con una aún así pues le pedimos que nos devuelva la primera y este método de Friends no te vuelven no cenar queremos evitar el uso de opcional tampoco por no hacer más complejas nuestra aplicación bueno pues devolvemos si he encontrado el primero tendrá el valor y si no pues devolvemos el resto de métodos algunos son muy sencillos aquí lo único que tenemos que hacer devolver todas las películas el listado completo a la hora de insertar pues también podemos hacerlo sencillos y bueno para editar y borrar vamos a crear un nuevo método esta vez sí me voy a parar un poco a crear el código para que lo podáis ver cómo crear un método privado que sea capaz de devolvernos el índice de una ver una película dentro del listado en base a sweet algoritmo de búsqueda muy sencillo nada eficiente pero bueno que nos puede ilustrar de conocerlo y el index menor que bueno si la película el índice en una búsqueda lineal de las de toda la vida ese live quiero decir que lo hemos encontrado y en otro caso para devolver bueno pues devolvemos si encontrado = true devolvemos el índice y en otro caso de volvemos menos 1 vale de esta manera podríamos trabajar ahora con el método edit vale que nos permita este es tan sencillo que lo vamos a copiar buscar el índice en base al Lidl que no debería cambiar un crédito en la película y si el índice es distinto de menos 1 o lo que hacemos cambiar el elemento que hay en ese índice por la nueva película y en el caso de ritmo pues no prácticamente igual pero en lugar de si ese índice realmente aquí si quisiéramos podríamos utilizar directamente el índice de esta manera vamos a comprar un poco si existe o no existe no bueno pues con esto tenemos nuestra clase lado implementada tenemos toda nuestra capa de repositorio implementada en el siguiente vídeo vamos a crear los diferentes servicios que lo van a utilizar
+
+```java
+```
+
 
 # 24 Servicios 13:28 
 
