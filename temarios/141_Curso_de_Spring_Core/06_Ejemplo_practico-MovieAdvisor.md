@@ -901,7 +901,354 @@ No existe.
 
 ## Transcripción
 
-vamos a continuar desarrollando nuestra aplicación ya que tenemos montado y desmontado en la parte del lado del repositorio vamos a crear los servicios necesarios y recordar y el diagrama de clase y vamos a crear los servicios 1 más de 80 de alto nivel y otro que nos va a permitir generar la consulta que nosotros vamos a empezar service para el servicio creamos una nueva interfaz que se va a llamar film query service y a la hora de diseñar la vamos a aplicar algo parecido al patrón builder en el caso del patrón builder cuando cuando para generar un objeto para construirlo se requieren de mucho mucho mucho parámetros constructor no suele ser operativa y elegante entonces se suele construir en alguna ocasión una clase estática interna que no ayuda a construirlo en definitiva lo que va haciendo es que los métodos de esa clase van devolviendo una referencia a la propia clase para que podamos encadenar diferentes llamada esto es lo que vamos a seguir este esquema el que vamos a seguir en este en este servicio de manera que podamos encadenar llamada a más de un método para ir con jugando la consulta tal y cual si fuera una consulta SQL donde pusiéramos diferentes condiciones y pusiéramos el operador en medio vale si os dais cuenta os he pegado a kilómetros que vamos a tener la opción es que veíamos en la sintaxis para buscar algún género todos los géneros en la película pertenezcan a todos los géneros que se proporcionen las películas de un año en particular película en un intervalo de años o que el título contenga esta cadena de caracteres lo que haríamos sería y llamando a uno varios métodos cadenado de estos tengo que tengo aquí y finalmente para que se ejecutará la consulta llamamos al método ese que nos devolvería la colección de películas que cumple con las condiciones que nosotros hemos expuesto vamos a crear el servicio query service y que va a implementar ya tenemos por aquí y bueno parece normal que necesitemos nuestro lado auto inyectado para que lo podemos lo podamos bueno como vamos a hacer para implementar pues vamos a tirar de lo que sabemos de Java 8 y de la interfaz predicar vamos a crear aquí un predicado de sin inicializar mediante el método INE la vamos a inicializar anotación correspondiente y ahora lo que vamos a hacer es en los diferentes métodos que devuelven parte de la consulta vamos a ir añadiendo sobre el predicado vale pues la consulta que quiere realizar el sueño por ejemplo si queremos que la película tenga algo género lo que podríamos crear aquí es otro predicado en el que lo que diríamos es oye pues sí para hacerlo como a tirar un poco más de ingenio me voy a permitir que os con el código directamente prédica oye si la película que la pasamos como argumento alguno de su género está contenido vale dentro del velarray de géneros que nosotros proporcionamos aquí estuvimos con los géneros que nos proporciona el usuario y vemos si alguno coincide con los géneros que tenemos dentro de la película haciendo algo así una especie de intersección en el caso de que alguno pues vale el predicado se daría por bueno y se varía como como verdad y en caso contrario pues si me intersecciones vaciar sería falso lo que hacemos aquí es bueno siempre picado porque sea la primera vez que lo hayamos invocada entonces directamente y si no lo que hacemos es sobre el predicado que tenemos definido como argumento de la clase de servicio le añadimos este que acabamos de definir con una por lo cual se evaluará como decía devolvemos el puntero this para que podamos encadenarlo con la llamada a otro método BT servicio os voy copiando parte del código para que veáis este es muy parecido en lugar de utilizar anymatch de string a que utilizamos ALLMAX pero el esquema exactamente el mismo aquí solamente devolverá verdad sí bueno pues existe un solapamiento completo entre el que acabamos de crear con los géneros que hemos proporcionado y los géneros de la película decir si son exactamente los los mismos están contenidos todos con lo cual lo devolveremos de mañana para buscar el año paren las películas por el año fue la búsqueda quizá sea más sencilla y es hemos hecho con un string podemos utilizar la comparación de si son exactamente iguales vale pues el año será el mismo y en ese caso bueno pues también seguiremos contando y predicado si es nulo inicialmente el predicado es el año y si no hacemos un para el caso del between el predicado va a ser un poco más complejo porque bueno vamos a para hacer una comparación buena y válida siempre de aquí vamos a tirar de fechas dejaba por eso es el predicado más contigo lo que hacemos es crear una fecha a partir del año from y otra del año tú vale para evitar que tengamos problemas por un día el año desde el cual vamos a contar lo creamos desde el 1 de enero vale supongamos que el año 1990 sería desde el 1 de enero de 1990 y el año de comparación finalen una fecha que sería el 2 de enero lo que podemos hacer después compras y el año de la película es la fecha de la película después que el intervalo intervalo y antes de la parte derecha del intervalo con lo cual si está en medio es que está incluido y se va María como verdad al igual que antes fue lo añadimos al predicado con una o dos establecemos si es la opción por defecto y el de contener el título sería un predicado francamente Santi que no en el cual bueno pues lo que hacemos es comparar si es verdad que pasamos la cadena a minúsculas todo para para evitar los problemas de Racing y de esa manera podríamos comparar si el título en minúsculas contiene la cadena de caracteres minúsculas nosotros nos proporciona la última parte que nos quedaría de este servicio sería el método ese que es realmente el que se encarga de ejecutar la consulta no sería nada complejo ya que digamos que la lógica complicada es la que hemos definido para que respeten nuestro formateo bueno y aquí tendríamos que devolver sobre el dado mainol que lo convierta en un mes y que una vez que lo pongo abierta siempre por el predicado qué será sencillo o complejo pues ya tendríamos directamente nuestra colección filtrada por el predicado ya sea sencillo o complejo que como decimos como a crear también otro servicio en este caso se llama filservis Mané y este fin service tendrá alguno elemento bueno pues de más alto nivel una clase en este caso si voy a para copiar el código porque sería más sencillo y explicar cómo anécdota decir que este servicio para utilizar el anterior también para algunos de sus métodos y bueno nos quedaría a poder utilizar al implementar un método que seríaesta clase va a ser Santillán necesitamos tanto el dado para hacer esta operación es sencilla como el servicio de consulta porque de esta manera podemos primero de todo vimos en la cinta así que había unos 100 de listar todos los géneros la podemos hacer sobre el propiedad tiramos también de lo que sabemos de Landa y de Steam estamos todas las películas nos quedamos con los géneros a través de un flashmob los unimos todos los géneros aplicamos distintos y para que aparezcan en orden alfabético con los ordenamos y lo devolvemos como lista para que puedan ser pintados vale sería así y bueno ofrecemos la operaciones de alto nivel que no serían acumulada no necesitaríamos el servicio encontrar solamente por algún género por todos los géneros por año en un intervalo de años y que contenga cómo podéis comprobar esto es sencillo porque solamente utiliza nuestro servicio de consulta llama uno de los métodos y directamente ejecuta dicha consulta este servicio lo tendríamos aquí preparado por si además de hacer una aplicación de escritorio quisiéramos utilizar nuestros servicios para crear un servicio web o una aplicación web no tendríamos que ir montando las consultas sino que ya las tendríamos que esa manera es puerta de una forma más sencilla con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los pies
+Vamos a continuar desarrollando nuestra aplicación, ya que tenemos montado y bien montado la parte del DAO, del repositorio. Vamos a crear los servicios necesarios, si recordamos el diagrama de clase ibamos a crear dos servicios, uno de consultas de alto nivel y otro que nos va a permitir generar la consulta que nosotros queramos.
+
+Vamos a empezar por el segundo, el que nos va a permitir generar cualquier consulta, para ello vamos a crear el paquete `com.openwebinars.movieadvisor.service`
+
+<img src="images/21-27.png">
+
+Dentro de este paquete vamos a crear una nueva Interfaz llamada `FilmQueryService`
+
+<img src="images/21-28.png">
+
+y a la hora de diseñarla vamos a aplicar algo parecido al patrón builder, en el caso del patrón builder, cuando para generar un objeto, para construirlo, se requieren de mucho mucho mucho parámetros, la llamada tan enorme a un constructor no suele ser operativa y elegante, entonces se suele construir en alguna ocasión una clase estática interna, que nos ayuda a construir el objeto, en definitiva lo que va haciendo, es que los métodos de esa clase, van devolviendo una referencia a la propia clase, para que podamos encadenar diferentes llamadas al método. Este esquema es el que vamos a seguir en este servicio, de manera que podamos encadenar llamadas, a más de un método, para ir conjugando la consulta tal y cual si fuera una consulta SQL, donde pusiéramos diferentes condiciones y pusiéramos el operador AND en medio.
+
+Los métodos que vamos a tener en la interface son los siguientes:
+
+```java
+package com.openwebinars.movieadvisor.service;
+
+import java.util.Collection;
+
+import com.openwebinars.movieadvisor.model.Film;
+
+/**
+ * Intefaz del servicio de consulta sobre el repositorio de películas.
+ * Está definido de forma que permita encadenar llamadas a métodos
+ * haciendo un AND de las diferentes condiciones. Para ejecutar
+ * la consulta, se invoca en último lugar el método exec.
+ * 
+ * ¿Serías capaz de añadir la lógica necesaria para que se pudieran
+ * utilizar AND y OR?
+ * 
+ * 
+ * @author OpenWebinars
+ *
+ */
+public interface FilmQueryService {
+	
+   public Collection<Film> exec();
+	
+   public FilmQueryService anyGenre(String... genres);
+
+   public FilmQueryService allGenres(String... genres);
+
+   public FilmQueryService year(String year);
+
+   public FilmQueryService betweenYears(String from, String to);
+
+   public FilmQueryService titleContains(String title);
+
+}
+```
+
+* `anyGenre(String... genres)`: para buscar algún género, los generos los pasaremos con un `var arg`
+* `allGenres(String... genres)`: para buscar todos los géneros en la película, que pertenezcan a todos los géneros que se proporcionen
+* `year(String year)`: las películas de un año en particular 
+* `betweenYears(String from, String to)`: película en un intervalo de años
+* `titleContains(String title)`: que el título contenga esta cadena de caracteres
+
+Lo que haríamos sería ir llamando a uno o varios de estos métodos encadenado, de estos 5 que tengo y finalmente para que se ejecutará la consulta llamaríamos al método `exec()` que nos devolvería la colección de películas que cumplen con las condiciones que nosotros hemos expuesto.
+
+Vamos a crear el servicio, lo vamos a llamar `FilmQueryServiceImpl` y va a implementar a `FilmQueryService`.
+
+<img src="images/21-29.png">
+
+<img src="images/21-30.png">
+
+Lo que nos genera es lo siguiente:
+
+```java
+package com.openwebinars.movieadvisor.service;
+
+import java.util.Collection;
+
+import com.openwebinars.movieadvisor.model.Film;
+
+@Service
+public class FilmQueryServiceImpl implements FilmQueryService {
+
+   @Override
+   public Collection<Film> exec() {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+   @Override
+   public FilmQueryService anyGenre(String... genres) {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+   @Override
+   public FilmQueryService allGenres(String... genres) {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+   @Override
+   public FilmQueryService year(String year) {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+   @Override
+   public FilmQueryService betweenYears(String from, String to) {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+   @Override
+   public FilmQueryService titleContains(String title) {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+}
+```
+
+Es necesario añadirle el estereotipo correcto en este caso `@Service` y parece normal que necesitemos autoinyectar nuestro DAO para poderlo usar.
+
+```java
+@Autowired
+private FilmDao dao;	
+```
+
+Como vamos a hacer para implementarlo, vamos a tirar de lo que sabemos de Java 8 y de la interfaz `Predicate`, vamos a crear un predicado de `Film` del `java.util.function.Predicate;`.
+
+```java
+private Predicate<Film> predicate;
+```
+
+Y la vamos a inicializar mediante el método `init()` con la anotación correspondiente a null
+
+```java
+@PostConstruct
+public void init() {
+   predicate = null;
+}
+```
+
+Y ahora lo que vamos a hacer, es en los diferentes métodos que devuelven, en una parte de la consulta, vamos a ir añadiendo sobre el predicado, la consulta que quiere realizar el usuario.
+
+Por ejemplo si queremos que las películas tengan algún género método `anyGenre`, lo que podríamos crear aquí es otro predicado, en el que lo que diríamos es, oye pues sí, para hacerlo vamos a tirar un poco más de ingenio, oye si la película que le pasamos como argumento, alguno de su género está contenido, dentro del array de géneros que nosotros proporcionamos con `genres`, es decir construimos otro Stream con los géneros que nos proporciona el usuario y vemos si alguno coincide con los géneros que tenemos dentro de la película, esta haciendo algo así como una especie de intersección.
+
+En el caso de que alguno, el predicado se daría por bueno y se evaluaría como verdad. Y en caso contrario si la intersecciones es vacia, sería falso, lo que hacemos aquí es comprobar si el predicado es nulo porque sea la primera vez que lo hayamos invocado, entonces lo asignamos directamente y si no, lo que hacemos es, sobre el predicado que tenemos definido como argumento de la clase de servicio, le añadimos este que acabamos de definir con un `and`, por lo cual se evaluará como el `and` de ambas y por último lo que deciamos devolvemos el puntero `this`, para que podamos encadenarlo con la llamada a otro método de este servicio. 
+
+El método `anyGenre` completo queda así:
+
+```java
+public FilmQueryServiceImpl anyGenre(String... genres) {
+   Predicate<Film> pAnyGenre = (film -> Arrays.stream(genres).anyMatch(film.getGenres()::contains));
+   predicate = (predicate == null) ? pAnyGenre : predicate.and(pAnyGenre);
+   return this;
+}
+```
+
+El método `allGenres` es muy parceido pero en lugar de usar `anyMatch` usa `allMatch` pero el esquema es exactamente el mismo.
+
+
+```java
+public FilmQueryServiceImpl allGenres(String... genres) {
+   Predicate<Film> pAllGenres = (film -> Arrays.stream(genres).allMatch(film.getGenres()::contains));
+   predicate = (predicate == null) ? pAllGenres : predicate.and(pAllGenres);
+   return this;
+}
+```
+
+Aquí solamente devolverá verdad si existe un solapamiento completo entre el Stream que acabamos de crear y los generos de la película, si son exactamente los mismos, si estan contenidos todos. Con lo cual se devuelven de esta manera.
+
+Para buscar las películas por el año la búsqueda quizá sea más sencilla vamos a tener el método `year(String year)` como el año lo declaramos como un `String` podemos usar la comparación de Strings.
+
+
+```java
+public FilmQueryServiceImpl year(String year) {
+   Predicate<Film> pYear = (film -> film.getYear().equalsIgnoreCase(year));
+   predicate = (predicate == null) ? pYear : predicate.and(pYear);
+   return this;
+}
+```
+
+Si son exactamente iguales el año será el mismo y en ese caso seguiremos montando el predicado si es nulo inicialmente el predicado es el año y si no hacemos un `AND`.
+
+Para el caso del between, método `betweenYears(String from, String to)` el predicado va a ser un poco más complejo, porque para hacer una comparación buena y válida vamos a tirar de fechas de Java 8, por eso eso quiza este sea el predicado más complejo.
+
+```java
+public FilmQueryServiceImpl betweenYears(String from, String to) {
+   Predicate<Film> pBetweenYears = (film -> {
+      LocalDate fromYear = LocalDate.of(Integer.parseInt(from), 1, 1);
+      LocalDate toYear = LocalDate.of(Integer.parseInt(to), 1, 3);
+      LocalDate filmYear = LocalDate.of(Integer.parseInt(film.getYear()), 1, 2);
+
+      return filmYear.isAfter(fromYear) && filmYear.isBefore(toYear);
+   });
+		
+   predicate = (predicate == null) ? pBetweenYears : predicate.and(pBetweenYears);
+
+   return this;
+}
+```
+
+Lo que hacemos es crear una fecha a partir del año `from` y otra del año `to`, para evitar que tengamos problemas por un día, el año desde el cual vamos a contar `fromYear` lo creamos desde el 1 de enero, supongamos que el año 1990, sería desde el 1 de enero de 1990 y el año de comparación final `toYear` lo pondríamos en el 3 de enero, por ejemplo del 2000. Y el año de cada película que vamos a comparar `filmYear` lo creamos en una fecha que sería el 2 de enero. Lo que podemos hacer después comparar es si el año de la película es la fecha de la película después que el intervalo izquierdo, la parte izquierda y antes de la parte derecha del intervalo, con lo cual si está en medio es que está incluido y se evaluaría como verdad al igual que antes fue lo añadimos al predicado con un `AND`  o lo establecemos si es la opción por defecto.
+
+
+
+Y el de contener el título, método `titleContains(String title)` sería un predicado francamente sencillo en el cual lo que hacemos es comparar, si es verdad que pasamos la cadena a minúsculas todo, para para evitar los problemas de Casing y de esa manera podríamos comparar si el título en minúsculas contiene la cadena de caracteres en minúsculas que nosotros estamos proporciondo. 
+
+```java
+public FilmQueryServiceImpl titleContains(String title) {
+   Predicate<Film> pTitleContains  = (film -> film.getTitle().toLowerCase().contains(title.toLowerCase()));
+   predicate = (predicate == null) ? pTitleContains : predicate.and(pTitleContains);
+		
+   return this;
+}
+```
+
+La última parte que nos quedaría de este servicio sería el método `exec()` que es el que realmente el que se encarga de ejecutar la consulta, no sería nada complejo ya que digamos que la lógica complicada es la que hemos definido antes.
+
+Aquí tendríamos que devolver sobre el `dao.findAll()` que nos devuelva un `stream()` y que una vez que lo convierta filtre el predicado que será simple o complejo y a partir de allí tendríamos nuestra colección filtrada por el predicado sencillo o complejo que hemos definido. 
+
+```java
+public Collection<Film> exec() {
+		
+   // @formatter:off
+   return dao.findAll()
+      		.stream()
+		.filter(predicate)
+		.collect(Collectors.toList()); 
+   // @formatter:on
+
+}
+```
+
+La clase completa la tenemos aquí:
+
+*`.java`*
+
+```java
+package com.openwebinars.movieadvisor.service;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.openwebinars.movieadvisor.dao.FilmDao;
+import com.openwebinars.movieadvisor.model.Film;
+
+/**
+ * Implementación del servicio de consulta sobre el repositorio.
+ * Esta implementación es algo lenta, ya que se basa en el uso
+ * del API Stream de Java 8 sobre una lista bastante grande.
+ * 
+ * Una posible mejora sería utilizar como repositorio una base
+ * de datos, y tener una implementación de este servicio que hiciera
+ * uso de Criteria API o QueryDSL. 
+ * 
+ * 
+ * @author OpenWebinars
+ *
+ */
+@Service
+public class FilmQueryServiceImpl implements FilmQueryService{
+	
+	@Autowired
+	FilmDao dao;
+
+	private Predicate<Film> predicate;
+	
+	@PostConstruct
+	public void init() {
+		predicate = null;
+	}
+
+	public Collection<Film> exec() {
+		
+		// @formatter:off
+		return dao.findAll()
+				.stream()
+				.filter(predicate)
+				.collect(Collectors.toList()); 
+		// @formatter:on
+
+	}
+
+	public FilmQueryServiceImpl anyGenre(String... genres) {
+		Predicate<Film> pAnyGenre = (film -> Arrays.stream(genres).anyMatch(film.getGenres()::contains));
+		predicate = (predicate == null) ? pAnyGenre : predicate.and(pAnyGenre);
+		return this;
+	}
+
+	public FilmQueryServiceImpl allGenres(String... genres) {
+		Predicate<Film> pAllGenres = (film -> Arrays.stream(genres).allMatch(film.getGenres()::contains));
+		predicate = (predicate == null) ? pAllGenres : predicate.and(pAllGenres);
+		return this;
+	}
+
+	public FilmQueryServiceImpl year(String year) {
+		Predicate<Film> pYear = (film -> film.getYear().equalsIgnoreCase(year));
+		predicate = (predicate == null) ? pYear : predicate.and(pYear);
+		return this;
+	}
+
+	public FilmQueryServiceImpl betweenYears(String from, String to) {
+		Predicate<Film> pBetweenYears = (film -> {
+			LocalDate fromYear = LocalDate.of(Integer.parseInt(from), 1, 1);
+			LocalDate toYear = LocalDate.of(Integer.parseInt(to), 1, 3);
+			LocalDate filmYear = LocalDate.of(Integer.parseInt(film.getYear()), 1, 2);
+
+			return filmYear.isAfter(fromYear) && filmYear.isBefore(toYear);
+		});
+		
+		predicate = (predicate == null) ? pBetweenYears : predicate.and(pBetweenYears);
+
+		return this;
+	}
+
+	public FilmQueryServiceImpl titleContains(String title) {
+		Predicate<Film> pTitleContains  = (film -> film.getTitle().toLowerCase().contains(title.toLowerCase()));
+		predicate = (predicate == null) ? pTitleContains : predicate.and(pTitleContains);
+		
+		return this;
+	}
+
+}
+```
+
+Como deciamos vamos a crear también otro servicio llamado `FilmService.`
+
+
+AQUI
+
+
+
+
+
+abierta siempre por el predicado qué será sencillo o complejo pues ya tendríamos directamente nuestra colección filtrada por el predicado ya sea sencillo o complejo que como decimos como a crear también otro servicio en este caso se llama filservis Mané y este fin service tendrá alguno elemento bueno pues de más alto nivel una clase en este caso si voy a para copiar el código porque sería más sencillo y explicar cómo anécdota decir que este servicio para utilizar el anterior también para algunos de sus métodos y bueno nos quedaría a poder utilizar al implementar un método que seríaesta clase va a ser Santillán necesitamos tanto el dado para hacer esta operación es sencilla como el servicio de consulta porque de esta manera podemos primero de todo vimos en la cinta así que había unos 100 de listar todos los géneros la podemos hacer sobre el propiedad tiramos también de lo que sabemos de Landa y de Steam estamos todas las películas nos quedamos con los géneros a través de un flashmob los unimos todos los géneros aplicamos distintos y para que aparezcan en orden alfabético con los ordenamos y lo devolvemos como lista para que puedan ser pintados vale sería así y bueno ofrecemos la operaciones de alto nivel que no serían acumulada no necesitaríamos el servicio encontrar solamente por algún género por todos los géneros por año en un intervalo de años y que contenga cómo podéis comprobar esto es sencillo porque solamente utiliza nuestro servicio de consulta llama uno de los métodos y directamente ejecuta dicha consulta este servicio lo tendríamos aquí preparado por si además de hacer una aplicación de escritorio quisiéramos utilizar nuestros servicios para crear un servicio web o una aplicación web no tendríamos que ir montando las consultas sino que ya las tendríamos que esa manera es puerta de una forma más sencilla con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los pies
+ sencillo o complejo,            
+
+```java
+
+```
+
+
+y el de contener el título sería un predicado francamente Santi que no en el cual bueno pues lo que hacemos es comparar si es verdad que pasamos la cadena a minúsculas todo para para evitar los problemas de Racing y de esa manera podríamos comparar si el título en minúsculas contiene la cadena de caracteres minúsculas nosotros nos proporciona la última parte que nos quedaría de este servicio sería el método ese que es realmente el que se encarga de ejecutar la consulta no sería nada complejo ya que digamos que la lógica complicada es la que hemos definido para que respeten nuestro formateo bueno y aquí tendríamos que devolver sobre el dado mainol que lo convierta en un mes y que una vez que lo pongo abierta siempre por el predicado qué será sencillo o complejo pues ya tendríamos directamente nuestra colección filtrada por el predicado ya sea sencillo o complejo que como decimos como a crear también otro servicio en este caso se llama filservis Mané y este fin service tendrá alguno elemento bueno pues de más alto nivel una clase en este caso si voy a para copiar el código porque sería más sencillo y explicar cómo anécdota decir que este servicio para utilizar el anterior también para algunos de sus métodos y bueno nos quedaría a poder utilizar al implementar un método que seríaesta clase va a ser Santillán necesitamos tanto el dado para hacer esta operación es sencilla como el servicio de consulta porque de esta manera podemos primero de todo vimos en la cinta así que había unos 100 de listar todos los géneros la podemos hacer sobre el propiedad tiramos también de lo que sabemos de Landa y de Steam estamos todas las películas nos quedamos con los géneros a través de un flashmob los unimos todos los géneros aplicamos distintos y para que aparezcan en orden alfabético con los ordenamos y lo devolvemos como lista para que puedan ser pintados vale sería así y bueno ofrecemos la operaciones de alto nivel que no serían acumulada no necesitaríamos el servicio encontrar solamente por algún género por todos los géneros por año en un intervalo de años y que contenga cómo podéis comprobar esto es sencillo porque solamente utiliza nuestro servicio de consulta llama uno de los métodos y directamente ejecuta dicha consulta este servicio lo tendríamos aquí preparado por si además de hacer una aplicación de escritorio quisiéramos utilizar nuestros servicios para crear un servicio web o una aplicación web no tendríamos que ir montando las consultas sino que ya las tendríamos que esa manera es puerta de una forma más sencilla con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los pies
 
 
 # 25 Ejecución de la app 22:28 
