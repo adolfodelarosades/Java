@@ -12,10 +12,6 @@
 
 [PDF 6-1_Proyecto_de_ejemplo.pdf](pdfs/6-1_Proyecto_de_ejemplo.pdf)
 
-## Resumen Profesor
-
-No existe.
-
 ## Transcripción
 
 <img src="images/20-01.png">
@@ -92,10 +88,6 @@ Por último la opción `-h` que mostrara el mensaje de ayuda.
 Ya digo una aplicación que es sencilla, aunque si es nuestro primer proyecto Spring completo tendrá una complejidad media y además haremos un buen uso del API Strem de Java 8, para poder hacer los filtrados, las búsquedas, los mapeo, etcétera etcétera. 
 
 # 21 Creación del proyecto y modelo de datos 5:49 
-
-## Resumen Profesor
-
-No existe.
 
 ## Transcripción
 
@@ -301,10 +293,6 @@ public class Film {
 Teniendo este modelo ya tenemos ya tenemos todo lo necesario para poder empezar desde abajo hacia arriba, es decir vamos a empezar a codificar primero la parte de los DAO, para poder rescatar los datos, a partir de ahí iremos subiendo hacia los servicios, etcétera etcétera y lo vamos a ir haciendo poco a poco en las siguiente lecciones.
 
 # 22 Repositorio y acceso a datos (Parte I) 12:55 
-
-## Resumen Profesor
-
-No existe.
 
 ## Transcripción
 
@@ -895,10 +883,6 @@ Con esto tenemos nuestra clase DAO implementada, tenemos toda nuestra capa de re
 
 # 24 Servicios 13:28 
 
-## Resumen Profesor
-
-No existe.
-
 ## Transcripción
 
 Vamos a continuar desarrollando nuestra aplicación, ya que tenemos montado y bien montado la parte del DAO, del repositorio. Vamos a crear los servicios necesarios, si recordamos el diagrama de clase ibamos a crear dos servicios, uno de consultas de alto nivel y otro que nos va a permitir generar la consulta que nosotros queramos.
@@ -1385,10 +1369,6 @@ Este servicio lo tendríamos aquí preparado por si además de hacer una aplicac
 Con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los servicios.
 
 # 25 Ejecución de la app 22:28 
-
-## Resumen Profesor
-
-No existe.
 
 ## Transcripción
 
