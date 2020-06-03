@@ -1637,12 +1637,13 @@ public void run(String[] args) {
 }
 ```
 
-De manera que si tenemos un solo argumento o bien es que queremos listar los géneros `-lg` o bienes queremos listar la ayuda
-`-h` o vienes que hay un error de sintaxis.
+De manera que si tenemos un solo argumento o bien es que queremos listar los géneros `-lg`, o bien es que queremos listar la ayuda `-h`, o bien es que hay un error de sintaxis.
 
-Si queremos listar los géneros quiere decir que el argumento es `-lg` con lo cual a través del servicio de películas `filmService` obtenemos todos los generos `.findAllGenres()` y los pintamos directamente por consola con `.forEach(System.out::println)` la instrucción completa es  `filmService.findAllGenres().forEach(System.out::println);`.
+Si queremos listar los géneros quiere decir que el argumento es `-lg`, con lo cual a través del servicio de películas `filmService`, obtenemos todos los generos `.findAllGenres()` y los pintamos directamente por consola con `.forEach(System.out::println)`. La instrucción completa es:
 
-Si lo que queremos es mostrar la ayuda directamente con el servicio de ayuda `help.getHelp()` la podríamos mostrar.
+`filmService.findAllGenres().forEach(System.out::println);`
+
+Si lo que queremos es mostrar la ayuda, directamente con el servicio de ayuda `help.getHelp()` la podríamos mostrar.
 
 Y en otro caso quiere decir que hay un error de sintaxis y tendríamos que mostrar de nuevo la ayuda también.
 
