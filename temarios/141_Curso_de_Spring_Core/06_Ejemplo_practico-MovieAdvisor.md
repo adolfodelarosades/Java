@@ -1101,8 +1101,6 @@ public FilmQueryServiceImpl betweenYears(String from, String to) {
 
 Lo que hacemos es crear una fecha a partir del año `from` y otra del año `to`, para evitar que tengamos problemas por un día, el año desde el cual vamos a contar `fromYear` lo creamos desde el 1 de enero, supongamos que el año 1990, sería desde el 1 de enero de 1990 y el año de comparación final `toYear` lo pondríamos en el 3 de enero, por ejemplo del 2000. Y el año de cada película que vamos a comparar `filmYear` lo creamos en una fecha que sería el 2 de enero. Lo que podemos hacer después comparar es si el año de la película es la fecha de la película después que el intervalo izquierdo, la parte izquierda y antes de la parte derecha del intervalo, con lo cual si está en medio es que está incluido y se evaluaría como verdad al igual que antes fue lo añadimos al predicado con un `AND`  o lo establecemos si es la opción por defecto.
 
-
-
 Y el de contener el título, método `titleContains(String title)` sería un predicado francamente sencillo en el cual lo que hacemos es comparar, si es verdad que pasamos la cadena a minúsculas todo, para para evitar los problemas de Casing y de esa manera podríamos comparar si el título en minúsculas contiene la cadena de caracteres en minúsculas que nosotros estamos proporciondo. 
 
 ```java
@@ -1133,7 +1131,7 @@ public Collection<Film> exec() {
 
 La clase completa la tenemos aquí:
 
-*`.java`*
+*`FilmQueryServiceImpl.java`*
 
 ```java
 package com.openwebinars.movieadvisor.service;
@@ -1168,88 +1166,223 @@ import com.openwebinars.movieadvisor.model.Film;
 @Service
 public class FilmQueryServiceImpl implements FilmQueryService{
 	
-	@Autowired
-	FilmDao dao;
+   @Autowired
+   FilmDao dao;
 
-	private Predicate<Film> predicate;
-	
-	@PostConstruct
-	public void init() {
-		predicate = null;
-	}
+   private Predicate<Film> predicate;
+ 	
+   @PostConstruct
+   public void init() {
+      predicate = null;
+   }
 
-	public Collection<Film> exec() {
+   public Collection<Film> exec() {
 		
-		// @formatter:off
-		return dao.findAll()
-				.stream()
-				.filter(predicate)
-				.collect(Collectors.toList()); 
-		// @formatter:on
+      // @formatter:off
+      return dao.findAll()
+		.stream()
+		.filter(predicate)
+		.collect(Collectors.toList()); 
+      // @formatter:on
 
-	}
+   }
 
-	public FilmQueryServiceImpl anyGenre(String... genres) {
-		Predicate<Film> pAnyGenre = (film -> Arrays.stream(genres).anyMatch(film.getGenres()::contains));
-		predicate = (predicate == null) ? pAnyGenre : predicate.and(pAnyGenre);
-		return this;
-	}
+   public FilmQueryServiceImpl anyGenre(String... genres) {
+      Predicate<Film> pAnyGenre = (film -> Arrays.stream(genres).anyMatch(film.getGenres()::contains));
+      predicate = (predicate == null) ? pAnyGenre : predicate.and(pAnyGenre);
+      return this;
+   }
 
-	public FilmQueryServiceImpl allGenres(String... genres) {
-		Predicate<Film> pAllGenres = (film -> Arrays.stream(genres).allMatch(film.getGenres()::contains));
-		predicate = (predicate == null) ? pAllGenres : predicate.and(pAllGenres);
-		return this;
-	}
+   public FilmQueryServiceImpl allGenres(String... genres) {
+      Predicate<Film> pAllGenres = (film -> Arrays.stream(genres).allMatch(film.getGenres()::contains));
+      predicate = (predicate == null) ? pAllGenres : predicate.and(pAllGenres);
+      return this;
+   }
 
-	public FilmQueryServiceImpl year(String year) {
-		Predicate<Film> pYear = (film -> film.getYear().equalsIgnoreCase(year));
-		predicate = (predicate == null) ? pYear : predicate.and(pYear);
-		return this;
-	}
+   public FilmQueryServiceImpl year(String year) {
+      Predicate<Film> pYear = (film -> film.getYear().equalsIgnoreCase(year));
+      predicate = (predicate == null) ? pYear : predicate.and(pYear);
+      return this;
+   }
 
-	public FilmQueryServiceImpl betweenYears(String from, String to) {
-		Predicate<Film> pBetweenYears = (film -> {
-			LocalDate fromYear = LocalDate.of(Integer.parseInt(from), 1, 1);
-			LocalDate toYear = LocalDate.of(Integer.parseInt(to), 1, 3);
-			LocalDate filmYear = LocalDate.of(Integer.parseInt(film.getYear()), 1, 2);
+   public FilmQueryServiceImpl betweenYears(String from, String to) {
+      Predicate<Film> pBetweenYears = (film -> {
+         LocalDate fromYear = LocalDate.of(Integer.parseInt(from), 1, 1);
+         LocalDate toYear = LocalDate.of(Integer.parseInt(to), 1, 3);
+         LocalDate filmYear = LocalDate.of(Integer.parseInt(film.getYear()), 1, 2);
 
-			return filmYear.isAfter(fromYear) && filmYear.isBefore(toYear);
-		});
+         return filmYear.isAfter(fromYear) && filmYear.isBefore(toYear);
+      });
 		
-		predicate = (predicate == null) ? pBetweenYears : predicate.and(pBetweenYears);
+      predicate = (predicate == null) ? pBetweenYears : predicate.and(pBetweenYears);
 
-		return this;
-	}
+      return this;
+   }
 
-	public FilmQueryServiceImpl titleContains(String title) {
-		Predicate<Film> pTitleContains  = (film -> film.getTitle().toLowerCase().contains(title.toLowerCase()));
-		predicate = (predicate == null) ? pTitleContains : predicate.and(pTitleContains);
+   public FilmQueryServiceImpl titleContains(String title) {
+      Predicate<Film> pTitleContains  = (film -> film.getTitle().toLowerCase().contains(title.toLowerCase()));
+      predicate = (predicate == null) ? pTitleContains : predicate.and(pTitleContains);
 		
-		return this;
-	}
+      return this;
+   }
 
 }
 ```
 
-Como deciamos vamos a crear también otro servicio llamado `FilmService.`
+Como deciamos vamos a crear también otro servicio llamado `FilmService`,  este `FilmService` tendrá alguno elemento de más alto nivel, vamos a crear la clase.
 
+<img src="images/21-31.png">
 
-AQUI
+Cómo anécdota decir que este servicio va a utilizar el anterior también para algunos de sus métodos, el código es el siguiente:
 
-
-
-
-
-abierta siempre por el predicado qué será sencillo o complejo pues ya tendríamos directamente nuestra colección filtrada por el predicado ya sea sencillo o complejo que como decimos como a crear también otro servicio en este caso se llama filservis Mané y este fin service tendrá alguno elemento bueno pues de más alto nivel una clase en este caso si voy a para copiar el código porque sería más sencillo y explicar cómo anécdota decir que este servicio para utilizar el anterior también para algunos de sus métodos y bueno nos quedaría a poder utilizar al implementar un método que seríaesta clase va a ser Santillán necesitamos tanto el dado para hacer esta operación es sencilla como el servicio de consulta porque de esta manera podemos primero de todo vimos en la cinta así que había unos 100 de listar todos los géneros la podemos hacer sobre el propiedad tiramos también de lo que sabemos de Landa y de Steam estamos todas las películas nos quedamos con los géneros a través de un flashmob los unimos todos los géneros aplicamos distintos y para que aparezcan en orden alfabético con los ordenamos y lo devolvemos como lista para que puedan ser pintados vale sería así y bueno ofrecemos la operaciones de alto nivel que no serían acumulada no necesitaríamos el servicio encontrar solamente por algún género por todos los géneros por año en un intervalo de años y que contenga cómo podéis comprobar esto es sencillo porque solamente utiliza nuestro servicio de consulta llama uno de los métodos y directamente ejecuta dicha consulta este servicio lo tendríamos aquí preparado por si además de hacer una aplicación de escritorio quisiéramos utilizar nuestros servicios para crear un servicio web o una aplicación web no tendríamos que ir montando las consultas sino que ya las tendríamos que esa manera es puerta de una forma más sencilla con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los pies
- sencillo o complejo,            
+*`FilmService.java`*
 
 ```java
+package com.openwebinars.movieadvisor.service;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.openwebinars.movieadvisor.dao.FilmDao;
+import com.openwebinars.movieadvisor.model.Film;
+
+/**
+ * Servicio con algunas operaciones "de alto nivel" sobre el repositorio de
+ * películas.
+ * 
+ * "Por debajo", está utilizando el servicio de consulta para realizar estas
+ * operaciones "de alto" nivel. Muchas se han implementado pero realmente no se
+ * están utilizando en esta aplicación.
+ * 
+ * ¿Por qué no hemos definido una interfaz y su implementación? Para dejartelo a
+ * ti como tarea ;)
+ * 
+ */
+@Service
+public class FilmService {
+
+   @Autowired
+   FilmDao filmDao;
+
+   @Autowired
+   FilmQueryService queryService;
+
+   public Collection<String> findAllGenres() {
+      List<String> result = null;
+
+      // @formatter:off
+      result = filmDao.findAll()
+            	      .stream()
+            	      .map(f -> f.getGenres())
+            	      .flatMap(lista -> lista.stream())
+            	      .distinct()
+            	      .sorted()
+            	      .collect(Collectors.toList());
+
+      // @formatter:on
+
+      return result;
+   }
+
+   public Collection<Film> findByAnyGenre(String... genres) {
+      return queryService.anyGenre(genres).exec();
+   }
+
+   public Collection<Film> findByAllGenres(String... genres) {
+      return queryService.allGenres(genres).exec();
+   }
+
+   public Collection<Film> findByYear(String year) {
+      return queryService.year(year).exec();
+   }
+
+   public Collection<Film> findBetweenYears(String from, String to) {
+      return queryService.betweenYears(from, to).exec();
+   }
+
+   public Collection<Film> findByTitleContains(String title) {
+      return queryService.titleContains(title).exec();
+   }
+
+   public Collection<Film> findAll() {
+      return filmDao.findAll();
+   }
+}
 ```
 
+Como es un servicio lo anotamos con `@Service`, necesitamos tanto el DAO `FilmDao` para hacer las operaciones sencillas como `FilmQueryService` como el servicio de consultas. Primero de todo vimos en la sintaxis que había  una opción de listar todos los géneros, `findAllGenres()`, la podemos hacer sobre el propio DAO, tiramos también de lo que sabemos de Lamda y de Stream.
 
-y el de contener el título sería un predicado francamente Santi que no en el cual bueno pues lo que hacemos es comparar si es verdad que pasamos la cadena a minúsculas todo para para evitar los problemas de Racing y de esa manera podríamos comparar si el título en minúsculas contiene la cadena de caracteres minúsculas nosotros nos proporciona la última parte que nos quedaría de este servicio sería el método ese que es realmente el que se encarga de ejecutar la consulta no sería nada complejo ya que digamos que la lógica complicada es la que hemos definido para que respeten nuestro formateo bueno y aquí tendríamos que devolver sobre el dado mainol que lo convierta en un mes y que una vez que lo pongo abierta siempre por el predicado qué será sencillo o complejo pues ya tendríamos directamente nuestra colección filtrada por el predicado ya sea sencillo o complejo que como decimos como a crear también otro servicio en este caso se llama filservis Mané y este fin service tendrá alguno elemento bueno pues de más alto nivel una clase en este caso si voy a para copiar el código porque sería más sencillo y explicar cómo anécdota decir que este servicio para utilizar el anterior también para algunos de sus métodos y bueno nos quedaría a poder utilizar al implementar un método que seríaesta clase va a ser Santillán necesitamos tanto el dado para hacer esta operación es sencilla como el servicio de consulta porque de esta manera podemos primero de todo vimos en la cinta así que había unos 100 de listar todos los géneros la podemos hacer sobre el propiedad tiramos también de lo que sabemos de Landa y de Steam estamos todas las películas nos quedamos con los géneros a través de un flashmob los unimos todos los géneros aplicamos distintos y para que aparezcan en orden alfabético con los ordenamos y lo devolvemos como lista para que puedan ser pintados vale sería así y bueno ofrecemos la operaciones de alto nivel que no serían acumulada no necesitaríamos el servicio encontrar solamente por algún género por todos los géneros por año en un intervalo de años y que contenga cómo podéis comprobar esto es sencillo porque solamente utiliza nuestro servicio de consulta llama uno de los métodos y directamente ejecuta dicha consulta este servicio lo tendríamos aquí preparado por si además de hacer una aplicación de escritorio quisiéramos utilizar nuestros servicios para crear un servicio web o una aplicación web no tendríamos que ir montando las consultas sino que ya las tendríamos que esa manera es puerta de una forma más sencilla con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los pies
+```java
+public Collection<String> findAllGenres() {
+   List<String> result = null;
 
+   // @formatter:off
+   result = filmDao.findAll()
+		.stream()
+		.map(f -> f.getGenres())
+		.flatMap(lista -> lista.stream())
+		.distinct()
+		.sorted()
+		.collect(Collectors.toList());
+
+   // @formatter:on
+
+   return result;
+}
+```
+
+Lo que hacemos es listar todas las películas, nos quedamos con los géneros `.map(f -> f.getGenres())`, a través de `.flatMap(lista -> lista.stream())` los unimos todos los géneros, aplicamos `.distinct()` y para que aparezcan en orden alfabético los ordenamos con `.sorted()` y lo devolvemos como lista para que puedan ser pintados.
+
+
+Por otro lado ofrecemos la operaciones de alto nivel, que no serían acumuladas, no necesitaríamos el servicio, encontrar solamente por algún género:
+
+```java
+public Collection<Film> findByAnyGenre(String... genres) {
+   return queryService.anyGenre(genres).exec();
+}
+```
+
+Por todos los generos
+
+```java
+public Collection<Film> findByAllGenres(String... genres) {
+   return queryService.allGenres(genres).exec();
+}
+```
+
+Por año
+
+```java
+public Collection<Film> findByYear(String year) {
+   return queryService.year(year).exec();
+}
+```
+
+Entre años
+
+```java
+public Collection<Film> findBetweenYears(String from, String to) {
+   return queryService.betweenYears(from, to).exec();
+}
+```
+
+Y que contenga un título
+
+```java
+public Collection<Film> findByTitleContains(String title) {
+   return queryService.titleContains(title).exec();
+}
+```
+
+Todos estos métodos utilizan nuestro servicio de consulta, llama a uno de los métodos y directamente ejecuta dicha consulta.
+
+Este servicio lo tendríamos aquí preparado por si además de hacer una aplicación de escritorio, quisiéramos utilizar nuestros servicios para crear un servicio web o una aplicación web, no tendríamos que ir montando las consultas sino que ya las tendríamos de esta manera, expuestas de una forma más sencilla.
+
+Con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los servicios.
 
 # 25 Ejecución de la app 22:28 
 
