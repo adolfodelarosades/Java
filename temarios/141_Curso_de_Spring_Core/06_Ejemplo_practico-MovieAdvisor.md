@@ -1372,7 +1372,282 @@ Con esto terminamos el apartado de los servicios y nos lanzamos de lleno a termi
 
 ## Transcripción
 
-Hola a todos vamos a seguir desarrollando nuestra aplicación y vamos a crear ahora las clases que van a utilizar los lo primero que vamos a hacer es crear un fichero dentro de los recursos de texto que va a tener toda la el texto de la sintaxis de la ayuda vale que se imprimirá cuando haya algún problema me permitís que lo copié y pegue directamente desde aquí shows reasons y lo podemos llamar ayuda esto ya así lo tenemos hecho para crearlo también vamos a crear decir el paquete raíz vale muy bien vais ahora como tal vale nos dice que existe pero como no tenemos nada creado ahora cuando queremos alguna clase no vamos a crear una nueva clase vale directamente aquí que va a ser la clase muy Advisor app y que estás iba a tener un método me lo que vamos a hacer aquí sencillo porque la lógica la vamos a desplazar hacia otra clase hacia otro bien y es que aquí lo único que vamos a hacer es cargar el contexto vale no nos olvidamos de cerrarrescatar el VIN que vamos a utilizar como ejecutor de la aplicación y los que salimos para ello vamos a crear una clase que la llamamos Advisor app ya veremos que va a ser en particular como no estamos trabajando con aplicaciones web no lo he querido llamar estereotipar como controlador nos pondremos como componente pero sería algo parecido a un controlador no y que tendrá un método que vamos a llamar vale que va a recibir los argumentos que le podamos proporcionar desde aquí con lo cual aquí rescataremos las referencias móvil Advisor y aquí directamente ya lo podríamos llamar con los argumentos ya tendríamos porque ya directamente bueno parece normal según el diagrama de clases que vimos que en este vino necesitamos auto inyectar los dos servicios vale service organizamos bueno pues vamos a ver la estructura que tendría esto para poder manejar la sintaxis parece claro que sí nuestra aplicación y el número de argumentos en menor que uno quiere decir que la sintaxis es erróneo decir que bueno pues lo que podemos hacer es simplemente indicarme que hay un error de sintaxis y otro caso mostrarle el mensaje de ayuda cómo le vamos a mostrar el mensaje de error bueno pues queríamos otro bien que vamos a llamar Advisor y que será el encargado de bueno de cargar en una cadena de caracteres todo el mensaje de ayuda de forma que bueno pues nosotros después la vamos a poder utilizar como no podemos hacer bueno pues me dejáis para que no nos veremos tampoco en esta parte de la lógica añadiríamos me toca notado con postconstruct y bueno cargaríamos las líneas del fichero vale lo podríamos hacer con read online también esta manera a mí me suele gustar más al igual que en la otra ocasión pues le indicamos cuál es el fichero de ayuda aquí directamente mismo hardcodeado el la ruta del fichero vale y en caso de que hay algún error pues directamente también saldríamos de la aplicación esperemos parar en esta parte de la aplicación en una cadena de caracteres y ya lo podríamos obtener de forma que aquí si queremos imprimir la ayuda primero auto inyectar la ayuda inyectamos ya la tenemos vale qué sucede si tenemos más de un argumento bueno porque tendremos que ver cuántos tenemos si tenemos una mente uno es posible que la búsqueda la estemos haciendo por alguno de los argumentos que queremos sueltoscuál tenemos que procesar exactamente para ello nos quedamos con el argumento cero vale lo pasamos a minúscula y lo podemos comparar con lo que tenemos aquí la lógica parece directamente la voy a copiar y pegar de manera que si tenemos un solo argumento o vienes que queremos listar los géneros o bienes que queremos listar la ayuda o vienes que hay un error de sintaxis si queremos limpiar los géneros quiere decir que bueno que se argumento es menos LG con lo cual bueno pues a través del servicio de películas tenemos todos los géneros y nos podríamos pintar directamente por bolsona si lo que queremos mostrar la ayuda pues directamente con el servicio de ayuda la podríamos y en otro caso quiere decir que hay un error de sintaxis y tendríamos que mostrar de nuevo la ayuda qué sucede en el caso de que tengamos más de un argumento pues vamos a diferenciar el caso de que el número de argumentos sea impar y de ser así pues tampoco tendríamos una sintaxis correcta porque si no utilizamos el mejor LG o al menos h quiere decir que los demás argumentos tienen que venir por parejas si queremos buscar con título tenemos que poner menos y el título si queremos buscar un año menos y y el año tienen que venir por parejas con lo cual aquí tendríamos también tenemos un problema igual que si pasamos más de 4 parejas de búsqueda que va a ser el tope que pongamos porque bueno no tendría sentido que buscáramos por un año en particular y también por un intervalo aunque eso realmente no lo vamos a controlar pero si vamos a controlar que sean cuatro parejas con lo cual si el número de argumentos es mayor que 8 también es verdad está bien fotos para que sepa vamos a dar otro caso quiere decir que no están pasando los diferentes argumentos que nosotros estamos necesitando cómo vamos a hacer este procesamiento puesto no es de spring esto es básicamente vamos a tratar de cogerlo por parejas de una manera sencilla vale de array de cadenas de caracteres llamada argumentos el bucle para hacernos adelantando un poco o lo dejo por aquí planteada vamos a ir recorriendo nuestro array pero dando saltos de dos en dos de manera que en cada salto cogemos esa posición y la siguiente y así tendremos menos te vi el título menos AG y bueno los géneros que queremos listar menos y y el aquí y lo tendremos directamente en este listado que para procesar va a ser más sencillo y ahora lo que tenemos que hacer es bueno pues procesar este estado extrayendo los distintos argumentos y haciendo todo lo que corresponda esta lógica también se parece la voy a copiar y la mamá explicando para que no se haga tan tedioso legión estos son los distintos argumentos que podemos pasar mensaje algún género menos texto de los géneros años entre 2 años y el título para ello como decía vamos sacando de argumentos cada pareja donde la el cero de este array sería el menos a Jimena Jimena y y el uno sería el argumento es bueno si es mensaje quiere decir que nos han pasado otro argumento que será o un género o una lista separada por comas de género en una lista separada por, vamos y lo que hacemos es directamente utilizar el método que teníamos en el servicio para poder buscar en el caso de que sean todos los géneros lo haríamos llamando al método correspondiente en el caso del año no tenemos nada que limpiar si son intervalos y que tendríamos que plantear los años para tener el desde y él hasta pronto y en el caso del título pues directamente compraríamos con elpeluquería haciendo sería ir acumulando si hemos pasado dos parejas de argumentos acumularía los predicados correspondientes añadimos esta posibilidad por si hay algún tipo de fallo es decir si alguien ha pasado un menos menos z por ejemplo como argumento pues directamente le tenemos que decir que hay un error de sintaxis no está variable error inicia fans a Fox sería verdaderas y si hubiera algún problema y lo que hacemos entonces en caso de que haya algún error bueno pues no imprimir iríamosimprimiremos los resultados de la ONCE de los resultados no hacemos aquí lo que vamos a hacer ejecutar la consulta lo guardamos en la conexiónque aprovechando también el API stream pues los sacamos todo del listado lo juntamos separado por, vale a la hora de 20 minutos para que aparezcan así de una manera más conveniente puede que el resultado que la lista esté vacía porque las películas alguna de las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo vale buscar aplicación vale y tenemos una a ver ahora como no hemos puesto ningún argumento no mostraría el mensaje de ayuda tenemos un error de sintaxis vale y bueno ya nos quería probar con la sintaxis no es decir vamos si queremos listar todos los géneros no vamos a ser directamente desde eclipse vale podemos crear una configuración de ejecución y aquí pasaremos argumento si queremos lista tendremos aquí procesar ya son muchas películas con lo cual es posible que tarde que tarda un ratito en procesar todos los resultadossi no tenemos resultado es posible que tengamos algún problema con el dado y podemos probar a ver si está cargando los datos efectivamente olvido esta notación del ciclo de vida no conoce comprobar que si no la añadimos pues no está procesando los datos vamos a probar ahora a ejecutar y efectivamente ahora si nos muestra un listado con todos los géneros vale si queremos hacer alguna otra búsqueda tenemos que volver a crear el la configuración de ejecución bueno que la ayuda funciona vale toda la información de ayuda buscar película de guerra que estén entre los años 1995 y 2005 vale en principio parece que no he encontrado ninguna perdón siempre que podemos buscar a lo mejor películas que sean solo de guerra para comprobar si no debería mostrar un listado más amplio que lo he puesto en minúscula y no la parte del género como no me he querido tampoco parar en la lo que no era mucho de primo que meterlo en mayúscula bueno vamos a probar ahora a ejecutar aplicación para ello deberíamos añadir una configuración de ejecución en la cual podamos añadir algún tipo de parámetro si no añadimos ninguno nos debería demostrar la que hay algún tipo de error de sintaxis y la información de ayuda crear una nueva y aquí pues ya le diremos por ejemplo de listar todos los géneros y entonces nos entraría todas las películas y las listeria si queremos listar las películas que bueno que sean de guerra alguna de su generosa de guerra pues nosotras un montón de películas si las queremos acotar por año Anne realmente no sé de qué año es pero ya si además quisiéramos buscar alguna que contuviera algún título bueno pues no lo podríamos incluso incluir cómo podéis ver bueno pues nos permite ir viendo si queremos ver algunas que sean de de guerra y además de estilo documental también lo podríamos añadir noque incluyan esos dos esos dos gemelos no entre entre una mano como podemos comprobar podríamos utilizar la sintaxis de nuestra aplicación por último si queremos podemos ver el mensaje de ayuda podríamos utilizar la sintaxis de nuestra aplicación para poder consultar y poco a poco tari tener una recomendación de las películas que queríamos ver con esto concluimos el curso de tren espero que lo hayáis disfrutado tanto como yo si queréis continuar pues tenéis algunos cursos más que ya he recomendado en el vídeo de presentación para poder andar aún más en vuestros conocimientos de string de Java y de algunas tecnologías hay que hacerte muchas gracias
+Vamos a seguir desarrollando nuestra aplicación y vamos a crear ahora las clases que van a utilizar los lo servicios. 
+
+Lo primero que vamos a hacer es crear un fichero de texto `ayuda.txt`, dentro de los recursos que va a tener todo el texto de la sintaxis de la ayuda, se imprimirá cuando haya algún problema.
+
+<img src="images/21-32.png">
+
+*`ayuda.txt`*
+
+```text
+Sintaxis: java -jar movieadvisor.jar [OPCIONES]
+
+	-lg
+	Lista los diferentes géneros de películas de la colección.
+	No se pueden utilizar más parámetros.
+	
+	-ag genero1,genero2,genero...
+	Lista aquellas películas que pertenecen a al menos uno de los géneros 
+	que se indican.	El listado de géneros no puede incluir espacios.
+	
+	-tg genero1,genero2,genero...
+	Lista aquellas películas que pertenecen a todos y cada uno de los 
+	géneros que se 	indican. El listado de géneros no puede incluir espacios. 
+	
+	-y año
+	Lista aquellas películas que se estrenaron en el año indicado.
+	El año debe expresarse con 4 cifras.
+	
+	-b desde,hasta
+	Lista aquellas películas que se estrenaron entre los años DESDE y HASTA.
+	Los años indicados están incluidos. Deben expresarse con 4 cifras.
+	
+	-t titulo
+	Lista aquellas películas cuyo título contiene la cadena proporcionada.
+	Se ignorará el uso de mayúsculas/minúsculas en la comparación.
+	
+	-h
+	Muestra este mensaje de ayuda.
+	
+EJEMPLOS DE USO
+
+java -jar movieadvisor.jar -y 2018 -ag Action,Comedy
+Muestra las películas estrenadas de 2018 de acción y/o de comedia.
+
+java -jar movieadvisor.jar -t heart
+Muestra las películas cuyo título contiene la palabra heart.
+
+java -jar movieadvisor.jar -td Action,Sci-Fi -b 1990,2010 -t star
+Muestra las películas cuyo título contiene la palabra star, pertenecen al 
+género de acción y ciencia ficción y fueron estrenadas entre 1990 y 2010.   
+
+java -jar movieadvisor.jar -lg
+Muestra un listado con todos los géneros.
+
+
+LICENCIAS
+
+Los datos utilizados sobre películas utilizados en este ejemplo son
+reales y están sacados del sitio web www.imdb.com. Ten en cuenta
+que solo puede ser usada con fines personales y no comerciales.
+```
+
+Vamos a crear una nueva clase directamente en el paquete raíz llamada `MovieAdvisorApp` y que está si va a tener un método `main`.
+
+<img src="images/21-33.png">
+
+Lo que vamos a hacer aquí es sencillo, porque la lógica la vamos a desplazar hacia otra clase, hacia otro bean, aquí lo único que vamos a hacer es cargar el contexto, no nos olvidamos de cerrarlo. En medio lo que haremos es rescatar el bean que vamos a utilizar como ejecutor de la aplicación y lo ejecutariamos.
+
+*`MovieAdvisorApp`*
+
+```java
+public class MovieAdvisorApp {
+
+   public static void main(String[] args) {
+		
+      ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+		
+		
+      ((AnnotationConfigApplicationContext) appContext).close();
+
+   }
+}
+```
+
+Para ello vamos a crear primero la clase que la llamamos `MovieAdvisorRunApp`.
+
+<img src="images/21-34.png">
+
+Esta clase va a ser un bean en particular, como no estamos trabajando con aplicaciones web, no lo he querido llamar con el estereotipo de controlador, lo pondremos como `@Component` pero sería algo parecido a un controlador, tendrá un método `run(String[] args)`, va a recibir los argumentos que le podamos proporcionar
+
+
+*`MovieAdvisorRunApp`*
+
+```java
+package com.openwebinars.movieadvisor;
+
+@Component
+public class MovieAdvisorRunApp {
+
+   public void run(String[] args) {
+		
+   }
+}
+```
+
+Con lo cual ya podemos completar el código de `MovieAdvisorApp`
+
+*`MovieAdvisorApp`*
+
+```java
+package com.openwebinars.movieadvisor;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.openwebinars.movieadvisor.config.AppConfig;
+
+/**
+ * 
+ * Clase principal del programa.
+ * 
+ * Tan solo carga el contexto a partir de la clase de configuración. 
+ * Tras esto, lanza el componente que ejecuta realmente el ciclo 
+ * del programa.
+ * 
+ *
+ */
+public class MovieAdvisorApp {
+
+   public static void main(String[] args) {
+		
+      ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+      MovieAdvisorRunApp runApp = appContext.getBean(MovieAdvisorRunApp.class);
+		
+      runApp.run(args);		
+		
+      ((AnnotationConfigApplicationContext) appContext).close();
+
+   }
+}
+```
+
+Ya tendríamos listo nuestro nuestro main porque la lógica la vamos a incluir directamente en `MovieAdvisorRunApp`.
+
+Parece normal según el diagrama de clases que vimos que en el bean ``MovieAdvisorRunApp`` necesitamos auto inyectar los dos servicios.
+
+
+```java
+@Autowired
+FilmService filmService;
+	
+@Autowired
+FilmQueryService filmQueryService;
+```
+
+Vamos a ver la estructura que tendría esto para poder manejar la sintaxis, parece claro que sí se invoca nuestra aplicación y el número de argumentos es menor que uno, quiere decir que la sintaxis es erróneo, es decir, lo que podemos hacer es simplemente indicarme que hay un error de sintaxis y mostrarle el mensaje de ayuda, cómo le vamos a mostrar el mensaje de error, bueno pues creariamos otro bean que vamos a llamar `MovieAdvisorHelp`
+
+<img src="images/21-35.png">
+
+
+y que será el encargado de cargar en una cadena de caracteres, todo el mensaje de ayuda, de forma que nosotros después a través del método `getHelp()` lo vamos a poder utilizar, como lo podemos hacer.
+
+*`MovieAdvisorHelp`*
+
+```java
+package com.openwebinars.movieadvisor;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
+
+/**
+ * Este componente especial se encarga de cargar el mensaje de ayuda
+ * que está almacenado en un fichero de texto.
+ * 
+ * Es un ejemplo de un componente (gestionado por el contenedor de IoC)
+ * con gestiónd el ciclo de vida (@PostConstruct).
+ * 
+ * 
+ * @author OpenWebinars
+ *
+ */
+@Component
+public class MovieAdvisorHelp {
+
+   private String help;
+
+   @PostConstruct
+   public void init() {
+      try {
+         // @formatter:off
+         help = Files
+                  .lines(Paths.get(ResourceUtils.getFile("classpath:ayuda.txt").toURI()))
+                  .collect(Collectors.joining("\n")); 
+	 // @formatter:on
+
+      } catch (IOException e) {
+         System.err.println("Error cargando el texto de ayuda");
+         System.exit(-1);
+      }
+   }
+
+   public String getHelp() {
+      return help;
+   }
+
+}
+```
+
+
+Añadiríamos el método `init()` anotado con `@PostConstruct` y cargaríamos las líneas del fichero, le indicamos cuál es el fichero de ayuda, directamente lo hemos hardcodeado la ruta del fichero y en caso de que haya algún error, directamente también saldríamos de la aplicación.
+
+Cargariamos el contenido de `help` en una cadena de caracteres y ya lo podríamos obtener.
+
+De forma que en el método `run(String[] args)` de `MovieAdvisorRunApp` si queremos imprimir la ayuda, primero tenemos que  auto inyectar la ayuda y ya la prodríamos mostrar:
+
+
+```java
+@Autowired
+MovieAdvisorHelp help;
+
+public void run(String[] args) {
+
+   if (args.length < 1) {
+      System.out.println("Error de sintaxis");
+      System.out.println(help.getHelp());
+   }
+}
+```
+
+Qué sucede si tenemos más de un argumento, bueno pues tendremos que ver cuántos tenemos, si tenemos solamente uno, es posible que la búsqueda la estemos haciendo por alguno de los argumentos que queremos sueltos, cuál tenemos que procesar exactamente, para ello nos quedamos con el argumento cero, lo pasamos a minúscula y lo podemos comparar con lo que tenemos aquí:
+
+```java
+@Autowired
+MovieAdvisorHelp help;
+
+public void run(String[] args) {
+
+   if (args.length < 1) {
+      System.out.println("Error de sintaxis");
+      System.out.println(help.getHelp());
+   } else if (args.length == 1) {
+      switch (args[0].toLowerCase()) {
+         case "-lg":
+	    filmService.findAllGenres().forEach(System.out::println);
+	    break;
+	 case "-h":
+	    System.out.println(help.getHelp());
+	    break;
+	 default:
+	    System.out.println("Error de sintaxis");
+	    System.out.println(help.getHelp());
+	 }
+      }
+   }
+}
+```
+
+De manera que si tenemos un solo argumento o bien es que queremos listar los géneros `-lg` o bienes queremos listar la ayuda
+`-h` o vienes que hay un error de sintaxis.
+
+Si queremos listar los géneros quiere decir que el argumento es `-lg` con lo cual a través del servicio de películas `filmService` obtenemos todos los generos `.findAllGenres()` y los pintamos directamente por consola con `.forEach(System.out::println)` la instrucción completa es  `filmService.findAllGenres().forEach(System.out::println);`.
+
+Si lo que queremos es mostrar la ayuda directamente con el servicio de ayuda `help.getHelp()` la podríamos mostrar.
+
+Y en otro caso quiere decir que hay un error de sintaxis y tendríamos que mostrar de nuevo la ayuda también.
+
+Qué sucede en el caso de que tengamos más de un argumento, vamos a diferenciar el caso de que el número de argumentos sea impar y de ser así, pues tampoco tendríamos una sintaxis correcta porque si no utilizamos el `-` o al menos h quiere decir que los demás argumentos tienen que venir por parejas si queremos buscar con título tenemos que poner menos y el título si queremos buscar un año menos y y el año tienen que venir por parejas con lo cual aquí tendríamos también tenemos un problema igual que si pasamos más de 4 parejas de búsqueda que va a ser el tope que pongamos porque bueno no tendría sentido que buscáramos por un año en particular y también por un intervalo aunque eso realmente no lo vamos a controlar pero si vamos a controlar que sean cuatro parejas con lo cual si el número de argumentos es mayor que 8 también es verdad está bien fotos para que sepa vamos a dar otro caso quiere decir que no están pasando los diferentes argumentos que nosotros estamos necesitando cómo vamos a hacer este procesamiento puesto no es de spring esto es básicamente vamos a tratar de cogerlo por parejas de una manera sencilla vale de array de cadenas de caracteres llamada argumentos el bucle para hacernos adelantando un poco o lo dejo por aquí planteada vamos a ir recorriendo nuestro array pero dando saltos de dos en dos de manera que en cada salto cogemos esa posición y la siguiente y así tendremos menos te vi el título menos AG y bueno los géneros que queremos listar menos y y el aquí y lo tendremos directamente en este listado que para procesar va a ser más sencillo y ahora lo que tenemos que hacer es bueno pues procesar este estado extrayendo los distintos argumentos y haciendo todo lo que corresponda esta lógica también se parece la voy a copiar y la mamá explicando para que no se haga tan tedioso legión estos son los distintos argumentos que podemos pasar mensaje algún género menos texto de los géneros años entre 2 años y el título para ello como decía vamos sacando de argumentos cada pareja donde la el cero de este array sería el menos a Jimena Jimena y y el uno sería el argumento es bueno si es mensaje quiere decir que nos han pasado otro argumento que será o un género o una lista separada por comas de género en una lista separada por, vamos y lo que hacemos es directamente utilizar el método que teníamos en el servicio para poder buscar en el caso de que sean todos los géneros lo haríamos llamando al método correspondiente en el caso del año no tenemos nada que limpiar si son intervalos y que tendríamos que plantear los años para tener el desde y él hasta pronto y en el caso del título pues directamente compraríamos con elpeluquería haciendo sería ir acumulando si hemos pasado dos parejas de argumentos acumularía los predicados correspondientes añadimos esta posibilidad por si hay algún tipo de fallo es decir si alguien ha pasado un menos menos z por ejemplo como argumento pues directamente le tenemos que decir que hay un error de sintaxis no está variable error inicia fans a Fox sería verdaderas y si hubiera algún problema y lo que hacemos entonces en caso de que haya algún error bueno pues no imprimir iríamosimprimiremos los resultados de la ONCE de los resultados no hacemos aquí lo que vamos a hacer ejecutar la consulta lo guardamos en la conexiónque aprovechando también el API stream pues los sacamos todo del listado lo juntamos separado por, vale a la hora de 20 minutos para que aparezcan así de una manera más conveniente puede que el resultado que la lista esté vacía porque las películas alguna de las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo vale buscar aplicación vale y tenemos una a ver ahora como no hemos puesto ningún argumento no mostraría el mensaje de ayuda tenemos un error de sintaxis vale y bueno ya nos quería probar con la sintaxis no es decir vamos si queremos listar todos los géneros no vamos a ser directamente desde eclipse vale podemos crear una configuración de ejecución y aquí pasaremos argumento si queremos lista tendremos aquí procesar ya son muchas películas con lo cual es posible que tarde que tarda un ratito en procesar todos los resultadossi no tenemos resultado es posible que tengamos algún problema con el dado y podemos probar a ver si está cargando los datos efectivamente olvido esta notación del ciclo de vida no conoce comprobar que si no la añadimos pues no está procesando los datos vamos a probar ahora a ejecutar y efectivamente ahora si nos muestra un listado con todos los géneros vale si queremos hacer alguna otra búsqueda tenemos que volver a crear el la configuración de ejecución bueno que la ayuda funciona vale toda la información de ayuda buscar película de guerra que estén entre los años 1995 y 2005 vale en principio parece que no he encontrado ninguna perdón siempre que podemos buscar a lo mejor películas que sean solo de guerra para comprobar si no debería mostrar un listado más amplio que lo he puesto en minúscula y no la parte del género como no me he querido tampoco parar en la lo que no era mucho de primo que meterlo en mayúscula bueno vamos a probar ahora a ejecutar aplicación para ello deberíamos añadir una configuración de ejecución en la cual podamos añadir algún tipo de parámetro si no añadimos ninguno nos debería demostrar la que hay algún tipo de error de sintaxis y la información de ayuda crear una nueva y aquí pues ya le diremos por ejemplo de listar todos los géneros y entonces nos entraría todas las películas y las listeria si queremos listar las películas que bueno que sean de guerra alguna de su generosa de guerra pues nosotras un montón de películas si las queremos acotar por año Anne realmente no sé de qué año es pero ya si además quisiéramos buscar alguna que contuviera algún título bueno pues no lo podríamos incluso incluir cómo podéis ver bueno pues nos permite ir viendo si queremos ver algunas que sean de de guerra y además de estilo documental también lo podríamos añadir noque incluyan esos dos esos dos gemelos no entre entre una mano como podemos comprobar podríamos utilizar la sintaxis de nuestra aplicación por último si queremos podemos ver el mensaje de ayuda podríamos utilizar la sintaxis de nuestra aplicación para poder consultar y poco a poco tari tener una recomendación de las películas que queríamos ver con esto concluimos el curso de tren espero que lo hayáis disfrutado tanto como yo si queréis continuar pues tenéis algunos cursos más que ya he recomendado en el vídeo de presentación para poder andar aún más en vuestros conocimientos de string de Java y de algunas tecnologías hay que hacerte muchas gracias
+
 
 
 # Contenido adicional 1
