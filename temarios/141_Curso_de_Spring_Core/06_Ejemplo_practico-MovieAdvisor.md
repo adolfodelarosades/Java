@@ -1643,7 +1643,123 @@ Si lo que queremos es mostrar la ayuda, directamente con el servicio de ayuda `h
 
 Y en otro caso quiere decir que hay un error de sintaxis y tendríamos que mostrar de nuevo la ayuda también.
 
-Qué sucede en el caso de que tengamos más de un argumento, vamos a diferenciar el caso de que el número de argumentos sea impar y de ser así, pues tampoco tendríamos una sintaxis correcta, porque si no utilizamos el `-lg` o `-h` quiere decir que los demás argumentos tienen que venir por parejas si queremos buscar con título tenemos que poner menos y el título si queremos buscar un año menos y y el año tienen que venir por parejas con lo cual aquí tendríamos también tenemos un problema igual que si pasamos más de 4 parejas de búsqueda que va a ser el tope que pongamos porque bueno no tendría sentido que buscáramos por un año en particular y también por un intervalo aunque eso realmente no lo vamos a controlar pero si vamos a controlar que sean cuatro parejas con lo cual si el número de argumentos es mayor que 8 también es verdad está bien fotos para que sepa vamos a dar otro caso quiere decir que no están pasando los diferentes argumentos que nosotros estamos necesitando cómo vamos a hacer este procesamiento puesto no es de spring esto es básicamente vamos a tratar de cogerlo por parejas de una manera sencilla vale de array de cadenas de caracteres llamada argumentos el bucle para hacernos adelantando un poco o lo dejo por aquí planteada vamos a ir recorriendo nuestro array pero dando saltos de dos en dos de manera que en cada salto cogemos esa posición y la siguiente y así tendremos menos te vi el título menos AG y bueno los géneros que queremos listar menos y y el aquí y lo tendremos directamente en este listado que para procesar va a ser más sencillo y ahora lo que tenemos que hacer es bueno pues procesar este estado extrayendo los distintos argumentos y haciendo todo lo que corresponda esta lógica también se parece la voy a copiar y la mamá explicando para que no se haga tan tedioso legión estos son los distintos argumentos que podemos pasar mensaje algún género menos texto de los géneros años entre 2 años y el título para ello como decía vamos sacando de argumentos cada pareja donde la el cero de este array sería el menos a Jimena Jimena y y el uno sería el argumento es bueno si es mensaje quiere decir que nos han pasado otro argumento que será o un género o una lista separada por comas de género en una lista separada por, vamos y lo que hacemos es directamente utilizar el método que teníamos en el servicio para poder buscar en el caso de que sean todos los géneros lo haríamos llamando al método correspondiente en el caso del año no tenemos nada que limpiar si son intervalos y que tendríamos que plantear los años para tener el desde y él hasta pronto y en el caso del título pues directamente compraríamos con elpeluquería haciendo sería ir acumulando si hemos pasado dos parejas de argumentos acumularía los predicados correspondientes añadimos esta posibilidad por si hay algún tipo de fallo es decir si alguien ha pasado un menos menos z por ejemplo como argumento pues directamente le tenemos que decir que hay un error de sintaxis no está variable error inicia fans a Fox sería verdaderas y si hubiera algún problema y lo que hacemos entonces en caso de que haya algún error bueno pues no imprimir iríamosimprimiremos los resultados de la ONCE de los resultados no hacemos aquí lo que vamos a hacer ejecutar la consulta lo guardamos en la conexiónque aprovechando también el API stream pues los sacamos todo del listado lo juntamos separado por, vale a la hora de 20 minutos para que aparezcan así de una manera más conveniente puede que el resultado que la lista esté vacía porque las películas alguna de las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo vale buscar aplicación vale y tenemos una a ver ahora como no hemos puesto ningún argumento no mostraría el mensaje de ayuda tenemos un error de sintaxis vale y bueno ya nos quería probar con la sintaxis no es decir vamos si queremos listar todos los géneros no vamos a ser directamente desde eclipse vale podemos crear una configuración de ejecución y aquí pasaremos argumento si queremos lista tendremos aquí procesar ya son muchas películas con lo cual es posible que tarde que tarda un ratito en procesar todos los resultadossi no tenemos resultado es posible que tengamos algún problema con el dado y podemos probar a ver si está cargando los datos efectivamente olvido esta notación del ciclo de vida no conoce comprobar que si no la añadimos pues no está procesando los datos vamos a probar ahora a ejecutar y efectivamente ahora si nos muestra un listado con todos los géneros vale si queremos hacer alguna otra búsqueda tenemos que volver a crear el la configuración de ejecución bueno que la ayuda funciona vale toda la información de ayuda buscar película de guerra que estén entre los años 1995 y 2005 vale en principio parece que no he encontrado ninguna perdón siempre que podemos buscar a lo mejor películas que sean solo de guerra para comprobar si no debería mostrar un listado más amplio que lo he puesto en minúscula y no la parte del género como no me he querido tampoco parar en la lo que no era mucho de primo que meterlo en mayúscula bueno vamos a probar ahora a ejecutar aplicación para ello deberíamos añadir una configuración de ejecución en la cual podamos añadir algún tipo de parámetro si no añadimos ninguno nos debería demostrar la que hay algún tipo de error de sintaxis y la información de ayuda crear una nueva y aquí pues ya le diremos por ejemplo de listar todos los géneros y entonces nos entraría todas las películas y las listeria si queremos listar las películas que bueno que sean de guerra alguna de su generosa de guerra pues nosotras un montón de películas si las queremos acotar por año Anne realmente no sé de qué año es pero ya si además quisiéramos buscar alguna que contuviera algún título bueno pues no lo podríamos incluso incluir cómo podéis ver bueno pues nos permite ir viendo si queremos ver algunas que sean de de guerra y además de estilo documental también lo podríamos añadir noque incluyan esos dos esos dos gemelos no entre entre una mano como podemos comprobar podríamos utilizar la sintaxis de nuestra aplicación por último si queremos podemos ver el mensaje de ayuda podríamos utilizar la sintaxis de nuestra aplicación para poder consultar y poco a poco tari tener una recomendación de las películas que queríamos ver con esto concluimos el curso de tren espero que lo hayáis disfrutado tanto como yo si queréis continuar pues tenéis algunos cursos más que ya he recomendado en el vídeo de presentación para poder andar aún más en vuestros conocimientos de string de Java y de algunas tecnologías hay que hacerte muchas gracias
+Qué sucede en el caso de que tengamos más de un argumento, vamos a diferenciar el caso de que el número de argumentos sea impar y de ser así, pues tampoco tendríamos una sintaxis correcta, porque si no utilizamos el `-lg` o `-h`, quiere decir que los demás argumentos tienen que venir por parejas, si queremos buscar con título tenemos que poner `-t` y el título, si queremos buscar un año tenemos que poner `-y` y el año, tienen que venir por parejas, con lo cual aquí tendríamos también un problema:
+
+```java
+} else if (args.length % 2 != 0) {
+   System.out.println("Error de sintaxis");
+   System.out.println(help.getHelp());
+}
+```
+
+al igual que si pasamos más de 4 parejas de búsqueda, que va a ser el tope que pongamos, porque bueno no tendría sentido que buscáramos por un año en particular y también por un intervalo, aunque eso realmente no lo vamos a controlar, pero si vamos a controlar que sean cuatro parejas, con lo cual si el número de argumentos es mayor que 8:
+
+```java
+} else if (args.length > 8) {
+   System.out.println("Error de sintaxis");
+   System.out.println(help.getHelp());
+} 
+```
+
+En otro caso quiere decir que nos están pasando los diferentes argumentos que nosotros estamos necesitando, cómo vamos a hacer este procesamiento, puesto que esto no es de Spring, esto es básicamente de Java, vamos a tratar de cogerlos por parejas, de una manera sencilla.
+
+Lo vamos a guardar en una lista de array de cadenas de caracteres, llamada `argumentos` 
+
+`List<String[]> argumentos = new ArrayList<>();`
+
+El bucle para hacerlo,  lo dejamos aquí planteado:
+
+```java
+for (int i = 0; i < args.length; i += 2) {
+   argumentos.add(new String[] { args[i], args[i + 1] });
+}
+```
+
+vamos a ir recorriendo nuestro array, pero dando saltos de dos en dos, de manera que en cada salto cogemos esa posición y la siguiente y así tendremos `-t` y el título, `-ag` y los géneros que queremos listar, `-y` y el año, y lo tendremos directamente en este listado, que para procesar va a ser más sencillo y ahora lo que tenemos que hacer, es procesar el listado `argumentos`, extrayendo los distintos argumentos y haciendo todo lo que corresponda, esta lógica es la siguiente:
+
+```java
+boolean error = false;
+
+for (String[] argumento : argumentos) {
+   switch (argumento[0].toLowerCase()) {
+      case "-ag":
+	 filmQueryService.anyGenre(argumento[1].split(","));
+	 break;
+      case "-tg":
+	 filmQueryService.allGenres(argumento[1].split(","));
+	 break;
+      case "-y":
+         filmQueryService.year(argumento[1]);
+	 break;
+      case "-b":
+         String[] years = argumento[1].split(",");
+	 filmQueryService.betweenYears(years[0], years[1]);
+	 break;
+      case "-t":
+         filmQueryService.titleContains(argumento[1]);
+	 break;
+      default: error = true;
+	 System.out.println("Error de sintaxis");
+	 System.out.println(help.getHelp());
+   }
+
+}
+```
+
+Estos son los distintos argumentos que podemos pasar, `-ag` algún género, `-td` todos los géneros, `-y` año, `-b` entre dos años y `-t` el título. 
+
+Para ello como decía vamos sacando de `argumentos` cada pareja, donde `argumentos[0]` es el `-ag`, `-td`, `-y`, `-b` o `-t`,  y `argumentos[1]` sería el argumento en si.
+
+Si es `-ag` quiere decir que nos han pasado otro argumento, que será o un género o una lista de generos separada por comas de genero, si es una lista la spliteamos y lo que hacemos es directamente utilizar el método `anyGenre` directamente del servicio `filmQueryService` para poder buscar `filmQueryService.anyGenre(argumento[1].split(","));`.
+
+En el caso de que sean todos los géneros, lo haríamos llamando al método correspondiente `filmQueryService.allGenres(argumento[1].split(","));`.
+
+En el caso del año no tenemos nada que splitear `filmQueryService.year(argumento[1]);`.
+
+Si son intervalos si que tendríamos que Splitear los años para tener el desde y él hasta:
+
+```java
+String[] years = argumento[1].split(",");
+filmQueryService.betweenYears(years[0], years[1]);
+```
+
+Y en el caso del título, directamente compraríamos con el título `filmQueryService.titleContains(argumento[1]);`.
+
+si nos damos cuenta lo que va haciendo aquí es ir llamando a `filmQueryService`, lo hemos inyectado previamente, y de esta forma lo que iria haciendo sería ir acumulando, si hemos pasado dos parejas de argumentos, acumularía los predicados correspondientes.
+
+En `default` añadimos esta posibilidad por si hay algún tipo de fallo, es decir si alguien ha pasado un `--z` por ejemplo como argumento, directamente le tenemos que decir que hay un error de sintaxis, la variable `error` inicia a `false`, sería verdadera si hubiera algún problema y lo que hacemos entonces es, en caso de que haya algún error, no imprimir los resultados de la busqueda, no ejecutaremos los resultados.
+
+```java
+default: error = true;
+   System.out.println("Error de sintaxis");
+   System.out.println(help.getHelp());
+}
+```
+
+Imprimiir los los resultados lo hacemos aquí:
+
+```java
+if (!error) {
+   Collection<Film> result = filmQueryService.exec();
+   System.out.printf("%s\t%-50s\t%s\t%s\n","ID","Título", "Año", "Géneros");
+   if (result != null) {
+      result.forEach(f -> System.out.printf("%s\t%-50s\t%s\t%s\n", 
+			f.getId(), f.getTitle(), f.getYear(), 
+			f.getGenres().stream().collect(Collectors.joining(", "))));
+   } else {
+      System.out.println("No hay películas que cumplan esos criterios. Lo sentimos");
+   }
+}
+```
+
+Sino hay error lo que vamos a hacer es ejecutar la consulta, lo guardamos en la colección, y lo único que hacemos es pintarlo de una forma conveniente, no esta demaciado currado. Pintamos en una primería línea todos los encabezados:
+
+`System.out.printf("%s\t%-50s\t%s\t%s\n","ID","Título", "Año", "Géneros");`
+
+La primera parte `"%s\t%-50s\t%s\t%s\n"` es un especificador de formato que le da 50 carácteres al título, nos va a dar una vaga sensación de ver columnas y ese mismo especificador lo usamos a la hora de pintar los datos correspondientes, en el caso de la lista de los generos aprovechamos el API stream, los sacamos todo del listado, lo juntamos separado por (,)  a la hora de imprimirlos, para que aparezcan así de una manera más conveniente.
+
+
+puede que el resultado que la lista esté vacía porque las películas alguna de las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo vale buscar aplicación vale y tenemos una a ver ahora como no hemos puesto ningún argumento no mostraría el mensaje de ayuda tenemos un error de sintaxis vale y bueno ya nos quería probar con la sintaxis no es decir vamos si queremos listar todos los géneros no vamos a ser directamente desde eclipse vale podemos crear una configuración de ejecución y aquí pasaremos argumento si queremos lista tendremos aquí procesar ya son muchas películas con lo cual es posible que tarde que tarda un ratito en procesar todos los resultadossi no tenemos resultado es posible que tengamos algún problema con el dado y podemos probar a ver si está cargando los datos efectivamente olvido esta notación del ciclo de vida no conoce comprobar que si no la añadimos pues no está procesando los datos vamos a probar ahora a ejecutar y efectivamente ahora si nos muestra un listado con todos los géneros vale si queremos hacer alguna otra búsqueda tenemos que volver a crear el la configuración de ejecución bueno que la ayuda funciona vale toda la información de ayuda buscar película de guerra que estén entre los años 1995 y 2005 vale en principio parece que no he encontrado ninguna perdón siempre que podemos buscar a lo mejor películas que sean solo de guerra para comprobar si no debería mostrar un listado más amplio que lo he puesto en minúscula y no la parte del género como no me he querido tampoco parar en la lo que no era mucho de primo que meterlo en mayúscula bueno vamos a probar ahora a ejecutar aplicación para ello deberíamos añadir una configuración de ejecución en la cual podamos añadir algún tipo de parámetro si no añadimos ninguno nos debería demostrar la que hay algún tipo de error de sintaxis y la información de ayuda crear una nueva y aquí pues ya le diremos por ejemplo de listar todos los géneros y entonces nos entraría todas las películas y las listeria si queremos listar las películas que bueno que sean de guerra alguna de su generosa de guerra pues nosotras un montón de películas si las queremos acotar por año Anne realmente no sé de qué año es pero ya si además quisiéramos buscar alguna que contuviera algún título bueno pues no lo podríamos incluso incluir cómo podéis ver bueno pues nos permite ir viendo si queremos ver algunas que sean de de guerra y además de estilo documental también lo podríamos añadir noque incluyan esos dos esos dos gemelos no entre entre una mano como podemos comprobar podríamos utilizar la sintaxis de nuestra aplicación por último si queremos podemos ver el mensaje de ayuda podríamos utilizar la sintaxis de nuestra aplicación para poder consultar y poco a poco tari tener una recomendación de las películas que queríamos ver con esto concluimos el curso de tren espero que lo hayáis disfrutado tanto como yo si queréis continuar pues tenéis algunos cursos más que ya he recomendado en el vídeo de presentación para poder andar aún más en vuestros conocimientos de string de Java y de algunas tecnologías hay que hacerte muchas gracias
 
 
 
