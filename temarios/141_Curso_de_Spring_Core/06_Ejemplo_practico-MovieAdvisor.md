@@ -1758,10 +1758,173 @@ Sino hay error lo que vamos a hacer es ejecutar la consulta, lo guardamos en la 
 
 La primera parte `"%s\t%-50s\t%s\t%s\n"` es un especificador de formato que le da 50 carácteres al título, nos va a dar una vaga sensación de ver columnas y ese mismo especificador lo usamos a la hora de pintar los datos correspondientes, en el caso de la lista de los generos aprovechamos el API stream, los sacamos todo del listado, lo juntamos separado por (,)  a la hora de imprimirlos, para que aparezcan así de una manera más conveniente.
 
+La clase `MovieAdvisorRunApp` completa la tenemos aquí:
 
-puede que el resultado que la lista esté vacía porque las películas alguna de las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo vale buscar aplicación vale y tenemos una a ver ahora como no hemos puesto ningún argumento no mostraría el mensaje de ayuda tenemos un error de sintaxis vale y bueno ya nos quería probar con la sintaxis no es decir vamos si queremos listar todos los géneros no vamos a ser directamente desde eclipse vale podemos crear una configuración de ejecución y aquí pasaremos argumento si queremos lista tendremos aquí procesar ya son muchas películas con lo cual es posible que tarde que tarda un ratito en procesar todos los resultadossi no tenemos resultado es posible que tengamos algún problema con el dado y podemos probar a ver si está cargando los datos efectivamente olvido esta notación del ciclo de vida no conoce comprobar que si no la añadimos pues no está procesando los datos vamos a probar ahora a ejecutar y efectivamente ahora si nos muestra un listado con todos los géneros vale si queremos hacer alguna otra búsqueda tenemos que volver a crear el la configuración de ejecución bueno que la ayuda funciona vale toda la información de ayuda buscar película de guerra que estén entre los años 1995 y 2005 vale en principio parece que no he encontrado ninguna perdón siempre que podemos buscar a lo mejor películas que sean solo de guerra para comprobar si no debería mostrar un listado más amplio que lo he puesto en minúscula y no la parte del género como no me he querido tampoco parar en la lo que no era mucho de primo que meterlo en mayúscula bueno vamos a probar ahora a ejecutar aplicación para ello deberíamos añadir una configuración de ejecución en la cual podamos añadir algún tipo de parámetro si no añadimos ninguno nos debería demostrar la que hay algún tipo de error de sintaxis y la información de ayuda crear una nueva y aquí pues ya le diremos por ejemplo de listar todos los géneros y entonces nos entraría todas las películas y las listeria si queremos listar las películas que bueno que sean de guerra alguna de su generosa de guerra pues nosotras un montón de películas si las queremos acotar por año Anne realmente no sé de qué año es pero ya si además quisiéramos buscar alguna que contuviera algún título bueno pues no lo podríamos incluso incluir cómo podéis ver bueno pues nos permite ir viendo si queremos ver algunas que sean de de guerra y además de estilo documental también lo podríamos añadir noque incluyan esos dos esos dos gemelos no entre entre una mano como podemos comprobar podríamos utilizar la sintaxis de nuestra aplicación por último si queremos podemos ver el mensaje de ayuda podríamos utilizar la sintaxis de nuestra aplicación para poder consultar y poco a poco tari tener una recomendación de las películas que queríamos ver con esto concluimos el curso de tren espero que lo hayáis disfrutado tanto como yo si queréis continuar pues tenéis algunos cursos más que ya he recomendado en el vídeo de presentación para poder andar aún más en vuestros conocimientos de string de Java y de algunas tecnologías hay que hacerte muchas gracias
+*`MovieAdvisorRunApp`*
+
+```java
+package com.openwebinars.movieadvisor;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.openwebinars.movieadvisor.model.Film;
+import com.openwebinars.movieadvisor.service.FilmQueryService;
+import com.openwebinars.movieadvisor.service.FilmService;
+
+/**
+ * Este componente tiene el ciclo de ejecución del programa,
+ * el cuerpo principal. En una aplicación web, seguramente
+ * hubiera sido anotada con @Controller.
+ * 
+ * El método run recibe los argumentos que se han pasado
+ * por la línea de comandos, y en función de cuantos y cuáles
+ * son, verifica si la sintaxis es correcta o no, y ejecuta
+ * la consulta correspondiente.
+ * 
+ * 
+ * @author OpenWebinars
+ *
+ */
+@Component
+public class MovieAdvisorRunApp {
+
+	@Autowired
+	FilmService filmService;
+	
+	@Autowired
+	FilmQueryService filmQueryService;
+
+	@Autowired
+	MovieAdvisorHelp help;
+
+	public void run(String[] args) {
+
+		if (args.length < 1) {
+			System.out.println("Error de sintaxis");
+			System.out.println(help.getHelp());
+		} else if (args.length == 1) {
+			switch (args[0].toLowerCase()) {
+			case "-lg":
+				filmService.findAllGenres().forEach(System.out::println);
+				break;
+			case "-h":
+				System.out.println(help.getHelp());
+				break;
+			default:
+				System.out.println("Error de sintaxis");
+				System.out.println(help.getHelp());
+
+			}
+		} else if (args.length % 2 != 0) {
+			System.out.println("Error de sintaxis");
+			System.out.println(help.getHelp());
+		} else if (args.length > 8) {
+			System.out.println("Error de sintaxis");
+			System.out.println(help.getHelp());
+		} else {
+
+			// De esta forma hemos asegurado que el número de argumentos
+			// es par (opción valoropción) y que no hay más de cuatro
+			// parejas (ver fichero de ayuda).
+			List<String[]> argumentos = new ArrayList<>();
+
+			for (int i = 0; i < args.length; i += 2) {
+				argumentos.add(new String[] { args[i], args[i + 1] });
+			}
+			
+			boolean error = false;
+
+			for (String[] argumento : argumentos) {
+				switch (argumento[0].toLowerCase()) {
+				case "-ag":
+					filmQueryService.anyGenre(argumento[1].split(","));
+					break;
+				case "-tg":
+					filmQueryService.allGenres(argumento[1].split(","));
+					break;
+				case "-y":
+					filmQueryService.year(argumento[1]);
+					break;
+				case "-b":
+					String[] years = argumento[1].split(",");
+					filmQueryService.betweenYears(years[0], years[1]);
+					break;
+				case "-t":
+					filmQueryService.titleContains(argumento[1]);
+					break;
+				default: error = true;
+						 System.out.println("Error de sintaxis");
+						 System.out.println(help.getHelp());
+				}
+
+			}
+			
+			if (!error) {
+				Collection<Film> result = filmQueryService.exec();
+				System.out.printf("%s\t%-50s\t%s\t%s\n","ID","Título", "Año", "Géneros");
+				if (result != null) {
+					result.forEach(f -> System.out.printf("%s\t%-50s\t%s\t%s\n", 
+							f.getId(), f.getTitle(), f.getYear(), 
+							f.getGenres().stream().collect(Collectors.joining(", "))));
+				} else {
+					System.out.println("No hay películas que cumplan esos criterios. Lo sentimos");
+				}
+			}
+		}
+
+	}
+
+}
+```
 
 
+Puede ocurrir que el resultado esté vacío porque las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo, vamos a ejecutar nuestra aplicación.
+
+<img src="images/21-36.png">
+
+<img src="images/21-37.png">
+
+Como no hemos puesto ningún argumento, no mostraría el mensaje de ayuda, tenemos un error de sintaxis, y bueno ya nos quería probar con la sintaxis correcta.
+
+Si queremos listar todos los géneros, lo vamos a ser directamente desde Eclipse, podemos crear una configuración de ejecución.
+
+<img src="images/21-38.png">
+
+En la pestaña `Arguments` pasaremos argumentos, si queremos lista todos los generos, tendremos que poner `-lg`.
+
+<img src="images/21-39.png">
+
+Aquí procesar los datos, son muchas películas, con lo cual es posible que tarde un ratito en procesar todos los resultados.
+
+<img src="images/21-40.png">
+
+Nos muestra un listado con todos los géneros.
+
+<img src="images/21-41.png">
+
+<img src="images/21-42.png">
+
+Nota: si ponemos `war` no las encuentra, podría mejorarse.
+
+Si queremos hacer alguna otra búsqueda tenemos que volver a crear el la configuración de ejecución, buscar película de guerra y documentales que estén entre los años 1995 y 2005
+
+<img src="images/21-43.png">
+
+<img src="images/21-44.png">
+
+Por último si queremos podemos ver el mensaje de ayuda.
+
+<img src="images/21-45.png">
+
+<img src="images/21-46.png">
+
+Podríamos utilizar la sintaxis de nuestra aplicación para poder consultar y poco a poco poder acotar y obtener una recomendación de las películas que queríamos ver, con esto concluimos el curso de Spring Core.
 
 # Contenido adicional 1
 
