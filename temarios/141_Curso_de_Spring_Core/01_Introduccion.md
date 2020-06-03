@@ -51,7 +51,13 @@ En este enlace podrás encontrar todas las novedades incluidas en las últimas v
 
 https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Framework-5.x
 
-### Transcripción
+## Preguntas
+
+* Tengo la siguiente duda con relacion al modulo para web reactiva. Solo aplica este modulo si utilizo el motor de plantillas Thymeleaf? O se puede hacer uso del mismo si mi frontend esta hecho en Angular?
+
+   Podrías utilizar la web reactiva tanto con Thymeleaf como con Angular. De hecho, este segundo esquema está siendo utilizado en muchos desarrollos, aprovechando toda la potencia de Spring para el backend y todas las funcionalidades de Angular para el frontend.
+
+## Transcripción
 
 <img src="images/2-01.png">
 
@@ -188,6 +194,11 @@ Ya podemos usarlo para instalar Spring Tool Suite
 ```sh
 $ umake ide spring-tools-suite
 ```
+## Preguntas
+
+* Ya no esta disponible la version de STS 3, se podria seguir el curso con la version STS 4?
+   
+   No debe haber ningún problema para hacerlo. La única dificultad puede estribar en que la versión 3 de STS sí que tenía alguna vista asociada a facilitar la gestión de ficheros de beans XML. La versión 4 no incluye alguna de esas vistas o asistentes, pero igualmente se pueden gestionar. Para cualquier duda, puedes contar conmigo para solucionarla.
 
 ## Transcripción
 
@@ -226,10 +237,6 @@ $ umake ide spring-tools-suite
 # 04 Estructura de una aplicación empresarial y patrones de diseño 12:55
 
 [PDF 1-4_Estructura_y_patrones.pdf](pdfs/1-4_Estructura_y_patrones.pdf)
-
-## Resumen Profesor
-
-No existe.
 
 ## Transcripción
 
@@ -321,10 +328,6 @@ Los *sistemas de plantillas* conectan la *Aplicación* y la *Interfaz de Usuario
 # 05 Inversión de control e inyección de dependencias 15:09 
 
 [PDF 1-5_Inversion_de_Control_e_Inyeccion_de_Dependencias.pdf](pdfs/1-5_Inversion_de_Control_e_Inyeccion_de_Dependencias.pdf)
-
-## Resumen Profesor
-
-No existe.
 
 ## Transcripción
 
