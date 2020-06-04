@@ -344,8 +344,55 @@ P= Mi consulta va respecto al último punto sobre Hibernate cuando dice "es algo
 
 ## Transcripción
 
+<img src="images/1-01.png">
 
+<img src="images/1-02.png">
 
+<img src="images/1-03.png">
+
+<img src="images/1-04.png">
+
+<img src="images/1-05.png">
+
+<img src="images/1-06.png">
+
+<img src="images/1-07.png">
+
+<img src="images/1-08.png">
+
+<img src="images/1-09.png">
+
+<img src="images/1-10.png">
+
+<img src="images/1-11.png">
+
+<img src="images/1-12.png">
+
+<img src="images/1-13.png">
+
+<img src="images/1-14.png">
+
+<img src="images/1-15.png">
+
+<img src="images/1-16.png">
+
+<img src="images/1-17.png">
+
+<img src="images/1-18.png">
+
+<img src="images/1-19.png">
+
+<img src="images/1-20.png">
+
+<img src="images/1-21.png">
+
+<img src="images/1-22.png">
+
+<img src="images/1-23.png">
+
+<img src="images/1-24.png">
+
+<img src="images/1-25.png">
 
 # Contenido adicional 2   
 
