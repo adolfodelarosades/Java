@@ -883,6 +883,18 @@ Con esto tenemos nuestra clase DAO implementada, tenemos toda nuestra capa de re
 
 # 24 Servicios 13:28 
 
+## Preguntas
+
+* No acabo de enteder muy bien para que queremos tener 2 servicios diferentes para acceder a los datos.
+
+R= Necesidad, lo que se dice necesidad, no existe. Se trata solo de un ejemplo. En él, he tratado de separar por un lado un servicio específico para realizar consultas sobre los datos, y otro servicio que, utilizando el anterior, tiene métodos de más alto nivel. Podría haberse implementado todo en una misma clase, o incluso a través de una clase (servicio) con una clase interna (pensada para las consultas).
+
+* Por favor me podrías decir cúal es la última versión del OpenJDK 8 que hayas utilizado y que por el momento no hayas encontrado problemas para usarlos en tus proyectos. Ya que en otro curso mencionas que habia un bug en el OpenJDK8 y por ello utilizas el de Oracle. ¿O conoces algún recurso donde pueda encontrar información de los bugs en esta versión de OpenJDK?
+
+R= El fallo sucedió en la época en la que grabamos el curso, y por el cual daba problema con algunos certificados de seguridad en ubuntu; al final, la solución menos complicada fue usar el JDK de oracle. La lista activa de incidencias de openjdk la puedes encontrar aquí: https://bugs.openjdk.java.net/browse/JDK-8238966?filter=-4.
+
+Si trabajas en Linux, puedes utilizar herramientas como SDKMAN (https://sdkman.io/) para poder instalar y probar entre diferentes versiones y sabores de JDK diferentes. También puedes utilizarlo en Windows (en su web hay un apartado donde lo explica).
+
 ## Transcripción
 
 Vamos a continuar desarrollando nuestra aplicación, ya que tenemos montado y bien montado la parte del DAO, del repositorio. Vamos a crear los servicios necesarios, si recordamos el diagrama de clase ibamos a crear dos servicios, uno de consultas de alto nivel y otro que nos va a permitir generar la consulta que nosotros queramos.
@@ -1041,7 +1053,6 @@ public FilmQueryServiceImpl anyGenre(String... genres) {
 
 El método `allGenres` es muy parceido pero en lugar de usar `anyMatch` usa `allMatch` pero el esquema es exactamente el mismo.
 
-
 ```java
 public FilmQueryServiceImpl allGenres(String... genres) {
    Predicate<Film> pAllGenres = (film -> Arrays.stream(genres).allMatch(film.getGenres()::contains));
@@ -1053,7 +1064,6 @@ public FilmQueryServiceImpl allGenres(String... genres) {
 Aquí solamente devolverá verdad si existe un solapamiento completo entre el Stream que acabamos de crear y los generos de la película, si son exactamente los mismos, si estan contenidos todos. Con lo cual se devuelven de esta manera.
 
 Para buscar las películas por el año la búsqueda quizá sea más sencilla vamos a tener el método `year(String year)` como el año lo declaramos como un `String` podemos usar la comparación de Strings.
-
 
 ```java
 public FilmQueryServiceImpl year(String year) {
@@ -1369,6 +1379,12 @@ Este servicio lo tendríamos aquí preparado por si además de hacer una aplicac
 Con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los servicios.
 
 # 25 Ejecución de la app 22:28 
+
+## Preguntas
+
+* Genial el cierre de este curso con el ejemplo de la aplicación. Solo una observación, se pudo omitir la llamada a autowired de FilmQueryService en la clase MovieAdvisorRunApp. Ya que como comentabas en el anterior video la clase FilmService (que tambien es un estereotipo @sService) incluye métodos que llaman a los metodos implementados de FilmQueryService. Por lo cual me parece que esta de más llamarlo en la clase principal de que maneja los comandos.
+
+R= Te en cuenta que a lo mejor, por lo didáctico, el código ha quedado un poco raro. En un sistema "real", en el que si se usa Spring Data JPA, lo repositorios trabajarán con una base de datos, tenemos diferentes alternativas para plantear el código. A mi me suele gustar elaborar un servicio que envuelve al repositorio, y utilizar en componentes y controladores solo el servicio, pero es solo un estilo; se pueden usar, tanto repositorios como servicios en componentes y controladores con total normalidad.
 
 ## Transcripción
 
