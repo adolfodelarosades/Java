@@ -1075,7 +1075,7 @@ Podemos excluir un bean de ser *candidato* a inyectarse automáticamente mediant
 
 También podemos limitar los candidatos a ser autoinyectados utilizando un patrón sobre los nombres de los beans y el atributo `default-autowired-candidates` (***este es solo aplicable al elemento raiz `<beans>`***). Por ejemplo, para que todos ellos incluyeran el nombre repository, podríamos usar el patrón `*Repository`.
 
-## Pregunta
+## Preguntas
 
 * Estimado buen dia. Como podria utilizar de forma explicita el bean identificado como englishSaludator Agradezco la colaboracion y la calidad del curso.
 
