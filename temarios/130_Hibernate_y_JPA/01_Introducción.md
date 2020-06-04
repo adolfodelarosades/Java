@@ -15,7 +15,11 @@ REPOSITORIO DEL CURSO: https://github.com/OpenWebinarsNet/Curso_hibernate_ejempl
 
 ## Transcripción
 
+<img src="images/1-01.png">
+
 Curso de Hibernate 5, una tecnología de ORM de las más utilizadas en el mercado sobre todo para Java. Vamos a compartir 12 capítulos en los que nos iremos metiendo de lleno en esta tecnología.
+
+<img src="images/1-02.png">
 
 En el primer capítulo veremos una introducción a lo que es el concepto de ORM y los diferentes productos que podemos encontrar en el mercado.
 
@@ -27,6 +31,8 @@ En el capítulo 4 vamos a saber cómo mapear nuestras entidades en la base de da
 
 En el capítulo 5 conoceremos cómo asociar una entidad desconocida y los diferentes tipos de asociaciones que existen.
 
+<img src="images/1-03.png">
+
 En el capítulo 6 hablaremos de algunos elementos avanzados como la herencia o los campos calculados.
 
 En el siete veremos como Hibernate nos permite mapear colecciones de diferentes tipos y estas colecciones pueden ser de valores simples de valores algo más complejo y también puede ser ordenada de diferentes maneras.
@@ -36,6 +42,8 @@ En el capítulo 8 veremos cómo genera el esquema de nuestra base de datos y as�
 En el capítulo 9 hablaremos un poco sobre qué es eso de la unidad de persistencia, el contexto de persistencia y cómo se pueden almacenar, recuperar y borrarlo.
 
 En el capítulo 10 hablaremos de transacciones y control de concurrencia y veremos algunos patrones y antipatrones.
+
+<img src="images/1-04.png">
 
 En el capítulo 11 veremos cómo podemos realizar consulta en lenguaje nativo de Hibernate y sobretodo utilizaremos el de JPA.
 
