@@ -1,19 +1,23 @@
 # 1. Introducción 44m
-   * Presentación del profesor y del curso 2:49 
-   * Introducción 18:52 
-   * Hibernate, más que un ORM 22:43 
+   * 01 Presentación del profesor y del curso 2:49 
+   * 02 Introducción 18:52 
+   * 03 Hibernate, más que un ORM 22:43 
    * Contenido adicional 2
    
    
-## Presentación del profesor y del curso 2:49 
+# 01 Presentación del profesor y del curso 2:49 
+
+## Resumen Profesor
 
 Conoce al profesor y lo que veremos durante el curso de Hibernate.
 
 REPOSITORIO DEL CURSO: https://github.com/OpenWebinarsNet/Curso_hibernate_ejemplos
 
-## Introducción 18:52 
+# 02 Introducción 18:52 
 
 [Introducción](pdfs/01_Introducción.pdf)
+
+## Resumen Profesor
 
 ### 1.1 Necesidad de almacenamiento de información
 
@@ -127,9 +131,11 @@ Para otros lenguajes de programación, también podemos encontrar algunos ORMs:
    
    * Pony
 
-## Hibernate, más que un ORM 22:43 
+# 03 Hibernate, más que un ORM 22:43 
 
 [Hibernate, más que un ORM](pdfs/02_Hibernate.pdf)
+
+## Resumen Profesor
 
 ### 2.1 Hibernate como ORM
 
@@ -246,7 +252,7 @@ Alguna de las que usaremos durante el curso es la siguiente:
 
 En cada uno de los proyectos de ejemplo indicaremos las librerías que necesitaremos.
 
-## Contenido adicional 2   
+# Contenido adicional 2   
 
 [Introducción](pdfs/01_Introducción.pdf)
 
