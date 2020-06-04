@@ -167,7 +167,49 @@ Para otros lenguajes de programación, también podemos encontrar algunos ORMs:
    
    * Pony
    
-## Transcripción   
+## Transcripción  
+
+<img src="images/2-01.png">
+
+<img src="images/2-02.png">
+
+<img src="images/2-03.png">
+
+<img src="images/2-04.png">
+
+<img src="images/2-05.png">
+
+<img src="images/2-06.png">
+
+<img src="images/2-07.png">
+
+<img src="images/2-08.png">
+
+<img src="images/2-09.png">
+
+<img src="images/2-10.png">
+
+<img src="images/2-11.png">
+
+<img src="images/2-12.png">
+
+<img src="images/2-13.png">
+
+<img src="images/2-14.png">
+
+<img src="images/2-15.png">
+
+<img src="images/2-16.png">
+
+<img src="images/2-17.png">
+
+<img src="images/2-18.png">
+
+<img src="images/2-19.png">
+
+<img src="images/2-20.png">
+
+<img src="images/2-21.png">
 
 # 03 Hibernate, más que un ORM 22:43 
 
@@ -302,47 +344,7 @@ P= Mi consulta va respecto al último punto sobre Hibernate cuando dice "es algo
 
 ## Transcripción
 
-<img src="images/2-01.png">
 
-<img src="images/2-02.png">
-
-<img src="images/2-03.png">
-
-<img src="images/2-04.png">
-
-<img src="images/2-05.png">
-
-<img src="images/2-06.png">
-
-<img src="images/2-07.png">
-
-<img src="images/2-08.png">
-
-<img src="images/2-09.png">
-
-<img src="images/2-10.png">
-
-<img src="images/2-11.png">
-
-<img src="images/2-12.png">
-
-<img src="images/2-13.png">
-
-<img src="images/2-14.png">
-
-<img src="images/2-15.png">
-
-<img src="images/2-16.png">
-
-<img src="images/2-17.png">
-
-<img src="images/2-18.png">
-
-<img src="images/2-19.png">
-
-<img src="images/2-20.png">
-
-<img src="images/2-21.png">
 
 
 # Contenido adicional 2   
