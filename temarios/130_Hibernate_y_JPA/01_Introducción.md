@@ -1,10 +1,10 @@
 # 1. Introducción 44m
+
    * 01 Presentación del profesor y del curso 2:49 
    * 02 Introducción 18:52 
    * 03 Hibernate, más que un ORM 22:43 
    * Contenido adicional 2
-   
-   
+      
 # 01 Presentación del profesor y del curso 2:49 
 
 ## Resumen Profesor
@@ -12,6 +12,34 @@
 Conoce al profesor y lo que veremos durante el curso de Hibernate.
 
 REPOSITORIO DEL CURSO: https://github.com/OpenWebinarsNet/Curso_hibernate_ejemplos
+
+## Transcripción
+
+Curso de Hibernate 5, una tecnología de ORM de las más utilizadas en el mercado sobre todo para Java. Vamos a compartir 12 capítulos en los que nos iremos metiendo de lleno en esta tecnología.
+
+En el primer capítulo veremos una introducción a lo que es el concepto de ORM y los diferentes productos que podemos encontrar en el mercado.
+
+En el segundo iremos conociendo Hibernate y también los diferentes módulos que ofrece, lo compararemos con el estándar JPA.
+
+En el tercer capítulo realizaremos nuestro primer proyecto con Hibernate, nuestro primer proyecto con JPA y también marinaremos estás tecnologías con Spring Boot y Spring MVC.
+
+En el capítulo 4 vamos a saber cómo mapear nuestras entidades en la base de datos haciéndolo a través de anotaciones y a través de fichero de descriptores XML y también conoceremos el ciclo de vida de las entidades.
+
+En el capítulo 5 conoceremos cómo asociar una entidad desconocida y los diferentes tipos de asociaciones que existen.
+
+En el capítulo 6 hablaremos de algunos elementos avanzados como la herencia o los campos calculados.
+
+En el siete veremos como Hibernate nos permite mapear colecciones de diferentes tipos y estas colecciones pueden ser de valores simples de valores algo más complejo y también puede ser ordenada de diferentes maneras.
+
+En el capítulo 8 veremos cómo genera el esquema de nuestra base de datos y así lo deseamos o cómo podemos hacer el proceso inverso para un esquema dado de generación de la entidad.
+
+En el capítulo 9 hablaremos un poco sobre qué es eso de la unidad de persistencia, el contexto de persistencia y cómo se pueden almacenar, recuperar y borrarlo.
+
+En el capítulo 10 hablaremos de transacciones y control de concurrencia y veremos algunos patrones y antipatrones.
+
+En el capítulo 11 veremos cómo podemos realizar consulta en lenguaje nativo de Hibernate y sobretodo utilizaremos el de JPA.
+
+Y por último en el capítulo 12 hablaremos de Hibernate Envers y cómo realizar la auditoría de entidades y cómo realizar la auditoría de entidades y un control de revisiones.
 
 # 02 Introducción 18:52 
 
@@ -130,6 +158,8 @@ Para otros lenguajes de programación, también podemos encontrar algunos ORMs:
    * SQL Alchemy
    
    * Pony
+   
+## Transcripción   
 
 # 03 Hibernate, más que un ORM 22:43 
 
@@ -251,6 +281,19 @@ Alguna de las que usaremos durante el curso es la siguiente:
 ```
 
 En cada uno de los proyectos de ejemplo indicaremos las librerías que necesitaremos.
+
+## Preguntas
+
+P= Mi consulta va respecto al último punto sobre Hibernate cuando dice "es algo difuso usar procedimientos almacenados". Qué pasaría si tengo un o varios procedimientos almacenados o funciones para "reportes especiales" a nivel de base de datos, en el cual se hacen varios "joins" con tablas o crea una tabla dinámica fruto de estas consultas. ¿Sería mejor invocar desde Hibernate o JPA al procedimiento almacenado o función? ¿Y si este cojunto de datos que retorna del procedimiento almacenado, corresponde mapearlo en un nuevo objeto? ¿Cómo Hibernate soluciona este escenario?.
+
+R= Con ello me refería a que, a diferencia de otros elementos del estándar SQL, los procedimientos almacenados están fuertemente acoplados al sistema gestor de base de datos concreto que se utilice. No es lo mismo programar en PLSQL (Oracle) o en T-SQL (SQL Server).
+Como premisa, cabe indicar que una función es un bloque de código que se puede usar en una sentencia SQL, y que recibe cero o más argumentos, devolviendo una salida. Frente a él, un procedimiento almacenado es un bloque de código que no se puede usar en una sentencia SQL y que recibe cero o más parámetros que pueden ser de entrada, de salida o de entrada-salida.
+JPA tiene la interfaz `StoredProcedureQuery` que nos permite invocar procedimientos almacenados. Se pueden utilizar parámetros de salida de tipo `REF_CURSOR`, permitiendo así obtener un listado de resultados como salida de dicho procedimiento. Si al crear el procedimiento, se indica el tipo sobre el que se realiza la consulta (por ejemplo, con el método `entityManager.createdStoredProcedure`) (ver https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createStoredProcedureQuery-java.lang.String-java.lang.Class...-), el conjunto de resultados puede ser un `List<Tipo>` siendo `Tipo` el tipo de dato de la entidad que queremos utilizar. En otro caso, lo habitual es que sea un `List<Object[]>`.
+  
+P= Mi consulta va respecto al último punto sobre Hibernate cuando dice "es algo difuso usar procedimientos almacenados". Qué pasaría si tengo un o varios procedimientos almacenados o funciones para "reportes especiales" a nivel de base de datos, en el cual se hacen varios "joins" con tablas o crea una tabla dinámica fruto de estas consultas. ¿Sería mejor invocar desde Hibernate o JPA al procedimiento almacenado o función? ¿Y si este cojunto de datos que retorna del procedimiento almacenado, corresponde mapearlo en un nuevo objeto? ¿Cómo Hibernate soluciona este escenario?.
+
+## Transcripción
+
 
 # Contenido adicional 2   
 
