@@ -11,10 +11,6 @@
 
 [PDF 1-1_Presentacion_del_curso.pdf](pdfs/1-1_Presentacion_del_curso.pdf)
 
-## Resumen Profesor
-
-No existe.
-
 ## Transcripción
 
 <img src="images/1-01.png">
