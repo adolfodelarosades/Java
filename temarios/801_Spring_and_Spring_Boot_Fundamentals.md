@@ -29,7 +29,6 @@ En esta ruta de aprendizaje, diseñada para desarrolladores de aplicaciones web 
 * Debe sentirse cómodo con Java, ya sea a través de capacitación o experiencia equivalente
 * Algún conocimiento de las técnicas de desarrollo web utilizando un marco Modelo-Vista-Controlador sería útil, pero no es obligatorio.
 * Sería útil estar familiarizado con los mecanismos de persistencia para la persistencia relacional de objetos (ORM), especialmente con herramientas como Hibernate.
-* Materiales o descargas necesarios por adelantado: ninguno
 
 ## Contenido
 
