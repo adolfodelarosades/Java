@@ -252,20 +252,19 @@ Aquí podemos ver cómo se hace ese mapeo objeto relacional, es decir las clases
 
 <img src="images/2-20.png">
 
-concreto no es que lo explicaremos en el siguiente capítulo en profundidad van a ayudarnos a salvar ese desfase y nos van a facilitar muchísimo las tareas sobre todo en la tarea de transformación de una fila de una base de datos en una instancia de un objeto concreto así como bueno con la operaciones básicas de consulta almacenamiento actualización y borrado de información para Java tenemos varias tecnologías distintas nosotros vamos a aprender en este curso la versión 5 de Internet sin embargo tenemos otras como son EclipseLink MyBatis y una larga serie de podemos encontrar en el mercado nos decantamos por internet porque es el más utilizado hilo RM no solamente existen para también existen para la gran mayoría de lenguajes de programación para PHP podemos encontrar algunos incluso algunos de desarrollo incorporan su propio para puntonet podemos encontrar aparte de ADO.NETa la tecnología o para otros lenguajes como Python Django incorpora su propio RM o tenemos otros conocidos como el que me pone o alguno más en el próximo capítulo nos vamos a entrar en el mundo de hibernate vamos a conocerlo o a conocer los diferentes módulos que ofrece
+Los ORM que los explicaremos en el siguiente capítulo en profundidad van a ayudarnos a salvar ese desfase y nos van a facilitar muchísimo las tareas sobre todo la tarea de transformación de una fila de una base de datos en una instancia de un objeto concreto, así como las operaciones básicas de consulta, almacenamiento, actualización y borrado de información. 
 
-
-
-
-
-
-
-
-
-
-
+Para Java tenemos varias tecnologías distintas, nosotros vamos a aprender en este curso la versión 5 de Hibernate sin embargo, tenemos otras como son EclipseLink, MyBatis y una larga serie de ORMs que podemos encontrar en el mercado. Nos decantamos por Hibernate porque es el más utilizado de todos.
 
 <img src="images/2-21.png">
+
+Y los ORMs no solamente existen para Java, también existen para la gran mayoría de lenguajes de programación, para PHP podemos encontrar algunos como Propel, Doctrine2 o incluso algunos framework de desarrollo incorporan su propio ORM.
+
+Para .Net, C# podemos encontrar aparte de ADO.NET que es propio de Microsoft podemos encontrar que existe una implementación de Hibernate. 
+
+Para otros lenguajes como Python, Django incorpora su propio ORM o tenemos otros conocidos como SQL Alchemy, Pony o alguno más.
+
+En el próximo capítulo nos vamos a adentrar en el mundo de Hibernate vamos a conocerlo o a conocer los diferentes módulos que ofrece.
 
 # 03 Hibernate, más que un ORM 22:43 
 
@@ -395,8 +394,6 @@ P= Mi consulta va respecto al último punto sobre Hibernate cuando dice "es algo
 R= Con ello me refería a que, a diferencia de otros elementos del estándar SQL, los procedimientos almacenados están fuertemente acoplados al sistema gestor de base de datos concreto que se utilice. No es lo mismo programar en PLSQL (Oracle) o en T-SQL (SQL Server).
 Como premisa, cabe indicar que una función es un bloque de código que se puede usar en una sentencia SQL, y que recibe cero o más argumentos, devolviendo una salida. Frente a él, un procedimiento almacenado es un bloque de código que no se puede usar en una sentencia SQL y que recibe cero o más parámetros que pueden ser de entrada, de salida o de entrada-salida.
 JPA tiene la interfaz `StoredProcedureQuery` que nos permite invocar procedimientos almacenados. Se pueden utilizar parámetros de salida de tipo `REF_CURSOR`, permitiendo así obtener un listado de resultados como salida de dicho procedimiento. Si al crear el procedimiento, se indica el tipo sobre el que se realiza la consulta (por ejemplo, con el método `entityManager.createdStoredProcedure`) (ver https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createStoredProcedureQuery-java.lang.String-java.lang.Class...-), el conjunto de resultados puede ser un `List<Tipo>` siendo `Tipo` el tipo de dato de la entidad que queremos utilizar. En otro caso, lo habitual es que sea un `List<Object[]>`.
-  
-P= Mi consulta va respecto al último punto sobre Hibernate cuando dice "es algo difuso usar procedimientos almacenados". Qué pasaría si tengo un o varios procedimientos almacenados o funciones para "reportes especiales" a nivel de base de datos, en el cual se hacen varios "joins" con tablas o crea una tabla dinámica fruto de estas consultas. ¿Sería mejor invocar desde Hibernate o JPA al procedimiento almacenado o función? ¿Y si este cojunto de datos que retorna del procedimiento almacenado, corresponde mapearlo en un nuevo objeto? ¿Cómo Hibernate soluciona este escenario?.
 
 ## Transcripción
 
