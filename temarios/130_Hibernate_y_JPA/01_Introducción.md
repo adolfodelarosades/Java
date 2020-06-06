@@ -510,8 +510,6 @@ Invitamos a que el manejo de estas librería la hagamos a través de un sistema 
 
 En particular podemos acceder a a la última dependencia si entramos en la página de [Hibernate](https://hibernate.org/) en el modulo de ORM,  si accedemos al apartado de descargas de download, en la parte de abajo encontraremos siempre las últimas dependencias Maven que están publicadas, otra manera de buscarla también es mediante la navegación dentro del [Repositorio de Maven](https://mvnrepository.com/) y si utilizamos su buscador podríamos encontrar las diferentes librerías que están publicadas así como código XML de la dependencia Maven o incluso de otros sistemas que tendríamos que incorporar a nuestro proyecto.
 
-<img src="images/3-25.png">
-
 # Contenido adicional 2   
 
 [Introducción](pdfs/01_Introducción.pdf)
