@@ -781,8 +781,111 @@ Vamos a crear una nueva clase Java normal en el paquete principal llamada `User`
 
 <img src="images/4-51.png">
 
+Como hemos dicho anotamos con `@Entity` la clase `User`. Creamos una primera propiedad llamada `id` y la anotamos con `@Id` para indicar que es la clave primaria de nuestra tabla, ya nos va sugiriendo el que nosotros vayamos añadiendo las anotaciones, aunque estamos trabajando con Hibernate nativo nos vamos ir acostubrando a ir trabajando con las anotaciones de JPA, por que es la tecnología que vamos a usar en los próximos proyectos.
+
+Vamos a añadir otros dos atributos `userName` y `userMesagge` si bien ya hablaremos más adelante como elementos mínimos de una entidad deberíamos tener un constructor sin parámetros y los getter y setter de las propiedades que vamos a manejar, los podemos autogenerar con Eclipse. Pues ya tenemos nuestra primera entidad:
+
+```java
+package com.openwebinars.hibernate.primerproyectohbn;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+
+   @Id
+   private int id;
+	
+   private String userName;
+	
+   private String userMessage;
+ 	
+   public User() {
+		
+   }
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
+   }
+
+   public String getUserName() {
+      return userName;
+   }
+
+   public void setUserName(String userName) {
+      this.userName = userName;
+   }
+
+   public String getUserMessage() {
+      return userMessage;
+   }
+
+   public void setUserMessage(String userMessage) {
+      this.userMessage = userMessage;
+   }
+	
+}
+```
+
+Aaunque para que realmente sea una entidad, tendremos que añadir la entidad dentro de nuestro fichero de configuracion de Hibernate, eso lo podemos hacer bien desde el código fuente, bien desde el asistente, en el apartado de `Mapping`.
+
+<img src="images/4-52.png">
+
+Podemos añadir la clase
+
+<img src="images/4-53.png">
+
+Incluso podemos buscar la clase.
+
+<img src="images/4-54.png">
+
+<img src="images/4-55.png">
+
+<img src="images/4-56.png">
+
+Si vemos en el código fuente, se ha añadido una nueva anotación mapping con la ruta completa con el nombre cualificado de nuestra clase. 
+
+<img src="images/4-57.png">
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">12345678</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate</property>
+  <property name="hibernate.connection.username">openwebinars</property>
+  <property name="hibernate.default_schema">hibernate</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
+  <mapping class="com.openwebinars.hibernate.primerproyectohbn.User"/>
+ </session-factory>
+</hibernate-configuration>
+```
 
 <img src="images/4-13.png">
+
+Ya casi hemos terminado, tan solo nos quedaría crear la clase de aplicación. Hibernet va a descansar, si bien ya lo veremos con más detenimiento más adelante, va a descansar sobre un objeto que se llama 
+`Session` que no es más que una conexión a la base de datos, que mantiene las instancias de las entidades que estamos manejando en ese momento y esa sesión la vamos a obtener a partir de una factoría de sesiones, las sesiones de un objeto algo más liviano, la factoría es un objeto bastante pesado, su creación se lleva bastante tiempo y recursos, con lo cual solamente se suele crear una sola `SessionFactory` en toda la aplicación y la cantidad de sesiones que veamos necesaria aunque ya hablaremos del tema en los Patrones y Antipatrones del capítulo 10.
+
+Vamos a crear la `SessionFactory` que carge la configuración que hemos definido antes en el fichero XML, abriremos una sesión, crearemos las instancias, iniciaremos una transacción para que la persistencia de nuestro objeto queden marcadas dentro de esa transacción, haremos la persistencia real, commitearemos esa transacción es decir marcaremos el fin para que hagan de manera efectiva los cambios en la base de datos y cerraremos los diferentes objetos. Todo esto lo vamos hacer dentro de nuestra clase de aplicación `App.java`.
+
+
+
+
+haremospodemos cargar la configuración de SessionFactory con el fichero XML de dos maneras diferentes un código Legazpi heredado de versiones anteriores sería algo más fácil y sería algo así para crear un factory solamente tendremos que usar la clase configuration para que configurara el fichero XML como el fichero tiene el nombre que por defecto espera hibernate que es hibernate.cfg.xml y además se encuentra dentro de la carpeta donde encontrar lo que es la carpeta ningún parámetro más y a partir de aquí la dependencia de importación de qué podríamos crear directamente nuestro sesión Factory que usaremos sin embargo como decimos este código es Legazpi es decir vamos a utilizar la forma que hibernate propone en su documentación para para la versión 5 es algo más compleja pero ten en cuenta que esto fue se hace solamente en un sitio del proyecto y seguimos los parámetros por defecto posiblemente no necesitas nada más que creamos un registro estándar de servicio a través de un builder nada con respecto al fichero de configuración y podemos construir este objeto directamente y ahora esto es que lo utilizamos para fabricar propiamente dicho el Factory que lo haríamos a partir de la línea de código en la que a través de los gestos metadata subs vamos a construir datos y necesario ella podemos auto completa ya tendríamos nuestro SessionFactory preparado ahora tendríamos que abrir la sesión lo hacemos de una manera sencilla mediante el comando open session no inicia una nueva sesión la sesión se cerrará mediante el comando close vamos a dejar ya puesto y todo el código que desarrolla Mayra en medio y después de cerrar la sesión también cerraremos la factoría porque nuestro programa ya terminada es aquí en medio donde vamos a generar el resto de nuestro cuerpo va a ser muy sencillo crear una entidad normal que crear un objeto Java no definido le asignamos nivel por ejemplo número 1 me asignamos un nombre como a llamar Pepe vamos a ponerle un mensaje de bienvenidasi queremos podríamos crear otro objeto vale pero vamos a llamar rápido le asignamos el y B2 un hombre le vamos a llamar Juan mensaje de bienvenida comenzar una nueva transacción vamos a marcar también el cierre de la misma sobre transacciones ya hablaremos largo y tendido a lo largo del curso pero podíamos entender una transacción vamos a tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
+
+
+
 
 # 05 Primer proyecto con Hibernate con JPA 13:58 
 
