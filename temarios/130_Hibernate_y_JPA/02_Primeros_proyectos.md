@@ -523,6 +523,31 @@ R= Puede que hubiera diferencias en cuanto a las versiones.
 
 ## Transcripción
 
+<img src="images/4-01.png">
+
+<img src="images/4-02.png">
+
+<img src="images/4-03.png">
+
+<img src="images/4-04.png">
+
+<img src="images/4-05.png">
+
+<img src="images/4-06.png">
+
+<img src="images/4-07.png">
+
+<img src="images/4-08.png">
+
+<img src="images/4-09.png">
+
+<img src="images/4-10.png">
+
+<img src="images/4-11.png">
+
+<img src="images/4-12.png">
+
+<img src="images/4-13.png">
 
 # 05 Primer proyecto con Hibernate con JPA 13:58 
 
