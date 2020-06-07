@@ -683,6 +683,10 @@ Se ha creado correctamente.
 
 Ahora creamos la base de datos.
 
+```sql
+CREATE DATABASE hibernate;
+```
+
 <img src="images/4-38.png">
 
 Todo va bien.
@@ -699,7 +703,7 @@ Testeamos la conección.
 
 Y ya tenemos listo nuestro esquema con el usuario especifico.
 
-Una vez que tenemos creado ese esquema que llamaremos `hibernate` y el usuario que hemos llamado `openwebinars` y con contraseña `12345678` ya podriamos hacer el paso 3.
+Una vez que tenemos creado ese esquema ya podemos hacer el paso 3.
 
 <img src="images/4-11.png">
 
