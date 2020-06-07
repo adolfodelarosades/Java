@@ -559,21 +559,12 @@ Vamos a ver qué pasos vamos a seguir para crear un nuevo proyecto en el que uti
 
 <img src="images/4-07.png">
 
-Los pasos lo tenemos definido aquí que van a hacer estos seis lo primero hacer la creación y configuración inicial del proyecto después que cenaremos las dependencias crearemos el fichero de configuracion de hibernate crearemos las clases de nuestro modelo la clase por ejemplo de aplicación que va a manejar un poco este modelo y ejecutaremos el precio en primer lugar vamos a crear el proyecto vamos a crear un proyecto de tipo maiden vamos a coger el arquetipo definiendo los iniciales íbamos a 
-
-
-
-
-
-<img src="images/4-04.png">
-
-<img src="images/4-05.png">
-
-<img src="images/4-06.png">
-
-<img src="images/4-07.png">
+Los pasos lo tenemos definido aquí que van a hacer estos seis, lo primero hacer la creación y configuración inicial del proyecto, después gestionaremos las dependencias, crearemos el fichero de configuracion de Hibernate `hibernate.cfg.xml`, crearemos las clases de nuestro modelo, la clase de ejemplo de aplicación que va a manejar un poco este modelo y ejecutaremos el proyecto.
 
 <img src="images/4-08.png">
+
+En primer lugar vamos a crear el proyecto, vamos a crear un proyecto de tipo Maven, vamos a escoger el arquetipo *quickstart* definiendo los datos iniciales y vamos a cambiar la versión de Java que trae el prototipo que por defecto es la 1.5 a la 1.8. por si queremos incorporar algu tipo de característica especifica de Java 8 en sus proyectos como podría ser el API Stream, las expresiones Lambda o algún otro tipo de elementos que quede incorporado dentro de Java 8.
+
 
 <img src="images/4-09.png">
 
