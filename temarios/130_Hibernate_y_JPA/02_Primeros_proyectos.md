@@ -1,13 +1,15 @@
 # 2. Primeros proyectos 81m
-   * Primer proyecto 34:30 
-   * Primer proyecto con Hibernate con JPA 13:58 
-   * Primer proyecto con Spring boot, Spring MVC e Hibernate (parte I) 16:25 
-   * Primer proyecto con Spring boot, Spring MVC e Hibernate (parte II) 16:34 
+   * 04 Primer proyecto 34:30 
+   * 05 Primer proyecto con Hibernate con JPA 13:58 
+   * 06 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte I) 16:25 
+   * 07 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte II) 16:34 
    * Contenido adicional 3
    
-## Primer proyecto 34:30 
+# 04 Primer proyecto 34:30 
 
 [Primer proyecto](pdfs/03_Primer_proyecto.pdf)
+
+## Resumen Profesor
 
 ### 3.1 Prerrequisitos antes de comenzar
 
@@ -223,9 +225,310 @@ public class App {
 
 Si comprobamos a través de Mysql Workbench, en nuestro esquema `hibernate` tendremos una nueva tabla, llamada `user` y que tendrá dos filas insertadas.
 
-## Primer proyecto con Hibernate con JPA 13:58 
+## Preguntas
+
+P= Buen día, podrían ayudarme con la configuración del proxy en el IDE STS, puesto que al crear un nuevo proyecto MAVEN no responden las dependencias.
+
+Aclaro que ya realice los siguientes:
+
+`Windows -> Preferences >> General -> Network Connections >> Edit >> "Edit Proxy Entry"` en ella ingrese los datos del proxi.
+Cree el archivo Settings.xml dentro de la carpeta .m2 con su respectivo contenido configurado para establecer proxy para Maven
+
+`Windows -> Preferences >> Maven -> User Settings >> Agrege` la ruta del archivo Settings.xml en la caja de texto `"User Settings" >> Update Settings >> Apply >> Ok`
+
+Mensaje visualizado en el archivo pom.xml: Cannot read lifecycle mapping metadata for artifact org.apache.maven.plugins:mav
+
+Que más tengo que realizar o cuál es la manera correcta de configurar el IDE para crear proyectos Maven cuando estoy conectado a una red con Proxy.
+
+R= Se me ocurren, a priori, dos causas posibles:
+
+1) Revisar bien los datos de conexión del fichero settings.xml. Dentro se deberían indicar los elementos necesarios para la conexión http y https. A continuación, dejo un ejemplo:
+
+```html
+<proxies>
+ <!-- Proxy para HTTP -->
+ <proxy>
+  <id>optional</id>
+  <active>true</active>
+  <protocol>http</protocol>
+  <username></username>  <!-- Solo si es necesario -->
+  <password></password>  <!-- Solo si es necesario -->
+  <host>domain.com</host>
+  <port>3128</port>
+  <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+ </proxy>
+ <!-- Proxy para HTTPS -->
+ <proxy>
+  <id>optional</id>
+  <active>true</active>
+  <protocol>https</protocol>
+  <username></username>   <!-- Solo si es necesario -->
+  <password></password>  <!-- Solo si es necesario -->
+  <host>domain.com</host>
+  <port>3128</port>
+  <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+ </proxy>
+</proxies>
+```
+2) En ocasiones, se puede llegar a corromper alguna librería o fichero descargado con maven. En tal caso, una solución práctica suele ser eliminar el contenido de la carpeta `.m2/repository/*;` posteriormente se pueden descargar las librerías a través de `Run > Maven > Maven install` (entre otras opciones).
+
+P= java.lang.ClassNotFoundException: Could not load requested class : com.mysql.jdbc.Driver
+Buenas noches por que me dice ese error que debo de hacer
+
+R= Ese error indica que la JVM no es capaz de localizar la clase que indica en el classpath. Esa clase es la que utiliza el framework para conectarse, de forma efectiva, a la base de datos MySQL.
+
+Te pediría que revises tu fichero pon.xml, y compruebes si la dependencia correspondiente está añadida.
+
+P= Porque la tabla se autogenera en la base de datos con el mismo nombre de la clase User? Donde podria leer mas acerca de esto?
+
+porque si le cambio el nombre de la carpeta `<default package>` a resources para el archivo hibernate.cfg.xml surgen problemas?
+
+R= El hecho de que la tabla que se genera tenga el mismo nombre que la clase es una convención ampliamente aceptada. Este comportamiento por defecto se puede configurar con la anotación @Table. Si usas sobre una entidad esta anotación, indicando su argumento name, puedes modificar el nombre de la tabla que se genera. Por ejemplo:
+
+```java
+@Entity
+@Table(name="persona")
+public class User {
+      //...
+}
+```  
+  
+P= He montado el primer ejemplo, con Mysql 8.0 y tras resolver varios errores, tales como el driver, la url,.... me he quedado estancado en el error:
+java.sql.SQLException: Unknown system variable 'query_cache_size'
+
+Segun he podido comprobar en internet, esta variable de sistema esta eliminada en el Mysql 8.0
+
+Ciertamente, veo en el Workbench en Server Variables que have_query_cache = NO
+
+¿Qué puedo hacer para seguir avanzando en el curso?
+
+Un saludo y gracias de antemano
+
+R= Según leo en la web de bugs de Mysql, para poder conectar a esa versión, tienes que tener una versión muy concreta del driver JDBC para Mysql.
+
+[Ver](https://bugs.mysql.com/bug.php?id=87846)
+
+¿Podrías probar con la última versión del driver? Según la web, es la 8.0.11
+
+[Ver](https://dev.mysql.com/downloads/connector/j/)
+
+Espero que te sirva de ayuda.
+
+P= Tengo un problema al ejecutar la clase App.
+
+MappingException: Unknown entity: com.alfonso.domenech.primerproyecto.User
+
+Esto error se debe, por lo que he buscado, a que no lo reconoce como clase. He visto que la solución es no haber importado la librería de persistence, pero he revisado en la carpeta de dependencias y su que se ha cargado correctamente.
+
+P= Creo que es por alguna version diferente, pero la configuración de hibernate tiende a añadirme esto:
+
+`< session-factory name="" >`
+
+dando errores de jndi. funciona correctamente quitando el name, tal como está en los repositorios GIT.
+
+R= Gracias por el aporte Miguel Ángel :)
+
+P= Entro en hibernate.org/orm y siguiendo los enlaces me indica la siguiente configuración de maven
+
+```html
+<dependency>
+<groupId>org.hibernate</groupId>
+<artifactId>hibernate-agroal</artifactId>
+<version>5.3.7.Final</version>
+<type>pom</type>
+</dependency>
+```
+
+R= La última versión publicada es la 5.3.7. La dependencia maven debería ser entonces:
+
+```html
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.3.7.Final</version>
+</dependency>
+```
+
+R= Eso es porque "hibernate-agroal" es el primero alfabéticamente de la lista de artefactos de Hibernate que hay en la web de Bintray, que es a donde te lleva el enlace en la web de Hibernate, y al ser el primero aparece ese por defecto. Pero si te fijas, encima del botón de copiar hay una especie de flechita o triángulo verde que apunta hacia abajo, que abre un desplegable para elegir el artefacto, y ahí puedes escoger hibernate-core.
+
+P= ¿Que relación hay o se tiene que dar, entre la version Hibernate en la creación del fichero config(cuadro de dialogo) y la versión que específicamos en las dependencias Maven que determinan las librerías a usar? Esa versión 5.1(5.3) que luego no aparece en el fichero hibernate.cfg.xml
+Realmente no entiendo a que se refiere
+
+R= El asistente pertenece a las llamadas Hibernate Tools de JBoss, y sirve para facilitarnos el trabajo de creación del fichero de configuración. La documentación sobre este asistente no deja muy claro para qué se debe seleccionar una versión concreta, si bien puedo imaginar que condicionará los datos que se ofrecen en los desplegables, entre otras posibles tareas.
+
+Desde que publicamos el curso a día de hoy hemos pasado a la versión 5.3 de Hibernate, cuyas mejoras destacan en:
+
+Posibilidad de usar JPA 2.2
+Soporte para Java 9
+Arreglo de algunos bugs
+En teoría, prácticamente todo lo que hagas para la versión 5.2 debe funcionarte bien con la versión 5.3, por lo que puedes seleccionar esta última.
+
+Con respecto a la correspondencia con Maven, también te recomiendo que, salvo que pierdas compatibilidad con algo de código desarrollado para una versión anterior, dejes incluida la última versión estable liberada, ya que suelen incluir arreglos a pequeños fallos de versiones anteriores.
+
+P= En la clase de aplicación ¿La creación de los objetos de entidad no sería mejor hacerla antes de abrir sesion?
+
+R= Se trata de un pequeño proyecto de ejemplo, y no hay verdaderos problemas de eficiencia en hacerlo antes o después.
+
+En otro tipo de proyectos sí que tenemos que plantearnos que estrategia vamos a tener con respecto a la sesión, si bien esta depende del tipo de proyecto concreto.
+
+P= Tengo un windows 7 de 64, y no he podido descargarme la última versión de mySql Community, por falta de un archivo en mi sistema. A pesar de buscar las actualizaciones de mi sistema, no ha sido capaz de resolver tal problemática.
+
+¿¿Que versión podría ser compatible??
+
+R= Durante el curso se utiliza la 5.7. Creo que podrás descargarla para Windows en este enlace:
+https://dev.mysql.com/downloads/windows/installer/5.7.html
+
+P= Estoy usando la version de MYsql 5.5.62
+y solo me funciono especificado el hibernate.dialect como org.hibernate.dialect.MySQL5InnoDBDialect.
+
+R= Si no me equivoco, es el dialecto que se utiliza en el ejemplo del vídeo. En el mismo lo que se explica lo necesario para, seleccionando InnoDB, poder seleccionar la clase de driver correcta.
+
+P= Disculpa, el error que me da es el siguiente:
+
+```sh
+feb 07, 2019 2:17:00 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.4.1.Final}
+feb 07, 2019 2:17:00 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+feb 07, 2019 2:17:01 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+feb 07, 2019 2:17:01 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost/hibernate]
+feb 07, 2019 2:17:01 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=openwebinars, password=****}
+```
+R= Vamos a ver si somos capaces.
+
+Para crear el usuario y la base de datos, quizás te pueda explicar mejor en un comentario como se hace a través de la línea de comandos. Para ello:
+
+1. Abre un nuevo terminal (linux/Mac) o ventana de comandos (en Windows: Inicio > Ejecutar > cmd)
+2. Doy por supuesto que ya has instalado mysql. Para conectarte con el cliente, el comando es: 
+ `$ mysql -u root -p`
+3. Te debe solicitar entoces la contraseña de administrador. La escribes, y te dará acceso.
+4. Para crear un usuario y darle privilegios, las sentencias a ejecutar son:
+
+```sql
+CREATE USER 'nombre_usuario'@'localhost' IDENTIFIED BY 'tu_contrasena';
+GRANT ALL PRIVILEGES ON * . * TO 'nombre_usuario'@'localhost';
+```
+
+5. Te recomiendo que salgas de la base de datos con exit, y te logues ahora con el nuevo usuario.
+6. Una vez que lo has hecho, puedes crear la base de datos con el siguiente comando:
+
+```sql
+CREATE DATABASE databasename;
+```
+
+Ya debes de tener el usuario y la base de datos creada.
+
+Por el primer error que me dices, te pediría que revisaras la versión de Mysql que tienes instalada. Este curso está pensado para Mysql 5.7, y a día de hoy la última versión es la 8; entre ellas, hay algunas pequeñas diferencias que pueden producir error. Te pediría que revises la versión del servidor y del conector, para ver si están en consonancia. Si el error persiste, puedes volver a avisarme por aquí.
+
+R= Modifiqué la versión en el fichero de configuración a la 8, y se me solucionó el problema.
+
+P= Tengo el mismo error, y al acceder como root a MySQL, (¿la contraseña por defecto es 'sin contraseña'?), me devuelve el siguiente error:
+
+```sh
+C:\Program Files\MySQL\MySQL Workbench 8.0 CE>mysql -u root -p
+Enter password:
+ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+
+C:\Program Files\MySQL\MySQL Workbench 8.0 CE>
+```
+
+¿Cómo podría solventar dicho error?
+
+R= Puede ser debido a varias causas, y la primera que se me ocurre es que el servidor de Mysql no esté ejecutandose. Puedes forzar el inicio siguiendo los siguientes pasos:
+
+1. Ejecuta la consola (en windows cmd) como administrador (`Inicio > escribes cmd > botón derecho > ejecutar como administrador`).
+2. Cambia de directorio al directorio `/bin` del servidor mysql
+3. Suponiendo que la ruta es `c:\mysql\bin>`, ejecuta el comando `mysqld --install`
+4. Después, ejecuta el comando `net start mysql`
+5. Si vuelves a conectarte con `mysql -u root -p`, ya deberías tener conexión.
+
+P= Hola, soy nuevo en Spring, y al estar empezando me está siendo muy complicado, he seguido todos los pasos desde 0, y me dice el siguiente error:`-Class "com.pruebaHibernate.User" is managed, but is not listed in the persistence.xml file User.java /prueba1/src/main/java/com/pruebaHibernate line 8 JPA Problem` He vuelto a empezar 7 veces el proyecto desde nuevo, y hasta he copiado y pegado el codigo de gitHub para ver si era un error mio de picar mal el código. Pero es que no entiendo si lo estoy configurando para conectarlo desde hibernate.cfg.xml, ¿Por qué le molesta tanto el persistence.xml, si eso no lo hemos tocado y a ti te va bien, de hecho ni siquiera aparece ese archivo en tu repositorio? Me estoy volviendo loco, Spring es un poco duro al principio jajaja
+
+R=Este curso se desarrolla sin el uso de Spring. Solamente hay un ejemplo del uso de Spring e Hibernate. Sí que es verdad que el IDE que se utiliza es Spring Tool Suite, pero no por nada, sino porque en el fondo es Eclipse.
+Tengo la impresión de que tienes una mezcla entre un proyecto JPA y un proyecto Hibernate nativo. ¿Te ha funcionado el código que te has descargado desde el repositorio? Si no, te animo a que puedas postear todo el código, para que lo pueda revisar.
+
+P= Al lanzar el proyecto me da un error: Que no encuentra mi Unknown entity: ..User, Pero si voy al fichero de configuracion de hibernate donde está mapeada la clase, pulsando el botón control me la reconoce y puedo acceder a ella.
+
+R= ¿Podrías darme más información sobre el error? Por ejemplo, puedes copiar y pegar toda la traza de la pila, para poder ayudarte mejor.
+
+R= La traza completa es la siguiente: Y al debuguear ocurre el error al persistir el objeto user. 
+
+```sh
+( sesion.save(user);)
+
+
+Exception in thread "main" org.hibernate.MappingException: Unknown entity: com.felix.hibernate.primerproyectohiber.User
+at org.hibernate.internal.SessionFactoryImpl.getEntityPersister(SessionFactoryImpl.java:1096)
+at org.hibernate.internal.SessionImpl.getEntityPersister(SessionImpl.java:1443)
+at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:116)
+at org.hibernate.event.internal.DefaultSaveOrUpdateEventListener.saveWithGeneratedOrRequestedId(DefaultSaveOrUpdateEventListener.java:209)
+at org.hibernate.event.internal.DefaultSaveEventListener.saveWithGeneratedOrRequestedId(DefaultSaveEventListener.java:55)
+at org.hibernate.event.internal.DefaultSaveOrUpdateEventListener.entityIsTransient(DefaultSaveOrUpdateEventListener.java:194)
+at org.hibernate.event.internal.DefaultSaveEventListener.performSaveOrUpdate(DefaultSaveEventListener.java:49)
+at org.hibernate.event.internal.DefaultSaveOrUpdateEventListener.onSaveOrUpdate(DefaultSaveOrUpdateEventListener.java:90)
+at org.hibernate.internal.SessionImpl.fireSave(SessionImpl.java:715)
+at org.hibernate.internal.SessionImpl.save(SessionImpl.java:707)
+at org.hibernate.internal.SessionImpl.save(SessionImpl.java:702)
+at com.felix.hibernate.primerproyectohiber.App.main(App.java:35)
+```
+
+R= Pero, ¿estás ejecutando el código tal cual? ¿O has hecho alguna modificación?
+
+R= Yo acabo de ejecutarlo tal cual, y no produce ese error; genera el DDL de la base de datos y realiza las inserciones correctamente :S
+
+R= Tras descargar tu proyecto he visto diferencias en el pom. Mi pom contenía estas líneas. Las he quitado y me ha funcionado tras hacer un maven update. GRacias.
+
+```html
+<plugin>
+<artifactId>maven-resources-plugin</artifactId>
+<version>3.0.2</version>
+</plugin>
+<plugin>
+<artifactId>maven-compiler-plugin</artifactId>
+<version>3.8.0</version>
+</plugin>
+<plugin>
+<artifactId>maven-surefire-plugin</artifactId>
+<version>2.22.1</version>
+</plugin>
+<plugin>
+<artifactId>maven-jar-plugin</artifactId>
+<version>3.0.2</version>
+</plugin>
+<plugin>
+<artifactId>maven-install-plugin</artifactId>
+<version>2.5.2</version>
+</plugin>
+<plugin>
+<artifactId>maven-deploy-plugin</artifactId>
+<version>2.8.2</version>
+</plugin>
+<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+<plugin>
+<artifactId>maven-site-plugin</artifactId>
+<version>3.7.1</version>
+</plugin>
+<plugin>
+<artifactId>maven-project-info-reports-plugin</artifactId>
+<version>3.0.0</version>
+</plugin>
+</plugins>
+```
+
+R= Puede que hubiera diferencias en cuanto a las versiones.
+
+## Transcripción
+
+
+# 05 Primer proyecto con Hibernate con JPA 13:58 
 
 [Primer proyecto con Hibernate con JPA](pdfs/04_Primer_proyecto_JPA.pdf)
+
+## Resumen Profesor
 
 ### 4.1 Comenzamos de nuevo
 
@@ -412,9 +715,15 @@ public class App {
 
 A diferencia del proyecto anterior, en este caso tenemos que inicializar dos objetos `EntityManagerFactory` y `EntityManager`. El segundo será nuestra interfaz directa con la base de datos, teniendo los métodos necesarios para consultar, actualizar, insertar o borrar datos. El primero es la *factoría* que nos permite construir al segundo, cargando los datos de nuestra unidad de persistencia.
 
-## Primer proyecto con Spring boot, Spring MVC e Hibernate (parte I) 16:25 
+## Preguntas
+
+## Transcripción
+
+# 06 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte I) 16:25 
 
 [Primer proyecto con Spring boot, Spring MVC e Hibernate](pdfs/05_Primer_proyecto_Spring_JPA_e_Hibernate.pdf)
+
+## Resumen Profesor
 
 ### 5.1 Y volvemos a comenzar
 
@@ -789,10 +1098,19 @@ public class UserController {
 
 }
 ```
+## Preguntas 
 
-## Primer proyecto con Spring boot, Spring MVC e Hibernate (parte II) 16:34 
+## Transcripción
+
+# 07 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte II) 16:34 
+
+## Resumen Profesor
 
 Continuación de la creación de un primer proyecto con Spring boot, Spring MVC e Hibernate
+
+## Preguntas
+
+## Transcripción
 
 ## Contenido adicional 3   
 
