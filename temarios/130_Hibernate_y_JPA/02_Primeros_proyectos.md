@@ -705,6 +705,60 @@ Y ya tenemos listo nuestro esquema con el usuario especifico.
 
 Una vez que tenemos creado ese esquema ya podemos hacer el paso 3.
 
+<img src="images/4-10.png">
+
+Para poder almacenar en un lugar adecuado ese fichero de configuración de Hibernate vamos a crear una nueva carpeta de código fuente con lo cual estará incluida dentro del classpath.
+
+<img src="images/4-42.png">
+
+Marcamos la opción de actualizar los filtros de exclusión para evitar que configurarlo nosotros a mano. 
+
+En la nueva carpeta vamos a crear un nuevo archivo de tipo `Hibernate Configuration File (cfg.xml)`, las opciones nos aparecen gracias a que instalamos las JBoss Tools.
+
+<img src="images/4-43.png">
+
+<img src="images/4-44.png">
+
+<img src="images/4-45.png">
+
+No vamos a darle un nombre al `Session factory name`, esto es útil si le queremos definir más de uno.
+
+Y podemos usar un pequeño truco primero marcamos en `Database dialect` con `MySQL` y en `Driver class` seleccionamos `com.mysql.jdbc.Driver` y ya que lo tenemos volvemos a `Database dialect` y ponemos `MySQL 5 (InnoDB)` ya que si lo marcabamos desde el principio el driver que aparece no es el recomendado, por eso tenemos que hacer este apaño.
+
+El dialecto no es más que la manera de decirle a Hibernate el sistema gestor de base de datos que vamos a utilizar. Si incluyen infinidad de dialectos donde tiene los elementos concretos de ese sistema gestor de base de datos, de cara a la gestión de esquemas, tablas, consultas, etc.
+
+La url de conexión no es más que una URL JDBC `jdbc:mysql://localhost/hibernate`, nuestro esquema por defecto será `hibernate`, el usuario `openwebinars` y la contraseña `12345678`.
+
+Si marcamos la opción `Create a console configuration` nos van a salir muchos más apartados que ahora mismo no vamos a usar. Finalizamos en la creación del fichero.
+
+Al haber instalado Hibernate Tools nos aparce una consola con diferentes pestañas para gestionar el archivo.
+
+<img src="images/4-46.png">
+
+<img src="images/4-47.png">
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">12345678</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate</property>
+        <property name="hibernate.connection.username">openwebinars</property>
+        <property name="hibernate.default_schema">hibernate</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    </session-factory>
+</hibernate-configuration>
+
+```
+
+
+
+
+
 <img src="images/4-11.png">
 
 <img src="images/4-12.png">
