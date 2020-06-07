@@ -525,9 +525,25 @@ R= Puede que hubiera diferencias en cuanto a las versiones.
 
 <img src="images/4-01.png">
 
+Este tercer capítulo que tendrá unas tres lecciones vamos a aprender a crear nuestro primer proyecto en el que usemos Hibernate en, primero vamos a conocer cómo usar hibernate de forma nativa es decir sin JPA y sin ningún otro framework de por medio.
+
 <img src="images/4-02.png">
 
 <img src="images/4-03.png">
+
+Como prerrequisito sobre todo a nivel de software vamos a comentar lo que utilizaremos a lo largo de todo el curso. Les recomiendo que utilicéis eclipse que es el IDE para proyectos Java por autonomacia, también podemos descargarnos Spring Tools Suite, que nos ofrece lo mismo que Eclipse y además también ofrece el soporte nativo para  trabajar con proyectos Spring. 
+
+Si lo queréis descargar pues lo podéis encontrar fácilmente en la página web de Spring qué es https://spring.io/ o desde Eclipse https://www.eclipse.org/.
+
+<img src="images/4-04.png">
+
+Dentro de Eclipse existen lo que se conocían como las Hibernate Tools que quedan dentro de un paraguas de algo más amplio conocido ahora como las *JBoss Tools* nos van a permitir tener funcionalidades propias de Hibernate dentro de Eclipse. 
+
+Vamos a ver fácilmente cómo se pueden instalar, Dentro de Help, el Marketplace, buscamos JBoss Tools 431 vale esta es la que yo tengo instalada para instalarla pues simplemente pulsar y ahí sobre el botón que está aquí y seguiríamos el proceso puedo recomendar que de todas las herramientas que incluyen las JBoss tools si no vais a usarlas todas que marque solamente la de la de hibernate porque siempre que las JBoss tools incluyen inclusocómo sistemas gestores de base de datos utilizaremos MySQL si bien como ya no es ya no es software libre desde que Oracle de alguna manera compro a Sam el proyecto quedó dentro de paraguas de Oracle y aunque como Maríagema de consulta de las tablas con un entorno gráfico bastante atractivo en algo así como para MySQL y que será pues bastante bastante útil para nosotros centramos la página de MySQL en el apartado de descargas podremos encontrar pues como descargar las distintas versiones de MySQL en particular si nos vamos abajo podemos encontrar la versión community y desde aquí si quisiéramos la podríamos descargar y aquí en el menú de la izquierda también tenemos el volumen que si queremos lo podemos descargar para diferentes sistemas operativos pero tengo instalado en Windows vale es que este software no es obligatorio si tenéis alguna instalación de MySQL o de incluso María de derecha pues podría valer si con PHP bueno pues vamos a ver qué pasos vamos a seguir para crear un nuevo proyecto en el que utilicemos ibernet los pasos lo tenemos definido aquí que van a hacer estos seis lo primero hacer la creación y configuración inicial del proyecto después que cenaremos las dependencias crearemos el fichero de configuracion de hibernate crearemos las clases de nuestro modelo la clase por ejemplo de aplicación que va a manejar un poco este modelo y ejecutaremos el precio en primer lugar vamos a crear el proyecto vamos a crear un proyecto de tipo maiden vamos a coger el arquetipo definiendo los iniciales íbamos a 
+
+
+
+
 
 <img src="images/4-04.png">
 
