@@ -567,11 +567,21 @@ En primer lugar vamos a crear el proyecto, vamos a crear un proyecto de tipo Mav
 
 <img src="images/4-17.png">
 
+Creamos un nuevo Proyecto Maven
+
 <img src="images/4-18.png">
+
+Dejamos los datos como aparecen por defecto.
 
 <img src="images/4-19.png">
 
+Vamos a ulilizar el arquetipo *quitstart*, un arquetipo no es más que un proyecto de plantilla, *quitstart* es el proyecto Maven más sencillo que podemos encontrar y que nos va a servir para desarrollar una aplicación de escritorio. 
+
 <img src="images/4-20.png">
+
+Recordar que Maven organiza sus proyectos mediante artefactos que vienen definidos por Id de Grupo y un Id de Artefacto.
+
+Lo primero que vamos hacer es cambiar la versión de Java 1.5 a Java 1.8
 
 <img src="images/4-21.png">
 
@@ -587,11 +597,65 @@ En primer lugar vamos a crear el proyecto, vamos a crear un proyecto de tipo Mav
 
 <img src="images/4-27.png">
 
-
+Como segundo paso vamos a añadir las dependencias necesarias a nuestro proyecto en el `pom.xml`.
 
 <img src="images/4-09.png">
 
+En nuestro caso van a ser dos, la primera es la dependencia Maven de Hibernate, las podemos localizar en el [mvnrepository](https://mvnrepository.com/) siempre tendrá publicada la última dependencia.
+
+Y también nos hará falta el conector java para MySQL.
+
+Hibernate no es más que una capa de abstracción sobre JDBC y JDBC necesita diferentes conectores en función del sistema Gestor de Bases de Datos que vayamos a usar de manera específica. 
+
+Vamos a buscarla en https://bintray.com/hibernate/artifacts/hibernate-orm donde obtenemos:
+
+```html
+<dependency>
+  <groupId>org.hibernate</groupId>
+  <artifactId>hibernate-agroal</artifactId>
+  <version>5.4.17.Final</version>
+  <type>pom</type>
+</dependency>
+```
+
+Y también tenemos que añadir la dependencia de MySQL en [mvnrepository](https://mvnrepository.com/)
+
+<img src="images/4-28.png">
+
+<img src="images/4-29.png">
+
+Donde obtenemos:
+
+```html
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.20</version>
+</dependency>
+```
+
+Estas dos dependencias las vamos a incluir dentro de nuestro archivo `pom.xml`
+
+Al guardar el `pom.xml` todas las dependencias se descargan en nuestro proyecto dentro de la carpeta `Maven Dependencies`, como son varios archivos JARs que si lo tuvieramos que hacer manualmente sería muy complicado.
+
+<img src="images/4-30.png">
+
+Como tercer paso vamos a crear el fichero de configuración de Hibernate `hibernate.cfg.xml`.
+
 <img src="images/4-10.png">
+
+Posteriormente lo iremos rellenando con los datos que nos correspondan.
+
+Antes de este paso deberíamos estar concientes que tendríamos que crear un usuario en MySQL para poder acceder a nuestra base de datos, no se recomienda que sea el usuario root, sino que sea un usuario que contenga los permisos especificos y también crear un esquema con el que nuestra aplicación va a trabajar. Un esquema es un conjunto de objetos dentro de la base de datos, tablas, vistas, secuencias, etc.
+
+ESQUEMA
+
+Una vez que tenemos creado ese esquema que llamaremos `hibernate` y el usuario que hemos llamado `openwebinars` y con contraseña `12345678` ya podriamos hacer el paso 3.
+
+
+
+
 
 <img src="images/4-11.png">
 
