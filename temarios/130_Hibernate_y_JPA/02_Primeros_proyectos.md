@@ -649,33 +649,57 @@ Posteriormente lo iremos rellenando con los datos que nos correspondan.
 
 Antes de este paso deberíamos estar concientes que tendríamos que crear un usuario en MySQL para poder acceder a nuestra base de datos, no se recomienda que sea el usuario root, sino que sea un usuario que contenga los permisos especificos y también crear un esquema con el que nuestra aplicación va a trabajar. Un esquema es un conjunto de objetos dentro de la base de datos, tablas, vistas, secuencias, etc.
 
+Al esquema lo llamaremos `hibernate` dentro tendra una base de datos también llamada `hibernate`, al usuario lo llamaremos  `openwebinars`, con contraseña `12345678`.
+
 <img src="images/4-31.png">
+
+Primero nos aseguramos que MySQL este arrancado.
 
 <img src="images/4-32.png">
 
+Creamos el esquema `hibernate` con el usuario `root`.
+
 <img src="images/4-33.png">
+
+Testeamos la conección.
 
 <img src="images/4-34.png">
 
+El esquema se ha creado.
+
 <img src="images/4-35.png">
 
+Entramos al esquema y creamos nuestro usuario.
+
+```sql
+CREATE USER 'openwebinars'@'localhost' IDENTIFIED BY '12345678';
+GRANT ALL PRIVILEGES ON * . * TO 'openwebinars'@'localhost';
+```
 <img src="images/4-36.png">
+
+Se ha creado correctamente.
 
 <img src="images/4-37.png">
 
+Ahora creamos la base de datos.
+
 <img src="images/4-38.png">
+
+Todo va bien.
 
 <img src="images/4-39.png">
 
+Editamos el esquema para que podamos acceder con el usuario creado.
+
 <img src="images/4-40.png">
+
+Testeamos la conección.
 
 <img src="images/4-41.png">
 
+Y ya tenemos listo nuestro esquema con el usuario especifico.
+
 Una vez que tenemos creado ese esquema que llamaremos `hibernate` y el usuario que hemos llamado `openwebinars` y con contraseña `12345678` ya podriamos hacer el paso 3.
-
-
-
-
 
 <img src="images/4-11.png">
 
