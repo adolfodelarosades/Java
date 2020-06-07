@@ -755,13 +755,32 @@ Al haber instalado Hibernate Tools nos aparce una consola con diferentes pestañ
 
 ```
 
-
-
-
-
 <img src="images/4-11.png">
 
+Vamos a continuar con las tareas, vamos a añadir una serie de propiedades que nos van a ser muy utiles como son *Show sql, Format sql y Hbm2ddl Auto*.
+
+Las dos primeras servirán para que Hibernate vaya mostrando por el log, las consultas SQL que va lanzando al sistema Gestor de Base de Datos la primera solo los muestra, la segunda hace una especie de función Pretty y nos muestra ese código SQL más entendible, la tercer propiedad *Hbm2ddl Auto* nos va a permiti que sea Hibernate el que se encargue de construir el esquema de la base de datos si nosotros lo queremosy de actualizar los cambios con respecto a versiones anteriores descargandonos a nosotros de esa tarea en particular. 
+
+Nos vamos a la consola del archivo `hibernate.cfg.xml` en la pestaña `Hibernate` 
+ 
+<img src="images/4-48.png">
+
+Le vamos a decir que nos muestre SQL, que lo muestre formateado y que cree el esquema de la base de datos.
+
+<img src="images/4-49.png">
+
+Podemos ver como en el código se insertan las propiedades que marcamos.
+
+<img src="images/4-50.png">
+
 <img src="images/4-12.png">
+
+Ahora es el momento de crear nuestra clase Modelo y añadir las anotaciones que seran las necesarias. En principio vamos a manejar muy pocas, para indicar en el mundo Hibernate y en el mundo JPA también que una clase tiene que ser manejada por el ORM, tan solo añadiremos la anotación `@Entity` y como obligación tan solo tenemos que añadir una anotación más, que es definir que propiedad definirá la clave primaria, es decir aquella que no podrá repetirse para dos instancias de una entidad con la anotación `@Id`. Hay una tercera anotación opcional `@Column` para el resto de propiedades que desemos indicar que son columnas, si bien no es obligatorio.
+
+Vamos a crear una nueva clase Java normal en el paquete principal llamada `User`.
+
+<img src="images/4-51.png">
+
 
 <img src="images/4-13.png">
 
