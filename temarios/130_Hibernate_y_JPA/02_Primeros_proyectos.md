@@ -563,7 +563,30 @@ Los pasos lo tenemos definido aquí que van a hacer estos seis, lo primero hacer
 
 <img src="images/4-08.png">
 
-En primer lugar vamos a crear el proyecto, vamos a crear un proyecto de tipo Maven, vamos a escoger el arquetipo *quickstart* definiendo los datos iniciales y vamos a cambiar la versión de Java que trae el prototipo que por defecto es la 1.5 a la 1.8. por si queremos incorporar algu tipo de característica especifica de Java 8 en sus proyectos como podría ser el API Stream, las expresiones Lambda o algún otro tipo de elementos que quede incorporado dentro de Java 8.
+En primer lugar vamos a crear el proyecto, vamos a crear un proyecto de tipo Maven, vamos a escoger el arquetipo *quickstart* definiendo los datos iniciales y vamos a cambiar la versión de Java que trae el prototipo que por defecto es la 1.5 a la 1.8, por si queremos incorporar algún tipo de característica específica de Java 8 como podría ser el API Stream, las expresiones Lambda o algún otro tipo de elementos que quede incorporado dentro de Java 8.
+
+<img src="images/4-17.png">
+
+<img src="images/4-18.png">
+
+<img src="images/4-19.png">
+
+<img src="images/4-20.png">
+
+<img src="images/4-21.png">
+
+<img src="images/4-22.png">
+
+<img src="images/4-23.png">
+
+<img src="images/4-24.png">
+
+<img src="images/4-25.png">
+
+<img src="images/4-26.png">
+
+<img src="images/4-27.png">
+
 
 
 <img src="images/4-09.png">
