@@ -1734,23 +1734,117 @@ Aun quedan propiedades por settear son propiedades de Hibernate, que las podemos
 
 <img src="images/5-40.png">
 
+Las otras opciones que vamos a añadir que la tenemos aquí en la pestaña Properties.
 
-las otras opciones que vamos a añadir que la tenemos aquí en properties podemos añadir la de hibernate show SQL hibernate punto form a ese pone que también la podremos otro m2 de DM auto que la pondremos en ya tenemos que estar opciones añadidas solamente nos faltaría especificar que nuestra clase y usted es una entidad que será manejada por j p ar y lo hacemos a través del asistente ninguna clase vamos a marcar que fluya que ya clase que no estén listadas cómo podemos comprobar el error sobre nuestra clase y usted ya ha desaparecido debemos recordar el nombre de nuestro contexto de persistencia porque lo vamos a necesitar ahora para crear nuestra clase de aplicación la inicialización de un proyecto es diferente a la de un proyector de hibernate es nativo porque aquí lo que necesitamos es un objeto llamado EntityManager que será el que haga las veces de sesión y ese EntityManager vendrá creado por una factoría que hará las veces de heces en Factory no en este caso se llaman entitymanagerfactory' y EntityManager y son un poco más fáciles de crear proporciona un método pero dentro de la clase persistence proporciona un método llamado create entitymanagerfactory' que solamente proporcionándole el nombre nos va a permitir cargar el fichero de configuración a partir de ahí vamos a generar EntityManager tan solo llamando al método de creación del mismo incluir los métodos de cierre nos faltaría incluir el código de aplicación podemos utilizar por lo menos igual que en el caso anterior y faltaría que decidiéramos el inicio de la transacción el almacenamiento de la información y el final de la Champions en este caso lo hacemos a través del EntityManager p vamos a añadirle una coletilla aquí información errónea y ya podemos preguntar nuestra aplicación botón derecho ejecutar como aplicación cómo podemos comprobar se ha borrado la tabla porque si tiene el ejemplo anterior se ha vuelto a crear con las mismas los mismos tipos de datos que antes y se han insertado los dos menores de hechos y venimos a consultar a refrescar un poco y podemos comprobar que se han insertado los nuevos valores en el próximo en la próxima lección que será la última vez el capítulo que le haremos el mismo proyecto pero lo crearemos usando spring boot y spring MVC
+<img src="images/5-41.png">
 
+Podemos añadir `hibernate.show_sql true`, `hibernate.format_sql true` y  `hibernate.hbm2ddl.auto create`.
 
+<img src="images/5-42.png">
 
+Ya tenemos que estas opciones añadidas, solamente nos faltaría especificar que nuestra clase `User` es una entidad que será manejada por JPA y lo hacemos a través del asistente.
 
-<img src="images/5-03.png">
+<img src="images/5-43.png">
 
-<img src="images/5-04.png">
+Vamos a marcar que excluya aquellas clases que no esten marcadas clase que no estén listadas.
 
-<img src="images/5-05.png">
+<img src="images/5-44.png">
 
-<img src="images/5-06.png">
+Con todo lo que hemos hecho, hemos pasado de tener el archivo `persistence.xml` 
 
-<img src="images/5-07.png">
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="PrimerProyectoHibernateJPA">
+	</persistence-unit>
+</persistence>
+```
+
+Y pasar a tenrlo así:
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="PrimerEjemploHibernateJPA" transaction-type="RESOURCE_LOCAL">
+		<class>com.openwebinars.hibernate.PrimerEjemploHibernateJPA.User</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+Cómo podemos comprobar el error sobre nuestra clase `User` ya ha desaparecido.
+
+<img src="images/5-45.png">
+
+Debemos recordar el nombre de nuestro contexto de persistencia `PrimerEjemploHibernateJPA`
+
+<img src="images/5-46.png">
+
+Porque lo vamos a necesitar para crear nuestra clase de aplicación.
 
 <img src="images/5-08.png">
+
+La inicialización de un proyecto JPA es diferente a la de un proyector de Hibernate nativo, porque aquí lo que necesitamos es un objeto llamado EntityManager que será el que haga las veces de SessionFactory en este caso se llama EntityManagerFactory y EntityManager y son un poco más faciles de crear. 
+
+JPA proporciona un método llamado `createEntityManagerFactory` que solamente proporcionandole el nombre nos va a permitir cargar el fichero de configuración 
+
+`EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerEjemploHibernateJPA");`.
+
+A partir de allí vamos a generar el `EntityManager` que es facíl de generar tan solo llamando al método de creación del mismo.
+
+`EntityManager em = emf.createEntityManager();`
+
+Y al igual que antes vamos a incluir los métodos de cierre.
+
+```java
+em.getTransaction().commit();
+em.close();
+```
+
+Nos faltaría incluir el código de aplicación, podemos utilizar igual que en el caso anterior.
+
+```java
+User user1 = new User();
+user1.setId(1);
+user1.setUserName("Pepe");
+user1.setUserMessage("Hello world from JPA with Pepe");
+
+User user2 = new User();
+user2.setId(2);
+user2.setUserName("Juan");
+user2.setUserMessage("Hello world from JPA with Juan");
+```
+
+Y faltaría que definiéramos el inicio de la transacción, el almacenamiento de la información y el final de la transacción.
+
+```java
+em.getTransaction().begin();
+
+em.persist(user1);
+em.persist(user2);
+
+em.getTransaction().commit();
+```
+Y ya podemos ejecutar nuestra aplicación como una aplicación Java.
+
+<img src="images/5-47.png">
+
+Cómo podemos comprobar se ha borrado la tabla porque existia  del ejemplo anterior, se ha vuelto a crear con los mismos tipos de datos que antes y se han insertado los dos valores, de hechos vamos a consultar en MySQL Workbeanch, vamos a refrescar y podemos comprobar que se han insertado los nuevos valores.
+
+<img src="images/5-48.png">
+
+En la próxima lección que será la última en el capítulo haremos el mismo proyecto pero lo crearemos usando Spring Boot y Spring MVC.
 
 # 06 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte I) 16:25 
 
