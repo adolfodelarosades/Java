@@ -2479,8 +2479,6 @@ hola a todos en esta lección que será la última del capítulo 3 vamos a apren
 
 <img src="images/6-10.png">
 
-<img src="images/6-11.png">
-
 # 07 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte II) 16:34 
 
 ## Resumen Profesor
@@ -2491,9 +2489,9 @@ Continuación de la creación de un primer proyecto con Spring boot, Spring MVC 
 
 ## Transcripción
 
-<img src="images/7-01.png">
-
 <img src="images/7-02.png">
+
+<img src="images/7-01.png">
 
 <img src="images/7-03.png">
 
