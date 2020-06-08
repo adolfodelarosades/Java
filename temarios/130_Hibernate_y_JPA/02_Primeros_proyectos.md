@@ -930,6 +930,9 @@ User user2 = new User();
 user2.setId(2);
 user2.setUserName("Juan");
 user2.setUserMessage("Hello world from Juan");
+
+//Inicio de la transacción
+session.beginTransaction();
     	
 //Almacenamos los objetos
 session.save(user1);
@@ -939,16 +942,347 @@ session.save(user2);
 session.getTransaction().commit();
 ```
 
+El código completo queda así:
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.primerproyectohbn;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        
+    	StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+    	
+    	SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+    	
+    	//SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    
+    	//Apertura de una sesión (e inicio de una transacción)
+    	Session session = sf.openSession();
+    	
+    	User user1 = new User();
+    	user1.setId(1);
+    	user1.setUserName("Pepe");
+    	user1.setUserMessage("Hello world from Pepe");
+    	
+    	User user2 = new User();
+    	user2.setId(2);
+    	user2.setUserName("Juan");
+    	user2.setUserMessage("Hello world from Juan");
+    	
+    	//Almacenamos los objetos
+    	session.save(user1);
+    	session.save(user2);
+    			
+    	//Commit de la transacción
+    	session.getTransaction().commit();
+    	
+    	//Cierre de la sesión
+    	session.close();
+    	sf.close();
+	
+    }
+}
+```
+
+Ya podemos ejecutar nuestra aplicacíon como una aplicación Java, da un primer error:
+
+`ERROR: The server time zone value 'CEST' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.`
+
+Este es un error por la configuración del tiempo en la base de datos que no tiene nada que ver con nuestro programa, para solucionar este problema tenemos el siguiente [link](https://es.stackoverflow.com/questions/48935/configurar-zona-horaria-jdbc-driver-java/48946), vamos a aplicar el siguiente comando en la base de datos hibernate `SET GLOBAL time_zone = '-3:00';`.
+
+Vamos a volver a ejecutar la aplicación, ahora se nos presenta lo siguiente:
+
+<img src="images/4-58.png">
+
+Este error lo solucionamos elimininando del archivo `hibernate.cfg.xml` de la línea `<session-factory name="">` el atributo `name` es decir que debe quedar así `<session-factory>` por que no le habiamos dado un nombre. Una vez hecho el cambio volvamos a intentarlo.
+
+<img src="images/4-59.png">
+
+A parte de un monton de mensajes en rojo nos vamos a centrar solamente en aquellos que tuvieran en negro, Hibernate lo primero que hace cuando le marcamos la propiedad `hbm2ddl.auto` con valor `create` lo primero que hace es verificar si existe el modelo en la base de datos y lo borra, para generarlo de nuevo.
+
+```sql
+Hibernate: 
+    
+    drop table if exists User
+```
+
+Posteriormente trata de lanzar la sentencia DDL, es decir de creación de la tabla que como podemos comprobar, es una sentencia que va a crear la tabla llamada `User` con un campo `id` y los tipos los ha optenido mapeando los tipos Java a MySQL qué es el sistema gestor que nosotros estamos utilizando y además añadido la restricción de clave primaria el campo que tenemos como `id`.
+
+```sql
+Hibernate: 
+    
+    create table User (
+       id integer not null,
+        userMessage varchar(255),
+        userName varchar(255),
+        primary key (id)
+    ) engine=InnoDB
+```
+
+Posteriormente nos muestra las dos sentencias de inserción que hemos ejecutado:
+
+```sql
+Hibernate: 
+    insert 
+    into
+        User
+        (userMessage, userName, id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        User
+        (userMessage, userName, id) 
+    values
+        (?, ?, ?)
+```
+
+Vamos entrar a través de MySQL Workbench y vamos a comprobar que está creación se ha hecho de verdad y podríamos comprobar que se han almacenados nuestros valores almacenados.
+
+### Código Completo 
+
+Vamos a poner todos la estructura y código de este proyecto.
+
+<img src="images/4-60.png">
 
 
+*`pom.xml`*
 
-tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
-Muy bien ya tenemos dos objetos creados pero no persistidos comenzar una nueva transacción vamos a marcar también el cierre de la misma sobre transacciones ya hablaremos largo y tendido a lo largo del curso pero podíamos entender una transacción vamos atodo `` tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
+```html
+<?xml version="1.0" encoding="UTF-8"?>
 
-Muy bien ya tenemos dos objetos creados pero no persistidos comenzar una nueva transacción vamos a marcar también el cierre de la misma sobre transacciones ya hablaremos largo y tendido a lo largo del curso pero podíamos entender una transacción vamos a tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>PrimerProyectoHbn</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
+	<name>PrimerProyectoHbn</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency> 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-agroal</artifactId>
+			<version>5.4.17.Final</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+*`hibernate.cfg.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">12345678</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate</property>
+  <property name="hibernate.connection.username">openwebinars</property>
+  <property name="hibernate.default_schema">hibernate</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
+  <mapping class="com.openwebinars.hibernate.primerproyectohbn.User"/>
+ </session-factory>
+</hibernate-configuration>
+```
+
+*`User.java`*
+
+```java
+package com.openwebinars.hibernate.primerproyectohbn;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+
+	@Id
+	private int id;
+	
+	private String userName;
+	
+	private String userMessage;
+	
+	
+	public User() {
+		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+	
+}
+```
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.primerproyectohbn;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        
+    	StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+    	
+    	SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+    	
+    	//SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    
+    	//Apertura de una sesión (e inicio de una transacción)
+    	Session session = sf.openSession();
+    	
+    	User user1 = new User();
+    	user1.setId(1);
+    	user1.setUserName("Pepe");
+    	user1.setUserMessage("Hello world from Pepe");
+    	
+    	User user2 = new User();
+    	user2.setId(2);
+    	user2.setUserName("Juan");
+    	user2.setUserMessage("Hello world from Juan");
+    	
+    	
+    	session.beginTransaction();
+    	
+    	//Almacenamos los objetos
+    	session.save(user1);
+    	session.save(user2);
+    			
+    	//Commit de la transacción
+    	session.getTransaction().commit();
+    	
+    	//Cierre de la sesión
+    	session.close();
+    	sf.close();
+
+    }
+}
+```
 
 # 05 Primer proyecto con Hibernate con JPA 13:58 
 
