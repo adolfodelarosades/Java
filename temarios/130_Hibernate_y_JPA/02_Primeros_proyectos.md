@@ -1527,7 +1527,218 @@ En este curso os propongo varias formas de utilizar Hibernate.
 
 <img src="images/5-01.png">
 
+En esta lección vamos a seguir creando nuestro primer proyecto Hibernate pero en este caso lo vamos a hacer conjuntamente con JPA, vamos a ver qué pasó hay que seguir porque algunos son bastante distinto.
+
 <img src="images/5-02.png">
+
+En primer lugar vamos a crear nuestro proyecto que también será un proyecto Maven, vamos añadir las características de JPA, Eclipse o Spring Tools tienen una perspectiva para JPA, vamos a añadir las clases Modelo o entidades en nuestro caso será la misma que en el ejemplo anterior, vamos a configurar la unidad de persistencia, podriamos decir que algo parecido al archivo de configuración de Hibernate, por lo menos en cuanto a contenido conceptualmente son dos cosas distintas, vamos a crear nuestra clase de aplicación y lo vamos a ejecutar.
+
+<img src="images/5-03.png">
+
+Creamos de nuevo el mismo proyecto, nuevo proyecto de tipo Maven.
+
+<img src="images/5-09.png">
+
+<img src="images/5-10.png">
+
+<img src="images/5-11.png">
+
+<img src="images/5-12.png">
+
+<img src="images/5-13.png">
+
+Vamos a cambiar el build Path de 1.7 a 1.14
+
+<img src="images/5-14.png">
+
+<img src="images/5-04.png">
+
+Vamos a ir buscando la dependencia, en este caso en lugar de usar `hibernate-core`  usaremos `hibernate-entitymanager` si vamos a usar JPA solamente, a diferencia de antaño que teniamos que incluir varias dependencias, solamente tendríamos que insertar esta dependencia, esta va a incluir el nucleo y los elementos necesarios para poder trabajar con JPA.
+
+```html
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>5.4.17.Final</version>
+</dependency>
+```
+
+y también añadimos la dependencia de MySQL dentro del `pom.xml`
+
+```html
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.20</version>
+</dependency>
+```
+
+Al incluir estas dos dependencias en el archivo `pom.xml` ya tendríamos nuestras dependencias organizadas.
+
+Ya tenemos nuestro proyecto creado ya tenemos configurado Java 8 y las dependencias, que tendríamos que hacer.
+
+<img src="images/5-05.png">
+
+El siguiente paso será añadir las características de JPA a nuestro proyecto, eso lo vamos a hacer como sigue,pulsamos sobre el proyecto con el botón derecho y pulsamos  propiedades y vamos a seleccionar la opción `Project Facets`. 
+
+<img src="images/5-15.png">
+
+Lo primero que tenemos que indicar es que este proyecto será usado con `Project Facets`. Pulsamos sobre el enlace para que se configure automáticamente.
+
+<img src="images/5-16.png">
+
+Para aquellos que no lo hayáis hecho antes es posible que marque algún tipo de configuración en la que podéis elegir que seréis vosotros mismos los que vais a gestionar la configuración de la librería y los ficheros en lugar de marcar una serie de ficheros Jars que ya esten añadidos.
+
+Marcamos JPA y en la pestaña de Runtimes marcamos Java 8.
+
+<img src="images/5-17.png">
+
+Y pulsamos en el enlace `Further configuration required` 
+
+<img src="images/5-18.png">
+
+Como a mi no me sale pongo lo que hace el profesor.
+
+<img src="images/5-19.png">
+
+<img src="images/5-20.png">
+
+Marcamos Hibernate.
+
+<img src="images/5-21.png">
+
+Desabilitamos la configuración de las librerias.
+
+<img src="images/5-22.png">
+
+Con esto nuestro proyecto ya es un proyecto JPA, pero no lo parece porque seguimos en una perspectiva que no es la perspectiva de JPA, para abrir una perspectiva nos tenemos arriba en la esquina en la que seleccionamos una perspectiva JPA.
+
+<img src="images/5-23.png">
+
+Una perspectiva no es más que un conjunto de ventanas, de vistas Eclipse nos ofrece  cómo podéis comprobar las que tenemos disponible han cambiado.
+
+<img src="images/5-06.png">
+
+A partir de ahora vamos a seguir los diferentes pasos, cómo es crear nuestras clases modelos y anotarla al igual que en el ejemplo anterior, lo que vamos a hacer es copiar la clase `User` porque su contenido va a ser exactamente el mismo.
+
+```java
+package com.openwebinars.hibernate.primerproyectohibernatejpa;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+
+	@Id
+	private int id;
+
+	@Column
+	private String userName;
+
+	@Column
+	private String userMessage;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+
+}
+```
+
+Sin embargo ahora al añadirla nos da un error y es que nos dice la clase `User` es una entidad, es decir que va a ser manejada por JPA, pero no está listada en el fichero de persistencia y es que no lo hemos configurado aún.
+
+<img src="images/5-24.png">
+
+Al convertir nuestro proyecto a un proyecto JPA se nos a creado el JPA Context con el fichero `persistence.xml`
+
+<img src="images/5-07.png">
+
+Está configuración tiene los pasos de de la imágen, vamos a añadir nuestra entidad como clases gestionada, vamos a crear la conexión y vamos a añadir las diferente opciones de Hibernate.
+
+<img src="images/5-25.png">
+
+El nombre de aquí será el nombre del contexto de persistencia `PrimerProyectoHibernateJPA`. 
+
+Vamos a ver la pestaña de Conexión entre los dos tipos de conexión que tenemos tenemos la conexión usando transacciones JTA o transacciones de recurso local,
+
+<img src="images/5-26.png">
+
+utilizaremos esta última, mediante este sistema del cual hablaremos en el capítulo 10, somos nosotros los encargados de gestionar las transacciones y no un sistema centralizado como ofrece JavaEE o Spring.
+
+<img src="images/5-27.png">
+
+Para insertar los datos de la conexión lo podemos hacer a través de una conexión ya generada que podemos construir aquí abajo, o través de una serie de datos.
+
+Vamos a configurar rápidamente la conexión en la vista `Data Source Explorer` pulsamos con el botón derecho sobre `Database Connection`, seleccionamos MySQL y ahora le tendríamos que proporcionar un driver y alguien se preguntará, no lo hemos descargado directamente mediante una dependencia Maven.
+
+<img src="images/5-28.png">
+
+<img src="images/5-29.png">
+
+<img src="images/5-30.png">
+
+
+Sí sin embargo esta parte de Eclipse necesita el JAR directamente, con lo cual lo podemos agregar, no nos valdría de los que tenemos aquí 
+
+<img src="images/5-31.png">
+
+y lo que podemos añadir de una manera efectiva, tenemos nosotros el fichero JAR dentro de nuestro repositorio local de Maven que es accesible desde usuarios/adolfodelarosa/.m2/repository/mysql/mysql-connector y la versión que queramos usar.
+
+<img src="images/5-32.png">
+
+<img src="images/5-33.png">
+
+(Todo esto en mi local no funciono, no me dejo añadir el JAR)
+
+De esta manera estaremos usando la misma librería que tenemos incluida dentro de nuestro proyecto una vez seleccionado el driver tenemos que proporcionar el nombre de la base de datos, `hibernate`, nombre de usuario, y contraseña, testeamos la conexión, perfecta y ya la podemos almacenar.
+
+<img src="images/5-34.png">
+
+<img src="images/5-35.png">
+
+<img src="images/5-36.png">
+
+<img src="images/5-37.png">
+
+Una vez que tengamos aquí la conexión, podemos rellenar los datos desde esa nueva conexión, ya tenemos aquí las propiedades.
+
+<img src="images/5-38.png">
+
+<img src="images/5-39.png">
+
+Aun quedan propiedades por settear son propiedades de Hibernate, que las podemos agregar de varias maneras, desde el fichero de código fuente o desde la pestaña de propiedades. Al igual que antes seleccionamos MySQL y el driver. Como podemos comprobar incluso podríamos proporcionar un fichero de configuracion hibernate.cfg.xml para que leyera las propiedades.
+
+<img src="images/5-40.png">
+
+
+las otras opciones que vamos a añadir que la tenemos aquí en properties podemos añadir la de hibernate show SQL hibernate punto form a ese pone que también la podremos otro m2 de DM auto que la pondremos en ya tenemos que estar opciones añadidas solamente nos faltaría especificar que nuestra clase y usted es una entidad que será manejada por j p ar y lo hacemos a través del asistente ninguna clase vamos a marcar que fluya que ya clase que no estén listadas cómo podemos comprobar el error sobre nuestra clase y usted ya ha desaparecido debemos recordar el nombre de nuestro contexto de persistencia porque lo vamos a necesitar ahora para crear nuestra clase de aplicación la inicialización de un proyecto es diferente a la de un proyector de hibernate es nativo porque aquí lo que necesitamos es un objeto llamado EntityManager que será el que haga las veces de sesión y ese EntityManager vendrá creado por una factoría que hará las veces de heces en Factory no en este caso se llaman entitymanagerfactory' y EntityManager y son un poco más fáciles de crear proporciona un método pero dentro de la clase persistence proporciona un método llamado create entitymanagerfactory' que solamente proporcionándole el nombre nos va a permitir cargar el fichero de configuración a partir de ahí vamos a generar EntityManager tan solo llamando al método de creación del mismo incluir los métodos de cierre nos faltaría incluir el código de aplicación podemos utilizar por lo menos igual que en el caso anterior y faltaría que decidiéramos el inicio de la transacción el almacenamiento de la información y el final de la Champions en este caso lo hacemos a través del EntityManager p vamos a añadirle una coletilla aquí información errónea y ya podemos preguntar nuestra aplicación botón derecho ejecutar como aplicación cómo podemos comprobar se ha borrado la tabla porque si tiene el ejemplo anterior se ha vuelto a crear con las mismas los mismos tipos de datos que antes y se han insertado los dos menores de hechos y venimos a consultar a refrescar un poco y podemos comprobar que se han insertado los nuevos valores en el próximo en la próxima lección que será la última vez el capítulo que le haremos el mismo proyecto pero lo crearemos usando spring boot y spring MVC
+
+
+
 
 <img src="images/5-03.png">
 
