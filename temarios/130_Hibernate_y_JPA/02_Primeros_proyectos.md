@@ -1054,6 +1054,8 @@ Hibernate:
 
 Vamos entrar a través de MySQL Workbench y vamos a comprobar que está creación se ha hecho de verdad y podríamos comprobar que se han almacenados nuestros valores almacenados.
 
+<img src="images/4-61.png">
+
 ### Código Completo 
 
 Vamos a poner todos la estructura y código de este proyecto.
