@@ -879,7 +879,6 @@ Ya casi hemos terminado, tan solo nos quedaría crear la clase de aplicación. H
 
 Vamos a crear la `SessionFactory` que carge la configuración que hemos definido antes en el fichero XML, abriremos una sesión, crearemos las instancias, iniciaremos una transacción para que la persistencia de nuestro objeto queden marcadas dentro de esa transacción, haremos la persistencia real, commitearemos esa transacción es decir marcaremos el fin para que hagan de manera efectiva los cambios en la base de datos y cerraremos los diferentes objetos. Todo esto lo vamos hacer dentro de nuestra clase de aplicación `App.java`.
 
-
 Podemos cargar la configuración del `SessionFactory` con el fichero XML de dos maneras diferentes un código `Legazi` heredado de versiones anteriores, sería algo más fácil por la cantidad de líneas de código y sería algo así:
 
 ```java
@@ -889,8 +888,6 @@ SessionFactory sf = new Configuration().configure().buildSessionFactory();
 Para crear un `SessionFactory` solamente tendríamos que usar la clase `Configuration()` para que configurara el fichero XML, como el fichero tiene el nombre que por defecto espera Hibernate que es `hibernate.cfg.xml` y además se encuentra dentro de la carpeta donde espera encontrarlo que es la carpeta `source/main/resource` no tenemos que indicar ningún parámetro más.
 
 Sin embargo como decimos este código es `Legazi` es decir es antiguo, vamos a utilizar la forma que Hibernate propone en su documentación, para la versión 5, es algo más compleja pero tener en cuenta que se hace solamente en un sitio del proyecto y si seguimos los parámetros por defecto posiblemente no necesitemos nada más que copiarlo y pegarlo.
-
-
 
 Creamos un registro estándar de servicio a través de un builder, y ya podemos configurar en este caso tampoco debemos indicar nada con respecto al fichero de configuración y podemos construir este objeto directamente. 
 
@@ -906,8 +903,49 @@ SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory(
 
 Ya tendríamos nuestro `SessionFactory` preparado. 
 
+¿Qué tendríamos que hacer ahora?, tendríamos que abrir la sesión, lo hacemos de una manera sencilla mediante el comando `openSession()` nos inicia una nueva sesión, la sesión se cerrará mediante el comando `close()` y todo el código que desarrollemos va en medio y después de cerrar la sesión también cerraremos la factoría porque nuestro programa ya termina. 
 
-ahora tendríamos que abrir la sesión lo hacemos de una manera sencilla mediante el comando open session no inicia una nueva sesión la sesión se cerrará mediante el comando close vamos a dejar ya puesto y todo el código que desarrolla Mayra en medio y después de cerrar la sesión también cerraremos la factoría porque nuestro programa ya terminada es aquí en medio donde vamos a generar el resto de nuestro cuerpo va a ser muy sencillo crear una entidad normal que crear un objeto Java no definido le asignamos nivel por ejemplo número 1 me asignamos un nombre como a llamar Pepe vamos a ponerle un mensaje de bienvenidasi queremos podríamos crear otro objeto vale pero vamos a llamar rápido le asignamos el y B2 un hombre le vamos a llamar Juan mensaje de bienvenida comenzar una nueva transacción vamos a marcar también el cierre de la misma sobre transacciones ya hablaremos largo y tendido a lo largo del curso pero podíamos entender una transacción vamos a tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
+```java
+//Apertura de una sesión (e inicio de una transacción)
+Session session = sf.openSession();
+    	
+    	
+    	
+//Cierre de la sesión
+session.close();
+sf.close();
+```
+
+Es en medio donde vamos a generar el resto de nuestro código, va a ser muy sencillo crear una entidad no es más que crear un objeto Java. Como hemos definido un constructor sin parámetros hacemos uso de el, le asignamos un id, por ejemplo el número 1, le asignamos un nombre vamos a llamarlo Pepe, vamos a ponerle un mensaje de bienvenida. Si queremos podríamos crear otro objeto vamos a llamarle `user2` le asignamos el id 2, un hombre le vamos a llamar Juan, mensaje de bienvenida.
+
+Muy bien ya tenemos dos objetos creados pero no persistidos para ello tendríamos comenzar una nueva transacción, vamos a marcar también el cierre de la misma, sobre transacciones ya hablaremos largo y tendido a lo largo del curso, pero podríamos entender una transacción como un lote de operaciones que vamos a realizar enfrentada a la base de datos. Vamos a almacenar los objetos utilizando el método `save(user)` del objeto `Session` y lo mismo para `user2`.
+
+```java
+User user1 = new User();
+user1.setId(1);
+user1.setUserName("Pepe");
+user1.setUserMessage("Hello world from Pepe");
+    	
+User user2 = new User();
+user2.setId(2);
+user2.setUserName("Juan");
+user2.setUserMessage("Hello world from Juan");
+    	
+//Almacenamos los objetos
+session.save(user1);
+session.save(user2);
+    			
+//Commit de la transacción
+session.getTransaction().commit();
+```
+
+
+
+
+tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
+Muy bien ya tenemos dos objetos creados pero no persistidos comenzar una nueva transacción vamos a marcar también el cierre de la misma sobre transacciones ya hablaremos largo y tendido a lo largo del curso pero podíamos entender una transacción vamos atodo `` tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
+
+Muy bien ya tenemos dos objetos creados pero no persistidos comenzar una nueva transacción vamos a marcar también el cierre de la misma sobre transacciones ya hablaremos largo y tendido a lo largo del curso pero podíamos entender una transacción vamos a tratar de ejecutar no se trata solamente de una aplicación a veces borrar fichero de configuración para la ejecuciónsolamente en aquellos que tuvieran en negro y Verne lo primero que hace cuando cuando le marcamos la propiedad hbm2ddl auto con valor creativo verificar si existe en la base de datos el modelo y lo borra para generar lo demás posteriormente trata de lanzar la sentencia de decir de creación de la tabla que como podemos comprobar pues una sentencia que va a crear la tabla llamada Josep con un campo diré los tipos los Austin ido mapeando los tipos Java a MySQL qué es el sistema porque nosotras y además añadido el campo que tenemosvamos entrar a través de MySQL workbench y vamos a comprobar pues que está creación se ha hecho de mentira el perdón no se ha hecho de mentira se ha hecho de verdad y lo podemos comprobar usuario hibernate en la tabla Giuseppe y si pulsamos en este botón y podríamos comprobar que sean almacenados los datos sin embargo parece que ha sucedido algo que la primera inserción no no ocurrido bien vemos que la referencia no la hemos ido arrastrando bien vamos a solventarlo y ahora estoy contando cómo comprobar que todo marche no volvería a borrar el esquema lo vuelve a generar inserta los valores y si probamos ahora podemos ver que tenemos nuestros valores almacenados conecta hemos terminado la lección de nuestro primer proyecto de hibernate en la siguiente elección realizan la misma tarea pero y JP
 
 
 
