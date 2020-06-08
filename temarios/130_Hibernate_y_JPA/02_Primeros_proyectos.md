@@ -1479,7 +1479,67 @@ A diferencia del proyecto anterior, en este caso tenemos que inicializar dos obj
 
 ## Preguntas
 
+P= Buenas, estoy intentando entender porque es necesario usar JPA. ¿Hibernate no tiene ya definida la persistencia?. ¿No estoy viendo a priori las ventajas de JPA?.
+
+R= La gran diferencia es que Hibernate es un producto comercial, y JPA es un estándar. De hecho, JPA es solo un documento, una especie de contrato, que establece una serie de elementos que deben ser implementados por aquellos vendors que quieran realizar su implementación.
+
+Las ventajas del uso de JPA+Hibernate frente a Hibernate a secas pueden ser las siguientes:
+
+* Si usas JPA, el día de mañana podrías mudarte de motor de persistencia, cambiando de Hibernate a otro mejor, diferente, más ligero, más barato, .... con un mínimo esfuerzo de cambio de código.
+* Si bien es cierto que JPA, en sus orígenes. está basado en el trabajo de Hibernate, sus derroteros en el futuro pueden ir por separado. En tanto en cuanto Hibernate proporcione una implementación para JPA, podrás seguir disfrutando de sus características.
+* El uso de JPA sobre Hibernate no te limita a, en casos concretos, utilizar elementos concretos de la implementación de Hibernate; a cambio, ese código que has producido estará más acoplado a esta solución tecnológica. Pero si te aporta algún beneficio, no es mala solución.
+
+P= Para las dependencias Maven estoy viendo el Maven Repository y dice que _EntityManager está deprecado y que use el core...¿Será que el core ya implementa JPA?
+
+```sh
+Hibernate ORM Hibernate EntityManager
+org.hibernate » hibernate-entitymanagerLGPL
+(deprecated - use hibernate-core instead) Hibernate O/RM implementation of the JPA specification
+```
+
+R= Efectivamente, a día de hoy se mantiene por compatibilidad. Si utilizas la dependencia core debes de poder utilizar EntityManager sin ninguna dificultad.
+
+P= Cual es la diferencia de usar la libreria EntityManager y hibernate core?, como voy a determinar si debo usar esta o el otro?
+
+¿Que es JPA J facet?
+
+Como se llama la primera opcion de hacer un proyecto hibernate y como se llama la segunda opcion?
+
+R= Te respondo por partes
+
+* Cual es la diferencia de usar la libreria EntityManager y hibernate core?, como voy a determinar si debo usar esta o el otro?
+
+En las nuevas versiones de Hibernate, esto queda resuelto. Si vas a trabajar con JPA como estándar, e Hibernate como motor de JPA, ya solo tienes que incluir la dependencia de hibernate core, ya que incluye de por sí la de EntityManager.
+
+* ¿Que es JPA J facet?
+
+Las eclipse facets (facetas eclipse) es una característica que ofrece eclipse, que permite que un determinado proyecto Java EE tenga un aspecto de configuración de ejecución determinado. Para poder trabajar correctamente con un proyecto JPA, deberíamos asegurarnos de que dicho proyecto tenga la faceta JPA.
+
+* Como se llama la primera opcion de hacer un proyecto hibernate y como se llama la segunda opcion?
+
+En este curso os propongo varias formas de utilizar Hibernate.
+
+1. De forma nativa. Aquí utilizamos Hibernate directamente, con todas las funcionalidades que ofrece.
+2. Utilizar JPA como estándar, e Hibernate como motor de persistencia. Si el día de mañana queremos cambiar de motor de persistencia, lo podremos hacer más fácilmente.
+3. Utilizar JPA en un proyecto Spring. JPA es un estándar de Java EE, y como tal, lo podemos utilizar en un proyecto Java EE normal o también en un proyecto Spring. Si vas a trabajar con Spring, esta sería tu forma de trabajo.
+
 ## Transcripción
+
+<img src="images/5-01.png">
+
+<img src="images/5-02.png">
+
+<img src="images/5-03.png">
+
+<img src="images/5-04.png">
+
+<img src="images/5-05.png">
+
+<img src="images/5-06.png">
+
+<img src="images/5-07.png">
+
+<img src="images/5-08.png">
 
 # 06 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte I) 16:25 
 
