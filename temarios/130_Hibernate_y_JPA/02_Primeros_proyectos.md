@@ -3429,25 +3429,446 @@ Vamos a añadir una nueva propiedad a nuestro fichero de properties para que no 
 Y ya podriamos ejecutar nuestro proyecto como una Spring Boot App.
 
 
+<img src="images/7-05.png">
+
+<img src="images/7-06.png">
+
+<img src="images/7-07.png">
+
+<img src="images/7-08.png">
+
+<img src="images/7-09.png">
+
+<img src="images/7-10.png">
+
+<img src="images/7-11.png">
+
+<img src="images/7-12.png">
+
+<img src="images/7-13.png">
+
+<img src="images/7-14.png">
+
+<img src="images/7-16.png">
 
 
+### Código Completo
+
+<img src="images/7-15.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>PrimerProyectoSpringHibernateJPA</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>PrimerProyectoSpringHibernateJPA</name>
+	<description>Práctica controladores</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+
+```
+
+*`application.properties`*
+
+```properties
+# Base de datos
+db.driver: com.mysql.jdbc.Driver
+db.url: jdbc:mysql://localhost/hibernate
+db.username: openwebinars
+db.password: 12345678
+
+# Busqueda de entidades
+entitymanager.packagesToScan: com.openwebinars.hibernate.spring
+
+# Hibernate
+hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+hibernate.show_sql: true
+hibernate.hbm2ddl.auto: create
+
+server.port: 9002
+```
 
 
+*`DatabaseConfig`*
+
+```java
+package com.openwebinars.hibernate.spring;
+
+import java.util.Properties;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@EnableTransactionManagement
+public class DatabaseConfig {
+
+	/**
+	 * Definición del DataSource para la conexión a nuestra base de datos. 
+	 * Las propiedades son establecidas desde el fichero de properties, y 
+	 * asignadas usando el objeto env.
+	 * 
+	 */
+	@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName(env.getProperty("db.driver"));
+		dataSource.setUrl(env.getProperty("db.url"));
+		dataSource.setUsername(env.getProperty("db.username"));
+		dataSource.setPassword(env.getProperty("db.password"));
+		return dataSource;
+	}
+
+	/**
+	 *
+	 * Declaración del EntityManagerFactory de JPA
+	 */
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		
+		//Le asignamos el dataSource que acabamos de definir.
+		entityManagerFactory.setDataSource(dataSource);
+
+		// Le indicamos la ruta donde tiene que buscar las clases anotadas
+		entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+
+		// Implementación de JPA a usar: Hibernate
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+
+		// Propiedades de Hiberante
+		Properties additionalProperties = new Properties();
+		additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		entityManagerFactory.setJpaProperties(additionalProperties);
+
+		return entityManagerFactory;
+	}
+
+	/**
+	 * Inicializa y declara el gestor de transacciones
+	 */
+	@Bean
+	public JpaTransactionManager transactionManager() {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+		return transactionManager;
+	}
+
+	/**
+	 *  
+	 * Este bean es un postprocessor que ayuda a relanzar las excepciones específicas
+	 * de cada plataforma en aquellas clases anotadas con @Repository
+	 * 
+	 */
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	@Autowired
+	private Environment env;
+
+	@Autowired
+	private DataSource dataSource;
+
+	@Autowired
+	private LocalContainerEntityManagerFactoryBean entityManagerFactory;
+
+}
+
+```
 
 
-yo la voy a aprovechar que las tengo por aquí para no alargar más la ejecución de este proyecto una manera sencilla para borrar un usuario pues cree haríamos el usuario en base a nivel y le pasaríamos ese usuario al Aldao y para actualizarlo bueno pues ya tendríamos nuestro controlador hecho ahora tendríamos que invocar ha estado URL para poder crear un nuevo usuario lo podemos comprobar vamos añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que podemos tener por ahí es server pop y nos vamos a poner por ejemplo 9002 nuestro proyecto botón derecho ejecutar como Springfield el nombre y el mensaje nombre Peperefrescamos la clase Giuseppe ahora tenemos un solo usuario app hola con esto finalizamos este capítulo en el que hemos aprendido a crear nuestro primer proyecto y también
+*`User`*
+
+```java
+package com.openwebinars.hibernate.spring;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+
+	@Id
+	private int id;
+
+	@Column
+	private String userName;
+
+	@Column
+	private String userMessage;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+
+}
+```
 
 
+*`UserDao`*
+
+```java
+package com.openwebinars.hibernate.spring;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+/**
+ * 
+ * Esta es la clase que usaremos para acceder a los datos de las entidades User.
+ * Al estar anotada con el estereotipo @Repository, será localizada rapidamente,
+ * y usada para tal fin.
+ * 
+ * Al tener definido un motor de transacciones en DatabaseConfig, toda clase
+ * anotada con @Transactional provocará que se invoquen los método begin()
+ * y commit() de forma "mágica" en el inicio y el fin del método.
+ * 
+ * 
+ */
+@Repository
+@Transactional
+public class UserDao {
+	
+	// A través de la anotación @PersistenceContext, se inyectará automáticamente
+	// un EntityManager producido desde el entityManagerFactory definido en la clase
+	// DatabaseConfig.
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 
 
+	/**
+	 * Almacena el usuario en la base de datos
+	 */
+	public void create(User user) {
+		entityManager.persist(user);
+		return;
+	}
+
+	/**
+	 * Elimina el usuario de la base de datos.
+	 */
+	public void delete(User user) {
+		if (entityManager.contains(user))
+			entityManager.remove(user);
+		else
+			entityManager.remove(entityManager.merge(user));
+		return;
+	}
+
+	/**
+	 * Devuelve todos los usuarios de la base de datos.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<User> getAll() {
+		return entityManager.createQuery("from User").getResultList();
+	}
+
+	/**
+	 * Devuelve un usuario en base a su Id
+	 */
+	public User getById(int id) {
+		return entityManager.find(User.class, id);
+	}
+
+	/**
+	 * Actualiza el usuario proporcionado
+	 */
+	public void update(User user) {
+		entityManager.merge(user);
+		return;
+	}
+
+	
+
+}
+```
 
 
+*`UserController`*
+
+```java
+package com.openwebinars.hibernate.spring;
+
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class UserController {
 
 
+	// Inyectamos el DAO dentro del Controller
+	@Autowired
+	private UserDao userDao;
 
+	/**
+	 * 
+	 * Crea un nuevo usuario con un Id autogenerado, y con los datos recibidos
+	 * por la URL 
+	 * 
+	 * /create?name=...&message=....
+	 * 
+	 */
+	@RequestMapping(value = "/create")
+	@ResponseBody
+	public String create(String name, String message) {
+		try {
+			User user = new User();
+			// Estas líneas de código generan un Id aleatorio.
+			// En las próximas lecciones veremos como delegar esto en la base de
+			// datos
+			Random r = new Random();
+			int randomId = r.nextInt(Integer.MAX_VALUE);
+			// Asignamos los datos
+			user.setId(randomId);
+			user.setUserName(name);
+			user.setUserMessage(message);
 
+			userDao.create(user);
+		} catch (Exception ex) {
+			return "Error creando el usuario: " + ex.toString();
+		}
+		return "Usuario creado correctamente";
+	}
 
+	/**
+	 * 
+	 * Elimina un usuario, localizándolo por su Id
+	 * 
+	 * /delete?id=...
+	 * 
+	 */
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	public String delete(int id) {
+		try {
+			User user = new User();
+			user.setId(id);
+			userDao.delete(user);
+		} catch (Exception ex) {
+			return "Error eliminando el usuario: " + ex.toString();
+		}
+		return "Usuario eliminado correctamente";
+	}
 
+	/**
+	 * 
+	 * Actualiza el nombre y el mensaje de un usuario, localizándolo por su Id
+	 * 
+	 * /update?id=...&name=...&message=....
+	 * 
+	 */
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public String updateName(int id, String name, String message) {
+		try {
+			User user = userDao.getById(id);
+			user.setUserName(name);
+			user.setUserMessage(message);
+			userDao.update(user);
+		} catch (Exception ex) {
+			return "Error actualizando el usuario: " + ex.toString();
+		}
+		return "Usuario actualizado correctamente";
+	}
+
+}
+```
 
 
 ## Contenido adicional 3   
