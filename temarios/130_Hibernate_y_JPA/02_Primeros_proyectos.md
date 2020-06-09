@@ -2952,16 +2952,252 @@ Ahora siguiendo los pasos de nuestro tutorial, tendríamos que crear la clase En
 
 <img src="images/7-01.png">
 
-
-diseño de en el que organizamos el acceso datos mediante una clase que nos van a devolver objetos de nuestro modelo en lugar de acceder directamente al origen de los datos es el trabajar con diferentes bases de datos diferentes sistemas de persistencia sin que bueno pues nos tengamos que preocupar de cuál cogemos en particular y también nos ofrece una interfaz común con ese almacén de datos bien pues vamos encargarnos de crear esa clase entidad y la clase dado que servirá para para manejarla en la clase dado no podemos olvidar anotarlo con la notación de repository eso nos permitirá indicar que se trata de un pin de acceso a datos y además con transaccional eso va a indicar que dentro de cada uno de los métodos cuando lo llamemos justo antes de empezar la llamada al método se comenzara una transacción y justo al terminar el código del método esa transacción será commitear sin que nosotros tenemos que encargar lo de hacerlo como los proyectos anteriores también tenemos que añadir que inyectar el contexto de persistencia y tendremos que implementarlo los diferentes métodos necesarios la clase ilusa han igual que antes la podremos y queda como una entidad que vamos a manejar creamos una nueva clase que vamos a llamar y como decíamos antes esta clase tendremos que anotar la coma bombín estereotipado como repositorio que además va a ejecutarse dentro de un marco transaccional los diferentes métodos que tendrá este bien pues son los lógicos de una clase que va a acceder a los datos nos permitirá crear una nueva instancia actualizar un existente borrar un existente obtener todas las que hay determinado tipo de tipo Giuseppe y obtener una en particular en base a a Swift obtener EntityManager una notación y lo que va a hacer eso buscar una factoría de EntityManager construir un EntityManager en particular e inyectarlo dentro de esta variable que vamos a tener aquí EntityManager para poder usarlo a lo largo de los diferentes bueno vamos a crear los distintos métodos que podríamos llamar y que lo único que hará será persistir no como decíamos antes no tenemos que preocuparnos de ver la gestión de transacciones vamos a eliminar un usuario si queremos podemos comprobar si el usuario existe si está contenido antes de de eliminarlo venga y en otro caso lo que podemos hacer es eliminar pero antes de eliminar hacer una operación merge ya hablaremos de ella con más detenimiento get by ve que no va a devolver un usuario en base a su bebé usaremos el método dentix y manager ya hablaremos sobre consulta el método fine que nos va a devolver una instancia recibe el tipo de dato y el valor del nivel muy sencillo de utilizar y el método que nos va a devolver todos devolverá una lista de usuarios podemos llamar particular warning ya tendríamos nuestra clase dado hecha no faltaría crear un controlador dentro del controlador vamos a inyectar mediante autowave en nuestro lado para poder utilizarlo y en el controlador vamos a definir los métodos necesarios para manejar peticiones a la URL create today etcétera lo vamos a llamar yo ser controllervamos a crear un bin a partir de bueno pues el nombre y el mensaje le añadimos las anotaciones request mapping vale o incluso si queremos la anotación getmapping vale las privadas y bueno no hemos declarado todavía un mecanismo automático de creación de Direct inventar aquí uno sobre la marcha para que lo haga de manera aleatoria y no carga para para el ejemplo y no tener que pasarle el IDE como como argumento nos quedaría llamar al lado para poder crear el usuario devolver algún tipo de mensaje con respecto a la creación del usuario para que podemos visualizar directamente este mensaje no nos perdamos ahora en gestión del sistema de vistas le vamos a añadir la notación@response body lo podríamos meter todo dentro de un bloque try catchbueno las diferentes llamadas serían de una forma parecida yo la voy a aprovechar que las tengo por aquí para no alargar más la ejecución de este proyecto una manera sencilla para borrar un usuario pues cree haríamos el usuario en base a nivel y le pasaríamos ese usuario al Aldao y para actualizarlo bueno pues ya tendríamos nuestro controlador hecho ahora tendríamos que invocar ha estado URL para poder crear un nuevo usuario lo podemos comprobar vamos añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que podemos tener por ahí es server pop y nos vamos a poner por ejemplo 9002 nuestro proyecto botón derecho ejecutar como Springfield el nombre y el mensaje nombre Peperefrescamos la clase Giuseppe ahora tenemos un solo usuario app hola con esto finalizamos este capítulo en el que hemos aprendido a crear nuestro primer proyecto y también
-
-
-
-
+La clase DAO seguira el patron DAO, para aquellos que ya hayas hecho el curso de Spring les sonara. El patrón DAO no es más que un patrón de diseño en el que organizamos el acceso a datos mediante una clase que nos van a devolver objetos de nuestro modelo en lugar de acceder directamente al origen de los datos, eso nos permite el trabajar con diferentes bases de datos, diferentes sistemas de persistencia sin que nos tengamos que preocupar de cuál cogemos en particular y también nos ofrece una interfaz común con ese almacén de datos.
 
 <img src="images/7-03.png">
 
+Vamos a encargarnos de crear esa clase entidad y la clase DAO que servirá para manejarla. En la clase DAO no olvidar anotarla con la anotación de `@Repository` eso nos permitirá indicar que se trata de un bean de acceso a datos y además con `@Transaccional`, eso va a indicar que dentro de cada uno de los métodos cuando lo llamemos, justo antes de empezar la llamada al método se comenzara una transacción y justo al terminar el código del método esa transacción será commitear sin que nosotros tenemos que encargarnos de hacerlo como en los proyectos anteriores. También tenemos que inyectar el contexto de persistencia y tendremos que implementar los diferentes métodos necesarios.
+
+
+Vamos a crear la clase `User` al igual que antes la podemos copiar.
+
+```java
+package com.openwebinars.hibernate.spring;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+
+	@Id
+	private int id;
+
+	@Column
+	private String userName;
+
+	@Column
+	private String userMessage;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+
+}
+```
+
+Creamos una nueva clase que vamos a llamar `UserDao` y como decíamos antes esta clase tendremos que anotarla como un bean estereotipado como repositorio, que además va a ejecutarse dentro de un marco transaccional
+```java
+@Repository
+@Transactional
+public class UserDao {
+
+}
+```
+
+Los diferentes métodos que tendrá este bean son los lógicos de una clase que va a acceder a los datos, nos permitirá crear una nueva instancia, actualizar una existente, borrar una existente, obtener todas las que hay de un determinado tipo, de tipo `User` y obtener una en particular en base a a Id.
+
+Lo primero que tenemos que hacer es obtener un EntityManager y eso lo vamos a hacer a través de una anotación `@PersistenceContext` esta anotación no es de Spring sino que esta definida en el standar Java y lo que va a hacer es buscar una factoria de EntityManager construir un EntityManager en particular e inyectarlo dentro de la variable que vamos a definir.
+
+```java
+// A través de la anotación @PersistenceContext, se inyectará automáticamente
+// un EntityManager producido desde el entityManagerFactory definido en la clase
+// DatabaseConfig.
+	
+@PersistenceContext
+private EntityManager entityManager;
+```
+
+Ya tenemos nuestro EntityManager para poder usarlo a lo largo de los diferentes métodos.
+
+Vamos a crear los distintos métodos CRUD que podríamos llamar.
+
+El método `create(User user)` lo que hará es persistirlo, no tenemos que preocuparnos de la gestión de transacciones.
+
+
+```java
+/**
+* Almacena el usuario en la base de datos
+*/
+public void create(User user) {
+   entityManager.persist(user);
+   return;
+}
+```
+
+Vamos a eliminar un usuario, vamos a comprobar si el usuario esta contenido antes de eliminarlo, mediante el método `contains`. Si no lo contiene lo elimina pero antes hace una operación `merge` ya hablaremos de ella con más detenimiento.
+
+```java
+/**
+* Elimina el usuario de la base de datos
+*/
+public void delete(User user) {
+   if (entityManager.contains(user))
+      entityManager.remove(user);
+   else
+      entityManager.remove(entityManager.merge(user));
+   return;
+}
+```
+
+Nos quedaría la actualización.
+
+
+```java
+/**
+* Actualiza el usuario proporcionado
+*/
+public void update(User user) {
+   entityManager.merge(user);
+   return;
+}
+```
+
+y por último los dos `getById()` que no va a devolver un usuario en base a su Id, usaremos el método de `entityManager` ya hablaremos sobre consulta, el método `find(...)` que nos va a devolver una instancia, recibe el tipo de dato y el valor id, un método muy sencillo de utilizar.
+
+```java
+/**
+* Devuelve un usuario en base a su Id
+*/
+public User getById(int id) {
+   return entityManager.find(User.class, 1);
+}
+```
+
+Y el método que nos va a devolver todos devolverá una lista de usuarios, podemos llamarlo `getAll()` no necesita recibir ningún argumento usaremos una consulta de las que crearemos en los siguientes capítulos. Le hemos añadido el `@SuppressWarnings` del cual también hablaremos más adelante.  
+
+```java
+/**
+* Devuelve todos los usuarios de la base de datos.
+*/
+@SuppressWarnings("unchecked")
+public List<User> getAll() {
+   return entityManager.createQuery("select u from User").getResultList();
+}
+```
+
+Ya tendiamos nuestra clase DAO echa.
+
+*`UserDao.java`*
+
+```java
+package com.openwebinars.hibernate.primerejemplospringjpahibernate;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+/**
+ * 
+ * Esta es la clase que usaremos para acceder a los datos de las entidades User.
+ * Al estar anotada con el estereotipo @Repository, será localizada rapidamente,
+ * y usada para tal fin.
+ * 
+ * Al tener definido un motor de transacciones en DatabaseConfig, toda clase
+ * anotada con @Transactional provocará que se invoquen los método begin()
+ * y commit() de forma "mágica" en el inicio y el fin del método.
+ * 
+ * 
+ */
+@Repository
+@Transactional
+public class UserDao {
+	
+	// A través de la anotación @PersistenceContext, se inyectará automáticamente
+	// un EntityManager producido desde el entityManagerFactory definido en la clase
+	// DatabaseConfig.
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+
+
+	/**
+	 * Almacena el usuario en la base de datos
+	 */
+	public void create(User user) {
+		entityManager.persist(user);
+		return;
+	}
+
+	/**
+	 * Elimina el usuario de la base de datos.
+	 */
+	public void delete(User user) {
+		if (entityManager.contains(user))
+			entityManager.remove(user);
+		else
+			entityManager.remove(entityManager.merge(user));
+		return;
+	}
+
+	/**
+	 * Devuelve todos los usuarios de la base de datos.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<User> getAll() {
+		return entityManager.createQuery("from User").getResultList();
+	}
+
+	/**
+	 * Devuelve un usuario en base a su Id
+	 */
+	public User getById(int id) {
+		return entityManager.find(User.class, id);
+	}
+
+	/**
+	 * Actualiza el usuario proporcionado
+	 */
+	public void update(User user) {
+		entityManager.merge(user);
+		return;
+	}
+
+	
+
+}
+```
+
 <img src="images/7-04.png">
+
+Nos faltaría crear un controlador, dentro del controlador vamos a inyectar mediante `@Autowired` nuestro DAO para poder utilizarlo y en el controlador vamos a definir los métodos necesarios para manejar peticiones a la URL create, update, delete, etc.
+
+En nestro proyectoto creariamos una nueva clase que la vamos a llamar `UserController`
+
+lo vamos a llamar yo ser controllervamos a crear un bin a partir de bueno pues el nombre y el mensaje le añadimos las anotaciones request mapping vale o incluso si queremos la anotación getmapping vale las privadas y bueno no hemos declarado todavía un mecanismo automático de creación de Direct inventar aquí uno sobre la marcha para que lo haga de manera aleatoria y no carga para para el ejemplo y no tener que pasarle el IDE como como argumento nos quedaría llamar al lado para poder crear el usuario devolver algún tipo de mensaje con respecto a la creación del usuario para que podemos visualizar directamente este mensaje no nos perdamos ahora en gestión del sistema de vistas le vamos a añadir la notación@response body lo podríamos meter todo dentro de un bloque try catchbueno las diferentes llamadas serían de una forma parecida yo la voy a aprovechar que las tengo por aquí para no alargar más la ejecución de este proyecto una manera sencilla para borrar un usuario pues cree haríamos el usuario en base a nivel y le pasaríamos ese usuario al Aldao y para actualizarlo bueno pues ya tendríamos nuestro controlador hecho ahora tendríamos que invocar ha estado URL para poder crear un nuevo usuario lo podemos comprobar vamos añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que podemos tener por ahí es server pop y nos vamos a poner por ejemplo 9002 nuestro proyecto botón derecho ejecutar como Springfield el nombre y el mensaje nombre Peperefrescamos la clase Giuseppe ahora tenemos un solo usuario app hola con esto finalizamos este capítulo en el que hemos aprendido a crear nuestro primer proyecto y también
+
+
+
+
+
+
+
+
 
 ## Contenido adicional 3   
 
