@@ -2832,7 +2832,7 @@ En la próxima lección vamos a ver el código de la clase DAO de las distintas 
 
 ## Resumen Profesor
 
-Continuación de la creación de un primer proyecto con Spring boot, Spring MVC e Hibernate
+Continuación de la creación de un primer proyecto con Spring Boot, Spring MVC e Hibernate
 
 ## Preguntas
 
@@ -3318,7 +3318,6 @@ public String updateName(int id, String name, String message) {
 
 La clase completa queda así:
 
-
 ```java
 package com.openwebinars.hibernate.primerejemplospringjpahibernate;
 
@@ -3410,6 +3409,31 @@ public class UserController {
 
 }
 ```
+
+Ya tendríamos nuestro Controlador echo, ahora tendríamos que invocar a las siguientes URLs
+
+<img src="images/7-04.png">
+
+```java
+/create?name=...&message=...
+/delete?id=...
+/update?id=...&name=...&message=...
+```
+
+Para poder crear un nuevo usuario, lo podemos comprobar.
+
+Vamos a añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que es
+
+`server.port: 9002`
+
+Y ya podriamos ejecutar nuestro proyecto como una Spring Boot App.
+
+
+
+
+
+
+
 
 yo la voy a aprovechar que las tengo por aquí para no alargar más la ejecución de este proyecto una manera sencilla para borrar un usuario pues cree haríamos el usuario en base a nivel y le pasaríamos ese usuario al Aldao y para actualizarlo bueno pues ya tendríamos nuestro controlador hecho ahora tendríamos que invocar ha estado URL para poder crear un nuevo usuario lo podemos comprobar vamos añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que podemos tener por ahí es server pop y nos vamos a poner por ejemplo 9002 nuestro proyecto botón derecho ejecutar como Springfield el nombre y el mensaje nombre Peperefrescamos la clase Giuseppe ahora tenemos un solo usuario app hola con esto finalizamos este capítulo en el que hemos aprendido a crear nuestro primer proyecto y también
 
