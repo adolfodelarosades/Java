@@ -1,11 +1,13 @@
 # 3. Definiciones y entidades 37m
-   * Entidades y su ciclo de vida 22:28 
-   * Mapeo con ficheros XML 14:45 
+   * 08 Entidades y su ciclo de vida 22:28 
+   * 09 Mapeo con ficheros XML 14:45 
    * Contenido adicional 2
    
-## Entidades y su ciclo de vida 22:28 
+# 08 Entidades y su ciclo de vida 22:28 
 
 [Entidades y su ciclo de vida](pdfs/06_Entidades_y_su_ciclo_de_vida.pdf)
+
+## Resumen Profesor
 
 ### 6.1 Modelo de Dominio
 
@@ -261,9 +263,15 @@ Si bien profundizaremos sobre este apartado en lecciones posteriores, no está d
 
 <img src="images/3-diagrama.jpg">
 
-## Mapeo con ficheros XML 14:45 
+## Preguntas
+
+## Transcripción
+
+# 09 Mapeo con ficheros XML 14:45 
 
 [Mapeo con ficheros XML](pdfs/07_Mapeo_con_ficheros_XML.pdf)
+
+## Resumen Profesor
 
 En el origen de los ORMs, no existía la posibilidad, como hemos visto en las lecciones anteriores, de mapear las clases de nuestro modelo mediante anotaciones. Esta tarea se realizaba mediante descriptores de ficheros XML. Estos deben incluir toda la información sobre cómo se llamará la tabla, los atributos que incluye, el atributo identificador. Hibernate tiene, de forma nativa, su tipología de ficheros XML, y JPA tiene otro. Veamos una introducción a ambos.
 
@@ -388,8 +396,11 @@ La versión (equivalente al ejemplo de hibernate) del fichero sería la siguient
 
 </entity-mappings>
 ```
+## Preguntas
 
-## Contenido adicional 2  
+## Transcripción
+
+# Contenido adicional 2  
 
 [Entidades y su ciclo de vida](pdfs/06_Entidades_y_su_ciclo_de_vida.pdf)
 
