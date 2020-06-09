@@ -264,6 +264,39 @@ Si bien profundizaremos sobre este apartado en lecciones posteriores, no está d
 
 ## Preguntas
 
+P= Me salta este error al correr el la clase App
+
+```sh
+Exception in thread "main" javax.persistence.PersistenceException: [PersistenceUnit: HibernateJPAGeneracionId] Unable to build Hibernate SessionFactory
+at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1225)
+at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:119)
+```
+
+R= No he entendido bien en tu mensaje si has modificado el código o no. Si te puedo decir que no todos los dialectos (es decir, no todos los sistemas gestores de bases de datos) tienen porqué soportar todos los tipos de estrategias de generación de claves primarias. A no ser que queramos escoger una forma concreta por alguna cuestión de eficiencia o circunstancia del proyecto, se suele indicar la estrategia Auto; al hacerlo, Hibernate escoge, en función del dialecto, la mejor estrategia para ese sistema gestor.
+
+P= Al momento de modelar el dominio de la aplicación, he visto en varios tutoriales y sistemas que el atributo "Id" lo representan de varias formas: int, long, Integer, Long. Igualmente para valores como: edad, precio, importeTotal, o atributos contables algunos hacen uso del tipo de valor primitivo y otros invocan a un objeto (double o Double). Una vez tuve la oportunidad de preguntarle por qué lo definia de tal manera y me respondia que por ejemplo para un "Id" de tipo Integer lo pueden asignar como "null" en caso inicialice un objeto y eso no se puede hacer con el "int" Mi pregunta es:
+
+¿Cuál es la forma correcta de utilizar para el modelo del dominio definirlos con un tipo primitivo o con su equivalente en clases (Integer, Long, Double)?
+¿Definirlo de una u otra forma afecta el rendimiento o alguna buena práctica en el desarrollo del código?
+
+R= Tu pregunta es buena, y por desgracia no tiene una única respuesta, ya que en el fondo depende del problema a resolver. Podemos tener en cuenta algunas consideraciones:
+
+* El uso de los tipos primitivos es francamente cómodo, y posiblemente (esto tendría que estudiarlo con mayor detenimiento), a nivel de Java tenga mejor rendimiento.
+* El uso de un tipo primitivo y su correspondiente wrapper produce un DDL casi idéntico (en caso de que deleguemos en JPA/Hibernate la generación del esquema de base de datos). Así, que en ese sentido, el rendimiento es el mismo. Si es verdad que tendríamos severas diferencias si la columna que estamos mapeando soporta valores nulos o no.
+* El uso de tipos primitivos estaría indicado: cuando no queremos dar la posibilidad de valor nulo o cuando vamos a realizar una gran cantidad de operaciones matemáticas con esos valores (como te digo, en principio tienen mejor rendimiento, aunque tendría que estudiar con detenimiento el factor de comparación entre ambos).
+* El uso de los tipos envoltorio (wrappers) estaría indicado: si queremos permitir el uso de nulo, si vamos a utilizar colleciones, como tipo de retorno de métodos que, de vez en cuando, pueden devolver nulo, etc...
+
+Por tanto, la única conclusión que a mi modo de ver podríamos sacar, es que la si la columna no va a soportar nulos, no hay inconveniente en usar tipos primitivos; y si va a soportar nulos, sería bueno usar las clases envoltorio.
+
+P= Tengo algunas consultas para hibernate y el uso de algunos comando:
+1. la opcion que ponemos Hbm2ddl.auto: Create. En produccion que valor debe tener o si se debe de usar?.
+2. los campos Id s pueden generar con numeros y letras por ejemplo para el cliente seria: C00001
+
+R= Te respondo:
+
+1. En producción no usaría la opción Hbm2ddl.auto; vamos, la pondría a none. Aunque parezca mentira, lo ideal sería llevar esa gestión por nuestra cuenta, o bien a través de algún sistema como Flyway o Liquibase, que nos permiten que nuestra base de datos vaya "evolucionando", y replicar estos cambios en diferentes entornos (desarrollo, pruebas, preproducción, producción, ...). En todo caso, si se quiere usar, la opción sería update, que mantiene los datos que haya en la base de datos ya añade los cambios necesarios al DDL.
+2. Sí que se podría, pero tendrías que implementar tú el generador para hacerlo a nivel de base de datos, posiblemente a través de un procedimiento almacenado. La manera más fácil, creo yo, sería utilizar java.util.UUID como tipo de dato, y utilizar la generación automática de valores.
+
 ## Transcripción
 
 <img src="images/8-01.png">
@@ -438,6 +471,50 @@ La versión (equivalente al ejemplo de hibernate) del fichero sería la siguient
 </entity-mappings>
 ```
 ## Preguntas
+
+P= Al configurar el mapeo en el XML me saltaba un error a la hora de parsear el XML. He sustituido los elementos class por elementos type quedando así :
+
+```html
+<hibernate-mapping>
+    <class name="com.openwebinars.hibernate.hibernatexml.User" table="User">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userName" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="userMessage" type ="java.lang.String">
+            <column name="USERMESSAGE" />
+        </property>
+    </class>
+</hibernate-mapping>
+```
+
+¿A qué se puede deber?
+
+R= ¿Te indica algún error en concreto?
+
+P=Esto esta super desactualizado, ahora ya no se mapea con ficheros XML porque se puede hacer de forma muy sencilla con las java anotattions.
+Por favor actualizar los cursos!!
+
+R= Efectivamente, no creo que nadie utilice en proyectos nuevos este tipo de mapeo. Por ello, no es el que se usa principalmente a lo largo del curso.
+
+Este tipo de mapeo se explica, en primer lugar, para saber que existe; y en segundo lugar, por si alguna vez trabajáis en algún proyecto con código heredado, algo que es más habitual de lo que parece.
+
+R=Eso lo entiendo, y esta bien una explicación de la configuración de los xml para saber como funciona. Pero vais a subir un curso tanto de spring como hibernate actualizados? tener en cuenta que son los frameworks mas utilizados en desarrollo java y hay empresas en las que no tenemos ya ni un solo proyecto con xml...
+Muchas gracias!
+
+R= De Spring hay publicados algunos cursos que utilizan la versión 5.X:
+
+Curso de Spring Boot y Spring Web MVC
+Curso de Desarrollo de una API REST con Spring Boot
+Curso de Elementos avanzados en tu API REST con Spring Boot
+Curso de Seguridad en tu API REST con Spring Boot.
+Por ser también adyacentes, también tienes los cursos de Introducción a Thymeleaf y Thymeleaf intermedio.
+
+Un saludo.
+
 
 ## Transcripción
 
