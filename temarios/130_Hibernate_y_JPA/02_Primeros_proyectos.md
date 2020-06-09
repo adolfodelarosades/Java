@@ -2916,13 +2916,48 @@ Me daba este error al crear la tabla: Sintaxis incorrecta cerca de la palabra cl
 Pensaba que era un problema de dialecto que no estaba poniendo el correcto hasta que encontré que es porque User es palabra reservada. He cambiado la clase java User por UsuarioPrueba y todo me ha ido bien.
 R=Gracias por compartirlo Ana Isabel.
 
-
-
 ## Transcripción
+
+Vamos a continuar con el ejemplo anterior de Spring Boot, Spring MVC, JPA y Hibernate configurando el fichero de properties. Si en el fichero `DatabaseConfig` indicabamos que íbamos a usar unsa seríe de properties tenemos que darle valor a esas propiedades, en el fichero de properties que tenemos dentro de la ruta `source/main/resource` podemos definir todas esas propiedades.
+
+Primero vamos a definir sobre la conexión a la base de datos, el driver, la url, nombre de usuario y contraseña.
+
+Nos quedan ahora algunas propiedades como la de busqueda de entidades, damos la ruta dónde vamos a incluir la entidad.
+
+Y las propiedades propias de Hibernate cómo eran el dialecto, que nos muestre el SQL por pantalla y que cree la base de datos automaticamente.
+
+*`application.properties`*
+
+```sh
+# Base de datos
+db.driver: com.mysql.jdbc.Driver
+db.url: jdbc:mysql://localhost/hibernate
+db.username: openwebinars
+db.password: 12345678
+
+# Busqueda de entidades
+entitymanager.packagesToScan: com.openwebinars.hibernate.spring
+
+# Hibernate
+hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+hibernate.show_sql: true
+hibernate.hbm2ddl.auto: create
+```
+
+Muy bien ya lo tenemos configurado.
 
 <img src="images/7-02.png">
 
+Ahora siguiendo los pasos de nuestro tutorial, tendríamos que crear la clase Entidad y la clase DAO.
+
 <img src="images/7-01.png">
+
+
+diseño de en el que organizamos el acceso datos mediante una clase que nos van a devolver objetos de nuestro modelo en lugar de acceder directamente al origen de los datos es el trabajar con diferentes bases de datos diferentes sistemas de persistencia sin que bueno pues nos tengamos que preocupar de cuál cogemos en particular y también nos ofrece una interfaz común con ese almacén de datos bien pues vamos encargarnos de crear esa clase entidad y la clase dado que servirá para para manejarla en la clase dado no podemos olvidar anotarlo con la notación de repository eso nos permitirá indicar que se trata de un pin de acceso a datos y además con transaccional eso va a indicar que dentro de cada uno de los métodos cuando lo llamemos justo antes de empezar la llamada al método se comenzara una transacción y justo al terminar el código del método esa transacción será commitear sin que nosotros tenemos que encargar lo de hacerlo como los proyectos anteriores también tenemos que añadir que inyectar el contexto de persistencia y tendremos que implementarlo los diferentes métodos necesarios la clase ilusa han igual que antes la podremos y queda como una entidad que vamos a manejar creamos una nueva clase que vamos a llamar y como decíamos antes esta clase tendremos que anotar la coma bombín estereotipado como repositorio que además va a ejecutarse dentro de un marco transaccional los diferentes métodos que tendrá este bien pues son los lógicos de una clase que va a acceder a los datos nos permitirá crear una nueva instancia actualizar un existente borrar un existente obtener todas las que hay determinado tipo de tipo Giuseppe y obtener una en particular en base a a Swift obtener EntityManager una notación y lo que va a hacer eso buscar una factoría de EntityManager construir un EntityManager en particular e inyectarlo dentro de esta variable que vamos a tener aquí EntityManager para poder usarlo a lo largo de los diferentes bueno vamos a crear los distintos métodos que podríamos llamar y que lo único que hará será persistir no como decíamos antes no tenemos que preocuparnos de ver la gestión de transacciones vamos a eliminar un usuario si queremos podemos comprobar si el usuario existe si está contenido antes de de eliminarlo venga y en otro caso lo que podemos hacer es eliminar pero antes de eliminar hacer una operación merge ya hablaremos de ella con más detenimiento get by ve que no va a devolver un usuario en base a su bebé usaremos el método dentix y manager ya hablaremos sobre consulta el método fine que nos va a devolver una instancia recibe el tipo de dato y el valor del nivel muy sencillo de utilizar y el método que nos va a devolver todos devolverá una lista de usuarios podemos llamar particular warning ya tendríamos nuestra clase dado hecha no faltaría crear un controlador dentro del controlador vamos a inyectar mediante autowave en nuestro lado para poder utilizarlo y en el controlador vamos a definir los métodos necesarios para manejar peticiones a la URL create today etcétera lo vamos a llamar yo ser controllervamos a crear un bin a partir de bueno pues el nombre y el mensaje le añadimos las anotaciones request mapping vale o incluso si queremos la anotación getmapping vale las privadas y bueno no hemos declarado todavía un mecanismo automático de creación de Direct inventar aquí uno sobre la marcha para que lo haga de manera aleatoria y no carga para para el ejemplo y no tener que pasarle el IDE como como argumento nos quedaría llamar al lado para poder crear el usuario devolver algún tipo de mensaje con respecto a la creación del usuario para que podemos visualizar directamente este mensaje no nos perdamos ahora en gestión del sistema de vistas le vamos a añadir la notación@response body lo podríamos meter todo dentro de un bloque try catchbueno las diferentes llamadas serían de una forma parecida yo la voy a aprovechar que las tengo por aquí para no alargar más la ejecución de este proyecto una manera sencilla para borrar un usuario pues cree haríamos el usuario en base a nivel y le pasaríamos ese usuario al Aldao y para actualizarlo bueno pues ya tendríamos nuestro controlador hecho ahora tendríamos que invocar ha estado URL para poder crear un nuevo usuario lo podemos comprobar vamos añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que podemos tener por ahí es server pop y nos vamos a poner por ejemplo 9002 nuestro proyecto botón derecho ejecutar como Springfield el nombre y el mensaje nombre Peperefrescamos la clase Giuseppe ahora tenemos un solo usuario app hola con esto finalizamos este capítulo en el que hemos aprendido a crear nuestro primer proyecto y también
+
+
+
+
 
 <img src="images/7-03.png">
 
