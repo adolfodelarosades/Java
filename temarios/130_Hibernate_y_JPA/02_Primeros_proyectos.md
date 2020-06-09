@@ -2487,23 +2487,42 @@ Spring Tool Suite descarga el proyecto, se trata de un proyecto especial porque 
 
 <img src="images/6-14.png">
 
+<img src="images/6-06.png">
+
 Como primer paso vamos a marcar la configuración que va a tener este proyecto JPA con Hibernate, en lugar de hacerlo mediante XML cosa que hemos hecho en los dos proyectos anteriores, vamos a aprovechar la tecnología Java Config que nos ofrece Spring para configurar el proyecto a través de una clase.
 
 Para ello creamos una nueva clase, la vamos a llamar `DatabaseConfig`.
 
 <img src="images/6-15.png">
 
-La vamos a anotar con `@Configuration`lo cual le va a indicar a Spring Boot que se trata de una clase de configuración y la ejecutará en el momento correspondiente y vamos a añadir la anotación de la habilitación de la gestión de transacciones para que podamos definir la gestión de transacciones también en esta clase `@EnableTransactionManagement`.
-
-
-Dentro tenemos que crear una serie de BEBIN en particular tengo que crear un bin dónde cenamos el origen de los datos vale en el haremos referencia al fichero de properties que donde finalmente pondremos está esteel empirismo manager Factory vale y cómo lo va a crear a partir del DataSource que hemos definido indicándole las clases que va a manejar indicándole la implementación que vamos a utilizar de JP a que nuestro caso será hibernate y las propiedades adicionales viernes que hemos estado añadiendo hasta ahora en los diferentes proyectos de ejemplo por último quién se va a encargar de las transacciones veremos que tienes que iba a ser más sencillo y este proceso que se va a encargar de determinadas excepciones para que las podamos recoger de una manera efectiva y por último dentro de esta clase de configuración autoinyector hemos los fin qué vamos a que vamos a necesitar el código generar un bin dónde cargaremos a las propiedades vale para crear este bien vamos a necesitar de un elemento que esté auto cabreado que sepáis que nos va a permitir leer la configuración de las diferentes properties que vamos a tener definidas ya dentro de este método lo que vamos a hacer es crear data shows a partir del 3er manager para los que ya habéis trabajado con JDBC y grata souls puede que este código o resulte un poco un poco conocido marcamos las propiedades de origen de datos en driver vamos a cargar desde una propiedad la propiedad bebé drivers que definiremos en el fichero de properties para que esté más rollo la URL de conexión que también la vamos a cargar más y el nombre de usuario y contraseña usernamemuy bien ya tenemos nuestro bien de origen de datos y lo vamos a auto cablear también directamente aquí para que cuando se cargue el fichero de configuración seauto en Yepes después añadiremos estos valores en el fichero de properties vamos a hacer la la declaración del entitymanagerfactory' vale te meto déjalo más largo spring nos va a permitir definir mediante un bean el invite manager Factory de forma local me voy a hacer el objeto que va a devolver qué método este objeto nos permitirá generar el EntityManager haya dónde lo vayamos a necesitar de una manera que veremos qué pasa ante interesante bueno creamos un nuevo objeto de este tipovamos asignarle una serie de propiedades en primer lugar le asignamos como origen de datos en data shows que hemos creado a inyectado en esta clase en segundo lugar le vamos a indicar cuál será los paquetes que tiene que escanear para buscar las clases notada en vez de la también como como un property en el fichero de propertiesen tercer lugar le vamos a decir que como implementación comento de JP a vamos a usar hibernate para eso usaremos o en las clases propias que nos da hibernate para ellos y se lo haremos y por último vamos añadirlos las propiedades de hibernate que hemos arrastrado hasta antes como son el dialecto la propiedad su SQL y la degeneración de DL que también se cargará desde el fichero de properties directamente property también Esquivel y añadimos y vende hbm2ddl auto propiedades ya estaría completo no faltaría definir el gestor de transacciones y el sebin proceso del que hablamos antes de transacciones vendrá definido por un JP a transaction manager perfecto a este transaction manager le vamos a resetear el entitymanagerfactory' que venimos manejando particular hace falta añadir ya veremos qué fácil es manejar las transacciones y por último post proceso una serie de excepciones a nivel de base de datos a través de las distintas capas para que nosotros nos podamos utilizarel código de la clase dao de las distintas entidades en particular y del controlador para finalizar este proyecto de primer ejemplo con spring jpg ibernet
-
-
-
-
-<img src="images/6-06.png">
+La vamos a anotar con `@Configuration` lo cual le va a indicar a Spring Boot que se trata de una clase de configuración y la ejecutará en el momento correspondiente y vamos a añadir la anotación de la habilitación de la gestión de transacciones para que podamos definir la gestión de transacciones también en esta clase `@EnableTransactionManagement`.
 
 <img src="images/6-07.png">
+
+Dentro tenemos que crear una serie de BEANs, en particular tenemos que crear una serie de beans dónde definamos el origen de los datos, en el haremos referencia al fichero de properties que es donde finalmente pondremos está configuración.
+
+<img src="images/6-08.png">
+
+Vamos a crear otro bean que será el que se encargue de crear el `entityManagerFactory` y cómo lo va a crear, a partir del DataSource que hemos definido indicándole las clases que va a manejar, indicándole la implementación que vamos a utilizar de JPA que en nuestro caso será Hibernate y las propiedades adicionales de Hibernate que hemos estado añadiendo hasta ahora en los diferentes proyectos de ejemplo.
+
+<img src="images/6-09.png">
+
+Por último también definiremos quien se va a encargar de las transacciones, veremos que el manejo de las transacciones con Spring aquí será más sencillo y este `PostProcessor` se va a encargar de determinadas excepciones para que las podamos recoger de una manera efectiva. 
+
+<img src="images/6-10.png">
+
+Y por último dentro de esta clase de configuración autoinyectoremos los beans qué vamos a necesitar. 
+
+Vamos a crear el código.
+
+ue vamos a necesitar el código generar un bin dónde cargaremos a las propiedades vale para crear este bien vamos a necesitar de un elemento que esté auto cabreado que sepáis que nos va a permitir leer la configuración de las diferentes properties que vamos a tener definidas ya dentro de este método lo que vamos a hacer es crear data shows a partir del 3er manager para los que ya habéis trabajado con JDBC y grata souls puede que este código o resulte un poco un poco conocido marcamos las propiedades de origen de datos en driver vamos a cargar desde una propiedad la propiedad bebé drivers que definiremos en el fichero de properties para que esté más rollo la URL de conexión que también la vamos a cargar más y el nombre de usuario y contraseña usernamemuy bien ya tenemos nuestro bien de origen de datos y lo vamos a auto cablear también directamente aquí para que cuando se cargue el fichero de configuración seauto en Yepes después añadiremos estos valores en el fichero de properties vamos a hacer la la declaración del entitymanagerfactory' vale te meto déjalo más largo spring nos va a permitir definir mediante un bean el invite manager Factory de forma local me voy a hacer el objeto que va a devolver qué método este objeto nos permitirá generar el EntityManager haya dónde lo vayamos a necesitar de una manera que veremos qué pasa ante interesante bueno creamos un nuevo objeto de este tipovamos asignarle una serie de propiedades en primer lugar le asignamos como origen de datos en data shows que hemos creado a inyectado en esta clase en segundo lugar le vamos a indicar cuál será los paquetes que tiene que escanear para buscar las clases notada en vez de la también como como un property en el fichero de propertiesen tercer lugar le vamos a decir que como implementación comento de JP a vamos a usar hibernate para eso usaremos o en las clases propias que nos da hibernate para ellos y se lo haremos y por último vamos añadirlos las propiedades de hibernate que hemos arrastrado hasta antes como son el dialecto la propiedad su SQL y la degeneración de DL que también se cargará desde el fichero de properties directamente property también Esquivel y añadimos y vende hbm2ddl auto propiedades ya estaría completo no faltaría definir el gestor de transacciones y el sebin proceso del que hablamos antes de transacciones vendrá definido por un JP a transaction manager perfecto a este transaction manager le vamos a resetear el entitymanagerfactory' que venimos manejando particular hace falta añadir ya veremos qué fácil es manejar las transacciones y por último post proceso una serie de excepciones a nivel de base de datos a través de las distintas capas para que nosotros nos podamos utilizarel código de la clase dao de las distintas entidades en particular y del controlador para finalizar este proyecto de primer ejemplo con spring jpg ibernet
+
+
+
+
+
+
+
 
 <img src="images/6-08.png">
 
