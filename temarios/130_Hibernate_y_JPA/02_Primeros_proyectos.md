@@ -2497,6 +2497,14 @@ Para ello creamos una nueva clase, la vamos a llamar `DatabaseConfig`.
 
 La vamos a anotar con `@Configuration` lo cual le va a indicar a Spring Boot que se trata de una clase de configuración y la ejecutará en el momento correspondiente y vamos a añadir la anotación de la habilitación de la gestión de transacciones para que podamos definir la gestión de transacciones también en esta clase `@EnableTransactionManagement`.
 
+```jav
+@Configuration
+@EnableTransactionManagement
+public class DatabaseConfig {
+
+}
+```
+
 <img src="images/6-07.png">
 
 Dentro tenemos que crear una serie de BEANs, en particular tenemos que crear una serie de beans dónde definamos el origen de los datos, en el haremos referencia al fichero de properties que es donde finalmente pondremos está configuración.
@@ -2515,20 +2523,313 @@ Y por último dentro de esta clase de configuración autoinyectoremos los beans 
 
 Vamos a crear el código.
 
-ue vamos a necesitar el código generar un bin dónde cargaremos a las propiedades vale para crear este bien vamos a necesitar de un elemento que esté auto cabreado que sepáis que nos va a permitir leer la configuración de las diferentes properties que vamos a tener definidas ya dentro de este método lo que vamos a hacer es crear data shows a partir del 3er manager para los que ya habéis trabajado con JDBC y grata souls puede que este código o resulte un poco un poco conocido marcamos las propiedades de origen de datos en driver vamos a cargar desde una propiedad la propiedad bebé drivers que definiremos en el fichero de properties para que esté más rollo la URL de conexión que también la vamos a cargar más y el nombre de usuario y contraseña usernamemuy bien ya tenemos nuestro bien de origen de datos y lo vamos a auto cablear también directamente aquí para que cuando se cargue el fichero de configuración seauto en Yepes después añadiremos estos valores en el fichero de properties vamos a hacer la la declaración del entitymanagerfactory' vale te meto déjalo más largo spring nos va a permitir definir mediante un bean el invite manager Factory de forma local me voy a hacer el objeto que va a devolver qué método este objeto nos permitirá generar el EntityManager haya dónde lo vayamos a necesitar de una manera que veremos qué pasa ante interesante bueno creamos un nuevo objeto de este tipovamos asignarle una serie de propiedades en primer lugar le asignamos como origen de datos en data shows que hemos creado a inyectado en esta clase en segundo lugar le vamos a indicar cuál será los paquetes que tiene que escanear para buscar las clases notada en vez de la también como como un property en el fichero de propertiesen tercer lugar le vamos a decir que como implementación comento de JP a vamos a usar hibernate para eso usaremos o en las clases propias que nos da hibernate para ellos y se lo haremos y por último vamos añadirlos las propiedades de hibernate que hemos arrastrado hasta antes como son el dialecto la propiedad su SQL y la degeneración de DL que también se cargará desde el fichero de properties directamente property también Esquivel y añadimos y vende hbm2ddl auto propiedades ya estaría completo no faltaría definir el gestor de transacciones y el sebin proceso del que hablamos antes de transacciones vendrá definido por un JP a transaction manager perfecto a este transaction manager le vamos a resetear el entitymanagerfactory' que venimos manejando particular hace falta añadir ya veremos qué fácil es manejar las transacciones y por último post proceso una serie de excepciones a nivel de base de datos a través de las distintas capas para que nosotros nos podamos utilizarel código de la clase dao de las distintas entidades en particular y del controlador para finalizar este proyecto de primer ejemplo con spring jpg ibernet
+Vamos a generar un bean dónde cargaremos las propiedades.
+
+```java
+@Bean
+public DataSource dataSource() {
+		
+}
+```
+
+Para crear este bean vamos a necesitar de un elemento que esté auto-inyectado, auto-cableado que es `Environment`.
+
+```java
+@Autowired
+private Environment env;
+```
+
+Que nos va a permitir leer la configuración de las diferentes properties, que vamos a tener definidas.
+
+Ya dentro del método `dataSource()` lo que vamos a hacer es crear el `dataSource` a partir del `DriverManager` para los que ya habéis trabajado con JDBC y DataSource puede ser que este código resulte un poco conocido.
+
+`DriverManagerDataSource dataSource = new DriverManagerDataSource();`
+
+Marcamos las propiedades del origen de datos, el driver que lo vamos a cargar desde una propiedad, la propiedad `db.driver` que definiremos en el fichero de properties.
+
+`dataSource.setDriverClassName(env.getProperty("db.driver"));`
+
+La URL de conexión que también la vamos a cargar desde la propiedad `db.url`
+
+`dataSource.setUrl(env.getProperty("db.url"));`
+
+Y el nombre de usuario y contraseña 
+
+```java
+dataSource.setUsername(env.getProperty("db.username"));
+dataSource.setPassword(env.getProperty("db.password"));
+```
+
+Y finalmente retornamos el `dataSource`.
+
+```java
+return dataSource;
+```
+
+Todo el bean queda así:
+
+```java
+/**
+* Definición del DataSource para la conexión a nuestra base de datos. 
+* Las propiedades son establecidas desde el fichero de properties, y 
+* asignadas usando el objeto env.
+* 
+*/
+@Bean
+public DataSource dataSource() {
+   DriverManagerDataSource dataSource = new DriverManagerDataSource();
+   dataSource.setDriverClassName(env.getProperty("db.driver"));
+   dataSource.setUrl(env.getProperty("db.url"));
+   dataSource.setUsername(env.getProperty("db.username"));
+   dataSource.setPassword(env.getProperty("db.password"));
+   return dataSource;
+}
+```
+
+Después añadiremos estos valores en el fichero de properties.
+
+Muy bien ya tenemos nuestro bean de origen de datos y lo vamos a auto-cablear también directamente aquí para que cuando se cargue el fichero de configuración se auto-inyecte.
+
+```java
+@Autowired
+private DataSource dataSource;
+```
+
+Vamos a hacer la declaración del `EntityManagerFactory` este método es algo más largo. Spring nos va a permitir definir mediante un bean el `EntityManagerFactory` de forma local mediante el objeto que va a devolver este método.
+
+```java
+@Bean
+public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+
+}
+```
+
+Ya lo podemos auto-cablear.
+
+```java
+@Autowired
+private LocalContainerEntityManagerFactoryBean entityManagerFactory;
+```
+
+Este objeto nos permitirá generar el EntityManager haya dónde lo vayamos a necesitar de una manera que veremos qué es batante interesante.
+
+Volviendo al método `entityManagerFactory()` creamos un nuevo objeto de este tipo, que será el que devolvamos.
+
+```java
+@Bean
+public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+
+   LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		
+   return entityManagerFactory;
+}
+```
+
+Y ahora vamos a asignarle una serie de propiedades, en primer lugar le asignamos como origen de datos el DataSource que hemos creado a inyectado en esta clase.
 
 
+```java
+//Le asignamos el dataSource que acabamos de definir.
+entityManagerFactory.setDataSource(dataSource);
+```
+
+En segundo lugar le vamos a indicar cuál será los paquetes que tiene que escanear para buscar las clases anotadas, vendrá también como un property en el fichero de properties.
+
+```java
+// Le indicamos la ruta donde tiene que buscar las clases anotadas
+		entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+
+```
+
+En tercer lugar le vamos a decir que como implementación, como vendor de JPA  vamos a usar Hibernate, para eso usaremos las clases propias que nos da Hibernate para ellos, a través de `HibernateJpaVendorAdapter` y se lo asignaremos al `entityManagerFactory`.
+
+```java
+// Implementación de JPA a usar: Hibernate
+HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+````
+Y por último vamos añadirlos las propiedades de Hibernate que hemos arrastrado hasta antes, como son el dialecto, la propiedad show SQL y la generación del DDL, que también se cargará desde el fichero de properties.
+
+```java
+// Propiedades de Hiberante
+Properties additionalProperties = new Properties();
+additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+entityManagerFactory.setJpaProperties(additionalProperties);
+```
+
+Y finalmente retornamos el `entityManagerFactory`.
+
+`return entityManagerFactory;`
 
 
+Este método ya estaría completo.
+
+```java
+/**
+*
+* Declaración del EntityManagerFactory de JPA
+ */
+@Bean
+public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+   LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		
+   //Le asignamos el dataSource que acabamos de definir.
+   entityManagerFactory.setDataSource(dataSource);
+
+   // Le indicamos la ruta donde tiene que buscar las clases anotadas
+   entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+
+   // Implementación de JPA a usar: Hibernate
+   HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+   entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+
+   // Propiedades de Hiberante
+   Properties additionalProperties = new Properties();
+   additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+   additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+   additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+   entityManagerFactory.setJpaProperties(additionalProperties);
+
+   return entityManagerFactory;
+}
+```
+
+Nos faltaría definir el gestor de transacciones y el bean `PostProcessor` del que hablamos antes.
 
 
+El gestor de transacciones vendrá definido por un `JpaTransactionManager`. A este transaction manager le vamos a setear el `entityManagerFactory` que venimos manejando y lo retornamos, ya veremos qué fácil es manejar las transacciones.
 
 
-<img src="images/6-08.png">
+```java
+/**
+* Inicializa y declara el gestor de transacciones
+*/
+@Bean
+public JpaTransactionManager transactionManager() {
+   JpaTransactionManager transactionManager = new JpaTransactionManager();
+   transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+   return transactionManager;
+}
+```
 
-<img src="images/6-09.png">
+Y por último el bean `PostProcessor` que nos permitira relanzar una serie de excepciones a nivel de base de datos a través de las distintas capas para que nosotros las podamos utilizar. 
 
-<img src="images/6-10.png">
+
+```java
+/**
+*  
+* Este bean es un postprocessor que ayuda a relanzar las excepciones específicas
+* de cada plataforma en aquellas clases anotadas con @Repository
+* 
+*/
+@Bean
+public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+   return new PersistenceExceptionTranslationPostProcessor();
+}
+```
+
+La clase completa a quedado así.
+
+```java
+package com.openwebinars.hibernate.primerejemplospringjpahibernate;
+
+import java.util.Properties;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@EnableTransactionManagement
+public class DatabaseConfig {
+
+	/**
+	 * Definición del DataSource para la conexión a nuestra base de datos. 
+	 * Las propiedades son establecidas desde el fichero de properties, y 
+	 * asignadas usando el objeto env.
+	 * 
+	 */
+	@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName(env.getProperty("db.driver"));
+		dataSource.setUrl(env.getProperty("db.url"));
+		dataSource.setUsername(env.getProperty("db.username"));
+		dataSource.setPassword(env.getProperty("db.password"));
+		return dataSource;
+	}
+
+	/**
+	 *
+	 * Declaración del EntityManagerFactory de JPA
+	 */
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		
+		//Le asignamos el dataSource que acabamos de definir.
+		entityManagerFactory.setDataSource(dataSource);
+
+		// Le indicamos la ruta donde tiene que buscar las clases anotadas
+		entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+
+		// Implementación de JPA a usar: Hibernate
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+
+		// Propiedades de Hiberante
+		Properties additionalProperties = new Properties();
+		additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		entityManagerFactory.setJpaProperties(additionalProperties);
+
+		return entityManagerFactory;
+	}
+
+	/**
+	 * Inicializa y declara el gestor de transacciones
+	 */
+	@Bean
+	public JpaTransactionManager transactionManager() {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+		return transactionManager;
+	}
+
+	/**
+	 *  
+	 * Este bean es un postprocessor que ayuda a relanzar las excepciones específicas
+	 * de cada plataforma en aquellas clases anotadas con @Repository
+	 * 
+	 */
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	@Autowired
+	private Environment env;
+
+	@Autowired
+	private DataSource dataSource;
+
+	@Autowired
+	private LocalContainerEntityManagerFactoryBean entityManagerFactory;
+
+}
+```
+
+En la próxima lección vamos a ver el código de la clase DAO de las distintas entidades que vamos a manejar en particular una y del controlador para finalizar este proyecto de primer ejemplo con Spring JPA Hibernet.
 
 # 07 Primer proyecto con Spring boot, Spring MVC e Hibernate (parte II) 16:34 
 
