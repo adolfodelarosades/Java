@@ -215,7 +215,6 @@ public class User {
 
 De esta forma, Hibernate detecta que el campo `Direccion` es una clase `Embeddable`, y mapea las columnas a la tabla `USER`.
 
-
 #### 6.5.1 Sobrescritura con @Embedded
 
 ¿Qué pasaría si quisiéramos añadir dos direcciones a un usuario? Hibernate nos lanzará un error, indicando que no se soportan columnas con nombre repetido.
@@ -266,6 +265,48 @@ Si bien profundizaremos sobre este apartado en lecciones posteriores, no está d
 ## Preguntas
 
 ## Transcripción
+
+<img src="images/8-01.png">
+
+<img src="images/8-02.png">
+
+<img src="images/8-03.png">
+
+<img src="images/8-04.png">
+
+<img src="images/8-05.png">
+
+<img src="images/8-06.png">
+
+<img src="images/8-07.png">
+
+<img src="images/8-08.png">
+
+<img src="images/8-09.png">
+
+<img src="images/8-10.png">
+
+<img src="images/8-11.png">
+
+<img src="images/8-12.png">
+
+<img src="images/8-13.png">
+
+<img src="images/8-14.png">
+
+<img src="images/8-15.png">
+
+<img src="images/8-16.png">
+
+<img src="images/8-15.png">
+
+<img src="images/8-18.png">
+
+<img src="images/8-19.png">
+
+<img src="images/8-20.png">
+
+<img src="images/8-21.png">
 
 # 09 Mapeo con ficheros XML 14:45 
 
@@ -399,6 +440,20 @@ La versión (equivalente al ejemplo de hibernate) del fichero sería la siguient
 ## Preguntas
 
 ## Transcripción
+
+<img src="images/9-01.png">
+
+<img src="images/9-02.png">
+
+<img src="images/9-03.png">
+
+<img src="images/9-04.png">
+
+<img src="images/9-05.png">
+
+<img src="images/9-06.png">
+
+<img src="images/9-07.png">
 
 # Contenido adicional 2  
 
