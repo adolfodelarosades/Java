@@ -2697,7 +2697,6 @@ public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
 Nos faltaría definir el gestor de transacciones y el bean `PostProcessor` del que hablamos antes.
 
-
 El gestor de transacciones vendrá definido por un `JpaTransactionManager`. A este transaction manager le vamos a setear el `entityManagerFactory` que venimos manejando y lo retornamos, ya veremos qué fácil es manejar las transacciones.
 
 
@@ -3035,7 +3034,6 @@ Vamos a crear los distintos métodos CRUD que podríamos llamar.
 
 El método `create(User user)` lo que hará es persistirlo, no tenemos que preocuparnos de la gestión de transacciones.
 
-
 ```java
 /**
 * Almacena el usuario en la base de datos
@@ -3063,7 +3061,6 @@ public void delete(User user) {
 
 Nos quedaría la actualización.
 
-
 ```java
 /**
 * Actualiza el usuario proporcionado
@@ -3074,7 +3071,7 @@ public void update(User user) {
 }
 ```
 
-y por último los dos `getById()` que no va a devolver un usuario en base a su Id, usaremos el método de `entityManager` ya hablaremos sobre consulta, el método `find(...)` que nos va a devolver una instancia, recibe el tipo de dato y el valor id, un método muy sencillo de utilizar.
+Y por último los dos `getById()` que no va a devolver un usuario en base a su Id, usaremos el método de `entityManager` ya hablaremos sobre consulta, el método `find(...)` que nos va a devolver una instancia, recibe el tipo de dato y el valor id, un método muy sencillo de utilizar.
 
 ```java
 /**
@@ -3187,9 +3184,239 @@ public class UserDao {
 
 Nos faltaría crear un controlador, dentro del controlador vamos a inyectar mediante `@Autowired` nuestro DAO para poder utilizarlo y en el controlador vamos a definir los métodos necesarios para manejar peticiones a la URL create, update, delete, etc.
 
-En nestro proyectoto creariamos una nueva clase que la vamos a llamar `UserController`
+En nuestro proyecto crearíamos una nueva clase que la vamos a llamar `UserController` la vamos a anotar con `@Controller`.
 
-lo vamos a llamar yo ser controllervamos a crear un bin a partir de bueno pues el nombre y el mensaje le añadimos las anotaciones request mapping vale o incluso si queremos la anotación getmapping vale las privadas y bueno no hemos declarado todavía un mecanismo automático de creación de Direct inventar aquí uno sobre la marcha para que lo haga de manera aleatoria y no carga para para el ejemplo y no tener que pasarle el IDE como como argumento nos quedaría llamar al lado para poder crear el usuario devolver algún tipo de mensaje con respecto a la creación del usuario para que podemos visualizar directamente este mensaje no nos perdamos ahora en gestión del sistema de vistas le vamos a añadir la notación@response body lo podríamos meter todo dentro de un bloque try catchbueno las diferentes llamadas serían de una forma parecida yo la voy a aprovechar que las tengo por aquí para no alargar más la ejecución de este proyecto una manera sencilla para borrar un usuario pues cree haríamos el usuario en base a nivel y le pasaríamos ese usuario al Aldao y para actualizarlo bueno pues ya tendríamos nuestro controlador hecho ahora tendríamos que invocar ha estado URL para poder crear un nuevo usuario lo podemos comprobar vamos añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que podemos tener por ahí es server pop y nos vamos a poner por ejemplo 9002 nuestro proyecto botón derecho ejecutar como Springfield el nombre y el mensaje nombre Peperefrescamos la clase Giuseppe ahora tenemos un solo usuario app hola con esto finalizamos este capítulo en el que hemos aprendido a crear nuestro primer proyecto y también
+```java
+@Controller
+public class UserController {
+
+}
+```
+
+Auto-cableamos el `UserDao` para tenerlo listo para utilizarlo.
+
+```java
+// Inyectamos el DAO dentro del Controller
+@Autowired
+private UserDao userDao;
+```
+
+Vamos a crear un bean a partir del nombre y el mensaje, le añadimos las anotaciones `@RequestMapping(value = "/create")` o incluso si queremos la anotación getmapping.
+
+```java
+@RequestMapping(value = "/create")
+@ResponseBody
+public String create(String name, String message) {
+
+}
+```
+
+Bueno no hemos declarado todavía un mecanismo automático de creación de Ids, podemos inventar uno sobre la marcha, para que lo haga de manera aleatoria y nos valga para el ejemplo y no tener que pasarle el Id como argumento, creamos un usuario, podemos crear un número aleatorio, asignamos los datos, asignamos el nombre y el mensaje, nos quedaría llamar al DAO para poder crear al usuario y devolver algún tipo de mensaje con respecto a la creación del usuario.
+
+```java
+@RequestMapping(value = "/create")
+public String create(String name, String message) {
+
+   User user = new User();
+
+   Random r = new Random();
+   int randomId = r.nextInt(Integer.MAX_VALUE);
+   // Asignamos los datos
+   user.setId(randomId);
+   user.setUserName(name);
+   user.setUserMessage(message);
+   userDao.create(user);
+   
+   return "Usuario creado correctamente";
+}
+```
+
+Para que podemos visualizar directamente este mensaje y no nos perdamos ahora en gestión del sistema de vistas, le vamos a añadir la anotación `@ResponseBody` que hara que lo que se devuelva como parte del método será el cuerpo de la respuesta y por lo tanto será el mensaje que nosotros podremos visualizar. Hay que tener en cuenta que esta creación puede dar alguna exepción aun que nosotros lo la hayamos capturado aquí, lo podríamos meter todo dentro de un bloque try catch de manera que quedara un poco más armado.
+
+```java
+/**
+* 
+* Crea un nuevo usuario con un Id autogenerado, y con los datos recibidos
+* por la URL 
+* 
+* /create?name=...&message=....
+* 
+*/
+@RequestMapping(value = "/create")
+@ResponseBody
+public String create(String name, String message) {
+   try {
+      User user = new User();
+      // Estas líneas de código generan un Id aleatorio.
+      // En las próximas lecciones veremos como delegar esto en la base de
+      // datos
+      Random r = new Random();
+      int randomId = r.nextInt(Integer.MAX_VALUE);
+      // Asignamos los datos
+      user.setId(randomId);
+      user.setUserName(name);
+      user.setUserMessage(message);
+
+      userDao.create(user);
+   } catch (Exception ex) {
+      return "Error creando el usuario: " + ex.toString();
+   }
+   return "Usuario creado correctamente";
+}
+```
+
+Las diferentes llamadas serían de una forma parecida. El método `delete(int id)` quedará así:
+
+```java
+/**
+* 
+* Elimina un usuario, localizándolo por su Id
+* 
+* /delete?id=...
+* 
+*/
+@RequestMapping(value = "/delete")
+@ResponseBody
+public String delete(int id) {
+   try {
+      User user = new User();
+      user.setId(id);
+      userDao.delete(user);
+   } catch (Exception ex) {
+      return "Error eliminando el usuario: " + ex.toString();
+   }
+   return "Usuario eliminado correctamente";
+}
+```
+
+Crearíamos al usuario en base al Id y le pasariamos ese usuario al DAO.
+
+Y para actualizarlo nos quedaría así:
+
+```java
+/**
+* 
+* Actualiza el nombre y el mensaje de un usuario, localizándolo por su Id
+* 
+* /update?id=...&name=...&message=....
+* 
+*/
+@RequestMapping(value = "/update")
+@ResponseBody
+public String updateName(int id, String name, String message) {
+   try {
+      User user = userDao.getById(id);
+      user.setUserName(name);
+      user.setUserMessage(message);
+      userDao.update(user);
+   } catch (Exception ex) {
+      return "Error actualizando el usuario: " + ex.toString();
+   }
+   return "Usuario actualizado correctamente";
+}
+```
+
+La clase completa queda así:
+
+
+```java
+package com.openwebinars.hibernate.primerejemplospringjpahibernate;
+
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class UserController {
+
+
+	// Inyectamos el DAO dentro del Controller
+	@Autowired
+	private UserDao userDao;
+
+	/**
+	 * 
+	 * Crea un nuevo usuario con un Id autogenerado, y con los datos recibidos
+	 * por la URL 
+	 * 
+	 * /create?name=...&message=....
+	 * 
+	 */
+	@RequestMapping(value = "/create")
+	@ResponseBody
+	public String create(String name, String message) {
+		try {
+			User user = new User();
+			// Estas líneas de código generan un Id aleatorio.
+			// En las próximas lecciones veremos como delegar esto en la base de
+			// datos
+			Random r = new Random();
+			int randomId = r.nextInt(Integer.MAX_VALUE);
+			// Asignamos los datos
+			user.setId(randomId);
+			user.setUserName(name);
+			user.setUserMessage(message);
+
+			userDao.create(user);
+		} catch (Exception ex) {
+			return "Error creando el usuario: " + ex.toString();
+		}
+		return "Usuario creado correctamente";
+	}
+
+	/**
+	 * 
+	 * Elimina un usuario, localizándolo por su Id
+	 * 
+	 * /delete?id=...
+	 * 
+	 */
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	public String delete(int id) {
+		try {
+			User user = new User();
+			user.setId(id);
+			userDao.delete(user);
+		} catch (Exception ex) {
+			return "Error eliminando el usuario: " + ex.toString();
+		}
+		return "Usuario eliminado correctamente";
+	}
+
+	/**
+	 * 
+	 * Actualiza el nombre y el mensaje de un usuario, localizándolo por su Id
+	 * 
+	 * /update?id=...&name=...&message=....
+	 * 
+	 */
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public String updateName(int id, String name, String message) {
+		try {
+			User user = userDao.getById(id);
+			user.setUserName(name);
+			user.setUserMessage(message);
+			userDao.update(user);
+		} catch (Exception ex) {
+			return "Error actualizando el usuario: " + ex.toString();
+		}
+		return "Usuario actualizado correctamente";
+	}
+
+}
+```
+
+yo la voy a aprovechar que las tengo por aquí para no alargar más la ejecución de este proyecto una manera sencilla para borrar un usuario pues cree haríamos el usuario en base a nivel y le pasaríamos ese usuario al Aldao y para actualizarlo bueno pues ya tendríamos nuestro controlador hecho ahora tendríamos que invocar ha estado URL para poder crear un nuevo usuario lo podemos comprobar vamos añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que podemos tener por ahí es server pop y nos vamos a poner por ejemplo 9002 nuestro proyecto botón derecho ejecutar como Springfield el nombre y el mensaje nombre Peperefrescamos la clase Giuseppe ahora tenemos un solo usuario app hola con esto finalizamos este capítulo en el que hemos aprendido a crear nuestro primer proyecto y también
+
+
+
+
+
 
 
 
