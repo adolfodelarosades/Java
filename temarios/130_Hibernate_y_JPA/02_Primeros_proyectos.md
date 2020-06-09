@@ -2663,7 +2663,6 @@ Y finalmente retornamos el `entityManagerFactory`.
 
 `return entityManagerFactory;`
 
-
 Este método ya estaría completo.
 
 ```java
@@ -2715,7 +2714,6 @@ public JpaTransactionManager transactionManager() {
 ```
 
 Y por último el bean `PostProcessor` que nos permitira relanzar una serie de excepciones a nivel de base de datos a través de las distintas capas para que nosotros las podamos utilizar. 
-
 
 ```java
 /**
@@ -2838,6 +2836,87 @@ En la próxima lección vamos a ver el código de la clase DAO de las distintas 
 Continuación de la creación de un primer proyecto con Spring boot, Spring MVC e Hibernate
 
 ## Preguntas
+
+P= Buenos días,
+trabajo con IDEA y me da este error en el dataconfig:
+Couldn't autowired,there is more than one bean of DataSource type
+
+He comentado el la linea que tiene el @Autowired y funciona igualmente.
+Lo que no me hace la aplicación es crear si o si la tabla cuando inicio la aplicación.
+También me daba un fallo a la hora de iniciar la aplicacion como que no encontraba el hibernate.properties y lo cree por si fuera eso, pero sigue sin hacerlo...
+Alguna propuesta?
+Gracias,
+Un saludo
+
+R= Creo que puede ser porque no tengo persistence.xml....voy a ver.
+R= Hola! Yo siempre he trabajado con Eclipse; de Jetbrains solo he utilizado Android Studio y PyCharm.
+
+En principio, con la configuración tipo Javaconfig realizada a través del fichero DatabaseConfig.javadebe construir el contexto de persistencia (los beans van encadenados uno sobre otro en la definición). En ocasiones, no es capaz de inyectar el bean Datasource porque existe algún problema de conectividad con la base de datos, algún pequeño fallo en los datos de configuración. Sería bueno que le echaras un vistazo a la traza de la pila, por si más abajo del error identifica alguna causa.
+
+P= Soy nuevo en Java ,
+He creado el ejemplo paso a paso y sin problemas, pero al " Run as" el proyecto spring, se despliega el server en el puerto 9002 y coloco :
+http://localhost:9002/create?name=Pepe&message=Hola%20mundo
+
+pero me aparece el siguiente error:
+"
+Error creando el usuario: org.springframework.dao.InvalidDataAccessApiUsageException: Unknown entity: com.openwebinars.hibernate.spring.User; nested exception is java.lang.IllegalArgumentException: Unknown entity: com.openwebinars.hibernate.spring.User
+"
+
+Es como no reconoce el entity.
+¿Alguna idea para que reconosca la entidad?
+
+R= Por si es el mismo error que me daba a mi ... revisa la línea "entitymanager.packagesToScan:" en el fichero application.properties.
+Tiene que tener la ruta de paquetes donde estén las entidades, si lo has hecho igual que Luis Miguel sería ... com.openwebinars.hibernate.primerejemplospringjpahibernate
+
+R= Efectivamente, no se está detectando a dicha clase como una entidad. ¿Podrías postear la estructura de paquetes y clases que tienes y el contenido del fichero application.properties?
+
+P= Parece que no puede inicializar la conexión de la base de datos.
+
+Caused by: com.mysql.cj.exceptions.InvalidConnectionAttributeException: The server time zone value 'Hora estándar romance' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+He aplicado una solución que he encontrado por ahí que añade más parámetros a la url:
+
+jdbc:mysql://localhost/hibernate?useUnicode\=true&useJDBCCompliantTimezoneShift\=true&useLegacyDatetimeCode\=false&serverTimezone\=UTC
+Y con esto consigo que funcione pero quisiera tu opinión. Gracias.
+
+R= ¿Qué versión del driver de jdbc estás utilizando?
+R= `....m2\repository\org\springframework\spring-jdbc\5.1.2.RELEASE\spring-jdbc-5.1.2.RELEASE.jar`
+
+P= Estoy teniendo los mismos errores en todos los ejercicios de éste bloque.
+Lo he solventado modificando en las distintas properties el siguiente código:
+
+```sh
+db.url: jdbc:mysql://localhost/hibernate?serverTimezone=UTC
+(lo adicional es "?serverTimezone=UTC")
+```
+R= ¿Qué versión de Mysql estás utilizando?
+R= Efectivamente, es la versión 8:
+```sh
+Server version: 8.0.15 MySQL Community Server - GPL
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+```
+R= Como decía en alguno de los mensajes anteriores, el curso se elaboró con Mysql 5.7, y de ahí algunas de las diferencias en las cadenas de conexión. Gracias por tu aportación.
+
+P= mi repositorio del proyecto en github: https://github.com/jlrc23/openwebinars-hibernate
+Hola, explicas muy bien, tengo un problema al intentar conectarme a la base de datos, es el siguiente:
+
+```
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'databaseConfig': Unsatisfied dependency expressed through field 'entityManagerFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [com/gvm/reportes/DatabaseConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Class name must not be null
+```
+R=Ya vi que fue lo diferente, yo estaba usando la version spring la 2.1.0 y en el ejemplo usan la 1.5.2, ¿como se debe de hacer en la version 2.1.0?
+R=Entonces, ¿has conseguido solucionar tu problema? No sé si he entendido si lo has conseguido o no.
+R=Sí ya lo solucione
+
+P=¿Cuál es la ventaja de poner un DAO como Repository?... Mencionas que utilizamos @Repository para el DAO para identificarlo, además de hacerlo por convención hay algún beneficio de utilizar esta anotación en lugar de por ejemplo Bean o Component?
+R= Sin llegar a profundizar mucho en la explicación, las diferencias no son muy grandes, ni tan obvias con otros estereotipos, como por ejemplo @Controller. Alguna de las ventajas podría ser el simple hecho de tener identificadas estas clases como un tipo concreto de estereotipo.
+
+Si profundizamos algo más, según la documentación de dicha anotación, una ventaja concreta del uso de la misma sería que dicha clase sería candidata a ser elegida como traductora de las excepciones de tipo DataAccessException. Aunque como bien sigue diciendo a continuación, la misión principal es la de definir un componente que tiene un rol específico dentro de la arquitectura de la aplicación.
+
+P=Buenos días, por si a alguien le occurre. Estoy ejecutando este ejemplo contra una base de datos que ya tengo en SQL Server.
+Me daba este error al crear la tabla: Sintaxis incorrecta cerca de la palabra clave 'User'.
+Pensaba que era un problema de dialecto que no estaba poniendo el correcto hasta que encontré que es porque User es palabra reservada. He cambiado la clase java User por UsuarioPrueba y todo me ha ido bien.
+R=Gracias por compartirlo Ana Isabel.
+
+
 
 ## Transcripción
 
