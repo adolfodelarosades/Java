@@ -459,7 +459,287 @@ tenemos que el valor de `id` que es de tipo `long` será generado con la mejor e
 
 <img src="images/8-12.png">
 
-sobre cómo controlar los nombres podemos cambiar el nombre que por defecto utiliza hibernate para generar la tabla si tenemos la propiedad bm2 ddl-auto o alguno de los valores asociados y se encarga de crear la tabla si se llama magenti utilizara el mismo nombre sin embargo con la notación@table y la propiedad name podemos cambiar nosotros el nombre de la tabla que se generará por la cual va a buscar en la base de datos a la hora de mapear está Espartinas esa también la tenemos dentro de mi ejemplo aunque la clase se llama Giuseppe vamos a crear una nueva tabla que se llama another user a la hora de mapear valores hemos visto que no tenemos por qué no tenemos porque anotar de ninguna manera los valores solamente la vi ya que hibernen se va a encargar de buscar las distintas propiedades que tengan estos tipos que tenemos en pantalla para anotar lo que en principio buscar a tipos básicos Javaclases los tipos básicos con mayúsculas y alguna de las clases que tenemos en pantalla screen etcétera etcétera también aquellas clases que implementen serializable si viene el comportamiento no será el que nosotros veremos porque lo que imaginarás eran las representaciones bytes y los tipos embebidos que hablaremos de ellos más si hibernate encuentra algún tipo de dato que no es alguno de estos y no tiene nada notación adecuada generará un error a la hora de cargar ese contexto de persistencia con lo cual si queremos mapear algo como como un valor lo tenemos que hacer a través de alguno de estos tipos que tenemos el pan la notación@colón que ya hemos dicho que no es obligatoria pero si nos permite definir a algunas propiedades en particular la más usual es la propiedad men nos permite cambiar el nombre que tendrá esa propiedad como columna en la base de datos pero también nos permite indicar el tamaño que será el que tenga el campo en la base de datos te viene bien para cadena de caracteres para número etcétera la propiedad nullable que si esdru permite almacenar nulos dentro de ese valor o la propiedad insertable la tablet que define si puede ser insertada o no o actualizada o no estén determinados contextos ya veremos que resulta bastante útil y con respecto a los tipos de datos temporales decir que para la fecha hibernate nos da un poco de soporte ya que el tratamiento no es exactamente el mismo que con un atributo normal con la notación@temporal podemos indicar que un determinado atributo será un tipo de dato temporal nos permite gestionar los clásicos de instantes de útil como se cuele en Santa en calendar y también los tipos nuevos que hay dentro de la Java time de de Java 8 está no está haciendo permite almacenar en la base de datos los datos de tres maneras distintas o day time o pensar vale que tenemos en el ejemplo vamos a ver nuestro ejemplo en funcionamiento vale como podéis ver tenemos una clase y usted que como la de antes la hemos cambiado un poco le hemos cambiado el nombre al campo name aunque la base de datos se llamará y username le hemos añadido un gato temporal que es werden vale que es de tipo Java útil day pero que no te lo conocen por ahí y que como de se almacenará en la base de datos cómo vemos ahora en esta clase de aplicación seguimos las líneas que marcamos en el capítulo 3 los proyectos de JP a creamos nuestros entitymanagerfactory' a partir de ahí os tenemos manager iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe el segundo le podemos llamar el nombre y llamarlo vale y a través de las fechas de nacimientohemos visto que hiberne pues ha hecho algún trabajo duro ha borrado la tabla si existe también ha borrado una tabla que utiliza como hemos dicho antes para generar los valores la vuelta crear ha vuelto a crear la tabla especial a utilizar esta tabla para obtener los nuevos valores que tiene que insertar y si miramos aquí Giuseppe los meses son distintos porque bueno calendar funciona de una manera diferente empezar a contar en cero si quisiéramos que realmente fuera septiembre sería el 8 mayo almacenado store ahora vamos a vernos tipo en bebidos y los ciclos de vida de los posibles valores ciclo de vida de las entidades los tipos de medido nos permiten insertar una clase dentro de otra si bien el traslado va a ser bueno pues a una sola tabla vale los tipos que quedamos marcar cómo medir los tendrán que llevar la anotación en verdad vale y bien solamente tendremos que hacer referencia a este objeto dentro de la clase de la queremos en beber la clase no es una entidad pero si es verdad que la podremos trabajar como un objeto no tenemos que preocuparnos de matarlo como otra entidad con su respectiva asociaciones la dificultad estriba en si queremos añadir más de uno por ejemplo la dirección de vivienda y la dirección de facturación online como una incidente vida porque tendríamos el nombre de atributo repetidos aunque hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
+Sobre cómo controlar los nombres podemos cambiar el nombre que por defecto utiliza Hibernate para generar la tabla, si tenemos la propiedad h2ddl-auto en create o update  o alguno de los valores asociados Hibernate se encarga de crear la tabla si se llama `MyEntity` utilizara el mismo nombre sin embargo, con la anotación `@Table` y la propiedad `name` podemos cambiar nosotros el nombre de la tabla que se generará o la cual va a buscar en la base de datos a la hora de mapear esta entidad. 
+
+Esa también la tenemos dentro del ejemplo, aunque la clase se llama `User` vamos a crear una nueva tabla que se llama `ANOTHER_USER`.
+
+```java
+@Entity
+@Table(name="ANOTHER_USER")
+public class User {
+   ...
+```
+
+<img src="images/8-13.png">
+
+<img src="images/8-14.png">
+
+A la hora de mapear valores hemos visto que no tenemos por qué anotar de ninguna manera los valores, solamente el `id` ya que Hibernate se va a encargar de buscar las distintas propiedades que tengan estos tipos que tenemos en pantalla para anotarlo.
+En principio buscara tipos básicos Java `int`, `long`, `double`, `float`, los envoltorios de esos tipos básicos con mayúsculas como se suelen conocer y alguna de las clases que tenemos en la diapositiva String, BigInteger, BigDecimal, etcétera.  También aquellas clases que implementen serializable si viene el comportamiento no será el que nosotros esperemos porque lo que almacenará seran las representaciones bytes y los tipos embebidos que hablaremos de ellos más tarde.
+
+Si Hibernate encuentra algún tipo de dato que no es alguno de estos y no tiene la anotación adecuada generará un error a la hora de cargar ese contexto de persistencia con lo cual si queremos mapear algo como un valor lo tenemos que hacer a través de alguno de estos tipos que tenemos en la diapositiva.
+
+<img src="images/8-15.png">
+
+La anotacion `@Column` que ya hemos dicho que no es obligatoria pero si nos permite definir algunas propiedades en particular la más usual es la propiedad `name` nos permite cambiar el nombre que tendrá esa propiedad como columna en la base de datos. Pero también nos permite indicar el tamaño que será el que tenga el campo en la base de datos te viene bien para cadena de caracteres, para número, etcétera. La propiedad `nullable` que si es `true` permite almacenar nulos dentro de ese valor o la propiedad insertable y updatable que define si puede ser insertada o no o actualizada o no. Esto en determinados contextos ya veremos que resulta bastante util.
+
+<img src="images/8-16.png">
+
+Y con respecto a los tipos de datos temporales, decir que para las fechas Hibernate nos da un poco de soporte, ya que el tratamiento no es exactamente el mismo que con un atributo normal con la anotación `@Temporal` podemos indicar que un determinado atributo será un tipo de dato temporal, nos permite gestionar los clásicos `Date` tanto de `util` como de `sql`, `Timestamp`, `Time`, `Calendar` y también los tipos nuevos que hay dentro de la `java.time` de Java 8. Esta anotación nos permite almacenar en la base de datos los datos de tres maneras distintas como DATE, TIME y TIMESTAMP, que es lo que tenemos en el ejemplo.
+
+Vamos a ver el ejemplo en funcionamiento.
+
+Tenemos `persistence.xml`.
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="PrimerEjemploHibernateJPA" transaction-type="RESOURCE_LOCAL">
+		<class>com.openwebinars.hibernate.mapeocolumnas.User</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+Tenemos el `pom.xml`.
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>130-04-PrimerProyectoHibernateJPAMapeoColumnas</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>130-04-PrimerProyectoHibernateJPAMapeoColumnas</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.17.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+Como ya hemos visto tenemos la clase `User`.
+
+*`User`*
+
+```java
+package com.openwebinars.hibernate.mapeocolumnas;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name="ANOTHER_USER")
+public class User {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+
+	@Column(name="USERNAME")
+	private String name;
+	
+	
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
+
+	
+	public long getId() {
+		return id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+}
+```
+
+Tiene un campo `name` pero en la base de datos se llamará `USERNAME`, le hemos añadido un dato temporal `birthDate` que es del tipo `java.util.date` pero que hemos anotado como `@Temporal(TemporalType.DATE)` y que se almacenará en la base de datos como `DATE`.
+
+Tenemos nuestra clase de aplicación `App` seguimos la línea que marcamos en el capitulo 3 en los proyectos de JPA.
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.mapeocolumnas;
+
+import java.util.Calendar;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Entidades y mapeo de atributos
+ * www.openwebinars.net
+ * @LuisMLopezMag
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("MapeoColumnas");
+
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
+
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+
+		//Obtenemos el Calendar con el que gestionaremos las fechas
+		Calendar calendar = Calendar.getInstance();
+
+		// Construimos un objeto de tipo User
+		User user1 = new User();
+		user1.setName("Pepe");
+		
+		calendar.set(1982, 9, 18);
+		user1.setBirthDate(calendar.getTime());
+
+		// Construimos otro objeto de tipo User
+		User user2 = new User();
+		user2.setName("Juan");
+		calendar.set(1990, 5, 20);
+		user2.setBirthDate(calendar.getTime());
+		
+		//Persistimos los objetos
+		em.persist(user1);
+		em.persist(user2);
+
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+
+	}
+}
+```
+
+Creamos nuestro `EntityManagerFactory`, a partir de allí a partir de ahí creamos nuestro `EntityManager` iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe y Juan y a través de un calendar vamos a obtener las fechas de nacimiento, observemos que los meses comienzan en 0.
+
+Si ejecutamos vemos que Hibernate ha hecho algún trabajo duro, ha borrado la tabla si existe, también ha borrado una tabla que utiliza como hemos dicho antes para generar los valores, la vuelve a crear, ha vuelto a crear la tabla especial, a utilizado esa tabla para obtener los nuevos valores que tiene que insertar.
+
+```java
+
+```
+
+
+y si miramos en Workbeanch podemos ver que tenemos las tablas `another_user`  
+
+los meses son distintos porque bueno calendar funciona de una manera diferente empezar a contar en cero si quisiéramos que realmente fuera septiembre sería el 8 mayo almacenado store ahora vamos a vernos tipo en bebidos y los ciclos de vida de los posibles valores ciclo de vida de las entidades los tipos de medido nos permiten insertar una clase dentro de otra si bien el traslado va a ser bueno pues a una sola tabla vale los tipos que quedamos marcar cómo medir los tendrán que llevar la anotación en verdad vale y bien solamente tendremos que hacer referencia a este objeto dentro de la clase de la queremos en beber la clase no es una entidad pero si es verdad que la podremos trabajar como un objeto no tenemos que preocuparnos de matarlo como otra entidad con su respectiva asociaciones la dificultad estriba en si queremos añadir más de uno por ejemplo la dirección de vivienda y la dirección de facturación online como una incidente vida porque tendríamos el nombre de atributo repetidos aunque hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
 
 
 
@@ -472,7 +752,7 @@ sobre cómo controlar los nombres podemos cambiar el nombre que por defecto util
 
 <img src="images/8-16.png">
 
-<img src="images/8-15.png">
+<img src="images/8-17.png">
 
 <img src="images/8-18.png">
 
