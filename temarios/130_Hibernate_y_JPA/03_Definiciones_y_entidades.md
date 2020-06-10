@@ -361,30 +361,108 @@ A nivel de base de datos dos objetos es decir serán dos filas, serán idéntica
 
 Para definir una entidad como mínimo ya sabiendo que además la tenemos que identificar, si vamos a usar anotaciones, tenemos que usar como mínimo dos anotaciones la primera es `@Entity` sobre el nombre de la clase nos permitirá decir que esa clase será gestionada dentro del contexto de persistencia de nuestra aplicación, al menos uno de ellos, ya veremos que se pueden definir más de uno, pero por lo menos en el que tengamos definido. Al anotar la clase con `@Entity` nos obliga por fuerza a que tengamos una propiedad anotada con `@Id`, podemos hacer las anotaciones a nivel de propiedad o a nivel de método getter nunca de setter, allá donde anotemos con la anotación `@Id` marcará la tónica que vamos a seguir, si anotamos sobre una propiedad  Hibernate se encargará de trabajar con las propiedades y si marcamos `@Id` sobre un método getter trabajara con los métodos getter en lugar de las propiedades.
 
-Antes de continuar vamos a ver un ejemplo.
+Antes de continuar vamos a ver un ejemplo de Mapeo.
+
+Aquí tenemos una Entidad User.
+
+```java
+package com.openwebinars.hibernate.mapeocolumnas;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name="ANOTHER_USER")
+public class User {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+
+	@Column(name="USERNAME")
+	private String name;
+	
+	
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
+
+	
+	public long getId() {
+		return id;
+	}
 
 
+	public String getName() {
+		return name;
+	}
 
-y descubre un método que trabajará con los metodos getter en función de perdones en lugar de con las propiedades antes de continuar vamos a ver un ejemplo remapeo aquí tenemos una una entidad que está mapeada y que tiene pues su a Rubén titi y su arroba a y b tiene también alguna notación es que vamos a ver en esta misma lección más adelante sobre la dirección del identificador aquí existe siempre un debate porque lo diseñadores más clásicos de base de datos conocen metodología específica a través de las dependencias funcionales existentes dentro de una relación de una tabla y son capaces de aplicar métodos formales del calculo de clave candidata y de clave primaria sin embargo entre los desarrolladores es habitual es usar un campo artificial decir uno que no está asociado al modelo que suele tener casi siempre el mismo nombre va a ser muy fácil diferenciarlo de otro número pues muy fácil identificar a través de la notación generatedvalue vale nos permite generar automáticamente descargando el programador como hemos hecho nosotros los proyectos anteriores que no hemos cenado o estáticamente o no hemos inventado algún método aleatorio bueno pues se puede encargar de que me dan utilizando alguna estrategia en particular tenemos cuatro la estrategia nos permite utilizar una secuencia que un objeto a nivel de base de datos que bautizo va devolviendo pues valores desde un valor inicial y con un incremento que nosotros manejemos identity que lo que hace es utilizar para que ellas base de datos que permiten un campo de tipo autonumerico y la estrategia table la que bueno se utiliza una tabla extra especial que normalmente tiene una sola columna y una fila por cada tabla o mejor dicho entidad que tengamos definida con generación de valor por tabla y que almacena es en ese único valor y el siguiente y de qué va a necesitar la estrategia cuartal auto en función del dialecto que tengamos seleccionado escoge cuál es la mejor de ella para cada uno de los sistemas gestores de base de datos que hibernate es posible que tiene posibilidad de manejar es otra vez de si me muere el mismo ejemplo de antes tenemos que el valor de y de qué va a ser de tipo no será generado con la mejor estrategia según la marque el dialecto en particular para MySQL 5 y 1 de ver suele utilizar la estrategia de tabla sobre cómo controlar los nombres podemos cambiar el nombre que por defecto utiliza hibernate para generar la tabla si tenemos la propiedad bm2 ddl-auto o alguno de los valores asociados y se encarga de crear la tabla si se llama magenti utilizara el mismo nombre sin embargo con la notación@table y la propiedad name podemos cambiar nosotros el nombre de la tabla que se generará por la cual va a buscar en la base de datos a la hora de mapear está Espartinas esa también la tenemos dentro de mi ejemplo aunque la clase se llama Giuseppe vamos a crear una nueva tabla que se llama another user a la hora de mapear valores hemos visto que no tenemos por qué no tenemos porque anotar de ninguna manera los valores solamente la vi ya que hibernen se va a encargar de buscar las distintas propiedades que tengan estos tipos que tenemos en pantalla para anotar lo que en principio buscar a tipos básicos Javaclases los tipos básicos con mayúsculas y alguna de las clases que tenemos en pantalla screen etcétera etcétera también aquellas clases que implementen serializable si viene el comportamiento no será el que nosotros veremos porque lo que imaginarás eran las representaciones bytes y los tipos embebidos que hablaremos de ellos más si hibernate encuentra algún tipo de dato que no es alguno de estos y no tiene nada notación adecuada generará un error a la hora de cargar ese contexto de persistencia con lo cual si queremos mapear algo como como un valor lo tenemos que hacer a través de alguno de estos tipos que tenemos el pan la notación@colón que ya hemos dicho que no es obligatoria pero si nos permite definir a algunas propiedades en particular la más usual es la propiedad men nos permite cambiar el nombre que tendrá esa propiedad como columna en la base de datos pero también nos permite indicar el tamaño que será el que tenga el campo en la base de datos te viene bien para cadena de caracteres para número etcétera la propiedad nullable que si esdru permite almacenar nulos dentro de ese valor o la propiedad insertable la tablet que define si puede ser insertada o no o actualizada o no estén determinados contextos ya veremos que resulta bastante útil y con respecto a los tipos de datos temporales decir que para la fecha hibernate nos da un poco de soporte ya que el tratamiento no es exactamente el mismo que con un atributo normal con la notación@temporal podemos indicar que un determinado atributo será un tipo de dato temporal nos permite gestionar los clásicos de instantes de útil como se cuele en Santa en calendar y también los tipos nuevos que hay dentro de la Java time de de Java 8 está no está haciendo permite almacenar en la base de datos los datos de tres maneras distintas o day time o pensar vale que tenemos en el ejemplo vamos a ver nuestro ejemplo en funcionamiento vale como podéis ver tenemos una clase y usted que como la de antes la hemos cambiado un poco le hemos cambiado el nombre al campo name aunque la base de datos se llamará y username le hemos añadido un gato temporal que es werden vale que es de tipo Java útil day pero que no te lo conocen por ahí y que como de se almacenará en la base de datos cómo vemos ahora en esta clase de aplicación seguimos las líneas que marcamos en el capítulo 3 los proyectos de JP a creamos nuestros entitymanagerfactory' a partir de ahí os tenemos manager iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe el segundo le podemos llamar el nombre y llamarlo vale y a través de las fechas de nacimientohemos visto que hiberne pues ha hecho algún trabajo duro ha borrado la tabla si existe también ha borrado una tabla que utiliza como hemos dicho antes para generar los valores la vuelta crear ha vuelto a crear la tabla especial a utilizar esta tabla para obtener los nuevos valores que tiene que insertar y si miramos aquí Giuseppe los meses son distintos porque bueno calendar funciona de una manera diferente empezar a contar en cero si quisiéramos que realmente fuera septiembre sería el 8 mayo almacenado store ahora vamos a vernos tipo en bebidos y los ciclos de vida de los posibles valores ciclo de vida de las entidades los tipos de medido nos permiten insertar una clase dentro de otra si bien el traslado va a ser bueno pues a una sola tabla vale los tipos que quedamos marcar cómo medir los tendrán que llevar la anotación en verdad vale y bien solamente tendremos que hacer referencia a este objeto dentro de la clase de la queremos en beber la clase no es una entidad pero si es verdad que la podremos trabajar como un objeto no tenemos que preocuparnos de matarlo como otra entidad con su respectiva asociaciones la dificultad estriba en si queremos añadir más de uno por ejemplo la dirección de vivienda y la dirección de facturación online como una incidente vida porque tendríamos el nombre de atributo repetidos aunque hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
+	public void setName(String name) {
+		this.name = name;
+	}
 
 
-<img src="images/8-04.png">
+	public Date getBirthDate() {
+		return birthDate;
+	}
 
-<img src="images/8-05.png">
 
-<img src="images/8-06.png">
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
 
-<img src="images/8-07.png">
 
-<img src="images/8-08.png">
+}
+```
 
-<img src="images/8-09.png">
-
-<img src="images/8-10.png">
+Está mapeada y que tiene `@Entity` y `@Id` tiene también algunas anotaciones que vamos a ver en esta misma lección más adelante.
 
 <img src="images/8-11.png">
 
+Sobre la elección del Identificador aquí existe siempre un debate, porque los diseñadores más clásicos de base de datos conocen metodología específica a través de las dependencias funcionales existentes dentro de una relación de una tabla y son capaces de aplicar métodos formales del calculo de clave candidata y de clave primaria sin embargo entre los desarrolladores es habitual el usar un campo artificial es decir uno que no está asociado al modelo que suele tener casi siempre el mismo nombre, se suele llamar *id* que suele ser de tipo entero un `long` y mediante un número que va a ser muy facil diferenciarlo de otro número es muy fácil identificar.
+
+JPA a través de la anotación `@GeneratedValue` nos permite generar automáticamente, descargando al programador, como hemos hecho nosotros en los proyectos anteriores que lo hemos asignado estaticamente o lo hemos inventado algún método aleatorio bueno pues JPA se puede encargar de generarlo utilizando alguna estrategia. En particular tenemos cuatro:
+
+* AUTO 
+* SEQUENCE
+* IDENTITY
+* TABLE
+
+La estrategia SEQUENCE nos permite utilizar una secuencia que un objeto a nivel de base de datos que va devolviendo valores desde un valor inicial y con un incremento que nosotros marquemos.
+
+
+IDENTITY que lo que hace es utilizar para que ellas base de datos que permiten un campo de tipo autonumerico.
+
+Y la estrategia TABLE que se utiliza una tabla extra especial que normalmente tiene una sola columna y una fila por cada tabla o mejor dicho entidad que tengamos definida con generación de valor por tabla y que almacena en ese único valor el siguiente Id qué va a necesitar.
+
+La estrategia AUTO en función del dialecto que tengamos seleccionado escoge cuál es la mejor de ella para cada uno de los sistemas gestores de base de datos que Hibernate tiene posibilidad de manejar. 
+
+Todo a través de `@GeneratedValue`.
+
+Si vemos en el mismo ejemplo de antes 
+
+```java
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
+private long id;
+
+```
+
+tenemos que el valor de `id` que es de tipo `long` será generado con la mejor estrategia según la marque el dialecto, en particular para MySQL5InnoDB suele utilizar la estrategia de TABLE.
+
 <img src="images/8-12.png">
+
+sobre cómo controlar los nombres podemos cambiar el nombre que por defecto utiliza hibernate para generar la tabla si tenemos la propiedad bm2 ddl-auto o alguno de los valores asociados y se encarga de crear la tabla si se llama magenti utilizara el mismo nombre sin embargo con la notación@table y la propiedad name podemos cambiar nosotros el nombre de la tabla que se generará por la cual va a buscar en la base de datos a la hora de mapear está Espartinas esa también la tenemos dentro de mi ejemplo aunque la clase se llama Giuseppe vamos a crear una nueva tabla que se llama another user a la hora de mapear valores hemos visto que no tenemos por qué no tenemos porque anotar de ninguna manera los valores solamente la vi ya que hibernen se va a encargar de buscar las distintas propiedades que tengan estos tipos que tenemos en pantalla para anotar lo que en principio buscar a tipos básicos Javaclases los tipos básicos con mayúsculas y alguna de las clases que tenemos en pantalla screen etcétera etcétera también aquellas clases que implementen serializable si viene el comportamiento no será el que nosotros veremos porque lo que imaginarás eran las representaciones bytes y los tipos embebidos que hablaremos de ellos más si hibernate encuentra algún tipo de dato que no es alguno de estos y no tiene nada notación adecuada generará un error a la hora de cargar ese contexto de persistencia con lo cual si queremos mapear algo como como un valor lo tenemos que hacer a través de alguno de estos tipos que tenemos el pan la notación@colón que ya hemos dicho que no es obligatoria pero si nos permite definir a algunas propiedades en particular la más usual es la propiedad men nos permite cambiar el nombre que tendrá esa propiedad como columna en la base de datos pero también nos permite indicar el tamaño que será el que tenga el campo en la base de datos te viene bien para cadena de caracteres para número etcétera la propiedad nullable que si esdru permite almacenar nulos dentro de ese valor o la propiedad insertable la tablet que define si puede ser insertada o no o actualizada o no estén determinados contextos ya veremos que resulta bastante útil y con respecto a los tipos de datos temporales decir que para la fecha hibernate nos da un poco de soporte ya que el tratamiento no es exactamente el mismo que con un atributo normal con la notación@temporal podemos indicar que un determinado atributo será un tipo de dato temporal nos permite gestionar los clásicos de instantes de útil como se cuele en Santa en calendar y también los tipos nuevos que hay dentro de la Java time de de Java 8 está no está haciendo permite almacenar en la base de datos los datos de tres maneras distintas o day time o pensar vale que tenemos en el ejemplo vamos a ver nuestro ejemplo en funcionamiento vale como podéis ver tenemos una clase y usted que como la de antes la hemos cambiado un poco le hemos cambiado el nombre al campo name aunque la base de datos se llamará y username le hemos añadido un gato temporal que es werden vale que es de tipo Java útil day pero que no te lo conocen por ahí y que como de se almacenará en la base de datos cómo vemos ahora en esta clase de aplicación seguimos las líneas que marcamos en el capítulo 3 los proyectos de JP a creamos nuestros entitymanagerfactory' a partir de ahí os tenemos manager iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe el segundo le podemos llamar el nombre y llamarlo vale y a través de las fechas de nacimientohemos visto que hiberne pues ha hecho algún trabajo duro ha borrado la tabla si existe también ha borrado una tabla que utiliza como hemos dicho antes para generar los valores la vuelta crear ha vuelto a crear la tabla especial a utilizar esta tabla para obtener los nuevos valores que tiene que insertar y si miramos aquí Giuseppe los meses son distintos porque bueno calendar funciona de una manera diferente empezar a contar en cero si quisiéramos que realmente fuera septiembre sería el 8 mayo almacenado store ahora vamos a vernos tipo en bebidos y los ciclos de vida de los posibles valores ciclo de vida de las entidades los tipos de medido nos permiten insertar una clase dentro de otra si bien el traslado va a ser bueno pues a una sola tabla vale los tipos que quedamos marcar cómo medir los tendrán que llevar la anotación en verdad vale y bien solamente tendremos que hacer referencia a este objeto dentro de la clase de la queremos en beber la clase no es una entidad pero si es verdad que la podremos trabajar como un objeto no tenemos que preocuparnos de matarlo como otra entidad con su respectiva asociaciones la dificultad estriba en si queremos añadir más de uno por ejemplo la dirección de vivienda y la dirección de facturación online como una incidente vida porque tendríamos el nombre de atributo repetidos aunque hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
+
+
+
 
 <img src="images/8-13.png">
 
