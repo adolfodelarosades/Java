@@ -728,29 +728,30 @@ public class App {
 }
 ```
 
-Creamos nuestro `EntityManagerFactory`, a partir de allí a partir de ahí creamos nuestro `EntityManager` iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe y Juan y a través de un calendar vamos a obtener las fechas de nacimiento, observemos que los meses comienzan en 0.
+Creamos nuestro `EntityManagerFactory`, a partir de ahí creamos nuestro `EntityManager` iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe y Juan y a través de un calendar vamos a obtener las fechas de nacimiento, observemos que los meses comienzan en 0.
 
 Si ejecutamos vemos que Hibernate ha hecho algún trabajo duro, ha borrado la tabla si existe, también ha borrado una tabla que utiliza como hemos dicho antes para generar los valores, la vuelve a crear, ha vuelto a crear la tabla especial, a utilizado esa tabla para obtener los nuevos valores que tiene que insertar.
 
-```java
+<img src="images/8-22.png">
 
-```
+<img src="images/8-23.png">
 
+Y si miramos en Workbeanch podemos ver que tenemos las tablas `ANOTHER_USER` con los siguientes datos:
 
-y si miramos en Workbeanch podemos ver que tenemos las tablas `another_user`  
+<img src="images/8-24.png">
 
-los meses son distintos porque bueno calendar funciona de una manera diferente empezar a contar en cero si quisiéramos que realmente fuera septiembre sería el 8 mayo almacenado store ahora vamos a vernos tipo en bebidos y los ciclos de vida de los posibles valores ciclo de vida de las entidades los tipos de medido nos permiten insertar una clase dentro de otra si bien el traslado va a ser bueno pues a una sola tabla vale los tipos que quedamos marcar cómo medir los tendrán que llevar la anotación en verdad vale y bien solamente tendremos que hacer referencia a este objeto dentro de la clase de la queremos en beber la clase no es una entidad pero si es verdad que la podremos trabajar como un objeto no tenemos que preocuparnos de matarlo como otra entidad con su respectiva asociaciones la dificultad estriba en si queremos añadir más de uno por ejemplo la dirección de vivienda y la dirección de facturación online como una incidente vida porque tendríamos el nombre de atributo repetidos aunque hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
+los meses son distintos porque Calendar funciona de una manera diferente empezar a contar de cero. Podemos comprobar como se han almacenado Pepe y Juan con sus respectivas fechas usando el formato de fecha de MySQL y como se ha podido almacenar esta transacción almacenando los datos indicados en `App`.
 
+También se creo la tabla `hibernate_sequence`.
 
+<img src="images/8-25.png">
 
+Y seguimos conservando la tabla `User` de las aplicaciones anteriores.
 
-<img src="images/8-13.png">
+<img src="images/8-26.png">
 
-<img src="images/8-14.png">
+store ahora vamos a vernos tipo en bebidos y los ciclos de vida de los posibles valores ciclo de vida de las entidades los tipos de medido nos permiten insertar una clase dentro de otra si bien el traslado va a ser bueno pues a una sola tabla vale los tipos que quedamos marcar cómo medir los tendrán que llevar la anotación en verdad vale y bien solamente tendremos que hacer referencia a este objeto dentro de la clase de la queremos en beber la clase no es una entidad pero si es verdad que la podremos trabajar como un objeto no tenemos que preocuparnos de matarlo como otra entidad con su respectiva asociaciones la dificultad estriba en si queremos añadir más de uno por ejemplo la dirección de vivienda y la dirección de facturación online como una incidente vida porque tendríamos el nombre de atributo repetidos aunque hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
 
-<img src="images/8-15.png">
-
-<img src="images/8-16.png">
 
 <img src="images/8-17.png">
 
