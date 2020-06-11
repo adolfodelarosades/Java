@@ -1060,11 +1060,12 @@ Vamos entrar a través de MySQL Workbench y vamos a comprobar que está creació
 
 <img src="images/4-61.png">
 
-### Código Completo
+### :computer: Código Completo - Proyecto 130-01-PrimerProyectoHbn
 
 Vamos a poner la estructura y código de este proyecto.
 
 <img src="images/4-100.png">
+
 <img src="images/4-60.png">
 
 *`pom.xml`*
@@ -1705,7 +1706,6 @@ Vamos a configurar rápidamente la conexión en la vista `Data Source Explorer` 
 
 <img src="images/5-30.png">
 
-
 Sí sin embargo esta parte de Eclipse necesita el JAR directamente, con lo cual lo podemos agregar, no nos valdría de los que tenemos aquí 
 
 <img src="images/5-31.png">
@@ -1850,7 +1850,7 @@ Cómo podemos comprobar se ha borrado la tabla porque existia  del ejemplo anter
 
 En la próxima lección que será la última en el capítulo haremos el mismo proyecto pero lo crearemos usando Spring Boot y Spring MVC.
 
-### Código Completo
+### :computer: Código Completo - 130-02-PrimerProyectoHibernateJPA
 
 <img src="images/5-49.png">
 
@@ -3178,9 +3178,7 @@ public class UserDao {
 		entityManager.merge(user);
 		return;
 	}
-
 	
-
 }
 ```
 
@@ -3455,8 +3453,7 @@ Y ya podriamos ejecutar nuestro proyecto como una Spring Boot App.
 
 <img src="images/7-16.png">
 
-
-### Código Completo
+### :computer: Código Completo - 130-03-PrimerProyectoSpringHibernateJPA
 
 <img src="images/7-15.png">
 
@@ -3645,7 +3642,6 @@ public class DatabaseConfig {
 
 ```
 
-
 *`User`*
 
 ```java
@@ -3693,7 +3689,6 @@ public class User {
 
 }
 ```
-
 
 *`UserDao`*
 
@@ -3778,7 +3773,6 @@ public class UserDao {
 
 }
 ```
-
 
 *`UserController`*
 
@@ -3873,7 +3867,6 @@ public class UserController {
 
 }
 ```
-
 
 ## Contenido adicional 3   
 
