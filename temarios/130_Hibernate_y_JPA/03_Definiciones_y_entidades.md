@@ -1817,6 +1817,8 @@ lo guardamos en la caepeta META-INF que es donde esta realmente guardado el fich
 
 <img src="images/9-28.png">
 
+<img src="images/9-07.png">
+
 Le asociamos la unida de persistencia del proyecto y vamos hacia adelante.
 
 <img src="images/9-29.png">
@@ -1933,7 +1935,6 @@ y dentro del elemento table podrías buscar su propiedad `name` vamos a cambiar 
 
 </entity-mappings>
 ```
-
 
 ¿Qué nos quedaría?
 
@@ -2214,8 +2215,6 @@ public class App {
 	}
 }
 ```
-
-<img src="images/9-07.png">
 
 # Contenido adicional 2  
 
