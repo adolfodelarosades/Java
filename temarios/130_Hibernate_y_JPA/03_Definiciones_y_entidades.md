@@ -750,14 +750,31 @@ Y seguimos conservando la tabla `User` de las aplicaciones anteriores.
 
 <img src="images/8-26.png">
 
-store ahora vamos a vernos tipo en bebidos y los ciclos de vida de los posibles valores ciclo de vida de las entidades los tipos de medido nos permiten insertar una clase dentro de otra si bien el traslado va a ser bueno pues a una sola tabla vale los tipos que quedamos marcar cómo medir los tendrán que llevar la anotación en verdad vale y bien solamente tendremos que hacer referencia a este objeto dentro de la clase de la queremos en beber la clase no es una entidad pero si es verdad que la podremos trabajar como un objeto no tenemos que preocuparnos de matarlo como otra entidad con su respectiva asociaciones la dificultad estriba en si queremos añadir más de uno por ejemplo la dirección de vivienda y la dirección de facturación online como una incidente vida porque tendríamos el nombre de atributo repetidos aunque hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
-
-
 <img src="images/8-17.png">
+
+Ahora vamos a ver los tipos embebidos y los ciclos de vida de las entidades.
 
 <img src="images/8-18.png">
 
+Los tipos embebidos nos permiten insertar una clase dentro de otra, si bien el translado va a ser a una sola tabla, los tipos que queramos marcar cómo embebidos tendrán que llevar la anotación `@Embeddable` y bien solamente tendremos que hacer referencia a este objeto dentro de la clase donde la queremos embeber.
+
+La clase embebida no es una entidad, pero si es verdad que la podremos trabajar como un objeto, que ventaja tiene esto por que alguin dira, oye si esto lo vamos a transladar como columnas de la misma tabla, bien si se van a transladar como columnas de la misma tabla, nosotros en Java lo vamos a tratar como un objeto de verdad, lo podemos tratar como null, podemos hacer colecciones, lo que nosotros necesitemos, pero  no tendremos que preocuparnos de mapearlo como otra entidad con su respectiva asociaciones.
+
 <img src="images/8-19.png">
+
+La dificultad estriba en si queremos añadir más de uno, por ejemplo la dirección de vivienda y la dirección de facturación que suele ser algo tipico en los sistemas de compra online, no podríamos añadir dos veces como una entidad embebida, por que tendríamos el nombre de atributos repetidos. Aunque Hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar.
+
+Veamos el ejemplo de Mapeo Embebido.
+
+
+
+
+tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
+
+
+
+
+
 
 <img src="images/8-20.png">
 
