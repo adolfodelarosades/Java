@@ -1324,7 +1324,7 @@ En el caso de configuración nativa de Hibernate tenemos que definir algunos fic
 
 Las Hibernate Tools que instalamos en capítulos anteriores a través de las JBOSS Tools nos permiten utilizar un asistente que va a scanear nuestro código fuente y va a generar ese fichero de mapeo, vamos a ver un ejemplo.
 
-Vamos a partir del proyecto ejemplo de Hibernate que hicimos en lecciones anteriores pero sin las anotaciones, cómo podéis comprobar es una clase pojo Java normal y corriente.
+Vamos a partir del proyecto ejemplo de Hibernate que hicimos en lecciones anteriores *Proyecto 130-01-PrimerProyectoHbn* pero sin las anotaciones, cómo podéis comprobar es una clase pojo Java normal y corriente.
 
 ```java
 package com.openwebinars.hibernate.hibernatexml;
@@ -1363,11 +1363,376 @@ public class User {
 }
 ```
 
-Como podríamos crear el fichero de mapeo sin tener que hacerlo de forma manual, como decíamos podríamos añadir y buscar la generación de un fichero de Mateo XML si vamos siguiendo este asistente podremos realizar el proceso. Lo que queremos es hacer el de la clase `User` 
+Como podríamos crear el fichero de mapeo sin tener que hacerlo de forma manual, como decíamos podríamos añadir 
+
+<img src="images/9-08.png">
+
+y buscar la generación de un fichero `Hibernate XML Mapping File (hbm.xml)` 
+
+<img src="images/9-09.png">
+
+si vamos siguiendo este asistente podremos realizar el proceso.
+
+<img src="images/9-10.png">
+
+Presionamos en `Add class` y buscamos la clase User de nuestro proyecto.
+
+<img src="images/9-11.png">
+
+<img src="images/9-12.png">
+
+Este paso nos indica los ficheros que va a generar.
+
+Y como podemos apreciar lo crea en la misma ruta donde este el código fuente de Java.
+
+<img src="images/9-13.png">
+
+Estos fichero XML necesitan estar dentro del ClassPath para que Hibernate los pueda localizar y pueda efectuar el mapeo con ellos sin embargo nosotros lo vamos a cambiar de carpeta por comodidad por si en alguna ocasión queremos gestionarlos aparte lo vamos a meter dentro de la carpeta de recursos junto con el fichero de configuracion de Hibernate, tan solo tenemos que pinsar, arrastrar y soltar.
+
+<img src="images/9-14.png">
+
+Si examinamos el contenido del fichero.
+
+<img src="images/9-15.png">
+
+*`User.hbm.xml`*
+
+```html
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11 jun. 2020 16:00:17 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.openwebinars.hibernate.hibernatexml.User" table="USER">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userName" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="userMessage" type="java.lang.String">
+            <column name="USERMESSAGE" />
+        </property>
+    </class>
+</hibernate-mapping>
+```
+
+Hibernate además nos proponen un asistente, una pantalla específica para poder examinarlo dónde tenemos la lista de clase que están descritas dentro del fichero XML y alguna serie de propiedades sobre ellas, si bien también podemos examinar el código fuente.
+
+Como podéis ver ha generado un fichero de XML que tiene distintas entidades `<hibernate-mapping>` recoje las clases que hay dentro del fichero, con el nombre cualifido de la clase, el nombre que va a tener la tabla, el atributo que va a ser `Id`, el nombre de la correspondiente columna, el tipo de generador que va a utilizar que ha sido asignada por defecto y las propiedades que incluye. 
+
+Aquí podríamos añadir las que correspondieran si es que queremos hacer algún tipo de customización en el proceso de generación de este fichero.
+
+¿Qué nos quedaría? En el fichero de configuración de Hibernate no hace referencia de modo alguno todavía a esa clase que acabamos de mapear a través del fichero XML.
+
+*`hibernate.cfg.xml`*
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">12345678</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate</property>
+  <property name="hibernate.connection.username">openwebinars</property>
+  <property name="hibernate.default_schema">hibernate</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
+  <mapping class="com.openwebinars.hibernate.hibernatexml.User"/>
+  <mapping resource="User.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>
+```
+
+Si nos venimos al fichero de configuración de Hibernate lo podemos hacer a través del asistente.
+
+<img src="images/9-16.png">
+
+Vamos a presionar Add 
+
+<img src="images/9-17.png">
+
+y ahora lo vamos a añadir a través de un recurso.
+
+<img src="images/9-18.png">
+
+<img src="images/9-19.png">
+
+<img src="images/9-20.png">
+
+<img src="images/9-21.png">
+
+De esta manera lo que estamos mapeando sería el recurso XML que no es lo mismo que mapear la clase, porque en este recurso ya se nos marca la clase con la que se está haciendo el mapeo directamente con lo cual cerrariamos la cadena que nos va a hacer que podamos identificar como entidad una clase Java.
+
+El código de la aplicación es el mismo que cuando lo hicimos de ejemplo, vamos ejecutarlo como aplicación Java.
+
+<img src="images/9-22.png">
+
+Se nos presenta un error que ya sabemos como resolver. Volvemos a ejecutar.
+
+<img src="images/9-23.png">
+
+Ha creado la tabla correctamente a insertado los datos, podemos comprobarlo en Workbeanch.
+
+<img src="images/9-24.png">
+
+En lugar de haber usado anotaciones hemos usado un descriptor XML que ha generado nuestro asistente.
+
+### :computer: Código Completo - Proyecto 130-07-HibernateXML
+
+<img src="images/9-25.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>130-01-PrimerProyectoHbn</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>130-01-PrimerProyectoHbn</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-agroal</artifactId>
+			<version>5.4.17.Final</version>
+			<type>pom</type>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+*`hibernate.cfg.xml`*
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">12345678</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate</property>
+  <property name="hibernate.connection.username">openwebinars</property>
+  <property name="hibernate.default_schema">hibernate</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
+  <mapping resource="User.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>
+```
+
+*`User.hbm.xml`*
+
+```java
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11 jun. 2020 16:00:17 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.openwebinars.hibernate.hibernatexml.User" table="USER">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userName" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="userMessage" type="java.lang.String">
+            <column name="USERMESSAGE" />
+        </property>
+    </class>
+</hibernate-mapping>
+```
+
+*`User.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatexml;
+
+public class User {
+
+	private int id;
+	
+	private String userName;
+	
+	private String userMessage;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+	
+}
+```
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatexml;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+/**
+ * Mapeo de entidades con ficheros XML (Hibernate nativo)
+ * www.openwebinars.net
+ * @LuisMLopezMag
+ *
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		
+		// Inicializamos un objeto SessionFactory con la configuración
+		// del fichero hibernate.cfg.xml
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder()
+				.configure()
+				.build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+		
+		
+		//Legacy
+		//SessionFactory sf = new Configuration().configure().buildSessionFactory();
+
+		// Iniciamos una sesión
+		Session session = sf.openSession();
+
+		// Construimos un objeto de tipo User
+		User user1 = new User();
+		user1.setId(1);
+		user1.setUserName("Pepe");
+		user1.setUserMessage("Hello world from Pepe");
+
+		// Construimos otro objeto de tipo User
+		User user2 = new User();
+		user2.setId(2);
+		user2.setUserName("Juan");
+		user2.setUserMessage("Hello world from Juan");
+
+		// Iniciamos una transacción dentro de la sesión
+		session.beginTransaction();
+
+		// Almacenamos los objetos
+		session.save(user1);
+		session.save(user2);
+
+		// Commiteamos la transacción
+		session.getTransaction().commit();
+
+		// Cerramos todos los objetos
+		session.close();
+		sf.close();
+	}
+}
+```
 
 
 
-dónde código fuente dejar esto fichero XML necesitan estar dentro del Clash va para que los pueda localizar y pueda efectuar el mapeo con ellos sin embargo nosotros lo vamos a cambiar de carpeta por comodidad por si en alguna ocasión queremos gestionar los aparte lo vamos a meter dentro de la carpeta de recursos junto con el fichero de configuracion de hibernate tan solo tenemos que pensar arrastrar y soltar si examinamos el contenido del fichero hibernate además no nos proponen un asistente o una pantalla específica para para poder examinarlo dónde tenemos la lista de clase que están descritas dentro del del fichero XML y alguna serie de propiedades sobre ellas si bien también podemos examinar el código fuente como podéis ver ha generado un fichero de XML que tiene distintas entidades valeel tipo de generador que va a utilizar que ha sido asignada por defecto y las propiedades que aquí podríamos añadir que correspondieran si es que queremos hacer algún tipo de customización en el proceso de generación de este fichet muffins hemos querido la clase que mapear y usted pero ahora lo vamos a hacer a través de a través de un recurso de esta manera lo que estamos mapeando sería el recurso XML y no es lo mismo que me a pegar la clase porque en este recurso ya se los marca la clase con la que se está haciendo el mapeo directamente con lo cual cerrar y amos la cadena que nos va a hacer que podemos identificar como entidad una clase estaba el código de la aplicación es el mismo que cuando lo hicimos de ejemplo vamos ejecutarlo del ejemplo anterior y no está haciendo bien el borrado con los posibles cambios que hemos realizado borrar la tabla ahora ha creado la tabla correctamente ha insertado los datos y se nos venimos de comprobamos podemos ver el Mateo pues igual tenemos aquí nuestro plato y en lugar de usar anotaciones hemos usado escritor XML que además ha generado nuestro asistente con hibernate nativo pero que hay del uso de XML con este caso a nuestra unidad de persistencia le tenemos que copiar un fichero de mapeo dónde vamos a realizar este mapeo que se suele llamar o r m punto XML y acompañando a la unidad de persistencia este fichero de mapeo hará las mismas tareas la dificultad que tenemos es que no encontramos para trabajar con hibernate eclipse spring tool suite ese asistente tan magnífico que teníamos como con hibernate con lo cual vamos a tener que hacer nosotros parte de esa tarea vamos a partir de ejemplo en este caso del que ya hicimos cómo pedir el primer proyecto de j.t.a. en el ya teníamos definido nuestra unidad de persistencia hola propiedades del ejemplo anterior en este caso tenemos aquí la clase Josep Ana cuando hemos quitado la anotaciones y que vamos a crear como un cómo proyecto perdón del vapeo lo hagamos nosotros igualmente para ello si tenemos activa la vista y le damos a crear nuevo nos permite usar estación qué es JP o RM Racing pointpor defecto eclipse ábrelo RM XML con la pantalla que tiene para ir creando fichero XML genéricolo vamos haciendo a través de esta amistad que tenemos a la derecha que es estructura jota tía sino no apareciera la vista por defecto o reseteamos la perspectiva o bien lo podemos mostrar a través de Windows solución poder y la podríamos buscar articular con esta vista aquí que está está pequeña vista nos va a dar una pequeña ayuda para ir mapeando entidades sobre este elemento que es el rey podemos pulsar con el botón derecho añadimos una clase la podemos buscar cómo estirar las hablaremos de la iglesia o como y una vez creada la clase podemos ir mapeando los los distintos atributos cómo podemos comprobar si los tenemos aquí le daríamos esta segunda opción básico es era una anotación que ni siquiera vemos porque una anotación que se añade por defecto esto indica que es un valor básico o no podemos anotar el caso ya lo añade a los atributos lo podríamos eliminar si lo necesitamos cambiar el tipo de texto ya tendríamos definido nuestro fichero podemos ver que aunque tengamos el asistenta y alguna opción es que lo que no podemos manejar desde el mismo cómo es añadir un elemento table por ejemplo en el que podríamos decir el que está entidad sea mapeada otra tabla nombre de tabla distinto sin embargo si nos venimos aquí intentamos utilizar el auto completa cómo eclipse escaneando el la definición del documento que hemos marcado en el elemento de cabecera de XML pues nos propone algunos y podríamos buscar y dentro del elemento table podrías buscar su propiedad vamos a cambiar el nombre para no tener la comisión que hemos tenido antes por ejemplo muy bien pues ya tenemos hecho nuestro fichero de Mateo del Pilar es bueno pues nos queda comprobar si existe fichero sea mapeado en el XML de la unidad de persistencia hbm.xml el proceso se ha hecho prácticamente podemos comprobar que se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
+del ejemplo anterior y no está haciendo bien el borrado con los posibles cambios que hemos realizado borrar la tabla ahora ha creado la tabla correctamente ha insertado los datos y se nos venimos de comprobamos podemos ver el Mateo pues igual tenemos aquí nuestro plato y en lugar de usar anotaciones hemos usado escritor XML que además ha generado nuestro asistente con hibernate nativo pero que hay del uso de XML con este caso a nuestra unidad de persistencia le tenemos que copiar un fichero de mapeo dónde vamos a realizar este mapeo que se suele llamar o r m punto XML y acompañando a la unidad de persistencia este fichero de mapeo hará las mismas tareas la dificultad que tenemos es que no encontramos para trabajar con hibernate eclipse spring tool suite ese asistente tan magnífico que teníamos como con hibernate con lo cual vamos a tener que hacer nosotros parte de esa tarea vamos a partir de ejemplo en este caso del que ya hicimos cómo pedir el primer proyecto de j.t.a. en el ya teníamos definido nuestra unidad de persistencia hola propiedades del ejemplo anterior en este caso tenemos aquí la clase Josep Ana cuando hemos quitado la anotaciones y que vamos a crear como un cómo proyecto perdón del vapeo lo hagamos nosotros igualmente para ello si tenemos activa la vista y le damos a crear nuevo nos permite usar estación qué es JP o RM Racing pointpor defecto eclipse ábrelo RM XML con la pantalla que tiene para ir creando fichero XML genéricolo vamos haciendo a través de esta amistad que tenemos a la derecha que es estructura jota tía sino no apareciera la vista por defecto o reseteamos la perspectiva o bien lo podemos mostrar a través de Windows solución poder y la podríamos buscar articular con esta vista aquí que está está pequeña vista nos va a dar una pequeña ayuda para ir mapeando entidades sobre este elemento que es el rey podemos pulsar con el botón derecho añadimos una clase la podemos buscar cómo estirar las hablaremos de la iglesia o como y una vez creada la clase podemos ir mapeando los los distintos atributos cómo podemos comprobar si los tenemos aquí le daríamos esta segunda opción básico es era una anotación que ni siquiera vemos porque una anotación que se añade por defecto esto indica que es un valor básico o no podemos anotar el caso ya lo añade a los atributos lo podríamos eliminar si lo necesitamos cambiar el tipo de texto ya tendríamos definido nuestro fichero podemos ver que aunque tengamos el asistenta y alguna opción es que lo que no podemos manejar desde el mismo cómo es añadir un elemento table por ejemplo en el que podríamos decir el que está entidad sea mapeada otra tabla nombre de tabla distinto sin embargo si nos venimos aquí intentamos utilizar el auto completa cómo eclipse escaneando el la definición del documento que hemos marcado en el elemento de cabecera de XML pues nos propone algunos y podríamos buscar y dentro del elemento table podrías buscar su propiedad vamos a cambiar el nombre para no tener la comisión que hemos tenido antes por ejemplo muy bien pues ya tenemos hecho nuestro fichero de Mateo del Pilar es bueno pues nos queda comprobar si existe fichero sea mapeado en el XML de la unidad de persistencia hbm.xml el proceso se ha hecho prácticamente podemos comprobar que se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
 
 
 
