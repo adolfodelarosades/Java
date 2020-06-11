@@ -1310,12 +1310,68 @@ Por ser también adyacentes, también tienes los cursos de Introducción a Thyme
 
 Un saludo.
 
-
 ## Transcripción
 
 <img src="images/9-01.png">
 
+Vamos a continuar con en capítulo 4 en el que estamos aprendiendo a manejar nuestras entidades en este caso en lugar de usar el esquema de definición de entidades a través de anotaciones vamos a definirla a través de XML y vamos a aprender la diferencia entre hacerlo con Hibernate nativo y hacerlo a través de JPA.
+
 <img src="images/9-02.png">
+
+En el caso de configuración nativa de Hibernate tenemos que definir algunos ficheros XML en particular podemos hacer incluso uno por cada entidad que queramos definir o podríamos reunir más de una entidad en un fichero XML en definitiva podríamos seguir el esquema que tenemos en pantalla para cada clase Java que queramos considerar como una Entidad lo que hariamos sería fabricar un fichero XML y a través de una serie de descriptores iriamos haciendo el mapeo entre la clase y la tabla correspondiente y cada una de las propiedades y de los atributos que va a tener esa tabla en la base de datos.
+
+<img src="images/9-03.png">
+
+Las Hibernate Tools que instalamos en capítulos anteriores a través de las JBOSS Tools nos permiten utilizar un asistente que va a scanear nuestro código fuente y va a generar ese fichero de mapeo, vamos a ver un ejemplo.
+
+Vamos a partir del proyecto ejemplo de Hibernate que hicimos en lecciones anteriores pero sin las anotaciones, cómo podéis comprobar es una clase pojo Java normal y corriente.
+
+```java
+package com.openwebinars.hibernate.hibernatexml;
+
+public class User {
+
+	private int id;
+	
+	private String userName;
+	
+	private String userMessage;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}	
+}
+```
+
+
+Como podríamos crear el fichero de mapeo sin tener que hacerlo de forma manual, como decíamos podríamos añadir y buscar la generación de un fichero de Mateo XML si vamos siguiendo este asistente podremos realizar el proceso. Lo que queremos es hacer el de la clase `User` 
+
+
+
+dónde código fuente dejar esto fichero XML necesitan estar dentro del Clash va para que los pueda localizar y pueda efectuar el mapeo con ellos sin embargo nosotros lo vamos a cambiar de carpeta por comodidad por si en alguna ocasión queremos gestionar los aparte lo vamos a meter dentro de la carpeta de recursos junto con el fichero de configuracion de hibernate tan solo tenemos que pensar arrastrar y soltar si examinamos el contenido del fichero hibernate además no nos proponen un asistente o una pantalla específica para para poder examinarlo dónde tenemos la lista de clase que están descritas dentro del del fichero XML y alguna serie de propiedades sobre ellas si bien también podemos examinar el código fuente como podéis ver ha generado un fichero de XML que tiene distintas entidades valeel tipo de generador que va a utilizar que ha sido asignada por defecto y las propiedades que aquí podríamos añadir que correspondieran si es que queremos hacer algún tipo de customización en el proceso de generación de este fichet muffins hemos querido la clase que mapear y usted pero ahora lo vamos a hacer a través de a través de un recurso de esta manera lo que estamos mapeando sería el recurso XML y no es lo mismo que me a pegar la clase porque en este recurso ya se los marca la clase con la que se está haciendo el mapeo directamente con lo cual cerrar y amos la cadena que nos va a hacer que podemos identificar como entidad una clase estaba el código de la aplicación es el mismo que cuando lo hicimos de ejemplo vamos ejecutarlo del ejemplo anterior y no está haciendo bien el borrado con los posibles cambios que hemos realizado borrar la tabla ahora ha creado la tabla correctamente ha insertado los datos y se nos venimos de comprobamos podemos ver el Mateo pues igual tenemos aquí nuestro plato y en lugar de usar anotaciones hemos usado escritor XML que además ha generado nuestro asistente con hibernate nativo pero que hay del uso de XML con este caso a nuestra unidad de persistencia le tenemos que copiar un fichero de mapeo dónde vamos a realizar este mapeo que se suele llamar o r m punto XML y acompañando a la unidad de persistencia este fichero de mapeo hará las mismas tareas la dificultad que tenemos es que no encontramos para trabajar con hibernate eclipse spring tool suite ese asistente tan magnífico que teníamos como con hibernate con lo cual vamos a tener que hacer nosotros parte de esa tarea vamos a partir de ejemplo en este caso del que ya hicimos cómo pedir el primer proyecto de j.t.a. en el ya teníamos definido nuestra unidad de persistencia hola propiedades del ejemplo anterior en este caso tenemos aquí la clase Josep Ana cuando hemos quitado la anotaciones y que vamos a crear como un cómo proyecto perdón del vapeo lo hagamos nosotros igualmente para ello si tenemos activa la vista y le damos a crear nuevo nos permite usar estación qué es JP o RM Racing pointpor defecto eclipse ábrelo RM XML con la pantalla que tiene para ir creando fichero XML genéricolo vamos haciendo a través de esta amistad que tenemos a la derecha que es estructura jota tía sino no apareciera la vista por defecto o reseteamos la perspectiva o bien lo podemos mostrar a través de Windows solución poder y la podríamos buscar articular con esta vista aquí que está está pequeña vista nos va a dar una pequeña ayuda para ir mapeando entidades sobre este elemento que es el rey podemos pulsar con el botón derecho añadimos una clase la podemos buscar cómo estirar las hablaremos de la iglesia o como y una vez creada la clase podemos ir mapeando los los distintos atributos cómo podemos comprobar si los tenemos aquí le daríamos esta segunda opción básico es era una anotación que ni siquiera vemos porque una anotación que se añade por defecto esto indica que es un valor básico o no podemos anotar el caso ya lo añade a los atributos lo podríamos eliminar si lo necesitamos cambiar el tipo de texto ya tendríamos definido nuestro fichero podemos ver que aunque tengamos el asistenta y alguna opción es que lo que no podemos manejar desde el mismo cómo es añadir un elemento table por ejemplo en el que podríamos decir el que está entidad sea mapeada otra tabla nombre de tabla distinto sin embargo si nos venimos aquí intentamos utilizar el auto completa cómo eclipse escaneando el la definición del documento que hemos marcado en el elemento de cabecera de XML pues nos propone algunos y podríamos buscar y dentro del elemento table podrías buscar su propiedad vamos a cambiar el nombre para no tener la comisión que hemos tenido antes por ejemplo muy bien pues ya tenemos hecho nuestro fichero de Mateo del Pilar es bueno pues nos queda comprobar si existe fichero sea mapeado en el XML de la unidad de persistencia hbm.xml el proceso se ha hecho prácticamente podemos comprobar que se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
+
+
+
 
 <img src="images/9-03.png">
 
