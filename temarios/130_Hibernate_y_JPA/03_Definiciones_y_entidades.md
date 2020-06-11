@@ -764,21 +764,377 @@ La clase embebida no es una entidad, pero si es verdad que la podremos trabajar 
 
 La dificultad estriba en si queremos añadir más de uno, por ejemplo la dirección de vivienda y la dirección de facturación que suele ser algo tipico en los sistemas de compra online, no podríamos añadir dos veces como una entidad embebida, por que tendríamos el nombre de atributos repetidos. Aunque Hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar.
 
-Veamos el ejemplo de Mapeo Embebido.
+### Ejemplo de Mapeo Embebido.
+
+Como podemos comprar tenemos usuarios con direcciones, la dirección esta embebida y en los usuarios aunque hemos embebido a través de la anotación `@AttributeOverrides(`
+podemos marcar que sobreescriba el nombre de una clase que estamos embebiendo por otra, de manera que al crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones, la dirección normal y la dirección de facturación dentro de si.
+
+<img src="images/8-27.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>130-05-PrimerProyectoHibernateJPAEmbebido</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>130-05-PrimerProyectoHibernateJPAEmbebido</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.17.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="MapeoEmbedd" transaction-type="RESOURCE_LOCAL">
+		<class>com.openwebinars.hibernate.mapeoembedd.User</class>
+		<class>com.openwebinars.hibernate.mapeoembedd.Direccion</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+*`User.java`*
+
+```java
+package com.openwebinars.hibernate.mapeoembedd;
+
+import java.util.Date;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name="USERCONEMBEDD")
+public class User {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+
+	private String name;	
+	
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
+	
+	private Direccion address;
+
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name = "via", column = @Column(name="VIA_FACTURACION")),
+		@AttributeOverride(name = "codigoPostal", column = @Column(name="CODIGOPOSTAL_FACTURACION", length=5)),
+		@AttributeOverride(name = "poblacion", column = @Column(name="POBLACION_FACTURACION")),
+		@AttributeOverride(name = "provincia", column = @Column(name="PROVINCIA_FACTURACION"))
+		
+	})
+	private Direccion billingAddress;
+	
+	public long getId() {
+		return id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+	public Direccion getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Direccion address) {
+		this.address = address;
+	}
+
+
+	public Direccion getBillingAddress() {
+		return billingAddress;
+	}
+
+
+	public void setBillingAddress(Direccion billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+
+}
+```
+
+*`Direccion.java`*
+
+```java
+package com.openwebinars.hibernate.mapeoembedd;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Direccion {
+
+	@Column(nullable = false)
+	private String via;
+
+	@Column(nullable = false, length = 5)
+	private String codigoPostal;
+
+	@Column(nullable = false)
+	private String poblacion;
+
+	@Column(nullable = false)
+	private String provincia;
+	
+	public Direccion() { }
+	
+
+	public Direccion(String via, String codigoPostal, String poblacion, String provincia) {
+		this.via = via;
+		this.codigoPostal = codigoPostal;
+		this.poblacion = poblacion;
+		this.provincia = provincia;
+	}
 
 
 
+	public String getVia() {
+		return via;
+	}
 
-tenemos usuarios con direcciones la dirección y en los usuarios aunque hemos embebido a través del atributo perdón del anotación atributo de raids podemos marcar que sobreescriba las el nombre de una clase que estamos viviendo por otro de manera que hay crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones la dirección normal y la dirección de facturación vale dentro de si bien nosotros solamente tenemos la entidad y dirección y está guardando las dos direcciones con los nombres de campo distintos aunque los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si le sacará ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado la entidad puede pasar del estado no existe al cual podemos llegar porque no hay nadapor por el contexto de persistencia la podemos separar vale ya veremos que sí que en determinadas causas por ejemplo limpiarla queen las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más
+	public void setVia(String via) {
+		this.via = via;
+	}
+
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+	public String getPoblacion() {
+		return poblacion;
+	}
+
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+}
+```
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.mapeoembedd;
+
+import java.util.Calendar;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Mapeo de entidades Embedd
+ *
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("MapeoEmbedd");
+
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
+
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+
+		//Obtenemos el Calendar con el que gestionaremos las fechas
+		Calendar calendar = Calendar.getInstance();
+
+		// Construimos un objeto de tipo User
+		User user1 = new User();
+		user1.setName("Pepe");
+		
+		calendar.set(1982, 9, 18);
+		user1.setBirthDate(calendar.getTime());
+		
+		user1.setAddress(new Direccion("Calle Rue del Percebe 13", "28000", "Madrid", "Madrid"));
+		user1.setBillingAddress(new Direccion("Calle Betis 1", "41010", "Sevilla", "Sevilla"));
+
+		// Construimos otro objeto de tipo User
+		User user2 = new User();
+		user2.setName("Pepe");
+		calendar.set(1990, 5, 20);
+		user2.setBirthDate(calendar.getTime());
+		user2.setAddress(new Direccion("Calle Betis 1", "41010", "Sevilla", "Sevilla"));
+		user2.setBillingAddress(new Direccion("Calle Rue del Percebe 13", "28000", "Madrid", "Madrid"));
+
+		
+		//Persistimos los objetos
+		em.persist(user1);
+		em.persist(user2);
+
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+
+	}
+}
+```
+
+Si ejecutamos la aplicación tenemos:
+
+<img src="images/8-28.png">
+
+<img src="images/8-29.png">
 
 
 
+El usuario tiene todos estos campos:
 
+`(codigoPostal, poblacion, provincia, via, CODIGOPOSTAL_FACTURACION, POBLACION_FACTURACION, PROVINCIA_FACTURACION, VIA_FACTURACION, birthDate, name, id)` 
 
+Nosotros solo tenemos las entidades `User` y `Direccion` y esta guardado las dos direcciones con nombres de campos distintos.
 
 <img src="images/8-20.png">
 
+Aunque en los próximos capítulos hablaremos más sobre contexto de persistencia unidad de persistencia si destacar ahora el ciclo de vida de la entidad para que no nos perdamos en las próximas lecciones.
+
 <img src="images/8-21.png">
+
+Una entidad puede pasar por estos distintos estados y los distintos métodos de la clase EntityManager nos sirven para cambiar una entidad de un estado a otro. La entidad puede pasar del estado no existe, al cual podemos llegar porque no hemos creado la entidad o la hayamos eliminado a como nueva, esta entidad aun no forma parte del contexto de persistencia por que todavia no esta gestionada para ello la tenemos que persistir, una vez que esta persistida ya sería gestionada por el contexto de persistencia, desde ese punto la podemos separar, ya veremos que existen diferentes causas por ejemplo limpiar la cache o explicitamente la podemos Separar si queremos hacer algún tipo de operación con ella o de Gestionada también podemos pasar a Eliminada si bien desde ambos Separada y Gestionada podemos rescatar esas entidades para que vuelvan a hacer Gestionadas.
+
+En las próximas lecciones lo que hablaremos será de las asociaciones entre entidades para ir poco a poco creando aplicaciones más complejas.
 
 # 09 Mapeo con ficheros XML 14:45 
 
