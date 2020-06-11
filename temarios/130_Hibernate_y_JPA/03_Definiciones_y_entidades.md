@@ -1322,6 +1322,8 @@ En el caso de configuración nativa de Hibernate tenemos que definir algunos fic
 
 <img src="images/9-03.png">
 
+<img src="images/9-04.png">
+
 Las Hibernate Tools que instalamos en capítulos anteriores a través de las JBOSS Tools nos permiten utilizar un asistente que va a scanear nuestro código fuente y va a generar ese fichero de mapeo, vamos a ver un ejemplo.
 
 Vamos a partir del proyecto ejemplo de Hibernate que hicimos en lecciones anteriores *Proyecto 130-01-PrimerProyectoHbn* pero sin las anotaciones, cómo podéis comprobar es una clase pojo Java normal y corriente.
@@ -1730,20 +1732,27 @@ public class App {
 }
 ```
 
-
-
-del ejemplo anterior y no está haciendo bien el borrado con los posibles cambios que hemos realizado borrar la tabla ahora ha creado la tabla correctamente ha insertado los datos y se nos venimos de comprobamos podemos ver el Mateo pues igual tenemos aquí nuestro plato y en lugar de usar anotaciones hemos usado escritor XML que además ha generado nuestro asistente con hibernate nativo pero que hay del uso de XML con este caso a nuestra unidad de persistencia le tenemos que copiar un fichero de mapeo dónde vamos a realizar este mapeo que se suele llamar o r m punto XML y acompañando a la unidad de persistencia este fichero de mapeo hará las mismas tareas la dificultad que tenemos es que no encontramos para trabajar con hibernate eclipse spring tool suite ese asistente tan magnífico que teníamos como con hibernate con lo cual vamos a tener que hacer nosotros parte de esa tarea vamos a partir de ejemplo en este caso del que ya hicimos cómo pedir el primer proyecto de j.t.a. en el ya teníamos definido nuestra unidad de persistencia hola propiedades del ejemplo anterior en este caso tenemos aquí la clase Josep Ana cuando hemos quitado la anotaciones y que vamos a crear como un cómo proyecto perdón del vapeo lo hagamos nosotros igualmente para ello si tenemos activa la vista y le damos a crear nuevo nos permite usar estación qué es JP o RM Racing pointpor defecto eclipse ábrelo RM XML con la pantalla que tiene para ir creando fichero XML genéricolo vamos haciendo a través de esta amistad que tenemos a la derecha que es estructura jota tía sino no apareciera la vista por defecto o reseteamos la perspectiva o bien lo podemos mostrar a través de Windows solución poder y la podríamos buscar articular con esta vista aquí que está está pequeña vista nos va a dar una pequeña ayuda para ir mapeando entidades sobre este elemento que es el rey podemos pulsar con el botón derecho añadimos una clase la podemos buscar cómo estirar las hablaremos de la iglesia o como y una vez creada la clase podemos ir mapeando los los distintos atributos cómo podemos comprobar si los tenemos aquí le daríamos esta segunda opción básico es era una anotación que ni siquiera vemos porque una anotación que se añade por defecto esto indica que es un valor básico o no podemos anotar el caso ya lo añade a los atributos lo podríamos eliminar si lo necesitamos cambiar el tipo de texto ya tendríamos definido nuestro fichero podemos ver que aunque tengamos el asistenta y alguna opción es que lo que no podemos manejar desde el mismo cómo es añadir un elemento table por ejemplo en el que podríamos decir el que está entidad sea mapeada otra tabla nombre de tabla distinto sin embargo si nos venimos aquí intentamos utilizar el auto completa cómo eclipse escaneando el la definición del documento que hemos marcado en el elemento de cabecera de XML pues nos propone algunos y podríamos buscar y dentro del elemento table podrías buscar su propiedad vamos a cambiar el nombre para no tener la comisión que hemos tenido antes por ejemplo muy bien pues ya tenemos hecho nuestro fichero de Mateo del Pilar es bueno pues nos queda comprobar si existe fichero sea mapeado en el XML de la unidad de persistencia hbm.xml el proceso se ha hecho prácticamente podemos comprobar que se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
-
-
-
-
-<img src="images/9-03.png">
-
-<img src="images/9-04.png">
-
 <img src="images/9-05.png">
 
+Esto con hibernate nativo pero que hay del uso de XML con JPA.
+
 <img src="images/9-06.png">
+
+En este caso a nuestra unidad de persistencia le tenemos que asociar un fichero de mapeo dónde vamos a realizar ese  mapeo que se suele llamar `orm.xml` y acompañando a la unidad de persistencia este fichero de mapeo hará las mismas tareas, la dificultad que tenemos es que no encontramos para trabajar con Hibernate, Eclipse o Spring Tool Suite ese asistente tan magnífico que teníamos como Hibernate con lo cual vamos a tener que hacer nosotros parte de esa tarea.
+
+Partiendo del ejemplo *130-02-PrimerProyectoHibernateJPA*
+
+
+vamos a partir de ejemplo en este caso del que ya hicimos cómo pedir el primer proyecto de j.t.a. en el ya teníamos definido nuestra unidad de persistencia hola propiedades del ejemplo anterior en este caso tenemos aquí la clase Josep Ana cuando hemos quitado la anotaciones y que vamos a crear como un cómo proyecto perdón del vapeo lo hagamos nosotros igualmente para ello si tenemos activa la vista y le damos a crear nuevo nos permite usar estación qué es JP o RM Racing pointpor defecto eclipse ábrelo RM XML con la pantalla que tiene para ir creando fichero XML genéricolo vamos haciendo a través de esta amistad que tenemos a la derecha que es estructura jota tía sino no apareciera la vista por defecto o reseteamos la perspectiva o bien lo podemos mostrar a través de Windows solución poder y la podríamos buscar articular con esta vista aquí que está está pequeña vista nos va a dar una pequeña ayuda para ir mapeando entidades sobre este elemento que es el rey podemos pulsar con el botón derecho añadimos una clase la podemos buscar cómo estirar las hablaremos de la iglesia o como y una vez creada la clase podemos ir mapeando los los distintos atributos cómo podemos comprobar si los tenemos aquí le daríamos esta segunda opción básico es era una anotación que ni siquiera vemos porque una anotación que se añade por defecto esto indica que es un valor básico o no podemos anotar el caso ya lo añade a los atributos lo podríamos eliminar si lo necesitamos cambiar el tipo de texto ya tendríamos definido nuestro fichero podemos ver que aunque tengamos el asistenta y alguna opción es que lo que no podemos manejar desde el mismo cómo es añadir un elemento table por ejemplo en el que podríamos decir el que está entidad sea mapeada otra tabla nombre de tabla distinto sin embargo si nos venimos aquí intentamos utilizar el auto completa cómo eclipse escaneando el la definición del documento que hemos marcado en el elemento de cabecera de XML pues nos propone algunos y podríamos buscar y dentro del elemento table podrías buscar su propiedad vamos a cambiar el nombre para no tener la comisión que hemos tenido antes por ejemplo muy bien pues ya tenemos hecho nuestro fichero de Mateo del Pilar es bueno pues nos queda comprobar si existe fichero sea mapeado en el XML de la unidad de persistencia hbm.xml el proceso se ha hecho prácticamente podemos comprobar que se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
+
+
+
+
+
+
+
+
+
 
 <img src="images/9-07.png">
 
