@@ -705,6 +705,8 @@ Y ya tenemos listo nuestro esquema con el usuario especifico.
 
 Una vez que tenemos creado ese esquema ya podemos hacer el paso 3.
 
+<img src="images/4-10-0.png">
+
 <img src="images/4-10.png">
 
 Para poder almacenar en un lugar adecuado ese fichero de configuración de Hibernate vamos a crear una nueva carpeta de código fuente con lo cual estará incluida dentro del classpath.
@@ -942,7 +944,7 @@ session.save(user2);
 session.getTransaction().commit();
 ```
 
-El código completo queda así:
+El código completo de la clase queda así:
 
 *`App.java`*
 
@@ -982,6 +984,8 @@ public class App
     	user2.setId(2);
     	user2.setUserName("Juan");
     	user2.setUserMessage("Hello world from Juan");
+	
+	session.beginTransaction();
     	
     	//Almacenamos los objetos
     	session.save(user1);
@@ -1056,12 +1060,12 @@ Vamos entrar a través de MySQL Workbench y vamos a comprobar que está creació
 
 <img src="images/4-61.png">
 
-### Código Completo 
+### Código Completo
 
-Vamos a poner todos la estructura y código de este proyecto.
+Vamos a poner la estructura y código de este proyecto.
 
+<img src="images/4-100.png">
 <img src="images/4-60.png">
-
 
 *`pom.xml`*
 
