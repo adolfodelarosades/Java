@@ -1740,10 +1740,239 @@ Esto con hibernate nativo pero que hay del uso de XML con JPA.
 
 En este caso a nuestra unidad de persistencia le tenemos que asociar un fichero de mapeo dónde vamos a realizar ese  mapeo que se suele llamar `orm.xml` y acompañando a la unidad de persistencia este fichero de mapeo hará las mismas tareas, la dificultad que tenemos es que no encontramos para trabajar con Hibernate, Eclipse o Spring Tool Suite ese asistente tan magnífico que teníamos como Hibernate con lo cual vamos a tener que hacer nosotros parte de esa tarea.
 
-Partiendo del ejemplo *130-02-PrimerProyectoHibernateJPA*
+Vamos a partir del ejemplo del que ya hicimos cómo primer proyecto de JPA *130-02-PrimerProyectoHibernateJPA* en el ya teníamos definido nuestra unidad de persistencia con las propiedades del ejemplo anterior:
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="PrimerEjemploHibernateJPA" transaction-type="RESOURCE_LOCAL">
+		<class>com.openwebinars.hibernate.primerproyectohibernatejpa.User</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+En este caso tenemos aquí la clase `User` a la cual le hemos quitado las notaciones y al que vamos a crear como un proyecto JPA pero donde el manualmente.
+
+```java
+package com.openwebinars.hibernate.hibernatejpaxml;
+
+public class User {
+
+	private int id;
+
+	private String userName;
+
+	private String userMessage;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+
+}
+```
+
+Para ello si tenemos activa la vista de JPA y le damos a crear nuevo nos permite usar la opción de JPA ORM Mapping File.
+
+<img src="images/9-26.png">
+
+que nos va a permitir crear ese fichero
+
+<img src="images/9-27.png">
+
+lo guardamos en la caepeta META-INF que es donde esta realmente guardado el fichero de la definición de la unidad de persistencia.
+
+<img src="images/9-28.png">
+
+Le asociamos la unida de persistencia del proyecto y vamos hacia adelante.
+
+<img src="images/9-29.png">
+
+Por defecto Eclipse nos ábre `orm.xml` con la pantalla que tiene para ir creando fichero XML genéricos, quisa a algunos les pueda resultar útil pero lo es poco, tenemos dos opciones o lo vamos haciendo vía el código fuente del fichero con lo cual estamos obligados a conocer las etiquetas o lo vamos haciedo de la vista JPA Structure que tenemos a la derecha:
+
+<img src="images/9-30.png">
+
+Si no apareciera esa vista podemos resetear la pespectiva o vien la podemos mostrar a través de Windows - Show - View - Other y la podríamos buscar. Esta pequeña vista nos va a servir para ir mapeando Entidades. Sobre el elemento raíz podemos pulsar con el botón derecho para añadir una clase:
+
+<img src="images/9-31.png">
+
+y la podríamos buscar 
+
+<img src="images/9-32.png">
+
+nuestra clase era `User`
+
+<img src="images/9-33.png">
+
+la podemos mapear como entidad
+
+<img src="images/9-34.png">
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd">
+	<entity class="com.openwebinars.hibernate.hibernatejpaxml.User">
+	</entity>
+</entity-mappings>
+```
+
+una vez mapeada la clase podemos ir mapeando los distintos atributos.
+
+<img src="images/9-35.png">
+
+como podemos comprobar si los desplegamos los tenemos aquí
+
+<img src="images/9-36.png">
+
+y ahora para mapearlos le damos a la segunda opción.
+
+<img src="images/9-37.png">
+
+Tenemos varias opciones de mapeo.
+
+<img src="images/9-38.png">
+
+Basic tiene una anotación que no vimos por que es una anotación que se añade por defecto, eso indica que es un valor básico. En este caso tiene que ser ID.
+
+<img src="images/9-39.png">
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd">
+	<entity class="com.openwebinars.hibernate.hibernatejpaxml.User">
+		<attributes>
+			<id name="id">
+			</id>
+		</attributes>
+	</entity>
+	
+</entity-mappings>
+```
+
+Como ven ya lo añade a los atributos como `id`, lo podríamos eliminar o cambiar el tipo de mapeo.
+
+<img src="images/9-40.png">
+
+Vamos añadir `userName` y `userMessage` como atributos básicos.
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd">
+	<entity class="com.openwebinars.hibernate.hibernatejpaxml.User">
+		<attributes>
+			<id name="id">
+			</id>
+			<basic name="userName">
+			</basic>
+			<basic name="userMessage">
+			</basic>
+		</attributes>
+	</entity>
+	
+</entity-mappings>
+```
+
+Ya tendriamos definido nuestro fichero, aunque tengamos el asistente hay algunas opciones que no las podemos manejar desde el mismo, cómo es añadir un elemento table por ejemplo, en el que podríamos decir el que está entidad sea mapeada a otra tabla o nombre de tabla distinto sin embargo, si nos venimos al código e intentamos utilizar el auto completar  cómo Eclipse esta escaneando la definición del documento que hemos marcado en el elemento de cabecera de XML, nos propone algunos y podríamos buscar
+
+<img src="images/9-41.png">
+
+y dentro del elemento table podrías buscar su propiedad `name` vamos a cambiar el nombre a `USERHBNXML` ya tenemos hecho nuestro fichero de Mapeo de entidades. 
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" 
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	
+	<entity class="com.openwebinars.hibernate.hibernatejpaxml.User">
+		<table name="USERHBNXML" />
+		<attributes>
+			<id name="id">
+			</id>
+			<basic name="userName">
+			</basic>
+			<basic name="userMessage">
+			</basic>
+		</attributes>
+	</entity>
 
 
-vamos a partir de ejemplo en este caso del que ya hicimos cómo pedir el primer proyecto de j.t.a. en el ya teníamos definido nuestra unidad de persistencia hola propiedades del ejemplo anterior en este caso tenemos aquí la clase Josep Ana cuando hemos quitado la anotaciones y que vamos a crear como un cómo proyecto perdón del vapeo lo hagamos nosotros igualmente para ello si tenemos activa la vista y le damos a crear nuevo nos permite usar estación qué es JP o RM Racing pointpor defecto eclipse ábrelo RM XML con la pantalla que tiene para ir creando fichero XML genéricolo vamos haciendo a través de esta amistad que tenemos a la derecha que es estructura jota tía sino no apareciera la vista por defecto o reseteamos la perspectiva o bien lo podemos mostrar a través de Windows solución poder y la podríamos buscar articular con esta vista aquí que está está pequeña vista nos va a dar una pequeña ayuda para ir mapeando entidades sobre este elemento que es el rey podemos pulsar con el botón derecho añadimos una clase la podemos buscar cómo estirar las hablaremos de la iglesia o como y una vez creada la clase podemos ir mapeando los los distintos atributos cómo podemos comprobar si los tenemos aquí le daríamos esta segunda opción básico es era una anotación que ni siquiera vemos porque una anotación que se añade por defecto esto indica que es un valor básico o no podemos anotar el caso ya lo añade a los atributos lo podríamos eliminar si lo necesitamos cambiar el tipo de texto ya tendríamos definido nuestro fichero podemos ver que aunque tengamos el asistenta y alguna opción es que lo que no podemos manejar desde el mismo cómo es añadir un elemento table por ejemplo en el que podríamos decir el que está entidad sea mapeada otra tabla nombre de tabla distinto sin embargo si nos venimos aquí intentamos utilizar el auto completa cómo eclipse escaneando el la definición del documento que hemos marcado en el elemento de cabecera de XML pues nos propone algunos y podríamos buscar y dentro del elemento table podrías buscar su propiedad vamos a cambiar el nombre para no tener la comisión que hemos tenido antes por ejemplo muy bien pues ya tenemos hecho nuestro fichero de Mateo del Pilar es bueno pues nos queda comprobar si existe fichero sea mapeado en el XML de la unidad de persistencia hbm.xml el proceso se ha hecho prácticamente podemos comprobar que se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
+</entity-mappings>
+```
+
+
+¿Qué nos quedaría?
+
+Nos queda comprobar si este fichero se ha mapeado en el XML de la unidad de persistence.xml.
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="HibernateJPAXML" transaction-type="RESOURCE_LOCAL">
+		<mapping-file>META-INF/orm.xml</mapping-file>
+		<class>com.openwebinars.hibernate.hibernatejpaxml.User</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+Podemos que si se ha incluido al generarlo a través de Eclipse y no hacerlo manualmente a quedado añadido.
+
+<img src="images/9-42.png">
+
+Aquí también lo podemos visualizar.
+
+Vamos a comprobar que nuestra aplicación que creaba va a generar una nueva tabla que se va a llamar `USERHBNXML`.
+
+
+
+se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
+
 
 
 
