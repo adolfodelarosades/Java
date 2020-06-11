@@ -1969,19 +1969,251 @@ Aquí también lo podemos visualizar.
 
 Vamos a comprobar que nuestra aplicación que creaba va a generar una nueva tabla que se va a llamar `USERHBNXML`.
 
+<img src="images/9-43.png">
+
+Se ha creado la tabla, se ha creado una columna `id`, `userName` y `userMessage` con la clave primaria correspondiente y se han insertado los registros, lo comprobamos en Workbeanch.
+
+<img src="images/9-44.png">
+
+En esta lección hemos podido comprobar como el mapeo a traves de descriptores XML funciona igual que las anotaciones escoger uno u otro dependera en función de lo comodo que nos sintamos trabajando con XML o con anotaciones.
+
+### :computer: Código Completo - 130-08-HibernateJPA-XML
+
+<img src="images/9-45.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>PrimerProyectoHibernateJPA</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>PrimerProyectoHibernateJPA</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.17.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+*`orx.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" 
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	
+	<entity class="com.openwebinars.hibernate.hibernatejpaxml.User">
+		<table name="USERHBNXML" />
+		<attributes>
+			<id name="id">
+			</id>
+			<basic name="userName">
+			</basic>
+			<basic name="userMessage">
+			</basic>
+		</attributes>
+	</entity>
 
 
-se ha creado la tabla se ha creado una columna y de ser mesas y username con la clave primaria correspondiente y se han insertado el plato más si nos venimos y comprobamos pues a crear nueva tabla los datos que acabamos de cenar comprobar cómo funciona igual
+</entity-mappings>
+```
 
+*`persistence.xml`*
 
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="HibernateJPAXML" transaction-type="RESOURCE_LOCAL">
+		<mapping-file>META-INF/orm.xml</mapping-file>
+		<class>com.openwebinars.hibernate.hibernatejpaxml.User</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
 
+*`User.java`*
 
+```java
+package com.openwebinars.hibernate.hibernatejpaxml;
 
+public class User {
 
+	private int id;
 
+	private String userName;
 
+	private String userMessage;
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+
+}
+```
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaxml;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Primer proyecto JPA con Hibernate 
+ * www.openwebinars.net
+ *
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("HibernateJPAXML");
+
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
+
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+
+		// Construimos un objeto de tipo User
+		User user1 = new User();
+		user1.setId(1);
+		user1.setUserName("Pepe");
+		user1.setUserMessage("Hello world from JPA with Pepe");
+
+		// Construimos otro objeto de tipo User
+		User user2 = new User();
+		user2.setId(2);
+		user2.setUserName("Juan");
+		user2.setUserMessage("Hello world from JPA with Juan");
+		
+		//Persistimos los objetos
+		em.persist(user1);
+		em.persist(user2);
+
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+
+	}
+}
+```
 
 <img src="images/9-07.png">
 
