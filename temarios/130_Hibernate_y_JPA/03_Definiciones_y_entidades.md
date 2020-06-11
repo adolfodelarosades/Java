@@ -487,6 +487,8 @@ La anotacion `@Column` que ya hemos dicho que no es obligatoria pero si nos perm
 
 Y con respecto a los tipos de datos temporales, decir que para las fechas Hibernate nos da un poco de soporte, ya que el tratamiento no es exactamente el mismo que con un atributo normal con la anotación `@Temporal` podemos indicar que un determinado atributo será un tipo de dato temporal, nos permite gestionar los clásicos `Date` tanto de `util` como de `sql`, `Timestamp`, `Time`, `Calendar` y también los tipos nuevos que hay dentro de la `java.time` de Java 8. Esta anotación nos permite almacenar en la base de datos los datos de tres maneras distintas como DATE, TIME y TIMESTAMP, que es lo que tenemos en el ejemplo.
 
+### :computer: Código Completo - 130-04-PrimerProyectoHibernateJPAMapeoColumnas
+
 Vamos a ver el ejemplo en funcionamiento.
 
 Tenemos `persistence.xml`.
@@ -764,7 +766,7 @@ La clase embebida no es una entidad, pero si es verdad que la podremos trabajar 
 
 La dificultad estriba en si queremos añadir más de uno, por ejemplo la dirección de vivienda y la dirección de facturación que suele ser algo tipico en los sistemas de compra online, no podríamos añadir dos veces como una entidad embebida, por que tendríamos el nombre de atributos repetidos. Aunque Hibernate es capaz de proporcionar algún tipo de mecanismo para que nos podamos saltar ese problema y lo podemos solventar.
 
-### Ejemplo de Mapeo Embebido.
+### :computer: Código Completo - 130-05-PrimerProyectoHibernateJPAEmbebido
 
 Como podemos comprar tenemos usuarios con direcciones, la dirección esta embebida y en los usuarios aunque hemos embebido a través de la anotación `@AttributeOverrides(`
 podemos marcar que sobreescriba el nombre de una clase que estamos embebiendo por otra, de manera que al crearse en la base de datos tendrá nombre diferente y nosotros saltaremos ese problema y podremos tener dos direcciones, la dirección normal y la dirección de facturación dentro de si.
@@ -1118,8 +1120,6 @@ Si ejecutamos la aplicación tenemos:
 
 <img src="images/8-29.png">
 
-
-
 El usuario tiene todos estos campos:
 
 `(codigoPostal, poblacion, provincia, via, CODIGOPOSTAL_FACTURACION, POBLACION_FACTURACION, PROVINCIA_FACTURACION, VIA_FACTURACION, birthDate, name, id)` 
@@ -1362,7 +1362,6 @@ public class User {
 	}	
 }
 ```
-
 
 Como podríamos crear el fichero de mapeo sin tener que hacerlo de forma manual, como decíamos podríamos añadir y buscar la generación de un fichero de Mateo XML si vamos siguiendo este asistente podremos realizar el proceso. Lo que queremos es hacer el de la clase `User` 
 
