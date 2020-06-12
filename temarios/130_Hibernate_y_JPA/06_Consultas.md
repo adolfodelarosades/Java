@@ -1,11 +1,11 @@
 # 6. Consultas 61m
-   * Consultas (Parte I) 18:25 
-   * Consultas (Parte II) 15:13 
-   * Consultas (Parte III) 16:09 
-   * Consultas (Parte IV) 11:43 
+   * 21 Consultas (Parte I) 18:25 
+   * 22 Consultas (Parte II) 15:13 
+   * 23 Consultas (Parte III) 16:09 
+   * 24 Consultas (Parte IV) 11:43 
    * Contenido adicional 2
    
-## Consultas (Parte I) 18:25 
+# 21 Consultas (Parte I) 18:25 
 
 [Consultas (Parte I)](pdfs/17_Consultas.pdf)
 
@@ -397,19 +397,19 @@ Si comprobamos la ejecución de estas consultas, encontraremos que Hibernate tie
 
 La estrategia de consultas que podemos realizar es la misma que en el caso *JOINED*, pero si revisamos el código SQL que ejecuta Hibernate, podremos comprobar que utiliza varias sentencias SQL unidas por cláusulas UNION.
 
-## Consultas (Parte II) 15:13 
+# 22 Consultas (Parte II) 15:13 
 
 Conoce las dos interfaces disponibles para realizar las consultas.
 
-## Consultas (Parte III) 16:09 
+# 23 Consultas (Parte III) 16:09 
 
 En esta lección vemos consultas  DML
 
-## Consultas (Parte IV) 11:43 
+# 23 Consultas (Parte IV) 11:43 
 
 En la ultima lección de consultas trabajaremos las consultas con herencia.
 
-## Contenido adicional 2  
+# Contenido adicional 2  
 
 [Consultas (Parte I)](pdfs/17_Consultas.pdf)
 
