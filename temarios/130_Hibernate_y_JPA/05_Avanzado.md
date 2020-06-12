@@ -1249,7 +1249,7 @@ El código es compilable y ejecutable, aunque el IDE lo subraye como error.
 
 [Esquema](pdfs/schema.sql)
 
-<img src="images/17-00">
+<img src="images/17-00.png">
 
 ## Resumen Profesor
 
@@ -1572,19 +1572,19 @@ Yo quisiera saber si hay alguna otra forma de poder manejar este asistente?
 
 ### Trascripción
 
-<img src="images/17-01">
+<img src="images/17-01.png">
 
-<img src="images/17-02">
+<img src="images/17-02.png">
 
-<img src="images/17-03">
+<img src="images/17-03.png">
 
-<img src="images/17-04">
+<img src="images/17-04.png">
 
-<img src="images/17-05">
+<img src="images/17-05.png">
 
-<img src="images/17-06">
+<img src="images/17-06.png">
 
-<img src="images/17-07">
+<img src="images/17-07.png">
 
 # 18 Ciclo de vida de la persistencia 20:21
 
