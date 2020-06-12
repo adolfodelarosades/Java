@@ -186,7 +186,479 @@ El manejo de las asociaciones a nivel ya de trabajo con la entidades sería senc
 
 Vamos a ver este ejemplo en funcionamiento.
 
-verso con un campo de y vez que será generado con la estrategia automáticay además de tener la anotación many-to-one qué es la que hace de manera efectiva qué es las menos está asociación entre ambas clase vamos a delimitar que la columna yo en el decir la columna que va a unir ambas ambas tablas a través de una clave externa un nombre muy típico el nombre de este atributo o de la entidad el código de ejemplo y vamos a comprobar que se ha generado la tabla minera se crea la tabla peso la tabla vale todo este devenir de selección el mecanismo que utiliza hibernate para para ir gestionando la clave primaria automáticas y cómo podemos comprobar al final se ha insertado una persona y se ha insertado un teléfono si comprobamos en la base de datos podemos ver que en persona tenemos la persona que tenemos número de teléfono sinónimostuvo entre ellas en el próximo capítulo vamos a aprender de las asociaciones uno a muchos cómo hacer el otro lado el lado onetomany y lo veremos de manera unidireccional o bidireccional
+Tenemos la clase `Person`
+
+*`Person.jva`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytoone;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Person {
+	
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	private String name;
+	
+	public Person() { }
+	
+	public Person(String name) {
+		this.name = name;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
+```
+
+Es muy sencilla es una Entidad con un campo de `id` que será generado por la estrategia por defecto, la estrategía automatica para MySQL5 y tenemos la entidad `Phone`.
+
+*`Phone.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytoone;
+
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Phone {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	private String number;
+	
+	@ManyToOne
+	@JoinColumn(name = "person_id", 
+					foreignKey = @ForeignKey(name="PERSON_ID_FK"))
+	private Person person;
+	
+	
+	public Phone() { }
+	
+	public Phone(String number) {
+		this.number = number;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public long getId() {
+		return id;
+	}
+	
+	
+
+}
+```
+
+que tiene también su `id`, el `number` y como podemos comprobar tiene una referencia a la entidad `Person` y además de tener la anotación `@ManyToOne` qué es la que hace de manera efectiva qué plasmemos está asociación entre ambas clases, vamos a delimitar que la columna que va a unir ambas tablas a traves de una clave externa `@JoinColumn(name = "person_id", foreignKey = @ForeignKey(name="PERSON_ID_FK"))` la que se llamara `person_id` un nombre muy típico, el nombre del atributo `person` o de la entidad a la que hacemos referencia y el nombre la restricción de clave externa a través de la anotación `@ForeignKey`.
+
+El código en nuestra aplicación es:
+
+*`App`*
+
+```java
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Asociaciones ManyToOne
+ * 
+ *
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ManyToOne");
+
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
+
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+		
+		Person person = new Person("Pepe");
+		em.persist( person );
+
+		Phone phone = new Phone("954000000");
+		phone.setPerson(person);
+		em.persist(phone);
+
+		em.flush();
+		//phone.setPerson(null);
+		
+		
+
+
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+		
+	}
+}
+```
+
+Es el clásico inicializamos el EntityManagerFactory desde el creamos un EntityManager y en el marco de una transacción vamos a añadir una Persona, le vamos a asociar el teléfono.
+
+Vamos a realizar una primera ejecución.
+
+<img src="images/10-07.png">
+
+<img src="images/10-08.png">
+
+<img src="images/10-09.png">
+
+Como podemos ver se crea la tabla `Person`, la tabla `Phone`, todo este ir y venir de `Select` y `Update` es el mecanismo que utiliza Hibernate para ir gestionando las claves primarias automáticas y cómo podemos comprobar al final se ha insertado una Persona y se ha insertado un teléfono.
+
+Si comprobamos en la base de datos podemos ver como tenemos las tablas `Person` y `Phone` si vemos su contenido en `Person` tenemos la persona que hemos dado de alta y en `Phone` tenemos el id y número de teléfono y la columna `person_id` de clave externa que esta apuntando hacía el registro de Persona que hemos dado de alta.
+
+<img src="images/10-07.png">
+
+<img src="images/10-08.png">
+
+<img src="images/10-09.png">
+
+<img src="images/10-10.png">
+
+<img src="images/10-11.png">
+
+<img src="images/10-12.png">
+
+Si volvemos a ejecutar pero descomentando `phone.setPerson(null);` tenemos lo siguiente:
+
+<img src="images/10-13.png">
+
+<img src="images/10-14.png">
+
+<img src="images/10-15.png">
+
+Ademas de las sentencias de antes se ha ejecutado un Update 
+
+<img src="images/10-16.png">
+
+<img src="images/10-17.png">
+
+Al ejecutar ese update lo que hemos es desasociado esas dos entidades, de manera que estarían existiendo por que tienen su propio ciclo de vida pero ya habíamos eliminado esa asiciación `@ManyToOne` entre ellas. 
+
+### :computer: Código Completo - 130-04-PrimerProyectoHibernateJPAMapeoColumnas
+
+<img src="images/10-18.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>130-09-HibernateJPA_ManyToOne</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>130-09-HibernateJPA_ManyToOne</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.17.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="ManyToOne" transaction-type="RESOURCE_LOCAL">
+		<class>com.openwebinars.hibernate.hibernatejpamanytoone.Person</class>
+		<class>com.openwebinars.hibernate.hibernatejpamanytoone.Phone</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+*`Person.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytoone;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Person {
+	
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	private String name;
+	
+	public Person() { }
+	
+	public Person(String name) {
+		this.name = name;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
+```
+
+*`Phone.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytoone;
+
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Phone {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	private String number;
+	
+	@ManyToOne
+	@JoinColumn(name = "person_id", 
+					foreignKey = @ForeignKey(name="PERSON_ID_FK"))
+	private Person person;
+	
+	
+	public Phone() { }
+	
+	public Phone(String number) {
+		this.number = number;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public long getId() {
+		return id;
+	}
+	
+	
+
+}
+```
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytoone;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Asociaciones ManyToOne
+ *
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ManyToOne");
+
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
+
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+		
+		Person person = new Person("Pepe");
+		em.persist( person );
+
+		Phone phone = new Phone("954000000");
+		phone.setPerson(person);
+		em.persist(phone);
+
+		em.flush();
+		//phone.setPerson(null);
+		
+		
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+		
+	}
+}
+```
+
+En el próximo capítulo vamos a aprender de las asociaciones Uno a Muchos, cómo hacer el otro lado, el lado onetomany y lo veremos de manera unidireccional o bidireccional.
 
 
 
