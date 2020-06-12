@@ -1586,7 +1586,9 @@ Yo quisiera saber si hay alguna otra forma de poder manejar este asistente?
 
 <img src="images/17-07">
 
-# 18 Ciclo de vida de la persistencia 20:21 
+# 18 Ciclo de vida de la persistencia 20:21
+
+## Resumen Profesor
 
 ### 15.1 Introducción
 
@@ -1834,9 +1836,39 @@ Tenemos a nuestar disposición dos esquema de trabajo:
 
 * LAZY: Con el modo perezoso solo se cargarán los datos cuando estos sean realmente necesarios (es decir, cuando se vayan a útilizar).
 
+## Preguntas
+
+P= ¿cuando estamos trabajando con servicios tipo REST o SOAP, que tipo de configuración deberiamos de poner en los Fetch plans, EAGER o LAZY?.
+Estoy pensando en POJO que sean complejos, con atributos uno a muchos, muchos a uno, muchos a muchos
+
+R= La respuesta es DEPENDE, ya que tendremos que ver muchos factores, y siempre será adecuado hacer un análisis exhaustivo en cada problema concreto. Tendríamos que tener en cuenta:
+
+1) La complejidad de los modelos. Modelos muy complejos pueden producir sentencias pesadas a nivel de bases de datos.
+2) Si los modelos incluyen campos binarios, que ocupen grandes cantidades de memoria.
+3) El uso que se va a hacer de esos objetos. Si tenemos dos objetos asociados, A y B, y siempre que recuperemos A, vamos a utilizar B, es posible que nos interese EAGER. Si solo lo vamos a utilizar ocasionalmente, es probable que sea más interesante EAGER.
+4) Plantearnos si somos capaces de realizar consultas más concretas (por ejemplo con @Query) que nos permitan recuperar los datos que necesitamos.
+
+P= No me queda claro que implicaciones tiene tener una entidad en el contexto de persistencia(managed) o tenerla fuera (detached) ni como pasa de estar a no estar en ese contexto. ¿Sería como un pool de entidades?
+
+R= Un objeto en Hibernate puede pasar por 3 estados:
+
+* *Transient*: se trata de un objeto Java (instanciado con new) que todavía no se ha asociado a un EntityManager. Si los IDs son autogenerados, no debe de tener aun ID.
+* *Persistent*: se trata de un objeto que está asociado a un EntityManager que está abierto o activo en ese momento.
+* *Detached*: se trata de un objeto que en su momento ha sido persistido a través de un EntityManager, pero que en este momento no está gestionado por él (normalmente, porque este se encuentra cerrado o no activo).
+
+Un ejemplo claro puede ser el tener una Entidad A, que tenga una asociación de tipo LAZY con otra entidad, B. A través de nuestro EntityManager consultamos y obtenemos una instancia de A (a:A). Trasladamos esa instancia a la vista. Si tratamos de navegar desde a:A al objeto de tipo B que tiene asociado, tendremos una excepción, ya que la sesión no está activa en la vista.
+
+Otra situación en la que nos puede interesar separar una entidad persistida del contexto de persistencia es sí queremos realizar una operación bulk, es decir, utilizar una consulta de JPQL o SQL nativo que afecte a una o más filas de una tabla (esto se hace en ocasiones porque es más eficiente que dejar que lo haga Hibernate directamente). En dichas situaciones, es recomendable limpiar el contexto de persistencia (a través de los métodos flush() y clear()), lo cual provoca una separación (es decir, pasar a estado detached) de los objetos, para evitar posibles inconsistencias entre el valor de los datos en los objetos y de las tablas en la base de datos.
+
+## Transcripción
+
 # 19 Transacciones, patrones y antipatrones 19:13 
 
 [Transacciones, patrones y antipatrones](pdfs/16_Transacciones.pdf)
+
+<img src="images/19-00.png">
+
+## Resumen Profesor 
 
 ### 16.1 Introducción
 
@@ -2072,6 +2104,58 @@ A continuación listamos los que están disponibles, a través de la enumeració
 
 * `PESSIMISTIC_WRITE`: La entidad es bloqueada usando un bloqueo explícito.
 Todos estos bloqueos se pueden usar en búsquedas mediante el método `find` o a través de queries.
+
+## Transcripción
+
+<img src="images/19-01.png">
+
+<img src="images/19-02.png">
+
+<img src="images/19-03.png">
+
+<img src="images/19-04.png">
+
+<img src="images/19-05.png">
+
+<img src="images/19-06.png">
+
+<img src="images/19-07.png">
+
+<img src="images/19-08.png">
+
+<img src="images/19-09.png">
+
+<img src="images/19-10.png">
+
+<img src="images/19-11.png">
+
+<img src="images/19-12.png">
+
+<img src="images/19-13.png">
+
+<img src="images/19-14.png">
+
+<img src="images/19-15.png">
+
+<img src="images/19-16.png">
+
+<img src="images/19-17.png">
+
+<img src="images/19-18.png">
+
+<img src="images/19-19.png">
+
+<img src="images/19-20.png">
+
+<img src="images/19-21.png">
+
+<img src="images/19-22.png">
+
+<img src="images/19-23.png">
+
+<img src="images/19-24.png">
+
+<img src="images/19-25.png">
 
 # 20 Control de concurrencias 15:55 
 
