@@ -155,7 +155,37 @@ R= No es obligatorio añadirlo. Sí debes hacerlo si quieres cambiar el valor po
 
 <img src="images/10-02.png">
 
+Vamos a comenzar un capítulo que va a ser algo más largo, va a estar formado por algunas lecciones por que vamos a hablar de las asociaciones entre entidades con Hibernate y JPA y existen diferentes tipos con lo cual tenemos que ir viéndolas cada uno paso a paso.
+
+Las asociación en entidades no es algo que Hibernate ni JPA hayan inventado, si revisamos lo que sabemos de análisis y diseño de software podremos comprobar que cuando estamos haciendo el proceso de análisis y estamos viendo el problema que queremos resolver y estamos identificando las entidades de información que queremos manejar, estas entidades nunca van a ser unidades aisladas o rara vez lo van a llegar ser. Sin embargo vemos como las entidades normalmente colaboran entre si participan las unas de la otra. 
+
 <img src="images/10-03.png">
+
+Podemos ver en la lamina como tenemos un diagrama de clase UML lo que sería una biblioteca muy sencilla y podemos ver como tenemos distintas clases que serían entidades de nuestro proyecto, Autor, Libro, Copia de un libro, Persona  alguna entidad especial que sería Prestamo y podiamos ver como entre ellas estan asociadas, es decir no tendría sentido que tuviéramos libros por algún lado y autores por otro y que entre ellos no hubiera ningún tipo de asociación por que sabemos bien que los autores escriben libros, los libros estan escritos por autores y por ejemplo entre Libro y Copia, normalmente en las bibliotecas de los libros que más se suelen utilizar se tiene más de una copia, de otras tal vez solo se tenga una.
+
+Otro elemento que podemos identificar en las asociaciones es la *Multíciplidad* o *Cardinalidad* qué es bueno, ya hemos establecido que hay una asociación entre dos clases pero cuánto elemento cuánta instancias de la entidad por ejemplo autor se pueden asociar con una sola instancia de la entidad Libro, en el gráfico lo tenemos descrito y UML nos permite visualizarlo de forma clara, un libro puede estar escrito por 0 o más autores, podemos tener algún libro que sea que sea anónimo con lo cual no tenemos identificado el autor o sin embargo puede estar escrito por muchos autores, los clásicos libros escritos para los colegios o libros de referencía de alguna tecnología hay veces que se escriben 15 capítulos y cada uno por diferente autor. Y un autor por su lado podría escribir más de un libro y ser muy prolifico, las diferentes multiplicidades entre asociaciones que podemos encontrar son las asociaciones siguientes:
+
+* Muchos a Uno por ejemplo la que hay entre Libros y Copia
+* Uno a Muchos Otra perspectiva de la asociación anterior
+* Uno a Uno en el diagrama no tenemos ninguna, en las que solamente una instacia de una clase se asocia con otra.
+* Muchos a Muchos por ejeplo la asociación entre Autor y Libro donde más de una instancia de la clase de un lado se asocia con instancia de la otra.
+
+<img src="images/10-04.png">
+
+Vamos a comenzar con la asociaciones más sencilla que son las asociaciones *Muchos a Uno*.
+
+<img src="images/10-05.png">
+
+Supongamos el diagrama de entidades de clase que tenemos de ejemplo en el que tendríamos una entidad Persona y tendríamos otra que sería Teléfono, esto a nivel de base de datos se resuelve de una manera sencilla, si quisieramos almacenar esto en tablas, tendríamos por un lado la Tabla Persona, tendríamos por otro lado la Tabla Telefonos y como un teléfono esta asociado a una sola persona bastaría con que tuvieramos una clave externa desde la tabla Telefono hacia la tabla Persona.
+
+Todo esto como lo podemos identificar en Hibernate, nos bastaría que dentro de la entidad Telefono tuvieramos definida una referencia hacia la Entidad, hacia la clase con la cual estamos asociados. La anotaríamos como mínimo con `@ManyToOne` la anotación `@JoinColumn` es optativa y nos permite customizar un poquito algunas propiedades como el nombre de la columna que se va a generar en la tabla Phone así como el nombre de la restricción de clave externa que se va a generar para que no sea un nombre aleatorio o uno de lo que de los que genere el sistema gestor de base de datos y le demos un nombre claro para evitar violar alguna restricción que con el nombre de la restricción lo podamos identificar de una manera rápida.
+
+<img src="images/10-06.png">
+
+El manejo de las asociaciones a nivel ya de trabajo con la entidad después sería sencillo dar de alta una persona que quedaría persistida y si queremos asociarle bueno pues un teléfono a esa persona pues que hemos el teléfono le asignaría hemos a través de por ejemplo el setter correspondiente o un constructor la persona y iríamos el teléfono de esa manera pues la asociación quedaría plasmada si la queremos borrar pues tal y como no aparece que bajo tan solo tendríamos que Alcampo del teléfono y con eso la asociación quedaría el vamos a ver este ejemplo funcionamiento verso con un campo de y vez que será generado con la estrategia automáticay además de tener la anotación many-to-one qué es la que hace de manera efectiva qué es las menos está asociación entre ambas clase vamos a delimitar que la columna yo en el decir la columna que va a unir ambas ambas tablas a través de una clave externa un nombre muy típico el nombre de este atributo o de la entidad el código de ejemplo y vamos a comprobar que se ha generado la tabla minera se crea la tabla peso la tabla vale todo este devenir de selección el mecanismo que utiliza hibernate para para ir gestionando la clave primaria automáticas y cómo podemos comprobar al final se ha insertado una persona y se ha insertado un teléfono si comprobamos en la base de datos podemos ver que en persona tenemos la persona que tenemos número de teléfono sinónimostuvo entre ellas en el próximo capítulo vamos a aprender de las asociaciones uno a muchos cómo hacer el otro lado el lado onetomany y lo veremos de manera unidireccional o bidireccional
+
+
+
 
 <img src="images/10-04.png">
 
