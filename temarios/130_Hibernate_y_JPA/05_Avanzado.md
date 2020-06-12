@@ -627,11 +627,33 @@ En este caso, cuando almacenemos la contraseña del usuario, lo haremos en forma
 
 Continuación de la lección sobre herencia y valores generados.
 
+## Preguntas
+
+P= hola luis miguel, una pregunta en el atributo columnDefinition la definicion sql se debe hacer de acuerdo al motor de base de datos o de acuerdo a jpa.
+
+R= Se debe hacer en base al motor de base de datos. Segun la documentación, es el codigo SQL que se utilizará para generar la columna.
+
+P= Me parece interesante esta opción que tiene JPA para definir el valor de una propiedad haciendo un cálculo, en base a otros campos por ejemplo. Recuerdo alguna vez haberme topado con una base de datos en cuyas tablas, algunas de ellas, el "identificador" era la concatenación de "prefijos" o en algunos casos de "Ids" de las tablas con las que esta relacionada. Para este caso ¿cómo debería definirse la anotación @Id y especialmente el @GeneratedValue? de la entidad.
+
+R= Jpa define varias estrategias de generación a través de @GeneratedValue, que son auto, identity, sequence y table.
+
+* *Auto* es la mejor estrategia por defecto (de entre las otras tres) elegida por el vendor de JPA (Hibernate, ObjectDB, ...) para un sistema gestor de bases de datos concreto.
+* *Identity* delega en la base de datos para crear una columna autonumérica, generando un nuevo valor en cada inserción. Es eficiente a nivel de base de datos, pero no si lo usamos con Hibernate.
+* *Sequence* utiliza una secuencia a nivel de base de datos para generar el identificador. Esta secuencia puede ser autogenerada, o la podemos especificar nosotros (con @SequenceGenerator. Requiere de una sentencia select adicional para obtener el ID, pero suele dar buenos resultados en términos de eficiencia.
+* *Table* es el menos utilizado de todos a día de hoy. Simula una secuencia pero almacenando los datos en una tabla. El rendimiento no es muy bueno cuando hay muchas transacciones en poco tiempo.
+
+Por tanto, la propuesta que tú haces no se podría implementar con @GeneratedValue. Sinceramente, creo que una solución podría ser no usar @GeneratedValue en JPA, e implementar un disparador a nivel de base de datos que realizara la composición que indicas, y almacene el resultado en la columna que sea clave primaria.
+Un saludo.
+
 # 16 Mapeo de colecciones 16:58 
 
 [Mapeo de colecciones](pdfs/13_Colecciones.pdf)
 
+## Resumen Profesor
+
 ### 13.1 Colecciones
+
+<img src="images/16-00.png">
 
 Si bien ya hemos manejado colecciones de componentes a través de las asociaciones (sobre todo las One-To-Many y las Many-To-Many), Hibernate nos permite manejar colecciones, tanto de valores básicos, tipos embebidos así como de otras entidades.
 
@@ -1130,11 +1152,106 @@ CREATE TABLE Person_Phone (
 )
 ```
 
+## Preguntas
+
+P= Estuve revisando y bueno estoy realizando una aplicación para mi trabajo , y necesito hacer una relación con la misma entidad, esto es posible?
+
+R= Sí que se puede. A ese tipo de asociación se le llama asociación reflexiva. Un ejemplo clásico suele ser el de una entidad empleado, cuyo jefe es otro empleado. A continuación podemos ver como podemos mapear la asociación tanto muchos-a-uno (quién es "mi jefe"), como la correspondiente uno-a-muchos (quienes son "mis subordinados").
+
+```java
+@Entity
+public class Empleado {
+
+  @Id
+  @GeneratedValue
+  private Long id;
+
+  private String nombre;
+
+  private String apellidos;
+
+  @ManyToOne
+  @JoinColumn(name="jefe_id")
+  private Empleado jefe;
+
+  @OneToMany(mappedBy="jefe")
+  private Set<Empleado> subordinados = new HashSet<Empleado>();
+
+  public Empleado() {
+  }
+
+
+  //Resto de constructores y métodos
+
+}
+```
+
+P= Otra consulta si quiero tener en mi clase entidad, la validación de unos campos que no se ingresen los mismos registros por ejemplo.
+
+Tengo el ID 1 , el telefono es 9537463 y el nombre es Juan y la ciudad es Barcelona, y no quiero que se dupliquen
+el telefono ni el nombre es posible realizarlo con una anotación?
+el campo id lo valido con @Id y lo trabajo con una secuencia @GeneratedValue(strategy = GenerationType.SEQUENCE) pero es posible que valide el campo telefono que no sea repetido y el nombre con una anotación?
+
+R= JPA dispone de algunas posibilidades, que fuerzan a crear una restricción de unicidad a través del DDL que genera las tablas en la base de datos:
+
+1) La propiedad unique de la anotación @Column (es decir, @Column(unique=true)). Esto permite crear una restricción de unicidad asociada a una propiedad
+2) La propiedad uniqueConstraints de la propiedad @Table, que nos permite definir restricciones de unicidad asociadas a varias columnas a la vez. Por ejemplo:
+
+```java
+@Entity
+@Table(
+    uniqueConstraints =  @UniqueConstraint(
+        name = "uk_book_title_author",
+        columnNames = {
+            "title",
+            "author_id"
+        }
+    )
+)
+public static class Book {
+//...
+}
+```
+
+Espero haber respondido a tu pregunta.
+
+P= En el proyecto 13b_HibernateJPA_ColeccionesEmbedd en la clase Phone me da este error. Attribute "type" has invalid mapping type in this context. A que puede ser debido. 
+
+R= He comprobado el código, y aunque aparece con un error, se puede ejecutar correctamente. Parece ser que se debe a un problema de las Hibernate Tools, pero el código no es erróneo. Dentro del sistema de incidencias de eclipse hay una que informa sobre el tema y la da por cerrada.
+
+El código es compilable y ejecutable, aunque el IDE lo subraye como error.
+
+## Trascripción
+
+<img src="images/16-01.png">
+
+<img src="images/16-02.png">
+
+<img src="images/16-03.png">
+
+<img src="images/16-04.png">
+
+<img src="images/16-05.png">
+
+<img src="images/16-06.png">
+
+<img src="images/16-07.png">
+
+<img src="images/16-08.png">
+
+<img src="images/16-09.png">
+
+<img src="images/16-10.png">
+
 # 17 Generación del esquema 15:36 
 
 [Generación del esquema](pdfs/14_Generación_del_esquema.pdf)
 
 [Esquema](pdfs/schema.sql)
+
+<img src="images/17-00">
+
+## Resumen Profesor
 
 ### 14.1 Generación automática del esquema
 
@@ -1424,6 +1541,50 @@ Además, estas han sido añadidas al nuestra unidad de persistencia. Añadimos l
     </persistence-unit>
 </persistence>
 ```
+
+## Preguntas
+
+P= Hola Luis Miguel. Estoy realizando el proceso para generar las entidades a partir de una base de datos generada por mí. Sigo los pasos indicados, pero me ocurren dos cosas:
+
+Las relaciones entre las tablas nunca me las crea, siempre tengo que hacerlas a mano.
+Muchos de los campos de tipo texto en la base de datos ("text" seguro, y creo que también "varchar") me los define como Object, y tengo que ser yo quien los cambie a String. En unos campos ocurre así, en otros no.
+¿Sabrías indicarme qué está ocurriendo? ¿Estoy haciendo algo mal? Muchas gracias de antemano.
+
+R= Para poder responderte mejor, necesitaría saber la versión del IDE con la que estás trabajando, si estás trabajando o no con Mysql, y con qué versión de la misma, ya que puede que eso condicione el proceso de generación del modelo de clases a partir del esquema de la base de datos.
+
+P= Desde los primeros videos donde muestras como realizar la conexión con la base de datos a traves del "Data Source Explorer" en mi caso no me funcionaron, no aparece el icono.
+Estoy usando el STS : Version: 3.9.10.RELEASE - Build Id: 201909190739 - Platform: Eclipse 2019-09 (4.13.0).
+El Mysql que uso es : Mysql 5.6
+Y lo estoy probando en un terminal con Window 10 Pro de 64 bits.
+Aqui te envío el link de los pasos que hice y lo que muestra.
+https://www.loom.com/share/d5c5347ba0244e3e8dd0205c4f74d35c
+Por favor ¿podrías indicarme qué pasos seguir? u otra forma de generar lo que nos muestras. Gracias.
+
+R= Si te soy sincero, en estos últimos días la extensión Data Platform Tools también me ha hecho alguna cosa rara. Con todo, ¿qué versión de es extensión tienes instalada? Lo puedes ver en Help > About ... > y pinchas en un icono que es un cilindro.
+Con todo, aun siendo cómodo el uso de esa extensión, no es obligatorio usarla para poder conectar nuestra aplicación JPA a una base de datos. Es cierto que nos ayuda a tener un cliente de la base de datos a utilizar en el mismo IDE, pero con los datos de conexión (url jdbc, usuario, contraseña, etc...) y un cliente de MySQL (como el cli o Mysql Workbech) también puedes seguir desarrollando.
+
+R= Supongo que te refieres al icono de Hiberante. Según me muestra aquí la extensión que uso es :
+Hibernate Tools for Eclipse
+Version: 5.4.5.v20190604-1228
+(c) Copyright (c) Red Hat, Inc., contributors and others 2004 - 2012. All rights reserved.
+Y claro que en los demás ejemplos pude conectarme a la base de datos de forma manual y avanzar con los ejemplos. Sin embargo observo que más adelante en tus videos del capítulo referente a "Constultas -I" te ayudas del "Asistente que ofrece Eclipse" para generar todas las tablas y sus relaciones.
+Yo quisiera saber si hay alguna otra forma de poder manejar este asistente?
+
+### Trascripción
+
+<img src="images/17-01">
+
+<img src="images/17-02">
+
+<img src="images/17-03">
+
+<img src="images/17-04">
+
+<img src="images/17-05">
+
+<img src="images/17-06">
+
+<img src="images/17-07">
 
 # 18 Ciclo de vida de la persistencia 20:21 
 
