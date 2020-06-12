@@ -1,11 +1,11 @@
 # 8. Proyecto: Crear un blog completo 61m
-   * Presentación y requisitos del proyecto 8:16 
-   * Creación y configuración del proyecto 9:07 
-   * Diseño de la aplicación 6:07 
-   * Creando el registro de usuarios 10:42 
-   * Acceso de usuarios 5:37 
-   * Creación y publicación de un post 9:13 
-   * Comentarios en nuestra aplicación 12:40 
+   * 26 Presentación y requisitos del proyecto 8:16 
+   * 27 Creación y configuración del proyecto 9:07 
+   * 28 Diseño de la aplicación 6:07 
+   * 29 Creando el registro de usuarios 10:42 
+   * 30 Acceso de usuarios 5:37 
+   * 31 Creación y publicación de un post 9:13 
+   * 32 Comentarios en nuestra aplicación 12:40 
    * Contenido adicional 1
    
 ## Presentación y requisitos del proyecto 8:16 
