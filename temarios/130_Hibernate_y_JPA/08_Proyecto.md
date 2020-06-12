@@ -38,6 +38,50 @@ Vamos a crear el gestor de contenidos de nuestra aplicación
 
 Para finalizar el proyecto, crearemos un sistema de comentarios para nuestro blog.
 
+<img src"images/26-01.png">
+
+<img src"images/26-02.png">
+
+<img src"images/26-03.png">
+
+<img src"images/26-04.png">
+
+<img src"images/26-05.png">
+
+<img src"images/26-06.png">
+
+<img src"images/26-07.png">
+
+<img src"images/26-08.png">
+
+<img src"images/26-09.png">
+
+<img src"images/26-10.png">
+
+<img src"images/26-11.png">
+
+<img src"images/26-12.png">
+
+<img src"images/26-13.png">
+
+<img src"images/26-14.png">
+
+<img src"images/26-15.png">
+
+<img src"images/26-16.png">
+
+<img src"images/26-17.png">
+
+<img src"images/26-18.png">
+
+<img src"images/26-19.png">
+
+<img src"images/26-20.png">
+
+<img src"images/26-21.png">
+
+<img src"images/26-22.png">
+
 ## Contenido adicional 1   
 
 [Presentación y requisitos del proyecto](pdfs/19_Proyecto_de_Ejemplo.pdf)
