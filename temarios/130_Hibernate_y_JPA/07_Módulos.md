@@ -1,10 +1,12 @@
 # 7. Módulos 14m
-   * Hibernate Envers 14:21 
+   * 25 Hibernate Envers 14:21 
    * Contenido adicional 1
 
-## Hibernate Envers 14:21 
+# 25 Hibernate Envers 14:21 
 
 [Hibernate Envers](pdfs/18_Envers.pdf)
+
+## Resumen Profesor
 
 ### 18.1 Introducción
 
@@ -148,6 +150,8 @@ AuditQuery query = reader.createQuery().forRevisionsOfEntity(Producto.class, fal
 
         }
 ```
+
+## Transcripción
 
 ## Contenido adicional 1
 
