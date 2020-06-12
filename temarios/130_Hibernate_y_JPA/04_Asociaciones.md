@@ -660,15 +660,6 @@ public class App {
 
 En el próximo capítulo vamos a aprender de las asociaciones Uno a Muchos, cómo hacer el otro lado, el lado onetomany y lo veremos de manera unidireccional o bidireccional.
 
-
-
-
-<img src="images/10-04.png">
-
-<img src="images/10-05.png">
-
-<img src="images/10-06.png">
-
 # 11 OneToMany: Unidireccional y bidireccional 12:54 
 
 [OneToMany: Unidireccional y bidireccional](pdfs/09_Asociaciones_OneToMany.pdf)
