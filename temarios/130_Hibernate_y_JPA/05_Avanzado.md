@@ -1,17 +1,20 @@
 # 5. Avanzado 109m
-   * Herencia y valores generados (parte I) 14:07 
-   * Herencia y valores generados (parte II) 7:43 
-   * Mapeo de colecciones 16:58 
-   * Generación del esquema 15:36 
-   * Ciclo de vida de la persistencia 20:21 
-   * Transacciones, patrones y antipatrones 19:13 
-   * Control de concurrencias 15:55 
+   * 14 Herencia y valores generados (parte I) 14:07 
+   * 15 Herencia y valores generados (parte II) 7:43 
+   * 16 Mapeo de colecciones 16:58 
+   * 17 Generación del esquema 15:36 
+   * 18 Ciclo de vida de la persistencia 20:21 
+   * 19 Transacciones, patrones y antipatrones 19:13 
+   * 20 Control de concurrencias 15:55 
    * Contenido adicional 5
    
-   
-## Herencia y valores generados (parte I) 14:07 
+<img src="images/14-00.png">
+
+# 14 Herencia y valores generados (parte I) 14:07 
 
 [Herencia y valores generados (parte I)](pdfs/12_Elementos_avanzados.pdf)
+
+## Resumen Profesor
 
 ### 12.1 Herencia
 
@@ -572,11 +575,59 @@ public class User {
 
 En este caso, cuando almacenemos la contraseña del usuario, lo haremos en forma de cadena MD5; si alguien consulta la base de datos por otra vía, no podrá saber cuál es nuestra contraseña (el algoritmo MD5 no tiene función inversa conocida).
 
-## Herencia y valores generados (parte II) 7:43 
+## Transcripción
+
+<img src="images/14-01.png">
+
+<img src="images/14-02.png">
+
+<img src="images/14-03.png">
+
+<img src="images/14-04.png">
+
+<img src="images/14-05.png">
+
+<img src="images/14-06.png">
+
+<img src="images/14-07.png">
+
+<img src="images/14-08.png">
+
+<img src="images/14-09.png">
+
+<img src="images/14-10.png">
+
+<img src="images/14-11.png">
+
+<img src="images/14-12.png">
+
+<img src="images/14-13.png">
+
+<img src="images/14-14.png">
+
+<img src="images/14-15.png">
+
+<img src="images/14-16.png">
+
+<img src="images/14-17.png">
+
+<img src="images/14-18.png">
+
+<img src="images/14-19.png">
+
+<img src="images/14-20.png">
+
+<img src="images/14-21.png">
+
+<img src="images/14-22.png">
+
+<img src="images/14-23.png">
+
+# 15 Herencia y valores generados (parte II) 7:43 
 
 Continuación de la lección sobre herencia y valores generados.
 
-## Mapeo de colecciones 16:58 
+# 16 Mapeo de colecciones 16:58 
 
 [Mapeo de colecciones](pdfs/13_Colecciones.pdf)
 
@@ -1079,7 +1130,7 @@ CREATE TABLE Person_Phone (
 )
 ```
 
-## Generación del esquema 15:36 
+# 17 Generación del esquema 15:36 
 
 [Generación del esquema](pdfs/14_Generación_del_esquema.pdf)
 
@@ -1374,7 +1425,7 @@ Además, estas han sido añadidas al nuestra unidad de persistencia. Añadimos l
 </persistence>
 ```
 
-## Ciclo de vida de la persistencia 20:21 
+# 18 Ciclo de vida de la persistencia 20:21 
 
 ### 15.1 Introducción
 
@@ -1622,7 +1673,7 @@ Tenemos a nuestar disposición dos esquema de trabajo:
 
 * LAZY: Con el modo perezoso solo se cargarán los datos cuando estos sean realmente necesarios (es decir, cuando se vayan a útilizar).
 
-## Transacciones, patrones y antipatrones 19:13 
+# 19 Transacciones, patrones y antipatrones 19:13 
 
 [Transacciones, patrones y antipatrones](pdfs/16_Transacciones.pdf)
 
@@ -1861,7 +1912,7 @@ A continuación listamos los que están disponibles, a través de la enumeració
 * `PESSIMISTIC_WRITE`: La entidad es bloqueada usando un bloqueo explícito.
 Todos estos bloqueos se pueden usar en búsquedas mediante el método `find` o a través de queries.
 
-## Control de concurrencias 15:55 
+# 20 Control de concurrencias 15:55 
 
 Seguimos hablando de control de concurrencias
 
