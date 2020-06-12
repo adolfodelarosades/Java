@@ -6,6 +6,8 @@
 
 [Hibernate Envers](pdfs/18_Envers.pdf)
 
+<img src="images/25-00">
+
 ## Resumen Profesor
 
 ### 18.1 Introducción
@@ -151,7 +153,64 @@ AuditQuery query = reader.createQuery().forRevisionsOfEntity(Producto.class, fal
         }
 ```
 
+## Preguntas
+
+P= Me parece un módulo muy interesante pero me quedan algunas dudas, normalmente en la auditoría del sistema nos interesa saber ¿quién lo hizo? ¿hay alguna manera de agregar esto en la tabla de auditoría? y ¿podemos auditar columnas específicas?
+
+R= La anotación @Audited puede usarse a nivel de clase o a nivel de propiedad. Si se utiliza solamente en algunas propiedades, solo esas propiedades serán auditadas.
+Para poder auditar información que no forma parte directamente de la entidad, tendríamos que implementar dos clases: una que extienda a DefaultRevisionEntity, en la que indicaremos la información que deseamos auditar para una entidad (y en la que podemos añadir el username); y asociada a esta tiene que haber una clase que implemente la interfaz RevisionListener; en esta última podemos establecer los valores que serán almacenados al auditar la entidad, y entre ellos, el nombre de usuario. Esto queda fuera del alcance del curso, pero te dejo un ejemplo de la documentación de hibernate envers:
+
+```java
+@Entity(name = &quot;CustomRevisionEntity&quot;)
+@Table(name = &quot;CUSTOM_REV_INFO&quot;)
+@RevisionEntity( CustomRevisionEntityListener.class )
+public static class CustomRevisionEntity extends DefaultRevisionEntity {
+
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername( String username ) {
+        this.username = username;
+    }
+}
+```
+
+```java
+public static class CustomRevisionEntityListener implements RevisionListener {
+
+public void newRevision( Object revisionEntity ) {
+    CustomRevisionEntity customRevisionEntity =
+        ( CustomRevisionEntity ) revisionEntity;
+
+    customRevisionEntity.setUsername(
+        CurrentUser.INSTANCE.get()
+    );
+}
+}
+```
+
 ## Transcripción
+
+<img src="images/25-01">
+
+<img src="images/25-02">
+
+<img src="images/25-03">
+
+<img src="images/25-04">
+
+<img src="images/25-05">
+
+<img src="images/25-06">
+
+<img src="images/25-07">
+
+<img src="images/25-08">
+
+<img src="images/25-09">
 
 ## Contenido adicional 1
 
