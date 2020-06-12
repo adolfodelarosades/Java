@@ -5,11 +5,15 @@
    * 24 Consultas (Parte IV) 11:43 
    * Contenido adicional 2
    
+<img src="images/21-00.png">   
+   
 # 21 Consultas (Parte I) 18:25 
 
 [Consultas (Parte I)](pdfs/17_Consultas.pdf)
 
 [mysqlsampledatabase](pdfs/mysqlsampledatabase.zip)
+
+## Resumen Profesor
 
 ### 17.1 Introducción
 
@@ -397,6 +401,76 @@ Si comprobamos la ejecución de estas consultas, encontraremos que Hibernate tie
 
 La estrategia de consultas que podemos realizar es la misma que en el caso *JOINED*, pero si revisamos el código SQL que ejecuta Hibernate, podremos comprobar que utiliza varias sentencias SQL unidas por cláusulas UNION.
 
+## Preguntas
+
+P= Hola Luis, tengo dos consultas:
+
+1) Revisando la generación de código del asistente, quisiera saber porqué en algunas clases (como las que implementan claves primarias compuestas) utilizas la anotación: @JoinColumn con los valores: insertable=false, updatable=false . ¿Qué significan estos valores?. Ya que en la clase "OrderDetailPK" genera en sus dos claves primarias: "orderNumber" y "productCode" con los valores anteriormente mencionados. Sin embargo en la clase "PaymentPK" solo colocas a una de ellas "customerNumber" e ignora a la otra:
+
+```java
+@Column(insertable=false, updatable=false)
+private int customerNumber;
+private String checkNumber;
+```
+
+2) En todas las clases se implementa la interfaz "Serializable", Pero en los anteriores videos no. ¿Por qué se da este cambio?
+3) En lugar de usar la clase Calendar para las fechas, se podría utilizar el LocalDate.of() para el query.setParameter()
+
+R= 1) En el uso de claves primarias compuestas, suele añadirse insertarble = false, updatable = false para, de alguna manera, hacer ese campo readonly y que solo se pueda asignar en la creación; en el ámbito de las claves primarias compuestas se suele utilizar también para descargar de la responsabilidad de hacer la inserción a esta clase, ya que lo hará la clase en la cual usamos esta PK compuesta.
+2) No hay ningún motivo. En la realidad, Hibernate no obliga a que nuestras entidades implementen Serializable. Buena prueba de ello es que en los ejemplos que no se utiliza, todo funciona correctamente. De hecho, la documentación oficial solamente indica lo siguiente:
+
+*If an entity instance is to be used remotely as a detached object, the entity class must implement the Serializable interface.*
+Es decir, solo en determinados escenarios necesitaríamos que implementara Serializable.
+3) A partir de la versión 2.2 de JPA, se pueden utilizar las fechas de Java 8 con total tranquilidad; para versiones anteriores de JPA, hay que utilizar algún tipo de extensión para ello.
+
+## Transcripción
+
+<img src="images/21-01.png">
+
+<img src="images/21-02.png">
+
+<img src="images/21-03.png">
+
+<img src="images/21-04.png">
+
+<img src="images/21-05.png">
+
+<img src="images/21-06.png">
+
+<img src="images/21-07.png">
+
+<img src="images/21-08.png">
+
+<img src="images/21-09.png">
+
+<img src="images/21-10.png">
+
+<img src="images/21-11.png">
+
+<img src="images/21-12.png">
+
+<img src="images/21-13.png">
+
+<img src="images/21-14.png">
+
+<img src="images/21-15.png">
+
+<img src="images/21-16.png">
+
+<img src="images/21-17.png">
+
+<img src="images/21-18.png">
+
+<img src="images/21-19.png">
+
+<img src="images/21-20.png">
+
+<img src="images/21-21.png">
+
+<img src="images/21-22.png">
+
+<img src="images/21-23.png">
+
 # 22 Consultas (Parte II) 15:13 
 
 Conoce las dos interfaces disponibles para realizar las consultas.
@@ -408,6 +482,79 @@ En esta lección vemos consultas  DML
 # 23 Consultas (Parte IV) 11:43 
 
 En la ultima lección de consultas trabajaremos las consultas con herencia.
+
+## Preguntas
+
+R= ¿En HQL también se puede usar la clausula TYPE?
+
+R= La documentación de Hibernate indica que cualquier consulta válida en JPQL lo será también en HQL, si bien puede que no suceda a la inversa:
+
+*The Hibernate Query Language (HQL) and Java Persistence Query Language (JPQL) are both object model focused query languages similar in nature to SQL. JPQL is a heavily-inspired-by subset of HQL. A JPQL query is always a valid HQL query, the reverse is not true however.*
+
+P= ¿como se puede acceder a las funciones y a los procedimientos que estan guardados en la BBDD, pasarles parametros y recibir los mismos?
+Puedes poner algun ejemplo al respecto de cada una de las llamadas?
+
+R= También JPA/Hibernate permite el uso de procedimientos almacenados, incluyendo o no parámetros de entrada y salida.
+
+Supón que tienes un procedimiento almacenado como el siguiente:
+
+```java
+CREATE PROCEDURE sp_count_phones (
+       IN personId INT, 
+       OUT phoneCount INT
+    )  
+    BEGIN
+      SELECT COUNT(*) INTO phoneCount
+      FROM Phone p
+      WHERE p.person_id = personId;
+    END
+```
+
+Para invocarlo desde JPA, podríamos usar el siguiente código:
+
+```java
+StoredProcedureQuery query = entityManager.createStoredProcedureQuery( "sp_count_phones");
+query.registerStoredProcedureParameter( "personId", Long.class, ParameterMode.IN);
+query.registerStoredProcedureParameter( "phoneCount", Long.class, ParameterMode.OUT);
+
+query.setParameter("personId", 1L);
+
+query.execute();
+Long phoneCount = (Long) query.getOutputParameterValue("phoneCount");
+```
+
+La clase StoredProcedureQuery nos permite invocar un procedimiento almacenado ya registrado. Esta clase tiene métodos convenientes para registrar parámetros, indicando el nombre del mismo, el tipo de dato y el modo del parámetro (entrada o salida). También tiene métodos para recoger los parámetros de salida.
+
+Al igual que con las consultas SELECT, si vamos a utilizar varias veces una misma consulta que usa un procedimiento almacenado y esta está asociada a una entidad, podemos utilizar la anotación @NamedStoredProcedureQuery. Por ejemplo, podríamos usar el siguiente conjunto de anotaciones:
+
+```java
+@NamedStoredProcedureQueries(
+    @NamedStoredProcedureQuery(
+        name = "sp_count_phones",
+        procedureName = "sp_count_phones",
+        parameters = {
+            @StoredProcedureParameter(
+                name = "personId",
+                type = Long.class,
+                mode = ParameterMode.IN
+            ),
+            @StoredProcedureParameter(
+                name = "phoneCount",
+                type = Class.class,
+                mode = ParameterMode.OUT
+            )
+        }
+    )
+)
+```
+
+Para utilizarlo, al estilo de las named queries, podríamos usar el siguiente código:
+
+```java
+StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery( "sp_count_phones");
+//...
+```
+
 
 # Contenido adicional 2  
 
