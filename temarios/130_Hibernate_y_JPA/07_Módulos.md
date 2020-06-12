@@ -6,7 +6,7 @@
 
 [Hibernate Envers](pdfs/18_Envers.pdf)
 
-<img src="images/25-00">
+<img src="images/25-00.png">
 
 ## Resumen Profesor
 
