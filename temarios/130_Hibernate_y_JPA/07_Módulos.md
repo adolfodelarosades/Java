@@ -194,23 +194,23 @@ public void newRevision( Object revisionEntity ) {
 
 ## Transcripción
 
-<img src="images/25-01">
+<img src="images/25-01.png">
 
-<img src="images/25-02">
+<img src="images/25-02.png">
 
-<img src="images/25-03">
+<img src="images/25-03.png">
 
-<img src="images/25-04">
+<img src="images/25-04.png">
 
-<img src="images/25-05">
+<img src="images/25-05.png">
 
-<img src="images/25-06">
+<img src="images/25-06.png">
 
-<img src="images/25-07">
+<img src="images/25-07.png">
 
-<img src="images/25-08">
+<img src="images/25-08.png">
 
-<img src="images/25-09">
+<img src="images/25-09.png">
 
 ## Contenido adicional 1
 
