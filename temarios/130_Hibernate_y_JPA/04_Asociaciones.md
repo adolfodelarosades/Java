@@ -5,6 +5,8 @@
    * 13 ManyToMany: 18:06 
    * Contenido adicional 4
    
+<img src="images/10-01.png">   
+   
 # 10 ManyToOne 10:34 
 
 [ManyToOne](pdfs/08_Asociaciones_ManyToOne.pdf)
@@ -150,8 +152,6 @@ P= ¿No hace falta poner @Column para el atributo number?¿O como es la única s
 R= No es obligatorio añadirlo. Sí debes hacerlo si quieres cambiar el valor por defecto de alguna propiedad, como el nombre, la longitud,...
 
 ## Transcripción
-
-<img src="images/10-01.png">
 
 <img src="images/10-02.png">
 
