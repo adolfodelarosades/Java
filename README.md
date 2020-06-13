@@ -50,7 +50,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [601 Desarrollo Web con JSP y Servlets](https://github.com/adolfodelarosades/Java/blob/master/temarios/601_Desarrollo_Web_con_JSP_y_Servlets.md)
 * [602 Persistencia de Datos con Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/602_Persistencia_de_Datos_con_Java.md)
 
-# 
+# Antonio Martín Sierra
 
 * [611 Aprende a programar en Java]()
 * [612 Programación Orientada a Objetos con Java]()
