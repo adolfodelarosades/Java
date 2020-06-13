@@ -966,18 +966,329 @@ La gestión que haríamos de personas y teléfonos en este caso sería distinta,
 
 Vamos a ver un proyecto de ejemplo se parece mucho al anterior de hecho las entidades son casi iguales, pero lo único que tendríamos en este caso sería que en la entidad Phone no tendríamos la asociación ManyToOne y en la entidad Person tendríamos la asociación OnetoMany tal como acabamos de definir. Las propiedades son las mismas que antes y podríamos comprobar al ejecutar el código de ejemplo en el marco de una transacción.
 
+<img src="images/10-19.png">
+
+<img src="images/10-20.png">
+
+<img src="images/10-21.png">
+
+<img src="images/10-22.png">
+
+como podemos comprobar Hibernate a creado una tabla `Person`, una tabla `Phone` y para manejar la asociación ha creado la tabla auxiliar que se llama `Person_Phone` en lugar de crear una clave externa como sucedia con la asociación `ManytoOne`, además ha añadido una serie de restricciones como sería la restricción de unicidad para el identificador del teléfono en la tabla `Person_Phone` con lo cual no podríamos repetir el valor del teléfono dentro de la tabla y también ha añadido algunas referencias de clave externa antes de ponerse a insertar los distintos valores.
+
+Si nos vamos a la base de datos podemos comprobar que se han creado estas tablas:
+
+<img src="images/10-23.png">
+
+Como vemos también creo la tabla especial `hibernate_sequence` que utiliza Hibernate para ir creando los ids.
+
+Tenemos las personas.
+
+<img src="images/10-24.png">
+
+Tenemos los telefonos.
+
+<img src="images/10-25.png">
+
+Ademas tenemos la tabla `person_phone` donde Hibernate va mapeando las asociaciones que existen entre ambos.
+
+<img src="images/10-26.png">
+
+Si volvemos a ejecutar descomentando la línea `person.getPhones().remove(phone1);` que representa la posibilidad de la eliminación de este teléfono, tenemos:
+
+<img src="images/10-27.png">
+
+<img src="images/10-28.png">
+
+<img src="images/10-29.png">
+
+<img src="images/10-30.png">
+
+<img src="images/10-31.png">
+
+Hemos visto que no solamente se va a eliminar la asociación sino que además de borrar esta asociación que tenemos por aquí 
+
+<img src="images/10-32.png">
+
+también se ha eliminado el número de teléfono 9540000000 en la tabla Phone
+
+<img src="images/10-33.png">
+
+Así sería el tratamiento de las asociaciones OneToMany unidirectional.
+
+### :computer: Código Completo - 130-10-HibernateJPA_OneToMany
+
+<img src="images/10-34.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>130-10-HibernateJPA_OneToMany</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>130-10-HibernateJPA_OneToMany</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.17.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="OneToManyUni" transaction-type="RESOURCE_LOCAL">
+		<class>com.openwebinars.hibernate.hibernatejpaonetomany.Person</class>
+		<class>com.openwebinars.hibernate.hibernatejpaonetomany.Phone</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+*`Person`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetomany;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Person {
+
+	@Id
+	@GeneratedValue
+	private long id;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Phone> phones = new ArrayList<>();
+
+	private String name;
+
+	public Person() {
+	}
+
+	public Person(String name) {
+		this.name = name;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Phone> getPhones() {
+		return phones;
+	}
+}
+```
+
+*`Phone`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetomany;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Phone {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	private String number;	
+	
+	public Phone() { }
+	
+	public Phone(String number) {
+		this.number = number;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
 
+	public long getId() {
+		return id;
+	}
+	
 
+}
+```
 
-pero lo único que tendríamos en este caso que en la entidad no tendríamos la asociación virtual y en la entidad pers decidimos nada asociación onetomany tal y como acabamos y podríamos comprobar qué sucede al ejecutar el código de ejemplo en el marco de una transacción con hibernate ha creado una persona a crear una tabla de teléfono y para manejar la asociación ha creado una tabla auxiliar que se llama person found para poder manejar esa asociación en lugar de crear una una clave externa como sucedía con la asociación many to one además ha añadido alguna serie de restricciones cómo serían las restricción de unicidad para el identificador del teléfono en la tabla person Fox con lo cual no podríamos repetir el valor del teléfono dentro de la tabla y también ha añadido algunas referencias de clave externa antes de ponerse a insertar los distintos valores si nos vamos a la base de datos que se han creado los tenemos las personas tenemos los teléfonos y además tenemos esta tablet especial vale donde donde hibernate pues vas mapeando las asociaciones que existe entre ambos la posibilidad de la de la eliminación de este teléfono bueno pues hemos visto que no solamente se va a eliminar la asociación sino que además de borrar esta asociación que tenemos por aquí también se ha eliminado el número de teléfono 9540000000 así sería el tratamiento de las asociaciones onetomany unidirectional qué sucede si le queremos dar un tratamiento un poco más compacto en el que ya que tenemos una asociación podamos atacarla tanto por el lado uno o mejor el lado muchos bueno pues para ello tendremos la posibilidad de usar las asociaciones uno a mucho bidireccional en este caso partimos de nuevo del lado muchos donde definiríamos la asociación a través de la notación many-to-one que vimos en la elección anterior lo que haríamos sería referir en la asociación onetomany en el lado o no que toda esta asociación va a venir mapeada va a venir definida mediante esa clave externa con lo cual lo que estamos haciendo es asociar está valga la redundancia la asociación one-to-many con la many-to-one de forma que quedaría establecida esta asociación uno a muchos de forma bidireccional para manejar la asociación bidireccional ya que tenemos que establecer la asociación en el teléfono y la asociación en la persona se suele proveer de de unos métodos helper en el lado que nosotros decidamos de la suerte que hacen la entidad en la que decidamos parece que tiene sentido que en este caso de la zona importante sea la persona que es la que posee los teléfono y en la que podemos añadir el método APO para añadir un teléfono y remo para eliminar bien si nos damos cuentas en iPhone lo que haríamos sería proporcionarle un teléfono y bueno pues que no manera sencilla añadimos a la lista de teléfonos el teléfono que acabo de proporcionar y de otra manera en el lado opuesto en el teléfono en particular le asignamos como una persona es decir una persona actual para eliminar el teléfono pues haríamos la tarea la tarea correcto el manejo de esta clase una aplicación por vendría a través de estos métodos helper que nos permitirían ir manejando la asociación vamos a verlo en un ejemplo como el anterior enmarañar vamos a borrar las tablas con las que hemos estado trabajando y como tenemos la columna many to one y tenemos la one-to-many como hemos visto en el ejemplo anterior aquí hemos añadido la asociación perdona la columna number una un elemento que es nativo de ibernet si no lo añadiremos tampoco pasaría nada natural y ves una anotación que nos va a permitir bueno que decir que una columna en particular no tiene que ser clave primaria pero que siempre me da que sería lo que se conoce un rato como una clave candidata de forma naturalen el caso de implementar métodos como los que tenemos aquí abajo y qué para manejar elementos que van a estar dentro de interesantes aquí estamos usando la estrategia de a partir de las 7 para abreviar un poco la redacción del método igual y del método Castro en la persona como decíamos antes tendríamos aquí el nombre que le hemos dado a vamos a ver cómo sería la ejecución del ejemplocomo ahora no tenemos esa tercera tabla de asociación la asociación la marca la clave externa que se ha generado en la tabla pon vale al igual que cuando teníamos una sucesión de nittua pues tenemos las personas sin embargo a través de esta asociación podemos marca y podemos encontrar que bueno pues una persona puede tener a su disposición una lista de teléfonos así que si quisiéramos mostrar lo podríamos recorrer la lista con normal haciendo uso del método helper upon hemos añadido los teléfonos y haciendo uso del método podríamos eliminarlos la sentencia de borrado aquí ya ha desaparecido eh esa Limia con lo cual bueno pues la persona que hemos creado PP tendría un teléfono fijo
+*`App`*
 
+```java
+package com.openwebinars.hibernate.hibernatejpaonetomany;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
+/**
+ * Asociaciones OneToMany unidireccionales
+ * 
+ * 
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("OneToManyUni");
 
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
 
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+		
+		Person person = new Person("Pepe");
+		Phone phone1 = new Phone("954000000");
+		Phone phone2 = new Phone("600000000");
+
+		person.getPhones().add(phone1);
+		person.getPhones().add(phone2);
+		em.persist(person);
+		em.flush();
+
+		person.getPhones().remove(phone1);
+		
+
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+		
+	}
+}
+```
 
 <img src="images/11-04.png">
+
+Qué sucede si le queremos dar un tratamiento un poco más compacto en el que ya que tenemos una asociación podamos atacarla tanto por el lado uno o mejor el lado muchos bueno pues para ello tendremos la posibilidad de usar las asociaciones uno a mucho bidireccional en este caso partimos de nuevo del lado muchos donde definiríamos la asociación a través de la notación many-to-one que vimos en la elección anterior lo que haríamos sería referir en la asociación onetomany en el lado o no que toda esta asociación va a venir mapeada va a venir definida mediante esa clave externa con lo cual lo que estamos haciendo es asociar está valga la redundancia la asociación one-to-many con la many-to-one de forma que quedaría establecida esta asociación uno a muchos de forma bidireccional para manejar la asociación bidireccional ya que tenemos que establecer la asociación en el teléfono y la asociación en la persona se suele proveer de de unos métodos helper en el lado que nosotros decidamos de la suerte que hacen la entidad en la que decidamos parece que tiene sentido que en este caso de la zona importante sea la persona que es la que posee los teléfono y en la que podemos añadir el método APO para añadir un teléfono y remo para eliminar bien si nos damos cuentas en iPhone lo que haríamos sería proporcionarle un teléfono y bueno pues que no manera sencilla añadimos a la lista de teléfonos el teléfono que acabo de proporcionar y de otra manera en el lado opuesto en el teléfono en particular le asignamos como una persona es decir una persona actual para eliminar el teléfono pues haríamos la tarea la tarea correcto el manejo de esta clase una aplicación por vendría a través de estos métodos helper que nos permitirían ir manejando la asociación vamos a verlo en un ejemplo como el anterior enmarañar vamos a borrar las tablas con las que hemos estado trabajando y como tenemos la columna many to one y tenemos la one-to-many como hemos visto en el ejemplo anterior aquí hemos añadido la asociación perdona la columna number una un elemento que es nativo de ibernet si no lo añadiremos tampoco pasaría nada natural y ves una anotación que nos va a permitir bueno que decir que una columna en particular no tiene que ser clave primaria pero que siempre me da que sería lo que se conoce un rato como una clave candidata de forma naturalen el caso de implementar métodos como los que tenemos aquí abajo y qué para manejar elementos que van a estar dentro de interesantes aquí estamos usando la estrategia de a partir de las 7 para abreviar un poco la redacción del método igual y del método Castro en la persona como decíamos antes tendríamos aquí el nombre que le hemos dado a vamos a ver cómo sería la ejecución del ejemplocomo ahora no tenemos esa tercera tabla de asociación la asociación la marca la clave externa que se ha generado en la tabla pon vale al igual que cuando teníamos una sucesión de nittua pues tenemos las personas sin embargo a través de esta asociación podemos marca y podemos encontrar que bueno pues una persona puede tener a su disposición una lista de teléfonos así que si quisiéramos mostrar lo podríamos recorrer la lista con normal haciendo uso del método helper upon hemos añadido los teléfonos y haciendo uso del método podríamos eliminarlos la sentencia de borrado aquí ya ha desaparecido eh esa Limia con lo cual bueno pues la persona que hemos creado PP tendría un teléfono fijo
+
+
+
+
+
+
+
 
 <img src="images/11-05.png">
 
