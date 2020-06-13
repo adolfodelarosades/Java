@@ -1289,24 +1289,91 @@ En este caso partimos de nuevo del lado muchos donde definiríamos la asociació
 
 <img src="images/11-06.png">
 
+<img src="images/11-07.png">
+
 Para manejar la asociación bidireccional ya que, tenemos que establecer la asociación en el teléfono y la asociación en la persona, se suele proveer de unos métodos HELPER en el lado que nosotros decidamos de la asociación en la entidad en la que decidamos, parece que tiene sentido, que en este caso la importante sea la Persona que es la que posee los teléfono y en la que podemos añadir el método `addPhone` para añadir un teléfono y `removePhone` para eliminar un teléfono.
 
 Bien si nos damos cuentas en `addPhone` lo que haríamos sería proporcionarle un teléfono y de una manera sencilla añadimos a la lista de teléfonos, el teléfono que acabamos de proporcionar y de otra manera en el lado opuesto en el teléfono en particular le asignamos como persona `this`, es decir la persona actual, para eliminar el teléfono haríamos la tarea correspondiente, el manejo de estas clase en una aplicación vendría a través de estos métodos HELPER que nos permitirían ir manejando la asociación.
 
-Vamos a verlo en un ejemplo como el anterior y como tenemos la columna many to one y tenemos la one-to-many como hemos visto en el ejemplo anterior aquí hemos añadido la asociación perdona la columna number una un elemento que es nativo de ibernet si no lo añadiremos tampoco pasaría nada natural y ves una anotación que nos va a permitir bueno que decir que una columna en particular no tiene que ser clave primaria pero que siempre me da que sería lo que se conoce un rato como una clave candidata de forma naturalen el caso de implementar métodos como los que tenemos aquí abajo y qué para manejar elementos que van a estar dentro de interesantes aquí estamos usando la estrategia de a partir de las 7 para abreviar un poco la redacción del método igual y del método Castro en la persona como decíamos antes tendríamos aquí el nombre que le hemos dado a vamos a ver cómo sería la ejecución del ejemplocomo ahora no tenemos esa tercera tabla de asociación la asociación la marca la clave externa que se ha generado en la tabla pon vale al igual que cuando teníamos una sucesión de nittua pues tenemos las personas sin embargo a través de esta asociación podemos marca y podemos encontrar que bueno pues una persona puede tener a su disposición una lista de teléfonos así que si quisiéramos mostrar lo podríamos recorrer la lista con normal haciendo uso del método helper upon hemos añadido los teléfonos y haciendo uso del método podríamos eliminarlos la sentencia de borrado aquí ya ha desaparecido eh esa Limia con lo cual bueno pues la persona que hemos creado PP tendría un teléfono fijo
+Vamos a verlo en un ejemplo como el anterior, en el ejemplo de asociaciones OneToMany Bidireccional podemos comprobar como tenemos la columna `@ManyToOne` en `Phone` y en `Person` tenemos la `@OneToMany` como hemos visto en el ejemplo anterior. 
 
+En Phone hemos añadido a la columna `number` un elemento nativo de Hibernate `@NaturalId` si no lo añadimos tampoco pasa nada. `@NaturalId` es una anotación que nos va a permitir decir que una columna en particular no tiene que ser clave primaria pero si podria ser lo que se conoce en base de datos como una clave candidata. Una columna que de forma natural perteneciendo de forma no postiza, como el id númerico que hemos creado sino de forma naturtal podría ser una clave candidata. 
 
+```java
+@NaturalId
+@Column(unique=true)
+private String number;	
+```
 
+Eso suele servir en el caso de hacer comparaciones, métodos como `hashCode`, `equals` y que para manejar elementos que estan dentro de colecciones van a ser bastante interesantes como son los métodos `hashCode`, `equals`, `equals` nos permite decir si dos Entidades son no identicas pero si equivalentes es decir si tenian los mismos valores. Aquí estamos usando la estrategia a partir de Java 7 para abreviar un poco los métodos `hashCode`, `equals`.
 
+```java
+@Override
+public int hashCode() {
+   return Objects.hash(number);
+}
 
+@Override
+public boolean equals(Object o) {
+   if ( this == o ) {
+      return true;
+   }
+   if ( o == null || getClass() != o.getClass() ) {
+      return false;
+   }
+   Phone phone = (Phone) o;
+   return Objects.equals( number, phone.number );
+}
+```
 
+En `Person` como deciamos antes tenemos la anotación `@OneToMany` con `mappedBy` el nombre `person` es el que le hemos dado en la entidad `Phone`.
 
+```java
+@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+private List<Phone> phones = new ArrayList<>();
+```
 
+Vamos a ejecutar el proyecto
 
+<img src="images/10-35.png">
 
+<img src="images/10-36.png">
 
+<img src="images/10-37.png">
 
-<img src="images/11-07.png">
+<img src="images/10-38.png">
+
+Podemos comprobar en la base de datos.
+
+Para empezar no tenemos esa tercera tabla de asociación.
+
+<img src="images/10-39.png">
+
+La asociación la marca la clave externa que se ha generado en la tabla `phone` al igual que cuando teniamos una asociación `ManyToOne` (de hecho ahora la tenemos).
+
+<img src="images/10-40.png">
+
+Y en la tabla `person` tenemos  la persona.
+
+<img src="images/10-41.png">
+
+Sin embargo a traves de la asociación `person_id` de la tabla `phone` podemos marcar y podemos encontrar que una persona puede tener a su disposición una lista de teléfonos. Tanto es así que si quisieramos mostrarlos podríamos recorrer la lista con un bucle normal.
+
+Si ejecutamos nuevamente la aplicacción descomentando la línea `person.removePhone(phone1);` haciendo uso del método `addPhone` hemos añadido los telefonos y con el método HELPER `person.removePhone(phone1);` podríamos eliminarlo .
+
+<img src="images/10-42.png">
+
+<img src="images/10-43.png">
+
+<img src="images/10-44.png">
+
+<img src="images/10-45.png">
+
+Como vemos se ha ejecutado la secuencia de borrado.
+
+En la tabla `phone` a desaparecido el teléfono 954000000 por lo que la persona que hemos creado tendría un teléfono menos.
+
+<img src="images/10-46.png">
 
 # 12 OneToOne: Unidireccional y bidireccional 7:18 
 
