@@ -1904,16 +1904,213 @@ Vamos a continuar con el capítulo de Asociaciones en este caso vamos a hablar d
 
 <img src="images/12-02.png">
 
-También le podemos dar un tratamiento unidireccional o bidireccional las asociaciones 1-1 pues son aquellas asociaciones en las que solamente una entidad del lado que podríamos llamar izquierdo se asocian con solamente una entidad del lado derecho, el tratamiento que le podemos dar a una asociación Uno a Uno unidireccionales es muy parecido al del Many To One de hecho a nivel de base de datos se realiza a través de una columna Join, de una clave externa sin embargo, el significado semántico que tiene la asociación sería un poco distinto veamos un ejemplo de asociación uno a uno unidireccional.
+También le podemos dar un tratamiento unidireccional o bidireccional, las asociaciones 1-1  son aquellas asociaciones en las que solamente una entidad del lado que podríamos llamar izquierdo se asocian con solamente una entidad del lado derecho, el tratamiento que le podemos dar a una asociación Uno a Uno unidireccional es muy parecido al del Many To One de hecho a nivel de base de datos se realiza a través de una columna Join, de una clave externa sin embargo, el significado semántico que tiene la asociación sería un poco distinto, veamos un ejemplo de asociación uno a uno unidireccional.
 
-En este caso en lugar de tener la entidad verso y la vamos a tener la entidad y fondue tails y si bien existe algún tipo de dependencia de existencia en telefónico de forma que teléfono si es verdad que mejor colocar la asociación dentro del lado a esa asociación para hacerme ejemplo pues nada más que tendremos que crear teléfono que hablo vale añadir los detalle al teléfono y persistir lo de forma que quedaría quedaría la asociación ya refresca vamos a comprobarlo los resultados como podemos comprobar el teléfono se los detalles y se han actualizado para establecer la asociación miramos en phone podemos comprobar como tenemos la clave externa que la tenemos aquí al ser una sucesión cuánto van solamente se asociaría una fila con una sola fila de este sería el tratamiento unidireccional de las asociaciones uno le queremos dar un tratamiento bidireccionalporque porque ahora lo que haría sería cambiar la notación oNEtoONE que teníamos antes en la clase la pasaríamos a homelidays y lo pasaríamos porque como decíamos en el lado opuesto en el lado fo añadiremos también la asociación y lo queremos no hace falta para otro ejemplo de opciónel modo no perezoso el modo y el otro modo que podemos usar y que hemos para manejar esta asociación bidireccional necesitaríamos también desde unos métodos helper admiten si me tenéis que nos pondremos pues en la clase en la clase vamos a ver este ejemplo en funciones clave externa la pondríamos en la clase fortnite y la cuánto cuánto cuesta que va mapeada la pondríamos en la entidad y aquí añadiríamos que van a permitir establecer las realizar una asignación de la asociación en ambos antes teníamos la clave externa ahora no la tenemos el teléfono dónde podemos encontraren la próxima lección que será la última y un poco más extensa sobre asociaciones vamos a aprender a tratar la asociaciones muchos a muchos unidireccionales y bidireccionales y un tipo especial que puede llevar atributos
+En este caso en lugar de tener la entidades `Person` y `Phone`, vamos a tener las entidades `Phone` y `PhoneDetails`, si bien existe algún tipo de dependencia de existencia entre `Phone` y `PhoneDetails` de forma que no podría existir los detalles de un teléfono sin el teléfono en si, si es verdad que mejor que vamos a estimar mejor la asociación dentro del lado de `Phone` auque ya digo en teoría tendría más sentido que por la dependencia existente que tienen la clave externa estuviera situada en la tabla de detalle.
+
+*`PhoneDetails`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetoone;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class PhoneDetails {
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String provider;
+
+	private String technology;
+
+	public PhoneDetails() {
+	}
+
+	public PhoneDetails(String provider, String technology) {
+		this.provider = provider;
+		this.technology = technology;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public String getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+
+}
+```
+
+*`Phone`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetoone;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
+public class Phone {
+
+	@Id
+	@GeneratedValue
+	private long id;
+
+	private String number;
+
+	@OneToOne
+	@JoinColumn(name = "details_id")
+	private PhoneDetails details;
+
+	public Phone() {
+	}
+
+	public Phone(String number) {
+		this.number = number;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public PhoneDetails getDetails() {
+		return details;
+	}
+
+	public void setDetails(PhoneDetails details) {
+		this.details = details;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+}
+```
+
+Como podemos comprobar la anotación es `@OneToOne` y mediante `@JoinColumn(name = "details_id")` que es optativa le podríamos dar un nombre a esa asociación. 
+
+Para hacerme un ejemplo pues nada más que tendremos que crear un teléfono, crear los detalle del teléfono, añadir los detalle al teléfono y persistirlo de forma que quedaría la asociación ya reflejada.
+
+*`App`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetoone;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Asociaciones OneToOne unidireccionales
+ * www.openwebinars.net
+ * @LuisMLopezMag
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("OneToOneUni");
+
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
+
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+		
+		Phone phone = new Phone("954000000");
+		em.persist(phone);
+
+		PhoneDetails details = new PhoneDetails("Movistar", "Fijo");
+		phone.setDetails(details);
+		em.persist(details);
+		
+		
+		Phone phone2 = new Phone("600000000");
+		em.persist(phone2);
+
+		PhoneDetails details2 = new PhoneDetails("Vodafone", "Móvil");
+		phone2.setDetails(details2);
+		em.persist(details2);
 
 
+		em.flush();
+		
+		
 
+
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+		
+	}
+}
+```
+
+Vamos a ejecutar el ejemplo.
+
+<img src="images/12-05.png">
+
+<img src="images/12-06.png">
+
+<img src="images/12-07.png">
+
+<img src="images/12-08.png">
+
+Vamos a comprobarlo los resultados como podemos comprobar, se han insertado los teléfonos, se han insertado los detallesy se han actualizado las filas correspondientes para establecer la asociación.
+
+<img src="images/12-09.png">
+
+Si miramos en la tabla phone podemos comprobar como tenemos la clave externa hacia la tabla detalle. 
+
+<img src="images/12-10.png">
+
+
+Que la tenemos aquí 
+
+<img src="images/12-11.png">
+
+al ser una sucesión OneToOne solamente se asociaría una fila de `Phone` con una sola fila de `PhoneDetail` este sería el tratamiento unidireccional de las asociaciones Uno a Uno
 
 <img src="images/12-03.png">
 
 <img src="images/12-04.png">
+
+Y si le queremos dar un tratamiento bidireccional también lo podríamos hacer en este caso estableceriamos a través de OneToOne las asociaciones a un lado y a otro si bien va a tener un comportamiento parecido al marinaje de las asociaciones ManyToOne y OneToMany porque, porque ahora lo que haría sería cambiar la anotación OneToOne que teníamos antes en la clase `Phone` la pasaríamos a `PhoneDetails` y lo pasaríamos porque como decíamos antes tiene más sentido por la dependencia de existencia que hay entre ambos, en el lado opuesto, en el lado `Phone` añadiremos también la asociación OneToOne y lo que haríamos sería mapearla a través de la clave externa que como decia antes va a estar en la clase `PhoneDetails`, hemos añadido también el tratamiento en cascada y para ilustrar por si nos hace falta para otro ejemplo hemos añadido la opción `Fetch` en ambos y lo hemos puesto con un fetch perezoso esto quiere decir que a no ser que explicitamente necesitemos los datos de detalle de un teléfono esos datos no se van a cargar.
+
+El modo no perezoso el modo EAGER suele ser el otro modo que podemos usar y que hemos venido usando hasta ahora. Para manejar esta asociacion bidireccional necesitariamos también de unos métodos HELPER `addDetails` y `removeDetails` que los pondríamos en la clase `Phone`.
+
+Vamos a ver este ejemplo en funcionamiento.
+
+
+
+y el otro modo que podemos usar y que hemos para manejar esta asociación bidireccional necesitaríamos también desde unos métodos helper admiten si me tenéis que nos pondremos pues en la clase en la clase vamos a ver este ejemplo en funciones clave externa la pondríamos en la clase fortnite y la cuánto cuánto cuesta que va mapeada la pondríamos en la entidad y aquí añadiríamos que van a permitir establecer las realizar una asignación de la asociación en ambos antes teníamos la clave externa ahora no la tenemos el teléfono dónde podemos encontraren la próxima lección que será la última y un poco más extensa sobre asociaciones vamos a aprender a tratar la asociaciones muchos a muchos unidireccionales y bidireccionales y un tipo especial que puede llevar atributos
+
+
+
+
+
 
 
 # 13 ManyToMany: 18:06 
