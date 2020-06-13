@@ -4,7 +4,21 @@
 
 ## 01 Presentación del curso 03:07
 
+<img src="images/1-01.png">
 
+<img src="images/1-02.png">
+
+<img src="images/1-03.png">
+
+<img src="images/1-04.png">
+
+<img src="images/1-05.png">
+
+<img src="images/1-06.png">
+
+<img src="images/1-07.png">
+
+<img src="images/1-08.png">
 
 
 Si te dedicas o te vas a dedicar al desarrollo de aplicaciones Java el conocimiento de JPA te va a resultar imprescindible puesto que el acceso a datos en las aplicaciones a través de una capa de persistencia es algo una tendencia cada vez más extendida en el mundo de la programación como puedes ver en esta imagen pues frente al acceso a datos tradicional desde una aplicación Java que se realiza a través de JDBC decir la aplicación directamente ataca los datos utilizando este API.
