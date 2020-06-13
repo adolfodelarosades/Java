@@ -1281,18 +1281,30 @@ public class App {
 
 <img src="images/11-04.png">
 
-Qué sucede si le queremos dar un tratamiento un poco más compacto en el que ya que tenemos una asociación podamos atacarla tanto por el lado uno o mejor el lado muchos bueno pues para ello tendremos la posibilidad de usar las asociaciones uno a mucho bidireccional en este caso partimos de nuevo del lado muchos donde definiríamos la asociación a través de la notación many-to-one que vimos en la elección anterior lo que haríamos sería referir en la asociación onetomany en el lado o no que toda esta asociación va a venir mapeada va a venir definida mediante esa clave externa con lo cual lo que estamos haciendo es asociar está valga la redundancia la asociación one-to-many con la many-to-one de forma que quedaría establecida esta asociación uno a muchos de forma bidireccional para manejar la asociación bidireccional ya que tenemos que establecer la asociación en el teléfono y la asociación en la persona se suele proveer de de unos métodos helper en el lado que nosotros decidamos de la suerte que hacen la entidad en la que decidamos parece que tiene sentido que en este caso de la zona importante sea la persona que es la que posee los teléfono y en la que podemos añadir el método APO para añadir un teléfono y remo para eliminar bien si nos damos cuentas en iPhone lo que haríamos sería proporcionarle un teléfono y bueno pues que no manera sencilla añadimos a la lista de teléfonos el teléfono que acabo de proporcionar y de otra manera en el lado opuesto en el teléfono en particular le asignamos como una persona es decir una persona actual para eliminar el teléfono pues haríamos la tarea la tarea correcto el manejo de esta clase una aplicación por vendría a través de estos métodos helper que nos permitirían ir manejando la asociación vamos a verlo en un ejemplo como el anterior enmarañar vamos a borrar las tablas con las que hemos estado trabajando y como tenemos la columna many to one y tenemos la one-to-many como hemos visto en el ejemplo anterior aquí hemos añadido la asociación perdona la columna number una un elemento que es nativo de ibernet si no lo añadiremos tampoco pasaría nada natural y ves una anotación que nos va a permitir bueno que decir que una columna en particular no tiene que ser clave primaria pero que siempre me da que sería lo que se conoce un rato como una clave candidata de forma naturalen el caso de implementar métodos como los que tenemos aquí abajo y qué para manejar elementos que van a estar dentro de interesantes aquí estamos usando la estrategia de a partir de las 7 para abreviar un poco la redacción del método igual y del método Castro en la persona como decíamos antes tendríamos aquí el nombre que le hemos dado a vamos a ver cómo sería la ejecución del ejemplocomo ahora no tenemos esa tercera tabla de asociación la asociación la marca la clave externa que se ha generado en la tabla pon vale al igual que cuando teníamos una sucesión de nittua pues tenemos las personas sin embargo a través de esta asociación podemos marca y podemos encontrar que bueno pues una persona puede tener a su disposición una lista de teléfonos así que si quisiéramos mostrar lo podríamos recorrer la lista con normal haciendo uso del método helper upon hemos añadido los teléfonos y haciendo uso del método podríamos eliminarlos la sentencia de borrado aquí ya ha desaparecido eh esa Limia con lo cual bueno pues la persona que hemos creado PP tendría un teléfono fijo
-
-
-
-
-
-
-
+Qué sucede si le queremos dar un tratamiento un poco más compacto en el que ya que tenemos una asociación podamos atacarla tanto por el lado uno como por el lado muchos, para ello tendremos la posibilidad de usar las asociaciones *Uno a Mucho Bidireccional*
 
 <img src="images/11-05.png">
 
+En este caso partimos de nuevo del lado muchos donde definiríamos la asociación a través de la anotación ManyToOne que vimos en la lección anterior y lo que haríamos sería referir en la asociación OneToMany en el lado uno, que toda esta asociación va a venir mapeada, va a venir definida, mediante esa clave externa. Con lo cual lo que estamos haciendo es asociar la asociación OneToMany con ManyToOne de forma que quedaría establecida esta asociación Uno a Muchos de forma bidireccional.
+
 <img src="images/11-06.png">
+
+Para manejar la asociación bidireccional ya que, tenemos que establecer la asociación en el teléfono y la asociación en la persona, se suele proveer de unos métodos HELPER en el lado que nosotros decidamos de la asociación en la entidad en la que decidamos, parece que tiene sentido, que en este caso la importante sea la Persona que es la que posee los teléfono y en la que podemos añadir el método `addPhone` para añadir un teléfono y `removePhone` para eliminar un teléfono.
+
+Bien si nos damos cuentas en `addPhone` lo que haríamos sería proporcionarle un teléfono y de una manera sencilla añadimos a la lista de teléfonos, el teléfono que acabamos de proporcionar y de otra manera en el lado opuesto en el teléfono en particular le asignamos como persona `this`, es decir la persona actual, para eliminar el teléfono haríamos la tarea correspondiente, el manejo de estas clase en una aplicación vendría a través de estos métodos HELPER que nos permitirían ir manejando la asociación.
+
+Vamos a verlo en un ejemplo como el anterior y como tenemos la columna many to one y tenemos la one-to-many como hemos visto en el ejemplo anterior aquí hemos añadido la asociación perdona la columna number una un elemento que es nativo de ibernet si no lo añadiremos tampoco pasaría nada natural y ves una anotación que nos va a permitir bueno que decir que una columna en particular no tiene que ser clave primaria pero que siempre me da que sería lo que se conoce un rato como una clave candidata de forma naturalen el caso de implementar métodos como los que tenemos aquí abajo y qué para manejar elementos que van a estar dentro de interesantes aquí estamos usando la estrategia de a partir de las 7 para abreviar un poco la redacción del método igual y del método Castro en la persona como decíamos antes tendríamos aquí el nombre que le hemos dado a vamos a ver cómo sería la ejecución del ejemplocomo ahora no tenemos esa tercera tabla de asociación la asociación la marca la clave externa que se ha generado en la tabla pon vale al igual que cuando teníamos una sucesión de nittua pues tenemos las personas sin embargo a través de esta asociación podemos marca y podemos encontrar que bueno pues una persona puede tener a su disposición una lista de teléfonos así que si quisiéramos mostrar lo podríamos recorrer la lista con normal haciendo uso del método helper upon hemos añadido los teléfonos y haciendo uso del método podríamos eliminarlos la sentencia de borrado aquí ya ha desaparecido eh esa Limia con lo cual bueno pues la persona que hemos creado PP tendría un teléfono fijo
+
+
+
+
+
+
+
+
+
+
+
 
 <img src="images/11-07.png">
 
