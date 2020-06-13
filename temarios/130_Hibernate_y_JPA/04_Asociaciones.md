@@ -1375,6 +1375,316 @@ En la tabla `phone` a desaparecido el teléfono 954000000 por lo que la persona 
 
 <img src="images/10-46.png">
 
+### :computer: Código Completo - 130-11-HibernateJPA_OneToManyBidireccional
+
+<img src="images/10-47.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate</groupId>
+	<artifactId>130-11-HibernateJPA_OneToManyBidireccional</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>130-11-HibernateJPA_OneToManyBidireccional</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.17.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="OneToManyBi" transaction-type="RESOURCE_LOCAL">
+		<class>com.openwebinars.hibernate.hibernatejpaonetomany.Person</class>
+		<class>com.openwebinars.hibernate.hibernatejpaonetomany.Phone</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+*`Person.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetomany;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Person {
+	
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Phone> phones = new ArrayList<>();
+	
+	private String name;
+	
+	public Person() { }
+	
+	public Person(String name) {
+		this.name = name;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	public List<Phone> getPhones() {
+        return phones;
+    }	
+	
+	public void addPhone(Phone phone) {
+		phones.add(phone);
+		phone.setPerson(this);
+	}
+
+	public void removePhone(Phone phone) {
+		phones.remove(phone);
+		phone.setPerson(null);
+	}
+	
+
+}
+```
+
+*`Phone.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetomany;
+
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.NaturalId;
+
+@Entity
+public class Phone {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	@NaturalId
+	@Column(unique=true)
+	private String number;	
+	
+	@ManyToOne
+	private Person person;
+	
+	public Phone() { }
+	
+	public Phone(String number) {
+		this.number = number;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(number);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if ( this == o ) {
+            return true;
+        }
+        if ( o == null || getClass() != o.getClass() ) {
+            return false;
+        }
+        Phone phone = (Phone) o;
+        return Objects.equals( number, phone.number );
+	}	
+}
+```
+
+*`App.java`*
+
+```java
+package com.openwebinars.hibernate.hibernatejpaonetomany;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Asociaciones OneToMany bidireccionales
+ * www.openwebinars.net
+ * @LuisMLopezMag
+ */
+public class App {
+	public static void main(String[] args) {
+		
+		
+		
+		//Configuramos el EMF a través de la unidad de persistencia
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("OneToManyBi");
+
+		//Generamos un EntityManager
+		EntityManager em = emf.createEntityManager();
+
+		//Iniciamos una transacción
+		em.getTransaction().begin();
+		
+		Person person = new Person("Pepe");
+		Phone phone1 = new Phone("954000000");
+		Phone phone2 = new Phone("600000000");
+
+		person.addPhone(phone1);
+		person.addPhone(phone2);
+		em.persist(person);
+		em.flush();
+
+		person.removePhone(phone1);
+		
+
+		//Commiteamos la transacción
+		em.getTransaction().commit();
+		
+		//Cerramos el EntityManager
+		em.close();
+		
+	}
+}
+```
+
 # 12 OneToOne: Unidireccional y bidireccional 7:18 
 
 [OneToOne: Unidireccional y bidireccional](pdfs/10_Asociaciones_OneToOne.pdf)
@@ -1587,6 +1897,9 @@ public void removeDetails() {
 }
 ```    
 ## Transcripción
+
+En este caso vamos a hablar de las asociaciones oNEtoONE es decir la asociación es también le podemos dar un tratamiento unidireccional o bidireccional las asociaciones 1-1 pues son aquellas asociaciones en las que solamente una entidad del lado que podríamos llamar izquierdo se asocian con solamente una entidad de la del lado que podríamos llamar del lado derecho no en tratamiento que le podemos dar a una asociación 11 unidireccionales muy parecido alel significado semántico que tiene la asociación sería un poco distinto veamos un ejemplo de asociación uno a uno unidireccional en este caso en lugar de tener la entidad verso y la vamos a tener la entidad y fondue tails y si bien existe algún tipo de dependencia de existencia en telefónico de forma que teléfono si es verdad que mejor colocar la asociación dentro del lado a esa asociación para hacerme ejemplo pues nada más que tendremos que crear teléfono que hablo vale añadir los detalle al teléfono y persistir lo de forma que quedaría quedaría la asociación ya refresca vamos a comprobarlo los resultados como podemos comprobar el teléfono se los detalles y se han actualizado para establecer la asociación miramos en phone podemos comprobar como tenemos la clave externa que la tenemos aquí al ser una sucesión cuánto van solamente se asociaría una fila con una sola fila de este sería el tratamiento unidireccional de las asociaciones uno le queremos dar un tratamiento bidireccionalporque porque ahora lo que haría sería cambiar la notación oNEtoONE que teníamos antes en la clase la pasaríamos a homelidays y lo pasaríamos porque como decíamos en el lado opuesto en el lado fo añadiremos también la asociación y lo queremos no hace falta para otro ejemplo de opciónel modo no perezoso el modo y el otro modo que podemos usar y que hemos para manejar esta asociación bidireccional necesitaríamos también desde unos métodos helper admiten si me tenéis que nos pondremos pues en la clase en la clase vamos a ver este ejemplo en funciones clave externa la pondríamos en la clase fortnite y la cuánto cuánto cuesta que va mapeada la pondríamos en la entidad y aquí añadiríamos que van a permitir establecer las realizar una asignación de la asociación en ambos antes teníamos la clave externa ahora no la tenemos el teléfono dónde podemos encontraren la próxima lección que será la última y un poco más extensa sobre asociaciones vamos a aprender a tratar la asociaciones muchos a muchos unidireccionales y bidireccionales y un tipo especial que puede llevar atributos
+
 
 <img src="images/12-01.png">
 
