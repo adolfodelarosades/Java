@@ -1289,9 +1289,9 @@ En este caso partimos de nuevo del lado muchos donde definiríamos la asociació
 
 <img src="images/11-06.png">
 
-<img src="images/11-07.png">
-
 Para manejar la asociación bidireccional ya que, tenemos que establecer la asociación en el teléfono y la asociación en la persona, se suele proveer de unos métodos HELPER en el lado que nosotros decidamos de la asociación en la entidad en la que decidamos, parece que tiene sentido, que en este caso la importante sea la Persona que es la que posee los teléfono y en la que podemos añadir el método `addPhone` para añadir un teléfono y `removePhone` para eliminar un teléfono.
+
+<img src="images/11-07.png">
 
 Bien si nos damos cuentas en `addPhone` lo que haríamos sería proporcionarle un teléfono y de una manera sencilla añadimos a la lista de teléfonos, el teléfono que acabamos de proporcionar y de otra manera en el lado opuesto en el teléfono en particular le asignamos como persona `this`, es decir la persona actual, para eliminar el teléfono haríamos la tarea correspondiente, el manejo de estas clase en una aplicación vendría a través de estos métodos HELPER que nos permitirían ir manejando la asociación.
 
