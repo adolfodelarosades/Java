@@ -18,71 +18,71 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 
 ## Contenido del curso 45 clases 04:59:46
 
-#### Presentación del curso 03:07
+#### 1. [Presentación del curso](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/01_Presentacion_del_curso.md) 03:07
 
-* Presentación del curso 03:07
+* 01 Presentación del curso 03:07
 
-#### Introducción a la persistencia con JPA 29:16
+#### 2. Introducción a la persistencia con JPA 29:16
 
-* Introducción a la persistencia 04:49
-* Java persistence API 04:09
-* Instalación del software 05:36
-* Creación de una capa de persistencia con JPA parte 1 03:47
-* Creación de una capa de persistencia con JPA parte 2 10:14
+* 02 Introducción a la persistencia 04:49
+* 03 Java persistence API 04:09
+* 04 Instalación del software 05:36
+* 05 Creación de una capa de persistencia con JPA parte 1 03:47
+* 06 Creación de una capa de persistencia con JPA parte 2 10:14
 * Autoevaluación I 00:41
 
-#### El API JPA 18:53
+#### 3. El API JPA 18:53
 
-* El API JPA 05:48
-* Primera aplicación JPA 12:05
+* 07 El API JPA 05:48
+* 08 Primera aplicación JPA 12:05
 * Autoevaluación II 01:00
 
-#### Consultas JPA 01:05:58
+#### 4. Consultas JPA 01:05:58
 
-* Consultas. El lenguaje JPQL 06:21
-* JPA en aplicaciones Web 06:26
-* Ejercicio práctico I Parte 1 19:04
-* Ejercicio práctico I Parte 2 10:01
-* Consultas parametrizadas 03:00
-* Consultas nominadas 02:28
-* Ejercicio práctico II 13:06
-* Consultas de acción 04:38
+* 09 Consultas. El lenguaje JPQL 06:21
+* 10 JPA en aplicaciones Web 06:26
+* 11 Ejercicio práctico I Parte 1 19:04
+* 12 Ejercicio práctico I Parte 2 10:01
+* 13 Consultas parametrizadas 03:00
+* 14 Consultas nominadas 02:28
+* 15 Ejercicio práctico II 13:06
+* 16 Consultas de acción 04:38
 * Autoevaluacion III 00:54
 
-#### JPA en EJBs 39:50
+#### 5. JPA en EJBs 39:50
 
-* Utilización de JPA con Enterprise JavaBeans 04:42
-* El servidor Glassfish 05:11
-* Creación de un DataSource 11:20
-* Ejercicio práctico III 17:57
+* 17 Utilización de JPA con Enterprise JavaBeans 04:42
+* 18 El servidor Glassfish 05:11
+* 19 Creación de un DataSource 11:20
+* 20 Ejercicio práctico III 17:57
 * Autoevaluación IV 00:40
 
-#### Relación entre entidades en JPA 47:26
+#### 6. Relación entre entidades en JPA 47:26
 
-* Relación entre entidades 07:43
-* Crear entidades relacionadas parte I 08:20
-* Crear entidades relacionadas parte 2 08:41
-* Ejercicio práctico IV parte I 07:19
-* Ejercicio práctico IV parte 2 01:57
-* joins 05:53
-* Ejercicio práctico V 06:02
+* 21 Relación entre entidades 07:43
+* 22 Crear entidades relacionadas parte I 08:20
+* 23 Crear entidades relacionadas parte 2 08:41
+* 24 Ejercicio práctico IV parte I 07:19
+* 25 Ejercicio práctico IV parte 2 01:57
+* 26 joins 05:53
+* 27 Ejercicio práctico V 06:02
 * Autoevaluación V 01:30
 
-#### Configuraciones JPA y uso de Hibernate 01:30:31
+#### 7. Configuraciones JPA y uso de Hibernate 01:30:31
 
-* Ajuste de relaciones 06:54
-* Claves compuestas 07:41
-* Utilización de motor hibernate 12:39
-* Carga de datos en modo lazy con Hibernate 04:57
-* Utilización del framework de hibernate 13:54
-* El API de Hibernate 06:21
-* Utilización del API de Hibernate en una aplicación 18:29
-* Ell API Criteria 03:44
-* Ejercicio práctico VI 07:27
+* 28 Ajuste de relaciones 06:54
+* 29 Claves compuestas 07:41
+* 30 Utilización de motor hibernate 12:39
+* 31 Carga de datos en modo lazy con Hibernate 04:57
+* 32 Utilización del framework de hibernate 13:54
+* 33 El API de Hibernate 06:21
+* 34 Utilización del API de Hibernate en una aplicación 18:29
+* 35 Ell API Criteria 03:44
+* 36 Ejercicio práctico VI 07:27
 * Autoevaluación VI 01:00
 * Resumen final 07:25
 
-#### Apéndices04:43
+#### 8. Apéndices 04:43
 
 * Apéndice A Crear backup de una base de datos MySQL 03:39
 * Apéndice B Consultas SQL nativas en JPA 01:04
