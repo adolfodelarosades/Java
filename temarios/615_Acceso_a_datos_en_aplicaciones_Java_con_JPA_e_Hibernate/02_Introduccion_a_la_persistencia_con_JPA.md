@@ -9,6 +9,16 @@
 
 ## 02 Introducción a la persistencia 04:49
 
+<img src="images/2-01.png">
+
+<img src="images/2-02.png">
+
+<img src="images/2-03.png">
+
+<img src="images/2-04.png">
+
+<img src="images/2-05.png">
+
 En esta primera lección del curso de persistencia con JPA voy a explicarte lo que es una capa de persistencia y qué beneficios nos va a aportar en la creación de aplicaciones.
 
 En primer lugar nos preguntamos qué es exactamente una capa de persistencia pues es una capa que aparecería entre lo que es la lógica de negocio de una aplicación la lógica aplicación.
