@@ -99,6 +99,8 @@ Esto te lo voy a proporcionar como digo dentro material adicional y son también
 
 ## 04 Instalación del software 05:36
 
+
+
 En esta elección vamos a ver los elementos software que necesitamos para poder trabajar con JPA tanto creación de capa de persistencia como su utilización desde las aplicaciones.
 
 Aquí tenemos resumidos los tres bloques de programas que necesitamos en primer lugar el Java Development
@@ -150,6 +152,18 @@ Pero ya te digo con esto no hay que hacer nada simplemente lo tienes estos dos a
 Esto te lo voy a proporcionar como digo dentro material adicional y son también de libre distribución los podrías encontrar en Google escribiendo su nombre directamente en el Google los encontrarías y también los puedes descargar pero en cualquier caso te lo voy a proporcionar.
 
 ## 05 Creación de una capa de persistencia con JPA parte 1 03:47
+
+<img src="images/5-01.png">
+
+<img src="images/5-02.png">
+
+<img src="images/5-03.png">
+
+<img src="images/5-04.png">
+
+<img src="images/5-05.png">
+
+<img src="images/5-06.png">
 
 En esta elección vamos a crear nuestra primera capa de persistencia con JPA y vamos a indicar el proceso que tenemos que seguir para ello básicamente son dos pasos que tendremos que hacer para crear una capa de persistencia es crear y configurar las entidades que configurarán esa configuración se realiza a través de unas anotaciones que ahora comentaremos.
 
