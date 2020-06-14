@@ -15,13 +15,13 @@ En esta primera lección del curso de persistencia con JPA voy a explicarte lo q
 
 <img src="images/2-02.png">
 
-En primer lugar nos preguntamos qué es exactamente una capa de persistencia pues es una capa que aparecería entre lo que es la lógica de negocio de una aplicación, la lógica aplicación, las instrucciones de acceso a datos etcétera y la propia base de datos.
+En primer lugar nos preguntamos qué es exactamente una capa de persistencia, pues es una capa que aparecería entre lo que es la lógica de negocio de una aplicación, la lógica aplicación, las instrucciones de acceso a datos etcétera y la propia base de datos.
 
-La idea es que a través de la capa de persistencia los datos de la base de datos, las filas, columnas, las tablas en definitiva se expongan a la aplicación en forma de objetos de manera que el programador cuando quiera programar instrucciones para acceder a datos no tenga que cambiar de mentalidad y pasar del mundo de los objetos al mundo relacional. Al mundo de las tablas con sus filas y columnas sino que directamente los datos se han expuesto como objetos y pueda hacer las operaciones de manipulación de datos contra objetos no contra lo que sería la base de datos relacional.
+La idea es que a través de la capa de persistencia los datos de la base de datos, las filas, columnas, las tablas en definitiva, se expongan a la aplicación en forma de objetos, de manera que el programador cuando quiera programar instrucciones para acceder a datos, no tenga que cambiar de mentalidad y pasar del mundo de los objetos al mundo relacional, al mundo de las tablas con sus filas y columnas sino que directamente los datos se han expuesto como objetos y pueda hacer las operaciones de manipulación de datos contra objetos, no contra lo que sería la base de datos relacional.
 
 <img src="images/2-03.png">
 
-El principal componente de una capa de persistencia es la *Entidad* esos objetos que se exponen en la capa de persistencia y que realmente representan como se ve en la imagen, filas de una tabla de la base de datos, se les conoce como entidades, a la hora de definirlos los definiremos mediante clases tipo Java Bean estándares, es decir con sus atributos para almacenar cada una de las columnas de la fila que representan en esa tabla y con sus métodos setter y getter para poder acceder a ellos.
+El principal componente de una capa de persistencia es la *Entidad*, esos objetos que se exponen en la capa de persistencia y que realmente representan como se ve en la imagen, filas de una tabla de la base de datos, se les conoce como entidades, a la hora de definirlos los definiremos mediante clases tipo Java Bean estándares, es decir con sus atributos para almacenar cada una de las columnas, de la fila que representan en esa tabla y con sus métodos setter y getter para poder acceder a ellos.
 
 Entonces las operaciones sobre la capa de persistencia que realizará la lógica de negocio consistirá no en mandar instrucciones SQL la base de datos, sino en crear objetos entidades, modificar entidades, eliminar entidades, recuperar entidades, siempre trabajando con este tipo de objetos. 
 
@@ -31,7 +31,7 @@ Para trabajar con una capa de persistencia existen los llamados Frameworks de Pe
 
 Entre los Frameworks de persistencia más populares tenemos por ejemplo Hibernate e IBatis y el que nos ocupa en este curso que es JPA y que como vamos a ver más adelante pues no es exactamente un Frameworks sino más bien una especificación. 
 
-Y qué nos ofrece esos Frameworks de persistencia en primer lugar nos van a ofrecer pues un motor de persistencia que es un software ya creado, de librerías Java que se encargan de todo lo que es lo que llamamos el mapeo ORM, es decir los datos en las entidades realmente representan filas reales de una tabla una base de datos, quien se encarga de sincronizar esto, el motor de persistencia. Cuando nosotros añadamos o modifiquemos entidades esas instrucciones se reflejarán en la base de datos a través del motor de persistencia que se encargará de todas las operaciones JDBC contra dicha tabla de la base de datos.
+Y qué nos ofrece esos Frameworks de persistencia, en primer lugar nos van a ofrecer un motor de persistencia que es un software ya creado, de librerías Java que se encargan de todo lo que es lo que llamamos el mapeo ORM, es decir los datos en las entidades realmente representan filas reales de una tabla una base de datos, quien se encarga de sincronizar esto, el motor de persistencia, cuando nosotros añadamos o modifiquemos entidades esas instrucciones se reflejarán en la base de datos a través del motor de persistencia que se encargará de todas las operaciones JDBC contra dicha tabla de la base de datos.
 
 Además se nos proporciona un sistema de configuración para indicarle al motor de persistencia cómo tiene que trabajar y eso ya depende de cada tipo de Frameworks si es basado en XML, en anotaciones y por supuesto un API es decir el modelo, la lógica de negocio ya no va a utilizar JDBC para acceder a la base de datos porque no va a acceder directamente a la base de datos, va a acceder a la capa de persistencia y eso implica utilizar un conjunto de clases e interfaces específicos para manipular esas entidades y que como ya verás a lo largo del curso mucho más sencillo que el clásico JDBC con sus instrucciones SQL.
 
@@ -39,13 +39,46 @@ Además se nos proporciona un sistema de configuración para indicarle al motor 
 
 En nuestro caso este curso lo vamos a centrar en JPA Java Persistence API, que es una especificación de Java EE para la configuración y gestión de una capa de persistencia.
 
-La idea es que a diferencia de otros Framework que son muy específicos es decir por ejemplo Hibernate pues todo lo que proporciona es para trabajar con Hibernate, pues JPA pretende ser universal es decir pretende ser compatible con otros Framework existentes de manera que por ejemplo, nosotros podríamos tener un motor Hibernate o motor iBatis y trabajar con el mismo API el mismo API JPA cuya idea es que sea compatible con los diferentes Framework de persistencia existentes.
+La idea es que a diferencia de otros Framework que son muy específicos, es decir por ejemplo Hibernate pues todo lo que proporciona es para trabajar con Hibernate, pues JPA pretende ser universal, es decir pretende ser compatible con otros Framework existentes de manera que por ejemplo, nosotros podríamos tener un motor Hibernate o motor iBatis y trabajar con el mismo API el mismo API JPA cuya idea es que sea compatible con los diferentes Framework de persistencia existentes.
 
-Es un API estandarizado ya digo forma parte de Java Enterprise Edition y nos va a proporcionar ese acceso estandarizado a la capa de persistencia independientemente del motor que nosotros queramos utilizar después.
+Es un API estandarizado, ya digo forma parte de Java Enterprise Edition y nos va a proporcionar ese acceso estandarizado a la capa de persistencia, independientemente del motor que nosotros queramos utilizar después.
 
 Ya en posteriores lecciones vamos a ir profundizando en cómo se crea la capa de persistencia y cómo utilizar este API dentro de nuestras aplicaciones.
 
 ## 03 Java persistence API 04:09
+
+<img src="images/2-3-01.png">
+
+Bien pues en este curso por tanto vamos a abordar el estudio de la persistencia a través de la especificación Java Persistence API de Oracle.
+
+<img src="images/2-3-02.png">
+
+Java Persistence API como decíamos es una especificación que forma parte del Java Enterprise Edition para la creación, configuración y gestión de una capa de persistencia, es decir a través de esta especificación nosotros vamos a poder crear la capa de persistencia y también vamos a poder acceder a ella desde la lógica de negocio de la aplicación utilizando el API y el sistema de configuración universal que proporciona dicha especificación JPA.
+
+Y qué es eso de que proporciona una API un sistema de configuración universal, que vamos a poder utilizar JPA es decir la misma manera de configurar la capa y el mismo juego de clases interfaces para atacar dicha capa, lo vamos a poder utilizar con diferentes proveedores o motores de persistencia existentes y que sean compatibles con JPA, como por ejemplo Hibernate que es uno de los más utilizados Toplink, IBatis etc..
+
+<img src="images/2-3-03.png">
+
+Qué es lo que nos proporciona exactamente la especificación JPA a los programadores para poder construir esa capa de persistencia y acceder a ella desde la lógica de negocio.
+
+Pues en primer lugar podríamos resumirlo en tres componentes.
+
+* En primer lugar el archivo de configuración `persistence.xml`. 
+
+   * Un archivo de configuración `persistence.xml` organiza la información de configuración en lo que se conoce como unidades de persistencia.
+   * Dentro de cada nivel de cada unidad de persistencia, lo que se va a indicar es por un lado que motor o que   proveedor de persistencia estamos utilizando para acceder a los datos. Las propiedades de conexión a la base de datos para que ese motor conecte con la base de datos, no olvidemos que al final, el objetivo de la capa de persistencia es exponer los datos como objeto, pero claro ese flujo de información entre los objetos y la base de datos tiene que realizarlo alguien, el motor de persistencia.
+   
+   Dentro de la Unidad de persistencia viven las etiquetas que se utilizan, se define *el proveedor* motor de persistencia que vamos a utilizar, una serie de propiedades donde le damos los datos de conexión y alguna propiedad específica que pueda necesitar algún proveedor en concreto. Se indica también la lista de entidades que se van a utilizar en esta capa de persistencia dentro de dicha unidad y esto nos permite además el organizarlo así en unidades de persistencia, que una aplicación, una capa persistente puede trabajar por ejemplo con distintas bases de datos. Cada base de datos podría tener su propio proveedor, sus propios datos de conexión, sería una unidad de persistencia, la información de cada base de datos. 
+   
+* Bien pues no es esa toda la configuración que hay que proporcionar cuando se está creando una capa de persistencia, además del `persistence.xml`, son las *Entidades*, que son las clases que representan los objetos con los datos de la base de datos, tienen que incluir una serie de anotaciones como luego iremos viendo en posteriores elecciones, pero bueno resumiendo por ejemplo `@Entity`, `@Table`, `@Id`, etc.
+
+* Y por último quizá el elemento principal el API JPA. Es precisamente el conjunto de clases e interfaces que vamos a utilizar desde la lógica de negocio para poder acceder a las entidades y hacer las operaciones clásicas de añadir, eliminar, modificar, recuperar, etc.
+
+   Es conocido como API JPA que se utilizará como digo desde la lógica de negocio para acceder a las entidades que han sido configuradas a través de estas anotaciones `@Entity`, `@Table`, `@Id` y cuya información de configuración de gestión de esa capa se encuentra en el `persistence.xml`.
+   
+En la siguiente lección vamos a ver todos los componentes, los paquetes software que necesitamos para poder trabajar con persistencia con JPA y ya vamos a ir profundizando tanto en la creación de una capa de persistencia, como en su utilización desde las aplicaciones.
+
+## 04 Instalación del software 05:36
 
 <img src="images/3-01.png">
 
@@ -96,60 +129,6 @@ Por un lado tenemos el driver, te lo puedes descargar también, pero te lo inclu
 Los otros dos archivos corresponden a los programas de instalación de MySQL por un lado teníamos SQL Essential que es para instalar el servidor de base de datos y el GUI que se instala posteriormente y que es una herramienta gráfica para manejar de forma sencilla el motor de base de datos y crear bases de datos de forma gráfica e inspeccionar las configurarlas etc. Son un poquito más antiguos de los problemas que tenemos en la página oficial, pero bueno son perfectamente válidos para lo que vamos a ver en el curso y de hecho son los que yo voy a utilizar en esta versión de MySQL, es la que voy a utilizar en los ejercicios que voy a seguir viendo a lo largo de todas las lecciones que te voy a ir presentando.
 
 Esto te lo voy a proporcionar como digo dentro material adicional y son también de libre distribución, los podrías encontrar en Google escribiendo su nombre directamente en Google los encontrarías y también los puedes descargar pero en cualquier caso te lo voy a proporcionar.
-
-## 04 Instalación del software 05:36
-
-
-
-En esta elección vamos a ver los elementos software que necesitamos para poder trabajar con JPA tanto creación de capa de persistencia como su utilización desde las aplicaciones.
-
-Aquí tenemos resumidos los tres bloques de programas que necesitamos en primer lugar el Java Development
-
-Kit que es el kit de desarrollo Java.
-
-Cualquier aplicación JPA está basada en Java y por lo tanto vamos a necesitar este paquete básico un entorno de desarrollo que nos facilite la creación de los programas y por supuesto la base de datos con la que vamos a trabajar.
-
-Al hablar de persistencia lógicamente estamos necesitamos una base de datos en la que se almacene dicha información además de un Reimer que va a ser el intermediario que utilice las aplicaciones para poder acceder a la base de datos Java Development Kit.
-
-Como decíamos JDK es el kit básico que nos proporciona Oracle para trabajar con Java y además de la máquina virtual Java incluye la librería Java estándar por supuesto y herramientas para compilar y ejecución y ejecutar programas que se usan desde la línea de comandos pero para eso utilizaremos dos después de instalar esto un entorno de desarrollo que facilitará el uso de estas herramientas y no tengamos que bajar la línea de comandos para manejarlas.
-
-En esta dirección vamos a poder descargar el JDK última versión como decía el JDK tenemos la base pero no lo vamos a manejar directamente nosotros necesitamos un entorno de desarrollo que lo maneje por nosotros y nos facilite la tarea de creación de los programas compilación pruebas entre los más utilizados.
-
-Tenemos NetBeans y Eclipse ambos de libre distribución pero como digo no son los únicos en este curso vamos a centrarnos en Eclipse que es el más utilizado por la comunidad de desarrolladores Java también vamos a necesitar una base de datos y en este curso vamos a utilizar SQL.
-
-Todo lo que vamos a estudiar sería aplicable a cualquier base de datos pero vamos a manejar a utilizar ese SQL por su sencillez y su potencia no solamente sencillos sino también la potencia va a ser muy sencillo crear bases de datos con mayor SQL poblarla inspeccionarlos etc..
-
-Las herramientas para trabajar con mayor SQL en el caso de Windows las encontramos en esta dirección donde Aquí podrás encontrar el motor de base de datos y luego alguna herramienta gráfica como Wordpress que nos facilite la creación y la utilización de dichas bases de datos.
-
-Cuántos sistemas operativos sería esta la dirección y también la web de Maya SQL.
-
-Concretamente en esta dirección podríamos descargarnos en River para manejar la base de datos de conio.
-
-A continuación podéis ver las direcciones que indicábamos antes en la presentación.
-
-Aquí tenemos en primer lugar la dirección de descarga del JDK que sería pulsando este botón que tienes aquí y el proceso de instalación es muy sencillo sería siguiendo todos los pasos hasta el final.
-
-Después nos iríamos a otra dirección para la descarga de Eclipse.
-
-En esta dirección puedes encontrar muchos packs de instalación para descargar e instalar Eclipse.
-
-Yo recomiendo el eclipse de Java developers puesto que es el más completo.
-
-Incluye todo lo necesario para construir aplicaciones web que es donde vamos a utilizar fundamentalmente la persistencia a continuación tenemos la dirección de descarga de mayo se cuele aquí.
-
-Por un lado podríamos descargar el servidor de media SQL de base de datos y el Word que es una herramienta gráfica para manejar la base de datos.
-
-En esta última dirección es donde tendríamos la descarga de el driver de mayo SQL tienes la última versión que sería 5 1 42 sobre la descarga e instalación de malla SQL.
-
-Si tienes algún problema a la hora de descargar estas versiones de servidor Worden yo te voy a proporcionar también un conjunto de archivos bueno por un lado aquí tenemos estos tres archivos que vienen ya te digo te lo voy a proporcionar dentro de lo que es el material adicional viene todo comprimido dentro de un archivo y tendrías estos tres por un lado tenemos el driver.
-
-Vale te lo puedes descargar desde aquí te lo incluido.
-
-Si no quieres descargar y con esto hay que hacer nada simplemente se utilizará cuando se nos vaya pidiendo las lecciones que va a seguir estudiando más adelante a lo largo del curso fundamentalmente para la configuración del motor de persistencia que es el que utiliza el driver para acceder a la base de datos.
-
-Pero ya te digo con esto no hay que hacer nada simplemente lo tienes estos dos archivos corresponden a unos los programas de instalación de malla SQL por un lado teníamos SQL Essential que es para instalar el servidor de base de datos y el Windows que se instala posteriormente y que es una herramienta gráfica para manejar de forma sencilla el motor de base de datos y crear bases de datos de forma gráfica e inspeccionar las configurarlas etc. son un poquito más antiguos de los problemas que tenemos aquí en la página oficial pero bueno son perfectamente válidos para lo que vamos a ver en el curso y de hecho son los que yo voy a utilizar en esta versión de mayo SQL en la que voy a utilizar los ejercicios que voy a seguir viendo a lo largo de todas las lecciones que te voy a ir presentando.
-
-Esto te lo voy a proporcionar como digo dentro material adicional y son también de libre distribución los podrías encontrar en Google escribiendo su nombre directamente en el Google los encontrarías y también los puedes descargar pero en cualquier caso te lo voy a proporcionar.
 
 ## 05 Creación de una capa de persistencia con JPA parte 1 03:47
 
