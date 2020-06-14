@@ -47,6 +47,29 @@ Ya en posteriores lecciones vamos a ir profundizando en cómo se crea la capa de
 
 ## 03 Java persistence API 04:09
 
+<img src="images/3-01.png">
+
+<img src="images/3-02.png">
+
+<img src="images/3-03.png">
+
+<img src="images/3-04.png">
+
+<img src="images/3-05.png">
+
+<img src="images/3-06.png">
+
+<img src="images/3-07.png">
+
+<img src="images/3-08.png">
+
+<img src="images/3-09.png">
+
+<img src="images/3-10.png">
+
+<img src="images/3-11.png">
+
+
 En esta elección vamos a ver los elementos software que necesitamos para poder trabajar con JPA tanto creación de capa de persistencia como su utilización desde las aplicaciones.
 
 Aquí tenemos resumidos los tres bloques de programas que necesitamos en primer lugar el Java Development Kit que es el kit de desarrollo Java.
