@@ -51,23 +51,6 @@ Ya en posteriores lecciones vamos a ir profundizando en cómo se crea la capa de
 
 En esta elección vamos a ver los elementos software que necesitamos para poder trabajar con JPA tanto creación de capa de persistencia como su utilización desde las aplicaciones.
 
-
-
-
-
-
-
-
-
-
-<img src="images/3-08.png">
-
-<img src="images/3-09.png">
-
-<img src="images/3-10.png">
-
-<img src="images/3-11.png">
-
 <img src="images/3-02.png">
 
 Aquí tenemos resumidos los tres bloques de programas que necesitamos, en primer lugar el Java Development Kit que es el kit de desarrollo Java. Cualquier aplicación JPA está basada en Java y por lo tanto vamos a necesitar este paquete básico un entorno de desarrollo que nos facilite la creación de los programas y por supuesto la base de datos con la que vamos a trabajar. Al hablar de persistencia lógicamente estamos necesitamos una base de datos en la que se almacene dicha información además de un Reimer que va a ser el intermediario que utilice las aplicaciones para poder acceder a la base de datos.
@@ -94,27 +77,25 @@ A continuación podéis ver las direcciones que indicábamos antes en la present
 
 Aquí tenemos en primer lugar la dirección de descarga del JDK que sería pulsando este botón que tienes aquí y el proceso de instalación es muy sencillo sería siguiendo todos los pasos hasta el final.
 
-Después nos iríamos a otra dirección para la descarga de Eclipse.
+<img src="images/3-08.png">
 
-En esta dirección puedes encontrar muchos packs de instalación para descargar e instalar Eclipse.
+Después nos iríamos a otra dirección para la descarga de Eclipse. En esta dirección puedes encontrar muchos packs de instalación para descargar e instalar Eclipse. Yo recomiendo el Eclipse de Java developers puesto que es el más completo, incluye todo lo necesario para construir aplicaciones web que es donde vamos a utilizar fundamentalmente la persistencia.
 
-Yo recomiendo el Eclipse de Java developers puesto que es el más completo.
+<img src="images/3-09.png">
 
-Incluye todo lo necesario para construir aplicaciones web que es donde vamos a utilizar fundamentalmente la persistencia a continuación tenemos la dirección de descarga de mayo se cuele aquí.
+A continuación tenemos la dirección de descarga de MySQL, por un lado podríamos descargar el servidor de MySQL de base de datos y el Workbeanch que es una herramienta gráfica para manejar la base de datos.
 
-Por un lado podríamos descargar el servidor de media SQL de base de datos y el Word que es una herramienta gráfica para manejar la base de datos.
+<img src="images/3-10.png">
 
-En esta última dirección es donde tendríamos la descarga de el driver de mayo SQL tienes la última versión que sería 5 1 42 sobre la descarga e instalación de malla SQL.
+En esta última dirección es donde tendríamos la descarga de el driver de MySQL tienes la última versión que sería 5.1.42. Sobre la descarga e instalación de MySQL si tienes algún problema a la hora de descargar estas versiones de servidor, Workbeanch yo te voy a proporcionar también un conjunto de archivos bueno por un lado aquí tenemos estos tres archivos que vienen ya te digo te lo voy a proporcionar dentro de lo que es el material adicional viene todo comprimido dentro de un archivo y tendrías estos tres.
 
-Si tienes algún problema a la hora de descargar estas versiones de servidor Worden yo te voy a proporcionar también un conjunto de archivos bueno por un lado aquí tenemos estos tres archivos que vienen ya te digo te lo voy a proporcionar dentro de lo que es el material adicional viene todo comprimido dentro de un archivo y tendrías estos tres por un lado tenemos el driver.
+<img src="images/3-11.png">
 
-Vale te lo puedes descargar desde aquí te lo incluido.
+Por un lado tenemos el driver, te lo puedes descargar también, pero te lo incluido si no quieres descargar y con esto hay que hacer nada simplemente se utilizará cuando se nos vaya pidiendo las lecciones que va a seguir estudiando más adelante a lo largo del curso, fundamentalmente para la configuración del motor de persistencia que es el que utiliza el driver para acceder a la base de datos, pero ya te digo con esto no hay que hacer nada simplemente lo tienes.
 
-Si no quieres descargar y con esto hay que hacer nada simplemente se utilizará cuando se nos vaya pidiendo las lecciones que va a seguir estudiando más adelante a lo largo del curso fundamentalmente para la configuración del motor de persistencia que es el que utiliza el driver para acceder a la base de datos.
+Los otros dos archivos corresponden a los programas de instalación de MySQL por un lado teníamos SQL Essential que es para instalar el servidor de base de datos y el GUI que se instala posteriormente y que es una herramienta gráfica para manejar de forma sencilla el motor de base de datos y crear bases de datos de forma gráfica e inspeccionar las configurarlas etc. Son un poquito más antiguos de los problemas que tenemos en la página oficial, pero bueno son perfectamente válidos para lo que vamos a ver en el curso y de hecho son los que yo voy a utilizar en esta versión de MySQL, es la que voy a utilizar en los ejercicios que voy a seguir viendo a lo largo de todas las lecciones que te voy a ir presentando.
 
-Pero ya te digo con esto no hay que hacer nada simplemente lo tienes estos dos archivos corresponden a unos los programas de instalación de malla SQL por un lado teníamos SQL Essential que es para instalar el servidor de base de datos y el Windows que se instala posteriormente y que es una herramienta gráfica para manejar de forma sencilla el motor de base de datos y crear bases de datos de forma gráfica e inspeccionar las configurarlas etc. son un poquito más antiguos de los problemas que tenemos aquí en la página oficial pero bueno son perfectamente válidos para lo que vamos a ver en el curso y de hecho son los que yo voy a utilizar en esta versión de mayo SQL en la que voy a utilizar los ejercicios que voy a seguir viendo a lo largo de todas las lecciones que te voy a ir presentando.
-
-Esto te lo voy a proporcionar como digo dentro material adicional y son también de libre distribución los podrías encontrar en Google escribiendo su nombre directamente en el Google los encontrarías y también los puedes descargar pero en cualquier caso te lo voy a proporcionar.
+Esto te lo voy a proporcionar como digo dentro material adicional y son también de libre distribución, los podrías encontrar en Google escribiendo su nombre directamente en Google los encontrarías y también los puedes descargar pero en cualquier caso te lo voy a proporcionar.
 
 ## 04 Instalación del software 05:36
 
