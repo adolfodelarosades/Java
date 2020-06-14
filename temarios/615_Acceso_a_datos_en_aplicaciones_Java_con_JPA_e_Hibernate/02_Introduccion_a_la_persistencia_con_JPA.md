@@ -55,8 +55,6 @@ Ya en posteriores lecciones vamos a ir profundizando en cómo se crea la capa de
 
 <img src="images/3-04.png">
 
-<img src="images/3-05.png">
-
 <img src="images/3-06.png">
 
 <img src="images/3-07.png">
