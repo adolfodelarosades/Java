@@ -11,15 +11,9 @@
 
 <img src="images/2-01.png">
 
-<img src="images/2-02.png">
-
-<img src="images/2-03.png">
-
-<img src="images/2-04.png">
-
-<img src="images/2-05.png">
-
 En esta primera lección del curso de persistencia con JPA voy a explicarte lo que es una capa de persistencia y qué beneficios nos va a aportar en la creación de aplicaciones.
+
+<img src="images/2-02.png">
 
 En primer lugar nos preguntamos qué es exactamente una capa de persistencia pues es una capa que aparecería entre lo que es la lógica de negocio de una aplicación la lógica aplicación.
 
@@ -29,15 +23,21 @@ La idea es que a través de la capa de persistencia los datos de la base de dato
 
 El mundo de las tablas con sus filas y columnas sino que directamente los datos se han expuesto como objetos y pueda hacer las operaciones de manipulación de datos contra objetos no contra lo que sería la base de datos relacional.
 
+<img src="images/2-03.png">
+
 El principal componente de una capa de persistencia es la entidad esos objetos que se exponen en la capa de persistencia y que realmente representan como ver la imagen fila de una tabla de la base de datos.
 
 Se les conoce como entidades a la hora de definirlos lo definiremos mediante clases tipo Java Bean estándares es decir con sus atributos para almacenar cada uno de las columnas de la fila que representan en esa tabla y con sus métodos se Brighter para poder acceder a ellos.
 
 Entonces las operaciones sobre la capa de persistencia que realizará la lógica de negocio consistirá no en mandar instrucciones SQL la base de datos sino en crear objetos entidades, modificar entidades, eliminar entidades, recuperar entidades, siempre trabajando con este tipo de objetos para trabajar con una capa de persistencia.
 
+<img src="images/2-04.png">
+
 Existen los llamados Frentes de persistencia que no son más que utilidades creadas por terceros que nos facilitan tanto la creación de la capa de persistencia como su posterior manipulación desde una lógica de negocio en una aplicación entre los Frameworks de persistencia más populares.
 
 Tenemos por ejemplo Hibernate e iBatis y el que nos ocupa en este curso que es JPA y que como vamos a ver más adelante pues no es exactamente un Frameworks sino más bien una especificación y qué nos ofrece esos Frameworks de persistencia en primer lugar nos van a ofrecer pues un motor de persistencia que es un software ya creado.
+
+<img src="images/2-05.png">
 
 Las librerías Java que se encargan de todo lo que es lo que llamamos el mapeo ORM es decir estos datos realmente representan con filas reales de una tabla una base de datos quien se encarga de sincronizar esto, El motor de persistencia.
 
