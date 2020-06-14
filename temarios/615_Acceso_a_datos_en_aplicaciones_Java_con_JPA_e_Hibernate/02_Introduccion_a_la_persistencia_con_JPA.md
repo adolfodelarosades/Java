@@ -264,7 +264,6 @@ Aquí en Shur vemos cómo quedaría la lista de propiedades cada propiedad con s
 Autoevaluación I
 
 1. Una capa de persistencia:
-
 * Requiere del uso de JDBC para acceder a los datos
 * Expone los registros de la base de datos en forma de objetos
 * Requiere el uso de un navegador compatible
@@ -272,28 +271,24 @@ Autoevaluación I
  
 
 2. Indica cuál de las siguientes tecnologías corresponde a un framework de persistencia
-
 * EJB
 * JSF
 * Hibernate
 * Spring
 
 3. Una entidad es
-
 * Un API de persistencia
 * Un archivo de configuración XML
 * Un framework de persistencia
 * Una clase
 
 4. ¿Dónde se configuran los datos de conexión a la base de datos en JPA?
-
 * A través de anotaciones
 * En el archivo de configuración persistence.xml
 * A través del API JPA
 * En ficheros de texto .cfg
 
 5. La anotación `@Id` de JPA se utiliza para
-
 * Indicar la primary key de una entidad
 * Indicar que la clase es una entidad
 * Indicar la tabla a la que se asocia una entidad
