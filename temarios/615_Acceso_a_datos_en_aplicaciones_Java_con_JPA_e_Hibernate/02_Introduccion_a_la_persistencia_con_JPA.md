@@ -49,15 +49,16 @@ Ya en posteriores lecciones vamos a ir profundizando en cómo se crea la capa de
 
 <img src="images/3-01.png">
 
-<img src="images/3-02.png">
+En esta elección vamos a ver los elementos software que necesitamos para poder trabajar con JPA tanto creación de capa de persistencia como su utilización desde las aplicaciones.
 
-<img src="images/3-03.png">
 
-<img src="images/3-04.png">
 
-<img src="images/3-06.png">
 
-<img src="images/3-07.png">
+
+
+
+
+
 
 <img src="images/3-08.png">
 
@@ -67,28 +68,27 @@ Ya en posteriores lecciones vamos a ir profundizando en cómo se crea la capa de
 
 <img src="images/3-11.png">
 
+<img src="images/3-02.png">
 
-En esta elección vamos a ver los elementos software que necesitamos para poder trabajar con JPA tanto creación de capa de persistencia como su utilización desde las aplicaciones.
+Aquí tenemos resumidos los tres bloques de programas que necesitamos, en primer lugar el Java Development Kit que es el kit de desarrollo Java. Cualquier aplicación JPA está basada en Java y por lo tanto vamos a necesitar este paquete básico un entorno de desarrollo que nos facilite la creación de los programas y por supuesto la base de datos con la que vamos a trabajar. Al hablar de persistencia lógicamente estamos necesitamos una base de datos en la que se almacene dicha información además de un Reimer que va a ser el intermediario que utilice las aplicaciones para poder acceder a la base de datos.
 
-Aquí tenemos resumidos los tres bloques de programas que necesitamos en primer lugar el Java Development Kit que es el kit de desarrollo Java.
+<img src="images/3-03.png">
 
-Cualquier aplicación JPA está basada en Java y por lo tanto vamos a necesitar este paquete básico un entorno de desarrollo que nos facilite la creación de los programas y por supuesto la base de datos con la que vamos a trabajar.
+Java Development Kit, como decíamos JDK es el kit básico que nos proporciona Oracle para trabajar con Java y además de la máquina virtual Java, incluye la librería Java estándar, por supuesto herramientas para compilar y ejecutar programas que se usan desde la línea de comandos, pero para eso utilizaremos después de instalar el JDK un entorno de desarrollo que facilitará el uso de estas herramientas y no tengamos que bajar la línea de comandos para manejarlas. En esta dirección vamos a poder descargar el JDK última versión. 
 
-Al hablar de persistencia lógicamente estamos necesitamos una base de datos en la que se almacene dicha información además de un Reimer que va a ser el intermediario que utilice las aplicaciones para poder acceder a la base de datos Java Development Kit.
+<img src="images/3-04.png">
 
-Como decíamos JDK es el kit básico que nos proporciona Oracle para trabajar con Java y además de la máquina virtual Java incluye la librería Java estándar por supuesto y herramientas para compilar y ejecución y ejecutar programas que se usan desde la línea de comandos pero para eso utilizaremos dos después de instalar esto un entorno de desarrollo que facilitará el uso de estas herramientas y no tengamos que bajar la línea de comandos para manejarlas.
+Como decía con el JDK tenemos la base pero no lo vamos a manejar directamente nosotros, necesitamos un entorno de desarrollo que lo maneje por nosotros y nos facilite la tarea de creación de los programas compilación pruebas entre los más utilizados tenemos NetBeans y Eclipse ambos de libre distribución, pero como digo no son los únicos, en este curso vamos a centrarnos en Eclipse que es el más utilizado por la comunidad de desarrolladores Java.
 
-En esta dirección vamos a poder descargar el JDK última versión como decía el JDK tenemos la base pero no lo vamos a manejar directamente nosotros necesitamos un entorno de desarrollo que lo maneje por nosotros y nos facilite la tarea de creación de los programas compilación pruebas entre los más utilizados.
+<img src="images/3-06.png">
 
-Tenemos NetBeans y Eclipse ambos de libre distribución pero como digo no son los únicos en este curso vamos a centrarnos en Eclipse que es el más utilizado por la comunidad de desarrolladores Java también vamos a necesitar una base de datos y en este curso vamos a utilizar SQL.
+También vamos a necesitar una base de datos y en este curso vamos a utilizar MySQL. Todo lo que vamos a estudiar sería aplicable a cualquier base de datos, pero vamos a utilizar MySQL por su sencillez y su potencia, no solamente sencillos sino también la potencia, va a ser muy sencillo crear bases de datos con MySQL, poblarlas, inspeccionarlas, etc..
 
-Todo lo que vamos a estudiar sería aplicable a cualquier base de datos pero vamos a manejar a utilizar ese SQL por su sencillez y su potencia no solamente sencillos sino también la potencia va a ser muy sencillo crear bases de datos con mayor SQL poblarla inspeccionarlos etc..
+Las herramientas para trabajar con mayor SQL en el caso de Windows las encontramos en esta dirección donde podrás encontrar el motor de base de datos y luego alguna herramienta gráfica como Workbeanch que nos facilite la creación y la utilización de dichas bases de datos.
 
-Las herramientas para trabajar con mayor SQL en el caso de Windows las encontramos en esta dirección donde Aquí podrás encontrar el motor de base de datos y luego alguna herramienta gráfica como Wordpress que nos facilite la creación y la utilización de dichas bases de datos.
+Para otros sistemas operativos esta la dirección y también la web de MySQL concretamente en esta dirección podríamos descargarnos el Driver para manejar la base de datos en el código.
 
-Cuántos sistemas operativos sería esta la dirección y también la web de Maya SQL.
-
-Concretamente en esta dirección podríamos descargarnos en River para manejar la base de datos de conio.
+<img src="images/3-07.png">
 
 A continuación podéis ver las direcciones que indicábamos antes en la presentación.
 
