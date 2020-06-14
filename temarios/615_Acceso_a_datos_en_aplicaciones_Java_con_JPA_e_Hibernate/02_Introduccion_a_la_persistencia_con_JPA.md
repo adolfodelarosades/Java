@@ -134,47 +134,47 @@ Esto te lo voy a proporcionar como digo dentro material adicional y son también
 
 <img src="images/5-01.png">
 
+En esta lección vamos a crear nuestra primera capa de persistencia con JPA y vamos a indicar el proceso que tenemos que seguir para ello.
+
 <img src="images/5-02.png">
 
+Básicamente son dos pasos que tendremos que hacer para crear una capa de persistencia:
+
+1. Es crear y configurar las entidades, esa configuración se realiza a través de unas anotaciones que ahora comentaremos.
+
+2. Y en segundo lugar configurar el archivo `persistence.xml`, en el que se debe indicar dentro de la Unidad de persistencia correspondiente:
+
+   * Qué proveedor de persistencia vamos a utilizar, un motor de persistencia.
+   * La lista de entidades que van a formar parte de esa unidad de persistencia 
+   * Y por supuesto las propiedades de conexión a la base de datos que necesitará dicho proveedor.
+   
 <img src="images/5-03.png">
+
+La base de datos con la que vamos a trabajar es una base datos MySQL.
+La base de datos se llamara `agenda` la tabla sobre la que vamos a trabajar se llama `contactos`.
+
+Uno de los archivos adicionales de contenido material adicional te explica el proceso para instalar MySQL y para crear esta base de datos con la que vamos a trabajar ahora.
+
+La tabla tiene cuatro campos:
+
+* `idContacto` Integer Auto Unsigned
+* `nombre` Varchar(45)
+* `email` Varchar(45)
+* `telefono` Integer Unsigned
 
 <img src="images/5-04.png">
 
+Una vez que lleguemos al primer paso, creación de la entidad, la entidad como tal va a ser una clase tipo Java Bean como las que podemos utilizar para encapsular cualquier conjunto de datos en Java, tendrá sus atributos que corresponderán con los diferentes campos de las columnas de la base de datos cuya información va a almacenar. Recordemos que la entidad los objetos de la entidad, lo que van a almacenar es el contenido de una fila básicamente. Los métodos setter y getter para acceder a dichos campos. Encontraremos unas anotaciones a nivel de clase y a nivel de atributo, que indicarán cierta información al motor de persistencia relativo a esta entidad.
+
 <img src="images/5-05.png">
+
+Entre las más interesantes, las más importantes por ejemplo `@Entity` indicará que se trata de una clase de Entidad, esta anotación se utiliza delante de la clase `@Table`  que mapea la entidad con la tabla de la base datos a la que va asociada. Y ya a nivel de atributo por ejemplo, `@Id` que va delante del atributo que hace de clave primaria, toda entidad tiene que tener una clave primaria que le permita al motor de persistencia identificar cada objeto de la capa de persistencia, de la unidad de persistencia e identificar en este caso unos contactos de otros a través del atributo `idContacto` y `@GeneratedValue` que es la estrategia de generación de esta clave primaria, en este caso se trata de un campo identidad autogenerados.
+
+Una anotación que no aparece en el ejemplo, en este listado es `@Column` que sería una anotación que habría que indicar delante de cada columna, de cada atributo, para indicar el nombre de la columna de la base de datos con la que está asociada, obviamente de la tabla contactos, como los atributos coinciden con los nombres de las columnas no es necesario utilizarlos sino coincidieran habría que utilizar la anotación `@Column` delante de cada atributo para indicar exactamente a qué columna está asociado dicho atributo.
 
 <img src="images/5-06.png">
 
-En esta elección vamos a crear nuestra primera capa de persistencia con JPA y vamos a indicar el proceso que tenemos que seguir para ello básicamente son dos pasos que tendremos que hacer para crear una capa de persistencia es crear y configurar las entidades que configurarán esa configuración se realiza a través de unas anotaciones que ahora comentaremos.
-
-Y en segundo lugar configurar el archivo persisten XML en el que se debe indicar que dentro de la Unidad de persistencia correspondiente qué proveedor de persistencia vamos a utilizar un motor de persistencia.
-
-La lista de entidades que van a formar parte de esa unidad de persistencia y por supuesto las propiedades de conexión a la base de datos que necesitará dicho proveedor la base de datos con la que vamos a trabajar es una base datos que se suele llamar a contacto base datos como nombre agenda la tabla sobre la que vamos a trabajar los contactos en la lección anterior.
-
-Uno de los archivos adicionales de contenido material adicional te explica el proceso para instalar y SQL precisamente para crear esta base de datos con la que vamos a trabajar ahora.
-
-Tener la tabla cuatro campos identificador numérico nombre contacto email y teléfono.
-
-Una vez que lleguemos al primer paso creación de la entidad la entidad como tal va a ser una clase tipo Java Bean como las que podemos utilizar para encapsular cualquier conjunto de datos en Java tendrá sus atributos que corresponderán con los diferentes campos de las columnas de la base de datos cuya información va a almacenar.
-
-Recordemos que la entidad los objetos de la entidad lo que van a almacenar es el contenido de una fila.
-
-Básicamente los métodos para acceder a dichos campos encontraremos efectivamente unas anotaciones a nivel de clase y a nivel de atributo que indicarán cierta información al motor de persistencia relativo a esta entidad.
-
-Entre las más interesantes las más importantes por ejemplo arroba Entity indicará que se trata de una clase identidad.
-
-Esta notación se utiliza durante la clase arroba table que mapea la entidad con la tabla de la base datos a la que va asociada y ya a nivel de atributo.
-
-Por ejemplo arroba IDE que va delante del atributo que hace de clave primaria Toda entidad tiene que tener una clave primaria que le permita al motor de persistencia identificar cada objeto de la capa de persistencia de la Unidad de persistencia e identificar en este caso unos contactos de otros a través de este atributo y arroba generate value que es la estrategia de generación de esta clave primaria.
-
-En este caso se trata de un campo identidad autogenerados una notación que no aparece en el ejemplo este listado es arroba Colom que sería una notación que habría que indicar delante de cada columna de cada atributo para indicar el nombre de la columna de la base de datos con la que está asociada.
-
-Obviamente la tabla contactos como los atributos coinciden con los nombres de las columnas no es necesario utilizarlos y no coincidieran y habría que utilizar la notación arroba Column delante de cada atributo para indicar exactamente a qué columna está asociado.
-
-Dicho atributo persiste en XML pues al final deberán quedar segunda parte del proceso.
-
-Algo parecido a esto donde indicaremos la unidad de persistencia de persistencia dentro de ella.
-
-El proveedor que se va a utilizar la clase de la lista de clase de entidades y como ver las propiedades de conexión a la base de datos.
+`persistence.xml` al final deberán quedar, segunda parte del proceso, algo parecido a la imagen, donde indicaremos la unidad de persistencia, dentro de ella el proveedor que se va a utilizar, la clase de la lista de clase de entidades y como vemos las propiedades de conexión a la base de datos.
 
 Vamos a ver cómo generar todo esto con un ejemplo concreto.
 
