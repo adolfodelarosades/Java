@@ -180,6 +180,45 @@ Vamos a ver cómo generar todo esto con un ejemplo concreto.
 
 ## 06 Creación de una capa de persistencia con JPA parte 2 10:14
 
+
+<img src="images/6-01.png">
+
+<img src="images/6-02.png">
+
+<img src="images/6-03.png">
+
+<img src="images/6-04.png">
+
+<img src="images/6-05.png">
+
+<img src="images/6-06.png">
+
+<img src="images/6-07.png">
+
+<img src="images/6-08.png">
+
+<img src="images/6-09.png">
+
+<img src="images/6-10.png">
+
+<img src="images/6-11.png">
+
+<img src="images/6-12.png">
+
+<img src="images/6-13.png">
+
+<img src="images/6-14.png">
+
+<img src="images/6-15.png">
+
+<img src="images/6-16.png">
+
+<img src="images/6-17.png">
+
+<img src="images/6-18.png">
+
+<img src="images/6-19.png">
+
 El ejercicio que vamos a desarrollar será una aplicación de consola donde vamos a crear una capa de persistencia para posteriormente en la siguiente elección empezar a utilizar la API JPA para acceder a ella.
 
 Para ello vamos a utilizar el entorno de desarrollo Eclipse que instalamos en la elección anterior y nos vamos a situar dentro de la perspectiva Java si aparece otra perspectiva por defecto atrás de este botoncito elegiremos la perspectiva Java que es la más adecuada para este tipo de proyecto.
