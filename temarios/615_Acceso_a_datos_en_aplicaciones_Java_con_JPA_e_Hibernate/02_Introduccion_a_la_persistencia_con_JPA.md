@@ -15,39 +15,35 @@ En esta primera lección del curso de persistencia con JPA voy a explicarte lo q
 
 <img src="images/2-02.png">
 
-En primer lugar nos preguntamos qué es exactamente una capa de persistencia pues es una capa que aparecería entre lo que es la lógica de negocio de una aplicación la lógica aplicación.
+En primer lugar nos preguntamos qué es exactamente una capa de persistencia pues es una capa que aparecería entre lo que es la lógica de negocio de una aplicación, la lógica aplicación, las instrucciones de acceso a datos etcétera y la propia base de datos.
 
-Las instrucciones de acceso a datos etcétera y la propia base de datos.
-
-La idea es que a través de la capa de persistencia los datos de la base de datos las filas columnas las tablas en definitiva se expongan a la aplicación en forma de objetos de manera que el programador cuando quiera programar instrucciones para acceder a datos no tenga que cambiar de mentalidad y pasar del mundo de los objetos al mundo relacional.
-
-El mundo de las tablas con sus filas y columnas sino que directamente los datos se han expuesto como objetos y pueda hacer las operaciones de manipulación de datos contra objetos no contra lo que sería la base de datos relacional.
+La idea es que a través de la capa de persistencia los datos de la base de datos, las filas, columnas, las tablas en definitiva se expongan a la aplicación en forma de objetos de manera que el programador cuando quiera programar instrucciones para acceder a datos no tenga que cambiar de mentalidad y pasar del mundo de los objetos al mundo relacional. Al mundo de las tablas con sus filas y columnas sino que directamente los datos se han expuesto como objetos y pueda hacer las operaciones de manipulación de datos contra objetos no contra lo que sería la base de datos relacional.
 
 <img src="images/2-03.png">
 
-El principal componente de una capa de persistencia es la entidad esos objetos que se exponen en la capa de persistencia y que realmente representan como ver la imagen fila de una tabla de la base de datos.
+El principal componente de una capa de persistencia es la *Entidad* esos objetos que se exponen en la capa de persistencia y que realmente representan como se ve en la imagen, filas de una tabla de la base de datos, se les conoce como entidades, a la hora de definirlos los definiremos mediante clases tipo Java Bean estándares, es decir con sus atributos para almacenar cada una de las columnas de la fila que representan en esa tabla y con sus métodos setter y getter para poder acceder a ellos.
 
-Se les conoce como entidades a la hora de definirlos lo definiremos mediante clases tipo Java Bean estándares es decir con sus atributos para almacenar cada uno de las columnas de la fila que representan en esa tabla y con sus métodos se Brighter para poder acceder a ellos.
-
-Entonces las operaciones sobre la capa de persistencia que realizará la lógica de negocio consistirá no en mandar instrucciones SQL la base de datos sino en crear objetos entidades, modificar entidades, eliminar entidades, recuperar entidades, siempre trabajando con este tipo de objetos para trabajar con una capa de persistencia.
+Entonces las operaciones sobre la capa de persistencia que realizará la lógica de negocio consistirá no en mandar instrucciones SQL la base de datos, sino en crear objetos entidades, modificar entidades, eliminar entidades, recuperar entidades, siempre trabajando con este tipo de objetos. 
 
 <img src="images/2-04.png">
 
-Existen los llamados Frentes de persistencia que no son más que utilidades creadas por terceros que nos facilitan tanto la creación de la capa de persistencia como su posterior manipulación desde una lógica de negocio en una aplicación entre los Frameworks de persistencia más populares.
+Para trabajar con una capa de persistencia existen los llamados Frameworks de Persistencia, que no son más que utilidades creadas por terceros que nos facilitan tanto la creación de la capa de persistencia, como su posterior manipulación desde una lógica de negocio en una aplicación. 
 
-Tenemos por ejemplo Hibernate e iBatis y el que nos ocupa en este curso que es JPA y que como vamos a ver más adelante pues no es exactamente un Frameworks sino más bien una especificación y qué nos ofrece esos Frameworks de persistencia en primer lugar nos van a ofrecer pues un motor de persistencia que es un software ya creado.
+Entre los Frameworks de persistencia más populares tenemos por ejemplo Hibernate e IBatis y el que nos ocupa en este curso que es JPA y que como vamos a ver más adelante pues no es exactamente un Frameworks sino más bien una especificación. 
+
+Y qué nos ofrece esos Frameworks de persistencia en primer lugar nos van a ofrecer pues un motor de persistencia que es un software ya creado, de librerías Java que se encargan de todo lo que es lo que llamamos el mapeo ORM, es decir los datos en las entidades realmente representan filas reales de una tabla una base de datos, quien se encarga de sincronizar esto, el motor de persistencia. Cuando nosotros añadamos o modifiquemos entidades esas instrucciones se reflejarán en la base de datos a través del motor de persistencia que se encargará de todas las operaciones JDBC contra dicha tabla de la base de datos.
+
+Además se nos proporciona un sistema de configuración para indicarle al motor de persistencia cómo tiene que trabajar y eso ya depende de cada tipo de Frameworks si es basado en XML, en anotaciones y por supuesto un API es decir el modelo, la lógica de negocio ya no va a utilizar JDBC para acceder a la base de datos porque no va a acceder directamente a la base de datos, va a acceder a la capa de persistencia y eso implica utilizar un conjunto de clases e interfaces específicos para manipular esas entidades y que como ya verás a lo largo del curso mucho más sencillo que el clásico JDBC con sus instrucciones SQL.
 
 <img src="images/2-05.png">
 
-Las librerías Java que se encargan de todo lo que es lo que llamamos el mapeo ORM es decir estos datos realmente representan con filas reales de una tabla una base de datos quien se encarga de sincronizar esto, El motor de persistencia.
+En nuestro caso este curso lo vamos a centrar en JPA Java Persistence API, que es una especificación de Java EE para la configuración y gestión de una capa de persistencia.
 
-Cuando nosotros añadamos o modifiquemos entidades esas instrucciones se reflejarán en la base de datos a través del motor de persistencia que se encargará de todas las operaciones JDBC contra dicha tabla de la base de datos.
+La idea es que a diferencia de otros Framework que son muy específicos es decir por ejemplo Hibernate pues todo lo que proporciona es para trabajar con Hibernate, pues JPA pretende ser universal es decir pretende ser compatible con otros Framework existentes de manera que por ejemplo, nosotros podríamos tener un motor Hibernate o motor iBatis y trabajar con el mismo API el mismo API JPA cuya idea es que sea compatible con los diferentes Framework de persistencia existentes.
 
-Además se nos proporciona un sistema de configuración para indicarle al motor de persistencia cómo tiene que trabajar y eso ya depende de cada tipo de Frameworks si es basado en XML en anotaciones y por supuesto un API es decir el modelo la lógica de negocio ya no va a utilizar JDBC para acceder a la base de datos porque no va a acceder directamente a la base de datos va a acceder a la capa de persistencia y eso implica utilizar un conjunto de clases e interfaces específicos para manipular esas entidades y que como ya verás a lo largo del curso mucho más sencillo que el clásico JDBC con sus instrucciones SQL en nuestro caso este curso lo vamos a centrar en JPA Java persistan API que es una especificación de Java para la configuración y gestión de una capa de persistencia.
+Es un API estandarizado ya digo forma parte de Java Enterprise Edition y nos va a proporcionar ese acceso estandarizado a la capa de persistencia independientemente del motor que nosotros queramos utilizar después.
 
-La idea es que a diferencia de otros Framework que son muy específicos es decir por ejemplo Hibernate pues todo lo que proporciona es para trabajar con Hibernate pues JPA pretende ser universal es decir pretende ser compatible con otros Framework existentes de manera que por ejemplo nosotros podríamos tener un motor Hibernate o motor iBatis y trabajar con el mismo API el mismo API JPA cuya idea es que sea compatible con los diferentes Framework de persistencia existentes.
-
-Es una pista vandalizado que ya digo forma parte de Java Enterprise Edition y nos va a proporcionar ese acceso estandarizado a la capa de persistencia independientemente del motor que nosotros queramos utilizar después ya posterior elecciones vamos a ir profundizando en cómo se crea la capa de persistencia y cómo utilizar este API dentro de nuestras aplicaciones.
+Ya en posteriores lecciones vamos a ir profundizando en cómo se crea la capa de persistencia y cómo utilizar este API dentro de nuestras aplicaciones.
 
 ## 03 Java persistence API 04:09
 
