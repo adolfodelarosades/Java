@@ -22,7 +22,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 
 * 01 Presentación del curso 03:07
 
-#### 2. Introducción a la persistencia con JPA 29:16
+#### 2. [Introducción a la persistencia con JPA](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/02_Introduccion_a_la_persistencia_con_JPA.md) 29:16
 
 * 02 Introducción a la persistencia 04:49
 * 03 Java persistence API 04:09
