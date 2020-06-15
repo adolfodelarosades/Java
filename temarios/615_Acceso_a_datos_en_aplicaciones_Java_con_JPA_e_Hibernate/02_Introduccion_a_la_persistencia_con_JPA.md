@@ -480,6 +480,8 @@ Esto es la capa de persistencia, a partir de ahí ya podríamos empezar a utiliz
 
 ### :computer: Código Completo - 615-01_ejemplo_jpa
 
+<img src="images/6-47.png">
+
 <img src="images/6-46.png">
 
 *`persistence.xml`*
@@ -565,8 +567,6 @@ public class Contacto implements Serializable {
 
 }
 ```
-
-<img src="images/6-47.png">
 
 ## Autoevaluación I 00:41
 
