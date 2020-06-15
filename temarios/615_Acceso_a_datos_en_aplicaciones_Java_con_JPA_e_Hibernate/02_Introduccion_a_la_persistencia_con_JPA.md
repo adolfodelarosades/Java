@@ -232,32 +232,29 @@ El paso siguiente aceptaríamos la licencia
 
 <img src="images/6-13.png">
 
-y procedería a descargar dicha librería que ya la tendríamos disponible para el resto del proyecto en el workspace, una vez que ya la tengamos descargada.
+y procedería a descargar dicha librería que ya la tendríamos disponible para el resto del proyecto en el workspace, una vez que ya la tengamos descargada pulsamos OK.
 
 <img src="images/6-14.png">
 
+Aquí también pulsamos OK. 
+
 <img src="images/6-15.png">
+
+y como veremos en la lista de librerías aquí la tenemos. 
 
 <img src="images/6-16.png">
 
+EclipseLink todas las librerías del motor de persistencia Eclipse.
+
 <img src="images/6-17.png">
+
+Además ya se ha creado también, lo podemos ver aquí el archivo `persistence.xml`
 
 <img src="images/6-18.png">
 
 <img src="images/6-19.png">
 
-
-
-
-
-
-Pulsamos okay aquí también pulsamos OK y como veremos en la lista de librerías aquí la tenemos Eclipso
-
-Linh todas las librerías del motor de persistencia Eclipse.
-
-Vale bien pues además ya se ha creado también lo podemos ver a quienes se aprece en metáis.
-
-El archivo persiste en XML pero bueno esto simplemente es una plantilla está preparado para empezar el proceso de creación de las entidades y en segundo lugar la creación del archivo XML porque ya está creado pero si su configuración.
+Esto simplemente es una plantilla, está preparado para empezar el proceso de creación de las entidades y en segundo lugar la creación del archivo `persistence.xml` que ya está creado, pero si su configuración.
 
 Vamos con la creación de las entidades con el botón derecho nos vamos a la acción JPA Tools generar entidades desde tablas aquí nos aparecerá una lista de posibles conexiones con base datos ya creadas por este asistente.
 
