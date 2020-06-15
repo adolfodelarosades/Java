@@ -136,161 +136,388 @@ tx.begin();
 
 Cómo vemos lo primero que hacemos es iniciar una transacción a través del `EntityTransaction`, `EntityTransaction` también forma parte del `javax.persistence` y dispone de un método `begin()` para iniciar la transacción, aparte por supuesto de los métodos para confirmar y rechazar.
 
-Todas las operaciones CRUD que realicemos ahora de acción, es decir crear, actualizar y eliminar una entidad en el momento que se confirmen quedarán reflejadas en la base de datos.
+Todas las operaciones CRUD que realicemos ahora de acción, es decir crear, actualizar y eliminar una entidad, en el momento que se confirmen quedarán reflejadas en la base de datos, pero si no hacemos un commit esas operaciones no quedarán en ningún 
+sitio.
 
+Vamos a persistir una entidad, creamos un objeto contacto, el asistente de Eclipse que utilizamos para crear las entidades, nos creo las entidades con el constructor sin parámetros, podríamos haber incluido nosotros un constructor explícito con parámetros que permitieran inicializar todos los atributos, pero bueno no está, nada, podemos llamar a los métodos set para inicializar los valores.
 
-si no hacemos un cómic esas operaciones no quedarán en ningún
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
 
-sitio entonces vamos a crear vamos a hacer nuestra momento una persistencia de objeto vamos a crear
+//Inicio de una transacción
+EntityTransaction tx = em.getTransaction();
+tx.begin();
 
-una entidad cualquier comentario al existir una entidad vamos a crear un objeto contacto
+//Crear una entidad
+Contacto c = new Contacto();
+c.setNombre("Contacto de prueba");
+c.setEmail("prueba@contacto.com");
+c.setTelefono(678999888);
+```
 
-el asistente de Eclipse que creaba que utilizamos para crear las entidades nos crearon las entidades
+A partir de ahí ya tenemos un contacto creado, lo persistimos, para ello usamos el método `em.persist(c);` el que comentamos en la lección anterior, con esto quedaría persistido a la espera de que confirmamos la transacción, que lo haremos al final cuando hayamos hecho ya todas las operaciones.
 
-con el constructor sin parámetros podríamos haber incluido nosotros un constructor explícito con parámetros
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
 
-que permitieran inicializar todos los atributos pero bueno no está nada llamando a los métodos Shep.
+//Inicio de una transacción
+EntityTransaction tx = em.getTransaction();
+tx.begin();
 
-Por ejemplo si el nombre.
+//Crear una entidad
+Contacto c = new Contacto();
+c.setNombre("Contacto de prueba");
+c.setEmail("prueba@contacto.com");
+c.setTelefono(678999888);
+		
+//Persistir una entidad
+em.persist(c);
+```
 
-Aquí vamos a poner contacto de prueba
+Que vamos a hacer ahora, vamos a actualizar una entidad, por ejemplo tenemos aquí los datos.
 
-Sethi mail
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
 
-la arroba porque tampoco quiero que utilicemos uno que gasistas nos vamos a poner un email nuevo por
+//Inicio de una transacción
+EntityTransaction tx = em.getTransaction();
+tx.begin();
 
-un pacto punto com por ejemplo vale
+//Crear una entidad
+Contacto c = new Contacto();
+c.setNombre("Contacto de prueba");
+c.setEmail("prueba@contacto.com");
+c.setTelefono(678999888);
+		
+//Persistir una entidad
+em.persist(c);
 
-y por último le vamos a dar un teléfono
+//Recuperación y modificación de un contacto
+c = em.find(Contacto.class, 19);
+c.setEmail("modificado");
+em.merge(c);
+```
 
-va perfecto y a partir de ahí ya tenemos contacto creado lo persistimos para ello Identity Manager disponer
+Reutilizamos la misma variable de contacto `c` y lo que hacemos en este caso es llamar a uno de los segundos métodos documentamos del `EntityManager`, `find` para localizar una entidad, cómo funciona `find`, le proporcionas el tipo de la clase objeto, `Contacto.class` lo que queremos nosotros un Contacto y la Primary Key que queremos localizar. Efectivamente debe haber un contacto con el valor de Primary Key que estamos proporcionando.
 
-el método pero si os comentamos en la lección anterior con esto que habría persistido a la espera de
+<img src="images/8-04.png">
 
-que confirmamos la transacción que lo haremos al final cuando hayamos hecho ya todas las operaciones
+Después le modificamos el email y hacemos un `merge` con lo cual esto haría que se modificase dicho email en la base de datos y quedaría cambiado, éste email aparecería con el valor de `modificado` una vez que se confirme la transacción.
 
-que vamos a hacer ahora lo vamos a actualizar una entidad por ejemplo tenemos aquí los datos.
+Vamos ahora a eliminar una entidad, recuperamos la entidad y llamaríamos al método `remove`
 
-Vamos a ver Operación y modificación de la entidad vamos a coger reutilizamos la misma posible contacto
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
 
-y lo que hacemos en este caso es llamar a uno de los segundos métodos documentamos del Entity manager
+//Inicio de una transacción
+EntityTransaction tx = em.getTransaction();
+tx.begin();
 
-Find para localizar una entidad.
+//Crear una entidad
+Contacto c = new Contacto();
+c.setNombre("Contacto de prueba");
+c.setEmail("prueba@contacto.com");
+c.setTelefono(678999888);
+		
+//Persistir una entidad
+em.persist(c);
 
-Cómo funciona.
+//Recuperación y modificación de un contacto
+c = em.find(Contacto.class, 19);
+c.setEmail("modificado");
+em.merge(c);
 
-Le proporcionas el tipo la clase objeto clase contacto lo que queremos nosotros y la prima que quieren
+//Eliminación de un contacto
+c = em.find(Contacto.class, 33);
+em.remove(c);
+```
 
-localizar.
+para eliminar un contacto volvemos a hacer una búsqueda y le vamos a proporcionar un identificador de un Primary Key que ya existe, por ejemplo yo tengo el 33, vamos a eliminar este usuario, bien proporcionamos la Primary Key y una vez que lo hemos obtenido, un remove, es así de simple.
 
-Efectivamente hay un contacto con un valor unos días de prueba.
-
-Pues la modificamos el email y hacemos números con lo cual esto haría que se modificase dicho e-mail
-
-en la base de datos y quedaría cambiado éste aparecería modificado una vez que se confirme la transacción.
-
-Vamos ahora a eliminar una entidad recuperamos la entidad y llamaríamos al método Ramu
-
-para eliminar un contacto o volvemos a hacer una búsqueda y le vamos a proporcionar un identificador
-
-de una prima Key que ya existe.
-
-Por ejemplo yo tengo aquí el 17 vamos a eliminar este usuario J.S. bien proporcionamos la primary key
-
-y una vez que lo hemos obtenido un remó es así de simple.
-
-Como es muy sencillo manejar JPA y realizar operaciones contra la capa de persistencia bastante más
-
-que por supuesto con JRC.
+Como ves es muy sencillo manejar JPA y realizar operaciones contra la capa de persistencia bastante más que por supuesto con JDBC.
 
 Ahora ya por fin confirmamos la transacción.
 
-Bueno pues ya lo tenemos
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
 
-pues simplemente sería ejecutarlo y ver los resultados.
+//Inicio de una transacción
+EntityTransaction tx = em.getTransaction();
+tx.begin();
 
-Podríamos haber dicho que nos mandaron un mensajito por aquí vamos a hacerlo si está en punto al punto
+//Crear una entidad
+Contacto c = new Contacto();
+c.setNombre("Contacto de prueba");
+c.setEmail("prueba@contacto.com");
+c.setTelefono(678999888);
+		
+//Persistir una entidad
+em.persist(c);
 
-Proein LNE operaciones realizadas aunque lo comprobaremos lógicamente en la base de datos macro directamente
+//Recuperación y modificación de un contacto
+c = em.find(Contacto.class, 19);
+c.setEmail("modificado");
+em.merge(c);
 
-vamos a ejecutar a la hora de ejecutarlo vamos a hablar ya verás que va a haber un pequeño problema
+//Eliminación de un contacto
+c = em.find(Contacto.class, 33);
+em.remove(c);
 
-ya te lo voy anunciando pero quería que apareciera para que lo viaxes Bueno pues lo típico ejecutas
+//Confirmar transacción
+tx.commit();
+```
 
-el programa y de repente empiezan a aparecer excepciones.
+Bueno pues ya lo tenemos completo.
 
-Error.
+```java
+package principal;
 
-Qué ha pasado.
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
-Bueno no tenemos que alarmarnos esto es muy habitual todos vamos a cometer errores y lo que más veces
+import entidades.Contacto;
 
-nos va a pasar cometer errores durante la ejecución de los programas cuando nos encontramos es todo
+public class Test {
 
-lo que tenemos que hacer siempre sea el programa del tipo que sea.
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+		EntityManager em = factory.createEntityManager();
+		
+		//Inicio de una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		
+		//Crear una entidad
+		Contacto c = new Contacto();
+		c.setNombre("Contacto de prueba");
+		c.setEmail("prueba@contacto.com");
+		c.setTelefono(678999888);
+		
+		//Persistir una entidad
+		em.persist(c);
+		
+		//Recuperación y modificación de un contacto
+		c = em.find(Contacto.class, 19);
+		c.setEmail("modificado");
+		em.merge(c);
+		
+		//Eliminación de un contacto
+		c = em.find(Contacto.class, 33);
+		em.remove(c);
+		
+		//Confirmar transacción
+		tx.commit();
+		
+		System.out.println("Operaciones realizadas");
+	}
 
-Si no es al principio el error o sea todos estos mensajes que empiezan a aparecer aquí de Exception
+}
+```
 
-tal y bueno están volcados de error que se llama Los volcarlos de pila de la excepción pues a partir
+Simplemente sería ejecutarlo y ver los resultados. Vamos a ejecutarlo, a la hora de ejecutarlo vamos a ver que va a haber un pequeño problema ya te lo voy anunciando, pero quería que apareciera para que lo vieras.
 
-de ahí aunque luego se pueden repetir pero normalmente suele ser al principio donde está el mensaje
+<img src="images/8-06.png">
 
-que nos va a indicar qué está pasando y efectivamente aquí al principio ya nos dice que falta o que
+Bueno pues lo típico, ejecutas el programa y de repente empiezan a aparecer excepciones. Error. Qué ha pasado. Bueno no tenemos que alarmarnos, esto es muy habitual, todos vamos a cometer errores y lo que más veces nos va a pasar, cometer errores durante la ejecución de los programas, cuando los encontramos todo lo que tenemos que hacer siempre, sea el programa del tipo que sea, es ir al principio del error o sea todos estos mensajes que empiezan a aparecer aquí de Exception tal y bueno están volcados en la consola, lo que se llama *Los volcarlos de pila de la excepción* pero normalmente suele ser al principio donde está el mensaje que nos va a indicar qué está pasando y efectivamente aquí al principio ya nos dice que falta o que no encuentra el driver de SQL, tened en cuenta que aquí hay un motor de persistencia que se va a encargar de hacer las operaciones contra la base de datos.
 
-no encuentra el driver de SQL tened en cuenta que aquí hay un motor de persistencia que se va a encargar
+Nosotros le hemos dicho en el `persistence.xml` a ese motor de persistencia que la base datos está en esta dirección `jdbc:mysql://localhost:3306/agenda` y que tienen que utilizar este driver `com.mysql.jdbc.Driver`, pero dónde está el driver, no está aquí.
 
-de hacer las operaciones contra la base de datos.
+<img src="images/8-07.png">
 
-Nosotros lo hemos dicho no existen XML a ese motor de persistencia que la base datos está en esta dirección
+nosotros sí lo utilizamos cuando el asistente, para crear la capa de persistencia pero dentro de lo que es el proyecto no está el Driver, hay que añadir la referencia a esa librería para que la pueda utilizar la aplicación y por lo tanto la pueda utilizar el motor de persistencia, no estaríamos en el Classmate de las clases posibles que puede utilizar este proyecto, está el JRE que son precisamente las clases de Java estándar y el EclipseLink que es el motor de persistencia pero aquí tendríamos que añadir el driver.
 
-y que tienen que utilizar este driver pero dónde está el driver no está aquí nosotros sí lo utilizamos
+Como lo hacemos, botón derecho nos vamos a las propiedades del proyecto 
 
-cuando el asistente para crear la capa de persistencia pero dentro de lo que es el proyecto no está
+<img src="images/8-08.png">
 
-el asistente hay que añadir la referencia a esa librería para que la pueda utilizar la aplicación y
+y vamos a Java Build Path 
 
-por lo tanto la puede utilizar el motor de persistencia no estaríamos en el Classmate de las clases
+<img src="images/8-09.png">
 
-posibles que puede utilizar.
+pestaña Libraries
 
-Este proyecto está jre que son precisamente las clases de Java estándar y el eclipse Link es el motor
+<img src="images/8-10.png">
 
-de persistencia pero aquí tendríamos que añadir el driver como lo hacemos.
+ahí aparece como ves las librerías que te comentaba, pero debemos añadir también el JAR correspondiente al Driver de MySQL, pulsamos el botón `Add External JARs...` y lo localizamos donde lo tengamos almacenado, lo tenemos aquí en esta carpeta. 
 
-Botón derecho nos vamos a las propiedades del proyecto y una propiedad que es Java.
+<img src="images/8-11.png">
 
-Path pestañea Library ahí aparece como ves las librerías que te comentaba debemos añadir también el
+Ahí está lo seleccionamos y ya tenemos el Driver.
 
-jar correspondiente a Android de se cuelga pulsamos el botón Añadir externan jar y lo localizamos donde
+<img src="images/8-12.png">
 
-lo tengamos grabado lo tenemos aquí en esta carpeta.
+Ahora ya cuando el proveedor de persistencia vaya a hacer las operaciones contra la base de datos e intente tirar de este Driver y al ver que nosotros lo hemos indicado aquí como está dentro de las librerías reconocidas lo localizara y puede hacer las operaciones.
 
-Ahí está lo seleccionamos y ya tenemos el Braida.
+<img src="images/8-13.png">
 
-Ahora ya cuando el proveedor de persistencia vaya a hacer las operaciones contra la base de datos intente
+Vamos a ejecutarlo como una Java aplicación y ahora ya no ha habido errores y nos dice operaciones realizadas.
 
-tirar de este diario y ver que nosotros lo hemos indicado aquí como está dentro de las librerías reconocidas
+<img src="images/8-14.png">
 
-por los localizara y puedan hacer las operaciones.
+Pero vamos a comprobarlo recordemos que nuestra base de datos tenia los siguientes valores:
 
-Vamos a ejecutarlo.
+<img src="images/8-06.png">
 
-Java aplicación y ahora ya no ha habido errores y nos dice operaciones realizadas pero vamos a comprobarlo
+Nos vamos a la base de datos refrescamos y ahora tenemos lo siguiente:
 
-nos vamos a la base de datos refrescamos y efectivamente como es primero el contacto de prueba que hemos
+<img src="images/8-15.png">
 
-hecho con el perfil.
+Efectivamente el primero contacto de prueba que hemos hecho se ha añadido con los datos que le hemos indicado.
 
-Aquí se ha añadido con los datos que le hemos indicado se ha modificado el email del contacto uno es
+Se ha modificado el email del contacto 19 ahora contiene el texto `modificado`.
 
-anteponía la nueva prueba tal solamente modificado y se ha añadido se ha eliminado el contacto número
+Y se ha eliminado el contacto número 33 ya no existe.
 
-17 que era un JSF y ya no existe pero se ha visto cómo realizar las operaciones básicas a través del
+Se ha visto cómo realizar las operaciones básicas a través del `EntityManager`.
 
-Entity manager.
+Si quisiéramos hacer otras operaciones más complejas de búsqueda de un conjunto de entidades o eliminación por otros criterios tendríamos que recurrir a las consultas que vamos a estudiar ya próximamente.
 
-Si quisiéramos hacer otras operaciones más complejas de búsqueda de un conjunto de entidades o eliminación
 
-por otros criterios etcétera tendríamos que recurrir a las consultas que vamos a estudiar ya próximamente.
+### :computer: Código Completo - 615-01_ejemplo_jpa 
+
+<img src="images/8-16.png">
+
+A diferencia de la primera versión de este proyecto se añadio el Driver de MySQL y se añadio la clase `Test`, todo lo demas es exactamente igual.
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-01_ejemplo_jpa" transaction-type="RESOURCE_LOCAL">
+		<class>entidades.Contacto</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+*`Contacto.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the contactos database table.
+ * 
+ */
+@Entity
+@Table(name="contactos")
+@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c")
+public class Contacto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idContacto;
+
+	private String email;
+
+	private String nombre;
+
+	private int telefono;
+
+	public Contacto() {
+	}
+
+	public int getIdContacto() {
+		return this.idContacto;
+	}
+
+	public void setIdContacto(int idContacto) {
+		this.idContacto = idContacto;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+}
+```
+
+*`Test.java`*
+
+```java
+package principal;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+import entidades.Contacto;
+
+public class Test {
+
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+		EntityManager em = factory.createEntityManager();
+		
+		//Inicio de una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		
+		//Crear una entidad
+		Contacto c = new Contacto();
+		c.setNombre("Contacto de prueba");
+		c.setEmail("prueba@contacto.com");
+		c.setTelefono(678999888);
+		
+		//Persistir una entidad
+		em.persist(c);
+		
+		//Recuperación y modificación de un contacto
+		c = em.find(Contacto.class, 19);
+		c.setEmail("modificado");
+		em.merge(c);
+		
+		//Eliminación de un contacto
+		c = em.find(Contacto.class, 33);
+		em.remove(c);
+		
+		//Confirmar transacción
+		tx.commit();
+		
+		System.out.println("Operaciones realizadas");
+	}
+
+}
+```
+
 
 # Autoevaluación II 01:00
