@@ -65,4 +65,232 @@ Pues bien en la siguiente leccion vamos a ver un primer ejemplo de utilización 
 
 # 08 Primera aplicación JPA 12:05
 
+<img src="images/8-01.png">
+
+Muy bien vamos a crear nuestra primera aplicación de ejemplo JPA lo que vamos a hacer es realizar una serie de operaciones CRUD de crear, recuperar, actualizar y eliminar entidades contra la capa de persistencia de la base de datos `agenda` de la tabla `contactos` que creamos en una de las lecciones anteriores.
+
+<img src="images/8-02.png">
+
+El Código de la aplicación al final quedará algo como esto:
+
+<img src="images/8-03.png">
+
+Vamos a obtener un `EntityManagerFactory` para obtener el `EntityManager`, iniciar una transacción y a partir de ahí hacer una serie de operaciones y confirmar en último lugar la transacción con un commit, para comprobar que efectivamente se han realizado sobre la base de datos.
+
+Pues lo primero vamos a abrir es Workbeanch y comprobar el contenido de la tabla contactos.
+
+<img src="images/8-04.png">
+
+Bueno pues vamos a pasar a desarrollar con Eclipse y recuperaremos el ejercicio primero que hicimos de ejemplo JPA donde como recordarás creamos la capa de persistencia que fue básicamente eso crear la entidad y la configuración de la misma a través de las anotaciones usando el asistente que veíamos en Eclipse. Y  también la configuración del `persistence.xml` que se genera automáticamente los datos de conexión.
+
+Lo que vamos a hacer es crear una clase Java básica de aplicación de consola con su método main donde vamos a realizar una serie de operaciones contra la capa de persistencia (Contacto).
+
+Entonces nos colocamos encima del proyecto vamos presionar el botón derecho, New Class para crear una nueva clase, esta clase la vamos a llamar por ejemplo `Test`, no la vamos a meter en el mismo paquete donde están las entidades más bien en un paquete aparte, por ejemplo `principal`. Y por supuesto con el método `main`.
+
+<img src="images/8-05.png">
+
+A partir de ahí vamos a esperar que genere la clase 
+
+```java
+package principal;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+```
+
+Y aquí ya vamos a introducir el código de la aplicación que vamos a hacer para realizar esas operaciones. Qué es lo que tenemos que hacer es crear `EntityManagerFactory` para crear el `EntityManagerFactory` como te comentaba en la lección anterior tenemos que recurrir al método de la clase `Persistence`, `createEntityManagerFactory()`, el cual necesita el nombre de la unidad de persistencia, y como se se llama la unidad de persistencia, ese dato lo tenemos en el archivo `persistence.xml` en la línea `<persistence-unit name="615-01_ejemplo_jpa" transaction-type="RESOURCE_LOCAL">`, sería `615-01_ejemplo_jpa` por lo que el código en `Test` queda así:
+
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+```
+
+Aquí ya tenemos la creación del `EntityManagerFactory` con el cual podremos crear el `EntityManager`
+
+Recuerda en Eclipse Control+Shift+O para importar las clases e interfaces que vayamos utilizando en cada momento.
+
+`EntityManager` a partir de ahí vamos a crear el objeto `factory` recurriendo al método `createEntityManager()` que no recibe ningún parámetro puesto que el nombre de la Unidad de persistencia lo indicamos al crear la factoría.
+
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
+```
+
+Pues ya tenemos el `EntityManager` a partir de ahí a poder realizar las operaciones CRUD.
+
+Pero vamos a iniciar una transacción.
+
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
+
+//Inicio de una transacción
+EntityTransaction tx = em.getTransaction();
+tx.begin();
+```
+
+Cómo vemos lo primero que hacemos es iniciar una transacción a través del `EntityTransaction`, `EntityTransaction` también forma parte del `javax.persistence` y dispone de un método `begin()` para iniciar la transacción, aparte por supuesto de los métodos para confirmar y rechazar.
+
+Todas las operaciones CRUD que realicemos ahora de acción, es decir crear, actualizar y eliminar una entidad en el momento que se confirmen quedarán reflejadas en la base de datos.
+
+
+si no hacemos un cómic esas operaciones no quedarán en ningún
+
+sitio entonces vamos a crear vamos a hacer nuestra momento una persistencia de objeto vamos a crear
+
+una entidad cualquier comentario al existir una entidad vamos a crear un objeto contacto
+
+el asistente de Eclipse que creaba que utilizamos para crear las entidades nos crearon las entidades
+
+con el constructor sin parámetros podríamos haber incluido nosotros un constructor explícito con parámetros
+
+que permitieran inicializar todos los atributos pero bueno no está nada llamando a los métodos Shep.
+
+Por ejemplo si el nombre.
+
+Aquí vamos a poner contacto de prueba
+
+Sethi mail
+
+la arroba porque tampoco quiero que utilicemos uno que gasistas nos vamos a poner un email nuevo por
+
+un pacto punto com por ejemplo vale
+
+y por último le vamos a dar un teléfono
+
+va perfecto y a partir de ahí ya tenemos contacto creado lo persistimos para ello Identity Manager disponer
+
+el método pero si os comentamos en la lección anterior con esto que habría persistido a la espera de
+
+que confirmamos la transacción que lo haremos al final cuando hayamos hecho ya todas las operaciones
+
+que vamos a hacer ahora lo vamos a actualizar una entidad por ejemplo tenemos aquí los datos.
+
+Vamos a ver Operación y modificación de la entidad vamos a coger reutilizamos la misma posible contacto
+
+y lo que hacemos en este caso es llamar a uno de los segundos métodos documentamos del Entity manager
+
+Find para localizar una entidad.
+
+Cómo funciona.
+
+Le proporcionas el tipo la clase objeto clase contacto lo que queremos nosotros y la prima que quieren
+
+localizar.
+
+Efectivamente hay un contacto con un valor unos días de prueba.
+
+Pues la modificamos el email y hacemos números con lo cual esto haría que se modificase dicho e-mail
+
+en la base de datos y quedaría cambiado éste aparecería modificado una vez que se confirme la transacción.
+
+Vamos ahora a eliminar una entidad recuperamos la entidad y llamaríamos al método Ramu
+
+para eliminar un contacto o volvemos a hacer una búsqueda y le vamos a proporcionar un identificador
+
+de una prima Key que ya existe.
+
+Por ejemplo yo tengo aquí el 17 vamos a eliminar este usuario J.S. bien proporcionamos la primary key
+
+y una vez que lo hemos obtenido un remó es así de simple.
+
+Como es muy sencillo manejar JPA y realizar operaciones contra la capa de persistencia bastante más
+
+que por supuesto con JRC.
+
+Ahora ya por fin confirmamos la transacción.
+
+Bueno pues ya lo tenemos
+
+pues simplemente sería ejecutarlo y ver los resultados.
+
+Podríamos haber dicho que nos mandaron un mensajito por aquí vamos a hacerlo si está en punto al punto
+
+Proein LNE operaciones realizadas aunque lo comprobaremos lógicamente en la base de datos macro directamente
+
+vamos a ejecutar a la hora de ejecutarlo vamos a hablar ya verás que va a haber un pequeño problema
+
+ya te lo voy anunciando pero quería que apareciera para que lo viaxes Bueno pues lo típico ejecutas
+
+el programa y de repente empiezan a aparecer excepciones.
+
+Error.
+
+Qué ha pasado.
+
+Bueno no tenemos que alarmarnos esto es muy habitual todos vamos a cometer errores y lo que más veces
+
+nos va a pasar cometer errores durante la ejecución de los programas cuando nos encontramos es todo
+
+lo que tenemos que hacer siempre sea el programa del tipo que sea.
+
+Si no es al principio el error o sea todos estos mensajes que empiezan a aparecer aquí de Exception
+
+tal y bueno están volcados de error que se llama Los volcarlos de pila de la excepción pues a partir
+
+de ahí aunque luego se pueden repetir pero normalmente suele ser al principio donde está el mensaje
+
+que nos va a indicar qué está pasando y efectivamente aquí al principio ya nos dice que falta o que
+
+no encuentra el driver de SQL tened en cuenta que aquí hay un motor de persistencia que se va a encargar
+
+de hacer las operaciones contra la base de datos.
+
+Nosotros lo hemos dicho no existen XML a ese motor de persistencia que la base datos está en esta dirección
+
+y que tienen que utilizar este driver pero dónde está el driver no está aquí nosotros sí lo utilizamos
+
+cuando el asistente para crear la capa de persistencia pero dentro de lo que es el proyecto no está
+
+el asistente hay que añadir la referencia a esa librería para que la pueda utilizar la aplicación y
+
+por lo tanto la puede utilizar el motor de persistencia no estaríamos en el Classmate de las clases
+
+posibles que puede utilizar.
+
+Este proyecto está jre que son precisamente las clases de Java estándar y el eclipse Link es el motor
+
+de persistencia pero aquí tendríamos que añadir el driver como lo hacemos.
+
+Botón derecho nos vamos a las propiedades del proyecto y una propiedad que es Java.
+
+Path pestañea Library ahí aparece como ves las librerías que te comentaba debemos añadir también el
+
+jar correspondiente a Android de se cuelga pulsamos el botón Añadir externan jar y lo localizamos donde
+
+lo tengamos grabado lo tenemos aquí en esta carpeta.
+
+Ahí está lo seleccionamos y ya tenemos el Braida.
+
+Ahora ya cuando el proveedor de persistencia vaya a hacer las operaciones contra la base de datos intente
+
+tirar de este diario y ver que nosotros lo hemos indicado aquí como está dentro de las librerías reconocidas
+
+por los localizara y puedan hacer las operaciones.
+
+Vamos a ejecutarlo.
+
+Java aplicación y ahora ya no ha habido errores y nos dice operaciones realizadas pero vamos a comprobarlo
+
+nos vamos a la base de datos refrescamos y efectivamente como es primero el contacto de prueba que hemos
+
+hecho con el perfil.
+
+Aquí se ha añadido con los datos que le hemos indicado se ha modificado el email del contacto uno es
+
+anteponía la nueva prueba tal solamente modificado y se ha añadido se ha eliminado el contacto número
+
+17 que era un JSF y ya no existe pero se ha visto cómo realizar las operaciones básicas a través del
+
+Entity manager.
+
+Si quisiéramos hacer otras operaciones más complejas de búsqueda de un conjunto de entidades o eliminación
+
+por otros criterios etcétera tendríamos que recurrir a las consultas que vamos a estudiar ya próximamente.
+
 # Autoevaluación II 01:00
