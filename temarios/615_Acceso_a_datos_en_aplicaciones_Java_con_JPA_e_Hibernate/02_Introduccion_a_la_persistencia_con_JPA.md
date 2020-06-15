@@ -216,7 +216,7 @@ En nuestro caso vamos a activar la opción JPA, al activar la opción JPA aparec
 
 <img src="images/6-09.png">
 
-Que concretamente van a consistir en indicarle Eclipse qué motor vamos a utilizar, si no es un motor que lo incorpore el propio Elipse.
+Que concretamente van a consistir en indicarle Eclipse qué motor vamos a utilizar, si no es un motor que lo incorpore el propio Elipse. En Platform Generic 2.2 que es la especificación de JPA actual y donde dice Type simplemente deshabilitaríamos configuración de librería, para luego posteriormente añadirla nosotros manualmente, pero resulta que Eclipse incorpora ya un motor, una librería de motor de proveedor de persistencia que es el EclipseLink muy parecido a TopLink de Oracle.
 
 <img src="images/6-10.png">
 
@@ -244,7 +244,7 @@ Que concretamente van a consistir en indicarle Eclipse qué motor vamos a utiliz
 
     
 
-Entonces aquí dedicaríamos nada en plataforma generic 2.1 que es la especificación de JPA actual y donde dice tipo simplemente deshabilita haríamos configuración de librería para luego posteriormente añadirla nosotros manualmente pero resulta que Eclipse incorpora ya un motor una librería de motor de proveedor de persistencia que es el eclipse Elim muy parecido a Tomlin de Oracle.
+
 
 Entonces bueno vamos a elegir la opción user Library y si no nos aparece aquí ninguna librería ya marcada es porque aún no la ha descargado.
 
