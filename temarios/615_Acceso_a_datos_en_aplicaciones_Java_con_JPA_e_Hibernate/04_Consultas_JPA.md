@@ -14,49 +14,42 @@
 
 <img src="images/9-01.png">
 
+Bueno después de haber visto las operaciones básicas contra la capa de persistencia a través de EntityManager es el momento de ver cómo realizar operaciones más complejas a través de las consultas JPA.
+
 <img src="images/9-02.png">
 
+Las consultas JPA nos van a permitir recuperar, actualizar, modificar grupos de entidades en base a diferentes criterios que no sean siempre la PRIMARY KEY como los métodos básicos que vimos en la lección anterior, para poder ejecutar una consulta JPA hay que definir a través de un lenguaje especial llamado JPQL Java Persisten Query Language, que es muy similar a SQL pero adaptado a la manipulación de entidades en lugar de filas y columnas de tablas de bases de datos.
+
+Estas consultas JPQL, estas instrucciones JPQL, las vamos a poder gestionar a través de los objetos `Query` o `TypedQuery` y del API JPA.
+
 <img src="images/9-03.png">
+
+Vamos a ver primero algunos fundamentos de JPQL. Como hemos dicho es una adaptación del SQL para tratar con entidades. Aquí vemos el formato de una instrucción Select que como ves se parece mucho al SQL normal.
+
+`Select alias From Entidad alias Where condicion`
+
+Select a continuación se indicaría un alias asociado a la entidad, From el nombre de la entidad y el alias que le hemos asociado, Where la condición, la condición emplea los mismos operadores que utilizaríamos en SQL. Es más también las cláusulas `Order By` y `Group by` también se podrían aplicar en la `Select`.
+
+Vamos a ver aquí algún ejemplo.
+
+```sql
+Select c From Contacto c
+Select e From empleado e Where e.dni="555K"
+```
+
+En este caso se trata de una Select que nos permite recuperar todas las entidades de tipo Contacto como ves `Select c` que sería el alias que le hemos asociado a la entidad `From Contacto c` que es el nombre de la entidad y el alias asociado, al no haber clausula `Where` recuperaría todas las entidades Contacto.
+
+En el segundo caso se trata de recuperar todas las entidades de tipo Empleado que cumplen una determinada condición que es que el atributo DNI es igual a cierto valor, como ves en la cláusula `Where` la condición se aplica a partir de los atributos de la entidad, es decir alias de la entidad punto nombre atributo igual mayor, los mismos operadores como decía que se utilizan en la cláusula `Where` de SQL. 
+
+Bien estas son consultas muy sencillas, ya veremos cuando tengamos entidades relacionadas como también incluso se pueden hacer hasta JOINS, pero bueno eso será elecciones posteriores. Esto en cuanto a JPQL.
 
 <img src="images/9-04.png">
 
 <img src="images/9-05.png">
 
 <img src="images/9-06.png">
-
-Bueno después de haber visto las operaciones básicas contra la capa de persistencia timãn ayer es el momento de ver cómo realizar operaciones más complejas a través de las consultas JPA en las consultas JPA nos van a permitir recuperar, actualizar, modificar grupos de entidades en base a diferentes criterios que no sean siempre la PRIMARY KEY como los métodos básicos que vimos en la lección anterior para poder ejecutar una consulta JPA Hay que definir a través de un lenguaje especial llamado J.P. que huele Java persistan Cubelli que es muy similar a SQL pero adaptado a la manipulación de entidades en lugar de filas y columnas de tablas de bases de datos.
-
-Estas consultas J.P. cueles estas instrucciones J.P. las vamos a poder gestionar a través de los objetos qwerty o Taipe Escuer y de la API JPA.
-
-Vamos a ver primero algunos fundamentos de JP QL.
-
-Como hemos dicho es una adaptación del SQL para tratar con entidades.
-
-Aquí vemos el formato de una instrucción Select que como veis se parece mucho al SQL normal Select.
-
-A continuación se indicaría un alias asociado a la entidad From el nombre de la entidad y el alias que le hemos asociado.
-
-Web la condición.
-
-La condición pues emplea los mismos operadores que utilizaríamos en SQL.
-
-Es más también las cláusulas Order BEIRUT..
-
-También se podrían aplicar en la Sele.
-
-Vamos a ver aquí algún ejemplo.
-
-En este caso se trata de una Select que nos permite recuperar todas las entidades de tipo contracto como vérsele C que sería el alias que lo hemos asociado a la entidad from contacto que es el nombre de la entidad y el alias asociado al no haber clãusula web recuperaría todas las entidades contacto en este caso se trata de recuperar todas las entidades de tipo empleado que cumplen una determinada condición que es el atributo DNI pues es igual a cierto valor como es en la cláusula web.
-
-La condición se aplica a partir de los atributos de la entidad es decir alíe de la entidad punto nombre atributo igual mayor.
-
-Los mismos operadores como decía que se utilizan en la cláusula Wer SQL bien esto son consultar muy sencillas.
-
-Ya veremos cuando tengamos entidades relacionadas como también incluso se pueden hacer hasta Yeung.
-
-Pero bueno eso será elecciones posteriores.
-
-Esto en cuanto a J.P. QL cómo lanzamos esa instrucción desde la lógica de negocio de nuestra aplicación hacia la capa de persistencia.
+AQUIIIIII
+Cómo lanzamos esa instrucción desde la lógica de negocio de nuestra aplicación hacia la capa de persistencia.
 
 Como decíamos pues a través de El objeto cuerito un objeto cueritos es simplemente una implementación de la interfaz Java X persistan cuerito y cómo obtenemos ese objeto cuerito.
 
