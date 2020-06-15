@@ -224,17 +224,17 @@ Y aparece las posibles librerías a descargar
 
 <img src="images/6-11.png">
 
-<img src="images/6-12.png">
-
 elegiríamos Eclipse Linh 2.5.2
 
-<img src="images/6-13.png">
+<img src="images/6-12.png">
 
 El paso siguiente aceptaríamos la licencia 
 
-<img src="images/6-14.png">
+<img src="images/6-13.png">
 
 y procedería a descargar dicha librería que ya la tendríamos disponible para el resto del proyecto en el workspace, una vez que ya la tengamos descargada.
+
+<img src="images/6-14.png">
 
 <img src="images/6-15.png">
 
