@@ -216,17 +216,25 @@ En nuestro caso vamos a activar la opción JPA, al activar la opción JPA aparec
 
 <img src="images/6-09.png">
 
-Que concretamente van a consistir en indicarle Eclipse qué motor vamos a utilizar, si no es un motor que lo incorpore el propio Elipse. En Platform Generic 2.2 que es la especificación de JPA actual y donde dice Type simplemente deshabilitaríamos configuración de librería, para luego posteriormente añadirla nosotros manualmente, pero resulta que Eclipse incorpora ya un motor, una librería de motor de proveedor de persistencia que es el EclipseLink muy parecido a TopLink de Oracle.
+Que concretamente van a consistir en indicarle Eclipse qué motor vamos a utilizar, si no es un motor que lo incorpore el propio Elipse. En Platform Generic 2.2 que es la especificación de JPA actual y donde dice Type simplemente deshabilitaríamos configuración de librería, para luego posteriormente añadirla nosotros manualmente, pero resulta que Eclipse incorpora ya un motor, una librería de motor de proveedor de persistencia que es el EclipseLink muy parecido a TopLink de Oracle. Entonces vamos a elegir la opción `User Library` y si no nos aparece aquí ninguna librería ya marcada es porque aún no la ha descargado, le damos a este botoncito el disco.
 
 <img src="images/6-10.png">
+
+Y aparece las posibles librerías a descargar 
 
 <img src="images/6-11.png">
 
 <img src="images/6-12.png">
 
+elegiríamos Eclipse Linh 2.5.2
+
 <img src="images/6-13.png">
 
+El paso siguiente aceptaríamos la licencia 
+
 <img src="images/6-14.png">
+
+y procedería a descargar dicha librería que ya la tendríamos disponible para el resto del proyecto en el workspace, una vez que ya la tengamos descargada.
 
 <img src="images/6-15.png">
 
@@ -242,15 +250,6 @@ Que concretamente van a consistir en indicarle Eclipse qué motor vamos a utiliz
 
 
 
-    
-
-
-
-Entonces bueno vamos a elegir la opción user Library y si no nos aparece aquí ninguna librería ya marcada es porque aún no la ha descargado.
-
-En mi caso como ya he utilizado crear un proyecto entre huesped podría la descarga una vez y desaparece pero si no le damos a este botoncito el disco y aparece las posibles librerías a descargar elegiríamos Eclipse Linh 2.5.
-
-El paso siguiente aceptaríamos la licencia y procedería a descargar dicha librería que ya la tendríamos disponible para el resto del proyecto de alguna speaks una vez que ya la tengamos descargada.
 
 Pulsamos okay aquí también pulsamos OK y como veremos en la lista de librerías aquí la tenemos Eclipso
 
