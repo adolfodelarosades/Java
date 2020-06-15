@@ -37,7 +37,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 * 08 Primera aplicación JPA 12:05
 * Autoevaluación II 01:00
 
-#### 4. Consultas JPA 01:05:58
+#### 4. [Consultas JPA](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/04_Consultas_JPA.md) 01:05:58
 
 * 09 Consultas. El lenguaje JPQL 06:21
 * 10 JPA en aplicaciones Web 06:26
