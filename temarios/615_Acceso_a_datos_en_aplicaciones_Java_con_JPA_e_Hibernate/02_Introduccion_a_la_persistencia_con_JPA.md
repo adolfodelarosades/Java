@@ -159,6 +159,13 @@ Una vez creado el esquema agenda hay que meter el password para el usuario root 
 
 `ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';`
 
+La tabla tiene cuatro campos:
+
+* `idContacto` Integer Auto Unsigned
+* `nombre` Varchar(45)
+* `email` Varchar(45)
+* `telefono` Integer Unsigned
+
 El Script completo de la Base de Datos `agenda` es:
 
 ```sql
@@ -452,13 +459,6 @@ INSERT INTO `titulares` (`idCuenta`,`idCliente`) VALUES
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
 ```
-
-La tabla tiene cuatro campos:
-
-* `idContacto` Integer Auto Unsigned
-* `nombre` Varchar(45)
-* `email` Varchar(45)
-* `telefono` Integer Unsigned
 
 <img src="images/5-04.png">
 
