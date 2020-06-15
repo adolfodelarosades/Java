@@ -519,5 +519,57 @@ public class Test {
 }
 ```
 
-
 # Autoevaluación II 01:00
+
+Autoevaluación II
+
+1. Una unidad de persistencia:
+   * Es el nombre que se le da al motor de persistencia en JPA
+   * Es un conjunto de librerías
+   * Define la información de persistencia asociada a una determinada base de datos :+1:
+   * Representa el conjunto de anotaciones que se emplean para definir las entidades
+
+2. El objeto EntityManager se obtiene
+   * A partir del método getEntityManager() de Persistence
+   * Creándolo a partir del constructor sin parámetros de EntityManager
+   * A partir del método createEntityManager() de EntityManagerFactory :+1:
+   * Spring
+
+3. El método merge() de EntityManager
+   * Actualiza la BD con los datos existentes en el objeto de entidad :+1:
+   * Almacena un nuevo registro en la BD con los datos de la entidad
+   * Refresca la entidad con los datos existentes en la base de datos
+   * Elimina una entidad del contexto de persistencia
+
+4. Si llamamos al método find() de EntityManager proporcionando una primary key no existente
+   * Se producirá una excepción
+   * Se devolverá un objeto nuevo con todos sus campos vacíos
+   * Se añadirá un nuevo registro en la base de datos con esa primary key
+   * El método devolverá null :+1:
+
+5. ¿Qué sucede si hacemos una llamada a persist() fuera de una transacción?
+   * La entidad no será persistida y no se producirá ninguna excepción :+1:
+   * La entidad será persistida, pero se producirá una excepción
+   * La entidad no será persistida y se producirá una excepción
+   * La entidad será persistida y no habrá ningún tipo de error
+ 
+
+
+
+
+
+
+
+
+
+SOLUCIONES:
+
+1.- C
+
+2.- C
+
+3.- A
+
+4.- D
+
+5.- A
