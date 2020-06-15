@@ -31,7 +31,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 * 06 Creación de una capa de persistencia con JPA parte 2 10:14
 * Autoevaluación I 00:41
 
-#### 3. El API JPA 18:53
+#### 3. [El API JPA](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate) 18:53
 
 * 07 El API JPA 05:48
 * 08 Primera aplicación JPA 12:05
