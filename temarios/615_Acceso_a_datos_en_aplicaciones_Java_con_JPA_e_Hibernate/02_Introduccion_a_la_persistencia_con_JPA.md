@@ -180,6 +180,11 @@ Vamos a ver cómo generar todo esto con un ejemplo concreto.
 
 ## 06 Creación de una capa de persistencia con JPA parte 2 10:14
 
+El ejercicio que vamos a desarrollar será una aplicación de consola donde vamos a crear una capa de persistencia para posteriormente en la siguiente elección empezar a utilizar la API JPA para acceder a ella.
+
+Para ello vamos a utilizar el entorno de desarrollo Eclipse que instalamos en la elección anterior y nos vamos a situar dentro de la perspectiva Java, si aparece otra perspectiva por defecto atrás de este botoncito elegiremos la perspectiva Java que es la más adecuada para este tipo de proyecto.
+
+Una vez estemos en perspectiva Java, vamos a crear nuestro proyecto con la opción File - New - Java Project.
 
 <img src="images/6-01.png">
 
@@ -187,17 +192,31 @@ Vamos a ver cómo generar todo esto con un ejemplo concreto.
 
 <img src="images/6-03.png">
 
+Le vamos a poner de nombre `615-01_ejemplo_jpa`, con el JDK que hemos instalado también previamente a la instalación de Eclipse y aquí directamente vamos a finalizar. Nos crea la siguiente estructura de proeyecto.
+
 <img src="images/6-04.png">
+
+A partir de ahora vamos a crear ya la *Capa de Persistencia*, lo primero es preparar el proyecto para que disponga de alguna de las plantillas y opciones de menú propios de JPA, donde lo que vamos a hacer es a través del botón derecho nos vamos a ir a las propiedades del proyecto
 
 <img src="images/6-05.png">
 
+y en `Project Facets` aparecerán o deberían aparecer una lista de propiedades, de características que queramos añadir a nuestro proyecto.
+
 <img src="images/6-06.png">
+
+Como es un proyecto Java estándar no suelen aparecer por defecto esas características hay que pulsar en el enlace `Convert to faceted from...`
 
 <img src="images/6-07.png">
 
+Para que ahora ya aparezcan una serie de características, como digo que hará que Eclipse incorpore nuevos menus, librerías, etc.
+
 <img src="images/6-08.png">
 
+En nuestro caso vamos a activar la opción JPA, al activar la opción JPA aparece este enlace `Futher configuration available...`, antes de darle OK, vamos a pulsar en este enlace para habilitar unas propiedades de JPA
+
 <img src="images/6-09.png">
+
+Que concretamente van a consistir en indicarle Eclipse qué motor vamos a utilizar, si no es un motor que lo incorpore el propio Elipse.
 
 <img src="images/6-10.png">
 
@@ -219,17 +238,11 @@ Vamos a ver cómo generar todo esto con un ejemplo concreto.
 
 <img src="images/6-19.png">
 
-El ejercicio que vamos a desarrollar será una aplicación de consola donde vamos a crear una capa de persistencia para posteriormente en la siguiente elección empezar a utilizar la API JPA para acceder a ella.
 
-Para ello vamos a utilizar el entorno de desarrollo Eclipse que instalamos en la elección anterior y nos vamos a situar dentro de la perspectiva Java si aparece otra perspectiva por defecto atrás de este botoncito elegiremos la perspectiva Java que es la más adecuada para este tipo de proyecto.
 
-Una vez estemos en perspectiva Java vamos a crear nuestro proyecto con la opción free new Java prohibí por ejemplo 1.
 
-Ejemplo JPA Es como lo vamos a llamar a nuestro proyecto JDK que hemos instalado también previamente a la instalación de Eclipse y aquí directamente vamos a finalizarã a partir de ahora vamos a crear ya la capa de persistencia.
 
-Lo primero es preparar el proyecto para que pueda ser disponga de alguna de las plantillas y opciones de menú propios de JPA donde lo que vamos a hacer es a través del botón derecho nos vamos a ir a las propiedades del proyecto y en proyecto faites aparecerán o deberían aparecer una lista de propiedades de características que queramos añadir a nuestro proyecto.
-
-Como es un proyecto Java estándar no suelen aparecer por defecto esas características hay que pulsar a este enlace para que ahora ya aparezcan una serie de características como digo que hará que Eclipse incorpore nuevos menus librerías etcétera en nuestro caso vamos a activar la opción JPA al activar la opción JPA aparece este enlace tanto antes de darle OK vamos a pulsar en este enlace para habilitar unas propiedades de JPA que concretamente van a consistir en indicarle Eclipse qué motor vamos a utilizar si no es un motor que lo incorpore el propio elipses.
+    
 
 Entonces aquí dedicaríamos nada en plataforma generic 2.1 que es la especificación de JPA actual y donde dice tipo simplemente deshabilita haríamos configuración de librería para luego posteriormente añadirla nosotros manualmente pero resulta que Eclipse incorpora ya un motor una librería de motor de proveedor de persistencia que es el eclipse Elim muy parecido a Tomlin de Oracle.
 
