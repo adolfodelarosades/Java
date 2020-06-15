@@ -288,51 +288,195 @@ y eso sí en Jar list aparece un nombre de archivo que realmente no existe,
 
 tenemos que eliminar con `Remove Jar/zip` y aquí lo que debemos incluir es la localización del archivo jar de nuestro driver que va a utilizar el asistente para conectarse con la base de datos, en la lección anterior como recuerdas tuvimos que descargar un Driver que vamos a añadir con `Add Jar/zip` lo localizamos, la carpeta donde lo tengamos, porque no había que instalar nada con ese archivo, simplemente había que descargarlo y guardarlo en algún sitio, pues lo localizamos y ya lo tenemos pulsamos OK.
 
+<img src="images/6-27.png">
 
+<img src="images/6-28.png">
 
-y ahora Rellenamos los datos de conexión a la base de datos con nuestra base de datos se llama agenda aquí también indicaremos agenda y los datos los credenciales Rut y Rut era también la contraseña.
+y ahora rellenamos los datos de conexión a la base de datos con nuestra base de datos se llama `agenda`, también indicaremos el URL para la base de datos agenda y los datos los credenciales usuario `root` y también la contraseña `root`.
+
+<img src="images/6-29.png">
 
 Podemos hacer un test de conexión para probar que efectivamente conecta con la base de datos.
 
-En el siguiente paso simplemente es un resumen y finalizamos y ahora se habrá localizado ya.
+<img src="images/6-30.png">
 
-Efectivamente ahí el esquema parecerá la base de datos agenda la lista de tablas que la conforman.
+En el siguiente paso simplemente es un resumen 
 
-En nuestro caso sólo nos interesa la tabla contactos que la única que tenemos es tarde usuarios la tengo yo ahí no se va a usar en este ejercicio.
+<img src="images/6-31.png">
 
-En el siguiente paso que asociaciones entre tablas existen si solo hay una tabla no tienen sentido hablar de asociaciones así que nada.
+y finalizamos y ahora se habrá localizado ya, efectivamente ahí el esquema aparecerá la base de datos agenda.
+
+<img src="images/6-32.png">
+
+la lista de tablas que la conforman.
+
+<img src="images/6-33.png">
+
+En nuestro caso sólo nos interesa la tabla contactos que es la única que tenemos, la tabla usuarios no se va a usar en este ejercicio.
+
+<img src="images/6-34.png">
+
+En el siguiente paso, que asociaciones entre tablas existen si solo hay una tabla no tienen sentido hablar de asociaciones así que nada. 
+
+<img src="images/6-35.png">
 
 Siguiente.
 
-Y aquí nos va a preguntar por ejemplo sobre la primera y que va a ser autogenerados o autogenerados si no fuera autogenerados por aquí dejaríamos nuestro caso sí que lo es el tipo de identidad que sea la opción que elegiremos.
+<img src="images/6-36.png">
 
-Esto se queda por defecto ya que indicaremos el nombre del paquete donde queremos guardar esa clase entidad en el siguiente paso nos va a dar un resumen de cómo se va a llamar la clase.
+Y aquí nos va a preguntar sobre la Primery Key, va a ser o no autogenerada, si no fuera autogenerada dejaríamos `none` en nuestro caso sí que lo es lo pondremos `identity`, el tipo de identidad que sea la opción que elegiremos.
 
-Normalmente suele llamarse igual que la tabla pero en singular y con la primera letra mayúscula.
+Esto se queda por defecto, indicaremos el nombre del paquete donde queremos guardar esa clase entidad `entidades`.
 
-En cualquier caso a través de la notación arroba tablet se asocia esta clase con esta tabla y ya está finalizamos y ahora veremos aquí nuestra entidad contacto ya creada.
+<img src="images/6-37.png">
 
-Como vemos la notación arroba Entity arroba table que veíamos en la transparencia anterior asociada con el nombre de la tabla y arroba columna aparece porque como ya te decía las nombres de los atributos de los campos coinciden con los nombres de las columnas.
+En el siguiente paso nos va a dar un resumen de cómo se va a llamar la clase.
 
-Aquí aparece también una notación arroba name Cuadri que introduce automáticamente al asistente pero en este caso no vamos a utilizar para nada ni sería necesario que estuviera ahí ya hablaremos de la escuelas en la lección dedicada a las consultas por lo que la entidad ya está.
+<img src="images/6-38.png">
 
-Ahora falta rellenar los datos del persiste en XML.
+Normalmente suele llamarse igual que la tabla pero en singular y con la primera letra mayúscula, en cualquier caso a través de la anotación `@Table` se asocia esta clase, con esta tabla y ya está finalizamos.
 
-Aquí habría que indicar ya ves que la unidad de persistencia se ha creado como un nombre por defecto y la lista de entidades al crear la entidad y al añadir aquí que forman esa unidad de persistencia faltaría por indicar el probare el Provider es el nombre del proveedor utilizado.
+<img src="images/6-39.png">
 
-Bueno este dato no es necesario puesto que al utilizar Eclipse Link que es el que trae Eclipse pues el Provider ya viene predeterminado entonces lo obtiene directamente de las librerías.
+y ahora veremos aquí nuestra entidad contacto ya creada, el código generado es el siguiente:
 
-En cualquier caso podríamos asociable el nombre de nombres asociados a proveedores el que tenemos aquí en la presentación que te enseñantes aquí lo ves o reflejé con Kartli se apunta que existen puntos JPA punto persisten Roballo pero es el proveedor predeterminado y si no se indica nombre pues este es el que va a buscar así que en este caso bueno como no es necesario pues no lo vamos a no lo vamos a utilizar no lo vamos a indicar pero podríamos indicar ese nombre a Eclipse y lo que sí que falta son los datos de conexión a la base de datos pero en vez de incluirlos aquí manualmente podemos hacer lo siguiente cuando vamos al archivo y vamos a abrir ese archivo XML Open width con el editor persisten XML que nos permite abrirlo con verlo de una forma más amigable a través de esta serie de pestañas y si nos vamos a la pestaña Connection pues aquí tendríamos que indicar los datos de conexión a la base de datos lo primero es que la manera en que vamos a conectar con la base de datos va a ser con conexiones directas.
 
-Eso implica elegir alquilación Resource local.
+*`Contacto`*
 
-La otra opción JSA es cuando vamos a utilizar lo que se conoce como un data show que ya lo veremos en los casos en los que utilicemos persistencia dentro de un contexto una aplicación.
+```java
+package entidades;
 
-Ahí veremos cómo utilizar un data pero en este caso son conexiones directas.
+import java.io.Serializable;
+import javax.persistence.*;
 
-Por lo tanto hay que elegir la opción versión local y en vez de incluir los datos aquí como digo manualmente le vamos a decir que los tenga de una de las conexiones que le creamos al asistente que ya están ahí todos los datos SQL prueba ya que toda la información y con esto ya tendrían la información suficiente del proveedor para conectar con la base de datos.
 
-Aquí en Shur vemos cómo quedaría la lista de propiedades cada propiedad con su nombre y su valor correspondiente y esto la capa de persistencia a partir de ahí ya podríamos empezar a utilizarla desde una aplicación a través de la JPA cosa que veremos en posteriores elecciones.
+/**
+ * The persistent class for the contactos database table.
+ * 
+ */
+@Entity
+@Table(name="contactos")
+@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c")
+public class Contacto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idContacto;
+
+	private String email;
+
+	private String nombre;
+
+	private int telefono;
+
+	public Contacto() {
+	}
+
+	public int getIdContacto() {
+		return this.idContacto;
+	}
+
+	public void setIdContacto(int idContacto) {
+		this.idContacto = idContacto;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+}
+```
+
+Como vemos la anotación `@Entity` y `@Table(name="contactos")` que veíamos en la transparencia anterior asociada con el nombre de la tabla y `@Column` no aparece porque como ya te decía las nombres de los atributos de los campos coinciden con los nombres de las columnas de la tabla.
+
+<img src="images/6-40.png">
+
+Aquí aparece también una anotación `@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c")` que introduce automáticamente el asistente pero en este caso no vamos a utilizarla para nada, ni sería necesario que estuviera ahí, ya hablaremos de las NamedQuery en la lección dedicada a las consultas.
+
+La entidad ya está ahora falta rellenar los datos del `persistence.xml` 
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-01_ejemplo_jpa">
+		<class>entidades.Contacto</class>
+	</persistence-unit>
+</persistence>
+```
+
+La unidad de persistencia se ha creado con un nombre por defecto `name="615-01_ejemplo_jpa"` y la lista de entidades 
+
+`<class>entidades.Contacto</class>`
+
+al crear la entidad ya la a añadir aquí, que forman esa unidad de persistencia.
+
+Faltaría por indicar el Provider, el Provider es el nombre del proveedor utilizado. Bueno este dato no es necesario puesto que al utilizar Eclipse Link que es el que trae Eclipse, el Provider ya viene predeterminado entonces lo obtiene directamente de las librerías. En cualquier caso podríamos asociable el nombre de nombres asociados a proveedores el que tenemos en la transparencia de `persistence.xml`.
+
+`<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>`
+
+en la presentación que te enseñe antes aquí lo ves, es el proveedor predeterminado y si no se indica nombre pues este es el que va a buscar, así que en este caso como no es necesario no lo vamos a utilizar, no lo vamos a indicar pero podríamos indicar ese nombre a Eclipse.
+
+Y lo que sí que falta son los datos de conexión a la base de datos pero en vez de incluirlos aquí manualmente podemos hacer lo siguiente, cuando vamos al archivo vamos a abrir ese archivo `persistence.xml` con Open With con el editor Persistence XML Editor, que nos permite abrirlo para verlo de una forma más amigable a través de esta serie de pestañas (es lo mismo que pulsar en la pestaña General)
+
+<img src="images/6-41.png">
+
+Y si nos vamos a la pestaña Connection pues aquí tendríamos que indicar los datos de conexión a la base de datos.
+
+<img src="images/6-42.png">
+
+Lo primero es que la manera en que vamos a conectar con la base de datos va a ser con conexiones directas, eso implica elegir en Transaction type: Resource local. 
+
+<img src="images/6-43.png">
+
+La otra opción JTA es cuando vamos a utilizar lo que se conoce como un data show que ya lo veremos en los casos en los que utilicemos persistencia dentro de un contexto en una aplicación, ahí veremos cómo utilizar un data pero en este caso son conexiones directas, por lo tanto hay que elegir la opción versión local y en vez de incluir los datos aquí como digo manualmente le vamos a decir que los tenga de una de las conexiones que hemos creamos anteriormente con el asistente y que ya están ahí todos los datos, usamos `Populate fom connection...` 
+
+<img src="images/6-44.png">
+
+ya se presenta toda la información y con esto ya tendrían la información suficiente del proveedor para conectar con la base de datos.
+
+<img src="images/6-45.png">
+
+En la pestaña Source vemos cómo quedaría la lista de propiedades
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-01_ejemplo_jpa" transaction-type="RESOURCE_LOCAL">
+		<class>entidades.Contacto</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+Cada propiedad con su nombre y su valor correspondiente.
+
+Esto es la capa de persistencia, a partir de ahí ya podríamos empezar a utilizarla desde una aplicación a través de JPA, cosa que veremos en posteriores elecciones.
 
 ## Autoevaluación I 00:41
 
@@ -340,31 +484,31 @@ Autoevaluación I
 
 1. Una capa de persistencia:
    * Requiere del uso de JDBC para acceder a los datos
-   * Expone los registros de la base de datos en forma de objetos
+   * Expone los registros de la base de datos en forma de objetos :+1:
    * Requiere el uso de un navegador compatible
    * Se gestiona desde la vista de una aplicación
  
 
-2. Indica cuál de las siguientes tecnologías corresponde a un framework de persistencia
+2. Indica cuál de las siguientes tecnologías corresponde a un Framework de persistencia
    * EJB
    * JSF
-   * Hibernate
+   * Hibernate :+1:
    * Spring
 
 3. Una entidad es
    * Un API de persistencia
    * Un archivo de configuración XML
    * Un framework de persistencia
-   * Una clase
+   * Una clase :+1:
 
 4. ¿Dónde se configuran los datos de conexión a la base de datos en JPA?
    * A través de anotaciones
-   * En el archivo de configuración persistence.xml
+   * En el archivo de configuración persistence.xml :+1:
    * A través del API JPA
    * En ficheros de texto .cfg
 
 5. La anotación `@Id` de JPA se utiliza para
-   * Indicar la primary key de una entidad
+   * Indicar la primary key de una entidad :+1:
    * Indicar que la clase es una entidad
    * Indicar la tabla a la que se asocia una entidad
    * Indicar el valor predeterminado de un atributo
