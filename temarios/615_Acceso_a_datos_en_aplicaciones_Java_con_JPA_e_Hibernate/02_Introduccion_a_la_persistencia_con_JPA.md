@@ -256,15 +256,41 @@ Además ya se ha creado también, lo podemos ver aquí el archivo `persistence.x
 
 Esto simplemente es una plantilla, está preparado para empezar el proceso de creación de las entidades y en segundo lugar la creación del archivo `persistence.xml` que ya está creado, pero si su configuración.
 
-Vamos con la creación de las entidades con el botón derecho nos vamos a la acción JPA Tools generar entidades desde tablas aquí nos aparecerá una lista de posibles conexiones con base datos ya creadas por este asistente.
+Vamos con la creación de las entidades, con el botón derecho sobre la raíz del proyecto, nos vamos a la acción JPA Tools - Generates Entities from Tables..., generar entidades desde tablas,
 
-Asistente cada vez que queramos generar entidades habráque al propio asistente darle unos datos de conexión con la base de datos de la que quiere sacar las entidades.
+<img src="images/6-20.png">
 
-Y si con Connecta alguna vez con la base de datos de SQL pues mi caso ha sido así porque aparecen aquí unas conexiones creadas.
+Aquí nos aparecerá una lista de posibles conexiones con base datos ya creadas por este asistente, por que este asistente cada vez que queramos generar entidades habrá que, al propio asistente darle unos datos de conexión con la base de datos de la que quiere sacar las entidades.
 
-Pero bueno si no es la primera vez pues entonces habrá creado este botón para crear una conexión contra mayor SQL indicaremos asociamos nombres a conexiones una colección propia de este asistente SQL prueba por ejemplo en el paso siguiente ya nos van a pedir los datos de conexión a la base de datos para que este asistente como digo pueda conectar con ella y extraer la información para generar las entidades en primer lugar debemos indicar el driver de mayor secuela que queremos utilizar este botoncito aquí elegimos la opción más SQL 5.1.1 le damos un nombre un nombre propio interno el del asistente y eso sí en Yarelis aparece un nombre de archivo que realmente no existe tenemos que eliminar y aquí lo que debemos incluir es la localización del archivo jar de nuestro driver que aunque queramos utilizar vamos que va a utilizar el asistente para conectarse con la base de datos en la elección anterior como recuerdas tuvimos que descargar un Reimer vamos a añadirlo vamos al botón de decir lo localizamos la carpeta donde lo tengamos porque no había que instalar nada con ese archivo.
+<img src="images/6-21.png">
 
-Simplemente había que descargarlo y guardarlo en algún sitio pues no localizamos y ya lo tenemos pulsamos OK y ahora Rellenamos los datos de conexión a la base de datos con nuestra base de datos se llama agenda aquí también indicaremos agenda y los datos los credenciales Rut y Rut era también la contraseña.
+Y si ya hemos conectado alguna vez con la base de datos de MySQL, aparecen en el combo algunas conexiones creadas.
+
+Pero si es la primera vez entonces habrá que presionar en el botón `Add conections...` para crear una conexión contra MySQL.
+
+<img src="images/6-22.png">
+
+Debemos indicar un nombre a la conexión por ejemplo `msql_prueba`.
+
+<img src="images/6-23.png">
+
+En el paso siguiente ya nos van a pedir los datos de conexión a la base de datos
+
+<img src="images/6-24.png">
+
+para que este asistente como digo pueda conectar con ella y extraer la información para generar las entidades, en primer lugar debemos indicar el driver de MySQL que queremos utilizar, le damos el boton `New Driver Definition` aquí elegimos la opción más MySQL 5.1, le damos el nombre `driver_para_mysql` un nombre propio interno del asistente
+
+<img src="images/6-25.png">
+
+y eso sí en Jar list aparece un nombre de archivo que realmente no existe,
+
+<img src="images/6-26.png">
+
+tenemos que eliminar con `Remove Jar/zip` y aquí lo que debemos incluir es la localización del archivo jar de nuestro driver que va a utilizar el asistente para conectarse con la base de datos, en la lección anterior como recuerdas tuvimos que descargar un Driver que vamos a añadir con `Add Jar/zip` lo localizamos, la carpeta donde lo tengamos, porque no había que instalar nada con ese archivo, simplemente había que descargarlo y guardarlo en algún sitio, pues lo localizamos y ya lo tenemos pulsamos OK.
+
+
+
+y ahora Rellenamos los datos de conexión a la base de datos con nuestra base de datos se llama agenda aquí también indicaremos agenda y los datos los credenciales Rut y Rut era también la contraseña.
 
 Podemos hacer un test de conexión para probar que efectivamente conecta con la base de datos.
 
