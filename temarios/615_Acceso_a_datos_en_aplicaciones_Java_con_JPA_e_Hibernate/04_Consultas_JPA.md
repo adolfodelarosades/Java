@@ -1141,17 +1141,40 @@ Entonces ya tenemos las dos dependencias que necesitamos al guardarlo pues ya au
 
 Efectivamente fijate que el error que teníamos ha desaparecido, porque en la entrada Libraries - Maven Dependencies tienen los dos JARs que Maven ya ha descargado `jstl-1.2.jar` y `mysql-connector-java-8.0.20.jar` correspondientes a las dependecias que incluimos en `pom.xml`. Si estos Jar dependieran de otro, pues también los descargaría y no tendríamos que haber estado nosotros buscándolos, incorporándolos manualmente a nuestro proyecto.
 
-Bueno esto ya se supone que ya podríamos ejecutarlo y funcionaría a través de `Run As - Run on Server` arrancara Tomcat, todo esto ya lo hace automáticamente Eclipse por nosotros.
+<img src="images/12-14.png">
 
+Bueno esto ya se supone que ya podríamos ejecutarlo y funcionaría a través de `Run As - Run on Server` la página `menu.html` que es nuestra página de inicio.
+<img src="images/12-15.png">
 
+Indicamos que nuestro servidor es Tomcat, podemos marcarlo para que la próxima vez ya no pregunte y lo haga automáticamente Eclipse por nosotros.
 
-el servidor arranca incluso por lanza como es a través de un navegador que tiene la página extra que le hemos dicho si le damos a ver contactos no deberían aparecer aquí la lista de todos los contactos que tenemos.
+<img src="images/12-16.png">
 
-Finalmente volvemos al menú vamos a añadir un nuevo contacto a ver si funciona como si etcétera JT cualquier cosa en el email del teléfono 1 y guardamos.
+El servidor arranca, incluso lanza como vez a través de un navegador que tiene la página.
 
-Volvemos al menú y al ver contactos.
+<img src="images/12-17.png">
 
-Efectivamente en esta nuevo contactos JPA si lo eliminamos se ha añadido hemos incluido de la transacción todas las capas se han ido conectadas una con otra y al eliminarlo también nos aparece.
+Si le damos a ver contactos no deberían aparecer aquí la lista de todos los contactos que tenemos.
+
+<img src="images/12-18.png">
+
+Finalmente volvemos al menú, vamos a añadir un nuevo contacto a ver si funciona.
+
+<img src="images/12-19.png">
+
+y guardamos, volvemos al menú 
+
+<img src="images/12-20.png">
+
+y al ver contactos nuevamente vemos el  nuevo contacto.
+
+<img src="images/12-21.png">
+
+si lo eliminamos se recarga la lista de contactos y ya vemos que no aparece.
+
+<img src="images/12-22.png">
+
+Todo funciona.
 
 # 13 Consultas parametrizadas 03:00
 # 14 Consultas nominadas 02:28
