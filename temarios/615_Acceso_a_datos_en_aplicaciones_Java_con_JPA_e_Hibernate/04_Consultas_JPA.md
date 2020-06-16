@@ -103,6 +103,10 @@ Muy bien pues en la siguiente elección vamos a ver un ejercicio práctico, adem
 
 <img src="images/10-01.png">
 
+
+
+JPA puede utilizarse en cualquier aplicación Java aunque normalmente vamos a ver su uso casi siempre centrado en el contexto del desarrollo de aplicaciones web en una aplicación web que sigue el patrón modelo vista controlador lo que es la lógica de negocio que es la donde se realiza el acceso a los datos es encapsulado dentro de clases o Enterprise Java.
+
 <img src="images/10-02.png">
 
 <img src="images/10-03.png">
@@ -110,8 +114,6 @@ Muy bien pues en la siguiente elección vamos a ver un ejercicio práctico, adem
 <img src="images/10-04.png">
 
 <img src="images/10-05.png">
-
-JPA puede utilizarse en cualquier aplicación Java aunque normalmente vamos a ver su uso casi siempre centrado en el contexto del desarrollo de aplicaciones web en una aplicación web que sigue el patrón modelo vista controlador lo que es la lógica de negocio que es la donde se realiza el acceso a los datos es encapsulado dentro de clases o Enterprise Java.
 
 En lo que se conoce como el modelo modelo que es utilizado desde el controlador punto central recibe todas las peticiones del cliente y que controla las vistas que sirven para generar las respuestas y el modelo que es el que le va a proporcionar todas las lógicas de negocio a dicha aplicación.
 
