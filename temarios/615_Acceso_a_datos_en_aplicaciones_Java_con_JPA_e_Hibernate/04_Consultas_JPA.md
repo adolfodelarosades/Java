@@ -103,64 +103,89 @@ Muy bien pues en la siguiente elección vamos a ver un ejercicio práctico, adem
 
 <img src="images/10-01.png">
 
-
-
-JPA puede utilizarse en cualquier aplicación Java aunque normalmente vamos a ver su uso casi siempre centrado en el contexto del desarrollo de aplicaciones web en una aplicación web que sigue el patrón modelo vista controlador lo que es la lógica de negocio que es la donde se realiza el acceso a los datos es encapsulado dentro de clases o Enterprise Java.
+JPA puede utilizarse en cualquier aplicación Java aunque normalmente vamos a ver su uso casi siempre centrado en el contexto del desarrollo de aplicaciones Web. 
 
 <img src="images/10-02.png">
 
+En una aplicación web que sigue el patrón Modelo Vista Controlador, lo que es la Lógica de Negocio que es donde se realiza el acceso a los datos es encapsulado dentro de Clases o Enterprise Java Beans EJB en lo que se conoce como el *Modelo*. El Modelo que es utilizado desde el Controlador, punto central que recibe todas las peticiones del Cliente y que controla las Vistas que sirven para generar las respuestas y el Modelo que es el que le va a proporcionar toda la lógicas de negocio a dicha aplicación. Esto significa que será en la capa *Modelo* donde vamos a utilizar ese API JPA para acceder a nuestra capa de persistencia que es la que nos va a exponer los datos.
+
 <img src="images/10-03.png">
+
+El Modelo como decíamos puede ser implementado con clases estándares Java o bien EJB que ya lo veremos en una lección posterior, dentro de sus métodos sean clases estándares Java o EJB es donde vamos a codificar las instrucciones JPA para acceso a la capa de persistencia.
 
 <img src="images/10-04.png">
 
+Las aplicaciones web se ejecutan no sólo dentro de la máquina virtual Java sino que requieren de un software adicional conocido como servidor de aplicaciones que es el que gestiona el ciclo de vida de esas aplicaciones Web. Las aplicaciones Web tienen como elementos fundamentales los Servlets y JSPs que se ejecutan sobre un contenedor, llamado Contenedor Web que forma parte de ese servidor de aplicaciones Java EE.
+
+Aunque nuestra lógica de negocio esté en clases estándar en Java sí va a formar parte de una aplicación Web tenemos que disponer de ese Servidor de Aplicaciones para que la aplicación entera pueda funcionar.
+
+Entonces antes de ver el ejercicio que vamos a presentar a continuación de utilización de JPA con las consultas Query y TypeQuery que comentamos en la lección anterior, vamos a ver cómo configurar nuestro Eclipse para poder utilizar un servidor de aplicaciones. Aquí te presentamos algunos de los más utilizados en el desarrollo aplicaciones Web y quizá el más sencillo y es con el que vamos a trabajar ahora es Apache Tomcat.
+
 <img src="images/10-05.png">
 
-En lo que se conoce como el modelo modelo que es utilizado desde el controlador punto central recibe todas las peticiones del cliente y que controla las vistas que sirven para generar las respuestas y el modelo que es el que le va a proporcionar todas las lógicas de negocio a dicha aplicación.
+Apache Tomcat lo podemos descargar gratuitamente desde la dirección http://www.apache.org/. La versión 8 es la más utilizada y como digo en esta dirección tienes una sección de descargas donde puedes descargar para 32 bits 64 bit se puede descargar el modo ejecutable o modo Zip simplemente descomprimirlo y ya está, el proceso de instalación es muy sencillo, muy básico y una vez que ya lo tengamos instalado descomprimido, instalado, dependiendo de si hemos elegido un exe o un punto zip en una carpeta de nuestro disco lo tenemos que integrar dentro de Eclipse para que luego cuando hagamos una aplicación Web podamos usar ese servidor de aplicaciones para probarlo.
 
-Esto significa que será aquí en esta capa donde vamos a utilizar ese API JPA para acceder a nuestra capa de persistencia que es la que nos va a exponer los datos.
-
-En ese modelo como decíamos puede ser implementado con clases estándares Java o bien interpretada bien que ya lo veremos en una lección posterior dentro de sus métodos sean clases estándares Java o EJB Java.
-
-Es donde vamos a codificar las instrucciones JPA para acceso a la capa de persistencia las aplicaciones web se ejecutan no sólo dentro de la máquina virtual Java sino que requieren de un software adicional conocido como servidor de aplicaciones que es el que gestiona el ciclo de vida de esas aplicaciones web aplicaciones web.
-
-Los elementos fundamentales que son las células y JSP se ejecutan sobre un contenedor llamado contenedor web que forma parte de ese servidor de aplicaciones Java.
-
-Aunque nuestra lógica de negocio esté en clases estándar en Java sí va a formar parte de una aplicación web pues tenemos que disponer de ese servidor de aplicaciones para que la aplicación entera pueda funcionar.
-
-Entonces antes de ver el ejercicio que vamos a presentar a continuación de utilización de JPA con las consultas cuerito y que comentamos en la lección anterior vamos a ver cómo configurar nuestro Eclipse para poder utilizar un servidor de aplicaciones.
-
-Aquí te presentamos algunos de los más utilizados en el desarrollo aplicaciones web y quizá el más sencillo y es el que vamos a hablar con el que vamos a trabajar ahora es el Apache Tomcat Apache Tomcat.
-
-Lo podemos descargar gratuitamente desde la dirección de Apache pintor. La versión de 8 es la más utilizada y como digo en esta dirección. Aquí tienes una sección de descargas donde puedes descargar para 32 bits 64 bit se puede descargar el modo ejecutable o Modo Zip simplemente descomprimir lo que ya está en proceso de instalación es muy sencillo muy básico y una vez que ya lo tengamos instalado descomprimido instalado dependiendo de si hemos elegido un exe o un punto zip en una carpeta de nuestro disco.
-
-Pues lo tenemos que integrará aventuren clips para que luego cuando hagamos una aplicación web podamos usar ese servidor de aplicaciones para probarla.
+<img src="images/10-07.png">
 
 Bien pues aquí tenemos el Eclipse que tendremos que hacer en él para poder integrar ese servidor de aplicaciones Tomcat que acabamos de descargar.
 
-Lo primero nos vamos a ir a la opción de menú Windows Preferences en Windows Preferences pues hay una serie de propiedades y dentro de la categoría Server tenemos run run the environments donde deberíamos tener registrados los servidores de aplicaciones que queremos utilizar para construir aplicaciones dentro de este paisa actual en el que estamos como no queremos ninguno.
+<img src="images/10-06.png">
 
-Vamos a registrar a través del botón A desde el servidor de aplicaciones Toccata que lo vamos a encontrar dentro de la lista de tipos de posibles servidores admitidos por el eclipse.
+Lo primero nos vamos a ir a las Preferences de Eclipse exactamente a Server - Runtime Enviroment
 
-Como ves es posible que a lo mejor en tu versión de Eclipse tengas menos que ello porque hay que yo me he descargado algún plugin adicional para poder disponer de otros servidores aparte del Apache como por ejemplo glacis que también eso lo veremos en una lección posterior cuando queramos utilizar EJB.
+<img src="images/10-08.png">
 
-Pero bueno en el caso concreto de Tomcat la categoría Apache viene por defecto ya en la versión de Eclipse Java Marthe y nos vamos.
+En Runtime Enviroment es donde deberíamos tener registrados los servidores de aplicaciones que queremos utilizar para construir aplicaciones dentro de este Workspace actual en el que estamos, como vemos no tenemos ninguno, vamos a registrar a través del botón `Add` el servidor de aplicaciones Tomcat que lo vamos a encontrar dentro de la lista de tipos de posibles servidores admitidos por Eclipse.
 
-Desplegamos Apache y aquí vemos Apache Tomcat. Elegimos la opción siguiente y ahora se nos pide el directorio de instalación que ya me aparece donde lo tenía seleccionado. En tu caso a través del botón Broewe tendrías que ir a la carpeta donde has descomprimido Tomcat concretamente a la carpeta que se llamará Apache Tomcat y la versión que hayas descargado. Dentro de esta huelga Micco libre etcétera.
-Esa es la carpeta raíz de Tomcat en la que hay que elegir la dirección que hay que indicar en ésta. En esta opción.Bueno pues una vez que ya lo tengamos fijados directamente finalizamos y ya lo tenemos disponible para poderlo utilizar en todas las aplicaciones web que hagamos dentro de este país.
+<img src="images/10-09.png">
 
-Pero para ello nos vamos a cambiar a si vamos a desarrollar aplicaciones web ya no vamos a estar en la perspectiva Java sino bien en la perspectiva Java o en la perspectiva web cualquiera de las dos es igualmente válida cualquiera de Java o web.
+Como ves es posible que a lo mejor en tu versión de Eclipse tengas menos que yo porque me he descargado algún plugin adicional para poder disponer de otros servidores aparte de Apache como por ejemplo Glassfish que también lo veremos en una lección posterior cuando queramos utilizar EJB.
 
-Una vez en esa perspectiva se habilitará esta pestaña servidores y si no siempre podemos hacer que se nos muestre por aquí a través de Windows o bien está la pestaña servidores y aquí tenemos que registrar el servidor de los que tendremos en la lista de ruta y en environments.
+<img src="images/10-10.png">
 
-En nuestro caso sólo tenemos uno elongar pero tenemos que tenerlo registrado aquí para que el Eclipse pueda utilizarlo de cara a probar las aplicaciones.
+Pero bueno en el caso concreto de Tomcat la categoría Apache viene por defecto ya en la versión de Eclipse Java EE Marte, desplegamos Apache y aquí vemos Apache Tomcat. 
 
-Entonces pulsamos sobre el enlace y lo mismo volvemos a elegir en la sección del tipo de servidor Apache Tomcat Apache con grado 8 y ahora ya directamente te aparece que se observe Runtime Environment registrado.
+<img src="images/10-10.png">
 
-Si tuviéramos varios podríamos elegir pero sólo tenemos ocho con el que nos vamos a quedar directamente finalizamos y ya tenemos el servidor registrado.
+Elegimos la opción siguiente y ahora se nos pide el directorio de instalación.
 
-Ahora mismo está en estado parado pero bueno ya se encargará el propio Eclipse cuando vemos aprobar una aplicación arrancarlo y publicar sobre las aplicaciones.
+<img src="images/10-11.png">
 
-Eso lo vamos a ver en la siguiente elección en el ejercicio que vamos a desarrollar que es una aplicación web donde vamos a utilizar JPA para acceder a la capa de persistencia utilizando en este caso las consultas y demás.
+A través del botón Browse tendrías que ir a la carpeta donde has descomprimido Tomcat concretamente a la carpeta que se llamará Apache Tomcat y la versión que hayas descargado.
+
+<img src="images/10-12.png">
+
+Esa es la carpeta raíz de Tomcat que hay indicar en ésta indicar en esta opción. 
+
+<img src="images/10-13.png">
+
+Bueno pues una vez que ya lo tengamos fijados directamente finalizamos 
+
+<img src="images/10-14.png">
+
+y ya lo tenemos disponible para poderlo utilizar en todas las aplicaciones web que hagamos dentro de este workspace.
+
+Pero para ello nos vamos a cambiar de perspectiva, si vamos a desarrollar aplicaciones web ya no vamos a estar en la perspectiva Java sino bien en la perspectiva Java EE o en la perspectiva Web cualquiera de las dos es igualmente válida cualquiera de JavaEE o Web.
+
+<img src="images/10-15.png">
+
+Una vez en esa perspectiva se habilitará esta pestaña servidores y si no siempre podemos hacer que se nos muestre por aquí a través de Windows
+
+<img src="images/10-16.png">
+
+Bien está la pestaña servidores y aquí tenemos que registrar el servidor de los que tendremos en la lista de ruta y en environments, en nuestro caso sólo tenemos uno el Tomcat, pero tenemos que tenerlo registrado aquí para que Eclipse pueda utilizarlo de cara a probar las aplicaciones, entonces pulsamos sobre el enlace 
+ 
+<img src="images/10-17.png">
+ 
+y lo mismo volvemos a elegir en la sección del tipo de servidor Apache Tomcat 9 y ahora ya directamente te aparece que se observe Runtime Environment registrado.
+
+<img src="images/10-18.png">
+
+Si tuviéramos varios podríamos elegir, pero sólo tenemos uno con el que nos vamos a quedar directamente finalizamos y ya tenemos el servidor registrado.
+
+<img src="images/10-19.png">
+
+Ahora mismo está en estado parado pero bueno ya se encargará el propio Eclipse cuando vemos aprobar una aplicación arrancarlo y publicar sobre las aplicaciones. Eso lo vamos a ver en la siguiente elección en el ejercicio que vamos a desarrollar que es una aplicación web donde vamos a utilizar JPA para acceder a la capa de persistencia utilizando en este caso las consultas y demás.
 
 # 11 Ejercicio práctico I Parte 1 19:04
 # 12 Ejercicio práctico I Parte 2 10:01
