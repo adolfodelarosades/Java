@@ -99,6 +99,53 @@ En `T getSingleResult()` es exactamente lo mismo devolvería una única entidad,
 
 Muy bien pues en la siguiente elección vamos a ver un ejercicio práctico, además va a ser una aplicación web, donde vamos a aplicar todas las consultas JPQL a través de `Query` y `TypedQuery`.
 
+### Materrial Adicional - Paginación de consultas
+
+Las interfaces `Query` y `TypedQuery` proporcionan una serie de métodos que permiten paginar los resultados de una consulta, a fin de poder tratarlos por bloques en lugar de todos a la vez.
+
+Estos métodos son los siguientes:
+
+* `Query setFirstResult(int pos)`. Establece la posición del primer objeto a devolver del conjunto. La posición del primer del primer objeto del conjunto es 0.
+
+* `Query setMaxResult(int max)`. Establece el máximo número de resultados a devolver por la consulta.
+
+Los métodos anteriores se deben establecer sobre el objeto `Query` o `TypedQuery` antes de llamar a `getResultList()`, pues la llamada a este método se verá condicionada por los valores establecidos en dichos métodos. De hecho, vemos que ambos métodos devuelven un nuevo objeto Query configurado para obtener los resultados según el valor establecido en la llamada al método.
+
+Por ejemplo, si tam es una variable que contiene el tamaño de página y q es la variable que apunta al objeto Query, el siguiente método nos devolvería el conjunto de entidades Producto de la página indicada como parámetro:
+
+```java
+public List<Producto> obtenerProductosPorPagina(int pag){ 
+   //calculamos el total de páginas
+   double totalEntidades=q.getResultList().size();
+   int paginas=(int)Math.ceil(totalEntidades/tam);
+
+   //si el número de página es superior a las existentes, devolvemos nulo     
+   if(pag>paginas){
+      return null; 
+   }else{
+      return q.setFirstResult((pag-1)*tam).setMaxResult(tam).getResultList();
+   } 
+}
+```
+
+Vamos a comentar un poco las instrucciones anteriores. En primer lugar, tenemos la línea: 
+
+`double totalEntidades=q.getResultList().size();`
+
+Lo que hacemos en esta instrucción es calcular el número total de entidades que devolvería la consulta asociada al objeto query que vamos a paginar. Lo almacenamos en una variable de tipo `double` porque después vamos a realizar una división con ella, y nos interesa la parte decimal.
+
+Seguidamente, tenemos la instrucción:
+
+`int paginas=(int)Math.ceil(totalEntidades/tam);`
+
+Lo que hacemos primeramente es calcular el número de páginas, para lo que dividimos el total de entidades por el tamaño de página. Si el resultado no es entero, por ejemplo, 3.2 o 3.7, el total de páginas será uno más que el valor entero de la división (en los ejemplos anteriores, sería 4), de ahí que apliquemos el método `ceil`, que nos da el entero superior más cercano a la división. Si el resultado de la división fuera 2.0, la llamada a `ceil` retornaría también 2.0, no habría que sumar uno al valor entero de la división porque directamente habría dos páginas.
+
+Finalmente, comprobamos si la página solicitada es superior a las existentes, porque en ese caso no hay que devolver ningún resultado. Si la página solicitada está dentro de las existentes, tenemos la instrucción:
+
+`return q.setFirstResult((pag-1)*tam).setMaxResult(tam).getResultList();`
+
+La llamada a `setFirstResult` devuelve un objeto Query, de ahí que al resultado le apliquemos directamente `setMaxResult` que devuelve el objeto Query final configurado con la posición del primer resultado y el máximo de resultados a obtener. A este objeto Query final es al que le aplicamos el `getResultList()`.
+
 # 10 JPA en aplicaciones Web 06:26
 
 <img src="images/10-01.png">
@@ -539,7 +586,6 @@ public void altacontacto(Contacto c) {
 
 Sería exactamente lo mismo, lo único no tendríamos que crear obviamente el objeto de Contacto porque ya nos viene. Obtenemos `EntityManager`, iniciamos transaccion llamada al método `persist` y confirmamos.
 
-
 Eliminar Contacto.
 
 ```java
@@ -616,21 +662,187 @@ Aquí ves que hemos utilizado una JPQL la cual incluye una condición, ya veremo
 
 # 12 Ejercicio práctico I Parte 2 10:01
 
-En esta segunda parte del ejercicio vamos a ver cómo crear las Capas de Controlador y Vista como no es objetivo de nuestro curso la elaboración de dichas capas vamos a ver un poco por encima los elementos que vamos a crear.
+En esta segunda parte del ejercicio vamos a ver cómo crear las Capas de Controlador y Vista, como no es objetivo de nuestro curso la elaboración de dichas capas vamos a ver un poco por encima los elementos que vamos a crear.
 
-Primero vamos a crear el Controlador vamos a crearlo que son una serie de servlets que yo ya tengo por aquí y que simplemente los voy a arrastrar.
+Primero vamos a crear el Controlador, vamos a crearlo son una serie de servlets que yo ya tengo por aquí.
 
-Sería este paquete servlets a la lista de paquete de nuestro proyecto y ahora lo revisamos así un poquito por encima para que vean lo que hacen.
+<img src="images/12-01.png">
 
-Tenemos un Servlet Controlador de acción que es el que el centro al que llegan todas las peticiones recibirá un parámetro que indicará qué tipo de operación quiere realizar el usuario si quiere añadir un contacto y un contacto y en función de eso ya el controlador le va redirigiendo a otros controladores de acción que se van a encargar de cada una de esas tareas o bien a alguna página.
+Los servlets estan dentro del paquete `servlets` ahora lo revisamos así un poquito por encima para que vean lo que hacen.
 
-Si simplemente es un enlace para ir a una determinada página por ejemplo la de dar de alta contacto o el menú principal.
+Tenemos un Servlet Controlador de acción.
 
-Aquí por ejemplo en este servlet al táctil como vemos tenemos la llamada a ese método alta contacto que hemos definido en la capa de lógica de negocio que es lo que se hace aquí se reciben los parámetros de la página HTML que ha provocado la opción de dar el alta y distanciamos gestión contactos y llamamos a ese método y después nos dirigimos a la página del menú.
+*`Controlador.java`*
 
-En este caso se está llamando la versión que recibe los tres parámetros se podría haber construido por aquí un objeto o contacto puesto que esta entidad también puede ser manejable de Servlets y páginas JSP y haberlo creado aquí haber enviado ya con el nombre email el teléfono a esa otra versión del método.
+```java
+package servlets;
 
-Cualquiera de las dos habría sido igualmente válida en el caso eliminarás pues lo que hace es recibir el contacto y después llamar a ese método que hemos creado también en recuperarã Action.
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   /**
+   * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String op=request.getParameter("op");
+      String url="";
+      switch(op){
+         case "doAlta":
+            url="AltaAction";
+            break;
+         case "doEliminar":
+            url="EliminarAction";
+            break;
+         case "doRecuperar":
+            url="RecuperarAction";
+            break;
+         case "toNuevo":
+            url="nuevo.html";
+            break;
+         case "toMenu":
+            url="menu.html";
+            break;		
+      }
+      request.getRequestDispatcher(url).forward(request, response);
+   }
+}
+```
+
+El Controlador es el centro al que llegan todas las peticiones, recibirá un parámetro `op` que indicará qué tipo de operación quiere realizar el usuario, si quiere añadir un contacto, eliminar un contacto, etc. y en función de eso ya el Controlador le va redirigiendo a otros controladores de acción que se van a encargar de cada una de esas tareas o bien a alguna página si simplemente es un enlace para ir a una determinada página, por ejemplo la de dar de alta contacto `toNuevo` o el menú principal `toMenu`.
+
+El servlet `AltaAction` tiene el siguiente contenido:
+
+*`AltaAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class AltaContacto
+ */
+@WebServlet("/AltaAction")
+public class AltaAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   /**
+   * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String nombre=request.getParameter("nombre");
+      String email=request.getParameter("email");
+      int telefono=Integer.parseInt(request.getParameter("telefono"));
+      //creamos un objeto de la capa de lógica de negocio
+      //y llamamos al método encargado de hacer el alta
+      GestionContactos gcontactos=new GestionContactos();
+      gcontactos.altaContacto(nombre,email,telefono);
+      request.getRequestDispatcher("menu.html").forward(request, response);
+   }
+}
+```
+
+Como vemos tenemos la llamada al método `altaContacto` que hemos definido en la Capa de Lógica de Negocio. Que es lo que se hace aquí, se reciben los parámetros `nombre`, `email` y `telefono` de la página HTML que ha provocado la opción de dar el alta e instanciamos `GestionContacto` y llamamos al método `altaContacto`, la versión que recibe los 3 parámetros y después nos redirigimos a la página del menú.
+
+En este caso se está llamando la versión que recibe los tres parámetros se podría haber construido un objeto o Contacto ya con el nombre, email y el teléfono y usar esa otra versión del método, cualquiera de las dos habría sido igualmente válida.
+
+En el caso del servlet `EliminarAction`
+
+*`EliminarAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class EliminaContacto
+ */
+@WebServlet("/EliminarAction")
+public class EliminarAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   /**
+   * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      int idContacto=Integer.parseInt(request.getParameter("idContacto"));
+      GestionContactos gcontactos=new GestionContactos();
+      gcontactos.eliminarContacto(idContacto);
+      request.getRequestDispatcher("RecuperarAction").forward(request, response);
+   }
+}
+```
+
+Lo que se hace es recibir el `idContacto` y después llamar a ese método que hemos creado también `gcontactos.eliminarContacto(idContacto);`
+
+
+En el caso del servlet `RecuperarAction`
+
+*`RecuperarAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Contacto;
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class RecuperarAction
+ */
+@WebServlet("/RecuperarAction")
+public class RecuperarAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   /**
+   * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      GestionContactos gcontactos=new GestionContactos();
+      List<Contacto> contactos=gcontactos.recuperarContactos();
+      //guardamos contactos en un atributo de petición
+      request.setAttribute("contactos", contactos);
+      //trasnferencia de la petición
+      request.getRequestDispatcher("contactos.jsp").forward(request, response);
+   }
+}
+```
 
 Lo que se hace es llamar al método que me devuelve todos los contactos que implementamos con la QWERTY y pasarlo como un atributo de petición a la JSP que se encargará de visualizarlo la vista.
 
