@@ -803,7 +803,6 @@ public class EliminarAction extends HttpServlet {
 
 Lo que se hace es recibir el `idContacto` y después llamar a ese método que hemos creado también `gcontactos.eliminarContacto(idContacto);`
 
-
 En el caso del servlet `RecuperarAction`
 
 *`RecuperarAction`*
@@ -844,71 +843,309 @@ public class RecuperarAction extends HttpServlet {
 }
 ```
 
-Lo que se hace es llamar al método que me devuelve todos los contactos que implementamos con la QWERTY y pasarlo como un atributo de petición a la JSP que se encargará de visualizarlo la vista.
+Lo que se hace es llamar al método `recuperarContactos()` que me devuelve todos los contactos que implementamos con la `Query` y pasarlo como un atributo de petición a la JSP que se encargará de visualizarlo, la Vista.
 
-Bueno vamos a poner las vistas también las tenemos en la carpeta web contén y serían dos HTML y JSP que es la que mostrará la lista de los contactos recuperados que vamos aquí y lo arrastramos.
+Bueno vamos a poner las vistas también las tenemos en la carpeta WebContent y serían dos HTML y un JSP que es la que mostrará la lista de los contactos recuperados.
 
-En este caso a esconder aquí tenemos estos son simples páginas HTML los enlaces a todo controles indicando la operación a realizar.
+<img src="images/12-02.png">
 
-Está también tomando el control de la operación a realizar y aquí tenemos la JSP en el caso de la JSP pues lo que hacemos es recuperar el atributo de petición contactos y recorrerlo para mostrar cada uno de los contactos en una fila y con el enlace de eliminar contactos estoy viendo aquí algunos errores porque en vez de utilizar Java en esta página JSP se está utilizando la librería JSTL librería jote STL Java Standard Library que proporciona acciones para realizar tareas habituales de lógica en una página JSP pero sin utilizar código Java por ejemplo Infor definir una variable UNIV bien entonces es clave para poder utilizar esa librería y emplear este elemento Talib y aquí el problema que nos está dando es que no la reconoce no encuentra esa librería porque aunque forma parte del Java Enterprise el servidor de aplicaciones Tomcat no la trae en la sección de Java Resources aquí vemos pues no solamente en nuestras clases sino en las librerías que puede utilizar la aplicación.
+En este caso `menu.html` y `nuevo.html` son simples páginas HTML.
 
-Nuestro proyecto que estamos desarrollando en Java erré el eclipse sin barrer Java estãndar Eclipse Lihn y que dice Apache Tomcat que representaría todas las librerías que vienen con Tomcat y que incluyen alguna de ellas concretamente están JSP Servlet pues parte de lo que es la librería Java Enterprise Edition para crear los @evleaks JSP pero no todas.
+*`menu.html`*
 
-Entonces qué ocurre si necesitamos hacer uso de esa librería que no viene con Donka.
+```html
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <center>
+        <a href="Controller?op=toNuevo">Nuevo contacto</a><br/>
+        <a href="Controller?op=doRecuperar">Ver contactos</a><br/>
+    </center>
+    </body>
+</html>
+```
 
-Pues igual que por ejemplo con el driver habría que descargarlo y añadirlo explícitamente las propiedades pestaña librerías o añadir external.
+Aquí tenemos enlaces todo a `Controller?op=...` indicando la operación a realizar.
 
-Eso es una forma de hacerlo ahora aprovechando este ejercicio te voy a enseñar otra y es utilizar Maven, Maven es una podríamos decir que es una herramienta que viene incorporada con Eclipse que nos permite localizar dependencias a librerías.
+*`nuevo.html`*
 
-Entonces descargar los archivos jar y añadirlos manualmente a través de Maven.
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>nuevo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+   function comprobar(){ 	
+      if(document.getElementById("nombre").value==""||
+ 	 document.getElementById("email").value==""||
+ 	 document.getElementById("edad").value==""){
+ 	 alert("faltan datos");
+ 	 return false;
+      }
+      else{
+ 	 return true;
+      }	
+    }
+    function comprobarEdad(){
+       if(isNaN(document.getElementById("edad").value)){
+          alert("Edad debe ser numérico");
+          document.getElementById("edad").value="";
+       }
+    }
+</script>
+</head>
+<body>
+    <form action="Controller?op=doAlta" method="post" onsubmit="return comprobar();">
+	Nombre:<input id="nombre" type="text" name="nombre"/>
+	<br/>
+	Email:<input id="email" type="text" name="email"/>
+	<br/>
+        Telefono:<input id="edad" onblur="comprobarEdad();" type="text" name="telefono"/>
+	<br/>
+	<input type="submit" value="Guardar"/>
+    </form>
+</body>
+</html>
+```
 
-Los podemos buscar en el repositorio de Maven indicar la referencia a sus archivos a esas librerías en un archivo XML propio de Maven y a partir de ahí ya se encargarán de descargarlo y de incluirlo en nuestro proyecto para lo mejor para una o dos librerías.
+Está también tomando el control de la operación a realizar `Controller?op=doAlta`.
 
-Pues igual no ahorramos mucho tiempo frente a descargarlas y añadirla manualmente pero es que hay ciertas librerías que a su vez dependen de otras y que claro ir descargando y localizando todas esas dependencias es muy complicado con Maven eso es automático y Maven se encarga de localizar las dependencias que pudieran tener cierta librería.
+Y aquí tenemos la JSP.
 
-Entonces cómo aplicaríamos Maven en este proyecto a través del botón derecho. Configure convertirá el proyecto finalizamos el cuadro de diálogo éste. Estas opciones que nos da aquí de incorporar via Maven también estas librerías que ya tenemos.
+*`contactos.jsp`*
 
-Esto lo vamos a asaltar porque en esa librería ya vienen con Tonga y cuando hay que incorporar las de A+B via Maven.
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="modelo.GestionContactos,java.util.ArrayList,entidades.Contacto"%>
 
-Queremos incorporar algunas adicionales que necesitamos el propio Driver y SQL.
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+   <c:set var="contactos" value="${requestScope.contactos}"/>
+	
+   <br/><br/><br/>
+	
+   <c:choose>
+      <c:when test="${!empty contactos}">
+	 <table border="1">
+	    <tr>
+	       <th>Nombre</th>
+	       <th>Email </th>
+	       <th>Telefono</th>
+	       <th></th>
+	    </tr>
+	    <c:forEach var="cont" items="${contactos}">
+	    <tr>
+	       <td>${cont.nombre}</td>
+	       <td>${cont.email}</td>
+	       <td>${cont.telefono}</td>
+	       <td><a href="Controller?op=doEliminar&idContacto=${cont.idContacto}">Eliminar</a></td>
+	    </tr>
+	    </c:forEach>
+	 </table>
+      </c:when>
+      <c:otherwise>
+	 <h1>No hay contactos</h1>
+      </c:otherwise>
+   </c:choose>
+   <br/>
+   <br/>
+   <a href="Controller?op=toMenu">Menu</a>
+</body>
+</html>
+```
 
-Vamos a ver como comprobado también con Maven aunque lo tenemos descargado.
+En el caso de la JSP lo que hacemos es recuperar el atributo de petición `contactos` y recorrerlo para mostrar cada uno de los contactos en una fila y con el enlace de eliminar contactos, estoy viendo aquí algunos errores porque en vez de utilizar Java en esta página JSP, se está utilizando la librería JSTL, Java Standard Tag Library que proporciona acciones para realizar tareas habituales de lógica en una página JSP pero sin utilizar código Java, por ejemplo un `<c:forEach`, una variable `<c:set var="`, un if `<c:when test=` para poder utilizar la librería hay que emplear este elemento Talib `<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>` y aquí el problema que nos está dando es que no la reconoce, no encuentra esa librería, porque aunque forma parte del Java Enterprise, el servidor de aplicaciones Tomcat no la trae. 
 
-Pero bueno aquí vamos a hacerlo con Maven.
+En la sección de Java Resources aquí vemos pues no solamente nuestras clases sino en las librerías que puede utilizar la aplicación, nuestro proyecto que estamos desarrollando.
 
-Este sería el `pom.xml` y aquí concretamente en la vista de código hay entre el cierre de Bil y cierre de proyecto donde deberíamos incorporar las entradas de localización de las librerías que necesitamos que van a ser Reimer de mail SQL por un lado y el JSTL por otro dónde metemos hoy las dependencias de esas librerías.
+<img src="images/12-03.png">
 
-Pues para ello vamos a ver nos vamos a ir al repositorio de Maren BVM repositorio en repositorio en repositorios que está en esta dirección MVNO repositorio punto com que permite buscar localizar a dependencias por ejemplo cuotas etc. ya que la tenemos ahí buscamos y aquí nos aparece una serie de listas para las que he encontrado y algunas son prácticamente iguales.
+Tenemos JRE, EclipseLink y Apache Tomcat que representaría todas las librerías que vienen con Tomcat y que incluyen alguna de ellas
 
-Hay algunas que ya son más raras y que por lo tanto no vamos a JSTL servlet la otra JSTL.
+<img src="images/12-04.png">
 
-Es decir es esto lo que vamos buscando normalmente las que aparecen en primeros lugares.
+concretamente están `jsp-api.jar` y `servlet-api.jar` parte de lo que es la librería Java Enterprise Edition para crear los Servlets y JSsP pero no todas. Entonces qué ocurre si necesitamos hacer uso de esa librería que no viene con Tomcat. Pues igual que por ejemplo con el Driver, habría que descargarlo y añadirlo explícitamente en las propiedades, pestaña librerías y añadir el external Jar. Eso es una forma de hacerlo, pero ahora aprovechando este ejercicio te voy a enseñar otra y es utilizar Maven, Maven es una podríamos decir que es una herramienta que viene incorporada con Eclipse que nos permite localizar dependencias a librerías, entonces en vez de descargar los archivos JAR y añadirlos manualmente, a través de Maven los podemos buscar en el repositorio de Maven, indicar la referencia a sus archivos, a esas librerías en un archivo XML propio de Maven y a partir de ahí ya se encarga Maven de descargarlo y de incluirlo en nuestro proyecto. A lo mejor para una o dos librerías  igual no ahorramos mucho tiempo frente a descargarlas y añadirla manualmente, pero es que hay ciertas librerías que a su vez dependen de otras y que claro ir descargando y localizando todas esas dependencias es muy complicado, con Maven eso es automático y Maven se encarga de localizar las dependencias que pudieran tener cierta librería.
 
-Sin embargo aquí vemos que está todavía debe ser muy reciente cuatro usos que tienen un poquito más de uso.
+Entonces cómo aplicaríamos Maven en este proyecto a través del botón derecho, Configure, Convert to Maven Project.
 
-Quizá el más más fiable.
+<img src="images/12-05.png">
 
-Elegimos otra STL indicamos la lista de versiones indicamos qué versión queremos la 1.2 que además ser la más utilizada y aquí tenemos ya directamente la entrada que tenemos que incluir copiamos esto portapapeles y lo incluimos directamente dentro de una sección dependencias entre las dependencias.
+<img src="images/12-06.png">
 
-Ahí incluimos esa dependencia a continuación repasito con todas las dependencias que queremos.
+Finalizamos el cuadro de diálogo éste. Estas opciones que nos da aquí de incorporar via Maven también estas librerías que ya tenemos, esto lo vamos a asaltar porque en esa librería ya vienen con Tomcat y no hay que incorporarlas via Maven (A mi no me salio).
 
-A esto ya le va indicando Maven que tiene que descargar esa librería por otro lado.
+El proyecto a cambiado un poco y ahora se nos presenta así:
 
-Vamos a volver otra vez a un repositorio.
+<img src="images/12-07.png">
 
-Y en este caso vamos a buscar MySQL.
+Básicamente se ha añadido el archivo `pom.xml` que es donde se insertan las dependencias que manejara Maven dentro de nuestro proyecto.
 
-Con esto hemos buscado alguna vez y esto es el conector Java mayor cual es quitarle las carga de SQL ya lo teníamos descargado pero bueno podemos cogerlo desde aquí e incorporarlo via Maven que aparece en la lista de versiones 6 creo que teníamos 5 1 XLII mirar este mismo es el que vamos a utilizar aquí tenemos la entrada que hay que indicar en el XML.
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>615-02_web_jpa</groupId>
+  <artifactId>615-02_web_jpa</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+        <configuration>
+          <warSourceDirectory>WebContent</warSourceDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
+
+Es posible que necesitemos incorporar algunas dependencias adicionales que necesitamos en el proyecto, el propio Driver MySQL por ejemplo. Vamos a ver como controlarlo con Maven aunque lo tenemos descargado. Pero bueno aquí vamos a hacerlo con Maven. 
+
+En el `pom.xml` deberíamos incorporar las entradas de localización de las librerías que necesitamos que van a ser el Driver de MySQL por un lado y el JSTL por otro, dónde metemos las dependencias de esas librerías. Para ello vamos a ir al repositorio de Maven https://mvnrepository.com/ el repositorio permite buscar, localizar dependencias por ejemplo `jstl` 
+
+<img src="images/12-08.png">
+
+ya que la tenemos ahí buscamos y aquí nos aparece una lista que ha encontrado y algunas son prácticamente iguales. Hay algunas que ya son más raras y que por lo tanto no vamos a usar. Es decir lo que vamos buscando normalmente aparecen en primeros lugares. Sin embargo aquí vemos que está todavía debe ser muy reciente ocho usos y la siguiente tienen un poquito más de usos, quizá es la más fiable, la elegimos.
+
+<img src="images/12-09.png">
+
+vemos la lista de versiones, indicamos qué versión queremos la 1.2 que además ser la más utilizada y aquí tenemos ya directamente la entrada que tenemos que incluir
+
+<img src="images/12-10.png">
+
+```html
+<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+```
+
+copiamos esto al portapapeles y lo incluimos directamente dentro de una sección dependencias entre las dependencias, ahí incluimos esa dependencia, a continuación repetimos con todas las dependencias que queremos. Esto ya le va indicando a Maven que tiene que descargar esas librería por otro lado vamos a volver otra vez al Repositorio de Maven y en este caso vamos a buscar MySQL connect
+
+<img src="images/12-11.png">
+
+ya lo teníamos descargado pero bueno podemos cogerlo desde aquí e incorporarlo via Maven, aparece en la lista de versiones 8.0.20 
+
+<img src="images/12-12.png">
+
+creo que teníamos la 5.1.42 mirar este mismo es el que vamos a utilizar aquí tenemos la entrada que hay que indicar en el XML.
+
+<img src="images/12-13.png">
+
+```html
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.20</version>
+</dependency>
+```
 
 Hacemos lo mismo de antes la copiamos y la pegamos.
 
-Entonces ya tenemos las dos dependencias que necesitamos al guardarlo pues ya automáticamente debería proceder a la descarga de esos archivos y por lo tanto incorporarlos en el proyecto.
+Entonces ya tenemos las dos dependencias que necesitamos al guardarlo pues ya automáticamente debería proceder a la descarga de esos archivos y por lo tanto incorporarlos en el proyecto, el archivo `pom.xml` queda así:
 
-Efectivamente fijate que el error que teníamos ha desaparecido porque aquí en esta entrada Library Maven dependencias tienen los dos Jahr que Maven ya descargado correspondientes a estos archivos si estos Jar dependieran de otro pues también los descargaría y no tendríamos que haber estado nosotros buscándolos incorporándolos manualmente a nuestro proyecto.
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-02_web_jpa</groupId>
+	<artifactId>615-02_web_jpa</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+</project>
+```
 
-Bueno esto ya se supone que ya podríamos ejecutarlo y funcionaría a través de ejecutamos runas rumbón Server la página menú en la página de inicio arrancarã Tomka.
+Efectivamente fijate que el error que teníamos ha desaparecido, porque en la entrada Libraries - Maven Dependencies tienen los dos JARs que Maven ya ha descargado `jstl-1.2.jar` y `mysql-connector-java-8.0.20.jar` correspondientes a las dependecias que incluimos en `pom.xml`. Si estos Jar dependieran de otro, pues también los descargaría y no tendríamos que haber estado nosotros buscándolos, incorporándolos manualmente a nuestro proyecto.
 
-Todo esto ya lo hace automáticamente eclipse por nosotros el servidor arranca incluso por lanza como es a través de un navegador que tiene la página extra que le hemos dicho si le damos a ver contactos no deberían aparecer aquí la lista de todos los contactos que tenemos.
+Bueno esto ya se supone que ya podríamos ejecutarlo y funcionaría a través de `Run As - Run on Server` arrancara Tomcat, todo esto ya lo hace automáticamente Eclipse por nosotros.
+
+
+
+el servidor arranca incluso por lanza como es a través de un navegador que tiene la página extra que le hemos dicho si le damos a ver contactos no deberían aparecer aquí la lista de todos los contactos que tenemos.
 
 Finalmente volvemos al menú vamos a añadir un nuevo contacto a ver si funciona como si etcétera JT cualquier cosa en el email del teléfono 1 y guardamos.
 
