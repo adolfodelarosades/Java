@@ -359,37 +359,173 @@ Al seleccionarla aparecen todos los datos de conexión.
 
 <img src="images/11-22.png">
 
-Bien ya tenemos la capa de persistencia, ahora se trataría de crear la lógica de negocio con todo lo que son los métodos de acceso a la capa de persistencia que nos van a ofrecer a las otras capas al controlador y la vista por las funcionalidades necesarias para el ejercicio que van a ser dar de alta la entidad eliminar una entidad a partir de el identificador de dicha entidad y recuperar todas las entidades que sólo vamos a tener que implementar mediante una cuenta.
+*`persistence.xml`*
 
-Entonces vamos a crear la clase gestión contactos donde vamos a encapsular toda esa funcionalidad gestión contactos dentro de un paquete modelo bien el código de esta clase.
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-02_web_jpa" transaction-type="RESOURCE_LOCAL">
+		<class>entidades.Contacto</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
 
-Pues vamos a ver eso lo tengo yo de aquí hecho y lo vamos.
+Bien ya tenemos la Capa de Persistencia, ahora se trataría de crear la Lógica de Negocio con todo lo que son los métodos de acceso a la Capa de Persistencia, que van a ofrecer a las otras capas, al Controlador y a la Vista, las funcionalidades necesarias para el ejercicio, que van a ser dar de alta la entidad, eliminar una entidad a partir de el identificador de dicha entidad y recuperar todas las entidades eso lo vamos a tener que implementar mediante una Query.
 
-Lo voy a copiar lo voy a pegar y lo vamos a estudiar lo vamos a analizar para explicarte todas las opciones que hemos ido código y todas las funcionalidades que hemos implementado.
+Vamos a crear la clase `GestionContactos` donde vamos a encapsular toda esa funcionalidad dentro de un paquete `modelo`.
 
-Control sí o para importar todo lo que necesitemos.
+<img src="images/11-23.png">
 
-Cuidado porque a la hora de importar por ejemplo QWERTY el eclipse puede detectar que hay dos cuerpos en el paquete Java que persistan en otros paquetes diferentes.
+El código de esta clase.
 
-Nosotros siempre estamos trabajando en JPA con este paquete cada X persisten como importemos otra clase que es de otro paquete distinto pues evidentemente no va a funcionar y puede darnos errores que luego nos cuesta trabajo detectar.
+```java
+package modelo;
 
-Entonces aquí utilizo también bueno ya tenemos aquí todo y bien por lo que vamos a hacer es vamos a explicar lo que hemos hecho aquí.
+public class GestionContactos {
 
-Bueno en primer lugar tenemos un método privado que vamos a utilizar dentro de los métodos de la lógica de negocio que serían estos 4 2 3 4 4 puesto 4 porque he hecho un par de métodos alta contacto dos variantes para darlos de alta a partir de lo que sería la propia entidad ya proporcionada como parámetro o los datos individuales.
+}
+```
 
-Pero primero centrémonos en este método que es usado por los otros métodos de negocio para obtener el Entity manager cuando necesiten acceder a la capa de persistencia.
+Antes de códificar esta clase vamos a hacer a añadir algunas cosas en la clase `Contacto`, ya que el asistente de Eclipse por defecto no nos genera un constructor con parámetros y para la gestión de los contactos lo necesitaremos, por lo que en Contacto vamos a añadir los siguientes dos constructores usando los asistentes de Eclipse:
 
-Recuerda que para obtener el intiman ayer teníamos que crear la factoría la Timaná y rFactor y a partir del Creativity manager ya teníamos el anticlimática vale para crear el Entity manager Factory.
+```java
+public Contacto(String email, String nombre, int telefono) {
+   super();
+   this.email = email;
+   this.nombre = nombre;
+   this.telefono = telefono;
+}
 
-Hay que darle el nombre de la Unidad de persistencia que nuestro persiste en XML pues era el que nos haya dado asistente directamente.
+public Contacto(int idContacto, String email, String nombre, int telefono) {
+   super();
+   this.idContacto = idContacto;
+   this.email = email;
+   this.nombre = nombre;
+   this.telefono = telefono;
+}
+```
 
-Por supuesto lo podríamos cambiar si no nos gusta ese nombre.
+Ahora volviendo a la clase `GestionContactos` vamos a colocar el código final de la clase y lo explicamos.
 
-Recordemos aquí y ya lo tenemos ahora vamos a analizar los métodos para dar de alta un contacto pues a partir de los datos de dicho contacto tendríamos que crear el contacto y obtener el intiman ayer iniciaron una transacción.
+*`GestionContactos`*
 
-Como sabéis todas las operaciones recordamos que impliquen hacer acciones sobre la base de datos que está detrás de la capa de persistencia implican que tenemos que tenerlas dentro de una transacción la iniciamos.
+```java
+package modelo;
 
-Hacemos la llamada proxys y confirmamos este error que tenemos aquí porque por defecto el asistente de Eclipse no nos genera un constructor con parámetros para la entidad y aquí hemos supuesto que ya está bueno o bien utiliza el constructor sin parámetros y le voy dando los datos a través de los eter o por qué no vamos a crearlo.
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import entidades.Contacto;
+
+public class GestionContactos {
+	
+	//Método que permite obtener el objeto EntityManager
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-02_web_jpa");
+		return factory.createEntityManager();
+	}
+	
+	public void altaContacto(String nombre, String email, int telefono) {
+		Contacto c = new Contacto(email, nombre, telefono);
+		EntityManager em = getEntityManager();
+		
+		//La operación la incluimos en una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(c);
+		tx.commit();
+	}
+
+	public void altacontacto(Contacto c) {
+		EntityManager em = getEntityManager();
+		
+		//La operación la incluimos en una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(c);
+		tx.commit();
+	}
+	
+	public void eliminarContacto(int idContacto) {
+		EntityManager em = getEntityManager();
+		
+		Contacto c = em.find(Contacto.class, idContacto);
+		EntityTransaction tx = em.getTransaction();
+		//Si el contacto existe lo eliminamos
+		tx.begin();
+		if(c != null) {
+		   em.remove(c);
+		}
+		tx.commit();	
+	}
+	
+	public List<Contacto> recuperarContactos(){
+		EntityManager em = getEntityManager();
+		/*Query qr = em.createQuery("Select c From Contacto c");
+		return (List<Contacto>)qr.getResultList();*/
+		TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+		return qr.getResultList();
+	}
+	
+	public Contacto buscarContactos(String email){
+		EntityManager em = getEntityManager();
+		
+		String jpql = "Select c From Contacto c Where c.email = '" + email + "'";
+		TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+		//return qr.getSingleResult();
+		return qr.getResultList().get(0);
+	}
+}
+
+```
+
+Vamos a explicar lo que hemos hecho aquí, en primer lugar tenemos un método privado `getEntityManager()`:
+
+```java
+//Método que permite obtener el objeto EntityManager
+private EntityManager getEntityManager() {
+   EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-02_web_jpa");
+   return factory.createEntityManager();
+}
+```
+
+que vamos a utilizar dentro de los métodos de la lógica de negocio que serían `altaContacto()`, `eliminarContacto`, `recuperarContactos` y `buscarContactos`.
+
+El método `getEntityManager()` es usado por los otros métodos de negocio para obtener el `EntityManager` cuando necesiten acceder a la capa de persistencia. Recuerda que para obtener el `EntityManager` teníamos que crear la factoría `EntityManagerFactory` a partir del `createEntityManagerFactory` y ya obteniamos el `EntityManager`. 
+
+Para crear el `EntityManagerFactory` hay que darle el nombre de la Unidad de Persistencia que se encuentra en el `persistence.xml` que nos haya dado asistente por default es decir `615-02_web_jpa`, por supuesto podríamos cambiar el nombre si no nos gusta ese nombre.
+
+Ahora vamos a analizar los métodos para dar de alta un contacto.
+
+```java
+public void altaContacto(String nombre, String email, int telefono) {
+   Contacto c = new Contacto(email, nombre, telefono);
+   EntityManager em = getEntityManager();
+		
+   //La operación la incluimos en una transacción
+   EntityTransaction tx = em.getTransaction();
+   tx.begin();
+   em.persist(c);
+   tx.commit();
+}
+```
+
+a partir de los datos de dicho contacto tendríamos que crear el contacto y obtener el `EntityManager`, iniciar una transacción, como sabés todas las operaciones, recordamos, que impliquen hacer acciones sobre la base de datos, que está detrás de la capa de persistencia implican que tenemos que tenerlas dentro de una transacción, la iniciamos, hacemos la llamada a `persist` y confirmamos.
+
+
+
+este error que tenemos aquí porque por defecto el asistente de Eclipse no nos genera un constructor con parámetros para la entidad y aquí hemos supuesto que ya está bueno o bien utiliza el constructor sin parámetros y le voy dando los datos a través de los eter o por qué no vamos a crearlo.
 
 Y así ya estoy más cómodo dentro de la entidad de contacto vamos a crear aquí un constructor que nos permita crear un objeto de contacto a partir de sus parámetros en sours generar constructores sin Fils podemos decirle que queremos un constructor con todos los parámetros si quisiéramos crearlo también con el ID de contacto para cuando vamos a construir un objeto contacto y lo vamos a devolver.
 
