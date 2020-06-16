@@ -615,6 +615,95 @@ Y en este caso por si hubiera más de un contacto simplemente se quedaría con e
 Aquí ves que hemos utilizado una JPQL la cual incluye una condición, ya veremos en posteriores lecciones cómo podemos hacer esto de otra manera utilizando JPQL con parámetros.
 
 # 12 Ejercicio práctico I Parte 2 10:01
+
+En esta segunda parte del ejercicio vamos a ver cómo crear las Capas de Controlador y Vista como no es objetivo de nuestro curso la elaboración de dichas capas vamos a ver un poco por encima los elementos que vamos a crear.
+
+Primero vamos a crear el Controlador vamos a crearlo que son una serie de servlets que yo ya tengo por aquí y que simplemente los voy a arrastrar.
+
+Sería este paquete servlets a la lista de paquete de nuestro proyecto y ahora lo revisamos así un poquito por encima para que vean lo que hacen.
+
+Tenemos un Servlet Controlador de acción que es el que el centro al que llegan todas las peticiones recibirá un parámetro que indicará qué tipo de operación quiere realizar el usuario si quiere añadir un contacto y un contacto y en función de eso ya el controlador le va redirigiendo a otros controladores de acción que se van a encargar de cada una de esas tareas o bien a alguna página.
+
+Si simplemente es un enlace para ir a una determinada página por ejemplo la de dar de alta contacto o el menú principal.
+
+Aquí por ejemplo en este servlet al táctil como vemos tenemos la llamada a ese método alta contacto que hemos definido en la capa de lógica de negocio que es lo que se hace aquí se reciben los parámetros de la página HTML que ha provocado la opción de dar el alta y distanciamos gestión contactos y llamamos a ese método y después nos dirigimos a la página del menú.
+
+En este caso se está llamando la versión que recibe los tres parámetros se podría haber construido por aquí un objeto o contacto puesto que esta entidad también puede ser manejable de Servlets y páginas JSP y haberlo creado aquí haber enviado ya con el nombre email el teléfono a esa otra versión del método.
+
+Cualquiera de las dos habría sido igualmente válida en el caso eliminarás pues lo que hace es recibir el contacto y después llamar a ese método que hemos creado también en recuperarã Action.
+
+Lo que se hace es llamar al método que me devuelve todos los contactos que implementamos con la QWERTY y pasarlo como un atributo de petición a la JSP que se encargará de visualizarlo la vista.
+
+Bueno vamos a poner las vistas también las tenemos en la carpeta web contén y serían dos HTML y JSP que es la que mostrará la lista de los contactos recuperados que vamos aquí y lo arrastramos.
+
+En este caso a esconder aquí tenemos estos son simples páginas HTML los enlaces a todo controles indicando la operación a realizar.
+
+Está también tomando el control de la operación a realizar y aquí tenemos la JSP en el caso de la JSP pues lo que hacemos es recuperar el atributo de petición contactos y recorrerlo para mostrar cada uno de los contactos en una fila y con el enlace de eliminar contactos estoy viendo aquí algunos errores porque en vez de utilizar Java en esta página JSP se está utilizando la librería JSTL librería jote STL Java Standard Library que proporciona acciones para realizar tareas habituales de lógica en una página JSP pero sin utilizar código Java por ejemplo Infor definir una variable UNIV bien entonces es clave para poder utilizar esa librería y emplear este elemento Talib y aquí el problema que nos está dando es que no la reconoce no encuentra esa librería porque aunque forma parte del Java Enterprise el servidor de aplicaciones Tomcat no la trae en la sección de Java Resources aquí vemos pues no solamente en nuestras clases sino en las librerías que puede utilizar la aplicación.
+
+Nuestro proyecto que estamos desarrollando en Java erré el eclipse sin barrer Java estãndar Eclipse Lihn y que dice Apache Tomcat que representaría todas las librerías que vienen con Tomcat y que incluyen alguna de ellas concretamente están JSP Servlet pues parte de lo que es la librería Java Enterprise Edition para crear los @evleaks JSP pero no todas.
+
+Entonces qué ocurre si necesitamos hacer uso de esa librería que no viene con Donka.
+
+Pues igual que por ejemplo con el driver habría que descargarlo y añadirlo explícitamente las propiedades pestaña librerías o añadir external.
+
+Eso es una forma de hacerlo ahora aprovechando este ejercicio te voy a enseñar otra y es utilizar Maven, Maven es una podríamos decir que es una herramienta que viene incorporada con Eclipse que nos permite localizar dependencias a librerías.
+
+Entonces descargar los archivos jar y añadirlos manualmente a través de Maven.
+
+Los podemos buscar en el repositorio de Maven indicar la referencia a sus archivos a esas librerías en un archivo XML propio de Maven y a partir de ahí ya se encargarán de descargarlo y de incluirlo en nuestro proyecto para lo mejor para una o dos librerías.
+
+Pues igual no ahorramos mucho tiempo frente a descargarlas y añadirla manualmente pero es que hay ciertas librerías que a su vez dependen de otras y que claro ir descargando y localizando todas esas dependencias es muy complicado con Maven eso es automático y Maven se encarga de localizar las dependencias que pudieran tener cierta librería.
+
+Entonces cómo aplicaríamos Maven en este proyecto a través del botón derecho. Configure convertirá el proyecto finalizamos el cuadro de diálogo éste. Estas opciones que nos da aquí de incorporar via Maven también estas librerías que ya tenemos.
+
+Esto lo vamos a asaltar porque en esa librería ya vienen con Tonga y cuando hay que incorporar las de A+B via Maven.
+
+Queremos incorporar algunas adicionales que necesitamos el propio Driver y SQL.
+
+Vamos a ver como comprobado también con Maven aunque lo tenemos descargado.
+
+Pero bueno aquí vamos a hacerlo con Maven.
+
+Este sería el `pom.xml` y aquí concretamente en la vista de código hay entre el cierre de Bil y cierre de proyecto donde deberíamos incorporar las entradas de localización de las librerías que necesitamos que van a ser Reimer de mail SQL por un lado y el JSTL por otro dónde metemos hoy las dependencias de esas librerías.
+
+Pues para ello vamos a ver nos vamos a ir al repositorio de Maren BVM repositorio en repositorio en repositorios que está en esta dirección MVNO repositorio punto com que permite buscar localizar a dependencias por ejemplo cuotas etc. ya que la tenemos ahí buscamos y aquí nos aparece una serie de listas para las que he encontrado y algunas son prácticamente iguales.
+
+Hay algunas que ya son más raras y que por lo tanto no vamos a JSTL servlet la otra JSTL.
+
+Es decir es esto lo que vamos buscando normalmente las que aparecen en primeros lugares.
+
+Sin embargo aquí vemos que está todavía debe ser muy reciente cuatro usos que tienen un poquito más de uso.
+
+Quizá el más más fiable.
+
+Elegimos otra STL indicamos la lista de versiones indicamos qué versión queremos la 1.2 que además ser la más utilizada y aquí tenemos ya directamente la entrada que tenemos que incluir copiamos esto portapapeles y lo incluimos directamente dentro de una sección dependencias entre las dependencias.
+
+Ahí incluimos esa dependencia a continuación repasito con todas las dependencias que queremos.
+
+A esto ya le va indicando Maven que tiene que descargar esa librería por otro lado.
+
+Vamos a volver otra vez a un repositorio.
+
+Y en este caso vamos a buscar MySQL.
+
+Con esto hemos buscado alguna vez y esto es el conector Java mayor cual es quitarle las carga de SQL ya lo teníamos descargado pero bueno podemos cogerlo desde aquí e incorporarlo via Maven que aparece en la lista de versiones 6 creo que teníamos 5 1 XLII mirar este mismo es el que vamos a utilizar aquí tenemos la entrada que hay que indicar en el XML.
+
+Hacemos lo mismo de antes la copiamos y la pegamos.
+
+Entonces ya tenemos las dos dependencias que necesitamos al guardarlo pues ya automáticamente debería proceder a la descarga de esos archivos y por lo tanto incorporarlos en el proyecto.
+
+Efectivamente fijate que el error que teníamos ha desaparecido porque aquí en esta entrada Library Maven dependencias tienen los dos Jahr que Maven ya descargado correspondientes a estos archivos si estos Jar dependieran de otro pues también los descargaría y no tendríamos que haber estado nosotros buscándolos incorporándolos manualmente a nuestro proyecto.
+
+Bueno esto ya se supone que ya podríamos ejecutarlo y funcionaría a través de ejecutamos runas rumbón Server la página menú en la página de inicio arrancarã Tomka.
+
+Todo esto ya lo hace automáticamente eclipse por nosotros el servidor arranca incluso por lanza como es a través de un navegador que tiene la página extra que le hemos dicho si le damos a ver contactos no deberían aparecer aquí la lista de todos los contactos que tenemos.
+
+Finalmente volvemos al menú vamos a añadir un nuevo contacto a ver si funciona como si etcétera JT cualquier cosa en el email del teléfono 1 y guardamos.
+
+Volvemos al menú y al ver contactos.
+
+Efectivamente en esta nuevo contactos JPA si lo eliminamos se ha añadido hemos incluido de la transacción todas las capas se han ido conectadas una con otra y al eliminarlo también nos aparece.
+
 # 13 Consultas parametrizadas 03:00
 # 14 Consultas nominadas 02:28
 # 15 Ejercicio práctico II 13:06
