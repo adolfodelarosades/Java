@@ -189,6 +189,16 @@ Ahora mismo está en estado parado pero bueno ya se encargará el propio Eclipse
 
 # 11 Ejercicio práctico I Parte 1 19:04
 
+<img src="images/11-01.png">
+
+<img src="images/11-02.png">
+
+<img src="images/11-03.png">
+
+<img src="images/11-04.png">
+
+<img src="images/11-05.png">
+
 Seguidamente vamos a desarrollar una aplicación web en la que vamos a poner en práctica el uso de Query y también de los métodos básicos de altísimamente en este ejercicio va a consistir como decía en una aplicación Web que nos va a permitir a los usuarios añadir y listar todos los contactos de la base de datos agenda con la que hemos estado trabajando en los ejemplos vistos hasta el momento.
 
 Cuando se listen los contactos cada uno mostrará un enlace que permitirá al ser pulsado que se elimine dicho contacto.
