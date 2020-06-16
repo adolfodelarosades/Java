@@ -191,101 +191,175 @@ Ahora mismo está en estado parado pero bueno ya se encargará el propio Eclipse
 
 <img src="images/11-01.png">
 
+Seguidamente vamos a desarrollar una aplicación web en la que vamos a poner en práctica el uso de Query y también de los métodos básicos de EntityManager.
+
 <img src="images/11-02.png">
 
-<img src="images/11-03.png">
-
-<img src="images/11-04.png">
-
-<img src="images/11-05.png">
-
-Seguidamente vamos a desarrollar una aplicación web en la que vamos a poner en práctica el uso de Query y también de los métodos básicos de altísimamente en este ejercicio va a consistir como decía en una aplicación Web que nos va a permitir a los usuarios añadir y listar todos los contactos de la base de datos agenda con la que hemos estado trabajando en los ejemplos vistos hasta el momento.
+En este ejercicio va a consistir como decía en una aplicación Web que nos va a permitir a los usuarios añadir y listar todos los contactos de la base de datos agenda con la que hemos estado trabajando en los ejemplos vistos hasta el momento.
 
 Cuando se listen los contactos cada uno mostrará un enlace que permitirá al ser pulsado que se elimine dicho contacto.
 
-El esquema de página de la aplicación será el que se muestra en esta imagen.
+<img src="images/11-04.png">
 
-Como vemos una página inicial con mostrará los enlaces para las dos opciones que comentábamos.
+El esquema de la página de la aplicación será el que se muestra en esta imagen. Como vemos habra una Página Inicial que mostrará los enlaces para las dos opciones que comentábamos. Nuevo Contacto nos llevaría a la página donde se piden los datos del Contacto, al guardarlo se volvería a la Página Inicial y Ver Contactos, es la lista de contactos con todos sus datos nombre, email y teléfono y un enlace para Eliminar que permitiría eliminar el contacto en concreto y regresar a la propia página. Desde el enlace Menú volveríamos otra vez a la Página Inicial.
 
-Nuevo contacto.
+Para abordar el desarrollo de esta aplicación vamos a aplicar el patrón Modelo Vista Controlador dentro de lo que sería la construcción de una aplicación Web.
 
-Me llevaría esta página donde al guardar el se piden los datos del contacto o guardarlo se volvería a la página inicial y ver Contactos La lista de contactos con todos sus datos nombre y teléfono y este enlace para eliminar que permitiría eliminar el contacto en concreto y usar la propia página desde este enlace.
+Cómo empezamos, bueno pues lo primero vamos a crear el proyecto File - New y en este caso utilizaremos la opción Dynamic Web Project puesto que se trata de una aplicación Web.
 
-Menú volveríamos otra vez a la página inicial para abordar el desarrollo de esta aplicación.
+<img src="images/11-06.png">
 
-Pues vamos a aplicar el patrón Modelo Vista Controlador dentro de lo que sería la construcción de una aplicación Web.
+Vamos a nombrarlo como `615-02_web_jpa`, como vemos aquí ya aparece Apache Tomcat como servidor en el que vamos a probar nuestra aplicación, ya que lo registramos en la lección anterior.
 
-Cómo empezamos.
+<img src="images/11-07.png">
 
-Bueno pues lo primero vamos a crear el proyecto File - New y en este caso utilizaremos la opción Web.
+Pues nada directamente aquí ya podemos finalizar, esta sería la estructura de la aplicación Web.
 
-Puesto que se trata de una aplicación wWeb pues vamos a ver vamos a nombrar como 0102_Ejercicio_práctico 1 ya que como vemos aquí aparece la Apache Tomcat como servidor en el que vamos a probar nuestra aplicación que lo registramos en el vídeo anterior te explican cómo hacerlo desde Eclipse.
+<img src="images/11-08.png">
 
-Una vez instalado.
+Le vamos a aplicar el patrón Modelo Vista Controlador. El Modelo será la parte que encapsule toda la lógica de negocio de acceso, en este caso la capa de persistencia, que ofrecerá a la Capa de Controlador los métodos para realizar las opciones, las funciones de eliminar un Contacto a partir de su identificador, recuperar todos los contactos y también añadir contacto.
 
-Pues nada directamente aquí ya podemos finalizar y como decía esta sería la estructura de la aplicación Web que vamos a aplicar el patrón Modelo Vista Controlador.
+La parte que realmente nos interesa, la Capa de Lógica de Negocio, puesto que la Capa Web que la conforma el Controlador y la Vista que se implementa con Servlets y páginas JSP no forma parte del estudio de este curso, pero también lo presentaré para que veas como queda en general el conjunto.
 
-El Modelo será la parte que Capsule toda la lógica de negocio de acceso en este caso la capa de persistencia que ofrecerá a la capa de controlador los métodos para realizar las opciones.
+Lo primero ya hemos creado la aplicación Web pues vamos a crear la Capa de Persistencia, para ello vamos a seguir exactamente los mismos pasos que seguimos con el ejercicio uno de JPA, es decir vamos a irnos a las propiedades del proyecto 
 
-Las funciones de eliminar un Contacto a partir de su identificador recuperar todos los contactos y también añadir contacto esa la parte que realmente nos interesa.
+<img src="images/11-09.png">
 
-La Capa de Lógica de negocio puesto que la capa web que se controlador y la vista que se ha implementado con serla y páginas JSP no forma parte del estudio de este curso.
+y vamos a habilitar a través de Project Faces 
 
-Pero bueno también lo presentaré para que veas como queda en general el conjunto.
+<img src="images/11-10.png">
 
-Lo primero ya hemos creado la aplicación Web pues vamos a crear la capa de persistencia.
+la opción Java JPA Java persistan 
 
-Para ello vamos a seguir exactamente los mismos pasos que seguimos con el ejercicio de ejemplo de JPA es decir pues vamos a irnos a las propiedades del proyecto y vamos a habilitar a través de Project Faces la opción Java JPA Java persistan aquí si no vamos a Configuración disponible pues esto de descargar el Eclipse sin indicarlo como implementación JPA ya nos viene por defecto porque ya lo hicimos en el ejercicio anterior.
+<img src="images/11-11.png">
 
-Una vez que ya se descargó y lo asociamos a las propiedades de JPA pues eso queda ya predefinido para todos los proyectos donde añadamos esta característica.
+si no vamos a `Further configuration available...`
 
-Así que aquí ya no hay que tocar nada más.
+<img src="images/11-12.png">
 
-Al hacer esto se va a crear el persiste en XML y se habilitarán vacío algunas de las opciones para poder generar las entidades desde la base de datos que es lo que vamos a hacer ahora.
+ya se nos presenta una configuración disponible, esto de descargar el EclipseLink sin indicarlo como implementación JPA ya nos viene por defecto porque ya lo hicimos en el ejercicio anterior. Una vez que ya se descargó y lo asociamos a las propiedades de JPA pues eso queda ya predefinido para todos los proyectos donde añadamos esta característica, así que aquí ya no hay que tocar nada más, solo pulsar OK.
 
-Este paso ya lo hicimos JPA Turks generar entidades desde tablas ya lo hicimos en el ejercicio anterior.
+Al hacer esto se va a crear el `persistence.xml` vacío claro. 
 
-Entonces la conexión la tenemos que tener galleta.
+<img src="images/11-13.png">
 
-Cogemos la conexión que RBM SQL prueba cuando yo tengo alguna el más que realmente todas se refieren a la misma base de datos al seleccionarla pues tendrían que aparecer aquí debería aparecer ya la tabla.
+Y se habilitarán algunas de las opciones para poder generar las entidades desde la base de datos que es lo que vamos a hacer ahora. Este paso ya lo hicimos con JPA Tools - Generate Entities from Tables ... , ya lo hicimos en el ejercicio anterior.
 
-Bueno pues si no la tenemos vamos a tener que crear si nos aparece vamos a tener que crear otra conexión porque al hacerlo vamos a ver si no se habilita vamos a tener que crear otra otra conexión igual que la que creamos anteriormente.
+<img src="images/11-14.png">
 
-MySQL vamos una conexión ejercicio 1 y todos los pasos que le dimos en el ejemplo anterior aunque utilizaríamos el driver para mayor se cuele eso sí que debería aparecer vamos a ver a dejarlo yo creo que efectivamente para MySQL ya está predefinido y si no vamos a añadir uno nuevo MySQL el ejercicio le asignamos.
+Entonces la conexión la tenemos que tener ya hecha, cogemos la conexión que ya habíamos creado en la lección pasada `msql_prueba`, al seleccionarla aparecen ya las tabla, vamos a seleccionar la tabla Contacto que es con la que trabajaremos por el momento.
 
-Esto lo tenemos que quitar y le tendremos que asignar el driver que descargamos en el video donde se explicaba la descarga de las de los recursos para poder trabajar con JPA concretamente.
+<img src="images/11-15.png">
 
-Pues lo tengo aquí no se respeta su web MySQL y ahí está bueno para que el asistente pueda reconocerlo y conectar con la base de datos hagamoslo con los datos de conexión a la base de datos agendadas el nombre de la base de datos.
+En el siguiente paso, asociaciones nada.
 
-La cadena de conexión que termina en agenda usuario y contraseña de conexión.
+<img src="images/11-16.png">
 
-Usted y yo tenemos la conexión creada.
+En el siguiente paso en Key generator le tenemos que decir que el campo Primary Key, en nuestro caso se genera mediante una identity, es decir es autonumerico, el paquete donde vamos a meter o queremos que se genere nuestra clase se llamara `entidades` en lugar de `model`.
 
-Esto simplemente es un resumen.
+<img src="images/11-17.png">
 
-Finalizamos el ejercicio 1 y ahora sí que ya debería aparecer efectivamente el nombre de la base de datos y la tabla Roussos deberías tener una porque estos usuarios es la tengo yo ahí.
+En el siguiente paso, es el resumen de la clase Contacto y Primary Key se genera con identidad 
 
-Luego en siguientes siguientes vídeos explicaré cómo crearla y vamos a utilizar en otros ejercicios pero de momento nos centramos en Contactos y ya la siguiente paso.
+<img src="images/11-18.png">
 
-Asociaciones nada.
+y finalizamos.
 
-Aquí le teníamos que decir que el campo Maric en nuestro caso se genera mediante una identidad es decir es autonómico el paquete donde vamos a meter o queremos que se genere nuestra clase sentira contacto.
+<img src="images/11-19.png">
 
-Este es el resumen de la clase de identidad y finalizamos y aquí tendremos ahora nuestra clase entidades Contacto la misma entidad que utilizamos en el ejercicio de ejemplo JPA persiste en XML como ya se ha registrado automáticamente la clase vamos a utilizar también el mismo proveedor Eclipse.
+y aquí tendremos ahora nuestra clase Contacto dentro del paquete entidades, la misma entidad que utilizamos en el ejercicio de ejemplo JPA.
 
-Pues no hace falta ni siquiera que lo registremos a través del elemento Provider dentro de la Unidad de persistencia.
+```java
+package entidades;
 
-Lo que sí que vamos a hacer es que vamos a abrir ese archivo cerrar esto y lo vamos a abrir vamos a ver dónde lo tenemos no lo tenemos aquí aquí que aparece muchas veces te muestra eclipse un mismo archivo en dos vistas diferentes.
+import java.io.Serializable;
+import javax.persistence.*;
 
-Por ejemplo aquí nos aparece aquí dentro de la sección JPA contempló físicamente el que existe en XML.
 
-Es importante que lo sepas se va a quedar grabado dentro de una subcarpetas Metin de la carpeta raíz donde se encuentran todas las clases y forma parte del lugar donde se encuentran todas las clases de Java pero siempre de la subcarpeta Metallic ahí donde está físicamente entonces aquí el botón derecho le decimos que lo queremos abrir con el persiste en XML editor y en la sección de Conexiones vamos a indicar su local para que se habilite esta opción y nos permite rellenar los datos de conexión a la base de datos para el proveedor.
+/**
+ * The persistent class for the contactos database table.
+ * 
+ */
+@Entity
+@Table(name="contactos")
+@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c")
+public class Contacto implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-A partir de los datos de conexión de esta conexión hemos creado un ejercicio vale la basaltos agenda etcétera.
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idContacto;
 
-Bien ya tenemos la capa de persistencia.
+	private String email;
 
-Ahora se trataría de crear la lógica de negocio con todo lo que son los métodos de acceso a la capa de persistencia que nos van a ofrecer a las otras capas al controlador y la vista por las funcionalidades necesarias para el ejercicio que van a ser dar de alta la entidad eliminar una entidad a partir de el identificador de dicha entidad y recuperar todas las entidades que sólo vamos a tener que implementar mediante una cuenta.
+	private String nombre;
+
+	private int telefono;
+
+	public Contacto() {
+	}
+
+	public int getIdContacto() {
+		return this.idContacto;
+	}
+
+	public void setIdContacto(int idContacto) {
+		this.idContacto = idContacto;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+}
+```
+
+En `persistent.xml` vemos como ya se ha registrado automáticamente la clase.
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-02_web_jpa">
+		<class>entidades.Contacto</class>
+	</persistence-unit>
+</persistence>
+```
+
+Como vamos a utilizar también el mismo proveedor EclipseLink no hace falta ni siquiera que lo registremos a través del elemento Provider dentro de la Unidad de persistencia.
+
+Lo que sí que vamos a hacer es que vamos a abrir `persistent.xml`, el cual fisicamente se queda almacenado dentro de la carpeta META-INF donde se encuentran todas las clases y forma parte del lugar donde se encuentran todas las clases de Java pero siempre de la subcarpeta META-INF ahí es donde está físicamente, entonces aquí con el botón derecho le decimos que lo queremos abrir con el persiste XML editor y en la sección de Conexiones vamos a indicar Resource Local para que se habilite la opción `Populate from connection...` y nos permite rellenar los datos de conexión a la base de datos para el proveedor.
+
+<img src="images/11-20.png">
+
+A partir de los datos de conexión de esta conexión hemos creado `msql_prueba` 
+
+<img src="images/11-21.png">
+
+Al seleccionarla aparecen todos los datos de conexión.
+
+<img src="images/11-22.png">
+
+Bien ya tenemos la capa de persistencia, ahora se trataría de crear la lógica de negocio con todo lo que son los métodos de acceso a la capa de persistencia que nos van a ofrecer a las otras capas al controlador y la vista por las funcionalidades necesarias para el ejercicio que van a ser dar de alta la entidad eliminar una entidad a partir de el identificador de dicha entidad y recuperar todas las entidades que sólo vamos a tener que implementar mediante una cuenta.
 
 Entonces vamos a crear la clase gestión contactos donde vamos a encapsular toda esa funcionalidad gestión contactos dentro de un paquete modelo bien el código de esta clase.
 
