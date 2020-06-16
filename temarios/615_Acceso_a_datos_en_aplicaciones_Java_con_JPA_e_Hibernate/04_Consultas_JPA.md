@@ -521,41 +521,83 @@ public void altaContacto(String nombre, String email, int telefono) {
 }
 ```
 
-a partir de los datos de dicho contacto tendríamos que crear el contacto y obtener el `EntityManager`, iniciar una transacción, como sabés todas las operaciones, recordamos, que impliquen hacer acciones sobre la base de datos, que está detrás de la capa de persistencia implican que tenemos que tenerlas dentro de una transacción, la iniciamos, hacemos la llamada a `persist` y confirmamos.
+A partir de los datos de dicho contacto tendríamos que crear el contacto y obtener el `EntityManager`, iniciar una transacción, como sabés todas las operaciones, recordamos, que impliquen hacer acciones sobre la base de datos, que está detrás de la capa de persistencia implican que tenemos que tenerlas dentro de una transacción, la iniciamos, hacemos la llamada a `persist` y confirmamos.
+
+Tenemos otro métodos para dar de alta un Contacto, en el caso de que nos den ya directamente el objeto Contacto con los datos ya metidos, digámoslo así.
+
+```java
+public void altacontacto(Contacto c) {
+   EntityManager em = getEntityManager();
+		
+   //La operación la incluimos en una transacción
+   EntityTransaction tx = em.getTransaction();
+   tx.begin();
+   em.persist(c);
+   tx.commit();
+}
+```
+
+Sería exactamente lo mismo, lo único no tendríamos que crear obviamente el objeto de Contacto porque ya nos viene. Obtenemos `EntityManager`, iniciamos transaccion llamada al método `persist` y confirmamos.
 
 
+Eliminar Contacto.
 
-este error que tenemos aquí porque por defecto el asistente de Eclipse no nos genera un constructor con parámetros para la entidad y aquí hemos supuesto que ya está bueno o bien utiliza el constructor sin parámetros y le voy dando los datos a través de los eter o por qué no vamos a crearlo.
+```java
+public void eliminarContacto(int idContacto) {
+   EntityManager em = getEntityManager();
+		
+   Contacto c = em.find(Contacto.class, idContacto);
+   EntityTransaction tx = em.getTransaction();
+   //Si el contacto existe lo eliminamos
+   tx.begin();
+   if(c != null) {
+      em.remove(c);
+   }
+   tx.commit();	
+}
+```
 
-Y así ya estoy más cómodo dentro de la entidad de contacto vamos a crear aquí un constructor que nos permita crear un objeto de contacto a partir de sus parámetros en sours generar constructores sin Fils podemos decirle que queremos un constructor con todos los parámetros si quisiéramos crearlo también con el ID de contacto para cuando vamos a construir un objeto contacto y lo vamos a devolver.
+Lo que haría es localizar el Contacto, a partir del identificador `idContacto` y en el caso de que exista pues lo eliminamos. Como ves también como se trata de una operación de acción, hay que iniciar la transacción y confirmarla después, siempre a nivel de cada método que hace su operación concreta, en este caso `remove`. 
 
-O en este caso si es un objeto de contacto que viene ya construido y que todavía no tiene contacto porque  se supone que se lo va a dar al dar a la cera la persistencia de la llamada método Perquis pues vamos a darle también un constructor que no necesite ese contacto.
+Y por último tenemos el recuperar contactos.
 
-Tenemos ya estos tres parámetros y estos dos parámetros procesara ya desaparece el error y aquí tenemos  el método Arsys bien alta contacto en el caso de que nos den ya directamente el objeto contacto con los datos ya ya metidos digámoslo así pues sería exactamente lo mismo.
+```java
+public List<Contacto> recuperarContactos(){
+   EntityManager em = getEntityManager();
+   Query qr = em.createQuery("Select c From Contacto c");
+   return (List<Contacto>)qr.getResultList();
+}
+```
 
-Lo único no tendríamos que crear obviamente el objeto de contacto porque ya no viene obtenemos timãn ayer iniciamos transaccion llamada método PES6 y Cómbita eliminar contacto de recuperar contactos para el final pues lo que haría es localizar el contacto a partir de ese identificador y en el caso de que exista pues lo eliminamos.
+En este caso lo que necesitamos es un Query, en este caso obtenemos el `EntityManager`, creamos el objeto Query a partir de la JPQL, la JPQL sería tan simple como, devuélveme todos los contactos sin ningún tipo de condición, como hemos utilizado Query el `getResultList()` nos va a devolver un `List` a secas de objetos, tenemos que hacer un casting una conversión a `(List<Contacto>)` si lo queremos devolver como un tipo List de objetos Contacto `List<Contacto>`, para que la Capa de Controlador ya directamente trabaje con la colección de objetos que requiera.
 
-Como ves también como se trata de una operación de acción hay que iniciar la transacción y confirmarla después siempre a nivel de cada método que hace su operación concreta y por último tenemos el recuperar contactos que en este caso lo que necesitamos es una Macuelizo.
+Podríamos haber utilizado como ya vimos también en la lección anterior el `TypeQuery`, cómo sería con `TypeQuery`.
 
-Vale entonces en este caso obtenemos lentísima ayer creamos el objeto Swery a partir de la J.P. QL J.P.QL.
+```java
+public List<Contacto> recuperarContactos(){
+   EntityManager em = getEntityManager();
+   TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+   return qr.getResultList();
+}
+```
 
-Sería tan simple como Devuélveme todos los contactos sin ningún tipo de condición como hemos utilizado.
+Simplemente sería descuelguen de contacto declaramos la variable y llamaríamos a la versión de crear `TypedQuery<Contacto>` y en `createQuery` pasarle exactamente el mismo JPQL y la clase, el objeto clase del tipo de objeto que nos debería devolver, Contacto, y ahora ya sería simplemente llamada al `getResultList()`, ya nos va a dar directamente la lista como tipo Contacto puesto que hemos utilizado `TypedQuery`.
 
-Pues tras un Lish nos va a devolver un liso a secas de objetos.
+Esto es la Capa de Lógica de Negocio de nuestra aplicación, cómo ves hemos utilizado métodos básicos del `EntityManager` y `Query` en el caso que tengamos que recuperar una colección de contactos, no hay ningún método básico del `EntityManager` que no haga eso, sólo nos permite recuperar por Primary Key, recurrimos a `Query` que en este caso ha sido bastante sencillo.
 
-Tenemos que hacer un Ancasti una conversión Alís de contacto si lo queremos devolver con un tipo de objetos contacto para que la capa de controlador o ya directamente trabaje con la colección de objetos que requiera.
+Imagínate por ejemplo que quisiéramos, aunque no lo necesitemos en este ejercicio, un método que nos devuelva un objeto de Contacto por ejemplo a partir de su email, imagínate que es eso lo que queremos.
 
-Podríamos haber utilizado como ya vimos también en la lección anterior el Taipe y cómo sería contais pecuarios o simplemente sería descuelguen de contacto declaramos la variable y llamaríamos a la versión de create Cury en la que le daríamos la instrucción J.P. cuele que sería exactamente la misma.
+```java
+public Contacto buscarContactos(String email){
+   EntityManager em = getEntityManager();
+		
+   String jpql = "Select c From Contacto c Where c.email = '" + email + "'";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   return qr.getSingleResult();
+}
+```
 
-Podríamos haber metido la variable o directamente aquí y la clase el objeto clase del tipo de objeto que nos debería devolver contacto portábamos PGR y ahora ya sería simplemente llamada al Treasure List que ya nos va a dar directamente la lista como tipo cuãntas puesto que hemos utilizado pecarí.
-
-Esto es la capa de lógica de negocio de nuestra aplicación cómo ver.
-
-Hemos utilizado métodos básicos del Entity manager y en el caso que tenemos que en este caso recuperar una colección de contactos no hay ningún método básico del Inti-Illimani que no sabes o sólo nos permite recuperar por que ya recurrimos al Ueli que en este caso ha sido bastante sencilla.
-
-Imagínate por ejemplo quisiéramos aunque no lo necesitemos en este ejercicio pues tener un método que nos devuelva un objeto de contacto después por ejemplo a partir de Seimei imagínate que es eso lo que queremos.
-
-Bueno pues obtendríamos en el City Manager como siempre en nuestro caso la instrucción JPEG huele pues sería del tipo CLC from contacto de Wer C punto y mail igual al valor entonces como el email es un campo un valor de tipo texto pues tendríamos que incluir su valor entre comillas simple concatenar con la variable Imai y concatenar con la comida simple de cierre.
+Bueno pues obtendríamos el `EntityManager` como siempre en nuestro caso la instrucción JPQL huele pues sería del tipo CLC from contacto de Wer C punto y mail igual al valor entonces como el email es un campo un valor de tipo texto pues tendríamos que incluir su valor entre comillas simple concatenar con la variable Imai y concatenar con la comida simple de cierre.
 
 Así quedaría la J.P. cuele si solamente el email no se pudiera repetir porque su base de datos no la tenemos configurada para para evitar eso.
 
