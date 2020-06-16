@@ -188,6 +188,172 @@ Si tuviéramos varios podríamos elegir, pero sólo tenemos uno con el que nos v
 Ahora mismo está en estado parado pero bueno ya se encargará el propio Eclipse cuando vemos aprobar una aplicación arrancarlo y publicar sobre las aplicaciones. Eso lo vamos a ver en la siguiente elección en el ejercicio que vamos a desarrollar que es una aplicación web donde vamos a utilizar JPA para acceder a la capa de persistencia utilizando en este caso las consultas y demás.
 
 # 11 Ejercicio práctico I Parte 1 19:04
+
+Seguidamente vamos a desarrollar una aplicación web en la que vamos a poner en práctica el uso de Query y también de los métodos básicos de altísimamente en este ejercicio va a consistir como decía en una aplicación Web que nos va a permitir a los usuarios añadir y listar todos los contactos de la base de datos agenda con la que hemos estado trabajando en los ejemplos vistos hasta el momento.
+
+Cuando se listen los contactos cada uno mostrará un enlace que permitirá al ser pulsado que se elimine dicho contacto.
+
+El esquema de página de la aplicación será el que se muestra en esta imagen.
+
+Como vemos una página inicial con mostrará los enlaces para las dos opciones que comentábamos.
+
+Nuevo contacto.
+
+Me llevaría esta página donde al guardar el se piden los datos del contacto o guardarlo se volvería a la página inicial y ver Contactos La lista de contactos con todos sus datos nombre y teléfono y este enlace para eliminar que permitiría eliminar el contacto en concreto y usar la propia página desde este enlace.
+
+Menú volveríamos otra vez a la página inicial para abordar el desarrollo de esta aplicación.
+
+Pues vamos a aplicar el patrón Modelo Vista Controlador dentro de lo que sería la construcción de una aplicación Web.
+
+Cómo empezamos.
+
+Bueno pues lo primero vamos a crear el proyecto File - New y en este caso utilizaremos la opción Web.
+
+Puesto que se trata de una aplicación wWeb pues vamos a ver vamos a nombrar como 0102_Ejercicio_práctico 1 ya que como vemos aquí aparece la Apache Tomcat como servidor en el que vamos a probar nuestra aplicación que lo registramos en el vídeo anterior te explican cómo hacerlo desde Eclipse.
+
+Una vez instalado.
+
+Pues nada directamente aquí ya podemos finalizar y como decía esta sería la estructura de la aplicación Web que vamos a aplicar el patrón Modelo Vista Controlador.
+
+El Modelo será la parte que Capsule toda la lógica de negocio de acceso en este caso la capa de persistencia que ofrecerá a la capa de controlador los métodos para realizar las opciones.
+
+Las funciones de eliminar un Contacto a partir de su identificador recuperar todos los contactos y también añadir contacto esa la parte que realmente nos interesa.
+
+La Capa de Lógica de negocio puesto que la capa web que se controlador y la vista que se ha implementado con serla y páginas JSP no forma parte del estudio de este curso.
+
+Pero bueno también lo presentaré para que veas como queda en general el conjunto.
+
+Lo primero ya hemos creado la aplicación Web pues vamos a crear la capa de persistencia.
+
+Para ello vamos a seguir exactamente los mismos pasos que seguimos con el ejercicio de ejemplo de JPA es decir pues vamos a irnos a las propiedades del proyecto y vamos a habilitar a través de Project Faces la opción Java JPA Java persistan aquí si no vamos a Configuración disponible pues esto de descargar el Eclipse sin indicarlo como implementación JPA ya nos viene por defecto porque ya lo hicimos en el ejercicio anterior.
+
+Una vez que ya se descargó y lo asociamos a las propiedades de JPA pues eso queda ya predefinido para todos los proyectos donde añadamos esta característica.
+
+Así que aquí ya no hay que tocar nada más.
+
+Al hacer esto se va a crear el persiste en XML y se habilitarán vacío algunas de las opciones para poder generar las entidades desde la base de datos que es lo que vamos a hacer ahora.
+
+Este paso ya lo hicimos JPA Turks generar entidades desde tablas ya lo hicimos en el ejercicio anterior.
+
+Entonces la conexión la tenemos que tener galleta.
+
+Cogemos la conexión que RBM SQL prueba cuando yo tengo alguna el más que realmente todas se refieren a la misma base de datos al seleccionarla pues tendrían que aparecer aquí debería aparecer ya la tabla.
+
+Bueno pues si no la tenemos vamos a tener que crear si nos aparece vamos a tener que crear otra conexión porque al hacerlo vamos a ver si no se habilita vamos a tener que crear otra otra conexión igual que la que creamos anteriormente.
+
+MySQL vamos una conexión ejercicio 1 y todos los pasos que le dimos en el ejemplo anterior aunque utilizaríamos el driver para mayor se cuele eso sí que debería aparecer vamos a ver a dejarlo yo creo que efectivamente para MySQL ya está predefinido y si no vamos a añadir uno nuevo MySQL el ejercicio le asignamos.
+
+Esto lo tenemos que quitar y le tendremos que asignar el driver que descargamos en el video donde se explicaba la descarga de las de los recursos para poder trabajar con JPA concretamente.
+
+Pues lo tengo aquí no se respeta su web MySQL y ahí está bueno para que el asistente pueda reconocerlo y conectar con la base de datos hagamoslo con los datos de conexión a la base de datos agendadas el nombre de la base de datos.
+
+La cadena de conexión que termina en agenda usuario y contraseña de conexión.
+
+Usted y yo tenemos la conexión creada.
+
+Esto simplemente es un resumen.
+
+Finalizamos el ejercicio 1 y ahora sí que ya debería aparecer efectivamente el nombre de la base de datos y la tabla Roussos deberías tener una porque estos usuarios es la tengo yo ahí.
+
+Luego en siguientes siguientes vídeos explicaré cómo crearla y vamos a utilizar en otros ejercicios pero de momento nos centramos en Contactos y ya la siguiente paso.
+
+Asociaciones nada.
+
+Aquí le teníamos que decir que el campo Maric en nuestro caso se genera mediante una identidad es decir es autonómico el paquete donde vamos a meter o queremos que se genere nuestra clase sentira contacto.
+
+Este es el resumen de la clase de identidad y finalizamos y aquí tendremos ahora nuestra clase entidades Contacto la misma entidad que utilizamos en el ejercicio de ejemplo JPA persiste en XML como ya se ha registrado automáticamente la clase vamos a utilizar también el mismo proveedor Eclipse.
+
+Pues no hace falta ni siquiera que lo registremos a través del elemento Provider dentro de la Unidad de persistencia.
+
+Lo que sí que vamos a hacer es que vamos a abrir ese archivo cerrar esto y lo vamos a abrir vamos a ver dónde lo tenemos no lo tenemos aquí aquí que aparece muchas veces te muestra eclipse un mismo archivo en dos vistas diferentes.
+
+Por ejemplo aquí nos aparece aquí dentro de la sección JPA contempló físicamente el que existe en XML.
+
+Es importante que lo sepas se va a quedar grabado dentro de una subcarpetas Metin de la carpeta raíz donde se encuentran todas las clases y forma parte del lugar donde se encuentran todas las clases de Java pero siempre de la subcarpeta Metallic ahí donde está físicamente entonces aquí el botón derecho le decimos que lo queremos abrir con el persiste en XML editor y en la sección de Conexiones vamos a indicar su local para que se habilite esta opción y nos permite rellenar los datos de conexión a la base de datos para el proveedor.
+
+A partir de los datos de conexión de esta conexión hemos creado un ejercicio vale la basaltos agenda etcétera.
+
+Bien ya tenemos la capa de persistencia.
+
+Ahora se trataría de crear la lógica de negocio con todo lo que son los métodos de acceso a la capa de persistencia que nos van a ofrecer a las otras capas al controlador y la vista por las funcionalidades necesarias para el ejercicio que van a ser dar de alta la entidad eliminar una entidad a partir de el identificador de dicha entidad y recuperar todas las entidades que sólo vamos a tener que implementar mediante una cuenta.
+
+Entonces vamos a crear la clase gestión contactos donde vamos a encapsular toda esa funcionalidad gestión contactos dentro de un paquete modelo bien el código de esta clase.
+
+Pues vamos a ver eso lo tengo yo de aquí hecho y lo vamos.
+
+Lo voy a copiar lo voy a pegar y lo vamos a estudiar lo vamos a analizar para explicarte todas las opciones que hemos ido código y todas las funcionalidades que hemos implementado.
+
+Control sí o para importar todo lo que necesitemos.
+
+Cuidado porque a la hora de importar por ejemplo QWERTY el eclipse puede detectar que hay dos cuerpos en el paquete Java que persistan en otros paquetes diferentes.
+
+Nosotros siempre estamos trabajando en JPA con este paquete cada X persisten como importemos otra clase que es de otro paquete distinto pues evidentemente no va a funcionar y puede darnos errores que luego nos cuesta trabajo detectar.
+
+Entonces aquí utilizo también bueno ya tenemos aquí todo y bien por lo que vamos a hacer es vamos a explicar lo que hemos hecho aquí.
+
+Bueno en primer lugar tenemos un método privado que vamos a utilizar dentro de los métodos de la lógica de negocio que serían estos 4 2 3 4 4 puesto 4 porque he hecho un par de métodos alta contacto dos variantes para darlos de alta a partir de lo que sería la propia entidad ya proporcionada como parámetro o los datos individuales.
+
+Pero primero centrémonos en este método que es usado por los otros métodos de negocio para obtener el Entity manager cuando necesiten acceder a la capa de persistencia.
+
+Recuerda que para obtener el intiman ayer teníamos que crear la factoría la Timaná y rFactor y a partir del Creativity manager ya teníamos el anticlimática vale para crear el Entity manager Factory.
+
+Hay que darle el nombre de la Unidad de persistencia que nuestro persiste en XML pues era el que nos haya dado asistente directamente.
+
+Por supuesto lo podríamos cambiar si no nos gusta ese nombre.
+
+Recordemos aquí y ya lo tenemos ahora vamos a analizar los métodos para dar de alta un contacto pues a partir de los datos de dicho contacto tendríamos que crear el contacto y obtener el intiman ayer iniciaron una transacción.
+
+Como sabéis todas las operaciones recordamos que impliquen hacer acciones sobre la base de datos que está detrás de la capa de persistencia implican que tenemos que tenerlas dentro de una transacción la iniciamos.
+
+Hacemos la llamada proxys y confirmamos este error que tenemos aquí porque por defecto el asistente de Eclipse no nos genera un constructor con parámetros para la entidad y aquí hemos supuesto que ya está bueno o bien utiliza el constructor sin parámetros y le voy dando los datos a través de los eter o por qué no vamos a crearlo.
+
+Y así ya estoy más cómodo dentro de la entidad de contacto vamos a crear aquí un constructor que nos permita crear un objeto de contacto a partir de sus parámetros en sours generar constructores sin Fils podemos decirle que queremos un constructor con todos los parámetros si quisiéramos crearlo también con el ID de contacto para cuando vamos a construir un objeto contacto y lo vamos a devolver.
+
+O en este caso si es un objeto de contacto que viene ya construido y que todavía no tiene contacto porque  se supone que se lo va a dar al dar a la cera la persistencia de la llamada método Perquis pues vamos a darle también un constructor que no necesite ese contacto.
+
+Tenemos ya estos tres parámetros y estos dos parámetros procesara ya desaparece el error y aquí tenemos  el método Arsys bien alta contacto en el caso de que nos den ya directamente el objeto contacto con los datos ya ya metidos digámoslo así pues sería exactamente lo mismo.
+
+Lo único no tendríamos que crear obviamente el objeto de contacto porque ya no viene obtenemos timãn ayer iniciamos transaccion llamada método PES6 y Cómbita eliminar contacto de recuperar contactos para el final pues lo que haría es localizar el contacto a partir de ese identificador y en el caso de que exista pues lo eliminamos.
+
+Como ves también como se trata de una operación de acción hay que iniciar la transacción y confirmarla después siempre a nivel de cada método que hace su operación concreta y por último tenemos el recuperar contactos que en este caso lo que necesitamos es una Macuelizo.
+
+Vale entonces en este caso obtenemos lentísima ayer creamos el objeto Swery a partir de la J.P. QL J.P.QL.
+
+Sería tan simple como Devuélveme todos los contactos sin ningún tipo de condición como hemos utilizado.
+
+Pues tras un Lish nos va a devolver un liso a secas de objetos.
+
+Tenemos que hacer un Ancasti una conversión Alís de contacto si lo queremos devolver con un tipo de objetos contacto para que la capa de controlador o ya directamente trabaje con la colección de objetos que requiera.
+
+Podríamos haber utilizado como ya vimos también en la lección anterior el Taipe y cómo sería contais pecuarios o simplemente sería descuelguen de contacto declaramos la variable y llamaríamos a la versión de create Cury en la que le daríamos la instrucción J.P. cuele que sería exactamente la misma.
+
+Podríamos haber metido la variable o directamente aquí y la clase el objeto clase del tipo de objeto que nos debería devolver contacto portábamos PGR y ahora ya sería simplemente llamada al Treasure List que ya nos va a dar directamente la lista como tipo cuãntas puesto que hemos utilizado pecarí.
+
+Esto es la capa de lógica de negocio de nuestra aplicación cómo ver.
+
+Hemos utilizado métodos básicos del Entity manager y en el caso que tenemos que en este caso recuperar una colección de contactos no hay ningún método básico del Inti-Illimani que no sabes o sólo nos permite recuperar por que ya recurrimos al Ueli que en este caso ha sido bastante sencilla.
+
+Imagínate por ejemplo quisiéramos aunque no lo necesitemos en este ejercicio pues tener un método que nos devuelva un objeto de contacto después por ejemplo a partir de Seimei imagínate que es eso lo que queremos.
+
+Bueno pues obtendríamos en el City Manager como siempre en nuestro caso la instrucción JPEG huele pues sería del tipo CLC from contacto de Wer C punto y mail igual al valor entonces como el email es un campo un valor de tipo texto pues tendríamos que incluir su valor entre comillas simple concatenar con la variable Imai y concatenar con la comida simple de cierre.
+
+Así quedaría la J.P. cuele si solamente el email no se pudiera repetir porque su base de datos no la tenemos configurada para para evitar eso.
+
+Pero bueno suponiendo que estamos seguros que no puede haber dos contactos con el mismo email entonces esto sería tan simple como coger bueno vamos primero vamos a crear Swery sería igual que ésta Cubelli aquí tendríamos la variable J.P. suele y como digo sería tan simple como coger y así que el azul ya no va a devolver el objeto contrasto pero cúrate lo que te comentaba cuando explicamos este método y es que si o lo que sea está Select estás J.P. devuelve más de un contacto.
+
+Pues entonces este método provocará una excepción si no estamos seguros pero solamente queremos devolver un contacto el primero que cumpla la condición.
+
+En este caso podríamos optar por esta otra opción Venetur Cubes repuntó gheto en su lista punto de ser dame el primero de la lista.
+
+Y en este caso por si hubiera más de un contacto simplemente se quedaría recuperar la condición se quedaría con el primero.
+
+Aquí ves que hemos utilizado una SQL la cual ya si metemos una condición ya veremos en posteriores elecciones cómo podemos hacer esto de otra manera utilizando cueles con parámetros.
+
+Bueno pues voy a cortar aquí el vídeo porque para lo que queda explicar las siguientes capas controlador y vista.
+
+Vamos a contar en un vídeo independiente para no hacer demasiado.
+
+
 # 12 Ejercicio práctico I Parte 2 10:01
 # 13 Consultas parametrizadas 03:00
 # 14 Consultas nominadas 02:28
