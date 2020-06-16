@@ -45,45 +45,60 @@ Bien estas son consultas muy sencillas, ya veremos cuando tengamos entidades rel
 
 <img src="images/9-04.png">
 
+Cómo lanzamos esa instrucción desde la lógica de negocio de nuestra aplicación hacia la capa de persistencia. Como decíamos a través del *Objeto Query*, un Objeto Query es simplemente una implementación de la interfaz `javax.persistence.Query`.
+
+Y cómo obtenemos ese Objeto Query, bueno pues dada la instrucción JPQL por ejemplo esta
+
+```java
+String jpql = Select c From Contacto c";
+Query qr=em.createQuery(jpql);
+```
+
+para poder crear un Objeto Query que tenga asociada dicha instrucción utilizaríamos el método `createQuery(jpql)` del `EntityManager` siempre como ves el `EntityManager` es el elemento central de JPA a través del método `createQuery(jpql)` le pasamos la cadena `jpql` y no devolverá un Objeto Query listo para poder ejecutar la instrucción JPQL.
+
 <img src="images/9-05.png">
 
+La ejecución de esa instrucción la vamos a realizar a través de los métodos que nos proporciona dicha interfaz Query. Entre los principales métodos destacamos estos tres:
+
+* `List getResultList()` 
+* `Object getSingleResult()`
+* `void executeUpdate()`
+
+
+`List getResultList()` en el caso de una `Select` lógicamente nos va a devolver una lista de resultados en forma de `List` de objetos Entidad. 
+
+```java
+String jpql = "Select c From Contacto c";
+Query qr = em.createQuery(jpql);
+//casting al tipo de colección especifica
+List<Contacto> contacts = (List<Contacto>)qr.getResultList();
+```
+
+
+Entonces si nosotros lanzamos esta `Select` esta `jpql` hacia la capa de persistencia con el Objeto Query llamando al método `getResultList()`, nos va a dar un Objeto `List` con todos los objetos que cumplen dicha condición en este caso serían todos los contactos, como enviarles un `List` lo devuelven en forma de Object hay que hacer un casting al tipo específico de objetos que esperamos, un casting a una colección de tipo `List` de objetos Contacto.
+
+Si la consulta solamente va a devolver un objeto pues entonces llamaríamos al método `getSingleResult()`, no necesitaríamos llamar al `getResultList()`, `getSingleResult()` nos da un único objeto el único que cumple la condición, eso sí, sí por lo que sea la condición devolviera mas de una entidad, la llamada a este método provocaría una excepción. Este método sólo vamos a utilizarlo cuando estemos seguros de que la `Select` por la condición que le hemos indicado solamente va a devolver un resultado. Como ves también lo devuelve como tipo Object por lo que habría que hacer un casting al tipo de entidad que estamos esperando.
+
+En el caso de instruciones JPQL que ya las veremos en lecciones posteriores que no sean de tipo `Select` sino de actualización masiva o eliminación masiva de entidades utilizaríamos el método `executeUpdate()`, ya lo veremos en lecciones posteriores.
+
 <img src="images/9-06.png">
-AQUIIIIII
-Cómo lanzamos esa instrucción desde la lógica de negocio de nuestra aplicación hacia la capa de persistencia.
 
-Como decíamos pues a través de El objeto cuerito un objeto cueritos es simplemente una implementación de la interfaz Java X persistan cuerito y cómo obtenemos ese objeto cuerito.
+Tenemos también otra interfaz llamada `TypedQuery` que es una SubInterfaz de Query disponible desde JPA 2, no estaba en las primeras versiones de JPA, que proporsiona los mismos métodos del Quey, es una interfaz pero adaptados digamos para el tipo específico de objetos que esperamos.
 
-Bueno pues dada la instrucción J.P. cuele por ejemplo para poder crear un objeto Kuric que tenga asociada dicha instrucción utilizaríamos el método create Cury del Himalaya años siempre como veis el City Manager es el elemento central de JPA a través del método create Cuera y le pasamos la cadena JPEG cuele y no devolveré un objeto y listo para poder ejecutar la instrucción JPEG QL.
+Por ejemplo `List<T> getResultList()` ya nos devolvería un `List` del tipo del que hemos creado la consulta.
 
-La ejecución de esa instrucción la vamos a realizar a través de los métodos que nos proporciona dicha interfaz.
+```java
+String jpql = "Select c From Contacto c";
+TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+//No hay que hacer casting
+List<Contacto> contacts = qr.getResultList();
+```
 
-Entre los principales métodos destacamos estos tres guerras un Liss en el caso de una Seele lógicamente nos va a devolver una lista de resultados en forma de Lisseth de objetos sentira.
+Partimos también de la JPQL, a la hora de crear un Objeto Query, `TypedQuery` sería el mismo método `createQuery` del `EntityManager` pero como ves es un método que aparece sobrecargado en este caso porque además de la JPQL le debemos indicar el tipo de entidad que queremos recuperar. Entonces esto ya nos devolvería un `TypedQuery` del tipo Contacto que es el tipo que le hemos indicado en `em.createQuery(jpql, Contacto.class)`, como un objeto class. Eso qué significa que a la hora por ejemplo de aplicar el `getResultList()` para obtener los resultados no habría que hacer ningún tipo de casting sino que directamente ya nos devolvería la colección del tipo que se le indica.
 
-Entonces si nosotros lanzamos esta Select esta J.P. QL hacia la capa de persistencia con el objeto Ueli llamando al método get results nos va a dar un objeto Liss con todos los objetos que cumplen dicha condición en este caso serían todos los contactos como enviarles un Lish lo devuelven en forma de Liz digamos que hacer un casting al tipo específico de objetos que esperamos castin a una colección de tipo List de objetos contando que la consulta solamente va a devolver un objeto pues entonces llamaríamos al QE3 un link sin que el Rasul no necesitaríamos llamar al resurgir sin que resulte nos da un único objeto el único que cumple la condición eso sí sí por lo que sea la condición devolviã mas de una entidad la llamada a este método provocaría una excepción.
+En `T getSingleResult()` es exactamente lo mismo devolvería una única entidad, pero ya sería del tipo que le hemos indicado a la hora de crear el `TypedQuery`.
 
-Este método sólo vamos a utilizar cuando estemos seguros de que las L.T por la condición que le hemos indicado solamente va a devolver un resultado.
-
-Como veis también lo devuelve como tipo Objet.
-
-Habría que hacer un casting al tipo de entidad que estamos esperando.
-
-En el caso de instruciones JP QL que ya las veremos en elecciones posteriores que no sean de tipo selecto sino de actualización masiva o eliminación masiva de entidades utilizaríamos el método Secot.
-
-Ya lo veremos en lecciones posteriores tenemos también otra interfaz llamada Toit qwerty que es una interfaz de Cleri disponible desde JPA 2 no estaba en las primeras versiones de JPA que proponían los mismos métodos del y es una interfaz pero adaptado digamos para el tipo específico de objetos que esperamos.
-
-Por ejemplo día 3 un Lish ya nos devolvería un Lish del tipo del que hemos creado la consulta a la hora de crear un objeto QWERTY Taipe.
-
-Partimos también de la rapé QL sería el mismo método create Kudrin timan ayer pero como veis es un método que aparece sobrecargado en este caso porque además de la J.P. QL le debemos indicar el tipo de entidad que queremos recuperar con esta cuenta.
-
-Entonces esto ya nos devolviã nos devolvería un Tacuarí del tipo contacto que es el tipo que le hemos indicado como un objeto Flash.
-
-Eso qué significa que la hora por ejemplo de aplicar el single azul para obtener los resultados no habría que hacer ningún tipo de casting sino que directamente ya nos devolvería la colección del tipo que se le indica.
-
-El resultado es exactamente lo mismo devolvería una única entidad pero ya no sería una opción ya sería del tipo que le hemos indicado a la hora de crear el pecuarios.
-
-Muy bien pues en la siguiente elección vamos a ver un ejercicio práctico.
-
-Además va a ser una aplicación web donde vamos a aplicar pues todas las consultas J.P. huele a través de descuella.
+Muy bien pues en la siguiente elección vamos a ver un ejercicio práctico, además va a ser una aplicación web, donde vamos a aplicar todas las consultas JPQL a través de `Query` y `TypedQuery`.
 
 # 10 JPA en aplicaciones Web 06:26
 # 11 Ejercicio práctico I Parte 1 19:04
