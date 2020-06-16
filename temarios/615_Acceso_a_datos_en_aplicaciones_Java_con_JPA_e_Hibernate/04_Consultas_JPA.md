@@ -585,7 +585,7 @@ Simplemente sería descuelguen de contacto declaramos la variable y llamaríamos
 
 Esto es la Capa de Lógica de Negocio de nuestra aplicación, cómo ves hemos utilizado métodos básicos del `EntityManager` y `Query` en el caso que tengamos que recuperar una colección de contactos, no hay ningún método básico del `EntityManager` que no haga eso, sólo nos permite recuperar por Primary Key, recurrimos a `Query` que en este caso ha sido bastante sencillo.
 
-Imagínate por ejemplo que quisiéramos, aunque no lo necesitemos en este ejercicio, un método que nos devuelva un objeto de Contacto por ejemplo a partir de su email, imagínate que es eso lo que queremos.
+Imagínate por ejemplo que quisiéramos, aunque no lo necesitemos en este ejercicio, tener un método que nos devuelva un objeto de Contacto por ejemplo a partir de su email, imagínate que es eso lo que queremos.
 
 ```java
 public Contacto buscarContactos(String email){
@@ -597,24 +597,22 @@ public Contacto buscarContactos(String email){
 }
 ```
 
-Bueno pues obtendríamos el `EntityManager` como siempre en nuestro caso la instrucción JPQL huele pues sería del tipo CLC from contacto de Wer C punto y mail igual al valor entonces como el email es un campo un valor de tipo texto pues tendríamos que incluir su valor entre comillas simple concatenar con la variable Imai y concatenar con la comida simple de cierre.
+Bueno obtendríamos el `EntityManager` como siempre, en nuestro caso la instrucción JPQL sería del tipo `String jpql = "Select c From Contacto c Where c.email = '" + email + "'"` el email es un campo un valor de tipo texto pues tendríamos que incluir su valor entre comillas simple concatenar con la variable `email` y concatenar con la comilla simple de cierre, así quedaría la JPQL, si solamente el email no se pudiera repetir, porque la base de datos no la tenemos configurada para evitar eso, pero bueno, suponiendo que estamos seguros que no puede haber dos contactos con el mismo email, entonces esto sería tan simple como coger, bueno primero vamos a crear `TypedQuery` tendríamos la variable `jpql` y como digo sería tan simple como coger y decir `return qr.getSingleResult();`  ya nos va a devolver el objeto Contacto, pero acúerdate lo que te comentaba cuando explicamos este método y es que si por lo que sea la `Select` del JPQL devuelve más de un contacto entonces este método provocará una excepción, si no estamos seguros pero solamente queremos devolver un Contacto el primero que cumpla la condición, en este caso podríamos optar por esta otra opción.
 
-Así quedaría la J.P. cuele si solamente el email no se pudiera repetir porque su base de datos no la tenemos configurada para para evitar eso.
+```java
+public Contacto buscarContactos(String email){
+   EntityManager em = getEntityManager();
+		
+   String jpql = "Select c From Contacto c Where c.email = '" + email + "'";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   //return qr.getSingleResult();
+   return qr.getResultList().get(0);
+}
+```
 
-Pero bueno suponiendo que estamos seguros que no puede haber dos contactos con el mismo email entonces esto sería tan simple como coger bueno vamos primero vamos a crear Swery sería igual que ésta Cubelli aquí tendríamos la variable J.P. suele y como digo sería tan simple como coger y así que el azul ya no va a devolver el objeto contrasto pero cúrate lo que te comentaba cuando explicamos este método y es que si o lo que sea está Select estás J.P. devuelve más de un contacto.
+Y en este caso por si hubiera más de un contacto simplemente se quedaría con el primero.
 
-Pues entonces este método provocará una excepción si no estamos seguros pero solamente queremos devolver un contacto el primero que cumpla la condición.
-
-En este caso podríamos optar por esta otra opción Venetur Cubes repuntó gheto en su lista punto de ser dame el primero de la lista.
-
-Y en este caso por si hubiera más de un contacto simplemente se quedaría recuperar la condición se quedaría con el primero.
-
-Aquí ves que hemos utilizado una SQL la cual ya si metemos una condición ya veremos en posteriores elecciones cómo podemos hacer esto de otra manera utilizando cueles con parámetros.
-
-Bueno pues voy a cortar aquí el vídeo porque para lo que queda explicar las siguientes capas controlador y vista.
-
-Vamos a contar en un vídeo independiente para no hacer demasiado.
-
+Aquí ves que hemos utilizado una JPQL la cual incluye una condición, ya veremos en posteriores lecciones cómo podemos hacer esto de otra manera utilizando JPQL con parámetros.
 
 # 12 Ejercicio práctico I Parte 2 10:01
 # 13 Consultas parametrizadas 03:00
