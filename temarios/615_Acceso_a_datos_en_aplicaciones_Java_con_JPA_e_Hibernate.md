@@ -49,7 +49,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 * 16 Consultas de acción 04:38
 * Autoevaluacion III 00:54
 
-#### 5. JPA en EJBs 39:50
+#### 5. [JPA en EJBs](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/05_JPA_en_EJBs.md) 39:50
 
 * 17 Utilización de JPA con Enterprise JavaBeans 04:42
 * 18 El servidor Glassfish 05:11
