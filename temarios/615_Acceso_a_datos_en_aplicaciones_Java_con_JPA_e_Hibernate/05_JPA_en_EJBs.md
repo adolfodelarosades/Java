@@ -10,47 +10,93 @@
 
 <img src="images/17-01.png">
 
+Aunque los ejemplos vistos hasta el momento hemos utilizado JPA dentro de clases normales Java, es muy habitual encapsular toda la lógica de negocio en muchas aplicaciones empresariales dentro de los llamados Enterprise Java Beans o EJB.
+
 <img src="images/17-02.png">
 
+Y qué es exactamente un EJB, un EJB es una especificación que forma parte de Java EE para la creación de componentes que encapsula la lógica de negocio de una aplicación.
+
+Estos componentes no se ejecutan directamente sobre la máquina virtual Java como una clase normal sino que se ejecuta sobre un contenedor EJB, que formaría parte del Servidor de Aplicaciones y que proporciona una serie de beneficios a la hora de implementar esa lógica de negocio.
+
+La Lógica de Negocio como tal realmente se va a crear en clases, es decir crear un EJB no es muy diferente a crear una clase normal Java, lo único que también se exponen los métodos a través de una interfaz de negocio, que es lo que realmente utilizan los clientes, es decir la Capa del Controlador o Servlet por ejemplo para poder acceder a esa Lógica de Negocio, no accede directamente a la clase sino que lo hace a través de la interfaz de negocio para que sea el contenedor el que gestione directamente la clase y proporcione esos beneficios que ahora vamos a comentar brevemente, los que nos interesan realmente de cara a JPA.
+
+Un entorno de Java Beans se puede crear dentro de un módulo Web con los JSP como hemos visto hasta ahora con las clases normales o en módulos EJB independientes para que puedan ser reutilizados desde muchas aplicaciones.
+
 <img src="images/17-03.png">
+
+Bien como te decía el Contenedor de EJB proporciona una serie de servicios que benefician al programador a la hora de realizar determinadas tareas que no va a tener que programar. En lo que a nosotros nos concierne es decir de cara a implementar la lógica de negocio con JPA dentro de un EJB, pues esos beneficios son:
+
+* *Inyección de Dependencia* y
+* *Gestión Automática de Transacciones*
+
+
+Qué es eso de *Inyección de Dependencia*, bueno pues que el objeto `EntityManager` que nosotros hemos creado hasta ahora con código a través de  `Persistence`, `EntityManagerFactory`, etc., es decir:
+
+```jav
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
+```
+
+O así:
+
+```java
+//Método que permite obtener el objeto EntityManager
+private EntityManager getEntityManager() {
+   EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-02_web_jpa");
+	 return factory.createEntityManager();
+}
+``` 
+
+si implementamos toda esa lógica dentro de un contenedor EJB no vamos a tener que crear todas esas instrucciones, a través de la anotación `@PersistenceContext` le vamos a decir al contenedor EJB de que unidad de persistencia queremos obtener el `EntityManager` y ya se encargará él de hacer todo el proceso de crear el objeto e inyectarlo en la variable `em`:
+
+```java
+@PersistenceContext(name ="unidad_persistencia")
+private EntityManager em;
+```
+Esto va a suponer un ahorro de código, pero no sólo eso también la gestión automática de transacciones es decir el contenedor EJB se va a encargar de a nivel de cada método de negocio iniciar una transacción , confirmarla o rechazarla si se produce alguna excepción en tiempo de ejecución. Por lo tanto lo de Transaction, iniciar transacciones con `begin()` confirmarlas es algo que también nos vamos a poder ahorrar. Es decir esto que antes metiamos en nuestros ejemplos pasados:
+
+```java
+EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-01_ejemplo_jpa");
+EntityManager em = factory.createEntityManager();
+
+//Inicio de una transacción
+EntityTransaction tx = em.getTransaction();
+tx.begin();
+
+//Eliminación de un contacto
+c = em.find(Contacto.class, 33);
+em.remove(c);
+
+//Confirmar transacción
+tx.commit();
+```
+puesto que se van a gestionar automáticamente con el contenedor, controlándolo eso sí a través de una anotación `@TransactionAttribute` que vamos a utilizar a nivel de cada método para indicar cómo queremos que se comporte nuestro método a nivel de transacciones.
 
 <img src="images/17-04.png">
 
 <img src="images/17-05.png">
 
-<img src="images/17-06.png">
+Existen distintos valores que se pueden asignar a esa anotación que están definidos dentro de una serie de constantes en la numeración `TransactionAttributeType` como por ejemplo:
 
-Aunque los ejemplos vistos hasta el momento hemos utilizado JPA dentro de clases normales Java es muy habitual encapsular toda la lógica de negocio en muchas aplicaciones empresariales dentro de los llamados Enterprise Linux o en JBS y qué es exactamente un JB interpelaba JB O interpretã Babin es una especificación que forma parte de Java para la creación de componentes que encapsula la lógica de negocio de una aplicación.
+* `MANDATORY` que indicaría que para poder ejecutar ese método debe haberse ya iniciado una transacción anteriormente y que el método participara de esa transacción.
 
-Estos componentes no se ejecutan directamente sobre la máquina virtual Java como una clase normal sino que se ejecuta sobre un contenedor JB formaría parte del servidor de aplicaciones y que proporciona una serie de beneficios a la hora de implementar esa lógica de negocio.
+* `REQUIRED` es que si hay una transacción el método va a participar en ella y si no iniciará una nueva.
 
-La lógica de negocio como tal realmente se va a crear en clase es decir crear un JB No es muy diferente a crear una clase normal Java lo único que también se exponen los métodos a través de una interfaz Conci interfaz de negocio que es lo que realmente utilizan los clientes es decir la capa del controlador o serlo por ejemplo para poder acceder a esa lógica de negocio no accede directamente a la clase sino que lo hace a través de la interfaz de negocio para que sea el contenedor el que gestione directamente la clase y proporcione beneficios que ahora vamos a comentar brevemente los que nos interesan realmente de cara a JPA.
+* `REQUIRES_NEW`
 
-Un entorno de Java se puede crear dentro de un módulo web con los JSP como hemos visto hasta ahora con las clases normales o en módulos independientes para que puedan ser reutilizados de muchas aplicaciones bien como te decía el contenido del JB proporciona una serie de servicios que benefician al programador a la hora de realizar determinadas tareas que no va a tener que programar.
+* `SUPPORTS`
 
-En lo que a nosotros nos concierne es decir de cara a implementar la lógica de negocio con JPA dentro de un JB Pues esos beneficios son inyección de dependencia y gestión automática de transacciones.
+* `NOT_SUPPORTED`
 
-Qué es eso de inyección de dependencia.
+* `NEVER`
 
-Bueno pues que el objeto en Titelman ayer que nosotros hemos creado hasta ahora de código persistan Factory etcétera.
+y algunos más que tenemos aquí resumidos, los seis posibles valores que puede tomar esa anotación.
 
-Pues ya si lo implementamos toda esa lógica dentro de un contenedor JB No vamos a tener que crear esas instrucciones a través de esta notación le vamos a decir al contenedor JB de que unidad de persistencia queremos obtener el intiman ayer y ya se encargará él de hacer todo el proceso de inyectarlo crear el objeto inyectarlo.
+Anotación que por otro lado no va a ser obligatorio incluir a nivel de cada método puesto que hay un valor por defecto es precisamente `REQUIRED`. Es decir cuando se hace un llamado a un método de un EJB, si hay una transacción ya iniciada por el cliente que ha hecho la llamada, pues ese método participará dentro de la transacción y si no se encargará el contenedor de iniciar una nueva y confirmarla al final.
 
-Esta variante es decir eso va a suponer un ahorro de código pero no sólo eso también la gestión automática de transacciones es decir el contenedor JB se va a encargar de a nivel de cada método de negocio iniciar una transacción confirmarla o rechazarla si se produce alguna excepción en tiempo de ejecución.
+Por lo tanto eso significa que nuestro método siempre va a contener todas las instrucciones dentro de una transacción y por lo tanto no será necesario que nosotros explicitamente las iniciemos como hemos hecho hasta ahora.
 
-Por lo tanto lo de Transaction iniciar conversaciones con el Beguin confirmarlas es algo que también nos vamos a poder ahorrar desde Kodi puesto que como digo se van a gestionar automáticamente con el contenedor controlándolo eso sí a través de una anotación arroba transaction a tribute que vamos a utilizar a nivel de cada método para indicar cómo queremos que se comporte nuestro método a nivel de transacciones.
-
-Existen distintos valores que se pueden asignar a esa anotación atraes que están definidos dentro de una serie de constantes en la numeración transaction a tributarle como por ejemplo mandatory que indicaría que para poder ejecutar ese método debe haberse ya iniciado una transacción anteriormente y que el método anticipará de esa transacción required.
-
-Y es que si hay una transacción el método va a participar en ella y si no iniciará una nueva y algunos más que tenemos aquí resumidos en los seis posibles valores que puede tomar esa anotación.
-
-Anotación que por otro lado no va a ser obligatorio incluir a nivel de cada método puesto que hay un valor por defecto es precisamente Recuay.
-
-Es decir cuando se hace un llamado método JB Si hay una transacción ya iniciada por el cliente derecho la llamada pues ese método participará dentro de la transacción y si no se encargará el contenedor de iniciar una nueva y confirmarlas final.
-
-Por lo tanto eso significa que nuestro método siempre va a estar todas las instrucciones dentro de una transacción y por lo tanto no será necesario que nosotros explicitamente las iniciemos como hemos hecho hasta ahora.
-
-Bien pues vamos a ver después en el siguiente vídeo vamos a explicar cómo configurar nuestro entorno de desarrollo para trabajar con JB y a continuación veremos una nueva versión de la agenda de contactos implementada con Interplay Jabari.
+Bien pues vamos a ver después en la siguiente lección vamos a explicar cómo configurar nuestro entorno de desarrollo para trabajar con EJB y a continuación veremos una nueva versión de la agenda de contactos implementada con EJB.
 
 # 18 El servidor Glassfish 05:11
 
