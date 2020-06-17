@@ -1699,35 +1699,72 @@ and open the template in the editor.
 
 # 13 Consultas parametrizadas 03:00
 
-Siguiendo con el estudio de las consultas JPA vamos a ver cómo podemos definir parámetros dentro de una instrucción JPQL lo que llamamos consultas parametrizada para definir parámetros podemos hacerlo de dos maneras o bien por nombre.
+<img src="images/13-01.png">
 
-Por ejemplo aquí tenemos unas L.T del empleado donde la condición es que el DNI del empleado sea igual a un parámetro y en este caso le damos un nombre DNI y precedido por los dos puntos.
+Siguiendo con el estudio de las consultas JPA vamos a ver cómo podemos definir parámetros dentro de una instrucción JPQL, lo que llamamos consultas parametrizada.
 
-La otra opción es asignar el parámetro de una posición.
+<img src="images/13-02.png">
 
-En ese caso utilizaríamos una interrogación y el nombre de la posición uno por uno dos tres etc.
+Para definir parámetros podemos hacerlo de dos maneras o bien por nombre por ejemplo:
 
-Esto sería la manera de definir la JPQL con parámetro a la hora de crear la instrucción y asociar las instrucciones JPQL
+`Select e From Empleado e Where e.dni=:dni`
 
-Luego le tendremos que asignar antes de su ejecución un valor a cada uno de los parámetros.
+Aquí tenemos una `Select` del empleado donde la condición es que el `dni` del empleado sea igual a un parámetro y en este caso le damos un nombre `dni` y precedido por los dos puntos.
 
-Para ello utilizaríamos alguno de estos dos métodos de la interfaz cuen o Tacuarí que son para meter a partir del nombre y el valor del parámetro asignar o para meter con la posición el valor asignará parámetros que ocupa dicha posición.
+La otra opción es asignar el parámetro en una posición.
 
-Aquí vemos un ejemplo con la instrucción J.P. QL que veíamos en la transparencia anterior en este caso tenemos una JPQL Con un parámetro por nombre de Nay creamos la QWERTY a partir de la instrucción JPQL y antes de ejecutarla como llamamos al set para meter indicando nombre el parámetro y el valor del valor como pueden ser cualquier o cualquier objeto Java.
+`Select e From Empleado e Where e.dni=?1`
 
-Una vez que ya lo ejecutemos en este caso con el Get Results obtendríamos la lista empleados que cumplen dicha condición.
+En ese caso utilizaríamos una interrogación y el número de la posición uno, dos, tres, etc.
 
-Vamos a verlo por ejemplo en el ejercicio que hicimos en la lección anterior donde teníamos un método que habíamos definido dentro del modelo que este método no se había utilizado.
+Esto sería la manera de definir la JPQL con parámetro.
 
-Pero bueno lo habíamos llamado a buscar contacto que a partir del email localizaba todas las entidades cuyo valor del atributo Immelt fuera.
+<img src="images/13-03.png">
 
-Este valor vale bien pues en vez de utilizar la concatenación con las comillas simples cuando es un valor de tipo texto cuando no es de tipo texto no hay que poner comillas etcétera que es bastante más farragoso de construir.
+A la hora de crear la Query asociada a la instruccion JPQL le tendremos que asignar antes de su ejecución un valor a cada uno de los parámetros. Para ello utilizaríamos alguno de estos dos métodos de la interfaz `Query` o `TypeQuery` que son:
 
-Esas instrucciones.
+* `setParameter(String nombre, Object value)` a partir del nombre y el valor del parámetro a asignar
+* `setParameter(int pos, Object value)` o con la posición y el valor a asignará en dicha posición.
 
-Pues lo mejor sería utilizar una consulta parametrizada en este caso por ejemplo con la asignaremos una posición crearíamos Aterpe Cury y antes de ejecutarla le asignamos un valor al parámetro para utilizaríamos el método para meter le daríamos la posición en este caso y el valor que sería el índice al ejecutarlo ya obtendríamos la lista de resultados asociados a dicho valor como. 
+Aquí vemos un ejemplo con la instrucción JPQL que veíamos en la transparencia anterior.
 
-Es bastante más cómodo que andar con la concatenación de los valores dentro de lo que sería la instrucción.
+```java
+String jpql = "Select e From Empleado e Where e.dni=:dni";
+Query qr = em.createQuery(jpql);
+qr.setParmeter("dni" , "334355R");
+List<Empleado> emps = (List<Empleado>) qr.getResultList();
+```
+
+En este caso tenemos una instrucción JPQL con un parámetro llamado `dni`, creamos la `Query` a partir de la instrucción JPQL y antes de ejecutarla llamamos a `setParmeter`  indicando el nombre del parámetro y el valor, el valor pueden ser cualquier objeto Java. Una vez que ya lo ejecutemos en este caso con el `qr.getResultList()` obtendríamos la lista de empleados que cumplen dicha condición.
+
+Vamos a verlo por ejemplo en el ejercicio que hicimos en la lección anterior donde teníamos un método que habíamos definido dentro del modelo que este método no se había utilizado, lo habíamos llamado a `buscarContactos`.
+
+```java
+public Contacto buscarContactos(String email){
+   EntityManager em = getEntityManager();
+		
+   String jpql = "Select c From Contacto c Where c.email = '" + email + "'";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   //return qr.getSingleResult();
+   return qr.getResultList().get(0);
+}
+```
+
+Que a partir del email localizaba todas las entidades cuyo valor del atributo `email` fuera el parámetro recibido. En vez de utilizar la concatenación con las comillas simples cuando es un valor de tipo texto, cuando no es de tipo texto no hay que poner comillas etc. que es bastante más farragoso de construir esas instrucciones. Lo mejor sería utilizar una consulta parametrizada, en este caso por ejemplo asignaremos una posición, crearíamos `TypedQuery` y antes de ejecutarla le asignamos un valor al parámetro, para lo cual utilizaríamos el método `setParmeter`, le daríamos la posición en este caso y el valor que sería el `email`.
+
+```java
+public Contacto buscarContactos(String email){
+   EntityManager em = getEntityManager();
+		
+   String jpql = "Select c From Contacto c Where c.email = ?1";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   qr.setParameter(1, email);
+   //return qr.getSingleResult();
+   return qr.getResultList().get(0);
+}
+```
+
+Al ejecutarlo ya obtendríamos la lista de resultados asociados a dicho valor, como ves es bastante más cómodo que andar con la concatenación de los valores dentro de lo que sería la instrucción.
 
 # 14 Consultas nominadas 02:28
 
