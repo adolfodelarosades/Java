@@ -2236,14 +2236,718 @@ recibiríamos como parámetro el email, obtenemos el `EntityManager`, el objeto 
 han visto afectadas pues no recogeremos el valor y simplemente lanzaremos la llamada para posteriormente hacer un `commit` esto sería una manera de utilizar una consulta JPQL de Acción.
 
 
+### :computer: Código Completo - 615-03_web_jpa 
 
+<img src="images/16-04.png">
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-03_web_jpa</groupId>
+	<artifactId>615-03_web_jpa</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-03_web_jpa" transaction-type="RESOURCE_LOCAL">
+		<class>entidades.Contacto</class>
+		<class>entidades.Usuario</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`Contacto.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the contactos database table.
+ * 
+ */
+@Entity
+@Table(name="contactos")
+@NamedQueries({
+	@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c"),
+	@NamedQuery(name="Contacto.deleteByEmail", query="DELETE FROM Contacto c WHERE c.email=?1")
+})
+
+public class Contacto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idContacto;
+
+	private String email;
+
+	private String nombre;
+
+	private int telefono;
+
+	public Contacto() {
+	}
+
+	public Contacto(String email, String nombre, int telefono) {
+		super();
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public Contacto(int idContacto, String email, String nombre, int telefono) {
+		super();
+		this.idContacto = idContacto;
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public int getIdContacto() {
+		return this.idContacto;
+	}
+
+	public void setIdContacto(int idContacto) {
+		this.idContacto = idContacto;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+}
+```
+
+*`Usuarios.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the usuarios database table.
+ * 
+ */
+@Entity
+@Table(name="usuarios")
+@NamedQueries({
+   @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
+   @NamedQuery(name="Usuario.findByUserAndPwd", query="SELECT u FROM Usuario u Where u.usuario=?1 and u.password=?2")
+})
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUsuario;
+
+	private String password;
+
+	private String usuario;
+
+	public Usuario() {
+	}
+
+	public int getIdUsuario() {
+		return this.idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+}
+```
+
+*Servlets*
+
+*`LoginAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import modelo.GestionUsuarios;
+
+/**
+ * Servlet implementation class LoginAction
+ */
+@WebServlet("/LoginAction")
+public class LoginAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String user=request.getParameter("user");
+		String pwd=request.getParameter("pwd");
+		GestionUsuarios gusuarios=new GestionUsuarios();
+		if(gusuarios.autenticar(user, pwd)){
+			//guardamos el nombre de usuario en un atributo de sesión
+			HttpSession s=request.getSession();
+			s.setAttribute("user", user);
+			request.getRequestDispatcher("menu.html").forward(request, response);
+		}else{
+			request.getRequestDispatcher("login.html").forward(request, response);
+		}
+	}
+
+}
+```
+
+*`AltaAction.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class AltaContacto
+ */
+@WebServlet("/AltaAction")
+public class AltaAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nombre=request.getParameter("nombre");
+		String email=request.getParameter("email");
+		int telefono=Integer.parseInt(request.getParameter("telefono"));
+		//creamos un objeto de la capa de lógica de negocio
+		//y llamamos al método encargado de hacer el alta
+		GestionContactos gcontactos=new GestionContactos();
+		gcontactos.altaContacto(nombre,email,telefono);
+		request.getRequestDispatcher("menu.html").forward(request, response);
+	}
+
+}
+```
+
+*`EliminarAction.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class EliminaContacto
+ */
+@WebServlet("/EliminarAction")
+public class EliminarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idContacto=Integer.parseInt(request.getParameter("idContacto"));
+		GestionContactos gcontactos=new GestionContactos();
+		gcontactos.eliminarContacto(idContacto);
+		request.getRequestDispatcher("RecuperarAction").forward(request, response);
+	}
+
+}
+```
+
+*`RecuperarAction.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Contacto;
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class RecuperarAction
+ */
+@WebServlet("/RecuperarAction")
+public class RecuperarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		GestionContactos gcontactos=new GestionContactos();
+		List<Contacto> contactos=gcontactos.recuperarContactos();
+		//guardamos contactos en un atributo de petición
+		request.setAttribute("contactos", contactos);
+		//trasnferencia de la petición
+		request.getRequestDispatcher("contactos.jsp").forward(request, response);
+	}
+
+}
+```
+
+*`Controller.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String op = request.getParameter("op");
+		String url = "";
+		switch (op) {
+		case "doLogin":
+			url = "LoginAction";
+			break;
+		case "doAlta":
+			url = "AltaAction";
+			break;
+		case "doEliminar":
+			url = "EliminarAction";
+			break;
+		case "doRecuperar":
+			url = "RecuperarAction";
+			break;
+		case "toNuevo":
+			url = "nuevo.html";
+			break;
+		case "toMenu":
+			url = "menu.html";
+			break;
+
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+}
+```
+
+**Modelo**
+
+*`GestionContactos.java`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import entidades.Contacto;
+
+public class GestionContactos {
+	
+	//Método que permite obtener el objeto EntityManager
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-03_web_jpa");
+		return factory.createEntityManager();
+	}
+	
+	public void altaContacto(String nombre, String email, int telefono) {
+		Contacto c = new Contacto(email, nombre, telefono);
+		EntityManager em = getEntityManager();
+		
+		//La operación la incluimos en una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(c);
+		tx.commit();
+	}
+
+	public void altacontacto(Contacto c) {
+		EntityManager em = getEntityManager();
+		
+		//La operación la incluimos en una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(c);
+		tx.commit();
+	}
+	
+	public void eliminarContacto(int idContacto) {
+		EntityManager em = getEntityManager();
+		
+		Contacto c = em.find(Contacto.class, idContacto);
+		EntityTransaction tx = em.getTransaction();
+		//Si el contacto existe lo eliminamos
+		tx.begin();
+		if(c != null) {
+		   em.remove(c);
+		}
+		tx.commit();	
+	}
+	
+	public void eliminarContactosPorEmail(String email){
+		EntityManager em=getEntityManager();
+		Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+		qr.setParameter(1, email);
+		EntityTransaction tx=em.getTransaction();
+		tx.begin();
+		qr.executeUpdate();
+		tx.commit();
+	}
+	
+	public List<Contacto> recuperarContactos(){
+		EntityManager em = getEntityManager();
+		/*Query qr = em.createQuery("Select c From Contacto c");
+		return (List<Contacto>)qr.getResultList();*/
+		TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+		return qr.getResultList();
+	}
+	
+	public Contacto buscarContactos(String email){
+		EntityManager em = getEntityManager();
+		
+		String jpql = "Select c From Contacto c Where c.email = ?1";
+		TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+		qr.setParameter(1, email);
+		//return qr.getSingleResult();
+		return qr.getResultList().get(0);
+	}
+}
+```
+
+*`GestionUsuarios.java`*
+
+```java
+package modelo;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import entidades.Usuario;
+
+public class GestionUsuarios {
+	// método que permite obtener el objeto EntityManager
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-03_web_jpa");
+		return factory.createEntityManager();
+	}
+
+	public boolean autenticar(String usuario, String pwd) {
+		EntityManager em = getEntityManager();
+		boolean res = false;
+		TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+		qr.setParameter(1, usuario);
+		qr.setParameter(2, pwd);
+		try {
+			qr.getSingleResult();
+			res = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return res;
+	}
+
+}
+```
+
+**WebContent**
+
+*`login.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="Controller?op=doLogin" method="post">
+		Usuario:<input type="text" name="user"/><br/>
+		Contraseña:<input type="password" name="pwd"/><br/>
+		<input type="submit" value="Enviar"/>
+	
+	</form>
+</body>
+</html>
+```
+
+*`menu.html`*
+
+```html
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <center>
+        <a href="Controller?op=toNuevo">Nuevo contacto</a><br/>
+        <a href="Controller?op=doRecuperar">Ver contactos</a><br/>
+    </center>
+    </body>
+</html>
+```
+
+*`nuevo.html`*
+
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>nuevo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+ 	function comprobar(){ 	
+ 		if(document.getElementById("nombre").value==""||
+ 			document.getElementById("email").value==""||
+ 			document.getElementById("edad").value==""){
+ 				alert("faltan datos");
+ 			return false;
+ 		}
+ 		else{
+ 			return true;
+ 		}
+ 		
+ 	}
+        function comprobarEdad(){
+            if(isNaN(document.getElementById("edad").value)){
+                alert("Edad debe ser numérico");
+                document.getElementById("edad").value="";
+            }
+        }
+</script>
+</head>
+<body>
+<form action="Controller?op=doAlta" method="post" onsubmit="return comprobar();">
+	Nombre:<input id="nombre" type="text" name="nombre"/>
+	<br/>
+	Email:<input id="email" type="text" name="email"/>
+	<br/>
+        Telefono:<input id="edad" onblur="comprobarEdad();" type="text" name="telefono"/>
+	<br/>
+	<input type="submit" value="Guardar"/>
+</form>
+</body>
+</html>
+```
+
+*`contactos.jsp`*
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="modelo.GestionContactos,java.util.ArrayList,entidades.Contacto"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<c:set var="contactos" value="${requestScope.contactos}"/>
+	
+	<br/><br/><br/>
+	
+	<c:choose>
+	
+		<c:when test="${!empty contactos}">
+	
+			<table border="1">
+						<tr>
+							<th>Nombre</th>
+							<th>Email </th>
+							<th>Telefono</th>
+							<th></th>
+						</tr>
+						
+						<c:forEach var="cont" items="${contactos}">
+							<tr><td>${cont.nombre}</td>
+							<td>${cont.email}</td>
+							<td>${cont.telefono}</td>
+							<td><a href="Controller?op=doEliminar&idContacto=${cont.idContacto}">Eliminar</a></td></tr>
+						
+						
+						</c:forEach>
+						
+						
+						
+			</table>
+		</c:when>
+		<c:otherwise>
+			<h1>No hay contactos</h1>
+		</c:otherwise>
+	</c:choose>
+	<br/>
+	<br/>
+	<a href="Controller?op=toMenu">Menu</a>
+</body>
+</html>
+```
 
 # Autoevaluacion III 00:54
 
-
 Autoevaluacion III
-
- 
 
 1. Indica cual de las siguientes instrucciones JPQL sería la correcta para recuperar las entidades de tipo Alumno cuya propiedad nota sea superior a 5:
    * `Select a From Alumno a where a.nota>5` :+1:
