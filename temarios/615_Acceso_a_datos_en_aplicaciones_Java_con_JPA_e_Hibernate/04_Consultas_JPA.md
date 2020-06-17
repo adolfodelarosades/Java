@@ -1698,7 +1698,263 @@ and open the template in the editor.
 ```
 
 # 13 Consultas parametrizadas 03:00
+
+Siguiendo con el estudio de las consultas JPA vamos a ver cómo podemos definir parámetros dentro de una instrucción JPQL lo que llamamos consultas parametrizada para definir parámetros podemos hacerlo de dos maneras o bien por nombre.
+
+Por ejemplo aquí tenemos unas L.T del empleado donde la condición es que el DNI del empleado sea igual a un parámetro y en este caso le damos un nombre DNI y precedido por los dos puntos.
+
+La otra opción es asignar el parámetro de una posición.
+
+En ese caso utilizaríamos una interrogación y el nombre de la posición uno por uno dos tres etc.
+
+Esto sería la manera de definir la JPQL con parámetro a la hora de crear la instrucción y asociar las instrucciones JPQL
+
+Luego le tendremos que asignar antes de su ejecución un valor a cada uno de los parámetros.
+
+Para ello utilizaríamos alguno de estos dos métodos de la interfaz cuen o Tacuarí que son para meter a partir del nombre y el valor del parámetro asignar o para meter con la posición el valor asignará parámetros que ocupa dicha posición.
+
+Aquí vemos un ejemplo con la instrucción J.P. QL que veíamos en la transparencia anterior en este caso tenemos una JPQL Con un parámetro por nombre de Nay creamos la QWERTY a partir de la instrucción JPQL y antes de ejecutarla como llamamos al set para meter indicando nombre el parámetro y el valor del valor como pueden ser cualquier o cualquier objeto Java.
+
+Una vez que ya lo ejecutemos en este caso con el Get Results obtendríamos la lista empleados que cumplen dicha condición.
+
+Vamos a verlo por ejemplo en el ejercicio que hicimos en la lección anterior donde teníamos un método que habíamos definido dentro del modelo que este método no se había utilizado.
+
+Pero bueno lo habíamos llamado a buscar contacto que a partir del email localizaba todas las entidades cuyo valor del atributo Immelt fuera.
+
+Este valor vale bien pues en vez de utilizar la concatenación con las comillas simples cuando es un valor de tipo texto cuando no es de tipo texto no hay que poner comillas etcétera que es bastante más farragoso de construir.
+
+Esas instrucciones.
+
+Pues lo mejor sería utilizar una consulta parametrizada en este caso por ejemplo con la asignaremos una posición crearíamos Aterpe Cury y antes de ejecutarla le asignamos un valor al parámetro para utilizaríamos el método para meter le daríamos la posición en este caso y el valor que sería el índice al ejecutarlo ya obtendríamos la lista de resultados asociados a dicho valor como. 
+
+Es bastante más cómodo que andar con la concatenación de los valores dentro de lo que sería la instrucción.
+
 # 14 Consultas nominadas 02:28
+
+En esta elección te voy a hablar de las consultas nominadas una consulta nominada es una instrucción JPQL que se define dentro de la propia entidad a la cual se le va a asignar un nombre de esta manera a la hora de utilizar dicha consulta.
+
+JP QL en lugar de tener que escribir la instrucción dentro del código de los métodos donde vaya a ser utilizada pues se referirá ella siempre a través de su nombre con lo cual podrá ser reutilizada en distintas partes del programa.
+
+Por supuesto estas instrucciones JPQL con nombre pues pueden incluir también parámetros como cualquier otra instrucción JPQL normal cómo se crea una consulta nominada pues se define como hemos dicho antes dentro de la propia entidad y se utiliza para ello la notación arroba mezclé de la entidad.
+
+Después vendrá la definición de la notación arroba Entity utilizamos arroba McCurry indicando por un lado el nombre que le vamos a asignar a la consulta y en el atributo Query lo que sería la instrucción JPQL asociada que como he dicho antes puede llevar parámetros una consulta JPQL estándar pueden ser por supuesto su elección de actualización etcétera.
+
+Si queremos definir más de una Mercuri podemos definir todas las que queramos entonces deberíamos utilizar otra segunda notación arroba name Aquaris dentro de la cual se definiría cada una de dichas no me acuerdo entre paréntesis entre llaves cada Name se definiría con su anotación Romagna Mercouri separándose por una coma de la siguiente.
+
+Esto sería lo que es la creación.
+
+La definición de la escuela y cómo la utilizamos después en un programa dentro de un método de la lógica de negocio que queremos utilizar esa consulta pues a través del método creatinina Mercouri de la Entity manager creatinina Mercuri simplemente le tenemos que indicar el nombre de la consulta que queremos obtener y a partir de ahí nos devolverá el objeto Cury asociado es decir en lugar de utilizar directamente la instrucción simplemente hacemos referencia a su nombre.
+
+Una vez que tenemos el objeto qwerty o que también podemos utilizarlo también podemos crear un creates no mezclar y generar un objeto del tipo Query pues la utilizaríamos como una consulta normal es decir sin Gorlero Shur etc..
+
 # 15 Ejercicio práctico II 13:06
+
+A continuación vamos a poner en práctica el uso de las name Aquaris en una nueva versión del ejercicio de la agenda de contactos en esta nueva versión.
+
+Vamos a incluir una página de autenticación que solicitará los credenciales del usuario para poder tener acceso al menú de opciones de alta de contacto y visualización de contactos.
+
+Para ello vamos a tener que crear en la base de datos una nueva tabla.
+
+Como pudiste ver anteriormente pues yo ya tenía esa tabla creadas y trata la tabla a usuarios y es una tabla que simplemente va a contener dos campos el campo usuario y el campo.
+
+Ambos de tipo texto con un campo Primary qué identificador de usuario numérico que permite identificar los combinaciones de usuario párvula en la base de datos.
+
+Bueno pues esto es sencillo de crear y una vez que ya disponemos de esta tabla vamos a Eclipse y para crear una nueva versión del ejercicio lo que hacemos es no hace falta que creamos un proyecto nuevo sino que podemos copiar y pegar este que ya tenemos y renombra haríamos lo recobramos como 03 ejercicio práctico.
+
+2.
+
+Muy importante a la hora de hacer esto con una aplicación web.
+
+Copiar y pegar en un proyecto porque aunque nosotros hemos renombrado el mismo y le hemos dado un nombre al proyecto lo que es la dirección de la aplicación web no ha cambiado sigue siendo la misma que la del ejercicio 2.
+
+Eso significa que si nos disponemos a probar esta aplicación no vamos a poder hacerlo en el Tomcat puesto que como ya tenemos desplegada una con la misma dirección que es la 02 al intentar probar esta nos va a dar un error bueno simplemente para solucionar ese problema nos iríamos a las propiedades de este proyecto que hemos copiado es con root en la opción web Proyect setting contra root que es la dirección de la aplicación sigue poniendo 0 2 ejercicios practicados por nosotros lo cambiamos con la nueva dirección que queramos asociable a esta aplicación que pues nada una vez hecho eso es lo que tenemos que hacer ahora es crear una nueva entidad asociada a la tabla de usuarios que hemos creado.
+
+Bueno pues que va a ser la que vamos a utilizar esa entidad para autenticar los usuarios desde la lógica de negocio de la aplicación.
+
+Para ello como ya tenemos la característica JPN aplicada por supuesto tenemos también las librerías que necesitamos añadida del motor de persistencia pues simplemente nos vamos a la opción JPA Tools generar entidades desde tablas seleccionaremos haríamos la conexión que ya tenemos creada del ejercicio anterior hasta conexión 1.
+
+Y bueno pues al elegir la base de datos agenda nos aparecen las dos tablas.
+
+Nosotros vamos a crear una entidad de la tabla usuarios que no haya asociaciones en el paquete pues aparecerán por defecto lo último que hemos utilizado para crear entidades y entidades generador de clave así es campo identidad una acción automática y el último paso como resumen nos va a decir que la clase se va a llamar usuario.
+
+Efectivamente lo que es como queremos que se llame pues nada más finalizamos tenemos aquí ya nuestras dos entidades.
+
+Contacto.
+
+Bueno pues esta la estamos utilizando en la lógica de negocio que ya teníamos y la nueva usuario.
+
+Una cosa que vamos a hacer que es muy importante es que persiste en XML el nuevo proyecto.
+
+La verdad es que se ha registrado automáticamente la nueva entidad usuario pero lo que vamos a hacer es que lo vamos a cambiar el nombre a la unidad de persistencia porque coge como nombre por defecto el nombre del proyecto y aquí sólo hemos cambiado al nombrarlo.
+
+Lógicamente esto no me lo ha cambiado.
+
+Entonces no vamos a cambiar y ese mismo nombre lo utilizaremos en la capa del modelo en gestión contactos donde obteníamos Identity Manager Factory.
+
+Bueno pues ahí lo dejamos ya para que luego no se nos pase y no nos dé errores al intentar crear el Inti-Illimani bien antes de meternos con la lógica de negocio pues como hemos dicho queremos utilizar las name Aquaris.
+
+En esta ocasión pues para poder hacer la autenticación de los usuarios entonces nos vamos a crear un Lanamme en esta entidad usuario que será la que utilicemos desde la lógica negoción.
+
+Como sabéis ya el eclipse te genera una por defecto que te recoge todas las entidades de ese tipo.
+
+Bueno vamos a dejar pero vamos a incluir una nueva.
+
+Habrá que incluir también la anotación arroba naveta.
+
+Aquí aparece entonces entre paréntesis si entre llaves la lista de entidades que queremos incluir dentro de la cuenta.
+
+Por supuesto tenemos esta que la vamos a poner aquí Koma y vamos a añadir copiando y pegando por su lado no van al recovery que nos interesa en este caso como es costumbre nombrar al andarme Aquaris con el nombre de la entidad y luego el nombre de lo que hace la consulta.
+
+Eso evita que se puedan duplicar nombres de entidades de namekianos en diferentes entidades.
+
+Al ponerle el nombre de la entidad adelante eso no va a ocurrir.
+
+Bueno pues aquí vamos a llamarla por ejemplo Fain y user TWA por ejemplo donde la cuadri la consulta JPQL 
+
+Pues tendrá como condición que en el campo usuario sea igual a un parámetro y el campo Passbook contó Passbook sea igual al siguiente parámetro.
+
+Muy bien.
+
+Ya tenemos Lanamme equally.
+
+Ahora será cuestión de utilizarla en la lógica de negocio entre un nuevo método que vamos a añadir para autenticar usuarios es ese método podemos hacer tenemos dos opciones o incluirlo dentro de la clase en gestión con datos como esto se trata de manipular otra entidad diferente.
+
+Quizá sería conveniente para no tener todos la misma clase incluir a una nueva clase dentro de la lógica negocio que ya vemos por ejemplo gestión a usuarios.
+
+Lo que vamos a hacer vamos a crear una nueva clase que vamos a llamar así gestión usuarios van porque ya lo tenemos dentro del paquete modelo y en esa clase incluiremos un método que fuera auténtica.
+
+Vamos a ver porque esto es como yo lo tengo hecho aquí vamos a ver aquí lo tenemos y copiamos y pegamos y ahora ya lo analizamos el corto.
+
+El método privado para obtener el intiman Layer es lo mismo que hicimos en la otra clase que se me aparece un eclipse y cerrando pestañas ya que es para Eclipse y bueno si lo tenemos es Identity Manager aquí ya le he dejado y he puesto el nombre de la nueva entidad persistencia para el ejercicio III que estamos Kontrol mayúscula 
+o para importar todas las clases e interfaces que necesitemos y vamos a analizar el método autenticada el método autenticar lo hemos puesto para que reciban lógicamente el usuario el pago que tiene que comprobar y nos devuelva si existe o no existe.
+
+Entonces obtenemos Identity Manager y creamos un tipo de acuerdo en este caso utilizando el create en la Mercuri puesto que partimos de una escuela INVI user ante WBA de tipo usuario y sustituimos los parámetros el uno con el que es el usuario con el parámetro que recibe el método autenticar y el segundo a segundo parámetro el método autenticar como esperamos un único resultado. 
+
+Llamamos a Singhal entonces fíjate lo que hemos hecho aquí lo hemos metido la llamada que es ingreso dentro de un troikas porque qué ocurre si no encuentra ninguna combinación de usuario algo que no nos va a devolver Null sino que va a provocar una excepción de que no encuentra al no encontrarlo resulta una excepción de la misma manera que si encontrase mal de uno también lo haría una excepción entonces realmente no nos interesa recoger el valor simplemente si la excepción o no no la da pues entonces es que la ha encontrado.
+
+Había un único resultado que coincide con esa combinación de usuario metemos el valor que no se producirá una excepción.
+
+Aquí simplemente le he dicho que me lo muestre la traza.
+
+Por si acaso hay algún problema poder verlo.
+
+Pero una vez que se pusiera en producción no sería nada directamente y retornaría falso.
+
+No he entrado aquí por lo tanto retorné que es el equivalente a decir que no la he encontrado.
+
+Pues ya tenemos nuestra lógica de negocio hecha utilizando en este caso como veis una mezcla mejor y podría utilizarse en cualquier otro método donde fuera requerida donde fuera interesante utilizar ya solamente quedaría hacer ahora la parte digamos del controlador y la vista.
+
+Esto también lo tenemos hecho ya por aquí pues vamos a ver aquí está hecho vamos a intentar hacer un arrastrar si puedo hacerlo desde aquí directamente.
+
+Por ejemplo tenemos la página de login pues esto iría a Web Content copiamos mientras que el nuevo servlet tendríamos por aquí es historia de una mujer como yo lo tengo hecho.
+
+En otra carpeta aquí no tenemos directamente este servlet que le he llamado Logue inactivan lo vamos a poner en la carpeta de secrets.
+
+Eso sí habría que añadir en el controller una una nueva entrada más en el caso de que el valor del parámetro sea Dulwich que es lo que manda la página HTML de login o la web de la la que habría que mandar el usuario a ese nuevo celular que hemos incluido.
+
+Robin que de lo que se encarga ahora que lo voy a enseñar pues es directamente de llevarnos bueno decir que nos hemos autenticado nos guarda el usuario un atributo de sesión tal pero bueno lo importante aquí es llevarnos a la página entera.
+
+Y con esto ya estaría entonces vamos a comprobar que efectivamente funciona a nivel.
+
+Ya te digo de librerías no hay nada que hacer porque ya tenemos añadidas las librerías a través de Maven como lo hicimos en el ejercicio anterior.
+
+DJ STL y el conector de malla se cuelgan.
+
+Bueno vamos a iniciar la página de login tenemos un usuario ya que cree en esa tabla.
+
+Vamos a verlo.
+
+Realmente tengo tres usuarios creados 3 1 3 1.
+
+Misma combinación de usuario password.
+
+Bueno vamos a ver 3 1 y 3 1 y al entrar pues nos tendría que llevar a la página.
+
+Efectivamente aquí estamos de contactos.
+
+Bueno pues esto sigue funcionando exactamente igual pero ya ha pasado si hubieran metido un usuario que no está registrado o se produciría la excepción devolvería false.
+
+Y en este caso lo que se ha previsto es que se quede donde está en la propia página del móvil fíjate que aquí da una traza de error de excepción que es la traza que yo le he dicho que me mostrase la llamada Singhal del sur al no devolver ninguna entidad se produce esa excepción.
+
+Bueno caso es que aquí ya hemos visto una utilización de Lanamme arcoíris dentro de la tira usuario y utilizar tanto name cueles en tantas entidades como se desee es recomendable a pesar de que no se vayan a reutilizar utilizar name Aquaris puesto que si lo queremos cambiar por ejemplo en el caso de la entidad contacto cuando teníamos la lógica de negocio la opción es la de buscar contacto ya que utilizamos 
+una Aquaris normal con sus parámetros y demás.
+
+Bueno pues también sería conveniente haber puesto esta instrucción como una Mercuri pues aunque sólo vamos a utilizar aquí pero sí prevemos hacer algún cambio modificar alguna cosa de volverlo loco.
+
+La lógica negocio al estar localizadas perfectamente dentro de la entidad cualquier cambio que hagamos tendremos ya sabemos que tenemos que ir a ese punto a hacer el retoque correspondiente.
+
 # 16 Consultas de acción 04:38
+
+A través de un objeto Kúbera también podemos lanzar consultas de acción sobre una capa de persistencia.
+
+Las instrucciones JPQL para este caso serían útil para actualización de un conjunto de entidades en función de un criterio o de ley para su eliminación.
+
+En el caso de Udai la sintaxis sería como tienen aquí en este ejemplo sería el nombre de la entidad alias sheet pues las establecimientos que veíamos hacer a los nuevos valores de los diferentes atributos de la entidad en función de alguna condición.
+
+Por ejemplo en este caso actualizaría los salarios de todos los empleados no hemos utilizado este caso ninguna cláusula en cuanto a la eliminación.
+
+La sintaxis sería delete from nombre de la entidad alias web y la condición que afectaría a alguno de los atributos de la entidad en estos tipo de instituciones JPQL como la de selección pueden incluir parámetros y definirse también como escuelas para ejecutarlas.
+
+Pues crearemos una vez creado el objeto Query a través del manager utilizando create qwerty o atenerme.
+
+Si lo hemos definido como una Anam Mercuri utilizaremos el método execute este método se lanzaría la instrucción contra la capa de persistencia y nos devolvería el número de entidades que se han visto afectadas.
+
+Por ejemplo si en nuestro ejercicio de la agenda de contactos quisiéramos añadir por ejemplo la posibilidad de eliminar todos los contactos a partir de un determinado email que coincidan con un determinado email o los que sean pues deberíamos ir a la capa de modelo la capa de persistencia porque lo vamos a definir como una name cuerito.
+
+Por ejemplo en contacto definiríamos una Mercuri dejando la que ya viene Mamet la que ya viene definida que sería la de búsqueda de todos los crearíamos ésta no van a Mercuri y por lo tanto habría que definirlo dentro de una notación Gamez cueritos tenemos esto ya.
+
+Como digo ya definida y esto respondíamos a continuación de esta guiñar esto y en este caso la llamaríamos de BAII y.
+
+La idea sería pues un veleto con gastos 14 Wer una condición de punto y mail igual y la vamos a parametrizar sería una gran descubri parametrizada entonces a partir de ahí no seríamos mail a gestión contactos y ahí añade añadiríamos un nuevo método Bobbit eliminar contacto o contactos por email recibiríamos como parámetro el mail y procederemos a la eliminación llamando a esa usando utilizando sondas Mercuri para llamar al método Scutum deuda a través del objeto.
+
+En cualquier caso tendríamos que obtener el Entity ayer el objeto Ueli a través del método create retendrán mezclarían y indicaremos el nombre de dicha Merkel contacto del voy y me vale este sea el nombre de la Lamec crearíamos con el objeto Ueli y antes deberíamos importar si están en antes deberíamos iniciar la transacción o obtener la transacción iniciarla debemos copiar estas instrucciones no las tenemos sean las mismas que en el resto de los métodos haríamos un Beguin de la transacción y ahí procederemos a llamar al execute si no nos interesa el número de filas que se 
+han visto filas de entidades que se han visto afectadas pues no recogeremos el valor y simplemente lanzaremos la llamada para posteriormente hacer un cómic esto sería una manera de utilizar una consulta JPQL de.
+
 # Autoevaluacion III 00:54
+
+
+Autoevaluacion III
+
+ 
+
+1. Indica cual de las siguientes instrucciones JPQL sería la correcta para recuperar las entidades de tipo Alumno cuya propiedad nota sea superior a 5:
+   * `Select a From Alumno a where a.nota>5`
+   * `Select Alumno a where a.nota>5`
+   * `Select a From Alumno a where nota>5`
+   * `Select Alumno From Alumno a where Alumno.nota>5`
+   
+2. Indica cual de las siguientes afirmaciones sobre las consultas de tipo NamedQuery es falsa:
+   * La instrucción JPQL se define en la propia entidad
+   * El objeto Query se debe crear a través de createNamedQuery()
+   * Pueden ser reutilizadas desde diferentes métodos de la aplicación
+   * Solo pueden incluir parámetros por nombre, no por posición
+
+3. ¿Qué sucede si al llamar a getSingleResult() de Query la consulta devuelve más de un resultado?
+   * Se produce una excepción
+   * Se devuelve el primer resultado encontrado
+   * Se devuelve null
+   * Se devuelve un array con todos los resultados encontrados
+
+4. Para asignar el valor 20 al parámetro de posición 1 de una query debemos de utilizar la instrucción:
+   * `q.setParameter(0,20);`
+   * `q.setParameter(1,20);`
+   * `q.setIntParameter(20,1);`
+   * `q.setIntParameter(20,0);`
+
+5. Indica cual de las siguientes afirmaciones sobre las consultas JPQL de acción es verdadera:
+   * Se ejecutan a través del método executeAction() de Query
+   * No pueden incluir parámetros
+   * N o pueden definirse como NamedQueries
+   * Deben ejecutarse dentro de una transacción
+ 
+SOLUCIONES:
+
+1.- A
+
+2.- D
+
+3.- A
+
+4.-B
+
+5.- D
