@@ -1768,6 +1768,16 @@ Al ejecutarlo ya obtendríamos la lista de resultados asociados a dicho valor, c
 
 # 14 Consultas nominadas 02:28
 
+<img src="images/14-01.png">
+
+<img src="images/14-02.png">
+
+<img src="images/14-03.png">
+
+<img src="images/14-04.png">
+
+<img src="images/14-05.png">
+
 En esta elección te voy a hablar de las consultas nominadas una consulta nominada es una instrucción JPQL que se define dentro de la propia entidad a la cual se le va a asignar un nombre de esta manera a la hora de utilizar dicha consulta.
 
 JP QL en lugar de tener que escribir la instrucción dentro del código de los métodos donde vaya a ser utilizada pues se referirá ella siempre a través de su nombre con lo cual podrá ser reutilizada en distintas partes del programa.
