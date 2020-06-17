@@ -158,34 +158,59 @@ http://download.eclipse.org/glassfish-tools/1.0.0/repository
 as repository (or add the URL under Work with: directly) and install the tools via the wizard.
 ```
 
-<img src="images/18-13.png">
-
 <img src="images/18-14.png">
 
 <img src="images/18-15.png">
 
 <img src="images/18-16.png">
 
+Se me pide reiniciar Eclipse.
 
-y una vez reiniciado es muy Preferences.
+Una vez que se vuelve a cargar Eclipse nuevamente nos vamos a las Preferences del Proyecto en la pestaña Server - Runtime Environment, presionamos el botón Add.
 
-Ahora sí si nos vamos a server Rutten environments al cursará desde ya tendrás la carpetita Classic con la opción para registrar el cuadro que tengo yo también registres.
+<img src="images/18-17.png">
 
-Pero bueno te aparecerá glacis IV que es la versión de gráficos que vamos a instalar además el paliará incluye Régis 4.1.
+<img src="images/18-18.png">
 
-Bien pues nada nos al siguiente paso y aquí lo que nos va a decir es el nombre del servidor evidentemente 4 y la localización la localización en la carpeta esa donde hemos descomprimido fallará concretamente la que tiene como nombre Classic dentro de pallar entonces nos vamos a buscar al directorio donde vayamos descomprimido dentro del payada.
+Ahora sí ya tendrás GlassFish lo seleccionamos 
 
-Esa es la carta estamos y está la dirección del servidor gráfico.
+<img src="images/18-19.png">
 
-Aquí ya aparece por defecto la localización de JDK de Java que nos instalamos al principio del curso por lo que sea que aparece aparece una crucecitas que no lo encuentra loquesea pues a través de este botón nos iríamos a program fails Java JDK que es donde está.
+y vamos al siguiente paso
 
-Dónde lo vas a tener que tener instalado.
+<img src="images/18-20.png">
 
-Bueno pues ya está ya tenemos nuestro servidor Playfish y ya vamos a poder utilizarlo en nuestros proyectos para ello bueno también habrá que registrarlo aquí como tenemos el Tomcat de la carpeta de servidores podemos seguir manteniendo Tomka un problema o lo podemos quitar si no queremos.
+y aquí lo que nos va a decir es el nombre del servidor `GlassFish` y nos pide la localización de la carpeta donde hemos descomprimido el servidor `GlassFish` al igual que el JDK de Java.
 
-A partir de ahora vamos a usar las FITS en cualquier caso si lo dejamos por ejemplo para añadir el Raffi sería botón derecho y aquí elegiríamos mi ser nos pide otra vez de nuevo el tipo de servidor pero vamos a Rajoy Nargis 4 y ahora ya sabe dónde está simplemente no aparece aquí su nombre el nombre que se le dió cuando le registramos las 6 4 y en el siguiente paso pues aquí nos pica lo que llama el dominio donde está digamos a utilizar las que se dividen dominios entonces el dominio que va a utilizar para publicar nuestras aplicaciones usuario contraseña administrador dejamos estos valores por defecto nombre mi jornada y directamente ya finalizarlos y ya tenemos nuestro servidor también registrado pasado y ahora cuando vayamos a probar una aplicación podremos optar o bien por probarlo en Tomcat o en la siguiente ejercicio que vamos a ver en el siguiente vídeo.
+<img src="images/18-21.png">
 
-Va a utilizar interpolar Babin que habrá que probarlo en este servidor.
+Ahora ya tenemos nuestro servidor GlassFish
+
+<img src="images/18-22.png">
+
+Ya lo podremos usar en nuestros proyectos, pero lo tenemos que registrar dentro de los Servers.
+
+<img src="images/18-23.png">
+
+actualmente tenemos Tomcat en la carpeta de servidores, podemos seguir manteniendo Tomcat sin ningún problema o lo podemos quitar si no lo queremos. Para añadir GlassFish sería botón derecho y elegiríamos New - Server
+
+<img src="images/18-24.png">
+
+Nos pide otra vez el tipo de servidor, vamos a GlassFish y ahora ya sabe dónde está simplemente nos aparece aquí su nombre, el nombre que se le dió cuando lo registramos
+
+<img src="images/18-25.png">
+
+en el siguiente paso dejamos estos valores por defecto
+
+<img src="images/18-26.png">
+
+y finalizamos.
+
+<img src="images/18-27.png">
+
+y ya tenemos nuestro servidor GlassFish también registrado parado y ahora cuando vayamos a probar una aplicación podremos optar o bien por probarlo en Tomcat o en GlassFish.
+
+En la siguiente lección haremos un ejercicio con EJBs que habrá que probarlo en este servidor GlassFish.
 
 # 19 Creación de un DataSource 11:20
 
