@@ -1770,29 +1770,43 @@ Al ejecutarlo ya obtendríamos la lista de resultados asociados a dicho valor, c
 
 <img src="images/14-01.png">
 
+En esta elección te voy a hablar de las consultas nominadas.
+
 <img src="images/14-02.png">
+
+Una consulta nominada es una instrucción JPQL que se define dentro de la propia entidad a la cual se le va a asignar un nombre, de esta manera a la hora de utilizar dicha consulta JPQL en lugar de tener que escribir la instrucción dentro del código de los métodos donde vaya a ser utilizada pues se referirá ella siempre a través de su nombre, con lo cual podrá ser reutilizada en distintas partes del programa.
+
+Por supuesto estas instrucciones JPQL con nombre pueden incluir también parámetros como cualquier otra instrucción JPQL normal.
 
 <img src="images/14-03.png">
 
+Cómo se crea una consulta nominada pues se define como hemos dicho antes dentro de la propia entidad y se utiliza para ello la anotación `@NamedQuery`. 
+
+Se define la anotación `@Entity` y después utilizamos `@NamedQuery(name = "Coche.findAll", query = "SELECT c FROM Coche c")` indicando por un lado el nombre que le vamos a asignar a la consulta y en el atributo `query` lo que sería la instrucción JPQL asociada, que como he dicho antes puede llevar parámetros, una consulta JPQL estándar, pueden ser por supuesto de selección, de actualización etc.
+
+Si queremos definir más de una `@NamedQuery`, podemos definir todas las que queramos entonces deberíamos utilizar otra segunda anotación `@NamedQueries` dentro de la cual se definiría cada una de dichas `@NamedQuery` entre paréntesis, entre llaves, cada NamedQuery se definiría con su anotación `@NamedQuery` separándose por una coma de la siguiente.
+
+```java
+@NamedQueries({
+   @NamedQuery(name = "Coche.findAll", query = "SELECT c FROM Coche c"),
+   @NamedQuery(name = "Coche.deletedByColor", query = "DELETE FROM Coche c WHERE c.color=?1")
+})
+public class Coche{
+   ...
+   
+```
+
+Esto sería lo que es la creación, la definición de la NamedQuery.
+
 <img src="images/14-04.png">
+
+
+Y cómo la utilizamos después en un programa dentro de un método de la Lógica de Negocio donde queremos utilizar esa consulta, pues a través del método `createNamedQuery` del `EntityManager`.  A `createNamedQuery` simplemente le tenemos que indicar el nombre de la consulta que queremos obtener `Query qr = em.createNamedQuery("Coche.findAll");` y a partir de ahí nos devolverá el objeto `Query` asociado, es decir en lugar de utilizar directamente la instrucción simplemente hacemos referencia a su nombre. Una vez que tenemos el objeto `Query` o
+`TypedQuery` que también podemos utilizarlo
 
 <img src="images/14-05.png">
 
-En esta elección te voy a hablar de las consultas nominadas una consulta nominada es una instrucción JPQL que se define dentro de la propia entidad a la cual se le va a asignar un nombre de esta manera a la hora de utilizar dicha consulta.
-
-JP QL en lugar de tener que escribir la instrucción dentro del código de los métodos donde vaya a ser utilizada pues se referirá ella siempre a través de su nombre con lo cual podrá ser reutilizada en distintas partes del programa.
-
-Por supuesto estas instrucciones JPQL con nombre pues pueden incluir también parámetros como cualquier otra instrucción JPQL normal cómo se crea una consulta nominada pues se define como hemos dicho antes dentro de la propia entidad y se utiliza para ello la notación arroba mezclé de la entidad.
-
-Después vendrá la definición de la notación arroba Entity utilizamos arroba McCurry indicando por un lado el nombre que le vamos a asignar a la consulta y en el atributo Query lo que sería la instrucción JPQL asociada que como he dicho antes puede llevar parámetros una consulta JPQL estándar pueden ser por supuesto su elección de actualización etcétera.
-
-Si queremos definir más de una Mercuri podemos definir todas las que queramos entonces deberíamos utilizar otra segunda notación arroba name Aquaris dentro de la cual se definiría cada una de dichas no me acuerdo entre paréntesis entre llaves cada Name se definiría con su anotación Romagna Mercouri separándose por una coma de la siguiente.
-
-Esto sería lo que es la creación.
-
-La definición de la escuela y cómo la utilizamos después en un programa dentro de un método de la lógica de negocio que queremos utilizar esa consulta pues a través del método creatinina Mercouri de la Entity manager creatinina Mercuri simplemente le tenemos que indicar el nombre de la consulta que queremos obtener y a partir de ahí nos devolverá el objeto Cury asociado es decir en lugar de utilizar directamente la instrucción simplemente hacemos referencia a su nombre.
-
-Una vez que tenemos el objeto qwerty o que también podemos utilizarlo también podemos crear un creates no mezclar y generar un objeto del tipo Query pues la utilizaríamos como una consulta normal es decir sin Gorlero Shur etc..
+Podemos crear un `createNamedQuery` y generar un objeto del tipo `TypedQuery` y lo utilizaríamos como una consulta normal, es decir con `qr.getResultList()`, `qr.getSingleResult()`, etc. 
 
 # 15 Ejercicio práctico II 13:06
 
