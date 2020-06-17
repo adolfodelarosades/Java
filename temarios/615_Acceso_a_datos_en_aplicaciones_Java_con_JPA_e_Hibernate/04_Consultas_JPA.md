@@ -2037,15 +2037,74 @@ En esta clase `Usuario` tenemos el método privado `getEntityManager()` como en 
 
 Ahora vamos a analizar el método autenticada el método `autenticar(String usuario, String pwd)` lo hemos puesto para que reciban lógicamente el usuario y el password que tiene que comprobar y nos devuelva si existe o no existe. Entonces creamos el `EntityManager` en base a nuestro método privado `getEntityManager()` creado previamente. Creamos un `TypedQuery` utilizando el `em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);` por que partimos de la `NamedQuery Usuario.findByUserAndPwd` de tipo `Usuario` y sustituimos los parámetros el uno con el parámetro usuario que recibe el método autenticar y el segundo con el segundo parámetro del método autenticar, como esperamos un único resultado llamamos a `getSingleResult()`, fíjate lo que hemos hecho aquí, la llamada de `getSingleResult()` la hemos metido dentro de un bloque `try-catch`porque qué ocurre si no encuentra ninguna combinación de usuario, `getSingleResult()` no nos va a devolver `null` sino que va a provocar una excepción de que no encuentra, al no encontrarlo resulta una excepción, de la misma manera que si encontrase más de uno también provocaría una excepción, entonces realmente no nos interesa recoger el valor simplemente si da excepción o no, no la da, pues entonces es que la ha encontrado, había un único resultado que coincide con esa combinación de usuario-password, asignamos `true` a `res`, que no se producirá una excepción, simplemente le he dicho que me lo muestre la traza, por si acaso hay algún problema poder verlo. Pero una vez que se pusiera en producción no sería nada directamente retornaría falso, no ha entrado en el try por lo tanto retorna false que es el equivalente a decir que no la he encontrado.
 
-Pues ya tenemos nuestra lógica de negocio hecha utilizando en este caso como ves una `NamedQuery` y podría utilizarse en cualquier otro método donde fuera requerida donde fuera interesante utilizar ya solamente quedaría hacer ahora la parte digamos del controlador y la vista.
+Pues ya tenemos nuestra lógica de negocio hecha utilizando en este caso como ves una `NamedQuery` y esta `NamedQuery` podría utilizarse en cualquier otro método donde fuera requerida, donde fuera interesante utilizarla.
 
-Esto también lo tenemos hecho ya por aquí pues vamos a ver aquí está hecho vamos a intentar hacer un arrastrar si puedo hacerlo desde aquí directamente.
+Ya solamente quedaría hacer ahora la parte del Controlador y la Vista. Para el Controler vamos a añadir dentro del paquete `servlets` la clase `LoginAction`.
 
-Por ejemplo tenemos la página de login pues esto iría a Web Content copiamos mientras que el nuevo servlet tendríamos por aquí es historia de una mujer como yo lo tengo hecho.
+```java
+import java.io.IOException;
 
-En otra carpeta aquí no tenemos directamente este servlet que le he llamado Logue inactivan lo vamos a poner en la carpeta de secrets.
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-Eso sí habría que añadir en el controller una una nueva entrada más en el caso de que el valor del parámetro sea Dulwich que es lo que manda la página HTML de login o la web de la la que habría que mandar el usuario a ese nuevo celular que hemos incluido.
+import modelo.GestionUsuarios;
+
+/**
+ * Servlet implementation class LoginAction
+ */
+@WebServlet("/LoginAction")
+public class LoginAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   /**
+   * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+   */
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String user=request.getParameter("user");
+      String pwd=request.getParameter("pwd");
+      GestionUsuarios gusuarios=new GestionUsuarios();
+      if(gusuarios.autenticar(user, pwd)){
+         //guardamos el nombre de usuario en un atributo de sesión
+         HttpSession s=request.getSession();
+         s.setAttribute("user", user);
+         request.getRequestDispatcher("menu.html").forward(request, response);
+      }else{
+         request.getRequestDispatcher("login.html").forward(request, response);
+      }
+   }
+}
+```
+
+Y dentro de `WebContent` vamos a incluir el archivo `login.html`.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <form action="Controller?op=doLogin" method="post">
+      Usuario:<input type="text" name="user"/><br/>
+      Contraseña:<input type="password" name="pwd"/><br/>
+      <input type="submit" value="Enviar"/>
+   </form>
+</body>
+</html>
+```
+
+Eso sí habría que añadir en el `Controller` una una nueva entrada más en el caso de que el valor del parámetro sea `doLogin` que es lo que manda la página HTML de login, la `url` a la que habría que mandar al usuario es a ese nuevo servlet que hemos incluido.
+
+```java
+case "doLogin":
+   url = "LoginAction";
+   break;
+```
 
 Robin que de lo que se encarga ahora que lo voy a enseñar pues es directamente de llevarnos bueno decir que nos hemos autenticado nos guarda el usuario un atributo de sesión tal pero bueno lo importante aquí es llevarnos a la página entera.
 
