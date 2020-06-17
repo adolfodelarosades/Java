@@ -2159,29 +2159,62 @@ Aquí utilizamos una Query normal con sus parámetros y demás. Bueno pues tambi
 
 <img src="images/16-01.png">
 
-A través de un objeto Kúbera también podemos lanzar consultas de acción sobre una capa de persistencia.
+A través de un objeto `Query` también podemos lanzar consultas de acción sobre una capa de persistencia.
 
 <img src="images/16-02.png">
 
-Las instrucciones JPQL para este caso serían útil para actualización de un conjunto de entidades en función de un criterio o de ley para su eliminación.
+Las instrucciones JPQL para este caso serían 
 
-En el caso de Udai la sintaxis sería como tienen aquí en este ejemplo sería el nombre de la entidad alias sheet pues las establecimientos que veíamos hacer a los nuevos valores de los diferentes atributos de la entidad en función de alguna condición.
+* `Update` para actualización de un conjunto de entidades en función de un criterio 
+* `Delete` para su eliminación
 
-Por ejemplo en este caso actualizaría los salarios de todos los empleados no hemos utilizado este caso ninguna cláusula en cuanto a la eliminación.
+En el caso de `Update` la sintaxis sería como sigue:
 
-La sintaxis sería delete from nombre de la entidad alias web y la condición que afectaría a alguno de los atributos de la entidad en estos tipo de instituciones JPQL como la de selección pueden incluir parámetros y definirse también como escuelas para ejecutarlas.
+`Update Empleado e Set e.salario = e.salario * 1.05`
 
-Pues crearemos una vez creado el objeto Query a través del manager utilizando create qwerty o atenerme.
+En este ejemplo sería el nombre de la entidad alias `Set` para establecer los nuevos valores de los diferentes atributos de la entidad en función de alguna condición. Por ejemplo en este caso actualizaría los salarios de todos los empleados, no hemos utilizado este caso ninguna cláusula `Where`.
+
+En cuanto a la eliminación la sintaxis sería la siguiente:
+
+`Delete From Curso c Where c.nombre like 'P%'`
+
+`Delete From` nombre de la entidad, alias,  `Where` y la condición que afectaría a alguno de los atributos de la entidad.
+
+En estos tipo de instituciones JPQL como en la de selección pueden incluir parámetros y definirse también como `NamedQuerys`.
 
 <img src="images/16-03.png">
 
-Si lo hemos definido como una Anam Mercuri utilizaremos el método execute este método se lanzaría la instrucción contra la capa de persistencia y nos devolvería el número de entidades que se han visto afectadas.
+Para ejecutarlas una vez creado el objeto `Query` a través del `EntityManager` y usando `createQuery` o `createNamedQuery` utilizariamos el método `executeUpdate()`, este método se lanzaría la instrucción contra la capa de persistencia y nos devolvería el número de entidades que se han visto afectadas.
 
-Por ejemplo si en nuestro ejercicio de la agenda de contactos quisiéramos añadir por ejemplo la posibilidad de eliminar todos los contactos a partir de un determinado email que coincidan con un determinado email o los que sean pues deberíamos ir a la capa de modelo la capa de persistencia porque lo vamos a definir como una name cuerito.
+```java
+String jpql = "Update Empleado e Set e.salario = e.salario * 1.05";
+Query qr = em.createQuery(jpql);
+qr.executeUpdate();
+```
 
-Por ejemplo en contacto definiríamos una Mercuri dejando la que ya viene Mamet la que ya viene definida que sería la de búsqueda de todos los crearíamos ésta no van a Mercuri y por lo tanto habría que definirlo dentro de una notación Gamez cueritos tenemos esto ya.
+Por ejemplo si en nuestro ejercicio de la agenda de contactos quisiéramos añadir por ejemplo la posibilidad de eliminar todos los contactos a partir de un determinado email, que coincidan con un determinado email o los que sean, pues deberíamos ir a la capa de persistencia porque lo vamos a definir como un `NamedQuery`, en `Contacto` actualmente tenemos:
 
-Como digo ya definida y esto respondíamos a continuación de esta guiñar esto y en este caso la llamaríamos de BAII y.
+```java
+@Entity
+@Table(name="contactos")
+@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c")
+public class Contacto implements Serializable {
+   ...
+```
+
+La `NamedQuery` que tenemos aquí es la que Eclipse añadio automáticamente cuando creamos la Entidad, vamos a añadir otra `NamedQuery` dejando la que ya viene definidad que sería la de búsqueda de todos, tendríamos que incluir una `NamedQueries` para añadir la nueva.
+
+```java
+@Entity
+@Table(name="contactos")
+@NamedQueries({
+   @NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c"),
+   @NamedQuery(name="Contacto.deleteByEmail", query="DELETE FROM Contacto c WHERE c.email=?1")
+})
+
+public class Contacto implements Serializable {
+   ...
+
 
 La idea sería pues un veleto con gastos 14 Wer una condición de punto y mail igual y la vamos a parametrizar sería una gran descubri parametrizada entonces a partir de ahí no seríamos mail a gestión contactos y ahí añade añadiríamos un nuevo método Bobbit eliminar contacto o contactos por email recibiríamos como parámetro el mail y procederemos a la eliminación llamando a esa usando utilizando sondas Mercuri para llamar al método Scutum deuda a través del objeto.
 
