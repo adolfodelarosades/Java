@@ -8,6 +8,18 @@
 
 # 17 Utilización de JPA con Enterprise JavaBeans 04:42
 
+<img src="images/17-01.png">
+
+<img src="images/17-02.png">
+
+<img src="images/17-03.png">
+
+<img src="images/17-04.png">
+
+<img src="images/17-05.png">
+
+<img src="images/17-06.png">
+
 Aunque los ejemplos vistos hasta el momento hemos utilizado JPA dentro de clases normales Java es muy habitual encapsular toda la lógica de negocio en muchas aplicaciones empresariales dentro de los llamados Enterprise Linux o en JBS y qué es exactamente un JB interpelaba JB O interpretã Babin es una especificación que forma parte de Java para la creación de componentes que encapsula la lógica de negocio de una aplicación.
 
 Estos componentes no se ejecutan directamente sobre la máquina virtual Java como una clase normal sino que se ejecuta sobre un contenedor JB formaría parte del servidor de aplicaciones y que proporciona una serie de beneficios a la hora de implementar esa lógica de negocio.
