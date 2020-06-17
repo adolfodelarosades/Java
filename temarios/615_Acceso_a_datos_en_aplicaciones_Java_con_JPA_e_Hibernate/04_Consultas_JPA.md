@@ -1800,7 +1800,6 @@ Esto sería lo que es la creación, la definición de la NamedQuery.
 
 <img src="images/14-04.png">
 
-
 Y cómo la utilizamos después en un programa dentro de un método de la Lógica de Negocio donde queremos utilizar esa consulta, pues a través del método `createNamedQuery` del `EntityManager`.  A `createNamedQuery` simplemente le tenemos que indicar el nombre de la consulta que queremos obtener `Query qr = em.createNamedQuery("Coche.findAll");` y a partir de ahí nos devolverá el objeto `Query` asociado, es decir en lugar de utilizar directamente la instrucción simplemente hacemos referencia a su nombre. Una vez que tenemos el objeto `Query` o
 `TypedQuery` que también podemos utilizarlo
 
@@ -1810,51 +1809,164 @@ Podemos crear un `createNamedQuery` y generar un objeto del tipo `TypedQuery` y 
 
 # 15 Ejercicio práctico II 13:06
 
-A continuación vamos a poner en práctica el uso de las name Aquaris en una nueva versión del ejercicio de la agenda de contactos en esta nueva versión.
+<img src="images/15-01.png">
 
-Vamos a incluir una página de autenticación que solicitará los credenciales del usuario para poder tener acceso al menú de opciones de alta de contacto y visualización de contactos.
+A continuación vamos a poner en práctica el uso de las NamedQuery en una nueva versión del ejercicio de la agenda de contactos.
 
-Para ello vamos a tener que crear en la base de datos una nueva tabla.
+<img src="images/15-02.png">
 
-Como pudiste ver anteriormente pues yo ya tenía esa tabla creadas y trata la tabla a usuarios y es una tabla que simplemente va a contener dos campos el campo usuario y el campo.
+En esta nueva versión vamos a incluir una página de autenticación que solicitará los credenciales del usuario para poder tener acceso al menú de opciones de alta de contacto y visualización de contactos.
 
-Ambos de tipo texto con un campo Primary qué identificador de usuario numérico que permite identificar los combinaciones de usuario párvula en la base de datos.
+Para ello vamos a tener que crear en la base de datos una nueva tabla, como pudiste ver anteriormente pues yo ya tenía esa tabla creada se trata de la tabla `usuarios` y es una tabla que simplemente va a contener tres campos:
 
-Bueno pues esto es sencillo de crear y una vez que ya disponemos de esta tabla vamos a Eclipse y para crear una nueva versión del ejercicio lo que hacemos es no hace falta que creamos un proyecto nuevo sino que podemos copiar y pegar este que ya tenemos y renombra haríamos lo recobramos como 03 ejercicio práctico.
+* `idUsuario`
+* `usuario`
+* `password`
 
-2.
+<img src="images/15-03.png">
 
-Muy importante a la hora de hacer esto con una aplicación web.
+<img src="images/15-04.png">
 
-Copiar y pegar en un proyecto porque aunque nosotros hemos renombrado el mismo y le hemos dado un nombre al proyecto lo que es la dirección de la aplicación web no ha cambiado sigue siendo la misma que la del ejercicio 2.
+Los campos `usuario` y `password` son ambos de tipo texto con un campo Primary Key `idUsuario`  numérico que permite identificar las combinaciones de usuario y password en la base de datos. Bueno pues esto es sencillo de crear y una vez que ya disponemos de esta tabla vamos a Eclipse y para crear una nueva versión del ejercicio lo que hacemos es, no hace falta que creemos un proyecto nuevo, sino que podemos copiar y pegar el anterior que ya tenemos y renombralo como `615-03_web_jpa`
+.
 
-Eso significa que si nos disponemos a probar esta aplicación no vamos a poder hacerlo en el Tomcat puesto que como ya tenemos desplegada una con la misma dirección que es la 02 al intentar probar esta nos va a dar un error bueno simplemente para solucionar ese problema nos iríamos a las propiedades de este proyecto que hemos copiado es con root en la opción web Proyect setting contra root que es la dirección de la aplicación sigue poniendo 0 2 ejercicios practicados por nosotros lo cambiamos con la nueva dirección que queramos asociable a esta aplicación que pues nada una vez hecho eso es lo que tenemos que hacer ahora es crear una nueva entidad asociada a la tabla de usuarios que hemos creado.
+Si intentamo ejeccutar este nuevo proyecto sin más nos marca lo siguiente:
 
-Bueno pues que va a ser la que vamos a utilizar esa entidad para autenticar los usuarios desde la lógica de negocio de la aplicación.
+<img src="images/15-05.png">
 
-Para ello como ya tenemos la característica JPN aplicada por supuesto tenemos también las librerías que necesitamos añadida del motor de persistencia pues simplemente nos vamos a la opción JPA Tools generar entidades desde tablas seleccionaremos haríamos la conexión que ya tenemos creada del ejercicio anterior hasta conexión 1.
+Muy importante a la hora de hacer esto con una aplicación Web, copiar y pegar un proyecto porque aunque nosotros hemos renombrado el mismo y le hemos dado un nombre al proyecto, lo que es la dirección de la aplicación Web no ha cambiado sigue siendo la misma que la del ejercicio `615-02_web_jpa`.
 
-Y bueno pues al elegir la base de datos agenda nos aparecen las dos tablas.
+Eso significa que si nos disponemos a probar esta aplicación no vamos a poder hacerlo en el Tomcat, puesto que como ya tenemos desplegada una con la misma dirección que es `615-02_web_jpa` al intentar probar esta nos va a dar un error como ya hemos visto.
 
-Nosotros vamos a crear una entidad de la tabla usuarios que no haya asociaciones en el paquete pues aparecerán por defecto lo último que hemos utilizado para crear entidades y entidades generador de clave así es campo identidad una acción automática y el último paso como resumen nos va a decir que la clase se va a llamar usuario.
+Simplemente para solucionar ese problema nos iríamos a las propiedades de este proyecto que hemos copiado y seleccionar la opción `Web Proyect Settings`
 
-Efectivamente lo que es como queremos que se llame pues nada más finalizamos tenemos aquí ya nuestras dos entidades.
+<img src="images/15-06.png">
 
-Contacto.
+Vemos como en `Context root:` sigue poniendo `615-02_web_jpa` simplemente lo cambiamos con la nueva dirección que queramos asociarle a esta aplicación.
 
-Bueno pues esta la estamos utilizando en la lógica de negocio que ya teníamos y la nueva usuario.
+<img src="images/15-07.png">
 
-Una cosa que vamos a hacer que es muy importante es que persiste en XML el nuevo proyecto.
+<img src="images/15-08.png">
 
-La verdad es que se ha registrado automáticamente la nueva entidad usuario pero lo que vamos a hacer es que lo vamos a cambiar el nombre a la unidad de persistencia porque coge como nombre por defecto el nombre del proyecto y aquí sólo hemos cambiado al nombrarlo.
+Una vez hecho esto nuestra aplicación ya se ejecuta correctamente.
 
-Lógicamente esto no me lo ha cambiado.
+<img src="images/15-09.png">
 
-Entonces no vamos a cambiar y ese mismo nombre lo utilizaremos en la capa del modelo en gestión contactos donde obteníamos Identity Manager Factory.
+Lo que tenemos que hacer ahora es crear una nueva Entidad asociada a la tabla de usuarios que hemos creado, es la Entidad que vamos a utilizar para autenticar los usuarios desde la Lógica de Negocio de la aplicación.
 
-Bueno pues ahí lo dejamos ya para que luego no se nos pase y no nos dé errores al intentar crear el Inti-Illimani bien antes de meternos con la lógica de negocio pues como hemos dicho queremos utilizar las name Aquaris.
+Como ya tenemos la característica JPA aplicada en el proyecto, también tenemos las librerías añadidas que necesitamos del motor de persistencia, simplemente nos vamos a la opción JPA Tools - Generate Entities from Table ..., generar entidades desde tablas
 
-En esta ocasión pues para poder hacer la autenticación de los usuarios entonces nos vamos a crear un Lanamme en esta entidad usuario que será la que utilicemos desde la lógica negoción.
+<img src="images/15-10.png">
+
+<img src="images/15-11.png">
+
+Seleccionaremos la conexión que ya tenemos creada del ejercicio anterior `msql_prueba`, seleccionariamos la base de datos (Schema) `agenda`, al elegir la base de datos `agenda` nos aparecen las dos tablas, nosotros vamos a crear una entidad de la tabla `usuarios`.
+
+<img src="images/15-12.png">
+
+no haya asociaciones
+
+<img src="images/15-13.png">
+
+en el paquete pues aparecerán por defecto lo último que hemos utilizado, paquete  `entidades`, Key generated con `identity` estos valores nos valen
+
+<img src="images/15-14.png">
+
+y el último paso como resumen nos va a decir que la clase se va a llamar `Usuario`, efectivamente es como queremos que se llame, pues nada más finalizamos.
+
+Se crea la clase `Usuario`
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the usuarios database table.
+ * 
+ */
+@Entity
+@Table(name="usuarios")
+@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUsuario;
+
+	private String password;
+
+	private String usuario;
+
+	public Usuario() {
+	}
+
+	public int getIdUsuario() {
+		return this.idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+}
+```
+
+<img src="images/15-15.png">
+
+
+Tenemos aquí ya nuestras dos entidades, `Contacto` la estamos utilizando en la Lógica de Negocio que ya teníamos y la nueva `Usuario`.
+
+Una cosa muy importante es que en `persistence.xml` si lo abrimos tenemos:
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-02_web_jpa" transaction-type="RESOURCE_LOCAL">
+		<class>entidades.Contacto</class>
+		<class>entidades.Usuario</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+Se ha registrado automáticamente la nueva entidad `Usuario`, pero lo que vamos a hacer es que lo vamos a cambiar el nombre a la unidad de persistencia porque coge como nombre por defecto el nombre del proyecto `615-02_web_jpa` y aquí sólo hemos cambiado al nombrarlo lógicamente esto no me lo ha cambiado. Entonces lo vamos a cambiar por `615-03_web_jpa` y este mismo nombre lo utilizaremos en la Capa del Modelo en `Gestioncontactos` donde obteníamos el `EntityManagerFactory`.
+
+```java
+//Método que permite obtener el objeto EntityManager
+private EntityManager getEntityManager() {
+   EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-03_web_jpa");
+   return factory.createEntityManager();
+}
+```
+
+Bueno pues ahí lo dejamos ya cambiado para que luego no se nos pase y no nos dé errores al intentar crear el `EntityManager`.
+
+Antes de meternos con la Lógica de Negocio como hemos dicho queremos utilizar las `NamedQuery` en esta ocasión para poder hacer la autenticación de los usuarios, entonces nos vamos a crear un Lanamme en esta entidad usuario que será la que utilicemos desde la lógica negoción.
 
 Como sabéis ya el eclipse te genera una por defecto que te recoge todas las entidades de ese tipo.
 
