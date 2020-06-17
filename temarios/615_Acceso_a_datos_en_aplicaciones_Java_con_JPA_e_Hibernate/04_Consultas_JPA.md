@@ -2033,29 +2033,11 @@ public class GestionUsuarios {
 }
 ```
 
+En esta clase `Usuario` tenemos el método privado `getEntityManager()` como en la clase `Contacto` que permite obtener el objeto `EntityManager`, usa el nombre de la nueva Unidad de Persistencia es decir `615-03_web_jpa`
 
-un método que fuera auténtica.
+Ahora vamos a analizar el método autenticada el método `autenticar(String usuario, String pwd)` lo hemos puesto para que reciban lógicamente el usuario y el password que tiene que comprobar y nos devuelva si existe o no existe. Entonces creamos el `EntityManager` en base a nuestro método privado `getEntityManager()` creado previamente. Creamos un `TypedQuery` utilizando el `em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);` por que partimos de la `NamedQuery Usuario.findByUserAndPwd` de tipo `Usuario` y sustituimos los parámetros el uno con el parámetro usuario que recibe el método autenticar y el segundo con el segundo parámetro del método autenticar, como esperamos un único resultado llamamos a `getSingleResult()`, fíjate lo que hemos hecho aquí, la llamada de `getSingleResult()` la hemos metido dentro de un bloque `try-catch`porque qué ocurre si no encuentra ninguna combinación de usuario, `getSingleResult()` no nos va a devolver `null` sino que va a provocar una excepción de que no encuentra, al no encontrarlo resulta una excepción, de la misma manera que si encontrase más de uno también provocaría una excepción, entonces realmente no nos interesa recoger el valor simplemente si da excepción o no, no la da, pues entonces es que la ha encontrado, había un único resultado que coincide con esa combinación de usuario-password, asignamos `true` a `res`, que no se producirá una excepción, simplemente le he dicho que me lo muestre la traza, por si acaso hay algún problema poder verlo. Pero una vez que se pusiera en producción no sería nada directamente retornaría falso, no ha entrado en el try por lo tanto retorna false que es el equivalente a decir que no la he encontrado.
 
-Vamos a ver porque esto es como yo lo tengo hecho aquí vamos a ver aquí lo tenemos y copiamos y pegamos y ahora ya lo analizamos el corto.
-
-El método privado para obtener el intiman Layer es lo mismo que hicimos en la otra clase que se me aparece un eclipse y cerrando pestañas ya que es para Eclipse y bueno si lo tenemos es Identity Manager aquí ya le he dejado y he puesto el nombre de la nueva entidad persistencia para el ejercicio III que estamos Kontrol mayúscula 
-o para importar todas las clases e interfaces que necesitemos y vamos a analizar el método autenticada el método autenticar lo hemos puesto para que reciban lógicamente el usuario el pago que tiene que comprobar y nos devuelva si existe o no existe.
-
-Entonces obtenemos Identity Manager y creamos un tipo de acuerdo en este caso utilizando el create en la Mercuri puesto que partimos de una escuela INVI user ante WBA de tipo usuario y sustituimos los parámetros el uno con el que es el usuario con el parámetro que recibe el método autenticar y el segundo a segundo parámetro el método autenticar como esperamos un único resultado. 
-
-Llamamos a Singhal entonces fíjate lo que hemos hecho aquí lo hemos metido la llamada que es ingreso dentro de un troikas porque qué ocurre si no encuentra ninguna combinación de usuario algo que no nos va a devolver Null sino que va a provocar una excepción de que no encuentra al no encontrarlo resulta una excepción de la misma manera que si encontrase mal de uno también lo haría una excepción entonces realmente no nos interesa recoger el valor simplemente si la excepción o no no la da pues entonces es que la ha encontrado.
-
-Había un único resultado que coincide con esa combinación de usuario metemos el valor que no se producirá una excepción.
-
-Aquí simplemente le he dicho que me lo muestre la traza.
-
-Por si acaso hay algún problema poder verlo.
-
-Pero una vez que se pusiera en producción no sería nada directamente y retornaría falso.
-
-No he entrado aquí por lo tanto retorné que es el equivalente a decir que no la he encontrado.
-
-Pues ya tenemos nuestra lógica de negocio hecha utilizando en este caso como veis una mezcla mejor y podría utilizarse en cualquier otro método donde fuera requerida donde fuera interesante utilizar ya solamente quedaría hacer ahora la parte digamos del controlador y la vista.
+Pues ya tenemos nuestra lógica de negocio hecha utilizando en este caso como ves una `NamedQuery` y podría utilizarse en cualquier otro método donde fuera requerida donde fuera interesante utilizar ya solamente quedaría hacer ahora la parte digamos del controlador y la vista.
 
 Esto también lo tenemos hecho ya por aquí pues vamos a ver aquí está hecho vamos a intentar hacer un arrastrar si puedo hacerlo desde aquí directamente.
 
