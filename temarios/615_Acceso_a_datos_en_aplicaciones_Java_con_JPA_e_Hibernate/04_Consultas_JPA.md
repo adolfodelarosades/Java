@@ -2079,6 +2079,8 @@ public class LoginAction extends HttpServlet {
 }
 ```
 
+`LoginAction` de lo que se encarga de decirnos que nos hemos autenticado, nos guarda el usuario en un atributo de sesión y nos lleva a a la página de menú.
+
 Y dentro de `WebContent` vamos a incluir el archivo `login.html`.
 
 ```html
@@ -2106,36 +2108,52 @@ case "doLogin":
    break;
 ```
 
-Robin que de lo que se encarga ahora que lo voy a enseñar pues es directamente de llevarnos bueno decir que nos hemos autenticado nos guarda el usuario un atributo de sesión tal pero bueno lo importante aquí es llevarnos a la página entera.
+Y con esto ya estaría entonces vamos a comprobar que efectivamente funciona. A nivel de librerías no hay nada que hacer porque ya tenemos añadidas las librerías a través de Maven como lo hicimos en el ejercicio anterior. 
 
-Y con esto ya estaría entonces vamos a comprobar que efectivamente funciona a nivel.
+Tenemos los siguientes usuario ya creados en la tabla usuarios para probar con ellos.
 
-Ya te digo de librerías no hay nada que hacer porque ya tenemos añadidas las librerías a través de Maven como lo hicimos en el ejercicio anterior.
+<img src="images/15-17.png">
 
-DJ STL y el conector de malla se cuelgan.
+Vamos a ejecutar el proyecto iniciando en la página de login.
 
-Bueno vamos a iniciar la página de login tenemos un usuario ya que cree en esa tabla.
+<img src="images/15-18.png">
 
-Vamos a verlo.
+Se nos carga la página login para poder ingresar losa datos de usuario y password
 
-Realmente tengo tres usuarios creados 3 1 3 1.
+<img src="images/15-19.png">
 
-Misma combinación de usuario password.
+presionamos el botón Enviar y efectivamente nos lleva al menú.
 
-Bueno vamos a ver 3 1 y 3 1 y al entrar pues nos tendría que llevar a la página.
+<img src="images/15-20.png">
 
-Efectivamente aquí estamos de contactos.
+<img src="images/15-21.png">
 
-Bueno pues esto sigue funcionando exactamente igual pero ya ha pasado si hubieran metido un usuario que no está registrado o se produciría la excepción devolvería false.
+Bueno pues esto sigue funcionando exactamente igual.
 
-Y en este caso lo que se ha previsto es que se quede donde está en la propia página del móvil fíjate que aquí da una traza de error de excepción que es la traza que yo le he dicho que me mostrase la llamada Singhal del sur al no devolver ninguna entidad se produce esa excepción.
+Pero que habría pasado si hubieran metido un usuario que no está registrado, se produciría la excepción, devolvería `false` y en este caso lo que se ha previsto es que se quede donde está, en la propia página de login.
 
-Bueno caso es que aquí ya hemos visto una utilización de Lanamme arcoíris dentro de la tira usuario y utilizar tanto name cueles en tantas entidades como se desee es recomendable a pesar de que no se vayan a reutilizar utilizar name Aquaris puesto que si lo queremos cambiar por ejemplo en el caso de la entidad contacto cuando teníamos la lógica de negocio la opción es la de buscar contacto ya que utilizamos 
-una Aquaris normal con sus parámetros y demás.
+<img src="images/15-22.png">
 
-Bueno pues también sería conveniente haber puesto esta instrucción como una Mercuri pues aunque sólo vamos a utilizar aquí pero sí prevemos hacer algún cambio modificar alguna cosa de volverlo loco.
+<img src="images/15-23.png">
 
-La lógica negocio al estar localizadas perfectamente dentro de la entidad cualquier cambio que hagamos tendremos ya sabemos que tenemos que ir a ese punto a hacer el retoque correspondiente.
+Fíjate que aquí da una traza de error de excepción que es la traza que yo le he dicho que me mostrase, la llamada `getSingleResult() did not retrieve any entities.` al no devolver ninguna entidad se produce esa excepción.
+
+El caso es que aquí ya hemos visto una utilización de las `NamedQuery` dentro de la Entidad `Usuario` y se pueden usar tantas `NamedQuery` en tantas Entidades, como se desee, es recomendable a pesar de que no se vayan a reutilizar `NamedQuery` puesto que si luego queremos cambiar por ejemplo en el caso de la entidad Contacto cuando teníamos la Lógica de Negocio la opción de `buscarContactos`
+
+
+```java
+public Contacto buscarContactos(String email){
+   EntityManager em = getEntityManager();
+		
+   String jpql = "Select c From Contacto c Where c.email = ?1";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   qr.setParameter(1, email);
+   //return qr.getSingleResult();
+   return qr.getResultList().get(0);
+}
+```
+
+Aquí utilizamos una Query normal con sus parámetros y demás. Bueno pues también sería conveniente haber puesto esta instrucción como una `NamedQuery` pues aunque sólo la vamos a utilizar aquí, pero sí prevemos hacer algún cambio, modificar alguna cosa, en vez de volvernos locos buscandola en la Lógica de Negocio, al estar localizadas perfectamente dentro de la Entidad, cualquier cambio que hagamos ya sabemos que tenemos que ir a ese punto a hacer el retoque correspondiente.
 
 # 16 Consultas de acción 04:38
 
