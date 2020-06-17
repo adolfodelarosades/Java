@@ -100,39 +100,74 @@ Bien pues vamos a ver después en la siguiente lección vamos a explicar cómo c
 
 # 18 El servidor Glassfish 05:11
 
-El servidor de aplicaciones Tomcat que hemos utilizado los ejemplos que hemos creado hasta el momento en aplicaciones web no incluye contenedores JB.
+<img src="images/18-01.png">
 
-Es por eso que necesitamos descargar e instalar un servidor que incluya este contenedor en nuestro caso.
+El servidor de aplicaciones Tomcat que hemos utilizado los ejemplos que hemos creado hasta el momento en aplicaciones web no incluye contenedores EJB.
 
-Vamos a ver cómo trabajar con Graphics el servidor glacis incluye un contenedor JB y lo podemos descargar de esta dirección.
+Es por eso que necesitamos descargar e instalar un servidor que incluya este contenedor en nuestro caso vamos a ver cómo trabajar con GlassFish,
 
-Una vez descargado y descomprimido puesto que se distribuye como un zip lo tendremos que registrar en Eclipse.
+<img src="images/18-02.png">
 
-Lo que pasa es que el eclipse tal cual lo hemos descargado las primeras lecciones se ha seguido los pasos que yo te he explicado hasta el momento y no has incluido ninguna otra cosa más o no ya no lo tenían ya creado Deantes o instalado de antes pues probablemente vas a necesitar este plugin.
+<img src="images/18-03.png">
 
-Las fístulas que ahora mismo te explicaré también cómo descargarlo e instalarlo.
+<img src="images/18-04.png">
 
-Lo primero vamos a descargar el servidor donde nos vamos a ir a la dirección que aparecía en la transparencia.
+El servidor GlassFish incluye un contenedor EJB y lo podemos descargar de esta dirección https://www.payara.fish/downloads/#community. Una vez descargado y descomprimido puesto que se distribuye como un zip lo tendremos que registrar en Eclipse. Lo que pasa es que en Eclipse tal cual lo hemos descargado las primeras lecciones y si has seguido los pasos que yo te he explicado hasta el momento y no has incluido ninguna otra cosa más y no lo tenían ya creado antes o instalado de antes pues probablemente vas a necesitar este plugin Glassfish Tools que ahora mismo te explicaré también cómo descargarlo e instalarlo.
 
-Y entraremos en la web de pallar Zapallar.
+Lo primero vamos a descargar el servidor, nos vamos a ir a la dirección https://www.payara.fish/downloads/#community que aparecía en la transparencia y entraremos en la web de Payara, Payara es una implementación completa del servidor Glassfish que podemos descargarla pulsando este botón.
 
-Es una implementación completa del servidor Goldsmiths que podemos descargarla pulsando este botón paliará Server al pulsarlo por bueno nos va a pedir que descargamos el archivo zip lo descargamos lo descomprimir en la carpeta donde queramos tenerlo y descomprimir.
+<img src="images/18-05.png">
 
-Se creará una carpeta XLI dentro de la cual tendremos una carpeta Goldfish que corresponde con el directorio raíz de nuestro servidor de aplicaciones.
+<img src="images/18-06.png">
 
-Ahí dentro ya tienen las carpetas propias de Blacklist.
+Al pulsarlo nos va a pedir que descargamos el archivo zip lo descargamos lo descomprimir en la carpeta donde queramos tenerlo y descomprimir. Se creará una carpeta `payara5` dentro de la cual tendremos una carpeta `glassfish` que corresponde con el directorio raíz de nuestro servidor de aplicaciones. Ahí dentro ya tienen las carpetas propias de `glassfish`.
 
-Una vez que ya lo tenemos descargado comprimido nos vamos a Eclipse.
+<img src="images/18-07.png">
 
-Y qué tenemos que hacer en Eclipse registrarlo.
+Una vez que ya lo tenemos descargado y descomprimido nos vamos a Eclipse. Y qué tenemos que hacer en Eclipse pues registrarlo. En principio tenemos que seguir los mismos pasos que seguimos para registrar el servidor Tomcat es decir nos vamos a las Preferences del proyecto, en Server - Runtime Environment.
 
-En principio tenemos que seguir los mismos pasos que seguimos para registrar el servidor Tomcat es decir en Server run their environment alegué.
+<img src="images/18-08.png">
 
-Qué ocurre.
+Presionamos el botón Add.
 
-Pues que estas opciones que aparecen aquí por ejemplo la categoría Goldfish aquí no aparecerá porque no me he instalado ya el plugin y como te decía es necesario instalar el club inglãs fístulas para poder disponer de esta opción y que nos permita registrar graffitis entonces antes de intentar registrarlo nos vamos a ir a Angel Eclipse marketplaces y ahí vamos a buscar la pulsamos el botón de búsqueda y nos aparecerá Blás fístulas aquí.
+<img src="images/18-09.png">
 
-Aquí me aparece el botón instales recién instalado que aparecerá al instar para que instales pulsas el botón y sigues todos los pasos con las opciones por defecto hasta el final tras instalar las fístulas te pedirá reiniciar Eclipse se reinicia y una vez reiniciado es muy Preferences.
+Qué ocurre, pues que muestra algunas opciones pero la categoría GlassFish no aparece, es necesario instalar el plugin GlassFish Tools para poder disponer de esta opción y que nos permita registrar GlassFish.
+
+Entonces antes de intentar registrarlo nos vamos a ir a Help - Eclipse Marketplaces y ahí vamos a buscar las GlassFish Tools pulsamos el botón de búsqueda y nos aparecerá GlassFish Tools.
+
+<img src="images/18-10.png">
+
+Aquí me aparece el botón `Install` lo pulsamos.
+
+<img src="images/18-11.png">
+
+<img src="images/18-12.png">
+
+recién instalado que aparecerá al instar para que instales pulsas el botón y sigues todos los pasos con las opciones por defecto hasta el final tras instalar las GlassFish Tools te pedirá reiniciar Eclipse se reinicia.
+
+Con estos pasos me fue imposible la instalación segui los siguientes pasos:
+
+```sh
+Go to Help > Install New Software...
+
+Add the GlassFish Tools Update Site
+
+http://download.eclipse.org/glassfish-tools/1.0.0/repository
+
+as repository (or add the URL under Work with: directly) and install the tools via the wizard.
+```
+
+<img src="images/18-13.png">
+
+<img src="images/18-14.png">
+
+<img src="images/18-15.png">
+
+<img src="images/18-16.png">
+
+
+y una vez reiniciado es muy Preferences.
 
 Ahora sí si nos vamos a server Rutten environments al cursará desde ya tendrás la carpetita Classic con la opción para registrar el cuadro que tengo yo también registres.
 
