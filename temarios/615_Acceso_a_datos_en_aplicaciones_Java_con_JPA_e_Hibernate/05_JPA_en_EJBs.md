@@ -124,6 +124,17 @@ Al pulsarlo nos va a pedir que descargamos el archivo zip lo descargamos lo desc
 
 <img src="images/18-07.png">
 
+
+Nota: Las descargas echas en Payara no funcionarón, por lo que se procedio a descargar GlassFish del siguiente enlace https://javaee.github.io/glassfish/download.
+
+<img src="images/18-07-2.png">
+
+Se descargo el archivivo `glassfish-5.0.1.zip` se descomprimio 
+
+<img src="images/18-07-3.png">
+
+Este descarga de GlassFish es la que se usará más adelante ya que la de Payara nunca la acepto en un paso que se va a ejecutar posteriormente a la hora de instlar el servidor GlassFish.
+
 Una vez que ya lo tenemos descargado y descomprimido nos vamos a Eclipse. Y qué tenemos que hacer en Eclipse pues registrarlo. En principio tenemos que seguir los mismos pasos que seguimos para registrar el servidor Tomcat es decir nos vamos a las Preferences del proyecto, en Server - Runtime Environment.
 
 <img src="images/18-08.png">
