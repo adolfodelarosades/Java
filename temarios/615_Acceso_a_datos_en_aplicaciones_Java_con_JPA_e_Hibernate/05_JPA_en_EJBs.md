@@ -90,7 +90,7 @@ Existen distintos valores que se pueden asignar a esa anotación que están defi
 
 * `NEVER`
 
-y algunos más que tenemos aquí resumidos, los seis posibles valores que puede tomar esa anotación.
+estos son seis posibles valores que puede tomar esta anotación.
 
 Anotación que por otro lado no va a ser obligatorio incluir a nivel de cada método puesto que hay un valor por defecto es precisamente `REQUIRED`. Es decir cuando se hace un llamado a un método de un EJB, si hay una transacción ya iniciada por el cliente que ha hecho la llamada, pues ese método participará dentro de la transacción y si no se encargará el contenedor de iniciar una nueva y confirmarla al final.
 
