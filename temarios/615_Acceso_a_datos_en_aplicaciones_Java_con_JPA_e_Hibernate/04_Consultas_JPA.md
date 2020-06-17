@@ -2214,12 +2214,29 @@ La `NamedQuery` que tenemos aquí es la que Eclipse añadio automáticamente cua
 
 public class Contacto implements Serializable {
    ...
+```
+
+Hemos incluido una `NamedQuery` parametrizada que eliminara los contactos que tengan un determinado email.
+
+A partir de ahí nos vamos a `GestionContactos` y añadirimos un nuevo método `eliminarContactosPorEmail(String email)` con el siguiente código:
+
+```java
+public void eliminarContactosPorEmail(String email){
+   EntityManager em=getEntityManager();
+   Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+   qr.setParameter(1, email);
+   EntityTransaction tx=em.getTransaction();
+   tx.begin();
+   qr.executeUpdate();
+   tx.commit();
+}
+```
+
+recibiríamos como parámetro el email, obtenemos el `EntityManager`, el objeto `Query` se obtiene en base al método `em.createNamedQuery("Contacto.deleteByEmail");` donde indicamos el nombre del `NamedQuery` a usar, asignamos el valor del parámetro que requiere el `NamedQuery`,  generamos la transacción y la inicializamos y ahí procederemos a llamar al método `executeUpdate()` si no nos interesa el número de entidades (filas) que se 
+han visto afectadas pues no recogeremos el valor y simplemente lanzaremos la llamada para posteriormente hacer un `commit` esto sería una manera de utilizar una consulta JPQL de Acción.
 
 
-La idea sería pues un veleto con gastos 14 Wer una condición de punto y mail igual y la vamos a parametrizar sería una gran descubri parametrizada entonces a partir de ahí no seríamos mail a gestión contactos y ahí añade añadiríamos un nuevo método Bobbit eliminar contacto o contactos por email recibiríamos como parámetro el mail y procederemos a la eliminación llamando a esa usando utilizando sondas Mercuri para llamar al método Scutum deuda a través del objeto.
 
-En cualquier caso tendríamos que obtener el Entity ayer el objeto Ueli a través del método create retendrán mezclarían y indicaremos el nombre de dicha Merkel contacto del voy y me vale este sea el nombre de la Lamec crearíamos con el objeto Ueli y antes deberíamos importar si están en antes deberíamos iniciar la transacción o obtener la transacción iniciarla debemos copiar estas instrucciones no las tenemos sean las mismas que en el resto de los métodos haríamos un Beguin de la transacción y ahí procederemos a llamar al execute si no nos interesa el número de filas que se 
-han visto filas de entidades que se han visto afectadas pues no recogeremos el valor y simplemente lanzaremos la llamada para posteriormente hacer un cómic esto sería una manera de utilizar una consulta JPQL de.
 
 # Autoevaluacion III 00:54
 
@@ -2229,7 +2246,7 @@ Autoevaluacion III
  
 
 1. Indica cual de las siguientes instrucciones JPQL sería la correcta para recuperar las entidades de tipo Alumno cuya propiedad nota sea superior a 5:
-   * `Select a From Alumno a where a.nota>5`
+   * `Select a From Alumno a where a.nota>5` :+1:
    * `Select Alumno a where a.nota>5`
    * `Select a From Alumno a where nota>5`
    * `Select Alumno From Alumno a where Alumno.nota>5`
@@ -2238,17 +2255,17 @@ Autoevaluacion III
    * La instrucción JPQL se define en la propia entidad
    * El objeto Query se debe crear a través de createNamedQuery()
    * Pueden ser reutilizadas desde diferentes métodos de la aplicación
-   * Solo pueden incluir parámetros por nombre, no por posición
+   * Solo pueden incluir parámetros por nombre, no por posición :+1:
 
 3. ¿Qué sucede si al llamar a getSingleResult() de Query la consulta devuelve más de un resultado?
-   * Se produce una excepción
+   * Se produce una excepción :+1:
    * Se devuelve el primer resultado encontrado
    * Se devuelve null
    * Se devuelve un array con todos los resultados encontrados
 
 4. Para asignar el valor 20 al parámetro de posición 1 de una query debemos de utilizar la instrucción:
    * `q.setParameter(0,20);`
-   * `q.setParameter(1,20);`
+   * `q.setParameter(1,20);` :+1:
    * `q.setIntParameter(20,1);`
    * `q.setIntParameter(20,0);`
 
@@ -2256,7 +2273,7 @@ Autoevaluacion III
    * Se ejecutan a través del método executeAction() de Query
    * No pueden incluir parámetros
    * N o pueden definirse como NamedQueries
-   * Deben ejecutarse dentro de una transacción
+   * Deben ejecutarse dentro de una transacción :+1:
  
 SOLUCIONES:
 
