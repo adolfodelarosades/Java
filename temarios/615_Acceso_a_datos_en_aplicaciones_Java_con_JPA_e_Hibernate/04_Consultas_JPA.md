@@ -2157,7 +2157,11 @@ Aquí utilizamos una Query normal con sus parámetros y demás. Bueno pues tambi
 
 # 16 Consultas de acción 04:38
 
+<img src="images/16-01.png">
+
 A través de un objeto Kúbera también podemos lanzar consultas de acción sobre una capa de persistencia.
+
+<img src="images/16-02.png">
 
 Las instrucciones JPQL para este caso serían útil para actualización de un conjunto de entidades en función de un criterio o de ley para su eliminación.
 
@@ -2168,6 +2172,8 @@ Por ejemplo en este caso actualizaría los salarios de todos los empleados no he
 La sintaxis sería delete from nombre de la entidad alias web y la condición que afectaría a alguno de los atributos de la entidad en estos tipo de instituciones JPQL como la de selección pueden incluir parámetros y definirse también como escuelas para ejecutarlas.
 
 Pues crearemos una vez creado el objeto Query a través del manager utilizando create qwerty o atenerme.
+
+<img src="images/16-03.png">
 
 Si lo hemos definido como una Anam Mercuri utilizaremos el método execute este método se lanzaría la instrucción contra la capa de persistencia y nos devolvería el número de entidades que se han visto afectadas.
 
