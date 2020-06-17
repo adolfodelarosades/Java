@@ -1933,7 +1933,6 @@ public class Usuario implements Serializable {
 
 <img src="images/15-15.png">
 
-
 Tenemos aquí ya nuestras dos entidades, `Contacto` la estamos utilizando en la Lógica de Negocio que ya teníamos y la nueva `Usuario`.
 
 Una cosa muy importante es que en `persistence.xml` si lo abrimos tenemos:
@@ -1966,35 +1965,76 @@ private EntityManager getEntityManager() {
 
 Bueno pues ahí lo dejamos ya cambiado para que luego no se nos pase y no nos dé errores al intentar crear el `EntityManager`.
 
-Antes de meternos con la Lógica de Negocio como hemos dicho queremos utilizar las `NamedQuery` en esta ocasión para poder hacer la autenticación de los usuarios, entonces nos vamos a crear un Lanamme en esta entidad usuario que será la que utilicemos desde la lógica negoción.
+Antes de meternos con la Lógica de Negocio como hemos dicho queremos utilizar las `NamedQuery` en esta ocasión para poder hacer la autenticación de los usuarios, entonces nos vamos a crear una `NamedQuery` en esta entidad `Usuario` que será la que utilicemos desde la Lógica de Negoción.
 
-Como sabéis ya el eclipse te genera una por defecto que te recoge todas las entidades de ese tipo.
+Como sabés ya Eclipse genera una por defecto que recoge todas las entidades de ese tipo, la vamos a dejar pero como vamos a incluir una nueva habrá que incluir también la anotación `@NamedQueries`.
 
-Bueno vamos a dejar pero vamos a incluir una nueva.
+```java
+@Entity
+@Table(name="usuarios")
+@NamedQueries({
+   @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
+   @NamedQuery(name="Usuario.findByUserAndPwd", query="SELECT u FROM Usuario u Where u.usuario=?1 and u.password=?2")
+})
+``` 
 
-Habrá que incluir también la anotación arroba naveta.
+Aquí aparecen entre paréntesis y llaves la lista de entidades que queremos incluir dentro de la `@NamedQueries` tenemos la creada automaticamente por Eclipse y hemos añadido la nueva `NamedQuery` es costumbre nombrar al `NamedQuery` con el nombre de la entidad y luego el nombre de lo que hace la consulta, eso evita que se puedan duplicar nombres de `NamedQuery` en diferentes entidades, al ponerle el nombre de la entidad adelante eso no va a ocurrir.
 
-Aquí aparece entonces entre paréntesis si entre llaves la lista de entidades que queremos incluir dentro de la cuenta.
+Ya tenemos `NamedQuery`, ahora será cuestión de utilizarla en la Lógica de Negocio entre un nuevo método que vamos a añadir para autenticar usuarios.
 
-Por supuesto tenemos esta que la vamos a poner aquí Koma y vamos a añadir copiando y pegando por su lado no van al recovery que nos interesa en este caso como es costumbre nombrar al andarme Aquaris con el nombre de la entidad y luego el nombre de lo que hace la consulta.
+Tenemos dos opciones o incluirlo el método dentro de la clase `GestionContactos` o como esto se trata de manipular otra entidad diferente, quizá sería conveniente para no tener todos los métodos en la misma clase, incluir a una nueva clase dentro de la Lógica de Negocio que llamemos por ejemplo `GestionUsuarios` que es lo que vamos a hacer.
 
-Eso evita que se puedan duplicar nombres de entidades de namekianos en diferentes entidades.
+Vamos a crear una nueva clase dentro del paquete `modelo` que vamos a llamar así `GestionUsuarios`.
 
-Al ponerle el nombre de la entidad adelante eso no va a ocurrir.
+<img src="images/15-16.png">
 
-Bueno pues aquí vamos a llamarla por ejemplo Fain y user TWA por ejemplo donde la cuadri la consulta JPQL 
+```java
+package modelo;
 
-Pues tendrá como condición que en el campo usuario sea igual a un parámetro y el campo Passbook contó Passbook sea igual al siguiente parámetro.
+public class GestionUsuarios {
 
-Muy bien.
+}
+```
 
-Ya tenemos Lanamme equally.
+ya la tenemos dentro del paquete modelo y en esa clase incluiremos lo siguiente:
 
-Ahora será cuestión de utilizarla en la lógica de negocio entre un nuevo método que vamos a añadir para autenticar usuarios es ese método podemos hacer tenemos dos opciones o incluirlo dentro de la clase en gestión con datos como esto se trata de manipular otra entidad diferente.
 
-Quizá sería conveniente para no tener todos la misma clase incluir a una nueva clase dentro de la lógica negocio que ya vemos por ejemplo gestión a usuarios.
+```java
+package modelo;
 
-Lo que vamos a hacer vamos a crear una nueva clase que vamos a llamar así gestión usuarios van porque ya lo tenemos dentro del paquete modelo y en esa clase incluiremos un método que fuera auténtica.
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import entidades.Usuario;
+
+public class GestionUsuarios {
+   // método que permite obtener el objeto EntityManager
+   private EntityManager getEntityManager() {
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-03_web_jpa");
+      return factory.createEntityManager();
+   }
+
+   public boolean autenticar(String usuario, String pwd) {
+      EntityManager em = getEntityManager();
+      boolean res = false;
+      TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+      qr.setParameter(1, usuario);
+      qr.setParameter(2, pwd);
+      try {
+         qr.getSingleResult();
+	 res = true;
+      } catch (Exception ex) {
+         ex.printStackTrace();
+      }
+      return res;
+   }
+}
+```
+
+
+un método que fuera auténtica.
 
 Vamos a ver porque esto es como yo lo tengo hecho aquí vamos a ver aquí lo tenemos y copiamos y pegamos y ahora ya lo analizamos el corto.
 
