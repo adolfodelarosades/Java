@@ -225,36 +225,31 @@ En la siguiente lección haremos un ejercicio con EJBs que habrá que probarlo e
 
 # 19 Creación de un DataSource 11:20
 
-Hasta ahora cuando teníamos que contestar con una base de datos proporcionamos los datos de conexión a la misma dentro de la propia aplicación.
+<img src="images/19-01.png">
 
-En el caso de JPA concretamente dentro del persiste en XML ahora que vamos a utilizar JBoss necesitamos hacer uso del Sur es decir en vez de conectar directamente desde la aplicación a la base de datos las conexiones lo vamos a obtener a través de una tasó que aparte de ser más eficiente por la manera de los Interplay Babin gestionar las transacciones utilizan una API que interno que se llama JPA pues es necesario que si queremos delegar dicha gestión de transacciones en el tãbet el acceso a los datos se 
-haga vía la tasó porque las conexiones directas no utilizan ese tipo de transacción y entonces no podríamos delegar la transaccionalidad en un tal bien.
+Hasta ahora cuando teníamos que conectar con una base de datos proporcionamos los datos de conexión a la misma dentro de la propia aplicación. En el caso de JPA concretamente dentro del `persistence.xml`, ahora que vamos a utilizar EJBs necesitamos hacer uso de DataSource, es decir en vez de conectar directamente desde la aplicación a la base de datos, la conexion la vamos a obtener a través de un DataSource, que aparte de ser más eficiente, por la manera de los EJB en gestionar las transacciones, utilizan una API que interno que se llama JTA, pues es necesario que si queremos delegar dicha gestión de transacciones en EJB el acceso a los datos se haga vía DataSource porque las conexiones directas no utilizan ese tipo de transacción y entonces no podríamos delegar la transaccionalidad en un EJB.
 
-Primero qué es exactamente un tesoro.
+<img src="images/19-02.png">
 
-Es un objeto que vive dentro de los servidores de aplicaciones y que como decía proporciona conexiones a la base de datos para la aplicación.
+Bien primero qué es exactamente un DataSource, un DataSource es un objeto que vive dentro de los servidores de aplicaciones y que como decía proporciona conexiones a la base de datos para la aplicación. Esas conexiones existen ya en un Pool de Conexiones que se genera dentro del servidor de aplicaciones y que gestiona el propio DataSource y que ya contiene como digo conexiones hacia la base de datos con la que vamos a trabajar.
 
-Esas conexiones existen ya en un puzle de conexiones que se genera dentro del servidor de aplicaciones y que gestiona el propio data Sur y que ya contiene como digo conexiones hacia la base de datos con la que vamos a trabajar.
+Cuando la aplicación en nuestro caso JPA será el proveedor de persistencia, necesite conexiones con la base de datos en vez de crearla directamente contra dicha base de datos se va a pedir al DataSource, el DataSource le cogerá una conexión del Pool y la entregará y cuando el proveedor de persistencia en nuestro caso termine de usar esa conexión se la devolverá al DataSource para que lo devuelva al Pool.
 
-Cuando la aplicación en nuestro caso en JPA será el proveedor de persistencia necesite conexiones con la base de datos en vez de crearla directamente contra dicha base de datos se va a pedir en tal caso sur le cogerá una conexión del pulso y la entregará y cuando el proveedor de persistencia en nuestro caso termine de usar esa conexión se la devolverá al paso para que lo devuelvan.
+Entonces es mucho más eficiente porque no hay que estar constantemente creando y cerrando conexiones sino que las conexiones ya están ahí y son gestionadas por el objeto DataSource.
 
-Entonces es mucho más eficiente porque no hay que estar constantemente creando y cerrando conexiones sino que las conexiones ya están ahí y son gestionadas por el objeto batasuno.
+Bien pues vamos a ver cómo crear un DataSource en el servidor de aplicaciones GlassFish que acabamos de instalar.
 
-Bien pues vamos a ver cómo crear un data Sur en el servidor de aplicaciones Goldfish que acabamos de instalar.
+Para ello lo primero que tenemos que hacer vamos a la carpeta donde tenemos instalados GlassFish. Dentro de la carpeta glassfish tenemos una carpeta Domains dentro de ella una Domaine1 que es lo que llamaríamos el dominio por defecto donde automáticamente vas a ver qué Eclipse ahí arranca el servidor y gestiona el servidor dentro de ese dominio y dentro de Domaio 1 tenemos una carpeta que se llama LIB y  justo dentro tenemos una carpeta que se llama ext.
 
-Para ello lo primero que tenemos que hacer vamos a la carpeta donde tenemos instalados las Fiss reflects.
+<img src="images/19-03.png">
 
-Como ya te expliqué en los vídeos anteriores pues viene en un zip pallar lo descargamos de la página web de pallar y les comprimirlo.
+Aquí vamos a copiar el Driver de MySQL que descargamos en las primeras lecciones del curso.
 
-Se genera una carpeta dentro de la cual no quiero descomprimir aparece una carpeta Goldfish dentro de la carpeta glacis tenemos una carpeta Domains dentro de ella una Domaine 1 que es lo que llamaríamos el dominio por defecto donde automáticamente vas a ver qué Eclipse ahí arranca el servidor y gestiona el servidor dentro de ese dominio y dentro de Domaio 1 tenemos una carpeta que se llama LEP injusto dentro de eso.
+<img src="images/19-04.png">
 
-Por fin llegamos a una carpeta que se llama ext.
+Por qué. Pues porque como digo el DataSource no es un objeto que va a vivir dentro del servidor de aplicaciones, entonces el propio servidor de aplicaciones para poder crear el DataSource y crear el Pool de conexiones contra la base de datos necesita el driver, entonces los driver o en general cualquier librería externa que necesitemos que use el servidor de aplicaciones GlassFish la vamos a copiar en esta carpeta `glassfish/domains/domain1/lib/ext`.
 
-Aquí vamos a copiar el driver de Mayes se cuele que descargamos las primeras lecciones del curso.
-
-Por qué.
-
-Pues porque como digo es un objeto que va a vivir dentro del servidor de aplicaciones entonces el propio servidor de aplicaciones para poder crear el Data Sur y crear esa Pul de conexiones contra la base de datos necesita el driver los driver o cualquier en general cualquier librería externa que necesitemos que use el servidor de aplicaciones gráficas la vamos a copiar en esta carpeta éx dentro y dentro del dominio por defecto que tomemos bien hecho eso ahora vamos a iniciar el servidor de aplicaciones Galaxys pero nos vamos a la carpeta raíz de blasfemas Bin y ahí ejecutarían un archivo no necesitamos Eclipse para esto como es necesitaríamos ejecutar un archivo que es estar ser punto Vacca que es lo que hace es iniciar el servidor e iniciar el servidor pues se inicia esta ventana de línea de comando donde van saliendo unos mensajes y por fin nos dice que está iniciado cuando ya termine de arrancar.
+Bien hecho eso ahora vamos a iniciar el servidor de aplicaciones GlassFish, nos vamos a la carpeta raíz de `glassfish/bin` y ahí ejecutarían un archivo, no necesitamos Eclipse para esto como ves, necesitaríamos ejecutar un archivo que es `starserv` que lo que hace es iniciar el servidor.  e iniciar el servidor pues se inicia esta ventana de línea de comando donde van saliendo unos mensajes y por fin nos dice que está iniciado cuando ya termine de arrancar.
 
 Entonces lo que hacemos es que cogemos nuestro navegador y nos vamos a ir a la siguiente dirección.
 
