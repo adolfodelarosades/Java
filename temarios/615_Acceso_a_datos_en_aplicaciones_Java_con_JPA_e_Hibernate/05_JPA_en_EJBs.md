@@ -249,67 +249,75 @@ Aquí vamos a copiar el Driver de MySQL que descargamos en las primeras leccione
 
 Por qué. Pues porque como digo el DataSource no es un objeto que va a vivir dentro del servidor de aplicaciones, entonces el propio servidor de aplicaciones para poder crear el DataSource y crear el Pool de conexiones contra la base de datos necesita el driver, entonces los driver o en general cualquier librería externa que necesitemos que use el servidor de aplicaciones GlassFish la vamos a copiar en esta carpeta `glassfish/domains/domain1/lib/ext`.
 
-Bien hecho eso ahora vamos a iniciar el servidor de aplicaciones GlassFish, nos vamos a la carpeta raíz de `glassfish/bin` y ahí ejecutarían un archivo, no necesitamos Eclipse para esto como ves, necesitaríamos ejecutar un archivo que es `starserv` que lo que hace es iniciar el servidor.  e iniciar el servidor pues se inicia esta ventana de línea de comando donde van saliendo unos mensajes y por fin nos dice que está iniciado cuando ya termine de arrancar.
+Bien, hecho eso ahora vamos a iniciar el servidor de aplicaciones GlassFish, nos vamos a la carpeta raíz de `glassfish/bin` y ahí ejecutarían un archivo, no necesitamos Eclipse para esto como ves, necesitaríamos ejecutar un archivo que es `starserv` que lo que hace es iniciar el servidor.  
 
-Entonces lo que hacemos es que cogemos nuestro navegador y nos vamos a ir a la siguiente dirección.
+<img src="images/19-05.png">
 
-Bueno ya lo estás viendo aquí pero la voy a volver a escribir.
+**NOTA**: En la Mac he encontrado con varios problemas para poder arrancar el Servidor con lo describe el paso anterior, los pasos necesarios para poder arrancar el servidor son los siguientes:
 
-Local jocs 48 48 no hace falta que pongamos el resto porque automáticamente es una dirección por defecto y entraríamos en esta página.
+1) Modificar el archivo `glassfish/config/asenv.conf` para incluir la línea `AS_JAVA="/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home"`
+2) Ejecutar la versión 8 de Java `setJDK8`; `java -version openjdk version "1.8.0_242"`
+3) Desde la misma terminal donde se cambio la versión de Java 8 ejecutar `/Users/adolfodelarosa/Documents/Udemy2020/Cursos/OW/615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/download/glassfish5/glassfish/bin/startserv`
 
-Esto que es esto es la consola de administración del glacis es decir una aplicación que utilizan los administradores del servidor de aplicaciones para hacer tareas propias de un administrador como por ejemplo desplegar aplicaciones o crear data Suhr que es lo que vamos a hacer nosotros ya que es Batasuna vivir en un servidor de aplicaciones es un objeto administrativo que debe ser creado por un administrador y eso es lo que vamos a hacer nosotros crear el caso.
+<img src="images/19-06.png">
 
-Bien pues recuerda primero el paso anterior de haber copiado el driver de SQL en la carpeta indicada porque es necesario para poder hacer la creación ahora del caso para crear el dato sur nos vamos a ir a la sección de recursos JDBC y primero se creará el pulque conexiones y a continuación se creará un Datsun asociado a dicho el puzzle de conexiones de conexiones que se pueden crear estarían dentro de esta sección JDBC conexión pulso si la seleccionamos veremos una lista de conexiones que ya están ahí creados el propio servidor de aplicaciones Magis tiene ya un servidor de conexiones que serían estos tres primeros y este bueno lo tenía yo creo que en tu caso no te deberá parecer.
+se inicia esta ventana de línea de comando donde van saliendo unos mensajes y por fin nos dice que está iniciado cuando ya termine de arrancar.
 
-Vamos a crear nuestro pull de conexiones asociado a la base de datos de agenda.
+Entonces lo que hacemos es que cogemos nuestro navegador y nos vamos a ir a la siguiente dirección `http://localhost:4848`
 
-Para ello pulsamos el botón nio le vamos a dar un nombre un agenda por ejemplo que es el nombre tipo de recurso pues es un Java jaba X.
+<img src="images/19-07.png">
 
-SQL data.
+No hace falta que pongamos el resto porque automáticamente es una dirección por defecto y entraríamos en esta página.
 
-Los objetos datos sobre implementan esta interfaz Java del paquete Java X SQL tipo de base de datos nuestro caso Ma y SQL fíjate todas las que reconocería el servidor Fish SQL y vamos al siguiente paso en el siguiente paso vas a ver que ya nos aparecen unas propiedades por defecto y que no tenemos que tocar me refería a estas concretamente de Pulse sobre tamaño inicial del Pul máximo tamaño que pueden alcanzar.
+Esto es la Consola de Administración del GlassFish, es decir una aplicación que utilizan los Administradores del Servidor de Aplicaciones para hacer tareas propias de un administrador, como por ejemplo desplegar aplicaciones o crear DataSources, que es lo que vamos a hacer nosotros ya que el DataSource al vivir en un servidor de aplicaciones es un objeto administrativo que debe ser creado por un administrador y eso es lo que vamos a hacer nosotros crear el DataSource.
 
-Esto significa que el club de conexiones cuando se arranca el servidor va a tener un tamaño mínimo de 8 conexiones hasta alcanzar un máximo de 32.
+Bien pues recuerda primero el paso anterior de haber copiado el driver de MySQL en la carpeta indicada porque es necesario para poder hacer la creación ahora del DataSource. 
 
-Esto luego ya el propio dato azul irá encargándose de ir poblando las conexiones de cuando llegue al máximo no crear más y repartiendo las entre los clientes que se la vayan solicitando.
+Para crear el DataSource nos vamos a ir a la sección de *Resources - JDBC*. Primero se creará el Pool de Conexiones y a continuación se creará un DataSource asociado a dicho Pool de Conexiones. 
 
-En fin esto es una configuración por defecto ni tampoco nosotros vamos a entrar lo que nos interesa son estas additional Properties.
+El Pool de Conexiones que se puede crear estarían dentro de la sección *JDBC Connection Pools* si la seleccionamos veremos una lista de conexiones que ya están ahí creados.
 
-Concretamente hay en tu casa a lo mejor te aparecen algunas menos 100 suelen ser entre 170 para arriba.
+<img src="images/19-08.png">
 
-Evidentemente no vamos a tener que configurar las todas solamente cinco o seis propiedades que representan por los datos que necesita el bus de conexiones para poder crear las conexiones es decir dónde está la base de datos como se llama el servidor el puerto.
+El propio servidor de aplicaciones GlassFish tiene ya unos Pools de conexiones que serían estos. Vamos a crear nuestro Pool de Conexiones asociado a la base de datos de agenda. Para ello pulsamos el botón NEW.
 
-Bueno vamos a ordenarlas alfabéticamente.
+<img src="images/19-09.png">
 
-Pulsamos aquí en name.
+Le vamos a dar un Pool Name `poolagenda` por ejemplo, Resource Type es un `javax.sql.DataSource`, Database Driver Vendor va a ser `MySql`.
 
-Entonces se ordenará la lista alfabéticamente para así centrarnos mejor en las que nos interesa.
+<img src="images/19-10.png">
 
-La primera de esas propiedades que tenemos que configurar es la propiedad Database en donde debemos indicar el nombre de la base de datos con la que queremos conectar para que se generen las conexiones dentro de ese pull agenda siguiente propiedad.
+Vamos al siguiente paso pulsando el botón Next.
 
-La siguiente propiedad ya nos iríamos directamente al puerto de María SQL sepa donde tiene en qué puerto tiene que está escuchando SQL de cara a conectar el servidor con la base de datos y rellenar este Pul.
+<img src="images/19-11.png">
 
-Como digo bueno este dato ya viene relleno pero si en tu caso por ejemplo tu y SQL no estuvieran en el 33 06 que suele ser puerto habitual de mayo SQL fuera otro por lo que habría que cambiarlo aquí en Port Vale.
+En el siguiente paso vas a ver que ya nos aparecen unas propiedades por defecto y que no tenemos que tocar, me refería a estas concretamente de *Pool Settings* sobre, tamaño inicial del Pool, máximo tamaño que pueden alcanzar, esto significa que el Pool de conexiones cuando se arranca el servidor va a tener un tamaño mínimo de 8 conexiones hasta alcanzar un máximo de 32. Esto luego ya el propio DataSource irá encargándose de ir poblando las conexiones de cuando llegue al máximo no crear más y repartiendo las entre los clientes que se la vayan solicitando, en fin esto es una configuración por defecto que tampoco nosotros vamos a entrar.
 
-Evidentemente también habría que cambiar por nombres que considera la siguiente propiedad serían los datos de conexión a la base de datos carenciales digámoslo así password realmente Paguay antes de que alfabéticamente antes Pactual meteríamos la contraseña de acceso a administrador para poder crear las conexiones contra esa base de datos siguiente propiedad en la siguiente propiedad.
+Lo que nos interesa son las *Additional Properties (8)*, en tu casa a lo mejor te aparecen algunas menos 100 suelen ser entre 170 para arriba. Evidentemente no vamos a tener que configurarlas todas, solamente cinco o seis propiedades que representan los datos que necesita el Pool de conexiones para poder crear las conexiones, es decir dónde está la base de datos, como se llama, el servidor, el puerto. 
 
-Ser Bernheim nombre del servidor es decir el equipo físico donde se encuentra el servidor de base de datos de Mallea se cuele aquí habría que poner la dirección IP o el nombre de la máquina como estamos haciendo modo local.
+Bueno vamos a ordenarlas alfabéticamente pulsamos en Name, entonces se ordenará la lista alfabéticamente para así centrarnos mejor en las que nos interesa.
 
-Podemos poner los campos una vez que hayamos dado el nombre del servidor nos iríamos a las propiedades currela y digo las propiedades porque hay dos releen en minúsculas y mayúsculas.
+La primera de esas propiedades que tenemos que configurar es la propiedad `databaseName` en donde debemos indicar el nombre de la base de datos con la que queremos conectar para que se generen las conexiones dentro de ese Pool ponemos `agenda`.
 
-Estas propiedades deberían ya haberse rellenado con los datos que le hemos dado de la base de datos y del servidor pero no lo han hecho.
+La siguiente propiedad ya nos iríamos directamente al puerto de MySQL para que sepa en que puerto tiene que estar escuchando MySQL de cara a conectar el servidor con la base de datos y rellenar este Pool como digo, bueno este dato ya viene relleno pero si en tu caso no es así hay que poner `3306`.
 
-Entonces tenemos que indicar explícitamente la cadena de conexión en ambas propiedades local los datos que faltan ya que sería el nombre del servidor y al final el nombre de la base de datos esa misma propiedad ese mismo valor habría que indicarlo en la misma propiedad que tiene mayúsculas.
+La siguiente propiedad serían los datos de conexión a la base de datos user y password con valor `root`.
 
-Y por último nos quedaría Ussher que es el usuario con el que vamos a conectar la base de datos ya veremos el pago.
+La siguiente propiedad el ServerName, nombre del servidor, es decir el equipo físico donde se encuentra el servidor de base de datos de MySQL, aquí habría que poner la dirección IP o el nombre de la máquina, como estamos haciendo de modo local ponemos `localhost`
 
-Ahora tenemos que dar el usuario es el mismo valor un usuario de mayo se y ya está.
+Dado el nombre del servidor nos iríamos a las propiedades Url y URL hay dos URLs en minúsculas y mayúsculas. Estas propiedades deberían ya haberse rellenado con los datos que le hemos dado de la base de datos y del servidor pero no lo han hecho el valor que tendrían es `jdbx:mysql://localhost:3306/agenda`. Entonces tenemos que indicar explícitamente la cadena de conexión en ambas propiedades.
 
-Así han sido las propiedades que hemos tenido que proporcionar.
+<img src="images/19-12.png">
 
-En definitiva los datos de conexión a la base de datos credenciales incluidos tiempos como habíamos llegado al final realizamos y ya tenemos creado nuestro caso tarda un poquito.
+Estas son las propiedades que hemos tenido que proporcionar. En definitiva los datos de conexión a la base de datos, credenciales incluidos, como ya hemos llegado al finalizamos y ya tenemos creado nuestro DataSource.
 
-Podemos incluso hacer una prueba ver si efectivamente esos datos de conexión que le hemos dado están bien y conecta con la base datos y si es capaz de poblar este Pul entraríamos de nuevo en las propiedades y tenemos ahí un botoncito pin para hacer un pin hacer significa que todo ha ido bien y que es capaz de crear conexiones en ese punto con los datos que le hemos dado sin fallar algo pues tendríamos que volver a las propiedades que las tendríamos aquí.
+<img src="images/19-13.png">
+
+Podemos incluso hacer una prueba ver si efectivamente esos datos de conexión que le hemos dado están bien y conecta con la base datos y si es capaz de poblar este Pool, entraríamos de nuevo en las propiedades y tenemos ahí un botoncito Ping, para hacer un ping.
+
+
+
+hacer significa que todo ha ido bien y que es capaz de crear conexiones en ese punto con los datos que le hemos dado sin fallar algo pues tendríamos que volver a las propiedades que las tendríamos aquí.
 
 En adición al propio país el mensaje de error nos daría una pista de que nos podría falta y volveríamos a repasarlas todos a ver si están los datos bien introducidos una vez que tenemos creado el puzzle conexiones vamos a caer en la basura asociada a ese pull y nos iríamos a la opción de arriba JDBC Resource aquí vamos al botón New y le damos el nombre del caso lo que llaman el JND Inaip que suele por costumbre suele empezar con la cadena JDBC barra y luego el nombre que queramos darle al caso que habitualmente es el nombre de la base de datos terminado en desheredar caso JNC agendados.
 
