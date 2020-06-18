@@ -429,39 +429,51 @@ Damos al botón New y le damos el nombre del DataSource lo que llaman el *JNDI N
 
 # 20 Ejercicio práctico III 17:57
 
-En el siguiente video vamos a crear una nueva versión del ejercicio.
+<img src="images/20-01.png">
 
-La agenda de contactos en el que vamos a utilizar o implementar la lógica de negocio dentro del jabalí para poder aprovechar las características que comentábamos antes de gestión de transaccionalidad.
+<img src="images/20-02.png">
 
-Inyección del objeto Inti-Illimani entonces vamos directamente.
+En esta lección vamos a crear una nueva versión del ejercicio de la agenda de contactos, en el que vamos a utilizar o implementar la lógica de negocio dentro del EJB para poder aprovechar las características que comentábamos antes de gestión de transaccionalidad e inyección del objeto `EntityManager`.
 
-Eclipse lo que vamos a hacer es que vamos a crearnos una copia del proyecto que ya teníamos hecho anteriormente con todas las funcionalidades que ya Ultimax que ya implementamos a través del botón derecho.
+Vamos directamente a Eclipse, lo que vamos a hacer es que vamos a crearnos una copia del proyecto que ya teníamos hecho anteriormente con todas las funcionalidades que ya implementamos a través del botón derecho creamos una copia y lo vamos a renombrar como `615-04_web_jpa`.
 
-Creamos una copia y lo vamos a renombrar como 04.
+<img src="images/20-03.png">
 
-Ejercicio práctico.
+Cuando hacemos una copia de un proyecto web ya existente, como ya vimos es importante ir a las propiedades del proyecto en *Web Project Setting* y  cambiar el `Content root` al del proyecto actual.
 
-3.
+<img src="images/20-04.png">
 
-Vamos a quedarnos con esta misma dirección con este mismo nombre porque como ya te comenté cuando queremos una copia de un proyecto web debemos acontinuación en las propiedades del proyecto en web settings cambiar el corte root o lo que es lo mismo la dirección asociada a la aplicación web que al hacer la copia el proyecto se Serratosa información no se cambia.
+o lo que es lo mismo la dirección asociada a la aplicación web que al hacer la copia del proyecto, esa información no se cambia por lo que hay que realizarlo manualmente, entonces aplicamos.
 
-Entonces aplicamos.
+Lo primero que vamos a hacer es asociar este proyecto con el nuevo servidor de aplicaciones que ya registramos en lecciones anteriores que es GlasFish, porque como sabes el servidor de aplicaciones Tomcat no incluye contenedores EJB y por lo tanto no podemos utilizar EJB con Tomcat lo utilizaremos sobre GlassFish.
 
-Y pues lo primero que vamos a hacer es asociar este proyecto con el nuevo servidor de aplicaciones que ya registramos en todos los vídeos anteriores que es el blasfemas vale porque como sabes el servidor de aplicaciones Tomcat no incluye contenedores JB y por lo tanto no podemos utilizar Interplay Java.
+Este proyecto que se creó en su momento estaba asociado al servidor Tomcat, esta nueva copia sigue asociado a Tomcat, habrá que decirle que queremos que quede asociado a GlassFish, aquí vemos las librerías del proyecto, lo que es la librería de Java EE, la asociación que proporciona Tomcat.
 
-Este servidor lo utilizaremos sobre clásicos como este proyecto que se creó en su momento pues estaba asociado al servidor Tomcat.
+<img src="images/20-05.png">
 
-Pues ahora esta nueva copia sigue asociado a Tonka habrá que decirle que no que queremos que quede asociado a las Fiss como es aquí en las librerías del proyecto asociado con todo lo que es la librería de Java e la asociación que proporciona tongano.
+Cuando creas un nuevo proyecto Web dinámico a la hora de crearlo 
 
-Entonces esto cuando creas un nuevo proyecto Web dinámico a la hora de crearlo aquí ya le dices que servidor de aplicaciones vuelvas a trabajar como nosotros no lo hemos creado de cero pues entonces ya viene asociado con el servidor que se asoció al proyecto original y para cambiarlo nos vamos a ir a las propiedades y en Tardi runtime.
+<img src="images/20-06.png">
 
-Como ves tenemos asociado Tomcat pues vamos a desactivar esta opción y asociable el servidor Majlis aplicamos ya las librerías del Java Interplay las cogerá de ese servidor y de cara a probarlo bueno también podremos elegir un otro pero bueno ya tenemos por defecto asociado el proyecto con nuestro servidor pues una vez hecho eso lo que vamos a hacer.
+aquí ya le dices que servidor de aplicaciones con el que vas a trabajar, como nosotros no lo hemos creado de cero, pues entonces ya viene asociado con el servidor que se asoció al proyecto original y para cambiarlo nos vamos a ir a las propiedades y en `Targeted Runtime`.
 
-Lo que tenemos una copia del proyecto es que nos vamos a ir al archivo persiste en XML y vamos a cambiar la manera en la que vamos a conectar con la base de datos a través del proveedor de persistencia porque como ya te comenté en el vídeo anterior resulta que no podemos utilizar datos de conexión directos a la base de datos es decir no podemos proporcionar los datos de conexión para que el motor de persistencia que conecta la base de datos sino que hay que hacerlo a través de un data.
+<img src="images/20-07.png">
 
-Porque ya creamos en el vídeo anterior esa información donde se cambia.
+Como ves tenemos asociado Tomcat pues vamos a desactivar esta opción y asociable el servidor GlassFish
 
-Bueno pues aquí vamos a abrirlo para ver este archivo lo vamos a abrir con el editor para poder hacer los cambios más comodamente en la sección conexiones pues en vez de elegir un lugar elegimos DeFalco JPA o Juanatey a secas y como veis desaparecen los datos de conexión directos a la base de datos y le indicamos la dirección del Data Suhr que creamos en el vídeo anterior y que vive dentro de ese servidor de aplicaciones blasfemas.
+<img src="images/20-08.png">
+
+aplicamos y ya las librerías del EJB las cogerá de ese servidor y de cara a probarlo bueno también podremos elegir uno u otro pero bueno ya tenemos por defecto asociado el proyecto con nuestro servidor GlassFish.
+
+Una vez hecho eso lo que vamos a hacer, dado que lo que tenemos es una copia del proyecto es que nos vamos a ir al archivo `persistence.xml` y vamos a cambiar la manera en la que vamos a conectar con la base de datos a través del proveedor de persistencia, porque como ya te comenté en la lección anterior, resulta que no podemos utilizar datos de conexión directos a la base de datos, es decir no podemos proporcionar los datos de conexión para que el motor de persistencia que conecte a la base de datos, sino que hay que hacerlo a través de un DataSource que ya creamos en la lección anterior.
+
+Esa información donde se cambia, bueno pues podemos cambiar directamente el código o apoyarnos de la pestaña `Connection`.
+
+<img src="images/20-09.png">
+
+
+aquí vamos a abrirlo para ver este archivo lo vamos a abrir con el editor para poder hacer los cambios más comodamente en la sección conexiones pues en vez de elegir un lugar elegimos DeFalco JPA o Juanatey a secas y como veis desaparecen los datos de conexión directos a la base de datos y le indicamos la dirección del Data Suhr que creamos en el vídeo anterior y que vive dentro de ese servidor de aplicaciones blasfemas.
+Esa información donde se cambia .
 
 Vale pues ahora a ver el surveys como cambia la cosa ahora ya no hay datos de conexión con la base datos sino que está directamente centrada.
 
