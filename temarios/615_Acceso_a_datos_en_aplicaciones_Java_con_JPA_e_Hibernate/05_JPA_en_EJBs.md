@@ -315,17 +315,117 @@ Estas son las propiedades que hemos tenido que proporcionar. En definitiva los d
 
 Podemos incluso hacer una prueba ver si efectivamente esos datos de conexión que le hemos dado están bien y conecta con la base datos y si es capaz de poblar este Pool, entraríamos de nuevo en las propiedades y tenemos ahí un botoncito Ping, para hacer un ping.
 
+<img src="images/19-14.png">
 
+<img src="images/19-15.png">
 
-hacer significa que todo ha ido bien y que es capaz de crear conexiones en ese punto con los datos que le hemos dado sin fallar algo pues tendríamos que volver a las propiedades que las tendríamos aquí.
+En este caso al hacer el Ping no ha ido bien, el mensaje de error nos daría una pista de que nos podría falta y volveríamos a repasar las propiedades para ver si todas están bien introducidos o nos faltan algunas.
 
-En adición al propio país el mensaje de error nos daría una pista de que nos podría falta y volveríamos a repasarlas todos a ver si están los datos bien introducidos una vez que tenemos creado el puzzle conexiones vamos a caer en la basura asociada a ese pull y nos iríamos a la opción de arriba JDBC Resource aquí vamos al botón New y le damos el nombre del caso lo que llaman el JND Inaip que suele por costumbre suele empezar con la cadena JDBC barra y luego el nombre que queramos darle al caso que habitualmente es el nombre de la base de datos terminado en desheredar caso JNC agendados.
+<img src="images/19-16.png">
 
-Pero bueno esto puede ser el nombre que tú quieras proporcionar lo único que hay que indicar aquí es el que lleva asociado este caso con la agenda pulsamos okay y ya tenemos el dato Sur creo en el siguiente vídeo.
+Hemos añadido algunas propiedades y vamos a probar nuevamente el Ping, nos sigue presentando un error
 
-Pues vamos a ver ya cómo utilizar este data Sur para proporcionar los datos de conexión en el persiste en XML de cara a que el JB pueda gestionarla.
+`Ping Connection Pool failed for poolagenda. Class name is wrong or classpath is not set for : com.mysql.jdbc.jdbc2.optional.MysqlDataSource Please check the server.log for more details.`
 
-La transaccionalidad como te decía antes a través de una pequeña llama JPA y podamos delegar en él dicha transaccionalidad.
+<img src="images/19-17.png">
+
+En la pestaña General tenemos el valor *Datasource Classname:* `com.mysql.jdbc.jdbc2.optional.MysqlDataSource`. Vamos a cambiar el valor por : `com.mysql.jdbc.Driver` que es el valor que usabamos en nuestros antiguos ejercicios e iba bien.
+
+<img src="images/19-18.png">
+
+Ahora nos aparece un error diferente, si revisamos el log de GlassFish nos muestra la siguiente traza:
+
+```sh
+[#|2020-06-18T20:34:09.723+0200|SEVERE|glassfish 5.0|javax.enterprise.resource.resourceadapter.com.sun.gjc.spi|_ThreadID=53;_ThreadName=admin-listener(1);_TimeMillis=1592505249723;_LevelValue=1000;_MessageID=jdbc.exc_cce;|
+  RAR5111 : Error casting to javax.sql.Datasource
+java.lang.ClassCastException: com.mysql.jdbc.Driver cannot be cast to javax.sql.DataSource
+	at com.sun.gjc.spi.DSManagedConnectionFactory.getDataSource(DSManagedConnectionFactory.java:163)
+	at com.sun.gjc.spi.DSManagedConnectionFactory.createManagedConnection(DSManagedConnectionFactory.java:102)
+	at com.sun.enterprise.connectors.service.ConnectorConnectionPoolAdminServiceImpl.getUnpooledConnection(ConnectorConnectionPoolAdminServiceImpl.java:702)
+	at com.sun.enterprise.connectors.service.ConnectorConnectionPoolAdminServiceImpl.testConnectionPool(ConnectorConnectionPoolAdminServiceImpl.java:431)
+	at com.sun.enterprise.connectors.ConnectorRuntime.pingConnectionPool(ConnectorRuntime.java:1162)
+	at org.glassfish.connectors.admin.cli.PingConnectionPool.execute(PingConnectionPool.java:143)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:540)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:536)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:360)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:535)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:566)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:558)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:360)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:557)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1465)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:110)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1847)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1723)
+	at org.glassfish.admin.rest.utils.ResourceUtil.runCommand(ResourceUtil.java:254)
+	at org.glassfish.admin.rest.utils.ResourceUtil.runCommand(ResourceUtil.java:232)
+	at org.glassfish.admin.rest.resources.TemplateExecCommand.executeCommandLegacyFormat(TemplateExecCommand.java:157)
+	at org.glassfish.admin.rest.resources.TemplateCommandGetResource.processGetLegacyFormat(TemplateCommandGetResource.java:75)
+	at sun.reflect.GeneratedMethodAccessor87.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:76)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:148)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:191)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:200)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:103)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:493)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:415)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:104)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:272)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:268)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:316)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:298)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:268)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:289)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:256)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:377)
+	at org.glassfish.admin.rest.adapter.RestAdapter$2.service(RestAdapter.java:316)
+	at org.glassfish.admin.rest.adapter.RestAdapter.service(RestAdapter.java:179)
+	at com.sun.enterprise.v3.services.impl.ContainerMapper$HttpHandlerCallable.call(ContainerMapper.java:463)
+	at com.sun.enterprise.v3.services.impl.ContainerMapper.service(ContainerMapper.java:168)
+	at org.glassfish.grizzly.http.server.HttpHandler.runService(HttpHandler.java:206)
+	at org.glassfish.grizzly.http.server.HttpHandler.doHandle(HttpHandler.java:180)
+	at org.glassfish.grizzly.http.server.HttpServerFilter.handleRead(HttpServerFilter.java:242)
+	at org.glassfish.grizzly.filterchain.ExecutorResolver$9.execute(ExecutorResolver.java:119)
+	at org.glassfish.grizzly.filterchain.DefaultFilterChain.executeFilter(DefaultFilterChain.java:284)
+	at org.glassfish.grizzly.filterchain.DefaultFilterChain.executeChainPart(DefaultFilterChain.java:201)
+	at org.glassfish.grizzly.filterchain.DefaultFilterChain.execute(DefaultFilterChain.java:133)
+	at org.glassfish.grizzly.filterchain.DefaultFilterChain.process(DefaultFilterChain.java:112)
+	at org.glassfish.grizzly.ProcessorExecutor.execute(ProcessorExecutor.java:77)
+	at org.glassfish.grizzly.nio.transport.TCPNIOTransport.fireIOEvent(TCPNIOTransport.java:539)
+	at org.glassfish.grizzly.strategies.AbstractIOStrategy.fireIOEvent(AbstractIOStrategy.java:112)
+	at org.glassfish.grizzly.strategies.WorkerThreadIOStrategy.run0(WorkerThreadIOStrategy.java:117)
+	at org.glassfish.grizzly.strategies.WorkerThreadIOStrategy.access$100(WorkerThreadIOStrategy.java:56)
+	at org.glassfish.grizzly.strategies.WorkerThreadIOStrategy$WorkerThreadRunnable.run(WorkerThreadIOStrategy.java:137)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:593)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:573)
+	at java.lang.Thread.run(Thread.java:748)
+```
+
+No he podido saber la causa del error. En el proyecto del profesor usa MySQL 5 y yo la 8 por lo que habría ver por donde va el fallo, la URL https://nikals.se/2019/04/05/using-mysql-connector-j-jdbc-driver-with-glassfish/ menciona una posible solución.
+
+Voy a seguir como si funcionará.
+
+En caso de que todo estuvierá bien al momento de hacer el Ping nos aparecería `Ping Succeeded` significa que todo ha ido bien y que es capaz de crear conexiones.
+
+Una vez que tenemos creado el Pool de conexiones vamos a crear el DataSource asociado a ese Pool y nos iríamos a la opción de *JDBC Resource*.
+
+<img src="images/19-19.png">
+
+Damos al botón New y le damos el nombre del DataSource lo que llaman el *JNDI Name* que suele por costumbre suele empezar con la cadena JDBC barra y luego el nombre que queramos darle al caso que habitualmente es el nombre de la base de datos terminado en ds, nos queda así `jdbc/agendads`, pero bueno puede ser el nombre que tú quieras proporcionar, lo único que hay que indicar es el Pool que lleva asociado, este caso `poolagenda`
+
+<img src="images/19-20.png">
+
+ pulsamos OK.
+ 
+ <img src="images/19-21.png">
+ 
+ y ya tenemos el DataSource, en la siguiente lección vamos a ver ya cómo utilizar este DataSource para proporcionar los datos de conexión en el `persistence.xml` de cara a que EJB pueda gestionar la transaccionalidad como te decía antes a través de un API que se llama JTA y podamos delegar en él dicha transaccionalidad.
 
 # 20 Ejercicio práctico III 17:57
 
