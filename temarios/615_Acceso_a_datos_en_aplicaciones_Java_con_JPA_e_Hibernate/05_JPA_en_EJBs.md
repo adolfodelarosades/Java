@@ -467,53 +467,147 @@ aplicamos y ya las librerías del EJB las cogerá de ese servidor y de cara a pr
 
 Una vez hecho eso lo que vamos a hacer, dado que lo que tenemos es una copia del proyecto es que nos vamos a ir al archivo `persistence.xml` y vamos a cambiar la manera en la que vamos a conectar con la base de datos a través del proveedor de persistencia, porque como ya te comenté en la lección anterior, resulta que no podemos utilizar datos de conexión directos a la base de datos, es decir no podemos proporcionar los datos de conexión para que el motor de persistencia que conecte a la base de datos, sino que hay que hacerlo a través de un DataSource que ya creamos en la lección anterior.
 
-Esa información donde se cambia, bueno pues podemos cambiar directamente el código o apoyarnos de la pestaña `Connection`.
+Esa información donde se cambia, bueno pues podemos cambiar directamente el código o para poder hacer los cambios más comodamente apoyarnos de la pestaña `Connection`.
 
 <img src="images/20-09.png">
 
+En vez de elegir *Resource Local* seleccionemos *Default (JTA)* o JTA a secas y como ves desaparecen los datos de conexión directos a la base de datos y le indicamos la dirección del DataSource que creamos en la lección anterior y que vive dentro de ese servidor de aplicaciones GlassFish, `jdbc/agendades`.
 
-aquí vamos a abrirlo para ver este archivo lo vamos a abrir con el editor para poder hacer los cambios más comodamente en la sección conexiones pues en vez de elegir un lugar elegimos DeFalco JPA o Juanatey a secas y como veis desaparecen los datos de conexión directos a la base de datos y le indicamos la dirección del Data Suhr que creamos en el vídeo anterior y que vive dentro de ese servidor de aplicaciones blasfemas.
-Esa información donde se cambia .
+Si vemos el código de `persistence.xml` vemos como cambia.
 
-Vale pues ahora a ver el surveys como cambia la cosa ahora ya no hay datos de conexión con la base datos sino que está directamente centrada.
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-03_web_jpa">
+		<jta-data-source>jdbc/agendads</jta-data-source>
+		<class>entidades.Contacto</class>
+		<class>entidades.Usuario</class>
+	</persistence-unit>
+</persistence>
+```
 
-JT adapta Surt con la dirección del dato Assur.
+Esa información donde se cambia, ahora ya no hay datos de conexión con la base datos sino que está directamente la entrada  `<jta-data-source>jdbc/agendads</jta-data-source>` con la dirección del DataSource, esto significa que el motor de persistencia va a utilizar este DataSource y el servidor va a ser mucho más óptimo y además utilizará el sistema de gestión de transacciones que es JTA que es el mismo que utilizan los EJBs.
 
-Y bueno pues cuando ya estaba eso significa que el motor de persistencia va a utilizar este dato su del servidor va a ser mucho más óptimo y además utilizará esa sistema de gestión de transacciones que es J.T real que es el mismo que utilizan los J2.
+Otra cosa que vamos a hacer es que vamos a cambiar el nombre de la Unidad de persistencia puesto que ahora estamos con el ejercicio `615-04_web_jpa` y es el nombre que le vamos a asociar a la nueva unidad de resistencia.
 
-En otro lado otra cosa que vamos a hacer es que vamos a cambiar la dirección de la Unidad de persistencia puesto que ahora estamos con el ejercicio 04 y da ese es el nombre que le vamos a asociar a la nueva unidad de resistencia.
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-04_web_jpa">
+		<jta-data-source>jdbc/agendads</jta-data-source>
+		<class>entidades.Contacto</class>
+		<class>entidades.Usuario</class>
+	</persistence-unit>
+</persistence>
+```
 
-Pues ahora lo que vamos a hacer es implementar la lógica negocio en los hoteles.
+Ahora lo que vamos a hacer es implementar la lógica negocio en los EJBs, en lugar de tener clases normales en el paquete `modelo` como lo tenemos crearemos Enterprise JavaBeans, vamos a crear un EJB para la Gestión de Usuarios y otro para la Gestión de los Contactos.
 
-Vamos a ver clases normales como lo tenemos aquí crearemos Enterprise JavaBeans y cómo se hace eso.
+Nos vamos al proyecto y con el botón derecho en la opción New dentro de la categoría Other en la subcategoría EJB elegimos Session Bean
 
-Vamos a crear una Interplay Java para la gestión de usuarios y otro para la gestión de los contactos.
+<img src="images/20-10.png">
 
-Nos vamos al proyecto y con el botón derecho en la opción New dentro de la categoría poder en la subcategoría JB elegimos se siembren el paquete es el mismo donde tenemos las clases y el nombre de la clase porque no Interplay dijo Babín va a estar formado por una clase de implementación muy parecida a las clases estándares Java y una interfaz de negocio con la que va a interaccionar el cliente en nuestro caso los controladores.
+En el siguiente paso el paquete es el mismo donde tenemos las clases y el nombre de la clase porque un EJB va a estar formado por una clase de implementación muy parecida a las clases estándares Java y una interfaz de negocio con la que va a interaccionar el cliente en nuestro caso los controladores. Bueno a la clase le vamos a llamar `GestionUsuariosEjb` y la interfaz de negocio va a ser en una interfaz local puesto que el acceso va a ser local, no se va a acceder al EJB remotamente desde otro servidor, sino que se va a acceder desde el mismo servidor completamente de la misma aplicación, le asigna nombre que por defecto a dicha interfaz `modelo.GestionUsuarioEjbLocal` . Vamos a desactivar la opción `No-interface View` puesto que sí que vamos a utilizar interfaz de negocio y ya directamente aquí podemos pulsar Finish.
 
-Bueno a la clase le vamos a llamar questión usuarios vamos a crear dos uno para la gestión de usuarios y otro para la gestión de los contactos.
+<img src="images/20-11.png">
 
-JB y la interfaz de negocio no va a ser en una interfaz local puesto que el acceso va a ser no sólo acceder a Alejo tãvez remotamente desde otro servidor sino que se va a acceder desde el mismo servidor completamente de la misma aplicación pues este es el nombre que por defecto le da a dicha interfaz.
+Ya tendríamos creado el EJB
 
-Vamos a desactivar esta opción puesto que sí que vamos a interfaz a utilizar interfaz de negocio y ya directamente aquí podemos pulsar Finish porque ya tendríamos creado LJG.
+<img src="images/20-12.png">
 
-JV Cómo va a saber ahora la clase concretamente la interfaz es una simple interfaz con la clase es una clase normal y corriente Java que lleva esta notación arroba Stainless indicando que estamos ante un JB de tipo sin está bueno pues por lo demás aquí lo que vamos a tener son los métodos de Lejona que sean los mismos métodos que teníamos en gestión usuario.
+Nos crea dos archivos `GestionUsuarioEjb` y `GestionUsuarioEjbLocal`
 
-Ahora vamos a ver los mismos métodos públicos porque como vamos a ver este ya no nos va a hacer falta el de obtener el mayor puesto que lo vamos a inyectar directamente entonces vamos a copiar ese método que ya tenemos creado.
+La Interface es una simple interfaz.
 
-Ahora veremos qué cambios vamos a hacer en su interior y cómo tenemos lentísima.
+*`GestionUsuarioEjbLocal`*
 
-Ayer declaramos una variable de ese tipo y en este caso al utilizar JB es el contenido del JB Nos va a permitir inyectar automáticamente el objeto dentro de la variable sin que lo tengamos que crear nosotros explícitamente desde código.
+```java
+package modelo;
 
-Para ello se utilizará una notación existen Contes se llama la notación que nos va a permitir la inyección del Entity manager dentro de la variable lo único que habrá que indicarle es en Junín Nein el nombre de la Unidad de persistencia de la que tiene que buscar la información nombre Unidad persistencia como sabes está en el sistema XML el nombre que le hemos dado este nombre es el nombre de la Unidad de persistencia nos vamos aquí y ya lo tenemos.
+import javax.ejb.Local;
 
-Con esto ya estaríamos timãn ayer.
+@Local
+public interface GestionUsuarioEjbLocal {
 
-Por lo tanto esto de obtención a través de ese método que ya no nos hace falta pues desaparece y por lo demás todo lo mismo Escuer y se crea la Taipe y se asignan los parámetros y se llama de.
+}
+```
 
-Al fin y al cabo el tema de ayer es el primero bien ese método.
+La Clase es una clase normal y corriente Java
 
-Queremos que sea expuesto también a través de la interfaz para que luego veremos el cliente que sólo puedan hacer uso del mismo.
+*`GestionUsuarioEjb`*
+
+```java
+package modelo;
+
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class GestionUsuarioEjb
+ */
+@Stateless
+public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
+
+    /**
+     * Default constructor. 
+     */
+    public GestionUsuarioEjb() {
+        // TODO Auto-generated constructor stub
+    }
+
+}
+```
+
+que lleva la anotación `@Stateless` que indica que estamos ante un EJB de tipo sin Estado, por lo demás lo que vamos a tener son los métodos del EJB que son mismos métodos que teníamos en `GestionUsuario` aunque no descartaremos `getEntityManager()` ya que la conexión ya no se realiza de esta manera, puesto que lo vamos a inyectar directamente.
+
+Vamos a copiar el método `autenticar` que ya tenemos creado en `GestionUsuario`. Ahora veremos qué cambios vamos a hacer en su interior.
+
+Cómo obtenemos el EntityManager, declaramos una variable de ese tipo y en este caso al utilizar EJB, el contenido del EJBs nos va a permitir inyectar automáticamente el objeto dentro de la variable, sin que lo tengamos que crear nosotros explícitamente desde código. Para ello se utilizará una anotación `@PersistenceContext` es la  anotación que nos va a permitir la inyección del EntityManager dentro de la variable, lo único que habrá que indicarle es el `unitName` que nos permite indicar el nombre de la Unidad de Persistencia en la que tiene que buscar la información, el nombre de la Unidad de persistencia como sabes está en el `persistence.xml` por lo que la anotación completa queda así: 
+
+```
+@PersistenceContext(unitName="615-04_web_jpa")
+EntityManager em;
+```
+
+Con esto ya inyectariamos el `EntityManager` por lo que podemos elininar `EntityManager em = getEntityManager();`. Nuestra clase completa queda así:
+
+```java
+package modelo;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import entidades.Usuario;
+
+/**
+ * Session Bean implementation class GestionUsuarioEjb
+ */
+@Stateless
+public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
+
+	@PersistenceContext(unitName="615-04_web_jpa")
+	EntityManager em;
+	public boolean autenticar(String usuario, String pwd) {
+		EntityManager em = getEntityManager();
+		boolean res = false;
+		TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+		qr.setParameter(1, usuario);
+		qr.setParameter(2, pwd);
+		try {
+			qr.getSingleResult();
+			res = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return res;
+	}
+
+}
+```
+AQUII
+
+Bien ese método queremos que sea expuesto también a través de la interfaz para que el cliente que son los Servlets puedan hacer uso del mismo. Podríamos 
 
 Para ello vamos aquí dentro de la clase de implementación de JB y con el botón derecho elegimos la opción refractor Pulau lo que queremos es llevarnos a esta interfaz que ya detecta como la implementa la clase ya que esta es la interfaz donde te quieres llevar la Declaración de los métodos que te indican esta lista.
 
