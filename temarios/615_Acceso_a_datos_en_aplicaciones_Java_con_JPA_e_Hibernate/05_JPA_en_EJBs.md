@@ -745,44 +745,785 @@ public class GestionContactosEjb implements GestionContactosEjbLocal {
 }
 ```
 
-
-
-
 Cómo se ve se el código se reduce bastante, pues muchos de los métodos de la Lógica de Negocio, si ya estaban de por sí reducida por utilizar JPA, el hecho de que la transacción la gestione automáticamente el contenedor de EJBs pues hace que aún sea más simple la Lógica de Negocio.
 
+Vamos a borrar la clase `GestionContactos` y ya lo único que nos queda es utilizar esos EJBs desde la capa cliente, en este caso los controladores de acción, vamos al paquete Servlets e ir revisando servlet por servlet.
+
+Empezamos por `AltaAction` aquí ya no tenemos una clase de `GestionContactos` que instanciar sino que tenemos que utilizar el EJB concretamente la Interfaz de Negocio, para ello vamos a utilizar esta anotación que forma parte de Java Enterprise Edition.
+
+```java
+@EJB
+GestionContactosEjbLocal gcontactos;
+```
+Qué lo que hace es inyectar una referencia al objeto de la interfaz de negocio y declara una variable del tipo de objeto que quieres y a través de la anotación, el contenedor de servlets, el contenedor web nos inyecta una referencia a ese objeto dentro de la variable, gracias a esta anotación. Por lo tanto esto `GestionContactos gcontactos=new GestionContactos();` ya no sobra.
+
+```java
+@EJB
+	GestionContactosEjbLocal gcontactos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nombre=request.getParameter("nombre");
+		String email=request.getParameter("email");
+		int telefono=Integer.parseInt(request.getParameter("telefono"));
+		//creamos un objeto de la capa de lógica de negocio
+		//y llamamos al método encargado de hacer el alta
+		
+		gcontactos.altaContacto(nombre,email,telefono);
+		request.getRequestDispatcher("menu.html").forward(request, response);
+	}
+```
+
+Vamos a hacer exactamente lo mismo en el resto de los servlets. Una vez hecho esto ya tendríamos adaptados los servlet con la inyección de dependencia EJB para realizar las mismas tareas que realizaban antes.
+
+En teoría de la vista no hay que tocar absolutamente nada, pero tal y como estaba hecha esta página de `contactos.jsp` tenia un import con `modelo.GestionContactos,` que no se usaba para nada pero lo tenia simplemente se elimina porque esas clases ese no se va a utilizar en la JSP.
+
+Pues ya lo tenemos todo listo y se supone que el ejercicio funcionaría exactamente igual que antes vamos a ejecutar la página de login para autenticarnos
+
+<img src="images/20-18.png">
+
+seleccionamos un servidor GlassFish yo lo tengo arrancado 
+
+<img src="images/20-19.png">
+
+se iniciaría ahora está publicando la aplicación y en el momento que arranque el navegador aparece aquí el navegador tendremos la página de inicio
+
+<img src="images/20-20.png">
+
+<img src="images/20-21.png">
+
+<img src="images/20-22.png">
+
+se habrá autenticado y si se ven los contactos que está efectivamente trabajando correctamente y haciendo las operaciones correctamente contra la base de datos.
+
+Diferencias, insistir la Lógica Negocio (modelo) la hemos implementado con EJBs, las Entidades (entidades) son las mismas, la capa de persistencia (`persistence.xml`) es la misma lo único es que ahora como estamos utilizando EJBs el acceso a los datos está haciendose a través de un DataSource, las conexiones que está utilizando para sincronizar las operaciones contra la base de datos, el motor de persistencia las está realizando a través de un DataSource que hemos creado en el Servidor de Aplicaciones local. Los controladores (servlets) al usar EJB han cambiado un poco para inyectar el EJB y no hacer uso de la Transaccionalidad que maneja automaticamente los EJB, las vistas son exactamente las mismas.
+
+Han visto cómo implementar ya la Lógica Negocio con EJBs que es muy parecido a hacerlo con clases, pero incluso con menos código.
+
+### :computer: Código Completo - 615-04_web_jpa 
+
+<img src="images/20-23.png">
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-04_web_jpa</groupId>
+	<artifactId>615-04_web_jpa</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-04_web_jpa">
+		<jta-data-source>jdbc/agendads</jta-data-source>
+		<class>entidades.Contacto</class>
+		<class>entidades.Usuario</class>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`Contacto.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
 
 
-Pues vamos a borrar gestión contactos y ya lo único que nos queda es utilizar esos J3 desde la capa cliente en este caso los controladores de acción vamos por servlet.
+/**
+ * The persistent class for the contactos database table.
+ * 
+ */
+@Entity
+@Table(name="contactos")
+@NamedQueries({
+	@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c"),
+	@NamedQuery(name="Contacto.deleteByEmail", query="DELETE FROM Contacto c WHERE c.email=?1")
+})
 
-Vamos a ver aquí ya no tenemos una clase de gestión contactos en la que instancias sino que tenemos que utilizar el JB concretamente la interfaz de negocio.
+public class Contacto implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-Para ello vamos a utilizar esta notación que forma parte de Java Enterprise Lithium JB Locanda qué es lo que hace también es inyectar una referencia al objeto de la interfaz de negocio y declara una variable del tipo de objeto que quieres y a través de la notación es el contenedor de servlets contenedor web.
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idContacto;
 
-Vaya pues nos inyecta una referencia a ese objeto dentro de la variable.
+	private String email;
 
-Gracias a esta notación.
+	private String nombre;
 
-Por lo tanto esto no sobra.
+	private int telefono;
 
-Vamos a hacer exactamente lo mismo en el resto de los servlets contactos es lo que van a ser que no nos sale el nombre del método y así por qué ocurre.
+	public Contacto() {
+	}
 
-Y es que aquí ha habido una cosa que se me ha olvidado realizar que hemos analizado JB de gestión de usuarios pero no lo hemos hecho en es gestión contactos y es llevar los métodos a la interfaz de negocio.
+	public Contacto(String email, String nombre, int telefono) {
+		super();
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
 
-Entonces con el botón derecho hacemos el mismo llevamos a cabo el mismo paso adelante Operator cula ya identifica de que interfaces estamos hablando.
+	public Contacto(int idContacto, String email, String nombre, int telefono) {
+		super();
+		this.idContacto = idContacto;
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
 
-Seleccionamos todos los métodos que nos queremos llevar menos la declaración del atributo obviamente y finalizamos y ahí lo tenemos si ahora volvemos al servlet esta instrucción que antes daba un error bueno al contacto real directamente le podemos pasar todos los atributos que hemos obtenido de la recurres al método para que funcione exactamente igual que funcionaba antes porque de hecho la firma del método no ha cambiado respecto a como lo teníamos en la versión anterior.
+	public int getIdContacto() {
+		return this.idContacto;
+	}
 
-Vamos a eliminar contacto.
+	public void setIdContacto(int idContacto) {
+		this.idContacto = idContacto;
+	}
 
-Lo mismo vamos a inyectar aquí una referencia al objeto de la interfaz de negocio gestión contacto SJL local.
+	public String getEmail() {
+		return this.email;
+	}
 
-Por lo tanto esa instrucción ya sobra vamos guardando en el recuperarás lo mismo borramos eso e inyectamos
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-el objeto de la interfaz de negocio y por último nos quedaría en la inacción que en este caso no es gestión contactos sino gestión usuarios usuarios objeto que tenemos que inyectar en un control mayuscula o para importar lo que haya que importar y pues ya tendríamos creados los servlet adaptados con la inyección de dependencia JB para realizar las mismas tareas que realizaban antes.
+	public String getNombre() {
+		return this.nombre;
+	}
 
-Nos quedan algunos errores aquí por qué puede ser posible que se hayan quedado impunes antiguos de clases como si el dato que ya no existe lo mismo ocurriría si bien y posiblemente de la naturaleza a la que estaba hecha porque aunque la vista no hay que tocar absolutamente nada pero tal y como estaba hecha esta página de contactos JSP bien es posible que tenga por ahí algunos impor aunque no los utilizaba luego después para nada porque todo estaba hecho con un lenguaje J STL y expresiones él no utilizaba código Java aquí pero sí tenía unos por aquí que los tendría yo de versiones anteriores que antes no daban ningún problema o que no los utilizaba esa clase pero como ahora no existe problema los podemos borrar tranquilamente porque esas clases ese código Java no se va a utilizar en la JSP pues ya lo tenemos todo listo y se supone que el ejercicio funcionaría exactamente igual que antes vamos a ejecutar la página de login para autenticar nos seleccionamos un servidor Goldfish yo lo tengo arrancado si estuviera parado pues se iniciaría se iniciaría ahora está publicando la aplicación y en el momento que arranque el navegador aparece aquí el navegador tendremos la página de inicio una se habrá autenticado y si se ven los contactos que está efectivamente trabajando correctamente y haciendo las operaciones correctamente contra la base de datos diferencias.
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-Bueno insistir la lógica negociã y la hemos implementado NJ ves la sentira que son las mismas la capa de persistencia es la misma lo único es que ahora como estamos utilizando el JB es el acceso a los datos está haciendo a través de este caso las conexiones que está utilizando para sincronizar las operaciones contra la base de datos el motor de persistencia las está realizando a través de este data Ashur que hemos creado en el servidor de aplicaciones local han visto cómo implementar ya la lógica negociã NJ ves que es muy parecido a hacerlo con clases pero incluso con menos código como es.
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+}
+```
+
+*`Usuario.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the usuarios database table.
+ * 
+ */
+@Entity
+@Table(name="usuarios")
+@NamedQueries({
+   @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
+   @NamedQuery(name="Usuario.findByUserAndPwd", query="SELECT u FROM Usuario u Where u.usuario=?1 and u.password=?2")
+})
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUsuario;
+
+	private String password;
+
+	private String usuario;
+
+	public Usuario() {
+	}
+
+	public int getIdUsuario() {
+		return this.idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+}
+```
+
+**Modelo**
+
+*`GestionContactosEjbLocal.java`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Local;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import entidades.Contacto;
+
+@Local
+public interface GestionContactosEjbLocal {
+	
+	public void altaContacto(String nombre, String email, int telefono);
+	public void altacontacto(Contacto c);
+	public void eliminarContacto(int idContacto);
+	public void eliminarContactosPorEmail(String email);
+	public List<Contacto> recuperarContactos();
+	public Contacto buscarContactos(String email);
+						
+}
+```
+
+*`GestionContactosEjb.java`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import entidades.Contacto;
+
+/**
+ * Session Bean implementation class GestionContactosEjb
+ */
+@Stateless
+public class GestionContactosEjb implements GestionContactosEjbLocal {
+
+	@PersistenceContext(unitName="615-04_web_jpa")
+	EntityManager em;
+	public void altaContacto(String nombre, String email, int telefono) {
+		Contacto c = new Contacto(email, nombre, telefono);
+		
+		em.persist(c);
+	}
+
+	public void altacontacto(Contacto c) {
+		
+		em.persist(c);
+		
+	}
+	
+	public void eliminarContacto(int idContacto) {
+		
+		Contacto c = em.find(Contacto.class, idContacto);
+		
+		if(c != null) {
+		   em.remove(c);
+		}
+		
+	}
+	
+	public void eliminarContactosPorEmail(String email){
+		
+		Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+		qr.setParameter(1, email);
+		
+		qr.executeUpdate();
+		
+	}
+	
+	public List<Contacto> recuperarContactos(){
+		
+		/*Query qr = em.createQuery("Select c From Contacto c");
+		return (List<Contacto>)qr.getResultList();*/
+		TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+		return qr.getResultList();
+	}
+	
+	public Contacto buscarContactos(String email){
+				
+		String jpql = "Select c From Contacto c Where c.email = ?1";
+		TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+		qr.setParameter(1, email);
+		//return qr.getSingleResult();
+		return qr.getResultList().get(0);
+	}
+
+}
+```
+
+*`GestionUsuarioEjbLocal.java`*
+
+```java
+package modelo;
+
+import javax.ejb.Local;
+
+@Local
+public interface GestionUsuarioEjbLocal {
+	
+	boolean autenticar(String usuario, String pwd);
+
+}
+```
+
+*`GestionUsuarioEjb.java`*
+
+```java
+package modelo;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import entidades.Usuario;
+
+/**
+ * Session Bean implementation class GestionUsuarioEjb
+ */
+@Stateless
+public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
+
+	@PersistenceContext(unitName="615-04_web_jpa")
+	EntityManager em;
+	public boolean autenticar(String usuario, String pwd) {
+		EntityManager em = getEntityManager();
+		boolean res = false;
+		TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+		qr.setParameter(1, usuario);
+		qr.setParameter(2, pwd);
+		try {
+			qr.getSingleResult();
+			res = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return res;
+	}
+
+}
+```
+
+**Servlets**
+
+*`AltaContacto.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactosEjbLocal;
+
+/**
+ * Servlet implementation class AltaContacto
+ */
+@WebServlet("/AltaAction")
+public class AltaAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionContactosEjbLocal gcontactos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nombre=request.getParameter("nombre");
+		String email=request.getParameter("email");
+		int telefono=Integer.parseInt(request.getParameter("telefono"));
+		//creamos un objeto de la capa de lógica de negocio
+		//y llamamos al método encargado de hacer el alta
+		
+		gcontactos.altaContacto(nombre,email,telefono);
+		request.getRequestDispatcher("menu.html").forward(request, response);
+	}
+
+}
+```
+
+*`EliminarAction.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactos;
+import modelo.GestionContactosEjbLocal;
+
+/**
+ * Servlet implementation class EliminaContacto
+ */
+@WebServlet("/EliminarAction")
+public class EliminarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionContactosEjbLocal gcontactos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idContacto=Integer.parseInt(request.getParameter("idContacto"));
+		
+		gcontactos.eliminarContacto(idContacto);
+		request.getRequestDispatcher("RecuperarAction").forward(request, response);
+	}
+
+}
+
+```
+
+*`RecuperarAction.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Contacto;
+import modelo.GestionContactosEjbLocal;
+
+/**
+ * Servlet implementation class RecuperarAction
+ */
+@WebServlet("/RecuperarAction")
+public class RecuperarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionContactosEjbLocal gcontactos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<Contacto> contactos=gcontactos.recuperarContactos();
+		//guardamos contactos en un atributo de petición
+		request.setAttribute("contactos", contactos);
+		//trasnferencia de la petición
+		request.getRequestDispatcher("contactos.jsp").forward(request, response);
+	}
+
+}
+
+```
+
+*`LoginAction.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class LoginAction
+ */
+@WebServlet("/LoginAction")
+public class LoginAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionUsuariosEjbLocal gusuarios;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String user=request.getParameter("user");
+		String pwd=request.getParameter("pwd");
+		
+		if(gusuarios.autenticar(user, pwd)){
+			//guardamos el nombre de usuario en un atributo de sesión
+			HttpSession s=request.getSession();
+			s.setAttribute("user", user);
+			request.getRequestDispatcher("menu.html").forward(request, response);
+		}else{
+			request.getRequestDispatcher("login.html").forward(request, response);
+		}
+	}
+
+}
+```
+
+*`Controller.java`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String op = request.getParameter("op");
+		String url = "";
+		switch (op) {
+		case "doLogin":
+			url = "LoginAction";
+			break;
+		case "doAlta":
+			url = "AltaAction";
+			break;
+		case "doEliminar":
+			url = "EliminarAction";
+			break;
+		case "doRecuperar":
+			url = "RecuperarAction";
+			break;
+		case "toNuevo":
+			url = "nuevo.html";
+			break;
+		case "toMenu":
+			url = "menu.html";
+			break;
+
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+}
+```
+
+*`login.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="Controller?op=doLogin" method="post">
+		Usuario:<input type="text" name="user"/><br/>
+		Contraseña:<input type="password" name="pwd"/><br/>
+		<input type="submit" value="Enviar"/>
+	
+	</form>
+</body>
+</html>
+```
+
+*`menu.html`*
+
+```html
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <center>
+        <a href="Controller?op=toNuevo">Nuevo contacto</a><br/>
+        <a href="Controller?op=doRecuperar">Ver contactos</a><br/>
+    </center>
+    </body>
+</html>
+```
+
+*`nuevo.html`*
+
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>nuevo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+ 	function comprobar(){ 	
+ 		if(document.getElementById("nombre").value==""||
+ 			document.getElementById("email").value==""||
+ 			document.getElementById("edad").value==""){
+ 				alert("faltan datos");
+ 			return false;
+ 		}
+ 		else{
+ 			return true;
+ 		}
+ 		
+ 	}
+        function comprobarEdad(){
+            if(isNaN(document.getElementById("edad").value)){
+                alert("Edad debe ser numérico");
+                document.getElementById("edad").value="";
+            }
+        }
+</script>
+</head>
+<body>
+<form action="Controller?op=doAlta" method="post" onsubmit="return comprobar();">
+	Nombre:<input id="nombre" type="text" name="nombre"/>
+	<br/>
+	Email:<input id="email" type="text" name="email"/>
+	<br/>
+        Telefono:<input id="edad" onblur="comprobarEdad();" type="text" name="telefono"/>
+	<br/>
+	<input type="submit" value="Guardar"/>
+</form>
+</body>
+</html>
+```
+
+*`contactos.jsp`*
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="java.util.ArrayList,entidades.Contacto"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<c:set var="contactos" value="${requestScope.contactos}"/>
+	
+	<br/><br/><br/>
+	
+	<c:choose>
+	
+		<c:when test="${!empty contactos}">
+	
+			<table border="1">
+						<tr>
+							<th>Nombre</th>
+							<th>Email </th>
+							<th>Telefono</th>
+							<th></th>
+						</tr>
+						
+						<c:forEach var="cont" items="${contactos}">
+							<tr><td>${cont.nombre}</td>
+							<td>${cont.email}</td>
+							<td>${cont.telefono}</td>
+							<td><a href="Controller?op=doEliminar&idContacto=${cont.idContacto}">Eliminar</a></td></tr>
+						
+						
+						</c:forEach>
+						
+						
+						
+			</table>
+		</c:when>
+		<c:otherwise>
+			<h1>No hay contactos</h1>
+		</c:otherwise>
+	</c:choose>
+	<br/>
+	<br/>
+	<a href="Controller?op=toMenu">Menu</a>
+</body>
+</html>
+```
 
 # Autoevaluación IV 00:40
 
