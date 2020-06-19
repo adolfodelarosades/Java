@@ -51,61 +51,45 @@ En el siguiente listado te mostramos como quedaría la definición de atributos 
 
 ```java
 @Entity
-
 @Table(name = "Secciones")
-
 public class Seccion implements Serializable {
+   
+   private static final long serialVersionUID = 1L;
+   
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Integer idSeccion;
 
-    private static final long serialVersionUID = 1L;
+   private String seccion;
+   private String responsable;
+   private List<Producto> productos;
+   //resto de código: constructores y métodos getter y setter
 
-    @Id
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer idSeccion;
-
-    private String seccion;
-
-    private String responsable;
-
-     private List<Producto> productos;
-
-    //resto de código: constructores y métodos getter y setter
-
-    :
-
+   ...
+    
 }
 ```
  
-
 #### Entidad Producto
 
 ```java
 @Entity
-
 @Table(name = "Productos")
-
 public class Producto implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
 
-    @Id
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int idProducto;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private String nombre;
+   private double precio;
+   private String descripcion;
+   private Seccion seccion;
+   //resto de código: constructores y métodos getter y setter
 
-    private int idProducto;
-
-    private String nombre;
-
-    private double precio;
-
-    private String descripcion;
-
-    private Seccion seccion;
-
-    //resto de código: constructores y métodos getter y setter
-
-    :
+   ...
 
 }
 ```
@@ -120,13 +104,12 @@ Además de la definición de los atributos de relación, es necesario indicar ci
 
 En primer lugar, veremos cómo configurar el atributo de relación en la entidad del lado uno. Dicho atributo será de tipo colección y tendrá que estar definido con la anotación `@OneToMany`, que indica que un objeto de la clase actual está asociado al conjunto de objetos sobre el que se aplica la anotación.
 
- Esta anotación deberá incluir al menos el atributo *mappedBy*, en el que se indicará el nombre del atributo de relación de la entidad relacionada que contendrá el objeto de la entidad actual.
+Esta anotación deberá incluir al menos el atributo *mappedBy*, en el que se indicará el nombre del atributo de relación de la entidad relacionada que contendrá el objeto de la entidad actual.
 
 Con el ejemplo de la entidad Seccion lo veremos más claro; así tendría que quedar definido el atributo productos:
 
 ```java
 @OneToMany(mappedBy = "seccion")   
-
 private List<Producto> productos;
 ```
 
@@ -149,11 +132,9 @@ Así pues en nuestro ejemplo, el atributo *seccion* de la entidad Producto deber
 
 ```java
 @JoinColumn(name = "idSeccion", referencedColumnName = "idSeccion")
-
- @ManyToOne
-
- private Seccion seccion;
- ```
+@ManyToOne
+private Seccion seccion;
+```
 
 Al configurar las relaciones de este modo, cada vez que se obtenga un objeto de una entidad se obtendrá también el objeto u objetos de la entidad relacionada.
 
@@ -161,11 +142,8 @@ El siguiente bloque de código de ejemplo nos mostraría por pantalla el nombre 
 
 ```java
 Producto p=em.find(Producto.class,2222);
-
-If(p!=null){
-
+if(p!=null){
    System.out.println(“Sección: “+p.getSeccion().getSeccion());
-
 }
 ```
 
@@ -173,19 +151,15 @@ Este otro ejemplo nos muestra los nombres de todos los productos asociados a una
 
 ```java
 Query q=em.createQuery(“select e from Seccion e where e.idSeccion=?1”);
-
 q.setParameter(1,31);
 
 Seccion m=(Seccion)q.getSingleResult();
 
 //recupera los objetos Producto relacionados
-
 List<Producto> productos=m.getProductos();
 
 for(Producto p:productos){
-
-                System.out.println(“Producto: “+p.getNombre());
-
+   System.out.println(“Producto: “+p.getNombre());
 }
 ```
 
@@ -207,53 +181,39 @@ A la hora de definir las entidades, Cuenta dispondrá de un atributo colección 
 
 ```java
 @Entity
-
 @Table(name="Cuentas")
-
 public class Cuenta implements Serializable{
 
-                @Id
+   @Id
+   private int numeroCuenta;
+   
+   private double saldo;
+   private String tipoCuenta;
+   private List<Cliente> clientes;
+   //constructores y métodos setter getter
 
-                private int numeroCuenta;
-
-                private double saldo;
-
-                private String tipoCuenta;
-
-                private List<Cliente> clientes;
-
-                //constructores y métodos setter getter
-
-                :
+   ...
 
 }
 
 @Entity
-
 @Table(name="Clientes")
-
 public class Cliente implements Serializable{
 
-                @Id
+   @Id
+   private int dni;
 
-                private int dni;
+   private String nombre;
+   private String direccion;
+   private int telefono;
+   private List<Cuenta> cuentas;
+   //constructores y métodos setter getter
 
-                private String nombre;
-
-                private String direccion;
-
-                private int telefono;
-
-                private List<Cuenta> cuentas;
-
-                //constructores y métodos setter getter
-
-                :
+   ...
 
 }
 ```
  
-
 ### Configuración de la relación
 
 De cara a configurar la relación, tenemos que tener en cuenta que una de las entidades será la propietaria de la relación mientras que la otra será la entidad del lado inverso de la relación. Al tratarse del mismo tipo de relación en ambos sentidos, da igual cual elijamos como propietaria y cual como inversa. En nuestro ejemplo, elegiremos Cliente como entidad propietaria de la relación y Cuenta como entidad inversa.
@@ -262,7 +222,6 @@ En ambas entidades, el atributo que contiene la colección de objetos relacionad
 
 ```java
 @ManyToMany(mappedBy="cuentas")
-
 private List<Cliente> clientes;
 ```
 
@@ -277,13 +236,9 @@ En nuestro ejemplo, el atributo *cuentas* de la entidad Cliente debería estar d
 
 ```java
 @ManyToMany
-
 @JoinTable(name="Titulares",
-
-             joinColumns=@JoinColumn(name="idCliente",referencedColumnName="dni"),                                         inverseJoinColumns=@JoinColumn(name="idCuenta",
-
-                               referencedColumnName="numeroCuenta"))
-
+           joinColumns=@JoinColumn(name="idCliente",referencedColumnName="dni"),                inverseJoinColumns=@JoinColumn(name="idCuenta",
+           referencedColumnName="numeroCuenta"))
 private List<Cuenta> cuentas;
 ```
 
@@ -293,7 +248,6 @@ Teniendo las entidades relacionadas de esta manera, si, por ejemplo, quisiéramo
 String jpql="Select c From Cuenta c Where c.numeroCuenta=?1";
 
 TypedQuery<Cuenta> q=em.createQuery(jpql,Cuenta.class):
-
 q.setParameter(1,6666);
 
 Cuenta cuenta=q.getSingleResult();
@@ -301,9 +255,7 @@ Cuenta cuenta=q.getSingleResult();
 List<Cliente> titulares=cuenta.getClientes();
 
 for(Cliente cl:titulares){
-
    System.out.println(cl.getNombre());
-
 }
 ```
 
