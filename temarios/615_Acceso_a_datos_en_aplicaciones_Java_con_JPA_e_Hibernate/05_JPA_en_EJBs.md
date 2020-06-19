@@ -605,57 +605,152 @@ public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
 
 }
 ```
-AQUII
 
-Bien ese método queremos que sea expuesto también a través de la interfaz para que el cliente que son los Servlets puedan hacer uso del mismo. Podríamos 
+Bien ese método queremos que sea expuesto también a través de la interfaz para que el cliente, que son los Servlets puedan hacer uso del mismo. Podríamos incluirlo manualmente, pero vamos a ver como nos ayuda Eclipse para hacerlo. Para ello vamos dentro de la clase de implementación del EJB y con el botón derecho elegimos la opción `Refactor - Pull Up...`
 
-Para ello vamos aquí dentro de la clase de implementación de JB y con el botón derecho elegimos la opción refractor Pulau lo que queremos es llevarnos a esta interfaz que ya detecta como la implementa la clase ya que esta es la interfaz donde te quieres llevar la Declaración de los métodos que te indican esta lista.
+<img src="images/20-13.png">
 
-Autenticar que es el único que tenemos bien si se está el método directamente finalizamos y veremos como era dicho método aparecerá definido también declarado ya en la interfaz de negocio pues ya tenemos hecho un JB que implementa la lógica de negocio de la gestión de usuarios.
+lo que queremos es llevarnos a esta interfaz que ya detecta como la implementa la clase ya que esta es la interfaz donde te quieres llevar la Declaración de los métodos que te indican esta lista.
 
-Laclase gestión de usuarios podemos eliminarla tranquilamente ya no lo necesitamos.
+<img src="images/20-14.png">
 
-Vamos a hacer lo mismo con gestión contactos vamos a crear un segundo JB volvemos a los mismos pasos.
+Autenticar que es el único que tenemos bien si se está el método directamente finalizamos y veremos como era dicho método aparecerá definido también declarado ya en la interfaz de negocio pues ya tenemos hecho un EJB que implementa la lógica de negocio de la gestión de usuarios.
 
-New Order categoríade JB sesión Vin es el tipo de jre que vamos a crear son los que implementa la lógica de negocio.
+<img src="images/20-15.png">
 
-Modelo
+```java
+package modelo;
 
-gestión contactos JB y lo mismo interfaz local gestión contactos cuota local y no intercedido.
+import javax.ejb.Local;
 
-Fíjate aquí que no te lo comenten en la jornada anterior que dentro de lo que son sesión mil posteamos Stainless painful habitualmente Stainless que no mantienen el Estado es decir de una llamada a otra de un método de LJ.
+@Local
+public interface GestionUsuarioEjbLocal {
+	
+   boolean autenticar(String usuario, String pwd);
 
-No hay que mantener información dentro de lo que es el propio JB no contienen variables atributos para almacenar información.
+}
+```
 
-Esto permitirá que el proveedor del motor de DJ concretamente el contenedor JB Pues haga una gestión óptima de dicha instancia de LJG siempre que podamos Stainless si por lo que sea vamos a implementar una lógica de negocio que tienen que almacenar datos en atributos asociados a cada cliente que haga la llamada.
+La clase `GestionUsuarios` podemos eliminarla tranquilamente ya no la necesitamos.
 
-Entonces utilizaremos este bien o lo dejamos con la Stainless finalizamos se habrá creado de nuevo la clase junto con la interfaz y vamos a hacer lo mismo de antes es decir vamos a gestió en contacto nos vamos a llevar todos los métodos que teníamos ahí creados y los vamos a copiar a gestión contactos JRE el constructor lo podemos borrar lo que hace falta y de gestión usuarios JB Vamos a traernos la inyección de dependencia del Entity manager puesto que esa instrucción debe ser la misma que utilizamos en este JB Pues habrá que hacer exactamente lo mismo inyectar un atributo en JB gestión contactos entonces.
+Vamos a hacer lo mismo con `GestionContactos` vamos a crear un segundo EJB volvemos a los mismos pasos.
 
-Bueno pues ahora vamos a ver los retoques que tenemos que hacer aquí a nivel de los métodos de obtener el Entity manager nada porque ya se inyecta y en estos métodos que realizan tareas de acción.
+<img src="images/20-16.png">
 
-Aquí viene algo interesante que es lo que venimos comentando desde videos anteriores si es que el contenedor es JB se va a encargar de la gestión de la transaccionalidad.
+<img src="images/20-17.png">
 
-No necesitamos nosotros obtener el Entity transaction comenzar confirmar o rechazar una transacción.
+Fíjate aquí que no te lo comenten en la lección anterior que dentro de lo que son 
+`State Type` tenemos `Stateless`, `Stateful` y `Singleton`, habitualmente `Stateless`  que no mantienen el Estado, es decir de una llamada a otra de un método EJB no hay que mantener información dentro de lo que es el propio EJB, no contienen variables atributos para almacenar información, esto permitirá que el contenedor de EJB haga una gestión óptima de dicha instancia de EJBs, siempre que podamos `Stateless`, si por lo que sea vamos a implementar una lógica de negocio que tienen que almacenar datos en atributos asociados a cada cliente que haga la llamada utilizaremos `Stateless`, lo dejamos con la `Stateless` y finalizamos.
 
-Eso lo gestiona automáticamente el contenido de la jota.
 
-Por lo tanto aquí simplemente falta contacto será crear el objeto contacto y la praxis.
+Se habrán creado de nuevo la clase junto con la interfaz `GestionContactosEjb`, `GestionContactosEjbLocal` y vamos a hacer lo mismo de antes es decir vamos a `GestionContactos` nos vamos a llevar todos los métodos que teníamos ahí creados y los vamos a copiar a `GestionContactosEjb` el constructor lo podemos borrar no nos hace falta, vamos a incluir la gestión de dependencia de `EntityManager`, hacemos algunos retoques que tenemos que hacer a nivel de los métodos. Aquí viene algo interesante que es lo que venimos comentando desde lecciones anteriores, es que el contenedor EJB se va a encargar de la gestión de la transaccionalidad. No necesitamos nosotros obtener `EntityTransaction`, comenzar, confirmar o rechazar una transacción, eso lo gestiona automáticamente el contenedor de EJBs, por lo tanto en el método `altaContacto` simplemente se crear el objeto Contacto y se persiste punto, iniciar la transacción al principio, confirmarlo al final lo hace automáticamente el contenedor de EJB. Con los demas métodos es exactamente lo mismo. El código final de la clase EJB queda así:
 
-Punto inicial la transacción al principio confirmarlo al final lo hace automáticamente el contenedor es JB aquí es exactamente lo mismo.
+*`GestionContactosEjbLocal`*
 
-Simplemente un persigas.
+```java
+package modelo;
 
-Cómo es esto reduce bastante pues muchos de los métodos la lógica de negocio si ya estaba de por sí reducida por utilizar JPA el hecho de que la transacción la gestione automáticamente el contenedor.
+import java.util.List;
 
-JB pues hace que aún sea más simple la lógica de negocio.
+import javax.ejb.Local;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-Aquí lo mismo.
+import entidades.Contacto;
 
-En este caso eliminar también iniciamos una transacción.
+@Local
+public interface GestionContactosEjbLocal {
+	
+	public void altaContacto(String nombre, String email, int telefono);
+	public void altacontacto(Contacto c);
+	public void eliminarContacto(int idContacto);
+	public void eliminarContactosPorEmail(String email);
+	public List<Contacto> recuperarContactos();
+	public Contacto buscarContactos(String email);
+						
+}
+```
+*`GestionContactosEjb`*
 
-Confirmamos pues todo esto ya nada más que lo mismo iniciábamos una transacción con firmábamos pues todo esto como digo ya desaparecen desconocer las cuentas.
+```java
+package modelo;
 
-La lógica al negocio se reduce bastante al utilizar JBS.
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import entidades.Contacto;
+
+/**
+ * Session Bean implementation class GestionContactosEjb
+ */
+@Stateless
+public class GestionContactosEjb implements GestionContactosEjbLocal {
+
+	@PersistenceContext(unitName="615-04_web_jpa")
+	EntityManager em;
+	public void altaContacto(String nombre, String email, int telefono) {
+		Contacto c = new Contacto(email, nombre, telefono);
+		
+		em.persist(c);
+	}
+
+	public void altacontacto(Contacto c) {
+		
+		em.persist(c);
+		
+	}
+	
+	public void eliminarContacto(int idContacto) {
+		
+		Contacto c = em.find(Contacto.class, idContacto);
+		
+		if(c != null) {
+		   em.remove(c);
+		}
+		
+	}
+	
+	public void eliminarContactosPorEmail(String email){
+		
+		Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+		qr.setParameter(1, email);
+		
+		qr.executeUpdate();
+		
+	}
+	
+	public List<Contacto> recuperarContactos(){
+		
+		/*Query qr = em.createQuery("Select c From Contacto c");
+		return (List<Contacto>)qr.getResultList();*/
+		TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+		return qr.getResultList();
+	}
+	
+	public Contacto buscarContactos(String email){
+				
+		String jpql = "Select c From Contacto c Where c.email = ?1";
+		TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+		qr.setParameter(1, email);
+		//return qr.getSingleResult();
+		return qr.getResultList().get(0);
+	}
+
+}
+```
+
+
+
+
+Cómo se ve se el código se reduce bastante, pues muchos de los métodos de la Lógica de Negocio, si ya estaban de por sí reducida por utilizar JPA, el hecho de que la transacción la gestione automáticamente el contenedor de EJBs pues hace que aún sea más simple la Lógica de Negocio.
+
+
 
 Pues vamos a borrar gestión contactos y ya lo único que nos queda es utilizar esos J3 desde la capa cliente en este caso los controladores de acción vamos por servlet.
 
@@ -695,8 +790,8 @@ Autoevaluación IV
 
 1. Indica cual de las siguientes afirmaciones son EJBs es falsa:
    * El contenedor EJB gestiona de forma automática las transacciones
-   * La clase del EJB de estar anotada con @EJB
-   * Un EJB se compone de una clase y una interfaz :+1:
+   * La clase del EJB de estar anotada con @EJB :+1:
+   * Un EJB se compone de una clase y una interfaz 
    * Los EJBs encapsulan la lógica de negocio de una aplicación
 
 2. Para inyectar un EntityManager en un EJB se utiliza la anotación:
