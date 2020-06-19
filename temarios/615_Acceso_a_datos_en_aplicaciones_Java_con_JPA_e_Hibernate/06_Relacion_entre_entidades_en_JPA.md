@@ -100,7 +100,7 @@ Tanto en una como en otra entidad, deberíamos añadir también la pareja de mé
 
 Además de la definición de los atributos de relación, es necesario indicar cierta información de configuración al motor de persistencia para que sepa cómo obtener los objetos de las entidades relacionadas. Esta información se proporcionará a través de una serie de **anotaciones** que se colocarán delante de los atributos de relación.
 
-## Entidad del lado uno
+### Entidad del lado uno
 
 En primer lugar, veremos cómo configurar el atributo de relación en la entidad del lado uno. Dicho atributo será de tipo colección y tendrá que estar definido con la anotación `@OneToMany`, que indica que un objeto de la clase actual está asociado al conjunto de objetos sobre el que se aplica la anotación.
 
@@ -117,7 +117,7 @@ Como vemos, aquí *mappedBy* hace referencia al atributo “seccion” de la ent
 
 Como indicamos anteriormente, estos campos de colección pueden ser Collection, List o Set.
 
-## Entidad del lado muchos
+### Entidad del lado muchos
 
 La entidad del lado muchos es la propietaria de la relación, por ello la configuración del atributo de relación de esta entidad requiere algo más de trabajo, puesto que deberá indicarse en ella la información de relación. Así, en este atributo utilizaremos las siguientes anotaciones para la configuración de la relación
 
