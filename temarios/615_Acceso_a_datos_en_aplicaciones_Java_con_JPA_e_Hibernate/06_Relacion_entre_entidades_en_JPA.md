@@ -431,15 +431,15 @@ Lo ejecutamos y nos creara las tablas para esta base de datos.
 
 <img src="images/22-05.png">
 
-Tenemos las tablas `productos`, `secciones`, `sucursales` y `ventas`, las dos tablas de las que hablamos más dos tablas más que usaremos posteriormente.
+Tenemos las tablas `productos`, `secciones`, `sucursales` y `ventas`, las dos tablas de las que hablamos, más dos tablas adicionales que usaremos posteriormente.
 
+<img src="images/22-07.png">
 
+<img src="images/22-08.png">
 
+Partiendo de que tenemos esta base de datos `almacen` con esas dos tablas `productos` y `secciones` cómo crearíamos las entidades ya relacionadas utilizando el entorno de desarrollo Eclipse.
 
-
-
-
-Bueno pues entonces partiendo de que tenemos esta base de datos almacén con esas dos tablas cómo crearíamos las entidades ya relacionadas utilizando el entorno de desarrollo Eclipse.
+AQUIIII
 
 Vamos a crearnos un proyecto dinámico que vamos a llamar la opción almacén por ejemplo cómo posteriormente utilizaremos este proyecto para crear un ejercicio donde vamos a incorporar lógica de negocio implementada en pareja Babín ya vamos a coger aquí como servidor de aplicaciones en el que vamos a desplegar la aplicación el servidor las que ya directamente finalizamos y lo que vamos a hacer.
 
