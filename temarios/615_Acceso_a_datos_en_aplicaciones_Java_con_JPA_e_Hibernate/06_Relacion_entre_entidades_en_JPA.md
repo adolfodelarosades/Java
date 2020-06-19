@@ -261,7 +261,7 @@ for(Cliente cl:titulares){
 
 # 22 Crear entidades relacionadas parte I 08:20
 
-<img src="images/22-01">
+<img src="images/22-01.png">
 
 Después de estudiar las relaciones entre entidades en la lección anterior, a continuación te voy a enseñar cómo crear entidades relacionadas utilizando el entorno de desarrollo Eclipse.
 
