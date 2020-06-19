@@ -57,7 +57,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 * 20 Ejercicio práctico III 17:57
 * Autoevaluación IV 00:40
 
-#### 6. Relación entre entidades en JPA 47:26
+#### 6. [Relación entre entidades en JPA](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/06_Relacion_entre_entidades_en_JPA.md) 47:26
 
 * 21 Relación entre entidades 07:43
 * 22 Crear entidades relacionadas parte I 08:20
