@@ -260,6 +260,75 @@ for(Cliente cl:titulares){
 ```
 
 # 22 Crear entidades relacionadas parte I 08:20
+
+<img src="images/22-01">
+
+Después de estudiar las relaciones entre entidades en la lección anterior, a continuación te voy a enseñar cómo crear entidades relacionadas utilizando el entorno de desarrollo Eclipse.
+
+Para ello vamos a partir de la base de datos que te mostraba en la lección anterior relativa a un almacén de productos donde teníamos dos tablas una tabla de secciones en la que teníamos registradas las secciones en las que se van a organizar los productos del almacén identificador de sección que es en la PRIMARY KEY nombre de la sección y responsable mientras que en la Tabla Productos tendríamos el identificador de producto nombre la sección a la que pertenece el precio y la descripción sería una relación uno a de secciones a productos muchos a uno de productos secciones.
+
+Estas otras dos tablas pues de momento vamos a ignorarlas porque no pertenecen a lo que queremos presentarte lo que te quiero enseñar en esta lección.
+
+Bueno pues entonces partiendo de que tenemos esta base de datos almacén con esas dos tablas cómo crearíamos las entidades ya relacionadas utilizando el entorno de desarrollo Eclipse.
+
+Vamos a crearnos un proyecto dinámico que vamos a llamar la opción almacén por ejemplo cómo posteriormente utilizaremos este proyecto para crear un ejercicio donde vamos a incorporar lógica de negocio implementada en pareja Babín ya vamos a coger aquí como servidor de aplicaciones en el que vamos a desplegar la aplicación el servidor las que ya directamente finalizamos y lo que vamos a hacer.
+
+Lo primero para incorporar la característica JPA a nuestro proyecto nos vamos a ir a través del botón derecho a las propiedades y en Project Faces activaremos JPA donde la configuración disponible ya viene por defecto.
+
+Eclipse Lihn que por cierto este es el motor de persistencia que hemos utilizado en los ejemplos realizados hasta ahora.
+
+Pero si vamos a desplegar la aplicación en un servidor de aplicaciones Graphics Goldfish también incorpora un motor de persistencia compatible con JPA o sea que podríamos seguir utilizando este o bien lo que conocemos como Class System Library que sería el motor de Fish es indiferente en cualquier caso es todo lo que vamos a ver funcionaría lógicamente tanto con uno como con otro.
+
+Pero bueno vamos a dejar el eclipse Linker que hemos utilizado hasta ahora bien perfecto porque ya tenemos activado la característica JPA.
+
+Ahora vamos a proceder como siempre que queremos generar entidades a irnos a la opción botón derecho dentro del proyecto JPA Tools generar entidades desde tablas.
+
+Entonces aquí lo que vamos a tener que hacer es crear una conexión a esa nueva base de datos que hemos creado es una base de datos de mayor SQL vamos a llamar a la conexión por ejemplo almacén Maire SQL el siguiente paso vamos a elegir el Driver Driver para mayor secuela que esto ya lo tenemos creado ese trailer de otros ejercicios ya podemos seguir utilizando porque al fin y al cabo es el mismo.
+
+Se trata de mayor secuela misma base de datos y el nombre de la base datos almacén almacena que también y los datos de conexión credenciales Rut y Errota.
+
+Hacemos un test de conexión para comprobar que efectivamente todo es correcto y finalizamos entonces aquí la lista de esquemas de ver aparecer el nombre de la base de datos y todas sus tablas.
+
+Nosotros vamos a crear entidades para las tablas productos y secciones y además la vamos.
+
+Las queremos relacionar bien pues eso lo vamos a hacer precisamente en el siguiente paso.
+
+Este paso que nunca hemos hecho nada hasta el momento porque nunca hemos tenido la necesidad de crear relaciones entre entidades pero ahora llega el momento.
+
+Por lo tanto vamos a añadir aquí una nueva asociación de tablas que es como llama eclipse la relación entre entidades.
+
+Se puede puede ser una relación simple uno a muchos muchos a uno o asociación digamos compleja muchos a muchos.
+
+Nuestro caso se trataba de uno a muchos y muchos a uno por lo tanto le dejaremos la opción simple.
+
+Elegimos una de las tablas o secciones por ejemplo tabla dos productos y en el siguiente paso vamos a indicar de ambas tablas cuál es el campo común la columna común ambas tablas a través del botón adrede por defecto el indica que en secciones sería de sección y en productos.
+
+Evidentemente no pueden ser descripción sino que se también la sección la columna que permite identificar a qué sección pertenece cada producto ser la columna común de ambas tablas en el siguiente paso ya debemos elegir exactamente qué tipo de relación queremos entre esas dos entidades que vamos a generar a partir de esas tablas pueden ser muchos a uno de cada producto le corresponden muchas secciones no es el caso sino uno a muchos cada sección le corresponden muchos productos que obviamente se traducirá en el lado de producto de una relación tipo muchos a uno muchos productos una sección pues una vez ya elegido esto finalizamos aparece aquí la información de la relación gráficamente que si pulsamos sobre ella nos indica las propiedades simplemente que hemos configurado.
+
+Si tuviéramos que cambiar algo sería aquí donde lo podríamos hacer no tendríamos que borrarla y volver a crear sino que aquí podríamos hacer los cambios que necesitase.
+
+Pues en el siguiente paso no le demos indicar ya los datos que normalmente indicamos no vamos a crear entidades a partir de las tablas.
+
+La generación de claves aquí de momento no decimos nada y luego sólo vamos a indicar uno por uno en el paso siguiente y si queremos que las entidades se generen en el paquete entidades muy importante ahora porque como se trata de asociación de uno a muchos muchos a uno va a haber entidades que tendrán campos de colección.
+
+Debemos indicar si queremos que esas colecciones sean de tipo OSEP o Licks.
+
+Habitualmente es el que se suele utilizar bien en el siguiente paso entidad productos Tabla Productos aquí nombre de la entidad producto generación de clave identidad tablas secciones nombre de la clase sección o secciones quitado la S.
+
+Pero obviamente en singular secciones serían sección y la generación de clave también es identidad que analizamos y ya tenemos nuestras entidades generales y relacionadas.
+
+Vamos a comprobarlo.
+
+Empezamos por la entidad sección la del lado 1 y aquí veremos a partir de las anotaciones clásicas.
+
+Pues efectivamente vemos ese nuevo atributo productos que contienen la colección de productos asociados a esta sección anotada con arroba o en Tumen y en Paperboy el nombre del atributo de la otra entidad de producto que contiene el objeto secciona asociado a puestos secciones.
+
+No podemos cambiar o lo podemos dejar así nada vamos a ver esa entidad producto ya veremos que tenemos pues efectivamente un atributo de tipo sección o secciones lo ha llamado y anotado con arroba mérito a través de un club como ya explicamos en la lección anterior se establece el nombre de las columnas reglas que definen esa relación entre las tablas Name y referentes con name aquí directamente como ambas se llaman igual.
+
+Basta con indicar el atributo name de sección para saber que ambas columnas con ese mismo nombre van a ser las que permiten identificar los objetos asociados a cada una de las otras entidades de la tabla relacionada.
+
+Por lo tanto ya tenemos las entidades generadas con toda la información de configuración correspondiente a sus relaciones.
+
 # 23 Crear entidades relacionadas parte 2 08:41
 # 24 Ejercicio práctico IV parte I 07:19
 # 25 Ejercicio práctico IV parte 2 01:57
