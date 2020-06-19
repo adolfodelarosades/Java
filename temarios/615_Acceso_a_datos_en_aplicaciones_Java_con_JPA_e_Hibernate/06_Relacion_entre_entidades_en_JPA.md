@@ -433,31 +433,101 @@ Lo ejecutamos y nos creara las tablas para esta base de datos.
 
 Tenemos las tablas `productos`, `secciones`, `sucursales` y `ventas`, las dos tablas de las que hablamos, más dos tablas adicionales que usaremos posteriormente.
 
+<img src="images/22-09.png">
+
+<img src="images/22-10.png">
+
 <img src="images/22-07.png">
 
 <img src="images/22-08.png">
 
 Partiendo de que tenemos esta base de datos `almacen` con esas dos tablas `productos` y `secciones` cómo crearíamos las entidades ya relacionadas utilizando el entorno de desarrollo Eclipse.
 
-AQUIIII
+Vamos a crearnos un proyecto Web dinámico que vamos a llamar `615-05_relacion_almacen`, cómo posteriormente utilizaremos este proyecto para crear un ejercicio donde vamos a incorporar Lógica de Negocio implementada en EJB ya vamos a coger aquí como servidor de aplicaciones GlassFish en el que vamos a desplegar la aplicación el servidor GlassFish.
 
-Vamos a crearnos un proyecto dinámico que vamos a llamar la opción almacén por ejemplo cómo posteriormente utilizaremos este proyecto para crear un ejercicio donde vamos a incorporar lógica de negocio implementada en pareja Babín ya vamos a coger aquí como servidor de aplicaciones en el que vamos a desplegar la aplicación el servidor las que ya directamente finalizamos y lo que vamos a hacer.
+<img src="images/22-11.png">
 
-Lo primero para incorporar la característica JPA a nuestro proyecto nos vamos a ir a través del botón derecho a las propiedades y en Project Faces activaremos JPA donde la configuración disponible ya viene por defecto.
+<img src="images/22-12.png">
 
-Eclipse Lihn que por cierto este es el motor de persistencia que hemos utilizado en los ejemplos realizados hasta ahora.
+Ya directamente finalizamos y lo primero es convertir nuestro proyecto a un proyecto Maven para poder incluir el driver de MySQL.
 
-Pero si vamos a desplegar la aplicación en un servidor de aplicaciones Graphics Goldfish también incorpora un motor de persistencia compatible con JPA o sea que podríamos seguir utilizando este o bien lo que conocemos como Class System Library que sería el motor de Fish es indiferente en cualquier caso es todo lo que vamos a ver funcionaría lógicamente tanto con uno como con otro.
+<img src="images/22-20.png">
 
-Pero bueno vamos a dejar el eclipse Linker que hemos utilizado hasta ahora bien perfecto porque ya tenemos activado la característica JPA.
+<img src="images/22-21.png">
 
-Ahora vamos a proceder como siempre que queremos generar entidades a irnos a la opción botón derecho dentro del proyecto JPA Tools generar entidades desde tablas.
+Modificamos el archivo `pom.xml` para incluir el Driver MySQL.
 
-Entonces aquí lo que vamos a tener que hacer es crear una conexión a esa nueva base de datos que hemos creado es una base de datos de mayor SQL vamos a llamar a la conexión por ejemplo almacén Maire SQL el siguiente paso vamos a elegir el Driver Driver para mayor secuela que esto ya lo tenemos creado ese trailer de otros ejercicios ya podemos seguir utilizando porque al fin y al cabo es el mismo.
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-05_relacion_almacen</groupId>
+	<artifactId>615-05_relacion_almacen</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>615-05_relacion_almacen</name>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+</project>
+```
 
-Se trata de mayor secuela misma base de datos y el nombre de la base datos almacén almacena que también y los datos de conexión credenciales Rut y Errota.
+Lo segundo que vamos a hacer para incorporar la característica JPA a nuestro proyecto, nos vamos a ir a través del botón derecho a las propiedades y en Project Faces activaremos JPA.
 
-Hacemos un test de conexión para comprobar que efectivamente todo es correcto y finalizamos entonces aquí la lista de esquemas de ver aparecer el nombre de la base de datos y todas sus tablas.
+<img src="images/22-13.png">
+
+Debemos pulsar en `Futher Configuration Availible`
+
+<img src="images/22-14.png">
+
+Donde la configuración disponible ya viene por defecto Eclipse Link que por cierto este es el motor de persistencia que hemos utilizado en los ejemplos realizados hasta ahora, pero si vamos a desplegar la aplicación en un servidor de aplicaciones GlassFish, GlassFish también incorpora un motor de persistencia compatible con JPA o sea que podríamos seguir utilizando este o bien lo que conocemos como GlasFish System Library que sería el motor de GlassFish, es indiferente, en cualquier caso vamos a ver que funcionaría lógicamente tanto con uno como con otro. Vamos a dejar Eclipse Link que hemos utilizado hasta ahora, bien perfecto porque ya tenemos activado la característica JPA.
+
+Ahora vamos a proceder como siempre que queremos generar entidades a irnos a la opción botón derecho dentro del proyecto, JPA Tools - Generate entities from Tables ..., generar entidades desde tablas.
+
+<img src="images/22-15.png">
+
+<img src="images/22-16.png">
+
+Entonces aquí lo que vamos a tener que hacer es crear una conexión a esa nueva base de datos que hemos creado, es una base de datos de MySQL
+
+<img src="images/22-17.png">
+
+vamos a llamar a la conexión por ejemplo `almacen_mysql`
+
+<img src="images/22-18.png">
+
+en el siguiente paso vamos a elegir el Driver `driver_para_mysql` que esto ya lo tenemos creado ese Driver de otros ejercicios, podemos seguir utilizando porque al fin y al cabo es el mismo, se trata de MySQL, indicamos el nombre de la base de datos, la URL y las credenciales.
+
+<img src="images/22-19.png">
+
+Hacemos un test de conexión para comprobar que efectivamente todo es correcto
+
+
+y finalizamos entonces aquí la lista de esquemas de ver aparecer el nombre de la base de datos y todas sus tablas.
 
 Nosotros vamos a crear entidades para las tablas productos y secciones y además la vamos.
 
