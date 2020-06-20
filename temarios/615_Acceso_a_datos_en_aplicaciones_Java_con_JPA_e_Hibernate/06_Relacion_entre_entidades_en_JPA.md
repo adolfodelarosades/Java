@@ -1275,9 +1275,7 @@ En la entidad `Cliente` nos ha puesto efectivamente un atributo con la lista de 
 private List<Cuenta> cuentas;
 ```
 
-Se supone que entonces serían en `Cuenta` donde tendríamos la información de configuración de la relación. 
-
-Si vemos `Cuenta`.
+Se supone que entonces serían en `Cuenta` donde tendríamos la información de configuración de la relación. Si vemos `Cuenta`.
 
 *`Cuenta`*
 
@@ -1349,7 +1347,7 @@ public class Cuenta implements Serializable {
 }
 ```
 
-Resulta que sí tenemos aquí el atributo `clientes` con la lista de objetos clientes relacionados, aquí tendría que estar la información de configuración, pero no está, por algún motivo que tampoco se explicar, el asistente no es capaz de generar y es aquí donde nos marca el error.
+Resulta que sí tenemos aquí el atributo `clientes`, con la lista de objetos clientes relacionados, aquí tendría que estar la información de configuración, pero no está, por algún motivo que tampoco se explicar, el asistente no es capaz de generar y es aquí donde nos marca el error.
 
 ```java
 //bi-directional many-to-many association to Cliente
@@ -1362,7 +1360,7 @@ private List<Cliente> clientes;
 
 entonces eso ya lo tenemos que hacer nosotros a mano.
 
-En `Cliente` que es la entidad que elegimos como propietaria de la relación vamos a cambiar esto:
+En `Cliente` que es la entidad que elegimos como propietaria, cuando explicamos todo esto en la lección anterior, la lección correspondiente a las relaciones entre entidades, aquí en `Cliente` concretamente en este atributo `cuentas`, la colección cuenta, es donde vamos a cambiar esto:
 
 ```java
 //bi-directional many-to-many association to Cuenta
@@ -1380,18 +1378,206 @@ Por esto:
 private List<Cuenta> cuentas;
 ```
 
-Cuando explicamos todo esto en la lección anterior, la lección correspondiente a las relaciones entre entidades, aquí en `Cliente` concretamente en este atributo `cuentas` la colección cuenta donde tenemos toda la información de la entable y inversión.
+Hemos anotado el atributo `cuentas` con `@ManyToMany` y luego con la anotación `@JoinTable` indicamos cual la tabla de Join en este caso `Titulares` y la relación de la tabla de `Titulares` con la tabla de `Clientes` con el atributo `joinColumn` y la relación entre ambas las tablas de `Titulares` con la tabla de `Cuentas` con el atributo `inverseJoinColumn`.
 
-Bueno pues os voy a hacer es que voy a copiar esto directamente y me lo voy a llevar a mi entidad cliente que como digo es la que hemos elegido como propietaria de la relación así que vamos a notar el atributo cuentas con todo eso me bitumen y rentable.
+Y en la Entidad Cuenta tenemos que cambiar esto:
 
-Cuál es el nombre de la tabla de Yeung con incólumes Inverse en columns.
 
-Las relaciones entre ambas tablas tanto del lado de la tabla de clientes con la tabla de titulares como con la tabla de cuenta con la tabla de titulares y la otra entidad cuenta simplemente dejaríamos el Tumini y con el Vamos a ver aquí cómo quedaría.
+```java
+//bi-directional many-to-many association to Cliente
+@ManyToMany
+@JoinColumn(name="numeroCuenta")
+private List<Cliente> clientes;
+```
 
-En este caso si el martes voy indicando cuál es el nombre del atributo de la otra entidad que contiene los objetos de ésta y ahora pues ya tenemos completo este que ya no necesitamos y ya lo tenemos completamente relacionado ambas entidades ahora sí están relacionadas.
+Por 
 
-Muchos a muchos correctamente ya podríamos operar con ellas.
+```java
+//bi-directional many-to-many association to Cliente
+@ManyToMany(mappedBy="cuentas")
+private List<Cliente> clientes;
+```
 
+El error desaparece ahora tenemos completamente relacionada ambas entidades, ahora si estan relacionadas Muchos a Muchos correctamente ya podríamos operar con ellas.
+
+### :computer: Código Completo - 615-06_relacion_bancadb
+
+Este código realmente no hace nada, así como esta.
+
+<img src="images/23-39.png">
+
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-06_relacion_bancadb">
+		<class>entidades.Cliente</class>
+		<class>entidades.Cuenta</class>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`Cliente.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+
+/**
+ * The persistent class for the clientes database table.
+ * 
+ */
+@Entity
+@Table(name="clientes")
+@NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int dni;
+
+	private String direccion;
+
+	private String nombre;
+
+	private int telefono;
+
+	//bi-directional many-to-many association to Cuenta
+	@ManyToMany
+	@JoinTable(name = "Titulares", 
+	joinColumns = @JoinColumn(name="idCliente", referencedColumnName = "dni"),
+	inverseJoinColumns = @JoinColumn(name="idCuenta", referencedColumnName = "numeroCuenta"))
+	private List<Cuenta> cuentas;
+
+	public Cliente() {
+	}
+
+	public int getDni() {
+		return this.dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Cuenta> getCuentas() {
+		return this.cuentas;
+	}
+
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
+	}
+
+}
+```
+
+*`Cuenta.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the cuentas database table.
+ * 
+ */
+@Entity
+@Table(name="cuentas")
+@NamedQuery(name="Cuenta.findAll", query="SELECT c FROM Cuenta c")
+public class Cuenta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int numeroCuenta;
+
+	private double saldo;
+
+	private String tipocuenta;
+
+	//bi-directional many-to-many association to Cliente
+	@ManyToMany(mappedBy="cuentas")
+	private List<Cliente> clientes;
+
+	public Cuenta() {
+	}
+
+	public int getNumeroCuenta() {
+		return this.numeroCuenta;
+	}
+
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+
+	public double getSaldo() {
+		return this.saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getTipocuenta() {
+		return this.tipocuenta;
+	}
+
+	public void setTipocuenta(String tipocuenta) {
+		this.tipocuenta = tipocuenta;
+	}
+
+	public List<Cliente> getClientes() {
+		return this.clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+}
+```
 
 ********
 
