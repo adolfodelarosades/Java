@@ -1604,6 +1604,81 @@ public class Cuenta implements Serializable {
 ```
 
 # 24 Ejercicio práctico IV parte I 07:19
+
+<img src="images/24-01.png">
+
+<img src="images/24-02.png">
+
+Bueno pues después de haber visto cómo crear entidades relacionadas utilizando Eclipse, qué te parece si hacemos una aplicación donde pongamos en práctica lo que hemos estudiado la idea se trataría de desarrollar una aplicación Web en la que vamos a trabajar con la base de datos de almacén la que hemos creado las relaciones a muchos muchos a uno anteriormente y se trataría de tener una página inicial con un enlace que nos daría acceso a una página en la que podríamos seleccionar la sección cuyos productos queremos consultar es una aplicación para consulta de productos.
+
+Si seleccionamos una sección al pulsar el botón Ver productos veríamos los productos que pertenecen a dicha sección su nombre y precio y descripción tendríamos también una opción todos que al seleccionarlo nos mostraría los productos de todas las secciones.
+
+En esta tercera página habría un enlace para volver otra vez a la página de selección de sección.
+
+Bien pues vamos a ver en el entorno de desarrollo Eclipse cómo se desarrollaría dicha aplicación.
+
+Yo ya la tengo desarrollada.
+
+Realmente se trata de seguir los mismos pasos que hemos seguido los ejercicios anteriores y centrarnos en lo que es la lógica de negocio JPA entonces vamos a ello.
+
+Realmente he partido del ejercicio de la relación almacén que teníamos del vídeo anterior.
+
+Lo he renombrado como 0 5 ejercicio práctico 4.
+
+Y bueno pues en esas entidades que ya teníamos relacionadas producto sección de uno a muchos y de muchos a uno le hemos añadido ya la capa de persistencia realmente y lo hemos añadido pues todo lo que es la Lógica de Negocio el modelo el controlador con los servlet y las vistas paginas HTML y JSP.
+
+Pero vamos a centrarnos en el modelo que es la lógica de negocio JPA que accede a esa capa de persistencia y que debe ofrecer dicha funcionalidad en primer lugar te voy a enseñar los métodos que deberías poner la Lógica de Negocio a través de la interfaz de LJG La interfaz de negocio obviamente tendríamos que tener un método que nos devuelva todas las secciones para poder mostrarlas en la lista de selección de secciones otro método que nos devolvería todos los productos para el caso de que elijamos qué queremos ver todos los productos y un método último que es digamos en el que más nos interesa por el tema de las relaciones que nos devolvería la lista de productos asociados a una determinada sección un determinado código versación vamos a ver el código ampliamos aquí y puedes obtener secciones y obtener productos pues realmente son muy sencillos porque realmente utilizamos lo que ya hemos visto en lecciones anteriores.
+
+Aprovechamos las Lamet que cree que crea automáticamente Eclipse cuando creamos las entidades de selección de todas las secciones en este caso selección de todos los productos creamos un Taipe QR llamada results simplemente vamos a centrarnos en este método que es el más interesante.
+
+Cómo podríamos obtener la lista de productos de una determinada sección A partir de su código.
+
+Podríamos construir esta J.P. se LTP fue un producto Wer como el la columna y de sección forma parte de la entidad producto pues podríamos establecer esta condición pero las entidades están relacionadas como están relacionadas.
+
+Lo primero es que este campo de sección ya no lo tenemos en la entidad producto tendríamos el campo o atributo sección y si podríamos poner Sección Punto y sección esa sería la forma de hacerlo pero ya que las tenemos relacionadas vamos a aprovecharnos de esa relación.
+
+No vamos a necesitar esta instrucción J.P. QL no la vamos a necesitar.
+
+Por qué Podemos directamente hacer una búsqueda simple de la sección A partir de su primary key cómo la sección está relacionada con productos ya trae la lista de productos asociados.
+
+Sería simplemente una vez que ya tenemos el objeto sección llamada El método de productos que nos devuelve todos los productos que tiene esa sección de asociados.
+
+Gracias a la relación automáticamente al hacer la búsqueda de la sección vienen con ella todos los objetos de las entidades.
+
+En este caso de la entidad relacionada.
+
+Así de simple sería.
+
+Y esto es lo que nos facilita enormemente el trabajo y la lógica de negocio en muchas aplicaciones donde necesitamos aprovecharnos de la relación.
+
+Esto sería lo que es la parte JPA lo servlet bueno pues tendríamos el controlador por un lado productos Auction que se encargan de recuperar el parámetro que viene de la página HTML con la sección elegida.
+
+Si es cero es que a pedido todos llamamos a un método obtener productos si es distinto de cero es que a pedido los productos de una determinada sección y al final pasamos el control a la página de productos para que los enseñes controlador de las secciones que es el que es llamado cuando queremos entrar en la página de donde aparece la lista de secciones pues debe recuperar todas las secciones o guardarlo también en un atributo de petición y pasar el control a las clases presenciales.
+
+Este código no es exactamente objetivo de este curso porque realmente esto ya no es JPA.
+
+No te preocupes porque la sección de recursos adicionales te lo vas a poder descargar porque yo ya tengo este proyecto ya creado y está dentro de la lección y te lo puedes descargar para examinarlo tranquilamente probarlo etc..
+
+En las páginas HTML y JSP se utilizan LJ STL utilizan etiquetas HTML en fin algo ya propio de lo que es la tecnología JSP y lo único bueno te voy a enseñar el pomme XML que es porque este proyecto lo hemos convertido en proyecto Maven para poder incluir estas dependencias tanto Ojota STL como del driver para no tener que incorporarlo explícitamente.
+
+Esto ya lo hemos visto en algún otro proyecto donde hemos utilizado Maven y por último así mencionarte el persiste en XML pues al crear las entidades las entidades ya se han generado se han incluido automáticamente dentro del archivo.
+
+Eso sí el Data Suhr JDBC almacén de S.
+
+Este es un data Sohr que ha habido que crear homogéneamente en el servidor de aplicaciones apuntando a la base de datos como ya te explique en la lección correspondiente a la creación de la tasó el caso es que volviendo otra vez al tema de las relaciones entre entidades has visto cómo efectivamente ha simplificado bastante la lógica de negocio.
+
+Pero bueno pongamos otro caso imaginamos que imagínate que queremos también incluir un método que nos que queremos que nos devuelva la sección a la que pertenece un determinado producto a partir de su nombre.
+
+Bueno pues gracias a la relación yo puedo hacer una búsqueda directa del producto que cumple la condición no necesito hacer uniones entre las L.T entre las entidades porque directamente buscando el producto automáticamente una vez que ya no encuentro esto sería el método que me devuelve el producto que Singhal resulta como me trae la sección relacionada directamente llamando a su método.
+
+Obtengo el objeto acción y ya lo puedo devolver directamente.
+
+Es decir simplifica la relación enormemente pues parte de la lógica de negocio de las aplicaciones.
+
+El hecho de que traernos una entidad nos venga ya con sus objetos relacionados.
+
+
+
 # 25 Ejercicio práctico IV parte 2 01:57
 # 26 joins 05:53
 # 27 Ejercicio práctico V 06:02
