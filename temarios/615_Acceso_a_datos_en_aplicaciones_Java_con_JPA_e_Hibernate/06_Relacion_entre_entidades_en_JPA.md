@@ -931,8 +931,204 @@ public class Producto implements Serializable {
 }
 ```
 
-
 # 23 Crear entidades relacionadas parte 2 08:41
+
+En esta nueva lección después de haber explicado cómo crear una relación Una a Muchos - Muchos a Uno entre entidades a través de Eclipse, vamos a ver ahora cómo crear una relación Muchos a Muchos y vamos a utilizar el ejemplo de base de datos que vimos en la lección anterior.
+
+Lo primero vamos a irnos a Workbeanch donde vamos a crear una nueva conexión de base de datos llamada `bancadb`.
+
+<img src="images/23-01.png">
+
+<img src="images/23-02.png">
+
+<img src="images/23-03.png">
+
+Entramos a esa nueva conexión para asignarle el password con:
+
+`ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';`
+
+<img src="images/23-04.png">
+
+Vamos a ejecutar el siguiente Script para crear la BD `bancadb`.
+
+```sql
+--
+-- Create schema bancabd
+--
+
+CREATE DATABASE IF NOT EXISTS bancabd;
+USE bancabd;
+
+--
+-- Definition of table `clientes`
+--
+
+DROP TABLE IF EXISTS `clientes`;
+CREATE TABLE `clientes` (
+  `dni` int(10) unsigned NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `direccion` varchar(45) NOT NULL,
+  `telefono` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`dni`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clientes`
+--
+
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` (`dni`,`nombre`,`direccion`,`telefono`) VALUES 
+ (1111,'Pepito','c/marte',1111),
+ (2222,'Alicia','c/ jupiter',2222),
+ (3333,'Marta','c/venus',3333);
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+
+
+--
+-- Definition of table `cuentas`
+--
+
+DROP TABLE IF EXISTS `cuentas`;
+CREATE TABLE `cuentas` (
+  `numeroCuenta` int(10) unsigned NOT NULL,
+  `saldo` double NOT NULL,
+  `tipocuenta` varchar(45) NOT NULL,
+  PRIMARY KEY  (`numeroCuenta`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cuentas`
+--
+
+/*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
+INSERT INTO `cuentas` (`numeroCuenta`,`saldo`,`tipocuenta`) VALUES 
+ (1000,300,'ahorro'),
+ (2000,3450,'ahorro'),
+ (3000,670,'recibos'),
+ (4000,880,'ahorro'),
+ (5000,6700,'recibos');
+/*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
+
+
+--
+-- Definition of table `titulares`
+--
+
+DROP TABLE IF EXISTS `titulares`;
+CREATE TABLE `titulares` (
+  `idCuenta` int(10) unsigned NOT NULL,
+  `idCliente` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`idCuenta`,`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `titulares`
+--
+
+/*!40000 ALTER TABLE `titulares` DISABLE KEYS */;
+INSERT INTO `titulares` (`idCuenta`,`idCliente`) VALUES 
+ (1000,3333),
+ (1000,5555),
+ (2000,1111),
+ (2000,3333),
+ (3000,1111),
+ (4000,2222),
+ (5000,4444);
+/*!40000 ALTER TABLE `titulares` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+```
+
+Al ejecutar el Script anterior se crea la base de datos `bancadb` y las tablas `clientes`, `cuentas` y `titulares`
+
+<img src="images/23-05.png">
+
+<img src="images/23-06.png">
+
+<img src="images/23-07.png">
+
+<img src="images/23-08.png">
+
+La base datos se llama `bancadb` donde tenemos una tabla de `clientes`
+
+<img src="images/23-09.png">
+
+con los datos registrados de todos los clientes DNI, nombre, dirección y teléfono.
+
+La tabla `cuentas` 
+
+<img src="images/23-10.png">
+
+que son las cuentas de esos clientes el número de cuenta, saldo o el tipo de cuenta y luego la tabla `titulares` tabla intermedia o joing
+
+<img src="images/23-11.png">
+
+que relaciona las Foreign Keys de cada una de las tablas principales de modo que podamos establecer esa relación Muchos a Muchos entre `clientes` y `cuentas` que como vemos la clave primaria de esta tabla intermedia sería la combinación de ambas claves Foreign Keys el `idCuenta` e `idCliente`.
+
+Aquí como ya viste en la lección anterior el `idCliente` aposta se ha llamado diferente a como se llama esa columna de clientes que es `dni` mientras que `idCuenta` también se llama de forma diferente a como se llama la Primary Key de la tabla `cuentas` que se llama `numeroCuenta`.
+
+Pues bien vamos a establecer la relación de tipo muchos a muchos entre las dos entidades que vamos a generar a partir de esas tablas clientes y cuentas.
+
+Bueno pues vamos a crearnos un nuevo proyecto de la web Proyect tipo relación banca Velay lo vamos a llamar también sobre el servidor GlassFish aunque ahora eso nos da un poquito igual de cara a generar las entidades que finalizamos procedemos como en el ejemplo anterior y a las propiedades siempre y faites activamos JPA para que el asistente nos permita generar lasentidades así que atraerle el botón derecho JPA Tools generar entidades desde tablas aquí tengo la conexión ya con esa base de datos la tenía ya creada de antes.
+
+En cualquier caso ya sabes cuáles son los pasos.
+
+A este botón vuelves a darle la información datos del driver nombre de la base de datos los credenciales etc..
+
+Y aquí aparecería el nombre de la base datos por qué no aparece ahora si ya tengo la conexión creada. 
+
+Bueno supongo que probablemente se habrá cerrado la conexión internamente en eclipse y no veremos la información.
+
+Entonces qué hay que hacer volver a crear otra conexión distinta hacia la misma base de datos.
+
+Bueno tenemos aquí un pequeño truquillo si nos vamos a las perspectivas hay una de las perspectivas en Eclipse que se llama Database development.
+
+Si entramos en esa perspectiva vemos aquí todas las conexiones que se han ido creando con el asistente y uno de ellos es precisamente bancal.
+
+Bueno pues obviamente tú no la tendrás la tendrás que crear como creamos la conexión anterior pero para posteriores veces donde quieras crear a lo mejor otra vez las entidades o nuevas entidades de esa base de datos para que no tengas que volver a crear de nuevo otra conexión te vas aquí y deberíamos conectar es como aparecen los datos de ver los nombres el trailer.
+
+Lo único que me falta es la contraseña porque no le di a la opción de guardar para que se quedara guardada para las siguientes veces entonces usamos el botón OK y se genera la conexión con esa base de datos.
+
+Si volvemos a la perspectiva Java y ya voy a poder volver al asistente JPA Tools genera identidades desde tablas y árabes y así elegir banco mayor se cuela y aparecen los datos de la base de datos y las tres tablas que hay.
+
+Nosotros vamos a generar entidades de dos tablas clientes y cuentas no de titulares titulares en la tabla y hoy no tenemos que elegir aquí vamos al siguiente paso y pulsamos este botón para crear la asociación que va a ser de tipo muchos a muchos primera tabla por ejemplo cuentas segunda tabla clientes tabla de tabla de unión que contiene las primary key de las dos o le damos a este botoncito y ahora sí aparecen las tres aunque no haya elegido titulares pero aparecen todas las que hay para que pueda elegir cuál es la de titulares efectivamente en el siguiente paso nos va a decir que especificamos las columnas de unión entre cuentas y titulares y entre titulares y clientes bien aquí pulsando botones.
+
+Lógicamente el número de cuenta en cuentas y de cuenta en titulares que es la tabla de aquí hacemos lo mismo en titulares sería de clientes evidentemente y en clientes es el email vale pues ya tenemos toda la información de unión.
+
+El siguiente paso.
+
+La única opción que cabe es mérito finalizamos aquí aparece la relación y ya en el siguiente paso pues como de costumbre debemos indicarnos cuáles son los la forma de generación de las claves y cómo va a ser los campos de colección que vamos a dejar siempre por efecto Lish el paquete entidades y ahí viene el siguiente paso vamos a ir tabla por tabla indicando clientes entidad correspondiente cliente forma de generación de clave ninguna.
+
+Puesto que el DNI del cliente no es autogenerados vale entonces no va a haber no se va a generar de forma automática con cuentas lo mismo es el número de cuenta que no se va a generar automáticamente finalizamos y vamos a ver ahora qué es lo que nos ha creado la asistente al ver esto puesto a una pequeña desagradable sorpresa.
+
+Y es que por ejemplo vamos a la entidad cliente pues la entidad cliente nos ha puesto que efectivamente un atributo con la lista de todos los objetos cuenta asociados a ese cliente Manitú Meini Paperboy clientes se supone que entonces serían clientes donde tendríamos la información de configuración de la relación clientes no en cuenta nos vamos a cuenta que sí tenemos ahí el atributo clientes con la lista de objetos clientes relacionados.
+
+Y aquí tendría que estar la información de configuración pero no está por algún motivo que tampoco se explicar que el asistente no es capaz de generar orientable con la Golum correctamente y de hecho por eso aparecen incluso aquí errores porque no está generado completamente entonces eso ya lo tenemos que hacer nosotros a mano.
+
+Yo tengo aquí esas dos entidades creadas entonces como es pues un cliente que es la que elegimos como propietaria de la relación.
+
+Cuando explicamos todo esto en la lección anterior a la lección correspondiente a las relaciones entre entidades pues un cliente concretamente en ese atributo la colección cuenta donde tenemos toda la información de la entable y inversión.
+
+Bueno pues os voy a hacer es que voy a copiar esto directamente y me lo voy a llevar a mi entidad cliente que como digo es la que hemos elegido como propietaria de la relación así que vamos a notar el atributo cuentas con todo eso me bitumen y rentable.
+
+Cuál es el nombre de la tabla de Yeung con incólumes Inverse en columns.
+
+Las relaciones entre ambas tablas tanto del lado de la tabla de clientes con la tabla de titulares como con la tabla de cuenta con la tabla de titulares y la otra entidad cuenta simplemente dejaríamos el Tumini y con el Vamos a ver aquí cómo quedaría.
+
+En este caso si el martes voy indicando cuál es el nombre del atributo de la otra entidad que contiene los objetos de ésta y ahora pues ya tenemos completo este que ya no necesitamos y ya lo tenemos completamente relacionado ambas entidades ahora sí están relacionadas.
+
+Muchos a muchos correctamente ya podríamos operar con ellas.
+
 # 24 Ejercicio práctico IV parte I 07:19
 # 25 Ejercicio práctico IV parte 2 01:57
 # 26 joins 05:53
