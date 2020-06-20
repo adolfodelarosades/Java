@@ -543,19 +543,207 @@ En el siguiente paso
 
 <img src="images/22-46.png">
 
-entidad productos Tabla Productos aquí nombre de la entidad producto generación de clave identidad tablas secciones nombre de la clase sección o secciones quitado la S.
+Tabla `Producto`, nombre de la entidad `Producto`, generación de clave `identity`.
 
-Pero obviamente en singular secciones serían sección y la generación de clave también es identidad que analizamos y ya tenemos nuestras entidades generales y relacionadas.
+<img src="images/22-47.png">
 
-Vamos a comprobarlo.
+Tabla `Secciones` nombre de la clase `Seccion`, generación de clave también es `identity`.
 
-Empezamos por la entidad sección la del lado 1 y aquí veremos a partir de las anotaciones clásicas.
+<img src="images/22-48.png">
 
-Pues efectivamente vemos ese nuevo atributo productos que contienen la colección de productos asociados a esta sección anotada con arroba o en Tumen y en Paperboy el nombre del atributo de la otra entidad de producto que contiene el objeto secciona asociado a puestos secciones.
+Finalizamos y ya tenemos nuestras entidades generadas y relacionadas.
 
-No podemos cambiar o lo podemos dejar así nada vamos a ver esa entidad producto ya veremos que tenemos pues efectivamente un atributo de tipo sección o secciones lo ha llamado y anotado con arroba mérito a través de un club como ya explicamos en la lección anterior se establece el nombre de las columnas reglas que definen esa relación entre las tablas Name y referentes con name aquí directamente como ambas se llaman igual.
+<img src="images/22-49.png">
 
-Basta con indicar el atributo name de sección para saber que ambas columnas con ese mismo nombre van a ser las que permiten identificar los objetos asociados a cada una de las otras entidades de la tabla relacionada.
+Vamos a comprobarlo. Empezamos por la Entidad `Seccion` la del lado 1.
+
+*`Seccion`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the secciones database table.
+ * 
+ */
+@Entity
+@Table(name="secciones")
+@NamedQuery(name="Seccion.findAll", query="SELECT s FROM Seccion s")
+public class Seccion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idSeccion;
+
+	private String responsable;
+
+	private String seccion;
+
+	//bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy="seccione")
+	private List<Producto> productos;
+
+	public Seccion() {
+	}
+
+	public int getIdSeccion() {
+		return this.idSeccion;
+	}
+
+	public void setIdSeccion(int idSeccion) {
+		this.idSeccion = idSeccion;
+	}
+
+	public String getResponsable() {
+		return this.responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+
+	public String getSeccion() {
+		return this.seccion;
+	}
+
+	public void setSeccion(String seccion) {
+		this.seccion = seccion;
+	}
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public Producto addProducto(Producto producto) {
+		getProductos().add(producto);
+		producto.setSeccione(this);
+
+		return producto;
+	}
+
+	public Producto removeProducto(Producto producto) {
+		getProductos().remove(producto);
+		producto.setSeccione(null);
+
+		return producto;
+	}
+
+}
+```
+
+Y aquí veremos a partir de las anotaciones clásicas, efectivamente vemos ese nuevo atributo `productos`
+
+```java
+//bi-directional many-to-one association to Producto
+@OneToMany(mappedBy="seccione")
+private List<Producto> productos;
+```
+
+que contienen la colección de productos asociados a esta sección anotada con `@OneToMany(mappedBy="seccione")` el nombre del atributo de la otra Entidad de Producto, que contiene el objeto `seccione` asociado, le a puesto `seccione` lo podemos cambiar o lo podemos dejar así no pasa nada.
+
+Vamos a ver esa Entidad `Producto`
+
+*`Producto`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the productos database table.
+ * 
+ */
+@Entity
+@Table(name="productos")
+@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idProducto;
+
+	private String descripcion;
+
+	private String nombre;
+
+	private double precio;
+
+	//bi-directional many-to-one association to Seccion
+	@ManyToOne
+	@JoinColumn(name="idSeccion")
+	private Seccion seccione;
+
+	public Producto() {
+	}
+
+	public int getIdProducto() {
+		return this.idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public Seccion getSeccione() {
+		return this.seccione;
+	}
+
+	public void setSeccione(Seccion seccione) {
+		this.seccione = seccione;
+	}
+
+}
+```
+
+Vemos que tenemos efectivamente un atributo de tipo `Seccion` llamado `seccione`
+
+
+```java
+//bi-directional many-to-one association to Seccion
+@ManyToOne
+@JoinColumn(name="idSeccion")
+private Seccion seccione;
+```
+
+lo a anotado con `@ManyToOne` a través `@JoinColumn(name="idSeccion")` como ya explicamos en la lección anterior se establece el nombre de las columnas que definen esa relación entre las tablas, como en ambas tablas se llama igual basta con indicar el atributo `name="idSeccion")` para saber que ambas columnas con ese mismo nombre, van a ser las que permiten identificar los objetos asociados a cada una de las otras entidades de la tabla relacionada.
 
 Por lo tanto ya tenemos las entidades generadas con toda la información de configuración correspondiente a sus relaciones.
 
