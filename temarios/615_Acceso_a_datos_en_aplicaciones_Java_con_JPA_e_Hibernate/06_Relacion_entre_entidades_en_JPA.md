@@ -1114,6 +1114,30 @@ Al hacer el Test de Conexión nos dimos cuenta de este pequeño fallo y así pon
 
 <img src="images/23-19.png">
 
+**NOTA:** Un pequeño parentesis, antes de continuar. Si necesitamos por algún motivo editar las conexiones de base de datos que tenemos. Bueno tenemos aquí un pequeño truquillo si nos vamos a las perspectivas hay una de las perspectivas en Eclipse que se llama `Database Development`. Por ejemplo yo no he estado salvando el password de la conexión y he notado que al momento de hacer el ping no me lo hace, el motivo puede ser ese, por lo que tendría que editar dichas conexiones. La forma de hacerlo es abrir la perspectiva `Database Development`.
+
+<img src="images/23-40.png">
+
+Si entramos en esa perspectiva vemos aquí todas las conexiones que se han ido creando con el asistente y uno de ellos es precisamente `bancabd`.
+
+<img src="images/23-41.png">
+
+Para posteriores veces donde quieras crear a lo mejor otra vez las entidades o nuevas entidades de esa base de datos para que no tengas que volver a crear de nuevo otra conexión 
+
+<img src="images/23-42.png">
+
+te vas aquí y deberíamos conectarnos. 
+
+<img src="images/23-43.png">
+
+aparecen los datos de conexión que habiamos insertado, lo único que me falta es la contraseña porque no le di a la opción de guardar para que se quedara guardada para las siguientes veces
+
+<img src="images/23-44.png">
+
+entonces usamos el botón Apply and Close y se genera la conexión con esa base de datos.
+
+Si volvemos a la perspectiva Java EE ya voy a poder volver al asistente JPA Tools - Generate Entity Tables ... y así elegir la conexión `mysql_bd_bancabd`  y aparecen los datos de la base de datos y las tres tablas que hay.
+
 Una vez creada la conexión a la base de datos ya podemos seleccionar el Schema y me aparecen las tablas.
 
 <img src="images/23-20.png">
@@ -1578,36 +1602,6 @@ public class Cuenta implements Serializable {
 
 }
 ```
-
-********
-
-aquí tengo la conexión ya con esa base de datos la tenía ya creada de antes.
-
-En cualquier caso ya sabes cuáles son los pasos.
-
-A este botón vuelves a darle la información datos del driver nombre de la base de datos los credenciales etc..
-
-Y aquí aparecería el nombre de la base datos por qué no aparece ahora si ya tengo la conexión creada. 
-
-Bueno supongo que probablemente se habrá cerrado la conexión internamente en eclipse y no veremos la información.
-
-Entonces qué hay que hacer volver a crear otra conexión distinta hacia la misma base de datos.
-
-Bueno tenemos aquí un pequeño truquillo si nos vamos a las perspectivas hay una de las perspectivas en Eclipse que se llama Database development.
-
-Si entramos en esa perspectiva vemos aquí todas las conexiones que se han ido creando con el asistente y uno de ellos es precisamente bancal.
-
-Bueno pues obviamente tú no la tendrás la tendrás que crear como creamos la conexión anterior pero para posteriores veces donde quieras crear a lo mejor otra vez las entidades o nuevas entidades de esa base de datos para que no tengas que volver a crear de nuevo otra conexión te vas aquí y deberíamos conectar es como aparecen los datos de ver los nombres el trailer.
-
-Lo único que me falta es la contraseña porque no le di a la opción de guardar para que se quedara guardada para las siguientes veces entonces usamos el botón OK y se genera la conexión con esa base de datos.
-
-Si volvemos a la perspectiva Java y ya voy a poder volver al asistente JPA Tools genera identidades desde tablas y árabes y así elegir banco mayor se cuela y aparecen los datos de la base de datos y las tres tablas que hay.
-
-***********
-
-
-
-
 
 # 24 Ejercicio práctico IV parte I 07:19
 # 25 Ejercicio práctico IV parte 2 01:57
