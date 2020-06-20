@@ -747,6 +747,191 @@ lo a anotado con `@ManyToOne` a través `@JoinColumn(name="idSeccion")` como ya 
 
 Por lo tanto ya tenemos las entidades generadas con toda la información de configuración correspondiente a sus relaciones.
 
+### :computer: Código Completo - 615-05_relacion_almacen
+
+Este código realmente no hace nada, así como esta.
+
+<img src="images/22-50.png">
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-05_relacion_almacen">
+		<class>entidades.Producto</class>
+		<class>entidades.Seccion</class>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`Seccion.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the secciones database table.
+ * 
+ */
+@Entity
+@Table(name="secciones")
+@NamedQuery(name="Seccion.findAll", query="SELECT s FROM Seccion s")
+public class Seccion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idSeccion;
+
+	private String responsable;
+
+	private String seccion;
+
+	//bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy="seccione")
+	private List<Producto> productos;
+
+	public Seccion() {
+	}
+
+	public int getIdSeccion() {
+		return this.idSeccion;
+	}
+
+	public void setIdSeccion(int idSeccion) {
+		this.idSeccion = idSeccion;
+	}
+
+	public String getResponsable() {
+		return this.responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+
+	public String getSeccion() {
+		return this.seccion;
+	}
+
+	public void setSeccion(String seccion) {
+		this.seccion = seccion;
+	}
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public Producto addProducto(Producto producto) {
+		getProductos().add(producto);
+		producto.setSeccione(this);
+
+		return producto;
+	}
+
+	public Producto removeProducto(Producto producto) {
+		getProductos().remove(producto);
+		producto.setSeccione(null);
+
+		return producto;
+	}
+
+}
+```
+
+*`Producto.java`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the productos database table.
+ * 
+ */
+@Entity
+@Table(name="productos")
+@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idProducto;
+
+	private String descripcion;
+
+	private String nombre;
+
+	private double precio;
+
+	//bi-directional many-to-one association to Seccion
+	@ManyToOne
+	@JoinColumn(name="idSeccion")
+	private Seccion seccione;
+
+	public Producto() {
+	}
+
+	public int getIdProducto() {
+		return this.idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public Seccion getSeccione() {
+		return this.seccione;
+	}
+
+	public void setSeccione(Seccion seccione) {
+		this.seccione = seccione;
+	}
+
+}
+```
+
+
 # 23 Crear entidades relacionadas parte 2 08:41
 # 24 Ejercicio práctico IV parte I 07:19
 # 25 Ejercicio práctico IV parte 2 01:57
