@@ -441,119 +441,109 @@ Tenemos las tablas `productos`, `secciones`, `sucursales` y `ventas`, las dos ta
 
 <img src="images/22-08.png">
 
+### Creación del Proyecto en Eclipse
+
 Partiendo de que tenemos esta base de datos `almacen` con esas dos tablas `productos` y `secciones` cómo crearíamos las entidades ya relacionadas utilizando el entorno de desarrollo Eclipse.
 
-Vamos a crearnos un proyecto Web dinámico que vamos a llamar `615-05_relacion_almacen`, cómo posteriormente utilizaremos este proyecto para crear un ejercicio donde vamos a incorporar Lógica de Negocio implementada en EJB ya vamos a coger aquí como servidor de aplicaciones GlassFish en el que vamos a desplegar la aplicación el servidor GlassFish.
+Vamos a crearnos un proyecto Web dinámico 
 
-<img src="images/22-11.png">
+<img src="images/22-22.png">
 
-<img src="images/22-12.png">
+que vamos a llamar `615-05_relacion_almacen`, cómo posteriormente utilizaremos este proyecto para crear un ejercicio donde vamos a incorporar Lógica de Negocio implementada en EJB ya vamos a coger aquí como servidor de aplicaciones GlassFish en el que vamos a desplegar la aplicación el servidor GlassFish.
 
-Ya directamente finalizamos y lo primero es convertir nuestro proyecto a un proyecto Maven para poder incluir el driver de MySQL.
+<img src="images/22-23.png">
 
-<img src="images/22-20.png">
+Lo primero que vamos a hacer es incorporar la característica JPA a nuestro proyecto, nos vamos a ir a través del botón derecho a las propiedades y en Project Faces activaremos JPA.
 
-<img src="images/22-21.png">
+<img src="images/22-24.png">
 
-Modificamos el archivo `pom.xml` para incluir el Driver MySQL.
-
-```html
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>615-05_relacion_almacen</groupId>
-	<artifactId>615-05_relacion_almacen</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>615-05_relacion_almacen</name>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.20</version>
-		</dependency>
-	</dependencies>
-</project>
-```
-
-Lo segundo que vamos a hacer para incorporar la característica JPA a nuestro proyecto, nos vamos a ir a través del botón derecho a las propiedades y en Project Faces activaremos JPA.
-
-<img src="images/22-13.png">
+<img src="images/22-25.png">
 
 Debemos pulsar en `Futher Configuration Availible`
 
-<img src="images/22-14.png">
+<img src="images/22-26.png">
 
 Donde la configuración disponible ya viene por defecto Eclipse Link que por cierto este es el motor de persistencia que hemos utilizado en los ejemplos realizados hasta ahora, pero si vamos a desplegar la aplicación en un servidor de aplicaciones GlassFish, GlassFish también incorpora un motor de persistencia compatible con JPA o sea que podríamos seguir utilizando este o bien lo que conocemos como GlasFish System Library que sería el motor de GlassFish, es indiferente, en cualquier caso vamos a ver que funcionaría lógicamente tanto con uno como con otro. Vamos a dejar Eclipse Link que hemos utilizado hasta ahora, bien perfecto porque ya tenemos activado la característica JPA.
 
 Ahora vamos a proceder como siempre que queremos generar entidades a irnos a la opción botón derecho dentro del proyecto, JPA Tools - Generate entities from Tables ..., generar entidades desde tablas.
 
-<img src="images/22-15.png">
+<img src="images/22-27.png">
 
-<img src="images/22-16.png">
+<img src="images/22-28.png">
 
-Entonces aquí lo que vamos a tener que hacer es crear una conexión a esa nueva base de datos que hemos creado, es una base de datos de MySQL
+Entonces aquí lo que vamos a tener que hacer es crear una conexión a esa nueva base de datos que hemos creado, es una base de datos de MySQL vamos a llamar a la conexión por ejemplo `mysql_bd_almacen`
 
-<img src="images/22-17.png">
+<img src="images/22-29.png">
 
-vamos a llamar a la conexión por ejemplo `almacen_mysql`
+en el siguiente paso vamos a elegir el Driver `driver_para_mysql_2`, ya tenemos creado el Driver `driver_para_mysql` de otros ejercicios pero al usarlo fallo por eso se creo `driver_para_mysql_2` siguiendo los mismos pasos, podemos seguir utilizandolo porque al fin y al cabo es el mismo se trata de MySQL, indicamos el nombre de la base de datos, la URL y las credenciales.
 
-<img src="images/22-18.png">
+<img src="images/22-30.png">
 
-en el siguiente paso vamos a elegir el Driver `driver_para_mysql` que esto ya lo tenemos creado ese Driver de otros ejercicios, podemos seguir utilizando porque al fin y al cabo es el mismo, se trata de MySQL, indicamos el nombre de la base de datos, la URL y las credenciales.
+Hacemos un test de conexión para comprobar que efectivamente todo es correcto.
 
-<img src="images/22-19.png">
+<img src="images/22-31.png">
 
-Hacemos un test de conexión para comprobar que efectivamente todo es correcto
+y finalizamos entonces en la lista de esquemas debe aparecer el nombre de la base de datos y todas sus tablas.
 
+<img src="images/22-32.png">
 
-y finalizamos entonces aquí la lista de esquemas de ver aparecer el nombre de la base de datos y todas sus tablas.
+Nosotros vamos a crear Entidades para las tablas `productos` y `secciones` por lo cual las marcamos.
 
-Nosotros vamos a crear entidades para las tablas productos y secciones y además la vamos.
+<img src="images/22-33.png">
 
-Las queremos relacionar bien pues eso lo vamos a hacer precisamente en el siguiente paso.
+y además las queremos relacionar bien pues eso lo vamos a hacer precisamente en el siguiente paso.
 
-Este paso que nunca hemos hecho nada hasta el momento porque nunca hemos tenido la necesidad de crear relaciones entre entidades pero ahora llega el momento.
+<img src="images/22-34.png">
 
-Por lo tanto vamos a añadir aquí una nueva asociación de tablas que es como llama eclipse la relación entre entidades.
+En este paso que nunca hemos hecho nada hasta el momento porque nunca hemos tenido la necesidad de crear relaciones entre entidades, pero ahora llega el momento. Por lo tanto vamos a añadir aquí una nueva *Asociación de Tablas* que es como llama Eclipse la relación entre entidades.
 
-Se puede puede ser una relación simple uno a muchos muchos a uno o asociación digamos compleja muchos a muchos.
+<img src="images/22-35.png">
 
-Nuestro caso se trataba de uno a muchos y muchos a uno por lo tanto le dejaremos la opción simple.
+Puede ser una relación Simple (Uno a Muchos o Muchos a Uno) o una asociación digamos compleja (Muchos a Muchos). En nuestro caso se trataba de Uno a Muchos y Muchos a Uno, por lo tanto le dejaremos la opción simple. Elegimos una de las tablas `secciones` por ejemplo y tabla dos `productos`.
 
-Elegimos una de las tablas o secciones por ejemplo tabla dos productos y en el siguiente paso vamos a indicar de ambas tablas cuál es el campo común la columna común ambas tablas a través del botón adrede por defecto el indica que en secciones sería de sección y en productos.
+<img src="images/22-36.png">
 
-Evidentemente no pueden ser descripción sino que se también la sección la columna que permite identificar a qué sección pertenece cada producto ser la columna común de ambas tablas en el siguiente paso ya debemos elegir exactamente qué tipo de relación queremos entre esas dos entidades que vamos a generar a partir de esas tablas pueden ser muchos a uno de cada producto le corresponden muchas secciones no es el caso sino uno a muchos cada sección le corresponden muchos productos que obviamente se traducirá en el lado de producto de una relación tipo muchos a uno muchos productos una sección pues una vez ya elegido esto finalizamos aparece aquí la información de la relación gráficamente que si pulsamos sobre ella nos indica las propiedades simplemente que hemos configurado.
+y en el siguiente paso 
 
-Si tuviéramos que cambiar algo sería aquí donde lo podríamos hacer no tendríamos que borrarla y volver a crear sino que aquí podríamos hacer los cambios que necesitase.
+<img src="images/22-37.png">
 
-Pues en el siguiente paso no le demos indicar ya los datos que normalmente indicamos no vamos a crear entidades a partir de las tablas.
+vamos a indicar de ambas tablas cuál es el campo común, la columna común a ambas tablas a través del botón Add, por defecto el indica que en secciones sería `idSeccion` y en productos `descripcion`.
 
-La generación de claves aquí de momento no decimos nada y luego sólo vamos a indicar uno por uno en el paso siguiente y si queremos que las entidades se generen en el paquete entidades muy importante ahora porque como se trata de asociación de uno a muchos muchos a uno va a haber entidades que tendrán campos de colección.
+<img src="images/22-38.png">
 
-Debemos indicar si queremos que esas colecciones sean de tipo OSEP o Licks.
+Evidentemente no pueden ser descripción sino que se también `idSeccion` la columna que permite identificar a qué sección pertenece cada producto, la columna común de ambas tablas.
 
-Habitualmente es el que se suele utilizar bien en el siguiente paso entidad productos Tabla Productos aquí nombre de la entidad producto generación de clave identidad tablas secciones nombre de la clase sección o secciones quitado la S.
+<img src="images/22-39.png">
+
+en el siguiente paso 
+
+<img src="images/22-40.png">
+
+ya debemos elegir exactamente qué tipo de relación queremos entre esas dos entidades que vamos a generar a partir de esas tablas, pueden ser Muchos a Uno, de cada producto le corresponden muchas secciones no es el caso, sino Uno a Muchos cada sección le corresponden muchos productos que obviamente se traducirá en el lado de producto en una relación tipo Muchos a Uno, muchos productos una sección.
+
+<img src="images/22-41.png">
+
+Una vez ya elegido esto finalizamos aparece aquí la información de la relación gráficamente
+
+<img src="images/22-42.png">
+
+que si pulsamos sobre ella nos indica las propiedades simplemente que hemos configurado, si tuviéramos que cambiar algo sería aquí donde lo podríamos hacer, no tendríamos que borrarla y volver a crear sino que aquí podríamos hacer los cambios que necesitase.
+
+<img src="images/22-43.png">
+
+En el siguiente paso 
+
+<img src="images/22-44.png">
+
+le demos indicar ya los datos que normalmente indicamos cuando vamos a crear entidades a partir de las tablas. En la generación de claves(Key generator) de momento no decimos nada, luego se lo vamos a indicar uno por uno en el paso siguiente, lo que si queremos que las entidades se generen en el paquete entidades no en model como indica lo cambiamos, muy importante ahora porque como se trata de asociación de Uno a Muchos - Muchos a Uno, va a haber entidades que tendrán campos de colección, debemos indicar en `Collection properties type` si queremos que esas colecciones sean de tipo `Set` o `List` que es el que habitualmente se suele utilizar.
+
+<img src="images/22-45.png">
+
+En el siguiente paso 
+
+<img src="images/22-46.png">
+
+entidad productos Tabla Productos aquí nombre de la entidad producto generación de clave identidad tablas secciones nombre de la clase sección o secciones quitado la S.
 
 Pero obviamente en singular secciones serían sección y la generación de clave también es identidad que analizamos y ya tenemos nuestras entidades generales y relacionadas.
 
