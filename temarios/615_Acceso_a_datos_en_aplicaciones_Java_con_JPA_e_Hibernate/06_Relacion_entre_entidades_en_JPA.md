@@ -1075,11 +1075,327 @@ que son las cuentas de esos clientes el número de cuenta, saldo o el tipo de cu
 
 que relaciona las Foreign Keys de cada una de las tablas principales de modo que podamos establecer esa relación Muchos a Muchos entre `clientes` y `cuentas` que como vemos la clave primaria de esta tabla intermedia sería la combinación de ambas claves Foreign Keys el `idCuenta` e `idCliente`.
 
-Aquí como ya viste en la lección anterior el `idCliente` aposta se ha llamado diferente a como se llama esa columna de clientes que es `dni` mientras que `idCuenta` también se llama de forma diferente a como se llama la Primary Key de la tabla `cuentas` que se llama `numeroCuenta`.
+Aquí como ya viste en la lección anterior el `idCliente` aposta se ha llamado diferente a como se llama esa columna de clientes que es `dni` mientras que `idCuenta` también se llama de forma diferente a como se llama la Primary Key de la tabla `cuentas` que es `numeroCuenta`.
 
-Pues bien vamos a establecer la relación de tipo muchos a muchos entre las dos entidades que vamos a generar a partir de esas tablas clientes y cuentas.
 
-Bueno pues vamos a crearnos un nuevo proyecto de la web Proyect tipo relación banca Velay lo vamos a llamar también sobre el servidor GlassFish aunque ahora eso nos da un poquito igual de cara a generar las entidades que finalizamos procedemos como en el ejemplo anterior y a las propiedades siempre y faites activamos JPA para que el asistente nos permita generar lasentidades así que atraerle el botón derecho JPA Tools generar entidades desde tablas aquí tengo la conexión ya con esa base de datos la tenía ya creada de antes.
+### Creación Proyecto en Eclipse
+
+Pues bien vamos a establecer la relación de tipo Muchos a Muchos entre las dos entidades que vamos a generar a partir de esas tablas `clientes` y `cuentas`.
+
+Vamos a crearnos un nuevo proyecto Dynamic Web Project
+
+<img src="images/23-12.png">
+
+lo vamos a llamar `615-06_relacion_bancadb` también sobre el servidor GlassFish aunque ahora eso nos da un poquito igual de cara a generar las entidades.
+
+<img src="images/23-13.png">
+
+y finalizamos. Procedemos como en el ejemplo anterior a las propiedades siempre y Project Facets 
+
+<img src="images/23-14.png">
+
+activamos JPA
+
+<img src="images/23-15.png">
+
+para que el asistente nos permita generar las entidades, así que através del botón derecho JPA Tools - Generated Entity Tables.. generar entidades desde tablas.
+
+<img src="images/23-16.png">
+
+Vamos a crear la conexión a esa base de datos que llamaremos `mysql_bd_bancadb`.
+
+<img src="images/23-17.png">
+
+En el siguiente paso seleccionamos el Driver de MySQL que estamos usando y metemos los datos de conexión de la base de datos, ojo por que el Schema lo llamamos `bancadb` y la base de datos realmente se llama `bancabd`.
+
+<img src="images/23-18.png">
+
+Al hacer el Test de Conexión nos dimos cuenta de este pequeño fallo y así ponemos el nombre adecuado.
+
+<img src="images/23-19.png">
+
+Una vez creada la conexión a la base de datos ya podemos seleccionar el Schema y me aparecen las tablas.
+
+<img src="images/23-20.png">
+
+Nosotros vamos a generar entidades de dos tablas `clientes` y `cuentas` no de `titulares`, `titulares` es la tabla de Join no la tenemos que elegir aquí 
+
+<img src="images/23-21.png">
+
+vamos al siguiente paso 
+
+<img src="images/23-22.png">
+
+y pulsamos el botón `New Association`
+
+<img src="images/23-23.png">
+
+para crear la asociación que va a ser de tipo Muchos a Muchos, primera tabla por ejemplo `cuentas` segunda tabla `clientes`,  tabla Join, tabla de unión que contiene las Primary Keys de las dos tablas o le damos a este botoncito y ahora sí aparecen las tres aunque no haya elegido titulares pero aparecen todas las que hay para que pueda elegir `titulares`.
+
+<img src="images/23-24.png">
+
+En el siguiente paso 
+
+<img src="images/23-25.png">
+
+nos va a decir que especificamos las columnas de unión entre cuentas y titulares y entre titulares y clientes, bien aquí pulsando el boton Add
+
+<img src="images/23-26.png">
+
+Lógicamente el `numeroCuenta` en `cuentas` y tenemos que cambiar `idCliente` por `idCuenta` para `titulares` que es la tabla de Join.
+
+<img src="images/23-27.png">
+
+Abajo hacemos lo mismo presionamos Add,
+
+<img src="images/23-28.png">
+
+en `titulares` esta bien `idCliente` pero en `clientes` debe ser `dni`.
+
+<img src="images/23-29.png">
+
+Pues ya tenemos toda la información de unión, el siguiente paso.
+
+<img src="images/23-30.png">
+
+La única opción que cabe es Many to Many finalizamos.
+
+<img src="images/23-31.png">
+
+Aquí aparece la relación, si pinchamos en la imagen aparecen los detalles
+
+<img src="images/23-32.png">
+
+y ya en el siguiente paso 
+
+<img src="images/23-33.png">
+
+pues como de costumbre debemos indicarnos cuáles son la la forma de generación de las claves y cómo van a ser los campos de colección, vamos a dejar siempre por efecto List, el paquete `entidades`.
+
+<img src="images/23-34.png">
+
+y en el siguiente paso vamos a ir tabla por tabla indicando `clientes`, entidad correspondiente `Cliente` forma de generación de clave ninguna (none), puesto que el DNI del cliente no es autogenerado, no se va a generar de forma automática.
+
+<img src="images/23-35.png">
+
+con `cuentas` lo mismo el `numeroCuenta` no se va a generar automáticamente
+
+<img src="images/23-36.png">
+
+Finalizamos y vamos a ver ahora qué es lo que nos ha creado el asistente.
+
+<img src="images/23-37.png">
+
+Al ver esto nos vamos a llevar una pequeña desagradable sorpresa, existen errores. Y es que por ejemplo vamos a la entidad `Cliente`.
+
+*`Cliente`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the clientes database table.
+ * 
+ */
+@Entity
+@Table(name="clientes")
+@NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int dni;
+
+	private String direccion;
+
+	private String nombre;
+
+	private int telefono;
+
+	//bi-directional many-to-many association to Cuenta
+	@ManyToMany(mappedBy="clientes")
+	private List<Cuenta> cuentas;
+
+	public Cliente() {
+	}
+
+	public int getDni() {
+		return this.dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Cuenta> getCuentas() {
+		return this.cuentas;
+	}
+
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
+	}
+
+}
+```
+
+En la entidad `Cliente` nos ha puesto efectivamente un atributo con la lista de todos los objetos cuenta asociados a ese cliente 
+
+```java
+//bi-directional many-to-many association to Cuenta
+@ManyToMany(mappedBy="clientes")
+private List<Cuenta> cuentas;
+```
+
+Se supone que entonces serían en `Cuenta` donde tendríamos la información de configuración de la relación. 
+
+Si vemos `Cuenta`.
+
+*`Cuenta`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the cuentas database table.
+ * 
+ */
+@Entity
+@Table(name="cuentas")
+@NamedQuery(name="Cuenta.findAll", query="SELECT c FROM Cuenta c")
+public class Cuenta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int numeroCuenta;
+
+	private double saldo;
+
+	private String tipocuenta;
+
+	//bi-directional many-to-many association to Cliente
+	@ManyToMany
+	@JoinColumn(name="numeroCuenta")
+	private List<Cliente> clientes;
+
+	public Cuenta() {
+	}
+
+	public int getNumeroCuenta() {
+		return this.numeroCuenta;
+	}
+
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+
+	public double getSaldo() {
+		return this.saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getTipocuenta() {
+		return this.tipocuenta;
+	}
+
+	public void setTipocuenta(String tipocuenta) {
+		this.tipocuenta = tipocuenta;
+	}
+
+	public List<Cliente> getClientes() {
+		return this.clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+}
+```
+
+Resulta que sí tenemos aquí el atributo `clientes` con la lista de objetos clientes relacionados, aquí tendría que estar la información de configuración, pero no está, por algún motivo que tampoco se explicar, el asistente no es capaz de generar y es aquí donde nos marca el error.
+
+```java
+//bi-directional many-to-many association to Cliente
+@ManyToMany
+@JoinColumn(name="numeroCuenta")
+private List<Cliente> clientes;
+```
+
+<img src="images/23-38.png">
+
+entonces eso ya lo tenemos que hacer nosotros a mano.
+
+En `Cliente` que es la entidad que elegimos como propietaria de la relación vamos a cambiar esto:
+
+```java
+//bi-directional many-to-many association to Cuenta
+@ManyToMany(mappedBy="clientes")
+private List<Cuenta> cuentas;
+```
+
+Por esto:
+
+```java
+@ManyToMany
+@JoinTable(name = "Titulares", 
+	joinColumns = @JoinColumn(name="idCliente", referencedColumnName = "dni"),
+	inverseJoinColumns = @JoinColumn(name="idCuenta", referencedColumnName = "numeroCuenta"))
+private List<Cuenta> cuentas;
+```
+
+Cuando explicamos todo esto en la lección anterior, la lección correspondiente a las relaciones entre entidades, aquí en `Cliente` concretamente en este atributo `cuentas` la colección cuenta donde tenemos toda la información de la entable y inversión.
+
+Bueno pues os voy a hacer es que voy a copiar esto directamente y me lo voy a llevar a mi entidad cliente que como digo es la que hemos elegido como propietaria de la relación así que vamos a notar el atributo cuentas con todo eso me bitumen y rentable.
+
+Cuál es el nombre de la tabla de Yeung con incólumes Inverse en columns.
+
+Las relaciones entre ambas tablas tanto del lado de la tabla de clientes con la tabla de titulares como con la tabla de cuenta con la tabla de titulares y la otra entidad cuenta simplemente dejaríamos el Tumini y con el Vamos a ver aquí cómo quedaría.
+
+En este caso si el martes voy indicando cuál es el nombre del atributo de la otra entidad que contiene los objetos de ésta y ahora pues ya tenemos completo este que ya no necesitamos y ya lo tenemos completamente relacionado ambas entidades ahora sí están relacionadas.
+
+Muchos a muchos correctamente ya podríamos operar con ellas.
+
+
+********
+
+aquí tengo la conexión ya con esa base de datos la tenía ya creada de antes.
 
 En cualquier caso ya sabes cuáles son los pasos.
 
@@ -1101,33 +1417,11 @@ Lo único que me falta es la contraseña porque no le di a la opción de guardar
 
 Si volvemos a la perspectiva Java y ya voy a poder volver al asistente JPA Tools genera identidades desde tablas y árabes y así elegir banco mayor se cuela y aparecen los datos de la base de datos y las tres tablas que hay.
 
-Nosotros vamos a generar entidades de dos tablas clientes y cuentas no de titulares titulares en la tabla y hoy no tenemos que elegir aquí vamos al siguiente paso y pulsamos este botón para crear la asociación que va a ser de tipo muchos a muchos primera tabla por ejemplo cuentas segunda tabla clientes tabla de tabla de unión que contiene las primary key de las dos o le damos a este botoncito y ahora sí aparecen las tres aunque no haya elegido titulares pero aparecen todas las que hay para que pueda elegir cuál es la de titulares efectivamente en el siguiente paso nos va a decir que especificamos las columnas de unión entre cuentas y titulares y entre titulares y clientes bien aquí pulsando botones.
+***********
 
-Lógicamente el número de cuenta en cuentas y de cuenta en titulares que es la tabla de aquí hacemos lo mismo en titulares sería de clientes evidentemente y en clientes es el email vale pues ya tenemos toda la información de unión.
 
-El siguiente paso.
 
-La única opción que cabe es mérito finalizamos aquí aparece la relación y ya en el siguiente paso pues como de costumbre debemos indicarnos cuáles son los la forma de generación de las claves y cómo va a ser los campos de colección que vamos a dejar siempre por efecto Lish el paquete entidades y ahí viene el siguiente paso vamos a ir tabla por tabla indicando clientes entidad correspondiente cliente forma de generación de clave ninguna.
 
-Puesto que el DNI del cliente no es autogenerados vale entonces no va a haber no se va a generar de forma automática con cuentas lo mismo es el número de cuenta que no se va a generar automáticamente finalizamos y vamos a ver ahora qué es lo que nos ha creado la asistente al ver esto puesto a una pequeña desagradable sorpresa.
-
-Y es que por ejemplo vamos a la entidad cliente pues la entidad cliente nos ha puesto que efectivamente un atributo con la lista de todos los objetos cuenta asociados a ese cliente Manitú Meini Paperboy clientes se supone que entonces serían clientes donde tendríamos la información de configuración de la relación clientes no en cuenta nos vamos a cuenta que sí tenemos ahí el atributo clientes con la lista de objetos clientes relacionados.
-
-Y aquí tendría que estar la información de configuración pero no está por algún motivo que tampoco se explicar que el asistente no es capaz de generar orientable con la Golum correctamente y de hecho por eso aparecen incluso aquí errores porque no está generado completamente entonces eso ya lo tenemos que hacer nosotros a mano.
-
-Yo tengo aquí esas dos entidades creadas entonces como es pues un cliente que es la que elegimos como propietaria de la relación.
-
-Cuando explicamos todo esto en la lección anterior a la lección correspondiente a las relaciones entre entidades pues un cliente concretamente en ese atributo la colección cuenta donde tenemos toda la información de la entable y inversión.
-
-Bueno pues os voy a hacer es que voy a copiar esto directamente y me lo voy a llevar a mi entidad cliente que como digo es la que hemos elegido como propietaria de la relación así que vamos a notar el atributo cuentas con todo eso me bitumen y rentable.
-
-Cuál es el nombre de la tabla de Yeung con incólumes Inverse en columns.
-
-Las relaciones entre ambas tablas tanto del lado de la tabla de clientes con la tabla de titulares como con la tabla de cuenta con la tabla de titulares y la otra entidad cuenta simplemente dejaríamos el Tumini y con el Vamos a ver aquí cómo quedaría.
-
-En este caso si el martes voy indicando cuál es el nombre del atributo de la otra entidad que contiene los objetos de ésta y ahora pues ya tenemos completo este que ya no necesitamos y ya lo tenemos completamente relacionado ambas entidades ahora sí están relacionadas.
-
-Muchos a muchos correctamente ya podríamos operar con ellas.
 
 # 24 Ejercicio práctico IV parte I 07:19
 # 25 Ejercicio práctico IV parte 2 01:57
