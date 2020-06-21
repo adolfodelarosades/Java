@@ -849,14 +849,25 @@ Y ahora si arranca nuestra Aplicación, ahora está publicando la aplicación y 
 
 <img src="images/20-63.png">
 
+nos autenticamos y vamos al menú podemos probar las dos opciones que tenemos ver los contactos que está efectivamente trabajando correctamente e insertar un nuevo contacto y después eliminarlo, las operaciones trabajan correctamente contra la base de datos.
 
-<img src="images/20-20.png">
+<img src="images/20-64.png">
 
-<img src="images/20-21.png">
+<img src="images/20-65.png">
 
-<img src="images/20-22.png">
+<img src="images/20-66.png">
 
-se habrá autenticado y si se ven los contactos que está efectivamente trabajando correctamente y haciendo las operaciones correctamente contra la base de datos.
+<img src="images/20-67.png">
+
+<img src="images/20-68.png">
+
+<img src="images/20-69.png">
+
+<img src="images/20-70.png">
+
+<img src="images/20-71.png">
+
+<img src="images/20-72.png">
 
 Diferencias, insistir la Lógica Negocio (modelo) la hemos implementado con EJBs, las Entidades (entidades) son las mismas, la capa de persistencia (`persistence.xml`) es la misma lo único es que ahora como estamos utilizando EJBs el acceso a los datos está haciendose a través de un DataSource, las conexiones que está utilizando para sincronizar las operaciones contra la base de datos, el motor de persistencia las está realizando a través de un DataSource que hemos creado en el Servidor de Aplicaciones local. Los controladores (servlets) al usar EJB han cambiado un poco para inyectar el EJB y no hacer uso de la Transaccionalidad que maneja automaticamente los EJB, las vistas son exactamente las mismas.
 
