@@ -427,6 +427,10 @@ Damos al botón New y le damos el nombre del DataSource lo que llaman el *JNDI N
  
  y ya tenemos el DataSource, en la siguiente lección vamos a ver ya cómo utilizar este DataSource para proporcionar los datos de conexión en el `persistence.xml` de cara a que EJB pueda gestionar la transaccionalidad como te decía antes a través de un API que se llama JTA y podamos delegar en él dicha transaccionalidad.
 
+La solución esta en el siguiente enlace:
+
+https://es.stackoverflow.com/questions/261195/error-pool-de-conexi%C3%B3n-glassfish-4-0-con-mysql-8-servidor-aws
+
 # 20 Ejercicio práctico III 17:57
 
 <img src="images/20-01.png">
