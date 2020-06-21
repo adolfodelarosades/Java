@@ -764,27 +764,29 @@ Cómo se ve se el código se reduce bastante, pues muchos de los métodos de la 
 
 Vamos a borrar la clase `GestionContactos` y ya lo único que nos queda es utilizar esos EJBs desde la capa cliente, en este caso los controladores de acción, vamos al paquete Servlets e ir revisando servlet por servlet.
 
+### Paquete Servlets
+
 Empezamos por `AltaAction` aquí ya no tenemos una clase de `GestionContactos` que instanciar sino que tenemos que utilizar el EJB concretamente la Interfaz de Negocio, para ello vamos a utilizar esta anotación que forma parte de Java Enterprise Edition.
 
 ```java
 @EJB
 GestionContactosEjbLocal gcontactos;
 ```
-Qué lo que hace es inyectar una referencia al objeto de la interfaz de negocio y declara una variable del tipo de objeto que quieres y a través de la anotación, el contenedor de servlets, el contenedor web nos inyecta una referencia a ese objeto dentro de la variable, gracias a esta anotación. Por lo tanto esto `GestionContactos gcontactos=new GestionContactos();` ya no sobra.
+Qué lo que hace es inyectar una referencia al objeto de la interfaz de negocio y declara una variable del tipo de objeto que quieres y a través de la anotación, el contenedor de servlets, el contenedor web nos inyecta una referencia a ese objeto dentro de la variable, gracias a esta anotación. Por lo tanto esto `GestionContactos gcontactos=new GestionContactos();` ya nos sobra.
 
 ```java
 @EJB
-	GestionContactosEjbLocal gcontactos;
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre=request.getParameter("nombre");
-		String email=request.getParameter("email");
-		int telefono=Integer.parseInt(request.getParameter("telefono"));
-		//creamos un objeto de la capa de lógica de negocio
-		//y llamamos al método encargado de hacer el alta
+GestionContactosEjbLocal gcontactos;
+protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   String nombre=request.getParameter("nombre");
+   String email=request.getParameter("email");
+   int telefono=Integer.parseInt(request.getParameter("telefono"));
+   //creamos un objeto de la capa de lógica de negocio
+   //y llamamos al método encargado de hacer el alta
 		
-		gcontactos.altaContacto(nombre,email,telefono);
-		request.getRequestDispatcher("menu.html").forward(request, response);
-	}
+   gcontactos.altaContacto(nombre,email,telefono);
+   request.getRequestDispatcher("menu.html").forward(request, response);
+}
 ```
 
 Vamos a hacer exactamente lo mismo en el resto de los servlets. Una vez hecho esto ya tendríamos adaptados los servlet con la inyección de dependencia EJB para realizar las mismas tareas que realizaban antes.
