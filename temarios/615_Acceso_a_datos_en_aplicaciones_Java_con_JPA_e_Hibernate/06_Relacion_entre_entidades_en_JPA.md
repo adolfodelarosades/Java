@@ -1629,7 +1629,9 @@ La base de datos tiene 4 tablas pero para esta aplicación solo vamos a usar dos
 
 <img src="images/24-05.png">
 
-1. Lo primero que vamos a hacer antes de nada será crear el DataSource en GlassFish para poder acceder a la base de datos `almacen`.
+#### 1. Creación DataSource y JNDI en GlassFish.
+
+Lo primero que vamos a hacer antes de nada será crear el DataSource en GlassFish para poder acceder a la base de datos `almacen`.
 
 Por lo que nos vamos a GlassFish - Resources - JDBC - JDBC Connections Pools
 
@@ -1692,9 +1694,9 @@ Presionamos OK.
 
 Perfecto ahora si ya esta nuestro DataSource y JNDI completamente funcional.
 
-AQUIIIII
+#### 2. Repetir los pasos de la sección "22 Crear entidades relacionadas parte I" para crear la capa de Persistencia y las Entidades Seccion y Producto.
 
-
+AQUI.
 
 Bien pues vamos a ver en el entorno de desarrollo Eclipse cómo se desarrollaría dicha aplicación.
 
