@@ -793,13 +793,35 @@ Vamos a hacer exactamente lo mismo en el resto de los servlets. Una vez hecho es
 
 En teoría de la vista no hay que tocar absolutamente nada, pero tal y como estaba hecha esta página de `contactos.jsp` tenia un import con `modelo.GestionContactos,` que no se usaba para nada pero lo tenia simplemente se elimina porque esas clases ese no se va a utilizar en la JSP.
 
+Antes de ejecutar la aplicación vemos que nos da una serie de errores en las clases del Modelo y Servlets
+
+<img src="images/20-50.png">
+
+Esto es por que no reconoce las librerias de los EJB `Stateless cannot be resolved to a type`. Según este enlace https://stackoverflow.com/questions/9830401/java-ejb-the-import-javax-ejb-cannot-be-resolved/24833985 debemos incluir el archivo `glassfish5\glassfish\lib\javaee.jar` dentro de nuestro Java Build Path, vamos a hacerlo.
+
+<img src="images/20-51.png">
+
+<img src="images/20-52.png">
+
+<img src="images/20-53.png">
+
+<img src="images/20-54.png">
+
+Como podemos observar los errores han desaparecido.
+
 Pues ya lo tenemos todo listo y se supone que el ejercicio funcionaría exactamente igual que antes vamos a ejecutar la página de login para autenticarnos
 
-<img src="images/20-18.png">
+<img src="images/20-55.png">
 
-seleccionamos un servidor GlassFish yo lo tengo arrancado 
+Seleccionamos un servidor GlassFish yo lo tengo arrancado 
 
-<img src="images/20-19.png">
+<img src="images/20-56.png">
+
+Y horror un nuevo error.
+
+<img src="images/20-57.png">
+
+
 
 se iniciaría ahora está publicando la aplicación y en el momento que arranque el navegador aparece aquí el navegador tendremos la página de inicio
 
