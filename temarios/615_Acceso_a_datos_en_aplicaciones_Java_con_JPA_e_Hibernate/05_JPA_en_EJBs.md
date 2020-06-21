@@ -602,24 +602,22 @@ import javax.persistence.TypedQuery;
 
 import entidades.Usuario;
 
-/**
- * Session Bean implementation class GestionUsuarioEjb
- */
+
 @Stateless
 public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
-
 	@PersistenceContext(unitName="615-04_web_jpa")
 	EntityManager em;
-	public boolean autenticar(String usuario, String pwd) {
-		EntityManager em = getEntityManager();
-		boolean res = false;
-		TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+	@Override
+	public boolean autenticar(String usuario, String pwd){
+		
+		boolean res=false;
+		TypedQuery<Usuario> qr=em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
 		qr.setParameter(1, usuario);
 		qr.setParameter(2, pwd);
-		try {
+		try{
 			qr.getSingleResult();
-			res = true;
-		} catch (Exception ex) {
+			res=true;
+		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 		return res;
@@ -662,8 +660,7 @@ Vamos a hacer lo mismo con `GestionContactos` vamos a crear un segundo EJB volve
 <img src="images/20-17.png">
 
 Fíjate aquí que no te lo comenten en la lección anterior que dentro de lo que son 
-`State Type` tenemos `Stateless`, `Stateful` y `Singleton`, habitualmente `Stateless`  que no mantienen el Estado, es decir de una llamada a otra de un método EJB no hay que mantener información dentro de lo que es el propio EJB, no contienen variables atributos para almacenar información, esto permitirá que el contenedor de EJB haga una gestión óptima de dicha instancia de EJBs, siempre que podamos `Stateless`, si por lo que sea vamos a implementar una lógica de negocio que tienen que almacenar datos en atributos asociados a cada cliente que haga la llamada utilizaremos `Stateless`, lo dejamos con la `Stateless` y finalizamos.
-
+`State Type` tenemos `Stateless`, `Stateful` y `Singleton`, habitualmente `Stateless` que no mantienen el Estado, es decir de una llamada a otra de un método EJB no hay que mantener información dentro de lo que es el propio EJB, no contienen variables atributos para almacenar información, esto permitirá que el contenedor de EJB haga una gestión óptima de dicha instancia de EJBs, siempre que podamos `Stateless`, si por lo que sea vamos a implementar una lógica de negocio que tienen que almacenar datos en atributos asociados a cada cliente que haga la llamada utilizaremos `Stateless`, lo dejamos con la `Stateless` y finalizamos.
 
 Se habrán creado de nuevo la clase junto con la interfaz `GestionContactosEjb`, `GestionContactosEjbLocal` y vamos a hacer lo mismo de antes es decir vamos a `GestionContactos` nos vamos a llevar todos los métodos que teníamos ahí creados y los vamos a copiar a `GestionContactosEjb` el constructor lo podemos borrar no nos hace falta, vamos a incluir la gestión de dependencia de `EntityManager`, hacemos algunos retoques que tenemos que hacer a nivel de los métodos. Aquí viene algo interesante que es lo que venimos comentando desde lecciones anteriores, es que el contenedor EJB se va a encargar de la gestión de la transaccionalidad. No necesitamos nosotros obtener `EntityTransaction`, comenzar, confirmar o rechazar una transacción, eso lo gestiona automáticamente el contenedor de EJBs, por lo tanto en el método `altaContacto` simplemente se crear el objeto Contacto y se persiste punto, iniciar la transacción al principio, confirmarlo al final lo hace automáticamente el contenedor de EJB. Con los demas métodos es exactamente lo mismo. El código final de la clase EJB queda así:
 
@@ -673,11 +670,7 @@ Se habrán creado de nuevo la clase junto con la interfaz `GestionContactosEjb`,
 package modelo;
 
 import java.util.List;
-
 import javax.ejb.Local;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 import entidades.Contacto;
 
 @Local
