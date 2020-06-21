@@ -409,7 +409,27 @@ java.lang.ClassCastException: com.mysql.jdbc.Driver cannot be cast to javax.sql.
 
 No he podido saber la causa del error. En el proyecto del profesor usa MySQL 5 y yo la 8 por lo que habría ver por donde va el fallo, la URL https://nikals.se/2019/04/05/using-mysql-connector-j-jdbc-driver-with-glassfish/ menciona una posible solución.
 
-Voy a seguir como si funcionará.
+### Solución encontrada.
+
+La solución esta en el siguiente enlace:
+
+https://es.stackoverflow.com/questions/261195/error-pool-de-conexi%C3%B3n-glassfish-4-0-con-mysql-8-servidor-aws
+
+<img src="images/19-50.png">
+
+Con los valores:
+
+**Resource Type:** javax.sql.DataSource
+
+**Datasource Classname:** com.mysql.cj.jdbc.MysqlDataSource
+
+Hay que añadir la propiedad
+
+**useSSL:** false
+
+<img src="images/19-51.png">
+
+Con esto el Ping ya responde: **Ping Succeeded**
 
 En caso de que todo estuvierá bien al momento de hacer el Ping nos aparecería `Ping Succeeded` significa que todo ha ido bien y que es capaz de crear conexiones.
 
@@ -427,9 +447,7 @@ Damos al botón New y le damos el nombre del DataSource lo que llaman el *JNDI N
  
  y ya tenemos el DataSource, en la siguiente lección vamos a ver ya cómo utilizar este DataSource para proporcionar los datos de conexión en el `persistence.xml` de cara a que EJB pueda gestionar la transaccionalidad como te decía antes a través de un API que se llama JTA y podamos delegar en él dicha transaccionalidad.
 
-La solución esta en el siguiente enlace:
 
-https://es.stackoverflow.com/questions/261195/error-pool-de-conexi%C3%B3n-glassfish-4-0-con-mysql-8-servidor-aws
 
 # 20 Ejercicio práctico III 17:57
 
