@@ -809,11 +809,11 @@ Esto es por que no reconoce las librerias de los EJB `Stateless cannot be resolv
 
 Como podemos observar los errores han desaparecido.
 
-Pues ya lo tenemos todo listo y se supone que el ejercicio funcionaría exactamente igual que antes vamos a ejecutar la página de login para autenticarnos
+Pues ya lo tenemos todo listo y se supone que el ejercicio funcionaría exactamente igual que antes vamos a ejecutar la página de login para autenticarnos.
 
 <img src="images/20-55.png">
 
-Seleccionamos un servidor GlassFish yo lo tengo arrancado 
+Seleccionamos un servidor GlassFish.
 
 <img src="images/20-56.png">
 
@@ -821,9 +821,34 @@ Y horror un nuevo error.
 
 <img src="images/20-57.png">
 
+Según el enlace https://www.it-swarm.dev/es/java/no-se-puede-implementar-una-aplicacion-para-glassfish-4.1-en-eclipse/1049983109/ sugiere los siguientes pasos:
 
+Pruebe los siguientes pasos:
 
-se iniciaría ahora está publicando la aplicación y en el momento que arranque el navegador aparece aquí el navegador tendremos la página de inicio
+1. clic derecho en glassfish servidor
+2. haga clic en propiedades
+3. entonces obtendrá 3 opciones (general, glassfish, monitoreo) en el lado izquierdo de ese cuadro.
+4. haga clic en glassfish
+5. haga clic en la casilla de verificación "Usar archivos JAR para la implementación". Anteriormente estaba desmarcado. Por eso me estaba dando problemas.
+
+<img src="images/20-58.png">
+
+<img src="images/20-59.png">
+
+<img src="images/20-60.png">
+
+Vamos a intententarlo de nuevo. vamos a ejecutar la página de login para autenticarnos.
+
+<img src="images/20-61.png">
+
+Seleccionamos un servidor GlassFish.
+
+<img src="images/20-62.png">
+
+Y ahora si arranca nuestra Aplicación, ahora está publicando la aplicación y en el momento que arranque el navegador aparece aquí el navegador tendremos la página de inicio
+
+<img src="images/20-63.png">
+
 
 <img src="images/20-20.png">
 
