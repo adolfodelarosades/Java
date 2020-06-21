@@ -1607,13 +1607,94 @@ public class Cuenta implements Serializable {
 
 <img src="images/24-01.png">
 
+Bueno pues después de haber visto cómo crear entidades relacionadas utilizando Eclipse, qué te parece si hacemos una aplicación donde pongamos en práctica lo que hemos estudiado.
+
 <img src="images/24-02.png">
 
-Bueno pues después de haber visto cómo crear entidades relacionadas utilizando Eclipse, qué te parece si hacemos una aplicación donde pongamos en práctica lo que hemos estudiado la idea se trataría de desarrollar una aplicación Web en la que vamos a trabajar con la base de datos de almacén la que hemos creado las relaciones a muchos muchos a uno anteriormente y se trataría de tener una página inicial con un enlace que nos daría acceso a una página en la que podríamos seleccionar la sección cuyos productos queremos consultar es una aplicación para consulta de productos.
+La idea se trataría de desarrollar una aplicación Web en la que vamos a trabajar con la base de datos de almacén la que hemos creado las relaciones Uno a Muchos - Muchos a Uno anteriormente y se trataría de tener una página inicial con un enlace que nos daría acceso a una página en la que podríamos seleccionar la sección cuyos productos queremos consultar, es una aplicación para consulta de productos.
 
-Si seleccionamos una sección al pulsar el botón Ver productos veríamos los productos que pertenecen a dicha sección su nombre y precio y descripción tendríamos también una opción todos que al seleccionarlo nos mostraría los productos de todas las secciones.
+Si seleccionamos una sección al pulsar el botón *Ver Productos* veríamos los productos que pertenecen a dicha sección su nombre, precio y descripción. Tendríamos también una opción Todos que al seleccionarlo nos mostraría los productos de todas las secciones.
 
-En esta tercera página habría un enlace para volver otra vez a la página de selección de sección.
+En la tercera página habría un enlace para volver otra vez a la página de Selección de Sección.
+
+### Creación de la Aplicación
+
+Lo primero que vamos a recordar son los datos de nuestra la base de datos que usaremos en esta aplicación el nombre es `almacen`.
+
+<img src="images/24-03.png">
+
+La base de datos tiene 4 tablas pero para esta aplicación solo vamos a usar dos de ellas `secciones` y `productos`, los datos que contienen actualmente son:
+
+<img src="images/24-04.png">
+
+<img src="images/24-05.png">
+
+1. Lo primero que vamos a hacer antes de nada será crear el DataSource en GlassFish para poder acceder a la base de datos `almacen`.
+
+Por lo que nos vamos a GlassFish - Resources - JDBC - JDBC Connections Pools
+
+<img src="images/24-06.png">
+
+Vamos a presionar el botón New
+
+<img src="images/24-07.png">
+
+Ingresamos los datos para este nuevo DataSource.
+
+<img src="images/24-08.png">
+
+Damos a siguiente paso
+
+<img src="images/24-09.png">
+
+Aquí debemos meter las propiedades necesarias para poder hacer la conexión, algunas de las que necesitamos no aparecen hay que añadirlas.
+
+Las propiedades completas son:
+
+databaseName: almacen
+password: root
+Port: 3306
+portNumber: 3306
+serverName: localhost
+Url: jdbc:mysql://localhost:3306/almacen?serverTimezone=UTC
+URL: jdbc:mysql://localhost:3306/almacen?serverTimezone=UTC
+user: root
+useSSL: false
+
+<img src="images/24-10.png">
+
+ademas en la pestaña General en el dato Datasource Classname: tuvimos que cambiar el valor que salia por `com.mysql.cj.jdbc.MysqlDataSource` para que funcione.
+
+<img src="images/24-11.png">
+
+Al presionar el botón Ping para probar la conexión a la base de datos nos muesta **Ping Succeeded**
+
+<img src="images/24-12.png">
+
+Por lo que ya tenemos nuestra JDBC Connection Pools `poolalmacen` funcionando.
+
+<img src="images/24-13.png">
+
+Nos fata hacer el JNDI para lo cual vamos a JDBC Resources 
+
+<img src="images/24-14.png">
+
+Presionamos New para crear un nuevo JNDI e ingresamos los datos solicitados.
+
+JNDI Name: `jdbc/almacends`
+Pool Name: `poolalmacen`
+
+<img src="images/24-15.png">
+
+Presionamos OK.
+
+<img src="images/24-16.png">
+
+Perfecto ahora si ya esta nuestro DataSource y JNDI completamente funcional.
+
+AQUIIIII
+
+
 
 Bien pues vamos a ver en el entorno de desarrollo Eclipse cómo se desarrollaría dicha aplicación.
 
