@@ -863,19 +863,17 @@ nos autenticamos y vamos al menú podemos probar las dos opciones que tenemos ve
 
 <img src="images/20-69.png">
 
-<img src="images/20-70.png">
-
-<img src="images/20-71.png">
-
 <img src="images/20-72.png">
 
-Diferencias, insistir la Lógica Negocio (modelo) la hemos implementado con EJBs, las Entidades (entidades) son las mismas, la capa de persistencia (`persistence.xml`) es la misma lo único es que ahora como estamos utilizando EJBs el acceso a los datos está haciendose a través de un DataSource, las conexiones que está utilizando para sincronizar las operaciones contra la base de datos, el motor de persistencia las está realizando a través de un DataSource que hemos creado en el Servidor de Aplicaciones local. Los controladores (servlets) al usar EJB han cambiado un poco para inyectar el EJB y no hacer uso de la Transaccionalidad que maneja automaticamente los EJB, las vistas son exactamente las mismas.
+<img src="images/20-70.png">
+
+Como podemos observar el proyecto trabaja exactamente igual que el proyecto anterior pero **contiene varias diferencias**, insistir la Lógica Negocio (modelo) la hemos implementado con EJBs, las Entidades (entidades) son las mismas, la capa de persistencia (`persistence.xml`) es la misma lo único es que ahora como estamos utilizando EJBs el acceso a los datos está haciendose a través de un DataSource, las conexiones que está utilizando para sincronizar las operaciones contra la base de datos, el motor de persistencia las está realizando a través de un DataSource que hemos creado en el Servidor de Aplicaciones local. Los controladores (servlets) al usar EJB han cambiado un poco para inyectar el EJB y no hacer uso de la Transaccionalidad que maneja automaticamente los EJB, las vistas son exactamente las mismas.
 
 Han visto cómo implementar ya la Lógica Negocio con EJBs que es muy parecido a hacerlo con clases, pero incluso con menos código.
 
 ### :computer: Código Completo - 615-04_web_jpa 
 
-<img src="images/20-23.png">
+<img src="images/20-73.png">
 
 *`pom.xml`*
 
@@ -938,12 +936,13 @@ Han visto cómo implementar ya la Lógica Negocio con EJBs que es muy parecido a
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-	<persistence-unit name="615-04_web_jpa">
-		<jta-data-source>jdbc/agendads</jta-data-source>
-		<class>entidades.Contacto</class>
-		<class>entidades.Usuario</class>
-	</persistence-unit>
+   <persistence-unit name="615-04_web_jpa">
+      <jta-data-source>jdbc/agendads</jta-data-source>
+      <class>entidades.Contacto</class>
+      <class>entidades.Usuario</class>
+   </persistence-unit>
 </persistence>
+
 ```
 
 **Entidades**
@@ -1102,11 +1101,7 @@ public class Usuario implements Serializable {
 package modelo;
 
 import java.util.List;
-
 import javax.ejb.Local;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 import entidades.Contacto;
 
 @Local
@@ -1223,24 +1218,22 @@ import javax.persistence.TypedQuery;
 
 import entidades.Usuario;
 
-/**
- * Session Bean implementation class GestionUsuarioEjb
- */
+
 @Stateless
 public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
-
 	@PersistenceContext(unitName="615-04_web_jpa")
 	EntityManager em;
-	public boolean autenticar(String usuario, String pwd) {
-		EntityManager em = getEntityManager();
-		boolean res = false;
-		TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+	@Override
+	public boolean autenticar(String usuario, String pwd){
+		
+		boolean res=false;
+		TypedQuery<Usuario> qr=em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
 		qr.setParameter(1, usuario);
 		qr.setParameter(2, pwd);
-		try {
+		try{
 			qr.getSingleResult();
-			res = true;
-		} catch (Exception ex) {
+			res=true;
+		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 		return res;
@@ -1251,13 +1244,14 @@ public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
 
 **Servlets**
 
-*`AltaContacto.java`*
+*`AltaAction.java`*
 
 ```java
 package servlets;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -1296,13 +1290,13 @@ package servlets;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.GestionContactos;
 import modelo.GestionContactosEjbLocal;
 
 /**
@@ -1322,7 +1316,6 @@ public class EliminarAction extends HttpServlet {
 	}
 
 }
-
 ```
 
 *`RecuperarAction.java`*
@@ -1333,6 +1326,7 @@ package servlets;
 import java.io.IOException;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -1361,7 +1355,6 @@ public class RecuperarAction extends HttpServlet {
 	}
 
 }
-
 ```
 
 *`LoginAction.java`*
@@ -1371,12 +1364,15 @@ package servlets;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import modelo.GestionUsuarioEjbLocal;
 
 /**
  * Servlet implementation class LoginAction
@@ -1386,7 +1382,7 @@ public class LoginAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	GestionUsuariosEjbLocal gusuarios;
+	GestionUsuarioEjbLocal gusuarios;
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user=request.getParameter("user");
 		String pwd=request.getParameter("pwd");
@@ -1458,6 +1454,8 @@ public class Controller extends HttpServlet {
 }
 ```
 
+**WebContent**
+
 *`login.html`*
 
 ```html
@@ -1468,12 +1466,11 @@ public class Controller extends HttpServlet {
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="Controller?op=doLogin" method="post">
-		Usuario:<input type="text" name="user"/><br/>
-		Contraseña:<input type="password" name="pwd"/><br/>
-		<input type="submit" value="Enviar"/>
-	
-	</form>
+   <form action="Controller?op=doLogin" method="post">
+      Usuario:<input type="text" name="user"/><br/>
+      Contraseña:<input type="password" name="pwd"/><br/>
+      <input type="submit" value="Enviar"/>
+   </form>
 </body>
 </html>
 ```
