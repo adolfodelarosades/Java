@@ -1694,9 +1694,334 @@ Presionamos OK.
 
 Perfecto ahora si ya esta nuestro DataSource y JNDI completamente funcional.
 
-#### 2. Repetir los pasos de la sección "22 Crear entidades relacionadas parte I" para crear la capa de Persistencia y las Entidades Seccion y Producto.
+#### 2. Creación Proyecto Eclipse 615-07_proyecto_relacion_almacen. Repetir los pasos de la sección "22 Crear entidades relacionadas parte I" para crear la capa de Persistencia y las Entidades Seccion y Producto.
 
-AQUI.
+1. Creación Proyecto Eclipse
+
+   <img src="images/24-17.png">
+
+   Metemos nombre y tipo de Servidor que vamos a usar en este proyecto.
+
+   <img src="images/24-18.png">
+
+   Finalizamos. Y el proyecto se crea con la estructura básica.
+
+   <img src="images/24-19.png">
+
+2. Lo primero que vamos a hacer es incorporar la característica JPA a nuestro proyecto, nos vamos a ir a través del botón derecho a las propiedades y en Project Faces activaremos JPA.
+
+   <img src="images/24-20.png">
+
+   <img src="images/24-21.png">
+
+   <img src="images/24-22.png">
+
+   <img src="images/24-23.png">
+
+   <img src="images/24-24.png">
+
+   Con esto vemos que se ha creado el archivo `persistence.xml` con el siguiente contenido.
+
+   *`persistence.xml`*
+
+   ```html
+   <?xml version="1.0" encoding="UTF-8"?>
+   <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+      <persistence-unit name="615-07_proyecto_relacion_almacen">
+      </persistence-unit>
+   </persistence>
+   ```
+
+   Podemos observar que la Unidad de Persistencia se llama `615-07_proyecto_relacion_almacen`.
+
+3. Ahora vamos a proceder como siempre que queremos generar entidades a irnos a la opción botón derecho dentro del proyecto, JPA Tools - Generate entities from Tables ..., generar entidades desde tablas.
+
+   <img src="images/24-25.png">
+   
+   <img src="images/24-26.png">
+   
+   Entonces aquí lo que vamos a tener que hacer es crear una conexión a la base de datos `almacen` que hemos creado, es una base de datos de MySQL vamos a llamar a la conexión por ejemplo `mysql_proyecto_almacen`. Podríamos haber usado la conexión `mysql_bd_almacen` que creamos en la lección 22, pero lo hacemos para repasar la creación de conexiones.
+   
+   <img src="images/24-27.png">
+   
+   En el siguiente paso.
+   
+   <img src="images/24-28.png">
+   
+   Seleccionamos el Driver y rellenamos los datos para la conexión a la base de datos `almacen`. Podemos hacer un Test de la conexión.
+   
+   <img src="images/24-29.png">
+   
+   Al dar el botón OK, regresamos a la pantalla inicial.
+   
+   <img src="images/24-30.png">
+   
+   Aquí seleccionamos el Schema `almacen` y con esto nos aparecen las 4 tablas de este esquema.
+   
+   <img src="images/24-31.png">
+   
+   Seleccionamos las dos tablas con las que vamos a trabajar en este proyecto `Productos` y `Secciones`.
+   
+   <img src="images/24-32.png">
+   
+   Damos al botón siguiente donde se van a crear la relación entre tablas.
+   
+   <img src="images/24-33.png">
+   
+   Presionamos el botón New Association
+   
+   <img src="images/24-34.png">
+   
+   Vamos a añadir aquí una nueva Asociación de Tablas que es como llama Eclipse la relación entre entidades. En nuestro caso se trataba de una Relación Uno a Muchos y Muchos a Uno, por lo tanto le dejaremos la opción simple. Elegimos una de las tablas secciones por ejemplo y tabla dos productos.
+   
+   <img src="images/24-35.png">
+   
+   En el siguiente paso. 
+   
+   <img src="images/24-36.png">
+   
+   Vamos a indicar de ambas tablas cuál es el campo común, la columna común a ambas tablas a través del botón Add, ponemos para ambas tablas el campo `idSeccion`.
+   
+   <img src="images/24-37.png">
+   
+   Vamos al siguiente paso.
+   
+   <img src="images/24-38.png">
+   
+   Debemos elegir el tipo de relación queremos entre las dos Entidades que vamos a generar a partir de las tablas, pueden ser Muchos a Uno, a cada producto le corresponden muchas secciones no es el caso, sino Uno a Muchos a cada sección le corresponden muchos productos, que obviamente se traducirá en el lado de producto en una relación tipo Muchos a Uno, muchos productos a una sección.
+   
+   <img src="images/24-39.png">
+   
+   Una vez ya elegido esto finalizamos aparece aquí la información de la relación gráficamente.
+   
+   <img src="images/24-40.png">
+   
+   Si pulsamos sobre ella nos indica las propiedades que hemos configurado.
+   
+   <img src="images/24-41.png">
+   
+   En el siguiente paso.
+   
+   <img src="images/24-42.png">
+   
+   Demos indicar ya los datos que normalmente indicamos cuando vamos a crear entidades a partir de las tablas. En la generación de claves(Key generator) de momento no decimos nada, luego se lo vamos a indicar uno por uno en el paso siguiente, lo que si queremos que las entidades se generen en el paquete `entidades` no en model como indica lo cambiamos, muy importante ahora porque como se trata de asociación de Uno a Muchos - Muchos a Uno, va a haber entidades que tendrán campos de colección, debemos indicar en Collection properties type si queremos que esas colecciones sean de tipo Set o List que es el que habitualmente se suele utilizar.
+   
+   <img src="images/24-43.png">
+   
+   En el siguiente paso
+   
+   <img src="images/24-44.png">
+   
+   Tabla `Productos`, nombre de la entidad `Producto`, generación de clave `identity`.
+   
+   <img src="images/24-45.png">
+   
+   Tabla `Secciones` nombre de la clase `Seccion`, generación de clave también es `identity`.
+   
+   <img src="images/24-46.png">
+   
+   Finalizamos y ya tenemos nuestras entidades generadas y relacionadas.
+   
+   <img src="images/24-47.png">
+   
+   Vamos a comprobarlo, empezamos por la Entidad `Seccion` la del lado 1.
+   
+   *`Seccion`*
+   
+   ```html
+   package entidades;
+
+   import java.io.Serializable;
+   import javax.persistence.*;
+   import java.util.List;
+
+   /**
+   * The persistent class for the secciones database table.
+   * 
+   */
+   @Entity
+   @Table(name="secciones")
+   @NamedQuery(name="Seccion.findAll", query="SELECT s FROM Seccion s")
+   public class Seccion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idSeccion;
+
+	private String responsable;
+
+	private String seccion;
+
+	//bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy="seccione")
+	private List<Producto> productos;
+
+	public Seccion() {
+	}
+
+	public int getIdSeccion() {
+		return this.idSeccion;
+	}
+
+	public void setIdSeccion(int idSeccion) {
+		this.idSeccion = idSeccion;
+	}
+
+	public String getResponsable() {
+		return this.responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+
+	public String getSeccion() {
+		return this.seccion;
+	}
+
+	public void setSeccion(String seccion) {
+		this.seccion = seccion;
+	}
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public Producto addProducto(Producto producto) {
+		getProductos().add(producto);
+		producto.setSeccione(this);
+
+		return producto;
+	}
+
+	public Producto removeProducto(Producto producto) {
+		getProductos().remove(producto);
+		producto.setSeccione(null);
+
+		return producto;
+	}
+
+   }
+   ```
+   
+   Vemos las anotaciones clásicas y ademas ese nuevo atributo `productos``
+   
+   
+   ```java
+   //bi-directional many-to-one association to Producto
+   @OneToMany(mappedBy="seccione")
+   private List<Producto> productos;
+   ```
+
+   que contienen la colección de productos asociados a esta sección anotada con @OneToMany(mappedBy="seccione") el nombre del atributo de la otra Entidad de Producto, que contiene el objeto seccione asociado, le a puesto seccione lo podemos cambiar o lo podemos dejar así no pasa nada.
+
+Vamos a ver esa Entidad Producto
+   
+   *`Producto`*
+   
+   ```html
+   package entidades;
+
+   import java.io.Serializable;
+   import javax.persistence.*;
+
+
+   /**
+    * The persistent class for the productos database table.
+    * 
+    */
+   @Entity
+   @Table(name="productos")
+   @NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+   public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idProducto;
+
+	private String descripcion;
+
+	private String nombre;
+
+	private double precio;
+
+	//bi-directional many-to-one association to Seccion
+	@ManyToOne
+	@JoinColumn(name="idSeccion")
+	private Seccion seccione;
+
+	public Producto() {
+	}
+
+	public int getIdProducto() {
+		return this.idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public Seccion getSeccione() {
+		return this.seccione;
+	}
+
+	public void setSeccione(Seccion seccione) {
+		this.seccione = seccione;
+	}
+
+   }
+   ```
+   
+   Vemos que tenemos efectivamente un atributo de tipo `Seccion` llamado `seccione`.
+   
+   ```java
+   //bi-directional many-to-one association to Seccion
+   @ManyToOne
+   @JoinColumn(name="idSeccion")
+   private Seccion seccione;
+   ```
+   
+   
+
+//bi-directional many-to-one association to Seccion
+@ManyToOne
+@JoinColumn(name="idSeccion")
+private Seccion seccione;
+   
+
+
+   
+   
 
 Bien pues vamos a ver en el entorno de desarrollo Eclipse cómo se desarrollaría dicha aplicación.
 
