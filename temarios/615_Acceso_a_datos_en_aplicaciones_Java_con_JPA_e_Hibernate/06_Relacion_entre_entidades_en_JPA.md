@@ -2011,12 +2011,13 @@ Vamos a ver esa Entidad Producto
    private Seccion seccione;
    ```
    
+   Lo a anotado con `@ManyToOne` a través `@JoinColumn(name="idSeccion")` como ya explicamos en la lección 21 se establece el nombre de las columnas que definen esa relación entre las tablas, como en ambas tablas se llama igual basta con indicar el atributo name="idSeccion") para saber que ambas columnas con ese mismo nombre, van a ser las que permiten identificar los objetos asociados a cada una de las otras entidades de la tabla relacionada.
+
+   Por lo tanto ya tenemos las entidades generadas con toda la información de configuración correspondiente a sus relaciones.
+   
    
 
-//bi-directional many-to-one association to Seccion
-@ManyToOne
-@JoinColumn(name="idSeccion")
-private Seccion seccione;
+
    
 
 
