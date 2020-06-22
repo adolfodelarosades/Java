@@ -2236,7 +2236,7 @@ import entidades.Seccion;
 @Stateless
 public class GestionProductosEjb implements GestionProductosEjbLocal {
 
-   @PersistenceContext(unitName="almacen_PU")
+   @PersistenceContext(unitName="615-07_proyecto_relacion_almacen")
    EntityManager em;
 		
    @Override
@@ -2497,6 +2497,36 @@ Dentro de  `WebContent` vamos a tener las páginas HTML y JSP necesarias:
 ```
 
 #### 7. Probar la Aplicación.
+
+Vamos a ejecutar la aplicación, partiendo del archivo `inicio.html`.
+
+<img src="images/24-64.png">
+
+<img src="images/24-65.png">
+
+<img src="images/24-66.png">
+
+<img src="images/24-67.png">
+
+<img src="images/24-68.png">
+
+<img src="images/24-69.png">
+
+<img src="images/24-70.png">
+
+<img src="images/24-71.png">
+
+<img src="images/24-72.png">
+
+<img src="images/24-73.png">
+
+<img src="images/24-74.png">
+
+<img src="images/24-75.png">
+
+<img src="images/24-76.png">
+
+<img src="images/24-77.png">
 
 
 Pero bueno pongamos otro caso imaginamos que imagínate que queremos también incluir un método que nos que queremos que nos devuelva la sección a la que pertenece un determinado producto a partir de su nombre.
