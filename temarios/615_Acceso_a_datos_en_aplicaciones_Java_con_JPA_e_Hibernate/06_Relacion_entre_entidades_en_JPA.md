@@ -3059,9 +3059,193 @@ public class ProductosAction extends HttpServlet {
 </html>
 ```
 
-
 # 25 Ejercicio práctico IV parte 2 01:57
+
+En esta segunda parte de la lección simplemente vamos a implementar un par de métodos donde vamos a aprovecharnos de la relación Muchos a Muchos que establecimos en la base de datos de `bancabd` entre las entidades `Cliente` y `Cuenta` del proyecto `615-06_relacion_bancadb`.
+
+<img src="images/25-01.png">
+
+Tendríamos que crear un EJB `GestionBancoEjb` pero dado como esta este proyecto no lo podemos hacer. Vamos a partir nuevamente del proyecto `615-04_web_jpa` vamos hacer una copia para crear el proyecto `615-08_proyecto_relacion_banco` para contar con la estructura que nos permite crear los EJBs.
+
+Listo ya tenemos la copia del proyecto con las Entidades `Cliente` y `Cuenta` y con nuestro archivo `persistence.xml`.
+
+<img src="images/25-02.png">
+
+Ahora vamos a crear el `Modelo` es decir el EJB de nombre `GestionBancoEjb`.
+
+<img src="images/25-03.png">
+
+<img src="images/25-04.png">
+
+<img src="images/25-05.png">
+
+Una vez creado nuestro EJB en la Interfaz declaramos dos métodos.
+
+*`GestionBancoEjbLocal`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import entidades.Cliente;
+import entidades.Cuenta;
+
+@Local
+public interface GestionBancoEjbLocal {
+	
+   List<Cliente> obtenerClientesCuenta(int numcuenta);
+   List<Cuenta> obtenerCuentasClientes(String nombre, String direccion);
+
+}
+```
+
+Un método `obtenerClientesCuenta(int numcuenta)` que a partir del número de cuenta nos dice o nos devuelve la lista de clientes asociados a dicha cuenta y por otro método `obtenerCuentasClientes(String nombre, String direccion)` que a partir del nombre y dirección de un cliente nos da su lista de cuentas.
+
+Para ello vamos a aprovechar como digo la relación Muchos a Muchos que establecimos entre ambas entidades.
+
+El primer método `obtenerClientesCuenta(int numcuenta)`:
+
+```java
+@Override
+public List<Cliente> obtenerClientesCuenta(int numcuenta) {
+		
+   Cuenta ct = em.find(Cuenta.class, numcuenta);
+   return ct.getClientes();
+}
+```
+
+Obtener clientes de una determinada cuenta, se trataría de realizar una búsqueda simple de una cuenta a partir de su Primary Key y como ya viene con los objetos relacionados, se trataría simplemente de llamar al método `getClientes()`. No necesitamos ninguna instrucción JPQL para implementar esta funcionalidad.
+
+En cuanto a la obtención de las cuentas de un determinado cliente `obtenerCuentasClientes(String nombre, String direccion)`:
+
+```java
+@Override
+public List<Cuenta> obtenerCuentasClientes(String nombre, String direccion) {
+		
+   String jpql = "Select c From Cliente c Where c.nombre=?1 and c.direccion=?2";
+   TypedQuery<Cliente> q=em.createQuery(jpql, Cliente.class);
+   q.setParameter(1, nombre);
+   q.setParameter(2, direccion);
+		
+   return q.getResultList().get(0).getCuentas();
+}
+```
+
+Dado que en este caso nos proporcionan el nombre y dirección es decir la Primary Key del cliente, tenemos que montar la JPQL
+
+`jpql = "Select c From Cliente c Where c.nombre=?1 and c.direccion=?2"`
+
+que a partir de el nombre y dirección nos devolvería en teoría un cliente, pero si nos devuelven más de uno ya lo tenemos preparado para quedarnos solamente con uno de ellos. El caso es que nos devuelven los clientes asociados a esa condición, le proporcionamos los parámetros y como digo en `q.getResultList().get(0).getCuentas()` nos quedamos solamente con el primer cliente que cumple dicha condición, puesto que solamente vamos buscando uno y en caso de que por lo que fuera hubiera más de un cliente con el mismo nombre y dirección sólo nos quedaríamos con el primero.
+
+Al igual que antes ese objeto cliente trae todos los objetos cuentas relacionados, sería simplemente llamar a su método `getCuentas()` para recuperar la lista de objetos de entidades cuenta asociados.
+
 # 26 joins 05:53
+
+Bien pues ahora que ya sabemos como crear entidades relacionadas y los beneficios que esto nos aporta vamos a ver el uso de los Jaynes qué es exactamente un.
+
+Bueno pues como dice la palabra es una unión es una unión que se va a realizar dentro de una consulta J.P. QL entre entidades relacionadas gracias a esto vamos a poder operar sobre una entidad en base a condiciones que van a afectar a la entidad relacionada.
+
+Bueno este tipo de cosas si ya lo hemos hecho simplemente con el hecho de tener relacionadas las entidades pues por ejemplo podríamos recuperar una entidad por ejemplo sección A partir de ese identificador de sección y gracias al atributo producto ya sacamos todos los productos asociados a dicha sección pero no todas las operaciones son tan simples.
+
+Hay veces que dadas las condiciones que afectan a entidades relacionadas son más complejas y entonces pues dependiendo también de cómo es la relación entre las entidades pues con una J.P. cual es simple o simplemente utilizando la relación no vamos a poder resolver el problema y vamos a tener que recurrir a los Yei.
+
+Vas a ver ejemplos más adelante.
+
+Bueno tenemos dos tipos de JOIN implícitos y los de hoy explícitos.
+
+Qué es exactamente un implícito.
+
+Pues como dice la expresión es implícito un guión implícito es aquel en que ni siquiera hace falta utilizar la palabra join lo vamos a utilizar en relaciones muchos a uno cuando vamos a operar sobre la entidad del lado muchos y la condición afecta a la entidad en la Duno.
+
+De hecho esto ya lo hemos hecho en algún caso y no hemos utilizado la palabra Ayén porque ya implícitamente se trataba de un implícito.
+
+Por ejemplo vamos a de nuevo a nuestra base de datos almacén entidades sección y producto.
+
+Imaginamos que queremos recuperar todos los productos de aquellas secciones cuyo responsable sea una determinada persona.
+
+Pues entonces en vez de estar jugando con la entidad ir recogiendo primero las secciones que tengan su responsable y de ahí ir sacando los productos pues sería mucho más cómodo hacerlo de esta manera indicando recupera todos los productos donde su campo responsable de el atributo sección que está dentro de la entidad producto que están relacionadas es igual a tal valor.
+
+Esto sería muchísimo más directo de la misma manera queremos obtener los empleados de un departamento cuyo nombre sea informática pues directamente recojamos los empleados y en la condición como la entidad empleado tendrá un atributo departamento con el objeto departamento pues podemos establecer la condición de la forma en que aquí departamento puso nombre en informática esto como ves aquí no hemos utilizado la palabra Yeun en ningún caso porque como digo en aquellos casos donde se está seleccionando entidades del lado muchos y la condición afecta al lado uno directamente se puede expresar así.
+
+Y no hace falta utilizar la palabra pero qué pasa cuando estamos en caso contrario es decir tenemos por ejemplo una relación muchos a muchos o queremos obtener los datos del lado uno en el caso de una relación a muchos pero la condición afecta a la entidad del lado muchos.
+
+Bueno pues en ese caso ya sí que tendríamos que utilizar la palabra que hay y vamos a ver dos ejemplos
+
+muy claros.
+
+Por ejemplo imaginaros que queremos pues todas las secciones que dispongan de productos cuyo nombre contenga la palabra clave vale igual en vez de estar buscando los productos que tenga la condición y luego ir sacando las secciones de cada uno y juntando las todas en una colección podemos hacerlo de forma mucho más directa de la forma que aquí utilizando esta instrucción.
+
+Aquí si ves el uso de la palabra Yeung puesto que el campo digamos de unión atributo de unión es de tipo muchos vale la condición está afectando a la entidad del lado muchos entonces sería Select s concepcionense Yeung se utiliza dentro de la cláusula from y lo que sería el atributo que se refiere a los productos se le asocia al alias P Y entonces ya sobre él le aplica la condición como es.
+
+Esto ocurre como digo cuando la condición está afectando al lado muchos y lo que estamos recuperando entidades del lado uno aquí tenemos otro caso queremos todo caso de la tabla de clientes y de cuentas que tienen una relación muchos a muchos pues creemos todos los clientes cuyas cuentas tenían un saldo superior a mil en vez de estar sacando los datos como decía antes a través de la redacción de forma básica y luego ir juntándonos con este lo podemos obtener directamente dame a aquellos clientes cuyas cuentas tengan un saldo superior a 1000 en ese caso la cláusula Yeung se utiliza para asignarle un alias a cada cuenta de cada cliente.
+
+Bueno se me había pasado pues hacerte mención de esta función de JP QL que si conoces J SQL que es la misma distinct que nos permite pues quedarnos solamente con valores distintos. 
+
+Vale no repetir objetos.
+
+Bien pues con esto yo podemos ya digo montar cualquier instrucción JP QL que nos permita obtener datos de entidades a partir de condiciones que puedan afectar a otras.
+
+Quedaría encubierto cualquier caso y la verdad que el uso de los fondos va a simplificar enormemente instrucciones y recuperaciones ciertamente complejas cuando se ven involucradas no sólo dos entidades sino varias entidades son de una gran ayuda.
+
+Vamos a ver después en el siguiente la siguiente elección un ejercicio práctico de utilizaciones de Yeung explícitos.
+
 # 27 Ejercicio práctico V 06:02
 # Autoevaluación V 01:30
+
+Autoevaluación V
+Autoevaluación 5
+ 
+
+1.       En una relación uno a muchos / muchos a uno, ¿Qué entidad debe indicar la información de la relación entre tablas?:
+
+La entidad del lado muchos
+La entidad del lado uno
+Cualquiera de las dos
+No es necesario indicar la información de relación entre tablas dentro de una entidad
+2.       Tenemos dos entidades, A y B, relacionadas uno a muchos/muchos a uno. El atributo mappedBy utilizado en la anotación  @OneToMany dentro de la entidad A indica
+
+El nombre de la columna común a ambas tablas
+El nombre del atributo de la entidad B que contiene el objeto de la entidad A
+El nombre del atributo de la entidad A que contiene los objetos de B
+El nombre de la primary key
+3.       En una relación muchos a muchos, la información de la tabla de unión se indica a través de la anotación
+
+@ManyToMany
+@JoinTable
+@UnionTable
+@UnionColumns
+4.       Tenemos dos entidades, EntiA y EntiB, relacionadas uno a muchos/muchos a uno. El atributo "bs" de la entidad EntiA contiene los objetos de EntiB asociados, mientras que el atributo "a" de EntiB, contiene el objeto EntiA asociado. Queremos recuperar todas las entidades de tipo EntiA, para las que el atributo num de la entidad EntiB vale 7. ¿Cuál de las siguientes instrucciones JPQL sería la que tendríamos que utilizar?
+
+Select b From EntiB b Where b.a.num=7
+Select a From EntiA a Where b.num=7
+Select a From EntiA a, EntiB b Where b.num=7
+Select a From EntiA a Join a.bs b Where b.num=7
+5.       Tenemos dos entidades, EntiA y EntiB, relacionadas uno a muchos/muchos a uno. El atributo "bs" de la entidad EntiA contiene los objetos de EntiB asociados, mientras que el atributo "a" de EntiB, contiene el objeto EntiA asociado. Queremos recuperar todas las entidades de tipo EntiB, para las que el atributo longitud de la Entidad EntiA vale 10. ¿Cuál de las siguientes instrucciones JPQL sería la que tendríamos que utilizar?
+
+Select b From EntiB b Where EntiA.longitud=7
+Select b From EntiB b join EntiA a Where a.longitud=7
+Select b From EntiB b Where b.a.longitud=7
+Select a From EntiA a Where a.bs.longitud=7
+ 
+
+
+
+
+
+SOLUCIONES:
+
+1.- A
+
+2.- B
+
+3.- B
+
+4.-D
+
+5.- C
+
+
 
