@@ -2152,60 +2152,131 @@ Nos genera ambos archivos.
 
 <img src="images/24-62.png">
 
+*`GestionProductosEjbLocal`*
+
+```java
+package modelo;
+
+import javax.ejb.Local;
+
+@Local
+public interface GestionProductosEjbLocal {
+
+}
+```
+
+*`GestionProductosEjb`*
+
+```java
+package modelo;
+
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class GestionProductosEjb
+ */
+@Stateless
+public class GestionProductosEjb implements GestionProductosEjbLocal {
+
+
+}
+```
+
+En primer lugar te voy a enseñar los métodos que deberías poner en la Lógica de Negocio a través de la interfaz `GestionProductosEjbLocal`. La interfaz de negocio obviamente tendríamos que tener:
+
+
+* Un método `obtenerSecciones()` que nos devuelva todas las secciones para poder mostrarlas en la lista de selección de secciones
+* Otro método `obtenerProductos()` que nos devolvería todos los productos para el caso de que elijamos qué queremos ver todos los productos
+* Y un método último `obtenerProductosPorSeccion(int idSecc)` que es digamos el que más nos interesa por el tema de las relaciones que nos devolvería la lista de productos asociados a una determinada sección un determinado código de sección.
+
+*`GestionProductosEjbLocal`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import entidades.Producto;
+import entidades.Seccion;
+
+@Local
+public interface GestionProductosEjbLocal {
+	
+   List<Seccion> obtenerSecciones();
+	
+   List<Producto> obtenerProductos();
+	
+   List<Producto> obtenerProductosPorSeccion(int idSecc);
+
+}
+```
+
+Vamos a ver su implementación:
+
+*`GestionProductosEjb`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import entidades.Producto;
+import entidades.Seccion;
+
+/**
+ * Session Bean implementation class GestionProductosEjb
+ */
+@Stateless
+public class GestionProductosEjb implements GestionProductosEjbLocal {
+
+   @PersistenceContext(unitName="almacen_PU")
+   EntityManager em;
+		
+   @Override
+   public List<Seccion> obtenerSecciones(){
+      TypedQuery<Seccion> q=em.createNamedQuery("Seccion.findAll",Seccion.class);
+      return q.getResultList();
+   }
+   
+   @Override
+   public List<Producto> obtenerProductos(){
+      TypedQuery<Producto> q=em.createNamedQuery("Producto.findAll",Producto.class);
+      return q.getResultList();
+   }
+   
+   @Override
+   public List<Producto> obtenerProductosPorSeccion(int idSecc){
+      //String jpql = "Select p From Producto p Where p.idSeccion=" + idSecc;
+      Seccion s=em.find(Seccion.class, idSecc);
+      return s.getProductos();		
+   }
+}
+```
+
+Tanto en `obtenerSecciones()` como `obtenerProductos()` realmente son muy sencillos porque utilizamos lo que ya hemos visto en lecciones anteriores, aprovechamos las `NamedQuery` que creo automáticamente Eclipse cuando creamos las entidades de selección de todas las secciones en un caso selección de todos los productos en el otro caso. Creamos un `TypedQuery` y hacemos la llamada a `getResultList()`.
+
+Vamos a centrarnos en el método `obtenerProductosPorSeccion(int idSecc)` que es el más interesante. Cómo podríamos obtener la lista de productos de una determinada sección a partir de su código, una forma es que podríamos construir esta JPQL:
+
+`String jpql = "Select p From Producto p Where p.idSeccion=" + idSecc;`
+
+Como la columna `idSeccion` forma parte de la entidad `Producto` podríamos establecer esta condición, pero las entidades están relacionadas, como están relacionadas lo primero es que este campo de `idSeccion` ya no lo tenemos en la entidad `Producto`,  tendríamos el campo o atributo `seccione` por lo que el JPQL correcto sería:
+
+`String jpql = "Select p From Producto p Where p.seccione.idSeccion=" + idSecc;`
+
+esta sería la forma de hacerlo, pero ya que las tenemos relacionadas vamos a aprovecharnos de esa relación, no vamos a necesitar ninguna instrucción JPQL. Por qué podemos directamente hacer una búsqueda simple de la sección a partir de su Primary Key, cómo la sección está relacionada con productos ya trae la lista de productos asociados, sería simplemente una vez que ya tenemos el objeto `Seccion` llamar al método `getProductos()` que nos devuelve todos los productos que tiene esa sección asociados. Gracias a la relación, automáticamente al hacer la búsqueda de la sección vienen con ella todos los objetos de la entidad relacionada `Producto`. 
+
+Así de simple sería y esto es lo que nos facilita enormemente el trabajo y la Lógica de Negocio en muchas aplicaciones donde necesitamos aprovecharnos de la relación. Esto sería lo que es la parte JPA.
+
 #### 5. Creación del Controlador.
 
-#### 6. Creación de la Vista.
-
-
-
-
-
-
-
-
-   
-
-
-   
-   
-
-Bien pues vamos a ver en el entorno de desarrollo Eclipse cómo se desarrollaría dicha aplicación.
-
-Yo ya la tengo desarrollada.
-
-Realmente se trata de seguir los mismos pasos que hemos seguido los ejercicios anteriores y centrarnos en lo que es la lógica de negocio JPA entonces vamos a ello.
-
-Realmente he partido del ejercicio de la relación almacén que teníamos del vídeo anterior.
-
-Lo he renombrado como 0 5 ejercicio práctico 4.
-
-Y bueno pues en esas entidades que ya teníamos relacionadas producto sección de uno a muchos y de muchos a uno le hemos añadido ya la capa de persistencia realmente y lo hemos añadido pues todo lo que es la Lógica de Negocio el modelo el controlador con los servlet y las vistas paginas HTML y JSP.
-
-Pero vamos a centrarnos en el modelo que es la lógica de negocio JPA que accede a esa capa de persistencia y que debe ofrecer dicha funcionalidad en primer lugar te voy a enseñar los métodos que deberías poner la Lógica de Negocio a través de la interfaz de LJG La interfaz de negocio obviamente tendríamos que tener un método que nos devuelva todas las secciones para poder mostrarlas en la lista de selección de secciones otro método que nos devolvería todos los productos para el caso de que elijamos qué queremos ver todos los productos y un método último que es digamos en el que más nos interesa por el tema de las relaciones que nos devolvería la lista de productos asociados a una determinada sección un determinado código versación vamos a ver el código ampliamos aquí y puedes obtener secciones y obtener productos pues realmente son muy sencillos porque realmente utilizamos lo que ya hemos visto en lecciones anteriores.
-
-Aprovechamos las Lamet que cree que crea automáticamente Eclipse cuando creamos las entidades de selección de todas las secciones en este caso selección de todos los productos creamos un Taipe QR llamada results simplemente vamos a centrarnos en este método que es el más interesante.
-
-Cómo podríamos obtener la lista de productos de una determinada sección A partir de su código.
-
-Podríamos construir esta J.P. se LTP fue un producto Wer como el la columna y de sección forma parte de la entidad producto pues podríamos establecer esta condición pero las entidades están relacionadas como están relacionadas.
-
-Lo primero es que este campo de sección ya no lo tenemos en la entidad producto tendríamos el campo o atributo sección y si podríamos poner Sección Punto y sección esa sería la forma de hacerlo pero ya que las tenemos relacionadas vamos a aprovecharnos de esa relación.
-
-No vamos a necesitar esta instrucción J.P. QL no la vamos a necesitar.
-
-Por qué Podemos directamente hacer una búsqueda simple de la sección A partir de su primary key cómo la sección está relacionada con productos ya trae la lista de productos asociados.
-
-Sería simplemente una vez que ya tenemos el objeto sección llamada El método de productos que nos devuelve todos los productos que tiene esa sección de asociados.
-
-Gracias a la relación automáticamente al hacer la búsqueda de la sección vienen con ella todos los objetos de las entidades.
-
-En este caso de la entidad relacionada.
-
-Así de simple sería.
-
-Y esto es lo que nos facilita enormemente el trabajo y la lógica de negocio en muchas aplicaciones donde necesitamos aprovecharnos de la relación.
-
-Esto sería lo que es la parte JPA lo servlet bueno pues tendríamos el controlador por un lado productos Auction que se encargan de recuperar el parámetro que viene de la página HTML con la sección elegida.
+lo servlet bueno pues tendríamos el controlador por un lado productos Auction que se encargan de recuperar el parámetro que viene de la página HTML con la sección elegida.
 
 Si es cero es que a pedido todos llamamos a un método obtener productos si es distinto de cero es que a pedido los productos de una determinada sección y al final pasamos el control a la página de productos para que los enseñes controlador de las secciones que es el que es llamado cuando queremos entrar en la página de donde aparece la lista de secciones pues debe recuperar todas las secciones o guardarlo también en un atributo de petición y pasar el control a las clases presenciales.
 
@@ -2232,6 +2303,8 @@ Es decir simplifica la relación enormemente pues parte de la lógica de negocio
 El hecho de que traernos una entidad nos venga ya con sus objetos relacionados.
 
 
+
+#### 6. Creación de la Vista.
 
 # 25 Ejercicio práctico IV parte 2 01:57
 # 26 joins 05:53
