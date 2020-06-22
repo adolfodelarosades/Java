@@ -3144,6 +3144,14 @@ Al igual que antes ese objeto cliente trae todos los objetos cuentas relacionado
 
 # 26 joins 05:53
 
+<img src="images/26-01.png">
+
+<img src="images/26-02.png">
+
+<img src="images/26-03.png">
+
+<img src="images/26-04.png">
+
 Bien pues ahora que ya sabemos como crear entidades relacionadas y los beneficios que esto nos aporta vamos a ver el uso de los Jaynes qué es exactamente un.
 
 Bueno pues como dice la palabra es una unión es una unión que se va a realizar dentro de una consulta J.P. QL entre entidades relacionadas gracias a esto vamos a poder operar sobre una entidad en base a condiciones que van a afectar a la entidad relacionada.
@@ -3193,42 +3201,39 @@ Quedaría encubierto cualquier caso y la verdad que el uso de los fondos va a si
 Vamos a ver después en el siguiente la siguiente elección un ejercicio práctico de utilizaciones de Yeung explícitos.
 
 # 27 Ejercicio práctico V 06:02
+
 # Autoevaluación V 01:30
-
-Autoevaluación V
-Autoevaluación 5
  
+1. En una relación uno a muchos / muchos a uno, ¿Qué entidad debe indicar la información de la relación entre tablas?:
+   * La entidad del lado muchos :+1:
+   * La entidad del lado uno
+   * Cualquiera de las dos
+   * No es necesario indicar la información de relación entre tablas dentro de una entidad
 
-1.       En una relación uno a muchos / muchos a uno, ¿Qué entidad debe indicar la información de la relación entre tablas?:
+2. Tenemos dos entidades, A y B, relacionadas uno a muchos/muchos a uno. El atributo mappedBy utilizado en la anotación `@OneToMany` dentro de la entidad A indica
+   * El nombre de la columna común a ambas tablas
+   * El nombre del atributo de la entidad B que contiene el objeto de la entidad A :+1:
+   * El nombre del atributo de la entidad A que contiene los objetos de B
+   * El nombre de la primary key
 
-La entidad del lado muchos
-La entidad del lado uno
-Cualquiera de las dos
-No es necesario indicar la información de relación entre tablas dentro de una entidad
-2.       Tenemos dos entidades, A y B, relacionadas uno a muchos/muchos a uno. El atributo mappedBy utilizado en la anotación  @OneToMany dentro de la entidad A indica
+3. En una relación muchos a muchos, la información de la tabla de unión se indica a través de la anotación
+   * `@ManyToMany`
+   * `@JoinTable` :+1:
+   * `@UnionTable`
+   * `@UnionColumns`
+   
+4. Tenemos dos entidades, EntiA y EntiB, relacionadas uno a muchos/muchos a uno. El atributo "bs" de la entidad EntiA contiene los objetos de EntiB asociados, mientras que el atributo "a" de EntiB, contiene el objeto EntiA asociado. Queremos recuperar todas las entidades de tipo EntiA, para las que el atributo num de la entidad EntiB vale 7. ¿Cuál de las siguientes instrucciones JPQL sería la que tendríamos que utilizar?
+   * `Select b From EntiB b Where b.a.num=7`
+   * `Select a From EntiA a Where b.num=7`
+   * `Select a From EntiA a, EntiB b Where b.num=7`
+   * `Select a From EntiA a Join a.bs b Where b.num=7` :+1:
+   
+5. Tenemos dos entidades, EntiA y EntiB, relacionadas uno a muchos/muchos a uno. El atributo "bs" de la entidad EntiA contiene los objetos de EntiB asociados, mientras que el atributo "a" de EntiB, contiene el objeto EntiA asociado. Queremos recuperar todas las entidades de tipo EntiB, para las que el atributo longitud de la Entidad EntiA vale 10. ¿Cuál de las siguientes instrucciones JPQL sería la que tendríamos que utilizar?
 
-El nombre de la columna común a ambas tablas
-El nombre del atributo de la entidad B que contiene el objeto de la entidad A
-El nombre del atributo de la entidad A que contiene los objetos de B
-El nombre de la primary key
-3.       En una relación muchos a muchos, la información de la tabla de unión se indica a través de la anotación
-
-@ManyToMany
-@JoinTable
-@UnionTable
-@UnionColumns
-4.       Tenemos dos entidades, EntiA y EntiB, relacionadas uno a muchos/muchos a uno. El atributo "bs" de la entidad EntiA contiene los objetos de EntiB asociados, mientras que el atributo "a" de EntiB, contiene el objeto EntiA asociado. Queremos recuperar todas las entidades de tipo EntiA, para las que el atributo num de la entidad EntiB vale 7. ¿Cuál de las siguientes instrucciones JPQL sería la que tendríamos que utilizar?
-
-Select b From EntiB b Where b.a.num=7
-Select a From EntiA a Where b.num=7
-Select a From EntiA a, EntiB b Where b.num=7
-Select a From EntiA a Join a.bs b Where b.num=7
-5.       Tenemos dos entidades, EntiA y EntiB, relacionadas uno a muchos/muchos a uno. El atributo "bs" de la entidad EntiA contiene los objetos de EntiB asociados, mientras que el atributo "a" de EntiB, contiene el objeto EntiA asociado. Queremos recuperar todas las entidades de tipo EntiB, para las que el atributo longitud de la Entidad EntiA vale 10. ¿Cuál de las siguientes instrucciones JPQL sería la que tendríamos que utilizar?
-
-Select b From EntiB b Where EntiA.longitud=7
-Select b From EntiB b join EntiA a Where a.longitud=7
-Select b From EntiB b Where b.a.longitud=7
-Select a From EntiA a Where a.bs.longitud=7
+   * `Select b From EntiB b Where EntiA.longitud=7`
+   * `Select b From EntiB b join EntiA a Where a.longitud=7`
+   * `Select b From EntiB b Where b.a.longitud=7` :+1:
+   * `Select a From EntiA a Where a.bs.longitud=7`
  
 
 
