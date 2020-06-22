@@ -2140,14 +2140,16 @@ Vamos a partir del proyecto `615-04_web_jpa` para  copiarlo y partir de el, una 
 
 <img src="images/24-58.png">
 
+Nuevamente vamos al proyecto y con el botón derecho en la opción New dentro de la categoría Other en la subcategoría EJB elegimos Session Bean.
 
+<img src="images/24-59.png">
 
+En el siguiente paso (que ya marca el nombre del proyecto) el paquete es `modelo` y el nombre del EJB  es `GestionProductosEjb` y la interfaz de negocio va a ser en una interfaz local puesto que el acceso va a ser local, no se va a acceder al EJB remotamente desde otro servidor, sino que se va a acceder desde el mismo servidor completamente de la misma aplicación, le asigna nombre que por defecto a dicha interfaz `modelo.GestionProductosEjbLocal`. Vamos a desactivar la opción No-interface View puesto que sí que vamos a utilizar interfaz de negocio y ya directamente aquí podemos pulsar Finish.
 
+<img src="images/24-61.png">
 
+Nos genera ambos archivos.
 
-
-
-En el siguiente paso el paquete es el mismo donde tenemos las clases y el nombre de la clase porque un EJB va a estar formado por una clase de implementación muy parecida a las clases estándares Java y una interfaz de negocio con la que va a interaccionar el cliente en nuestro caso los controladores. Bueno a la clase le vamos a llamar GestionUsuariosEjb y la interfaz de negocio va a ser en una interfaz local puesto que el acceso va a ser local, no se va a acceder al EJB remotamente desde otro servidor, sino que se va a acceder desde el mismo servidor completamente de la misma aplicación, le asigna nombre que por defecto a dicha interfaz modelo.GestionUsuarioEjbLocal . Vamos a desactivar la opción No-interface View puesto que sí que vamos a utilizar interfaz de negocio y ya directamente aquí podemos pulsar Finish.
 
 #### 5. Creación del Controlador.
 
