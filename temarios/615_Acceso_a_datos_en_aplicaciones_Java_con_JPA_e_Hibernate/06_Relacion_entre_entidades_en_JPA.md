@@ -1918,9 +1918,9 @@ Perfecto ahora si ya esta nuestro DataSource y JNDI completamente funcional.
    private List<Producto> productos;
    ```
 
-   que contienen la colección de productos asociados a esta sección anotada con @OneToMany(mappedBy="seccione") el nombre del atributo de la otra Entidad de Producto, que contiene el objeto seccione asociado, le a puesto seccione lo podemos cambiar o lo podemos dejar así no pasa nada.
+   Que contienen la colección de productos asociados a esta sección anotada con @OneToMany(mappedBy="seccione") el nombre del atributo de la otra Entidad de Producto, que contiene el objeto seccione asociado, le a puesto seccione lo podemos cambiar o lo podemos dejar así no pasa nada.
 
-Vamos a ver esa Entidad Producto
+   Vamos a ver esa Entidad Producto
    
    *`Producto`*
    
