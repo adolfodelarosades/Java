@@ -491,6 +491,8 @@ Una vez hecho eso lo que vamos a hacer, dado que lo que tenemos es una copia del
 
 Esa información donde se cambia, bueno pues podemos cambiar directamente el código o para poder hacer los cambios más comodamente apoyarnos de la pestaña `Connection`.
 
+OJO CON LA IMAGEN PARECE QUE NO ES CORRECTA
+
 <img src="images/20-09.png">
 
 En vez de elegir *Resource Local* seleccionemos *Default (JTA)* o JTA a secas y como ves desaparecen los datos de conexión directos a la base de datos y le indicamos la dirección del DataSource que creamos en la lección anterior y que vive dentro de ese servidor de aplicaciones GlassFish, `jdbc/agendades`.
