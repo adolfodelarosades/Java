@@ -2254,6 +2254,7 @@ public class GestionProductosEjb implements GestionProductosEjbLocal {
    @Override
    public List<Producto> obtenerProductosPorSeccion(int idSecc){
       //String jpql = "Select p From Producto p Where p.idSeccion=" + idSecc;
+      //String jpql = "Select p From Producto p Where p.seccione.idSeccion=" + idSecc;
       Seccion s=em.find(Seccion.class, idSecc);
       return s.getProductos();		
    }
@@ -2276,21 +2277,227 @@ Así de simple sería y esto es lo que nos facilita enormemente el trabajo y la 
 
 #### 5. Creación del Controlador.
 
-lo servlet bueno pues tendríamos el controlador por un lado productos Auction que se encargan de recuperar el parámetro que viene de la página HTML con la sección elegida.
+En la parte del Controlador tendríamos:
 
-Si es cero es que a pedido todos llamamos a un método obtener productos si es distinto de cero es que a pedido los productos de una determinada sección y al final pasamos el control a la página de productos para que los enseñes controlador de las secciones que es el que es llamado cuando queremos entrar en la página de donde aparece la lista de secciones pues debe recuperar todas las secciones o guardarlo también en un atributo de petición y pasar el control a las clases presenciales.
+* `Controller`
+* `ProductosAction`
+* `SeccionesAction`
 
-Este código no es exactamente objetivo de este curso porque realmente esto ya no es JPA.
+Vamos a ver el código de cada uno de ellos.
 
-No te preocupes porque la sección de recursos adicionales te lo vas a poder descargar porque yo ya tengo este proyecto ya creado y está dentro de la lección y te lo puedes descargar para examinarlo tranquilamente probarlo etc..
+*`ProductosAction`*
 
-En las páginas HTML y JSP se utilizan LJ STL utilizan etiquetas HTML en fin algo ya propio de lo que es la tecnología JSP y lo único bueno te voy a enseñar el pomme XML que es porque este proyecto lo hemos convertido en proyecto Maven para poder incluir estas dependencias tanto Ojota STL como del driver para no tener que incorporarlo explícitamente.
+```java
+package controlador;
 
-Esto ya lo hemos visto en algún otro proyecto donde hemos utilizado Maven y por último así mencionarte el persiste en XML pues al crear las entidades las entidades ya se han generado se han incluido automáticamente dentro del archivo.
+import java.io.IOException;
 
-Eso sí el Data Suhr JDBC almacén de S.
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-Este es un data Sohr que ha habido que crear homogéneamente en el servidor de aplicaciones apuntando a la base de datos como ya te explique en la lección correspondiente a la creación de la tasó el caso es que volviendo otra vez al tema de las relaciones entre entidades has visto cómo efectivamente ha simplificado bastante la lógica de negocio.
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class ProductosAction
+ */
+@WebServlet("/ProductosAction")
+public class ProductosAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   @EJB
+   GestionProductosEjbLocal gproductos;
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+      int idSeccion=Integer.parseInt(request.getParameter("seccion"));
+      if(idSeccion==0){
+         request.setAttribute("productos", gproductos.obtenerProductos());
+      }else{
+         request.setAttribute("productos", gproductos.obtenerProductosPorSeccion(idSeccion));
+      }
+      request.getRequestDispatcher("productos.jsp").forward(request, response);
+      
+   }
+}
+
+```
+
+`ProductosAction` se encargan de recuperar el parámetro que viene de la página HTML con la sección elegida, si es cero es que a pedido todos los productos llamamos al método `obtenerProductos()`, si es distinto de cero es que a pedido los productos de una determinada sección llamamos al método `obtenerProductosPorSeccion(idSeccion)`  y al final pasamos el control a la página `productos.jsp` para que los enseñe.
+
+*`SeccionesAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Seccion;
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class SeccionesAction
+ */
+@WebServlet("/SeccionesAction")
+public class SeccionesAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   @EJB
+   GestionProductosEjbLocal gproductos;
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+      List<Seccion> secciones=gproductos.obtenerSecciones();
+      request.setAttribute("secciones", secciones);
+      request.getRequestDispatcher("secciones.jsp").forward(request, response);
+      
+   }
+}
+```
+
+El controlador de las secciones `SeccionesAction` que es el que es llamado cuando queremos entrar en la página donde aparece la lista de secciones, debe recuperar todas las secciones con el método `obtenerSecciones()` guardarlas también en un atributo de request `secciones` y pasar el control a la vista `secciones.jsp` para que las pinte.
+
+Este código no es exactamente objetivo de este curso porque realmente esto ya no es JPA. 
+
+Finalmente la clase `Controller`.
+
+*`Controller`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   /**
+    * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+      String op=request.getParameter("op");
+      String url="inicio.html";
+		
+      switch(op){
+         case "doSecciones":
+            url="SeccionesAction";	
+            break;
+         case "doProductos":
+            url="ProductosAction";
+            break;
+      }
+		
+      request.getRequestDispatcher(url).forward(request, response);
+   }
+}
+```
+
+El `Controller` es el encargado de recibir las peticiones echas en nuestra aplicación, recupera el parámetro `op` para saber que petición se a solicitado y nos redirige a esa petición.
+
+#### 6. Creación de la Vista.
+
+Dentro de  `WebContent` vamos a tener las páginas HTML y JSP necesarias:
+
+* `inicio.html`
+* `secciones.jsp`
+* `productos.jsp`
+
+*`inicio.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <center>
+      <h1><a href="Controller?op=doSecciones">Acceso</a></h1>
+   </center>
+</body>
+</html>
+```
+
+*`secciones.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>seleccion</title>
+<meta http-equiv="Content-Type" content="text/html;  charset=ISO-8859-1">
+</head>
+<body>
+   <center>
+      <h1>Seleccione Sección</h1>
+      <br /><br />
+      <form action="Controller?op=doProductos" method="post">
+         <select name="seccion">
+            <option value="0">Todos</option>
+            <c:set var="sec" value="${requestScope.secciones}" />
+	    <c:forEach var="s" items="${sec}">
+               <option value="${s.idSeccion}">${s.seccion}</option>
+            </c:forEach>
+         </select>
+	 <br /> <br /> 
+	 <input type="submit" value="Ver Productos" />
+      </form>
+   </center>
+</body>
+</html>
+```
+
+*`productos.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>libros</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+   <table border="1">
+      <tr><th>Nombre</th><th>Precio</th><th>Descripción</th></tr>
+      <c:set var="productos" value="${requestScope.productos}"/>
+         <c:forEach var="pr" items="${productos}">
+    	    <tr>
+               <td>${pr.nombre}</td>
+               <td>${pr.precio}</td>
+               <td>${pr.descripcion}</td>
+            </tr>
+    	 </c:forEach>
+   </table>
+   <br/><br/>
+   <a href="Controller?op=doSecciones">Otra sección</a>
+</body>
+</html>
+```
+
+#### 7. Probar la Aplicación.
+
 
 Pero bueno pongamos otro caso imaginamos que imagínate que queremos también incluir un método que nos que queremos que nos devuelva la sección a la que pertenece un determinado producto a partir de su nombre.
 
@@ -2304,7 +2511,6 @@ El hecho de que traernos una entidad nos venga ya con sus objetos relacionados.
 
 
 
-#### 6. Creación de la Vista.
 
 # 25 Ejercicio práctico IV parte 2 01:57
 # 26 joins 05:53
