@@ -2015,7 +2015,110 @@ Perfecto ahora si ya esta nuestro DataSource y JNDI completamente funcional.
 
    Por lo tanto ya tenemos las entidades generadas con toda la información de configuración correspondiente a sus relaciones.
    
+   Es importante saber que al crear estas dos Entidades en el archivo `persistence.xml` se han añadido.
    
+   *`persistence.xml`*
+   
+   ```html
+   <?xml version="1.0" encoding="UTF-8"?>
+   <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+      <persistence-unit name="615-07_proyecto_relacion_almacen">
+         <class>entidades.Producto</class>
+         <class>entidades.Seccion</class>
+      </persistence-unit>
+   </persistence>
+   ```
+   
+   Pero lo que nos esta faltando es incluir el DataSource de conexión a la base de datos. Vamos al archivo `persistence.xml` y vamos a la pestaña `Connection`.
+   
+   <img src="images/24-48.png">
+   
+   En este caso como vamos a hacer la conexión a traves de DataSource vamos a seleccionar la opción `Default (JTA)` en lugar de `Resource Local` y en el campo `JTA data source:` vamos a poner el nombre del JNDI que creamos en GlassFish `jdbc/almacends`. Por lo que nuestro archivo `persistence.xml` final nos queda así:
+   
+   *`persistence.xml`*
+   
+   ```html
+   <?xml version="1.0" encoding="UTF-8"?>
+   <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+      <persistence-unit name="615-07_proyecto_relacion_almacen">
+	 <jta-data-source>jdbc/almacends</jta-data-source>     
+         <class>entidades.Producto</class>
+         <class>entidades.Seccion</class>
+      </persistence-unit>
+   </persistence>
+   ``` 
+   
+#### 3. Configurar Proyecto Maven
+
+Vamos a convertir el proyecto aun proyecto Maven para poder meter las dependencias JSTL y el Driver de MySQL que serán necesarias.
+
+<img src="images/24-49.png">
+
+<img src="images/24-50.png">
+
+<img src="images/24-51.png">
+
+Con esto se crea el archivo `pom.xml` vamos a añadir las dependencias que mencionamos antes, JSTL, Driver MySQL pero también vamos a añadir la dependencia JavaEE ya que como vimos en ejemplos anteriores teniamos problemas para que se aceptaran sentencias relacionadas con los EJBs, en su momento insertamos el JAR localmente desde el servidor GlassFish local. En este caso insertaremos la dependecia para ver si funciona.
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>615-07_proyecto_relacion_almacen</groupId>
+   <artifactId>615-07_proyecto_relacion_almacen</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>615-07_proyecto_relacion_almacen</name>
+   <build>
+      <sourceDirectory>src</sourceDirectory>
+      <plugins>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+               <source>1.8</source>
+               <target>1.8</target>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+   <dependencies>
+      <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+      <dependency>
+         <groupId>javax.servlet</groupId>
+	 <artifactId>jstl</artifactId>
+	 <version>1.2</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+      <dependency>
+         <groupId>mysql</groupId>
+         <artifactId>mysql-connector-java</artifactId>
+         <version>8.0.20</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+      <dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-api</artifactId>
+         <version>8.0.1</version>
+         <scope>provided</scope>
+      </dependency>
+   </dependencies>
+</project>
+```
+
+#### 4. Creación del Modelo.
+
+#### 5. Creación del Controlador.
+
+#### 6. Creación de la Vista.
+
+
+
+
+
+
 
 
    
