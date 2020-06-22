@@ -2110,6 +2110,45 @@ Con esto se crea el archivo `pom.xml` vamos a añadir las dependencias que menci
 
 #### 4. Creación del Modelo.
 
+Nos vamos al proyecto y con el botón derecho en la opción New dentro de la categoría Other en la subcategoría EJB elegimos Session Bean.
+
+<img src="images/24-52.png">
+
+Por algún motivo no nos permite seleccionar el proyecto donde vamos a crear el EJB.
+
+<img src="images/24-53.png">
+
+Revisando los Project Facets tenemos:
+
+<img src="images/24-54.png">
+
+Según el proyecto anterior que si funciona tiene algunos módulo más marcados.
+
+<img src="images/24-55.png">
+
+Tampoco deja marcar los modulos.
+
+La estructura de ambos proyectos son diferentes.
+
+<img src="images/24-56.png">
+
+<img src="images/24-57.png">
+
+Realmente no detecto cual es el problema al crear el proyecto pero me ha estado pasando que al crear un nuevo proyecto una vez de Finalizado se queda en la misma pantalla para crear Modulos y a veces le doy a aceptar y otras a cancelar por allí puede venir el problema.
+
+Vamos a partir del proyecto `615-04_web_jpa` para  copiarlo y partir de el, una vez hecho lo que tenemos es lo siguiente:
+
+<img src="images/24-58.png">
+
+
+
+
+
+
+
+
+En el siguiente paso el paquete es el mismo donde tenemos las clases y el nombre de la clase porque un EJB va a estar formado por una clase de implementación muy parecida a las clases estándares Java y una interfaz de negocio con la que va a interaccionar el cliente en nuestro caso los controladores. Bueno a la clase le vamos a llamar GestionUsuariosEjb y la interfaz de negocio va a ser en una interfaz local puesto que el acceso va a ser local, no se va a acceder al EJB remotamente desde otro servidor, sino que se va a acceder desde el mismo servidor completamente de la misma aplicación, le asigna nombre que por defecto a dicha interfaz modelo.GestionUsuarioEjbLocal . Vamos a desactivar la opción No-interface View puesto que sí que vamos a utilizar interfaz de negocio y ya directamente aquí podemos pulsar Finish.
+
 #### 5. Creación del Controlador.
 
 #### 6. Creación de la Vista.
