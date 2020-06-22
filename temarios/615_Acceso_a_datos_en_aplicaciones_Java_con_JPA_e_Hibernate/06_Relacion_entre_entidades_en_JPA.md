@@ -2150,6 +2150,7 @@ En el siguiente paso (que ya marca el nombre del proyecto) el paquete es `modelo
 
 Nos genera ambos archivos.
 
+<img src="images/24-62.png">
 
 #### 5. Creación del Controlador.
 
