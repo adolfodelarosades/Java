@@ -3250,7 +3250,7 @@ Tambien cambiamos el nombre en el `pom.xml`.
 <artifactId>615-09_proyecto_relacion_almacen</artifactId>
 ```
 
-Y tambie´n lo cambiamos en el `persistence.xml`
+Y también lo cambiamos en el `persistence.xml`
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
@@ -3315,7 +3315,6 @@ public List<Producto> obtenerProductosVentas(int unidades){
    
 }
 ```
-
 
 Bueno sin Join la cosa habría sido más compleja por qué primero habríamos tenido que sacar las ventas que cumplieran esa condición, unidades mayor que tal valor, una vez obtenidas las ventas, habría que ver de cada venta haber obtenido sus productos relacionados, con la venta viene el producto pero vienen muchas ventas y nosotros sólo nos interesan los productos. Entonces habría que haber ido recorriendo todas las ventas haber cogido cada producto y haberlo metido en una colección auxiliar uno por uno hasta que al final los tendríamos todos en `prods` y lo retornaríamos.
 
@@ -3444,9 +3443,41 @@ Ha siddo crear dos nuevas vistas `unidades.html` que es donde se va a recoger el
 </html>
 ```
 
+Ademas hemos tenido que modificar la página `inicio.html`.
+
+*`inicio.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <center>
+      <h3><a href="Controller?op=doSecciones">Consulta secciones</a></h3>
+      <h3><a href="Controller?op=toUnidades">Top ventas</a></h3>
+   </center>
+</body>
+</html>
+```
+
 #### 4. Probar la Aplicación
 
+<img src="images/27-08.png">
 
+<img src="images/27-09.png">
+
+<img src="images/27-10.png">
+
+<img src="images/27-11.png">
+
+<img src="images/27-12.png">
+
+<img src="images/27-13.png">
+
+<img src="images/27-14.png">
 
 
 
