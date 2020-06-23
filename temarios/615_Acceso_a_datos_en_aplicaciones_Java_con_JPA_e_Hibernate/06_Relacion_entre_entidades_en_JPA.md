@@ -3142,6 +3142,305 @@ que a partir de el nombre y dirección nos devolvería en teoría un cliente, pe
 
 Al igual que antes ese objeto cliente trae todos los objetos cuentas relacionados, sería simplemente llamar a su método `getCuentas()` para recuperar la lista de objetos de entidades cuenta asociados.
 
+### :computer: Código Completo - 615-08_proyecto_relacion_banco
+
+<img src="images/25-06.png">
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-04_web_jpa</groupId>
+	<artifactId>615-04_web_jpa</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-08_proyecto_relacion_banco">
+		<class>entidades.Cliente</class>
+		<class>entidades.Cuenta</class>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`Cliente`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+
+/**
+ * The persistent class for the clientes database table.
+ * 
+ */
+@Entity
+@Table(name="clientes")
+@NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int dni;
+
+	private String direccion;
+
+	private String nombre;
+
+	private int telefono;
+
+	//bi-directional many-to-many association to Cuenta
+	@ManyToMany
+	@JoinTable(name = "Titulares", 
+	joinColumns = @JoinColumn(name="idCliente", referencedColumnName = "dni"),
+	inverseJoinColumns = @JoinColumn(name="idCuenta", referencedColumnName = "numeroCuenta"))
+	private List<Cuenta> cuentas;
+
+	public Cliente() {
+	}
+
+	public int getDni() {
+		return this.dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Cuenta> getCuentas() {
+		return this.cuentas;
+	}
+
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
+	}
+
+}
+```
+
+*`Cuenta`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the cuentas database table.
+ * 
+ */
+@Entity
+@Table(name="cuentas")
+@NamedQuery(name="Cuenta.findAll", query="SELECT c FROM Cuenta c")
+public class Cuenta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int numeroCuenta;
+
+	private double saldo;
+
+	private String tipocuenta;
+
+	//bi-directional many-to-many association to Cliente
+	@ManyToMany(mappedBy="cuentas")
+	private List<Cliente> clientes;
+
+	public Cuenta() {
+	}
+
+	public int getNumeroCuenta() {
+		return this.numeroCuenta;
+	}
+
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+
+	public double getSaldo() {
+		return this.saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getTipocuenta() {
+		return this.tipocuenta;
+	}
+
+	public void setTipocuenta(String tipocuenta) {
+		this.tipocuenta = tipocuenta;
+	}
+
+	public List<Cliente> getClientes() {
+		return this.clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+}
+```
+
+**Modelo**
+
+*`GestionBancoEjbLocal`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import entidades.Cliente;
+import entidades.Cuenta;
+
+@Local
+public interface GestionBancoEjbLocal {
+	
+	List<Cliente> obtenerClientesCuenta(int numcuenta);
+	List<Cuenta> obtenerCuentasClientes(String nombre, String direccion);
+
+}
+```
+
+*`GestionBancoEjb`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import entidades.Cliente;
+import entidades.Cuenta;
+
+/**
+ * Session Bean implementation class GestionBancoEjb
+ */
+@Stateless
+public class GestionBancoEjb implements GestionBancoEjbLocal {
+
+    @PersistenceContext(unitName = "615-08_proyecto_relacion_banco")
+    EntityManager em;
+
+	@Override
+	public List<Cliente> obtenerClientesCuenta(int numcuenta) {
+		
+		Cuenta ct = em.find(Cuenta.class, numcuenta);
+		return ct.getClientes();
+	}
+
+	@Override
+	public List<Cuenta> obtenerCuentasClientes(String nombre, String direccion) {
+		
+		String jpql = "Select c From Cliente c Where c.nombre=?1 and c.direccion=?2";
+		TypedQuery<Cliente> q=em.createQuery(jpql, Cliente.class);
+		q.setParameter(1, nombre);
+		q.setParameter(2, direccion);
+		
+		return q.getResultList().get(0).getCuentas();
+	}
+}
+```
+
 # 26 joins 05:53
 
 <img src="images/26-01.png">
