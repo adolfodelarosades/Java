@@ -3213,6 +3213,180 @@ Vamos a ver después en la siguiente lección un ejercicio práctico de utilizac
 
 # 27 Ejercicio práctico V 06:02
 
+<img src="images/27-01.png">
+
+A continuación vamos a desarrollar una nueva aplicación en la que vamos a poner en práctica el uso de los Joins.
+
+<img src="images/27-02.png">
+
+Realmente se trata de una nueva versión de la aplicación de almacén en la que además de la consulta de secciones vamos a incluir una nueva opción con ventas que nos va a llevar a una página donde se nos va a solicitar el número mínimo de unidades vendidas y al pulsar Enviar nos va salir una lista con los nombres de todos los productos que hayan sido vendidos como mínimo ese número de unidades, más o igual que ese número de unidades.
+
+Bien pues para ello lo que vamos a incluir es una nueva tabla `ventas` en la base de datos de almacén. Vamos a verla por aquí en la tabla ventas vamos a registrar las ventas de los productos.
+
+<img src="images/27-03.png">
+
+<img src="images/27-04.png">
+
+Como ves la estructura de esta tabla va a ser como ves en esta imagen estará el identificador de venta que será un auto numérico el identificador del producto que se ha vendido vale la tabla en relación las unidades que se han vendido de ese producto en esa venta y en la ciudad donde se ha vendido pongámoslo así, se tratará de una relación entre Productos y Ventas de Uno a Muchos, cada producto puede ser vendido muchas veces.
+
+<img src="images/27-05.png">
+
+bien pues una vez visto la estructura de la tabla vamos a vemos algunos datos insertados.
+
+### Creación Proyecto Eclipse
+
+Basandonos en el proyecto `615-07_proyecto_relacion_almacen` vamos a hacer una copia y lo llamaremos `615-09_proyecto_relacion_almacen`.
+
+<img src="images/27-06.png">
+
+Una vez copiado vamos a las propiedades del proyecto en `Web Project Settings` para colocar el nuevo nombre `615-09_proyecto_relacion_almacen`.
+
+<img src="images/27-07.png">
+
+Tambien cambiamos el nombre en el `pom.xml`.
+
+```html
+<groupId>615-09_proyecto_relacion_almacen</groupId>
+<artifactId>615-09_proyecto_relacion_almacen</artifactId>
+```
+
+Y tambie´n lo cambiamos en el `persistence.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit
+		name="615-09_proyecto_relacion_almacen">
+		<jta-data-source>jdbc/almacends</jta-data-source>
+		<class>entidades.Producto</class>
+		<class>entidades.Seccion</class>
+	</persistence-unit>
+</persistence>
+```
+
+Lo que nos obliga también cambiarlo en `GestionProductosEjb`.
+
+```java
+@PersistenceContext(unitName="615-09_proyecto_relacion_almacen")
+EntityManager em;
+```
+
+Una vez hecho la copia del proyecto y los ajustes básicos necesarios vamos a ver lo que se ha aumentado.
+
+#### 1. Aumentar el método `obtenerProductosVentas(int unidades)` en la Logica de Negocio `GestionProductosEjb` y `GestionProductosEjbLocal`
+
+```java
+@Override
+public List<Producto> obtenerProductosVentas(int unidades){
+   //opción 1 con join
+   String jpql="select distinct(p) from Producto p join p.ventas v where v.unidades>?1";
+   TypedQuery<Producto> q=em.createQuery(jpql,Producto.class);
+   q.setParameter(1,unidades);
+   return q.getResultList();
+}
+```
+
+Este método nuevo `obtenerProductosVentas(int unidades)` obtener productos ventas a partir del número de unidades devolvera la lista de productos que han sido vendidos mayor de esas unidades.
+
+La instrucción JPQL `select distinct(p) from Producto p join p.ventas v where v.unidades>?1` se trata de un Join. Porque lo que tenemos es que recuperar objetos de la entidad del lado 1 `Producto`, cuya condición afecta a la entidad del lado Mucho `Ventas` por eso debemos definir un Join. La asociación del alias la llamamos `v` a la entidad `Venta` de cada producto, es el Join, que nos permite a continuación establecer la condición sobre la entidad `Venta` que `unidades` en este caso sea mayor que el parámetro. Aquí también utilizamos la función `distinct` para quedarnos con una única versión del productos, por cada vez que se repite el producto. Es decir si ha habido tres ventas de un determinado producto que superen esa cantidad de unidades, sólo nos vamos a quedar con una de ellas, es decir va a ser el mismo producto si los alicates se han vendido en tres ventas una vez por cinco unidades otra 7 y otra 10 si queremos la condiciones que sea mayor de tres pues nos va a recoger tres veces ese objeto producto alicates, gracias a `distinct` solamente nos vamos a quedar con una de esas entidades con una de esas entradas nada más.
+
+Una vez que tenemos la instrucción JPQL creamos el `TypedQuery` le asignamos el parámetro y ya simplemente lanzar la instrucción llamar a `getResultList()` es así de simple.
+
+Qué pasaría, cómo lo habríamos tenido que hacer si no hubiéramos utilizado Joins, que habríamos tenido que hacer.
+
+```java
+@Override
+public List<Producto> obtenerProductosVentas(int unidades){
+   
+   //opción 2 sin join
+   
+   String jpql="select v from Venta v where v.unidades>?1";
+   TypedQuery<Venta> q=em.createQuery(jpql,Venta.class);
+   q.setParameter(1,unidades);
+   List<Venta> ventas=q.getResultList();
+   List<Producto> prods=new ArrayList<>();
+   for(Venta v:ventas){
+      prods.add(v.getProducto());
+   }
+   return prods;
+   
+}
+```
+
+
+Bueno sin Join la cosa habría sido más compleja por qué primero habríamos tenido que sacar las ventas que cumplieran esa condición, unidades mayor que tal valor, una vez obtenidas las ventas, habría que ver de cada venta haber obtenido sus productos relacionados, con la venta viene el producto pero vienen muchas ventas y nosotros sólo nos interesan los productos. Entonces habría que haber ido recorriendo todas las ventas haber cogido cada producto y haberlo metido en una colección auxiliar uno por uno hasta que al final los tendríamos todos en `prods` y lo retornaríamos.
+
+Cómo ves el uso de los Joins nos a simplificado enormemente el trabajo.
+
+#### 2. Añadir el Controlador `TopVentasAction`
+
+En cuanto al resto de la aplicación en la parte del Controlador ha habido que incluir un nuevo controlador `TopVentasAction`.
+
+*`TopVentasAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Producto;
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class TopVentasAction
+ */
+@WebServlet("/TopVentasAction")
+public class TopVentasAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   @EJB
+   GestionProductosEjbLocal gproductos;
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      int unidades=Integer.parseInt(request.getParameter("unidades"));
+      List<Producto> prods=gproductos.obtenerProductosVentas(unidades);
+      request.setAttribute("productos", prods);
+      request.getRequestDispatcher("topventas.jsp").forward(request, response);
+   }
+
+}
+```
+
+Que recupera el parámetro `unidades` que le manda la vista y manda llamar al método `.obtenerProductosVentas(unidades)` que recien creamos en la Lógica de Negocios, coloca lo obtenido en un atributo y redirige a la vista `topventas.jsp`.
+
+#### 3. Añadir dos Vistas `unidades.html` y `topventas.jsp`
+
+
+Ha siddo crear dos nuevas vistas `unidades.html` que es donde se va a recoger el número de unidades que ingrese el usuario y `topventas.jsp` que será donde se pinten los los productos que cumplen esa condición.
+
+#### 4. Probar la Aplicación
+
+
+
+
+
+Aquí se ha puesto de manifiesto cómo el uso de los Yeung nos va a simplificar muchas situaciones de otra manera pues la cosa sería bastante compleja si además hablamos de afectar por ejemplo a tres entidades que se verán afectadas en la instrucción J.P. Cubela y que obtener datos de una entidad cuya condición es de otra entidad que a su vez también implica condiciones de otra etcétera.
+
+La utilización de Yeung simplemente con una única instrucción nos permite recogerlo todo y establecer todas las condiciones en ella de otra manera pues sería bastante más complejo y recurriendo entre todo el camino de relaciones hasta poder conseguir las entidades que vamos buscando no tanto el uso de Jaynes.
+
+Es muy práctico también en JPA.
+
+
+*******
+cómo sería la aplicación la tengo aquí ya funcionando te voy a enseñar cómo sería el funcionamiento usaríamos dos ventas y al escribir las unidades por ejemplo tres al pulsar Enviar nos mostraría una lista con los productos que han sido vendidos más de tres unidades de cada uno de ellos en una ventana determinada.
+
+Es decir si esto significa que ha habido ventas en la que alicates de 25 milímetros se han vendido más de tres veces interruptor doble lo mismo es lo mismo y pintura.
+
 # Autoevaluación V 01:30
  
 1. En una relación uno a muchos / muchos a uno, ¿Qué entidad debe indicar la información de la relación entre tablas?:
