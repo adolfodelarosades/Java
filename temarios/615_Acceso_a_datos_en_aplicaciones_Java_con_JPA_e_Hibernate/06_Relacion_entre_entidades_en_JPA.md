@@ -3364,10 +3364,85 @@ public class TopVentasAction extends HttpServlet {
 
 Que recupera el parámetro `unidades` que le manda la vista y manda llamar al método `.obtenerProductosVentas(unidades)` que recien creamos en la Lógica de Negocios, coloca lo obtenido en un atributo y redirige a la vista `topventas.jsp`.
 
+Debemos también modificar el archivo `Controller` para tener dos opciones más que manejar:
+
+```java
+protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+   String op=request.getParameter("op");
+   String url="inicio.html";
+		
+   switch(op){
+      case "doSecciones":
+         url="SeccionesAction";	
+         break;
+      case "doProductos":
+         url="ProductosAction";
+         break;
+      case "doTopVentas":
+         url="TopVentasAction";
+         break;
+      case "toUnidades":
+         url="unidades.html";
+   }
+   request.getRequestDispatcher(url).forward(request, response);
+}
+```
+
 #### 3. Añadir dos Vistas `unidades.html` y `topventas.jsp`
 
 
 Ha siddo crear dos nuevas vistas `unidades.html` que es donde se va a recoger el número de unidades que ingrese el usuario y `topventas.jsp` que será donde se pinten los los productos que cumplen esa condición.
+
+*`unidades.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <center>
+      <form action="Controller?op=doTopVentas" method="post">
+	 Unidades mínimas vendidas:<input type="number" name="unidades"/><br/><br/>
+	 <input type="submit" value="Enviar"/>
+      </form>
+   </center>
+</body>
+</html>
+```
+
+*`topventas.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE HTML><%@page language="java"
+	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
+	%>
+<html>
+<head>
+<title>libros</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+   <table border="1">
+      <tr><th>Nombre</th><th>Precio</th><th>Descripción</th></tr>
+      <c:set var="productos" value="${requestScope.productos}"/>
+      <c:forEach var="pr" items="${productos}">
+         <tr>
+	    <td>${pr.nombre}</td>
+	    <td>${pr.precio}</td>
+	    <td>${pr.descripcion}</td>
+	 </tr>
+      </c:forEach>
+   </table>
+   <br/><br/>
+   <a href="Controller?op=toInicio">Inicio</a>
+</body>
+</html>
+```
 
 #### 4. Probar la Aplicación
 
