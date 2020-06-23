@@ -498,199 +498,77 @@ Operación anulación y para confirmar la transacción sería el método commit 
 
 # 34 Utilización del API de Hibernate en una aplicación 18:29
 
-En la lección anterior hemos estado viendo la Hibernate y presentando algunos de los métodos más importantes
+En la lección anterior hemos estado viendo la Hibernate y presentando algunos de los métodos más importantes de objetos.
 
-de objetos.
-
-Ahora en esta elección vamos a ver ya su aplicación directa en el ejercicio que estamos hemos comenzado
-
-a hacer ya sólo en la configuración de Hibernate de la gestión de los contactos.
+Ahora en esta elección vamos a ver ya su aplicación directa en el ejercicio que estamos hemos comenzado a hacer ya sólo en la configuración de Hibernate de la gestión de los contactos.
 
 Bueno volvamos a él.
 
-Vamos a ver aquí ya teníamos una de las lecciones anteriores donde empezamos ya con Jiguaní Hibernate
+Vamos a ver aquí ya teníamos una de las lecciones anteriores donde empezamos ya con Jiguaní Hibernate que creamos el hiberna y CFG XML.
 
-que creamos el hiberna y CFG XML.
+Partíamos ya de las entidades configuradas con anotaciones que teníamos originariamente en el ejercicio práctico número 3 y ahora lo que vamos a meter ya es lo que sería el código del modelo pero utilizando Hibernate en lugar de JPA.
 
-Partíamos ya de las entidades configuradas con anotaciones que teníamos originariamente en el ejercicio
+Lo primero ya lo he comentado en la lección anterior necesitamos encapsular todas las operaciones de obtención de sesión Factory que es con el que obtendremos el objeto sesión en un archivo y Bernet útil que normalmente se suele conocer así desde las primeras versiones de que se lleva utilizando Internet.
 
-práctico número 3 y ahora lo que vamos a meter ya es lo que sería el código del modelo pero utilizando
+Aquí tienes una clase me he creado Hibernate útil y este sería el código donde como puedes ver en método estático sesión Factory nos devuelve una implementación de sesión Factory y claro tensada preguntando de dónde has sacado todo esto.
 
-Hibernate en lugar de JPA.
+Estas implementaciones están ya estandarizadas yo por ejemplo esa implementación la he sacado de aquí de esta página de Java jits ASP.NET y la tienes en muchos otros sitios porque es una implementación clásica de Hibernate útil para la versión de hiberna y 5 en adelante.
 
-Lo primero ya lo he comentado en la lección anterior necesitamos encapsular todas las operaciones de
+Esto luego en versiones han ido evolucionando distintas formas de obtener el session Factory que parece que cada vez es más complejo pero bueno es una forma de hacerlo de la manera más eficiente posible.
 
-obtención de sesión Factory que es con el que obtendremos el objeto sesión en un archivo y Bernet útil
-
-que normalmente se suele conocer así desde las primeras versiones de que se lleva utilizando Internet.
-
-Aquí tienes una clase me he creado Hibernate útil y este sería el código donde como puedes ver en método
-
-estático sesión Factory nos devuelve una implementación de sesión Factory y claro tensada preguntando
-
-de dónde has sacado todo esto.
-
-Estas implementaciones están ya estandarizadas yo por ejemplo esa implementación la he sacado de aquí
-
-de esta página de Java jits ASP.NET y la tienes en muchos otros sitios porque es una implementación
-
-clásica de Hibernate útil para la versión de hiberna y 5 en adelante.
-
-Esto luego en versiones han ido evolucionando distintas formas de obtener el session Factory que parece
-
-que cada vez es más complejo pero bueno es una forma de hacerlo de la manera más eficiente posible.
-
-Tampoco tenemos que meternos al detalle de esto porque ya esto es un código ya bastante estandarizado
-
-y directamente cuando se llame este método es sesión Factory estatico de esta clase y vamos a obtener
-
-una implementación de assessor Factory sin decir muchos clientes que llamen a este método todos sostendrían
-
-la misma instancia y trabajaríamos sobre el mismo.
+Tampoco tenemos que meternos al detalle de esto porque ya esto es un código ya bastante estandarizado y directamente cuando se llame este método es sesión Factory estatico de esta clase y vamos a obtener una implementación de assessor Factory sin decir muchos clientes que llamen a este método todos sostendrían la misma instancia y trabajaríamos sobre el mismo.
 
 Sesión Factory.
 
-De todas formas yo te dejaré el archivo para que te lo pueda descargar directamente los recursos de
+De todas formas yo te dejaré el archivo para que te lo pueda descargar directamente los recursos de la lección.
 
-la lección.
+Bueno vamos a volver al código y bueno suponiendo que ya tenemos esta clase que ha creado dentro del paquete modelo donde están los JBS con la lógica de negocio con el código que ya he visto ahí pues vamos a ver si hacemos uso de ella para implementar todas las funcionalidades del modelo entonces.
 
-Bueno vamos a volver al código y bueno suponiendo que ya tenemos esta clase que ha creado dentro del
-
-paquete modelo donde están los JBS con la lógica de negocio con el código que ya he visto ahí pues vamos
-
-a ver si hacemos uso de ella para implementar todas las funcionalidades del modelo entonces.
-
-Bueno pues aquí tenemos como la implementación que originariamente teníamos con JPA pues lógicamente
-
-esto ya no ya no ya no es así sino que ahora pues a nivel de cada método tendremos que tener la posesión
-
-Yamal a los métodos que hemos comentado en la lección anterior y cuando haya que aplicar transaccionalidad
-
-pues habrá que probarlo dentro de una transacción y así va a ser como por ejemplo pues vamos empezando
-
-ya por este método alta contacto vale entonces aquí lo que tendremos que obtener pues es un objeto sesión
-
-vamos a ir mezclando la variable y claro que qué necesitamos y Bernadet útil vamos a ir importando para
-
-que me aparezca la ayuda los todos los métodos con mayúsculas y vamos importando de accesión Factory
-
-y a partir de la opción Factory obtenemos el cesio vamos a ver qué haces en un factor de escurran sesión
-
-aquí la que nos devolvería una implementación del objeto sesión.
+Bueno pues aquí tenemos como la implementación que originariamente teníamos con JPA pues lógicamente esto ya no ya no ya no es así sino que ahora pues a nivel de cada método tendremos que tener la posesión Yamal a los métodos que hemos comentado en la lección anterior y cuando haya que aplicar transaccionalidad pues habrá que probarlo dentro de una transacción y así va a ser como por ejemplo pues vamos empezando ya por este método alta contacto vale entonces aquí lo que tendremos que obtener pues es un objeto sesión vamos a ir mezclando la variable y claro que qué necesitamos y Bernadet útil vamos a ir importando para que me aparezca la ayuda los todos los métodos con mayúsculas y vamos importando de accesión Factory y a partir de la opción Factory obtenemos el cesio vamos a ver qué haces en un factor de escurran sesión aquí la que nos devolvería una implementación del objeto sesión.
 
 Vamos como digo de importar para que podamos importar adecuadamente las clases que sean por sesión.
 
-Pues como veis puedes encontrar muchas clases de referencias que tengas en tu proyecto que hagan referencia
-
-a un tipo sesión.
+Pues como veis puedes encontrar muchas clases de referencias que tengas en tu proyecto que hagan referencia a un tipo sesión.
 
 En nuestro caso obviamente es jaibas.
 
-Pues a partir del sesión ya podríamos realizar la persistencia del contacto muy importante que el objeto
+Pues a partir del sesión ya podríamos realizar la persistencia del contacto muy importante que el objeto sesión.
 
-sesión.
+Pues aquí tenemos que preocuparnos también nosotros como JPA que es más automático de la obtención y de su cierre entonces lo vamos a meter en un traje con recursos y con recursos es una versión de El troikas de Java que te permite pues cierre automático de los recursos como indica su nombre es decir que automáticamente cuando se abandona el Troy el objeto que has creado dentro de los paréntesis se cierra y no tenemos que estar preocupándonos de cerrarlo o de meter el cierre dentro suvez del total Catch.
 
-Pues aquí tenemos que preocuparnos también nosotros como JPA que es más automático de la obtención y
+Es más el recurso ni siquiera necesita un catch porque su misión podríamos tenerlo pero no es el objetivo captura ninguna sección sino que realizar el aprovecharnos del auto cierre de los recursos.
 
-de su cierre entonces lo vamos a meter en un traje con recursos y con recursos es una versión de El
+Bueno pues entonces aquí tenemos el objeto contacto vamos a una extracción aquí porque lo vamos a necesitar y otra cosa importante necesitamos englobar esto dentro de una transacción.
 
-troikas de Java que te permite pues cierre automático de los recursos como indica su nombre es decir
+Como ya dijimos a partir del objeto sesión podemos crear una transacción comenzarla es decir obtendríamos el objeto transaction y ya se comenzaría esa transacción.
 
-que automáticamente cuando se abandona el Troy el objeto que has creado dentro de los paréntesis se
+Importamos importamos o Bernet transaction que es el tipo que a nosotros nos interesa y a partir de ahí creamos el objeto contacto y hacemos la persistencia que era el método si recuerdo recuerdas el método 6 del objeto Cs.
 
-cierra y no tenemos que estar preocupándonos de cerrarlo o de meter el cierre dentro suvez del total
+Vale que es el que hemos creado a ella le pasamos el objeto con que queremos coexistir con ella lo tenemos es esto si la podemos borrar que es la antigua que teníamos y ya tenemos una parte ya de la implementación de Verneuil pues en esa línea vamos a ir todo.
 
-Catch.
+Aquí teníamos otra versión de alta contacto donde en vez de recibir los datos por separado ya recibíamos el objeto contacto por bueno vamos a copiar esto o incluso desde aquí podríamos llamar también a este método es decir podremos hacer aquí un alto contacto y pasar directamente los parámetros punto del nombre ya que tenemos el código para no volver a repetirlo.
 
-Es más el recurso ni siquiera necesita un catch porque su misión podríamos tenerlo pero no es el objetivo
+Punto y mail punto de teléfono pues ahí lo tenemos.
 
-captura ninguna sección sino que realizar el aprovecharnos del auto cierre de los recursos.
+Bueno seguimos avanzando y bueno ahora tenemos un método para recuperar contactos donde tenemos una J.P. cuele que como ya te he dicho Hibernate tiene HCl que es lo mismo la misma sintaxis. 
 
-Bueno pues entonces aquí tenemos el objeto contacto vamos a una extracción aquí porque lo vamos a necesitar
+Por lo tanto vamos a poder seguir utilizando esas mismas J.P. cueles las mismas instituciones así como la andarme arcoiris que tengamos ya creadas en las entidades bien como siempre hay que obtener esto digamos el bloque troikas la estructura troikas vamos a tener que utilizarla siempre es independiente ya ya de lo que pongamos aquí lo voy a dejar vacío pero la estructura para obtener el objeto Obsession siempre bases aquí no necesitamos transaccion porque es una instrucción de recuperación de entidades lo que necesitamos es crear un cuadri.
 
-y otra cosa importante necesitamos englobar esto dentro de una transacción.
-
-Como ya dijimos a partir del objeto sesión podemos crear una transacción comenzarla es decir obtendríamos
-
-el objeto transaction y ya se comenzaría esa transacción.
-
-Importamos importamos o Bernet transaction que es el tipo que a nosotros nos interesa y a partir de
-
-ahí creamos el objeto contacto y hacemos la persistencia que era el método si recuerdo recuerdas el
-
-método 6 del objeto Cs.
-
-Vale que es el que hemos creado a ella le pasamos el objeto con que queremos coexistir con ella lo tenemos
-
-es esto si la podemos borrar que es la antigua que teníamos y ya tenemos una parte ya de la implementación
-
-de Verneuil pues en esa línea vamos a ir todo.
-
-Aquí teníamos otra versión de alta contacto donde en vez de recibir los datos por separado ya recibíamos
-
-el objeto contacto por bueno vamos a copiar esto o incluso desde aquí podríamos llamar también a este
-
-método es decir podremos hacer aquí un alto contacto
-
-y pasar directamente los parámetros punto del nombre ya que tenemos el código para no volver a repetirlo.
-
-Punto y mail punto de teléfono
-
-pues ahí lo tenemos.
-
-Bueno seguimos avanzando y bueno ahora tenemos un método para recuperar contactos donde tenemos una
-
-J.P. cuele que como ya te he dicho Hibernate tiene HCl que es lo mismo la misma sintaxis.
-
-Por lo tanto vamos a poder seguir utilizando esas mismas J.P. cueles las mismas instituciones así como
-
-la andarme arcoiris que tengamos ya creadas en las entidades bien como siempre hay que obtener esto
-
-digamos el bloque troikas la estructura troikas vamos a tener que utilizarla siempre es independiente
-
-ya ya de lo que pongamos aquí lo voy a dejar vacío pero la estructura para obtener el objeto Obsession
-
-siempre bases aquí no necesitamos transaccion porque es una instrucción de recuperación de entidades
-
-lo que necesitamos es crear un cuadri.
-
-Voy a aprovecharme de esta instrucción que ya teníamos pero en vez de Tacuarí vamos a utilizar Cury
-
-que es una interfaz de Hibernate que ya es tipado con tipo y lancemos la llamada Create QWERTY del objeto
-
-cesion como es es el mismo método Recovery de sesión que tiene el Entity maneira.
+Voy a aprovecharme de esta instrucción que ya teníamos pero en vez de Tacuarí vamos a utilizar Cury que es una interfaz de Hibernate que ya es tipado con tipo y lancemos la llamada Create QWERTY del objeto cesion como es es el mismo método Recovery de sesión que tiene el Entity maneira.
 
 Cuidado al importar Cuadri porque no van a salir aquí también.
 
-A ver cuando vamos en el control mayusculo varias importaciones a ver qué es lo que nos ha importado
+A ver cuando vamos en el control mayusculo varias importaciones a ver qué es lo que nos ha importado esto como ya venía importado de antes tenemos ha importado el cuerno de Java y que persisten en ese no es que importar el cuadri de internet lo he borrado a propósito para que me pregunte cualquier importar ahora si es el cuadri Estado o como dice uno de es que aquí tenemos un cuerina en Java X persistes ni otro.
 
-esto como ya venía importado de antes tenemos ha importado el cuerno de Java y que persisten en ese
+Bueno este no es obviamente no es el de JPA pero si aquí tenemos un qwerty en el BNG Hibernate y otro en el Bergère Bernadet QWERTY si su paquete y dentro de Rajoy Bernet cómo es este cuatrista de precarga es que tenemos que utilizar Balay el objeto QWERTY un tipo interfaz quali que está en el paquete qwerty de ivermectina vale ya lo tenemos y entonces ya hemos creado la QWERTY y devolveremos la lista de resultados.
 
-no es que importar el cuadri de internet lo he borrado a propósito para que me pregunte cualquier importar
-
-ahora si es el cuadri Estado o como dice uno de es que aquí tenemos un cuerina en Java X persistes ni
-
-otro.
-
-Bueno este no es obviamente no es el de JPA pero si aquí tenemos un qwerty en el BNG Hibernate y otro
-
-en el Bergère Bernadet QWERTY si su paquete y dentro de Rajoy Bernet cómo es este cuatrista de precarga
-
-es que tenemos que utilizar Balay el objeto QWERTY un tipo interfaz quali que está en el paquete qwerty
-
-de ivermectina vale ya lo tenemos y entonces ya hemos creado la QWERTY y devolveremos la lista de resultados.
-
-Cogemos esa instrucción que nos sirve tal cual porque es el mismo método de resultas como hemos explicado
-
-en el capítulo anterior.
+Cogemos esa instrucción que nos sirve tal cual porque es el mismo método de resultas como hemos explicado en el capítulo anterior.
 
 Esta anotación aquí como aquí no hay transaccionalidad esto no nos va a hacer falta.
 
 Vamos a borrar tenemos una tarea de gestión automática de transacciones y eso hoy no lo necesitamos.
 
-Además no nos va a hacer nada porque al utilizar Internet las transacciones lo vamos a tener que gestionar
-
-nosotros manualmente y solamente la vamos a aplicar cuando sean instrucciones de acción como Yakumo.
+Además no nos va a hacer nada porque al utilizar Internet las transacciones lo vamos a tener que gestionar nosotros manualmente y solamente la vamos a aplicar cuando sean instrucciones de acción como Yakumo.
 
 Bueno pues venga vamos a seguir copiamos esta estructura para el siguiente buscar contactos.
 
@@ -700,188 +578,222 @@ Esta instrucción la pueden meter incluso en el tema de los parámetros normales
 
 Si cogemos tal o cual no lo copiamos etc..
 
-Fuera entonces bueno pues fíjate creamos la web y establecemos el parámetro de igual método el mismo
+Fuera entonces bueno pues fíjate creamos la web y establecemos el parámetro de igual método el mismo método para meter el cual es muy parecido.
 
-método para meter el cual es muy parecido.
+Prácticamente igual al Pasquali de KPA y bueno de la lista de resultados nos quedamos con el primero en buscar contacto eliminar contacto.
 
-Prácticamente igual al Pasquali de KPA y bueno de la lista de resultados nos quedamos con el primero
+Una vez más vamos a copiar la estructura lo que pasa que debía copiar la estructura del alta puesto que la instrucción para inicio de transacción aquí la voy a necesitar ya que estas instrucciones como es una eliminación deben de venir dentro de una transacción.
 
-en buscar contacto eliminar contacto.
+Cuando hacemos una búsqueda del contacto por primary key en este caso será el objeto sesión método Geeta que es el equivalente al fin.
 
-Una vez más vamos a copiar la estructura lo que pasa que debía copiar la estructura del alta puesto
-
-que la instrucción para inicio de transacción aquí la voy a necesitar ya que estas instrucciones como
-
-es una eliminación deben de venir dentro de una transacción.
-
-Cuando hacemos una búsqueda del contacto por primary key
-
-en este caso será el objeto sesión método Geeta que es el equivalente al fin.
-
-Ya he visto que si dejaba el Fain también funcionaba porque como ya te comenté en el capítulo anterior
-
-se puede utilizar los métodos de JPA porque llevan incorporados también dentro de las nuevas versiones
-
-de la interfaz sesión de Internet.
+Ya he visto que si dejaba el Fain también funcionaba porque como ya te comenté en el capítulo anterior se puede utilizar los métodos de JPA porque llevan incorporados también dentro de las nuevas versiones de la interfaz sesión de Internet.
 
 Pero bueno estamos trabajando con los originales.
 
 Vale y entonces.
 
-Pues aquí lo que vamos a hacer para eliminar la instancia de contacto es un método de llamada método
+Pues aquí lo que vamos a hacer para eliminar la instancia de contacto es un método de llamada método de alerta pasamos el todo contacto en la librería bajo la pregunta.
 
-de alerta pasamos el todo contacto en la librería bajo la pregunta.
+Efectivamente cierto que esto había que hacerlo poquito más y para preguntar si existe la estancia o si no existe la estancia no tenemos nada que eliminar.
 
-Efectivamente cierto que esto había que hacerlo poquito más y para preguntar si existe la estancia o
+Vale entonces la recuperamos y si existe la eliminamos compramos por su clave primaria y ya por último nos quedaría dentro de esta clase de JB pues la eliminación de contactos por email en este caso figote estamos utilizando una name equally pero es una name Kourí de acción.
 
-si no existe la estancia no tenemos nada que eliminar.
-
-Vale entonces la recuperamos y si existe la eliminamos compramos por su clave primaria y ya por último
-
-nos quedaría dentro de esta clase de JB pues la eliminación de contactos por email en este caso figote
-
-estamos utilizando una name equally pero es una name Kourí de acción.
-
-Por lo tanto también tenemos que estar dentro de una transacción así que vamos a ver porque hay una
-
-cosita aquí no sé si taladrado cuenta pero se me ha olvidado realizar también en el primer ejemplo en
-
-el primer método donde salvamos la entidad y es confirmar la transacción.
+Por lo tanto también tenemos que estar dentro de una transacción así que vamos a ver porque hay una cosita aquí no sé si taladrado cuenta pero se me ha olvidado realizar también en el primer ejemplo en el primer método donde salvamos la entidad y es confirmar la transacción.
 
 Saito confirma y confirma los explicitamente entonces vamos a empezar por aquí por el alta contacto.
 
-Cuando se me había olvidado hacer la operación commit porque si no no se confirmaría no quedaría reflejada
-
-en la base de datos aquí.
+Cuando se me había olvidado hacer la operación commit porque si no no se confirmaría no quedaría reflejada en la base de datos aquí.
 
 Pues lo mismo con el L.T X punto com vale.
 
 Bueno pues nos quedaba esta eliminación de contactos por email.
 
-Vamos a copiar toda esta estructura que nos puede servir porque en este caso si lo que necesitamos es
-
-una Mercury llamada Executiu.
+Vamos a copiar toda esta estructura que nos puede servir porque en este caso si lo que necesitamos es una Mercury llamada Executiu.
 
 Todo esto lo cortamos y vamos a sustituir por la que teníamos antes de recuperación eliminación.
 
 Y como es creatinina name Kairi repasarla name Cuadri.
 
-Este es el nombre original que tiene la entidad porque las entidades no las hemos cambiado mismo métodos
+Este es el nombre original que tiene la entidad porque las entidades no las hemos cambiado mismo métodos actitude y confirmar.
 
-actitude y confirmar.
+Como vemos es bastante similar a como hemos trabajado con JPA sólo que aquí bueno gestionando manualmente digamos las transacciones gestión usuarios pues también teníamos aquí un método que el método autenticar.
 
-Como vemos es bastante similar a como hemos trabajado con JPA sólo que aquí bueno gestionando manualmente
-
-digamos las transacciones gestión usuarios pues también teníamos aquí un método que el método autenticar.
-
-Bueno lo mismo esto Identity Manager lo vamos a quitar y aquí tenemos que crear una Tacuri a partir
-
-de una nave Juriquilla teníamos proporcionan los parámetros.
+Bueno lo mismo esto Identity Manager lo vamos a quitar y aquí tenemos que crear una Tacuri a partir de una nave Juriquilla teníamos proporcionan los parámetros.
 
 Bueno pues esto mismo.
 
 Venga vamos a traducirlo a Internet.
 
-Entonces como siempre la estructura el trade con recursos lo vamos a llevar aquí no podemos poner después
+Entonces como siempre la estructura el trade con recursos lo vamos a llevar aquí no podemos poner después a continuación la declaración de la variable Pullen.
 
-a continuación la declaración de la variable Pullen.
+Y bueno primero la acuerdo sí que vamos a ir copiando cosas bueno mejor cortando Cory Monteith Mercuri usuario y el objeto sesione al importar QWERTY como sabes.
 
-Y bueno primero la acuerdo sí que vamos a ir copiando cosas bueno mejor cortando Cory Monteith Mercuri
-
-usuario y el objeto sesione al importar QWERTY como sabes.
-
-Pues tiene que ser el cuadri de Rajoy ni te.
+Pues tiene que ser el cuadri de Rajoy ni te. 
 
 Todo esto es lo mismo que la forma de crearla es la misma.
 
-Establecimiento de los parámetros captura de una sesión si no hay un resultado bueno esto es exactamente
+Establecimiento de los parámetros captura de una sesión si no hay un resultado bueno esto es exactamente igual así que me lo voy a llevar también.
 
-igual así que me lo voy a llevar también.
-
-Aquí dentro bueno exactamente igual con la salvedad de que no hay ninguna salvedad la variable la llamada
-
-también QR o sea tal cual está.
+Aquí dentro bueno exactamente igual con la salvedad de que no hay ninguna salvedad la variable la llamada también QR o sea tal cual está.
 
 Por lo tanto.
 
 Bueno pues ya hemos reimplantado la lógica de negocio que teníamos hecha con JPA dentro de JB.
 
-Pues sí con el JB es manteniendo la misma lógica forma de la lógica de negocio pero utilizando la pide
+Pues sí con el JB es manteniendo la misma lógica forma de la lógica de negocio pero utilizando la pide y Bernays.
 
-y Bernays.
+Pues nada ahora sería cuestión de probar el ejercicio y verificar que funciona exactamente igual que antes.
 
-Pues nada ahora sería cuestión de probar el ejercicio y verificar que funciona exactamente igual que
-
-antes.
-
-Vamos a ello nos colocamos encima la página Lubin botón derecho runas observase
-
-seleccionamos algunas feeds y esperamos a que se inicie el servidor y nos lance la página
-
+Vamos a ello nos colocamos encima la página Lubin botón derecho runas observase seleccionamos algunas feeds y esperamos a que se inicie el servidor y nos lance la página 
 una vez que hayas arrancado aquí tenemos la página del Lovin para que nos adentraremos bien.
 
-Pues venga vamos a meter las credenciales que supuestamente están en la base de datos 3 1 2 1 y al pulsar
-
-el botón Enviar.
+Pues venga vamos a meter las credenciales que supuestamente están en la base de datos 3 1 2 1 y al pulsar el botón Enviar.
 
 Pues vamos a obtener un error 500.
 
 Vamos a ver cuál es.
 
-Ahora ya te explican en qué va a consistir el error y por qué nos dice que si vamos PJD es exception
-
-si vamos bajando llega un momento que nos dice que no hay una sesión abierta no ocurren sesión contes.
+Ahora ya te explican en qué va a consistir el error y por qué nos dice que si vamos PJD es exception si vamos bajando llega un momento que nos dice que no hay una sesión abierta no ocurren sesión contes.
 
 Por qué ha sido eso.
 
-Bueno volvemos otra vez al modelo a los métodos que hemos ido creando y bueno el problema aquí reside
+Bueno volvemos otra vez al modelo a los métodos que hemos ido creando y bueno el problema aquí reside básicamente en que al llamar al Guez ocurre sesión nos devolvería digamos la sesión actual si es que se hubiera abierto alguna como las hemos ido abriendo y cerrando no hay ninguna abierta.
 
-básicamente en que al llamar al Guez ocurre sesión nos devolvería digamos la sesión actual si es que
+Entonces served current Session es un método que si lo podemos tener un contexto donde hay una sesión ya creada y que se esté compartiendo.
 
-se hubiera abierto alguna como las hemos ido abriendo y cerrando no hay ninguna abierta.
-
-Entonces served current Session es un método que si lo podemos tener un contexto donde hay una sesión
-
-ya creada y que se esté compartiendo.
-
-Pero si lo que queremos es ir abriendo y cerrando nuestras sesiones para ganar en eso cierta eficiencia
-
-pues en vez de que curren sesión utilizaríamos Open session vale bueno o vamos a ir sustituyendo en
-
-todos los sitios donde tenemos a ver aquí
-
-sesión también aquí también
-
-y aquí tan Bale y en el otro no tenemos nada más que 1 lo tenemos guardamos todos los cambios y volvemos
-
-a probar de nuevo recuperamos la página del Odin
-
-vamos a ver 3 1 3 1 que son los usuarios que tenemos en la tabla de usuarios.
+Pero si lo que queremos es ir abriendo y cerrando nuestras sesiones para ganar en eso cierta eficiencia pues en vez de que curren sesión utilizaríamos Open session vale bueno o vamos a ir sustituyendo en todos los sitios donde tenemos a ver aquí sesión también aquí también y aquí tan Bale y en el otro no tenemos nada más que 1 lo tenemos guardamos todos los cambios y volvemos a probar de nuevo recuperamos la página del Odin vamos a ver 3 1 3 1 que son los usuarios que tenemos en la tabla de usuarios.
 
 Tramos tardado un poquito lo cual significa una buena señal.
 
-Vamos a ver la lista de contactos aquí tenemos la lista de contactos donde nos aparecen todos los contactos
+Vamos a ver la lista de contactos aquí tenemos la lista de contactos donde nos aparecen todos los contactos que teníamos en la base de datos.
 
-que teníamos en la base de datos.
+Bueno por ejemplo vamos a ver si es capaz de eliminar efectivamente Limina o vamos al menú y vamos ya crear la última prueba.
 
-Bueno por ejemplo vamos a ver si es capaz de eliminar efectivamente Limina o vamos al menú y vamos ya
+1 contacto contar a junto con un número de teléfono guardamos aquí debería aparecer efectivamente el nuevo contacto o la lista.
 
-crear la última prueba.
-
-1 contacto
-
-contar a
-
-junto con un número de teléfono guardamos aquí debería aparecer efectivamente el nuevo contacto o la
-
-lista.
-
-Como veis funciona exactamente igual que el otro difrencia en el ejercicio 3 utilizamos JPA en todos
-
-los ámbitos de lo que es creación y utilización de capa persistencia y aquí hemos utilizado Internet.
-
+Como veis funciona exactamente igual que el otro difrencia en el ejercicio 3 utilizamos JPA en todos los ámbitos de lo que es creación y utilización de capa persistencia y aquí hemos utilizado Internet.
 
 # 35 Ell API Criteria 03:44
+
+El API criteria de JPA es una alternativa al uso de Query/JPQL de cara a realizar consultas sobre la capa de persistencia. La diferencia fundamental entre uno y otro método de consulta es que mediante el API criteria construimos las consultas de forma dinámica a través de objetos, sin necesidad de predefinir las instrucciones con un lenguaje especial de consulta como JPQL.
+
+El API criteria está formado por una serie de interfaces que podemos encontrar en el paquete javax.persistence.criteria.
+
+### CriteriaBuilder
+
+Para realizar cualquier operación con el API criteria necesitamos un objeto CriteriaBuilder, el cual puede obtenerse a partir del objeto EntityManager a través del método `getCriteriaBuilder()`:
+
+`CriteriaBuilder cb=em.getCriteriaBuilder();`
+
+Una vez que disponemos del CriteriaBuilder podemos crear objetos CriteriaQuery, que son los que nos permitirán realizar las consultas sobre la capa de persistencia
+
+### CriteriaQuery
+
+Como te acabo de indicar, el objeto CriteriaQuery es quién nos permitirá realizar las consultas de selección de entidades sobre la capa de persistencia. Para crearlo, recurriremos al siguiente método de CriteriaBuilder:
+
+`CriteriaQuery<T> createQuery(Class<T> claseResultado)`
+
+El parámetro claseResultado es el objeto Class correspondiente al tipo de entidad que vamos a tratar en la consulta.
+
+Por ejemplo, para consultar sobre la capa de persistencia formada por objetos Contacto tendríamos que crear el objeto CriteriaQuery de la siguiente manera:
+
+```java
+CriteriaQuery<Contacto> 
+cq=cb.createQuery(Contacto.class);
+```
+
+La interfaz CriteriaQuery proporciona una serie de métodos para construir la consulta. Estos métodos corresponden con las cláusulas utilizadas para crear una instrucción JPQL , así tenemos los métodos `select(), from(), where()`, etc.
+
+### Raíz de una consulta. La interfaz Root
+
+Para poder realizar una consulta a través de los métodos de CriteriaQuery, necesitamos primeramente disponer de la raíz u origen de la consulta, que está representado en criteria mediante un objeto Root.
+
+Root es el punto de partida de una consulta al igual que lo es el elemento indicado en las cláusulas From de JPQL, de ahí que para obtener un objeto Root tengamos que recurrir al método `from()` de CriteriaQuery:
+
+`Root<Contacto> raiz=cq.from(Contacto.class);`
+
+### Ejecución de la consulta básica
+
+A partir de aquí, ya podríamos lanzar una instrucción select simple de recuperación de todas las entidades. Para ello, utilizaremos el método `select()` de CriteriaQuery, al que tendremos que pasarle el objeto Root. La llamada a este método nos devuelve un nuevo objeto CriteriaQuery, configurado como una consulta Select básica:
+
+`cq=cq.select(raiz);`
+
+Lo anterior equivale a la instrucción JPQL:
+
+`Select c From Contacto c`
+
+Para manipular las entidades resultantes de la consulta, utilizaremos como en JPQL el objeto Query o TypedQuery, pues podemos crear uno de estos objetos a partir del método createQuery(`CriteriaQuery<T> cquery`) de EntityManager.
+
+Para mostrar los nombres de todos los contactos sería:
+
+```java
+TypedQuery<Contacto> q=em.createQuery(cq);
+List<Contacto> contactos=q.getResultList();
+for(Contacto c:contactos){
+   System.out.println(c.getNombre();
+}
+```
+
+### Condiciones de selección
+
+Para establecer una condición a la hora de seleccionar las entidades, emplearemos el método `where()` sobre el CriteriaQuery obtenido de la selección, al igual que en JPQL empleamos la cláusula where.
+
+Sin embargo el uso del método where no es tan simple como el de la cláusula where, a la que le pasamos un String de la forma "columna operador valor". El método `where()` que utilizaremos en criteria tiene uno de estos formatos:
+
+```java
+CriteriaQuery<T> where(Expression<Boolean> restriction)
+CriteriaQuery<T> where(Predicate... restrictions)
+```
+
+
+En el primer caso, se pasa como parámetro al método un objeto **Expression** de tipo boolean con la condición de selección, mientras que en la segunda versión del método se pasaría como parámetro un número variable de objetos **Predicate**.
+
+Tanto en un caso como en otro, deberíamos recurrir a métodos de la clase CriteriaBuilder que nos proporcionarán objetos *Expression y Predicate* para formar las condiciones de selección.
+
+Vamos a ver un ejemplo que nos sirva para aclarar el funcionamiento de este método `where()`. Supongamos que queremos recuperar un objeto Contacto a partir de su email. Utilizaremos en este ejemplo la segunda versión de `where()`, al que pasaremos como parámetro un objeto Predicate que defina la condición.
+
+Ese objeto Predicate representa  una condición de igualdad que podemos generar a partir del método `equals()` de QueryBuilder:
+
+`Predicate equal(Expression<?> x, Object y)`
+
+El objeto Expression representaría el atributo al que le aplicaremos la condición de igualdad y podemos obtenerlo a partir del objeto Root, aplicando su método `get()` con el nombre del atributo. El segundo parámetro de `equals()` es el valor con el que se va a realizar la comparación.
+
+Asi pues, el CriteriaQuery que definiría la consulta de selección de entidades Contacto cuyo email sea `"test@gmail.com"` sería:
+
+`cq=cq.where(cb.equal(raiz.get("email"), "test@gmail.com"));`
+
+Si lo que queremos es recuperar todos los contactos cuyo nombre comience por "pru", utilizaríamos el método `like()` de CriteriaBuilder:
+
+`cq=cq.where(cb.like(raiz.get("nombre"), "pru%"));`
+
+Estoy bastante de acuerdo contigo en que la utilización del API criteria resulta mucho más farragoso que JPQL, sin embargo, debes considerar una ventaja el poder definir las condiciones de selección de forma dinámica, sin usar ninguna cadena JPQL.
+
+### Unión de condiciones
+
+La interfaz CriteriaBuilder también dispone de los métodos `and()` y `or()` para unir varias condiciones con estos operadores lógicos. Por ejemplo, si queremos recuperar los contactos cuyo email sea `"test@gmail.com"` y su nombre comience por "Luis", sería:
+
+```java
+cq=cq.where(cb.and(cb.equal(raiz.get("email"), "test@gmail.com"),
+                                cb.like(raiz.get("nombre"), "Luis%")));
+```                                
+
+### Operaciones Delete y Update
+
+Además de la interfaz CriteriaQuery para consultas de selección, tenemos CriteriaDelete y CriteriaUpdate para realizar consultas de acción. Estos objetos son creados, respectivamente, con los métodos `createCriteriaDelete()` y `createCriteriaUpdate()` de CriteriaBuilder.
+
+Por ejemplo, si quisiéramos eliminar los contactos cuyo telefono sea 5555 sería:
+
+```java
+CriteriaDelete<Contacto> cd=cb.createCriteriaDelete(Contacto.class);
+Root<Contacto> raiz=cd.from(Contacto.class);
+cd.where(cb.equal(raiz.get("telefono"), 5555));
+Query qr=em.createQuery(cd);
+EntityTransaction tx=em.getTransaction();
+tx.begin();
+qr.executeUpdate();
+tx.commit();
+```
+
 # 36 Ejercicio práctico VI 07:27
 # Autoevaluación VI 01:00
 # Resumen final 07:25
