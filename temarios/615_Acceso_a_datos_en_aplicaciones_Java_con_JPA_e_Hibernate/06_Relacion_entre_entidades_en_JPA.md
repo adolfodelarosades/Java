@@ -3231,7 +3231,7 @@ Como ves la estructura de esta tabla va a ser como ves en esta imagen estará el
 
 <img src="images/27-05.png">
 
-bien pues una vez visto la estructura de la tabla vamos a vemos algunos datos insertados.
+bien pues una vez visto la estructura de la tabla vamos a ver algunos datos insertados.
 
 ### Creación Proyecto Eclipse
 
@@ -3276,7 +3276,207 @@ EntityManager em;
 
 Una vez hecho la copia del proyecto y los ajustes básicos necesarios vamos a ver lo que se ha aumentado.
 
-#### 1. Aumentar el método `obtenerProductosVentas(int unidades)` en la Logica de Negocio `GestionProductosEjb` y `GestionProductosEjbLocal`
+#### 1. Crear Entidad Venta y Relación Uno a Muchos entre Producto y Venta
+
+Se ha creado una nueva Entidad `Venta` y hemos hecho una Relación Uno a Muchos entre Producto y Venta.
+
+*`Producto`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the productos database table.
+ * 
+ */
+@Entity
+@Table(name="productos")
+@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idProducto;
+
+	private String descripcion;
+
+	private String nombre;
+
+	private double precio;
+
+	//bi-directional many-to-one association to Seccion
+	@ManyToOne
+	@JoinColumn(name="idSeccion")
+	private Seccion seccione;
+
+	//bi-directional many-to-one association to Venta
+	@OneToMany(mappedBy="producto",cascade={CascadeType.REMOVE,CascadeType.MERGE})
+	private List<Venta> ventas;
+
+	public Producto() {
+	}
+
+	public int getIdProducto() {
+		return this.idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public Seccion getSeccione() {
+		return this.seccione;
+	}
+
+	public void setSeccione(Seccion seccione) {
+		this.seccione = seccione;
+	}
+
+	public List<Venta> getVentas() {
+		return this.ventas;
+	}
+
+	public void setVentas(List<Venta> ventas) {
+		this.ventas = ventas;
+	}
+
+	public Venta addVenta(Venta venta) {
+		getVentas().add(venta);
+		venta.setProducto(this);
+
+		return venta;
+	}
+
+	public Venta removeVenta(Venta venta) {
+		getVentas().remove(venta);
+		venta.setProducto(null);
+
+		return venta;
+	}
+
+}
+```
+
+*`Venta`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the ventas database table.
+ * 
+ */
+@Entity
+@Table(name="ventas")
+@NamedQuery(name="Venta.findAll", query="SELECT v FROM Venta v")
+public class Venta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idVenta;
+
+	private String ciudad;
+
+	private int unidades;
+
+	//bi-directional many-to-one association to Producto
+	@ManyToOne
+	@JoinColumn(name="idProducto")
+	private Producto producto;
+
+	public Venta() {
+	}
+
+	public int getIdVenta() {
+		return this.idVenta;
+	}
+
+	public void setIdVenta(int idVenta) {
+		this.idVenta = idVenta;
+	}
+
+	public String getCiudad() {
+		return this.ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public int getUnidades() {
+		return this.unidades;
+	}
+
+	public void setUnidades(int unidades) {
+		this.unidades = unidades;
+	}
+
+	public Producto getProducto() {
+		return this.producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+}
+```
+
+Por supuesto esto modifica `persistence.xml`
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+   <persistence-unit name="615-09_proyecto_relacion_almacen">
+      <jta-data-source>jdbc/almacends</jta-data-source>
+      <class>entidades.Producto</class>
+      <class>entidades.Seccion</class>
+      <class>entidades.Venta</class>
+   </persistence-unit>
+</persistence>
+```
+
+#### 2. Aumentar el método `obtenerProductosVentas(int unidades)` en la Logica de Negocio `GestionProductosEjb` y `GestionProductosEjbLocal`
 
 ```java
 @Override
@@ -3320,7 +3520,7 @@ Bueno sin Join la cosa habría sido más compleja por qué primero habríamos te
 
 Cómo ves el uso de los Joins nos a simplificado enormemente el trabajo.
 
-#### 2. Añadir el Controlador `TopVentasAction`
+#### 3. Añadir el Controlador `TopVentasAction`
 
 En cuanto al resto de la aplicación en la parte del Controlador ha habido que incluir un nuevo controlador `TopVentasAction`.
 
@@ -3357,7 +3557,6 @@ public class TopVentasAction extends HttpServlet {
       request.setAttribute("productos", prods);
       request.getRequestDispatcher("topventas.jsp").forward(request, response);
    }
-
 }
 ```
 
@@ -3388,8 +3587,7 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 }
 ```
 
-#### 3. Añadir dos Vistas `unidades.html` y `topventas.jsp`
-
+#### 4. Añadir dos Vistas `unidades.html` y `topventas.jsp`
 
 Ha siddo crear dos nuevas vistas `unidades.html` que es donde se va a recoger el número de unidades que ingrese el usuario y `topventas.jsp` que será donde se pinten los los productos que cumplen esa condición.
 
@@ -3463,7 +3661,11 @@ Ademas hemos tenido que modificar la página `inicio.html`.
 </html>
 ```
 
-#### 4. Probar la Aplicación
+#### 5. Probar la Aplicación
+
+Te voy a enseñar cómo sería el funcionamiento usaríamos `Top Ventas` y al escribir las unidades por ejemplo tres al pulsar Enviar nos mostraría una lista con los productos que han sido vendidos más de tres unidades de cada uno de ellos en una ventana determinada.
+
+Es decir si esto significa que ha habido ventas en la que alicates de 25 milímetros se han vendido más de tres veces, interruptor doble lo mismo.
 
 <img src="images/27-08.png">
 
@@ -3479,19 +3681,750 @@ Ademas hemos tenido que modificar la página `inicio.html`.
 
 <img src="images/27-14.png">
 
+Aquí se ha puesto de manifiesto cómo el uso de los Joins nos va a simplificar muchas situaciones donde de otra manera la cosa sería bastante compleja, si además hablamos de afectar por ejemplo a tres entidades que se verán afectadas en la instrucción JPQL, allí hay que obtener datos de una entidad cuya condición es de otra entidad que a su vez también implica condiciones de otra etcétera.
+
+La utilización de Joins simplemente con una única instrucción nos permite recogerlo todo y establecer todas las condiciones en ella, de otra manera sería bastante más complejo y recorriendo entre todo el camino de relaciones hasta poder conseguir las entidades que vamos buscando. Por tanto el uso de Joins es muy práctico también en JPA.
+
+### :computer: Código Completo - 615-09_proyecto_relacion_almacen
+
+<img src="images/27-15.png">
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-09_proyecto_relacion_almacen</groupId>
+	<artifactId>615-09_proyecto_relacion_almacen</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit
+		name="615-09_proyecto_relacion_almacen">
+		<jta-data-source>jdbc/almacends</jta-data-source>
+		<class>entidades.Producto</class>
+		<class>entidades.Seccion</class>
+		<class>entidades.Venta</class>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
 
 
-Aquí se ha puesto de manifiesto cómo el uso de los Yeung nos va a simplificar muchas situaciones de otra manera pues la cosa sería bastante compleja si además hablamos de afectar por ejemplo a tres entidades que se verán afectadas en la instrucción J.P. Cubela y que obtener datos de una entidad cuya condición es de otra entidad que a su vez también implica condiciones de otra etcétera.
+*`Seccion`*
 
-La utilización de Yeung simplemente con una única instrucción nos permite recogerlo todo y establecer todas las condiciones en ella de otra manera pues sería bastante más complejo y recurriendo entre todo el camino de relaciones hasta poder conseguir las entidades que vamos buscando no tanto el uso de Jaynes.
+```java
+package entidades;
 
-Es muy práctico también en JPA.
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+/**
+ * The persistent class for the secciones database table.
+ * 
+ */
+@Entity
+@Table(name = "secciones")
+@NamedQuery(name = "Seccion.findAll", query = "SELECT s FROM Seccion s")
+public class Seccion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idSeccion;
+
+	private String responsable;
+
+	private String seccion;
+
+	// bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy = "seccione")
+	private List<Producto> productos;
+
+	public Seccion() {
+	}
+
+	public int getIdSeccion() {
+		return this.idSeccion;
+	}
+
+	public void setIdSeccion(int idSeccion) {
+		this.idSeccion = idSeccion;
+	}
+
+	public String getResponsable() {
+		return this.responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+
+	public String getSeccion() {
+		return this.seccion;
+	}
+
+	public void setSeccion(String seccion) {
+		this.seccion = seccion;
+	}
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public Producto addProducto(Producto producto) {
+		getProductos().add(producto);
+		producto.setSeccione(this);
+
+		return producto;
+	}
+
+	public Producto removeProducto(Producto producto) {
+		getProductos().remove(producto);
+		producto.setSeccione(null);
+
+		return producto;
+	}
+
+}
+```
+
+*`Producto`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
 
-*******
-cómo sería la aplicación la tengo aquí ya funcionando te voy a enseñar cómo sería el funcionamiento usaríamos dos ventas y al escribir las unidades por ejemplo tres al pulsar Enviar nos mostraría una lista con los productos que han sido vendidos más de tres unidades de cada uno de ellos en una ventana determinada.
+/**
+ * The persistent class for the productos database table.
+ * 
+ */
+@Entity
+@Table(name="productos")
+@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-Es decir si esto significa que ha habido ventas en la que alicates de 25 milímetros se han vendido más de tres veces interruptor doble lo mismo es lo mismo y pintura.
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idProducto;
+
+	private String descripcion;
+
+	private String nombre;
+
+	private double precio;
+
+	//bi-directional many-to-one association to Seccion
+	@ManyToOne
+	@JoinColumn(name="idSeccion")
+	private Seccion seccione;
+
+	//bi-directional many-to-one association to Venta
+	@OneToMany(mappedBy="producto",cascade={CascadeType.REMOVE,CascadeType.MERGE})
+	private List<Venta> ventas;
+
+	public Producto() {
+	}
+
+	public int getIdProducto() {
+		return this.idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public Seccion getSeccione() {
+		return this.seccione;
+	}
+
+	public void setSeccione(Seccion seccione) {
+		this.seccione = seccione;
+	}
+
+	public List<Venta> getVentas() {
+		return this.ventas;
+	}
+
+	public void setVentas(List<Venta> ventas) {
+		this.ventas = ventas;
+	}
+
+	public Venta addVenta(Venta venta) {
+		getVentas().add(venta);
+		venta.setProducto(this);
+
+		return venta;
+	}
+
+	public Venta removeVenta(Venta venta) {
+		getVentas().remove(venta);
+		venta.setProducto(null);
+
+		return venta;
+	}
+
+}
+```
+
+*`Venta`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the ventas database table.
+ * 
+ */
+@Entity
+@Table(name="ventas")
+@NamedQuery(name="Venta.findAll", query="SELECT v FROM Venta v")
+public class Venta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idVenta;
+
+	private String ciudad;
+
+	private int unidades;
+
+	//bi-directional many-to-one association to Producto
+	@ManyToOne
+	@JoinColumn(name="idProducto")
+	private Producto producto;
+
+	public Venta() {
+	}
+
+	public int getIdVenta() {
+		return this.idVenta;
+	}
+
+	public void setIdVenta(int idVenta) {
+		this.idVenta = idVenta;
+	}
+
+	public String getCiudad() {
+		return this.ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public int getUnidades() {
+		return this.unidades;
+	}
+
+	public void setUnidades(int unidades) {
+		this.unidades = unidades;
+	}
+
+	public Producto getProducto() {
+		return this.producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+}
+```
+
+**Modelo**
+
+*`GestionProductosEjbLocal`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import entidades.Producto;
+import entidades.Seccion;
+
+@Local
+public interface GestionProductosEjbLocal {
+	
+	List<Seccion> obtenerSecciones();
+	
+	List<Producto> obtenerProductos();
+	
+	List<Producto> obtenerProductosPorSeccion(int idSecc);
+	
+	Seccion obtenerSeccionDeProducto(String prod);
+
+	List<Producto> obtenerProductosVentas(int unidades);
+
+}
+```
+
+*`GestionProductosEjb`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import entidades.Producto;
+import entidades.Seccion;
+
+/**
+ * Session Bean implementation class GestionProductosEjb
+ */
+@Stateless
+public class GestionProductosEjb implements GestionProductosEjbLocal {
+
+	@PersistenceContext(unitName="615-09_proyecto_relacion_almacen")
+	EntityManager em;
+	
+	
+	@Override
+	public List<Seccion> obtenerSecciones(){
+		TypedQuery<Seccion> q=em.createNamedQuery("Seccion.findAll",Seccion.class);
+		return q.getResultList();
+	}
+	@Override
+	public List<Producto> obtenerProductos(){
+		TypedQuery<Producto> q=em.createNamedQuery("Producto.findAll",Producto.class);
+		return q.getResultList();
+	}
+	@Override
+	public List<Producto> obtenerProductosPorSeccion(int idSecc){
+		//String jpql = "Select p From Producto p Where p.idSeccion=" + idSecc;
+		Seccion s=em.find(Seccion.class, idSecc);
+		return s.getProductos();		
+	}
+
+	@Override
+	public Seccion obtenerSeccionDeProducto(String prod){
+		
+		String jpql="select p from Producto p where p.nombre=?1";
+		TypedQuery<Producto> q=em.createQuery(jpql,Producto.class);
+		q.setParameter(1, prod);
+		return q.getSingleResult().getSeccione();
+	}
+	
+	@Override
+	public List<Producto> obtenerProductosVentas(int unidades){
+		//opción 1 con join
+		String jpql="select distinct(p) from Producto p join p.ventas v where v.unidades>?1";
+		TypedQuery<Producto> q=em.createQuery(jpql,Producto.class);
+		q.setParameter(1,unidades);
+		return q.getResultList();
+		
+		//opción 2 sin join
+		/*String jpql="select v from Venta v where v.unidades>?1";
+		TypedQuery<Venta> q=em.createQuery(jpql,Venta.class);
+		q.setParameter(1,unidades);
+		List<Venta> ventas=q.getResultList();
+		List<Producto> prods=new ArrayList<>();
+		for(Venta v:ventas){
+			prods.add(v.getProducto());
+		}
+		return prods;*/
+	}
+}
+```
+
+**Controlador**
+
+*`Controller`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String op=request.getParameter("op");
+		String url="inicio.html";
+		
+		switch(op){
+			case "doSecciones":
+				url="SeccionesAction";	
+				break;
+			case "doProductos":
+				url="ProductosAction";
+				break;
+			case "doTopVentas":
+				url="TopVentasAction";
+				break;
+			case "toUnidades":
+				url="unidades.html";
+		}
+		
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+}
+```
+
+*`SeccionesAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Seccion;
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class SeccionesAction
+ */
+@WebServlet("/SeccionesAction")
+public class SeccionesAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionProductosEjbLocal gproductos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Seccion> secciones=gproductos.obtenerSecciones();
+		request.setAttribute("secciones", secciones);
+		request.getRequestDispatcher("secciones.jsp").forward(request, response);
+	}
+
+}
+```
+
+*`ProductosAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class ProductosAction
+ */
+@WebServlet("/ProductosAction")
+public class ProductosAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionProductosEjbLocal gproductos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idSeccion=Integer.parseInt(request.getParameter("seccion"));
+		if(idSeccion==0){
+			request.setAttribute("productos", gproductos.obtenerProductos());
+		}else{
+			request.setAttribute("productos", gproductos.obtenerProductosPorSeccion(idSeccion));
+		}
+		request.getRequestDispatcher("productos.jsp").forward(request, response);
+	}
+
+}
+```
+
+*`TopVentasAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Producto;
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class TopVentasAction
+ */
+@WebServlet("/TopVentasAction")
+public class TopVentasAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionProductosEjbLocal gproductos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int unidades=Integer.parseInt(request.getParameter("unidades"));
+		List<Producto> prods=gproductos.obtenerProductosVentas(unidades);
+		request.setAttribute("productos", prods);
+		request.getRequestDispatcher("topventas.jsp").forward(request, response);
+	}
+
+}
+```
+
+**Vista**
+
+*`inicio.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<h3><a href="Controller?op=doSecciones">Consulta secciones</a></h3>
+		<h3><a href="Controller?op=toUnidades">Top ventas</a></h3>
+	</center>
+</body>
+</html>
+```
+
+*`secciones.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>seleccion</title>
+<meta http-equiv="Content-Type" content="text/html;  charset=ISO-8859-1">
+</head>
+<body>
+	<center>
+		<h1>Seleccione Sección</h1>
+		<br /><br />
+		<form action="Controller?op=doProductos" method="post">
+			<select name="seccion">
+				<option value="0">Todos</option>
+				<c:set var="sec" value="${requestScope.secciones}" />
+				<c:forEach var="s" items="${sec}">
+					<option value="${s.idSeccion}">${s.seccion}</option>
+				</c:forEach>
+			</select>
+			<br /> <br /> 
+			<input type="submit" value="Ver Productos" />
+		</form>
+	</center>
+</body>
+</html>
+```
+
+*`productos.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>libros</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+   <table border="1">
+      <tr><th>Nombre</th><th>Precio</th><th>Descripción</th></tr>
+      <c:set var="productos" value="${requestScope.productos}"/>
+         <c:forEach var="pr" items="${productos}">
+    	    <tr>
+		       <td>${pr.nombre}</td>
+		       <td>${pr.precio}</td>
+		       <td>${pr.descripcion}</td>
+			</tr>
+    	 </c:forEach>
+   </table>
+   <br/><br/>
+   <a href="Controller?op=doSecciones">Otra sección</a>
+</body>
+</html>
+```
+
+*`unidades.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<form action="Controller?op=doTopVentas" method="post">
+			Unidades mínimas vendidas:<input type="number" name="unidades"/><br/><br/>
+			<input type="submit" value="Enviar"/>
+		</form>
+	
+	</center>
+</body>
+</html>
+```
+
+*`topventas.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE HTML><%@page language="java"
+	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
+	%>
+<html>
+<head>
+<title>libros</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+    
+
+
+<table border="1">
+    <tr><th>Nombre</th><th>Precio</th><th>Descripción</th></tr>
+    		<c:set var="productos" value="${requestScope.productos}"/>
+    		<c:forEach var="pr" items="${productos}">
+    			<tr>
+		              	<td>${pr.nombre}</td>
+						<td>${pr.precio}</td>
+						<td>${pr.descripcion}</td>
+				</tr>
+    		</c:forEach>
+            
+    
+
+
+</table>
+<br/><br/>
+<a href="Controller?op=toInicio">Inicio</a>
+
+</body>
+</html>
+```
 
 # Autoevaluación V 01:30
  
