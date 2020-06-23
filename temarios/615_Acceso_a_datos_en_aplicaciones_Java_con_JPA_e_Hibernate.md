@@ -68,7 +68,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 * 27 Ejercicio práctico V 06:02
 * Autoevaluación V 01:30
 
-#### 7. Configuraciones JPA y uso de Hibernate 01:30:31
+#### 7. [Configuraciones JPA y uso de Hibernate](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/07_Configuraciones_JPA_y_uso_de_Hibernate.md) 01:30:31
 
 * 28 Ajuste de relaciones 06:54
 * 29 Claves compuestas 07:41
