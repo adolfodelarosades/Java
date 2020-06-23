@@ -795,5 +795,176 @@ tx.commit();
 ```
 
 # 36 Ejercicio práctico VI 07:27
+
+Después de haber estudiado la gritería he visto que es un poquito más complejo que la utilización de J.P. cuele para realización de consultas.
+
+Por tanto vamos a ver si en este ejercicio práctico lo aclaramos todo su funcionamiento se trata de realizar una nueva versión más de la aplicación web de la agenda de contactos.
+
+Pero la consulta la vamos a implementar con la Criteria en lugar de JRE en el ejercicio pues vamos a ver ya lo tengo yo hecho aquí vamos a analizarlo es el 07 quiroprácticos 6 que podrás encontrar en la zona de recursos para que te lo descargues y en principio lo que he hecho es crear una copia del ejercicio práctico 2 que ya teníamos creado e implementando una aplicación web con moda arquitectura Modelo Vista Controlador donde la lógica de negocio la teníamos en gestión contactos y gestión a usuarios.
+
+Bueno pues todos lo teníamos hecho con JPA y ahora vamos a ver cómo sería esas mismas operaciones.
+
+Concretamente en la parte de las consultas claramente pero utilizando la API Criteria en lugar de JPQL.
+
+Entonces nos vamos a centrar en el único cambio a las únicas clases donde hay que hacer cambios son en contactos es decir usuarios el resto tanto entidades como servlet como páginas JSP.
+
+Obviamente permanece igual puesto que lo único que cambia es la lógica de acceso a la capa de persistencia concretamente la manera en la que vamos a enviar las consultas.
+
+Vamos a empezar por gestión contactos contactos teníamos una serie de métodos teníamos el método privado que nos devuelven Timaná ayer.
+
+Lógicamente eso se mantiene.
+
+He visto que hemos cambiado el nombre de la Unidad de persistencia.
+
+También existen en XML lógicamente para adaptarlo al nuevo ejercicio.
+
+Y bueno pues las dos métodos los dos métodos que teníamos de alta de contactos lo dejamos igual porque para hacer una operación básica Crook con los métodos en este caso pero si eso no lo vamos a hacer con API Criteria petitorias para hacer consultas enviar consultas en lugar de JPEG suele hacerlo con este app.
+
+Entonces el primer método donde vamos a aplicar Criteria es recuperar contactos que se recuperan todos los contactos de la base de datos.
+
+Aquí creamos construimos el Criteria Builder el criterio de QWERTY a partir de la clase contacto el objeto RUV también utilizando el método from de Criteria.
+
+Y bueno pues una vez que tenemos ya el Criteria Cury configurado o lanzamos un Select con el Roiz y esto sería el equivalente pues al Seele de todos los contactos a partidos seguiría Ueli y creamos Twitter QWERTY y sulkys.
+
+Esto lo teníamos lo habrás visto en el ejemplo que teníamos puesto en la documentación en el documento donde se explicaba la pequeña historia en la lección anterior en cuanto a buscar un contacto a partir de un determinado email aquí ya tenemos que proponer una condición.
+
+Por lo tanto después de hacer el Select del criterio injury todas estas situaciones como son las mismas que antes pues aplicamos el método huera donde aplicamos una condición llamada método Equal de Criteria Builder donde el email tenga que ser igual al valor de la variable email que se pasa como parámetro.
+
+A partir de ahí cuando ya tenemos el Quiteria Kuric confeccionado creamos el Taipe QWERTY y de nuevo GAD3 un Liss en este caso nos quedamos con el primer resultado por si acaso hubiera más de uno que correspondería con el contacto primero que cumplan la condición que tenga cuyo valor de email sea igual al de esa variable.
+
+En cuanto a eliminar contactos eliminar contacto a partir de líder sigue siendo una operación básica del City Manager Remus.
+
+Hay que hacer cambios pero teníamos un eliminar contactos por email que luego no se utilizaba desde la capa de controlador y la vista.
+
+Pero bueno lo teníamos implementado.
+
+Bueno pues aquí sí teníamos que crear una consulta para eliminar por email.
+
+Bueno pues igualmente lo vamos a hacer con Criteria.
+
+Hasta aquí sería lo mismo hasta la creación del root pero en este caso no sería lo mismo porque en vez de crear un criterio evidentemente vamos a crear un criterio del experto si tenemos el criterio Wílder.
+
+Y como ves aquí creamos un Criteria delete de la entidad al contacto que nos devuelve un objeto Criteria delete a partir de él con el método from creamos el robot y luego aplicamos la condición de eliminación.
+
+Igual que tenía un método web el criterio también lo tenía Criteria delete para establecer la condición de eliminación.
+
+En este caso es llamada el método de Criteria Builder donde le vamos a indicar que la columna mail es igual a este valor de la variable.
+
+Una vez que tenemos ya el Criteria delete configurado de esa manera pues llamamos a Criteria Juri y en este caso una llamada a Execute porque no se trata de seleccionar sino de una actualización.
+
+Eso en cuanto a gestión de contactos teníamos otra clase que es gestión usuarios donde se hacía el lock in.
+
+Sin embargo este método autenticar donde recibamos un usuario una contraseña y tendríamos que devolver si el usuario existía o no entonces lanzábamos en su momento en estos días JP QL vamos a verlo con Criteria Criteria aquí sería crear de nuevo un Criteria Cueli porque se trata de una selecta lanzamos una serie de raíz de decir esto serían las cuatro mismas instrucciones que en el caso de la gestión en contacto donde se hacía una búsqueda de los contactos y bueno a la hora de establecer la condición método web.
+
+Pues en este caso ya no se trata de que cumpla una única condición que tal columna sea igual al valor que cumplir dos.
+
+Por lo tanto deben estar dentro de una llamada al método de Criteria Builder donde le vamos a pasar las dos condiciones que usuarios e igual a la variable usuario y que sea igual a la variable PWR que tenemos el método al or si la condición fuera que cumpla una u otra podremos pasarle varias condiciones método al método y así podemos confeccionar una consulta más compleja. 
+
+Bueno pues una vez que tenemos el criterio Aquaris pues como siempre el PP adquiere a partir de ahí una llamada Persinger Rasul para ver si se obtiene un resultado de un usuario que cumpla esa condición.
+
+Si devuelve un resultado entonces esta instrucción se ejecutará normalmente se devuelve true bueno esto sería realmente lo mismo que ya teníamos hecho en la versión anterior puesto que a partir de inserta y pecarí todo es igual e independientemente de que es utilizado JPQL o Quiteria.
+
+Bueno pues esto sería esas funcionalidades implementadas a través de la victoria como es pues bueno pues es un poquito más complejo que J.P. QL pero permite construir dinámicamente y no depender de una cadena corta huele que en algunos casos esto ofrece esa ventaja de poder como digo con modificar y confeccionar dinámicamente la consulta.
+
 # Autoevaluación VI 01:00
+
+1. Si queremos al cargar una entidad queremos que su objeto u objetos relacionados se carguen también en ese momento, habrá que indicar en la anotación de relación:
+   * `load=LAZY`
+   * `fetch=FetchType.LAZY`
+   * `load=EAGER`
+   * `fetch=FetchType.EAGER` :+1:
+
+2. Si no se indica nada en la anotación de relación
+   * Todas las operaciones que se realicen en la entidad son propagadas a los objetos relacionados
+   * Ninguna de las operaciones sobre la entidad es propagada a los objetos relacionados :+1:
+   * Solo la operación de actualización es propagada a los objetos relacionados
+   * Solo la operación de eliminación es propagada a los objetos relacionados
+
+3. Indica cual de las siguientes afirmaciones sobre el API Criteria es verdadera
+   * Se emplea para realizar las mismas operaciones de eliminación, actualización, inserción y recuperación que se hacen con los métodos de EntityManager
+   * Requiere que toda la configuración de las consultas se realice en XML
+   * Es una alternativa al uso de Query y TyperQuery :+1:
+   * Se basa en definir operaciones mediante anotaciones
+
+4. La carga de datos relacionados en una relación muchos a muchos
+   * Es siempre de tipo Lazy
+   * Es siempre de tipo Eager
+   * Es aleatoria
+   * Se configura igual que en el resto de relaciones :+1:
+
+5. Para establecer las condiciones en una consulta de selección de entidades, generada por el API Criteria
+   * Utilizaremos el método select de CriteriaBuilder
+   * Utilizaremos el método where de CriteriaBuilder
+   * Utilizaremos el método where de CriteriaQuery :+1:
+   * Utilizaremos el método where de Root
+ 
+
+
+SOLUCIONES:
+
+1.-D
+
+2.- B
+
+3.- C
+
+4.- D
+
+5.- C
+
+
 # Resumen final 07:25
+
+Bueno pues ya hemos llegado al final de este curso a modo de resumen si te parece vamos a repasar un poquito los conceptos que hemos visto a lo largo del mismo.
+
+Empezamos hablando de lo que era una capa de persistencia que nos permitía exponer los datos a la aplicación en forma de objetos los que llamamos entidades y esa capa de persistencia puede ser creada y también manipulada desde la aplicación utilizando el estándar de Java Java persistan API que forma parte de la especificación Java.
+
+Java persiste en API pues dispone de un objeto principal conocido como Timaná ayer que nos proporciona una serie de métodos para realizar las llamadas operaciones básicas Cruzat de crear recuperar actualizar y eliminar entidades que se traduce en hacer esas operaciones por detrás que las lleva a cabo el motor de persistencia.
+
+La base de datos estos métodos serán el percibís para hacer la persistencia o añadir nuevas entidades actualizar entidades eliminar entidades y localizar entidades recuerda que estas tres operaciones que implican una acción en la base de datos están englobadas dentro de una transacción que en caso de utilizó en Enterprise Java Bin como vimos esas transacciones serán gestionadas automáticamente por el contenedor JB no tendríamos que preocuparnos del código de iniciar confirmar transacciones por supuesto también hemos visto las consultas como una parte muy importante de JPA ya que aparte de esas operaciones.
+
+Si queremos hacer operaciones más complejas que impliquen por ejemplo recuperar entidades en base a criterios diferentes a la primera íQué y eliminar conjuntos de entidades etcétera pues tenemos que recurrir como digo a las consultas que se ejecutan a través de o bien el objeto qwerty o Taipe.
+
+Esas consultas se definen utilizando un lenguaje basado en SQL conocido como J.P. cuelen Java persista en qn a la hora de generar las consultas que da las consultas.
+
+Podemos utilizar consultas estándares que se definen dentro de la propia el propio código.
+
+Como ves aquí en este ejemplo las consultas pueden ser parametrizada es decir determinados valores pueden no conocerse en el momento de crear la instrucción y proporcionarse después como parámetros en vez de andar concatenando valores y demás en la propia instrucción se pronuncian como parámetros que pueden ser parámetros definidos o bien por posición o bien por un nombre y también vimos que otra variante a la hora de crear las consultas es en lugar de definirlas como en estos casos en el propio código.
+
+La definíamos en la entidad las llamadas equally o consultas nominadas a la hora de trabajar con ellas.
+
+Luego en el código creábamos creamos el objeto qualia asociado a la consulta utilizando creatinina Mercuri en lugar de create QWERTY indicando el nombre de la consulta que se le había asignado al crearla dentro de la entidad como es el lenguaje JPQL es la parte esencial a la hora de crear una consulta y hemos visto que existen realmente tres tipos de instrucciones JPQL la Sele cuyos formatos ves aquí tres ejemplos de cada una.
+
+SELECT UPDATE DELETE.
+
+Tres ejemplos de clásicos de utilización de dichas instrucciones que una vez definidas se proporcionan al objeto a la hora de crear el objeto KERI o Taipe.
+
+Si bien si vienen directamente o ya se han especificado Mercuri y ya una vez que ya las tenemos podemos ejecutarlas vimos también cómo podíamos relacionar entidades a fin de facilitar las operaciones.
+
+Cuando trabajamos con un conjunto de entidades que tienen alguna relación entre ellas es decir a nivel de tabla tienen un campo común pero a nivel de entidad eso se traduce en que un objeto de una entidad incluye en su interior todos los objetos relacionados.
+
+Entonces qué ocurre.
+
+Que por ejemplo vas a obtener recuperar una entidad.
+
+Por ejemplo hacer un fin o una consulta de un conjunto de entidades.
+
+Recuperamos también los objetos relacionados con lo cual las operaciones en el código luego se simplifican bastante las relaciones podrían ser uno a muchos una entidad le corresponden muchos objetos de otra muchos a uno es decir a varias entidades estas tienen asociado el mismo objeto de otra de otra entidad o muchos a muchos a la hora de configurarlas pues aquí vemos unos ejemplos de las anotaciones que culturizar en cada caso y también de las anotaciones a nivel de definición de lo que son las columnas de relación o relaciones a nivel de tabla de la base de datos.
+
+No todo se podía resolver con relaciones y con instrucciones J.P. cueles simples es decir hay algunas consultas complejas que solamente se pueden resolver uniendo entidades dentro de la consulta a través de una cláusula que también se dispone de ella en el lenguaje SQL estándar que la cláusula Yeung nos permite como ves aquí pues a la hora de seleccionar una entidad que es una relación del tipo de lado no mucho del lado uno por ejemplo a la hora de seleccionar producto pues esa entidad a la hora de relacionarla conventos para establecer la condición a través de ventas pues no se podría hacer directamente en una instrucción habría que recuperar todos los todos los productos y sumando lo bueno sería algo bastante complejo como ya vimos en un ejercicio que te presente entonces a través de la cláusula Yeung.
+
+Se puede indicar cuál es ser la entidad de relación a quién sería SELECT FROM productode Yeung la palabra reservada y luego indicas cuál es el atributo muchos que contiene la colección de ventas al que se le asocia un alias para después poder establecer la condición sobre esa entidad venta sobre todo cuando tenemos varias.
+
+Aparte de este caso sí hay varias entidades implicadas a utilizar yo y no es una cosa que simplifica enormemente lo que sería la creación de las instrucciones una vez que ya tiene la instrucción completa o con se construyen los objetos que nos van a permitir ejecutarlas.
+
+Y por último también estuvimos hablando de la API Criteria aparte de otros elementos que vimos como por ejemplo actualizaciones en cascada la carga de datos rápida o carga perezosa.
+
+También vimos cómo crear primero X compuestos y finalmente hablamos de la API Criteria que nos permite definir consultas dinámicamente sin utilizar JPQL.
+
+Esto ofrece cierta flexibilidad a la hora de crear las consultas.
+
+Vimos que también creaba o generaba cierta complejidad puesto que como veis están implicadas nuevas clases aparte de lo que son más clásicas las interfaces QWERTY el ayer evidentemente para construir las consultas en vez de utilizar una cadena instruccion J.P. suele empleábamos el Criteria Builder que es el creador de consultas el objeto root para hacer referencias a las entidades sobre las que se va a trabajar y luego ya depende de la consulta utilizar si es de selección 7 eliminación de actualización pues tienes Criteria Couric Criteria Deloitte Criterium respectivamente pues esto es todólogo lo que hemos visto en el curso espero que hayan disfrutado con él y que haya sido de tu agrado.
+
+En cualquier caso ya sabes que estoy aquí para responder a cualquiera de tus dudas y para atenderte en todo lo que pueda necesitar.
+
+Un saludo y gracias.
