@@ -82,7 +82,7 @@ A través de este curso te enseñaré a construir una capa de persistencia, tant
 * Autoevaluación VI 01:00
 * Resumen final 07:25
 
-#### 8. Apéndices 04:43
+#### 8. [Apéndices](615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/08_Apendices.md) 04:43
 
 * Apéndice A Crear backup de una base de datos MySQL 03:39
 * Apéndice B Consultas SQL nativas en JPA 01:04
