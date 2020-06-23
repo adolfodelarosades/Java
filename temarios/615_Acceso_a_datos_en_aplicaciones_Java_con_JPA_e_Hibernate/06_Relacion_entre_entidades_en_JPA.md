@@ -3146,59 +3146,70 @@ Al igual que antes ese objeto cliente trae todos los objetos cuentas relacionado
 
 <img src="images/26-01.png">
 
+Bien pues ahora que ya sabemos como crear entidades relacionadas y los beneficios que esto nos aporta vamos a ver el uso de los Joins.
+
 <img src="images/26-02.png">
+
+¿Qué es exactamente un Join?
+
+Bueno pues como dice la palabra un Join es una unión que se va a realizar dentro de una consulta JPQL entre entidades relacionadas. Gracias a estos Joins vamos a poder operar sobre una entidad en base a condiciones que van a afectar a la entidad relacionada.
+
+Bueno este tipo de cosas ya lo hemos hecho, simplemente con el hecho de tener relacionadas las entidades, por ejemplo podríamos recuperar una entidad `Seccion` a partir de ese identificador de sección y gracias al atributo producto ya sacamos todos los productos asociados a dicha sección, pero no todas las operaciones son tan simples las condiciones que afectan a entidades relacionadas son más complejas y entonces pues dependiendo también de cómo es la relación entre las entidades con una JPQL es simple, simplemente utilizando la relación no vamos a poder resolver el problema y vamos a tener que recurrir a los Joins.
+
+Tenemos dos tipos de Joins:
+
+* Join implícitos.
+* Join explícitos.
 
 <img src="images/26-03.png">
 
+¿Qué es exactamente un Join implícito?
+
+Pues como dice la expresión un Join implícito es aquel en el que ni siquiera hace falta utilizar la palabra Join, lo vamos a utilizar en relaciones Muchos a Uno cuando vamos a operar sobre la entidad del lado muchos y la condición afecta a la entidad en el lado uno.
+
+De hecho esto ya lo hemos hecho en algún caso y no hemos utilizado la palabra Join porque ya implícitamente se trataba de un Join implícito.
+
+Por ejemplo, vamos a de nuevo a nuestra base de datos almacén entidades sección y producto, imaginamos que queremos recuperar todos los productos de aquellas secciones cuyo responsable sea una determinada persona.
+
+```java
+Select p From Producto p Where p.seccion.responsable ="María Salgado"
+```
+
+Pues entonces en vez de estar jugando con la entidad ir recogiendo primero las secciones que tengan su responsable y de ahí ir sacando los productos pues sería mucho más cómodo hacerlo de esta manera, indicando recupera todos los productos donde su campo responsable de el atributo sección que está dentro de la entidad producto que están relacionadas es igual a tal valor. Esto sería muchísimo más directo.
+
+De la misma manera queremos obtener los empleados de un departamento cuyo nombre sea informática.
+
+```java
+Select e From Empleado e Where e.departamento.nombre ="informatica"
+```
+
+Directamente recojamos los empleados y en la condición como la entidad empleado tendrá un atributo departamento, con el objeto departamento, podemos establecer la condición. Esto como ves aquí no hemos utilizado la palabra Join en ningún caso, porque como digo en aquellos casos donde se está seleccionando entidades del lado muchos y la condición afecta al lado uno, directamente se puede expresar así y no hace falta utilizar la palabra Join.
+
 <img src="images/26-04.png">
 
-Bien pues ahora que ya sabemos como crear entidades relacionadas y los beneficios que esto nos aporta vamos a ver el uso de los Jaynes qué es exactamente un.
+Pro qué pasa cuando estamos en caso contrario es decir tenemos por ejemplo una relación Mchos a Muchos o queremos obtener los datos del lado Uno, en el caso de una relación Uno a Muchos, pero la condición afecta a la entidad del lado Muchos. Bueno pues en ese caso ya sí que tendríamos que utilizar la palabra Join y vamos a ver dos ejemplos muy claros.
 
-Bueno pues como dice la palabra es una unión es una unión que se va a realizar dentro de una consulta J.P. QL entre entidades relacionadas gracias a esto vamos a poder operar sobre una entidad en base a condiciones que van a afectar a la entidad relacionada.
+Por ejemplo imaginaros que queremos pues todas las secciones que dispongan de productos cuyo nombre contenga la palabra `cable`.
 
-Bueno este tipo de cosas si ya lo hemos hecho simplemente con el hecho de tener relacionadas las entidades pues por ejemplo podríamos recuperar una entidad por ejemplo sección A partir de ese identificador de sección y gracias al atributo producto ya sacamos todos los productos asociados a dicha sección pero no todas las operaciones son tan simples.
+```java
+Select distinct(s) From Seccion s join s.productos p Where p.nombre like "%cable%"
+```
 
-Hay veces que dadas las condiciones que afectan a entidades relacionadas son más complejas y entonces pues dependiendo también de cómo es la relación entre las entidades pues con una J.P. cual es simple o simplemente utilizando la relación no vamos a poder resolver el problema y vamos a tener que recurrir a los Yei.
+Igual en vez de estar buscando los productos que tenga la condición y luego ir sacando las secciones de cada uno y juntandolas todas en una colección, podemos hacerlo de forma mucho más directa, de la forma que vez en la instrucción, donde aquí si ves el uso de la palabra **join** puesto que el campo digamos de unión, el atributo de unión es de tipo Muchos, la condición está afectando a la entidad del lado Muchos. El **join** se utiliza dentro de la cláusula From y lo que sería el atributo que se refiere a los productos se le asocia el alias `p` y entonces ya sobre él se aplica la condición. Como ves esto ocurre como digo cuando la condición está afectando al lado muchos y lo que estamos es recuperando entidades del lado uno. El `distinct` nos permite quedarnos solamente con valores distintos,no repetir objetos.
 
-Vas a ver ejemplos más adelante.
+Aquí tenemos otro caso, en el caso de la tabla de Clientes y de cuentas que tienen una relación Muchos a Muchos. Queremos todos los clientes cuyas cuentas tengan un saldo superior a mil.
 
-Bueno tenemos dos tipos de JOIN implícitos y los de hoy explícitos.
+```java
+Select c From Cliente c join c.cuentas b Where b.saldo > 1000
+```
 
-Qué es exactamente un implícito.
+En vez de estar sacando los datos como decía antes a través de la relacción de forma básica y luego ir juntándonos, con este Select lo podemos obtener directamente, dame aquellos clientes cuyas cuentas tengan un saldo superior a 1000, en ese caso la cláusula Join se utiliza para asignarle un alias a cada cuenta de cada cliente.
 
-Pues como dice la expresión es implícito un guión implícito es aquel en que ni siquiera hace falta utilizar la palabra join lo vamos a utilizar en relaciones muchos a uno cuando vamos a operar sobre la entidad del lado muchos y la condición afecta a la entidad en la Duno.
+Bien pues con esto ya podemos ya digo montar cualquier instrucción JPQL que nos permita obtener datos de entidades a partir de condiciones que puedan afectar a otras.
 
-De hecho esto ya lo hemos hecho en algún caso y no hemos utilizado la palabra Ayén porque ya implícitamente se trataba de un implícito.
+Quedaría cubierto cualquier caso y la verdad que el uso de los Joins nos va a simplificar enormemente instrucciones y recuperaciones ciertamente complejas, cuando se ven involucradas no sólo dos entidades sino varias entidades son de una gran ayuda.
 
-Por ejemplo vamos a de nuevo a nuestra base de datos almacén entidades sección y producto.
-
-Imaginamos que queremos recuperar todos los productos de aquellas secciones cuyo responsable sea una determinada persona.
-
-Pues entonces en vez de estar jugando con la entidad ir recogiendo primero las secciones que tengan su responsable y de ahí ir sacando los productos pues sería mucho más cómodo hacerlo de esta manera indicando recupera todos los productos donde su campo responsable de el atributo sección que está dentro de la entidad producto que están relacionadas es igual a tal valor.
-
-Esto sería muchísimo más directo de la misma manera queremos obtener los empleados de un departamento cuyo nombre sea informática pues directamente recojamos los empleados y en la condición como la entidad empleado tendrá un atributo departamento con el objeto departamento pues podemos establecer la condición de la forma en que aquí departamento puso nombre en informática esto como ves aquí no hemos utilizado la palabra Yeun en ningún caso porque como digo en aquellos casos donde se está seleccionando entidades del lado muchos y la condición afecta al lado uno directamente se puede expresar así.
-
-Y no hace falta utilizar la palabra pero qué pasa cuando estamos en caso contrario es decir tenemos por ejemplo una relación muchos a muchos o queremos obtener los datos del lado uno en el caso de una relación a muchos pero la condición afecta a la entidad del lado muchos.
-
-Bueno pues en ese caso ya sí que tendríamos que utilizar la palabra que hay y vamos a ver dos ejemplos
-
-muy claros.
-
-Por ejemplo imaginaros que queremos pues todas las secciones que dispongan de productos cuyo nombre contenga la palabra clave vale igual en vez de estar buscando los productos que tenga la condición y luego ir sacando las secciones de cada uno y juntando las todas en una colección podemos hacerlo de forma mucho más directa de la forma que aquí utilizando esta instrucción.
-
-Aquí si ves el uso de la palabra Yeung puesto que el campo digamos de unión atributo de unión es de tipo muchos vale la condición está afectando a la entidad del lado muchos entonces sería Select s concepcionense Yeung se utiliza dentro de la cláusula from y lo que sería el atributo que se refiere a los productos se le asocia al alias P Y entonces ya sobre él le aplica la condición como es.
-
-Esto ocurre como digo cuando la condición está afectando al lado muchos y lo que estamos recuperando entidades del lado uno aquí tenemos otro caso queremos todo caso de la tabla de clientes y de cuentas que tienen una relación muchos a muchos pues creemos todos los clientes cuyas cuentas tenían un saldo superior a mil en vez de estar sacando los datos como decía antes a través de la redacción de forma básica y luego ir juntándonos con este lo podemos obtener directamente dame a aquellos clientes cuyas cuentas tengan un saldo superior a 1000 en ese caso la cláusula Yeung se utiliza para asignarle un alias a cada cuenta de cada cliente.
-
-Bueno se me había pasado pues hacerte mención de esta función de JP QL que si conoces J SQL que es la misma distinct que nos permite pues quedarnos solamente con valores distintos. 
-
-Vale no repetir objetos.
-
-Bien pues con esto yo podemos ya digo montar cualquier instrucción JP QL que nos permita obtener datos de entidades a partir de condiciones que puedan afectar a otras.
-
-Quedaría encubierto cualquier caso y la verdad que el uso de los fondos va a simplificar enormemente instrucciones y recuperaciones ciertamente complejas cuando se ven involucradas no sólo dos entidades sino varias entidades son de una gran ayuda.
-
-Vamos a ver después en el siguiente la siguiente elección un ejercicio práctico de utilizaciones de Yeung explícitos.
+Vamos a ver después en la siguiente lección un ejercicio práctico de utilizaciones de Joins explícitos.
 
 # 27 Ejercicio práctico V 06:02
 
