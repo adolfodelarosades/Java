@@ -2914,6 +2914,10 @@ tx.commit();
 
 # 36 Ejercicio práctico VI 07:27
 
+<img src="images/36-01.png">
+
+<img src="images/36-02.png">
+
 Después de haber estudiado la gritería he visto que es un poquito más complejo que la utilización de J.P. cuele para realización de consultas.
 
 Por tanto vamos a ver si en este ejercicio práctico lo aclaramos todo su funcionamiento se trata de realizar una nueva versión más de la aplicación web de la agenda de contactos.
@@ -3029,7 +3033,6 @@ SOLUCIONES:
 4.- D
 
 5.- C
-
 
 # Resumen final 07:25
 
