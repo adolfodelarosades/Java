@@ -83,6 +83,7 @@ Esto por un lado, sobre el tema de las actualizaciones en cascada. Por ejemplo t
 @OneToMany(mappedBy="producto")
 private List<Venta> ventas;
 ```
+Entonces definiríamos el atributo `cascade` indicaremos que queremos propagar la operación de eliminación atravez de `CascadeType` que tiene una serie de constantes entre las cuales está `REMOVE` si quisiéramos propagar más de una operación entonces deberíamos indicar la lista de constantes entre llaves y separar los valores por comas por ejemplo para incluir también la actualización `MERGE`. 
 
 ```java
 //bi-directional many-to-one association to Venta
@@ -90,14 +91,7 @@ private List<Venta> ventas;
 private List<Venta> ventas;
 ```
 
-
-en cuanto Beni definiríamos el atributo Qashqai en el atributo Qashqai indicaremos.
-
-Pues que queremos propagar la operación de eliminación atravez.
-
-Como decíamos antes de la anotación Qashqai Toit que tiene una serie de constantes entre las cuales está remó si quisiéramos propagar más de una operación entonces deberíamos indicar la lista de constantes entre llaves Qashqai terremoto como por ejemplo pues también la actualización rasqueta y de esta manera pues estaríamos propagando estas dos operaciones si quisiéramos propagar las todas.
-
-Eso ya depende de cada caso si tiene sentido o no en este caso pues no tendría mucho sentido a lo mejor es que si se da de alta un producto se den de alta sus ventas porque a lo mejor no existen todavía ese tipo de operación igual no tiene mucho sentido pero en cualquier caso que por lo que sea queremos propagar todas las operaciones no hace falta que pongamos todas las constantes posibles está la constante que significa propagar todas las operaciones a la entidad relacionada.
+y de esta manera estaríamos propagando estas dos operaciones, si quisiéramos propagar las todas, eso ya depende de cada caso si tiene sentido o no, en este caso pues no tendría mucho sentido, a lo mejor es que si se da de alta un producto se den de alta sus ventas, porque a lo mejor no existen todavía, ese tipo de operación igual no tiene mucho sentido, pero en cualquier caso que por lo que sea queremos propagar todas las operaciones, no hace falta que pongamos todas las constantes posibles, está la constante `ALL` que significa propagar todas las operaciones a la entidad relacionada.
 
 Bueno pues ya he visto de qué manera se puede ajustar y optimizar las relaciones entre entidades.
 
