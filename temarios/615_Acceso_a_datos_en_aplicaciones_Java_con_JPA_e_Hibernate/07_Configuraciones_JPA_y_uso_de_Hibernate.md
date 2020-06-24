@@ -103,8 +103,6 @@ Este proyecto es exactamente igaul que el proyecto `615-09_proyecto_relacion_alm
 
 <img src="images/29-01.png">
 
-
-
 En los ejemplos de entidades que hemos visto hasta el momento, siempre hemos trabajado con claves primarias simples es decir, los atributos de esas clases estaban asociados a una única columna de la tabla en la base de datos puesto que en la propia base de datos, en la tabla la clave primaria era una única columna.
 
 Pero qué ocurre si nos encontramos con tablas cuya clave primaria es la combinación de dos o más columnas.
@@ -136,43 +134,303 @@ Y qué pasa con la clase entidad `Sucursal` se definirá como una entidad como o
 
 ### Creación Proyecto Eclipse
 
-Vamos a ver esto con un ejemplo.
+Vamos a ver esto con un ejemplo, vamos a crear un proyecto Web básico como el ejemplo que realizamos en la leccione `11 Ejercicio práctico I Parte`.
+
+#### 1. Creación de un Proyecto Dynamic Web Project 
+
+<img src="images/29-06.png">
+
+Le llamaremos `615-11_ejemplo_clave_compuesta` y usaremos el servidor Tomcat.
+
+<img src="images/29-07.png">
+
+Se crea la estructura de nuestro proyecto Web.
+
+<img src="images/29-08.png">
+
+#### 2. Vamos a convertirlo en Project Facets - JPA
+
+<img src="images/29-09.png">
+
+<img src="images/29-10.png">
+
+<img src="images/29-11.png">
+
+<img src="images/29-12.png">
+
+Se ha activado el Project Facets - JPA tenemos ya el archivo `persistence.xml`:
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-11_ejemplo_clave_compuesta">
+	</persistence-unit>
+</persistence>
+```
+
+#### 3. Hacer la Conexión a la Base de Datos
+
+Dentro de `persistence.xml` vamos a la pestaña `Connection`.
+
+<img src="images/29-13.png">
+
+Seleccionamos `Transaction type: Resource Local`, presionamos en `Populate from connection...`.
+
+<img src="images/29-14.png">
+
+<img src="images/29-15.png">
+
+Seleccionamos nuestra conexión de base de datos `almacen`. Con esto se insertan los datos de conexión dentro de nuestro archivo `persistence.xml`.
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-11_ejemplo_clave_compuesta" transaction-type="RESOURCE_LOCAL">
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/almacen"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+#### 4. Creación de la Entidad `Sucursal`
+
+Vamos a crear la Entidad con clave compuesta lo vamos a hacer con el asistente de Eclipse y verás cómo es exactamente igual que con el caso de las entidades que hemos creado hasta el momento con Primary Key simple, todo se va a generar de forma automática incluido la clase que encapsula la Primary Key, el proceso es el mismo con el botón derecho JPA Tools generar entidades desde tablas.
+
+<img src="images/29-16.png">
+
+Elegimos la conexión con la base de datos que ya la tenemos creada de ejercicios anteriores `mysql_bd_almacen`
+
+<img src="images/29-17.png">
+
+En teoría deberían podernos seleccionar el Esquema pero nada, no nos aparece nada, acuérdate del truco que te enseñé si no te aparece la lista de tablas pues entonces te vas a la perspectiva Database Deployment para editar la conexión y poder ver en que falla.
+
+<img src="images/29-18.png">
+
+<img src="images/29-19.png">
+
+Aparentemente todo esta bien, el Ping funciona.
+
+<img src="images/29-20.png">
+
+Si volvemos a seleccionar botón derecho JPA Tools - Generated Entities from Tables...
+
+<img src="images/29-21.png">
+
+Ya aparece la lista de las tablas, seleccionamos la tabla `sucursales`.
+
+<img src="images/29-22.png">
+
+En el siguiente paso `Table Associations`
+
+<img src="images/29-23.png">
+
+No hay asociaciones porque sólo vamos a generar una entidad con una única tabla, evidentemente si esa tabla estuviera relacionada con otras pues igual que hemos hecho en los casos de las entidades de clave primaria simple pues se añadirían aquí se indicarían cuáles son los campos de relación entre cada tabla y sería exactamente igual, el proceso es el mismo. Bueno vamos al siguiente paso.
+
+<img src="images/29-24.png">
+
+Aquí le indicamos que el paquete es `entidades` que genere la entidad en ese paquete.
+
+<img src="images/29-25.png">
+
+Y en el último paso decir que la clase de entidad se va a llamar `Sucursal` y evidentemente no vamos a poner nada en `Key generator` porque la Primary Key al ser compuesta está formada por la combinación de dos columnas con valores específicos. Como ven no pregunta nada sobre la Clase Primary Key (SucursalPK) la va a generar automáticamente al darse cuenta que la tabla `sucursales` tiene una Primary Key formada por dos columnas.
+
+<img src="images/29-26.png">
+
+Al finalizar vemos los archivos que se han creado.
+
+<img src="images/29-27.png">
+
+Aquí tenemos `SucursalPK` y `Sucursal`.
+
+*`SucursalPK`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+/**
+ * The primary key class for the sucursales database table.
+ * 
+ */
+@Embeddable
+public class SucursalPK implements Serializable {
+	//default serial version id, required for serializable classes.
+	private static final long serialVersionUID = 1L;
+
+	private String nombre;
+
+	private String calle;
+
+	public SucursalPK() {
+	}
+	public String getNombre() {
+		return this.nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getCalle() {
+		return this.calle;
+	}
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof SucursalPK)) {
+			return false;
+		}
+		SucursalPK castOther = (SucursalPK)other;
+		return 
+			this.nombre.equals(castOther.nombre)
+			&& this.calle.equals(castOther.calle);
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int hash = 17;
+		hash = hash * prime + this.nombre.hashCode();
+		hash = hash * prime + this.calle.hashCode();
+		
+		return hash;
+	}
+}
+```
+
+Como ves es una clase con `@Embeddable` los métodos setters y getters y el `equals()` y `hashCode()` sobreescritos, ha hecho una implementación por defecto de esos métodos con la que nos podemos quedar por supuesto y estar seguros de que en cuando sean distintos nombre y distinta calle los objetos van a ser diferentes y cuando sea el mismo nombre y la misma calle van a ser iguales, es la implementación que se ha hecho.
+
+Y bueno lo que es la entidad `Sucursal`
+
+*`Sucursal`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
 
 
+/**
+ * The persistent class for the sucursales database table.
+ * 
+ */
+@Entity
+@Table(name="sucursales")
+@NamedQuery(name="Sucursal.findAll", query="SELECT s FROM Sucursal s")
+public class Sucursal implements Serializable {
+	private static final long serialVersionUID = 1L;
 
+	@EmbeddedId
+	private SucursalPK id;
 
+	private int innauguracion;
 
-ya tenemos aquí creado vamos a Eclipse tengo aquí a una aplicación web creada se ha creado sobre el servidor Donka se ha activado el proyecto faites JPA tenemos ya que persiste en XML con los datos de conexión a la base de datos almacén.
+	private double presupuesto;
 
-El nombre de la Unidad de persistencia y tengo aquí una clase que la analizaremos que encapsula una serie de operaciones con esa entidad para que el tratamiento de la entidad una vez que ya se ha creado es exactamente igual que con las entidades que tienen clase primaria simples y lo único que queda es crear precisamente la entidad para que veas que lo vamos a hacer con el asistente de Eclipse y verás cómo es exactamente igual que con el caso de las entidades que hemos creado hasta el momento todo se va a generar de forma automática incluido la clase que encapsula la Primary el proceso es el mismo con el botón derecho JPA Tools generar entidades desde tablas elegimos la conexión con la base de datos que ya la tenemos creada de ejercicios anteriores almacén y SQL.
+	public Sucursal() {
+	}
 
-Acuérdate del truco que te enseñé si no te aparece la lista de tablas pues entonces te vas a la lista Database Deployment hacer la conexión por si acaso a la de cerrar el eclipse o se cierran esas conexiones entonces no te aparecen pero bueno ya la tengo yo aquí.
+	public SucursalPK getId() {
+		return this.id;
+	}
 
-Sucursales selecciono me voy al siguiente paso no hay asociaciones porque sólo vamos a generar una entidad con una única tabla.
+	public void setId(SucursalPK id) {
+		this.id = id;
+	}
 
-Evidentemente si esa tabla estuviera relacionada con otras pues igual que hemos hecho caso de las entidades de clave primaria simple pues se añadirían aquí se indicarían cuáles son los campos de relación entre cada tabla y sería exactamente igual.
+	public int getInnauguracion() {
+		return this.innauguracion;
+	}
 
-Proceso es el mismo.
+	public void setInnauguracion(int innauguracion) {
+		this.innauguracion = innauguracion;
+	}
 
-Bueno vamos al siguiente paso.
+	public double getPresupuesto() {
+		return this.presupuesto;
+	}
 
-Aquí ya le indicamos que queremos en el paquete entidades que genere la entidad en ese paquete y en el último paso decir que la clase de entidad se va a llamar sucursal y evidentemente no vamos a ser de tipo entidad porque ser compuesta pues está formada por la combinación de dos columnas con valores específicos como él no me pregunta nada sobre la clase Primary que la va a generar automáticamente al darse cuenta que la tabla o sucursales tiene una primaría formada por dos columnas.
+	public void setPresupuesto(double presupuesto) {
+		this.presupuesto = presupuesto;
+	}
 
-Al finalizar lo vamos a ver automáticamente.
+}
+```
 
-Aquí tenemos sucursal p.k pues como veis una clase con arroba en béisbol los métodos se periquete y l Xcode sobre escritos de modo no se ha hecho una implementación por defecto son métodos con la que nos podemos quedar por supuesto y estar seguros de que cuando sean distintos nombres distinta calle los objetos van a ser diferentes y cuando sea el mismo nombre la misma calle van a ser iguales es la implementación que se ha hecho.
+Aquí tenemos la entidad `Sucursal` igual con sus anotaciones de siempre y eso sí el atributo del tipo `SucursalPK` en vez de `@Id` con `@EmbeddedId`.
 
-Y bueno lo que es la entidad aquí la tenemos en la entidad sucursal igual con sus anotaciones de siempre es una Mercuri y eso sí el atributo del tipo sucursal peca con en vez de Arroba Heydi arroba en vez de Goyri.
+```java
+@EmbeddedId
+private SucursalPK id;
+```
 
-Por lo demás a partir de ahora la manipulación de esa entidad exactamente igual que como las entidades de clave primaria simple por ejemplo lo vamos a ver aquí.
+#### 5. Lógica de Negocio 
 
-Aquí he creado esta clase pues no es una pareja es una clase normal Timaná.
+Por lo demás a partir de ahora la manipulación de esa entidad es exactamente igual que como las entidades de clave primaria simple, vamos crear una clase `GestionSucursales` dentro del paquete `modelo`.
 
-Vamos a centrarnos en nuestros métodos.
+<img src="images/29-28.png">
 
-Por ejemplo un método que para buscar una sucursal una búsqueda en clave primaria.
+<img src="images/29-29.png">
 
-Pues claro lo que va a recibir no va a ser un único valor sino recibir dos con la clave primaria está formado por dos valores string crearíamos un objeto de la clave primaria como lo tenemos constructor con los dos parámetros por los asignaremos con los setter y a la hora de hacer el filme como si vamos a buscar un objeto sucursal y la clave primaria según string un entero etcétera es un objeto de esta clase.
+El código de esta clase es el siguiente:
+
+*`GestionSucursales`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import entidades.Sucursal;
+import entidades.SucursalPK;
+
+public class GestionSucursales {
+	
+	//Método que permite obtener el objeto EntityManager
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-11_ejemplo_clave_compuesta");
+		return factory.createEntityManager();
+	}
+	
+	public Sucursal buscarSucursal(String nombre, String calle) {
+		SucursalPK clave = new SucursalPK();
+		clave.setCalle(calle);
+		clave.setNombre(nombre);
+		EntityManager em = getEntityManager();
+		return em.find(Sucursal.class, clave);
+	}
+	
+	public List<Sucursal> obtenerSucursalesCalle(String calle){
+		EntityManager em = getEntityManager();
+		String jpql = "Select s From Sucursal s Where s.id.calle=?1";
+		TypedQuery<Sucursal> q = em.createQuery(jpql, Sucursal.class);
+		q.setParameter(1, calle);
+		return q.getResultList();
+	}
+
+}
+```
+
+No es un EJB es una clase normal con su método `getEntityManager()` que nos permite obtener el objeto `EntityManager`.
+
+Tenemos el método `buscarSucursal(String nombre, String calle)` que nos permite buscar una Sucursal con su clave primaria `nombre` y `calle`. Pues claro lo que va a recibir no va a ser un único valor sino recibir dos con la clave primaria que está formado por dos valores string.
+
+Crearíamos un objeto `clave` de tipo `SucursalPK` como no tenemos un constructor con los dos parámetros en `SucursalPK`,  asignaremos los valores con los setter y a la hora de hacer el `find` como vemos vamos a buscar un objeto `Sucursal` y la clave primaria en vez de ser un `String`, un entero etc. es un objeto `clave` de tipo `SucursalPK`.
+
 
 Por lo demás exactamente igual.
 
@@ -181,6 +439,11 @@ Por ejemplo si tuviéramos que montar una cuerito imaginaros por ejemplo que que
 Pues es igual al parámetro asignarían el parámetro Rasul Lis es decir el tratamiento de la entidad.
 
 Una vez que ya se ha creado es exactamente igual que si tuviera una Primary simple.
+
+
+*****
+Tengo aquí una clase que la analizaremos que encapsula una serie de operaciones con esa entidad para que el tratamiento de la entidad una vez que ya se ha creado es exactamente igual que con las entidades que tienen clase primaria simples y
+*****
 
 # 30 Utilización del Motor Hibernate 12:39
 
