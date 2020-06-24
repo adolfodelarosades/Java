@@ -1501,40 +1501,43 @@ and open the template in the editor.
 
 # 31 Carga de datos en modo lazy con Hibernate 04:57
 
-Después de ver cómo utilizar el motor de Internet en una aplicación JPA en la que hemos utilizado una única entidad vamos a ver qué ocurriría cuando trabajamos con entidades relacionadas.
+<img src="images/31-01.png">
 
-Dónde.
+Después de ver cómo utilizar el motor de Hibernate en una aplicación JPA en la que hemos utilizado una única entidad vamos a ver qué ocurriría cuando trabajamos con entidades relacionadas. Dónde como sabes al cargar una entidad se cargan también los datos relacionados de las entidades relacionadas que pueden ser en modo Lazy o en modo Eager. 
 
-Pues como sabes al cargar una entidad se cargan también los datos relacionados de las entidades relacionadas que pueden ser en modo Leuzzi o bien cuando el modo es el modo predeterminado de cargar datos.
+Cuando el modo predeterminado de cargar datos es Lazy se produce un problema que vamos a analizar a continuación.
 
-Es ley si se produce un problema que vamos a analizar a continuación vamos a centrarnos por ejemplo en uno de los casos de ejemplos que hemos estado viendo donde teníamos una aplicación en la que se trabajaba con secciones a las que se les relacionaba productos.
+<img src="images/31-02.png">
 
-Entonces al recuperar un objeto su sección de secciones como las entidades estaban relacionadas.
+Vamos a centrarnos por ejemplo en uno de los casos de ejemplos que hemos estado viendo donde teníamos una aplicación en la que se trabajaba con Secciones a las que se les relacionaba Productos. Al recuperar un objeto `Seccion` de la tabla secciones como las entidades estaban relacionadas recuperábamos también la lista de productos asociados.
 
-Recuperábamos también la lista de productos asociados.
+Por ejemplo aquí tenemos la instrucción 
 
-Por ejemplo aquí tenemos la instrucción a través de la intuitiva Ayer llamamos al método Fain le indicamos por ejemplo Rahim para localizarlo por identificador de sección pero podría ser utilizado también con quereís.
+`Seccion s = em.find(Seccion.class, idSecc);`
 
-El caso es que obtenemos el objeto sección y con él los objetos relacionados.
+Através del EntityManager llamamos al método `find` le indicamos por ejemplo para localizarlo por identificador de sección, pero podría haberse utilizado también con queries, el caso es que obtenemos el objeto `Seccion` y con él los objetos relacionados.
 
-Pero cuando la carga sí pues sabemos que esos datos no se obtienen en la misma consulta sino que para ganar eficiencia y menor consumo de memoria solamente se obtiene el objeto principal.
+Pero cuando la carga es Lazy sabemos que esos datos no se obtienen en la misma consulta sino que para ganar eficiencia y menor consumo de memoria solamente se obtiene el objeto principal.
 
-Esa es la carga de datos que es la carga predeterminada además de los motores de persistencia y concretamente en el caso de Hibernate es así.
+Esa es la carga Lazy de datos que es la carga predeterminada además de los motores de persistencia y concretamente en el caso de Hibernate es así. Pero qué ocurre con Hibernate. Pues que al hacer la búsqueda de ese objeto Seccion se cierra una sesión interna que utiliza Hibernate para manejar los datos, de la base de datos de modo que al intentar después a través de ese objeto sección obtener los productos
 
-Pero qué ocurre con Hibernate.
+`s.getProductos();`
 
-Pues que al hacer la búsqueda de objetos se cierra una sesión interna que utiliza Hibernate para manejar los datos de la base de datos de modo que al intentar después a través de ese objeto sección obtener los productos como la sesión se ha cerrado.
+como la sesión se ha cerrado se produce una clásica sección llamada `LazyInitializationException` 
 
-Se produce una clásica sección llamada Leuzzi inicialización exception.
+Cómo se soluciona esto. 
 
-Cómo se soluciona eso.
+<img src="images/31-03.png">
 
-Pues añadir.
 
-Muy simple el problema.
+La solucion del problema es muy simple, en el `persistence.xml` simplemente tenemos que añadir esta propiedad la propiedad.
 
-La solución del problema en el sistema XML simplemente tenemos que añadir esta propiedad la propiedad tiene nombre y Bernadet en abril Silvano Tremps valor True para que la sesión no se cierre durante la carga de la entidad principal.
+<property name="hibernate.enable_lazy_load_no_trans" value="true" />
 
+para que la sesión no se cierre durante la carga de la entidad principal.
+
+
+AQUIII
 Vamos a ver esto con el ejemplo concretamente hemos estado analizando ahora se el ejemplo de que teníamos una aplicación donde le pedíamos al usuario seleccionar una sección y al elegir la sección se mostrasen los productos relacionados.
 
 El aspecto de la aplicación es éste.
