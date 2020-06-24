@@ -1628,7 +1628,6 @@ El código de `persistence.xml` queda así:
 
 Si ejecutamos la aplicación tiene que seguir funcionando exactamente igual que funcionaba antes puesto que es el motor Hibernate es compatible con JPA.
 
-
 <img src="images/31-12.png">
 
 <img src="images/31-13.png">
@@ -1645,7 +1644,7 @@ Al probar la aplicación ya usando el motor Hibernate vemos que aparentemente to
 
 Obtenemos la excepción de la que estabamos hablando `org.hibernate.LazyInitializationException` por utilizar el motor de Hibernate. 
 
-LO que sucede es que en `GestionProductoEjb` se ejecuta el método `obtenerProductosPorSeccion`
+Lo que sucede es que en `GestionProductoEjb` se ejecuta el método `obtenerProductosPorSeccion`
 
 ```java
 @Override
@@ -1656,32 +1655,770 @@ public List<Producto> obtenerProductosPorSeccion(int idSecc){
 }
 ```
 
-Recuperamos la Seccion através de su `idSecc` y luego llamamos a `s.getProductos()` para recuperar los productos asociados con una carga Lazy
+Recuperamos la Seccion através de su `idSecc` y luego llamamos a `s.getProductos()` para recuperar los productos asociados con una carga Lazy con lo que se han cargado esos productos al recuperar la sección sino que se hace o se intenta hacer mejor dicho en este momento, la sesión ya se ha cerrado y se produce la `org.hibernate.LazyInitializationException` que hemos visto.
 
-AQUI
+La solución como digo es irnos al `persistence.xml` y añadir esta propiedad 
 
-cuando se ha encargado esos productos al recuperar la sección sino que se hace o se intenta hacer mejor dicho en este momento la sesión ya se ha cerrado y se produce la inicialización excepción que hemos visto la solución como digo es irnos al persiste en XML y añadir esta propiedad menos vamos a recuperarla de la presentación en la que la hemos visto.
+`<property name="hibernate.enable_lazy_load_no_trans" value="true" />`
 
-Aquí vamos a recuperar al copiar este texto no lo llevamos al que existe en XML mientras pegamos y ya con esto habilitamos y Bernet para que no cierre las sesiones cuando tiene la entidad principal.
+Y ya con esto habilitamos Hibernate para que no cierre las sesiones cuando tiene la entidad principal. Guardamos y si volvemos a ejecutar veremos que el problema ya se ha solucionado.
 
-Guardamos y si volvemos a ejecutar veremos que el problema ya se ha solucionado.
+<img src="images/31-17.png">
 
-Vamos a volver a desplegar la aplicación observes y una vez que ya quede republicado veremos como vamos a ver donde ya está desplegada.
-
-Si volvemos otra vez al navegador volvemos a recargar la aplicación seleccionamos la sección porque era de ellas productos.
+<img src="images/31-18.png">
 
 Ahora ya el problema ha quedado resuelto.
-********
 
-Hemos comprobado que el funcionamiento es exactamente el mismo. Nos autenticamos, vamos al menú, vemos nuestra lista de contactos, vemos que podemos añadir un nuevo contacto y por supuesto nos dejará eliminar tambien es decir que independientemente del motor utilizado JPA es el mismo en todos los casos y esta combinación JPA - Hibernate, motor Hibernate es muy utilizada en muchos de los desarrollos de aplicaciones empresariales.
+### :computer: Código Completo - 615-13_proyecto_relacion_almacen_hibernate
 
-************
+<img src="images/31-19.png">
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-13_proyecto_relacion_almacen_hibernate</groupId>
+	<artifactId>615-13_proyecto_relacion_almacen_hibernate</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.18.Final</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit
+		name="615-13_proyecto_relacion_almacen_hibernate">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>jdbc/almacends</jta-data-source>
+		<class>entidades.Producto</class>
+		<class>entidades.Seccion</class>
+		<class>entidades.Venta</class>
+		<properties>
+			<property name="hibernate.enable_lazy_load_no_trans" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`Seccion`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+/**
+ * The persistent class for the secciones database table.
+ * 
+ */
+@Entity
+@Table(name = "secciones")
+@NamedQuery(name = "Seccion.findAll", query = "SELECT s FROM Seccion s")
+public class Seccion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idSeccion;
+
+	private String responsable;
+
+	private String seccion;
+
+	// bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy = "seccione", fetch=FetchType.LAZY)
+	private List<Producto> productos;
+
+	public Seccion() {
+	}
+
+	public int getIdSeccion() {
+		return this.idSeccion;
+	}
+
+	public void setIdSeccion(int idSeccion) {
+		this.idSeccion = idSeccion;
+	}
+
+	public String getResponsable() {
+		return this.responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+
+	public String getSeccion() {
+		return this.seccion;
+	}
+
+	public void setSeccion(String seccion) {
+		this.seccion = seccion;
+	}
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public Producto addProducto(Producto producto) {
+		getProductos().add(producto);
+		producto.setSeccione(this);
+
+		return producto;
+	}
+
+	public Producto removeProducto(Producto producto) {
+		getProductos().remove(producto);
+		producto.setSeccione(null);
+
+		return producto;
+	}
+
+}
+```
+
+*`Producto`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
 
----------------------------------
+/**
+ * The persistent class for the productos database table.
+ * 
+ */
+@Entity
+@Table(name="productos")
+@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idProducto;
+
+	private String descripcion;
+
+	private String nombre;
+
+	private double precio;
+
+	//bi-directional many-to-one association to Seccion
+	@ManyToOne
+	@JoinColumn(name="idSeccion")
+	private Seccion seccione;
+
+	//bi-directional many-to-one association to Venta
+	@OneToMany(mappedBy="producto",cascade={CascadeType.REMOVE,CascadeType.MERGE})
+	private List<Venta> ventas;
+
+	public Producto() {
+	}
+
+	public int getIdProducto() {
+		return this.idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public Seccion getSeccione() {
+		return this.seccione;
+	}
+
+	public void setSeccione(Seccion seccione) {
+		this.seccione = seccione;
+	}
+
+	public List<Venta> getVentas() {
+		return this.ventas;
+	}
+
+	public void setVentas(List<Venta> ventas) {
+		this.ventas = ventas;
+	}
+
+	public Venta addVenta(Venta venta) {
+		getVentas().add(venta);
+		venta.setProducto(this);
+
+		return venta;
+	}
+
+	public Venta removeVenta(Venta venta) {
+		getVentas().remove(venta);
+		venta.setProducto(null);
+
+		return venta;
+	}
+
+}
+```
+
+*`Venta`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
 
 
-Pues que claro al utilizar este proveedor Hibernate pues al realizar esta operación recuperación de los productos recuperamos la sección con el método Fain y luego llamamos a productos 
+/**
+ * The persistent class for the ventas database table.
+ * 
+ */
+@Entity
+@Table(name="ventas")
+@NamedQuery(name="Venta.findAll", query="SELECT v FROM Venta v")
+public class Venta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idVenta;
+
+	private String ciudad;
+
+	private int unidades;
+
+	//bi-directional many-to-one association to Producto
+	@ManyToOne
+	@JoinColumn(name="idProducto")
+	private Producto producto;
+
+	public Venta() {
+	}
+
+	public int getIdVenta() {
+		return this.idVenta;
+	}
+
+	public void setIdVenta(int idVenta) {
+		this.idVenta = idVenta;
+	}
+
+	public String getCiudad() {
+		return this.ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public int getUnidades() {
+		return this.unidades;
+	}
+
+	public void setUnidades(int unidades) {
+		this.unidades = unidades;
+	}
+
+	public Producto getProducto() {
+		return this.producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+}
+```
+
+**Modelo**
+
+*`GestionProductosEjbLocal`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import entidades.Producto;
+import entidades.Seccion;
+
+@Local
+public interface GestionProductosEjbLocal {
+	
+	List<Seccion> obtenerSecciones();
+	
+	List<Producto> obtenerProductos();
+	
+	List<Producto> obtenerProductosPorSeccion(int idSecc);
+	
+	Seccion obtenerSeccionDeProducto(String prod);
+
+	List<Producto> obtenerProductosVentas(int unidades);
+
+}
+
+```
+
+*`GestionProductosEjb`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import entidades.Producto;
+import entidades.Seccion;
+
+/**
+ * Session Bean implementation class GestionProductosEjb
+ */
+@Stateless
+public class GestionProductosEjb implements GestionProductosEjbLocal {
+
+	@PersistenceContext(unitName="615-13_proyecto_relacion_almacen_hibernate")
+	EntityManager em;
+	
+	
+	@Override
+	public List<Seccion> obtenerSecciones(){
+		TypedQuery<Seccion> q=em.createNamedQuery("Seccion.findAll",Seccion.class);
+		return q.getResultList();
+	}
+	@Override
+	public List<Producto> obtenerProductos(){
+		TypedQuery<Producto> q=em.createNamedQuery("Producto.findAll",Producto.class);
+		return q.getResultList();
+	}
+	@Override
+	public List<Producto> obtenerProductosPorSeccion(int idSecc){
+		//String jpql = "Select p From Producto p Where p.idSeccion=" + idSecc;
+		Seccion s=em.find(Seccion.class, idSecc);
+		return s.getProductos();		
+	}
+
+	@Override
+	public Seccion obtenerSeccionDeProducto(String prod){
+		
+		String jpql="select p from Producto p where p.nombre=?1";
+		TypedQuery<Producto> q=em.createQuery(jpql,Producto.class);
+		q.setParameter(1, prod);
+		return q.getSingleResult().getSeccione();
+	}
+	
+	@Override
+	public List<Producto> obtenerProductosVentas(int unidades){
+		//opción 1 con join
+		String jpql="select distinct(p) from Producto p join p.ventas v where v.unidades>?1";
+		TypedQuery<Producto> q=em.createQuery(jpql,Producto.class);
+		q.setParameter(1,unidades);
+		return q.getResultList();
+		
+		//opción 2 sin join
+		/*String jpql="select v from Venta v where v.unidades>?1";
+		TypedQuery<Venta> q=em.createQuery(jpql,Venta.class);
+		q.setParameter(1,unidades);
+		List<Venta> ventas=q.getResultList();
+		List<Producto> prods=new ArrayList<>();
+		for(Venta v:ventas){
+			prods.add(v.getProducto());
+		}
+		return prods;*/
+	}
+}
+```
+
+**Controlador**
+
+*`Controller`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String op=request.getParameter("op");
+		String url="inicio.html";
+		
+		switch(op){
+			case "doSecciones":
+				url="SeccionesAction";	
+				break;
+			case "doProductos":
+				url="ProductosAction";
+				break;
+			case "doTopVentas":
+				url="TopVentasAction";
+				break;
+			case "toUnidades":
+				url="unidades.html";
+		}
+		
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+}
+```
+
+*`SeccionesAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Seccion;
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class SeccionesAction
+ */
+@WebServlet("/SeccionesAction")
+public class SeccionesAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionProductosEjbLocal gproductos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Seccion> secciones=gproductos.obtenerSecciones();
+		request.setAttribute("secciones", secciones);
+		request.getRequestDispatcher("secciones.jsp").forward(request, response);
+	}
+
+}
+```
+
+*`ProductosAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class ProductosAction
+ */
+@WebServlet("/ProductosAction")
+public class ProductosAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionProductosEjbLocal gproductos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idSeccion=Integer.parseInt(request.getParameter("seccion"));
+		if(idSeccion==0){
+			request.setAttribute("productos", gproductos.obtenerProductos());
+		}else{
+			request.setAttribute("productos", gproductos.obtenerProductosPorSeccion(idSeccion));
+		}
+		request.getRequestDispatcher("productos.jsp").forward(request, response);
+	}
+
+}
+```
+
+*`TopVentasAction`*
+
+```java
+package controlador;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Producto;
+import modelo.GestionProductosEjbLocal;
+
+/**
+ * Servlet implementation class TopVentasAction
+ */
+@WebServlet("/TopVentasAction")
+public class TopVentasAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionProductosEjbLocal gproductos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int unidades=Integer.parseInt(request.getParameter("unidades"));
+		List<Producto> prods=gproductos.obtenerProductosVentas(unidades);
+		request.setAttribute("productos", prods);
+		request.getRequestDispatcher("topventas.jsp").forward(request, response);
+	}
+
+}
+```
+
+**Vista**
+
+*`inicio`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<h3><a href="Controller?op=doSecciones">Consulta secciones</a></h3>
+		<h3><a href="Controller?op=toUnidades">Top ventas</a></h3>
+	</center>
+</body>
+</html>
+```
+
+*`secciones.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>seleccion</title>
+<meta http-equiv="Content-Type" content="text/html;  charset=ISO-8859-1">
+</head>
+<body>
+	<center>
+		<h1>Seleccione Sección</h1>
+		<br /><br />
+		<form action="Controller?op=doProductos" method="post">
+			<select name="seccion">
+				<option value="0">Todos</option>
+				<c:set var="sec" value="${requestScope.secciones}" />
+				<c:forEach var="s" items="${sec}">
+					<option value="${s.idSeccion}">${s.seccion}</option>
+				</c:forEach>
+			</select>
+			<br /> <br /> 
+			<input type="submit" value="Ver Productos" />
+		</form>
+	</center>
+</body>
+</html>
+```
+
+*`productos.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>libros</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+   <table border="1">
+      <tr><th>Nombre</th><th>Precio</th><th>Descripción</th></tr>
+      <c:set var="productos" value="${requestScope.productos}"/>
+         <c:forEach var="pr" items="${productos}">
+    	    <tr>
+		       <td>${pr.nombre}</td>
+		       <td>${pr.precio}</td>
+		       <td>${pr.descripcion}</td>
+			</tr>
+    	 </c:forEach>
+   </table>
+   <br/><br/>
+   <a href="Controller?op=doSecciones">Otra sección</a>
+</body>
+</html>
+```
+
+*`unidades.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<form action="Controller?op=doTopVentas" method="post">
+			Unidades mínimas vendidas:<input type="number" name="unidades"/><br/><br/>
+			<input type="submit" value="Enviar"/>
+		</form>
+	
+	</center>
+</body>
+</html>
+```
+
+*`topventas.jsp`*
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE HTML><%@page language="java"
+	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
+	%>
+<html>
+<head>
+<title>libros</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+    
+
+
+<table border="1">
+    <tr><th>Nombre</th><th>Precio</th><th>Descripción</th></tr>
+    		<c:set var="productos" value="${requestScope.productos}"/>
+    		<c:forEach var="pr" items="${productos}">
+    			<tr>
+		              	<td>${pr.nombre}</td>
+						<td>${pr.precio}</td>
+						<td>${pr.descripcion}</td>
+				</tr>
+    		</c:forEach>
+            
+    
+
+
+</table>
+<br/><br/>
+<a href="Controller?op=toInicio">Inicio</a>
+
+</body>
+</html>
+```
 
 # 32 Utilización del framework de hibernate 13:54
 
