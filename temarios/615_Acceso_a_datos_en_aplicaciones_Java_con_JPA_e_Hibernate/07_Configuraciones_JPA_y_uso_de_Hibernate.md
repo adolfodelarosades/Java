@@ -625,32 +625,67 @@ public class GestionSucursales {
 }
 ```
 
-
 # 30 Utilización del Motor Hibernate 12:39
+
+<img src="images/30-01.png">
 
 En las aplicaciones que hemos estado desarrollando hasta el momento hemos empleado siempre el motor de Eclipse Link como motor de persistencia dentro de una aplicación.
 
-Sin embargo una de las implementaciones clásicas de persistencia es la combinación del motor de Hibernate con el API JPA.
+Sin embargo una de las implementaciones clásicas de persistencia es la combinación del motor de Hibernate con el API JPA, vamos a ver cómo realizar esto.
 
-Vamos a ver cómo realizar esto básicamente se trata de modificar la configuración básicamente porque lo que es el código JPA es exactamente igual al que hemos estado utilizando hasta el momento.
+<img src="images/30-02.png">
 
-Lo primero que tendríamos que hacer si estamos utilizando Maven es incluir la referencia en las librerías del motor de Hibernate que es el Hibernate Core en el XML.
+Básicamente se trata de modificar la configuración básicamente porque lo que es el código JPA es exactamente igual al que hemos estado utilizando hasta el momento.
 
-Esto haría que se cargasen todos los Jar asociados a dicho motor.
+Lo primero que tendríamos que hacer, si estamos utilizando Maven es incluir la referencia en las librerías del motor de Hibernate que es el `hibernate-core` en el `pom.xml`. Esto haría que se cargasen todos los Jar asociados a dicho motor. 
 
-Por otro lado en el persiste en XML en vez de dejarlo vacío como hemos hecho hasta el momento para que cogiera el motor por defecto tendríamos que indicar a través de esta elemento de Provider que queremos utilizar el motor Hibernate persisten Robayna y nada más el resto ya es código JPEG.
+Por otro lado el  `persistence.xml` en vez de dejarlo vacío como hemos hecho hasta el momento para que cogiera el motor por defecto tendríamos que indicar a través del tag `provider`
 
-Con eso quedaría configurada la capa de persistencia.
+```html
+<provider>
+   org.hibernate.jpa.HibernatePersistenceProvider
+</provider>
+```
 
-Por supuesto se crearían las entidades igual exactamente igual que hemos estado haciendo hasta ahora.
+que queremos utilizar el motor `HibernatePersistenceProvider` y nada más el resto ya es código JPA, con eso quedaría configurada la capa de persistencia. Por supuesto se crearían las entidades igual, exactamente igual que hemos estado haciendo hasta ahora. Y por supuesto JPA ningún cambio en cuanto a las instrucciones a utilizar, puesto que el motor de Hibernate es compatible con JPA. Esa es la idea.
 
-Y por supuesto JPA ningún cambio en cuanto a las instrucciones a utilizar puesto que el motor de Hibernate es compatible con JPA.
+### Creación Poyecto Eclipse
 
-Esa es la idea.
+Bueno pues vamos a partir de uno de los ejercicios que tenemos hecho `615-03_web_jpa` donde habíamos creado una aplicación web como recordaras que se ejecutaba sobre Tomcat que hace los siguiente:
 
-Bueno pues vamos a ver si partimos de uno de los ejercicios que tenemos hecho en él por ejemplo el ejercicio práctico número 2 donde trabajábamos habíamos creado una aplicación web como recordaras que se ejecutaba sobre Tomcat y teníamos aquí la capa de lógica de negocio implementada con clases estándares y estábamos utilizando el motor Eclipse.
+<img src="images/30-03-01.png">
 
-Bueno pues vamos a ver vamos a migrar esa aplicación a Hibernate vamos a utilizar el motor DuVernay entonces  vamos a crear una copia del proyecto no pegamos y lo vamos a renombrar vamos a llamar pues agenda que era la aplicación de la agenda de contactos motor Hibernate bien vamos a quedarnos con ese mismo nombre para utilizarlo como conté RUT o dirección de la aplicación web.
+<img src="images/30-03-02.png">
+
+<img src="images/30-04.png">
+
+<img src="images/30-05.png">
+
+<img src="images/30-06.png">
+
+<img src="images/30-07.png">
+
+<img src="images/30-08.png">
+
+
+teníamos la Capa de Lógica de Negocio implementada con clases estándares y estábamos utilizando el motor Eclipse. Vamos a migrar esta aplicación a Hibernate vamos a utilizar el motor Hibernate, entonces vamos a crear una copia del proyecto `615-03_web_jpa` y la vamos a pegar con el nombre `615-12_agenda_motor_hibernate`.
+
+Vamos a cambiar el nombre en:
+
+* Web Project Settings
+* `pom.xml`
+* `persistence.xml`
+* `GestionContactos`
+* `GestionUsuarios`
+
+Una vez que hayamos hecho los cambios ya tenemos nuestro nuevo proyecto `615-12_agenda_motor_hibernate`
+
+<img src="images/30-09.png">
+
+Si lo probamos todo funciona como el original.
+
+
+no pegamos y lo vamos a renombrar vamos a llamar pues agenda que era la aplicación de la agenda de contactos motor Hibernate bien vamos a quedarnos con ese mismo nombre para utilizarlo como conté RUT o dirección de la aplicación web.
 
 Vale nos vamos a las propiedades y employer settings modificamos el Conde-Ruiz de la aplicación aplicamos.
 
