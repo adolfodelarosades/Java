@@ -2614,6 +2614,8 @@ Operación anulación y para confirmar la transacción sería el método commit 
 
 # 34 Utilización del API de Hibernate en una aplicación 18:29
 
+<img src="images/34-01.png">
+
 En la lección anterior hemos estado viendo la Hibernate y presentando algunos de los métodos más importantes de objetos.
 
 Ahora en esta elección vamos a ver ya su aplicación directa en el ejercicio que estamos hemos comenzado a hacer ya sólo en la configuración de Hibernate de la gestión de los contactos.
