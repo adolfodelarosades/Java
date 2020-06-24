@@ -2548,6 +2548,18 @@ Aparte de tener ya los suyos propios y clásicos antes.
 
 # 33 El API de Hibernate 06:21
 
+<img src="images/33-01.png">
+
+<img src="images/33-02.png">
+
+<img src="images/33-03.png">
+
+<img src="images/33-04.png">
+
+<img src="images/33-05.png">
+
+<img src="images/33-06.png">
+
 En esta elección vamos a ver cómo utilizar el de Bernet para manipular la capa de persistencia de una aplicación rápida y Hibernate.
 
 Es un conjunto de clases e interfaces lo mismo que en el caso de JPA que se utilizan para acceder desde el modelo de la capa de la lógica de negocio de una aplicación a la capa de persistencia los datos.
