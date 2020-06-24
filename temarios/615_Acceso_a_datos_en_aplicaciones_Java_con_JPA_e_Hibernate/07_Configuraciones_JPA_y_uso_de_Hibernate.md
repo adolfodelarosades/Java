@@ -1529,16 +1529,126 @@ Cómo se soluciona esto.
 
 <img src="images/31-03.png">
 
-
-La solucion del problema es muy simple, en el `persistence.xml` simplemente tenemos que añadir esta propiedad la propiedad.
+La solucion del problema es muy simple, en el `persistence.xml` simplemente tenemos que añadir esta propiedad.
 
 <property name="hibernate.enable_lazy_load_no_trans" value="true" />
 
-para que la sesión no se cierre durante la carga de la entidad principal.
+La propiedad para que la sesión no se cierre durante la carga de la entidad principal.
+
+### Creación Proyecto Eclipse
+
+Vamos a ver esto con un ejemplo nos vamos a basar en el proyecto `615-10_proyecto_relacion_almacen` que hace lo siguiente:
+
+<img src="images/31-04.png">
+
+<img src="images/31-05.png">
+
+<img src="images/31-06.png">
+
+<img src="images/31-07.png">
+
+<img src="images/31-08.png">
+
+Vamos a duplicar el proyecto `615-10_proyecto_relacion_almacen` con el nombre `615-13_proyecto_relacion_almacen_hibernate`
+
+Vamos a cambiar el nombre en:
+
+* Web Project Settings
+* `pom.xml`
+* `persistence.xml`
+* `GestionProductosEjb`
+
+Una vez que hayamos hecho los cambios ya tenemos nuestro nuevo proyecto `615-13_proyecto_relacion_almacen_hibernate`
+
+<img src="images/31-09.png">
+
+Si lo probamos todo funciona como el original.
+
+Este es un proyecto Web, con JPA que utiliza EclipseLink, se ejecuta en GlassFish por usar EJB.
+
+Para la nueva configuración que vamos a usar con Hibernate necesitamos hacer algunos cambios.
+
+#### 0. Dejar de usar el Motor EclipseLink.
+
+Vamos a las propiedades del proyecto y en JPA utilizamos EclipseLink que es suficiente para JPA.
+
+<img src="images/31-10.png">
+
+Pero ahora ya no queremos utilizar ese motor, no queremos que se incorporen esas librerías, entonces si no vamos a utilizar ni EclipseLink ni tampoco las librerías del motor de GlassFish lo que hacemos es desactivar las Library Configuration.
+
+<img src="images/31-11.png">
+
+Pulsamos el botón OK y ahora ya vamos a seguir los pasos que hemos visto en la presentación y que hicimos también en la aplicación pasada.
+
+En este caso no se se observan errores en las clases de entidades y modelo, raro.
+
+#### 1. Añadir Motor Hibernate en `pom.xml`
+
+Vamos a añadir la dependecia `hibernate-core` correspondiente a la librería del motor Hibernate en nuestro archivo `pom.xml`.
+
+```html
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-core</artifactId>
+   <version>5.4.18.Final</version>
+</dependency>
+```
+
+Esto ya hará que se incorpore el motor de Hibernate.
+
+#### 2. Registrar el Motor Hibernate en `persistence.xml`
+
+Bien lo siguiente era registrar el motor de Hibernate en `persistence.xml` es decir la etiqueta `provider`:
+
+`<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>`
+
+Los datos de conexión a la base de datos no cambian aquí lo estamos haciendo por medio de JNDI, a pesar de que estemos utilizando el motor Hibernate hay que proporcionarle igualmente las propiedades de conexión a la base de datos.
+
+El código de `persistence.xml` queda así:
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit
+		name="615-13_proyecto_relacion_almacen_hibernate">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>jdbc/almacends</jta-data-source>
+		<class>entidades.Producto</class>
+		<class>entidades.Seccion</class>
+		<class>entidades.Venta</class>
+	</persistence-unit>
+</persistence>
+```
+
+#### 3. Probar la Aplicación
+
+Si ejecutamos la aplicación tiene que seguir funcionando exactamente igual que funcionaba antes puesto que es el motor Hibernate es compatible con JPA.
 
 
-AQUIII
-Vamos a ver esto con el ejemplo concretamente hemos estado analizando ahora se el ejemplo de que teníamos una aplicación donde le pedíamos al usuario seleccionar una sección y al elegir la sección se mostrasen los productos relacionados.
+`org.apache.jasper.JasperException: org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: entidades.Seccion.productos, could not initialize proxy - no Session`
+
+<img src="images/31-12.png">
+
+<img src="images/31-13.png">
+
+<img src="images/31-14.png">
+
+<img src="images/31-15.png">
+
+********
+
+Hemos comprobado que el funcionamiento es exactamente el mismo. Nos autenticamos, vamos al menú, vemos nuestra lista de contactos, vemos que podemos añadir un nuevo contacto y por supuesto nos dejará eliminar tambien es decir que independientemente del motor utilizado JPA es el mismo en todos los casos y esta combinación JPA - Hibernate, motor Hibernate es muy utilizada en muchos de los desarrollos de aplicaciones empresariales.
+
+************
+
+
+---------------------------------
+
+a baconcretamente hemos estado analizando ahora se el ejemplo de que teníamos una aplicación donde le pedíamos al usuario seleccionar una sección y al elegir la sección se mostrasen los productos relacionados.
 
 El aspecto de la aplicación es éste.
 
