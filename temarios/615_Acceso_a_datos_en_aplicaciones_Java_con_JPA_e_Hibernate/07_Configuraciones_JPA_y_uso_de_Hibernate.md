@@ -667,8 +667,7 @@ Bueno pues vamos a partir de uno de los ejercicios que tenemos hecho `615-03_web
 
 <img src="images/30-08.png">
 
-
-teníamos la Capa de Lógica de Negocio implementada con clases estándares y estábamos utilizando el motor Eclipse. Vamos a migrar esta aplicación a Hibernate vamos a utilizar el motor Hibernate, entonces vamos a crear una copia del proyecto `615-03_web_jpa` y la vamos a pegar con el nombre `615-12_agenda_motor_hibernate`.
+Tenemos la Capa de Lógica de Negocio implementada con clases estándares y estábamos utilizando el motor Eclipse. Vamos a migrar esta aplicación a Hibernate vamos a utilizar el motor Hibernate, entonces vamos a crear una copia del proyecto `615-03_web_jpa` y la vamos a pegar con el nombre `615-12_agenda_motor_hibernate`.
 
 Vamos a cambiar el nombre en:
 
