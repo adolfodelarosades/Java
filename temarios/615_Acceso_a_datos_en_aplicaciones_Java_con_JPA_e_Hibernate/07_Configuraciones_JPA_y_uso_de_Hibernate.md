@@ -425,25 +425,206 @@ public class GestionSucursales {
 }
 ```
 
+Tengo aquí una clase que la analizaremos que encapsula una serie de operaciones con esa entidad para que el tratamiento de la Entidad una vez que ya se ha creado, es exactamente igual que con las entidades que tienen clase primaria simples.
+
 No es un EJB es una clase normal con su método `getEntityManager()` que nos permite obtener el objeto `EntityManager`.
 
 Tenemos el método `buscarSucursal(String nombre, String calle)` que nos permite buscar una Sucursal con su clave primaria `nombre` y `calle`. Pues claro lo que va a recibir no va a ser un único valor sino recibir dos con la clave primaria que está formado por dos valores string.
 
-Crearíamos un objeto `clave` de tipo `SucursalPK` como no tenemos un constructor con los dos parámetros en `SucursalPK`,  asignaremos los valores con los setter y a la hora de hacer el `find` como vemos vamos a buscar un objeto `Sucursal` y la clave primaria en vez de ser un `String`, un entero etc. es un objeto `clave` de tipo `SucursalPK`.
+Crearíamos un objeto `clave` de tipo `SucursalPK` como no tenemos un constructor con los dos parámetros en `SucursalPK`,  asignaremos los valores con los setter y a la hora de hacer el `find` como vemos vamos a buscar un objeto `Sucursal` y la clave primaria en vez de ser un `String`, un entero etc. es un objeto `clave` de tipo `SucursalPK`. Por lo demás exactamente igual.
+
+Por ejemplo si tuviéramos que montar una Query imaginaros por ejemplo que queremos localizar todas las sucursales a partir de un determinado valor, que además es un valor de la Primary Key solamente la `calle`. Para eso tenemos al método `obtenerSucursalesCalle(String calle)` podríamos montar el JPQL
+`jpql = "Select s From Sucursal s Where s.id.calle=?1";` que devuélve todas las sucursales cuyo calle como ves el atributo es `s.id.calle` que es como se llama el atributo de la Primary Key es igual al parámetro, asignarían el parámetro y con `getResultList()` recuperamos todas las Sucursales.
+
+Es decir el tratamiento de la entidad una vez que ya se ha creado es exactamente igual que si tuviera una Primary Key simple.
+
+### :computer: Código Completo - 615-11_ejemplo_clave_compuesta
+
+<img src="images/29-30.png">
+
+Este proyecto no se ejecuta.
+
+*`persistence.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-11_ejemplo_clave_compuesta" transaction-type="RESOURCE_LOCAL">
+		<class>entidades.Sucursal</class>
+		<class>entidades.SucursalPK</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/almacen"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`SucursalPK`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+/**
+ * The primary key class for the sucursales database table.
+ * 
+ */
+@Embeddable
+public class SucursalPK implements Serializable {
+	//default serial version id, required for serializable classes.
+	private static final long serialVersionUID = 1L;
+
+	private String nombre;
+
+	private String calle;
+
+	public SucursalPK() {
+	}
+	public String getNombre() {
+		return this.nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getCalle() {
+		return this.calle;
+	}
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof SucursalPK)) {
+			return false;
+		}
+		SucursalPK castOther = (SucursalPK)other;
+		return 
+			this.nombre.equals(castOther.nombre)
+			&& this.calle.equals(castOther.calle);
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int hash = 17;
+		hash = hash * prime + this.nombre.hashCode();
+		hash = hash * prime + this.calle.hashCode();
+		
+		return hash;
+	}
+}
+```
 
 
-Por lo demás exactamente igual.
+*`Sucursal`*
 
-Por ejemplo si tuviéramos que montar una cuerito imaginaros por ejemplo que queremos localizar todas las sucursales a partir de un determinado valor que además es un valor de la prima y que parte de la primera y solamente la calle podríamos montar la J.P. QL como veis aquí devuélveme todas las sucursales cuyo calle ves del atributo de que es como se llama el atributo de la primary key.
+```java
+package entidades;
 
-Pues es igual al parámetro asignarían el parámetro Rasul Lis es decir el tratamiento de la entidad.
+import java.io.Serializable;
+import javax.persistence.*;
 
-Una vez que ya se ha creado es exactamente igual que si tuviera una Primary simple.
 
+/**
+ * The persistent class for the sucursales database table.
+ * 
+ */
+@Entity
+@Table(name="sucursales")
+@NamedQuery(name="Sucursal.findAll", query="SELECT s FROM Sucursal s")
+public class Sucursal implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-*****
-Tengo aquí una clase que la analizaremos que encapsula una serie de operaciones con esa entidad para que el tratamiento de la entidad una vez que ya se ha creado es exactamente igual que con las entidades que tienen clase primaria simples y
-*****
+	@EmbeddedId
+	private SucursalPK id;
+
+	private int innauguracion;
+
+	private double presupuesto;
+
+	public Sucursal() {
+	}
+
+	public SucursalPK getId() {
+		return this.id;
+	}
+
+	public void setId(SucursalPK id) {
+		this.id = id;
+	}
+
+	public int getInnauguracion() {
+		return this.innauguracion;
+	}
+
+	public void setInnauguracion(int innauguracion) {
+		this.innauguracion = innauguracion;
+	}
+
+	public double getPresupuesto() {
+		return this.presupuesto;
+	}
+
+	public void setPresupuesto(double presupuesto) {
+		this.presupuesto = presupuesto;
+	}
+
+}
+```
+
+**Modelo**
+
+*`GestionSucursal`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import entidades.Sucursal;
+import entidades.SucursalPK;
+
+public class GestionSucursales {
+	
+	//Método que permite obtener el objeto EntityManager
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-11_ejemplo_clave_compuesta");
+		return factory.createEntityManager();
+	}
+	
+	public Sucursal buscarSucursal(String nombre, String calle) {
+		SucursalPK clave = new SucursalPK();
+		clave.setCalle(calle);
+		clave.setNombre(nombre);
+		EntityManager em = getEntityManager();
+		return em.find(Sucursal.class, clave);
+	}
+	
+	public List<Sucursal> obtenerSucursalesCalle(String calle){
+		EntityManager em = getEntityManager();
+		String jpql = "Select s From Sucursal s Where s.id.calle=?1";
+		TypedQuery<Sucursal> q = em.createQuery(jpql, Sucursal.class);
+		q.setParameter(1, calle);
+		return q.getResultList();
+	}
+
+}
+```
+
 
 # 30 Utilización del Motor Hibernate 12:39
 
