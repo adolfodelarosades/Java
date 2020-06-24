@@ -103,43 +103,46 @@ Este proyecto es exactamente igaul que el proyecto `615-09_proyecto_relacion_alm
 
 <img src="images/29-01.png">
 
-<img src="images/29-02.png">
 
-<img src="images/29-03.png">
 
-<img src="images/29-04.png">
-
-En los ejemplos de entidades que hemos visto hasta el momento siempre hemos trabajado con claves primarias simples es decir los atributos de esas clases pues estaban asociados a una única columna de la tabla en la base de datos puesto que es la propia base de datos en la tabla.
-
-La clave primaria era una única columna.
+En los ejemplos de entidades que hemos visto hasta el momento, siempre hemos trabajado con claves primarias simples es decir, los atributos de esas clases estaban asociados a una única columna de la tabla en la base de datos puesto que en la propia base de datos, en la tabla la clave primaria era una única columna.
 
 Pero qué ocurre si nos encontramos con tablas cuya clave primaria es la combinación de dos o más columnas.
 
-Bueno pues cómo proceder vamos a nivel de capa de persistencia a nivel de capa de persistencia.
+<img src="images/29-02.png">
 
-Tendríamos que definir una clase en tipo Java brinquen Capsule los datos de dicha prima Key dicha clave primaria compuesta es decir en caso Lauría las dos o más columnas que formarán la primaria que después a nivel de la entidad en vez de definir un atributo por cada una de las columnas definiríamos un único atributo asociado a dicha clase.
+Bueno pues cómo procederíamos a nivel de Capa de Persistencia, a nivel de Capa de Persistencia tendríamos que definir una clase en tipo JavaBean que encapsule los datos de dicha Prima Key, dicha clave primaria compuesta, es decir encapsularía las dos o más columnas que formarán la Prima Key, después a nivel de la entidad en vez de definir un atributo por cada una de las columnas definiríamos un único atributo asociado a dicha clase de este JavaBean que encapsula la Prima Key, además habría que incluir unas anotaciones que vamos a ver ahora en el ejemplo que vamos a proponer a continuación.
 
-Este Jabari encapsula la primeroque además habría que incluir unas anotaciones que vamos a ver ahora.
+<img src="images/29-03.png">
 
-El ejemplo que vamos a proponer a continuación supongamos por ejemplo que tenemos nuestra tabla de almacén como la que hemos trabajado ya en otros ejercicios y en ella añadimos una nueva tabla sucursales que representa o que contienen los datos de las diferentes sucursales en las que se van a realizar las ventas del almacén.
+Supongamos por ejemplo que tenemos nuestra base de datos `almacen` donde hemos trabajado ya en otros ejercicios y en ella añadimos una nueva tabla `sucursales` que representa o que contienen los datos de las diferentes sucursales en las que se van a realizar las ventas del almacén, la verdad es que eso es lo de menos, lo importante es que pasamos a tener cuatro campos, cuatro columnas:
 
-La verdad es que eso es lo de menos lo importante es que pasamos a tener cuatro campos cuatro columnas nombre calle presupuesto inauguración.
+* nombre
+* calle
+* presupuesto
+* inauguracion.
 
-Y lo interesante por el motivo que sea hemos decidido que la primera ICAI de esta tabla es la combinación de las columnas nombre y calle tiempos qué tendríamos que hacer a nivel de capa de persistencia. 
+<img src="images/29-05.png">
 
-Tendríamos primero que crear una clase tipo Abadín a la que llamaríamos habitualmente como el nombre de la entidad que vamos a crear después terminaba en la sucursal p.k en este caso que en Capsule como veis en este caso las dos columnas nombre y calle aquí tendríamos entonces dos atributos los campos asociados a estas dos columnas.
+Y lo interesante, por el motivo que sea hemos decidido que la Prima Key de esta tabla es la combinación de las columnas nombre y calle, qué tendríamos que hacer a nivel de capa de persistencia. 
 
-Por supuesto se Perimeter para acceder a ellos y muy importante esta clase Java debe sobrescribir los métodos e hija Xcode puesto que son métodos son en los que se basa el motor de persistencia para determinar la igualdad de las entidades y por lo tanto también la igualdad de las primera y qué decir.
+Tendríamos primero que crear una clase tipo JavaBean a la que llamaríamos habitualmente como el nombre de la entidad que vamos y terminaba en PK es decir `SucursalPK`, en este caso que en Capsule como ves las dos columnas nombre y calle, tendríamos entonces dos atributos, los campos asociados a estas dos columnas. Por supuesto los setters y getters para acceder a ellos y muy importante esta clase Java debe sobrescribir los métodos `equals()` y `hashcode()` puesto que en estos métodos son en los que se basa el motor de persistencia para determinar la igualdad de las entidades y por lo tanto también la igualdad de las Prima Key es decir, una Prima Key se distingue de otras no porque mire los valores de los atributos sino en función de lo que determinen los métodos `equals()` y `hashcode()`.
 
-Una primera y se distingue de otras no porque mire los valores de los atributos sino en función de lo que determinen los métodos e hijas con bien.
+Otra cosa importante tendrá que estar anotada la clase con la anotación `@Embeddable` esto en cuanto a la clase Prima Key.
 
-Otra cosa importante tendrá que estar anotada en esa clase con esta notación arroba en védico esto en cuanto a la clase primero y qué pasa con la clase entidad sucursal se definirá como una entidad como otra cualquiera pero eso sí en vez de definir un atributo por cada una de las columnas define un único atributo del tipo de la primera.
+<img src="images/29-04.png">
 
-Como veis aquí definimos un atributo de tipo sucursal PK.
+Y qué pasa con la clase entidad `Sucursal` se definirá como una entidad como otra cualquiera pero eso sí en vez de definir un atributo por cada una de las columnas define un único atributo del tipo de la Prima Key, como ves aquí definimos un atributo de tipo `SucursalPK`, el resto de los atributos igual con sus métodos setter y getter y muy importante en vez de la anotación `@Id` que es la que hemos utilizado para Prima Key simples se utilizaría la anotación `@Embeddable` para anotar la Prima Key compuesta.
 
-El resto de los atributos igual con sus métodos setter getter y muy importante en vez de la notación arroba IDIC en la que hemos utilizado las primarias simples se utilizaría la notación arroba en vez de Goyri para anotar la primera compuesta.
+### Creación Proyecto Eclipse
 
-Vamos a ver eso sobre un ejemplo ya tenemos aquí creado vamos a Eclipse tengo aquí a una aplicación web creada se ha creado sobre el servidor Donka se ha activado el proyecto faites JPA tenemos ya que persiste en XML con los datos de conexión a la base de datos almacén.
+Vamos a ver esto con un ejemplo.
+
+
+
+
+
+ya tenemos aquí creado vamos a Eclipse tengo aquí a una aplicación web creada se ha creado sobre el servidor Donka se ha activado el proyecto faites JPA tenemos ya que persiste en XML con los datos de conexión a la base de datos almacén.
 
 El nombre de la Unidad de persistencia y tengo aquí una clase que la analizaremos que encapsula una serie de operaciones con esa entidad para que el tratamiento de la entidad una vez que ya se ha creado es exactamente igual que con las entidades que tienen clase primaria simples y lo único que queda es crear precisamente la entidad para que veas que lo vamos a hacer con el asistente de Eclipse y verás cómo es exactamente igual que con el caso de las entidades que hemos creado hasta el momento todo se va a generar de forma automática incluido la clase que encapsula la Primary el proceso es el mismo con el botón derecho JPA Tools generar entidades desde tablas elegimos la conexión con la base de datos que ya la tenemos creada de ejercicios anteriores almacén y SQL.
 
