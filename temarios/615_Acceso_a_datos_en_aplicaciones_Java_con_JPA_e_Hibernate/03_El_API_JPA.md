@@ -81,6 +81,8 @@ Pues lo primero vamos a abrir es Workbeanch y comprobar el contenido de la tabla
 
 <img src="images/8-04.png">
 
+### Creación Proyecto Eclipse
+
 Bueno pues vamos a pasar a desarrollar con Eclipse y recuperaremos el ejercicio primero que hicimos de ejemplo JPA donde como recordarás creamos la capa de persistencia que fue básicamente eso crear la entidad y la configuración de la misma a través de las anotaciones usando el asistente que veíamos en Eclipse. Y  también la configuración del `persistence.xml` que se genera automáticamente los datos de conexión.
 
 Lo que vamos a hacer es crear una clase Java básica de aplicación de consola con su método main donde vamos a realizar una serie de operaciones contra la capa de persistencia (Contacto).
