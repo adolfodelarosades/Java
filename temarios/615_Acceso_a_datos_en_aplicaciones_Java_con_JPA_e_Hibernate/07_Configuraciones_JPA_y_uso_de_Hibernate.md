@@ -1629,34 +1629,38 @@ El código de `persistence.xml` queda así:
 Si ejecutamos la aplicación tiene que seguir funcionando exactamente igual que funcionaba antes puesto que es el motor Hibernate es compatible con JPA.
 
 
-`org.apache.jasper.JasperException: org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: entidades.Seccion.productos, could not initialize proxy - no Session`
-
 <img src="images/31-12.png">
 
 <img src="images/31-13.png">
+
+<img src="images/31-16.png">
 
 <img src="images/31-14.png">
 
 <img src="images/31-15.png">
 
-********
+Al probar la aplicación ya usando el motor Hibernate vemos que aparentemente todo funciona igual hasta que seleccionamos una sección e intentamos recuperar sus productos nos provoca un error.
 
-Hemos comprobado que el funcionamiento es exactamente el mismo. Nos autenticamos, vamos al menú, vemos nuestra lista de contactos, vemos que podemos añadir un nuevo contacto y por supuesto nos dejará eliminar tambien es decir que independientemente del motor utilizado JPA es el mismo en todos los casos y esta combinación JPA - Hibernate, motor Hibernate es muy utilizada en muchos de los desarrollos de aplicaciones empresariales.
+`org.apache.jasper.JasperException: org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: entidades.Seccion.productos, could not initialize proxy - no Session`
 
-************
+Obtenemos la excepción de la que estabamos hablando `org.hibernate.LazyInitializationException` por utilizar el motor de Hibernate. 
 
+LO que sucede es que en `GestionProductoEjb` se ejecuta el método `obtenerProductosPorSeccion`
 
----------------------------------
+```java
+@Override
+public List<Producto> obtenerProductosPorSeccion(int idSecc){
+   //String jpql = "Select p From Producto p Where p.idSeccion=" + idSecc;
+   Seccion s=em.find(Seccion.class, idSecc);
+   return s.getProductos();		
+}
+```
 
-a baconcretamente hemos estado analizando ahora se el ejemplo de que teníamos una aplicación donde le pedíamos al usuario seleccionar una sección y al elegir la sección se mostrasen los productos relacionados.
+Recuperamos la Seccion através de su `idSecc` y luego llamamos a `s.getProductos()` para recuperar los productos asociados con una carga Lazy
 
-El aspecto de la aplicación es éste.
+AQUI
 
-Consultamos las secciones y por ejemplo seleccionamos la sección ferretería vamos a pulsar el botón Ver productos aquí donde vamos a obtener esa excepción de la que estábamos hablando por utilizar el motor de Internet volvemos al eclipse y aquí lo vemos podemos comprobar es una versión del ejercicio número 5 donde hemos utilizado el motor de hibernan simplemente el único cambio que se ha hecho ha sido indicar como proveedor y Bernet existen Robayna.
-
-Qué ocurre.
-
-Pues que claro al utilizar este proveedor Hibernate pues al realizar esta operación recuperación de los productos recuperamos la sección con el método Fain y luego llamamos a productos para recuperar los productos asociados a la carga Leuzzi cuando se ha encargado esos productos al recuperar la sección sino que se hace o se intenta hacer mejor dicho en este momento la sesión ya se ha cerrado y se produce la inicialización excepción que hemos visto la solución como digo es irnos al persiste en XML y añadir esta propiedad menos vamos a recuperarla de la presentación en la que la hemos visto.
+cuando se ha encargado esos productos al recuperar la sección sino que se hace o se intenta hacer mejor dicho en este momento la sesión ya se ha cerrado y se produce la inicialización excepción que hemos visto la solución como digo es irnos al persiste en XML y añadir esta propiedad menos vamos a recuperarla de la presentación en la que la hemos visto.
 
 Aquí vamos a recuperar al copiar este texto no lo llevamos al que existe en XML mientras pegamos y ya con esto habilitamos y Bernet para que no cierre las sesiones cuando tiene la entidad principal.
 
@@ -1667,6 +1671,17 @@ Vamos a volver a desplegar la aplicación observes y una vez que ya quede republ
 Si volvemos otra vez al navegador volvemos a recargar la aplicación seleccionamos la sección porque era de ellas productos.
 
 Ahora ya el problema ha quedado resuelto.
+********
+
+Hemos comprobado que el funcionamiento es exactamente el mismo. Nos autenticamos, vamos al menú, vemos nuestra lista de contactos, vemos que podemos añadir un nuevo contacto y por supuesto nos dejará eliminar tambien es decir que independientemente del motor utilizado JPA es el mismo en todos los casos y esta combinación JPA - Hibernate, motor Hibernate es muy utilizada en muchos de los desarrollos de aplicaciones empresariales.
+
+************
+
+
+---------------------------------
+
+
+Pues que claro al utilizar este proveedor Hibernate pues al realizar esta operación recuperación de los productos recuperamos la sección con el método Fain y luego llamamos a productos 
 
 # 32 Utilización del framework de hibernate 13:54
 
