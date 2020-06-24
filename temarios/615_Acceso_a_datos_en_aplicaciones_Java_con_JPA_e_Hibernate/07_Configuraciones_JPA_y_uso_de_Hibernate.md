@@ -683,92 +683,821 @@ Una vez que hayamos hecho los cambios ya tenemos nuestro nuevo proyecto `615-12_
 
 Si lo probamos todo funciona como el original.
 
+Este es un proyecto Web, con JPA que utiliza EclipseLink, se ejecuta en Tomcat y no usa EJB.
 
-no pegamos y lo vamos a renombrar vamos a llamar pues agenda que era la aplicación de la agenda de contactos motor Hibernate bien vamos a quedarnos con ese mismo nombre para utilizarlo como conté RUT o dirección de la aplicación web.
+Para la nueva configuración que vamos a usar con Hibernate necesitamos hacer algunos cambios.
 
-Vale nos vamos a las propiedades y employer settings modificamos el Conde-Ruiz de la aplicación aplicamos.
+#### 0. Dejar de usar el Motor EclipseLink.
 
-No le voy a dar OC porque ya que estamos aquí las propiedades del proyecto voy a cambiar otra cosa es la propiedad JPA.
+Vamos a las propiedades del proyecto y en JPA, en su momento utilizamos EclipseLink 
 
-En su momento pues claro utilizamos el eclipse Elim pero ahora ya no queremos utilizar ese motor.
+<img src="images/30-10.png">
 
-Vale entonces no queremos que se incorporen esas librerías simplemente entonces si no vamos a utilizar ni el eclipse Link ni tampoco digamos las librerías del motor de glacis no lo vamos a ejecutar sobre Graphic desactivamos la Library configuration y gastã pulsamos el botón OK y ahora ya vamos a seguir los pasos que hemos visto en la presentación.
+pero ahora ya no queremos utilizar ese motor, no queremos que se incorporen esas librerías simplemente, entonces si no vamos a utilizar ni EclipseLink ni tampoco las librerías del motor de GlassFish lo que hacemos es desactivar las Library Configuration.
 
-Primero en el XML pues aquí añadiremos una entrada correspondiente a la librería del motor Hibernate teníamos JSTL el trailer de mayo se cuele.
+<img src="images/30-11.png">
 
-Bueno pues vamos a añadir tenemos por aquí esta dependencia la incluimos aquí y esto ya hará que se incorpore el motor de Hibernate que son varios dentro de nuestro proyecto al guardar.
+Pulsamos el botón OK y ahora ya vamos a seguir los pasos que hemos visto en la presentación.
 
-Vamos a ver nos vamos a ir a la pestaña dependencias para que veas.
+Al hacer esto se nos presentan una serie de errores en las clases de entidades y modelo de nuestro proyecto sobre todo en el uso de las anotaciones por que ya no estamos usando ningún motor de persistencia.
 
-Se ha creado a partir de los que ya teníamos la dependencia Liver no te Kore y si te fijas en esta pestaña dependencias aquí no es que este a su vez depende de otros muchos.
+<img src="images/30-12.png">
 
-Realmente son todos librerías las que se han incluido y gracias a MAVEN no hemos tenido que incluyéndola a nosotros una por una.
+#### 1. Añadir Motor Hibernate en `pom.xml`
 
-Bien lo siguiente era registrar el motor de Ibermedia persiste en XML es decir esta etiqueta Provider nos vamos a ir aquí a nuestro persiste en XML.
+Vamos a añadir la dependecia `hibernate-core` correspondiente a la librería del motor Hibernate en nuestro archivo `pom.xml`.
 
-No podemos saber más desde aquí a la pestaña Source código fuente y vamos a incluir como primera entrada de la Unidad de persistencia el Hibernate persisten proteinas los datos de conexión a la base de datos no cambia es decir a pesar de que estemos utilizando este motor hay que proporcionarle igualmente las propiedades de conexión a la base de datos y esas propiedades los nombres de esas propiedades.
+```html
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-core</artifactId>
+   <version>5.4.18.Final</version>
+</dependency>
+```
 
-Sí es cierto que el motor Giverny tiene unos nombres de propiedades que son equivalentes a estas.
+Esto ya hará que se incorpore el motor de Hibernate que son varios Jars dentro de nuestro proyecto al guardar se descargan, vamos a ver la pestaña dependencias.
 
-Evidentemente la arregle el usuario por el driver pero estos son también nombres estandarizados de JPA que podremos utilizarlos igual puesto que como te digo el motor de Hibernate es compatible con JPA.
+<img src="images/30-13.png">
 
-Bueno pues nada más vamos a cambiar el nombre de la Unidad de persistencia le vamos a llamar su agenda el mismo nombre del proyecto MEIC y entonces ese mismo nombre lo utilizaremos.
+Se ha creado ademas de las dependencias que ya teníamos la dependencia `hibernate-core` y si te fijas en esta pestaña `Dependency Hierarchy` la dependencia `hibernate-core` depende de otros muchas.
 
-Vamos a ver aquí guardando en la lógica de negocio a la hora de cargar la unidad de persistencia.
+<img src="images/30-14.png">
 
-Esta sería la unidad de persistencia y por aquí lo mismo.
+Realmente son todas las librerías que se han incluido y gracias a MAVEN no hemos tenido que ir incluyéndolas nosotros una por una.
 
-Por nada guardamos todo y si ejecutamos la aplicación pues tiene que seguir funcionando exactamente igual que funcionaba antes puesto que es el motor compatible con JPA.
+Si en en alguna ocación por cualquier cosa en Eclipse no aparecen las dependencias Maven podemos dar en Maven - Update Project para que actualice las dependencias del proyecto y esto recargara todas las dependencias Maven dentro del proyecto.
 
-Aquí son unos errores pero realmente esos errores no existen como tal simplemente que la clase no tiene errores no aparecen por aquí eso el editor de Eclipse que hay veces que se queda esa información ahí una vez que la volvamos a abrir.
+<img src="images/30-15.png">
 
-Bueno parece que seguir dando como si no reconociera pero realmente están aquí ya esas librerías de JPA persistencia JPA puesto que están incluidos dentro de el motor de Hibernate aquí tendríamos que tener las dependencias de Mabe me estoy dando cuenta de que no aparecen las independencias y que se esté dando este error.
+<img src="images/30-16.png">
 
-Vamos a ver el POM está todo guardado.
+<img src="images/30-17.png">
 
-Hay veces que si esto ocurre sí ocurre en este tipo de cosas que no ha registrado la dependencia a las librerías y no aparecen aquí.
+#### 2. Registrar el Motor Hibernate en `persistence.xml`
 
-Pues vamos a hacer una no vamos a ir al menú del botón derecho del proyecto y vamos a ver en una opción que por aquí propiedades Maven efectivamente actualiza el proyecto a ver si actualizando el proyecto carga las librerías dentro de las dependencias del proyecto.
+Bien lo siguiente era registrar el motor de Hibernate en `persistence.xml` es decir la etiqueta `provider`:
 
-Ahora si lo ha hecho.
+`<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>`
 
-Bueno ahora ya sí que ha incluido alojar y probablemente todos esos errores pues desaparecen automáticamente.
+Los datos de conexión a la base de datos no cambian, es decir a pesar de que estemos utilizando este motor hay que proporcionarle igualmente las propiedades de conexión a la base de datos y esas `property` y los `name` de esas propiedades.
 
-Por qué no lo ha incluido directamente al haber copiado la dependencia dentro del POM y haberlo guardado.
+Sí es cierto que el motor Hibernate tiene unos nombres de propiedades que son equivalentes a estas pero estos son también nombres estandarizados de JPA que podremos utilizarlos igual puesto que como te digo el motor de Hibernate es compatible con JPA.
 
-Normalmente lo tiene que hacer así pero hay veces que el eclipse simplemente se hace esa actualización es el truco.
+Bueno pues nada más el código de `persistence.xml` queda así:
 
-Vuelvo a repetir.
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-12_agenda_motor_hibernate" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>entidades.Contacto</class>
+		<class>entidades.Usuario</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
 
-Botón derecho sobre el proyecto Maven un tipo de proyecto y si no se ve que no se han incluido antes ahora al hacer esta actualización ya las habrá tenido que incluir.
+#### 3. Probar la Aplicación
 
-Bien pues nada vamos a probarlo y vas a ver que el funcionamiento es exactamente el mismo que tenía antes y que permitirá realizar las mismas tareas.
+Si ejecutamos la aplicación tiene que seguir funcionando exactamente igual que funcionaba antes puesto que es el motor Hibernate es compatible con JPA.
 
-Lógicamente vamos a ver que dice que era un error de publicación si es que no me ha cambiado el ruta en la propiedad de vuestro settings.
+<img src="images/30-18.png">
 
-Pues efectivamente no me lo ha cambiado con Carruth que solo vea como hay otra aplicación con la misma dirección pues eso no lo permite entonces ponerlo en la Motor y Bernet es el terror de la aplicación aplicábamos que hay y bueno pues vamos a hacer una limpieza del proyecto también en el proyecto Clean reflex que todo y bueno vamos a volver a probar de nuevo probablemente se habrá quedado publicada vamos a descubrir todas las aplicaciones que tenemos hoy en Tomcat.
+<img src="images/30-19.png">
 
-Bueno realmente sería esta la agenda motor en la nuestra vamos a quitarla para que la vuelva republicar con la dirección correcta y bueno vamos a probar de nuevo observed las tareas que a veces es el eclipse parece que se pone duro y que hay veces que cuesta arrancar los proyectos con este tipo de cosas.
+<img src="images/30-20.png">
 
-Bueno ya por fin hemos entrado levamos un usuario que se ha valido de la tabla de usuarios bueno por saber ahora lo que ha ocurrido 3 1 3 1 parece que no ha cogido sabia decisión.
+<img src="images/30-21.png">
 
-Vamos a ver lo que le pasa ahora vamos a parar el Tomcat a ver si cuando un servidor consigue Bueno hay otra cosa que me estoy dando cuenta ahora esto ya que parece ser que Eclipse se ha querido poner ahora dudo ya en las últimas fases del curso y hay una cosa como te decía que me estoy dando cuenta ahora y la verdad que me alegro que haya ocurrido porque puede ser que en algún momento te ocurra a ti fíjate aquí abajo eso ocurre con completamente con la versión de Marte puede ser que con alguna otra también pero yo lo he sufrido ya con esta versión y es que hay veces que se queda ahí como pues actualizando espacio se queda colgado entonces cualquier cambio que hagas pues por ejemplo el publicado esta aplicación y no reconoce que la haya publicado porque realmente el hecho de que haya un error 404 es que como si no lo hubiera publicado vamos a ver ahora es que ya ni siquiera ni siquiera entra.
+<img src="images/30-22.png">
 
-Bueno pues eso es porque se queda haciendo tareas en segundo plano y se queda el juego.
+<img src="images/30-23.png">
 
-Aquí se ha quedado totalmente colgado si fuéramos capaces de ver aquí al hacer doble click en ese Incognito intermitente vemos deconstruyendo con los países que se han quedado ahí colgado qué hay que hacer cuando ocurre eso.
+<img src="images/30-24.png">
 
-Pues tan simple como cerrarlo y volverlo a abrir.
+Hemos comprobado que el funcionamiento es exactamente el mismo. Nos autenticamos, vamos al menú, vemos nuestra lista de contactos, vemos que podemos añadir un nuevo contacto y por supuesto nos dejará eliminar tambien es decir que independientemente del motor utilizado JPA es el mismo en todos los casos y esta combinación JPA - Hibernate, motor Hibernate es muy utilizada en muchos de los desarrollos de aplicaciones empresariales.
 
-Así que lo vamos a cerrar y lo voy a volver a abrir después a ver si con esto pues ya verás cómo se soluciona Bueno pues ya reinicia el eclipse y como veis ya no tenemos aquí ese Incognito de estar constantemente construyendo workspace.
+### :computer: Código Completo - 615-12_agenda_motor_hibernate
 
-Por lo tanto no he tocado nada no hemos tocado nada como lo que habíamos hecho la configuración del sistema XML el XML.
+<img src="images/30-25.png">
 
-No hemos tocado nada en la lógica de negocio que sigue siendo la misma que teníamos en el ejercicio 2 puesto que el motor Hibernate como ya he dicho varias veces es compatible con JPA y vamos a comprobar que el funcionamiento es exactamente el mismo.
+*`pom.xml`* Modificado
 
-Ejecutamos sobre Tomcat el proyecto 1 1 y de momento nos está cargando Akiko Sadi Verneuil etc. tarda un poquito más.
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-12_agenda_motor_hibernate</groupId>
+	<artifactId>615-12_agenda_motor_hibernate</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.18.Final</version>
+		</dependency>
+	</dependencies>
+</project>
+```
 
-Bueno pues vamos al menú es decir nos autenticado vemos nuestra lista de contactos veremos que podemos añadir un nuevo contacto arroba gmail.com por ejemplo al ver los contactos pues ahi lo tenemos y por supuesto nos dejará eliminar tambien es decir que independientemente del motor utilizado pues JPA Es el mismo en todos los casos y esta combinación JPA y Bernays motor y Hibernate es muy utilizada en muchos de los desarrollos de aplicaciones empresariales.
+*`persistence.xml`* Modificado
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="615-12_agenda_motor_hibernate" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>entidades.Contacto</class>
+		<class>entidades.Usuario</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+**Entidades**
+
+*`Contacto`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the contactos database table.
+ * 
+ */
+@Entity
+@Table(name="contactos")
+@NamedQueries({
+	@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c"),
+	@NamedQuery(name="Contacto.deleteByEmail", query="DELETE FROM Contacto c WHERE c.email=?1")
+})
+
+public class Contacto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idContacto;
+
+	private String email;
+
+	private String nombre;
+
+	private int telefono;
+
+	public Contacto() {
+	}
+
+	public Contacto(String email, String nombre, int telefono) {
+		super();
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public Contacto(int idContacto, String email, String nombre, int telefono) {
+		super();
+		this.idContacto = idContacto;
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public int getIdContacto() {
+		return this.idContacto;
+	}
+
+	public void setIdContacto(int idContacto) {
+		this.idContacto = idContacto;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+}
+```
+
+*`Usuario`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the usuarios database table.
+ * 
+ */
+@Entity
+@Table(name="usuarios")
+@NamedQueries({
+   @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
+   @NamedQuery(name="Usuario.findByUserAndPwd", query="SELECT u FROM Usuario u Where u.usuario=?1 and u.password=?2")
+})
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUsuario;
+
+	private String password;
+
+	private String usuario;
+
+	public Usuario() {
+	}
+
+	public int getIdUsuario() {
+		return this.idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+}
+```
+
+**Modelo**
+
+*`Gestioncontactos`* Modificado
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import entidades.Contacto;
+
+public class GestionContactos {
+	
+	//Método que permite obtener el objeto EntityManager
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-12_agenda_motor_hibernate");
+		return factory.createEntityManager();
+	}
+	
+	public void altaContacto(String nombre, String email, int telefono) {
+		Contacto c = new Contacto(email, nombre, telefono);
+		EntityManager em = getEntityManager();
+		
+		//La operación la incluimos en una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(c);
+		tx.commit();
+	}
+
+	public void altacontacto(Contacto c) {
+		EntityManager em = getEntityManager();
+		
+		//La operación la incluimos en una transacción
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(c);
+		tx.commit();
+	}
+	
+	public void eliminarContacto(int idContacto) {
+		EntityManager em = getEntityManager();
+		
+		Contacto c = em.find(Contacto.class, idContacto);
+		EntityTransaction tx = em.getTransaction();
+		//Si el contacto existe lo eliminamos
+		tx.begin();
+		if(c != null) {
+		   em.remove(c);
+		}
+		tx.commit();	
+	}
+	
+	public void eliminarContactosPorEmail(String email){
+		EntityManager em=getEntityManager();
+		Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+		qr.setParameter(1, email);
+		EntityTransaction tx=em.getTransaction();
+		tx.begin();
+		qr.executeUpdate();
+		tx.commit();
+	}
+	
+	public List<Contacto> recuperarContactos(){
+		EntityManager em = getEntityManager();
+		/*Query qr = em.createQuery("Select c From Contacto c");
+		return (List<Contacto>)qr.getResultList();*/
+		TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+		return qr.getResultList();
+	}
+	
+	public Contacto buscarContactos(String email){
+		EntityManager em = getEntityManager();
+		
+		String jpql = "Select c From Contacto c Where c.email = ?1";
+		TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+		qr.setParameter(1, email);
+		//return qr.getSingleResult();
+		return qr.getResultList().get(0);
+	}
+}
+```
+
+*`GestionUsuarios`* Modificado
+
+```java
+package modelo;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import entidades.Usuario;
+
+public class GestionUsuarios {
+	// método que permite obtener el objeto EntityManager
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-12_agenda_motor_hibernate");
+		return factory.createEntityManager();
+	}
+
+	public boolean autenticar(String usuario, String pwd) {
+		EntityManager em = getEntityManager();
+		boolean res = false;
+		TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+		qr.setParameter(1, usuario);
+		qr.setParameter(2, pwd);
+		try {
+			qr.getSingleResult();
+			res = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return res;
+	}
+
+}
+```
+
+**Servlets**
+
+*`Controller`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String op = request.getParameter("op");
+		String url = "";
+		switch (op) {
+		case "doLogin":
+			url = "LoginAction";
+			break;
+		case "doAlta":
+			url = "AltaAction";
+			break;
+		case "doEliminar":
+			url = "EliminarAction";
+			break;
+		case "doRecuperar":
+			url = "RecuperarAction";
+			break;
+		case "toNuevo":
+			url = "nuevo.html";
+			break;
+		case "toMenu":
+			url = "menu.html";
+			break;
+
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+}
+```
+
+*`LoginAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import modelo.GestionUsuarios;
+
+/**
+ * Servlet implementation class LoginAction
+ */
+@WebServlet("/LoginAction")
+public class LoginAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String user=request.getParameter("user");
+		String pwd=request.getParameter("pwd");
+		GestionUsuarios gusuarios=new GestionUsuarios();
+		if(gusuarios.autenticar(user, pwd)){
+			//guardamos el nombre de usuario en un atributo de sesión
+			HttpSession s=request.getSession();
+			s.setAttribute("user", user);
+			request.getRequestDispatcher("menu.html").forward(request, response);
+		}else{
+			request.getRequestDispatcher("login.html").forward(request, response);
+		}
+	}
+
+}
+```
+
+*`RecuperarAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Contacto;
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class RecuperarAction
+ */
+@WebServlet("/RecuperarAction")
+public class RecuperarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		GestionContactos gcontactos=new GestionContactos();
+		List<Contacto> contactos=gcontactos.recuperarContactos();
+		//guardamos contactos en un atributo de petición
+		request.setAttribute("contactos", contactos);
+		//trasnferencia de la petición
+		request.getRequestDispatcher("contactos.jsp").forward(request, response);
+	}
+
+}
+```
+
+*`EliminarAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class EliminaContacto
+ */
+@WebServlet("/EliminarAction")
+public class EliminarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idContacto=Integer.parseInt(request.getParameter("idContacto"));
+		GestionContactos gcontactos=new GestionContactos();
+		gcontactos.eliminarContacto(idContacto);
+		request.getRequestDispatcher("RecuperarAction").forward(request, response);
+	}
+
+}
+```
+
+*`AltaAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactos;
+
+/**
+ * Servlet implementation class AltaContacto
+ */
+@WebServlet("/AltaAction")
+public class AltaAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nombre=request.getParameter("nombre");
+		String email=request.getParameter("email");
+		int telefono=Integer.parseInt(request.getParameter("telefono"));
+		//creamos un objeto de la capa de lógica de negocio
+		//y llamamos al método encargado de hacer el alta
+		GestionContactos gcontactos=new GestionContactos();
+		gcontactos.altaContacto(nombre,email,telefono);
+		request.getRequestDispatcher("menu.html").forward(request, response);
+	}
+
+}
+```
+
+**Vista**
+
+*`login`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="Controller?op=doLogin" method="post">
+		Usuario:<input type="text" name="user"/><br/>
+		Contraseña:<input type="password" name="pwd"/><br/>
+		<input type="submit" value="Enviar"/>
+	
+	</form>
+</body>
+</html>
+```
+
+*`menu`*
+
+```html
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <center>
+        <a href="Controller?op=toNuevo">Nuevo contacto</a><br/>
+        <a href="Controller?op=doRecuperar">Ver contactos</a><br/>
+    </center>
+    </body>
+</html>
+```
+
+*`contactos`*
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="modelo.GestionContactos,java.util.ArrayList,entidades.Contacto"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<c:set var="contactos" value="${requestScope.contactos}"/>
+	
+	<br/><br/><br/>
+	
+	<c:choose>
+	
+		<c:when test="${!empty contactos}">
+	
+			<table border="1">
+						<tr>
+							<th>Nombre</th>
+							<th>Email </th>
+							<th>Telefono</th>
+							<th></th>
+						</tr>
+						
+						<c:forEach var="cont" items="${contactos}">
+							<tr><td>${cont.nombre}</td>
+							<td>${cont.email}</td>
+							<td>${cont.telefono}</td>
+							<td><a href="Controller?op=doEliminar&idContacto=${cont.idContacto}">Eliminar</a></td></tr>
+						
+						
+						</c:forEach>
+						
+						
+						
+			</table>
+		</c:when>
+		<c:otherwise>
+			<h1>No hay contactos</h1>
+		</c:otherwise>
+	</c:choose>
+	<br/>
+	<br/>
+	<a href="Controller?op=toMenu">Menu</a>
+</body>
+</html>
+```
+
+*`nuevo`*
+
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>nuevo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+ 	function comprobar(){ 	
+ 		if(document.getElementById("nombre").value==""||
+ 			document.getElementById("email").value==""||
+ 			document.getElementById("edad").value==""){
+ 				alert("faltan datos");
+ 			return false;
+ 		}
+ 		else{
+ 			return true;
+ 		}
+ 		
+ 	}
+        function comprobarEdad(){
+            if(isNaN(document.getElementById("edad").value)){
+                alert("Edad debe ser numérico");
+                document.getElementById("edad").value="";
+            }
+        }
+</script>
+</head>
+<body>
+<form action="Controller?op=doAlta" method="post" onsubmit="return comprobar();">
+	Nombre:<input id="nombre" type="text" name="nombre"/>
+	<br/>
+	Email:<input id="email" type="text" name="email"/>
+	<br/>
+        Telefono:<input id="edad" onblur="comprobarEdad();" type="text" name="telefono"/>
+	<br/>
+	<input type="submit" value="Guardar"/>
+</form>
+</body>
+</html>
+```
 
 # 31 Carga de datos en modo lazy con Hibernate 04:57
 
