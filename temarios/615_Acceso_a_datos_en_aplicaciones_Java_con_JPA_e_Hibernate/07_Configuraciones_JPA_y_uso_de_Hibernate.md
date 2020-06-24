@@ -95,7 +95,19 @@ y de esta manera estaríamos propagando estas dos operaciones, si quisiéramos p
 
 Bueno pues ya he visto de qué manera se puede ajustar y optimizar las relaciones entre entidades.
 
+### :computer: Código Completo - 615-10_proyecto_relacion_almacen
+
+Este proyecto es exactamente igaul que el proyecto `615-09_proyecto_relacion_almacen`, solo con los cambios que se mencionarón en las entidades `Seccion` y `Producto`.
+
 # 29 Claves compuestas 07:41
+
+<img src="images/29-01.png">
+
+<img src="images/29-02.png">
+
+<img src="images/29-03.png">
+
+<img src="images/29-04.png">
 
 En los ejemplos de entidades que hemos visto hasta el momento siempre hemos trabajado con claves primarias simples es decir los atributos de esas clases pues estaban asociados a una única columna de la tabla en la base de datos puesto que es la propia base de datos en la tabla.
 
