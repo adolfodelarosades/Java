@@ -3615,7 +3615,7 @@ public class Producto implements Serializable {
 	private Seccion seccione;
 
 	//bi-directional many-to-one association to Venta
-	@OneToMany(mappedBy="producto",cascade={CascadeType.REMOVE,CascadeType.MERGE})
+	@OneToMany(mappedBy="producto")
 	private List<Venta> ventas;
 
 	public Producto() {
@@ -4184,7 +4184,7 @@ public class Producto implements Serializable {
 	private Seccion seccione;
 
 	//bi-directional many-to-one association to Venta
-	@OneToMany(mappedBy="producto",cascade={CascadeType.REMOVE,CascadeType.MERGE})
+	@OneToMany(mappedBy="producto")
 	private List<Venta> ventas;
 
 	public Producto() {
