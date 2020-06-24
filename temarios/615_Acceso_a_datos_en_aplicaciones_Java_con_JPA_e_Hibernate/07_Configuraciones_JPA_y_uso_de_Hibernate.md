@@ -2422,6 +2422,16 @@ public class TopVentasAction extends HttpServlet {
 
 # 32 Utilización del framework de hibernate 13:54
 
+<img src="images/32-01.png">
+
+<img src="images/32-02.png">
+
+<img src="images/32-03.png">
+
+<img src="images/32-04.png">
+
+<img src="images/32-05.png">
+
 Ya hemos visto cómo utilizar el motor de Hibernate dentro de una capa de persistencia gestionada con JPA.
 
 Sin embargo Hibernate es un framework completo que proporciona todo lo necesario para utilizarlo por sí solo para la gestión y la utilización de una capa de persistencia en una aplicación esos componentes son además del motor de Hibernate un sistema de configuración podríamos decir hay un archivo de configuración general que se llama Hibernate CFG XML donde es similar al persiste en XML pues se establecen todos los datos de conexión a la base de datos lista de entidades.
