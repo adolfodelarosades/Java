@@ -16,69 +16,82 @@
 
 <img src="images/28-01.png">
 
+Después de estudiar la creación y manipulación de entidades relacionadas vamos a ver cómo realizar algunos ajustes en las relaciones, de manera que nos permitan optimizar el trabajo sobre la capa de persistencia.
+
 <img src="images/28-02.png">
+
+La primera de esas operaciones de ajuste que vamos a realizar vamos a ver cómo realizar es,  la Carga de Datos Relacionados, y es que en una relación podemos configurar la manera en la que se van a cargar los datos relacionados.
+
+La manera en la que lo vamos a hacer es a través de un atributo llamado `Fetch` que vamos a poder indicar en las anotaciones `@OneToMany`, `@ManyToOne` y `@ManyToMany`.
+
+Cuáles son los posibles valores que puede tomar este atributo:
+
+* `FechType.EAGER` 
+* `FechType.LAZY`
+
+Son estos dos posibles valores que ves aquí, que corresponden a unas constantes definidas en la anotación `FetchType` está el valor `EAGER` y el valor `LAZY`.
+
+Qué significa que el atributo `Fetch` tenga el valor `EAGER`, significa que a la hora de por ejemplo hacer una búsqueda en una entidad los objetos relacionados se van a cargar dentro de la colección o dentro del atributo de la clase dependiendo si OneToMany o ManyToOne en el mismo momento en el que se carga la entidad principal, la entidad localizada.
+
+En el caso de que eligamos la acción `LAZY` entonces cuando se hace una carga de una entidad, de la entidad principal, los datos relacionados no se van a cargar en memoria en ese momento, solamente se cargarán cuando vayan a ser utilizados, es decir a la hora de llamar al método `getNombreDelAtributo()` de la entidad que vamos a recuperar.
+
+Eso nos va a permitir hacer esos ajustes de manera que dependiendo de si queremos tenerlo todo desde el principio o si queremos optimizar el consumo de memoria y no queremos tener todos los datos cargados hasta que van a ser utilizados podemos jugar con los valores `EAGER` o `LAZY`, si no indicamos nada cada motor de persistencia definirá su propio valor y dependiendo del tipo de relación definirán su propio valor predeterminado, pero si queremos establecer uno concreto tenemos estos atributos, como vamos a ver ahora en uno de los ejercicios que hicimos en las lecciones anteriores.
 
 <img src="images/28-03.png">
 
-Después de estudiar la creación y manipulación de entidades relacionadas.
+El otro tipo de ajuste que podemos realizar son las *Actualizaciones en Cascada*. Si nosotros hacemos una operación sobre una entidad, una eliminación, un refresco o una actualización qué pasa con los objetos de las entidades relacionadas, se van a actualizar también, se van a eliminar, en principio no va a pasar nada con ellos a no ser que queramos nosotros propagar alguna o todas las operaciones sobre la identidad principal también en las entidades relacionadas. Eso lo vamos a indicar a través del atributo `cascade` también de las mismas anotaciones `@OneToMany`, `@ManyToOne` y `@ManyToMany` utilizando alguna de las constantes definidas en la anotación `CascadeType`:
 
-Vamos a ver cómo realizar algunos ajustes en las relaciones de manera que nos permitan optimizar el trabajo sobre la capa de persistencia.
+* `CascadeType.PERSIST`
+* `CascadeType.MERGE`
+* `CascadeType.REMOVE`
+* `CascadeType.REFRESH`
+* `CascadeType.ALL`
 
-La primera de esas operaciones de ajuste que vamos a realizar vamos a ver cómo realizar es la carga de datos relacionados.
+Por ejemplo si a la hora de eliminar una entidad queremos que también se eliminen los objetos relacionados puesto que no tendría sentido a lo mejor que quedarán esos objetos en la base de datos, las filas correspondientes en la base de datos, una vez que se ha eliminado la actividad principal, podríamos propagar la operación de eliminación utilizando el valor `CascadeType.REMOVE` en el atributo `cascade`.
 
-Y es que en una relación podemos configurar la manera en la que se van a cargar los datos relacionados.
+Bueno lo mejor es que lo vamos a ver sobre uno de los ejercicios el último que hicimos el ejercicio práctico `615-09_proyecto_relacion_almacen` lo vamos a copiar a uno llamado `615-10_proyecto_relacion_almacen`, debemos cambiar el nombre en:
 
-La manera en la que lo vamos a hacer es a través de un atributo llamado fets que vamos a poder indicar en las anotaciones arroba o humani arroba Manitú Juan y arroba monitoreen.
+* Web Project Settings
+* `pom.xml`
+* `persistence.xml`
+* `GestionProductosEjb`
 
-Cuáles son los posibles valores que puede tomar este atributo pues son estos dos posibles valores que ves aquí que corresponden a unas constantes definidas en la notación Feldstein está el valor Hiller y el valor Leuzzi qué significa que el atributo Fetch tenga el valor higher significa que a la hora de por ejemplo hacer una búsqueda en una entidad los objetos relacionados se van a cargar dentro de la colección o dentro del atributo de la clase dependiendo si en cuanto medio sitúan en el mismo momento en el que se carga la entidad principal de la entidad localizada en el caso de la acción Lasi.
+Vamos a centrarnos concretamente en las entidades `Seccion` y `Producto` por ejemplo ya sabemos que hay una relación Uno a Muchos y Muchos a Uno en sentido contrario pero hay una relación Uno a Muchos entre `Seccion` y `Producto`. Queremos que se carguen todos los productos dentro del atributo de colección de la entidad `Seccion` cuando se haga la localización o la búsqueda de una determinada `Seccion`, dependiendo si queremos que sea así o no sea así utilizaremos y configuramos el atributo `Fetch` que hemos comentado anteriormente dentro de la anotación de la que define la relación.
 
-Entonces cuando se hace una carga de una entidad de la entidad principal los datos relacionados no se van a cargar en memoria en ese momento solamente se cargarán cuando vayan a ser utilizados es decir a la hora de llamar al método que el nombre del atributo de la entidad que vamos a recuperar.
+Por ejemplo en `Seccion` nosotros tenemos actualmente esto:
 
-Eso nos va a permitir hacer esos ajustes de manera que dependiendo de si queremos tenerlo todo desde el principio o si no queremos queremos optimizar el consumo de memoria y no queremos tenerlos todos los datos cargados hasta que van a ser utilizados.
+```java
+// bi-directional many-to-one association to Producto
+@OneToMany(mappedBy = "seccione")
+private List<Producto> productos;
+```
 
-Podemos jugar con los valores Hiller o Leuzzi si no indicamos nada pues cada motor de persistencia definirá su propio valor y dependiendo del tipo de relación definirán su propio valor predeterminado.
+Por ejemplo aquí no queremos que al cargar un objeto `Seccion` al hacer un `find` al objeto `Seccion` o un `Query` no queremos que se carguen todos los objetos `Producto` relacionados de cada `Seccion` en la variable `productos`, solamente cuando se llame al método `getProductos()`. Bueno pues entonces si no queremos que se carguen inmediatamente había que hacer lo que se conoce como una carga perezosa `LAZY` y eso se indica como decía antes a través del atributo `Fetch`, indicando una de las dos posibles constantes que hemos hemos dicho antes. En nuestro caso queremos que sea `LAZY`, carga perezosa para que no sean encargado inmediatamente.
 
-Pero si queremos establecer uno concreto si tenemos esos atributos como vamos a ver ahora en uno de los ejercicios que hicimos en las lecciones anteriores el otro tipo de ajuste que podemos realizar son
+```java
+// bi-directional many-to-one association to Producto
+@OneToMany(mappedBy = "seccione", fetch=FetchType.LAZY)
+private List<Producto> productos;
+```
 
-las actualizaciones en cascada.
+Si queremos lo contrario, que se cargue todo al mismo momento en el que se carga también la sección, que vengan también sus productos, sería `EAGER`. Si no se dice nada, lo dejaríamos al valor por defecto que tenga cada motor de persistencia y cada relación, habría que consultar la documentación de dicho motor o proveedor de persistencia para ver cual es.
 
-Si nosotros hacemos una operación sobre una entidad una eliminación un refresco o una actualización qué pasa con los objetos de las entidades relacionadas se van a actualizar también se van a eliminar.
+Esto por un lado, sobre el tema de las actualizaciones en cascada. Por ejemplo tenemos una relación Uno a Muchos entre `Producto` y `Venta`, queremos que al ser eliminado un producto por ejemplo se eliminen todos sus ventas relacionadas. Podría tener sentido, porque si ya no existe un producto qué sentido tiene que estén registran sus ventas en la base de datos también. Entonces lo que podríamos hacer en la relación Uno a Muchos entre `Producto` y `Venta` que actualmente esta así en `Producto`:
 
-En principio no va a pasar nada con ellos a no ser que queramos nosotros propagar alguna o todas las operaciones sobre la identidad principal.
+```java
+//bi-directional many-to-one association to Venta
+@OneToMany(mappedBy="producto")
+private List<Venta> ventas;
+```
 
-También en las entidades relacionadas.
+```java
+//bi-directional many-to-one association to Venta
+@OneToMany(mappedBy="producto",cascade={CascadeType.REMOVE,CascadeType.MERGE})
+private List<Venta> ventas;
+```
 
-Eso lo vamos a indicar a través del atributo Cascade también de las mismas anotaciones.
 
-Cuánto Meini reditúan Toumani utilizando alguna de las constantes definidas en la notación Qashqai.
-
-Por ejemplo si a la hora de eliminar una entidad queremos que también se eliminen los objetos relacionados puesto que no tendría sentido lo mejor que quedarán esos objetos en la base de datos las filas correspondientes en la base de datos.
-
-Una vez que se ha eliminado la actividad principal podríamos propagar la operación de eliminación utilizando este valor en el atributo casque.
-
-Vamos a ver el atributo Qashqai y Ramu dentro del atributo Qashqai.
-
-Bueno lo mejor vamos a verlo como decía sobre uno de los ejercicios el último que hicimos el ejercicio práctico número 5 lo teníamos también la gestión de ventas y tal aunque bueno ahora vamos a centrarnos concretamente en las entidades setiene y producto por ejemplo ya sabemos que hay una relación uno a muchos y muchos a uno en sentido contrario pero hay uno una relación muchos entre sección y producto.
-
-Queremos que se carguen todos los productos dentro del atributo de colección de la entidad sección cuando se haga la localización o la búsqueda de una determinada sección o dependiendo si queremos que sea así o no sea así.
-
-Utilizaremos y configuramos el atributo Fetch que hemos comentado anteriormente dentro de la notación de la que define la relación.
-
-Por ejemplo aquí nosotros no queremos que al cargar un objeto sección al hacer un fino objeto sección o QWERTY no queremos que se carguen todos los objetos productos relacionados de cada sección.
-
-En esa variable solamente cuando se llame al método Ogueta a diez productos.
-
-Bueno pues entonces si no os queremos que se carguen inmediatamente había que hacer lo que se conoce como una carga perezosa y eso se indica como decía antes a través del atributo Fetch indicando una de las dos posibles constantes que hemos hemos dicho antes.
-
-En nuestro caso queremos que sea la carga perezosa para que no se ha encargado inmediatamente queremos lo contrario que se cargue todo el mismo momento en el que se carga también la sección pues que vengan también sus productos.
-
-Sería como si no se dice nada pues lo dejaríamos al valor por defecto que tenga cada motor de persistencia y según cada relación mixups habría que consultar la documentación de dicho motor o proveedor de persistencia.
-
-Esto por un lado sobre el tema de las actualizaciones las actualizaciones en cascada.
-
-Por ejemplo si nosotros queremos tenemos una relación uno a muchos entre producto y venta queremos que al ser eliminado un producto por ejemplo se eliminen todos sus ventas relacionadas.
-
-Podría tener sentido porque si ya no existe un producto qué sentido tiene que estén registran sus ventas en la base de datos también pues entonces lo que podríamos hacer en la relación uno a muchos entre producto y venta en cuanto Beni definiríamos el atributo Qashqai en el atributo Qashqai indicaremos.
+en cuanto Beni definiríamos el atributo Qashqai en el atributo Qashqai indicaremos.
 
 Pues que queremos propagar la operación de eliminación atravez.
 
