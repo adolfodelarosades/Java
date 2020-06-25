@@ -2747,21 +2747,69 @@ tx.commit();
 
 <img src="images/34-01.png">
 
-En la lección anterior hemos estado viendo la Hibernate y presentando algunos de los métodos más importantes de objetos.
+En la lección anterior hemos estado viendo el API de Hibernate y te he presentado algunos de los métodos más importantes de objetos `Session`
 
-Ahora en esta elección vamos a ver ya su aplicación directa en el ejercicio que estamos hemos comenzado a hacer ya sólo en la configuración de Hibernate de la gestión de los contactos.
+Ahora en esta lección vamos a ver ya su aplicación directa en el ejercicio que hemos comenzado a hacer ya sobre la configuración de Hibernate de la gestión de los contactos.
 
-Bueno volvamos a él.
+Volvamos a `615-14_web_jpa_hibernate` ya tenemos el archivo de configuración `hibernate.cfg.xml` partíamos ya de las entidades configuradas con anotaciones que teníamos originariamente en el ejercicio práctico `615-04_web_jpa` ahora lo que vamos a meter es el código del modelo pero utilizando Hibernate en lugar de JPA.
 
-Vamos a ver aquí ya teníamos una de las lecciones anteriores donde empezamos ya con Jiguaní Hibernate que creamos el hiberna y CFG XML.
+Lo primero ya lo he comentado en la lección anterior necesitamos encapsular todas las operaciones de obtención de un `SessionFactory` que es con el que obtendremos el objeto `Session` en un archivo `HibernateUtil` que normalmente se suele conocer así desde las primeras versiones de que se lleva utilizando Hibernate.
 
-Partíamos ya de las entidades configuradas con anotaciones que teníamos originariamente en el ejercicio práctico número 3 y ahora lo que vamos a meter ya es lo que sería el código del modelo pero utilizando Hibernate en lugar de JPA.
+Aquí tienes la clase `HibernateUtil`.
 
-Lo primero ya lo he comentado en la lección anterior necesitamos encapsular todas las operaciones de obtención de sesión Factory que es con el que obtendremos el objeto sesión en un archivo y Bernet útil que normalmente se suele conocer así desde las primeras versiones de que se lleva utilizando Internet.
+*`HibernateUtil`*
 
-Aquí tienes una clase me he creado Hibernate útil y este sería el código donde como puedes ver en método estático sesión Factory nos devuelve una implementación de sesión Factory y claro tensada preguntando de dónde has sacado todo esto.
+```java
+package modelo;
 
-Estas implementaciones están ya estandarizadas yo por ejemplo esa implementación la he sacado de aquí de esta página de Java jits ASP.NET y la tienes en muchos otros sitios porque es una implementación clásica de Hibernate útil para la versión de hiberna y 5 en adelante.
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+  private static StandardServiceRegistry registry;
+  private static SessionFactory sessionFactory;
+
+  public static SessionFactory getSessionFactory() {
+    if (sessionFactory == null) {
+      try {
+        // Create registry
+        registry = new StandardServiceRegistryBuilder()
+            .configure()
+            .build();
+
+        // Create MetadataSources
+        MetadataSources sources = new MetadataSources(registry);
+
+        // Create Metadata
+        Metadata metadata = sources.getMetadataBuilder().build();
+
+        // Create SessionFactory
+        sessionFactory = metadata.getSessionFactoryBuilder().build();
+
+      } catch (Exception e) {
+        e.printStackTrace();
+        if (registry != null) {
+          StandardServiceRegistryBuilder.destroy(registry);
+        }
+      }
+    }
+    return sessionFactory;
+  }
+
+  public static void shutdown() {
+    if (registry != null) {
+      StandardServiceRegistryBuilder.destroy(registry);
+    }
+  }
+}
+```
+
+Este sería el código donde como puedes ver el método estático `public static SessionFactory getSessionFactory()` nos devuelve una implementación de `SessionFactory` y claro te estaras preguntando de dónde he sacado todo esto.
+
+Estas implementaciones están ya estandarizadas yo por ejemplo esa implementación la he sacado de esta página https://www.javaguides.net/2018/11/hibernate-5-xml-configuration-example.html y la tienes en muchos otros sitios porque es una implementación clásica de Hibernate útil para la versión de hiberna y 5 en adelante.
 
 Esto luego en versiones han ido evolucionando distintas formas de obtener el session Factory que parece que cada vez es más complejo pero bueno es una forma de hacerlo de la manera más eficiente posible.
 
