@@ -2809,39 +2809,160 @@ public class HibernateUtil {
 
 Este sería el código donde como puedes ver el método estático `public static SessionFactory getSessionFactory()` nos devuelve una implementación de `SessionFactory` y claro te estaras preguntando de dónde he sacado todo esto.
 
-Estas implementaciones están ya estandarizadas yo por ejemplo esa implementación la he sacado de esta página https://www.javaguides.net/2018/11/hibernate-5-xml-configuration-example.html y la tienes en muchos otros sitios porque es una implementación clásica de Hibernate útil para la versión de hiberna y 5 en adelante.
+Estas implementaciones están ya estandarizadas yo por ejemplo esa implementación la he sacado de esta página https://www.javaguides.net/2018/11/hibernate-5-xml-configuration-example.html y la tienes en muchos otros sitios porque es una implementación clásica de `HibernateUtil` para la versión de Hibernate 5 en adelante.
 
-Esto luego en versiones han ido evolucionando distintas formas de obtener el session Factory que parece que cada vez es más complejo pero bueno es una forma de hacerlo de la manera más eficiente posible.
+Esto ha ido evolucionando en distintas formas de obtener el `SessionFactory` que parece que cada vez es más complejo pero bueno es una forma de hacerlo de la manera más eficiente posible.
 
-Tampoco tenemos que meternos al detalle de esto porque ya esto es un código ya bastante estandarizado y directamente cuando se llame este método es sesión Factory estatico de esta clase y vamos a obtener una implementación de assessor Factory sin decir muchos clientes que llamen a este método todos sostendrían la misma instancia y trabajaríamos sobre el mismo.
+Tampoco tenemos que meternos al detalle de esto porque ya esto es un código ya bastante estandarizado y directamente cuando se llame al método estatico `getSessionFactory()` de esta clase `HibernateUtil` vamos a obtener una implementación de `SessionFactory` por muchos clientes que llamen a este método todos obtendrían la misma instancia y trabajaríamos sobre el mismo `SessionFactory`.
 
-Sesión Factory.
+Bueno ya tenemos esta clase que se ha creado dentro del paquete `modelo` donde están los EJBs con la lógica de negocio vamos a hacer uso de ella para implementar todas las funcionalidades del modelo. 
 
-De todas formas yo te dejaré el archivo para que te lo pueda descargar directamente los recursos de la lección.
+Recordemos que en nuestro modelo tenemos las clases `GestionContactosEjb` y `GestionUsuarioEjb`  vamos a poner su código actual.
 
-Bueno vamos a volver al código y bueno suponiendo que ya tenemos esta clase que ha creado dentro del paquete modelo donde están los JBS con la lógica de negocio con el código que ya he visto ahí pues vamos a ver si hacemos uso de ella para implementar todas las funcionalidades del modelo entonces.
+*`GestionContactosEjb`*
 
-Bueno pues aquí tenemos como la implementación que originariamente teníamos con JPA pues lógicamente esto ya no ya no ya no es así sino que ahora pues a nivel de cada método tendremos que tener la posesión Yamal a los métodos que hemos comentado en la lección anterior y cuando haya que aplicar transaccionalidad pues habrá que probarlo dentro de una transacción y así va a ser como por ejemplo pues vamos empezando ya por este método alta contacto vale entonces aquí lo que tendremos que obtener pues es un objeto sesión vamos a ir mezclando la variable y claro que qué necesitamos y Bernadet útil vamos a ir importando para que me aparezca la ayuda los todos los métodos con mayúsculas y vamos importando de accesión Factory y a partir de la opción Factory obtenemos el cesio vamos a ver qué haces en un factor de escurran sesión aquí la que nos devolvería una implementación del objeto sesión.
+```java
+package modelo;
 
-Vamos como digo de importar para que podamos importar adecuadamente las clases que sean por sesión.
+import java.util.List;
 
-Pues como veis puedes encontrar muchas clases de referencias que tengas en tu proyecto que hagan referencia a un tipo sesión.
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-En nuestro caso obviamente es jaibas.
+import entidades.Contacto;
 
-Pues a partir del sesión ya podríamos realizar la persistencia del contacto muy importante que el objeto sesión.
+/**
+ * Session Bean implementation class GestionContactosEjb
+ */
+@Stateless
+public class GestionContactosEjb implements GestionContactosEjbLocal {
 
-Pues aquí tenemos que preocuparnos también nosotros como JPA que es más automático de la obtención y de su cierre entonces lo vamos a meter en un traje con recursos y con recursos es una versión de El troikas de Java que te permite pues cierre automático de los recursos como indica su nombre es decir que automáticamente cuando se abandona el Troy el objeto que has creado dentro de los paréntesis se cierra y no tenemos que estar preocupándonos de cerrarlo o de meter el cierre dentro suvez del total Catch.
+   @PersistenceContext(unitName="615-14_web_jpa_hibernate")
+   EntityManager em;
+   public void altaContacto(String nombre, String email, int telefono) {
+      Contacto c = new Contacto(email, nombre, telefono);
+		
+      em.persist(c);
+   }
 
-Es más el recurso ni siquiera necesita un catch porque su misión podríamos tenerlo pero no es el objetivo captura ninguna sección sino que realizar el aprovecharnos del auto cierre de los recursos.
+   public void altacontacto(Contacto c) {
+		
+      em.persist(c);
+		
+   }
+	
+   public void eliminarContacto(int idContacto) {
+		
+      Contacto c = em.find(Contacto.class, idContacto);
+		
+      if(c != null) {
+	 em.remove(c);
+      }
+		
+   }
+	
+   public void eliminarContactosPorEmail(String email){
+		
+      Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+      qr.setParameter(1, email);
+		
+      qr.executeUpdate();
+		
+   }
+	
+   public List<Contacto> recuperarContactos(){
+		
+      /*Query qr = em.createQuery("Select c From Contacto c");
+      return (List<Contacto>)qr.getResultList();*/
+      TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+      return qr.getResultList();
+   }
+	
+   public Contacto buscarContactos(String email){
+				
+      String jpql = "Select c From Contacto c Where c.email = ?1";
+      TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+      qr.setParameter(1, email);
+      //return qr.getSingleResult();
+      return qr.getResultList().get(0);
+   }
 
-Bueno pues entonces aquí tenemos el objeto contacto vamos a una extracción aquí porque lo vamos a necesitar y otra cosa importante necesitamos englobar esto dentro de una transacción.
+}
+```
 
-Como ya dijimos a partir del objeto sesión podemos crear una transacción comenzarla es decir obtendríamos el objeto transaction y ya se comenzaría esa transacción.
+*`GestionUsuarioEjb`*
 
-Importamos importamos o Bernet transaction que es el tipo que a nosotros nos interesa y a partir de ahí creamos el objeto contacto y hacemos la persistencia que era el método si recuerdo recuerdas el método 6 del objeto Cs.
+```java
+package modelo;
 
-Vale que es el que hemos creado a ella le pasamos el objeto con que queremos coexistir con ella lo tenemos es esto si la podemos borrar que es la antigua que teníamos y ya tenemos una parte ya de la implementación de Verneuil pues en esa línea vamos a ir todo.
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import entidades.Usuario;
+
+
+@Stateless
+public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
+   @PersistenceContext(unitName="615-14_web_jpa_hibernate")
+   EntityManager em;
+   @Override
+   public boolean autenticar(String usuario, String pwd){
+		
+      boolean res=false;
+      TypedQuery<Usuario> qr=em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+      qr.setParameter(1, usuario);
+      qr.setParameter(2, pwd);
+      try{
+         qr.getSingleResult();
+	 res=true;
+      }catch(Exception ex){
+	 ex.printStackTrace();
+      }
+      return res;
+   }
+}
+```
+
+Bueno aquí tenemos la implementación que originariamente teníamos con JPA.
+
+Esto ya no va a ser así por ejemplo para obtener la Unidad de Persistencia tenemos:
+
+```java
+@PersistenceContext(unitName="615-14_web_jpa_hibernate")
+EntityManager em;
+```
+
+Esto lo haciamos con JPA pero en este proyecto ya no tenemos ni rastro del `persistence.xml` lo hemos eliminado por lo que ambas sentencias ya no las vamos a usar con Hibertate. Ahora a nivel de cada método tendremos que obtener el objeto `Session` llamar a los métodos que hemos comentado en la lección anterior y cuando haya que aplicar transaccionalidad pues habrá que englobarlo dentro de una transacción así va a ser. 
+
+Vamos empezando ya por este método `altaContacto` de `GestionContactosEjb`.
+
+```java
+public void altaContacto(String nombre, String email, int telefono) {
+   Contacto c = new Contacto(email, nombre, telefono);
+   em.persist(c);
+}
+```
+
+Aquí lo que tendremos que obtener es un objeto `Session` vamos a ir declarando la variable y claro que necesitamos `Session s = HibernateUtil.getSessionFactory().getCurrentSession();` aquí nos devolvería una implementación del objeto `Session`. Finalmente su utilizo mejor `Session s = HibernateUtil.getSessionFactory().openSession();` por que el problema recide que al usar `getCurrentSession()` nos devolvería la sesión actual si es que se ubiera abierto alguna como las vamos ir abriendo y cerrando no hay ninguna abierta. El método `getCurrentSession()` lo podemos tener en un contexto donde ya hay una sesión creada y que se este compartiendo pero si lo que queremos es ir abriendo y cerrando nuestras sesiones para ganar en eso cierta eficiencia en vez de `getCurrentSession()` usamos `openSession()`.  
+
+A partir del `Session` ya podríamos realizar la persistencia del Contacto, muy importante que el objeto `Session`, aquí tenemos que preocuparnos también nosotros no como JPA que es más automático, de **la obtención y de su cierre** entonces lo vamos a meter en un `try` con recursos, un `try` con recursos es una versión de `try-catch` de Java que te permite el cierre automático de los recursos como indica su nombre, es decir que automáticamente cuando se abandona el `try` el objeto que has creado dentro de los paréntesis se cierra y no tenemos que estar preocupándonos de cerrarlo o de meter el cierre dentro del `catch`, es más el `try` con recursos ni siquiera necesita un `catch` porque su misión, podríamos tenerlo pero no es el objetivo captura ninguna excepción sino aprovecharnos del auto cierre de los recursos. Las sentencias irian dentro del `try` y otra cosa importante necesitamos englobarlas dentro de una transacción. Como ya dijimos a partir del objeto `Session` podemos crear una transacción comenzarla es decir obtendríamos el objeto `Transaction` y ya se comenzaría esa transacción, importamos `org.hibernate.Transaction` que es el tipo que a nosotros nos interesa y a partir de ahí creamos el objeto contacto y hacemos la persistencia que era el método si recuerdas el método `save` del objeto `Session` que es el que hemos creado y le pasamos el objeto que queremos persistir ya lo tenemos.
+
+```java
+public void altaContacto(String nombre, String email, int telefono) {
+   try (Session s = HibernateUtil.getSessionFactory().openSession();){
+      Transaction tx = s.beginTransaction();
+      Contacto c = new Contacto(email, nombre, telefono);
+      s.save(c);
+      tx.commit();
+   }
+}
+```
+
 
 Aquí teníamos otra versión de alta contacto donde en vez de recibir los datos por separado ya recibíamos el objeto contacto por bueno vamos a copiar esto o incluso desde aquí podríamos llamar también a este método es decir podremos hacer aquí un alto contacto y pasar directamente los parámetros punto del nombre ya que tenemos el código para no volver a repetirlo.
 
