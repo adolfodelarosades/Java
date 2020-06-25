@@ -3027,120 +3027,979 @@ public Contacto buscarContactos(String email){
 
 El código con Hibernate es:
 
-AQUUUUU
 
-Cogemos esa instrucción que nos sirve tal cual porque es el mismo método de resultas como hemos explicado en el capítulo anterior.
+```java
+public Contacto buscarContactos(String email){				
+   String jpql = "Select c From Contacto c Where c.email = ?1";
+   try (Session s = HibernateUtil.getSessionFactory().openSession();){
+      Query<Contacto> qr = s.createQuery(jpql, Contacto.class);
+      qr.setParameter(1, email);
+      return qr.getResultList().get(0);
+   }
+}
+```
 
-Esta anotación aquí como aquí no hay transaccionalidad esto no nos va a hacer falta.
+Bueno pues aquí tenemos lo mismo tenemos que crear una Query con la JPQL que recibe un parámetro. El Query es muy parecido prácticamente igual al `TypedQuery` de JPA y bueno de la lista de resultados nos quedamos con el primero.
 
-Vamos a borrar tenemos una tarea de gestión automática de transacciones y eso hoy no lo necesitamos.
+Vamos con el siguiente método `eliminarContacto(int idContacto)` el código original es:
 
-Además no nos va a hacer nada porque al utilizar Internet las transacciones lo vamos a tener que gestionar nosotros manualmente y solamente la vamos a aplicar cuando sean instrucciones de acción como Yakumo.
+```java
+public void eliminarContacto(int idContacto) {
+		
+   Contacto c = em.find(Contacto.class, idContacto);
+		
+   if(c != null) {
+      em.remove(c);
+   }
+		
+}
+```
 
-Bueno pues venga vamos a seguir copiamos esta estructura para el siguiente buscar contactos.
+La estructura para este método es muy similar a la del alta puesto que la instrucción para inicio de transacción aquí la voy a necesitar ya que estas instrucciones como es una eliminación deben de ir dentro de una transacción.
 
-Bueno pues aquí tenemos lo mismo tenemos que crear un acuerdo con la J.P. cuele desde el sur.
+Hacemos una búsqueda del contacto por Primary Key en este caso será el objeto sesión método `get` que es el equivalente al `find`, si dejaba el `find` también funcionaba porque como ya te comenté en el capítulo anterior se puede utilizar los métodos de JPA porque ya van incorporados también dentro de las nuevas versiones de la interfaz sesión de Hibernate. Pero bueno estamos trabajando con los originales. Aquí lo que vamos a hacer para eliminar la instancia de Contacto es llamar al método `delete` le pasamos el Contacto y lo elimina si existe la instancia. El método con Hibernate nos queda así:
 
-Esta instrucción la pueden meter incluso en el tema de los parámetros normales.
+```java
+public void eliminarContacto(int idContacto) {
+		
+   try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			
+      Transaction tx = s.beginTransaction();
+      Contacto c = s.get(Contacto.class, idContacto);
+      if(c != null) {
+	 s.delete(c);
+      }
+      tx.commit();
+   }
+		
+}	
+```
 
-Si cogemos tal o cual no lo copiamos etc..
+Nos falta el método `eliminarContactosPorEmail(String email)`
 
-Fuera entonces bueno pues fíjate creamos la web y establecemos el parámetro de igual método el mismo método para meter el cual es muy parecido.
+```java
+public void eliminarContactosPorEmail(String email){
+		
+   Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+   qr.setParameter(1, email);
+		
+   qr.executeUpdate();
+		
+}
+```
 
-Prácticamente igual al Pasquali de KPA y bueno de la lista de resultados nos quedamos con el primero en buscar contacto eliminar contacto.
+En este caso estamos usando una `NamedQuery` pero es una `NamedQuery` de acción por lo que también necesitariamos estar dentro de una transacción. El método con Hibernate nos queda así:
 
-Una vez más vamos a copiar la estructura lo que pasa que debía copiar la estructura del alta puesto que la instrucción para inicio de transacción aquí la voy a necesitar ya que estas instrucciones como es una eliminación deben de venir dentro de una transacción.
+```java
+public void eliminarContactosPorEmail(String email){
+		
+   try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			
+      Transaction tx = s.beginTransaction();
+      Query qr=s.createNamedQuery("Contacto.deleteByEmail");
+      qr.setParameter(1, email);
+			
+      qr.executeUpdate();
+      tx.commit();
+   }
 
-Cuando hacemos una búsqueda del contacto por primary key en este caso será el objeto sesión método Geeta que es el equivalente al fin.
+}
+```
 
-Ya he visto que si dejaba el Fain también funcionaba porque como ya te comenté en el capítulo anterior se puede utilizar los métodos de JPA porque llevan incorporados también dentro de las nuevas versiones de la interfaz sesión de Internet.
+Como vemos es bastante similar a como hemos trabajado con JPA sólo que aquí bueno gestionando manualmente digamos las transacciones.
 
-Pero bueno estamos trabajando con los originales.
 
-Vale y entonces.
+En `GestionUsuarioEjb` lo mismo el `@PersistenceContext` y `EntityManager` lo vamos a quitar. Tenemos el método `autenticar(String usuario, String pwd)`.
 
-Pues aquí lo que vamos a hacer para eliminar la instancia de contacto es un método de llamada método de alerta pasamos el todo contacto en la librería bajo la pregunta.
+```java
+@Override
+public boolean autenticar(String usuario, String pwd){
+		
+   boolean res=false;
+   TypedQuery<Usuario> qr=em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+   qr.setParameter(1, usuario);
+   qr.setParameter(2, pwd);
+   try{
+      qr.getSingleResult();
+      res=true;
+   }catch(Exception ex){
+      ex.printStackTrace();
+   }
+   return res;
+   
+}
+```
 
-Efectivamente cierto que esto había que hacerlo poquito más y para preguntar si existe la estancia o si no existe la estancia no tenemos nada que eliminar.
+Aquí tenemos que crear un `TypedQuery` a partir de una `NamedQuery` que ya teníamos proporcionan los parámetros. Bueno pues esto mismo vamos a traducirlo a Hibernate.
 
-Vale entonces la recuperamos y si existe la eliminamos compramos por su clave primaria y ya por último nos quedaría dentro de esta clase de JB pues la eliminación de contactos por email en este caso figote estamos utilizando una name equally pero es una name Kourí de acción.
+```java
+@Override
+public boolean autenticar(String usuario, String pwd){
+		
+   boolean res=false;
+   try (Session s = HibernateUtil.getSessionFactory().openSession();){
+      Query<Usuario> qr=s.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+      qr.setParameter(1, usuario);
+      qr.setParameter(2, pwd);
+      try{
+	 qr.getSingleResult();
+	 res=true;
+      }catch(Exception ex){
+	 ex.printStackTrace();
+      }
+      return res;
+   }
+}
+```
 
-Por lo tanto también tenemos que estar dentro de una transacción así que vamos a ver porque hay una cosita aquí no sé si taladrado cuenta pero se me ha olvidado realizar también en el primer ejemplo en el primer método donde salvamos la entidad y es confirmar la transacción.
-
-Saito confirma y confirma los explicitamente entonces vamos a empezar por aquí por el alta contacto.
-
-Cuando se me había olvidado hacer la operación commit porque si no no se confirmaría no quedaría reflejada en la base de datos aquí.
-
-Pues lo mismo con el L.T X punto com vale.
-
-Bueno pues nos quedaba esta eliminación de contactos por email.
-
-Vamos a copiar toda esta estructura que nos puede servir porque en este caso si lo que necesitamos es una Mercury llamada Executiu.
-
-Todo esto lo cortamos y vamos a sustituir por la que teníamos antes de recuperación eliminación.
-
-Y como es creatinina name Kairi repasarla name Cuadri.
-
-Este es el nombre original que tiene la entidad porque las entidades no las hemos cambiado mismo métodos actitude y confirmar.
-
-Como vemos es bastante similar a como hemos trabajado con JPA sólo que aquí bueno gestionando manualmente digamos las transacciones gestión usuarios pues también teníamos aquí un método que el método autenticar.
-
-Bueno lo mismo esto Identity Manager lo vamos a quitar y aquí tenemos que crear una Tacuri a partir de una nave Juriquilla teníamos proporcionan los parámetros.
-
-Bueno pues esto mismo.
-
-Venga vamos a traducirlo a Internet.
-
-Entonces como siempre la estructura el trade con recursos lo vamos a llevar aquí no podemos poner después a continuación la declaración de la variable Pullen.
-
-Y bueno primero la acuerdo sí que vamos a ir copiando cosas bueno mejor cortando Cory Monteith Mercuri usuario y el objeto sesione al importar QWERTY como sabes.
-
-Pues tiene que ser el cuadri de Rajoy ni te. 
-
-Todo esto es lo mismo que la forma de crearla es la misma.
-
-Establecimiento de los parámetros captura de una sesión si no hay un resultado bueno esto es exactamente igual así que me lo voy a llevar también.
-
-Aquí dentro bueno exactamente igual con la salvedad de que no hay ninguna salvedad la variable la llamada también QR o sea tal cual está.
-
-Por lo tanto.
-
-Bueno pues ya hemos reimplantado la lógica de negocio que teníamos hecha con JPA dentro de JB.
-
-Pues sí con el JB es manteniendo la misma lógica forma de la lógica de negocio pero utilizando la pide y Bernays.
+Ya hemos reimplementado la Lógica de Negocio que teníamos hecha con JPA dentro de EJB pero utilizando el API de Hibernate.
 
 Pues nada ahora sería cuestión de probar el ejercicio y verificar que funciona exactamente igual que antes.
 
-Vamos a ello nos colocamos encima la página Lubin botón derecho runas observase seleccionamos algunas feeds y esperamos a que se inicie el servidor y nos lance la página 
-una vez que hayas arrancado aquí tenemos la página del Lovin para que nos adentraremos bien.
+Vamos a ello nos colocamos encima la página `login` botón Run Ass.. Run on Server y esperamos a que se inicie el servidor y nos lance la página una vez que hayas arrancado aquí tenemos la página del `login` para que nos autentiquemos.
 
-Pues venga vamos a meter las credenciales que supuestamente están en la base de datos 3 1 2 1 y al pulsar el botón Enviar.
+<img src="images/34-02.png">
 
-Pues vamos a obtener un error 500.
+<img src="images/34-03.png">
 
-Vamos a ver cuál es.
+<img src="images/34-04.png">
 
-Ahora ya te explican en qué va a consistir el error y por qué nos dice que si vamos PJD es exception si vamos bajando llega un momento que nos dice que no hay una sesión abierta no ocurren sesión contes.
+Como podemos observar al intentarautenticarnos nos presenta un error 
 
-Por qué ha sido eso.
+```
+Caused by: java.sql.SQLNonTransientConnectionException: Cannot open file:/Users/adolfodelarosa/Documents/Udemy2020/Cursos/OW/615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate/download/glassfish5/glassfish/domains/domain1/config/keystore.jks [Keystore was tampered with, or password was incorrect]
+```
 
-Bueno volvemos otra vez al modelo a los métodos que hemos ido creando y bueno el problema aquí reside básicamente en que al llamar al Guez ocurre sesión nos devolvería digamos la sesión actual si es que se hubiera abierto alguna como las hemos ido abriendo y cerrando no hay ninguna abierta.
+Este error ya nos suena de clases pasadas y se arregla insertando esta línea en el archivo `hibernate.cfg.xml`:
 
-Entonces served current Session es un método que si lo podemos tener un contexto donde hay una sesión ya creada y que se esté compartiendo.
+`<property name="hibernate.connection.useSSL">false</property>`
 
-Pero si lo que queremos es ir abriendo y cerrando nuestras sesiones para ganar en eso cierta eficiencia pues en vez de que curren sesión utilizaríamos Open session vale bueno o vamos a ir sustituyendo en todos los sitios donde tenemos a ver aquí sesión también aquí también y aquí tan Bale y en el otro no tenemos nada más que 1 lo tenemos guardamos todos los cambios y volvemos a probar de nuevo recuperamos la página del Odin vamos a ver 3 1 3 1 que son los usuarios que tenemos en la tabla de usuarios.
+Al probar nuevamente tenemos:
 
-Tramos tardado un poquito lo cual significa una buena señal.
+<img src="images/34-05.png">
 
-Vamos a ver la lista de contactos aquí tenemos la lista de contactos donde nos aparecen todos los contactos que teníamos en la base de datos.
+<img src="images/34-06.png">
 
-Bueno por ejemplo vamos a ver si es capaz de eliminar efectivamente Limina o vamos al menú y vamos ya crear la última prueba.
+<img src="images/34-07.png">
 
-1 contacto contar a junto con un número de teléfono guardamos aquí debería aparecer efectivamente el nuevo contacto o la lista.
+<img src="images/34-08.png">
 
-Como veis funciona exactamente igual que el otro difrencia en el ejercicio 3 utilizamos JPA en todos los ámbitos de lo que es creación y utilización de capa persistencia y aquí hemos utilizado Internet.
+<img src="images/34-09.png">
 
-# 35 Ell API Criteria 03:44
+<img src="images/34-10.png">
+
+<img src="images/34-11.png">
+
+Como ves funciona exactamente igual que el otro a difrencia que en el proyecto `615-04_web_jpa` utilizamos JPA en todos los ámbitos de lo que es creación y utilización de capa persistencia y aquí hemos utilizado Hibernate.
+
+### :computer: Código Completo - 615-14_web_jpa_hibernate
+
+<img src="images/34-12.png">
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>615-14_web_jpa_hibernate</groupId>
+	<artifactId>615-14_web_jpa_hibernate</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.18.Final</version>
+		</dependency>
+	</dependencies>
+</project>
+```
+
+*`hibernate.cfg.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">root</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/agenda</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="hibernate.connection.useSSL">false</property>
+  <mapping class="entidades.Contacto"/>
+  <mapping class="entidades.Usuario"/>
+ </session-factory>
+</hibernate-configuration>
+```
+
+**Entidades**
+
+*`Contacto`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the contactos database table.
+ * 
+ */
+@Entity
+@Table(name="contactos")
+@NamedQueries({
+	@NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c"),
+	@NamedQuery(name="Contacto.deleteByEmail", query="DELETE FROM Contacto c WHERE c.email=?1")
+})
+
+public class Contacto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idContacto;
+
+	private String email;
+
+	private String nombre;
+
+	private int telefono;
+
+	public Contacto() {
+	}
+
+	public Contacto(String email, String nombre, int telefono) {
+		super();
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public Contacto(int idContacto, String email, String nombre, int telefono) {
+		super();
+		this.idContacto = idContacto;
+		this.email = email;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public int getIdContacto() {
+		return this.idContacto;
+	}
+
+	public void setIdContacto(int idContacto) {
+		this.idContacto = idContacto;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+}
+```
+
+*`Usuario`*
+
+```java
+package entidades;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the usuarios database table.
+ * 
+ */
+@Entity
+@Table(name="usuarios")
+@NamedQueries({
+   @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
+   @NamedQuery(name="Usuario.findByUserAndPwd", query="SELECT u FROM Usuario u Where u.usuario=?1 and u.password=?2")
+})
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUsuario;
+
+	private String password;
+
+	private String usuario;
+
+	public Usuario() {
+	}
+
+	public int getIdUsuario() {
+		return this.idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+}
+```
+
+**Modelo**
+
+*`HibernateUtil`*
+
+```java
+package modelo;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+  private static StandardServiceRegistry registry;
+  private static SessionFactory sessionFactory;
+
+  public static SessionFactory getSessionFactory() {
+    if (sessionFactory == null) {
+      try {
+        // Create registry
+        registry = new StandardServiceRegistryBuilder()
+            .configure()
+            .build();
+
+        // Create MetadataSources
+        MetadataSources sources = new MetadataSources(registry);
+
+        // Create Metadata
+        Metadata metadata = sources.getMetadataBuilder().build();
+
+        // Create SessionFactory
+        sessionFactory = metadata.getSessionFactoryBuilder().build();
+
+      } catch (Exception e) {
+        e.printStackTrace();
+        if (registry != null) {
+          StandardServiceRegistryBuilder.destroy(registry);
+        }
+      }
+    }
+    return sessionFactory;
+  }
+
+  public static void shutdown() {
+    if (registry != null) {
+      StandardServiceRegistryBuilder.destroy(registry);
+    }
+  }
+}
+```
+
+*`GestionContactosEjbLocal`*
+
+```java
+package modelo;
+
+import java.util.List;
+import javax.ejb.Local;
+import entidades.Contacto;
+
+@Local
+public interface GestionContactosEjbLocal {
+	
+	public void altaContacto(String nombre, String email, int telefono);
+	public void altacontacto(Contacto c);
+	public void eliminarContacto(int idContacto);
+	public void eliminarContactosPorEmail(String email);
+	public List<Contacto> recuperarContactos();
+	public Contacto buscarContactos(String email);
+						
+}
+```
+
+*`GestionContactosEjb`*
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import entidades.Contacto;
+
+/**
+ * Session Bean implementation class GestionContactosEjb
+ */
+@Stateless
+public class GestionContactosEjb implements GestionContactosEjbLocal {
+
+	public void altaContacto(String nombre, String email, int telefono) {
+		try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			
+			Transaction tx = s.beginTransaction();
+			Contacto c = new Contacto(email, nombre, telefono);
+			s.save(c);
+			tx.commit();
+		}
+	}
+
+	public void altacontacto(Contacto c) {
+		
+		altaContacto(c.getNombre(), c.getEmail(), c.getTelefono());
+		
+	}
+	
+	public void eliminarContacto(int idContacto) {
+		
+		try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			
+			Transaction tx = s.beginTransaction();
+			Contacto c = s.get(Contacto.class, idContacto);
+			if(c != null) {
+			   s.delete(c);
+			}
+			tx.commit();
+		}
+		
+	}
+	
+	public void eliminarContactosPorEmail(String email){
+		
+		
+		try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			
+			Transaction tx = s.beginTransaction();
+			Query qr=s.createNamedQuery("Contacto.deleteByEmail");
+			qr.setParameter(1, email);
+			
+			qr.executeUpdate();
+			tx.commit();
+		}
+
+	}
+	
+	public List<Contacto> recuperarContactos(){
+		
+		String jpql = "Select c From Contacto c";
+		try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			Query<Contacto> qr = s.createQuery(jpql, Contacto.class);
+			return qr.getResultList();
+		}
+	}
+	
+	public Contacto buscarContactos(String email){
+				
+		String jpql = "Select c From Contacto c Where c.email = ?1";
+		try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			Query<Contacto> qr = s.createQuery(jpql, Contacto.class);
+			qr.setParameter(1, email);
+			return qr.getResultList().get(0);
+		}
+
+	}
+
+}
+```
+
+*`GestionUsuarioEjbLocal`*
+
+```java
+package modelo;
+
+import javax.ejb.Local;
+
+@Local
+public interface GestionUsuarioEjbLocal {
+	
+	boolean autenticar(String usuario, String pwd);
+
+}
+```
+
+*`GestionUsuarioEjb`*
+
+```
+package modelo;
+
+import javax.ejb.Stateless;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import entidades.Usuario;
+
+
+@Stateless
+public class GestionUsuarioEjb implements GestionUsuarioEjbLocal {
+	
+	@Override
+	public boolean autenticar(String usuario, String pwd){
+		
+		boolean res=false;
+		try (Session s = HibernateUtil.getSessionFactory().openSession();){
+			Query<Usuario> qr=s.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+			qr.setParameter(1, usuario);
+			qr.setParameter(2, pwd);
+			try{
+				qr.getSingleResult();
+				res=true;
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			return res;
+		}
+	}
+
+}
+```
+
+**Servlets-Controller**
+
+*`Controller`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Controller
+ */
+@WebServlet("/Controller")
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String op = request.getParameter("op");
+		String url = "";
+		switch (op) {
+		case "doLogin":
+			url = "LoginAction";
+			break;
+		case "doAlta":
+			url = "AltaAction";
+			break;
+		case "doEliminar":
+			url = "EliminarAction";
+			break;
+		case "doRecuperar":
+			url = "RecuperarAction";
+			break;
+		case "toNuevo":
+			url = "nuevo.html";
+			break;
+		case "toMenu":
+			url = "menu.html";
+			break;
+
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+}
+```
+
+*`LoginAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import modelo.GestionUsuarioEjbLocal;
+
+/**
+ * Servlet implementation class LoginAction
+ */
+@WebServlet("/LoginAction")
+public class LoginAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionUsuarioEjbLocal gusuarios;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String user=request.getParameter("user");
+		String pwd=request.getParameter("pwd");
+		
+		if(gusuarios.autenticar(user, pwd)){
+			//guardamos el nombre de usuario en un atributo de sesión
+			HttpSession s=request.getSession();
+			s.setAttribute("user", user);
+			request.getRequestDispatcher("menu.html").forward(request, response);
+		}else{
+			request.getRequestDispatcher("login.html").forward(request, response);
+		}
+	}
+
+}
+```
+
+*`RecuperarAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entidades.Contacto;
+import modelo.GestionContactosEjbLocal;
+
+/**
+ * Servlet implementation class RecuperarAction
+ */
+@WebServlet("/RecuperarAction")
+public class RecuperarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionContactosEjbLocal gcontactos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<Contacto> contactos=gcontactos.recuperarContactos();
+		//guardamos contactos en un atributo de petición
+		request.setAttribute("contactos", contactos);
+		//trasnferencia de la petición
+		request.getRequestDispatcher("contactos.jsp").forward(request, response);
+	}
+
+}
+```
+
+*`EliminarAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactosEjbLocal;
+
+/**
+ * Servlet implementation class EliminaContacto
+ */
+@WebServlet("/EliminarAction")
+public class EliminarAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionContactosEjbLocal gcontactos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idContacto=Integer.parseInt(request.getParameter("idContacto"));
+		
+		gcontactos.eliminarContacto(idContacto);
+		request.getRequestDispatcher("RecuperarAction").forward(request, response);
+	}
+
+}
+```
+
+*`AltaAction`*
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.GestionContactosEjbLocal;
+
+/**
+ * Servlet implementation class AltaContacto
+ */
+@WebServlet("/AltaAction")
+public class AltaAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	GestionContactosEjbLocal gcontactos;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nombre=request.getParameter("nombre");
+		String email=request.getParameter("email");
+		int telefono=Integer.parseInt(request.getParameter("telefono"));
+		//creamos un objeto de la capa de lógica de negocio
+		//y llamamos al método encargado de hacer el alta
+		
+		gcontactos.altaContacto(nombre,email,telefono);
+		request.getRequestDispatcher("menu.html").forward(request, response);
+	}
+
+}
+```
+
+**Vista**
+
+*`login.html`*
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="Controller?op=doLogin" method="post">
+		Usuario:<input type="text" name="user"/><br/>
+		Contraseña:<input type="password" name="pwd"/><br/>
+		<input type="submit" value="Enviar"/>
+	
+	</form>
+</body>
+</html>
+```
+
+*`menu.html`*
+
+```html
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <center>
+        <a href="Controller?op=toNuevo">Nuevo contacto</a><br/>
+        <a href="Controller?op=doRecuperar">Ver contactos</a><br/>
+    </center>
+    </body>
+</html>
+```
+
+*`contactos.jsp`*
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="java.util.ArrayList"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<c:set var="contactos" value="${requestScope.contactos}"/>
+	
+	<br/><br/><br/>
+	
+	<c:choose>
+	
+		<c:when test="${!empty contactos}">
+	
+			<table border="1">
+						<tr>
+							<th>Nombre</th>
+							<th>Email </th>
+							<th>Telefono</th>
+							<th></th>
+						</tr>
+						
+						<c:forEach var="cont" items="${contactos}">
+							<tr><td>${cont.nombre}</td>
+							<td>${cont.email}</td>
+							<td>${cont.telefono}</td>
+							<td><a href="Controller?op=doEliminar&idContacto=${cont.idContacto}">Eliminar</a></td></tr>
+						
+						
+						</c:forEach>
+						
+						
+						
+			</table>
+		</c:when>
+		<c:otherwise>
+			<h1>No hay contactos</h1>
+		</c:otherwise>
+	</c:choose>
+	<br/>
+	<br/>
+	<a href="Controller?op=toMenu">Menu</a>
+</body>
+</html>
+```
+
+*`nuevo.html`*
+
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>nuevo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+ 	function comprobar(){ 	
+ 		if(document.getElementById("nombre").value==""||
+ 			document.getElementById("email").value==""||
+ 			document.getElementById("edad").value==""){
+ 				alert("faltan datos");
+ 			return false;
+ 		}
+ 		else{
+ 			return true;
+ 		}
+ 		
+ 	}
+        function comprobarEdad(){
+            if(isNaN(document.getElementById("edad").value)){
+                alert("Edad debe ser numérico");
+                document.getElementById("edad").value="";
+            }
+        }
+</script>
+</head>
+<body>
+<form action="Controller?op=doAlta" method="post" onsubmit="return comprobar();">
+	Nombre:<input id="nombre" type="text" name="nombre"/>
+	<br/>
+	Email:<input id="email" type="text" name="email"/>
+	<br/>
+        Telefono:<input id="edad" onblur="comprobarEdad();" type="text" name="telefono"/>
+	<br/>
+	<input type="submit" value="Guardar"/>
+</form>
+</body>
+</html>
+```
+
+
+
+# 35 El API Criteria 03:44
 
 El API criteria de JPA es una alternativa al uso de Query/JPQL de cara a realizar consultas sobre la capa de persistencia. La diferencia fundamental entre uno y otro método de consulta es que mediante el API criteria construimos las consultas de forma dinámica a través de objetos, sin necesidad de predefinir las instrucciones con un lenguaje especial de consulta como JPQL.
 
