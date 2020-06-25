@@ -2714,28 +2714,34 @@ De todas formas después veremos un ejemplo donde utilizaremos los métodos clá
 
 <img src="images/33-05.png">
 
-<img src="images/33-06.png">
-
 Además por supuesto tenemos las consultas para realizar operaciones complejas como recuperaciónde un conjunto de entidades o recuperación de alguna entidad a partir de una condición que no involucra la Primary Key, eliminación o actualización de conjunto entidades.
 
 Para ello bueno igual que en JPA utilizaremos un lenguaje, una variante del SQL llamada en este caso `HQL` Hibernate QL que es casi idéntico a JPQL.
 
 Una vez que tenemos confeccionada la consulta, la gestionaremos a través de `Query` el mismo nombre que la correspondiente interfaz de JPA. De hecho aquí no tenemos un `TypedQuery` usamos directamente `Query` con tipo, de modo que podemos crear una `Query` a partir de una HQL de selección indicando el tipo de entidad que queremos recuperar.
 
-Los métodos pues como ves son los mismos que tenía la interfaz `Query` de JPA:
+Los métodos como ves son los mismos que tenía la interfaz `Query` de JPA:
 
+* `getResultList()` para devolver una lista entidades
+* `getSingleResult()` cuando solamente es un único resultado una única entidad
+* `executeUpdate()` si se trata de una consulta de acción
 
-su para devolver una lista entidades sin que el resto cuando solamente es un único resultado una única entidad y si se trata de una consulta de acción execute o es un proceso va a ser el mismo en JPA de hecho también tenemos la posibilidad de crear las consultas haches huele como una mezcla gris en las correspondientes entidades hecho en el ejemplo que he visto anteriormente cuando estuvimos configurando la capa de persistencia vimos que había ya una n Mercuri creados que también podremos utilizar desde Internet y por supuesto pueden tener parámetros.
+Como ves el proceso va a ser el mismo que en JPA. De hecho también tenemos la posibilidad de crear las consultas HQL como `NamedQuery` en las correspondientes entidades, de hecho en el ejemplo que hemos visto anteriormente cuando estuvimos configurando la capa de persistencia vimos que había ya una `NamedQuery` creados que también podremos utilizar desde el API de Hibernate y por supuesto pueden tener parámetros.
 
-Por último comentar el tema de la transaccionalidad que también lo teníamos en esta situación en JPA y es que si queremos realizar alguna operación que requiere acción sobre la base de datos consulta añadir una nueva entidad modificar una entidad o eliminar entidad.
+<img src="images/33-06.png">
 
-Esas operaciones tienen que estar en global dentro de una transacción.
+Por último comentar el tema de la transaccionalidad que también teníamos esta situación en JPA y es que si queremos realizar alguna operación que requiere acción sobre la base de datos añadir una nueva entidad, modificar una entidad o eliminar entidad, esas operaciones tienen que estar englobadas dentro de una transacción.
 
-Las transacciones vienen gestionadas por el objeto transaction de Internet.
+Las transacciones vienen gestionadas por el objeto `Transaction` de Hibernate.
 
-Para crearlo utilizaremos el objeto Obsession su método de transacción que ya crea el objeto de transacción y además da comienzo la transacción aquí y cubríamos la operación.
+Para crearlo utilizaremos el objeto `session` su método `begintransaction()` que ya crea el objeto de transacción y además da comienzo a la transacción, incluiriamos las operaciones de acción y para confirmar la transacción sería con el método `commit()` de la transacción.
 
-Operación anulación y para confirmar la transacción sería el método commit de transacción.
+```java
+Transaction tx = objeto_session.beginTransaction();
+//operaciones de acción
+
+tx.commit();
+```
 
 # 34 Utilización del API de Hibernate en una aplicación 18:29
 
