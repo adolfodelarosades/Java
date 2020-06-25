@@ -2555,50 +2555,121 @@ Nos hace falta el archivo de configuración `hibernate.cfg.xml`. Cómo añadimos
 
 <img src="images/32-21.png">
 
-
 Dentro de toda la lista de opciones lo único importante son las Hibernate Tools es suficiente para que te aparezca el menú que vamos a comentar a continuación.
+
+<img src="images/32-22.png">
 
 Una vez instalado el Plugin nos ponemos encima el proyecto y el botón derecho File - New -Other.
 
-AQUIII
+Cuando hayas instalado ese plugin que te acabo de comentar aparecerá una opción Hibernate dentro de la cual aparecen varias opciones.
 
-New poder dentro de joder pero es que cuando hayas instalado ese plugin que te acabo de comentar aparecerá una opción y Bernheim aquí la tenemos dentro de la cual aparecen varias opciones.
+<img src="images/32-23.png">
 
-Estos son HCM XML son los archivos de mapeo que se llaman identidades para configurar entidades no como lo tenemos nosotros sino con XML lo cual eso ya también está bastante desfasado y no os recomiendo que se haga así sino con anotaciones.
+Tenemos la opción `Hibernate XML Mapping File (hbm.xml)` son los archivos de mapeo que se llaman de entidades, para configurar entidades no como lo tenemos nosotros sino con XML lo cual eso ya también está bastante desfasado y no se recomienda que se haga así, sino con anotaciones. Y bueno la que nos interesa que es el `Hibernate Configuration File (cfg.xml)` nos vamos al paso siguiente 
 
-Y bueno la que os interesa es el Hibernate configuración Feil nos vamos al paso siguiente y ahí nos va dedicado donde donde lo va a crear pues no hay config se va a crear y debe estar la carpeta donde están las clases se pueden meter en algún paquete o directamente en el paquete por defecto es decir en ese PC y el nombre es Bernays CFG XML en el siguiente paso pues ya nos va pidiendo incluso algunas propiedades básicas como las que hemos visto antes.
+<img src="images/32-24.png">
 
-Vamos a coger la versión de Internet realmente todas son muy parecidas por lo menos acogerla 5 2 5 3 no está todavía a estas alturas un poquito sin depurar.
+Debemos indicar donde lo va a crear, lo vamos a crear directamente en el paquete `src` la carpeta donde están las clases, se pueden meter en algún paquete o directamente en el paquete por defecto es decir en `src` y el nombre es `hibernate.cfg.xml` 
+
+<img src="images/32-25.png">
+
+en el siguiente paso
+
+<img src="images/32-26.png">
+
+Ya nos va pidiendo incluso algunas propiedades básicas como las que hemos visto antes, la versión de Hibernate 5.4 es la más reciente. 
 
 Bueno vamos a ir dándole algunas propiedades ya.
 
 Realmente las que necesitamos son los datos de conexión y la lista de entidades eso habrá que dárselo después a posteriori.
 
-Primero Factory session Factory que equivale equivale al nombre de la Unidad de persistencia o la llamamos Factory esto son contactos contactos y contactos tipo de base de datos para optimizar las consultas por mail SQL Drive el driver de la base de datos SQL.
+`Session Factory name:` que equivale al nombre de la Unidad de Persistencia, la llamamos `factoryContactos`.
 
-Aquí tenemos un dato si no te apetece escribir lo puedes copiar de Combayo SQL JDBC trãiler mucho pero bueno cadena de conexión con lo mismo.
+`Database dialect:` tipo de base de datos para utilizar las consultas `MySQL`.
 
-La cadena de conexión es la cadena de conexión clásica de Marie se huele y lo único que tendremos que cambiar es el nombre de la base de datos.
+`Driver class:` Driver de la base de datos `com.mysql.jdbc.Driver`.
 
-Al final me parece que es agendas de tema de fábula esquema de catálogo nada bueno.
+`Connection URL:` Cadena de conexión clásica de MySQL `jdbc:mysql://localhost:3306/agenda`.
 
-Su uso es Nein Good y Ruth.
+`Username: root`
+`Password: root`
 
-En nuestro caso o en tu caso los usuarios contraseña que tengas para conectar con se.
+<img src="images/32-27.png">
 
-Bueno pues pulsamos el botón finish y ahora verás inyectarme y confi te lo muestra en más de una forma más amigable de pestañas vale.
+Bueno pues pulsamos el botón Finish y ahora verás `hibernate.cfg.xml`. 
 
-Y bueno si quiero ver lo que es el código XML como tal como lo que teníamos antiecológico piénsese en Factory Factory contactos y las propiedades que acaba de editar nos faltaría que listarse las entidades que forman parte de esa factoría de sesión.
+<img src="images/32-28.png">
 
-Esto se puede hacer también pues vamos a ver aquí más cómodamente o bien te vas al XML y los escribes directamente o donde está vista más amigable en la sección mapping con nosotros ahí añadimos a DD Class vamos a buscarla con el asistente y la primera de las entidades es contacto con stop en ese ejercicio práctico.
+*`hibernate.cfg.xml`*
 
-Esas firmas y aquí la tenemos siguiente mapping son dos clases contacto y usuario.
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="factoryContactos">
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/agenda</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    </session-factory>
+</hibernate-configuration>
+```
 
-Añadimos también igual la misma manera buscamos un usuario aparece el proyecto donde está el finalizarlos y aquí tenemos configurado lo que sería la capa de persistencia utilizando Hibernate nativo archivo de configuración y Hibernate CFG XML y entidades configuradas con anotaciones al el siguiente vídeo por lo que vamos a ver es cómo acceder a la capa de persistencia del modelo usando el propio API de Hibernate.
+Tenemos la pestaña `Seccion Factory` que lo muestra de una forma más amigable.
 
-Como veis es prácticamente el mismo de JPA de hecho ha adquirido ya en las últimas versiones todos los métodos todas las características de JPA.
+Nos faltaría que listarse las entidades que forman parte de esa factoría de sesión. Esto se puede hacer desde la pestaña `Seccion Factory` más cómodamente.
 
-Aparte de tener ya los suyos propios y clásicos antes.
+<img src="images/32-29.png">
+
+O bien te vas al XML y los escribes directamente o desde está vista más amigable en la sección `Mappings` añadimos las Entidades.
+
+<img src="images/32-30.png">
+
+Presionamos `Add`
+
+<img src="images/32-31.png">
+
+Vamos a buscarla con el asistente, la primera de las entidades es `Contacto`.
+
+<img src="images/32-32.png">
+
+<img src="images/32-33.png">
+
+Damos Finish.
+
+<img src="images/32-34.png">
+
+Y aquí la tenemos, nos falta la siguiente son dos clases `Contacto` y `Usuario`.
+
+Añadimos también igual de la misma manera `Usuario`.
+
+<img src="images/32-35.png">
+
+Ya tenemos mapeadas nuestras dos entidades si vemos el código de `hibernate.cfg.xml` tenemos:
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="factoryContactos">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">root</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/agenda</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <mapping class="entidades.Contacto"/>
+  <mapping class="entidades.Usuario"/>
+ </session-factory
+</hibernate-configuration>
+```
+
+**Ya tenemos configurado lo que sería la Capa de Persistencia utilizando Hibernate nativo, tenemos el archivo de configuración `hibernate.cfg.xml` y las entidades configuradas con anotaciones.**
+
+En la siguiente lección lo que vamos a ver es cómo acceder a la Capa de Persistencia desde el modelo usando el propio API de Hibernate que como ves es prácticamente el mismo de JPA, de hecho ha adquirido ya en las últimas versiones todos los métodos, todas las características de JPA aparte de tener ya los suyos propios y clásicos de antes.
 
 # 33 El API de Hibernate 06:21
 
