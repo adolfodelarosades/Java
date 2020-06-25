@@ -2963,22 +2963,54 @@ public void altaContacto(String nombre, String email, int telefono) {
 }
 ```
 
+Aquí ya tenemos nuestro primer método implementado con Hibernate, en esta línea va ir todo. 
 
-Aquí teníamos otra versión de alta contacto donde en vez de recibir los datos por separado ya recibíamos el objeto contacto por bueno vamos a copiar esto o incluso desde aquí podríamos llamar también a este método es decir podremos hacer aquí un alto contacto y pasar directamente los parámetros punto del nombre ya que tenemos el código para no volver a repetirlo.
+Aquí teníamos otra versión de alta contacto donde en vez de recibir los datos por separado ya recibíamos el objeto contacto.
 
-Punto y mail punto de teléfono pues ahí lo tenemos.
+```java
+public void altacontacto(Contacto c) {
+		
+   em.persist(c);
+		
+}
+```
 
-Bueno seguimos avanzando y bueno ahora tenemos un método para recuperar contactos donde tenemos una J.P. cuele que como ya te he dicho Hibernate tiene HCl que es lo mismo la misma sintaxis. 
+Implementado con Hibernate nos queda así:
 
-Por lo tanto vamos a poder seguir utilizando esas mismas J.P. cueles las mismas instituciones así como la andarme arcoiris que tengamos ya creadas en las entidades bien como siempre hay que obtener esto digamos el bloque troikas la estructura troikas vamos a tener que utilizarla siempre es independiente ya ya de lo que pongamos aquí lo voy a dejar vacío pero la estructura para obtener el objeto Obsession siempre bases aquí no necesitamos transaccion porque es una instrucción de recuperación de entidades lo que necesitamos es crear un cuadri.
+```java
+public void altacontacto(Contacto c) {
+		
+   altaContacto(c.getNombre(), c.getEmail(), c.getTelefono());
+		
+}
+```
 
-Voy a aprovecharme de esta instrucción que ya teníamos pero en vez de Tacuarí vamos a utilizar Cury que es una interfaz de Hibernate que ya es tipado con tipo y lancemos la llamada Create QWERTY del objeto cesion como es es el mismo método Recovery de sesión que tiene el Entity maneira.
+Bueno esta implementación se valio del método anterior para no repetir el código.
 
-Cuidado al importar Cuadri porque no van a salir aquí también.
+Bueno seguimos avanzando y ahora tenemos un método para recuperar contactos donde tenemos una JPQL que como ya te he dicho Hibernate tiene HQL que es lo mismo, la misma sintaxis. Por lo tanto vamos a poder seguir utilizando esas mismas JPQL las mismas instituciones así como las NamedQuery que tengamos ya creadas en las entidades. 
 
-A ver cuando vamos en el control mayusculo varias importaciones a ver qué es lo que nos ha importado esto como ya venía importado de antes tenemos ha importado el cuerno de Java y que persisten en ese no es que importar el cuadri de internet lo he borrado a propósito para que me pregunte cualquier importar ahora si es el cuadri Estado o como dice uno de es que aquí tenemos un cuerina en Java X persistes ni otro.
+```java
+public List<Contacto> recuperarContactos(){
+   String jpql = "Select c From Contacto c";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   return qr.getResultList();
+}
+```
 
-Bueno este no es obviamente no es el de JPA pero si aquí tenemos un qwerty en el BNG Hibernate y otro en el Bergère Bernadet QWERTY si su paquete y dentro de Rajoy Bernet cómo es este cuatrista de precarga es que tenemos que utilizar Balay el objeto QWERTY un tipo interfaz quali que está en el paquete qwerty de ivermectina vale ya lo tenemos y entonces ya hemos creado la QWERTY y devolveremos la lista de resultados.
+Como siempre hay que obtener esto del bloque `try` que vamos a tener que utilizarla siempre, la estructura para obtener el objeto `Session` siempre va a ser esta. El método con Hibernate nos queda así:
+
+```java
+public List<Contacto> recuperarContactos(){
+		
+   String jpql = "Select c From Contacto c";
+   try (Session s = HibernateUtil.getSessionFactory().openSession();){
+      Query<Contacto> qr = s.createQuery(jpql, Contacto.class);
+      return qr.getResultList();
+   }
+}
+```
+
+Aquí no necesitamos transaccion porque es una instrucción de recuperación de entidades lo que necesitamos es crear un `Query` que importamos de `org.hibernate.query.Query`, en vez de usar `TypedQuery` como lo haciamos con JPA vamos a utilizar `Query` que es una interfaz de Hibernate que ya es tipada, con tipo y lanzamos la llamada `createQuery` del objeto `Session` que tiene el mismo método que el `EntityManager` ya hemos creado el `Query` y devolveremos la lista de resultados.
 
 Cogemos esa instrucción que nos sirve tal cual porque es el mismo método de resultas como hemos explicado en el capítulo anterior.
 
