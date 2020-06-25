@@ -3012,6 +3012,23 @@ public List<Contacto> recuperarContactos(){
 
 Aquí no necesitamos transaccion porque es una instrucción de recuperación de entidades lo que necesitamos es crear un `Query` que importamos de `org.hibernate.query.Query`, en vez de usar `TypedQuery` como lo haciamos con JPA vamos a utilizar `Query` que es una interfaz de Hibernate que ya es tipada, con tipo y lanzamos la llamada `createQuery` del objeto `Session` que tiene el mismo método que el `EntityManager` ya hemos creado el `Query` y devolveremos la lista de resultados.
 
+Vamos con el siguiente método `buscarContactos(String email)` el código original es:
+
+```java
+public Contacto buscarContactos(String email){
+				
+   String jpql = "Select c From Contacto c Where c.email = ?1";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   qr.setParameter(1, email);
+   //return qr.getSingleResult();
+   return qr.getResultList().get(0);
+}
+```
+
+El código con Hibernate es:
+
+AQUUUUU
+
 Cogemos esa instrucción que nos sirve tal cual porque es el mismo método de resultas como hemos explicado en el capítulo anterior.
 
 Esta anotación aquí como aquí no hay transaccionalidad esto no nos va a hacer falta.
