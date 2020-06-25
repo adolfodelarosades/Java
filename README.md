@@ -163,4 +163,6 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [Journal Dev](https://www.journaldev.com/)
 
+[JavaGuides](https://www.javaguides.net/)
+
  [Baeldung] (https://www.baeldung.com/)
