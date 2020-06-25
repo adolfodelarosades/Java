@@ -2420,93 +2420,147 @@ public class TopVentasAction extends HttpServlet {
 </html>
 ```
 
-# 32 Utilización del framework de hibernate 13:54
+# 32 Utilización del Framework de Hibernate 13:54
 
 <img src="images/32-01.png">
 
+Ya hemos visto cómo utilizar el motor de Hibernate dentro de una Capa de Persistencia gestionada con JPA. Sin embargo Hibernate es un framework completo que proporciona todo lo necesario para utilizarlo por sí solo para la gestión y la utilización de una Capa de Persistencia en una aplicación.
+
 <img src="images/32-02.png">
+
+Esos componentes, son además del motor de Hibernate, un sistema de configuración podríamos decir hay un archivo de configuración general que se llama `hibernate.cfg.xml` donde es similar al `persistence.xml` pues se establecen todos los datos de conexión a la base de datos, lista de entidades.
+
+En cuanto a la configuración de las entidades se puede hacer de dos maneras bien mediante XML o anotaciones. Si bien la primera opción es la clásica utilización de Hibernate desde las primeras versiones **está ya bastante obsoleta** y se tiende a utilizar anotaciones como hemos visto en JPA, y por supuesto cuenta también con un API, el **API de Hibernate**.
 
 <img src="images/32-03.png">
 
+El `hibernate.cfg.xml` como decíamos antes es similar al `persistence.xml` y ahí vamos a incluir los datos de conexión a la base de datos, propiedades que necesite el motor para poder acceder a esa base de datos y gestionarla, así como la lista de entidades, lo que no vamos a incluir aquí obviamente es el motor de persistencia porque sólo puede ser el motor de Hibernate.
+
 <img src="images/32-04.png">
+
+Aquí tenemos un ejemplo de cómo sería un `hibernate.cfg.xml`, como ves va a poder definir una unidad de persistencia como hace JPA. Aquí lo que se define es una `session-factory` una factoría de sesión, es el concepto similar y dentro de esa `session-factory` se establecen las propiedades y los respectivos valores, qué propiedades van a ser, el Driver  que vamos a utilizar, contraseña, URL o cadena de conexión, usuario y la ultima que no es obligatorio pero sí es conveniente que es el tipo de base datos `hibernate.dialect`, tipo de base datos con la que vamos a trabajar para que el motor optimice de alguna manera las consultas contradicha tipo de base de datos y a continuación con la etiqueta `mapping` la lista de entidades que van a formar parte de esa factoría de sesión, todo ello en un `hibernate-configuration`. 
+
+En vez de utilizar datos de conexión se podría utilizar también un DataSource del servidor como se ha hecho con JPA, una propiedad como las anteriores pero para el DataSource contra la que pudiéramos tener configurado un servidor de base de datos.
 
 <img src="images/32-05.png">
 
-Ya hemos visto cómo utilizar el motor de Hibernate dentro de una capa de persistencia gestionada con JPA.
+La configuración de entidades como hemos dicho se puede hacer mediante archivos XML, uno por entidad, es decir cada entidad debería llevar su archivo XML de configuración o mediante anotaciones que es la tendencia.
 
-Sin embargo Hibernate es un framework completo que proporciona todo lo necesario para utilizarlo por sí solo para la gestión y la utilización de una capa de persistencia en una aplicación esos componentes son además del motor de Hibernate un sistema de configuración podríamos decir hay un archivo de configuración general que se llama Hibernate CFG XML donde es similar al persiste en XML pues se establecen todos los datos de conexión a la base de datos lista de entidades.
+Hibernate es un framework que es realmente además de ser un framework es una implementación de JPA, qué quiere decir esto, pues que las anotaciones que hemos visto de JPA están incorporadas también Hibernate y podemos utilizarlas para configurar las entidades. Hibernate tiene también sus propias anotaciones pero digamos están la mayor parte de ellas obsoletas, tiene otras que no lo están y servirían para otras tareas, pero todas las anotaciones de JPA todas están incluidos también en Hibernate, porque es una implementación de la especificación JPA. Aunque insisto tiene otras propias para otras tareas que en JPA no se pueden realizar como acceder a base de datos NoSQL o alguna otra tarea que pueda realizarse también con Hibernate.
 
-En cuanto a la configuración de las entidades se puede hacer de dos maneras bien mediante XML o anotaciones.
+### Creación Proyecto Eclipse
 
-Si bien la primera opción es la clásica utilización de Hibernate desde las primeras versiones está ya bastante obsoleta y se tiende a utilizar anotaciones como he visto en JPA y por supuesto cuenta también con un API en de y el internet CFG XML como decíamos antes es similar pero en XML y ahí vamos a incluir los datos de conexión a la base de datos propiedades que necesite el motor para poder acceder a esa base de datos y gestionarla así como la lista de entidades lo que no vamos a incluir aquí obviamente es el motor de persistencia porque sólo puede ser el motor de Internet.
+Bien vamos a ver a continuación uno de los ejemplos que tenemos desarrollados de otros lecciones anteriores, por ejemplo teníamos el ejercicio `615-04_web_jpa` donde accedíamos mediante JPA y EJBs a una base de datos de contactos. Este proyecto hace lo siguiente:
 
-Aquí tenemos un ejemplo de cómo sería una Hibernate CFG XML.
+<img src="images/32-06.png">
 
-Como veis va a poder definir una unidad de persistencia como hace JPA.
+<img src="images/32-07.png">
 
-Aquí lo que se define es una factoría de sesión en sesión Factory que el concepto similar y dentro de esa sesión Factory establece las propiedades como nombre de propiedad del Beverley y los respectivos valores qué propiedades van a ser River que vamos a utilizar mezcladas contraseña o arreglo cadena de conexión usuario y ésta que no es obligatorio pero sí es conveniente que es el tipo de base datos Hibernate Dialnet y podemos xatos con la que vamos a trabajar para que el motor optimice optimice de alguna manera las consultas contradicha tipo de base de datos y a continuación en la etiqueta mapping la lista de entidades que van a formar parte de esa factoría de sesión.
+<img src="images/32-08.png">
 
-Todo ello en un Bernays configuración en vez de utilizar dotado de conexión se podría utilizar también una tasa del servidor como se ha hecho con JPA una propiedad de éstas sería una propiedad que la propiedad del Data Ashur contra la que pudiéramos tener configurado un servidor de base de datos.
+<img src="images/32-09.png">
 
-La configuración de entidades como hemos dicho se puede hacer mediante archivos XML uno por entidad es decir cada entidad debería llevar su archivo XML de configuración o mediante anotaciones que es la tendencia Hibernate pues es un framework que es realmente además de sufrir una implementación de JPA qué quiere decir esto.
+<img src="images/32-10.png">
 
-Pues que las anotaciones que hemos visto JPA son están incorporadas también Hibernate y podemos utilizarlas para configurar las entidades y Bernays tiene también sus propias anotaciones pero digamos están la mayor parte de ellas obsoletas tiene otras que no lo están y servirían para otras tareas pero todas las anotaciones de JPA todas están incluidos también en Hibernate porque es una implementación de la especificación JPA.
+<img src="images/32-11.png">
 
-Aunque insisto tiene otras propias para otras tareas que busque JPA No se pueden realizar como acceder a base de datos no SQL o alguna otra tarea que pueda realizarse también con internet.
+<img src="images/32-12.png">
 
-Bien pues vamos a ver a continuación uno de los ejemplos que tenemos desarrollados de otros relaciones anteriores por ejemplo teníamos un ejercicio ejercicio práctico número 3 donde puedes accedíamos mediante JPA a una base de datos de contactos.
+Lo que vamos a hacer es intentar migrar esta aplicación a Hibernate exclusivamente. En lugar de utilizar JPA utilizar Hibernate, que realmente como vamos a ver, la configuración de las entidades es la misma, va a ser muy parecida. Entonces nos vamos a centrar en esta lección concretamente en la configuración, el uso del API lo dejamos para la siguiente lección.
 
-Pues lo que vamos a hacer es vamos a intentar migrar esa aplicación a Internet totalmente.
+Vamos a copiar el proyecto `615-04_web_jpa` y le vamos a llamar `615-14_web_jpa_hibernate`
 
-En lugar de utilizar JPA utilizar Internet que es realmente como vamos a ver la configuración de las entidades en la misma va a ser muy parecida.
+Vamos a cambiar el nombre en:
 
-Entonces nos vamos a centrar en lo que es en este vídeo concretamente la configuración el uso de la API lo dejamos para la posterior para la elección posterior.
+* Web Project Settings
+* `pom.xml`
+* `persistence.xml`
+* `GestionContactosEjb`
+* `GestionUsuarioEjb`
 
-He creado aquí una copia del proyecto renombrado como ejercicio práctico 3 y Verneuil.
+Una vez que hayamos hecho los cambios ya tenemos nuestro nuevo proyecto `615-14_web_jpa_hibernate`
 
-Ahora mismo es exactamente igual que lo que tienes arriba que es lo son los pasos que tendríamos que hacer para poder utilizar Internet.
+<img src="images/32-13.png">
 
-En primer lugar antes de empezar a configurar nada ni XML es lo que llamaríamos el setup del proyecto es decir que librerías tengo que incorporar a través de Maven.
+Si lo probamos todo funciona como el original, ahora mismo es exactamente igual que lo que teniamoes en `615-04_web_jpa` a excepción del nombre cambaido.
 
-Bueno pues lógicamente si vamos a utilizar conexiones directas con la base datos el droide.
+Este es un proyecto Web, con JPA que utiliza EclipseLink, se ejecuta en GlassFish por usar EJB.
 
-Pero por supuesto el propio Hibernate aquí del ejercicio 5 donde utilizamos Hibernate como motor pues recordarás que en el POM tuvimos que añadir una entrada para Internet.
+Para la nueva configuración que vamos a usar con Hibernate necesitamos hacer algunos cambios.
 
-Esta dependencia pues esa misma vamos a copiar no hace falta que nos vayamos a buscarlo porque ya la tenemos ahí de otro proyecto y en este nuevo proyecto que hemos creado copia de ejercicio 3 veces nos vamos a supón y ahí o es pegamos esa dependencia para que incorpore toda la librería de Internet.
+#### 1. Añadir dependencia Hibernate en `pom.xml`
 
-No sólo va el motor aquí la API todo lo que es la implementación de internet.
+En primer lugar antes de empezar a configurar nada en el archivo XML, lo que vamos a hacer es lo que llamaríamos el setup del proyecto, es decir que librerías tengo que incorporar a través de Maven.
 
-Bien vale eso por un lado.
+Bueno pues lógicamente si vamos a utilizar conexiones directas con la base datos el Driver que ya lo tenemos del proyecto anterior.
 
-Por otro lado como este proyecto estaba creado para JPA en su momento pues está activada la característica JPA está por ahí de hecho el persiste en XML está esto de Eclipse Link que es el motor de implicito que llevaba el servidor de aplicaciones de la física nosotros ya no vamos a ser porque vamos a auriverdes pero lo que vamos a hacer es desactivar esas opciones que nos vamos a ir a las propiedades del proyecto y aquí en Java vuelva.
+Pero por supuesto vamos a añadir la dependencia Hibernate en el `pom.xml`. 
 
-De momento el Library de Eclipso Olimpos lo vamos a quitar no necesitamos esa librería para nada y en Provías Faces vamos aplicando desactivamos la opción JPA o simplemente el persiste en XML.
+```html
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-core</artifactId>
+   <version>5.4.18.Final</version>
+</dependency>
+```
 
-No se ha borrado sí pero no es que moleste pero lo vamos a quitar para que no pensemos que es que tendríamos que tener ese archivo de JPA y la idea es usar únicamente Internet aunque la mayor parte de las cosas que tiene Internet ya son adquiridas de JPA como por ejemplo y es por donde vamos a empezar ya la configuración.
+Pegamos esta dependencia en el `pom.xml` para que incorpore todas la librería de Hibernate, no sólo va el motor también va el API todo lo que es la implementación de Hibernate. Bien eso por un lado.
 
-Las entidades lasentidades ya en su momento las creábamos y las configuramos como JPA.
+#### 2. Eliminar rastros de JPA
 
-Bueno pues tal cual están las vamos a seguir utilizando porque insisto lo que hemos comentado antes las entidades se configuran con anotaciones y esas anotaciones de JPA en su momento también están incluidos ya en Internet y son de hecho las que se recomienda utilizar no las nativas de internet que están obsoletas sólo se han mantenido como no obsoletas aquellas otras anotaciones que siguen para cosas que JPA No llega como ya te he comentado antes pues hacer basaltos no se cuele o algún otro tipo de tarea bien.
+Por otro lado como este proyecto estaba creado para JPA en su momento, está activada la característica JPA, está por ahí de hecho el `persistence.xml`, está esto de EclipseLink que es la librería del motor implícito que llevaba el servidor de aplicaciones GlassFish, nosotros ya no vamos a usarlo porque vamos a usar Hibernate.
 
-Pues entonces qué significa eso.
+<img src="images/32-14.png">
 
-Que toda la configuración que vimos entidades de entidades con estas anotaciones incluso las name Kuric diciendo todo es perfectamente válido y así se va a mantener nos falta el archivo de configuración y CFG XML.
+Lo que vamos a hacer es desactivar esas opciones, nos vamos a ir a las propiedades del proyecto y luego en `Java Build Path` 
 
-Cómo añadimos ese archivo al proyecto o podemos crear un XML.
+<img src="images/32-15.png">
 
-No podemos buscarlo por internet porque hay algunas plantillas o digamos una cosa también bastante cómoda es instalarnos en Eclipse un plugin que hay que sirve para muchas más cosas no solamente para Internet pero entre otras cosas incorpora una opción de menú para poder generar el archivo de configuración de internet de una forma mucho más cómoda.
+De momento EclipseLink lo vamos a quitar no necesitamos esa librería para nada, aplicamos los cambios.
 
-Cómo instalaremos ese plugin en el eclipse marketplaces aquí buscamos ahora Hibernate no van a aparecer varias entradas vamos a buscar Internet y una de esas entradas va a ser las J Ra's Tools JBoss tus pasos.
+<img src="images/32-16.png">
 
-Entre otras cosas pues tiene unos asistentes para trabajar con Internet.
+Y en `Project Facets` 
 
-Yo ya lo tengo instalado entonces como lo tengo instalado ya pero si no lo tienes instalado Talat aparecería aquí el botón Install.
+<img src="images/32-17.png">
 
-Y bueno pues dentro de las opciones a ver si lo tengo yo por aquí por lo menos que aparezca la lista de opciones y que las podamos ver lo digo aquí por ejemplo Cheung que aparecería para cambiar esto es lo que te aparecería aquí toda la lista de opciones de en su momento en las que están marcadas o las que instalé y algunas malas quiero actualizar.
+Vamos a desactir la opción JPA.
 
-Evidentemente no tienes que instalar todo esto.
+<img src="images/32-18.png">
 
-Lo único importante son las Hibernate y ahí ya con esto sales esta parte de las JBoss Tool es suficiente para que te parezca el menú que vamos a comentar a continuación en fin vamos a ver nos ponemos encima el proyecto y el botón derecho.
+Una vez aplicados estos cambios 
+
+<img src="images/32-19.png">
+
+El `persistence.xml` no se ha borrado, no es que moleste pero lo vamos a quitar para que no pensemos que tendríamos que tener ese archivo, eso es de JPA y la idea es usar únicamente Hibernate.
+
+<img src="images/32-20.png">
+
+Aunque la mayor parte de las cosas que tiene Hibernate ya son adquiridas de JPA como por ejemplo y es por donde vamos a empezar ya la configuración las Entidades.
+
+#### 3. Configurar Entidades
+
+Las entidades ya en su momento las creámos y las configuramos con JPA. Bueno pues tal cual están las vamos a seguir utilizando, porque insisto lo que hemos comentado antes, las entidades se configuran con anotaciones y esas anotaciones de JPA en su momento, también están incluidos ya en Hibernate y son de hecho **las que se recomienda utilizar** no las nativas de Hibernate que **están obsoletas** sólo se han mantenido como no obsoletas aquellas otras anotaciones que siguen para cosas que JPA no llega, como ya te he comentado antes acceder a bases de datos NoSQL o algún otro tipo de tarea.
+
+Pues entonces qué significa todo esto.
+
+Que toda la configuración que vimos en Entidades con estas anotaciones incluso las NamedQuery todo es perfectamente válido y así se va a mantener. Las Entidades `Contacto` y `Usuario` son exactamente las mismas, no han cambiado nada.
+
+#### 4. Archivo de Configuración `hibernate.cfg.xml`
+
+Nos hace falta el archivo de configuración `hibernate.cfg.xml`. Cómo añadimos ese archivo al proyecto. Podemos crear un XML, podemos buscarlo por internet porque hay algunas plantillas o digamos una cosa también bastante cómoda, es instalarnos en Eclipse un plugin que hay, que sirve para muchas más cosas no solamente para Hibernate pero entre otras cosas incorpora una opción de menú para poder generar el archivo de configuración de Hibernate de una forma mucho más cómoda.
+
+¿Cómo instalaremos ese plugin? En el Eclipse Marketplaces aquí buscamos JBoos Tools.
+
+<img src="images/32-21.png">
+
+
+Dentro de toda la lista de opciones lo único importante son las Hibernate Tools es suficiente para que te aparezca el menú que vamos a comentar a continuación.
+
+Una vez instalado el Plugin nos ponemos encima el proyecto y el botón derecho File - New -Other.
+
+AQUIII
 
 New poder dentro de joder pero es que cuando hayas instalado ese plugin que te acabo de comentar aparecerá una opción y Bernheim aquí la tenemos dentro de la cual aparecen varias opciones.
 
