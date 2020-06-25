@@ -2675,57 +2675,57 @@ En la siguiente lección lo que vamos a ver es cómo acceder a la Capa de Persis
 
 <img src="images/33-01.png">
 
+En esta lección vamos a ver cómo utilizar el API de Hibernate para manipular la Capa de Persistencia de una aplicación.
+
 <img src="images/33-02.png">
+
+El API de Hibernate es un conjunto de clases e interfaces lo mismo que en el caso de JPA, que se utilizan para acceder desde el modelo o Capa de Lógica de Negocio de una aplicación a la Capa de Persistencia a los datos.
+
+Estas clases e interfaces se encuentran en un paquete `org.hibernate` que forma parte de ese conjunto de librerías del API.
+
+La realización de las operaciones básicas CRUD creación, recuperación de entidades, actualización o eliminación de las mismas, se va a realizar a través de un objeto una interfaz llamada `Session` que en vista de lo que ya conocemos de JPA podríamos decir que `Session` es el equivalente al EntityManager de JPA. 
+
+También para operaciones no Crud, es decir más complejas como actualización de un conjunto de entidades o recuperación de conjunto entidades o entidades que no dependan de la Primary Key es decir que la condición sea diferente a obtenerla por Primary Key podemos personalizar las consultas a través de un lenguaje similar al que utilizamos, prácticamente igual podríamos decir que es el mismo en JPA que se llama HQL Hibernate QL muy parecido a JPQL que utilizamos en JPA.
 
 <img src="images/33-03.png">
 
+Bien lo primero para poder operar contra esa Capa de Persistencia necesitaríamos obtener una implementación de `Session`, para obtener una implementación de `Session` necesitamos un `SessionFactory` muy similares como digo al `EntityManager` en el caso de JPA.
+
+Lo que pasa es que `SessionFactory` es un objeto bastante digamos pesado, que solamente debería ser utilizado una única instancia del mismo para todos los clientes que acceden a la aplicación. Por lo tanto se recomienda que se cree como Singleton, es decir una única instancia compartida por todos los clientes.
+
+Para crear un `SessionFactory` de modo Singleton habría que seguir una serie de pautas, otra serie de elementos que habría que utilizar del API de Hibernate y habitualmente encapsular todo ese conjunto de instrucciones de extensión de `SessionFactory` en un archivo `HibernateUtil.java` obviamente lo podemos llamar como queramos pero desde las primeras versiones de Hibernate la costumbre es encapsular esas instrucciones de extensión de `SessionFactory` en un `HibernateUtil.java`. De hecho incluso existen ya varias versiones de este archivo que podemos encontrar por internet. Además bueno han ido evolucionando, con la evolución también de las versiones de este framework y hay bastantes ya estandarizados que podemos encontrar y no necesitamos tenernos que crear nosotros nuestro propio  `HibernateUtil.java`.
+
+Cómo va a ver después en la siguiente lección vamos a utilizar un `HibernateUtil.java` clásico ya creado.
+
 <img src="images/33-04.png">
+
+Bien pues una vez que ya tenemos el objeto `Session` ya podemos recurrir a estos métodos básicos para realizar las siguientes operaciones:
+
+* `save(Object ob)` Persistir una entidad a partir de la entidad pasada como parámetro.
+* `update(Object ob)` Actualizar la base de datos con los datos de una entidad que le pasamos como parámetro.
+* `get(Class<T> tipo, Serializable id)` Para recuperar una entidad a partir de su Primary Key pasándole como primer parámetro el tipo de entidad y como segundo parámetro la Primary Key.
+* `delete(Object ob)` Delete para eliminar la entidad que se le pasa como parámetro.
+
+Como ves son métodos muy parecidos a los correspondientes de EntityManager `save` es como `persiste`, `update` como `merge`, `get` como `find` y `delete` como `remove`.
+
+De hecho las últimas versiones de Hibernate incluyen también los mismos métodos que vimos en EntityManager en JPA, es decir que además de estos tenemos el `persice`, `merge`, `find` y `remove`.
+
+De todas formas después veremos un ejemplo donde utilizaremos los métodos clásicos de Hibernate que son los que te estoy presentando aquí.
 
 <img src="images/33-05.png">
 
 <img src="images/33-06.png">
 
-En esta elección vamos a ver cómo utilizar el de Bernet para manipular la capa de persistencia de una aplicación rápida y Hibernate.
+Además por supuesto tenemos las consultas para realizar operaciones complejas como recuperaciónde un conjunto de entidades o recuperación de alguna entidad a partir de una condición que no involucra la Primary Key, eliminación o actualización de conjunto entidades.
 
-Es un conjunto de clases e interfaces lo mismo que en el caso de JPA que se utilizan para acceder desde el modelo de la capa de la lógica de negocio de una aplicación a la capa de persistencia los datos.
+Para ello bueno igual que en JPA utilizaremos un lenguaje, una variante del SQL llamada en este caso `HQL` Hibernate QL que es casi idéntico a JPQL.
 
-Estas clases y interfaces encuentran un paquete o punto Hibernate que forma parte de ese conjunto de librerías deseable.
+Una vez que tenemos confeccionada la consulta, la gestionaremos a través de `Query` el mismo nombre que la correspondiente interfaz de JPA. De hecho aquí no tenemos un `TypedQuery` usamos directamente `Query` con tipo, de modo que podemos crear una `Query` a partir de una HQL de selección indicando el tipo de entidad que queremos recuperar.
 
-La realización de las operaciones básicas Club Creación recuperación de entidades actualización o eliminación de las mismas se va a realizar a través de un objeto una interfaz llamada sesión que en vista de lo que ya conocemos de JPA podríamos decir que Obsession es el equivalente al Entity manager de JPA también para operaciones no Klub es decir más complejas pues actualización de un conjunto de entidades o recuperación de conjunto entidades o entidades que no dependan de la Primary Coyle es decir que la condición sea diferente a obtenerla primero y que podemos personalizar las consultas a través de un lenguaje similar al que utilizamos o similar prácticamente podríamos decir que es el mismo en JPA que se llama HCl y Mermaid huele muy parecido a J.P. QL que utilizamos como digo en JPA.
+Los métodos pues como ves son los mismos que tenía la interfaz `Query` de JPA:
 
-Bien lo primero para poder operar contra esa capa de persistencia necesitaríamos obtener una implementación de sesión para obtener una implementación de sesión necesitamos un sesión fácil muy similares como Entity manager facto ni en el caso de JPA lo que pasa es que obsesión Factory es un objeto bastante digamos pesado que solamente debería ser utilizado una única instancia del mismo para todos los clientes que acceden a la aplicación.
 
-Por lo tanto deberías se recomienda que se cree como Shingen es decir una única instancia compartida por todos los clientes para crear un factor modo Singleton habría que seguir una serie de pautas otra serie de elementos que habría que utilizar de la Hibernate y habitualmente encapsular todo ese conjunto de instrucciones de extensión de sesión Factory en un archivo Hibernate.
-
-útil antojaban obviamente lo podemos llamar como queramos pero desde las primeras versiones de Hibernate la costumbre es encapsular esas instrucciones de extensión de sesión Factory en un hiberna ITU-T en un punto Java.
-
-De hecho incluso existen ya varias versiones de este archivo que podemos encontrar por internet.
-
-Además bueno han ido evolucionando con la evolución también de las versiones de este framework y hay bastantes ya estandarizados que podemos encontrar y no necesitamos tenernos que crear nosotros nuestro propio Hibernate.
-
-Cómo va a ver después en el siguiente vídeo la siguiente elección.
-
-Pues vamos a utilizar ni Bernays butil clásico ya ya creamos.
-
-Bien pues una vez que ya tenemos el objeto sesión podemos recurrir a estos métodos básicos para realizar las operaciones de primero.
-
-Si existir una entidad a partir de la actividad pasada como parámetro a actualizar la base de datos con los datos de una entidad que le pasamos como parámetro para recuperar una entidad a partir de su primary key pasándole como primer parámetro el tipo de entidad y como segundo parámetro la Primary y Delete para limitar o eliminar la entidad que se le pasa como parámetro.
-
-Como ves son métodos muy parecidos a los correspondientes Identity Manager Soib como práxis Hunter como Helmer como elfin y Delete como el remo.
-
-De hecho las últimas versiones de Hibernate incluyen también los mismos métodos que vimos en timãn ayer en JPA Es decir que además de estos tenemos el persiste en ver el cine y el remo.
-
-De todas formas después veremos un ejemplo donde utilizaremos los métodos clásicos de Hibernate que son los que te estoy presentando aquí.
-
-Además por supuesto de las consultas para realizar operaciones complejas como recuperaciónde un conjunto de entidades o recuperación de alguna entidad a partir de una condición que no involucra la primera eliminación o actualización de conjunto entidades.
-
-Para ello bueno igual que en JPA utilizaremos un lenguaje una variante del SQL llamada en este caso vuelo y Bernays cueles que es casi idéntico a J.P. cuelo.
-
-Una vez que tenemos Concepció confeccionado la consulta la gestionaremos a través de igual nombre que la correspondiente interfaz de JPA.
-
-De hecho aquí no tenemos un cuerpo y un Taipe directamente QWERTY con tipo de modo que podemos crear una cuerito a partir de una la selección indicando el tipo de entidad que queremos recuperar.
-
-Los métodos pues como veis son los mismos que tenía la interfaz qwerty de JPA su para devolver una lista entidades sin que el resto cuando solamente es un único resultado una única entidad y si se trata de una consulta de acción execute o es un proceso va a ser el mismo en JPA de hecho también tenemos la posibilidad de crear las consultas haches huele como una mezcla gris en las correspondientes entidades hecho en el ejemplo que he visto anteriormente cuando estuvimos configurando la capa de persistencia vimos que había ya una n Mercuri creados que también podremos utilizar desde Internet y por supuesto pueden tener parámetros.
+su para devolver una lista entidades sin que el resto cuando solamente es un único resultado una única entidad y si se trata de una consulta de acción execute o es un proceso va a ser el mismo en JPA de hecho también tenemos la posibilidad de crear las consultas haches huele como una mezcla gris en las correspondientes entidades hecho en el ejemplo que he visto anteriormente cuando estuvimos configurando la capa de persistencia vimos que había ya una n Mercuri creados que también podremos utilizar desde Internet y por supuesto pueden tener parámetros.
 
 Por último comentar el tema de la transaccionalidad que también lo teníamos en esta situación en JPA y es que si queremos realizar alguna operación que requiere acción sobre la base de datos consulta añadir una nueva entidad modificar una entidad o eliminar entidad.
 
