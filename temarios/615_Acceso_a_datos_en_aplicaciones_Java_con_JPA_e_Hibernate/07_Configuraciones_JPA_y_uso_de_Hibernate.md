@@ -5271,10 +5271,6 @@ Si vienen directamente o ya se han especificado en una `NamedQuery` y ya una vez
 
 <img src="images/38-06.png">
 
-<img src="images/38-07.png">
-
-<img src="images/38-08.png">
-
 Vimos también cómo podíamos relacionar entidades a fin de facilitar las operaciones cuando trabajamos con un conjunto de entidades que tienen alguna relación entre ellas, es decir a nivel de tabla tienen un campo común pero a nivel de entidad, eso se traduce en que un objeto de una entidad incluye en su interior todos los objetos relacionados.
 
 Entonces qué ocurre, que por ejemplo vas a obtener, recuperar una entidad, por ejemplo hacer un `find` o una consulta de un conjunto de entidades, recuperamos también los objetos relacionados con lo cual las operaciones en el código luego se simplifican bastante. Las relaciones podrían ser:
@@ -5283,13 +5279,15 @@ Entonces qué ocurre, que por ejemplo vas a obtener, recuperar una entidad, por 
 * Muchos a Uno: es decir a varias entidades estas tienen asociado el mismo objeto de otra entidad 
 * Muchos a Muchos
 
-A la hora de configurarlas pues aquí vemos unos ejemplos de las anotaciones que culturizar en cada caso y también de las anotaciones a nivel de definición de lo que son las columnas de relación o relaciones a nivel de tabla de la base de datos.
+A la hora de configurarlas pues aquí vemos unos ejemplos de las anotaciones que se utilizan en cada caso y también de las anotaciones a nivel de definición de lo que son las columnas de relación o relaciones a nivel de tabla de la base de datos.
 
-No todo se podía resolver con relaciones y con instrucciones J.P. cueles simples es decir hay algunas consultas complejas que solamente se pueden resolver uniendo entidades dentro de la consulta a través de una cláusula que también se dispone de ella en el lenguaje SQL estándar que la cláusula Yeung nos permite como ves aquí pues a la hora de seleccionar una entidad que es una relación del tipo de lado no mucho del lado uno por ejemplo a la hora de seleccionar producto pues esa entidad a la hora de relacionarla conventos para establecer la condición a través de ventas pues no se podría hacer directamente en una instrucción habría que recuperar todos los todos los productos y sumando lo bueno sería algo bastante complejo como ya vimos en un ejercicio que te presente entonces a través de la cláusula Yeung.
+<img src="images/38-07.png">
 
-Se puede indicar cuál es ser la entidad de relación a quién sería SELECT FROM productode Yeung la palabra reservada y luego indicas cuál es el atributo muchos que contiene la colección de ventas al que se le asocia un alias para después poder establecer la condición sobre esa entidad venta sobre todo cuando tenemos varias.
+No todo se podía resolver con relaciones y con instrucciones JPQL simples, es decir hay algunas consultas complejas que solamente se pueden resolver uniendo entidades dentro de la consulta a través de una cláusula `join` que también se dispone de ella en el lenguaje SQL estándar, la cláusula `join` nos permite como ves en el ejemplo a la hora de seleccionar una entidad que es una relación del tipo de lado Uno a Muchos, del lado uno por ejemplo a la hora de seleccionar un producto pues esa entidad a la hora de relacionarla con ventas para establecer la condición a través de ventas pues no se podría hacer directamente en una instrucción, habría que recuperar todos los productos y sumandolos, bueno sería algo bastante complejo como ya vimos en un ejercicio que trato este tema, entonces a través de la cláusula `join` se puede indicar cuál es la entidad de relación a quién sería `select distinct(p) from Producto p join p.ventas v Where v.unidades>?1` indicas cuál es el atributo muchos que contiene la colección de ventas al que se le asocia un alias para después poder establecer la condición sobre esa entidad venta.
 
-Aparte de este caso sí hay varias entidades implicadas a utilizar yo y no es una cosa que simplifica enormemente lo que sería la creación de las instrucciones una vez que ya tiene la instrucción completa o con se construyen los objetos que nos van a permitir ejecutarlas.
+Aparte de este caso sí hay varias entidades implicadas utilizar `join` es una cosa que simplifica enormemente lo que sería la creación de las instrucciones, una vez que ya tiene la instrucción con `Query` o `TypedQuery` se construyen los objetos que nos van a permitir ejecutarlas.
+
+<img src="images/38-08.png">
 
 Y por último también estuvimos hablando de la API Criteria aparte de otros elementos que vimos como por ejemplo actualizaciones en cascada la carga de datos rápida o carga perezosa.
 
