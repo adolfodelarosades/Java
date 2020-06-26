@@ -4124,23 +4124,141 @@ tx.commit();
 
 <img src="images/36-01.png">
 
+Después de haber estudiado el API Criteria has visto que es un poquito más complejo que la utilización de JPQL para realización de consultas. 
+
 <img src="images/36-02.png">
 
-Después de haber estudiado la gritería he visto que es un poquito más complejo que la utilización de J.P. cuele para realización de consultas.
+Por tanto vamos a ver si en este ejercicio práctico aclaramos su funcionamiento, se trata de realizar una nueva versión más de la aplicación web de la agenda de contactos, pero las consultas las vamos a implementar con el API Criteria en lugar de JPQL.
 
-Por tanto vamos a ver si en este ejercicio práctico lo aclaramos todo su funcionamiento se trata de realizar una nueva versión más de la aplicación web de la agenda de contactos.
+### Creación Proyecto Eclipse
 
-Pero la consulta la vamos a implementar con la Criteria en lugar de JRE en el ejercicio pues vamos a ver ya lo tengo yo hecho aquí vamos a analizarlo es el 07 quiroprácticos 6 que podrás encontrar en la zona de recursos para que te lo descargues y en principio lo que he hecho es crear una copia del ejercicio práctico 2 que ya teníamos creado e implementando una aplicación web con moda arquitectura Modelo Vista Controlador donde la lógica de negocio la teníamos en gestión contactos y gestión a usuarios.
+Para este proyecto vamos a partir del proyecto `615-03_web_jpa` que hace lo siguiente:
 
-Bueno pues todos lo teníamos hecho con JPA y ahora vamos a ver cómo sería esas mismas operaciones.
+<img src="images/36-03.png">
 
-Concretamente en la parte de las consultas claramente pero utilizando la API Criteria en lugar de JPQL.
+<img src="images/36-04.png">
 
-Entonces nos vamos a centrar en el único cambio a las únicas clases donde hay que hacer cambios son en contactos es decir usuarios el resto tanto entidades como servlet como páginas JSP.
+<img src="images/36-05.png">
 
-Obviamente permanece igual puesto que lo único que cambia es la lógica de acceso a la capa de persistencia concretamente la manera en la que vamos a enviar las consultas.
+<img src="images/36-06.png">
 
-Vamos a empezar por gestión contactos contactos teníamos una serie de métodos teníamos el método privado que nos devuelven Timaná ayer.
+<img src="images/36-07.png">
+
+<img src="images/36-08.png">
+
+<img src="images/36-09.png">
+
+
+Vamos a crear una copia del ejercicio y le vamos a llamar `615-15_web_jpa_criteria`. 
+
+Vamos a cambiar el nombre en:
+
+* Web Project Settings
+* `pom.xml`
+* `persistence.xml`
+* `GestionContactos`
+* `GestionUsuarios`
+
+Una vez que hayamos hecho los cambios ya tenemos nuestro nuevo proyecto `615-15_web_jpa_criteria`
+
+<img src="images/36-10.png">
+
+Si lo probamos todo funciona como el original.
+
+Este es un proyecto Web, con JPA que utiliza EclipseLink, se ejecuta en Tomcat y no usa EJB.
+
+Para la nueva configuración que vamos a usar con Criteria necesitamos hacer algunos cambios. Concretamente en la parte de las consultas claramente pero utilizando el API Criteria en lugar de JPQL. Entonces nos vamos a centrar en las clases donde hay que hacer cambios que son `GestionContactos` y `GestionUsuarios` el resto tanto entidades como servlet como páginas JSP permanecen igual puesto que lo único que cambia es la lógica de acceso a la capa de persistencia, concretamente la manera en la que vamos a enviar las consultas.
+
+Vamos a empezar por `GestionContactos` teníamos el siguiente código:
+
+```java
+package modelo;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import entidades.Contacto;
+
+public class GestionContactos {
+	
+   //Método que permite obtener el objeto EntityManager
+   private EntityManager getEntityManager() {
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-15_web_jpa_criteria");
+      return factory.createEntityManager();
+   }
+	
+   public void altaContacto(String nombre, String email, int telefono) {
+      Contacto c = new Contacto(email, nombre, telefono);
+      EntityManager em = getEntityManager();
+		
+      //La operación la incluimos en una transacción
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      em.persist(c);
+      tx.commit();
+   }
+
+   public void altacontacto(Contacto c) {
+      EntityManager em = getEntityManager();
+		
+      //La operación la incluimos en una transacción
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      em.persist(c);
+      tx.commit();
+   }
+	
+   public void eliminarContacto(int idContacto) {
+      EntityManager em = getEntityManager();
+		
+      Contacto c = em.find(Contacto.class, idContacto);
+      EntityTransaction tx = em.getTransaction();
+      //Si el contacto existe lo eliminamos
+      tx.begin();
+      if(c != null) {
+         em.remove(c);
+      }
+      tx.commit();	
+   }
+	
+   public void eliminarContactosPorEmail(String email){
+      EntityManager em=getEntityManager();
+      Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+      qr.setParameter(1, email);
+      EntityTransaction tx=em.getTransaction();
+      tx.begin();
+      qr.executeUpdate();
+      tx.commit();
+   }
+	
+   public List<Contacto> recuperarContactos(){
+      EntityManager em = getEntityManager();
+      /*Query qr = em.createQuery("Select c From Contacto c");
+      return (List<Contacto>)qr.getResultList();*/
+      TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+      return qr.getResultList();
+   }
+	
+   public Contacto buscarContactos(String email){
+      EntityManager em = getEntityManager();
+		
+      String jpql = "Select c From Contacto c Where c.email = ?1";
+      TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+      qr.setParameter(1, email);
+      //return qr.getSingleResult();
+      return qr.getResultList().get(0);
+   }
+}
+```
+
+
+una serie de métodos teníamos el método privado que nos devuelven Timaná ayer.
 
 Lógicamente eso se mantiene.
 
