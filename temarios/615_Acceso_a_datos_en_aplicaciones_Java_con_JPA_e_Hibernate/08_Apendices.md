@@ -5,35 +5,55 @@
 
 # Apéndice A Crear backup de una base de datos MySQL 03:39
 
+<img src="images/39-01.png">
+
 Hola en este video Quiero explicarte cómo hacer un Bacab de una o varias bases de datos de malla SQL y cómo hacer un postre y una posterior restauración.
 
-Lo primero entramos en el administrador de mi SQL.
+Lo primero entramos en el administrador de mi SQL. Aquí tenemos en la parte izquierda las bases de datos y en la parte superior tenemos un menú con diferentes opciones y una de ellas es Backup que es donde vamos a entrar.
 
-Aquí tenemos en la parte izquierda las bases de datos y en la parte superior tenemos un menú con diferentes opciones y una de ellas es Baka que es donde vamos a entrar.
+<img src="images/39-02.png">
 
-Accedemos a la sección Bacab y pulsamos el botón New proyecto para generar un nuevo Bacab a partir de aquí nos aparece la lista con las bases de datos que tenemos y podemos añadir a la columna de la derecha aquellas bases de datos de las que queremos generar un Bacab un Baka por fin y al cabo va a ser un archivo SQL con las instrucciones de creación de la base de datos la tabla y los registros que tiene que incluir y en ese mismo SQL puede ir la creación de una o de varias bases de datos.
+Accedemos a la sección Backup y pulsamos el botón New Proyecto para generar un nuevo Backup.
 
-Por ejemplo si las bases de datos con la que hemos estado trabajando a lo largo del curso agenda almacén y banca vamos a generar un backup de las tres bases de datos juntas.
+<img src="images/39-03.png">
 
-Bueno pues una vez que ya las tenemos añadidas a la parte derecha pulsamos el botón Ejecutar y nos pide la carpeta donde queramos guardar dicho Baka seleccionamos donde queremos colocarlo por ejemplo yo me voy a poner aquí dentro de la carpeta del curso y le damos un nombre al archivo SQL Bacab bases de datos curso y ya está.
+A partir de aquí nos aparece la lista con las bases de datos que tenemos y podemos añadir a la columna de la derecha aquellas bases de datos de las que queremos generar un Backup, un Backup al fin y alcabo va a ser un archivo SQL con las instrucciones de creación de la base de datos, la tabla y los registros que tiene que incluir y en ese mismo SQL puede ir la creación de una o de varias bases de datos.
 
-Con esto automáticamente en menos de un segundo ahí tenemos ya generado dicho Baka qué tendríamos que hacer en el caso contrario es decir en el mismo equipo o en otro archivo lo podemos trasladar es un archivo con extensión como digo SQL entonces no podemos ver por aquí lo tengo por aquí para que lo puedas comprobar.
+Por ejemplo si las bases de datos con la que hemos estado trabajando a lo largo del curso agenda, almacén y banca vamos a generar un Backup de las tres bases de datos juntas.
 
-Aquí lo tenemos.
+<img src="images/39-04.png">
 
-Bueno en este caso como al renombrando no le puse la extensión punto SQL agravado sin extensión pero bueno es un archivo SQL lo podríamos ver intentando abrir aquí por ejemplo con el plus para ver su contenido.
+Bueno pues una vez que ya las tenemos añadidas a la parte derecha pulsamos el botón Ejecutar y nos pide la carpeta donde queramos guardar dicho Bacup, seleccionamos donde queremos colocarlo por ejemplo yo me voy a poner aquí dentro de la carpeta del curso y le damos un nombre al archivo SQL Bacab `backup_base_de_datos_curso` y ya está.
+
+<img src="images/39-06.png">
+
+Con esto automáticamente en menos de un segundo ahí tenemos ya generado dicho Backup.
+
+<img src="images/39-07.png">
+
+Qué tendríamos que hacer en el caso contrario es decir en el mismo equipo o en otro, ese archivo lo podemos trasladar, es un archivo con extensión como digo SQL entonces lo podemos ver por aquí, lo tengo por aquí para que lo puedas comprobar, aquí lo tenemos.
+
+<img src="images/39-08.png">
+
+Bueno en este caso como al renombrando no le puse la extensión SQL lo ha grabado sin extensión pero bueno es un archivo SQL lo podríamos ver intentando abrir aquí por ejemplo con el Nte Pad plus para ver su contenido.
+
+<img src="images/39-09.png">
 
 Esto es el contenido de dicho archivo está todo lleno de instrucciones SQL de creación de bases datos e inserción de contenidos.
 
-Pues lo cerramos y ahora que queremos restaurarlo en otro equipo nos iríamos a la sección Restore es decir ese archivo lo podemos trasladar en un pendrive y llevarlo a donde queramos y en el equipo destino donde queramos restaurar esa base de datos.
+Pues lo cerramos y ahora que queremos restaurarlo en otro equipo nos iríamos a la sección Restore.
 
-Llegamos a la sección Restore abrir archivos de backup y lo buscamos si aparece tipo SQL en los tipos de archivo que va a localizar.
+<img src="images/39-10.png">
 
-Pues claro si no tiene la extensión no lo vamos a ver aquí que es donde lo tengo.
+Es decir ese archivo lo podemos trasladar en un pendrive y llevarlo a donde queramos y en el equipo destino donde queramos restaurar esa base de datos.
 
-Podemos elegir todos los archivos y ahí nos aparecería.
+Llegamos a la sección Restore abrir archivos de backup y lo buscamos si aparece tipo SQL en los tipos de archivo que va a localizar. Pues claro si no tiene la extensión no lo vamos a ver aquí que es donde lo tengo. Podemos elegir todos los archivos y ahí nos aparecería.
+
+<img src="images/39-11.png">
 
 Aquí tenemos a base de datos curso abrimos y simplemente pulsamos el botón está Restore.
+
+<img src="images/39-12.png">
 
 Yo no lo voy a pulsar ahora porque como ya las tengo la base de datos creada no tengo que hacer una nueva creación pero si no existiera esa base de datos se generarían directamente con esto.
 
@@ -73,7 +93,6 @@ for(Object[] d:datos){
 }
 ```
  
-
 ### Enlaces de interés
 
 Página de Oracle:
