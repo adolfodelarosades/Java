@@ -4204,7 +4204,7 @@ public class GestionContactos {
       tx.commit();
    }
 
-   public void altacontacto(Contacto c) {
+   public void altaContacto(Contacto c) {
       EntityManager em = getEntityManager();
 		
       //La operación la incluimos en una transacción
@@ -4239,8 +4239,6 @@ public class GestionContactos {
 	
    public List<Contacto> recuperarContactos(){
       EntityManager em = getEntityManager();
-      /*Query qr = em.createQuery("Select c From Contacto c");
-      return (List<Contacto>)qr.getResultList();*/
       TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
       return qr.getResultList();
    }
@@ -4251,68 +4249,288 @@ public class GestionContactos {
       String jpql = "Select c From Contacto c Where c.email = ?1";
       TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
       qr.setParameter(1, email);
-      //return qr.getSingleResult();
       return qr.getResultList().get(0);
    }
 }
 ```
 
+Tenemos una serie de métodos, tenemos el método privado `getEntityManager()` que nos devuelven el `EntityManager`, lógicamente eso se mantiene. Hemos cambiado el nombre de la Unidad de persistencia para adaptarlo al nuevo ejercicio.
 
-una serie de métodos teníamos el método privado que nos devuelven Timaná ayer.
+Para los dos métodos de alta de contactos que tenemos `altaContacto(String nombre, String email, int telefono)` y `altaContacto(Contacto c)` los dejamos igual porque para hacer una operación básica CRUD con el método `persist(c)` del `EntityManager` eso no lo vamos a hacer con el API Criteria, Criteria nos sirve para hacer consultas, enviar consultas en lugar de JPQL hacerlo con este API Criteria.
 
-Lógicamente eso se mantiene.
+Entonces el primer método donde vamos a aplicar Criteria es en `recuperarContactos()` que recuperan todos los contactos de la base de datos.
 
-He visto que hemos cambiado el nombre de la Unidad de persistencia.
+```java
+public List<Contacto> recuperarContactos(){
+   EntityManager em = getEntityManager();
+   TypedQuery<Contacto> qr = em.createQuery("Select c From Contacto c", Contacto.class);
+   return qr.getResultList();
+}
+```
 
-También existen en XML lógicamente para adaptarlo al nuevo ejercicio.
+Con Criteria nos quedará así:
 
-Y bueno pues las dos métodos los dos métodos que teníamos de alta de contactos lo dejamos igual porque para hacer una operación básica Crook con los métodos en este caso pero si eso no lo vamos a hacer con API Criteria petitorias para hacer consultas enviar consultas en lugar de JPEG suele hacerlo con este app.
+```java
+public List<Contacto> recuperarContactos(){
+   EntityManager em = getEntityManager();
+   CriteriaBuilder cb = em.getCriteriaBuilder();
+   CriteriaQuery<Contacto> cq = cb.createQuery(Contacto.class);
+   Root<Contacto> raiz = cq.from(Contacto.class);
+   cq=cq.select(raiz);
+   TypedQuery<Contacto> qr = em.createQuery(cq);
+   return qr.getResultList();
+}
+```
 
-Entonces el primer método donde vamos a aplicar Criteria es recuperar contactos que se recuperan todos los contactos de la base de datos.
+Aquí construimos el `CriteriaBuilder`, el `CriteriaQuery` a partir de la clase `Contacto` el objeto `Root` también utilizando el método `from` de `CriteriaQuery` y una vez que tenemos ya el `CriteriaQuery` configurado o lanzamos un `select(raiz)` y esto sería el equivalente al Select de todos los contactos, a partidos del `CriteriaQuery` creamos el `TypedQuery` y recuperamos la lista de Contactos con `getResultList()`.
 
-Aquí creamos construimos el Criteria Builder el criterio de QWERTY a partir de la clase contacto el objeto RUV también utilizando el método from de Criteria.
+Esto lo teníamos lo habrás visto en el ejemplo que teníamos puesto en la documentación en el documento donde se explicaba la pequeña historia en la lección anterior.
 
-Y bueno pues una vez que tenemos ya el Criteria Cury configurado o lanzamos un Select con el Roiz y esto sería el equivalente pues al Seele de todos los contactos a partidos seguiría Ueli y creamos Twitter QWERTY y sulkys.
+En cuanto a buscar un contacto a partir de un determinado email:
 
-Esto lo teníamos lo habrás visto en el ejemplo que teníamos puesto en la documentación en el documento donde se explicaba la pequeña historia en la lección anterior en cuanto a buscar un contacto a partir de un determinado email aquí ya tenemos que proponer una condición.
+```java
+public Contacto buscarContactos(String email){
+   EntityManager em = getEntityManager();
+		
+   String jpql = "Select c From Contacto c Where c.email = ?1";
+   TypedQuery<Contacto> qr = em.createQuery(jpql, Contacto.class);
+   qr.setParameter(1, email);
+   return qr.getResultList().get(0);
+}
+```
 
-Por lo tanto después de hacer el Select del criterio injury todas estas situaciones como son las mismas que antes pues aplicamos el método huera donde aplicamos una condición llamada método Equal de Criteria Builder donde el email tenga que ser igual al valor de la variable email que se pasa como parámetro.
+Aquí ya tenemos que proponer una condición, con Criteria nos queda así:
 
-A partir de ahí cuando ya tenemos el Quiteria Kuric confeccionado creamos el Taipe QWERTY y de nuevo GAD3 un Liss en este caso nos quedamos con el primer resultado por si acaso hubiera más de uno que correspondería con el contacto primero que cumplan la condición que tenga cuyo valor de email sea igual al de esa variable.
+```java
+public Contacto buscarContactos(String email){
+   EntityManager em = getEntityManager();
+   CriteriaBuilder cb = em.getCriteriaBuilder();
+   CriteriaQuery<Contacto> cq = cb.createQuery(Contacto.class);
+   Root<Contacto> raiz = cq.from(Contacto.class);
+   cq=cq.select(raiz);
+   cq=cq.where(cb.equal(raiz.get("email"), email));
+			
+   TypedQuery<Contacto> qr = em.createQuery(cq);
+		
+   return qr.getResultList().get(0);
+}
+```
 
-En cuanto a eliminar contactos eliminar contacto a partir de líder sigue siendo una operación básica del City Manager Remus.
+Después de hacer `select(raiz)` todas las instrucciones hasta aquí son las mismas que antes, aplicamos el método `where` donde aplicamos una condición llamada método `equal` de Criteria Builder donde el email tenga que ser igual al valor de la variable email que se pasa como parámetro.
 
-Hay que hacer cambios pero teníamos un eliminar contactos por email que luego no se utilizaba desde la capa de controlador y la vista.
+A partir de ahí cuando ya tenemos el `CriteriaQuery` confeccionado creamos el `TypedQuery` y de nuevo usamos  `getResultList().get(0)` en este caso nos quedamos con el primer resultado por si acaso hubiera más de uno que correspondería con el contacto primero que cumplan la condición que tenga cuyo valor de email sea igual al de esa variable.
 
-Pero bueno lo teníamos implementado.
+En cuanto a `eliminarContacto(int idContacto)` eliminar contacto a partir de id sigue siendo una operación básica del `EntityManager` que usa el método básico `remove` para eliminarlo por lo que aquí no hacemos nada. Pero teníamos un método `eliminarContactosPorEmail(String email)` eliminar contactos por email que luego no se utilizaba desde la capa de controlador y la vista, pero bueno lo teníamos implementado, aquí sí teníamos que crear una consulta para eliminar por email. 
 
-Bueno pues aquí sí teníamos que crear una consulta para eliminar por email.
+```java
+public void eliminarContactosPorEmail(String email){
+   EntityManager em=getEntityManager();
+   Query qr=em.createNamedQuery("Contacto.deleteByEmail");
+   qr.setParameter(1, email);
+   EntityTransaction tx=em.getTransaction();
+   tx.begin();
+   qr.executeUpdate();
+   tx.commit();
+}
+```
 
-Bueno pues igualmente lo vamos a hacer con Criteria.
+Igualmente lo vamos a hacer con Criteria.
 
-Hasta aquí sería lo mismo hasta la creación del root pero en este caso no sería lo mismo porque en vez de crear un criterio evidentemente vamos a crear un criterio del experto si tenemos el criterio Wílder.
+```java
+public void eliminarContactosPorEmail(String email){
+   EntityManager em=getEntityManager();
+   CriteriaBuilder cb = em.getCriteriaBuilder();
+   CriteriaDelete<Contacto> cd = cb.createCriteriaDelete(Contacto.class);
+   Root<Contacto> raiz = cd.from(Contacto.class);
+   cd.where(cb.equal(raiz.get("email"), email));
+		
+   Query qr=em.createQuery(cd);
+		
+   EntityTransaction tx=em.getTransaction();
+   tx.begin();
+   qr.executeUpdate();
+   tx.commit();
+}
+```
 
-Y como ves aquí creamos un Criteria delete de la entidad al contacto que nos devuelve un objeto Criteria delete a partir de él con el método from creamos el robot y luego aplicamos la condición de eliminación.
+Aquí existe una gran diferencia con respecto a lo que veniamos haciendo en lugar de crear un `CriteriaQuery` creamos un `CriteriaDelete` apartir del `cb.createCriteriaDelete(Contacto.class)` a partir de él con el método `from` creamos el `Root` y luego aplicamos la condición de eliminación. Igual que tenía un método `where` el `CriteriaQuery` también lo tiene `CriteriaDelete` para establecer la condición de eliminación. En este caso llamada a el método `equal` del `CriteriaBuilder` donde le vamos a indicar que la columna `email` es igual a este valor de la variable. Una vez que tenemos ya el `CriteriaDelete` configurado de esa manera pues llamamos al `CriteriaQuery` y en este caso una llamada a `executeUpdate()` porque no se trata de seleccionar sino de una actualización.
 
-Igual que tenía un método web el criterio también lo tenía Criteria delete para establecer la condición de eliminación.
+Eso en cuanto a `GestionContactos`,  teníamos otra clase que es `GestionUsuarios` con el siguiente código:
 
-En este caso es llamada el método de Criteria Builder donde le vamos a indicar que la columna mail es igual a este valor de la variable.
+```java
+package modelo;
 
-Una vez que tenemos ya el Criteria delete configurado de esa manera pues llamamos a Criteria Juri y en este caso una llamada a Execute porque no se trata de seleccionar sino de una actualización.
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
-Eso en cuanto a gestión de contactos teníamos otra clase que es gestión usuarios donde se hacía el lock in.
+import entidades.Usuario;
 
-Sin embargo este método autenticar donde recibamos un usuario una contraseña y tendríamos que devolver si el usuario existía o no entonces lanzábamos en su momento en estos días JP QL vamos a verlo con Criteria Criteria aquí sería crear de nuevo un Criteria Cueli porque se trata de una selecta lanzamos una serie de raíz de decir esto serían las cuatro mismas instrucciones que en el caso de la gestión en contacto donde se hacía una búsqueda de los contactos y bueno a la hora de establecer la condición método web.
+public class GestionUsuarios {
+   
+   // método que permite obtener el objeto EntityManager
+   private EntityManager getEntityManager() {
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("615-15_web_jpa_criteria");
+      return factory.createEntityManager();
+   }
 
-Pues en este caso ya no se trata de que cumpla una única condición que tal columna sea igual al valor que cumplir dos.
+   public boolean autenticar(String usuario, String pwd) {
+      EntityManager em = getEntityManager();
+      boolean res = false;
+      TypedQuery<Usuario> qr = em.createNamedQuery("Usuario.findByUserAndPwd", Usuario.class);
+      qr.setParameter(1, usuario);
+      qr.setParameter(2, pwd);
+      try {
+	 qr.getSingleResult();
+	 res = true;
+      } catch (Exception ex) {
+         ex.printStackTrace();
+      }
+      return res;
+   }
+}
+```
 
-Por lo tanto deben estar dentro de una llamada al método de Criteria Builder donde le vamos a pasar las dos condiciones que usuarios e igual a la variable usuario y que sea igual a la variable PWR que tenemos el método al or si la condición fuera que cumpla una u otra podremos pasarle varias condiciones método al método y así podemos confeccionar una consulta más compleja. 
+Aquí tenemos el método `autenticar(String usuario, String pwd)` autenticar donde recibamos un usuario y una contraseña y tendríamos que devolver si el usuario existía o no, lanzábamos en su momento una expresión con JPQL vamos a verlo con Criteria.
 
-Bueno pues una vez que tenemos el criterio Aquaris pues como siempre el PP adquiere a partir de ahí una llamada Persinger Rasul para ver si se obtiene un resultado de un usuario que cumpla esa condición.
+```java
+public boolean autenticar(String usuario, String pwd) {
+   EntityManager em = getEntityManager();
+   boolean res = false;
+   CriteriaBuilder cb = em.getCriteriaBuilder();
+   CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
+   Root<Usuario> raiz = cq.from(Usuario.class);
+   cq=cq.select(raiz);
+   cq=cq.where(cb.and(cb.equal(raiz.get("usuario"), usuario), cb.equal(raiz.get("password"), pwd)));
+		
+		
+   TypedQuery<Usuario> qr = em.createQuery(cq);
+   try {
+      qr.getSingleResult();
+      res = true;
+   } catch (Exception ex) {
+      ex.printStackTrace();
+   }
+   return res;
+}
+```
 
-Si devuelve un resultado entonces esta instrucción se ejecutará normalmente se devuelve true bueno esto sería realmente lo mismo que ya teníamos hecho en la versión anterior puesto que a partir de inserta y pecarí todo es igual e independientemente de que es utilizado JPQL o Quiteria.
+Usamos `CriteriaQuery` por que se trata de una `Select` lanzamos una `select(raiz)` es decir hasta aquí, esto serían las cuatro mismas instrucciones que en el caso de la gestión en contacto donde se hacía una búsqueda de los contactos. A la hora de establecer la condición en el método `where` es donde esta lo interesante, en este caso ya no se trata de que cumpla una única condición, aquí tenemos dos condiciones. Por lo tanto deben estar dentro de una llamada al método `and` de `CriteriaQuery` donde le vamos a pasar las dos condiciones, que usuarios sea igual a la variable `usuario` y que password sea igual a la variable `pwd`. 
 
-Bueno pues esto sería esas funcionalidades implementadas a través de la victoria como es pues bueno pues es un poquito más complejo que J.P. QL pero permite construir dinámicamente y no depender de una cadena corta huele que en algunos casos esto ofrece esa ventaja de poder como digo con modificar y confeccionar dinámicamente la consulta.
+Así como existe un método `and` también existe un método `or` podremos pasarle varias condiciones a estos métodos y así podemos confeccionar una consulta más compleja. 
+
+Una vez que tenemos el `CriteriaQuery` pues como siempre el `TypedQuery` y a partir de ahí una llamada a `getSingleResult()` para ver si se obtiene un resultado de un usuario que cumpla esa condición.
+
+Si devuelve un resultado entonces esta instrucción se ejecutará normalmente se devuelve true, bueno esto sería realmente lo mismo que ya teníamos hecho en la versión anterior puesto que a partir de `TypedQuery` todo es igual independientemente de que se este utilizado JPQL o Criteria.
+
+Vamos a probar la aplicación:
+
+<img src="images/36-11.png">
+
+<img src="images/36-12.png">
+
+<img src="images/36-13.png">
+
+<img src="images/36-14.png">
+
+<img src="images/36-15.png">
+
+<img src="images/36-16.png">
+
+<img src="images/36-17.png">
+
+Bueno pues esto sería esas funcionalidades implementadas a través del API Criteria como ves es un poquito más complejo que JPQL pero permite construir dinámicamente y no depender de una cadena JPQL, que en algunos casos esto ofrece esa ventaja de poder como digo confeccionar dinámicamente las consultas.
+
+### :computer: Código Completo - 615-15_web_jpa_criteria
+
+<img src="images/36-18.png">
+
+*``*
+
+```html
+```
+
+*``*
+
+```html
+```
+
+**Entidades**
+
+*`Contacto`*
+
+```java
+```
+
+*`Usuario`*
+
+```java
+```
+
+**Modelo**
+
+*`GestionContacto`* Modificado
+
+```java
+```
+
+*`GestionUsuario`* Modificado
+
+```java
+```
+
+**Servlets**
+
+*`Controller`*
+
+```java
+```
+
+*`LoginAction`*
+
+```java
+```
+
+*`RecuperarAction`*
+
+```java
+```
+
+*`EliminarAction`*
+
+```java
+```
+
+*`AltaAction`*
+
+```java
+```
+
+
+**Vistas**
+
+*`login.html`*
+
+```html
+```
+
+*`menu.html`*
+
+```html
+```
+
+*`contactos.jsp`*
+
+```html
+```
+
+*`nuevo.html`*
+
+```html
+```
+
+
 
 # Autoevaluación VI 01:00
 
