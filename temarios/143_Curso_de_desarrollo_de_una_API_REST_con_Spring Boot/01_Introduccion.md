@@ -19,6 +19,33 @@ No existe.
 
 ## Transcripción
 
+<img src="images/01-01.png">
+
+Hola a todos y bienvenido a este curso en el que vas a aprender a desarrollar un API REST con Spring Boot. 
+
+<img src="images/01-02.png">
+
+Antes de nada me gustaría comentaros los requisitos que serían deseables para poder realizar con garantía este curso, es muy bueno que podáis manejar con algunos conceptos de Spring, sobre todo de la parte de podríamos llamar del nucleo, lo qué es el contenedor de inversión de control, inyección de dependencia, sino lo conocer podéis visitar nuestro curso de Spring Core.
+
+También sería muy bueno que ya manejaran algún concepto de Modelo Vista Controlador controladores, servicios que lo podéis también aprender si sino no pensáis que tengáis demasiadas solvencia en nuestro curso de Spring Boot y Spring Web MVC.
+
+Cómo es natural pues para poder hacerlo bien es bueno que tengáis conocimiento de Java si queréis también por repasar incluso puedes visitar nuestros cursos de Java 8 desde cero si lo consideráis necesario o si no el de Java 8 para programadores Java.
+
+Y también aunque no es estrictamente imprescindible porque el modelo de datos que vamos a manejar en este curso va a ser muy sencillo pero es recomendable tener conocimientos de JPA en particular de la capa de encima que utiliza Spring es decir Spring Data JPA y para ello también si visita el curso de JPA e Hibernate o el de Spring Framework podran trabajarlo adecuadamente.
+
+<img src="images/01-03.png">
+
+<img src="images/01-04.png">
+
+<img src="images/01-05.png">
+
+<img src="images/01-06.png">
+
+<img src="images/01-07.png">
+AQUIIII
+Que vamos a aprender en este curso, podemos aprender bastantes conceptos que nos van a servir para apuntalar qué es eso del mundillo REST y como implementar nuestras APIs con Spring Boots, principalmente empezaremos aprendiendo qué es la arquitectura REST, buenos en qué está basada también a nivel de protocolo en qué consiste el protocolo HTTP y cómo lo podemos utilizar para implementar sistemas que siguen esta arquitectura generar un proyecto de Spring boot para tener una API red utilizar algunas librería de utilidad como Lombok que nos van a hacer la vida bastante más fácil cuál sería la estructura de un controlador red vale que va a diferir mínimamente con respecto a lo que sería un controlador de una aplicación MVC de Spring en qué consiste eso del patrón de Data Transfer Object cómo manejar errores y excepciones dentro de nuestra API red y también veremos al final cómo subir ficheros no solamente enviar información ya veremos en un formato conocido como Jason graciosamente siempre sino también poder subir ficheros y cómo documentar nuestra picón pero con una herramienta que se llama suak todo eso es lo que vamos a aprender los trituraremos aproximadamente en 6 bloques en el cual cada uno de ellos habrá una serie de lesiones el primero será más de introducción para conocer eso del padrón red del protocolo HTTP y algunos elementos más a partir de ahí desarrollaremos nuestra primera API REST con Spring boot después aprenderemos a hacer el manejo de errores y excepciones de la forma más conveniente veremos que tenemos diferente alternativa algunas que vienen desde sprint 3 otras que se propusieron en Spring 4 alguna que se ha propuesto desde spring 5 cómo manejar qué es en qué consiste eso de corcho y cómo poder manejarlo la subida de ficheros y cómo documentar nuestra Hola a todos y bienvenido este curso en el que vais a aprender a desarrollar una pides con el primo soy Luis Miguel López Magaña y principalmente me dedico a dar clase ciclo formativo de grado superior relacionados con con el desarrollo de aplicaciones llevo más de 10 años como profesor y tengo más de 15 años de experiencia desarrollando prácticamente siempre en torno a ja baja baja de con tecnología como JP ahí verme y con sprint y también pues todo todo el ecosistema desde antes de nada me gustaría comentar en los requisitos que serían desearle para poder realizar con garantía y se curso en muy bueno que podáis manejar con con alguno conceptos de sprint sobre todo de la parte de Pokémon Diamante núcleo lo que él contenedor de inversión de control y de quién de Dependencia si no lo manejas pues podéis visitar nuestro curso de picores de también lo que sería muy bueno que ya manejar ella algún concepto de modelo vista controlador controladores servicio sale que lo podéis también aprender sí sí no sí no pensé que es que tenga y demasiada solvencia bien nuestro curso de Facebook 10:50 en bici como natural fue para poder hacerlo viene bueno que tengáis conocimiento de Java si queréis también puede pasar incluso puede visitar no es el curso de Java 8 desde cero si lo consideras necesario si no dejaba 8 para programador estaba y también aunque no es triste mente imprescindible porque el modelo de datos que vamos a manejar m s curso va a ser muy sencillo pero recomendable tener conocimiento de JP a particular de la casa de encima que utiliza si no de plata JP ahí para ello también se visita y no es el curso de JP hay ver ni vuelve Prince Royce bueno pues podré ir a trabajar lo adecuadamente que vamos a aprender m s curso por cómo aprender bastantes concepto es que no van a servir para monta la que eso del mundo y yo resi como implementar nuestras a pistones principalmente empezaremos aprendiendo que la arquitectura reales bueno que está basada también a animes de protocolo en qué consiste el protocolo HTTP y como no podemos utilizar para incrementar si te fuiste más que se llames arquitectura era un proyecto de tribu para tener una y reutilizar algunas librería de utilidad Colombo que no van a ser Navidad bastante más fácil cual sería la estructura de Déu controlador resbalé que va a digerir mínima mente con
+
+
 # 02 ¿Qué es un servicio REST? 15:06 
 
 [PDF Qué_es_un_servicio_REST.pdf](pdfs/01_Qué_es_un_servicio_REST.pdf)
