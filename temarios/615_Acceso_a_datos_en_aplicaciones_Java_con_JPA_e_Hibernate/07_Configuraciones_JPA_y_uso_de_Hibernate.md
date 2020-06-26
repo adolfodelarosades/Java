@@ -5291,12 +5291,12 @@ Aparte de este caso sí hay varias entidades implicadas utilizar `join` es una c
 
 Y por último también estuvimos hablando de la API Criteria aparte de otros elementos que vimos como por ejemplo actualizaciones en cascada la carga de datos rápida o carga perezosa.
 
-También vimos cómo crear primero X compuestos y finalmente hablamos de la API Criteria que nos permite definir consultas dinámicamente sin utilizar JPQL.
+También vimos cómo crear Primero Key compuestos y finalmente hablamos de la API Criteria que nos permite definir consultas dinámicamente sin utilizar JPQL.
 
 Esto ofrece cierta flexibilidad a la hora de crear las consultas.
 
-Vimos que también creaba o generaba cierta complejidad puesto que como veis están implicadas nuevas clases aparte de lo que son más clásicas las interfaces QWERTY el ayer evidentemente para construir las consultas en vez de utilizar una cadena instruccion J.P. suele empleábamos el Criteria Builder que es el creador de consultas el objeto root para hacer referencias a las entidades sobre las que se va a trabajar y luego ya depende de la consulta utilizar si es de selección 7 eliminación de actualización pues tienes Criteria Couric Criteria Deloitte Criterium respectivamente pues esto es todólogo lo que hemos visto en el curso espero que hayan disfrutado con él y que haya sido de tu agrado.
+Vimos que también creaba o generaba cierta complejidad puesto que como ves están implicadas nuevas clases aparte de lo que son más clásicas las interfaces `Query`  `EntityManager` evidentemente para construir las consultas en vez de utilizar una cadena instruccion JPQL empleábamos el `CriteriaBuilder` que es el creador de consultas el objeto  `Root` para hacer referencias a las entidades sobre las que se va a trabajar y luego ya depende de la consulta a utilizar si es de selección `CriteriaQuery`, si es de eliminación `CriteriaDelete` o si es de actualización `CriteriaUpdate`.
 
-En cualquier caso ya sabes que estoy aquí para responder a cualquiera de tus dudas y para atenderte en todo lo que pueda necesitar.
+Esto es todo lo que hemos visto en el curso espero que hayan disfrutado con él y que haya sido de tu agrado.
 
 Un saludo y gracias.
