@@ -10,7 +10,7 @@
 * 35 Ell API Criteria 03:44
 * 36 Ejercicio práctico VI 07:27
 * Autoevaluación VI 01:00
-* Resumen final 07:25
+* 38 Resumen final 07:25
 
 # 28 Ajuste de relaciones 06:54
 
@@ -5222,43 +5222,68 @@ SOLUCIONES:
 
 5.- C
 
-# Resumen final 07:25
+# 38 Resumen final 07:25
+
+<img src="images/38-01.png">
 
 Bueno pues ya hemos llegado al final de este curso a modo de resumen si te parece vamos a repasar un poquito los conceptos que hemos visto a lo largo del mismo.
 
-Empezamos hablando de lo que era una capa de persistencia que nos permitía exponer los datos a la aplicación en forma de objetos los que llamamos entidades y esa capa de persistencia puede ser creada y también manipulada desde la aplicación utilizando el estándar de Java Java persistan API que forma parte de la especificación Java.
+<img src="images/38-02.png">
 
-Java persiste en API pues dispone de un objeto principal conocido como Timaná ayer que nos proporciona una serie de métodos para realizar las llamadas operaciones básicas Cruzat de crear recuperar actualizar y eliminar entidades que se traduce en hacer esas operaciones por detrás que las lleva a cabo el motor de persistencia.
+Empezamos hablando de lo que era una *Capa de Persistencia* que nos permitía exponer los datos a la aplicación en forma de objetos los que llamamos *Entidades* y esa capa de persistencia puede ser creada y también manipulada desde la aplicación utilizando el estándar de Java Java Persistan API - JPA que forma parte de la especificación JavaEE.
 
-La base de datos estos métodos serán el percibís para hacer la persistencia o añadir nuevas entidades actualizar entidades eliminar entidades y localizar entidades recuerda que estas tres operaciones que implican una acción en la base de datos están englobadas dentro de una transacción que en caso de utilizó en Enterprise Java Bin como vimos esas transacciones serán gestionadas automáticamente por el contenedor JB no tendríamos que preocuparnos del código de iniciar confirmar transacciones por supuesto también hemos visto las consultas como una parte muy importante de JPA ya que aparte de esas operaciones.
+<img src="images/38-03.png">
 
-Si queremos hacer operaciones más complejas que impliquen por ejemplo recuperar entidades en base a criterios diferentes a la primera íQué y eliminar conjuntos de entidades etcétera pues tenemos que recurrir como digo a las consultas que se ejecutan a través de o bien el objeto qwerty o Taipe.
+El Java Persiste API - JPA dispone de un objeto principal conocido como `EntityManager` que nos proporciona una serie de métodos para realizar las llamadas operaciones básicas CRUD de crear, recuperar, actualizar y eliminar entidades que se traduce en hacer esas operaciones por detrás que las lleva a cabo el motor de persistencia en la base de datos estos métodos son:
 
-Esas consultas se definen utilizando un lenguaje basado en SQL conocido como J.P. cuelen Java persista en qn a la hora de generar las consultas que da las consultas.
+* `persist` para hacer la persistencia o añadir nuevas entidades 
+* `merge` actualizar entidades
+* `remove` eliminar entidades 
+* `find` y localizar entidades 
 
-Podemos utilizar consultas estándares que se definen dentro de la propia el propio código.
+Recuerda que las tres primeras operaciones que implican una acción en la base de datos están englobadas dentro de una transacción, que en caso de utilizó en EJBs como vimos esas transacciones serán gestionadas automáticamente por el contenedor EJB, no tendríamos que preocuparnos del código de iniciar, confirmar transacciones.
 
-Como ves aquí en este ejemplo las consultas pueden ser parametrizada es decir determinados valores pueden no conocerse en el momento de crear la instrucción y proporcionarse después como parámetros en vez de andar concatenando valores y demás en la propia instrucción se pronuncian como parámetros que pueden ser parámetros definidos o bien por posición o bien por un nombre y también vimos que otra variante a la hora de crear las consultas es en lugar de definirlas como en estos casos en el propio código.
+<img src="images/38-04.png">
 
-La definíamos en la entidad las llamadas equally o consultas nominadas a la hora de trabajar con ellas.
+Por supuesto también hemos visto las consultas como una parte muy importante de JPA ya que aparte de esas operaciones CRUD si queremos hacer operaciones más complejas que impliquen por ejemplo recuperar entidades en base a criterios diferentes a la Primary Key y eliminar conjuntos de entidades etc. tenemos que recurrir a las consultas que se ejecutan a través de el objeto `Query` o `TypedQuery`.
 
-Luego en el código creábamos creamos el objeto qualia asociado a la consulta utilizando creatinina Mercuri en lugar de create QWERTY indicando el nombre de la consulta que se le había asignado al crearla dentro de la entidad como es el lenguaje JPQL es la parte esencial a la hora de crear una consulta y hemos visto que existen realmente tres tipos de instrucciones JPQL la Sele cuyos formatos ves aquí tres ejemplos de cada una.
+Esas consultas se definen utilizando un lenguaje basado en SQL conocido como JPQL Java Persistan QL.
 
-SELECT UPDATE DELETE.
+A la hora de generar las consultas podemos utilizar consultas estándares que se definen dentro del propio código, como ves en los ejemplo de la transparencia.
 
-Tres ejemplos de clásicos de utilización de dichas instrucciones que una vez definidas se proporcionan al objeto a la hora de crear el objeto KERI o Taipe.
+Las consultas pueden ser parametrizada, es decir determinados valores pueden no conocerse en el momento de crear la instrucción y proporcionarse después como parámetros, en vez de andar concatenando valores y demás en la propia instrucción se pronuncian como parámetros que pueden ser parámetros definidos o bien por posición o bien por un nombre.
 
-Si bien si vienen directamente o ya se han especificado Mercuri y ya una vez que ya las tenemos podemos ejecutarlas vimos también cómo podíamos relacionar entidades a fin de facilitar las operaciones.
 
-Cuando trabajamos con un conjunto de entidades que tienen alguna relación entre ellas es decir a nivel de tabla tienen un campo común pero a nivel de entidad eso se traduce en que un objeto de una entidad incluye en su interior todos los objetos relacionados.
+También vimos que otra variante a la hora de crear las consultas es en lugar de definirlas como en estos casos en el propio código, las definíamos en la entidad las llamadas `NamedQuery` o consultas nominadas a la hora de trabajar con ellas en el código creamos el objeto `Query` utilizando `createNamedQuery` en lugar de `createQuery` indicando el nombre de la consulta que se le había asignado al crearla dentro de la entidad.
 
-Entonces qué ocurre.
+<img src="images/38-05.png">
 
-Que por ejemplo vas a obtener recuperar una entidad.
+Como ves es el lenguaje JPQL es la parte esencial a la hora de crear una consulta y hemos visto que existen realmente tres tipos de instrucciones JPQL:
 
-Por ejemplo hacer un fin o una consulta de un conjunto de entidades.
 
-Recuperamos también los objetos relacionados con lo cual las operaciones en el código luego se simplifican bastante las relaciones podrían ser uno a muchos una entidad le corresponden muchos objetos de otra muchos a uno es decir a varias entidades estas tienen asociado el mismo objeto de otra de otra entidad o muchos a muchos a la hora de configurarlas pues aquí vemos unos ejemplos de las anotaciones que culturizar en cada caso y también de las anotaciones a nivel de definición de lo que son las columnas de relación o relaciones a nivel de tabla de la base de datos.
+* `Select From empleado e Where e.edad > 25`
+* `Update producto p Set p.precio = p.precio*0.9`
+* `Delete From Producto p Where p.nombre like "%pru%"`
+
+Tres ejemplos clásicos de utilización de dichas instrucciones que una vez definidas se proporcionan al objeto a la hora de crear el objeto `Query` o `TypedQuery`.
+
+Si vienen directamente o ya se han especificado en una `NamedQuery` y ya una vez que ya las tenemos podemos ejecutarlas.
+
+<img src="images/38-06.png">
+
+<img src="images/38-07.png">
+
+<img src="images/38-08.png">
+
+Vimos también cómo podíamos relacionar entidades a fin de facilitar las operaciones cuando trabajamos con un conjunto de entidades que tienen alguna relación entre ellas, es decir a nivel de tabla tienen un campo común pero a nivel de entidad, eso se traduce en que un objeto de una entidad incluye en su interior todos los objetos relacionados.
+
+Entonces qué ocurre, que por ejemplo vas a obtener, recuperar una entidad, por ejemplo hacer un `find` o una consulta de un conjunto de entidades, recuperamos también los objetos relacionados con lo cual las operaciones en el código luego se simplifican bastante. Las relaciones podrían ser:
+
+* Uno a Muchos: una entidad le corresponden muchos objetos de otra 
+* Muchos a Uno: es decir a varias entidades estas tienen asociado el mismo objeto de otra entidad 
+* Muchos a Muchos
+
+A la hora de configurarlas pues aquí vemos unos ejemplos de las anotaciones que culturizar en cada caso y también de las anotaciones a nivel de definición de lo que son las columnas de relación o relaciones a nivel de tabla de la base de datos.
 
 No todo se podía resolver con relaciones y con instrucciones J.P. cueles simples es decir hay algunas consultas complejas que solamente se pueden resolver uniendo entidades dentro de la consulta a través de una cláusula que también se dispone de ella en el lenguaje SQL estándar que la cláusula Yeung nos permite como ves aquí pues a la hora de seleccionar una entidad que es una relación del tipo de lado no mucho del lado uno por ejemplo a la hora de seleccionar producto pues esa entidad a la hora de relacionarla conventos para establecer la condición a través de ventas pues no se podría hacer directamente en una instrucción habría que recuperar todos los todos los productos y sumando lo bueno sería algo bastante complejo como ya vimos en un ejercicio que te presente entonces a través de la cláusula Yeung.
 
