@@ -143,11 +143,15 @@ Con RPP sí tuviéramos un servicio para consultar información sobre cervezas t
 
 <img src="images/02-10.png">
 
+Esto además nos va a permitir que separemos un recurso de lo que será su representación y un mismo recurso podremos obtenerlo con diferentes representaciones, por ejemplo en JSON o XML en determinadas ocasiones me interesaba y la separación pues puede hacer que tengamos por allí algún middleware que se encargue en un determinado momento de el recurso en si transformado a la representación que mas nos interese, ya veremos cómo lo podemos hacer.
+
 <img src="images/02-11.png">
+
+Por tanto REST no ofrece una serie de ventajas que vamos a aprovechar la separación cliente-servidor además de una manera sencilla y a través de puerto seguro como suele ser el 80, visibilidad, fiabilidad y escalabilidad, la separación entre cliente y servidor tiene la ventaja de que cualquier equipo de desarrollo puede escalar el producto sin problemas lo podemos ir migrando de servidores al tenerlo totalmente separado podemos acercarme a nivel de base datos, la separación nos va a ayudar siempre y además REST es independiente del tipo de plataforma y lenguaje es decir podemos crear API REST con PHP con Java con Python con Node, aquí en particular lo vamos a aprender con Spring pero podríamos utilizar cualquier tipo de tecnología, solamente necesitamos un lenguaje de programación que nos permita crear servidores, que atiendan peticiones, que puedan producir respuestas con XML o JSON.
 
 <img src="images/02-12.png">
 
-
+Resumo esta lección, lo que vamos a hacer a lo largo del curso a través de este gráfico es decir vamos a crear la parte de la derecha lo que sería un servidor, nuestra API REST que va a recibir peticiones del cliente de tipo multiplataforma desde una placa Arduino o de cualquier tipo de IoT, desde un navegador web, desde una aplicación móvil nativa se realizarán peticiones HTTP, ahora veremos cómo y recibiremos una respuesta normalmente será en un formato plano de texto vease XML o JSON preferentemente este último, que ya en los clientes podremos procesar y podremos trabajarlos de manera que podamos mostrárselo al usuario, hasta aquí la introducción a qué es un servicio REST en la próxima lección vamos a aprender sobre HTTP.
 
 # 03 Protocolo HTTP 7:37 
 
