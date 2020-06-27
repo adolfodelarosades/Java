@@ -209,9 +209,14 @@ Algunos los más conocidos vale cómo serían cómo serían los códigos de tipo
 Los códigos 400 que son de errores de cliente, cómo serían path request una petición errónea, no autorizado o una solicitud legal pero sin privilegios.
 
 <img src="images/03-09.png">
+
 <img src="images/03-10.png">
+
 <img src="images/03-11.png">
 
+En [Códigos de estado de respuesta HTTP](https://developer.mozilla.org/es/docs/Web/HTTP/Status) tenemos la posibilidad de ver cada uno de ellos, los códigos de respuesta nos traen un número y también un mensaje, dentro del conjunto de los 200 tenemos que la solicitud se ha hecho con éxito en una petición GET en el 201 no indica que la solicitud ha tenido éxito y se ha creado un nuevo recurso, hay algunos que se utilizan más y otros menos, 202 y 203 se utilizan menos, 204 sí que se utiliza con más frecuencia la petición se ha completado con éxito y se devuelve sin cuerpo, contenido parcial, tenemos luego las peticiones por ejemplo las de tipos 400 bad request una petición errónea, la petición de no autorizado si estamos haciendo algún tipo de autenticación pues tendremos ese tipo de respuesta. Trabajaremos con estos códigos y de hecho seremos nosotros los que en nuestros API los iremos generando para que le demos una respuesta al cliente sobre lo que ha ha sucedido. 
+
+Ya hemos conocido el protocolo HTTP en la próxima lección vamos a profundizar un poco más.
 
 # 04 Algunos elementos de HTTP 7:57 
 
@@ -228,6 +233,22 @@ Podemos encontrar un listado exhaustivo de métodos o verbos de HTTP en castella
 También podemos encontrar un listado exhaustivo de encabezados o cabeceras de HTTP en castellano en la documentación de desarrolladores de mozilla: https://developer.mozilla.org/es/docs/Web/HTTP/Headers.
 
 ## Transcripción
+
+<img src="images/04-01.png">
+<img src="images/04-02.png">
+<img src="images/04-03.png">
+<img src="images/04-04.png">
+<img src="images/04-05.png">
+<img src="images/04-06.png">
+<img src="images/04-07.png">
+<img src="images/04-08.png">
+<img src="images/04-09.png">
+<img src="images/04-10.png">
+<img src="images/04-10.png">
+<img src="images/04-11.png">
+
+Hola hablamos antes de método y nos presentamos vamos a vernos con más detenimiento los métodos que más vamos a usar serán sobre todo que post put y DELETE vale que son digamos que los métodos más básico y casi que los que podemos alinear a lo que serían los distintos verbos de un Cruz la creación de recursos la lectura de recursos la actualización de recurso y el borrado de recurso la petición que nos sirve para solicitar un recurso al servidor vale y bueno cuando lo implementemos una petición que no debería tener otro efecto que devolver el recurso solicitado para otro tipo de efectos deberíamos utilizar otro tipo de método verbo una petición POST será aquella petición que envíe datos para que sean procesados los datos se deben incluir en el cuerpo de la petición y deberíamos utilizar este tipo de petición para crear recursos en el servidor que el impacto sea la creación de un recurso vamos a hacer editar deberíamos usar el verbo put ya veréis como hay mucha gente que por ahí ha desarrollado cosas que parecen reales pero que en el fondo no lo son y que utiliza vos tanto para evitar como para crear nuevo recurso deberíamos utilizar no solamente para descubrir but she que se debería utilizar en operaciones de actualización completa en recibir que este recurso que enviamos sustituye a uno que exista y suele ser idempotentes decir que si enviáramos n veces está petición debería producir la misma modificación que enviarla una sola vez que no debería acumular modificación y la petición de letra que es bastante sencilla porque debería dedicarse a borrar el recurso especificado como decía estos son los que más vamos a utilizar pero no son los únicos otros que son útiles como por ejemplo her qué es idéntico a el método que perdón el método es idéntico al método que pero en lugar de que el cuerpo de la respuesta venga relleno este vendría solamente los encabezados y útil para obtener metadatos por ejemplo si queremos saber un determinado fichero que nos vamos a descargar cuánto pesa pues le podríamos hacer primero una petición G y así tendríamos esos datos no la petición opcions que devuelve la lista de métodos HTTP que soporta un recurso y qué se utiliza en bastantes conceptos vale por ejemplo si no estoy equivocado sin ser experto pero creo que angular es1d a la hora de crear servicios que van a interactuar con un API pues también lo utiliza o la petición pack que nos permita actualizar parcialmente un recurso sin tener que hacerlo de forma completa con respecto a los métodos si hablamos de encabezado cabecera en inglés header vale son metadatos que contextualizan nuestro mensaje vale cada cabecera especificada por un nombre de cabecera seguida por dos puntos valenciano que se estructura clave-valor y después de esos dos puntos un espacio en blanco y el valor de dicha cabecera y además después un retorno de carro vale una especie de intro para que se esté una nueva cabecera en la siguiente línea de hecho si hubiéramos esto por dentro vale lo que se enviar en realidad al servidor podríamos ver aquí una serie de encabezado una línea en blanco vale una línea en blanco para indicar el final de la cabecera y si no hay cabecera la línea en blanco debería permanecer por si estamos desarrollando un cliente a bajo nivel para nuestra para nuestra tierra como decía esto encabezado cabecera para nadar una gran flexibilidad vale porque el protocolo dice que debe haber encabezado pero a lo largo del tiempo han ido apareciendo más con lo cual no nos ceñimos a tener solamente unos pocos frente a otro esquema como decíamos antes otro tipo de protocolo donde cualquier cambio producción gran impacto aquí pues con el tiempo han ido apareciendo nuevos encabezados con resultado francamente útiles vale ser interpretados por el cliente o por el servidor o por los intermediarios se tuvieron algún tipo de proxy de Gateway pues fecha como tipos tenemos tres los encabezados de petición los encabezados de respuesta y los encabezados de peticiones respuesta que podemos encontrar los mensajes de amor tiempo hay muchos que son estándares los podemos visitar por aquí vale también los tipos de cabeceras que hay y y bueno vamos a
+
 
 # 05 Nuestro entorno de desarrollo 9:34 
 
