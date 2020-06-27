@@ -278,19 +278,31 @@ Como tipos tenemos tres los encabezados de petición, los encabezados de respues
 
 https://developer.mozilla.org/es/docs/Web/HTTP/Headers
 
-
 Los tipos de cabeceras que hay.
 
-
 <img src="images/04-08.png">
+
+Vamos a ver alguna pequeña clasificación en función de a qué se dedican, si hablamos de por ejemplo el clientes y queremos ver qué son aceptadas por el cliente que envía el mensaje uno de los encabezados de las cabeceras más importantes es **Accept** esto se envían una petición y le estamos diciendo al servidor el tipo de formato que vamos a aceptar normalmente se envía un tipo MIME, entonces si nosotros tenemos una API que soporta la representación de los recursos en distintos formatos podríamos decirle oye yo en particular ahora en lugar de en JSON quiero tener esto en XML o si puedes me envías una representación en HTML del recurso y esto es francamente útil porque ya digo que si es soportado por el servidor podríamos variando.
+
+También hay veces que utilizamos **Accept-Charset** para indicar oye pues yo lo quiero en UTF-8, en latín o en otro tipo de codificación.
+
+Otro muy como suele ser **User-Agent** que se utiliza para hacer una descripción del cliente que hace la petición.
+
 <img src="images/04-09.png">
+
+Para la descripción del contenido por ejemplo pues tendríamos **Content-Type** o **Content-Length** no podría venir una respuesta y no diría que el contenido que te estoy enviando es de este tipo MIME particular o tiene esta longitud.
+
 <img src="images/04-10.png">
-<img src="images/04-10.png">
+
+A nivel de hacer referencia a las URIs tenemos algunas como `Location` que indica dónde está el contenido posiblemente completo, también para autenticación tenemos alguna como `Authorization` o `WWW-Authenticate` que se utilizan en mecanismo de seguridad.
+
+Estás serían una de las más conocidas o de las cuales nos podemos ir encontrar.
+
 <img src="images/04-11.png">
 
+Si queremos ver un diálogo que está extraído de la Wikipedia, si dijéramos descargar en el navegador esta URL `www.example.com/index.html` por debajo en la cocina podríamos decir del navegador y el servidor esto es lo que sucedería, se abre una conexión en el puerto 80, el mensaje del lado derecho es el que se enviaría como petición indicando el tipo de petición,  hacia quién se hace, la versión del protocolo, a qué Host, quíen es el user-agents como no se envía ningún tipo de dato en el cuerpo de la petición vendría una línea en blanco y nada más y en la respuesta, la del lado derecho, podemos ver como nos respondería con la versión del protocolo, el código 200 que todo va bien ,la fecha, el tipo de contenido, el tamaño, un espacio en blanco porque terminan las cabeceras y a partir de aquí todo el contenido.
 
-y y bueno vamos a
-
+Con esto podemos ver cómo va funcionando el protocolo HTTP sobre el cual se va a basar REST y a partir de ahora en la próxima lección ya podemos ir viendo cómo ir montando nuestro entorno para empezar a poner ya el foco en programar nuestras APIs REST.
 
 # 05 Nuestro entorno de desarrollo 9:34 
 
@@ -395,6 +407,8 @@ curl -X DELETE https://jsonplaceholder.typicode.com/posts/24
 ```
 
 ## Transcripción
+
+Hola a todos vamos a continuar con nuestro curso de desarrollo de una pirueta con Spring boot íbamos a conocer el entorno de desarrollo que vamos a utilizar podemos crear proyectos con Spring con alguna de nuestro y de favorito cómo puede ser eclipse IntelliJ J idea o Visual Studio nosotros vamos a utilizar spring tool Suite es una extensión para algunos y desconocidos vale y que nos permite trabajar con Project stream de una manera súper fácil y conveniente está disponible para Eclipse nosotros será el pan del que utilizamos se puede descargar un bueno pues ya con el con el plugin instalado de Spring tool suite y bueno si no también lo tenemos como extensión disponible para Visual Studio code párate ya y si quisiera ir vale pues también con inteligente aunque spring tool suite plugin no existe para inteligente inteligente idea pero es verdad que sobre todo en su versión de pago tiene una serie de extensiones que nos permitirían trabajar con un proyecto con total tranquilidad que no tenéis la presión de pago y tenéis la versión gratuita pues también a través del servicio starter se pueden generar fácilmente los proyectos importan como me iba y podría impugnar que digo nosotros vamos a trabajar con Spring tool suite el banderín para está disponible para Windows para para Mac para Linux también hay extensiones para Visual Studio code Coratella para alguno de vuestros de favorito nosotros trabajaremos con este os lo podéis descargar desde la web de Spring tool suite vale primo y os barrastur desde aquí lo podéis descargar con total tranquilidad para Linux para Mac para Windows incremente hay que descomprimirlo de allá donde lo queráis utilizar y ni siquiera instalarlo y doble click y lo podría empezar a ejecutar vale con una serie de funcionalidades ya digo bastante interesante y francamente cómodo también para los más viejos del lugar senil a ver si entre por si seguís todavía trabajar con ella útil sobre todo si vaya a trabajar con algún proyecto Legazpi que no utilice spring boot oalgo una cosa bastante bastante más vieja eso por ahí en nuestro entorno ya digo que trabajaremos con Spring tool suite y lo haremos desde desde Esteban de a nivel dejaba deciros que la versión mínima será la versión 8 vale de hecho la 8 la tienes que tener instalada porque a día de hoy es necesaria para poder ejecutar eclipse con Spring tool suite pero también podríais tener alguna versión adicional como la versión 911 versiones LTS que ofrecen alguna funcionalidad más de hecho a lo mejor en algún punto del curso digo si estuvierais Java 9 o Java 11 lo podría ser así no si trabajáis en Linux es verdad que además para poder gestionar estas varias versiones de cava tenemos por ahí algún alguna herramienta como ese de cama que a través de la consola o permitirían que pudiera ir gestionar la descarga de distintos JDK en realidad ya no es el momento de comentarlo pero no son el JDK oficial de Oracle ketchup cuyo licenciamiento pues cambio hace ya un tiempo sino que son otros open JDK podríamos descargar de Vigo y tener diferentes versión instalada y conmutar entre algunas de ellas decir que Sprint ya hemos hablado en nuestro entorno de desarrollo como tal ahora hablar del entorno en el cual nos vamos a mover de freno es un gran ecosistema de proyectos que incluye un montón de proyecto y además alguno de esos proyectos también son un proyecto podríamos llamar paraguas sobre otros que van dentro no algunos de ellos como por ejemplo los que tenemos aquí no spring boot framework security data muchos de ellos algunos de ellos o con muchos de ellos lo utilizaremos a lo largo de este curso o de sucesivos curso sobre sobre API REST con Spring y bueno vamos a conocer alguno en algo más de profundidad cómo sería spring boot que facilita la creación de aplicaciones pasadas con Spring de manera que sea independiente y listas para usar con un esfuerzo mínimo vale tiene una gestión superfácil a través de dependiendo de su zumo de sus amos hola a todos vamos a continuar con la Seu curso de desarrollo de una directo en el facebook y vamos a conocer el entorno de desarrollo que vas a utilizar podemos quedar proyectos con spring con ayuda de nuestro y de favorito cómo puede ser x** J idea o Visual Studio nosotros vamos utilizar el príncipe un extensión para algunos y desconocidos vale y que no permite trabajar con proyecto de tren de una manera super fácil y conveniente está disponible para eclipse beso nosotros era el pan del que utilizamos se puede descargar download
 
 # 06 Uso de la librería Lombok 7:22 
 
