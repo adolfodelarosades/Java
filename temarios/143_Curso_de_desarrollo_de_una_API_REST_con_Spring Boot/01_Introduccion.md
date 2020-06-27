@@ -115,9 +115,31 @@ Además tenemos los problemas de comunicación, además de los problemas que son
 
 <img src="images/02-07.png">
 
+Con el auge de la web esta plataforma la propia web paso a ser la preferida para el desarrollo de software con el tirón del comercio electrónico, en lugar de ser un único estándar es un conjunto de mucho estándares pequeños definido en documento llamado RFC Request For Comment, que la manera en que empezó la web que digamos que no empezó como un estándar sino como bueno pues un algo hay que empezó poco a poco a partir de una serie de documentos y bueno no patrocinada por una única organización sino un conjunto de varias, entonces con eso todo momento en la petición de comentarios venido definiendo pequeño estándares que son francamente aportan una gran flexibilidad frente a los cambios, bueno pues todo esto supuso el caldo de cultivo para para que surgiera REST al calor de la web y el protocolo HTTP.
+
 <img src="images/02-08.png">
 
+REST es un nuevo enfoque para sistemas distribuidos propuesto por un autor Roy Fielding en su tesis doctoral y que tiene una serie de características, si queréis visitar os dejo en el material complementario la URL de la tesis y la podrías consultar y ver como allí se propone eso de REST, esta arquitectura. Tiene una serie de características está basada en el protocolo HTTP, es Sin Estados es decir que cada petición HTTP tiene toda la información necesaria para ser ejecutada, lo cual hace que la gestión del protocolo sea más fácil, los recursos vienen representados por una URI, un identificador único del recurso, se tiene una interfaz uniforme para interactuar entre los diferentes sistemas y todo esto hace que en el fondo sea bastante más fácil.
+
 <img src="images/02-09.png">
+
+Frente a RPC, REST esta orientado a ofrecer recursos, RPC sin embargo suele ofrecer una exposición de funcionalidades tenemos un ejemplo por aquí:
+
+RPC
+
+```
+/myapi/beerService/getAll
+/myapi/beerService/getById
+```
+
+REST
+
+```
+/myapi/beers
+/myapi/beer/123
+```
+
+Con RPP sí tuviéramos un servicio para consultar información sobre cervezas tendríamos que tener una serie de llamadas a métodos, devuélveme todas las cervezas, devuelven una cerveza por id sin embargo la idea de REST es *ofrecer recursos* aunque a mí se me escapa alguna vez la palabra servicio, el concepto de servicio desaparece frente a recurso y si quieres tener el catálogo con todas las cervezas lo que tengo que hacer invocar al recurso cervezas y si lo que quiero es una en particular lo que tengo que hacer es invocar al recurso cerveza con su correspondiente id, la idea de recurso frente a la idea de ofrecer funcionalidades.
 
 <img src="images/02-10.png">
 
@@ -125,7 +147,7 @@ Además tenemos los problemas de comunicación, además de los problemas que son
 
 <img src="images/02-12.png">
 
-con el auge de la web esta plataforma la propia web paso a ser la preferida para el desarrollo de software con el tirón del comercio electrónico en lugar de ser un único estándar es un conjunto de mucho estándares pequeños definido en documento llamado RFC request for comment vale que la manera en que empezó la web que digamos que no empezó como un estándar sino como bueno pues un algo hay que empezó poco a poco a partir de una serie de documentos y bueno no patrocinada por una única organización sino un conjunto de varias vale entonces con eso todo momento en la petición de comentarios venido definiendo pequeño estándares que son francamente aportan una gran flexibilidad frente a los cambios bueno pues todo esto supuso el caldo de cultivo para para que surgiera red al calor de amigo de la web y el protocolo HTTP red es un nuevo enfoque para sistemas distribuidos propuesto por un autor Roy Fielding en su tesis doctoral y que tiene una serie de características si queréis visitar vale os dejo en el material complementario la URL de la tesis de que alguien la quiere leer vale que pública y la podrías consultar y ver como como allí se propone eso de no estar quitectura tiene una serie de características está basada en el protocolo HTTP scene Estado es decir que cada petición HTTP tiene toda la información necesaria para ser ejecutada lo cual hace que la gestión del protocolo se más fácil los recursos vienen representados por una URI vale un un identificador único del recurso se tiene una interfaz uniforme para interactuar con entre los diferentes sistemas y yo digo que todo esto hace que en el fondo sea bastante más fáciles frente a RPC restaurant A2 ofrecer recurso de reposición embargo suele ofrecer una exposición de funcionalidades no tenemos un ejemplo por aquí con RPP sí que estén tuviéramos un servicio para consultar información sobre cerveza tendríamos que tener una serie de llamadas a métodos devuélveme todas las cervezas devuelven una cerveza por iré sin embargo la idea de red es ofrecer recursos no realmente aunque a mí se me escapa alguna ver la palabra servicio el concepto de servicio desaparece frente a recurso y si quieres tener el catálogo con todas las cervezas por lo que tengo que hacer invocar al recurso cerveza y si lo que quiero es una en particular por lo que tengo que hacer es invocar al recurso pero besa con su correspondiente la idea de recurso frente a la idea de ofrecer funcionalidades Joaquín el Euromillón algún momento determinado superar acordar pero tenía básicamente las mismas la
+
 
 # 03 Protocolo HTTP 7:37 
 
