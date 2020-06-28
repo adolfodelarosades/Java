@@ -797,6 +797,17 @@ Spring Boot ofrece una serie de instancias de `HttpMessageCoverter` por defecto 
 
 ## Transcripción
 
+<img src="images/07-01.png">
+<img src="images/07-02.png">
+<img src="images/07-03.png">
+<img src="images/07-04.png">
+<img src="images/07-05.png">
+<img src="images/07-06.png">
+<img src="images/07-07.png">
+<img src="images/07-08.png">
+<img src="images/07-09.png">
+<img src="images/07-10.png">
+
 # Contenido adicional  7
 
 * [PDF Presentacion.pdf](pdfs/00._Presentacion.pdf)
