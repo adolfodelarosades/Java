@@ -148,9 +148,159 @@ Vemos como nuestra aplicación se ha lanzado.
 
 <img src="images/08-15.png">
 
-Ya estaría disponible en el puerto 8080 y en primera instancia podríamos comprobarlo desde el propio navegador con el URL `http://localhost:8080/greeting`
+Ya estaría disponible en el puerto 8080 y en primera instancia podríamos comprobarlo desde el propio navegador con el URL `http://localhost:8080/greeting` y aquí tendríamos nuestro `Hello, World!`.
 
-localhost 8080 greeting y aquí tendríamos nuestro hello-world vale cómo podemos ver la creación de un servicio es bastante sencillo no es tan solo necesitaríamos tener una clase controladora anotada con red controller en la que tengamos algunos métodos anotado bien con request mapping y el método correspondiente cómo podría ser con quién muffin post mapping with mapping Odile te maten y en el cual pues podamos atender peticiones que recibirán o no alguna serie de argumentos y en la que podamos devolver valores que bueno dentro de está dentro de este método estamos devolviendo una clase Java que serán transformadas a través de un HTTP mensaje Converter aunque tengamos solamente el navegador y le damos a inspeccionar Network y hacemos y recargamos podríamos ver que ha sucedido por aquí detrás y si pinchamos en greeting vale si voy un poco regular sabemos algo más pero podemos ver como el navegador por detrás recibido todas en esa petición GET ha enviado alguna serie de elementos y ha recibido en la respuesta vale aquí tendremos un preview de lo que sería y aquí tendríamos incluso los encabezados de la respuesta así como de la petición vale como lo ha ido gestionando el propio navegador para que veamos que bueno que es que todo eso va sucediendo de verdad todas las anotaciones que hemos visto antes se van se van utilizando tanto vamos todas las los encabezados tanto en peticiones como en el tipo de contenido la fecha vale el código de estado 200 y no lo ponen verde como que lo que nosotros hemos enviado como parte de la petición vale algunas de ellas la íbamos viendo antes para que veamos que esto ha sucedido conforme a nosotros lo hemos lo hemos programado hasta aquí nuestro primer servicio vamos a ver ahora como con posma como cliente el lugar del propio navegador cómo poder interactuar con el
+<img src="images/08-16.png">
+
+Cómo podemos ver la creación de un servicio es bastante sencillo, solo necesitaríamos tener una clase controladora anotada con `@RestController` en la que tengamos algunos métodos anotado bien con `@RequestMapping` o `@GetMapping` y el método correspondiente cómo podría ser con `@GetMapping`, `@PostMapping`, `@PutMapping` o `@DeleteMapping` y en el cual pues podamos atender peticiones que recibirán o no alguna serie de argumentos y en la que podamos devolver valores que dentro de este método estamos devolviendo una clase Java que serán transformadas a través de un `HTTPMessageConverter`.
+
+Aunque tengamos solamente el navegador y le damos a inspeccionar Network y recargamos podríamos ver que ha sucedido por aquí detrás y si pinchamos en greeting
+
+<img src="images/08-17.png">
+
+<img src="images/08-18.png">
+
+<img src="images/08-19.png">
+
+podemos ver como el navegador por detrás con esa petición GET ha enviado alguna serie de elementos y ha recibido la respuesta, tendríamos incluso los encabezados de la respuesta así como de la petición, como lo ha ido gestionando el propio navegador para que veamos que todo eso va sucediendo de verdad. todas las anotaciones que hemos visto antes se van utilizando tanto en peticiones como en respuestas, el tipo de contenido, la fecha, el código de estado 200 y lo ponen en verde como OK, lo que nosotros hemos enviado como parte de la petición para que veamos que esto ha sucedido conforme a nosotros lo hemos programado.
+
+Podemos probar mandando un nombre con el URL `http://localhost:8080/greeting?name=Pedro` obtenemos.
+
+<img src="images/08-20.png">
+
+<img src="images/08-21.png">
+
+<img src="images/08-22.png">
+
+Hasta aquí nuestro primer servicio, vamos a ver ahora como con Postman como cliente en el lugar del propio navegador poder interactuar con nuestro API REST.
+
+### :computer: Código Completo - gs-rest-service-complete -  143-02-API_REST
+
+<img src="images/08-23.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>rest-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>rest-service</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+```
+
+*`Greeting`*
+
+```java
+package com.example.restservice;
+
+public class Greeting {
+
+	private final long id;
+	private final String content;
+
+	public Greeting(long id, String content) {
+		this.id = id;
+		this.content = content;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public String getContent() {
+		return content;
+	}
+}
+```
+
+*`GreetingController`*
+
+```java
+package com.example.restservice;
+
+import java.util.concurrent.atomic.AtomicLong;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GreetingController {
+
+	private static final String template = "Hello, %s!";
+	private final AtomicLong counter = new AtomicLong();
+
+	//@RequestMapping(value = "/greeting", method = RequestMethod.GET)
+	@GetMapping("/greeting")
+	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+	}
+}
+```
+
+*`RestServiceApplication`*
+
+```java
+package com.example.restservice;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RestServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RestServiceApplication.class, args);
+    }
+
+}
+```
 
 # 09 Puesta en marcha de la aplicación 7:48 
 
