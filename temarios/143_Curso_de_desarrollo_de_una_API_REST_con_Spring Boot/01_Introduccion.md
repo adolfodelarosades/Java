@@ -536,14 +536,243 @@ También tenemos algunas anotaciones derivadas o digamos que complementan que ag
 Bueno pues vamos manos a la obra, esto a cómo vas como dirían. Vamos a descargarnos [Project Lombok](https://projectlombok.org/) descargamos el archivo `lombok.jar` lo que tenemos que hacer es instalar un pequeño complemento en nuestro Spring Tools Suit o en nuestro Eclipse que lo hacemos a través de esta librería `lombok.jar` y abriendo el terminal lo que hacemos es ejecutarla con `java -jar lombok.jar`.
 
 <img src="images/06-06.png">
+
+Se nos abre una ventana Lombok intentará dependiendo del sistema operativo que tengáis escanear si tiene instalado algún IDE, lo mismo no encuentra o aparece aquí el listado y es maravilloso si no lo encontrarás tendréis que buscarlo, en este caso solo nos aparece Eclipse.
+
 <img src="images/06-07.png">
+
+Al darle en instalar nos lo instala en Eclipse.
+
 <img src="images/06-08.png">
+
+Vamos a volver a ejecutar `java -jar lombok.jar` para localizar Spring Toos Suite 
+
 <img src="images/06-09.png">
+
+
+Al darle en instalar nos lo instala en Spring Toos Suite.
+
 <img src="images/06-10.png">
 
+Ya quedaría instalado aquí tenemos algunos comentarios.
 
+Lo único que tenemos que hacer ahora es incluir Lombok en nuestro proyecto.
 
-no ella digo que lo tengo en el escritorio disfrutamos menoscabar los buscar vale nos dirás tú por aquí intentará dependiendo del sistema operativo que tengáis que intentará escanear si tiene instalado algún lo mismo no encuentra o aparece aquí el listado y es maravilloso si no lo encontrarás tendréis que buscarlo entonces tendríamos que ponerlo por aquí lo buscamos yo tengo una instalación fresca en el escritorio y aquí ves como ya si lo ha localizado y le damos instalado actualizar ya quedaría instalado vale aquí tenemos alguna algunos comentarios más podemos ver el los completos vale lo único que tenemos que hacer ahora e incluir los bosques nuestro frente otra cosa que daría también un montón de presa sería tener que añadir ahora Lombo como un hack a mano no perdón pues no os preocupéis porque esto no tiene por que suceder y es que lo podemos ir haciendo con nuestros proyectos de Spring y lo podríamos hacer con pon el modo tradicional que tienes que ir para hacerlo vamos a generar llamarte modos vale unificado como tipo demonio Bird las dependencias de tren web en este caso y también para lo que decir que lo podemos que cenar a través de MAYDEN y que no necesitamos hacerlo como una dependencia externa que sabéis que eso es un gran quebradero de cabeza generamos vale proyecto no podríamos crear clase modelo persona pimiento y lo único que tendríamos que hacer sería añadirle anotaciones del ojo ya digo con data la magia que ha sucedido a la derecha se han generado getter setter equal cast to string vale incluso bueno que esto viene definido a nivel del propio Java no cuando no hay ningún constructor definido el solo no genera un constructor sin argumentos sin embargo si nosotros generamos con argumento ese constructor desaparecen también tiene una anotación de nuestro código de persona por aquí que nos permite ejecutar aquí como si esto fuese un pequeño main no podríamos crear una nueva persona con su constructor a lo mejor sin parámetros y quisiera no vale podríamos crear app 31 de enero del año noventa y nueve y si quisiéramos comprobar que el generado podríamos no es la manera más ortodoxa pero podemos incluso utilizar aquí en Secado vale y ejecutar otro proyecto y ver como tenemos por aquí a Pepe Pérez con esta fecha de nacimiento y es un objeto totalmente funcional pero si nos damos cuenta su código francamente más cómodo hasta aquí lo que hemos aprendido de Lombo ya estamos totalmente preparado para lanzarnos a la piscina a poder crear nuestra primera API REST con el tiempo
+Otra cosa que daría también un montón de pereza sería tener que añadir ahora Lombok como un Jar a mano, pues no os preocupéis porque esto no tiene por que suceder y es que lo podemos ir haciendo con nuestros proyectos de Spring y lo podríamos hacer con el modo tradicional que tiene Spring para hacerlo.
+
+### Proyecto Demo Lombok
+
+Vamos a crear un nuevo proyecto `Spring Starter Project`.
+
+<img src="images/06-11.png">
+
+Lo vamos a llamar `143-01-Demo_Lombok`
+
+<img src="images/06-12.png">
+
+Aquí podemos añadir las dependencias de Spring Web y Lombok es decir que lo podemos gestionar a través de Maven y que no necesitamos hacerlo con una dependencia externa que sabéis que eso es un gran quebradero de cabeza.
+
+<img src="images/06-13.png">
+
+Con esto ya tenemos la estructura básica de nuestro proyecto.
+
+<img src="images/06-14.png">
+
+Podríamos crear la clase modelo `Persona`
+
+<img src="images/06-15.png">
+
+<img src="images/06-16.png">
+
+```java
+package com.openwebinars.lombok;
+
+public class Persona {
+
+}
+```
+
+Vamos a añadirle las siguientes propiedades.
+
+```java
+package com.openwebinars.lombok;
+
+import java.time.LocalDate;
+
+public class Persona {
+	
+	private String nombre;
+	private String apellidos;
+	private LocalDate fechaNacimiento;
+
+}
+```
+<img src="images/06-17.png">
+
+Y lo único que tendríamos que hacer sería añadirle anotaciones de Lombok, con `@Data`
+
+<img src="images/06-18.png">
+
+vea la magia que ha sucedido, a la derecha se han generado getter, setter, equal, hashCode, toString, incluso tenemos un constructor sin argumentos esto viene definido a nivel del propio Java, cuando no hay ningún constructor definido el solo no genera un constructor sin argumentos, sin embargo si nosotros anotamos también con `@AllArgsConstructor` generamos un constructor con argumento el constructor sin argumentos desaparece.
+
+<img src="images/06-19.png">
+
+Si quisieramos también un constructor sin argumentos Lombok tiene una anotación para ello `@NoArgsConstructor`
+
+<img src="images/06-20.png">
+
+Y fijarse en la cantidad de elementos que ya tenemos disponibles.
+
+Podríamos hacer una prueba de nuestro código de Persona, en la clase `Application` podemos insertar el siguiente código que nos va a permitir ejecutarlo como si fuera un pequeño main.
+
+```java
+@Bean
+public CommandLineRunner lombokTest() {
+		
+   return args -> {
+			
+	  Persona p1 = new Persona();
+	  p1.setNombre("Pepe");
+	  p1.setApellidos("Pérez");
+	  p1.setFechaNacimiento(LocalDate.of(1999, 1, 31) );
+			
+	  System.out.println(p1);
+   };
+}
+```
+
+Creamos una nueva persona con su constructor sin parámetros, usamos los setter para asignarle valores a sus 3 propiedades y en el Sysout usamos no de la manera más ortodoxa el `toString`.
+
+Podemos ejecutar el proyecto.
+
+<img src="images/06-21.png">
+
+Y ver como en la consola nos muestra `Persona(nombre=Pepe, apellidos=Pérez, fechaNacimiento=1999-01-31)`.
+
+<img src="images/06-22.png">
+
+Como vemos Persona es un objeto totalmente funcional pero si nos damos cuenta su código es francamente más cómodo.
+
+Hasta aquí lo que hemos aprendido de Lombok, ya estamos totalmente preparado para lanzarnos a la piscina a poder crear nuestra primera API REST con Spring Boot.
+
+### :computer: Código Completo - 143-01-Demo_Lombok
+
+<img src="images/06-23.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.openwebinars</groupId>
+	<artifactId>143-01-Demo_Lombok</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>143-01-Demo_Lombok</name>
+	<description>Práctica Lombok</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+```
+
+*`Personana.java`*
+
+```java
+package com.openwebinars.lombok;
+
+import java.time.LocalDate;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @AllArgsConstructor @NoArgsConstructor
+public class Persona {
+	
+	private String nombre;
+	private String apellidos;
+	private LocalDate fechaNacimiento;
+
+}
+```
+
+*`Application.java`*
+
+```java
+package com.openwebinars.lombok;
+
+import java.time.LocalDate;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class Application {
+
+   public static void main(String[] args) {
+	  SpringApplication.run(Application.class, args);
+   }
+	
+   @Bean
+   public CommandLineRunner lombokTest() {
+		
+      return args -> {
+			
+         Persona p1 = new Persona();
+         p1.setNombre("Pepe");
+         p1.setApellidos("Pérez");
+         p1.setFechaNacimiento(LocalDate.of(1999, 1, 31) );
+			
+		 System.out.println(p1);
+      };
+   }
+}
+```
 
 # 07 Soporte de Spring Boot para servicios REST 6:34 
 
