@@ -24,15 +24,133 @@ También se puede descargar desde dentro del propio IDE, a través de *New > Imp
 ## Transcripción
 
 <img src="images/08-01.png">
+
+Vamos a comenzar el segundo bloque y vamos a crear nuestro primera API REST, nuestro primer servicio API REST.
+
 <img src="images/08-02.png">
+
+Para ello nos vamos a ir a la fuente, nos vamos a ir directamente a [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/) o directamente desde nuestro Spring Tool Suite. 
+
+Vamos a ver un ejemplo muy básico que vamos a ir desgranando poco a poco de hecho vamos a traernos el código completo y lo vamos a ir analizando para aprender los distintos elementos que lo componen y en las siguientes lecciones, poder crearlo por nuestra cuenta.
+
+Ya digo desde esta web URL https://spring.io/guides/gs/rest-service/ que podemos visitar tendríamos la posibilidad si queréis lo podemos buscar en las guias este primero cómo construir un servicio web sera el que vayamos trabajando.
+
+Para traernos el código desde Spring Tool Suite lo podríamos hacer así nos venimos a File - New - Import Spring Getting Started Content 
+
+<img src="images/08-09.png">
+
+y lo podríamos buscar aquí sería si buscamos `Rest Service`.
+
+<img src="images/08-10.png">
+
+y nos traemos solamente el código completo 
+
+<img src="images/08-11.png">
+
+le damos a Finish, nos importaría todo el proyecto `gs-rest-service-complete`, nos abre una ventana incluso con el tutorial.
+
+<img src="images/08-12.png">
+
+No nos va a hacer falta y tendríamos el código fuente disponible por aquí.
+
+<img src="images/08-13.png">
+
 <img src="images/08-03.png">
+
+Vamos ir desgranandolo poquito a poco. Primero nos vamos a situar, ¿Qué es lo que vamos a hacer? vamos a implementar una aplicación de servidor que va a aceptar peticiones GET en una determinada ruta `/greeting` y que nos va a devolver un JSON como el de la transparencia. Un mensaje de respuesta que vas a tener un `id` que va a ser de tipo numérico un long y un mensaje en una cadena de caracteres petición-respuesta como hemos ido viendo y en una determinada URL devolveremos un JSON. 
+
 <img src="images/08-04.png">
+
+Si además le proporcionamos como parámetro opcional `name` este `/greeting` de manera que podríamos tener una URL como está `/greeting?name=User` cambiaremos en lugar de decir hola mundo haremos un hola usuario, de manera que lo podemos cambiar.
+
 <img src="images/08-05.png">
+
+La interacción cómo podemos ver va a ser hacer peticiones GET a `/greeting` y como respuesta deberíamos obtener un código 200 OK y en el cuerpo de la respuesta deberíamos tener un JSON como el que hemos visto antes, si pasamos `/greeting?name=User` pues obtendríamos el hello con el name en partícular. El objeto además llevará un id que veremos cómo se va incrementándo si hacemos más de una petición. 
+
 <img src="images/08-06.png">
+
+Para gestionar este modelo de datos vamos a tener una clase modelo `Greeting` que ya incluso la podemos ver por aquí:
+
+*`Greeting`*
+
+```java
+package com.example.restservice;
+
+public class Greeting {
+
+   private final long id;
+   private final String content;
+
+   public Greeting(long id, String content) {
+      this.id = id;
+      this.content = content;
+   }
+
+   public long getId() {
+      return id;
+   }
+
+   public String getContent() {
+      return content;
+   }
+}
+```
+
+Y que incluye solamente dos datos que sería un `id` y `content` de tipo String y además tendríamos un controlador `GreetingController`:
+
+*`GreetingController`*
+
+```java
+package com.example.restservice;
+
+import java.util.concurrent.atomic.AtomicLong;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GreetingController {
+
+   private static final String template = "Hello, %s!";
+   private final AtomicLong counter = new AtomicLong();
+
+   @GetMapping("/greeting")
+   public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+      return new Greeting(counter.incrementAndGet(), String.format(template, name));
+   }
+}
+```
+
+Que para aquellos que tenga ya algunos conocimientos de Spring MVC llamara la atención que en lugar de ser con el `@Controller` esto ya lo comentamos también antes sera con `@RestController` esto es la combinación de `@Controller` y `@ResponseBody` tenemos también la versión con `@GetMapping` pero hay otra con `@RequestMapping` yo que tengo son SonarLint  me hace algunos análisis del código que voy poniendo y entonces no no invita que pongamos el código correcto por lo que `@RequestMapping` debería quedar así: `@RequestMapping(value = "/greeting", method = RequestMethod.GET)`, definitivamente la anotación `@GetMapping("/greeting")` es más comoda sea como fuere tendríamos que aceptar peticiones GET en una determinada URL que hara que se invoque este método. 
+
+Además podemos ver como el método `greeting(@RequestParam(value = "name", defaultValue = "World") String name)` recibe un parámetro que será el parámetro `name` lo inyectamos con `@RequestParam` recogera de la parte `query` de la URL algo llamado `value = "name"` y lo inyectará en `name`, sino lo encuentra inyectara un valor por defecto `defaultValue = "World"` para poderlo utilizar en el método.  
+
+Como deciamos como se devuelve JSON si el método lo que retorna es un objeto de tipo `Greeting`:
+
+`return new Greeting(counter.incrementAndGet(), String.format(template, name));`
+
 <img src="images/08-07.png">
+
+Bueno podemos verlo por aquí.
+
 <img src="images/08-08.png">
 
-Hola todo vamos a comenzar el segundo bloque íbamos a crear nuestra primera pirre vale nuestro primer servicio repara ello nos vamos a ir a la fuente vale nos vamos a ir directamente a la web de Sprint o directamente desde nuestro spring tool suite y vamos a ver un ejemplo muy básico que vamos a ir desgranando poco a poco de hecho vamos a traernos el código completo y lo vamos a ir analizando para aprender los distintos elementos que lo componen y en las siguientes lecciones bueno pues poder crearlo por nuestra cuenta ya digo desde esta web URL que podemos visitar pues tendríamos la posibilidad si queréis lo podemos buscar encontrar valen friv.io la tía y este primero cómo construir un servicio web vale ser hay que vayamos trabajando traernos el código de Spring tool suite no podríamos hacer así nos venimos a file mío import spring Getting Started content y lo podríamos buscar aquí sería si buscamos resto si no mal recuerdo es red service vale es el que no seríamos y nos traemos solamente el código completo vale le damos a fini no importaría no abre una ventana incluso con el tutorial no nos va a hacer falta y tendríamos el código fuente disponible por aquí vale cómo ir de gran ando lo poquito a poco vale primero nos vamos a lo que vamos a hacer vamos a implementar una aplicación de servidor que va a aceptar peticiones que en una determinada ruta barra griten y que nos va a devolver un Jason como este que tenemos aquí un mensaje de respuesta que vas a tener un nivel que va a ser de tipo numérico un lobo y un mensaje en una cadena de caracteres petición respuesta como hemos ido viendo y en una determinada en un determinado paz en una determinada URL devolveremos un Jason le proporcionamos como parámetro opcional name vale a este greeting de manera que podríamos tener una URL como está de abajo no con el de Niuserre cambiaremos en lugar de decir hola mundo Hello World haremos de manera que lo podemos cambiar la interacción cómo podemos ver va a ser hacer peticiones a barra crítico a localhost 2.80 que no te se va a ejecutar el servidor barras greeting y como respuesta deberíamos obtener un código 200 o que tiene el cuerpo de la respuesta deberíamos tener un Jason como el que hemos visto antes si pasamos el nene pues con el hello y el name en particular sino hello corto el objeto además llevará un nivel que veremos cómo se va incrementándose hacemos más de una petición este modelo de datos vamos a tener una clase modelo greeting vale que ya incluso la podemos ver por aquí y que incluye solamente los datos que sería un IDE y un contenido de tipo String y además tendríamos un controlador que para aquellos que tenga y algunos conocimientos de Spring MVC bueno puedo llamar a la atención que en lugar de ser con el robot controller vale esto ya lo comentamos también antes era@red controles esto es la combinación de Arroba controles y a robar responsebody tenemos también la versión con request mapping yo que tengo son arlyne me hace algunos análisis del código que voy poniendo y entonces no no invita que pongamos aquí el método no es obligatorio porque con el método que tiene por defecto no sería obligatorio lo podríamos poner esto esta manera como valió vale y el método o incluso podríamos ya lo tendríamos el método indicado o incluso podríamos hacerlo con la notación es Martín que francamente además podemos ver cómo este método para recibir un parámetro en la URL que será el parámetro name lo inyectamos con Rico es para vale recoger a de la parte query de la URL algo llamado name in os lo intentará aquí si no lo encuentras no inyectar a un valor por defecto que será vale y nos lo ingresará directamente aquí para que lo podamos utilizar en este mes no como decíamos como se devuelve Jason 7m todos está haciendo aquí un reto un de un objeto de tipo gripe bueno pues podemos verlo por aquí controles la combinación de controles y responsebody esta última lo que hace devolver en el método vale lo que se devuelven el método mejor dicho como cuerpo de la respuesta si recordáis el formato de los mensajes de respuesta como un cajón que tenía las cabeceras y el cuerpo pues dentro del cuerpo lo que se hace poner lo que nosotros devuelvan lo que pasa que pasa antes por el filtro de un HTTP mensaje Converter que lo que hace es transformarlo en un objeto Java Asia o un objeto de tipo Jason vale a una cadena estoy poniendo vamos a probar a ponerlo en ejecución puerto 8080 y en primera instancia podríamos comprobarlo desde el propio navegador localhost 8080 greeting y aquí tendríamos nuestro hello-world vale cómo podemos ver la creación de un servicio es bastante sencillo no es tan solo necesitaríamos tener una clase controladora anotada con red controller en la que tengamos algunos métodos anotado bien con request mapping y el método correspondiente cómo podría ser con quién muffin post mapping with mapping Odile te maten y en el cual pues podamos atender peticiones que recibirán o no alguna serie de argumentos y en la que podamos devolver valores que bueno dentro de está dentro de este método estamos devolviendo una clase Java que serán transformadas a través de un HTTP mensaje Converter aunque tengamos solamente el navegador y le damos a inspeccionar Network y hacemos y recargamos podríamos ver que ha sucedido por aquí detrás y si pinchamos en greeting vale si voy un poco regular sabemos algo más pero podemos ver como el navegador por detrás recibido todas en esa petición GET ha enviado alguna serie de elementos y ha recibido en la respuesta vale aquí tendremos un preview de lo que sería y aquí tendríamos incluso los encabezados de la respuesta así como de la petición vale como lo ha ido gestionando el propio navegador para que veamos que bueno que es que todo eso va sucediendo de verdad todas las anotaciones que hemos visto antes se van se van utilizando tanto vamos todas las los encabezados tanto en peticiones como en el tipo de contenido la fecha vale el código de estado 200 y no lo ponen verde como que lo que nosotros hemos enviado como parte de la petición vale algunas de ellas la íbamos viendo antes para que veamos que esto ha sucedido conforme a nosotros lo hemos lo hemos programado hasta aquí nuestro primer servicio vamos a ver ahora como con posma como cliente el lugar del propio navegador cómo poder interactuar con el
+`@RestController` como hemos dicho es la combinación de `@Controller` + `@ResponseBody` y `@ResponseBody` lo que hace es que lo que se devuelve en el método como cuerpo de la respuesta, si recordáis el formato de los mensajes de respuesta como un cajón que tenía las cabeceras y el cuerpo, pues dentro del cuerpo lo que se hace es poner lo que nosotros devolvamos, lo que pasa, es que pasa antes por el filtro de un `HTTPMessageConverter` que lo que hace es transformarlo de un objeto Java a un objeto de tipo JSON, a una cadena de tipo JSON.
+
+### Probando la Aplicación
+
+Vamos a probar a ponerlo en ejecución la aplicación.
+
+<img src="images/08-14.png">
+
+Vemos como nuestra aplicación se ha lanzado.
+
+<img src="images/08-15.png">
+
+Ya estaría disponible en el puerto 8080 y en primera instancia podríamos comprobarlo desde el propio navegador con el URL `http://localhost:8080/greeting`
+
+localhost 8080 greeting y aquí tendríamos nuestro hello-world vale cómo podemos ver la creación de un servicio es bastante sencillo no es tan solo necesitaríamos tener una clase controladora anotada con red controller en la que tengamos algunos métodos anotado bien con request mapping y el método correspondiente cómo podría ser con quién muffin post mapping with mapping Odile te maten y en el cual pues podamos atender peticiones que recibirán o no alguna serie de argumentos y en la que podamos devolver valores que bueno dentro de está dentro de este método estamos devolviendo una clase Java que serán transformadas a través de un HTTP mensaje Converter aunque tengamos solamente el navegador y le damos a inspeccionar Network y hacemos y recargamos podríamos ver que ha sucedido por aquí detrás y si pinchamos en greeting vale si voy un poco regular sabemos algo más pero podemos ver como el navegador por detrás recibido todas en esa petición GET ha enviado alguna serie de elementos y ha recibido en la respuesta vale aquí tendremos un preview de lo que sería y aquí tendríamos incluso los encabezados de la respuesta así como de la petición vale como lo ha ido gestionando el propio navegador para que veamos que bueno que es que todo eso va sucediendo de verdad todas las anotaciones que hemos visto antes se van se van utilizando tanto vamos todas las los encabezados tanto en peticiones como en el tipo de contenido la fecha vale el código de estado 200 y no lo ponen verde como que lo que nosotros hemos enviado como parte de la petición vale algunas de ellas la íbamos viendo antes para que veamos que esto ha sucedido conforme a nosotros lo hemos lo hemos programado hasta aquí nuestro primer servicio vamos a ver ahora como con posma como cliente el lugar del propio navegador cómo poder interactuar con el
 
 # 09 Puesta en marcha de la aplicación 7:48 
 
