@@ -23,6 +23,15 @@ También se puede descargar desde dentro del propio IDE, a través de *New > Imp
 
 ## Transcripción
 
+<img src="images/08-01.png">
+<img src="images/08-02.png">
+<img src="images/08-03.png">
+<img src="images/08-04.png">
+<img src="images/08-05.png">
+<img src="images/08-06.png">
+<img src="images/08-07.png">
+<img src="images/08-08.png">
+
 # 09 Puesta en marcha de la aplicación 7:48 
 
 [PDF Puesta_en_marcha_de_la_aplicación.pdf](pdfs/08_Puesta_en_marcha_de_la_aplicación.pdf)
