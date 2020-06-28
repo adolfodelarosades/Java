@@ -431,14 +431,22 @@ Si trabajáis en Linux es verdad que además para poder gestionar estas varias v
 Decir que Sprint ya hemos hablado en nuestro entorno de desarrollo como tal, ahora hablar del entorno en el cual nos vamos a mover en el Framework es un gran ecosistema de proyectos que incluye un montón de proyecto y además alguno de esos proyectos también son proyectos que podríamos llamar paraguas sobre otros que van dentro. Algunos de ellos como por ejemplo los que tenemos aquí Spring Boot, Spring Framework, Spring Security, Spring Data algunos de ellos o con muchos de ellos lo utilizaremos a lo largo de este curso o de sucesivos curso sobre sobre API REST con Spring.
 
 <img src="images/05-06.png">
+
+Vamos a conocer alguno con algo más de profundidad cómo sería Spring Boot que facilita la creación de aplicaciones basadas con Spring de manera que sea independiente y lista para usar con un esfuerzo mínimo, tiene una gestión superfácil a través de dependiendo de si usamos Maven o Gradel a través del fichero `pom.xml` o `build.gradle`, nosotros trabajaremos con Maven, nos permite tener el servidor embebido dentro de la aplicación en lugar de hacerlo al contrario, ya no tenemos que tener un servidor instalado, generar un WAR y mandar allí la aplicación si no que vamos a tener nuestro servidor dentro de nuestro WAR lo cual será más fácil de ejecutar. Una serie de dependencia Starter dependencia iniciales que facilitan la configuración de componentes, que son capaces de escanear si tenemos en el ClassPath alguna librería incluida para activar o no determinada acción de configuración, de alguna librería de terceros y todo ello sin generar ni una línea prácticamente de codigo o de configuración XML, no es que por detrás se vaya generando clase y clase sino que todo sucede de manera transparente o como a mí me gusta decir auto mágica.
+
 <img src="images/05-07.png">
+
+Tenemos también un servicio que es Spring Initializr y que nos va a permitir generar rápidamente nuestros proyectos, quien quiera sobre todo aquellos que uséis Inteligente IDEA necesitaran esto para generar de una manera más fácil un project Spring, incluso hay alguna herramienta que nos permite hacerlo desde la línea de comandos, aunque está es exactamente comoda, nosotros tendremos esta herramienta integrada dentro de nuestro Spring Tools Suit no nos hará falta recurrir a esta herramienta externa.
+
 <img src="images/05-08.png">
+
+Como elemento más de entorno decir que utilizaremos Postman, Postman es un cliente que nos va a permitir interactuar con nuestra API REST, de hecho nos ayuda un montón al desarrollo y al testeo, existen versiones tanto para Windows, como para Linux, para Mac, tenéis web para descargar [Postman](https://www.postman.com) y podéis acceder y descargar la versión del sistema operativo Mac, Windows la instalación es bastante sencilla. Tiene una serie de pestañas en las cuales vamos a poder hacer diferentes peticiones en las cuales podemos pasar algunos datos y que nos dará la respuesta, tiene una API REST que existe de ejemplo y podríamos hacer una petición GET y por detrás suceden cosas, nos devuelve la respuesta ya incluso en un formato Pretty en el cual podemos ir viendo el tipo de código de respuesta, las cookies que hay, los distintos encabezados que hemos tenido como respuesta, en otro tipo de peticiones si fueran POST nosotros podremos crear recursos, aplicar elementos de seguridad, enviar otros encabezdos, elementos en el cuerpo, etc. la verdad es que Postman va a ser para nosotros de una gran utilidad ya digo lo podremos utilizar en nuestra API REST de una manera súper cómoda.
+
 <img src="images/05-09.png">
 
-Vamos a conocer alguno con algo más de profundidad cómo sería Spring Boot que facilita la creación de aplicaciones basadas con Spring de manera que sea independiente y listas para usar con un esfuerzo mínimo, tiene una gestión superfácil a través de dependiendo de si usamos Maven o Gradel.
+Si eres más de consola puede utilizarse **cURL** esto se usa en un terminal, nos permitiría hacer diferentes peticiones, en el material adicional dice como instalarlo en Ubuntu, en Mac o en Windows. Es verdad que hay que conocer su sintaxis, de cómo hacer peticiones pero también es verdad que nos permitiría sin necesidad de ningún otro tipo de herramienta gráfica hacer peticiones y ver todo ello desde el terminal, de hecho nos permitiría interactuar y construir herramientas complementarias haciendo algún tipo de Script que hiciera petición a algún tipo de servicio, que recibirá después datos, encadenarlo con otra petición etc.
 
-
-
+Bueno con esto hemos visto todas las herramientas, proyectos, el framework que vamos a utilizar en nuestro entorno y ya lo que nos queda es lanzarnos a su uso y aprendizaje.
 
 # 06 Uso de la librería Lombok 7:22 
 
