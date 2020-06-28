@@ -500,6 +500,51 @@ Puedes encontrar más información en https://projectlombok.org/features/all y e
 
 ## Transcripción
 
+<img src="images/06-01.png">
+
+Vamos a complementar todo lo que hemos hablado en la lección anterior de nuestro entorno de desarrollo con Project Lombok. 
+
+<img src="images/06-02.png">
+
+Estoy completamente seguro de que si te pregunto me dirás que te da un montón de pereza en tus clases modelo cada vez que le añades una serie de datos tener que generar getter, setter, método equals, hashCode, toString ahora le añade una nueva propiedad, tengo que añadir el getter y setter, modificar el hashCode, el toString, el equals, ahora quito una igual, ahora que pasa con el constructor, da un montón, un montón de pereza, bueno pues para ellos Project Lombok viene a nuestro rescate.
+
+<img src="images/06-03.png">
+
+Y es que vamos a pasar de tener esas clases dónde ya digo que aunque no tengamos que programarlo y se auto genere por el IDE, la verdad es que así lo vamos a tener francamente más cómodo y más flexible frente a cambios. Podemos ver como nuestra clase va a pasar ahora a ser netamente las propiedades y un conjunto anotaciones, si solamente queremos sobrescribir algún método, añadir alguno más, pues lo podemos tener pero si es solamente getter, setter, método equals, hashCode, toString que suele pasar que en nuestro proyecto tengamos algunas clases así, solamente tendríamos que trabajar con algunas anotaciones.
+
+<img src="images/06-04.png">
+
+Vamos a ver como Lombok tiene algunas anotaciones clave:
+
+* `@Getter` nos va a permitir general los metodos getter de nuestras propiedades
+* `@Setter` nos va a permitir general los metodos setter de nuestras propiedades
+* `@RequiredArgsConstructor` el constructor de argumentos requerido no construirá un constructor con los argumentos que tenga la anotación notNull o que sean final
+* `@AllArgsConstructor` el de todos los argumentos con constructor para todos 
+* `@NoArgsConstructor` el de sin argumento un constructor sin argumentos
+* `@EqualsAndHashCode` genera los métos equals y hashCode
+* `@ToString` generara el método toString
+
+<img src="images/06-05.png">
+
+También tenemos algunas anotaciones derivadas o digamos que complementan que aglutina algunas del anterior, una muy útiles es:
+
+* `@Data` que es equivalente a utilizar `@Getter`, `@Setter`, `@RequiredArgsConstructor`, `@EqualsAndHashCode` y `@ToString`
+
+
+### Instalar Lombok
+
+Bueno pues vamos manos a la obra, esto a cómo vas como dirían. Vamos a descargarnos [Project Lombok](https://projectlombok.org/) descargamos el archivo `lombok.jar` lo que tenemos que hacer es instalar un pequeño complemento en nuestro Spring Tools Suit o en nuestro Eclipse que lo hacemos a través de esta librería `lombok.jar` y abriendo el terminal lo que hacemos es ejecutarla con `java -jar lombok.jar`.
+
+<img src="images/06-06.png">
+<img src="images/06-07.png">
+<img src="images/06-08.png">
+<img src="images/06-09.png">
+<img src="images/06-10.png">
+
+
+
+no ella digo que lo tengo en el escritorio disfrutamos menoscabar los buscar vale nos dirás tú por aquí intentará dependiendo del sistema operativo que tengáis que intentará escanear si tiene instalado algún lo mismo no encuentra o aparece aquí el listado y es maravilloso si no lo encontrarás tendréis que buscarlo entonces tendríamos que ponerlo por aquí lo buscamos yo tengo una instalación fresca en el escritorio y aquí ves como ya si lo ha localizado y le damos instalado actualizar ya quedaría instalado vale aquí tenemos alguna algunos comentarios más podemos ver el los completos vale lo único que tenemos que hacer ahora e incluir los bosques nuestro frente otra cosa que daría también un montón de presa sería tener que añadir ahora Lombo como un hack a mano no perdón pues no os preocupéis porque esto no tiene por que suceder y es que lo podemos ir haciendo con nuestros proyectos de Spring y lo podríamos hacer con pon el modo tradicional que tienes que ir para hacerlo vamos a generar llamarte modos vale unificado como tipo demonio Bird las dependencias de tren web en este caso y también para lo que decir que lo podemos que cenar a través de MAYDEN y que no necesitamos hacerlo como una dependencia externa que sabéis que eso es un gran quebradero de cabeza generamos vale proyecto no podríamos crear clase modelo persona pimiento y lo único que tendríamos que hacer sería añadirle anotaciones del ojo ya digo con data la magia que ha sucedido a la derecha se han generado getter setter equal cast to string vale incluso bueno que esto viene definido a nivel del propio Java no cuando no hay ningún constructor definido el solo no genera un constructor sin argumentos sin embargo si nosotros generamos con argumento ese constructor desaparecen también tiene una anotación de nuestro código de persona por aquí que nos permite ejecutar aquí como si esto fuese un pequeño main no podríamos crear una nueva persona con su constructor a lo mejor sin parámetros y quisiera no vale podríamos crear app 31 de enero del año noventa y nueve y si quisiéramos comprobar que el generado podríamos no es la manera más ortodoxa pero podemos incluso utilizar aquí en Secado vale y ejecutar otro proyecto y ver como tenemos por aquí a Pepe Pérez con esta fecha de nacimiento y es un objeto totalmente funcional pero si nos damos cuenta su código francamente más cómodo hasta aquí lo que hemos aprendido de Lombo ya estamos totalmente preparado para lanzarnos a la piscina a poder crear nuestra primera API REST con el tiempo
+
 # 07 Soporte de Spring Boot para servicios REST 6:34 
 
 [PDF Soporte_de_Spring_Boot_para_REST](pdfs/06_Soporte_de_Spring_Boot_para_REST.pdf)
