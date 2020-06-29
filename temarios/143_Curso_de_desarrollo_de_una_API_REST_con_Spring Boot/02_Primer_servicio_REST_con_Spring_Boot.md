@@ -997,19 +997,44 @@ Si queremos devolver el producto que acabemos de borrar lo podemos hacer muy sim
 
 Buscamos el producto y lo recuperamos con `get()`, borramos al producto por `id` y lo devolvemos. Esta es una opción donde obtenemos el producto cuando lo eliminamos.
 
-Vamos a relanzar la aplicación para comprobar que esto funciona.
+Vamos a reelanzar la aplicación para comprobar que esto funciona.
 
+Damos de alta el Jamón y ahora hacemos una petción `DELETE` a la URL `http://localhost:8080/producto/31`
 
+<img src="images/10-17.png">
 
+A la hora de enviar nos regresa como respuesta el objeto eliminado, si lo solicitamos con un GET veremos que el producto realmente ya no existe.
 
+<img src="images/10-18.png">
 
+Con lo cual ya hemos implementado CRUD completo tenemos los métodos:
 
-*************
+```java
+@PostMapping("/producto")
+public Producto nuevoProducto(@RequestBody Producto nuevo)
+ 
+@GetMapping("/producto/{id}")
+public Producto obtenerUno(@PathVariable Long id)
 
-buscarlo a través del método ya sabéis que este producto repository tiene una serie de métodos en el cual producto repository en el método Find by ID y al cual le pasamos ni de qué va a ser el mismo que recibamos y que devuelve un opcional como devuelve un opcional ahora mismo no nos vamos a meter a manejar ningún tipo de error y no no lo encuentras o qué vamos a hacer devolverme uno vale si queremos ya podemos ir ejecutando nuestro proyecto podríamos ir estoy currando también posma y podemos hacer pruebas de esta petición
+@PostMapping("/producto")
+public Producto nuevoProducto(@RequestBody Producto nuevo)
 
+@PutMapping("/producto/{id}")
+public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id)
+
+@DeleteMapping("/producto/{id}")
+public Producto borrarProducto(@PathVariable Long id)   
+```
 
 <img src="images/10-06.png">
+
+¿Qué nos faltaría entonces? Nos falta manejar correctamente los cóigos de respuesta, las peticiones de creación deberían devolver un 201, las peticiones que no encuentren un recurso 
+deberían devolver un 404, si la petición de borrado devuelve datos esta bien que devuelva un 200 pero si no devuelve datos deveria devolver un 204 que es vacío, todo eso lo haremos en las próximas lecciones donde iremos modificando este código poco a poco.
+
+:+1:
+
+
+
 
 # 11 Clases y anotaciones de Spring 14:25 
 
