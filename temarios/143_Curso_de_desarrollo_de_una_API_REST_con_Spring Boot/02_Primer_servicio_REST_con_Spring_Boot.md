@@ -777,7 +777,7 @@ También usa `@PathVariable` para inyectar el valor de la ruta y tomarlo como pa
 
 Bueno pues por lo pronto lo que necesitamos aquí es obtener el repositorio que lo tenemos declarado con la línea `private final ProductoRepositorio productoRepositorio;` aque ahora iremos utilizando.
 
-Fijarnos que no hemos utilizado la anotación `@Autowire` ni nada, Lombok nos permite también anotar con la anotación `@RequiredArgsConstructor`
+Fijarnos que no hemos utilizado la anotación `@Autowire` ni nada, Lombok nos permite también anotar con la anotación `@RequiredArgsConstructor` un controlador y como este repositorio no se va a haber modificado, lo podemos declarar como final y directamente cuando se instancie el Bean se autoinyectaran las dependencias y lo hacemos de una manera limpia y utilizándo Lombok.
 
 
 ```java
@@ -791,8 +791,222 @@ public class ProductoController {
    
 ```
 
+También contamos dentro de los recursos contamos con el archivo `data.sql` con el siguiente contenido.
 
-un controlador y como este repositorio no se va a haber modificado lo podemos declarar como final y directamente cuando se instancia Elvin vale pues te auto inyectaran las dependencias y lo hacemos de una manera limpia y utilizándolo como sería está petición más vamos a modificar este coche aquí tenemos que devolver todos los productos con lo cual no podemos hacer tan sencillo como utilizando nuestro producto repositorio todo se me olvidaba deciros que dentro de la carpeta risou vale tenéis aquí una serie de productos de ejemplo que yo en generado lo he sacado de un servicio que hay de Moclín de datos que te llamas mockaroo generado esta sentencia SQL para poder insertar que esta serie de productos que tiene Unide que se autogenera vale a través de una secuencia un nombre y un precio vale lo tendríamos por aquí podemos comprobar como aquí solamente te volveremos los productos y te devolverían todos de hecho si quisiéramos ya podríamos poner en ejecución el proyecto vamos a completar algo más aquí para devolver un solo producto lo que podríamos hacer buscarlo a través del método ya sabéis que este producto repository tiene una serie de métodos en el cual producto repository en el método Find by ID y al cual le pasamos ni de qué va a ser el mismo que recibamos y que devuelve un opcional como devuelve un opcional ahora mismo no nos vamos a meter a manejar ningún tipo de error y no no lo encuentras o qué vamos a hacer devolverme uno vale si queremos ya podemos ir ejecutando nuestro proyecto podríamos ir estoy currando también posma y podemos hacer pruebas de esta petición
+```sql
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Juice - Orange, Concentrate', 91);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Beef - Ground, Extra Lean, Fresh', 87);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cheese - Parmesan Grated', 39);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cups 10oz Trans', 67);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Wine - Beringer Founders Estate', 27);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Bread - Wheat Baguette', 82);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Quail - Eggs, Fresh', 3);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cheese - Mascarpone', 97);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Mace', 25);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Oil - Shortening - All - Purpose', 63);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Marjoram - Fresh', 60);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Turnip - White', 74);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Pork Salted Bellies', 38);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Longos - Greek Salad', 15);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Amaretto', 85);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Godiva White Chocolate', 97);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Tomatoes - Roma', 61);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Oven Mitt - 13 Inch', 1);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Vermouth - White, Cinzano', 72);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Club Soda - Schweppes, 355 Ml', 38);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Fenngreek Seed', 1);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Dill Weed - Dry', 72);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Pepper - Green', 56);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Bacardi Breezer - Tropical', 35);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Wine - Merlot Vina Carmen', 14);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Sauce - Black Current, Dry Mix', 9);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Crab - Soft Shell', 17);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Jameson Irish Whiskey', 19);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Muffin Chocolate Individual Wrap', 77);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Mussels - Frozen', 95);
+```
+
+Tenéis aquí una serie de productos de ejemplo que yo en generado, lo he sacado de un servicio que hay de Mocking de datos llamado [MOCKAROO](https://www.mockaroo.com/) que ha generado estas sentencias SQL para poder insertar esta serie de productos que tiene un `id` que se autogenera a través de una secuencia, un nombre y un precio.
+
+Lo primero que vamos a hacer es modificar el método `obtenerTodos()`ya que actualmente nos devuelve `null`.
+
+```java
+   @GetMapping("/producto")
+   public List<Producto> obtenerTodos() {
+      // Vamos a modificar este código
+      return null;
+   }
+```
+
+Lo podemos hacer tan sencillo utilizando nuestro `productoRepositorio`
+
+```java
+   @GetMapping("/producto")
+   public List<Producto> obtenerTodos() {
+      return productoRepositorio.findAll();
+   }
+```
+
+Con esto ya se devolverían todos los productos.
+
+Para devolver un solo producto lo que podríamos hacer es cambiar el método `obtenerUno(@PathVariable Long id)`. 
+
+
+```java
+   @GetMapping("/producto/{id}")
+   public Producto obtenerUno(@PathVariable Long id) {
+      // Vamos a modificar este código
+      return null;
+   }
+```
+
+Por esto, ya sabes que el `productoRepositorio` tiene una serie de métodos solo basta buscar el adecuado.
+
+```java
+   @GetMapping("/producto/{id}")
+   public Producto obtenerUno(@PathVariable Long id) {
+      return productoRepositorio.findById(id).orElse(null);
+   }
+```
+
+Como `findById` devuelve un opcional y no nos vamos a poner a manejar los errores, sino lo encuentra usamos `orElse(null)` para mandar un nulo.
+
+Con estas dos peticiones modificadas ya podemos probarlas con Postman e ir haciendo peticiones a estos URL.
+
+<img src="images/10-08.png">
+
+<img src="images/10-09.png">
+
+Empezamos por hacer una petición a `http://localhost:8080/producto`.
+
+<img src="images/10-10.png">
+
+En la cual obtenemos un código 200 OK y todos los productos que tenemos ahora mismo en la base de datos que son 30.
+
+Si hacemos la petición para obtener un solo producto `http://localhost:8080/producto/3`.
+
+<img src="images/10-11.png">
+
+Nos devuelve solamente el producto con el `id` indicado.
+
+Si hacemos la petición de un producto que no existe `http://localhost:8080/producto/31`.
+
+<img src="images/10-12.png">
+
+Es una situación que ahora mismo no estamos contemplando, devolvemos nulo pero todavía no lo estamos gestionando lo haremos más adelante.
+
+Faltaría que implementaramos la petición para insertar un nuevo producto por lo que cambiamos el método `nuevoProducto(@RequestBody Producto nuevo)` 
+
+```java
+   @PostMapping("/producto")
+   public Producto nuevoProducto(@RequestBody Producto nuevo) {
+      // Vamos a modificar este código
+      return null;
+   }
+```
+
+Por 
+
+```java
+   @PostMapping("/producto")
+   public Producto nuevoProducto(@RequestBody Producto nuevo) {
+      return productoRepositorio.save(nuevo);
+   }
+```
+
+Bastaría devolver lo que almacenemos aquí como nuevo, esto lo que hace es recoger `nuevo` a través del repositorio lo salva, lo devuelve con el `id` generado y todo lo demás y lo devolvemos directamente.
+
+Vamos a relanzar la aplicación con el botón `Relaunch` y comprobar que funciona.
+
+Tendríamos que hacer una petición a `http://localhost:8080/producto/` y tendríamos que usar el verbo POST, y para enviar datos en el cuerpo tenemos que irnos a Body - raw - JSON y mandar los datos de nuestro producto en formato JSON. El `id` se autogenera, necesitariamos mandar un nombre y precio de nuestro producto.
+
+<img src="images/10-13.png">
+
+Al enviar la petición nos indica que se ha generado un nuevo Producto con un `id` 31 y vemos también algo que tendremos que gestionar después y es el código de respuesta en este caso nos a devuelto 200 OK que esta más asociado a obtener un recurso, el 101 esta más asociado a la creación de un nuevo recurso, veremos como hacerlo en siguientes lecciones. 
+
+<img src="images/10-14.png">
+
+Nos faltaría el método `editarProducto(@RequestBody Producto editar, @PathVariable Long id)` para editar un producto.
+
+```java
+   @PutMapping("/producto/{id}")
+   public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+      // Vamos a modificar este código
+      return null;
+   }
+```
+
+Tendríamos diferentes de hacerlo lo haremos de una manera muy sencilla 
+
+```java
+   @PutMapping("/producto/{id}")
+   public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+      if(productoRepositorio.existsById(id)) {
+         editar.setId(id);
+	 return productoRepositorio.save(editar);
+      }else {
+	 return null;
+      }
+   }
+```
+
+Si el producto existe lo que hacemos es asegurarnos que el objeto `editar` que recogemos tenga el `id`, salvamos el objeto y lo devolvemos y sino devolvemos nulo. En posteriores lecciones optimizaremos este código. Pero por ahora nos puede servir si lo encontramos lo modificamos y sino lo encontramos devolvemos nulo.
+
+Vamos a relanzar la aplicación y probar a modificar el `Jamón de Bellota` para que sea un `Jamón Ibérico de Bellota`. En este caso usamos el verbo PUT con el URL `http://localhost:8080/producto/31` y con el Body
+
+```html
+{
+   "nombre": "Jamón Ibérico de Bellota",
+   "precio": 1234
+}
+```
+
+<img src="images/10-15.png">
+
+<img src="images/10-16.png">
+
+Obtenemos los datos del Producto actualizado.
+
+**NOTA**: Como estamos relanzando de nuevo la aplicación es necesario rimero volver a insertar el Producto 31 antes de quererlo modificar, por que cada que se relanza la aplicación se vuelve a inicializar la base de datos.
+
+
+Por último nos queda el método `borrarProducto(@PathVariable Long id)` para eliminar un producto.
+
+```java
+   @DeleteMapping("/producto/{id}")
+   public Producto borrarProducto(@PathVariable Long id) {
+      // Vamos a modificar este código
+      return null;
+   }
+```
+
+Si queremos devolver el producto que acabemos de borrar lo podemos hacer muy similar a la modificación del Producto.
+
+```java
+   @DeleteMapping("/producto/{id}")
+   public Producto borrarProducto(@PathVariable Long id) {
+      if(productoRepositorio.existsById(id)) {
+         Producto producto = productoRepositorio.findById(id).get();
+         productoRepositorio.deleteById(id);
+         return producto;
+      }else {
+         return null;
+      }
+   }
+```
+
+Buscamos el producto y lo recuperamos con `get()`, borramos al producto por `id` y lo devolvemos. Esta es una opción donde obtenemos el producto cuando lo eliminamos.
+
+Vamos a relanzar la aplicación para comprobar que esto funciona.
+
+
+
+
+
+
+*************
+
+buscarlo a través del método ya sabéis que este producto repository tiene una serie de métodos en el cual producto repository en el método Find by ID y al cual le pasamos ni de qué va a ser el mismo que recibamos y que devuelve un opcional como devuelve un opcional ahora mismo no nos vamos a meter a manejar ningún tipo de error y no no lo encuentras o qué vamos a hacer devolverme uno vale si queremos ya podemos ir ejecutando nuestro proyecto podríamos ir estoy currando también posma y podemos hacer pruebas de esta petición
 
 
 <img src="images/10-06.png">
