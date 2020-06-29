@@ -360,15 +360,44 @@ Ya tenemos arrancada nuestra aplicación cuando deseemos detenerla bastaría pul
 
 Bueno ya que tenemos lanzada la aplicación desde la terminal con Maven vamos a consuimir nuestra API desde Postman.
 
+Postman es muy cómodo nos permite en un sistema de pestañas poder consumir desde nuestra API REST, tendríamos que hacer algún tipo de petición poniendo el verbo, la URL, la ejecutamos.
+
 <img src="images/09-03.png">
+
+Y nos devolvería el resultado el cuerpo con el código de estado, tiempo que tarde en ejecutase, tamaño de respuesta, también podemos salvar la respuesta en un fichero.
+
+<img src="images/09-14.png">
+
+Tenemos el botón + para poder crear nuevas peticiones añadiendo nuevas pestaña.
+
 <img src="images/09-04.png">
-<img src="images/09-05.png">
+
+Las pestañas las podemos almacenar, incluso si queremos para guardarla y gestionarla en colecciones que se muestran a la izquierda.
+
+Al ingresar el URL debemos presionar el botón Send para hacer enviar la petición al Servidor.
+
 <img src="images/09-06.png">
-<img src="images/09-07.png">
+
+Se nos muestra el contenido.
+
 <img src="images/09-08.png">
+
+Y a nivel de respuesta podemos ver el código de estado, 
+
 <img src="images/09-09.png">
 
-si queremos controlarlo nosotros no podremos dar aquí que para la aplicación y la vuelve a lanzar no esté uno de los botones que más utilizaré a la hora de desarrollar no ya tenemos nuestra aplicación ejecutándose vamos a tratar de consumir con rapidez e post Postman que ya lo hemos instalado en alguno de en algunas de las lecciones anteriores es francamente cómodo nos permite en un sistema de pestañas poder poder consumir desde nuestra y no tendríamos que hacer algún tipo de petición poniendo el verbo la URL la ejecutamos y nos devolvería el resultado vale el cuerpo con el código de estado vale si nos damos cuenta tenemos aquí para poder crear nuevas peticiones no vamos a ir viendo desde Pomba yo ya lo ejecutado no tenemos por aquí para crear nuevas peticiones tenemos este nuevo botón de aquí que añadiría nuevas pestañas las pestañas las podemos almacenar incluso si queremos para guardarla y gestionarla en colecciones como yo tengo por aquí a la izquierda no podemos hacer la petición como decía Mante método vale tenemos un desplegable por aquí que nos permite en lugar de hacer peticiones que poder hacer peticiones post put delete Eva G opción copy link unlink etcétera etcétera vale un montón de peticiones tenemos la barra dónde podemos escribir la URL dónde podemos pasar diferentes parámetros que nos vamos a ver dónde poder enviar nuestra petición vale le digo que también la podemos hablar y a nivel de respuesta ya podemos ver que tenemos por aquí dónde consultar el código de estado podemos salvar la respuesta en un fichero vale donde la podemos ver en diferentes formatos vales en formato que no hubiera llegado no lo hubiera reconocido automáticamente no podemos aplicar vale hija como Jason si lo ponen la vista cities en la vista Raúl no nos lo muestra en crudo y bueno algunas vistas más no serían preview Invisalign que no usaremos durante el curso aquí y pulsaremos sobre todo la vista ricino como hemos visto el botón para enviar en la zona de opciones vamos a poder lanzar ahora vale estas son imágenes de lo que hemos ido viendo en la zona de opciones podemos mandar lanzar en el que por ejemplo hemos dicho que si pasamos el parámetro name por lo cual si no queremos tener que escribirlo directamente en la URL no podríamos escribir aquí nene y un determinado valor vale ahora nos vamos a saludar a nosotros mismos había que irme si cambiáramos el nombre otro nombre pues sería entonces a Cristina la que saludaría ya digo si queremos salvar está petición con el Estado que tiene ahora mismo lo que podríamos hacer este la podremos salvar en el raid o incluso en una colección que tuviéramos por aquí o incluso crear una colección de aquí no le podríamos dar un nombre a la petición en principio nos propone la propia URL le podríamos dar otro nombre otro nombre vale le podemos añadir aquí una descripción que incluso soporta Masgrau por documentar nuestra aplicación y podríamos crear una nueva colección Mané y aquí mismo poder salvar Nano y más adelante la cerramos la tenemos aquí para rescatarla vale o incluso si cerramos Postman y los volvemos a abrir tendríamos la opción de poder encontrarnos late nuevo y así si estamos desarrollando durante varios días varias semana una serie de peticiones sobre una misma API la podemos dejar guardada y documentada de hecho estas colecciones también si queréis se pueden exportar se pueden compartir para que se la podéis pasar a gente si fuese necesario llevar Honda incluso desde un equipo a otro hemos visto cómo trabajar con Postman y de verdad quería prender por Juan tenemos un curso estupendo dentro de nuestro de nuestro catálogo nosotros vamos a seguir en las siguientes lecciones creando una API que que incluya todos los métodos no solamente método que y que bueno pues nos dejes de una vez por todas teclear de verdad vale y darle caña al código para seguir aprendiendo a crear mensaje
+También podemos trabajar con diferentes métodos, tenemos un desplegable para seleccionarlos.
+
+<img src="images/09-05.png">
+
+Para que en lugar de hacer peticiones GET poder hacer peticiones POST, PUT, PATCH, DELETE, etc. un montón de peticiones.
+
+
+Tenemos la barra dónde podemos escribir la URL, dónde podemos pasar diferentes parámetros que vamos a ver, dónde poder enviar nuestra petición, le digo que también la podemos salvar
+
+<img src="images/09-07.png">
+
+ podemos salvar la respuesta en un fichero vale donde la podemos ver en diferentes formatos vales en formato que no hubiera llegado no lo hubiera reconocido automáticamente no podemos aplicar vale hija como Jason si lo ponen la vista cities en la vista Raúl no nos lo muestra en crudo y bueno algunas vistas más no serían preview Invisalign que no usaremos durante el curso aquí y pulsaremos sobre todo la vista ricino como hemos visto el botón para enviar en la zona de opciones vamos a poder lanzar ahora vale estas son imágenes de lo que hemos ido viendo en la zona de opciones podemos mandar lanzar en el que por ejemplo hemos dicho que si pasamos el parámetro name por lo cual si no queremos tener que escribirlo directamente en la URL no podríamos escribir aquí nene y un determinado valor vale ahora nos vamos a saludar a nosotros mismos había que irme si cambiáramos el nombre otro nombre pues sería entonces a Cristina la que saludaría ya digo si queremos salvar está petición con el Estado que tiene ahora mismo lo que podríamos hacer este la podremos salvar en el raid o incluso en una colección que tuviéramos por aquí o incluso crear una colección de aquí no le podríamos dar un nombre a la petición en principio nos propone la propia URL le podríamos dar otro nombre otro nombre vale le podemos añadir aquí una descripción que incluso soporta Masgrau por documentar nuestra aplicación y podríamos crear una nueva colección Mané y aquí mismo poder salvar Nano y más adelante la cerramos la tenemos aquí para rescatarla vale o incluso si cerramos Postman y los volvemos a abrir tendríamos la opción de poder encontrarnos late nuevo y así si estamos desarrollando durante varios días varias semana una serie de peticiones sobre una misma API la podemos dejar guardada y documentada de hecho estas colecciones también si queréis se pueden exportar se pueden compartir para que se la podéis pasar a gente si fuese necesario llevar Honda incluso desde un equipo a otro hemos visto cómo trabajar con Postman y de verdad quería prender por Juan tenemos un curso estupendo dentro de nuestro de nuestro catálogo nosotros vamos a seguir en las siguientes lecciones creando una API que que incluya todos los métodos no solamente método que y que bueno pues nos dejes de una vez por todas teclear de verdad vale y darle caña al código para seguir aprendiendo a crear mensaje
 
 
 # 10 Estructura de las rutas 15:31 
