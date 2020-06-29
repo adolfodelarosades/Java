@@ -462,10 +462,34 @@ public class ProductoController {
 ## Transcripción
 
 <img src="images/10-01.png">
+
+Hola a todos vamos a seguir con nuestro curso en el que estamos aprendiendo a desarrollar una API con Sprint Boot, a partir de esta lección vamos a desarrollar una API casi desde cero, os dejo un pequeño código base para no pararnos en cosas que ya hemos aprendido antes, vamos a partir de una estructura de un controlador que vamos a explicar y lo vamos a ir completando poco a poco.
+
 <img src="images/10-02.png">
+
+El ejemplo va a ser una especie de API de productos, vamos a gestionar una serie de productos simples, como campo van a tener un ID, el nombre del producto y el precio. Vamos a crear también un repositorio y vamos a insertar unos datos de ejemplo desde `data.sql`, ya digo esto este código de base ya lo vas a tener en el repositorio del curso para que no tengas que pararnos a crear la clase Modelo, el repositorio, para que no tengáis que hacer la creación de datos de ejemplo, cosas que si habéis visitado los otros cursos como por ejemplo el de Spring Boot y Spring Web se explica con mayor detenimiento, es cuestión de que nos parecemos en la capa de acceso a datos en esta parte, sino que nos vamos a centrar sobre todo en el controlador y en la parte más REST.
+
 <img src="images/10-03.png">
+
+Vamos a ver cómo mapear las rutas de nuestro controlador con las diferentes operaciones CRUD, en el fondo vamos hacer un CRUD de productos y entonces necesitamos para cada una de las operaciones CRUD hacer una determinada ruta en el controlador, esta estructura veréis que va a ser muy común si lo que necesitáis es generar CRUD y de hecho si trabajáis alguna vez con Spring Data REST veréis que no dista de la que genera automáticamente,
+
+Dentro de CRUD la operación `Read` la de obtener datos la haremos a través de peticiones de tipo `GET` es decirme métodos del controlador que irán anotados con `@GetMapping` y como nosotros vamos a trabajar con productos la ruta de obtener todos los productos será una petición `@GetMapping("/producto")` lo vamos a poner en singular, tampoco sería demasiado dramático si lo pusieramos en plural, si queremos obtener un producto en particular lo haremos con su `id` y entonces será la ruta `@GetMapping("/producto/{id}")` el producto 1, el 2 el producto 114, ambas peticiones de tipo `GET`.
+
+Para crear un producto lo que haremos será una petición de tipo POST anotada con `@PostMapping` a la propia ruta `/producto` es decir `@PostMapping("/producto")`.
+
 <img src="images/10-04.png">
+
+Para actualizar la petición de tipo UPDATE será con `Put` con una anotación `@PutMapping` y está usualmente aunque el `id` vaya dentro del objeto que le estamos pasando es muy habitual que se lo proporcionemos dentro de la ruta y entonces así lo vamos a hacer con `@PutMapping("/producto/{id}")` 
+
+La estructura sería la misma para la petición de borrado sería con un deleite mapping y también sería con la anotación `@DeleteMapping` completa tendríamos `@DeleteMapping("/producto/{id}")`.
+
 <img src="images/10-05.png">
+
+Algunas notaciones que vamos a usar para que no nos suenen raro y que las reconozcamos sería la anotación `@RequestBody` que nos va a permitir inyectar el cuerpo de la petición en un objeto, es decir nos enviara una petición, aquello trae datos y hemos visto que cuando nosotros en una petición GET devolvemos algo en el cuerpo el `HTTPMessageConverter` transforma nuestro objeto Java en un JSON, pero ahora lo necesitamos a la hora de recibirlo, vamos a recibir una petición en la cual se va a enviar un JSON y vamos a necesitar sacar ese JSON como un objeto Java para poder interactuar con nuestro repositorio y almacenarlo en  la base de datos.
+
+Hasta aquí ya nos podemos venir a nuestro código vamos el proyecto base lo vamos a copiar y pegar.
+
+
 <img src="images/10-06.png">
 
 # 11 Clases y anotaciones de Spring 14:25 
