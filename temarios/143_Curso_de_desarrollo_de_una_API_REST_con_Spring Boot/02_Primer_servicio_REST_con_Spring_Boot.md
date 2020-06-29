@@ -386,19 +386,39 @@ Y a nivel de respuesta podemos ver el código de estado, tiempo que tarde en eje
 
 <img src="images/09-09.png">
 
-
-
-
-Las pestañas las podemos almacenar, incluso si queremos para guardarla y gestionarla en colecciones que se muestran a la izquierda.
-
-Tenemos la barra dónde podemos escribir la URL, dónde podemos pasar diferentes parámetros que vamos a ver, dónde poder enviar nuestra petición, le digo que también la podemos salvar
+Tenemos una secció dónde podemos pasar diferentes parámetros a nuestra petición.
 
 <img src="images/09-07.png">
 
- 
- 
- 
- dicho que si pasamos el parámetro name por lo cual si no queremos tener que escribirlo directamente en la URL no podríamos escribir aquí nene y un determinado valor vale ahora nos vamos a saludar a nosotros mismos había que irme si cambiáramos el nombre otro nombre pues sería entonces a Cristina la que saludaría ya digo si queremos salvar está petición con el Estado que tiene ahora mismo lo que podríamos hacer este la podremos salvar en el raid o incluso en una colección que tuviéramos por aquí o incluso crear una colección de aquí no le podríamos dar un nombre a la petición en principio nos propone la propia URL le podríamos dar otro nombre otro nombre vale le podemos añadir aquí una descripción que incluso soporta Masgrau por documentar nuestra aplicación y podríamos crear una nueva colección Mané y aquí mismo poder salvar Nano y más adelante la cerramos la tenemos aquí para rescatarla vale o incluso si cerramos Postman y los volvemos a abrir tendríamos la opción de poder encontrarnos late nuevo y así si estamos desarrollando durante varios días varias semana una serie de peticiones sobre una misma API la podemos dejar guardada y documentada de hecho estas colecciones también si queréis se pueden exportar se pueden compartir para que se la podéis pasar a gente si fuese necesario llevar Honda incluso desde un equipo a otro hemos visto cómo trabajar con Postman y de verdad quería prender por Juan tenemos un curso estupendo dentro de nuestro de nuestro catálogo nosotros vamos a seguir en las siguientes lecciones creando una API que que incluya todos los métodos no solamente método que y que bueno pues nos dejes de una vez por todas teclear de verdad vale y darle caña al código para seguir aprendiendo a crear mensaje
+Vamos abrir unanueva pestaña y lanzar la petición mandando el parámetro `name`.
+
+<img src="images/09-15.png">
+
+Si no queremos tener que escribir el parámetro directamente en la URL lo podríamos escribir en la sección `Query Params` indicando una Key/Value, en este caso name/Pedro.
+
+Vemos como la respuesta donde saludamos a Pedro.
+
+Podemos saludar a otra persona cambiando el valor de `name`.
+
+<img src="images/09-17.png">
+
+Las pestañas las podemos almacenar en la raíz o incluso si queremos gestionarlas en colecciones que se muestran a la izquierda. Al presionar Save sobre una pestaña se nos muestra la siguiente ventana:
+
+<img src="images/09-16.png">
+
+Donde le podemos dar un nombre a la petición de primeras pone la URL de la petición, le podemos añadir una descripción que incluso soporta Markdown, e indicarle en que colección la debe almacenar.
+
+<img src="images/09-18.png">
+
+<img src="images/09-19.png">
+
+Y ya del lado izquierdo tenemos nuestra colección `143-API-REST-Con-Spring` con nuestras dos peticiones.
+
+<img src="images/09-20.png">
+
+Con esto ya podemos recuperarlas y ejecutarlas cuando volvamos a acceder a Postman sin necesidad de volver a crearlas y así si estamos desarrollando durante varios días, varias semana una serie de peticiones sobre una misma API la podemos dejar guardada y documentada de hecho estas colecciones también si queréis se pueden exportar se pueden compartir para que se la podéis pasar a gente si fuese necesario incluso llevarla desde un equipo a otro.
+
+<img src="images/09-21.png">
 
 También podemos trabajar con diferentes métodos, tenemos un desplegable para seleccionarlos.
 
