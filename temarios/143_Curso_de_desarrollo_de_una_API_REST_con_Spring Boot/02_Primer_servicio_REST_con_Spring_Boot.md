@@ -487,7 +487,206 @@ La estructura sería la misma para la petición de borrado sería con un deleite
 
 Algunas notaciones que vamos a usar para que no nos suenen raro y que las reconozcamos sería la anotación `@RequestBody` que nos va a permitir inyectar el cuerpo de la petición en un objeto, es decir nos enviara una petición, aquello trae datos y hemos visto que cuando nosotros en una petición GET devolvemos algo en el cuerpo el `HTTPMessageConverter` transforma nuestro objeto Java en un JSON, pero ahora lo necesitamos a la hora de recibirlo, vamos a recibir una petición en la cual se va a enviar un JSON y vamos a necesitar sacar ese JSON como un objeto Java para poder interactuar con nuestro repositorio y almacenarlo en  la base de datos.
 
-Hasta aquí ya nos podemos venir a nuestro código vamos el proyecto base lo vamos a copiar y pegar.
+Hasta aquí ya nos podemos venir a nuestro código vamos al proyecto base lo vamos a copiar y pegar del repositorio y le vamos a asignar el nombre `143-03-09_EstructuraRutas`.
+
+<img src="images/10-07.png">
+
+Tenemos nuestro archivo `pom.xml`.
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.8.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.openwebinars.rest</groupId>
+	<artifactId>143-03-09_EstructuraRutas</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>143-03-09_EstructuraRutas</name>
+	<description>Ejemplo de métodos crud en un API REST</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+```
+
+Tenemos una clase Modelo `Producto`.
+
+*`Producto`*
+
+```java
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+   @Id @GeneratedValue
+   private Long id;
+	
+   private String nombre;
+	
+   private float precio;
+	
+}
+```
+
+En esta clase `Producto` usamos Lombok lo cual la hace muy sencilla con una `id` y ya sabéis que Spring Data JPA nos permite tener estas anotación `@Id @GeneratedValue` y que tiene que tener `@Entity` para que sea una auténtica entidad, las demás anotaciones `@Data @NoArgsConstructor @AllArgsConstructor` son de Lombok. Vemos cómo tiene los atributos `id`, `nombre` y `precio`.
+
+*`ProductoRepositorio`*
+
+```java
+package com.openwebinars.rest.modelo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
+
+}
+```
+
+El repositorio es sencillo no vamos a necesitar ninguna consulta rara para hacerlo, entiende a los repositorios de `JpaRepository`.
+
+*`ProductoRepositorio`*
+
+```java
+package com.openwebinars.rest.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.openwebinars.rest.modelo.Producto;
+import com.openwebinars.rest.modelo.ProductoRepositorio;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductoController {
+
+   private final ProductoRepositorio productoRepositorio;
+
+   /**
+    * Obtenemos todos los productos
+    * 
+    * @return
+    */
+   @GetMapping("/producto")
+   public List<Producto> obtenerTodos() {
+      // Vamos a modificar este código
+      return null;
+   }
+
+   /**
+    * Obtenemos un producto en base a su ID
+    * 
+    * @param id
+    * @return Null si no encuentra el producto
+    */
+   @GetMapping("/producto/{id}")
+   public Producto obtenerUno(@PathVariable Long id) {
+      // Vamos a modificar este código
+      return null;
+   }
+
+   /**
+    * Insertamos un nuevo producto
+    * 
+    * @param nuevo
+    * @return producto insertado
+    */
+   @PostMapping("/producto")
+   public Producto nuevoProducto(@RequestBody Producto nuevo) {
+      // Vamos a modificar este código
+      return null;
+   }
+
+   /**
+    * 
+    * @param editar
+    * @param id
+    * @return
+    */
+   @PutMapping("/producto/{id}")
+   public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+      // Vamos a modificar este código
+      return null;
+   }
+
+   /**
+    * Borra un producto del catálogo en base a su id
+    * @param id
+    * @return
+    */
+   @DeleteMapping("/producto/{id}")
+   public Producto borrarProducto(@PathVariable Long id) {
+      // Vamos a modificar este código
+      return null;
+   }
+}
+```
+
+tendríamos el controlador del cual yo soy el esqueleto que vamos a ver ahora y a partir de aquí vamos a ir ahora no tendríamos el método que toma PIN para obtener todo ya lo hemos visto te devolverá un listado de producto el método para obtener uno que devolver a un producto el método POST mapping de insertar nuevo producto que lo recoge con request body el método para evitar un producto que también lo recoge con este rico es BodyCombat variable lo que vamos a hacer es inyectar este y dentro de este valor nuestra en el pub y no sienta que también lo utilizaremos tanto en el Puig como en el Perete vale no me ha gustado también es variable en el salón Tenerife bueno pues por lo pronto lo que necesitamos aquí es obtener el repositorio que era lo vamos a ir usando si trabajamos no tenemos que utilizar ni la anotación autowire ni nada Lombok nos permite también anotar con esta notación un controlador y como este repositorio no se va a haber modificado lo podemos declarar como final y directamente cuando se instancia Elvin vale pues te auto inyectaran las dependencias y lo hacemos de una manera limpia y utilizándolo como sería está petición más vamos a modificar este coche aquí tenemos que devolver todos los productos con lo cual no podemos hacer tan sencillo como utilizando nuestro producto repositorio todo se me olvidaba deciros que dentro de la carpeta risou vale tenéis aquí una serie de productos de ejemplo que yo en generado lo he sacado de un servicio que hay de Moclín de datos que te llamas mockaroo generado esta sentencia SQL para poder insertar que esta serie de productos que tiene Unide que se autogenera vale a través de una secuencia un nombre y un precio vale lo tendríamos por aquí podemos comprobar como aquí solamente te volveremos los productos y te devolverían todos de hecho si quisiéramos ya podríamos poner en ejecución el proyecto vamos a completar algo más aquí para devolver un solo producto lo que podríamos hacer buscarlo a través del método ya sabéis que este producto repository tiene una serie de métodos en el cual producto repository en el método Find by ID y al cual le pasamos ni de qué va a ser el mismo que recibamos y que devuelve un opcional como devuelve un opcional ahora mismo no nos vamos a meter a manejar ningún tipo de error y no no lo encuentras o qué vamos a hacer devolverme uno vale si queremos ya podemos ir ejecutando nuestro proyecto podríamos ir estoy currando también posma y podemos hacer pruebas de esta petición
 
 
 <img src="images/10-06.png">
