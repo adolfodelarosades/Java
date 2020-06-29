@@ -1026,6 +1026,10 @@ public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long 
 public Producto borrarProducto(@PathVariable Long id)   
 ```
 
+Hemos guardado en Postman nuestras cinco peticiones.
+
+<img src="images/10-20.png">
+
 <img src="images/10-06.png">
 
 ¿Qué nos faltaría entonces? Nos falta manejar correctamente los cóigos de respuesta, las peticiones de creación deberían devolver un 201, las peticiones que no encuentren un recurso 
