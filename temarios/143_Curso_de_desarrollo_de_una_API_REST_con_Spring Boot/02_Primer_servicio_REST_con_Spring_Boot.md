@@ -6,8 +6,8 @@
 * 11 Clases y anotaciones de Spring 14:25 
 * 12 Uso del patrón Data Transfer Object (DTO) 11:25 
 * 13 Implementando DTO con ModelMapper 17:58 
-* 14 Contenido adicional 6
-* 15 Manejo de errores y excepciones 64m
+* Contenido adicional 6
+
 
 # 08 Mi primer servicio REST 9:33 
 
@@ -320,6 +320,16 @@ mvn spring-boot:run
 
 ## Transcripción
 
+<img src="images/09-01.png">
+<img src="images/09-02.png">
+<img src="images/09-03.png">
+<img src="images/09-04.png">
+<img src="images/09-05.png">
+<img src="images/09-06.png">
+<img src="images/09-07.png">
+<img src="images/09-08.png">
+<img src="images/09-09.png">
+
 # 10 Estructura de las rutas 15:31 
 
 [PDF Estructura_de_las_rutas.pdf](pdfs/09_Estructura_de_las_rutas.pdf)
@@ -355,6 +365,13 @@ public class ProductoController {
 
 ## Transcripción
 
+<img src="images/10-01.png">
+<img src="images/10-02.png">
+<img src="images/10-03.png">
+<img src="images/10-04.png">
+<img src="images/10-05.png">
+<img src="images/10-06.png">
+
 # 11 Clases y anotaciones de Spring 14:25 
 
 [PDF Algunas_clases_y_anotaciones.pdf](pdfs/10_Algunas_clases_y_anotaciones.pdf)
@@ -378,6 +395,12 @@ DELETE | `204 No Content` |
 
 ## Transcripción
 
+<img src="images/11-01.png">
+<img src="images/11-02.png">
+<img src="images/11-03.png">
+<img src="images/11-04.png">
+<img src="images/11-05.png">
+
 # 12 Uso del patrón Data Transfer Object (DTO) 11:25 
 
 [PDF Uso_del_patrón_DTO.pdf](pdfs/11_Uso_del_patrón_DTO.pdf)
@@ -387,6 +410,18 @@ DELETE | `204 No Content` |
 No existe.
 
 ## Transcripción
+
+<img src="images/12-01.png">
+<img src="images/12-02.png">
+<img src="images/12-03.png">
+<img src="images/12-04.png">
+<img src="images/12-05.png">
+<img src="images/12-06.png">
+<img src="images/12-07.png">
+<img src="images/12-08.png">
+<img src="images/12-09.png">
+<img src="images/12-10.png">
+<img src="images/12-11.png">
 
 # 13 Implementando DTO con ModelMapper 17:58 
 
@@ -470,7 +505,16 @@ public class ProductoDTOConverter {
 
 ## Transcripción
 
-# 14 Contenido adicional 6
+<img src="images/13-01.png">
+<img src="images/13-02.png">
+<img src="images/13-03.png">
+<img src="images/13-04.png">
+<img src="images/13-05.png">
+<img src="images/13-06.png">
+<img src="images/13-07.png">
+<img src="images/13-08.png">
+
+# Contenido adicional 6
 
 * [PDF Mi_primer_servicio_REST.pdf](pdfs/07_Mi_primer_servicio_REST.pdf)
 * [PDF Puesta_en_marcha_de_la_aplicación.pdf](pdfs/08_Puesta_en_marcha_de_la_aplicación.pdf)
