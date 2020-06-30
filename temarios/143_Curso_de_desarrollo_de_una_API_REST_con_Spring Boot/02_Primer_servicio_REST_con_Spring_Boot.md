@@ -1522,6 +1522,276 @@ Relanzamos la aplicación y probamos con Postman el borrar el Prodducto 31.
 
 Nos devolvería vacío pero nos devuelve el código correcto que es 204 No Content y así hemos completado nuestra API para que los códigos de retorno que vamos teniendo se vayan acercando a lo que debería.
 
+### :computer: Código Completo - 143-04-11_Clases_Anotaciones
+
+<img src="images/11-16.png">
+
+*`pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.8.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.openwebinars.rest</groupId>
+	<artifactId>143-04-11_Clases_Anotaciones</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>143-04-11_Clases_Anotaciones</name>
+	<description>Ejemplo de métodos crud en un API REST</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+```
+
+*`data.sql`*
+
+```sql
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Juice - Orange, Concentrate', 91);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Beef - Ground, Extra Lean, Fresh', 87);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cheese - Parmesan Grated', 39);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cups 10oz Trans', 67);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Wine - Beringer Founders Estate', 27);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Bread - Wheat Baguette', 82);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Quail - Eggs, Fresh', 3);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cheese - Mascarpone', 97);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Mace', 25);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Oil - Shortening - All - Purpose', 63);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Marjoram - Fresh', 60);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Turnip - White', 74);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Pork Salted Bellies', 38);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Longos - Greek Salad', 15);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Amaretto', 85);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Godiva White Chocolate', 97);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Tomatoes - Roma', 61);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Oven Mitt - 13 Inch', 1);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Vermouth - White, Cinzano', 72);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Club Soda - Schweppes, 355 Ml', 38);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Fenngreek Seed', 1);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Dill Weed - Dry', 72);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Pepper - Green', 56);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Bacardi Breezer - Tropical', 35);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Wine - Merlot Vina Carmen', 14);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Sauce - Black Current, Dry Mix', 9);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Crab - Soft Shell', 17);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Jameson Irish Whiskey', 19);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Muffin Chocolate Individual Wrap', 77);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Mussels - Frozen', 95);
+```
+
+**Modelo**
+
+*`Producto`*
+
+```java
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+   @Id @GeneratedValue
+   private Long id;
+	
+   private String nombre;
+	
+   private float precio;
+	
+}
+```
+
+*`ProductoRepositorio`*
+
+```java
+package com.openwebinars.rest.modelo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
+
+}
+```
+
+**Controller**
+
+*`Productocontroller`* (El unico modificado en esta lección)
+
+```java
+package com.openwebinars.rest.controller;
+
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.openwebinars.rest.modelo.Producto;
+import com.openwebinars.rest.modelo.ProductoRepositorio;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductoController {
+
+	private final ProductoRepositorio productoRepositorio;
+
+	/**
+	 * Obtenemos todos los productos
+	 * 
+	 * @return
+	 */
+	@GetMapping("/producto")
+	public ResponseEntity<?> obtenerTodos() {
+		
+		List<Producto> result = productoRepositorio.findAll();
+		
+		if(result.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(result);
+		}
+	}
+
+	/**
+	 * Obtenemos un producto en base a su ID
+	 * 
+	 * @param id
+	 * @return Null si no encuentra el producto
+	 */
+	@GetMapping("/producto/{id}")
+	public ResponseEntity<?> obtenerUno(@PathVariable Long id) {
+		Producto result = productoRepositorio.findById(id).orElse(null);
+		
+		if(result == null) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(result);
+		}
+	}
+
+	/**
+	 * Insertamos un nuevo producto
+	 * 
+	 * @param nuevo
+	 * @return producto insertado
+	 */
+	@PostMapping("/producto")
+	public ResponseEntity<Producto> nuevoProducto(@RequestBody Producto nuevo) {
+		Producto saved = productoRepositorio.save(nuevo);
+		return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+	}
+
+	/**
+	 * 
+	 * @param editar
+	 * @param id
+	 * @return
+	 */
+	@PutMapping("/producto/{id}")
+	public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+		
+		return productoRepositorio.findById(id).map(p -> {
+			p.setNombre(editar.getNombre());
+			p.setPrecio(editar.getPrecio());
+			return ResponseEntity.ok(productoRepositorio.save(p));
+		}).orElseGet(() -> {
+			return ResponseEntity.notFound().build();
+		});
+	}
+
+	/**
+	 * Borra un producto del catálogo en base a su id
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/producto/{id}")
+	public ResponseEntity<?>  borrarProducto(@PathVariable Long id) {
+		productoRepositorio.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
+
+}
+```
+
+**Base**
+
+*`Application`*
+
+```
+package com.openwebinars.rest;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Application {
+
+   public static void main(String[] args) {
+      SpringApplication.run(Application.class, args);
+   }
+
+}
+```
+
 # 12 Uso del patrón Data Transfer Object (DTO) 11:25 
 
 [PDF Uso_del_patrón_DTO.pdf](pdfs/11_Uso_del_patrón_DTO.pdf)
