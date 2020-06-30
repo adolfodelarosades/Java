@@ -1487,12 +1487,40 @@ Relanzamos la aplicación y probamos nuevamente con Postman.
 
 <img src="images/11-13.png">
 
-Nuestro jamón de bellota lo transformamos a ibérico de bellota y vemos que sucede lo mismo, si lo que quisiéramos transformar el producto 33 que no existe nos devolvería de nuevo un 404 qué es lo que hablamos.
+Nuestro jamón de bellota lo transformamos a ibérico de bellota y vemos que sucede lo mismo, si lo que quisiéramos transformar el producto 33 que no existe nos devolvería de nuevo un 404 Not Found qué es lo que hablamos.
 
 <img src="images/11-14.png">
 
+Por último a la hora de modificar donde actualmente tenemos:
 
-por último a la hora de modificar como hemos dicho que ya no vamos a querer devolver lo podríamos hacer vale nos podríamos casi que quitar todo este código vamos delete eBay aire repasamos el líder y aquí si podemos hacer una devolución hemos creado el 31 y ahora vamos a borrarlo y nos devolvería vacío pero no devuelve el código correcto que es 204 y así hemos completado nuestra API para que los códigos de retorno que vamos teniendo se vayan acercando a lo que debería
+```java
+@DeleteMapping("/producto/{id}")
+public Producto borrarProducto(@PathVariable Long id) {
+   if(productoRepositorio.existsById(id)) {
+      Producto producto = productoRepositorio.findById(id).get();
+      productoRepositorio.deleteById(id);
+      return producto;
+   }else {
+      return null;
+   }
+}
+```
+
+Como hemos dicho que ya no vamos a querer devolver el Producto eliminado, eliminamos el Producto con `deleteById(id)` y aquí si podemos hacer una devolución de `noContent()` la terminamos de construir con `built()`, por lo que el método nos quedaría así:
+
+```java
+@DeleteMapping("/producto/{id}")
+public ResponseEntity<?>  borrarProducto(@PathVariable Long id) {
+   productoRepositorio.deleteById(id);
+   return ResponseEntity.noContent().build();
+}
+```
+
+Relanzamos la aplicación y probamos con Postman el borrar el Prodducto 31.
+
+<img src="images/11-15.png">
+
+Nos devolvería vacío pero nos devuelve el código correcto que es 204 No Content y así hemos completado nuestra API para que los códigos de retorno que vamos teniendo se vayan acercando a lo que debería.
 
 # 12 Uso del patrón Data Transfer Object (DTO) 11:25 
 
