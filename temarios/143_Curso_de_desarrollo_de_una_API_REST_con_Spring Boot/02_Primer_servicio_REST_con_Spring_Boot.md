@@ -1447,7 +1447,52 @@ Ahora ya está el producto jamón de bellota ya se encuentra vemos como nos devu
 
 Si a la hora tampoco lo vamos a programar ahora mismo, pero si a la hora de crear el nuevo producto hubiera algún tipo de fallo por ejemplo que el nombre no lo mandaramos y fuera obligatorio podríamos devolver a lo mejor un código 400 de peticion erronea.
 
-no la petición de put mapping podemos cambiar el código para que en lugar de hacerse de esta manera se hiciera de una manera un poco más conveniente sabemos que bueno por lo pronto tendremos que volver a un responso sabemos que el producto repositorio tiene un método finebuy y ve al cuál le pasamos el Lidl y que devuelve una opcional pues opcional tiene un método fantástico que nos va a permitir transformar el objeto en otro objeto y si no vale este lo vamos a hacer ahora aquí ya veremos todo lo que vamos a incluir y si no vale esto sería y sino que nos devuelva en lugar de ese objeto vale vale que ya veremos la quesera bueno por lo pronto esto será lo que se devuelva y como tenemos aquí este Maps vale ahora se caerá correctamente cuando ahora se perderá esto esto viene porque es un producto bueno ahora lo podremos ir solucionando lo que devolvamos aquí dentro será el producto editado y aquí dentro ya no podemos viendo si no ha encontrado el producto lo que hacemos devolver pon mane.com y aquí lo que vamos a ir haciendo eh el nombre del producto será el que hemos pasado y lo que tenemos es que devolverlo cómo podemos comprobar que no faltaba que era devolver en retorno a Monte devolviendo en el Maps pon responseentity del producto ya almacenado porque lo estamos almacenando aquí con código ok 200 OK y el código y el producto modificado en lo que vamos buscando y si no lo que se devuelve aquí sería un noto porque no lo hemos encontrado el comportamiento que andábamos buscando no recordamos aquí nuestro jamón de bellota lo transformamos a ibérico de bellota y vemos que sucede lo mismo es lo que quisiéramos sería transformar el producto 33 que no existe sino te volvería de nuevo o 404 qué es lo que hablamos por último a la hora de modificar como hemos dicho que ya no vamos a querer devolver lo podríamos hacer vale nos podríamos casi que quitar todo este código vamos delete eBay aire repasamos el líder y aquí si podemos hacer una devolución hemos creado el 31 y ahora vamos a borrarlo y nos devolvería vacío pero no devuelve el código correcto que es 204 y así hemos completado nuestra API para que los códigos de retorno que vamos teniendo se vayan acercando a lo que debería
+Si nos vamos a la petición de `@PutMapping` actualmente tenemos:
+
+```java
+@PutMapping("/producto/{id}")
+public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+   if(productoRepositorio.existsById(id)) {
+      editar.setId(id);
+      return productoRepositorio.save(editar);
+   }else {
+      return null;
+   }
+}
+```
+
+Podemos cambiar el código para que en lugar de hacerse de esta manera se hiciera de una manera un poco más conveniente, devolver un `ResponseEntity`, sabemos que el `productoRepositorio` tiene un método `findById(id)` y que devuelve un `Optional`, `Optional` tiene un método fantástico `map` que nos va a permitir transformar el objeto en otro objeto y si no lo encuentra nos devolvera otra cosa que ya veremos la que será.
+
+<img src="images/11-12.png">
+
+Por lo pronto esto será lo que se devuelva lo que devolvamos aquí dentro será el producto editado y dentro del Else ya lo podemos ir viendo, si no ha encontrado el producto lo que hacemos es devolver `return ResponseEntity.notfound().build();` y en el otro caso lo que vamos a ir haciendo es que el nombre y precio del producto será el que hemos pasado y después de editar todo el producto tendríamos que devolverlo. 
+
+```java
+@PutMapping("/producto/{id}")
+public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+		
+   return productoRepositorio.findById(id).map(p -> {
+      p.setNombre(editar.getNombre());
+      p.setPrecio(editar.getPrecio());
+      return ResponseEntity.ok(productoRepositorio.save(p));
+   }).orElseGet(() -> {
+      return ResponseEntity.notFound().build();
+   });
+}
+```
+
+En el Map devolvemos un `ResponseEntity` del producto ya almacenado porque lo estamos almacenando con `productoRepositorio.save(p)` con código `ok` 200 OK y el código y el producto modificado que es lo que vamos buscando y si no lo que se devuelve sería un `notFound()` porque no lo hemos encontrado, el comportamiento que andábamos buscando.
+
+Relanzamos la aplicación y probamos nuevamente con Postman.
+
+<img src="images/11-13.png">
+
+Nuestro jamón de bellota lo transformamos a ibérico de bellota y vemos que sucede lo mismo, si lo que quisiéramos transformar el producto 33 que no existe nos devolvería de nuevo un 404 qué es lo que hablamos.
+
+<img src="images/11-14.png">
+
+
+por último a la hora de modificar como hemos dicho que ya no vamos a querer devolver lo podríamos hacer vale nos podríamos casi que quitar todo este código vamos delete eBay aire repasamos el líder y aquí si podemos hacer una devolución hemos creado el 31 y ahora vamos a borrarlo y nos devolvería vacío pero no devuelve el código correcto que es 204 y así hemos completado nuestra API para que los códigos de retorno que vamos teniendo se vayan acercando a lo que debería
 
 # 12 Uso del patrón Data Transfer Object (DTO) 11:25 
 
