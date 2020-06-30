@@ -1958,15 +1958,48 @@ public class ProductoDTOConverter {
 ## Transcripción
 
 <img src="images/13-01.png">
-<img src="images/13-02.png">
-<img src="images/13-03.png">
-<img src="images/13-04.png">
-<img src="images/13-05.png">
-<img src="images/13-06.png">
-<img src="images/13-07.png">
-<img src="images/13-08.png">
 
-Hola a todos vamos a aprender a implementar el patrón data Transfer Object de Theo con modelmapper primero vamos a empezar viendo que es eso de modelmapper hemos visto en la lección anterior que para poder transformar un objeto de negocio en desde o viceversa podremos hacer manualmente o con modelmapper modelmapper nos va a permitir evitar código muy repetitivo ya que nos va a facilitar la creación de tejidos mediante una asignación dinámica vale de hecho lo que va a buscar aplicar una serie de pequeñas regla inteligente para hacer la transformación pero también nos va a ofrecer la posibilidad de configurar cómo se va a hacer la asignación entre objetos para usar modelmapper tan solo tendríamos que añadir esta dependencia con la versión más actualizada que quisiéramos tener dentro de nuestro Po y como configuración básica para poder utilizarla ya dónde lo necesitemos podríamos crear un bin que nos devuelva el Hypoderma por el objeto nuclear que va a hacer las transformaciones para para poder utilizarlo allá donde lo necesitemos no hacer nuestro de Teo electro de Teo va a hacer una clase muy sencilla que tercer y algo no podemos añadir algo por algún tipo de constructor o Builder constructor por defecto que tiene creado podríamos necesitando y que va a tener solamente leader el nombre y el nombre de la categoría vamos a comprobar como en el proyecto va a ser que tenéis ya he añadido una clase modelo de categoría vale se añaden algunas categorías a la base de datos los productos tienen enlazadas categoría para que no nos perdamos en detalle asociado a spring data JP a las entidades a esta parte del modelo y nos sentemos no sé tenemos solamente enfrentó nuestra clase va a hacer esta vamos a tener el líder el nombre y el nombre de la categoría un posible candidato por ejemplo para tener el listado de producto para un cliente que a lo mejor nos hubiera logueado en el sistema y que no puede ver los precios no es que por ejemplo nuestro sistema funciona como una posible idea dónde vamos a hacer la transformación hacia nuestro deseo bueno pues físicamente la podríamos hacer toda esa transformación modelmapper en el controlador de hecho encontraré en algún ejemplo de algún autor es conocido que se apellida ejemplo nosotros lo que vamos a hacer es crear un componente independiente la transformación de un objeto en otro y inyectar este componente allá donde no necesiten el componente podría ser como es picados que sería una clase con arroba components no llega quizás servicio es simplemente un componente de utilidad dónde utilizando el modelmapper va a hacer la construcción de un producto de Teo a partir de un producto va a ser así de sencillo dentro de un controlador por ejemplo de todos los productos que no te queremos hacer la transformación podríamos tener la lista de todos y hacer esta conversión aprovechando el API string eso sí lo podríamos hacer aquí ya no porque a partir de la capa de acceso a datos tenemos todos los productos y los procesamos aquí mismo 11 pero a través del API string con más vale ya vamos llamando al conversor de Vete o construye por cada producto un producto de Teo lo almacenamos y es lo que me volveríamos entonces a nuestro cliente vale vamos a hacer esto nuestro proyecto como decía tenemos por aquí el proyecto bajo vale implementación de Teo base vamos a hacer copia para poder trabajar con tranquilidad nombre para que no haya problema y lo primero que hacemos en el Pou es añadir la dependencia de modelmapper vale vamos añadir la dependencia paper artifacts y de ferias modelmapper y la versión en este caso sí que la tenemos que añadir vale ya tendríamos modelmapper y miramos en las dependencias Maiden por aquí debe aparecer vale lo siguiente que vamos a hacer es dentro de nuestro código vamos a crear un paquete de configuración y dentro una en un alarde de imaginación me lo he puesto en una mezcla de español y en mi configuración anotadas con configuration vale y aquí es donde vamos a crear el bean dónde vamos a poner modelo más moderno centro podemos hacer creando directamente la clase
+Vamos a aprender a implementar el patrón Data Transfer Object DTO con ModelMapper.
+
+<img src="images/13-02.png">
+
+Primero vamos a empezar viendo que es eso de ModelMapper hemos visto en la lección anterior que para poder transformar un Objeto de Negocio (BO) en DTO o viceversa lo podremos hacer manualmente o con ModelMapper. ModelMapper nos va a permitir evitar código muy repetitivo ya que nos va a facilitar la creación de DTOs mediante una asignación dinámica, de hecho lo que va a buscar es aplicar una serie de pequeñas regla inteligentes, para hacer la transformación, pero también nos va a ofrecer la posibilidad de configurar cómo se va a hacer la asignación entre objetos.
+
+<img src="images/13-03.png">
+
+Para usar ModelMapper tan solo tendríamos que añadir esta dependencia con la versión más actualizada que quisiéramos tener dentro de nuestro `pom.xml`.
+
+```html
+<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+<dependency>
+    <groupId>org.modelmapper</groupId>
+    <artifactId>modelmapper</artifactId>
+    <version>2.3.8</version>
+</dependency>
+```
+
+<img src="images/13-04.png">
+
+Y como configuración básica para poder utilizarla ya dónde lo necesitemos podríamos crear un Bean que nos devuelva el ModelMapper, el objeto nuclear que va a hacer las transformaciones para poder utilizarlo allá donde lo necesitemos.
+
+<img src="images/13-05.png">
+
+¿Cómo va a ser nuestro DTO? Nuestro DTO va a ser una clase muy sencilla con getter, setter con las anotaciones `@Getter` y `@Setter` le podemos añadir algún tipo de constructor o Builder o el constructor por defecto que tiene creado lo que vayamos necesitando y que va a tener solamente el `id`, `nombre` y `categoriaNombre` vamos a comprobar como en el proyecto Base ya hemos añadido una clase modelo de categoría, se añaden algunas categorías a la base de datos, los productos tienen enlazadas categoría, para que no nos perdamos en detalle asociado a Spring Data JPA, a las entidades, a esta parte del modelo y nos centremos solamente en REST.
+
+Nuestra clase va a ser esta vamos a tener el `id`, `nombre` y `categoriaNombre` sería un posible candidato por ejemplo para tener el listado de productos para un cliente que a lo mejor no se hubiera logueado en el sistema y que no puede ver los precios si es que por ejemplo nuestro sistema trabaja así, como una posible idea. 
+
+<img src="images/13-06.png">
+
+Dónde vamos a hacer la transformación hacia nuestro DTO, bueno pues explísitamente la podríamos hacer toda esa transformación con ModelMapper en el controlador, de hecho encontraré en algún ejemplo de algúnos autores conocido que se hace allí de ejemplo.
+
+<img src="images/13-07.png">
+
+Nosotros lo que vamos a hacer es crear un componente independiente que haga la transformación de un objeto en otro e inyectar ese componente allá donde lo necesiten el componente podría ser como este, observen que sería una clase con `@Component` no llega quizá a servicio, es simplemente un componente de utilidad dónde utilizando el ModelMapper va a hacer la construcción de un producto DTO a partir de un producto, va a ser así de sencillo y esto lo utilizaremos dentro de un controlador, por ejemplo en `@GetMapping("/producto")` donde queremos hacer la transformación podríamos tener la lista de todos y hacer esta conversión aprovechando el API Stream eso sí lo podríamos hacer aquí ya, porque a partir de la capa de acceso a datos tenemos todos los productos y los procesamos aquí mismo 1 a 1 pero a través del API Stream con Map vamos llamando al conversor de DTO, construye por cada producto un producto DTO lo almacenamos en una lista y es lo que devolveríamos entonces a nuestro cliente.
+
+AQUIIIIIIII
+Vamos a hacer esto nuestro proyecto como decía tenemos por aquí el proyecto bajo vale implementación de Teo base vamos a hacer copia para poder trabajar con tranquilidad nombre para que no haya problema y lo primero que hacemos en el Pou es añadir la dependencia de modelmapper vale vamos añadir la dependencia paper artifacts y de ferias modelmapper y la versión en este caso sí que la tenemos que añadir vale ya tendríamos modelmapper y miramos en las dependencias Maiden por aquí debe aparecer vale lo siguiente que vamos a hacer es dentro de nuestro código vamos a crear un paquete de configuración y dentro una en un alarde de imaginación me lo he puesto en una mezcla de español y en mi configuración anotadas con configuration vale y aquí es donde vamos a crear el bean dónde vamos a poner modelo más moderno centro podemos hacer creando directamente la clase
+
+<img src="images/13-08.png">
 
 # Contenido adicional 6
 
