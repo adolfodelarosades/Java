@@ -1697,7 +1697,7 @@ public class ProductoController {
 	/**
 	 * Obtenemos todos los productos
 	 * 
-	 * @return
+	 * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
 	 */
 	@GetMapping("/producto")
 	public ResponseEntity<?> obtenerTodos() {
@@ -1715,7 +1715,7 @@ public class ProductoController {
 	 * Obtenemos un producto en base a su ID
 	 * 
 	 * @param id
-	 * @return Null si no encuentra el producto
+	 * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
 	 */
 	@GetMapping("/producto/{id}")
 	public ResponseEntity<?> obtenerUno(@PathVariable Long id) {
@@ -1732,7 +1732,7 @@ public class ProductoController {
 	 * Insertamos un nuevo producto
 	 * 
 	 * @param nuevo
-	 * @return producto insertado
+	 * @return 201 y el producto insertado
 	 */
 	@PostMapping("/producto")
 	public ResponseEntity<Producto> nuevoProducto(@RequestBody Producto nuevo) {
@@ -1744,7 +1744,7 @@ public class ProductoController {
 	 * 
 	 * @param editar
 	 * @param id
-	 * @return
+	 * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
 	 */
 	@PutMapping("/producto/{id}")
 	public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
@@ -1761,7 +1761,7 @@ public class ProductoController {
 	/**
 	 * Borra un producto del catálogo en base a su id
 	 * @param id
-	 * @return
+	 * @return Código 204 sin contenido
 	 */
 	@DeleteMapping("/producto/{id}")
 	public ResponseEntity<?>  borrarProducto(@PathVariable Long id) {
