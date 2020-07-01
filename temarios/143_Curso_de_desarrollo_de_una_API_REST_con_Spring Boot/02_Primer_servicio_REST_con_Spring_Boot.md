@@ -1996,6 +1996,127 @@ Dónde vamos a hacer la transformación hacia nuestro DTO, bueno pues explísita
 
 Nosotros lo que vamos a hacer es crear un componente independiente que haga la transformación de un objeto en otro e inyectar ese componente allá donde lo necesiten el componente podría ser como este, observen que sería una clase con `@Component` no llega quizá a servicio, es simplemente un componente de utilidad dónde utilizando el ModelMapper va a hacer la construcción de un producto DTO a partir de un producto, va a ser así de sencillo y esto lo utilizaremos dentro de un controlador, por ejemplo en `@GetMapping("/producto")` donde queremos hacer la transformación podríamos tener la lista de todos y hacer esta conversión aprovechando el API Stream eso sí lo podríamos hacer aquí ya, porque a partir de la capa de acceso a datos tenemos todos los productos y los procesamos aquí mismo 1 a 1 pero a través del API Stream con Map vamos llamando al conversor de DTO, construye por cada producto un producto DTO lo almacenamos en una lista y es lo que devolveríamos entonces a nuestro cliente.
 
+### Creacion Proyecto Eclipse
+
+<img src="images/13-09.png">
+
+*`data.sql`*
+
+```sql
+insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Comida');
+insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Bebida');
+insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Complementos');
+
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Juice - Orange, Concentrate', 91, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Beef - Ground, Extra Lean, Fresh', 87, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Cheese - Parmesan Grated', 39, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Cups 10oz Trans', 67, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Wine - Beringer Founders Estate', 27, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Bread - Wheat Baguette', 82, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Quail - Eggs, Fresh', 3, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Cheese - Mascarpone', 97, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Mace', 25, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Oil - Shortening - All - Purpose', 63, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Marjoram - Fresh', 60, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Turnip - White', 74, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Pork Salted Bellies', 38, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Longos - Greek Salad', 15, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Amaretto', 85, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Godiva White Chocolate', 97, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Tomatoes - Roma', 61, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Oven Mitt - 13 Inch', 1, 3);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Vermouth - White, Cinzano', 72, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Club Soda - Schweppes, 355 Ml', 38, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Fenngreek Seed', 1, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Dill Weed - Dry', 72, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Pepper - Green', 56, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Bacardi Breezer - Tropical', 35, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Wine - Merlot Vina Carmen', 14, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Sauce - Black Current, Dry Mix', 9, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Crab - Soft Shell', 17, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Jameson Irish Whiskey', 19, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Muffin Chocolate Individual Wrap', 77, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Mussels - Frozen', 95, 1);
+```
+
+*`Producto`*
+
+```java
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+	@Id @GeneratedValue
+	private Long id;
+	
+	private String nombre;
+	
+	private float precio;
+	
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria;
+	
+}
+```
+
+*`Categoria`*
+
+```java
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Categoria {
+
+	@Id @GeneratedValue
+	private Long id;
+	
+	private String nombre;
+	
+}
+```
+
+*`CategoriaRepositorio`*
+
+```java
+package com.openwebinars.rest.modelo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
+
+}
+```
+
+
+
+
+
+
+
+
+
 AQUIIIIIIII
 Vamos a hacer esto nuestro proyecto como decía tenemos por aquí el proyecto bajo vale implementación de Teo base vamos a hacer copia para poder trabajar con tranquilidad nombre para que no haya problema y lo primero que hacemos en el Pou es añadir la dependencia de modelmapper vale vamos añadir la dependencia paper artifacts y de ferias modelmapper y la versión en este caso sí que la tenemos que añadir vale ya tendríamos modelmapper y miramos en las dependencias Maiden por aquí debe aparecer vale lo siguiente que vamos a hacer es dentro de nuestro código vamos a crear un paquete de configuración y dentro una en un alarde de imaginación me lo he puesto en una mezcla de español y en mi configuración anotadas con configuration vale y aquí es donde vamos a crear el bean dónde vamos a poner modelo más moderno centro podemos hacer creando directamente la clase
 
