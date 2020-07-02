@@ -15,27 +15,50 @@
 
 ![00_Presentacion-1](images/00_Presentacion-1.png)
 
+Para realizar el curso de Java desde cero no es necesario ningún requisito en particular, si bien es cierto que cualquier persona que quiera ser programador o quiera aprender programación, se agradece siempre el tener algo de capacidad analítica, algo de base matemáticas y siempre un puntito de creatividad.
+
 ![00_Presentacion-3](images/00_Presentacion-3.png)
+
+Porque es bueno que aprendáis Java 8, según Oracle la empresa propietaria de la tecnología Java existen a día de hoy cerca de tres mil millones de dispositivos en el mundo que utilizan Java dispositivo de diferentes tipos.
 
 ![00_Presentacion-4](images/00_Presentacion-4.png)
 
+Y además Java en particular ahora con la versión 8 es la mitad del camino que tenemos que recorrer si queremos aprender a programar aplicaciones nativas para dispositivos móviles que corran Android.
+
 ![00_Presentacion-5](images/00_Presentacion-5.png)
+
+Como otro argumento también para tratar de convencerlos es que Java sigue siendo desde hace bastante tiempo el lenguaje de programación más utilizados según uno de los [rankings](https://tiobe.com/tiobe-index/) que existen que lo mide en todo el mundo, además os recomiendo que podáis leer el artículo que tenemos en nuestro blog sobre [cuánto gana un programador Java en España](https://openwebinars.net/blog/cuanto-gana-un-programador-java-en-espana/) para qué pueda servir también de acicate o podéis comparar con respecto a otra tecnología si es que el salario que quieren obtener también es una opción para aprender o no un lenguaje de programación.
 
 ![00_Presentacion-6](images/00_Presentacion-6.png)
 
+Vamos a estructurar el curso de Java en varios bloques que los vamos a ver a continuación, primero vamos a comenzar con Java instalándolo, instalando un entorno de desarrollo y comenzando con su sintaxis inicial, posteriormente vamos a trabajar con variables, tipos de datos, operadores y con las sentencias de estructura de control, después pasaremos a trabajar con clases y objetos una primera introducción, posteriormente en manipularemos y trataremos datos con Arrays y Strings.
+
 ![00_Presentacion-7](images/00_Presentacion-7.png)
+
+Pasaremos después a revisitar otra vez clase y objetos trabajando con sus argumento y modificadores, usaremos herencia de clase y aprenderemos también a trabajar con interfaces, clases abstracta y polimorfismo, manejaremos excepciones y también conoceremos alguna de las clases más utilizadas del API de Java cómo son StringBuilder, el nuevo API de fecha, ArrayList y las expresiones lambda y el nuevo API Stream que podremos introducir.
 
 ![00_Presentacion-8](images/00_Presentacion-8.png)
 
-![00_Presentacion-9](images/00_Presentacion-9.png)
+Como prácticas haremos tres proyectos, que lo haremos en momento intermedio y al final del curso en el que haremos una sencilla calculadora aritmética, un juego de hundir la flota y la gestión de de un parking.
 
+![00_Presentacion-9](images/00_Presentacion-9.png)
 ![00_Presentacion-10](images/00_Presentacion-10.png)
+
+Y si te planteas cual va a ser el resultado cuando yo termine este curso, es decir que sere capaz de hacer cuando finalice el curso, lo primero es que seras capaz de programar aplicaciones en Java, lo cual será programar aplicaciones que se puedan ejecutar en distintos sistemas operativos Windows, Linux, Mac son los más utilizados. También vas a poder manejar todos los conceptos de programación orientada a objetos, sabras utilizar tipos de datos complejos como son las fechas.  
+
 
 ![00_Presentacion-11](images/00_Presentacion-11.png)
 
+Podrás utilizar el nuevo estilo de programación funcional incorporado en Java SE 8, manejar situaciones de error y darle tratamiento a esos errores, tratarlos de forma adecuada.
+
 ![00_Presentacion-12](images/00_Presentacion-12.png)
 
-Para realizar el curso de Java desde cero no es necesario ningún requisito en particular si bien es cierto que cualquier persona que quiera ser programador o quiera aprender programación voy a agradecer siempre el tener algo de capacidad analítica algo de base matemáticas y siempre un puntito de creatividad porque es bueno que aprendáis Java 8 según la empresa propietaria de la tecnología Java existen a día de hoy cerca de tres mil millones de dispositivos en el mundo que utilizan Java dispositivo de diferentes tipos y además porque Java 8 es Java en particular ahora con la versión 8 es la mitad del camino que tenemos que recorrer y queremos aprender a programar aplicaciones nativas para para dispositivos móviles que corran Android con otro argumento también para tratar de convencer o es que Java sigue siendo desde hace bastante tiempo el lenguaje de programación más utilizados según uno de los rankings que existen vale y que lo mire en todo el mundo y además os recomiendo que podáis leer el artículo que tenemos en nuestro blog sobre cuánto gana un programador Java en España para qué bueno pueda servir también de acicate o o podéis comparar con respecto a otra tecnología vale si es que el salario te creías tener también es una opción para aprender en un lenguaje de programación vamos a estructurar el curso déjame en varios bloques que los vamos a ver a continuación primero vamos a comenzar con Java instalándolo instalando un entorno de desarrollo y comenzando con su sintaxis inicial posteriormente vamos a trabajar con variables tipos de datos operadores y con las sentencias de estructura de control después pasaremos a trabajar con clases y objetos una primera introducción posteriormente en manipular emoji trataremos datos con arrays y stream pasaremos después a revisitar otra vez clase y objetos trabajando con su argumento y modificadores usaremos herencia de clase y aprenderemos también a trabajar con interfaz clase abstracta y polimorfismo manejaremos excepciones y también conoceremos alguna de las clases más utilizadas del API de Java cómo son streambuilder el nuevo API de fecha ArrayList y las expresiones lambda y el nuevo API stream que podremos introducir como prácticas haremos tres proyectos que lo haremos en momento intermedio y al final del curso en el que haremos una sencilla calculadora aritmética un juego de hundir la flota y la gestión de de un parking y por qué bueno que aprenda y sábado el curso de Java JSF los cursos de Spring e Hibernate y el curso de Android entre otro así que os ánimo a que podáis hacer este curso de Java 8 desde cero si no sabéis nada de programación he puesto curso incluso también os puede servir como reciclaje si sabes programar en java pero queréis conocer los nuevos elementos que incorpora Java 8 ánimo y que disfrutéis del curso
+También podrás utilizar los conocimientos de este curso como base para hacer otros de los cursos como son Java 8 para programadores Java, Java EE, JSF, los cursos de Spring e Hibernate y el curso de Android entre otro.
+
+Así que os ánimo a que podáis hacer este curso de Java 8 desde cero, si no sabéis nada de programación es el curso, incluso también os puede servir como reciclaje si sabes programar en Java, pero queréis conocer los nuevos elementos que incorpora Java 8, ánimo y que disfrutéis del curso 
+
+
+
 
 
 
