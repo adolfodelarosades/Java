@@ -62,7 +62,7 @@ Así que os ánimo a que podáis hacer este curso de Java 8 desde cero, si no sa
 
 [Instalación de Java](pdfs/01_Instalación_de_Java.pdf)
 
-## Presentación Profesor
+## Resumen Profesor
 
 ### 1.1 ¿Qué es Java?
 
