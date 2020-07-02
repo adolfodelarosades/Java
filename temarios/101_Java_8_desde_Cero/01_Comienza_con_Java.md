@@ -106,16 +106,6 @@ En el momento de comenzar a escribir estas líneas, la primera versión de Java 
 
 ## Transcripción
 
-
-
-![01_Instalación_de_Java-8](images/01_Instalación_de_Java-8.png)
-
-![01_Instalación_de_Java-9](images/01_Instalación_de_Java-9.png)
-
-![01_Instalación_de_Java-10](images/01_Instalación_de_Java-10.png)
-
-![01_Instalación_de_Java-11](images/01_Instalación_de_Java-11.png)
-
 Hola todo y bienvenido a esta primera lección sobre Java 8 en el nos vamos a introducir un poco en esta tecnología tan apasionante que es Java y acabaremos haciendo la instalación de la primera parte del software que vamos a necesitar para desarrollar aplicaciones con el.
 
 ![01_Instalación_de_Java-2](images/01_Instalación_de_Java-2.png)
@@ -140,8 +130,31 @@ Java lo que hace es aportarnos la máquina virtual de Java y eso qué es, pues s
 
 ![01_Instalación_de_Java-7](images/01_Instalación_de_Java-7.png)
 
-AAAQUIIIIII
-Está portabilidad, este carácter multiplataforma se consigue cambiando el planteamiento a la hora de producir el programa, por ejemplo cuando nosotros trabajamos en un lenguaje como C nosotros debíamos compilar nuestro programa y compilarlo significa traducirlo de lenguaje de programación que conoce el programador a un lenguaje que pudiera entender la máquina llamado lenguaje objeto ese lenguaje objeto no es el mismo para Windows que para niños no no sé debíamos hacer una compilación expresa de nuestro programa para Windows o de nuestro programa para abrir con Java sucede algo diferente y es que Java a la hora de ser compilado produce un código que se suele llamar intermedio Java bytecode qué es el código objeto que podríamos decir que habla la Java Virtual Machine con lo cual una sola compilación de nuestra de nuestra aplicación Java va a ser que funcione en una Java Virtual Machine instalada pues tanto en Windows como en Linux que el ejemplo del cual venimos hablando en este capítulo como incluso en otra arquitectura diferentes y que a lo mejor para para el usuario de a pie son menos conocidas como utilizando el sistema operativo Solaris con una arquitectura por debajo que no fuera de PC y eso que no fuera una arquitectura sino una risco con la espalda aunque se haya alguna antigua pero pero si nos podríamos plantear que pudiera funcionar incluso ya no solo en arquitectura te diferente arquitectura de computadores que Oracle se capta de alguna manera que más de tres mil millones de dispositivos en todo el mundo son capaces de ejecutar Java y podemos encontrarlo de de la manera más variopinta no desde sistemas de vuelo el sistema operativo de alguno cajero automático el sistema embebido de algunos reproductores de Blu-ray o antiguamente de DVD en libro electrónico Kindle el sistema operativo de muchos routers en robótica el todo ello ejecuta por debajo de una u otra manera una máquina virtual de Java sobre la cual nosotros podemos desarrollar aplicaciones Java Windows cualquier tipo de aplicación Java si por el contrario nos queremos dedicar a al desarrollo de aplicaciones Java necesitamos el kit de desarrollo que lo que hace es incluir además de todo lo que ya trae el J&R una serie de herramientas necesarias entre ellos por ejemplo el compilador para que podamos compilar fabricar y ejecutar cualquier tipo de aplicación Java ahora después haremos la descarga del JDK que lo haremos desde la página de vaca y bueno Java es mucho Java lo que hemos presentado es solamente una gota en el océano Java como decíamos antes muy extenso y bueno nosotros nos centraremos en conocer la versión conocida como estándar la javaexe en particular bueno pues la versión más madura que existe a día de hoy qué es la versión 8 vale y qué bueno la vamos a ejecutar sobre todo en aplicaciones de escritorio si bien bueno pues todo lo que aprendamos dejaba no servirá para desarrollar aplicaciones que podrán ejecutarse como decíamos en muchas otras plataformas por ejemplo con las gavatv en televisores y reproductores de DVD en móviles que utilicen Java en tarjeta inteligente servidores robótica otro tipo de dispositivo bueno pues vamos a pasar ahora a ejecutar a descargar nuestra versión de JDK tengo aquí preparado para vosotros nada una máquina virtual dónde lo vamos a poder hacer para poder descargar java lo que necesitamos solamente un navegador y en el podemos buscar en Google simplemente la cadena get vale normalmente el primer resultado se utiliza most Google cómo buscador no le dirigirá directamente a hacia la página de Oracle no recomiendo que descarguéis JDK desde cualquier otra página vale sino que nos vamos directamente a la fuente de aquí como siempre el aceptar el uso de cookies y sobre las persianas dejaba hace unas pocas semanas se publicaba la versión 9 de Java sí bien nosotros vamos a desarrollar el curso sobre la versión 8 de hecho la versión 9 todavía no es que no esté madura antes de ayer de haber sido liberada pero si es verdad que algunos programas todavía no la soporta así que nosotros pasaremos descargarnos la última actualización de la versión 8 de Java que la tenemos aquí escogemos la instalación del JDK la descarga del JDK
+Está portabilidad, este carácter multiplataforma se consigue cambiando el planteamiento a la hora de producir el programa, por ejemplo cuando nosotros trabajamos en un lenguaje como C nosotros debíamos compilar nuestro programa y compilarlo significa traducirlo de lenguaje de programación que conoce el programador a un lenguaje que pudiera entender la máquina llamado lenguaje objeto, ese lenguaje objeto no es el mismo para Windows que para Linux, debíamos hacer una compilación expresa de nuestro programa para Windows o de nuestro programa para Linux.
+
+![01_Instalación_de_Java-8](images/01_Instalación_de_Java-8.png)
+
+Con Java sucede algo diferente y es que Java a la hora de ser compilado produce un código que se suele llamar intermedio Java ByteCode qué es el código objeto que podríamos decir que habla la Java Virtual Machine con lo cual una sola compilación de nuestra aplicación Java va a ser que funcione en una Java Virtual Machine instalada pues tanto en Windows como en Linux que el ejemplo del cual venimos hablando en este capítulo como incluso en otra arquitectura diferentes y que a lo mejor para para el usuario de a pie son menos conocidas como, el sistema operativo Solaris con una arquitectura por debajo que no fuera de PC y eso que no fuera una arquitectura SISC sino una RISC con la SPARC aunque esa ya es mas antigua pero si nos podríamos plantear que pudiera funcionar ahi, incluso ya no solo en arquitectura de diferente arquitectura de computadores.
+
+![01_Instalación_de_Java-9](images/01_Instalación_de_Java-9.png)
+
+Oracle se jacta de alguna manera que más de tres mil millones de dispositivos en todo el mundo son capaces de ejecutar Java y podemos encontrarlo de de la manera más variopinta, desde sistemas de vuelo el sistema operativo de alguno cajero automático el sistema embebido de algunos reproductores de Blu-ray o antiguamente de DVD en libro electrónico Kindle, el sistema operativo de muchos routers, en robótica, todo ello ejecuta por debajo de una u otra manera una máquina virtual de Java sobre la cual nosotros podemos desarrollar aplicaciones Java.
+
+![01_Instalación_de_Java-10](images/01_Instalación_de_Java-10.png)
+
+Cuando se empieza a conocer el mundo Java cuesta algo de trabajo diferenciar estos dos conceptos:
+
+* Java Runtime Environment (JRE)
+* Java Development Kit (JDK)
+
+Como hemos dicho antes Java es una plataforma y esa Java Virtual Machine es un programa que hay que instalar dentro de nuestro sistema operativo. Si nosotros solamente nos vamos a dedicar a ejecutar aplicaciones Java en cualquier formato que hayan producido unos terceros nosotros solo necesitamos el entorno de ejecución el JRE que incluye todo lo necesario la JVM para ejecutar cualquier tipo de aplicación Java si por el contrario nos queremos dedicar al desarrollo de aplicaciones Java necesitamos el kit de desarrollo que lo que hace es incluir además de todo lo que ya trae el JRE, una serie de herramientas necesarias entre ellos por ejemplo el compilador, para que podamos compilar fabricar y ejecutar cualquier tipo de aplicación Java.
+
+![01_Instalación_de_Java-11](images/01_Instalación_de_Java-11.png)
+
+Bueno Java es mucho Java, lo que hemos presentado es solamente una gota en el océano, Java como decíamos antes es muy extenso y bueno nosotros nos centraremos en conocer la versión conocida como estándar la Java SE en particular la versión más madura que existe a día de hoy qué es la versión 8 y qué la vamos a ejecutar sobre todo en aplicaciones de escritorio, si bien todo lo que aprendamos de Java nos servirá para desarrollar aplicaciones que podrán ejecutarse como decíamos en muchas otras plataformas, por ejemplo con las Java TV en televisores y reproductores de DVD en móviles que utilicen Java, en tarjeta inteligente, servidores, robótica otro tipo de dispositivo.
+
+
+Vamos a pasar ahora a ejecutar a descargar nuestra versión de JDK tengo aquí preparado para vosotros nada una máquina virtual dónde lo vamos a poder hacer para poder descargar java lo que necesitamos solamente un navegador y en el podemos buscar en Google simplemente la cadena get vale normalmente el primer resultado se utiliza most Google cómo buscador no le dirigirá directamente a hacia la página de Oracle no recomiendo que descarguéis JDK desde cualquier otra página vale sino que nos vamos directamente a la fuente de aquí como siempre el aceptar el uso de cookies y sobre las persianas dejaba hace unas pocas semanas se publicaba la versión 9 de Java sí bien nosotros vamos a desarrollar el curso sobre la versión 8 de hecho la versión 9 todavía no es que no esté madura antes de ayer de haber sido liberada pero si es verdad que algunos programas todavía no la soporta así que nosotros pasaremos descargarnos la última actualización de la versión 8 de Java que la tenemos aquí escogemos la instalación del JDK la descarga del JDK
 
 
 
