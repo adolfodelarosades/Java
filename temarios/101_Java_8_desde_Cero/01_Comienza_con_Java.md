@@ -62,39 +62,23 @@ Así que os ánimo a que podáis hacer este curso de Java 8 desde cero, si no sa
 
 [Instalación de Java](pdfs/01_Instalación_de_Java.pdf)
 
-### 1.1 ¿Qué es Java?
+## Presentación Profesor
 
-![01_Instalación_de_Java-2](images/01_Instalación_de_Java-2.png)
+### 1.1 ¿Qué es Java?
 
 Java no es más que una plataforma sobre la cual ejecutar aplicaciones que están desarrolladas en ese mismo lenguaje de programación, es decir, Java. Además, esta plataforma pone a nuestra disposición cantidades ingenentes de código que podemos utilizar.
 
-![01_Instalación_de_Java-3](images/01_Instalación_de_Java-3.png)
-
-![01_Instalación_de_Java-4](images/01_Instalación_de_Java-4.png)
-
 ### 1.2 Java Virtual Machine
 
-![01_Instalación_de_Java-5](images/01_Instalación_de_Java-5.png)
-
 Una de las principales características de Java con respecto a otros lenguajes, como C, C++ o Python es que los programas producidos en este lenguaje no se ejecutan directamente por el sistema operativo; sobre este, existe un entorno, llamado *Java Virtual Machine*. Podríamos asemejarlo a un ordenador virtual que está capacitado para ejectuar aplicaciones Java. De esta manera, como programadores nos desprendemos de la mayoría de los detalles asociados a la plataforma concreta sobre la cual estamos programando.
-
-![01_Instalación_de_Java-6](images/01_Instalación_de_Java-6.png)
 
 La JVM está disponible para la casi totalidad de arquitecturas y sistemas operativos existentes en el mercado. Desde Oracle, la propietaria de Java, se jactan de que se pueden ejecutar aplicaciones java en 3.000 millones de dispositivos, desde sistemas de vuelo, cajeros automáticos a robots o routers.
 
 ### 1.3 Java Bytecode
 
-![01_Instalación_de_Java-7](images/01_Instalación_de_Java-7.png)
-
 Como consecuencia de tener un entorno especial de ejecución, la JVM, tenemos que al compilar y enlazar (link) nuestro código Java, no vamos a obtener el clásico *código objeto* producido, por ejemplo, al trabajar con C o C++. En este caso, tenemos un código objeto especial, llamado **java bytecode**, y que solo es capaz de ser ejecutado por la Java Virtual Machine.
 
-![01_Instalación_de_Java-8](images/01_Instalación_de_Java-8.png)
-
-![01_Instalación_de_Java-9](images/01_Instalación_de_Java-9.png)
-
 ### 1.4 JRE vs JDK
-
-![01_Instalación_de_Java-10](images/01_Instalación_de_Java-10.png)
 
 Al empezar a trabajar con Java, nos encontramos con dos conceptos que es necesario diferenciar, y que son JRE (*Java Runtinme Environment*) y JDK (*Java Development Kit*)
 
@@ -103,8 +87,6 @@ Al empezar a trabajar con Java, nos encontramos con dos conceptos que es necesar
 * **JDK**: Se trata de un conjunto de ficheros y programas que nos permiten crear, compilar y ejecutar aplicaciones Java. Es necesario si además de ejecutar aplicaciones Java, queremos desarrolarlas.
 
 Es interesante apreciar que al instalar en nuestro PC el kit de desarrollo (JDK), también estamos instalando en entorno de ejecución (JRE.)
-
-![01_Instalación_de_Java-11](images/01_Instalación_de_Java-11.png)
 
 ### 1.5 Instalación de JDK 8
 
@@ -121,6 +103,33 @@ Para instalar la última versión de JDK, tan solo tenemos que escribir en googl
 ### 1.6 Java 9
 
 En el momento de comenzar a escribir estas líneas, la primera versión de Java 9 ha sido liberada, si bien muchos programas (como por ejemplo, el propio entorno de desarrollo Eclipse) aun no soportan dicha versión.
+
+## Transcripción
+
+![01_Instalación_de_Java-2](images/01_Instalación_de_Java-2.png)
+
+![01_Instalación_de_Java-3](images/01_Instalación_de_Java-3.png)
+
+![01_Instalación_de_Java-4](images/01_Instalación_de_Java-4.png)
+
+![01_Instalación_de_Java-5](images/01_Instalación_de_Java-5.png)
+
+![01_Instalación_de_Java-6](images/01_Instalación_de_Java-6.png)
+
+![01_Instalación_de_Java-7](images/01_Instalación_de_Java-7.png)
+
+![01_Instalación_de_Java-8](images/01_Instalación_de_Java-8.png)
+
+![01_Instalación_de_Java-9](images/01_Instalación_de_Java-9.png)
+
+![01_Instalación_de_Java-10](images/01_Instalación_de_Java-10.png)
+
+![01_Instalación_de_Java-11](images/01_Instalación_de_Java-11.png)
+
+Hola todo y bienvenido a este primer vídeo sobre Java 8 en el nos vamos a introducir un poco en esta tecnología tan apasionante que Java y acabaremos haciendo la instalación de la primera parte del software que vamos a necesitar para desarrollar aplicaciones con el si alguien no hiciera la pregunta de que Java le podríamos responder que Java pues son varias cosas primero java es un lenguaje de programación que nos va a servir para desarrollar aplicaciones de muchos tipos distintos lo iremos aprendiendo a lo largo de este curso además Java no es solamente una sintaxis no es solamente unas reglas que no que también es un conjunto además muy grande de código que ya está puesto a nuestra a nuestra disposición para hacer diversas tareas y también y eso lo vamos a aprender en este capítulo JavaEE una plataforma un software de base dónde poder ejecutar las aplicaciones que vamos a desarrollar cualquier otra rama de conocimiento merece la pena conocer algo o su inicio Java qué es un lenguaje orientado a objetos valencianos que está asociado al paradigma orientado a objetos igual también aprenderemos dentro de este capítulo el perdón dentro de este curso surge a principios de los años 80 en torno al año 80 con un lenguaje de programación llamado Smalltalk vale y paulatinamente va ganándole terreno a otros lenguajes de programación que se utilizaba pues otras maneras de organizarse otros paradigmas poco a poco va cogiendo auge en los años 90 a raíz de una extensión del lenguaje C llamadas temas más si alguno de vosotros con los temas más sabrá que es bueno es un lenguaje de programación muy potente a día de hoy sigo utilizando pero que no es nativamente orientado a objetos sino que es como una extensión orientado a objetos para hacer y que además pues tenía algunos o daba algunos problemas a la hora de desarrollar software que pudiéramos aplicaciones que pudiéramos ejecutar con garantía en diferentes plataformas diferentes sistema operativo en torno a los años 90 Sun Microsystems en una empresa que en su día ya fue adquirida por Oracle necesita una plataforma para poder ejecutar en distintos tipos de dispositivos no solamente en empecé o estaciones de trabajo sino en otro dispositivo como pueden ser coche o incluso electrodomésticos paralelamente a mitad de los noventa pero desde el principio y mitad de los noventa surge la World Wide Web vale la web empieza a tomar forma hasta hasta que es lo que conocemos hoy y es otro elemento digamos que dados de la mano son los que los que producen la génesis dejaba como como lenguaje como plataforma y los que hacen que vaya cogiendo que vaya cogiendo un grano hacemos a ver ahora otro concepto y es el de la Java Virtual Machine decíamos antes que con C más más al igual que consumamos otros lenguajes de programación pues teníamos diferencias o problema pues tenemos que plantearnos la dificultad de desarrollar una aplicación escrita con un con un código y qué bueno está se ejecutará en distintos sistemas operativos tanto es así que por ejemplo si dijéramos de hacer una aplicación en feos somos más los lenguajes de programación y la quisiéramos ejecutar en Windows los conceptos ya lo aprenderemos la compilar amo y la preparamos la limpiaramos para ejecutar en Windows Hola todo y bienvenido a este primer vídeo sobre Java 8 en el nos vamos a introducir un poco en mi mesa tecnología tan apasionante quejaba y acabaremos haciendo la instalación de de la primera parte de del software que vamos a necesitar para desarrollar aplicaciones con el
+
+
+
 
 # 02 Posibles entornos de desarrollo 13:46 
 
