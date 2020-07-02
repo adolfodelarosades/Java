@@ -1,9 +1,17 @@
 # 1. Comienza con Java 59m 
 
-## Presentación del profesor y curso 5:12 
+   * 00 Presentación del profesor y curso 5:12 
+   * 01 Instalación de Java 16:13 
+   * 02 Posibles entornos de desarrollo 13:46 
+   * 03 Hola Mundo 10:49 
+   * 04 Algunos elementos de sintaxis 13:01 
+   * Contenido adicional 4
+
+# 00 Presentación del profesor y curso 5:12 
 
 [Presentación](pdfs/00_Presentación.pdf)
 
+## Transcripción
 
 ![00_Presentacion-1](images/00_Presentacion-1.png)
 
@@ -27,8 +35,14 @@
 
 ![00_Presentacion-12](images/00_Presentacion-12.png)
 
+Para realizar el curso de Java desde cero no es necesario ningún requisito en particular si bien es cierto que cualquier persona que quiera ser programador o quiera aprender programación voy a agradecer siempre el tener algo de capacidad analítica algo de base matemáticas y siempre un puntito de creatividad porque es bueno que aprendáis Java 8 según la empresa propietaria de la tecnología Java existen a día de hoy cerca de tres mil millones de dispositivos en el mundo que utilizan Java dispositivo de diferentes tipos y además porque Java 8 es Java en particular ahora con la versión 8 es la mitad del camino que tenemos que recorrer y queremos aprender a programar aplicaciones nativas para para dispositivos móviles que corran Android con otro argumento también para tratar de convencer o es que Java sigue siendo desde hace bastante tiempo el lenguaje de programación más utilizados según uno de los rankings que existen vale y que lo mire en todo el mundo y además os recomiendo que podáis leer el artículo que tenemos en nuestro blog sobre cuánto gana un programador Java en España para qué bueno pueda servir también de acicate o o podéis comparar con respecto a otra tecnología vale si es que el salario te creías tener también es una opción para aprender en un lenguaje de programación vamos a estructurar el curso déjame en varios bloques que los vamos a ver a continuación primero vamos a comenzar con Java instalándolo instalando un entorno de desarrollo y comenzando con su sintaxis inicial posteriormente vamos a trabajar con variables tipos de datos operadores y con las sentencias de estructura de control después pasaremos a trabajar con clases y objetos una primera introducción posteriormente en manipular emoji trataremos datos con arrays y stream pasaremos después a revisitar otra vez clase y objetos trabajando con su argumento y modificadores usaremos herencia de clase y aprenderemos también a trabajar con interfaz clase abstracta y polimorfismo manejaremos excepciones y también conoceremos alguna de las clases más utilizadas del API de Java cómo son streambuilder el nuevo API de fecha ArrayList y las expresiones lambda y el nuevo API stream que podremos introducir como prácticas haremos tres proyectos que lo haremos en momento intermedio y al final del curso en el que haremos una sencilla calculadora aritmética un juego de hundir la flota y la gestión de de un parking y por qué bueno que aprenda y sábado el curso de Java JSF los cursos de Spring e Hibernate y el curso de Android entre otro así que os ánimo a que podáis hacer este curso de Java 8 desde cero si no sabéis nada de programación he puesto curso incluso también os puede servir como reciclaje si sabes programar en java pero queréis conocer los nuevos elementos que incorpora Java 8 ánimo y que disfrutéis del curso
 
-## Instalación de Java 16:13 
+
+
+
+
+
+# 01 Instalación de Java 16:13 
 
 [Instalación de Java](pdfs/01_Instalación_de_Java.pdf)
 
@@ -92,7 +106,7 @@ Para instalar la última versión de JDK, tan solo tenemos que escribir en googl
 
 En el momento de comenzar a escribir estas líneas, la primera versión de Java 9 ha sido liberada, si bien muchos programas (como por ejemplo, el propio entorno de desarrollo Eclipse) aun no soportan dicha versión.
 
-## Posibles entornos de desarrollo 13:46 
+# 02 Posibles entornos de desarrollo 13:46 
 
 [Posibles entornos de desarrollo](pdfs/02_Posibles_entornos_de_desarrollo.pdf)
 
@@ -139,7 +153,7 @@ Actualmente, eclipse nos sugiere descargar un instalador *ligero* que posteriorm
 
 Al iniciar eclipse, nos encontramos de lleno con el concepto de *workspace*. Un *espacio de trabajo* no es más que un punto de nuestro sistema de ficheros que marcamos como ubicación de un conjunto de proyectos. Eclipse es capaz de manejar más de un workspace (no a la vez), y nos permite cambiar de uno a otro cuando lo necesitemos. Para comenzar, podemos utilizar la propuesta por defecto.
 
-## Hola Mundo 10:49 
+# 03 Hola Mundo 10:49 
 
 *HolaMundo.java*
 
@@ -160,7 +174,7 @@ public class HolaMundo {
 BUILD SUCCESS
 ------------------------------------------------------------------------
 ```
-## Algunos elementos de sintaxis 13:01 
+# 04 Algunos elementos de sintaxis 13:01 
 
 [Algunos elementos de sintaxis](pdfs/04_Algunos_elementos_de_sintaxis.pdf)
 
