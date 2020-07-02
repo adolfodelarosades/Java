@@ -279,10 +279,6 @@ El resultado aparece en la consola.
 
 ### 4.1 Estructura de un programa básico
 
-![04_Algunos_elementos_de_sintaxis-2](images/04_Algunos_elementos_de_sintaxis-2.png)
-
-![04_Algunos_elementos_de_sintaxis-3](images/04_Algunos_elementos_de_sintaxis-3.png)
-
 Cualquier programa básico Java estará compuesto de un fichero `.java`, que contendrá dentro una clase (con el mismo nombre que el fichero) y un método main:
 
 ***HolaMundo.java***
@@ -312,13 +308,9 @@ public class HolaMundo {
 
 ### 4.2 Sentencia
 
-![04_Algunos_elementos_de_sintaxis-4](images/04_Algunos_elementos_de_sintaxis-4.png)
-
 A falta de una definición más formal, podemos asemejar una sentencia a una línea de código. Indica al programa los pasos que debe dar. Hay que tener cuidado con el uso de mayúsculas y minúsculas, ya que Java es case sensitive. Obligatoriamente, todas las sentencias deben terminar con un punto y coma (;), que delimitan el fin de la misma y el inicio de la siguiente. También debemos ser cuidadosos con las tabulaciones, que hacen el código más legible.
 
 ### 4.3 Bloque de código
-
-![04_Algunos_elementos_de_sintaxis-5](images/04_Algunos_elementos_de_sintaxis-5.png)
 
 Se trata de la agrupación de varias sentencias. En las próximas lecciones encontraremos muchos motivos para realizar estas agrupaciones. Siempre vienen delimitadas por una apertura y cierre de llaves `{ }`.
 
@@ -343,6 +335,14 @@ public static void main(String[] args) {
 ```
 
 Si posteriormente abrimos la vista de tareas **(Window -> Show View -> Task)**, eclipse se encarga de escanear el código buscando estos comentarios, para localizarlos después fácilmente, y saber que tareas tenemos pendientes sobre el código.
+
+![04_Algunos_elementos_de_sintaxis-2](images/04_Algunos_elementos_de_sintaxis-2.png)
+![04_Algunos_elementos_de_sintaxis-3](images/04_Algunos_elementos_de_sintaxis-3.png)
+![04_Algunos_elementos_de_sintaxis-4](images/04_Algunos_elementos_de_sintaxis-4.png)
+![04_Algunos_elementos_de_sintaxis-5](images/04_Algunos_elementos_de_sintaxis-5.png)
+## Transcripción
+
+Si java es un lenguaje pues al igual que pasa con el castellano con el inglés también tiene sus reglas de sintaxis vamos a aprender o vamos a estudiar algunas de ellas en el vídeo anterior hemos creado nuestro primer proyecto el conocido como hola mundo el fichero que hemos creado tiene bastante de elementos que se han podido pasar desapercibido y qué bien vamos a conocer en este vídeo lo primero que podemos encontrar es comentario de hecho en a lo largo de este pequeño trozo de código pues hay más de 1 y hasta 4 comentarios y es que los comentarios nos van a ayudar a bueno ir identificando las distintas partes dentro de un fichero nos pueden recordar cosas a tener en cuenta y tenemos que revisar este código pues en algún momento después puede servir de aclaración si es que no puede estamos trabajando en un proyecto donde trabajas más de un desarrollador y hay algún fragmento que especialmente complejo de entender o simplemente pues puede servir para bueno pues para identificar a través de alguna de alguna notaciones o de variable especiales como en este caso el segundo comentario quién es el autor de este fichero de código que sería nuestro caso openwebinar no es raro y que se añada un comentario al inicio de cada fichero en el que se pueda describir de manera más o menos extensa el contenido que va qué va a tener este filtro lo siguiente que encontramos es la referencia al paquete en el cual estamos guardando albergando esta clase que viene a continuación y es que como decía antes nuestro nuestro código no vamos en un proyecto pequeño bueno podríamos lo podríamos hacer la metáfora como si estuviéramos en hojas sueltas de papel que tenemos que hacer algún documento que sea pequeño y que tenga pocas hojas de papel pues seguramente nos da igual incluso llevarla suelta o tenerla solamente en una carpeta si tuviéramos que manejar un documento que tuviera miles de página seguramente no interesaría el poder agrupar estas páginas dentro de capítulos que tendríamos pues guardada juntas de alguna manera no bueno pues los paquetes nos van a permitir organizar nuestro código de manera que podremos tener elementos de nuestro programa que tengan relación entre ellos pues no fue guardado de una manera cercana no y bueno pues ya aprenderemos cómo podemos tener paquete dentro de paquete que se le llaman sus paquetes etcétera a continuación podemos encontrar la definición de una clase que la tenemos aquí un poco más destacadas cuando nosotros trabajemos con Java y en particular cuando cuando trabajamos en programas de este calibre nos damos cuenta de que Java no obliga que tengamos como mínimo una clase en particular una clase pública o por lo menos con modificador por defecto ya hablaremos también de ellos es que tengamos una en cada fichero y además ya veremos cómo Eclipse en este sentido no ayuda el nombre del fichero dónde está guardado esta clase debe ser el mismo exactamente el mismo que el nombre de la clase de hecho si hay una diferencia entre ambos eclipse nos recomendará o bien modificar el nombre de la clase o el mismo nos ayudará a renombrar ese fichero hija va es un lenguaje pues aquí igual que pasa con el castellano con el inglés también tiene sus regla peseta que vamos a aprender o vamos a estudiar alguna Sevilla en el vidio anterior hemos creado nuestro primer proyecto en el conocido como buena mundo entero que hemos creado tiene bastante elementos que me ha podido pasar desapercibido y que te vamos a conocer en este vídeo lo primero que podemos encontrar el comentario de eso a lo largo de este pequeño te lo suplico digo no hay más de 1 días a 4 comentarios y que los comentarios nos van a ayudar a bueno iré identificado las distintas partes dentro de ti pero nos pueden recordar cosas a tener en cuenta y tenemos que revisar este código en algún momento después puede servir de aclaración y el que no pues estamos trabajando en un proyecto dónde trabajas más de un desarrollador y hay algún fragmento que qué especialmente complejo de entender vale un simplemente pues puede servir para no forzar identificar a través de alguna de alguna anotaciones o de variable especiales como en este caso el segundo comentario de quién es el autor de desees este sitio de código que se van a hacer caso no tengo el Nano raro y que señala un comentario al inicio de década fichero en el que se pueda describir manera más o menos estés ahí con tenido que va a que va a tener ese sitio lo siguiente que encontramos es la la referencia paquete en el cual estamos guardando alberga no está clase que que viene a continuación y qué cómo te sientes nuestro nuestro código nos hacen un proyecto pequeño bueno podríamos los primos de la metáfora como escribiera bueno hojas sueltas te lo tengo que hacer algún documento que sea pequeño y que tenga poca hoja de papel pues seguramente no sé igual
 
 ## Contenido adicional 4
 
