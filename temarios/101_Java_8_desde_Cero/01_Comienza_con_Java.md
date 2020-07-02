@@ -232,25 +232,47 @@ Eclipse y como decíamos gratuito lo tenemos disponible desde su cuenta de punto
 
 # 03 Hola Mundo 10:49 
 
+Vamos a crear un nuevo proyecto *Java Project* de nombre `101-01-HolaMundo`, debemos seleccionar sobre que versión de Java se creara dicho proyecto y Finish.
+
+![03-01](images/03-01.png)
+
+Dentro del proyecto vamos a crear una nueva clase.
+
+
+![03-02](images/03-02.png)
+
 *HolaMundo.java*
 
 ```java
+/**
+ * 
+ */
 package holamundo;
 
+/**
+ * @author adolfodelarosa
+ *
+ */
 public class HolaMundo {
-    
-    public static void main(String[] args) {
-        System.out.println("¡Hola Mundo!");
-    }
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hola Mundo!!!");
+
+	}
+
 }
 ```
 
-```sh
-¡Hola Mundo!
-------------------------------------------------------------------------
-BUILD SUCCESS
-------------------------------------------------------------------------
-```
+Si ejecutamos el programa tenemos.
+
+![03-03](images/03-03.png)
+
+El resultado aparece en la consola.
+
 # 04 Algunos elementos de sintaxis 13:01 
 
 [Algunos elementos de sintaxis](pdfs/04_Algunos_elementos_de_sintaxis.pdf)
