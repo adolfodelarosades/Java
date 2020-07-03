@@ -17,12 +17,12 @@ Aprende programación en Java realizando esta formación Java online, y comienza
 2. [Tipos de datos, operadores y estructuras de control](101_Java_8_desde_Cero/02_Tipos_de_datos_operadores_y_estructuras_de_control.md) 110m
    * 05 Variables 16:58 
    * 06 Manipulación de números, caracteres y otros valores I 8:28 
-   * 0 Manipulación de números, caracteres y otros valores II 15:39 
-   * 0 Manipulación de números, caracteres y otros valores III 8:13 
-   * 0 Manipulación de números, caracteres y otros valores IV 15:52 
-   * 0 Estructura de decisión 21:22 
-   * 1 Estructura de repetición 13:01 
-   * 1 Práctica: Creando una calculadora 11:13 
+   * 07 Manipulación de números, caracteres y otros valores II 15:39 
+   * 08 Manipulación de números, caracteres y otros valores III 8:13 
+   * 09 Manipulación de números, caracteres y otros valores IV 15:52 
+   * 10 Estructura de decisión 21:22 
+   * 11 Estructura de repetición 13:01 
+   * 12 Práctica: Creando una calculadora 11:13 
    * Contenido adicional  7
    
 3. [Clases y objetos](101_Java_8_desde_Cero/03_Clases_y_objetos.md) 58m
