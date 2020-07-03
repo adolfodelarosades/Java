@@ -1,6 +1,16 @@
 # 2. Tipos de datos, operadores y estructuras de control 110m
 
-## 5. Variables 16:58 
+   * 05 Variables 16:58 
+   * 06 Manipulación de números, caracteres y otros valores I 8:28 
+   * 06 Manipulación de números, caracteres y otros valores II 15:39 
+   * 06 Manipulación de números, caracteres y otros valores III 8:13 
+   * 06 Manipulación de números, caracteres y otros valores IV 15:52 
+   * 07 Estructura de decisión 21:22 
+   * 08 Estructura de repetición 13:01 
+   * 09 Práctica: Creando una calculadora 11:13 
+   * Contenido adicional  7
+
+# 05. Variables 16:58 
 
 [Variables](pdfs/05_Variables.pdf)
 
@@ -118,7 +128,7 @@ a
 1
 ```
 
-## 6. Manipulación de números, caracteres y otros valores I 8:28 
+# 6. Manipulación de números, caracteres y otros valores I 8:28 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
@@ -158,7 +168,7 @@ long creditCardNumber = 1234_5678_9012_3456L;
 
 El principal operador de asignación en java es`=`, y nos permite establecer el valor de una variable.
 
-## Manipulación de números, caracteres y otros valores II 15:39
+# 06 Manipulación de números, caracteres y otros valores II 15:39
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
@@ -210,7 +220,7 @@ val1 += 1; //Es equivalente a val1 = val1 + 1;
 
 Los operadores son `+=`, `-=`, `*=`, `/=` y `%=`.
 
-## Manipulación de números, caracteres y otros valores III 8:13 
+# 06 Manipulación de números, caracteres y otros valores III 8:13 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
@@ -578,7 +588,7 @@ System.out.println((double)5/9);
 
 En este caso, el resultado será 0.55555555556
 
-## 7. Estructura de decisión 21:22 
+# 7. Estructura de decisión 21:22 
 
 [Estructura de decisión](pdfs/07_Estructuras_de_decisión.pdf)
 
@@ -1082,7 +1092,7 @@ SALIDA:
 El mes de abril se corresponde con el número 4
 ```
 
-## Estructura de repetición 13:01 
+# 08 Estructura de repetición 13:01 
 
 [Estructura de repetición](pdfs/08_Estructuras_de_repeticion.pdf)
 
@@ -1267,7 +1277,7 @@ Existen dos sentencias especiales, que no suelen usarse mucho ya que producen po
 
 Su uso no es demasiado recomendable, ya que puede producir un efecto conocido como código spaguetti, por el cual es dificil predecir los caminos de ejecución del mismo.
 
-## Práctica: Creando una calculadora 11:13 
+# 09 Práctica: Creando una calculadora 11:13 
 
 En esta sesión práctica veremos como crear una calculadora, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0).
 
