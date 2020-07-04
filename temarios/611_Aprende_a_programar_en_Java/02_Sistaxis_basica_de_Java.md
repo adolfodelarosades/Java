@@ -6,41 +6,44 @@
    
 # 05 Tipos de datos y variables I 02:34
 
-A partir de esta lección vamos a adentrarnos en el conocimiento de la sintaxis del lenguaje Java y empezamos por los elementos principales de cualquier lenguaje de programación como son sus tipos de datos y las variables donde se almacena.
+<img src="images/05-01.png">
+
+A partir de esta lección vamos a centrarnos en el conocimiento de la sintaxis del lenguaje Java y empezamos por los elementos principales de cualquier lenguaje de programación como son sus tipos de datos y las variables donde se almacena.
+
+<img src="images/05-02.png">
 
 En Java distinguimos dos grandes grupos de tipos de datos.
 
-Por un lado tenemos los tipos primitivos que harían referencia a los datos básicos de cualquier programa como números datos del tipo lógico y caracteres.
+Por un lado tenemos los tipos primitivos que harían referencia a los datos básicos de cualquier programa, como números, datos del tipo lógico y caracteres. Aquí ves cuatro ejemplos que hacen referencia a los tipos primitivos que utilizamos en Java que serían los números enteros, números decimales, datos lógicos palabras reservadas TRUE y FALSE o los caracteres que se representarían entre comillas simples.
 
-Aquí ves cuatro ejemplos que hacen referencia a los tipos primitivos que utilizamos en Java que serían los números enteros números decimales datos lógicos palabras reservadas TRUE FALSE o los caracteres que se representarían entre comillas simple Por otro lado tenemos los tipos objetos en Java hay miles de objetos que podríamos manejar a partir de los que podríamos crear nosotros por los proporcionados por las ediciones Java estándar Edition.
+Por otro lado tenemos los tipos objetos, en Java hay miles de objetos que podríamos manejar a parte de los que podríamos crear nosotros, los proporcionados por las ediciones Java estándar Edition, como te hemos comentado en lecciones anteriores y también son datos manejados en un programa. Vamos a dejar de momento los tipos objetos de lado y centrémonos en los tipos primitivos.
 
-Como te hemos comentado elecciones anteriores y también son datos manejados en un programa vamos a dejar de momento los tipos objetos de lado y centrémonos en los tipos primitivos.
+<img src="images/05-03.png">
 
-En la siguiente tabla tienes una lista con todos los nuevos serían los ocho tipos primitivos que podemos utilizar en el lenguaje Java antes decíamos que eran cuatro tipos porque realmente los tipos enteros tenemos cuatro subtipos en Java que sería el bait El XOR el in y el Long dependiendo de a qué rango queremos llegar de número.
+En la siguiente tabla tienes una lista con los ocho tipos primitivos que podemos utilizar en el lenguaje Java, antes decíamos que eran cuatro tipos porque realmente en los tipos enteros tenemos cuatro subtipos en Java que sería `byte`, `short`, `int` y `long` dependiendo de a qué rango queremos llegar de número. Por ejemplo que con `byte` solamente tenemos 8 bits con lo cual llegaríamos nada más a alcanzar números entre -128 y +128, según vamos aumentando en bits podemos abarcar un rango mayor. Por eso tenemos hasta cuatro tipos, para los tipos más pequeñitos y los más grandes que serán con `long`.
 
-Por ejemplo que Convit solamente tenemos 8 bits con lo cual llegaríamos con nada más que alcanzar números entre menos 128 y 128 según vamos aumentando en bits podemos abarcar un rango mayor.
+Por otro lado tenemos los tipos `boolean` que solamente hace referencia a las palabras reservadas True  o False, Verdadero o Falso.
 
-Por eso tenemos hasta cuatro tipos para los tipos más pequeñitos y más grandes que serán con el.
+Los decimales que también tenemos dos subtipos el `float` para decimales de pequeño rango y el `double` para abarcar los decimales de un rango muy alto hasta 64 bits, 64 bits sería el tamaño que ocuparía en memoria un dato de tipo doble.
 
-Por otro lado tenemos los tipos bullían que solamente hace referencia a las palabras reservadas True False Verdadero false vale los decimales que también tenemos dos subtipos el float para decimales de pequeño rango podríamos decir y el doble para abarcar los decimales de un rango muy alto hasta 64 bits 64 bits sería el tamaño que ocuparía en memoria un dato de tipo doble.
+Y por último tenemos los `char`, el tipo `char` hace referencia a cualquier caracter que internamente se representa con su código Unicode de 16 bits su combinación Unicode.
 
-Y por último tenemos los Char tipo Char hace referencia a cualquier caracter que internamente se representa con su código Unicode de 16 bits su combinación Unicode en el siguiente vídeo vamos ya a adentrarnos en el estudio de las variables.
+En el siguiente lección vamos ya a adentrarnos en el estudio de las variables.
 
 # 05 Tipos de datos y variables II 04:46
 
 En la primera parte de esta lección hemos estado hablando de los tipos de datos del lenguaje Java nos hemos centrado en los tipos primitivos.
 
-Ahora vamos a analizar las variables las variables es el elemento de programación que utilizamos para almacenar los datos dentro de un programa.
+<img src="images/05-04.png">
+<img src="images/05-05.png">
+<img src="images/05-06.png">
+<img src="images/05-07.png">
 
-Qué es exactamente una variable.
+Ahora vamos a analizar las variables, las variables es el elemento de programación que utilizamos para almacenar los datos dentro de un programa.
 
-No es ni más ni menos que un espacio de memoria una caja la podríamos imaginar donde se almacena un dato de un determinado tipo a las variables se les asigna un nombre o identificador a la hora de definir identificadores para las variables.
+¿Qué es exactamente una variable?.
 
-Podríamos utilizar en principio cualquier combinación de caracteres y símbolos.
-
-Sin embargo hay que tener en cuenta una serie de reglas en primer lugar no podríamos utilizar como identificador una palabra reservada de Java class for son palabras reservadas y no podemos utilizarlos como identificadores además los identificadores pueden contener.
-
-Como hemos dicho cualquier letra números y los caracteres de Subrayado y dólar por ejemplo puntos guiones comas no podríamos utilizar como parte del nombre del identificador aunque puede contener letras números y estos dos caracteres.
+No es ni más ni menos que un espacio de memoria, una caja la podríamos imaginar, donde se almacena un dato de un determinado tipo, a las variables se les asigna un nombre o identificador, a la hora de definir identificadores para las variables podríamos utilizar en principio cualquier combinación de caracteres y símbolos. Sin embargo hay que tener en cuenta una serie de reglas, en primer lugar no podríamos utilizar como identificador una palabra reservada de Java `class`, `for`, son palabras reservadas y no podemos utilizarlos como identificadores. Además los identificadores pueden contener como hemos dicho cualquier letra, números y los caracteres de subrayado `_` y y de dólar `$`, por ejemplo puntos, guiones, coma,s no podríamos utilizar como parte del nombre del identificador aunque puede contener letras, números y estos dos caracteres `_` y `$`.
 
 Todo identificador debe comenzar o bien por una letra o por uno de estos dos caracteres dólar y subrayado nunca por un número bien aunque sí lo pueden contener el resto de la parte del identificador las variables hay que declararlas antes de ser utilizadas en la declaración es cuando le vamos a indicar ese identificador que queremos asignar a la variable y de qué tipo es.
 
@@ -67,6 +70,11 @@ Hay que distinguir si estamos hablando de variables atributos o variables locale
 Las variables de tipológico Gülen se inicializar automáticamente a false pero qué pasa con las variables locales cuando tú declara es una variable local y no le asigna un valor esa variable no tiene ningún valor.
 
 Aquí tienes una variable atributo que automáticamente adquiere el valor 0 o como acabamos de decir en la narración anterior pero si declara una variable local y no le asigna un valor esa variable no tiene valor por lo tanto intentar hacer una operación con ella sin haberla asignado previamente de manera explícita un valor daría un error de compilación como tienes.
+
+### Material adicional
+
+[L5-Literales_y_conversion_de_tipos.pdf]
+
 
 # 06 Operadores 04:11
 
@@ -355,6 +363,10 @@ Operador
 ?:      
 
 = += -= *= /= %=      
+
+### Material adicional
+
+[L6-Operadores.pdf]()
 
 
 # Ejercicio práctico I 04:39   
