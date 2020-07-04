@@ -2,7 +2,7 @@
 
 Java desde cero
 
-### Lo que aprenderás
+### Lo que aprenderás
 
 * Conoceras las reglas y estructuras sintácticas del lenguaje Java
 * Aprenderas los conceptos de clases y objetos
@@ -16,7 +16,7 @@ Java es el lenguaje de programación más utilizado por la comunidad mundial de 
 
 Con este curso queremos enseñarte a programar con este lenguaje, que conozcas todos los elementos sintácticos del mismo y que dispongas de la base y conocimientos necesarios para poder abordar con garantías en cursos posteriores el aprendizaje de las APIs de utilidades y los frameworks y tecnologías empleados en el desarrollo de aplicaciones profesionales.
 
-#### ¿Para quién es este curso?
+#### ¿Para quién es este curso?
 
 Este curso está pensado para todas aquellas personas que quieran aprender a desarrollar aplicaciones con Java, y no conozcan el lenguaje
 Si siempre has querido aprender a programar en Java, pero nunca has sabido por donde empezar, este es tu curso.
