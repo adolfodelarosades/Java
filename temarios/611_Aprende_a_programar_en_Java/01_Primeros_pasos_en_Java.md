@@ -66,15 +66,25 @@ Tenemos clases para crear cualquier tipo de aplicación es decir con Java se van
 
 # 02 Software necesario  05:12
 
+<img src="imgages/02-01.png">
+
 Bueno pues después de haber introducido la lección 1 a la tecnología Java imagino que estarás deseando ya ver como hacen tus primeros programas con este lenguaje.
 
 Bien con lo que vamos a ver en estas elecciones qué software necesitamos instalar en nuestros equipos para poder crear programas Java y probarlos.
 
-Por supuesto.
+<img src="imgages/02-02.png">
+<img src="imgages/02-03.png">
+<img src="imgages/02-04.png">
+<img src="imgages/02-05.png">
+<img src="imgages/02-06.png">
+<img src="imgages/02-07.png">
+<img src="imgages/02-08.png">
+<img src="imgages/02-09.png">
+<img src="imgages/02-010.png">
+<img src="imgages/02-011.png">
+<img src="imgages/02-012.png">
 
-Bien pues son fundamentalmente dos tipos de programas los que vamos a necesitar para poder programar en Java con nuestro ordenador.
-
-Por un lado tenemos lo que se conoce como el JDK Java Development Kit que es el conjunto de herramientas básicas para poder crear un programa Java compilar lo testearlo bueno esas herramientas nos los proporciona el propio Oracle no te lo dije en la lección anterior pero bueno microsistema es la empresa que inventó Java desarrollo Java pero fue comprada posteriormente por Oracle y actualmente Oracle el que gestiona todo Java.
+Son fundamentalmente dos tipos de programas los que vamos a necesitar para poder programar en Java con nuestro ordenador. Por un lado tenemos lo que se conoce como el JDK Java Development Kit que es el conjunto de herramientas básicas para poder crear un programa Java compilarlo, testearlo, esas herramientas las proporciona el Oracle, no te lo dije en la lección anterior pero Microsystems es la empresa que inventó Java, desarrollo Java pero fue comprada posteriormente por Oracle y actualmente Oracle el que gestiona todo Java.
 
 Todas las ediciones las versiones etc. Entonces desde la página web de Oracle ahora vamos a ver cuál vamos a poder descargar ese JDK con las herramientas básicas que las podríamos utilizar nosotros desde línea de comandos para poder compilar nuestros programas ejecutarlos.
 
