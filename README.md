@@ -52,7 +52,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # Antonio Martín Sierra
 
-* [611 Aprende a programar en Java]()
+* [611 Aprende a programar en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/611_Aprende_a_programar_en_Java.md)
 * [612 Programación Orientada a Objetos con Java]()
 * [613 Curso Programador Java Certificado I]()
 * [614 Creación de aplicaciones Web con Java EE]()
