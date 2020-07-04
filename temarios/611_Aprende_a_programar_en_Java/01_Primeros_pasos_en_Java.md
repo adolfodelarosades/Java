@@ -88,8 +88,6 @@ Vamos a verla en el navegador, esta es la dirección. Como veis al entrar tenemo
 
 <img src="images/02-05.png">
 
-
-
 Y aquí vemos todas las posibles descargas que podemos hacer del JDK en función del sistema operativo que tengamos, tenemos para Linux, para Solaris, para Windows por supuesto, no es más que un `exe` lo descargamos, lo ejecutamos y vamos siguiendo todos los pasos, las opciones que vienen por defecto, sin tener que modificar nada.
 
 <img src="images/02-06.png">
@@ -130,111 +128,90 @@ En la siguiente lección vamos a ver precisamente como crear nuestro primer prog
 
 # 03 Primer programa en Java 10:11
 
-Muy bien.
+<img src="images/03-01.png">
 
 Estás listo para crear tu primer programa Java.
 
-Yo creo que sí.
+Yo creo que sí, si ya tienes instalada las herramientas que comentábamos en lección anterior pues venga vamos.
 
-Si ya tienes instalada las herramientas que comentábamos en el video anterior pues venga vamos a lo que vamos a hacer es iniciar el entorno de desarrollo Eclipse.
+Lo que vamos a hacer es iniciar el entorno de desarrollo Eclipse. Si ya te has creado un acceso directo al escritorio. Si no te vas a la carpeta donde lo hayas descomprimido doble click y se ejecutaría Eclipse. Se te pide que selecciones lo que se llama el Workspace qué es eso, un Workspace no es ni más ni menos que una carpeta de tu disco, donde vas a ir guardando todos los proyectos o ejercicios que se le llaman proyectos en Eclipse, que vas a ir realizando relativos a un determinado tema. Por ejemplo si ahora vamos a hacer proyectos de Java básico, pues crearíamos en una carpeta en nuestro disco y a partir de ahí todos los proyectos que se hagan se van a crear en esa carpeta. Cada proyecto en una subcarpeta, si luego vas a crear otros ejercicios ya para Web cambiarías de Workspace seleccionarías otra carpeta diferente y ahí crearían los proyectos relativos a ese otro tipo de programas que vas a realizar.
 
-Vale si ya te has creado un acceso directo al escritorio.
+Bueno seleccionamos el Workspace OK y se va iniciando Eclipse, la tardanza de lo que te va a arrancar el entorno de desarrollo pues ya depende un poco de las características de tu equipo. Posiblemente la primera vez que inicias Eclipse tarde un poquito más que el resto de las veces, andara configurando algunos archivos etc. 
 
-Bueno pues si no te vas a la carpeta donde lo hayas descomprimido doble click y se ejecutaría en Eclipse punto ExE al ejecutarse al cabo de un ratito te va a aparecer esta ventanita.
+Ya aprovecho para contarte que las versiones de Eclipse van dando nombres de planetas o de satélites en este caso estamos ante la versión Eclipse Mars, pero bueno todas son bastante parecidas creo que hay una después de este eclipse Mars que posiblemente me parece que es la Neon, que a lo mejor es la que te habrás instalado tú. Bueno todas funcionan muy parecido.
 
-Este cuadro de diálogo en el que te pide que selecciones lo que se llama el Workspace qué es eso.
+Una vez que se cargue Eclipse vamos a maximizar el entorno de desarrollo y bueno la primera vez que entras en un Workspace aparece la ventana de Welcome la cerramos eso solamente va a aparecer la primera vez el resto de veces te aparecerá ya tu Workspace. 
 
-Espais no es ni más ni menos que una carpeta de tu disco donde vas a ir guardando todos los proyectos o ejercicios que se le llama proyectos en Eclipse que vas a ir realizando relativos a un determinado tema.
+Una cosa importante es qué tipo de programas estoy haciendo yo con Eclipse, son programas para web, son programas Java estándar. Por qué digo eso, porque todo depende de cómo quieras configurar tu entorno en función del tipo de programas que vas a organizar, es lo que se llama la perspectiva, perspectiva es simplemente adaptar las ventanitas al tipo de programa que estás haciendo.
 
-Por ejemplo si ahora vamos a hacer proyectos de Java básico pues crearíamos en una carpeta en nuestro disco por ejemplo que tenéis aquí ejercicios unaumento a través del botón de buscar la carpeta donde quieres guardar tus ejercicios y a partir de ahí todos los proyectos que se hagan se van a crear en esa carpeta cada proyecto en una carpeta si luego vas a crear otros ejercicios ya Paraguay. vital pues cambiaría de Whores Espais mencionaría otra carpeta diferente y ahí crearían los proyectos relativos a ese otro tipo de programas que vas a realizar.
+Si nosotros ahora mismo tenemos una perspectiva JavaEE que es la por defecto, si nosotros vamos a hacer programas Java estándar, Java normal mejor cambiar a otra perspectiva más simple y eso lo hacemos a través de el botoncito que dice Open Perspective lu pulsamos y aparecerá una lista de perspectivas hay bastantes posibles perspectivas dependiendo de los tipo de programas que vas a estar haciendo.
 
-Bueno nosotros ya hemos seleccionado este Wheres Paix pues venga ok se va iniciando Eclipse la tardanza de lo que te va a arrancar el entorno de desarrollo pues ya depende un poco de las características de tu equipo.
-
-Posiblemente la primera vez que inicias Eclipse tarde un poquito más que el resto de las veces andar configurando algunos archivos etc. Vamos a ver si ahora en mi caso como es bueno pues esto ya aprovecho para contarte Eclipse las versiones que van apareciendo en vez de la 1 la 2 3 le va dando nombres de planetas de satélites en este caso estamos ante la versión Eclipse Mars pero bueno todas son bastante parecidas creo que hay una después de este eclipse Mars que posiblemente me parece que es la Neon que a lo mejor es la que te habrás instalado tú.
-
-Bueno todas funcionan muy parecido bien vamos a maximizar ahora el entorno de desarrollo y bueno la primera vez que entras en un buen Espais como en nuestro caso porque es la primera vez que entramos en este buen Espais estas ventanas no te van a tener que aparecer a ti no Zenani por ser mi juego lo tengo configurado la primera vez que entramos en un buen Espais tenemos una pestaña de bienvenida la cerramos vale y eso solamente va a aparecer la primera del resto de veces te aparecerá ya lo que estás viendo ahora mismo solo que en este proyecto Explorer Explorador de paquetes aquí vas a tener una carpeta por cada uno de los proyectos que tenga ya creado en ese pais.
-
-Vale pero luego ya estas otras pestañas depende de otras opciones que tengas instaladas en Eclipse.
-
-Posiblemente esta no te va a aparecer la voy a cerrar.
-
-Bueno y luego otra cosa importante es qué tipo de programas estoy haciendo yo con Eclipse son programas para web son programas Java estándar.
-
-Por qué digo eso porque todo depende de cómo quieras configurar tu entorno en función del tipo de programas que vas a organizar es lo que se llama la perspectiva ves que perspectiva es simplemente adaptar las ventanitas estas que tienes aquí al tipo de programa que estás haciendo.
-
-Si nosotros ahora mismo tenemos una perspectiva Java la por defecto si nosotros vamos a hacer programas Java estándar Java normal mejor cambiar a otra perspectiva más simple y eso lo hacemos a través de este botoncito que dice Open Perspective llegamos y aparecerá una lista con hay bastantes posibles perspectivas dependiendo de los tipo de programas que vas a estar haciendo.
+<img src="images/03-02.png">
 
 Vamos a seleccionar la perspectiva Java y entonces se adaptará nuestro entorno a este tipo de programas que vamos a realizar simplemente ves que desaparecen algunas pestañas que no son necesarias para este tipo de programas.
 
-Bueno volvemos vamos a crear nuestro primer programa o proyecto como se le llama en Eclipse como es un proyecto de Java estándar vamos a Feil New y elegimos la opción Java problema que es lo mismo que decir Java estándar value a la legislación Java proyectã aparecerá otro cuadro de diálogo en el que se nos va a solicitar el nombre del proyecto yo lo nombrando por el orden de los proyectos que voy a ir haciendo.
+Vamos a crear nuestro primer programa o proyecto como se le llama en Eclipse, como es un proyecto de Java estándar, vamos a *File - New - Java Project*  es lo mismo que decir Java estándar,  aparecerá otro cuadro de diálogo en el que se nos va a solicitar el nombre del proyecto le vamos a llamar `601-01_Primer_Programa`.
 
-01.
+<img src="images/03-03.png">
 
-Primer programa y esto es lo que va a hacer es crearnos una carpeta dentro de los países que elegimos aquí al principio ves que te van a coger la versión Java estándar 8 que ya a partir del JDK ya lo han detectado que tienen instalado el siguiente paso no vamos a tener que hacer nada simplemente desinformativo de unas carpetita que se te van a crear ahí dentro del explorador de paquetes para ese proyecto.
+Lo que va a hacer es crearnos una carpeta dentro del Workspace elegido al principio, va a coger la versión Java instalada, a partir del JDK que tienen instalado, en el siguiente paso no vamos a tener que hacer nada simplemente es informativo de unas carpetitas que se te van a crear ahí dentro del explorador de paquetes para ese proyecto, bueno damos a Finish.
 
-Bueno vamos a finish SRC donde va a estar creado el código fuente finalizamos y lo que vamos a hacer es crear nuestro primer archivo de código que es lo que se conoce como una clase porque aquí en Java como vas ir viendo todos los programas se estructuran en clases.
+<img src="images/03-04.png">
 
-Pero bueno vamos a ir comentando si acaso en la lección si vamos a dar con el botón derecho colocado dentro del proyecto New Class y a esa clase que se va a crear un archivo como el punto Java los archivos de código fuente de Java le tenemos que dar un nombre.
+<img src="images/03-05.png">
 
-Vamos a llamarle por ejemplo saludo porque el primer programa que vamos a hacer va a ser tan simple como generar el típico mensaje de saludo.
+Se nos creo la estructura del proyecto, dentro de JRE tenemos todas las librerías Java que podemos utilizar.
 
-Hola mundo.
+Lo que vamos a hacer es crear nuestro primer archivo de código, que es lo que se conoce como una clase porque aquí en Java como vas ir viendo todos los programas se estructuran en clases.
 
-Otra cosa distinta a ser un poquito más originales.
+Vamos a dar con el botón derecho colocado dentro del proyecto New Class.
 
-Esto de package de momento lo vamos a dejar ahí vacío no vamos a poner nada y vamos a marcar esta casita porque queremos que se nos genere un método una función dentro de esa clase conocido como La función principal o función main método es el punto de entrada a cualquier programa Java como vas a ver después.
+<img src="images/03-06.png">
 
-Lo voy a explicar en la lección siguiente.
+y a esa clase que se va a crear en un archivo con extensión `.java` un archivo de código fuente de Java, le tenemos que dar un nombre. 
 
-Bueno vamos a finalizar y como vamos a ver ahora pues se nos creará en un momentito la clase y aparecerá aquí.
+<img src="images/03-07.png">
 
-Bueno no es.
+Vamos a llamarle por ejemplo saludo porque el primer programa que vamos a hacer va a ser tan simple como generar el típico mensaje de saludo. En el package de momento lo vamos a dejar vacío no vamos a poner nada, aunque no es nada recomendable y vamos a marcar la casilla porque queremos que se nos genere un método `main` dentro de esa clase conocido como el método principal, es el punto de entrada a cualquier programa Java como vas a ver después.
 
-Aquí tienes.
+Bueno vamos a finalizar y como vamos a ver ahora se nos creará en la clase y aparecerá aquí.
 
-Saludos mundo.
+<img src="images/03-08.png">
 
-Este es el archivo colgando de tu proyecto proyecto zero 1 primer programa Java Espais y aquí lo tenemos.
+*`Saludo.java`*
 
-Vale esto también es cierto que aparece a lo mejor ahí el tamaño es un poco pequeño y no lo ves bien lo puedes ajustar siempre a través de la opción de menú window Preferences en general apariencia colores y fuentes pues aquí tenemos una opción vamos a ver donde dice Betsy texto fuente del texto la editamos y Reséndez.
+```java
+public class Saludo {
 
-Es un tamaño muy pequeñito vamos a pasar a 14 con lo cual sólo veremos un poco mejor lo ajustas a tus necesidades y a lo que más te guste.
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 
-El caso es que aquí vemos la estructura de lo que es el club una clase Java public class.
+	}
 
-Saludos te lo explicaré mejor en la próxima elección nosotros vamos a ir al grano a hacer nuestro primer programa que va a ser sacar el mensaje de saludo y esa instrucción de sacar el mensaje de saludo voy a.
+}
+```
 
-Hoy eso que aparece ahí todo lo borro directamente y ahí escribo la siguiente instrucción.
+Aquí lo tenemos, si no lo ves bien lo puedes ajustar siempre a través de la opción de menú *Window -  Preferences - General - Apaciencia - Colores y Fuentes, pues aquí tenemos una opción para ampliar el texto.
 
-Existen cunto o cunto brinda N.N.
+<img src="images/03-09.png">
 
-Bueno vamos a ir viendo por qué está aquí todavía hoy actualizando algunas cosillas en catalán un poco hoy junto.
+Vamos a pasar a 14 con lo cual lo veremos un poco mejor.
 
-Pregunta ln y entre paréntesis y entre comillas el texto que quieres que muestre tu programa Bienvenido a Java con un punto y coma aquí al final has de saber también que si cometes alguno vamos a ir guardando vale si cometes un error de sintaxis porque Java tiene una sintaxis muy rígida como ahora vamos a ir viendo después en las siguientes elecciones.
+Vamos a poner la instrucción para mostrar el mensaje.
 
-Por ejemplo se me olvida el punto y coma o alguna cosa así pues ya en seguida el entorno de desarrollo Eclipse te va a ir dando avisos oye que se te falta el punto y coma te va marcando con una crucecita y te va avisando para que lo vayas corrigiendo.
+`System.out.println("Bienvenido a Java!!!");`
 
-No todos los errores son tan fáciles de detectar como este pero bueno pues este instruccion sistema Punto a Punto Prin LN.
+Si cometes un error de sintaxis Eclipse te va a ir dando avisos, oye que te falta el punto y coma, te va marcando con una crucecita y te va avisando para que lo vayas corrigiendo. No todos los errores son tan fáciles de detectar.
 
-Luego la analizaremos si es la que te hace la función de sacar un mensaje por pantalla y esto dónde va a salir en una ventana.
+`System.out.println;` es la que hace la función de sacar un mensaje por pantalla y esto dónde va a salir, en la consola.
 
-Bueno es simplemente lo que sería lo que llamamos la consola o ventana de salida es decir son programas que se comunican con el usuario a través de una ventana conocida como la consola que vas a ver ahora quien eclipse un poquito más abajo.
+Bien ya hemos hecho nuestro programa al guardar ya automáticamente Eclipse compila, genera el `.class`, si tú lo que quieres es ejecutar esto, decirle a la máquina virtual Java oye ese `.class` que se ha generado correspondiente a este código fuente ejecutalo, simplemente le damos al Play y se ejecuta el programa.
 
-Bien ya hemos hecho nuestro programa al guardar ya automáticamente clips se te va compilando va generando y al punto Clas si tú lo que quieres es ejecutar esto decirle a la máquina virtual Java oye ese punto clave que se ha generado correspondiente a este código fuente ejecuta.
+<img src="images/03-10.png">
 
-Simplemente quedar aquí al play vale si te aparece esta ventana pues tienes que elegir que esto es una aplicación Java o la aplicación o key y automáticamente la máquina virtual Java va a buscar el método y lo va a ejecutar y mira ese es el resultado de esta pestañita llamada console.
+La máquina virtual Java va a buscar el método y lo va a ejecutar y mira ese es el resultado de esta pestañita llamada console. Ahí es donde se saca el mensaje.
 
-Ahí es donde se saca el mensaje.
-
-Bueno pues por supuesto esto ha sido el primer programa.
-
-No todos los programas evidentemente son tan simple como éste.
-
-Vamos a cumplir dándolos a medida que vayamos aprendiendo cosas.
-
-Pero bueno ya has hecho tu primer ejercicio tu primer programa y nos va a servir para ir cogiendo confianza y aprendiendo todo lo que nos espera que es la verdad.
-
-Muchísimo.
+Ya has hecho tu primer ejercicio tu primer programa y nos va a servir para ir cogiendo confianza y aprendiendo todo lo que nos espera que es la verdad muchísimo.
 
 # 04 Reglas sintácticas y estructura de un programa Java 06:47  
 
