@@ -88,13 +88,17 @@ Vamos a verla en el navegador, esta es la dirección. Como veis al entrar tenemo
 
 <img src="images/02-05.png">
 
+
+
+Y aquí vemos todas las posibles descargas que podemos hacer del JDK en función del sistema operativo que tengamos, tenemos para Linux, para Solaris, para Windows por supuesto, no es más que un `exe` lo descargamos, lo ejecutamos y vamos siguiendo todos los pasos, las opciones que vienen por defecto, sin tener que modificar nada.
+
 <img src="images/02-06.png">
 
-Y aquí vemos todas las posibles descargas que podemos hacer del JDK en función del sistema operativo que tengamos, tenemos para Linux, para Solaris, para Windows por supuesto, no es más que un `exe` lo descargamos, lo ejecutamos y vamos siguiendo todos los pasos, las opciones que vienen por defecto, sin tener que modificar nada y ya con eso tendríamos el JDK instalado en nuestro equipo.
+Y ya con eso tendríamos el JDK instalado en nuestro equipo. Habitualmente mira donde se te va a instalar en el caso de Windows por ejemplo que es lo que tengo yo en los archivos de programa Java ves aquí está JDK, bueno yo tengo varios pero bueno este sería el actual JDK 8, está JDK 9 a punto de salir también en cualquiera de los dos JDK.
 
 <img src="images/02-07.png">
 
-Habitualmente mira donde se te va a instalar en el caso de Windows por ejemplo que es lo que tengo yo en los archivos de programa Java ves aquí está JDK, bueno yo tengo varios pero bueno este sería el actual JDK 8, está JDK 9 a punto de salir también en cualquiera de los dos JDK.
+Como veis el 8 1.8 tiene aquí una serie de carpetas y en `bin` están los `.exe`, `java`, `javac` que son las herramientas básicas que te comentaba para que desde línea de comandos poder compilar un programa y ejecutarlo.
 
 <img src="images/02-08.png">
 <img src="images/02-09.png">
@@ -102,9 +106,9 @@ Habitualmente mira donde se te va a instalar en el caso de Windows por ejemplo q
 <img src="images/02-11.png">
 <img src="images/02-12.png">
 
- pues como veis el 8 1.8 tiene aquí una serie de carpetas.
 
-En fin es donde están estos EXE Java C Java que son las herramientas básicas que te comentaba desde línea de comandos para poder compilar un programa ejecutarlo terminaba de la máquina virtual pero vaya que nosotros no vamos a utilizar esos comandos de esa manera los vamos a utilizar a través del entorno de desarrollo entorno de desarrollo pues es un programa que te facilita la creación de tus propios programas Java combinándolos ejecutándolo utiliza por debajo el JDK pero para ti como programador te va de resultar mucho más sencillo su uso puesto que lo vas a utilizar como un programa con el que utilizar Word o cualquier otro programa de escritorio.
+
+En fin es donde  terminaba de la máquina virtual pero vaya que nosotros no vamos a utilizar esos comandos de esa manera los vamos a utilizar a través del entorno de desarrollo entorno de desarrollo pues es un programa que te facilita la creación de tus propios programas Java combinándolos ejecutándolo utiliza por debajo el JDK pero para ti como programador te va de resultar mucho más sencillo su uso puesto que lo vas a utilizar como un programa con el que utilizar Word o cualquier otro programa de escritorio.
 
 Cuáles son los entornos de desarrollo o ides que se les llama también más habituales.
 
