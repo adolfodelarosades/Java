@@ -228,63 +228,41 @@ public class Saludo {
 # 04 Reglas sintácticas y estructura de un programa Java 06:47  
 
 <img src="images/04-01.png">
+
+En esta lección veremos algunas reglas sintácticas básicas y cómo es la estructura de un programa Java. 
+
 <img src="images/04-02.png">
+
+En primer lugar hablemos de las reglas sintácticas básicas. 
+
+Java es un lenguaje sensitivo ¿Qué significa eso? que hace distinción entre mayúsculas y minúsculas, no es lo mismo declarar una variable o crear una clase utilizar mayúsculas o minúsculas. Las palabras reservadas que se utilizan en el lenguaje Java tienen una determinada sintaxis de mayúsculas, minúsculas que hay que respetar.
+
+Por otro lado todas las instrucciones terminan en punto y coma. 
+
+Los bloques de sentencias van a venir delimitados siempre por llaves. Eso lo has visto ya en el ejercicio que vimos en la lección anterior y lo vamos a ir viendo ahora cuando veamos las estructuras básicas del lenguaje.
+
+Y luego está el tema de los comentarios, se pueden poner comentarios en un programa para indicar determinadas notas que le sirven al programador, pueden ocupar una línea en cuyo caso se crearían con la doble barra o varias líneas barra asterisco la línea del comentario y finalizarían con asterisco barra.
+
 <img src="images/04-03.png">
+
+Y cómo es una estructura de un programa Java. 
+
+Vamos a ver un programa Java se estructura en clases, ya viste en el ejercicio que vimos en el primer ejercicio Java cómo el código estaba creado dentro de una clase.
+
+¿Qué es eso de una clase? Vamos a decir que de momento que una clase es la estructura donde se definen los métodos que va a exponer un determinado tipo de objeto.
+
+Aquí vamos a utilizar muchos objetos como ya hemos dicho al principio de las primeras lecciones y los objetos pertenecen a clases, los objetos exponemos unos métodos y esos métodos están definidos dentro de las clases, así es como se programa en Java a base de ir creando clases, incluso en un programa simple como el que hemos visto en la lección anterior tendrás que crear una clase y dentro de esa clase como mínimo va a haber un método que es el método main que ahora te explicaremos la estructura.
+
+En la diapositiva tienes un ejemplo, una clase se define con la palabra `class` el nombre que le queramos dar a la clase `NombreClase`, es habitual seguir una regla en la cual los nombres de clases siempre comienzan por mayúscula, case sensitive como decíamos antes eso hay que tenerlo en cuenta y si es un nombre compuesto la primera letra de cada palabra se escribirá en mayúsculas como en `NombreClase` y luego están los métodos, los métodos se definen por un nombre en el ejemplo tenemos  
+`metodo(int param)` y `metodo2()`, unos parámetros o valores que van a recibir cuando se hace la llamada a un método se le pueden enviar datos desde el punto de llamada y aquí ves en este primer método que tenemos se recibiría un parámetro del tipo entero, se pueden recibir más de uno, serían separados por comas o puede que no reciban nada, en cuyo caso a la hora de definir el método tienes que poner también igualmente los paréntesis, hay un tipo de devolución lo que va a devolver el método después de ejecutar su tarea, devuelve un resultado, que no devuelve nada entonces utilizaríamos la palabra `void`, que va a devolver un resultado de una operación que haga internamente el método pues entonces indicaríamos el tipo de devolución, en el segundo método `metodo2()` el tipo de devolucion es `int` y para indicar dentro del método que vas a devolver, que vas a retornar algo, se utilizaría la palabra `return`.
+
+Si comparamos esto con el programa que vimos en la lección anterior verás que efectivamente un programa creado a base de una clase `public class Saludo`, esta palabra `public` no está puesto en el primer proframa porque realmente no es obligatorio, eso dependerá de donde se quieren hacer las llamadas a esas clases, ya cuando se analicen las clases en detalle ya hablaremos de los posibles valores que se pueden poner durante la declaración de una clase y también de los métodos porque como ves en la clase `Saludo` hay un único método que también tiene la palabra `public` delante, se puede poner `public` o  no ponerlo, ya veremos los llamados modificadores de acceso.
+
+Bueno como te decía pues en el caso del ejercicio que vimos anteriormente pues había un método que es el método `main`, el tipo de devolución es `void` se llama `main`, recibe unos parámetros y en este caso se mostraba un mensaje de saludo, como es `void` no devuelve ningún tipo de resultado no se utiliza la palabra `return`.
+
 <img src="images/04-04.png">
 
-En esta elección veremos algunas reglas sintácticas básicas y cómo la estructura de un programa Java en primer lugar hablemos de las reglas sintácticas básicas.
-
-Java es un lenguaje sensitivo.
-
-Qué significa eso.
-
-Pues que hace distinción entre mayúsculas y minúsculas.
-
-No es lo mismo a la hora por ejemplo pues como veremos a declarar una variable o crear una clase utilizar mayúsculas o minúsculas.
-
-Las palabras reservadas que se utilizan en el lenguaje Java tienen una determinada sintaxis de mayúsculas minúsculas que hay que respetar.
-
-Por otro lado todas las instrucciones terminan en punto y coma.
-
-Los bloques de sentencias van a venir delimitados siempre por llaves.
-
-Sólo has visto ya en el ejercicio que vimos en la lección anterior y lo vamos a ir viendo ahora cuando veamos las estructuras básicas del lenguaje.
-
-Y luego está el tema de los comentarios se pueden poner comentarios en un programa para indicar determinadas notas que le sirven al programador pueden ocupar una línea en cuyo caso se crearían con la doble barra o varias líneas barra asterisco la línea del comentario y finalizarían con asterisco barra.
-
-Y cómo es una estructura de un programa Java.
-
-Vamos a ver un programa Java se estructura en clases ya viste en el ejercicio que vimos en el primer ejercicio Java del video anterior cómo el código estaba creado dentro de una clase y qué es eso de una clase.
-
-Bueno vamos a decir que de momento una clase es la estructura donde se definen las funciones o métodos que es como se le llama Java a las funciones se le llama métodos que va a exponer un determinado tipo de objeto.
-
-Aquí vamos a utilizar muchos objetos como ya hemos dicho al principio de las primeras lecciones y los objetos pertenecen a clases los objetos exponemos unos métodos más funciones y esos métodos están definidos dentro de las clases pues así como se programa en Java a base de ir creando clases incluso han creado un programa simple como el que hemos visto en el vídeo anterior.
-
-Tendrás que crear una clase y dentro de esa clase como mínimo va a haber un método que es el método main que ahora te explicaremos la estructura un poquito más adelante.
-
-Aquí tienes un ejemplo ves una clase se define con la palabra clase el nombre que le queramos dar a la clase.
-
-Es habitual seguir una regla en la cual los nombres de clases siempre comienzan por mayúscula que sensitive.
-
-Como decíamos antes eso hay que tenerlo en cuenta y si es un nombre compuesto la primera letra de cada palabra se escribirá en mayúsculas es nombre clase y luego están los métodos los métodos o las funciones o los métodos se definen por un nombre.
-
-Aquí este método se llamaría método este método dos unos parámetros o valores que van a recibir cuando se hace la llamada a un método se le pueden enviar datos desde el punto de llamada y aquí ves en este primer método que tenemos este ejemplo que se recibiría un parámetro del tipo entero se pueden recibir más de uno serían declarados aquí por comas.
-
-Tipo del dato o de parámetro el nombre komas siguiente tipo nombre etcétera o puede que no reciban nada en cuyo caso a la hora de definir el método tienes que poner también igualmente los paréntesis hay un tipo de evolución lo que va a devolver el método después de ejecutar su tarea devuelve un resultado que no devuelve nada.
-
-Entonces utilizaríamos la palabra bolita que va a devolver un resultado de una operación que haga internamente el método pues entonces indica haríamos el tipo de devolución.
-
-En este segundo método que estás viendo aquí abajo Método 2 el tipo de evoluciones y para indicar dentro del método que vas a devolver vas a retornar algo se utilizaría la palabra retuve como estar viendo bien.
-
-Por ejemplo si comparamos esto con el programa que vimos en el vídeo anterior verás que efectivamente un programa creado a base de una clase Class saludo esta palabra Public aquí no está puesto porque realmente no es obligatorio eso dependerá desde donde se quieren hacer las llamadas a esas clases ya cuando se analicen las clases en detalle ya hablaremos de las posibles valores que se pueden poner durante la declaración de una clase y también de los métodos porque como ves esta clase de saludo hay un único método que también tiene la palabra públic delante se puede poner publi y no ponerlo.
-
-Ya veremos los llamados modificadores de acceso.
-
-Bueno como te decía pues en el caso del ejercicio que vimos anteriormente pues había un método que es el método main.
-
-El tipo de evolución es guay se llama Main recibe unos parámetros y en este caso se mostraba un mensaje de saludo como es Veidt no devuelve ningún resultado no se utiliza la palabra Retour método main lo vemos ahora un poquito más en detalle pues es el punto de entrada un programa Java puedes tener un programa Java con muchas clases cada clase tendrá su grupo de métodos pero en una tiene que haber un método llamado Moine.
-
-Con la estructura que tienes aquí definida con la que ya has visto y que es hay que respetarlo al cien por cien porque ese es el punto de entrada al programa Java y ese es el método que llamará la máquina virtual Java.
+Método `main` lo vemos ahora un poquito más en detalle, es el punto de entrada a un programa Java puedes tener un programa Java con muchas clases, cada clase tendrá su grupo de métodos pero en una tiene que haber un método llamado `main` con la estructura que tienes aquí definida, con la que ya has visto y que hay que respetarla al cien por cien porque ese es el punto de entrada al programa Java y ese es el método que llamará la máquina virtual Java.
 
 Cuando nosotros le digamos ejecutamos este programa cuando llegamos a la máquina virtual Java pues buscará el método main que tenga esta estructura de código y lo ejecutará a partir de aquí se crearán objetos de otras clases se llamarán otros métodos etcétera.
 
