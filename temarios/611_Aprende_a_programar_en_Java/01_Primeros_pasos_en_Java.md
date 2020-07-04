@@ -262,24 +262,14 @@ Bueno como te decía pues en el caso del ejercicio que vimos anteriormente pues 
 
 <img src="images/04-04.png">
 
-Método `main` lo vemos ahora un poquito más en detalle, es el punto de entrada a un programa Java puedes tener un programa Java con muchas clases, cada clase tendrá su grupo de métodos pero en una tiene que haber un método llamado `main` con la estructura que tienes aquí definida, con la que ya has visto y que hay que respetarla al cien por cien porque ese es el punto de entrada al programa Java y ese es el método que llamará la máquina virtual Java.
+Método `main` lo vemos ahora un poquito más en detalle, es el punto de entrada a un programa Java puedes tener un programa Java con muchas clases, cada clase tendrá su grupo de métodos pero en una tiene que haber un método llamado `main` con la estructura que tienes aquí definida, con la que ya has visto y que hay que respetarla al cien por cien porque ese es el punto de entrada al programa Java y ese es el método que llamará la máquina virtual Java cuando nosotros le digamos ejecutamos este programa, cuando le digamos eso la máquina virtual Java buscará el método `main` que tenga esta estructura de código y lo ejecutará a partir de aquí se crearán objetos de otras clases se llamarán otros métodos etcétera.
 
-Cuando nosotros le digamos ejecutamos este programa cuando llegamos a la máquina virtual Java pues buscará el método main que tenga esta estructura de código y lo ejecutará a partir de aquí se crearán objetos de otras clases se llamarán otros métodos etcétera.
+El método `main` como te decía tiene que ser `public` para que pueda ser llamado desde fuera de esa clase, concretamente por la máquina virtual Java. 
 
-Como te decía tiene que ser públic para que pueda ser llamado desde fuera de esa clase concretamente por la máquina virtual Java el método main tiene que ser también estático esto es una palabra que unos métodos lo tienen otros no.
+El método `main` tiene que ser también `static` esto es una palabra que unos métodos lo tienen otros no. En el caso de que lleven la palabra `static` porque `main` lo tiene que llevar, quien lo llame podrá llamarlo sin necesidad de crear un objeto de esta clase, en el caso de `main` como lo va a llamar la máquina virtual Java tiene que ser `static` para que la máquina virtual Java no tenga que crear objetos.
 
-En el caso de que lleven la palabra Static porque lo tiene que llevar quien lo llame podrá llamarlo sin necesidad de crear un objeto de esta clase.
+El tipo de devolución es `void` no devuelve ningún resultado.
 
-En el caso de México como lo va a llamar la máquina virtual Java tiene que ser estática para que la máquina virtual Java no tenga que crear objetos el tipo de evolución que Boito vale no devuelve ningún resultado.
+El nombre tiene que ser `main`, los nombres de métodos suelen ser habitualmente en minúsculas.Tiene que ser así nombre tal cual lo estás viendo y luego los parámetros que puede recibir `main`. Y es que cuando la máquina virtual Java llama a este método, opcionalmente le puede proporcionar cierta información en la llamada, aunque no se suele usar habitualmente pero aquí lo recibiría a través de un array de cadena de caracteres `main(String[] args)`.
 
-El nombre tiene que ser éste.
-
-Los nombres de método suelen ser habitualmente en minúsculas.
-
-Tiene que ser así nombre tal cual lo estás viendo y luego los parámetros que puede recibir el mail.
-
-Y es que cuando la máquina virtual Java llama a este método opcionalmente le puede proporcionar cierta información en la llamada aunque no se suele usar habitualmente pero aquí lo recibiría a través de una red de cadena de caracteres.
-
-En los siguientes métodos vamos a ir viendo ya más sobre la sintaxis de Java que instrucciones puedes poner en el mail para realizar tu código llámalo método otros objetos etc..
-
-
+En los siguientes métodos vamos a ir viendo ya más sobre la sintaxis de Java, que instrucciones puedes poner en el `main` para realizar tu código, llamar otros métodos, otros objetos, etc..
