@@ -74,39 +74,35 @@ Bien con lo que vamos a ver en esta leccion es qué software necesitamos instala
 
 <img src="images/02-02.png">
 
-Son fundamentalmente dos tipos de programas los que vamos a necesitar para poder programar en Java con nuestro ordenador. Por un lado tenemos lo que se conoce como el JDK Java Development Kit que es el conjunto de herramientas básicas para poder crear un programa Java compilarlo, testearlo, esas herramientas las proporciona el Oracle, no te lo dije en la lección anterior pero Microsystems es la empresa que inventó Java, desarrollo Java pero fue comprada posteriormente por Oracle y actualmente Oracle el que gestiona todo Java.
-
-Todas las ediciones las versiones etc. Entonces desde la página web de Oracle ahora vamos a ver cuál vamos a poder descargar ese JDK con las herramientas básicas que las podríamos utilizar nosotros desde línea de comandos para poder compilar nuestros programas ejecutarlos.
-
-Pero eso es una cosa un poquito rudimentaria y lo normal lo habitual es que los programadores utilicen un segundo programa conocido como entorno de desarrollo el IDE que de una forma más sencilla a través de menús botones en barra de herramientas etcétera te permite hacer todas esas operaciones por debajo los entornos de desarrollo utilizarán el JDK como te decía el Java Development Kit nos incluye todo lo necesario para programar en Java que incluye realmente el JDK.
+Son fundamentalmente dos tipos de programas los que vamos a necesitar para poder programar en Java con nuestro ordenador. Por un lado tenemos lo que se conoce como el JDK Java Development Kit, que es el conjunto de herramientas básicas para poder crear un programa Java, compilarlo, testearlo, esas herramientas las proporciona Oracle, no te lo dije en la lección anterior pero Microsystems es la empresa que inventó Java, desarrollo Java pero fue comprada posteriormente por Oracle y actualmente Oracle el que gestiona todo Java, todas las ediciones, las versiones etc. Entonces desde la página web de Oracle vamos a poder descargar ese JDK con las herramientas básicas, que las podríamos utilizar nosotros desde línea de comandos para poder compilar nuestros programas, ejecutarlos, pero eso es una cosa un poquito rudimentaria y lo normal lo habitual es que los programadores utilicen un segundo programa conocido como entorno de desarrollo, el IDE que de una forma más sencilla a través de menús, botones en barra de herramientas, etc. te permite hacer todas esas operaciones. Por debajo los entornos de desarrollo utilizarán el JDK.
 
 <img src="images/02-03.png">
 
-Por supuesto la Máquina Virtual Java, la librerías de clases o de tipos de objetos de lo que se conoce como Java estándar que lo vimos en la lección anterior y es una herramienta básica que se utilizan en línea de comandos para compilar y ejecutar los programas.
+Como te decía el Java Development Kit nos incluye todo lo necesario para programar en Java. ¿Qué ncluye realmente el JDK? Por supuesto la Máquina Virtual Java, la librerías de clases o de tipos de objetos de lo que se conoce como Java Estándar que lo vimos en la lección anterior y unas herramienta básica que se utilizan en línea de comandos para compilar y ejecutar los programas.
 
 Desde donde vamos a descargar el JDK desde esta dirección.
 
 <img src="images/02-04.png">
+
+Vamos a verla en el navegador, esta es la dirección. Como veis al entrar tenemos este botón que dice download Java.
+
 <img src="images/02-05.png">
+
 <img src="images/02-06.png">
+
+Y aquí vemos todas las posibles descargas que podemos hacer del JDK en función del sistema operativo que tengamos, tenemos para Linux, para Solaris, para Windows por supuesto, no es más que un `exe` lo descargamos, lo ejecutamos y vamos siguiendo todos los pasos, las opciones que vienen por defecto, sin tener que modificar nada y ya con eso tendríamos el JDK instalado en nuestro equipo.
+
 <img src="images/02-07.png">
+
+Habitualmente mira donde se te va a instalar en el caso de Windows por ejemplo que es lo que tengo yo en los archivos de programa Java ves aquí está JDK, bueno yo tengo varios pero bueno este sería el actual JDK 8, está JDK 9 a punto de salir también en cualquiera de los dos JDK.
+
 <img src="images/02-08.png">
 <img src="images/02-09.png">
 <img src="images/02-10.png">
 <img src="images/02-11.png">
 <img src="images/02-12.png">
 
-Como veis Oracle vamos a ver momentito que vamos a verla aquí en el navegador.
-
-Esta es la dirección que a seguir en la presentación.
-
-Como veis al entrar aquí tenemos este botón que dice download Java y aquí vemos todas las posibles descargas que podemos hacer del JDK en función del sistema operativo que tengamos que tenemos para Linux para Solaris para Windows.
-
-Por supuesto no es más que un exe lo descargamos lo ejecutamos.
-
-Vamos siguiendo todos los pasos las opciones que vienen por defecto sin tener que modificar nada y ya con eso tendríamos el JDK instalado en nuestro equipo habitualmente mira donde se te va a instalar en el caso de Windows por ejemplo que es lo que tengo yo en los archivos de programa Java ves aquí está JDK.
-
-Bueno yo tengo varios pero bueno este sería el actual JDK 8 está JDK 9 a punto de salir también en cualquiera de los dos JDK pues como veis el 8 1.8 tiene aquí una serie de carpetas.
+ pues como veis el 8 1.8 tiene aquí una serie de carpetas.
 
 En fin es donde están estos EXE Java C Java que son las herramientas básicas que te comentaba desde línea de comandos para poder compilar un programa ejecutarlo terminaba de la máquina virtual pero vaya que nosotros no vamos a utilizar esos comandos de esa manera los vamos a utilizar a través del entorno de desarrollo entorno de desarrollo pues es un programa que te facilita la creación de tus propios programas Java combinándolos ejecutándolo utiliza por debajo el JDK pero para ti como programador te va de resultar mucho más sencillo su uso puesto que lo vas a utilizar como un programa con el que utilizar Word o cualquier otro programa de escritorio.
 
