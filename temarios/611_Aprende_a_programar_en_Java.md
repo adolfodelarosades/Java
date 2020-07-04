@@ -23,7 +23,7 @@ Si siempre has querido aprender a programar en Java, pero nunca has sabido por d
 
 ## Contenido del curso 36 clases 03:47:37
 
-0. Presentación del curso 05:59
+0. [Presentación del curso](/temarios/611_Aprende_a_programar_en_Java/00_Presentacion_del_curso.md) 05:59
    * Presentación del curso 05:59
 
 1. Primeros pasos en Java 30:26
