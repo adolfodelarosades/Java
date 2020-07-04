@@ -98,37 +98,35 @@ Y ya con eso tendríamos el JDK instalado en nuestro equipo. Habitualmente mira 
 
 <img src="images/02-07.png">
 
-Como veis el 8 1.8 tiene aquí una serie de carpetas y en `bin` están los `.exe`, `java`, `javac` que son las herramientas básicas que te comentaba para que desde línea de comandos poder compilar un programa y ejecutarlo.
+Como veis el 8 1.8 tiene aquí una serie de carpetas y en `bin` están los `.exe`, `java`, `javac` que son las herramientas básicas que te comentaba para que desde línea de comandos poder compilar un programa y ejecutarlo, pero vaya que nosotros no vamos a utilizar esos comandos de esa manera los vamos a utilizar a través del entorno de desarrollo.
 
 <img src="images/02-08.png">
-<img src="images/02-09.png">
+
+El entorno de desarrollo es un programa, que te facilita la creación de tus propios programas Java combinándolos, ejecutándolos. Utiliza por debajo el JDK pero para ti como programador te va de resultar mucho más sencillo su uso puesto que lo vas a utilizar como cualquier programa, con el que utiliza Word o cualquier otro programa de escritorio.
+
+Cuáles son los entornos de desarrollo o IDEs que se les llama también más habituales.
+
+Tenemos **Netbeans** muy sencillo de manejar y **Eclipse** que es el que se utiliza mayoritariamente por la comunidad de programadores, desarrolladores Java.
+
+Eclipse lo vas a poder descargar desde esta dirección. 
+
 <img src="images/02-10.png">
+
+Verás que al entrar en ella tienes una serie de opciones Eclipse IDE Java Developer, Java etc..
+
+Yo te recomiendo que te descargues está el Eclipse IDE por Java Java Developers EE, porque este te va a permitir crear no solamente los programas de Java estándar sino también incluye toda una serie de plantillas, menús, etc. para desarrollar aplicaciones Web con Java.
+
+Acuérdate que lo decíamos en la lección 1 la edición Java Enterprise Edition es la que te permite crear aplicaciones Web por lo tanto está mucho más completo.
+
 <img src="images/02-11.png">
+
+Si por ejemplo optamos por 64 bit por lo que nos vamos a encontrar es la descarga de un ZIP es decir el Eclipse no es más que un archivo zip lo descomprimimos y una vez que esté descomprimido verás que hay una carpeta se llama eclipse donde tienes ahí el `Eclipse.exe`.
+
 <img src="images/02-12.png">
 
+Que luego te puedes crear un acceso directo al escritorio como tengo yo por aquí y simplemente ejecutándolo ya directamente entrarás en el entorno de desarrollo.
 
-
-En fin es donde  terminaba de la máquina virtual pero vaya que nosotros no vamos a utilizar esos comandos de esa manera los vamos a utilizar a través del entorno de desarrollo entorno de desarrollo pues es un programa que te facilita la creación de tus propios programas Java combinándolos ejecutándolo utiliza por debajo el JDK pero para ti como programador te va de resultar mucho más sencillo su uso puesto que lo vas a utilizar como un programa con el que utilizar Word o cualquier otro programa de escritorio.
-
-Cuáles son los entornos de desarrollo o ides que se les llama también más habituales.
-
-Pues tenemos en Nevins muy sencillo de manejar y el eclipse que es el que se utiliza mayoritariamente por la comunidad de programadores desarrolladores Java Eclipse lo vas a poder descargar desde esta dirección.
-
-Si nos vamos al navegador que tengo también esa dirección aquí verás que al entrar en ella tienes una serie de opciones Eclipse IDE Java Developer Java etc..
-
-Yo te recomiendo que te descargues está el Eclipse IDE por Java Java Developers.
-
-Por qué.
-
-Porque este te va a permitir crear no solamente los programas de Java estándar sino también incluye toda una serie de plantillas menús etcétera para desarrollar aplicaciones web con Java.
-
-Acuérdate que lo decíamos en la lección 1 la edición Java Enterprise Edition es la que te permite crear aplicaciones web por lo tanto está mucho más completo que ésta.
-
-Si por ejemplo optamos por 64 bit por lo que nos vamos a encontrar es la descarga de un ZIP es decir el eclipse no es más que un archivo zip lo imprimimos y una vez que esté descomprimido verás que hay una carpeta.
-
-Se llama eclipse donde tienes ahí el eclipse punto ExE que luego te puedes crear un acceso directo al escritorio como tengo yo por aquí y simplemente ejecutándolo ya directamente entrarás en el entorno de desarrollo.
-
-El siguiente video vamos a ver precisamente como crear nuestro primer programa una vez que tengamos instaladas estas herramientas.
+En la siguiente lección vamos a ver precisamente como crear nuestro primer programa una vez que tengamos instaladas estas herramientas.
 
 # 03 Primer programa en Java 10:11
 
