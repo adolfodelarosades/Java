@@ -38,7 +38,7 @@ Si siempre has querido aprender a programar en Java, pero nunca has sabido por d
    * 06 Operadores 04:11
    * 07 Ejercicio práctico I 04:39
 
-3. Estructuras de control 52:19
+3. [Estructuras de control](/temarios/611_Aprende_a_programar_en_Java/03_Estructuras_de_control.md) 52:19
    * 08 Instrucción alternativa simple. If 03:11
    * 09 Ejercicio práctico II 04:30
    * 10 Instrucción alternativa múltiple 04:57
