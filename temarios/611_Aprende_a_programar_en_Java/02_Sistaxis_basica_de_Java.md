@@ -289,42 +289,50 @@ La siguiente tabla nos muestra la preferencia de los operadores Java en orden de
 
 [L6-Operadores.pdf](/temarios/611_Aprende_a_programar_en_Java/pdfs/L6-Operadores.pdf)
 
+# Ejercicio práctico I 04:39  
 
-# Ejercicio práctico I 04:39   
+<img src="images/05-08.png">
 
-Bueno de momento los tipos de datos variables y operadores no podemos hacer grandes programas aún en Java pero te vamos a mostrar este ejercicio práctico donde ponemos en práctica algunos de los operadores que hemos visto la lección anterior.
+Bueno de momento con los tipos de datos variables y operadores no podemos hacer grandes programas aún en Java, pero te vamos a mostrar este ejercicio práctico donde ponemos en práctica algunos de los operadores que hemos visto en la lección anterior.
 
-El enunciado del ejercicio consiste en realizar un programa que a partir de los números que vamos a tener almacenados en dos variables nos muestra el resultado dividir el mayor entre el menor de ambos números.
+<img src="images/05-09.png">
 
-Para ello nos vamos a ir a nuestro entorno de desarrollo Eclipse.
+El enunciado del ejercicio consiste en realizar un programa que a partir de los números que vamos a tener almacenados en dos variables nos muestra el resultado de dividir el mayor entre el menor de ambos números.
 
-Aquí tenemos el ejercicio que hicimos cuando creamos la primera aplicación el primer programa de  ejemplo vamos a aprovechar para recordar los pasos que había que hacer para crear un programador con Eclipse fail new Java Proyect.
+Para ello nos vamos a ir a nuestro entorno de desarrollo Eclipse y damos File - New - Java Project.
 
-Y ahí nos aparecerá un cuadro de diálogo en el que nos van a pedir el nombre del proyecto la localización donde tuviéramos ya los países que creamos al principio donde teníamos el primer programa hicimos una carpeta se va a crear este otro 02 vamos a llamarle ejercicio práctico no así finalizamos se creará el proyecto y como sabes lo siguiente que tenemos que hacer es crear una clase con su método main que es donde vamos a crear todo el código de nuestro primer programa.
+Y ahí nos aparecerá un cuadro de diálogo en el que nos van a pedir el nombre del proyecto, la localización donde tuviéramos el Workspace que creamos al principio, donde teníamos el primer programa. Vamos a llamarle `601-02_Ejercicio_Practico_1`, lo siguiente que tenemos que hacer es crear una clase con su método main que es donde vamos a crear todo el código de nuestro primer programa, vamos a llamarle `DivideNumeros` elegimos método main para que nos lo cree.
 
-El segundo programa realmente un primer ejercicio práctico que va a ser muy sencillo porque lo conocemos hasta ahora pues aún es bastante poco entonces con el botón derecho sobre el proyecto ni clase pues nos aparece el cuadro diálogo para crear la clase vamos a crear la app a ver divide números.
+Y sobre ese método es donde vamos a crear todo el código de este sencillo programa que vamos a hacer.
 
-Fíjate un pequeño detalle un convenio en Java es que los nombres de clases ya lo hemos comentado antes pero bueno no conviene recordarlo los nombres de clases como digo siguen la nomenclatura está de que la primera letra se pone en mayúscula y el resto minúsculas y es una palabra compuesta.
+```java
+public class DivideNumeros {
 
-La primera letra de cada palabra se escribirá en mayúscula.
+	public static void main(String[] args) {
+		
+		int a = 3;
+		int b = 14;
+		int div;
+		div = (a>b) ? a/b : b/a;
+		System.out.println("División: " + div);
 
-Bien pues elegimos método main para que no lo cree.
+	}
 
-Y sobre ese método pues es donde vamos a crear todo el código de este sencillo programa que vamos a hacer.
+}
+```
 
-Declaramos dos variables con dos números cualquiera en una vamos a poner por ejemplo el tres a poner más pequeño.
-
-La verdad que da igual pero bueno en otras vamos a poner pues el 14 por ejemplo y vamos a declarar una variable donde vamos a almacenar el resultado de la decisión.
+Declaramos dos variables con dos números cualquiera en una vamos a poner por ejemplo el tres en otro vamos a poner el 14 por ejemplo y vamos a declarar una variable donde vamos a almacenar el resultado de la decisión.
 
 Cómo calculamos la división entre el mayor y el menor de los dos números.
 
-Pues vamos a aplicar el operador ternario operador ternario se establece una condición por ejemplo mayor de ver la pregunta que vamos a hacer y si fuera mayor debe entonces lo que vamos a devolver sería la resultado dividir a entrevé si no pues viviríamos Ventre a el resultado de la operación se va a almacenar en la variable y por lo tanto es mayor pues a entrevé que no entra siempre obtenemos como resultado la división entre el mayor y el menor de ambos números como una división entera pues el resultado va a ser entero también es decir se va a despreciar los decimales con la instrucción System punto a punto Frin Elaine mostramos un mensajito vamos a ver que diga división y con el operador más lo concatenados lo unimos a la variable cuyo resultado queremos mostrar al final y por eso el programa muy sencillo lo vamos a ejecutar.
+Pues vamos a aplicar el operador ternario, el operador ternario establece una condición por ejemplo `(a>b)` y si `a` fuera mayor que `b` entonces lo que vamos a devolver sería el resultado de dividir `a/b` si no devplveriamos `b/a`. El resultado de la operación se va a almacenar en la variable `div` y por lo tanto que `a` es mayor pues `a/b` que no `b/a`. Siempre obtenemos como resultado la división entre el mayor y el menor de ambos números como es una división entera el resultado va a ser entero también, es decir se va a despreciar los decimales con la instrucción. Con la instrucción `System.out.println()` mostramos un mensaje usando `+` para concatenar.
 
-4 Un derecho reúnas Java Application y ahora aquí en la consola y en la consola como aparece división.
+El programa es muy sencillo lo vamos a ejecutar.
 
-4.
+<img src="images/05-10.png">
 
-Finalmente se ha dividido 14 entre 3 y 4 como algo bueno pues se desprecian los decimales y eso lo que sale si hubiéramos puesto mayor entonces la división sería a entrevé.
+Finalmente se ha dividido 14 entre 3 y nos da 4 se desprecian los decimales y eso lo que sale si ponemos un valor mayor en entonces la división sería al revéz.
 
-Vamos a verlo para que ver que efectivamente siempre va a garantizar que se divide mayor entre.
+<img src="images/05-11.png">
 
+Vamos a verlo para que ver que efectivamente siempre va a garantizar que se divide mayor entre menor.
