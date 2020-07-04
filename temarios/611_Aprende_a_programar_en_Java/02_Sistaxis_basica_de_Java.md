@@ -35,41 +35,37 @@ En el siguiente lección vamos ya a adentrarnos en el estudio de las variables.
 En la primera parte de esta lección hemos estado hablando de los tipos de datos del lenguaje Java nos hemos centrado en los tipos primitivos.
 
 <img src="images/05-04.png">
-<img src="images/05-05.png">
-<img src="images/05-06.png">
-<img src="images/05-07.png">
 
 Ahora vamos a analizar las variables, las variables es el elemento de programación que utilizamos para almacenar los datos dentro de un programa.
 
 ¿Qué es exactamente una variable?.
 
-No es ni más ni menos que un espacio de memoria, una caja la podríamos imaginar, donde se almacena un dato de un determinado tipo, a las variables se les asigna un nombre o identificador, a la hora de definir identificadores para las variables podríamos utilizar en principio cualquier combinación de caracteres y símbolos. Sin embargo hay que tener en cuenta una serie de reglas, en primer lugar no podríamos utilizar como identificador una palabra reservada de Java `class`, `for`, son palabras reservadas y no podemos utilizarlos como identificadores. Además los identificadores pueden contener como hemos dicho cualquier letra, números y los caracteres de subrayado `_` y y de dólar `$`, por ejemplo puntos, guiones, coma,s no podríamos utilizar como parte del nombre del identificador aunque puede contener letras, números y estos dos caracteres `_` y `$`.
+No es ni más ni menos que un espacio de memoria, una caja la podríamos imaginar, donde se almacena un dato de un determinado tipo, a las variables se les asigna un nombre o identificador, a la hora de definir identificadores para las variables podríamos utilizar en principio cualquier combinación de caracteres y símbolos. Sin embargo hay que tener en cuenta una serie de reglas, en primer lugar no podríamos utilizar como identificador una palabra reservada de Java `class`, `for`, son palabras reservadas y no podemos utilizarlos como identificadores. Además los identificadores pueden contener como hemos dicho cualquier letra, números y los caracteres de subrayado `_` y y de dólar `$`, por ejemplo puntos, guiones, comas no podríamos utilizar como parte del nombre del identificador, aunque puede contener letras, números y estos dos caracteres `_` y `$`.
 
-Todo identificador debe comenzar o bien por una letra o por uno de estos dos caracteres dólar y subrayado nunca por un número bien aunque sí lo pueden contener el resto de la parte del identificador las variables hay que declararlas antes de ser utilizadas en la declaración es cuando le vamos a indicar ese identificador que queremos asignar a la variable y de qué tipo es.
+Todo identificador debe comenzar o bien por una letra o por uno de estos dos caracteres `_` y `$`, nunca por un número, aunque sí lo pueden contener en el resto de la parte del identificador.
 
-Esta sería la sintaxis Java para declarar una variable el tipo de dato que va a almacenar identificador asignado.
+<img src="images/05-05.png">
 
-Por supuesto terminado en puntico aquí tienes un ejemplo de cómo se declararía la variable de la transparencia anterior también podemos declarar la variable y en la misma línea la misma instrucción asignarle un valor.
+Las variables hay que declararlas antes de ser utilizadas, en la declaración es cuando le vamos a indicar ese identificador que queremos asignar a la variable y de qué tipo es. Esta sería la sintaxis Java para declarar una variable el tipo de dato que va a almacenar,  identificador asignado, por supuesto terminado en punto y coma, aquí tienes un ejemplo `int num;` de cómo se declararía la variable de la transparencia anterior.
 
-Se pueden declarar varias variables en la misma línea separándolas por comas algunas se les puede dar un valor inicial y otras como en este caso oiré no una vez que ya se declaró una variable se le puede usar asignándole un valor o incluso utilizándolo dentro de un programa para hacer operaciones con ella.
+También podemos declarar la variable y en la misma línea la misma instrucción asignarle un valor `int num=100;`.
 
-En este caso cogemos la variable la multiplicamos por un número y el resultado se asigna a. 
+Se pueden declarar varias variables en la misma línea separándolas por comas `int a, b, c=2;`, algunas se les puede dar un valor inicial y otras como en este caso a y b no.
 
-En este caso otra vez a la misma variable.
+Una vez que ya se declaró una variable se le puede usar asignándole un valor o incluso utilizándolo dentro de un programa para hacer operaciones con ella, en este caso `num=num*2;` cogemos la variable, la multiplicamos por un número y el resultado se asigna a, en este caso otra vez a la misma variable.
 
-Como ves siempre las instrucciones en Java la asignación de datos es de derecha a izquierda bien ámbitode una variable qué es eso del ámbito de una variable o solamente una variable que básicamente se refiere a donde podemos declarar una variable y además utilizarla realmente en Java hay dos ámbitos posibles o dos lugares posibles en donde se puede declarar una variable al principio de la clase.
+Como ves siempre las instrucciones en Java, la asignación de datos es de derecha a izquierda.
 
-Es decir fuera de cualquiera de los métodos de la clase a esas variables.
+<img src="images/05-06.png">
 
-Como en este caso data la llamamos variables atributos y podrían ser utilizadas por cualquier método que estuviera definido dentro de esa clase a su vez.
+Bien *ámbito de una variable*, qué es eso del ámbito de una variable, el ámbito de una variable una variable básicamente se refiere a donde podemos declarar una variable y además utilizarla, realmente en Java hay dos ámbitos posibles o dos lugares posibles en donde se puede declarar una variable *al principio de la clase*, es decir fuera de cualquiera de los métodos de la clase, a esas variables como `data` las llamamos *variables atributos* y podrían ser utilizadas por cualquier método que estuviera definido dentro de esa clase, a su vez cada método puede tener sus propias variables, como en el caso de `p`, el `metodo1` tiene declarada la variable `p`, en este caso estamos hablando de variables locales utilizadas únicamente dentro de esos métodos. En el caso del `metodo2` podría evidentemente acceder a la variable `data` porque es una variable atributo y es compartida podríamos acceder a ella tanto aquí como aquí pero no podríamos acceder a la variable tanto en el `metodo1` como en el `metodo2` pero en el `metodo2` no podemos acceder a `p` por que es local al `metodo1`.  
 
-Cada método puede tener sus propias variables como en este caso el método 1 tiene declaró la variable P En este caso estamos hablando de variables locales utilizadas únicamente dentro de esos métodos como es este ejemplo del método 2 podría evidentemente acceder a la variable data porque es una variable atributo y es compartida podríamos acceder a ella tanto aquí como aquí pero no podríamos acceder a la variable pe puesto que es local al método 1 otra cosa que tenemos que conocer sobre las variables es qué valores se les asignan a las variables por defecto cuando se declaran bien.
+<img src="images/05-07.png">
 
-Hay que distinguir si estamos hablando de variables atributos o variables locales porque las variables atributos si se inicialización implícitamente cuando se declaran las variables que sean de tipo entero se van inicializar automáticamente a cero las decimales 0.0 las cáracter a lo que llamaríamos el carácter nulo que es esta combinación hexadecimal se puede representar así les va rabu y cuatro ceros.
+Otra cosa que tenemos que conocer sobre las variables es qué valores se les asignan a las variables por defecto cuando se declaran. Hay que distinguir si estamos hablando de variables atributos o variables locales, porque las variables atributos si se inicializan implícitamente cuando se declaran, las variables que sean de tipo entero se van inicializar automáticamente a 0, las decimales a 0.0, las cáracter a lo que llamaríamos el carácter nulo `\u0000` que es esta combinación hexadecimal se puede representar así. Las variables de tipo lógico Boolean se inicializan automáticamente a `false`.
 
-Las variables de tipológico Gülen se inicializar automáticamente a false pero qué pasa con las variables locales cuando tú declara es una variable local y no le asigna un valor esa variable no tiene ningún valor.
-
-Aquí tienes una variable atributo que automáticamente adquiere el valor 0 o como acabamos de decir en la narración anterior pero si declara una variable local y no le asigna un valor esa variable no tiene valor por lo tanto intentar hacer una operación con ella sin haberla asignado previamente de manera explícita un valor daría un error de compilación como tienes.
+Pero qué pasa con las variables locales, cuando tú declara una variable local y no le asigna un valor a esa variable no tiene ningún valor. En el ejemplo de la diapositiva tienes una variable atributo `data` 
+que automáticamente adquiere el valor 0 o como acabamos de decir, pero si declara una variable local y no le asigna un valor, esa variable no tiene valor, por lo tanto, intentar hacer una operación con ella sin haberla asignado previamente de manera explícita un valor, daría un error de compilación.
 
 ### Material adicional
 
@@ -78,73 +74,46 @@ Aquí tienes una variable atributo que automáticamente adquiere el valor 0 o co
 
 # 06 Operadores 04:11
 
-Recursos de esta clase Leccion6_Operadores.pdf
+## Operadores Utilizados en Java
 
-Operadores
-Operadores Utilizados en Java
 Los operadores son símbolos que se emplean en un programa para operar con los datos del mismo. Por ejemplo:  
 
+```java
 int a=5; //asignación a una variable  
 
 int b=10; //asignación a una variable  
 
 int c=a+b;  //suma de dos variables y asignación a otra  
-
+```
  
-
 En Java existen muchos operadores, que podemos clasificar en los siguientes grupos en función del tipo de operación que realizan  
 
-Aritméticos  
+* Aritméticos  
+* Asignación  
+* Condicionales  
+* Lógicos  
+* Otros  
 
-Asignación  
+## Operadores Aritméticos
 
-Condicionales  
-
-Lógicos  
-
-Otros  
-
-Operadores aritméticos
 Se emplean con tipos numéricos para realizar operaciones aritméticas en un programa. La siguiente tabla te muestra cuales son estos operadores y la operación que realizan.  
 
    
 
-Operador        
-
-Descripción      
-
-+        
-
-Suma dos valores numéricos.        
-
--        
-
-Resta dos valores numéricos.      
-
-*        
-
-Multiplica dos números.      
-
-/        
-
-Divide dos números. El tipo de resultado   depende de los operandos, pues en el caso de que ambos sean enteros, el resultado   de la división siempre será entero.      
-
-%        
-
-Calcula el resto de la división entre   dos números.      
-
-++        
-
-Incrementa una variable numérica en una   unidad y deposita el resultado en la variable.      
-
---        
-
-Decrementa una variable en una unidad y   deposita el resultado en la variable.      
+Operador | Descripción      
+---------|------------
++        | Suma dos valores numéricos.        
+-        | Resta dos valores numéricos.      
+*        | Multiplica dos números.      
+/        | Divide dos números. El tipo de resultado   depende de los operandos, pues en el caso de que ambos sean enteros, el resultado de la división siempre será entero.      
+%        | Calcula el resto de la división entre   dos números.      
+++       | Incrementa una variable numérica en una unidad y deposita el resultado en la variable.      
+--       | Decrementa una variable en una unidad y   deposita el resultado en la variable.      
 
    
-
 A continuación te presento algunos ejemplos:  
 
+```java
 int a=3, b=8;  
 
 int c=b/a; //el resultado es 2, la división entre enteros es siempre entero  
@@ -154,64 +123,44 @@ int n=a%2; //resto de dividir a entre 2
 a++; //equivale a a=a+1  
 
 n--; //equivale a n=n-1;  
-
+```java
  
 
-Respecto a los operadores ++ y --, hay que tener en cuenta que y pueden ir delante o detrás de la variable. Aunque depende de donde se pongan, pueden afectar de forma diferente:   
+Respecto a los operadores `++` y `--`, hay que tener en cuenta que y pueden ir delante o detrás de la variable. Aunque depende de donde se pongan, pueden afectar de forma diferente:   
 
+```java
 int a=3, b;  
 
 b=a++; //b toma el valor 3  
 
 
-
 int a=3, b;  
 
 b=++a; //b toma el valor 4  
-
+```
  
+Fíjate en el primer caso, cuando el operador se coloca después de la variable, **la operación de asignación se realiza antes** del incremento.  
 
-Fíjate en el primer caso, cuando el operador se coloca después de la variable, la operación de asignación se realiza antes del incremento.  
+## Operadores de asignación
 
-Operadores de asignación
 Asignan el resultado de la expresión que aparece a la derecha del operador a la variable que se indica a la izquierda del mismo:  
 
 variable = expresión  
 
 La siguiente tabla resume los operadores de asignación existentes en Java:  
 
-Operador        
-
-Descripción      
-
-=        
-
-Asigna la expresión de la derecha, a la   variable situada a la izquierda del operador.      
-
-+=        
-
-Suma la expresión de la derecha, a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
-
--=        
-
-Resta la expresión de la derecha a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
-
-*=        
-
-Multiplica la expresión de la derecha   con la variable y deposita el resultado en la variable.      
-
-/=        
-
-Divide la variable situada a la   izquierda entre la expresión de la derecha, depositando el resultado en la   variable.      
-
-%=        
-
-Calcula el resto de la división entre la   variable situada a la izquierda y la expresión de la derecha, depositando el   resultado en la variable.      
-
-   
+Operador | Descripción 
+---------|------------
+=        | Asigna la expresión de la derecha, a la   variable situada a la izquierda del operador.     
++=       | Suma la expresión de la derecha, a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
+-=       | Resta la expresión de la derecha a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
+*=       | Multiplica la expresión de la derecha   con la variable y deposita el resultado en la variable.      
+/=       | Divide la variable situada a la   izquierda entre la expresión de la derecha, depositando el resultado en la   variable.      
+%=       | Calcula el resto de la división entre la   variable situada a la izquierda y la expresión de la derecha, depositando el   resultado en la variable.      
 
 Ejemplos:  
 
+```java
 int a=3, b=2;  
 
 a+=10;  //equivale a a=a+10;  
@@ -219,46 +168,26 @@ a+=10;  //equivale a a=a+10;
 b*=2; //equivale a b=b*2;  
 
 b%3; //equivale a b=b%3;  
-
+```
  
+## Operadores condicionales
 
-Operadores condicionales
 Evalúan dos operandos y dan como resultado un valor boolean (true o false). Habitualmente se emplean en instrucciones de control de flujo.  
 
-En la siguiente tabla te muestro los operadores condicionales empleados en Java. Fíjate en el primero de ellos (==), utilizado para comprobar la igualdad de dos datos, se utiliza un doble igual en lugar del simple:  
+En la siguiente tabla te muestro los operadores condicionales empleados en Java. Fíjate en el primero de ellos (`==`), utilizado para comprobar la igualdad de dos datos, se utiliza un doble igual en lugar del simple:  
 
-Operador        
-
-Descripción      
-
-==        
-
-Compara dos valores, en caso que sean   iguales el resultado de la operación será true      
-
-<        
-
-Si el operando de la izquierda es menor   que el de la derecha el resultado es true      
-
->        
-
-Si el operando de la izquierda es mayor   que el de la derecha el resultado es true      
-
-<=        
-
-Si el operando de la izquierda es menor   o igual que el de la derecha el resultado es true      
-
->=        
-
-Si el operando de la izquierda es mayor   o igual que el de la derecha el resultado es true      
-
-!=        
-
-Si el valor de los operandos es   diferente el resultado es true.      
-
-   
+Operador | Descripción      
+---------|------------
+==       | Compara dos valores, en caso que sean   iguales el resultado de la operación será true      
+<        | Si el operando de la izquierda es menor   que el de la derecha el resultado es true      
+>        | Si el operando de la izquierda es mayor   que el de la derecha el resultado es true      
+<=       | Si el operando de la izquierda es menor   o igual que el de la derecha el resultado es true 
+>=       | Si el operando de la izquierda es mayor   o igual que el de la derecha el resultado es true 
+!=       | Si el valor de los operandos es   diferente el resultado es true.      
 
 Ejemplos:  
 
+```java
 int a=3;  
 
 int c=5;  
@@ -268,32 +197,21 @@ if(a>c) //comprueba si a es mayor que c
 if(a==3) //comprueba si a es igual a 3  
 
 if(c!=0) //comprueba si c es diferente a 0  
-
+```
  
+### Operadores lógicos
 
-Operadores lógicos
 Evalúan expresiones de tipo boolean, dando como resultado también un boolean. Son tres los operadores lógicos de Java:  
 
-Operador        
-
-Descripción      
-
-&&        
-
-Operador AND. El resultado es verdadero   únicamente si ambos operando son verdaderos      
-
-||        
-
-Operador OR. El resultado es verdadero   si alguno de los operandos es verdadero      
-
-!        
-
-Operador NOT. Se aplica sobre un único   operando, su resultado es el contrario al valor del operando      
-
-   
+Operador | Descripción      
+---------|------------
+&&       | Operador AND. El resultado es verdadero   únicamente si ambos operando son verdaderos      
+||       | Operador OR. El resultado es verdadero   si alguno de los operandos es verdadero      
+!        | Operador NOT. Se aplica sobre un único   operando, su resultado es el contrario al valor del operando      
 
 A continuación te mostramos algunos ejemplos:  
 
+```java
 int a=3;  
 
 int c=9;  
@@ -303,66 +221,69 @@ int n=0;
 if(a>n && a<c) //verdadero  
 
 if(a==2 || c>10) //falso   if(!(n==0)) //falso
-
+```
  
+### Otros operadores
 
-Otros operadores
 Además de los que te he presentado, Java dispone de otros operadores que no entran en una categoría específica. Entre los más importantes están:  
 
-* new. Se utiliza para crear objetos a partir de una clase. Lo veremos en la sección de arrays  
+* **new**. Se utiliza para crear objetos a partir de una clase. Lo veremos en la sección de arrays  
 
-* instanceof. Se emplea para comprobar si un objeto es de un determinado tipo. De momento, no veremos su uso  
+* **instanceof**. Se emplea para comprobar si un objeto es de un determinado tipo. De momento, no veremos su uso  
 
-* Operador ternario (?:). Se utiliza para realizar una operación u otra, en función de una condición:  
+* **Operador ternario (?:)**. Se utiliza para realizar una operación u otra, en función de una condición:  
 
-variable = (condicion)?expresion1:expresion2;  
+`variable = (condicion)?expresion1:expresion2;`  
 
 Si la condición es verdadera, se ejecutará la expresión1 y el resultado se almacenará en la variable, pero si la condición es falsa se ejecutará expresión2 y será este resultado el que se guarde en la variable  
 
 En el siguiente ejemplo se guarda en la variable div el resultado de dividir el mayor entre el menor de dos números:  
 
+```java
 int a=3;  
 
 int b=9;  
 
 int div;    div=(a>b)?a/b:b/a;
-
+```
  
+### Precedencia de operadores
 
-Precedencia de operadores
 En Java, salvo las que implican asignación, las operaciones se ejecutan de izquierda a derecha. Sin embargo, hay operaciones que tienen preferencia sobre otras. Por ejemplo, dada la siguiente instrucción:  
 
-int a=3+4*5;  
+```java
+int a=3+4*5;
+```
 
-¿Cuál sería el valor de la variable a?. La respuesta es 23, pues aunque primero aparece la suma y después la multiplicación, como esta tiene preferencia sobre la primera, se ejecuta antes la operación 4*5 y después, el resultado se suma a 3.  
+¿Cuál sería el valor de la variable a?. La respuesta es 23, pues aunque primero aparece la suma y después la multiplicación, como esta tiene preferencia sobre la primera, se ejecuta antes la operación `4*5` y después, el resultado se suma a 3.  
 
 Si quisiéramos realizar primero la suma, podemos recurrir al uso de paréntesis o corchetes:  
 
-int a=(3+4)*5; //el resultado es 35  
+`int a=(3+4)*5; //el resultado es 35`  
 
 La siguiente tabla nos muestra la preferencia de los operadores Java en orden decreciente, de modo que los operadores de la parte superior tienen más preferencia que los de la parte inferior:  
 
-Operador      
+### Operador      
 
-() []      
+`() []`
 
-++ --      
+`++ --`      
 
-* / %      
+`* / %`      
 
-+ -      
+`+ -`      
 
-> >= < <=      
+`> >= < <=`      
 
-== !=      
+`== !=`      
 
-&&      
+`&&`      
 
-||      
+`||`      
 
-?:      
+`?:`      
 
-= += -= *= /= %=      
+`= += -= *= /= %=`      
 
 ### Material adicional
 
