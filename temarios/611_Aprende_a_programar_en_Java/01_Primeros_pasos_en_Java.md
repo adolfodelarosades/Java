@@ -213,7 +213,24 @@ La máquina virtual Java va a buscar el método y lo va a ejecutar y mira ese es
 
 Ya has hecho tu primer ejercicio tu primer programa y nos va a servir para ir cogiendo confianza y aprendiendo todo lo que nos espera que es la verdad muchísimo.
 
+*`Saludo.java`*
+
+```java
+public class Saludo {
+
+   public static void main(String[] args) {
+      System.out.println("Bienvenido a Java!!!")
+   }
+
+}
+```
+
 # 04 Reglas sintácticas y estructura de un programa Java 06:47  
+
+<img src="images/04-01.png">
+<img src="images/04-02.png">
+<img src="images/04-03.png">
+<img src="images/04-04.png">
 
 En esta elección veremos algunas reglas sintácticas básicas y cómo la estructura de un programa Java en primer lugar hablemos de las reglas sintácticas básicas.
 
