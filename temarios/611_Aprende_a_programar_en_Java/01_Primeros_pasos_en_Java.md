@@ -70,10 +70,22 @@ Tenemos clases para crear cualquier tipo de aplicación es decir con Java se van
 
 Bueno pues después de haber introducido la lección 1 a la tecnología Java imagino que estarás deseando ya ver como hacen tus primeros programas con este lenguaje.
 
-Bien con lo que vamos a ver en estas elecciones qué software necesitamos instalar en nuestros equipos para poder crear programas Java y probarlos.
+Bien con lo que vamos a ver en esta leccion es qué software necesitamos instalar en nuestros equipos para poder crear programas Java y probarlos.
 
 <img src="images/02-02.png">
+
+Son fundamentalmente dos tipos de programas los que vamos a necesitar para poder programar en Java con nuestro ordenador. Por un lado tenemos lo que se conoce como el JDK Java Development Kit que es el conjunto de herramientas básicas para poder crear un programa Java compilarlo, testearlo, esas herramientas las proporciona el Oracle, no te lo dije en la lección anterior pero Microsystems es la empresa que inventó Java, desarrollo Java pero fue comprada posteriormente por Oracle y actualmente Oracle el que gestiona todo Java.
+
+Todas las ediciones las versiones etc. Entonces desde la página web de Oracle ahora vamos a ver cuál vamos a poder descargar ese JDK con las herramientas básicas que las podríamos utilizar nosotros desde línea de comandos para poder compilar nuestros programas ejecutarlos.
+
+Pero eso es una cosa un poquito rudimentaria y lo normal lo habitual es que los programadores utilicen un segundo programa conocido como entorno de desarrollo el IDE que de una forma más sencilla a través de menús botones en barra de herramientas etcétera te permite hacer todas esas operaciones por debajo los entornos de desarrollo utilizarán el JDK como te decía el Java Development Kit nos incluye todo lo necesario para programar en Java que incluye realmente el JDK.
+
 <img src="images/02-03.png">
+
+Por supuesto la Máquina Virtual Java, la librerías de clases o de tipos de objetos de lo que se conoce como Java estándar que lo vimos en la lección anterior y es una herramienta básica que se utilizan en línea de comandos para compilar y ejecutar los programas.
+
+Desde donde vamos a descargar el JDK desde esta dirección.
+
 <img src="images/02-04.png">
 <img src="images/02-05.png">
 <img src="images/02-06.png">
@@ -83,14 +95,6 @@ Bien con lo que vamos a ver en estas elecciones qué software necesitamos instal
 <img src="images/02-10.png">
 <img src="images/02-11.png">
 <img src="images/02-12.png">
-
-Son fundamentalmente dos tipos de programas los que vamos a necesitar para poder programar en Java con nuestro ordenador. Por un lado tenemos lo que se conoce como el JDK Java Development Kit que es el conjunto de herramientas básicas para poder crear un programa Java compilarlo, testearlo, esas herramientas las proporciona el Oracle, no te lo dije en la lección anterior pero Microsystems es la empresa que inventó Java, desarrollo Java pero fue comprada posteriormente por Oracle y actualmente Oracle el que gestiona todo Java.
-
-Todas las ediciones las versiones etc. Entonces desde la página web de Oracle ahora vamos a ver cuál vamos a poder descargar ese JDK con las herramientas básicas que las podríamos utilizar nosotros desde línea de comandos para poder compilar nuestros programas ejecutarlos.
-
-Pero eso es una cosa un poquito rudimentaria y lo normal lo habitual es que los programadores utilicen un segundo programa conocido como entorno de desarrollo el IDE que de una forma más sencilla a través de menús botones en barra de herramientas etcétera te permite hacer todas esas operaciones por debajo los entornos de desarrollo utilizarán el JDK como te decía el Java Development Kit nos incluye todo lo necesario para programar en Java que incluye realmente el JDK.
-
-Por supuesto la máquina virtual Java la librerías de clases o de tipos de objetos de lo que se conoce como Java estándar que lo vimos en la lección anterior y es una herramienta básica que se utilizan en línea de comandos para compilar y ejecutar los programas desde donde vamos a descargar el JDK desde esta dirección.
 
 Como veis Oracle vamos a ver momentito que vamos a verla aquí en el navegador.
 
