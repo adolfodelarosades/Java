@@ -50,7 +50,7 @@ Si siempre has querido aprender a programar en Java, pero nunca has sabido por d
    * 16 Ejercicio práctico VI 04:05
    * 17 Salida forzada de un bucle 03:37
 
-4. Arrays 32:20
+4. [Arrays](/temarios/611_Aprende_a_programar_en_Java) 32:20
    * 18 Concepto de array, declaración y creación 07:45
    * 19 Recorrido de un array 05:34
    * 20 Ejercicio práctico VII 09:12
@@ -62,17 +62,17 @@ Si siempre has querido aprender a programar en Java, pero nunca has sabido por d
    * 24 Creación de clases propias 05:17
    * 25 Ejemplo práctico IX 16:02
 
-6. Cadenas de caracteres 30:23
+6. [Cadenas de caracteres](/temarios/611_Aprende_a_programar_en_Java/06_Cadenas_de_caracteres.md) 30:23
    * 26 La clase String 04:04
    * 27 Principales métodos de la clase String 09:22
    * 28 Ejercicio práctico X 08:05
    * 29 Ejercicio práctico XI 08:52
 
-7. JavaBeans 18:30
+7. [JavaBeans](/temarios/611_Aprende_a_programar_en_Java/07_JavaBeans.md) 18:30
    * 30 JavaBeans 05:10
    * 31 Ejercicio práctio XII 13:20
 
-8. Apéndices 09:34
+8. [Apéndices](/temarios/611_Aprende_a_programar_en_Java/08_Apendices.md) 09:34
    * 32 Apéndice A. Ejercicios propuestos 01:18
    * 33 Apéndice B. Soluciones ejercicios resueltos y propuestos 04:10
    * 34 Apéndice C. Novedades en versiones Java 9, 10 y 11 04:06
