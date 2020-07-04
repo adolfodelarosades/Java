@@ -1,172 +1,72 @@
-# 2. Sistaxis básica de Java 16:10
+# 2. Sistaxis básica de Java 16:10
    * 05 Tipos de datos y variables I 02:34
-   * 06 Tipos de datos y variables II 04:46
-   * 07 Operadores 04:11
+   * 05 Tipos de datos y variables II 04:46
+   * 06 Operadores 04:11
    * Ejercicio práctico I 04:39
    
 # 05 Tipos de datos y variables I 02:34
 
-A partir de esta lección vamos a adentrarnos en el conocimiento de la sintaxis del lenguaje Java y empezamos
-
-por los elementos principales de cualquier lenguaje de programación como son sus tipos de datos y las
-
-variables donde se almacena.
+A partir de esta lección vamos a adentrarnos en el conocimiento de la sintaxis del lenguaje Java y empezamos por los elementos principales de cualquier lenguaje de programación como son sus tipos de datos y las variables donde se almacena.
 
 En Java distinguimos dos grandes grupos de tipos de datos.
 
-Por un lado tenemos los tipos primitivos que harían referencia a los datos básicos de cualquier programa
+Por un lado tenemos los tipos primitivos que harían referencia a los datos básicos de cualquier programa como números datos del tipo lógico y caracteres.
 
-como números datos del tipo lógico y caracteres.
+Aquí ves cuatro ejemplos que hacen referencia a los tipos primitivos que utilizamos en Java que serían los números enteros números decimales datos lógicos palabras reservadas TRUE FALSE o los caracteres que se representarían entre comillas simple Por otro lado tenemos los tipos objetos en Java hay miles de objetos que podríamos manejar a partir de los que podríamos crear nosotros por los proporcionados por las ediciones Java estándar Edition.
 
-Aquí ves cuatro ejemplos que hacen referencia a los tipos primitivos que utilizamos en Java que serían
+Como te hemos comentado elecciones anteriores y también son datos manejados en un programa vamos a dejar de momento los tipos objetos de lado y centrémonos en los tipos primitivos.
 
-los números enteros números decimales datos lógicos palabras reservadas TRUE FALSE o los caracteres
+En la siguiente tabla tienes una lista con todos los nuevos serían los ocho tipos primitivos que podemos utilizar en el lenguaje Java antes decíamos que eran cuatro tipos porque realmente los tipos enteros tenemos cuatro subtipos en Java que sería el bait El XOR el in y el Long dependiendo de a qué rango queremos llegar de número.
 
-que se representarían entre comillas simple Por otro lado tenemos los tipos objetos en Java hay miles
-
-de objetos que podríamos manejar a partir de los que podríamos crear nosotros por los proporcionados
-
-por las ediciones Java estándar Edition.
-
-Como te hemos comentado elecciones anteriores y también son datos manejados en un programa vamos a dejar
-
-de momento los tipos objetos de lado y centrémonos en los tipos primitivos.
-
-En la siguiente tabla tienes una lista con todos los nuevos serían los ocho tipos primitivos que podemos
-
-utilizar en el lenguaje Java antes decíamos que eran cuatro tipos porque realmente los tipos enteros
-
-tenemos cuatro subtipos en Java que sería el bait El XOR el in y el Long dependiendo de a qué rango
-
-queremos llegar de número.
-
-Por ejemplo que Convit solamente tenemos 8 bits con lo cual llegaríamos con nada más que alcanzar números
-
-entre menos 128 y 128 según vamos aumentando en bits podemos abarcar un rango mayor.
+Por ejemplo que Convit solamente tenemos 8 bits con lo cual llegaríamos con nada más que alcanzar números entre menos 128 y 128 según vamos aumentando en bits podemos abarcar un rango mayor.
 
 Por eso tenemos hasta cuatro tipos para los tipos más pequeñitos y más grandes que serán con el.
 
-Por otro lado tenemos los tipos bullían que solamente hace referencia a las palabras reservadas True
+Por otro lado tenemos los tipos bullían que solamente hace referencia a las palabras reservadas True False Verdadero false vale los decimales que también tenemos dos subtipos el float para decimales de pequeño rango podríamos decir y el doble para abarcar los decimales de un rango muy alto hasta 64 bits 64 bits sería el tamaño que ocuparía en memoria un dato de tipo doble.
 
-False Verdadero false vale los decimales que también tenemos dos subtipos el float para decimales de
-
-pequeño rango podríamos decir y el doble para abarcar los decimales de un rango muy alto hasta 64 bits
-
-64 bits sería el tamaño que ocuparía en memoria un dato de tipo doble.
-
-Y por último tenemos los Char tipo Char hace referencia a cualquier caracter que internamente se representa
-
-con su código Unicode de 16 bits su combinación Unicode en el siguiente vídeo vamos ya a adentrarnos
-
-en el estudio de las variables.
+Y por último tenemos los Char tipo Char hace referencia a cualquier caracter que internamente se representa con su código Unicode de 16 bits su combinación Unicode en el siguiente vídeo vamos ya a adentrarnos en el estudio de las variables.
 
 # 05 Tipos de datos y variables II 04:46
 
-En la primera parte de esta lección hemos estado hablando de los tipos de datos del lenguaje Java nos
+En la primera parte de esta lección hemos estado hablando de los tipos de datos del lenguaje Java nos hemos centrado en los tipos primitivos.
 
-hemos centrado en los tipos primitivos.
-
-Ahora vamos a analizar las variables las variables es el elemento de programación que utilizamos para
-
-almacenar los datos dentro de un programa.
+Ahora vamos a analizar las variables las variables es el elemento de programación que utilizamos para almacenar los datos dentro de un programa.
 
 Qué es exactamente una variable.
 
-No es ni más ni menos que un espacio de memoria una caja la podríamos imaginar donde se almacena un
-
-dato de un determinado tipo a las variables se les asigna un nombre o identificador a la hora de definir
-
-identificadores para las variables.
+No es ni más ni menos que un espacio de memoria una caja la podríamos imaginar donde se almacena un dato de un determinado tipo a las variables se les asigna un nombre o identificador a la hora de definir identificadores para las variables.
 
 Podríamos utilizar en principio cualquier combinación de caracteres y símbolos.
 
-Sin embargo hay que tener en cuenta una serie de reglas en primer lugar no podríamos utilizar como identificador
+Sin embargo hay que tener en cuenta una serie de reglas en primer lugar no podríamos utilizar como identificador una palabra reservada de Java class for son palabras reservadas y no podemos utilizarlos como identificadores además los identificadores pueden contener.
 
-una palabra reservada de Java class for son palabras reservadas y no podemos utilizarlos como identificadores
+Como hemos dicho cualquier letra números y los caracteres de Subrayado y dólar por ejemplo puntos guiones comas no podríamos utilizar como parte del nombre del identificador aunque puede contener letras números y estos dos caracteres.
 
-además los identificadores pueden contener.
+Todo identificador debe comenzar o bien por una letra o por uno de estos dos caracteres dólar y subrayado nunca por un número bien aunque sí lo pueden contener el resto de la parte del identificador las variables hay que declararlas antes de ser utilizadas en la declaración es cuando le vamos a indicar ese identificador que queremos asignar a la variable y de qué tipo es.
 
-Como hemos dicho cualquier letra números y los caracteres de Subrayado y dólar por ejemplo puntos guiones
+Esta sería la sintaxis Java para declarar una variable el tipo de dato que va a almacenar identificador asignado.
 
-comas no podríamos utilizar como parte del nombre del identificador aunque puede contener letras números
+Por supuesto terminado en puntico aquí tienes un ejemplo de cómo se declararía la variable de la transparencia anterior también podemos declarar la variable y en la misma línea la misma instrucción asignarle un valor.
 
-y estos dos caracteres.
+Se pueden declarar varias variables en la misma línea separándolas por comas algunas se les puede dar un valor inicial y otras como en este caso oiré no una vez que ya se declaró una variable se le puede usar asignándole un valor o incluso utilizándolo dentro de un programa para hacer operaciones con ella.
 
-Todo identificador debe comenzar o bien por una letra o por uno de estos dos caracteres dólar y subrayado
-
-nunca por un número bien aunque sí lo pueden contener el resto de la parte del identificador las variables
-
-hay que declararlas antes de ser utilizadas en la declaración es cuando le vamos a indicar ese identificador
-
-que queremos asignar a la variable y de qué tipo es.
-
-Esta sería la sintaxis Java para declarar una variable el tipo de dato que va a almacenar identificador
-
-asignado.
-
-Por supuesto terminado en puntico aquí tienes un ejemplo de cómo se declararía la variable de la transparencia
-
-anterior también podemos declarar la variable y en la misma línea la misma instrucción asignarle un
-
-valor.
-
-Se pueden declarar varias variables en la misma línea separándolas por comas algunas se les puede dar
-
-un valor inicial y otras como en este caso oiré no una vez que ya se declaró una variable se le puede
-
-usar asignándole un valor o incluso utilizándolo dentro de un programa para hacer operaciones con ella.
-
-En este caso cogemos la variable la multiplicamos por un número y el resultado se asigna a.
+En este caso cogemos la variable la multiplicamos por un número y el resultado se asigna a. 
 
 En este caso otra vez a la misma variable.
 
-Como ves siempre las instrucciones en Java la asignación de datos es de derecha a izquierda bien ámbitode
-
-una variable qué es eso del ámbito de una variable o solamente una variable que básicamente se refiere
-
-a donde podemos declarar una variable y además utilizarla realmente en Java hay dos ámbitos posibles
-
-o dos lugares posibles en donde se puede declarar una variable al principio de la clase.
+Como ves siempre las instrucciones en Java la asignación de datos es de derecha a izquierda bien ámbitode una variable qué es eso del ámbito de una variable o solamente una variable que básicamente se refiere a donde podemos declarar una variable y además utilizarla realmente en Java hay dos ámbitos posibles o dos lugares posibles en donde se puede declarar una variable al principio de la clase.
 
 Es decir fuera de cualquiera de los métodos de la clase a esas variables.
 
-Como en este caso data la llamamos variables atributos y podrían ser utilizadas por cualquier método
+Como en este caso data la llamamos variables atributos y podrían ser utilizadas por cualquier método que estuviera definido dentro de esa clase a su vez.
 
-que estuviera definido dentro de esa clase a su vez.
+Cada método puede tener sus propias variables como en este caso el método 1 tiene declaró la variable P En este caso estamos hablando de variables locales utilizadas únicamente dentro de esos métodos como es este ejemplo del método 2 podría evidentemente acceder a la variable data porque es una variable atributo y es compartida podríamos acceder a ella tanto aquí como aquí pero no podríamos acceder a la variable pe puesto que es local al método 1 otra cosa que tenemos que conocer sobre las variables es qué valores se les asignan a las variables por defecto cuando se declaran bien.
 
-Cada método puede tener sus propias variables como en este caso el método 1 tiene declaró la variable
+Hay que distinguir si estamos hablando de variables atributos o variables locales porque las variables atributos si se inicialización implícitamente cuando se declaran las variables que sean de tipo entero se van inicializar automáticamente a cero las decimales 0.0 las cáracter a lo que llamaríamos el carácter nulo que es esta combinación hexadecimal se puede representar así les va rabu y cuatro ceros.
 
-P En este caso estamos hablando de variables locales utilizadas únicamente dentro de esos métodos como
+Las variables de tipológico Gülen se inicializar automáticamente a false pero qué pasa con las variables locales cuando tú declara es una variable local y no le asigna un valor esa variable no tiene ningún valor.
 
-es este ejemplo del método 2 podría evidentemente acceder a la variable data porque es una variable
-
-atributo y es compartida podríamos acceder a ella tanto aquí como aquí pero no podríamos acceder a la
-
-variable pe puesto que es local al método 1 otra cosa que tenemos que conocer sobre las variables es
-
-qué valores se les asignan a las variables por defecto cuando se declaran bien.
-
-Hay que distinguir si estamos hablando de variables atributos o variables locales porque las variables
-
-atributos si se inicialización implícitamente cuando se declaran las variables que sean de tipo entero
-
-se van inicializar automáticamente a cero las decimales 0.0 las cáracter a lo que llamaríamos el carácter
-
-nulo que es esta combinación hexadecimal se puede representar así les va rabu y cuatro ceros.
-
-Las variables de tipológico Gülen se inicializar automáticamente a false pero qué pasa con las variables
-
-locales cuando tú declara es una variable local y no le asigna un valor esa variable no tiene ningún
-
-valor.
-
-Aquí tienes una variable atributo que automáticamente adquiere el valor 0 o como acabamos de decir en
-
-la narración anterior pero si declara una variable local y no le asigna un valor esa variable no tiene
-
-valor por lo tanto intentar hacer una operación con ella sin haberla asignado previamente de manera
-
-explícita un valor daría un error de compilación como tienes.
+Aquí tienes una variable atributo que automáticamente adquiere el valor 0 o como acabamos de decir en la narración anterior pero si declara una variable local y no le asigna un valor esa variable no tiene valor por lo tanto intentar hacer una operación con ella sin haberla asignado previamente de manera explícita un valor daría un error de compilación como tienes.
 
 # 06 Operadores 04:11
 
@@ -459,91 +359,39 @@ Operador
 
 # Ejercicio práctico I 04:39   
 
-Bueno de momento los tipos de datos variables y operadores no podemos hacer grandes programas aún en
+Bueno de momento los tipos de datos variables y operadores no podemos hacer grandes programas aún en Java pero te vamos a mostrar este ejercicio práctico donde ponemos en práctica algunos de los operadores que hemos visto la lección anterior.
 
-Java pero te vamos a mostrar este ejercicio práctico donde ponemos en práctica algunos de los operadores
-
-que hemos visto la lección anterior.
-
-El enunciado del ejercicio consiste en realizar un programa que a partir de los números que vamos a
-
-tener almacenados en dos variables nos muestra el resultado dividir el mayor entre el menor de ambos
-
-números.
+El enunciado del ejercicio consiste en realizar un programa que a partir de los números que vamos a tener almacenados en dos variables nos muestra el resultado dividir el mayor entre el menor de ambos números.
 
 Para ello nos vamos a ir a nuestro entorno de desarrollo Eclipse.
 
-Aquí tenemos el ejercicio que hicimos cuando creamos la primera aplicación el primer programa de ejemplo
+Aquí tenemos el ejercicio que hicimos cuando creamos la primera aplicación el primer programa de  ejemplo vamos a aprovechar para recordar los pasos que había que hacer para crear un programador con Eclipse fail new Java Proyect.
 
-vamos a aprovechar para recordar los pasos que había que hacer para crear un programador con Eclipse
+Y ahí nos aparecerá un cuadro de diálogo en el que nos van a pedir el nombre del proyecto la localización donde tuviéramos ya los países que creamos al principio donde teníamos el primer programa hicimos una carpeta se va a crear este otro 02 vamos a llamarle ejercicio práctico no así finalizamos se creará el proyecto y como sabes lo siguiente que tenemos que hacer es crear una clase con su método main que es donde vamos a crear todo el código de nuestro primer programa.
 
-fail new Java Proyect.
+El segundo programa realmente un primer ejercicio práctico que va a ser muy sencillo porque lo conocemos hasta ahora pues aún es bastante poco entonces con el botón derecho sobre el proyecto ni clase pues nos aparece el cuadro diálogo para crear la clase vamos a crear la app a ver divide números.
 
-Y ahí nos aparecerá un cuadro de diálogo en el que nos van a pedir el nombre del proyecto la localización
-
-donde tuviéramos ya los países que creamos al principio donde teníamos el primer programa hicimos una
-
-carpeta se va a crear este otro 02 vamos a llamarle ejercicio práctico no
-
-así finalizamos se creará el proyecto y como sabes lo siguiente que tenemos que hacer es crear una clase
-
-con su método main que es donde vamos a crear todo el código de nuestro primer programa.
-
-El segundo programa realmente un primer ejercicio práctico que va a ser muy sencillo porque lo conocemos
-
-hasta ahora pues aún es bastante poco entonces con el botón derecho sobre el proyecto ni clase pues
-
-nos aparece el cuadro diálogo para crear la clase vamos a crear la app a ver divide números.
-
-Fíjate un pequeño detalle un convenio en Java es que los nombres de clases ya lo hemos comentado antes
-
-pero bueno no conviene recordarlo los nombres de clases como digo siguen la nomenclatura está de que
-
-la primera letra se pone en mayúscula y el resto minúsculas y es una palabra compuesta.
+Fíjate un pequeño detalle un convenio en Java es que los nombres de clases ya lo hemos comentado antes pero bueno no conviene recordarlo los nombres de clases como digo siguen la nomenclatura está de que la primera letra se pone en mayúscula y el resto minúsculas y es una palabra compuesta.
 
 La primera letra de cada palabra se escribirá en mayúscula.
 
 Bien pues elegimos método main para que no lo cree.
 
-Y sobre ese método pues es donde vamos a crear todo el código de este sencillo programa que vamos a
+Y sobre ese método pues es donde vamos a crear todo el código de este sencillo programa que vamos a hacer.
 
-hacer.
+Declaramos dos variables con dos números cualquiera en una vamos a poner por ejemplo el tres a poner más pequeño.
 
-Declaramos dos variables con dos números cualquiera en una vamos a poner por ejemplo el tres a poner
-
-más pequeño.
-
-La verdad que da igual pero bueno en otras vamos a poner pues el 14 por ejemplo y vamos a declarar una
-
-variable donde vamos a almacenar el resultado de la decisión.
+La verdad que da igual pero bueno en otras vamos a poner pues el 14 por ejemplo y vamos a declarar una variable donde vamos a almacenar el resultado de la decisión.
 
 Cómo calculamos la división entre el mayor y el menor de los dos números.
 
-Pues vamos a aplicar el operador ternario operador ternario se establece una condición por ejemplo mayor
-
-de ver la pregunta que vamos a hacer y si fuera mayor debe entonces lo que vamos a devolver sería la
-
-resultado dividir a entrevé si no pues viviríamos Ventre a el resultado de la operación se va a almacenar
-
-en la variable y por lo tanto es mayor pues a entrevé que no entra siempre obtenemos como resultado
-
-la división entre el mayor y el menor de ambos números como una división entera pues el resultado va
-
-a ser entero también es decir se va a despreciar los decimales con la instrucción System punto a punto
-
-Frin Elaine mostramos un mensajito vamos a ver que diga división y con el operador más lo concatenados
-
-lo unimos a la variable cuyo resultado queremos mostrar al final y por eso el programa muy sencillo
-
-lo vamos a ejecutar.
+Pues vamos a aplicar el operador ternario operador ternario se establece una condición por ejemplo mayor de ver la pregunta que vamos a hacer y si fuera mayor debe entonces lo que vamos a devolver sería la resultado dividir a entrevé si no pues viviríamos Ventre a el resultado de la operación se va a almacenar en la variable y por lo tanto es mayor pues a entrevé que no entra siempre obtenemos como resultado la división entre el mayor y el menor de ambos números como una división entera pues el resultado va a ser entero también es decir se va a despreciar los decimales con la instrucción System punto a punto Frin Elaine mostramos un mensajito vamos a ver que diga división y con el operador más lo concatenados lo unimos a la variable cuyo resultado queremos mostrar al final y por eso el programa muy sencillo lo vamos a ejecutar.
 
 4 Un derecho reúnas Java Application y ahora aquí en la consola y en la consola como aparece división.
 
 4.
 
-Finalmente se ha dividido 14 entre 3 y 4 como algo bueno pues se desprecian los decimales y eso lo que
-
-sale si hubiéramos puesto mayor entonces la división sería a entrevé.
+Finalmente se ha dividido 14 entre 3 y 4 como algo bueno pues se desprecian los decimales y eso lo que sale si hubiéramos puesto mayor entonces la división sería a entrevé.
 
 Vamos a verlo para que ver que efectivamente siempre va a garantizar que se divide mayor entre.
 
