@@ -1,7 +1,25 @@
 # 0. Presentación del curso 05:59
-   * Presentación del curso 05:59
+   * 00 Presentación del curso 05:59
    
-# Presentación del curso 05:59
+# 00 Presentación del curso 05:59
+
+<img src="images/00-01.png">
+
+<img src="images/00-02.png">
+
+<img src="images/00-03.png">
+
+<img src="images/00-04.png">
+
+<img src="images/00-05.png">
+
+<img src="images/00-06.png">
+
+<img src="images/00-07.png">
+
+<img src="images/00-08.png">
+
+<img src="images/00-09.png">
 
 Hola mi nombre es Antonio Martín y quiero darte la bienvenida a este curso de aprende a programar en Java.
 
