@@ -66,7 +66,7 @@ Tenemos clases para crear cualquier tipo de aplicación es decir con Java se van
 
 # 02 Software necesario  05:12
 
-<img src="imgages/02-01.png">
+<img src="images/02-01.png">
 
 Bueno pues después de haber introducido la lección 1 a la tecnología Java imagino que estarás deseando ya ver como hacen tus primeros programas con este lenguaje.
 
