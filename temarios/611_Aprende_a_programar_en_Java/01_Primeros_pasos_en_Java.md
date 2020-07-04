@@ -6,75 +6,63 @@
    
 # 01 Introducción a Java 08:16
 
-Hola en este primer video del curso te voy a introducir en algunas de las características fundamentales de lo que sería la tecnología Java no sólo el lenguaje sino todo lo que le rodea en general bien pues lo primero que tenemos que ver es que Java es un lenguaje que fue desarrollado a mediados de los años noventa por la empresa microsistema.
+<img src="images/01-01.png">
 
-Es un lenguaje orientado a objetos que ya iremos viendo poco a poco largo del curso que significa eso pero bueno entonces no había muchos lenguajes orientados a objetos.
+Hola en este primer video del curso te voy a introducir en algunas de las características fundamentales de lo que sería la tecnología Java no sólo el lenguaje sino todo lo que le rodea en general.
 
-Cuando apareció Java estaba C++ Volchok y era una característica interesante para un nuevo lenguaje de programación pero quizá lo más importante es que Java es un lenguaje de programación multiplataforma.
+<img src="images/01-02.png">
 
-Ahora en un momento vamos a ver qué significa eso.
+Lo primero que tenemos que ver es que Java es un lenguaje que fue desarrollado a mediados de los años noventa por la empresa Sun Microsystems. 
 
-También muy importante que sepamos y sólo tendremos que tener en cuenta siempre que Java no es solamente un lenguaje.
+Es un lenguaje orientado a objetos que ya iremos viendo poco a poco a largo del curso que significa eso pero bueno entonces no había muchos lenguajes orientados a objetos, cuando apareció Java estaba C++, SmalTalk y era una característica interesante para un nuevo lenguaje de programación.
 
-Cuando hablamos de Java estamos hablando un lenguaje de programación sí pero también de un conjunto librería de objetos que tenemos a nuestra disposición para poder hacer los programas También comentarte que Java ha ido evolucionando a lo largo de estos veintitantos años desde la versión 1 que apareció a mediados de los noventa hasta la 1.8.
+Pero quizá lo más importante es que Java es un lenguaje de programación multiplataforma, ahora en un momento vamos a ver qué significa eso.
 
-Actualmente a punto de salir ya la 1.9.
+También muy importante que sepamos y lo tendremos que tener en cuenta siempre que Java no es solamente un lenguaje. Cuando hablamos de Java estamos hablando de un lenguaje de programación, sí pero también de un conjunto de librerías de objetos que tenemos a nuestra disposición para poder hacer los programas.
 
-Bien pues te decía que una de las principales características por no decir la principal es que Java es un lenguaje multiplataforma.
+También comentarte que Java ha ido evolucionando a lo largo de estos veintitantos años desde la versión 1 que apareció a mediados de los noventa hasta la 1.8, actualmente la 1.14.
 
-Qué significa eso.
+<img src="images/01-03.png">
 
-Pues que tú puedes desarrollar un programa con pelarlo y una vez compilado ejecutarlo en cualquier parte es decir en cualquier sistema operativo algo totalmente novedoso en la época en la que apareció Java porque hoy en día hay algún otro lenguaje también que tiene esta característica.
+Bien pues te decía que una de las principales características por no decir la principal es que Java es un lenguaje multiplataforma, qué significa eso, pues que tú puedes desarrollar un programa, compilarlo y una vez compilado ejecutarlo en cualquier parte, es decir en cualquier sistema operativo, algo totalmente novedoso en la época en la que apareció Java porque hoy en día hay algún otro lenguaje también que tiene esta característica.
 
-Tú desarrollas un programa en Java lo que tendríamos es un código fuente un archivo con Java y a partir de ahí es cuando se compila para que pueda ser ejecutado por el ordenador se genera los llamados vizcondes archivos con extensión con Toklas Bien pues estos archivos no son como los ejecutables clásicos los punto ExE que solamente se pueden ejecutar en aquella máquina para la que se han compilado sino que un boicot de Toklas puede ser ejecutado en cualquier sistema operativo.
+Tú desarrollas un programa en Java, lo que tendríamos es un código fuente un archivo con Java y a partir de ahí cuando se compila para que pueda ser ejecutado por el ordenador, se genera los llamados Byte Codes, archivos con extensión `.class` estos archivos no son como los ejecutables clásicos, los `.exe` que solamente se pueden ejecutar en aquella máquina para la que se han compilado, sino que un Byte Codes `.class` puede ser ejecutado en cualquier sistema operativo. Cómo es posible eso. Eso es gracias a la máquina virtual Java JVM. Has oído hablar de alguna vez verdad.
 
-Cómo es posible eso.
+La máquina virtual Java no es más que un software, una especie de extensión del sistema operativo que de lo que se encarga es de traducir en tiempo de ejecución, es decir cuando tú le dices ejecutar este programa Java, lo que hace la máquina virtual Java es traducir ese `.class` a lo que sería ya el ejecutable puro del sistema operativo para el cual estás realizando la ejecución del programa.
 
-Pues por eso es gracias reponsable sería la conocida como máquina virtual Java.
-
-Has oído hablar de alguna vez verdad.
-
-Pues la máquina virtual Java no es más que un software una especie de extensión del sistema operativo que de lo que se encarga es de traducir en tiempo de ejecución es decir cuando tú le dices ejecutar este programa Java lo que hace la máquina virtual Java es traducir ese punto Clas a lo que sería ya el ejecutable puro del sistema operativo para el cual estás realizando la ejecución del programa.
-
-Entonces todas las máquinas virtuales porque hay máquinas virtuales para cada uno de los distintos sistemas operativos que tenemos hoy en día máquina virtual para Windows para Linux para Solaris todas funcionan igual traducen el punto Clas a digamos el código binario propio de ese sistema operativo.
+Entonces todas las máquinas virtuales, porque hay máquinas virtuales para cada uno de los distintos sistemas operativos que tenemos hoy en día, máquina virtual para Windows, para Linux, para Solaris, todas funcionan igual traducen el `.class` a digamos el código binario propio de ese sistema operativo.
 
 Eso permite pues eso cuando haces un programa no tener que estar preocupándote de si esto va a ir para Windows o para Linux porque ese resultado de la compilación se podrá ejecutar en cualquier sistema operativo.
 
-Esta característica que entonces en aquellos años era muy muy novedosa pues hizo que Java fuera aceptado por gran cantidad de fabricantes software de la época como Oracle y B.M. asisten etcétera.
+Esta característica que entonces en aquellos años era muy muy novedosa pues hizo que Java fuera aceptado por gran cantidad de fabricantes software de la época como Oracle, IBM etc.
 
-Otra de las características que hemos mencionado es que es un lenguaje orientado a objetos.
+<img src="images/01-04.png">
 
-Bueno eso tiene muchas implicaciones ya que a medida que vayas aprendiendo Java ya las irás viendo porque no es una cosa no es cuestión de un momento pero bueno de momento decirte que una de esas características de los lenguajes orientados a objetos es que a la hora de hacer un programa Java tu puedes hacer uso de múltiples objetos que son realmente los objetos.
+Otra de las características que hemos mencionado es que es un lenguaje orientado a objetos. Bueno eso tiene muchas implicaciones ya que a medida que vayas aprendiendo Java ya las irás viendo porque no es una cosa, no es cuestión de un momento, pero bueno de momento decirte que una de esas características de los lenguajes orientados a objetos es que a la hora de hacer un programa Java, tu puedes hacer uso de múltiples objetos.
 
-Puedes imagínatelo como una especie de cajas negras en su interior tenemos unas funciones o métodos que realizan tareas entonces programar en Java es realmente ir cogiendo esos objetos y llamando a esas funciones a métodos de uno y otro y a partir de ir confeccionando la tarea realizada.
+¿Qué son realmente los objetos? puedes imagínatelo como una especie de cajas negras, en su interior tenemos unas funciones o métodos que realizan tareas, entonces programar en Java es realmente ir cogiendo esos objetos y llamando a esas funciones a métodos de uno y otro y a partir de ir confeccionando la tarea realizada.
 
-Es una de las características de los lenguajes orientados a objetos o el hecho de usar objetos ya creados ves cajas negras con sus funciones para hacer tareas pero hay más implicaciones que ya las irás aprendiendo.
+Esa es una de las características de los lenguajes orientados a objetos, el hecho de usar objetos ya creados, cajas negras con sus funciones para hacer tareas pero hay más implicaciones que ya las irás aprendiendo.
 
-Java es más que un lenguaje.
+<img src="images/01-05.png">
 
-Ya lo hemos dicho al principio cuando hablamos de Java no solamente es un lenguaje de programación eso es digamos una pequeña parte de ese mundo pero muy importante por supuesto.
+Java es más que un lenguaje ya lo hemos dicho al principio cuando hablamos de Java no solamente es un lenguaje de programación, eso es digamos una pequeña parte de ese mundo pero muy importante por supuesto, de hecho en este curso nuestro objetivo es eso enseñarte el lenguaje Java a utilizar las estructuras sintácticas de ese lenguaje, pero el mundo Java es algo más que su lenguaje y son librerías de objetos, son los objetos como los que te he enseñado en la transparencia anterior objetos que te van a permitir hacer un montón de cosas, como acceder a base de datos, realizar operaciones de entrada salida, comunicar aplicaciones con el exterior, generar páginas web lo que se te ocurra porque hay miles y miles de tipos de objetos a nuestra disposición para hacer los programas.
 
-De hecho en este curso nuestro objetivo es eso enseñarte el lenguaje Java a utilizar las estructuras sintácticas de ese lenguaje pero el mundo Java es algo más que su lenguaje y son librerías de objetos son los objetos como los que te he enseñado en la transparencia anterior objetos que te van a permitir hacer un montón de cosas como acceder a base de datos realizar operaciones de entrada salida comunicar aplicaciones con el exterior generar páginas web lo que se te ocurra porque hay miles y miles de tipos de objetos a nuestra disposición para hacer los programas que he mencionado directamente.
+Algunos nombres de librerías clásicas son JDBC para acceder a base de datos, Util para utilidades, IO entrada-salida, Net para comunicaciones hay muchísimas más y a lo largo de tu vida de aprendizaje de Java irás conociendo muchas de esas librerías.
 
-Algunos nombres de librerías clásicas como JDBC para acceder a base de datos útil para utilidades y la salida de comunicaciones hay muchísimas más y a lo largo de tu vida de aprendizaje de Java irás conociendo muchas de esas librerías.
+<img src="images/01-06.png">
 
-Por último en esta introducción quería comentarte lo que llamamos las ediciones Java.
+Por último en esta introducción quería comentarte lo que llamamos las ediciones Java. Vamos a ver son tantísimas las librerías de clases, de tipos de objetos, definitiva a nuestra disposición a la hora de hacer aplicaciones que Sun Mycrosystems cuando empezó a ir creando y más y más de esos tipos de objetos o clase como se le llama tuvo que hacer una división, una organización, todo ese conjunto de clases de tipos de objetos que tenemos pues se dividen en tres grandes bloques aunque aquí hay cuatro.
 
-Vamos a ver son tantísimas las librerías de clases tipos de objetos definitiva a nuestra disposición a la hora de hacer aplicaciones que sean microsistema.
+El primer bloque **Java Standar Edition Java SE** este conjunto de tipos de objetos o librerías de clase forman todo lo que es las clases de uso general que se utilizan para hacer cualquier programa y muy especialmente si te vas a dedicar a hacer lo que se llamarían los programas de escritorios, es decir las típicas aplicaciones los típicos Programa basados en Ventanas donde se instala el programa en la máquina donde va a ser utilizada por el usuario tipo Word o algún programa de ese tipo, eso es lo que se conoce como una aplicación de escritorio todo lo necesario para crear esos programas están en Java Standar Edition Java SE.
 
-Cuando empezó a ir creando y más y más de esos tipos de objetos o clase como se le llama pues tuvo que hacer una división una organización vale entonces todo ese conjunto de clases de tipos de objetos que tenemos pues se dividen en tres grandes bloques aunque aquí hay cuatro.
-
-Bueno de momento documentarte estos tres lo que llamaríamos el bloque Java estándar Edition Java S..
-
-Todo este conjunto de tipos de objetos su librería de clase forman todo lo que es la clase de uso general que se utilizan para hacer cualquier programa y muy especialmente si te vas a dedicar a hacer lo que se llamarían los programas de escritorio es decir las típicas aplicaciones los típicos Calamita basados en Ventanas donde se instala el programa en la máquina donde va a ser utilizada por el usuario tipo Word o algún programa de ese tipo.
-
-Eso es lo que se conoce como una aplicación de escritorio todo lo necesario para crear esos programas están en Java estándar Edition Java Enterprise Edition probablemente la versión más importante porque aquí encontramos todo lo necesario para poder crear aplicaciones para entornos web que es digamos donde Java está más especializado en creación de aplicaciones para web debe ser el típico Gmail Hotmail aplicaciones tipo tienda virtual es decir todo lo que utilizas a través de la web son aplicaciones web ese tipo de programas se pueden construir con Java utilizando el conjunto de objetos proporcionados por el Java Enterprise Edition.
+**Java Enterprise Edition Java EE** probablemente la versión más importante, porque aquí encontramos todo lo necesario para poder crear aplicaciones para entornos web, que es digamos donde Java está más especializado en creación de aplicaciones para web como el típico Gmail, Hotmail, aplicaciones tipo tienda virtual, es decir todo lo que utilizas a través de la web son aplicaciones web, ese tipo de programas se pueden construir con Java utilizando el conjunto de objetos proporcionados por el Java Enterprise Edition.
  
-Tenemos también un Java Micro Edition especialmente pensado para creación de aplicaciones para dispositivos electrónicos y por último comentarte un no podríamos decir que es una edición de Java porque no fue lanzada por Sam microsistemas sino por Google que es la librería de clases o el tipo de objetos Android especialmente pensado como sabes para crear programas que se van a ejecutar en los smartphones tabletas y dispositivos electrónicos que tengan ese sistema operativo de Google Android como es.
+Tenemos también un **Java Micro Edition Java ME** especialmente pensado para la creación de aplicaciones para dispositivos electrónicos.
 
-Tenemos clases para crear cualquier tipo de aplicación es decir con Java se van a poder realizar y desarrollar cualquier tipo de programa que puedas imaginar cómo es el reto que tienes por delante y es muy interesante y muy apasionante.
+Y por último comentarte **Android** no podríamos decir que es una edición de Java porque no fue lanzada por Sum Microsystems sino por Google, que es la librería de clases o el tipo de objetos Android especialmente pensado como sabes para crear programas que se van a ejecutar en los smartphones, tabletas y dispositivos electrónicos que tengan ese sistema operativo de Google que es Android.
 
-Animo.
+Tenemos clases para crear cualquier tipo de aplicación es decir con Java se van a poder realizar y desarrollar cualquier tipo de programa que puedas imaginar cómo ves el reto que tienes por delante es muy interesante y muy apasionante, animo.
 
 # 02 Software necesario  05:12
 
