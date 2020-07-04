@@ -80,9 +80,9 @@ Bien con lo que vamos a ver en estas elecciones qué software necesitamos instal
 <img src="images/02-07.png">
 <img src="images/02-08.png">
 <img src="images/02-09.png">
-<img src="images/02-010.png">
-<img src="images/02-011.png">
-<img src="images/02-012.png">
+<img src="images/02-10.png">
+<img src="images/02-11.png">
+<img src="images/02-12.png">
 
 Son fundamentalmente dos tipos de programas los que vamos a necesitar para poder programar en Java con nuestro ordenador. Por un lado tenemos lo que se conoce como el JDK Java Development Kit que es el conjunto de herramientas básicas para poder crear un programa Java compilarlo, testearlo, esas herramientas las proporciona el Oracle, no te lo dije en la lección anterior pero Microsystems es la empresa que inventó Java, desarrollo Java pero fue comprada posteriormente por Oracle y actualmente Oracle el que gestiona todo Java.
 
