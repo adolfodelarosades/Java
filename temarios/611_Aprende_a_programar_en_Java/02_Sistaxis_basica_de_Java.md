@@ -69,7 +69,7 @@ que automáticamente adquiere el valor 0 o como acabamos de decir, pero si decla
 
 ### Material adicional
 
-[L5-Literales_y_conversion_de_tipos.pdf]
+[L5-Literales_y_conversion_de_tipos.pdf](/temarios/611_Aprende_a_programar_en_Java/pdfs/L5-Literales_y_conversion_de_tipos.pdf)
 
 
 # 06 Operadores 04:11
@@ -287,7 +287,7 @@ La siguiente tabla nos muestra la preferencia de los operadores Java en orden de
 
 ### Material adicional
 
-[L6-Operadores.pdf]()
+[L6-Operadores.pdf](/temarios/611_Aprende_a_programar_en_Java/pdfs/L6-Operadores.pdf)
 
 
 # Ejercicio práctico I 04:39   
