@@ -11,12 +11,508 @@
    * 17 Salida forzada de un bucle 03:37
    
 # 08 Instrucción alternativa simple. If 03:11
+
+Después de los tipos de datos variables y operadores es el momento de abordar el estudio de las instrucciones de control de flujo que nos van a permitir introducir cierta lógica dentro de nuestros programas.
+
+Empezamos con la instrucción de tipo alternativa simple una alternativa simple es un tipo instrucción llamada If es el nombre de la instrucción y la característica principal es que se evalúa una condición que puede dar como resultado verdadero o falso si el resultado la condición es verdadero.
+
+El programa tomó un camino y si es falso toma otro diferente.
+
+La estructura de esta instrucción es la que veis aquí y entre paréntesis la condición a evaluar si el resultado de esa condición es verdadero pues se van a ejecutar las instrucciones que hay dentro del bloque delimitado por las llaves que vienen entre IF y aquí finalde.
+
+Si no se ejecutarán las instrucciones indicadas en este otro bloque llamado Else que también tiene sus llaves para delimitar el conjunto de instrucciones a ejecutar.
+
+En este caso el ejemplo que te ponemos proponemos aquí pues simplemente a partir de una variable se comprueba si el resto de la división es cero es decir si es un número par.
+
+Si es así se mostró un mensaje y si no otro mensaje diferente es importante tener en cuenta una serie de consideraciones cómo utilizamos la instrucción IF.
+
+La primera es referente a la condición importante que tengamos claro que la condición a evaluar tiene que dar como resultado obligatoriamente un tipo Bühler no puede dar un valor numérico esto Char C-C tiene que ser bullían.
+
+Por ejemplo en este caso simplemente preguntamos si la variable de resultado de P es un número porque es una variable entera y eso no está permitido dentro de la condición de Lick.
+
+Por lo tanto se produciría un error de compilación si quiera compilar el programa otra cosa que también tenemos que decir es que lo bloque es opcional.
+
+Puede ser que si la condición se cumple queramos hacer algo y si no se cumple o simplemente no queremos hacer nada entonces simplemente continuaría el programa después de la instrucción que venga a continuación de la llave de cierre de las llaves solamente son obligatorias si hay más de una instrucción dentro del bloque Rieff como else.
+
+Es decir si solamente queremos realizar una determinada tarea una única instrucción no sería necesario utilizar las llaves como ves en este ejemplo que tenemos aquí simplemente queríamos sacar un mensaje que el número es positivo si el número contenido de la variable es mayor que cero aunque no es obligatorio poner la llave.
+
+Yo siempre recomiendo hacerlo porque es una manera de organizar nuestro código y que quede más claro el bloque 6 es una manera de crear un dentro de un bloque Else es decir puede ocurrir que si no se cumple una condición queramos evaluar otra.
+
+Entonces en ese caso utilizaremos este bloque llamado el 6.
+
+En este caso como ves se comprueba si contiene una variable es igual a 1 y si no queremos comprobar si es otro valor diferente si p es mayor que 10.
+
+En ese caso aquí la llave y poner otro anidado utilizamos la expresión el.
+
 # 09 Ejercicio práctico II 04:30
+
+Seguidamente vamos a realizar un ejercicio en el que vamos a poner en práctica el uso de la instrucción y vista la lección anterior.
+
+El ejercicio va a consistir en un programa que dados dos números nos va a mostrar cuál es el mayor de los dos en caso de que sean iguales pues nos saldrá un mensaje indicando que se trata de dos números iguales.
+
+Bueno pues vamos a ir de nuevo a nuestro entorno de desarrollo Eclipse y vamos a crear el siguiente jaba proyecto 03 en ejercicio práctico dos realizamos y añadiremos como siempre una clase con su método mayor utilizamos marcamos la casita método min para que nos incluya el método Mayne y aquí vamos a crear nuestro código.
+
+Vamos a declarar dos variables con dos números cualesquiera Becca igual a 45 por ejemplo el caso es que nuestro programa compruebe sus dos números muestre cuál es el mayor y si se trata de dos números iguales.
+
+También olvida un mensaje en el que nos informa de esa situación y vamos a utilizar para ello con la instrucción que hemos visto.
+
+Lo primero que hacemos es preguntar si A es mayor que en cuyo caso el mensaje a mostrar será que el número mayor está vamos a ver si sistema Elene y aquí sacamos el mensaje que diga el mayor es concatenados únimos con la variable a para que nos muestre el valor de esa variable.
+
+Qué ocurre si no es mayor que aquí vamos a utilizar la estructura el 6 porque habría que hacer una siguiente pregunta y es si es mayor que a porque en ese caso lo que habría que sacar es un mensaje indicándonos que es de mayor cojeamos.
+
+Esta instrucción el mayor es P Pero y si tampoco se cumple esta condición en este se que correspondería a la segunda condición sería cuando habría que informar de que si no ha cumplido ésta ni ésta.
+
+Se trata de dos números iguales cogemos copiamos otra vez indicamos los números son iguales os damos la variable y en este caso si hemos puesto en el número 10 y en el 45 lógicamente nos va a decir que el mayor es el 45.
+
+Vamos a probarlo una aplicación efectiva que es el número que tenemos en la variable al mayor. 
+
+Entonces nos indicaría lógicamente que se trata ese número en este caso 100 el mayor de 100 efectivamente.
+
+Y si fueran iguales por ejemplo ambos 100 no debería entrar en este Else indicando que se trata de dos números iguales no probamos y.
+
+Efectivamente este es el mensaje.
+
+Has visto una utilización de la estructura de control extorción de control alternativa y aprovechamos para comentar lo que vimos en la lección anterior.
+
+Y es que es obligatorio que esa condición sea de tipo bullían el resultado sea verdadero o falso. 
+
+Yo no puedo hacer por ejemplo y entonces como que un error de compilación al tratarse de un resultado numérico y mucho cuidado también porque es muy habitual cuando se está aprendiendo Java. 
+
+A la pregunta si una variable es igual a un determinado valor porque el operador de comparación no es el igual sino el doble igual aquí pensaría que estás asignando cero a la variable y estás preguntando por algo con lo cual por eso da un error de compilación porque el resultado sería numérico si lo que quieres es comparar si es igual tienes que utilizar el doble igual.
+
 # 10 Instrucción alternativa múltiple 04:57
+
+A continuación te voy a presentar la instrucción alternativa múltiple la instrucción alternativa múltiple.
+
+A diferencia de la simple evalua una expresión no una condición la expresión puede dar como resultado múltiples valores en función de cada valor ejecutaremos distintas tareas.
+
+La instrucción alternativa múltiple en Java es la instrucción switch switch tiene este formato entre paréntesis la expresión a evaluar que puede ser una operación matemática o incluso una simple variable y para cada posible valor utilizamos estos bloques Kaixo cais valor 1 significa que si el resultado de esa expresión coincide con valor 1 se ejecutará en estas instrucciones.
+
+Si coincidiera con valor 2 estas otras sí coincidirá con otro valor etc..
+
+Podemos poner tanto escritos como consideremos apropiados como opciones queremos evaluar en caso de que no coincida el resultado de la expresión con ninguno de los valores indicados en keys entraría en el bloque Defour como es cada cais lleva al final del bloque instrucciones una instrucción Brak que lo que hace es que se salga de la instrucción switch porque si no ponemos la instrucción break cuando el programa entra en un caso al ejecutar la instrucciones si no encuentra Brak aunque no cumpliese con la siguiente cais entraría en él eso lo vamos a comentar después.
+
+Bueno aquí tenemos un ejemplo en el cual en la instrucción suits simplemente evaluamos una variable que supuestamente es una variable o debería ser una variable entera.
+
+Ah bueno pues si bien el contenido de la variable A es 1 entonces permitíamos este mensaje si fuera 10 imprimiría.
+
+C.O.T. Y si no es ni uno ni diez pues sacaría este mensaje sistema Elene fuera qué consideraciones tenemos que tener en cuenta sobre Suits.
+
+Bueno lo primero Block default es opcional.
+
+Lo has visto el ejemplo anterior pero podríamos no tener un bloque de lo que te comentaba también la instrucción break es opcional no es obligatoria pero si no la ponemos pues cuando termine de ejecutar las instrucciones del Cais pasará al siguiente ejemplo.
+
+El caso anterior si no tuviéramos este break y este suponiendo que el valor de afuera 1 saldría el mensaje bajo alto y fuera por qué.
+
+Porque entraría en el caso al coincidir el valor de A con uno y al no haber un break entraría en el sguiente.
+
+Y al no haber un break aquí entrarían también.
+
+Eso que puede parecer un problema o una limitación no lo es.
+
+Este hecho ha puesto porque puede ser que haya veces en las que no nos interese poner un break.
+
+Luego lo verás en el siguiente vídeo del ejercicio práctico que vamos a realizar.
+
+Otra consideración muy importante es que los valores del Keys deben ser constantes es decir fíjate en este caso aquí evaluamos el valor de la variable y en el caso en vez de utilizar un número hemos puesto una variable.
+
+Eso no es posible.
+
+No me lo permite sería un error de compilación todos los valores indicados en keys deben ser fijos constantes.
+
+Otra consideración también muy importante es que los valores de los keys deben ser enteros de tipo int o compatibles.
+
+Vale por ejemplo nosotros no podríamos evaluar una expresión que nos devolvieron lonko sería un error de compilación en cambio uno de los keys sí que podría ser por ejemplo un tipo Char.
+
+Por qué.
+
+Porque Char es compatible con entero derecho a luchar.
+
+Ya lo dijimos cuando estudiamos los tipos de datos almacena el valor Unicode valor entero.
+
+Por lo tanto sí podría utilizarse como valor de los keys un char Vali también Univ.
+
+Por supuesto un bit o un sólo son compatibles pero nunca lonko ni en los keys ni tampoco en lo que serían las expresiones aunque no conocemos el tipo de texto que lo veremos más adelante en lecciones posteriores pues comentar que desde la versión Java 7 es posible utilizar strings cadenas de caracteres en un switch.
+
+Como ves aquí tienes una variable de tipo cadena de caracteres string que como te digo ya lo estudiaremos las acciones posteriores.
+
+Y es posible utilizar como expresión del switch un string un texto movemos estamos evaluando la variable K en ese caso los valores de los keys deben ser obligatoriamente de tipo texto y como decíamos en las consideraciones anteriores no podemos poner variables tienen que ser literales valores fijos si K-T ese string sólo podríamos utilizar en cada cais valores de tipo texto texto además fijos literales. 
+
 # 11 Ejercicio práctico III 05:58
+
+Para ver el funcionamiento de la instrucción suits explicada en la lección anterior vamos a ver el siguiente ejercicio práctico en este ejercicio vamos a hacer un programa que da una nota almacenada en una variable nos va a indicar si se trata de un suspenso si se está entre el rango de 1 a 4 aprobado 5 6 notable 7 8 o sobresaliente si es un 9 un 10 si es otro valor diferente a estos indicados entonces nos que mostrar un mensaje indicando que se trata de una nota no válida.
+
+Bien pues bueno vamos a nuestro entorno de desarrollo Eclipse y como siempre procederemos a crear un proyecto 4 ejercicio práctico.
+
+3 En este caso añadimos la clase y le vamos a llamar cãlculo nos vamos a poner el método main para que no lo añada.
+
+Y bueno pues nada vamos a declarar una variable que supuestamente va a contener la nota a evaluar le damos un valor cualquiera los 6 entonces de lo que se trataría es de evaluar el valor de dicha variable y en función de eso sacarnos un mensaje con los indicaciones que te hemos dicho en el enunciado pues si es suspenso aprobado notable sobresaliente o una nota negativa como son varias posibles opciones pues lo mejor sería utilizar una instrucción switch.
+
+Para ello evaluaremos dentro de Swett la nota la variable nota y aquí nos encontramos con que hay varios casos para los cuales el mensaje va a ser el mismo.
+
+Esto es precisamente la situación en la cual vamos a tener algunos casos sin la instrucción brik al final ya lo verás que es uno que dos Castres o cuatro.
+
+En todos estos casos se va a tener que hacer lo mismo vamos a tabulados para que aparezcan un poquito inventados lo mismo que va a ser con sacar el mensaje LN suspenso entonces qué va a ocurrir si la nota del alumno es un 1 o un 2 o un 3 o un 4 por ejemplo si es un 1 Entrar aquí como naive pasar al siguiente caites.
+
+Como no hay al siguiente y como neurálgica el siguiente que tenemos un 4 o 4 y ahí aparecerá el mensaje.
+
+Y eso mismo se puede aplicar para el caso de que haya sacado un 2 o 3.
+
+Aquí sí que vamos a poner un Bloy porque ya no nos interesaría que pasase al siguiente cais los siguientes Keys serán los asociados al 5 y 6 el aprobado.
+
+5 no ponemos nada gunplay para que en caso de que sea un 5 pase directamente al caso 6 donde la indirecta indicaremos que es un aprobado viendo como en estos casos no nos interesa poner el black en las instrucciones.
+
+En alguna de ellas en otras como en estas pues evidentemente si lo pondremos porque no nos interesa que si sacan mensaje aprobado luego pase al siguiente.
+
+No nos interesa lo mismo vamos a hacer para la pareja 7 y 8 aquí pondremos el mensaje vamos a copiar y pegar de notable y por último en los casos 9 y 10 indicaremos que se trata de sobresaliente cómo vamos a contemplar la posibilidad de que se introduzca un valor diferente a estos en cuyo caso habría que indicar que se trata de una nota no válida pues utilizaremos un bloque de la Raúl Sendic inventado y el mensaje en este caso era lo que decíamos.
+
+Nota no válida.
+
+Vale.
+
+Nota no tumbaría pues ya lo tenemos.
+
+Están contemplados todas las opciones que hemos dicho agrupadas es decir todos aquellos posibles valores que vayan a dar el mismo mensaje están agrupadas pues dentro de el mismo cais es decir la instrucción de repetir la encada que la hemos puesto en el último.
+
+Así si es uno dos o tres en todos esos casos entrarán en el mismo sitio que en el CAIS.
+
+4.
+
+Bueno si lo ejecutamos debería entrar en el pais de aprobado.
+
+Vamos a verlo y decirnos que está aprobado puesto que la nota que hemos puesto es un 6.
+
+Efectivamente pero es que si ponemos un 1 verás que el mensaje a salir será el equivalente al suspenso que tenemos indicado en el CAIS 4 vamos efectivamente y si ponemos una nota que no vale por ejemplo el cero no la hemos contemplado como nota válida nos tendría que salir el mensaje.
+
+Nota normalidad seguidamente pues aquí lo tenemos.
+
+Entonces vemos un caso claro de utilización de Suits puesto que hay varias posibles valores a evaluar con diferentes acciones y además donde algunos de esos que no tienen brik porque nos interesa que cuando entre en ellos se pasen también exigo.
+
 # 12 Instrucción repetitiva for 08:17
+
+Después de ver las instrucciones de tipo alternativa como la simple IHF o la multiple Switch es el momento de hablar de otro tipo de instrucciones de control de flujo en un programa Java como son las instrucciones repetitivas conocidas también como bucles y empezamos hablando de la instrucción for instruccion for se utiliza para ejecutar un grupo de instrucciones un número determinado de veces.
+
+Aquí tienes cómo sería su formato utilizamos la palabra reservada Zor y entre paréntesis tenemos tres instrucciones.
+
+La instrucción llamada inicialización Punto y Coma condición que siempre debe devolver un bullían e incremento en el interior entre llaves.
+
+Las instrucciones a ejecutar con el foro.
+
+Estas instrucciones se van a ejecutar un número definido de veces ese número definido de veces va a venir determinado por estas tres instrucciones que tenemos aquí.
+
+Cómo funciona esto.
+
+Lo vamos a entender ahora mejor como un ejemplo pero te explico inicialmente al entrar en el foro se ejecutaría esa instrucción de inicialización que como su nombre indica habitualmente consiste en inicializar una variable una variable que llamamos variable de control del Forth porque la vamos a utilizar para controlar ese número de veces que se va a ejecutar el bloque de sentencias después de la inicialización comprobaríamos una condición.
+
+Esto es una condición del tipo Pues eso con operadores condicionales siempre va a dar como resultado un bulevar.
+
+Lógicamente en esa condición va a estar implicada esa variable que hemos inicializar.
+
+Si la condición se cumple se va a ejecutar el bloque de instrucciones al finalizar el bloque de instrucciones se ejecuta incremento que como su nombre indica también pues habitualmente va a ser el incremento o decremento.
+
+Puede ocurrir también de la variable de control que se iniciará hizo la primera vez tras ejecutar el incremento.
+
+Volvemos a comprobar la condición se sigue se sigue cumpliendo pues ejecutamos las instrucciones de nuevo al finalizar otra vez incremento y otra vez condición se sigue cumpliendo.
+
+Otra vez las instrucciones y así hasta que llega un momento en el que tras la ejecución incremento condición ya no se cumpla.
+
+En ese momento ya no se van a ejecutar las instrucciones que tenemos definidas dentro del bucle.
+
+Como te decía lo mejor es verlo como un ejemplo ya verás que es muy sencillo su funcionamiento aquí tenemos un pequeño bloque de código que se encarga de mostrarnos los números en pantalla del 1 al 10 los números naturales 1 2 3 hasta 10.
+
+Cómo funciona.
+
+Fíjate al entrar en el foro se ejecutaría esta instrucción que lo que hace el declara además una variable no tiene porque la declaración de la variable podría estar fuera.
+
+Pero bueno es habitual que si esa variable sólo la vamos a usar dentro del foro se declara que mismo se declara variable y se asignan se comprueba la condición es menor que 10 si ejecutamos como y ISO inicializar 1 imprimiría el número 1.
+
+Al finalizar se ejecuta incrementode cómo ves lo que haces sumarle uno ahí y otra vez a comprobar ahora si vale 2 2 menos de 10 si puedes ejecutaría otra vez y se mostrará el mensaje 2.
+
+Otra vez incrementarã 3 y el menor 3 3 es menor que 10.
+
+Si eso sacaría también el 3 y así hasta el momento en el que la iba a 10.
+
+En ese caso 10 es menor que 10.
+
+No ya deja de cumplirse la condición y se saldría fuera del bucle por lo tanto fíjate aquí hay un pequeño fallo en el mensaje este no muestra los números del 1 al 10 sino del 1 al 9 porque la condición de salida vamos la condición de entrada mejor dicho es que sea menor de 10 es decir la conexión de salida es que en el momento que valga 10 ya no se va a ejecutar.
+
+Por lo tanto realmente si imprimiría los números del 1 al 9 vale 9 se imprime pero al llegar al final se le suma uno más 10 y ya no cumple la condición tanto ya 90.
+
+Aquí tienes otro caso.
+
+Otro ejemplo de un programa que va calculando la suma de todos los números comprendidos entre un número dado y ser mostrando el resultado en pantalla.
+
+En este caso para que veas que no siempre hay que empezar desde el número más pequeño hasta el número final.
+
+Hemos empezado inicializar la variable de control en el número al que hay que alcanzar 200 y lo que vamos haciendo es clavamos incremental fíjate 200 200 es mayor que cero si por lo tanto la variable suma que está inicializar a cero le sumamos el número 200 que hacemos después la operación un incremento que en este caso sería decremento.
+
+Restamos 1 ahora son 199 199 es mayor que cero.
+
+Si ahora a lo que había acumulado en suma que era 200 le sumamos 199 volvemos al decremento 198 198 mayor que cero si.
+
+Pues entonces volvemos a sumar 198 y así mientras hasta el número 1 vale cuando vamos a remendando y vale 1 es el último número que sumamos al decremento ahí valiendo uno tendremos que vale cero cuyo caso ya deja de cumplirse la condición y salimos del foro por lo tanto hemos sumado todos los números entrene y cero no incluido.
+
+Realmente sería entre uno bueno bueno.
+
+Después mostraremos el resultado como es su funcionamiento es muy sencillo y se dice que ejecuta el grupo de instrucciones un número definido de veces porque suele ser un número concreto 20 30 o 40 veces viene determinado siempre por esa variable de control y el valor máximo o mínimo a alcanzar.
+
+Vale consideraciones que tenemos que tener en cuenta sobre el uso del foro.
+
+Bueno hemos visto que habitualmente en un foro hay tres instrucciones pero no son obligatorias.
+
+Fíjate aquí podrías tener un foro en el cual no hemos puesto ni inicialización ni incremento ni condición.
+
+Esto es un bucle infinito estaría ejecutando esto indefinidamente.
+
+Es un caso extremo no se suelen utilizar desde luego pero te viene a indicar que puede ser que falte una de las tres instrucciones las dos o incluso todas que no utilices.
+
+No utilicemos ninguna para hacer un bucle infinito.
+
+Ya digo no es habitual suele ser práctico hacerlo pero podríamos crearlo un bucle infinito si no ponemos ninguna de las instrucciones ni la de inicialización ni comprobación ni tampoco la de incremento.
+
+Otra consideración es que la inicialización incrementos de primera y tercera instrucción habitualmente si es una instrucción inicialización pero podrían ser dos instrucciones o sea yo quiero inicializar una variable y sumarle 2 o a otra variable hacerlo otra operación pues se podrían poner más de una instruciones aquí pasaríamos por comas lo mismo en el incremento puedes incrementar la variable y además quiero asignar esa variable a otra variable que tengo por ahí separada por comas pondría todas las instrucciones que fueran necesarias en la condición es una única instrucción aunque podría incluir algún operador lógico de manera que la comprobación incluyera si es menor que 10 y mayor que no sé qué valor y menor tanto podría ser una condición más compleja.
+
+Pero eso sí siempre devolviendo voleas otras la consideración que te comentaba anteriormente al principio es que la variable de control es una variable de control que habitualmente la declaramos aquí dentro de la instrucción de inicialización pero no tiene por qué podría haberse declarado antes ya que si la declares aquí dentro del foro en inicialización solamente la podríamos utilizar dentro de ese bloque si por lo que sea esa variable también se tiene que usar fuera cosa habría que declararlo antes y como ves pues en su lugar no ponemos nada el punto y coma para indicar la delimitación de los de las tres  secciones.
+
+Si son siempre obligatorios ponerlos vale bueno esto lo es todo sobreaforo en la siguiente elección.
+
+Vamos a ver un ejemplo de varios ejemplos de utilización del cuerpo que es una de las instituciones más utilizadas en cualquier programa Java.
+
+
 # 13 Ejercicio práctico IV 07:13
+
+Muy bien pues vamos a ver un ejercicio en el que vamos a poner en práctica el uso de la instrucción repetitiva o bucle for el ejercicio va a consistir en un programa que dados dos números no va a calcular la suma de todos los números comprendidos por los pares comprendidos entre ambos números extremos incluidos.
+
+Bueno pues vamos al entorno de desarrollo Eclipse y como procederemos como de costumbre a crear nuestro nuevo jaba proyecto este nuevo proyecto le vamos a nombrar como 0 5 ejercicio práctico 4 van no creamos y añadimos la clase como siempre Miho Java class o clase suma pares.
+
+Así es como vamos a llamar a la clase y crearemos el método main dentro de ella que es donde vamos a meter el código de nuestro programa.
+
+Bueno pues aquí lo primero que vamos a hacer es declarar dos variables cualquiera como hemos hecho otras veces con dos números inventados ve por ejemplo que en principio se trataría de dos números que en un programa real serían obtenidos desde el exterior no estarían fijados ahí directamente en el código del programa.
+
+Pero bueno nosotros como esas clases esos elementos que son clases no se van a necesitar para poder leer datos de entrada no las conocemos pues vamos a suponer que tenemos almacenados los números en dos variables aunque en teoría deberíamos desconocer lógicamente lo que valen esas variables incluso no sabemos cuál es la que contiene el número mayor ni cuál la que contiene un número menor.
+
+Por tanto vamos a declarar dos nuevas variables mayor y menor en las que vamos a almacenar cuál sería la primera de ellas el mayor de los dos y en la siguiente el menor para qué.
+
+Para que a la hora de que hagamos en el bucle for destruction for recurramos desde un extremo hasta el otro sepamos cuál es el más pequeño hasta el más mayor.
+
+También vamos a declarar la variable suma donde vamos a ir sumando los números pares que vamos encontrando entre menor y mayor.
+
+Esto es la declaración de las variables.
+
+Pues lo primero que hacemos entonces es eso es obtener cuál es el mayor y el menor de ambos números haríamos la siguiente pregunta si es mayor que entonces está claro que el mayor y el menor en la variable mayor metemos a la variable menor metemos y si no al contrario la variable mayor y en menor almacenamos el número.
+
+Si fueran iguales pues también entraría aquí.
+
+Pero bueno en ese caso es que nos da igual cuál sería el mayor de los dos el bucle iría de uno a otro y realmente solamente haría la suma una vez bueno pues venga vamos a establecer la instrucción for declaremos la variable de control que comienza con el menor de los números inicializar al menor y digamos va a hacer las operaciones que vamos a definir dentro del futuro mientras que esa variable no alcance el valor mayor o sea mientras así sea menor igual que en mayor y menor igual porque vamos a considerar el extremo también es decir vamos a ir comprobando y sumando todos los números pares que encontremos entre menor y mayor si no quisiéramos contemplar los extremos pues entonces habríamos puesto menos vale.
+
+Pues venga entonces cómo sabemos si ahí va a ir pasando.
+
+En este caso los números son 15 más pequeños y 23 en mayor va a empezar en 15 16 17 hasta 23.
+
+Cómo saber si un número es par o no es calculando el resto de la división entre dos.
+
+Si el número que toque en cada recorrido al dividirlo entre dos da resto cero.
+
+Se trata de un número para el resto se calcula con el tanto por ciento.
+
+Vamos incluso si es que es conveniente y poniendo comentarios comprobamos si pero vamos si el número es para 100 números par lo sumamos a la variable suma suma es igual a la suma más de modo que si esto lo vamos haciendo desde el más pequeño hasta el más mayor no nos vamos a encontrar con que en esta variable habremos sumado todos los pares comprendidos dentro de ese rango.
+
+Al final sacamos por pantalla el contenido la variable en suma nos ha quedado ahí un poquito la suma de los pares 3 y concatenados por la variable suma.
+
+Vamos a comprobarlo ejecutamos el botón derecho sobre la clase Java Application y ahora nos debería aparecer el resultado de la suma 76 es decir 16 más 18.
+
+Bueno bueno nos vamos a poner sumarlos si queremos saber si funciona bien o no vamos a probar con números más pequeños.
+
+Por ejemplo 2 y 7 aquí estaríamos sumando dos más cuatro que serían seis más seis que serían doce.
+
+Vale entonces el resultado en este caso debería salir 12.
+
+Vamos a comprobarlo ejecutamos efectivamente y como es el programa está preparado para que no importe el orden en el que hemos definido las variables es decir siempre se compruebe cuál es el mayor y el menor de ambos sucesivos cambios en siete pongo.
+
+El resultado va a tener que ser en vamos a ver que siguen siendo 12 como te decía antes.
+
+Qué pasa si ambos números son iguales.
+
+Bueno pues depende si son para eso son impares en este caso como ambos son como el mismo número impar pues no va a sumar nada va a salirnos la suma cero pero si se trata de un número par pues entonces la suma sería realmente uno de ellos.
+
+En este caso con no pagar cuatro números.
+
+Bueno pues aquí hemos visto un uso bastante claro de la instrucción repetitiva tipo foro que además como veis se ha combinado con una instrucción y más adelante vamos a ver siguiente elección.
+
+Vamos a ver pues otro ejercicios similares para que te quede claro el funcionamiento de esta instrucción.
+
 # 14 Ejercicio práctico V 05:38
+
+Bueno pues como te comentaba en el video anterior vamos a ver un nuevo ejercicio práctico de utilización de la instrucción repetitiva.
+
+En este caso vamos a realizar un programa que dado un número nos indica si se trata de un número primo o no. Recordemos que los números primos son aquellos que sólo son divisibles entre sí mismo y 1 Los primos serían aquellos que pueden ser divididos y visible división exacta entre cualquier número comprendido entre uno y ese mismo número.
+
+Bueno pues vamos a ello como siempre nos vamos a nuestro entorno de desarrollo Eclipse y un nuevo Java proyecto 06 ejercicio práctico 5 5 vamos ya vale.
+
+Pues nada que veamos el ejercicio y nuestra nueva clase comprobar
+
+podremos meter Domain y aquí tenemos el método main de nuestro programa.
+
+Bien vamos a declarar una variable en donde vamos a guardar el número para el cual vamos a hacer la comprobación se supone como ya te he dicho en alguna otra ocasión que este número sería recuperado desde el exterior pero bueno para eso se necesitan clases especiales y demás nosotros nos estamos centrando en la sintaxis del lenguaje Java.
+
+Por lo tanto suponemos que el número está en una variable ponemos 8 como podríamos haber puesto cualquiera.
+
+Vamos a centrarnos en cómo haríamos la comprobación de si es un número primo o no lo es.
+
+Para ello el resultado como se trata de comprobar si cumple una condición o no lo cumple lo vamos a almacenar en una variable de tipo bullían a la que llamamos primo precisamente y que vamos a inicializar al valor Tru.
+
+De esta manera la lógica del problema va a ser la siguiente voy a recorrer todos los números comprendidos entre 2 y ese número que me encuentro a un divisor hago una división exacta entre N y los números por los que va pasando la variable desde 2 a este pues entonces cambia el estado de esta variable y la pongo a falso como diciendo que ese número ya no es primo porque he encontrado una división exacta si no encontramos ninguna división exacta no vamos a tocar esa variable y se va a quedar a lo que nos va a indicar que efectivamente al no haber encontrado ninguna división estamos ante un número primo.
+
+Esa es la lógica del programa que vamos a realizar.
+
+Bueno pues vamos a ello planteamos el Foro de la siguiente manera la variable de control que va a empezar en dos y muy importante va a llegar hasta en menos 1 es decir va a comprobar todos los números entre 2 y el anterior número para ver si encuentra alguna división exacta.
+
+Por supuesto no tenía que comprobar la división con el número no podemos poner igual porque entonces todas las números son divisibles entre sí mismo.
+
+Eso no nos vale para determinar que se trata realmente de un número primo.
+
+Habría que ver que no hay ninguna división exacta entre dos y el anterior año vamos a comprobar cómo se comprobaría una división en una división a tono con el resto.
+
+Como hemos hecho en otras veces es decir si el resto de dividir n entre y ese número por el que estemos comprobando en cada iteración del foro pues es exacta entonces ya está claro que el número no es primo.
+
+Hemos encontrado una división exacta así que directamente ponemos la variable a false Qué pasa que no.
+
+Evidentemente en este caso no vamos a poder es decir si no encuentra la división exacta.
+
+Pues nada que compruebe la siguiente si no hay ninguna división exacta no pasará nunca por aquí y por lo tanto la variable o sea que estamos ante un primo.
+
+Vale hacemos la siguiente pregunta Si primo no hace falta poner primo igual igual tú porque se trata de una variable Gülen es decir directamente si esa variable es tu estamos ante un número primo el número ya sea eso le concatenados aquí el numerito para que se vea de qué número estamos hablando es primo.
+
+Pero si es falso pues el número no es saberlo no explican bien.
+
+Pues nada vamos a comprobarlo en este caso como estamos con el número 8 pues ese sí que no es primo porque es divisible entre dos.
+
+4.
+
+Hola debería dejar de decirnos que no es un número primo ejecutarlo y lo comprobaremos vamos. 
+
+Efectivamente número 8 no es primo pero si ponemos un número un poquito más grande el 17 que sabemos que ese sí que es primo porque no hay divisiones exactas entre 2 y 16 es normal decir que efectivamente eso sí que es efectivamente.
+
+Pues aquí tenemos otro uso clásico de la instrucción por siempre se trata como ves de recorrer realizar un número de tareas un número fijo de veces desde que la variable vale un valor hasta que alcanza un valor final en la siguiente elección probamos a estudiar otra tipo de instrucción repetitiva que es la instrucción Huay.
+
 # 15 Instrucción repetitiva while 04:53
+
+Seguidamente te voy a presentar la última de las instrucciones de control de Java la instrucción repetitiva `while` bueno es la diferencia del `for` que es una instrucción que se ejecuta ejecuta Bloque de sentencias un número determinado de veces con `while` lo que haremos es ejecutar un grupo de instrucciones un número indeterminado de veces mientras se cumpla una determinada condición.
+
+Existen dos variantes de esta instrucción las tienes aquí como es una de ellas sería la instrucción `while` y entre paréntesis la condición a evaluar entre llaves el grupo de instrucciones a ejecutar.
+
+Si la condición es verdadera cuando entra por primera vez en `while` se evalúa la condición si es verdadera ejecuta el bloque de sentencias y después vuelve de nuevo a comprobar la condición si sigue siendo verdadera.
+
+De nuevo a ejecutar el bloque de sentencias en el caso contrario de la otra instrucción.
+
+La otra variante de `while` primero se ejecutaría las instrucciones y después se comprobaría la condición.
+
+Fijate que en este caso después del `while` entre paréntesis condición finalizamos con punto y coma.
+
+Bueno el funcionamiento es comprobar las instrucciones al ejecutar las instrucciones y comprobar la condición al final.
+
+Si la condición se cumple de nuevo volvemos a ejecutar las instrucciones así hasta que deje de cumplirse con la instrucción de `while` se garantiza que las instrucciones se van a ejecutar por lo menos una vez ya que el primero ejecuta y luego comprueba como te decía al principio esto es para ejecutar un bloque de sentencias cuando no sabemos cuántas veces van a ejecutarse dichas sentencias depende de la condición entonces no sabemos cuándo cambiará la condición en principio evidentemente dentro de estos bloques de instrucciones algo hará que en algún momento la condición deje de ser verdadera o sea falsa y por tanto finalice la ejecución del buque.
+
+Importante recordar como decíamos también en Elif que la condición debe dar como resultado siempre un tipo bullían no vale utilizar un valor numérico de texto porque sería un error de compilación siempre tiene que dar como resultado un Bolea.
+
+Vamos a ver un par de ejemplos en la siguiente transparencia en este caso lo que vamos a hacer es un ejemplo similar al que hicimos conforme que es mostrar los números del 1 al 10 movés declaramos una variable que inicializar a 1 y luego comprobamos si esa variable es menor igual.
+
+Si es así se muestra y luego se incrementa la variable volvemos otra vez a evaluar la condición.
+
+Si se sigue cumpliendo ahora ya vale 2 se sigue cumpliendo pues se ejecuta el bloque de instrucciones y ahora tendríamos un 2.
+
+Después se incrementaría 3 si hasta el valor 10 cuando la variable de control toma el valor 11 pues ya la condición no se cumple y dejaría de entrar en el bucle en este caso sería hacer algo como lo haríamos con Forno es la típica utilización de Huay en este otro caso pues tenemos ya algo más propio de utilización del web y es bueno en este caso suponemos que tenemos unas instrucciones para la lectura de números y almacenamiento en una variable y resulta que queremos leer un número pues hasta que ese número sea positivo es decir si se introduce un número negativo no nos vale y queremos volver a leer así hasta que realmente se introduzca un número positivo.
+
+Como no sabemos cuántas veces habrá que hacer esto porque no sabemos cuántos números negativos seguidos nos van a ir introduciendo pues es el típico caso de utilización de Weyl o en este caso dugun.
+
+Como veis primero se realizaría la lectura del números almacenaría en la variable y se comprobaría al final en Uruguay si el número es menor que cero porque si lo es se cumple la condición de volver otra vez de nuevo a entrar en el bucle para realizar un nuevo.
+
+La misma operación lectura número variable y comprobación mientras el número sea negativo.
+
+Esto va a ir ejecutándose cuando sea positivo pues al no cumplir la condición se saldrá del bucle y el programa seguirá adelante muy importante.
+
+Lo que te decimos aquí.
+
+Con respecto a la utilización de `while`.
+
+Cuidado con los bucles infinitos.
+
+Y es que si no se establece correctamente la condición o las instrucciones no las hemos preparado adecuadamente para que en algún momento dejemos de cumplirse la condición nos podemos encontrar con situaciones fácilmente mientras que al principio cuando estamos programando con esto estamos aprendiendo de poder.
+
+Como digo no definir bien la condición o no establecer bien las instrucciones que hagan que en algún momento la condición deje de cumplirse y se salga del bucle lo que provocaría como digo un bucle infinito.
+
 # 16 Ejercicio práctico VI 04:05
+
+Muy bien porque vamos a hacer ahora un ejercicio en el que vamos a poner en práctica el uso de la instrucción repetitiva.
+
+Se trata de un programa en el que nos vamos a ir realizando una suma de números naturales empezando por el 1 hasta llegar a superar a 1000.
+
+Entonces de lo que se trata es de calcular hasta dónde tenemos que llegar empezando por el 1 para poder alcanzar superarme.
+
+Bueno pues en este caso estamos ante una clara situación en el que no sabemos cuántos números tendremos que sumar uno más dos más.
+
+No sabremos hasta cual tenemos que llegar para poder alcanzar.
+
+Es el típico caso de utilización de una instrucción repetitiva.
+
+Bueno pues vamos a nuestro entorno de desarrollo Eclipse y vamos a crear un nuevo proyecto sería ya el proyecto número 7 ejercicio práctico 6 generalizamos añadimos la clase new class suma 1000 vamos a llamarle a la clase con el método main como siempre.
+
+Entonces aquí lo que vamos a hacer ahora cuando aparezca la clase es declarar una variable que digamos va a hacer de contador de números hasta que tengamos que llegar para alcanzar 1000 vamos a declararla con la igualamos la inicializar dos a cero.
+
+Por otro lado tenemos una variable suma donde vamos a ir acumulando las sumas.
+
+Entonces de qué se trata pues de ir sumando hasta alcanzar o superar 1000.
+
+Es decir mientras la suma sea menor que 1000 por lo tanto la instrucción de control del Weyl la condición será Guaire suma menor que aquí en el interior qué es lo que vamos a hacer.
+
+Pues vamos a ir incrementando la variable Contador y se la vamos acumulando a Suma suma más contratos de modo que la primera vez iremos sumando uno más inicial cero la siguiente vez a uno le sumaremos dos la siguiente tres.
+
+Así mientras sea menor que mil en el momento en el que la suma ya haya superado de 1000 pues ya hemos llegado con Irán marcándonos el número al que hemos tenido que llegar.
+
+Por lo tanto el mensaje será el que nos muestre el valor de la variable con hay que sumar hasta que ya lo tenemos nuestras pasiones.
+
+Y bueno pues vamos a probarlo vamos a proyecto aceptamos y vamos a ver Assange nos dice que hay que sumar hasta 45 es decir uno dos más hasta 45 con el resultado de esa suma llegaría a alcanzar o superar.
+
+Si probamos con un número mucho más pequeño por ejemplo 10 pues lo probamos vamos a comprobar como en este caso el número sería 4 0 1 +2 +3 +4 suman justamente 10.
+
+Es decir hay que sumar hasta el número cuatro para alcanzarles.
+
+Efectivamente esta sería la solución utilizando un bucle igual que como es vamos realizando las operaciones sin saber cuántas veces se van a ejecutar esa operación de suma vendrá determinado por esta condición.
+
 # 17 Salida forzada de un bucle 03:37   
+
+Y ya para finalizar con el estudio de las instrucciones de control te voy a explicar cómo realizar una salida forzada de un bucle for joy.
+
+Tenemos dos instrucciones para ello dependiendo de qué tipo de salida queremos realizarla.
+
+Está la instrucción break y continúe instrucción break.
+
+Esta instrucción ya la has visto que lo hemos utilizado en la instrucción de tipo alternativa multiple Switch.
+
+También se puede utilizar en un foro y en un guante para qué.
+
+Para provocar la salida forzada de la instrucción repetitiva es decir si se da alguna condición dentro de la instrucción repetitiva que haga que ya no tengamos que seguir integrando este grupo de instrucciones que finalicemos el bucle.
+
+En definitiva utilizaremos una instrucción breve eso provocará que el control del programa pase justo a la siguiente instrucción que hay dentro de ese o foro.
+
+Aquí por ejemplo tienes un pequeño ejemplo en el cual se van recorriendo una serie de números naturales empezando por uno y bueno si nos encontramos que la variable va recorriendo los números naturales es igual a cierto valor.
+
+8.
+
+Abandonamos es un ejemplo un poco mejor tonto pero bueno ahora vamos a ver ya uno de los ejercicios que hemos hecho un caso muy concreto donde sí que nos vendría bien utilizar un break la otra instruciones continúe continúe.
+
+No provoca una salida forzada del bucle como tal sino de la iteración actual es decir nosotros estamos en un foro o en un way y será una condición que haga que ya no tengamos que seguir ejecutando ese bloque de sentencias para esa digamos para ese valor de la variable de control.
+
+Entonces llamamos a Continue continúe lo que haces ir al final del foro como si saltarse todas las instrucciones que quedan y por lo tanto volver otra vez de nuevo a ejecutar la operación incremento a comprobar la condición y si se cumple volver a entrar.
+
+Es decir no es una salida que haga que salgamos completamente del foro o Caraguay sino que simplemente de la iteración actual como te decía Vamos a ver un ejemplo práctico de utilización en este caso de break uno de los ejercicios que hemos realizado en una de las lecciones anteriores.
+
+Concretamente se trata el ejercicio práctico 5 No sé si recordarás que era el ejercicio en el que a partir de un número comprobamos si se trataba de un número primo o no íbamos recorriendo todos los números entre dos y ese número y comprobando si las divisiones entre el número y el número por el que estamos recorriendo eran exactas en cuyo caso ya no era primo.
+
+Entonces claro si yo ya encuentro que hay una división exacta con uno de los números con el que estoy tirando para qué voy a seguir comprobando más.
+
+Es decir si por ejemplo en este número pongamos que fuera 16 vale al hacer la división entre dos me encuentro con que el resto es cero.
+
+Ya no es primo.
+
+Para qué voy a seguir comprobando el 3 el 4 etc. Es decir digamos que si no salimos del bucle en este caso ponemos aquí un break evitamos iteraciones ya que no nos llevan a ningún sitio puesto que si ya has comprobado ya has visto que realmente el número no es primo porque te has encontrado el resto de una división que es igual a cero una división exacta pues no necesitas seguir comprobando esto es lo que haría es mejorar el rendimiento de los programas en este caso el funcionamiento sería el mismo pero como te digo evitaría iteraciones que no tendrían sentido puesto que ya has determinado el resultado de la operación.
