@@ -36,43 +36,43 @@ Si siempre has querido aprender a programar en Java, pero nunca has sabido por d
    * 05 Tipos de datos y variables I 02:34
    * 05 Tipos de datos y variables II 04:46
    * 06 Operadores 04:11
-   * Ejercicio práctico I 04:39
+   * 07 Ejercicio práctico I 04:39
 
 3. Estructuras de control 52:19
-   * Instrucción alternativa simple. If 03:11
-   * Ejercicio práctico II 04:30
-   * Instrucción alternativa múltiple 04:57
-   * Ejercicio práctico III 05:58
-   * Instrucción repetitiva for 08:17
-   * Ejercicio práctico IV 07:13
-   * Ejercicio práctico V 05:38
-   * Instrucción repetitiva while 04:53
-   * Ejercicio práctico VI 04:05
-   * Salida forzada de un bucle 03:37
+   * 08 Instrucción alternativa simple. If 03:11
+   * 09 Ejercicio práctico II 04:30
+   * 10 Instrucción alternativa múltiple 04:57
+   * 11 Ejercicio práctico III 05:58
+   * 12 Instrucción repetitiva for 08:17
+   * 13 Ejercicio práctico IV 07:13
+   * 14 Ejercicio práctico V 05:38
+   * 15 Instrucción repetitiva while 04:53
+   * 16 Ejercicio práctico VI 04:05
+   * 17 Salida forzada de un bucle 03:37
 
 4. Arrays 32:20
-   * Concepto de array, declaración y creación 07:45
-   * Recorrido de un array 05:34
-   * Ejercicio práctico VII 09:12
-   * Ejercicio práctico VIII 09:49
+   * 18 Concepto de array, declaración y creación 07:45
+   * 19 Recorrido de un array 05:34
+   * 20 Ejercicio práctico VII 09:12
+   * 21 Ejercicio práctico VIII 09:49
 
 5. Creación de clases 31:54
-   * Clases, objetos y métodos 07:14
-   * Creación de objetos 03:21
-   * Creación de clases propias 05:17
-   * Ejemplo práctico IX 16:02
+   * 22 Clases, objetos y métodos 07:14
+   * 23 Creación de objetos 03:21
+   * 24 Creación de clases propias 05:17
+   * 25 Ejemplo práctico IX 16:02
 
 6. Cadenas de caracteres 30:23
-   * La clase String 04:04
-   * Principales métodos de la clase String 09:22
-   * Ejercicio práctico X 08:05
-   * Ejercicio práctico XI 08:52
+   * 26 La clase String 04:04
+   * 27 Principales métodos de la clase String 09:22
+   * 28 Ejercicio práctico X 08:05
+   * 29 Ejercicio práctico XI 08:52
 
 7. JavaBeans 18:30
-   * JavaBeans 05:10
-   * Ejercicio práctio XII 13:20
+   * 30 JavaBeans 05:10
+   * 31 Ejercicio práctio XII 13:20
 
 8. Apéndices 09:34
-   * Apéndice A. Ejercicios propuestos 01:18
-   * Apéndice B. Soluciones ejercicios resueltos y propuestos 04:10
-   * Apéndice C. Novedades en versiones Java 9, 10 y 11 04:06
+   * 32 Apéndice A. Ejercicios propuestos 01:18
+   * 33 Apéndice B. Soluciones ejercicios resueltos y propuestos 04:10
+   * 34 Apéndice C. Novedades en versiones Java 9, 10 y 11 04:06
