@@ -2,7 +2,7 @@
    * 05 Tipos de datos y variables I 02:34
    * 05 Tipos de datos y variables II 04:46
    * 06 Operadores 04:11
-   * Ejercicio práctico I 04:39
+   * 07 Ejercicio práctico I 04:39
    
 # 05 Tipos de datos y variables I 02:34
 
@@ -289,7 +289,7 @@ La siguiente tabla nos muestra la preferencia de los operadores Java en orden de
 
 [L6-Operadores.pdf](/temarios/611_Aprende_a_programar_en_Java/pdfs/L6-Operadores.pdf)
 
-# Ejercicio práctico I 04:39  
+# 07 Ejercicio práctico I 04:39  
 
 <img src="images/05-08.png">
 
