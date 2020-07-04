@@ -56,7 +56,7 @@ Si siempre has querido aprender a programar en Java, pero nunca has sabido por d
    * 20 Ejercicio práctico VII 09:12
    * 21 Ejercicio práctico VIII 09:49
 
-5. Creación de clases 31:54
+5. [Creación de clases](/temarios/611_Aprende_a_programar_en_Java/05_Creacion_de_clases.md) 31:54
    * 22 Clases, objetos y métodos 07:14
    * 23 Creación de objetos 03:21
    * 24 Creación de clases propias 05:17
