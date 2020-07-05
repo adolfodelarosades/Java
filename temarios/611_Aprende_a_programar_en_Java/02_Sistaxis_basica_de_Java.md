@@ -123,7 +123,7 @@ int n=a%2; //resto de dividir a entre 2
 a++; //equivale a a=a+1  
 
 n--; //equivale a n=n-1;  
-```java
+```
  
 
 Respecto a los operadores `++` y `--`, hay que tener en cuenta que y pueden ir delante o detrás de la variable. Aunque depende de donde se pongan, pueden afectar de forma diferente:   
@@ -205,9 +205,9 @@ Evalúan expresiones de tipo boolean, dando como resultado también un boolean. 
 
 Operador | Descripción      
 ---------|------------
-`&&`     | Operador AND. El resultado es verdadero   únicamente si ambos operando son verdaderos      
-`||`     | Operador OR. El resultado es verdadero   si alguno de los operandos es verdadero      
-`!`      | Operador NOT. Se aplica sobre un único   operando, su resultado es el contrario al valor del operando      
+`&&`     | Operador AND El resultado es verdadero   únicamente si ambos operando son verdaderos      
+`||`     | Operador OR El resultado es verdadero   si alguno de los operandos es verdadero      
+`!`      | Operador NOT Se aplica sobre un único   operando, su resultado es el contrario al valor del operando      
 
 A continuación te mostramos algunos ejemplos:  
 
