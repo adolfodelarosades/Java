@@ -199,9 +199,13 @@ Por eso te recomiendo que la siguiente lección leas el documento que tenemos de
 
 # 21 Ejercicio práctico VIII 09:49   
 
-Vamos a continuación a hacer nuestro segundo ejercicio de raíz.
+<img src="images/21-01">
 
-Para ello deberías leerte el documento de lectura de datos por teclado que tenemos en la sección de material adicional dentro de esta lección ya que en este ejemplo vamos a ver el enunciado vamos a hacer un programa en el que se van a leer por el teclado la introducción de diez números el usuario del programa tendrá que introducir diez números uno detrás de otros y le seguirá pidiendo y lo que va a hacer nuestro programa es ordenar los números y presentarlos ordenados de mayor a menor o de menor a mayor eso ya como queramos en este caso vamos a hacerlo de mayor o menor.
+<img src="images/21-02">
+
+Vamos a continuación a hacer nuestro segundo ejercicio de arrays.
+
+Para ello deberías leerte el documento de [lectura de datos por teclado]() que tenemos en la sección de material adicional dentro de esta lección ya que en este ejemplo vamos a ver el enunciado vamos a hacer un programa en el que se van a leer por el teclado la introducción de diez números el usuario del programa tendrá que introducir diez números uno detrás de otros y le seguirá pidiendo y lo que va a hacer nuestro programa es ordenar los números y presentarlos ordenados de mayor a menor o de menor a mayor eso ya como queramos en este caso vamos a hacerlo de mayor o menor.
 
 Una particularidad del ejercicio es que si se introduce un número negativo mientras el usuario está solicitando esos números el programa le dirá que es erróneo que vuelva de nuevo a intentarlo.
 
