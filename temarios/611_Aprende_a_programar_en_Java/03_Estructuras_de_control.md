@@ -121,55 +121,70 @@ Aunque no conocemos el tipo de texto que lo veremos más adelante en lecciones p
 
 Como ves en el ejemplo de la diapositiva tienes una variable de tipo cadena de caracteres `Strings` y es posible utilizar como expresión del `switch` un `String` estamos evaluando la variable `cad`, en ese caso los valores de los `case` deben ser obligatoriamente de tipo texto y como decíamos en las consideraciones anteriores no podemos poner variables, tienen que ser literales, valores fijos, si `cad` es `String` sólo podríamos utilizar en cada `case` valores de tipo texto, además fijos, literales. 
 
-# 11 Ejercicio práctico III 05:58
+# 11 :computer: Ejercicio práctico III `601-04-Ejercicio_Practico_3` 05:58
 
-Para ver el funcionamiento de la instrucción suits explicada en la lección anterior vamos a ver el siguiente ejercicio práctico en este ejercicio vamos a hacer un programa que da una nota almacenada en una variable nos va a indicar si se trata de un suspenso si se está entre el rango de 1 a 4 aprobado 5 6 notable 7 8 o sobresaliente si es un 9 un 10 si es otro valor diferente a estos indicados entonces nos que mostrar un mensaje indicando que se trata de una nota no válida.
+<img src="images/11-01.png">
 
-Bien pues bueno vamos a nuestro entorno de desarrollo Eclipse y como siempre procederemos a crear un proyecto 4 ejercicio práctico.
+Para ver el funcionamiento de la instrucción `switch` explicada en la lección anterior vamos a ver el siguiente ejercicio práctico en este ejercicio.
 
-3 En este caso añadimos la clase y le vamos a llamar cãlculo nos vamos a poner el método main para que no lo añada.
+<img src="images/11-02.png">
 
-Y bueno pues nada vamos a declarar una variable que supuestamente va a contener la nota a evaluar le damos un valor cualquiera los 6 entonces de lo que se trataría es de evaluar el valor de dicha variable y en función de eso sacarnos un mensaje con los indicaciones que te hemos dicho en el enunciado pues si es suspenso aprobado notable sobresaliente o una nota negativa como son varias posibles opciones pues lo mejor sería utilizar una instrucción switch.
+Vamos a hacer un programa que da una nota almacenada en una variable nos va a indicar si se trata de un suspenso si se está entre el rango de 1 a 4, aprobado 5 y 6, notable 7 y 8 o sobresaliente si es un 9 ó 10, si es otro valor diferente a estos debe mostrar un mensaje indicando que se trata de una nota no válida.
 
-Para ello evaluaremos dentro de Swett la nota la variable nota y aquí nos encontramos con que hay varios casos para los cuales el mensaje va a ser el mismo.
+Vamos a nuestro entorno de desarrollo Eclipse y a crear un proyecto `601-04-Ejercicio_Practico_3`, añadimos la clase `CalculoNota` e insertamos el siguiente código.
 
-Esto es precisamente la situación en la cual vamos a tener algunos casos sin la instrucción brik al final ya lo verás que es uno que dos Castres o cuatro.
+*`CalculoNota`*
 
-En todos estos casos se va a tener que hacer lo mismo vamos a tabulados para que aparezcan un poquito inventados lo mismo que va a ser con sacar el mensaje LN suspenso entonces qué va a ocurrir si la nota del alumno es un 1 o un 2 o un 3 o un 4 por ejemplo si es un 1 Entrar aquí como naive pasar al siguiente caites.
+```java
+public class CalculoNota {
 
-Como no hay al siguiente y como neurálgica el siguiente que tenemos un 4 o 4 y ahí aparecerá el mensaje.
+   public static void main(String[] args) {
+		
+      int nota = 32;
+		
+      switch (nota) {
+         case 1:
+         case 2:
+         case 3:
+         case 4:
+            System.out.println("Suspenso");
+            break;
+         case 5:
+         case 6:
+       	    System.out.println("Aprobado");
+            break;
+         case 7:
+         case 8:
+            System.out.println("Notable");
+            break;
+         case 9:
+         case 10:
+            System.out.println("Sobresaliente");
+            break;
+         default:
+            System.out.println("Nota no válida");
+  	
+      }
+   }
+}
 
-Y eso mismo se puede aplicar para el caso de que haya sacado un 2 o 3.
+```
 
-Aquí sí que vamos a poner un Bloy porque ya no nos interesaría que pasase al siguiente cais los siguientes Keys serán los asociados al 5 y 6 el aprobado.
+Esta es precisamente la situación en la cual vamos a tener algunos `cases` sin la instrucción `break`. 
 
-5 no ponemos nada gunplay para que en caso de que sea un 5 pase directamente al caso 6 donde la indirecta indicaremos que es un aprobado viendo como en estos casos no nos interesa poner el black en las instrucciones.
+Están contemplados todas las opciones que hemos dicho agrupadas, es decir todos aquellos posibles valores que vayan a dar el mismo mensaje están agrupados.
 
-En alguna de ellas en otras como en estas pues evidentemente si lo pondremos porque no nos interesa que si sacan mensaje aprobado luego pase al siguiente.
+Vamos a probar la aplicación con varios casos.
 
-No nos interesa lo mismo vamos a hacer para la pareja 7 y 8 aquí pondremos el mensaje vamos a copiar y pegar de notable y por último en los casos 9 y 10 indicaremos que se trata de sobresaliente cómo vamos a contemplar la posibilidad de que se introduzca un valor diferente a estos en cuyo caso habría que indicar que se trata de una nota no válida pues utilizaremos un bloque de la Raúl Sendic inventado y el mensaje en este caso era lo que decíamos.
+<img src="images/11-03.png">
 
-Nota no válida.
+<img src="images/11-04.png">
 
-Vale.
+<img src="images/11-05.png">
 
-Nota no tumbaría pues ya lo tenemos.
+<img src="images/11-06.png">
 
-Están contemplados todas las opciones que hemos dicho agrupadas es decir todos aquellos posibles valores que vayan a dar el mismo mensaje están agrupadas pues dentro de el mismo cais es decir la instrucción de repetir la encada que la hemos puesto en el último.
-
-Así si es uno dos o tres en todos esos casos entrarán en el mismo sitio que en el CAIS.
-
-4.
-
-Bueno si lo ejecutamos debería entrar en el pais de aprobado.
-
-Vamos a verlo y decirnos que está aprobado puesto que la nota que hemos puesto es un 6.
-
-Efectivamente pero es que si ponemos un 1 verás que el mensaje a salir será el equivalente al suspenso que tenemos indicado en el CAIS 4 vamos efectivamente y si ponemos una nota que no vale por ejemplo el cero no la hemos contemplado como nota válida nos tendría que salir el mensaje.
-
-Nota normalidad seguidamente pues aquí lo tenemos.
-
-Entonces vemos un caso claro de utilización de Suits puesto que hay varias posibles valores a evaluar con diferentes acciones y además donde algunos de esos que no tienen brik porque nos interesa que cuando entre en ellos se pasen también exigo.
+Vemos un caso claro de utilización de `switch` que hay varios posibles valores a evaluar con diferentes acciones y además donde algunos de esos no tienen `break` porque nos interesa que cuando entre en ellos se pasen también al siguiente.
 
 # 12 Instrucción repetitiva for 08:17
 
