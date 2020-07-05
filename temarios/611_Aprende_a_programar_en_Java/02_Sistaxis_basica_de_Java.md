@@ -289,7 +289,7 @@ La siguiente tabla nos muestra la preferencia de los operadores Java en orden de
 
 [L6-Operadores.pdf](/temarios/611_Aprende_a_programar_en_Java/pdfs/L6-Operadores.pdf)
 
-# 07 Ejercicio práctico I 04:39  
+# 07 :computer: Ejercicio práctico I `601-02_Ejercicio_Practico_1` 04:39  
 
 <img src="images/05-08.png">
 
