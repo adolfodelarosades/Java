@@ -81,137 +81,120 @@ En la siguiente lección vamos a ver cómo utilizar un array directamente desde 
 
 # 19 Recorrido de un array 05:34
 
-En la lección anterior hemos estudiado que son los Arráiz.
+<img src="images/19-01.png">
 
-Vamos a ver cómo recorrer el contenido de una Reith utilizando una instrucción for bien.
+En la lección anterior hemos estudiado que son los arrays, en esta lección vamos a ver cómo recorrer el contenido de un array utilizando una instrucción `for`.
 
-En primer lugar vamos a hablar de un atributo que exponen todos los objetos Rey sean del tipo que sean llamado Lent que significa que exponen un atributo bueno los Arráiz son objetos entonces disponen de propiedades o atributos que es como les llamamos habitualmente en Java.
+<img src="images/19-02.png">
 
-Disponen de métodos funciones pero en el caso de los arrays lo que nos interesa es uno de esos atributos concretamente el que nos va a decir en todo momento cuál es la longitud de una raíz hay que tener en cuenta que una red es una estructura de datos estática.
+En primer lugar vamos a hablar de un atributo que exponen todos los objetos array sean del tipo que sean llamado `length`, que significa que exponen un atributo, bueno los arrays son objetos entonces disponen de propiedades o atributos que es como les llamamos habitualmente en Java, disponen de métodos pero en el caso de los arrays lo que nos interesa es uno de esos atributos concretamente `length` que nos va a decir en todo momento cuál es la longitud de un array, hay que tener en cuenta que un array es una estructura de datos estática, una vez que lo creamos le damos un tamaño, pues ese tamaño no puede ser modificado, entonces si el array está siendo tratado en muchas partes del programa es posible que en algún momento no sepamos exactamente qué tamaño va a tener o qué tamaño tiene porque no sabemos o desconocemos en una parte del código en qué momento se habrá creado y de qué tamaño sea. Entonces si en algún momento necesitamos conocer su tamaño a través del atributo `length`, utilizando la expresión `nombreArray.length` puedes saber cuántos elementos tiene, eso qué significa.
 
-Una vez que lo creamos le damos un contenido a un tamaño pues ese tamaño no puede ser modificado entonces si el array está siendo tratado en muchas partes del programa es posible que en algún momento nos sepamos exactamente qué tamaño va a tener o qué tamaño tiene porque no sabemos o desconocemos en una parte del código.
+<img src="images/19-03.png">
 
-En qué momento se habrá creado y qué tamaño se ha entonces si en algún momento necesitamos conocerlo sabemos que a través del atributo Lent utilizando la expresión para verás en el siguiente ejemplo variable Array punto Lens puedes saber cuántos elementos tiene eso qué significa.
+Lo vemos aquí, que si yo quiero recorrer el contenido de un array para hacer algo con él, como almacenar información en cada una de sus posiciones o como comúnmente se hace para leer el valor de cada una de esas posiciones, podemos utilizar esta estructura:
 
-Pues lo vemos aquí que si yo quiero recorrer el contenido de una raíz para hacer algo con él pues almacenar información en cada una de sus posiciones o como comúnmente se hace para leer el valor de cada una de esas posiciones podemos utilizar esta estructura que estás viendo aquí.
+```java
+int [] datos = new int[10];
+//almacena los 10 primeros números pares
+for(int i=0; i < datos.length; i++){
+   datos[i] = i*2;
+}
+```
 
-Y es que como decimos si una raíz todos los Array sean del tipo que sea comienzan en la posición cero la última será la menos 1.
+Todos los arrays comienzan en la posición 0 por lo que la ultima sera `length-1`.
 
-Entonces si nosotros planteamos un foro cuya variable de control empieza en cero y llegue hasta la condición y menor que datos punto Lentz significará que va a ir pasando por todos los números desde cero justo a longitud menos 1 usando ese número esa variable de control podemos acceder a la posición del array lo que va a hacer que este bucle haga lo que tiene que hacer en este caso por ejemplo es multiplicar la variable control por dos es decir ir calculando los números pares entre cero en adelante y almacenarlos en cada posición de la red.
+Entonces si nosotros planteamos un `for` cuya variable de control empieza en 0 y llegue hasta la condición `i < datos.length` significará que va a ir pasando por todos los números desde 0 justo a longitud menos 1, usando ese número, esa variable de control podemos acceder a la posición del array, lo que va a hacer que este bucle haga lo que tiene que hacer en este caso por ejemplo es multiplicar la variable control por dos es decir ir calculando los números pares entre cero en adelante y almacenarlos en cada posición del array.
 
-Pues claro la primera vez que entramos accederemos a la posición cero la siguiente sala 1 con la variable acuerdate y el incremento que se incrementa al ejecutar al final de bloque instrucciones del Forth y así hasta la última posición porque la condición de salida es que sea menor que la longitud de la red.
+Pues claro la primera vez que entramos accederemos a la posición cero, la siguiente sala 1 con la variable acuerdate y el incremento que se incrementa al ejecutar al final de bloque instrucciones del `for` y así hasta la última posición, porque la condición de salida es que sea menor que la longitud del array.
 
-En este caso como digo pues eso vamos almacenando los diez primeros números pares otro ejemplo que en este caso lo que hacemos es leer recuperar.
+En este caso vamos a almacenar los diez primeros números pares.
 
-Si queremos recuperar todo el contenido de la raíz todas las posiciones una por una desde la primera hasta la última volvemos a plantear el mismo foro desde la posición cero que sería la del primero hasta en menos uno o lo que es lo mismo mientras la condición sea que sea menor que la longitud.
+Otro ejemplo que en este caso lo que hacemos es leer, recuperar.
 
-En ese caso como pues estamos con la variable de control accediendo a cada una de esas posiciones de la red y mostrando sus datos por su contenido por pantalla.
+```java
+//Muestra el contenido del array
+for(int i=0; i < datos.length; i++){
+   System.out.println(datos[i]);
+}
+```
 
-Existe una forma de recorrer también el rey sin utilizar índices con lo que una instrucción conocida como Feith es una variante del foro que no te la conté en el momento cuando vimos la sesión de control porque se especifica de raíz y también de colecciones que es otra estructura de datos un poquito más compleja.
+Si queremos recuperar todo el contenido del array, todas las posiciones una por una desde la primera hasta la última volvemos a plantear el mismo `for` desde la posición cero que sería la del primer elemento hasta la última menos uno o lo que es lo mismo mientras la condición sea menor que la longitud.
 
-Bueno en el caso de los arrays existe una variante como decía el foro que se llama Furyk que nos permite recorrer el contenido de una raíz siempre de lectura muy importante eso siempre lectura sin necesidad de índices.
+En ese caso como ves estamos con la variable de control `i` accediendo a cada una de esas posiciones del array y mostrando su contenido por pantalla.
+
+<img src="images/19-04.png">
+
+Existe una forma de recorrer también el array sin utilizar índices con la instrucción conocida como `for each` es una variante del `for` que no te la conté en el momento cuando vimos la sesión de control porque es especifica de arrays y también de colecciones que es otra estructura de datos un poquito más compleja.
+
+Bueno en el caso de los arrays existe una variante como decía el `for` que se llama `for each` que nos permite recorrer el contenido de un array, **siempre de lectura, muy importante eso siempre lectura, sin necesidad de índices**.
 
 Cómo funciona esto.
 
-Aquí la tiene esta variante del foro no hay tres instrucciones como en el foro clásico sino solamente una declaremos una variable de control dos puntos en la raíz que vamos a recorrer.
+```java
+//Muestra el contenido del array
+for(int n:datos){
+   System.out.println(n);
+}
+```
 
-No tenemos que indicar nada más esto cómo se interpreta como se interpreta que para cada elemento del array.
+Aquí la tiene en esta variante del `for` no hay tres instrucciones como en el `for` clásico sino solamente una, declaramos una variable de control dos puntos el array que vamos a recorrer, no tenemos que indicar nada más, esto cómo se interpreta, se interpreta que para cada elemento del array, por eso lo llamamos habitualmente `for each` a pesar de que el nombre de la instrucción realmente es `for`, para cada uno de los segmentos del array hacer el `System.out.println(n)`, la variable `n` no es un índice es una variable del tipo de dato del array. Si tenemos un array de tipo entero, la variable `n` que declaramos es de tipo entero y lo que hace esa variable es ir, como ves apuntando a cada una de las posiciones del array, repito no representa un índice es una variable que va a ir adquiriendo cada uno de los valores del array.
 
-Por eso se llama la llamamos habitualmente for each.
+Por lo tanto cuando hacemos referencia a `n` en el interior del `for` nos estamos refiriendo al contenido de esa posición, la posición actual, ya se encarga Java de ir cogiendo esa variable e ir apuntándola a cada uno de los elementos del array sin que nosotros le digamos dónde hay que empezar o dónde hay que terminar.
 
-A pesar de que el nombre de la instrucción realmente effort pues para cada uno de los segmentos de la RAI hacer esto.
+Es una instrucción que encontramos en el lenguaje Java desde la versión Java 5 ya son bastantes años la que con la que contamos con esta instrucción.
 
-Esta variable no es un índice es una variable del tipo de dato de la red.
-
-Si tenemos una red de tipo entero la variable n que declaramos aquí el tipo entero y lo que hace esa variable es ir.
-
-Como ves aquí en esta imagen apuntando a cada una de las posiciones de la red es decir repito no es 1 no representa un índice es una variable que va a ir adquiriendo cada uno de los valores de la red.
-
-Por lo tanto cuando hacemos referencia n en el interior del foro nos estamos refiriendo al contenido de esa posición la posición actual ya se encargaba de ir cogiendo esa variable e ir apuntándoles a cada uno de los elementos de la red sin que nosotros le digamos dónde hay que empezar o dónde hay que terminar.
-
-Es una instrucción que encontramos en el lenguaje Java desde la versión Java 5 última versión que tenemos ahora Java 8 próximos Java 9 y ya son bastantes años la que con la que contamos con esta instrucción.
-
-Y como digo pues si no necesitas el índice para nada resulta bastante más copra.
+Y como digo si no necesitas el índice para nada resulta bastante más compacta.
 
 # 20 Ejercicio práctico VII 09:12
 
+<img src="images/20-01">
+
 Muy bien vamos a realizar un par de ejercicios donde pongamos en práctica el uso de los arrays en Java.
 
-En este primer ejercicio dentro de la lección 20 pues vamos a realizar un programa en el que a partir de una raíz que tiene almacenado 10 números enteros cualquiera pues se nos va a mostrar en pantalla la media de esos valores almacenados así como también su valor máximo.
+<img src="images/20-02">
 
-Bueno pues vamos como siempre a nuestro entorno de desarrollo Eclipse y vamos a crear el ejercicio práctico.
+En este primer ejercicio vamos a realizar un programa en el que a partir de un array que tiene almacenados 10 números enteros cualquiera se nos va a mostrar en pantalla la media de esos valores almacenados así como también su valor máximo.
 
-Vamos a ver es el ejercicio práctico número 7 que corresponde con el proyecto 8 que llevamos ya varios ejercicios práctico.
+Vamos a nuestro entorno de desarrollo Eclipse y vamos a crear el proyecto Java `601-07-Ejercicio_Practico_7` y creamos la clase principal `CalculosArray`.
 
-7 directamente finalizamos cuando esté creado el proyecto creamos la clase principal que llamamos así porque tiene el método Meine el punto de entrada a cualquier programa Java recuerda.
 
-Y bueno hasta ahora estamos creando todos los programas que hemos hecho hasta ahora.
+*`CalculosArray`*
 
-Ya verás un poquito más adelante después de que veamos los ejercicios de Arráiz cómo empezaremos a crear ya programas con más de una clase.
+```java
+public class CalculosArray {
 
-Bueno vamos a lo que vamos entonces vamos a crear aquí os cálculos Jarrai vale método main y bueno lo primero que vamos a hacer es declarar las variables donde vamos a almacenar los resultados medio aunque los números van a ser enteros y la media vamos a almacenar números enteros.
+	public static void main(String[] args) {
+		
+		
+		double media = 0;
+		int max;
+		
+		int [] datos = { 4, 8, 2, 11, 8, 9, 23, 7, 11, 14};
+		
+		max = datos[0];
+		
+		for(int dato:datos) {
+			media=media + dato;
+			if(dato > max) {
+				max = dato;
+			}
+		}
+		media = media/datos.length;
+		
+		System.out.println("La media es: " + media) ;
+		System.out.println("El valor máximo es: " + max);
 
-Realmente podríamos utilizar un tipo doble para que almacenarse y contarse también los posibles valores decimales que tuviera esa media.
+	}
+}
+```
 
-Pero bueno como eso ahora mismo tampoco es lo importante vamos a dejar como entero la bolsa inicializar al valor cero y también el valor máximo.
+Vamos a ejecutar el programa.
 
-Vale que lo vamos a inicializar.
+<img src="images/20-03">
 
-Bueno eso lo vamos a ver después a que vamos a inicializar desafiarle el array va a ser un array de hemos dicho 10 elementos datos diez elementos cualesquiera.
+En la siguiente lección vamos a realizar otro ejercicio de arrays y ahí lo que vamos ya es por primera vez a utilizar operaciones de entrada de datos, es decir en vez de como hemos hecho hasta ahora trabajando siempre con datos introducidos previamente en variables dentro del propio programa podemos hacer algo más interactivo que el usuario pueda introducir datos del exterior.
 
-Pues bien vamos a meter ahí unos cuantos números 9 3 7 11 cuando llevamos ya 1 2 3 4 5 6 7 8 9 1 más el 14 que pues aquí ya tenemos declarar las variables y en el caso del array también asignado los valores con los que vamos a partir vale números cualquiera aquí repetido el 4 da igual vamos.
-
-Aquí no hay ningún problema pero bueno vamos que te sean valores diferentes.
-
-Qué valor inicializar la variable más que es la que va a contener el valor máximo de todos.
-
-Bueno pues durante el recorrido la lo vamos a ir calculando pero para ello tenemos que darle un valor inicial que no sabemos cuál va a ser el mínimo número que tenemos en el array ni el máximo número a alcanzar con cualquier valor entero pues lo vamos a inicializar al primero de los elementos de la red con datos de cero y eso nos garantiza que.
-
-Bueno pues la búsqueda del máximo pues si da la casualidad de que el máximo es el primero pues ese sería el primero que vamos a Máximo o que vamos a tener pero si nos encontramos alguno mayor pues conseguiremos sustituirlo pero nunca vamos a tener un máximo que no esté dentro de este conjunto de valores eso lo garantiza el inicializar con el primero de ellos exmandatarios o con cualquiera.
-
-Realmente lo podríamos haber inicializar esa variante.
-
-Bueno pues vamos a recorrer la red tenemos dos opciones o los recorrer lo recorremos dos veces en cada recorrido hacemos uno recorrido para la media y luego lo volvemos a recorrer para calcular el máximo o lo más eficiente sería el mismo recorrido Larrieu o hacer los cálculos.
-
-Las dos operaciones ir calculando la media oficial en cada momento y el máximo parcial que vayamos encontrando lo vamos a recorrer como Zurich qué es lo que normalmente deberíamos utilizar para el recorrido de una raíz.
-
-Cuando vamos a leer su contenido recuerda que en un Furyk la variable de control no es un índice sino que es una variable que va a ir apuntando a cada uno de los elementos de la raíz.
-
-Es decir esa variable ni en cada iteración cada pasada que va a ser 10 aunque ahí no aparezca el número 10 en ningún sitio pero es el tamaño del array pues en cada pasada como digo va a ir apuntando a cada una de las posiciones.
-
-Entonces para la media pues lo primero que hacemos es ir acumulando los valores del array que vamos encontrando dentro de la variable media es decir sería media es igual a media más en insisto en es cada uno de los elementos de la red.
-
-No es una variable Contador ni nada de eso.
-
-Y para el máximo lo que hacemos es la siguiente pregunta si resulta que el elemento que estamos recorriendo en ese elemento en ese momento es mayor que el máximo parcial que llevamos acumulado pues entonces lo que hay que hacer es actualizar esa variable más con ese número encontrado.
-
-Pues eso nos garantiza que al terminar de ejecutar el foro en la variable más tenemos el mayor de todos los que pudiera haber en ese Array mientras que en media tenemos la suma de todos los elementos de la red.
-
-Pero claro la media es la suma dividido por el total con lo cual nos falta hacer una operación ya después del foro importante que no es dentro sino al final cuando hayamos acabado que es divide el contenido de media entre el total y vuelven a almacenar la variable medida.
-
-Cómo era podemos saber el total de elementos que hay en un array.
-
-No hace falta que lo contemos simplemente sabemos que hay un atributo público dentro de todo Array que se llama Lentz que nos garantiza en cada momento que se consulte ese atributo. 
-
-La información del total de elementos que tenemos ahora ya simplemente mostramos el resultado o sistema Uprimny LN
-
-La media es más Mecca y otros mensajes de un punto primo Elene el mayor es más máx.
-
-Todos vamos a probarlo a ver qué es lo que sale.
-
-Obviamente para calcular la media habría que hacer la operación pero bueno vamos a ver si el valor no es descabellado pues evidentemente el que lo estamos haciendo bien y el máximo fácilmente lo podemos ver aquí que debería darnos el número 23 vamos a ejecutarlo a la aplicación pide que guardemos los cambios y la media nueve que serán nueve coma algo seguramente pero como lo hemos almacenado el resultado es una variable tipo Win la división entre dos números enteros es siempre un entero.
-
-Si el resultado es decimal se desprecia la cifra decimal da igual que hubiéramos declarado la variable media si lo hubiéramos puesto como doble pues como aquí sería una división doble entre enteros entonces sí sí tendríamos vale.
-
-Porque uno de los elementos de la operación es doble entonces el resultado sí que sería bueno.
-
-Lo hemos hecho así como entero ahora si lo cambiamos para que números y el mayor respectivamente 23 vamos a cambiar lo vamos a poner la variable media como tipo doble.
-
-Entonces al ejecutarlo ya nos daría la medida exacta
-
-9.7 como en la siguiente elección vamos a realizar otro ejercicio de raíz y ahí lo que vamos ya es por primera vez a utilizar operaciones de entrada de datos es decir en vez de como hemos hecho hasta ahora trabajando siempre con datos introducidos previamente en variables dentro del propio programa podemos hacer algo más interactivo que el usuario pueda introducir datos del exterior.
-
-Por eso te recomiendo que la siguiente elección leas el documento que tenemos dentro de la sección de material adicional que explica el funcionamiento de la clase Escanes que es una de las que se dejaba estándar porque hay otras opciones pero quizás la más sencilla para lectura de datos porque claro antes de hacer el ejercicio le.
+Por eso te recomiendo que la siguiente lección leas el documento que tenemos dentro de la sección de material adicional que explica el funcionamiento de la clase `Scanner` que es una de las clase de Java estándar, porque hay otras opciones pero quizás `Scanner` es la más sencilla para lectura de datos desde el teclado.
 
 
 # 21 Ejercicio práctico VIII 09:49   
