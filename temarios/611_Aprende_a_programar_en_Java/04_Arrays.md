@@ -147,11 +147,11 @@ Y como digo si no necesitas el índice para nada resulta bastante más compacta.
 
 # 20 Ejercicio práctico VII 09:12
 
-<img src="images/20-01">
+<img src="images/20-01.png">
 
 Muy bien vamos a realizar un par de ejercicios donde pongamos en práctica el uso de los arrays en Java.
 
-<img src="images/20-02">
+<img src="images/20-02.png">
 
 En este primer ejercicio vamos a realizar un programa en el que a partir de un array que tiene almacenados 10 números enteros cualquiera se nos va a mostrar en pantalla la media de esos valores almacenados así como también su valor máximo.
 
@@ -190,7 +190,7 @@ public class CalculosArray {
 
 Vamos a ejecutar el programa.
 
-<img src="images/20-03">
+<img src="images/20-03.png">
 
 En la siguiente lección vamos a realizar otro ejercicio de arrays y ahí lo que vamos ya es por primera vez a utilizar operaciones de entrada de datos, es decir en vez de como hemos hecho hasta ahora trabajando siempre con datos introducidos previamente en variables dentro del propio programa podemos hacer algo más interactivo que el usuario pueda introducir datos del exterior.
 
@@ -199,9 +199,9 @@ Por eso te recomiendo que la siguiente lección leas el documento que tenemos de
 
 # 21 Ejercicio práctico VIII 09:49   
 
-<img src="images/21-01">
+<img src="images/21-01.png">
 
-<img src="images/21-02">
+<img src="images/21-02.png">
 
 Vamos a continuación a hacer nuestro segundo ejercicio de arrays.
 
