@@ -58,33 +58,26 @@ Esto ya hará que implícitamente al ejecutarse este programa que se construya u
 La primera con 3, la siguiente con 5, el siguiente con 20 y la siguiente con 11.
 
 <img src="images/18-04.png">
+
+Consideraciones que tenemos que tener en cuenta cuando vamos a trabajar con una array, como cualquier variable se puede declarar o bien como atributo al principio de la clase o bien como una variable local dentro de un método, si se declara como un atributo implícitamente un array es inicializado a `null`, `null` es una palabra reservada de Java que la utilizaremos con objetos, representa el objeto nulo. Evidentemente si es local esa variable no se inicializa a nada, ya sabemos que las variables locales hay que asignarles algo antes de ser utilizadas.
+
+Cuando creamos un array independientemente de que sea atributo o sea una variable local todos sus elementos se van a inicializar implícitamente asignando un cero a cada una de las posiciones de ese datos.
+
 <img src="images/18-05.png">
 
-Consideraciones que tenemos que tener en cuenta cuando vamos a trabajar con una raíz pues como cualquier variable se puede declarar o bien como tributo al principio de la clase o bien como una variable local dentro de un método si se declara como tipo atributo implícitamente una es inicializar.
+Por ultimo comentarte que podemos también trabajar aunque no es habitual porque no se utilizan demasiado con arrays de varias dimensiones, es decir nosotros nos imaginamos un array como los que hemos visto antes como una fila, un conjunto de cajitas una detrás de otra. Pero podemos tener arrays de dos dimensiones que podemos imaginar como una especie de tabla de datos repartidas en filas y columnas 
 
-No es una palabra reservada de Java que la utilizaremos por objetos representa el objeto nulo igual que en una variable de tipo entero.
+En el ejemplo de la diapositiva es que como utilizaríamos un array de dos dimensiones
 
-Si inicialmente se asigna el valor cero clausurarse un atributo claro porque las variables locales no se inicializar implícitamente recordaras.
+`int [][] m = new int[10][4]`
 
-En el caso de la variable de tipo objeto y como digo una red es un tipo de objeto pues quería saborear un inicializar al valor.
-
-Evidentemente si es local esa variable no es inicializar a nada.
-
-Ya sabemos que las variables locales hay que asignarles algo antes de ser utilizadas bien cuando creamos una raíz es decir hacemos lo del New y metemos el Rey dentro de la variable independientemente de que sea atributo o sea una variable local todos sus elementos se van inicializar implícitamente es decir por ejemplo en este caso cuando yo hago nio i10 ya estoy asignando un cero a cada una de las posiciones de ese datos independientemente de que esta variable sea un atributo o sea una variable local por ultimo comentarte que podemos también trabajar aunque no es habitual porque no se utilizan demasiado con arrays de varias dimensiones es decir nosotros nos imaginamos una raíz como los que hemos visto antes como una fila de lo que te decía antes un conjunto de cajitas una detrás de otra.
-
-Pero podemos tener a raíz de dos dimensiones que podemos imaginar como una especie de tabla de datos de repartidas en filas y columnas por ejemplo.
-
-En este ejemplo que tienes aquí es que como utilizaríamos una raíz de dos dimensiones Arraya enteros tipo int corchete cierre corchete otra vez corchete cierre corchete y nombre la variable se hace la apertura cierre corchete tantas veces como dimensiones indica el compilador que se trata de dos dimensiones a la hora de crear el array.
-
-Hay que indicar después del Gniewino el tipo de datos pues tanto la dimensión del tamaño de la primera dimensión como de la segunda es decir si nos imaginamos una red dos dimensiones como una tabla pues el primer número representaría por ejemplo en las filas de esa tabla y el segundo las columnas de modo que una raíz 10 4.
-
-Como en este caso sería realmente una raíz de 10 por cuatro elementos 40 elementos.
+El primer número representaría las filas de esa tabla y el segundo las columnas de modo que un array `[10][4]` como en este caso sería realmente un array de 10 por cuatro elementos, 40 elementos.
 
 Para acceder a cada una de las posiciones evidentemente tenemos que utilizar dos índices para la primera dimensión y para la segunda dimensión.
 
-En la siguiente elección vamos a ver cómo utilizar una raíz directamente desde un programa para recorrerlo de cara a almacenar información y ejecutar un grupo de instrucciones que se ejecuten con cada una de las posiciones del array.
+`m[2][1]`
 
-Y también para la lectura de la información que es para lo que más vamos a utilizar dentro de un foro dentro de una red.
+En la siguiente lección vamos a ver cómo utilizar un array directamente desde un programa para recorrerlo de cara a almacenar información y ejecutar un grupo de instrucciones que se ejecuten con cada una de las posiciones del array y también para la lectura de la información que es para lo que más vamos a utilizar.
 
 # 19 Recorrido de un array 05:34
 
