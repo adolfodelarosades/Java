@@ -163,28 +163,28 @@ Vamos a nuestro entorno de desarrollo Eclipse y vamos a crear el proyecto Java `
 ```java
 public class CalculosArray {
 
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
 		
-		double media = 0;
-		int max;
+      double media = 0;
+      int max;
 		
-		int [] datos = { 4, 8, 2, 11, 8, 9, 23, 7, 11, 14};
+      int [] datos = { 4, 8, 2, 11, 8, 9, 23, 7, 11, 14};
 		
-		max = datos[0];
+      max = datos[0];
 		
-		for(int dato:datos) {
-			media=media + dato;
-			if(dato > max) {
-				max = dato;
-			}
-		}
-		media = media/datos.length;
-		
-		System.out.println("La media es: " + media) ;
-		System.out.println("El valor máximo es: " + max);
-
+     for(int dato:datos) {
+	media=media + dato;
+	if(dato > max) {
+	   max = dato;
 	}
+     }
+     media = media/datos.length;
+		
+     System.out.println("La media es: " + media) ;
+     System.out.println("El valor máximo es: " + max);
+
+   }
 }
 ```
 
