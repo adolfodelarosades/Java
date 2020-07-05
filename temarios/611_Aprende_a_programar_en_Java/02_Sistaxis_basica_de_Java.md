@@ -102,13 +102,13 @@ Se emplean con tipos numéricos para realizar operaciones aritméticas en un pro
 
 Operador | Descripción      
 ---------|------------
-+        | Suma dos valores numéricos.        
--        | Resta dos valores numéricos.      
-*        | Multiplica dos números.      
-/        | Divide dos números. El tipo de resultado   depende de los operandos, pues en el caso de que ambos sean enteros, el resultado de la división siempre será entero.      
-%        | Calcula el resto de la división entre   dos números.      
-++       | Incrementa una variable numérica en una unidad y deposita el resultado en la variable.      
---       | Decrementa una variable en una unidad y   deposita el resultado en la variable.      
+`+`      | Suma dos valores numéricos.        
+`-`      | Resta dos valores numéricos.      
+`*`      | Multiplica dos números.      
+`/`      | Divide dos números. El tipo de resultado   depende de los operandos, pues en el caso de que ambos sean enteros, el resultado de la división siempre será entero.      
+`%`      | Calcula el resto de la división entre   dos números.      
+`++`     | Incrementa una variable numérica en una unidad y deposita el resultado en la variable.      
+`--`     | Decrementa una variable en una unidad y   deposita el resultado en la variable.      
 
    
 A continuación te presento algunos ejemplos:  
@@ -151,12 +151,12 @@ La siguiente tabla resume los operadores de asignación existentes en Java:
 
 Operador | Descripción 
 ---------|------------
-=        | Asigna la expresión de la derecha, a la   variable situada a la izquierda del operador.     
-+=       | Suma la expresión de la derecha, a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
--=       | Resta la expresión de la derecha a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
-*=       | Multiplica la expresión de la derecha   con la variable y deposita el resultado en la variable.      
-/=       | Divide la variable situada a la   izquierda entre la expresión de la derecha, depositando el resultado en la   variable.      
-%=       | Calcula el resto de la división entre la   variable situada a la izquierda y la expresión de la derecha, depositando el   resultado en la variable.      
+`=`      | Asigna la expresión de la derecha, a la   variable situada a la izquierda del operador.     
+`+=`     | Suma la expresión de la derecha, a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
+`-=`     | Resta la expresión de la derecha a la   variable situada a la izquierda del operador y deposita el resultado en la   variable      
+`*=`     | Multiplica la expresión de la derecha   con la variable y deposita el resultado en la variable.      
+`/=`     | Divide la variable situada a la   izquierda entre la expresión de la derecha, depositando el resultado en la   variable.      
+`%=`     | Calcula el resto de la división entre la   variable situada a la izquierda y la expresión de la derecha, depositando el   resultado en la variable.      
 
 Ejemplos:  
 
@@ -178,12 +178,12 @@ En la siguiente tabla te muestro los operadores condicionales empleados en Java.
 
 Operador | Descripción      
 ---------|------------
-==       | Compara dos valores, en caso que sean   iguales el resultado de la operación será true      
-<        | Si el operando de la izquierda es menor   que el de la derecha el resultado es true      
->        | Si el operando de la izquierda es mayor   que el de la derecha el resultado es true      
-<=       | Si el operando de la izquierda es menor   o igual que el de la derecha el resultado es true 
->=       | Si el operando de la izquierda es mayor   o igual que el de la derecha el resultado es true 
-!=       | Si el valor de los operandos es   diferente el resultado es true.      
+`==`     | Compara dos valores, en caso que sean   iguales el resultado de la operación será true      
+`<`      | Si el operando de la izquierda es menor   que el de la derecha el resultado es true      
+`>`      | Si el operando de la izquierda es mayor   que el de la derecha el resultado es true      
+`<=`     | Si el operando de la izquierda es menor   o igual que el de la derecha el resultado es true 
+`>=`     | Si el operando de la izquierda es mayor   o igual que el de la derecha el resultado es true 
+`!=`     | Si el valor de los operandos es   diferente el resultado es true.      
 
 Ejemplos:  
 
@@ -205,9 +205,9 @@ Evalúan expresiones de tipo boolean, dando como resultado también un boolean. 
 
 Operador | Descripción      
 ---------|------------
-&&       | Operador AND. El resultado es verdadero   únicamente si ambos operando son verdaderos      
-||       | Operador OR. El resultado es verdadero   si alguno de los operandos es verdadero      
-!        | Operador NOT. Se aplica sobre un único   operando, su resultado es el contrario al valor del operando      
+`&&`     | Operador AND. El resultado es verdadero   únicamente si ambos operando son verdaderos      
+`||`     | Operador OR. El resultado es verdadero   si alguno de los operandos es verdadero      
+`!`      | Operador NOT. Se aplica sobre un único   operando, su resultado es el contrario al valor del operando      
 
 A continuación te mostramos algunos ejemplos:  
 
@@ -308,15 +308,15 @@ Y sobre ese método es donde vamos a crear todo el código de este sencillo prog
 ```java
 public class DivideNumeros {
 
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
-		int a = 3;
-		int b = 14;
-		int div;
-		div = (a>b) ? a/b : b/a;
-		System.out.println("División: " + div);
+      int a = 3;
+      int b = 14;
+      int div;
+      div = (a>b) ? a/b : b/a;
+      System.out.println("División: " + div);
 
-	}
+   }
 
 }
 ```
