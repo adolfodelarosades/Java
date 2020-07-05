@@ -12,131 +12,114 @@
    
 # 08 Instrucción alternativa simple. If 03:11
 
+<img src="images/08-01.png">
+
 Después de los tipos de datos variables y operadores es el momento de abordar el estudio de las instrucciones de control de flujo que nos van a permitir introducir cierta lógica dentro de nuestros programas.
 
-Empezamos con la instrucción de tipo alternativa simple una alternativa simple es un tipo instrucción llamada If es el nombre de la instrucción y la característica principal es que se evalúa una condición que puede dar como resultado verdadero o falso si el resultado la condición es verdadero.
+<img src="images/08-02.png">
 
-El programa tomó un camino y si es falso toma otro diferente.
+Empezamos con la instrucción de tipo alternativa simple, una alternativa simple es un tipo instrucción llamada `if` es el nombre de la instrucción y la característica principal es que se evalúa una condición que puede dar como resultado verdadero o falso, si el resultado, la condición es verdadera el programa tomá un camino y si es falso toma otro diferente.
 
-La estructura de esta instrucción es la que veis aquí y entre paréntesis la condición a evaluar si el resultado de esa condición es verdadero pues se van a ejecutar las instrucciones que hay dentro del bloque delimitado por las llaves que vienen entre IF y aquí finalde.
+La estructura de esta instrucción es la que ves `if` entre paréntesis la condición a evaluar, si el resultado de esa condición es verdadero pues se van a ejecutar las instrucciones que hay dentro del bloque delimitado por las llaves que vienen entre `if`, si no se ejecutarán las instrucciones indicadas en este otro bloque llamado `else` que también tiene sus llaves para delimitar el conjunto de instrucciones a ejecutar.
 
-Si no se ejecutarán las instrucciones indicadas en este otro bloque llamado Else que también tiene sus llaves para delimitar el conjunto de instrucciones a ejecutar.
+En el ejemplo que te proponemos aquí simplemente a partir de una variable se comprueba si el resto de la división es cero es decir si es un número par, si es así se muestra un mensaje y si no otro mensaje diferente.
 
-En este caso el ejemplo que te ponemos proponemos aquí pues simplemente a partir de una variable se comprueba si el resto de la división es cero es decir si es un número par.
+<img src="images/08-03.png">
 
-Si es así se mostró un mensaje y si no otro mensaje diferente es importante tener en cuenta una serie de consideraciones cómo utilizamos la instrucción IF.
+Es importante tener en cuenta una serie de consideraciones cuando utilizamos la instrucción `if`. La primera es referente a la condición, importante que tengamos claro que la condición a evaluar tiene que dar como resultado obligatoriamente un tipo boolean no puede dar un valor numérico, char, etc. tiene que ser boolean.
 
-La primera es referente a la condición importante que tengamos claro que la condición a evaluar tiene que dar como resultado obligatoriamente un tipo Bühler no puede dar un valor numérico esto Char C-C tiene que ser bullían.
+Por ejemplo en el primer caso simplemente preguntamos si la variable `p`, `p` es un número porque es una variable entera y eso no está permitido dentro de la condición del `if`, por lo tanto se produciría un error de compilación, nisiquiera compilaría el programa.
 
-Por ejemplo en este caso simplemente preguntamos si la variable de resultado de P es un número porque es una variable entera y eso no está permitido dentro de la condición de Lick.
+Otra cosa que también tenemos que decir es que el bloque `else` es opcional, puede ser que si la condición se cumple queramos hacer algo y si no se cumple simplemente no queremos hacer nada entonces simplemente continuaría el programa después de la instrucción que venga a continuación de la llave de cierre del `if`.
 
-Por lo tanto se produciría un error de compilación si quiera compilar el programa otra cosa que también tenemos que decir es que lo bloque es opcional.
+Las llaves solamente son obligatorias si hay más de una instrucción dentro del bloque `if` como `else`, es decir si solamente queremos realizar una determinada tarea, una única instrucción no sería necesario utilizar las llaves como ves en el segundo ejemplo que tenemos aquí, simplemente queríamos sacar un mensaje que el número es positivo si el número contenido en la variable `p` es mayor que cero, aunque no es obligatorio poner la llave yo siempre recomiendo hacerlo porque es una manera de organizar nuestro código y que quede más claro.
 
-Puede ser que si la condición se cumple queramos hacer algo y si no se cumple o simplemente no queremos hacer nada entonces simplemente continuaría el programa después de la instrucción que venga a continuación de la llave de cierre de las llaves solamente son obligatorias si hay más de una instrucción dentro del bloque Rieff como else.
+<img src="images/08-04.png">
 
-Es decir si solamente queremos realizar una determinada tarea una única instrucción no sería necesario utilizar las llaves como ves en este ejemplo que tenemos aquí simplemente queríamos sacar un mensaje que el número es positivo si el número contenido de la variable es mayor que cero aunque no es obligatorio poner la llave.
+El bloque `else if` es una manera de crear un `if` dentro de un bloque `else` es decir puede ocurrir que si no se cumple una condición queramos evaluar otra, en ese caso utilizaremos este bloque llamado `else if`, en este caso como ves se comprueba si el contiene de una variable es igual a 1 y si no queremos comprobar si es otro valor diferente, si `p` es mayor que 10, en ese caso en vez de abrir la llave y poner otro `if` anidado utilizamos la expresión `else if`.
 
-Yo siempre recomiendo hacerlo porque es una manera de organizar nuestro código y que quede más claro el bloque 6 es una manera de crear un dentro de un bloque Else es decir puede ocurrir que si no se cumple una condición queramos evaluar otra.
+# 09 :computer: Ejercicio práctico II `601-03_Ejercicio_Practico_2` 04:30
 
-Entonces en ese caso utilizaremos este bloque llamado el 6.
-
-En este caso como ves se comprueba si contiene una variable es igual a 1 y si no queremos comprobar si es otro valor diferente si p es mayor que 10.
-
-En ese caso aquí la llave y poner otro anidado utilizamos la expresión el.
-
-# 09 Ejercicio práctico II 04:30
+<img src="images/09-01.png">
 
 Seguidamente vamos a realizar un ejercicio en el que vamos a poner en práctica el uso de la instrucción y vista la lección anterior.
 
+<img src="images/09-02.png">
+
 El ejercicio va a consistir en un programa que dados dos números nos va a mostrar cuál es el mayor de los dos en caso de que sean iguales pues nos saldrá un mensaje indicando que se trata de dos números iguales.
 
-Bueno pues vamos a ir de nuevo a nuestro entorno de desarrollo Eclipse y vamos a crear el siguiente jaba proyecto 03 en ejercicio práctico dos realizamos y añadiremos como siempre una clase con su método mayor utilizamos marcamos la casita método min para que nos incluya el método Mayne y aquí vamos a crear nuestro código.
+Vamos a ir de nuevo a nuestro entorno de desarrollo Eclipse y vamos a crear el siguiente proyecto java `601-03_Ejercicio_Practico_2` y añadiremos una clase `MayorNumeros` con su método `main`. 
 
-Vamos a declarar dos variables con dos números cualesquiera Becca igual a 45 por ejemplo el caso es que nuestro programa compruebe sus dos números muestre cuál es el mayor y si se trata de dos números iguales.
+Vamos a incluir el siguiente codigo en la clase.
 
-También olvida un mensaje en el que nos informa de esa situación y vamos a utilizar para ello con la instrucción que hemos visto.
+*`MayorNumeros`*
 
-Lo primero que hacemos es preguntar si A es mayor que en cuyo caso el mensaje a mostrar será que el número mayor está vamos a ver si sistema Elene y aquí sacamos el mensaje que diga el mayor es concatenados únimos con la variable a para que nos muestre el valor de esa variable.
+```java
 
-Qué ocurre si no es mayor que aquí vamos a utilizar la estructura el 6 porque habría que hacer una siguiente pregunta y es si es mayor que a porque en ese caso lo que habría que sacar es un mensaje indicándonos que es de mayor cojeamos.
+public class MayorNumeros {
 
-Esta instrucción el mayor es P Pero y si tampoco se cumple esta condición en este se que correspondería a la segunda condición sería cuando habría que informar de que si no ha cumplido ésta ni ésta.
+	public static void main(String[] args) {
+		int a=10;
+		int b=45;
+		
+		if(a>b) {
+			System.out.println("El número mayor es: " + a);
+		}else if(b>a) {
+			System.out.println("El número mayor es: " + b);
+		}else {
+			System.out.println("Los dos números son iguales.");
+		}
 
-Se trata de dos números iguales cogemos copiamos otra vez indicamos los números son iguales os damos la variable y en este caso si hemos puesto en el número 10 y en el 45 lógicamente nos va a decir que el mayor es el 45.
+	}
 
-Vamos a probarlo una aplicación efectiva que es el número que tenemos en la variable al mayor. 
+}
+```
 
-Entonces nos indicaría lógicamente que se trata ese número en este caso 100 el mayor de 100 efectivamente.
+Vamos a probar los tres casos que existen.
 
-Y si fueran iguales por ejemplo ambos 100 no debería entrar en este Else indicando que se trata de dos números iguales no probamos y.
+<img src="images/09-03.png">
 
-Efectivamente este es el mensaje.
+<img src="images/09-04.png">
 
-Has visto una utilización de la estructura de control extorción de control alternativa y aprovechamos para comentar lo que vimos en la lección anterior.
+<img src="images/09-05.png">
 
-Y es que es obligatorio que esa condición sea de tipo bullían el resultado sea verdadero o falso. 
+Has visto la utilización de la estructura de control alternativa `if`.
 
-Yo no puedo hacer por ejemplo y entonces como que un error de compilación al tratarse de un resultado numérico y mucho cuidado también porque es muy habitual cuando se está aprendiendo Java. 
+Aprovechamos para comentar lo que vimos en la lección anterior, es que es obligatorio que esa condición sea de tipo boolean, el resultado sea verdadero o falso. 
 
-A la pregunta si una variable es igual a un determinado valor porque el operador de comparación no es el igual sino el doble igual aquí pensaría que estás asignando cero a la variable y estás preguntando por algo con lo cual por eso da un error de compilación porque el resultado sería numérico si lo que quieres es comparar si es igual tienes que utilizar el doble igual.
+Yo no puedo hacer por ejemplo `if(a)` por que da un error de compilación al tratarse de un resultado numérico y mucho cuidado también porque es muy habitual cuando se está aprendiendo Java a la pregunta si una variable es igual a un determinado valor `if(a=0)` porque el operador de comparación no es el `=` sino el doble igual `==` aquí `if(a=0)` pensaría que estás asignando cero a la variable y estás preguntando por `a` eso da un error de compilación porque el resultado sería numérico si lo que quieres es comparar si `a` es  igual tienes que utilizar el doble igual `if(a==0)`.
 
 # 10 Instrucción alternativa múltiple 04:57
 
-A continuación te voy a presentar la instrucción alternativa múltiple la instrucción alternativa múltiple.
+<img src="images/10-01.png">
 
-A diferencia de la simple evalua una expresión no una condición la expresión puede dar como resultado múltiples valores en función de cada valor ejecutaremos distintas tareas.
+A continuación te voy a presentar la instrucción alternativa múltiple.
 
-La instrucción alternativa múltiple en Java es la instrucción switch switch tiene este formato entre paréntesis la expresión a evaluar que puede ser una operación matemática o incluso una simple variable y para cada posible valor utilizamos estos bloques Kaixo cais valor 1 significa que si el resultado de esa expresión coincide con valor 1 se ejecutará en estas instrucciones.
+<img src="images/10-02.png">
 
-Si coincidiera con valor 2 estas otras sí coincidirá con otro valor etc..
+La instrucción alternativa múltiple a diferencia de la simple, evalua una expresión, no una condición, la expresión puede dar como resultado múltiples valores en función de cada valor ejecutaremos distintas tareas.
 
-Podemos poner tanto escritos como consideremos apropiados como opciones queremos evaluar en caso de que no coincida el resultado de la expresión con ninguno de los valores indicados en keys entraría en el bloque Defour como es cada cais lleva al final del bloque instrucciones una instrucción Brak que lo que hace es que se salga de la instrucción switch porque si no ponemos la instrucción break cuando el programa entra en un caso al ejecutar la instrucciones si no encuentra Brak aunque no cumpliese con la siguiente cais entraría en él eso lo vamos a comentar después.
+La instrucción alternativa múltiple en Java es la instrucción `switch`, `switch` tiene este formato entre paréntesis la expresión a evaluar `switch(expresion_entera)` que puede ser una operación matemática o incluso una simple variable y para cada posible valor utilizamos bloques `case`, `case valor 1:` significa que si el resultado de esa expresión coincide con valor 1 se ejecutarán las instrucciones en ese `case`. Si coincidiera con valor 2 se ejecutarán las instrucciones en ese `case`, etc.. Podemos poner tanto `case` como consideremos apropiados, como opciones queremos evaluar, en caso de que no coincida el resultado de la expresión con ninguno de los valores indicados en `case` entraría en el bloque `default`. Como ves cada `case` lleva al final del bloque de instrucciones una instrucción `break` que lo que hace es que se salga de la instrucción `switch`, porque si no ponemos la instrucción `break` cuando el programa entra en un `case` al ejecutar las instrucciones si no encuentra `break` aunque no cumpliese con el siguiente `case` entraría en él.
 
-Bueno aquí tenemos un ejemplo en el cual en la instrucción suits simplemente evaluamos una variable que supuestamente es una variable o debería ser una variable entera.
+En el ejemplo simplemente evaluamos una variable `a` que supuestamente es una variable o debería ser una variable entera. Si el contenido de la variable `a` es 1 entonces imprimiríamos el mensaje `bajo`. Si el contenido de la variable `a` es 10 entonces imprimiríamos el mensaje `alto` y si no es ni 1 ni 10 imprimiríamos el mensaje `fuera`.
+ 
+<img src="images/10-03.png">
 
-Ah bueno pues si bien el contenido de la variable A es 1 entonces permitíamos este mensaje si fuera 10 imprimiría.
+Consideraciones que tenemos tener en cuenta sobre `switch`.
 
-C.O.T. Y si no es ni uno ni diez pues sacaría este mensaje sistema Elene fuera qué consideraciones tenemos que tener en cuenta sobre Suits.
+Lo primero el bloque `default` es opcional.
 
-Bueno lo primero Block default es opcional.
+La instrucción `break` es opcional, no es obligatoria pero si no la ponemos cuando termine de ejecutar las instrucciones del `case` pasará al siguiente `case`. Eso que puede parecer un problema o una limitación no lo es, puede ser que haya veces en las que no nos interese poner un break.
 
-Lo has visto el ejemplo anterior pero podríamos no tener un bloque de lo que te comentaba también la instrucción break es opcional no es obligatoria pero si no la ponemos pues cuando termine de ejecutar las instrucciones del Cais pasará al siguiente ejemplo.
+Otra consideración muy importante es que los valores del `case` deben ser **valores literales** o constantes, en el primer ejemplo de la diapositiva en el case usamos el valor de la variable `b`, en vez de utilizar un número hemos puesto una variable, eso no es posible, no me lo permite sería un error de compilación todos los valores indicados en `case` deben ser fijos, constantes.
 
-El caso anterior si no tuviéramos este break y este suponiendo que el valor de afuera 1 saldría el mensaje bajo alto y fuera por qué.
+Otra consideración también muy importante es que los valores de los `case` deben ser enteros de tipo `int` o compatibles. En el segundo ejemplo nosotros no podríamos evaluar una expresión que nos devolvieron `long` sería un error de compilación, en cambio en uno de los `case` sí que podría ser por ejemplo un tipo `char`, ¿por que?, porque `char` es compatible con enteros. Ya lo dijimos cuando estudiamos los tipos de datos almacena el valor Unicode, valor entero, por lo tanto sí podría utilizarse como valor de los `case` un `char`, un `byte`, un `short` e `int`, pero no un `long` en los `case` ni en las expresiones.
 
-Porque entraría en el caso al coincidir el valor de A con uno y al no haber un break entraría en el sguiente.
+<img src="images/10-04.png">
 
-Y al no haber un break aquí entrarían también.
+Aunque no conocemos el tipo de texto que lo veremos más adelante en lecciones posteriores pues comentar que desde la versión Java 7 es posible utilizar `Strings` cadenas de caracteres en un `switch`.
 
-Eso que puede parecer un problema o una limitación no lo es.
-
-Este hecho ha puesto porque puede ser que haya veces en las que no nos interese poner un break.
-
-Luego lo verás en el siguiente vídeo del ejercicio práctico que vamos a realizar.
-
-Otra consideración muy importante es que los valores del Keys deben ser constantes es decir fíjate en este caso aquí evaluamos el valor de la variable y en el caso en vez de utilizar un número hemos puesto una variable.
-
-Eso no es posible.
-
-No me lo permite sería un error de compilación todos los valores indicados en keys deben ser fijos constantes.
-
-Otra consideración también muy importante es que los valores de los keys deben ser enteros de tipo int o compatibles.
-
-Vale por ejemplo nosotros no podríamos evaluar una expresión que nos devolvieron lonko sería un error de compilación en cambio uno de los keys sí que podría ser por ejemplo un tipo Char.
-
-Por qué.
-
-Porque Char es compatible con entero derecho a luchar.
-
-Ya lo dijimos cuando estudiamos los tipos de datos almacena el valor Unicode valor entero.
-
-Por lo tanto sí podría utilizarse como valor de los keys un char Vali también Univ.
-
-Por supuesto un bit o un sólo son compatibles pero nunca lonko ni en los keys ni tampoco en lo que serían las expresiones aunque no conocemos el tipo de texto que lo veremos más adelante en lecciones posteriores pues comentar que desde la versión Java 7 es posible utilizar strings cadenas de caracteres en un switch.
-
-Como ves aquí tienes una variable de tipo cadena de caracteres string que como te digo ya lo estudiaremos las acciones posteriores.
-
-Y es posible utilizar como expresión del switch un string un texto movemos estamos evaluando la variable K en ese caso los valores de los keys deben ser obligatoriamente de tipo texto y como decíamos en las consideraciones anteriores no podemos poner variables tienen que ser literales valores fijos si K-T ese string sólo podríamos utilizar en cada cais valores de tipo texto texto además fijos literales. 
+Como ves en el ejemplo de la diapositiva tienes una variable de tipo cadena de caracteres `Strings` y es posible utilizar como expresión del `switch` un `String` estamos evaluando la variable `cad`, en ese caso los valores de los `case` deben ser obligatoriamente de tipo texto y como decíamos en las consideraciones anteriores no podemos poner variables, tienen que ser literales, valores fijos, si `cad` es `String` sólo podríamos utilizar en cada `case` valores de tipo texto, además fijos, literales. 
 
 # 11 Ejercicio práctico III 05:58
 
