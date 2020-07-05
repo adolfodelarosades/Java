@@ -6,6 +6,12 @@
    
 # 18 Concepto de array, declaración y creación 07:45
 
+<img src="images/18-01.png">
+<img src="images/18-02.png">
+<img src="images/18-03.png">
+<img src="images/18-04.png">
+<img src="images/18-05.png">
+
 En esta lección te voy a explicar una estructura de programación muy utilizada en cualquier lenguaje que es el array que es una red una raíz es un conjunto de datos de un mismo tipo a los que vamos a poder acceder no con varias variables sino con una única variable.
 
 Vamos a ver si nos imaginamos una variable como una caja en la que almacenamos un dato de un determinado tipo.
