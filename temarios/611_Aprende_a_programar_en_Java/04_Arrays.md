@@ -145,7 +145,7 @@ Es una instrucción que encontramos en el lenguaje Java desde la versión Java 5
 
 Y como digo si no necesitas el índice para nada resulta bastante más compacta.
 
-# 20 Ejercicio práctico VII 09:12
+# 20 :computer: Ejercicio práctico VII `601-08-Ejercicio_Practico_7` 09:12
 
 <img src="images/20-01.png">
 
@@ -197,100 +197,66 @@ En la siguiente lección vamos a realizar otro ejercicio de arrays y ahí lo que
 Por eso te recomiendo que la siguiente lección leas el documento que tenemos dentro de la sección de material adicional que explica el funcionamiento de la clase `Scanner` que es una de las clase de Java estándar, porque hay otras opciones pero quizás `Scanner` es la más sencilla para lectura de datos desde el teclado.
 
 
-# 21 Ejercicio práctico VIII 09:49   
+# 21 :computer: Ejercicio práctico VIII `601-09-Ejercicio_Practico_8` 09:49   
 
 <img src="images/21-01.png">
 
+Vamos a continuación a hacer nuestro segundo ejercicio de arrays, ara ello deberías leerte el documento de [lectura de datos por teclado](/temarios/611_Aprende_a_programar_en_Java/pdfs/L21-Lectura_de_datos_por_teclado.pdf) ya que en este ejemplo lo necesitaremos.
+
 <img src="images/21-02.png">
 
-Vamos a continuación a hacer nuestro segundo ejercicio de arrays.
+Vamos a hacer un programa en el que se van a leer por el teclado la introducción de diez números, el usuario del programa tendrá que introducir diez números uno detrás de otro y le seguirá pidiendo y lo que va a hacer nuestro programa es ordenar los números y presentarlos ordenados de mayor a menor.
 
-Para ello deberías leerte el documento de [lectura de datos por teclado]() que tenemos en la sección de material adicional dentro de esta lección ya que en este ejemplo vamos a ver el enunciado vamos a hacer un programa en el que se van a leer por el teclado la introducción de diez números el usuario del programa tendrá que introducir diez números uno detrás de otros y le seguirá pidiendo y lo que va a hacer nuestro programa es ordenar los números y presentarlos ordenados de mayor a menor o de menor a mayor eso ya como queramos en este caso vamos a hacerlo de mayor o menor.
+Una particularidad del ejercicio es que si se introduce un número negativo mientras el usuario está solicitando esos números el programa le dirá que es erróneo que vuelva de nuevo a intentarlo así hasta conseguir diez números positivos.
 
-Una particularidad del ejercicio es que si se introduce un número negativo mientras el usuario está solicitando esos números el programa le dirá que es erróneo que vuelva de nuevo a intentarlo.
+Vamos al entorno de desarrollo Eclipse y vamos a crear el proyecto `601-09-Ejercicio_Practico_8` con la clase principal `NumerosOrdenados` con el siguiente código.
 
-Así hasta conseguir diez números positivos.
+*`NumerosOrdenados`*
 
-Bien pues nada vamos a ello aquí tenemos un entorno de desarrollo Eclipse donde yo ya tengo creado el proyecto número 9 para el ejercicio práctico 8 donde tenemos ya todo preparado para empezar a programar.
+```java
+public class NumerosOrdenados {
 
-De hecho este programa es un poquito más largo pues ya lo tengo yo hecho y vamos a ir pegando partes para ir analizándolas y explicando bien.
+   public static void main(String[] args) {
+		
+      Scanner sc = new Scanner(System.in);
+      int [] numeros = new int[10];
+      int num, aux;
+		
+      //Solicitamos la introducción de los 10 números positivos
+      for(int i=0; i<numeros.length; i++) {
+         System.out.println("Introduce número: ");
+         num = sc.nextInt();
+			
+         //repite la lectura mientras no sea positivo
+	 while(num < 0) {
+            System.out.println("No es positivo!!!, vuelve a intentarlo");
+            num = sc.nextInt();
+				
+      	 }
+         numeros[i] = num;
+      }
+		
+      //Ordenación: método de la burbuja
+      for(int i=0; i<numeros.length; i++) {
+         for(int k=i; k<numeros.length; k++) {
+            if(numeros[k]>numeros[i]) {
+               //sustitución o intercambio
+               aux = numeros[i];
+               numeros[i]=numeros[k];
+               numeros[k]=aux;
+            }
+         }
+      }
+		
+      //Muestra el contenido del array
+      System.out.println("Los números son: ");
+      for(int n:numeros) {
+         System.out.print(n+", ");
+      }
+   }
+}
+```
 
-En primer lugar lo que vamos a hacer es todo el tema de la declaración de variables y creación del objeto escáner que nos va a servir para realizar la lectura porque claro como te explicamos en el ejercicio creación de un escáner para leer por teclado es recurrir a esta instrucción donde en el escáner le pasa como parámetro por lo que llamaríamos el canal de entrada de datos.
+Ejecutamos la aplicación.
 
-Creamos el objeto escáner y ya lo tenemos listo para leer cómo tenemos que ordenar los números.
-
-Una vez que se ha leído pues tenemos que guardarlos en algún sitio donde en una red de 10 elementos tenemos aquí un par de variables más declaradas una donde vamos a ir guardando el número leído y otra es una variable auxiliar que utilizaremos para la ordenación.
-
-Bueno aquí hay un error que habrá de usar la clase escáner que es lo que pasa porque esa es una clase de Java estándar que se encuentra en un determinado paquete del Java estándar los paquetes Java se utilizan para organizar clases igual que los directorios los utilizamos para organizar archivos.
-
-Los paquetes se usan para organizar las clases entonces Java estándar.
-
-Todas las clases están en sus correspondientes paquetes para que el compilador reconozca esta clase que vamos a usar nosotros.
-
-Hay que importarla con una instrucción aquí que la podemos escribir pero vamos a hacer que lo haga eclipse por nosotros.
-
-Si presionas la combinación de teclas Control Shift o automáticamente te pone Eclipse la sentencia de importación no puedes escribir a mano impor Java punto útil que es el paquete y su paquete puntos Kanner que la clase esta instrucción debe ir siempre delante de la declaración de la clase.
-
-La primera instrucción del archivo o Primera Segunda porque puede haber varios IMPO puede que utilicemos la verdad según vayas haciendo programas cada vez más complejo pues se utilizarán muchas clases entonces habrá que importarlas todas.
-
-Bueno de hecho eso repito la combinación de teclas Control Shift de las mayúsculas o y si no lo puedes escribir a mano.
-
-Una vez que hemos declarado las variables pues bueno vamos a empezar ya con lo que es el código como tal la lógica del programa.
-
-Entonces vamos a ver vamos a pegar esta parte que sería la que se encarga de la solicitud de números por teclado vamos a ver aquí lo tenemos que solicitar la introducción de 10 números positivos entonces vamos a crear Infor de cero hasta al menos uno porque cada número positivo en una posición del array. 
-
-Aquí como estamos utilizando el foro para recorrer el array para escribir obviamente es normal.
-
-Solicitamos el número mandamos el mensaje y el método Next-Gen como te explicamos en ese documento es el que realiza la lectura del dato es decir queda dejar el programa digamos bloqueado a la espera de que el usuario introduzca el número y pulsa Intro en ese momento método función devuelve un resultado que se guarda en esta variable.
-
-Qué pasa si el número es negativo o es que no hay que guardarlo en el array.
-
-Hay que volver a pedir otro número y así si vuelvo a meter otro negativo después del primer negativo pues así hasta que metan uno positivo tenemos un caso claro de utilización de la instrucción repetitiva guey es decir mientras el número sea menor que cero volvemos a sacar un mensaje.
-
-En este caso uno de advertencia el número positivo vuelve a introducir y se le cómo es un buen volver a comprobar que es negativo otra vez lo mismo.
-
-Y así hasta que por fin introduzco un positivo y entonces sigue adelante el programa siga adelante que es el número que se leyó ya por fin positivo se guarda en esa posición y vale.
-
-Puede ser que para conseguir un número positivo hayamos tenido que leer 20 números porque ha metido 19 negativos.
-
-Al final se ha leído el número positivo.
-
-La variable sigue apuntando a esa posición.
-
-No se ha enterado y ya al finalizar el foro vuelve a incrementarse la variable y pasamos para la lectura del segundo número positivo y por lo tanto almacenamiento.
-
-En la segunda posición de la RAE y así hasta 10 min.
-
-Con esto garantizamos tener los números ya positivos leídos dentro de la red.
-
-Ahora vamos a la ordenación vamos a ver tenemos aquí el programa y ya también podemos poner la parte última de mostrar el contenido de dicho rey en pantalla que es bastante sensible.
-
-La ordenación.
-
-Digamos que es lo llamativo de este programa aparte de lo que es ya la lectura de números que la primera vez que lo hacemos porque claro pero bueno la ordenación emplea lo que se llama el método de la burbuja que consiste en que para cada elemento del array vamos comprobando ese elemento con los siguientes y si nos encontramos uno en esos siguientes menor o mayor depende de cómo queramos hacer la ordenación de mayor o menor o de menor a mayor.
-
-En este caso lo queremos hacer una ordenación de mayor a menor.
-
-Entonces si nos encontramos un número lossiguientes mayor que ese número se hace una sustitución. 
-
-Estas tres instituciones que tenemos aquí para hacer una sustitución la sustitución es meter en la posición y lo que hay en casa y lo que ahí había y entonces eso requiere utilizar una variable auxiliar que habíamos declarado que antes guardamos el contenido de la posición y en esa variable auxiliar para digamos sobreescribir el contenido de la posición y con lo que hoy en día y como ayer lo teníamos Salvado lo anterior y en HAWX lo volcamos en la posición.
-
-Es decir es un intercambio una sustitución o no intercambio que ya tenemos hecho el intercambio y entonces haciendo eso con cada elemento de la raíz para cada uno de subsiguientes nos garantiza la ordenación según el criterio que hemos establecido en este caso de mayor a menor.
-
-Si fuera de menor a mayor pues habría que hacer la pregunta al contrario lógicamente una vez que ya se ha ordenado ves que aquí como dependemos de los índices de las posiciones tenemos que utilizar estándares aunque sean operaciones de lectura buena también son de escritura porque vamos a acceder a las posiciones obviamente entonces aquí tenemos que utilizar el estándar pero ya para lo que es mostrar el contenido ya tenemos el argayo ordenado y queremos simplemente mostrar lo que tiene un Follies es la variable de control apuntaría a cada uno de los valores de la red y números y los mostraría separando por una.
-
-Vamos a probarlo vamos a ejecutar el programa y empezamos introduce un número metemos el 5 por ejemplo introduce un número.
-
-Ahora vamos a forzar una equivocación en menos tres que no es positivo.
-
-Vuelvo a intentarlo Bueno pues resulta que vuelvo a meter mi voto otro negativo que no es positivo que volvemos a intentarlo ya por fin le damos el 7 o salga el siguiente mensaje de introducir otro número más nueve.
-
-Ya hemos visto que lo de la equivocación está controlado vamos a ir metiendo ya positivos 8 por ejemplo los que llevamos 3 y ya por fin los números son como ordenados de mayor a menor el mayor que metimos por aquí fue 44 después el 18 11 9 y se ha repetido pues el orden es indiferente evidentemente.
-
-Bueno pues aquí ha visto un ejercicio donde se combinan ya un poquito de todo.
-
-Pues instrucciones repetitivas de tipo for Weyl uso de raíz además una operación muy clásica de la RAE y la primera es que a lo mejor puede resultar poco compleja que es el tema de la ordenación pero bueno nosotros siempre siempre es así con Foro admirados aplicando la metodología que te he dicho instrucciones tan alternativas lógicamente frizz.
-
-Y bueno esta novedad de la lectura de datos con teclado que ya hace que los programas sean más interactivos.
-
-Esto ya lo utilizaremos en el resto de ejercicios prácticos que hagamos más adelante.
+<img src="images/21-03.png">
