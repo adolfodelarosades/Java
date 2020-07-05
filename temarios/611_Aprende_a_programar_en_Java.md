@@ -50,7 +50,7 @@ Si siempre has querido aprender a programar en Java, pero nunca has sabido por d
    * 16 Ejercicio práctico VI 04:05
    * 17 Salida forzada de un bucle 03:37
 
-4. [Arrays](/temarios/611_Aprende_a_programar_en_Java) 32:20
+4. [Arrays](/temarios/611_Aprende_a_programar_en_Java/04_Arrays.md) 32:20
    * 18 Concepto de array, declaración y creación 07:45
    * 19 Recorrido de un array 05:34
    * 20 Ejercicio práctico VII 09:12
