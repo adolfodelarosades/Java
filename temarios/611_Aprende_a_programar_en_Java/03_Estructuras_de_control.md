@@ -188,55 +188,56 @@ Vemos un caso claro de utilización de `switch` que hay varios posibles valores 
 
 # 12 Instrucción repetitiva for 08:17
 
-Después de ver las instrucciones de tipo alternativa como la simple IHF o la multiple Switch es el momento de hablar de otro tipo de instrucciones de control de flujo en un programa Java como son las instrucciones repetitivas conocidas también como bucles y empezamos hablando de la instrucción for instruccion for se utiliza para ejecutar un grupo de instrucciones un número determinado de veces.
+<img src="images/12-01.png">
 
-Aquí tienes cómo sería su formato utilizamos la palabra reservada Zor y entre paréntesis tenemos tres instrucciones.
+Después de ver las instrucciones de tipo alternativa como la simple `if` o la multiple `switch` es el momento de hablar de otro tipo de instrucciones de control de flujo en un programa Java como son las **instrucciones repetitivas**, conocidas también como **bucles** y empezamos hablando de la instrucción `for`.
 
-La instrucción llamada inicialización Punto y Coma condición que siempre debe devolver un bullían e incremento en el interior entre llaves.
+<img src="images/12-02.png">
 
-Las instrucciones a ejecutar con el foro.
+La instruccion `for` se utiliza para ejecutar un grupo de instrucciones un número determinado de veces.
 
-Estas instrucciones se van a ejecutar un número definido de veces ese número definido de veces va a venir determinado por estas tres instrucciones que tenemos aquí.
+En la diapositiva tienes cómo sería su formato, utilizamos la palabra reservada `for` y entre paréntesis tenemos tres instrucciones.
 
-Cómo funciona esto.
+La instrucción llamada `inicializacion;`, `condicion;` que siempre debe devolver un boolean e `incremento` y en el interior entre llaves las instrucciones a ejecutar por el `for`. Las instrucciones se van a ejecutar un número definido de veces, ese número definido de veces va a venir determinado por las tres instrucciones `(inicializacion;condicion;incremento)`.
 
-Lo vamos a entender ahora mejor como un ejemplo pero te explico inicialmente al entrar en el foro se ejecutaría esa instrucción de inicialización que como su nombre indica habitualmente consiste en inicializar una variable una variable que llamamos variable de control del Forth porque la vamos a utilizar para controlar ese número de veces que se va a ejecutar el bloque de sentencias después de la inicialización comprobaríamos una condición.
+Cómo funciona esto, lo vamos a entender ahora mejor como un ejemplo pero te explico, inicialmente al entrar en el `for` se ejecutaría la instrucción de `inicializacion;` que como su nombre indica habitualmente consiste en inicializar una variable, una variable que llamamos variable de control del `for` porque la vamos a utilizar para controlar ese número de veces que se va a ejecutar el bloque de sentencias.
 
-Esto es una condición del tipo Pues eso con operadores condicionales siempre va a dar como resultado un bulevar.
+Después de la `inicializacion` comprobaríamos una `condicion` es una condición del tipo con operadores condicionales siempre va a dar como resultado un booleano. Lógicamente en esa condición va a estar implicada esa variable que hemos inicializar. Si la condición se cumple se va a ejecutar el bloque de instrucciones al finalizar el bloque de instrucciones se ejecuta `incremento` que como su nombre indica habitualmente va a ser el incremento o decremento de la variable de control que se inicializo la primera vez. Tras ejecutar el incremento volvemos a comprobar la condición, se sigue cumpliendo pues ejecutamos las instrucciones de nuevo, al finalizar otra vez `incremento` y otra vez `condicion` se sigue cumpliendo, otra vez las instrucciones y así hasta que llega un momento en el que tras la ejecución de `incremento`, `condicion` ya no se cumpla en ese momento ya no se van a ejecutar las instrucciones que tenemos definidas dentro del bucle.
 
-Lógicamente en esa condición va a estar implicada esa variable que hemos inicializar.
+<img src="images/12-03.png">
+<img src="images/12-04.png">
 
-Si la condición se cumple se va a ejecutar el bloque de instrucciones al finalizar el bloque de instrucciones se ejecuta incremento que como su nombre indica también pues habitualmente va a ser el incremento o decremento.
+Como te decía lo mejor es verlo como un ejemplo ya verás que es muy sencillo su funcionamiento, aquí tenemos un pequeño bloque de código que se encarga de mostrarnos los números en pantalla del 1 al 10 los números naturales 1 2 3 hasta 10.
 
-Puede ocurrir también de la variable de control que se iniciará hizo la primera vez tras ejecutar el incremento.
-
-Volvemos a comprobar la condición se sigue se sigue cumpliendo pues ejecutamos las instrucciones de nuevo al finalizar otra vez incremento y otra vez condición se sigue cumpliendo.
-
-Otra vez las instrucciones y así hasta que llega un momento en el que tras la ejecución incremento condición ya no se cumpla.
-
-En ese momento ya no se van a ejecutar las instrucciones que tenemos definidas dentro del bucle.
-
-Como te decía lo mejor es verlo como un ejemplo ya verás que es muy sencillo su funcionamiento aquí tenemos un pequeño bloque de código que se encarga de mostrarnos los números en pantalla del 1 al 10 los números naturales 1 2 3 hasta 10.
+```java
+//Muestra los números del 1 al 10
+for(int i=1; i<10; i++){
+   System.out.println(i);
+}
+```
 
 Cómo funciona.
 
-Fíjate al entrar en el foro se ejecutaría esta instrucción que lo que hace el declara además una variable no tiene porque la declaración de la variable podría estar fuera.
+Fíjate al entrar en el `for` se ejecutaría esta instrucción `int i=1` que lo que hace es declarar una variable, aunque la declaración de la variable podría estar fuera, pero es habitual que si esa variable sólo la vamos a usar dentro del `for` se declare aquí mismo, se declara variable `i` y se asignan `1`, se comprueba la condición `i<10`, si, ejecutamos, como `i` se inicializo a 1 imprimiría el número 1.
 
-Pero bueno es habitual que si esa variable sólo la vamos a usar dentro del foro se declara que mismo se declara variable y se asignan se comprueba la condición es menor que 10 si ejecutamos como y ISO inicializar 1 imprimiría el número 1.
+Al finalizar se ejecuta incremento `i++` cómo ves lo que haces es sumarle 1 a `i` y otra vez a comprobar, ahora `i` vale 2, 2 es menor que 10, si, puedes ejecutaría otra vez y se mostrará el mensaje 2.
 
-Al finalizar se ejecuta incrementode cómo ves lo que haces sumarle uno ahí y otra vez a comprobar ahora si vale 2 2 menos de 10 si puedes ejecutaría otra vez y se mostrará el mensaje 2.
+Otra vez se incrementa 3, 3 es menor que 10, si, eso sacaría también el 3 y así hasta el momento en el que la `i` valga 10. En ese caso 10 es menor que 10, no, ya deja de cumplirse la condición y se saldría fuera del bucle, por lo tanto fíjate aquí hay un pequeño fallo en el mensaje `//Muestra los números del 1 al 10`, no muestra los números del 1 al 10 sino del 1 al 9, porque la condición de salida, la condición de entrada mejor dicho es `i<10` es decir la condición de salida es que en el momento que valga 10 ya no se va a ejecutar.
 
-Otra vez incrementarã 3 y el menor 3 3 es menor que 10.
-
-Si eso sacaría también el 3 y así hasta el momento en el que la iba a 10.
-
-En ese caso 10 es menor que 10.
-
-No ya deja de cumplirse la condición y se saldría fuera del bucle por lo tanto fíjate aquí hay un pequeño fallo en el mensaje este no muestra los números del 1 al 10 sino del 1 al 9 porque la condición de salida vamos la condición de entrada mejor dicho es que sea menor de 10 es decir la conexión de salida es que en el momento que valga 10 ya no se va a ejecutar.
-
-Por lo tanto realmente si imprimiría los números del 1 al 9 vale 9 se imprime pero al llegar al final se le suma uno más 10 y ya no cumple la condición tanto ya 90.
+Por lo tanto realmente si imprimiría los números del 1 al 9.
 
 Aquí tienes otro caso.
+
+```java
+//Calcula la suma de todos los números
+//entre n y 0 y muestra el resultado
+int n = 200;
+int suma = 0;
+for(int i=n; i>0; i--){
+   suma += i;
+}
+System.out.println(suma);
+```
 
 Otro ejemplo de un programa que va calculando la suma de todos los números comprendidos entre un número dado y ser mostrando el resultado en pantalla.
 
@@ -278,6 +279,9 @@ Vamos a ver un ejemplo de varios ejemplos de utilización del cuerpo que es una 
 
 
 # 13 Ejercicio práctico IV 07:13
+
+<img src="images/13-01.png">
+<img src="images/13-02.png">
 
 Muy bien pues vamos a ver un ejercicio en el que vamos a poner en práctica el uso de la instrucción repetitiva o bucle for el ejercicio va a consistir en un programa que dados dos números no va a calcular la suma de todos los números comprendidos por los pares comprendidos entre ambos números extremos incluidos.
 
