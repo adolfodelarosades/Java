@@ -271,237 +271,245 @@ Vamos al entorno de desarrollo Eclipse y vamos a crear el proyecto `601-05-Ejerc
 *`SumaPares`*
 
 ```java
+public class SumaPares {
+
+   public static void main(String[] args) {
+      int a=23;
+      int b=15;
+		
+      int mayor, menor;
+      int suma = 0;
+		
+      if(a>b) {
+         mayor = a;
+      	 menor = b;
+      } else {
+         mayor = b;
+         menor = a;
+      }
+      
+      for(int i=menor; i <= mayor; i++) {
+         //Comprobamos si el número es par
+	 if(i%2==0) {
+	    suma=suma+i;
+	 }
+      }
+      System.out.println("La Suma de los pares es: " + suma);
+   }
+}
 ```
 
+Vamos a ejecutar el programa con los diferentes casos que pueden existir.
 
-Así es como vamos a llamar a la clase y crearemos el método main dentro de ella que es donde vamos a meter el código de nuestro programa.
+<img src="images/13-03.png">
 
-Bueno pues aquí lo primero que vamos a hacer es declarar dos variables cualquiera como hemos hecho otras veces con dos números inventados ve por ejemplo que en principio se trataría de dos números que en un programa real serían obtenidos desde el exterior no estarían fijados ahí directamente en el código del programa.
+<img src="images/13-04.png">
 
-Pero bueno nosotros como esas clases esos elementos que son clases no se van a necesitar para poder leer datos de entrada no las conocemos pues vamos a suponer que tenemos almacenados los números en dos variables aunque en teoría deberíamos desconocer lógicamente lo que valen esas variables incluso no sabemos cuál es la que contiene el número mayor ni cuál la que contiene un número menor.
+<img src="images/13-05.png">
 
-Por tanto vamos a declarar dos nuevas variables mayor y menor en las que vamos a almacenar cuál sería la primera de ellas el mayor de los dos y en la siguiente el menor para qué.
+<img src="images/13-06.png">
 
-Para que a la hora de que hagamos en el bucle for destruction for recurramos desde un extremo hasta el otro sepamos cuál es el más pequeño hasta el más mayor.
+# 14 :computer: Ejercicio práctico V `601-06-Ejercicio_Practico_5` 05:38
 
-También vamos a declarar la variable suma donde vamos a ir sumando los números pares que vamos encontrando entre menor y mayor.
+<img src="images/14-01.png">
 
-Esto es la declaración de las variables.
+Vamos a ver un nuevo ejercicio práctico de utilización de la instrucción repetitiva.
 
-Pues lo primero que hacemos entonces es eso es obtener cuál es el mayor y el menor de ambos números haríamos la siguiente pregunta si es mayor que entonces está claro que el mayor y el menor en la variable mayor metemos a la variable menor metemos y si no al contrario la variable mayor y en menor almacenamos el número.
+<img src="images/14-02.png">
 
-Si fueran iguales pues también entraría aquí.
+En este caso vamos a realizar un programa que dado un número nos indica si se trata de un número primo o no. Recordemos que los números primos son aquellos que sólo son divisibles entre sí mismo y 1. Los no primos serían aquellos que pueden ser divididos y divisibles, división exacta entre cualquier número comprendido entre uno y ese mismo número.
 
-Pero bueno en ese caso es que nos da igual cuál sería el mayor de los dos el bucle iría de uno a otro y realmente solamente haría la suma una vez bueno pues venga vamos a establecer la instrucción for declaremos la variable de control que comienza con el menor de los números inicializar al menor y digamos va a hacer las operaciones que vamos a definir dentro del futuro mientras que esa variable no alcance el valor mayor o sea mientras así sea menor igual que en mayor y menor igual porque vamos a considerar el extremo también es decir vamos a ir comprobando y sumando todos los números pares que encontremos entre menor y mayor si no quisiéramos contemplar los extremos pues entonces habríamos puesto menos vale.
+Vamos a nuestro entorno de desarrollo Eclipse y creamos un Proyecto Java con nombre `601-06-Ejercicio_Practico_5` y creamos una nueva clase `ComprobarPrimos` donde insertamos el siguiente código.
 
-Pues venga entonces cómo sabemos si ahí va a ir pasando.
+*`ComprobarPrimos`*
 
-En este caso los números son 15 más pequeños y 23 en mayor va a empezar en 15 16 17 hasta 23.
+```java
+public class ComprobarPrimos {
 
-Cómo saber si un número es par o no es calculando el resto de la división entre dos.
+   public static void main(String[] args) {
+		
+      int n=8;
+      boolean primo=true;
+		
+      for(int i=2; i<n; i++) {
+         if(n%i==0) {
+            primo=false;
+         }
+      }
+      
+      if(primo) {
+         System.out.println("El número " + n + " es primo");
+      }else {
+         System.out.println("El número " + n + " NO es primo");
+      }
+      
+   }
+}
+```
 
-Si el número que toque en cada recorrido al dividirlo entre dos da resto cero.
+La lógica del problema va a ser la siguiente voy a recorrer todos los números comprendidos entre 2 y ese número que me encuentro,hago una división exacta entre N y los números por los que va pasando la variable desde 2 hasta N-1 cambia el estado de la variable `primo` en caso que la división entre N y el número recorrido sea exacta por lo que ya ese número no será Primo, recordemos un número Primo solo puede ser divisible entre 1 y el mismo número.
 
-Se trata de un número para el resto se calcula con el tanto por ciento.
+Vamos a ejecutar el programa con diferentes casos.
 
-Vamos incluso si es que es conveniente y poniendo comentarios comprobamos si pero vamos si el número es para 100 números par lo sumamos a la variable suma suma es igual a la suma más de modo que si esto lo vamos haciendo desde el más pequeño hasta el más mayor no nos vamos a encontrar con que en esta variable habremos sumado todos los pares comprendidos dentro de ese rango.
+<img src="images/14-03.png">
 
-Al final sacamos por pantalla el contenido la variable en suma nos ha quedado ahí un poquito la suma de los pares 3 y concatenados por la variable suma.
+<img src="images/14-04.png">
 
-Vamos a comprobarlo ejecutamos el botón derecho sobre la clase Java Application y ahora nos debería aparecer el resultado de la suma 76 es decir 16 más 18.
+Aquí tenemos otro uso clásico de la instrucción,  se trata como ves de recorrer, realizar un número de tareas, un número fijo de veces, desde que la variable vale un valor hasta que alcanza un valor final.
 
-Bueno bueno nos vamos a poner sumarlos si queremos saber si funciona bien o no vamos a probar con números más pequeños.
+En la siguiente elección probamos a estudiar otra tipo de instrucción repetitiva que es la instrucción `while`.
 
-Por ejemplo 2 y 7 aquí estaríamos sumando dos más cuatro que serían seis más seis que serían doce.
+# 15 Instrucción repetitiva `while` 04:53
 
-Vale entonces el resultado en este caso debería salir 12.
+<img src="images/15-01.png">
 
-Vamos a comprobarlo ejecutamos efectivamente y como es el programa está preparado para que no importe el orden en el que hemos definido las variables es decir siempre se compruebe cuál es el mayor y el menor de ambos sucesivos cambios en siete pongo.
+Seguidamente te voy a presentar la última de las instrucciones de control de Java la instrucción repetitiva `while`.
 
-El resultado va a tener que ser en vamos a ver que siguen siendo 12 como te decía antes.
+<img src="images/15-02.png">
 
-Qué pasa si ambos números son iguales.
 
-Bueno pues depende si son para eso son impares en este caso como ambos son como el mismo número impar pues no va a sumar nada va a salirnos la suma cero pero si se trata de un número par pues entonces la suma sería realmente uno de ellos.
+A diferencia del `for` que es una instrucción que ejecuta sentencias un número determinado de veces, con `while` lo que haremos es ejecutar un grupo de instrucciones un número indeterminado de veces, mientras se cumpla una determinada condición.
 
-En este caso con no pagar cuatro números.
+Existen dos variantes de esta instrucción, una de ellas sería: 
 
-Bueno pues aquí hemos visto un uso bastante claro de la instrucción repetitiva tipo foro que además como veis se ha combinado con una instrucción y más adelante vamos a ver siguiente elección.
+```java
+while(condicion){
+   //instrucciones
+}
+```
+Cuando entra por primera vez en `while` se evalúa la condición, si es verdadera ejecuta el bloque de sentencias y después vuelve de nuevo a comprobar la condición si sigue siendo verdadera de nuevo ejecuta el bloque de sentencias.
 
-Vamos a ver pues otro ejercicios similares para que te quede claro el funcionamiento de esta instrucción.
+En el caso contrario de la otra instrucción.
 
-# 14 Ejercicio práctico V 05:38
+```java
+do{
+   //instrucciones
+}while(condicion);
+```
 
-Bueno pues como te comentaba en el video anterior vamos a ver un nuevo ejercicio práctico de utilización de la instrucción repetitiva.
+La otra variante de `while` primero se ejecutaría las instrucciones y después se comprobaría la condición, fijate que en este caso después del `while(condicion)` finalizamos con punto y coma. El funcionamiento es ejecutar las instrucciones y comprobar la condición al final, si la condición se cumple de nuevo volvemos a ejecutar las instrucciones, así hasta que deje de cumplirse.
 
-En este caso vamos a realizar un programa que dado un número nos indica si se trata de un número primo o no. Recordemos que los números primos son aquellos que sólo son divisibles entre sí mismo y 1 Los primos serían aquellos que pueden ser divididos y visible división exacta entre cualquier número comprendido entre uno y ese mismo número.
+Con la instrucción  `do-while` se garantiza que las instrucciones se van a ejecutar por lo menos una vez, ya que el primero ejecuta y luego comprueba. 
 
-Bueno pues vamos a ello como siempre nos vamos a nuestro entorno de desarrollo Eclipse y un nuevo Java proyecto 06 ejercicio práctico 5 5 vamos ya vale.
+Como te decía al principio esto es para ejecutar un bloque de sentencias cuando no sabemos cuántas veces van a ejecutarse dichas sentencias depende de la condición, entonces no sabemos cuándo cambiará la condición en principio, evidentemente dentro de estos bloques de instrucciones algo hará que en algún momento la condición deje de ser verdadera o sea falsa y por tanto finalice la ejecución del bucle.
 
-Pues nada que veamos el ejercicio y nuestra nueva clase comprobar
+Importante recordar como decíamos también en `if` que la condición debe dar como resultado siempre un tipo booleano, no vale utilizar un valor numérico, de texto porque sería un error de compilación siempre tiene que dar como resultado un booleano.
 
-podremos meter Domain y aquí tenemos el método main de nuestro programa.
+<img src="images/15-03.png">
 
-Bien vamos a declarar una variable en donde vamos a guardar el número para el cual vamos a hacer la comprobación se supone como ya te he dicho en alguna otra ocasión que este número sería recuperado desde el exterior pero bueno para eso se necesitan clases especiales y demás nosotros nos estamos centrando en la sintaxis del lenguaje Java.
+Vamos a ver un par de ejemplos en la transparencia.
 
-Por lo tanto suponemos que el número está en una variable ponemos 8 como podríamos haber puesto cualquiera.
+```java
+//Muestra los números del 1 al 10
+int i=1;
+while(i<=10){
+   System.out.println(i);
+   i++
+}
+```
 
-Vamos a centrarnos en cómo haríamos la comprobación de si es un número primo o no lo es.
+En este caso lo que vamos a hacer es un ejemplo similar al que hicimos con el `for` que es mostrar los números del 1 al 10, declaramos una variable que inicializamos a 1 y luego comprobamos si esa variable es menor igual a 10, si es así se muestra y luego se incrementa la variable, volvemos otra vez a evaluar la condición, si se sigue cumpliendo ahora ya vale 2, se sigue cumpliendo pues se ejecuta el bloque de instrucciones y ahora tendríamos un 2, después se incrementaría a 3, asi hasta el valor 10, cuando la variable de control toma el valor 11, ya la condición no se cumple y dejaría de entrar en el bucle, en ese caso sería hacer algo como lo haríamos con `for` no es la típica utilización de `while`.
 
-Para ello el resultado como se trata de comprobar si cumple una condición o no lo cumple lo vamos a almacenar en una variable de tipo bullían a la que llamamos primo precisamente y que vamos a inicializar al valor Tru.
+```java
+//Solicita la introducción de un número
+//hasta que sea positivo
+int i=1;
+do{
+   //lectura de un número y
+   //almacenamiento en la variable n
+}while(n<0);
+```
 
-De esta manera la lógica del problema va a ser la siguiente voy a recorrer todos los números comprendidos entre 2 y ese número que me encuentro a un divisor hago una división exacta entre N y los números por los que va pasando la variable desde 2 a este pues entonces cambia el estado de esta variable y la pongo a falso como diciendo que ese número ya no es primo porque he encontrado una división exacta si no encontramos ninguna división exacta no vamos a tocar esa variable y se va a quedar a lo que nos va a indicar que efectivamente al no haber encontrado ninguna división estamos ante un número primo.
+En este otro caso pues tenemos ya algo más propio de utilización de `while`, en este caso suponemos que tenemos unas instrucciones para la lectura de números y almacenamiento en una variable y resulta que queremos leer un número hasta que ese número sea positivo, es decir si se introduce un número negativo no nos vale y queremos volver a leer así hasta que realmente se introduzca un número positivo. Como no sabemos cuántas veces habrá que hacer esto porque no sabemos cuántos números negativos seguidos nos van a ir introduciendo es el típico caso de utilización de `while` o en este caso `do-while`. Como ves primero se realizaría la lectura del número, se almacenaría en la variable y se comprobaría al final en el `while` si el número es menor que 0, porque si lo es se cumple la condición de volver otra vez de nuevo a entrar en el bucle para realizar de nuevo la misma operación de lectura de número, variable y comprobación, mientras el número sea negativo esto va a ir ejecutándose, cuando sea positivo pues al no cumplir la condición se saldrá del bucle y el programa seguirá adelante.
 
-Esa es la lógica del programa que vamos a realizar.
+Muy importante lo que te decimos aquí con respecto a la utilización de `while`, cuidado con los bucles infinitos. Y es que si no se establece correctamente la condición o las instrucciones no las hemos preparado adecuadamente para que en algún momento dejemos de cumplirse la condición, nos podemos encontrar con situaciones que provoquen ciclos infinitos por no definir bien la condición o no establecer bien las instrucciones que hagan que en algún momento la condición deje de cumplirse y se salga del bucle lo que provocaría como digo un bucle infinito.
 
-Bueno pues vamos a ello planteamos el Foro de la siguiente manera la variable de control que va a empezar en dos y muy importante va a llegar hasta en menos 1 es decir va a comprobar todos los números entre 2 y el anterior número para ver si encuentra alguna división exacta.
+# 16 :computer:  Ejercicio práctico VI `601-07-Ejercicio_Practico_6` 04:05
 
-Por supuesto no tenía que comprobar la división con el número no podemos poner igual porque entonces todas las números son divisibles entre sí mismo.
+<img src="images/16-01.png">
 
-Eso no nos vale para determinar que se trata realmente de un número primo.
+Vamos a hacer ahora un ejercicio en el que vamos a poner en práctica el uso de la instrucción repetitiva.
 
-Habría que ver que no hay ninguna división exacta entre dos y el anterior año vamos a comprobar cómo se comprobaría una división en una división a tono con el resto.
+<img src="images/16-02.png">
 
-Como hemos hecho en otras veces es decir si el resto de dividir n entre y ese número por el que estemos comprobando en cada iteración del foro pues es exacta entonces ya está claro que el número no es primo.
+Se trata de un programa en el que vamos a ir realizando una suma de números naturales empezando por el 1 hasta llegar a superar a 1000, lo que se trata es de calcular hasta dónde tenemos que llegar empezando por el 1 para poder alcanzar o superar 1000.
 
-Hemos encontrado una división exacta así que directamente ponemos la variable a false Qué pasa que no.
+En este caso estamos ante una clara situación en la que no sabemos cuántos números tendremos que sumar uno más dos más ... no sabremos hasta cual tenemos que llegar para poder alcanzar 1000, es el típico caso de utilización de una instrucción repetitiva.
 
-Evidentemente en este caso no vamos a poder es decir si no encuentra la división exacta.
+Vamos a nuestro entorno de desarrollo Eclipse y vamos a crear un nuevo proyecto Java con nombre `601-07-Ejercicio_Practico_6` y vamos a añadir la clase `SumaMil` con el siguiente código:
 
-Pues nada que compruebe la siguiente si no hay ninguna división exacta no pasará nunca por aquí y por lo tanto la variable o sea que estamos ante un primo.
+*`SumaMil`*
 
-Vale hacemos la siguiente pregunta Si primo no hace falta poner primo igual igual tú porque se trata de una variable Gülen es decir directamente si esa variable es tu estamos ante un número primo el número ya sea eso le concatenados aquí el numerito para que se vea de qué número estamos hablando es primo.
+```java
+public class SumaMil {
 
-Pero si es falso pues el número no es saberlo no explican bien.
+   public static void main(String[] args) {
+		
+      int cont = 0;
+      int suma = 0;
+		
+      while(suma<1000) {
+         cont++;
+      	 suma = suma + cont;
+      }
+      System.out.println("Hay que sumar hasta " + cont + " para alcanzar o superar a 1000");
+   }
+}
+```
 
-Pues nada vamos a comprobarlo en este caso como estamos con el número 8 pues ese sí que no es primo porque es divisible entre dos.
+Vamos a ejecutar el programa.
 
-4.
-
-Hola debería dejar de decirnos que no es un número primo ejecutarlo y lo comprobaremos vamos. 
-
-Efectivamente número 8 no es primo pero si ponemos un número un poquito más grande el 17 que sabemos que ese sí que es primo porque no hay divisiones exactas entre 2 y 16 es normal decir que efectivamente eso sí que es efectivamente.
-
-Pues aquí tenemos otro uso clásico de la instrucción por siempre se trata como ves de recorrer realizar un número de tareas un número fijo de veces desde que la variable vale un valor hasta que alcanza un valor final en la siguiente elección probamos a estudiar otra tipo de instrucción repetitiva que es la instrucción Huay.
-
-# 15 Instrucción repetitiva while 04:53
-
-Seguidamente te voy a presentar la última de las instrucciones de control de Java la instrucción repetitiva `while` bueno es la diferencia del `for` que es una instrucción que se ejecuta ejecuta Bloque de sentencias un número determinado de veces con `while` lo que haremos es ejecutar un grupo de instrucciones un número indeterminado de veces mientras se cumpla una determinada condición.
-
-Existen dos variantes de esta instrucción las tienes aquí como es una de ellas sería la instrucción `while` y entre paréntesis la condición a evaluar entre llaves el grupo de instrucciones a ejecutar.
-
-Si la condición es verdadera cuando entra por primera vez en `while` se evalúa la condición si es verdadera ejecuta el bloque de sentencias y después vuelve de nuevo a comprobar la condición si sigue siendo verdadera.
-
-De nuevo a ejecutar el bloque de sentencias en el caso contrario de la otra instrucción.
-
-La otra variante de `while` primero se ejecutaría las instrucciones y después se comprobaría la condición.
-
-Fijate que en este caso después del `while` entre paréntesis condición finalizamos con punto y coma.
-
-Bueno el funcionamiento es comprobar las instrucciones al ejecutar las instrucciones y comprobar la condición al final.
-
-Si la condición se cumple de nuevo volvemos a ejecutar las instrucciones así hasta que deje de cumplirse con la instrucción de `while` se garantiza que las instrucciones se van a ejecutar por lo menos una vez ya que el primero ejecuta y luego comprueba como te decía al principio esto es para ejecutar un bloque de sentencias cuando no sabemos cuántas veces van a ejecutarse dichas sentencias depende de la condición entonces no sabemos cuándo cambiará la condición en principio evidentemente dentro de estos bloques de instrucciones algo hará que en algún momento la condición deje de ser verdadera o sea falsa y por tanto finalice la ejecución del buque.
-
-Importante recordar como decíamos también en Elif que la condición debe dar como resultado siempre un tipo bullían no vale utilizar un valor numérico de texto porque sería un error de compilación siempre tiene que dar como resultado un Bolea.
-
-Vamos a ver un par de ejemplos en la siguiente transparencia en este caso lo que vamos a hacer es un ejemplo similar al que hicimos conforme que es mostrar los números del 1 al 10 movés declaramos una variable que inicializar a 1 y luego comprobamos si esa variable es menor igual.
-
-Si es así se muestra y luego se incrementa la variable volvemos otra vez a evaluar la condición.
-
-Si se sigue cumpliendo ahora ya vale 2 se sigue cumpliendo pues se ejecuta el bloque de instrucciones y ahora tendríamos un 2.
-
-Después se incrementaría 3 si hasta el valor 10 cuando la variable de control toma el valor 11 pues ya la condición no se cumple y dejaría de entrar en el bucle en este caso sería hacer algo como lo haríamos con Forno es la típica utilización de Huay en este otro caso pues tenemos ya algo más propio de utilización del web y es bueno en este caso suponemos que tenemos unas instrucciones para la lectura de números y almacenamiento en una variable y resulta que queremos leer un número pues hasta que ese número sea positivo es decir si se introduce un número negativo no nos vale y queremos volver a leer así hasta que realmente se introduzca un número positivo.
-
-Como no sabemos cuántas veces habrá que hacer esto porque no sabemos cuántos números negativos seguidos nos van a ir introduciendo pues es el típico caso de utilización de Weyl o en este caso dugun.
-
-Como veis primero se realizaría la lectura del números almacenaría en la variable y se comprobaría al final en Uruguay si el número es menor que cero porque si lo es se cumple la condición de volver otra vez de nuevo a entrar en el bucle para realizar un nuevo.
-
-La misma operación lectura número variable y comprobación mientras el número sea negativo.
-
-Esto va a ir ejecutándose cuando sea positivo pues al no cumplir la condición se saldrá del bucle y el programa seguirá adelante muy importante.
-
-Lo que te decimos aquí.
-
-Con respecto a la utilización de `while`.
-
-Cuidado con los bucles infinitos.
-
-Y es que si no se establece correctamente la condición o las instrucciones no las hemos preparado adecuadamente para que en algún momento dejemos de cumplirse la condición nos podemos encontrar con situaciones fácilmente mientras que al principio cuando estamos programando con esto estamos aprendiendo de poder.
-
-Como digo no definir bien la condición o no establecer bien las instrucciones que hagan que en algún momento la condición deje de cumplirse y se salga del bucle lo que provocaría como digo un bucle infinito.
-
-# 16 Ejercicio práctico VI 04:05
-
-Muy bien porque vamos a hacer ahora un ejercicio en el que vamos a poner en práctica el uso de la instrucción repetitiva.
-
-Se trata de un programa en el que nos vamos a ir realizando una suma de números naturales empezando por el 1 hasta llegar a superar a 1000.
-
-Entonces de lo que se trata es de calcular hasta dónde tenemos que llegar empezando por el 1 para poder alcanzar superarme.
-
-Bueno pues en este caso estamos ante una clara situación en el que no sabemos cuántos números tendremos que sumar uno más dos más.
-
-No sabremos hasta cual tenemos que llegar para poder alcanzar.
-
-Es el típico caso de utilización de una instrucción repetitiva.
-
-Bueno pues vamos a nuestro entorno de desarrollo Eclipse y vamos a crear un nuevo proyecto sería ya el proyecto número 7 ejercicio práctico 6 generalizamos añadimos la clase new class suma 1000 vamos a llamarle a la clase con el método main como siempre.
-
-Entonces aquí lo que vamos a hacer ahora cuando aparezca la clase es declarar una variable que digamos va a hacer de contador de números hasta que tengamos que llegar para alcanzar 1000 vamos a declararla con la igualamos la inicializar dos a cero.
-
-Por otro lado tenemos una variable suma donde vamos a ir acumulando las sumas.
-
-Entonces de qué se trata pues de ir sumando hasta alcanzar o superar 1000.
-
-Es decir mientras la suma sea menor que 1000 por lo tanto la instrucción de control del Weyl la condición será Guaire suma menor que aquí en el interior qué es lo que vamos a hacer.
-
-Pues vamos a ir incrementando la variable Contador y se la vamos acumulando a Suma suma más contratos de modo que la primera vez iremos sumando uno más inicial cero la siguiente vez a uno le sumaremos dos la siguiente tres.
-
-Así mientras sea menor que mil en el momento en el que la suma ya haya superado de 1000 pues ya hemos llegado con Irán marcándonos el número al que hemos tenido que llegar.
-
-Por lo tanto el mensaje será el que nos muestre el valor de la variable con hay que sumar hasta que ya lo tenemos nuestras pasiones.
-
-Y bueno pues vamos a probarlo vamos a proyecto aceptamos y vamos a ver Assange nos dice que hay que sumar hasta 45 es decir uno dos más hasta 45 con el resultado de esa suma llegaría a alcanzar o superar.
-
-Si probamos con un número mucho más pequeño por ejemplo 10 pues lo probamos vamos a comprobar como en este caso el número sería 4 0 1 +2 +3 +4 suman justamente 10.
-
-Es decir hay que sumar hasta el número cuatro para alcanzarles.
-
-Efectivamente esta sería la solución utilizando un bucle igual que como es vamos realizando las operaciones sin saber cuántas veces se van a ejecutar esa operación de suma vendrá determinado por esta condición.
+<img src="images/16-03.png">
 
 # 17 Salida forzada de un bucle 03:37   
 
-Y ya para finalizar con el estudio de las instrucciones de control te voy a explicar cómo realizar una salida forzada de un bucle for joy.
+<img src="images/17-01.png">
 
-Tenemos dos instrucciones para ello dependiendo de qué tipo de salida queremos realizarla.
+Y ya para finalizar con el estudio de las instrucciones de control te voy a explicar cómo realizar una salida forzada de un bucle `for` o `while`.
 
-Está la instrucción break y continúe instrucción break.
+<img src="images/17-02.png">
 
-Esta instrucción ya la has visto que lo hemos utilizado en la instrucción de tipo alternativa multiple Switch.
+Tenemos dos instrucciones para ello dependiendo de qué tipo de salida queremos realizar. Está la instrucción `break` y `continue`.
 
-También se puede utilizar en un foro y en un guante para qué.
+<img src="images/17-03.png">
 
-Para provocar la salida forzada de la instrucción repetitiva es decir si se da alguna condición dentro de la instrucción repetitiva que haga que ya no tengamos que seguir integrando este grupo de instrucciones que finalicemos el bucle.
+La instrucción `break` ya la has visto que la hemos utilizado en la instrucción de tipo alternativa multiple `switch`, también se puede utilizar en un `for` o `while`, para qué, para provocar la salida forzada de la instrucción repetitiva, es decir si se da alguna condición dentro de la instrucción repetitiva que haga que ya no tengamos que seguir iterando este grupo de instrucciones, que finalicemos el bucle en definitiva, utilizaremos una instrucción `break`, eso provocará que el control del programa pase justo a la siguiente instrucción que hay justo después de ese `for` o `while`.
 
-En definitiva utilizaremos una instrucción breve eso provocará que el control del programa pase justo a la siguiente instrucción que hay dentro de ese o foro.
+En ejemplo tienes un pequeño progrma en el cual se van recorriendo una serie de números naturales empezando por uno y va recorriendo los números naturales hasta el valor 8 donde abandonamos. Es un ejemplo un poco tonto pero bueno ahora vamos a ver ya uno de los ejercicios que hemos un caso muy concreto donde sí que nos vendría bien utilizar un `break`.
 
-Aquí por ejemplo tienes un pequeño ejemplo en el cual se van recorriendo una serie de números naturales empezando por uno y bueno si nos encontramos que la variable va recorriendo los números naturales es igual a cierto valor.
+<img src="images/17-04.png">
 
-8.
+La otra instruciones es `continue`, `continue` no provoca una salida forzada del bucle como tal, sino de la iteración actual, es decir nosotros estamos en un `for` o `while` y será una condición que haga que ya no tengamos que seguir ejecutando ese bloque de sentencias para ese valor de la variable de control, entonces llamamos a `continue`, `continue` lo que hace es ir al final del `for` como si saltarse todas las instrucciones que quedan y por lo tanto volver otra vez de nuevo a ejecutar la operación incremento a comprobar la condición y si se cumple volver a entrar, no es una salida que haga que salgamos completamente del `for` o `while` sino que simplemente de la iteración actual.
 
-Abandonamos es un ejemplo un poco mejor tonto pero bueno ahora vamos a ver ya uno de los ejercicios que hemos hecho un caso muy concreto donde sí que nos vendría bien utilizar un break la otra instruciones continúe continúe.
+Vamos a hacer un ajuste en el proyecto `601-06-Ejercicio_Practico_5` tenemos la clase `ComprobarPrimos`.
 
-No provoca una salida forzada del bucle como tal sino de la iteración actual es decir nosotros estamos en un foro o en un way y será una condición que haga que ya no tengamos que seguir ejecutando ese bloque de sentencias para esa digamos para ese valor de la variable de control.
+*`ComprobarPrimos`*
 
-Entonces llamamos a Continue continúe lo que haces ir al final del foro como si saltarse todas las instrucciones que quedan y por lo tanto volver otra vez de nuevo a ejecutar la operación incremento a comprobar la condición y si se cumple volver a entrar.
+```java
+public class ComprobarPrimos {
 
-Es decir no es una salida que haga que salgamos completamente del foro o Caraguay sino que simplemente de la iteración actual como te decía Vamos a ver un ejemplo práctico de utilización en este caso de break uno de los ejercicios que hemos realizado en una de las lecciones anteriores.
+   public static void main(String[] args) {
+		
+      int n=8;
+      boolean primo=true;
+		
+      for(int i=2; i<n; i++) {
+         if(n%i==0) {
+            primo=false;
+	    break;
+         }
+      }
+      
+      if(primo) {
+         System.out.println("El número " + n + " es primo");
+      }else {
+         System.out.println("El número " + n + " NO es primo");
+      }
+      
+   }
+}
+```
 
-Concretamente se trata el ejercicio práctico 5 No sé si recordarás que era el ejercicio en el que a partir de un número comprobamos si se trataba de un número primo o no íbamos recorriendo todos los números entre dos y ese número y comprobando si las divisiones entre el número y el número por el que estamos recorriendo eran exactas en cuyo caso ya no era primo.
-
-Entonces claro si yo ya encuentro que hay una división exacta con uno de los números con el que estoy tirando para qué voy a seguir comprobando más.
-
-Es decir si por ejemplo en este número pongamos que fuera 16 vale al hacer la división entre dos me encuentro con que el resto es cero.
-
-Ya no es primo.
-
-Para qué voy a seguir comprobando el 3 el 4 etc. Es decir digamos que si no salimos del bucle en este caso ponemos aquí un break evitamos iteraciones ya que no nos llevan a ningún sitio puesto que si ya has comprobado ya has visto que realmente el número no es primo porque te has encontrado el resto de una división que es igual a cero una división exacta pues no necesitas seguir comprobando esto es lo que haría es mejorar el rendimiento de los programas en este caso el funcionamiento sería el mismo pero como te digo evitaría iteraciones que no tendrían sentido puesto que ya has determinado el resultado de la operación.
+Si recordamos aquí recorriamos todos los números que hay entre 2 y el numero que estamos analizando para ver si es divisible entre dicho número para cambiar el estado de la variable `primo=false;` y seguiamos con el siguiente número, pero realmente no es necesario ya que con el primero número que sea dvisible ya sabremos que no es primo y podemos salir del `for` con un `break` como hemos hecho.
+ 
+Para qué voy a seguir comprobando el 3 el 4 etc. es decir salimos del bucle evitamos iteraciones que ya que no nos llevan a ningún sitio, puesto que si ya has comprobado ya has visto que realmente el número no es primo porque te has encontrado el resto de una división que es igual a cero, una división exacta pues no necesitas seguir comprobando esto lo que haría es mejorar el rendimiento de los programas, en este caso el funcionamiento sería el mismo pero evitaría iteraciones que no tendrían sentido puesto que ya has determinado el resultado de la operación.
