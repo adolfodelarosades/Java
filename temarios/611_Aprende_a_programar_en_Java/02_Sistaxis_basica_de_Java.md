@@ -206,7 +206,7 @@ Evalúan expresiones de tipo boolean, dando como resultado también un boolean. 
 Operador | Descripción      
 ---------|------------
 `&&`     | Operador AND El resultado es verdadero únicamente si ambos operando son verdaderos      
-`ll` `||`| Operador OR El resultado es verdadero si alguno de los operandos es verdadero      
+`ll`     | Operador OR El resultado es verdadero si alguno de los operandos es verdadero      
 `!`      | Operador NOT Se aplica sobre un único operando, su resultado es el contrario al valor del operando      
 
 A continuación te mostramos algunos ejemplos:  
