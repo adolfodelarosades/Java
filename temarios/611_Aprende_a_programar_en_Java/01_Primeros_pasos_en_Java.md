@@ -126,7 +126,7 @@ Que luego te puedes crear un acceso directo al escritorio como tengo yo por aqu√
 
 En la siguiente lecci√≥n vamos a ver precisamente como crear nuestro primer programa una vez que tengamos instaladas estas herramientas.
 
-# 03 Primer programa en Java 10:11
+# 03 :computer: Primer programa en Java `601-01_Primer_Programa` 10:11
 
 <img src="images/03-01.png">
 
