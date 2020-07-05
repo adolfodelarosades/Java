@@ -205,7 +205,6 @@ Cómo funciona esto, lo vamos a entender ahora mejor como un ejemplo pero te exp
 Después de la `inicializacion` comprobaríamos una `condicion` es una condición del tipo con operadores condicionales siempre va a dar como resultado un booleano. Lógicamente en esa condición va a estar implicada esa variable que hemos inicializar. Si la condición se cumple se va a ejecutar el bloque de instrucciones al finalizar el bloque de instrucciones se ejecuta `incremento` que como su nombre indica habitualmente va a ser el incremento o decremento de la variable de control que se inicializo la primera vez. Tras ejecutar el incremento volvemos a comprobar la condición, se sigue cumpliendo pues ejecutamos las instrucciones de nuevo, al finalizar otra vez `incremento` y otra vez `condicion` se sigue cumpliendo, otra vez las instrucciones y así hasta que llega un momento en el que tras la ejecución de `incremento`, `condicion` ya no se cumpla en ese momento ya no se van a ejecutar las instrucciones que tenemos definidas dentro del bucle.
 
 <img src="images/12-03.png">
-<img src="images/12-04.png">
 
 Como te decía lo mejor es verlo como un ejemplo ya verás que es muy sencillo su funcionamiento, aquí tenemos un pequeño bloque de código que se encarga de mostrarnos los números en pantalla del 1 al 10 los números naturales 1 2 3 hasta 10.
 
@@ -239,53 +238,41 @@ for(int i=n; i>0; i--){
 System.out.println(suma);
 ```
 
-Otro ejemplo de un programa que va calculando la suma de todos los números comprendidos entre un número dado y ser mostrando el resultado en pantalla.
+Otro ejemplo de un programa que va calculando la suma de todos los números comprendidos entre un número dado `n` y `0` mostrando el resultado en pantalla. En este caso para que veas que no siempre hay que empezar desde el número más pequeño hasta el número final, hemos empezado inicializando la variable de control en el número al que hay que alcanzar 200 y lo que vamos haciendo es que la vamos decrementando, fíjate 200, 200 es mayor que 0, si, por lo tanto la variable `suma` que está inicializa a 0 le sumamos el número 200, que hacemos después, la operación de incremento, que en este caso sería de decremento, le restamos 1 ,ahora son 199, 199 es mayor que 0, si, ahora lo que había acumulado en suma que era 200, le sumamos 199, volvemos al decremento, 198, 198 es mayor que 0, si, entonces volvemos a sumar 198 y así hasta el número 1. Cuando vamos decrementando e `i` vale 1 es el último número que sumamos, al decrementar la `i` valiendo 1, tendremos que vale 0, cuyo caso ya deja de cumplirse la condición y salimos del `for`, por lo tanto hemos sumado todos los números entre `n` y 0 no incluido, sería entre `n` y 1. Después mostraremos el resultado.
 
-En este caso para que veas que no siempre hay que empezar desde el número más pequeño hasta el número final.
+Como ves su funcionamiento es muy sencillo y se dice que ejecuta el grupo de instrucciones un número definido de veces porque suele ser un número concreto 20, 30, 40 veces, viene determinado siempre por esa variable de control y el valor máximo o mínimo a alcanzar.
 
-Hemos empezado inicializar la variable de control en el número al que hay que alcanzar 200 y lo que vamos haciendo es clavamos incremental fíjate 200 200 es mayor que cero si por lo tanto la variable suma que está inicializar a cero le sumamos el número 200 que hacemos después la operación un incremento que en este caso sería decremento.
+<img src="images/12-04.png">
 
-Restamos 1 ahora son 199 199 es mayor que cero.
+Consideraciones que tenemos que tener en cuenta sobre el uso del `for`.
 
-Si ahora a lo que había acumulado en suma que era 200 le sumamos 199 volvemos al decremento 198 198 mayor que cero si.
+Hemos visto que habitualmente en un `for` hay tres instrucciones pero no son obligatorias.
 
-Pues entonces volvemos a sumar 198 y así mientras hasta el número 1 vale cuando vamos a remendando y vale 1 es el último número que sumamos al decremento ahí valiendo uno tendremos que vale cero cuyo caso ya deja de cumplirse la condición y salimos del foro por lo tanto hemos sumado todos los números entrene y cero no incluido.
+Podrías tener un `for(;;){...}` en el cual no hemos puesto ni inicialización, ni incremento, ni condición, esto es un bucle infinito estaría ejecutando esto indefinidamente. Es un caso extremo, no se suelen utilizar desde luego pero te viene a indicar que puede ser que falte una de las tres instrucciones, las dos o incluso todas para hacer un bucle infinito. Ya digo no es habitual, no suele ser práctico hacerlo pero podríamos crear un bucle infinito si no ponemos ninguna de las instrucciones ni la de inicialización, ni comprobación, ni tampoco la de incremento.
 
-Realmente sería entre uno bueno bueno.
+Otra consideración, es que en la inicialización e incremento, la primera y tercera instrucción, habitualmente es una sola instrucción pero podrían ser dos o mas instrucciones como se muestra en la diapositiva. O sea yo quiero inicializar una variable y sumarle 2 o se podrían poner más de una instruciones separadas por comas, lo mismo en el incremento puedes incrementar la variable y además asignar esa variable a otra variable que tengo por ahí, separada por comas pondría todas las instrucciones que fueran necesarias, la condición es una única instrucción, aunque podría incluir algún operador lógico de manera que la comprobación incluyera si es menor que 10 y mayor que no sé qué valor y menor tanto podría ser una condición más compleja, pero eso sí siempre devolviendo booleano.
 
-Después mostraremos el resultado como es su funcionamiento es muy sencillo y se dice que ejecuta el grupo de instrucciones un número definido de veces porque suele ser un número concreto 20 30 o 40 veces viene determinado siempre por esa variable de control y el valor máximo o mínimo a alcanzar.
+Otras consideración es que la variable de control que habitualmente la declaramos aquí dentro de la instrucción de inicialización, pero no tiene por qué, podría haberse declarado antes, ya que si la declares aquí dentro del `for` en inicialización solamente la podríamos utilizar dentro de ese bloque, si por lo que sea, esa variable también se tiene que usar fuera habría que declararla antes y en su lugar no ponemos nada el punto y coma para indicar la delimitación de las tres secciones si son siempre obligatorios ponerlos.
 
-Vale consideraciones que tenemos que tener en cuenta sobre el uso del foro.
+Esto es todo sobre `for` en la siguiente lección vamos a ver varios ejemplos de utilización del `for` por que es una de las instituciones más utilizadas en cualquier programa Java.
 
-Bueno hemos visto que habitualmente en un foro hay tres instrucciones pero no son obligatorias.
-
-Fíjate aquí podrías tener un foro en el cual no hemos puesto ni inicialización ni incremento ni condición.
-
-Esto es un bucle infinito estaría ejecutando esto indefinidamente.
-
-Es un caso extremo no se suelen utilizar desde luego pero te viene a indicar que puede ser que falte una de las tres instrucciones las dos o incluso todas que no utilices.
-
-No utilicemos ninguna para hacer un bucle infinito.
-
-Ya digo no es habitual suele ser práctico hacerlo pero podríamos crearlo un bucle infinito si no ponemos ninguna de las instrucciones ni la de inicialización ni comprobación ni tampoco la de incremento.
-
-Otra consideración es que la inicialización incrementos de primera y tercera instrucción habitualmente si es una instrucción inicialización pero podrían ser dos instrucciones o sea yo quiero inicializar una variable y sumarle 2 o a otra variable hacerlo otra operación pues se podrían poner más de una instruciones aquí pasaríamos por comas lo mismo en el incremento puedes incrementar la variable y además quiero asignar esa variable a otra variable que tengo por ahí separada por comas pondría todas las instrucciones que fueran necesarias en la condición es una única instrucción aunque podría incluir algún operador lógico de manera que la comprobación incluyera si es menor que 10 y mayor que no sé qué valor y menor tanto podría ser una condición más compleja.
-
-Pero eso sí siempre devolviendo voleas otras la consideración que te comentaba anteriormente al principio es que la variable de control es una variable de control que habitualmente la declaramos aquí dentro de la instrucción de inicialización pero no tiene por qué podría haberse declarado antes ya que si la declares aquí dentro del foro en inicialización solamente la podríamos utilizar dentro de ese bloque si por lo que sea esa variable también se tiene que usar fuera cosa habría que declararlo antes y como ves pues en su lugar no ponemos nada el punto y coma para indicar la delimitación de los de las tres  secciones.
-
-Si son siempre obligatorios ponerlos vale bueno esto lo es todo sobreaforo en la siguiente elección.
-
-Vamos a ver un ejemplo de varios ejemplos de utilización del cuerpo que es una de las instituciones más utilizadas en cualquier programa Java.
-
-
-# 13 Ejercicio práctico IV 07:13
+# 13 :computer: Ejercicio práctico IV 601-05-Ejercicio_Practico_4 07:13
 
 <img src="images/13-01.png">
+
+Muy bien pues vamos a ver un ejercicio en el que vamos a poner en práctica el uso de la instrucción repetitiva o bucle `for`.
+
 <img src="images/13-02.png">
 
-Muy bien pues vamos a ver un ejercicio en el que vamos a poner en práctica el uso de la instrucción repetitiva o bucle for el ejercicio va a consistir en un programa que dados dos números no va a calcular la suma de todos los números comprendidos por los pares comprendidos entre ambos números extremos incluidos.
+El ejercicio va a consistir en un programa que dados dos números nos va a calcular la suma de todos los números pares comprendidos entre ambos números, extremos incluidos.
 
-Bueno pues vamos al entorno de desarrollo Eclipse y como procederemos como de costumbre a crear nuestro nuevo jaba proyecto este nuevo proyecto le vamos a nombrar como 0 5 ejercicio práctico 4 van no creamos y añadimos la clase como siempre Miho Java class o clase suma pares.
+Vamos al entorno de desarrollo Eclipse y vamos a crear el proyecto `601-05-Ejercicio_Practico_4` y añadimos la clase `SumaPares` con el siguiente código.
+
+*`SumaPares`*
+
+```java
+```
+
 
 Así es como vamos a llamar a la clase y crearemos el método main dentro de ella que es donde vamos a meter el código de nuestro programa.
 
