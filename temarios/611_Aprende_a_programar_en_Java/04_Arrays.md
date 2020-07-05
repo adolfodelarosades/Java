@@ -7,52 +7,60 @@
 # 18 Concepto de array, declaración y creación 07:45
 
 <img src="images/18-01.png">
+
+En esta lección te voy a explicar una estructura de programación muy utilizada en cualquier lenguaje que es el array.
+
 <img src="images/18-02.png">
+
+¿Qué que es un Array? Un Array es un conjunto de datos de un mismo tipo a los que vamos a poder acceder no con varias variables sino con una única variable. 
+
+Vamos a ver si nos imaginamos una variable como una caja en la que almacenamos un dato de un determinado tipo. Podríamos decir que un Array es como un conjunto de cajas pegadas una detrás de otra, lo que pasa es que en vez de tener un nombre cada una de esas cajas hay un único nombre, una única variable que permite acceder a un único identificador que es lo que se asigna a las variables, para acceder a todas esas posiciones, a todas esas cajas que conforman el array. Y cómo podemos hacer para que con una única variable, un único identificador podamos acceder a todas esas posiciones, cada una de ellas tiene asociado un índice, el primer elemento de ese conjunto de datos que forman el array tendría posición 0, el siguiente 1 y así sucesivamente.
+
+Aquí ves en este ejemplo de la diapositiva un array de 10 números enteros donde tenemos una serie de números almacenados 4,15,0 etc. y cada uno asociado a una posición.
+
+Cuando se trata de hacer una operación o un grupo de operaciones con un conjunto de datos en el mismo grupo de operaciones con todos esos datos, en vez de tenerlos cada uno en una variable es mejor almacenarlos en un array de modo que podríamos utilizar las estructuras repetitivas tipo `for` o `while` para poder ejecutar las mismas instrucciones con todos los elementos que conforman dicho array, ya lo verás en los ejemplos que vamos a hacer en posteriores lecciones.
+
 <img src="images/18-03.png">
+
+Lo primero cómo creamos un array, para crear un array dado que va a estar almacenada en una variable hay que declarar dicha variable, fíjate cómo sería la declaración:
+
+`int [] datos;`
+
+tipo de datos que vamos a almacenar en el array, corchete y cierre de corchete y nombre de la variable donde se va a almacenar, no se indica tamaño ni nada.
+
+Es en el momento de la creación del array cuando ya le damos un tamaño a través del operador `new` muy utilizado en Java para construir objetos a partir de clases, porque en definitiva eso no es importante pero que sepas que un array es un objeto, bueno pues para construir un array utilizamos el operador `new` seguido del tipo de dato de ese array y ahora ya si entre corchetes indicaremos el tamaño del array.
+
+`datos = new int[10]; //array de 10 enteros`
+
+Por ejemplo si es un array de tamaño 10 indicaremos el número 10 entre corchetes.
+
+Esta instrucción crea un objeto array y lo almacena en la variable `datos` la variable que va a almacenar el objeto o la referencia al objeto de array para poder después utilizar dicha variable para acceder a él.
+
+Y cómo se accedería a ese Array, como se accedería a cada uno de los elementos, cada una de las posiciones utilizaríamos el nombre de la variable como ves aquí:
+
+```java
+datos[0]=4;
+datos[1]=15;
+```
+
+En este caso queremos acceder a la posición 0 para almacenar el número 4 y a la posición 1 para almacenar el número 15 etc.
+
+Por supuesto si de lo que se trata es de mostrar el contenido de las posiciones también esta expresión `datos[i]` haría referencia al dato para leerlo y hacer alguna operación con el. 
+
+Podemos hacer la declaración, la creación y la inicialización del array, asignación de datos a cada una de las posiciones todo en una misma instrucción.
+
+`int [] valores = {3, 5, 20, 11}`
+
+Declaramos el tipo y en este caso corchetes apertura cierre vacíos, nombre la variable y a continuación el signo igual y entre llaves la lista de datos que van a conformar ese array.
+
+Esto ya hará que implícitamente al ejecutarse este programa que se construya un array en este caso de tamaño 4 y cada una de esas posiciones desde cero hasta la 3 sera inicializado con uno de esos valores que ves.
+
+La primera con 3, la siguiente con 5, el siguiente con 20 y la siguiente con 11.
+
 <img src="images/18-04.png">
 <img src="images/18-05.png">
 
-En esta lección te voy a explicar una estructura de programación muy utilizada en cualquier lenguaje que es el array que es una red una raíz es un conjunto de datos de un mismo tipo a los que vamos a poder acceder no con varias variables sino con una única variable.
-
-Vamos a ver si nos imaginamos una variable como una caja en la que almacenamos un dato de un determinado tipo.
-
-Podríamos decir que una Rayes como un conjunto de cajas pegadas una detrás de otra lo que pasa es que en vez de tener un nombre cada una de esas cajas hay un único nombre una única variable que permite acceder a un único identificador.
-
-En definitiva que es lo que se asigna a las variables pues para acceder a todas esas posiciones a todas esas cajas que conforman el array y cómo podemos hacer para que con una única variable un único identificador podamos acceder a todas esas posiciones.
-
-Pues porque cada una de ellas tiene asociado un índice.
-
-El primer elemento de ese conjunto de datos que forman la raíz tendría posición cero siguiente 1 y así sucesivamente.
-
-Aquí ves en este ejemplo de una raíz de 10 números enteros donde tenemos una serie de números almacenados 4 4:15 etcétera y cada uno asociado a una posición.
-
-Cuando se trata de hacer una operación o un grupo de operaciones con un conjunto de datos en el mismo grupo de operaciones con todos esos datos en vez de tenerlos cada uno en una variable es mejor almacenarlos en una red de modo que podríamos utilizar las estructuras repetitivas tipo Ford o guai para poder ejecutar las mismas instrucciones con todos los elementos que conforman dicha raíz.
-
-Ya lo verás en los ejemplos que vamos a hacer en posteriores elecciones lo primero cómo creamos una red para crear una raíz dado que va ser a estar almacenada en una variable hay que declarar dicha variable y fíjate cómo sería la declaración tipo de datos que vamos a almacenar en el array corchete y cierre de corchete y nombre de la variable donde se va a almacenar.
-
-Esto es Avro corchete 0% y lo dejo ahí.
-
-No se indica tamaño ni nada es en el momento de la creación de la raíz.
-
-Cuando ya le damos un tamaño a través del operador new muy utilizado en Java para construir objetos a partir de clases porque en definitiva eso no es importante pero que sepas que una red es un objeto bueno pues para construir una radio utilizamos el operador new seguido del tipo de dato de ese Array y ahora ya si entre corchetes indicaremos el tamaño de la raíz.
-
-Por ejemplo si es una red de tamaño 10 os indicaremos el número 10 esta instrucción Niu el tipo de dato en este caso entero entre corchetes 10 crea un objeto Arbey y como lo tenemos que almacena una variable por eso a la izquierda del signo igual tenemos el nombre de la variable que va a almacenar el objeto o la referencia al objeto de array para poder después utilizar dicha variable para acceder a él y cómo se accedería a ese Array como se accedería a cada uno de los elementos.
-
-Cada una de las posiciones utilizaríamos el nombre de la variable.
-
-Como ves aquí datos en este caso y entre corchetes la posición a la que queremos acceder en este caso queremos acceder a la posición 0 para almacenar el número 4 posición 1 para almacenar el número 15 etc..
-
-Por supuesto si de lo que se trata es de mostrar el contenido de las posiciones pues también esta expresión nombre la variable y entre corchetes la posición haría referencia al dato para leerlo y hacer alguna operación con Podemos hacer la declaración.
-
-La creación de la RAE y la inicialización asignación de datos a cada una de las posiciones todo en una misma instrucción.
-
-Fíjate aquí en esta instrucción de abajo cómo quedaría declaramos el tipo y en este caso corchetes apertura cierre de vacíos nombre la variable y a continuación el signo igual y entre llaves la lista de datos que van a conformar ese array.
-
-Esto ya hará que implícitamente al ejecutarse este programa se construya una raíz en este caso de tamaño 4 y cada una de esas posiciones desde cero hasta la 3 sea inicializar con uno de esos valores que ves aquí.
-
-La primera. 
-
-3 La siguiente el 5 lo siguiente el 20 y la siguiente el 11 consideraciones que tenemos que tener en cuenta cuando vamos a trabajar con una raíz pues como cualquier variable se puede declarar o bien como tributo al principio de la clase o bien como una variable local dentro de un método si se declara como tipo atributo implícitamente una es inicializar.
+Consideraciones que tenemos que tener en cuenta cuando vamos a trabajar con una raíz pues como cualquier variable se puede declarar o bien como tributo al principio de la clase o bien como una variable local dentro de un método si se declara como tipo atributo implícitamente una es inicializar.
 
 No es una palabra reservada de Java que la utilizaremos por objetos representa el objeto nulo igual que en una variable de tipo entero.
 
