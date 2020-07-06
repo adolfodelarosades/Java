@@ -7,67 +7,57 @@
 # 22 Clases, objetos y métodos 07:14
 
 <img src="images/22-01.png">
+
+Bueno llevamos desde el principio del curso hablando de lo que es una clase, objetos, métodos, creo que es el momento de entrar en detalle a estos conceptos y de aclarar las diferencias entre ellos.
+
 <img src="images/22-02.png">
+
+Lo primero que es una **Clase**, una clase digamos que es el lugar donde se define el comportamiento de un determinado tipo de objeto, la clase podríamos decir que es el molde, mientras que el objeto es el elemento físico obtenido a partir de ese molde.
+
+En programación la clase es código donde se define el comportamiento del objeto a base de *métodos*, de *atributos*, es código y a partir de ese código se pueden crear lo que llamamos *instancias*  de esa clase que son los *objetos* de una clase, puedo crear múltiples objetos. Es sobre el objeto donde voy a ir haciendo las llamadas a los elementos que determinan ese comportamiento del tipo de objeto que se ha definido en la clase es decir los métodos.
+
 <img src="images/22-03.png">
+
+Por ejemplo vamos a hacer una similitud con casos del mundo real, cuando hablamos de coches imaginemos una marca y modelo de coche,  una marca es el Ford KV y el modelo que es Prin 2017. Cuando hablamos de eso, el Ford KV modelo Prin 2017 estamos hablando de un tipo de coche, de una clase a partir de esa clase evidentemente se fabrican muchos objetos, muchos coches de esa marca y de ese modelo, los objetos ya son los coches físicos con su matrícula, su color, sus propiedades ya definidas. La clase en el caso de los coches definirá los métodos de las funcionalidades que tienen todo coche arrancar, frenar, acelerar y tiene sus propiedades como el color, la potencia, etc. 
+
 <img src="images/22-04.png">
+
+Hemos dicho que el comportamiento de los objetos se define dentro de la clase a base de que, a base de *métodos* y *atributos*, ya hemos visto en todos los ejercicios que hemos hecho hasta el momento cómo se crea una clase, la palabra `class` el nombre que se le da a la clase y entre llaves el contenido los atributos que son variables, básicamente lo que representan las propiedades del tipo de objeto. Siguiendo con la similitud de los coches vemos unas posibles propiedades de la clase de la que estamos hablando FourKV sería su potencia, el color mientras que los métodos son las funciones que definen ese comportamiento de los objetos lo que hacen los objetos acelerar, consumo. Los métodos son funciones que reciben unos parámetros, los datos de entrada y pueden devolver unos resultados. Obviamente dentro del código de esos métodos se puede hacer uso de esos atributos para algo, el consumo pues se puede determinar a partir de la potencia y acelerar a partir de un parámetro de intensidad que a lo mejor está determinado también por la potencia, eso ya depende de cada tipo de objeto.
+
 <img src="images/22-05.png">
 <img src="images/22-06.png">
 
-Bueno llevamos desde el principio del curso hablando de lo que es una clase objetos métodos creo que es el momento de entrar en detalle estos conceptos y de aclarar las diferencias entre ellos pues lo primero que es una clase es una clase digamos que es el lugar donde se define el comportamiento de un determinado tipo de objeto la clase podríamos decir que es el molde mientras que el objeto es el elemento físico obtenido a partir de ese molde.
+Ya que hemos hablado de los atributos, los atributos y los métodos digamos que como vamos a ver más adelante aunque aquí no aparecen los atributos suelen estar definidos de manera privada es decir para uso interno de la clase, mientras que los métodos suelen estar definidos de forma pública para que se usen desde afuera de la clase, es decir otros objetos que usan esta clase para crear objetos de ella podrán llamar a esos métodos mientras que los atributos suelen ser para uso interno de la propia clase.
 
-En programación la clase de código donde se define como decimos y comportamiento del objeto a base de métodos de atributos es código y a partir de ese código se pueden crear lo que llamamos instancias que luego veremos de la misma instancia de esa clase que son los objetos de una clase pues puedo crear múltiples objetos sobre el objeto donde voy a ir haciendo las llamadas a los elementos que determinan ese comportamiento del tipo de objeto que se ha definido la clase es decir los métodos las funciones.
+Los métodos se aplican sobre los objetos, vamos a entrar un poquito más en detalles sobre la definición y cómo sería la llamada a un método, ya olvidémonos de objetos para llamar a los métodos, hay que tener un objeto sí, pero centrémonos exclusivamente lo que es el método en si, un método se define como ves en la diapositiva, hay un tipo de devolución, un nombre Método y luego una lista de posibles parámetros, parámetros que va a recibir, cada parámetro se define como una variable Java, un tipo y un nombre coma, tipo nombre etc..
 
-Por ejemplo vamos a hacer una similitud con casos del mundo real cuando hablamos de coches.
+El tipo de devolución es lo que va a devolver,  si el método no devuelve ningún resultado por qué hace lo que tiene que hacer y no da ningún resultado al punto de llamada pues el tipo de devolución será `void`.
 
-Imaginemos una marca y modelo de coche equipos inventado una marca y modelo que es el Ford KV modelo Prin 2017.
-
-Bueno pues cuando hablamos de eso el Ford KV modelo Prin 2017 estamos hablando de un tipo de coche de una clase de una clase vale a partir de esa clase evidentemente se fabrican muchos objetos muchos coches de esa marca y ese modelo los objetos ya son pues los coches físicos con su matrícula su color sus propiedades ya definidas la clase en el caso de los coches definirá los métodos de las funcionalidades que tienen todo coche arrancar frenar acelerar y tiene sus propiedades como el color la potencia etcétera hemos dicho que el comportamiento de los objetos se define dentro de la clase a base de que a base de métodos y atributos ya hemos visto en todos los ejercicios que hemos hecho hasta el momento cómo se crea una clase.
-
-La palabra Class el nombre que se le da a la clase y entre llaves el contenido los atributos que son variables.
-
-Básicamente lo que representan las propiedades del tipo de objeto pues siguiendo con la similitud de los coches vemos que unas posibles propiedades de la clase de la que estamos hablando Fourcade sería su potencia el color mientras que los métodos son las funciones que definen ese comportamiento de los objetos lo que hacen los objetos pues siguiendo repito con la similitud pues acelerar consumo.
-
-Los métodos son funciones pues reciben unos parámetros en los datos de entrada y pueden devolver unos resultados.
-
-Obviamente dentro del código de sus métodos se puede hacer uso de esos atributos para algo consumo pues se puede determinar a partir de la potencia y acelerar a partir de un parámetro de intensidad que a lo mejor está determinado también por la potencia.
-
-Eso ya depende de cada tipo de objeto ya que hemos hablado de los atributos los atributos y los métodos pues digamos que como vamos a ver más adelante aunque aquí no aparecen los atributos suelen estar definidos de manera privada es decir para uso interno de la clase mientras que los métodos suelen estar definidos de forma pública para que se usen desde afuera de la clase.
-
-Es decir otros objetos que usan esta clase para crear objetos de ella pues podrán llamar a esos métodos mientras que los atributos suelen ser para uso para uso interno de la propia clase.
-
-Los métodos se aplican sobre los objetos.
-
-Vamos a entrar un poquito más en detalles sobre la definición y cómo sería la llamada a un método ya olvidémonos de objetos para llamar a los métodos.
-
-Hay que tener un objeto sí pero centrémonos exclusivamente lo que es el método sencillo un método se define como ves aquí hay un tipo de devolución un nombre Método y luego una lista de posibles parámetros parámetros que va a recibir cada parámetro se define como una variable Java un tipo y un nombre Koma tipo nombre etc..
-
-El tipo de evolución es lo que va a devolver.
-
-Como digo si el método no devuelve ningún resultado por qué hace lo que tiene que hacer y no da ningún resultado al punto de llamada pues el tipo de evolución será el nombre el método los parámetros bien cómo se hace la llamada nos metemos con los ejemplos la llamada a un método si se aplicará sobre un objeto pero en definitiva lo que es la parte de la llamada ese método es con el nombre del método y entre paréntesis la lista de datos que coinciden con los parámetros que va a recibir es decir en esos parámetros que son variables se van a meter datos en la llamada que son los llamados argumentos.
-
-Si esto fuera un entero X un entero y griega a la hora de llamar a ese método podría poner aquí veinti cinco coma cuatro.
-
-El 25 se volcaría en el parámetro x 4 en el parámetro.
+Cómo se hace la llamada a métodos, la llamada a un método si se aplicará sobre un objeto pero en definitiva lo que es la parte de la llamada a ese método es con el nombre del método y entre paréntesis la lista de datos que coinciden con los parámetros que va a recibir, es decir en esos parámetros que son variables se van a meter datos en la llamada que son los llamados argumentos.
 
 Aquí ves unos ejemplos.
 
-Fíjate en este caso tenemos un método definido como llamado test que va a devolver un entero y recibe como un parámetro un número entero.
+```java
+int test(int n) {...}
+void mostrar(){...}
+```
 
-Así es como se declararía independientemente de lo que haga un método que no devuelve nada. 
+Tenemos un método llamado test que va a devolver un entero y recibe como un parámetro un número entero. Así es como se declararía independientemente de lo que haga.
 
-Como decía antes tipo de evolución Veidt el nombre del método y bueno puede que no reciba ningún parámetro si no recibe ningún parámetro se tienen que poner los paréntesis igualmente cómo sería por ejemplo una llamada a ese método 3 agobiando como he dicho antes que habría que poner el objeto delante.
+Un método que no devuelve nada, como decía antes tipo de devolución void, el nombre del método y bueno puede que no recibe ningún parámetro, si no recibe ningún parámetro se tienen que poner los paréntesis igualmente.
 
-Pero centrémonos en lo que es el método pues poniendo el nombre del método y entre paréntesis el valor o argumento de llamada es el número 25 se volcaría la variable n lo que hagamos aquí dentro del método con n pues afectaría lógicamente o contendría sería con el valor 25 que lo hemos pasado la llamada.
+Cómo sería la llamada a esos métodos.
 
-Cómo este método devuelve un resultado.
+```java
+int a = test(25);
+mostrar()
+```
 
-Pues fíjate que ponemos la llamada al método a la derecha del igual de una declaración de variable lo que significa que cuando el método termina de ejecución el resultado se guardará en dicha variable.
+Poniendo el nombre del método y entre paréntesis el valor o argumento de llamada, el número 25 se volcaría en la variable `n`, lo que hagamos dentro del método con `n` contendría el valor 25 que le hemos pasado. Cómo este método devuelve un resultado fíjate que ponemos la llamada al método a la derecha del igual de una declaración de variable lo que significa que cuando el método termina la ejecución el resultado se guardará en dicha variable.
 
-Aquí tienes un ejemplo de una llamada a un método que no devuelve nada.
+Tienes también un ejemplo de una llamada a un método que no devuelve nada, como ves no hay variable que tenga que recoger el resultado porque es `void` y a la hora de llamarlo aunque no reciba parámetros los paréntesis deben indicarse.
 
-Como ves no hay variable que tenga que recoger el resultado porque es bait y a la hora de llamarlo aunque no reciba parámetros los paréntesis deben indicarse con esta explicación de lo que es.
-
-Las clases objetos un poco más en detalle el método ya podemos seguir avanzando en la creación de clases y la utilización dentro de un programa porque como puedes imaginar un programa no solamente está formado por la clase con el método que se organiza en varias clases con varios métodos y es lo que vamos a ir viendo en las siguientes lecciones del curso.
+Con esta explicación de lo que son las clases, objetos, métodos un poco más en detalle ya podemos seguir avanzando en la creación de clases y la utilización dentro de un programa porque como puedes imaginar, un programa no solamente está formado por la clase con el método `main`, se organiza en varias clases, con varios métodos y es lo que vamos a ir viendo en las siguientes lecciones del curso.
 
 # 23 Creación de objetos 03:21
 
