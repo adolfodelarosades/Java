@@ -6,6 +6,11 @@
    
 # 26 La clase String 04:04
 
+<img src="images/26-01.png">
+<img src="images/26-02.png">
+<img src="images/26-03.png">
+<img src="images/26-04.png">
+
 En esta elección voy a hablarte de una de las clases más importantes dejaba la clase Street a través de la clase string.
 
 Podemos representar cualquier tipo de texto en Java.
@@ -47,6 +52,12 @@ La característica inmutabilidad pero el uso de los mismos es a través de las o
 Aparte de la concatenación como hemos visto antes pero sobre todo de la llamada a sus múltiples métodos que tiene dicha clase eso lo vamos a ver en la elección siguiente.
 
 # 27 Principales métodos de la clase String 09:22
+
+<img src="images/27-01.png">
+<img src="images/27-02.png">
+<img src="images/27-03.png">
+<img src="images/27-04.png">
+<img src="images/27-05.png">
 
 En la lección anterior has estado estudiando en la clase stream cómo has podido comprobar se trata de una de las clases más importantes de Java.
 
@@ -134,6 +145,9 @@ Es decir esto sería lo que nos devolverá bueno has visto alguno de los método
 
 # 28 Ejercicio práctico X 08:05
 
+<img src="images/28-01.png">
+<img src="images/28-02.png">
+
 Muy bien pues a continuación vamos a realizar un ejercicio en el que vamos a poner en práctica algunos de los métodos que hemos visto en la elección anterior sobre la clase Street el ejercicio va a consistir en un programa que solicitará al usuario la introducción de una cadena de texto y después de eso nos dirá cuántos vocales contiene dicho texto.
 
 Bueno pues vamos a un entorno de desarrollo para crear el proyecto vamos a ver muy Holler y bueno en este caso ya estamos con el proyecto número 11 correspondiente al ejercicio  práctico 10 Shishio 5 10.
@@ -195,6 +209,10 @@ Esto es una cadena la transforma solamente para a la hora de contarlo en este ca
 que tiene ocho vocales.
 
 # 29 Ejercicio práctico XI 08:52 
+
+
+<img src="images/29-01.png">
+<img src="images/29-02.png">
 
 Vamos a realizar un nuevo ejercicio en el que vamos a poner en práctica más métodos de la clase Street en este caso se trata de hacer un programa que va a solicitar al usuario la introducción de una cadena de texto cadena de texto que va a consistir en una serie de nombres nombres de personas separadas por comas.
 
