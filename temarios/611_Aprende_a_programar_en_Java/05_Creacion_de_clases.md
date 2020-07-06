@@ -6,6 +6,13 @@
    
 # 22 Clases, objetos y métodos 07:14
 
+<img src="images/22-01.png">
+<img src="images/22-02.png">
+<img src="images/22-03.png">
+<img src="images/22-04.png">
+<img src="images/22-05.png">
+<img src="images/22-06.png">
+
 Bueno llevamos desde el principio del curso hablando de lo que es una clase objetos métodos creo que es el momento de entrar en detalle estos conceptos y de aclarar las diferencias entre ellos pues lo primero que es una clase es una clase digamos que es el lugar donde se define el comportamiento de un determinado tipo de objeto la clase podríamos decir que es el molde mientras que el objeto es el elemento físico obtenido a partir de ese molde.
 
 En programación la clase de código donde se define como decimos y comportamiento del objeto a base de métodos de atributos es código y a partir de ese código se pueden crear lo que llamamos instancias que luego veremos de la misma instancia de esa clase que son los objetos de una clase pues puedo crear múltiples objetos sobre el objeto donde voy a ir haciendo las llamadas a los elementos que determinan ese comportamiento del tipo de objeto que se ha definido la clase es decir los métodos las funciones.
@@ -63,6 +70,11 @@ Como ves no hay variable que tenga que recoger el resultado porque es bait y a l
 Las clases objetos un poco más en detalle el método ya podemos seguir avanzando en la creación de clases y la utilización dentro de un programa porque como puedes imaginar un programa no solamente está formado por la clase con el método que se organiza en varias clases con varios métodos y es lo que vamos a ir viendo en las siguientes lecciones del curso.
 
 # 23 Creación de objetos 03:21
+
+<img src="images/23-01.png">
+<img src="images/23-02.png">
+<img src="images/23-03.png">
+<img src="images/23-04.png">
 
 Las clases definen el comportamiento de un determinado tipo de objetos y cómo creamos un objeto a partir de una clase.
 
@@ -418,7 +430,11 @@ Gracias a la existencia de este constructor, pudimos crear objetos de la clase C
 Calculadora c=new Calculadora();
 ```
  
-# 25 Ejemplo práctico IX 16:02  
+# 25 Ejemplo práctico IX 16:02 
+
+<img src="images/25-01.png">
+<img src="images/25-02.png">
+<img src="images/25-03.png">
 
 Después de haber visto la elección anterior cómo crear clases para encapsular la lógica de aplicación de un programa.
 
