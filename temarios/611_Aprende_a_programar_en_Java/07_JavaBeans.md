@@ -4,6 +4,12 @@
    
 # 30 JavaBeans 05:10
 
+<img src="images/30-01.png">
+<img src="images/30-02.png">
+<img src="images/30-03.png">
+<img src="images/30-04.png">
+<img src="images/30-05.png">
+
 En esta elección voy a enseñarte a utilizar un tipo de clase muy habitual en Java conocida como Java bien que es un jabalí.
 
 Java no es una clase que podamos encontrar en el paquete de clases de Java estándar.
@@ -48,7 +54,10 @@ Como veis se trata de una clase muy práctica y que se utiliza como he dicho ant
 
 Cuando vamos a trabajar con conjuntos de datos asociados a la entidad vas a ver en el siguiente ejercicio un caso muy concreto de utilización y que nos da la idea de lo interesante y de lo ampliamente utilizados que son este tipo de clases.
 
-# 31 Ejercicio práctio XII 13:20   
+# 31 Ejercicio práctio XII 13:20  
+
+<img src="images/31-01.png">
+<img src="images/32-02.png">
 
 En esta elección vamos a realizar un ejercicio en el que vamos a hacer uso de las clases de tipo Java bin y también de algunos de los elementos vistos en elecciones anteriores como por ejemplo la encapsulación de lógica de aplicación en clases independientes.
 
