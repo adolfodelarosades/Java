@@ -63,41 +63,49 @@ Con esta explicación de lo que son las clases, objetos, métodos un poco más e
 # 23 Creación de objetos 03:21
 
 <img src="images/23-01.png">
-<img src="images/23-02.png">
-<img src="images/23-03.png">
-<img src="images/23-04.png">
 
 Las clases definen el comportamiento de un determinado tipo de objetos y cómo creamos un objeto a partir de una clase.
 
-Bien lo primero es que tenemos que saber que a los objetos creados a partir de la clase se les conoce habitualmente también como instancia de la clase de una clase.
+<img src="images/23-02.png">
 
-Podemos crear múltiples instancias múltiples objetos y cómo creamos una instancia o objeto a partir de una clase.
+Lo primero es que tenemos que saber que a los objetos creados a partir de la clase se les conoce habitualmente también como **instancia de la clase**, de una clase podemos crear múltiples instancias, múltiples objetos.
 
-Ya lo habrás visto en el ejemplo que te presenté en la lección anterior donde creamos un objeto de la clase Escanes y es utilizándolo para dormir primeramente declaramos una variable de la clase o sea del tipo de objeto que vamos a crear con el operador new.
+Y cómo creamos una instancia o un objeto a partir de una clase. Primeramente declaramos una variable de la clase o sea del tipo de objeto que vamos a crear y con el operador `new` a continuación el nombre de la clase y entre paréntesis, eso ya depende de qué tipo de objeto sea, de qué clase trabajemos habrá que proporcionar valores dentro de los paréntesis o no.
 
-A continuación el nombre de la clase y entre paréntesis eso ya depende de qué tipo de objeto sea de qué clase estemos en la que estemos trabajando pues habrá que proporcionar valores dentro de los paréntesis o no.
+El caso es que la instrucción `ClaseA c = new ClaseA()` lo que hace es crear en memoria una instancia un objeto y lo referencia a través de la variable `c`, en este caso así es como la hemos llamado, *referencia* qué significa exactamente, que el objeto como tal está contenido dentro de la variable como ocurre con los tipos primitivos. Por ejemplo cuando declaras una variable de tipo int y le asigna un número ese número queda dentro de la variable. En el caso de los objetos la variable contiene referencias, dejémoslo así, porque no son tampoco exactamente direcciones de memoria, pero bueno es algo que luego me permite utilizando esa variable, acceder a los métodos del objeto, métodos que están definidos dentro de la clase como hemos visto.
 
-El caso es que esa instrucción lo que hace es crear en memoria una instancia un objeto y lo referencia a través de la variable C en este caso si es como lo hemos llamado referencia qué significa exactamente que el objeto como tal está contenido dentro de la variable como ocurre con los tipos primitivos.
+<img src="images/23-03.png">
 
-Por ejemplo cuando declaras una variable de tipo int y le asigna un número ese número queda dentro de la variable.
+Como se hace, utilizando el operador punto, es decir una vez que has creado la instancia y la tienes referenciada por la variable, utilizando un operador punto nombre del método y entre paréntesis los datos que se necesite dependiendo del método que sea podemos hacer la llamada a dichos métodos.
 
-En el caso de los objetos la variable que contiene son referencias dejémoslo así porque no son tampoco exactamente direcciones de memoria pero bueno es algo que luego me permite utilizando esa variable acceder a los métodos del objeto métodos que están definidos dentro de la clase como hemos visto cómo se hace.
+<img src="images/23-04.png">
 
-Utilizando el operador punto es decir una vez que has creado la instancia y la tienes referenciada por la variable utilizando un operador punto nombre del método y entre paréntesis los datos que se necesite dependiendo del método que sea podemos hacer la llamada a dichos métodos ejemplos.
-
-Pues bueno te presentamos aquí algunos ejemplos de los muchísimos que hay y los posibles tipos de objetos que vas a crear a lo largo de tu vida como programador en Java.
+Ejemplos, te presentamos aquí algunos ejemplos de los muchísimos que hay y los posibles tipos de objetos que vas a crear a lo largo de tu vida como programador en Java.
 
 Si acaso empezamos con este medio porque ya lo hemos visto ya lo hemos utilizado esto este tipo de objetos.
 
-La clase escarnios concretamente para poder realizar lectura de datos por teclado es una variable del tipo de objeto que vamos a crear scaner y con el New creás el objeto se quedaría en memoria y el objeto que la referencia al mismo se guardaría dentro de la variable.
+```java
+Scanner sc= new Scanner(System.in);
+System.out.println(sc.nextLine());
+```
 
-A partir de ahí ya puedes llamar a los métodos Flavin sin parar lectura en este caso en el caso de escanee concretamente pues hay que proporcionarle lo que llamamos el canal de entrada eso ya depende de cada tipo de objeto.
+La clase Scanner concretamente para poder realizar lectura de datos por teclado, declaras una variable del tipo de objeto que vamos a crear Scanner y con el New creás el objeto, se quedaría en memoria y el objeto lo es que es la referencia al mismo se guardaría dentro de la variable. A partir de ahí ya puedes llamar a los métodos `nextLine()`, `nextInt()` para  la lectura en este caso. En el caso de Scanner concretamente  hay que proporcionarle lo que llamamos el canal de entrada `System.in` eso ya depende de cada tipo de objeto.
 
-Aquí tienes otro caso a raíz Lish Railways es un objeto de tipo colección y bueno pues para crearlo el New nombre de la clase en este caso no hay que proporcionas nada entre paréntesis nos creería la referencia y a partir de ahí llamar a los métodos otro más Princes Street para la escritura por ejemplo en ficheros en este caso igual de clamo la variable con el niño creamos el objeto en este caso se le proporciona la dirección del fichero y se crearía el objeto y a partir de ahí escribir.
+```java
+ArrayList datos= new ArrayList();
+datos.add("primero");
+```
 
-Y esto es.
+Aquí tienes otro caso ArrayList, ArrayList es un objeto de tipo colección y bueno para crearlo `new ArrayList()`  nombre de la clase en este caso no hay que proporcionas nada entre paréntesis nos creería la referencia y a partir de ahí llamar a los métodos.
 
-Veamos la mecánica de trabajo en todas las aplicaciones Java ir creando objetos de clases o bien existentes o creadas por nosotros y llamar a los métodos que ofrecen la funcionalidad.
+```java
+PrintStream ps= new PrintStream("salida.txt");
+ps.println("fila de datos");
+```
+
+Otro más PrintStream para la escritura por ejemplo en ficheros, en este caso igual declaramos la variable con el New creamos el objeto, en este caso se le proporciona la dirección del fichero y se crearía el objeto y a partir de ahí a escribir.
+
+Y esto es la mecánica de trabajar en todas las aplicaciones Java, ir creando objetos de clases o bien existentes o creadas por nosotros y llamar a los métodos que ofrecen la funcionalidad.
 
 # 24 Creación de clases propias 05:17
 
