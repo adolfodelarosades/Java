@@ -707,6 +707,8 @@ public class Principal {
 
 # 34 Apéndice C. Novedades en versiones Java 9, 10 y 11 04:06   
 
+[Documento](/temarios/611_Aprende_a_programar_en_Java/pdfs/APC-novedades_en_el_lenguaje_ultimas_versiones.pdf)
+
 En esta elección quería hablarte de las novedades que han aparecido en las últimas versiones de Java concretamente Java 9 Java 10 y Java 11.
 
 Y es que dejaba nueve la política de Oracle han sido lanzar nuevas versiones del lenguaje y en general de la librería Java estándar cada seis meses.
