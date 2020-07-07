@@ -2,6 +2,10 @@
 
 Esta es una serie de varios cursos Java que se listan a continuación.
 
+# CFTIC
+
+* [000 Java Profesional SE]()
+
 # OPENWEBINARS
 
 * [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero.md)
