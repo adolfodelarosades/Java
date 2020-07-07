@@ -7,99 +7,130 @@
 # 26 La clase String 04:04
 
 <img src="images/26-01.png">
+
+En esta lección voy a hablarte de una de las clases más importantes de Java, la clase 
+`String` a través de la clase `String` podemos representar cualquier tipo de texto en Java.
+
 <img src="images/26-02.png">
+
+Un texto es una cadena de caracteres y como digo se representa a través de la clase `String` porque todos los objetos de la clase `String` son textos.
+
+Cómo creamos un objeto `String`.
+
+Lo podemos crear de dos maneras una sería utilizando la forma tradicional de crear objetos Java usando `new` .
+
+```java
+String cad = new String("texto prueba");
+```
+
+Esto haría que en la variable `cad` se almacenarse una referencia a ese objeto y a partir de ella pudiéramos llamar a los métodos de la clase `String`, que estudiaremos en la lección siguiente. Como la clase `String` se utiliza muchísimo es decir en manejar objetos en un programa Java y en general en cualquier lenguaje programación es una tarea muy habitual de forma abreviada puedes crear un objeto `String`.
+
+```java
+String cad = "texto prueba";
+```
+
+Declarando la variable igual y asignando directamente el literal de objeto `String`, es decir como si fuera su número, un tipo primitivo Java, aunque insisto `String` no es un tipo primitivo `String` es una clase y los objetos `String` son los textos, en definitiva son objetos de dicha clase.
+
 <img src="images/26-03.png">
+
+A partir de ahí qué operaciones podemos hacer con un objeto `String` pues aparte de llamar a sus métodos podemos por ejemplo unir textos, lo que se llama la *concatenación de textos*. Para ello podemos utilizar el signo igual sino más `+` que es el que se emplea también en sumas aritméticas, si tenemos una variable donde tenemos un texto la variable 1 y otra variable con otro texto, la suma de los dos, de ambas variables, la operación de suma equivaldría a la unión de ambos, es decir en S3 tendríamos el texto `hola adios`.
+
 <img src="images/26-04.png">
 
-En esta elección voy a hablarte de una de las clases más importantes dejaba la clase Street a través de la clase string.
+Una de las características más importantes de los objetos `String` es que **se trata de objetos inmutables** y eso significa que no se puede modificar un `String`, una vez que se ha creado no puede ser modificado.
 
-Podemos representar cualquier tipo de texto en Java.
+Si yo por ejemplo tengo 
 
-Un texto es una cadena de caracteres.
+```java
+String cad = "texto prueba";
+cad= cad + " nuevo"; //concatenación
+```
+Inicialmente uno tiende a pensar que lo que ha ocurrido es que el objeto texto `cad` ha sido modificado y se le ha unido otra parte adicional, pero no es eso lo que ha ocurrido como resultado de esa concatenación es que se ha generado un nuevo texto, la unión de estos dos textoa es al que está apuntando la variable `cad`.
 
-Y como digo se representa a través de la clase string porque todos los objetos de la clase string son textos.
+Esto lo vemos gráficamente de forma muy sencilla tienes el texto en memoria y la variable apuntándolo, tras la concatenación, tras la unión uno tendería a pensar como digo que el texto ha sido modificado pero no, se ha generado como he dicho antes un nuevo texto y la variable está apuntando a ese nuevo texto.
 
-Cómo creamos un objeto Extrem.
+Qué pasa con el objeto anterior `texto prueba` que queda digamos en memoria sin ser referenciado hasta que el recolector de basura que es una de las partes importantes de la máquina virtual Java lo liberará ese espacio de memoria cuando se ponga en funcionamiento dicho recolector.
 
-Pues lo podemos crear de dos maneras una sería utilizando la forma tradicional de crear objetos Java declara la variable en este caso del tipo string y con el operador niu.
-
-A continuación el nombre de la clase string y entre paréntesis entre comillas el texto que vamos a crear el objeto.
-
-Esto haría que en la variable Kahhat se almacenarse una referencia a ese objeto y a partir de ella pudiéramos llamar a los métodos de la clase string que estudiaremos en la lección siguiente como la clase string se utiliza muchísimo decir en manejar objetos en un programa Java y en general en cualquier lenguaje programación es una tarea muy habitual pues de forma abreviada puedes crear un objeto string declarando la variable y conexión igual asignando directamente el literal de objeto string es decir como si fuera su número un tipo primitivo Java aunque insisto string no es un tipo primitivo string es una clase y los objetos string son los textos.
-
-En definitiva son objetos de dicha clase.
-
-A partir de ahí qué operaciones podemos hacer con un objeto Extrem pues aparte de llamar a sus métodos que como te dije antes lo vamos a estudiar en la lección siguiente pues podemos por ejemplo unir textos lo que se llama la concatenación de textos.
-
-Para ello podemos utilizar el signo igual sino más que es el que se emplea también en sumas aritméticas si tenemos una variable donde tenemos un texto la variable 1 y otra variable con otro texto.
-
-La suma de los dos de ambas variables la operación de suma equivaldría a la unión de ambos es decir en S3 tendríamos el texto o Larios una de las características más importantes de los objetos Extrem es que se trata de objetos inmutables y eso significa que no se pueden modificar un string.
-
-Una vez que se ha creado no puede ser modificado.
-
-Si yo por ejemplo tengo un string un texto en una variable con esta instrucción que des aquí y Laino un segundo texto concatena nuevo texto y lo asigna a la variable a la misma variable donde tenía el texto original pues inicialmente uno tiende a pensar que lo que ha ocurrido es que este objeto texto prueba ha sido modificado y se le ha unido otra parte adicional pero no es eso lo que ha ocurrido como resultado de esa concatenación.
-
-Se ha generado un nuevo texto de este texto no se ha modificado o se ha generado uno nuevo que es la unión de estos dos y ese nuevo texto es el que está apuntando la variable.
-
-Esto lo vemos aquí gráficamente de forma muy sencilla tienes aquí el texto en memoria del objeto texto prueba memoria y la variable apuntándolo tras la concatenación tras la unión uno tendería a pensar como digo que el texto ha sido modificado pero no se ha generado como he dicho antes un nuevo texto y la variable está apuntando.
-
-Qué pasa con el objeto anterior el texto prueba que queda digamos en memoria sin ser referenciado hasta que el recolector de basura que es una de las partes importantes de la máquina virtual Java pues liberará ese espacio de memoria cuando se ponga en funcionamiento dicho dicho recolector.
-
-En esta elección como digo simplemente te he explicado cuáles son los fundamentos de la clase string cómo se crean objetos de string.
-
-La característica inmutabilidad pero el uso de los mismos es a través de las operaciones.
-
-Aparte de la concatenación como hemos visto antes pero sobre todo de la llamada a sus múltiples métodos que tiene dicha clase eso lo vamos a ver en la elección siguiente.
+En esta lección simplemente te he explicado cuáles son los fundamentos de la clase `String`, cómo se crean objetos de `String`, la característica de inmutabilidad, pero el uso de los mismos es a través de las operaciones, aparte de la concatenación como hemos visto antes pero sobre todo de la llamada a sus múltiples métodos que tiene dicha clase, eso lo vamos a ver en la elección siguiente.
 
 # 27 Principales métodos de la clase String 09:22
 
 <img src="images/27-01.png">
+
+En la lección anterior has estado estudiando la clase `String` cómo has podido comprobar se trata de una de las clases más importantes de Java. Puesto que todos los textos son objetos de dicha clase.
+
+A continuación lo que te voy a enseñar son los principales métodos de `String` y cómo aplicarlos en la manipulación de cadenas de caracteres dentro de un programa.
+
+Pero antes de ello te voy a enseñar la siguiente página 
+
+
+https://docs.oracle.com/en/java/javase/14/docs/api
+
+<img src="images/27-06.png">
+
+https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/String.html
+
+Se trata de una dirección de Oracle donde se encuentra la ayuda oficial de las clases de Java estándar lo que llamamos el JavaDoc, en esta dirección encontrarás que está dividida en cuatro pestañas en All Module puedes ver la lista de todos los modulos de clases que forman todo el Java estándar. Como ves la mayoría de los modulos empiezan por Java luego el sub-modulo donde está organizado los distintos tipos de clases que tenemos. 
+
+Tenemos el modulo base `java.base` donde estan definidas las APIs fundamentales de la plataforma Java SE, si entramos en ese modulo vemos.
+
+<img src="images/27-07.png">
+
+El cual contiene diferentes paquetes que contienen las clases básicas de Java estándar, en el caso concreto de la clase `String` por ejemplo así como otras muchas de uso habitual en Java se encuentra en el paquete `java.lang` ahí es donde está la clase `String` seleccionemo el paquete `java.lang` y en este marco inferior puedes ver la lista de clases que componen dicho paquete.
+
+<img src="images/27-08.png">
+
+Están ordenadas alfabéticamente por lo tanto estrechen tendríamos aquí una vez que selecciona la clase que va buscando en esta zona central aparece la información de la misma información de la misma.
+
+<img src="images/27-09.png">
+
+Con una descripción de lo que representa cómo está definida y lo más importante que lo encontramos un poquito más abajo, la lista de constructores para poder crear objetos de dicha clase y especialmente en nuestro caso lo que nos interesa con `String` la lista de métodos.
+
+<img src="images/27-10.png">
+
+Métodos que expone dicha clase y que puedes aplicar sobre cualquier objeto de tipo `String`.
+
+La ayuda de los métodos como ves se indica nombre del método, el tipo de datos que recibe, la lista de parámetros y lo que devuelve. Hay una pequeña descripción sobre el funcionamiento del método pero si quieres entrar en más detalles harías click en el método que te interesa y ahí te da una información un poquito más detallada.
+
+No se trata de una página que se utilice como estilo típico tutorial de Java porque no se trata de aprender Java con esto es más bien una referencia para los programadores que pueden acudir en cualquier momento a informarse sobre alguna clase que les interesa y obtener información de los métodos, tipo de datos que devuelven, parámetros que reciben etc. Muy importante que la tengan siempre referenciada en tus favoritos de tu navegador para consultarla en cualquier momento.
+
+Vamos a ver algunos de los métodos más importantes.
+
 <img src="images/27-02.png">
+
+Empezamos por el método `int length()` es bastante sencillo no recibe nada como parámetro y nos devuelve un entero que es el total de caracteres de la cadena.
+
+```java
+String cad="texto prueba";
+System.out.println(cad.length()); //Muestra 12
+```
+
+Va a devolver la longitud, número de caracteres que tiene en este caso incluidos los espacios por supuesto si los contamos que son 12.
+
+Método `char charAt(int pos)` en este caso este método lo vamos a utilizar para saber que carácter ocupa una determinada posición de la cadena, si le pasa como parámetro una posición de la cadena te devuelve el carácter en esa posición.
+
+```java
+String cad="texto prueba";
+System.out.println(cad.charAt(2)); //Muestra x
+```
+
+La primer posición empieza en 0 por lo tanto la posición del último siempre será la longitud total menos 1 puesto que siempre el primero esta en la posición 0.
+
+Método `boolean equals(Object ob)`, en el caso de querer comparar textos no podemos utilizar el operador de comparación de igualdad `==`. Por qué, porque los textos son objetos, **el doble igual `==` se utiliza para comparar tipos primitivos Java**. Si lo utilizas con variables de tipo `String` estarías comparando realmente sus referencias a las direcciones de memoria y aunque fueran textos idénticos si están en zonas de memoria distintos sería falso la comparación entre las dos variables. Por lo tanto hay que utilizar este método `equals(Object ob)` al cual se le pasa como parámetro el texto con el que lo quieres comparar y lo compara contra texto que hay en la variable a la que le estás aplicando dicho método.
+
+```java
+String cad="texto prueba";
+if(cad.equals("texto"){
+   System.out.println("iguales"); //No lo muestra
+}
+```
+
+En este caso estaríamos comparando `texto prueba` con `texto` nos daría como resultado falso, solamente nos devolvera verdadero si se trata de una coincidencia exacta es decir son iguales todos los caracteres, haciendo distinción entre mayúsculas y minúsculas.
+
 <img src="images/27-03.png">
 <img src="images/27-04.png">
 <img src="images/27-05.png">
 
-En la lección anterior has estado estudiando en la clase stream cómo has podido comprobar se trata de una de las clases más importantes de Java.
-
-Puesto que todos los textos son objetos de dicha clase.
-
-A continuación lo que te voy a enseñar son los principales métodos de string y cómo aplicarlos en la manipulación de cadenas de caracteres estos dentro de un programa.
-
-Pero antes de ello te voy a enseñar la siguiente página vamos a ver se trata de una dirección de Oracle donde se encuentra la ayuda oficial de las clases de Java estándar lo que llamamos el sábado en esta dirección esta página encontrarás tres partes está dividida en tres en tres secciones tres marcos en esta zona izquierda superior puedes ver la lista de paquetes de clases que forman todo el Java estándar.
-
-Como ves la mayoría de los paquetes empiezan por Java luego Bunko el paquete cuando su paquete donde está organizado los distintos tipos de clases que tenemos en el caso concreto de la clase string por ejemplo así como otras muchas de uso habitual en Java estamos en el paquete hablan ahí es donde está la clase string seleccionas el paquete y en este marco inferior puedes ver la lista de clases que componen dicho paquete.
-
-Están ordenadas alfabéticamente por lo tanto estrechen tendríamos aquí una vez que selecciona la clase que va buscando en esta zona central aparece la información de la misma información de la misma como una descripción de lo que representa cómo está definida y lo más importante que lo encontramos un poquito más abajo.
-
-La lista de constructores para poder crear objetos de dicha clase y especialmente en nuestro caso lo que nos interesa con string la lista de métodos métodos es poner dicha clase que puedes aplicar sobre cualquier objeto de tipo test y posting.
-
-El ayuda de los métodos como veis se indica nombre del método el tipo de datos que recibe la lista de parámetros podríamos decir y lo que devuelve.
-
-Hay una pequeña descripción sobre el funcionamiento del método pero si quieres entrar en más detalles harías click en el método que te interesa y ahí te da una información un poquito más detallada.
-
-No se trata de una página que se utilice como estilo típico tutorial de Java porque no se trata de aprender Java con esto es más bien una referencia para los programadores que pueden acudir en cualquier momento a informarse sobre alguna clase que les interesa y obtener información.
-
-Los métodos tipo de datos que devuelven parámetros que reciben etc. muy importante que la tengan siempre referenciada en tus favoritos de tu navegador para consultarla en cualquier momento y ahora si ya vamos a ver todos esos métodos que podrías encontrar en dicha página pues algunos de los más importantes y empezamos por el método lengas método Lens.
-
-Además bastante sencillo como estos no recibe nada como parámetro y nos devuelve un entero que es el total de caracteres de la cadena.
-
-Si yo tengo este texto almacenado en esta variable Catt al aplicar método sobre el mismo va a devolver la longitud número de caracteres que tiene en este caso incluidos los espacios por supuesto si los contamos que son 12.
-
-Otro método Charata en este caso este método lo vamos a utilizar cuando queramos conocer el carácter que ocupe una determinada posición si le pasa como parámetro la posición del carácter y te devuelve dicho carácter.
-
-Los caracteres están posicionados siempre indicando que la primera la posición del primero es el 0 vale por lo tanto la posición del último siempre será la longitud total menos 1 puesto que siempre el primero es de posición 0.
-
-En este caso si le decimos aplicamos el método Charan sobre esta variable indicando que queremos el carácter de la posición 2 nos devolverá cero uno la X.
-
-Eso será lo que nos devolvería charapa en este caso el cual es bueno para comparar textos no podemos utilizar el operador de comparación de igualdad doble igual.
-
-Por qué.
-
-Pues porque los textos son objetos entonces el doble igual se utiliza para comparar tipos primitivos Java.
-
-Si lo utilizas con variables de tipo extrínseca estarías comparando son realmente su referencia a direcciones de memoria y aunque fueran textos idénticos si están en zonas de memoria distintos sonaría falso.
-
-La comparación entre las dos variables por lo tanto hay que utilizar este método método al cual se le pasa como parámetro el texto con el que lo quieres comparar y lo compara contra texto que hay en la variable a la que le estás aplicando dicho método en este caso estaríamos comparando texto prueba simplemente con texto resultado en este caso sería falso puesto que solamente nos daba devolver verdadero si se trata de una coincidencia exacta es decir son iguales todos los caracteres haciendo distinción entre mayúsculas y minúsculas.
 
 Que no nos interesa la distinción entre mayúsculas y minúsculas pues utilizaríamos este otro cual Signore X hace lo mismo pero en este caso no tiene en cuenta las mayúsculas y minúsculas si una palabra está escrita en mayúsculas y otra minúsculas si son los mismos caracteres nos va a devolver verdadero INDEC sobre todo este método se trata de o tiene como misión mejor dicho indicarnos la posición de una cadena dentro de otra.
 
