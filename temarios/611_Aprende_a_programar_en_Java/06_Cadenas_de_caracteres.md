@@ -98,7 +98,7 @@ Vamos a ver algunos de los métodos más importantes.
 
 <img src="images/27-02.png">
 
-Empezamos por el método `int length()` es bastante sencillo no recibe nada como parámetro y nos devuelve un entero que es el total de caracteres de la cadena.
+**Método `int length()`**, es bastante sencillo no recibe nada como parámetro y nos devuelve un entero que es el total de caracteres de la cadena.
 
 ```java
 String cad="texto prueba";
@@ -107,7 +107,7 @@ System.out.println(cad.length()); //Muestra 12
 
 Va a devolver la longitud, número de caracteres que tiene en este caso incluidos los espacios por supuesto si los contamos que son 12.
 
-Método `char charAt(int pos)` en este caso este método lo vamos a utilizar para saber que carácter ocupa una determinada posición de la cadena, si le pasa como parámetro una posición de la cadena te devuelve el carácter en esa posición.
+**Método `char charAt(int pos)`** en este caso este método lo vamos a utilizar para saber que carácter ocupa una determinada posición de la cadena, si le pasa como parámetro una posición de la cadena te devuelve el carácter en esa posición.
 
 ```java
 String cad="texto prueba";
@@ -116,7 +116,7 @@ System.out.println(cad.charAt(2)); //Muestra x
 
 La primer posición empieza en 0 por lo tanto la posición del último siempre será la longitud total menos 1 puesto que siempre el primero esta en la posición 0.
 
-Método `boolean equals(Object ob)`, en el caso de querer comparar textos no podemos utilizar el operador de comparación de igualdad `==`. Por qué, porque los textos son objetos, **el doble igual `==` se utiliza para comparar tipos primitivos Java**. Si lo utilizas con variables de tipo `String` estarías comparando realmente sus referencias a las direcciones de memoria y aunque fueran textos idénticos si están en zonas de memoria distintos sería falso la comparación entre las dos variables. Por lo tanto hay que utilizar este método `equals(Object ob)` al cual se le pasa como parámetro el texto con el que lo quieres comparar y lo compara contra texto que hay en la variable a la que le estás aplicando dicho método.
+**Método `boolean equals(Object ob)`**, en el caso de querer comparar textos no podemos utilizar el operador de comparación de igualdad `==`. Por qué, porque los textos son objetos, **el doble igual `==` se utiliza para comparar tipos primitivos Java**. Si lo utilizas con variables de tipo `String` estarías comparando realmente sus referencias a las direcciones de memoria y aunque fueran textos idénticos si están en zonas de memoria distintos sería falso la comparación entre las dos variables. Por lo tanto hay que utilizar este método `equals(Object ob)` al cual se le pasa como parámetro el texto con el que lo quieres comparar y lo compara contra texto que hay en la variable a la que le estás aplicando dicho método.
 
 ```java
 String cad="texto prueba";
@@ -128,51 +128,78 @@ if(cad.equals("texto"){
 En este caso estaríamos comparando `texto prueba` con `texto` nos daría como resultado falso, solamente nos devolvera verdadero si se trata de una coincidencia exacta es decir son iguales todos los caracteres, haciendo distinción entre mayúsculas y minúsculas.
 
 <img src="images/27-03.png">
+
+**Método `boolean equalsIgnoreCase(Object ob)`**, que no nos interesa la distinción entre mayúsculas y minúsculas utilizaríamos este método, hace lo mismo pero en este caso no tiene en cuenta las mayúsculas y minúsculas si una palabra está escrita en mayúsculas y otra en minúsculas, si son los mismos caracteres nos va a devolver verdadero.
+
+**Método `int indexOf(String aux)`**, este método tiene como misión indicarnos la posición de una cadena dentro de otra, es decir yo tengo:
+
+```java
+String cad="texto prueba";
+System.out.println(cad.indexOf("to")); //Muestra 3
+System.out.println(cad.indexOf("un")); //Muestra -1
+}
+```
+
+Si encuentra la subcadena devuelve el índice donde comienza esa subcadena dentro de la cadena original.
+
+Qué ocurre si le paso un texto que no está contenido en la cadena principal, me devuelve -1.
+
+**Método `String toLowerCase()`**, este método lo que hace es **devolvernos una copia de la cadena** y digo devolvernos porque los textos como ya vimos en la lección anterior son inmutables, no se pueden modificar, entonces todos estos métodos calculan un texto que convierten en mayúsculas, son métodos que actúan o generan una copia de la cadena, el original permanece intacto.
+
+```java
+String cad="HOLA";
+System.out.println(cad.toLowerCase()); //Muestra hola
+}
+```
+
+Lo que hace es devolvernos una nueva cadena resultante de transformar todas las letras a minúsculas.
+
+**Método `String toUpperCase()`**, hace lo contrario le damos el texto y nos devuelve una copia en mayúsculas.
+
+```java
+String cad="hola";
+System.out.println(cad.toUpperCase()); //Muestra HOLA
+}
+```
+
 <img src="images/27-04.png">
+
+**Método `String replace(char old, char new)`**, remplaza el primer caracter indicado como parámetro por el segundo pero no sobre la cadena original que repito es inmutable, devuelve una copia con el resultado de ese reemplazo.
+
+```java
+String cad="texto prueba";
+System.out.println(cad.replace('e','@')); //Muestra t@xto pru@ba
+}
+```
+
+**Método `String[] split(String exp)`**, muy práctico también cuando tenemos una cadena de caracteres que está formada por una serie de ítems, de nombres, de países, etc., separados por un carácter una coma, un espacio con lo que sea, para hacer búsquedas en esa lista de nombres podríamos transformarlo en una array y así sería más comoda la busqueda, eso es precisamente lo que hace el método `split`.
+
+```java
+String cad="maria pedro miguel";
+String[] nombres = cad.split(" "); //saparador, espacio en blanco
+//muestra los tres nombres
+for(String s: nombres){
+   System.out.println(s);
+}
+```
+
+Al método `split` le pasamos como parámetro el carácter de separación. En este caso le estamos pasando a la cadena `cad` formada por tres nombres el espacio, que sería el caracter de separación y lo que hace es devolvernos un array con el contenido de esa cadena , donde cada posición del array sería uno de los elementos de la cadena.
+
+En este caso en la posición cero tendríamos el nombre `maria` en la posición 1 `pedro` y la posición 2 `miguel`.
+
+Como ves el array `nombres` no hay que crearlo sino directamente declaras la variable y el `split` devuelve el array ya construido, luego lo recorremos para mostrar su contenido.
+
 <img src="images/27-05.png">
 
+**Método `String substring(int pos1, int pos2)`**, este método lo que hace es devolvernos un trozo de la cadena que está formado por los caracteres que van entre la posición 1 y la posición 2 **no incluida** muy importante, la posición 1 si se incluye pero la posición 2 no se incluye.
 
-Que no nos interesa la distinción entre mayúsculas y minúsculas pues utilizaríamos este otro cual Signore X hace lo mismo pero en este caso no tiene en cuenta las mayúsculas y minúsculas si una palabra está escrita en mayúsculas y otra minúsculas si son los mismos caracteres nos va a devolver verdadero INDEC sobre todo este método se trata de o tiene como misión mejor dicho indicarnos la posición de una cadena dentro de otra.
+```java
+String cad="texto prueba";
+System.out.println(cad.substring(2,8)); //Muestra: xto pr
+}
+```
 
-Es decir yo tengo la cadena texto prueba y quiero conocer la posición de una parte de esa cadena.
-
-Por ejemplo la cadena formato vale entonces al pasar ese texto a inversor y aplicarlo sobre k me va a dar la posición de este texto concretamente de la primera letra de este subtexto digámoslo así en este caso sería 3.
-
-Qué ocurre si le paso un texto que no está contenido.
-
-La cadena principal me devuelve una método WildCats.
-
-Este método lo que hace es devolvernos una copia de la cadena y digo devolvernos porque los textos como ya vimos en la elección anterior son inmutables no se pueden modificar entonces todos estos métodos calculan un trozo que te convierta en mayúsculas pues son métodos que actúan o generan digamos una copia de la cadena el original permanece intacto.
-
-En este caso tú lo huarpes lo que hace es devolvernos una nueva cadena resultante de transformar todas las letras a minúsculas.
-
-Si sólo aplicamos este texto nos devolvería el mismo pero en minúsculas tú Perquis hace lo contrario vale le damos el texto y nos lo convierte o mejor dicho nos devuelve una copia en mayúsculas.
-
-Método replays.
-
-Pues igual no el nombre puede dar a confusión porque uno puede pensar que es que coge el texto original y reemplaza un carácter por otro.
-
-No vamos a ver el método Replay lo que haces.
-
-Si reemplazar el caracter indicado como primer parámetro por el segundo pero no sobre la cara original que repito es inmutable devuelve una copia con el resultado de ese reemplazo.
-
-En este caso si llamamos a replays y le decimos que sustituye a la e por una arroba lo que nos va a devolver el método es un nuevo texto que sería este pero el que está en la variable seguiría si no se cambia métodos clik muy práctico también cuando tenemos una cadena de caracteres que está formada por una serie de ítems de nombres de países etcétera separados por un carácter espacio como lo que sea pues para hacer búsquedas en esa lista de nombres podríamos decir puede ser muy cómodo transformarlo en una raíz la cadena en la red.
-
-Es lo que hace el método hoplita le pasas como parámetro el carácter de separación.
-
-En este caso la estamos pasando a esta cadena formada por tres nombres el espacio que sería caracteres separación y lo que hace es devolvernos un array con ese contenido de esa cadena donde cada posición del array sería uno de los elementos de la cadena.
-
-En este caso en la posición cero tendríamos este nombre en la posición 1 y la posición 2.
-
-Como veis este array no hay que crearlo con el sino directamente ya claro la variable y el explícate devuelve la rejilla construida en este caso y luego lo recorremos para mostrarnos su contenido no saldría con este pequeño programita.
-
-La lista de los nombres es decir María Pedro íñigo y por último el método subestime.
-
-Este método lo que hace es devolvernos un trozo de la cadena en el que está formado por los caracteres que van entre la posición 1 y la posición 2 no incluida muy importante la posición 1 si se incluye pero las dos veamos este ejemplo.
-
-Texto de prueba nuevamente le aplicamos el método string con los valores 2 y 8 pues nos va a devolver los caracteres que van desde la posición 2 que sería la X hasta la anterior a la 8 8 es la o nos va a devolver hasta la S.
-
-Es decir esto sería lo que nos devolverá bueno has visto alguno de los métodos más interesantes de Street en las siguientes elecciones vamos a hacer algunos ejercicios Aplicando dichos métodos.
+Has visto alguno de los métodos más interesantes de `String` en las siguientes lecciones vamos a hacer algunos ejercicios aplicando dichos métodos.
 
 # 28 Ejercicio práctico X 08:05
 
