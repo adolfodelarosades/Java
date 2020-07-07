@@ -5,73 +5,90 @@
 # 30 JavaBeans 05:10
 
 <img src="images/30-01.png">
+
+En esta lección voy a enseñarte a utilizar un tipo de clase muy habitual en Java conocida como *Java Bean*.
+
 <img src="images/30-02.png">
+
+¿Qué es un Java Bean? Un Java Bean no es una clase que podamos encontrar en el paquete de clases de Java estándar. Se trata de una clase personalizada, creada por nosotros como programadores, cuyo objetivo es encapsular una serie de datos asociados a una determinada entidad o un determinado elemento como una persona, empleado, libro, de modo que en vez de tener los datos de esa persona separados en variables, el nombre por un lado, el email por otro y el teléfono por otro, los tengamos todos agrupados dentro de un mismo objeto. Eso facilita su manipulación y hacer operaciones de crear datos de personas, búsqueda de datos, eliminaciones, etc. 
+
 <img src="images/30-03.png">
+
+Como es un Java Bean, un Java Bean es una clase normal de código creada por el programador cuyo nombre suele coincidir con el nombre de la entidad que vamos a representar, en este caso `Persona` y que está formada por una serie de atributos, variables donde vamos a almacenar cada uno de los elementos que identifican a esa entidad.
+
+En este caso tendremos un atributo `String` para el nombre, otro `String` para el email y otro `int` para el teléfono.
+
+Además de eso tendremos los constructores entre los cuales lógicamente habrá uno que a la hora de crear un objeto `Persona` ya le podamos indicar los datos que identifican a esa `Persona` y el constructor se encargue de guardar los atributos.
+
+Pero para acceder una vez que se ha creado el objeto a la información almacenada dentro de su objeto persona tenemos que proporcionar los llamados métodos getters y setters, por qué se les llama así. Bueno porque son los métodos que utilizan para escritura de datos dentro del objeto y recuperación de los datos y se llaman getters y setters porque la nomenclatura para poder nombrarlos es la siguiente.
+
+```java
+//setter y getter
+public void setNombre(String nombre){
+   this.nombre = nombre;
+}
+public String getNombre(){
+   return nombre;
+}
+```
+
+Los métodos `set` recibirán como parámetro el dato y habitualmente lo que harán será asignarlo a su atributo correspondiente mientras que los `get` recuperan el valor del atributo. Se nombran con `set` o `get` y a continuación el nombre del atributo. En el caso de los `set` devuelven `void` y en el caso de los `get` devuelven el tipo del atributo.
+
+El caso de los `set` no solamente se puede hacer la asignación directamente y ya está, sino que se puede incluir algún tipo de lógica que compruebe el dato a asignar antes de proceder a ello. Esto es una ventaja respecto a por ejemplo exponer directamente como Público los atributos al hacerlo a través de setter podemos meter ese control y evitar que se puedan introducir datos incorrectos dentro de un objeto de este tipo.
+
 <img src="images/30-04.png">
+
+
+Como te decía la nomenclatura de los métodos setter y getter es la que se  muestra en la diapositiva, `get` el nombre del atributo con la primera en mayúscula, `set` el nombre que le hemos dado el atributo con la primera también en mayúscula, nosotros los podemos nombrar como queramos a estos métodos, pero es muy conveniente que sigamos esta nomenclatura clásica tipo Java Bean, porque en un futuro si estos objetos y estos Java Ban los van a manejar determinados Frameworks conjuntos de utilidades que existen en Java, esos Frameworks se encargarán de hacer una serie de cosas con los objetos por nosotros lo van a facilitar la tarea de manipulación de Java Bean pero para ello se debe cumplir esta nomenclatura.
+
 <img src="images/30-05.png">
 
-En esta elección voy a enseñarte a utilizar un tipo de clase muy habitual en Java conocida como Java bien que es un jabalí.
+Cómo se utiliza un Java Bean, el contexto de utilización es aquel en el cual queremos tener todos los datos de una determinada entidad agrupados dentro de un objeto para luego almacenarlos en un array o hacer algún tipo de manipulación con ellos.
 
-Java no es una clase que podamos encontrar en el paquete de clases de Java estándar.
+Si nosotros queremos crear un objeto `Persona` con el nombre y el email de una persona pues lo haríamos de la siguiente manera:
 
-Se trata de una clase personalizada creada por nosotros como programadores cuyo objetivo es encapsular una serie de datos asociados a una determinada entidad o un determinado elemento como una persona empleado libro de modo que en vez de tener los datos de esa persona separados en variables por un lado el email por otro y el teléfono por otro los tengamos todos agrupados dentro de un mismo objeto.
+```java
+Persona p =new Persona("Jose", "jose@gmail.com", 33);
+System.out.println("Te llamas " + p.getNombre());
+```
 
-Eso facilita su manipulación y hacer operaciones de crear datos de personas.
+Declararían la variable de tipo `Persona` igual que se declaran variables de tipo `String` de tipo `int`, declaremos en este caso del tipo la clase que hemos definido `Persona` y con el `New` crearíamos el objeto y ya llamaríamos al constructor pasándole los datos correspondientes.
 
-Búsqueda de datos eliminaciones etcétera como es un jabalí en un jardín es una clase normal de código creada por el programador cuyo nombre suele coincidir con el nombre de la entidad que vamos a representar.
+Una vez creado el objeto para acceder a la información almacenada en él, si queremos leer hacemos la llamada al método `get`, en este caso nos devolvería el nombre y lo mostraría junto con el texto que le estamos concatenando.
 
-En este caso persona y que está formada por una serie de atributos variables donde vamos a almacenar cada uno de los elementos que identifican a esa entidad.
+Por supuesto podemos tener arrays de objetos Java Beans
 
-En este caso tendremos un atributo string para el nombre.
+```java
+Persona [] pers =new Persona[5];
+pers[0]=p;
+```
 
-Otros tienen por el e-mail y otro entero para el teléfono.
+En este caso tenemos una array de cinco elementos de tipo `Persona` declaró la variable de array de `Persona` y con el `new` crearíamos indicando el nombre de la clase `Persona` entre corchetes el tamaño, a partir de ahí ya en las distintas posiciones se pueden ir almacenando objetos `Persona`.
 
-Además de eso tendremos los constructores entre los cuales lógicamente habrá uno que a la hora de crear un objeto persona pues ya le podamos indicar los datos que identifican a esa persona y el constructor se encargue de guardar como ves aquí los atributos pero para acceder una vez que se ha creado el objeto a la información almacenada dentro de su objeto persona tenemos que proporcionar los llamados métodos Veteris etc. Por qué se les llama así.
+Como ves se trata de una clase muy práctica y que se utiliza como he dicho antes muchísimo en las aplicaciones Java cuando vamos a trabajar con conjuntos de datos asociados a la entidad. Vas a ver en el siguiente ejercicio un caso muy concreto de utilización y que nos da la idea de lo interesante y de lo ampliamente utilizados que son este tipo de clases.
 
-Bueno pues porque son sólo el método que utilizan para escritura de datos dentro del objeto y recuperación de los datos y se llaman Trickster porque la nomenclatura para poder nombrarlos es la siguiente.
-
-En el caso de los métodos de escritura y en nombre del dato almacenar recibirá como parámetro el dato y habitualmente lo que hará será asignarlo a su atributo correspondiente mientras que los GEC se les llama así porque lo que hacen es recuperar el dato y su forma de nombrarlos sería.
-
-Y a continuación el nombre del dato que van a devolver el tipo de evolución sería el tipo del dato devuelto que normalmente no vamos a encontrar aquí en el caso del Hogue con una instrucción de tipo.
-
-El caso de los Eter pues no solamente se puede hacer la asignación directamente y ya está sino que se puede incluir algún tipo de lógica que compruebe el dato asignar antes de proceder a ello.
-
-Esto es una ventaja respecto a por ejemplo exponer directamente como Público los atributos al hacerlo a través de setter.
-
-Podemos meter ese control y evitar que se puedan introducir datos incorrectos dentro de un objeto de este tipo.
-
-Como te decía la nomenclatura de los métodos getter es la siguiente sheet el nombre del atributo con la primera en mayúscula el nombre que le hemos dado el atributo con la primera también en mayúscula nosotros lo podemos nombrar como queramos estos métodos pero es muy conveniente que sigamos esta nomenclatura clásica tipo Java Bin porque en un futuro si estos objetos y estos Java Bin los van a manejar determinados Freijo conjuntos de utilidades que existen en Java Facebook se encargarán de hacer una serie de cosas con los objetos por nosotros lo van a facilitar la tarea de manipulación de Java Bin.
-
-Pero para ello se debe cumplir esta nomenclatura cómo se utiliza un Java gálibo que el contexto es aquel en el cual queremos tener todos los datos de una determinada entidad agrupados dentro de un objeto para luego almacenarlo en la ley o hacer algún tipo de manipulación con ellos.
-
-Si nosotros queremos crear un objeto personal con el nombre y email de una persona pues lo haríamos de la siguiente manera declararían la variable de tipo Persona que se declaran variables de tipo string de tipo entero declaremos en este caso del tipo la clase que hemos definido persona y con el Luyk con el lío pues quedaríamos el objeto y ya llamaríamos al constructor pasándole los datos correspondientes.
-
-Una vez creado el objeto para acceder a la información almacenada en él o si queremos leer bien la llamada los métodos en este caso nos devolvería el nombre y lo mostraría junto con el texto que le estamos concatenando.
-
-Por supuesto podemos tener arrays de objetos Java en este caso tenemos una raíz de cinco elementos de tipo persona declaró la variable de A raíz de persona y con el New crearíamos indicando el nombre de la clase entre corchetes el tamaño a partir de ahí ya en las distintas posiciones se pueden ir almacenando objetos personas.
-
-Como veis se trata de una clase muy práctica y que se utiliza como he dicho antes muchísimo las aplicaciones Java.
-
-Cuando vamos a trabajar con conjuntos de datos asociados a la entidad vas a ver en el siguiente ejercicio un caso muy concreto de utilización y que nos da la idea de lo interesante y de lo ampliamente utilizados que son este tipo de clases.
-
-# 31 Ejercicio práctio XII 13:20  
+# 31 :computer: Ejercicio práctio XII `601-13-Ejercicio_Practico_12` 13:20  
 
 <img src="images/31-01.png">
+
+En esta lección vamos a realizar un ejercicio en el que vamos a hacer uso de las clases de tipo Java Bean y también de algunos de los elementos vistos en lecciones anteriores como por ejemplo la encapsulación de lógica de aplicación en clases independientes.
+
 <img src="images/31-02.png">
 
-En esta elección vamos a realizar un ejercicio en el que vamos a hacer uso de las clases de tipo Java bin y también de algunos de los elementos vistos en elecciones anteriores como por ejemplo la encapsulación de lógica de aplicación en clases independientes.
+El ejercicio en cuestión se trata de un programa en el que al iniciarse aparecerá el menú con cuatro opciones, añadir contacto, buscar contactos, mostrar contactos y salir, es la gestión de una agenda de contactos.
 
-El ejercicio en cuestión pues se trata de un programa en el que al iniciarse aparecerá el siguiente menú con cuatro opciones en tres opciones la última de salir a añadir contacto buscar contactos Mostrar contactos en la gestión de una agenda de contactos en la opción 1.
+En la opción 1 en caso de que haya espacio libre para añadir contacto porque vamos a limitarlo a 10, se solicitará al usuario la introducción de los datos de dicho contacto que van a ser nombre, edad e email, vamos a limitar a esos tres. Si hay espacio libre como digo pues se solicitará los datos y se quedará guardado el contacto dentro de la aplicación. Vamos a crear una array de 10 elementos como como podéis imaginar.
 
-Pues sí en caso de que haya espacio libre para añadir contacto porque vamos a limitarlo a 10 se solicitará al usuario la introducción de los datos de dicho contacto que van a ser nombre edad y Maido vamos a limitar a esos tres si hay espacio libre como digo pues se solicitará los datos y se quedará guardado el contacto dentro de la aplicación.
+En la opción 2 para la búsqueda de contactos se va a pedir un nombre del usuario. Si el contacto existe es decir tenemos un contacto almacenado con ese nombre pues se van a mostrar todos los datos del mismo y si no pues habrá un mensaje de advertencia diciendo que no se ha encontrado el contacto, que hay más contactos con ese nombre, pues el primero que se encuentra es el que se muestra.
 
-Vamos a crear una raíz de 10 elementos como como podéis imaginar en la opción 2 para la búsqueda de contactos se va a pedir un nombre del usuario.
+En la opción 3 se van a mostrar los datos de todos los contactos almacenados hasta el momento.
 
-Si el contacto existe es decir tenemos un contacto almacenado con ese nombre pues se van a mostrar todos los datos del mismo y si no pues habrá un mensaje de advertencia diciendo que no se ha encontrado el contacto que hay más contactos con él.
+La opción 4 es para salir.
 
-Con ese nombre pues el primero que se encuentra es el que se muestra en la opción 3 pues se van a mostrar los datos de todos los contactos almacenados hasta el momento mientras que cuatro para salir bien vamos allá.
+Vamos a ir al entorno de desarrollo Eclipse y creamos el proyecto `601-13-Ejercicio_Practico_12` vamos a tener el paquete `beans` y la clase `Contacto`, luego vamos a tener un paquete `logica` con la clase `GestionContacto` donde tendremos toda la llógica para poder añadir, buscar y mostrar un contacto y otro paquete `presentacion` con la clase `Principal` encargada de interactuar con el usuario para mostrarle el menú.
 
-Para ello nos vamos a ir al entorno de desarrollo Eclipse y bueno pues aquí ya tengo yo ya preparado el ejercicio porque es un poquito más largo que los anteriores.
+
+
 
 Entonces bueno pues ya está hecho parte del mismo.
 
