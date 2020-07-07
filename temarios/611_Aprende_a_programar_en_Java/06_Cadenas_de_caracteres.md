@@ -260,68 +260,37 @@ En este caso se trata de hacer un programa que va a solicitar al usuario la intr
 Vamos a crear el proyecto `601-12-Ejercicio_Practico_11` con la clase `BuscadorNombres` con método `main` y que contiene el siguiente código.
 
 ```java
+import java.util.Scanner;
 
+public class BuscadorNombres {
+
+	public static void main(String[] args) {
+		String lista, nom;
+		String[] nombres;
+		int contador=0;
+		Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Introduce lista de nombres: ");
+		lista = sc.nextLine();
+		
+		System.out.println("Introduce nombre a buscar: ");
+		nom = sc.nextLine();
+		
+		nombres = lista.split(",");
+		
+		//Recorrer el array en busca del nombre introducido
+		for(String n: nombres) {
+			if(n.equals(nom)) {
+				contador++;
+			}
+		}
+		System.out.println("El nombre aparace " + contador + " veces");
+
+	}
+
+}
 ```
 
-Once y bueno pues igual que hicimos en el ejercicio anterior no vamos a meternos en temas de capas de separación en clases y demás sino que todo lo vamos a hacer en el método mail porque de lo que se trata es de centrarnos en los métodos de la clase Street así que vamos a crear la clase con el método main buscador nombres la podemos llamar con su método y tampoco hace falta que definamos ningún paquete especial.
+Si ejecutamos el programa tenemos.
 
-Bueno pues lo primero vamos a declarar las variables donde vamos a guardar por un lado la cadena con la lista de nombres vamos a llamarla en vez de cartonista y la variable nom donde vamos a almacenar el nombre que se va a introducir.
-
-En segundo lugar vamos a tener que buscar en la lista principal el objeto escaner antes de los frutos cuando bajamos aquí vamos a declarar la variable numérica contador que va a llevar la cuenta la inicial vamos a hacer lógicamente de las veces que aparece el nombre en la lista y así creamos la clase scaner el objeto de la clase escaner o mejor dicho a partir del canal de entrada y control mayúscula o para que nos importe el paquete más importe de la clase de paquete pues abre un paréntesis aquí cerramos.
-
-Pues nada empezamos ya el programa lo primero lo vamos a solicitar al usuario la introducción de la lista de nombres introduce la lista de nombres leeremos esa lista y la almacena haremos en la variable lista lo leeremos con el escáner utilizando el método explica toda la lista de nombres introducirá una línea y al pulsar la tecla intro se lee bien.
-
-Ahora le vamos a pedir el nombre de nuevo un mensaje introduce nombre a buscar y vamos a ver y a ver cómo queda dentro de las comillas exterminan ahí parentesis y le leemos y metemos la variable no.
-
-Una vez más recurrimos de nuevo a un exploit.
-
-Bueno pues ahora que hacemos cómo buscamos ese nombre en la lista y sobre todo cuántas veces aparece.
-
-Pues aquí deberíamos aplicar el método exploit de la clase string que lo que hace es transformar una cadena a una raíz porque la cadena tiene el aspecto de una lista de datos una serie de datos.
-
-Entonces sería muy cómodo pasarlo a una raíz y recordar esa raíz y hacer la búsqueda dentro de dicha red.
-
-Por lo tanto necesitamos una variable real vamos a declararla también por aquí podríamos declarar justo en el momento en el que lo vamos a utilizar.
-
-Pero bueno tenerlo todo ahí junto todas las declaraciones la llamamos nombres vale.
-
-Entonces qué hacemos.
-
-Pues en la variable nombres no vamos a crear el array con el lío porque es que hay un método de string que ya nos genera ese Array a partir del contenido del método.
-
-Como recordarás que lo vimos en la lección dedicada a los métodos de string es exploit o exploit le vamos a pasar pues el separador la coma que es el que se va a utilizar para separar unos nombres de otros y ahora recorremos el array el comentario es recomendable siempre que pongamos comentarios en los programas o todo cuando son un poquito largos para que veamos y tengamos claro lo que hemos hecho en cada caso.
-
-Cuando volvamos a ver el programa Días más tarde en busca del nombre Introducing entonces lo vamos a recordar como un forista dentro de nombres que se LaVey y cómo preguntamos y el 
-nombre está contenido en esa lista.
-
-Claro en la variable que viene apuntando cada uno de los nombres que hay en la red.
-
-Entonces si el contenido es variable es igual a la variable ENUM o ya tenemos una ocurrencia bueno te estás dando cuenta si no lo has hecho.
-
-Pues tengo que incidir en ello que no puedo utilizar el doble igual combinado me dejas perfectamente pero a la hora de ejecutarlo pues no va a funcionar porque no puedo utilizar el nombre igual para comparar cadenas de caracteres.
-
-Por qué.
-
-Porque lo que hace el comparador de igualdad sería comparar los contenidos de las variables en las variables como sabes no está el objeto no está el texto está la referencia al texto.
-
-Entonces si las variables no apuntan a la misma posición de memoria al mismo objeto aunque sea igual sean dos objetos iguales con el mismo texto no me va a decir que son iguales.
-
-Por lo tanto utilizar el método de saber quals sobre cualquiera de ellos sobre N y le paso como parámetro a ese método la variable que apunta al texto con el que quiero comparar.
-
-Entonces si son iguales pues entrar aquí y fomentaremos en 1 incrementaremos la variable Contador hasta el final después del foro simplemente se trataría de sacar un mensaje podríamos haber hecho una pregunta Si Contador es cero para sacar un mensaje diferente pero bueno caso más directo como lo que se trataba era eso de hacer uso de estos métodos exploit.
-
-Bueno pues el mensaje será el nombre aparece más Contador y voy a concatenar por el lado derecho con otra frasecita veces no me aparece tantas veces vale.
-
-Bueno pues vamos a probarlo ejecutamos la aplicación y vamos a introducir una lista de nombres Alicia arcos no van a poner espacio para que no se considera usar los nombres vienen juntos o están pegados a la correa solamente se separan unos de otros por la coma.
-
-Vamos a repetir ese nombre Alicia y será el que introduzcamos para comprobar que efectivamente me cuenta dos Marta pues es suficiente.
-
-Esa es mi lista de nombres ahora me hice el nombre a buscar.
-
-Pues lo voy a indicar.
-
-Alicia si el programa funciona que nos va a decir que aparece dos veces Sebastián.
-
-Si quieres lo volvemos a probar para ver en el caso de que introduzcamos una lista de nombres estos cuatro nombres y nos piden un nombre buscador por ejemplo.
-
-Sí como no está a decir zelotes pues efectivamente que has visto pues otro de los usos de los métodos interesantes de stream como son adecuados para la comparación de igualdad y explica.
+<img src="images/29-03.png">
