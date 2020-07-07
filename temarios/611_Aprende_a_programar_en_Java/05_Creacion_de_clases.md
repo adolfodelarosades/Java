@@ -386,27 +386,27 @@ De cara a utilizar la clase en main, podríamos pasar los números al constructo
 ```java
 public class Principal {
 
-    public static void main(String[] args){
+   public static void main(String[] args){
 
-                int a=25;
+      int a=25;
 
-                int b=10;
+      int b=10;
 
-                Calculadora c=new Calculadora(a, b);
+      Calculadora c=new Calculadora(a, b);
 
-              //hacer operaciones
+      //hacer operaciones
 
-              System.out.println("Suma: "+c.sumar());
+      System.out.println("Suma: "+c.sumar());
 
-              System.out.println("Restar: "+c.restar());
+      System.out.println("Restar: "+c.restar());
 
-              System.out.println("Multiplicar: "+c.multiplicar());
+      System.out.println("Multiplicar: "+c.multiplicar());
 
-              System.out.println("Dividir: "+c.dividir());
+      System.out.println("Dividir: "+c.dividir());
 
-        System.out.println("Factorial de 5: "+Calculadora.factorial(5));
+      System.out.println("Factorial de 5: "+Calculadora.factorial(5));
 
-    }
+   }
 
 }
 ```
@@ -429,192 +429,140 @@ Gracias a la existencia de este constructor, pudimos crear objetos de la clase C
 Calculadora c=new Calculadora();
 ```
  
-# 25 Ejemplo práctico IX 16:02 
+# 25 :computer: Ejemplo práctico IX `601-10-Ejercicio_Practico_9` 16:02 
 
 <img src="images/25-01.png">
+
+Después de haber visto la elección anterior cómo crear clases para encapsular la lógica de aplicación de un programa. Vamos a poner en práctica dichos conocimientos en el siguiente ejercicio práctico.
+
 <img src="images/25-02.png">
+
 <img src="images/25-03.png">
 
-Después de haber visto la elección anterior cómo crear clases para encapsular la lógica de aplicación de un programa.
+Se trata de un programa en el que al inicio se va a aparecer un menú, hasta ahora no habíamos hecho ningún problema con estas características tan interactivo como el que vamos a realizar ahora.
+
+Dicho menú tendrá cuatro opciones para un programa de gestión de notas y en la primera opción se nos solicitará introduciendo una nota al elegirla el usuario simplemente se le va a pedir que introduzca dicha nota y esa nota se almacenará ,se guardará dentro del programa.
+
+Las notas se van a guardar en un array, como los arrays tienen un tamaño fijo y en nuestro caso vamos a limitarlo a 10 el tamaño del array va a ser 10. Por tanto si se elige la opción 1, teniendo ya 10 elementos nos informará de que el array está lleno y que no se admiten más notas. En cuanto a la opción 2 simplemente se mostrará la media de todas las notas que estén registradas hasta el momento. En la opción 3 el número de aprobados. Y se elija la que se elija tras procesarse dicha opción se volverá de nuevo a presentar el menú y así hasta que se elija la opción 4 que es la que teníamos prevista para abandonar el programa.
+
+Vamos a crear el proyecto de Java en Eclipse llamado `601-10-Ejercicio_Practico_9`.
+
+En este caso lo que vamos a hacer para poder desarrollar dicha aplicación es crearnos dos clases, en una clase vamos a aislar todo lo que sería la lógica del programa, es decir la gestión de las notas, las operaciones donde vamos a añadir la nota, comprobar que sí hay espacio, hacer el cálculo de la media, el cálculo de los aprobados, etc. y la otra clase que es donde tenemos el método principal que es el punto de entrar al programa, esta la vamos a dejar para todo lo que es la interacción con el usuario y la entrada salida, la generación del menú, solicita las opciones y demás es lo que habitualmente se suele hacer en un programa ya mínimamente grande, tener esa separación como mínimo de dos capas y cada una creada con su clase correspondiente.
+
+Entonces primero vamos a crear la clase donde vamos a tener todas esas operaciones sobre el array de notas, donde vamos a almacenar la información, la vamos a llamar `GestionNotas` la vamos a crear en el paquete `logica` y sin método `main`.
+
+*`GestionNotas`*
+
+```java
+package logica;
+
+public class GestionNotas {
+	
+	private double[] notas;
+	private int total;
+	
+	public GestionNotas() {
+		notas = new double[10];
+		total=0;
+	}
+	
+	public boolean agregarNota(double d) {
+		// si hay espacio, la agrega, sino devuelve false
+		if(total<10) {
+			notas[total]=d;
+			total++;
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public double media() {
+		double m=0;
+		for(int i=0; i<total; i++) {
+			m+=notas[i];
+		}
+		return m/total;
+	}
+	
+	public int aprobados() {
+		int ap=0;
+		for(int i=0; i<total;i++) {
+			if(notas[i] >= 5) {
+				ap++;
+			}
+		}
+		return ap;
+	}
+	
+}
+```
+
+Fíjate que estos métodos no tienen ninguna instrucción de mandar mensajes al usuario ni nada de eso. Es pura lógica de negocio que se llama lógica de aplicación. Son métodos que realizan operaciones más adelante cuando vayas a estudiar el acceso a base de datos y demás  verás que estos métodos harán operaciones de acceder a base de datos, ficheros, etc. pero en cualquier caso esos métodos que hacen la operación correspondiente como acceso a almacenamiento permanente o no y devuelven unos resultados pero en ningún caso van a interaccionar con el usuario. Eso se deja para la otra clase y la otra capa.
+
+Ahora vamos a crear una clase donde vamos a meter el menú, la interacción con el usuario, donde va a estar el método `main`. Vamos a llamarla `Principal` en el paquete `presentacion` y con método `main` y va a tener el siguiente código:
+
+```java
+package presentacion;
+
+import java.util.Scanner;
+
+import logica.GestionNotas;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		
+		//Creamos un objeto de la clase que contiene las operaciones
+		//de la lógica de aplicación
+		GestionNotas gnotas = new GestionNotas();
+		Scanner sc = new Scanner(System.in);
+		int op; //opción elegida
+		do{
+			System.out.println("1.- Agregar nota");
+			System.out.println("2.- Ver nota media");
+			System.out.println("3.- Ver aprobados");
+			System.out.println("4.- Salir");
+			
+			op = Integer.parseInt(sc.nextLine());
+			switch (op) {
+			   case 1:
+				  System.out.println("Nota: ");
+				  double d= Double.parseDouble(sc.nextLine());
+				  if(!gnotas.agregarNota(d)) {
+					  System.out.println("No se ha podido agregar la nota, sin espacio!"); 
+				  }
+				  break;
+			   case 2:
+				   System.out.println("Media: " + gnotas.media());
+				   break;
+			   case 3:
+				   System.out.println("Aprobados: " + gnotas.aprobados());
+				   break;
+			   case 4:
+				   break;
+			   default:
+				   System.out.println("Debes escribir una opción válida.");
+			}
+		}while (op!= 4);
+	}
+}
+```
 
-Vamos a poner en práctica dichos conocimientos en el siguiente ejercicio práctico se trata de un programa en el que al inicio se va a parecer un menú.
+Vemos que vamos a hacer uso de la clase `GestionNotas` y de `Scanner` la cual se debe importar de `java.util.Scanner`. Creamos un objeto gestión notas y a partir de ahí ya podremos llamar a los métodos que hemos visto de añadir nota, media, etc. También creamos el `Scanner` para poder hacer la lectura de datos. 
 
-Hasta ahora no habíamos hecho ningún problema con estas características tan interactivo como el que vamos a realizar ahora.
+Montamos el menú que se repite hasta que elija la opción 4 con un `do-while`.
 
-Dicho menú habrá cuatro opciones para un programa para gestión de notas y en la primera opción se nos solicitará introduciendo una nota al elegirla al usuario simplemente se le va a pedir que introduzca dicha nota y esa nota se almacenará se guardará dentro del programa.
+Se está esperando que el usuario introduzca la opción del menú, la leemos y la convertimos en una instrucción para convertir un texto a un entero. Por qué no la leemos con `nextInt()`. Una cosa que comentábamos cuando explicamos en el documento el funcionamiento de `Scanner` es que no se podría utilizar el mismo `Scanner` para leer textos y números, entonces como hay que leer por un lado números y por otro lado textos una opción para olvidarse digamos de tener que tener dos objetos `Scanner` sería leerlo todo como texto, lo lees como texto y si se espera un número se convierte ese texto en número. En el caso de la opción lo convierte a entero.
 
-Las notas se van a guardar en Arráiz como los arrays tienen un tamaño fijo y en nuestro caso vamos a limitarlo a 10 el tamaño de la raíz va a ser 10.
+Pues una vez que ya tenemos el entero lo comprobamos y en función de la opción elegida actuamos si es la opción 1 pues mandamos un mensajito para que introduzca la nota, leemos la nota y vemos que volvemos otra vez a usar siempre el mismo scanner sin preocuparnos de que si una vez tiene que ser entero, doble o texto da igual el mismo escáner para leer todo que es doble lo que está leyendo en este caso usamos `Double.parseDouble(sc.nextLine())` para convertir la nota a doble y llamamos a agregar nota pero agregar nota nos va a dar un resultado booleano en caso de ser falso nos manda un mensaje de que ya no hay espacio para insertar la nota.
 
-Por tanto si se elige una opción la opción 1 teniendo ya 10 elementos nos informará de que la raíz está lleno y que no se admiten más notas en cuanto a la opción 2 pues simplemente se mostrará la media de todas las notas que estén registradas hasta el momento en la opción 3 el número de aprobados y se elija la que se elija Tras procesarse dicha opción se volverá de nuevo a presentar el menú y así hasta que se elija la opción 4 que es la que teníamos prevista para abandonar el programa.
-
-Bien pues vamos a ver cómo abordaría el desarrollo de esta aplicación.
-
-Vamos a crear el proyecto de Java Eclipse sería el número 10 ejercicio práctico 9.
-
-Bueno pues en este caso lo que vamos a hacer para poder desarrollar dicha aplicación es crearnos dos clases en una clase.
-
-Vamos a aislar todo lo que sería como decimos la lógica del programa es decir la gestión de las notas las operaciones donde vamos.
-
-Pues eso añadir la nota.
-
-Comprobar que sí hay espacio y espacio hacer el cálculo de la media el cálculo de los aprobados etcétera y otra clase que es donde tenemos el método principal que es el punto de entrar al programa. 
-
-Eso la vamos a dejar para todo lo que es la interacción con el usuario y la entrada salida.
-
-Vaya pues eso la generación del menú solicita las opciones y demás es lo que habitualmente se suele hacer en un programa ya mínimamente grande tener esa separación como mínimo de dos capas y cada una creada con su clase correspondiente.
-
-Entonces primero vamos a crear la clase donde vamos a añadir como digo a tener todas esas operaciones sobre la raíz de notas que vamos a almacenar la información así que botón derecho My Class y vamos a crearnos una nota una clase ciertos.
-
-Pero en esta clase no vamos a añadir método porque solamente va haber uno dentro de cada programa método mail una clase un método y esa va a ser la que contenga todo lo que las operaciones de entrada salida e interacción con el usuario.
-
-Otra cosa que vamos a hacer como novedad es separar nuestras clases en paquetes para que no estén sólo hay dos clases.
-
-Pero bueno aún así está bien la costumbre de crearnos dos tres paquetes dependiendo de el grupo de clases que tengamos asociadas a la diferentes funcionalidad de cada una.
-
-Pues eso las clases que tienen que ver con lo que la lógica de aplicación la vamos a meter en un paquete que podríamos llamar gestión lógico vamos a llamarlo simplemente La gestión notas dentro del paquete lógica.
-
-Como digo no hay metrosde pero estamos aquí tenemos nuestra clase donde vamos a tener por un lado lo que son los atributos que se necesiten para la realización de las operaciones.
-
-Por supuesto la Rey y un atributo también para llevar la cuenta de cuántas notas tenemos introducidas en cada momento.
-
-Vamos a equip porque ya tenemos hecho el programa y sería estas dos variables que tenemos aquí como te digo pues notas donde vamos a almacenar las notas.
-
-Total que va a llevar la cuenta de las notas que tenemos almacenada en cada momento.
-
-Por supuesto vamos a tener un constructor que como ya hemos comentado es para qué se utiliza los constructores son bloques de código que se ejecutan al crear un objeto de una clase.
-
-Aprovechamos ese bloque de código para hacer tareas de inicialización en este caso no hace falta que se nos proporcione ningún atributo porque lo único que queremos hacer es darle tamaño 10 a ese Array lo hacemos aquí y asignarle cero al total de notas aunque esta instrucción realmente no la pusiéramos por defecto ya sabes que las variables de tipo atributo se inicializar.
-
-En el caso de las numéricas a cero esta sea redundante.
-
-Pero bueno ahí está queda como explícitamente lo hemos hecho esa inicialización.
-
-Bien pues a partir de ahí ahora ya irían los métodos llamados que llamamos de lógica aplicación que van a llamar la otra capa a capa presentación para hacer las operaciones y operaciones son almacenas nota calcula la media calcula el número de aprobados.
-
-Eso en esta versión si luego decidimos ampliarla pues simplemente sería ir añadiendo nuevos métodos a esta clase o en el caso de programas más grandes podría crear otras clases donde se hicieran otras operaciones con otro tipo de entes con las notas y a lo mejor habría una gestión de usuarios y eso serían otra clase independiente etcétera.
-
-Vamos a ver esos métodos que ya los tenemos aquí desarrollados y ahora los explico. 
-
-Copiamos Podemos y bueno pues vamos a verlos.
-
-El primero de ellos es el método agregarlo recibe como parámetro doble con la nota agrega y nos devuelve un bullían indicando si se ha podido agregar o no.
-
-Nosotros lo que hacemos aquí es comprobar si el espacio es la variable total con la que se supone que va a llevar la cuenta de las notas introducidas.
-
-Si el menor de 10 hay espacio en esa posición que nos va a marcar total pues ahí es donde metemos la nueva nota incrementamos la variable para indicar que tenemos una nota más return true.
-
-Por qué.
-
-Porque la hemos añadido ha sido exitosa la operación.
-
-Si no pues simplemente devolvemos falso para que la capa de presentación sepa que no se ha podido añadir y ya opté por mandar el mensaje correspondiente al usuario.
-
-La media es simplemente recorrer desde la posición cero hasta la anterior total o total siempre te va a decir cuántas hay.
-
-Ya sabes que si las posiciones empiezan por cero pues la posición del último es total menos 1 y las vamos sumando para después calcular la media dividiendo el total de los aprobados.
-
-Pues lo mismo un recorrido de la raíz desde la posición 0 hasta la anterior la total vale pues qué hacemos en ese recorrido.
-
-Comprobar si se trata de un número mayor igual que 5 en cuyo caso tenemos un aprobado más vamos incrementando la variable probados con cada nota que nos encontremos igual o superior a 5 y devolvemos el valor.
-
-Fíjate que estos métodos no tienen ninguna instrucción de mandar mensajes al usuario ni nada.
-
-Es pura lógica de negocio que se llama lógica de aplicación.
-
-Son métodos que realizan operaciones más adelante cuando vayas a estudiar el acceso a base de datos y demás.
-
-Verás que estos métodos harán operaciones de acceder a base de datos ficheros etcétera pero en cualquier caso es Nexon métodos que hacen la operación correspondiente como acceso a almacenamiento permanente o no y devuelven unos resultados pero en ningún caso van a interaccionar con el usuario.
-
-Eso se deja para la otra clase y la otra capa vale entonces.
-
-Bueno pues esto sería la clase gestión notas ahora vamos a crear una clase donde vamos a meter en el menú la interacción con el usuario donde va a estar el método.
-
-Entonces vamos a crear una nueva clase que podríamos llamar por ejemplo principal y el rey también pues eso lo vamos a separar en un parque independiente porque si no tenemos la lógica aplicación.
-
-Esto sería presentación y si como digo el método de penalizamos que tenemos nuestro método más clásico de siempre y cuál es el código que vamos a tener ahí.
-
-Vamos a verlo porque lo tenemos aquí un poquito más abajo.
-
-Vamos a ver todos estas instrucciones van a ser las que van a formar parte de ese método. 
-
-Tenemos bien cómo es aquí lo primero pues vamos vemos que vamos a hacer uso de las clases no las que acabamos de crear escáner para lectura de datos y ya nos está protestando el compilador indicando que no puede resolver esos tipos accurate lo que te conté cuando hicimos el ejercicio en el que utilizamos la clase escaner que había que importarla para poder usarla.
-
-Cómo se hace eso.
-
-Pues con una sentencia impor que se genera automáticamente con la combinación de teclas Control.
-
-Si y automáticamente pues no nos las va a importar.
-
-Puede ocurrir como en este caso que haya alguna clase que se encuentran varios paquetes realmente serían varias clases distintas claro.
-
-Eclipse ha detectado que en la clase una de las que tenemos que importar escaner tiene tres clases escaner en paquetes diferentes nosotros es ésta la útil del paquete Java útil de Java estándar la que nos interesa ya las importamos y ahora ya se pueden utilizar.
-
-Fíjate que eso también lo puedes ver en la clase que acabamos de crear.
-
-Gestión notas como cuando metes una clase en un paquete aparece esa sentencia packages al principio del archivo de código oculto Java.
-
-Las importaciones siempre van después de.
-
-Esto significa que la clase está empaquetada en ese paquete.
-
-Estos son las instrucciones de importación y después la definición de la clase siempre es en ese orden.
-
-No podríamos poner los IMPO antes de paquetes en ningún caso vamos al código.
-
-Entonces decimos que gestión notas es la clase que acabamos de crear en su momento pues es la que contiene los métodos para hacer todas esas operaciones que temo que te explique la lección anterior que hay que crear un objeto de la clase para poder llamar a esos métodos.
-
-Pues eso es lo que estamos haciendo creamos un objeto gestión notas y a partir de ahí ya podremos llamar a los métodos que hemos visto de añadir nota media etcétera.
-
-También creamos el escáner para poder hacer la lectura de datos de los datos al usuario que vamos a guardar en esta variable entre otras variables esta simplemente es para leer la opción elegida logado otra variable.
-
-Cuando vayamos a leer la nota y demás. 
-
-Cómo montamos lo que se repetición del menú hasta que elija la opción 4.
-
-Pues fíjate una instrucción de tipo repetitivo du guay guay mientras la opción elegida distinto de 4 se va a mostrar este menú población 1 2 3 y 4.
-
-Después de mostrar la situación del sistema Pinel en las opciones de menú como es se está esperando que el usuario introduzca la opción real decline la leemos y la convertimos en una instrucción para convertir un texto a un entero vale.
-
-Por qué no lo hemos leído con éxito.
-
-Una cosa que comentábamos cuando explicamos explica en el documento el funcionamiento de escáner es que no se podría utilizar el mismo escáner para leer textos y números.
-
-Entonces como hay que leer por un lado números y por otro lado a lo mejor hay que leer textos pues una opción para olvidarse digamos de tener que tener dos objetos escáner sería leerlo todo como texto y no te preocupas de tener como dos escáner diferentes.
-
-Todo lo lees como texto y si se espera un número se convierte ese texto en número.
-
-En este caso esperamos que sea un entero pues esta instrucción que ves aquí es una llamada un método estático de una clase que se llama ITD método es Sain pues coge el texto.
-
-En este caso texto leído y lo convierte a entero.
-
-Pues una vez que ya tenemos el entero lo comprobamos y en función de la opción elegida actuamos si es la opción 1 pues mandamos un mensajito para que introduzca la nota leemos la nota y ver que volvemos otra vez lo mismo usar siempre Medline para preocuparnos de que si una vez tiene que ser entero doblez o texto da igual el mismo escáner para leer de todo que es doble lo que está leyendo en este caso pues fíjate doble Parse doble método estático Parse doble de la clase Doble entonces transformamos texto leído al doble y llamamos a agregar nota pero agregar nota nos va a dar un resultado si es false Nos estamos preguntando de esta manera si no el resultado de la llamada al método.
-
-Si esto es False Not false Bartók es una forma abreviada en vez de utilizar esto podríamos haber hecho la pregunta de la siguiente manera igual false sería lo mismo vale lo que pasa es que en programación seamos es costumbre de preguntar así como es algo de tipo Gülen pues sí es simplemente que es igual a Trump sería como lo estás viendo ahora.
-
-Así se quedaría pero si lo que preguntamos si es igual a false sería y Nott lo que por lo que preguntes.
-
-Bien el caso es que si no se ha podido añadir sacamos el mensaje no se ha podido agregar notas sin estar muy bien Breathe para que no entren en el siguiente bloque. 
-
-Y bueno si la opción es 2 llamamos al método media como método nos devuelve un resultado y lo mostramos como parte del mensaje y si la opción 3 por lo mismo llamamos al método aprobados que nos va a devolver un resultado lo mostramos en el mensaje.
-
-Fíjate que aquí no hacemos cálculo de media ni interaccionan con el array eso está encapsulado en gestión.
+Y si la opción es 2 llamamos al método media como método nos devuelve un resultado y lo mostramos como parte del mensaje y si la opción es 3 lo mismo llamamos al método aprobados que nos va a devolver un resultado lo mostramos en el mensaje, fíjate que aquí no hacemos cálculo de media ni interaccionan con el array eso está encapsulado en gestión.
 
 Aquí nos dedicamos a la entradas tenemos contemplado también que si mete un número que no sea ni uno ni dos ni tres ni cuatro pues que le digan que la opción no es válida.
 
-Y vuelvo a Atarés solo cuando os 4 pues claro no haremos nada evidentemente y habrá que ir Weinberger de cumplirse y por lo tanto es que se finaliza el programa. 
+Solo cuando pulso 4 pero el while deja de cumplirse y por lo tanto es que se finaliza el programa. 
 
-Bueno vamos a ver es ahora esa llave copiarse.
+Vamos a probarlo ejecutamos el programa principal botón derecho una aplicación y aquí tenéis el menú.
 
-Porque además vamos a probarlo ejecutamos el programa principal botón derecho una aplicación y aquí tenéis el menú.
-
-Vamos a ver vamos a agregar un par de notas.
-
-Veamos un cuadro vuelve a salir al menú 1 agregamos un 6.
-
-Vuelve a salir el menú.
-
-Vamos a ver la nota media que debería ser 5 2 2 2 efectivamente media 5 ahora vía legislación 3 nos dice que hay un aprobado.
-
-Vamos a agregar una nota más ponemos un 7 la media debe haber subido.
-
-Evidentemente si elegimos dos la medida sube a 5 con 66 y si elegimos tres o es que hay dos aprobados vamos a terminar el programa con salir y como estos finalizará el programa ya han visto aquí un caso práctico y muy concreto de la separación de código en varias clases.
+<img src="images/25-04.png">
