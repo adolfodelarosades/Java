@@ -201,72 +201,55 @@ System.out.println(cad.substring(2,8)); //Muestra: xto pr
 
 Has visto alguno de los métodos más interesantes de `String` en las siguientes lecciones vamos a hacer algunos ejercicios aplicando dichos métodos.
 
-# 28 Ejercicio práctico X 08:05
+# 28 :computer: Ejercicio práctico X `601-11-Ejercicio_Practico_10` 08:05
 
 <img src="images/28-01.png">
+
+A continuación vamos a realizar un ejercicio en el que vamos a poner en práctica algunos de los métodos que hemos visto en la lección anterior sobre la clase `String`.
+
 <img src="images/28-02.png">
 
-Muy bien pues a continuación vamos a realizar un ejercicio en el que vamos a poner en práctica algunos de los métodos que hemos visto en la elección anterior sobre la clase Street el ejercicio va a consistir en un programa que solicitará al usuario la introducción de una cadena de texto y después de eso nos dirá cuántos vocales contiene dicho texto.
+El ejercicio va a consistir en un programa que solicitará al usuario la introducción de una cadena de texto y después de eso nos dirá cuántos vocales contiene dicho texto.
 
-Bueno pues vamos a un entorno de desarrollo para crear el proyecto vamos a ver muy Holler y bueno en este caso ya estamos con el proyecto número 11 correspondiente al ejercicio  práctico 10 Shishio 5 10.
+Vamos al entorno de desarrollo para crear el proyecto que vamos a llamar `601-11-Ejercicio_Practico_10`, vamos a crear la clase `ContarVocales` con método `main` que va a contener el siguiente código:
 
-En este caso pues a diferencia del ejercicio anterior que hicimos en la elección donde se presentó la separación de capas no vamos a hacer ningún tipo separacion de capas porque nos queremos centrar en el estudio estos métodos de Street por lo tanto vamos a hacer todo en el método main y vamos a crear la clase base la vamos a llamar contar convocarlas ni siquiera como solamente va a estar esta clase ni siquiera va a hacer falta que hagamos una estructuración en paquetes ni nada con su método Mayne y ya está lo que se trata es centrarnos en este caso en el uso de esos métodos.
+*`ContarVocales`*
 
-Bien lo primero declaramos la variable donde vamos a guardar la cadena que va a introducir el usuario.
+```java
+import java.util.Scanner;
 
-Creamos el objeto escaner que como sabes no va a servir para poder leer datos por teclado a partir del canal de entrada van después vamos a declarar unas variables que nos van a servir para llevar la cuenta del número de vocales introducidas.
+public class ContarVocales {
 
-Vamos a ver si escudamos para hacer las importaciones o importación concretamente de la clase Escanes y como te decía vamos a declarar unas variables Contador bien la otra variable va a ser una variable de tipo Char donde vamos a ir guardando la letra que vamos a ir leyendo en cada iteración por el conjunto de letras de la cadena letra.
+	public static void main(String[] args) {
+		String cad;
+		Scanner sc = new Scanner(System.in);
+		int contador = 0;
+		char letra;
+		System.out.println("Introduce una cadena de texto: ");
+		cad = sc.nextLine();
+		for(int i=0; i < cad.length(); i++) {
+			letra = cad.toLowerCase().charAt(i);
+			switch (letra) {
+			   case 'a':
+			   case 'e':
+			   case 'i':
+			   case 'o':
+			   case 'u':
+				   contador++;			
+			}
+		}
+		System.out.println("La cadena '" + cad +"' tiene " + contador + " vocales");
 
-Vale pues entonces una vez que tenemos declaradas las variables y creado el objeto scaner pues lo que hacemos es realizar la lectura lo primero lógicamente será mandar un mensaje al usuario para que sepa no tiene que hacer introduce una cadena de texto esa cadena la vamos a leer a través del método de escaner next next Line eximios para ver números lo que queremos es leer una línea de texto que es todo lo que introduzca hasta la pulsación de la tecla Enter.
+	}
 
-Bueno pues ahora con un fork vamos a ir recogiendo recorriendo las letras desde la posición cero hasta la última y cuál será la última la posición de la última letra de la cadena.
+}
+```
 
-Pues eso no nos va a marcar el método Lens que vimos en la lección anterior.
+Si ejecutamos el programa tenemos.
 
-Esta junto a la más bien que lo que hacemos en este foro vamos a recuperar la letra que toque en cada momento.
+<img src="images/28-03.png">
 
-Para eso utilizaremos todos los métodos que vimos Charata que como sabes pues a partir de una posición
-
-te da el carácter que ocupa dicha posición.
-
-Le pasamos la variable que va marcando las posiciones.
-
-Y ahora qué hacemos.
-
-Pues un switch en este switch de una variable Elettra pues vamos a ir comprobando si se trata de una de una de las cinco vocales que hay en los cinco casos deberíamos hacer exactamente lo mismo que es como el tipo Char es un tipo compatible con ir porque realmente es un se almacena como una codificación Unicode podemos utilizar valores tipo Char en los que un switch bien tanto si es a como si estamos hablando de la letra E o de la vamos a ponerlo en las cinco de la O aún como es estaríamos ante una vocal en cualquiera de esos cinco casos.
-
-Pues lo que tenemos que hacer incrementar la variable ContaPlus Contador más que ya sabemos que esto lo que hace es sumarle uno a la variable y volverlo a dejar dentro de la misma variable vamos a si acaso tabular esto para que quede mejor y ya está.
-
-Es decir una vez que ya se haya integrado todas las letras de la cadena todas las pasadas Polyforum pues habremos tenido un contador.
-
-El total de vocales con las que nos hemos ido encontrando en cualquiera de estas 5 al final que hacemos presentará el resultado en n total de vocales y unimos concatenados con el resultado bueno pues vamos a probarlo vamos a ejecutarlo el programa y vamos a introducir una cadena de prueba monja laaplicación vamos a meter un texto.
-
-Esto es una cadena.
-
-Vale que le damos a la tecla de intro ya automáticamente nos hará el cálculo total de vocales 7 está a 1 2 está 3 otra 4 5 la 6 y 7 el agua.
-
-Y qué pasa con esta mayúscula.
-
-Eso no me lo ha contado lo que he puesto en todos los casos es simplemente la comprobación de la minúscula.
-
-Entonces si se introduce una letra mayúscula como es el caso de la primera y no va a coincidir con ninguno de estos Keys no la va a contar ha contado las minúsculas que son los que hemos indicado explícitamente los keys y si quiere hiciéramos también tuviera en cuenta las mayúsculas pues había dos opciones o poner otros cinco keys para las cinco vocales en mayúscula o tenemos otra cosa yo creo que es mejor.
-
-Y es que vamos a hacer lo siguiente Una vez que leemos la cadena por lo que hacemos es transformarla.
-
-O bien a mayúsculas ubiera minúsculas.
-
-Depende de lo que vayamos a comprobar en nuestro caso minúsculas.
-
-Entonces cogemos y llamamos a otro de los métodos que vimos anteriormente que es el método Lower Keys qué hace este método transformar la cadena a minúscula más que transformar porque como ya sabes de la navegación donde estudiamos el tipo string los tipos de string son inmutables los objetos son inmutables no se pueden modificar lo que hace este método es generar una nueva cadena de texto con todo lo que es lo valores la cadena original pero en minúsculas todas las letras.
-
-Entonces ahora ya solamente comprobaría minúsculas es decir introduzcas en mayúsculas minúsculas como te lo traduce toda minúscula o sólo va a contar las minúsculas en este caso si volvemos a probar el ejercicio aunque tecleamos la mayúscula no la va a contabilizar igual porque la transforma en minúsculas.
-
-Esto es una cadena la transforma solamente para a la hora de contarlo en este caso como veis pues sale
-
-que tiene ocho vocales.
-
-# 29 Ejercicio práctico XI 08:52 
+# 29 :computer: Ejercicio práctico XI `601-12-Ejercicio_Practico_11` 08:52 
 
 
 <img src="images/29-01.png">
