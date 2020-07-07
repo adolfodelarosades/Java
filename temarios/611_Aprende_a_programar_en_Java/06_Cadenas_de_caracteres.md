@@ -220,28 +220,26 @@ import java.util.Scanner;
 
 public class ContarVocales {
 
-	public static void main(String[] args) {
-		String cad;
-		Scanner sc = new Scanner(System.in);
-		int contador = 0;
-		char letra;
-		System.out.println("Introduce una cadena de texto: ");
-		cad = sc.nextLine();
-		for(int i=0; i < cad.length(); i++) {
-			letra = cad.toLowerCase().charAt(i);
-			switch (letra) {
-			   case 'a':
-			   case 'e':
-			   case 'i':
-			   case 'o':
-			   case 'u':
-				   contador++;			
-			}
-		}
-		System.out.println("La cadena '" + cad +"' tiene " + contador + " vocales");
-
-	}
-
+   public static void main(String[] args) {
+      String cad;
+      Scanner sc = new Scanner(System.in);
+      int contador = 0;
+      char letra;
+      System.out.println("Introduce una cadena de texto: ");
+      cad = sc.nextLine();
+      for(int i=0; i < cad.length(); i++) {
+         letra = cad.toLowerCase().charAt(i);
+      	 switch (letra) {
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+            case 'u':
+               contador++;			
+         }
+      }
+      System.out.println("La cadena '" + cad +"' tiene " + contador + " vocales");
+   }
 }
 ```
 
@@ -251,23 +249,19 @@ Si ejecutamos el programa tenemos.
 
 # 29 :computer: Ejercicio práctico XI `601-12-Ejercicio_Practico_11` 08:52 
 
-
 <img src="images/29-01.png">
+
+Vamos a realizar un nuevo ejercicio en el que vamos a poner en práctica más métodos de la clase `String`.
+
 <img src="images/29-02.png">
 
-Vamos a realizar un nuevo ejercicio en el que vamos a poner en práctica más métodos de la clase Street en este caso se trata de hacer un programa que va a solicitar al usuario la introducción de una cadena de texto cadena de texto que va a consistir en una serie de nombres nombres de personas separadas por comas.
+En este caso se trata de hacer un programa que va a solicitar al usuario la introducción de una cadena de texto, una cadena de texto que va a consistir en una serie de nombres, nombres de personas separadas por comas. A continuación el programa le va a solicitar al usuario la introducción de un nombre y qué es lo que va a hacer el programa, decirnos cuántas veces aparece este nombre en la lista de nombres introducidas en primer lugar.
 
-A continuación el programa le va a solicitar al usuario la introducción de un nombre y qué es lo que va a hacer el programa.
+Vamos a crear el proyecto `601-12-Ejercicio_Practico_11` con la clase `BuscadorNombres` con método `main` y que contiene el siguiente código.
 
-Puedes decirnos cuántas veces aparece este nombre en la lista de nombres introducidas en primer lugar.
+```java
 
-Bueno pues vamos a ello.
-
-Creamos el nuevo proyecto que será el proyecto número 12 correspondiente al ejercicio práctico dice 12.
-
-Ejercicio
-
-práctico.
+```
 
 Once y bueno pues igual que hicimos en el ejercicio anterior no vamos a meternos en temas de capas de separación en clases y demás sino que todo lo vamos a hacer en el método mail porque de lo que se trata es de centrarnos en los métodos de la clase Street así que vamos a crear la clase con el método main buscador nombres la podemos llamar con su método y tampoco hace falta que definamos ningún paquete especial.
 
