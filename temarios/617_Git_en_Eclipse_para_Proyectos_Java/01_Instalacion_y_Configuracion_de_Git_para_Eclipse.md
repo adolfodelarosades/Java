@@ -4,7 +4,7 @@
 
 Vamos a ver trabajar con Git para trabajar con proyectos, compartirlos con los miembros del equipo y llevar un contro de versiones del mismo. Lo primero que veremos es como utilizar dentro de Eclipse tanto Git como GitHub y es que aun que son herramientas que se pueden utilizar en la línea de comandos lo habital es integrarlo dentro de los IDEs. 
 
-## GIT
+## Git
 
 <img src="images/01-02.png">
 
@@ -62,7 +62,7 @@ Hasta ahora ya hemos creado nuestra cuenta en GitHub y creado un nuevo repositor
 
 ### Configurar Eclipse para usar Git y GitHub
 
-#### Instalar EGit
+#### 1. Instalar EGit
 
 En Eclipse lo primero que tendríamos que hacer es instalar el Plugin EGit, pero como hemos mencionado antes en las últimas versiones de Eclipse ya viene instalado por default pero si no fuera el caso hay que instalarlo. 
 
@@ -72,7 +72,60 @@ Nos vamos al Eclipse Markplace y buscamos Egit.
 
 Como observamos ya esta instalado EGit, sino lo instalariamos con las opciones por default y tendríamos que reinicar Eclipse.
 
-#### Proporcionar datos de Identificación de Git
+#### 2. Proporcionar datos de Identificación de Git y GitHub
+
+Lo que tenemos que hacer ahora es proporcinar unos datos de identificación que nos serviran para interactuar con Git y GitHub. Vamos a *Preferences - Team - Git - Configuration*, esto aparece por que tenemos instalado EGit.
+
+<img src="images/01-10.png">
+
+Lo que hemos hecho aquí es añadir un `user.name` y un `user.email` con sus respectivos valores. Estos datos simplemente son idenfificativos, no sirven para acceder a nada.
+
+#### 3. Crear Repositorio Local
+
+Lo que nos falta es crear nuestro repositorio local, tenemos que tener un repositorio donde almacenar las versiones de nuestro proyecto. Para hacer esta gestión nos va a ser de utilidad abrir la vista **Git Repositories** esto lo hacemos con *Windows - Show Views - Others...* y de la lista de vistas nos vamos a *Git - Git Repositories*.
+
+<img src="images/01-11.png">
+
+Al presionar OK nos va a aparecer la vista Git Repositories.
+
+<img src="images/01-12.png">
+
+En este caso yo ya tengo un repositorio creado.
+
+En la vista Git Repositories tenemos una serie de botonoes que nos permiten hacer diferentes tareas.
+
+<img src="images/01-13.png">
+
+Entre ellos hay uno que es para `Create a new Git Repository and add it to this view` que es el que vamos a presionar.
+
+<img src="images/01-14.png">
+
+Tenemos que seleccionar la carpeta donde lo queremos tener, por defaul nos aparece el sitio que usa git por default para almacenar los repositorios pero en este caso vamos a seleccionar una carpeta diferente. Lo ideal sería haber creado primero dicha carpeta donde queremos tener almacenado el repositorio, la voy a crear.
+
+<img src="images/01-15.png">
+
+Una vez creada mi carpeta esa es la que voy a seleccionar.
+
+<img src="images/01-16.png">
+
+<img src="images/01-17.png">
+
+Y una vez que aceptamos ya nos aparece el nuevo repositorio local en la vista Git Repositories.
+
+<img src="images/01-18.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
