@@ -114,21 +114,45 @@ Y una vez que aceptamos ya nos aparece el nuevo repositorio local en la vista Gi
 
 <img src="images/01-18.png">
 
+Y si nos vamos a la carpeta del repositorio dentro de ella se ha creado una carpeta oculta `.git`.
 
+<img src="images/01-19.png">
 
+Que es donde se va ir almacenando toda la información del repositorio, las diferentes versiones,, cambios y demas.
 
+Con esto ya tenemos creado nuestro repositorio local, de nuestro equipo y donde queremos controlar las diferentes versiones del proyecto. Pero también quremos conectarlo con el repositorio remoto para compartir las versiones de los proyectos con otros miembros del equipo.
 
+#### 4. Conectar Repositorio Local con el Repositorio Remoto
 
+Para hacer la conección del Repositorio Local con el Remoto lo que hacemos es expandir nuestro repositorio local `repositorio-JAVASE`.
 
+<img src="images/01-20.png">
 
+Sobre remote presionamos el botón derecho.
 
+<img src="images/01-21.png">
 
+Y nos aparece `Create Remote...` lo pulsamos.
 
+<img src="images/01-22.png">
 
+Simplemente presionamos OK dejando `origin` y presionamos el botón `Create`
 
+<img src="images/01-23.png">
 
+Presionamos el botón `Change...`
 
+<img src="images/01-24.png">
 
+En esta ventana es donde se me pide toda la información de conección con el repositorio Remoto es aquí donde debo meter la URI que me genero al crear el repositorio en GitHub junto con mis credenciales.
 
+Con esto tendríamos la conexión entre el repositorio Local y el remoto.
 
+<img src="images/01-26.png">
+
+Salvamos la configuración con `Save`.
+
+<img src="images/01-27.png">
+
+Ya tenemos todo listo para a partir de ahora empezar a crear proyectos, subirlos a GitHub, controlar versiones algo que vamos a ver en la próxima lección.
 
