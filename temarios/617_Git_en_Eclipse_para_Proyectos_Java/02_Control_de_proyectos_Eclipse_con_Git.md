@@ -39,11 +39,21 @@ En Repository indicamos nuestro repositorio local.
 
 Damos en Finish. 
 
-Al hacer esto si vemos el proyecto ahora sobre los archicos, paquetes y carpetas aparece un signo de interrogación.
+Al hacer esto si vemos el proyecto ahora sobre los archivos, paquetes y carpetas aparecen con un signo de interrogación.
 
 <img src="images/02-08.png">
 
 Esto indica que todavía no se ha hecho ninguna operación con Git, ya esta asociado con Git pero no hemos realizado ninguna operación con el, no hemos realizado ningura versión del proyecto.
+
+Una cosa importante tambien es que nuestro proyecto que se encontraba en la carpeta del Workspace ya no esta en dicha carpeta.
+
+<img src="images/02-22.png">
+
+El proyecto se ha pasado a la carpeta del repositorio. Si vamos a la carpeta del Repositorio Local tenemos.
+
+<img src="images/02-19.png">
+
+El proyecto se ha movido del Workspace al repositorio.
 
 Lo que vamos a hacer ahora es realizar nuestro primer Commit sobre el proyecto, volvemos a ponernos sobre el proyecto y damos botón derecho, *Team - Commit*. 
 
@@ -101,19 +111,6 @@ Y si vamos al repositorio remoto.
 <img src="images/02-21.png">
 
 Podemos ver que también se ha incluido el proyecto dentro del repositorio remoto.
-
-
-
-
-
-
-
-
-Con esto lo que hemos hecho es que nuestro proyecto que antes solo estaba en el Workspace este bajo control de Git, s
-
-
-
-
 
 
 
