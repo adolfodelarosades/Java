@@ -175,6 +175,76 @@ Suponiendo que ya estamos conformes vamos a hacer un Commit solo al repositorio 
 
 ###  Commit al Repositorio Local.
 
+Vamos a pensar que estamos conformes con los cambios realizados y queremos hacer un Commit al repositorio Local
+
+<img src="images/02-37.png">
+
+Nos ponemos sobre el proyecto botón derecho *Team - Commit*.
+
+<img src="images/02-38.png">
+
+Se nos abre la vista `Git Staging` mostrando el archivo modificado en este caso `Saludo` pero resalmente aparecen dos archivos el `Saludo.java` y `Saludo.class` que es el archivo compilado y observese que ya aparecen directamente en la zona `Staged Change` esto es por que ya pertenecen a Git y solo se han modificado. Vamos a insertar un comentario para el commit.
+
+<img src="images/02-39.png">
+
+En este caso solo vamos a presionar sobre el botón `Commit`.
+
+<img src="images/02-40.png">
+
+Como se hizo solo un Commit solo se sincronizo con el Repositorio Local pero no con el Remoto.
+
+<img src="images/02-41.png">
+
+Vamos a realizar a hacer el Push como se muestra en la imágen.
+
+<img src="images/02-42.png">
+
+Nos pide que confirmemos el repositorio remoto, damos en Next.
+
+<img src="images/02-43.png">
+
+Nos pide unas especificaciones para el la Ref del push.
+
+<img src="images/02-44.png">
+
+En ambos combos ponemos `master` y presionamos el botón `Add Spec`.
+
+<img src="images/02-45.png">
+
+Vamos a marcar los check `Force Update` y `Save specifications in origin configuration`
+
+<img src="images/02-46.png">
+
+Y presionamos `Finish`.
+
+<img src="images/02-47.png">
+
+Nos informa que el Push se ha realizado.
+
+<img src="images/02-48.png">
+
+<img src="images/02-49.png">
+
+Como podemos comprobar ahora si los cambios han sido subidos al repositorio remoto.
+
+También podemos ver algo similar desde Eclipse si sobre el proyecto damos *Team - Show in History*  
+
+<img src="images/02-50.png">
+
+Se nos presenta la vista `History` con los commits que llevemos realizados.
+
+<img src="images/02-51.png">
+
+<img src="images/02-52.png">
+
+Si nos colocamos en alguno de ellos nos indica que archivos se subieron en cada commit, incluso si damos doble click sobre el se abre la versión del archivo en ese commit.
+
+<img src="images/02-53.png">
+
+<img src="images/02-54.png">
+
+
+
 
 
 
