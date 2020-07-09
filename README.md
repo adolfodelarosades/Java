@@ -4,7 +4,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # CFTIC
 
-* [000 Java Profesional SE]()
+* [000 Java Profesional SE](https://github.com/adolfodelarosades/Java/blob/master/temarios/000_Java_Profesional_SE.md)
 
 # OPENWEBINARS
 
