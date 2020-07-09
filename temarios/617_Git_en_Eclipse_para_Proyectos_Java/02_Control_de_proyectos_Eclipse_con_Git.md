@@ -229,6 +229,8 @@ Nos informa que el Push se ha realizado.
 
 Como podemos comprobar ahora si los cambios han sido subidos al repositorio remoto.
 
+###  Ver los diferentes Commits desde Eclipse.
+
 También podemos ver algo similar desde Eclipse si sobre el proyecto damos *Team - Show in History*  
 
 <img src="images/02-50.png">
@@ -244,6 +246,117 @@ Si nos colocamos en alguno de ellos nos indica que archivos se subieron en cada 
 <img src="images/02-53.png">
 
 <img src="images/02-54.png">
+
+### Descargarse el Proyecto desde el repositorio Remoto.
+
+Vamos a realizar la tarea contraria es decir suponiendo que somos un usuario diferente nos vamos a descargar el Proyecto desde el repositior a nuestro IDE. Para hacer esto vamos a cambiarnos de Workspace y poder simular esta acción.
+
+<img src="images/02-55.png">
+
+Tenemos un Workspace totalmente vacío, vamos configurarnos nuestro propio repositorio Local, abrimos la vista `Git Repositories`
+
+<img src="images/02-56.png">
+
+Como estamos en un nuevo Workspace no tenemos ningún repositorio, lo vamos a crear, primero que nada voy a crear una nueva carpeta dentro de donde tengo mis repositorios donde tendre el repositorio "virtual" para este Workspace.
+
+<img src="images/02-57.png">
+
+
+Pulsando en `Create a new local Git repository`.
+
+<img src="images/02-58.png">
+
+Seleccionamos la ruta donde se creará el repositorio y aceptamos.
+
+El repositorio se crea en dicha carpeta.
+
+<img src="images/02-59.png">
+
+<img src="images/02-60.png">
+
+Ahora si vamos a Importar el Proyecto desde el Repositorio remoto de Git Hub.
+
+
+Seleccionamos *Import - Git - Project from Git*.
+
+<img src="images/02-61.png">
+
+Siguiente.
+
+<img src="images/02-62.png">
+
+Vamos a seleccionar `Clone URI` siguiente.
+
+Tenemos que ingresar la URI y demñas datos para conectarnos con el servidor remoto.
+
+<img src="images/02-63.png">
+
+
+En este caso el usuario y la contraseña no son necesarios por que puede que estemos descargando el proyecto desde un repositorio que no sea de nuestra propiedad por lo que no tendríamos por que conocer esos datos. Siguiente.
+
+<img src="images/02-64.png">
+
+Nos indica la rama desde la cual se va a traer los proyectos en este caso `master` que es la única que existe.Siguiente.
+
+<img src="images/02-65.png">
+
+En esta pantalla nos pide que configuremos el destino Local que no es el que aparece lo vamos a cambiar.
+
+<img src="images/02-66.png">
+
+Ya tenemos la carpeta correcta donde va a descargar el proyecto. Damos Siguiente.
+
+<img src="images/02-67.png">
+
+Damos Siguiente.
+
+<img src="images/02-68.png">
+
+Aquí nos indica todos los proyectos existentes en el repositorio que queramos importar en este caso solo es uno el cual importaremos al presionar `Finish`.
+
+<img src="images/02-69.png">
+
+Como podemos apreciar ya nos ha importado nuestro proyecto a nuestro Workspace.
+
+Si veo la carpeta de este repositorio local tenemos.
+
+<img src="images/02-70.png">
+
+A quedado algo rara vamos a continuar a ver si no hay problemas.
+
+La aplicación se ejecuta correctamente. Vamos a añadir un cambio.
+
+
+<img src="images/02-71.png">
+
+Vamos a subir este cambio al repositorio Remoto.
+
+<img src="images/02-72.png">
+
+Presionamos `Commit and Push`.
+
+<img src="images/02-73.png">
+
+<img src="images/02-74.png">
+
+<img src="images/02-75.png">
+
+Con esto el Desarrollador 2 ha hecho un cambio y lo ha subido al repositorio remoto.
+
+<img src="images/02-76.png">
+
+<img src="images/02-77.png">
+
+
+
+
+
+
+
+
+
+
+
 
 
 
