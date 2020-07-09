@@ -347,34 +347,45 @@ Con esto el Desarrollador 2 ha hecho un cambio y lo ha subido al repositorio rem
 
 <img src="images/02-77.png">
 
+<img src="images/02-78.png">
+
+Desde GitHub puedo ver lo que se ha realizado en cada Commit y quien lo ha realizado.
+
+### Realizar un Pull
+
+Que pasa si el Desarrollador 1 quiere descargarse los cambios realizados por el Desarrollador 2. Volvamos a nuestro Workspace inicial.
+
+En este caso estamos hablando de una operación de tipo `Pull` que consiste en traernos los ultimos cambios es decir los ultimos commits que se han hecho sobre el repositorio remoto y que no los tenemos en nuestro repositorio local. Nos traemos el contenido del repositorio Remoto y hacemos una combinación con los valores del proyecto existente. Los cambios que se han hecho en el archivo se transladaran al archivo actual del workspace, que por el momento no los tiene.
+
+<img src="images/02-79.png">
 
 
+¿Cómo se hace el Pull?
 
+<img src="images/02-81.png">
 
+<img src="images/02-82.png">
 
+<img src="images/02-83.png">
 
+<img src="images/02-84.png">
 
+<img src="images/02-85.png">
 
+<img src="images/02-86.png">
 
+Tuve que volver a marcar la relación por que no me la había almacenado cuando hice el Push. Finalmente se ha actualizado el archivo descargando lo que existia en el el repositorio remoto.
 
+<img src="images/02-87.png">
 
+Si quiero ver las configuraciones de Push y Fech puedo entrar a las siguientes opciones.
 
+<img src="images/02-88.png">
 
+<img src="images/02-89.png">
 
+<img src="images/02-90.png">
 
+<img src="images/02-91.png">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Estas configuraciones solo se hacen una vez y apartir de allí ya sabe como y adonde hacer los Push y los Pull.
