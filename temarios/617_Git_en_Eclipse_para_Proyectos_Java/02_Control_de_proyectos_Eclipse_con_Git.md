@@ -112,6 +112,74 @@ Y si vamos al repositorio remoto.
 
 Podemos ver que también se ha incluido el proyecto dentro del repositorio remoto.
 
+### Haciendo cambios en el Proyecto
+
+Si modificamos nuestro código esto se reflejara en el Package Explorer
+
+<img src="images/02-23.png">
+
+<img src="images/02-24.png">
+
+En los archivos modificados aparece el simbolo `>` antes del nombre del archivo con el cual podemos saber que sobre ese archivo se han subido modificaciones que no se han subido a los repositorios.
+
+Podemos ver los cambios hechos en el archivo antes de subirlo al repositorio, para lo cual sobre el archivo presionamos botón derecho *Team - Show Local History*
+
+<img src="images/02-25.png">
+
+Se nos va a mostrar una lista de las diferentes versione que hemos realizado del archivo la primera que sale es la últim que hemos creado.
+
+<img src="images/02-26.png">
+
+Podriamos seleccionar las dos últimas versiones dar botón derecho y seleccionar `Compare with Each Other`
+
+<img src="images/02-27.png">
+
+Nos va a aparecer una nueva ventana donde salen las dos versiones y muestra claramente los cambios que existen entre una y otra versión.
+
+<img src="images/02-28.png">
+
+Tenemos unos botones que nos van a permitir mover los cambios de una ventana a otra según lo que desee hacer.
+
+<img src="images/02-29.png">
+
+<img src="images/02-30.png">
+
+Se activan unos u otros botones dependiendo en que ventana y línea nos posicionemos. Por ejemplo para descartar los cambios hechos nos posicionamos en la ventana derecha en la línea que se ha modificado vamos a presionar el botón `Copy Currenct Change from Rigth to Left`.
+
+<img src="images/02-31.png">
+
+Se pasa lo de la derecha a la izquierda, que es una forma de descartar el cambio y salvamos el archivo para retornar a la versión original. Vamos a volver a poner el cambio. 
+
+
+Otra forma de ver las modificaciones hechas es directamente en el editor del archivo, esta es la versión normal del editor.
+
+<img src="images/02-32.png">
+
+Si nos colocamos en el archivo y damos botón derecho seleccionamos la opción *Team - Show revision Information* 
+
+<img src="images/02-33.png">
+
+Ahora el editor aparece de esta manera.
+
+<img src="images/02-34.png">
+
+De esta forma podemos ver las líneas modificadas.
+
+<img src="images/02-35.png">
+
+Volvemos a comparar las últimas dos versiones.
+
+<img src="images/02-36.png">
+
+Suponiendo que ya estamos conformes vamos a hacer un Commit solo al repositorio Local.
+
+###  Commit al Repositorio Local.
+
+
+
+
+
+
 
 
 
