@@ -193,6 +193,8 @@ En este caso solo vamos a presionar sobre el botón `Commit`.
 
 Como se hizo solo un Commit solo se sincronizo con el Repositorio Local pero no con el Remoto.
 
+###  Push al Repositorio Remoto.
+
 <img src="images/02-41.png">
 
 Vamos a realizar a hacer el Push como se muestra en la imágen.
