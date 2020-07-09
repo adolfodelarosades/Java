@@ -389,3 +389,11 @@ Si quiero ver las configuraciones de Push y Fech puedo entrar a las siguientes o
 <img src="images/02-91.png">
 
 Estas configuraciones solo se hacen una vez y apartir de allí ya sabe como y adonde hacer los Push y los Pull.
+
+<img src="images/02-92.png">
+
+Aquí ya tenemos el historial de los 3 commits hechos hasta el momento.
+
+Con esto tenemos controlado con Git todas las versiones de nuestro proyecto y podemos compartir entre los diferentes miembros del equipo  de una forma mucho más comoda que copiar ficheros o pasarlos por USB o por ZIP.
+
+
