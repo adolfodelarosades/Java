@@ -17,9 +17,10 @@ Mediante este taller serás capaz de conocer las similitudes y diferencias entre
 
 ## Contenido
 
-   * 01 Introducción
-   * 02 Tipo de Colecciones y ejemplo de uso
-   * 03 Algunos algoritmos para colecciones
-   * 04 Librería de colecciones de terceros
-
+   * 01 [Introducción](/temarios/104_Manejo_de_colecciones_en_Java/01_Introduccion.md)
+   * 02 [Tipo de Colecciones y ejemplo de uso](/temarios/104_Manejo_de_colecciones_en_Java/02_Tipo_de_Colecciones.md)
+   * 03 [Colecciones para Situaciones Especiales](/temarios/104_Manejo_de_colecciones_en_Java/03_Colecciones_para_Situaciones_Especiales.md)
+   * 04 [Algoritmos para Colecciones](/temarios/104_Manejo_de_colecciones_en_Java/04_Algoritmos_para_Colecciones.md)
+   * 05 [Cómo saber qué Tipo de Colección Escoger](/temarios/104_Manejo_de_colecciones_en_Java/05_Como_saber_que_Tipo_de_Coleccion_Escoger.md)
+   * 06 [Librerías de Colecciones de Terceros](/temarios/104_Manejo_de_colecciones_en_Java/06_Librerias_de_Colecciones_de_Terceros.md)
 
