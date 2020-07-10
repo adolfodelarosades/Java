@@ -35,11 +35,5 @@
 <img src="images/01-41.png">
 <img src="images/01-42.png">
 <img src="images/01-43.png">
-<img src="images/01-44.png">
-<img src="images/01-45.png">
-<img src="images/01-46.png">
-<img src="images/01-47.png">
-<img src="images/01-48.png">
-<img src="images/01-49.png">
-<img src="images/01-50.png">
+
 
