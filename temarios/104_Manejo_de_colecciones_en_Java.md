@@ -15,4 +15,11 @@ Mediante este taller serás capaz de conocer las similitudes y diferencias entre
 * Colecciones y API Stream
 * Librerías de colecciones disponibles en el mercado
 
+## Contenido
+
+   * 1. Introducción
+   * 2. Tipo de Colecciones y ejemplo de uso
+   * 3. Algunos algoritmos para colecciones
+   * 4. Librería de colecciones de terceros
+
 
