@@ -17,9 +17,9 @@ Mediante este taller serás capaz de conocer las similitudes y diferencias entre
 
 ## Contenido
 
-   * 1. Introducción
-   * 2. Tipo de Colecciones y ejemplo de uso
-   * 3. Algunos algoritmos para colecciones
-   * 4. Librería de colecciones de terceros
+   * 01 Introducción
+   * 02 Tipo de Colecciones y ejemplo de uso
+   * 03 Algunos algoritmos para colecciones
+   * 04 Librería de colecciones de terceros
 
 
