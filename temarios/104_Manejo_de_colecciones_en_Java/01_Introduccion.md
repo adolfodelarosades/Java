@@ -25,8 +25,7 @@ En Java las colecciones estan disponibles desde la versión 2, es decir desde ha
 
 <img src="images/01-07.png">
 
-Veremos como el framework de colecciones de cava nos permite o no ofrece una serie de elementos a saber una interfase el decir unos tipos de dato o no contratos para algunas clases de implementación que serán independientes de sus representaciones que no garantizarán fue una serie de características lo iremos conociendo implementaciones para esta interfase cada una de ellas pues era una una concreción de los diferentes tipos y que bueno pues no aportará algo nuevo y fresco en cada uno de los casos y como decimos también una serie de algoritmos que son métodos en ocasiones comunes para un conjunto de colecciones para poder buscar ordenar clasificar objetos y que veremos cómo decir que son reutilizables en muchos casos para diferentes tipos de interfaces o de o de implementaciones las ventajas del uso del friends
-
+Veremos como el Framework de Colecciones de Java nos ofrece una serie de elementos, a saber unas **interfaces** es decir unos tipos de datos, unos contratos para algunas clases de implementación, que serán independientes de sus representaciones que nos garantizarán una serie de características, lo iremos conociendo, **implementaciones** para estas interfaces, cada una de ellas es una concreción de los diferentes tipos y nos aportará algo nuevo y fresco en cada uno de los casos y también una serie de **algoritmos** que son métodos en ocasiones comunes para un conjunto de colecciones para poder *buscar*, *ordenar*, *clasificar* objetos y que son reutilizables en muchos casos para diferentes tipos de interfaces o de implementaciones.
 
 
 <img src="images/01-08.png">
