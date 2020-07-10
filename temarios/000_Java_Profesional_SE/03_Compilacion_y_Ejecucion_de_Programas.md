@@ -2,11 +2,11 @@
 
 <img src="images/03-01.png">
 
-<img src="images/04-02.png">
+<img src="images/03-02.png">
 
-<img src="images/04-03.png">
+<img src="images/03-03.png">
 
-<img src="images/05-04.png">
+<img src="images/03-04.png">
 
 <img src="images/03-05.png">
 
