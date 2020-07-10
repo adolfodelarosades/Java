@@ -1,3 +1,35 @@
 # 02 Tipo de Colecciones y ejemplo de uso
 
 <img src="images/01-09.png">
+<img src="images/01-10.png">
+<img src="images/01-11.png">
+<img src="images/01-12.png">
+<img src="images/01-13.png">
+<img src="images/01-14.png">
+<img src="images/01-15.png">
+<img src="images/01-16.png">
+<img src="images/01-17.png">
+<img src="images/01-18.png">
+<img src="images/01-19.png">
+<img src="images/01-20.png">
+<img src="images/01-21.png">
+<img src="images/01-22.png">
+<img src="images/01-23.png">
+<img src="images/01-24.png">
+<img src="images/01-25.png">
+<img src="images/01-26.png">
+<img src="images/01-27.png">
+<img src="images/01-28.png">
+<img src="images/01-29.png">
+<img src="images/01-30.png">
+<img src="images/01-31.png">
+<img src="images/01-32.png">
+<img src="images/01-33.png">
+<img src="images/01-34.png">
+<img src="images/01-35.png">
+<img src="images/01-36.png">
+<img src="images/01-37.png">
+<img src="images/01-38.png">
+<img src="images/01-39.png">
+<img src="images/01-40.png">
+
