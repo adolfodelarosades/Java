@@ -486,7 +486,9 @@ quijoteHashSet.forEach(System.out::println);
 
 <img src="images/01-75.png">
 
-Vemos como el parrafo original tiene 217 palabras y que tenemos 136 diferentes, que se contiene la palabra `hidalgo` y podemos ver también la lista de todas las palabras. 
+Vemos como el parrafo original tiene 217 palabras y que tenemos 136 palabras diferentes después de haber descartado todas las palabras repetidas, también vemos que en el `HashSet` si que se contiene la palabra `hidalgo` y podemos ver también la lista de todas las palabras dentro del `HashSet`. 
+
+Como podemos comprobar un `HashSet` es bastante adecuado cuando queremos trabajar con colecciones que quieran eliminar de alguna manera los repetidos y que orden de los elementos no nos importe para nada. 
 
 ### `LinkedHashSet<E>`
 
