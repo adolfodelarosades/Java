@@ -374,7 +374,9 @@ Pero si observamos el resultado vemos que aquí si que nos inserta los dos objet
 
 #### :computer: Ejemplo de Aplicación `HashSet<E>`
 
-Finalmente vamos a ver un ejemplo de Aplicación de `HashSet<E>`.
+Finalmente vamos a ver un ejemplo de Aplicación de `HashSet<E>`. 
+
+Como ejemplo de aplicación podríamos pensar en la eliminación de elementos duplicados por ejemplo de otra colección. `HashSet` tiene un constructor que nos permite construir un `Set` a partir de otra colección, cualquiera que herede de `Collection` y si por ejemplo quisieramos buscar en un parrafo las palabras que sean únicas, es decir ir descartando las repetidas lo podríamos hacer de la siguiente manera.
 
 *`HashSetAppAplicacion`*
 
@@ -439,16 +441,52 @@ public class HashSetAppAplicacion {
 }
 ```
 
+Lo primero que hemos hecho es obtener todas las palabras del Quijote, bueno para este ejemplo solo lo haremos del primer parrafo, eso se obiene con el método `palabrasQuijote()`, se define todo el parrafo en una cadena de carácteres, la cual la pasamos a minúscula por simplificar, se remplazan los puntos y las comas por espacios en blanco, después Spliteamos la cadena de caracteres separandolas por los espacios en blanco para obtener una colección de Strings `Collection<String>`. 
+
+:confused: ¿Como `return Arrays.asList(quijote.split(" "));` genera un `Collection<String>` ?
+
+Si construimos un `HashSet` a partir de esta colección lo que vamos a tener es que se van a descartar todos los elementos repetidos esto lo logramos con:
+
+```java
+// EJEMPLO DE APLICACIÓN: eliminación de duplicados en otra colección
+// Crea un HashSet a partir de otra colección
+// eliminando los duplicados que contenga
+Collection<String> palabrasDelQuijote = palabrasQuijote();
+Set<String> quijoteHashSet = new HashSet<>(palabrasDelQuijote);
+```
+
+Es como si construyeramos el `HashSet` vacío, iteramos la colección e insertaramos cada elemento en el `HashSet`, al insertar algún valor repetido se descartaría como vimos en los ejemplos anteriores. Aquí al crear el `HashSet` a partir de una colección existente también se van a descartar las palabras repetidas, cosa que comprobaremos al ejecutar la aplicación.
+
+Vamos a implimir el tamaño de la `Collection` y del `HashSet` para ver la diferencia que existe entre uno y el otro usando el el método `size()` que es el mismo para ambas colecciones.
+
+```java
+// Comparación de número de elementos
+System.out.println("Total de palabras en el 1º párrafo: " + palabrasDelQuijote.size());
+System.out.println("Palabras diferentes en el 1º párrafo: " + quijoteHashSet.size());
+```
+
+También vamos a comprobar como al usar el método `contains` de nuestro `Set` contiene o no un elemento. 
+
+```java
+// Se puede comprobar si contiene algún elemento
+if (quijoteHashSet.contains("hidalgo"))
+   System.out.println("Contiene la palabra hidalgo");
+else
+   System.out.println("No contiene la palabra hidalgo");
+```
+
+Y finalmente vamos a ver como podemos iterar sobre todas las palabras y ver como se han descartado todas las palabras repetidas. 
+
+```java
+// Imprimir todos los elementos del hashset
+quijoteHashSet.forEach(System.out::println);
+```
+
 #### Ejecutar la Aplicación.
 
 <img src="images/01-75.png">
 
-
-
-
-mujer en A3 y como veíamos este se alimenta al colegio que implementa iterable pues podemos hacer uso del bucle for mejorado para para poder utilizar vale algo más de código pero podríamos ver al menos esta parte de aquí podemos ver como aunque hemos insertado cadena 22 veces no aparece dos veces porque directamente descarta los valores repetidos ponme ejemplo de aplicación podríamos pensar en la eliminación de elementos duplicados por ejemplo de otra colección frase tiene un constructor que nos permite construir un set a partir de otra colección cualquiera ver que eres de collection y por ejemplo si quisiéramos buscar en un párrafo las palabras que sean únicas decir descartando las repetidas no podríamos hacer de la siguiente manera podríamos tener las palabras por ejemplo de todo el libro del Quijote o al menos del primer párrafo del mismo eso se obtiene a través de un método por aquí abajo que tampoco requiere de mucha historia porque lo que se hace definir todo en una cadena de caracteres lo pasamos a minúscula por simplificar se reemplazan los puntos y las comas por los valores vacíos decir que directamente se borran y lo que hacemos es flirtear no para obtener explicarlo por espacio en blanco para obtener las palabras distintas no de manera que aquí tendríamos una colección con las distintas palabras que incluye el primer párrafo del Quijote construimos un café a partir de esta colección lo que vamos a tener es que se van a descartar todos los elementos repetidos es como si recordaramos esta colección construyéramos el cassette vacío iteramos sobre sobre esta colección y la fuéramos añadiendo una una igual que antes hemos visto que la añadir la segunda vez un valor directamente se descarta aquí se van a descargar también los las palabras que estén que estén repetidas y lo podríamos comprobar después también podemos comprobar como el método contains nos permite verificar si si este set contiene un determinado valor o si no lo tiene devolvería tú o Falls en el caso que corresponda y vamos a poder ver cómo podemos iterar sobre todas las palabras y ver cómo se han descartado los repetidos porque al ejecutarlo podemos ver que la palabra Hidalgo se contiene el el total de palabra en el primer párrafo en la colección por la repetida era 217 y sin embargo en el segundo el total de palabras después de haber quitado las repetidas son solo 136 de hecho las palabras que se encuentran en este primer párrafo del Quijote también las tenéis por aquí cómo podemos comprobar un set es bastante adecuado un hámster cuando queremos trabajar con colecciones que quieran eliminar de alguna manera lo repetido y de las cuales no nos haga falta nada con respecto al horno con linked ser lo que tenemos es una especie de hamsters pero que nos va a permitir de alguna manera tenerlo elemento poder obtener los elementos mejor dicho en el orden en el cual lo insertamos por si en algún momento no
-
-
+Vemos como el parrafo original tiene 217 palabras y que tenemos 136 diferentes, que se contiene la palabra `hidalgo` y podemos ver también la lista de todas las palabras. 
 
 ### `LinkedHashSet<E>`
 
