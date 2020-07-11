@@ -488,13 +488,225 @@ quijoteHashSet.forEach(System.out::println);
 
 Vemos como el parrafo original tiene 217 palabras y que tenemos 136 palabras diferentes después de haber descartado todas las palabras repetidas, también vemos que en el `HashSet` si que se contiene la palabra `hidalgo` y podemos ver también la lista de todas las palabras dentro del `HashSet`. 
 
-Como podemos comprobar un `HashSet` es bastante adecuado cuando queremos trabajar con colecciones que quieran eliminar de alguna manera los repetidos y que orden de los elementos no nos importe para nada. 
+Como podemos comprobar un `HashSet` es bastante adecuado cuando queremos trabajar con colecciones que quieran eliminar de alguna manera los repetidos y de las cuales no nos haga falta nada con respecto al orden de los elementos que no nos importe para nada. 
 
 ### `LinkedHashSet<E>`
 
 <img src="images/01-18.png">
 
 Podemos ver también la siguiente implementación qué es `LinkedHashSet<E>`con respecto al anterior lo que haría sería almacenar los valores en una tabla hash con una lista doblemente enlazada, lo cual nos va a permitir además de tener la opción anterior del hashing, el poder conservar el orden de inserción y podríamos recuperar los elementos en ese orden, por lo cual al menos si necesitáramos un cierto orden y mantener el orden de inserción lo podríamos hacer, el rendimiento es algo peor que `HashSet<E>` pero algo mejor que el de `TreeSet<E>`.
+
+#### :computer: Ejemplo de Aplicación `LinkedHashSet<E>`
+
+Con `LinkedHashSet` lo que tenemos es una especie de `HashSet` pero que nos va a permitir de alguna manera poder obtener los elementos en el orden en el cual los insertamos por si en algún momento nos interesara hacerlo. 
+
+Para este ejemplo vamos a contar con una clase modelo `Persona` y nuestra clase `LinkedHashSetApp`
+
+*`Persona`*
+
+```java
+package net.openwebinars.colecciones.set.modelo;
+
+
+import java.time.LocalDate;
+import java.util.Objects;
+
+public class Persona implements Comparable<Persona> {
+
+    private String nombre;
+    private String apellidos;
+    private LocalDate fechaNacimiento;
+
+    public Persona() { }
+
+    public Persona(String nombre, String apellidos, LocalDate fechaNacimiento) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Persona persona = (Persona) o;
+        return Objects.equals(nombre, persona.nombre) &&
+                Objects.equals(apellidos, persona.apellidos) &&
+                Objects.equals(fechaNacimiento, persona.fechaNacimiento);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, apellidos, fechaNacimiento);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                '}';
+    }
+
+    // La forma de ordenar será por el orden alfabético de los apellidos
+    @Override
+    public int compareTo(Persona o) {
+        return apellidos.compareTo(o.apellidos);
+    }
+}
+```
+
+Nuestra clase modela `Persona` tiene tres atributos `nombre`, `apellidos` y `fechaNacimiento`, cuenta con el contructor por defecto y otro con los tres atributos, contamos con los métodos getters y setters, y con los métodos `equals`, `hashCode`, `toString` e implementa la interface  `compareTo` para después poder comprobar el uso con `TreeSet`.
+
+
+*`LinkedHashSetApp`*
+
+```java
+package net.openwebinars.colecciones.set.b.linkedhashset;
+
+import net.openwebinars.colecciones.set.modelo.Persona;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class LinkedHashSetApp {
+
+    public static void main(String[] args) {
+
+        // Los constructores de LinkedHashSet se comportan como los de HashSet
+
+        // Instancia un nuevo LinkedHashSet con las mismas características
+        // que el constructor de HashSet
+        Set<Persona> linkedHashSet = new LinkedHashSet<>();
+
+        // Insertamos diferentes elementos
+        linkedHashSet.add(new Persona("José", "García García", LocalDate.of(1990,1,1)));
+        linkedHashSet.add(new Persona("Ana", "López Martínez", LocalDate.of(2000, 8, 24)));
+        linkedHashSet.add(new Persona("Javier", "Castro Méndez", LocalDate.of(1970, 6,30)));
+        linkedHashSet.add(new Persona("María", "Laínez Muñoz", LocalDate.of(1980, 3,3)));
+
+        // Independientemente del orden que tenga implementada una determinada
+        // clase, LinkedHashSet mantiene solo el orden de inserción
+        System.out.println("Elementos de la colección");
+        for (Persona p : linkedHashSet) {
+            System.out.println(p);
+        }
+
+        // Podemos eliminar un determinado elemento
+        Persona p = new Persona("Javier", "Castro Méndez", LocalDate.of(1970, 6,30));
+        linkedHashSet.remove(p);
+        // Y añadir uno nuevo
+        linkedHashSet.add(new Persona("Alicia", "Antúnez Marín", LocalDate.of(2010, 10,10)));
+        // Al iterar de nuevo la colección, se sigue manteniendo el orden de inserción
+        System.out.println("\n\nElementos de la colección después de unas modificaciones");
+        linkedHashSet.forEach(System.out::println);
+
+        // Conversión de un Set en un array
+        // Esta funcionalidad es común en el interfaz Set, y la mostramos en esta implementación
+        Persona[] personas = new Persona[linkedHashSet.size()];
+        linkedHashSet.toArray(personas);
+        System.out.println("\n\nLinkedHashSet transformado en un array: " + Arrays.toString(personas));
+    }
+}
+```
+
+En nuestra clase `LinkedHashSetApp` lo primero que hacemos es instanciarlo.
+
+```java
+// Instancia un nuevo LinkedHashSet con las mismas características
+// que el constructor de HashSet
+Set<Persona> linkedHashSet = new LinkedHashSet<>();
+```
+
+El constructor sigue las mismas características de `HashSet`, podemos ver cómo podemos insertar una serie de personas usando nuestro modelo `Persona`.
+
+```java
+// Insertamos diferentes elementos
+linkedHashSet.add(new Persona("José", "García García", LocalDate.of(1990,1,1)));
+linkedHashSet.add(new Persona("Ana", "López Martínez", LocalDate.of(2000, 8, 24)));
+linkedHashSet.add(new Persona("Javier", "Castro Méndez", LocalDate.of(1970, 6,30)));
+linkedHashSet.add(new Persona("María", "Laínez Muñoz", LocalDate.of(1980, 3,3)));
+```
+
+Independientemente de que persona tiene un orden natural definido a través de `compareTo` vamos a poder comprobar como los elementos de la colección los podemos tener en el orden de inserción.
+
+```java
+// Independientemente del orden que tenga implementada una determinada
+// clase, LinkedHashSet mantiene solo el orden de inserción
+System.out.println("Elementos de la colección");
+for (Persona p : linkedHashSet) {
+   System.out.println(p);
+}
+```
+
+<img src="images/01-76.png">
+
+Podemos comprobar como están 'José', 'Ana', 'Javier' y 'María'  en el orden de inserción.
+
+Si eliminamos algún elemento mediante el método `remove`.
+
+```java
+// Podemos eliminar un determinado elemento
+Persona p = new Persona("Javier", "Castro Méndez", LocalDate.of(1970, 6,30));
+linkedHashSet.remove(p);
+```
+
+Y añadimos uno nuevo, no se reutiliza ese hueco, sino que se va a seguir manteniendo el orden de inserción.
+
+```java
+// Y añadir uno nuevo
+linkedHashSet.add(new Persona("Alicia", "Antúnez Marín", LocalDate.of(2010, 10,10)));
+```
+
+<img src="images/01-77.png">
+
+De hecho hemos eliminado a Javier, hemos añadido Alicia y por tanto Javier que era el tercero desaparece y Alicia se incorpora en el último lugar, va a estar al final de todo porque se sigue manteniendo el orden de inserción.
+
+Otra de las funcionalidades, también la tiene `HashSet`, pero la vemos ahora, vamos la tienen todas las implementaciones de `Set` es la posibilidad de transformar el `Set` en un array, por si alguna vez nos conviene transformarlo directamente en un array mediante el método `toArray` el código lo tenemos aquí:
+
+```java
+// Conversión de un Set en un array
+// Esta funcionalidad es común en el interfaz Set, y la mostramos en esta implementación
+Persona[] personas = new Persona[linkedHashSet.size()];
+linkedHashSet.toArray(personas);
+System.out.println("\n\nLinkedHashSet transformado en un array: " + Arrays.toString(personas));
+```
+
+Tendríamos primero que instanciar el array dándole el tamaño correspondiente a través del tamaño del `linkedHashSet` y lo podríamos transformar directamente en un array de tipo `Persona`.
+
+<img src="images/01-78.png">
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-78.png">
 
 ### `TreeSet<E>`
 
@@ -507,6 +719,8 @@ Podemos ver también la siguiente implementación qué es `LinkedHashSet<E>`con 
 La cuestión sería como es natural que para que los elementos estuvieran ordenados según su orden natural, las clases que insertemos en el tipo de dato tiene que implementar `Comparable` y de esta manera podría mantener el orden, como decía esta notación `O(log(N))` qué se utiliza en algorítmica para medir debido a su estructura de árbol, las operaciones por ejemplo de búsqueda estarían acotada en NO logaritmo de N, es decir que no es directamente proporcional el rendimiento al al número de elementos sino que estaría un poco por debajo al ser este tipo de Logaritmo.
 
 
+
+por consola por último la implementación de TreeSet la tenemos por aquí tiene la cosa triste de que si permite mantener los elementos en orden según él va lo hemos comprobado antes que la clase persona lo que hace es ordenar por orden alfabético de los apellidos utilizando el método compare to de la clase String bueno si nosotros añadimos al Tríceps con una serie de personas por apellido con la G la L o l a I d tú aquí comprobamos comprobar si está contenido lo interesante estaría en comprobar que a la hora de obtener estos elementos se han ordenado por apellidos no si ejecutamos podemos ver aquí arriba el elemento estaba contenido vale y podemos ver en lo interesante es que se han ordenado primero García después la Inés y por último López vale obteniendo las personas directamente y tirando sobre el tríceps que no la devuelve por el orden natural tenemos la posibilidad de recorrer el triste de una manera ascendente o descendente vale mediante un método que no devuelve un iterador especial que se llama descending literato vale como hemos comprobado antes muy distanciado el set perdón el tríceps con una referencia se esto nos permite tener la implementación de tríceps a través de los métodos de ser vale pero para hacer uso de el pecho las palabras que se encuentra en ese primer párrafo del Quijote también la cena por aquí como podemos comprobar once de bastante adecuado un café cuando queremos trabajar con con colecciones que te quieran eliminar de alguna manera lo repetido y de las cuales no no haga falta nada con respecto al horno con limpiezas lo que tenemos es una especie de Castle pero que nos va a permitir de alguna manera tenerlo elemento poder obtener los elementos mejor dicho en en el orden en el cuadro insertar por si en algún momento no interesar a hacer el constructor sé que las mismas características de besarse podíamos insertar en este caso podemos ver como tenemos hecho una clase modelo persona vale que la tenemos por aquí de la cual guardamos nombre lo ha pedido y la fecha de nacimiento cometido que te dice Tere que son los dos visuales Lolo habituales perdón y cual casco litros Trini bueno con la imprenta la interfaz comparable para después poder comprobar en el uso con tristeza vale con un link quejas el podemos ver cómo podemos insertar una serie de personas y bueno independientemente de que personas tiene un orden natural detenido a través de comparable vamos a poder comprobar cómo lo elementos de la colección los podemos tener en el orden de de inserción por aquí podemos probar cómo están Josean a Javier y María en el orden del inserción si eliminados algún elemento mediante el método removal y añadimos uno nuevo no sé reutilizar ese hueco si no que se va a seguir manteniendo el orden de de inserción de podemos eliminado a Javier hemos añadido Alicia y por tanto Javier que era el primero te perdone era el tercero desaparece y Alicia pues incorpora en el en el último lugar vale para sacar al final de todo porque se sigue manteniendo el orden de Sergio nacionalidades también la tenían ja Seprona la vemos ahora como no tiene toda la implementación de PSP la posibilidad de detrás formales que se den en un array por si alguna vez nos conviene transformar lo directamente en un array mediante el método tú a raíz del ejemplo lo tenía aquí tendríamos primero distancia de la red dándole el tamaño correspondiente a través del tamaño del cáncer vale y lo podríamos todas formas directamente en un array de de tipo personal que mi empresa por aquí por consola por último la implementación de decir y se la tenemos por aquí tiene la la cosa tristes de que si permite mantener los elementos en orden según el balón hemos comprobado antes de la clase persona lo que hace es ordenar por orden alfabético de pelo apellido vale utilizando el método compares to the de la clase Trini buenos y nosotros añadimos el triste con una serie de personas por apellido por la esquela de lo que le ha dicho a ti comprobamos comprobar si está contenido lo interesante estaría en comprobar que a la hora de obtener estoy elemento se han ordenado por aquí no sé si arriba
 
 
 <img src="images/01-21.png">
