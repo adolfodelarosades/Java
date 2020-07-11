@@ -30,7 +30,7 @@ Mediante este taller serás capaz de conocer las similitudes y diferencias entre
    
 En este taller quiero que podamos profundizar en el conocimiento que tenemos en las colecciones que no ofreces Java pudiendo aprender qué es eso de una *colección*, los diferentes *tipos de interfaces* implementaciones y los algoritmos que nos ofrece Java en este sentido para el manejo de colecciones. Vamos a tratar de ser capaces de dilucidar qué colección es la más adecuada para usar en cada momento y también algunas librería de tercero que podamos utilizar para para manejar las colecciones que nos ofrece Java.
 
-<img src="images/01-03.png">
+<img src="/temarios/104_Manejo_de_colecciones_en_Java/images/01-03.png">
       
 Vamos a comenzar con este taller de Manejo de Colecciones en Java, lo vamos a hacer conociendo los cuatro puntos que vamos a trabajar, el primero sería la introducción vamos a saber qué es eso de una colección y qué es lo que no ofrece, en segundo lugar vamos a conocer el tipo de colecciones y ejemplos de uso de las mismas, veremos que Java no ofrece bastantes tipos distintos, en el tercer punto tenemos algunos algoritmos que también ofrece Java para el manejo de colecciones ordenación, búsqueda, etc. y por último en el cuarto paso conoceremos algunas librerías de colecciones de terceros que existen en el mercado.
 
