@@ -27,5 +27,13 @@ En Java las colecciones estan disponibles desde la versión 2, es decir desde ha
 
 Veremos como el Framework de Colecciones de Java nos ofrece una serie de elementos, a saber unas **interfaces** es decir unos tipos de datos, unos contratos para algunas clases de implementación, que serán independientes de sus representaciones que nos garantizarán una serie de características, lo iremos conociendo, **implementaciones** para estas interfaces, cada una de ellas es una concreción de los diferentes tipos y nos aportará algo nuevo y fresco en cada uno de los casos y también una serie de **algoritmos** que son métodos en ocasiones comunes para un conjunto de colecciones para poder *buscar*, *ordenar*, *clasificar* objetos y que son reutilizables en muchos casos para diferentes tipos de interfaces o de implementaciones.
 
-
 <img src="images/01-08.png">
+
+Las ventajas del uso del Framework de Colecciones estan claras:
+
+* Reduce el esfuerzo de programación, ya que de otra manera algún tipo de colección lo tendríamos que implementar nosotros y eso costaría bastante esfuerzo.
+* Aumenta la calidad y velocidad del programa tengamos en cuenta que esto está implementado por expertos con un código que está totalmente testeado, verificado y optimizado.
+* Permite la interoperabilidad con librerías de terceros, si nosotros creamos una colección que fuese propia posiblemente no podríamos utilizarla con una librería de un tercero, de otro proveedor, entonces tendríamos dificultades, teniendo un conjunto de implementaciones y de interfaces comunes vamos a poder hacer uso de este tipo de librería de una manera más fácil.
+* Por lo tanto reduce el esfuerzo para aprender el uso de estas librerías.
+* Incluso para que nosotros diseñamos las nuestras propias
+* Y de manera que además el software se puede ir reutilizando 
