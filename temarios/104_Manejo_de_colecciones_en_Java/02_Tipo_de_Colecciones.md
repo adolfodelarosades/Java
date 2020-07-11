@@ -24,7 +24,7 @@ En las primeras versiones de los iteradores lo que se permitía siempre era reco
 
 El hecho de que se pueda heredar de `Iterable` es lo que permite que usemos los métodos *forEach* o el bucle *forEach* que tenemos en la diapositiva, podríamos tener por la vía que fuese un iterable y podríamos iterar o lo podríamos recorrer con este bucle que es bastante usual.
 
-## Ejemplo de `Iterable<E>`
+## :computer: Ejemplo de `Iterable<E>`
 
 *`IterableApp`*
 
@@ -135,7 +135,7 @@ es decir que no va a variar el tiempo de búsqueda con el número de elementos q
 
 Lo que deciamos antes sobre los `HashSet` no podemos predecir nada sobre el orden de los elementos, es decir puede que los insertemos en un orden y que se nos devuelvan en un orden distinto una vez y otra vez y otra vez cada que lo quisiéramos recuperar, si es verdad que nos da el mejor rendimiento de todas las implementaciones de `Set` proporcionando un tiempo constante en las operaciones básicas, permite insertar valores nulos, como no se permiten valores repetidos lo podríamos insertar una sola vez, no es sincronizada es decir que no sería recomendable si la quisiéramos utilizar para hacer inserciones y consultas en un contexto múltihilo, a la hora de construirla se mejoraría mucho el rendimiento si establecemos una capacidad inicial lo más ajustada posible.
 
-#### Ejemplo de `HashSet<E>`
+#### :computer: Ejemplo de `HashSet<E>`
 
 *`HashSetApp`*
 
@@ -180,9 +180,273 @@ public class HashSetApp {
 }
 ```
 
-Aquí tenmos la implementación más sencilla de un `Set` que es pormedio de un `HashSet<E>`, cuando nosotros consultamos en la documentación de `HashSet<E>` vemos que tenemos diferente constructores, el más sencillo de ellos el constructor al cual no le pasamos ninguna argumento `Set<String> hashSet = new HashSet<>();` y que nos crea un `Set` un `hashSet` con 16 elementos y un factor de carga de 0.75, el factor de carga lo que representa es una especie de porcentaje a partir del cual el `Set` va a ir creciendo conforme nosotros le añadamos elementos, el conjugar bien estos dos elementos nos va a permitir que la función de hashing que utiliza por dentro sea lo más concreta posible y por tanto que el rendimiento de nuestro `HashSet<E>` séa lo mejor.
+Aquí tenemos la implementación más sencilla de un `Set` que es por medio de un `HashSet<E>`, cuando nosotros consultamos en la documentación de `HashSet<E>` vemos que tenemos diferente constructores, el más sencillo de ellos el constructor al cual no le pasamos ninguna argumento `Set<String> hashSet = new HashSet<>();` y que nos crea un `Set` un `hashSet` con 16 elementos y un factor de carga de 0.75, el factor de carga lo que representa es una especie de porcentaje a partir del cual el `Set` va a ir creciendo conforme nosotros le añadamos elementos, el conjugar bien estos dos elementos como deciamos antes, nos va a permitir que la función de hashing que utiliza por dentro sea lo más concreta posible y por tanto que el rendimiento de nuestro `HashSet<E>` séa lo mejor.
 
-En `Set<String> hashSet = new HashSet<>();` podemos apreciar el uso de genéricos es decir que hasta la versión 1.4 de Java lo que teníamos es que todas las colecciones lo que hacían eran almacenar `Object` y como cualquier objeto, cualquier clase hereda de `Object` podía almacenar cualquier cosa, sin embargo con el uso de Genericos 
+En `Set<String> hashSet = new HashSet<>();` podemos apreciar el uso de genéricos es decir que hasta la versión 1.4 de Java lo que teníamos es que todas las colecciones lo que hacían era almacenar `Object` y como cualquier objeto, cualquier clase de Java hereda de `Object` podía almacenar cualquier cosa, sin embargo con el uso de genéricos le podemos decir que tipo de dato vamos a almacenar exactamente en la colección, se lo podemos indicar directamente, de manera que al ser esto un `Set<String>` no podremos guardar por ejemplo un número. Y por último decir también sobre esta sentencia `Set<String> hashSet = new HashSet<>();` que estamos haciendo uso del operador `Diamond` hasta la versión 1.6 de Java teniamos que volver a indicar el tipo `Set<String> hashSet = new HashSet<String>();`  para invocar al constructor concreto, sin embargo el operador Diamond lo que nos permite es que se hiciera el tipo a la hora de hacer la construcción coja el tipo de la referencia y la sentencia nos queda un poco menos **VERBOSA**.
+
+
+Con el método `add` insertaremos algunos valores `Madrid`, `Barcelona` si insertamos de nuevo `Barcelona`  veremos como directamente se va a descartar insertaría `Sevilla`.
+
+Y como `HashSet` que hereda de `Set` que implementa `Collection` que a la vez implementa `Iterable` podemos recurrir al `for Each` o al método `foreach` para iterar nuestro `hashSet`.
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-71.png">
+
+Podemos ver que aun que hemos insertado Barcelona dos veces no aparece solo una vez ya que `HashSet` directamente descarta los valores repetidos.
+
+#### :computer: Ejemplo de `HashSet<E>` Variante new String
+
+*`HashSetAppObjetosString`*
+
+```java
+package net.openwebinars.colecciones.set.a.hashset;
+
+import java.util.*;
+
+/**
+ * Ejemplo de uso de la implementación HashSet
+ *
+ */
+public class HashSetAppObjetosString {
+
+    public static void main(String[] args) {
+
+        // Crea un HashSet con capacidad inicial para 16 elementos
+        // y un factor de carga de 0.75
+        // El factor de carga es a partir de que porcentaje de relleno
+        // el hashset amplía su tamaño
+        Set<String> hashSet = new HashSet<>();
+
+        // En la línea anterior hemos podido apreciar:
+        // - El uso de genéricos
+        // - El operador diamond <> para tener una sentencia menos "verbose"
+
+        hashSet.add(new String("Madrid"));
+        hashSet.add(new String("Barcelona"));
+        // Los valores repetidos simplemente se descartan
+        hashSet.add(new String("Barcelona")); // Valor repetido
+        hashSet.add(new String("Sevilla"));
+
+        for (String s: hashSet) {
+            System.out.println(s);
+        }
+        
+        System.out.println("");
+        
+        
+        // También con el método forEach
+        hashSet.forEach(System.out::println);
+
+    }
+}
+```
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-72.png">
+
+La Aplicación funciona exactamente igual.
+
+#### :computer: Ejemplo de `HashSet<E>` Variante Objeto Ciudad
+
+*`Ciudad`*
+
+```java
+package net.openwebinars.colecciones.set.a.hashset;
+
+public class Ciudad {
+	
+	private String nombre;
+	
+	
+	public Ciudad() {
+		super();
+	}
+
+	public Ciudad(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}	
+
+}
+```
+
+*`HashSetAppObjetosCiudad`*
+
+```java
+package net.openwebinars.colecciones.set.a.hashset;
+
+import java.util.*;
+
+/**
+ * Ejemplo de uso de la implementación HashSet
+ * 
+ */
+public class HashSetAppObjetosCiudad {
+
+    public static void main(String[] args) {
+
+        Set<Ciudad> hashSet = new HashSet<>();
+        
+        Ciudad madrid = new Ciudad("Madrid");
+        Ciudad barcelona = new Ciudad("Barcelona");
+        Ciudad sevilla = new Ciudad("Sevilla");
+
+        hashSet.add(madrid);
+        hashSet.add(barcelona);
+        // Los valores repetidos simplemente se descartan
+        hashSet.add(barcelona); // Valor repetido
+        hashSet.add(sevilla);
+
+        for (Ciudad c: hashSet) {
+            System.out.println(c.getNombre());
+        }
+        
+        System.out.println("");
+        
+        hashSet.forEach(item->System.out.println(item.getNombre()));
+    }
+}
+```
+
+Esta variante consiste en ya no usar Objetos String, hemos creado el JavaBean `Ciudad` y hemos creado objetos de este tipo y después los hemos añadido al `HashSet` usando el método `add`.
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-73.png">
+
+También nos excluye aquellos objetos repetidos, hasta aquí es el comportamiento que se esperaba.
+
+#### :computer: Ejemplo de `HashSet<E>` Variante new Ciudad
+
+*`HashSetAppObjetosCiudadNew`*
+
+```java
+package net.openwebinars.colecciones.set.a.hashset;
+
+import java.util.*;
+
+/**
+ * Ejemplo de uso de la implementación HashSet con new Ciudad(
+ * 
+ */
+public class HashSetAppObjetosCiudadNew {
+
+    public static void main(String[] args) {
+
+        Set<Ciudad> hashSet = new HashSet<>();
+        
+        hashSet.add(new Ciudad("Madrid"));
+        hashSet.add(new Ciudad("Barcelona"));
+        // Los valores repetidos simplemente se descartan
+        hashSet.add(new Ciudad("Barcelona")); // Valor repetido
+        hashSet.add(new Ciudad("Sevilla"));
+
+        for (Ciudad c: hashSet) {
+            System.out.println(c.getNombre());
+        }
+        
+        System.out.println("");
+        
+        hashSet.forEach(item->System.out.println(item.getNombre()));
+    }
+}
+```
+
+Esta variante consiste en ya no creado objetos de este tipo Ciudad sino que directamente los creamos dentro del método `add`, pensaríamos que lo único que hemos logrado con esto es ahorrarnos las variables.
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-74.png">
+
+Pero si observamos el resultado vemos que aquí si que nos inserta los dos objetos con nombre de "Barcelona", **¿Qué ha pasado aquí?**.
+
+#### :computer: Ejemplo de Aplicación `HashSet<E>`
+
+Finalmente vamos a ver un ejemplo de Aplicación de `HashSet<E>`.
+
+*`HashSetAppAplicacion`*
+
+```java
+package net.openwebinars.colecciones.set.a.hashset;
+
+import java.util.*;
+
+/**
+ * Ejemplo de uso de la implementación HashSet
+ * @author Luis Miguel López Magaña
+ */
+public class HashSetAppAplicacion {
+
+    public static void main(String[] args) {
+
+        // EJEMPLO DE APLICACIÓN: eliminación de duplicados en otra colección
+        // Crea un HashSet a partir de otra colección
+        // eliminando los duplicados que contenga
+        Collection<String> palabrasDelQuijote = palabrasQuijote();
+        Set<String> quijoteHashSet = new HashSet<>(palabrasDelQuijote);
+
+        // Comparación de número de elementos
+        System.out.println("Total de palabras en el 1º párrafo: " + palabrasDelQuijote.size());
+        System.out.println("Palabras diferentes en el 1º párrafo: " + quijoteHashSet.size());
+        
+        System.out.println("");
+        
+        // Se puede comprobar si contiene algún elemento
+        if (quijoteHashSet.contains("hidalgo"))
+            System.out.println("Contiene la palabra hidalgo");
+        else
+            System.out.println("No contiene la palabra hidalgo");
+        
+        System.out.println("");
+
+        // Imprimir todos los elementos del hashset
+        quijoteHashSet.forEach(System.out::println);
+
+        /*
+            Aunque todavía no lo hemos trabajado, una de las colecciones que más usarás a
+            lo largo de tu vida como programador es ArrayList<E>. HashSet se le parece
+            en bastantes funcionalidades, y ofrece mejor rendimiento. Por tanto:
+
+            - Si no queremos manejar repetidos
+            - No importa el orden (de valor o inserción)
+
+            Podemos usar HashSet como implementación.
+
+            Un ejemplo lo podemos encontrar al usar JPA/Hibernate en el manejo de
+            asociaciones @OneToMany (uno-a-muchos).
+            
+         */
+
+    }
+
+    public static Collection<String> palabrasQuijote() {
+        String quijote = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda. El resto della concluían sayo de velarte, calzas de velludo para las fiestas, con sus pantuflos de lo mesmo, y los días de entresemana se honraba con su vellorí de lo más fino. Tenía en su casa una ama que pasaba de los cuarenta, y una sobrina que no llegaba a los veinte, y un mozo de campo y plaza, que así ensillaba el rocín como tomaba la podadera. Frisaba la edad de nuestro hidalgo con los cincuenta años; era de complexión recia, seco de carnes, enjuto de rostro, gran madrugador y amigo de la caza. Quieren decir que tenía el sobrenombre de Quijada, o Quesada, que en esto hay alguna diferencia en los autores que deste caso escriben; aunque por conjeturas verosímiles se deja entender que se llamaba Quijana. Pero esto importa poco a nuestro cuento: basta que en la narración dél no se salga un punto de la verdad.";
+        quijote = quijote.toLowerCase().replace(".", "").replace(",", "");
+        return Arrays.asList(quijote.split(" "));
+    }
+}
+```
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-75.png">
+
+
+
+
+mujer en A3 y como veíamos este se alimenta al colegio que implementa iterable pues podemos hacer uso del bucle for mejorado para para poder utilizar vale algo más de código pero podríamos ver al menos esta parte de aquí podemos ver como aunque hemos insertado cadena 22 veces no aparece dos veces porque directamente descarta los valores repetidos ponme ejemplo de aplicación podríamos pensar en la eliminación de elementos duplicados por ejemplo de otra colección frase tiene un constructor que nos permite construir un set a partir de otra colección cualquiera ver que eres de collection y por ejemplo si quisiéramos buscar en un párrafo las palabras que sean únicas decir descartando las repetidas no podríamos hacer de la siguiente manera podríamos tener las palabras por ejemplo de todo el libro del Quijote o al menos del primer párrafo del mismo eso se obtiene a través de un método por aquí abajo que tampoco requiere de mucha historia porque lo que se hace definir todo en una cadena de caracteres lo pasamos a minúscula por simplificar se reemplazan los puntos y las comas por los valores vacíos decir que directamente se borran y lo que hacemos es flirtear no para obtener explicarlo por espacio en blanco para obtener las palabras distintas no de manera que aquí tendríamos una colección con las distintas palabras que incluye el primer párrafo del Quijote construimos un café a partir de esta colección lo que vamos a tener es que se van a descartar todos los elementos repetidos es como si recordaramos esta colección construyéramos el cassette vacío iteramos sobre sobre esta colección y la fuéramos añadiendo una una igual que antes hemos visto que la añadir la segunda vez un valor directamente se descarta aquí se van a descargar también los las palabras que estén que estén repetidas y lo podríamos comprobar después también podemos comprobar como el método contains nos permite verificar si si este set contiene un determinado valor o si no lo tiene devolvería tú o Falls en el caso que corresponda y vamos a poder ver cómo podemos iterar sobre todas las palabras y ver cómo se han descartado los repetidos porque al ejecutarlo podemos ver que la palabra Hidalgo se contiene el el total de palabra en el primer párrafo en la colección por la repetida era 217 y sin embargo en el segundo el total de palabras después de haber quitado las repetidas son solo 136 de hecho las palabras que se encuentran en este primer párrafo del Quijote también las tenéis por aquí cómo podemos comprobar un set es bastante adecuado un hámster cuando queremos trabajar con colecciones que quieran eliminar de alguna manera lo repetido y de las cuales no nos haga falta nada con respecto al horno con linked ser lo que tenemos es una especie de hamsters pero que nos va a permitir de alguna manera tenerlo elemento poder obtener los elementos mejor dicho en el orden en el cual lo insertamos por si en algún momento no
 
 
 
