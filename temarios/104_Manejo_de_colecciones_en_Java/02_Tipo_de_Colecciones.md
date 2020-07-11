@@ -35,7 +35,7 @@ import java.util.Arrays;
 
 /**
  *  Ejemplo de uso de la interfaz Iterable
- *  @author Luis Miguel López Magaña
+ *  
  */
 public class IterableApp {
 
@@ -133,7 +133,58 @@ es decir que no va a variar el tiempo de búsqueda con el número de elementos q
 
 <img src="images/01-17.png">
 
-Lo que deciamos antes sobre los `HashSet` no podemos predecir nada sobre el orden de los elementos, es decir puede que los insertemos en un orden y que se nos devuelvan en un orden distinto una vez y otra vez y otra vez cada que lo quisiéramos recuperar, si es verdad que nos da el mejor rendimiento de todas las implementaciones de `Set` proporcionando un tiempo constante en las operaciones básicas, permite insertar valores nulos, como no se permiten valores repetidos lo podríamos insertar una sola vez, no es sincronizada es decir que no sería recomendable si la quisiéramos utilizar para hacer inserciones y consultas en un contexto múltihilo, a la hora de construirla se mejoraría mucho el rendimiento si establecemos una capacidad inicial lo más ajustada posible. 
+Lo que deciamos antes sobre los `HashSet` no podemos predecir nada sobre el orden de los elementos, es decir puede que los insertemos en un orden y que se nos devuelvan en un orden distinto una vez y otra vez y otra vez cada que lo quisiéramos recuperar, si es verdad que nos da el mejor rendimiento de todas las implementaciones de `Set` proporcionando un tiempo constante en las operaciones básicas, permite insertar valores nulos, como no se permiten valores repetidos lo podríamos insertar una sola vez, no es sincronizada es decir que no sería recomendable si la quisiéramos utilizar para hacer inserciones y consultas en un contexto múltihilo, a la hora de construirla se mejoraría mucho el rendimiento si establecemos una capacidad inicial lo más ajustada posible.
+
+#### Ejemplo de `HashSet<E>`
+
+*`HashSetApp`*
+
+```java
+package net.openwebinars.colecciones.set.a.hashset;
+
+import java.util.*;
+
+/**
+ * Ejemplo de uso de la implementación HashSet
+ * 
+ */
+public class HashSetApp {
+
+   public static void main(String[] args) {
+
+      // Crea un HashSet con capacidad inicial para 16 elementos
+      // y un factor de carga de 0.75
+      // El factor de carga es a partir de que porcentaje de relleno
+      // el hashset amplía su tamaño
+      Set<String> hashSet = new HashSet<>();
+
+      // En la línea anterior hemos podido apreciar:
+      // - El uso de genéricos
+      // - El operador diamond <> para tener una sentencia menos "verbose"
+
+      hashSet.add("Madrid");
+      hashSet.add("Barcelona");
+      // Los valores repetidos simplemente se descartan
+      hashSet.add("Barcelona"); // Valor repetido
+      hashSet.add("Sevilla");
+
+      for (String s: hashSet) {
+         System.out.println(s);
+      }
+        
+      System.out.println("");
+        
+      // También con el método forEach
+      hashSet.forEach(System.out::println);
+   }
+}
+```
+
+Aquí tenmos la implementación más sencilla de un `Set` que es pormedio de un `HashSet<E>`, cuando nosotros consultamos en la documentación de `HashSet<E>` vemos que tenemos diferente constructores, el más sencillo de ellos el constructor al cual no le pasamos ninguna argumento `Set<String> hashSet = new HashSet<>();` y que nos crea un `Set` un `hashSet` con 16 elementos y un factor de carga de 0.75, el factor de carga lo que representa es una especie de porcentaje a partir del cual el `Set` va a ir creciendo conforme nosotros le añadamos elementos, el conjugar bien estos dos elementos nos va a permitir que la función de hashing que utiliza por dentro sea lo más concreta posible y por tanto que el rendimiento de nuestro `HashSet<E>` séa lo mejor.
+
+En `Set<String> hashSet = new HashSet<>();` podemos apreciar el uso de genéricos es decir que hasta la versión 1.4 de Java lo que teníamos es que todas las colecciones lo que hacían eran almacenar `Object` y como cualquier objeto, cualquier clase hereda de `Object` podía almacenar cualquier cosa, sin embargo con el uso de Genericos 
+
+
 
 ### `LinkedHashSet<E>`
 
@@ -149,7 +200,8 @@ Podemos ver también la siguiente implementación qué es `LinkedHashSet<E>`con 
 
 <img src="images/01-20.png">
 
-la cuestión sería como es natural que para para que los elementos tuvieran ordenados según su orden natural pues las clases que insertemos el tipo de dato tiene que implementar comparable y de esta manera bueno pues podría mantener el orden como decía esta notación o qué se utiliza en algorítmica vale para medir bueno fue debido a su estructura de árbol la operación es por ejemplo la búsqueda estarían dejamos acostada en no logaritmo de N decir que no no va directamente no es directamente proporcional el Prendimiento al al número de elementos sino que estaría un poco un poco por debajo al ser en en este tipo de bueno pues vamos a conocer vamos a ver en acción alguna odelo ejemplo vale de ser el primero sería cassette hemos visto que la implementación más sencilla que tenemos cuando nosotros consultamos en la documentación dejase vemos que tenemos diferente constructores el más sencillo de ellos el constructor al cual no no le pasamos ninguna argumento y que no bueno no crea un set un hámster con 16 elementos y un factor de carga de 075 factor de carga lo que representa una especie de porcentaje a partir del cual el se va a ir creciendo conforme nosotros lee le añadamos elementos cómo te sientes el conjugar bien estos dos elementos nos va a permitir es que la función dejasen que utiliza por dentro pues sea lo más concreta posible y por tanto que el rendimiento de nuestro hámster sé a lo mejor aquí podemos apreciar como decía antes el uso de genéricos es decir que hasta la versión 14 de estaba no por lo que teníamos es que todas las colecciones lo que hacían eran almacenar noche y como cualquier objeto almacenar cualquier cosa sin embargo con el uso de
+La cuestión sería como es natural que para que los elementos estuvieran ordenados según su orden natural, las clases que insertemos en el tipo de dato tiene que implementar `Comparable` y de esta manera podría mantener el orden, como decía esta notación `O(log(N))` qué se utiliza en algorítmica para medir debido a su estructura de árbol, las operaciones por ejemplo de búsqueda estarían acotada en NO logaritmo de N, es decir que no es directamente proporcional el rendimiento al al número de elementos sino que estaría un poco por debajo al ser este tipo de Logaritmo.
+
 
 
 
