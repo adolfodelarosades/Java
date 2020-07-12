@@ -1377,11 +1377,175 @@ de la cena a la hora de hacer una cola con prioridad tendríamos prioritic yo va
 
 #### :computer: Ejemplo de Aplicación `ArrayQueue<E>`
 
+*`QueueArrayDequeApp`*
+
+```java
+package net.openwebinars.colecciones.queue.a.queue;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+/**
+ * Ejemplo de uso de los métodos de Queue<E>
+ *
+ * 
+ */
+public class QueueArrayDequeApp {
+
+    public static void main(String[] args) {
+
+        // Podemos usar una cola si necesitamos obtener los elementos en el orden
+        // en el cual los hemos insertado
+        Queue<String> meses = new ArrayDeque<>();
+
+        // Insertamos los diferentes meses del año
+        meses.add("Enero");
+        meses.add("Febrero");
+        meses.add("Marzo");
+        meses.add("Abril");
+        meses.add("Mayo");
+        meses.add("Junio");
+        meses.add("Julio");
+        meses.add("Agosto");
+        meses.add("Septiembre");
+        meses.add("Octubre");
+        meses.add("Noviembre");
+        meses.add("Diciembre");
+
+        // ¿Qué mes está ahora mismo en la cabecera de la cola?
+        System.out.println(meses.element());
+
+        System.out.println("\n\n");
+        // Vaciamos la cola, obteniendo todos los meses
+        while (!meses.isEmpty()) {
+            System.out.println(meses.remove());
+        }
+
+    }
+}
+```
+
+Aquí tenemosel ejemplo de una Cola `Queue` para gestionar los meses del año estamos usando la implementación con `ArrayDeque` que es la más eficiente.
+
+```java
+// Podemos usar una cola si necesitamos obtener los elementos en el orden
+// en el cual los hemos insertado
+Queue<String> meses = new ArrayDeque<>();
+```
+
+Podemos insertar los meses en un determinado orden de inserción.
+
+```java
+// Insertamos los diferentes meses del año
+meses.add("Enero");
+meses.add("Febrero");
+meses.add("Marzo");
+meses.add("Abril");
+meses.add("Mayo");
+meses.add("Junio");
+meses.add("Julio");
+meses.add("Agosto");
+meses.add("Septiembre");
+meses.add("Octubre");
+meses.add("Noviembre");
+meses.add("Diciembre");
+```
+
+El método `element()` nos permita consultar la cabecera es decir el primer elemento.
+
+```java
+// ¿Qué mes está ahora mismo en la cabecera de la cola?
+System.out.println(meses.element());
+```
+El método `remove()` nos permite eliminar un elemento devolviendo el elemento eliminado, por lo que con el siguiente bucle:
+
+```java
+// Vaciamos la cola, obteniendo todos los meses
+while (!meses.isEmpty()) {
+   System.out.println(meses.remove());
+}
+```
+
+Recorremos la cola mientras no este vacía, hasta que vaciamos la cola, obteniendo todos los meses, es como ver pasar los meses. Nos devolvera los meses en el orden de inserción. 
+
+Si fueran personas en la caja de un supermercado representaría como vamos atendiendo a los clientes.
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-93.png">
+
+#### :computer: Ejemplo de Aplicación `PriorityQueue<E>`
+
+*`PriorityQueueApp`*
+
+```java
+package net.openwebinars.colecciones.queue.a.queue;
+
+import net.openwebinars.colecciones.queue.a.queue.model.FifoEntry;
+import net.openwebinars.colecciones.queue.a.queue.model.Pasajero;
+
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+/**
+ * Ejemplo de uso de una cola con prioridad, PriorityQueue
+ *
+ * 
+ */
+public class PriorityQueueApp {
+
+    public static void main(String[] args) {
+
+        // Una cola con prioridad nos permite "ordenar" un poco los
+        // elementos dentro de la cola.
+        // El tipo de los elementos debe implementar Comparable
 
 
+        // Creamos una cola para gestionar el orden de embarque de algunos pasajeros
+        // a un medio de transporte. Algunos pasajeros tiene mayor prioridad que otros,
+        // según lo hayan abonado al comprar su billete.
+        Queue<Pasajero> cola = new PriorityQueue<>();
 
 
+        // Los pasajeros van llegando a la cola
+        cola.add(new Pasajero("María", 1));
+        cola.add(new Pasajero("Manuel", 2));
+        cola.add(new Pasajero("Antonio", 1));
+        cola.add(new Pasajero("Rosa", 3));
+        cola.add(new Pasajero("Ana", 5));
 
+
+        // Es hora de embarcar.
+        // Los pasajeros van pasando conforme se va vaciando la cola
+        while(!cola.isEmpty())
+            System.out.println(cola.remove());
+
+
+        // ¡OJO! No se nos asegura que los elementos de igual
+        // prioridad se obtengan en orden de inserción :S
+        // Para ello, tendríamos que añadir un segundo elemento
+        // que nos permita manejar el orden de inserción
+
+        Queue<FifoEntry<Pasajero>> cola2 = new PriorityQueue<>();
+
+
+        cola2.add(new FifoEntry<Pasajero>(new Pasajero("María", 1)));
+        cola2.add(new FifoEntry<Pasajero>(new Pasajero("Manuel", 2)));
+        cola2.add(new FifoEntry<Pasajero>(new Pasajero("Antonio", 1)));
+        cola2.add(new FifoEntry<Pasajero>(new Pasajero("Rosa", 3)));
+        cola2.add(new FifoEntry<Pasajero>(new Pasajero("Ana", 5)));
+
+        // Gracias a FifoEntry, ahora sí que obtenemos los elementos
+        // de igual prioridad en orden de inserción
+        System.out.println("\n\n");
+        while(!cola2.isEmpty())
+            System.out.println(cola2.remove().getEntry());
+
+    }
+}
+```
+
+La clase `PriorityQueueApp`
 
 
 <img src="images/01-36.png">
