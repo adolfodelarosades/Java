@@ -20,7 +20,7 @@ Para su comodidad, puede optar por descargar la lección del curso individual. T
 ### Tabla de contenido
 
 * Lección 00: [Indice]()
-* Lección 01: [Introducción]]()
+* Lección 01: [Introducción]()
 * Lección 02: [¿Qué es un programa Java?]()
 * Lección 03: [Crear una clase principal de Java]()
 * Lección 04: [Datos en un carrito]()
