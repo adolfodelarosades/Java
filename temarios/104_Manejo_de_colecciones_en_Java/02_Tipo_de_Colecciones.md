@@ -977,7 +977,7 @@ Con esto hemos visto todas las implementaciones de `Set` al menos las más usual
 
 <img src="images/01-85.png">
 
-### `List<E>`
+## `List<E>`
 
 <img src="images/01-21.png">
 
@@ -1009,7 +1009,7 @@ La implementación de `List` la podemos hacer a través de un `ArrayList` o un `
 
 <img src="images/01-28.png">
 
-#### :computer: Ejemplo de Aplicación `List<E>`
+### :computer: Ejemplo de Aplicación `List<E>`
 
 Vamos a comprobar esto en un ejemplo con `List<E>`.
 
@@ -1047,13 +1047,13 @@ public class ListApp {
 
 Aquí tenemos lo que hemos visto sería bastante sencillo, tenemos la opción de hacer un acceso posicional y seguimos teniendo la posibilidad de iterar sobre los distintos elementos también con el bucle `for Each` o mediante el método `.forEach` y una expresión lambda.
 
-#### Ejecutar la Aplicación.
+### Ejecutar la Aplicación.
 
 <img src="images/01-86.png">
 
 Si queremos ejecutar este ejemplo que es sencillo nos imprimiría `Uno Dos Tres cinco Seis` tal cual se los encuentra, en `tercerElemento` estaría `Tres`.
 
-#### :computer: Ejemplo de Aplicación `ArrayList<E>`
+### :computer: Ejemplo de Aplicación `ArrayList<E>`
 
 La implementación de `ArrayList<E>` ya digo que no agrega nada a lo que define la interfaz `List<E>` es decir que seguimos teniendo la posibilidad de acceso posicional tanto en modo lectura como en escritura.
 
@@ -1245,7 +1245,6 @@ Hacemos una iteración de atrás hacia adelante sobre este `ArrayList` mediante 
 
 <img src="images/01-89.png">
 
-
 Por último decíamos que teníamos las operaciones sobre un rango de elementos:
 
 ```java
@@ -1286,11 +1285,11 @@ Vemos que la lista original se ha visto modificada a través de la sublista pues
 
 Todo esto como ejemplo de uso de `ArrayList<E>`.
 
-#### Ejecutar la Aplicación.
+### Ejecutar la Aplicación.
 
 <img src="images/01-92.png">
 
-#### Otras interfaces relacionados con `List<E>`
+### Otras interfaces relacionados con `List<E>`
 
 <img src="images/01-29.png">
 
@@ -1375,7 +1374,7 @@ Hemos visto antes `LinkedList<E>` tampoco sería `LinkedQueue<E>` la más adecua
 
 de la cena a la hora de hacer una cola con prioridad tendríamos prioritic yo vale
 
-#### :computer: Ejemplo de Aplicación `ArrayQueue<E>`
+### :computer: Ejemplo de Aplicación `ArrayQueue<E>`
 
 *`QueueArrayDequeApp`*
 
@@ -1470,11 +1469,11 @@ Recorremos la cola mientras no este vacía, hasta que vaciamos la cola, obtenien
 
 Si fueran personas en la caja de un supermercado representaría como vamos atendiendo a los clientes.
 
-#### Ejecutar la Aplicación.
+### Ejecutar la Aplicación.
 
 <img src="images/01-93.png">
 
-#### :computer: Ejemplo de Aplicación `PriorityQueue<E>`
+### :computer: Ejemplo de Aplicación `PriorityQueue<E>`
 
 La clase `PriorityQueueApp` nos permite crear una cola con prioridad de manera que los diferentes elementos deben implementar `Comparable` y aquellos elementos que mientras su orden natural sean mayores tendrán mayor prioridad.
 
@@ -1663,7 +1662,7 @@ public class PriorityQueueApp {
 }
 ```
 
-#### Ejecutar la Aplicación.
+### Ejecutar la Aplicación.
 
 <img src="images/01-94.png">
 
@@ -1672,7 +1671,7 @@ Al ejecutar la aplicación obtendremos los pasajeros por prioridad pero los que 
 Los de igual prioridad fijaos que nos ha desordenado vale compro aquí lo ha desordenado Antonio luego después que María y sin embargo lo ha puesto antes sin embargo aquí se ordena por prioridad y a igual prioridad no garantizaría que sería por el orden de llegada.
 
 
-#### :computer: Ejemplo de Aplicación `ArrayDeque<E>`
+### :computer: Ejemplo de Aplicación `ArrayDeque<E>`
 
 *`StackApp`*
 
@@ -1856,8 +1855,7 @@ y suponemos que la expresión va a ser correcta,
 boolean result = true;
 ```
 
-
-recorremos cada uno de los caracteres de la expresión y si el carácter actual es una apertura de parentesis lo insertamos en la pila, recordar que había una serie de métodos de `Deque` que nos permiten tratar una cola doble como está, como si fuese una Pila `addFirst` y `pollFirst`, si encontramos una apertura de paréntesis lo metemos en la pila si el carácter es un cierre de paréntesis lo que hacemos es sacarlo de la pila,
+Recorremos cada uno de los caracteres de la expresión y si el carácter actual es una apertura de parentesis lo insertamos en la pila, recordar que había una serie de métodos de `Deque` que nos permiten tratar una cola doble como está, como si fuese una Pila `addFirst` y `pollFirst`, si encontramos una apertura de paréntesis lo metemos en la pila si el carácter es un cierre de paréntesis lo que hacemos es sacarlo de la pila,
 
 ```java
 // Recorremos la expresión
@@ -1893,7 +1891,7 @@ return result;
 Por ejemplo al tratar la expresión `(((a+b` la pila no está vacía no tiene ningún cierre de paréntesis la expresión también sería erróneo en cualquier caso lo que hacemos devolver el resultado.
 
 
-#### Ejecutar la Aplicación.
+### Ejecutar la Aplicación.
 
 <img src="images/01-95.png">
 
