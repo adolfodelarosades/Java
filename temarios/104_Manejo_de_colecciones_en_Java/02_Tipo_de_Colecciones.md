@@ -1290,24 +1290,41 @@ Todo esto como ejemplo de uso de `ArrayList<E>`.
 
 <img src="images/01-92.png">
 
-#### Otras interfaces relacionados con de List<E>
-
-
+#### Otras interfaces relacionados con `List<E>`
 
 <img src="images/01-29.png">
 
-otro interfaces relacionados con list serían tío y de que nos permiten implementar una cola y una cola doble que también nos permitirá de esa manera obtener una una lista vale una cola una acción es una cola de tipo fijo se suele poner como ejemplo siempre la cola del supermercado es decir el primero que llega el primero que sale perfil nosotros intentaremos lo elemento al final de la cola por los que se conoce por la cola y saldrían por la cabeza conforme vamos insertando elementos se van viendo empujado vale o mejor dicho conforme nos vamos sacando bueno pues se van desplazando los elementos de la cola hacia la cabeza vale de operaciones las cuales like que lanzan una excepción a para insertar Remus para extraer y element para examinar elemen hace lo mismo que Remus pero sin eliminar elemento de la cabeza de la cola si sucede algún tipo de error lanza una excepción y tenemos también una implementación que devuelve un valor especial como ópera Paul y Big que harían la misma operación espero que no lanzarían una una excepción sino que bueno pues si por ejemplo no se puede insertar un elemento pues nos devolvería un valor nulo si no hay ningún elemento nos devolvería un valor nulo en lugar de lanzar una excepción contenido dos veces porque López en León
-
-
-
-
-
-
-
+Otros interfaces relacionados con `List<E>` serían `Queue` y `Deque` que nos permiten implementar una cola y una cola doble, que también nos permitirán de esa manera obtener una una lista.
 
 <img src="images/01-30.png">
+
+Una cola una `Queue` es una cola de tipo FIFO se suele poner como ejemplo siempre la cola del supermercado, es decir el primero que llega es el primero que sale, nosotros insertariamos los elemento al final de la cola llamada cola y saldrían por la cabeza, conforme vamos insertando elementos se van viendo empujado o mejor dicho conforme los vamos sacando se van desplazando los elementos de la cola hacia la cabeza. 
+
 <img src="images/01-31.png">
+
+Tiene una serie de operaciones algunas lanzan una excepción:
+
+* `add(e)` Inserción.
+* `remove()` Extraer.
+* `element()` Examinar, hace lo mismo que `remove()` pero sin eliminar el elemento de la cabeza de la cola.
+
+Si sucede algún tipo de error lanzan una excepción.
+
+Y tenemos también una implementación que devuelve un valor especial como:
+
+* `offer(e)` Inserción.
+* `poll()` Extraer.
+* `peek` Examinar.
+
+Que harían las misma operación pero que no lanzarían una una excepción si por ejemplo no se puede insertar un elemento nos devolvería un valor nulo, si no hay ningún elemento nos devolvería un valor nulo en lugar de lanzar una excepción.
+
 <img src="images/01-32.png">
+
+contenido dos veces porque López en León
+
+
+
+
 <img src="images/01-33.png">
 <img src="images/01-34.png">
 <img src="images/01-35.png">
