@@ -1320,14 +1320,70 @@ Que harían las misma operación pero que no lanzarían una una excepción si po
 
 <img src="images/01-32.png">
 
-contenido dos veces porque López en León
-
-
-
+La interfaz `Deque<E>` son las siglas de una cola doblemente enlazada,  Double Ended Que, nos permite tener una cola que funciona como cola en ambos extremos, que puede ser útil en algún tipo de sistema o también podría funcionar como una pila, incluso como una pila doble pero sobre todo como una pila que suele ser para lo que más se utiliza.
 
 <img src="images/01-33.png">
+
+Si la tratamos como una cola tendríamos el siguiente mapeo en los métodos que tendríamos que utilizar.
+
+* `add(e) -> addLast(e)` Inserción.
+* `remove() -> removeFirst()` Extraer.
+* `element() -> getFirst()` Examinar.
+
+Y para la implementación que devuelve un valor especial:
+
+* `offer(e) -> offerLast(e)` Inserción.
+* `poll() -> pollFirst()` Extraer.
+* `peek -> peekFirst()` Examinar.
+
+Y si lo queremos trabajar como pila tenemos la clase `Stack<E>` que no vamos a visitar tampoco tiene una serie de métodos:
+
+* `push(e)` Inserción.
+* `pop()` Extraer.
+* `peek` Examinar.
+
+Y si tratamos `Deque<E>` como pilas tendríamos que hacer siempre la inserción y la obtención desde el principio.
+
+* `addFirst(e)` Inserción.
+* `removeFirst()` Extraer.
+* `getFirst` Examinar.
+
+Y para la implementación que devuelve un valor especial:
+
+* `offerFirst(e)` Inserción.
+* `pollFirst()` Extraer.
+* `peekFirst` Examinar.
+
 <img src="images/01-34.png">
+
+Si lo tratamos como una cola doble tendremos que trabajar con los mismos métodos pero en uno u otro extremo siempre con la coletilla de `First` o `Last`.
+
 <img src="images/01-35.png">
+
+Vamos a ver algún ejemplo de estas implementaciones tenemos la posibilidad con la implementación de `Queue<E>` de trabajar con:
+
+* `PriorityQueue<E>` 
+* `ArrayQueue<E>` 
+* `LinkedQueue<E>` 
+
+Y con `Deque<E>` trabajar con:
+
+* `ArrayDeque<E>`
+* `LinkedDeque<E>`
+
+Hemos visto antes `LinkedList<E>` tampoco sería `LinkedQueue<E>` la más adecuada si queremos trabajar con una cola, sería más adecuada por ejemplo `ArrayQueue<E>`, si queremos trabajar con prioridad por ejemplo `PriorityQueue<E>` y si queremos trabajar con `Deque<E>` pues podríamos trabajar con alguna de estas implementaciones  `ArrayDeque<E>` o `LinkedDeque<E>`. 
+
+de la cena a la hora de hacer una cola con prioridad tendríamos prioritic yo vale
+
+#### :computer: Ejemplo de Aplicación `ArrayQueue<E>`
+
+
+
+
+
+
+
+
 <img src="images/01-36.png">
 <img src="images/01-37.png">
 <img src="images/01-38.png">
