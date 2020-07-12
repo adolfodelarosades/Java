@@ -1003,6 +1003,12 @@ Hemos visto que tenemos una serie de elementos de iteración también extendida 
 
 Podemos también obtener un *View* una especie de copia de la lista pero que realmente no es una copia porque se ofrece a través de la lista subyacente y si queremos tener ese subconjunto de la lista podemos trabajar con el con cualquier tipo de operación de inserción actualización y borrado de manera que la lista subyacente la lista general grande se vería modificada por por ese tipo de operación.
 
+<img src="images/01-27.png">
+
+La implementación de `List` la podemos hacer a través de un `ArrayList` o un `LinkedList`. `ArrayList` es la más adecuada en la mayoría de las situaciones, el acceso por índice se hacen en tiempo constante, la inserción en media también sería en un tiempo constante, ocupa menos espacio en memoria que `LinkedList` sin embargo `LinkedList` suele tener un peor rendimiento, las distintas operaciones en el acceso depende mucho del tamaño del `LinkedList` y suele ocupar más espacio por eso su uso suele estar circunscrito a una serie de operaciones muy concretas.
+
+<img src="images/01-28.png">
+
 #### :computer: Ejemplo de Aplicación `List<E>`
 
 Vamos a comprobar esto en un ejemplo con `List<E>`.
@@ -1046,15 +1052,6 @@ Aquí tenemos lo que hemos visto sería bastante sencillo, tenemos la opción de
 <img src="images/01-86.png">
 
 Si queremos ejecutar este ejemplo que es sencillo nos imprimiría `Uno Dos Tres cinco Seis` tal cual se los encuentra, en `tercerElemento` estaría `Tres`.
-
-
-#### Implementación de `ArrayList<E>`
-
-<img src="images/01-27.png">
-
-La implementación `ArrayList` que ya la hemos comentado qué es la más adecuada en la mayoría de las situaciones, el acceso por índice se hacen en tiempo constante, la inserción en media también sería en un tiempo constante, ocupa menos espacio en memoria que `LinkedList` sin embargo `LinkedList` suele tener un peor rendimiento, las distintas operaciones en el acceso depende mucho del tamaño del `LinkedList` y suele ocupar más espacio por eso su uso suele estar circunscrito a una serie de operaciones muy concretas.
-
-<img src="images/01-28.png">
 
 #### :computer: Ejemplo de Aplicación `ArrayList<E>`
 
