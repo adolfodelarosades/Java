@@ -1047,6 +1047,15 @@ Aquí tenemos lo que hemos visto sería bastante sencillo, tenemos la opción de
 
 Si queremos ejecutar este ejemplo que es sencillo nos imprimiría `Uno Dos Tres cinco Seis` tal cual se los encuentra, en `tercerElemento` estaría `Tres`.
 
+
+#### Implementación de `ArrayList<E>`
+
+<img src="images/01-27.png">
+
+La implementación `ArrayList` que ya la hemos comentado qué es la más adecuada en la mayoría de las situaciones, el acceso por índice se hacen en tiempo constante, la inserción en media también sería en un tiempo constante, ocupa menos espacio en memoria que `LinkedList` sin embargo `LinkedList` suele tener un peor rendimiento, las distintas operaciones en el acceso depende mucho del tamaño del `LinkedList` y suele ocupar más espacio por eso su uso suele estar circunscrito a una serie de operaciones muy concretas.
+
+<img src="images/01-28.png">
+
 #### :computer: Ejemplo de Aplicación `ArrayList<E>`
 
 La implementación de `ArrayList<E>` ya digo que no agrega nada a lo que define la interfaz `List<E>` es decir que seguimos teniendo la posibilidad de acceso posicional tanto en modo lectura como en escritura.
@@ -1284,19 +1293,21 @@ Todo esto como ejemplo de uso de `ArrayList<E>`.
 
 <img src="images/01-92.png">
 
-#### Implementación de List<E>
-
-<img src="images/01-27.png">
-
-bellies incrementacion ArrayList que ya la hemos comentado vale qué es la más adecuada en la mayoría de las situaciones el acceso por índice se hacen tiempo constante la inserción en media también sería en un tiempo constante ocupa menos espacio en memoria que limpies list sin embargo limpia el suele tener un peor rendimiento las distintas operaciones el acceso pues depende mucho del tamaño de LinkedList y suele ocupar más spa vale por eso su uso suele estar circunscrito a una serie de operaciones muy concretas otro interfaces relacionados con list serían tío y de que nos permiten implementar una cola y una cola doble que también nos permitirá de esa manera obtener una una lista vale una cola una acción es una cola de tipo fijo se suele poner como ejemplo siempre la cola del supermercado es decir el primero que llega el primero que sale perfil nosotros intentaremos lo elemento al final de la cola por los que se conoce por la cola y saldrían por la cabeza conforme vamos insertando elementos se van viendo empujado vale o mejor dicho conforme nos vamos sacando bueno pues se van desplazando los elementos de la cola hacia la cabeza vale de operaciones las cuales like que lanzan una excepción a para insertar Remus para extraer y element para examinar elemen hace lo mismo que Remus pero sin eliminar elemento de la cabeza de la cola si sucede algún tipo de error lanza una excepción y tenemos también una implementación que devuelve un valor especial como ópera Paul y Big que harían la misma operación espero que no lanzarían una una excepción sino que bueno pues si por ejemplo no se puede insertar un elemento pues nos devolvería un valor nulo si no hay ningún elemento nos devolvería un valor nulo en lugar de lanzar una excepción contenido dos veces porque López en León
+#### Otras interfaces relacionados con de List<E>
 
 
 
-
-
-
-<img src="images/01-28.png">
 <img src="images/01-29.png">
+
+otro interfaces relacionados con list serían tío y de que nos permiten implementar una cola y una cola doble que también nos permitirá de esa manera obtener una una lista vale una cola una acción es una cola de tipo fijo se suele poner como ejemplo siempre la cola del supermercado es decir el primero que llega el primero que sale perfil nosotros intentaremos lo elemento al final de la cola por los que se conoce por la cola y saldrían por la cabeza conforme vamos insertando elementos se van viendo empujado vale o mejor dicho conforme nos vamos sacando bueno pues se van desplazando los elementos de la cola hacia la cabeza vale de operaciones las cuales like que lanzan una excepción a para insertar Remus para extraer y element para examinar elemen hace lo mismo que Remus pero sin eliminar elemento de la cabeza de la cola si sucede algún tipo de error lanza una excepción y tenemos también una implementación que devuelve un valor especial como ópera Paul y Big que harían la misma operación espero que no lanzarían una una excepción sino que bueno pues si por ejemplo no se puede insertar un elemento pues nos devolvería un valor nulo si no hay ningún elemento nos devolvería un valor nulo en lugar de lanzar una excepción contenido dos veces porque López en León
+
+
+
+
+
+
+
+
 <img src="images/01-30.png">
 <img src="images/01-31.png">
 <img src="images/01-32.png">
