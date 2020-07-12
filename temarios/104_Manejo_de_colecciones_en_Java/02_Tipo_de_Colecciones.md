@@ -721,8 +721,266 @@ LinkedHashSet transformado en un array: [Persona{nombre='José', apellidos='Garc
 La cuestión sería como es natural que para que los elementos estuvieran ordenados según su orden natural, las clases que insertemos en el tipo de dato tiene que implementar `Comparable` y de esta manera podría mantener el orden, como decía esta notación `O(log(N))` qué se utiliza en algorítmica para medir debido a su estructura de árbol, las operaciones por ejemplo de búsqueda estarían acotada en NO logaritmo de N, es decir que no es directamente proporcional el rendimiento al al número de elementos sino que estaría un poco por debajo al ser este tipo de Logaritmo.
 
 
+#### :computer: Ejemplo de Aplicación `TreeSet<E>`
 
-por consola por último la implementación de TreeSet la tenemos por aquí tiene la cosa triste de que si permite mantener los elementos en orden según él va lo hemos comprobado antes que la clase persona lo que hace es ordenar por orden alfabético de los apellidos utilizando el método compare to de la clase String bueno si nosotros añadimos al Tríceps con una serie de personas por apellido con la G la L o l a I d tú aquí comprobamos comprobar si está contenido lo interesante estaría en comprobar que a la hora de obtener estos elementos se han ordenado por apellidos no si ejecutamos podemos ver aquí arriba el elemento estaba contenido vale y podemos ver en lo interesante es que se han ordenado primero García después la Inés y por último López vale obteniendo las personas directamente y tirando sobre el tríceps que no la devuelve por el orden natural tenemos la posibilidad de recorrer el triste de una manera ascendente o descendente vale mediante un método que no devuelve un iterador especial que se llama descending literato vale como hemos comprobado antes muy distanciado el set perdón el tríceps con una referencia se esto nos permite tener la implementación de tríceps a través de los métodos de ser vale pero para hacer uso de el pecho las palabras que se encuentra en ese primer párrafo del Quijote también la cena por aquí como podemos comprobar once de bastante adecuado un café cuando queremos trabajar con con colecciones que te quieran eliminar de alguna manera lo repetido y de las cuales no no haga falta nada con respecto al horno con limpiezas lo que tenemos es una especie de Castle pero que nos va a permitir de alguna manera tenerlo elemento poder obtener los elementos mejor dicho en en el orden en el cuadro insertar por si en algún momento no interesar a hacer el constructor sé que las mismas características de besarse podíamos insertar en este caso podemos ver como tenemos hecho una clase modelo persona vale que la tenemos por aquí de la cual guardamos nombre lo ha pedido y la fecha de nacimiento cometido que te dice Tere que son los dos visuales Lolo habituales perdón y cual casco litros Trini bueno con la imprenta la interfaz comparable para después poder comprobar en el uso con tristeza vale con un link quejas el podemos ver cómo podemos insertar una serie de personas y bueno independientemente de que personas tiene un orden natural detenido a través de comparable vamos a poder comprobar cómo lo elementos de la colección los podemos tener en el orden de de inserción por aquí podemos probar cómo están Josean a Javier y María en el orden del inserción si eliminados algún elemento mediante el método removal y añadimos uno nuevo no sé reutilizar ese hueco si no que se va a seguir manteniendo el orden de de inserción de podemos eliminado a Javier hemos añadido Alicia y por tanto Javier que era el primero te perdone era el tercero desaparece y Alicia pues incorpora en el en el último lugar vale para sacar al final de todo porque se sigue manteniendo el orden de Sergio nacionalidades también la tenían ja Seprona la vemos ahora como no tiene toda la implementación de PSP la posibilidad de detrás formales que se den en un array por si alguna vez nos conviene transformar lo directamente en un array mediante el método tú a raíz del ejemplo lo tenía aquí tendríamos primero distancia de la red dándole el tamaño correspondiente a través del tamaño del cáncer vale y lo podríamos todas formas directamente en un array de de tipo personal que mi empresa por aquí por consola por último la implementación de decir y se la tenemos por aquí tiene la la cosa tristes de que si permite mantener los elementos en orden según el balón hemos comprobado antes de la clase persona lo que hace es ordenar por orden alfabético de pelo apellido vale utilizando el método compares to the de la clase Trini buenos y nosotros añadimos el triste con una serie de personas por apellido por la esquela de lo que le ha dicho a ti comprobamos comprobar si está contenido lo interesante estaría en comprobar que a la hora de obtener estoy elemento se han ordenado por aquí no sé si arriba
+Por último la implementación de `TreeSet<E>` la tenemos por aquí:
+
+```java
+package net.openwebinars.colecciones.set.c.treeset;
+
+import com.sun.source.tree.Tree;
+import net.openwebinars.colecciones.set.modelo.Persona;
+
+import java.sql.SQLOutput;
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+/**
+ *  Ejemplo de uso de la implementación TreeSet<E>
+ * @author Luis Miguel López Magaña
+ */
+public class TreeSetApp {
+
+    public static void main(String[] args) {
+
+        // Constructor sin parámetros de TreeSet
+        // Genera una instancia con un árbol vacío
+        // Los elementos a guardar deben implementar Comparable<E>
+        Set<Persona> treeSet = new TreeSet<>();
+
+        // Insertamos diferentes elementos
+        treeSet.add(new Persona("José", "García García", LocalDate.of(1990,1,1)));
+        treeSet.add(new Persona("Ana", "López Martínez", LocalDate.of(2000, 8, 24)));
+        treeSet.add(new Persona("María", "Laínez Muñoz", LocalDate.of(1980, 3,3)));
+
+        // Instanciamos un elemento para comprobar si está contenido o no
+        Persona p = new Persona("José", "García García", LocalDate.of(1990,1,1));
+
+        // Comprobamos si está contenido
+        if (treeSet.contains(p))
+            System.out.println("El elemento está contenido");
+        else
+            System.out.println("El elemento NO está contenido");
+
+        // Aunque son dos instancias diferentes, el elemento está contenido, puesto que
+        // se cumple que o1.equals(o2)
+
+        // Si iteramos sobre los objetos del TreeSet, los obtenemos
+        // en orden alfabético
+        System.out.println("\nPersonas por orden alfabético");
+        for (Persona persona : treeSet) {
+            System.out.println(persona);
+        }
+
+        // OTRAS POSIBILIDADES DE RECORRIDO
+        // Tenemos la posibilidad de recorrer el TreeSet ascendentemente (como antes)
+        // o descendentemente, mediante descendingIterator
+
+        // Algunos de estos métodos no son propios de Set<E>, sino de alguno de sus
+        // subinterfaces SortedSet<E> y NavigableSet<E>.
+        // Para usarlos, obtenemos una nueva referencia al objeto existente,
+        // siendo dicha referencia de tipo TreeSet<E>.
+        TreeSet<Persona> treeSetRef = (TreeSet<Persona>) treeSet;
+        Iterator<Persona> descendente = treeSetRef.descendingIterator();
+
+        System.out.println("\n\nPersonas por orden alfabético inverso");
+
+        while(descendente.hasNext()) {
+            System.out.println(descendente.next());
+        }
+
+
+        // También tenemos algunos métodos para obtener elementos de los "extremos",
+        // para extraerlos, o para obtener partes del TreeSet
+
+        System.out.println("\n\nPrimer elemento: " + treeSetRef.first());
+        System.out.println("Último elemento: " + treeSetRef.last());
+        System.out.println("Elemento inmediatamente menor a otro: " + treeSetRef.lower(treeSetRef.last()));
+
+        // OTRO EJEMPLO
+        // Construir un segundo TreeSet, a partir del primero,
+        // pero modificando el orden por defecto.
+        // Vamos a ordenar por edad (fecha de nacimiento de más antigua a más moderna)
+        // Usamos el constructor TreeSet(Comparator<? super E> comparator)
+        // Utilizamos una expresión lambda para construir la instancia de Comparator
+        TreeSet<Persona> treeSetPorEdad =
+                new TreeSet<>((o1, o2) -> o1.getFechaNacimiento().compareTo(o2.getFechaNacimiento()));
+
+        // Podemos añadir todos los elementos de otro Collection
+        treeSetPorEdad.addAll(treeSet);
+
+        // Si ahora iteramos, los obtenemos por edad
+        System.out.println("\n\nPersonas ordenadas por edad");
+        treeSetPorEdad.forEach(System.out::println);
+
+        // Ejemplo de eliminación de un elemento
+        treeSetPorEdad.remove(p);
+
+        // Recorremos de nuevo, para comprobar
+        System.out.println("\n\nEstado del TreeSet tras eliminar un elemento.");
+        treeSetPorEdad.forEach(System.out::println); // El orden se mantiene
+    }
+}
+```
+
+
+`TreeSet<E>` tiene la ventaja de que si permite mantener los elementos en orden según él valor.
+
+Hemos comprobado antes que la clase `Persona` que implementa `implements Comparable<Persona>`, lo que hace es ordenar por orden alfabético de los apellidos utilizando el método `compareTo` de la clase `String`.
+
+```java
+// La forma de ordenar será por el orden alfabético de los apellidos
+@Override
+public int compareTo(Persona o) {
+   return apellidos.compareTo(o.apellidos);
+}
+```
+
+Lo primero que hacemos es instaciár el `TreeSet`.
+
+```java
+// Constructor sin parámetros de TreeSet
+// Genera una instancia con un árbol vacío
+// Los elementos a guardar deben implementar Comparable<E>
+Set<Persona> treeSet = new TreeSet<>();
+```
+
+Si nosotros añadimos al `TreeSet` una serie de personas con diferentes apellidos.
+
+```java
+// Insertamos diferentes elementos
+treeSet.add(new Persona("José", "García García", LocalDate.of(1990,1,1)));
+treeSet.add(new Persona("Ana", "López Martínez", LocalDate.of(2000, 8, 24)));
+treeSet.add(new Persona("María", "Laínez Muñoz", LocalDate.of(1980, 3,3)));
+```
+
+Vamos a comprobar si un elemento está contenido o no.
+
+```java
+// Instanciamos un elemento para comprobar si está contenido o no
+Persona p = new Persona("José", "García García", LocalDate.of(1990,1,1));
+
+// Comprobamos si está contenido
+if (treeSet.contains(p))
+   System.out.println("El elemento está contenido");
+else
+   System.out.println("El elemento NO está contenido");
+```
+
+<img src="images/01-81.png">
+
+El elemento está contenido
+
+Aquí lo interesante estaría en comprobar que a la hora de obtener estos elementos se han ordenado por apellidos.
+
+```java
+// Si iteramos sobre los objetos del TreeSet, los obtenemos
+// en orden alfabético
+System.out.println("\nPersonas por orden alfabético");
+for (Persona persona : treeSet) {
+   System.out.println(persona);
+}
+```
+
+<img src="images/01-79.png">
+
+Si ejecutamoslo interesante es que se han ordenado primero García después Laínez y por último López al iterar directamente sobre el `TreeSet` que las devuelve por el orden natural.
+
+Tenemos la posibilidad de recorrer el `TreeSet` de una manera ascendente o descendente mediante un método que nos devuelve un iterador especial que se llama `descendingIterator`  como hemos comprobado antes hemos instanciando el `TreeSet` con una referencia `Set`.
+
+```java
+Set<Persona> treeSet = new TreeSet<>();
+```
+
+Esto nos permite tener la implementación de `TreeSet` a través de los métodos de `Set` pero para hacer uso de el método `descendingIterator()` como es un método especifico de `TreeSet` debemos tener una referencia de este tipo.
+
+
+```java
+// Algunos de estos métodos no son propios de Set<E>, sino de alguno de sus
+// subinterfaces SortedSet<E> y NavigableSet<E>.
+// Para usarlos, obtenemos una nueva referencia al objeto existente,
+// siendo dicha referencia de tipo TreeSet<E>.
+TreeSet<Persona> treeSetRef = (TreeSet<Persona>) treeSet;
+Iterator<Persona> descendente = treeSetRef.descendingIterator();
+```
+
+Ahora si iteramos por orden alfabetico inverso a través de este Iterador.
+
+```java
+System.out.println("\n\nPersonas por orden alfabético inverso");
+
+while(descendente.hasNext()) {
+   System.out.println(descendente.next());
+}
+```
+
+Podemos ver como se nos devuelven los elementos en orden inverso sin tener que haber reordenado, simplemente lo que se ha hecho es recorrer el `TreeSet` a la inversa.
+
+<img src="images/01-80.png">
+
+También se nos permite obtener algunos elementos concretos del `TreeSet` en función del orden como pueden ser el el primer elemento, el último elemento o ir jugando un elemento con otro para obtener el inmediatamente menor a otro, en este caso el penultimo elemento. 
+
+```java
+// También tenemos algunos métodos para obtener elementos de los "extremos",
+// para extraerlos, o para obtener partes del TreeSet
+
+System.out.println("\n\nPrimer elemento: " + treeSetRef.first());
+System.out.println("Último elemento: " + treeSetRef.last());
+System.out.println("Elemento inmediatamente menor a otro: " + treeSetRef.lower(treeSetRef.last()));       
+```
+
+<img src="images/01-82.png">
+
+Otro ejemplo que podríamos tener de uso de `TreeSet` sería a través del constructor que tiene en el que se recibe un `comparator` y lo que nos permitiría de alguna manera sería ordenar el `TreeSet` mediante otro orden que no sea el orden natural por apellídos que se definio en la clase `Persona`. Aquí podríamos crear un `TreeSet` por edad proporcionando un `comparator` mediante una expresión lambda donde lo que vamos hacer es comparar para cada objeto `Persona` por su fecha de nacimiento y lo que podríamos hacer mediante el método `addAll` añadiriamos todas las personas del anterior `TreeSet` pero en este caso se ordenarían por fecha de nacimiento. 
+
+```java
+// OTRO EJEMPLO
+// Construir un segundo TreeSet, a partir del primero,
+// pero modificando el orden por defecto.
+// Vamos a ordenar por edad (fecha de nacimiento de más antigua a más moderna)
+// Usamos el constructor TreeSet(Comparator<? super E> comparator)
+// Utilizamos una expresión lambda para construir la instancia de Comparator
+TreeSet<Persona> treeSetPorEdad =
+                new TreeSet<>((o1, o2) -> o1.getFechaNacimiento().compareTo(o2.getFechaNacimiento()));
+
+// Podemos añadir todos los elementos de otro Collection
+treeSetPorEdad.addAll(treeSet);
+
+// Si ahora iteramos, los obtenemos por edad
+System.out.println("\n\nPersonas ordenadas por edad");
+treeSetPorEdad.forEach(System.out::println);   
+```
+
+<img src="images/01-83.png">
+
+Esta ordenado desde una fecha más antigua a una más reciente, de más edad a menos edad.
+
+Si eliminamos un elemento y recorremos el `TreeSet` lo sigue haciendo de la forma adecuada.
+
+```java
+// Ejemplo de eliminación de un elemento
+treeSetPorEdad.remove(p);
+
+// Recorremos de nuevo, para comprobar
+System.out.println("\n\nEstado del TreeSet tras eliminar un elemento.");
+treeSetPorEdad.forEach(System.out::println); // El orden se mantiene
+```
+
+<img src="images/01-84.png">
+
+Al eliminar un elemento se sigue manteniendo el orden del árbol.
+
+Con esto hemos visto todas las implementaciones de `Set` al menos las más usuales.
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-85.png">
+
+### `List<E>`
+
 
 
 <img src="images/01-21.png">
