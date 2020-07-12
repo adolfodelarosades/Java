@@ -1476,6 +1476,125 @@ Si fueran personas en la caja de un supermercado representaría como vamos atend
 
 #### :computer: Ejemplo de Aplicación `PriorityQueue<E>`
 
+La clase `PriorityQueueApp` nos permite crear una cola con prioridad de manera que los diferentes elementos deben implementar `Comparable` y aquellos elementos que mientras su orden natural sean mayores tendrán mayor prioridad.
+
+Supongamos que lo que tenemos son pasajeros de un vuelo por ejemplo o de un tren y algunos tienen mayor prioridad por que han pagado más por su billete, tienen una prioridad más alta.
+
+Lo primero es implementar la clase modelo `Pasajero` que tiene como novedad manejar esa prioridad y comparar los elementos por prioridad, la prioridad será más grande cuando mayor sea el número almacenado en la propiedad `prioridad` por eso hacemos un `compare` (` -Integer.compare(prioridad, o.getPrioridad())`) mediante `Integer` pero lo hacemos a la inversa, podríamos comprobar como de esta forma como aun que los pasajeros vayan llegando en un orden determinado después se obtienen en base a la prioridad, con una salvedad cuando tengamos elementos que tengan la misma prioridad se deven devolver en el orden en que llegarón, pero realmente `PriorityQueue<E>` no nos garantiza nada con elementos que tengan la misma prioridad. Para ello en la documentación que existe sobre la implementación de `PriorityQueue<E>` se nos sugiere que añadamos una especie de contenedor para que manejemos la cola de este tipo de contenedor de nuestra clase modelo y en este contenedor si podamos manejar de alguna manera el orden de llegada, para eso tenemos otra clase de Modelo `FifoEntry` donde tenemos un `AtomicLong` donde en el fondo lo que nos hace es devolver una secuencia de valores, cada valor que vayamos cereando, insertando se le asigna un valor de esa secuencia, de manera que a la hora de comparar comparariamos en primer lugar en base al contenido al pasajero a su prioridad y si la prioridad fuese la misma lo hariamos comparando en base a la secuencia, al orden de llegada. 
+
+De esta forma si que podríamos tener  
+
+*`Pasajero`*
+
+```java
+package net.openwebinars.colecciones.queue.a.queue.model;
+
+import java.util.Objects;
+
+/**
+ * Clase modelo para algunos de los ejemplos
+ */
+public class Pasajero implements Comparable<Pasajero> {
+
+    private String nombre;
+    private int prioridad;
+
+    public Pasajero(String nombre, int prioridad) {
+        this.nombre = nombre;
+        this.prioridad = prioridad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pasajero pasajero = (Pasajero) o;
+        return prioridad == pasajero.prioridad &&
+                Objects.equals(nombre, pasajero.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, prioridad);
+    }
+
+    @Override
+    public String toString() {
+        return "Pasajero{" +
+                "nombre='" + nombre + '\'' +
+                ", prioridad=" + prioridad +
+                '}';
+    }
+
+    // Las instancias de Pasajero se ordenan según prioridad
+    // La prioridad es más grande cuanto mayor es el número
+    // entero almacenado en la propiedad prioridad
+    @Override
+    public int compareTo(Pasajero o) {
+        return -Integer.compare(prioridad, o.getPrioridad());
+    }
+}
+```
+
+*`FifoEntry`*
+
+```java
+package net.openwebinars.colecciones.queue.a.queue.model;
+
+import java.util.concurrent.atomic.AtomicLong;
+
+/**
+ * Contenedor que nos permite manejar las entradas
+ * de una cola de forma conveniente.
+ * Propuesto en la documentación de Java
+ * https://download.java.net/java/GA/jdk14/docs/api/java.base/java/util/concurrent/PriorityBlockingQueue.html
+ */
+public class FifoEntry<E extends Comparable<? super E>>
+        implements Comparable<FifoEntry<E>> {
+
+    static final AtomicLong seq = new AtomicLong(0);
+    final long seqNum;
+    final E entry;
+
+    public FifoEntry(E entry) {
+        seqNum = seq.getAndIncrement();
+        this.entry = entry;
+    }
+
+    public E getEntry() { return entry; }
+
+    // Se comprar según la prioridad del elemento.
+    // A igual prioridad, se compara según el número
+    // de la secuencia
+
+    // Nos permite "ordenar" los elementos
+    // de igual prioridad
+
+    public int compareTo(FifoEntry<E> other) {
+        int res = entry.compareTo(other.entry);
+        if (res == 0 && other.entry != this.entry)
+            res = (seqNum < other.seqNum ? -1 : 1);
+        return res;
+    }
+}
+```
+
 *`PriorityQueueApp`*
 
 ```java
@@ -1505,7 +1624,6 @@ public class PriorityQueueApp {
         // a un medio de transporte. Algunos pasajeros tiene mayor prioridad que otros,
         // según lo hayan abonado al comprar su billete.
         Queue<Pasajero> cola = new PriorityQueue<>();
-
 
         // Los pasajeros van llegando a la cola
         cola.add(new Pasajero("María", 1));
@@ -1545,8 +1663,243 @@ public class PriorityQueueApp {
 }
 ```
 
-La clase `PriorityQueueApp`
+#### Ejecutar la Aplicación.
 
+<img src="images/01-94.png">
+
+Al ejecutar la aplicación obtendremos los pasajeros por prioridad pero los que tienen la misma prioridad los desordena, sin embargo en el segundo bloque estan ordenados por prioridad y por orden de llegada como correspone.
+
+Los de igual prioridad fijaos que nos ha desordenado vale compro aquí lo ha desordenado Antonio luego después que María y sin embargo lo ha puesto antes sin embargo aquí se ordena por prioridad y a igual prioridad no garantizaría que sería por el orden de llegada.
+
+
+#### :computer: Ejemplo de Aplicación `ArrayDeque<E>`
+
+*`StackApp`*
+
+```java
+package net.openwebinars.colecciones.queue.b.deque;
+
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+/**
+ * Ejemplo de uso de un Deque<E> para tratarlo como una pila
+ *
+ * 
+ */
+public class StackApp {
+
+    public static void main(String[] args) {
+
+        // Según la documentación de Java, no es recomendable el uso de la clase
+        // Stack<E>. En su lugar, recomiendan tratar como una pila a
+        // Deque<String> pila = new ArrayDeque<>();
+
+        // Vamos a realizar un simple comprobador de sintaxis
+        // para saber si nos hemos equivocado en el número de
+        // paréntesis en una expresión.
+        // Por cada apertura de paréntesis, lo insertamos
+        // en la pila, y por cada cierre, lo sacamos de la pila
+
+        String expresion1 = "(a+(b+c))";
+
+        String expresion2 = "(((a+b";
+
+        if (comprobarParentesis(expresion1))
+            System.out.println(String.format("La expresión %s es correcta", expresion1));
+        else
+            System.out.println(String.format("La expresión s% no es correcta", expresion1));
+
+
+        if (comprobarParentesis(expresion2))
+            System.out.println(String.format("La expresión %s es correcta", expresion2));
+        else
+            System.out.println(String.format("La expresión %s no es correcta", expresion2));
+
+    }
+
+    /**
+     * Comprueba si una expresión tiene el número correcto de paréntesis
+     * @param expresion a comprobar
+     * @return True, si el número de paréntesis es adecuado, false en otro caso
+     */
+    private static boolean comprobarParentesis(String expresion) {
+
+        // Declaramos la pila
+        Deque<Character> pila = new ArrayDeque<>();
+
+        // Transformamos la expresión en un array de caracteres
+        char[] expresionAsArray = expresion.toCharArray();
+
+        // Suponemos que el resultado va a ser bueno
+        boolean result = true;
+
+        // Recorremos la expresión
+        for (int i = 0; i < expresionAsArray.length; i++) {
+            char actual = expresionAsArray[i];
+            // Si es la apertura de un paréntesis, insertamos en la pila
+            if (actual == '(')
+                pila.addFirst(actual);
+            // Si es el cierre de un paréntesis, lo sacamos la cabecera de la pila
+            else if (actual == ')') {
+                // Si devuelve nulo, quiere decir que no nay elementos
+                // y por tanto, la expresión es errónea
+                if (pila.pollFirst() == null)
+                    result = false;
+            }
+        }
+
+        // Si al terminar, la pila no está vacía,
+        // también es errónea
+        if (result && !pila.isEmpty())
+            result = false;
+
+        // Devolvemos el resultado
+        return result;
+    }
+}
+```
+
+Para el ejemplo de `Deque<E>` podríamos ver un ejemplo de la comprobación de la sintaxis de una expresión para saber si tiene todos los paréntesis adecuados, podría ser un buen uso de una pila, les decía que existe la clase `Stack` pila pero la propia documentación de Java no nos recomienda que la utilicemos en su lugar nos recomiendan tratar como una pila a un `Deque<E>` construido sobre un `ArrayDeque<E>`.
+
+```java
+// Según la documentación de Java, no es recomendable el uso de la clase
+// Stack<E>. En su lugar, recomiendan tratar como una pila a
+// Deque<String> pila = new ArrayDeque<>();
+```
+
+Como podríamos hacer la comprobación de que si una expresión tiene los paréntesis de forma adecuada, bueno pues lo que podemos hacer es recorrerla carácter a carácter y si vamos insertando cada vez que nos encontremos con una apertura de paréntesis lo insertamos en la pila y cada vez que nos encontremos con un cierre de paréntesis sacaríamos de la pila, si al final de este recorrido la pila se ha quedado vacía lo normal es que la expresión sea correcta, si no se ha quedado vacía la expresión no sería correcta.
+
+```java
+String expresion1 = "(a+(b+c))";
+
+String expresion2 = "(((a+b";
+
+if (comprobarParentesis(expresion1))
+   System.out.println(String.format("La expresión %s es correcta", expresion1));
+else
+   System.out.println(String.format("La expresión s% no es correcta", expresion1));
+
+
+if (comprobarParentesis(expresion2))
+   System.out.println(String.format("La expresión %s es correcta", expresion2));
+else
+   System.out.println(String.format("La expresión %s no es correcta", expresion2));
+```
+
+Lo hacemos en el método `comprobarParentesis(String expresion)`:
+
+```java
+    /**
+     * Comprueba si una expresión tiene el número correcto de paréntesis
+     * @param expresion a comprobar
+     * @return True, si el número de paréntesis es adecuado, false en otro caso
+     */
+    private static boolean comprobarParentesis(String expresion) {
+
+        // Declaramos la pila
+        Deque<Character> pila = new ArrayDeque<>();
+
+        // Transformamos la expresión en un array de caracteres
+        char[] expresionAsArray = expresion.toCharArray();
+
+        // Suponemos que el resultado va a ser bueno
+        boolean result = true;
+
+        // Recorremos la expresión
+        for (int i = 0; i < expresionAsArray.length; i++) {
+            char actual = expresionAsArray[i];
+            // Si es la apertura de un paréntesis, insertamos en la pila
+            if (actual == '(')
+                pila.addFirst(actual);
+            // Si es el cierre de un paréntesis, lo sacamos la cabecera de la pila
+            else if (actual == ')') {
+                // Si devuelve nulo, quiere decir que no nay elementos
+                // y por tanto, la expresión es errónea
+                if (pila.pollFirst() == null)
+                    result = false;
+            }
+        }
+
+        // Si al terminar, la pila no está vacía,
+        // también es errónea
+        if (result && !pila.isEmpty())
+            result = false;
+
+        // Devolvemos el resultado
+        return result;
+
+
+    }
+```
+
+Recibimos la expresión, construimos la pila
+
+```java
+// Declaramos la pila
+Deque<Character> pila = new ArrayDeque<>();
+
+```
+
+transformamos la expresión en un array de caracteres que es lo que estamos guardando en la pila,
+
+```java
+// Transformamos la expresión en un array de caracteres
+char[] expresionAsArray = expresion.toCharArray();
+```
+
+y suponemos que la expresión va a ser correcta, 
+
+```java
+// Suponemos que el resultado va a ser bueno
+boolean result = true;
+```
+
+
+recorremos cada uno de los caracteres de la expresión y si el carácter actual es una apertura de parentesis lo insertamos en la pila, recordar que había una serie de métodos de `Deque` que nos permiten tratar una cola doble como está, como si fuese una Pila `addFirst` y `pollFirst`, si encontramos una apertura de paréntesis lo metemos en la pila si el carácter es un cierre de paréntesis lo que hacemos es sacarlo de la pila,
+
+```java
+// Recorremos la expresión
+for (int i = 0; i < expresionAsArray.length; i++) {
+   char actual = expresionAsArray[i];
+   // Si es la apertura de un paréntesis, insertamos en la pila
+   if (actual == '(')
+      pila.addFirst(actual);
+      // Si es el cierre de un paréntesis, lo sacamos la cabecera de la pila
+   else if (actual == ')') {
+      // Si devuelve nulo, quiere decir que no nay elementos
+      // y por tanto, la expresión es errónea
+      if (pila.pollFirst() == null)
+         result = false;
+   }
+}
+```
+
+`pollFirst` es la la implementación de métodos que nos permite obtener un valor nulo, si por ejemplo la pila no tiene elementos, con lo cual si al sacar el paréntesis se nos devuelve nulo quiere decir que hemos encontrado un cierre de paréntesis pero que la pila está vacía, eso quiere decir si hay algún paréntesis de cierre de más, con lo cual el resultado debería ser falso.
+
+Si al terminar la pila no está vacía.
+
+```java
+// Si al terminar, la pila no está vacía,
+// también es errónea
+if (result && !pila.isEmpty())
+   result = false;
+
+// Devolvemos el resultado
+return result;
+```
+
+Por ejemplo al tratar la expresión `(((a+b` la pila no está vacía no tiene ningún cierre de paréntesis la expresión también sería erróneo en cualquier caso lo que hacemos devolver el resultado.
+
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-95.png">
+
+Vemos cómo sería el ejemplo de ejecución una expresión si es correcta realmente no hace una validación completa de la expresión, esto tendríamos que validar también el orden del operando, operadores, simplemente lo estamos haciendo a nivel de paréntesis, conforme vayamos abriendo un paréntesis se va cerrando se va cerrando y podemos ver como la segunda expresión no es correcta. 
+
+## Map<K,V>
 
 <img src="images/01-36.png">
 <img src="images/01-37.png">
