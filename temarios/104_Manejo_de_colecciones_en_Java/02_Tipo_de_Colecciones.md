@@ -720,7 +720,6 @@ LinkedHashSet transformado en un array: [Persona{nombre='José', apellidos='Garc
 
 La cuestión sería como es natural que para que los elementos estuvieran ordenados según su orden natural, las clases que insertemos en el tipo de dato tiene que implementar `Comparable` y de esta manera podría mantener el orden, como decía esta notación `O(log(N))` qué se utiliza en algorítmica para medir debido a su estructura de árbol, las operaciones por ejemplo de búsqueda estarían acotada en NO logaritmo de N, es decir que no es directamente proporcional el rendimiento al al número de elementos sino que estaría un poco por debajo al ser este tipo de Logaritmo.
 
-
 #### :computer: Ejemplo de Aplicación `TreeSet<E>`
 
 Por último la implementación de `TreeSet<E>` la tenemos por aquí:
@@ -980,17 +979,322 @@ Con esto hemos visto todas las implementaciones de `Set` al menos las más usual
 
 ### `List<E>`
 
-
-
 <img src="images/01-21.png">
 
-, pasamos a la siguiente interfaz la interfaz please será quizá la interfaz que más utilicéis se trata de un tipo de colección que si permite duplicados y que a las funcionalidades de collection añade el acceso posicional la posibilidad de búsqueda una iteración extendida y una operación sobre un rango de los elementos de la lista la habitación más usual la que utilizar y en el 95% de los casos será Radcliffe después tendremos la implementación vector esta es bastante más antigua sales de la primera versión de Java presente una implementación que si está sincronizada decir que sería adecuada en el caso de que quisiéramos utilizarlo en un contexto de concurrencia sin embargo tiene varios métodos Legazpi y no es demasiado rápida y de hecho no suele ser muy muy recomendable si queremos tener una implementación sincronizada en una lista veremos que existen otras alternativas y por último tendríamos LinkedList que si bien bueno pues hereda o implementa la interfaz link hereda de abstractly al igual que Raily también implementa la interfaz TweetDeck y bueno va a ser eficiente solamente en algunas situaciones bastante bastante bastante concreta la operaciones de acceso oposición al son las mismas que tendría un array cualquiera lo índice también empiezan en 0 y nos permitiría acceder al tercer elemento por ejemplo de una lista en este caso sería el que está en la posición 2 y que no devolvería el elemento 3 vale si quisiéramos buscar por índice pues también podríamos irnos devolvería la posición en la que se encuentra un determinado elemento vale empezando por el principio por ahí por el final es decir la primera ocurrencia o o la última hemos visto que tenemos una serie de elementos de iteración también extendida de manera que en este iterador además de poder avanzar hacia delante como como en un integrador cualquiera podríamos avanzar hacia delante hacia atrás podríamos añadir modificar además de eliminar vale es bastante potente en ese sentido podemos también un obtener un View en Spyro una especie de copia de la lista pero que realmente no no es una copia porque se ofrece a través de la lista subyacente y si queremos tener ese subconjunto de la lista podemos trabajar con el con cualquier tipo de operación de inserción actualización y borrado de manera que la lista subyacente la lista general grande se vería modificada por por ese tipo de operación vamos a comprobar esto en un ejemplo con ArrayList vale aquí tenemos lo que hemos visto con que sería bastante sencillo tenemos la opción de hacer un acceso posicional y seguimos teniendo la posibilidad de iterar sobre los distintos elementos vale también con el bucle o bien foreach o a ti mediante el método y una expresión lambda vale por si queremos ejecutar este ejemplo que es sencillo no imprimiría 12356 tal cual se lo se lo encuentra vale el tercer elemento estaría como al natural tres y la implementación de ArrayList ya digo que no agrega nada a lo que define la interfaz es decir que seguimos teniendo la posibilidad de acceso oposición al tanto en modo lectura como en escritura es decir que podríamos decirle que aquí en medio en la posición 30123 es decir que desplazando hacia la derecha cinco que insertará el valor 4 mediante el método set podemos sustituir un elemento que se encuentre en una posición por otro aquí podríamos sustituir 5 que está en minúscula por 5 con la primera letra en mayúscula para seguir el estilo del resto de elementos podríamos eliminar un elemento que se encuentra en una determinada posición podemos contener elementos repetidos es decir que podríamos añadir dos veces space infinite éramos podemos comprobar como tenemos aquí contenido dos veces puesto que dos veces lo hemos añadido tenemos determinadas funciones de búsqueda que nos permiten obtener la posición ya que tenemos acceso a posicionar la posición de la primera o última ocurrencia de un determinado elemento por ejemplo la primera ocurrencia de dos está en la posición uno vale hasta bien tarde que se empieza a contar entero la última ocurrencia de 6 que estaba repetido está en la posición 6 es el séptimo elemento de la colección hemos hablado también de que tenemos iteraciones tendida través de y teatro vale como podríamos hacer una iteración de atrás hacia adelante sobre este ArrayList mediante un literato literator es un método que nos devuelve que tiene el propio el propio ArrayList vale y qué bueno de esta manera nos permitiría obtener el iterador vale que comenzaría en la posición que nosotros marcamos aquí vale aquí comenzaría cómo podríamos comprobar a la derecha de la última del último elemento vale seis devolvería siete hecho sería imposible no 0123456 con lo cual lo colocaría en esta posición el día y tirando mediante a través del ArrayList mientras haya un elemento anterior es decir que cuando llegue al primer elemento como no habrá un elemento anterior pararía expectación de esta manera y tirando hacia atrás podríamos tener los elementos cómo podemos ver por aquí 6 6 5 4 3 2 1 por último decíamos que teníamos las operaciones sobre un rango de elementos podríamos tener los desde la posición 3 a las 5 de la lista con lo cual nos devolvería los elementos cuatro y cinco y si limpiamos la sublista y volvemos a imprimir la lista sustente vemos que se ha visto modificada a través de la sublista puesto que cuatro y cinco ya no aparecería todo esto como ejemplo de uso de bellies incrementacion ArrayList que ya la hemos comentado vale qué es la más adecuada en la mayoría de las situaciones el acceso por índice se hacen tiempo constante la inserción en media también sería en un tiempo constante ocupa menos espacio en memoria que limpies list sin embargo limpia el suele tener un peor rendimiento las distintas operaciones el acceso pues depende mucho del tamaño de LinkedList y suele ocupar más spa vale por eso su uso suele estar circunscrito a una serie de operaciones muy concretas otro interfaces relacionados con list serían tío y de que nos permiten implementar una cola y una cola doble que también nos permitirá de esa manera obtener una una lista vale una cola una acción es una cola de tipo fijo se suele poner como ejemplo siempre la cola del supermercado es decir el primero que llega el primero que sale perfil nosotros intentaremos lo elemento al final de la cola por los que se conoce por la cola y saldrían por la cabeza conforme vamos insertando elementos se van viendo empujado vale o mejor dicho conforme nos vamos sacando bueno pues se van desplazando los elementos de la cola hacia la cabeza vale de operaciones las cuales like que lanzan una excepción a para insertar Remus para extraer y element para examinar elemen hace lo mismo que Remus pero sin eliminar elemento de la cabeza de la cola si sucede algún tipo de error lanza una excepción y tenemos también una implementación que devuelve un valor especial como ópera Paul y Big que harían la misma operación espero que no lanzarían una una excepción sino que bueno pues si por ejemplo no se puede insertar un elemento pues nos devolvería un valor nulo si no hay ningún elemento nos devolvería un valor nulo en lugar de lanzar una excepción contenido dos veces porque López en León
+Pasamos a la siguiente interfaz, la interfaz `List<E>` será quizá la interfaz que más utilicéis se trata de un tipo de `Collection<E>` que si permite duplicados y que a las funcionalidades de `Collection<E>` añade el acceso posicional, la posibilidad de búsqueda, una iteración extendida y una operación sobre un rango de los elementos de la lista.
+
 <img src="images/01-22.png">
+
+la implementación más usual, la que utilizaras en el 95% de los casos será `ArrayList<E>` después tendremos la implementación `Vector<E>` esta es bastante más antigua desde de la primera versión de Java esta presente, una implementación que si está sincronizada, es decir que sería adecuada en el caso de que quisiéramos utilizarlo en un contexto de concurrencia sin embargo, tiene varios métodos *legacy* y no es demasiado rápida y de hecho no suele ser muy recomendable si queremos tener una implementación sincronizada en una lista veremos que existen otras alternativas y por último tendríamos `LinkedList<E>` que si bien hereda `AbstractList<E>` al igual que `ArrayList<E>` también implementa la interfaz `Queue` y `deque` y va a ser eficiente solamente en algunas situaciones bastante bastante bastante concretas.
+
 <img src="images/01-23.png">
+
+Las operaciones de acceso posicional son las mismas que tendría un array cualquiera, los índices también empiezan en 0 y nos permitiría acceder al tercer elemento por ejemplo de una lista en este caso sería el que está en la posición 2 y que no devolvería el elemento 3.
+
 <img src="images/01-24.png">
+
+Si quisiéramos buscar por índice también podríamos y nos devolvería la posición en la que se encuentra un determinado elemento empezando por el principio o por el final, es decir la primera ocurrencia o la última.
+
 <img src="images/01-25.png">
+
+Hemos visto que tenemos una serie de elementos de iteración también extendida de manera que en este iterador además de poder avanzar hacia adelante como en un iterador cualquiera, podríamos avanzar hacia adelante, hacia atrás, podríamos añadir, modificar además de eliminar es bastante potente en ese sentido.
+
 <img src="images/01-26.png">
+
+Podemos también obtener un *View* una especie de copia de la lista pero que realmente no es una copia porque se ofrece a través de la lista subyacente y si queremos tener ese subconjunto de la lista podemos trabajar con el con cualquier tipo de operación de inserción actualización y borrado de manera que la lista subyacente la lista general grande se vería modificada por por ese tipo de operación.
+
+#### :computer: Ejemplo de Aplicación `List<E>`
+
+Vamos a comprobar esto en un ejemplo con `List<E>`.
+
+*`ListApp`*
+
+```java
+package net.openwebinars.colecciones.list.a.list;
+
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Ejemplo de uso de los métodos de List<E>
+ *
+ *
+ */
+public class ListApp {
+
+    public static void main(String[] args) {
+
+        // Una de las formas más sencillas de obtener una lista
+        List<String> lista = Arrays.asList("Uno", "Dos", "Tres", "cinco", "Seis");
+
+        // Uso posicional de la lista
+        // Los índices comienzan en 0
+
+        // Obtener el elemento en la posición 2 (tercer elemento)
+        String tercerElemento = lista.get(2);
+
+        // Iterar sobre los elementos
+        lista.forEach((x) -> System.out.print(x + " "));
+    }
+}
+```
+
+Aquí tenemos lo que hemos visto sería bastante sencillo, tenemos la opción de hacer un acceso posicional y seguimos teniendo la posibilidad de iterar sobre los distintos elementos también con el bucle `for Each` o mediante el método `.forEach` y una expresión lambda.
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-86.png">
+
+Si queremos ejecutar este ejemplo que es sencillo nos imprimiría `Uno Dos Tres cinco Seis` tal cual se los encuentra, en `tercerElemento` estaría `Tres`.
+
+#### :computer: Ejemplo de Aplicación `ArrayList<E>`
+
+La implementación de `ArrayList<E>` ya digo que no agrega nada a lo que define la interfaz `List<E>` es decir que seguimos teniendo la posibilidad de acceso posicional tanto en modo lectura como en escritura.
+
+*`ArrayListApp`*
+
+```java
+package net.openwebinars.colecciones.list.b.arraylist;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
+
+/**
+ * Ejemplo de uso de los métodos de ArrayList<E> (con una referencia de tipo List<E>
+ *
+ * 
+ */
+public class ArrayListApp {
+
+    public static void main(String[] args) {
+
+        // Podemos construir un ArrayList a partir de otra colección
+        List<String> lista = new ArrayList<>(Arrays.asList("Uno", "Dos", "Tres", "cinco", "Seis"));
+
+        // USO POSICIONAL
+
+        // Uso posicional de la lista
+        // Los índices comienzan en 0
+
+        // Obtener el elemento en la posición 2 (tercer elemento)
+        String tercerElemento = lista.get(2);
+
+        // Añadir un elemento en una posición determinada
+        lista.add(3, "Cuatro");
+
+        // Sustituir un elemento de una determinada posición
+        lista.set(4, "Cinco");
+
+        // Eliminar un elemento de una determinada posición
+        // Devuelve el elemento eliminado
+        String eliminado = lista.remove(5);
+
+        // Posibilidad de contener repetidos
+        lista.add("Seis");
+        lista.add("Seis");
+
+        // Iterar sobre los elementos mediante un forEach
+        lista.forEach((x) -> System.out.print(x + " "));
+
+        // FUNCIONES DE BÚSQUEDA
+
+        // Búsqueda de la primera o la última ocurrencia de un elemento
+        int posicion1 = lista.indexOf("Dos");
+        int posicion2 = lista.lastIndexOf("Seis");
+
+        System.out.println("\n\nLa primera ocurrencia de Dos está en la posición " + posicion1);
+        System.out.println("La última ocurrencia de Seis está en la posición " + posicion2);
+
+        // ITERACIÓN EXTENDIDA
+
+        // Se realiza a través del uso de ListIterator
+        // Este nos permite iterar en cualquier dirección, así como
+        // añadir, modificar y eliminar
+
+        // Ejemplo de iteración hacia atrás
+        for (ListIterator<String> listIterator = lista.listIterator(lista.size());
+             listIterator.hasPrevious();) {
+            System.out.print(listIterator.previous() + " ");
+        }
+
+        // OPERACIONES SOBRE UN RANGO DE ELEMENTOS
+
+        // La lista que se obtiene no es una nueva lista
+        // sino una "vista" de la ya existente.
+        // Las operaciones que modifiquen la sublista,
+        // modificarán la lista subyacente.
+
+        List<String> subLista = lista.subList(3,5);
+        System.out.println("\n\nElementos de la sublista");
+        for (String s : subLista) {
+            System.out.print(s + " ");
+        }
+
+        // Si eliminamos elementos de la sublista
+        // se eliminan de la lista.
+        subLista.clear();
+
+        System.out.println("\n\nElementos de la lista modificados a través de la sublista");
+        for (String s : lista) {
+            System.out.print(s + " ");
+        }
+
+    }
+}
+```
+
+Podemos construir un `ArrayList` a partir de otra colección
+
+```java
+// Podemos construir un ArrayList a partir de otra colección
+List<String> lista = new ArrayList<>(Arrays.asList("Uno", "Dos", "Tres", "cinco", "Seis"));
+```
+
+Como seguimos teniendo la posibilidad de acceso posicional tanto en modo lectura como en escritura podemos recuperar un elemento en determinada posición, siempre teniendo en cuenta que los índices comienzan en 0.
+
+```java
+// Obtener el elemento en la posición 2 (tercer elemento)
+String tercerElemento = lista.get(2);
+```
+
+Podríamos decirle que insertará un elemento en una determinada posición recorriendo los demás elementos a la derecha, actualmente tenemos los elementos `"Uno", "Dos", "Tres", "cinco", "Seis"` con la siguiente sentencia:  
+
+```java
+// Añadir un elemento en una posición determinada
+lista.add(3, "Cuatro");
+```
+
+Lograríamos insertar el elemento `Cuatro` en la posición 3 por lo que `cinco` se recorrería a la posición 4 y así con el resto de los elementos por lo que ahora tendríamos  `"Uno", "Dos", "Tres", "Cuatro", "cinco", "Seis"`.
+
+Mediante el método `set` podemos sustituir un elemento que se encuentre en una posición por otro.
+
+```java
+// Sustituir un elemento de una determinada posición
+lista.set(4, "Cinco");
+```
+
+Con la sentencia anterior estaríamos remplazando `cinco` por `Cinco` para seguir el estilo del resto de elementos. 
+
+También podríamos eliminar un elemento que se encuentra en una determinada posición.
+
+```java
+// Eliminar un elemento de una determinada posición
+// Devuelve el elemento eliminado
+String eliminado = lista.remove(5);
+```
+
+Podemos contener elementos repetidos es decir que podríamos añadir dos veces `Seis`.
+
+```java
+// Posibilidad de contener repetidos
+lista.add("Seis");
+lista.add("Seis");
+```
+
+Y si iteramos.
+
+```java
+// Iterar sobre los elementos mediante un forEach
+lista.forEach((x) -> System.out.print(x + " "));
+```
+
+Podemos comprobar como tenemos `Uno Dos Tres Cuatro Cinco Seis Seis `, `Cuatro` lo añadimos nosotros, `Cinco` lo sustituimos por su primer letra en mayúscula y `Seis` que lo insertamos dos veces.
+
+<img src="images/01-87.png">
+
+Tenemos determinadas funciones de búsqueda que nos permiten obtener la posición, ya que tenemos acceso a posicionar, la posición de la primera o última ocurrencia de un determinado elemento.
+
+```java
+// Búsqueda de la primera o la última ocurrencia de un elemento
+int posicion1 = lista.indexOf("Dos");
+int posicion2 = lista.lastIndexOf("Seis");
+
+System.out.println("\n\nLa primera ocurrencia de Dos está en la posición " + posicion1);
+System.out.println("La última ocurrencia de Seis está en la posición " + posicion2);
+```
+
+<img src="images/01-88.png">
+
+Por ejemplo la primera ocurrencia de `Dos` está en la posición 1, a sabiendas que se empieza a contar en 0, la última ocurrencia de `Seis` que estaba repetido está en la posición 6, es el séptimo elemento de la colección.
+
+Hemos hablado también de que tenemos iteraciones extendida a través de `ListIterator` en el siguiente código:
+
+```java
+// ITERACIÓN EXTENDIDA
+
+// Se realiza a través del uso de ListIterator
+// Este nos permite iterar en cualquier dirección, así como
+// añadir, modificar y eliminar
+
+// Ejemplo de iteración hacia atrás
+for (ListIterator<String> listIterator = lista.listIterator(lista.size());
+   listIterator.hasPrevious();) {
+   System.out.print(listIterator.previous() + " ");
+}
+```
+
+Hacemos una iteración de atrás hacia adelante sobre este `ArrayList` mediante un `ListIterator`, `listIterator()` es un método que tiene el propio el propio `ArrayList` y qué de esta manera nos permitiría obtener el iterador que comenzaría en la posición que en este caso estamos marcando con `lista.size()` es decir que comenzaría en la posición 7 aquí comenzaría cómo podríamos comprobar a la derecha del último elemento `lista.size()` devolvería 7, lo colocaría en esta posición he iria iterando a través del ArrayList mientras haya un elemento anterior, es decir que cuando llegue al primer elemento, como no habrá un elemento anterior pararía esa iteración, de esta manera iterando hacia atrás podríamos tener los elementos cómo podemos ver aquí `Seis Seis Cinco Cuatro Tres Dos Uno`
+
+<img src="images/01-89.png">
+
+
+Por último decíamos que teníamos las operaciones sobre un rango de elementos:
+
+```java
+// OPERACIONES SOBRE UN RANGO DE ELEMENTOS
+
+// La lista que se obtiene no es una nueva lista
+// sino una "vista" de la ya existente.
+// Las operaciones que modifiquen la sublista,
+// modificarán la lista subyacente.
+
+List<String> subLista = lista.subList(3,5);
+System.out.println("\n\nElementos de la sublista");
+for (String s : subLista) {
+   System.out.print(s + " ");
+}
+```
+
+Podríamos obtenerlos desde la posición 3 a las 5 de la lista con lo cual nos devolvería los elementos `Cuatro Cinco`.
+
+<img src="images/01-89.png">
+
+Y si limpiamos la sublista y volvemos a imprimir la lista subyacente.
+
+```java
+// Si eliminamos elementos de la sublista
+// se eliminan de la lista.
+subLista.clear();
+
+System.out.println("\n\nElementos de la lista modificados a través de la sublista");
+for (String s : lista) {
+   System.out.print(s + " ");
+}
+```
+
+Vemos que la lista original se ha visto modificada a través de la sublista puesto que `Cuatro Cinco` ya no aparecerían, solo aparecen `Uno Dos Tres Seis Seis`.
+
+<img src="images/01-91.png">
+
+Todo esto como ejemplo de uso de `ArrayList<E>`.
+
+#### Ejecutar la Aplicación.
+
+<img src="images/01-92.png">
+
+#### Implementación de List<E>
+
 <img src="images/01-27.png">
+
+bellies incrementacion ArrayList que ya la hemos comentado vale qué es la más adecuada en la mayoría de las situaciones el acceso por índice se hacen tiempo constante la inserción en media también sería en un tiempo constante ocupa menos espacio en memoria que limpies list sin embargo limpia el suele tener un peor rendimiento las distintas operaciones el acceso pues depende mucho del tamaño de LinkedList y suele ocupar más spa vale por eso su uso suele estar circunscrito a una serie de operaciones muy concretas otro interfaces relacionados con list serían tío y de que nos permiten implementar una cola y una cola doble que también nos permitirá de esa manera obtener una una lista vale una cola una acción es una cola de tipo fijo se suele poner como ejemplo siempre la cola del supermercado es decir el primero que llega el primero que sale perfil nosotros intentaremos lo elemento al final de la cola por los que se conoce por la cola y saldrían por la cabeza conforme vamos insertando elementos se van viendo empujado vale o mejor dicho conforme nos vamos sacando bueno pues se van desplazando los elementos de la cola hacia la cabeza vale de operaciones las cuales like que lanzan una excepción a para insertar Remus para extraer y element para examinar elemen hace lo mismo que Remus pero sin eliminar elemento de la cabeza de la cola si sucede algún tipo de error lanza una excepción y tenemos también una implementación que devuelve un valor especial como ópera Paul y Big que harían la misma operación espero que no lanzarían una una excepción sino que bueno pues si por ejemplo no se puede insertar un elemento pues nos devolvería un valor nulo si no hay ningún elemento nos devolvería un valor nulo en lugar de lanzar una excepción contenido dos veces porque López en León
+
+
+
+
+
+
 <img src="images/01-28.png">
 <img src="images/01-29.png">
 <img src="images/01-30.png">
