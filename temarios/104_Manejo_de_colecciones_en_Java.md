@@ -21,6 +21,11 @@ Mediante este taller serás capaz de conocer las similitudes y diferencias entre
 
    * 01 [Introducción](/temarios/104_Manejo_de_colecciones_en_Java/01_Introduccion.md)
    * 02 [Tipo de Colecciones y ejemplo de uso](/temarios/104_Manejo_de_colecciones_en_Java/02_Tipo_de_Colecciones.md)
+      * 02-01 [Iterator](/temarios/104_Manejo_de_colecciones_en_Java/02_01_Tipo_de_Colecciones_Iterator.md)
+      * 02-02 [Collection](/temarios/104_Manejo_de_colecciones_en_Java/02_02_Tipo_de_Colecciones_Collection.md)
+      * 02-03 [Set](/temarios/104_Manejo_de_colecciones_en_Java/02_03_Tipo_de_Colecciones_Set.md)
+      * 02-04 [List](/temarios/104_Manejo_de_colecciones_en_Java/02_04_Tipo_de_Colecciones_List.md)
+      * 02-05 [Map](/temarios/104_Manejo_de_colecciones_en_Java/02_05_Tipo_de_Colecciones_Map.md)
    * 03 [Colecciones para Situaciones Especiales](/temarios/104_Manejo_de_colecciones_en_Java/03_Colecciones_para_Situaciones_Especiales.md)
    * 04 [Algoritmos para Colecciones](/temarios/104_Manejo_de_colecciones_en_Java/04_Algoritmos_para_Colecciones.md)
    * 05 [Cómo saber qué Tipo de Colección Escoger](/temarios/104_Manejo_de_colecciones_en_Java/05_Como_saber_que_Tipo_de_Coleccion_Escoger.md)
