@@ -38,13 +38,11 @@ En `LinkedHashMap` que ordena según inserción.
 
 Y `TreeMap` que mantiene las claves en en orden natural.
 
-
 Veámoslo los distintos ejemplos que tenemos de `Map`.
 
 ### :computer: Ejemplo de Aplicación `HashMap<E>`
 
-Por ejemplo si quisiéramos almacenar una serie de productos en base a su referencia los podríamos tener por por aquí.
-
+Un ejemplo con `HashMap<E>` podría ser si quisiéramos almacenar una serie de productos en base a su referencia.
 
 *`Producto`*
 
@@ -155,7 +153,6 @@ public class HashMapApp {
         hashMap.put("COMPGAM012", new Producto("COMPGAM012", "Auriculares gamer", 75.56f));
         hashMap.put("MON274K034", new Producto("MON274K034", "Monitor 27 4K", 325.67f));
 
-
         // Si insertamos una referencia que ya existe, simplemente reemplaza el valor
         // hashMap.put("MON274K034", new Producto("MON274K034", "Monitor 27 4K", 450.0f));
 
@@ -170,6 +167,8 @@ public class HashMapApp {
         if (hashMap.containsValue(pc))
             System.out.println("El Map contiene el valor");
 
+        System.out.println("\n\n");
+        
         // También podemos hacer uso de getOrDefault
         // si queremos obtener el valor asociado
         // a una referencia y, si no existe, un valor por defecto
@@ -185,13 +184,232 @@ public class HashMapApp {
 
     }
 }
-
 ```
 
-AQUIIIIII.
-Podríamos guardar aquí un ordenador portátil uno compacto no auriculares gamer con monitor de 27 pulgadas insertaremos Comput una referencia de que ya existe una clave que ya existe lo único que se hace sustituir este nuevo valor por el valor que había antes hija que aquí este monitor sería un poco más caro que el anterior y si les comentara esa línea y ejecutará no pues se insertaría este este valor se puede insertar un valor si solo si la clave no está insertada y si no está lo que hace devolvernos el valor antiguo y en otro caso no te volvería nudo vale que lo podíamos hacer también mediante estar mediante esta operación con containskey y barrio hemos visto también que podríamos comprobar si se contiene un determinado una determinada clave un determinado valor vale y también tenemos el método GET or default que nos devolvería para una determinada clave que nosotros
+Instanciamos un `HashMap` donde sus keys van a ser `Strings` y sus valores `Productos`.
+
+```java
+// HashMap tiene unos constructores muy parecidos a HashSet
+Map<String, Producto> hashMap = new HashMap<>();
+```
+
+Para insertar contenido a nuestro `HashMap` usamos el método `put` que requiere dos parámetros la key que esta representada por el código del producto y como valor usamos una instancia de Producto.
+
+```java
+// Insertamos varios productos
+Producto pc = new Producto("PC000123", "Ordenador portátil", 800.0f);
+hashMap.put("PC000123", pc);
+hashMap.put("PC000234", new Producto("PC000234", "Ordenador compacto", 400.0f));
+hashMap.put("COMPGAM012", new Producto("COMPGAM012", "Auriculares gamer", 75.56f));
+hashMap.put("MON274K034", new Producto("MON274K034", "Monitor 27 4K", 325.67f));
+```
+
+Si insertamos con el método `put` una referencia que ya existe lo que haría es sustituir el nuevo valor por el anterior que tuvíera.
+
+```java
+// Si insertamos una referencia que ya existe, simplemente reemplaza el valor
+//hashMap.put("MON274K034", new Producto("MON274K034", "Monitor 27 4K", 450.0f));
+```
+
+En este caso sería que tendríamos el `Monitor 27 4K", 450.0f` en lugar de `Monitor 27 4K", 325.67f`, actua como una actualización.
+
+Si puede insertarse un valor si y solo si la clave no esta insertada usando el método `.putIfAbsent(...)` y si lo está, nos devuelve el valor antiguo. En otro caso devuelve nulo :confused: ¿Cúal es el otro caso?
+
+```java
+// Se puede insertar un valor sí y solo sí la clave no está insertada,
+// y si lo está, nos devuelve el valor antiguo. En otro caso devuelve nulo
+Producto monitor = hashMap.putIfAbsent("MON274K034", new Producto("MON274K034", "Monitor 27 4K", 450.0f));
+```
+
+Podemos comprobar si se tiene una determinada clave o un determinado valor.
+
+```java
+// Se puede comprobar si se contiene alguna clave, o algún valor.
+if (hashMap.containsKey("PC000123"))
+   System.out.println("El Map contiene la clave");
+
+if (hashMap.containsValue(pc))
+   System.out.println("El Map contiene el valor");
+```
+
+También tenemos el método `getOrDefault(...)` que nos devolvería un valor asociado a una referencia y sino un valor por defecto que nosotros le proporcionemos. 
+
+```java
+// También podemos hacer uso de getOrDefault
+// si queremos obtener el valor asociado
+// a una referencia y, si no existe, un valor por defecto
+System.out.println(hashMap.getOrDefault("MON274K034", monitor));
+```
+
+Por último tenemos las dos maneras de recorrerlo.
+
+La primer forma es la tradicional de recorrerla es mediante un bucle for-each sobre las claves, mediante el método `keySet()` obtendríamos un `Set` con todas las claves de este `HashMap`, podríamos recorrer una a una y después podríamos recorrer los valores a partir de las claves con el método `get`.
+
+```java
+// La forma tradicional de recorrerla es mediante un bucle for-each sobre las claves
+for (String key : hashMap.keySet())
+   System.out.println(hashMap.get(key));
+```
+
+La otra forma de recorrerlo es usando el método `forEach(...)` con un Bitconsumer que en el fondo recibe dos argumentos la clave y el valor y ya en la parte dereca de la lambda podemos hacer lo que quisieramos tanto con la clave como con el valor en este caso para tener el mismo comportamiento que antes imprimimos el valor.
+
+```java
+/// También podemos recorrer el HashMap con un estilo "más lambda"
+hashMap.forEach((k,v) -> System.out.println(v));
+```
+
+### Ejecutar la Aplicación 
+
+<img src="images/01-96.png">
+
+Como podemos ver un tipo de colección que nos permite manejar pares.
+
+### :computer: Ejemplo de Aplicación `LinkedHashMap<E>`
+
+*``*
+
+```java
+package net.openwebinars.colecciones.map.b.linkedhashmap;
+
+import net.openwebinars.colecciones.map.model.Producto;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/**
+ * Ejemplo de uso de la clase LinkedHashMap
+ *
+ * 
+ */
+public class LinkedHashMapApp {
+
+    public static void main(String[] args) {
+
+        // Vamos a implementar un carro de compra
+        // Nos permitirá almacenar productos y la cantidad de los mismos
+        // que queremos adquirir.
+        // Elegimos LinkedHashMap para mostrar al usuario los
+        // productos en el orden que los insertó.
+
+        // Tenemos varias alternativas de diseño del Map
+        // 1) Map<Producto, Integer>, almacenando los productos y la cantidad de los mismos
+        // 2) Map<String, Pair<Producto, Integer>>
+        // 3) Manejar 2 Map: Map<String, Producto>, para almacenar productos
+        //    y otro Map<String, Integer> o Map<Producto, Integer> para el carrito
+        // 4) Map<String, Integer>, con las referencias y la cantidades
+
+        // En una aplicación real, seguramente tengamos los productos
+        // en una base de datos, y la opción a elegir fuera la 4,
+        // pero por ilustrar el uso de dos Map, escogemos la 3
+
+        // Definimos los productos como el ejercicio anterior
+        Map<String, Producto> productos = new HashMap<>();
+
+        // Insertamos varios producto
+        productos.put("PC000123", new Producto("PC000123", "Ordenador portátil", 800.0f));
+        productos.put("PC000234", new Producto("PC000234", "Ordenador compacto", 400.0f));
+        productos.put("COMPGAM012", new Producto("COMPGAM012", "Auriculares gamer", 75.56f));
+        productos.put("MON274K034", new Producto("MON274K034", "Monitor 27 4K", 325.67f));
 
 
+        // Construimos nuestro carrito
+        Map<Producto, Integer> carrito = new LinkedHashMap<>();
+
+        // Añadimos un portátil
+        addProductoToCarrito(carrito, productos.get("PC000123"),1);
+
+        // Añadimos dos ordenadores
+        addProductoToCarrito(carrito, productos.get("PC000234"), 2);
+
+        // Añadimos un portátil más
+        addProductoToCarrito(carrito, productos.get("PC000123"),1);
+
+        // Estado actual del carrito
+        imprimirCarrito(carrito);
+        System.out.println("\n\n");
+
+        // Si decrementamos el numero de ordenadores 2 veces, se debe eliminar
+        decrementarUnidadesDeProductoEnCarrito(carrito, productos.get("PC000234"));
+        decrementarUnidadesDeProductoEnCarrito(carrito, productos.get("PC000234"));
+
+        // Estado actual del carrito
+        imprimirCarrito(carrito);
+        System.out.println("\n\n");
+
+        // Vaciamos el carrito eliminando el producto que queda
+        removeProductoFromCarrito(carrito, productos.get("PC000123"));
+
+        // Estado actual del carrito
+        imprimirCarrito(carrito);
+        System.out.println("\n\n");
+    }
+
+    /**
+     * Método que permite añadir una referencia al carrito
+     * @param carrito estructura de datos donde guardamos la compra actual
+     * @param producto producto para el que queremos añadir unidades
+     * @param unidades cantidad de unidades a añadir. Si es menor que 1, se normaliza a la unidad.
+     */
+    public static void addProductoToCarrito(Map<Producto, Integer> carrito, Producto producto, int unidades) {
+        int cantidad = unidades >= 1 ? unidades : 1;
+        carrito.put(producto, carrito.get(producto) != null ? carrito.get(producto) + cantidad : cantidad);
+    }
+
+    /**
+     * Método que elimina un producto del carrito
+     * @param carrito
+     * @param producto
+     */
+    public static void removeProductoFromCarrito(Map<Producto, Integer> carrito, Producto producto) {
+        carrito.remove(producto);
+    }
+
+    /**
+     * Método que decrementa en 1 el número de unidades del producto en el carrito.
+     * Si el número de unidades resultante es cero, se elimina.
+     * @param carrito
+     */
+    public static void decrementarUnidadesDeProductoEnCarrito(Map<Producto, Integer> carrito, Producto producto) {
+        if (carrito.containsKey(producto)) {
+            int cantidad = carrito.get(producto);
+            if (cantidad == 1)
+                carrito.remove(producto);
+            else
+                carrito.put(producto, cantidad-1);
+        }
+    }
+
+    /**
+     * Método que procesa el carrito para obtener el importe de la compra.
+     * El código no es estilo Java 8, para simplificar
+     * @param carrito
+     * @return Importe total
+     */
+    public static float calcularTotalCompra(Map<Producto, Integer> carrito) {
+        float total = 0.0f;
+
+        // Para cada producto en el carrito
+        for(Producto p : carrito.keySet()) {
+            total += p.getPrecio() * carrito.get(p);
+        }
+
+        return total;
+    }
+
+    public static void imprimirCarrito(Map<Producto, Integer> carrito) {
+        if (carrito.size() >= 1) {
+            carrito.forEach((k, v) -> {
+                System.out.printf("Producto: %s (%s) -> Nº unidades: %s. Subtotal: %.2f\n",
+                        k.getPrecio(), k.getReferencia(), v.toString(), k.getPrecio() * v);
+            });
+            System.out.printf("Total: %.2f\n", calcularTotalCompra(carrito));
+        } else
+            System.out.println("El carrito no tiene productos actualmente");
+    }
+
+}
+```
 
 
 
