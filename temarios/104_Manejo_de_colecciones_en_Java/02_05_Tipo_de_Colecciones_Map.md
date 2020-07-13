@@ -575,5 +575,173 @@ Vemos como vamos añadiendo algunos productos al carrito con el número de unida
 
 ### :computer: Ejemplo de Aplicación `TreeMap<E>`
 
+La implementación con `TreeMap<E>` la podriamos utilizar para hacer una agenda de contactos. 
+
+*`Contacto`*
+
+```java
+package net.openwebinars.colecciones.map.model;
+
+import java.util.Objects;
+
+/**
+ * Modelo para uno de los ejemplos con Map<K,V>
+ *
+ * @author Luis Miguel López Magaña
+ */
+public class Contacto {
+
+    private String apellidos;
+    private String nombre;
+    private String telefono;
+    private String email;
+
+    public Contacto(String apellidos, String nombre, String telefono, String email) {
+        this.apellidos = apellidos;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidosNombre() {
+        return this.apellidos + ", " + this.nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contacto contacto = (Contacto) o;
+        return Objects.equals(apellidos, contacto.apellidos) &&
+                Objects.equals(nombre, contacto.nombre) &&
+                Objects.equals(telefono, contacto.telefono) &&
+                Objects.equals(email, contacto.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(apellidos, nombre, telefono, email);
+    }
+
+    @Override
+    public String toString() {
+        return "Contacto{" +
+                "apellidos='" + apellidos + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+}
+```
+
+*`TreeMapApp`*
+
+```java
+import java.util.TreeMap;
+
+import net.openwebinars.colecciones.map.model.Contacto;
+
+/**
+ * Ejemplo de uso de la clase TreeMap<K,V>
+ *
+ * 
+ */
+public class TreeMapApp {
+
+    public static void main(String[] args) {
+
+        // Instanciamos nuestro TreeMap
+        TreeMap<String, Contacto> contactos = new TreeMap<>();
+
+        // Añadimos algunos contactos
+        Contacto[] arrayContactos = new Contacto[] {
+          new Contacto("García García", "José", "600123123", "jose.garcia@openwebinars.net"),
+          new Contacto("López Martínez", "Ana", "600456456", "ana.lopez@openwebinars.net"),
+          new Contacto("Castro Méndez", "Javier", "600789789", "javier.castro@openwebinars.net"),
+          new Contacto("Laínez Muñoz", "María", "698765432", "maria.lainez@openwebinars.net")
+        };
+
+        for (Contacto contacto : arrayContactos) {
+            contactos.put(contacto.getApellidosNombre(), contacto);
+        }
+
+        // Si los obtenemos, nos aparecen en el orden de las claves, es decir, Apellido, Nombre
+        contactos.forEach((k,v) -> System.out.println(v));
+
+        // Si añadimos un nuevo contacto, se inserta en orden
+        Contacto nuevoContacto = new Contacto("Fernández Hernández", "Juan", "612345678", "juan.fernandez@openwebinars.net");
+        contactos.put(nuevoContacto.getApellidosNombre(), nuevoContacto);
+
+        // Si los volvemos a obtener todos, nos vuelven a aparecer en el orden natural de la clave
+        System.out.println("\n\n");
+        contactos.forEach((k,v) -> System.out.println(v));
+
+    }
+}
+```
+
+La ordenación de los contactos la podríamos hacer con un método especial haciendo la concatenación de los apellidos coma, el nombre. Para obtener un listado que aun que se imprimiera a lo mejor nombre espacio apellidos se ordenara por los apellidos que suele ser una manera muy conveniente. Eso se obtiene a partir de lo que nosptros le proporcionemos al `TreeMap`.
 
 
+```java
+        // Instanciamos nuestro TreeMap
+        TreeMap<String, Contacto> contactos = new TreeMap<>();
+
+        // Añadimos algunos contactos
+        Contacto[] arrayContactos = new Contacto[] {
+          new Contacto("García García", "José", "600123123", "jose.garcia@openwebinars.net"),
+          new Contacto("López Martínez", "Ana", "600456456", "ana.lopez@openwebinars.net"),
+          new Contacto("Castro Méndez", "Javier", "600789789", "javier.castro@openwebinars.net"),
+          new Contacto("Laínez Muñoz", "María", "698765432", "maria.lainez@openwebinars.net")
+        };
+```
+
+Podemos ir añadiendo los distintos contactos.
+
+```java
+for (Contacto contacto : arrayContactos) {
+   contactos.put(contacto.getApellidosNombre(), contacto);
+}
+```
+
+Lo hacemos a traves del atributo `getApellidosNombre()`, no hace falta que el JavaBean `Contacto` implemente `Comparable` por que la clave del `TreeMap` es un `String` el cual se utilizaría para ordenar alfabeticamente.
+
+### Ejecutar la Aplicación 
+
+<img src="images/01-98.png">
+
+Podemos ver a los contactos ordenados por apellidos aun que los insertamos de una manera poco arbitraria y si añadimos un nuevo contacto se inserta en su lugar adecuado, por que se sigue manteniendo el orden de los mismos.
