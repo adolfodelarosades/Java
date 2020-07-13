@@ -1,21 +1,12 @@
 # 001_Java_SE_Programacion_I
 
- 
-Nombre del curso: Java SE: Programación I
-### Descripción
-
 Este curso de nivel de entrada está dirigido a programadores que son nuevos en Java y que necesitan aprender sus conceptos, construcciones de lenguaje y tipos de datos. El curso está diseñado para programadores que aplicarán estas habilidades lingüísticas para desarrollar programas utilizando las últimas versiones principales del JDK, actualmente Java 11.
 
+El curso completo incluye todas las lesiones y laboratorios en un solo archivo.
 
-Descargue el curso completo para recibir todas las lesiones y laboratorios en un solo archivo.
-
-Tamaño completo del archivo del curso
-
-Java SE: Programación I (Guía del estudiante - Volumen 1) 7.33 MB Descargar
-Java SE: Programación I (Guía del estudiante - Volumen 2) 7.87 MB Descargar
-Java SE: Programación I (Guía de actividades) 2.41 MB Descargar
-
-Para su comodidad, puede optar por descargar la lección del curso individual. Tenga en cuenta que no es necesario descargar lesiones individuales si ya ha descargado el curso completo.
+* Java SE: Programación I (Guía del estudiante - Volumen 1) 
+* Java SE: Programación I (Guía del estudiante - Volumen 2) 
+* Java SE: Programación I (Guía de actividades) 
 
 ### Tabla de contenido
 
