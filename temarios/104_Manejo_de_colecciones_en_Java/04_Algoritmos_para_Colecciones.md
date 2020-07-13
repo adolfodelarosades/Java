@@ -169,7 +169,7 @@ System.out.println("ORDEN ASCENDENTE");
 listaNumeros.forEach(n -> System.out.print(n + " "));
 ```
 
-<img src="images/01-100">
+<img src="images/01-100.png">
 
 Y podríamos hacer una ordenación descendente mediante el método `reverseOrder()` que es bastante cómodo y que lo que haces estudiar el tipo de esta lista y crear un `comparator` a la inversa del comparable que tenga definido. Auque podríamos hacer nosotros nuestras propias implementaciones proporcionando el `comparator` por ejemplo.  
 
