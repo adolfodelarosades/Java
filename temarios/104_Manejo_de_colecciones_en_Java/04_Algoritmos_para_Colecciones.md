@@ -190,7 +190,7 @@ System.out.println("\nORDEN DESCENDENTE");
 listaNumeros.forEach(n -> System.out.print(n + " "));
 ```
 
-<img src="images/01-101">
+<img src="images/01-101.png">
 
 En orden descendente la lista estaría a la inversa, **recordemos que `sort` trabaja con colecciones de tipo `List` siempre**.
 
