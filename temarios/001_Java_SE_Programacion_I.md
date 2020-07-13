@@ -10,10 +10,10 @@ El curso completo incluye todas las lesiones y laboratorios en un solo archivo.
 
 ### Tabla de contenido
 
-* Lección 00: [Indice]()
-* Lección 01: [Introducción]()
-* Lección 02: [¿Qué es un programa Java?]()
-* Lección 03: [Crear una clase principal de Java]()
+* Lección 00: [Indice](/temarios/001_Java_SE_Programacion_I/pdf/Indice.pdf)
+* Lección 01: [Introducción](/temarios/001_Java_SE_Programacion_I/pdf/Leccion01_Introduction.pdf)
+* Lección 02: [¿Qué es un programa Java?](/temarios/001_Java_SE_Programacion_I/pdf/Leccion02_Que_es_un_Programa_Java.pdf)
+* Lección 03: [Crear una clase principal de Java](/temarios/001_Java_SE_Programacion_I/pdf/Leccion03_Crear_una_Java_Main_Class.pdf)
 * Lección 04: [Datos en un carrito]()
 * Lección 05: [Gestión de elementos múltiples]()
 * Lección 06: [Describiendo objetos y clases]()
