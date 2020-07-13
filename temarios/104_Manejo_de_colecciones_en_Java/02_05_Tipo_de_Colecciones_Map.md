@@ -266,7 +266,9 @@ Como podemos ver un tipo de colección que nos permite manejar pares.
 
 ### :computer: Ejemplo de Aplicación `LinkedHashMap<E>`
 
-*``*
+Al usar un `LinkedHashMap<E>` lo único que aportaría sería el orden de inserción con respecto a `HashMap<E>`, vamos a complementar el ejemplo anterior con una implementación de un carrito de la compra de una aplicación web. 
+
+*`LinkedHashMapApp`*
 
 ```java
 package net.openwebinars.colecciones.map.b.linkedhashmap;
@@ -411,9 +413,167 @@ public class LinkedHashMapApp {
 }
 ```
 
+Hay varias opciones que se describen en los comentarios en este caso lo vamos hacer con la opción 3. Vamos a mantener el mismo `Map` del ejemplo de antes y un segundo con el Producto y número de unidades que tenemos del mismo.
+
+```java
+        // Vamos a implementar un carro de compra
+        // Nos permitirá almacenar productos y la cantidad de los mismos
+        // que queremos adquirir.
+        // Elegimos LinkedHashMap para mostrar al usuario los
+        // productos en el orden que los insertó.
+
+        // Tenemos varias alternativas de diseño del Map
+        // 1) Map<Producto, Integer>, almacenando los productos y la cantidad de los mismos
+        // 2) Map<String, Pair<Producto, Integer>>
+        // 3) Manejar 2 Map: Map<String, Producto>, para almacenar productos
+        //    y otro Map<String, Integer> o Map<Producto, Integer> para el carrito
+        // 4) Map<String, Integer>, con las referencias y la cantidades
+
+        // En una aplicación real, seguramente tengamos los productos
+        // en una base de datos, y la opción a elegir fuera la 4,
+        // pero por ilustrar el uso de dos Map, escogemos la 3
+
+        // Definimos los productos como el ejercicio anterior
+        Map<String, Producto> productos = new HashMap<>();
+
+        // Insertamos varios producto
+        productos.put("PC000123", new Producto("PC000123", "Ordenador portátil", 800.0f));
+        productos.put("PC000234", new Producto("PC000234", "Ordenador compacto", 400.0f));
+        productos.put("COMPGAM012", new Producto("COMPGAM012", "Auriculares gamer", 75.56f));
+        productos.put("MON274K034", new Producto("MON274K034", "Monitor 27 4K", 325.67f));
 
 
+        // Construimos nuestro carrito
+        Map<Producto, Integer> carrito = new LinkedHashMap<>();
+```
 
+
+A la hora de trabajar con este `Map` se han hecho algunos métodos que facilitarán trabajar con el.
+
+```java
+     /**
+     * Método que permite añadir una referencia al carrito
+     * @param carrito estructura de datos donde guardamos la compra actual
+     * @param producto producto para el que queremos añadir unidades
+     * @param unidades cantidad de unidades a añadir. Si es menor que 1, se normaliza a la unidad.
+     */
+    public static void addProductoToCarrito(Map<Producto, Integer> carrito, Producto producto, int unidades) {
+        int cantidad = unidades >= 1 ? unidades : 1;
+        carrito.put(producto, carrito.get(producto) != null ? carrito.get(producto) + cantidad : cantidad);
+    }
+```
+
+Lo que hace es añadirle al `Map` el `Producto` y un número de unidades, se garantiza que el número de unidades sea siempre mayor que 1, si es un valor menor lo sustituimos por el 1, y para insertaarlo lo que hacemos es comprobar con la expresión si el producto no existe lo que hacemos es insertar la cantidad que se proporciona y si existiera si fuera distinto de null lo que hacemos es incrementar el número de unidades, es simular la opción de ir simulando pulsar varias veces la opción de "+" a la hora de añadir productos en un carrito.
+
+    
+```java
+    /**
+     * Método que elimina un producto del carrito
+     * @param carrito
+     * @param producto
+     */
+    public static void removeProductoFromCarrito(Map<Producto, Integer> carrito, Producto producto) {
+        carrito.remove(producto);
+    }
+```
+
+Para eliminarlos simplemente con el método `remove(producto)` se eliminaria el par completo del carrito.
+
+
+```java
+    /**
+     * Método que decrementa en 1 el número de unidades del producto en el carrito.
+     * Si el número de unidades resultante es cero, se elimina.
+     * @param carrito
+     */
+    public static void decrementarUnidadesDeProductoEnCarrito(Map<Producto, Integer> carrito, Producto producto) {
+        if (carrito.containsKey(producto)) {
+            int cantidad = carrito.get(producto);
+            if (cantidad == 1)
+                carrito.remove(producto);
+            else
+                carrito.put(producto, cantidad-1);
+        }
+    }
+```
+
+Si quisieramos decrementar para que tuvieramos esa opción de decrementa en 1 el número de unidades del producto en el carrito. Comprobariamos si el carrito tiene el producto y si lo contiene cual es la cantidad, si la cantidad es mayor de 1 simplemente la decrementamos y si la cantidad fuese 1 y si la decrementamos ya sería 0 y lo que hacemos ya directamente es eliminarlo del carrito. 
+
+```java
+    /**
+     * Método que procesa el carrito para obtener el importe de la compra.
+     * El código no es estilo Java 8, para simplificar
+     * @param carrito
+     * @return Importe total
+     */
+    public static float calcularTotalCompra(Map<Producto, Integer> carrito) {
+        float total = 0.0f;
+
+        // Para cada producto en el carrito
+        for(Producto p : carrito.keySet()) {
+            total += p.getPrecio() * carrito.get(p);
+        }
+
+        return total;
+    }
+
+    public static void imprimirCarrito(Map<Producto, Integer> carrito) {
+        if (carrito.size() >= 1) {
+            carrito.forEach((k, v) -> {
+                System.out.printf("Producto: %s (%s) -> Nº unidades: %s. Subtotal: %.2f\n",
+                        k.getPrecio(), k.getReferencia(), v.toString(), k.getPrecio() * v);
+            });
+            System.out.printf("Total: %.2f\n", calcularTotalCompra(carrito));
+        } else
+            System.out.println("El carrito no tiene productos actualmente");
+    }
+```
+
+Y como Bonus métodos para obtener el importe de la compra e imprimir el carrito que en el fondo no son maneras de recorrer el carrito y que lo hacemos de dos maneras distintas `keySet()` nos permitiria recorrer el carrito que esta formado por Productos obteniendo de la propia clase `Producto` el precio y como valor del carrito el número de unidades acumulandolo en `total` para poder obtenerlo.
+
+Y en el caso de `imprimirCarrito(...)` lo recorremos con el método `forEach` y a través del Bitconsumer `(k, v)` el poder imprimir algo así como el Ticket de Compra, el carrito y cuanto nos costaría.
+
+En el método `main` solo se ha jugado un poco con esos métodos.
+
+```java
+        // Añadimos un portátil
+        addProductoToCarrito(carrito, productos.get("PC000123"),1);
+
+        // Añadimos dos ordenadores
+        addProductoToCarrito(carrito, productos.get("PC000234"), 2);
+
+        // Añadimos un portátil más
+        addProductoToCarrito(carrito, productos.get("PC000123"),1);
+
+        // Estado actual del carrito
+        imprimirCarrito(carrito);
+        System.out.println("\n\n");
+
+        // Si decrementamos el numero de ordenadores 2 veces, se debe eliminar
+        decrementarUnidadesDeProductoEnCarrito(carrito, productos.get("PC000234"));
+        decrementarUnidadesDeProductoEnCarrito(carrito, productos.get("PC000234"));
+
+        // Estado actual del carrito
+        imprimirCarrito(carrito);
+        System.out.println("\n\n");
+
+        // Vaciamos el carrito eliminando el producto que queda
+        removeProductoFromCarrito(carrito, productos.get("PC000123"));
+
+        // Estado actual del carrito
+        imprimirCarrito(carrito);
+        System.out.println("\n\n");
+```
+
+Podemos ver como vamos añadiendo algunos Productos al carrito con su correspondiente número de unidades.
+
+### Ejecutar la Aplicación 
+
+<img src="images/01-97.png">
+
+Vemos como vamos añadiendo algunos productos al carrito con el número de unidades se cálcula perfectamente el subtotal y también el total del mismo y si vamos cambiando el número de unidades y volvemos a imprimir o lo vaciamos el carrito no tuviera ningún producto.
+
+### :computer: Ejemplo de Aplicación `TreeMap<E>`
 
 
 
