@@ -10,7 +10,7 @@ Con respecto a los algoritmos, tenemos algoritmos para bastante operaciones pero
 
 `sort` nos permite tener una versión que tiraría del orden natural de los elementos que almacenemos, todo ellos son métodos de la clase `Collection` tendría una segunda versión donde le proporcionaremos un `comparador` y entonces lo que haría sería ordenar en base a ese `comparador` ambas versiones lo que hacen es utilizar el algoritmo **mergesort** que un algoritmo con un rendimiento bastante bueno de los mejores diría yo a la hora de hacer estas operaciones de ordenación.
 
-### :computer: Ejemplo de Aplicación `LinkedHashMap<E>`
+### :computer: Ejemplo de Aplicación `AlgoritmosColeccionesApp`
 
 ```java
 package net.openwebinars.colecciones.algoritmos;
