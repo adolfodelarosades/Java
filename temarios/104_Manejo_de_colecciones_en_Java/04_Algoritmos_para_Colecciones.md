@@ -216,8 +216,101 @@ Tenemos algoritmos de búsqueda, la búsqueda binaria que trabajaría siempre co
 
 <img src="images/01-57.png">
 
-Lo hace de una manera un poco peculiar y es que si encuentra el elemento nos devuelve el índice en el cual se encuentra y sino nos devuelve este valor vale que es una manera de mezclar un Boolean oí un Boolean no y un número entero porque porque no devuelve un valor menor que cero si no lo encuentras con lo cual pues tenemos esa facilidad decir si el índice es mayor o igual que cero elemento está en la lista y si no pues no está pero además nos devuelve de alguna manera es una forma de obtener el punto de inserción de elementos de donde deberíamos si queremos insertarlo para que se mantenga el orden dónde deberíamos hacerlo como el 7 podríamos buscar otro que no está como el 25 como el índice no es mayor que cero no lo puede encontrar y si lo quisiéramos añadir no que tendríamos que hacer es utilizar este valor que se nos ha devuelto vale invertirlo con menos sin decir la posición menos 1 Vale de esta forma lo que haríamos sería obtener la posición exacta de reinserción y podemos comprobar como aquí lo inserta en su posición adecuada 25 que sería al final de la lista vale con respecto a los algoritmo tenemos algo más para bastante operaciones pero la más clásicas un extraordinario desordenado la operación de mi mujer y también alguna como el máximo mínimo frecuencias horno permite tener una versión que qué tiraría del ordenador al dedo elemento que te alma tenemos todo ello son métodos de la clase colegios vale entendido una segunda versión dónde le proporciona haríamos un un comprador y entonces lo que haría sería ordenar en base a eso he comprado ambas versión es lo que hacen de utilizar el algoritmo meses órale que una algoritmo con un rendimiento bastante bueno de los mejores diría yo a la hora de de hacer esta operación este de ordenación vale tenemos por aquí
+Lo hace de una manera un poco peculiar y es que si encuentra el elemento nos devuelve el índice en el cual se encuentra y sino nos devuelve este valor `(-(punto de inserción)-1)` que es una manera de mezclar un Boolean y un número entero porque, porque no devuelve un valor menor que cero si no lo encuentras, con lo cual tenemos esa facilidad de decir si el índice es mayor o igual que cero el elemento está en la lista y si no pues no está, pero además nos devuelve de alguna manera una forma de obtener el punto de inserción de ese elemento, de donde deberíamos si queremos insertarlo para que se mantenga el orden dónde deberíamos hacerlo.
 
+```java
+/**
+* ALGORITMOS DE BÚSQUEDA
+*/
+
+// Para usar la búsqueda binaria, la lista debe estar ordenada
+Collections.sort(listaNumeros);
+
+// Buscamos un elemento que sabemos que está contenido en la colección
+int index = Collections.binarySearch(listaNumeros, 7);
+
+// Si lo encontramos...
+if (index >= 0)
+   System.out.println("\n\nPodemos encontrar el elemento 7 en la posición " + index);
+else
+   System.out.println("\n\nNo se ha podido encontrar el elemento 7");
+
+// Ahora buscamos un elemento que sabemos que no está contenido en la colección
+index = Collections.binarySearch(listaNumeros, 25);
+
+if (index >= 0)
+   System.out.println("\nPodemos encontrar el elemento 25 en la posición " + index);
+   // Si no lo encontramos...
+else {
+   System.out.println("\nNo se ha podido encontrar el elemento 25");
+   // Si quisiéramos insertar el elemento en el lugar adecuado, según el orden actual
+   listaNumeros.add(-index-1, 25);
+}
+
+// Resultado
+System.out.println("\nELEMENTOS TRAS INSERTAR UN ELEMENTO EN SU LUGAR ADECUADO");
+listaNumeros.forEach(n -> System.out.print(n + " "));
+```
+
+Podríamos buscar un elemento que si está como el 7, podríamos buscar otro que no está como el 25, como el índice no es mayor que cero no lo puede encontrar y si lo quisiéramos añadir, lo que tendríamos que hacer es utilizar el valor que se nos ha devuelto `index` invertirlo y la posición menos 1, es decir `add(-index-1, 25)`, de esta forma lo que haríamos sería obtener la posición exacta de inserción y podemos comprobar.
+
+<img src="images/01-103.png">
+
+Podemos comprobar como inserta en su posición adecuada a 25 que sería al final de la lista.
+
+
+AQUIIIIIIIII
+
+```java
+// También se puede buscar con un orden determinado, usando la segunda
+// implementación de binarySearch
+
+// Ordenamos descendentemente
+Collections.sort(listaNumeros, Collections.reverseOrder());
+
+index = Collections.binarySearch(listaNumeros, 9, Collections.reverseOrder());
+
+System.out.println("\n\nELEMENTOS ORDENADOS INVERSAMENTE");
+listaNumeros.forEach(n -> System.out.print(n + " "));
+
+if (index >= 0)
+   System.out.println("\nPodemos encontrar el elemento 9 en la posición " + index);
+else
+   System.out.println("\n\nNo se ha podido encontrar el elemento 9");
+```
+
+```java
+/**
+* ALGUNAS OPERACIONES
+*/
+
+// MÁXIMO Y MÍNIMO
+
+// Funciona sobre Collection. Podemos probar con un Set.
+Set<Integer> conjuntoDeNumeros = new HashSet<>(listaNumeros);
+
+int minimo = Collections.min(conjuntoDeNumeros);
+
+System.out.println("\n\nEl valor minimo del conjunto de números es " + minimo);
+
+// FRECUENCIA
+
+int elemento = 5;
+int frecuencia = Collections.frequency(conjuntoDeNumeros, elemento);
+
+System.out.println("\nEl número de ocurrencias de " + elemento + " en la colección es " + frecuencia);
+```
+
+```java
+// DISJOINT
+
+List<Integer> pares = List.of(1,3,5,7,9);
+List<Integer> impares = List.of(0,2,4,6,8);
+
+if (Collections.disjoint(pares, impares)) {
+   System.out.println("\nAmbas colecciones no tienen ningún elemento en común");
+}
+```
 
 
 
