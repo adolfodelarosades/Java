@@ -287,10 +287,6 @@ Podemomos ver como obtenemos 9 en la posición 1 por que hemos ordenado descende
 Tenemos otras serie de operaciones como serían el Máximo, el Mínimo de acuerdo al orden natural, con un `Comparator`, se pueden aplicar a `Collection` con lo cual podemos implementaciones de `Set`, `Queue`, etc.
 
 También tenemos para manejar la frecuencia con el método `frequency` que nos devolveria la frecuencia de un objeto.
-AQUIIII.
-
-
-Podemos ver como obtenemos el máximo, el mínimo 
 
 ```java
 /**
@@ -314,6 +310,12 @@ int frecuencia = Collections.frequency(conjuntoDeNumeros, elemento);
 System.out.println("\nEl número de ocurrencias de " + elemento + " en la colección es " + frecuencia);
 ```
 
+<img src="images/01-105.png">
+
+Podemos ver como obtenemos el mínimo y la frecuencia. 
+
+Finalmente tenemos el método `disjoint(...)` que nos permite saber que elementos tienen en común dos colecciones, dos listas. Devuelve `true` si no lo tienen y `false` si tienen elementos en común. 
+
 ```java
 // DISJOINT
 
@@ -325,8 +327,7 @@ if (Collections.disjoint(pares, impares)) {
 }
 ```
 
-
-
+<img src="images/01-106.png">
 
 
 <img src="images/01-59.png">
