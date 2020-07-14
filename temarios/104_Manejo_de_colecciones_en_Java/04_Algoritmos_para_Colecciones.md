@@ -258,8 +258,7 @@ Podríamos buscar un elemento que si está como el 7, podríamos buscar otro que
 
 Podemos comprobar como inserta en su posición adecuada a 25 que sería al final de la lista.
 
-
-AQUIIIIIIIII
+Si quisieramos hacer una busqueda con los elementos ordenados descendente también lo podríamos hacer.
 
 ```java
 // También se puede buscar con un orden determinado, usando la segunda
@@ -278,6 +277,20 @@ if (index >= 0)
 else
    System.out.println("\n\nNo se ha podido encontrar el elemento 9");
 ```
+
+<img src="images/01-104.png">
+
+Podemomos ver como obtenemos 9 en la posición 1 por que hemos ordenado descendentemente.
+
+<img src="images/01-58.png">
+
+Tenemos otras serie de operaciones como serían el Máximo, el Mínimo de acuerdo al orden natural, con un `Comparator`, se pueden aplicar a `Collection` con lo cual podemos implementaciones de `Set`, `Queue`, etc.
+
+También tenemos para manejar la frecuencia con el método `frequency` que nos devolveria la frecuencia de un objeto.
+AQUIIII.
+
+
+Podemos ver como obtenemos el máximo, el mínimo 
 
 ```java
 /**
@@ -315,5 +328,5 @@ if (Collections.disjoint(pares, impares)) {
 
 
 
-<img src="images/01-58.png">
+
 <img src="images/01-59.png">
