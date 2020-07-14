@@ -16,10 +16,9 @@ https://guava.dev/
 
 **Guava** esta implementada por Google como decíamos, la podemos utilizar tanto en Java como en Android, nos ofrece un montón de posibilidades, visitar la documentación, nos ofrece una serie de constructores bastante mejorado, se utiliza iterable allá siempre donde sea posible por hacerlo todo por un paraguas lo más común posible, tenemos más metodos factoría de los que nos ofrece Java directamente, operaciones con conjuntos, la unión, la intersección, el producto cartesiano de dos conjuntos y algunas colecciones un poco especiales como los `BiMaps`, `Multisets`, `Multimaps`, `Tables`, qué puede ser bastante útil en algunos contextos.
 
-
-
-
 Tenemos por aquí un ejemplo de los tres, para poder utilizar estas librerías hemos creado un proyecto Maven en el mismo proyecto hemos hemos añadido las tres librerías, tendríamos aquí las dependencias también la documentación, para añadir la librería Guava, Eclipse Collections que necesita dos dependencias y las Apache Commons Collections que necesitaría una dependencia.
+
+### :computer: Ejemplo de Aplicación Guava
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
@@ -119,6 +118,8 @@ https://www.eclipse.org/collections/
 
 Eclipse collections nos ofrece distintas alternativas, según su web nos ofrece una API que es más legible con métodos más efectivos, nos ofrece también múltiples métodos factoría para colecciones mutables no solamente inmutables como ofrente Java por defecto, nos ofrece colecciones para tipos primitivos sin tener que usar los tipos de envoltorio, una gestión de memoria mejorada y también algún tipo de colecciones como los `BiMaps`, `Multimaps`, `Bags`,...
 
+### :computer: Ejemplo de Aplicación Eclipse Collections
+
 Vamos a ver como ejemplo de Eclipse Collections uno que nos ofrecen en su web.
 
 ```java
@@ -189,6 +190,8 @@ https://commons.apache.org/proper/commons-collections/download_collections.cgi
 <img src="images/01-66.png">
 
 Por último tenemos aquí la Apache Commons Collection la última librería que vamos a ver nos ofrece también alguna opciones como las colecciones tipo `Bag` será el ejemplo que veamos, los `BidiMap`,  también mapas clave-valor y valor-clave, un iterador para recorrer un map de una manera más conveniente, colecciones compuestas, muchas implementaciones de interadores, de comparadores etc.
+
+### :computer: Ejemplo de Aplicación Apache Commons Collections
 
 ```java
 package net.openwebinars.collections.librerias.apache;
