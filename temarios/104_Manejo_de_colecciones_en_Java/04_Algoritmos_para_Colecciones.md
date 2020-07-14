@@ -314,6 +314,8 @@ System.out.println("\nEl número de ocurrencias de " + elemento + " en la colecc
 
 Podemos ver como obtenemos el mínimo y la frecuencia. 
 
+<img src="images/01-59.png">
+
 Finalmente tenemos el método `disjoint(...)` que nos permite saber que elementos tienen en común dos colecciones, dos listas. Devuelve `true` si no lo tienen y `false` si tienen elementos en común. 
 
 ```java
@@ -328,6 +330,3 @@ if (Collections.disjoint(pares, impares)) {
 ```
 
 <img src="images/01-106.png">
-
-
-<img src="images/01-59.png">
