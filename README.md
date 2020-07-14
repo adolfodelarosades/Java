@@ -11,7 +11,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 * [101 Java 8 desde Cero](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero.md)
 * [102 Java8 para programadores Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/102_Java8_para_programadores_Java.md)
-* [104 Manejo de colecciones en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/104_Manejo_de_colecciones_en_Java.md)
+* [104 Manejo de colecciones en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/104_Manejo_de_colecciones_en_Java.md) :+1:
 * [106 Java 9: Nueva filosofía y funcionalidades](https://github.com/adolfodelarosades/Java/blob/master/temarios/106_Java-9_Nueva_filosofia_y_funcionalidades.md)
 * [110 Desarrollo Web con Java EE](https://github.com/adolfodelarosades/Java/blob/master/temarios/110_Desarrollo_Web_con_Java_EE.md)
 * [120 Curso JavaServer Faces](https://github.com/adolfodelarosades/Java/blob/master/temarios/120_Curso_JavaServer_Faces.md)
@@ -57,13 +57,13 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # Antonio Martín Sierra
 
-* [611 Aprende a programar en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/611_Aprende_a_programar_en_Java.md)
+* [611 Aprende a programar en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/611_Aprende_a_programar_en_Java.md) :+1:
 * [612 Programación Orientada a Objetos con Java]()
 * [613 Curso Programador Java Certificado I]()
 * [614 Creación de aplicaciones Web con Java EE]()
-* [615 Acceso a datos en aplicaciones Java con JPA e Hibernate](https://github.com/adolfodelarosades/Java/blob/master/temarios/615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate.md)
+* [615 Acceso a datos en aplicaciones Java con JPA e Hibernate](https://github.com/adolfodelarosades/Java/blob/master/temarios/615_Acceso_a_datos_en_aplicaciones_Java_con_JPA_e_Hibernate.md) :+1:
 * [616 Microservicios con Spring Boot y Cloud]()
-* [617 Git en Eclipse para Proyectos Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/617_Git_en_Eclipse_para_Proyectos_Java.md)
+* [617 Git en Eclipse para Proyectos Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/617_Git_en_Eclipse_para_Proyectos_Java.md) :+1:
 
 # Cursos Madrid
 
