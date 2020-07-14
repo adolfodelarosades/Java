@@ -1,4 +1,4 @@
-# 28 Interfaces en Java
+# 28 Interfaces en Java 8
 
 <img src="images/28-01.png">
 <img src="images/28-02.png">
