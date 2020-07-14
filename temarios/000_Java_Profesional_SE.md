@@ -31,4 +31,4 @@
    * [28 Interfaces en Java 8](/temarios/000_Java_Profesional_SE/28_Interfaces_en_Java.md)
    * [29 Interfaces Funcionales en Java 8](/temarios/000_Java_Profesional_SE/29_Interfaces_funcionales_en_Java.md)
    * [30 Expresiones_Lambda](/temarios/000_Java_Profesional_SE/30_Expresiones_Lambda.md)
-   * [31 Nuevos Métodos en Colecciones](31_Nuevos_Metodos_en_Colecciones.md)
+   * [31 Nuevos Métodos en Colecciones](/temarios/000_Java_Profesional_SE/31_Nuevos_Metodos_en_Colecciones.md)
