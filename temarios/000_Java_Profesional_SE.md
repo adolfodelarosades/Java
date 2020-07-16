@@ -2,6 +2,7 @@
 
 ## Clases
    * [20200714 Martes](/temarios/000_Java_Profesional_SE/20200714_Martes.md)
+   * [20200715 Miercoles](/temarios/000_Java_Profesional_SE/20200715_Miercoles.md)
 
 ## Contenido
    * [01 Características de Java](/temarios/000_Java_Profesional_SE/01_Caracteristicas_de_Java.md)
