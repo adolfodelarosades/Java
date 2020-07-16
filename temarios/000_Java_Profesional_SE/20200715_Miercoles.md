@@ -109,19 +109,19 @@ import service.PersonaService;
 
 public class ManipularPersonas {
 
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
-		List<Persona> varias=Arrays.asList(new Persona("Alex","al@gg.com", 55555, 16),
-				new Persona("Juan","alfd@gg.com", 55555, 20),
-				new Persona("Elena","al@gg.es", 42332, 17),
-				new Persona("Marta","alaoia@gg.com", 1233, 34),
-				new Persona("Lucas","alert@gg.net", 6672, 44),
-				new Persona("Alicia","sdfl@gg.com", 2121, 35));
+      List<Persona> varias=Arrays.asList(new Persona("Alex","al@gg.com", 55555, 16),
+		new Persona("Juan","alfd@gg.com", 55555, 20),
+		new Persona("Elena","al@gg.es", 42332, 17),
+		new Persona("Marta","alaoia@gg.com", 1233, 34),
+		new Persona("Lucas","alert@gg.net", 6672, 44),
+		new Persona("Alicia","sdfl@gg.com", 2121, 35));
 		
 		
-		//Parte 1. Imprime los nombres de las personas mayores de edad
-		PersonaService service = new PersonaService();
-		service.imprimir(varias, p->p.getEdad()>=18);
+      //Parte 1. Imprime los nombres de las personas mayores de edad
+      PersonaService service = new PersonaService();
+      service.imprimir(varias, p->p.getEdad()>=18);
   }
 }
 ```
@@ -134,10 +134,130 @@ Interface `Predicate<T>` hay que mandarle la implementación del método `test` 
 
 Como observamos `test` recibe como parametro una `Persona` y como ya sabemos `test` nos regrea un valor booleano. Por eso al hacer la implementación de la Interface `Predicate<T>` con expresiones lambada en eso debemos pensar para saber como implementarla en este caso el resultado es `p->p.getEdad()>=18` del lado de la derecha el parámetro que debe recir y del lado derecho una expresión booleana que nos devolvera el resultado.
 
+**La Expresión Lambda es una implementación de la interfaz sin crear una clase. Lo que se crea es un Objeto de una clase Anonima que implementa la interfaz**.
+
+<img src="images/20200715-03.png">
+
+Vamos a usar el mismo método `test` para una segunda condición, vamos a imprimir las personas que tengan un determinado dominio.
+
+*`ManipularPersonas`*
+
+```java
+package principal;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+import model.Persona;
+import service.PersonaService;
+
+public class ManipularPersonas {
+
+   public static void main(String[] args) {
+		
+      List<Persona> varias=Arrays.asList(new Persona("Alex","al@gg.com", 55555, 16),
+		new Persona("Juan","alfd@gg.com", 55555, 20),
+		new Persona("Elena","al@gg.es", 42332, 17),
+		new Persona("Marta","alaoia@gg.com", 1233, 34),
+		new Persona("Lucas","alert@gg.net", 6672, 44),
+		new Persona("Alicia","sdfl@gg.com", 2121, 35));
+		
+		
+      //Parte 1. Imprime los nombres de las personas mayores de edad
+      PersonaService service = new PersonaService();
+      service.imprimir(varias, p->p.getEdad()>=18);
+      
+      //Parte 2: solicitar la introducción de un dominio y muestre
+      Scanner sc= new Scanner(System.in);
+      System.out.println("Introduce Dominio:");
+      String dominio = sc.nextLine();
+      service.imprimir(varias, p -> p.getEmail().endsWith(dominio));
+      
+  }
+}
+```
+
+Simplemente llamamos al método `service.imprimir(varias, p -> p.getEmail().endsWith(dominio));` con una Lambda diferente, una que se adecue a la nueva condición.
+
+<img src="images/20200715-04.png">
+
+Vamos a hacer una tercera variante de la condición, vamos a pedir el `Telefono` que es un `integer` y que muestre las personas con un número menor al introducido.
+
+*`ManipularPersonas`*
+
+```java
+package principal;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+import model.Persona;
+import service.PersonaService;
+
+public class ManipularPersonas {
+
+   public static void main(String[] args) {
+		
+      List<Persona> varias=Arrays.asList(new Persona("Alex","al@gg.com", 55555, 16),
+		new Persona("Juan","alfd@gg.com", 55555, 20),
+		new Persona("Elena","al@gg.es", 42332, 17),
+		new Persona("Marta","alaoia@gg.com", 1233, 34),
+		new Persona("Lucas","alert@gg.net", 6672, 44),
+		new Persona("Alicia","sdfl@gg.com", 2121, 35));
+		
+		
+      //Parte 1. Imprime los nombres de las personas mayores de edad
+      PersonaService service = new PersonaService();
+      service.imprimir(varias, p->p.getEdad()>=18);
+      
+      //Parte 2: solicitar la introducción de un dominio y muestre
+      Scanner sc= new Scanner(System.in);
+      System.out.println("Introduce Dominio:");
+      String dominio = sc.nextLine();
+      service.imprimir(varias, p -> p.getEmail().endsWith(dominio));
+      
+      //Parte 3: Solicita telefono y presentar nombres de las personas con numero menor
+      System.out.println("Introduce Teléfono:");
+      int tel = Integer.parseInt(sc.nextLine());
+      service.imprimir(varias, p -> p.getTelefono() < tel);
+      
+  }
+}
+```
+
+Una nueva llamada al método `imprimir` con una condición diferente.
+
+<img src="images/20200715-05.png">
+
+### Interface `Interface Function<T,R>`
+
+<img src="images/29-04.png">
+
+<img src="images/20200715-06.png">
+
+La Interface `Interface Function<T,R>`
+
+Su método abstracto es:
+
+`R	apply (T t)	Applies this function to the given argument.`
+
+### Interface `Consumer<T>`
+
+<img src="images/29-05.png">
+
+<img src="images/20200715-02.png">
+
+Esta es una interfaz funcional y, por lo tanto, se puede utilizar como destino de asignación para una expresión lambda o referencia de método.
+
+Su método abstracto es:
+
+`void	accept (T t)	Recibe un dato y lo procesa no regresa nada`
 .
 Vamos a usa
-<img src="images/29-04.png">
-<img src="images/29-05.png">
+
+
 <img src="images/29-06.png">
 <img src="images/29-07.png">
 <img src="images/29-08.png">
