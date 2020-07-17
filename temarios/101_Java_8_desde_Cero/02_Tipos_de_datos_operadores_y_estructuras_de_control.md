@@ -254,6 +254,8 @@ public class TiposDatosNumericos {
       int binVal = 0b11010;
 		
       //String s = "Hola Mundo";
+      
+      ...
    }
 }
 ```
@@ -320,16 +322,126 @@ Paralelamente a los número entero que son números negativos y positivos pero s
 
 ![06_Manipulación-8](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-8.png)
 
-Aparejado a los números enteros y números reales tenemos 
+Aparejado a los números enteros y números reales tenemos una serie de operadores qué podemos utilizar con todos los números. Los podemos agrupar de esta manera y serían los **operadores de prefijo y postfijo** que nos van a permitir incrementar o decrementar en una unidad cada uno de los valores y qué se utilizarían poniendo antes o después de la expresión que queremos incrementar, de la variable que quedemos incrementar, la potencia de colocarlo antes o después la conoceremos cuando conozcamos expresiones y es que de alguna manera si lo colocamos delante del valor de una expresión, se incrementa primero el valor y después se evaluar la extensión y si lo colocamos después se evalúa primero la expresión y después se incrementa o decrementa, **si lo utilizamos con un nombre de una variable normal no va a haber un diferente**. 
 
+Los **operadores unarios**, es decir los que solamente requieren de un operando simplemente sirven para el más y el menos que servirían para para cambiar el signo del número.
 
+Los **operadores de tipo multiplicativo** que estaría la multiplicación con el asterisco `*`, la división con la barra del 7 `/` y el tanto por ciento `%` para obtener el residuo, el resto de dividir un número entre otro.
 
+Los operadores de suma `+` y resta `-`.
 
-
-
-
+Y los **operadores de desplazamiento de bits** que lo vamos a presentar un poquito después.
 
 ![06_Manipulación-9](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-9.png)
+
+También tenemos determinados **operadores numérico de asignación abreviada** y es que si queremos almacenar el resultado de una suma por ejemplo entre dos variables y queremos asignarle el valor de esa suma, el resultado de la suma a una de las variables tenemos esta serie de operadores abreviados que nos ahorran un poco en lo que tenemos que escribir y nos evitan errores, lo podemos usar con la suma, la resta, la multiplicación, la división y también el residuo.
+
+### :computer: `101-06-Tipos_de_Datos`
+
+Vamos a ver algunos ejemplo que tenemos a continuación de declaración de distintos tipos declaración de distintos tipos numéricos y el uso de los operadores.
+
+*`TiposDatosNumericos`*
+
+```java
+package tiposdatos;
+
+@SuppressWarnings("all")
+public class TiposDatosNumericos {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+		
+      ...
+		
+      /*
+       * TIPOS DE DATOS NUMÉRICOS
+       */
+		
+      //TIPOS DE DATOS ENTEROS
+      //[-128,127]
+      byte b = 28;
+      //[-32768,32767]
+      short s = 3458;
+      //[-2^31,(2^31)-1]
+      int i = 33456;
+      //[-2^63,(2^63)-1]
+      long l = 3_000_000_000L;
+			
+      //TIPOS DE DATOS REALES
+      //Precisión simple
+      float f = 0.25f;
+      //Precisión doble
+      double Pi = Math.PI;
+		
+		
+		
+      //OPERADORES NUMÉRICOS
+      int x = 7;
+      int y = 5;
+		
+      //Suma
+      int z = x + y;
+      System.out.print("Suma ");
+      System.out.println(z);
+		
+      //Resta
+      z = x - y;
+      System.out.print("Resta ");
+      System.out.println(z);
+		
+      //Multiplicación
+      z = x * y;
+      System.out.print("Multipliación ");		
+      System.out.println(z);
+		
+		
+      //División (entera)
+      z = x / y;
+      System.out.print("División entera ");		
+      System.out.println(z);
+		
+      //División (no entera)
+      double j = Pi/f;
+      System.out.println("División con decimales ");
+      System.out.println(j);
+				
+      //Resto
+      z = x % y;
+      System.out.print("Módulo o resto ");		
+      System.out.println(z);
+		
+      //Incremento
+      z = x++;
+      System.out.print("Incremento ");		
+      System.out.println(z);
+      System.out.println(x);
+      
+      ...
+   }
+}
+```
+
+AQUIIII
+
+### Comentarios
+
+Podríamos utilizar dos tipos de comentarios, si queremos comentar un gran bloque de código lo podríamos hacer simplemente añadiendo como decíamos una barra y un asterisco `/*` y más adelante con un asterisco y una barra `*/` y ya quedaría totalmente comentado. También podríamos utilizar alguno de los atajos que noofrece Eclipse, si seleccionamos todo el código que queremos comentar y vamos a la pestaña de `Source` vemos que nos permite añadir algunos elementos de comentarios `Toggle Comment`, `Add Block Comment`, `Remove Block Comment`, `Generate Element Comment` y tiene también sus atajo de teclado, podemos añadir un comentario directamente desde aquí con `Toggle Comment` y lo añadiría como un comentario al inicio de cada línea, comentaría línea a línea esto tiene sus ventajas porque si intercalado en mitad de este código hubiera comentarios de bloque y quisiéramos hacerlo solamente con un comentario de bloque, sería un verdadero quebradero de cabeza y esto nos asegura que se van a comentar todas las líneas, esto veremos que lo podemos conmutar para eliminar los comentarios rapidamente.
+
+![06-01](images/06-01.png)
+
+![06-02](images/06-02.png)
+
+
+
+
+
+
+
+
+
+
 
 # 06 Manipulación de números, caracteres y otros valores III 8:13 
 
