@@ -103,7 +103,7 @@ Además el nombre de las variables como pasa con el con el resto de los elemento
 
 Por último antes de pasar a ver un ejemplo hablar que el **ámbito de una variable**, el ámbito se circunscribe al bloque donde, como norma general aunque veremos que esto se puede transgredir, el ámbito es el bloque en el que la hemos escrito, es decir si declaramos la variable número y la variable letras dentro del método main en cuanto finalice la ejecución de este método ya no tendríamos la posibilidad de acceder a la a la variable número y a la variable letra porque ya estaríamos fuera de su ámbito.
 
-### :computer: `101-02-Declaracion_de_Variables_y_Constantes`
+### :computer: `101-05-Declaracion_de_Variables_y_Constantes`
 
 Aquí tenemos el pequeño ejemplo que hemos ido viendo, incluyendo también la declaración e inicializacion de una constante, por ejemplo el número de horas que suele incluir una jornada laboral normal suelen ser de 8 y bien ese número no suele variar si el valor va a ser constante, el nombre se suele declarar en mayúscula y utilizando guiones bajos, además para forzar que este valor se constante y que no se pueda modificar después utilizaríamos esta palabra `final` de la cual aprenderemos algo más adelante en este curso. Como podéis comprobar podemos declarar diferentes tipos de variables, podemos declarar variables en cualquier punto del programa, es decir no tenemos que hacerlo como en otros lenguajes de programación que nos fueza hacerlo siempre en las primeras líneas, tenemos una variable con nombre en notación camelCase en la que en lugar de escribir esto con espacio lo cual sería un error, o escribirlo todo en mayúscula que ya digo que se recomienda con el uso de constantes, utilizamos una notación en la que si utilizamos dos o más palabras, eliminamos los espacios en blanco intermedios, lo escribimos todo en minúsculas salvo la primera letra de cada palabra, si fueran muchas más palabras lo escribiríamos de esta manera `otroNumeroMasQueEscribimosEnNotacionCamelCase`, podríamos dar un valor inicial y pasaríamos por ejemplo a imprimirlo por consola que es de las cosas que sabemos hacer.
 
@@ -164,17 +164,11 @@ En el próxima lección vamos a aprender los diferentes tipos que hay los numér
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
-![06_Manipulación-0](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-0.png) 
-
-### 6.1 Tipos de datos primitivos en Java
-
-![06_Manipulación-1](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-1.png)                     
+### 6.1 Tipos de datos primitivos en Java                   
 
 Son solamente 8: `boolean, char, byte, short, int, long, float, double`. A estos, se suele añadir el objeto `java.lang.String`, ya que es muy usual.
 
 ### 6.1.1 Valores literales
-
-![06_Manipulación-2](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-2.png)
 
 Un valor literal es la representación de un valor fijo, que se escribe directamente en el código:
 
@@ -186,8 +180,6 @@ int i = 100000;
 String str = "CADENA";
 ```
 
-![06_Manipulación-3](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-3.png)
-
 Desde Java SE 7, se puede usar el guión bajo `_` para delimitar partes en un literal, sin que java lo procese:
 
 ```java
@@ -196,9 +188,73 @@ long creditCardNumber = 1234_5678_9012_3456L;
 
 ### 6.1.2 Operadores de asignación
 
+El principal operador de asignación en java es `=`, y nos permite establecer el valor de una variable.
+
+## Transcripción
+
+![06_Manipulación-0](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-0.png) 
+
+En este segundo capítulo en el que hablaremos de variables vamos a ver cómo manipular los diferentes tipos de datos primitivos que son los números, los caracteres y los valores Booleanos, lo que hemos llamado como otro valores.
+
+![06_Manipulación-1](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-1.png)  
+
+Java nos ofrece una serie de tipos primitivos que nos van a permitir manejar diferentes situaciones y que los vamos a ir conociendo por diferentes grupos, aquí tenemos una visión de conjunto. Para manejar los tipos lógicos solamente tendremos un tipo de dato que es el `boolean` cuyos valores pueden ser solo `true` o `false`, para manejar caracteres, caracteres sueltos de codificación Unicode tendremos el tipo `char` si viene adicionalmente tenemos la posibilidad de usar cadenas de caracteres mediante `String` que ya es un tipo estructurado si bien veremos cómo Java en algunos momentos también le da una cierta similitud a un tipo básico y luego para los tipos numéricos tenemos un conjunto más rico que nos permite diferenciar entre números que no tienen decimales, número enteros positivo y negativo y los números que si tienen decimales y veremos cómo podemos manejarlos.
+
+![06_Manipulación-2](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-2.png)
+
+Pero antes de usar los diferentes tipos vamos a hablar de lo que se conocen como los **valores literales**, opuestamente al uso de una variable que no es mas que una región de memoria cuyo contenido cuyo valor podía variar a lo largo de la ejecución de nuestro programa, tenemos los valores que son literales, es decir valores cuyo valor se escribe directamente en el código. Aquí tenemos una serie de declaraciones e inicializaciones de diferentes tipos de primitivos de variables y la inicialización tiene como particular que siempre se realiza a partir de un valor literal para que podamos ver e ilustrar el uso de estos literarales, como podemos comprobar podemos utilizar un valor literal para dar de alta una variable booleana, los valores `true` o `false` nos permitirán inicializar variable y comprobar el valor de otras expresiones. Podemos también utilizar literales para inicializar variable de tipo carácter, podemos comprobar como los literales de carácter siempre tienen que ir encerrado no entre `''` no comillas dobles sino comillas simples. Los tipos numéricos los valores literales en la mayoría de las ocasiones nos valdra directamente representar el valor del número, el valor de tipo `byte`, `short`, `int` nos bastara simplemente con escribir el número, si bien Java nos permite también el uso de valores enteros, pero en diferentes sistemas de codificación que no sean solamente el decimal, podemos utilizar número en base 10 sistema de numeración normal, aunque también podemos utilizarlo en hexadecimal o en binario, dependiendo del cometido de nuestro programa es posible que nos sea útil el utilizar esos números en binarios o en hexadecimal, si queremos declarar el valor literal en hexadecimal lo que haremos será comenzar ese literal por `0x` y a continuación podríamos poner el valor, para aquellos que no caen en la numeración de base 16 en hexadecimal utilizan los números del 0 al 9 y para completar los símbolos del resto de valores utilizan letras de la A hasta la F, si queremos declararlo en binario donde solamente podemos utilizar 0 y 1 el literal comenzaría por `0b` y a partir de ahí ese número es binario. Hexadecimal, binario y decimal siguen siendo números enteros pero Java nos permite Java utilizar estos literales que nos van a hacer la vida un poco más cómoda.
+
+![06_Manipulación-3](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-3.png)
+
+Desde la versión de Java SE 7 podemos utilizar guiones bajos para delimitar partes de un literal que visualmente nos podrán ser utiles qun que Java no procesara esos guiones bajos como parte del literal y tenemos el ejemplo de el número de una tarjeta de crédito que normalmente son 16 dígitos agrupados de 4 en 4, lo normal hasta la versión de Java 6, incluso en otros lenguajes de programación es que nosotros tuviéramos que escribir, aunque en la tarjeta venga representados en grupos de 4, los tuviéramos que escribir los 16 dígitos seguidos sin qué visualmente eso no ayudará mucho a identificarlos de 4 en 4. Java nos permite desde la versión SE7 el que podamos delimitarlo mediante estos guiones bajos sin necesidad de que esto haga que este literal se transforme en algo que no sea un número, si decir aunque lo iremos viendo poco a poco, que los literales de tipo `long`, veremos cuál es el tipo de dato numérico ahora, sí suelen ir acompañados del sufijo `L` para que nosotros le podamos decir a nuestro compilador, a nuestra máquinas de Java después que ese número está representando un entero de tipo `long` y no de otro tipo de menor precisión.
+
 ![06_Manipulación-4](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-4.png)
 
-El principal operador de asignación en java es`=`, y nos permite establecer el valor de una variable.
+Antes de meternos en el meoyo de los tipos de datos numéricos en este caso algo que ha podido pasar desapercibido es el **operador de asignación**, es decir el símbolo que nos sirve para inicializar o asignar un valor a una variable, que en el caso de Java es el símbolo de igual `=` y de hecho nos permite delimitar en la sentencia de inicializacion dos zonas muy claras, lo que queda a la izquierda del operador de asignación y lo que queda a la derecha del operador de asignación, en el en el proceso de inicialización de una variable lo que debemos marcar a la izquierda del operador de asignación es como mínimo el nombre de una variable que hayamos declarado más arriba, si además de inicializar estamos declarandolo entonces tendremos que encontrar como todos los ejemplos de esta transparencia el tipo de dato y el nombre de la variable, es decir la operación de declaración de esa variable, a la derecha del operador de asignación encontraremos el valor, en este caso para inicializar con el cual estamos inicializando esa variable.
+
+### :computer: `101-06-Tipos_de_Datos`
+
+Si queremos ver algunos elementos de los que hemos visto tenemos el siguiente código, podemos ver como tenemos diferentes literales, asignados a diferentes tipos de variables como son los literales `boolean`, `char`, `byte` veremos también cuando trabajemos con los tipos de datos carácter en esta lección como los literales de cadena de caracteres se representan entre comillas doble y ya los hemos usado antes, lo deberíamos asignar a una cadena de caracteres de tipo `String` que hemos presentado antes someramente y que veremos más adelante.
+
+*``*
+
+```java
+package tiposdatos;
+
+@SuppressWarnings("all")
+public class TiposDatosNumericos {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+		
+      /*
+       * LITERALES
+       */
+		
+      //Valor booleano VERDADERO
+      boolean resultado = true;
+      //Letra C
+      char letraMayuscula = 'C';
+      //Número 100
+      byte by = 100;
+      //Número 1000
+      short sh = 1000;
+      //Número 1000000
+      int in = 1000000;
+		
+      //Valor 26, en decimal
+      int decVal = 26;
+      //Valor 26, en hexadecimal
+      int hexVal = 0x1a;
+      //Valor 26, en binario
+      int binVal = 0b11010;
+		
+      //String s = "Hola Mundo";
+   }
+}
+```
 
 # 06 Manipulación de números, caracteres y otros valores II 15:39
 
