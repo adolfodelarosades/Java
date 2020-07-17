@@ -97,25 +97,18 @@ Si me gustaría ahora que nos centraremos en cómo *declarar* y cómo *inicializ
 
 ![05_Variables-5](images/05_Variables-5.png)
 
-Además el nombre de las variables como pasa con el con el resto de los elementos del lenguaje es *Case-Sensitive* es decir su nombre es sensible a mayúsculas y a minúscula, no es lo mismo que utilizamos `NUMERO` que `numero`, que `Numero` no va a ser igual, con lo cual debemos de tener cuidado, en ese sentido yo recomiendo que utilicéis como digo más abajo en esta transparencia la notación *camelCase*, es una notación especial que nos va a permitir para aquellas variables, para las cuales utilizan en su nombre varias palabras, como no vamos a poder utilizar espacios lo que haremos será eliminar los espacios en blanco entre esas palabras pero para poder leerlos fácilmente podremos la primera letra de cada palabra en mayúscula, a esta notación se le llama *camelCase*. A la hora de escribir el nombre de una variable yo recomiendo que empiecen siempre siempre siempre por una letra, Java permite también utilizar algunos caracteres como el dólar `$` o el guíon bajo `_`, yo no lo recomiendo, el propio Oracle si leen la documentación oficial de Java no recomienda su utilización. Tampoco podemos utilizar alguna palabra reservada, las iremos aprendiendo poco a poco por ejemplo la palabra `class` hemos visto antes que se utiliza, no podríamos utilizarla como nombre de una variable. 
+Además el nombre de las variables como pasa con el con el resto de los elementos del lenguaje es *Case-Sensitive* es decir su nombre es sensible a mayúsculas y a minúscula, no es lo mismo que utilizamos `NUMERO` que `numero`, que `Numero` no va a ser igual, con lo cual debemos de tener cuidado, en ese sentido yo recomiendo que utilicéis como digo más abajo en esta transparencia la notación *camelCase*, es una notación especial que nos va a permitir para aquellas variables, para las cuales utilizan en su nombre varias palabras, como no vamos a poder utilizar espacios lo que haremos será eliminar los espacios en blanco entre esas palabras pero para poder leerlos fácilmente podremos la primera letra de cada palabra en mayúscula, a esta notación se le llama *camelCase*. A la hora de escribir el nombre de una variable yo recomiendo que empiecen siempre siempre siempre por una letra, Java permite también utilizar algunos caracteres como el dólar `$` o el guíon bajo `_`, yo no lo recomiendo, el propio Oracle si leen la documentación oficial de Java no recomienda su utilización. Tampoco podemos utilizar alguna palabra reservada, las iremos aprendiendo poco a poco por ejemplo la palabra `class` hemos visto antes que se utiliza, no podríamos utilizarla como nombre de una variable. Existen también un grupo de variables especiales cuyo valor no va a a cambiar nunca tras su inicialización que se llaman **constantes** por ejemoplo si tuvieramos que utilizar el valor de PI en algún tipo de programa que calculara un área el vallor de esa constante no va a variar, por diferenciarla un poco de las variables, las constantes si se suelen escribir en mayúsculas y si incluyen varias palabras en lugar la notación *camelCase* como ya lo estamos escribiendo todo en mayúsculas si nos recomiendan el que separtemos las palabras mediante `_`. 
 
 ![05_Variables-6](images/05_Variables-6.png)
 
-Si decir aprenderemos a crear los más adelante que sobre el nombre de un tipo de variable especiales cuyo valor no va a cambiar nunca transmisión izacion que se llaman constante los mensajes tuviéramos que usar el valor de pi en algún tipo de programa que calculará el valor de constante no va a variar bien por diferenciarla un poco de la variable las constantes y se suelen escribir nombres totalmente en mayúscula y se incluye el varias palabras en lugar de utilizar la notación camelCase como ya lo estaba escribiendo todo en mayúsculas y nos recomiendan el que separemos las palabras mediante guiones bajos por último antes de pasar a ver un poco de este Código y su ejecución hablar que el ámbito de una variable es el periodo de tiempo que el programa bueno pues tiene acceso a dicha variable residencia la duración en tiempo de esa variable en memoria como norma general y el ámbito de una variable el tiempo de duración hablamos de tiempo pero bueno ahora veremos que el ámbito se circunscribe al bloque donde como norma general no queremos que eso se puede transgredir el ámbito es el bloque en el que la hemos escrito especie en este código que tenemos aquí delante si declaramos la variable número y la variable letras dentro del método main en cuanto finalice la ejecución de este método ya no tendríamos la posibilidad de acceder a la a la variable número y koala variable letra porque ya estaríamos fuera de su ámbito aquí tenemos el pequeño ejemplo que hemos ido viendo incluyendo también la declaración inicializacion de una constante por ejemplo el número de horas que suele incluir una jornada laboral normal suele ser de 8 y bien ese número no sale Mariano fue y el valor va a ser constante el nombre se suele declarar en mayúscula y utilizando iones bajo además para forzar que este valor se acostarte que no se pueda modificar después utilizaríamos esta palabra al final de la cual aprenderemos algo más más adelante en este curso no como podéis comprobar podemos declarar diferentes tipos de variable podemos declarar variables en cualquier punto del programa es decir no tenemos que hacerlo como en otros lenguajes de programación que no fueras a hacerlo siempre en las primeras líneas de cada ámbito después ver pesa serial anotación camelCase en la que en lugar de escribir esto con espacio lo cual sería un error o escribirlo todo en mayúscula que ya digo que se recomienda al uso de constante utilizamos una notación en la que si utilizamos dos o más palabras eliminamos los espacios en blanco intermedio lo escribimos todo en minúsculas salvo la primera letra de cada palabra si fueras muchas más palabras lo escribiríamos pues de esa manera podríamos dar un valor inicial pasaríamos por ejemplo a imprimirlo por consola que es de las cosas que sabemos hacer nada y os dais cuenta ayudando y nos va diciendo algunos mensajes los que están subrayados en rojo normalmente es que cuando no sean comentarios son errores que también se van a destacar aquí a la derecha mediante un recuadro y lo que viene su radiado en amarillo son advertencias en fin no son errores pero son líneas que deberíamos vigilar porque es posible que pase algo raro en ella en particular está no está indicando que el valor de esta variable qué es local al ámbito de este método no se usa nunca esto es muy posible que nos pase cuando empecemos a desarrollar un código y bueno fuésemos a declarar variables qué bueno en la versión final del código qué es el que imprimir por consola tenemos un atajo de teclados escribimos peace out y me damos a control espacio el propio eclipse nota general en resto del método para que nosotros podamos seguir también tiene autocompletado con el nombre de variable que nosotros escribimos otro y no hay nada más que se llame Jorge y le damos a las teclas CONTROL espacio completaría con el nombre de la variable que hemos que hemos creado y queremos ejecutar este método al vamos antes de ejecutar podríamos ver cómo imprimido por la consola el valor de número es 7 el valor de la letra lo 
+Por último antes de pasar a ver un ejemplo hablar que el **ámbito de una variable**, el ámbito se circunscribe al bloque donde, como norma general aunque veremos que esto se puede transgredir, el ámbito es el bloque en el que la hemos escrito, es decir si declaramos la variable número y la variable letras dentro del método main en cuanto finalice la ejecución de este método ya no tendríamos la posibilidad de acceder a la a la variable número y a la variable letra porque ya estaríamos fuera de su ámbito.
 
+### :computer: `101-02-Declaracion_de_Variables_y_Constantes`
 
+Aquí tenemos el pequeño ejemplo que hemos ido viendo, incluyendo también la declaración e inicializacion de una constante, por ejemplo el número de horas que suele incluir una jornada laboral normal suelen ser de 8 y bien ese número no suele variar si el valor va a ser constante, el nombre se suele declarar en mayúscula y utilizando guiones bajos, además para forzar que este valor se constante y que no se pueda modificar después utilizaríamos esta palabra `final` de la cual aprenderemos algo más adelante en este curso. Como podéis comprobar podemos declarar diferentes tipos de variables, podemos declarar variables en cualquier punto del programa, es decir no tenemos que hacerlo como en otros lenguajes de programación que nos fueza hacerlo siempre en las primeras líneas, tenemos una variable con nombre en notación camelCase en la que en lugar de escribir esto con espacio lo cual sería un error, o escribirlo todo en mayúscula que ya digo que se recomienda con el uso de constantes, utilizamos una notación en la que si utilizamos dos o más palabras, eliminamos los espacios en blanco intermedios, lo escribimos todo en minúsculas salvo la primera letra de cada palabra, si fueran muchas más palabras lo escribiríamos de esta manera `otroNumeroMasQueEscribimosEnNotacionCamelCase`, podríamos dar un valor inicial y pasaríamos por ejemplo a imprimirlo por consola que es de las cosas que sabemos hacer.
 
-
-
-
-
-
-
-
-
-
-
-###  Código
+Si os dais cuenta el IDE nos va ayudando y nos va diciendo algunos mensajes los que están subrayados en rojo normalmente, siempre y cuando no sean comentarios, son errores que también se van a destacar a la derecha mediante un recuadro y lo que viene subrayado en amarillo son advertencias, no son errores pero son líneas que deberíamos vigilar porque es posible que pase algo raro en ellas, en particular está nos está indicando que el valor de esta variable, qué es local al ámbito de este método, no se usa nunca, esto es muy posible que nos pase cuando empecemos a desarrollar un código y empecemos a declarar variables qué en la versión final del código quiza no usemos todas, nos puede servir para eliminar código ineccesario y no nos quede emborronado. Para el método `println` qué es el que imprimir por consola tenemos un atajo de teclado escribimos `Syso` y le damos a 
+`Ctrl+Espacio` el propio Eclipse general el resto del método para que nosotros podamos escribir. También tiene autocompletado con el nombre de variables, si nosotros escribimos `otro` y no hay nada más que se llame `otro` y le damos a las teclas `Ctrl+Espacio`, completaría con el nombre de la variable que hemos creado.
 
 *Variables.java*
 
@@ -128,31 +121,30 @@ package variables;
  */
 public class Variables {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
 		
-		//Declaración e inicialización de dos variables
-		int numero = 7;		
-		char letra = 'a';		
+      //Declaración e inicialización de dos variables
+      int numero = 7;		
+      char letra = 'a';		
 		
-		//Declaración e inicialización de una constante
-		final int NUM_HORAS = 8;	
+      //Declaración e inicialización de una constante
+      final int NUM_HORAS = 8;	
 		
-		//Impresión por consola de los 3 valores
-		System.out.println(numero);
+      //Impresión por consola de los 3 valores
+      System.out.println(numero);
 		
-		System.out.println(letra);
+      System.out.println(letra);
 		
-		System.out.println(NUM_HORAS);
+      System.out.println(NUM_HORAS);
 		
-		int otroNumeroMasQueEscribimosEnNotacionCamelCase = 1;
+      int otroNumeroMasQueEscribimosEnNotacionCamelCase = 1;
 		
-		System.out.println(otroNumeroMasQueEscribimosEnNotacionCamelCase);
+      System.out.println(otroNumeroMasQueEscribimosEnNotacionCamelCase);
 
-	}
-
+   }
 }
 
 
@@ -163,6 +155,8 @@ a
 8
 1
 ```
+
+![05-01](images/05-01.png)
 
 # 6. Manipulación de números, caracteres y otros valores I 8:28 
 
