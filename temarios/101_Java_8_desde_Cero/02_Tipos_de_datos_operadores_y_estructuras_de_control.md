@@ -158,6 +158,8 @@ a
 
 ![05-01](images/05-01.png)
 
+En el próxima lección vamos a aprender los diferentes tipos que hay los numéricos, los de caracteres y los booleanos y como manejarlos.  
+
 # 6. Manipulación de números, caracteres y otros valores I 8:28 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
