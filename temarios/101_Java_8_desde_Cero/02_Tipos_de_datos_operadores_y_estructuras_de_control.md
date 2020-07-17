@@ -14,23 +14,17 @@
 
 [Variables](pdfs/05_Variables.pdf)
 
-![05_Variables-0](images/05_Variables-0.png)
+## Resumen Profesor
 
 ### 5.1 Datos
 
-![05_Variables-1](images/05_Variables-1.png)
-
-Un dato es un registro de un hecho de la naturaleza, una idea, un objeto…. Podemos considerar como datos un número, una imagen, un sonido, un caracter, ….
+Un dato es un registro de un hecho de la naturaleza, una idea, un objeto…. Podemos considerar como datos un número, una imagen, un sonido, un caracter, ....
 
 ### 5.2 Variable
-
-![05_Variables-2](images/05_Variables-2.png)
 
 En el mundo de la programación, una variable es la forma de almacenar en memoria un dato de un programa. Aunque como hemos visto, un dato puede representar un texto o una imagen, a nivel físico, estos se almacenan como 0 y 1.
 
 Por tanto, podemos concluir que una variable será una región delimitada de memoria, a la que se le asigna un nombre y un tipo de dato.
-
-![05_Variables-3](images/05_Variables-3.png)
 
 ### 5.2 Tipos de datos primitivos
 
@@ -40,7 +34,6 @@ Cualquier lenguaje de programación, Java incluido, ofrece una serie de tipos de
 
 ### 5.3 Declaración e inicialización de variables
 
-![05_Variables-4](images/05_Variables-4.png)
 
 Para poder usar una variable, previamente tenemos que haberla declarado. Es decir, tenemos que haber indicado que la vamos a usar. Para ello, basta con indicar el tipo de dato y el nombre de la variable:
 
@@ -57,8 +50,6 @@ En muchas ocasiones, acompañaremos la declaración de la variable de su corresp
 
 ### 5.4 Como nombrar las variables
 
-![05_Variables-5](images/05_Variables-5.png)
-
 La tarea de dar un nombre a una variable no es sencilla, como iremos descubriendo poco a poco. Debemos seguir las suigientes reglas, que suele cumplir todo buen programador Java:
 
 * El nombre debe ser autodescriptivo.
@@ -74,8 +65,6 @@ La tarea de dar un nombre a una variable no es sencilla, como iremos descubriend
 Los valores constantes (declarados como `final`), se suelen escribir en mayúsculas, y separados por `_` si el nombre está formado por más de una palabra.
 
 ### 5.5 Vida (o ámbito) de una variable
-
-![05_Variables-6](images/05_Variables-6.png)
 
 Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que las variables tienen un ámbito, es decir, un período de vida. Como norma general, el ámbito de una variable es el bloque donde ha sido definida la misma.
 
@@ -127,6 +116,22 @@ a
 8
 1
 ```
+
+## Transcripción
+
+![05_Variables-0](images/05_Variables-0.png)
+
+![05_Variables-1](images/05_Variables-1.png)
+
+![05_Variables-2](images/05_Variables-2.png)
+
+![05_Variables-3](images/05_Variables-3.png)
+
+![05_Variables-4](images/05_Variables-4.png)
+
+![05_Variables-5](images/05_Variables-5.png)
+
+![05_Variables-6](images/05_Variables-6.png)
 
 # 6. Manipulación de números, caracteres y otros valores I 8:28 
 
