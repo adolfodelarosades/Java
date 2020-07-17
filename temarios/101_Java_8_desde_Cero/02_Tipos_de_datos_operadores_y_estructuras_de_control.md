@@ -68,7 +68,23 @@ Los valores constantes (declarados como `final`), se suelen escribir en mayúscu
 
 Si bien ya hablaremos sobre este concepto más adelante, podemos indicar ya que las variables tienen un ámbito, es decir, un período de vida. Como norma general, el ámbito de una variable es el bloque donde ha sido definida la misma.
 
-### 5.6 Código
+## Transcripción
+
+![05_Variables-0](images/05_Variables-0.png)
+
+![05_Variables-1](images/05_Variables-1.png)
+
+![05_Variables-2](images/05_Variables-2.png)
+
+![05_Variables-3](images/05_Variables-3.png)
+
+![05_Variables-4](images/05_Variables-4.png)
+
+![05_Variables-5](images/05_Variables-5.png)
+
+![05_Variables-6](images/05_Variables-6.png)
+
+###  Código
 
 *Variables.java*
 
@@ -116,22 +132,6 @@ a
 8
 1
 ```
-
-## Transcripción
-
-![05_Variables-0](images/05_Variables-0.png)
-
-![05_Variables-1](images/05_Variables-1.png)
-
-![05_Variables-2](images/05_Variables-2.png)
-
-![05_Variables-3](images/05_Variables-3.png)
-
-![05_Variables-4](images/05_Variables-4.png)
-
-![05_Variables-5](images/05_Variables-5.png)
-
-![05_Variables-6](images/05_Variables-6.png)
 
 # 6. Manipulación de números, caracteres y otros valores I 8:28 
 
