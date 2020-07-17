@@ -164,6 +164,8 @@ En el próxima lección vamos a aprender los diferentes tipos que hay los numér
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
+## Resumen Profesor
+
 ### 6.1 Tipos de datos primitivos en Java                   
 
 Son solamente 8: `boolean, char, byte, short, int, long, float, double`. A estos, se suele añadir el objeto `java.lang.String`, ya que es muy usual.
@@ -260,13 +262,11 @@ public class TiposDatosNumericos {
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
+## Resumen Profesor
+
 ### 6.2 Tipos de datos numéricos
 
-![06_Manipulación-5](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-5.png)
-
 #### 6.2.1 Tipos de datos enteros
-
-![06_Manipulación-6](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-6.png)
 
 Para manejar números enteros, tenemos 4 tipos de datos primitivos:
 
@@ -277,16 +277,12 @@ Para manejar números enteros, tenemos 4 tipos de datos primitivos:
 
 #### 6.2.2 Tipos de datos reales
 
-![06_Manipulación-7](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-7.png)
-
 Ambos tipos numéricos se representan mediante la notación IEEE 754, en la que se descompone un número en su mantisa, base y exponente.
 
 * `float`: ocupa 32 bits
 * `double`: ocupa 64 bits
 
 #### 6.2.3 Operadores numéricos
-
-![06_Manipulación-8](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-8.png)
 
 Java es muy rico en cuanto a operadores se refiere:
 
@@ -298,8 +294,6 @@ Java es muy rico en cuanto a operadores se refiere:
 
 #### 6.2.4 Operadores numéricos de asignación abreviada
 
-![06_Manipulación-9](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-9.png)
-
 Estos son operadores que nos permiten asignar el valor de una variable al primer operando. Por ejemplo:
 
 ```java
@@ -308,13 +302,21 @@ val1 += 1; //Es equivalente a val1 = val1 + 1;
 
 Los operadores son `+=`, `-=`, `*=`, `/=` y `%=`.
 
+## Transcripción
+
+![06_Manipulación-5](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-5.png)
+![06_Manipulación-6](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-6.png)
+![06_Manipulación-7](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-7.png)
+![06_Manipulación-8](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-8.png)
+![06_Manipulación-9](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-9.png)
+
 # 06 Manipulación de números, caracteres y otros valores III 8:13 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
-#### 6.2.5 Operadores numéricos a nivel de bits
+## Resumen Profesor
 
-![06_Manipulación-10](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-10.png)
+#### 6.2.5 Operadores numéricos a nivel de bits
 
 Estos son los menos usuales de todos, pero los presentamos también por si en alguna ocasión fueran necesarios:
 
@@ -500,6 +502,9 @@ Signed rigth shift 11111111111111111111111111111100
 Unsigned rigth shift 111
 Inverso o complementario 11111111111111111111111111110000
 ```
+## Transcripción
+
+![06_Manipulación-10](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-10.png)
 
 ### 6.3 Tipos de datos lógicos o booleanos
 
