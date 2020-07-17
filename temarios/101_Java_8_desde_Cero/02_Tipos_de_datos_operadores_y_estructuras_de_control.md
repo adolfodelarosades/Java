@@ -218,7 +218,7 @@ Antes de meternos en el meoyo de los tipos de datos numéricos en este caso algo
 
 Si queremos ver algunos elementos de los que hemos visto tenemos el siguiente código, podemos ver como tenemos diferentes literales, asignados a diferentes tipos de variables como son los literales `boolean`, `char`, `byte` veremos también cuando trabajemos con los tipos de datos carácter en esta lección como los literales de cadena de caracteres se representan entre comillas doble y ya los hemos usado antes, lo deberíamos asignar a una cadena de caracteres de tipo `String` que hemos presentado antes someramente y que veremos más adelante.
 
-*``*
+*`TiposDatosNumericos`*
 
 ```java
 package tiposdatos;
@@ -305,9 +305,30 @@ Los operadores son `+=`, `-=`, `*=`, `/=` y `%=`.
 ## Transcripción
 
 ![06_Manipulación-5](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-5.png)
+
+El primer tipo o conjunto de tipo de datos que vamos a conocer son los números y que se subdividen a su vez en números enteros y en números reales. 
+
 ![06_Manipulación-6](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-6.png)
+
+Para los números enteros tenemos cuatro tipos de datos primitivos y la existencia de cuatro tipos de datos no es más que el hecho de que nos van a permitir almacenar números que sean más grandes o más pequeños, de esta manera podemos aprovechar mejor la memoria que estamos utilizando, si vemos la tabla y lo que queremos utilizar son números muy pequeños, es decir en el rango de -128 a 127 tendríamos el tipo de dato `byte`, es decir todos los valores que somos capaces de representar con un solo byte con 8 bits, en el caso de que queramos usar números en un rango un poco más amplio, números de -32768 y 32767 tendríamos el tipo `short`, el tipo de dato entero normal llamado `int` y que normalmente utiliza 32 bits y que normamente utiliza 4-bytes será normalmente el tipo de dato que usemos por defecto para manejar números enteros y su capacidad es relativamente grande, el valor -2 elevado a 31 es un número bastante grande y el número 2 elevado a 31 menos 1, aunque sea uno negativo y otro positivo son bastante grandes, nos permitirán manejar la gran mayoría de las operaciones que hagamos. Si necesitábamos un número entero que tuviera una capacidad mayor tenemos uno que permite manejar el doble de bits que permite manejar números de hasta 64 bits y por lo cual su rango pasa a ser enorme de -2 elevado a 63 a 2 elevado a 63 -1 y sería el tipo `long`.
+
+Como decíamos antes **los valores por defecto de estas variable de este tipo numéricos son siempre 0** pero en particular para el `long` tendríamos que añadirle una L minúscula o mayúscula `OL` para indicar que ese valor literal es de tipo `long` y no es de uno de los tipos anteriores especialmente del tipo `String`.
+
 ![06_Manipulación-7](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-7.png)
+
+Paralelamente a los número entero que son números negativos y positivos pero siempre sin decimales tenemos los **números reales** que son números que nos permiten manejar decimales y Java nos ofrece dos tipos de precisión, precisión sencilla y precisión doble que son los números de tipo `float` y los números de tipo `double` ambos dos están representados mediante un sistema de codificación que se llama el **IEEE 754** en el cual la representación de un números reales en notación IEEE 754 se descomponen para almacenarse mediante tres cifras que serían la **mantisa**  la **base** y el **exponente** de los cuales lo usamos en base 10 solamente tenemos que almacenar dos cifras la mantita y el exponente, por ejemplo el número 345 realmente se almacenaría como si fuera el número 0.345 con todos los distritos significativo escritos de esa manera y después lo que almacén haríamos sería el exponente al cual elevaríamos el número 10 que multiplicar por esa mantita para finalmente obtener ese número, está notación se le llama de punto o coma flotante, porque la coma iría flotando desde donde aparece e iría flotando en función del exponente al que está elevada la base, tanto los números `float` como `double` que se almacenan en esta en esta notación, si bien `float` nos permite almacenar número de 32 bits y `double` números de doble precisión de 64 bits. 
+
 ![06_Manipulación-8](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-8.png)
+
+Aparejado a los números enteros y números reales tenemos 
+
+
+
+
+
+
+
+
 ![06_Manipulación-9](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-9.png)
 
 # 06 Manipulación de números, caracteres y otros valores III 8:13 
