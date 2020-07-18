@@ -340,6 +340,8 @@ También tenemos determinados **operadores numérico de asignación abreviada** 
 
 Vamos a ver algunos ejemplo que tenemos a continuación de declaración de distintos tipos declaración de distintos tipos numéricos y el uso de los operadores.
 
+Tenemo algunos ejemplo de declaración de variables de tipo de dato enteros, cómo sería `byte` que recordamos también su rango, `short`, `int` y `long` hacemos también ilustración del uso del guion bajo para separar, a modo de separador de miles de este número más grande para que pudiéramos identificar su valor y también el uso de tipo de datos reales, de precisión simple y doble cómo podemos comprobar al igual del uso de la `L` para los `long`, si queremos indicar que un número decimal va a ser `float` lo haríamos con la `f` y si quisiéramos denotar que fuese de precisión doble lo haríamos con la `d`, en este caso para asegurarnos que este valor que estamos inicializando es doble de verdad estamos utilizando la expresión `Math.PI` que no hace más que rebuscar un poco entre ese código que ya nos ofrece Java y Java ya tiene una constante en una clase, en la clase `Math` para el valor de `PI` con muchos más decimales de los que nosotros seguramente podamos definir.
+
 *`TiposDatosNumericos`*
 
 ```java
@@ -423,7 +425,11 @@ public class TiposDatosNumericos {
 }
 ```
 
-AQUIIII
+Para comprobar el uso de operadores numéricos tenemos algunas operaciones sencillas con dos variables, hemos declarado la variable `x` e inicializada con el valor literal 7, la variable `y` con cinco y podemos ver cómo realizar la **suma** de estos valores, podemos comprobar utilizamos para formar la expresión el primer operando, el operador que en este caso es **`+`** el segundo operando y todo esto lo asignamos mediante el igual `=` el operador de asignación al valor de una nueva variable que sería la variable `z` y podríamos imprimir este valor por consola. Vamos a hacer lo mismo con la **resta** **`-`**, como ya tenemos la variable `z` declarada e inicializada, posteriormente podemos modificar su valor, de ahí que se llame variable, porque su valor va a variar a lo largo de la ejecución pero ya no es necesario que la volvamos a declarar, tanto es así que si lo hiciéramos Eclipse de alguna manera anticipándose a los problemas que no daría el compilador ya se va a quejar. La **multiplicación `*`** como podemos verlo existe un espacio entre los operandos y el operador, no son obligatorios pero la recomendación sería el poder tenerlos y a nosotros sobre todo nos ayuda a visualizarlo mejor. La **división `/`** que en este caso sería **división entera**, la división entera es algo que hasta que no se comienza a programar a lo mejor no se es consciente de ella, si dividimos un número entre entre otro obteníamos siempre un *cociente* y el *resto* pues bien la **división entera** en Java lo que nos va a proporcionar es el **cociente de la división** y si queremos tener el resto lo que tendríamos que hacer es utilizar el operador correspondiente `%`, *el resultado de una división de enteros nos devuelve el conciente* y la *operación resto nos devuelve el cociente o módulo*. También tenemos un ejemplo de la división no entera si dividimos dos valores literales o en este caso una constante y el valor de una variable `float`, si lo dividimos y su valor no es entero, la división que se realizará será una división no entera, es decir la misma división que utilizáramos en una calculadora una división con decimales. Podemos ver como también podemos usar los operadores de incremento o el decremento, en este caso usamos el de post-incremento sobre el valor de la variable `x` primero se realizan la asignacíon a la variable `z` y después se incrementa `x`.
+
+Vamos a ver el resultado de estas operaciones.
+
+![06-03](images/06-03.png)
 
 ### Comentarios
 
