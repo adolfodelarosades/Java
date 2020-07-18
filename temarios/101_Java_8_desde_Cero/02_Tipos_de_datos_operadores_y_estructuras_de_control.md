@@ -689,27 +689,15 @@ public class TiposDatosNumericos {
 
 ![06-05](images/06-05.png)
 
-
 # 06 Manipulación de números, caracteres y otros valores IV 15:52 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
-#### 6.2.6 Código
-
-
-
-
 ### 6.3 Tipos de datos lógicos o booleanos
-
-![06_Manipulación-11](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-11.png)
 
 Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `false`).
 
-![06_Manipulación-12](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-12.png)
-
 #### 6.3.1 Operadores lógicos condicionales
-
-![06_Manipulación-13](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-13.png)
 
 * `!`: realiza la negación del valor.
 * `&&`: realiza un AND condicional de los dos operandos.
@@ -718,8 +706,6 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 
 #### 6.3.2 Operadores lógicos relacionales
 
-![06_Manipulación-14](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-14.png)
-
 * `==`: devuelve verdadero si ambos valores son verdaderos
 * `!=`: devuelve el valor inverso a ==
 * `>`: devuelve verdadero si el valor de la izquierda es mayor estricto que el de la derecha.
@@ -727,7 +713,53 @@ Nos permite almacenar valores susceptibles de ser verdadero o falso (`true`, `fa
 * `<`: devuelve verdadero si el valor de la izquierda es menor estricto que el de la derecha.
 * `<=`: devuelve verdadero si el valor de la izquierda es menor o igual que el de la derecha.
 
-#### 6.3.3 Código
+### 6.4 Tipos de datos para caracteres
+
+Como tipo de dato primitivo para el manejo de caracteres, Java solamente nos ofrece `char`, el cual nos permite almacenar un solo caracter (letra, signo de puntuación, …).
+
+```java
+char = 'a';
+```
+
+Por si solo, este tipo de dato no nos permite mucho *juego*.
+
+Sin embargo, Java nos ofrece una clase, `java.lang.String`, con la que manejar facilmente cadenas de caracteres. La incluimos en este apartado, aunque sea un tipo de dato estructurado ya que se puede obtener directamente desde un literal:
+
+```java
+String str = "Cadena de caracteres";
+```
+
+#### 6.4.1 Operadores con cadenas de caracteres
+
+El principal operador para cadenas de caracteres es `+`, que nos permite concatenar dos textos, es decir, *poner* el segundo tras el primero.
+
+### 6.5 Castings o transformaciones explícitas de tipos
+
+En ocasiones, nos puede interesar realizar un cambio explicito de un tipo de dato.
+
+```java
+System.out.println(5/9);
+```
+Este código produce como salida un 0, porque está haciendo la división entera. Si queremos obtener el resultado con decimales, podemos cambiar el tipo de dato explícitamente, pero para esa operación.
+
+```java
+System.out.println((double)5/9);
+```
+
+En este caso, el resultado será 0.55555555556
+
+## Transcripción
+
+![06_Manipulación-11](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-11.png)
+![06_Manipulación-12](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-12.png)
+![06_Manipulación-13](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-13.png)
+![06_Manipulación-14](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-14.png)
+![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15.png)
+![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16.png)
+![06_Manipulación-17](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-17.png)
+![06_Manipulación-18](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-18.png)
+
+
 
 *TiposDatosLogicos.java*
 
@@ -793,31 +825,7 @@ valor1 < valor2
 valor1 <= valor2
 ```
 
-### 6.4 Tipos de datos para caracteres
 
-![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15.png)
-
-![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16.png)
-
-Como tipo de dato primitivo para el manejo de caracteres, Java solamente nos ofrece `char`, el cual nos permite almacenar un solo caracter (letra, signo de puntuación, …).
-
-```java
-char = 'a';
-```
-
-Por si solo, este tipo de dato no nos permite mucho *juego*.
-
-Sin embargo, Java nos ofrece una clase, `java.lang.String`, con la que manejar facilmente cadenas de caracteres. La incluimos en este apartado, aunque sea un tipo de dato estructurado ya que se puede obtener directamente desde un literal:
-
-```java
-String str = "Cadena de caracteres";
-```
-
-#### 6.4.1 Operadores con cadenas de caracteres
-
-El principal operador para cadenas de caracteres es `+`, que nos permite concatenar dos textos, es decir, *poner* el segundo tras el primero.
-
-#### 6.4.1 Código
 
 *TiposDatosCaracteres.java*
 
@@ -853,26 +861,6 @@ a
 Cadena de caracteres
 Cadena de caracteres más larga
 ```
-
-### 6.5 Castings o transformaciones explícitas de tipos
-
-![06_Manipulación-17](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-17.png)
-
-![06_Manipulación-18](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-18.png)
-
-En ocasiones, nos puede interesar realizar un cambio explicito de un tipo de dato.
-
-```java
-System.out.println(5/9);
-```
-
-Este código produce como salida un 0, porque está haciendo la división entera. Si queremos obtener el resultado con decimales, podemos cambiar el tipo de dato explícitamente, pero para esa operación.
-
-```java
-System.out.println((double)5/9);
-```
-
-En este caso, el resultado será 0.55555555556
 
 # 7. Estructura de decisión 21:22 
 
