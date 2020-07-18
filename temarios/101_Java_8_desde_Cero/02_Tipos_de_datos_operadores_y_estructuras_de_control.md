@@ -750,11 +750,130 @@ En este caso, el resultado será 0.55555555556
 ## Transcripción
 
 ![06_Manipulación-11](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-11.png)
+
+Vamos a continuar con los tipos de datos lógicos.
+
 ![06_Manipulación-12](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-12.png)
+
+Los tipos de datos lógicos o Booleanos son aquellos valores, aquellas variables que serán susceptibles de ser verdaderas o falsas, las palabras reservadas que tiene Java para ellos son las palabras `true` y `false` y veremos qué son muy útiles para realizar algunas operación en especial operaciones de comparación.
+
 ![06_Manipulación-13](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-13.png)
+
+Aparejados a los tipos de datos hemos visto que hay una serie de operadores para poder trabajar con los valores de estas variables en particular tenemos un operador unario `!`, dos binarios `&&` y `||` y un ternario `?:`, de hecho será el único operador ternario que tengamos en todo Java.
+
+El operador unario `!` es el que nos va a permitir realizar la negación de aquel operando de aquella variable que le proporcionemos, es decir si le proporcionamos una variable verdadera nos devolverá falso y y si le proporcionamos un valor falso nos devolverá verdadero.
+
+Los operadores `&&` y `||` nos permitirán hacer las operaciones lógicas AND y OR de los valores lógicos cuyas tablas de verdad suelen ser conocidas para que el AND de dos condiciones de dos valores Booleanos sea verdad ambos dos tienes que ser verdad y en cualquier otro caso el resultado es falso y para que el OR de dos valores Booleanos sea verdad tan solo uno de ellos tiene que ser verdad, si los dos son verdad también el resultado sería verdad.
+
+El **operador ternario** comprobaremos ahora que además es ciertamente cómodo y en particular a mi me gusta mucho usarlo porque simplifica el código, si bien al principio es cierto que seguro gusta más utilizar alguna de las estructuras de decisión que veremos, pero ya digo este hace el código bastante más conciso y es un operador que recibe una condición susceptible de ser verdadera o falsa, a la izquierda del interrogante entre el interrogante y punto indicarían bueno qué valor se devuelve y la evaluación de lo que había a la izquierda del interrogante, entre el interrogante y los dos puntos se indicaría que valor se devuelve si lo que esta a la izquierda del interrogante es verdadero y a la derecha de los dos puntos se devolvería lo que tuviéramos como condiciones es falso.
+
 ![06_Manipulación-14](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-14.png)
+
+También tenemos otra serie de operadores lógicos relacionales que nos permiten saber si se cumplen cierta propiedades ya digo en función de relacionar los operandos, por ejemplo si son iguales `==` nos devolverá verdadero siempre y cuando los dos valores que le pasemos son iguales, la inversa es decir si son diferentes `!=`, si son mayor `>` o mayor igual `>=` que nos devolverá verdadero si el valor de la izquierda es mayor o mayor o igual que el de la derecha, menor `<` o menor o igual `<=`.
+
+### :computer: `101-06-Tipos_de_Datos`
+
+Vamos a ver algunos ejemplo de el uso de estos tipos de dato lógico y los diferentes operadores.
+
+*`TiposDatosLogicos`*
+
+```java
+package tiposdatos;
+
+@SuppressWarnings("all")
+public class TiposDatosLogicos {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+
+      //OPERADORES LÓGICOS CONDICIONALES
+      int valor1 = 1;
+      int valor2 = 2;
+      //En el próximo capítulo profundizamos en las sentencias condicionales
+      if((valor1 == 1) && (valor2 == 2))
+         System.out.println("valor1 es 1 AND valor2 es 2");
+      if((valor1 == 1) || (valor2 == 1))
+         System.out.println("valor1 es 1 OR valor2 es 1");
+		
+      //OPERADOR "TERNARIO"
+      int result;
+      boolean someCondition = false;
+      result = someCondition ? valor1 : valor2;
+      System.out.println(result);
+        
+      //OPERADORES LÓGICOS RELACIONALES
+      //En el próximo capítulo profundizamos en las sentencias condicionales
+      if(valor1 == valor2)
+         System.out.println("valor1 == valor2");
+      if(valor1 != valor2)
+         System.out.println("valor1 != valor2");
+      if(valor1 > valor2)
+         System.out.println("valor1 > valor2");
+      if(valor1 < valor2)
+         System.out.println("valor1 < valor2");
+      if(valor1 <= valor2)
+         System.out.println("valor1 <= valor2");
+      
+   }
+}
+```
+
+![06-06](images/06-06.png)
+
 ![06_Manipulación-15](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-15.png)
+
+Nos faltaría por ver un tercer tipo de datos que son los **tipos de datos de caracteres**.
+
 ![06_Manipulación-16](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-16.png)
+
+Para manejar caracteres Java nos ofrece un tipo de dato primitivo y como decimos ante un **tipo de dato estructurado** pero que en determinadas circuntancia va a tener carácter primitivo, el **tipo de dato primitivo `char`** nos permite almacenar un solo carácter en **Unicode** normalmente representado en 16 bits y el uso de una clase que su nombre completo es `java.land.String` que ya digo que no es un tipo de dato básico, pero nos *permite manejar cadenas de caracteres **inmutables***, cadenas de caracteres que no vamos a poder después modificar su valor, *porque vemos ahora un tipo de dato estructurado si estamos viendo los tipos de datos primitivos*, por que hay un literal de cadena de caracteres qué es una sucesión de caracteres encerrada entre entre `""` y este literal va a producir automáticamente un valor `String` un valor de este tipo de dato estructurado, de esta clase, por eso lo vemos ahora, de echo van a ser muy común en su utilización. 
+
+Usando cadena de caracteres el operador más usual aparte de alguno de los que hemos visto anteriormente que podríamos utilizar, el más usual es `+` que nos va a permitir **concatenar dos valores**, concatenar significa que a continuación del valor de una cadena de caracteres colocaríamos el valor de la siguiente cadena de caracteres.
+
+### :computer: `101-06-Tipos_de_Datos`
+
+Veamos algunos de los ejemplos que tenemos por aquí.
+
+Tenemos la declaración de un carácter mediante un literal con comillas simples `''`, la declaración de una cadena de caracteres, la tendríamos que almacenar en una variable de tipo `String`, todos aquellos tipos que estén almacenados en `java.land.String` no van a requerir que escribamos un nombre completo, sino que simplemente podemos hacer referencia al tipo directa, tenemos una cadena que llamaremos `str` cómo vemos la hemos inicializado a partir de un literal en este caso `"Cadena de caracteres"`, los literales que van encerrado entre comillas dobles se representan siempre mediante un `String`, tenemos el `str-2` que concatenamos con `str`, concatenación de dos cadenas de caracteres para producir otro `String`.
+
+*`TiposDatosCaracteres`*
+
+```java
+package tiposdatos;
+
+public class TiposDatosCaracteres {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+		
+      char a = 'a';
+      System.out.println(a);
+		
+      String str = "Cadena de caracteres";
+      System.out.println(str);
+		
+      String str2 = " más larga";
+      System.out.println(str + str2); // Cadena de caracteres más larga
+
+   }
+}
+```
+
+![06-07](images/06-07.png)
+
+
+
+
+
+
+
+
+
+
 ![06_Manipulación-17](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-17.png)
 ![06_Manipulación-18](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-18.png)
 
