@@ -439,16 +439,6 @@ Podríamos utilizar dos tipos de comentarios, si queremos comentar un gran bloqu
 
 ![06-02](images/06-02.png)
 
-
-
-
-
-
-
-
-
-
-
 # 06 Manipulación de números, caracteres y otros valores III 8:13 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
@@ -467,7 +457,84 @@ Estos son los menos usuales de todos, pero los presentamos también por si en al
 * `>>>`: desplaza un número de bits hacia la derecha. Rellena los huecos con ceros.
 * `>>`: desplaza un número de bits hacia la derecha. Rellena los huecos con el bit más significativo (el de signo).
 
-## Manipulación de números, caracteres y otros valores IV 15:52 
+## Transcripción
+
+![06_Manipulación-10](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-10.png)
+
+Para terminar el bloque de tipos de datos numéricos podemos ver que también podemos tratar estos tipos numéricos a nivel de bits, puedo aseguraros que no será lo más habitual en vuestra operaciones cotidianas, pero es posible que se de el caso de que alguna vez tengan que hacer este tipo de tratamiento, por ello vamos a ver someramente los operadores y algún ejemplo de su utilización.
+
+Podemos realizar operaciones de tipo lógico, operaciones de desplazamiento de bits, la operacion de tipo lógico con un ampersand **`&`** sería una **operación lógica `and`** a nivel de bits se refiere que siguiendo la tabla de verdad del `and` y bit a bit haría esa operación entre los dos valores numéricos. Podemos hacer la operación de tipo **OR exclusivo `^`** u **OR inclusivo `|`** en el cual al hacer el OR si recordáis el OR de dos valores verdadero en un tipo pues no se volvía verdadero y en el otro nos devolvería falso y la **operación de negación `~`** que lo que hace es cambiar cada 0 por 1 y cada 1 por 0, hasta aquí estos operadores pueden ser asimilable a los que ya conozcáis de logica booleana y sencillos.
+
+Luego tenemos los de desplazamiento de bits, que ya digo que es posible que no utilicen nunca, pero que más o menos vamos aprender a utilizar, el operador de los dos los dos símbolos de menor que hacia la izquierda **`<<`** lo que va a hacer es desplazar un número de bits que nosotros le vamos a indicar hacia la izquierda y va a rellenar los huecos con ceros, el desplazamiento de bits en ocasiones se puede utilizar para generar algún tipo de operaciones matemáticas si es que lo sabemos utilizar.  En el caso de los desplazamientos de bits a la derecha tenemos dos tipos de operaciones con signo y sin signo que estan representados con **`>>`** y **`>>>`**, si utilizamos el operador `>>` nos desplaza el número de bits que nosotros indiquemos a la derecha y rellena los huecos que se han quedado vacíos, con nuestro bit más significativo el que indica el signo en su representación, si usamos el `>>>` lo que hace es desplazar un número de bits hacia la derecha rellenando con ceros, el `>>>` es el que más se suele utilizar.
+
+### :computer: `101-06-Tipos_de_Datos`
+
+Si nos damos cuenta tenemos aquí representados dos valores enteros pero con su representación binaria
+`0b0011` y `0b1111` y vamos a probar a hacer las diferentes operaciones lógicas, AND, OR exclusivo y el OR inclusivo, ponemos los resultados esperados. No aprovechamos de un método especial `toBinaryString`, de una clase que se llama `Integer` que conoceremos más adelante que *nos permite traducir un valor entero a su representación binaria para que la podamos imprimir por consola, sin añadir los ceros más representativos a la izquierda*. El OR inclusivo es el que se suele usar más para la lógica de los programas al OR exclusivo también se le conoce como XOR. 
+
+*`TiposDatosNumericos`*
+
+```java
+   ...
+   //OPERADORES A NIVEL DE BITS
+   int bitmask = 0b0011; 
+   int val = 0b1111; 
+		
+   int res = val & bitmask; //0011
+   System.out.print("AND ");
+   System.out.println(Integer.toBinaryString(res));
+		
+   res = val ^ bitmask; //1100
+   System.out.print("OR exclusivo ");		
+   System.out.println(Integer.toBinaryString(res));
+				
+   res = val | bitmask; //1111
+   System.out.print("OR inclusivo ");
+   System.out.println(Integer.toBinaryString(res));
+		
+   // val = 0b1111
+		
+   res = val << 1; //11110
+   System.out.print("left shift ");		
+   System.out.println(Integer.toBinaryString(res));
+				
+   res = val >> 2; //0011
+   System.out.print("Signed rigth shift ");		
+   System.out.println(Integer.toBinaryString(res));
+		
+		
+   res = (-val) >> 2; //11111111111111111111111111111100
+   System.out.print("Signed rigth shift ");		
+   System.out.println(Integer.toBinaryString(res));
+				
+   res = val >>> 1; //111
+   System.out.print("Unsigned rigth shift ");		
+   System.out.println(Integer.toBinaryString(res));
+		
+   res = ~val; //11111111111111111111111111110000
+   System.out.print("Inverso o complementario ");
+   System.out.println(Integer.toBinaryString(res));
+   
+   ...
+```
+
+En los casos del desplazamiento vamos a poder ver como podemos hacer diferentes desplazamientos y también veremos la negación. 
+
+Si tenemos el número `val = 0b1111`, es decir `1111` y hacemos un desplazamiento de un bit hacia la izquierda `res = val << 1;` lo que va a hacer es desplazar todos los bits una posición a la izquierda y el hueco que queda lo rellena con 0 por eso nos da como resultado `11110`, pasa de tener 4 bits a tener 5 bits.
+
+Si desplazamos hacia la derecha dos posiciones `res = val >> 2;` el resultado con "unsigned rigth" se nos retornará como resultado `0011`, se pieden dos 1s y como este número tiene de bit de signo 0, lo que ha hecho es añadir un solo cero, si tuvierá de bit de signo un 1, añadiria un 1. :confuse:
+
+En este caso para poderlo ver mejor hemos cálculado el negativo de `val` y desplazamos dos valores a la derecha con signo `res = (-val) >> 2;` y como podemos ver a rellenado todos los valores que quedan a libres a la izquierda con 1s `11111111111111111111111111111100` por que el bit de signo esta vacío.
+
+Si hacemos un desplazamiento "unsigned" lo que hace es que pasa de tener cuatro 1s a tener tres 1s `res = val >>> 1; //111`.
+
+Y la negación de un número es invertir todos los bits de 1 a 0 y de 0 a 1 `res = ~val; //11111111111111111111111111110000`
+
+Vamos a ejecutar la aplicación para ver el resultado de las operaciones.
+
+![06-04](images/06-04.png)
+
+# 06 Manipulación de números, caracteres y otros valores IV 15:52 
 
 [Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
 
@@ -641,9 +708,7 @@ Signed rigth shift 11111111111111111111111111111100
 Unsigned rigth shift 111
 Inverso o complementario 11111111111111111111111111110000
 ```
-## Transcripción
 
-![06_Manipulación-10](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-10.png)
 
 ### 6.3 Tipos de datos lógicos o booleanos
 
