@@ -534,19 +534,18 @@ Vamos a ejecutar la aplicación para ver el resultado de las operaciones.
 
 ![06-04](images/06-04.png)
 
-# 06 Manipulación de números, caracteres y otros valores IV 15:52 
+El programa completo queda es el siguiente:
 
-[Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
-
-#### 6.2.6 Código
-
-*TiposDatosNumericos.java*
+*`TiposDatosNumericos.java`*
 
 ```java
+/**
+ * 
+ */
 package tiposdatos;
 
 /**
- * @author 
+ * @author
  *
  */
 @SuppressWarnings("all")
@@ -556,97 +555,91 @@ public class TiposDatosNumericos {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		/*
 		 * LITERALES
 		 */
-		
-		//Valor booleano VERDADERO
+
+		// Valor booleano VERDADERO
 		boolean resultado = true;
-		//Letra C
+		// Letra C
 		char letraMayuscula = 'C';
-		//Número 100
+		// Número 100
 		byte by = 100;
-		//Número 1000
+		// Número 1000
 		short sh = 1000;
-		//Número 1000000
+		// Número 1000000
 		int in = 1000000;
-		
-		//Valor 26, en decimal
+
+		// Valor 26, en decimal
 		int decVal = 26;
-		//Valor 26, en hexadecimal
+		// Valor 26, en hexadecimal
 		int hexVal = 0x1a;
-		//Valor 26, en binario
+		// Valor 26, en binario
 		int binVal = 0b11010;
-		
-		//String s = "Hola Mundo";
-		
+
+		// String s = "Hola Mundo";
+
 		/*
 		 * TIPOS DE DATOS NUMÉRICOS
 		 */
-		
-		//TIPOS DE DATOS ENTEROS
-		//[-128,127]
+
+		// TIPOS DE DATOS ENTEROS
+		// [-128,127]
 		byte b = 28;
-		//[-32768,32767]
+		// [-32768,32767]
 		short s = 3458;
-		//[-2^31,(2^31)-1]
+		// [-2^31,(2^31)-1]
 		int i = 33456;
-		//[-2^63,(2^63)-1]
+		// [-2^63,(2^63)-1]
 		long l = 3_000_000_000L;
-		
-		
-		//TIPOS DE DATOS REALES
-		//Precisión simple
+
+		// TIPOS DE DATOS REALES
+		// Precisión simple
 		float f = 0.25f;
-		//Precisión doble
+		// Precisión doble
 		double Pi = Math.PI;
-		
-		
-		
-		//OPERADORES NUMÉRICOS
+
+		// OPERADORES NUMÉRICOS
 		int x = 7;
 		int y = 5;
-		
-		//Suma
+
+		// Suma
 		int z = x + y;
 		System.out.print("Suma ");
 		System.out.println(z);
-		
-		//Resta
+
+		// Resta
 		z = x - y;
 		System.out.print("Resta ");
 		System.out.println(z);
-		
-		//Multiplicación
+
+		// Multiplicación
 		z = x * y;
-		System.out.print("Multipliación ");		
+		System.out.print("Multipliación ");
 		System.out.println(z);
-		
-		
-		//División (entera)
+
+		// División (entera)
 		z = x / y;
-		System.out.print("División entera ");		
+		System.out.print("División entera ");
 		System.out.println(z);
-		
-		//División (no entera)
-		double j = Pi/f;
+
+		// Resto
+		z = x % y;
+		System.out.print("Módulo o resto ");
+		System.out.println(z);
+
+		// División (no entera)
+		double j = Pi / f;
 		System.out.println("División con decimales ");
 		System.out.println(j);
-				
-		//Resto
-		z = x % y;
-		System.out.print("Módulo o resto ");		
-		System.out.println(z);
-		
-		//Incremento
+
+		// Incremento
 		z = x++;
-		System.out.print("Incremento ");		
+		System.out.print("Incremento ");
 		System.out.println(z);
 		System.out.println(x);
-		
-		
-		
+
 		//OPERADORES A NIVEL DE BITS
 		int bitmask = 0b0011; 
 		int val = 0b1111; 
@@ -690,24 +683,20 @@ public class TiposDatosNumericos {
 //		int b = 9;
 //		
 //		System.out.println((double)a/b);
-		
+
 	}
-
-}
-
-
-SALIDA:
-
-8
-AND 11
-OR exclusivo 1100
-OR inclusivo 1111
-left shift 11110
-Signed rigth shift 11
-Signed rigth shift 11111111111111111111111111111100
-Unsigned rigth shift 111
-Inverso o complementario 11111111111111111111111111110000
 ```
+
+![06-05](images/06-05.png)
+
+
+# 06 Manipulación de números, caracteres y otros valores IV 15:52 
+
+[Manipulación de números, caracteres y otros valores](pdfs/06_Manipulación_de_numeros_caracteres_y_otros_valores.pdf)
+
+#### 6.2.6 Código
+
+
 
 
 ### 6.3 Tipos de datos lógicos o booleanos
