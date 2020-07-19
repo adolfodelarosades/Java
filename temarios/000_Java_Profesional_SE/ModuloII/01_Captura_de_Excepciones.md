@@ -203,7 +203,7 @@ public class OperacionNoValidaException extends Exception{
 }
 ```
 
-### Creación y lanzamiento de la excepción
+### Creación y lanzamiento de la excepción
 
 Las excepciones son provocadas desde el interior de un método de alguna clase. Para ello, se creará un objeto del tipo de excepción que se va a provocar y se lanzará mediante la instrucción `throw`, cuya sintaxis es:
 
