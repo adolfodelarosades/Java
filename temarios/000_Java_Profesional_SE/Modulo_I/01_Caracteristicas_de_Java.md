@@ -1,6 +1,6 @@
 # 01 Características de Java
 
-<img src="/images/01-01.png">
+<img src="../images/01-01.png">
 
 <img src="images/01-02.png">
 
