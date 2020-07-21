@@ -7,4 +7,7 @@
 <img src="../images/M2-05-05.png">
 <img src="../images/M2-05-06.png">
 <img src="../images/M2-05-07.png">
+<img src="../images/M2-05-09.png">
+<img src="../images/M2-05-10.png">
+<img src="../images/M2-05-11.png">
 <img src="../images/M2-05-08.png">
