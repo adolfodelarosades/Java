@@ -26,9 +26,9 @@ En el caso de `LocalDate`, estos son los métodos estáticos que nos permitiría
 * `static LocalDate now()`. Crea un objeto asociado a la fecha actual del sistema
 * `static LocalDate of(int year, int month, int day)`. Crea un objeto asociado a una determinada fecha específica, cuyos valores se pasan como parámetro. Los valores de los meses van de 1 (enero) a 12 (diciembre). Si el valor de alguno de los parámetros está fuera de rango o el dia del mes no se corresponde con el valor indicado, se producirá una `DateTimeException`:
 
-```java
-LocalDate ld=LocalDate.of(2017,2,30); //DateTimeException
-```
+   ```java
+   LocalDate ld=LocalDate.of(2017,2,30); //DateTimeException
+   ```
 
 Si mostramos por pantalla un objeto `LocalDate` se llamará al método `toString()`, que devuelve la fecha en formato: `yyyy-mmm-dd`:
 
@@ -43,11 +43,11 @@ Una vez creado el objeto, podemos recurrir a los siguientes métodos para la man
 
 * `plusYears(long y)`, `plusMonths(long m)` y `plusDays(long d)`. Devuelven una copia de la fecha, correspondiente a los años, meses o días añadidos. Si se sobrepasa el número de días del mes o el número de meses del año, se incrementará el mes/año, según el caso:
 
-```java
-LocalDate ld=LocalDate.of(2017,12, 30);
-ld=ld.plus(2);
-System.out.println(ld); //muestra 2018-1-1
-```
+   ```java
+   LocalDate ld=LocalDate.of(2017,12, 30);
+   ld=ld.plus(2);
+   System.out.println(ld); //muestra 2018-1-1
+   ```
 
 Observa en el código anterior como la fecha original no se ha modificado, **se ha generado una nueva fecha** que se ha almacenado en la variable que apuntaba a la fecha original.
 
@@ -71,10 +71,10 @@ Tras la creación del objeto, podemos utilizar los siguientes métodos para la m
 
 * `plusHours(long h)`, `plusMinutes(long m)` y `plusSeconds(long s)`. Devuelven un nuevo objeto `LocalTime` resultante de la suma de hora, minutos y segundo realizada:
 
-```java
-LocalTime lt=LocalTime.of(23, 50,40);
-System.out.println(lt.plusSeconds(800)); //muestra 00:04
-```
+   ```java
+   LocalTime lt=LocalTime.of(23, 50,40);
+   System.out.println(lt.plusSeconds(800)); //muestra 00:04
+   ```
 
 * `minusHours(long h)`, `minusMinutes(long m)` y `minusSeconds(long s)`. Devuelven un nuevo objeto `LocalTime` resultante de restar le hora, minutos y segundos indicados.
 
@@ -130,19 +130,19 @@ Por tanto, lo primero será crear un objeto `DateTimeFormatter`, para lo cual ut
 
 * `static DateTimeFormatter ofLocalizedDateTime(FormatStyle dateTimeStyle)`. Devuelve un objeto `DateTimeFormatter` según el estilo indicado por el objeto `FormatStyle`. `FormatStyle`, que se encuentra también en el paquete `java.time.format`, proporciona una serie de constantes de estilo predefinido, concretamente, las constantes `FUL`, `LONG`, `MEDIUM` y `SHORT`. La siguiente instrucción crea un objeto `DateTimeFormatter` para aplicar un formato de fecha hora largo:
 
-```java
-DateTimeFormatter dtf;
-dtf=DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL);
-```
+   ```java
+   DateTimeFormatter dtf;
+   dtf=DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL);
+   ```
   
 * `ofLocalizedDate(FormatStyle dateStyle)` y `ofLocalizedTime(FormatStyle timeStyle)`. Igual que el anterior, aunque solo proporcionan formato para fecha y hora, respectivamente.
 
 * `static DateTimeFormatter ofPattern(String pattern)`. Crea un objeto `DateTimeFormatter` a partir del patrón de formato indicado como parámetro. En la ayuda oficial de Oracle sobre la clase `DateTimeFormatter` tienes una tabla con los diferentes caracteres de formato que se pueden utilizar para construir el patrón de formato. Por ejemplo, si quisieramos formatear una fecha/hora de manera que se pueda presentar de la forma dia/mes/año - horas:minutos:segundos, esta sería la instrucción para la creación del objeto:
 
-```java
- DateTimeFormatter dtf;
-dtf=DateTimeFormatter.ofPattern("dd/MM/YYYY - HH:mm:ss");
-```
+   ```java
+   DateTimeFormatter dtf;
+   dtf=DateTimeFormatter.ofPattern("dd/MM/YYYY - HH:mm:ss");
+   ```
 
 Una vez creado el `DateTimeFormatter`, si quisiéramos cambiar la localización, deberíamos utilizar el método:
 
@@ -185,12 +185,12 @@ En cuanto a los métodos que proporciona la clase `Period` para la manipulación
 * `Period withYears(long years)`, `withMonths(long months)` y `withDays(long days)`. Devuelven un nuevo objeto `Period` resultante de establecer el número de años, meses o días indicados.
 * `Period normalized()`. Devuelve un nuevo objeto `Period` con los años y meses normalizados, es decir, reajustando los valores de años y meses de manera que el valor de estos últimos no sea superior a 11. Para comprender su funcionamiento, veamos el siguiente código de ejemplo:
 
-```java
-Period p=Period.ofYears(10);
-p=p.plusMonths(20);
-System.out.println(p); //sin normalizar muestra P10Y20M
-System.out.println(p.normalized()); //normalizado muestra P11Y8M
-```
+   ```java
+   Period p=Period.ofYears(10);
+   p=p.plusMonths(20);
+   System.out.println(p); //sin normalizar muestra P10Y20M
+   System.out.println(p.normalized()); //normalizado muestra P11Y8M
+   ```
 
 #### Clase `Duration`
 
@@ -215,13 +215,13 @@ Los siguientes métodos de la clase `Duration` nos permitirán manipular los dat
 * `long getSeconds()`. Devuelve la duración del intervalo en segundos
 * `long toDays(), toHours() y toMinutes()`. Devuelve la duración del intervalo en días, horas o minutos, respectivamente.
 	
-```java
-Duration d=Duration.ofDays(2);
-System.out.println(d.getSeconds());//muestra 172800
-System.out.println(d.toDays()); //muestra 2
-System.out.println(d.toHours()); //muestra 48
-System.out.println(d.toMinutes()); //muestra 2880
-```  
+   ```java
+   Duration d=Duration.ofDays(2);
+   System.out.println(d.getSeconds());//muestra 172800
+   System.out.println(d.toDays()); //muestra 2
+   System.out.println(d.toHours()); //muestra 48
+   System.out.println(d.toMinutes()); //muestra 2880
+   ```  
 
 * `Duration plusDays(long days)`, `plusHours(long hours)`, `plusMinutes(long minutes)` y `plusSeconds(long seconds)`. Devuelven una copia del objeto `Duration` con los días, horas, minutos o segundos añadidos.
 
@@ -229,7 +229,7 @@ System.out.println(d.toMinutes()); //muestra 2880
 
 * `Duration withSeconds(long seconds)`. Devuelve una copia del objeto `Duration` con la cantidad de segundos establecidos:
 
-```java
-Duration d=Duration.ofDays(2);
-System.out.println(d.withSeconds(100)); //muestra PT1M40S
-```
+   ```java
+   Duration d=Duration.ofDays(2);
+   System.out.println(d.withSeconds(100)); //muestra PT1M40S
+   ```
