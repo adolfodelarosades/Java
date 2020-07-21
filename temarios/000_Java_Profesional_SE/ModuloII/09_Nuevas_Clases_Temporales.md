@@ -192,7 +192,7 @@ System.out.println(p); //sin normalizar muestra P10Y20M
 System.out.println(p.normalized()); //normalizado muestra P11Y8M
 ```
 
-#### Clase `Duration`
+#### Clase `Duration`
 
 Representa un intervalo temporal medido con unidades horarias, al estilo 2 horas 20 minutos 40 segundos.
 
