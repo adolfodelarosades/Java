@@ -1,4 +1,4 @@
-# 001_Java_SE_Programacion_I
+# 001 Java SE Programacion I
 
 Este curso de nivel de entrada está dirigido a programadores que son nuevos en Java y que necesitan aprender sus conceptos, construcciones de lenguaje y tipos de datos. El curso está diseñado para programadores que aplicarán estas habilidades lingüísticas para desarrollar programas utilizando las últimas versiones principales del JDK, actualmente Java 11.
 
