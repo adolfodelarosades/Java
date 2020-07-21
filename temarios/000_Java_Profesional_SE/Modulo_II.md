@@ -7,6 +7,6 @@
    * [05 Operaciones Finales Streams](/temarios/000_Java_Profesional_SE/ModuloII/05_Operaciones_Finales_Streams.md)
    * [06 Operaciones Intermedias Streams](/temarios/000_Java_Profesional_SE/ModuloII/06_Operaciones_Intermedias_Streams.md)
    * [07 Java NIO](/temarios/000_Java_Profesional_SE/ModuloII/07_Java_NIO.md)
-   * [08 Fechas en Java](/temarios/000_Java_Profesional_SE/Modulo_II/08_Fechas_en_Java.md)
-   * [09 Nuevas Clases Temporales](/temarios/000_Java_Profesional_SE/Modulo_II/09_Nuevas_Clases_Temporales.md)
+   * [08 Fechas en Java](/temarios/000_Java_Profesional_SE/ModuloII/08_Fechas_en_Java.md)
+   * [09 Nuevas Clases Temporales](/temarios/000_Java_Profesional_SE/ModuloII/09_Nuevas_Clases_Temporales.md)
    
