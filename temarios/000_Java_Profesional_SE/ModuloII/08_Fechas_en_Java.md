@@ -24,9 +24,9 @@ No solo casi todos sus constructores están obsoletos, también la mayoría de s
 
 Si la mayoría de sus métodos y constructores están obsoletos, ¿porqué se sigue utilizando esta clase?. La respuesta es que `Date` es el tipo de dato fecha/hora de Java y la gran mayoría de los métodos de clases que trabajan con datos de tipo fecha/hora utilizan `Date`. Además, como veremos más adelante en esta lección, la clase `DateFormat`, que se encarga de formatear datos de tipo fecha, lo hace sobre objetos de tipo `Date`.
 
-### La clase ``java.util.Calendar
+### La clase `java.util.Calendar`
 
-Esta clase es posterior a ``Date, fue incorporada a Java estándar a partir de la versión JDK 1.1. Proporciona métodos para trabajar con los componentes de una fecha/hora (días, meses, años, horas,..).
+Esta clase es posterior a `Date`, fue incorporada a Java estándar a partir de la versión JDK 1.1. Proporciona métodos para trabajar con los componentes de una fecha/hora (días, meses, años, horas,..).
 
 En primer lugar, dado que `Calendar` es una clase abstracta, no podemos utilizar su constructor para crear un objeto de este tipo, debemos recurrir al método estático `getInstance()`, que devuelve un objeto `Calendar` asociado a la fecha y hora actuales:
 
