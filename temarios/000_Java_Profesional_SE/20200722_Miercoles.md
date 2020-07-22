@@ -372,3 +372,38 @@ public class ServicePaises {
 	}
 }
 ```
+
+*`TestPaises`*
+
+```java
+package test;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import service.ServicePaises;
+
+public class TestPaises extends ServicePaises {
+	ServicePaises service;
+
+	@Before
+	public void setUp() throws Exception {
+		service = new ServicePaises();
+	}
+
+	@Test
+	public void testContinenteConMasPaises() {
+		assertEquals(service.continenteConMasPaises(), "Europe");
+	}
+	
+	@Test
+	public void testPaisMasPoblado() {
+		assertEquals(service.paisMasPoblado().getHabitantes(), 249903450);
+	}
+
+}
+```
+
+<img src="images/20200722-06.png">
