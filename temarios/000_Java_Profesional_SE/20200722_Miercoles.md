@@ -84,23 +84,23 @@ import org.json.simple.parser.ParseException;
 
 public class TestLecturaJSON {
 
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
-		String json="[{\"numeroPedido\":200, \"producto\":\"Galletas\",\"precio\":20.5}," + 
-				     "{\"numeroPedido\":100, \"producto\":\"Balón\",\"precio\":2.2}]";
+      String json="[{\"numeroPedido\":200, \"producto\":\"Galletas\",\"precio\":20.5}," + 
+	           "{\"numeroPedido\":100, \"producto\":\"Balón\",\"precio\":2.2}]";
 		
-		//Crear objeto JSONParse
-		JSONParser parse = new JSONParser();
+      //Crear objeto JSONParse
+      JSONParser parse = new JSONParser();
 		
-		//Leemos el documento y lo volcamos en una variable JSONArray
-		try {
-			JSONArray array = (JSONArray)parse.parse(json);
-			//2. Forma de recorrer un JSONArray
-			array.forEach(ob -> System.out.println(((JSONObject)ob).get("producto")));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+      //Leemos el documento y lo volcamos en una variable JSONArray
+      try {
+	 JSONArray array = (JSONArray)parse.parse(json);
+	 //2. Forma de recorrer un JSONArray
+	 array.forEach(ob -> System.out.println(((JSONObject)ob).get("producto")));
+      } catch (ParseException e) {
+	 e.printStackTrace();
+      }
+   }
 }
 ```
 
@@ -120,24 +120,24 @@ import org.json.simple.parser.ParseException;
 
 public class TestLecturaJSON {
 
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
-		String json="[{\"numeroPedido\":200, \"producto\":\"Galletas\",\"precio\":20.5}," + 
-				     "{\"numeroPedido\":100, \"producto\":\"Balón\",\"precio\":2.2}]";
+      String json="[{\"numeroPedido\":200, \"producto\":\"Galletas\",\"precio\":20.5}," + 
+	           "{\"numeroPedido\":100, \"producto\":\"Balón\",\"precio\":2.2}]";
 		
-		//Crear objeto JSONParse
-		JSONParser parse = new JSONParser();
+      //Crear objeto JSONParse
+      JSONParser parse = new JSONParser();
 		
-		//Leemos el documento y lo volcamos en una variable JSONArray
-		try {
-			JSONArray array = (JSONArray)parse.parse(json);
-			//3. Forma de recorrer un JSONArray Con Streams
-			Stream<JSONObject> st= (Stream<JSONObject>)array.stream();
-			st.forEach(ob -> System.out.println(ob.get("producto")));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+      //Leemos el documento y lo volcamos en una variable JSONArray
+      try {
+	  JSONArray array = (JSONArray)parse.parse(json);
+	  //3. Forma de recorrer un JSONArray Con Streams
+	  Stream<JSONObject> st= (Stream<JSONObject>)array.stream();
+	  st.forEach(ob -> System.out.println(ob.get("producto")));
+      } catch (ParseException e) {
+	  e.printStackTrace();
+      }
+   }
 }
 ```
 
@@ -159,36 +159,36 @@ import org.json.simple.parser.ParseException;
 
 public class LecturaJSON {
 
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
-		String json="[{\"numeroPedido\":200, \"producto\":\"Galletas\",\"precio\":20.5}," + 
-				     "{\"numeroPedido\":100, \"producto\":\"Balón\",\"precio\":2.2}]";
+      String json="[{\"numeroPedido\":200, \"producto\":\"Galletas\",\"precio\":20.5}," + 
+	           "{\"numeroPedido\":100, \"producto\":\"Balón\",\"precio\":2.2}]";
 		
-		//Crear objeto JSONParse
-		JSONParser parse = new JSONParser();
+      //Crear objeto JSONParse
+      JSONParser parse = new JSONParser();
 		
-		//Leemos el documento y lo volcamos en una variable JSONArray
-		try {
+      //Leemos el documento y lo volcamos en una variable JSONArray
+      try {
+	 JSONArray array = (JSONArray)parse.parse(json);
+	 //1. Forma de recorrer un JSONArray
+	 /*
+	 for (int i = 0; i < array.size(); i++) {
+	    JSONObject ob = (JSONObject)array.get(i);
+	    System.out.println(ob.get("producto"));
+	 }
+	 */
+	 
+	 //2. Forma de recorrer un JSONArray
+	 //array.forEach(ob -> System.out.println(((JSONObject)ob).get("producto")));
 			
-			JSONArray array = (JSONArray)parse.parse(json);
-			//1. Forma de recorrer un JSONArray
-			/*
-			for (int i = 0; i < array.size(); i++) {
-				JSONObject ob = (JSONObject)array.get(i);
-				System.out.println(ob.get("producto"));
-			}
-			*/
-			//2. Forma de recorrer un JSONArray
-			//array.forEach(ob -> System.out.println(((JSONObject)ob).get("producto")));
-			
-			//3. Forma de recorrer un JSONArray Con Streams
-			Stream<JSONObject> st= (Stream<JSONObject>)array.stream();
-			st.forEach(ob -> System.out.println(ob.get("producto")));
+	 //3. Forma de recorrer un JSONArray Con Streams
+	 Stream<JSONObject> st= (Stream<JSONObject>)array.stream();
+	 st.forEach(ob -> System.out.println(ob.get("producto")));
 		
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+      } catch (ParseException e) {
+	 e.printStackTrace();
+      }
+   }
 }
 ```
 
