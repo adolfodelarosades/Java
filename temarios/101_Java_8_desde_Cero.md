@@ -6,7 +6,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
 
 ## CONTENIDOS 
   
-1. [Comienza con Java](101_Java_8_desde_Cero/01_Comienza_con_Java.md) 59m 
+1. [Comienza con Java](101_Java_8_desde_Cero/01_Comienza_con_Java.md) 59m :+1:
    * 00 Presentación del profesor y curso 5:12 
    * 01 Instalación de Java 16:13 
    * 02 Posibles entornos de desarrollo 13:46 
