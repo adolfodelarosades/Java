@@ -836,7 +836,7 @@ Usando cadena de caracteres el operador más usual aparte de alguno de los que h
 
 Veamos algunos de los ejemplos que tenemos por aquí.
 
-Tenemos la declaración de un carácter mediante un literal con comillas simples `''`, la declaración de una cadena de caracteres, la tendríamos que almacenar en una variable de tipo `String`, todos aquellos tipos que estén almacenados en `java.land.String` no van a requerir que escribamos un nombre completo, sino que simplemente podemos hacer referencia al tipo directa, tenemos una cadena que llamaremos `str` cómo vemos la hemos inicializado a partir de un literal en este caso `"Cadena de caracteres"`, los literales que van encerrado entre comillas dobles se representan siempre mediante un `String`, tenemos el `str-2` que concatenamos con `str`, concatenación de dos cadenas de caracteres para producir otro `String`.
+Tenemos la declaración de un carácter mediante un literal con comillas simples `''`, la declaración de una cadena de caracteres, la tendríamos que almacenar en una variable de tipo `String`, todos aquellos tipos que estén almacenados en `java.lang.String` no van a requerir que escribamos un nombre completo, sino que simplemente podemos hacer referencia al tipo directa, tenemos una cadena que llamaremos `str` cómo vemos la hemos inicializado a partir de un literal en este caso `"Cadena de caracteres"`, los literales que van encerrado entre comillas dobles se representan siempre mediante un `String`, tenemos el `str-2` que concatenamos con `str`, concatenación de dos cadenas de caracteres para producir otro `String`.
 
 *`TiposDatosCaracteres`*
 
@@ -865,85 +865,45 @@ public class TiposDatosCaracteres {
 
 ![06-07](images/06-07.png)
 
-
-
-
-
-
-
-
-
-
 ![06_Manipulación-17](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-17.png)
+
 ![06_Manipulación-18](images/06_Manipulación_de_numeros_caracteres_y_otros_valores-18.png)
 
+Hablemos algo sobre cambios de tipo de dato o ***casting*** hemos visto que hemos declarado variable de diferentes tipos de datos, en ocasiones nos interesara el que podamos hacer un cambio del tipo de dato, *incluso del tipo de dato de un literal* para por ejemplo poder hacer una división que no sea entera, de dos números enteros. El cambio del tipo de datos se hace encerrando entre paréntesis el tipo de datos el cual queremos promocionar o *castear* y poniéndolo como prefijo de la expresión o del litera al cuál le queremos cambiar el tipo de datos, **como es natural para promocionar una variable de un tipo de dato a otro esos tipos de datos tienen que ser compatible**, como sucede en el caso de lo de los tipos numéricos. El valor 5 literal lo podemos almacenar en un entero por ejemplo de tipo `int` y también lo podríamos almacenar como es lógico en un número real de doble precisión, esos tipos de datos son compatibles.
 
+Si nos venimos hacia los ejemplos.
 
-*TiposDatosLogicos.java*
+*`Casting`*
 
 ```java
-/**
- * 
- */
-package tiposdatos;
+package cast;
 
-/**
- * @author
- *
- */
-@SuppressWarnings("all")
-public class TiposDatosLogicos {
+public class Casting {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		//OPERADORES LÓGICOS CONDICIONALES
-		int valor1 = 1;
-        int valor2 = 2;
-        //En el próximo capítulo profundizamos en las sentencias condicionales
-        if((valor1 == 1) && (valor2 == 2))
-            System.out.println("valor1 es 1 AND valor2 es 2");
-        if((valor1 == 1) || (valor2 == 1))
-            System.out.println("valor1 es 1 OR valor2 es 1");
+   public static void main(String[] args) {
+      System.out.println(5/9);
 		
-        
-        //OPERADOR "TERNARIO"
-        int result;
-        boolean someCondition = false;
-        result = someCondition ? valor1 : valor2;
-        System.out.println(result);
-        
-        
-        //OPERADORES LÓGICOS RELACIONALES
-        //En el próximo capítulo profundizamos en las sentencias condicionales
-        if(valor1 == valor2)
-            System.out.println("valor1 == valor2");
-        if(valor1 != valor2)
-            System.out.println("valor1 != valor2");
-        if(valor1 > valor2)
-            System.out.println("valor1 > valor2");
-        if(valor1 < valor2)
-            System.out.println("valor1 < valor2");
-        if(valor1 <= valor2)
-            System.out.println("valor1 <= valor2");
-        
-	}
+      System.out.println(5d/9);
+		
+      System.out.println(5/9d);
+		
+      System.out.println((double)5/9);
+		
+      System.out.println((double)(5/9));
+		
+      int a = 5;
+      int b = 9;
+		
+      System.out.println((double)a/b);//Aquí no puedo usar "d" sufija
+
+   }
+
 }
-
-
-SALIDA:
-
-valor1 es 1 AND valor2 es 2
-valor1 es 1 OR valor2 es 1
-2
-valor1 != valor2
-valor1 < valor2
-valor1 <= valor2
 ```
 
+![06-08](images/06-08.png)
 
+Los casting será algo que se utiliza mucho no solamente entre tipo de dato primitivo sino también con el uso de tipos de dato estructurado aunque eso lo iremos viendo más adelante.
 
 *TiposDatosCaracteres.java*
 
