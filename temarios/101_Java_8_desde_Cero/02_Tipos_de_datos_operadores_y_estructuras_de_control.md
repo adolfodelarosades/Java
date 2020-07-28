@@ -963,17 +963,13 @@ public class TiposDatosChar_02 {
 
 [Estructura de decisión](pdfs/07_Estructuras_de_decisión.pdf)
 
-![07_Estructuras_de_decision-0](images/07_Estructuras_de_decision-0.png)
+## Resumen Profesor
 
 ### 7.1 Repaso sobre sentencias, bloques y expresiones
-
-![07_Estructuras_de_decision-1](images/07_Estructuras_de_decision-1.png)
 
 En el capítulo 4 veíamos que podíamos asemejar una sentencia a una *línea de código*, y un bloque a una agrupación de sentencias con una determinada misión. Repasemos esos conceptos y, vistos los capítulos 5 y 6, conzcamos mejor el de expresión.
 
 #### 7.1.1 Expresión
-
-![07_Estructuras_de_decision-2](images/07_Estructuras_de_decision-2.png)
 
 Se trata de una construcción hecha con variables, operadores y llamadas a funciones, que sigue la sintaxis del lenguaje, y que se evalúa produciendo un solo valor.
 
@@ -998,37 +994,29 @@ numero = (1 + 2) * 3;
 
 #### 7.1.2 Sentencia
 
-![07_Estructuras_de_decision-3](images/07_Estructuras_de_decision-3.png)
-
 Tras conocer una expresión, podemos decir que una sentencia es una expresión que termina en `;`
 
 #### 7.1.3 Bloque de código
-
-![07_Estructuras_de_decision-4](images/07_Estructuras_de_decision-4.png)
 
 Un bloque será un grupo de cero o más sentencias, delimitadas por un `{ }`. Por ejemplo:
 
 ```java
 class BlockDemo {
-     public static void main(String[] args) {
-          boolean condicion = true;
-          if (condicion) { // inicio del bloque 1
-               System.out.println("La condición es verdadera");
-          } // final del bloque 1
-          else { // inicio del bloque 2
-               System.out.println("La condición es falsa.");
-          } // final del bloque 2
-     }
+   public static void main(String[] args) {
+      boolean condicion = true;
+      if (condicion) { // inicio del bloque 1
+         System.out.println("La condición es verdadera");
+      } // final del bloque 1
+      else { // inicio del bloque 2
+         System.out.println("La condición es falsa.");
+      } // final del bloque 2
+   }
 }
 ```
 
 ### 7.2 Estructuras de decisión
 
-![07_Estructuras_de_decision-5](images/07_Estructuras_de_decision-5.png)
-
 #### 7.2.1 Estructura `if-then`
-
-![07_Estructuras_de_decision-6](images/07_Estructuras_de_decision-6.png)
 
 Permite evaluar una expresión como verdadera o falsa, y ejecutar en caso de que sea verdadera un bloque de código
 
@@ -1042,6 +1030,87 @@ if (num1 > num2) {
 System.out.println("Este mensaje se imprime siempre");
 ```
 
+#### 7.2.2 Estructura `if-else`
+
+Permite evaluar una expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta otro diferente:
+
+```java
+int num1 = 3, num2 = 4;
+
+if (num1 > num2) {
+   System.out.println("num1 es mayor que num2");
+}else {
+   System.out.println("num1 NO es mayor que num2");
+}
+
+System.out.println("Este mensaje se imprime siempre");
+```
+
+#### 7.2.3 Estructura `if-else-if`
+
+Permite evaluar varias expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta el último bloque de código correspondiente al else:
+
+```java
+if (puntuacion >= 9) {
+   System.out.println("Tienes un SOBRESALIENTE");
+} else if (puntuacion >= 7) {
+   System.out.println("Tienes un NOTABLE");
+} else if (puntuacion >= 5) {
+   System.out.println("Tienes un APROBADO");
+} else {
+   System.out.println("Estás SUSPENSO. Lo siento");
+}
+```
+
+#### 7.2.4 Estructura `switch`
+
+Permite evaluar si una expresión se corresponde con alguno de los valores de una serie de casos. Se puede usar con valores `byte`, `short`, `char`, `int` y `String`, entre otros. También existe la posibilidad de tener un caso por defecto (parecido a `else`).
+
+```java
+switch (mes) {
+   case 1:  mesString = "Enero";
+      break;
+   case 2:  mesString = "Febrero";
+      break;
+   case 3:  mesString = "Marzo";
+      break;
+   case 4:  mesString = "Abril";
+      break;
+   case 5:  mesString = "Mayo";
+      break;
+   case 6:  mesString = "Junio";
+      break;
+   case 7:  mesString = "Julio";
+      break;
+   case 8:  mesString = "Agosto";
+      break;
+   case 9:  mesString = "Septiembre";
+      break;
+   case 10: mesString = "Octubre";
+      break;
+   case 11: mesString = "Noviembre";
+      break;
+   case 12: mesString = "Diciembre";
+      break;
+   default: mesString = "Mes no válido";
+      break;
+}
+```
+
+## Transcripción
+
+![07_Estructuras_de_decision-0](images/07_Estructuras_de_decision-0.png)
+![07_Estructuras_de_decision-1](images/07_Estructuras_de_decision-1.png)
+![07_Estructuras_de_decision-2](images/07_Estructuras_de_decision-2.png)
+![07_Estructuras_de_decision-3](images/07_Estructuras_de_decision-3.png)
+![07_Estructuras_de_decision-4](images/07_Estructuras_de_decision-4.png)
+![07_Estructuras_de_decision-5](images/07_Estructuras_de_decision-5.png)
+![07_Estructuras_de_decision-6](images/07_Estructuras_de_decision-6.png)
+![07_Estructuras_de_decision-7](images/07_Estructuras_de_decision-7.png)
+![07_Estructuras_de_decision-8](images/07_Estructuras_de_decision-8.png)
+![07_Estructuras_de_decision-9](images/07_Estructuras_de_decision-9.png)
+
+
 ##### 7.2.1.1 Código
 
 *Decision01.java*
@@ -1052,30 +1121,25 @@ System.out.println("Este mensaje se imprime siempre");
  */
 package decision;
 
-/**
- * @author 
- *
- */
 public class Decision01 {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
 		
-//		int num1 = 3;
-//		int num2 = 4;
-		int num1 = 5, num2 = 4;
+      // int num1 = 3;
+      // int num2 = 4;
+      int num1 = 5, num2 = 4;
 		
-		if (num1 > num2) {
-			System.out.println("num1 es mayor que num2");
-		}
+      if (num1 > num2) {
+	 System.out.println("num1 es mayor que num2");
+      }
 		
-		System.out.println("Este mensaje se imprime siempre");
+      System.out.println("Este mensaje se imprime siempre");
 
-	}
+   }
 }
-
 
 SALIDA:
 
@@ -1116,24 +1180,6 @@ SALIDA:
 num1 es menor que num3, y este es menor que num2
 
 ```
-
-#### 7.2.2 Estructura `if-else`
-
-![07_Estructuras_de_decision-7](images/07_Estructuras_de_decision-7.png)
-
-Permite evaluar una expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta otro diferente:
-
-```java
-int num1 = 3, num2 = 4;
-
-if (num1 > num2) {
-   System.out.println("num1 es mayor que num2");
-}else {
-   System.out.println("num1 NO es mayor que num2");
-}
-
-System.out.println("Este mensaje se imprime siempre");
-```
 ##### 7.2.2.1 Código
 
 *Decision03.java*
@@ -1171,25 +1217,6 @@ SALIDA:
 
 El número mayor es 25
 ```
-
-#### 7.2.3 Estructura `if-else-if`
-
-![07_Estructuras_de_decision-8](images/07_Estructuras_de_decision-8.png)
-
-Permite evaluar varias expresión como verdadera o falsa; si el valor es verdadero se ejecuta un bloque de código, y si es falso, se ejecuta el último bloque de código correspondiente al else:
-
-```java
-if (puntuacion >= 9) {
-   System.out.println("Tienes un SOBRESALIENTE");
-} else if (puntuacion >= 7) {
-   System.out.println("Tienes un NOTABLE");
-} else if (puntuacion >= 5) {
-   System.out.println("Tienes un APROBADO");
-} else {
-   System.out.println("Estás SUSPENSO. Lo siento");
-}
-```
-
 ##### 7.2.3.1 Código
 
 *Decision04.java*
@@ -1230,43 +1257,6 @@ public class Decision04 {
 SALIDA:
 
 Tienes un NOTABLE
-```
-
-#### 7.2.4 Estructura `switch`
-
-![07_Estructuras_de_decision-9](images/07_Estructuras_de_decision-9.png)
-
-Permite evaluar si una expresión se corresponde con alguno de los valores de una serie de casos. Se puede usar con valores `byte`, `short`, `char`, `int` y `String`, entre otros. También existe la posibilidad de tener un caso por defecto (parecido a `else`).
-
-```java
-switch (mes) {
-   case 1:  mesString = "Enero";
-      break;
-   case 2:  mesString = "Febrero";
-      break;
-   case 3:  mesString = "Marzo";
-      break;
-   case 4:  mesString = "Abril";
-      break;
-   case 5:  mesString = "Mayo";
-      break;
-   case 6:  mesString = "Junio";
-      break;
-   case 7:  mesString = "Julio";
-      break;
-   case 8:  mesString = "Agosto";
-      break;
-   case 9:  mesString = "Septiembre";
-      break;
-   case 10: mesString = "Octubre";
-      break;
-   case 11: mesString = "Noviembre";
-      break;
-   case 12: mesString = "Diciembre";
-      break;
-   default: mesString = "Mes no válido";
-      break;
-}
 ```
 
 ##### 7.2.4.1 Código
@@ -1456,12 +1446,11 @@ public class Decision07 {
 	}
 
 }
-
+```
 
 SALIDA:
 
 El mes de abril se corresponde con el número 4
-```
 
 # 08 Estructura de repetición 13:01 
 
