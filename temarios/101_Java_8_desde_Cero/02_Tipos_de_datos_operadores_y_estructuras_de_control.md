@@ -905,40 +905,59 @@ public class Casting {
 
 Los casting será algo que se utiliza mucho no solamente entre tipo de dato primitivo sino también con el uso de tipos de dato estructurado aunque eso lo iremos viendo más adelante.
 
-*TiposDatosCaracteres.java*
+## Temas Avanzados.
+
+*`TiposDatosChar_01`*
 
 ```java
 package tiposdatos;
 
-/**
- * @author 
- *
- */
-public class TiposDatosCaracteres {
+public class TiposDatosChar_01 {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		char a = 'a';
-		System.out.println(a);
-		
-		String str = "Cadena de caracteres";
-		System.out.println(str);
-		
-		String str2 = " más larga";
-		System.out.println(str + str2); // Cadena de caracteres más larga
-	}
+   public static void main(String[] args) {
+      for (int i = 0; i <= 65535; i++) {
+	 char unicode = (char) i;
+	 System.out.print(unicode);
+      }
+   }
 }
-
-
-SALIDA:
-
-a
-Cadena de caracteres
-Cadena de caracteres más larga
 ```
+
+![06-09](images/06-09.png)
+
+
+*`TiposDatosChar_02`*
+
+```java
+package tiposdatos;
+
+import java.io.UnsupportedEncodingException;
+
+public class TiposDatosChar_02 {
+   public static void main(String[] argv) throws UnsupportedEncodingException {
+
+      String unicodeMessage = "\u7686\u3055\u3093\u3001\u3053\u3093\u306b\u3061\u306f";
+      System.out.println(unicodeMessage);
+      System.out.println("\n");
+
+      unicodeMessage = "También puedes comer sandia! ";
+      unicodeMessage += new String(Character.toChars(0x1F349));
+      System.out.println(unicodeMessage);
+      System.out.println("\n");
+
+      unicodeMessage = new String(Character.toChars(0x1F600)) + " " + new String(Character.toChars(0x1F609)) + " "
+			+ new String(Character.toChars(0x1F601)) + " " + new String(Character.toChars(0x1F606)) + " "
+			+ new String(Character.toChars(0x1F606)) + " " + new String(Character.toChars(0x1F602)) + " "
+			+ new String(Character.toChars(0x1F923)) + " " + new String(Character.toChars(0x1F603)) + " "
+			+ new String(Character.toChars(0x1F61B)) + " " + new String(Character.toChars(0x1F61C)) + " "
+			+ new String(Character.toChars(0x1F606));
+
+      System.out.println(unicodeMessage);
+   }
+}
+```
+
+![06-10](images/06-10.png)
 
 # 7. Estructura de decisión 21:22 
 
