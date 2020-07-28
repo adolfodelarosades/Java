@@ -871,6 +871,9 @@ public class TiposDatosCaracteres {
 
 Hablemos algo sobre cambios de tipo de dato o ***casting*** hemos visto que hemos declarado variable de diferentes tipos de datos, en ocasiones nos interesara el que podamos hacer un cambio del tipo de dato, *incluso del tipo de dato de un literal* para por ejemplo poder hacer una división que no sea entera, de dos números enteros. El cambio del tipo de datos se hace encerrando entre paréntesis el tipo de datos el cual queremos promocionar o *castear* y poniéndolo como prefijo de la expresión o del litera al cuál le queremos cambiar el tipo de datos, **como es natural para promocionar una variable de un tipo de dato a otro esos tipos de datos tienen que ser compatible**, como sucede en el caso de lo de los tipos numéricos. El valor 5 literal lo podemos almacenar en un entero por ejemplo de tipo `int` y también lo podríamos almacenar como es lógico en un número real de doble precisión, esos tipos de datos son compatibles.
 
+
+### :computer: `101-06-Tipos_de_Datos`
+
 Si nos venimos hacia los ejemplos.
 
 *`Casting`*
@@ -907,6 +910,8 @@ Los casting será algo que se utiliza mucho no solamente entre tipo de dato prim
 
 ## Temas Avanzados.
 
+### :computer: `101-06-Tipos_de_Datos`
+
 *`TiposDatosChar_01`*
 
 ```java
@@ -925,6 +930,7 @@ public class TiposDatosChar_01 {
 
 ![06-09](images/06-09.png)
 
+### :computer: `101-06-Tipos_de_Datos`
 
 *`TiposDatosChar_02`*
 
@@ -1100,18 +1106,38 @@ switch (mes) {
 ## Transcripción
 
 ![07_Estructuras_de_decision-0](images/07_Estructuras_de_decision-0.png)
+
+En esta lección vamos a hablar de estructuras de decisión.
+
 ![07_Estructuras_de_decision-1](images/07_Estructuras_de_decision-1.png)
+
+Si bien tendremos antes unas palabras sobre expresiones, sentencia y bloque, algo de lo cual ya hemos hablado pero creo que tenemos que profundizar.
+
 ![07_Estructuras_de_decision-2](images/07_Estructuras_de_decision-2.png)
+
+Una expresión en Java, en general, esto es aplicable a cualquier lenguaje de programación, pero nos centraremos en el nuestro en Java, una expresión es una construcción que haremos usando variables, operadores, usando también valores literales y llamadas a funciones, que es algo que aprenderemos mas adelante, como es lógico debe seguir la sintaxis de Java. **Una expresión siempre será susceptible de ser evaluada**, es decir seguramente sea una operación que podemos ver, si es sencilla será como una suma,  entonces evaluar esa suma significa simplemente realizarla, si tenemos la suma de dos valores literales 1 + 2 evaluarla significa obtener el resultado de esta operación que es 3, las expresiones tienen como una operación que puede empezar a resultar entonces un poco más complejas que se pueden componer, componer una expresión significa ir construyendo una expresión grande a partir de expresiones pequeñas. En el ejemplo tenemos una expresión compuesta por dos, primero la expresión 1 más 2, que ya por si es una expresión y que la agrupamos entre paréntesis para después componer esa expresión con otra que sería el producto con el valor literal 3, en este caso podemos identificar mediante los dos óvalos que hemos dibujado el valor de la expresión 1 + 2 y cómo lo podemos componer con otro operador del multiplicador y con el valor literal tres, para hacer el cálculo de (1 + 2) x 3 donde la evaluación de esa expresión sería 9.
+
 ![07_Estructuras_de_decision-3](images/07_Estructuras_de_decision-3.png)
+
+Una expresión no es lo mismo que una sentencia, sino que para que una expresión sea sentencia será aquella que termine siempre en un punto y coma, los programadores la suelen llamar normalmente líneas de código. Aquí tenemos un ejemplo de una expresión la asignación del valor uno mas dos posteriormente x 3 y asignado a una variable que estamos declarando que se llama numero, toda esa operación es el valor de la evaluación de la expresión asignado a la variable numero siempre y cuando termine en un punto y coma serán lo que conocemos como una sentencia. Una sentencia puede incluir varias expresiones que podamos componer la composición de varias expresiones.
+
 ![07_Estructuras_de_decision-4](images/07_Estructuras_de_decision-4.png)
+
+De expresión a sentencia, de sentencia a bloque de código. Un bloque de código será la agrupación de cero porque podemos crear bloques de código que sean vacíos o más líneas de código es decir o más sentencia siempre y cuando estén delimitados por unas llaves de apertura y de cierre. Aquí tenemos por ejemplo un método `main` donde podemos identificar varias sentencias, incluye a su vez algunos bloques donde todas las líneas de código quedarían incluida dentro del bloque del método y a su vez las condiciones que vamos a aprender ahora delimitan bloques de códigos.
+
+Era necesario que conociéramos la diferencia entre expresión, sentencia y bloque de código para comenzar con las diferentes estructuras de control en particular en esta lección hablaremos sobre la estructura de decisión. 
+
 ![07_Estructuras_de_decision-5](images/07_Estructuras_de_decision-5.png)
+
+La estructura de decisión son aquellas que nos van a permitir evaluar el valor de una variable o de una expresión y en función de eso poder ejecutar un bloque de sentencia o ejecutar otro, pudiendo dar ese pequeño plus podríamos decir de inteligencia a nuestros programas para que condicione la ejecución de uno u otro bloque de sentencia a la evaluación de una expresión.
+
 ![07_Estructuras_de_decision-6](images/07_Estructuras_de_decision-6.png)
-![07_Estructuras_de_decision-7](images/07_Estructuras_de_decision-7.png)
-![07_Estructuras_de_decision-8](images/07_Estructuras_de_decision-8.png)
-![07_Estructuras_de_decision-9](images/07_Estructuras_de_decision-9.png)
 
+Tenemos varias estructuras de decisión diferentes en Java, la más elemental en la `IF-THEN`, es decir si se cumple el valor de una determinada expresión, si la podemos evaluar como cierta como `true` se ejecuta un bloque de código y en caso de que no lo séa, dicho bloque no sería ejecutado y la ejecución del programa pasaría a la sentencia que esté escrita después de este bloque.
 
-##### 7.2.1.1 Código
+### :computer: `101-07_Decision`
+
+Vamos a ver algún ejemplo.
 
 *Decision01.java*
 
@@ -1123,14 +1149,10 @@ package decision;
 
 public class Decision01 {
 
-   /**
-    * @param args
-    */
    public static void main(String[] args) {
-		
       // int num1 = 3;
       // int num2 = 4;
-      int num1 = 5, num2 = 4;
+      int num1 = 3, num2 = 4; //Podemos definir e inicializar varias variables
 		
       if (num1 > num2) {
 	 System.out.println("num1 es mayor que num2");
@@ -1140,12 +1162,63 @@ public class Decision01 {
 
    }
 }
-
-SALIDA:
-
-num1 es mayor que num2
-Este mensaje se imprime siempre
 ```
+
+En la primera estructura `if` la sintaxis es bien sencilla porque requiere que usemos la palabra reservada `if` y a continuación indiquemos una expresión que será susceptible de ser evaluada como verdadero o falso, rescatamos aquí por ejemplo los operadores relacionales que hemos visto aparejados a los valores Booleanos y evaluando esa expresión que susceptible de ser verdadera o falsa, si se cumple como verdadera se ejecutarían las sentencias de código que estén dentro del bloque definido a continuación del `if` y si no se cumplen, la ejecución del programa pasaría a la siguiente línea de código, en este caso sería la impresión de un mensaje por consola.
+
+Vamos a ejecutar. 
+
+![07-02](images/07-02.png)
+
+Cómo vemos como el número uno no es mayor que el número dos que este mensaje no se imprime y directamente se pasa a imprimirse este mensaje.
+
+Si cambiamos el valor por cinco en este caso el número uno si es mayor que el número 2 y entonces si se ejecutaría la linea.
+
+![07-01](images/07-01.png)
+
+### :computer: `101-07_Decision`
+
+Vamos a ver algún ejemplo.
+
+*Decision02.java*
+
+```java
+/**
+ *  Ejemplo de uso de la estructura IF con una condición más compleja
+ */
+package decision;
+
+public class Decision02 {
+
+   public static void main(String[] args) {
+
+      int num1 = 4, num2 = 9, num3 = 7;
+
+      if (num3 > num1 && num3 < num2) {
+	 System.out.println("num1 es menor que num3, y este es menor que num2");
+      }
+   }
+}
+```
+
+
+La expresión que indiquemos entre paréntesis podrán ser sencillas o podrán ser algo más complejas y podemos hacer uso de una conjunción de operadores relacionales con operadores lógicos para crear expresiones que sean algo más complejas, lo que vaya entre paréntesis a continuación del `if` siempre tiene que ser una única condición y alguien se preguntará bueno pero es que hay más de una, realmente no realmente ahí lo que tenemos es la conjunción de dos expresiones de comparación para que formen una sola condición y eso lo podemos hacer a través del operador AND `&&` o también del operador OR `||` eso nos va a ir permitiendo que vayamos construyendo expresiones susceptible de ser verdadera o falsa, que sean más sencillas o más complejas en este caso tenemos tres números, `num1 = 4`, `num2 = 9` y `num3 = 7` y queremos saber si el num3 es mayor que num1 y además si el num3 es menor que el num2 para que el Y dé 2 condiciones sea verdadero ya hemos dicho que tiene que serlo la expresión de la derecha y la expresión de la izquierda, en este caso si se va a cumplir y se imprimir el mensaje que hay dentro del bloque de sentencia del `if`.
+
+![07-03](images/07-03.png)
+
+
+![07_Estructuras_de_decision-7](images/07_Estructuras_de_decision-7.png)
+
+La siguiente estructura que vamos a conocer y es que bueno a la estructura yrden vemos que le falta algo porque si evaluamos una expresión y esa expresión se evalúa como falsa es posible que en alguna situación no interesa ejecutar un bloque de código decir si se evalúa como verdadera ejecutar un bloque si se evalúa como falsa ejecutar otro para eso tenemos la estructura Eiffel que nos va a permitir ejecutar en dos bloques de código Sila la evaluación de la expresión da como verdadera o como falta veamos algún ejemplo el que tenemos aquí por ejemplo si vamos a comparar dos números y saber si uno es mayor que otro el número uno en este caso 5 es mayor que el número 221 y fuese verdadero podríamos imprimir un valor después te falso podríamos imprimir otro bueno pues en este caso la evaluación de esta expresión in con mayor que 21 va a devolver con lo cual el número mayor de los dos sería versión aquí como podéis comprobar estamos haciendo la concatenación de dos valores para poder imprimirlo por la consola y bueno aquí digamos que estaba está llorando un poco porque si vienen en un uno con un 2 no son valores la gente es porque requiere que usamos la palabra reservada a continuación invitamos una presión que sea susceptible reserva nada como verdadero o falso rescatado aquí por ejemplo luego operadores regalo operadores los operadores relación al es que hemos visto el aparejador lo malo de Pulianas y y evaluar esa expresión que susceptible de ser verdadero o falso si se cumple como verdaderas ejecutar ya la sentencia de código que estés dentro del bloque de sonido a continuación del IBI
+
+
+![07_Estructuras_de_decision-8](images/07_Estructuras_de_decision-8.png)
+![07_Estructuras_de_decision-9](images/07_Estructuras_de_decision-9.png)
+
+
+##### 7.2.1.1 Código
+
+
 
 *Decision02.java*
 
