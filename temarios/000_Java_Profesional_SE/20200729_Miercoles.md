@@ -167,6 +167,8 @@ public class TestResultados {
 
 ### :computer: `000-063_agenda_bd_v1`
 
+<img src="images/20200729-10.png">
+
 *`Contacto`*
 
 ```java
@@ -228,7 +230,7 @@ public class Contacto {
 }
 ```
 
-*`Contacto`*
+*`ContactoService`*
 
 ```java
 package service;
@@ -353,3 +355,6 @@ public class TestBD {
 }
 ```
 
+<img src="images/20200729-08.png">
+
+<img src="images/20200729-09.png">
