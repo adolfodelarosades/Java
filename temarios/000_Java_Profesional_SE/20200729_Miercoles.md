@@ -358,3 +358,328 @@ public class TestBD {
 <img src="images/20200729-08.png">
 
 <img src="images/20200729-09.png">
+
+
+### :computer: `000-063_agenda_bd_v1`
+
+<img src="images/20200729-11.png">
+
+**Model**
+
+*`Contacto`*
+
+```java
+package model;
+
+public class Contacto {
+	
+   private int idContacto;
+   private String nombre;
+   private String email;
+   private int edad;
+	
+   public Contacto(String nombre, String email, int edad) {
+      super();
+      this.nombre = nombre;
+      this.email = email;
+      this.edad = edad;
+   }
+	
+   public Contacto(int idContacto, String nombre, String email, int edad) {
+      super();
+      this.idContacto = idContacto;
+      this.nombre = nombre;
+      this.email = email;
+      this.edad = edad;
+   }
+
+   public int getIdContacto() {
+      return idContacto;
+   }
+
+   public void setIdContacto(int idContacto) {
+      this.idContacto = idContacto;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public int getEdad() {
+      return edad;
+   }
+
+   public void setEdad(int edad) {
+      this.edad = edad;
+   }
+}
+```
+
+**Service**
+
+*`Datos`*
+
+```java
+package service;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Datos {
+
+   static String driver = "com.mysql.cj.jdbc.Driver";
+   static String cadenaConexion = "jdbc:mysql://localhost:3306/miscontactos?serverTimezone=UTC";
+   static String user= "root";
+   static String password= "root";
+   static {
+      //cargar del driver
+      try {
+         Class.forName(driver);
+      } catch (ClassNotFoundException e) {
+         e.printStackTrace();
+      }
+   }
+	
+   public static Connection getConnection() throws SQLException {
+      return DriverManager.getConnection(cadenaConexion, user, password);
+   }
+}
+````
+
+*`ContactoService`*
+
+```java
+package service;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Contacto;
+
+public class ContactoService {
+	
+   public boolean agregarContacto(Contacto contacto) {
+		
+      //Conexión de la base de datos.
+      try(Connection con = Datos.getConnection()) {
+         		
+         /* USANDO PreparedStatement*/
+         String sql= "INSERT INTO contactos(nombre, email, edad) values(?,?,?)";
+         PreparedStatement st = con.prepareStatement(sql);
+         st.setString(1, contacto.getNombre());
+         st.setString(2, contacto.getEmail());
+         st.setInt(3, contacto.getEdad());
+         st.execute();
+         return true;
+			
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+      return false;
+   }
+	
+   public static boolean borrarContacto(String email) {
+      try(Connection con = Datos.getConnection()) {
+    		
+         String sql = "DELETE FROM contactos WHERE email = ?";
+         PreparedStatement st = con.prepareStatement(sql);
+         st.setString(1, email);
+         //st.execute();
+         //return true;
+         return st.executeUpdate()>0;
+		   
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+      return false;
+   }
+    
+   public Contacto buscarContacto(String email) {
+    	
+      try(Connection con = Datos.getConnection()) {
+    	   
+         String sql = "SELECT * FROM contactos WHERE email = ?";
+         PreparedStatement pst = con.prepareStatement(sql);
+         pst.setString(1, email);
+    	 ResultSet rs = pst.executeQuery(); //Aquí no se le manda el sql por que ya esta en el pst
+ 		   
+         if(rs.next()) {
+            return new Contacto(rs.getString("nombre"),rs.getString("email"),rs.getInt("edad"));
+ 	 }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+      return null;
+   }
+    
+   public List<Contacto> leerContactos() {
+	   
+      try(Connection con = Datos.getConnection()) {
+	    	
+         List<Contacto> lista = new ArrayList<>();
+	   
+	 String sql = "SELECT * FROM contactos";
+	 Statement st = con.createStatement();
+	 ResultSet rs = st.executeQuery(sql);
+		
+	 while(rs.next()) {
+	    lista.add(new Contacto(rs.getString("nombre"),rs.getString("email"),rs.getInt("edad")));
+	 }
+	 return lista;
+		
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+      return null;
+   }
+}
+````
+
+**Principal**
+
+*`TestBD`*
+
+```java
+package principal;
+
+import java.util.List;
+import java.util.Scanner;
+
+import model.Contacto;
+import service.ContactoService;
+
+public class TestBD {
+
+   public static void main(String[] args) {
+		
+      Scanner sc = new Scanner(System.in);
+      int opcion = 0;
+			
+      do {
+         menu();
+         System.out.println("\nOpción:");
+	 opcion = Integer.parseInt(sc.nextLine());
+	 switch (opcion) {
+            case 1: {
+               agregarContacto();
+	       break;
+	    }
+	    case 2: {
+	       eliminarContacto();
+	       break;
+	    }
+	    case 3: {
+	       buscarContacto();
+	       break;
+	    }
+	    case 4: {
+	       mostrarContactos();
+	       break;
+	    }
+            case 5: {
+	       System.out.println("ADIOS!!!");
+               break;
+            }
+            default:
+               System.out.println("Opción no valida");
+            }
+         }while(opcion != 5);
+      }
+	
+      private static void  menu() {
+         System.out.println("\n***** Menú *****");
+         System.out.println("1. Agregar Contacto");
+         System.out.println("2. Eliminar Contacto");
+         System.out.println("3. Buscar Contacto");
+         System.out.println("4. Mostrar Contacto");
+         System.out.println("5. Salir");
+      }
+	
+      private static void  agregarContacto() {	
+	 String nombre;
+	 String email;
+	 int edad;
+	 Scanner sc = new Scanner(System.in);
+	 ContactoService cs = new ContactoService();
+		
+	 System.out.println("***** Agregar Contacto *****");
+	 System.out.println("Inserta el nombre:");
+	 nombre = sc.nextLine();
+	 System.out.println("Inserta el email:");
+	 email = sc.nextLine();
+	 System.out.println("Insertar Edad");
+	 edad = Integer.parseInt(sc.nextLine());
+		
+	 Contacto contacto = new Contacto(nombre, email, edad);
+	 if (cs.agregarContacto(contacto)) {
+	    System.out.println("Contacto Agregado");
+	 }else {
+	    System.out.println("No se agrego el Contacto");
+	 }
+      }
+	
+      private static void  eliminarContacto() {
+	 String email;
+	 Scanner sc = new Scanner(System.in);
+	 ContactoService cs = new ContactoService();
+	 System.out.println("***** Agregar Contacto *****");
+	 System.out.println("Inserta email:");
+	 email = sc.nextLine();
+		
+	 if(cs.borrarContacto(email)) {
+	    System.out.println("Contacto eliminado");
+	 }else {
+	    System.out.println("No se pudo eliminar el Contacto con email " + email);
+	 }	
+      }
+	
+      private static void  buscarContacto() {
+	 String email;
+	 Scanner sc = new Scanner(System.in);
+	 ContactoService cs = new ContactoService();
+	 System.out.println("***** Buscar Contacto *****");
+	 System.out.println("Inserta email:");
+	 email = sc.nextLine();
+		
+	 Contacto contacto = cs.buscarContacto(email);
+		
+	 if(contacto != null) {
+	    System.out.println(contacto.getNombre() + " " + contacto.getEmail() + " " + contacto.getEdad());
+	 }else {
+	    System.out.println("No se pudo localizar el Contacto con email " + email);
+	 }	
+      }
+
+      private static void  mostrarContactos() {
+	 ContactoService cs = new ContactoService();
+    	
+	 List<Contacto> contactos = cs.leerContactos();
+    	
+	 System.out.println("***** Lista Contacto *****");
+	 contactos
+	    .forEach(contacto -> System.out.println(contacto.getNombre() + " " + contacto.getEmail() + " " + contacto.getEdad()));	
+      }
+   }
+}
+````
+
+
+
