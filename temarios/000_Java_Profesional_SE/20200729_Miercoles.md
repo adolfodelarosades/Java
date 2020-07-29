@@ -10,6 +10,15 @@
 
 <img src="images/M2-11-04.png">
 
+
+## Creación de Tabla en WorkBeanch
+
+<img src="images/20200729-02.png">
+
+<img src="images/20200729-01.png">
+
+<img src="images/20200729-03.png">
+
 ## `Statement`
 
 ### :computer: `000-062_ejemplo_bd`
