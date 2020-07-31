@@ -13,6 +13,7 @@
    * [20200728 Martes](/temarios/000_Java_Profesional_SE/20200728_Martes.md)
    * [20200729 Miercoles](/temarios/000_Java_Profesional_SE/20200729_Miercoles.md)
    * [20200730 Jueves](/temarios/000_Java_Profesional_SE/20200730_Jueves.md)
+   * [20200731 Viernes](/temarios/000_Java_Profesional_SE/20200731_Viernes.md)
    
 ## Contenido
    * [Modulo I](/temarios/000_Java_Profesional_SE/Modulo_I.md)
