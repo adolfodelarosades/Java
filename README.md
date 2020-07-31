@@ -178,4 +178,16 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [beginnersbook](https://beginnersbook.com/)
 
-[howtodoinjava] https://howtodoinjava.com/
+[howtodoinjava] (https://howtodoinjava.com/)
+
+### Java Web to AWS
+
+[Video](https://www.youtube.com/watch?time_continue=1181&v=Ozc5Yu_IcaI&feature=emb_logo)
+
+[How to Deploy Java Web Application in AWS?](https://www.edureka.co/blog/deploy-java-web-application-in-aws/)
+
+[How to deploy a Java enterprise application to AWS cloud](https://mindmajix.com/java-enterprise-application-in-aws-cloud)
+
+[DEPLOYING JAVA WEB APPLICATIONS](https://d1.awsstatic.com/aws-answers/AWS_Web_App_Deployment_Java.pdf)
+
+[Hosting on AWS](https://happycoding.io/tutorials/java-server/hosting-aws)
