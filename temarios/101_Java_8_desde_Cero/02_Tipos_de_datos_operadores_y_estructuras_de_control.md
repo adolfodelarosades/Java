@@ -1792,9 +1792,10 @@ System.out.println();
 System.out.print("Introduzca una opción válida: ");
 ```
 
+En la última línea en lugar de usar `println` se usa `print`
 
 
-que esta línea en lugar de Prince LN hace uso de otros métodos de impresión que se llama Prince y qué bueno este LN lo que añade un salto de línea al final de manera que no lo pusiéramos imprimiría todo seguido este prima va a ser que no se añada ese salto de línea para que el curso se quede esperando a la derecha de los 2 puntos de manera que cuando introduzcamos el valor sea algo más amigable no es decir introduzca una opción válida y a la derecha nosotros escribimos eso como decía todo vamos a tratar de alucinar para de las cosas que más ido perdiendo ahora en un ejemplo un poco más complejo mediante el cual vamos a hacer una calculadora sé si tienes la cual bueno pues como a poder manejar variable América operador expresiones estructura de decisión y estructura de repetición como digo un buen número de las cosas que hemos visto hasta ahora operativo de
+Prince LN hace uso de otros métodos de impresión que se llama Prince y qué bueno este LN lo que añade un salto de línea al final de manera que no lo pusiéramos imprimiría todo seguido este prima va a ser que no se añada ese salto de línea para que el curso se quede esperando a la derecha de los 2 puntos de manera que cuando introduzcamos el valor sea algo más amigable no es decir introduzca una opción válida y a la derecha nosotros escribimos eso como decía todo vamos a tratar de alucinar para de las cosas que más ido perdiendo ahora en un ejemplo un poco más complejo mediante el cual vamos a hacer una calculadora sé si tienes la cual bueno pues como a poder manejar variable América operador expresiones estructura de decisión y estructura de repetición como digo un buen número de las cosas que hemos visto hasta ahora operativo de
 
 
 ***Calculadora.java***
