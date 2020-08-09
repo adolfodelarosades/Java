@@ -1687,6 +1687,33 @@ package repeticion;
 public class Repeticion03 {
 
    public static void main(String[] args) {
+      for(int contador = 1; contador < 11; contador++) {
+         System.out.println(contador);
+      }
+   }
+   
+}
+```
+
+Cómo podemos comprobar aquí tenemos un bucle `for` dónde utilizamos en el bloque de declaración, declaramos la variable `contador`, la estamos declarando su ámbito en este caso será todo el bucle, es decir que está variable ya no existirá al finalizar el bucle, inicializamos su valor a 1, decimos que la condición es que `contador < 11` y decimos que el incremento lo vamos a hacer con `contador++` el operador de post incremento, de esta manera a priori podemos calcular fácilmente que vamos a hacer 10 iteraciones. También lo podíamos hacer con los bucles `while` o `do-while` pero por el ejemplo que hemos puesto en los otros ejemplo no sería tan fácil calcularlo. 
+
+Vamos a ejecutar.
+
+![08-04](images/08-04.png)
+
+Podríamos ver que ejecutaría 10 veces, si en lugar de 1 inicializamos en 4, el número de veces que se ejecutaría pues sería menor e incluso el incremento no tiene porqué ser solamente de uno en uno sino que puede ser de dos en dos, de manera que el número de ejecuciones de este bucle `for` caería drasticamente.
+
+*Repeticion03.java*
+
+```java
+/**
+ * Ejemplo de uso del bucle FOR
+ */
+package repeticion;
+
+public class Repeticion03 {
+
+   public static void main(String[] args) {
       for(int contador = 4; contador < 11; contador+=2) {
 	 System.out.println(contador);
       }
@@ -1695,7 +1722,33 @@ public class Repeticion03 {
 }
 ```
 
-Cómo podemos comprobar aquí tenemos un bucle `for` dónde utilizamos en el bloque de declaración dónde está la condición se valora al final no
+![08-05](images/08-05.png)
+
+De esta manera solamente se ejecutaría en cuatro ocasiones, esto viene provocado porque comienzo valiendo 4 a partir de ahí segunda ejecución valdría 6, tercera ejecución valdría 8, cuarta ejecución valdría 10, la siguiente vale 12, 12 ya es mayor que 11, se saldría y ya no ejecutaría nada más. 
+
+Es muy raro que nos encontrémos bucles `for` que se declaren de esa manera:
+
+```java
+int contador = 4;
+for( ; ; ) {
+    ...
+   contador+=2
+}
+```
+
+Pero sintácticamente es posible sería un bucle for que requeriría de que la declaración estuviera hecha fuera y que las condiciones de salida y el incremento se hicieran dentro ya digo es muy raro pero que sepáis que sintácticamente es correcto. Con todo yo no recomiendo su uso, si recomendaría utilizar siempre usar las tres estructuras que hemos visto **declaración, condición e incremento**.
+
+Si solo se declara como:
+
+```java
+for( ; ; ) {
+    ...
+}
+```
+
+Puede representar un bucle `for` infinito.
+
+![08-06](images/08-06.png)
 
 # 09 Práctica: Creando una calculadora 11:13 
 
