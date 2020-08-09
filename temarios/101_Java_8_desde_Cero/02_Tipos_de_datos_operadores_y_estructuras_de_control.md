@@ -1632,25 +1632,70 @@ Aquí tenemos un ejemplo de un bucle `do-while` que va a hacer algo parecido al 
 *Repeticion02.java*
 
 ```java
+/**
+ * Ejemplo de uso del bucle do-while
+ */
+package repeticion;
+
+public class Repeticion02 {
+
+   public static void main(String[] args) {
+      int contador = 1;
+      do {
+         System.out.println("Contador vale: " + contador);
+         contador++;
+      } while (contador < 11);
+   }
+   
+}
 ```
 
+Declaramos el contador fuera, se ejecuta la primera vez, contador 1, 2, 3 hasta 10, porque la condición es la misma que antes.
 
- donde buenos declaramos el montador fuera se ejecuta la primera vez 23 hasta 10 vale porque la concepción en la misma de antes cuando deberíamos escoger una estructura guay y cuando una Dubai dependerá de si necesitamos asegurar que una vez se ejecute el bloque de código con lo cual para eso tenemos la estructura de Wild y si siempre va a ir en función del valor de una variable o de una determinada condición y ello puede marcar que el bucle while no se ejecute ninguna vez puedo usaríamos el Wild directamente no el Duguay como decía antes tenemos que tener cuidado con que las sentencias de dentro tanto en way como Dubai alguna de ella haga que varíe el valor de contador para que vaya cambiando su valor y alguna vez haga que esto sea fan porque si no y tratamos de ejecuta tendríamos lo que se conoce como un bucle infinito es decir un puzzle del cual no se sale no y tendríamos que parar explícitamente la ejecución del programa para poder retomar nuestra misión eso lo haríamos entre otras maneras pulsando el símbolo de pararte terminar que tenemos acá vale así que tenemos que tener mucho cuidado con el uso de los bucles infinitos no porque pueden hacer que nuestro nuestro programa se quede totalmente colgado en tercer lugar tenemos los bucles de tipo Ford que nos permiten repetir un bloque de código vale una serie de sentencias de código un número de veces que conoceremos a fríos a diferencia de antes que estábamos todos en base a una condición normalmente no suele ser una condición de igualdad vale porque es más difícil que se ponga suele ser una condición de desigualdad menor menor igual mayor mayor igual aquí a priori vamos a saber el número de veces que se va a ejecutar ese cumple ya veremos como sobre todo al comenzar suele ser el más utilizado de los tres aunque digamos que un bucle derivado de lo anterior es porque podríamos crear un bucle for con un bucle while y cuando trabajemos con colección en particular con la colección ArrayList vale o incluso con los array podremos ver utilizar una variante que surge en versiones de Java en particular en la en la excavación con su versión conocida como Ford y vale estructura de algo más compleja porque requiere de la palabra reservada Ford vale y ya antes de la declaración del bloque de sentencias que se tributaria identificamos 3 para la primera parte que es la declaración requiere que bueno que declaremos e inicial y cémo o que al menos inicial temos yo recomiendo que hagamos las dos operaciones pero que declaremos inicializamos o inicializamos nada más una variable con un valor inicial la condición para uso de la variable que hemos declarado antes y el incremento o decremento vale o cambio de valor lo que hará será ir modificando el valor de la variable que hemos utilizado en declaración para que vaya modificando su valor hasta que en algún momento se cumpla la condición vamos a ver un ejemplo si bien esto lo aprenderemos mejor con con la con la utilización que iremos haciendo más adelante sobre todo fue como decíamos con array y colecciones cómo podemos comprobar aquí tenemos un bucle for dónde utilizamos en el bloque de declaración dónde está la condición se valora al final no
+![08-02](images/08-02.png)
 
+Cuando deberíamos escoger una estructura `while` y cuando una `do-while`, dependerá de si necesitamos asegurar que al menos se ejecute el bloque de código una vez, con lo cual para eso tenemos la estructura de `do-while` y si siempre va a ir en función del valor de una variable o de una determinada condición y ello puede marcar que el bucle `while` no se ejecute ninguna vez, usaríamos el `while` directamente no el `do-while`.
 
+Como decía antes tenemos que tener cuidado con que las sentencias de dentro tanto en el `while` como en el `do-while`, alguna de ella haga que varíe el valor de contador para que vaya cambiando su valor y alguna vez haga que la condición sea falsa, porque si no tendríamos lo que se conoce como un bucle infinito, es decir un bucle del cual no se sale nunca y tendríamos que parar explícitamente la ejecución del programa para poder retomar nuestra misión, eso lo haríamos entre otras maneras pulsando el botón de parar, de terminar (botón rojo).
 
+![08-03](images/08-03.png)
 
-
-
-
-
-
-
-
+Así que tenemos que tener mucho cuidado con el uso de los bucles infinitos, porque pueden hacer que nuestro programa se quede totalmente colgado.
 
 ![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-5.png)
 
+En tercer lugar tenemos los bucles de tipo `for` que nos permiten repetir un bloque de código, una serie de sentencias de código, **un número de veces que conoceremos a príori**, a diferencia de antes que basamos todo en base a una condición, normalmente no suele ser una condición de igualdad, porque es más difícil que se cumpla suele ser una condición de desigualdad, menor, menor o igual, mayor, mayor o igual.  Aquí a priori vamos a saber el número de veces que se va a ejecutar ese bucle, ya veremos como sobre todo al comenzar suele ser el más utilizado de los tres, aunque digamos que es un bucle derivado de los anteriores porque podríamos crear un bucle `for` con un bucle `while`. 
+
+Cuando trabajemos con colección en particular con la colección `ArrayList` o incluso con los `array` podremos utilizar una variante que surge en versiones de Java en particular en la Java 5 con su versión conocida como `for-each`.
+
 ![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-6.png)
+
+Su estructura es algo más compleja porque requiere de la palabra reservada `for` y antes de la declaración del bloque de sentencias que se ejecutaria identificamos 3 partes, **la primera parte que es la declaración** requiere que declaremos e inicializamos o que al menos inicializamos, yo recomiendo que hagamos las dos operaciones, pero que declaremos e inicializamos o inicializamos nada más una variable con un valor inicial, **la condición** hara uso de la variable que hemos declarado antes y **el incremento o decremento** lo que hará será ir modificando el valor de la variable que hemos utilizado en declaración para que vaya modificando su valor hasta que en algún momento se cumpla la condición.
+
+### :computer: `101-08-Repeticion`
+
+Vamos a ver un ejemplo, si bien esto lo aprenderemos mejor con la utilización que iremos haciendo más adelante sobre todo como decíamos con array y colecciones.
+
+*Repeticion03.java*
+
+```java
+/**
+ * Ejemplo de uso del bucle FOR
+ */
+package repeticion;
+
+public class Repeticion03 {
+
+   public static void main(String[] args) {
+      for(int contador = 4; contador < 11; contador+=2) {
+	 System.out.println(contador);
+      }
+   }
+   
+}
+```
+
+Cómo podemos comprobar aquí tenemos un bucle `for` dónde utilizamos en el bloque de declaración dónde está la condición se valora al final no
 
 # 09 Práctica: Creando una calculadora 11:13 
 
