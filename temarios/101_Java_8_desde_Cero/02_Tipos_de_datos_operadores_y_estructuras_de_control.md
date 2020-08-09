@@ -1478,6 +1478,49 @@ El mes de Agosto tiene tiene correspondencia con el número 8.
 
 Tenemos que tener cuidado porque como sabemos Java es **CaseSensitive** por lo que `Agosto` y `agosto` no es lo mismo y se puede ir al caso por defecto. Cuando trabajemos un poco más con cadenas de caracteres veremos alguna manera de solventar estos problemas.
 
+## Temas Avanzados.
+
+### :computer: `101-07_Decision`
+
+Apartir de Java 12 el Switch ya puede contener varias opciones en el mismo caso, vamos a reacer el ejemplo `Decision06` con esta nueva funcionalidad.
+
+*Decision08.java*
+
+```java
+/**
+ * Ejemplo más complejo de uso de SWITCH con varias opciones en el mismo caso
+ */
+package decision;
+
+public class Decision08 {
+
+   public static void main(String[] args) {
+      int mes = 8;
+      int numDias = 0;
+
+      switch (mes) {
+         case 1, 3, 5, 7, 8, 10, 12:
+            numDias = 31;
+            break;
+         case 4, 6, 9, 11:
+            numDias = 30;
+            break;
+         case 2:
+            // No tenemos en cuenta si el año es bisiesto
+            // para no hacer más complejo el ejemplo
+            numDias = 28;
+            break;
+         default:
+            System.out.println("Mes no válido");
+            break;
+      }
+      System.out.println("Número de días = " + numDias);
+   }
+}
+```
+
+![07-09](images/07-09.png)
+
 # 08 Estructura de repetición 13:01 
 
 [Estructura de repetición](pdfs/08_Estructuras_de_repeticion.pdf)
