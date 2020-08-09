@@ -1343,7 +1343,72 @@ Utilizando un valor entero para hacer la comparación con él, queremos transfor
 
 Decir `case 1` es lo mismo que decir que estamos evaluando la expresión `mes == 1` y que se está evaluando como verdadera, si el mes es igual a 1 se ejecutara el caso uno, se asignaría a la variable `mes` el literal `Enero` el mes uno del calendario es Enero y lo que usaríamos sería la sentencia `break` para que deje de ejecutar el resto de sentencias y directamente pase a imprimir el mes correspondiente.
 
+Tendríamos un caso para cada uno de los 12 meses del año y en el caso de que nos pasará un valor entero menor que 1 o mayor que 12 tendríamos un caso por defecto indicando que el mes es un mes no válido. En este caso tenemos el mes 8 que sería el mes de Agosto.
+
 ![07-06](images/07-06.png)
+
+Si pasamos el valor 0 se va al caso por defecto e imprimiría `Mes no válido`.
+
+### :computer: `101-07_Decision`
+
+Aquí tenemos otro ejemplo de `switch` en el que el `break` lo utilizamos solamente en determinados casos por ejemplo, si tenemos más de un caso para el cual el bloque de código del caso que vamos a ejecutar es el mismo, podemos evitar el uso de break y agrupar todos esos casos para que ejecuten el mismo bloque de 
+código, por ejemplo si queremos calcular el número de días en función de un número de mes, el número de días del mes, sabemos que los meses de Enero, Marzo, Mayo, Julio, Agosto, Octubre y Diciembre tienen 31 días, los meses de Abril, Junio, Septiembre y Noviembre tienen 30 días y el mes de febrero, no vamos a entrar a manejar la complejidad de si el año es bisiesto o no para no hacer más complejo el ejemplo, pondremos por defecto que tienes 28 días.
+
+*Decision06.java*
+
+```java
+/**
+ * Ejemplo más complejo de uso de SWITCH
+ */
+package decision;
+
+public class Decision06 {
+
+   public static void main(String[] args) {
+      int mes = 8;
+      int numDias = 0;
+
+      switch (mes) {
+         case 1:
+         case 3:
+         case 5:
+         case 7:
+         case 8:
+         case 10:
+         case 12:
+            numDias = 31;
+	    break;
+         case 4:
+         case 6:
+         case 9:
+         case 11:
+            numDias = 30;
+            break;
+         case 2:
+            // No tenemos en cuenta si el año es bisiesto
+            // para no hacer más complejo el ejemplo
+	    numDias = 28;
+	    break;
+	 default:
+	    System.out.println("Mes no válido");
+	    break;
+      }
+      System.out.println("Número de días = " + numDias);
+   }
+}
+```
+
+Por ejemplo si recibimos el mes 8 veríamos que tenemos el caso 8, el caso 8 no tiene ningún bloque, pero como no tiene sentencia `break` pasaría ejecutar el caso 10, que tampoco tiene nada, y ya en el 11 se encontraría código y diría que tiene 31 días. De esta manera si pasamos dentro del mismo valor mes 1,3,5,7,8,10 ó 12 ejecutaría siempre esta sentencia `numDias = 31;`, en el caso de ser 4, 6, 9 u 11 ejecutaría esta otra sentencia `numDias = 30;` y en el caso de ser 2 ejecutaría `numDias = 28;`, si no es ningún valor del 1 al 12 ejecutaría al igual que antes el caso por defecto.
+
+Lo vamos a ejecutar, el mes es 8 sería 31 días.
+
+![07-07](images/07-07.png)
+
+Si lo cambiamos por ejemplo al mes 2 el mes de febrero tendríamos 28 días, si el mes es 3 Abril tendríamos 30 días.
+
+
+
+Podemos ver una estructura switch algo más completa que quisiéramos hacer la operación inversa al primer ejemplo de Sweet también podemos ver cómo podemos usar un switch que recibe una cadena de caracteres y hace la evaluación de los casos mediante esa cadena de caracteres por ejemplo si queremos tener el número del mes en función del nombre podríamos hacerlo de esa manera vale de manera que los casos se evalúa una cadena de caracteres ejecutamos el mes de enero tiene con él tiene correspondencia con el número uno vale y podríamos usar en cadena de caracteres tenemos que tener cuidado porque aquí como sabemos JavaScript send it is easy fuerte enero por la E en mayúscula tendríamos con que el mes por del caso por defecto sería asignarle un cero y no salía evaluado vale cuando trabajemos un poco más con cadenas de caracteres veremos alguna manera de solventar estos problemas y terminamos las estructuras de decisión para continuar con nuestras estructuras de control
 
 
 
