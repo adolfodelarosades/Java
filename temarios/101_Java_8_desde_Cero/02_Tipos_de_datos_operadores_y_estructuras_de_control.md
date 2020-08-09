@@ -1752,7 +1752,22 @@ Puede representar un bucle `for` infinito.
 
 # 09 Práctica: Creando una calculadora 11:13 
 
+## Resumen Profesor
+
 En esta sesión práctica veremos como crear una calculadora, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0).
+
+## Transcripción
+
+Vamos a tratar de aglutinar varias de las cosas que hemos ido aprendiendo hasta ahora en un ejemplo un poco más complejo, mediante el cual vamos a hacer una **calculadora sencilla**, en la cual vamos a poder manejar variables numericas, operadores, expresiones, estructuras de decisión y estructuras de repetición. Un buen número de las cosas que hemos visto hasta ahora.
+
+La operativa de nuestra calculadora va a ser sencilla, en principio lo que va a hacer es imprimir por consola el menú, de manera que el usuario pueda escoger entre las distintas opciones. Para escoger la opción, es para que el usuario pueda introducir por teclado un valor y nosotros lo podamos recoger, utilizaremos la clase `Scanner` que sirve entre otras cosas para esto que vamos a hacer, transformaremos lo que nos devuelva `Scanner` en un valor numérico para poder compararlo, veremos cómo se hace, en función de la opción seleccionada le diremos que es una opción no válida o que la opción si es válida y si es válida lo que haremos será recoger los dos operandos, el primero y el segundo, en función de la opción seleccionada suma, resta, multiplicación, división o resto haremos la operación correspondiente.
+
+Le volvemos a pedir al usuario que introduzca otra opción válida, volviendo a imprimir el menú siempre y cuando la opción no sea la de salir del programa, la opción cero. Cuando el usuario seleccione la opción cero **indicaremos que no vamos a recoger más valores esto será importante** que no vamos a recoger ningún valor más por teclado e imprimiremos un mensaje de final de ejecución. 
+
+Esto podría ser nuestra calculadora avista de pajaro comencemos.
+
+Lo primero que tenemos que declarar es una variable la vamos a inicializar a cero dónde vamos a recoger la opción que el usuario introduzca por teclado cada vez que imprimimos el mejor y también declararemos la la variable que ya digo en este caso es de un tipo estructurado que todavía no lo hemos presentado pero que ese no hace necesario para que nosotros podamos introducir valores por teclado y recogerlo que es la clase scanner para que el proceso de impresión de menú tratamiento de la opción y realización de la operación correspondiente se repita hasta que introduzcamos el cero utilizamos de los tres bucles que hemos conocido de los cuplé why to wild y el bucle for usaremos el bucle como decíamos en el vídeo anterior este nos va a ser útil porque si se ha ejecutado la aplicación de la calculadora es que al menos queremos que en una ocasión se ejecute el cuerpo de ese bus que tú bueno el bloque de código del del bucle Dubai imprimimos primero el menú vale lo imprimimos con varias sentencias de tipo system out print LN este carácter especial la barra que tenemos debajo del escape con n lo que hace es imprimir algún salto de línea adicional para que cuando lo comprobaremos cuando se imprima la impresión del menú que de lo más clara posible dentro de la concha imprimir iríamos todo esto que esta línea en lugar de Prince LN hace uso de otros métodos de impresión que se llama Prince y qué bueno este LN lo que añade un salto de línea al final de manera que no lo pusiéramos imprimiría todo seguido este prima va a ser que no se añada ese salto de línea para que el curso se quede esperando a la derecha de los 2 puntos de manera que cuando introduzcamos el valor sea algo más amigable no es decir introduzca una opción válida y a la derecha nosotros escribimos eso como decía todo vamos a tratar de alucinar para de las cosas que más ido perdiendo ahora en un ejemplo un poco más complejo mediante el cual vamos a hacer una calculadora sé si tienes la cual bueno pues como a poder manejar variable América operador expresiones estructura de decisión y estructura de repetición como digo un buen número de las cosas que hemos visto hasta ahora operativo de
+
 
 ***Calculadora.java***
 
