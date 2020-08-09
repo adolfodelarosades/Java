@@ -1406,23 +1406,85 @@ Lo vamos a ejecutar, el mes es 8 sería 31 días.
 
 Si lo cambiamos por ejemplo al mes 2 el mes de febrero tendríamos 28 días, si el mes es 3 Abril tendríamos 30 días.
 
+### :computer: `101-07_Decision`
 
+Si quisiéramos hacer la operación inversa al primer ejemplo de `switch`, podemos ver cómo podemos usar un `switch` que recibe una cadena de caracteres y hace la evaluación de los casos mediante esa cadena de caracteres por ejemplo, si queremos tener el número del mes en función del nombre del mes podríamos hacerlo de esa manera.
 
-Podemos ver una estructura switch algo más completa que quisiéramos hacer la operación inversa al primer ejemplo de Sweet también podemos ver cómo podemos usar un switch que recibe una cadena de caracteres y hace la evaluación de los casos mediante esa cadena de caracteres por ejemplo si queremos tener el número del mes en función del nombre podríamos hacerlo de esa manera vale de manera que los casos se evalúa una cadena de caracteres ejecutamos el mes de enero tiene con él tiene correspondencia con el número uno vale y podríamos usar en cadena de caracteres tenemos que tener cuidado porque aquí como sabemos JavaScript send it is easy fuerte enero por la E en mayúscula tendríamos con que el mes por del caso por defecto sería asignarle un cero y no salía evaluado vale cuando trabajemos un poco más con cadenas de caracteres veremos alguna manera de solventar estos problemas y terminamos las estructuras de decisión para continuar con nuestras estructuras de control
+*Decision07.java*
 
+```java
+/**
+ * Uso de la estructura Switch con cadenas de caracteres
+ */
+package decision;
 
+public class Decision07 {
+
+   public static void main(String[] args) {
+      int mesNumero = 0;
+      String mes = "Agosto";
+
+      switch (mes) {
+         case "Enero":
+            mesNumero = 1;
+            break;
+         case "Febrero":
+            mesNumero = 2;
+            break;
+         case "Marzo":
+            mesNumero = 3;
+            break;
+         case "Abril":
+            mesNumero = 4;
+            break;
+         case "Mayo":
+            mesNumero = 5;
+            break;
+         case "Junio":
+            mesNumero = 6;
+            break;
+         case "Julio":
+            mesNumero = 7;
+            break;
+         case "Agosto":
+            mesNumero = 8;
+            break;
+         case "Septiembre":
+            mesNumero = 9;
+            break;
+         case "Octubre":
+            mesNumero = 10;
+            break;
+         case "Noviembre":
+            mesNumero = 11;
+            break;
+         case "Diciembre":
+            mesNumero = 12;
+            break;
+         default:
+            mesNumero = 0;
+            break;
+      }
+      System.out.println("El mes de " + mes + " se corresponde con el número " + mesNumero );
+   }
+}
+```
+
+De manera que los casos se evalúa con una cadena de caracteres, si ejecutamos.
+
+![07-08](images/07-08.png)
+
+El mes de Agosto tiene tiene correspondencia con el número 8.
+
+Tenemos que tener cuidado porque como sabemos Java es **CaseSensitive** por lo que `Agosto` y `agosto` no es lo mismo y se puede ir al caso por defecto. Cuando trabajemos un poco más con cadenas de caracteres veremos alguna manera de solventar estos problemas.
 
 # 08 Estructura de repetición 13:01 
 
 [Estructura de repetición](pdfs/08_Estructuras_de_repeticion.pdf)
 
-![08_Estructuras_de_repeticion-0](images/08_Estructuras_de_repeticion-0.png)
+## Resumen Profesor
 
 ### 8.1 Bucle `while`
-
-![08_Estructuras_de_repeticion-1](images/08_Estructuras_de_repeticion-1.png)
-
-![08_Estructuras_de_repeticion-2](images/08_Estructuras_de_repeticion-2.png)
 
 Nos permite repetir la ejecución de un bloque de sentencias. La repetición se realiza durante un número indeterminado de veces, mientras una expresión sea cierta. Una de las sentencias del cuerpo del bucle debe modificar alguna de las variables de la condición, para que, en alguna ocasión, la expresión sea falsa.
 
@@ -1433,56 +1495,7 @@ while (condicion) {
 }
 ``` 
 
-#### 8.1.1 Código
-
-*Repeticion01.java*
-
-```java
-/**
- *  Ejemplo de uso del bucle while
- */
-package repeticion;
-
-/**
- * @author 
- *
- */
-public class Repeticion01 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		int contador = 1;
-        while (contador < 11) {
-            System.out.println("Contador vale: " + contador);
-            contador++;
-        }
-
-	}
-
-}
-
-
-SALIDA:
-
-Contador vale: 1
-Contador vale: 2
-Contador vale: 3
-Contador vale: 4
-Contador vale: 5
-Contador vale: 6
-Contador vale: 7
-Contador vale: 8
-Contador vale: 9
-Contador vale: 10
-```
-
 ### 8.2 Bucle `do-while`
-
-![08_Estructuras_de_repeticion-3](images/08_Estructuras_de_repeticion-3.png)
-
-![08_Estructuras_de_repeticion-4](images/08_Estructuras_de_repeticion-4.png)
 
 Nos permite repetir la ejecución de un bloque de sentencias. La condición, a diferencia de la estructura while, se evalúa al final del bucle. El cuerpo del bucle se ejecuta siempre, al menos, una vez.
 
@@ -1493,55 +1506,7 @@ do {
 } while (condicion);
 ```
 
-#### 8.2.1 Código
-
-*Repeticion02.java*
-
-```java
-/**
- * Ejemplo de uso del bucle do-while
- */
-package repeticion;
-
-/**
- * @author 
- *
- */
-public class Repeticion02 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		int contador = 1;
-        do {
-            System.out.println("Contador vale: " + contador);
-            contador++;
-        } while (contador < 11);
-
-	}
-}
-
-
-SALIDA:
-
-Contador vale: 1
-Contador vale: 2
-Contador vale: 3
-Contador vale: 4
-Contador vale: 5
-Contador vale: 6
-Contador vale: 7
-Contador vale: 8
-Contador vale: 9
-Contador vale: 10
-```
-
 ### 8.3 Bucle `for`
-
-![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-5.png)
-
-![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-6.png)
 
 Nos permite repetir un bloque de código un número conocido a priori de veces. Suele ser el más utilizado de los 3. Se podría implementar un bucle for con un while. Cuando trabajemos con colecciones o arrays, podremos usar su variante llamada *for-each*.
 
@@ -1549,42 +1514,6 @@ Nos permite repetir un bloque de código un número conocido a priori de veces. 
 for(declaracion; condicion; incremento) {
    ...
 }
-```    
-
-#### 8.3.1 Código
-
-*Repeticion03.java*
-
-```java
-/**
- * Ejemplo de uso del bucle FOR
- */
-package repeticion;
-
-/**
- * @author 
- *
- */
-public class Repeticion03 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		for(int contador = 4; contador < 11; contador+=2) {
-			System.out.println(contador);
-		}
-	}
-}
-
-
-SALIDA:
-
-4
-6
-8
-10
 ```
 
 ### 8.4 Sentencias `break` y `continue`
@@ -1596,6 +1525,22 @@ Existen dos sentencias especiales, que no suelen usarse mucho ya que producen po
 * `continue`: permite finalizar la ejecución de la iteración actual de un bucle, pasando automáticamente a la siguiente iteración del mismo.
 
 Su uso no es demasiado recomendable, ya que puede producir un efecto conocido como código spaguetti, por el cual es dificil predecir los caminos de ejecución del mismo.
+
+## Transcripción
+
+![08_Estructuras_de_repeticion-0](images/08_Estructuras_de_repeticion-0.png)
+
+![08_Estructuras_de_repeticion-1](images/08_Estructuras_de_repeticion-1.png)
+
+![08_Estructuras_de_repeticion-2](images/08_Estructuras_de_repeticion-2.png)
+
+![08_Estructuras_de_repeticion-3](images/08_Estructuras_de_repeticion-3.png)
+
+![08_Estructuras_de_repeticion-4](images/08_Estructuras_de_repeticion-4.png)
+
+![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-5.png)
+
+![08_Estructuras_de_repeticion-5](images/08_Estructuras_de_repeticion-6.png)
 
 # 09 Práctica: Creando una calculadora 11:13 
 
