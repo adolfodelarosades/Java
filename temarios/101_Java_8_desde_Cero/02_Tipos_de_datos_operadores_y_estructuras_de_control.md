@@ -1236,94 +1236,20 @@ public class Decision03 {
 }
 ```
 
-Si vamos a comparar dos números y saber si uno es mayor que el otro, el número uno en este caso es 5, es mayor que el número 2 que es 21, si fuese verdadero podríamos imprimir un valor y si fuese falso podríamos imprimir otro. En este caso la evaluación de esta expresión 5 mayor que 21 va a devolver que es falso.
+Si vamos a comparar dos números y saber si uno es mayor que el otro, el número uno en este caso es 5, es mayor que el número 2 que es 21, si fuese verdadero podríamos imprimir un valor y si fuese falso podríamos imprimir otro. En este caso la evaluación de esta expresión 5 mayor que 21 va a devolver que es falso con lo cual el número mayor de los dos sería 21. En el mensaje de salida como podéis comprobar estamos haciendo la concatenación de dos valores para poder imprimirlo por la consola, Java esta ayudandonos un poco porque si bien num1 o num2 no son valores de caddena de caracteres sino que son números esta haciendo una transformación automática a cadena de caracteres para que nosotros podamos concatenarlo con esa cadena facilmente e imprimirlo por consola.
 
-
-
-
-
-con lo cual el número mayor de los dos sería versión aquí como podéis comprobar estamos haciendo la concatenación de dos valores para poder imprimirlo por la consola y bueno aquí digamos que estaba está llorando un poco porque si vienen en un uno con un 2 no son valores la gente es porque requiere que usamos la palabra reservada a continuación invitamos una presión que sea susceptible reserva nada como verdadero o falso rescatado aquí por ejemplo luego operadores regalo operadores los operadores relación al es que hemos visto el aparejador lo malo de Pulianas y y evaluar esa expresión que susceptible de ser verdadero o falso si se cumple como verdaderas ejecutar ya la sentencia de código que estés dentro del bloque de sonido a continuación del IBI
-
+![07-04](images/07-04.png)
 
 ![07_Estructuras_de_decision-8](images/07_Estructuras_de_decision-8.png)
-![07_Estructuras_de_decision-9](images/07_Estructuras_de_decision-9.png)
 
+La siguiente estructura de decisión que nos va pidiendo un poco la lógica, y si al evaluar una expresión se evalúa como falsa, necesito evaluar otra expresión, podemos utilizar la expresión o la estructura 
+`IF-ELSE-IF` que nos va a permitir comprobar una segunda, incluso una tercera, una cuarta condición, si la primera no se cumple de manera encadenada.
 
-##### 7.2.1.1 Código
+Está la tenemos en este ejemplo, dado una puntuación en un examen queremos decir si se tiene un sobresaliente, un notable, un aprobado o un suspenso, lo podríamos hacer mediante una estructura `IF-ELSE-IF` si la puntuación es mayor o igual que 9 le indicaremos al alumno que tiene un sobresaliente, en caso de que no sea mayor que 9, si es mayor o igual que 7 le diríamos que tiene notable, en caso de que no sea mayor o igual que 7, ya lejos queda el mayor o igual que 9, evaluamos para ver si es mayor o igual que 5 con lo cual le diríamos que tiene un aprobado y en otro caso, es decir si no es mayor o igual que 5, ni que 7, ni que 9, le indicaremos como condición casi por defecto que está suspenso.
 
+### :computer: `101-07_Decision`
 
-
-*Decision02.java*
-
-```java
-/**
- *  Ejemplo de uso de la estructura IF con una condición más compleja
- */
-package decision;
-
-/**
- * @author 
- *
- */
-public class Decision02 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		int num1 = 4, num2 = 9, num3 = 7;
-
-		if (num3 > num1 && num3 < num2) {
-			System.out.println("num1 es menor que num3, y este es menor que num2");
-		}
-	}
-}
-
-
-SALIDA:
-
-num1 es menor que num3, y este es menor que num2
-
-```
-##### 7.2.2.1 Código
-
-*Decision03.java*
-
-```java
-/**
- * Ejemplo de uso de la estructura IF-ELSE
- */
-package decision;
-
-/**
- * @author 
- *
- */
-public class Decision03 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		int num1 = 25;
-		int num2 = 21;
-		if (num1 > num2) {
-			System.out.println("El número mayor es " + num1); 
-		} else { 			
-			System.out.println("El número mayor es " + num2);
-		}
-
-	}
-}
-
-
-SALIDA:
-
-El número mayor es 25
-```
-##### 7.2.3.1 Código
+Vamos a ver algún ejemplo.
 
 *Decision04.java*
 
@@ -1334,38 +1260,38 @@ El número mayor es 25
  */
 package decision;
 
-/**
- * @author 
- *
- */
 public class Decision04 {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		float puntuacion = 7.6f;
+   public static void main(String[] args) {
+      float puntuacion = 7.6f;
 		
-		if (puntuacion >= 9) {
-			System.out.println("Tienes un SOBRESALIENTE");
-		} else if (puntuacion >= 7) {
-			System.out.println("Tienes un NOTABLE");
-		} else if (puntuacion >= 5) {
-			System.out.println("Tienes un APROBADO");
-		} else {
-			System.out.println("Estás SUSPENSO. Lo siento");
-		}
-	}
+      if (puntuacion >= 9) {
+         System.out.println("Tienes un SOBRESALIENTE");
+      } else if (puntuacion >= 7) {
+         System.out.println("Tienes un NOTABLE");
+      } else if (puntuacion >= 5) {
+         System.out.println("Tienes un APROBADO");
+      } else {
+         System.out.println("Estás SUSPENSO. Lo siento");
+      }
+   }
 }
-
-
-SALIDA:
-
-Tienes un NOTABLE
 ```
 
-##### 7.2.4.1 Código
+![07-05](images/07-05.png)
+
+Si cambiamos el valor de puntuacion a 9.6 veriamos `SOBRESALIENTE`
+
+Esta estructura `IF-ELSE-IF` se puede volver un poco tediosa cuando en lugar de dos o tres tenemos más y sobre todo cuando la expresión de comparación que estamos evaluando es de igualdad, es decir con un `==`.
+ Para el manejo de este tipo de estructuras para que no sea tan tedioso y tengamos que usar `IF-ELSE-IF` en demasía Java nos propone el uso de una estructura que es la estructura `switch`.
+ 
+![07_Estructuras_de_decision-9](images/07_Estructuras_de_decision-9.png)
+
+La estructura `switch` nos permite evaluar varias posibilidades sin tener que pasar por todas las anteriores todas las condiciones anteriores, siempre y cuando la comparación sea de igualdad. Funciona con tipos de dato básico `byte, short, chart, int` y `String` entre otros y veremos que lo que vamos a declarar son diferentes casos de comparación, entre un caso y el siguiente para que no se ejecuten todos seguidos tenemos que utilizar la sentencia `break` para que deje de ejecutar el resto de caso y termine la evaluación de ese `switch` y tenemos la opción de usar un caso por defecto usando la palabra `default` y qué es parecido al `else` que hemos utilizado con la estructura `if`.
+
+### :computer: `101-07_Decision`
+
+Aquí tenemos un primer ejemplo de `switch`.
 
 *Decision05.java*
 
@@ -1375,188 +1301,51 @@ Tienes un NOTABLE
  */
 package decision;
 
-/**
- * @author 
- *
- */
 public class Decision05 {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		int mes = 4;
-        String mesString;
-        switch (mes) {
-            case 1:  mesString = "Enero"; // mes == 1 -> true
-                     break;
-            case 2:  mesString = "Febrero";
-                     break;
-            case 3:  mesString = "Marzo";
-                     break;
-            case 4:  mesString = "Abril";
-                     break;
-            case 5:  mesString = "Mayo";
-                     break;
-            case 6:  mesString = "Junio";
-                     break;
-            case 7:  mesString = "Julio";
-                     break;
-            case 8:  mesString = "Agosto";
-                     break;
-            case 9:  mesString = "Septiembre";
-                     break;
-            case 10: mesString = "Octubre";
-                     break;
-            case 11: mesString = "Noviembre";
-                     break;
-            case 12: mesString = "Diciembre";
-                     break;
-            default: mesString = "Mes no válido";
-                     break;
-        }
-        System.out.println(mesString);
-
-	}
-
-}
-
-
-SALIDA:
-
-Abril
-```
-
-
-*Decision06.java*
-
-```java
-/**
- * Ejemplo más complejo de uso de SWITCH
- */
-package decision;
-
-/**
- * @author 
- *
- */
-public class Decision06 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		int mes = 4;
-		int numDias = 0;
-
-		switch (mes) {
-		case 1:
-		case 3:
-		case 5:
-		case 7:
-		case 8:
-		case 10:
-		case 12:
-			numDias = 31;
-			break;
-		case 4:
-		case 6:
-		case 9:
-		case 11:
-			numDias = 30;
-			break;
-		case 2:
-			// No tenemos en cuenta si el año es bisiesto
-			// para no hacer más complejo el ejemplo
-			numDias = 28;
-			break;
-		default:
-			System.out.println("Mes no válido");
-			break;
-		}
-		System.out.println("Número de días = " + numDias);
-	}
-
-}
-
-
-SALIDA:
-
-Número de días = 30
-```
-
-*Decision07.java*
-
-```java
-/* Uso de la estructura Switch con cadenas de caracteres
- */
-package decision;
-
-/**
- * @author 
- */
-public class Decision07 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		int mesNumero = 4;
-		String mes = "abril";
-
-		switch (mes) {
-		case "enero":
-			mesNumero = 1;
-			break;
-		case "febrero":
-			mesNumero = 2;
-			break;
-		case "marzo":
-			mesNumero = 3;
-			break;
-		case "abril":
-			mesNumero = 4;
-			break;
-		case "mayo":
-			mesNumero = 5;
-			break;
-		case "junio":
-			mesNumero = 6;
-			break;
-		case "julio":
-			mesNumero = 7;
-			break;
-		case "agosto":
-			mesNumero = 8;
-			break;
-		case "septiembre":
-			mesNumero = 9;
-			break;
-		case "octubre":
-			mesNumero = 10;
-			break;
-		case "noviembre":
-			mesNumero = 11;
-			break;
-		case "diciembre":
-			mesNumero = 12;
-			break;
-		default:
-			mesNumero = 0;
-			break;
-		}
-
-		System.out.println("El mes de " + mes + " se corresponde con el número " + mesNumero );
-
-	}
-
+   public static void main(String[] args) {
+      int mes = 8;
+      String mesString;
+      switch (mes) {
+         case 1:  mesString = "Enero"; // mes == 1 -> true
+            break;
+         case 2:  mesString = "Febrero";
+            break;
+         case 3:  mesString = "Marzo";
+            break;
+         case 4:  mesString = "Abril";
+            break;
+         case 5:  mesString = "Mayo";
+            break;
+         case 6:  mesString = "Junio";
+            break;
+         case 7:  mesString = "Julio";
+            break;
+         case 8:  mesString = "Agosto";
+            break;
+         case 9:  mesString = "Septiembre";
+            break;
+         case 10: mesString = "Octubre";
+            break;
+         case 11: mesString = "Noviembre";
+            break;
+         case 12: mesString = "Diciembre";
+            break;
+         default: mesString = "Mes no válido";
+            break;
+      }
+      System.out.println(mesString);
+   }
 }
 ```
 
-SALIDA:
+Utilizando un valor entero para hacer la comparación con él, queremos transformar un valor numérico de mes en su cadena de caracteres, como veo usamos la palabra reservada `switch` entre paréntesis ponemos el valor que queremos evaluar, **aquí no iría ninguna expresión booleana**, iría el valor de una variable el  nombre de una variable y a continuación abrimos el bloque `switch` y lo que hacemos e identificar los distintos casos.
 
-El mes de abril se corresponde con el número 4
+Decir `case 1` es lo mismo que decir que estamos evaluando la expresión `mes == 1` y que se está evaluando como verdadera, si el mes es igual a 1 se ejecutara el caso uno, se asignaría a la variable `mes` el literal `Enero` el mes uno del calendario es Enero y lo que usaríamos sería la sentencia `break` para que deje de ejecutar el resto de sentencias y directamente pase a imprimir el mes correspondiente.
+
+![07-06](images/07-06.png)
+
+
 
 # 08 Estructura de repetición 13:01 
 
