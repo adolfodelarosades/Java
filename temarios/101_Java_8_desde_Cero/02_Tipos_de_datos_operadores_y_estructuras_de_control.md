@@ -1766,7 +1766,35 @@ Le volvemos a pedir al usuario que introduzca otra opción válida, volviendo a 
 
 Esto podría ser nuestra calculadora avista de pajaro comencemos.
 
-Lo primero que tenemos que declarar es una variable la vamos a inicializar a cero dónde vamos a recoger la opción que el usuario introduzca por teclado cada vez que imprimimos el mejor y también declararemos la la variable que ya digo en este caso es de un tipo estructurado que todavía no lo hemos presentado pero que ese no hace necesario para que nosotros podamos introducir valores por teclado y recogerlo que es la clase scanner para que el proceso de impresión de menú tratamiento de la opción y realización de la operación correspondiente se repita hasta que introduzcamos el cero utilizamos de los tres bucles que hemos conocido de los cuplé why to wild y el bucle for usaremos el bucle como decíamos en el vídeo anterior este nos va a ser útil porque si se ha ejecutado la aplicación de la calculadora es que al menos queremos que en una ocasión se ejecute el cuerpo de ese bus que tú bueno el bloque de código del del bucle Dubai imprimimos primero el menú vale lo imprimimos con varias sentencias de tipo system out print LN este carácter especial la barra que tenemos debajo del escape con n lo que hace es imprimir algún salto de línea adicional para que cuando lo comprobaremos cuando se imprima la impresión del menú que de lo más clara posible dentro de la concha imprimir iríamos todo esto que esta línea en lugar de Prince LN hace uso de otros métodos de impresión que se llama Prince y qué bueno este LN lo que añade un salto de línea al final de manera que no lo pusiéramos imprimiría todo seguido este prima va a ser que no se añada ese salto de línea para que el curso se quede esperando a la derecha de los 2 puntos de manera que cuando introduzcamos el valor sea algo más amigable no es decir introduzca una opción válida y a la derecha nosotros escribimos eso como decía todo vamos a tratar de alucinar para de las cosas que más ido perdiendo ahora en un ejemplo un poco más complejo mediante el cual vamos a hacer una calculadora sé si tienes la cual bueno pues como a poder manejar variable América operador expresiones estructura de decisión y estructura de repetición como digo un buen número de las cosas que hemos visto hasta ahora operativo de
+Lo primero que tenemos que declarar es una variable la vamos a inicializar a cero dónde vamos a recoger la opción que el usuario introduzca por teclado cada vez que imprimimos el menú y también declararemos la la variable, que ya digo en este caso es de un tipo estructurado que todavía no lo hemos presentado, pero que es necesario para que nosotros podamos introducir valores por teclado y recogerlo que es la clase `Scanner`.
+
+```java
+Scanner sc;
+sc = new Scanner(System.in);
+```
+
+Para que el proceso de impresión de menú, tratamiento de la opción y realización de la operación correspondiente se repita hasta que introduzcamos el cero, utilizamos de los tres bucles que hemos conocido de los bucles `while`, `do-while` y `for` usaremos el bucle `do-while`, como decíamos en la lección anterior este nos va a ser útil porque si se ha ejecutado la aplicación de la calculadora es que al menos queremos que en una ocasión se ejecute el cuerpo de ese bucle `do-while`, el bloque de código del bucle `do-while`.
+
+Imprimimos primero el menú, lo imprimimos con varias sentencias de tipo `System.out.println` el carácter especial `\n` lo que hace es imprimir algún salto de línea adicional, para que cuando, lo comprobaremos cuando se imprima, la impresión del menú quede lo más clara posible dentro de la consola. Imprimiríamos todo esto:
+
+```java
+//Imprimimos por consola el menú
+System.out.println("\n"); //Este caracter especial nos permite imprimir una línea en blanco
+System.out.println("***** CALCULADORA CUARENTENA *****");
+System.out.println();
+System.out.println("1. Sumar");
+System.out.println("2. Restar");
+System.out.println("3. Multiplicar");
+System.out.println("4. Dividir");
+System.out.println("5. Resto");
+System.out.println("0. Salir del programa");
+System.out.println();
+System.out.print("Introduzca una opción válida: ");
+```
+
+
+
+que esta línea en lugar de Prince LN hace uso de otros métodos de impresión que se llama Prince y qué bueno este LN lo que añade un salto de línea al final de manera que no lo pusiéramos imprimiría todo seguido este prima va a ser que no se añada ese salto de línea para que el curso se quede esperando a la derecha de los 2 puntos de manera que cuando introduzcamos el valor sea algo más amigable no es decir introduzca una opción válida y a la derecha nosotros escribimos eso como decía todo vamos a tratar de alucinar para de las cosas que más ido perdiendo ahora en un ejemplo un poco más complejo mediante el cual vamos a hacer una calculadora sé si tienes la cual bueno pues como a poder manejar variable América operador expresiones estructura de decisión y estructura de repetición como digo un buen número de las cosas que hemos visto hasta ahora operativo de
 
 
 ***Calculadora.java***
