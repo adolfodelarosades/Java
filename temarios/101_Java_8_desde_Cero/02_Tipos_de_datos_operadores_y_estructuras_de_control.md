@@ -1775,7 +1775,7 @@ sc = new Scanner(System.in);
 
 Para que el proceso de impresión de menú, tratamiento de la opción y realización de la operación correspondiente se repita hasta que introduzcamos el cero, utilizamos de los tres bucles que hemos conocido de los bucles `while`, `do-while` y `for` usaremos el bucle `do-while`, como decíamos en la lección anterior este nos va a ser útil porque si se ha ejecutado la aplicación de la calculadora es que al menos queremos que en una ocasión se ejecute el cuerpo de ese bucle `do-while`, el bloque de código del bucle `do-while`.
 
-Imprimimos primero el menú, lo imprimimos con varias sentencias de tipo `System.out.println` el carácter especial `\n` lo que hace es imprimir algún salto de línea adicional, para que cuando, lo comprobaremos cuando se imprima, la impresión del menú quede lo más clara posible dentro de la consola. Imprimiríamos todo esto:
+Imprimimos primero el menú, lo imprimimos con varias sentencias de tipo `System.out.println`. El carácter especial `\n` lo que hace es imprimir algún salto de línea adicional, para que cuando, lo comprobaremos cuando se imprima, la impresión del menú quede lo más clara posible dentro de la consola. Imprimiríamos todo esto:
 
 ```java
 //Imprimimos por consola el menú
@@ -1792,11 +1792,101 @@ System.out.println();
 System.out.print("Introduzca una opción válida: ");
 ```
 
-En la última línea en lugar de usar `println` se usa `print`
+En la última línea en lugar de usar `println` se usa `print` lo que hace el `ln` añade un salto de línea al final de manera que si no lo pusiéramos imprimiría todo seguido, este `print` va a ser que no se añada ese salto de línea para que el curso se quede esperando a la derecha de los 2 puntos, de manera que cuando introduzcamos el valor sea algo más amigable, es decir introduzca una opción válida y a la derecha nosotros escribimos esa opción. 
 
+Aquí tenemos el código de esta clase `Scanner` para recoger el valor escrito en el teclado, lo que hace `nextLine()` es recogerlo como una cadena de caracteres también hacemos como segundo paso transformar esa cadena de caracteres a un valor entero.
 
-Prince LN hace uso de otros métodos de impresión que se llama Prince y qué bueno este LN lo que añade un salto de línea al final de manera que no lo pusiéramos imprimiría todo seguido este prima va a ser que no se añada ese salto de línea para que el curso se quede esperando a la derecha de los 2 puntos de manera que cuando introduzcamos el valor sea algo más amigable no es decir introduzca una opción válida y a la derecha nosotros escribimos eso como decía todo vamos a tratar de alucinar para de las cosas que más ido perdiendo ahora en un ejemplo un poco más complejo mediante el cual vamos a hacer una calculadora sé si tienes la cual bueno pues como a poder manejar variable América operador expresiones estructura de decisión y estructura de repetición como digo un buen número de las cosas que hemos visto hasta ahora operativo de
+```java
+opcion = Integer.parseInt(sc.nextLine());
+```
 
+De esa manera traducimos en una sola sentencia lo que escribimos en el teclado en un valor numérico que almacenamos en la variable `opcion`.
+
+Ahora dentro de esta estructura de repetición incluimos alguna estructura de decisión que nos van a permitir ejecutar uno u otro bloque de código en función de el valor de `opcion`, si el valor de `opcion` es menor que 0 o el valor de `opcion` es mayor que 5, quiere decir que no hemos introducido ninguna de las opciones correctas que ofrecemos en nuestro menú, es posible que el usuario se haya equivocado, con lo cual le decimos que la opción introducida no es válida y que tiene que volver a escoger.
+
+```java
+if (opcion < 0 || opcion > 5) {
+   System.out.println("Opción no válida. Vuelva a escoger");
+   //Si la opcion es diferente a cero, solicitamos los 
+   //dos operandos
+}			}
+```
+
+Ahora bien si la opción es cero, uno, dos, tres, cuatro o cinco, y entraríamos ejecutar el `else`:
+
+```java
+} else if (opcion != 0) {			}
+```
+
+y lo que hacemos ahora es comprobar si es distinto de cero, por qué, porque en el caso de que sea cero, lo que haremos será terminar la ejecución.
+
+```java
+} while (opcion != 0); //opcion == 0 implicar salir del programa		}
+```
+
+No tenemos que añadir un tercer `else` para que compruebe si es igual a cero, porque esa misión de alguna manera ya la está cumpliendo en la condición del `while`. Si el valor de `opcion` fuese cero no entraría a ejecutar el bloque ni del `if` ni del `else` y directamente iría hasta el `while` a evaluar la expresión y saldría. 
+
+Si es distinta de cero quiere decir que la opción vale o bien uno o dos o tres o cuatro o cinco, con lo cual lo que hacemos ahora es solicitar al usuario los dos operandos, como la calculadora no es solamente de valores enteros sino que de valores reales, declaramos dos variables de tipo `float`
+
+```java
+float operando1, operando2;	}
+```
+
+y en este caso recogemos también por el teclado el valor que escribe el usuario para el primer operando y lo transformamos en un valor real, mediante esta sentencia.
+
+```java
+System.out.print("Introduzca el primer operando: ");
+operando1 = Float.parseFloat(sc.nextLine());
+```
+
+Esta sentencia recoge un valor por teclado y lo transforma en un valor real igual que está otra que te lo almacena en el en `operando2`:
+
+```java
+System.out.print("Introduzca el segundo operando: ");
+operando2 = Float.parseFloat(sc.nextLine());
+```
+
+Y en función de la opción que hayamos seleccionado se realizaría la suma, la resta, la multiplicación, la división o el resto.
+
+```java
+switch(opcion) {
+				
+   case 1: //Suma
+      System.out.println("El resultado de la suma es " + (operando1 + operando2));
+      break;
+   case 2: //Resta
+      System.out.println("El resultado de la resta es " + (operando1 - operando2));
+      break;
+   case 3: //Multiplicación
+      System.out.println("El resultado de la multiplicación es " + (operando1 * operando2));
+      break;
+   case 4: //División
+      System.out.println("El resultado de la división es " + (operando1 / operando2));
+      break;
+   case 5: //Resto
+      System.out.println("El resto de dividir " +operando1 + " entre " + operando2 + " es "+ (operando1 % operando2));
+      break;
+}
+```
+
+Como a través de los `if-else` hemos asegurado que el valor sea 1, 2, 3, 4 ó 5 no nos haría falta crear el caso por default.
+
+En el momento que la opción es 0 saldríamos e indicaríamos que no vamos a solicitar ningún valor más por teclado:
+
+```java
+//Indicamos que no vamos a leer ningún valor más por teclado.
+sc.close();
+```
+
+e imprimimos un mensaje de finalización.
+
+```java
+System.out.println("Finalizando la ejecución de la calculadora");
+```
+
+### :computer: `101-08-Bis-Calculadora`
+
+A continuación tenemos todo el código.
 
 ***Calculadora.java***
 
@@ -1815,101 +1905,95 @@ package calculadora;
 
 import java.util.Scanner;
 
-/**
- * @author 
- *
- */
 public class Calculadora {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
-		//Variable donde almacenamos el valor seleccionado
-		//del menú
-		int opcion = 0;
-		//Por ahora, es normal si no se comprenden estas dos
-		//líneas de código.
-		Scanner sc;
-		sc = new Scanner(System.in);
+      //Variable donde almacenamos el valor seleccionado
+      //del menú
+      int opcion = 0;
+      //Por ahora, es normal si no se comprenden estas dos
+      //líneas de código.
+      Scanner sc;
+      sc = new Scanner(System.in);
 		
-		do {
+      do {
 
-			//Imprimimos por consola el menú
-			System.out.println("\n"); //Este caracter especial nos permite imprimir una línea en blanco
-			System.out.println("***** CALCULADORA CUARENTENA *****");
-			System.out.println();
-			System.out.println("1. Sumar");
-			System.out.println("2. Restar");
-			System.out.println("3. Multiplicar");
-			System.out.println("4. Dividir");
-			System.out.println("5. Resto");
-			System.out.println("0. Salir del programa");
-			System.out.println();
-			System.out.print("Introduzca una opción válida: ");
+         //Imprimimos por consola el menú
+         System.out.println("\n"); //Este caracter especial nos permite imprimir una línea en blanco
+         System.out.println("***** CALCULADORA CUARENTENA *****");
+         System.out.println();
+         System.out.println("1. Sumar");
+         System.out.println("2. Restar");
+         System.out.println("3. Multiplicar");
+         System.out.println("4. Dividir");
+         System.out.println("5. Resto");
+         System.out.println("0. Salir del programa");
+         System.out.println();
+         System.out.print("Introduzca una opción válida: ");
 			
-			//Estas líneas de código nos permiten leer del teclado
-			//y transformar el valor leído de String a int
+         //Estas líneas de código nos permiten leer del teclado
+         //y transformar el valor leído de String a int
 			
-			// 1) Recoger el valor escrito en el teclado
-			// 2) Transformar esa cadena de caracteres en un valor entero
-			opcion = Integer.parseInt(sc.nextLine());
+         // 1) Recoger el valor escrito en el teclado
+         // 2) Transformar esa cadena de caracteres en un valor entero
+         opcion = Integer.parseInt(sc.nextLine());
 			
-			//Si la opcion es menor que 0 o mayor que 5, no es una
-			//opción válida
-			if (opcion < 0 || opcion > 5) {
-				System.out.println("Opción no válida. Vuelva a escoger");
-				//Si la opcion es diferente a cero, solicitamos los 
-				//dos operandos
-			} else if (opcion != 0) {
+         //Si la opcion es menor que 0 o mayor que 5, no es una
+         //opción válida
+         if (opcion < 0 || opcion > 5) {
+            System.out.println("Opción no válida. Vuelva a escoger");
+            //Si la opcion es diferente a cero, solicitamos los 
+            //dos operandos
+         } else if (opcion != 0) {
 
-				System.out.println("\n");
+            System.out.println("\n");
 				
-				float operando1, operando2;
+            float operando1, operando2;
 				
-				System.out.print("Introduzca el primer operando: ");
-				operando1 = Float.parseFloat(sc.nextLine());
+            System.out.print("Introduzca el primer operando: ");
+            operando1 = Float.parseFloat(sc.nextLine());
 				
-				System.out.print("Introduzca el segundo operando: ");
-				operando2 = Float.parseFloat(sc.nextLine());
+            System.out.print("Introduzca el segundo operando: ");
+            operando2 = Float.parseFloat(sc.nextLine());
 
 				
-				System.out.println("\n");
-				switch(opcion) {
+            System.out.println("\n");
+            switch(opcion) {
 				
-				case 1: //Suma
-					System.out.println("El resultado de la suma es " + (operando1 + operando2));
-					break;
-				case 2: //Resta
-					System.out.println("El resultado de la resta es " + (operando1 - operando2));
-					break;
-				case 3: //Multiplicación
-					System.out.println("El resultado de la multiplicación es " + (operando1 * operando2));
-					break;
-				case 4: //División
-					System.out.println("El resultado de la división es " + (operando1 / operando2));
-					break;
-				case 5: //Resto
-					System.out.println("El resto de dividir " +operando1 + " entre " + operando2 + " es "+ (operando1 % operando2));
-					break;
+               case 1: //Suma
+                  System.out.println("El resultado de la suma es " + (operando1 + operando2));
+                  break;
+               case 2: //Resta
+                  System.out.println("El resultado de la resta es " + (operando1 - operando2));
+                  break;
+               case 3: //Multiplicación
+                  System.out.println("El resultado de la multiplicación es " + (operando1 * operando2));
+                  break;
+               case 4: //División
+                  System.out.println("El resultado de la división es " + (operando1 / operando2));
+                  break;
+               case 5: //Resto
+                  System.out.println("El resto de dividir " +operando1 + " entre " + operando2 + " es "+ (operando1 % operando2));
+                  break;
 					
-				}
+            }
 				
-			}
+	 }
 			
-		} while (opcion != 0); //opcion == 0 implicar salir del programa
+      } while (opcion != 0); //opcion == 0 implicar salir del programa
 		
-		//Indicamos que no vamos a leer ningún valor más por teclado.
-		sc.close();
+      //Indicamos que no vamos a leer ningún valor más por teclado.
+      sc.close();
 		
-		System.out.println("Finalizando la ejecución de la calculadora");
+      System.out.println("Finalizando la ejecución de la calculadora");
 
-	}
+   }
 
 }
-
 ```
+
+Al ejecutar el programa tenemos las siguientes salidas.
 
 **SALIDA:**
 
