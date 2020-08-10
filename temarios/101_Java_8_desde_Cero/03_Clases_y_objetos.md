@@ -159,15 +159,166 @@ Ya que hemos presentado la referencia hacia objetos, podemos presentar el valor 
 
 ![09_Orientacion_a_objetos-16](images/09_Orientacion_a_objetos-16.png)
 
-Nos queda ver cómo por un lado van a interaccionar objeto ya veremos que el objeto interaccionan como hemos dicho antes a través de un sistema de paso de mensaje y se paso de mensajes no es más que un método pueda invocar a un método definido centro de otra clase vale cómo se invoca haría pues utilizaríamos el nombre de la referencia de ese objeto persona punto y el nombre del metro y a continuación los parece que como tenemos aquí si quisiéramos hacer nacer a una persona que una persona hablara que caminara porque murieras vale las distintas operaciones de personas no tendríamos que ejecutar esa llamada a los metros hablábamos antes de modificadores de acceso y aquí podemos presentarlo los cuatro que nos ofrece Java si bien nosotros ahora lo iremos utilizando un poco no a la ligera pero si sin saber muy bien a lo mejor que hacerle unas a ganar algo más de experiencia de hecho nos limitaremos a algunos de ellos no como es el de público es decir cualquiera puede acceder a algún apartado de esa clase private solamente la propia clase puede acceder protect en la propia clase y su derivado o el modificador por defecto en el cual son las clases cercanas las que tienen el mismo paquete las que podrían hacer y ya que habíamos hablado de organización de código presentamos en su momento cuando hicimos nuestro primer ejemplo el concepto de paquete lo recordamos ahora un paquete es una unidad organizativa que va a contener una o más clases vale si lo miramos y me clipse un paquete es un directorio o una sucesión de directorio dónde se almacenan clases nos va a permitir organizar el código organizar las clases de forma lógica vale sobretodo guardando dentro del mismo paquete clases que suelan interaccionar entre ellas o que tengan algún tipo de relación cierta cohesión y para declarar un paquete como he visto que este no está nos da cierta ayuda cuando cuando creamos una nueva clase pero se hace en la cabecera de la misma mediante la palabra reservada para acá vale vamos a ver el ejemplo de creación de una persona y como desde otro objeto en particular cómo estás entonces la que instancia más un objeto de tipo persona tiene varias parte aunque la sentencia sencilla de izquierda derecha tendría el tipo igual que arde sus amigos primitivo ahora usamos he puesto el jurado vale la clase tipo de pedazo de esta variable nombre de la clase de pues vendría el nombre de la variable del objeto cuando se habla de objetos además de referirse yo como variable también se suele utilizar la palabra referencia vale la referencia hacia de se objeto del operador de simulación el operador de instancias yo ya continuación vendría lo que se conoce como un constructor que hasta que lo colocamos un poco mejor podríamos decir que el mismo nombre de la clase y necesito si la pena yo con la de personas mayúsculas Deportiva pero no sé si terminaré como todo emergencia con . Y como distancia uno de construir una persona potencia
+Nos queda ver cómo por un lado van a interaccionar objetos, ya veremos que los objetos interaccionan como hemos dicho antes a través de un sistema de paso de mensaje y ese paso de mensajes no es más que un método pueda invocar a un método definido, dentro de otra clase. Cómo se invocaría, utilizaríamos el nombre de la referencia de ese objeto Persona punto y el nombre del método y a continuación los parentesis como tenemos aquí.
 
-
-
-
+Si quisiéramos hacer nacer a una persona, que una persona hablara, que caminara y que murieras, las distintas operaciones de Persona, tendríamos que ejecutar esas llamadas a los métodos. 
 
 ![09_Orientacion_a_objetos-17](images/09_Orientacion_a_objetos-17.png)
 
+Hablábamos antes de modificadores de acceso y aquí podemos presentarlos, los cuatro que nos ofrece Java, si bien nosotros ahora los iremos utilizando un poco no a la ligera, pero sin saber muy bien a lo mejor que hace alguno hasta ganar algo más de experiencia, de hecho nos limitaremos a algunos de ellos, como es el de `public`, es decir cualquiera puede acceder a algún apartado de esa clase, `private` solamente la propia clase puede acceder, `protected` la propia clase y sus derivados o el modificador por defecto en el cual son las clases cercanas, las que esten en el mismo paquete, las que podrían haceder. 
+
 ![09_Orientacion_a_objetos-18](images/09_Orientacion_a_objetos-18.png)
+
+Y ya que habíamos hablado de organización de código, presentamos en su momento cuando hicimos nuestro primer ejemplo el concepto de paquete, lo recordamos ahora, un paquete es una unidad organizativa que va a contener una o más clases, si lo miramos sin Eclipse un paquete es un directorio o una sucesión de directorios dónde se almacenan clases, nos va a permitir organizar el código, organizar las clases de forma lógica, sobretodo guardando dentro del mismo paquete clases que suelan interaccionar entre ellas o que tengan algún tipo de relación, cierta cohesión. 
+
+Para declarar un paquete, hemos visto que Eclipse nos da cierta ayuda cuando creamos una nueva clase, pero se hace en la cabecera de la misma mediante la palabra reservada `package`.
+
+### :computer: `101-09-OrientacionObjetos`
+
+Vamos a ver el ejemplo de creación de una Persona y como desde otro objeto en particular de una clase con un método `main` vamos a invocar los métodos de Persona.
+
+*`Persona`*
+
+```java
+/**
+ * Definición e implementación de una clase
+ */
+package objetos;
+
+public class Persona {
+   // Estructura, conocida como propiedades o atributos
+   String nombre;
+   String apellidos;
+   int edad;
+   int altura;
+   float peso;
+
+   // Comportamiento, conocido como métodos
+   void caminar() {
+      System.out.println("Estoy caminando");
+   }
+
+   void hablar() {
+      System.out.println("Estoy hablando");
+   }
+
+   void nacer() {
+      System.out.println("¡¡¡Acabo de nacer!!!");
+   }
+
+   void morir() {
+      System.out.println("¡Hasta más ver!");
+   }
+}
+```
+
+En este caso tenemos la clase `Persona`, dentro del ejemplo de la orientación a objetos, dónde podemos identificar muy bien su estructura a través de una serie de propiedades y su comportamiento a través de una serie de métodos, **por ahora hemos dejado como modificador de acceso el por defecto, es decir no escribir nada, de manera que cualquier clase que esté en el mismo paquete podría acceder, el paquete en el cual estamos almacenando la clase Persona, el paquete `objetos`**.
+
+Dentro de la estructura tenemos:
+
+```java
+// Estructura, conocida como propiedades o atributos
+String nombre;
+String apellidos;
+int edad;
+int altura;
+float peso;
+```
+
+Son las propiedades que identifican a una Persona y como métodos tenemos:
+
+```java
+// Comportamiento, conocido como métodos
+void caminar() {
+   System.out.println("Estoy caminando");
+}
+
+void hablar() {
+   System.out.println("Estoy hablando");
+}
+
+void nacer() {
+   System.out.println("¡¡¡Acabo de nacer!!!");
+}
+
+void morir() {
+   System.out.println("¡Hasta más ver!");
+}
+```
+
+Hablaremos de los métodos más adelante pero si decir que si un método se va a limitar a hacer una serie de sentencias y no queremos que devuelva ningún tipo de valor, la ejecución de ese método utilizaríamos la palabra `void`, este caso cada método solamente va a realizar una sentencia, va a ejecutar una sentencia que es imprimir un mensaje, en referencia al nombre del método.
+
+Con esto tendríamos implementada la clase Persona, vamos a tratar de utilizarla. Cómo utilizamos la persona, lo normal es que lo hagamos desde otra clase distinta, creamos una clase para poder crear objetos de ella dentro de métodos de otra clase. 
+
+*`OrientacionObjetos`*
+
+```java
+package objetos;
+
+public class OrientacionObjetos {
+
+   public static void main(String[] args) {
+      Persona persona = new Persona();
+      Persona persona2 = new Persona();
+      Persona persona3 = new Persona();
+
+      persona.nacer();
+      persona.hablar();
+      persona.caminar();
+      persona.morir();
+
+      persona2.nacer();
+
+      persona3.caminar();
+   }
+}
+```
+
+En particular esta otra clase `OrientacionObjetos` que es la clase que tiene el método `main`, es decir el punto de entrada a la ejecución y cómo podemos comprobar para instanciar una nueva persona lo haríamos utilizando el nombre de la clase, `Persona`, el nombre que le damos a la referencia, es decir `persona` es una variable de tipo `Persona` que vamos a poder utilizar en tanto en cuanto dure su ámbito, es decir en todo el método `main`, el operador de igualdad, la palabra `new` y haríamos referencia a la clase mediante lo que se conoce como su **constructor** que presentaremos en la siguiente lección.
+
+```java
+Persona persona = new Persona();
+```
+
+Ya tenemos lista esta persona podríamos interaccionar con ella invocando sus distintos métodos.
+
+```java
+persona.nacer();
+persona.hablar();
+persona.caminar();
+persona.morir();
+```
+
+Veremos como imprimira sus mensajes.
+
+Podríamos crear más objetos 
+
+```java
+Persona persona = new Persona();
+Persona persona2 = new Persona();
+Persona persona3 = new Persona();
+```
+
+Al igual que veíamos en la imagen de los globos que teníamos una clase Globo y un montón de globos o en la imagen de Personas que teníamos varias personas, podríamos crear varias instancias de Persona e interaccionar también con ellas, invocar sus métodos que producen mensajes, invocado el método nacer de la persona 2 y por último invocado el método caminar de persona 3.
+
+```java
+persona.nacer();
+persona.hablar();
+persona.caminar();
+persona.morir();
+
+persona2.nacer();
+
+persona3.caminar();
+```
+
+Podríamos tener dos, tres o todas las instancias de una clase que nosotros necesitemos.
+
+Vamos a ver la ejecución del programa.
+
+![09-01](images/09-01.png)
+
+Terminamos la introducción a la orientación a objetos, poco a poco iremos hablando de las distintas partes que lo componen, los constructores, propiedades, métodos tipos de retorno, recepción de argumentos, etc.
 
 # 10. Los constructores 9:07
 
