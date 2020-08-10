@@ -340,31 +340,28 @@ Nuestro IDE Eclipse, posee un asistente que nos puede ayudar a generar el códig
 
 ### 10.3 *Puntero* `this`
 
-![10_Los_constructores-4](images/10_Los_constructores-4.png)
-
 Se trata de una forma de referenciar desde un objeto a sí mismo, tanto a sus variables miembro como a sus métodos. También nos sirve para poder utilizar un constructor desde otro. Por ejemplo:
 
 ```java
 public class Persona {
 
-  //Variables miembro
+   //Variables miembro
 
 
-    // Constructor con algunos parámetros
-    public Persona(String nombre, String apellidos) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-    }
+   // Constructor con algunos parámetros
+   public Persona(String nombre, String apellidos) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+   }
 
-    public Persona(String nombre, String apellidos, int edad) {
-        this(nombre, apellidos);
-        this.edad = edad;
-    }
+   public Persona(String nombre, String apellidos, int edad) {
+      this(nombre, apellidos);
+      this.edad = edad;
+   }
 }
 ```
 
 El segundo constructor de este código utiliza el primer constructor. De esta forma reutilizamos código.
-
 
 ## Transcripción
 
@@ -373,6 +370,8 @@ El segundo constructor de este código utiliza el primer constructor. De esta fo
 ![10_Los_constructores-2](images/10_Los_constructores-2.png)
  
 ![10_Los_constructores-3](images/10_Los_constructores-3.png)
+
+![10_Los_constructores-4](images/10_Los_constructores-4.png)
 
 ## 11. Getters y setters 14:28 
 
