@@ -1,49 +1,23 @@
 # 3. Clases y objetos 58m
 
-* Orientación de objetos 22:58 
-* Los constructores 9:07 
-* Getters y setters 14:28 
-* Ciclo de vida de un objeto 6:27 
-* Uso de clases envoltorio 5:31 
-* Contenido adicional 5
+* 09 Orientación de objetos 22:58 
+* 10 Los constructores 9:07 
+* 11 Getters y setters 14:28 
+* 12 Ciclo de vida de un objeto 6:27 
+* 13 Uso de clases envoltorio 5:31 
+* 14 Contenido adicional 5
 
-## 9. Orientación de objetos 22:58
+# 9. Orientación de objetos 22:58
 
 [Orientación de objetos](pdfs/09_Orientación_a_objetos.pdf)
 
-![09_Orientacion_a_objetos-0](images/09_Orientacion_a_objetos-0.png)
+## Resumen Profesor
 
 ### 9.1 Paradigma de programación Orientada a Objetos
 
-![09_Orientacion_a_objetos-1](images/09_Orientacion_a_objetos-1.png)
-
 **Un *paradigma* es un modelo, una manera de entender las cosas. El *paradigma de programación orientada a objetos* es aquel por el cual todos los elementos que manejamos en nuestro programa son *objetos*. Estos no son más que *instancias* construidas a través de un molde, que llamamos *clase*.**
 
-![09_Orientacion_a_objetos-2](images/09_Orientacion_a_objetos-2.png)
-
-![09_Orientacion_a_objetos-3](images/09_Orientacion_a_objetos-3.png)
-
-![09_Orientacion_a_objetos-4](images/09_Orientacion_a_objetos-4.png)
-
-![09_Orientacion_a_objetos-5](images/09_Orientacion_a_objetos-5.png)
-
-![09_Orientacion_a_objetos-6](images/09_Orientacion_a_objetos-6.png)
-
-![09_Orientacion_a_objetos-7](images/09_Orientacion_a_objetos-7.png)
-
-![09_Orientacion_a_objetos-8](images/09_Orientacion_a_objetos-8.png)
-
-![09_Orientacion_a_objetos-9](images/09_Orientacion_a_objetos-9.png)
-
-![09_Orientacion_a_objetos-10](images/09_Orientacion_a_objetos-10.png)
-
-![09_Orientacion_a_objetos-11](images/09_Orientacion_a_objetos-11.png)
-
-![09_Orientacion_a_objetos-12](images/09_Orientacion_a_objetos-12.png)
-
 ### 9.2 Clases en Java
-
-![09_Orientacion_a_objetos-13](images/09_Orientacion_a_objetos-13.png)
 
 Una clase en Java tiene la siguiente estructura:
 
@@ -67,8 +41,6 @@ Una clase en Java tiene la siguiente estructura:
 
 ### 9.3 Objetos
 
-![09_Orientacion_a_objetos-14](images/09_Orientacion_a_objetos-14.png)
-
 Los objetos, que no son más que instancias de clases, tienen que ser creados (instanciados) por el programador, y almacenados en una referencia (muy similar a una variable).
 
 ```java
@@ -76,8 +48,6 @@ Persona persona = new Persona();
 ```
 
 ### 9.4 Valor null
-
-![09_Orientacion_a_objetos-15](images/09_Orientacion_a_objetos-15.png)
 
 Si declaramos una referencia, pero no construimos ningún objeto en ese momento, obtenemos una referencia nula, o con valor `null`. Además, es una palabra reservada que podemos usar para comparar.
 
@@ -87,13 +57,9 @@ Persona persona;
 
 ### 9.5 Interacción entre objetos
 
-![09_Orientacion_a_objetos-16](images/09_Orientacion_a_objetos-16.png)
-
 Los objetos suelen interactuar los unos con los otros. Esto lo realizan mediante un mecanismo llamado *paso de mensajes*, que en la práctica es que, desde el cuerpo de una clase, estamos invocando a un método de otra clase.
 
 ### 9.6 Modificadores de acceso
-
-![09_Orientacion_a_objetos-17](images/09_Orientacion_a_objetos-17.png)
 
 Tanto a nivel de clase, como de atributos y métodos, Java pone a nuestra disposición una serie de *modificadores de acceso*, que harán que no cualquier clase pueda acceder a otra.
 
@@ -105,8 +71,6 @@ Modificador | Descripción
 `default`: | Es decir, sin modificador de acceso - pueden acceder a esa clase todas las del mismo *paquete*.
 
 ### 9.7 Paquete
-
-![09_Orientacion_a_objetos-18](images/09_Orientacion_a_objetos-18.png)
 
 Es una agrupación de clases. Indicamos que una clase pertenece a un paquete mediante la palabra reservada `package` en la primera línea de código de la clase:
 
@@ -120,98 +84,53 @@ class Clase {
 }
 ```
 
-### 9.8 Código
+## Transcripción
 
-*Persona.java*
+![09_Orientacion_a_objetos-0](images/09_Orientacion_a_objetos-0.png)
 
-```java
-package objetos;
+![09_Orientacion_a_objetos-1](images/09_Orientacion_a_objetos-1.png)
 
-/**
- * @author 
- *
- */
-class Persona {
-	
-	//Estructura, conocida como  propiedades o atributos
-	String nombre;
-	String apellidos;
-	int edad;
-	int altura;
-	float peso;
-	
-	//Comportamiento, conocido como métodos
-	void caminar() {
-		System.out.println("Estoy caminando");
-	}
-	
-	void hablar() {
-		System.out.println("Estoy hablando");
-	}
-	
-	void nacer() {
-		System.out.println("¡¡¡Acabo de nacer!!!");
-	}
-	
-	void morir() {
-		System.out.println("¡Hasta más ver!");
-	}
-}
-```
+![09_Orientacion_a_objetos-2](images/09_Orientacion_a_objetos-2.png)
 
-*OrientacionObjetos.java*
+![09_Orientacion_a_objetos-3](images/09_Orientacion_a_objetos-3.png)
 
-```java
-package objetos;
+![09_Orientacion_a_objetos-4](images/09_Orientacion_a_objetos-4.png)
 
-/**
- * @author 
- *
- */
-public class OrientacionObjetos {
+![09_Orientacion_a_objetos-5](images/09_Orientacion_a_objetos-5.png)
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		Persona persona = new Persona();
-		Persona persona2 = new Persona();
-		Persona persona3 = new Persona(); 
-		
-		persona.nacer();
-		persona.hablar();
-		persona.caminar();
-		persona.morir();
-		
-		persona2.nacer();
-		
-		persona3.caminar();	
-	}
-}
-```
+![09_Orientacion_a_objetos-6](images/09_Orientacion_a_objetos-6.png)
 
-**SALIDA**:
+![09_Orientacion_a_objetos-7](images/09_Orientacion_a_objetos-7.png)
 
-```sh
-¡¡¡Acabo de nacer!!!
-Estoy hablando
-Estoy caminando
-¡Hasta más ver!
-¡¡¡Acabo de nacer!!!
-Estoy caminando
-```
+![09_Orientacion_a_objetos-8](images/09_Orientacion_a_objetos-8.png)
 
-## 10. Los constructores 9:07
+![09_Orientacion_a_objetos-9](images/09_Orientacion_a_objetos-9.png)
+
+![09_Orientacion_a_objetos-10](images/09_Orientacion_a_objetos-10.png)
+
+![09_Orientacion_a_objetos-11](images/09_Orientacion_a_objetos-11.png)
+
+![09_Orientacion_a_objetos-12](images/09_Orientacion_a_objetos-12.png)
+
+![09_Orientacion_a_objetos-13](images/09_Orientacion_a_objetos-13.png)
+
+![09_Orientacion_a_objetos-14](images/09_Orientacion_a_objetos-14.png)
+
+![09_Orientacion_a_objetos-15](images/09_Orientacion_a_objetos-15.png)
+
+![09_Orientacion_a_objetos-16](images/09_Orientacion_a_objetos-16.png)
+
+![09_Orientacion_a_objetos-17](images/09_Orientacion_a_objetos-17.png)
+
+![09_Orientacion_a_objetos-18](images/09_Orientacion_a_objetos-18.png)
+
+# 10. Los constructores 9:07
 
 [Los constructores](pdfs/10_Los_constructores.pdf)
 
-![10_Los_constructores-1](images/10_Los_constructores-1.png)
+## Resumen Profesor
 
 ### 10.1 Construcción de objetos
-
-![10_Los_constructores-2](images/10_Los_constructores-2.png)
-![10_Los_constructores-3](images/10_Los_constructores-3.png)
 
 En orientación a objetos, la construcción de un objeto implica la inicialización de cero o más variables miembros de ese mismo objeto que estamos construyendo. Java, por sí mismo, solamente hace las gestiones oportunas en memoria; sin embargo, si queremos que ese nuevo objeto recién creado tenga valores inicializados, se los podemos proporcionar mediante un constructor.
 
@@ -250,136 +169,28 @@ public class Persona {
 
 El segundo constructor de este código utiliza el primer constructor. De esta forma reutilizamos código.
 
-### 10.4 Código
 
-*Persona.java*
+## Transcripción
 
-```java
-/**
- * Definición e implementación de una clase
- */
-package constructores;
+![10_Los_constructores-1](images/10_Los_constructores-1.png)
 
-/**
- * @author 
- *
- */
-public class Persona {
-
-	// Estructura, conocida como propiedades o atributos
-	private String nombre;
-	private String apellidos;
-	private int edad;
-	private int altura;
-	private float peso;
-
-	// Constructor vacóo
-	public Persona() {
-		this.nombre = "desconocido";
-		this.apellidos = "desconocido";
-		this.edad = 0;
-	}
-
-	// Constructor con algunos parámetros
-	public Persona(String nombre, String apellidos) {
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-	}
-	
-	public Persona(String nombre, String apellidos, int edad) {
-		this(nombre, apellidos);
-		this.edad = edad;
-	}
-	
-	
-
-	public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.edad = edad;
-		this.altura = altura;
-		this.peso = peso;
-	}
-
-	// Comportamiento, conocido como métodos
-	void caminar() {
-		System.out.println("Estoy caminando");
-	}
-
-	void hablar() {
-		System.out.println("Estoy hablando");
-	}
-
-	void nacer() {
-		System.out.println("¡¡¡Acabo de nacer!!!");
-	}
-
-	void morir() {
-		System.out.println("¡Hasta más ver!");
-	}
-
-	void presentacion() {
-		System.out.println(
-				"Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad.");
-	}
-
-}
-```
-
-*Constructores.java*
-
-```java
-package constructores;
-
-/**
- * @author 
- *
- */
-public class Constructores {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		Persona johndoe = new Persona();		
-		johndoe.presentacion();
-		
-		Persona manuel = new Persona("Manuel", "Ruiz González");		
-		manuel.presentacion();
-		
-		Persona antonio = new Persona("Antonio", "Castillo Real", 31);
-		antonio.presentacion();
-	}
-}
-```
-
-**SALIDA**:
-
-```sh
-Mi nombre es desconocido desconocido, y tengo 0 años de edad.
-Mi nombre es Manuel Ruiz González, y tengo 0 años de edad.
-Mi nombre es Antonio Castillo Real, y tengo 31 años de edad.
-```
+![10_Los_constructores-2](images/10_Los_constructores-2.png)
+ 
+![10_Los_constructores-3](images/10_Los_constructores-3.png)
 
 ## 11. Getters y setters 14:28 
 
 [Getters y setters](pdfs/11_Propiedades_y_metodos.pdf)
 
-![11_Propiedades_y_metodos-1](images/11_Propiedades_y_metodos-1.png)
+## Resumen Profesor
 
 ### 11.1 Métodos y atributos
-
-![11_Propiedades_y_metodos-2](images/11_Propiedades_y_metodos-2.png)
-![11_Propiedades_y_metodos-3](images/11_Propiedades_y_metodos-3.png)
 
 Tal y como hemos aprendido en lecciones anteriores, los métodos se corresponden con el *comportamiento* de una clase, y los atributos (o propiedades) con su *estructura*.
 
 La encapsulación nos recomienda que el trato con los objetos sea siempre a través de métodos; y dado que la estructura interna de un objeto solamente la conoce el mismo, los atributos se deberían consultar o editar siempre a través de métodos.
 
 ### 11.2 Propiedades o atributos
-
-![11_Propiedades_y_metodos-4](images/11_Propiedades_y_metodos-4.png)
 
 Tienen la siguiente sintaxis genérica:
 
@@ -396,10 +207,6 @@ donde:
 * `nombreAtributo` debería estar escrito en notación *camelCase* y ser autodescriptivo.
 
 ### 11.3 Métodos
-
-![11_Propiedades_y_metodos-5](images/11_Propiedades_y_metodos-5.png)
-
-![11_Propiedades_y_metodos-6](images/11_Propiedades_y_metodos-6.png)
 
 Tienen la siguiente sintaxis genérica:
 
@@ -421,181 +228,47 @@ donde:
 
 #### 11.3.1 Métodos getters/setters
 
-![11_Propiedades_y_metodos-7](images/11_Propiedades_y_metodos-7.png)
-
 Son unos métodos especiales, pero sencillos, que nos permiten consultar cualquier atributo de una clase, así como asignarle un nuevo valor. Pueden autogenerarse con Eclipse.
 
 #### 11.3.2 `toString()`
 
-![11_Propiedades_y_metodos-8](images/11_Propiedades_y_metodos-8.png)
-
 Se trata de un método especial, que sirve para obtener, en un solo valor de tipo String, una representación de un objeto. Eclipse también incluye un asistente para generarlo, si nos fuera preciso.
 
+## Transcripción
 
-### 11.4 Código
+![11_Propiedades_y_metodos-1](images/11_Propiedades_y_metodos-1.png)
 
-*Persona.java*
+![11_Propiedades_y_metodos-2](images/11_Propiedades_y_metodos-2.png)
 
-```java
-/**
- * Definición e implementación de una clase
- */
-package propiedadesymetodos;
+![11_Propiedades_y_metodos-3](images/11_Propiedades_y_metodos-3.png)
 
-/**
- * @author
- *
- */
-public class Persona {
+![11_Propiedades_y_metodos-4](images/11_Propiedades_y_metodos-4.png)
 
-	// Estructura, conocida como propiedades o atributos
-	private String nombre;
-	private String apellidos;
-	private int edad;
-	private int altura;
-	private float peso;
+![11_Propiedades_y_metodos-5](images/11_Propiedades_y_metodos-5.png)
 
-	// Constructor vacío
-	public Persona() {
-		this.nombre = "desconocido";
-		this.apellidos = "desconocido";
-		this.edad = 0;
-	}
+![11_Propiedades_y_metodos-6](images/11_Propiedades_y_metodos-6.png)
 
-	// Constructor con algunos parámetros
-	public Persona(String nombre, String apellidos) {
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-	}
+![11_Propiedades_y_metodos-7](images/11_Propiedades_y_metodos-7.png)
 
-	public Persona(String nombre, String apellidos, int edad) {
-		this(nombre, apellidos);
-		this.edad = edad;
-	}
+![11_Propiedades_y_metodos-8](images/11_Propiedades_y_metodos-8.png)
 
-	// Comportamiento, conocido como métodos
-	public void caminar() {
-		System.out.println("Estoy caminando");
-	}
-
-	public void hablar() {
-		System.out.println("Estoy hablando");
-	}
-
-	public void nacer() {
-		System.out.println("¡¡¡Acabo de nacer!!!");
-	}
-
-	public void morir() {
-		System.out.println("¡Hasta más ver!");
-	}
-
-	public void presentacion() {
-		System.out.println(
-				"Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad.");
-	}
-	
-	public void saludo(String mensaje) {
-		System.out.println("Hola, soy " + this.nombre + " " + this.apellidos + ", y quiero saludarte diciéndote " + mensaje);
-	}
-	
-	public String obtenerNombreCompleto() {
-		return this.nombre + " " + this.apellidos;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	public int getEdad() {
-		return edad;
-	}
-
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}
-
-	public int getAltura() {
-		return altura;
-	}
-
-	public void setAltura(int altura) {
-		this.altura = altura;
-	}
-
-	public float getPeso() {
-		return peso;
-	}
-
-	public void setPeso(float peso) {
-		this.peso = peso;
-	}
-
-	@Override
-	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" + altura
-				+ ", peso=" + peso + "]";
-	}
-}
-
-```
-
-*PropiedadesMetodos.java*
-
-```java
-/**
- *  PROPIEDADES Y MÉTODOS DE UNA CLASE
- */
-package propiedadesymetodos;
-
-
-/**
- * @author 
- *
- */
-
-public class PropiedadesMetodos {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		Persona p = new Persona();
-		
-		p.setNombre("Pepe");
-		p.setApellidos("Perez");
-		p.setAltura(180);
-		p.setEdad(25);
-		p.setPeso(75.5f);
-		
-		System.out.println(p);
-	}
-}
-```
-
-**SALIDA:**
-
-```sh
-Persona [nombre=Pepe, apellidos=Perez, edad=25, altura=180, peso=75.5]
-```
-
-
-## 12. Ciclo de vida de un objeto 6:27 
+# 12. Ciclo de vida de un objeto 6:27 
 
 [Ciclo de vida de un objeto](pdfs/12_Ciclo_de_vida.pdf)
+
+## Resumen Profesor
+
+### 12.1 Ciclo de vida de un objeto
+
+En Java, cualquier objeto tiene un ciclo de vida, pasado por los estados de creación, uso y destrucción.
+
+Para la creación, solo tenemos que hacer uso del operador `new`. Es Java quien se encarga de realizar todas las operaciones necesarias en memoria.
+
+Un objeto está vivo, accesible y en uso mientras dure el ámbito en el que fue creado. Si creamos un objeto en el método `main` de una aplicación, estará *vivo* hasta que finalice la ejecución del mismo. Si por el contrario, lo creamos en el método de una otra clase, finalizará cuanto termine la ejecución del mismo.
+
+Cuando finaliza el ámbito donde fue definido un método, este se marca como *no util* y es candidato a ser liberado por el *garbage collector*, un proceso de baja prioridad de la JVM que se encarga de liberar la memoria ocupada por estos objetos.
+
+## Transcripción
 
 ![12_Ciclo_de_vida-1](images/12_Ciclo_de_vida-1.png)
 
@@ -605,31 +278,19 @@ Persona [nombre=Pepe, apellidos=Perez, edad=25, altura=180, peso=75.5]
 
 ![12_Ciclo_de_vida-4](images/12_Ciclo_de_vida-4.png)
 
-### 12.1 Ciclo de vida de un objeto
-
-En Java, cualquier objeto tiene un ciclo de vida, pasado por los estados de creación, uso y destrucción.
-
 ![12_Ciclo_de_vida-5](images/12_Ciclo_de_vida-5.png)
-
-Para la creación, solo tenemos que hacer uso del operador `new`. Es Java quien se encarga de realizar todas las operaciones necesarias en memoria.
 
 ![12_Ciclo_de_vida-6](images/12_Ciclo_de_vida-6.png)
 
-Un objeto está vivo, accesible y en uso mientras dure el ámbito en el que fue creado. Si creamos un objeto en el método `main` de una aplicación, estará *vivo* hasta que finalice la ejecución del mismo. Si por el contrario, lo creamos en el método de una otra clase, finalizará cuanto termine la ejecución del mismo.
-
 ![12_Ciclo_de_vida-7](images/12_Ciclo_de_vida-7.png)
 
-Cuando finaliza el ámbito donde fue definido un método, este se marca como *no util* y es candidato a ser liberado por el *garbage collector*, un proceso de baja prioridad de la JVM que se encarga de liberar la memoria ocupada por estos objetos.
-
-## 13. Uso de clases envoltorio 5:31 
+# 13. Uso de clases envoltorio 5:31 
 
 [Uso de clases envoltorio](pdfs/13_Uso_de_las_clases_envoltorio.pdf)
 
+## Resumen Profesor
+
 ### 13.1 Clases envoltorio
-
-![13_Uso_de_las_clases_envoltorio-1](images/13_Uso_de_las_clases_envoltorio-1.png)
-
-![13_Uso_de_las_clases_envoltorio-2](images/13_Uso_de_las_clases_envoltorio-2.png)
 
 Java nos ofrece una clase para cada uno de los tipos primitivos:
 
@@ -644,71 +305,15 @@ long | Long
 float | Float
 double | Double
 
-![13_Uso_de_las_clases_envoltorio-3](images/13_Uso_de_las_clases_envoltorio-3.png)
-
 Entre otras funcionalidades, nos ofrecen muchos métodos para transformar y operar con los tipos primitivos. Además, más adelante comprobaremos que son útiles con las colecciones y otros contenedores de objetos.
 
-### 13.2 Código
+## Transcripción
 
-*ClasesEnvoltorio.java*
+![13_Uso_de_las_clases_envoltorio-1](images/13_Uso_de_las_clases_envoltorio-1.png)
 
-```java
-/**
- *  CLASES ENVOLTORIO PARA TIPOS PRIMITIVOS
- */
-package envoltorio;
+![13_Uso_de_las_clases_envoltorio-2](images/13_Uso_de_las_clases_envoltorio-2.png)
 
-/**
- * @author 
- *
- */
-public class ClasesEnvoltorio {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		//Podemos procesar una cadena de caracteres
-		//para obtener un valor int
-		int x = Integer.parseInt("12345");		
-		System.out.println(x);
-				
-		//Podemos obtener el máximo entre dos enteros
-		System.out.println(Integer.max(x, 12346));
-		
-		//Podemos obtener la representación binaria, hexadecimal u octal de un número entero
-		System.out.println(Integer.toBinaryString(x));
-		
-		//Podemos obtener instancias de cualquier tipo con los métodos valueOf(...).
-		Long l = Long.valueOf("34597623495729346");
-		Double d = Double.valueOf("3.141592");
-		System.out.println(l);
-		System.out.println(d);
-		
-		//Podemos saber si un caracter es una letra o un número
-		char c = 'a';
-		System.out.println(Character.isAlphabetic(c));
-		System.out.println(Character.isDigit(c));
-		
-		//Podemos realizar operaciones lógicas con valores booleanos
-		System.out.println(Boolean.logicalXor(true, true));
-	}
-}
-```
-
-**SALIDA:**
-
-```sh
-12345
-12346
-11000000111001
-34597623495729346
-3.141592
-true
-false
-false
-```
+![13_Uso_de_las_clases_envoltorio-3](images/13_Uso_de_las_clases_envoltorio-3.png)
 
 ## Contenido adicional 5
 
