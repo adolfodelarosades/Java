@@ -7,7 +7,7 @@
    * 06 Manipulación de números, caracteres y otros valores IV 15:52 
    * 07 Estructura de decisión 21:22 
    * 08 Estructura de repetición 13:01 
-   * 09 Práctica: Creando una calculadora 11:13 
+   * Práctica: Creando una calculadora 11:13 
    * Contenido adicional  7
 
 # 05. Variables 16:58 
