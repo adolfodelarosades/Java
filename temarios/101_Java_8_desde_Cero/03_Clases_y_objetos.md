@@ -5,7 +5,7 @@
 * 11 Getters y setters 14:28 
 * 12 Ciclo de vida de un objeto 6:27 
 * 13 Uso de clases envoltorio 5:31 
-* 14 Contenido adicional 5
+* Contenido adicional 5
 
 # 9. Orientación de objetos 22:58
 
