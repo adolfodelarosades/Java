@@ -355,23 +355,44 @@ public class Persona {
    }
 
    public Persona(String nombre, String apellidos, int edad) {
-      this(nombre, apellidos);
+      this(nombre, apellidos); //Invoca al constructor con dos parámetros
       this.edad = edad;
    }
 }
 ```
 
-El segundo constructor de este código utiliza el primer constructor. De esta forma reutilizamos código.
+**El segundo constructor de este código utiliza el primer constructor. De esta forma reutilizamos código.**
 
 ## Transcripción
 
 ![10_Los_constructores-1](images/10_Los_constructores-1.png)
 
+Vamos a continuar con el bloque de orientación a objeto hablando de los **constructores** y lo primero que creo que merece la pena que nos detengamos en responder a la pregunta *qué significa construir un objeto*.
+
 ![10_Los_constructores-2](images/10_Los_constructores-2.png)
- 
+
+Vamos a intentar ilustrando a través del gráfico, rescatemos la sentencia de instanciación de un objeto de tipo `Persona`, de la construcción de un objeto de tipo `Persona`, realmente esto está haciendo una operación ciertamente compleja por detrás en la memoria de nuestro ordenador y es que **almacena en dos sitios diferentes**, por un lado `persona` en minúscula que hemos dicho que es el nombre del objeto, **es una referencia hacia el objeto en si es decir esa referencia no es el objeto en si sino una manera de acceder al objeto** el objeto se crea en otra zona de memoria diferente conocida como `Heat` donde básicamente lo que vamos a encontrar son objetos almacenados y se construye a través del operador de instanciación y del constructor, de manera que podemos hablar con cierta garantía de lo que es la referencia, que como veis además ocupa siempre o de manera normal mucha menos memoria, que lo que es el objeto en sí, que al ser un tipo de dato estructurado pues seguramente ocupe un tamaño en memoria bastante más grande. 
+
+Aprenderemos más adelante como para un mismo objeto podríamos incluso tener más de una referencia que nos llevará a el, nos basta ahora con que sepamos que **desde una referencia podemos acceder a un objeto** y que esta es la secuencia de operaciones que sucede cuando nosotros construimos un objeto, instanciamos un objeto. 
+
 ![10_Los_constructores-3](images/10_Los_constructores-3.png)
 
+La construcción de los objetos se hace a través de **los métodos constructores, son unos métodos especiales**, en este caso hemos usado un constructor muy básico, **el constructor por defecto** de `Persona`, es tan básico que ni siquiera lo hemos tenido que implementar, habrá momentos en el que no sirva el constructor por defecto, sin embargo será muy natural que nosotros necesitemos crear constructores, implementar constructores que sean diferentes al por defecto y que nos sirvan para inicializar valores.
+
+Como decíamos antes los constructores son métodos especiales, no se invocan de cualquier manera, requieren del uso del operador `new`, se ejecutan para crear objetos, es decir se ejecutan solamente en ese momento, deben servir también para inicializar los valores de las propiedades del objeto, lo normal es que sean públicos, sera muy raro el caso donde no queramos que lo sea, veremos que pueden recibir argumentos o no recibirlos, los argumentos podrían servir para dar un valor inicial a sus propiedades, también podremos ver que puede haber más de un constructor, es decir puede haber lo que se conoce como **sobrecarga de constructores** y por último lo que más suele gustar a los programadores que empiezan es que Eclipse nos ayuda tanto, que incluso no tenemos que escribirlo nosotros sino que podemos generarlo.
+
+
+AQUIIIII
+
+
 ![10_Los_constructores-4](images/10_Los_constructores-4.png)
+
+vale vamos a ver aquí alguno de los constructores que tenemos y no encontramos con la palabra reservada di que es necesaria conocerla antes de vernos cosas hablando de los c****** primero que
+
+
+ 
+
+
 
 ## 11. Getters y setters 14:28 
 
