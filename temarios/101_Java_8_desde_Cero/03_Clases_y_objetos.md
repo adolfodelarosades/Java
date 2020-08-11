@@ -954,9 +954,111 @@ Entre otras funcionalidades, nos ofrecen muchos métodos para transformar y oper
 
 ![13_Uso_de_las_clases_envoltorio-1](images/13_Uso_de_las_clases_envoltorio-1.png)
 
+Último capítulo en el que hemos comenzado con la orientación a objetos, vamos a ver el uso de las **clases envoltorio** para los tipos primitivos y es que aparejado a cada uno de los tipos de datos primitivos que Java nos ofrece, tenemos una clase, ya definida entre esas miles de clases que Java nos ofrece y que poco a poco la vamos a ir conociendo.
+
 ![13_Uso_de_las_clases_envoltorio-2](images/13_Uso_de_las_clases_envoltorio-2.png)
 
+Java tiene una clase para cada uno de esos tipos de datos primitivos, se conocen como clases envoltorio porque envuelven a un valor primitivo, para el tipo de dato primitivo `boolean` tenemos la clase `Boolean` para `char` tenemos la clase `Character` para `byte` `Byte`, cómo podemos ver las clases siempre van en mayúscula utilizando su notación de UpperCamelCase, para `short` tendría su tipo `Short` para `int` la clase envoltorio se llama `Integer` tenemos `Long`, `Float` y `Double`.
+
 ![13_Uso_de_las_clases_envoltorio-3](images/13_Uso_de_las_clases_envoltorio-3.png)
+
+Estas clases envoltorio nos van a aportar una serie de métodos que son interesantes para transformar, bien un valor primitivo en una cadena de caracteres, ya alguna la hemos utilizado sin saberlo, por ejemplo en el caso de los literales y de las operaciones con números enteros utilizamos la clase `Integer` para transformar un valor entero en la representación binaria de un número entero como una cadena de caracteres y también nos va a permitir **transformar una cadena de caracteres en un valor primitivo**, en lo que se conoce como el **proceso de parseo** se va a procesar, a pasear una cadena de caracteres, todos los caracteres de esa cadena para ver qué valor de tipo primitivo está representando. 
+
+Veremos más adelante en capítulos sucesivos que todas estas clases son útiles sobretodo si vamos a trabajar con con colecciones, genéricos y con contenedores de objetos, aunque está bien que las conozcamos ahora para que podamos ir utilizándolas.
+
+### :computer: `101-13-ClasesEnvoltorio`
+
+Veamos algún ejemplo sencillo.
+
+*`ClasesEnvoltorio`*
+
+```java
+/**
+ *  CLASES ENVOLTORIO PARA TIPOS PRIMITIVOS
+ */
+package envoltorio;
+
+public class ClasesEnvoltorio {
+
+   public static void main(String[] args) {
+      // Podemos procesar una cadena de caracteres
+      // para obtener un valor int
+      int x = Integer.parseInt("12345");
+      System.out.println(x);
+
+      // Podemos obtener el máximo entre dos enteros
+      System.out.println(Integer.max(x, 12346));
+
+      // Podemos obtener la representación binaria, hexadecimal u ocatl de un número
+      // entero
+      System.out.println(Integer.toBinaryString(x));
+
+      // Podemos obtener instancias de cualquier tipo con los métodos valueOf(...).
+      Long l = Long.valueOf("34597623495729346");
+      Double d = Double.valueOf(3.141592);
+      System.out.println(l);
+      System.out.println(d);
+
+      // Podemos saber si un caracter es una letra o un número
+      char c = 'a';
+      System.out.println(Character.isAlphabetic(c));
+      System.out.println(Character.isDigit(c));
+
+      // Podemos realizar operaciones lógicas con valores booleanos
+      System.out.println(Boolean.logicalXor(true, true));
+   }
+}
+```
+
+Fijemosnos en este caso cómo podemos almacenar en una variable entera el procesamiento de una cadena de caracteres, en este caso es literal "12345" y es la clase `Integer` a través de su método `parseInt` la que nos da esa transformación.
+
+```java
+int x = Integer.parseInt("12345");
+```
+
+Siempre en Eclipse si nos ponemos encima de un método o de algún otro valor se nos pondra la ayuda de Java para ese método.
+
+```java
+System.out.println(Integer.max(x, 12346));
+```
+
+Podríamos obtener mediante el método `max` de `Integer` el valor máximo entre dos objetos.
+
+```java
+System.out.println(Integer.toBinaryString(x));
+```
+
+Podemos imprimir la representación como binario de un número entero.
+
+```java
+Long l = Long.valueOf("34597623495729346");
+Double d = Double.valueOf(3.141592);
+```
+
+El método `valueOf` nos van a permitir obtener instancias de cualquier tipo de estas clases Wrapper que ya digo que puede que en algún determinado caso no sean útiles. El primero transforma un valor literar en un `Long` que almacenaría en esta instancia de la clase `Long` y lo mismo pasaría con `Double`.
+
+```java
+System.out.println(Character.isAlphabetic(c));
+System.out.println(Character.isDigit(c));
+```
+
+En el caso de `Character` tenemos métodos que nos van a permitir saber si un determinado carácter es una letra o un dígito, comparaciones que en algún momento puede que no sean útiles.
+
+
+```java
+System.out.println(Boolean.logicalXor(true, true));
+```
+
+Y operaciones por ejemplo a nivel Booleano hacer el Xor lógico de los valores true, nos daría como resultado falso. 
+
+Todas estas clase envoltorio nos proveen de alguna serie de métodos que pueden ser útiles para que podamos nosotros utilizar en en nuestra aplicación.
+
+Ejecutemos el programa.
+
+![13-01](images/13-01.png)
+
+Con esto terminamos este capítulo de orientación objeto.
+
 
 ## Contenido adicional 5
 
