@@ -607,7 +607,6 @@ Continuemos ahora conociendo los métodos, los métodos que conforman el comport
 
 Podemos ver los métodos como una caja, que recibe una serie de valores de entrada, en los cuales dentro se suceden una serie de operaciones y que pueden producir entre 0 o 1 valo de salida, siendo abajo a la izquierda, un método sin valores de salida, el que tenemos definido `public void metodo` no tendría ningún valor de salida y si quisiéramos tener algún valor de salida, tendríamos que indicar el tipo de valor de salida, el tipo de retorno y dentro del método, una de las sentencias posiblemente la última, aunque no es obligatorio será el uso de la palabra reservada `return` devolviendo un valor, bien literal o bien de una variable, del tipo de dato que hemos dicho que va a ser el tipo de retorno de ese método. 
 
-
 ![11_Propiedades_y_metodos-7](images/11_Propiedades_y_metodos-7.png)
 
 Dentro de los métodos hay algunos métodos que son especiales entre ellos vamos a presentar ahora los métodos `getters/setters` si bien son especiales, son los más sencillos, porque **son los métodos que nos permiten implementar la encapsulación** de forma que si declaramos las propiedades de nuestra clase como privadas, nos van a permitir que tengamos un método que nos devuelva el estado actual de una propiedad, el valor actual de una propiedad o que nos permitan modificar el valor de esta propiedad. 
@@ -681,7 +680,197 @@ Al igual que antes desde Source tenemos aquí la opción de generar getter y set
 
 ![11-02](images/11-02.png)
 
-Ahora tan solo tendríamos que seleccionar para que atributos, para que propiedades, queremos generar los `getters/setters` he incluso podemos diferenciar si queremos crear solamente el `get` o solamente el `set` para un determinado atributo, en nuestro caso como queremos hacerlo para todos seleccionamos todos, dejariamos el resto de opciones por defecto, podríamos indicar otra posición, el que agrupe primero `setters` y luego `getters` o que los agrupe por propiedades, el modificador de acceso lo dejamos ahora todo por defecto.
+Ahora tan solo tendríamos que seleccionar para que atributos, para que propiedades, queremos generar los `getters/setters` he incluso podemos diferenciar si queremos crear solamente el `get` o solamente el `set` para un determinado atributo, en nuestro caso como queremos hacerlo para todos seleccionamos todos, dejariamos el resto de opciones por defecto, podríamos indicar otra posición, el que agrupe primero `setters` y luego `getters` o que los agrupe por propiedades, el modificador de acceso lo dejamos ahora todo por defecto. Esto es maravilloso porque nos ha evitado el tener que escribir todos estos métodos que son casi siempre iguales y que si los escribimos nosotros solamente va a dar pie a que nos podemos equivocar en algo y cómo está es una manera ahorrar tiempo.
+
+Como decía el método `toString` es un método especial, ya hablaremos de herencia y de la clase `Object` pero decir que lo podemos autogeneral indicándole que valores queremos incluir.
+
+![11-03](images/11-03.png)
+
+![11-04](images/11-04.png)
+
+```java
+@Override
+public String toString() {
+   return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" + altura + ", peso=" + peso + "]";
+}
+```
+
+Ya hablaremos de herencia y de la clase `Object` y el motivo por el cual Eclipse esta añadiendo la anotación `@Override` para sobreescribir, lo explicaremos en el capítulo de Herencia, nos tenemos que quedar con que **el método `toString` es un método especial que siempre se llama igual, lo que hace es transformar un objeto, un tipo de dato estructurado en una cadena de caracteres** a través de los valores de sus propiedades.
+
+¿Como podríamos crear una `Persona`?
+
+```java
+Persona p = new Persona();
+		
+p.setNombre("Pepe");
+p.setApellidos("Perez");
+p.setAltura(180);
+p.setEdad(25);
+p.setPeso(75.5f);
+	
+System.out.println(p);
+```
+
+Incluso no usando el constructor que recibe parámetros podríamos setear el valor de los distintos atributos de esta persona mediante los métodos setters para indicar el nombre, los apellidos, la altura, la edad o el peso y por último podríamos imprimir el objeto.
+
+
+### :computer: `101-11-PropiedadesMetodos`
+
+*`Persona`*
+
+```java
+/**
+ * Definición e implementación de una clase
+ */
+package propiedadesymetodos;
+
+public class Persona {
+   // Estructura, conocida como propiedades o atributos
+   private String nombre;
+   private String apellidos;
+   private int edad;
+   private int altura;
+   private float peso;
+
+   // Constructor vacío
+   public Persona() {
+      this.nombre = "desconocido";
+      this.apellidos = "desconocido";
+      this.edad = 0;
+   }
+
+   // Constructor con algunos parámetros
+   public Persona(String nombre, String apellidos) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+   }
+
+   public Persona(String nombre, String apellidos, int edad) {
+      this(nombre, apellidos);
+      this.edad = edad;
+   }
+
+   // Comportamiento, conocido como métodos
+   public void caminar() {
+      System.out.println("Estoy caminando");
+   }
+
+   public void hablar() {
+      System.out.println("Estoy hablando");
+   }
+
+   public void nacer() {
+      System.out.println("¡¡¡Acabo de nacer!!!");
+   }
+
+   public void morir() {
+      System.out.println("¡Hasta más ver!");
+   }
+
+   public void presentacion() {
+      System.out.println("Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad.");
+	}
+
+   public void saludo(String mensaje) {
+      System.out.println("Hola, soy " + this.nombre + " " + this.apellidos + ", y quiero saludarte diciéndote " + mensaje);
+   }
+
+   public String obtenerNombreCompleto() {
+      return this.nombre + " " + this.apellidos;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getApellidos() {
+      return apellidos;
+   }
+
+   public void setApellidos(String apellidos) {
+      this.apellidos = apellidos;
+   }
+
+   public int getEdad() {
+      return edad;
+   }
+
+   public void setEdad(int edad) {
+      this.edad = edad;
+   }
+
+   public int getAltura() {
+      return altura;
+   }
+
+   public void setAltura(int altura) {
+      this.altura = altura;
+   }
+
+   public float getPeso() {
+      return peso;
+   }
+
+   public void setPeso(float peso) {
+      this.peso = peso;
+   }
+
+   @Override
+   public String toString() {
+      return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" + altura + ", peso=" + peso + "]";
+   }
+}
+```
+
+*`PropiedadesMetodos`*
+
+```java
+/**
+ *  PROPIEDADES Y MÉTODOS DE UNA CLASE
+ */
+package propiedadesymetodos;
+
+public class PropiedadesMetodos {
+
+   public static void main(String[] args) {
+      Persona p = new Persona();
+		
+      p.setNombre("Pepe");
+      p.setApellidos("Perez");
+      p.setAltura(180);
+      p.setEdad(25);
+      p.setPeso(75.5f);
+		
+      System.out.println(p);
+
+   }
+}
+```
+
+Vamos a ejecutar este ejemplo:
+
+![11-05](images/11-05.png)
+
+Como podemos comprobar se imprime lo siguiente al invocar al método `toString`
+
+```sh
+Persona [nombre=Pepe, apellidos=Perez, edad=25, altura=180, peso=75.5]
+```
+
+Si comentamos el método `toString` la salida que tendríamos sería:
+
+![11-06](images/11-06.png)
+
+```sh
+propiedadesymetodos.Persona@6ff3c5b5
+```
+
+
+mamá ejecutar este ejemplo comprobar se imprime invocando al método to string una persona de nombre Pepe Pérez de 25 años de metro 80 de altura y 75 kg antes de finalizar deciros que si comentamos el método to string como el de antes la impresión de la referencia de un objeto no nos va a dar error simplemente que lo que se va imprimiendo vamos a entender poco porque directamente se imprime el nombre de la clase incluido el nombre del paquete y su posición en memoria vale esto ciertamente no ahora mismo no nos sirve de gran cosa sin embargo su representación como cadena de caracteres es bastante más útil que su posición en memoria y con esto terminamos el capítulo de propiedades
 
 
 
