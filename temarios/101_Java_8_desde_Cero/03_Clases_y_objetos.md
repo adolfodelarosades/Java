@@ -950,6 +950,41 @@ double | Double
 
 Entre otras funcionalidades, nos ofrecen muchos métodos para transformar y operar con los tipos primitivos. Además, más adelante comprobaremos que son útiles con las colecciones y otros contenedores de objetos.
 
+## Documentación Oficial
+
+[Class Boolean](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Boolean.html)
+
+![13-02](images/13-02.png)
+
+[Character](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Character.html)
+
+![13-03](images/13-03.png)
+
+[Byte](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Byte.html)
+
+![13-04](images/13-04.png)
+
+[Short](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Short.html)
+
+![13-05](images/13-05.png)
+
+[Integer](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Integer.html)
+
+![13-06](images/13-06.png)
+
+[Long](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Long.html)
+
+![13-07](images/13-07.png)
+
+[Float](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Float.html)
+
+![13-08](images/13-08.png)
+
+[Double](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Double.html)
+
+![13-09](images/13-09.png)
+
+
 ## Transcripción
 
 ![13_Uso_de_las_clases_envoltorio-1](images/13_Uso_de_las_clases_envoltorio-1.png)
@@ -1058,7 +1093,6 @@ Ejecutemos el programa.
 ![13-01](images/13-01.png)
 
 Con esto terminamos este capítulo de orientación objeto.
-
 
 ## Contenido adicional 5
 
