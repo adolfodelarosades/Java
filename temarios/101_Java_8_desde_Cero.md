@@ -25,7 +25,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * 09 Práctica: Creando una calculadora 11:13 
    * Contenido adicional  7
    
-3. [Clases y objetos](101_Java_8_desde_Cero/03_Clases_y_objetos.md) 58m
+3. [Clases y objetos](101_Java_8_desde_Cero/03_Clases_y_objetos.md) 58m :+1:
    * 1 Orientación de objetos 22:58 
    * 1 Los constructores 9:07 
    * 1 Getters y setters 14:28 
