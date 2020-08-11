@@ -601,20 +601,96 @@ Además no es obligatorio pero usualmente se definen primero las propiedades y l
 
 ![11_Propiedades_y_metodos-5](images/11_Propiedades_y_metodos-5.png)
 
-Continuemos ahora conociendo los métodos, los métodos que conforman el comportamiento de la clase van a tener una estructura algo parecida si bien es posible que podamos incluir algunos elementos adicionales. Como es natural en principio debería llevar **los modificadores de acceso** del método público, privado protegido, por defecto **adicionalmente** podremos utilizar alguna de las palabras reservadas que tenemos también aquí y que darán **un carácter especial u otro al método**, por ahora no las vamos a conocer pero está bien que sepamos que pueden estar ahí por si nos lo encontramos, método estático, métodos abstractos, método finales, nativos, sincronizados, tenemos un gran conjunto de ellos podemos pasamos ahora a los **tipos de retorno** y es que los métodos los podemos hacer para que no devuelvan ningún valor o los podemos hacer para que el resultado produzca algo, lo que tenemos que indicar cuando definimos un método es el el tipo de dato que va a devolver, sino devuelve nada diremos que devuelve vacío `void`, si devuelve puede devolver un tipo primitivo como char, int, float, double, String e incluso otra clase, a continuación tendríamos el nombre del método
-
-
-
-
-
-
-
-
-
+Continuemos ahora conociendo los métodos, los métodos que conforman el comportamiento de la clase van a tener una estructura algo parecida si bien es posible que podamos incluir algunos elementos adicionales. Como es natural en principio debería llevar **los modificadores de acceso** del método público, privado protegido, por defecto **adicionalmente** podremos utilizar alguna de las palabras reservadas que tenemos también aquí y que darán **un carácter especial u otro al método**, por ahora no las vamos a conocer pero está bien que sepamos que pueden estar ahí por si nos lo encontramos, método estático, métodos abstractos, método finales, nativos, sincronizados, tenemos un gran conjunto de ellos podemos pasamos ahora a los **tipos de retorno** y es que los métodos los podemos hacer para que no devuelvan ningún valor o los podemos hacer para que el resultado produzca algo, lo que tenemos que indicar cuando definimos un método es el el tipo de dato que va a devolver, sino devuelve nada diremos que devuelve vacío `void`, si devuelve puede devolver un tipo primitivo como char, int, float, double, String e incluso otra clase, a continuación tendríamos el nombre del método que también tiene que ser autodescriptivo y seguir la notación camelCase, a continuación vendría entre paréntesis una lista separada por comas de los parámetros que recibe este método, de todo esto de la recepción de este parámetro hablaremos con detenimiento más adelante pero que sepáis que siempre es un par indicando el tipo del parámetro y a continuación el nombre del parámetro y cuando cerramos el paréntesis, cerrando la lista de parámetros que vamos a recibir, entre llaves abriendo y cerrando un bloque, vendría el cuerpo de ese método, es decir la implementación de este método. 
 
 ![11_Propiedades_y_metodos-6](images/11_Propiedades_y_metodos-6.png)
 
+Podemos ver los métodos como una caja, que recibe una serie de valores de entrada, en los cuales dentro se suceden una serie de operaciones y que pueden producir entre 0 o 1 valo de salida, siendo abajo a la izquierda, un método sin valores de salida, el que tenemos definido `public void metodo` no tendría ningún valor de salida y si quisiéramos tener algún valor de salida, tendríamos que indicar el tipo de valor de salida, el tipo de retorno y dentro del método, una de las sentencias posiblemente la última, aunque no es obligatorio será el uso de la palabra reservada `return` devolviendo un valor, bien literal o bien de una variable, del tipo de dato que hemos dicho que va a ser el tipo de retorno de ese método. 
+
+
 ![11_Propiedades_y_metodos-7](images/11_Propiedades_y_metodos-7.png)
+
+Dentro de los métodos hay algunos métodos que son especiales entre ellos vamos a presentar ahora los métodos `getters/setters` si bien son especiales, son los más sencillos, porque **son los métodos que nos permiten implementar la encapsulación** de forma que si declaramos las propiedades de nuestra clase como privadas, nos van a permitir que tengamos un método que nos devuelva el estado actual de una propiedad, el valor actual de una propiedad o que nos permitan modificar el valor de esta propiedad. 
+
+Los métodos `getters` servirán para tomar el valor de una determinada propiedad y los métodos `setters` para establecer, para modificar el valor de esa propiedad. Como buena noticia al igual que los constructores con parámetros, como son métodos muy sencillos Eclipse nos permite auto generarlos de una tacada podemos autogenerarlos todos.
+
+Otro método especial que también vamos a conocer y que por suerte también se puede autogenerar con el IDE es **el método `toString` un método que nos va a permitir transformar un objeto a una representación del mismo en una cadena de caracteres**, para que, para que podamos imprimirlo, de forma que en determinados contextos como por ejemplo intentar imprimir el objeto dentro de una sentencia `System.out.println` no tenemos ni siquiera que invocar ese objeto, sino que directamente si existe lo va a invocar, sino lo que nos imprimiría sería la referencia al valor de la referencia, la posición de memoria de ese objeto.
+
+Veamos algunos ejemplos, retomamos de nuevo a la clase `Persona` igual como hemos visto antes teníamos varios constructores, podemos tener métodos cualquiera en este caso son todos públicos, no tienen valor de retorno y bueno ya los habíamos implementado antes.
+
+```java
+   // Constructor vacío
+   public Persona() {
+      this.nombre = "desconocido";
+      this.apellidos = "desconocido";
+      this.edad = 0;
+   }
+
+   // Constructor con algunos parámetros
+   public Persona(String nombre, String apellidos) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+   }
+
+   public Persona(String nombre, String apellidos, int edad) {
+      this(nombre, apellidos);
+      this.edad = edad;
+   }
+
+   // Comportamiento, conocido como métodos
+   public void caminar() {
+      System.out.println("Estoy caminando");
+   }
+
+   public void hablar() {
+      System.out.println("Estoy hablando");
+   }
+
+   public void nacer() {
+      System.out.println("¡¡¡Acabo de nacer!!!");
+   }
+
+   public void morir() {
+      System.out.println("¡Hasta más ver!");
+   }
+
+   public void presentacion() {
+      System.out.println("Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad.");
+   }
+
+   public void saludo(String mensaje) {
+      System.out.println("Hola, soy " + this.nombre + " " + this.apellidos + ", y quiero saludarte diciéndote " + mensaje);
+   }
+
+   public String obtenerNombreCompleto() {
+      return this.nombre + " " + this.apellidos;
+   }
+```
+
+Otro métodos llamados `presentacion()` y `saludo(String mensaje)`, `presentacion()` también es vacío pero en este caso nos va a servir para qué una persona se pueda presentar, dando el valor de algunos de sus valores, fijarse como usamos el puntero `this` para dentro de un método hacer referencia a las propiedades de este objeto en particular `"Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad."`.
+
+`public void saludo(String mensaje)` sería un método que recibiría un argumento, no tendría tipo de retorno, pero si recoge el valor `mensaje` que podemos utilizar dentro para por ejemplo dar un mensaje en particular a alguna persona.
+
+`public String obtenerNombreCompleto()` este método por ejemplo, sería el ejemplo de un método que si tiene un tipo de retorno `String` y que nos fuerza a poner este tipo de retorno, a que usemos la palabra reservada `return` de hecho si comentamos la línea `//return this.nombre + " " + this.apellidos;` vemos como Eclipse ya nos va orientando y nos dice o una de dos, o añades una sentencias de `return` para devolver un valor o cambias el tipo de retorno dato a `void`, en este caso lo que queremos devolver el nombre completo de la persona, concatenando el nombre y los apellidos.
+
+Abajo irían los `getters/setters` que para ver su autogeneración nos colocamos donde los queremos insertar y accedemos a la opción:
+
+![11-01](images/11-01.png)
+
+Al igual que antes desde Source tenemos aquí la opción de generar getter y setter. 
+
+![11-02](images/11-02.png)
+
+Ahora tan solo tendríamos que seleccionar para que atributos, para que propiedades, queremos generar los `getters/setters` he incluso podemos diferenciar si queremos crear solamente el `get` o solamente el `set` para un determinado atributo, en nuestro caso como queremos hacerlo para todos seleccionamos todos, dejariamos el resto de opciones por defecto, podríamos indicar otra posición, el que agrupe primero `setters` y luego `getters` o que los agrupe por propiedades, el modificador de acceso lo dejamos ahora todo por defecto.
+
+
+
+
+
+
+
+
+
 
 ![11_Propiedades_y_metodos-8](images/11_Propiedades_y_metodos-8.png)
 
