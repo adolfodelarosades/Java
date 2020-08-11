@@ -381,18 +381,139 @@ La construcción de los objetos se hace a través de **los métodos constructore
 
 Como decíamos antes los constructores son métodos especiales, no se invocan de cualquier manera, requieren del uso del operador `new`, se ejecutan para crear objetos, es decir se ejecutan solamente en ese momento, deben servir también para inicializar los valores de las propiedades del objeto, lo normal es que sean públicos, sera muy raro el caso donde no queramos que lo sea, veremos que pueden recibir argumentos o no recibirlos, los argumentos podrían servir para dar un valor inicial a sus propiedades, también podremos ver que puede haber más de un constructor, es decir puede haber lo que se conoce como **sobrecarga de constructores** y por último lo que más suele gustar a los programadores que empiezan es que Eclipse nos ayuda tanto, que incluso no tenemos que escribirlo nosotros sino que podemos generarlo.
 
+![10_Los_constructores-4](images/10_Los_constructores-4.png) 
 
-AQUIIIII
+La palabra reservada `this` es necesaria conocerla antes de ver algún ejemplo de constructores, para poder diferenciar muy bien en el caso sobre todo de los constructores cuando estamos recibiendo un argumento, para poder diferenciar muy bien que estamos haciendo referencia de dentro del constructor a una propiedad o estamos haciendo referencia a uno de los valores que hemos recibido como argumento tenemos la palabra reservada `this`.
+
+`this` es una palabra que nos hace falta para hacer referencia a un objeto desde dentro, de sí mismo, nos va ayudar mucho a poder realizar lo que conocíamos como encapsulación, a que un objeto se conozca a sí mismo.
+
+### :computer: `101-10-Constructores`
+
+*`Persona`*
+
+```java
+/**
+ * Definición e implementación de una clase
+ */
+package constructores;
+
+public class Persona {
+   // Estructura, conocida como propiedades o atributos
+   private String nombre;
+   private String apellidos;
+   private int edad;
+   private int altura;
+   private float peso;
+
+   // Constructor vacío
+   public Persona() {
+      this.nombre = "desconocido";
+      this.apellidos = "desconocido";
+      this.edad = 0;
+   }
+
+   // Constructor con algunos parámetros
+   public Persona(String nombre, String apellidos) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+   }
+
+   public Persona(String nombre, String apellidos, int edad) {
+      this(nombre, apellidos);
+      this.edad = edad;
+   }
+
+   public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+      this.edad = edad;
+      this.altura = altura;
+      this.peso = peso;
+   }
+
+   // Comportamiento, conocido como métodos
+   void caminar() {
+      System.out.println("Estoy caminando");
+   }
+
+   void hablar() {
+      System.out.println("Estoy hablando");
+   }
+
+   void nacer() {
+      System.out.println("¡¡¡Acabo de nacer!!!");
+   }
+
+   void morir() {
+      System.out.println("¡Hasta más ver!");
+   }
+
+   void presentacion() {
+      System.out.println("Mi nombre es " + this.nombre + " " + this.apellidos + ", y tengo " + this.edad + " años de edad.");
+   }
+}
+```
+
+Para la clase `Persona` hemos añadido algunos modificadores de acceso, la clase es pública, cualquiera puede acceder a ella, sin embargo su estructura pasa a ser privada, estamos empezando a aplicar encapsulación, no cualquier objeto puede acceder a las propiedades, a la estructura de un objeto `Persona`, el mismo si y para hacerlo utilizamos el puntero `this`.
+
+Vamos a hacer varios constructores, el primer constructor será un **constructor** de los que se llaman **vacío**, se llama vacío porque no va a incluir ningún argumento, no va a recibir ningún argumento, en este caso bueno para no utilizar valores `null` en las distintas propiedades `String` lo que podemos hacer es inicializarlo a una serie de valores por defecto, en este caso por ejemplo `desconocido`.
+
+Tenemos algunos otros constructores, cómo podéis comprobar **un consultor siempre se llama como la clase en la cual está definido**, algunos constructores con parámetros. ¿Cuántos constructores podemos tener? podemos tener varios, siempre se llaman igual y para que podamos diferenciar uno de otro, siempre tienen que tener o un número diferente de argumentos, en nuestro ejemplo tenemos un constructor sin argumentos otro que tiene dos y otro que tiene tres, o si tuvieran el mismo número de argumentos, los tipos de los datos que reciben deberían ser diferentes.
+
+Los constructores con argumentos nos permiten inicializar algunas propiedades como el nombre o los apellidos y el de tres argumentos permite inicializar el nombre, los apellidos y la edad.
+
+En el constructor con tres argumentos:
+
+```java
+public Persona(String nombre, String apellidos, int edad) {
+   this(nombre, apellidos);
+   this.edad = edad;
+}
+```
+
+Tiene una expresión algo rara:
+
+```java
+this(nombre, apellidos);
+```
+
+y es que, si se nos da el caso de que tenemos un constructor con un número de parámetros y en un constructor posterior vamos a realizar esa misma operación, es decir en este caso construir un objeto `Persona` con nombre y apellidos y algún atributo adicional, podemos hacer referencia al constructor anterior, desde aquí dentro mediante esta estructura, para no tener que volver a escribir el bloque de código, alguien dirá que se podría copiar y pegar, pero veremos con el devenir de las diferentes lecciones que **copiar y pegar no es una buena práctica sino que es mejor práctica reutilizar el código** por lo que usando el `this` de esta manera podríamos reutilizariamos el código y al construir este objeto de `Persona` con tres argumentos utilizaríamos este constructor, pero este a su vez usa el constructor con dos argumentos.
+
+Para que Eclipse nos ayude con la creación de constructores usamos la opción 
 
 
-![10_Los_constructores-4](images/10_Los_constructores-4.png)
+![10-01](images/10-01.png)
 
-vale vamos a ver aquí alguno de los constructores que tenemos y no encontramos con la palabra reservada di que es necesaria conocerla antes de vernos cosas hablando de los c****** primero que
+![10-02](images/10-02.png)
 
+Y se insertara el constructor con las propiedades indicadas.
 
- 
+Para usar la clase `Persona` y sus diferentes constructores tenemos la siguiente clase.
 
+*`Constructores`*
 
+```java
+public class Constructores {
+   public static void main(String[] args) {
+
+      Persona johndoe = new Persona();
+      johndoe.presentacion();
+
+      Persona manuel = new Persona("Manuel", "Ruiz González");
+      manuel.presentacion();
+
+      Persona antonio = new Persona("Antonio", "Castillo Real", 31);
+      antonio.presentacion();
+      
+   }
+}
+```
+
+Al ejecutar el programa tenemos.
+
+![10-03](images/10-03.png)
+
+Con esto terminamos el capítulo de constructores y uso del puntero `this` y nos lanzamos de lleno al uso de métodos y a la definición de propiedades de una clase.
 
 ## 11. Getters y setters 14:28 
 
