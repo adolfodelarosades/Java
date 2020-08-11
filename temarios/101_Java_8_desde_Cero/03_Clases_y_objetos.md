@@ -682,6 +682,8 @@ Al igual que antes desde Source tenemos aquí la opción de generar getter y set
 
 Ahora tan solo tendríamos que seleccionar para que atributos, para que propiedades, queremos generar los `getters/setters` he incluso podemos diferenciar si queremos crear solamente el `get` o solamente el `set` para un determinado atributo, en nuestro caso como queremos hacerlo para todos seleccionamos todos, dejariamos el resto de opciones por defecto, podríamos indicar otra posición, el que agrupe primero `setters` y luego `getters` o que los agrupe por propiedades, el modificador de acceso lo dejamos ahora todo por defecto. Esto es maravilloso porque nos ha evitado el tener que escribir todos estos métodos que son casi siempre iguales y que si los escribimos nosotros solamente va a dar pie a que nos podemos equivocar en algo y cómo está es una manera ahorrar tiempo.
 
+![11_Propiedades_y_metodos-8](images/11_Propiedades_y_metodos-8.png)
+
 Como decía el método `toString` es un método especial, ya hablaremos de herencia y de la clase `Object` pero decir que lo podemos autogeneral indicándole que valores queremos incluir.
 
 ![11-03](images/11-03.png)
@@ -869,19 +871,9 @@ Si comentamos el método `toString` la salida que tendríamos sería:
 propiedadesymetodos.Persona@6ff3c5b5
 ```
 
+La impresión de la referencia de un objeto no nos va a dar error, simplemente que lo que se va imprimir vamos a entenderlo poco, porque directamente se imprime el nombre de la clase, incluido el nombre del paquete y su posición en memoria, esto ciertamente no nos sirve de gran cosa, sin embargo su representación como cadena de caracteres es bastante más útil que su posición en memoria.
 
-mamá ejecutar este ejemplo comprobar se imprime invocando al método to string una persona de nombre Pepe Pérez de 25 años de metro 80 de altura y 75 kg antes de finalizar deciros que si comentamos el método to string como el de antes la impresión de la referencia de un objeto no nos va a dar error simplemente que lo que se va imprimiendo vamos a entender poco porque directamente se imprime el nombre de la clase incluido el nombre del paquete y su posición en memoria vale esto ciertamente no ahora mismo no nos sirve de gran cosa sin embargo su representación como cadena de caracteres es bastante más útil que su posición en memoria y con esto terminamos el capítulo de propiedades
-
-
-
-
-
-
-
-
-
-
-![11_Propiedades_y_metodos-8](images/11_Propiedades_y_metodos-8.png)
+Con esto terminamos el capítulo de propiedades.
 
 # 12. Ciclo de vida de un objeto 6:27 
 
