@@ -180,6 +180,8 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [howtodoinjava] (https://howtodoinjava.com/)
 
+[Test Your Java Knowledge With FREE Sample Questions](https://blogs.oracle.com/certification/test-your-java-knowledge-with-free-sample-questions)
+
 ### Java Web to AWS
 
 [Video](https://www.youtube.com/watch?time_continue=1181&v=Ozc5Yu_IcaI&feature=emb_logo)
