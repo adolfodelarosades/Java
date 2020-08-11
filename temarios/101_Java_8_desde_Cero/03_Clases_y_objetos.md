@@ -481,7 +481,6 @@ y es que, si se nos da el caso de que tenemos un constructor con un número de p
 
 Para que Eclipse nos ayude con la creación de constructores usamos la opción 
 
-
 ![10-01](images/10-01.png)
 
 ![10-02](images/10-02.png)
@@ -575,11 +574,28 @@ Se trata de un método especial, que sirve para obtener, en un solo valor de tip
 
 ![11_Propiedades_y_metodos-1](images/11_Propiedades_y_metodos-1.png)
 
+Continuamos con el uso de clases y objetos y vamos a profundizar un poco en las propiedades y en los métodos de una clase.
+
 ![11_Propiedades_y_metodos-2](images/11_Propiedades_y_metodos-2.png)
+
+Cuando hablamos de objetos en la lección de orientación a objetos como tal hablamos que **los objetos vienen definidos por un lado su estructura y por otro lado su comportamiento** hablando ya de objetos en Java, de clases y objetos en Java, podemos hacer una cazación perfecta entre **la estructura de un objeto de una clase con los atributos que va a tener esta clase y entre el comportamiento y los diferentes métodos**, de manera bueno que ya tendríamos identificada cada una de las partes que tenía ese objeto a nivel teórico.
 
 ![11_Propiedades_y_metodos-3](images/11_Propiedades_y_metodos-3.png)
 
+Si recordáis la encapsulación hacía que un objeto ocultara gran parte de su estructura ofreciendo solamente una pequeña parte a los demás, pues bien si unimos este concepto con el de paso de mensaje, podemos comprobar como el trato entre objeto se realiza a través de los métodos, es decir un objeto interacciona con otro invocando uno de esos métodos, ya lo hemos visto también utilizando en alguno de las 
+lecciones anteriores la clase persona e invocando sus métodos, lo normal es que los atributos de un objeto se oculten haciendolos privado y se consulten o se editen a través de una serie de métodos que veremos y conoceremos a continuación.
+
 ![11_Propiedades_y_metodos-4](images/11_Propiedades_y_metodos-4.png)
+
+Pacemos primero por las propiedades, las propiedades conforman la estructura de una clase y la sintaxis normal de la declaración de una propiedad dentro de una clase tendrá siempre para cada propiedad 3 partes, **el modificador del atributos su modificador de acceso** si es privado, público, si es por defecto o protected que lo estudiaremos en herencia, **el tipo de datos del atributo** si es un tipo de dato primitivo como  char, int, float, double, String e incluso otra clase, porque veremos que las clases se pueden componer, una y otra y por último tendremos **el nombre de ese atributo** como tal seguirá siempre las mismas reglas que conocemos y que estén en notación camelCase y terminaría con un punto y coma. Ya hemos visto la declaración de algunas propiedades como tenemos por aquí dentro de la clase `Persona`
+
+
+además no es obligatorio pero usualmente se define primero las propiedades y luego los método tenemos las propiedades de una persona es decir su modificador de acceso su tipo y el nombre de la propiedad; a continuación en otra línea la siguiente y la siguiente y así todas las propiedades de continuemos ahora conociendo los metros un método el comportamiento de la clase va a tener una estructura algo parecida si bien es posible que podamos incluir algunos elementos bien como es natural en principio debería llevar los modificadores de acceso del metro público privado protegido por defecto adicionalmente podremos utilizar alguna de las palabras reservadas que tenemos también aquí y que darán un carácter especial o otro al metro por ahora no las vamos a conocer pero está bien que sepamos que pueden estar ahí por si nos lo encontramos método estático métodos abstractos método finales nativo sincronizados tenemos un gran conjunto de ellos podemos bajamos ahora a los tipos de retorno y es que los métodos los podemos hacer para que no devuelvan ningún valor por lo podemos hacer para que el resultado del prosecución produzca algo si con ella no lo que tenemos que indicar cuando decidimos continuamos con el uso de clase yo quedo íbamos a profundizar un poco en la propiedades y en los métodos de una clase cuando hablamos de objetos en el en el vídeo de orientación objetos cómo está la hablamos que lo hello tienes de sonidos por un lado apertura y por otro lado . Cortan hablando ya de objetos nada mezclas yo qué pensaba podemos hacer la casa siempre se está entre la estructura del objeto de una clase con Manolo atributos que va a tener esa clase siempre comportamiento y los diferentes método vale de manera bueno que ya tendríamos identificada cada una de las partes que tenías objeto a nivel teórico no puedo voy a nivel práctico en casi recordar la en cápsulas yo nací aquí un objeto ocultar a gran parte de su estructura vale ofreciendo sabes una pequeña parte a a los demás muy bien y venimos este concepto con el de paso de mensaje por hemos comprobar cupón trato entero objetos se realiza a través de los medios de decir un objeto de la zona con otro invocar Mujeres hombres ya lo hemos visto también utilizando el alguna de los pidió anteriores la clase persona equivocando un mes solo normal es que lo atributos y un objeto se ocupe haciendo frío y se consulte José dice a través de una serie de menos mal que veremos conoceremos arroz y
+
+
+
+
+
 
 ![11_Propiedades_y_metodos-5](images/11_Propiedades_y_metodos-5.png)
 
