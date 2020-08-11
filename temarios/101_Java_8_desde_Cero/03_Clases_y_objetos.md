@@ -899,29 +899,33 @@ Vamos a hablar ahora del ciclo de vida de un objeto.
 
 ![12_Ciclo_de_vida-2](images/12_Ciclo_de_vida-2.png)
 
-En otros lenguajes de programación como C, las operaciones tocantes a la memoria eran cometido del programador es decir, si nosotros queríamos no crear un objeto porque en C antes no existían, pero si algún tipo de estructura que requiera el uso de memoria más allá de un tipo de dato primitivo, teníamos nosotros que reservar explícitamente esas posiciones de memoria, lo cual siempre ha sido fuente de múltiples errores porque los programadores tenían que hacer excesivas tareas en ese sentido. Además de reservar la memoria, posteriormente la tenían que usar es decir alojar allí, en este caso un objeto y almacenar sus valores, por último eran los programadores los que cuando un objeto ya no se utilizaba más tenían que ser responsables de la destrucción de ese objeto, la memoria de un ordenador no es infinita, a día de hoy disfrutamos de ordenadores que tienen mucha memoria RAM, pero aún así tenemos que tratar siempre de hacer programas, aplicaciones, que sean lo más eficiente posible, tanto en el uso de recursos como en la cantidad de líneas de código que necesitan para realizar las operaciones, especialmente en el uso de memoria, con lo cual el programador se encargaba de reservar la memoria, de utilizarla y posteriormente destruida.  
+En otros lenguajes de programación como C, las operaciones tocantes a la memoria eran cometido del programador es decir, si nosotros queríamos no crear un objeto porque en C antes no existían, pero si algún tipo de estructura que requiera el uso de memoria más allá de un tipo de dato primitivo, teníamos nosotros que reservar explícitamente esas posiciones de memoria, lo cual siempre ha sido fuente de múltiples errores porque los programadores tenían que hacer excesivas tareas en ese sentido. 
 
 ![12_Ciclo_de_vida-3](images/12_Ciclo_de_vida-3.png)
+
+Además de reservar la memoria, posteriormente la tenían que usar es decir alojar allí, en este caso un objeto y almacenar sus valores.
+
+![12_Ciclo_de_vida-4](images/12_Ciclo_de_vida-4.png)
+
+Por último eran los programadores los que cuando un objeto ya no se utilizaba más, tenían que ser responsables de la destrucción de ese objeto, la memoria de un ordenador no es infinita, a día de hoy disfrutamos de ordenadores que tienen mucha memoria RAM, pero aún así, tenemos que tratar siempre de hacer programas, aplicaciones, que sean lo más eficiente posible, tanto en el uso de recursos como en la cantidad de líneas de código que necesitan para realizar las operaciones, especialmente en el uso de memoria, con lo cual el programador se encargaba de reservar la memoria, de utilizarla y posteriormente destruida.  
+
+![12_Ciclo_de_vida-5](images/12_Ciclo_de_vida-5.png)
 
 Java viene aportarnos alguna novedad en este sentido, de forma que nosotros nos centramos solamente en el uso de clases y objetos y la operación de inicializacion y de destrucción de eso en memoria es decir, la reserva de la memoria y el liberar está memoria, será Java quién se encargue. 
 
 ¿Cómo se hace la reserva de memoria? ya hemos visto en el capítulo de constructores, como cuando nosotros instanciamos un objeto, cuando lo creamos a través de una sentencia como la que tenemos en la imagen, **Java utilizaba dos sitios de memoria, uno el lugar donde alberga la referencia al objeto y el otro el Heap dónde va a albergar el objeto en si**, de esa forma Java ya ha hecho una reserva de la memoria, sobre todo la del objeto que vamos a utilizar. 
 
-![12_Ciclo_de_vida-4](images/12_Ciclo_de_vida-4.png)
-
-Este objeto va a tener un tiempo de vida, va a vivir durante todo el ámbito como norma general, en el bloque de código en el cual ha sido instanciado y durante todo ese tiempo, durante todo ese bloque de código Java nos va a permitir acceder a él a través de una o varias referencias, qué sucede cuando finaliza el ámbito del objeto, bueno pues no tenemos nosotros que responsabilizarnos de la destrucción explica de ese objeto, sino que cuando su ámbito termina directamente el objeto debe *ser enviado a la basura*, y qué significa eso de la basura, bueno que de alguna manera ese objeto ya no va a poder ser utilizado nunca mas y es Java el que se va a encargar de liberar los recursos asociados a ese objeto para que pueda volver a ser utilizados, ya no solo hablamos de la memoria en si, que también es interesante, sino incluso de algún elemento más.
-
-![12_Ciclo_de_vida-5](images/12_Ciclo_de_vida-5.png)
-
-Java posee un recolector de basura, el *Garbage Collector* que será el que se encargue de 
-
-
-
-
-
 ![12_Ciclo_de_vida-6](images/12_Ciclo_de_vida-6.png)
 
+Este objeto va a tener un tiempo de vida, va a vivir durante todo el ámbito como norma general, durante todo el bloque de código en el cual ha sido instanciado y durante todo ese tiempo, durante todo ese bloque de código, Java nos va a permitir acceder a él a través de una o varias referencias. ¿Qué sucede cuando finaliza el ámbito del objeto?, bueno pues no tenemos nosotros que responsabilizarnos de la destrucción explica de ese objeto, sino que cuando su ámbito termina, directamente el objeto debe *ser enviado a la basura*, y qué significa eso de la basura, bueno que de alguna manera ese objeto ya no va a poder ser utilizado nunca mas y es Java el que se va a encargar de liberar los recursos asociados a ese objeto para que pueda volver a ser utilizados, ya no solo hablamos de la memoria en si, que también es interesante, sino incluso de algún elemento más.
+
 ![12_Ciclo_de_vida-7](images/12_Ciclo_de_vida-7.png)
+
+Java posee un recolector de basura, el *Garbage Collector* que será el que se encargue de identificar qué objetos ya no se van a utilizar más, porque su ámbito ha terminado y liberar la memoria que tiene asociada, todo esto lo hace mediante un proceso de baja prioridad que se está ejecutando constantemente y que constantemente está verificando si hay objetos que ya no se van a utilizar más, porque en las líneas de código posteriores ya no hay ningún tipo de uso de ese objeto, porque ha finalizado su ámbito, etcétera y bien ya está disponible para que pase el recolector de basura y recoga esa basura y libere la memoria.
+
+No lo vamos a aprender ahora, pero para clases complejas que utilicen recursos complejos, ficheros, conexiones a bases de datos, conexiones de red, podemos añadir un código de liberación de esos recursos, es decir un código adicional que se ejecutaría cuando el recolector de basura pasará a liberar la memoria asociada a ese objeto, de manera que por concluir un poco hemos podido ver cómo Java se encarga por nosotros de las reservas de una memoria y un objeto cuando se instancia se aloja directamente en la memoria que Java ha reservado, se queda ahí y nos permite Java acceder a él durante todo toda su vida, todo su ámbito y cuando su ámbito finaliza, es marcado como basura para que el recolector de basura pueda pasar a recogerlo y liberar la memoria que está asociada a el.
+
+Con ello terminamos el conocimiento sobre el ciclo de vida de un objeto.
 
 # 13. Uso de clases envoltorio 5:31 
 
