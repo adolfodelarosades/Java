@@ -181,7 +181,7 @@ También podemos querer saber la longitud de una cadena de caracteres, que no es
 
 Una operación muy habitual que vamos a querer hacer con cadenas de caracteres es el pasarlo a mayúsculas o a minúsculas o también su formateo, vamos a poder verlo en los ejemplos que tenemos a continuación.
 
-### :computer: `101-09-OrientacionObjetos`
+### :computer: `101-15-String`
 
 *`EjemplosString`*
 
@@ -446,7 +446,6 @@ Java 8 incorpora algunos métodos paralelos, que aprovechan mejor el rendimiento
 
 ![16_Arrays-1](images/16_Arrays-1.png)
 
-
 Vamos a hablar de Array, creación y uso de array.
 
 ![16_Arrays-2](images/16_Arrays-2.png)
@@ -463,9 +462,87 @@ Va a estar más ligado a la creación de un objeto que a la de la de un tipo de 
 
 ![16_Arrays-5](images/16_Arrays-5.png)
 
-Si queremos acceder a una
+Si queremos acceder a una determinada posición del array para asignarle un valor o para consultar el valor que tiene podemos usar el operador corchetes `[]`, están íntimamente ligados tanto en la creación, instanciación como acceso a los arrays es un operador de lectura y escritura. Si utilizamos los corchetes junto con el nombre del array y una posición a la izquierda de una operación de asignación, lo que estaremos es cambiando o estableciendo el valor de esa posición del array, del elemento que esté en esa posición.  Si por contra lo utilizamos por ejemplo de una operación de lectura o a la derecha de una operación de asignación lo que estamos haciendo es una lectura, una consulta de esa posición del array.
 
-No se puede variar no quiere decir que la raitech adentro todo eso colores todavía no lo vamos a aprender ahora como cómo hacer si queremos acceder a una determinada posición del array para asignarle un valor o para consultar el valor que tiene podemos usar el operador no están íntimamente ligados tanto en la creación y Santi acción como acceso a la red es un operador de lectura y escritura que utilizamos los consejos con el nombre de la RAI y una posición a la izquierda de una operación de asignación lo que estaré muerto cambiando o estableciendo el valor de esa posición del array del elemento que esté en esta noche y por contra lo utilizamos por ejemplo de una operación de lectura o a la derecha de una operación de citación lo que estamos haciendo una lectura una consulta de SL inicializar un array el vestir para darle un valor inicial podemos seguir una política parecida a la de la inicialización de cualquier variable que establecer un valor que pasa que en este caso un array de 10 elementos recién día de 10 sentencias de inicializacion una por cada posición una por cada elemento que compró mañana podemos utilizar algún tipo de atajo mediante una sintaxis especial encerrada entre llave o también mediante un bucle cuando la lógica del programa permita que nosotros utilicemos veamos un ejemplo de declaración e inicialización de una vale así tenemos por ejemplo una rayo crear y amos y la inicializacion la haríamos elemento a elemento cómo podemos ver esto es sumamente tedio como veíamos podíamos inicializar un array mediante un bucle y eso lo podemos hacer aquí estamos utilizando para recorrer un array que es muy sencillo usando un bucle de tipo for porque los arrays sincero objetos como tales es decir no son instancias de clases como sale ya decía que iban a estar a caballo entre tipo de dato primitivo y yo que si es que es verdad que tienen una propiedad que podríamos decir que es pública porque podemos consultar y qué es lento y que nos diste el número de elementos que tiene este array usando un bucle FOR y la propiedad le rápidamente podríamos recorrer todo el array también tenemos la posibilidad de usar el bucle for mejorado conocido como Forex en el que sin conocer el número de elementos de la RAM sin tener que consultar leer podríamos ir sacando elemento a elemento del array y un array es un array de enteros podríamos decir eh ves guardándome la variable entera y cada uno de los elementos de nata y también recorrerlo de esta manera vale reforma aquí estamos inicializando los elementos elementos que después lo recorremos para poder consultarlo todo cómo podemos comprobar esto no imprimiría perdón en admin nos lo imprimir y a través de este bucle porque está recorriendo todas y cada una de las posiciones de ese array también que había otras maneras de inicializar lo uno es el atasco de las llantas estamos declarando una Rai y conocemos a priori el conjunto de valores que lo van a comprobar son valores literales o incluso variables y no son juntos lo podemos hacer mediante este formato en lugar de usar el operador mío y usar el tipo de dato y entre corchetes el tamaño lo que haríamos sería indicar el tipo de arranque entero el nombre de la RAE igual tenéis llaves una lista separada por comas en este caso una raíz cuánto elemento tendrá tendrá tanto elementos como elementos separados por coma ya no tenga nada que tendría los mismos 10 elementos
+![16_Arrays-6](images/16_Arrays-6.png)
+
+Para inicializar un array es decir para darle un valor inicial, podemos seguir una política parecida a la de la inicialización de cualquier variable, que es establecer un valor, que pasa que en este caso un array de 10 elementos requeriría de 10 sentencias de inicializacion una por cada posición, una por cada elemento que conforman el array. Podemos utilizar algún tipo de atajo mediante una sintaxis especial encerrada entre llaves o también mediante un bucle cuando la lógica del programa permita que nosotros lo utilicemos.
+
+Veamos un ejemplo de declaración e inicialización de un array.
+
+### :computer: `101-16-Arrays`
+
+*`ManejoArrays01`*
+
+```java
+package arrays;
+
+public class ManejoArrays01 {
+   public static void main(String[] args) {
+
+      // CREACIÓN E INICIALIZACIÓN ELEMENTO A ELEMENTO
+      int[] unArray = new int[10];
+
+      unArray[0] = 100;
+      unArray[1] = 200;
+      unArray[2] = 300;
+      unArray[3] = 400;
+      unArray[4] = 500;
+      unArray[5] = 600;
+      unArray[6] = 700;
+      unArray[7] = 800;
+      unArray[8] = 900;
+      unArray[9] = 1000;
+
+      // RECORRIDO DE TODOS LOS VALORES DE UN ARRAY
+      for (int i = 0; i < unArray.length; i++) {
+         System.out.println(unArray[i]);
+      }
+
+   }
+}
+```
+
+Tenemos la creación de un array de 10 elementos
+
+
+```java
+int[] unArray = new int[10];
+```
+
+La inicialización de los elementos la hacemos elemento a elemento.
+
+```java
+unArray[0] = 100;
+unArray[1] = 200;
+unArray[2] = 300;
+unArray[3] = 400;
+unArray[4] = 500;
+unArray[5] = 600;
+unArray[6] = 700;
+unArray[7] = 800;
+unArray[8] = 900;
+unArray[9] = 1000;
+```
+
+Esto es sumamente tedioso, tan solo imaginemos que hubiera 1000 elementos en el array.
+
+![16_Arrays-7](images/16_Arrays-7.png)
+
+Podríamos usar un bucle para inicializarlo o incluso para recorrerlo como vemos a continuación.
+
+```java
+// RECORRIDO DE TODOS LOS VALORES DE UN ARRAY
+for (int i = 0; i < unArray.length; i++) {
+   System.out.println(unArray[i]);
+}
+```
+
+Si ejecutamos la aplicación tenemos la siguiente salida:
+
+![16-01](images/16-01.png)
+
+y amos y la inicializacion la haríamos elemento a elemento cómo podemos ver esto es sumamente tedio como veíamos podíamos inicializar un array mediante un bucle y eso lo podemos hacer aquí estamos utilizando para recorrer un array que es muy sencillo usando un bucle de tipo for porque los arrays sincero objetos como tales es decir no son instancias de clases como sale ya decía que iban a estar a caballo entre tipo de dato primitivo y yo que si es que es verdad que tienen una propiedad que podríamos decir que es pública porque podemos consultar y qué es lento y que nos diste el número de elementos que tiene este array usando un bucle FOR y la propiedad le rápidamente podríamos recorrer todo el array también tenemos la posibilidad de usar el bucle for mejorado conocido como Forex en el que sin conocer el número de elementos de la RAM sin tener que consultar leer podríamos ir sacando elemento a elemento del array y un array es un array de enteros podríamos decir eh ves guardándome la variable entera y cada uno de los elementos de nata y también recorrerlo de esta manera vale reforma aquí estamos inicializando los elementos elementos que después lo recorremos para poder consultarlo todo cómo podemos comprobar esto no imprimiría perdón en admin nos lo imprimir y a través de este bucle porque está recorriendo todas y cada una de las posiciones de ese array también que había otras maneras de inicializar lo uno es el atasco de las llantas estamos declarando una Rai y conocemos a priori el conjunto de valores que lo van a comprobar son valores literales o incluso variables y no son juntos lo podemos hacer mediante este formato en lugar de usar el operador mío y usar el tipo de dato y entre corchetes el tamaño lo que haríamos sería indicar el tipo de arranque entero el nombre de la RAE igual tenéis llaves una lista separada por comas en este caso una raíz cuánto elemento tendrá tendrá tanto elementos como elementos separados por coma ya no tenga nada que tendría los mismos 10 elementos
 
 En este caso hemos hecho un recorrido de la raíz con el bucle for mejorado no tenemos porque crear solamente a raíz de tipos de datos primitivos lo podemos hacer también de objeto cualquier tipo de clase la cinta se identifica simplemente cambiando los tipos de este caso si queremos hacer una raíz de persona lo haríamos en lugar de Conil con personas y las fiestas y sería a nada la inicialización manejo de Array 3 dónde lo estamos haciendo de objetos vamos a trabajar con la clase persona que ya conocemos porque la hemos utilizado antes con 77013 y gitanos vamos a hacer un ejemplo un poco más completa en el que tenga un array de nombre un array de apellidos que decir array de String de cadena de caracteres y vamos a crear un array de 5 elementos y lo que vamos a hacer es inicializar exposiciones de Ferrari que lo haremos aquí recogiendo un nombre y un apellido de forma aleatoria para ello hemos creado un método especial vale que está aquí abajo y que nos devuelve un número aleatorio dándole un toque este topes nos es necesario para que no nos devuelva un número muy grande que esté fuera de las posiciones de Tobarra sobre método estático hablaremos más adelante pero si decís que bueno podemos utilizar este método dentro de aquí del método main nos llamamos aleatorio pasándole como tope la longitud del array de nombre no se volverá un número entre 0 y 12345678 nos devolverá un número entre 0 y 100 lo mismo sucedería con los apellidos con el número de apellidos que hay queso esta manera cómo podemos ver estamos accediendo a esta posición del array y en este caso aleatorio estaría muy inicializando una persona me nombre y apellido aleatorio el bucle for mejorado nos permite recorrer el array de persona y si la persona la clase persona tiene el método to string implementado podríamos inicializar 5 personas con el nombre y apellido aleatorio tarde así que si hacemos de nuevo una ejecución pues los nombres y los apellidos la combinación de ellos con todas las instituciones que vayamos haciendo van a ser diferente en algún caso aparecerán repetido en otro no dependerá de como calculé Java esos números aleatorios respecto al uso de array de objeto también podemos crear arrays tanto de tipos primitivos como de tipo plástico que sean multidimensionales es decir que no solamente tengan una dimensión podríamos crear por ejemplo una matriz en un array bidimensional el número de dimensiones va a venir aparejado a la cantidad de parejas de corchetes que vaya a colocada a continuación del tipo a la izquierda de la operación de citación para un array bidimensional utilizaríamos dos parejas de corchetes si quisiéramos hacer un array que nos permitiera representar un cubo de Rubik pues necesitaríamos tres parejas de coche aquí tenemos el ejemplo de la creación de una red tridimensional para acceder a cualquier posición y suponemos una matriz bidimensional pues necesitaríamos la fila y la columna a la cual queremos ver para recorrer un array bidimensional cumple nueva dimensión
 
@@ -479,9 +556,9 @@ Podemos buscar la Java array bueno pues nos vemos nos da un montón de métodos 
 
 
 
-![16_Arrays-6](images/16_Arrays-6.png)
 
-![16_Arrays-7](images/16_Arrays-7.png)
+
+
 
 ![16_Arrays-8](images/16_Arrays-8.png)
 
