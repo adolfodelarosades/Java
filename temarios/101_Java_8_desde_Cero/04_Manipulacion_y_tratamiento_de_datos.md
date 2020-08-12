@@ -259,26 +259,76 @@ Si no nos acordamos muy bien de un método podemos usar la ayuda debemos escribi
 
 ![15-03](images/15-03.png)
 
-Vamos a hablar del formateo de cadenas de caracteres y es que hay un método en particular el método `format()` que nos va permitir construir cadenas de caracteres para las cuales vamos a 
-
-```java
-```
-
-utilizar una especie de plantilla y luego en esta plantilla vamos a definir el espacio que vamos a sustituir por determinados valores de variable o de literal por ejemplo si quisiéramos hacer la cadena hola soy y meter ahí en medio un nombre y un apellido ya continuación continuar con el literal y quiero saludarte diciéndote y a continuación meter un mensaje la concatenación de esto sería un poco tedioso podríamos crear mediante un solo golpe el literal hola soy y quiero saludarte diciéndote y dejar unos cuerpos especiales los que posteriormente sustituir cada uno de estos cuerpos por un valor de una valla se definen a través de tanto por ciento y un carácter son los conocidos como especificadores de formato no es tanto por ciento este indica que lo que se va a sustituir a y una cadena de caracteres podríamos utilizar otro como por ejemplo tanto por ciento de para números tanto por ciento F para números con decimales tanto por ciento M no añadirá un salto de línea particular ahora para los caracteres podríamos usar usar el tanto por ciento ese cómo podemos comprobar el método forma además recibe después un número variable de argumentos porque está aquí encontramos estos tres huecos para incrustar tres valores esperar a que nosotros le proporcionemos separado por coma eso Serrano cómo montar cómo cómo está cadena montada con concatenación se vuelve algo tediosa y como a diferencia de hecho fueron efectiva y que nos da resultado podríamos utilizar nos permite utilizar el método forma de la clase 3 tiene digamos que su hermano su espejo fuera de la clase stream y dentro de System.out de manera que podríamos sustituir estas dos líneas y que básicamente lo que haces temperar un formateo y los argumentos para utilizar el vestir espera lo mismo vale el método forma de la clase de esta manera si la cadena la estamos construyendo con orientación a que sea mostrada por la consola pues lo podríamos hacer directamente con el método print ese que va a tener el mismo resultado se queremos guardar una referencia con este valor lo haremos a través de este y entre otra otra de las operaciones que comúnmente se suele hacer con cadenas de caracteres es la comparación entre ella y vamos a comprobar como Java proverte múltiple métodos para comprobar
-
-Comparar dos cadenas de caracteres que hace debo a la ayuda a lápiz vale como truco también deciros que en lugar de entrar aquí y tener que buscar podemos buscar directamente Google normalmente si buscamos Java api-docs y el nombre de la clase no aparecerá la ayuda es posible que no aparezca la versión que nosotros deseamos podemos indicar la versión y es posible que así si no tienes directamente vale Java 8 de este si no la localizar a otra manera muy rápida e instituir en la URL el 7 por el 8 y así cambiaremos rápidamente un montón de métodos de comparación el más básico de todos es el método compare to que compara dos cadenas de caracteres mediante el orden lexicografico este orden tan rimbombante rimbombante no es más que el orden que conocemos como siempre alfabético es decir la el menor que lave y azul es menor que la C y así sucesivamente hasta la cena vale con todo podemos o tenemos una serie de método para para comprar malla de este maya del método compare to compare two podemos ver su contenido lo que hace es que devuelve un valor menor que cero y la cadena de la izquierda del operador es menor que la otra cadena pero si son iguales y mayor que 0 si 10 machos tenemos también su método hermano compare ignoré case que lo que hace es pasar las dos cadenas de caracteres a minúscula o a mano o A mayúscula para hacer la comparación ignorando que hay mayúscula o minúscula y luego tenemos otra serie de métodos cómo poder comprobar y un fragmento de cadena está dentro de otra con content vale y el contenido de una cadena es igual a otra vale tenemos todo esos métodos entre otros que ya digo que son interesante nos vamos a ver por aquí estos tres que podéis comentar la ayuda bien aquí o viene en el API en Ruiz nos va a devolver verdadero y la cadena de caracteres que le pasamos como argumento es el final de la cadena de caracteres sobre la que estamos llamando al método análogamente tenemos estar uy que nos devolverá verdadero di la cadena de caracteres a la cual sobre la cual estamos de mandarme todo comienza con la que le proporcionamos como argumento y con lo que hace es buscar en medio de la cadena de caracteres para indicar si si contiene esta secuencia de caracteres no tiene esa cara en un lugar de la Mancha termina en la mancha en un lugar y contiene la palabra lugar bueno yo ánimo a que tratéis de ir conociendo poco a poco los métodos que tiene stream que son muchos imposible conocer los todo de una vez que si es necesario consultar la ayuda y si hace falta pues envié y algún tipo de pregunta en esto
-
-
-
-
-
-
-
-
-
 ![15_Uso_de_la_clase_String-6](images/15_Uso_de_la_clase_String-6.png)
 
+Vamos a hablar del formateo de cadenas de caracteres.
+
+
+```java
+// STRING FORMAT
+
+String nombre = "Pepe";
+String apellidos = "Pérez";
+String mensaje = "¿qué tal estás?";
+System.out.println("Hola, soy " + nombre + " " + apellidos + ", y quiero saludarte diciéndote " + mensaje);
+```
+
+![15-04](images/15-04.png)
+
+En este ejemplo usamos el operador `+` para concatenar las cadenas y realizar una especie de formato de salida, pero está cadena montada con concatenación se vuelve algo tediosa.
+
+Hay un método en particular el método `format()` que nos va permitir construir cadenas de caracteres para las cuales vamos a utilizar una especie de plantilla y luego en esa plantilla vamos a definir el espacio que vamos a sustituir por determinados valores de variable o de literal por ejemplo, si quisiéramos hacer la cadena hola soy y meter ahí en medio un nombre y uno apellido y a continuación continuar con el literal y quiero saludarte diciéndote y a continuación meter un mensaje, la concatenación de esto sería un poco tedioso, podríamos crear mediante un solo golpe el literal, "hola soy y quiero saludarte diciéndote..." y dejar unos huecos especiales, los que posteriormente sustituir cada uno de esos huecos por un valor de una variable, esos huecos se definen a través de tanto por ciento y un carácter, son los conocidos como **especificadores de formato**, `%s` lo que indica que lo que se va a sustituir es una cadena de caracteres, podríamos utilizar otro como por ejemplo `%d` para números,  `%f` para números con decimales, `%n` nos añadirá un salto de línea, pero en particular ahora para los caracteres podríamos usar `%s`, cómo podemos comprobar el método `format()` además recibe después un número variable de argumentos para incrustar los valores de los huecos, esperara que nosotros le proporcionemos separado por coma esos valores.
+
+```java
+String nombre = "Pepe";
+String apellidos = "Pérez";
+String mensaje = "¿qué tal estás?";
+String str = String.format("Hola, soy %s %s y quiero saludarte diciéndote %s", nombre, apellidos, mensaje);
+System.out.println(str);
+```
+
+Aquí usamos el método `format` de la clase `String`, formamos primero el formato del `String` y despúes lo imprimimos.
+ 
+![15-05](images/15-05.png)
+
+Lo anterior que haciamos en dos pasos lo podemos hacer en uno solo con el método `System.out.printf` que nos va a permitir directamente imprimir a la consola 8aun que no siempre es lo que queramos hacer por eso esta `String.format`).
+
+```java
+String nombre = "Pepe";
+String apellidos = "Pérez";
+String mensaje = "¿qué tal estás?";
+//String str = String.format("Hola, soy %s %s y quiero saludarte diciéndote %s", nombre, apellidos, mensaje);
+//System.out.println(str);
+System.out.printf("Hola, soy %s %s y quiero saludarte diciéndote %s", nombre, apellidos, mensaje);
+```
+
+![15-06](images/15-06.png)
+
 ![15_Uso_de_la_clase_String-7](images/15_Uso_de_la_clase_String-7.png)
+
+Otra de las operaciones que comúnmente se suele hacer con cadenas de caracteres es la comparación entre ella y vamos a comprobar como Java proverte múltiple métodos para comparar dos cadenas de caracteres.
+
+Si hacedemos a la ayuda del API https://docs.oracle.com/javase/8/docs/api/java/lang/String.html 
+
+![15-07](images/15-07.png)
+
+
+que hace debo a la ayuda a lápiz vale como truco también deciros que en lugar de entrar aquí y tener que buscar podemos buscar directamente Google normalmente si buscamos Java api-docs y el nombre de la clase no aparecerá la ayuda es posible que no aparezca la versión que nosotros deseamos podemos indicar la versión y es posible que así si no tienes directamente vale Java 8 de este si no la localizar a otra manera muy rápida e instituir en la URL el 7 por el 8 y así cambiaremos rápidamente un montón de métodos de comparación el más básico de todos es el método compare to que compara dos cadenas de caracteres mediante el orden lexicografico este orden tan rimbombante rimbombante no es más que el orden que conocemos como siempre alfabético es decir la el menor que lave y azul es menor que la C y así sucesivamente hasta la cena vale con todo podemos o tenemos una serie de método para para comprar malla de este maya del método compare to compare two podemos ver su contenido lo que hace es que devuelve un valor menor que cero y la cadena de la izquierda del operador es menor que la otra cadena pero si son iguales y mayor que 0 si 10 machos tenemos también su método hermano compare ignoré case que lo que hace es pasar las dos cadenas de caracteres a minúscula o a mano o A mayúscula para hacer la comparación ignorando que hay mayúscula o minúscula y luego tenemos otra serie de métodos cómo poder comprobar y un fragmento de cadena está dentro de otra con content vale y el contenido de una cadena es igual a otra vale tenemos todo esos métodos entre otros que ya digo que son interesante nos vamos a ver por aquí estos tres que podéis comentar la ayuda bien aquí o viene en el API en Ruiz nos va a devolver verdadero y la cadena de caracteres que le pasamos como argumento es el final de la cadena de caracteres sobre la que estamos llamando al método análogamente tenemos estar uy que nos devolverá verdadero di la cadena de caracteres a la cual sobre la cual estamos de mandarme todo comienza con la que le proporcionamos como argumento y con lo que hace es buscar en medio de la cadena de caracteres para indicar si si contiene esta secuencia de caracteres no tiene esa cara en un lugar de la Mancha termina en la mancha en un lugar y contiene la palabra lugar bueno yo ánimo a que tratéis de ir conociendo poco a poco los métodos que tiene stream que son muchos imposible conocer los todo de una vez que si es necesario consultar la ayuda y si hace falta pues envié y algún tipo de pregunta en esto
+
+
+
+
+```java
+
+
+```
+
+
+
+
+
+
+
 
 # 16. Manejo de Arrays 23:09 
 
