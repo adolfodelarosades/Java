@@ -163,13 +163,103 @@ La clase `String` nos proporciona muchos métodos para comparar cadenas y fragme
 
 ![15_Uso_de_la_clase_String-1](images/15_Uso_de_la_clase_String-1.png)
 
+En esta lección vamos a aprender a usar la clase `String`, una clase que ya hemos utilizado antes a través de literales encerrado entre comillas doble o de referencias que hemos creado a través de esas literales. Vamos a ver cómo trabajar con esa clase. 
+
 ![15_Uso_de_la_clase_String-2](images/15_Uso_de_la_clase_String-2.png)
+
+Un literal encerrada entre comillas dobles genera para Java un `String` y podemos almacenar el valor de ese literal en una referencia de tipo `String`, **los `String` son inmutables** estó es muy importante que lo tengamos presente, toda operación que hagamos sobre un `String` no modifica ese `String`, es imposible modificarlo por qué son inmutables, sin embargo si intentamos modificarlo lo que va a suceder es que va a generarse un `String` nuevo con estas modificaciones hechas, es altamente eficiente y casi al final del curso aprenderemos a utilizar otras clases que nos permiten trabajar con cadenas que si somos conscientes de que van a ser modificadas muchas veces nos van a permitir el tratamiento de essas cadenas de una manera más eficiente. Ahora nosotros trabajaremos con `String` que va a darnos respuesta suficiente a lo que nosotros necesitamos por ahora.
 
 ![15_Uso_de_la_clase_String-3](images/15_Uso_de_la_clase_String-3.png)
 
+Una operación muy habitual entre `String` es la concatenación de dos `String`. Concatenar es yuxtaponer, es decir colocar a continuación de de una cadena otra cadena, se puede hacer mediante el método `concat`  o también se puede hacerse con el operador `+` que suele ser la forma más habitual porque es muy cómoda, pero que sepamos que también tenemos el método `concat`.
+
 ![15_Uso_de_la_clase_String-4](images/15_Uso_de_la_clase_String-4.png)
 
+También podemos querer saber la longitud de una cadena de caracteres, que no es más que el número de caracteres que lo conforman, a la hora de contar esos caracteres cuenta espacio en blanco, incluso si están al principio o al final de la cadena, tabuladores que también los podemos incluir, signos de puntuación, toda esa serie de caracteres que podríamos llamar raros, no son letras ni números también contarían, se puede hacer a través del método `length()`, el método `length()` para una instancia de `String` nos va a permitir conocer el número de caracteres que tiene. 
+
 ![15_Uso_de_la_clase_String-5](images/15_Uso_de_la_clase_String-5.png)
+
+Una operación muy habitual que vamos a querer hacer con cadenas de caracteres es el pasarlo a mayúsculas o a minúsculas o también su formateo, vamos a poder verlo en los ejemplos que tenemos a continuación.
+
+### :computer: `101-09-OrientacionObjetos`
+
+*`EjemplosString`*
+
+```java
+package string;
+
+public class EjemplosString {
+   public static void main(String[] args) {
+
+      // CONCATENAR
+      String nombre = "Mi nombre es ".concat("Pepe");
+      String nombre2 = "Mi nombre es " + "Pepe";
+      System.out.println(nombre);
+      System.out.println(nombre2);
+
+      // MAYÚSCULAS-MINÚSCULAS
+//    String cadena = "En un lugar de La Mancha";
+//    System.out.println(cadena);
+//    System.out.println(cadena.toLowerCase());
+//    System.out.println(cadena.toUpperCase());
+      // cadena.
+
+      // STRING FORMAT
+
+//    String nombre = "Pepe";
+//    String apellidos = "Pérez";
+//    String mensaje = "¿qué tal estás?";
+//    System.out.println("Hola, soy " + nombre + " " + apellidos + ", y quiero saludarte diciéndote " + mensaje);
+
+//    String nombre = "Pepe";
+//    String apellidos = "Pérez";
+//    String mensaje = "¿qué tal estás?";
+//    //String str = String.format("Hola, soy %s %s y quiero saludarte diciéndote %s", nombre, apellidos, mensaje);
+//    //System.out.println(str);
+//    System.out.printf("Hola, soy %s %s y quiero saludarte diciéndote %s", nombre, apellidos, mensaje);
+
+      // MÉTODOS DE COMPARACIÓN
+//    String quijote = "En un lugar de La Mancha";
+//
+//    System.out.println(quijote.endsWith("La Mancha"));
+//    System.out.println(quijote.startsWith("En un lugar"));
+//    System.out.println(quijote.contains("lugar"));
+
+   }
+}
+```
+
+Vamos a hacer primero la concatenación de dos cadenas de caracteres, la concatenación como hemos visto la podemos hacer con el operador `+` o la podemos hacer con el método `concat` 
+
+```java
+// CONCATENAR
+String nombre = "Mi nombre es ".concat("Pepe");
+String nombre2 = "Mi nombre es " + "Pepe";
+System.out.println(nombre);
+System.out.println(nombre2);
+```
+
+`concat` nos permite concatenar la cadena `"Mi nombre es "` a esta otra `"Pepe"`, utilizo esta sintaxis para que la conozcamos y sepamos reconocer que un literal encerrado entre comillas doble implica una instancia de `String` tanto es así que este valor literal nos permite llamar a métodos en este caso a `concat` esto devolvería `Mi nombre es Pepe` almacenado en `nombre` de la misma manera que lo hacemos con `nombre2` con el operador `+`.
+
+![15-01](images/15-01.png)
+
+
+
+, y vamos a pasarlas rápidamente a mayúscula y minúscula,
+```java
+```
+
+Método to lowercase y to uppercase que nos van a permitir transformar toda una cadena de caracteres lo pondrá en mayúscula no no acordamos muy bien de un método como ayuda esto no es solamente para escribir el nombre de una referencia suya un punto y no aparecerá a continuación todos los métodos que podríamos llamar para en minúscula íbamos a hablar del formateo de cadenas de caracteres y es que hay un método en particular el método forma que nos va permitir construir cadenas de caracteres para las cuales vamos a utilizar una especie de plantilla y luego en esta plantilla vamos a definir el espacio que vamos a sustituir por determinados valores de variable o de literal por ejemplo si quisiéramos hacer la cadena hola soy y meter ahí en medio un nombre y un apellido ya continuación continuar con el literal y quiero saludarte diciéndote y a continuación meter un mensaje la concatenación de esto sería un poco tedioso podríamos crear mediante un solo golpe el literal hola soy y quiero saludarte diciéndote y dejar unos cuerpos especiales los que posteriormente sustituir cada uno de estos cuerpos por un valor de una valla se definen a través de tanto por ciento y un carácter son los conocidos como especificadores de formato no es tanto por ciento este indica que lo que se va a sustituir a y una cadena de caracteres podríamos utilizar otro como por ejemplo tanto por ciento de para números tanto por ciento F para números con decimales tanto por ciento M no añadirá un salto de línea particular ahora para los caracteres podríamos usar usar el tanto por ciento ese cómo podemos comprobar el método forma además recibe después un número variable de argumentos porque está aquí encontramos estos tres huecos para incrustar tres valores esperar a que nosotros le proporcionemos separado por coma eso Serrano cómo montar cómo cómo está cadena montada con concatenación se vuelve algo tediosa y como a diferencia de hecho fueron efectiva y que nos da resultado podríamos utilizar nos permite utilizar el método forma de la clase 3 tiene digamos que su hermano su espejo fuera de la clase stream y dentro de System.out de manera que podríamos sustituir estas dos líneas y que básicamente lo que haces temperar un formateo y los argumentos para utilizar el vestir espera lo mismo vale el método forma de la clase de esta manera si la cadena la estamos construyendo con orientación a que sea mostrada por la consola pues lo podríamos hacer directamente con el método print ese que va a tener el mismo resultado se queremos guardar una referencia con este valor lo haremos a través de este y entre otra otra de las operaciones que comúnmente se suele hacer con cadenas de caracteres es la comparación entre ella y vamos a comprobar como Java proverte múltiple métodos para comprobar
+
+Comparar dos cadenas de caracteres que hace debo a la ayuda a lápiz vale como truco también deciros que en lugar de entrar aquí y tener que buscar podemos buscar directamente Google normalmente si buscamos Java api-docs y el nombre de la clase no aparecerá la ayuda es posible que no aparezca la versión que nosotros deseamos podemos indicar la versión y es posible que así si no tienes directamente vale Java 8 de este si no la localizar a otra manera muy rápida e instituir en la URL el 7 por el 8 y así cambiaremos rápidamente un montón de métodos de comparación el más básico de todos es el método compare to que compara dos cadenas de caracteres mediante el orden lexicografico este orden tan rimbombante rimbombante no es más que el orden que conocemos como siempre alfabético es decir la el menor que lave y azul es menor que la C y así sucesivamente hasta la cena vale con todo podemos o tenemos una serie de método para para comprar malla de este maya del método compare to compare two podemos ver su contenido lo que hace es que devuelve un valor menor que cero y la cadena de la izquierda del operador es menor que la otra cadena pero si son iguales y mayor que 0 si 10 machos tenemos también su método hermano compare ignoré case que lo que hace es pasar las dos cadenas de caracteres a minúscula o a mano o A mayúscula para hacer la comparación ignorando que hay mayúscula o minúscula y luego tenemos otra serie de métodos cómo poder comprobar y un fragmento de cadena está dentro de otra con content vale y el contenido de una cadena es igual a otra vale tenemos todo esos métodos entre otros que ya digo que son interesante nos vamos a ver por aquí estos tres que podéis comentar la ayuda bien aquí o viene en el API en Ruiz nos va a devolver verdadero y la cadena de caracteres que le pasamos como argumento es el final de la cadena de caracteres sobre la que estamos llamando al método análogamente tenemos estar uy que nos devolverá verdadero di la cadena de caracteres a la cual sobre la cual estamos de mandarme todo comienza con la que le proporcionamos como argumento y con lo que hace es buscar en medio de la cadena de caracteres para indicar si si contiene esta secuencia de caracteres no tiene esa cara en un lugar de la Mancha termina en la mancha en un lugar y contiene la palabra lugar bueno yo ánimo a que tratéis de ir conociendo poco a poco los métodos que tiene stream que son muchos imposible conocer los todo de una vez que si es necesario consultar la ayuda y si hace falta pues envié y algún tipo de pregunta en esto
+
+
+
+
+
+
+
+
 
 ![15_Uso_de_la_clase_String-6](images/15_Uso_de_la_clase_String-6.png)
 
