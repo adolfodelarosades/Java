@@ -312,23 +312,28 @@ Si hacedemos a la ayuda del API https://docs.oracle.com/javase/8/docs/api/java/l
 
 ![15-07](images/15-07.png)
 
+En `String` tenemos un montón de métodos de comparación, el más básico de todos es el método `compareTo(String anotherString)` que compara dos cadenas de caracteres mediante el orden *lexicografico*, este orden tan rimbombante no es más que el orden alfabético que conocemos. Podemos ver el contenido del método `compareTo(String anotherString)`.
 
-que hace debo a la ayuda a lápiz vale como truco también deciros que en lugar de entrar aquí y tener que buscar podemos buscar directamente Google normalmente si buscamos Java api-docs y el nombre de la clase no aparecerá la ayuda es posible que no aparezca la versión que nosotros deseamos podemos indicar la versión y es posible que así si no tienes directamente vale Java 8 de este si no la localizar a otra manera muy rápida e instituir en la URL el 7 por el 8 y así cambiaremos rápidamente un montón de métodos de comparación el más básico de todos es el método compare to que compara dos cadenas de caracteres mediante el orden lexicografico este orden tan rimbombante rimbombante no es más que el orden que conocemos como siempre alfabético es decir la el menor que lave y azul es menor que la C y así sucesivamente hasta la cena vale con todo podemos o tenemos una serie de método para para comprar malla de este maya del método compare to compare two podemos ver su contenido lo que hace es que devuelve un valor menor que cero y la cadena de la izquierda del operador es menor que la otra cadena pero si son iguales y mayor que 0 si 10 machos tenemos también su método hermano compare ignoré case que lo que hace es pasar las dos cadenas de caracteres a minúscula o a mano o A mayúscula para hacer la comparación ignorando que hay mayúscula o minúscula y luego tenemos otra serie de métodos cómo poder comprobar y un fragmento de cadena está dentro de otra con content vale y el contenido de una cadena es igual a otra vale tenemos todo esos métodos entre otros que ya digo que son interesante nos vamos a ver por aquí estos tres que podéis comentar la ayuda bien aquí o viene en el API en Ruiz nos va a devolver verdadero y la cadena de caracteres que le pasamos como argumento es el final de la cadena de caracteres sobre la que estamos llamando al método análogamente tenemos estar uy que nos devolverá verdadero di la cadena de caracteres a la cual sobre la cual estamos de mandarme todo comienza con la que le proporcionamos como argumento y con lo que hace es buscar en medio de la cadena de caracteres para indicar si si contiene esta secuencia de caracteres no tiene esa cara en un lugar de la Mancha termina en la mancha en un lugar y contiene la palabra lugar bueno yo ánimo a que tratéis de ir conociendo poco a poco los métodos que tiene stream que son muchos imposible conocer los todo de una vez que si es necesario consultar la ayuda y si hace falta pues envié y algún tipo de pregunta en esto
+![15-08](images/15-08.png)
 
+Lo que hace es que devuelve un valor menor que 0 si la cadena de la izquierda del operador es menor que la otra cadena, 0 si son iguales y mayor que 0 si es mayor. 
 
-
+Tenemos también su método hermano `compareToIgnoreCase` que lo que hace es pasar las dos cadenas de caracteres a minúscula o mayúscula para hacer la comparación ignorando que hay mayúscula o minúscula y luego tenemos otra serie de métodos cómo poder comprobar si un fragmento de cadena está dentro de otra con `contains(CharSequence s)` si el contenido de una cadena es igual a otra `equals(Object anObject)` tenemos todos esos métodos, entre otros que ya digo que son interesantes, vamos a ver algunos ejemplos.
 
 ```java
+// MÉTODOS DE COMPARACIÓN
+String quijote = "En un lugar de La Mancha";
 
-
+System.out.println(quijote.endsWith("La Mancha"));
+System.out.println(quijote.startsWith("En un lugar"));
+System.out.println(quijote.contains("lugar"));
 ```
 
+![15-09](images/15-09.png)
 
+Como métodos más útiles podemos destacar estos tres `endsWith` nos va a devolver verdadero si la cadena de caracteres que le pasamos como argumento es el final de la cadena de caracteres sobre la que estamos llamando al método, análogamente tenemos `startsWith` que nos devolverá verdadero si la cadena de caracteres sobre la cual estamos llamando al método comienza con la que le proporcionamos como argumento y `contains` lo que hace es buscar en medio de la cadena de caracteres para indicar si contiene esa secuencia de caracteres.
 
-
-
-
-
+Yo ánimo a que tratéis de ir conociendo poco a poco los métodos que tiene `String` que son muchos, imposible conocerlos todos de una vez, que si es necesario consultar la ayuda.
 
 # 16. Manejo de Arrays 23:09 
 
