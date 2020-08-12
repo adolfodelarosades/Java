@@ -447,25 +447,6 @@ Java 8 incorpora algunos métodos paralelos, que aprovechan mejor el rendimiento
 ![16_Arrays-1](images/16_Arrays-1.png)
 
 
-
-
-
-![16_Arrays-4](images/16_Arrays-4.png)
-
-![16_Arrays-5](images/16_Arrays-5.png)
-
-![16_Arrays-6](images/16_Arrays-6.png)
-
-![16_Arrays-7](images/16_Arrays-7.png)
-
-![16_Arrays-8](images/16_Arrays-8.png)
-
-![16_Arrays-9](images/16_Arrays-9.png)
-
-![16_Arrays-10](images/16_Arrays-10.png)
-
-![16_Arrays-11](images/16_Arrays-11.png)
-
 Vamos a hablar de Array, creación y uso de array.
 
 ![16_Arrays-2](images/16_Arrays-2.png)
@@ -490,6 +471,21 @@ No tendríamos aquí que no tiene porqué ser cuadrado este tendría 10 filas y 
 
 Podemos buscar la Java array bueno pues nos vemos nos da un montón de métodos en la cantidad de método la verdad es que es bastante bastante grande por decir o por destacar algunos de ellos podríamos buscar los métodos de ordenación vale que nos va a permitir ordenar arrays de los distintos tipos de datos primitivos por ejemplo un array de números entero lo podríamos ordenar este método para ordenar el array que nosotros pasemos como argumento no devuelve un array ordenado sino que devuelve ese atrae como digo la cantidad de métodos que tiene es inmensa otro método por ejemplo cómodo es tu stream que no te volveré a una representación como cadena de caracteres de un array y también tenemos un método para array peces más grandes que sería trip to stream este bueno si una raya esté más de una dimensión o lo de dentro fuera de otro tipo que no fuera primitivo seguiría profundizando hasta visualizar no el valor y no referencia te de objetos tenemos por aquí álbum alguna salida método un método para para imprimir en la RAE un poco un poco artesanal tenemos una cantidad de métodos muy grande si estaba aquí vamos a generar un array de posiciones aleatorias con número de cero a cien lo podríamos imprimir podemos copiar en la RAI hemos creado antes en otro ampliando su longitud y una raíz se nos queda pequeño en lugar de tener que crear un segundo array recorrer el primero asignar las variable pues el método propio ya lo hace por nosotros lo podemos ordenar e imprimir el array ordenado ahora vamos a ejecutarlo todo junto podríamos ya con el array ordenado realizar una búsqueda binaria la búsqueda binaria es un algoritmo de búsqueda que requiere sobre una colección de elementos que los elementos están ordenados para poder localizarla este método nos permitiría buscar un número aleatorio si es que está dentro de la RAI bueno Java 8 agregado algunos métodos como por ejemplo la ordenación paralela de algunos array que sean muy grande cuando hablamos de paralelo y secuencial queremos decir es que la ordenación secuencial de elementos los ba101 si utilizamos un tipo de operación en paralelo lo que va a hacer utilizar las características tanto físicas del procesador como lógica para ejecutar tareas en paralelo es decir que se van ejecutando a la vez para intentar sobre colecciones muy grande sobre sobre array muy grande hacerlo de una manera más rápida secado aquí esta colección que tiene más de un millón de elemento utilizamos unos métodos especiales médico quizá no sean los que más utilicéis al principio y una sintaxis especial que aprenderemos en alguna de la última elecciones de la expresión el Landa para rellenar que sea Ray grande con un montón de números aleatorios de forma paralela y después ordenarlo de forma también para leer bueno pues ha producido todas las operaciones y aquí tenemos la representación de la RAI el array ordenado como habíamos hecho una copia de 100 elemento y lo hemos ordenado después o 100 primero elemento están inicializado a cero y por ejemplo elementos 9 no está sinceramos buscar otro elemento elemento do tampoco 77 tampoco estamos teniendo muy mala suerte con los números aleatorio bueno ejecutar el código posiblemente sí salga un número que de ubicado en algún en algún sitio del array como de aquí enfrente donde está está buscando el 63 que está varias veces repetido Rai
 
+![16_Arrays-4](images/16_Arrays-4.png)
+
+![16_Arrays-5](images/16_Arrays-5.png)
+
+![16_Arrays-6](images/16_Arrays-6.png)
+
+![16_Arrays-7](images/16_Arrays-7.png)
+
+![16_Arrays-8](images/16_Arrays-8.png)
+
+![16_Arrays-9](images/16_Arrays-9.png)
+
+![16_Arrays-10](images/16_Arrays-10.png)
+
+![16_Arrays-11](images/16_Arrays-11.png)
 
 ## Práctica: Creando el juego de hundir la flota 31:16 
 
