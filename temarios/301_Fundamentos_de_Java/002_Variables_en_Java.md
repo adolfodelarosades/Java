@@ -452,6 +452,281 @@ Es todo por esta lección y nos vemos en la siguiente lección.
 Saludos.
 
 # 010 Ejercicio: Concatenación con Java - 11:46
+
+Hola, bienvenidos a esta lección.
+
+A continuación vamos a ver el tema de concatenación de cadenas en Java. Están listos? Vamos.
+
+Vamos a ver el tema de concatenación de cadenas, para ello vamos a definir dos variables de tipo `String` y vamos a unirlas por medio del operador `+`.
+
+Por ejemplo:
+
+```java
+var usuario = "Juan";
+var titulo = "Ingeniero";
+```
+
+Y lo que vamos a hacer es crear una tercera variable para unir estas dos variables, así que vamos a hacer lo siguiente. Vamos a definir una variable llamada `union` y para unir estas dos variables vamos a hacer lo siguiente.
+
+```java
+var union = titulo + usuario;
+```
+
+Y vamos a imprimir el valor de la variable `union`, recordemos usar el atajo `soutv` más TABULADOR.
+
+```java
+var union = titulo + usuario;
+System.out.println("union = " + union);
+```
+
+Vamos a guardar cambios, presionamos CTRL+S y ejecutamos clic derecho Run File.
+
+![10-01](images/10-01.png)
+
+Y podemos observar que la variable `union` tiene el valor de `IngenieroJuan`, podemos ver que ya es una sola cadena. Sin embargo, cuando unimos cadenas es común que también adjuntemos otro carácter para separar estas cadenas. Por ejemplo, en este caso en la `union` tenemos el operador de `+`, pero ahora vamos a concatenar un espacio en blanco, así que ponemos la cadena de espacio en blanco y volvemos a concatenar el valor de la variable usuario, así que ya tenemos el valor de la variable título que va a imprimir Ingeniero posteriormente concatenados el espacio y finalmente concatenados el valor de la variable usuario que va a ser Juan. Vamos a comprobar.
+
+```java
+var union = titulo + " " + usuario;
+System.out.println("union = " + union);
+```
+
+Guardamos cambios, presionamos CTRL+S. Click derecho Run File.
+
+![10-02](images/10-02.png)
+
+La variable unión tiene el valor de `Ingeniero Juan`
+
+Así que el operador de más no solamente nos va a permitir sumar números, sino que también nos permite concatenar cadenas.
+
+Atajo para formatear nuestro código, presionamos el botón derecho y seleccionamos FORMAT.
+
+![10-03](images/10-03.png)
+
+Y podemos ver que nuestra clase en automático reajusta cada uno de sus elementos, a esto se le conoce como formato de nuestro código dar formato.
+
+Bien, ahora vamos a definir dos variables de tipo entero.
+
+```java
+
+```
+
+```java
+
+```
+Bar y igual a tres libar jota igual a cuatro.
+
+No es recomendable utilizar nombres tan cortos en los nombres de nuestras variables, pero en este caso
+
+simplemente es para poner un ejemplo, ese tipo de nombres de variables los vamos a utilizar cuando
+
+veamos el tema de ciclos en Java.
+
+Pero no es recomendable en otros casos simplemente poner una letra.
+
+Se recomienda utilizar un nombre que reconozcamos de manera automática.
+
+Y también el nombre de nuestra variable no puede coincidir con ninguna palabra reservada en Java.
+
+Y en la figura pueden observar las palabras reservadas en Java.
+
+También les vamos a adjuntar esa tabla en la sección de recursos para que la tengan a mano.
+
+Pero por ejemplo, no pueden utilizar Hint.
+
+Para definir el nombre de su variable, ya que éste es un tipo primitivo y es una palabra que está reservada,
+
+por ejemplo, también se pueden utilizar Bait, ya que este nombre también es una palabra reservada
+
+que vamos a estudiar más adelante y cualquier nombre de palabra reservada no lo pueden utilizar.
+
+Por ejemplo, la palabra reservada nioh es otra palabra reservada que no pueden utilizar, y si tratan
+
+de utilizarlo, entonces les dice el compilador que no reconoce esta sentencia, así que deben utilizar
+
+nombres de variables que no coincidan con las palabras reservadas.
+
+En Java.
+
+Obviamente, esta cantidad de palabras reservadas no se las van a aprender de memoria de manera inmediata,
+
+sino que poco a poco nos vamos a ir familiarizando con cada una de ellas y así van a saber a qué se
+
+refiere cada una de ellas cuando estemos trabajando en nuestras lecciones.
+
+Así que esto va a ser poco a poco.
+
+Bien.
+
+Con esto ya hemos definido nuestras variables, la variable y la variable J, que son el tipo entero.
+
+Recuerden que es de tipo entero porque estamos infiriendo el tipo que le estamos asignando.
+
+A partir de la literal entera y por lo tanto, entonces nuestra variable también es de tipo entero.
+
+Por lo tanto, si mandamos a imprimir.
+
+Escribimos ese auto volador y posteriormente mandamos a imprimir estas variables.
+
+Utilizando el mismo operador de suma vamos a ver cómo se comporta, así que guardamos cambios, ejecutamos.
+
+Y podemos observar que en este caso nos devuelve el valor de 7.
+
+Esto quiere decir que se está realizando la suma correctamente tres más cuatro nos da siete.
+
+Pero qué pasa con los siguientes casos?
+
+Aquí se realiza la suma de números.
+
+De igual manera, aunque aquí podemos utilizar acentos, no se recomienda, ya que los acentos pueden
+
+provocar problemas cuando estamos guardando nuestros programas y a su vez abriéndolas desde otras herramientas.
+
+Así que por lo tanto, se recomienda que no utilicemos acentos en nuestros programas, aunque si lo
+
+permite no es recomendable.
+
+Bien, vamos a ver entonces el siguiente caso.
+
+Qué pasa si queremos concatenar los valores?
+
+Posteriormente J.
+
+Pero además, ahora le vamos a concatenar el valor de la variable.
+
+Usuario.
+
+Vamos a ver el resultado.
+
+Guardamos cambios y ejecutamos.
+
+Recordemos que el último resultado es el que estamos analizando.
+
+Podemos se que en este caso tenemos y mascota nos da el valor de siete.
+
+Y posteriormente tenemos la unión con la cadena de usuario, con el valor de Juan y por lo tanto podemos
+
+observar que primero se realizó la suma y posteriormente se realizó la concatenación.
+
+La unión con la cadena de Juan.
+
+Por lo tanto, aquí la regla es que si de izquierda a derecha encontramos primeros números, entonces
+
+se realiza primero la suma y posteriormente se sigue avanzando en la evaluación de esta expresión y
+
+se realiza la concatenación de este valor.
+
+Así que de izquierda a derecha se evalúan las expresiones.
+
+Pero ahora qué pasa si hacemos lo contrario?
+
+Vamos a poner ahora el código.
+
+Primero vamos a poner usuario.
+
+Posteriormente concatenados y concatenados la jota, vamos a ver qué sucede.
+
+Vamos a guardar cambios, ejecutamos.
+
+Y en este caso podemos observar que el primero nos muestra la cadena de Juan, el valor de la variable
+
+usuario y posteriormente y la jota no está realizando la suma, sino está realizando una concatenación.
+
+Así que el 3 y el 4 los toma como una cadena.
+
+Esto se debe a que en Java a esto se le conoce como contexto cadena.
+
+Así que nuestra expresión evaluada de izquierda a derecha, si primero encuentra una cadena, todo lo
+
+demás lo va a tomar como una cadena.
+
+Así que, por lo tanto, el valor de Juan lo está concatenando con el valor de la variable y que es
+
+el valor de tres y posteriormente concatena.
+
+Este valor de la variable J el valor de 4, pero nunca realiza aquí la suma.
+
+Debido al concepto de contexto cadena, si primero encuentra una cadena, entonces todo lo demás lo
+
+va a concatenar, pero si del lado izquierdo encuentra números.
+
+Como en el ejemplo anterior, si primero tenemos números y después la cadena, primero realiza la suma
+
+y después la concatenación de la cadena.
+
+Ahora, por último, cabe mencionar.
+
+También podemos modificarlo utilizando parentesis.
+
+Así que si queremos realizar la concatenación de la variable usuario, pero además llevar a cabo la
+
+suma de estas dos variables para que realmente realice la suma, podemos utilizar paréntesis.
+
+Si utilizamos paréntesis, esto quiere decir que estamos modificando la prioridad al evaluar esta expresión.
+
+Así que primero se va a realizar la suma y posteriormente el resultado de esta suma se va concatenar
+
+con la variable de usuario.
+
+Así que la evaluación de esta expresión de izquierda a derecha evalúa si tenemos paréntesis y los paréntesis
+
+toman la máxima prioridad.
+
+Por lo tanto, primero se realiza la suma.
+
+Así que en este caso aquí vamos a tener un 7 y posteriormente, una vez que termina de evaluar los paréntesis,
+
+vuelve a evaluar toda nuestra expresión.
+
+En este caso, revisá que tenemos la variable usuario, así que pone el valor de Juan.
+
+Y posteriormente, con el operador de más, lo que va a hacer es concatenar el valor de 7 como una cadena,
+
+ya que en este caso como primero encontró una cadena, lo demás lo va a tomar como una cadena, pero
+
+debido a que esto lo pusimos entre paréntesis, primero se realizó la operación de suma y posteriormente
+
+la operación de concatenación.
+
+Vamos a revisar.
+
+Así aguardamos cambios y ejecutamos.
+
+Y podemos observar que ya tenemos el resultado de Juan 7.
+
+Así que en este caso, si se realizó la suma, vamos a documentar estos casos.
+
+Evaluacion.
+
+De izquierda a derecha.
+
+Realiza suma.
+
+En este caso.
+
+Contexto Cadena.
+
+Todo es una cadena.
+
+Todo lo toma como una cadena y en este caso uso de paréntesis.
+
+Modifican.
+
+La prioridad?
+
+En la evaluación.
+
+Así que primero se evalúa la suma de números y posteriormente se revisa la concatenación de usuario,
+
+más el resultado de lo que tenían los paréntesis, es decir, del resultado de la suma que fue 7, por
+
+lo tanto tenemos el resultado de Juan 7.
+
+Pero esto finalmente es una concatenación.
+
+Bien es todo por este video y nos vemos en la siguiente elección.
+
+Saludos.
+
 # 011 Ejercicio: Caracteres Especiales con Java - 08:31
 # 012 Ejercicio: Clase Scanner en Java - 07:58
 # 013 Preguntas de Variables - 5 preguntas
