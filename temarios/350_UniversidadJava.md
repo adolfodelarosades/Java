@@ -419,7 +419,7 @@ Procesamiento de datos con Servlets y despliegue de información con JSPs
 
 * Autenticación del Cliente SOAP y REST Web Service
 
-### Ejercicio Final con la integración de todo lo aprendido
+* Ejercicio Final con la integración de todo lo aprendido
 
 
 ## Nivel - Struts Framework 
