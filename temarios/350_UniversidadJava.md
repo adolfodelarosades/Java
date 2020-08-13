@@ -821,13 +821,13 @@ Fundador de Global Mentoring
 * Ejercicio: Encapsulamiento en Java - parte 2 - 09:08
 * Ejercicio: Mejora con el método toString - 05:19
 
-### 015 • 3 clases • 29 min
+### 015 Fundamentos Java: Contexto Estático en Java (palabra static) • 3 clases • 29 min
 
 * Lección: Contexto Estático en Java (uso de la palabra static) - 10:44
 * Ejercicio: Contexto Estático en Java (uso palabra static) - 11:00
 * Ejercicio: Contexto Estático en Java - parte 2 - 07:06
 
-### 016 • 6 clases • 57 min 
+### 016 Fundamentos Java: Herencia en Java • 6 clases • 57 min 
 
 * Herencia en Java (Inheritance) - 08:57
 * Herencia en Java - parte 2 - 06:16
@@ -836,21 +836,21 @@ Fundador de Global Mentoring
 * Herencia en Java - parte 5 - 14:32
 * Herencia en Java - Orden de construcción de Objetos y Herencia - 08:42
 
-### 017 • 2 clases • 22 min
+### 017 Fundamentos Java: Sobrecarga de Constructores y Métodos en Java • 2 clases • 22 min
 
 * Ejercicio: Sobrecarga de Constructores - 09:50
 * Ejercicio: Sobrecarga de Métodos en Java - 11:43
 
-### 018 • 1 clase • 12 min
+### 018 Fundamentos Java: Paquetes en Java • 1 clase • 12 min
 
 * Ejercicio: Paquetes en Java - 11:35
 
-### 019 • 2 clase • 15 min
+### 019 Fundamentos Java: Uso de la palabra final en Java • 2 clase • 15 min
 
 * Uso de la palabra final en Java - 10:59
 * Uso de la palabra final con Objetos en Java - 04:13
 
-### 020 • 6 clases • 32 min
+### 020 Fundamentos Java: Manejo de Arreglos en Java (arrays) • 6 clases • 32 min
 
 * Arreglos en Java - 06:43
 * Arreglos en Java - parte 2 - 02:44
@@ -859,7 +859,7 @@ Fundador de Global Mentoring
 * Arreglos en Java - parte 5 - 02:41
 * Arreglos en Java - parte 6 - 03:01
 
-### 021 • 5 clases • 29 min
+### 021 Fundamentos Java: Manejo de Matrices en Java • 5 clases • 29 min
 
 * Manejo de Matrices en Java - 08:24
 * Manejo de Matrices en Java - parte 2 - 03:51
@@ -867,7 +867,7 @@ Fundador de Global Mentoring
 * Manejo de Matrices en Java - parte 4 - 05:01
 * Manejo de Matrices en Java - parte 5 - 06:17
 
-### 022 • 7 clases • 43 min
+### 022 Fundamentos Java: Diseño de Clases en Java • 7 clases • 43 min
 
 * Lección: Diseño de Clases en Java - 07:59
 * Ejercicio: Diseño de Clases en Java - 08:47
@@ -877,7 +877,7 @@ Fundador de Global Mentoring
 * Ejercicio: Diseño de Clases en Java - parte 5 - 04:17
 * Ejercicio: Diseño de Clases en Java - parte 6 - 06:14
 
-### 023 • 6 clases • 43 min
+### 023 Fundamentos Java: Laboratorio Final y Conclusión del Curso • 6 clases • 43 min
 
 * Laboratorio Final del curso Fundamentos de Java - 03:59
 * Solución - Laboratorio Final CFJ - parte 1 - 10:45
@@ -886,80 +886,80 @@ Fundador de Global Mentoring
 * Solución - Laboratorio Final CFJ - parte 4 - 06:58
 * Solución - Laboratorio Final CFJ - parte 5 - 11:11
 
-### 024 • 1 clases • 9 min
+### 024 Programación con Java: Argumentos Variables en Java (varargs) • 1 clases • 9 min
 
 * Ejercicio: Argumentos Variables en Java (varargs) - 09:16
 
-### 025 • 3 clases • 18 min
+### 025 Programación con Java: Manejo de Enumeraciones en Java • 3 clases • 18 min
 
 * Manejo de Enumeraciones (enum) en Java - 08:39
 * Ejercicio: Manejo de Enumeraciones en Java - parte 2 - 05:44
 * Ejercicio: Manejo de Enumeraciones en Java - parte 3 - 03:54
 
-### 026 • 2 clases • 12 min
+### 026 Programación con Java: Bloques de Código • 2 clases • 12 min
 
 * Manejo de Bloques de Código en Java - 06:58
 * Manejo de Bloques de Código en Java - parte 2 - 05:19
 
-### 027 • 2 clases • 9 min
+### 027 Programación con Java: Manejo de forEach en Java • 2 clases • 9 min
 
 * Manejo de forEach en Java - 03:55
 * Manejo de forEach en Java - parte 2 - 05:32
 
-### 028 • 1 clase • 8 min
+### 028 Programación con Java: Autoboxing y Unboxing en Java • 1 clase • 8 min
 
 * Autoboxing y Unboxing en Java - 07:56
 
-### 029 • 4 clases • 33 min
+### 029 Programación con Java: Modificadores de Acceso en Java • 4 clases • 33 min
 
 * Modificadores de Acceso en Java - public - 08:10
 * Modificadores de Acceso en Java - protected - 09:39
 * Modificadores de Acceso en Java - default o package - 07:29
 * Modificadores de Acceso en Java - private - 07:14
 
-### 030 • 2 clases • 13 min
+### 030 Programación con Java: Sobreescritura de Métodos en Java (overriding) • 2 clases • 13 min
 
 * Sobreescritura de Métodos en Java (overriding) - 04:10
 * Ejercicio: Sobreescritura de Métodos en Java (overriding) - 08:49
 
-### 031 • 2 clases • 22 min
+### 031 Programación con Java: Polimorfismo en Java • 2 clases • 22 min
 
 * Polimorfismo en Java - 13:27
 * Polimorfismo en Java - Explicación Paso a Paso - 08:25
 
-### 032 • 2 clases • 19 min
+### 032 Programación con Java: Palabra instance of en Java • 2 clases • 19 min
 
 * Lección: Palabra instance of en Java - 09:06
 * Ejercicio: Palabra instance of en Java - 09:48
 
-### 033 • 2 clases • 20 min
+### 033 Programación con Java: Conversión de Objetos (casting) • 2 clases • 20 min
 
 * Lección: Conversión de Objetos (casting) en Java - 07:30
 * Conversión de Objetos (casting) en Java - parte 2 - 12:07
 
-### 034 • 2 clases • 19 min
+### 034 Programación con Java: Clase Object en Java (equals, hashCode y toString) • 2 clases • 19 min
 
 * Clase Object en Java - 11:56
 * Clase Object en Java - parte 2 - 07:12
 
-### 035 • 2 clases • 17 min
+### 035 Programación con Java: Clases Abstractas • 2 clases • 17 min
 
 * Clases Abstractas en Java - 06:14
 * Clases Abstractas en Java - parte 2 - 10:16
 
-### 036 • 4 clases • 25 min
+### 036 Programación con Java: Manejo de Interfaces en Java • 4 clases • 25 min
 
 * Manejo de Interfaces en Java - 02:58
 * Manejo de Interfaces en Java - parte 2 - 05:10
 * Manejo de Interfaces en Java - parte 3 - 07:55
 * Manejo de Interfaces en Java - parte 4 - 09:21
 
-### 037 • 2 clases • 13 min
+### 037 Programación con Java: Manejo de JavaBeans • 2 clases • 13 min
 
 * Manejo de JavaBeans - 07:08
 * Manejo de JavaBeans - parte 2 - 05:28
 
-### 038 • 6 clases • 27 min
+### 038 Programación con Java: Manejo de Excepciones en Java • 6 clases • 27 min
 
 * Manejo de Excepciones en Java - parte 1 - 06:13
 * Manejo de Excepciones en Java - parte 2 - 03:23
@@ -968,19 +968,19 @@ Fundador de Global Mentoring
 * Manejo de Excepciones en Java - parte 5 - 03:18
 * Manejo de Excepciones en Java - parte 6 - 04:04
 
-### 039 • 2 clases • 21 min
+### 039 Programación con Java: API de Collections en Java • 2 clases • 21 min
 
 * Lección: API de Collections en Java - 05:29
 * Ejercicio: API de Collections en Java - 15:06
 
-### 040 • 4 clases • 23 min
+### 040 Programación con Java: Manejo de Generics en Java • 4 clases • 23 min
 
 * Manejo de Generics en Java - parte 1 - 04:34
 * Manejo de Generics en Java - parte 2 - 04:13
 * Colecciones Genéricas en Java - parte 1 - 07:31
 * Colecciones Genéricas en Java - parte 2 - 06:45
 
-### 041 • 5 clases • 25 min
+### 041 Programación con Java: Manejo de Archivos • 5 clases • 25 min
 
 * Manejo de Archivos en Java - parte 1 - 06:12
 * Manejo de Archivos en Java - parte 2 - 03:43
@@ -988,7 +988,7 @@ Fundador de Global Mentoring
 * Manejo de Archivos en Java - parte 4 - 04:14
 * Manejo de Archivos en Java - 07:22
 
-### 042 • 13 clases • 1 h 33 min
+### 042 Programación con Java: Laboratorio Final y Conclusión del Curso • 13 clases • 1 h 33 min
 
 * Laboratorio: Proyecto Final Curso de Programación con Java - 11:21
 * Solución Laboratorio Final Programación con Java - parte 1 - 06:28
@@ -1004,21 +1004,21 @@ Fundador de Global Mentoring
 * Solución Laboratorio Final Programación con Java - parte 11 - 08:38
 * Solución Laboratorio Final Programación con Java - parte 12 - 09:26
 
-### 043 • 4 clases • 25 min
+### 043 Java con JDBC: Introducción a SQL • 4 clases • 25 min
 
 * Ejercicio: Instalación de MySql 8 - 07:13
 * Ejercicio: Creación Base de Datos en MySql 8 - 04:41
 * Sentencias DML en Mysql - 06:57
 * Sentencias DML en Mysql - parte 2 - 05:57
 
-### 044 • 4 clases • 30 min
+### 044 Java con JDBC: Introducción a JDBC • 4 clases • 30 min
 
 * Introducción a JDBC - 09:16
 * Cadena de Conexión a Mysql - 05:27
 * Conexión desde Java con JDBC - 07:22
 * Procesando el resultado con ResultSet - 08:10
 
-### 045 • 11 clases • 1 h 34 min
+### 045 Java con JDBC: Manejo de JDBC • 11 clases • 1 h 34 min
 
 * Ejercicio: Manejo de JDBC - parte 1 - MySql 8 - 09:12
 * Ejercicio: Manejo de JDBC - parte 2 - MySql 8 - 08:09
@@ -1032,20 +1032,19 @@ Fundador de Global Mentoring
 * Laboratorio: Manejo de Usuarios en JDBC con Mysql 8 - 01:36
 * Solución: Manejo de Usuarios en JDBC - 22:27
 
-### 046 • 3 clases • 30 min
+### 046 Java con JDBC: Manejo de Transacciones • 3 clases • 30 min
 
-Lección: Transacciones con JDBC
-03:06
-Ejercicio: Manejo de Transacciones con JDBC
-25:52
-Laboratorio: Manejo de Transacciones con JDBC
-00:49
-Lección: Patrones de Diseño y Buenas Prácticas
-13:24
-Ejercicio: Creación Capa de Datos
-13:02
-Lección: Manejo de Pool de Conexiones
-02:39
-Ejercicio: Manejo de Pool de Conexiones
-07:38
+* Lección: Transacciones con JDBC - 03:06
+* Ejercicio: Manejo de Transacciones con JDBC - 25:52
+* Laboratorio: Manejo de Transacciones con JDBC - 00:49
+
+### 047 Java con JDBC: Patrones de Diseño y Buenas Prácticas • 2 clases • 26 min
+
+* Lección: Patrones de Diseño y Buenas Prácticas - 13:24
+* Ejercicio: Creación Capa de Datos - 13:02
+
+### 048 Java con JDBC: Manejo de Pool de Conexiones • 2 clases • 10 min
+
+* Lección: Manejo de Pool de Conexiones - 02:39
+* Ejercicio: Manejo de Pool de Conexiones - 07:38
 
