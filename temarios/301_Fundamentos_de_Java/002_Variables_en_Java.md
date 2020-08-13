@@ -79,7 +79,7 @@ public class Variables {
 }
 ```
 
-![06-03](images/06-01-3.png)
+![06-03](images/06-03.png)
 
 Y podemos observar que nos despliega el valor de 10.
 
