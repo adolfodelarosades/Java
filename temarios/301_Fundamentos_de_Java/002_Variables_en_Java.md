@@ -632,7 +632,527 @@ Bien es todo por este lección y nos vemos en la siguiente lección.
 Saludos.
 
 # 011 Ejercicio: Caracteres Especiales con Java - 08:31
+
+Hola, que tal y bienvenidos a esta elección.
+
+A continuación vamos a ver el tema de caracteres especiales en Java están listos?
+
+Vamos.
+
+Vamos a seguir trabajando con este programa.
+
+Vamos a limpiar nuestro método.
+
+Vamos a quitar estas líneas.
+
+Y vamos a ver esta lección.
+
+Algunos de los caracteres especiales que podemos utilizar en Java y así poder visualizarlos en nuestra
+
+consola, vamos a comenzar definiendo una variable de tipo string llamada nombre y le asignamos el valor
+
+de Carla.
+
+Ahora vamos a trabajar con esta variable para poder revisar cómo funcionan algunos de los caracteres
+
+especiales que podemos utilizar en Java.
+
+Por ejemplo, tenemos el carácter de salto de línea conocido como diagonal, el cual podemos utilizar
+
+de la siguiente manera vamos a poner ese otro.
+
+Tabulador y vamos a poner el texto de nueva línea.
+
+Dos puntos y posiblemente lo que vamos a hacer es utilizar el carácter de salto de línea.
+
+Este carácter lo vamos a utilizar de la siguiente manera ponemos diagonal inversa y posteriormente la
+
+letra N.
+
+Así que el conjunto de estos caracteres nos va a dar un salto de línea en la consola.
+
+Y posteriormente concatenados el valor de nuestra variable para que visualicemos cómo afecta este carácter
+
+de salto de línea en la salida de nuestro programa.
+
+Vamos a guardar cambios con controles.
+
+Estamos hoy derecho y ejecutamos nuestro programa y podemos llevar nueva línea dos puntos y observamos
+
+que el nombre de Carla ya no se visualiza en la misma línea, sino que ya generamos una nueva línea
+
+y el nombre se imprimió en la siguiente línea.
+
+Así que para ello nos va a servir este carácter.
+
+El carácter de salto de línea también tenemos, por ejemplo, el carácter de tabulador.
+
+De igual manera utilizamos diagonal inversa, pero en este caso la letra T.
+
+Para poder imprimir un tabulador y vamos a ver qué es lo que significa concatenando la variable de nombre.
+
+Bien, guardamos cambios y ejecutamos.
+
+Y podemos ver que un tabulador básicamente es un espacio definido a partir del último carácter se presenta
+
+un tabulador y posteriormente el número de nuestra variable.
+
+De igual manera, nuestro código podemos observar que tiene tabuladores, así que da exactamente lo
+
+mismo cuando definimos una variable.
+
+Podemos presionar la tecla de tap y podemos observar que no se agregan fabulaciones.
+
+Recordemos que para dar formato correcto a nuestro código, en dado caso de que no esté formateado correctamente,
+
+damos clic, derecho y forma.
+
+Y Podemos se va de nueva cuenta élide en automático nos da el formato correcto, nos quita todos los
+
+tabuladores que no necesitamos, pero este carácter de tabulador es exactamente lo mismo.
+
+Cuando mandamos a imprimir este carácter nos da un tabulador en la salida.
+
+Como podemos observar, no son varios espacios en blanco, sino el carácter de tabulador.
+
+También tenemos el siguiente carácter de retroceso.
+
+Así que ese carácter es diagonal inversa de.
+
+De igual manera, concatenados la variable de nombre, guardamos cambios, imprimimos y vamos a ver
+
+qué es lo que hace.
+
+Podemos observar que se imprime el texto de retroceso dos puntos.
+
+Y el valor de Carla.
+
+Sin embargo, podemos observar que aquí habíamos dejado un espacio en blanco.
+
+Así que este espacio en blanco se ha perdido debido precisamente al uso del carácter de retroceso.
+
+Así que básicamente en este caso este carácter nos está regresando una posición en la salida de nuestro
+
+programa y utilizamos dos caracteres de retroceso, entonces es el número de caracteres.
+
+Va a ir retrocediendo la cantidad de caracteres que tengamos de retroceso en nuestra salida?
+
+Vamos a comprobarlo si ponemos de nueva cuenta el carácter.
+
+Desde diagonal inversa, el carácter de retroceso.
+
+Ahora ya no se van a imprimir los dos puntos debido a que se va a recorrer un carácter hacia atrás.
+
+La impresión de nuestra salida bien, guardamos cambios, ejecutamos.
+
+Y podemos ver que ya no están los dos puntos debido a que retrocedimos la impresión de nuestra salida
+
+en dos posiciones, tanto el espacio en blanco como los dos puntos.
+
+También tenemos el uso de comida simple y comilla doble.
+
+Vamos a probarlo.
+
+El uso de comilla simple.
+
+Vamos a poner nuestro nombre entre comillas simple, así que para imprimir el carácter de comida simple
+
+utilizando los caracteres especiales ponemos diagonal inversa y el carácter de comilla simple.
+
+En este caso solamente una comida simple posiblemente concatenados nuestra variable de nombre y para
+
+que envuelva el nombre en comilla simple.
+
+Vamos a poner otra cadena.
+
+Y volvemos a utilizar el carácter de comida simple, en este caso realmente no es necesario utilizar
+
+la diagonal inversa, ya que este carácter de comida simple funciona incluso sin este carácter de diagonal
+
+inversa.
+
+Pero a continuación vamos a ver otro caso para que entiendan por qué se debe de utilizar.
+
+No es en todos los casos, pero se puede utilizar para ciertas ocasiones, así que en este caso no es
+
+necesario.
+
+Pero vamos a utilizarlo y más adelante vamos a explicar el porqué si es necesario.
+
+En algunos casos vamos a guardar cambios, ejecutamos y podemos observar que el valor de carga está
+
+envuelto en comillas simples.
+
+Ahora vamos a ver otro caso, la impresión de comilla doble.
+
+Podemos ver que en este caso, si tratamos de utilizar comilla doble en nuestro programa.
+
+Y posteriormente concatenar el valor de nombre.
+
+Y volver a poner doble comilla simple.
+
+Y concatenados.
+
+De nueva cuenta, la comida doble Podemos se debe a que no se está generando correctamente en nuestra
+
+cadena, ya que si utilizamos la comilla doble dentro de una cadena, entonces el compilador entiende
+
+que ya se acabó la cadena.
+
+Por lo tanto, para que podamos imprimir la comida doble podemos utilizar el caracter de escape.
+
+Así que vamos a poner diagonal inversa.
+
+Tanto en esa comida doble como en esta comida doble.
+
+Y con esto básicamente lo que estamos haciendo.
+
+Voy a poner algunos espacios para que se entienda, aquí lo que estamos haciendo es abriendo la cadena
+
+y aquí se está cerrando la cadena y aquí lo que estamos haciendo es simplemente imprimir el carácter
+
+de comida doble.
+
+Pero hacia la consola.
+
+Así que para poder utilizar este carácter dentro de una cadena, entonces tenemos que utilizar el carácter
+
+de escape diagonal inversa y de igual manera, en este caso aquí ya no estoy poniendo espacios, pero
+
+básicamente lo mismo.
+
+Aquí lo que estamos haciendo es abriendo y cerrando nuestra cadena y estos dos caracteres lo que va
+
+a hacer es que se va a imprimir el carácter de comilla doble hacia la consola.
+
+Por ello utilizamos el carácter de diagonal inversa para que se pueda utilizar este carácter dentro
+
+de una cadena.
+
+Vamos a guardar cambios y vamos a comprobar.
+
+Guardamos derecho, ejecutamos y podemos observar que en este caso tenemos la comida doble abriendo
+
+y cerrando al nombre.
+
+Aquí tengo un espacio, además podemos quitarlo simplemente para que entendieran el ejemplo.
+
+Pero con esto podemos observar, guardamos cambios, ejecutamos.
+
+Observamos que ya está completando la comida doble al inicio y al final de nuestro nombre, así que
+
+estamos concatenando este carácter especial utilizando la diagonal inversa.
+
+En este primer caso, la comilla simple no rompe la cadena.
+
+Por lo tanto, no requerido utilizar la diagonal inversa.
+
+Así que en este caso podríamos haber utilizado la comida simple directamente guardamos cambios y ejecutamos
+
+y observamos que el resultado es el mismo.
+
+Sin embargo, debido a que estamos viendo el tema de caracteres especiales.
+
+Por ello es que ponemos la diagonal inversa y en este caso hemos demostrado que si es requerido utilizar
+
+la diagonal inversa para que este carácter se escape, es decir, que no lo tome como el carácter de
+
+cierre de la cadena, sino que lo tome como un carácter que queremos mandar a imprimir a la consola.
+
+Todo por esta elección y nos vemos en el siguiente video.
+
+Saludos!
+
+
 # 012 Ejercicio: Clase Scanner en Java - 07:58
+
+Hola, bienvenidos a esta elección.
+
+A continuación vamos a ver el uso de la clase escaner en Java.
+
+Están listos?
+
+Vamos.
+
+Hasta el momento hemos definido nuestras variables, pero hasta el momento la información que le estamos
+
+asignando a nuestras variables se conoce como información en código duro, es decir, que este valor
+
+no lo está introduciendo el usuario.
+
+Ahora, aunque el tema de la clase escaner es un tema más avanzado.
+
+De momento vamos a adelantarlo debido a que lo vamos a necesitar para capturar la información que escriba
+
+el usuario y va a ser muy importante para hacer más dinámicos nuestros programas, así que vamos a utilizar
+
+esta clase escáner y vamos a ver cómo hacerlo.
+
+Vamos a quitar este código.
+
+Vamos a definir una variable, por ejemplo la variable usuario y le vamos a asignar cualquier valor.
+
+Por ejemplo, en este caso el valor de Carlos punto y coma y mandamos a imprimir esta variable, como
+
+ya sabemos, ese aleví.
+
+Se va a imprimir el valor de esta variable.
+
+Guardamos cambios, ejecutamos.
+
+Y hasta aquí no hay ningún problema.
+
+Es exactamente lo mismo que hemos venido trabajando.
+
+Estamos creando una variable, le asignamos un valor y lo mandamos a imprimir.
+
+Pero ahora qué pasa si queremos capturar esta información?
+
+No directamente el nombre de Carlos, sino cualquier otro valor que quiera proporcionar el usuario en
+
+nuestra consola.
+
+Para ello vamos a hacer lo siguiente vamos a mandar un mensaje a la consola.
+
+Solicitando que el usuario escriba una información.
+
+Por ejemplo, escribe tu nombre dos puntos.
+
+Y posteriormente vamos a utilizar una clase llamada escáner que nos va a permitir leer información de
+
+la consola.
+
+Para ello vamos a utilizar el siguiente código vamos a escribir.
+
+Recuerden que debe de ser tal cual como se muestra, respetando mayúsculas y minúsculas.
+
+Escribimos escáner con doble n.
+
+Este va a ser el tipo de nuestra variable, posiblemente vamos a ver a detalle el uso de clases y la
+
+creación de objetos, como hemos comentado, nos estamos adelantando un poco a estos temas para que
+
+podamos leer información de la consola, pero básicamente aquí estamos utilizando la clase escaner,
+
+que es un tipo ya definido dentro de las clases de IAVA.
+
+Posteriormente definimos el nombre de nuestra variable llamada consola.
+
+Este va a ser el nombre de esta variable y posteriormente para poder leer información de la consola
+
+escribimos lo siguiente Vamos a crear un nuevo objeto de esta clase utilizando la palabra reservada
+
+Danio escaner, que es el nombre de nuestra clase, y entre paréntesis escribimos Sistem puntos.
+
+Básicamente con esto lo que estamos diciendo es que vamos a leer información de la consola.
+
+Y es de imput, así que la información de la consola y System es una clase también de IAVA que nos va
+
+a permitir acceder a la consola a través de esta variable.
+
+Y cerramos con punto y coma.
+
+Ahora esta sintaxis de crear un objeto de la clase escaner es lo que vamos a ver a detalle posteriormente.
+
+De momento solamente escribano y más adelante lo vamos a explicar a detalle.
+
+Es necesario importar esta clase, ya que se encuentra definida en otra parte de las clases de IAVA,
+
+así que las clases que vamos a utilizar en Java normalmente las vamos a clasificar y empaquetar en folders.
+
+A esto se le conoce como paquetes, así que esta clase se encuentra en un paquete llamado Java punto
+
+y útil, así que vamos a dar clic sobre esta línea Add Import, Java Punto y útil y la clase Escaner.
+
+Así que básicamente le estamos diciendo que dentro del paquete Java punto y útil va a importar la clase
+
+escaner para que podamos utilizarla también.
+
+Todo esto lo vamos a ver a detalle más adelante, solamente lo estamos viendo a grandes rasgos para
+
+que podamos utilizar la consola y así leer información de manera dinámica por parte del usuario.
+
+Ahora esta variable consola la podemos utilizar una o varias veces.
+
+No solamente es para leer una vez de la consola, sino que una vez que ya tenemos esta variable, la
+
+podemos utilizar para leer varias veces de la consola y en lugar de asignarle directamente el valor
+
+de Carlos, ahora vamos a utilizar nuestra variable consola.
+
+Vamos a utilizar el método NEX Line.
+
+Aunque existen otros métodos para leer información de la consola, de momento ese es el método que le
+
+recomendamos utilizar, ya que este método lo que va a hacer es leer una línea completa de la consola,
+
+así que ese es el método que más van a utilizar cuando lean información de la consola.
+
+Bien, y posteriormente aquí lo que va a hacer el programa es que se va a detener hasta que el usuario
+
+escriba una información y una vez que escribe la información y da enter.
+
+Entonces el valor que escribe se asigna a la variable usuario y finalmente se va a imprimir este valor.
+
+Bien, vamos a poner en práctica esto, vamos a guardar cambios y ejecutamos.
+
+Así que en primer lugar se ejecuta la línea 9, se manda imprimir.
+
+Escribe tu nombre.
+
+Y Podemos se va que nuestro programa se detiene, así que nos está esperando para que escribamos un
+
+valor, vamos a escribir cualquier valor, por ejemplo el valor de Juan y hasta que damos enter.
+
+Entonces la consola va a procesar el método next line y el resultado de procesar Next Line se va a asignar
+
+a nuestra variable usuario.
+
+Bien, así que vamos a dar enter.
+
+Y podemos observar finalmente que se imprime usuario igual al valor de la variable usuario, en este
+
+caso el valor que proporcionó el usuario, que es el valor de Juan.
+
+Así que con estas líneas de manera dinámica estamos recuperando el valor de Juan utilizando el método
+
+Next Line, y este método next line lo que hace es detener la ejecución de nuestro programa para esperar
+
+a que el usuario escriba una información y una vez que da enter.
+
+Entonces el resultado se asigna a la variable usuario de manera automática y por ello es cuando mandamos
+
+a imprimir.
+
+Esta variable se imprime el valor que escribió el usuario en la consola y así podemos volver a utilizar
+
+esta variable.
+
+Por ejemplo.
+
+Similar al ejercicio que hemos creado anteriormente para solicitar un título.
+
+Así que volvemos a utilizar la variable consola y el método next line.
+
+Punto y coma y volvemos a imprimir la variable de título, pero además vamos a imprimir, ponemos lo
+
+siguiente.
+
+Resultado?
+
+Dos puntos imprimimos la variable de título.
+
+Y posteriormente concatenados la variable de usuario.
+
+Pero primero con un espacio entre estas dos variables.
+
+Para que tengamos un espacio.
+
+Cuando se imprimen estas variables bien guardamos cambios y ejecutamos.
+
+Podemos ver que el programa nos pide escribe tu nombre, escribimos el valor de Juan y aquí podemos
+
+observar que se detuvo también el programa, pero lo recomendable es poner un texto antes de utilizar
+
+la consola para que el usuario entienda qué es lo que se le está solicitando.
+
+Vamos a detener la ejecución de nuestro programa presionando este icono el botón de Stop.
+
+Y antes de mandar a llamar de nueva cuenta esta línea, voy a poner un texto, voy a mandar un texto
+
+a la consola.
+
+El texto describe.
+
+El título.
+
+Para que el usuario sepa qué es lo que debe de escribir.
+
+Bien guardamos cambios.
+
+Ejecutamos.
+
+Escribimos el nombre Juan y posteriormente nos pide el título, en este caso ingeniero.
+
+Y finalmente, el resultado es la concatenación de la variable ingeniero espacio y el nombre que hemos
+
+proporcionado.
+
+Ingeniero Juan.
+
+Así que con esta línea estamos definiendo la variable consola, la cual nos va a servir para solicitar
+
+información al usuario por medio del método Next Line.
+
+Como hemos comentado, existen otros métodos, pero es el método que más van a utilizar para que no
+
+tengan problemas para leer la información de la consola.
+
+Es todo por este vídeo y nos vemos en la siguiente elección.
+
+Saludos.
+
 # 013 Preguntas de Variables - 5 preguntas
+
+Pregunta 1:
+Cuál es la salida del siguiente código:
+
+var nombre = “Juan”;
+System.out.println(nombre);
+nombre = “Carlos”;
+System.out.println(nombre);
+
+Pregunta 2:
+¿Cuál es la salida del siguiente código?:
+
+String color;
+System.out.println(color);
+color = “Rojo”;
+
+ERROR
+
+¡Buen trabajo!
+¡Correcto! En el momento en que se imprime la variable, no se ha asignado aún un valor a la variable y el compilador manda el error: variable color might not have been initialized (la variable color tal vez no ha sido inicializada)
+
+Pregunta 3:
+¿Qué variable se nombra correctamente?
+
+Pregunta 4:
+¿Qué variable se nombra correctamente?
+
+Pregunta 5:
+¿Cuál es la salida del siguiente código?:
+
+a = “A”;
+System.out.println(a);
+a = “B”;
+System.out.println(b);
+
+ERROR
+
+Correcto. La variable a no se ha definido, no tiene un tipo definido.
+
+
 # Detalles Libro - 1 preguntas
+
+Tarea: Detalles Libro
+
+se solicita agregar la siguiente información de un Libro
+
 # Detalles Libro (Solución) - 00:09
+
+```java
+import java.util.Scanner;
+ 
+public class Main {
+   public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+      // Escribe tu solucion aqui
+      System.out.println("Proporciona el titulo:");
+      String titulo = scanner.nextLine();
+      System.out.println("Proporciona el autor:");
+      String autor = scanner.nextLine();
+      System.out.println(titulo + " fue escrito por " + autor);
+    }
+}
+```
