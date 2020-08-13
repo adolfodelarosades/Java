@@ -1,7 +1,7 @@
 # 301 Fundamentos de Java
 
 ## Contenido del curso 156 secciones • 636 clases • 93h 39m de duración total
-## Contenido del curso 156 secciones • 636 clases • 93h 39m de duración total
+## Contenido del curso 23 secciones • XXX clases • XXh XXm de duración total
 
 ### 001 Instalación Java 14 y Apache Netbeans • 5 clases • 25 min :computer:
 
