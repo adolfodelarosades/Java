@@ -185,15 +185,239 @@ public class Variables {
       System.out.println(miVariableCadena);
     }
 }
-
 ```
 
 ![07-05](images/07-05.png)
 
 Es todo por esta lección y nos vemos en la siguiente lección. Saludos!
 
-
 # 008 Inferencia de Tipos en Java - 08:21
+
+Hola y bienvenidos a esta lección.
+
+A continuación vamos a ver el uso de la palabra reservada `var` en Java están listos? Vamos. 
+
+Continuando con nuestro ejercicio, 
+
+*`Variables`*
+```java
+//Variables Java
+public class Variables {
+   public static void main(String arg[]){
+      //Definimos la variable
+      int miVariableEntera = 10;
+      System.out.println(miVariableEntera);
+        
+      //Modificamos el valor de la variable
+      miVariableEntera = 5;
+      System.out.println(miVariableEntera);
+        
+      String miVariableCadena = "Saludos";
+      System.out.println(miVariableCadena);
+        
+      miVariableCadena = "Adiós";
+      System.out.println(miVariableCadena);
+    }
+}
+```
+
+Hemos visto cómo definir una variable utilizando un tipo de dato, posteriormente el identificador o nombre de la variable y asignándole un valor. Este valor se va a conocer como una **literal** y en este caso las literales numéricas en Java van a ser de tipo `int`.
+
+Así que no solamente la variable va a tener un tipo, sino también las literales es decir, los valores que asignamos a nuestras variables también van a tener un tipo en Java, así que cualquier tipo numérico que no tenga punto flotante va a ser de tipo `int`. Por ejemplo, en este caso 10 y 5 son de tipo `int`.
+
+Y una literal de tipo cadena en automático su tipo va a ser de tipo `String`. 
+
+Ahora, por qué les comento esto?
+
+Porque **a partir de la versión 10 de Java podemos utilizar la palabra reservada `var`** en lugar de utilizar el tipo de dato definido, podemos simplemente poner `var` para que Java infiera el tipo de dato que estamos utilizando, pero **el tipo de dato lo va a inferir a partir de la literal que estamos utilizando**.
+
+Recuerden que la literal es de tipo entero en este caso de 5 y 10, ya que es un número sin punto flotante y en caso de "Saludo" la literal es de tipo `String` debido a que estamos utilizando comillas dobles.
+
+Ahora vamos a ver cómo utilizar `var`, `var` va a hacer inferencia de tipos en Java, a partir del valor que le vamos a asignar de nuestra literal, así que para definir una variable de tipo entero, en lugar de utilizar `int` por ejemplo:
+
+```java
+int miVariableEntera2 = 10;
+```
+
+En lugar de hacerlo así, podemos sino poner ahora la palabra reservada `var`.
+
+```java
+//var - Inferencia de tipos en Java
+var miVariableEntera2 = 10;
+```
+
+Y con esto vamos a lograr varias cosas, pero básicamente nuestro código se va a simplificar debido
+
+a que vamos a utilizar tipos de datos mucho más complejos y simplemente utilizando Baur en automático,
+
+Java va a inferir el tipo de dato según el valor que le estemos asignando del lado derecho.
+
+Así que según el valor que asignemos en este caso puede ser una literal, pero más adelante vamos a
+
+ver que le podemos asignar referencias de objetos y aquí es en el tema de la inferencia de tipos va
+
+a ser mucho más poderoso.
+
+En este caso es más simple debido a que la literal 10 es de tipo entero, según hemos comentado.
+
+Por lo tanto, la variable que estamos definiendo mi variable enterados también va a ser de tipo entero.
+
+Vamos a imprimir ahora esta variable, ese tabulador.
+
+Ponemos las primeras letras de nuestra variable y posteriormente control espacio para que nos dé la
+
+ayuda y seleccionamos la variable mi variable.
+
+Enterados.
+
+Ya estamos utilizando el valor de 10, por lo tanto vamos a usar uno distinto, por ejemplo el valor
+
+de 15 para que veamos el nuevo valor en guardamos cambios y ejecutamos.
+
+Y podemos llevar el nuevo valor de nuestra variable, el valor de 15.
+
+Así que está funcionando sin ningún problema.
+
+En dado caso de que el uso de bar no funcione en su programa, deben de revisar que en su proyecto tengan
+
+la última versión del JDK.
+
+Puede ser una versión 10 o superior.
+
+Por ejemplo, en este caso damos clic derecho propiedades y aquí, en el icono de Sources podemos observar
+
+aquí una parte inferior que estamos seleccionando el JDK 14, que es la última versión que tenemos al
+
+día de hoy.
+
+Si tienen una versión más reciente no hay ningún problema.
+
+Pueden seleccionarla, pero pueden observar que su proyecto lo pueden poner a cualquier otra versión.
+
+Pero en este caso, a partir de la versión 10 es cuando se introdujo el concepto de variables inferencia
+
+de tipos.
+
+Y también aquí en la sección de Libraries deben de verificar que estén seleccionando el JDK 14.
+
+De lo contrario no va a funcionar correctamente su programa, ya que no va a reconocer el uso de.
+
+Así que el uso de barcos va a simplificar la definición de variables.
+
+Sin embargo, todo el poder del uso de bar lo vamos a ver más adelante, cuando ya estudiamos el tema
+
+de objetos, en el cual vamos a poder crear nuestros propios tipos de datos utilizando clases en Java.
+
+Bien les dejamos como ejercicio ahora definir una variable de tipo cadena llamada Mi Variable Cadena
+
+2 y mandan a imprimir esta nueva variable, pero ya no van a utilizar el tipo string, sino van a utilizar
+
+el tipo de dato VAR.
+
+Les damos unos segundos y continuamos.
+
+Bien, si ya lo realizaron, vamos a comprobar la solución.
+
+Vamos a definir nuestra variable de tipo string, pero podemos observar que ya no es necesario utilizar
+
+el tipo de dato string, sino que lo vamos a inferir a partir del valor que le vamos a asignar.
+
+Por ejemplo, en este caso utilizamos Baur, mi variable.
+
+Cadena 2 y le asignamos un valor, este valor va a ser una literal de tipo cadena.
+
+Y le asignamos cualquier valor, por ejemplo, nueva cadena para mandar a imprimir directamente el valor
+
+de la variable en lugar de ese otro.
+
+Podemos aceptar que no nos muestra el valor de la variable, pero para mandar a imprimir el valor de
+
+la variable voy a presionar control Z.
+
+Para quitar este código y posteriormente en lugar de otro, voy a poner ese hobby, es otro atajo muy
+
+común también que podemos utilizar para imprimir el valor de nuestra variable.
+
+Así que ponemos ese bi de variable, presionamos la tecla de tabulador y podemos se va que nos va a
+
+mandar a imprimir.
+
+La última variable que hemos definido en este caso nos va a mandar el texto mi variable y posteriormente
+
+va a imprimir el valor de la variable mi carenados.
+
+Posteriormente vamos a ver este concepto que se conoce como concatenación de cadenas.
+
+Podemos se va que en este caso para unir dos cadenas ya utiliza el operador de más.
+
+Así que no solamente el operador de más se puede utilizar para sumar números.
+
+Como vamos a ver más adelante, sino que en este caso también lo vamos a utilizar para unir cadenas.
+
+A este concepto se le conoce como concatenación de cadenas y esto lo vamos a ver al detalle más adelante.
+
+Pero pueden observar que en este momento ya estamos uniendo la cadena, que es el texto de mi variable
+
+dos, el símbolo de igual.
+
+Esto es simplemente un texto y del lado derecho, con el símbolo de más, unimos el valor de nuestra
+
+variable, en este caso el valor de la variable cadena 2.
+
+Bien, vamos a guardar cambios, ejecutamos.
+
+Y podemos observar ahora el valor de nuestra variable primero el texto mi variable cadena 2 igual y
+
+se imprime el valor de nuestra variable.
+
+Todo esto lo podemos hacer en las impresiones anteriores de las variables para que sepamos cuál es el
+
+valor de la variable que estamos imprimiendo.
+
+Por qué en este caso ya no sabemos cuál es la variable que tiene este valor.
+
+Por lo tanto, es recomendable que mandemos a imprimir el nombre de la variable y posteriormente su
+
+valor.
+
+Simplemente es una práctica común.
+
+Y para ello nos va a servir entonces el atajo de ese automóvil.
+
+Así que ponemos ese bi tabulador.
+
+Y Podemos va, que nos imprime el valor de nuestra variable, incluyendo el nombre de la variable en
+
+texto.
+
+Así que esperemos que hayan llegado a la misma solución, en este caso solamente con la diferencia de
+
+que estamos agregando el nombre de nuestra variable.
+
+Y en conclusión, si están utilizando una versión del JDK anterior a la versión 10, entonces tienen
+
+que indicar el tipo de dato.
+
+Por ejemplo, en este caso que es de tipo int, que es de tipo string, etc. pero si están trabajando
+
+con una versión de JDK superior a la versión 10, entonces pueden utilizar el tipo bar para la inferencia
+
+de tipos y el tipo se va a inferir a partir del valor que le estamos asignando.
+
+Más adelante vamos a ver qué restricciones existen respecto al uso de bar, pero en resumen podríamos
+
+decir que sí van a definir una variable dentro de un método.
+
+Por ejemplo, en este caso dentro del método Domaine lo van a poder utilizar sin problema, pero si
+
+ya están fuera de un método, entonces ya no pueden utilizar bahr.
+
+Así que es parte de las restricciones que vamos a ir estudiando poco a poco.
+
+Es todo por este video y nos vemos en la siguiente elección.
+
+Saludos.
+
 # 009 Ejercicio: Reglas para definir una variable en Java - 04:03
 # 010 Ejercicio: Concatenación con Java - 11:46
 # 011 Ejercicio: Caracteres Especiales con Java - 08:31
