@@ -105,96 +105,96 @@ La Universidad Java incluye los siguientes temas de estudio en la tecnología Ja
 
 ### Lección 1 - Polimorfismo en Java
 
-Qué es el polimorfismo y su aplicación
+* Qué es el polimorfismo y su aplicación
 
-Sobreescritura en Java y su uso
+* Sobreescritura en Java y su uso
 
 ### Lección 2 - Manejo Avanzado de Objetos en Java
 
-Conversión de Objetos (cast)
+* Conversión de Objetos (cast)
 
-Identificando el tipo de objeto con el operador instanceof
+* Identificando el tipo de objeto con el operador instanceof
 
-La importancia y uso del operador this
+* La importancia y uso del operador this
 
 ### Lección 3 - Manejo de Bloques de Código en Java
 
-Alcance de Variables (Scope)
+* Alcance de Variables (Scope)
 
-Uso de bloques estáticos y no estáticos
+* Uso de bloques estáticos y no estáticos
 
 ### Lección 4 - Uso de Clases Abstractas e Interfaces en Java
 
-Diferencias entre Clases Abstractas e Interfaces
+* Diferencias entre Clases Abstractas e Interfaces
 
-Declaración y uso de Clases Abstractas
+* Declaración y uso de Clases Abstractas
 
-Manejo de Interfaces en Java y cuándo utilizarlas
+* Manejo de Interfaces en Java y cuándo utilizarlas
 
 ### Lección 5 - Manejo de Excepciones en Java
 
-Procesando las excepciones en Java
+* Procesando las excepciones en Java
 
-Uso de try-catch y propagación de Excepciones
+* Uso de try-catch y propagación de Excepciones
 
 ### Módulo 6 - Manejo de Colecciones en Java
 
-Uso de las colecciones en Java
+* Uso de las colecciones en Java
 
-Manejo de List, Set y Map y la aplicación de cada estructura
+* Manejo de List, Set y Map y la aplicación de cada estructura
 
 ### Módulo 7 - Manejo de Archivos en Java
 
-Manejo y uso de archivos en Java
+* Manejo y uso de archivos en Java
 
-Manejo de Streams en Java y sus usos
+* Manejo de Streams en Java y sus usos
 
 ### Laboratorio Final del Nivel
 
-Ejercicio Final donde se aplica todo lo aprendido en este nivel
+* Ejercicio Final donde se aplica todo lo aprendido en este nivel
 
 
 ## Nivel 3. Conexión a Bases de Datos con JDBC
 
 ### Lección 1 - Comenzando con JDBC (Java Database Connectivity)
 
-La necesidad de una base de datos
+* La necesidad de una base de datos
 
-Instalando MySql y Oracle
+* Instalando MySql y Oracle
 
-Descarga de controladores (drivers) para conectarnos a la base
+* Descarga de controladores (drivers) para conectarnos a la base
 
 ### Lección 2 - Conectando a la Base de Datos (BD)
 
-Pasos para conectarnos a una base de datos relacional
+* Pasos para conectarnos a una base de datos relacional
 
-Código JDBC para conectarnos a la base de datos
+* Código JDBC para conectarnos a la base de datos
 
 ### Lección 3 - Sentencia Select
 
-Pasos para ejecutar la sentencia Select de SQL con JDBC
+* Pasos para ejecutar la sentencia Select de SQL con JDBC
 
-Uso de la sentencia select para leer la información de la BD
+* Uso de la sentencia select para leer la información de la BD
 
 ### Lección 4 - Manipulando Datos con JDBC
 
-Pasos para ejecutar las sentencias insert, update y delete
+* Pasos para ejecutar las sentencias insert, update y delete
 
-Uso de las sentencias insert,update y delete para manipular información
+* Uso de las sentencias insert,update y delete para manipular información
 
-Separación de funciones select, insert, update y delete con JDBC
+* Separación de funciones select, insert, update y delete con JDBC
 
 ### Lección 5 - Metadatos con JDBC
 
-Conocimiendo la estructura de las tablas de BD con JDBC
+* Conocimiendo la estructura de las tablas de BD con JDBC
 
-La importancia del uso de Metadatos en JDBC
+* La importancia del uso de Metadatos en JDBC
 
 ### Lección 6 - Patrones de Diseño
 
-Patrón de Diseño DAO (Data Access Object)
+* Patrón de Diseño DAO (Data Access Object)
 
-Patrón de Diseño DTO (Data Transfer Object) o VO (Value Object)
+* Patrón de Diseño DTO (Data Transfer Object) o VO (Value Object)
 
 ### Laboratorio Final con la integración de todo lo visto en este Nivel
 
@@ -203,31 +203,31 @@ Patrón de Diseño DTO (Data Transfer Object) o VO (Value Object)
 
 ### Lección 1 - Introducción a la Tecnología Web con Java
 
-El asombroso mundo de la tecnología Web con Java
+* El asombroso mundo de la tecnología Web con Java
 
-La revolución de las aplicaciones Web y cómo aprovecharla
+* La revolución de las aplicaciones Web y cómo aprovecharla
 
-El servidor de aplicaciones Glassfish y cómo utilizarlo
+* El servidor de aplicaciones Glassfish y cómo utilizarlo
 
 ### Lección 2 - Conceptos Básicos de los Servlets
 
-Sin misterios: qué es la tecnología de los Servlets
+* Sin misterios: qué es la tecnología de los Servlets
 
-Elementos y ciclo de vida de un Servlet
+* Elementos y ciclo de vida de un Servlet
 
 ### Lección 3 - Manejo de Sesiones con Servlets
 
-Implementación del concepto de Sesiones con Servlets
+* Implementación del concepto de Sesiones con Servlets
 
-Aprenderemos el uso del objeto HttpSession
+* Aprenderemos el uso del objeto HttpSession
 
-Implementaremos un carrito de compras Web
+* Implementaremos un carrito de compras Web
 
 ### Lección 4 - Conceptos Básicos de los JSPs
 
-Estudiaremos cómo crear páginas Web dinámicas con JSPs
+* Estudiaremos cómo crear páginas Web dinámicas con JSPs
 
-Aprenderemos los elementos fundamentales de los JSPs
+* Aprenderemos los elementos fundamentales de los JSPs
 
 ### Lección 5 - Conceptos Avanzados de Servlets y JSPs
 
@@ -237,324 +237,325 @@ Procesamiento de datos con Servlets y despliegue de información con JSPs
 
 ### Lección 6 - JSTL y EL (Expression Language) en JSPs
 
-Entenderemos las etiquetas JSTL para facilitar el uso de JSPs
+* Entenderemos las etiquetas JSTL para facilitar el uso de JSPs
 
-Veremos el poder de EL (Expression Language) en los JSPs
+* Veremos el poder de EL (Expression Language) en los JSPs
 
 ### Lección 7 - Patrón de Diseño MVC (Model View Controller)
 
-Estudiaremos una arquitectura multicapas del mundo real con Servlets y JSPs
+* Estudiaremos una arquitectura multicapas del mundo real con Servlets y JSPs
 
-Aplicaremos el patrón de diseño MVC con Servlets y JSPs
+* Aplicaremos el patrón de diseño MVC con Servlets y JSPs
 
 ### Lección 8 - Aplicación SGA (Sistema de Gestión de Alumnos)
 
-Integración de los primeros 5 niveles en un proyecto final (SGA)
+* Integración de los primeros 5 niveles en un proyecto final (SGA)
 
-Análisis, Diseño y Desarrollo de la aplicación SGA
+* Análisis, Diseño y Desarrollo de la aplicación SGA
 
-Este nivel les permite conseguir empleo desde becario o programador Java Jr
+* Este nivel les permite conseguir empleo desde becario o programador Java Jr
+
 
 ## Nivel 5 - Java Server Faces
 
 ### Lección 1 - Introducción a JavaServer Faces
 
-Qué es JSF y su rol en Java EE
+* Qué es JSF y su rol en Java EE
 
-Conceptos básicos de JSF y MVC
+* Conceptos básicos de JSF y MVC
 
-HolaMundo con JSF
+* HolaMundo con JSF
 
 ### Lección 2 - ManagedBeans en JSF
 
-Concepto de ManagedBeans en JSF
+* Concepto de ManagedBeans en JSF
 
-Uso de ModelManagedBeans en JSF
+* Uso de ModelManagedBeans en JSF
 
-Expression Language (EL) en JSF
+* Expression Language (EL) en JSF
 
-Cocepto de BackingBeans en JSF
+* Cocepto de BackingBeans en JSF
 
-Manejo de Alcances (Scopes) en JSF
+* Manejo de Alcances (Scopes) en JSF
 
 ### Lección 3 - Reglas de Navegación en JSF
 
-Reglas de Navegación en JSF
+* Reglas de Navegación en JSF
 
-Ciclo de Vida en JSF
+* Ciclo de Vida en JSF
 
 ### Lección 4 - Validadores en JSF
 
-Manejo de Validadores en JSF
+* Manejo de Validadores en JSF
 
-Uso de Convertidores en JSF
+* Uso de Convertidores en JSF
 
-Manejo de Mensajes e Internacionalización en JSF
+* Manejo de Mensajes e Internacionalización en JSF
 
 ### Lección 5 - Manejo de Eventos en JSF
 
-Uso de Value Change Listener
+* Uso de Value Change Listener
 
-Manejo de ActionListener y ActionEvent en JSF
+* Manejo de ActionListener y ActionEvent en JSF
 
-Uso de librería estándar y SelectItems en JSF
+* Uso de librería estándar y SelectItems en JSF
 
 ### Lección 6 - Manejo de Facelets
 
-La evolución de JSP y el uso de Facelets
+* La evolución de JSP y el uso de Facelets
 
-El uso y la importancia de Faceltes en JSF
-
+* El uso y la importancia de Faceltes en JSF
 
 
 ## Nivel 6 - Java EE (ncluye EJB's y JPA, Web Services y Seguridad)
 
 ### Lección 1 - Introducción a Java EE
 
-Introducción al mundo Java Empresarial (Java EE)
+* Introducción al mundo Java Empresarial (Java EE)
 
-Stack de Tecnologías Java EE
+* Stack de Tecnologías Java EE
 
-Arquitectura Multicapas en Java EE
+* Arquitectura Multicapas en Java EE
 
-Instalación de las Herramientas (Eclipse, MySql)
+* Instalación de las Herramientas (Eclipse, MySql)
 
-Instalación del Servidor de Aplicaciones Glassfish
+* Instalación del Servidor de Aplicaciones Glassfish
 
-Uso de Maven y JavaEE
+* Uso de Maven y JavaEE
 
-HolaMundo con JavaEE
+* HolaMundo con JavaEE
 
 ### Lección 2 - Enterprise Java Beans (EJB)
 
-Introducción a los EJB
+* Introducción a los EJB
 
-Tipos y Configuración de un EJB
+* Tipos y Configuración de un EJB
 
-Inyección de Dependencias en Java EE
+* Inyección de Dependencias en Java EE
 
-Empaquetamiento y Contenedores empresariales
+* Empaquetamiento y Contenedores empresariales
 
 ### Lección 3 - Introducción a Java Persistence API (JPA)
 
-Introducción a Java Persistence API (JPA)
+* Introducción a Java Persistence API (JPA)
 
-Entenidimiento de las clases de Entidad en JPA
+* Entenidimiento de las clases de Entidad en JPA
 
-Manejo de EntityManager y Persistence Unit
+* Manejo de EntityManager y Persistence Unit
 
-Uso de JUnit y JPA
+* Uso de JUnit y JPA
 
 ### Lección 4 - Consultas con JPA
 
-Ciclo de Vida en JPA
+* Ciclo de Vida en JPA
 
-Tipos de Relaciones en JPA
+* Tipos de Relaciones en JPA
 
-Consultas JPQL en JPA
+* Consultas JPQL en JPA
 
-Uso del API de Criteria en JPA
+* Uso del API de Criteria en JPA
 
-Manejo de Transacciones en JPA
+* Manejo de Transacciones en JPA
 
 ### Lección 5 - Rol de JSF
 
-Rol de JSF en Java EE
+* Rol de JSF en Java EE
 
-Ajax en JSF 
+* Ajax en JSF 
 
-PrimeFaces y JSF 
+* PrimeFaces y JSF 
 
-Integración JSF, PrimeFaces, AJAX, EJB y JPA
+* Integración JSF, PrimeFaces, AJAX, EJB y JPA
 
 ### Lección 6 - WebServices y JavaEE
 
-Introducción a los Web Services
+* Introducción a los Web Services
 
-Tipos de Web Services JAX-WS y JAX-RS
+* Tipos de Web Services JAX-WS y JAX-RS
 
-Qué es un Documento WSDL
+* Qué es un Documento WSDL
 
-Uso de Documentos XML y XSD (XML Scheme)
+* Uso de Documentos XML y XSD (XML Scheme)
 
-Manejo del API de JAXB
+* Manejo del API de JAXB
 
-Estrategias de Generación de Web Services
+* Estrategias de Generación de Web Services
 
-Despliegue de Web Services
+* Despliegue de Web Services
 
-Creación del Cliente del Servicio Web
+* Creación del Cliente del Servicio Web
 
 ### Lección 7 - REST Web Services
 
-Introducción a REST Web Services
+* Introducción a REST Web Services
 
-Análisis de Peticiones HTTP
+* Análisis de Peticiones HTTP
 
-Anotaciones del API JAX-RS
+* Anotaciones del API JAX-RS
 
-Integración de EJB y JAX-RS
+* Integración de EJB y JAX-RS
 
-Creación de un Cliente REST
+* Creación de un Cliente REST
 
-Documento WADL y XSD del REST Web Service
+* Documento WADL y XSD del REST Web Service
 
-Despliegue de un REST Web Service
+* Despliegue de un REST Web Service
 
-Creación Cliente REST Web Service
+* Creación Cliente REST Web Service
 
 ### Lección 8 - Seguridad en Java EE
 
-Introducción a la Seguridad en Java EE
+* Introducción a la Seguridad en Java EE
 
-Autenticación y Autorización en Java EE
+* Autenticación y Autorización en Java EE
 
-Seguridad en la Capa Web en Java EE
+* Seguridad en la Capa Web en Java EE
 
-Seguridad en Capa EJB en Java EE
+* Seguridad en Capa EJB en Java EE
 
-Autenticación de Clientes en Java EE
+* Autenticación de Clientes en Java EE
 
-Autenticación del Cliente Web
+* Autenticación del Cliente Web
 
-Autenticación del Cliente SOAP y REST Web Service
+* Autenticación del Cliente SOAP y REST Web Service
 
 ### Ejercicio Final con la integración de todo lo aprendido
+
 
 ## Nivel - Struts Framework 
 
 ### Lección 1 - Introducción a Struts Framework
 
-¿Qué es un Struts Framework?
+* ¿Qué es un Struts Framework?
 
-Instalación de Herramientas del Curso
+* Instalación de Herramientas del Curso
 
 ### Lección 2 - HolaMundo con Struts
 
-Creación del proyecto Web con Struts Framework
+* Creación del proyecto Web con Struts Framework
 
-HolaMundo con Struts.
+* HolaMundo con Struts.
 
 ### Lección 3 - Manejo de Acciones con Struts
 
-Acciones con Struts
+* Acciones con Struts
 
-Ejercicio Acciones con Struts
+* Ejercicio Acciones con Struts
 
-Más ejercicios de Acciones con Stu
+* Más ejercicios de Acciones con Stu
 
 ### Lección 4 - Manejo de Formas con Struts
 
-FormBeans con Struts
+* FormBeans con Struts
 
-Ejercicio con FormBeans
+* Ejercicio con FormBeans
 
-Llenado de Formularios con Struts
+* Llenado de Formularios con Struts
 
 ### Lección 5 - Acciones Avanzadas con Struts
 
-Formas Avanzadas con Struts
+* Formas Avanzadas con Struts
 
-Ejercicio Formas Avanzadas con Struts
+* Ejercicio Formas Avanzadas con Struts
 
 ### Lección 6 - Internacionalización con Struts
 
-Manejo de Internacionalización con Struts
+* Manejo de Internacionalización con Struts
 
-Ejercicio manejo de Mensajes con Struts
+* Ejercicio manejo de Mensajes con Struts
 
-Ejercicio manejo de Internacionalización con Struts
+* Ejercicio manejo de Internacionalización con Struts
 
 ### Lección 7 - Manejo de Excepciones con Struts
 
-Manejo de Excepciones con Struts
+* Manejo de Excepciones con Struts
 
-Ejercicio Manejo de Excepciones con Struts
+* Ejercicio Manejo de Excepciones con Struts
 
 ### Lección 8 - Validación Manual con Struts
 
-Validación Manual con Struts
+* Validación Manual con Struts
 
-Ejerciciodas Validación Manual con Struts
+* Ejerciciodas Validación Manual con Struts
 
 ### Lección 9 - Validación Automática con Struts
 
-Validación Automática con Struts
+* Validación Automática con Struts
 
-Ejercicio Validación Automática
+* Ejercicio Validación Automática
 
 ### Lección 10 - Manejo de Tiles (Plantillas) con Struts
 
-Uso de Tiles (Plantillas) con Struts
+* Uso de Tiles (Plantillas) con Struts
 
-Ejercicio Plantillas con Struts
+* Ejercicio Plantillas con Struts
 
 ### Laboratorio Final
 
-Conclusión del Curso con Struts
+* Conclusión del Curso con Struts
 
 
 ## Nivel - Hibernate Framework y JPA (JavaPersistence API)
 
 ### Lección 1 - Introducción a Hibernate Framework
 
-¿Qué es un ORM - Object Relational Mapping?
+* ¿Qué es un ORM - Object Relational Mapping?
 
-Cómo Hibernate me ayuda en un diseño multicapas empresarial
+* Cómo Hibernate me ayuda en un diseño multicapas empresarial
 
-Cómo ser mucho más productivo en la capa de datos con Hibernate
+* Cómo ser mucho más productivo en la capa de datos con Hibernate
 
 ### Lección 2 - Configuración de Hibernate
 
-Revisaremos de los Patrones de Diseño DAO y DTO
+* Revisaremos de los Patrones de Diseño DAO y DTO
 
-Pondremos en práctica las operaciones básicas con Hibernate.
+* Pondremos en práctica las operaciones básicas con Hibernate.
 
-Crearemos una aplicación Web con JSPs, Servlets y Hibernate.
+* Crearemos una aplicación Web con JSPs, Servlets y Hibernate.
 
 ### Lección 3 - Manejo de Relaciones con Hibernate
 
-Estudiaremos los tipos de Asociaciones en Hibernate
+* Estudiaremos los tipos de Asociaciones en Hibernate
 
-Veremos las relaciones uno-uno, uno-muchos y muchos-muchos
+* Veremos las relaciones uno-uno, uno-muchos y muchos-muchos
 
-Estudiaremos el concepto de Clases de Entidad que nos ofrece Hibernate
+* Estudiaremos el concepto de Clases de Entidad que nos ofrece Hibernate
 
 ### Lección 4 - Ciclo Vida en Objetos de Entidad
 
-Estudiaremos el concepto del Ciclo de Vida en Objetos de Entidad
+* Estudiaremos el concepto del Ciclo de Vida en Objetos de Entidad
 
-Aprenderemos el concepto de Persistencia y Persistencia en Cascada
+* Aprenderemos el concepto de Persistencia y Persistencia en Cascada
 
 ### Lección 5 - Consultas con HQL
 
-Aprenderemos el lenguaje HQL (Hibernate Query Language)
+* Aprenderemos el lenguaje HQL (Hibernate Query Language)
 
-Estudiaremos el concepto de JOINS en HQL
+* Estudiaremos el concepto de JOINS en HQL
 
-Analizaremos el concepto de Lazy Loading y Fetch en HIbernate
+* Analizaremos el concepto de Lazy Loading y Fetch en HIbernate
 
 ### Lección 6 - Consultas API Criteria
 
-Estudiaremos el API de Criteria y cómo aplicarlo en Hibernate
+* Estudiaremos el API de Criteria y cómo aplicarlo en Hibernate
 
-Analizaremos en qué casos aplicar HQL o el API de Criteria
+* Analizaremos en qué casos aplicar HQL o el API de Criteria
 
 ### Lección 7 - Query by Example
 
-Aprenderemos a aplicar Criteria Join y Fetch
+* Aprenderemos a aplicar Criteria Join y Fetch
 
-Utilizaremos Query by Example para crear queries avanzados
+* Utilizaremos Query by Example para crear queries avanzados
 
 ### Lección 8 - Sistema SGA con Hibernate
 
-Construiremos el sistema SGA con Hibernate
+* Construiremos el sistema SGA con Hibernate
 
-La capa de datos la construiremos utilizando Hibernate
+* La capa de datos la construiremos utilizando Hibernate
 
-Crearemos consultas avanzadas con Hibernate
+* Crearemos consultas avanzadas con Hibernate
 
-### Aplicaremos todo lo aprendido en este Nivel
+* Aplicaremos todo lo aprendido en este Nivel
 
 
 ## Nivel - Spring Framework
@@ -610,29 +611,29 @@ Y por si fuera poco, te obsequiamos como bono de regalo los cursos de "HTML, CSS
 
 ### Lección 1 - Introducción a HTML
 
-Estudiaremos una introducción a la tecnología HTML
+* Estudiaremos una introducción a la tecnología HTML
 
-Enteniendo el papel de HTML en el mundo de las aplicaciones Web
+* Enteniendo el papel de HTML en el mundo de las aplicaciones Web
 
 ### Lección 2 - Componentes en HTML
 
-Los componentes de HTML y cómo se estructura una página Web
+* Los componentes de HTML y cómo se estructura una página Web
 
-Uso de componentes de Texto, Fuentes, Preformato y más en HTML
+* Uso de componentes de Texto, Fuentes, Preformato y más en HTML
 
 ### Lección 3 - Introducción a CSS
 
-Introducción a las Hojas de Estilo CSS
+* Introducción a las Hojas de Estilo CSS
 
-Los aspectos más importantes a considerar al utilizar CSS
+* Los aspectos más importantes a considerar al utilizar CSS
 
-Uso de clases e indentificadores en CSS
+* Uso de clases e indentificadores en CSS
 
 ### Lección 4 - Formularios en HTML
 
-Elementos a considerar al crear Formularios HTML
+* Elementos a considerar al crear Formularios HTML
 
-Componentes para la creación de Formularios HTML
+* Componentes para la creación de Formularios HTML
 
 ### Lección 5 - Introducción a JavaScript
 
@@ -642,9 +643,9 @@ Elementos básicos del lenguaje JavaScript
 
 ### Lección 6 - Validación de Formularios HTML
 
-Integración de Formularios HTML y JavaScript
+* Integración de Formularios HTML y JavaScript
 
-Validación de Formularios con JavaScript
+* Validación de Formularios con JavaScript
 
 
 ## Bono Regalo 2: Nivel - HTML5 y CSS3
