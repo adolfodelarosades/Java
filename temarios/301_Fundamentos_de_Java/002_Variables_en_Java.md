@@ -31,133 +31,61 @@ Esto lo vamos a ver más adelante y en estas primeras lecciones vamos a comenzar
 
 ![06-02](images/06-02-1.png)
 
-En Java existen diferentes tipos de datos, pero en esta elección vamos a comenzar con lo que se conoce
+En Java existen diferentes tipos de datos, pero en esta lección vamos a comenzar con lo que se conoce
 
 como tipos primitivos.
 
-Por ejemplo, en este caso tenemos los tipos primitivos de tipo entero y también los tipos primitivos
+Por ejemplo, en este caso tenemos los tipos primitivos de tipo entero y también los tipos primitivos de tipo flotante, así que son los tipos con los que vamos a empezar. Sin embargo, también existe un tipo especial en Java que se conoce como `String` y nos va a permitir manejar las cadenas que vamos a trabajar en Java. Esto ya lo trabajamos en nuestra primera lección, pero en esta lección vamos a ir profundizando más en ese tipo de dato que es una cadena y esto lo vamos a conocer como un *tipo referenciado*. Sin embargo, esto lo vamos a ver a detalle en clases posteriores. Pero la clasificación de tipos referenciados va a ser *clases*, *interfaces* y *arreglos*. Todo eso lo vamos a ver a detalle posteriormente. Así que tengan paciencia.
 
-de tipo flotante, así que son los tipos con los que vamos a empezar.
+De momento vamos a trabajar con los tipos primitivos, *enteros* y *flotantes*, y también respecto de los tipos referenciados, como hemos comentado vamos a trabajar con el tipo `String` o cadena.
 
-Sin embargo, también existe un tipo especial en Java que se conoce como string y nos va a permitir
+Así que vamos a empezar nuestra lección, lo que van a hacer es abrir su IDE de NetBeans.
 
-manejar las cadenas que vamos a trabajar en Java.
+Recordemos que el método `main` nos va a permitir ejecutar nuestro programa, así que de momento vamos a entender que este método únicamente lo estamos utilizando para poder ejecutar las líneas de código que están contenidas dentro de este método `main`.
 
-Esto ya lo trabajamos en nuestra primera elección, pero en esta lección vamos a ir profundizando más
+Para definir una variable existen diferentes reglas, *primero tenemos que especificar el tipo en Java que vamos a utilizar* por ejemplo, podemos definir una variable primitiva de tipo entero, `int` es la palabra reservada que vamos a utilizar para definir una variable de tipo entero y posteriormente utilizamos un identificador, es decir, el nombre de la variable por ejemplo, `miVariableEntera`.  
 
-en ese tipo de dato que es una cadena y esto lo vamos a conocer como un tipo referenciado.
+```java
+int miVariableEntera = 10;
+```
 
-Sin embargo, esto lo vamos a ver a detalle en clases posteriores.
+Podemos observar que el nombre de la variable inicia con minúscula y posteriormente, si tenemos más de una palabra, entonces se recomienda utilizar la primera letra en mayúscula, por ejemplo, la palabra variable, la V que es la primer letra de esta palabra inicia mayúscula y también la E inicia con mayúscula.
 
-Pero la clasificación de tipos referenciados va a ser clases, interfaces y arreglos.
+A este tipo de notación se le conoce como **notación de camello o notación de altas y bajas**, y se conoce así debido a la forma que se genera. Como podemos observar de altas y bajas o notación de camello.
 
-Todo eso lo vamos a ver a detalle posteriormente.
+Así que eso es lo más común que vamos a encontrar cuando trabajamos en Java, incluso es una buena práctica, por lo tanto, es recomendable que nos empecemos a familiarizar con esto desde un inicio.
 
-Así que tengan paciencia.
+Podemos ver que **la variable inicia con letra minúscula** y posteriormente, después de definir la variable y su tipo, vamos a asignarle un valor para poder asignar un valor vamos a utilizar el operador de igual, es decir, el operador de asignación y le podemos asignar cualquier valor, por ejemplo, el valor de 10 y como es una línea de código en Java, debe determinar con punto y coma. Así que todas las líneas en Java terminan con punto y coma. 
 
-De momento vamos a trabajar con los tipos primitivos, enteros y flotantes, y también respecto de los
+Ahora lo que vamos a hacer es imprimir el valor de esta variable.
 
-tipos referenciados, como hemos comentado.
+```java
+int miVariableEntera = 10;
+System.out.println(miVariableentera);
+```
 
-Vamos a trabajar con el tipo string o cadena.
+Guardamos cambios, ya sea presionando este icono o presionando la combinación de teclas CTRL+S. Bien guardamos cambios y ejecutamos, **para ejecutar** vamos a dar clic derecho sobre nuestro archivo y seleccionamos la opción de ***Run File***.
 
-Así que vamos a empezar nuestra elección.
+### :computer: `006-VariablesJava`
 
-Lo que van a hacer es abrir su vida de Nevins y vamos a trabajar con este mismo archivo para simplificar
+*`Variables`*
+```java
+//Variables Java
+public class Variables {
+   public static void main(String arg[]){
+      int miVariableEntera = 10;
+      System.out.println(miVariableEntera);
+   }
+}
+```
 
-esta lección.
+![06-03](images/06-01-3.png)
 
-Sin embargo, ustedes podrían crear un nuevo proyecto y agregar en un nuevo proyecto todo el código
+Y podemos observar que nos despliega el valor de 10.
 
-que vamos a trabajar.
+Así que con esto ya estamos declarando nuestra variable, la estamos mandando a imprimir y obtenemos el resultado de 10.
 
-Sin embargo, no necesario, podemos trabajar en esta misma clase.
-
-Recordemos que el método Moine nos va a permitir ejecutar nuestro programa, así que de momento vamos
-
-a entender que este método únicamente lo estamos utilizando para poder ejecutar las líneas de código
-
-que están contenidas dentro de este método.
-
-Así que vamos a quitar esta línea y vamos a empezar esta elección de variables para definir una variable.
-
-Existen diferentes reglas.
-
-Primero tenemos que especificar el tipo en Java que vamos a utilizar.
-
-Por ejemplo, podemos definir una variable primitiva de tipo entero.
-
-Esa es la palabra reservada que vamos a utilizar para definir una variable de tipo entero y posteriormente
-
-utilizamos un identificador, es decir, el nombre de la variable.
-
-Por ejemplo, mi variable.
-
-Entera.
-
-Podemos observar que el nombre de la variable inicia con minúscula y posteriormente, si tenemos más
-
-de una palabra, entonces se recomienda utilizar la primera letra en mayúscula.
-
-Por ejemplo, la palabra variable, la de que es la primer letra de esta palabra inicia mayúscula y
-
-también la e inicia con mayúscula.
-
-A este tipo de notación.
-
-Se le conoce como notación de camello o notación de altas y bajas, y se conoce así debido a la forma
-
-que se genera.
-
-Como podemos observar de altas y bajas o notación de camello.
-
-Así que eso es lo más común que vamos a encontrar cuando trabajamos en Java.
-
-Incluso es una buena práctica.
-
-Por lo tanto, es recomendable que nos empecemos a familiarizar con esto desde un inicio.
-
-Podemos ver que la variable inicia con letra minúscula y posteriormente, después de definir la variable
-
-y su tipo, vamos a asignarle un valor para poder asignar un valor.
-
-Vamos a utilizar el operador de igual, es decir, el operador de asignación y le podemos asignar cualquier
-
-valor.
-
-Por ejemplo, el valor de 10 y como es una línea de código en Java, debe determinar con punto y coma,
-
-así que todas las líneas en Java terminan con punto y coma y ahora lo que vamos a hacer es imprimir
-
-el valor de esta variable.
-
-Vamos a imprimir este valor.
-
-Escribimos Sistem punto a punto LN.
-
-Y posteriormente ponemos el valor de nuestra variable para que se mande imprimir a consola, así que
-
-escribimos mi variable.
-
-Entera.
-
-Guardamos cambios, ya sea presionando este icono o presionando la combinación de teclas controles de.
-
-Bien guardamos cambios y ejecutamos para ejecutar, vamos a dar clic derecho sobre nuestro archivo y
-
-seleccionamos la opción de romboide.
-
-Y Podemos se va que nos despliega el valor de 10.
-
-Así que con esto ya estamos declarando nuestra variable, la estamos mandando a imprimir y obtenemos
-
-el resultado de días bien, todo por esta elección y en las siguientes elecciones vamos a continuar
-
-con el tema de variables en Java.
-
-Nos vemos en el siguiente video.
-
-Saludos.
+Eso es todo en esta lección y en las siguientes lecciones vamos a continuar con el tema de variables en Java. Nos vemos en la siguiente lección. Saludos.
 
 # 007 Tipos Enteros y Tipo String en Java - 09:07
 # 008 Inferencia de Tipos en Java - 08:21
