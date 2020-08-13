@@ -246,63 +246,40 @@ En lugar de hacerlo así, podemos sino poner ahora la palabra reservada `var`.
 var miVariableEntera2 = 10;
 ```
 
-Y con esto vamos a lograr varias cosas, pero básicamente nuestro código se va a simplificar debido
+Y con esto vamos a lograr varias cosas, pero básicamente nuestro código se va a simplificar debido a que vamos a utilizar tipos de datos mucho más complejos y simplemente utilizando `var` en automático Java va a inferir el tipo de dato según el valor que le estemos asignando del lado derecho. Así que según el valor que asignemos en este caso puede ser una literal, pero más adelante vamos a ver que le podemos asignar referencias de objetos y aquí es en el tema de la inferencia de tipos va a ser mucho más poderoso.
 
-a que vamos a utilizar tipos de datos mucho más complejos y simplemente utilizando Baur en automático,
+En este caso es más simple debido a que la literal 10 es de tipo entero, según hemos comentado. Por lo tanto, la variable que estamos definiendo `miVariableEntera2` también va a ser de tipo entero.
 
-Java va a inferir el tipo de dato según el valor que le estemos asignando del lado derecho.
+Vamos a imprimir ahora esta variable, `sout` más tabulador. Ponemos las primeras letras de nuestra variable y posteriormente CTRL+ESPACIO para que nos dé la ayuda y seleccionamos la variable `miVariableEntera2`. Ya estamos utilizando el valor de 10, por lo tanto vamos a usar uno distinto, por ejemplo el valor de 15 para que veamos el nuevo valor en guardamos cambios y ejecutamos.
 
-Así que según el valor que asignemos en este caso puede ser una literal, pero más adelante vamos a
+```java
+//var - Inferencia de tipos en Java
+var miVariableEntera2 = 15;
+System.out.println(miVariableEntera2);
+```
 
-ver que le podemos asignar referencias de objetos y aquí es en el tema de la inferencia de tipos va
+![08-01](images/08-01.png)
 
-a ser mucho más poderoso.
+Y podemos observar el nuevo valor de nuestra variable, el valor de 15 así que está funcionando sin ningún problema. En dado caso de que el uso de `var` no funcione en su programa, deben de revisar que en su proyecto tengan la última versión del JDK. Puede ser una versión 10 o superior.
 
-En este caso es más simple debido a que la literal 10 es de tipo entero, según hemos comentado.
+Por ejemplo, en este caso damos clic derecho en el nombre del proyecto, propiedades 
 
-Por lo tanto, la variable que estamos definiendo mi variable enterados también va a ser de tipo entero.
+![08-02](images/08-02.png)
 
-Vamos a imprimir ahora esta variable, ese tabulador.
+y aquí, en el icono de Sources podemos observar 
 
-Ponemos las primeras letras de nuestra variable y posteriormente control espacio para que nos dé la
+![08-03](images/08-03.png)
 
-ayuda y seleccionamos la variable mi variable.
+una parte inferior que estamos seleccionando el JDK 14, que es la última versión que tenemos al día de hoy.
 
-Enterados.
+Si tienen una versión más reciente no hay ningún problema pueden seleccionarla, pero pueden observar que su proyecto lo pueden poner a cualquier otra versión, pero en este caso, **a partir de la versión 10 es cuando se introdujo el concepto de variables inferencia de tipos**.
 
-Ya estamos utilizando el valor de 10, por lo tanto vamos a usar uno distinto, por ejemplo el valor
+Y también aquí en la sección de Libraries deben de verificar que estén seleccionando el JDK 14, de lo contrario no va a funcionar correctamente su programa, ya que no va a reconocer el uso de `var`.
 
-de 15 para que veamos el nuevo valor en guardamos cambios y ejecutamos.
+![08-04](images/08-04.png)
 
-Y podemos llevar el nuevo valor de nuestra variable, el valor de 15.
 
-Así que está funcionando sin ningún problema.
-
-En dado caso de que el uso de bar no funcione en su programa, deben de revisar que en su proyecto tengan
-
-la última versión del JDK.
-
-Puede ser una versión 10 o superior.
-
-Por ejemplo, en este caso damos clic derecho propiedades y aquí, en el icono de Sources podemos observar
-
-aquí una parte inferior que estamos seleccionando el JDK 14, que es la última versión que tenemos al
-
-día de hoy.
-
-Si tienen una versión más reciente no hay ningún problema.
-
-Pueden seleccionarla, pero pueden observar que su proyecto lo pueden poner a cualquier otra versión.
-
-Pero en este caso, a partir de la versión 10 es cuando se introdujo el concepto de variables inferencia
-
-de tipos.
-
-Y también aquí en la sección de Libraries deben de verificar que estén seleccionando el JDK 14.
-
-De lo contrario no va a funcionar correctamente su programa, ya que no va a reconocer el uso de.
-
-Así que el uso de barcos va a simplificar la definición de variables.
+Así que el uso de `var` va a simplificar la definición de variables.
 
 Sin embargo, todo el poder del uso de bar lo vamos a ver más adelante, cuando ya estudiamos el tema
 
