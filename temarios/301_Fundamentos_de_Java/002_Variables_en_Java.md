@@ -21,7 +21,7 @@
 
 Hola, que tal y bienvenidos a esta lección. A continuación van a estudiar el tema de variables en Java, están listos? Vamos.
 
-![06-01](images/06-01.png)
+![06-01](images/06-01-1.png)
 
 Bien, como podemos ver en la figura, una variable nos va a permitir almacenar información. Esta información van a ser los datos que vamos a procesar con este programa, así que estos datos van a variar según la información que estemos recibiendo por parte del usuario o del tipo de información que estemos procesando.
 
@@ -29,7 +29,7 @@ Una variable va a tener un identificador y va a almacenar entonces un valor, per
 
 Esto lo vamos a ver más adelante y en estas primeras lecciones vamos a comenzar con dos tipos.
 
-![06-02](images/06-02.png)
+![06-02](images/06-02-1.png)
 
 En Java existen diferentes tipos de datos, pero en esta elección vamos a comenzar con lo que se conoce
 
