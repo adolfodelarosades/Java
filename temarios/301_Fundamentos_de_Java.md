@@ -12,7 +12,7 @@
 * 005 Ejercicio Saludar
 * Solución Saludar
 
-### 002 Variables en Java • 8 clases • 55 min
+### [002 Variables en Java](002_Variables_en_Java.md) • 8 clases • 55 min
 
 * 006 Variables en Java - 05:03
 * 007 Tipos Enteros y Tipo String en Java - 09:07
