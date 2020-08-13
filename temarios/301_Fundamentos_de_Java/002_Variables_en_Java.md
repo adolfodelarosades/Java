@@ -13,7 +13,8 @@
 
 # 006 Variables en Java - 05:03
 
-## Resumen Profesor
+
+## [Resumen Profesor](/temarios/301_Fundamentos_de_Java/pdfs/006-CFJ-A-Leccion-Variables.pdf)
 
 
 
