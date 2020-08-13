@@ -879,178 +879,161 @@ Fundador de Global Mentoring
 
 ### 023 • 6 clases • 43 min
 
-Laboratorio Final del curso Fundamentos de Java
-03:59
-Solución - Laboratorio Final CFJ - parte 1
-10:45
-Solución - Laboratorio Final CFJ - parte 2
-03:56
-Solución - Laboratorio Final CFJ - parte 3
-05:43
-Solución - Laboratorio Final CFJ - parte 4
-06:58
-Solución - Laboratorio Final CFJ - parte 5
-11:11
-Ejercicio: Argumentos Variables en Java (varargs)
-09:16
-Manejo de Enumeraciones (enum) en Java
-08:39
-Ejercicio: Manejo de Enumeraciones en Java - parte 2
-05:44
-Ejercicio: Manejo de Enumeraciones en Java - parte 3
-03:54
-Manejo de Bloques de Código en Java
-06:58
-Manejo de Bloques de Código en Java - parte 2
-05:19
-Manejo de forEach en Java
-03:55
-Manejo de forEach en Java - parte 2
-05:32
-Autoboxing y Unboxing en Java
-07:56
-Modificadores de Acceso en Java - public
-08:10
-Modificadores de Acceso en Java - protected
-09:39
-Modificadores de Acceso en Java - default o package
-07:29
-Modificadores de Acceso en Java - private
-07:14
-Sobreescritura de Métodos en Java (overriding)
-04:10
-Ejercicio: Sobreescritura de Métodos en Java (overriding)
-08:49
-Polimorfismo en Java
-13:27
-Polimorfismo en Java - Explicación Paso a Paso
-08:25
-Lección: Palabra instance of en Java
-09:06
-Ejercicio: Palabra instance of en Java
-09:48
-Lección: Conversión de Objetos (casting) en Java
-07:30
-Conversión de Objetos (casting) en Java - parte 2
-12:07
-Clase Object en Java
-11:56
-Clase Object en Java - parte 2
-07:12
-Clases Abstractas en Java
-06:14
-Clases Abstractas en Java - parte 2
-10:16
-Manejo de Interfaces en Java
-02:58
-Manejo de Interfaces en Java - parte 2
-05:10
-Manejo de Interfaces en Java - parte 3
-07:55
-Manejo de Interfaces en Java - parte 4
-09:21
-Manejo de JavaBeans
-07:08
-Manejo de JavaBeans - parte 2
-05:28
-Manejo de Excepciones en Java - parte 1
-06:13
-Manejo de Excepciones en Java - parte 2
-03:23
-Manejo de Excepciones en Java - parte 3
-06:37
-Manejo de Excepciones en Java - parte 4
-03:25
-Manejo de Excepciones en Java - parte 5
-03:18
-Manejo de Excepciones en Java - parte 6
-04:04
-Lección: API de Collections en Java
-05:29
-Ejercicio: API de Collections en Java
-15:06
-Manejo de Generics en Java - parte 1
-04:34
-Manejo de Generics en Java - parte 2
-04:13
-Colecciones Genéricas en Java - parte 1
-07:31
-Colecciones Genéricas en Java - parte 2
-06:45
-Manejo de Archivos en Java - parte 1
-06:12
-Manejo de Archivos en Java - parte 2
-03:43
-Manejo de Archivos en Java - parte 3
-03:42
-Manejo de Archivos en Java - parte 4
-04:14
-Manejo de Archivos en Java
-07:22
-Laboratorio: Proyecto Final Curso de Programación con Java
-11:21
-Solución Laboratorio Final Programación con Java - parte 1
-06:28
-Solución Laboratorio Final Programación con Java - parte 2
-03:34
-Solución Laboratorio Final Programación con Java - parte 3
-09:46
-Solución Laboratorio Final Programación con Java - parte 4
-13:16
-Solución Laboratorio Final Programación con Java - parte 5
-03:33
-Solución Laboratorio Final Programación con Java - parte 6
-05:50
-Solución Laboratorio Final Programación con Java - parte 7
-03:35
-Solución Laboratorio Final Programación con Java - parte 8
-04:23
-Solución Laboratorio Final Programación con Java - parte 9
-07:33
-Solución Laboratorio Final Programación con Java - parte 10
-05:56
-Solución Laboratorio Final Programación con Java - parte 11
-08:38
-Solución Laboratorio Final Programación con Java - parte 12
-09:26
-Ejercicio: Instalación de MySql 8
-07:13
-Ejercicio: Creación Base de Datos en MySql 8
-04:41
-Sentencias DML en Mysql
-06:57
-Sentencias DML en Mysql - parte 2
-05:57
-Introducción a JDBC
-09:16
-Cadena de Conexión a Mysql
-05:27
-Conexión desde Java con JDBC
-07:22
-Procesando el resultado con ResultSet
-08:10
-Ejercicio: Manejo de JDBC - parte 1 - MySql 8
-09:12
-Ejercicio: Manejo de JDBC - parte 2 - MySql 8
-08:09
-Ejercicio: Manejo de JDBC - parte 3 - MySql 8
-07:46
-Ejercicio: Manejo de JDBC - parte 4
-09:46
-Ejercicio: Manejo de JDBC - parte 5
-07:09
-Ejercicio: Manejo de JDBC - parte 6
-13:22
-Ejercicio: Manejo de JDBC - parte 7
-01:16
-Ejercicio: Manejo de JDBC - parte 8
-07:44
-Ejercicio: Manejo de JDBC - parte 9
-05:53
-Laboratorio: Manejo de Usuarios en JDBC con Mysql 8
-01:36
-Solución: Manejo de Usuarios en JDBC
-22:27
+* Laboratorio Final del curso Fundamentos de Java - 03:59
+* Solución - Laboratorio Final CFJ - parte 1 - 10:45
+* Solución - Laboratorio Final CFJ - parte 2 - 03:56
+* Solución - Laboratorio Final CFJ - parte 3 - 05:43
+* Solución - Laboratorio Final CFJ - parte 4 - 06:58
+* Solución - Laboratorio Final CFJ - parte 5 - 11:11
+
+### 024 • 1 clases • 9 min
+
+* Ejercicio: Argumentos Variables en Java (varargs) - 09:16
+
+### 025 • 3 clases • 18 min
+
+* Manejo de Enumeraciones (enum) en Java - 08:39
+* Ejercicio: Manejo de Enumeraciones en Java - parte 2 - 05:44
+* Ejercicio: Manejo de Enumeraciones en Java - parte 3 - 03:54
+
+### 026 • 2 clases • 12 min
+
+* Manejo de Bloques de Código en Java - 06:58
+* Manejo de Bloques de Código en Java - parte 2 - 05:19
+
+### 027 • 2 clases • 9 min
+
+* Manejo de forEach en Java - 03:55
+* Manejo de forEach en Java - parte 2 - 05:32
+
+### 028 • 1 clase • 8 min
+
+* Autoboxing y Unboxing en Java - 07:56
+
+### 029 • 4 clases • 33 min
+
+* Modificadores de Acceso en Java - public - 08:10
+* Modificadores de Acceso en Java - protected - 09:39
+* Modificadores de Acceso en Java - default o package - 07:29
+* Modificadores de Acceso en Java - private - 07:14
+
+### 030 • 2 clases • 13 min
+
+* Sobreescritura de Métodos en Java (overriding) - 04:10
+* Ejercicio: Sobreescritura de Métodos en Java (overriding) - 08:49
+
+### 031 • 2 clases • 22 min
+
+* Polimorfismo en Java - 13:27
+* Polimorfismo en Java - Explicación Paso a Paso - 08:25
+
+### 032 • 2 clases • 19 min
+
+* Lección: Palabra instance of en Java - 09:06
+* Ejercicio: Palabra instance of en Java - 09:48
+
+### 033 • 2 clases • 20 min
+
+* Lección: Conversión de Objetos (casting) en Java - 07:30
+* Conversión de Objetos (casting) en Java - parte 2 - 12:07
+
+### 034 • 2 clases • 19 min
+
+* Clase Object en Java - 11:56
+* Clase Object en Java - parte 2 - 07:12
+
+### 035 • 2 clases • 17 min
+
+* Clases Abstractas en Java - 06:14
+* Clases Abstractas en Java - parte 2 - 10:16
+
+### 036 • 4 clases • 25 min
+
+* Manejo de Interfaces en Java - 02:58
+* Manejo de Interfaces en Java - parte 2 - 05:10
+* Manejo de Interfaces en Java - parte 3 - 07:55
+* Manejo de Interfaces en Java - parte 4 - 09:21
+
+### 037 • 2 clases • 13 min
+
+* Manejo de JavaBeans - 07:08
+* Manejo de JavaBeans - parte 2 - 05:28
+
+### 038 • 6 clases • 27 min
+
+* Manejo de Excepciones en Java - parte 1 - 06:13
+* Manejo de Excepciones en Java - parte 2 - 03:23
+* Manejo de Excepciones en Java - parte 3 - 06:37
+* Manejo de Excepciones en Java - parte 4 - 03:25
+* Manejo de Excepciones en Java - parte 5 - 03:18
+* Manejo de Excepciones en Java - parte 6 - 04:04
+
+### 039 • 2 clases • 21 min
+
+* Lección: API de Collections en Java - 05:29
+* Ejercicio: API de Collections en Java - 15:06
+
+### 040 • 4 clases • 23 min
+
+* Manejo de Generics en Java - parte 1 - 04:34
+* Manejo de Generics en Java - parte 2 - 04:13
+* Colecciones Genéricas en Java - parte 1 - 07:31
+* Colecciones Genéricas en Java - parte 2 - 06:45
+
+### 041 • 5 clases • 25 min
+
+* Manejo de Archivos en Java - parte 1 - 06:12
+* Manejo de Archivos en Java - parte 2 - 03:43
+* Manejo de Archivos en Java - parte 3 - 03:42
+* Manejo de Archivos en Java - parte 4 - 04:14
+* Manejo de Archivos en Java - 07:22
+
+### 042 • 13 clases • 1 h 33 min
+
+* Laboratorio: Proyecto Final Curso de Programación con Java - 11:21
+* Solución Laboratorio Final Programación con Java - parte 1 - 06:28
+* Solución Laboratorio Final Programación con Java - parte 2 - 03:34
+* Solución Laboratorio Final Programación con Java - parte 3 - 09:46
+* Solución Laboratorio Final Programación con Java - parte 4 - 13:16
+* Solución Laboratorio Final Programación con Java - parte 5 - 03:33
+* Solución Laboratorio Final Programación con Java - parte 6 - 05:50
+* Solución Laboratorio Final Programación con Java - parte 7 - 03:35
+* Solución Laboratorio Final Programación con Java - parte 8 - 04:23
+* Solución Laboratorio Final Programación con Java - parte 9 - 07:33
+* Solución Laboratorio Final Programación con Java - parte 10 - 05:56
+* Solución Laboratorio Final Programación con Java - parte 11 - 08:38
+* Solución Laboratorio Final Programación con Java - parte 12 - 09:26
+
+### 043 • 4 clases • 25 min
+
+* Ejercicio: Instalación de MySql 8 - 07:13
+* Ejercicio: Creación Base de Datos en MySql 8 - 04:41
+* Sentencias DML en Mysql - 06:57
+* Sentencias DML en Mysql - parte 2 - 05:57
+
+### 044 • 4 clases • 30 min
+
+* Introducción a JDBC - 09:16
+* Cadena de Conexión a Mysql - 05:27
+* Conexión desde Java con JDBC - 07:22
+* Procesando el resultado con ResultSet - 08:10
+
+### 045 • 11 clases • 1 h 34 min
+
+* Ejercicio: Manejo de JDBC - parte 1 - MySql 8 - 09:12
+* Ejercicio: Manejo de JDBC - parte 2 - MySql 8 - 08:09
+* Ejercicio: Manejo de JDBC - parte 3 - MySql 8 - 07:46
+* Ejercicio: Manejo de JDBC - parte 4 - 09:46
+* Ejercicio: Manejo de JDBC - parte 5 - 07:09
+* Ejercicio: Manejo de JDBC - parte 6 - 13:22
+* Ejercicio: Manejo de JDBC - parte 7 - 01:16
+* Ejercicio: Manejo de JDBC - parte 8 - 07:44
+* Ejercicio: Manejo de JDBC - parte 9 - 05:53
+* Laboratorio: Manejo de Usuarios en JDBC con Mysql 8 - 01:36
+* Solución: Manejo de Usuarios en JDBC - 22:27
+
+### 046 • 3 clases • 30 min
+
 Lección: Transacciones con JDBC
 03:06
 Ejercicio: Manejo de Transacciones con JDBC
