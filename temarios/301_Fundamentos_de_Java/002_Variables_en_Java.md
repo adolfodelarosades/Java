@@ -11,13 +11,9 @@
 * Detalles Libro - 1 preguntas
 * Detalles Libro (Solución) - 00:09
 
-
-# 006 Variables en Java - 05:03
-
 ## [Resumen Profesor](/temarios/301_Fundamentos_de_Java/pdfs/006-CFJ-A-Leccion-Variables.pdf)
 
-
-## Transcripción
+# 006 Variables en Java - 05:03
 
 Hola, que tal y bienvenidos a esta lección. A continuación van a estudiar el tema de variables en Java, están listos? Vamos.
 
@@ -347,6 +343,114 @@ Es todo por este video y nos vemos en la siguiente elección.
 Saludos.
 
 # 009 Ejercicio: Reglas para definir una variable en Java - 04:03
+
+Hola, que tal y bienvenidos a esta lección.
+
+A continuación vamos a ver las reglas para definir el nombre de una variable en Java están listos? Vamos.
+
+Hasta ese momento ya hemos visto cómo definir una variable y el nombre que hemos utilizado ha sido de manera muy explícita. Sin embargo, existen reglas para definir el nombre de una variable en Java, por ejemplo en Java, el primer carácter del nombre de nuestra variable debe de ser como sigue.
+
+Podemos utilizar cualquier letra del alfabeto en mayúsculas o en minúsculas sin embargo, por convención se recomienda que utilicemos la primer letra en minúscula y como hemos comentado ya después, si tenemos más palabras, la primera letra de cada palabra debe ir también en mayúscula. Sin embargo, no podemos utilizar números como primer carácter de nuestra variable.
+
+Por ejemplo, si ponemos:
+
+```java
+var 1MiVariable = 3;
+```
+
+El compilador nos manda un error debido a que no reconoce este nombre de la variable. Así que no es posible utilizar números o caracteres especiales para definir una variable. Este primer carácter debe de ser una letra, pero no puede tener caracteres especiales como podemos observar.
+
+```java
+var %MiVariable = 3;
+```
+
+Pero sí puede tener, por ejemplo, guion bajo, el guion bajo es uno de los caracteres permitidos para iniciar el nombre de una variable. No es tan común definir así nuestras variables, pero si está permitido
+
+```java
+var _MiVariable = 3;
+```
+
+y también podemos utilizar por ejemplo, el símbolo de dólar.
+
+```java
+var $MiVariable = 3;
+```
+
+Así que vamos a agregar algunos ejemplos.
+
+```java
+//Valores permitidos en el nombre de variables
+var miVariable = 1;
+var _miVariable = 2;
+var $miVariable = 3;
+```
+
+Así que cualquiera de estos casos son valores permitidos. Valores permitidos en el nombre de nuestras variables.
+
+Y por ejemplo, si queremos utilizar acentos en nuestras variables podemos observar que sí es posible. Sin embargo, tampoco se recomienda no porque nos lo prohíba el lenguaje, sino porque podemos tener problemas por el juego de caracteres que estamos utilizando, así que también las letras con acento no se recomienda utilizarla para definir nombres de variables.
+
+```java
+var árbol = 10;
+```
+
+**Aunque es posible, no lo recomendamos utilizar.** Así que vamos a poner esto entre comentarios, con el comentario no se recomienda utilizar.
+
+Y si queremos utilizar un carácter especial, por ejemplo el símbolo de gato o de número y le asignamos algún valor.
+
+```java
+var #miVariable = 2;
+```
+
+Podemos observar que el compilador nos manda que este carácter, es un carácter ilegal para definir el nombre de una variable, así que cualquier carácter especial no está permitido utilizarlo.
+
+Así que los únicos valores permitidos son una letra en minúscula o en mayúscula, pero se recomienda utilizar minúscula para iniciar nuestra variable. Podemos utilizar un guion bajo y podemos utilizar símbolo de dólar, así que son las reglas para definir los nombres de nuestras variables.
+
+### :computer: `009-VariablesJava`
+
+*`Variables`*
+```java
+//Variables Java
+public class Variables {
+   public static void main(String arg[]){
+      //Definimos la variable
+      int miVariableEntera = 10;
+      System.out.println(miVariableEntera);
+        
+      //Modificamos el valor de la variable
+      miVariableEntera = 5;
+      System.out.println(miVariableEntera);
+        
+      String miVariableCadena = "Saludos";
+      System.out.println(miVariableCadena);
+        
+      miVariableCadena = "Adiós";
+      System.out.println(miVariableCadena);
+      
+      //var - Inferencia de datos en Java
+      var miVariableEntera2 = 15;
+      System.out.println(miVariableEntera2);
+        
+      var miVariableCadena2 = "Hello";
+      System.out.println("miVariableCadena2 = " + miVariableCadena2);
+      
+      //Valores permitidos en el nombre de variables
+      var miVariable = 1;
+      var _miVariable = 2;
+      var $miVariable = 3;
+        
+      var árbol = 10; //Aunque es posible no se recomienda utilizar
+        
+      //var #miVariable = 2; no se permiten utilizar carácteres especiales
+    }
+}
+```
+
+Pongan en práctica lo que hemos visto en esta elección. Creen sus propias variables para que comprueben todo lo que les hemos comentado. Recuerden que si no escriben el código, entonces no van a aprender. Así que todo lo que vamos enseñando lo deben de ir escribiendo en el IDE y cada uno de los ejercicios lo deben ir realizando paso a paso de lo contrario, no van a aprender y no van a retener la información que les estamos brindando, ya que va a ser bastante información y se va a ir acumulando muy rápidamente.
+
+Es todo por esta lección y nos vemos en la siguiente lección.
+
+Saludos.
+
 # 010 Ejercicio: Concatenación con Java - 11:46
 # 011 Ejercicio: Caracteres Especiales con Java - 08:31
 # 012 Ejercicio: Clase Scanner en Java - 07:58
