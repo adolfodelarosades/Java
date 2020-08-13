@@ -66,6 +66,7 @@ En este nivel estudiaremos los conceptos de la Programación Orientada a Objetos
 
 
 ## Contenido del curso 156 secciones • 636 clases • 93h 39m de duración total
+## Contenido del curso 19 secciones • XXX clases • XXh XXm de duración total
 
 ### 024 Programación con Java: Argumentos Variables en Java (varargs) • 1 clases • 9 min
 
