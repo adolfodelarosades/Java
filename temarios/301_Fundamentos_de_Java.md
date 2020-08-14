@@ -12,7 +12,7 @@
 * 005 Ejercicio Saludar
 * Solución Saludar
 
-### [002 Variables en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/301_Fundamentos_de_Java/002_Variables_en_Java.md) • 8 clases • 55 min
+### [002 Variables en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/301_Fundamentos_de_Java/002_Variables_en_Java.md) • 8 clases • 55 min :+1:
 
 * 006 Variables en Java - 05:03
 * 007 Tipos Enteros y Tipo String en Java - 09:07
@@ -21,9 +21,9 @@
 * 010 Ejercicio: Concatenación con Java - 11:46
 * 011 Ejercicio: Caracteres Especiales con Java - 08:31
 * 012 Ejercicio: Clase Scanner en Java - 07:58
-* 013 Preguntas de Variables - 5 preguntas
+* Preguntas de Variables - 5 preguntas
 * Detalles Libro - 1 preguntas
-* Detalles Libro (Solución) - 00:09
+* 013 Detalles Libro (Solución) - 00:09
 
 ### 003 Tipos Primitivos en Java • 9 clases • 1 h 14 min
 
