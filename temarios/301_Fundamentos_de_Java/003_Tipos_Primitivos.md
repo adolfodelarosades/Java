@@ -301,7 +301,14 @@ A continuación vamos a ver los tipos primitivos de tipo flotante. Están listos
 
 En este momento hemos visto los tipos primitivos `byte`, `short`, `int` y `long`, los cuales únicamente permiten recibir valores de tipo entero.
 
-Ahora vamos a ver los tipos que nos permiten recibir valores de tipo flotante, es decir, con punto decimal que son los tipos `float` y `double`.
+Ahora vamos a ver los tipos que nos permiten recibir valores de tipo flotante, es decir, con punto decimal.
+
+### Tipos Flotantes
+
+Los tipos primitivos de tipo flotante que podemos manejar son los siguientes:
+
+* `float` 
+* `double`.
 
 
 Ahora el tipo Flagg utiliza 32bits y el tipo de árbol utiliza 64bits.
