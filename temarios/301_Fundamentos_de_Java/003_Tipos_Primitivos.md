@@ -649,108 +649,53 @@ Pero dependiendo de la región, ese juego de caracteres que vamos a utilizar má
 
 ![18-02](images/18-02.png)
 
-Vamos a ver un ejemplo de esto, el tipo `char` tiene 16 bits, así que es la misma cantidad de bits que un tipo `short`. Sin embargo, un tipo `short` almacena únicamente valores decimales sin punto flotante. En cambio, un valor `char` puede almacenar un carácter, pero también valores decimales. Vamos a ver cómo es esto. Vamos a definir otra variable de tipo char. 
+Vamos a ver un ejemplo de esto, el tipo `char` tiene 16 bits, así que es la misma cantidad de bits que un tipo `short`. Sin embargo, un tipo `short` almacena únicamente valores decimales sin punto flotante. En cambio, un valor `char` puede almacenar un carácter, pero también valores decimales. Vamos a ver cómo es esto. Vamos a definir otra variable de tipo char. Y le asignamos directamente un valor, pero ahora utilizando el código Unicode para ello vamos a utilizar `\u` y con esto estamos indicando a Java que vamos a asignar un valor con el código Unicode. Así que podemos tomar cualquier valor de estos, en este caso tenemos el `0021`, vamos a utilizar este carácter, el carácter de admiración `!` y vamos a imprimir este valor.
 
 ```java
 char varChar = '\u0021';
 System.out.println("varChar = " + varChar);
 ```
 
-Y le asignamos directamente un valor, pero ahora utilizando el código Unicode.
+Guardamos cambios, ejecutamos.
 
-Para ello vamos a utilizar diagonal inversa.
+![18-03](images/18-03.png)
 
-Y con esto estamos indicando aullaba que vamos a asignar un valor con el código Unicode.
+Podemos ver que nos está imprimiendo el carácter deseado, que es el carácter de signos de admiración. Sin embargo, no es la única forma de representar este carácter, como hemos comentado, también podemos utilizar el código decimal asociado. Así que vamos a definir la variable `varCharDecimal` y si vamos a nuestra tabla, únicoque podemos observar que en este caso el valor decimal asociado a este carácter de admiración es el valor decimal de 33. Así que en ese caso también podemos asignar un valor en decimal y debido a que estamos indicando que esta variable es de tipo `char` y no de tipo `int`, entonces el valor lo debe de convertir a un tipo `char`.
 
-Así que podemos tomar cualquier valor de estos, en este caso tenemos el cero cero veintiuno, vamos
-
-a utilizar este carácter, el carácter de admiración.
-
-Así que indicamos el código en este caso cero cero 21.
-
-íbamos a imprimir este valor.
-
-Así que imprimimos esta variable, guardamos cambios, ejecutamos.
-
-Y Podemos se va que nos está imprimiendo el carácter deseado, que es el carácter de signos de admiración.
-
-Sin embargo, no es la única forma de representar este carácter, como hemos comentado, también podemos
-
-utilizar el código decimal asociado.
-
-Así que vamos a definir la variable marchar, pero ahora en decimal.
-
-Y si vamos a nuestra tabla, únicoque podemos observar que en este caso el valor decimal asociado a
-
-este carácter de admiración es el valor decimal de 33.
-
-Así que en ese caso también podemos asignar un valor en decimal y debido a que estamos indicando que
-
-esta variable es de tipo char y no de tipo int, entonces el valor lo debe de convertir a un tipo char.
+```java
+char varChardecimal = 33;
+System.out.println("varChardecimal = " + varChardecimal);
+```
 
 Vamos a ver el resultado.
 
-Imprimimos esta variable y guardamos cambios, ejecutamos.
+![18-04](images/18-04.png)
 
-Y observamos exactamente el mismo resultado, aunque le asignamos el valor de 33.
+Y observamos exactamente el mismo resultado, aunque le asignamos el valor de 33 podemos observar en la salida que se está visualizando el carácter de signo de admiración. Así que es otra forma de asignar un valor cuando estamos trabajando con tipos `char` y esto es importante porque en ocasiones vamos a visualizar el código de esta forma, pero también podríamos visualizar un código decimal y en este caso no quiere decir que el valor es 33, sino que representa el valor decimal de este carácter. Así que para saber cuál es el carácter podemos mandarlo a imprimir o consultar la tabla de caracteres Unicode como estamos realizando.
 
-Podemos observar en la salida que se está visualizando el carácter de signo de admiración.
+Y por último, también podemos asignar directamente el símbolo. Para utilizar el símbolo vamos a poner comilla simple. Y si tenemos el símbolo disponible, se lo podemos asignar directamente. Obviamente no pueden escribir del teclado, pero en este caso lo voy a copiar, ya que en su lista de caracteres Unicode podría necesitar de un carácter especial que no pueden sacar directamente del teclado. Así que por ello también estamos demostrando que podemos copiar y pegar este carácter directamente, vamos a imprimir este valor.
 
-Así que es otra forma de asignar un valor cuando estamos trabajando con tipos char y esto es importante
+```java
+char varCharSimbolo = '!';
+System.out.println("varCharSimbolo = " + varCharSimbolo);
+```
 
-porque en ocasiones vamos a visualizar el código de esta forma, pero también podríamos visualizar un
-
-código decimal y en este caso no quiere decir que el valor es 33, sino que representa el valor decimal
-
-de este carácter.
-
-Así que para saber cuál es el carácter podemos mandarlo a imprimir o consultar la tabla de caracteres
-
-Unicode.
-
-Como estamos realizando?
-
-Y por último, también podemos asignar.
-
-Directamente el símbolo.
-
-Para utilizar el símbolo vamos a poner comilla simple.
-
-Y si tenemos el símbolo disponible, se lo podemos asignar directamente.
-
-Así que en este caso voy a copiar el signo de admiración.
-
-Obviamente no pueden escribir del teclado, pero en este caso lo voy a copiar, ya que en su lista de
-
-caracteres Unicode podría necesitar de un carácter especial que no pueden sacar directamente del teclado.
-
-Así que por ello también estamos demostrando que podemos copiar y pegar este carácter directamente,
-
-vamos a imprimir este valor.
-
-Se imprime de marchar, pero ahora utilizando directamente el símbolo.
+![18-05](images/18-05.png)
 
 Observamos el mismo resultado en los tres casos estamos visualizando el carácter de símbolo de admiración.
 
-Ahora, por último, vamos a ver el caso, cuando estamos trabajando con Bahr ya hemos utilizado el
+Ahora, por último, vamos a ver el caso, cuando estamos trabajando con `var` ya hemos utilizado el tipo `char`. Vamos a copiar esas tres líneas y ahora vamos a utilizar `var`, así que en los tres casos. Vamos a utilizar en lugar de `char`. Vamos a utilizar `var`. Vamos a renombrar estas variables. Simplemente hacemos un cambio en el nombre para que podamos utilizar esta nueva variable. y también en la impresión cambiamos el nombre para que sepamos a qué valor corresponde.
 
-tipo Char.
-
-Vamos a copiar esas tres líneas y ahora vamos a utilizar Bahr, así que en los tres casos.
-
-Vamos a utilizar en lugar de echar.
-
-Vamos a utilizar Bahr.
-
-Vamos a renombrar estas variables.
-
-Simplemente hacemos un cambio en el nombre para que podamos utilizar esta nueva variable.
-
-Y también en la impresión cambiamos el nombre para que sepamos.
-
-A qué valor corresponde?
-
-A qué variable?
+```java
+var varChar2 = '\u0021';
+System.out.println("varChar2 = " + varChar2);
+        
+var varChardecimal2 = 33;
+System.out.println("varChardecimal2 = " + varChardecimal2);
+        
+var varCharSimbolo2 = '!';
+System.out.println("varCharSimbolo2 = " + varCharSimbolo2);
+```
 
 Así que en este primer caso estamos utilizando también el símbolo único y lo estamos asignando a un
 
