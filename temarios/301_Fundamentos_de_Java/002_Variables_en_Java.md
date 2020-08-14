@@ -7,9 +7,9 @@
 * 010 Ejercicio: Concatenación con Java - 11:46
 * 011 Ejercicio: Caracteres Especiales con Java - 08:31
 * 012 Ejercicio: Clase Scanner en Java - 07:58
-* 013 Preguntas de Variables - 5 preguntas
+* Preguntas de Variables - 5 preguntas
 * Detalles Libro - 1 preguntas
-* Detalles Libro (Solución) - 00:09
+* 013 Detalles Libro (Solución) - 00:09
 
 ## [Resumen Profesor](/temarios/301_Fundamentos_de_Java/pdfs/006-CFJ-A-Leccion-Variables.pdf)
 
@@ -874,7 +874,7 @@ Es todo por esta lección y nos vemos en la siguiente lección.
 
 Saludos.
 
-# 013 Preguntas de Variables - 5 preguntas
+# Preguntas de Variables - 5 preguntas
 
 Pregunta 1:
 Cuál es la salida del siguiente código:
@@ -924,12 +924,15 @@ Tarea: Detalles Libro
 
 Se solicita agregar la siguiente información de un Libro
 
-# Detalles Libro (Solución) - 00:09
+# 013 Detalles Libro (Solución) - 00:09
+
+*`Libro`*
 
 ```java
 import java.util.Scanner;
- 
-public class Main {
+
+public class Libro {
+
    public static void main(String[] args) {
       Scanner scanner = new Scanner(System.in);
       // Escribe tu solucion aqui
@@ -938,6 +941,9 @@ public class Main {
       System.out.println("Proporciona el autor:");
       String autor = scanner.nextLine();
       System.out.println(titulo + " fue escrito por " + autor);
-    }
+   }
+   
 }
 ```
+
+![13-01](images/13-01.png)
