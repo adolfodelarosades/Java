@@ -1,5 +1,7 @@
 # 002 Variables en Java • 8 clases • 55 min
 
+## [Resumen Profesor](/temarios/301_Fundamentos_de_Java/pdfs/006-CFJ-A-Leccion-Variables.pdf)
+
 * 006 Variables en Java - 05:03
 * 007 Tipos Enteros y Tipo String en Java - 09:07
 * 008 Inferencia de Tipos en Java - 08:21
@@ -10,8 +12,6 @@
 * Preguntas de Variables - 5 preguntas
 * Detalles Libro - 1 preguntas
 * 013 Detalles Libro (Solución) - 00:09
-
-## [Resumen Profesor](/temarios/301_Fundamentos_de_Java/pdfs/006-CFJ-A-Leccion-Variables.pdf)
 
 # 006 Variables en Java - 05:03
 
