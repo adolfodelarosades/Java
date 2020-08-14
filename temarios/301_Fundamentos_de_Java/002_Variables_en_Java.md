@@ -633,233 +633,129 @@ Saludos.
 
 # 011 Ejercicio: Caracteres Especiales con Java - 08:31
 
-Hola, que tal y bienvenidos a esta elección.
+Hola, que tal y bienvenidos a esta lección.
 
-A continuación vamos a ver el tema de caracteres especiales en Java están listos?
+A continuación vamos a ver el tema de caracteres especiales en Java están listos? Vamos.
 
-Vamos.
+![11-01](images/11-01.png)
 
-Vamos a seguir trabajando con este programa.
+Vamos a ver esta lección algunos de los caracteres especiales que podemos utilizar en Java y así poder visualizarlos en nuestra consola, vamos a comenzar definiendo una variable de tipo `String` llamada `nombre` y le asignamos el valor de `Karla`.
 
-Vamos a limpiar nuestro método.
+```java
+var nombre = "Karla";
+```
 
-Vamos a quitar estas líneas.
+Ahora vamos a trabajar con esta variable para poder revisar cómo funcionan algunos de los caracteres especiales que podemos utilizar en Java.
 
-Y vamos a ver esta lección.
+Por ejemplo, tenemos el carácter de salto de línea  `\n`, el cual nos va a dar un salto de línea en la consola y posteriormente concatenamos el valor de nuestra variable para que visualicemos cómo afecta este carácter de salto de línea en la salida de nuestro programa.
 
-Algunos de los caracteres especiales que podemos utilizar en Java y así poder visualizarlos en nuestra
+```java
+var nombre = "Karla";
+System.out.println("Nueva línea: \n" + nombre);
+```
 
-consola, vamos a comenzar definiendo una variable de tipo string llamada nombre y le asignamos el valor
+Vamos a guardar cambios con CTRL+S y ejecutamos nuestro programa.
 
-de Carla.
+![11-02](images/11-02.png)
 
-Ahora vamos a trabajar con esta variable para poder revisar cómo funcionan algunos de los caracteres
+Observamos que el nombre de `Karla` ya no se visualiza en la misma línea, sino que ya generamos una nueva línea y el nombre se imprimió en la siguiente línea, así que para ello nos va a servir este carácter.
 
-especiales que podemos utilizar en Java.
+También tenemos el carácter de tabulador `\t` para poder imprimir un tabulador y vamos a ver qué es lo que significa concatenando la variable de nombre.
 
-Por ejemplo, tenemos el carácter de salto de línea conocido como diagonal, el cual podemos utilizar
-
-de la siguiente manera vamos a poner ese otro.
-
-Tabulador y vamos a poner el texto de nueva línea.
-
-Dos puntos y posiblemente lo que vamos a hacer es utilizar el carácter de salto de línea.
-
-Este carácter lo vamos a utilizar de la siguiente manera ponemos diagonal inversa y posteriormente la
-
-letra N.
-
-Así que el conjunto de estos caracteres nos va a dar un salto de línea en la consola.
-
-Y posteriormente concatenados el valor de nuestra variable para que visualicemos cómo afecta este carácter
-
-de salto de línea en la salida de nuestro programa.
-
-Vamos a guardar cambios con controles.
-
-Estamos hoy derecho y ejecutamos nuestro programa y podemos llevar nueva línea dos puntos y observamos
-
-que el nombre de Carla ya no se visualiza en la misma línea, sino que ya generamos una nueva línea
-
-y el nombre se imprimió en la siguiente línea.
-
-Así que para ello nos va a servir este carácter.
-
-El carácter de salto de línea también tenemos, por ejemplo, el carácter de tabulador.
-
-De igual manera utilizamos diagonal inversa, pero en este caso la letra T.
-
-Para poder imprimir un tabulador y vamos a ver qué es lo que significa concatenando la variable de nombre.
+```java
+var nombre = "Karla";
+System.out.println("Nueva línea: \n" + nombre);
+System.out.println("Tabulador: \t" + nombre);
+```
 
 Bien, guardamos cambios y ejecutamos.
 
-Y podemos ver que un tabulador básicamente es un espacio definido a partir del último carácter se presenta
+![11-03](images/11-03.png)
 
-un tabulador y posteriormente el número de nuestra variable.
+Y podemos ver que un tabulador básicamente es un espacio definido a partir del último carácter, se presenta un tabulador y posteriormente el nombre de nuestra variable.
 
-De igual manera, nuestro código podemos observar que tiene tabuladores, así que da exactamente lo
+También tenemos el carácter de retroceso `\b`.
 
-mismo cuando definimos una variable.
+```java
+var nombre = "Karla";
+System.out.println("Nueva línea: \n" + nombre);
+System.out.println("Tabulador: \t" + nombre);
+System.out.println("Retroceso: \b" + nombre);
+```
 
-Podemos presionar la tecla de tap y podemos observar que no se agregan fabulaciones.
+![11-04](images/11-04.png)
 
-Recordemos que para dar formato correcto a nuestro código, en dado caso de que no esté formateado correctamente,
+Podemos observar que se imprime el texto `Retroceso:Karla`.
 
-damos clic, derecho y forma.
+Sin embargo, podemos observar que habíamos dejado un espacio en blanco, así que este espacio en blanco se ha perdido debido precisamente al uso del carácter de retroceso. Así que básicamente en este caso este carácter nos está regresando una posición en la salida de nuestro programa, si utilizamos dos caracteres de retroceso ya no aparecerían los dos puntos `RetrocesoKarla`. Va a ir retrocediendo la cantidad de caracteres de retroceso que tengamos en nuestra salida.
 
-Y Podemos se va de nueva cuenta élide en automático nos da el formato correcto, nos quita todos los
+También tenemos el uso de comida simple y comilla doble, vamos a probar el uso de comilla simple usando `\'` aun que en este caso podemos simplemente usar la comilla simple sin la barra diagonal `'`. Vamos a poner nuestro nombre entre comillas simple usando el caracter especial de comilla simple y simplemente la comilla.
 
-tabuladores que no necesitamos, pero este carácter de tabulador es exactamente lo mismo.
+```java
+var nombre = "Karla";
+System.out.println("Nueva línea: \n" + nombre);
+System.out.println("Tabulador: \t" + nombre);
+System.out.println("Retroceso: \b" + nombre);
+System.out.println("Comilla simple: \'" + nombre + "\'");
+System.out.println("Comilla simple: '" + nombre + "'");
+```
 
-Cuando mandamos a imprimir este carácter nos da un tabulador en la salida.
+![11-05](images/11-05.png)
 
-Como podemos observar, no son varios espacios en blanco, sino el carácter de tabulador.
+Si quisieramos hacer esto ultimo con la comilla doble es decir:
 
-También tenemos el siguiente carácter de retroceso.
+```java
+System.out.println("Comilla simple: "" + nombre + """);
+```
 
-Así que ese carácter es diagonal inversa de.
+Podemos observar que no se está generando correctamente nuestra cadena, ya que si utilizamos la comilla doble dentro de una cadena, entonces el compilador entiende que ya se acabó la cadena. Por lo tanto, para que podamos imprimir la comida doble podemos utilizar el caracter de escape, así que vamos a poner diagonal inversa `\"`.
 
-De igual manera, concatenados la variable de nombre, guardamos cambios, imprimimos y vamos a ver
+```java
+System.out.println("Comilla simple: \"" + nombre + "\"");
+```
 
-qué es lo que hace.
+Lo que estamos haciendo es simplemente imprimir el carácter de comida doble en la consola. Así que para poder utilizar este carácter dentro de una cadena, entonces tenemos que utilizar el carácter de escape `\"`.
 
-Podemos observar que se imprime el texto de retroceso dos puntos.
 
-Y el valor de Carla.
-
-Sin embargo, podemos observar que aquí habíamos dejado un espacio en blanco.
-
-Así que este espacio en blanco se ha perdido debido precisamente al uso del carácter de retroceso.
-
-Así que básicamente en este caso este carácter nos está regresando una posición en la salida de nuestro
-
-programa y utilizamos dos caracteres de retroceso, entonces es el número de caracteres.
-
-Va a ir retrocediendo la cantidad de caracteres que tengamos de retroceso en nuestra salida?
-
-Vamos a comprobarlo si ponemos de nueva cuenta el carácter.
-
-Desde diagonal inversa, el carácter de retroceso.
-
-Ahora ya no se van a imprimir los dos puntos debido a que se va a recorrer un carácter hacia atrás.
-
-La impresión de nuestra salida bien, guardamos cambios, ejecutamos.
-
-Y podemos ver que ya no están los dos puntos debido a que retrocedimos la impresión de nuestra salida
-
-en dos posiciones, tanto el espacio en blanco como los dos puntos.
-
-También tenemos el uso de comida simple y comilla doble.
-
-Vamos a probarlo.
-
-El uso de comilla simple.
-
-Vamos a poner nuestro nombre entre comillas simple, así que para imprimir el carácter de comida simple
-
-utilizando los caracteres especiales ponemos diagonal inversa y el carácter de comilla simple.
-
-En este caso solamente una comida simple posiblemente concatenados nuestra variable de nombre y para
-
-que envuelva el nombre en comilla simple.
-
-Vamos a poner otra cadena.
-
-Y volvemos a utilizar el carácter de comida simple, en este caso realmente no es necesario utilizar
-
-la diagonal inversa, ya que este carácter de comida simple funciona incluso sin este carácter de diagonal
-
-inversa.
-
-Pero a continuación vamos a ver otro caso para que entiendan por qué se debe de utilizar.
-
-No es en todos los casos, pero se puede utilizar para ciertas ocasiones, así que en este caso no es
-
-necesario.
-
-Pero vamos a utilizarlo y más adelante vamos a explicar el porqué si es necesario.
-
-En algunos casos vamos a guardar cambios, ejecutamos y podemos observar que el valor de carga está
-
-envuelto en comillas simples.
-
-Ahora vamos a ver otro caso, la impresión de comilla doble.
-
-Podemos ver que en este caso, si tratamos de utilizar comilla doble en nuestro programa.
-
-Y posteriormente concatenar el valor de nombre.
-
-Y volver a poner doble comilla simple.
-
-Y concatenados.
-
-De nueva cuenta, la comida doble Podemos se debe a que no se está generando correctamente en nuestra
-
-cadena, ya que si utilizamos la comilla doble dentro de una cadena, entonces el compilador entiende
-
-que ya se acabó la cadena.
-
-Por lo tanto, para que podamos imprimir la comida doble podemos utilizar el caracter de escape.
-
-Así que vamos a poner diagonal inversa.
-
-Tanto en esa comida doble como en esta comida doble.
-
-Y con esto básicamente lo que estamos haciendo.
-
-Voy a poner algunos espacios para que se entienda, aquí lo que estamos haciendo es abriendo la cadena
-
-y aquí se está cerrando la cadena y aquí lo que estamos haciendo es simplemente imprimir el carácter
-
-de comida doble.
-
-Pero hacia la consola.
-
-Así que para poder utilizar este carácter dentro de una cadena, entonces tenemos que utilizar el carácter
-
-de escape diagonal inversa y de igual manera, en este caso aquí ya no estoy poniendo espacios, pero
-
-básicamente lo mismo.
-
-Aquí lo que estamos haciendo es abriendo y cerrando nuestra cadena y estos dos caracteres lo que va
-
-a hacer es que se va a imprimir el carácter de comilla doble hacia la consola.
-
-Por ello utilizamos el carácter de diagonal inversa para que se pueda utilizar este carácter dentro
-
-de una cadena.
+```java
+var nombre = "Karla";
+System.out.println("Nueva línea: \n" + nombre);
+System.out.println("Tabulador: \t" + nombre);
+System.out.println("Retroceso: \b" + nombre);
+System.out.println("Comilla simple: \'" + nombre + "\'");
+System.out.println("Comilla simple: '" + nombre + "'");
+System.out.println("Comilla doble: \"" + nombre + "\"");
+```
 
 Vamos a guardar cambios y vamos a comprobar.
 
-Guardamos derecho, ejecutamos y podemos observar que en este caso tenemos la comida doble abriendo
+![11-06](images/11-06.png)
 
-y cerrando al nombre.
+Podemos observar que en este caso tenemos la comida doble abriendo y cerrando al nombre.
 
-Aquí tengo un espacio, además podemos quitarlo simplemente para que entendieran el ejemplo.
+### :computer: `011-CaracteresEspeciales`
 
-Pero con esto podemos observar, guardamos cambios, ejecutamos.
+*`Concatenacion`*
 
-Observamos que ya está completando la comida doble al inicio y al final de nuestro nombre, así que
+```java
+public class CaracteresEspeciales {
+   public static void main(String args[]){
+        
+      var nombre = "Karla";
+      System.out.println("Nueva línea: \n" + nombre);
+      System.out.println("Tabulador: \t" + nombre);
+      System.out.println("Retroceso: \b" + nombre);
+      System.out.println("Comilla simple: \'" + nombre + "\'");
+      System.out.println("Comilla simple: '" + nombre + "'");
+      System.out.println("Comilla doble: \"" + nombre + "\"");
+        
+   }
+}
+```
 
-estamos concatenando este carácter especial utilizando la diagonal inversa.
+![11-06](images/11-06.png)
 
-En este primer caso, la comilla simple no rompe la cadena.
-
-Por lo tanto, no requerido utilizar la diagonal inversa.
-
-Así que en este caso podríamos haber utilizado la comida simple directamente guardamos cambios y ejecutamos
-
-y observamos que el resultado es el mismo.
-
-Sin embargo, debido a que estamos viendo el tema de caracteres especiales.
-
-Por ello es que ponemos la diagonal inversa y en este caso hemos demostrado que si es requerido utilizar
-
-la diagonal inversa para que este carácter se escape, es decir, que no lo tome como el carácter de
-
-cierre de la cadena, sino que lo tome como un carácter que queremos mandar a imprimir a la consola.
-
-Todo por esta elección y nos vemos en el siguiente video.
+Es todo por esta lección y nos vemos en la siguiente lección.
 
 Saludos!
 
