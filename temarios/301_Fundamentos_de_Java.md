@@ -25,7 +25,7 @@
 * Detalles Libro - 1 preguntas
 * 013 Detalles Libro (Solución) - 00:09
 
-### 003 Tipos Primitivos en Java • 9 clases • 1 h 14 min
+### [003 Tipos Primitivos en Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/301_Fundamentos_de_Java/003_Tipos_Primitivos.md) • 9 clases • 1 h 14 min
 
 * 014 Tipos Primitivos en Java - 06:51
 * 015 Tipos Numéricos Enteros - 09:06
