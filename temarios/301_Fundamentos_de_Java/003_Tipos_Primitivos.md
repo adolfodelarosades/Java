@@ -308,194 +308,167 @@ Ahora vamos a ver los tipos que nos permiten recibir valores de tipo flotante, e
 Los tipos primitivos de tipo flotante que podemos manejar son los siguientes:
 
 * `float` 
-* `double`.
+* `double`
 
+![14-01](images/14-01.png)
 
-Ahora el tipo Flagg utiliza 32bits y el tipo de árbol utiliza 64bits.
+El tipo `float` utiliza 32 bits y el tipo `double` utiliza 64 bits. Sin embargo, simplemente al utilizar notación de punto flotante, el tipo flow puede almacenar valores más grandes que un tipo `int` o un tipo `long` simplemente por utilizar notación exponencial.
 
-Sin embargo, simplemente al utilizar notación de punto flotante, el tipo flow puede almacenar valores
+Vamos a definir una variable de tipo `float` y le asignamos cualquier valor, por ejemplo el valor de 10, en este caso este valor de 10 puede ser una literal de tipo primitivo de tipo entero:
 
-más grandes que un tipo int o un tipo longe simplemente por utilizar notación exponencial.
+```java
+float numeroFloat = 10;    
+```
 
-Así que vamos a ver lo siguiente definimos una variable.
+ya que en este caso es una literal de tipo entero o puede ser una literal de punto flotante, por ejemplo, en este caso 10.0
 
-Número float.
+```java
+float numeroFloat = 10.0;    
+```
 
-Y le asignamos cualquier valor, por ejemplo el valor de 10, en este caso este valor de 10 puede ser
+Sin embargo, **las literales de punto flotante en Java por default son de tipo doble**. Así que un `double` que tiene 64 bits no se puede almacenar de manera inmediata a un tipo `float`. Por lo tanto, para corregir esto podemos hacer dos cosas, podemos indicar que esta literal sea de tipo F de tipo flotante, puede ser una f minúscula o una f mayúscula, pero de igual manera lo recomendable es utilizar la F mayúscula para que se entienda que es una literal de tipo flotante.
 
-una literal de tipo primitivo de tipo entero, ya que en este caso es una literal de tipo entero o puede
+```java
+float numeroFloat = 10.0F;    
+```
 
-ser una literal de punto flotante, por ejemplo, en este caso 10 puntos cero.
+Así que esta es una forma o podemos indicar al compilador que haga la conversión al tipo `float`.
 
-Sin embargo, las literales de punto flotante en Java por default son de tipo doble.
+```java
+float numeroFloat = (float)10.0;
+System.out.println("numeroFloat = " + numeroFloat);
+```
 
-Así que un Nobol que tiene 64 bits no se puede almacenar de manera inmediata a un tipo flop.
+Así que en este caso está literal `10.0` ese tipo de `double` por default en Java las literales flotantes son de tipo `double`, pero con esta indicación le estamos diciendo al compilador que de cualquier manera 
+lo convierte a un tipo `float` y debido a que es un valor que puede soportar el tipo flotante si lo mandamos a imprimir deberemos observar que el resultado es correcto, así que guardamos cambios, ejecutamos y podemos observar que el resultado no se altera, por lo tanto esta conversión es válida y además no hubo pérdida de precisión.
 
-Por lo tanto, para corregir esto podemos hacer dos cosas.
+![16-01](images/16-01.png)
 
-Podemos indicar que esta literal sea de tipo F de tipo flotante.
+Pero qué pasa si nos vamos a los límites del punto flotante? Vamos a imprimir los valores límite mínimo y máximo.
 
-Puede ser una f minúscula o una f mayúscula, pero de igual manera lo recomendable es utilizar la f
+```java
+float numeroFloat = (float)10.0;    
+System.out.println("numeroFloat = " + numeroFloat);
+System.out.println("Valor mínimo tipo float: " + Float.MIN_VALUE);
+System.out.println("Valor máximo tipo float: " + Float.MAX_VALUE);
+```
 
-mayúscula para que se entienda que es una literal de tipo flotante.
+![16-02](images/16-02.png)
 
-Así que esa es una forma o podemos indicar al compilador que haga la conversión.
-
-Al Tipo flotante.
-
-Así que en este caso está literal ese tipo de doble por default en Java las literales flotantes son
-
-el tipo de fútbol, pero con esta indicación le estamos diciendo al compilador que de cualquier manera
-
-lo convierte a un tipo flow y debido a que es un valor que puede soportar el tipo flotante si lo mandamos
-
-a imprimir.
-
-Deberemos observar que el resultado es correcto, así que guardamos cambios, ejecutamos y podemos dejar
-
-que el resultado no se altera, por lo tanto esta conversión es válida y además no hubo pérdida de precisión.
-
-Pero qué pasa si nos vamos a los límites del punto flotante?
-
-Vamos a imprimir los valores límite valor.
-
-Valor mínimo.
-
-Tipo float.
-
-Lo mandamos a imprimir utilizando la clase float y accedemos al valor de 1000 valio.
-
-Imprimimos el valor de mil BALIO y vamos a hacer lo mismo.
-
-Para Max Valio.
-
-Así que imprimimos el valor máximo del tipo flop, guardamos cambios, vamos a ejecutar.
-
-Y podemos observar que tenemos un valor negativo, pero utilizando notación exponencial, si no están
-
-familiarizados con esto, pueden revisar cualquier referencia en Ghoul para revisar la notación exponencial
-
-de los números, pero básicamente es utilizar la letra de exponente y posteriormente indicamos en cuántas
-
-posiciones se va a mover.
-
-Este valor simplemente es un número más grande, pero utilizar esta notación para que no se despliegue
-
-todo este número, sino que se simplifique la impresión de números del tipo flotante, ya que pueden
-
-ser valores muy grandes y también el valor máximo es 3.4, pero exponente 38.
-
-Así que tenemos 38 posiciones hacia la derecha y en este caso 45 posiciones hacia la izquierda y por
-
-lo tanto podemos observar que es un número bastante grande.
+Podemos observar que tenemos un valor negativo `1.4E-45`, pero utilizando notación exponencial, si no están familiarizados con esto, pueden revisar cualquier referencia en Google para revisar la notación exponencial de los números pero básicamente es utilizar la letra de exponente y posteriormente indicamos en cuántas posiciones se va a mover. Este valor simplemente es un número más grande, pero utilizar esta notación para que no se despliegue todo este número, sino que se simplifique la impresión de números del tipo flotante, ya que pueden ser valores muy grandes. El valor máximo es 3.4028235E38, así que tenemos 38 posiciones hacia la derecha y en este caso 45 posiciones hacia la izquierda y por lo tanto podemos observar que es un número bastante grande.
 
 Y si nos vamos al límite?
 
-Utilizando la notación exponencial vamos a asignar este valor.
+Utilizando la notación exponencial vamos a asignar este valor. Vamos a indicar que esta literal sea de tipo flotante, ponemos una F y podemos ver que ya no tenemos ningún problema. Estamos en el límite, pero todavía podemos utilizarlo, así que tenemos exponente a la 38.
 
-Este valor todavía soportado vamos a quitar esta conversión.
+```java
+float numeroFloat = 3.4028235E38F;    
+```
 
-Vamos a indicar que esta literal sea de tipo flotante, ponemos una F y podemos ver que ya no tenemos
+Pero si sumamos un 1 a este valor, es decir que nos vamos al valor de 36.
 
-ningún problema.
+```java
+float numeroFloat = 3.4028236E38F;    
+```
 
-Estamos en el límite, pero todavía podemos utilizarlo, así que tenemos exponente a la 38, pero si
+Podemos observar que estamos superando el valor soportado por la literal de tipo flotante `floating point number too large`. Así que esto lo podemos resolver de dos maneras podemos indicar que esta literal sea de tipo doble.
 
-sumamos un 1 a este valor, es decir que nos vamos al valor de 36.
+```java
+float numeroFloat = 3.4028236E38D;    
+```
 
-Podemos observar que estamos superando el valor soportado por la literal de tipo flotante.
+Sin embargo, si indicamos esto, tenemos que hacer la conversión de manera explícita, así que estamos convirtiendo una literal de tipo doble.
 
-Así que esto lo podemos resolver de dos maneras podemos indicar que esta literal sea de tipo doble.
+```java
+float numeroFloat = (float)3.4028236E38D;    
+```
 
-Sin embargo, si indicamos esto, tenemos que hacer la conversión.
+Y lo estamos asignando a una variable de tipo flotante, vamos a ver el resultado.
 
-De manera explícita, así que estamos convirtiendo una literal de tipo doble.
+![16-03](images/16-03.png)
 
-Y lo estamos asignando a una variable de tipo flotante.
+Y en este caso, debido a que ya estamos utilizando un número mayor soportado por el tipo `float`, vamos a tener pérdida de precisión, así que guardamos cambios, ejecutamos y podemos observar el valor de `Infinity`.
 
-Vamos a ver el resultado.
-
-Y en este caso, debido a que ya estamos utilizando un número mayor soportado por el tipo flop, vamos
-
-a tener pérdida de precisión, así que guardamos cambios, ejecutamos y podemos observar el valor de
-
-Infinity.
-
-Esto quiere decir que ya no pudimos asignar el valor de manera correcta y por lo tanto el compilador
-
-ya no se puede interpretar.
-
-Este valor nos manda el valor de Infinity y por lo tanto fue un valor inválido.
-
-Para asignar al tipo flotante se perdió la precisión.
-
-Ya no fue el valor que intentamos asignar de tipo doble, sino que ya no soportó este valor y por lo
-
-tanto nos manda el valor de Infiniti.
+Esto quiere decir que ya no pudimos asignar el valor de manera correcta y por lo tanto el compilador ya no se puede interpretar. Este valor nos manda el valor de `Infinity` y por lo tanto fue un valor inválido. Para asignar al tipo flotante se perdió la precisión. Ya no fue el valor que intentamos asignar de tipo `double`, sino que ya no soportó este valor y por lo tanto nos manda el valor de `Infinity`.
 
 Así que vamos a dejar simplemente el valor máximo que puede soportar.
 
-Guardamos cambios, ejecutamos y podemos saber que en este caso es exactamente el mismo valor máximo
+```java
+float numeroFloat = (float)3.4028235E38D;    
+```
+Guardamos cambios, ejecutamos.
 
-que soporta el tipo flotante.
+![16-04](images/16-04.png)
 
-Y por último, vamos a ver el tipo de fútbol.
+y podemos observar que en este caso es exactamente el mismo valor máximo que soporta el tipo flotante.
 
-Definimos una variable de tipo doble.
+Y por último, vamos a ver el tipo `double`. Definimos una variable de tipo doble.
 
-Le asignamos cualquier valor, por ejemplo, el valor de 10 no tiene que ser de punto flotante en automático
+```java
+double numeroDouble = 10;    
+```
 
-la literal, el tipo entero se puede asignar a un tipo doble sin realizar ningún tipo de conversión.
+Le asignamos cualquier valor, por ejemplo, el valor de 10 no tiene que ser de punto flotante en automático 
+la literal, el tipo entero se puede asignar a un tipo `double` sin realizar ningún tipo de conversión. Debido a que los tipos enteros se pueden almacenar en los tipos `double` sin ningún problema, vamos a imprimir esta variable número `double`. Vamos a imprimir los valores mínimo y máximo. Y la clase que vamos a utilizar es la clase de `Double` para saber el valor mínimo y máximo.
 
-Debido a que los tipos enteros se pueden almacenar en los tipos doble sin ningún problema, vamos a
+```java
+double numeroDouble = 10;
+System.out.println("numeroDouble = " + numeroDouble);
+System.out.println("Valor mínimo tipo double: " + Double.MIN_VALUE);
+System.out.println("Valor máximo tipo double: " + Double.MAX_VALUE);
+```
 
-imprimir esta variable número doble.
+Guardamos cambios, ejecutamos.
 
-Vamos a imprimir los valores mínimo y máximo.
+![16-05](images/16-05.png)
 
-Y la clase que vamos a utilizar es la clase de doble.
+Y podemos observar que también este es un número ya muchísimo más grande. El tipo flotante tiene 45 posiciones hacia la izquierda y en este caso el valor mínimo de un `double` tiene menos 324 posiciones hacia la izquierda. Cuando trabajamos con el tipo `double` y en el tipo `float` tenemos 38 posiciones hacia la derecha y en este caso de `double` tenemos 308 posiciones en valor positivo, así que podemos observar que es un número muchísimo más grande.
 
-Así que vamos a utilizar la clase doble.
+Por ello es que el tipo de `double` es el tipo más grande en Java.
 
-Para saber el valor mínimo y máximo, guardamos cambios, ejecutamos.
+Es el tipo de dato que puede almacenar los valores mayores. Vamos a asignarle el valor máximo para hacer la prueba.
 
-Y podemos observar que también este es un número ya muchísimo más grande.
-
-El tipo flotante tiene 45 posiciones hacia la izquierda y en este caso el valor mínimo tiene menos 324
-
-posiciones hacia la izquierda.
-
-Cuando trabajamos con el tipo doble y en el tipo flotante tenemos 38 posiciones hacia la derecha y en
-
-este caso tenemos 300, ocho posiciones en valor positivo, así que podemos observar que es un número
-
-muchísimo más grande.
-
-Por ello es que el tipo de doble es el tipo más grande en Java.
-
-Es el tipo de dato que puede mencionar los valores mayores.
-
-Vamos a asignarle el valor máximo para hacer la prueba.
+```java
+double numeroDouble = 1.7976931348623157E308;
+System.out.println("numeroDouble = " + numeroDouble);
+System.out.println("Valor mínimo tipo double: " + Double.MIN_VALUE);
+System.out.println("Valor máximo tipo double: " + Double.MAX_VALUE);
+```
 
 Guardamos cambios, imprimimos.
 
-Observamos que el número doble es exactamente igual al valor máximo que soporta este tipo de doble.
+![16-06](images/16-06.png)
 
-Y podemos ver que tampoco fue necesario indicar que esta literal es de tipo doble, ya que en Java por
+Observamos que el número `double` es exactamente igual al valor máximo que soporta este tipo de doble. Y podemos ver que tampoco fue necesario indicar que esta literal es de tipo doble, ya que en Java por default, las literales de punto flotante simplemente contener un punto entonces ya son de tipo `double`, así que eso es opcional se puede poner o no la `D`.
 
-default, las literales de punto flotante simplemente contener un punto entonces ya son de tipo doble.
+### :computer: `016-TiposPrimitivos-Flotantes` 
 
-Así que eso es opcional.
+*`TiposPrimitivos`*
 
-Se puede poner o no la de.
+```java
+public class TiposFlotantes {
+   public static void main(String arg[]){
+      /*
+         Tipos primitivos de tipo flotante: float y double.
+      */
+        
+      float numeroFloat = (float)3.4028235E38D;
+      System.out.println("numeroFloat = " + numeroFloat);
+      System.out.println("Valor mínimo tipo float: " + Float.MIN_VALUE);
+      System.out.println("Valor máximo tipo float: " + Float.MAX_VALUE);
+        
+      double numeroDouble = 1.7976931348623157E308; 
+      System.out.println("numeroDouble = " + numeroDouble);
+      System.out.println("Valor mínimo tipo double: " + Double.MIN_VALUE);
+      System.out.println("Valor máximo tipo double: " + Double.MAX_VALUE);
 
-Así que revisen hasta aquí su código, realicen los ejercicios que hemos visto hasta el momento.
+   }
+}
+```
 
-Y cualquier duda.
+![16-06](images/16-06.png)
 
-Recuerden que también les adjuntamos la tabla con el detalle de cada uno de estos tipos enteros y flotantes.
-
-Todo por este vídeo y nos vemos en la siguiente elección.
+Es todo por esta lección y nos vemos en la siguiente.
 
 Saludos.
 
