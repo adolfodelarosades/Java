@@ -611,92 +611,50 @@ public class InferenciaDeTipos {
 
 ![17-12](images/17-12.png)
 
-Así que todo por esta lección.
+Así que es todo por esta lección.
 
 Saludos!
 
 
-# 018 Ejercicio: Tipos Primitivos tipo char - 11:34
+# 018 Ejercicio: Tipos Primitivos tipo `char` - 11:34
 
-Hola y bienvenidos a esta elección.
+Hola y bienvenidos a esta lección.
 
-A continuación estudiar el tipo Char en Java.
+A continuación estudiar el tipo Char en Java. Están listos? Vamos.
 
-Están listos?
+Y ya hemos visto hasta el momento varios tipos numéricos, como es el tipo int, long, float y double.
 
-Vamos.
+Pero ahora falta ver algunos otros tipos como es el tipo `char`.
 
-Y ya hemos visto hasta el momento varios tipos numéricos, como es el tipo in long, flagg y doble.
+Así que vamos a escribir lo siguiente. Para declarar una variable de tipo `char` simplemente utilizamos la palabra reservada `char`, ponemos el nombre de la variable. 
 
-Pero ahora falta ver algunos otros tipos como es el tipo Char.
+Básicamente, un tipo `char` tiene la característica que es solamente un carácter, así que puede almacenar solamente un carácter, y para utilizar un carácter en Java utilizamos comilla simple, terminemos con punto y coma. Y en este momento podemos asignar cualquier carácter, por ejemplo el carácter `a` vamos a imprimir esta variable.
 
-Así que vamos a escribir lo siguiente vamos a limpiar nuestro método main.
-
-Para declarar una variable de tipo char simplemente utilizamos la palabra reservada char, ponemos el
-
-nombre de la variable.
-
-Y básicamente, un tipo achar tiene la característica que es solamente un carácter, así que puede almacenar
-
-solamente un carácter, y para utilizar un carácter en Java utilizamos comilla simple.
-
-Terminemos con punto y coma.
-
-Y en este momento podemos asignar cualquier carácter, por ejemplo el carácter A vamos a imprimir esta
-
-variable.
+```java
+char miCaracter = 'a';
+System.out.println("miCaracter = " + miCaracter);
+```
 
 Guardamos cambios, ejecutamos.
 
-Y Podemos se va a dar resultado.
+![18-01](images/18-01.png)
 
-Mi carácter, el valor de A.
+Y podemos ver el resultado `miCaracter = a`
 
-Sin embargo, los caracteres se rigen por una lista de caracteres que se conoce como la lista de caracteres
+Sin embargo, los caracteres se rigen por una lista de caracteres que se conoce como la lista de caracteres Unicode. Existen varios tipos de juegos de caracteres, pero el más común es el [juego de caracteres Unicode](https://unicode-table.com/es/blocks/).
 
-Unicode.
+Si conocen esta lista de caracteres, pueden buscar en Internet escribe [List Unicode](https://en.wikipedia.org/wiki/List_of_Unicode_characters) para ver una lista de caracteres de tipo Unicode, entramos a este link que nos muestra en Wikipedia. Ya que nos da una breve descripción del tipo de caracteres Unicode, el cual cuenta con 143859 caracteres.
 
-Existen varios tipos de juegos de caracteres, pero el más común es el juego de caracteres Unicode.
+Pero dependiendo de la región, ese juego de caracteres que vamos a utilizar más comúnmente. Y en particular cuando estamos trabajando con el tipo `char` en Java, tenemos diferentes opciones para poder trabajar con un `char`, ya sea utilizando el código Unicode. También podemos utilizar el valor decimal o podemos utilizar directamente el carácter de tipo Unicode. Por ejemplo, si bajamos más en esta lista podemos observar la lista de caracteres latinos Básico y observamos el código Unicode que podemos utilizar posteriormente, el carácter y también el valor decimal que podemos utilizar, así que cualquiera de esos tres valores lo podemos utilizar en nuestro código.
 
-Si conocen esta lista de caracteres, pueden buscar en Internet escriben List Unicode para ver una lista
+![18-02](images/18-02.png)
 
-de caracteres de tipo Unicode, entramos a este link que nos muestra en Wikipedia.
+Vamos a ver un ejemplo de esto, el tipo `char` tiene 16 bits, así que es la misma cantidad de bits que un tipo `short`. Sin embargo, un tipo `short` almacena únicamente valores decimales sin punto flotante. En cambio, un valor `char` puede almacenar un carácter, pero también valores decimales. Vamos a ver cómo es esto. Vamos a definir otra variable de tipo char. 
 
-Ya que nos da una breve descripción del tipo de caracteres Unicode, el cual cuenta con 140 y 3000 859
-
-caracteres.
-
-Pero dependiendo de la región, ese juego de caracteres que vamos a utilizar más comúnmente.
-
-Y en particular cuando estamos trabajando con el tipo Achar en Java, tenemos diferentes opciones para
-
-poder trabajar con un char, ya sea utilizando el código Unicode.
-
-También podemos utilizar el valor decimal o podemos utilizar directamente el carácter de tipo Unicode.
-
-Por ejemplo, si bajamos más en esta lista.
-
-Podemos observar la lista de caracteres latinos Bãsico.
-
-Y observamos el código único que podemos utilizar posteriormente.
-
-El carácter y también el valor decimal que podemos utilizar, así que cualquiera de esos tres valores
-
-lo podemos utilizar en nuestro código.
-
-Vamos a ver un ejemplo de esto.
-
-El tipo char tiene 16bits, así que es la misma cantidad de bits que un tipo llort.
-
-Sin embargo, un tipo almacena únicamente valores decimales sin punto flotante.
-
-En cambio, un valor char puede almacenar un carácter, pero también valores decimales.
-
-Vamos a ver cómo es esto.
-
-Vamos a definir otra variable de tipo char.
-
-Se va a llamar la variable marchar.
+```java
+char varChar = '\u0021';
+System.out.println("varChar = " + varChar);
+```
 
 Y le asignamos directamente un valor, pero ahora utilizando el código Unicode.
 
