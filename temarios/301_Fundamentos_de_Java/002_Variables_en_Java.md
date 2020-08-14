@@ -735,7 +735,7 @@ Podemos observar que en este caso tenemos la comida doble abriendo y cerrando al
 
 ### :computer: `011-CaracteresEspeciales`
 
-*`Concatenacion`*
+*`CaracteresEspeciales`*
 
 ```java
 public class CaracteresEspeciales {
@@ -760,231 +760,117 @@ Es todo por esta lección y nos vemos en la siguiente lección.
 Saludos!
 
 
-# 012 Ejercicio: Clase Scanner en Java - 07:58
+# 012 Ejercicio: Clase `Scanner` en Java - 07:58
 
-Hola, bienvenidos a esta elección.
+Hola, bienvenidos a esta lección.
 
-A continuación vamos a ver el uso de la clase escaner en Java.
+A continuación vamos a ver el uso de la clase escaner en Java. Están listos? Vamos.
 
-Están listos?
+Hasta el momento hemos definido nuestras variables, pero hasta el momento la información que le estamos asignando a nuestras variables se conoce como información en código duro, es decir, que este valor no lo está introduciendo el usuario.
 
-Vamos.
+Ahora, aunque el tema de la clase `Scanner` es un tema más avanzado de momento vamos a adelantarlo debido a que lo vamos a necesitar para capturar la información que escriba el usuario y va a ser muy importante para hacer más dinámicos nuestros programas, así que vamos a utiliza esta clase `Scanner` y vamos a ver cómo hacerlo.
 
-Hasta el momento hemos definido nuestras variables, pero hasta el momento la información que le estamos
+Vamos a definir una variable, por ejemplo la variable `usuario` y le vamos a asignar el valor de `Carlos` punto y coma y mandamos a imprimir esta variable, como ya sabemos, `soutv` + TABULADOR. Se va a imprimir el valor de esta variable.
 
-asignando a nuestras variables se conoce como información en código duro, es decir, que este valor
-
-no lo está introduciendo el usuario.
-
-Ahora, aunque el tema de la clase escaner es un tema más avanzado.
-
-De momento vamos a adelantarlo debido a que lo vamos a necesitar para capturar la información que escriba
-
-el usuario y va a ser muy importante para hacer más dinámicos nuestros programas, así que vamos a utilizar
-
-esta clase escáner y vamos a ver cómo hacerlo.
-
-Vamos a quitar este código.
-
-Vamos a definir una variable, por ejemplo la variable usuario y le vamos a asignar cualquier valor.
-
-Por ejemplo, en este caso el valor de Carlos punto y coma y mandamos a imprimir esta variable, como
-
-ya sabemos, ese aleví.
-
-Se va a imprimir el valor de esta variable.
+```java
+var usuario = "Carlos";
+System.out.println("usuario = " + usuario);
+```
 
 Guardamos cambios, ejecutamos.
 
-Y hasta aquí no hay ningún problema.
+![12-01](images/12-01.png)
 
-Es exactamente lo mismo que hemos venido trabajando.
+Y hasta aquí no hay ningún problema es exactamente lo mismo que hemos venido trabajando estamos creando una variable, le asignamos un valor y lo mandamos a imprimir.
 
-Estamos creando una variable, le asignamos un valor y lo mandamos a imprimir.
+Pero ahora qué pasa si queremos capturar esta información? No directamente el nombre de Carlos, sino cualquier otro valor que quiera proporcionar el usuario en nuestra consola.
 
-Pero ahora qué pasa si queremos capturar esta información?
+Para ello vamos a hacer lo siguiente vamos a mandar un mensaje a la consola, solicitando que el usuario escriba una información. Por ejemplo:
 
-No directamente el nombre de Carlos, sino cualquier otro valor que quiera proporcionar el usuario en
+```java
+System.out.println("Escribe tu nombre: ");
+```
 
-nuestra consola.
+Posteriormente vamos a utilizar una clase llamada `Scanner` que nos va a permitir leer información de la consola. Para ello vamos a utilizar el siguiente código, recuerden que debe de ser tal cual como se muestra, respetando mayúsculas y minúsculas.
 
-Para ello vamos a hacer lo siguiente vamos a mandar un mensaje a la consola.
+```java
+System.out.println("Escribe tu nombre: ");
+Scanner consola = new Scanner(System.in);
+```
 
-Solicitando que el usuario escriba una información.
+Básicamente aquí estamos utilizando la clase `Scanner` que es un tipo ya definido dentro de las clases de Java. Posteriormente definimos el nombre de nuestra variable llamada `consola`, este va a ser el nombre de esta variable y posteriormente para poder leer información de la consola escribimos lo siguiente, vamos a crear un nuevo objeto de esta clase utilizando la palabra reservada `new` `Scanner`, que es el nombre de nuestra clase y entre paréntesis escribimos `System.in`. Básicamente con esto lo que estamos diciendo es que vamos a leer información de la consola, `in` es de `input`, así que la información de la consola y `System` es una clase también de Java que nos va a permitir acceder a la consola a través de esta variable `in` y cerramos con punto y coma.
 
-Por ejemplo, escribe tu nombre dos puntos.
+Es necesario importar esta clase `Scanner`, ya que se encuentra definida en otra parte de las clases de Java, así que las clases que vamos a utilizar en Java normalmente las vamos a clasificar y empaquetar en folders a esto se le conoce como paquetes, así que esta clase se encuentra en un paquete llamado `java.util`, así que vamos a dar clic sobre esta línea Add Import, `java.util.Scanner`. Así que básicamente le estamos diciendo que dentro del paquete `java.util` va a importar la clase `Scanner` para que podamos utilizarla también.
 
-Y posteriormente vamos a utilizar una clase llamada escáner que nos va a permitir leer información de
+Todo esto lo vamos a ver a detalle más adelante, solamente lo estamos viendo a grandes rasgos para que podamos utilizar la consola y así leer información de manera dinámica por parte del usuario.
 
-la consola.
+Ahora esta variable `consola` la podemos utilizar una o varias veces, no solamente es para leer una vez de la consola, sino que una vez que ya tenemos esta variable, la podemos utilizar para leer varias veces de la consola y en lugar de asignarle directamente el valor de `Carlos`, ahora vamos a utilizar nuestra variable consola y vamos a utilizar el método `nextLine()`.
 
-Para ello vamos a utilizar el siguiente código vamos a escribir.
+```java
+System.out.println("Escribe tu nombre: ");
+Scanner consola = new Scanner(System.in);
+var usuario = consola.nextLine();
+```
 
-Recuerden que debe de ser tal cual como se muestra, respetando mayúsculas y minúsculas.
+Aunque existen otros métodos para leer información de la consola, de momento ese es el método que le recomendamos utilizar, ya que este método lo que va a hacer es leer una línea completa de la consola, así que ese es el método que más van a utilizar cuando lean información de la consola.
 
-Escribimos escáner con doble n.
+Bien, y posteriormente lo que va a hacer el programa es que se va a detener hasta que el usuario escriba una información y una vez que escribe la información y dar ENTER entonces el valor que escribe se asigna a la variable `usuario` y finalmente se va a imprimir este valor.
 
-Este va a ser el tipo de nuestra variable, posiblemente vamos a ver a detalle el uso de clases y la
-
-creación de objetos, como hemos comentado, nos estamos adelantando un poco a estos temas para que
-
-podamos leer información de la consola, pero básicamente aquí estamos utilizando la clase escaner,
-
-que es un tipo ya definido dentro de las clases de IAVA.
-
-Posteriormente definimos el nombre de nuestra variable llamada consola.
-
-Este va a ser el nombre de esta variable y posteriormente para poder leer información de la consola
-
-escribimos lo siguiente Vamos a crear un nuevo objeto de esta clase utilizando la palabra reservada
-
-Danio escaner, que es el nombre de nuestra clase, y entre paréntesis escribimos Sistem puntos.
-
-Básicamente con esto lo que estamos diciendo es que vamos a leer información de la consola.
-
-Y es de imput, así que la información de la consola y System es una clase también de IAVA que nos va
-
-a permitir acceder a la consola a través de esta variable.
-
-Y cerramos con punto y coma.
-
-Ahora esta sintaxis de crear un objeto de la clase escaner es lo que vamos a ver a detalle posteriormente.
-
-De momento solamente escribano y más adelante lo vamos a explicar a detalle.
-
-Es necesario importar esta clase, ya que se encuentra definida en otra parte de las clases de IAVA,
-
-así que las clases que vamos a utilizar en Java normalmente las vamos a clasificar y empaquetar en folders.
-
-A esto se le conoce como paquetes, así que esta clase se encuentra en un paquete llamado Java punto
-
-y útil, así que vamos a dar clic sobre esta línea Add Import, Java Punto y útil y la clase Escaner.
-
-Así que básicamente le estamos diciendo que dentro del paquete Java punto y útil va a importar la clase
-
-escaner para que podamos utilizarla también.
-
-Todo esto lo vamos a ver a detalle más adelante, solamente lo estamos viendo a grandes rasgos para
-
-que podamos utilizar la consola y así leer información de manera dinámica por parte del usuario.
-
-Ahora esta variable consola la podemos utilizar una o varias veces.
-
-No solamente es para leer una vez de la consola, sino que una vez que ya tenemos esta variable, la
-
-podemos utilizar para leer varias veces de la consola y en lugar de asignarle directamente el valor
-
-de Carlos, ahora vamos a utilizar nuestra variable consola.
-
-Vamos a utilizar el método NEX Line.
-
-Aunque existen otros métodos para leer información de la consola, de momento ese es el método que le
-
-recomendamos utilizar, ya que este método lo que va a hacer es leer una línea completa de la consola,
-
-así que ese es el método que más van a utilizar cuando lean información de la consola.
-
-Bien, y posteriormente aquí lo que va a hacer el programa es que se va a detener hasta que el usuario
-
-escriba una información y una vez que escribe la información y da enter.
-
-Entonces el valor que escribe se asigna a la variable usuario y finalmente se va a imprimir este valor.
+```java
+System.out.println("Escribe tu nombre: ");
+Scanner consola = new Scanner(System.in);
+var usuario = consola.nextLine();
+System.out.println("usuario = " + usuario);
+```
 
 Bien, vamos a poner en práctica esto, vamos a guardar cambios y ejecutamos.
 
-Así que en primer lugar se ejecuta la línea 9, se manda imprimir.
+![12-02](images/12-02.png)
 
-Escribe tu nombre.
+Así que en primer lugar se ejecuta la línea 5, se manda imprimir `Escribe tu nombre: ` y nuestro programa se detiene, así que nos está esperando para que escribamos un valor, vamos a escribir cualquier valor, por ejemplo el valor de `Adolfo` y hasta que damos ENTER entonces la consola va a procesar el método `nextLine()` y el resultado de `nextLine()` se va a asignar a nuestra variable `usuario`. Bien, así que vamos a dar enter y podemos observar finalmente que se imprime:
 
-Y Podemos se va que nuestro programa se detiene, así que nos está esperando para que escribamos un
+```java
+usuario = Adolfo
+```
 
-valor, vamos a escribir cualquier valor, por ejemplo el valor de Juan y hasta que damos enter.
+Así que con estas líneas de manera dinámica estamos recuperando el valor de `Adolfo` utilizando el método `nextLine()`. Esta variable se imprime el valor que escribió el usuario en la consola y así podemos volver a utilizar esta variable `consola`.
 
-Entonces la consola va a procesar el método next line y el resultado de procesar Next Line se va a asignar
 
-a nuestra variable usuario.
+Por ejemplo similar al ejercicio que hemos creado anteriormente para solicitar un título.
 
-Bien, así que vamos a dar enter.
+```java
+System.out.println("Escribe tu título: ");
+var titulo = consola.nextLine();
+System.out.println("Resultado = " + titulo + " " + usuario);
+```
 
-Y podemos observar finalmente que se imprime usuario igual al valor de la variable usuario, en este
+### :computer: `012-Scanner`
 
-caso el valor que proporcionó el usuario, que es el valor de Juan.
+*`ClaseScanner`*
 
-Así que con estas líneas de manera dinámica estamos recuperando el valor de Juan utilizando el método
+```java
+import java.util.Scanner;
 
-Next Line, y este método next line lo que hace es detener la ejecución de nuestro programa para esperar
+public class ClaseScanner {
+   public static void main(String args[]){
+        
+      Scanner consola = new Scanner(System.in);
+        
+      System.out.println("Escribe tu nombre: ");
+      var usuario = consola.nextLine();
+      System.out.println("usuario = " + usuario);
+        
+      System.out.println("Escribe tu título: ");
+      var titulo = consola.nextLine();
+      System.out.println("Resultado = " + titulo + " " + usuario);
 
-a que el usuario escriba una información y una vez que da enter.
+    }
+}
+```
 
-Entonces el resultado se asigna a la variable usuario de manera automática y por ello es cuando mandamos
+![12-03](images/12-03.png)
 
-a imprimir.
-
-Esta variable se imprime el valor que escribió el usuario en la consola y así podemos volver a utilizar
-
-esta variable.
-
-Por ejemplo.
-
-Similar al ejercicio que hemos creado anteriormente para solicitar un título.
-
-Así que volvemos a utilizar la variable consola y el método next line.
-
-Punto y coma y volvemos a imprimir la variable de título, pero además vamos a imprimir, ponemos lo
-
-siguiente.
-
-Resultado?
-
-Dos puntos imprimimos la variable de título.
-
-Y posteriormente concatenados la variable de usuario.
-
-Pero primero con un espacio entre estas dos variables.
-
-Para que tengamos un espacio.
-
-Cuando se imprimen estas variables bien guardamos cambios y ejecutamos.
-
-Podemos ver que el programa nos pide escribe tu nombre, escribimos el valor de Juan y aquí podemos
-
-observar que se detuvo también el programa, pero lo recomendable es poner un texto antes de utilizar
-
-la consola para que el usuario entienda qué es lo que se le está solicitando.
-
-Vamos a detener la ejecución de nuestro programa presionando este icono el botón de Stop.
-
-Y antes de mandar a llamar de nueva cuenta esta línea, voy a poner un texto, voy a mandar un texto
-
-a la consola.
-
-El texto describe.
-
-El título.
-
-Para que el usuario sepa qué es lo que debe de escribir.
-
-Bien guardamos cambios.
-
-Ejecutamos.
-
-Escribimos el nombre Juan y posteriormente nos pide el título, en este caso ingeniero.
-
-Y finalmente, el resultado es la concatenación de la variable ingeniero espacio y el nombre que hemos
-
-proporcionado.
-
-Ingeniero Juan.
-
-Así que con esta línea estamos definiendo la variable consola, la cual nos va a servir para solicitar
-
-información al usuario por medio del método Next Line.
-
-Como hemos comentado, existen otros métodos, pero es el método que más van a utilizar para que no
-
-tengan problemas para leer la información de la consola.
-
-Es todo por este vídeo y nos vemos en la siguiente elección.
+Es todo por esta lección y nos vemos en la siguiente lección.
 
 Saludos.
 
@@ -993,21 +879,23 @@ Saludos.
 Pregunta 1:
 Cuál es la salida del siguiente código:
 
+```java
 var nombre = “Juan”;
 System.out.println(nombre);
 nombre = “Carlos”;
 System.out.println(nombre);
+```
 
 Pregunta 2:
 ¿Cuál es la salida del siguiente código?:
 
+```java
 String color;
 System.out.println(color);
 color = “Rojo”;
+```
 
 ERROR
-
-¡Buen trabajo!
 ¡Correcto! En el momento en que se imprime la variable, no se ha asignado aún un valor a la variable y el compilador manda el error: variable color might not have been initialized (la variable color tal vez no ha sido inicializada)
 
 Pregunta 3:
@@ -1019,13 +907,14 @@ Pregunta 4:
 Pregunta 5:
 ¿Cuál es la salida del siguiente código?:
 
+```java
 a = “A”;
 System.out.println(a);
 a = “B”;
 System.out.println(b);
+```
 
 ERROR
-
 Correcto. La variable a no se ha definido, no tiene un tipo definido.
 
 
@@ -1033,7 +922,7 @@ Correcto. La variable a no se ha definido, no tiene un tipo definido.
 
 Tarea: Detalles Libro
 
-se solicita agregar la siguiente información de un Libro
+Se solicita agregar la siguiente información de un Libro
 
 # Detalles Libro (Solución) - 00:09
 
