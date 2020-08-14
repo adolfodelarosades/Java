@@ -474,229 +474,144 @@ Saludos.
 
 # 017 Ejercicio: Inferencia de Tipos con Var y tipos Primitivos - 07:55
 
-Hola, bienvenidos a esta elección.
+Hola, bienvenidos a esta lección.
 
-A continuación vamos a ver algunos detalles más del uso de la palabra reservada bar en Java.
+A continuación vamos a ver algunos detalles más del uso de la palabra reservada `var` en Java. Están listos? Vamos.
 
-Están listos?
+Ahora, una vez que ya hemos visto los tipos primitivos, tanto de tipo entero como de tipo flotante, podemos entonces entender a más detalle el uso de la palabra reservada. Por ejemplo, si vamos a definir una variable de tipo entero, podemos utilizar:
 
-Vamos.
+```java
+var numeroEntero = 10;
+```
 
-Bien, vamos a seguir trabajando con este proyecto.
+Recordemos que las literales que no tienen punto flotante en Java y que son de tipo numérico en automático son de tipo `int`, por ello, el tipo de esta variable va a ser de tipo `int`. Vamos a imprimir esto.
 
-Vamos a limpiar nuestro código y solo dejamos el método.
-
-Ahora, una vez que ya hemos visto los tipos primitivos, tanto de tipo entero como de tipo flotante,
-
-podemos entonces entender a más detalle el uso de la palabra reservada.
-
-Por ejemplo, si vamos a definir una variable de tipo entero, podemos utilizar varios.
-
-Número entero y le asignamos una literal de tipo entero.
-
-Recordemos que las literales que no tienen punto flotante en Java y que son de tipo numérico en automático
-
-son de tipo int.
-
-Por ello, el tipo de esta variable va a ser de tipo INT.
-
-Vamos a imprimir esto.
+```java
+var numeroEntero = 10;
+System.out.println("numeroEntero = " + numeroEntero);
+```
 
 Vamos a imprimir esto, guardamos cambios y ejecutamos.
 
-Y observamos el valor de Díaz.
+![17-01](images/17-01.png)
 
-Y una forma de saber rápidamente el tipo de dato de esta variable, vamos a hacer lo siguiente vamos
+Y observamos el valor de 10.
 
-a ejecutar nuestro programa paso a paso.
+Una forma de saber rápidamente el tipo de dato de esta variable, vamos a hacer lo siguiente, vamos a ejecutar nuestro programa paso a paso. Esto se conoce como el **modo Debug** y la mayoría de las herramientas en Java soporta este tipo de ejecución, la ejecución paso a paso.
 
-Esto se conoce como el modo debug y la mayoría de las herramientas en Java soporta este tipo de ejecución.
+Así que para ello tenemos que agregar, en primer lugar, lo que se conoce como un **punto de ruptura** para que se detenga la ejecución de nuestro programa donde nosotros indiquemos. No puede ser en cualquier parte, sino que tiene que ser en una línea de código que pueda ser ejecutada. Así que en este caso esta línea de código es una línea de código válida. Ponemos un punto de ruptura en esta sección, simplemente vamos a dar clic, así que damos clic y podemos observar que este cuadro rojo y el mensaje que no se agrega es una línea, es un punto de ruptura.
 
-La ejecución paso a paso.
+![17-02](images/17-02.png)
 
-Así que para ello tenemos que agregar, en primer lugar, lo que se conoce como un punto de ruptura
+Así que aquí se va a detener la ejecución de nuestro programa cuando lo ejecutemos en modo Debug y ahora, 
+para que se ejecute en modo paso a paso, damos clic derecho y en lugar de seleccionar **Run file**, seleccionamos **Debug File**. Así que vamos a dar clic.
 
-para que se detenga la ejecución de nuestro programa donde nosotros indiquemos.
+![17-03](images/17-03.png)
 
-No puede ser en cualquier parte, sino que tiene que ser en una línea de código que pueda ser ejecutada.
+Y podemos observar que inicia la ejecución paso a paso en la parte inferior tenemos diferentes ventanas, tenemos diferentes Tabs y el Tab que nos interesa es el Tab de variables.
 
-Así que en este caso esta línea de código es una línea de código válida.
+![17-04](images/17-04.png)
 
-Ponemos un punto de ruptura en esta sección, simplemente vamos a dar clic, así que damos clic y podemos
+Si por alguna razón este Tab no se despliega o lo cerramos por algún error, entonces vamos a la sección de Window y en el apartado de Debugging podemos observar las diferentes opciones que tenemos para analizar nuestro código, en este caso vamos a dar clic sobre la sección de Variables.
 
-observar que este cuadro rojo y el mensaje que no se agrega es una línea, es un punto de ruptura.
+![17-05](images/17-05.png)
 
-Así que aquí se va a detener la ejecución de nuestro programa cuando lo ejecutemos en modo debug y ahora,
 
-para que se ejecute en modo paso a paso, damos clic derecho y en lugar de seleccionar renfield, seleccionamos
+Así que damos clic y podemos ver que nos vuelve a desplegar la sección de variables. Ahora esto es importante porque aquí es donde vamos a ver el tipo de dato de esta variable y debido a que estamos en la ejecución paso a paso para avanzar a la siguiente línea, vamos a presionar la tecla de F8 o lo que se conoce también como **Step Over**, es decir, que vamos a ejecutar esta línea y vamos a pasar a la siguiente.
 
-Dibbuks.
+![17-06](images/17-06.png)
 
-Así que vamos a dar clic.
+Así que presionamos este icono o presionamos F8. 
 
-Y podemos observar que inicia la ejecución paso a paso en la parte inferior tenemos diferentes ventanas,
+![17-07](images/17-07.png)
 
-tenemos diferentes tabuladores y el tabulador que nos interesa es el tabulador de variables.
+Y podemos observar que ya pasamos a la siguiente línea y además nos agregó en la parte inferior el valor 
+de nuestra variable. En este caso la variable de número entero con el valor de 10. Pero además nos está indicando que su tipo es de tipo entero. Esto quiere decir que la inferencia de tipos en Java ya hizo su trabajo. Es decir, que esta literal es de tipo entero y por lo tanto, al momento de definir esta  variable, cuando se crea, entonces se asigna el tipo de la variable y por lo tanto ahora ya reconoce que la variable es de tipo entero.
 
-Si por alguna razón este tabulador no se despliega o lo cerramos por algún error, entonces vamos a
-
-la sección de Window.
-
-Y en el apartado de debugging podemos observar las diferentes opciones que tenemos para analizar nuestro
-
-código, en este caso vamos a dar clic sobre la sección de variables o también podemos utilizar el shortcuts
-
-de Alt Cheff 1.
-
-Así que damos clic y podemos ver que nos vuelve a desplegar la sección de variables.
-
-Ahora esto es importante porque aquí es donde vamos a ver el tipo de dato de esta variable y debido
-
-a que estamos en la ejecución paso a paso para avanzar a la siguiente línea, vamos a presionar la tecla
-
-de F8 o lo que se conoce también como este over, es decir, que vamos a ejecutar esta línea y vamos
-
-a pasar a la siguiente.
-
-Así que presionamos este icono o presionamos f8.
-
-Y podemos observar que ya pasamos a la siguiente línea y además nos agregó en la parte inferior el valor
-
-de nuestra variable.
-
-En este caso la variable de número entero con el valor de 10.
-
-Pero además nos está indicando que su tipo es de tipo entero.
-
-Esto quiere decir que la inferencia de tipos en Java ya hizo su trabajo.
-
-Es decir, que esta literal es de tipo entero y por lo tanto, al momento de definir esta variable,
-
-cuando se crea, entonces se asigna el tipo de la variable y por lo tanto ahora ya reconoce que la variable
-
-es de tipo entero.
-
-Para terminar la ejecución paso a paso, en este caso, como ya es la última línea de código, podemos
-
+Para terminar la ejecución paso a paso, en este caso, como ya es la última línea de código, podemos 
 presionar F8 o podemos presionar este botón para que se ejecute todo nuestro programa.
+
+![17-08](images/17-08.png)
 
 Y también otra opción es que podemos detener la ejecución paso a paso con este botón.
 
-Con este icono vamos a presionar este botón para que se ejecute todo nuestro programa.
+![17-09](images/17-09.png)
 
-Y con ello termina la ejecución paso a paso.
+Vamos a presionar el botón para que se ejecute todo nuestro programa y con ello termina la ejecución paso a paso.
 
-Así que es una forma de saber el tipo de nuestras variables.
+Así que es una forma de saber el tipo de nuestras variables. Vamos a probar con otra variable.
 
-Vamos a probar con otra variable.
+```java
+var numeroDouble = 10.0;
+System.out.println("numeroDouble = " + numeroDouble);
+```
 
-Número de tipos de árbol.
+Y recordemos que si utilizamos un tipo flotante simplemente por poner el punto cero, entonces esta variable ya es de tipo flotante. Vamos a comprobarlo.
 
-Y recordemos que si utilizamos un tipo flotante simplemente por poner el punto cero, entonces esta
+Imprimimos esta variable, pero además vamos a realizar la ejecución paso a paso. Así que mantenemos nuestro punto de ruptura para quitarlo, simplemente volvemos a dar click y para volverlo a agregar en otra parte de nuestro código, volvemos a dar clic donde queremos que se detenga nuestro programa. En este caso vamos a detenerlo en la primer línea. Recuerden que ya debemos de haber guardado cambios. Damos clic derecho y seleccionamos Debug File. Y comienza la ejecución de nuestro programa paso a paso vamos a presionar F8. En este momento vamos al Tab de variables. Ya se creó nuestra variable de número entero y podemos observar su tipo, que es de tipo entero, según ya habíamos analizado. Ahora vamos a presionar de nueva cuenta F8 y esta es la línea de código que nos interesa en este momento. Esta literal es de tipo doble. Por lo tanto, si presionamos F8, entonces observamos que ahora esta variable número doble ya se creó en este momento es de tipo doble y el valor que asignamos es de tipo flotante 10.0, así que esta variable en automático se creó de tipo double.
 
-variable ya es de tipo flotante.
+![17-10](images/17-10.png)
 
-Vamos a comprobarlo.
+Por lo tanto, ya podemos entender a más detalle la inferencia de tipos. Vamos a detener esta ejecución paso a paso.
 
-Imprimimos esta variable, pero además vamos a realizar la ejecución paso a paso.
+Y vamos a ver un último ejemplo qué pasa si queremos definir una variable por ejemplo, de tipo float, recordemos que si le asignamos el valor de 10.0, si lo dejamos así en automático esta variable, esta variable no va a ser el tipo float, sino va a ser de tipo double, ya que la literal es de tipo double y por lo tanto la inferencia de tipos va a reconocer que la variable la va a crear de tipo double.
 
-Así que mantenemos nuestro punto de ruptura para quitarlo, simplemente volvemos a dar click y para
+```java
+var numeroFloat = 10.0;
+```
 
-volverlo a agregar en otra parte de nuestro código, volvemos a dar clic donde queremos que se detenga
+Así que para que la cree de tipo float, entonces podemos utilizar la F.
 
-nuestro programa.
+```java
+var numeroFloat = 10.0F;
+```
 
-En este caso vamos a detenerlo en la primer línea.
+Recordemos que utilizar la F, entonces esta literal es de tipo float. Un detalle es que estas letras no las tenemos en todos los tipos, solamente lo tenemos para ciertos tipos como son los tipos long, float y double, así que solamente para estos tipos podemos indicar ese tipo de literales.
 
-Recuerden que ya debemos de haber guardado cambios.
-
-Damos clic derecho y seleccionamos Debug File.
-
-Y comienza la ejecución de nuestro programa paso a paso vamos a presionar F8.
-
-En este momento vamos al tabulador de variables.
-
-Ya se creó nuestra variable de número entero y podemos elevar su tipo, que es de tipo entero, según
-
-ya habíamos analizado.
-
-Ahora vamos a presionar de nueva cuenta F8 y esta es la línea de código que nos interesa en este momento.
-
-Esta literal es de tipo doble.
-
-Por lo tanto, si presionamos F8, entonces observamos que ahora esta variable número doble ya se creó
-
-en este momento es de tipo doble y el valor que asignamos es de tipo flotante 10.0, así que esta variable
-
-en automático se creó de tipo double.
-
-Por lo tanto, ya podemos entender a más detalle la inferencia de tipos.
-
-Vamos a detener esta ejecución paso a paso.
-
-Y vamos a ver un último ejemplo qué pasa si queremos definir una variable?
-
-Por ejemplo, de tipo float, recordemos que si le asignamos el valor de 10 puntos cero, si lo dejamos
-
-así en automático esta variable, esta variable no va a ser el tipo flop, sino va a ser de tipo doble,
-
-ya que la literal es de tipo doble y por lo tanto la inferencia de tipos va a reconocer que la variable
-
-la va a crear de tipo doble.
-
-Así que para que la cree de tipo flotante, entonces podemos utilizar la F.
-
-Recordemos que utilizar la F, entonces esta literal es de tipo float.
-
-Un detalle es que estas letras no las tenemos en todos los tipos, solamente lo tenemos para ciertos
-
-tipos como son los tipos log, flop y doble, así que solamente para estos tipos podemos indicar ese
-
-tipo de literales bien.
-
-Por último, vamos a imprimir esta variable, la variable float, y vamos a ver el tipo ejecutemos paso
-
+Por último, vamos a imprimir esta variable, la variable float, y vamos a ver el tipo ejecutemos paso 
 a paso nuestro programa, así que mantenemos el punto de ruptura.
 
-Damos clic Derecho de Buffalo.
+```java
+var numeroFloat = 10.0F;
+System.out.println("numeroFloat = " + numeroFloat);
+```
 
-Empezamos a ejecutar.
+Damos clic Derecho Debug File. Empezamos a ejecutar. Observamos nuestra variable número entero, que es de tipo int. Vamos a continuar. Se crean otras variables de tipo double. También podemos llevar que es de tipo double sin ningún problema. Y por último, vamos a crear la variable número float y podemos observar en este caso que se ha creado correctamente.
 
-Observamos nuestra variable número entero, que es de tipo INT.
+![17-11](images/17-11.png)
 
-Vamos a continuar.
-
-Se crean otras variables de tipo doble.
-
-También podemos llevar que es de tipo doble sin ningún problema.
-
-Y por último, vamos a crear la variable número float y podemos observar en este caso que se ha creado
-
-correctamente.
-
-El tipo es de tipo float y aunque el valor es 10.0, esta literal hemos indicado que va a ser de tipo
-
-flotante, por lo tanto, la inferencia de tipos al momento en que se creó esta variable también está
-
-reconociendo que este tipo debe de ser de tipo float.
-
-Así que con esto ya tenemos a más detalle el uso de la inferencia de tipos.
-
-Esto cuando estamos trabajando con equipos enteros o con tipos flotantes.
+El tipo es de tipo float y aunque el valor es 10.0, esta literal hemos indicado que va a ser de tipo flotante 10.0F, por lo tanto, la inferencia de tipos al momento en que se creó esta variable también está reconociendo que este tipo debe de ser de tipo float. Así que con esto ya tenemos a más detalle el uso de la inferencia de tipos. Esto cuando estamos trabajando con tipos enteros o con tipos flotantes.
 
 Bien terminamos la ejecución y con eso termina nuestro programa.
 
 También ya podemos quitar el punto de ruptura.
 
-Y para ejecutar nuestro programa de manera normal, simplemente damos clic Derecho Broomfield.
+Y para ejecutar nuestro programa de manera normal, simplemente damos clic Derecho Run File.
 
 Y tenemos el resultado como lo hemos venido trabajando.
 
-Así que todo por esta elección.
+### :computer: `017-InferenciaDeTiposConVar` 
 
-Revisen a detalle su código y cualquier duda la pueden poner en la sección de preguntas y respuestas,
+*`InferenciaDeTipos`*
 
-así que nos vemos en el siguiente video.
+```java
+public class InferenciaDeTipos {
+   public static void main(String arg[]){
+      var numeroEntero = 10;
+      System.out.println("numeroEntero = " + numeroEntero);
+        
+      var numeroDouble = 10.0;
+      System.out.println("numeroDouble = " + numeroDouble);
+        
+      var numeroFloat = 10.0F;
+      System.out.println("numeroFloat = " + numeroFloat);
+   }
+}
+```
+
+![17-12](images/17-12.png)
+
+Así que todo por esta lección.
 
 Saludos!
 
