@@ -550,6 +550,10 @@ En el ejemplo anterior estamos inicializando los elementos y después los recorr
 
 ### :computer: `101-16-Arrays`
 
+Deciamos también que había otras maneras de inicializar un array, uno es el atajo de las llaves, si estamos declarando un array y conocemos a priori el conjunto de valores que lo van a conformar, son valores literales o incluso variables y no son muchos, lo podemos hacer mediante este formato, en lugar de usar el operador `new` y usar el tipo de dato y entre corchetes el tamaño, lo que haríamos sería indicar el tipo de array, entero, el nombre del array, igual y entre llaves una lista separada por comas de los valores, en este caso un array cuánto elemento tendrá, tendrá tanto elementos como elementos separados por coma hayamos declarado, tendría los mismos 10 elementos
+
+En este caso hemos hecho un recorrido del array con el bucle for mejorado.
+
 *`ManejoArrays02`*
 
 ```java
@@ -574,15 +578,14 @@ public class ManejoArrays02 {
 
 ![16-02](images/16-02.png)
 
-Deciamos también que había otras maneras de inicializar un array, uno es el atajo de las llaves, si estamos declarando un array y conocemos a priori el conjunto de valores que lo van a conformar, son valores literales o incluso variables y no son muchos, lo podemos hacer mediante este formato, en lugar de usar el operador `new` y usar el tipo de dato y entre corchetes el tamaño, lo que haríamos sería indicar el tipo de array, entero, el nombre del array, igual y entre llaves una lista separada por comas de los valores, en este caso un array cuánto elemento tendrá, tendrá tanto elementos como elementos separados por coma hayamos declarado, tendría los mismos 10 elementos
-
-En este caso hemos hecho un recorrido del array con el bucle for mejorado.
 
 ![16_Arrays-8](images/16_Arrays-8.png)
 
 No tenemos porque crear solamente arrays de tipos de datos primitivos, lo podemos hacer también de objeto, cualquier tipo de clase, la sintaxis es identifica simplemente cambiando los tipos, en este caso si queremos hacer un array de Persona lo haríamos en lugar de con `int` con Personas y la sintaxis sería analoga. La inicialización requeriría lo mismo que la inicialización de cualquier referencia de tipo objeto en este caso Persona, para cada posición del array almacenaríamos una referencia a un objeto e instanciariamos el objeto mediante el operador `new`.
 
 ### :computer: `101-16-Arrays`
+
+Vamos a trabajar con la clase persona que ya conocemos porque la hemos utilizado antes con sus setters, getters y toString.
 
 *`Persona`*
 
@@ -660,8 +663,9 @@ public class Persona {
 }
 ```
 
-Vamos a trabajar con la clase persona que ya conocemos porque la hemos utilizado antes con sus setters, getters y toString.
+Vamos a hacer un ejemplo un poco más completa en el que tenga un array de nombres, un array de apellidos, es decir arrays de String, de cadena de caracteres y vamos a crear un array de 5 elementos de tipo Persona y lo que vamos a hacer es inicializar cada una de las posiciones de este array recogiendo un nombre y un apellido de forma aleatoria. Para ello hemos creado un método especial llamado `aleatorio(int tope)` y que nos devuelve un número aleatorio dándole un tope, este topes nos es necesario para que no nos devuelva un número muy grande que esté fuera de las posiciones de estos arrays.
 
+Sobre métodos estáticos hablaremos más adelante, pero si decir que podemos utilizar este método dentro del método `main`.  Lo llamamos `aleatorio(int tope)` pasándole como tope la longitud del array de nombres nos devolverá un número entre 0 y 7 nos devolverá un número entre 0 y 7, lo mismo sucedería con los apellidos, con el número de apellidos que que son 6, de esta manera cómo podemos ver estamos accediendo a esta posición del array, en este caso aleatorio, estaríamos inicializando una `Persona` de nombre y apellido aleatorio, el bucle for mejorado nos permite recorrer el array de Persona y si la `Persona`, la clase `Persona` tiene el método `toString` implementado, podríamos inicializar 5 personas con el nombre y apellido aleatorio, tanto es así que si hacemos de nuevo una ejecución pues los nombres y los apellidos, la combinación de ellos con todas las ejecuciones que vayamos haciendo, van a ser diferentes, en algún caso aparecerán repetidos, en otro no, dependerá de como calculé Java esos números aleatorios.
 
 *`ManejoArrays03`*
 
@@ -712,10 +716,6 @@ public class ManejoArrays03 {
 ```
 
 ![16-03](images/16-03.png)
-
-Vamos a hacer un ejemplo un poco más completa en el que tenga un array de nombres, un array de apellidos, es decir arrays de String, de cadena de caracteres y vamos a crear un array de 5 elementos de tipo Persona y lo que vamos a hacer es inicializar cada una de las posiciones de este array recogiendo un nombre y un apellido de forma aleatoria. Para ello hemos creado un método especial llamado `aleatorio(int tope)` y que nos devuelve un número aleatorio dándole un tope, este topes nos es necesario para que no nos devuelva un número muy grande que esté fuera de las posiciones de estos arrays.
-
-Sobre métodos estáticos hablaremos más adelante, pero si decir que podemos utilizar este método dentro del método `main`.  Lo llamamos `aleatorio(int tope)` pasándole como tope la longitud del array de nombres nos devolverá un número entre 0 y 7 nos devolverá un número entre 0 y 7, lo mismo sucedería con los apellidos, con el número de apellidos que que son 6, de esta manera cómo podemos ver estamos accediendo a esta posición del array, en este caso aleatorio, estaríamos inicializando una `Persona` de nombre y apellido aleatorio, el bucle for mejorado nos permite recorrer el array de Persona y si la `Persona`, la clase `Persona` tiene el método `toString` implementado, podríamos inicializar 5 personas con el nombre y apellido aleatorio, tanto es así que si hacemos de nuevo una ejecución pues los nombres y los apellidos, la combinación de ellos con todas las ejecuciones que vayamos haciendo, van a ser diferentes, en algún caso aparecerán repetidos, en otro no, dependerá de como calculé Java esos números aleatorios.
 
 ![16_Arrays-9](images/16_Arrays-9.png)
 
