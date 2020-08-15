@@ -1831,7 +1831,125 @@ Lo primero que hacemos como hemos dicho antes, inicializar unos valores e inicia
 
 En el ejemplo que hemos ejecutado vemos como en algunas tiradas hemos dado en el agua en otras en los barcos, nos muestra el REGISTRO DEL MAPA DEL ORDENADOR y también el MAPA DEL USUARIO, así que vamos viendo todo lo que va sucediendo.
 
-Vayamos viendo detenidamente el código de este ejemplo de utilización de los Ana inicializamos el mapa del usuario del ordenador con un array de chat y el tamaño lo damos como el tablero de hundir la flota suele ser cuadrado y de 10 por bien lo damos algo lo podríamos cambiar aunque ya digo usualmente el hundir la flota desde esa cantidad de Castilla tanto es así que lo utilizamos por aquí en varias ocasiones inicializamos molestemos los puntos del usuario del ordenador vayamos a ver el método de inicializacion como atasco decir que si queremos no tener que buscar manualmente incluso si está en otra clase la utilización de un método si pulsamos sobre el nos lo seleccionas pero si pulsamos la tecla Control si todos como no hables la posibilidad de abrir la declaración o la implementación del método si nos vamos a la implementación nos vendríamos directamente allí el método de inicializacion para los dos mapas lo único que hace llamar a otro método estático en este caso privado para que no se pueda llamar desde fuera que lo que hace es inicializar un mapa da igual que sea el del usuario o el del ordenador porque la inicialización es la misma inicialmente lo colocamos todo el mapa como agua perdón aquí lo que hacemos es colocarlo como agua no tocado y después colocamos los distintos bancos vale sabemos que tenemos dos portaaviones de cinco uno y dos tenemos tres buques de tres uno dos y tres y tenemos cinco lanzas de una casilla que las tenemos aquí lo guardamos los diferentes marcos en un array de enteros que nos van a representar los barcos la dirección para colocar el barco puede ser en vertical es decir las 5 las 3 o la una casilla ocupando todos una misma columna o en horizontal ocupando todo una misma no bueno pues lo que vamos a hacer un bucle bastante tenso en el que vamos a colocar cada uno de los barcos que tenemos en el arrival hemos inicia guisado nuestro mapa el del ordenador también podemos
+Vayamos viendo detenidamente el código de este ejemplo de utilización de los arrays. 
+
+Como podemos ver inicializamos el mapa del usuario del ordenador con un array de chat y el tamaño lo damos como el tablero de hundir la flota suele ser cuadrado y de 10.
+
+```java
+//TAMAÑO DEL TABLERO
+final static int TAMANIO = 10;
+
+. . .
+
+// Mapa del usuario y del ordenador
+char[][] mapaUsuario = new char[TAMANIO][TAMANIO];
+char[][] mapaOrdenador = new char[TAMANIO][TAMANIO];
+		
+// Este tercer mapa nos sirve para anotar y visualizar
+// las tiradas que hacemos sobre el mapa del ordenador
+char[][] mapaOrdenadorParaUsuario = new char[TAMANIO][TAMANIO];
+```
+
+Podríamos cambiar el tamaño tan solo modificando el valor de la constante `TAMANIO` aunque ya digo usualmente el hundir la flota es de esa cantidad de castillas, tanto es así que lo utilizamos por aquí en varias ocasiones. Inicializamos los puntos del usuario, del ordenador 
+
+```java
+// Inicializamos los mapas, colocando los barcos
+inicializacion(mapaUsuario, mapaOrdenador);
+// Inicializamos el mapa de registro a AGUA_NO_TOCADO
+inicializaMapaRegistro(mapaOrdenadorParaUsuario);
+```
+
+Vayamos a ver el método de inicializacion, como atajo, decir que si queremos no tener que buscar manualmente, incluso si está en otra clase, la utilización de un método, si pulsamos sobre el lo seleccionas, pero si pulsamos la tecla CTRL nos da la posibilidad de abrir la declaración o la implementación del método, si nos vamos a la implementación nos vendríamos directamente allí:
+
+
+```java
+/*
+ * Metodo que aglutina la inicialización de ambos mapas
+ */
+public static void inicializacion(char[][] m1, char[][] m2) {
+   inicializaMapa(m1);
+   inicializaMapa(m2);
+}
+```
+
+El método de `inicializacion` para los dos mapas, lo único que hace llamar a otro método estático, en este caso privado para que no se pueda llamar desde fuera, que lo que hace es inicializar un mapa da igual que sea el del usuario o el del ordenador porque la inicialización es la misma.
+
+
+```java
+/*
+ * Método que inicializa un mapa de juego, colocando
+ * los barcos sobre el mismo.
+ */
+private static void inicializaMapa(char[][] mapa) {
+
+   // Inicializamos el mapa entero a AGUA_NO_TOCADO
+   for (int i = 0; i < TAMANIO; i++)
+      for (int j = 0; j < TAMANIO; j++)
+         mapa[i][j] = AGUA_NO_TOCADO;
+
+   // 2 portaaviones (5 casillas)
+   // 3 buques (3 casillas)
+   // 5 lanchas (1 casilla)
+   int[] barcos = { 5, 5, 3, 3, 3, 1, 1, 1, 1, 1 };
+
+   // Posible dirección de colocación del barco
+   char[] direccion = { 'V', 'H' };
+
+   // Para cada barco
+   for (int b : barcos) {
+
+      // Intentamos tantas veces sea necesarias para colocar el barco en el mapa.
+      // Vamos de mayor tamaño a menor, para que sea menos
+      // dificultoso encontrar un hueco
+      boolean colocado = false;
+      while (!colocado) {
+
+         //Obtenemos una posición y dirección aleatorias
+         int fila = aleatorio();
+         int columna = aleatorio();
+         char direcc = direccion[aleatorio() % 2];
+
+         // ¿Cabe el barco en la posición indicada?
+         if (direcc == 'V') {
+            if (fila + b <= (TAMANIO - 1)) {
+               // comprobamos que no hay otro barco que se solape
+               boolean otro = false;
+               for (int i = fila; (i <= fila + b) && !otro; i++) {
+                  if (mapa[i][columna] != AGUA_NO_TOCADO)
+                     otro = true;
+	       }
+               // Si no hay otro barco, lo colocamos
+               if (!otro) {
+                  for (int i = fila; i < fila + b; i++) {
+                     mapa[i][columna] = Integer.toString(b).charAt(0);
+		  }
+		  colocado = true;
+	       }
+	    }
+	 } else { // direcc == 'H'
+	    if (columna + b <= (TAMANIO - 1)) {
+	       // comprobamos que no hay otro barco que se solape
+	       boolean otro = false;
+	       for (int j = columna; (j <= columna + b) && !otro; j++) {
+		  if (mapa[fila][j] != AGUA_NO_TOCADO)
+	             otro = true;
+	       }
+	       // Si no hay otro barco, lo colocamos
+	       if (!otro) {
+		  for (int j = columna; j < columna + b; j++) {
+		     mapa[fila][j] = Integer.toString(b).charAt(0);
+		  }
+		  colocado = true;
+	       }
+	    }
+	 }
+      }
+   }
+}
+```
+
+
+inicialmente lo colocamos todo el mapa como agua perdón aquí lo que hacemos es colocarlo como agua no tocado y después colocamos los distintos bancos vale sabemos que tenemos dos portaaviones de cinco uno y dos tenemos tres buques de tres uno dos y tres y tenemos cinco lanzas de una casilla que las tenemos aquí lo guardamos los diferentes marcos en un array de enteros que nos van a representar los barcos la dirección para colocar el barco puede ser en vertical es decir las 5 las 3 o la una casilla ocupando todos una misma columna o en horizontal ocupando todo una misma no bueno pues lo que vamos a hacer un bucle bastante tenso en el que vamos a colocar cada uno de los barcos que tenemos en el arrival hemos inicia guisado nuestro mapa el del ordenador también podemos
 
 Así que intentamos tantas veces como sea necesario colocar el barco en el mapa vamos de tamaño mayor a menor porque como este proceso no vamos a hacer aleatoriamente será más fácil colocar primero en un barco grande y luego lo cargo porque con lo del comenzamos suponiendo que el barco no está colocado y repetimos en tanto en cuanto el barco no esté colocado lo primero que hacemos es obtener una posición aleatoria mediante el método aleatorio que este método lo que va a hacer es devolvernos un número aleatorio vale te espero hasta tamaño maleta mañana cuenta porque es bien y que cero anuel vale nos lo va a devolver el número aleatorio con lo cual lo primero que intentamos hacer para colocar el barco que buscamos una fila aleatoria una columna aleatoria y una dirección aleatoria tenemos la dirección aleatoria si las direcciones las tenemos aquí para obtener una dirección aleatoria vertical u horizontal lo que decimos bueno pues vamos a sacar un número aleatorio entre 0 y 1 aprovechando el método aleatorio que ya teníamos lo podemos hacer calculando y el residuo o el resto de dividir entre entre dos pudiendo ser áspero o bien no será un port localhost tendríamos una dirección ahora nos tenemos que preguntar daba esa posición y esa dirección sabe el barco en la posición indicada porque no sería lo mismo que nosotros éramos de colocar un barco en posición horizontal si la posición inicial es a 9 porque por simplicidad como es natural vamos a colocar los barcos siempre de izquierda abre 12 el barco no cabría por si vamos a colocar la posición que no ha dado como aleatoria eh la A7 y vamos a colocar un barco de 5 posiciones uno de 13 cabría uno de cinco pues sí tenemos que ver si cabe en vertical lo que tendremos que hacer es la fila del barco más el tamaño del barco en este caso hemos empezado en 5 es menor o igual que tamaño menos uno y lo vamos a colocar en posición vertical el barco tiene tres posiciones si están las pilas y le sumamos el número de posiciones del barco es mayor que tamaño menú no bueno pues si sabes lo que hacemos comprobar con un tercer bucle que el barco no solape otra es decir recorremos todas las posiciones que ocuparía el barco y vemos si todas son a bueno tocado todas una bueno tocado otro se quedará con Manolo Zante en otro caso entraremos dentro de tenis otro valdrá true con lo cual tendríamos que entrar en este otro no se cumpliría y volveríamos a intentar colocar el barco fijaos que la condición de este bucle puede resultar un poco rara quizá alguien lo hubiera hecho mejor aunque ha resultado así más cómodas porque así recorremos todas las posiciones que vamos a necesitar empezando en fila hasta fila más el tamaño del barco pero vamos a parar la ejecución del bucle si ya hemos encontrado que hay otra como decía si no hay otro barco lo que hacemos el colocar el barco de qué manera pues vamos escribiendo en la piscin estás posiciones del barco vale el carácter asociado al barco si es cinco pues vamos escribiendo los cinco necesarios para colocarte del barco y lo marcamos como tú y en lugar de dirección vertical fuera horizontal tenemos que hacer la operación análoga pero trasladarlo todo la cuestión horizontal la columna más el tamaño del barco tiene que ser menor que tamaño me lo uno revisamos que no hay otro barco que se solape si no hay otro barco lo colocamos cómo colocado seguía tu saldríamos de este bucle volveremos a intentar colocar otro barco b593 lo de 3 no de 3 de 1 de 1 hasta que termináramos de colocar todos y cada uno de los más operación de inicializacion del mapa se produce tanto con el mapa del ordenador como el del usuario así que intenta no
 
