@@ -1948,12 +1948,214 @@ private static void inicializaMapa(char[][] mapa) {
 }
 ```
 
+Lo que hacemos es colocarlo como `AGUA_NO_TOCADO` y después colocamos los distintos barcos, sabemos que tenemos dos portaaviones de cinco, tenemos tres buques de tres y tenemos cinco lanchas de una casilla. Guardamos los diferentes barcos en un array de enteros  que nos van a representar los barcos.
 
-inicialmente lo colocamos todo el mapa como agua perdón aquí lo que hacemos es colocarlo como agua no tocado y después colocamos los distintos bancos vale sabemos que tenemos dos portaaviones de cinco uno y dos tenemos tres buques de tres uno dos y tres y tenemos cinco lanzas de una casilla que las tenemos aquí lo guardamos los diferentes marcos en un array de enteros que nos van a representar los barcos la dirección para colocar el barco puede ser en vertical es decir las 5 las 3 o la una casilla ocupando todos una misma columna o en horizontal ocupando todo una misma no bueno pues lo que vamos a hacer un bucle bastante tenso en el que vamos a colocar cada uno de los barcos que tenemos en el arrival hemos inicia guisado nuestro mapa el del ordenador también podemos
+```java
+// 2 portaaviones (5 casillas)
+// 3 buques (3 casillas)
+// 5 lanchas (1 casilla)
+int[] barcos = { 5, 5, 3, 3, 3, 1, 1, 1, 1, 1 };
+```
 
-Así que intentamos tantas veces como sea necesario colocar el barco en el mapa vamos de tamaño mayor a menor porque como este proceso no vamos a hacer aleatoriamente será más fácil colocar primero en un barco grande y luego lo cargo porque con lo del comenzamos suponiendo que el barco no está colocado y repetimos en tanto en cuanto el barco no esté colocado lo primero que hacemos es obtener una posición aleatoria mediante el método aleatorio que este método lo que va a hacer es devolvernos un número aleatorio vale te espero hasta tamaño maleta mañana cuenta porque es bien y que cero anuel vale nos lo va a devolver el número aleatorio con lo cual lo primero que intentamos hacer para colocar el barco que buscamos una fila aleatoria una columna aleatoria y una dirección aleatoria tenemos la dirección aleatoria si las direcciones las tenemos aquí para obtener una dirección aleatoria vertical u horizontal lo que decimos bueno pues vamos a sacar un número aleatorio entre 0 y 1 aprovechando el método aleatorio que ya teníamos lo podemos hacer calculando y el residuo o el resto de dividir entre entre dos pudiendo ser áspero o bien no será un port localhost tendríamos una dirección ahora nos tenemos que preguntar daba esa posición y esa dirección sabe el barco en la posición indicada porque no sería lo mismo que nosotros éramos de colocar un barco en posición horizontal si la posición inicial es a 9 porque por simplicidad como es natural vamos a colocar los barcos siempre de izquierda abre 12 el barco no cabría por si vamos a colocar la posición que no ha dado como aleatoria eh la A7 y vamos a colocar un barco de 5 posiciones uno de 13 cabría uno de cinco pues sí tenemos que ver si cabe en vertical lo que tendremos que hacer es la fila del barco más el tamaño del barco en este caso hemos empezado en 5 es menor o igual que tamaño menos uno y lo vamos a colocar en posición vertical el barco tiene tres posiciones si están las pilas y le sumamos el número de posiciones del barco es mayor que tamaño menú no bueno pues si sabes lo que hacemos comprobar con un tercer bucle que el barco no solape otra es decir recorremos todas las posiciones que ocuparía el barco y vemos si todas son a bueno tocado todas una bueno tocado otro se quedará con Manolo Zante en otro caso entraremos dentro de tenis otro valdrá true con lo cual tendríamos que entrar en este otro no se cumpliría y volveríamos a intentar colocar el barco fijaos que la condición de este bucle puede resultar un poco rara quizá alguien lo hubiera hecho mejor aunque ha resultado así más cómodas porque así recorremos todas las posiciones que vamos a necesitar empezando en fila hasta fila más el tamaño del barco pero vamos a parar la ejecución del bucle si ya hemos encontrado que hay otra como decía si no hay otro barco lo que hacemos el colocar el barco de qué manera pues vamos escribiendo en la piscin estás posiciones del barco vale el carácter asociado al barco si es cinco pues vamos escribiendo los cinco necesarios para colocarte del barco y lo marcamos como tú y en lugar de dirección vertical fuera horizontal tenemos que hacer la operación análoga pero trasladarlo todo la cuestión horizontal la columna más el tamaño del barco tiene que ser menor que tamaño me lo uno revisamos que no hay otro barco que se solape si no hay otro barco lo colocamos cómo colocado seguía tu saldríamos de este bucle volveremos a intentar colocar otro barco b593 lo de 3 no de 3 de 1 de 1 hasta que termináramos de colocar todos y cada uno de los más operación de inicializacion del mapa se produce tanto con el mapa del ordenador como el del usuario así que intenta no
+La dirección para colocar el barco puede ser en vertical, es decir las 5 las 3 o la una casilla ocupando todos una misma columna o en horizontal ocupando todo una misma fila.
 
-Reproduce tanto con el mapa del ordenador como el del usuario una vez que hayamos hecho la inicialización del mapa del usuario del ordenador inicializamos el mapa de registrarse es mucho más sencillo porque inicializamos toda la matriz A agua no tocado es decir a los puntitos y lo que hacemos es dejar este mapa como tal porque en el lo miremos que apuntando las tiradas de bombas que hemos ido haciendo bueno ya hemos inicializado los distintos mapa el juego acaba de comenzar no ha terminado comenzamos el buque una tirada para el usuario otra para el ordenador imprimimos el mapa del usuario para qué bueno en cada la primera iteración nos vamos tras los barcos dónde está colocado en las siguientes nos irá mostrando dónde han caído la bomba del ordenador imprimimos los puntos restantes del jugador indicamos que nuestro turno y comenzamos a tirar el usuario lo primero que suponemos que el tiro no es correcto utilizamos esta variable así para entrar en este bucle while lo primero que hacemos para poder tirar es pedir una casilla una posición por teclado lo hacemos también en otro método este método lo que va a hacer es solicitar una casilla vale lo pide como una sola cadena de caracteres lo que hacemos nosotros que si el usuario no hubiera escrito en minúscula la pasamos a mayúscula y vamos a declarar aquí un array que nos va a permitir realizar la tirada esta línea es lógica que no la comprendáis ni falta que hace pero basta con que yo diga que garantiza que lo que el usuario ha escrito es una letra y un número 1 letra podríamos haberla marcado no de la a la Z sino de la A hasta hasta la jota vale y un número de 0 a 9 vale de esa manera nos aseguramos que el usuario no ha escrito otra cosa rara y si la hubiera escrito pues directamente lo que vamos a devolver es una posición que no se encuentra dentro del array para saber qué es un error si todo es correcto que me motive se reconoce como expresión regular vale si todo es correcto lo que hacemos es sacar del primer carácter la letra y después sacaríamos el valor de las pilas sacando el valor numérico de las letras cómo lo hacemos bueno pues en Java con otro lenguaje de programación es fácil transformar un objeto perdón una variable de tipo chat a un valor numérico todo esto viene por el tipo de codificación que se utilizaba anteriormente así ahora único de lo que nos interesa simplemente saber es que la posición de la a va a ser nuestra posición de referencia con lo cual a través de la clase envoltorio carácter podemos tomar el valor numérico de una letra y nos bastaría con restar a ese valor numérico el valor numérico de a y la letra está el valor numérico de a menos el valor numérico de Adele a cero syesve la diferencia de la 1 2 3 y así sucesivamente para la columna lo que hacemos es pasear el resto de lo que he introducido el usuario nos suponemos que sea solo un carácter vale por asegurarnos que bueno con el tamaño de tablero que tenemos así debería hacer lo parte amos con este método de la clase entregué y usado este método de Extreme que se llama su vestido y que nos devuelve un fragmento de una cadena poder consultar como trabaja en el agua nos devolvería el valor de esta conoces si se da que la fila está entre 0 y el tamaño y la columna en tercero y el tamaño lo que hacemos devolverlo si hubiera metido el usuario una posición rara volvemos a devolver un array con las dos posiciones a menos 1 para que esto lo podamos comprobar volvemos aquí habíamos pedido la el tiro hacemos aquí la comprobación y alguna de las dos posiciones se menos uno quiere decir que el tiro es incorrecto vale con lo cual deberíamos pasar al el y el jugador debería volver a tirar si ninguna de las dos posiciones 2:59 el filo es correcto y lo que vamos a hacer es evaluar el tío cuando decimos que el tío es correcto es que las coordenadas son correctas ahora vamos a ver si el usuario ha tirado
+```java
+// Posible dirección de colocación del barco
+char[] direccion = { 'V', 'H' };
+```
+
+Lo que vamos a hacer es un bucle bastante extenso en el que vamos a colocar cada uno de los barcos que tenemos en el array de barcos, por lo pronto lo que vamos a hacer es una estructura que no hemos conocido hasta ahora, que es un bucle dentro de otro, si lo hemos hecho para recorrer el array pero los dos bucles eran `for` en este caso sera un bucle `while` dentro de un bucle `for`.
+
+```java
+// Para cada barco
+for (int b : barcos) {
+
+   // Intentamos tantas veces sea necesarias para colocar el barco en el mapa.
+   // Vamos de mayor tamaño a menor, para que sea menos
+   // dificultoso encontrar un hueco
+   boolean colocado = false;
+   while (!colocado) {
+       . . .
+```
+
+Por que, porque tenemos que asegurarnos que para cada barco `b`, el primero de 5 casillas tenemos que asegurarnos que lo vamos a colocar así que intentamos tantas veces como sea necesario colocar el barco en el mapa. Vamos del tamaño mayor a menor porque como este proceso lo vamos a hacer aleatoriamente será más fácil colocar primero los barcos grande y luego los barcos pequeños. Comenzamos suponiendo que el barco no está colocado y repetimos en tanto en cuanto el barco no esté colocado.
+
+```java
+//Obtenemos una posición y dirección aleatorias
+int fila = aleatorio();
+int columna = aleatorio();
+char direcc = direccion[aleatorio() % 2];
+```
+
+Lo primero que hacemos es obtener una posición aleatoria, mediante el método `aleatorio()`, este método lo que va a hacer es devolvernos un número aleatorio de 0 a 9.
+
+```java
+/*
+ * Método que nos devuelve un número aleatorio
+ */
+private static int aleatorio() {
+   Random r = new Random(System.currentTimeMillis());
+   return r.nextInt(TAMANIO);
+}
+```
+
+Con lo cual lo primero que intentamos hacer para colocar el barco que es, buscamos una fila aleatoria, una columna aleatoria y una dirección aleatoria. Fijaos como obtenemos la dirección aleatoria, si las direcciones las tenemos en el array `direccion`, para obtener una dirección aleatoria vertical u horizontal lo que decimos, bueno pues vamos a sacar un número aleatorio entre 0 y 1 aprovechando el método aleatorio que ya teníamos, lo podemos hacer calculando el residuo o el resto de dividir entre entre dos, esto nos dara 0 o nos dara 1 por lo cual  obtendríamos una dirección.
+
+Ahora nos tenemos que preguntar daba esa posición y esa dirección cabe el barco en la posición indicada.
+
+```java
+// ¿Cabe el barco en la posición indicada?
+if (direcc == 'V') {
+   if (fila + b <= (TAMANIO - 1)) {
+   
+      . . .
+      
+} else { // direcc == 'H'
+   if (columna + b <= (TAMANIO - 1)) { 
+   
+   . . .
+   
+}   
+```
+
+Porque no sería lo mismo el colocar un barco en posición horizontal si la posición inicial es A9, porque por simplicidad como es natural vamos a colocar los barcos siempre de izquierda a derecha, el barco no cabría o si vamos a colocar la posición que no ha dado como aleatoria es la A7 y vamos a colocar un barco de 5 posiciones, uno de 3 si cabría, uno de cinco no. Pues sí queremos saber si cabe en vertical lo que tendremos que hacer es **la fila del barco más el tamaño del barco, en este caso hemos empezado en 5 es menor o igual que TAMANIO menos uno**, si lo vamos a colocar en posición vertical el barco tiene tres posiciones, si está es la fila si le sumamos el número de posiciones del barco, es mayor que TAMANIO menos 1, bueno pues si cabe lo que hacemos comprobar con un tercer bucle que el barco no solape otro.
+
+
+```java
+// comprobamos que no hay otro barco que se solape
+boolean otro = false;
+for (int i = fila; (i <= fila + b) && !otro; i++) {
+   if (mapa[i][columna] != AGUA_NO_TOCADO)
+      otro = true;
+}
+```
+
+Es decir recorremos todas las posiciones que ocuparía el barco y vemos si todas son AGUA_NO_TOCADO, si todas son AGUA_NO_TOCADO `otro` se quedará con valor `false`. En otro caso entraremos dentro de del `if` `otro` valdrá `true` con lo cual tendríamos que entrar en este otro `if`.
+
+```java
+// Si no hay otro barco, lo colocamos
+if (!otro) {
+   for (int i = fila; i < fila + b; i++) {
+      mapa[i][columna] = Integer.toString(b).charAt(0);
+   }
+   colocado = true;
+}
+```
+
+no se cumpliría y volveríamos a intentar colocar el barco.
+
+Fijaos que la condición de este bucle puede resultar un poco rara 
+
+```java
+for (int i = fila; (i <= fila + b) && !otro; i++) {
+```
+
+Quizá alguien lo hubiera hecho mejor con un bucle `while` aunque ha resultado así más cómoda, porque así recorremos todas las posiciones que vamos a necesitar empezando en `fila` hasta `fila` más el tamaño del barco, pero vamos a parar la ejecución del bucle si ya hemos encontrado que hay otro barco.
+
+Como decía si no hay otro barco lo que hacemos el colocar el barco, de qué manera
+
+```java
+// Si no hay otro barco, lo colocamos
+if (!otro) {
+   for (int i = fila; i < fila + b; i++) {
+      mapa[i][columna] = Integer.toString(b).charAt(0);
+   }
+   colocado = true;
+}
+```
+
+Vamos escribiendo en las distintas posiciones del barco, el carácter asociado al barco, si es cinco pues vamos escribiendo los cinco necesarios para colocarte el barco y lo marcamos como `true`.
+
+Si en lugar de dirección vertical fuera horizontal tenemos que hacer la operación análoga pero trasladarlo todo a la cuestión horizontal.
+
+
+```java
+} else { // direcc == 'H'
+   if (columna + b <= (TAMANIO - 1)) {
+      // comprobamos que no hay otro barco que se solape
+      boolean otro = false;
+      for (int j = columna; (j <= columna + b) && !otro; j++) {
+         if (mapa[fila][j] != AGUA_NO_TOCADO)
+            otro = true;
+      }
+      // Si no hay otro barco, lo colocamos
+      if (!otro) {
+         for (int j = columna; j < columna + b; j++) {
+            mapa[fila][j] = Integer.toString(b).charAt(0);
+         }
+         colocado = true;
+      }
+   }
+}
+```
+
+La columna más el tamaño del barco tiene que ser menor que TAMANIO - 1, revisamos que no hay otro barco que se solape, si no hay otro barco lo colocamos, cómo colocado segría `true` saldríamos de este bucle volveremos a intentar colocar otro barco de 5,5, luego de 3  hasta que termináramos de colocar todos y cada uno de los barcos. Esta operación de inicializacion del mapa se produce tanto con el mapa del ordenador, como el del usuario.
+
+Una vez que hayamos hecho la inicialización del mapa del usuario y del ordenador, inicializamos el mapa de registro.
+
+
+```java
+/*
+ * Método que inicializa el mapa que mostramos al usuario
+ * con las tiradas que ha hecho sobr el mapa del ordenador.
+ */
+private static void inicializaMapaRegistro(char[][] mapa) {
+   // Inicializamos el mapa entero a AGUA_NO_TOCADO
+   for (int i = 0; i < TAMANIO; i++)
+      for (int j = 0; j < TAMANIO; j++)
+	 mapa[i][j] = AGUA_NO_TOCADO;	
+}
+```
+
+Este es mucho más sencillo porque inicializamos toda la matriz a AGUA_NO_TOCADO, es decir a los puntitos y lo que hacemos es dejar ese mapa como tal, porque en el iremos apuntando las tiradas de bombas que hemos ido haciendo.
+
+Bueno ya hemos inicializado los distintos mapas el juego acaba de comenzar, no ha terminado comenzamos el bucle.
+
+```java
+//Mientras queden barcos a flote
+while (!juegoTerminado) {
+
+   // Al principio del turno, pintamos el mapa del usuario
+   System.out.println("MAPA DEL USUARIO");
+   imprimirMapa(mapaUsuario);
+			
+   System.out.printf("PUNTOS RESTANTES DEL JUGADOR: %d\n", puntosUsuario);
+   System.out.println("TURNO DEL JUGADOR");
+   
+   . . .
+```			
+
+Una tirada para el usuario otra para el ordenador, imprimimos el mapa del usuario para qué en la primera iteración nos va a mostras los barcos dónde está colocado, en las siguientes nos irá mostrando dónde han caído las bombas del ordenador, imprimimos los puntos restantes del jugador, indicamos que es nuestro turno y comenzamos a tirar el usuario.
+
+```java
+//Mientras queden barcos a flote
+while (!juegoTerminado) {
+   
+   . . .
+   
+   //Comenzamos con la tirada del usuario
+   tiroCorrecto = false;
+   while (!tiroCorrecto) {
+      //Solicitamos los datos por teclado.
+      tiro = pedirCasilla();
+      //Verificamos si el tiro es correcto o no
+      if (tiro[0] != -1 && tiro[1] != -1) {
+         //Puede ser INCORRECTO porque ya haya tirado
+         //sobre esas coordenadas
+         tiroCorrecto = evaluarTiro(mapaOrdenador, tiro);
+         if (!tiroCorrecto)
+            System.out.println("TIRO INCORRECTO");	
+      } else {
+         System.out.println("TIRO INCORRECTO");
+      }
+      //De no serlo, el jugador debe volver a tirar
+				
+   }
+   
+   . . .
+```
+
+Lo primero que suponemos que el tiro no es correcto utilizamos esta variable así para entrar en este bucle while lo primero que hacemos para poder tirar es pedir una casilla una posición por teclado lo hacemos también en otro método este método lo que va a hacer es solicitar una casilla vale lo pide como una sola cadena de caracteres lo que hacemos nosotros que si el usuario no hubiera escrito en minúscula la pasamos a mayúscula y vamos a declarar aquí un array que nos va a permitir realizar la tirada esta línea es lógica que no la comprendáis ni falta que hace pero basta con que yo diga que garantiza que lo que el usuario ha escrito es una letra y un número 1 letra podríamos haberla marcado no de la a la Z sino de la A hasta hasta la jota vale y un número de 0 a 9 vale de esa manera nos aseguramos que el usuario no ha escrito otra cosa rara y si la hubiera escrito pues directamente lo que vamos a devolver es una posición que no se encuentra dentro del array para saber qué es un error si todo es correcto que me motive se reconoce como expresión regular vale si todo es correcto lo que hacemos es sacar del primer carácter la letra y después sacaríamos el valor de las pilas sacando el valor numérico de las letras cómo lo hacemos bueno pues en Java con otro lenguaje de programación es fácil transformar un objeto perdón una variable de tipo chat a un valor numérico todo esto viene por el tipo de codificación que se utilizaba anteriormente así ahora único de lo que nos interesa simplemente saber es que la posición de la a va a ser nuestra posición de referencia con lo cual a través de la clase envoltorio carácter podemos tomar el valor numérico de una letra y nos bastaría con restar a ese valor numérico el valor numérico de a y la letra está el valor numérico de a menos el valor numérico de Adele a cero syesve la diferencia de la 1 2 3 y así sucesivamente para la columna lo que hacemos es pasear el resto de lo que he introducido el usuario nos suponemos que sea solo un carácter vale por asegurarnos que bueno con el tamaño de tablero que tenemos así debería hacer lo parte amos con este método de la clase entregué y usado este método de Extreme que se llama su vestido y que nos devuelve un fragmento de una cadena poder consultar como trabaja en el agua nos devolvería el valor de esta conoces si se da que la fila está entre 0 y el tamaño y la columna en tercero y el tamaño lo que hacemos devolverlo si hubiera metido el usuario una posición rara volvemos a devolver un array con las dos posiciones a menos 1 para que esto lo podamos comprobar volvemos aquí habíamos pedido la el tiro hacemos aquí la comprobación y alguna de las dos posiciones se menos uno quiere decir que el tiro es incorrecto vale con lo cual deberíamos pasar al el y el jugador debería volver a tirar si ninguna de las dos posiciones 2:59 el filo es correcto y lo que vamos a hacer es evaluar el tío cuando decimos que el tío es correcto es que las coordenadas son correctas ahora vamos a ver si el usuario ha tirado
 
 Ahora vamos a ver si el usuario ha tirado sobre otro sitio que ya pero hace lo único que tenemos que hacer es comprobar que las coordenadas del pilot son agua no tocado o un valor entre 1 y 5 en esos dos casos el tiro sería correcto está en la estructura que utilizamos en lugar de hacer un if sobre una condición o mejor dicho el or de dos condiciones grandes y devolver en este caso los valores liberales Duofold podemos utilizarlo directamente dentro del reto este método que devuelve un Julián nos va a permitir evaluar esta expresión junto con el ojo de esta otra está ese libro y otras dos expresión se evalúa como verdadero se devuelve verdadero si se evalúa como falso se devuelve con Javi y el tiro fuera correcto evaluado como correcto imprimimos qué estilo correcto es correcto salimos del buque y ya pasamos a procesar el la tirada recogemos los puntos del ordenador vale y lo que hacemos es actualizar el mapa del ordenador con el tío que acabamos de realizar y con el número de punto actual y si ese número de puntos se modifica valen los tendremos aquí actualizar mapa lokeva Ceres irse a las coordenadas que le hemos pasado sobre el mapa que le hemos pasado y verificar y este mapa perdón esta posición era agua no tocado mira cuando tocado quiere decir que es agua almacenamos agua vale el carácter de agua imprimimos que la tirada pues no ha caído en un barco en otro caso si el mapa no está cuando tocado quiere decir que tiene el valor uno dos o tres o cuatro o cinco significaría que hemos tocado un barco indicamos que el valor es tocado lo representamos mediante una X indicamos que hemos alcanzado algún barco y decrementa Moss el número de punto en este caso el número de punto del ordenador retornamos ese número de puntos cómo podemos saber si el tiro ácido bueno o malo bueno pues lo podemos saber el número de puntos antes de actualizar el mapa es el mismo que el número de puntos del mapa ahora o mejor dicho si su diferencia es mayor que 0 si el número de tiro perdón sin número de punto anterior es menos el número de punto actuales es mayor que 0 y la diferencia cero quiere decir que hemos tocado en algún barco podríamos como tocado y no está agua como utilizamos en operador ternario este tipo de tiro lo utilizamos para actualizar el mapa del usuario el que llevamos de registro con los con las miradas sobre el mapa del ordenador si entramos aquí podemos ver cómo actualizamos las coordenadas de tiro en este mapa añadiendo o tocado o agua imprimimos este mapa y el juego termina y el número actual de puntos del ordenador fuese feo en otro caso como podemos comprobar esto es una expresión booleana y puntos igual igual a cero daría como Trueba terminado no entraríamos aquí y da como falsa continuamos entramos aquí la lógica de la tirada de un ordenador es parecida lo único que en lugar de solicitar al usuario al otro usuario una tirada generamos un disparo aleatorio yo lo único que hace utilizar la función aleatorio para dar unas coordenadas o otra sobre ese disparo aleatorio lo que hacemos es evaluar el tío para saber si es correcto o no es correcto y si el tiro no fuese correcto
 
