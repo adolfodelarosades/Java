@@ -310,8 +310,6 @@ public class Artista {
 
 ### 21.2 Sobrecarga de constructores
 
-![21_Sobrecarga_de_metodos_y_constructores-3](images/21_Sobrecarga_de_metodos_y_constructores-3.png)
-
 También permite tener varios constructores por clase, que siguen las mismas reglas que los métodos:
 
 ```java
@@ -356,6 +354,8 @@ public class Persona {
 ![21_Sobrecarga_de_metodos_y_constructores-1](images/21_Sobrecarga_de_metodos_y_constructores-1.png)
 
 ![21_Sobrecarga_de_metodos_y_constructores-2](images/21_Sobrecarga_de_metodos_y_constructores-2.png)
+
+![21_Sobrecarga_de_metodos_y_constructores-3](images/21_Sobrecarga_de_metodos_y_constructores-3.png)
 
 ## Contenido adicional 5   
 
