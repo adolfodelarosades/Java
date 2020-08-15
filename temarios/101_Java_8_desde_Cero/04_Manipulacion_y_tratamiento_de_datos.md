@@ -574,17 +574,233 @@ public class ManejoArrays02 {
 
 ![16-02](images/16-02.png)
 
-Deciamos también que había otras maneras de inicializar un array, uno es el atajo de las llaves, si estamos declarando un array y conocemos a priori el conjunto de valores que lo van a conformar, son valores literales o incluso variables y no son muchos, lo podemos hacer mediante este formato, en lugar de usar el operador `new` y usar el tipo de dato y entre corchetes el tamaño, lo que haríamos sería indicar el tipo de array, entero el nombre del array, igual y entre llaves una lista separada por comas de los valores, en este caso un array cuánto elemento tendrá, tendrá tanto elementos como elementos separados por coma hayamos declarado, tendría los mismos 10 elementos
+Deciamos también que había otras maneras de inicializar un array, uno es el atajo de las llaves, si estamos declarando un array y conocemos a priori el conjunto de valores que lo van a conformar, son valores literales o incluso variables y no son muchos, lo podemos hacer mediante este formato, en lugar de usar el operador `new` y usar el tipo de dato y entre corchetes el tamaño, lo que haríamos sería indicar el tipo de array, entero, el nombre del array, igual y entre llaves una lista separada por comas de los valores, en este caso un array cuánto elemento tendrá, tendrá tanto elementos como elementos separados por coma hayamos declarado, tendría los mismos 10 elementos
 
 En este caso hemos hecho un recorrido del array con el bucle for mejorado.
 
 ![16_Arrays-8](images/16_Arrays-8.png)
 
-No tenemos porque crear solamente a raíz de tipos de datos primitivos lo podemos hacer también de objeto cualquier tipo de clase la cinta se identifica simplemente cambiando los tipos de este caso si queremos hacer una raíz de persona lo haríamos en lugar de Conil con personas y las fiestas y sería a nada la inicialización manejo de Array 3 dónde lo estamos haciendo de objetos vamos a trabajar con la clase persona que ya conocemos porque la hemos utilizado antes con 77013 y gitanos vamos a hacer un ejemplo un poco más completa en el que tenga un array de nombre un array de apellidos que decir array de String de cadena de caracteres y vamos a crear un array de 5 elementos y lo que vamos a hacer es inicializar exposiciones de Ferrari que lo haremos aquí recogiendo un nombre y un apellido de forma aleatoria para ello hemos creado un método especial vale que está aquí abajo y que nos devuelve un número aleatorio dándole un toque este topes nos es necesario para que no nos devuelva un número muy grande que esté fuera de las posiciones de Tobarra sobre método estático hablaremos más adelante pero si decís que bueno podemos utilizar este método dentro de aquí del método main nos llamamos aleatorio pasándole como tope la longitud del array de nombre no se volverá un número entre 0 y 12345678 nos devolverá un número entre 0 y 100 lo mismo sucedería con los apellidos con el número de apellidos que hay queso esta manera cómo podemos ver estamos accediendo a esta posición del array y en este caso aleatorio estaría muy inicializando una persona me nombre y apellido aleatorio el bucle for mejorado nos permite recorrer el array de persona y si la persona la clase persona tiene el método to string implementado podríamos inicializar 5 personas con el nombre y apellido aleatorio tarde así que si hacemos de nuevo una ejecución pues los nombres y los apellidos la combinación de ellos con todas las instituciones que vayamos haciendo van a ser diferente en algún caso aparecerán repetido en otro no dependerá de como calculé Java esos números aleatorios respecto al uso de array de objeto también podemos crear arrays tanto de tipos primitivos como de tipo plástico que sean multidimensionales es decir que no solamente tengan una dimensión podríamos crear por ejemplo una matriz en un array bidimensional el número de dimensiones va a venir aparejado a la cantidad de parejas de corchetes que vaya a colocada a continuación del tipo a la izquierda de la operación de citación para un array bidimensional utilizaríamos dos parejas de corchetes si quisiéramos hacer un array que nos permitiera representar un cubo de Rubik pues necesitaríamos tres parejas de coche aquí tenemos el ejemplo de la creación de una red tridimensional para acceder a cualquier posición y suponemos una matriz bidimensional pues necesitaríamos la fila y la columna a la cual queremos ver para recorrer un array bidimensional cumple nueva dimensión
+No tenemos porque crear solamente arrays de tipos de datos primitivos, lo podemos hacer también de objeto, cualquier tipo de clase, la sintaxis es identifica simplemente cambiando los tipos, en este caso si queremos hacer un array de Persona lo haríamos en lugar de con `int` con Personas y la sintaxis sería analoga. La inicialización requeriría lo mismo que la inicialización de cualquier referencia de tipo objeto en este caso Persona, para cada posición del array almacenaríamos una referencia a un objeto e instanciariamos el objeto mediante el operador `new`.
 
-Nueva dimensión preferiríamos este caso como podemos comprobar tenemos que lo primero que tenemos que hacer es un bucle externo que nos va a ir recorriendo y la fila la matriz bidimensional la estructura es la misma que hemos visto antes para cada iteración de ese buque lo que hacemos es ejecutar otro hombre que nos va a permitir integrar desde 0 hasta el número de elementos por ejemplo de la posición pero suponemos que la matriz Array bidimensionales cuadrado es decir cuadrado rectangular es decir que todas las filas tienen el mismo número de Colón esa manera para cada fila vamos recorriendo cada una de las celdas de las posiciones de los elementos de esa fina y podríamos imprimirlo así como tal ejemplo de array bidimensional
+### :computer: `101-16-Arrays`
 
-No tendríamos aquí que no tiene porqué ser cuadrado este tendría 10 filas y en cada fila 20 columna si quisiéramos volver a inicializarlo mediante este método aleatorio con un tope de 100 lo podríamos hacer de esta manera lo recorremos como decíamos primero con su longitud esto nos devuelve el número de filas y posteriormente aquí esto nos devolvería el tope que sería el número de columna aquí esto será 10 y esto 20 y por la posición y J lo podríamos almacenar no recomiendo Sheila los nombres de variables X e Y para recorrer un array porque pueden desinstalar o pueden orientará hacia un eje de coordenada Y realmente aquí el el tratamiento sería un poco diferente porque es la primera posición que no está la fila estaría en vertical en cuál sería la I y la equis estaría orientada a la columna y sería la horizontal y entonces puede llegar a despertar escuchar primera vez que lo doy cuando realmente lo deberíamos estar al contrario es mejor usar y J o simplemente las palabras fila y columna vale como referencia para para recorrer haríamos el mismo bucle para para pintar una raid este bucle un clásico porque nos permitiría para cada fila pintar los valores de cada una de las columnas en esa fila no qué hacemos en lugar de Prince léeme llamamos al método print que hace lo mismo pero no añade el salto de línea al final y este carácter especial este literal de cadena realmente un solo carácter vale aunque lo hayamos puesto como un literal de cadena lo que hace es añadir un tabulador igual que si hubiéramos pulsado la tecla de tabulacion del teclado por lo cual nos va a hacer una representación más o menos digna de esta de esta matriz cuando terminamos de pintar las columnas de esta fina y estamos son Prim LN vacío se lo que nos añade un salto de línea y pasamos a pintar la siguiente podríamos pintar y de 20 vale ya digo de una manera más o menos 10 nos queda por último una clase especial que es la clase Array en plural que está dentro del paquete Java util y poseen muchos muchos métodos para realizar diversas operaciones con una raya operaciones de ordenación operaciones de búsqueda operaciones de copia operaciones de transformación de impresión por consola un montón de operaciones podemos consultarla
+*`Persona`*
+
+```java
+package arrays.objetos;
+
+public class Persona {
+	
+   private String nombre;
+   private String apellidos;
+   private int edad;
+   private int altura;
+   private float peso;
+	
+   public Persona() {}
+	
+   public Persona(String nombre, String apellidos) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+   }
+
+   public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+      this.edad = edad;
+      this.altura = altura;
+      this.peso = peso;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getApellidos() {
+      return apellidos;
+   }
+
+   public void setApellidos(String apellidos) {
+      this.apellidos = apellidos;
+   }
+
+   public int getEdad() {
+      return edad;
+   }
+
+   public void setEdad(int edad) {
+      this.edad = edad;
+   }
+
+   public int getAltura() {
+      return altura;
+   }
+
+   public void setAltura(int altura) {
+      this.altura = altura;
+   }
+
+   public float getPeso() {
+      return peso;
+   }
+
+   public void setPeso(float peso) {
+      this.peso = peso;
+   }
+
+   @Override
+   public String toString() {
+      return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" 
+      		+ altura + ", peso=" + peso + "]";
+   }
+}
+```
+
+Vamos a trabajar con la clase persona que ya conocemos porque la hemos utilizado antes con sus setters, getters y toString.
+
+
+*`ManejoArrays03`*
+
+```java
+package arrays.objetos;
+
+import java.util.Random;
+
+public class ManejoArrays03 {
+
+   public static void main(String[] args) {
+
+      // Estos dos arrays nos permitirán obtener valores aleatorios para inicializar
+      // los datos
+      String[] nombres = { "José", "Antonio", "Martín", "Luis", "María", "Leticia", "Luisa" };
+      String[] apellidos = { "Pérez", "Gómez", "López", "García", "Muñoz", "Martínez" };
+
+      // Creamos nuestro array de 5 elementos de tipo Persona
+      Persona[] personas = new Persona[5];
+
+      // Inicializamos los valores
+      for (int i = 0; i < personas.length; i++) {
+         // Obtenemos un nombre de una posición aleatoria
+         String nombre = nombres[aleatorio(nombres.length)];
+         // Obtenemos un apellido de una posición aleatoria
+         String apellido = apellidos[aleatorio(apellidos.length)];
+         // Los usamos para crear una nueva persona
+         personas[i] = new Persona(nombre, apellido);
+      }
+
+      // Recorremos de nuevo el array, esta vez
+      // para imprimir sus valores.
+      for (Persona p : personas) {
+         System.out.println(p);
+      }
+
+   }
+
+   /*
+    * ESTE MÉTODO DEVUELVE UN NÚMERO ALEATORIO ENTRE 0 y TOPE-1.
+   */
+   public static int aleatorio(int tope) {
+      Random r = new Random();
+      return r.nextInt(tope - 1);
+   }
+
+}
+```
+
+![16-03](images/16-03.png)
+
+Vamos a hacer un ejemplo un poco más completa en el que tenga un array de nombres, un array de apellidos, es decir arrays de String, de cadena de caracteres y vamos a crear un array de 5 elementos de tipo Persona y lo que vamos a hacer es inicializar cada una de las posiciones de este array recogiendo un nombre y un apellido de forma aleatoria. Para ello hemos creado un método especial llamado `aleatorio(int tope)` y que nos devuelve un número aleatorio dándole un tope, este topes nos es necesario para que no nos devuelva un número muy grande que esté fuera de las posiciones de estos arrays.
+
+Sobre métodos estáticos hablaremos más adelante, pero si decir que podemos utilizar este método dentro del método `main`.  Lo llamamos `aleatorio(int tope)` pasándole como tope la longitud del array de nombres nos devolverá un número entre 0 y 7 nos devolverá un número entre 0 y 7, lo mismo sucedería con los apellidos, con el número de apellidos que que son 6, de esta manera cómo podemos ver estamos accediendo a esta posición del array, en este caso aleatorio, estaríamos inicializando una `Persona` de nombre y apellido aleatorio, el bucle for mejorado nos permite recorrer el array de Persona y si la `Persona`, la clase `Persona` tiene el método `toString` implementado, podríamos inicializar 5 personas con el nombre y apellido aleatorio, tanto es así que si hacemos de nuevo una ejecución pues los nombres y los apellidos, la combinación de ellos con todas las ejecuciones que vayamos haciendo, van a ser diferentes, en algún caso aparecerán repetidos, en otro no, dependerá de como calculé Java esos números aleatorios.
+
+![16_Arrays-9](images/16_Arrays-9.png)
+
+Esto con respecto al uso de array de objetos, también podemos crear arrays, tanto de tipos primitivos como de tipo básicos que sean multidimensionales, es decir que no solamente tengan una dimensión, podríamos crear por ejemplo una matriz, es decir un array bidimensional. El número de dimensiones va a venir aparejado a la cantidad de parejas de corchetes que vaya colocada a continuación del tipo, a la izquierda de la operación de asignación, para un array bidimensional utilizaríamos dos parejas de corchetes, si quisiéramos hacer un array que nos permitiera representar un cubo de Rubi necesitaríamos tres parejas de coche, aquí tenemos el ejemplo de la creación de un array bidimensional para acceder a cualquier posición, si suponemos una matriz bidimensional pues necesitaríamos la fila y la columna a la cual queremos acceder.
+
+![16_Arrays-10](images/16_Arrays-10.png)
+
+Para recorrer un array bidimensional requerimos de dos bucles, a cada cumple nueva dimensión requeririamos de un nuevo bucle en este caso como podemos comprobar tenemos que lo primero que tenemos que hacer es un bucle externo que nos va a ir recorriendo fila a fila la matriz bidimensional, la estructura es la misma que hemos visto antes y para cada iteración de ese buque, lo que hacemos es ejecutar otro bucle, que nos va a permitir interar desde 0 hasta el número de elementos, por ejemplo de la posición 0 suponemos que la matriz Array bidimensional es cuadrado es decir, cuadrado, rectangular es decir, que todas las filas tienen el mismo número de columnas, de esta manera para cada fila vamos recorriendo cada una de las celdas de las posiciones de los elementos de esa fila y podríamos imprimirlo así como tal.
+
+### :computer: `101-16-Arrays`
+
+Si queremos ver un ejemplo de array bidimensional, lo tendríamos aquí, que no tiene porqué ser cuadrado este tendría 10 filas y en cada fila 20 columnas, si quisiéramos volver a inicializarlo mediante este método aleatorio con un tope de 100, lo podríamos hacer de esta manera.
+
+Lo recorremos como decíamos primero con su longitud, esto nos devuelve el número de filas y posteriormente aquí esto nos devolvería el tope, que sería el número de columnas aquí esto será 10 y esto 20 y por la posición I y J lo podríamos almacenar. 
+
+```java
+for (int i = 0; i < bidimensional.length; i++) {
+   for (int j = 0; j < bidimensional[0].length; j++) {
+      bidimensional[i][j] = aleatorio(TOPE);
+   }
+}
+```
+
+No recomiendo utilizar los nombres de variables X e Y para recorrer un array, porque pueden despistar los pueden orientará hacia un eje de coordenadas y realmente aquí el el tratamiento sería un poco diferente porque la primera posición que no da la fila estaría en vertical, lo cuál sería la I y la X estaría orientada a la columna que sería la horizontal y entonces puede llegar a despistar usar primero X y luego Y cuando realmente lo deberíamos estar haciendo al contrario es mejor usar I y J o simplemente las palabras fila y columna como referencia para para recorrer.
+
+Haríamos el mismo bucle para pintar un array, este bucle es un clásico porque nos permitiría para cada fila, pintar los valores de cada una de las columnas en esa fila, 
+
+```java
+for (int i = 0; i < bidimensional.length; i++) {
+   for (int j = 0; j < bidimensional[0].length; j++) {
+      System.out.print(bidimensional[i][j] + "\t");
+   }
+   System.out.println("");
+}
+```
+
+lo qué hacemos en lugar de `println` llamamos al método `print` que hace lo mismo pero no añade el salto de línea al final, pintariamos la posición y este carácter especial `\t`, este literal de cadena realmente un solo carácter, aunque lo hayamos puesto como un literal de cadena, lo que hace es añadir un tabulador, igual que si hubiéramos pulsado la tecla de tabulacion del teclado, por lo cual nos va a hacer una representación más o menos digna de esta matriz, cuando terminamos de pintar las columnas de esta fila y pintamos un `println` vacío que lo que nos añade es un salto de línea y pasamos a pintar la siguiente fila, de esta manera podríamos pintar la matriz de 10 filas y 20 columnas.
+
+*`ManejoArrays04`*
+
+```java
+package arrays.bidimensionales;
+
+import java.util.Random;
+
+public class ManejoArrays04 {
+
+   public static void main(String[] args) {
+      // No tiene porqué ser cuadrado
+      int[][] bidimensional = new int[10][20];
+      final int TOPE = 100;
+
+      for (int i = 0; i < bidimensional.length; i++) {
+         for (int j = 0; j < bidimensional[0].length; j++) {
+            bidimensional[i][j] = aleatorio(TOPE);
+	 }
+      }
+
+      for (int i = 0; i < bidimensional.length; i++) {
+         for (int j = 0; j < bidimensional[0].length; j++) {
+            System.out.print(bidimensional[i][j] + "\t");
+         }
+         System.out.println("");
+      }
+
+   }
+
+   /*
+    * ESTE MÉTODO DEVUELVE UN NÚMERO ALEATORIO ENTRE 0 y TOPE-1.
+   */
+   public static int aleatorio(int tope) {
+      Random r = new Random();
+      return r.nextInt(tope - 1);
+   }
+
+}
+```
+
+![16-04](images/16-04.png)
+
+![16-05](images/16-05.png)
+
+![16_Arrays-11](images/16_Arrays-11.png)
+
+Nos queda por último una clase especial que es la clase Array en plural que está dentro del paquete Java util y poseen muchos muchos métodos para realizar diversas operaciones con una raya operaciones de ordenación operaciones de búsqueda operaciones de copia operaciones de transformación de impresión por consola un montón de operaciones podemos consultarla
 
 Podemos buscar la Java array bueno pues nos vemos nos da un montón de métodos en la cantidad de método la verdad es que es bastante bastante grande por decir o por destacar algunos de ellos podríamos buscar los métodos de ordenación vale que nos va a permitir ordenar arrays de los distintos tipos de datos primitivos por ejemplo un array de números entero lo podríamos ordenar este método para ordenar el array que nosotros pasemos como argumento no devuelve un array ordenado sino que devuelve ese atrae como digo la cantidad de métodos que tiene es inmensa otro método por ejemplo cómodo es tu stream que no te volveré a una representación como cadena de caracteres de un array y también tenemos un método para array peces más grandes que sería trip to stream este bueno si una raya esté más de una dimensión o lo de dentro fuera de otro tipo que no fuera primitivo seguiría profundizando hasta visualizar no el valor y no referencia te de objetos tenemos por aquí álbum alguna salida método un método para para imprimir en la RAE un poco un poco artesanal tenemos una cantidad de métodos muy grande si estaba aquí vamos a generar un array de posiciones aleatorias con número de cero a cien lo podríamos imprimir podemos copiar en la RAI hemos creado antes en otro ampliando su longitud y una raíz se nos queda pequeño en lugar de tener que crear un segundo array recorrer el primero asignar las variable pues el método propio ya lo hace por nosotros lo podemos ordenar e imprimir el array ordenado ahora vamos a ejecutarlo todo junto podríamos ya con el array ordenado realizar una búsqueda binaria la búsqueda binaria es un algoritmo de búsqueda que requiere sobre una colección de elementos que los elementos están ordenados para poder localizarla este método nos permitiría buscar un número aleatorio si es que está dentro de la RAI bueno Java 8 agregado algunos métodos como por ejemplo la ordenación paralela de algunos array que sean muy grande cuando hablamos de paralelo y secuencial queremos decir es que la ordenación secuencial de elementos los ba101 si utilizamos un tipo de operación en paralelo lo que va a hacer utilizar las características tanto físicas del procesador como lógica para ejecutar tareas en paralelo es decir que se van ejecutando a la vez para intentar sobre colecciones muy grande sobre sobre array muy grande hacerlo de una manera más rápida secado aquí esta colección que tiene más de un millón de elemento utilizamos unos métodos especiales médico quizá no sean los que más utilicéis al principio y una sintaxis especial que aprenderemos en alguna de la última elecciones de la expresión el Landa para rellenar que sea Ray grande con un montón de números aleatorios de forma paralela y después ordenarlo de forma también para leer bueno pues ha producido todas las operaciones y aquí tenemos la representación de la RAI el array ordenado como habíamos hecho una copia de 100 elemento y lo hemos ordenado después o 100 primero elemento están inicializado a cero y por ejemplo elementos 9 no está sinceramos buscar otro elemento elemento do tampoco 77 tampoco estamos teniendo muy mala suerte con los números aleatorio bueno ejecutar el código posiblemente sí salga un número que de ubicado en algún en algún sitio del array como de aquí enfrente donde está está buscando el 63 que está varias veces repetido Rai
 
@@ -598,11 +814,11 @@ Podemos buscar la Java array bueno pues nos vemos nos da un montón de métodos 
 
 
 
-![16_Arrays-9](images/16_Arrays-9.png)
 
-![16_Arrays-10](images/16_Arrays-10.png)
 
-![16_Arrays-11](images/16_Arrays-11.png)
+
+
+
 
 ## Práctica: Creando el juego de hundir la flota 31:16 
 
