@@ -987,8 +987,117 @@ final static char TOCADO = 'X';
 
 También son variables de **tipo estático**, *podríamos decir simplemente que una variable de tipo estático dentro de una clase es una variable que no requiere de que tengamos una instancia de esa clase para poder utilizarla en este caso son constantes estáticas*, análogamente tenemos métodos estáticos lo venimos utilizando desde el inicio de este curso de Java el método `main` es estático y un método de tipo especial que no requiere que tengamos una instancia de la clase para utilizarlo, de hecho **todo aquello que marcamos como estático Eclipse nos lo suele poner en cursiva para indicarnos que es estático**. Como digo hemos resuelto este proyecto a base de algunas variables de tipo estático, sobre todo las constantes y alguna más y de una serie una sucesión de bastantes métodos estáticos también, aunque no hayamos visto con detenimiento qué significa eso de estático nos basta con saber que son parecidos al `main` el decir que no necesitamos instanciar la clase `HundirLaFlota` utilizar esos métodos.
 
+Cómo podemos ver declaramos los distintos mapas que vamos a utilizar.
 
-cómo podemos ver declaramos los distintos mapas que vamos a utilizar como mapas usaremos arrays bidimensionales de carácter es donde guardaremos si es un barco y es agua que si no tocado o no usaremos en lugar de implementar el juego para dos jugadores para darle un poco más de vidilla vamos a implementarlo para que juguemos contra el ordenador y le daremos un cierto grado de inteligencia al ordenador para que pueda ganar no el mapa del usuario del ordenador comercial una regleta el array bidimensional este tercer mapa no servirá para almacenar por registrar dónde vamos tirando nosotros nuestras bomba iniciamos cada usuario tanto el ordenador como nosotros con 24 puntos una serie de variables booleanas que nos van a permitir sí el juego ha terminado el juego no termina mientras los dos jugadores tengan barco a flote en cuanto uno de los dos deja de tener barco a flote el juego deja de ser para cada tiro indicaremos si el piso es correcto no o si no lo he invitaremos al usuario a que vuelva tirar una tirada vendrá marcada por dos posiciones para comenzar inicializar hemos los mapas tanto del usuario como del ordenador así como el mapa de registro el del usuario y el del ordenador se inicializan de una manera aleatoria la veremos con tranquilidad después en proceso de que el usuario fuera colocando los distintos barcos y comenzamos con el bucle principal del juez que como podéis ver es bastante amplio no principal nos va a indicar que mientras no se termina el juego vamos a ir haciendo una tirada por parte del usuario y otra tirada por parte del ordenador se comienza con el del usuario a continuación se sigue con el del jugador tenemos que comprobar además de que el juego no ha terminado aquí lo tenemos que comprobar a mitad porque si la tirada del jugador ha producido tal éxito que ya el barco que me quedaba un perdón el ordenador le quedaba un punto ya no le queda ninguno pues en este punto y el juego hubiera terminado ya no tendríamos que dejar que el ordenador tirará vale ya el jugador habría ganado vamos a ver después la lógica de cada tirada vamos restando los puntos y bueno y hemos terminado la partida decir si el juego ha terminado quiere decir que el ordenador o bien se ha quedado sin punto o hemos ido nosotros y los puntos del ordenador llegarán a cero el vencedor habría sido el jugador en otro caso el vencedor ha sido el ordenador negro debajo tenemos un montón de método aleatorio que te método estático conoceremos está vamos el programa íbamos a ver bien ya lo primero que hacemos como hemos dicho antes inicializar unos valores e inicializar los mapa de manera que bueno nuestro mapa que como podéis ver hemos pintado de una manera un poco especial para que se sepa que las pilas van por letra indicando cada letra de cada fila que las columnas van con números indicando el número de cada columna vale hemos
+```java
+//TAMAÑO DEL TABLERO
+final static int TAMANIO = 10;
+
+. . .
+
+// Mapa del usuario y del ordenador
+char[][] mapaUsuario = new char[TAMANIO][TAMANIO];
+char[][] mapaOrdenador = new char[TAMANIO][TAMANIO];
+		
+// Este tercer mapa nos sirve para anotar y visualizar
+// las tiradas que hacemos sobre el mapa del ordenador
+char[][] mapaOrdenadorParaUsuario = new char[TAMANIO][TAMANIO];
+```
+
+Como mapas usaremos arrays bidimensionales de carácteres, donde guardaremos si es un barco, si es agua,  si lo hemos tocado o no, en lugar de implementar el juego para dos jugadores, para darle un poco más de vidilla, vamos a implementarlo para que juguemos contra el ordenador y le daremos un cierto grado de inteligencia al ordenador para que pueda ganar.
+
+El mapa del usuario y del ordenador como decia es un array bidimensional de char, el tercer mapa nos servirá para almacenar o registrar dónde vamos tirando nosotros nuestras bombas, iniciamos cada usuario tanto el ordenador como nosotros con 24 puntos.
+
+```java
+// Puntos con los que comienzan las partidas		
+int puntosUsuario = 24;
+int puntosOrdenador = 24;
+```
+
+Una serie de variables booleanas que nos van a indicar sí el juego ha terminado, el juego no termina mientras los dos jugadores tengan barco a flote, en cuanto uno de los dos deja de tener barco a flote el juego termina.
+
+```java
+// Lleva el control del programa.
+// Si no quedan barcos a flote del jugador o el ordenador, lo ponemos a true
+boolean juegoTerminado = false;
+
+// Indica si el tiro es correcto, para volver a realizar otro
+boolean tiroCorrecto = false;
+```
+
+Para cada tiro indicaremos si es correcto o no o si no lo es, invitaremos al usuario a que vuelva tirar. Una tirada vendrá marcada por dos posiciones.
+
+```java
+//Posiciones de la tirada
+int[] tiro = new int[2];
+```
+
+Para comenzar inicializaremos los mapas tanto del usuario, como del ordenador, así como el mapa de registro.
+
+```java
+// Inicializamos los mapas, colocando los barcos
+inicializacion(mapaUsuario, mapaOrdenador);
+// Inicializamos el mapa de registro a AGUA_NO_TOCADO
+inicializaMapaRegistro(mapaOrdenadorParaUsuario);
+```
+
+El del usuario y el del ordenador se inicializan de una manera aleatoria, la veremos con tranquilidad después, simula el proceso de que el usuario fuera colocando los distintos barcos.
+
+
+Y comenzamos con el bucle principal del juego que como podéis ver es bastante amplio.
+
+```java
+//Mientras queden barcos a flote
+while (!juegoTerminado) {
+
+. . .
+
+} //FIN DE LA PARTIDA. Alguien ha ganado
+```
+
+Este bucle principal nos va a indicar que mientras no se termina el juego vamos a ir haciendo una tirada por parte del usuario y otra tirada por parte del ordenador, se comienza con el del usuario:
+
+```java
+//Comenzamos con la tirada del usuario
+tiroCorrecto = false;
+while (!tiroCorrecto) {
+   //Solicitamos los datos por teclado.
+   tiro = pedirCasilla();
+   //Verificamos si el tiro es correcto o no
+   if (tiro[0] != -1 && tiro[1] != -1) {
+      //Puede ser INCORRECTO porque ya haya tirado
+      //sobre esas coordenadas
+      tiroCorrecto = evaluarTiro(mapaOrdenador, tiro);
+      if (!tiroCorrecto)
+         System.out.println("TIRO INCORRECTO");	
+   } else {
+      System.out.println("TIRO INCORRECTO");
+   }
+   //De no serlo, el jugador debe volver a tirar
+				
+}
+```
+
+A continuación se sigue con el del jugador:
+
+```java
+//Si no ha ganado el jugador, le toca a la máquina
+if (!juegoTerminado) {
+   
+   System.out.printf("PUNTOS RESTANTES DEL ORDENADOR: %d\n\n", puntosOrdenador);
+   System.out.println("TURNO DEL ORDENADOR");
+   tiroCorrecto = false;
+   //Seguimos los mismos parámetros de comprobación que en la tirada del usuario
+   while (!tiroCorrecto) {
+      tiro = generaDisparoAleatorio();
+      tiroCorrecto = evaluarTiro(mapaUsuario, tiro);
+   }
+}
+```
+
+Tenemos que comprobar además de que el juego no ha terminado en la condicion del `While` lo tenemos que comprobar a mitad, porque si la tirada del jugador ha producido tal éxito que ya el barco que le quedaba al ordenador, le quedaba un punto y ya no le queda ninguno, pues en este punto si el juego hubiera terminado ya no tendríamos que dejar que el ordenador tirará ya el jugador habría ganado.
+
+Vamos a ver después la lógica de cada tirada vamos restando los puntos y bueno y hemos terminado la partida decir si el juego ha terminado quiere decir que el ordenador o bien se ha quedado sin punto o hemos ido nosotros, si los puntos del ordenador llegarán a cero el vencedor habría sido el jugador en otro caso el vencedor ha sido el ordenador negro debajo tenemos un montón de método aleatorio que te método estático conoceremos está vamos el programa íbamos a ver bien ya lo primero que hacemos como hemos dicho antes inicializar unos valores e inicializar los mapa de manera que bueno nuestro mapa que como podéis ver hemos pintado de una manera un poco especial para que se sepa que las pilas van por letra indicando cada letra de cada fila que las columnas van con números indicando el número de cada columna vale hemos
 
 
 
