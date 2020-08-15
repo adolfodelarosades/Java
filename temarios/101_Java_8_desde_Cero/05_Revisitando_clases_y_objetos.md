@@ -6,15 +6,13 @@
    * Sobrecarga de métodos y constructores 7:07 
    * Contenido adicional 5
    
-## 17. Argumento de un método y tipos de retorno 13:36 
+# 17. Argumento de un método y tipos de retorno 13:36 
 
 [Argumento de un método y tipos de retorno](pdfs/17_Argumentos_y_tipos_de_retorno.pdf)
 
-![17_Argumentos_y_tipos_de_retorno-1](images/17_Argumentos_y_tipos_de_retorno-1.png)
+## Resumen del Profesor
 
 ### 17.1 Tipos de retorno
-
-![17_Argumentos_y_tipos_de_retorno-2](images/17_Argumentos_y_tipos_de_retorno-2.png)
 
 Un método puede volver al código desde donde se invocó de varias maneras:
 
@@ -22,15 +20,11 @@ Un método puede volver al código desde donde se invocó de varias maneras:
 2. Por el uso de una sentencia `return`.
 3. Por un comportamiento erróneo (lo aprenderemos más adelante).
 
-![17_Argumentos_y_tipos_de_retorno-3](images/17_Argumentos_y_tipos_de_retorno-3.png)
-
 #### 17.1.1 Métodos que no devuelven ningún valor
 
 Si un método no devuelve ningún valor, el tipo de retorno será `void`. Si tratamos de devolver algún valor (con `return`) en un método marcado como `void`, obtendremos un error de compilación.
 
 #### 17.1.2 Métodos que devuelven un tipo primitivo
-
-![17_Argumentos_y_tipos_de_retorno-4](images/17_Argumentos_y_tipos_de_retorno-4.png)
 
 Ya hemos comprobado que un método puede devolver un tipo primitivo, mediante la sentencia `return`. También puede devolver un array (multidimensional) de tipos primitivos.
 
@@ -46,8 +40,6 @@ public class Rectangulo {
 ```
 
 #### 17.1.3 Métodos que devuelven un objeto
-
-![17_Argumentos_y_tipos_de_retorno-5](images/17_Argumentos_y_tipos_de_retorno-5.png)
 
 Un método también puede tener un tipo de retorno una clase, y servirá para devolver una instancia del mismo. También puede devolver un array de objetos.
 
@@ -71,127 +63,7 @@ public class Rectangulo {
 }
 ```
 
-#### 17.1.4 Código
-
-*ArgumentosTiposRetorno.java*
-
-```java
-package argumentos;
-
-/**
- * @author 
- *
- */
-public class ArgumentosTiposRetorno {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		imprimeMensajes("En un lugar", "de La Mancha");
-		imprimeMensajes("de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo");
-		imprimeMensajes("...");
-		imprimeMensajes();
-	}
-	
-	public static void imprimeMensajes(String... mensajes) {
-		
-		for(String mensaje : mensajes) {
-			System.out.print(mensaje + " ");
-		}
-		System.out.println("");
-		
-	}
-
-}
-
-SALIDA: 
-
-En un lugar de La Mancha 
-de cuyo nombre no quiero acordarme no ha mucho tiempo 
-... 
-```
-
-*Punto.java*
-
-```java
-package argumentos;
-
-public class Punto {
-	
-	float x, y;
-
-	public Punto(float x, float y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	public float getX() {
-		return x;
-	}
-
-	public void setX(float x) {
-		this.x = x;
-	}
-
-	public float getY() {
-		return y;
-	}
-
-	public void setY(float y) {
-		this.y = y;
-	}
-
-	@Override
-	public String toString() {
-		return "Punto [x=" + x + ", y=" + y + "]";
-	}
-}
-```
-
-*Rectangulo.java*
-
-```java
-package argumentos;
-
-import java.util.Arrays;
-
-/**
- * @author 
- *
- */
-public class Rectangulo {
-	
-	private Punto[] puntos;
-	
-	public Rectangulo(Punto p1, Punto p2, Punto p3, Punto p4) {
-		puntos = new Punto[]{p1, p2, p3, p4};
-	}
-
-	public Rectangulo(Punto[] puntos) {
-		this.puntos = puntos;
-	}
-
-	public Punto[] getPuntos() {
-		return puntos;
-	}
-
-	public void setPuntos(Punto[] puntos) {
-		this.puntos = puntos;
-	}
-
-	@Override
-	public String toString() {
-		return "Rectangulo [puntos=" + Arrays.toString(puntos) + "]";
-	}
-}
-```
-
 ### 17.2 Paso de argumentos
-
-![17_Argumentos_y_tipos_de_retorno-6](images/17_Argumentos_y_tipos_de_retorno-6.png)
-
-![17_Argumentos_y_tipos_de_retorno-7](images/17_Argumentos_y_tipos_de_retorno-7.png)
 
 Un método puede recibir cuantos argumentos necesitemos para realizar una operación. Estos pueden ser:
 
@@ -206,8 +78,6 @@ public Rectangulo rectanguloDePuntos(Punto[] esquinas) {
 ```
 
 #### 17.2.1 Número *arbitrario* de argumentos
-
-![17_Argumentos_y_tipos_de_retorno-8](images/17_Argumentos_y_tipos_de_retorno-8.png)
 
 Desde hace algunas versiones, Java incluye la opción de usar *varargs* para indicar que un método recibirá un número arbitrario de argumentos de un tipo. Estos son útiles cuando no sabemos a priori la cantidad de argumentos que recibiremos.
 
@@ -231,17 +101,29 @@ Dentro del método, un *varargs* se trata igual que un array.
 
 ***¡IMPORTANTE!** Un método que reciba varios argumentos de diferentes tipos, y además, un varargs, debe incluir este como el último en orden de recepción. De otra forma, sería imposible identificar el número de argumentos recibidos mediante el varargs.*
 
+## Transcripción
+
+![17_Argumentos_y_tipos_de_retorno-1](images/17_Argumentos_y_tipos_de_retorno-1.png)
+
+![17_Argumentos_y_tipos_de_retorno-2](images/17_Argumentos_y_tipos_de_retorno-2.png)
+
+![17_Argumentos_y_tipos_de_retorno-3](images/17_Argumentos_y_tipos_de_retorno-3.png)
+
+![17_Argumentos_y_tipos_de_retorno-4](images/17_Argumentos_y_tipos_de_retorno-4.png)
+
+![17_Argumentos_y_tipos_de_retorno-5](images/17_Argumentos_y_tipos_de_retorno-5.png)
+
+![17_Argumentos_y_tipos_de_retorno-6](images/17_Argumentos_y_tipos_de_retorno-6.png)
+
+![17_Argumentos_y_tipos_de_retorno-7](images/17_Argumentos_y_tipos_de_retorno-7.png)
+
+![17_Argumentos_y_tipos_de_retorno-8](images/17_Argumentos_y_tipos_de_retorno-8.png)
+
 ## 18. Paso de argumento por valor y referencia 8:18 
 
 [Paso de argumento por valor y referencia](pdfs/18_Paso_por_valor_y_referencia.pdf)
 
-18_Paso_por_valor_y_referencia
-
-![18_Paso_por_valor_y_referencia-1](images/18_Paso_por_valor_y_referencia-1.png)
-
 ### 18.1 Paso por valor y paso por referencia
-
-![18_Paso_por_valor_y_referencia-2](images/18_Paso_por_valor_y_referencia-2.png)
 
 * Paso por `valor`: cuando un método recibe unos argumentos por valor, realiza una copia de estos, y si modifica su contenido, dichas modificaciones no duran más allá del final de la ejecución del método.
 
@@ -250,8 +132,6 @@ Dentro del método, un *varargs* se trata igual que un array.
 En Java, **solamente existe el paso por valor**, si bien podemos matizar esto.
 
 ### 18.2 Paso de tipos de datos primitivos
-
-![18_Paso_por_valor_y_referencia-3](images/18_Paso_por_valor_y_referencia-3.png)
 
 Los argumentos de tipo primitivo, como `int` o `double`, siempre se pasan por valor. Por tanto, si modificamos, sus valores tras la ejecución del método no habrán cambiado.
 
@@ -281,8 +161,6 @@ La salida de la ejecución del programa será `Después de invocar pasoPorValor,
 
 ### 18.3 Paso de objetos
 
-![18_Paso_por_valor_y_referencia-4](images/18_Paso_por_valor_y_referencia-4.png)
-
 Si en lugar de tipos primitivos, pasamos objetos, estos también se pasan por valor. Es decir, que cuando termina la ejecución del método, la referencia seguirá apuntando al mismo objeto. **Sin embargo, el estado del método puede haberse visto modificado, y estos cambios si sobreviven al final del método`*`**.
 
 ```java
@@ -302,155 +180,15 @@ moveCircle(myCircle, 23, 56)
 
 Primero, modificamos los valores X e X del círculo, y posteriormente, asignamos la referencia a una nueva instancia. Si verificamos el objeto tras la ejecución del método, comprobaremos que la referencia *apunta* al objeto inicial, y sus valores sí se han visto modificados.
 
-### 18.4 Código
+## Transcripción
 
-*PasoPorValor.java*
+![18_Paso_por_valor_y_referencia-1](images/18_Paso_por_valor_y_referencia-1.png)
 
-```java
-package valoryreferencia;
+![18_Paso_por_valor_y_referencia-2](images/18_Paso_por_valor_y_referencia-2.png)
 
-/**
- * @author 
- *
- */
-public class PasoPorValor {
+![18_Paso_por_valor_y_referencia-3](images/18_Paso_por_valor_y_referencia-3.png)
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		int x = 3;
-		System.out.println("Antes de invocar pasoPorValor, x = " + x);
-
-		// invocamos el argumento y le pasamos x
-		pasoPorValor(x);
-
-		// imprimimos x y vemos si el parámetro ha cambiado
-		System.out.println("Después de invocar pasoPorValor, x = " + x);
-
-	}
-
-	// cambiamos el valor en el método
-	public static void pasoPorValor(int p) {
-		p = 10;
-		System.out.println("Cambiamos el valor en el método, x = " + p);
-	}
-}
-
-
-SALIDA:
-
-Antes de invocar pasoPorValor, x = 3
-Cambiamos el valor en el método, x = 10
-Después de invocar pasoPorValor, x = 3
-```
-
-*Circle.java*
-
-```java
-package valoryreferencia;
-
-public class Circle {
-	
-	private int x;
-	private int y;
-	private int radius;
-	
-	public Circle(int x, int y) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.radius = 1;
-	}
-
-
-	public Circle(int x, int y, int radius) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.radius = radius;
-	}
-
-
-	public int getX() {
-		return x;
-	}
-
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-
-	public int getY() {
-		return y;
-	}
-
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-
-	public int getRadius() {
-		return radius;
-	}
-
-
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Circle [x=" + x + ", y=" + y + ", radius=" + radius + "]";
-	}
-}
-```
-
-*PasoPorReferencia.java*
-
-```java
-package valoryreferencia;
-
-/**
- * @author 
- *
- */
-public class PasoPorReferencia {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Circle circle = new Circle(2,3);
-		
-		System.out.println(circle);
-		
-		moveCircle(circle, 23, 56);
-		
-		System.out.println(circle);
-
-	}
-	
-	public static void moveCircle(Circle circle, int deltaX, int deltaY) {
-	    // code to move origin of circle to x+deltaX, y+deltaY
-	    circle.setX(circle.getX() + deltaX);
-	    circle.setY(circle.getY() + deltaY);
-
-	    // code to assign a new reference to circle
-	    circle = new Circle(0, 0);
-	}
-}
-
-
-SALIDA:
-
-Circle [x=2, y=3, radius=1]
-Circle [x=25, y=59, radius=1]
-```
+![18_Paso_por_valor_y_referencia-4](images/18_Paso_por_valor_y_referencia-4.png)
 
 ## 19. Modificadores de acceso 12:39 
 
