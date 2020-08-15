@@ -145,8 +145,6 @@ Una expresión lamba no va a ser más que una función anónima, un método abst
 (p1, p2, ...) -> { sentencia1; sentencia2; .....;}
 ```
 
-![33_ExpresionesLambda-5](images/33_ExpresionesLambda-5.png)
-
 Algunos ejemplos de expresiones lambda podrían ser:
 
 ```java
