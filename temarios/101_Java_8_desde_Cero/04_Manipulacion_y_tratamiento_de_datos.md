@@ -2335,13 +2335,47 @@ System.out.println("\nREGISTRO DEL MAPA DEL ORDENADOR");
 imprimirMapa(mapaOrdenadorParaUsuario);
 ```
 
-si el número de tiro perdón sin número de punto anterior es menos el número de punto actuales es mayor que 0 y la diferencia cero quiere decir que hemos tocado en algún barco podríamos como tocado y no está agua como utilizamos en operador ternario este tipo de tiro lo utilizamos para actualizar el mapa del usuario el que llevamos de registro con los con las miradas sobre el mapa del ordenador si entramos aquí podemos ver cómo actualizamos las coordenadas de tiro en este mapa añadiendo o tocado o agua imprimimos este mapa y el juego termina y el número actual de puntos del ordenador fuese feo en otro caso como podemos comprobar esto es una expresión booleana y puntos igual igual a cero daría como Trueba terminado no entraríamos aquí y da como falsa continuamos entramos aquí la lógica de la tirada de un ordenador es parecida lo único que en lugar de solicitar al usuario al otro usuario una tirada generamos un disparo aleatorio yo lo único que hace utilizar la función aleatorio para dar unas coordenadas o otra sobre ese disparo aleatorio lo que hacemos es evaluar el tío para saber si es correcto o no es correcto y si el tiro no fuese correcto
+Si el número de punto anterior menos el número de punto actuales es mayor que 0, si la diferencia es mayor de cero quiere decir que hemos tocado en algún barco, lo podríamos como tocado si no es agua. Como ven utilizamos el operador ternario, este `tipoTiro` lo utilizamos para actualizar el mapa del usuario, el que llevamos de registro con las tiradas sobre el mapa del ordenador. Si entramos aquí podemos ver cómo actualizamos las coordenadas de tiro en este mapa añadiendo o tocado o agua, imprimimos este mapa y el juego termina si el número actual de puntos del ordenador fuese 0.
 
-Volvería a intentar un tiro correcto tantas veces como fuese necesario cuando el tiro es correcto que hacemos actualizamos el mapa del usuar vale pasando el número de punto del usuario el juego termina en este caso si el número de puntos del usuario hubiera llegado a cero vamos a volver a ejecutar para que veamos un poco más la lógica del juego como funciona posiciones verticales u horizontales pasaríamos a tirar comprobamos que aunque pasemos una posición en minúscula la va a saber evaluar podemos comprobar que no hemos tocado un barco hemos tocado ningún barco el ordenador tampoco ha tocado en ningún barco nuestro alcanzado algún barco del ordenador el alcanzado alguno mío en este caso ya digo iríamos rellenando esto de alguna manera a partir de las tiradas que le fuera montando Valerie barco hay un barco del ordenador que ha sido tocado el ordenador ha tocado uno mío etcétera etcétera vale iríamos continuando como es natural conforme vayamos teniendo más huecos del mapa completos la evaluación de los tiros se vuelve más las complejas sobre todo en el caso de la tirada del ordenador porque como lo genera aleatoriamente tiene que ir generando tiro aleatorio disparo aleatorio para para ir dando como no comprueba antes de generar los números aleatorios cuales puede generar pues puede ser que tarde un rato más y probáis la ejecución del programa con esto terminamos este ejemplo de hundir la flota y pasaremos a continuación a otro bloque donde trataremos algunos elementos más de orientación a objetos
+```java
+//El juego termina si el número de puntos llega a 0
+juegoTerminado = (puntosOrdenador == 0);
+```			
+
+Esto es una expresión booleana `puntosOrdenador == 0` daría como ressultado una expresión booleana. Si es `true` no entrariamos al siguiente `if` pero si da `false` si que entramos al `if`.
 
 
+```java
+//Si no ha ganado el jugador, le toca a la máquina
+if (!juegoTerminado) {
+				
+   System.out.printf("PUNTOS RESTANTES DEL ORDENADOR: %d\n\n", puntosOrdenador);
+   System.out.println("TURNO DEL ORDENADOR");
+   tiroCorrecto = false;
+   //Seguimos los mismos parámetros de comprobación que en la tirada del usuario
+   while (!tiroCorrecto) {
+      tiro = generaDisparoAleatorio();
+      tiroCorrecto = evaluarTiro(mapaUsuario, tiro);
+   }
+}
+```
 
+La lógica de la tirada de un ordenador es parecida, lo único que en lugar de solicitar al usuario al otro usuario una tirada generamos un disparo aleatorio, lo único que hace es utilizar la función `generaDisparoAleatorio()` para dar unas coordenadas u otra sobre ese disparo aleatorio lo que hacemos es evaluar el tío para saber si es correcto o no es correcto y si el tiro no fuese correcto volvería a intentar un tiro correcto tantas veces como fuese necesario.
 
+Cuando el tiro es correcto que hacemos.
+
+```java
+//Actualizamos mapa
+puntosUsuario = actualizarMapa(mapaUsuario, tiro, puntosUsuario);
+//El juego termina si el número de puntos llega a 0			
+juegoTerminado = (puntosUsuario == 0);
+```
+
+Actualizamos el mapa del usuario pasando el número de punto del usuario, el juego termina en este caso si el número de puntos del usuario hubiera llegado a cero. 
+
+Vamos a volver a ejecutar para que veamos un poco más la lógica del juego como funciona. Como es natural conforme vayamos teniendo más huecos del mapa completos la evaluación de los tiros se vuelve más complejas sobre todo en el caso de la tirada del ordenador, porque como lo genera aleatoriamente tiene que ir generando tiros aleatorios, disparos aleatorios, para ir dando, como no comprueba antes de generar los números aleatorios cuales puede generar, pues puede ser que tarde un rato más si probáis la ejecución del programa.
+
+Con esto terminamos este ejemplo de hundir la flota y pasaremos a continuación a otro bloque donde trataremos algunos elementos más de orientación a objetos
 
 ## Contenido adicional 4   
 
