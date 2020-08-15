@@ -101,11 +101,7 @@ La máquina virtual de java es capaz de detectar el tipo del objeto, siendo este
 
 ## Resumen del Profesor
 
-![24_Super-1](images/24_Super-1.png)
-
 ### 24.1 Acceso a la superclase
-
-![24_Super-2](images/24_Super-2.png)
 
 Podemos acceder a los elementos de nuestra clase base a través de la palabra `super`. En particular, podemos acceder a los métodos, aunque estos hayan sido sobrescritos:
 
@@ -119,8 +115,6 @@ public void printMethod() {
 
 ### 24.2 Constructores y `super`
 
-![24_Super-3](images/24_Super-3.png)
-
 Cuando construimos una instancia de una clase derivada, tenemos que construir también la parte correspondiente a su clase base. Por defecto, Java espera que hayamos incluido un constructor sin parámetros en la clase base, y él se encargará de todo.
 
 También podemos invocar, explícitamente, al constructor:
@@ -133,8 +127,14 @@ public Empleado(…) {
 }
 ```
 
-
 ## Transcripción
+
+![24_Super-1](images/24_Super-1.png)
+
+![24_Super-2](images/24_Super-2.png)
+
+![24_Super-3](images/24_Super-3.png)
+
 
 # 25. Clases abstractas e interfaces I 20:52 
 
