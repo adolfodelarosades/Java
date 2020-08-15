@@ -2192,10 +2192,150 @@ private static int[] pedirCasilla() {
 }
 ```
 
+Este método lo que va a hacer es solicitar una casilla, lo pide como una sola cadena de caracteres, lo que hacemos nosotros que si el usuario lo hubiera escrito en minúsculas la pasamos a mayúsculas y vamos a declarar un array que nos va a permitir realizar la tirada. 
 
-este método lo que va a hacer es solicitar una casilla vale lo pide como una sola cadena de caracteres lo que hacemos nosotros que si el usuario no hubiera escrito en minúscula la pasamos a mayúscula y vamos a declarar aquí un array que nos va a permitir realizar la tirada esta línea es lógica que no la comprendáis ni falta que hace pero basta con que yo diga que garantiza que lo que el usuario ha escrito es una letra y un número 1 letra podríamos haberla marcado no de la a la Z sino de la A hasta hasta la jota vale y un número de 0 a 9 vale de esa manera nos aseguramos que el usuario no ha escrito otra cosa rara y si la hubiera escrito pues directamente lo que vamos a devolver es una posición que no se encuentra dentro del array para saber qué es un error si todo es correcto que me motive se reconoce como expresión regular vale si todo es correcto lo que hacemos es sacar del primer carácter la letra y después sacaríamos el valor de las pilas sacando el valor numérico de las letras cómo lo hacemos bueno pues en Java con otro lenguaje de programación es fácil transformar un objeto perdón una variable de tipo chat a un valor numérico todo esto viene por el tipo de codificación que se utilizaba anteriormente así ahora único de lo que nos interesa simplemente saber es que la posición de la a va a ser nuestra posición de referencia con lo cual a través de la clase envoltorio carácter podemos tomar el valor numérico de una letra y nos bastaría con restar a ese valor numérico el valor numérico de a y la letra está el valor numérico de a menos el valor numérico de Adele a cero syesve la diferencia de la 1 2 3 y así sucesivamente para la columna lo que hacemos es pasear el resto de lo que he introducido el usuario nos suponemos que sea solo un carácter vale por asegurarnos que bueno con el tamaño de tablero que tenemos así debería hacer lo parte amos con este método de la clase entregué y usado este método de Extreme que se llama su vestido y que nos devuelve un fragmento de una cadena poder consultar como trabaja en el agua nos devolvería el valor de esta conoces si se da que la fila está entre 0 y el tamaño y la columna en tercero y el tamaño lo que hacemos devolverlo si hubiera metido el usuario una posición rara volvemos a devolver un array con las dos posiciones a menos 1 para que esto lo podamos comprobar volvemos aquí habíamos pedido la el tiro hacemos aquí la comprobación y alguna de las dos posiciones se menos uno quiere decir que el tiro es incorrecto vale con lo cual deberíamos pasar al el y el jugador debería volver a tirar si ninguna de las dos posiciones 2:59 el filo es correcto y lo que vamos a hacer es evaluar el tío cuando decimos que el tío es correcto es que las coordenadas son correctas ahora vamos a ver si el usuario ha tirado
+Esta línea es lógica que no la comprendáis (expresión regular)
 
-Ahora vamos a ver si el usuario ha tirado sobre otro sitio que ya pero hace lo único que tenemos que hacer es comprobar que las coordenadas del pilot son agua no tocado o un valor entre 1 y 5 en esos dos casos el tiro sería correcto está en la estructura que utilizamos en lugar de hacer un if sobre una condición o mejor dicho el or de dos condiciones grandes y devolver en este caso los valores liberales Duofold podemos utilizarlo directamente dentro del reto este método que devuelve un Julián nos va a permitir evaluar esta expresión junto con el ojo de esta otra está ese libro y otras dos expresión se evalúa como verdadero se devuelve verdadero si se evalúa como falso se devuelve con Javi y el tiro fuera correcto evaluado como correcto imprimimos qué estilo correcto es correcto salimos del buque y ya pasamos a procesar el la tirada recogemos los puntos del ordenador vale y lo que hacemos es actualizar el mapa del ordenador con el tío que acabamos de realizar y con el número de punto actual y si ese número de puntos se modifica valen los tendremos aquí actualizar mapa lokeva Ceres irse a las coordenadas que le hemos pasado sobre el mapa que le hemos pasado y verificar y este mapa perdón esta posición era agua no tocado mira cuando tocado quiere decir que es agua almacenamos agua vale el carácter de agua imprimimos que la tirada pues no ha caído en un barco en otro caso si el mapa no está cuando tocado quiere decir que tiene el valor uno dos o tres o cuatro o cinco significaría que hemos tocado un barco indicamos que el valor es tocado lo representamos mediante una X indicamos que hemos alcanzado algún barco y decrementa Moss el número de punto en este caso el número de punto del ordenador retornamos ese número de puntos cómo podemos saber si el tiro ácido bueno o malo bueno pues lo podemos saber el número de puntos antes de actualizar el mapa es el mismo que el número de puntos del mapa ahora o mejor dicho si su diferencia es mayor que 0 si el número de tiro perdón sin número de punto anterior es menos el número de punto actuales es mayor que 0 y la diferencia cero quiere decir que hemos tocado en algún barco podríamos como tocado y no está agua como utilizamos en operador ternario este tipo de tiro lo utilizamos para actualizar el mapa del usuario el que llevamos de registro con los con las miradas sobre el mapa del ordenador si entramos aquí podemos ver cómo actualizamos las coordenadas de tiro en este mapa añadiendo o tocado o agua imprimimos este mapa y el juego termina y el número actual de puntos del ordenador fuese feo en otro caso como podemos comprobar esto es una expresión booleana y puntos igual igual a cero daría como Trueba terminado no entraríamos aquí y da como falsa continuamos entramos aquí la lógica de la tirada de un ordenador es parecida lo único que en lugar de solicitar al usuario al otro usuario una tirada generamos un disparo aleatorio yo lo único que hace utilizar la función aleatorio para dar unas coordenadas o otra sobre ese disparo aleatorio lo que hacemos es evaluar el tío para saber si es correcto o no es correcto y si el tiro no fuese correcto
+```java
+if (linea.matches("^[A-Z][0-9]*$")) {
+```
+
+ni falta que hace pero basta con que yo diga que garantiza que lo que el usuario ha escrito es una letra y un número. La letra podríamos haberla marcado no de la A a la Z sino de la A hasta hasta la J y un número de 0 a 9, de esa manera nos aseguramos que el usuario no ha escrito otra cosa rara y si la hubiera escrito pues directamente lo que vamos a devolver es que es una posición que no se encuentra dentro del array para saber qué es un error. 
+
+Si todo es correcto lo que hacemos es sacar del primer carácter la letra y después sacaríamos el valor de la fila sacando el valor numérico de las letras, cómo lo hacemos.
+
+```java
+// Obtenemos la letra.
+// Suponemos que, como mucho, usaremos una letra del abecedario
+char letra = linea.charAt(0);
+// El número de fila es VALOR_NUMERICO(LETRA) - VALOR_NUMERICO(A).
+int fila = Character.getNumericValue(letra) - Character.getNumericValue('A');
+```
+
+Bueno pues en Java como en otros lenguajes de programación es fácil transformar una variable de tipo chat a un valor numérico, todo esto viene por el tipo de codificación que se utilizaba anteriormente ASCII ahora UNICODE, lo que nos interesa simplemente saber es que la posición de la A va a ser nuestra posición de referencia, con lo cual a través de la clase envoltorio `Character` podemos tomar el valor numérico de una letra y nos bastaría con restar a ese valor numérico el valor numérico de A si la letra es A, el valor numérico de A menos el valor numérico de A dara 0, si es B la diferencia dara 1, C 2, D 3 y así sucesivamente.
+
+Para la columna lo que hacemos es pasear el resto de lo que he introducido el usuario no suponemos que sea solo un carácter
+
+```java
+// Para la columna, tan solo tenemos que procesar el número
+int columna = Integer.parseInt(linea.substring(1, linea.length()));
+```
+
+por asegurarnos que bueno con el tamaño de tablero que tenemos así debería ser, lo parseamos con el método `parseInt` de la clase `Integer` y usado el método `substring` que nos devuelve un fragmento de una cadena, pueden consultar como trabaja, nos devolvería el valor de esta columna.
+
+Si se da que la fila está entre 0 y el TAMANIO y la columna entre 0 y el TAMANIO lo que hacemos es devolverlo.
+
+```java
+// Si las coordenadas están dentro del tamaño del tablero, las devolvemos
+if (fila >= 0 && fila < TAMANIO && columna >= 0 && columna <= TAMANIO) {
+   t = new int[]{ fila, columna };
+} else //En otro caso, devolvemos -1, para que vuelva a solicitar el tiro
+   t =  new int[] { -1, -1 };
+```
+
+Si hubiera metido el usuario una posición rara volvemos a devolver un array con las dos posiciones a -1 para que esto lo podamos comprobar.
+
+Volvemos a donde solicitamos el tiro, habíamos pedido la el tiro, hacemos aquí la comprobación si alguna de las dos posiciones es -1 quiere decir que el tiro es incorrecto, con lo cual deberíamos pasar al `else` y el jugador debería volver a tirar.
+
+```java
+//Solicitamos los datos por teclado.
+tiro = pedirCasilla();
+//Verificamos si el tiro es correcto o no
+if (tiro[0] != -1 && tiro[1] != -1) {
+   //Puede ser INCORRECTO porque ya haya tirado
+   //sobre esas coordenadas
+   tiroCorrecto = evaluarTiro(mapaOrdenador, tiro);
+   if (!tiroCorrecto)
+      System.out.println("TIRO INCORRECTO");	
+} else {
+   System.out.println("TIRO INCORRECTO");
+}
+//De no serlo, el jugador debe volver a tirar
+```
+
+Si ninguna de las dos posiciones es -1 el tiro es correcto y lo que vamos a hacer es **evaluar el tiro**, cuando decimos que el tiro es correcto es que las coordenadas son correctas, ahora vamos a ver si el usuario ha tirado sobre otro sitio que ya tiro antes con el método `evaluarTiro`.
+
+```java
+/*
+ * Método que nos permite evaluar si un tiro es CORRECTO (AGUA o TOCADO)
+ * o se trata de una casilla por la que ya hemos pasado antes.
+ */
+public static boolean evaluarTiro(char[][] mapa, int[] t) {
+   int fila = t[0];
+   int columna = t[1];
+   return mapa[fila][columna] == AGUA_NO_TOCADO || (mapa[fila][columna] >= '1' && mapa[fila][columna] <= '5'); 
+}
+```
+
+Lo único que tenemos que hacer es comprobar que las coordenadas del tiro son AGUA_NO_TOCADO o un valor entre 1 y 5, en esos dos casos el tiro sería correcto. Fijarse en la estructura que utilizamos, **en lugar de hacer un `if` sobre una condición o mejor dicho el or de dos condiciones grandes y devolver en ese caso los valores `true` o `false` podemos utilizarlo directamente dentro del `return`.
+
+```java
+return mapa[fila][columna] == AGUA_NO_TOCADO || (mapa[fila][columna] >= '1' && mapa[fila][columna] <= '5'); 
+```
+
+Este método que devuelve un boolean nos va a permitir evaluar esta expresión `mapa[fila][columna] == AGUA_NO_TOCADO` junto con el OR de esta otra `(mapa[fila][columna] >= '1' && mapa[fila][columna] <= '5')`
+si todo se evalua verdadero devuelve `true` si se evalua como falso devueve `false`.
+
+Si el tiro fuera incorrecto, evaluado como incorrecto, imprimimos "TIRO INCORRECTO", si el tiro es correcto salimos del bucle y ya pasamos a procesar la tirada.
+
+
+```java
+//Actualizamos mapa del ordenador y los puntos
+int puntosOrdenadorAnterior = puntosOrdenador;
+puntosOrdenador = actualizarMapa(mapaOrdenador, tiro, puntosOrdenador);
+			
+//Actualizamos nuestro mapa de registro y lo imprimimos.
+//Sabemos si la tirada ha sido AGUA O TOCADO si el número de puntos se ha decrementado.
+char tipoTiro = (puntosOrdenadorAnterior - puntosOrdenador) > 0 ? TOCADO : AGUA; 
+actualizarMapaRegistro(mapaOrdenadorParaUsuario,tiro, tipoTiro);
+System.out.println("\nREGISTRO DEL MAPA DEL ORDENADOR");
+imprimirMapa(mapaOrdenadorParaUsuario);
+			
+//El juego termina si el número de puntos llega a 0
+juegoTerminado = (puntosOrdenador == 0);
+```
+
+Recogemos los puntos del ordenador y lo que hacemos es actualizar el mapa del ordenador con el tiro que acabamos de realizar y con el número de punto actual y si ese número de puntos se modifica los tendremos en `puntosOrdenador`.
+
+El método `actualizarMapa` lo que va a hacer es 
+
+```java
+/*
+ * Método que actualiza el mapa, con un determinado tiro. 
+ * Devolvemos el número de puntos restantes.
+ */
+private static int actualizarMapa(char[][] mapa, int[] t, int puntos) {
+   int fila = t[0];
+   int columna = t[1];
+		
+   if (mapa[fila][columna] == AGUA_NO_TOCADO) {
+      mapa[fila][columna] = AGUA;
+      System.out.println("AGUA");
+   } else {			
+      mapa[fila][columna] = TOCADO;
+      System.out.println("HAS ALCANZADO A ALGÚN BARCO");
+      --puntos;
+   }
+  		
+   return puntos;
+		
+}
+```
+
+Irse a las coordenadas que le hemos pasado, sobre el mapa que le hemos pasado y verificar si esa posición era AGUA_NO_TOCADO si era AGUA_NO_TOCADO quiere decir que es agua, almacenamos agua, el carácter de agua, imprimimos que la tirada no ha caído en un barco, en otro caso si el mapa no es AGUA_NO_TOCADO quiere decir que tiene el valor 1, 3 o 5, significaría que hemos tocado un barco, indicamos que el valor es tocado, lo representamos mediante una X, indicamos que hemos alcanzado algún barco y decrementamos el número de puntos, en este caso el número de punto del ordenador, retornamos ese número de puntos.
+
+Cómo podemos saber si el tiro a sido bueno o malo, bueno pues lo podemos saber si el número de puntos antes de actualizar el mapa es el mismo que el número de puntos del mapa ahora o mejor dicho si su diferencia es mayor que 0.
+
+```java
+//Actualizamos nuestro mapa de registro y lo imprimimos.
+//Sabemos si la tirada ha sido AGUA O TOCADO si el número de puntos se ha decrementado.
+char tipoTiro = (puntosOrdenadorAnterior - puntosOrdenador) > 0 ? TOCADO : AGUA; 
+actualizarMapaRegistro(mapaOrdenadorParaUsuario,tiro, tipoTiro);
+System.out.println("\nREGISTRO DEL MAPA DEL ORDENADOR");
+imprimirMapa(mapaOrdenadorParaUsuario);
+```
+
+si el número de tiro perdón sin número de punto anterior es menos el número de punto actuales es mayor que 0 y la diferencia cero quiere decir que hemos tocado en algún barco podríamos como tocado y no está agua como utilizamos en operador ternario este tipo de tiro lo utilizamos para actualizar el mapa del usuario el que llevamos de registro con los con las miradas sobre el mapa del ordenador si entramos aquí podemos ver cómo actualizamos las coordenadas de tiro en este mapa añadiendo o tocado o agua imprimimos este mapa y el juego termina y el número actual de puntos del ordenador fuese feo en otro caso como podemos comprobar esto es una expresión booleana y puntos igual igual a cero daría como Trueba terminado no entraríamos aquí y da como falsa continuamos entramos aquí la lógica de la tirada de un ordenador es parecida lo único que en lugar de solicitar al usuario al otro usuario una tirada generamos un disparo aleatorio yo lo único que hace utilizar la función aleatorio para dar unas coordenadas o otra sobre ese disparo aleatorio lo que hacemos es evaluar el tío para saber si es correcto o no es correcto y si el tiro no fuese correcto
 
 Volvería a intentar un tiro correcto tantas veces como fuese necesario cuando el tiro es correcto que hacemos actualizamos el mapa del usuar vale pasando el número de punto del usuario el juego termina en este caso si el número de puntos del usuario hubiera llegado a cero vamos a volver a ejecutar para que veamos un poco más la lógica del juego como funciona posiciones verticales u horizontales pasaríamos a tirar comprobamos que aunque pasemos una posición en minúscula la va a saber evaluar podemos comprobar que no hemos tocado un barco hemos tocado ningún barco el ordenador tampoco ha tocado en ningún barco nuestro alcanzado algún barco del ordenador el alcanzado alguno mío en este caso ya digo iríamos rellenando esto de alguna manera a partir de las tiradas que le fuera montando Valerie barco hay un barco del ordenador que ha sido tocado el ordenador ha tocado uno mío etcétera etcétera vale iríamos continuando como es natural conforme vayamos teniendo más huecos del mapa completos la evaluación de los tiros se vuelve más las complejas sobre todo en el caso de la tirada del ordenador porque como lo genera aleatoriamente tiene que ir generando tiro aleatorio disparo aleatorio para para ir dando como no comprueba antes de generar los números aleatorios cuales puede generar pues puede ser que tarde un rato más y probáis la ejecución del programa con esto terminamos este ejemplo de hundir la flota y pasaremos a continuación a otro bloque donde trataremos algunos elementos más de orientación a objetos
 
