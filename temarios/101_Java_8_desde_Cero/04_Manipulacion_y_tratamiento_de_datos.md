@@ -800,25 +800,151 @@ public class ManejoArrays04 {
 
 ![16_Arrays-11](images/16_Arrays-11.png)
 
-Nos queda por último una clase especial que es la clase Array en plural que está dentro del paquete Java util y poseen muchos muchos métodos para realizar diversas operaciones con una raya operaciones de ordenación operaciones de búsqueda operaciones de copia operaciones de transformación de impresión por consola un montón de operaciones podemos consultarla
+Nos queda por último una clase especial que es la clase `Arrays` en plural que está dentro del paquete `java.util` y poseen muchos, muchos métodos para realizar diversas operaciones con un array, operaciones de ordenación, operaciones de búsqueda, operaciones de copia, operaciones de transformación, de impresión por consola, un montón de operaciones podemos consultarla en:
 
-Podemos buscar la Java array bueno pues nos vemos nos da un montón de métodos en la cantidad de método la verdad es que es bastante bastante grande por decir o por destacar algunos de ellos podríamos buscar los métodos de ordenación vale que nos va a permitir ordenar arrays de los distintos tipos de datos primitivos por ejemplo un array de números entero lo podríamos ordenar este método para ordenar el array que nosotros pasemos como argumento no devuelve un array ordenado sino que devuelve ese atrae como digo la cantidad de métodos que tiene es inmensa otro método por ejemplo cómodo es tu stream que no te volveré a una representación como cadena de caracteres de un array y también tenemos un método para array peces más grandes que sería trip to stream este bueno si una raya esté más de una dimensión o lo de dentro fuera de otro tipo que no fuera primitivo seguiría profundizando hasta visualizar no el valor y no referencia te de objetos tenemos por aquí álbum alguna salida método un método para para imprimir en la RAE un poco un poco artesanal tenemos una cantidad de métodos muy grande si estaba aquí vamos a generar un array de posiciones aleatorias con número de cero a cien lo podríamos imprimir podemos copiar en la RAI hemos creado antes en otro ampliando su longitud y una raíz se nos queda pequeño en lugar de tener que crear un segundo array recorrer el primero asignar las variable pues el método propio ya lo hace por nosotros lo podemos ordenar e imprimir el array ordenado ahora vamos a ejecutarlo todo junto podríamos ya con el array ordenado realizar una búsqueda binaria la búsqueda binaria es un algoritmo de búsqueda que requiere sobre una colección de elementos que los elementos están ordenados para poder localizarla este método nos permitiría buscar un número aleatorio si es que está dentro de la RAI bueno Java 8 agregado algunos métodos como por ejemplo la ordenación paralela de algunos array que sean muy grande cuando hablamos de paralelo y secuencial queremos decir es que la ordenación secuencial de elementos los ba101 si utilizamos un tipo de operación en paralelo lo que va a hacer utilizar las características tanto físicas del procesador como lógica para ejecutar tareas en paralelo es decir que se van ejecutando a la vez para intentar sobre colecciones muy grande sobre sobre array muy grande hacerlo de una manera más rápida secado aquí esta colección que tiene más de un millón de elemento utilizamos unos métodos especiales médico quizá no sean los que más utilicéis al principio y una sintaxis especial que aprenderemos en alguna de la última elecciones de la expresión el Landa para rellenar que sea Ray grande con un montón de números aleatorios de forma paralela y después ordenarlo de forma también para leer bueno pues ha producido todas las operaciones y aquí tenemos la representación de la RAI el array ordenado como habíamos hecho una copia de 100 elemento y lo hemos ordenado después o 100 primero elemento están inicializado a cero y por ejemplo elementos 9 no está sinceramos buscar otro elemento elemento do tampoco 77 tampoco estamos teniendo muy mala suerte con los números aleatorio bueno ejecutar el código posiblemente sí salga un número que de ubicado en algún en algún sitio del array como de aquí enfrente donde está está buscando el 63 que está varias veces repetido Rai
+https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/util/Arrays.html
 
+Vemos que nos da un montón de métodos, la cantidad de método la verdad es que es bastante grande por destacar algunos de ellos podríamos buscar los métodos de ordenación `sort`.
 
+![16-06](images/16-06.png)
 
+Nos va a permitir ordenar arrays de los distintos tipos de datos primitivos, por ejemplo un array de números entero lo podríamos ordenar, **este método va a ordenar el array que nosotros pasemos como argumento no devuelve un array ordenado sino que devuelve ese array** como digo la cantidad de métodos que tiene es inmensa, otro método por ejemplo cómodo es tu `toString()` que nos devuelve una representación como cadena de caracteres de un array y también tenemos un método para array que sean más grandes, que sería `deepToString (Object[] a)` este bueno si un array es más de una dimensión o lo de dentro fuera de otro tipo que no fuera primitivo seguiría profundizando hasta visualizar el valor y no referencias de objetos.
 
+### :computer: `101-16-Arrays`
 
+Vamos a generar un array de 100 posiciones aleatorias con número de cero a cien, lo podríamos imprimir con nuestro método creado un tanto artesanal.
 
+```java
+int[] array = new int[100];
 
+for (int i = 0; i < array.length; i++) {
+   array[i] = aleatorio(100);
+}
 
+printArray(array);
+```
 
+Podemos copiar el array que hemos creado antes en otro ampliando su longitud, si un array se nos queda pequeño en lugar de tener que crear un segundo array, recorrer el primero, asignar las variable, el método `copyOf` ya lo hace por nosotros.
 
+```java
+// Podemos crear otro array, copia del primero, ampliando su longitud
+int[] otroArray = Arrays.copyOf(array, 200);
+```
 
+Podemos ordenar e imprimir el array ordenado.
 
+```java
+// Podemos ordenar los elementos de un array
+Arrays.sort(otroArray);
+System.out.println("");
+System.out.println("Array ordenado");
+printArray(otroArray);
+```
 
+Podríamos ya con el array ordenado realizar una búsqueda binaria, la búsqueda binaria es un algoritmo de búsqueda que requiere sobre una colección de elementos, que los elementos están ordenados para poder localizarla. Este método `binarySearch` nos permitiría buscar un número aleatorio si es que está dentro del array.
 
+```java
+// Posición de un número aleatorio, si es que está
+int num = aleatorio(100);
+int pos = Arrays.binarySearch(array, num);
+System.out.println("");
+if (pos >= 0)
+   System.out.printf("El elemento " + num + " está contenido en el array, en la posición " + pos);
+else
+   System.out.println("El elemento " + num + " no está en el array");
+```
 
+Java 8 a agregado algunos métodos como por ejemplo la ordenación paralela de algunos array que sean muy grande, cuando hablamos de paralelo y secuencial queremos decir es que la ordenación secuencial de elementos los va haciendo 1 a 1, si utilizamos un tipo de operación en paralelo lo que va a hacer es  utilizar las características tanto físicas del procesador como lógica para ejecutar tareas en paralelo es decir que se van ejecutando a la vez para intentar sobre colecciones muy grande, sobre sobre array muy grande, hacerlo de una manera más rápida.
 
+```java
+// JAVA SE 8
+// El método parallelsort realiza una ordenación más rápida para arrays
+// muy largos
+int[] arrayGrande = new int[123456];
+// Este método sirve para inicializar un array con valores
+// y usa una expresión lambda, que aprenderemos a crear
+// en la última lección del curso
+Arrays.parallelSetAll(arrayGrande, i -> aleatorio(12345));
+Arrays.parallelSort(arrayGrande);
+```
+
+Fijarse en esta colección que tiene más de un millón de elemento utilizamos unos métodos especiales, quizá no sean los que más utilicéis al principio y una sintaxis especial que aprenderemos en alguna de la última lecciones de la expresión el Lambda para rellenar este array grande con un montón de números aleatorios de forma paralela y después ordenarlo de forma también paralela.
+
+*`ManejoArrays05`*
+
+```java
+package arrays;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class ManejoArrays05 {
+
+   public static void main(String[] args) {
+      int[] array = new int[100];
+
+      for (int i = 0; i < array.length; i++) {
+         array[i] = aleatorio(100);
+      }
+
+      printArray(array);
+
+      // Podemos crear otro array, copia del primero, ampliando su longitud
+      int[] otroArray = Arrays.copyOf(array, 200);
+
+      // Podemos ordenar los elementos de un array
+      Arrays.sort(otroArray);
+      System.out.println("");
+      System.out.println("Array ordenado");
+      printArray(otroArray);
+
+      // Posición de un número aleatorio, si es que está
+      int num = aleatorio(100);
+      int pos = Arrays.binarySearch(array, num);
+      System.out.println("");
+      if (pos >= 0)
+         System.out.printf("El elemento " + num + " está contenido en el array, en la posición " + pos);
+      else
+         System.out.println("El elemento " + num + " no está en el array");
+
+      // JAVA SE 8
+      // El método parallelsort realiza una ordenación más rápida para arrays
+      // muy largos
+      int[] arrayGrande = new int[123456];
+      // Este método sirve para inicializar un array con valores
+      // y usa una expresión lambda, que aprenderemos a crear
+      // en la última lección del curso
+      Arrays.parallelSetAll(arrayGrande, i -> aleatorio(12345));
+      Arrays.parallelSort(arrayGrande);
+   }
+
+   /*
+    * ESTE MÉTODO DEVUELVE UN NÚMERO ALEATORIO ENTRE 0 y TOPE-1.
+    */
+   public static int aleatorio(int tope) {
+      Random r = new Random();
+      return r.nextInt(tope - 1);
+   }
+
+   /*
+    * Este método imprime un array, indicando para cada elemento su valor y su
+    * posición
+    */
+   public static void printArray(int[] array) {
+      for (int i = 0; i < array.length; i++) {
+         System.out.print(array[i] + "[" + i + "]  ");
+         if (i > 0 && i % 10 == 0)
+	    System.out.println("");
+      }
+      System.out.println("");
+   }
+
+}
+```
+
+![16-07](images/16-07.png)
+
+Se ha producido todas las operaciones y aquí tenemos la representación del array, el array ordenado, como habíamos hecho una copia de 100 elemento y lo hemos ordenado después los 100 primero elemento están inicializado a cero y por ejemplo elementos 9 no está, si intentamos buscar otro elemento elemento do tampoco 86 si esta. 
 
 ## Práctica: Creando el juego de hundir la flota 31:16 
 
