@@ -119,9 +119,11 @@ Dentro del método, un *varargs* se trata igual que un array.
 
 ![17_Argumentos_y_tipos_de_retorno-8](images/17_Argumentos_y_tipos_de_retorno-8.png)
 
-## 18. Paso de argumento por valor y referencia 8:18 
+# 18. Paso de argumento por valor y referencia 8:18 
 
 [Paso de argumento por valor y referencia](pdfs/18_Paso_por_valor_y_referencia.pdf)
+
+## Resumen del Profesor
 
 ### 18.1 Paso por valor y paso por referencia
 
@@ -190,15 +192,13 @@ Primero, modificamos los valores X e X del círculo, y posteriormente, asignamos
 
 ![18_Paso_por_valor_y_referencia-4](images/18_Paso_por_valor_y_referencia-4.png)
 
-## 19. Modificadores de acceso 12:39 
+# 19. Modificadores de acceso 12:39 
 
 [Modificadores de acceso](pdfs/19_Modificadores_de_acceso.pdf)
 
-![19_Modificadores_de_acceso-1](images/19_Modificadores_de_acceso-1.png)
+## Resumen del Profesor
 
 ### 19.1 Modificadores de acceso
-
-![19_Modificadores_de_acceso-2](images/19_Modificadores_de_acceso-2.png)
 
 Modificador |	Clase |	Paquete	| Subclase | El mundo
 ------------|-------|---------|----------|---------
@@ -209,173 +209,42 @@ private | Sí | No |	No | No
 
 ### 19.2 Modificadores a nivel de Clase
 
-![19_Modificadores_de_acceso-3](images/19_Modificadores_de_acceso-3.png)
-
 Nuestras clases deberían ser `public` casi siempre. Solo en casos más avanzados veremos que podemos tener otros tipos de clases donde nos interesaría que no lo fueran.
 
 ### 19.3 Modificadores a nivel de métodos
-
-![19_Modificadores_de_acceso-4](images/19_Modificadores_de_acceso-4.png)
 
 Para métodos y atributos, intentemos siempre escoger la versión más restrictiva. Los métodos deberían ser siempre `public`, salvo que realicen operaciones auxiliares; en ese caso los podemos marcar como `private`. Los constructores deben ser `public`.
 
 ### 19.4 Modificadores a nivel de atributos.
 
-![19_Modificadores_de_acceso-5](images/19_Modificadores_de_acceso-5.png)
-
 Deben ser `private` salvo para constantes (que deben ser `public`). Los atributos no privados aumentan el acoplamiento del código y limitan la flexibilidad para cambiar código en el futuro.
 
-### 19.5 Código
+## Transcripción
 
-![19-Estructura_Proyecto](images/19-Estructura_Proyecto.png)
+![19_Modificadores_de_acceso-1](images/19_Modificadores_de_acceso-1.png)
 
+![19_Modificadores_de_acceso-2](images/19_Modificadores_de_acceso-2.png)
 
-*B.java*
+![19_Modificadores_de_acceso-3](images/19_Modificadores_de_acceso-3.png)
 
-```java
-package modificadores;
+![19_Modificadores_de_acceso-4](images/19_Modificadores_de_acceso-4.png)
 
-class B {
-	
-	String b;
-	
-	B() {
-		b = "Hola desde B";
-	}
-
-	String getB() {
-		return b;
-	}
-
-	void setB(String b) {
-		this.b = b;
-	}
-	
-	/*String aMasB(A a) {
-		return a.getA() + b;  
-	}*/
-}
-```
-
-*Modificadores.java*
-
-```java
-/**
- * 
- */
-package modificadores;
-
-import paquetec.C;
-
-/**
- * @author Openwebinars
- *
- */
-public class Modificadores {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		//A a = new A();  //A no es accesible, aunque está en un subpaquete
-		B b = new B();		
-		System.out.println(b.b); //Esta opción no suele ser recomendable
-		System.out.println(b.getB());
-		
-		C c = new C();
-		//System.out.println(c.c); //Si intentamos acceder al atributo, error
-		System.out.println(c.getC());
-		
-		
-
-	}
-
-}
+![19_Modificadores_de_acceso-5](images/19_Modificadores_de_acceso-5.png)
 
 
-SALIDA:
-
-Hola desde B
-Hola desde B
-Hola desde C
-```
-
-*A.java*
-
-```java
-package modificadores.paquetea;
-
-class A {
-	
-	String a;
-	
-	A() {
-		a = "Hola desde A";
-	}
-	
-	void setA(String a) {
-		this.a = a;
-	}
-	
-	String getA() { return this.a; }
-}
-```
-
-*D.java*
-
-```java
-package modificadores.paquetea;
-
-public class D {
-	// Dentro del mismo paquete sí que podemos usar A
-	A a;
-
-}
-```
-
-*C.java*
-
-```java
-package paquetec;
-
-public class C {
-	
-	private String c;
-	
-	public C() {
-		c = "Hola desde C";
-	}
-
-	public String getC() {
-		return c;
-	}
-
-	public void setC(String c) {
-		this.c = c;
-	}
-}
-```
-
-## 20. Métodos estáticos y variables estáticas 8:19 
+# 20. Métodos estáticos y variables estáticas 8:19 
 
 [Métodos estáticos y variables estáticas](pdfs/20_Métodos_y_variables_estáticas.pdf)
 
-![20_Metodos_y_variables_estaticas-1](images/20_Metodos_y_variables_estaticas-1.png)
+## Resumen del Profesor
 
 ### 20.1 Atributos de objeto y de clase
-
-![20_Metodos_y_variables_estaticas-2](images/20_Metodos_y_variables_estaticas-2.png)
 
 Java nos permite crear cuantos objetos queramos de una misma clase. Estos objetos tienen una copia propia de los atributos. Sin embargo, en ocasiones, puede interesarnos tener un atributo común a todos los objetos. Estos son los atributos `static`.
 
 Están asociados a la clase, y compartidos para todas las instancias. Pueden ser manipulados por cualquier objeto, o incluso sin crear una instancia de esa clase.
 
-![20_Metodos_y_variables_estaticas-3](images/20_Metodos_y_variables_estaticas-3.png)
-
 ### 20.2 Métodos estáticos
-
-![20_Metodos_y_variables_estaticas-4](images/20_Metodos_y_variables_estaticas-4.png)
 
 Se rigen por los mismos principios de los atributos estáticos. Para invocar:
 
@@ -387,140 +256,31 @@ Para acceder a una variable estática, necesitamos hacerlo desde un método est�
 
 ### 20.3 Constantes
 
-![20_Metodos_y_variables_estaticas-5](images/20_Metodos_y_variables_estaticas-5.png)
-
 Se pueden definir como `static`.
 
 ```java
 static final PI = 3.141592653589793;
 ```
 
-### 20.4 Código
+## Transcripción
 
-*Bicicleta.java*
+![20_Metodos_y_variables_estaticas-1](images/20_Metodos_y_variables_estaticas-1.png)
 
-```java
-package bicicleta;
+![20_Metodos_y_variables_estaticas-2](images/20_Metodos_y_variables_estaticas-2.png)
 
-public class Bicicleta {
-	
-	private int numMarchas;
-	private int diametroRueda;
-	private int velocidad;
-	private int id;
-	
-	
-	//Variable estática
-	//Compartida para todas las instancias.
-	private static int numeroDeBiciletas = 0;
-	
-	public static int getNumeroDeBicicletas() {
-		//No podemos usar this
-		//return this.numeroDeBiciletas;
-		return numeroDeBiciletas;
-	}
+![20_Metodos_y_variables_estaticas-3](images/20_Metodos_y_variables_estaticas-3.png)
 
+![20_Metodos_y_variables_estaticas-4](images/20_Metodos_y_variables_estaticas-4.png)
 
-	public Bicicleta(int numMarchas, int diametroRueda, int velocidad) {
-		this.numMarchas = numMarchas;
-		this.diametroRueda = diametroRueda;
-		this.velocidad = velocidad;
-		id = ++numeroDeBiciletas;
-	}
+![20_Metodos_y_variables_estaticas-5](images/20_Metodos_y_variables_estaticas-5.png)
 
-
-	public int getNumMarchas() {
-		return numMarchas;
-	}
-
-
-	public void setNumMarchas(int numMarchas) {
-		this.numMarchas = numMarchas;
-	}
-
-
-	public int getDiametroRueda() {
-		return diametroRueda;
-	}
-
-
-	public void setDiametroRueda(int diametroRueda) {
-		this.diametroRueda = diametroRueda;
-	}
-
-
-	public int getVelocidad() {
-		return velocidad;
-	}
-
-
-	public void setVelocidad(int velocidad) {
-		this.velocidad = velocidad;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Bicicleta [numMarchas=" + numMarchas + ", diametroRueda=" + diametroRueda + ", velocidad=" + velocidad
-				+ ", id=" + id + "]";
-	}
-}
-```
-
-*Estaticos.java*
-
-```java
-package bicicleta;
-
-/**
- * @author 
- *
- */
-public class Estaticos {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		Bicicleta bici1 = new Bicicleta(21, 27, 0);
-		Bicicleta bici2 = new Bicicleta(18, 24, 0);
-		
-		System.out.println(bici1);
-		System.out.println(bici2);
-		
-		//bici1.getNumeroDeBicicletas();
-		System.out.println(Bicicleta.getNumeroDeBicicletas());
-	}
-}
-
-
-SALIDA:
-
-Bicicleta [numMarchas=21, diametroRueda=27, velocidad=0, id=1]
-Bicicleta [numMarchas=18, diametroRueda=24, velocidad=0, id=2]
-2
-```
-
-## 21. Sobrecarga de métodos y constructores 7:07 
+# 21. Sobrecarga de métodos y constructores 7:07 
 
 [Sobrecarga de métodos y constructores](pdfs/21_Sobrecarga_de_métodos_y_constructores.pdf)
 
-![21_Sobrecarga_de_metodos_y_constructores-1](images/21_Sobrecarga_de_metodos_y_constructores-1.png)
+## Resumen del Profesor
 
 ### 21.1 Sobrecarga de métodos
-
-![21_Sobrecarga_de_metodos_y_constructores-2](images/21_Sobrecarga_de_metodos_y_constructores-2.png)
 
 Java permite que una clase tenga dos o más metodos con el mismo nombre, siempre que su firma (es decir, el número de atributos y/o su tipo) sea diferente:
 
@@ -591,162 +351,11 @@ public class Persona {
 }
 ```
 
-### 21.3 Código
+## Transcripción
 
-*Artista.java*
+![21_Sobrecarga_de_metodos_y_constructores-1](images/21_Sobrecarga_de_metodos_y_constructores-1.png)
 
-```java
-package sobrecarga;
-
-public class Artista {
-	
-	
-	public void dibuja(String s) {
-		System.out.println(s);
-	}
-	
-	public void dibuja(int i) {
-		System.out.println(i);
-	}
-	
-	public void dibuja(double f) {
-		System.out.println(f);
-	}
-	
-	public void dibuja(int i, double f) {
-		System.out.println(i);
-		System.out.println(f);
-	}
-}
-```
-
-*Persona.java*
-
-```java
-package sobrecarga;
-
-public class Persona {
-
-	private String nombre;
-	private String apellidos;
-	private int edad;
-	private int altura;
-	private float peso;
-	
-	
-	public Persona() {
-	}
-	
-	public Persona(String nombre, String apellidos) {
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-	}
-	
-
-	public Persona(String nombre, String apellidos, int edad) {
-//		this.nombre = nombre;
-//		this.apellidos = apellidos;
-		this(nombre, apellidos);
-		this.edad = edad;
-	}
-	
-	public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
-//		this.nombre = nombre;
-//		this.apellidos = apellidos;
-//		this.edad = edad;
-		this(nombre, apellidos, edad);
-		this.altura = altura;
-		this.peso = peso;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellidos() {
-		return apellidos;
-	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-	public int getEdad() {
-		return edad;
-	}
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}
-	public int getAltura() {
-		return altura;
-	}
-	public void setAltura(int altura) {
-		this.altura = altura;
-	}
-	public float getPeso() {
-		return peso;
-	}
-	public void setPeso(float peso) {
-		this.peso = peso;
-	}
-	
-	@Override
-	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" + altura
-				+ ", peso=" + peso + "]";
-	}
-}
-```
-
-*Sobrecarga.java*
-
-```java
-/**
- * 
- */
-package sobrecarga;
-
-/**
- * @author Openwebinars
- *
- */
-public class Sobrecarga {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Artista artista = new Artista();
-		
-		artista.dibuja("Hola");
-		artista.dibuja(7);
-		artista.dibuja(7, 8.3f);
-		
-		
-		Persona perso1 = new Persona();
-		Persona perso2 = new Persona("Pepe", "Pérez");
-		Persona perso3 = new Persona("Alejandro", "Ruiz", 33);
-		Persona perso4 = new Persona("Miguel", "Gómez", 25, 180, 75f);
-		
-		System.out.println(perso1);
-		System.out.println(perso2);
-		System.out.println(perso3);
-		System.out.println(perso4);	
-	}
-}
-
-
-SALIDA:
-
-Hola
-7
-7
-8.300000190734863
-Persona [nombre=null, apellidos=null, edad=0, altura=0, peso=0.0]
-Persona [nombre=Pepe, apellidos=Pérez, edad=0, altura=0, peso=0.0]
-Persona [nombre=Alejandro, apellidos=Ruiz, edad=33, altura=0, peso=0.0]
-Persona [nombre=Miguel, apellidos=Gómez, edad=25, altura=180, peso=75.0]
-```
+![21_Sobrecarga_de_metodos_y_constructores-2](images/21_Sobrecarga_de_metodos_y_constructores-2.png)
 
 ## Contenido adicional 5   
 
