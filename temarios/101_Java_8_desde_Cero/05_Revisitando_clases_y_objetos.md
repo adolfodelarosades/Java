@@ -817,17 +817,106 @@ static final PI = 3.141592653589793;
 
 ![20_Metodos_y_variables_estaticas-1](images/20_Metodos_y_variables_estaticas-1.png)
 
+Vamos a hablar de atributo y métodos estáticos, es algo que ya hemos venido utilizando y que como bien decía sobre todo en el proyecto de hundir la flota lo utilizábamos sin conocer muy bien para que servia, vamos a tratar de clarificar ahora para que se utiliza.
+
 ![20_Metodos_y_variables_estaticas-2](images/20_Metodos_y_variables_estaticas-2.png)
+
+En Java podemos hablar de atributos de un objeto y los venimos utilizando desde casi el inicio del curso y podemos diferenciar entre los **atributos de un objeto** y los **atributos de una clase**. 
+
+Los objeto como hemos podido aprender en el capítulo de orientación a objetos, son instancias es decir son copias sacadas a partir de un molde llamado Clase, cuando hacemos esa copia a través del molde, cada objeto tiene una copia de los atributos y permite modificar el valor de los suyos propios, hasta ahora lo hemos venido haciéndo si teníamos diferentes instancias de una clase, cada uno a través de la encapsulación tenían sus copias de los atributos y tenía sus propios valores.
+
+Y si quisiéramos tener un atributo que fuese común a todas las instancias, a todos los objetos que hemos creado a partir de una clase, eso lo podemos conseguir a través del modificador **`static`** que va a indicar que un atributo no va a ser de un objeto u otro particular, de una instancia concreta, sino que va a ser común a todas ellas porque va a ser de la clase.
 
 ![20_Metodos_y_variables_estaticas-3](images/20_Metodos_y_variables_estaticas-3.png)
 
+Estos atributos no estarán asociado a ningún objeto en particular, a ninguna instancia en particular, sino que son de alguna manera propiedades de la clase, se conocen como **atributo estático** y son compartidos para todas las instancias de la clase. Un elemento interesante es que al ser compartido pueden ser manipulado por cualquier instancia, pero más interesante aún es que **no es necesario que tengamos creadas ninguna instancia de la clase para poder manipular ese atributo** si no que lo podríamos hacer directamente desde la clase, sin tener ninguna instancia creada.
+
 ![20_Metodos_y_variables_estaticas-4](images/20_Metodos_y_variables_estaticas-4.png)
+
+Y al igual que tenemos atributos estáticos, **también tenemos método estático**, son similares a a esas variables estáticas de las que ya hablábamos y como ventaja también es que **no es necesario que tengamos ningún tipo de instancia de la clase para invocar esos métodos**. También **tenemos que tener presente que si desde dentro de una clase queremos acceder a una variable estática tenemos que hacerlo desde un método estático** porque si fuera un método de instancia nos podría costar más trabajo, no sería el mismo tipo de contexto. También tenemos presente en los métodos estáticos múltiples clase ofrecidas por Java como la clase `Array`, `String` o `Math` que ya hemos podido trabajar con ellas y hemos podido comprobar que tiene multitud de métodos estáticos que no ofrecían para poder acceder a ellos. De hecho la clase `Array` por ejemplo es más que una clase para ser instanciada es una clase que ofrece una multitud ingente de métodos estáticos que son utilidades auxiliares de soporte para trabajar con arrays.
 
 ![20_Metodos_y_variables_estaticas-5](images/20_Metodos_y_variables_estaticas-5.png)
 
-Hola a todos vamos a hablar en este nuevo vídeo de atributo y método estático es algo que ya hemos venido utilizando y que como bien decía sobre todo en el proyecto de hundir la flota bueno lo utilizábamos sin conocer muy bien para que para que servia vamos a tratar de clarificar ahora para que se podemos hablar de atributos de un objeto y los venimos utilizando desde casi inicio del Este curso y podemos diferenciar entre los atributos de un objeto y los atributos de una clase objeto como hemos podido aprender en el capítulo 11 de orientación a objetos son instancia es decir son copias tacada a partir de un molde llamado claro cuando hacemos esa copia tráete el molde cada objeto tiene una copia de los atributos y permite modificar el valor de los de los suyos propios hasta ahora no hemos venido haciéndose teníamos diferentes instancias de una clase cada uno a través de la encapsulación pues tenían sus copias de los atributos y tenía sus propios valores y si quisiéramos tener un atributo que fuese común a todas la distancia a todos los objetos que hemos creado a partir de una clase eso lo podemos conseguir a través del modificador static que va a indicar que un atributo no va a ser de un objeto u otro particular de una instancia concreta sino que va a ser común a todas ellas porque va a ser de la clase como no estarán asociado a ningún objeto en particular a ninguna instancia en particular sino que son de alguna manera propiedades de la clase se conocen como atributo estático y son compartidos para para todas las instancias de la clase un elemento interesante es que al ser compartido pueden ser manipulado por cualquier instancia pero más interesante aún es que no es necesario que tengamos creadas ninguna instancia de la clase para poder manipular ese atributo si no te lo podríamos hacer directamente desde la clase sale sin tener ninguna instancia creada y al igual que tenemos atributos estáticos también tenemos método estático son similares a a esas variables estáticas de las que ya hablábamos y como ventaja también es que no es necesario que tengamos ningún tipo de instancia de la clase para invocar instrumentos y recordar en el proyecto ejemplo
+Por último antes de ver un ejemplo decir que las constantes que vimos que venía marcadas por la palabra `final` también se suelen definir como estática, es decir que se suele utilizar de forma conjunta el modificador `static final` para que esas constante sean de la propia clase y no de una instancia en particular, cada instancia no tiene porqué tener su copia de esta constante y de esa manera no se puede modificar su valor y recordamos que suelen colocar en mayúscula y si son varias palabras separadas por guiones bajos.
 
-También tenemos que tener presente que dentro de una clase queremos acceder a una variable estática tenemos que hacerlo desde un método estático porque si fuera un método de instancia nos podría costar más trabajo no es no sería el mismo tipo de contexto también tenemos presente en los métodos estáticos múltiples clase ofrecidas por Java como la clase Array o la clase String que ya hemos podido trabajar con ella hemos podido comprobar que tiene multitud de métodos estáticos no que no ofrecían para poder acceder de la clase Alive por ejemplo es más que una clase para ser instanciada una clase que ofrece una multitud ingente de método estático que son bueno utilidades auxiliares de soporte para trabajar con hadas no por último antes de ver un ejemplo decir que las constantes que vimos que venía enmarcadas por la palabra final también se suelen definir como estática es decir que se suele utilizar de forma conjunta el modificador static final vale para que seas constante bueno pues te antena propia clase y no de una instancia particular cada instancia no tiene porqué tener su copia de esta constante y de esa manera no se puede modificar su valor y recordamos bueno que suelen colocar en mayúscula y si son varias palabras separadas por guiones bajos no vamos a ver un ejemplo de una clase que tendrá atributo no estáticos y atributos estáticos y que además tendrán método no estático y un método estático supongamos que tenemos una clase para modelar bicicletas vale dónde vamos a modificar de cada bicicleta su velocidad su diámetro de rueda su número de marchas y además como vamos a intentar guardar o crear varias bicicletas pues vamos añadirle un identificador es diferente un número diferente a cada una de no interesa conocer el número de instancia de bicicleta que vamos crea cómo lo vamos a poder saber a través de un atributo estático el número de bicicletas que inicializamos directamente aseo si queremos conocer el valor de este atributo estático que privado lo podemos hacer a traerle un método público vale estático que nos devolverá el valor del número de bicicleta fijado como un eclipse el código estático suele poner nos lo pone siempre lo resalta poniéndolo en cursiva para indicar que ese método que este atributo es estático a partir de aquí vamos a trabajar con el con el resto de código que no puede sonar como más porque es lo que hacemos a la hora de crear una
+### :computer: `101-20-Static`
+
+Vamos a ver un ejemplo de una clase que tendrá atributo no estáticos y atributos estáticos y que además tendrán método no estático y un método estático.
+
+Supongamos que tenemos una clase para modelar bicicletas, dónde vamos a modificar de cada bicicleta su velocidad, su diámetro de rueda, su número de marchas y además como vamos a intentar guardar o crear varias bicicletas pues vamos añadirle un identificador diferente, un número diferente a cada una de ellas. Y por otro lado nos interesa conocer el número de instancia de bicicleta que vamos creando, cómo lo vamos a poder saber, a través de un atributo estático `numeroDeBiciletas` que inicializamos directamente a 0, si queremos conocer el valor de este atributo estático que es privado lo podemos hacer a través de un método público estático `getNumeroDeBicicletas()` que nos devolverá el valor de `numeroDeBiciletas`. Fijarse como Eclipse todo el código estático suele resaltarlo poniéndolo en cursivas para indicar que ese método, que este atributo es estático.
+
+*``*
+
+```java
+package bicicleta;
+
+public class Bicicleta {
+	
+   private int numMarchas;
+   private int diametroRueda;
+   private int velocidad;
+   private int id;
+
+   // Variable estática
+   // Compartida para todas las instancias.
+   private static int numeroDeBiciletas = 0;
+
+   public static int getNumeroDeBicicletas() {
+      // No podemos usar this
+      // return this.numeroDeBiciletas;
+      return numeroDeBiciletas;
+   }
+
+   public Bicicleta(int numMarchas, int diametroRueda, int velocidad) {
+      this.numMarchas = numMarchas;
+      this.diametroRueda = diametroRueda;
+      this.velocidad = velocidad;
+      id = ++numeroDeBiciletas;
+   }
+
+   public int getNumMarchas() {
+      return numMarchas;
+   }
+
+   public void setNumMarchas(int numMarchas) {
+      this.numMarchas = numMarchas;
+   }
+
+   public int getDiametroRueda() {
+      return diametroRueda;
+   }
+
+   public void setDiametroRueda(int diametroRueda) {
+      this.diametroRueda = diametroRueda;
+   }
+
+   public int getVelocidad() {
+      return velocidad;
+   }
+
+   public void setVelocidad(int velocidad) {
+      this.velocidad = velocidad;
+   }
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
+   }
+
+   @Override
+   public String toString() {
+      return "Bicicleta [numMarchas=" + numMarchas + ", diametroRueda=" + diametroRueda + ", velocidad=" 
+                                      + velocidad + ", id=" + id + "]";
+   }
+}
+```
+
+
+
+a partir de aquí vamos a trabajar con el con el resto de código que no puede sonar como más porque es lo que hacemos a la hora de crear una
 
 Como a la hora de crear una bicicleta lo que vamos haciendo es utilizar la variable no la variable estática en la que no es distancia la consultamos desde en método constructor para asignar el Ibex la primera bicicleta que creamos en la bicicleta a cero los incrementamos quedaría como uno la siguiente 2 y así sucesivamente no tendríamos y los métodos set vale aquí si creamos dos bicicletas imprimimos su subiré podemos ver cómo se va utilizando el dentro del concepto de los constructores y creáramos además el método to string y creará más alguna bicicleta más podríamos consultar su contenido completo vale tarde escribir solamente esto no podríamos hacer esta manera y si queremos saber el número bicicletas que tenemos ahora mismo no podríamos hacer de esta manera fijado como solamente utilizando el nombre de la clase no de una de una instancia sería la manera más adecuada de acceder a este método a este método estático también lo podemos hacer a través de una instancia pero ya digo es una práctica que suele ser menos habitual y suele ser más habitual hacerlo a través de la propia clase no el código que tenemos esta tipo podemos acceder a través de esta de esta clase incineramos el número de bicicletas que tenemos disponibles con esto terminamos los modificadores del código modificado como como estático y nos lanzamos hacia la sobrecarga de método y de constructor
 
