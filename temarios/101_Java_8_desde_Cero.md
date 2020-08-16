@@ -40,7 +40,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Práctica: Creando el juego de hundir la flota 31:16 
    * Contenido adicional 4
 
-5. [Revisitando clases y objetos](101_Java_8_desde_Cero/05_Revisitando_clases_y_objetos.md) 49m
+5. [Revisitando clases y objetos](101_Java_8_desde_Cero/05_Revisitando_clases_y_objetos.md) 49m :+1:
    * 17 Argumento de un método y tipos de retorno 13:36 
    * 18 Paso de argumento por valor y referencia 8:18 
    * 19 Modificadores de acceso 12:39 
