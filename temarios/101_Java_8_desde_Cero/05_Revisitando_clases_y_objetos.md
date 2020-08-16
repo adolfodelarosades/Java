@@ -105,19 +105,151 @@ Dentro del método, un *varargs* se trata igual que un array.
 
 ![17_Argumentos_y_tipos_de_retorno-1](images/17_Argumentos_y_tipos_de_retorno-1.png)
 
+Vamos a comenzar este nuevo capítulo en el que vamos a revisitar *Clases y Objetos* y vamos a comenzar con  el tipo de retorno de los métodos y los argumentos que pueden recibir.
+
 ![17_Argumentos_y_tipos_de_retorno-2](images/17_Argumentos_y_tipos_de_retorno-2.png)
+
+Comencemos con los tipos de retorno.
 
 ![17_Argumentos_y_tipos_de_retorno-3](images/17_Argumentos_y_tipos_de_retorno-3.png)
 
+El tipo de retorno marca el tipo de valor que puede devolver un método cuando complete la ejecución de todas sus sentencias puede producir un determinado valor como resultado de esa operación, la manera de devolver un valor concreto es mediante la sentencia `return` y podría incluso devolver un error, cosa que veremos más adelante. 
+
+Los métodos que no devuelven nada, que simplemente agrupan un grupo de sentencias  para realizar una serie de operaciones de manera conjunta, no es que no devuelvas nada sino que devuelven un valor vacío que Java se llama `void `. 
+
 ![17_Argumentos_y_tipos_de_retorno-4](images/17_Argumentos_y_tipos_de_retorno-4.png)
 
+Hasta ahora hemos visto algunos métodos que devuelven tipos primitivos cuyo tipo de retorno era primitivo y también podemos tener métodos que devuelvan un array, incluso un array multidimensional, los métodos getters y setters de las clases que hemos visto hasta ahora en especial los getters hemos visto que devolvían tipos primitivos e incluso `Strings`.
+
 ![17_Argumentos_y_tipos_de_retorno-5](images/17_Argumentos_y_tipos_de_retorno-5.png)
+
+También podemos tener métodos que retornen instancias de una clase, tanto si la hemos definido nosotros, como si esta definida por Java, el uso de métodos que devuelven `String` como el método `toString()` ues uno de los que más hemos podido ver hasta ahora y aquí tenemos otro ejemplo, si un rectángulo viene definido por 4 puntos podríamos devolver todos los puntos de un rectángulo en un array de puntos.
+
+Vamos a hacer una pequeña prueba sobre esto.
+
+### :computer: `101-17-ArgumentosTiposRetorno`
+
+Vamos a crear la clase `Punto`, un punto viene definido por sus coordenadas (x,y). Con Eclipse podemos generar el constructor con argumentos, los métodos getters y setters y el método `toString`.
+
+*`Punto`*
+
+```java
+package argumentos;
+
+public class Punto {
+	
+   float x, y;
+
+   public Punto(float x, float y) {
+      this.x = x;
+      this.y = y;
+	 }
+
+	 public float getX() {
+		  return x;
+	 }
+
+	 public void setX(float x) {
+		  this.x = x;
+	 }
+
+	 public float getY() {
+		  return y;
+	 }
+
+	 public void setY(float y) {
+		  this.y = y;
+	 }
+
+	 @Override
+	 public String toString() {
+		  return "Punto [x=" + x + ", y=" + y + "]";
+	 }
+}
+```
+
+Ya que hemos terminado la clase `Punto` podríamos indicar que un rectángulo viene delimitado por 4 puntos en una clase `Rectangulo`. O incluso existen múltiples manera de limitar un rectángulo, porque podríamos poner un punto que sería su esquina superior izquierda y una base y una altura, lo podríamos hacer con esas dos versiones.
+
+Por ver que podemos devolver un array, una serie de instancias de una clase que hemos creado lo vamos a hacer de la manera del array de puntos. Podríamos crear un constructor manualmente lo pudiéramos inicializar así, esta sería una manera de reaprovechar las cuatro referencias de punto que recibimos como argumentos para poder crear el array de puntos. 
+
+Vimos en su momento que teníamos la notación de paréntesis para agrupar valores, pero si nos damos cuenta esto nos produce error.
+
+```java
+puntos = {p1, p2, p3, p4};
+```
+
+y es que esto solamente puede ser cuando se declara una variable:
+
+```java
+Punto[] puntos2 = {p1, p2, p3, p4};
+```
+
+Pero sin embargo si podríamos hacerlo creandolo directamente así al vuelo:
+
+```java
+puntos = new Punto[]{p1, p2, p3, p4};
+```
+
+Podríamos crear el resto de cosas con Eclipse es decir el constructor, getters y setters, método `toString`, por lo que la clase completa queda así:
+
+
+*`Rectangulo`*
+
+```java
+package argumentos;
+
+import java.util.Arrays;
+
+public class Rectangulo {
+	
+   private Punto[] puntos;
+	
+	 public Rectangulo(Punto p1, Punto p2, Punto p3, Punto p4) {
+		  puntos = new Punto[]{p1, p2, p3, p4};
+	 }
+
+	 public Rectangulo(Punto[] puntos) {
+		  this.puntos = puntos;
+	 }
+
+	 public Punto[] getPuntos() {
+		  return puntos;
+	 }
+
+	 public void setPuntos(Punto[] puntos) {
+		  this.puntos = puntos;
+	 }
+
+	 @Override
+	 public String toString() {
+		  return "Rectangulo [puntos=" + Arrays.toString(puntos) + "]";
+	 }
+}
+```
+
+Al generar los métodos getters podemos comprobar como el método `getPuntos()` va a devolver un array de puntos como tipo de retorno.
+
+Cómo podemos ver en base al tipo de retorno en Java podemos devolver un valor vacío `void`, un un valor ya  sea primitivo, instancia de clase, array, etc., todo lo complejo que queramos, el método `getPuntos()` realmente va a devolver cuatro puntos, pero está devolviendo un solo valor de tipo array de punto, el tipo de retorno también podría ser una instancia en particular de una clase. Lo podemos observar con el método `toString()` lo que devuelve es una instancia de la clase `String`. Esto con respecto a los tipos de retorno.
 
 ![17_Argumentos_y_tipos_de_retorno-6](images/17_Argumentos_y_tipos_de_retorno-6.png)
 
 ![17_Argumentos_y_tipos_de_retorno-7](images/17_Argumentos_y_tipos_de_retorno-7.png)
 
 ![17_Argumentos_y_tipos_de_retorno-8](images/17_Argumentos_y_tipos_de_retorno-8.png)
+
+pasemos a hablar ahora del paso de argumentos decir que un método puede recibir una serie de argumentos de entrada para para poder hacer alguna operaciones con ella y es que en muchas ocasiones un método de una clase no va a trabajar solamente con las propiedades internas de esa instancia de la clase sino que va a recibir algún tipo de valor externo para complementar el zócalo el forro paral interno y el realizar algún tipo de operación puede ser una operación de inicializacion cálculo el valor de cualquier tipo que nos pudiéramos imaginar también hemos visto métodos que no reciben argumento por ejemplo claro era los método que está vale no recibe ningún tipo de argumento por lo cual solamente tenemos que indicar que se abre y cierra paréntesis y que no va a haber nada en medio el máximo número de argumentos que pueden recibir un método es D255 yo no recomiendo que jamás diga a esa cantidad de valores porque seguramente entonces no estamos diseñando bien el metro y podamos fraccionar eso en otros métodos que vayan trabajando dentro de otra manera y el tipo de datos que se puede recibir en una clase son tipo primitivo arrays clase o cualquier combinación de ellos aquí tenemos en la play un ejemplo de un método que crearía el constructor de nosotros antes a partir de un array de puntos indicando la esquina crearía un rectángulo está recibiendo una raíz de instancia de puntos no también existe desde hace varias versiones de Java la posibilidad de definir un método que va a recibir un número arbitrario de argumentos de un determinado tipo utilizado alguno de ellos que vienen lo hemos hecho sin quizás sin conocerlo muy bien o o sin haberlo sabido apreciar no podemos tener un método que bueno a priori no sabemos cuántos argumentos de un mismo tipo va a recibir ninguno 112 etcétera no bueno pues a este concepto de un número variable de argumentos se me llama para simplemente me voy a hacer anotación de 3 puntos seguidos cómo podemos ver en pantalla podríamos tener en lugar de para la clase rectángulo podemos intentar definir un polígono en base a una serie de puntos pero los polígonos pueden ser de diferente número de lados el número de lados vendría delimitado por la cantidad de puntos que nosotros pudiéramos marcar como como esquinas no un rectángulo ya sabemos que tiene cuatro puntos que delimitan su vecina triángulo tres y a partir de ahí podríamos ir incrementando en función del número de esquina el número de lados que tendría ese pollito en lugar de crear un método para cada uno de los lados del polígono o en lugar de crear un método que recibe un array de de punto nos podemos plantear el implementar un método que reciba un parar vale si bien es cierto que de manera interna parar la funcionar dentro del método que se recibe como si fuera una
+
+
+Embarazo para funcionar dentro del método que se recibe como si fuera una vamos a ver por ejemplo que nos pueda mostrar nevará de quisiéramos tener un método que pudiera imprimir una serie de cadenas de caracteres por consola independientemente del número de cadena de caracteres que recibiera pues te la primera todas lo podríamos hacer de esta manera como aquí estamos recibiendo una serie de mensajes pero en lugar de hacerlo en un stream lo hacemos con un varal no delimitados como tipo este punto.. y posteriormente el nombre de ese para es importante destacar que cuando un método incluye un número variable de argumentos tiene que ser el último argumento que reciba de no ser así nos habríamos diferencia pusiéramos algo de este tipo no sabría diferenciar bien el cava cuál es cuál pertenece al bar y cual pertenece a otro incluso con otro tipo de gato con lo cual si queremos recibir varios argumentos por separado y un bar el bar tiene que ser el último ver si los pusiéramos al principio no tendríamos ningún tipo de inconveniente para poder cómo utilizar un método que está definido con barato pues lo podemos hacer de esta manera le podemos pasar tantas cadenas de caracteres como nosotros deseemos aquí estamos pasando dos aquí lo estamos pasando tres aquí lo pasamos una aquí puso ninguna a la hora de trabajar con él como hemos dicho este baratos se puede trabajar con él como si fuera un array de hecho tiene su propiedad Leo y las propiedades que hemos tenido antes con los diferentes atrás y no le podríamos dar el tratamiento de un tribunal bueno pues tenemos la posibilidad de utilizar este este sistema para para imprimir una serie de mensajes no quizá quede más claro para para que te den en una en una sola línea una final aquí siempre peces la primera llamada al método esta es la segunda llamada al método está en la tercera y la última no produciría ningún mensaje no solamente haría un salto un salto de línea terminamos este apartado de argumento y tipos de retorno si viene en el siguiente vídeo vamos a seguir hablando de la recepción de argumento y qué es eso del paso por valor y paso por referencia
+
+
+
+
+
+
+
+
+
 
 # 18. Paso de argumento por valor y referencia 8:18 
 
