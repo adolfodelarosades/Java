@@ -1,9 +1,9 @@
 # 5. Revisitando clases y objetos 49m
-   * Argumento de un método y tipos de retorno 13:36 
-   * Paso de argumento por valor y referencia 8:18 
-   * Modificadores de acceso 12:39 
-   * Métodos estáticos y variables estáticas 8:19 
-   * Sobrecarga de métodos y constructores 7:07 
+   * 17 Argumento de un método y tipos de retorno 13:36 
+   * 18 Paso de argumento por valor y referencia 8:18 
+   * 19 Modificadores de acceso 12:39 
+   * 20 Métodos estáticos y variables estáticas 8:19 
+   * 21 Sobrecarga de métodos y constructores 7:07 
    * Contenido adicional 5
    
 # 17. Argumento de un método y tipos de retorno 13:36 
@@ -31,10 +31,10 @@ Ya hemos comprobado que un método puede devolver un tipo primitivo, mediante la
 ```java
 public class Rectangulo {
 
-    //atributos y otros métodos
-    public float getArea() {
+   //atributos y otros métodos
+   public float getArea() {
       return base*altura;
-    }
+   }
 
 }
 ```
@@ -46,19 +46,19 @@ Un método también puede tener un tipo de retorno una clase, y servirá para de
 ```java
 public class Punto {
 
-  float x;
-  float y;
+   float x;
+   float y;
 
-  //...
+   //...
 
 }
 
 public class Rectangulo {
 
-    //atributos y otros métodos
-    public Punto[] getPuntos() {
+   //atributos y otros métodos
+   public Punto[] getPuntos() {
       //return ....
-    }
+   }
 
 }
 ```
@@ -85,15 +85,15 @@ Para usarlos usaremos la sintaxis de tres puntos seguidos (`...`), justo despué
 
 ```java
 public Poligono poligonoDePuntos(Punto... esquinas) {
-    int numeroLados = esquinas.length;
-    double raizDelLado1, longitudLado1;
-    raizDelLado1 = (corners[1].x - corners[0].x)
+   int numeroLados = esquinas.length;
+   double raizDelLado1, longitudLado1;
+   raizDelLado1 = (corners[1].x - corners[0].x)
                      * (corners[1].x - corners[0].x)
                      + (corners[1].y - corners[0].y)
                      * (corners[1].y - corners[0].y);
-    longitudLado1 = Math.sqrt(raizDelLado1);
+   longitudLado1 = Math.sqrt(raizDelLado1);
 
-    // continuación del cuerpo del método
+   // continuación del cuerpo del método
 }
 ```
 
