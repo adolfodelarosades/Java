@@ -642,7 +642,6 @@ public class A {
 }
 ```
 
-
 La clase `A` está definida en el paquete `modificadores.paquetea`, `paquetea` es un subpaquete del paquete `modificadores`. El modificador de Acceso de la clase `A` es por defecto, es decir que todas las clases del mismo paquete podrían acceder a esta clase `A` y además sun métodos y su propiedad también estan definidas con modificador por defecto, es decir cualquier clase de ese paquete podría acceder a ellas.
 
 Si intentamos desde una clase que está ubicada en otro paquete, aunque sean paquetes que estén relacionados `paquetea` es un subpaquete del paquete `modificadores`, si intentamos acceder a ella desde fuera de su paquete, directamente ya Eclipse nos indica que no es posible acceder, porque no está definida dentro del mismo paquete. Como en el caso de la clase `Modificadores`
@@ -779,6 +778,8 @@ public class Modificadores {
 }
 ```
 
+![19-01](images/19-01.png)
+
 Fijemos como creamos una instancia de `B` y al ser su modificador por defecto podriamos acceder directamente a los atributos con `b.b` aunque esta opción no suele ser recomendable en casi ningún caso. En cambio en el caso de la clase `C` no podemos hacer lo mismo ya que el atributo `c` no lo declaramos ni público, ni por defecto lo declaramos privado por lo cual no podemos accederlo directamente lo hacemos a través de su método `c.getC()` que es lo recomendable.
 
 Y con esto terminamos de conocer los modificadores de acceso público, privado, protegido y por defecto y nos lanzamos a conocer en el uso de métodos y de atributo estático
@@ -843,9 +844,11 @@ Por último antes de ver un ejemplo decir que las constantes que vimos que vení
 
 Vamos a ver un ejemplo de una clase que tendrá atributo no estáticos y atributos estáticos y que además tendrán método no estático y un método estático.
 
-Supongamos que tenemos una clase para modelar bicicletas, dónde vamos a modificar de cada bicicleta su velocidad, su diámetro de rueda, su número de marchas y además como vamos a intentar guardar o crear varias bicicletas pues vamos añadirle un identificador diferente, un número diferente a cada una de ellas. Y por otro lado nos interesa conocer el número de instancia de bicicleta que vamos creando, cómo lo vamos a poder saber, a través de un atributo estático `numeroDeBiciletas` que inicializamos directamente a 0, si queremos conocer el valor de este atributo estático que es privado lo podemos hacer a través de un método público estático `getNumeroDeBicicletas()` que nos devolverá el valor de `numeroDeBiciletas`. Fijarse como Eclipse todo el código estático suele resaltarlo poniéndolo en cursivas para indicar que ese método, que este atributo es estático.
+Supongamos que tenemos una clase para modelar bicicletas, dónde vamos a modificar de cada bicicleta su velocidad, su diámetro de rueda, su número de marchas y además como vamos a intentar guardar o crear varias bicicletas pues vamos añadirle un identificador diferente, un número diferente a cada una de ellas. Y por otro lado nos interesa conocer el número de instancia de bicicleta que vamos creando, cómo lo vamos a poder saber, a través de un atributo estático `numeroDeBiciletas` que inicializamos directamente a 0, si queremos conocer el valor de este atributo estático que es privado lo podemos hacer a través de un método público estático `getNumeroDeBicicletas()` que nos devolverá el valor de `numeroDeBiciletas`. Fijarse como Eclipse todo el código estático suele resaltarlo poniéndolo en cursivas para indicar que ese método, que este atributo es estático, posteriormente creamos los constructores, los getters y setters y el método `toString` algo con lo que ya estamos más acostumbrados.
 
-*``*
+Observemos como al crear una instancia de bicicleta con nuestro constructor por un lado vamos incrementando nuestra variable estatica y por otro lado ese valor se lo asignamos al atributo `id` para identificar a la bicicleta creada.
+
+*`Bicicleta`*
 
 ```java
 package bicicleta;
@@ -914,11 +917,32 @@ public class Bicicleta {
 }
 ```
 
+*`Estaticos`*
 
+```java
+package bicicleta;
 
-a partir de aquí vamos a trabajar con el con el resto de código que no puede sonar como más porque es lo que hacemos a la hora de crear una
+public class Estaticos {
+   public static void main(String[] args) {
 
-Como a la hora de crear una bicicleta lo que vamos haciendo es utilizar la variable no la variable estática en la que no es distancia la consultamos desde en método constructor para asignar el Ibex la primera bicicleta que creamos en la bicicleta a cero los incrementamos quedaría como uno la siguiente 2 y así sucesivamente no tendríamos y los métodos set vale aquí si creamos dos bicicletas imprimimos su subiré podemos ver cómo se va utilizando el dentro del concepto de los constructores y creáramos además el método to string y creará más alguna bicicleta más podríamos consultar su contenido completo vale tarde escribir solamente esto no podríamos hacer esta manera y si queremos saber el número bicicletas que tenemos ahora mismo no podríamos hacer de esta manera fijado como solamente utilizando el nombre de la clase no de una de una instancia sería la manera más adecuada de acceder a este método a este método estático también lo podemos hacer a través de una instancia pero ya digo es una práctica que suele ser menos habitual y suele ser más habitual hacerlo a través de la propia clase no el código que tenemos esta tipo podemos acceder a través de esta de esta clase incineramos el número de bicicletas que tenemos disponibles con esto terminamos los modificadores del código modificado como como estático y nos lanzamos hacia la sobrecarga de método y de constructor
+      Bicicleta bici1 = new Bicicleta(21, 27, 0);
+      Bicicleta bici2 = new Bicicleta(18, 24, 0);
+
+      System.out.println(bici1);
+      System.out.println(bici2);
+
+      // bici1.getNumeroDeBicicletas();
+      System.out.println(Bicicleta.getNumeroDeBicicletas());
+
+   }
+}
+```
+
+![20-01](images/20-01.png)
+
+Aquí creamos 2 bicicletas e imprimos sus datos, así como también imprimimos el valor de nuestra variable estatica `numeroDeBicicletas`. Solamente utilizando el nombre de la clase, no de una de una instancia sería la manera más adecuada de acceder a este método estático, también lo podemos hacer a través de una instancia pero ya digo es una práctica que suele ser menos habitual y suele ser más habitual hacerlo a través de la propia clase.
+
+Con esto terminamos los modificadores estáticos y nos lanzamos hacia la sobrecarga de método y de constructor.
 
 # 21. Sobrecarga de métodos y constructores 7:07 
 
