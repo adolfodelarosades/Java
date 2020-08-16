@@ -1022,8 +1022,6 @@ Cerrando este bloque de revisitación de los objetos vamos a hablar de la sobrec
 
 ![21_Sobrecarga_de_metodos_y_constructores-2](images/21_Sobrecarga_de_metodos_y_constructores-2.png)
 
-
-
 Hablamos de **sobrecarga** cuando decimos que un determinado método puede estar implementado más de una vez, sino que bueno que tengamos varios métodos con el el mismo nombre y es que Java soporta esa posibilidad, que dos o más métodos que en principio son diferentes tienen implementaciones diferentes que tengan el mismo nombre, que tiene que ser diferentes sus firmas, es decir el número de argumentos que reciba tiene que ser distinto o bien el mismo número de argumentos, alguno de los tipos de los argumentos tiene que ser diferente, porque si los métodos tuvieran el mismo nombre y la misma firma serían indistinguible, de manera qué bueno esto no va a dar la posibilidad de que tengamos un método cuyo nombre sea común y que reciba diferentes tipos o diferente números de argumentos.
 
 Si bien Java permite totalmente su uso, no lo recomienda utilizar de manera masiva porque el código se vuelve bastante difícil de leer, se vuelve menos legible. 
@@ -1151,16 +1149,48 @@ public class Persona {
 }
 ```
 
-Que nos proporciona a través de dibujar Manuela llamada podemos ver como aquí tenemos las cuatro posibilidades de llamar a a dibujar y pasamos a la sobrecarga de constructores podemos comprobar como si quisiéramos crear una clase persona dónde almacenar amo su nombre su apellido su edad su altura y su peso podríamos plantearnos diferentes formas de construir una persona la primera y que suele ser muy muy habitual yo incluso os recomiendo que la que la podéis utilizar cuando trabajamos con algunos tipos de frameworks como spring o hoy ver net es muy recomendable que tengamos un constructor vacío si además tenemos un constructor parámetro yo diría que en algunos conceptos no es solamente recomendable si no obligatorio vale porque es curioso que haga si no creamos para una determinada clase un constructor es capaz de construir objetos con un constructor de esa manera pero si creamos un constructor con parámetros olvida de alguna manera cómo conseguir objeto con un constructor sin parámetros no así que se lo teníamos que proporcionar explícitamente bueno podríamos crear una persona de esta forma proporcionando solamente el nombre y lo apellido proporcionando el nombre los apellidos y la era vale este código está autogenerado con Eclipse está todo en línea de aquí la podríamos sustituir como ya conocíamos para reutilizar los constructores mediante el uso de ti no dónde lo que estábamos haciendo es invocar a este constructor de aquí arriba no y lo mismo podríamos hacer aquí abajo no estas tres líneas primera las podríamos sustituir vale para que llamar aquí arriba eclipse a la hora de autogenerar el código no no se suele para eso sino que el cuerpo lo hace de una manera más sencilla llamando a cada una de las propiedades pero bueno si nosotros les liberamos a mano o si tuviéramos algún tipo de lógica de negocio asociada a la construcción de un objeto lo podíamos hacer de esta manera cómo podemos comprobar tenemos cuatro constructores distintos para personas una semana metro uno con dos otro con 3 y otro con todos los parámetros de la inicialización de todos los atributos de esa persona aquí tenemos la creación de cuatro personas utilizando cada uno de los constructores no y si la salida podemos ver cómo tenemos aquí que una persona inicializada vacía pues nombre y apellidos nulo y el resto de valores iniciales en acero para para la primera persona que creamos con algunos valores se llama Pepe Pérez el resto de valores entero reales inicializar a 0 en este caso si se inicializa la edad vale aquí por último si estamos inicializando todos los valores podemos probar podemos utilizar los método sobrecargado de la manera que más que más nos convenga con este vídeo cerramos está re visita a los objetos y nos lanzamos de lleno hacia un nuevo bloque en el que aprenderemos a hacer herencia de clase
+Podemos comprobar como si quisiéramos crear una clase Persona dónde almacenamos su nombre, su apellido, su edad, su altura y su peso, podríamos plantearnos diferentes formas de construir una Persona, la primera y que suele ser muy habitual yo incluso os recomiendo que la que la podéis utilizar cuando trabajamos con algunos tipos de frameworks como Spring o Hibernate es muy recomendable que tengamos un **constructor vacío**, si además tenemos un constructor con parámetros, yo diría que en algunos conceptos no es solamente recomendable si no obligatorio, porque es curioso que Java si no creamos para una determinada clase un constructor es capaz de construir objetos con un constructor de esa manera, pero si creamos un constructor con parámetros Java olvida de alguna manera cómo construir un objeto con un constructor sin parámetros, así que se lo teníamos que proporcionar explícitamente. 
 
+Bueno podríamos crear una Persona de esta forma proporcionando solamente el nombre y el apellido, proporcionando el nombre, los apellidos y la edad, este código está autogenerado con Eclipse, estás dos línea de aquí la podríamos sustituir como ya conocíamos para reutilizar los constructores mediante el uso de `this` dónde lo que estábamos haciendo es invocar a este constructor de aquí arriba y lo mismo podríamos hacer aquí abajo, estas tres líneas primeras las podríamos sustituir para llamar aquí arriba, Eclipse a la hora de autogenerar el código no se suele parar en eso, sino que lo hace de una manera más sencilla, llamando a cada una de las propiedades pero bueno, si nosotros lo hacemos a mano o si tuviéramos algún tipo de lógica de negocio asociada a la construcción de un objeto lo podíamos hacer de esta manera. 
 
-
-
+Cómo podemos comprobar tenemos cuatro constructores distintos para Personas uno sin parámetros, uno con dos, otro con 3 y otro con todos los parámetros de la inicialización de todos los atributos de esa persona.
 
 *`Sobrecarga`*
 
 ```java
+package sobrecarga;
+
+public class Sobrecarga {
+   public static void main(String[] args) {
+      Artista artista = new Artista();
+
+      artista.dibuja("Hola");
+      artista.dibuja(7);
+      artista.dibuja(7, 8.3f);
+
+      Persona perso1 = new Persona();
+      Persona perso2 = new Persona("Pepe", "Pérez");
+      Persona perso3 = new Persona("Alejandro", "Ruiz", 33);
+      Persona perso4 = new Persona("Miguel", "Gámez", 25, 180, 75f);
+
+      System.out.println(perso1);
+      System.out.println(perso2);
+      System.out.println(perso3);
+      System.out.println(perso4);
+
+   }
+}
 ```
+
+Aquí tenemos la invocación de 3 métodos `Artista` usando sus métodos sobrecargados y también la creación de 4 instancias de `Persona` usando sus constructores sobrecargados.
+
+![21-01](images/21-01.png)
+
+En la salida podemos ver lo que pinta la clase `Artista` para cada argumento pasado y en el caso de las Personas tenemos una persona inicializada vacía, pues nombre y apellidos nulo y el resto de valores iniciales en cero, para la primera persona que creamos con algunos valores se llama Pepe Pérez el resto de valores enteros reales inicializar a 0, en el siguiente caso si se inicializa la edad y por último si estamos inicializando todos los valores.
+
+Podemos utilizar los método sobrecargado de la manera que más nos convenga.
+
+Cerramos está revisita a los objetos y nos lanzamos de lleno hacia un nuevo bloque en el que aprenderemos a hacer Herencia de Clases.
 
 
 ## Contenido adicional 5   
