@@ -143,28 +143,28 @@ public class Punto {
    public Punto(float x, float y) {
       this.x = x;
       this.y = y;
-	 }
+   }
 
-	 public float getX() {
-		  return x;
-	 }
+   public float getX() {
+      return x;
+   }
 
-	 public void setX(float x) {
-		  this.x = x;
-	 }
+   public void setX(float x) {
+      this.x = x;
+   }
 
-	 public float getY() {
-		  return y;
-	 }
+   public float getY() {
+      return y;
+   }
 
-	 public void setY(float y) {
-		  this.y = y;
-	 }
+   public void setY(float y) {
+      this.y = y;
+   }
 
-	 @Override
-	 public String toString() {
-		  return "Punto [x=" + x + ", y=" + y + "]";
-	 }
+   @Override
+   public String toString() {
+      return "Punto [x=" + x + ", y=" + y + "]";
+   }
 }
 ```
 
@@ -204,26 +204,26 @@ public class Rectangulo {
 	
    private Punto[] puntos;
 	
-	 public Rectangulo(Punto p1, Punto p2, Punto p3, Punto p4) {
-		  puntos = new Punto[]{p1, p2, p3, p4};
-	 }
+   public Rectangulo(Punto p1, Punto p2, Punto p3, Punto p4) {
+      puntos = new Punto[]{p1, p2, p3, p4};
+   }
 
-	 public Rectangulo(Punto[] puntos) {
-		  this.puntos = puntos;
-	 }
+   public Rectangulo(Punto[] puntos) {
+      this.puntos = puntos;
+   }
 
-	 public Punto[] getPuntos() {
-		  return puntos;
-	 }
+   public Punto[] getPuntos() {
+      return puntos;
+   }
 
-	 public void setPuntos(Punto[] puntos) {
-		  this.puntos = puntos;
-	 }
+   public void setPuntos(Punto[] puntos) {
+      this.puntos = puntos;
+   }
 
-	 @Override
-	 public String toString() {
-		  return "Rectangulo [puntos=" + Arrays.toString(puntos) + "]";
-	 }
+   @Override
+   public String toString() {
+      return "Rectangulo [puntos=" + Arrays.toString(puntos) + "]";
+   }
 }
 ```
 
@@ -235,9 +235,17 @@ Cómo podemos ver en base al tipo de retorno en Java podemos devolver un valor v
 
 ![17_Argumentos_y_tipos_de_retorno-7](images/17_Argumentos_y_tipos_de_retorno-7.png)
 
+
+
+Pasemos a hablar ahora del paso de argumentos, es decir que un método puede recibir una serie de argumentos de entrada para para poder hacer alguna operaciones con ella y es que en muchas ocasiones un método de una clase no va a trabajar solamente con las propiedades internas de esa instancia de la clase, sino que va a recibir algún tipo de valor externo para complementar esos valores con los valores internos y realizar algún tipo de operación, puede ser una operación de inicializacion, cálculo, el seteo de un valor de cualquier tipo que nos pudiéramos imaginar. También hemos visto métodos que no reciben argumento un ejemplo claro era los método getters, solamente tenemos que indicar que se abre y cierra paréntesis y que no va a haber nada en medio.
+
+El máximo número de argumentos que pueden recibir un método es de 255, yo no recomiendo que jamás llegar a esa cantidad de valores, porque seguramente entonces no estamos diseñando bien el método y podamos fraccionar eso en otros métodos que vayan trabajando de otra manera y el tipo de datos que se puede recibir en una clase son tipo primitivo, arrays, clase o cualquier combinación de ellos.
+
+En la diapositiva tenemos un ejemplo de un método que crearía a partir de un array de puntos indicando, la esquina, crearía un rectángulo, está recibiendo un array de instancias de puntos.
+
 ![17_Argumentos_y_tipos_de_retorno-8](images/17_Argumentos_y_tipos_de_retorno-8.png)
 
-pasemos a hablar ahora del paso de argumentos decir que un método puede recibir una serie de argumentos de entrada para para poder hacer alguna operaciones con ella y es que en muchas ocasiones un método de una clase no va a trabajar solamente con las propiedades internas de esa instancia de la clase sino que va a recibir algún tipo de valor externo para complementar el zócalo el forro paral interno y el realizar algún tipo de operación puede ser una operación de inicializacion cálculo el valor de cualquier tipo que nos pudiéramos imaginar también hemos visto métodos que no reciben argumento por ejemplo claro era los método que está vale no recibe ningún tipo de argumento por lo cual solamente tenemos que indicar que se abre y cierra paréntesis y que no va a haber nada en medio el máximo número de argumentos que pueden recibir un método es D255 yo no recomiendo que jamás diga a esa cantidad de valores porque seguramente entonces no estamos diseñando bien el metro y podamos fraccionar eso en otros métodos que vayan trabajando dentro de otra manera y el tipo de datos que se puede recibir en una clase son tipo primitivo arrays clase o cualquier combinación de ellos aquí tenemos en la play un ejemplo de un método que crearía el constructor de nosotros antes a partir de un array de puntos indicando la esquina crearía un rectángulo está recibiendo una raíz de instancia de puntos no también existe desde hace varias versiones de Java la posibilidad de definir un método que va a recibir un número arbitrario de argumentos de un determinado tipo utilizado alguno de ellos que vienen lo hemos hecho sin quizás sin conocerlo muy bien o o sin haberlo sabido apreciar no podemos tener un método que bueno a priori no sabemos cuántos argumentos de un mismo tipo va a recibir ninguno 112 etcétera no bueno pues a este concepto de un número variable de argumentos se me llama para simplemente me voy a hacer anotación de 3 puntos seguidos cómo podemos ver en pantalla podríamos tener en lugar de para la clase rectángulo podemos intentar definir un polígono en base a una serie de puntos pero los polígonos pueden ser de diferente número de lados el número de lados vendría delimitado por la cantidad de puntos que nosotros pudiéramos marcar como como esquinas no un rectángulo ya sabemos que tiene cuatro puntos que delimitan su vecina triángulo tres y a partir de ahí podríamos ir incrementando en función del número de esquina el número de lados que tendría ese pollito en lugar de crear un método para cada uno de los lados del polígono o en lugar de crear un método que recibe un array de de punto nos podemos plantear el implementar un método que reciba un parar vale si bien es cierto que de manera interna parar la funcionar dentro del método que se recibe como si fuera una
+También existe desde hace varias versiones de Java la posibilidad de definir un método que va a recibir un número arbitrario de argumentos de un determinado tipo utilizado alguno de ellos que vienen lo hemos hecho sin quizás sin conocerlo muy bien o o sin haberlo sabido apreciar no podemos tener un método que bueno a priori no sabemos cuántos argumentos de un mismo tipo va a recibir ninguno 112 etcétera no bueno pues a este concepto de un número variable de argumentos se me llama para simplemente me voy a hacer anotación de 3 puntos seguidos cómo podemos ver en pantalla podríamos tener en lugar de para la clase rectángulo podemos intentar definir un polígono en base a una serie de puntos pero los polígonos pueden ser de diferente número de lados el número de lados vendría delimitado por la cantidad de puntos que nosotros pudiéramos marcar como como esquinas no un rectángulo ya sabemos que tiene cuatro puntos que delimitan su vecina triángulo tres y a partir de ahí podríamos ir incrementando en función del número de esquina el número de lados que tendría ese pollito en lugar de crear un método para cada uno de los lados del polígono o en lugar de crear un método que recibe un array de de punto nos podemos plantear el implementar un método que reciba un parar vale si bien es cierto que de manera interna parar la funcionar dentro del método que se recibe como si fuera una
 
 
 Embarazo para funcionar dentro del método que se recibe como si fuera una vamos a ver por ejemplo que nos pueda mostrar nevará de quisiéramos tener un método que pudiera imprimir una serie de cadenas de caracteres por consola independientemente del número de cadena de caracteres que recibiera pues te la primera todas lo podríamos hacer de esta manera como aquí estamos recibiendo una serie de mensajes pero en lugar de hacerlo en un stream lo hacemos con un varal no delimitados como tipo este punto.. y posteriormente el nombre de ese para es importante destacar que cuando un método incluye un número variable de argumentos tiene que ser el último argumento que reciba de no ser así nos habríamos diferencia pusiéramos algo de este tipo no sabría diferenciar bien el cava cuál es cuál pertenece al bar y cual pertenece a otro incluso con otro tipo de gato con lo cual si queremos recibir varios argumentos por separado y un bar el bar tiene que ser el último ver si los pusiéramos al principio no tendríamos ningún tipo de inconveniente para poder cómo utilizar un método que está definido con barato pues lo podemos hacer de esta manera le podemos pasar tantas cadenas de caracteres como nosotros deseemos aquí estamos pasando dos aquí lo estamos pasando tres aquí lo pasamos una aquí puso ninguna a la hora de trabajar con él como hemos dicho este baratos se puede trabajar con él como si fuera un array de hecho tiene su propiedad Leo y las propiedades que hemos tenido antes con los diferentes atrás y no le podríamos dar el tratamiento de un tribunal bueno pues tenemos la posibilidad de utilizar este este sistema para para imprimir una serie de mensajes no quizá quede más claro para para que te den en una en una sola línea una final aquí siempre peces la primera llamada al método esta es la segunda llamada al método está en la tercera y la última no produciría ningún mensaje no solamente haría un salto un salto de línea terminamos este apartado de argumento y tipos de retorno si viene en el siguiente vídeo vamos a seguir hablando de la recepción de argumento y qué es eso del paso por valor y paso por referencia
