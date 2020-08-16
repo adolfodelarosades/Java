@@ -606,9 +606,75 @@ Supongamos que tenemos este código.
 
 ![19-01](images/19-01.png)
 
-como podemos ver tenemos tres paquetes diferentes uno llamado paquete C otro llamado modificadores y otro paquete que tiene dentro un paquete paquete recordemos que teníamos la posibilidad de usar público privado protegido y por defecto como no vamos a tener herencia en ningún caso vamos a usar protegido vale vamos a usar público privado y por defecto vale comencemos por la clase a la clase A está definida en el paquete a qué es un su paquete de modificadores su modificador de Acceso Este por defecto es decir que todas las clases del mismo paquete podrían acceder a esta clase A y además un método y su propiedad también con modificador por defecto es decir cualquier clase de ese paquete podría acceder a ellas no si intentamos desde una clase que está ubicada en otro paquete aunque sean paquetes que estén relacionados no paquete a es un SUV paquete de modificadores si intentamos acceder a ella desde fuera de su paquete directamente ya eclipse no indica que no es posible acceder porque no está definida dentro del mismo paquete si creáramos otra clase nueva paquete y quisiéramos crear una nueva instancia de a como propiedad de dentro del mismo paquete dentro del mismo paquete
+Como podemos ver tenemos tres paquetes diferentes:
+
+* `modificadores`
+* `modificadores.paquetea`
+* `paquetec`
+
+Recordemos que teníamos la posibilidad de usar `public`, `protected`, sin modificador llamado por defecto o `private`, como no vamos a tener herencia en ningún caso vamos a usar `protected`, vamos a usar `public`,  `private` y por defecto.
+
+Comencemos con la clase `A`.
+
+*`A`*
+
+```java
+package modificadores.paquetea;
+
+public class A {
+	
+   String a;
+
+   A() {
+      a = "Hola desde A";
+   }
+
+   void setA(String a) {
+      this.a = a;
+   }
+
+   String getA() {
+      return this.a;
+   }
+	
+}
+```
+
+
+La clase `A` está definida en el paquete `modificadores.paquetea`, `paquetea` es un subpaquete del paquete `modificadores`. El modificador de Acceso de la clase `A` es por defecto, es decir que todas las clases del mismo paquete podrían acceder a esta clase `A` y además sun métodos y su propiedad también estan definidas con modificador por defecto, es decir cualquier clase de ese paquete podría acceder a ellas.
+
+Si intentamos desde una clase que está ubicada en otro paquete, aunque sean paquetes que estén relacionados `paquetea` es un subpaquete del paquete `modificadores`, si intentamos acceder a ella desde fuera de su paquete, directamente ya Eclipse nos indica que no es posible acceder, porque no está definida dentro del mismo paquete. Como en el caso de la clase `Modificadores`
+
+```java
+// A a = new A(); //A no es accesible, aunque esté en un subpaquete
+```
+
+O en el caso de la clase `B`.
+
+```java
+// String aMasB(A a) { return a.getA() + b; }
+```
+
+Si intentamos usar la clase `A` desde la clase `D` que esta en el mismo paquete y quisiéramos crear una nueva instancia de `A` como propiedad de esta clase `D` si que podríamos por que estan dentro del mismo paquete.
+
+*`D`*
+
+```java
+package modificadores.paquetea;
+
+public class D {
+   // Dentro del mismo paquete sí que podemos usar A
+   A a;
+}
+```
+
 
 Está dentro del paquete modificadores se parece mucho a a la clase vale y siendo como es con modificadores por defecto y que la podríamos utilizar desde la clase B como hemos visto si son clases que están dentro del mismo paquete y la podríamos utilizar aquí dentro de la clase de la clase B aunque fuera para recibirlo como argumento de un método en principio no podríamos utilizarlo vale porque ya digo que están marcados con el modificador por defecto no flashea y por ende no podríamos pensar en el caso de la Clase C es una clase pública con su atributo C con modificador privado y los métodos públicos esta sería la manera más usual de crear una clase y como podemos comprobar me modificadores podríamos poder acceder directamente hace y lo haríamos de una manera conveniente en base a lo que sabemos ya de encapsulación he estado aquí hemos creado una instancia de vez y al ser su modificador por defecto desde otra clase en el mismo paquete podríamos acceder directamente al menos esta opción no suele ser recomendable en prácticamente ningún caso vale también podíamos hacer el directamente sobre todo les comentamos esta línea podemos ver como ya tendríamos un error de compilación y es que la el atributo C no es por defecto ni público con lo cual no podemos acceder a él sí que lo podríamos hacer que sería la opción siempre más más recomendable no estaré aquí y con esto terminamos de conocer los modificadores de acceso público y privado protegido y por defecto y nos lanzamos a conocer en el uso de métodos y de atributo estático
+
+*`A`*
+
+```java
+```
 
 # 20. Métodos estáticos y variables estáticas 8:19 
 
