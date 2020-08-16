@@ -37,15 +37,15 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * 14 Conoce Java API Docs 9:57 
    * 15 Uso de la clase String 13:03 
    * 16 Manejo de Arrays 23:09 
-   * 17 Práctica: Creando el juego de hundir la flota 31:16 
+   * Práctica: Creando el juego de hundir la flota 31:16 
    * Contenido adicional 4
 
 5. [Revisitando clases y objetos](101_Java_8_desde_Cero/05_Revisitando_clases_y_objetos.md) 49m
-   * 18 Argumento de un método y tipos de retorno 13:36 
-   * 19 Paso de argumento por valor y referencia 8:18 
-   * 20 Modificadores de acceso 12:39 
-   * 21 Métodos estáticos y variables estáticas 8:19 
-   * 22 Sobrecarga de métodos y constructores 7:07 
+   * 17 Argumento de un método y tipos de retorno 13:36 
+   * 18 Paso de argumento por valor y referencia 8:18 
+   * 19 Modificadores de acceso 12:39 
+   * 20 Métodos estáticos y variables estáticas 8:19 
+   * 21 Sobrecarga de métodos y constructores 7:07 
    * Contenido adicional 5
 
 6. [Uso de herencia](101_Java_8_desde_Cero/06_Uso_de_herencia.md) 64m
