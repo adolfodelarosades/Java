@@ -341,22 +341,22 @@ Los argumentos de tipo primitivo, como `int` o `double`, siempre se pasan por va
 ```java
 public class PasoPorValor {
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
 
-        int x = 3;
+      int x = 3;
 
-        //invocamos el argumento y le pasamos x
-        pasoPorValor(x);
+      //invocamos el argumento y le pasamos x
+      pasoPorValor(x);
 
-        //imprimimos x y vemos si el parámetro ha cambiado
-        System.out.println("Después de invocar pasoPorValor, x = " + x);
+      //imprimimos x y vemos si el parámetro ha cambiado
+      System.out.println("Después de invocar pasoPorValor, x = " + x);
 
-    }
+   }
 
-    // cambiamos el valor en el método
-    public static void pasoPorValor(int p) {
-        p = 10;
-    }
+   // cambiamos el valor en el método
+   public static void pasoPorValor(int p) {
+      p = 10;
+   }
 }
 ```
 
@@ -368,12 +368,12 @@ Si en lugar de tipos primitivos, pasamos objetos, estos también se pasan por va
 
 ```java
 public void moveCircle(Circle circle, int deltaX, int deltaY) {
-    // code to move origin of circle to x+deltaX, y+deltaY
-    circle.setX(circle.getX() + deltaX);
-    circle.setY(circle.getY() + deltaY);
+   // code to move origin of circle to x+deltaX, y+deltaY
+   circle.setX(circle.getX() + deltaX);
+   circle.setY(circle.getY() + deltaY);
 
-    // code to assign a new reference to circle
-    circle = new Circle(0, 0);
+   // code to assign a new reference to circle
+   circle = new Circle(0, 0);
 }
 
 //...
@@ -387,11 +387,152 @@ Primero, modificamos los valores X e X del círculo, y posteriormente, asignamos
 
 ![18_Paso_por_valor_y_referencia-1](images/18_Paso_por_valor_y_referencia-1.png)
 
+Vamos a hablar ahora en este curso de Java 8 del paso de argumentos por valor o por referencia.
+
 ![18_Paso_por_valor_y_referencia-2](images/18_Paso_por_valor_y_referencia-2.png)
+
+Vamos a diferenciar primero que significa **paso por valor** o **por referencia** como hemos visto en la lección anterior, los métodos pueden recibir una serie de argumentos, pueden recibir ninguno, uno o varios dependiendo de la operación que nosotros vayamos a realizar.
+
+Hablamos de paso por valor cuando nosotros recibimos una serie de argumentos y Java realiza una copia de esas variables y al finalizar el método está copia se destruye, es decir nosotros le proporcionamos uno o varios valores, Java no van a modificar sus valores, Java copia esos valores y trabaja con ellos, se puede modificar está copia, se puede setear un nuevo valor, podemos incrementar o decrementar su valor, sin embargo cuándo termina la ejecución de este método esa copia se destruye. todo funciona mediante un marco de ejecución que se van anidando en una estructura de la memoria que se llama la PILA.
+
+Basta con saber que cuando se hace un paso por valor se hace una copia de la variable y cuando termina el método esa copia se destruye.
+
+Hablaríamos de paso por referencia cuando no se realiza una copia de las variables si no lo que estamos haciendo es modificar directamente la variable que hemos pasado y esos valores quedan modificados al finalizar el método.
+
+En la diapositiva esta en color diferente porque el paso por referencia que si existe en otros lenguajes de programación por ejemplo aquellos que hayáis programada en C o en C++ que sabe que si es posible, **en Java el paso por referencia no existe** solamente existe el paso por valor.
+
+Y porque ver los dos, bueno esta pregunta nos puede surgir, si tenemos que tener presente que **el paso de cualquier valor va a ser por valor pero vamos a diferenciar entre tipo primitivo y el paso de objetos**.
+
 
 ![18_Paso_por_valor_y_referencia-3](images/18_Paso_por_valor_y_referencia-3.png)
 
+Como habíamos dicho los pasos de variables siempre se hacen por valor, qué sucede si hacemos el paso de tipos primitivos, bueno en este código de ejemplo que vamos a ejecutar ahora si tenemos una variable `x` que inicializamos con el valor 3, y si se la proporcionamos al método `pasoPorValor` podemos ver que el parámetro formal del método `pasoPorValor(int p)` lo hemos llamado `p` y bueno este método es lo que está haciendo es setear un nuevo valor a `p` como el paso se produce por valor, realmente cuando invocamos a este método este valor de `p` es una copia del valor de `x` con lo cual no es la misma variable, sino que lo que tiene es el mismo valor, cuando nosotros asignamos un valor de 10, cambia de manera efectiva el valor de `p`, pero no cambia el valor de `x`, con lo cual cuando termina la ejecución de de este método se destruye la variable `p` y `x` sigue valiendo 3, cómo vamos a poder comprobar ahora mismo.
+
+### :computer: `101-18-PasoPorValorOReferencia`
+
+*`PasoPorValor`*
+
+```java
+package valoryreferencia;
+
+public class PasoPorValor {
+   public static void main(String[] args) {
+
+      int x = 3;
+
+      // invocamos el argumento y le pasamos x
+      pasoPorValor(x);
+
+      // imprimimos x y vemos si el parámetro ha cambiado
+      System.out.println("Después de invocar pasoPorValor, x = " + x);
+
+   }
+
+   // cambiamos el valor en el método
+   public static void pasoPorValor(int p) {
+      p = 10;
+   }
+
+}
+```
+
+![18-01](images/18-01.png)
+
+Podemos comprobar como el valor de `x` después de invocar al método `pasoPorValor` sigue valiendo 3, aunque nosotros lo hayamos setteado a 10 en el método `pasoPorValor` y es que como deciamos el paso de tipo primitivos se hace por valor.
+
 ![18_Paso_por_valor_y_referencia-4](images/18_Paso_por_valor_y_referencia-4.png)
+
+Qué pasa con los objetos, **el paso de objetos también se hace por valor**, pero aquí hay que tener en cuenta que es lo que nosotros estamos pasando, cuando nosotros pasamos un objeto a través de un método como argumento, lo que **estamos pasando es una referencia**, recordemos el concepto de referencia que era bueno una variable que nos permitía acceder al objeto que estaba en otras zonas de memoria, con lo cual mediante este paso por valor lo que no vamos a poder modificar dentro del método es esa referencia, es decir si cambiamos a qué objeto está apuntando esa referencia pues perderemos ese cambio cuando el método termine su ejecución, sin embargo si dentro del método modificamos algo del interior del objeto referenciado esos cambios si van a perdurar cuando nosotros terminemos la ejecución del método con lo cual aunque el paso también se ha por valor los objetos si pueden ser modificados dentro de los métodos. Repito lo que no podemos hacer es que esta referencia al terminar el método apuntara a otro objeto diferente del mismo tipo, va a seguir al mismo, pero el interior del objeto si se va a ver modificado si nosotros lo queremos.
+
+### :computer: `101-18-PasoPorValorOReferencia`
+
+Por ejemplo aquí tenemos la posibilidad de trabajar con una clase `Circulo` un `Circulo` viene delimitado por un punto del centro del círculo y por un radio, con varios constructores con sus métodos getters y sus métodos setters.
+
+*`Circle`*
+
+```java
+package valoryreferencia;
+
+public class Circle {
+   private int x;
+   private int y;
+   private int radius;
+
+   public Circle(int x, int y) {
+      super();
+      this.x = x;
+      this.y = y;
+      this.radius = 1;
+   }
+
+   public Circle(int x, int y, int radius) {
+      super();
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+   }
+
+   public int getX() {
+      return x;
+   }
+
+   public void setX(int x) {
+      this.x = x;
+   }
+
+   public int getY() {
+      return y;
+   }
+
+   public void setY(int y) {
+      this.y = y;
+   }
+
+   public int getRadius() {
+      return radius;
+   }
+
+   public void setRadius(int radius) {
+      this.radius = radius;
+   }
+
+   @Override
+   public String toString() {
+      return "Circle [x=" + x + ", y=" + y + ", radius=" + radius + "]";
+   }
+}
+```
+
+*`PasoPorReferencia`*
+
+```java
+package valoryreferencia;
+
+public class PasoPorReferencia {
+	
+   public static void main(String[] args) {
+      Circle circle = new Circle(2,3);	
+      System.out.println(circle);
+      moveCircle(circle, 23, 56);
+      System.out.println(circle);
+   }
+	
+   public static void moveCircle(Circle circle, int deltaX, int deltaY) {
+      // code to move origin of circle to x+deltaX, y+deltaY
+      circle.setX(circle.getX() + deltaX);
+      circle.setY(circle.getY() + deltaY);
+
+      // code to assign a new reference to circle
+      circle = new Circle(0, 0);
+   }
+}
+```
+
+![18-02](images/18-02.png)
+
+En el `PasoPorReferencia` nos podríamos hacer un círculo, en el punto (2,3), imprimir donde esta este círculo, si quisiéramos mover el círculo, estamos pasando la instancia del círculo a un método `moveCircle` junto con la cantidad que queremos mover dicho círculo y después lo imprimimos.
+
+**El  método `moveCircle(Circle circle, int deltaX, int deltaY)` recibe la referencia `circle` que se pasa por valor, se hace una copia de la referencia, pero claro aquí lo que tendríamos son dos referencias apuntando a un mismo objeto, sin embargo si modificamos a través de esta segunda referencia el objeto y si se van a modificar los valores, de hecho aquí si le sumamos 23 a la `x` y 56 a `y` vamos a poder ver que aunque al final creemos una nueva referencia y la almacenemos en círculo, cuando imprimamos círculo, el valor no va a ser ni (0,0) ni siquiera va a ser el de (2,3) sino que el círculo se va haber modificado, cuando imprimimosla primera vez el círculo está en (2,3), al imprimirlo esta segunda vez hemos sumado 23 + 2 = 25 y 56 + 3 =59 sería del lugar donde hemos desplazado ese el círculo, de forma que podemos comprobar como utilizando está copia de la referencia, si podemos modificar el interior de un objeto y lo que no podríamos modificar es la referencia, que aunque hagamos una nueva asignación, esto se pierde cuando se termina y círculo afuera sigue apuntando a la misma referencia**.
 
 # 19. Modificadores de acceso 12:39 
 
