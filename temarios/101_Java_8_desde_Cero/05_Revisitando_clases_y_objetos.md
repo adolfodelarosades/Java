@@ -602,7 +602,7 @@ A nivel de atributo sucede lo contrario, y es que en la gran mayoría de las oca
 
 Vamos a ver un ejemplo de varias clases, con diferentes tipos de modificadores de clase, que estén en el mismo paquete, que estén en diferentes paquetes y como podrían interaccionar.
 
-### :computer `101-19-Modificadores`
+### :computer: `101-19-Modificadores`
 
 Supongamos que tenemos este código.
 
@@ -777,8 +777,6 @@ public class Modificadores {
    }
 }
 ```
-
-![19-01](images/19-01.png)
 
 Fijemos como creamos una instancia de `B` y al ser su modificador por defecto podriamos acceder directamente a los atributos con `b.b` aunque esta opción no suele ser recomendable en casi ningún caso. En cambio en el caso de la clase `C` no podemos hacer lo mismo ya que el atributo `c` no lo declaramos ni público, ni por defecto lo declaramos privado por lo cual no podemos accederlo directamente lo hacemos a través de su método `c.getC()` que es lo recomendable.
 
@@ -957,23 +955,22 @@ Java permite que una clase tenga dos o más metodos con el mismo nombre, siempre
 ```java
 public class Artista {
 
+   public void dibuja(String s) {
+      System.out.println(s);
+   }
 
-    public void dibuja(String s) {
-        System.out.println(s);
-    }
+   public void dibuja(int i) {
+      System.out.println(i);
+   }
 
-    public void dibuja(int i) {
-        System.out.println(i);
-    }
+   public void dibuja(double f) {
+      System.out.println(f);
+   }
 
-    public void dibuja(double f) {
-        System.out.println(f);
-    }
-
-    public void dibuja(int i, double f) {
-        System.out.println(i);
-        System.out.println(f);
-    }
+   public void dibuja(int i, double f) {
+      System.out.println(i);
+      System.out.println(f);
+   }
 
 }
 ```
@@ -985,37 +982,35 @@ También permite tener varios constructores por clase, que siguen las mismas reg
 ```java
 public class Persona {
 
-    private String nombre;
-    private String apellidos;
-    private int edad;
-    private int altura;
-    private float peso;
+   private String nombre;
+   private String apellidos;
+   private int edad;
+   private int altura;
+   private float peso;
 
+   public Persona() {
+   }
 
-    public Persona() {
-    }
+   public Persona(String nombre, String apellidos) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+   }
 
-    public Persona(String nombre, String apellidos) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-    }
+   public Persona(String nombre, String apellidos, int edad) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+      this.edad = edad;
+   }
 
+   public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+      this.edad = edad;
+      this.altura = altura;
+      this.peso = peso;
+   }
 
-    public Persona(String nombre, String apellidos, int edad) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.edad = edad;
-    }
-
-    public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.edad = edad;
-        this.altura = altura;
-        this.peso = peso;
-    }
-
-  //...
+   //...
 }
 ```
 
@@ -1023,13 +1018,149 @@ public class Persona {
 
 ![21_Sobrecarga_de_metodos_y_constructores-1](images/21_Sobrecarga_de_metodos_y_constructores-1.png)
 
+Cerrando este bloque de revisitación de los objetos vamos a hablar de la sobrecarga de métodos y constructores.
+
 ![21_Sobrecarga_de_metodos_y_constructores-2](images/21_Sobrecarga_de_metodos_y_constructores-2.png)
+
+
+
+Hablamos de **sobrecarga** cuando decimos que un determinado método puede estar implementado más de una vez, sino que bueno que tengamos varios métodos con el el mismo nombre y es que Java soporta esa posibilidad, que dos o más métodos que en principio son diferentes tienen implementaciones diferentes que tengan el mismo nombre, que tiene que ser diferentes sus firmas, es decir el número de argumentos que reciba tiene que ser distinto o bien el mismo número de argumentos, alguno de los tipos de los argumentos tiene que ser diferente, porque si los métodos tuvieran el mismo nombre y la misma firma serían indistinguible, de manera qué bueno esto no va a dar la posibilidad de que tengamos un método cuyo nombre sea común y que reciba diferentes tipos o diferente números de argumentos.
+
+Si bien Java permite totalmente su uso, no lo recomienda utilizar de manera masiva porque el código se vuelve bastante difícil de leer, se vuelve menos legible. 
 
 ![21_Sobrecarga_de_metodos_y_constructores-3](images/21_Sobrecarga_de_metodos_y_constructores-3.png)
 
-Fernando este bloque de revisitación no de risitas de los objetos vamos a hablar de la sobrecarga de métodos y te consulto hablamos de sobrecarga cuando decimos que un determinado método puede estar implementado no más de una vez sino que bueno que tengamos varios métodos con el con el mismo nombre y es que Java soporta soporta esa posibilidad no que dos o más metros que en principio son diferentes tienen implementaciones diferentes que tengan el mismo nombre que tiene que ser diferente su firma es decir el número de argumentos que reciba tiene que ser distinto o bien a mismo número de argumento alguno de los tipos de los argumentos tiene que ser diferente porque si los métodos tuvieran el mismo nombre y la misma firma serían indistinguible de manera que qué buena está no pagar la posibilidad de de que tengamos un método cuyo nombre sea como y recibas diferentes tipo o diferente número de argumentos y bien java permite totalmente su uso no lo recomienda utilizar pelotas de manera masiva porque el código se vuelve bastante difícil de teléfono se vuelve menos legible lo podemos usar para cualquier método incluido también los constructores la sobrecarga de constructores y es muy habitual porque hemos podido comprobar que el constructor se llama siempre como como la clase entonces es cierto que podríamos implementar diferentes maneras de construir un mismo objeto recibiendo tanto los parámetros inicializando trabajo a valores por defecto recogiendo todos los valores no recogiendo ninguno vale vamos a poder tener diferente diferentes constructores de diferente manera de construir un mismo objeto función de los argumentos que reciban la sobrecarga de constructores sigue en las mismas normales de la sobrecarga de la firma final no puede no puede ser la vamos a ver un ejemplo en el que vamos a sobrecargar metodos cualquiera y constructores de una clase 3a en el caso de venta clase que podríamos llamar al dentista y que se dedica a dibujar tendríamos 4 metros que tiene pero que su firma final es distinta por ejemplo estos tres métodos el mismo número de argumento tiene dos pero si comparamos estos métodos A2 podemos ver como nunca persona para los tipos de tanto no esté doble y aquí en este caso así tendríamos que tener todo dibuja dos argumentos diferentes
+Lo podemos usar para cualquier método incluido también los constructores, la sobrecarga de constructores si es muy habitual porque hemos podido comprobar que el constructor se llama siempre como la clase, entonces es cierto que podríamos implementar diferentes maneras de construir un mismo objeto, recibiendo tanto los parámetros, inicializando otros a valores por defecto, recogiendo todos los valores, no recogiendo ninguno,  vamos a poder tener diferentes constructores, de diferentes manera de construir un mismo objeto, en función de los argumentos que reciba. 
+
+La sobrecarga de constructores sigue las mismas normas de la sobrecarga del método es decir el nombre es común pero la firma final no puede ser la misma.
+
+### :computer: `101-21-Sobrecarga`
+
+Vamos a ver un ejemplo en el que vamos a sobrecargar métodos cualquiera y constructores de una clase `Persona`.
+
+En el caso de esta clase `Artista` y que se dedica a dibujar tendríamos 4 métodos que tiene el mismo nombre `dibuja` pero que su firma final es distinta, por ejemplo los tres primeros métodos tienen el mismo número de argumento uno pero no se solapan el tipo de argumento y el final tiene dos. 
+
+*`Artista`*
+
+```java
+package sobrecarga;
+
+public class Artista {
+   public void dibuja(String s) {
+      System.out.println(s);
+   }
+
+   public void dibuja(int i) {
+      System.out.println(i);
+   }
+
+   public void dibuja(double f) {
+      System.out.println(f);
+   }
+
+   public void dibuja(int i, double f) {
+      System.out.println(i);
+      System.out.println(f);
+   }
+}
+```
+
+Si pasamos a la sobrecarga de Costructores podemos ver la clase `Persona`:
+
+*`Persona`*
+
+```java
+package sobrecarga;
+
+public class Persona {
+   private String nombre;
+   private String apellidos;
+   private int edad;
+   private int altura;
+   private float peso;
+
+   public Persona() {
+   }
+
+   public Persona(String nombre, String apellidos) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+   }
+
+   public Persona(String nombre, String apellidos, int edad) {
+//    this.nombre = nombre;
+//    this.apellidos = apellidos;
+      this(nombre, apellidos);
+      this.edad = edad;
+   }
+
+   public Persona(String nombre, String apellidos, int edad, int altura, float peso) {
+//    this.nombre = nombre;
+//    this.apellidos = apellidos;
+//    this.edad = edad;
+      this(nombre, apellidos, edad);
+      this.altura = altura;
+      this.peso = peso;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getApellidos() {
+      return apellidos;
+   }
+
+   public void setApellidos(String apellidos) {
+      this.apellidos = apellidos;
+   }
+
+   public int getEdad() {
+      return edad;
+   }
+
+   public void setEdad(int edad) {
+      this.edad = edad;
+   }
+
+   public int getAltura() {
+      return altura;
+   }
+
+   public void setAltura(int altura) {
+      this.altura = altura;
+   }
+
+   public float getPeso() {
+      return peso;
+   }
+
+   public void setPeso(float peso) {
+      this.peso = peso;
+   }
+
+   @Override
+   public String toString() {
+      return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad + ", altura=" 
+                                + altura + ", peso=" + peso + "]";
+   }
+}
+```
 
 Que nos proporciona a través de dibujar Manuela llamada podemos ver como aquí tenemos las cuatro posibilidades de llamar a a dibujar y pasamos a la sobrecarga de constructores podemos comprobar como si quisiéramos crear una clase persona dónde almacenar amo su nombre su apellido su edad su altura y su peso podríamos plantearnos diferentes formas de construir una persona la primera y que suele ser muy muy habitual yo incluso os recomiendo que la que la podéis utilizar cuando trabajamos con algunos tipos de frameworks como spring o hoy ver net es muy recomendable que tengamos un constructor vacío si además tenemos un constructor parámetro yo diría que en algunos conceptos no es solamente recomendable si no obligatorio vale porque es curioso que haga si no creamos para una determinada clase un constructor es capaz de construir objetos con un constructor de esa manera pero si creamos un constructor con parámetros olvida de alguna manera cómo conseguir objeto con un constructor sin parámetros no así que se lo teníamos que proporcionar explícitamente bueno podríamos crear una persona de esta forma proporcionando solamente el nombre y lo apellido proporcionando el nombre los apellidos y la era vale este código está autogenerado con Eclipse está todo en línea de aquí la podríamos sustituir como ya conocíamos para reutilizar los constructores mediante el uso de ti no dónde lo que estábamos haciendo es invocar a este constructor de aquí arriba no y lo mismo podríamos hacer aquí abajo no estas tres líneas primera las podríamos sustituir vale para que llamar aquí arriba eclipse a la hora de autogenerar el código no no se suele para eso sino que el cuerpo lo hace de una manera más sencilla llamando a cada una de las propiedades pero bueno si nosotros les liberamos a mano o si tuviéramos algún tipo de lógica de negocio asociada a la construcción de un objeto lo podíamos hacer de esta manera cómo podemos comprobar tenemos cuatro constructores distintos para personas una semana metro uno con dos otro con 3 y otro con todos los parámetros de la inicialización de todos los atributos de esa persona aquí tenemos la creación de cuatro personas utilizando cada uno de los constructores no y si la salida podemos ver cómo tenemos aquí que una persona inicializada vacía pues nombre y apellidos nulo y el resto de valores iniciales en acero para para la primera persona que creamos con algunos valores se llama Pepe Pérez el resto de valores entero reales inicializar a 0 en este caso si se inicializa la edad vale aquí por último si estamos inicializando todos los valores podemos probar podemos utilizar los método sobrecargado de la manera que más que más nos convenga con este vídeo cerramos está re visita a los objetos y nos lanzamos de lleno hacia un nuevo bloque en el que aprenderemos a hacer herencia de clase
+
+
+
+
+
+*`Sobrecarga`*
+
+```java
+```
 
 
 ## Contenido adicional 5   
