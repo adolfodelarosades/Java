@@ -22,7 +22,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * 06 Manipulación de números, caracteres y otros valores IV 15:52 
    * 07 Estructura de decisión 21:22 
    * 08 Estructura de repetición 13:01 
-   * 09 Práctica: Creando una calculadora 11:13 
+   * Práctica: Creando una calculadora 11:13 
    * Contenido adicional  7
    
 3. [Clases y objetos](101_Java_8_desde_Cero/03_Clases_y_objetos.md) 58m :+1:
