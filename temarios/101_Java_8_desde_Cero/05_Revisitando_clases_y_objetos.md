@@ -248,10 +248,53 @@ También existe desde hace varias versiones de Java la posibilidad de definir un
 Podemos tener un método que a priori no sabemos cuántos argumentos de un mismo tipo va a recibir, puede que reciba ninguno, 1, 2, 3, etc., a este concepto de un número variable de argumentos se me llama **`varargs`**.
 Se implementa con la notación de 3 puntos seguidos, cómo podemos ver en pantalla, podríamos tener en lugar de para la clase rectángulo, podemos intentar definir un polígono en base a una serie de puntos, pero los polígonos pueden ser de diferente número de lados, el número de lados vendría delimitado por la cantidad de puntos que nosotros pudiéramos marcar como esquinas, un rectángulo ya sabemos que tiene cuatro puntos que delimitan sus esquinas, un triángulo tres y a partir de ahí podríamos ir incrementando en función del número de esquinas, el número de lados que tendría ese polígono, *en lugar de crear un método para cada uno de los lados del polígono o en lugar de crear un método que recibe un array de de punto* nos podemos plantear el implementar un método que reciba un `varargs`, si bien es cierto que de manera interna un `varargs` va a funcionar dentro del método que se recibe como si fuera un array.
 
+Vamos a ver un ejemplo que nos pueda mostrar esto del `varargs`.
+
+Si quisiéramos tener un método que pudiera imprimir una serie de cadenas de caracteres por consola, independientemente del número de cadena de caracteres que recibiera que las imprimiera todas, lo podríamos hacer de esta manera:
+
+```java
+public static void imprimeMensajes(String... mensajes) {
+   for (String mensaje : mensajes) {
+      System.out.print(mensaje + " ");
+   }
+   System.out.println("");
+}
+```
+
+Estamos recibiendo una serie de mensajes, pero en lugar de hacerlo en un `String` lo hacemos con un `varargs`, lo delimitados como tipo este `String... mensajes`, **es importante destacar que cuando un método incluye un número variable de argumentos tiene que ser el último argumento que reciba** de no ser así, no sabríamos diferenciar, si pusiéramos algo de este tipo.
+
+```java
+public static void imprimeMensajes(String... mensajes, String str) {
+```
+
+No sabría diferenciar bien diferenciar cuál es cuál, cuál pertenece al `varargs` y cual pertenece a otro, incluso con otro tipo de dato.
+
+```java
+public static void imprimeMensajes(String... mensajes, int str) {
+```
+
+Con lo cual si queremos recibir varios argumentos por separado y un `varargs`, el `varargs` tiene que ser el último.
+
+```java
+public static void imprimeMensajes(int str, String... mensajes) {
+```
+
+Si los pusiéramos al principio no tendríamos ningún tipo de inconveniente para poder recibirlo.
+
+Como utilizar un método que está definido con `varargs` pues lo podemos hacer de esta manera.
+
+```java
+public static void main(String[] args) {
+   imprimeMensajes("En un lugar", "de La Mancha");
+   imprimeMensajes("de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo");
+   imprimeMensajes("...");
+   imprimeMensajes();
+}
+```
+
+Le podemos pasar tantas cadenas de caracteres como nosotros deseemos, primero estamos pasando dos, luego le estamos pasando tres, después le pasamos una y por último ninguna. A la hora de trabajar con él como hemos dicho este `varargs` se puede trabajar con él como si fuera un array, de hecho tiene su propiedad `length` y las propiedades que hemos tenido antes con los diferentes arrays y no le podríamos dar el tratamiento de un array.
 
 ### :computer: `101-17-ArgumentosTiposRetorno`
-
-Vamos a ver un ejemplo que nos pueda mostrar esto del `varargs`.
 
 *`ArgumentosTiposRetorno`*
 
@@ -274,15 +317,7 @@ public class ArgumentosTiposRetorno {
 }
 ```
 
- de quisiéramos tener un método que pudiera imprimir una serie de cadenas de caracteres por consola independientemente del número de cadena de caracteres que recibiera pues te la primera todas lo podríamos hacer de esta manera como aquí estamos recibiendo una serie de mensajes pero en lugar de hacerlo en un stream lo hacemos con un varal no delimitados como tipo este punto.. y posteriormente el nombre de ese para es importante destacar que cuando un método incluye un número variable de argumentos tiene que ser el último argumento que reciba de no ser así nos habríamos diferencia pusiéramos algo de este tipo no sabría diferenciar bien el cava cuál es cuál pertenece al bar y cual pertenece a otro incluso con otro tipo de gato con lo cual si queremos recibir varios argumentos por separado y un bar el bar tiene que ser el último ver si los pusiéramos al principio no tendríamos ningún tipo de inconveniente para poder cómo utilizar un método que está definido con barato pues lo podemos hacer de esta manera le podemos pasar tantas cadenas de caracteres como nosotros deseemos aquí estamos pasando dos aquí lo estamos pasando tres aquí lo pasamos una aquí puso ninguna a la hora de trabajar con él como hemos dicho este baratos se puede trabajar con él como si fuera un array de hecho tiene su propiedad Leo y las propiedades que hemos tenido antes con los diferentes atrás y no le podríamos dar el tratamiento de un tribunal bueno pues tenemos la posibilidad de utilizar este este sistema para para imprimir una serie de mensajes no quizá quede más claro para para que te den en una en una sola línea una final aquí siempre peces la primera llamada al método esta es la segunda llamada al método está en la tercera y la última no produciría ningún mensaje no solamente haría un salto un salto de línea terminamos este apartado de argumento y tipos de retorno si viene en el siguiente vídeo vamos a seguir hablando de la recepción de argumento y qué es eso del paso por valor y paso por referencia
-
-
-
-
-
-
-
-
+![17-01](images/17-01.png)
 
 
 # 18. Paso de argumento por valor y referencia 8:18 
