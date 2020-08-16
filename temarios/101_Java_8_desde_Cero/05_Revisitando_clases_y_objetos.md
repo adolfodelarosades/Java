@@ -600,7 +600,9 @@ Sin embargo al hablar de métodos empezamos a poder matizar, si bien la mayoría
 
 A nivel de atributo sucede lo contrario, y es que en la gran mayoría de las ocasiones los atributos serán privados, salvo para las constantes que usualmente las constantes para poder utilizarlas no solamente dentro de nuestra clase sino como comparación fuera de ella, las podíamos marcar como públicas, hay que tener una muy buena razón para no usar `private` como el modificador de acceso de un atributo, ya que el uso de atributos público y no acceder a ellos a través de métodos hace que el código este muy acoplado y por tanto limita la posibilidad de que nosotros modifiquemos ese código en el futuro, lo que se conoce como la refactorización, es decir poder modificar como ese código trabaja por dentro sín que afecte a la gente que lo utiliza, porque si cambiáramos el tipo de dato de esa variable o si cambiáramos el nombre de esa variable dentro del objeto, todo código que lo utilizara por fuera también tendría que ser modificado, sin embargo si cambiamos el nombre pero siempre accedemos a ella a traés de métodos tendríamos que modificar solamente el cuerpo de esos métodos, pero quienes lo utilizaran no tendrían que modificar su código, con lo cual mi recomendación es que siempre trabajemos con atributo en la medida de lo posible privados, ya digo salvo que tengamos una muy buena razón para trabajar con atributos público.
 
-Vamos a ver un ejemplo de varias clases, con diferentes tipos de modificadores de clase, que estén en el mismo paquete, que estén en diferentes paquetes y como podrían interaccionar. 
+Vamos a ver un ejemplo de varias clases, con diferentes tipos de modificadores de clase, que estén en el mismo paquete, que estén en diferentes paquetes y como podrían interaccionar.
+
+### :computer `101-19-Modificadores`
 
 Supongamos que tenemos este código.
 
@@ -669,12 +671,117 @@ public class D {
 ```
 
 
-Está dentro del paquete modificadores se parece mucho a a la clase vale y siendo como es con modificadores por defecto y que la podríamos utilizar desde la clase B como hemos visto si son clases que están dentro del mismo paquete y la podríamos utilizar aquí dentro de la clase de la clase B aunque fuera para recibirlo como argumento de un método en principio no podríamos utilizarlo vale porque ya digo que están marcados con el modificador por defecto no flashea y por ende no podríamos pensar en el caso de la Clase C es una clase pública con su atributo C con modificador privado y los métodos públicos esta sería la manera más usual de crear una clase y como podemos comprobar me modificadores podríamos poder acceder directamente hace y lo haríamos de una manera conveniente en base a lo que sabemos ya de encapsulación he estado aquí hemos creado una instancia de vez y al ser su modificador por defecto desde otra clase en el mismo paquete podríamos acceder directamente al menos esta opción no suele ser recomendable en prácticamente ningún caso vale también podíamos hacer el directamente sobre todo les comentamos esta línea podemos ver como ya tendríamos un error de compilación y es que la el atributo C no es por defecto ni público con lo cual no podemos acceder a él sí que lo podríamos hacer que sería la opción siempre más más recomendable no estaré aquí y con esto terminamos de conocer los modificadores de acceso público y privado protegido y por defecto y nos lanzamos a conocer en el uso de métodos y de atributo estático
+La clase `B` esta dentro del paquete `modificadores` se parece mucho a la clase `A` usa modificadores por defecto.
 
-*`A`*
+*`B`*
 
 ```java
+package modificadores;
+
+public class B {
+
+   String b;
+
+   B() {
+      b = "Hola desde B";
+   }
+
+   String getB() {
+      return b;
+   }
+
+   void setB(String b) {
+      this.b = b;
+   }
+
+   /*
+    * String aMasB(A a) { return a.getA() + b; }
+    */
+
+}
 ```
+
+y ya que esta en el mismo paquete que la clase `Modificadores` como estan en el mismo paquete si podremos usar la clase `B` al contrario que la clase `A` que no la pudimos usar.
+
+*`Modificadores`*
+
+```java
+package modificadores;
+
+import paquetec.C;
+
+public class Modificadores {
+	
+   public static void main(String[] args) {
+
+      // A a = new A(); //A no es accesible, aunque esté en un subpaquete
+      B b = new B();
+      System.out.println(b.b); // Esta opción no suele ser recomendable
+      System.out.println(b.getB());
+ 
+      C c = new C();
+      // System.out.println(c.c); //Si intentamos acceder al atributo, error
+      System.out.println(c.getC());
+
+   }
+}
+```
+
+En el caso de la clase `C`.
+
+*`C`*
+
+```java
+package paquetec;
+
+public class C {
+	
+   private String c;
+
+   public C() {
+      c = "Hola desde C";
+   }
+
+   public String getC() {
+      return c;
+   }
+
+   public void setC(String c) {
+      this.c = c;
+   }
+	
+}
+```
+
+Es una clase pública, con su atributo `C` con modificador privado y los métodos públicos, esta sería la manera más usual de crear una clase y como podemos comprobar desde la clase `Modificadores` podríamos poder acceder directamente a `C` y lo haríamos de una manera conveniente en base a lo que sabemos ya de encapsulación.
+
+*`Modificadores`*
+
+```java
+package modificadores;
+
+import paquetec.C;
+
+public class Modificadores {
+	
+   public static void main(String[] args) {
+
+      // A a = new A(); //A no es accesible, aunque esté en un subpaquete
+      B b = new B();
+      System.out.println(b.b); // Esta opción no suele ser recomendable
+      System.out.println(b.getB());
+ 
+      C c = new C();
+      // System.out.println(c.c); //Si intentamos acceder al atributo, error
+      System.out.println(c.getC());
+
+   }
+}
+```
+
+Fijemos como creamos una instancia de `B` y al ser su modificador por defecto podriamos acceder directamente a los atributos con `b.b` aunque esta opción no suele ser recomendable en casi ningún caso. En cambio en el caso de la clase `C` no podemos hacer lo mismo ya que el atributo `c` no lo declaramos ni público, ni por defecto lo declaramos privado por lo cual no podemos accederlo directamente lo hacemos a través de su método `c.getC()` que es lo recomendable.
+
+Y con esto terminamos de conocer los modificadores de acceso público, privado, protegido y por defecto y nos lanzamos a conocer en el uso de métodos y de atributo estático
 
 # 20. Métodos estáticos y variables estáticas 8:19 
 
