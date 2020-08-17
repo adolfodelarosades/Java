@@ -220,7 +220,7 @@ Tendríamos los metodos getter y setter de los atributos propios de un `Empleado
    }
 ```
 
-Si pasamos a ver ahora la clase `Consultor`.
+Si pasamos a ver ahora la clase `Consultor` tiene en común con la clase `Empleado` que un `Consultor` también extiende de un `Trabajador`, son clases con el mismo padre,  en este caso un `Consultor` que sería algo así como un trabajador externo a la compañía, podríamos plantearlo de esa manera, tendría una serie de horas que trabaja para nuestra empresa y la tarifa que tiene, a la hora de construir tiene en común que tiene que construir con súper la parte común a `Trabajador` y setteariamos los atributos propios y en este caso que habíamos dicho también que íbamos a implementar el método `calcularPaga()` la paga del `Consultor` sería simplemente la tarifa por horas multiplicada por el número de horas.
 
 *`Consultor`*
 
@@ -268,7 +268,48 @@ public class Consultor extends Trabajador {
 }
 ```
 
- de ti ahora ver la clase consulto en la definición tienen como que bueno un empleado encendía de trabajador un consultor también extiende de trabajador son clases que tienen un mismo padre en este caso un consultor que sería algo así como un trabajador externo a la compañía vale podríamos plantear lo de esa manera bueno pues tendría una serie de horas que trabaja para nuestra empresa y y la tarifa que tiene no a la hora de construir tiene en común que tiene que construir con súper la parte común a trabajador y bueno se te haríamos los atributos propios y en este caso que habíamos dicho también que íbamos a implementar el método calcular paga la paga del consultor sería simplemente la tarifa por horas multiplicada por el número de Orange a la hora de crear una serie distancia de esta clase pues podríamos plantearnos en crear un trabajador un empleado y un consultor e interaccionar un poco con ello recordemos que también hemos implementado los métodos presten manera a través de la implementación automática que hace eclipse de la generación de código y vamos a poder consultar a cada uno de estos de estos objetos trabajador lo creamos con su constructor de nombre Bill Gates es el presidente Mané su dirección está en ritmo no vamos a guardar ni su número de teléfono ni su número de seguridad social vale esto lo creamos como cadena pastillas también lo podríamos crear como módulo o simplemente tener un constructor de trabajador que recogiera menos argumento vamos a crear también un empleado el empleado sería Larry Ellison vale también es Presidente en red book que la sé dónde está Oracle tiene un buen salario vale pagando una cantidad de impuestos y por último tendríamos un consulto y yo sería el consultor jefe Google si no tiene este caso pues tendría una serie de horas que trabaja para nosotros y una tarifa por hora imprimo ahora el resultado de crear este objeto o trabajador un empleado un consultor y el cálculo de para de cada uno de ello tendríamos esto como resultado el trabajador eres Bill Gates con estos datos el empleado que es Larry Ellison tendría aparte de los atributos propios tendría también lo perdona parte de los Comunes de trabajo de los cuatro puntos propio su salario mensual su paga mensual serie está de aquí y nuestro Consultor sitios también tendrían aquí teníamos más tributo tendría también un paga total sería el número de horas por el la tarifa sería la de 20.000 20.000 dólares o euros función de lo que estuviéramos expresando la cuantía como podemos comprobar a la hora de generar el metro de tu stream to string de trabajador en prime solo todo su atributo cuando hemos generado el método to string empleado queréis lo podemos volver a general podemos indicar que te imprima los atributos propios podríamos desmarcarse queremos la constante y también podríamos marcar que imprimiera o que utilizara los métodos heredados de manera que a la hora de definir un un empleado pues también pudiéramos conocer
+A la hora de crear una serie de instancias de estas clases podríamos plantearnos en crear un `Trabajador` un `Empleado` y un `Consultor` e interaccionar un poco con ellos, recordemos que también hemos implementado los métodos `toString()` a través de la implementación automática que hace Eclipse, de la generación de código y vamos a poder consultar a cada uno de estos objetos.
+
+*`Herencia`*
+
+```java
+package herencia;
+
+public class Herencia {
+
+   public static void main(String[] args) {
+		
+      Trabajador trabajador;
+      Empleado empleado;
+      Consultor consultor;
+		
+      trabajador = new Trabajador("Bill Gates", "Presidente", "Redmond", "", "");
+      empleado = new Empleado("Larry Ellison", "Presidente", "Redwood", "", "", 100000.0, 1000.0);
+      consultor = new Consultor("Steve Jobs", "Consultor Jefe", "Cupertino", "", "", 20, 1000.0);
+		
+      System.out.println(trabajador);
+      System.out.println(empleado);
+      System.out.println(empleado.calcularPaga());
+      System.out.println(consultor);
+      System.out.println(consultor.calcularPaga());
+
+   }
+}
+```
+
+`Trabajador` lo creamos con su constructor de nombre Bill Gates, es el presidente, su dirección está en Redmond, no vamos a guardar ni su número de teléfono, ni su número de seguridad social, esto lo creamos como cadena vacías, también lo podríamos crear como `null` o simplemente tener un constructor de `Trabajador` que recogiera menos argumento.
+
+Vamos a crear también un `Empleado`, el empleado sería Larry Ellison, también es Presidente, en Redwood que es la sede dónde está Oracle, tiene un buen salario, pagando una cantidad de impuestos.
+
+Y por último tendríamos un `Consultor` Steve Jobs sería el consultor jefe en Cupertino en este caso tendría una serie de horas que trabaja para nosotros y una tarifa por horas.
+
+Si imprimos ahora el resultado de crear estos objetos `Trabajador` un `Empleado` un `Consultor` y el cálculo de pagas de cada uno de ellos tendríamos esto como resultado lo siguiente:
+
+![22-01](images/22-01.png)
+
+![22-02](images/22-02.png)
+
+El trabajador Bill Gates con estos datos el empleado que es Larry Ellison tendría aparte de los atributos propios tendría también los atributos comunes de `Trabajador` de los cuatro puntos propio su salario mensual su paga mensual serie está de aquí y nuestro Consultor sitios también tendrían aquí teníamos más tributo tendría también un paga total sería el número de horas por el la tarifa sería la de 20.000 20.000 dólares o euros función de lo que estuviéramos expresando la cuantía como podemos comprobar a la hora de generar el metro de tu stream to string de trabajador en prime solo todo su atributo cuando hemos generado el método to string empleado queréis lo podemos volver a general podemos indicar que te imprima los atributos propios podríamos desmarcarse queremos la constante y también podríamos marcar que imprimiera o que utilizara los métodos heredados de manera que a la hora de definir un un empleado pues también pudiéramos conocer
 
 , podemos indicar que imprima los atributos propios salimos de marcha queremos la constante y también podremos marcar que imprimiera o que utilizara los métodos heredados de manera que a la hora de definir un un empleado pues también pudiéramos conocer lo que haya heredado de la clase trabajador como los atributos que trabajador eran privados no podemos acceder directamente a ellos pero si podemos acceder diferente métete en particular a los método Goethe esta forma a la hora de generar lo genera este código en el que pone primero los atributos propios y luego está llamando a los atributos de la clase de la clase trabajadora por eso no han generado un empleado de esta manera no solamente empleado no podremos comprobarlo primero los atributos propios y después te hace viendo a todos los atributos de un trabajador a través de los métodos con esto terminamos de presentar la herencia y pasamos a hablar de otro concepto que viene aparejado que es el de poli porfi
 
