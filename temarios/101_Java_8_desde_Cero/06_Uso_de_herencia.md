@@ -209,7 +209,6 @@ Si recordamos en `Trabajador` tenemos todo indicado como privado a nivel de atri
    }
 ```
 
-
 Profundizaremos en el uso de `super` en una lección posterior, ahora simplemente tenemos presente que a la hora de construir un `Empleado` tenemos que construirlo de esta manera primero la parte propia del `Trabajador` y luego la parte que es propia del `Empleado`. 
 
 Tendríamos los metodos getter y setter de los atributos propios de un `Empleado` y vamos a calcular la paga del `Empleado` con el método que hace uso de varios atributos para calcular la paga de un `Empleado` que sería el sueldo total restándole los impuestos y dividiendo entre el número de pagas de esa manera tendríamos serie sueldo mensual de un trabajador de tipo `Empleado`.
@@ -410,7 +409,6 @@ Veamos estos dos ejemplos de polimorfismo a la hora de poder recibirlo dentro de
 
 Hemos modificado un poco el ejemplo anterior para tener que un `Trabajador` tiene un salario base, que viene marcado mediante una constante de tipo double, cualquier `Trabajador` tiene una pagaba base.
 
-
 *`Trabajador`*
 
 ```java
@@ -487,24 +485,115 @@ public class Trabajador {
 }
 ```
 
+Para `Empleado` seguimos teniendo el mismo sistema de antes.
 
+*``Empleado``*
+
+```java
+package polimorfismo;
+
+public class Empleado extends Trabajador {
+
+   private double sueldo;
+   private double impuestos;
+
+   private final int PAGAS = 14;
+
+   public Empleado(String nombre, String puesto, String direccion, String telefono, String nSS, 
+   			double sueldo, double impuestos) {
+      // Profundizamos en "super" en las próximas lecciones
+      super(nombre, puesto, direccion, telefono, nSS);
+      this.sueldo = sueldo;
+      this.impuestos = impuestos;
+   }
+
+   public double getSueldo() {
+      return sueldo;
+   }
+
+   public void setSueldo(double sueldo) {
+      this.sueldo = sueldo;
+   }
+
+   public double getImpuestos() {
+      return impuestos;
+   }
+
+   public void setImpuestos(double impuestos) {
+      this.impuestos = impuestos;
+   }
+
+   public double calcularPaga() {
+      return (sueldo - impuestos) / PAGAS;
+   }
+
+   @Override
+   public String toString() {
+      return "Empleado [sueldo=" + sueldo + ", impuestos=" + impuestos + ", PAGAS=" + PAGAS + ",
+      		getNombre()=" + getNombre() + ", getPuesto()=" + getPuesto() + ", getDireccion()=" +
+		getDireccion() + ", getTelefono()=" + getTelefono() + ", getnSS()=" + getnSS() + "]";
+   }
+
+}
+```
+
+También para el `Consultor` seguimos teniendo el mismo sistema de antes.
+
+*`Consultor`*
+
+```java
+package polimorfismo;
+
+public class Consultor extends Trabajador {
+
+   private int horas;
+   private double tarifa;
+
+   public Consultor(String nombre, String puesto, String direccion, String telefono, String nSS, int horas,
+			double tarifa) {
+      super(nombre, puesto, direccion, telefono, nSS);
+      this.horas = horas;
+      this.tarifa = tarifa;
+   }
+
+   public int getHoras() {
+      return horas;
+   }
+
+   public void setHoras(int horas) {
+      this.horas = horas;
+   }
+
+   public double getTarifa() {
+      return tarifa;
+   }
+
+   public void setTarifa(double tarifa) {
+      this.tarifa = tarifa;
+   }
+
+   public double calcularPaga() {
+      return horas * tarifa;
+   }
+
+   @Override
+   public String toString() {
+      return "Consultor [horas=" + horas + ", tarifa=" + tarifa + ", getNombre()=" + getNombre() + ",
+      		getPuesto()=" + getPuesto() + ", getDireccion()=" + getDireccion() + ", getTelefono()=" +
+		getTelefono() + ", getnSS()=" + getnSS() + "]";
+   }
+
+}
+```
+
+Como podemos observar `Trabajador`, `Empleado` y `Consultor` tienen el método `calcularPaga()` y todos calcular su pago de forma diferente.
 
 *``*
 
 ```java
 ```
 
-*``*
-
-```java
-```
-
-*``*
-
-```java
-```
-
-se va a ser el jefe en particular para los empleados seguimos teniendo el mismo sistema de antes vale que sería su sueldo menos menos los impuestos y para el coche entonces sería la hora por la tarifa no igual que antes sentiment hemos añadido el hecho de que de que un trabajador como tal también tuvieras han hecho con lo cual te empleada al implementar este método lo que está haciendo ocultar la implementación de trabajador y lo mismo sucede con consultor que está ocultando la indemnización de trabajador antes no nos daba ningún problema porque hemos creado una referencia para cada uno de los tipos el empleado lo hacemos el a través de una referencia Atlético empleado y el consultor a través de una referencia de tipo consultor uno justiciera mosquear lo de esta manera para poder lo que tenemos aquí para saludar a cualquier trabajador haría plantearnos qué sucede cuando vayamos a llamar al método de calcular paro pues vamos a ver lo primero vamos a ver cómo funciona esto de saludar a cualquier trabajador yate una referencia de tipo trabajador y bueno como hay una suficiente tipo que un trabajador es un empleado es un consultor o un trabajo aquí hemos creado a través de esta referencia vamos a llamar en este caso los métodos calcular paga para ver qué sucede no en lugar de saludar hiciéramos ahora en primero calcular la paga de cada uno lo podríamos hacer de esta manera no
+ vale que sería su sueldo menos menos los impuestos y para el coche entonces sería la hora por la tarifa no igual que antes sentiment hemos añadido el hecho de que de que un trabajador como tal también tuvieras han hecho con lo cual te empleada al implementar este método lo que está haciendo ocultar la implementación de trabajador y lo mismo sucede con consultor que está ocultando la indemnización de trabajador antes no nos daba ningún problema porque hemos creado una referencia para cada uno de los tipos el empleado lo hacemos el a través de una referencia Atlético empleado y el consultor a través de una referencia de tipo consultor uno justiciera mosquear lo de esta manera para poder lo que tenemos aquí para saludar a cualquier trabajador haría plantearnos qué sucede cuando vayamos a llamar al método de calcular paro pues vamos a ver lo primero vamos a ver cómo funciona esto de saludar a cualquier trabajador yate una referencia de tipo trabajador y bueno como hay una suficiente tipo que un trabajador es un empleado es un consultor o un trabajo aquí hemos creado a través de esta referencia vamos a llamar en este caso los métodos calcular paga para ver qué sucede no en lugar de saludar hiciéramos ahora en primero calcular la paga de cada uno lo podríamos hacer de esta manera no
 
 Vamos a recibir una referencia de tipo trabajador y lo que haríamos sería el método print effect podríamos hacer la construcción de la cadena de una manera un poco más cómoda aquí nos va a servir para imprimir un número decimal que tendrá los decimales que tenga pero de los cuales nosotros vamos a imprimir solamente dos aplicando un redondeo si fuese necesario qué año nació el carácter de euro y si también como ya se empiezan a unir conceptos que hemos trabajado antes a la hora de recibir argumentos y aquí podríamos el nombre calcular VAT como no como estas referencias de tipo trabajador pero vamos a ver cómo hace el cálculo de la paga de cada uno de ellos vale y me faltaría trabajador recordemos que el trabajador se diferenciaba de empleado y consulto por tener un salario base fijo no Bill Gates era un trabajador el de la clase base pues tiene su salario base Larry Ellison que era un empleado pues tenía un método para calcularlo a raíz del sueldo que hemos proporcionado los impuestos y el número de paga y un consultor vimos que tenía otro que en función del número de horas que dedicaba y una tarifa por hora imprimía el perdón calcúlame entonces la la paga del consultor de esta manera no justificando la otra forma técnica como podemos comprobar aquí se ha producido este polimorfismo en tiempo de ejecución Java tipo concreto de trabajador de empleado o de consultor y ha llamado al método calcular paga de cada uno de espero que hayamos comprendido el concepto de polimorfismo y vamos a seguir trabajando con algunos conceptos también relacionados con el
 
