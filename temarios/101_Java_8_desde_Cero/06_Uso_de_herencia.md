@@ -385,7 +385,6 @@ La máquina virtual de java es capaz de detectar el tipo del objeto, siendo este
 
 ![23_Polimorfismo-1](images/23_Polimorfismo-1.png)
 
-
 Vamos a continuar hablando sobre herencia trabajando en particular el **concepto de Polimorfismo**.
 
 ![23_Polimorfismo-2](images/23_Polimorfismo-2.png)
@@ -586,16 +585,87 @@ public class Consultor extends Trabajador {
 }
 ```
 
-Como podemos observar `Trabajador`, `Empleado` y `Consultor` tienen el método `calcularPaga()` y todos calcular su pago de forma diferente.
+Como podemos observar `Trabajador`, `Empleado` y `Consultor` tienen el método `calcularPaga()` y todos calcular su pago de forma diferente. Por lo que `Empleado` que hereda de `Trabajador` al implementar el método `calcularPaga()` lo que hace es ocultar el el método `calcularPaga()` de `Trabajador` y lo mismo pasa con `Consultor` que está ocultando la implementación de `Trabajador`.
 
-*``*
+Esto que antes no nos daba ningún problema porque habíamos creado una referencia para cada uno de los tipos.
 
 ```java
+   Trabajador trabajador;
+   Empleado empleado;
+   Consultor consultor;
 ```
 
- vale que sería su sueldo menos menos los impuestos y para el coche entonces sería la hora por la tarifa no igual que antes sentiment hemos añadido el hecho de que de que un trabajador como tal también tuvieras han hecho con lo cual te empleada al implementar este método lo que está haciendo ocultar la implementación de trabajador y lo mismo sucede con consultor que está ocultando la indemnización de trabajador antes no nos daba ningún problema porque hemos creado una referencia para cada uno de los tipos el empleado lo hacemos el a través de una referencia Atlético empleado y el consultor a través de una referencia de tipo consultor uno justiciera mosquear lo de esta manera para poder lo que tenemos aquí para saludar a cualquier trabajador haría plantearnos qué sucede cuando vayamos a llamar al método de calcular paro pues vamos a ver lo primero vamos a ver cómo funciona esto de saludar a cualquier trabajador yate una referencia de tipo trabajador y bueno como hay una suficiente tipo que un trabajador es un empleado es un consultor o un trabajo aquí hemos creado a través de esta referencia vamos a llamar en este caso los métodos calcular paga para ver qué sucede no en lugar de saludar hiciéramos ahora en primero calcular la paga de cada uno lo podríamos hacer de esta manera no
+Si quisieramos crearlo de otra manera para poder utilizar un método `saludar` que independientemente de lo que se mande siempre salude lo tendíamos que hacer como sigue.
 
-Vamos a recibir una referencia de tipo trabajador y lo que haríamos sería el método print effect podríamos hacer la construcción de la cadena de una manera un poco más cómoda aquí nos va a servir para imprimir un número decimal que tendrá los decimales que tenga pero de los cuales nosotros vamos a imprimir solamente dos aplicando un redondeo si fuese necesario qué año nació el carácter de euro y si también como ya se empiezan a unir conceptos que hemos trabajado antes a la hora de recibir argumentos y aquí podríamos el nombre calcular VAT como no como estas referencias de tipo trabajador pero vamos a ver cómo hace el cálculo de la paga de cada uno de ellos vale y me faltaría trabajador recordemos que el trabajador se diferenciaba de empleado y consulto por tener un salario base fijo no Bill Gates era un trabajador el de la clase base pues tiene su salario base Larry Ellison que era un empleado pues tenía un método para calcularlo a raíz del sueldo que hemos proporcionado los impuestos y el número de paga y un consultor vimos que tenía otro que en función del número de horas que dedicaba y una tarifa por hora imprimía el perdón calcúlame entonces la la paga del consultor de esta manera no justificando la otra forma técnica como podemos comprobar aquí se ha producido este polimorfismo en tiempo de ejecución Java tipo concreto de trabajador de empleado o de consultor y ha llamado al método calcular paga de cada uno de espero que hayamos comprendido el concepto de polimorfismo y vamos a seguir trabajando con algunos conceptos también relacionados con el
+*`Polimorfismo`*
+
+```java
+package polimorfismo;
+
+public class Polimorfismo {
+
+   public static void main(String[] args) {
+
+      Trabajador trabajador;
+      Trabajador empleado;
+      Trabajador consultor;
+
+      trabajador = new Trabajador("Bill Gates", "Presidente", "Redmond", "", "");
+      empleado = new Empleado("Larry Ellison", "Presidente", "Redwood", "", "", 100000.0, 1000.0);
+      consultor = new Consultor("Steve Jobs", "Consultor Jefe", "Cupertino", "", "", 20, 1000.0);
+
+      saludar(trabajador);
+      saludar(empleado);
+      saludar(consultor);
+   }
+
+   public static void saludar(Trabajador t) {
+      System.out.println("Hola, " + t.getNombre());
+   }
+}
+```
+
+![23-01](images/23-01.png)
+
+Como vemos estamos definiendo los tres tipos de trabajador como `Trabajador`, pero a la hora de instanciar cada uno de esos objetos lo hacemos con el constructor que corresponde a su tipo real, y posteriormente invocamos para cada uno de ellos el método `saludar(Trabajador t)` el cual recibe una referencia de tipo `Trabajador` y como hay una asociación de tipo **ES UN** cada instancia que recibe la considera de su tipo correspondiente es decir `Trabajador`, `Empleado` y `Consultor`, en este caso el método `getNombre()` recupera en los tres casos el nombre del trabajador y lo saluda independientemente de tipo de trabajador que sea.
+
+Vamos a ver ahora el caso del cálculo de la paga para cada trabajador que lo cálcula diferente para cada uno de ellos.
+
+*`Polimorfismo`*
+
+```java
+package polimorfismo;
+
+public class Polimorfismo {
+
+   public static void main(String[] args) {
+
+      Trabajador trabajador;
+      Trabajador empleado;
+      Trabajador consultor;
+
+      trabajador = new Trabajador("Bill Gates", "Presidente", "Redmond", "", "");
+      empleado = new Empleado("Larry Ellison", "Presidente", "Redwood", "", "", 100000.0, 1000.0);
+      consultor = new Consultor("Steve Jobs", "Consultor Jefe", "Cupertino", "", "", 20, 1000.0);
+
+      imprimirNombreYPaga(trabajador);
+      imprimirNombreYPaga(empleado);
+      imprimirNombreYPaga(consultor);
+   }
+
+   public static void imprimirNombreYPaga(Trabajador t) {
+      System.out.printf("El trabajador %s tiene una paga de %.2f€ %n", t.getNombre(), t.calcularPaga());
+   }
+}
+```
+
+![23-02](images/23-02.png)
+
+En este caso invocamos al método estatico `imprimirNombreYPaga(Trabajador t)` que como podemos ver recive una referencia de tipo `Trabajador` y para cada uno de ellos invoca el método `calcularPaga()`. Recordemos que el `Trabajador` tiene un salario fijo, y para `Empleado` se usaba la formula `(sueldo - impuestos) / PAGAS;` y para `Consultor` usabamos `horas*tarifa`.
+
+Como podemos comprobar en la salida se ha producido el Polimorfismo, es decir **en tiempo de ejecución Java a decidido cual es el tipo concreto** de `Trabajador`, `Empleado` o `Consultor` y ha llamado al método `calcularPaga()` de cada uno de ellos. 
+
+Con esto espero que hayamos comprendido el concepto de polimorfismo y vamos a seguir trabajando con algunos conceptos también relacionados con la herencia.
 
 
 # 24. Uso de super para acceder a un objeto y sus constructores 8:42 
