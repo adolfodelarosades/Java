@@ -732,7 +732,6 @@ public class ClaseBase {
 }
 ```
 
-
 *`ClaseDerivada`*
 
 ```java
@@ -768,14 +767,178 @@ public class UsoDeSuper {
 }
 ```
 
-
 ![24-01](images/24-01.png)
 
 
-que van a pero si lo hacemos desde clase derivada el método imprimir va a hacer uso de Super para llamar a la clase base a la funcionalidad de base con lo cual se va a imprimir un primer mensaje y adicionalmente imprimir y amos un segundo mensaje aquí vamos a comprobarlo y aquí tendríamos que ver iba de imprimiría tanto el mensaje de la clase bajo porque haciendo uso de Super estamos llamando a hacia hacia ese método y también el de la clase derivada en la clase derivada a la hora de invocar el método solamente estaríamos hablando desde la clase derivada es decir habría muerto solapamiento total de cementerio de esta manera estamos incluyendo la funcionalidad de la clase base también podríamos añadir algunos constructores y como decíamos si tuviéramos aquí que la clase base en lugar de imprimir cualquier mensaje en primera el mensaje estamos pasando ahora como argumento vale requeriría de al menos o un 7 o un constructor para para poder inicializar este baloncesto y ya añadimos un constructor aquí reproduce un error en clase de hija dice que hay un constructor de clase base y no está definido el constructor por defecto si queremos
+Se imprime un primer mensaje de la clase base, mientras que la clase derivada imprime dos, el primero de ellos es por invocar al super de la clase base, si comentamos dicho super.
 
-J**** no tener que tener un constructor en la clase derivada que invoque a súper deberíamos tener un constructor vacío mensaje valor por defecto manera ya no tendríamos el error porque porque a la hora de construir la clase derivada lo que está haciendo eh llamar a la parte de clase lo haces con el constructor por defecto de Android lo que haríamos sería en tener la funcionalidad que tenemos casi al principio aunque en este caso cuando tiramos al súper imprimir mensaje que se ha creado mediante este valor literal si añadiéramos ahora un constructor a clase derivada atizar la podemos construirlo y decir qué clase sería este mensaje que estamos pasando desde aquí incluso podríamos envolver un constructor con otro distancia de Plaza en lugar de crear la de esta manera pues ya como digo este constructor de clase derivada lo único que está haciendo es en volver a al constructor de la clase base lo normal es que la tía también tu propio privado y bueno y qué mensaje con esto podemos comprobar como podemos utilizar super para llamar a métodos de de nuestra clase base o lo podemos utilizar como parte de un constructor de nuestro objeto para para poder terminar de construir un objeto de una clase derivada en el siguiente vídeo trabajaremos con un concepto fundamental también la orientación a objetos estaba qué es el concepto de interfase y de clases abstractas
+*`ClaseDerivada`*
 
+```java
+package usodesuper;
+
+public class ClaseDerivada extends ClaseBase {
+
+   public void imprimir() {
+      //super.imprimir();
+      System.out.println("Saludo desde la clase derivada");
+   }
+}
+```
+
+La salida que tenemos es:
+
+![24-02](images/24-02.png)
+
+Solo se manda el mensaje de la clase derivada, es decir hemos realizado un solapamiento total de este método.
+
+Podríamos añadir algunos constructores en la clase base para que en lugar de que en lugar de que imprimiera cualquier mensaje imprima el mensaje que le estamos pasando ahora como argumento, requeriria de un `set` o de un constructor para poder inicializar este valor.
+
+*`ClaseBase`*
+
+```java
+package usodesuper;
+
+public class ClaseBase {
+
+   private String mensaje;
+	
+   public ClaseBase(String s) {
+      this.mensaje = s;
+   }
+	
+   public void imprimir() {
+      //System.out.println("Saludo desde la clase base");
+      System.out.println(mensaje);
+   }
+
+}
+```
+
+Este cambio nos provoca un error en la clase `ClaseDerivada`.
+
+![24-03](images/24-03.png)
+
+![24-04](images/24-04.png)
+
+si lo leemos bien nos dice que hay un constructor en la clase base y no esta definido el constructor por defecto, si queremos poder no tener un constructor en la clase derivada que invoque a `super` deberíamos tener un constructor vacío en la clase base.
+
+*`ClaseBase`*
+
+```java
+package usodesuper;
+
+public class ClaseBase {
+
+   private String mensaje;
+   
+   public ClaseBase() {
+      this.mensaje = "Saludo desde la clase base";
+   }
+	
+   public ClaseBase(String s) {
+      this.mensaje = s;
+   }
+	
+   public void imprimir() {
+      //System.out.println("Saludo desde la clase base");
+      System.out.println(mensaje);
+   }
+
+}
+```
+
+De esta manera ya no tenemos el error por que, porque a la hora de construir la clase derivada lo que esta haciendo es llamar a la parte de la clase base con el constructor por defecto. Tanto es así que si lo ejecutamos tenemos la misma funcionalidad que teniamos antes.
+
+![24-05](images/24-05.png)
+
+Aunque en este caso cuando llamamos a `super.imprimir();` esto esta imprimiendo `mensaje` que se ha creado en el constructor con este valor literal `Saludo desde la clase base`.
+
+Si añadieramos ahora un constructor a `ClaseDerivada` tendríamos que llamar para construir a esa parte de la clase base si quisieramos matizarla, podemos construirla y decir que es desde la clase derivada:
+
+*`ClaseDerivada`*
+
+```java
+package usodesuper;
+
+public class ClaseDerivada extends ClaseBase {
+
+   public ClaseDerivada() {
+      super("Desde la clase derivada");
+   }
+	
+   public void imprimir() {
+      super.imprimir();
+      System.out.println("Saludo desde la clase derivada");
+   }
+}
+```
+
+Al ejecutar tenemos.
+
+![24-06](images/24-06.png)
+
+Vemos que el primer mensaje de la clase derivada es el que se manda desde el constructor de esta, invocando a `super` de la clase base.
+
+Incluso podríamos envolver un constructor con otro sobreescribiendo.
+
+*`ClaseDerivada`*
+
+```java
+package usodesuper;
+
+public class ClaseDerivada extends ClaseBase {
+
+   private String otroMensaje;
+   
+   public ClaseDerivada() {
+      super("Desde la clase derivada");
+   }
+   
+   public ClaseDerivada(String mensaje, String otroMensaje) {
+      super(mensaje);
+      this.otroMensaje = otroMensaje;
+   }
+	
+   public void imprimir() {
+      super.imprimir();
+      //System.out.println("Saludo desde la clase derivada");
+      System.out.println(otroMensaje);
+   }
+}
+```
+
+
+Ya como digo el constructor de clase derivada lo único que hace es envolver al constructor de la clase base para ejecutarse y si la clase de instancia derivada en lugar de crearla como hasta ahora la creamos con un atributo.
+
+*`UsoDeSuper`*
+
+```java
+package usodesuper;
+
+public class UsoDeSuper {
+   public static void main(String[] args) {
+
+      ClaseBase base = new ClaseBase();
+      //ClaseDerivada derivada = new ClaseDerivada();
+      ClaseDerivada derivada = new ClaseDerivada("Hola Mundo", "Desde una clase derivada");
+		
+      base.imprimir();
+      System.out.println("");
+      derivada.imprimir();
+
+   }
+}
+```
+
+Al ejecutarlo tenemos:
+
+![24-07](images/24-07.png)
+
+
+Con esto podemos comprobar como podemos utilizar `super` para llamar a métodos de de nuestra clase base o lo podemos utilizar como parte de un constructor de nuestro objeto para para poder terminar de construir un objeto de una clase derivada.
+
+En la siguiente lección trabajaremos con un concepto fundamental también de la orientación a objetos de Java qué es el concepto de interfases y de clases abstractas.
 
 
 # 25. Clases abstractas e interfaces I 20:52 
