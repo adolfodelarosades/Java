@@ -319,6 +319,40 @@ Como podemos comprobar a la hora de generar el método `toString()` de `Trabajad
 
 Como los atributos de trabajador eran privados, a la hora de generar lo genera pone primero los atributos propios y luego está llamando a los atributos de la clase trabajadora. 
 
+### :computer: `101-22-Herencia`
+
+Otro ejemplo que podemos ver es cuando declaramos una clase final.
+
+*`ClaseFinal`*
+
+```java
+package herencia;
+
+public final class ClaseFinal {
+	
+	
+
+}
+```
+
+Esta clase final no la podemos usar para extender a partir de ella.
+
+*`ClaseExtendida`*
+
+```java
+package herencia;
+
+public class ClaseExtendida extends ClaseFinal {
+}
+```
+
+Nos marcara el siguiente error 
+
+```sh
+The type ClaseExtendida cannot subclass the final class ClaseFinal
+```
+
+
 ## 23. Polimorfismo 9:43 
 
 [Polimorfismo](pdfs/23_Polimorfismo.pdf)
@@ -352,11 +386,127 @@ La máquina virtual de java es capaz de detectar el tipo del objeto, siendo este
 
 ![23_Polimorfismo-1](images/23_Polimorfismo-1.png)
 
+
+Vamos a continuar hablando sobre herencia trabajando en particular el **concepto de Polimorfismo**.
+
 ![23_Polimorfismo-2](images/23_Polimorfismo-2.png)
+
+Lo primero que tenemos que tener presente a la hora de trabajar con herencias de clases es algo que quizá ha podido quedar muy sutil en la lección anterior, yo indicaba que cuando tenemos una herencia entre dos clases existe una relación de tipo **ES UN** es decir si teníamos que un `Consultor` era un `Trabajador` y un `Empleado` también era un `Trabajador` entre `Consultor` y `Trabajador` hay una referencia de tipo **ES UN** **esto que puede quedar solamente como algo anecdótico se plasma en la realidad en el hecho de que podemos utilizar referencias de una superclase para almacenar objetos o para referenciar objetos de un tipo de su clase en particular** por ejemplo podríamos utilizar referencias de `Trabajador` para hacer referencia a `Empleado` o para hacer referencia a `Consultor` además de para hacer referencia a `Trabajador`. 
+
+**Esto es util por ejemplo si queremos tener un método que trabaje no solamente con la clase base, sino con las clases heredadas** por ejemplo el que tenemos en pantalla, si quisiéramos tener un método que saludara a cualquier trabajador podríamos recibir un `Trabajador` como argumento y como cualquier `Trabajador` tiene 
+un método `getNombre()` ya sea el `Trabajador`, el `Empleado` o el `Consultor` o el empleado podríamos saludarlo directamente, quién dice saludar, podría utilizarlo en un sistema que sirviera para para fichar la entrada y la salida de un empleado en una empresa con la hora, podríamos utilizar una clase genérica aunque tuviéramos diferentes tipos de trabajadores implementados, esto va a ser algo muy potente ya digo sobre todo a la hora de poder trabajar con métodos, recibir argumento o devolver argumento el poder utilizar una superclase aunque la instancia final sea de alguna subclase.
 
 ![23_Polimorfismo-3](images/23_Polimorfismo-3.png)
 
+También hablamos del concepto de **Ocultación de Métodos** y es que si una determinada subclase añade un método que se llame igual, con el mismo nombre y que tenga la misma firma que otro de la clase base, lo "ocultara". Podríamos pensar que esto puede ser útil porque sirve para que una subclase matice algo en particular, por ejemplo de cálculo de la paga, lo matice en particular, empieza a darnos cierto quebradero de cabeza cuando trabajamos con referencia de tipo de la clase base como hablábamos antes, qué pasa si tenemos una referencia de tipo `Trabajador` para crear un `Empleado` y llamamos al método `calcularPaga()`.
+
 ![23_Polimorfismo-4](images/23_Polimorfismo-4.png)
+
+Aquí es donde cobra protagonismo el polimorfismo y es que **Java escoge en tiempo de ejecución el tipo de objeto**, con lo cual si la referencia es de tipo `Trabajador` pero la instancia de tipo `Empleado` va a llamar al método concreto de `Empleado` si es que ha ocultado el método de `Trabajador`, en otro caso si no hubiera ocultado ese método llamaría entonces al método de la clase base.
+
+Veamos estos dos ejemplos de polimorfismo a la hora de poder recibirlo dentro de un objeto con referencia del mismo tipo y la llamada al método de `calcularPaga()`.
+
+### :computer: `101-23-Polimorfismo`
+
+Hemos modificado un poco el ejemplo anterior para tener que un `Trabajador` tiene un salario base, que viene marcado mediante una constante de tipo double, cualquier `Trabajador` tiene una pagaba base.
+
+
+*`Trabajador`*
+
+```java
+package polimorfismo;
+
+public class Trabajador {
+
+   private String nombre;
+   private String puesto;
+   private String direccion;
+   private String telefono;
+   private String nSS; // Número Seguridad Social
+
+   private static final double SALARIO_BASE = 30000.0;
+
+   public Trabajador(String nombre, String puesto, String direccion, String telefono, String nSS) {
+      this.nombre = nombre;
+      this.puesto = puesto;
+      this.direccion = direccion;
+      this.telefono = telefono;
+      this.nSS = nSS;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getPuesto() {
+      return puesto;
+   }
+
+   public void setPuesto(String puesto) {
+      this.puesto = puesto;
+   }
+
+   public String getDireccion() {
+      return direccion;
+   }
+
+   public void setDireccion(String direccion) {
+      this.direccion = direccion;
+   }
+
+   public String getTelefono() {
+      return telefono;
+   }
+
+   public void setTelefono(String telefono) {
+      this.telefono = telefono;
+   }
+
+   public String getnSS() {
+      return nSS;
+   }
+
+   public void setnSS(String nSS) {
+      this.nSS = nSS;
+   }
+
+   public double calcularPaga() {
+      return SALARIO_BASE;
+   }
+
+   @Override
+   public String toString() {
+      return "Trabajador [nombre=" + nombre + ", Puesto=" + puesto + ", direccion=" 
+                      + direccion + ", telefono=" + telefono + ", nSS=" + nSS + "]";
+   }
+
+}
+```
+
+
+
+*``*
+
+```java
+```
+
+*``*
+
+```java
+```
+
+*``*
+
+```java
+```
+
+se va a ser el jefe en particular para los empleados seguimos teniendo el mismo sistema de antes vale que sería su sueldo menos menos los impuestos y para el coche entonces sería la hora por la tarifa no igual que antes sentiment hemos añadido el hecho de que de que un trabajador como tal también tuvieras han hecho con lo cual te empleada al implementar este método lo que está haciendo ocultar la implementación de trabajador y lo mismo sucede con consultor que está ocultando la indemnización de trabajador antes no nos daba ningún problema porque hemos creado una referencia para cada uno de los tipos el empleado lo hacemos el a través de una referencia Atlético empleado y el consultor a través de una referencia de tipo consultor uno justiciera mosquear lo de esta manera para poder lo que tenemos aquí para saludar a cualquier trabajador haría plantearnos qué sucede cuando vayamos a llamar al método de calcular paro pues vamos a ver lo primero vamos a ver cómo funciona esto de saludar a cualquier trabajador yate una referencia de tipo trabajador y bueno como hay una suficiente tipo que un trabajador es un empleado es un consultor o un trabajo aquí hemos creado a través de esta referencia vamos a llamar en este caso los métodos calcular paga para ver qué sucede no en lugar de saludar hiciéramos ahora en primero calcular la paga de cada uno lo podríamos hacer de esta manera no
+
+Vamos a recibir una referencia de tipo trabajador y lo que haríamos sería el método print effect podríamos hacer la construcción de la cadena de una manera un poco más cómoda aquí nos va a servir para imprimir un número decimal que tendrá los decimales que tenga pero de los cuales nosotros vamos a imprimir solamente dos aplicando un redondeo si fuese necesario qué año nació el carácter de euro y si también como ya se empiezan a unir conceptos que hemos trabajado antes a la hora de recibir argumentos y aquí podríamos el nombre calcular VAT como no como estas referencias de tipo trabajador pero vamos a ver cómo hace el cálculo de la paga de cada uno de ellos vale y me faltaría trabajador recordemos que el trabajador se diferenciaba de empleado y consulto por tener un salario base fijo no Bill Gates era un trabajador el de la clase base pues tiene su salario base Larry Ellison que era un empleado pues tenía un método para calcularlo a raíz del sueldo que hemos proporcionado los impuestos y el número de paga y un consultor vimos que tenía otro que en función del número de horas que dedicaba y una tarifa por hora imprimía el perdón calcúlame entonces la la paga del consultor de esta manera no justificando la otra forma técnica como podemos comprobar aquí se ha producido este polimorfismo en tiempo de ejecución Java tipo concreto de trabajador de empleado o de consultor y ha llamado al método calcular paga de cada uno de espero que hayamos comprendido el concepto de polimorfismo y vamos a seguir trabajando con algunos conceptos también relacionados con el
 
 
 # 24. Uso de super para acceder a un objeto y sus constructores 8:42 
