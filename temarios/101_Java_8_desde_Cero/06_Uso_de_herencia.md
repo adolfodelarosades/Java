@@ -953,17 +953,16 @@ Una interfaz es un contrato de comportamiento que adquiere una clase, es decir, 
 
 #### 25.1.1 Definición
 
-
 Las interfaces siguen las mismas normas de nomenclatura y modificadores de acceso que las clases:
 
 ```java
 public interface GroupedInterface extends Interface1, Interface2  {
-     // constant declarations
-     // base of natural logarithms
-     double E = 2.718282;
-     // method signatures
-     void doSomething (int i, double x);
-     int doSomethingElse(String s);
+   // constant declarations
+   // base of natural logarithms
+   double E = 2.718282;
+   // method signatures
+   void doSomething (int i, double x);
+   int doSomethingElse(String s);
 }
 ```
 
@@ -976,15 +975,15 @@ Una clase puede implementar una o varias interfaces:
 ```java
 public class RectanglePlus implements Relatable {
 //...
-    public int isLargerThan(Relatable other) {
-        RectanglePlus otherRect = (RectanglePlus)other;
-        if (this.getArea() < otherRect.getArea())
-            return -1;
-        else if (this.getArea() > otherRect.getArea())
-            return 1;
-        else
-            return 0;               
-    }
+   public int isLargerThan(Relatable other) {
+      RectanglePlus otherRect = (RectanglePlus)other;
+      if (this.getArea() < otherRect.getArea())
+         return -1;
+      else if (this.getArea() > otherRect.getArea())
+         return 1;
+      else
+         return 0;               
+   }
 }
 ```
 
@@ -1004,33 +1003,61 @@ Java 8 incluye la posibilidad de que las interfaces proporcionen el cuerpo de un
 ```java
 public interface Interfaz {
 
-     default public void metodoPorDefecto() {
-          System.out.println("Este es uno de los nuevos métodos por defecto");
-     }
+   default public void metodoPorDefecto() {
+      System.out.println("Este es uno de los nuevos métodos por defecto");
+   }
 
 }
 ```
 
 Las clases que implementen esta interfaz no tienen porqué dar una nueva implementación si no la necesitan.
 
-
 ## Transcripción
 
 ![25_Interfaces_y_clases_abstractas-1](images/25_Interfaces_y_clases_abstractas-1.png)
 
+
+Vamos a pasar a hablar de dos conceptos que son fundamental y que además nos van a ayudar a conocer mucho del código que Java ya nos ofrece de esas miles de clases que hemos comentado en lecciones anteriores, son los **conceptos de interfaces y clases abstractas**.
+
 ![25_Interfaces_y_clases_abstractas-2](images/25_Interfaces_y_clases_abstractas-2.png)
+
+Además en el capítulo de interfaces nos tendremos que parar un poco más porque si alguno de vosotros ya conocéis Java pero en versiones anteriores **es uno de los elementos que más ha modificado Java 8**.
 
 ![25_Interfaces_y_clases_abstractas-3](images/25_Interfaces_y_clases_abstractas-3.png)
 
+Una **interfaz** en Java no es más que **un contrato de compromisos**, es decir es **una manera de comprometer a una clase a que implemente una serie de métodos**. La interfaz lo que marcaría es los métodos que debe implementar una clase que implemente esa interfaz, es decir es como un contrato en el que nosotros definimos solamente la firma de los métodos y es la clase la que tiene que darle contenido a esos métodos, hasta aquí esto sería común a las interfaces que están presentes desde la primera versión de Java. 
+
+**Desde Java 8 las interfaces también pueden incluir métodos que tengan cuerpo a través de los métodos estáticos y los métodos por defecto**, también **se pueden incluir constantes**,  vamos a ir entendiendo un poco más cómo se define una interfaz, como una clase lo puede implementar y cómo podemos tener métodos por defecto, método estático e incluso utilizando un concepto que veíamos en alguna lección anterior, podríamos utilizar una referencia también para albergar instancias de un objeto que implemente esa interface.
+
 ![25_Interfaces_y_clases_abstractas-4](images/25_Interfaces_y_clases_abstractas-4.png)
 
+A diferencia de las clases que siempre hemos venido utilizando la palabra reservada `class` aquí usaremos la palabra reservada `interface` para poder definir una interfaz. A la hora de nombrar una interfaz seguimos las mismas normas de nombres que para una clase y con los modificadores de acceso sucede lo mismo, seguiremos las mismas reglas que para una clase, como podremos comprobar la mayoría de las interfaces que vamos a ir creando también serán públicas. 
+
+Para crear una interfaz por tanto tan solo tenían que tener `public interface` el nombre de la interfaz y entre llaves definir los métodos abstractos la mayoría como venia sucediendo en Java en versiones anteriores o ya digo desde Java 8 con método por defecto, métodos estáticos o la definición de constantes.
+
+También existe la herencia de interfases es decir una interfaz puede heredar de otra, en este caso heredaría sobre todo la definición de esos métodos así como los métodos estáticos y los métodos por defecto y en este caso **la herencia si puede ser multiple**, es decir un interfaz puede heredar a la vez de otras dos o más interfases. La herencia múltiple en este caso se indicaría a partir de la palabra `extends` vendría una lista separada por comas de los interfaces de los cuales esta heredando una interface, en el ejemplo que tenemos en la diapositiva podemos ver como una interfaz puede extender, puede heredar de otras dos  interfaces y cómo puede incluir en su cuerpo la definición de una constante o de algunos métodos abstractos.
+
 ![25_Interfaces_y_clases_abstractas-5](images/25_Interfaces_y_clases_abstractas-5.png)
+
+
+
+Cómo haríamos para que una clase implementará una interfaz, es decir cómo hacemos que una clase adquiera  ese compromiso, firme ese contrato para implementar esos métodos, lo haríamos a través de la palabra `implements` podemos indicar que una clase va a implementar una o varias interfaces porque podría implementar más de una de hecho cuando hablábamos de herencia decíamos que una clase solamente iba a poder heredar de otra pero si iba a poder implementar diversas interfaces es la manera que Java nos ofrece de tener algún tipo de mecanismo parecido a lo que sería la herencia multiple, en este ejemplo tenemos como la clase `RectanglePlus` implementaria `Relatable` para darle cuerpo a los métodos que tendría esa interfaz.
+
 
 ![25_Interfaces_y_clases_abstractas-6](images/25_Interfaces_y_clases_abstractas-6.png)
 
 ![25_Interfaces_y_clases_abstractas-7](images/25_Interfaces_y_clases_abstractas-7.png)
 
 ![25_Interfaces_y_clases_abstractas-8](images/25_Interfaces_y_clases_abstractas-8.png)
+
+
+Venir marcada desde un punto que theory G y un ancho y un alto vale entonces Yaya antes que un refrán no lo podíamos delimitar de mí hace 4 puntos o de esta manera en este caso el pescado que estamos usando la clase voy vale que ya viene definida por Java en una de sus librerías gráficas Java a W te vale tendríamos diferentes constructores un constructor sin parámetros dónde podríamos te lo dicen en 00 y no tendrían y Antonia porque estarían inicializado directamente a cero a partir de un punto podremos un rectángulo de ancho 0 y de alto cero. Determinado a partir de un ancho y un acto desde el origen de coordenadas con una estudiante determinado o recibiendo un punto un gancho tenemos la posibilidad de mover un rectángulo no veríamos su punto de origen tenemos la posibilidad de tienes que caso tendríamos la implementación del método Alfon no hemos comprometido el decir que la clase rectángulo momento está líneas de código pequeño asistente podríamos lo que va hacer en general la carcasa de los métodos que tendríamos que implementar
+
+
+Generar la carcasa de los métodos que tendríamos que implementar está y no le diera cuerpo no implementará esos metros la manera de comprobar si un rectángulo es mayor que otro objeto relatable pues sería primero comprobar que cerré la tablet es rectángulo vales más que comprobar lotería transformarlo estamos aquí haciendo un casting vale me da igual hablamos hace bastante Simyo y bueno si queremos saber si un rectángulo es más grande que otro lo que podemos hacer es comparar sus áreas vamos a devolver un valor menor que 0 menos 1 en este caso y el área del rectángulo actual del rectángulo piso es menor que el área del otro rectángulo que estamos recibiendo vamos a devolver un valor positivo 1 y el área del rectángulo vivo el rectángulo actual es mayor que el área del otro rectángulo que hemos recibido y si no es mayor y el menor quiere decir que igual y entonces te volveríamos cero en este caso vamos a hacer una comparación entre 2 rectángulo y podemos comprobar como decíamos antes que podemos crear un rectángulo por fuera con una referencia de su propia clase y que podíamos utilizar también la interfaz que implementa rectángulo a la hora de instanciar una clase al igual que cuando teníamos herencia de clase podríamos usar la clase base en este caso podemos utilizar la interfaz que está implementando la clase rectángulo podríamos comparar y en función del valor que estamos recibiendo decir tendrás ángulo de menos son iguales o si es mayor ángulos que son iguales porque aunque tienen diferente base y altura hemos permutado la base y altura con lo cual el área de ambos sería exactamente la misma ya hemos visto como una clase puede implementar una interfaz ya hemos visto como una interfaz puede incluso heredar de otra como hemos visto aquí aunque no le hayamos añadido cuerpo a esta le digo que también podríamos quitáramos aquí está está herencia y añadiéramos aquí otro método
+
+
+Añadir a muéstrame tu primo indicaremos que la clase rectángulo plus para implementar la interfaz de esta manera ahora no puedo hablar un error tendríamos imprimir el propio rectángulo para imprimirlo campo llamar al método to string para poder imprimirlo de manera que aquí a la hora de comparar los rectángulos pues podríamos imprimirlo antes de verificar el la comprobación no a través del método print que hemos que hemos implementado aquí este método no está presente en esta está presente en este interesada pero no en esta otra con lo cual a la hora de querer invocar al método prime a través de esta referencia no es capaz de reconocer lo tendríamos que hacer un casting hacia un tipo que si conociéramos para poder poder utilizarlo por ejemplo esa quisiéramos sí que ahora podríamos llamar al método vale como hemos podido comprobar no podemos acceder desde una referencia de una interfaz a un atributo que aunque si tenga implementado un perdón me toques el planeta dona clase proviene de otra manera podríamos pintando el contenido de los dos rectángulos que son iguales porque su área es la misma pero bueno a ti se podíamos hacer porque esta clase en la que estaba dando el cuerpo al método pero en el caso de la tablet no conoce para nada a primo vamos a pasar también a ver cómo podemos trabajar con interfaces por con métodos por defecto y métodos estáticos vale vale que tiene un método este método de los conocidos como abstracto es decirte lo cual damos su firma pero no la implementación y podemos comprobar como en este caso con Java 8 si podríamos tener código por defecto y código estático esta implementación por defecto hace que si una clase implementa interfaz si no quiere darle cuerpo a método por defecto pues no tienen obligación de implementar lo y si llamamos a método por defecto en una instancia de esta clase pues se ejecutaría este código provincia el método estático vamos a poder comprobar cómo lo podemos invocar de diferentes maneras así tenemos dos clases la clase primera implementa solamente método euskera abstracto la clase 2 siesta sobre escribiendo a método por defecto cuándo vamos a trabajar con él y creamos una instancia de clase y luego otra de clase 2 y llamamos ambos métodos podemos ver la diferencia y aquí como podemos comprobar utilizando accediendo directamente me interesa podemos invocar al método estático aquí estamos llamando primero a método que estamos llamando a método por defecto como no le hemos dado implementación está utilizando la implementación por defecto y sin embargo en clase 2 cuando llamamos a método y en el caso de método por defecto sí que le hemos dado una sobreescritura me montado nuestra funcionalidad propia al método por defecto con lo cual a la hora de imprimir se por consola lo que está llamando a la implementación profe de aquí estaremos llamando a este método estático el trabajo con interfaz vamos a trabajar con clase abstracta
 
 # 25. Clases abstractas e interfaces II 9:48 
 
