@@ -668,7 +668,7 @@ Como podemos comprobar en la salida se ha producido el Polimorfismo, es decir **
 Con esto espero que hayamos comprendido el concepto de polimorfismo y vamos a seguir trabajando con algunos conceptos también relacionados con la herencia.
 
 
-# 24. Uso de super para acceder a un objeto y sus constructores 8:42 
+# 24. Uso de `super` para acceder a un objeto y sus constructores 8:42 
 
 [Uso de super para acceder a un objeto y sus constructores](pdfs/24_Super.pdf)
 
@@ -694,9 +694,9 @@ También podemos invocar, explícitamente, al constructor:
 
 ```java
 public Empleado(…) {
-     super(nombre, puesto, direccion, telefono, nSS);
-     this.sueldo = sueldo;
-     this.impuestos = impuestos;
+   super(nombre, puesto, direccion, telefono, nSS);
+   this.sueldo = sueldo;
+   this.impuestos = impuestos;
 }
 ```
 
@@ -704,9 +704,78 @@ public Empleado(…) {
 
 ![24_Super-1](images/24_Super-1.png)
 
+Lo prometido es deuda y en esta nueva lección vamos a hablar del uso de `super`.
+
 ![24_Super-2](images/24_Super-2.png)
 
+`super` qué es una palabra reservada de Java no va a permitir acceder desde una subclase hacia su superclase, en particular nos va a permitir acceder hacia sus métodos o si tuviéramos acceso por sus modificadores de acceso hacia sus atributos. Utilizando `super` podemos invocar por ejemplo como tenemos en este código a un método de una superclase para complementar la funcionalidad, nos daremos cuenta que en determinadas ocasiones una superclase implementa un determinado método que tiene una funcionalidad, una clase que encienda a está lo que haría sería complementar las funcionalidades de este método, podría invocarlo dentro de un método que se llamaré igual, de manera que no existiría un solapamiento total sino que la funcionalidad de la subclase incluiría la de la superclase con alguna sentencia adicional.
+
 ![24_Super-3](images/24_Super-3.png)
+
+También es muy común y ya lo hemos utilizado a la hora de crear constructores, un constructor de una clase que heredé de otra, de una subclase puede utilizar `super` para invocar al constructor de la clase base, de hecho si una subclase no lo invoca, la máquina virtual de Java lo hará por él, para ello la clase base como os decía antes que en algunas situaciones debe ser así, la clase base debería tener un constructor sin parámetros, para que la Java Virtual Machine lo pueda hacer por nosotros, de no tenerlo nos daremos cuenta como Eclipse se queja y tendríamos que invocar explícitamente con `super` al constructor de la clase base, lo hacíamos por ejemplo a la hora de crear un empleado que teníamos que invocara a súper para construir la parte de empleado que era común a trabajador.
+
+### :computer: `101-24-Super`
+
+Veamos un ejemplo en el que vamos a tener una `ClaseBase`, una `ClaseDerivada` que extiende a la `ClaseBase` y vamos a ver como ambas tienen un método que se llama `imprimir()` que simplemente va a imprimir un mensaje de saludo.
+
+*`ClaseBase`*
+
+```java
+package usodesuper;
+
+public class ClaseBase {
+
+   public void imprimir() {
+      System.out.println("Saludo desde la clase base");
+   }
+
+}
+```
+
+
+*`ClaseDerivada`*
+
+```java
+package usodesuper;
+
+public class ClaseDerivada extends ClaseBase {
+
+   public void imprimir() {
+      super.imprimir();
+      System.out.println("Saludo desde la clase derivada");
+   }
+}
+```
+
+Vamos a comprobar como si llamamos desde `ClaseBase` al método `imprimir()` se imprimirá `Saludo desde la clase base`, pero si lo hacemos desde `ClaseDerivada` el método `imprimir()` va a hacer uso de `super` para llamar a la clase base con lo cual se va a imprimir un primer mensaje `Saludo desde la clase base` y adicionalmente imprimiriamos un segundo mensaje `Saludo desde la clase derivada`. Aquí vamos a comprobarlo:
+
+*`UsoDeSuper`*
+
+```java
+package usodesuper;
+
+public class UsoDeSuper {
+   public static void main(String[] args) {
+
+      ClaseBase base = new ClaseBase();
+      ClaseDerivada derivada = new ClaseDerivada();
+		
+      base.imprimir();
+      System.out.println("");
+      derivada.imprimir();
+
+   }
+}
+```
+
+
+![24-01](images/24-01.png)
+
+
+que van a pero si lo hacemos desde clase derivada el método imprimir va a hacer uso de Super para llamar a la clase base a la funcionalidad de base con lo cual se va a imprimir un primer mensaje y adicionalmente imprimir y amos un segundo mensaje aquí vamos a comprobarlo y aquí tendríamos que ver iba de imprimiría tanto el mensaje de la clase bajo porque haciendo uso de Super estamos llamando a hacia hacia ese método y también el de la clase derivada en la clase derivada a la hora de invocar el método solamente estaríamos hablando desde la clase derivada es decir habría muerto solapamiento total de cementerio de esta manera estamos incluyendo la funcionalidad de la clase base también podríamos añadir algunos constructores y como decíamos si tuviéramos aquí que la clase base en lugar de imprimir cualquier mensaje en primera el mensaje estamos pasando ahora como argumento vale requeriría de al menos o un 7 o un constructor para para poder inicializar este baloncesto y ya añadimos un constructor aquí reproduce un error en clase de hija dice que hay un constructor de clase base y no está definido el constructor por defecto si queremos
+
+J**** no tener que tener un constructor en la clase derivada que invoque a súper deberíamos tener un constructor vacío mensaje valor por defecto manera ya no tendríamos el error porque porque a la hora de construir la clase derivada lo que está haciendo eh llamar a la parte de clase lo haces con el constructor por defecto de Android lo que haríamos sería en tener la funcionalidad que tenemos casi al principio aunque en este caso cuando tiramos al súper imprimir mensaje que se ha creado mediante este valor literal si añadiéramos ahora un constructor a clase derivada atizar la podemos construirlo y decir qué clase sería este mensaje que estamos pasando desde aquí incluso podríamos envolver un constructor con otro distancia de Plaza en lugar de crear la de esta manera pues ya como digo este constructor de clase derivada lo único que está haciendo es en volver a al constructor de la clase base lo normal es que la tía también tu propio privado y bueno y qué mensaje con esto podemos comprobar como podemos utilizar super para llamar a métodos de de nuestra clase base o lo podemos utilizar como parte de un constructor de nuestro objeto para para poder terminar de construir un objeto de una clase derivada en el siguiente vídeo trabajaremos con un concepto fundamental también la orientación a objetos estaba qué es el concepto de interfase y de clases abstractas
+
 
 
 # 25. Clases abstractas e interfaces I 20:52 
