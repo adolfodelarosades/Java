@@ -1116,17 +1116,12 @@ public interface Relatable {
 }
 ```
 
+Tenemos la clase rectángulo que va a venir marcada desde un punto de origen y un ancho y un alto. En este caso fijarse que usamos la clase `Point` que ya viene definida por Java en una de sus librerías gráficas AWT que se encuentra en el paquete `java.awt`.
 
+Tendríamos diferentes constructores, un constructor sin parámetros dónde podríamos el origen en (0,0) y no tendrían ni ancho ni alto estarían inicializado directamente a cero, a partir de un punto podremos un rectángulo de ancho 0 y de alto cero en un punto determinado, a partir de un ancho y un alto desde el origen de coordenadas con un ancho y alto determinado o recibiendo un punto un ancho y un alto. Tenemos la posibilidad de mover un rectángulo moveríamos su punto de origen, tenemos la posibilidad de calcular su área, además tenemos la posibilida de implementar el método al cual nos hemos comprometido al decir que la clase rectangulo implementa `Relatable` que es el método `isLargerThan`, si comentamos este método Eclipse se va a quejar y es que al comprometerse una clase a implementar una determinada interface nos obliga a que le demos cuerpo a dicho método. De hecho en donde nos marca el error aparece un pequeño asistente que nos sirve para generar la carcaza de los métodos que tendríamos que implementar, añade la notación de `@Override` que no es necesaría pero muy útil para ver que el método se esta sobreescribiendo. Nos indica el el cuerpo del método y nos da como tarea //TODO el que nosotros tenemos que darle cuerpo a dicho método.
 
+Por lo que si en una clase que implementa una interface no implementamos los métodos de la interface tendremos un error de compilación.
 
-
-
-*``*
-
-```java
-```
-
-Tenemos la clase rectángulo.
 
 *`RectanglePlus`*
 
@@ -1135,7 +1130,123 @@ package interfaces;
 
 import java.awt.Point;
 
-public class RectanglePlus implements Relatable, MyInterface {
+public class RectanglePlus implements Relatable {
+
+   public int width = 0;
+   public int height = 0;
+   public Point origin;
+
+   // four constructors
+   public RectanglePlus() {
+      origin = new Point(0, 0);
+   }
+
+   public RectanglePlus(Point p) {
+      origin = p;
+   }
+
+   public RectanglePlus(int w, int h) {
+      origin = new Point(0, 0);
+      width = w;
+      height = h;
+   }
+
+   public RectanglePlus(Point p, int w, int h) {
+      origin = p;
+      width = w;
+      height = h;
+   }
+
+   // a method for moving the rectangle
+   public void move(int x, int y) {
+      origin.x = x;
+      origin.y = y;
+   }
+
+   // a method for computing
+   // the area of the rectangle
+   public int getArea() {
+      return width * height;
+   }
+
+   @Override
+   public String toString() {
+      return "RectanglePlus [width=" + width + ", height=" + height + ", origin=" + origin + "]";
+   }
+
+   // a method required to implement
+   // the Relatable interface
+   public int isLargerThan(Relatable other) {
+      RectanglePlus otherRect = (RectanglePlus) other;
+      if (this.getArea() < otherRect.getArea())
+         return -1;
+      else if (this.getArea() > otherRect.getArea())
+         return 1;
+      else
+         return 0;
+   }
+
+}
+```
+
+La manera de comprobar si un rectángulo es mayor que otro objeto Relatable sería primero comprobar que ese Relatable es rectángulo, más que comprobar sería transformarlo, estamos haciendo un casting y bueno si queremos saber si un rectángulo es más grande que otro lo que podemos hacer es comparar sus áreas. Vamos a devolver un valor menor que 0, -1 en este caso si el área del rectángulo actual, del rectángulo this es menor que el área del otro rectángulo que estamos recibiendo, vamos a devolver un valor positivo 1 si el área del rectángulo this, el rectángulo actual es mayor que el área del otro rectángulo que hemos recibido y si no es mayor, ni es menor, quiere decir que es igual y entonces devolveríamos 0.
+
+
+En este caso vamos a hacer una comparación entre 2 rectángulo y podemos comprobar como decíamos antes que podemos crear un rectángulo de una forma normal, es decir con una referencia de su propia clase y que **podíamos utilizar también la interfaz que implementa rectángulo a la hora de instanciar una clase**, al igual que cuando teníamos herencia de clases podríamos usar la clase base, en este caso podemos utilizar la interfaz que está implementando la clase rectángulo, podríamos comparar y en función del valor que estamos recibiendo, decir si el rectangulo es menor, son iguales o si es mayor. En este caso los rectangulos son iguales porque aunque tienen diferente base y altura, hemos permutado la base y altura con lo cual el área de ambos sería exactamente la misma. 
+
+*`ComparadorRectangulos`*
+
+```java
+package interfaces;
+
+public class ComparadorRectangulos {
+
+   public static void main(String[] args) {
+
+      RectanglePlus rectangleOne = new RectanglePlus(10, 20);
+      Relatable rectangleTwo = new RectanglePlus(20, 10);
+      
+      switch (rectangleOne.isLargerThan(rectangleTwo)) {
+         case -1:
+            System.out.println("Es menor");
+            break;
+         case 0:
+            System.out.println("Son iguales");
+            break;
+         case 1:
+            System.out.println("Es mayor");
+            break;
+      }
+
+   }
+}
+```
+
+![25-03](images/25-03.png)
+
+Ya hemos visto como una clase puede implementar una interfaz, ya hemos visto como una interfaz puede incluso heredar de otra como hemos visto en `MyInterface` aunque no le hayamos añadido cuerpo. Podríamos quitar esa herencia y añadir el método `print()`
+
+```java
+package interfaces;
+
+public interface MyInterface {
+	
+   void print();
+
+}
+```
+
+Y que Rectangulo implementará dos interfaces, tendríamos que implementar el método `print()`:
+
+
+*`RectanglePlus`*
+
+```java
+package interfaces;
+
+import java.awt.Point;
+
+public class RectanglePlus implements Relatable, , MyInterface {
 
    public int width = 0;
    public int height = 0;
@@ -1198,12 +1309,43 @@ public class RectanglePlus implements Relatable, MyInterface {
 }
 ```
 
+De manera que a la hora de compararlo podríamos imprimirlos antes de compararlos.
 
-que va a venir marcada desde un punto theory G y un ancho y
-Venir marcada desde un punto que theory G y un ancho y un alto vale entonces Yaya antes que un refrán no lo podíamos delimitar de mí hace 4 puntos o de esta manera en este caso el pescado que estamos usando la clase voy vale que ya viene definida por Java en una de sus librerías gráficas Java a W te vale tendríamos diferentes constructores un constructor sin parámetros dónde podríamos te lo dicen en 00 y no tendrían y Antonia porque estarían inicializado directamente a cero a partir de un punto podremos un rectángulo de ancho 0 y de alto cero. Determinado a partir de un ancho y un acto desde el origen de coordenadas con una estudiante determinado o recibiendo un punto un gancho tenemos la posibilidad de mover un rectángulo no veríamos su punto de origen tenemos la posibilidad de tienes que caso tendríamos la implementación del método Alfon no hemos comprometido el decir que la clase rectángulo momento está líneas de código pequeño asistente podríamos lo que va hacer en general la carcasa de los métodos que tendríamos que implementar
+*`ComparadorRectangulos`*
 
+```java
+package interfaces;
 
-Generar la carcasa de los métodos que tendríamos que implementar está y no le diera cuerpo no implementará esos metros la manera de comprobar si un rectángulo es mayor que otro objeto relatable pues sería primero comprobar que cerré la tablet es rectángulo vales más que comprobar lotería transformarlo estamos aquí haciendo un casting vale me da igual hablamos hace bastante Simyo y bueno si queremos saber si un rectángulo es más grande que otro lo que podemos hacer es comparar sus áreas vamos a devolver un valor menor que 0 menos 1 en este caso y el área del rectángulo actual del rectángulo piso es menor que el área del otro rectángulo que estamos recibiendo vamos a devolver un valor positivo 1 y el área del rectángulo vivo el rectángulo actual es mayor que el área del otro rectángulo que hemos recibido y si no es mayor y el menor quiere decir que igual y entonces te volveríamos cero en este caso vamos a hacer una comparación entre 2 rectángulo y podemos comprobar como decíamos antes que podemos crear un rectángulo por fuera con una referencia de su propia clase y que podíamos utilizar también la interfaz que implementa rectángulo a la hora de instanciar una clase al igual que cuando teníamos herencia de clase podríamos usar la clase base en este caso podemos utilizar la interfaz que está implementando la clase rectángulo podríamos comparar y en función del valor que estamos recibiendo decir tendrás ángulo de menos son iguales o si es mayor ángulos que son iguales porque aunque tienen diferente base y altura hemos permutado la base y altura con lo cual el área de ambos sería exactamente la misma ya hemos visto como una clase puede implementar una interfaz ya hemos visto como una interfaz puede incluso heredar de otra como hemos visto aquí aunque no le hayamos añadido cuerpo a esta le digo que también podríamos quitáramos aquí está está herencia y añadiéramos aquí otro método
+public class ComparadorRectangulos {
+
+   public static void main(String[] args) {
+
+      RectanglePlus rectangleOne = new RectanglePlus(10, 20);
+      Relatable rectangleTwo = new RectanglePlus(20, 10);
+      
+      rectangleOne.print();
+      rectangleTwo.print();
+     
+      switch (rectangleOne.isLargerThan(rectangleTwo)) {
+         case -1:
+            System.out.println("Es menor");
+            break;
+         case 0:
+            System.out.println("Son iguales");
+            break;
+         case 1:
+            System.out.println("Es mayor");
+            break;
+      }
+
+   }
+}
+```
+
+Pero si obsevarmos eclipse nos marca un error `The method print() is undefined for the type 
+ Relatable`.
+
+![25-04](images/25-04.png)
 
 
 Añadir a muéstrame tu primo indicaremos que la clase rectángulo plus para implementar la interfaz de esta manera ahora no puedo hablar un error tendríamos imprimir el propio rectángulo para imprimirlo campo llamar al método to string para poder imprimirlo de manera que aquí a la hora de comparar los rectángulos pues podríamos imprimirlo antes de verificar el la comprobación no a través del método print que hemos que hemos implementado aquí este método no está presente en esta está presente en este interesada pero no en esta otra con lo cual a la hora de querer invocar al método prime a través de esta referencia no es capaz de reconocer lo tendríamos que hacer un casting hacia un tipo que si conociéramos para poder poder utilizarlo por ejemplo esa quisiéramos sí que ahora podríamos llamar al método vale como hemos podido comprobar no podemos acceder desde una referencia de una interfaz a un atributo que aunque si tenga implementado un perdón me toques el planeta dona clase proviene de otra manera podríamos pintando el contenido de los dos rectángulos que son iguales porque su área es la misma pero bueno a ti se podíamos hacer porque esta clase en la que estaba dando el cuerpo al método pero en el caso de la tablet no conoce para nada a primo vamos a pasar también a ver cómo podemos trabajar con interfaces por con métodos por defecto y métodos estáticos vale vale que tiene un método este método de los conocidos como abstracto es decirte lo cual damos su firma pero no la implementación y podemos comprobar como en este caso con Java 8 si podríamos tener código por defecto y código estático esta implementación por defecto hace que si una clase implementa interfaz si no quiere darle cuerpo a método por defecto pues no tienen obligación de implementar lo y si llamamos a método por defecto en una instancia de esta clase pues se ejecutaría este código provincia el método estático vamos a poder comprobar cómo lo podemos invocar de diferentes maneras así tenemos dos clases la clase primera implementa solamente método euskera abstracto la clase 2 siesta sobre escribiendo a método por defecto cuándo vamos a trabajar con él y creamos una instancia de clase y luego otra de clase 2 y llamamos ambos métodos podemos ver la diferencia y aquí como podemos comprobar utilizando accediendo directamente me interesa podemos invocar al método estático aquí estamos llamando primero a método que estamos llamando a método por defecto como no le hemos dado implementación está utilizando la implementación por defecto y sin embargo en clase 2 cuando llamamos a método y en el caso de método por defecto sí que le hemos dado una sobreescritura me montado nuestra funcionalidad propia al método por defecto con lo cual a la hora de imprimir se por consola lo que está llamando a la implementación profe de aquí estaremos llamando a este método estático el trabajo con interfaz vamos a trabajar con clase abstracta
