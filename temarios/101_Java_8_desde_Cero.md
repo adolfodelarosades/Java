@@ -49,11 +49,11 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Contenido adicional 5
 
 6. [Uso de herencia](101_Java_8_desde_Cero/06_Uso_de_herencia.md) 64m
-   * 2 Qué es la herencia y los beneficios que aporta 15:52 
-   * 2 Polimorfismo 9:43 
-   * 2 Uso de super para acceder a un objeto y sus constructores 8:42 
-   * 2 Clases abstractas e interfaces I 20:52 
-   * 2 Clases abstractas e interfaces II 9:48 
+   * 22 Qué es la herencia y los beneficios que aporta 15:52 
+   * 23 Polimorfismo 9:43 
+   * 24 Uso de super para acceder a un objeto y sus constructores 8:42 
+   * 25 Clases abstractas e interfaces I 20:52 
+   * 25 Clases abstractas e interfaces II 9:48 
    * Contenido adicional 5
    
 7. [Manejo de excepciones](101_Java_8_desde_Cero/07_Manejo_de_excepciones.md) 39m
