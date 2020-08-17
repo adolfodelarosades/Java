@@ -935,7 +935,6 @@ Al ejecutarlo tenemos:
 
 ![24-07](images/24-07.png)
 
-
 Con esto podemos comprobar como podemos utilizar `super` para llamar a métodos de de nuestra clase base o lo podemos utilizar como parte de un constructor de nuestro objeto para para poder terminar de construir un objeto de una clase derivada.
 
 En la siguiente lección trabajaremos con un concepto fundamental también de la orientación a objetos de Java qué es el concepto de interfases y de clases abstractas.
@@ -1053,10 +1052,154 @@ Vamos a ver también antes de ver los ejemplo como **una interfaz y esto una gra
 
 Aparejado a los métodos por defecto encontramos también la posibilidad de que una interfaz tenga métodos estáticos, que siguen la misma sintaxis de los métodos estáticos de una clase, si queremos situar un código que sea estático y que no esté en una clase si no que este en una determinada interfaz, también lo vamos a poder encontrar. **Esto es una gran novedad en Java 8 porque una serie de interfaces que para nosotros ya eran conocidas van a tener ahora a nuestra disposición un montón de método estáticos para poder hacer operaciones auxiliares** lo veremos sobre todo si queremos por ejemplo trabajar comparando una clase de otra veremos como ya tenemos un montón de método a nuestra disposición, disponibles en las interfaces. Ya digo esto a sido junto con los métodos por defecto una de las grandes novedades de Java 8 y hay mucho código que sea refactorizado para pasar a estar como método estático dentro de una interfaz.
 
+### :computer: `101-25a-Interfaces`
 
-Vamos a ver alguno vale la creación de una interfaz sigue el mismo proceso que ni una clase si quisiéramos crear otra interfaz nueva dentro de este paquete la podríamos crear aquí en interface vale le daríamos un nombre quisiéramos ya añadir herencia entre interfaces lo podríamos hacer desde aquí si no lo podemos hacer posteriormente dentro de código como podemos comprobar la creación de una interfaz es bien sencilla si queremos que la interfaz te entienda otra no tenemos más que añadir la interfaz de la cuerda para encender una interfaz que hemos tenido nosotros o incluso alguna que ya viniera definida por Java está interfaz nos va a decir que una clase se la implemente va a tener la posibilidad de tener un método en el que diremos o podemos comprobar dos objetos y decir si un objeto es más grande que otro jefe vale no podríamos usar imaginamos figuras de dos dimensiones lo podríamos usar en el foco tipo de figura rectángulo un círculo un triángulo embargo la forma de decir si uno es más grande que otro pues sería quizá algo algo diferente no clase rectángulo que va a venir marcada desde un punto theory G y un ancho y
+Vamos a ver algunos de los ejemplos, primero nos fijamos en la definición de una interfaz, la creación de una interfaz sigue el mismo proceso que el de una clase.
+
+*`Relatable`*
+
+```java
+package interfaces;
+
+public interface Relatable {
+
+   /*
+    * Método que nos va a permitir si un objeto de este tipo es más grande que otro
+    * 
+    */
+   public int isLargerThan(Relatable other);
+
+}
+```
+
+Si quisieramos crear otra interfaz nueva dentro de ese paquete se crea en *File - New - Interface*
+
+![25-02](images/25-02.png)
+
+Con el botón Add podemos indicar de que interfaces va a heredar o lo podemos ya hacer dentro del código y al aceptar nos pone lo siguiente.
+
+*`MyInterface`*
+
+```java
+package interfaces;
+
+public interface MyInterface {
+
+}
+```
+
+Como podemos observar la creación de una interface es muy sencilla. Si quisieramos extender de otra interfaz bastaría con añadir la interface de la cual va a extender. Podríamos extender una interface definida por nosotros o alguna ya definida por Java.
+
+```java
+package interfaces;
+
+public interface MyInterface extends Relatable{
+
+}
+```
+
+La interfaz `Relatable` nos va a decir que una clase que la implemente va a tener la posibilidad de tener un método en el que diremos o podemos comprobar dos objetos y decir si un objeto es más grande que otro objeto. Lo podríamos usar si imaginamos figuras de dos dimensiones, lo podríamos usar en el fondo con muchos tipso de figuras, un rectángulo, un círculo, un triángulo sin embargo la forma de decir si uno es más grande que otro pues sería quizá algo diferente.
+
+*`Relatable`*
+
+```java
+package interfaces;
+
+public interface Relatable {
+
+   /*
+    * Método que nos va a permitir si un objeto de este tipo es más grande que otro
+    * 
+    */
+   public int isLargerThan(Relatable other);
+
+}
+```
 
 
+
+
+
+
+*``*
+
+```java
+```
+
+Tenemos la clase rectángulo.
+
+*`RectanglePlus`*
+
+```java
+package interfaces;
+
+import java.awt.Point;
+
+public class RectanglePlus implements Relatable, MyInterface {
+
+   public int width = 0;
+   public int height = 0;
+   public Point origin;
+
+   // four constructors
+   public RectanglePlus() {
+      origin = new Point(0, 0);
+   }
+
+   public RectanglePlus(Point p) {
+      origin = p;
+   }
+
+   public RectanglePlus(int w, int h) {
+      origin = new Point(0, 0);
+      width = w;
+      height = h;
+   }
+
+   public RectanglePlus(Point p, int w, int h) {
+      origin = p;
+      width = w;
+      height = h;
+   }
+
+   // a method for moving the rectangle
+   public void move(int x, int y) {
+      origin.x = x;
+      origin.y = y;
+   }
+
+   // a method for computing
+   // the area of the rectangle
+   public int getArea() {
+      return width * height;
+   }
+
+   @Override
+   public String toString() {
+      return "RectanglePlus [width=" + width + ", height=" + height + ", origin=" + origin + "]";
+   }
+
+   // a method required to implement
+   // the Relatable interface
+   public int isLargerThan(Relatable other) {
+      RectanglePlus otherRect = (RectanglePlus) other;
+      if (this.getArea() < otherRect.getArea())
+         return -1;
+      else if (this.getArea() > otherRect.getArea())
+         return 1;
+      else
+         return 0;
+   }
+
+   @Override
+   public void print() {
+      System.out.println(this.toString());
+   }
+}
+```
+
+
+que va a venir marcada desde un punto theory G y un ancho y
 Venir marcada desde un punto que theory G y un ancho y un alto vale entonces Yaya antes que un refrán no lo podíamos delimitar de mí hace 4 puntos o de esta manera en este caso el pescado que estamos usando la clase voy vale que ya viene definida por Java en una de sus librerías gráficas Java a W te vale tendríamos diferentes constructores un constructor sin parámetros dónde podríamos te lo dicen en 00 y no tendrían y Antonia porque estarían inicializado directamente a cero a partir de un punto podremos un rectángulo de ancho 0 y de alto cero. Determinado a partir de un ancho y un acto desde el origen de coordenadas con una estudiante determinado o recibiendo un punto un gancho tenemos la posibilidad de mover un rectángulo no veríamos su punto de origen tenemos la posibilidad de tienes que caso tendríamos la implementación del método Alfon no hemos comprometido el decir que la clase rectángulo momento está líneas de código pequeño asistente podríamos lo que va hacer en general la carcasa de los métodos que tendríamos que implementar
 
 
