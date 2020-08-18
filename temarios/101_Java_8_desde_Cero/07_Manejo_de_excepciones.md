@@ -237,7 +237,7 @@ public class EjemploTratamientoExcepciones {
 }
 ```
 
-![26-04](images/26-04.png)
+![27-01](images/27-01.png)
 
 Cómo podemos comprobar este tipo de error no va a ser de los que no nos podemos anticipar con lo cual Eclipse no nos sugiere que va a requerir del uso de un tratamiento excepcional, lo tendríamos que decir nosotros a 
 través de un bloque `try-catch`.
@@ -262,7 +262,7 @@ public class EjemploTratamientoExcepciones {
 }
 ```
 
-![26-05](images/26-05.png)
+![27-02](images/27-02.png)
 
 El objeto de tipo `Exception` nos provee de un método que digamos que es el comportamiento por defecto incluso cuando sucede una excepción, es decir darle este tratamiento en particular a esta excepción y no darle ninguno sería CASI igual, porque aquí lo que hacemos es **imprimir la traza de la pila**, como podemos comprobar nos esta imprimiendo el mismo mensaje que cuando no teniamos el bloque `try-catch`.
 
@@ -288,7 +288,7 @@ public class EjemploTratamientoExcepciones {
 }
 ```
 
-![26-06](images/26-06.png)
+![27-03](images/27-03.png)
 
 Cuando tenemos un bloque `try-catch` y se produce una excepción la aplicación no se para esta continua. Lo que no sucede si no tenemos el bloque `try-catch`.
 
@@ -309,8 +309,7 @@ public class EjemploTratamientoExcepciones {
 }
 ```
 
-![26-07](images/26-07.png)
-
+![27-04](images/27-04.png)
 
 Si no tratamos esta situación excepcional podemos ver como el segundo `println` no se imprime porque el tratamiento que hace la máquina virtual de Java como hemos dicho es imprimir la traza de la pila y terminar la ejecución del programa.
 
@@ -337,8 +336,7 @@ public class EjemploTratamientoExcepciones {
 }
 ```
 
-
-![26-08](images/26-08.png)
+![27-05](images/27-05.png)
 
 
 las que comprenden todas algo parecido estamos haciendo aquí podemos comprobar trabajar con con excepción con arithmetic exception con una instancia de ella y en particular por ejemplo podríamos tratar de imprimir el mensaje sin tener que parar definitivamente la la ejecución del programa no imprime iríamos solamente el mensaje ha habido un error de división entre 0 y bueno este tratamiento nos permitiría continuar con la excepción podríamos incluso plantearnos el uso de algún bloque finally junto con este tratamiento de infección y quisiéramos incluir el uso de estrictamente necesarias independientemente de que digo ocurre un error on ocurre por ejemplo en este caso la división sea centre doyuno la división se hace correctamente no sucede una excepción y el bloque trae perdones bloque finally se ejecuta si cambiáramos F110 la dirección no se hace correctamente ocurre un error pero independientemente de que haya sucedido correctamente podemos plantearnos el tratamiento de Mapfre una excepción o bloque catch en los cuales como decíamos iríamos de más concreto decepción más concreta hacia una excepción más genérica así tendríamos dos posibles errores uno es el de divisiones tercero y el otro es el de vale llamar a un método a través de una referencia que no está apuntando a ningún objeto que una referencia nula podemos comprobar como producido un error que no esperábamos no esperábamos que si el programa de utilizar una referencia nula o en este caso si estuviéramos haciendo la división la ejecución de esta sentencia pararía aquí porque esto producir produciría una excepción de tipo aritmético con lo cual se va a tratar en este bloque CAD de aquí decir que no se
