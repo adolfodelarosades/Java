@@ -37,19 +37,89 @@ Podemos agrupar las excepciones en 3 grandes tipos:
 
 ![26_Excepciones_y_errores-1](images/26_Excepciones_y_errores-1.png)
 
+Hola a todos vamos a comenzar un nuevo bloque en el que hablaremos de excepcines.
+
 ![26_Excepciones_y_errores-2](images/26_Excepciones_y_errores-2.png)
+
+Hasta ahora todo el código que hemos ido desarrollando hemos supuestoque iba a funcionar bien, como no iba a funcionar sí nosotros somos estupendos programadores, sino que toda situación que se iba a presentar era una situación normal o si queríamos tratar algún tipo de situación que no fuese la normal, recordar por ejemplo los diferentes ejemplos que hemos hecho que incluyan un menú, si la opción que introducía en el menú no estaba dentro del rango que nosotros teníamos definido, lo comprobamos a través de un pequeño `if` y podíamos decirle al usaurio, se ha equivocado usted, la opción que ha introducido no es válida, introduzca otra. 
+
+Sin embargo es posible que se nos presenten situaciones excepcionales, muchas de las veces sucederá porque un valor introducido por el usuario no es correcto, otra es posible que sea porque los programadores que son humanos se hayan equivocado en la secuencia de operaciones o sentencias que van desarrollando, esa situación excepcional es posible que altere la ejecución normal de nuestro programa y bien al producirse esa situación excepcional el método dónde sucede crea un objeto especial que recoge de alguna manera información sobre esa situación excepcional, **llamado objeto de excepción** y que se lo pasa a alguien para que pueda tratarlo. 
+
+Veremos además como si teníamos una serie de llamada a métodos que dentro habían llamado a otro método, el método dónde sucede el error, es posible que vaya pasando ese objeto de excepción a diferentes métodos que traten de encontrar alguno que sea capaz de de manejar la excepción.
 
 ![26_Excepciones_y_errores-3](images/26_Excepciones_y_errores-3.png)
 
+Si existe quien pueda manejarlo, por ejemplo si uno de los métodos si tiene el mecanismo necesario para manejar esa excepción sera quien recoga ese objeto y le de el tratamiento que corresponda. Si no llegar a existir ese objeto sería la máquina virtual de Java la que le daría un tratamiento por defecto a cualquier excepción, ese tratamiento por defecto pasa por **imprimir lo que se conoce como la traza de la pila y finalizar la ejecución del programa**. La traza de la pila sería imprimir bueno pues el método actual en el que nos encontrábamos, imprimiendo alguna información sobre ese error y a raíz de ahí el método sobre el que habíamos llamado y habíamos llamado anteriormente etc. hasta llegar al método `main`, sería el tratamiento por defecto que haría la máquina virtual de Java, no sería casí que en ningún caso salvo que estemos comenzando el desarrollo de una pequeña aplicaciones y no queramos todavía darle el tratamiento a esta situación excepcional, pero casí que en ningún caso sería el más adecuado o que simplemente nos queremos centrar en algo didáctico y que no queramos darle tratamiento a esa excepción.
+
 ![26_Excepciones_y_errores-4](images/26_Excepciones_y_errores-4.png)
+
+El uso de excepciones nos va a permitir separar el código de tratamiento de errores, del código normal, como decían en otras ocasiones anteriores el tratamiento del hecho de que un usuario introdujeron la opción de menú que no era correcta lo teníamos junto con el código del menú, del resto del programa, habrá situación en la que eso no sea adecuado, entonces podamos separar físicamente el código del tratamiento de error del código normal. También nos va a permitir el uso de excepciones el evitar que haya errores que puedan pasar inadvertidos, tanto para el programador, como si nuestro código lo utilizarán otros programadores. También va a permitir propagar errores, es decir que si un error sucede en una parte podamos propagarlo hasta el objeto que pueda tratarlo. Y también nos permite coecionar el código del tratamiento de errores para agruparlos en un lugar común. 
 
 ![26_Excepciones_y_errores-5](images/26_Excepciones_y_errores-5.png)
 
+Java nos ofrece diferentes tipos de excepciones a través de varios interfaces y subinterfaces que podemos encontrar en la documentación. Estarán las excepciones de tipo **`Checked`** y **`Unchecked`** en particular podemos destacar los `Error`. 
+
+Las excepciones de tipo `Checked` son aquellas que son recojidas y tratadas por programas que estan bien escritos, es decir que no haya sido un error del programador, los `Error` son situaciones externas a nuestra aplicación y es imposible anticiparnos a ellos, imaginemonos que estamos tratando de acceder a un fichero y el volumen, del disco duro en el que está ese fichero tiene algún tipo de error hardware, imposible de que podamos anticipar y los de tipo `Runtime` son situaciones internas a la aplicación, no son externa y de las cuales no nos vamos a poder recuperar.
+
 ![26_Excepciones_y_errores-6](images/26_Excepciones_y_errores-6.png)
 
-Hola a todos vamos a comenzar un nuevo bloque en el que hablaremos de excepción ahora todo el código que hemos ido desarrollando hemos supuesto pues que no solamente que iba a funcionar bien como no iba a funcionar así nosotros somos estupendos programables sino que bueno pues que toda situación que se iba a presentar era una situación normal o si queríamos tratar algún tipo de situación que no fuese la normal recordar por ejemplo los diferentes ejemplos que hemos hecho que incluyan un menú pues si la opción que introducía en el menú no estaba dentro del rango que nosotros teníamos definido lo comprobamos a través de un pequeño ahí y y podíamos decirle de equivocado usted la opción que introducido sin embargo es posible que se nos presenten situaciones excepcionales muchas de las veces sucederá porque un valor introducido por el usuario no es correcto otra es posible que sea porque los programadores que son humanos pues se hayan equivocado en la secuencia de operaciones de potencias que bancaria esta situación excepcional es posible que altere la ejecución de normal de nuestro programa al producirse esa situación excepcional el método dónde dónde sucede crea un objeto especial que recoge de alguna manera información sobre esa situación excepcional llamado objeto de ese objeto de excepción y que se lo pasa a alguien para que pueda tratar lo veremos además como si teníamos uno por una serie llamada a métodos que dentro habían llamado a otro método el método dónde sucede el error es posible que vaya pasando este objeto de excepción a diferentes métodos que traten de encontrar alguno que sea capaz de de manejar la excepción quien pueda manejarlo por ejemplo si uno de los métodos si tiene el mecanismo necesario para manejar esta excepción gratis recoges objeto del tratamiento que corresponda llegar a existir ese objeto sería la máquina virtual de Java la que le daría un tratamiento por defecto a cualquier excepción ese tratamiento por defecto pasa por imprimir lo que se conoce como la traza de la pila y finalizar la ejecución del programa la traza de la pila sería imprimir bueno pues el método actual en el que nos encontrábamos el finde alguna información sobre el perro y a raíz de ahí el método sobre el que habíamos llamado y habíamos llamado anteriormente etcétera etcétera hasta llegar al metro 2000 sería el tratamiento por defecto que haría la máquina virtual de Java no sería que esté así que en ningún en ningún caso salvo que estemos comenzando le el desarrollo de una pequeña aplicaciones no queramos todavía darle el tratamiento a esta situación excepcional espero que así que en ningún caso sería el más adecuado con sus respectivos nos queremos centrar en algo didáctico y que nos veamos allí tratamiento a esta excepción el uso de expresiones nos va a permitir separar el código de tratamiento de errores del código normal como decían en nuestra ocasiones anteriores el tratamiento del hecho de que un usuario introdujeron la opción de menú que no era correcta lo teníamos junto con el código del menú del resto del programa habrá situación en la que eso no sea de cuanto que podamos separar físicamente el código del tratamiento de error del código normal también nos va a permitir el uso de excepciones le evitar que haya errores que puedan pasar inadvertidos tanto para el programador como bueno si no se lo digo lo utilizarán otros programadores también va a permitir propagar errores en decir si un error se sucede sucede en una parte podamos propagarlo hasta el objeto que pueda tratarlo y también pues nos permite coge cenar el código de tratamiento de errores para agruparlos en un lugar común vale Java nos ofrece diferentes tipos de excepciones a través de varios interfaces y y su interfaz es que podemos encontrar Hola todo vamos a comenzar un nuevo bloquéame y que hablaremos especial
+El uso de un tipo u otro tipo vendrá marcado por alguna de las siguientes cuestiones, las de tipo `Checked` las usaremos cuando la excepción es la única manera de detectar el error y no queremos que pase inadvertido.
 
-Por programas están bien escrito vale un error de del programador los errores son situaciones externas a nuestra aplicación y es imposible anticiparnos a ellos imaginemos no que bueno que estamos tratando de acceder a un fichero y el volumen el disco duro en el que está este Cicero tú tiene algún tipo de error hardware imposible de que podamos participar y los de tipo ruta en error perdón run time error de ejecución que son situaciones internas a la aplicación no son externa y de las cuales pues no nos vamos a poder recuperarlo el uso de un tipo u otro tipo vendrá marcado por alguna de las siguientes cuestiones las de tipo chequeado pues la usaremos cuando la excepción es la única manera de detectar el error y no queremos que pase inadvertido que veremos a partir de ahora con el Burguer la noche quedado pues la podremos usar cuándo podemos intentar mejorar el código para que no suceda ese error o la excepción sirve para detectar y corregir uso indebido de la clase vale o errores internos antes los que poco podemos hacer vamos a ver alguna ejemplo de situaciones excepcionales algunas situaciones excepcionales se podrían suceder provocar errores en el momento de compilación de distribución de ella el profe por ejemplo tratamos de trabajar con una variable que no esté inicializada eso sería una instancia de una clase muy particular trimper una instancia de una clase bueno y expectación no ha sido inicializada bueno pues no te vienes ya de aguja o podemos comprobar no podemos usar la clase me si no ha sido inicializada con absolutamente ningún tipo de valor no en otro caso podríamos tener por ejemplo inicializamos expresamente una variable anulo y tratamos de imprimir este va lo podemos comprobar como bueno imprimir un valor nulo sin LN para imprimir rulo bueno pues nosotras sin embargo si tratamos de acceder a un método de un objeto en particular de una instancia de Menem pero esa instancia resiste signo referencia ninguna instancia en valor nulo una excepción de tipo NULL pointer exception y recién estamos intentando acceder a una referencia perdona un objeto a través de una referencia pero esa referencia realmente no está apuntando en este referenciando a ningún objeto esto el buen programador en este caso y podría plantearse el escribir código que permitirán manejar este error otro tipo quizá sea menos posible marcar supongamos que en este caso bueno pues amor en este caso lo dejamos tarde estamos declarando la variable la estamos inicializando con valores literales pensemos en la calculadora que teníamos implementada y en la que bueno pues loca Lorenzo introducir usuario y tratamos de hacer la división de a entrever la división entera sería dividirlo entre 0 la división entre 0 no es posible vale ponte matemáticamente no es posible y entonces se nos produciría una excepción de tipo de tipo aritmético no es posible hacer una división entre cero está excepciones por sería mucho más complicado el poder controlar la excepción que es muy muy complicado de controlar porque si el usuario es que introduciendo los valores pues no sería no sería muy complicado poder anticipar Javan ofrece un mecanismo para el tratamiento de excepciones que vamos a trabajar en el siguiente
+Las de tipo `Unchecked` las podremos usar cuándo podemos intentar mejorar el código para que no suceda ese error o la excepción sirve para detectar y corregir el uso indebido de la clase o errores internos antes los que poco podemos hacer.
+
+### :compute: `101-26-Excepciones`
+
+Vamos a ver alguna ejemplos de situaciones excepcionales algunas situaciones excepcionales, algunas situaciones excepcionales se podrían suceder, provocar errores en el momento de compilación o de ejecución ya nos provee de ella el propio Eclipse `The local variable name may not have been 
+ initialized`.
+
+![26-01](images/26-01.png)
+
+Por ejemplo si tratamos de trabajar con una variable que no esté inicializada, eso sería una instancia de una clase muy particular `String` pero al final una instancia de una clase y esta instancia no ha sido inicializada, el IDE de Eclipse nos previende de algunos errores, no podemos usar la clase `name` si no ha sido inicializada con absolutamente ningún tipo de valor. 
+
+En otro caso podríamos tener por ejemplo una variable que inicializamos expresamente a una variable nula y tratamos de imprimir ese valor, podemos comprobar como imprime un valor nulo esto es correcto no hay error,  sin embargo si tratamos de acceder a un método de un objeto en particular de una instancia de `name` pero esa instancia no existe, es decir no referencia ninguna instancia, es valor nulo, Eclipse nos advierte con un warning `Null pointer access: The variable name can only be null at this 
+ location` pero no marca error de compilación.
+
+![26-02](images/26-02.png)
+
+Pero al ejecutar tenemos una excepción del tipo `java.lang.NullPointerException`, estamos intentando acceder a un objeto a través de una referencia, pero esa referencia realmente no está apuntando, no esta referenciando a ningún objeto. El buen programador en este caso si podría plantearse el escribir código que permitirán manejar este error.
+
+Otro tipo quizá sea menos posible manejar, supongamos que en este caso los valores los introduce usuario y tratamos de hacer la división de `a/b`, la división entera.
+
+![26-03](images/26-03.png)
+
+La división entre 0 no es posible, matemáticamente no es posible y entonces se nos produciría una excepción de tipo `java.lang.ArithmeticException`, no es posible hacer una división entre cero.
+
+Estás excepciones serían mucho más complicado el poder controlarla, un ejemplo sencillo de una excepción que es muy complicado de controlar, porque si el usuario es el que introduce los valores "sería muy complicado poder anticiparlo".
+
+*`SituacionExcepcional`*
+ 
+```java
+package excepciones;
+
+public class SituacionExcepcional {
+	
+   public static void main(String[] args) {
+		
+	 // El IDE nos previene de algunas
+// String name;
+// System.out.println(name);
+
+// String name = null;
+// System.out.println(name);
+// System.out.println(name.length());
+//		
+   
+   //Otras no es posible controlarlas.
+   int a = 2;
+	 int b = 0;
+	 System.out.println(a/b); //Error de división entre 0
+		
+	}
+
+}
+```
+
+Java nos ofrece un mecanismo para el tratamiento de excepciones que vamos a trabajar en la siguiente lección.
 
 
 # 27 Tratamiento de excepciones 13:36 
@@ -64,11 +134,11 @@ Se realiza utilizando la siguiente sintaxis:
 
 ```java
 try {
-    instrucciones;
+   instrucciones;
 } catch (Exception e) {
-    instruccinoes;
+   instruccinoes;
 } finally {
-    instrucciones
+   instrucciones
 }
 ```
 
@@ -79,14 +149,14 @@ try {
 Debe envolver las sentencias que son susceptibles de provocar uno o varios tipos de excepción. Debemos agrupar las sentencias que vayan a tener un tratamiento idéntico de la situación excepcional.
 
 ```java
-    try {
-            int a = 2;
-            int b = 0;
-            System.out.println(a/b); //Error de división entre 0            
-        } catch(ArithmeticException ex) {
-            //ex.printStackTrace();
-            System.err.println("Error: " + ex.getMessage());
-        }
+try {
+   int a = 2;
+   int b = 0;
+   System.out.println(a/b); //Error de división entre 0            
+} catch(ArithmeticException ex) {
+   //ex.printStackTrace();
+   System.err.println("Error: " + ex.getMessage());
+}
 ```
 
 ### 27.3 Bloque `catch`
@@ -94,25 +164,25 @@ Debe envolver las sentencias que son susceptibles de provocar uno o varios tipos
 Sirven como manejadores de las situaciones excepcionales. Puede haber más de uno. Cada bloque puede manejar uno o más tipos de excepciones:
 
 ```java
-        try {
-            for (int i = 0; i < 5; i++) {
-                System.out.println(mensajes[i].toUpperCase());
-            }
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
-            System.err.println("Tratamiento común a las excepciones");
-        }
- ```
+try {
+   for (int i = 0; i < 5; i++) {
+      System.out.println(mensajes[i].toUpperCase());
+   }
+} catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
+   System.err.println("Tratamiento común a las excepciones");
+}
+```
  
- ```java
-        try {
-            for (int i = 0; i < 5; i++) {
-                System.out.println(mensajes[i].toUpperCase());
-            }
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            System.err.println("Tratamiento particular a las excepción ArrayIndex...");
-        } catch (NullPointerException ex) {
-            System.err.println("Tratamiento particular a la excepción NullPointer...");
-        }
+```java
+try {
+   for (int i = 0; i < 5; i++) {
+      System.out.println(mensajes[i].toUpperCase());
+   }
+} catch (ArrayIndexOutOfBoundsException ex) {
+   System.err.println("Tratamiento particular a las excepción ArrayIndex...");
+} catch (NullPointerException ex) {
+   System.err.println("Tratamiento particular a la excepción NullPointer...");
+}
 ```
 
 ### 27.4 Bloque `finally`
