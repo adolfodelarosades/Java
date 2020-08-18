@@ -48,7 +48,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * 21 Sobrecarga de métodos y constructores 7:07 
    * Contenido adicional 5
 
-6. [Uso de herencia](101_Java_8_desde_Cero/06_Uso_de_herencia.md) 64m
+6. [Uso de herencia](101_Java_8_desde_Cero/06_Uso_de_herencia.md) 64m :+1:
    * 22 Qué es la herencia y los beneficios que aporta 15:52 
    * 23 Polimorfismo 9:43 
    * 24 Uso de super para acceder a un objeto y sus constructores 8:42 
