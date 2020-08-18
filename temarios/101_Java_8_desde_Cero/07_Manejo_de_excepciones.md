@@ -100,21 +100,21 @@ public class SituacionExcepcional {
 	
    public static void main(String[] args) {
 		
-	 // El IDE nos previene de algunas
-// String name;
-// System.out.println(name);
+      // El IDE nos previene de algunas
+//    String name;
+//    System.out.println(name);
 
-// String name = null;
-// System.out.println(name);
-// System.out.println(name.length());
+//    String name = null;
+//    System.out.println(name);
+//    System.out.println(name.length());
 //		
    
-   //Otras no es posible controlarlas.
-   int a = 2;
-	 int b = 0;
-	 System.out.println(a/b); //Error de división entre 0
+      //Otras no es posible controlarlas.
+      int a = 2;
+      int b = 0;
+      System.out.println(a/b); //Error de división entre 0
 		
-	}
+   }
 
 }
 ```
@@ -618,6 +618,12 @@ StringIndexOutOfBounds | Índice usado en String fuera de los límites
 ### Transcripción
 
 FALTAN IMAGENES
+
+![28-Excepciones-Comunes-01](images/28-Excepciones-Comunes-01.png)
+
+![28-Excepciones-Comunes-02](images/28-Excepciones-Comunes-02.png)
+
+![28-Excepciones-Comunes-03](images/28-Excepciones-Comunes-03.png)
 
 Tras conocer cómo dar tratamiento la excepciones vamos a pasar ahora a conocer algunas de las expresiones más comunes que no ofrecen nada java tiene varias decenas de clases para tratar situaciones excepcionales que pueden ser bueno asociada a diferentes tipos de operaciones por ejemplo podemos tener la excepción que ya hemos conocido errores en el uso de operaciones aritméticas y estamos intentando utilizar un índice fuera de los límites en la RAE la clasca excepción en la cual estamos convertir una clase a través de un casting a un tipo que no es correcto te recojo a ti le notaría la excepción sería un índice pero fuera de una colección de un array y tratamos de crear un array de tamaño negativo nos daría una excepción de tipo negativas ride Side y hemos visto que el uso de una referencia nula para llamar algún método bueno provocó nullpointer si tratamos de formatear un número con un formato incorrecto nos darían number format exception si tratamos de acceder a un String que sabemos que una sucesión de caracteres utilizando alguna índice que está fuera de sus límites también lo sería un error y cómo estás podemos tener un montón de teclas estación todas estas clases de ballet tienen también constructores que incluyen la posibilidad de que le pasamos nosotros un mensaje a la hora de construir no tienen una serie de métodos que no van a permitir obtener información sobre la excepción y suelen tener el método print stack trace que ya hemos conocido antes que es el que se invoca cuando no le damos tratamiento la infección y Pimpinela terraza de la pila para posteriormente cuando lo dejamos tratamientos detener la ejecución del programa si pincháis en el enlace de la slide nos viene directamente a la documentación a lápiz box de la clase precio y podemos comprobar como tenemos un montón de tipos diferentes posibles de excepciones no como desde la clase septiem podemos tener especiales de todo tipo para para diferentes situaciones no por ejemplo si estuviéramos haciendo consulta SQL con una base de datos relacional si hubiera algún problema en esta consulta al procesar los resultados podríamos tener una una excepción de tipo SQL excepción cuando se trabaja con ficheros intentamos acceder a a un tipo de fichero o con flujo podríamos tener excepciones de tipo II o excepción teníamos que había un tipo de expresión especial la ruta en excepción de las cuales pues también tenemos un montón de subtipos que podemos utilizar por ejemplo error de tipo DateTime haciendo DataBinding la especiales aritmética que ya hemos visto las negativas raise exception operación del trabajo anoche que Adán no permitida un montón de excepciones diferentes quejaba pone a nuestra disposición y que podemos utilizar de diferentes maneras no las vamos a conseguir conocer siempre una vez y bueno podremos comprobar como en determinadas ocasiones ama escribiendo un programa que produce alguna excepción que nosotros no habíamos previsto sobre todo las de tipo roca en excepción y que tenemos que elegir si darle un tratamiento darle otro ya que en el mundo de los casos nos podremos anticipar sobre todo si vamos aprendiendo a ser prudente y exigente a la hora de programar o en otros casos pues no nos podremos aceptar ya las de tipo renta y me es más complicado el poder anticiparnos a este tipo de sesión la de las que eran directamente de excepción o será un poco más fácil que podamos anticipar para finalizar el bloque de sesiones y su tratamiento vamos a ver como nosotros podríamos lanzar por relanzar una excepción que haya sucedido o bueno lanzar una nueva experiencia que nosotros queremos darle ese tratamiento
 
