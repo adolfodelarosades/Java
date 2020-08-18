@@ -57,10 +57,10 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Contenido adicional 5
    
 7. [Manejo de excepciones](101_Java_8_desde_Cero/07_Manejo_de_excepciones.md) 39m
-   * 3 Excepciones y errores 9:28 
-   * 3 Tratamiento de excepciones 13:36 
-   * 3 Excepciones más comunes 4:49 
-   * 3 Lanzamiento y propagación de excepciones 11:25 
+   * 26 Excepciones y errores 9:28 
+   * 27 Tratamiento de excepciones 13:36 
+   * 28 Excepciones más comunes 4:49 
+   * 29 Lanzamiento y propagación de excepciones 11:25 
    * Contenido adicional 4
    
 8. [Algunas clases del API de Java](101_Java_8_desde_Cero/08_Algunas_clases_del_API_de_Java.md) 82m
