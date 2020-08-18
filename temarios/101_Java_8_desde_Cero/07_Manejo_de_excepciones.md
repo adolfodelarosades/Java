@@ -493,10 +493,78 @@ public class TratamientoExcepciones03 {
 
 ![27-10](images/27-10.png)
 
+Nos podríamos plantear otro tipo de excepciones por ejemplo una que suele ser muy común para los programadores que trabajan con colecciones o con array es el tipo de excepción de tratar de recorrer una colección, en este caso un array de mensajes. Si lanzáramos así:
+
+
+*`TratamientoExcepciones04`*
+
+```java
+package excepciones;
+
+public class TratamientoExcepciones04 {
+
+   public static void main(String[] args) {
+
+      String[] mensajes = { "En un lugar", "de La Mancha", "de cuyo nombre", "no quiero acordarme" };
+      //String[] mensajes = { "En un lugar", null, "de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo vivía" };
+
+      try {
+         for (int i = 0; i < 5; i++) {
+            System.out.println(mensajes[i].toUpperCase());
+	 }
+      } catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
+         System.err.println("Tratamiento común a las excepciones");
+      }
+
+      System.out.println("Mensaje final");
+
+   }
+}
+```
+
+![27-11](images/27-11.png)
+
+
+Podríamos comprobar como esto se imprime de una manera que  a priori parece correcta. Pero nos damos cuenta que el array de mensajes tiene cuatro posiciones y que estamos tratando de acceder a una quinta posición que no existe, este error se trataría mediante la excepción `ArrayIndexOutOfBoundsException` estamos intentando acceder a una posición que no existe a un índice de un array que está fuera de sus límites.
+
+En este caso de abajo tenemos un error diferente, en este caso tenemos cinco posiciones dentro del array pero tenemos una posición que es una cadena nula, si tratamos de imprimir eso en mayúscula.
+
+*`TratamientoExcepciones04`*
+
+```java
+package excepciones;
+
+public class TratamientoExcepciones04 {
+
+   public static void main(String[] args) {
+
+      //String[] mensajes = { "En un lugar", "de La Mancha", "de cuyo nombre", "no quiero acordarme" };
+      String[] mensajes = { "En un lugar", null, "de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo vivía" };
+
+      try {
+         for (int i = 0; i < 5; i++) {
+            System.out.println(mensajes[i].toUpperCase());
+	 }
+      } catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
+         System.err.println("Tratamiento común a las excepciones");
+      }
+
+      System.out.println("Mensaje final");
+
+   }
+}
+```
+
+![27-12](images/27-12.png)
+
+Pues nos damos cuenta como a la hora de imprimir la segunda cadena, al tratar de pasarlo a mayúsculas estamos llamando a un método sobre una referencia que es nula, con lo cual produce un `NullPointerException`, el uso de este operador de la barra vertical `|` la que está en la en la tecla del uno, nos permite darle un tratamiento común a estas dos excepciones a la primera o a la segunda. Podemos ver como el último mensaje tras darle un tratamiento a los errores lo imprime.
 
 
 
-De aquí esto quiere decir que no se pasa ejecutar estas dos sentencias que además ya hemos comprobado que podían producir un error y que el tratamiento se le da con este bloque CAD de aquí no podríamos plantear otro tipo de excepciones por ejemplo una que suele ser muy cómodo para para los programadores que trabajan con colección eso o con array es el tipo de excepción letra tarde que recorrer una colección de mensaje si comenzáramos así podríamos comprobar como esto se imprime a priori parece correcta vale pero nos damos cuenta que la raíz de 100 mensajes tiene una dos tres cuatro posiciones y que aquí estamos tratando de acceder a una quinta posición que no existe este error se trataría mediante la excepción array index out of bound exception estamos intentando acceder a una posición a un índice de una raíz que está fuera de sus límites en este caso de abajo tenemos un error diferente en este caso tenemos una dos tres cuatro cinco posiciones dentro de la RAE pero tenemos una posición que es una cadena nula si tratamos de imprimir eso en mayúscula pues nos damos cuenta como a la hora de imprimir la segunda cadena al tratar de pasarlo mayúscula estamos llamando a un método sobre una referencia que es nula con lo cual produce un pointer excepto el uso de este operador de la barra vertical la que está en la en la tecla del uno nos permite darle un tratamiento como a estas dos excepciones a la primera o a la segunda podemos ver como este mensaje te dan un tratamiento a los errores lo también como existe aparte de existe. Aunque hemos utilizado para imprimir mensaje existe system Earth en digamos que es una consola que como una la de salida a la auto pero que bueno en Eclipse lo único que va a hacer eso imprimirlo errores en en un color distinto color rojo esto viene heredado desde antiguo cuando puedas pues los sistemas informáticos podían tener una consola de salida y una consola diferente un monitor diferente incluso para para los posibles errores incluso podríamos configurar la ejecución de nuestro proyecto para que los errores los primeros por aquí no suena de dirigiendo hacia otro sitio por ejemplo hacia hacia un fichero para tener una especie de sistema de Loomis no de registro bitácora deja de error tendríamos un tratamiento que sería si llamo anterior a a Java 7 el que no ofrece el de la barra del pickup en el que bueno podemos comprobar como para tratar una excepción de tipo a reír de autobox o de grupo Intercom con un tratamiento particular vale pues lo haríamos así si no le queremos dar el mismo tratamiento tendremos diferentes bloques CAD no si me lo trataríamos el grupo interés que la excepción es el run o sí RR tipo array autofox de tipo array index out of bounds vale con esto terminamos el tratamiento de excepciones vamos a pasar ahora a conocer alguna de las excepciones más comunes alguno de los tipos de sesión más comunes que no
+Fijaos como existe aparte de `System.out` existe `System.err` digamos que es una consola que es común a la de salida a la `out` pero que Eclipse lo único que va a hacer es imprimir los errores en en un color rojo. Esto viene heredado desde antiguo cuando los sistemas informáticos podían tener una consola de salida y una consola diferente un monitor diferente incluso para los posibles errores, incluso podríamos configurar la ejecución de nuestro proyecto para que los errores los que imprimimos por aquí los fuera redirigiendo hacia otro sitio por ejemplo hacia un fichero para tener una especie de sistema de Logs de registro o bitácora de errores.
+
+
+tendríamos un tratamiento que sería si llamo anterior a a Java 7 el que no ofrece el de la barra del pickup en el que bueno podemos comprobar como para tratar una excepción de tipo a reír de autobox o de grupo Intercom con un tratamiento particular vale pues lo haríamos así si no le queremos dar el mismo tratamiento tendremos diferentes bloques CAD no si me lo trataríamos el grupo interés que la excepción es el run o sí RR tipo array autofox de tipo array index out of bounds vale con esto terminamos el tratamiento de excepciones vamos a pasar ahora a conocer alguna de las excepciones más comunes alguno de los tipos de sesión más comunes que no
 
 
 ## 28. Excepciones más comunes 4:49 
