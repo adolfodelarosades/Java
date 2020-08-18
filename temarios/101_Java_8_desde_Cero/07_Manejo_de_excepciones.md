@@ -67,7 +67,7 @@ El uso de un tipo u otro tipo vendrá marcado por alguna de las siguientes cuest
 
 Las de tipo `Unchecked` las podremos usar cuándo podemos intentar mejorar el código para que no suceda ese error o la excepción sirve para detectar y corregir el uso indebido de la clase o errores internos antes los que poco podemos hacer.
 
-### :compute: `101-26-Excepciones`
+### :computer: `101-26-Excepciones`
 
 Vamos a ver alguna ejemplos de situaciones excepcionales algunas situaciones excepcionales, algunas situaciones excepcionales se podrían suceder, provocar errores en el momento de compilación o de ejecución ya nos provee de ella el propio Eclipse `The local variable name may not have been 
  initialized`.
@@ -193,20 +193,155 @@ Se ejecuta siempre, tanto si hemos terminado correctamente el bloque `try` como 
 
 ![27_Tratamiento_de_excepciones-1](images/27_Tratamiento_de_excepciones-1.png)
 
+En la lección anterior hemos presentado las excepciones, esta lección vamos a ver cómo podemos darle tratamiento.
+
 ![27_Tratamiento_de_excepciones-2](images/27_Tratamiento_de_excepciones-2.png)
+
+Java nos ofrece una sintaxis especial para poder dar tratamiento a instrucciones que van a poder provocar algún tipo de excepción y las vamos a poder recoger que es como hablábamos en la terminología utilizavamos antes, vamos a poder recoger esa excepsión y darle tratamiento y adicionalmente vamos a poder tener un bloque de código que será especial.
+
+La estructura sería la que tenemos en pantalla encerrariamos dentro del bloque `try` el código propio de la aplicación, es decir el qué es susceptible de general alguna situación excepcional, a continuación tendríamos uno más bloques `catch` que sería el manejo de esa situación excepcional y por último y de manera optativa podríamos tener bloque `finally` donde tendríamos diferente instrucciones que se ejecutarían tanto si el bloque `try` ha finalizado correctamente como si ha sucedido algún tipo de excepción y le hemos dado tratamiento.
 
 ![27_Tratamiento_de_excepciones-3](images/27_Tratamiento_de_excepciones-3.png)
 
+Como decíamos `finally` no es obligatorio puede haber más de un bloque `catch` tenemos que tener presente que los tipos excepción deben venir del más concretos al más genérico, porque si hay varios bloques `catch` y el primer `catch` es el de una clase de excepción muy genérica, por ejemplo la clase `Exception` directamente ese bloque va a recoger el tratamiento de esa excepción, sobre tipos de excepción hablaremos en lecciones siguientes, directamente recogería y si queríamos darle un tratamiento más concreto a una excepción por ejemplo de entrada salida con el teclado, con la pantalla o con ficheros pues escaparía, porque había recogido el tipo mas genérico antes. Tenemos que pensar que vamos trabajando primero con unos trámites que estén más concretos para posteriormente pasar a algunos más genérico, desde las última versiones de Java si no mal recuerdo desde la versión 7 tenemos un operador el de la barra vertical `|` que nos va a permitir recoger en un mismo `catch` dos tipos de excepción distintos si es que el tratamiento que queremos darle es el mismo, una cosa que sería bastante comoda.
+
+
 ![27_Tratamiento_de_excepciones-4](images/27_Tratamiento_de_excepciones-4.png)
+
+Como decíamos el bloque `try` debía encerrar, debía envolver las sentencias que son susceptibles de provocar alguna situación excepcional, alguna excepción y deberíamos agrupar las sentencias que vayan a tener un tratamiento idénticos, no tenemos porque crear bloques `try` dentro por ejemplo de un mismo método, bloques `try` distintos para sentencias diferentes si se ejecutan de manera encadenada o secuencial y bueno van a tener el tratamiento común de un mismo tipo de error.
 
 ![27_Tratamiento_de_excepciones-5](images/27_Tratamiento_de_excepciones-5.png)
 
+Con respecto a los bloques `catch` incidir en que puede haber más de uno, que nos permiten definir dentro de ese bloque `catch` lo que llamamos el manejador del error de la excepción y que cada bloque `catch` maneja al menos un tipo de excepción aunque puede manejar más de un tipo con el operador de barra vertical `|`.
+
 ![27_Tratamiento_de_excepciones-6](images/27_Tratamiento_de_excepciones-6.png)
 
-En el anterior hemos presentado la excepción que vamos a ver cómo podemos darle tratamiento ofrece una sintaxis especial para poder dar tratamiento acciones que van a poder provocar algún tipo de excepción y bueno nos vamos a poder recoger que como hablábamos en la terminología utilizada como antes vamos a poder recoger esas pensión y darle tratamiento y adicionalmente vamos a poder tener un bloque de código que será especial lo que salga la estructura sería la que tenemos en pantalla encerrar y amos dentro del bloque trae el código propio de la aplicación es decir el qué es susceptible de general alguna situación excepcional a continuación tendríamos uno más blokkestraat que sería el manejo de esa situación excepcional y por último y de manera optativa podríamos tener bloque finally my que tendríamos diferente instrucciones que se ejecutarían tantos el código lo que trae ha finalizado correctamente como si hay sucedido algún tipo de extensión y le hemos dado tratamiento vale como decíamos finally no me obligatorio puede haber más de un bloque está tener presente que los tipos decisión de venir de más concretos a más genérico porque si hay varios bloques CAD y el primer chat es el de una clase de excepción muy genérica por ejemplo la clase Exception pues directamente eso es lo que va a recoger el tratamiento de esa expresión sobrecitos de especiales hablaremos en vídeo siguiente directamente recogería y si queríamos darle un tratamiento más concreto una excepción por ejemplo de entrada salida con el teclado con la pantalla con jilguero pues escaparía no porque no había recogido el timoma genérico antes tenemos que pensar el que vamos trabajando con primero pon con unos trámites que estén más concreto para posteriormente pasar a algunos más genérico desde las última persiana pescaba si no mal recuerdo desde la Virgen de siete dejado tenemos un operador entre la barra vertical que nos va a permitir recoger en un mismo k dos tipos de sesión distintos que el tratamiento que queremos darle es el mismo una cosa que sería bastante como decíamos el bloque trail debía encerrarme bien volver plaza enfrente que son susceptibles de provocar alguna alguna situación excepcional alguna excepción y deberíamos agrupar las sentencias que vayan a tener un tratamiento idénticos vale no tenemos porque crear block strike centro por ejemplo de un momento todo lo que estáis distintos para sentirse diferente si se ejecutan de manera encadenada o secuencial y bueno van a tener el tratamiento común de un mismo tipo de techno con respecto a los bloques catch incidir en que puede haber más de uno que nos permiten definir dentro de ese bloque CAD lo que llamamos el manejador del error de la excepción y que cada bloque maneja al menos un tipo de excepción aunque puede manejar más de un tipo comedor operador de barra vertical el bloque Saint Alice ejecuta siempre siempre siempre tanto si han terminado de ejecutarse todas las sentencias del bloque trae como sí bueno alguna de ellas ha provocado la situación excepcional y se ha pasado a manejar a través de un caso en el final y se suele incluir código que no asegura el cierre de recurso abierto como fichero o base de datos para asegurarnos que se cierra tanto si hemos escuchado bien la operación como si lo hemos ejecutado a través de una situación excepcional la finalización y abrir algo vamos a ver poco a poco el tratamiento de algunas situaciones excepcionales que hemos visto en el ejemplo anterior de la especiales si quisiéramos anticiparnos al posible error de una división entre 0 bueno pues tendríamos esta es lo que le eche si os parece bien lo vamos a generar de 30 para que veáis cómo cómo podemos incluirlo lo que trae ya desde Eclipse
+El bloque `finally` se ejecuta siempre tanto si han terminado de ejecutarse todas las sentencias del bloque `try` como sí alguna de ellas ha provocado la situación excepcional y se ha pasado a manejar a través de un `catch`. En el `finally` se suele incluir código que nos asegura el cierre de recursos abiertos como ficheros o bases de datos para asegurarnos que se cierra tanto si hemos ejecutado bien la operación como si lo hemos ejecutado a través de una situación excepcional la finalización y ha habido algún problema.
+
+### :computer: `101-27-TratamientoExcepciones`
+
+Vamos a ver poco a poco el tratamiento de algunas situaciones excepcionales que hemos visto en el ejemplo anterior de las excepciones.
+
+*`EjemploTratamientoExcepciones`*
+
+```java
+package excepciones;
+
+public class EjemploTratamientoExcepciones {
+
+   public static void main(String[] args) {
+      int a = 2, b = 0;      
+      System.out.println(a / b);
+   }
+   
+}
+```
+
+![26-04](images/26-04.png)
+
+Cómo podemos comprobar este tipo de error no va a ser de los que no nos podemos anticipar con lo cual Eclipse no nos sugiere que va a requerir del uso de un tratamiento excepcional, lo tendríamos que decir nosotros a 
+través de un bloque `try-catch`.
 
 
-Cómo podemos comprobar este tipo de error no va a ser de los que no nos podemos anticipar con local eclipse no nos sugiere que va a requerir del uso de un tratamiento excepcional no tendríamos que decir nosotros otra vez el objeto de tipo cesión lo conoceremos en el siguiente bloque nos provee un método que digamos que es el comportamiento por defecto incluso cuando sucede una excepción es decir darle este tratamiento en particular a esta sesión y no darle ninguno sería igual porque aquí lo que hace es imprimir la traza de la pila vale mensajes que sí solamente estuviéramos solamente estuviéramos ejecutando la sentencia sin embargo el club haría que nosotros pudiéramos hacer algo aquí alguna operación adicional o incluso pudiéramos sustituir este este tratamiento incluso poder continuar con nuestra aplicación no hemos podido hacer es operación pero no quiere decir que tengamos que cerrar la aplicación no tiramos un tratamiento al error hemos tenido una situación excepcional en el caso anterior porque el tratamiento que hace la máquina virtual de Java como hemos dicho es inscribir la terraza de la pida terminar las que comprenden todas algo parecido estamos haciendo aquí podemos comprobar trabajar con con excepción con arithmetic exception con una instancia de ella y en particular por ejemplo podríamos tratar de imprimir el mensaje sin tener que parar definitivamente la la ejecución del programa no imprime iríamos solamente el mensaje ha habido un error de división entre 0 y bueno este tratamiento nos permitiría continuar con la excepción podríamos incluso plantearnos el uso de algún bloque finally junto con este tratamiento de infección y quisiéramos incluir el uso de estrictamente necesarias independientemente de que digo ocurre un error on ocurre por ejemplo en este caso la división sea centre doyuno la división se hace correctamente no sucede una excepción y el bloque trae perdones bloque finally se ejecuta si cambiáramos F110 la dirección no se hace correctamente ocurre un error pero independientemente de que haya sucedido correctamente podemos plantearnos el tratamiento de Mapfre una excepción o bloque catch en los cuales como decíamos iríamos de más concreto decepción más concreta hacia una excepción más genérica así tendríamos dos posibles errores uno es el de divisiones tercero y el otro es el de vale llamar a un método a través de una referencia que no está apuntando a ningún objeto que una referencia nula podemos comprobar como producido un error que no esperábamos no esperábamos que si el programa de utilizar una referencia nula o en este caso si estuviéramos haciendo la división la ejecución de esta sentencia pararía aquí porque esto producir produciría una excepción de tipo aritmético con lo cual se va a tratar en este bloque CAD de aquí decir que no se
+*`EjemploTratamientoExcepciones`*
+
+```java
+package excepciones;
+
+public class EjemploTratamientoExcepciones {
+
+   public static void main(String[] args) {
+      int a = 2, b = 0;      
+      try {
+         System.out.println(a / b);
+      } catch (Exception ex) {
+         ex.printStackTrace();
+      }
+   }
+   
+}
+```
+
+![26-05](images/26-05.png)
+
+El objeto de tipo `Exception` nos provee de un método que digamos que es el comportamiento por defecto incluso cuando sucede una excepción, es decir darle este tratamiento en particular a esta excepción y no darle ninguno sería CASI igual, porque aquí lo que hacemos es **imprimir la traza de la pila**, como podemos comprobar nos esta imprimiendo el mismo mensaje que cuando no teniamos el bloque `try-catch`.
+
+Sin embargo si que existe una diferencia substancial entre poner y no el bloque `try-catch`. Vamos a imprimir un mensaje después del bloque `try-catch`.
+
+*`EjemploTratamientoExcepciones`*
+
+```java
+package excepciones;
+
+public class EjemploTratamientoExcepciones {
+
+   public static void main(String[] args) {
+      int a = 2, b = 0;      
+      try {
+         System.out.println(a / b);
+      } catch (Exception ex) {
+         ex.printStackTrace();
+      }
+      System.out.println("La aplicación continua...");
+   }
+   
+}
+```
+
+![26-06](images/26-06.png)
+
+Cuando tenemos un bloque `try-catch` y se produce una excepción la aplicación no se para esta continua. Lo que no sucede si no tenemos el bloque `try-catch`.
+
+*`EjemploTratamientoExcepciones`*
+
+```java
+package excepciones;
+
+public class EjemploTratamientoExcepciones {
+
+   public static void main(String[] args) {
+      int a = 2, b = 0;      
+      System.out.println(a / b);
+      
+      System.out.println("La aplicación continua...");
+   }
+   
+}
+```
+
+![26-07](images/26-07.png)
+
+
+Si no tratamos esta situación excepcional podemos ver como el segundo `println` no se imprime porque el tratamiento que hace la máquina virtual de Java como hemos dicho es imprimir la traza de la pila y terminar la ejecución del programa.
+
+Finalmente para terminar con este ejemplo vamos a cambiar el mensaje que enviamos cuando sucede una excepción para no mandar el valor de la traza de la pila sino andar un mensaje personalizado.
+
+*`EjemploTratamientoExcepciones`*
+
+```java
+package excepciones;
+
+public class EjemploTratamientoExcepciones {
+
+   public static void main(String[] args) {
+      int a = 2, b = 0;      
+      try {
+         System.out.println(a / b);
+      } catch (Exception ex) {
+         //ex.printStackTrace();
+	 System.out.println("Error de división entre cero");
+      }
+      System.out.println("La aplicación continua...");
+   }
+   
+}
+```
+
+
+![26-08](images/26-08.png)
+
+
+las que comprenden todas algo parecido estamos haciendo aquí podemos comprobar trabajar con con excepción con arithmetic exception con una instancia de ella y en particular por ejemplo podríamos tratar de imprimir el mensaje sin tener que parar definitivamente la la ejecución del programa no imprime iríamos solamente el mensaje ha habido un error de división entre 0 y bueno este tratamiento nos permitiría continuar con la excepción podríamos incluso plantearnos el uso de algún bloque finally junto con este tratamiento de infección y quisiéramos incluir el uso de estrictamente necesarias independientemente de que digo ocurre un error on ocurre por ejemplo en este caso la división sea centre doyuno la división se hace correctamente no sucede una excepción y el bloque trae perdones bloque finally se ejecuta si cambiáramos F110 la dirección no se hace correctamente ocurre un error pero independientemente de que haya sucedido correctamente podemos plantearnos el tratamiento de Mapfre una excepción o bloque catch en los cuales como decíamos iríamos de más concreto decepción más concreta hacia una excepción más genérica así tendríamos dos posibles errores uno es el de divisiones tercero y el otro es el de vale llamar a un método a través de una referencia que no está apuntando a ningún objeto que una referencia nula podemos comprobar como producido un error que no esperábamos no esperábamos que si el programa de utilizar una referencia nula o en este caso si estuviéramos haciendo la división la ejecución de esta sentencia pararía aquí porque esto producir produciría una excepción de tipo aritmético con lo cual se va a tratar en este bloque CAD de aquí decir que no se
 
 De aquí esto quiere decir que no se pasa ejecutar estas dos sentencias que además ya hemos comprobado que podían producir un error y que el tratamiento se le da con este bloque CAD de aquí no podríamos plantear otro tipo de excepciones por ejemplo una que suele ser muy cómodo para para los programadores que trabajan con colección eso o con array es el tipo de excepción letra tarde que recorrer una colección de mensaje si comenzáramos así podríamos comprobar como esto se imprime a priori parece correcta vale pero nos damos cuenta que la raíz de 100 mensajes tiene una dos tres cuatro posiciones y que aquí estamos tratando de acceder a una quinta posición que no existe este error se trataría mediante la excepción array index out of bound exception estamos intentando acceder a una posición a un índice de una raíz que está fuera de sus límites en este caso de abajo tenemos un error diferente en este caso tenemos una dos tres cuatro cinco posiciones dentro de la RAE pero tenemos una posición que es una cadena nula si tratamos de imprimir eso en mayúscula pues nos damos cuenta como a la hora de imprimir la segunda cadena al tratar de pasarlo mayúscula estamos llamando a un método sobre una referencia que es nula con lo cual produce un pointer excepto el uso de este operador de la barra vertical la que está en la en la tecla del uno nos permite darle un tratamiento como a estas dos excepciones a la primera o a la segunda podemos ver como este mensaje te dan un tratamiento a los errores lo también como existe aparte de existe. Aunque hemos utilizado para imprimir mensaje existe system Earth en digamos que es una consola que como una la de salida a la auto pero que bueno en Eclipse lo único que va a hacer eso imprimirlo errores en en un color distinto color rojo esto viene heredado desde antiguo cuando puedas pues los sistemas informáticos podían tener una consola de salida y una consola diferente un monitor diferente incluso para para los posibles errores incluso podríamos configurar la ejecución de nuestro proyecto para que los errores los primeros por aquí no suena de dirigiendo hacia otro sitio por ejemplo hacia hacia un fichero para tener una especie de sistema de Loomis no de registro bitácora deja de error tendríamos un tratamiento que sería si llamo anterior a a Java 7 el que no ofrece el de la barra del pickup en el que bueno podemos comprobar como para tratar una excepción de tipo a reír de autobox o de grupo Intercom con un tratamiento particular vale pues lo haríamos así si no le queremos dar el mismo tratamiento tendremos diferentes bloques CAD no si me lo trataríamos el grupo interés que la excepción es el run o sí RR tipo array autofox de tipo array index out of bounds vale con esto terminamos el tratamiento de excepciones vamos a pasar ahora a conocer alguna de las excepciones más comunes alguno de los tipos de sesión más comunes que no
 
