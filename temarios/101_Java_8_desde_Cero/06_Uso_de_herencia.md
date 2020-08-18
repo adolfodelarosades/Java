@@ -320,7 +320,7 @@ Como los atributos de trabajador eran privados, a la hora de generar lo genera p
 
 ### :computer: `101-22-Herencia`
 
-Otro ejemplo que podemos ver es cuando declaramos una clase final.
+Otro ejemplo que podemos ver es cuando declaramos una clase `final`. El uso de `final`, decíamos de una clase `final` era una clase que no podía ser extendida y podemos comprobar aquí tenemos una clase marcada con `final` y con `final` podemos comprobar como no nos permite extender de ella, produciría un error de compilación.
 
 *`ClaseFinal`*
 
@@ -350,7 +350,6 @@ Nos marcara el siguiente error
 ```sh
 The type ClaseExtendida cannot subclass the final class ClaseFinal
 ```
-
 
 ## 23. Polimorfismo 9:43 
 
