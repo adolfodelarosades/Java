@@ -1342,13 +1342,152 @@ public class ComparadorRectangulos {
 }
 ```
 
-Pero si obsevarmos eclipse nos marca un error `The method print() is undefined for the type 
- Relatable`.
+Pero si obsevarmos Eclipse nos marca un error `The method print() is undefined for the type 
+ Relatable`. 
 
 ![25-04](images/25-04.png)
 
+Lo que pasa aquí es que la interfaz `Relatable` de cuyo tipo es `rectangleTwo` no contiene el método `print()`, por eso nos marca el error. Tendríamos que hacer un casting hacia un tipo que si conociera el método `print()` para poder utilizarlo, por ejemplo:
 
-Añadir a muéstrame tu primo indicaremos que la clase rectángulo plus para implementar la interfaz de esta manera ahora no puedo hablar un error tendríamos imprimir el propio rectángulo para imprimirlo campo llamar al método to string para poder imprimirlo de manera que aquí a la hora de comparar los rectángulos pues podríamos imprimirlo antes de verificar el la comprobación no a través del método print que hemos que hemos implementado aquí este método no está presente en esta está presente en este interesada pero no en esta otra con lo cual a la hora de querer invocar al método prime a través de esta referencia no es capaz de reconocer lo tendríamos que hacer un casting hacia un tipo que si conociéramos para poder poder utilizarlo por ejemplo esa quisiéramos sí que ahora podríamos llamar al método vale como hemos podido comprobar no podemos acceder desde una referencia de una interfaz a un atributo que aunque si tenga implementado un perdón me toques el planeta dona clase proviene de otra manera podríamos pintando el contenido de los dos rectángulos que son iguales porque su área es la misma pero bueno a ti se podíamos hacer porque esta clase en la que estaba dando el cuerpo al método pero en el caso de la tablet no conoce para nada a primo vamos a pasar también a ver cómo podemos trabajar con interfaces por con métodos por defecto y métodos estáticos vale vale que tiene un método este método de los conocidos como abstracto es decirte lo cual damos su firma pero no la implementación y podemos comprobar como en este caso con Java 8 si podríamos tener código por defecto y código estático esta implementación por defecto hace que si una clase implementa interfaz si no quiere darle cuerpo a método por defecto pues no tienen obligación de implementar lo y si llamamos a método por defecto en una instancia de esta clase pues se ejecutaría este código provincia el método estático vamos a poder comprobar cómo lo podemos invocar de diferentes maneras así tenemos dos clases la clase primera implementa solamente método euskera abstracto la clase 2 siesta sobre escribiendo a método por defecto cuándo vamos a trabajar con él y creamos una instancia de clase y luego otra de clase 2 y llamamos ambos métodos podemos ver la diferencia y aquí como podemos comprobar utilizando accediendo directamente me interesa podemos invocar al método estático aquí estamos llamando primero a método que estamos llamando a método por defecto como no le hemos dado implementación está utilizando la implementación por defecto y sin embargo en clase 2 cuando llamamos a método y en el caso de método por defecto sí que le hemos dado una sobreescritura me montado nuestra funcionalidad propia al método por defecto con lo cual a la hora de imprimir se por consola lo que está llamando a la implementación profe de aquí estaremos llamando a este método estático el trabajo con interfaz vamos a trabajar con clase abstracta
+*`ComparadorRectangulos`*
+
+```java
+package interfaces;
+
+public class ComparadorRectangulos {
+
+   public static void main(String[] args) {
+
+      RectanglePlus rectangleOne = new RectanglePlus(10, 20);
+      Relatable rectangleTwo = new RectanglePlus(20, 10);
+      
+      rectangleOne.print();
+      MyInterface rectangle2 = (MyInterface) rectangleTwo;
+      rectangle2.print();
+     
+      switch (rectangleOne.isLargerThan(rectangleTwo)) {
+         case -1:
+            System.out.println("Es menor");
+            break;
+         case 0:
+            System.out.println("Son iguales");
+            break;
+         case 1:
+            System.out.println("Es mayor");
+            break;
+      }
+
+   }
+}
+```
+
+De esta manera ya podríamos usar el método `print()`. Si ejecutamos la aplicación tenemos:
+
+![25-05](images/25-05.png)
+
+Pinta el congtenido de los dos rectangulos y nos dice que son iguales por que su área es la misma.
+
+### :computer: `101-25a-Interfaces`
+
+Vamos a pasar también a ver cómo podemos trabajar con interfaces con métodos por defecto y métodos estáticos.
+
+Esta interfaz que tiene un **método abstracto** `metodo()`, es decirte **damos su firma pero no la implementación** y podemos comprobar como en este caso con Java 8 si podríamos tener métodos por defecto `metodoPorDefecto()` y métodos estáticos `metodoEstatico()`.
+
+*``*
+
+```java
+package interfaces.defecto;
+
+public interface Interfaz {
+
+   public void metodo();
+
+   default public void metodoPorDefecto() {
+      System.out.println("Este es uno de los nuevos métodos por defecto");
+   }
+
+   public static void metodoEstatico() {
+      System.out.println("Método estático en un interfaz");
+   }
+
+}
+```
+
+La implementación por defecto hace que si una clase implementa la interfaz `Interfaz` si no quiere darle cuerpo al método por defecto `metodoPorDefecto()`, pues no tienen obligación de implementarlo y si llamamos a `metodoPorDefecto()` en una instancia de esta clase se ejecutaría este código por defecto. El método estático `metodoEstatico()` vamos a poder comprobar cómo lo podemos invocar de diferentes maneras.
+
+Aquí tenemos dos clases, la clase `Clase` implementa solamente `metodo()` el método abstracto.
+
+*`Clase`*
+
+```java
+package interfaces.defecto;
+
+public class Clase implements Interfaz {
+
+   @Override
+   public void metodo() {
+      System.out.println("método");
+   }
+
+}
+```
+
+La clase `Clase2` si esta sobreescribiendo a `metodoPorDefecto()`.
+
+*`Clase2`*
+
+```java
+package interfaces.defecto;
+
+public class Clase2 implements Interfaz {
+
+   @Override
+   public void metodo() {
+      System.out.println("Otro método");
+   }
+
+   @Override
+   public void metodoPorDefecto() {
+      System.out.println("Mi propia implementación del método por defecto");
+   }
+
+}
+```
+
+Cuándo vamos a trabajar con él si creamos una instancia de `Clase` y luego otra de `Clase2` y llamamos a ambos métodos podemos ver la diferencia.
+
+*`InterfacesPorDefecto`*
+
+```java
+package interfaces.defecto;
+
+public class InterfacesPorDefecto {
+
+   public static void main(String[] args) {
+
+      Clase c1 = new Clase();
+
+      c1.metodo();
+      c1.metodoPorDefecto();
+
+      Clase2 c2 = new Clase2();
+
+      c2.metodo();
+      c2.metodoPorDefecto();
+
+      Interfaz.metodoEstatico();
+
+   }
+   
+}
+```
+
+![25-06](images/25-06.png)
+
+Aquí  podemos comprobar accediendo directamente a la interfaz podemos invocar al método estático, estamos llamando primero a `metodo()` que es la implementación que le dimos en `Clase`, después estamos llamando a `metodoPorDefecto()` como no le hemos dado implementación está utilizando la implementación por defecto y sin embargo en `Clase2` cuando llamamos a `metodo()` llamamos a la implementación de `metodo()` en la `Clase2` y en el caso de `metodoPorDefecto()` sí que le hemos dado una sobreescritura, le hemos dado nuestra funcionalidad propia a `metodoPorDefecto()` con lo cual a la hora de imprimirse por consola lo que está llamando a la implementación propia, finalmente estaremos llamando al método estático `metodoEstatico()`.
+
+Y tras ver el trabajo con interfaz vamos a trabajar con clases abstractas. 
+
 
 # 25. Clases abstractas e interfaces II 9:48 
 
@@ -1366,9 +1505,9 @@ Son clases definidas como `abstract`. Tienen las siguientes características:
 ```java
 public abstract class AbstractaSencilla {
 
-    public void saluda() {
-        System.out.println("Hola mundo!!!");
-    }
+   public void saluda() {
+      System.out.println("Hola mundo!!!");
+   }
 
 }
 ```
@@ -1380,11 +1519,11 @@ Son métodos que están definidos en una clase `abstract`. Definen la firma del 
 ```java
 public abstract class AbstractaConMetodos {
 
-    public abstract void saludo(String s);
+   public abstract void saludo(String s);
 
-    public void saludar() {
-        System.out.println("Hola mundo!!!");
-    }
+   public void saludar() {
+      System.out.println("Hola mundo!!!");
+   }
 }
 ```
 
