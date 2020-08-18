@@ -338,8 +338,163 @@ public class EjemploTratamientoExcepciones {
 
 ![27-05](images/27-05.png)
 
+Algo parecido estamos haciendo aquí podemos comprobar como no tratamos con `Exception` directamente sino con una subclase suya `ArithmeticException` que se produce cuando hay algún tipo de error en una operación aritmética y como en lugar de imprimir la traza de la pila completa simplemene mandamos a imprimir el mensaje con el método `getMessage()` del objeto `ArithmeticException`, sin tener que parar definitivamente la ejecución del program.
 
-las que comprenden todas algo parecido estamos haciendo aquí podemos comprobar trabajar con con excepción con arithmetic exception con una instancia de ella y en particular por ejemplo podríamos tratar de imprimir el mensaje sin tener que parar definitivamente la la ejecución del programa no imprime iríamos solamente el mensaje ha habido un error de división entre 0 y bueno este tratamiento nos permitiría continuar con la excepción podríamos incluso plantearnos el uso de algún bloque finally junto con este tratamiento de infección y quisiéramos incluir el uso de estrictamente necesarias independientemente de que digo ocurre un error on ocurre por ejemplo en este caso la división sea centre doyuno la división se hace correctamente no sucede una excepción y el bloque trae perdones bloque finally se ejecuta si cambiáramos F110 la dirección no se hace correctamente ocurre un error pero independientemente de que haya sucedido correctamente podemos plantearnos el tratamiento de Mapfre una excepción o bloque catch en los cuales como decíamos iríamos de más concreto decepción más concreta hacia una excepción más genérica así tendríamos dos posibles errores uno es el de divisiones tercero y el otro es el de vale llamar a un método a través de una referencia que no está apuntando a ningún objeto que una referencia nula podemos comprobar como producido un error que no esperábamos no esperábamos que si el programa de utilizar una referencia nula o en este caso si estuviéramos haciendo la división la ejecución de esta sentencia pararía aquí porque esto producir produciría una excepción de tipo aritmético con lo cual se va a tratar en este bloque CAD de aquí decir que no se
+
+*`TratamientoExcepciones01`*
+
+```java
+package excepciones;
+
+public class EjemploTratamientoExcepciones {
+
+   public static void main(String[] args) {
+      try {
+         int a = 2;
+         int b = 0;
+         System.out.println(a / b); // Error de división entre 0
+      } catch (ArithmeticException ex) {
+         // ex.printStackTrace();
+         System.err.println("Error: " + ex.getMessage());
+      }
+
+      System.out.println("\nMensaje tras la división");
+   }
+   
+}
+```
+
+![27-06](images/27-06.png)
+
+
+Podríamos incluso plantearnos el uso de algún bloque `finally` junto con el tratamiento de este tipo de excepción, si quisiéramos incluir el uso de una instrucción que fuera extrictamente necesaria independientemente de que si ocurre o no un error.  
+
+*`TratamientoExcepciones02`*
+
+```java
+package excepciones;
+
+public class TratamientoExcepciones02 {
+
+   public static void main(String[] args) {
+      try {
+         int a = 2;
+         int b = 1;
+         System.out.println(a / b); // Error de división entre 0
+      } catch (ArithmeticException ex) {
+         // ex.printStackTrace();
+         System.err.println("Error: " + ex.getMessage());
+      } finally {
+         System.out.println(
+		"\nEstas instrucciones son muy importantes. Deben ejecutarse tanto si no ha habido excepciones, como si las ha habido");
+      }
+
+   }
+
+}
+```
+
+![27-07](images/27-07.png)
+
+Por ejemplo en este caso la división se hace entre 2 y 1, la división se hace correctamente no sucede una excepción y el bloque `finally` se ejecuta.
+
+Si cambiáramos el 1 por un 0.
+
+*`TratamientoExcepciones02`*
+
+```java
+package excepciones;
+
+public class TratamientoExcepciones02 {
+
+   public static void main(String[] args) {
+      try {
+         int a = 2;
+         int b = 0;
+         System.out.println(a / b); // Error de división entre 0
+      } catch (ArithmeticException ex) {
+         // ex.printStackTrace();
+         System.err.println("Error: " + ex.getMessage());
+      } finally {
+         System.out.println(
+		"\nEstas instrucciones son muy importantes. Deben ejecutarse tanto si no ha habido excepciones, como si las ha habido");
+      }
+
+   }
+
+}
+```
+
+![27-08](images/27-08.png)
+
+La división no se hace correctamente, ocurre un error, pero el bloque `finally` independientemente de que haya sucedido el `try` o el `catch` se va a ejecutar.
+
+Podemos plantearnos el tratamiento de más de una excepción con bloques `catch` en los cuales como decíamos iríamos de excepción más concreta hacia una excepción más genérica. Aquí tendríamos dos posibles errores uno es el de divisiones entre cero y el otro es el del tipo `nullPointerException` en el que tratamos de llamar a un método a través de una referencia que no está apuntando a ningún objeto, que es una referencia nula.
+
+*`TratamientoExcepciones03`*
+
+```java
+package excepciones;
+
+public class TratamientoExcepciones03 {
+
+   public static void main(String[] args) {
+
+      try {
+         int a = 2;
+         int b = 1; //0;
+         int resultado = a / b;
+         String mensaje = null;
+         System.out.println(mensaje.length()); // Error de división entre 0
+      } catch (ArithmeticException ex) {
+         // ex.printStackTrace();
+         System.err.println("Error: " + ex.getMessage());
+      } catch (Exception ex) {
+         System.out.println("Se ha producido un error no esperado");
+      }
+
+   }
+
+}
+```
+
+![27-09](images/27-09.png)
+
+Podemos comprobar como se ha producido un error que no esperábamos, no esperábamos que el programador utilizara una referencia nula.
+
+O en este caso si estuviéramos haciendo la división la ejecución de esta sentencia pararía en `int resultado = a / b;` porque esto produciría una excepción de tipo aritmético, las siguientes dos sentencias ya no se ejecutan, con lo cual se va a tratar en el bloque `catch (ArithmeticException ex)`.
+
+*`TratamientoExcepciones03`*
+
+```java
+package excepciones;
+
+public class TratamientoExcepciones03 {
+
+   public static void main(String[] args) {
+
+      try {
+         int a = 2;
+         int b = 0;
+         int resultado = a / b;
+         String mensaje = null;
+         System.out.println(mensaje.length()); // Error de división entre 0
+      } catch (ArithmeticException ex) {
+         // ex.printStackTrace();
+         System.err.println("Error: " + ex.getMessage());
+      } catch (Exception ex) {
+         System.out.println("Se ha producido un error no esperado");
+      }
+
+   }
+
+}
+```
+
+![27-10](images/27-10.png)
+
+
+
 
 De aquí esto quiere decir que no se pasa ejecutar estas dos sentencias que además ya hemos comprobado que podían producir un error y que el tratamiento se le da con este bloque CAD de aquí no podríamos plantear otro tipo de excepciones por ejemplo una que suele ser muy cómodo para para los programadores que trabajan con colección eso o con array es el tipo de excepción letra tarde que recorrer una colección de mensaje si comenzáramos así podríamos comprobar como esto se imprime a priori parece correcta vale pero nos damos cuenta que la raíz de 100 mensajes tiene una dos tres cuatro posiciones y que aquí estamos tratando de acceder a una quinta posición que no existe este error se trataría mediante la excepción array index out of bound exception estamos intentando acceder a una posición a un índice de una raíz que está fuera de sus límites en este caso de abajo tenemos un error diferente en este caso tenemos una dos tres cuatro cinco posiciones dentro de la RAE pero tenemos una posición que es una cadena nula si tratamos de imprimir eso en mayúscula pues nos damos cuenta como a la hora de imprimir la segunda cadena al tratar de pasarlo mayúscula estamos llamando a un método sobre una referencia que es nula con lo cual produce un pointer excepto el uso de este operador de la barra vertical la que está en la en la tecla del uno nos permite darle un tratamiento como a estas dos excepciones a la primera o a la segunda podemos ver como este mensaje te dan un tratamiento a los errores lo también como existe aparte de existe. Aunque hemos utilizado para imprimir mensaje existe system Earth en digamos que es una consola que como una la de salida a la auto pero que bueno en Eclipse lo único que va a hacer eso imprimirlo errores en en un color distinto color rojo esto viene heredado desde antiguo cuando puedas pues los sistemas informáticos podían tener una consola de salida y una consola diferente un monitor diferente incluso para para los posibles errores incluso podríamos configurar la ejecución de nuestro proyecto para que los errores los primeros por aquí no suena de dirigiendo hacia otro sitio por ejemplo hacia hacia un fichero para tener una especie de sistema de Loomis no de registro bitácora deja de error tendríamos un tratamiento que sería si llamo anterior a a Java 7 el que no ofrece el de la barra del pickup en el que bueno podemos comprobar como para tratar una excepción de tipo a reír de autobox o de grupo Intercom con un tratamiento particular vale pues lo haríamos así si no le queremos dar el mismo tratamiento tendremos diferentes bloques CAD no si me lo trataríamos el grupo interés que la excepción es el run o sí RR tipo array autofox de tipo array index out of bounds vale con esto terminamos el tratamiento de excepciones vamos a pasar ahora a conocer alguna de las excepciones más comunes alguno de los tipos de sesión más comunes que no
 
