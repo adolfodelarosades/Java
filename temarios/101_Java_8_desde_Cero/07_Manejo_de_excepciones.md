@@ -495,7 +495,6 @@ public class TratamientoExcepciones03 {
 
 Nos podríamos plantear otro tipo de excepciones por ejemplo una que suele ser muy común para los programadores que trabajan con colecciones o con array es el tipo de excepción de tratar de recorrer una colección, en este caso un array de mensajes. Si lanzáramos así:
 
-
 *`TratamientoExcepciones04`*
 
 ```java
@@ -559,13 +558,43 @@ public class TratamientoExcepciones04 {
 
 Pues nos damos cuenta como a la hora de imprimir la segunda cadena, al tratar de pasarlo a mayúsculas estamos llamando a un método sobre una referencia que es nula, con lo cual produce un `NullPointerException`, el uso de este operador de la barra vertical `|` la que está en la en la tecla del uno, nos permite darle un tratamiento común a estas dos excepciones a la primera o a la segunda. Podemos ver como el último mensaje tras darle un tratamiento a los errores lo imprime.
 
-
-
 Fijaos como existe aparte de `System.out` existe `System.err` digamos que es una consola que es común a la de salida a la `out` pero que Eclipse lo único que va a hacer es imprimir los errores en en un color rojo. Esto viene heredado desde antiguo cuando los sistemas informáticos podían tener una consola de salida y una consola diferente un monitor diferente incluso para los posibles errores, incluso podríamos configurar la ejecución de nuestro proyecto para que los errores los que imprimimos por aquí los fuera redirigiendo hacia otro sitio por ejemplo hacia un fichero para tener una especie de sistema de Logs de registro o bitácora de errores.
 
+Aquí tendríamos un tratamiento que sería digamos anterior a Java 7 el que no ofrece el de la barra vertical,  que bueno podemos comprobar que para tratar una excepción de tipo `ArrayIndexOutOfBoundsException` o `NullPointerException` con un tratamiento particular, si no le queremos dar el mismo tratamiento tendremos diferentes bloques `catch` uno para cada tipo de excepción, lo haríamos así.
 
-tendríamos un tratamiento que sería si llamo anterior a a Java 7 el que no ofrece el de la barra del pickup en el que bueno podemos comprobar como para tratar una excepción de tipo a reír de autobox o de grupo Intercom con un tratamiento particular vale pues lo haríamos así si no le queremos dar el mismo tratamiento tendremos diferentes bloques CAD no si me lo trataríamos el grupo interés que la excepción es el run o sí RR tipo array autofox de tipo array index out of bounds vale con esto terminamos el tratamiento de excepciones vamos a pasar ahora a conocer alguna de las excepciones más comunes alguno de los tipos de sesión más comunes que no
+*`TratamientoExcepciones04bis`*
 
+```java
+public class TratamientoExcepciones04bis {
+
+   public static void main(String[] args) {
+
+      String[] mensajes = { "En un lugar", "de La Mancha", "de cuyo nombre", "no quiero acordarme" };
+      // String[] mensajes = { "En un lugar", null, "de cuyo nombre", "no quiero acordarme", "no ha mucho tiempo vivía" };
+
+      try {
+         for (int i = 0; i < 5; i++) {
+	    System.out.println(mensajes[i].toUpperCase());
+         }
+      } catch (ArrayIndexOutOfBoundsException ex) {
+         System.err.println("Tratamiento particular a las excepción ArrayIndex...");
+      } catch (NullPointerException ex) {
+         System.err.println("Tratamiento particular a la excepción NullPointer...");
+      }
+
+      System.out.println("Mensaje final");
+
+   }
+
+}
+```
+
+![27-13](images/27-13.png)
+
+![27-14](images/27-14.png)
+
+
+Con esto terminamos el tratamiento de excepciones vamos a pasar ahora a conocer alguna de las excepciones más comunes.
 
 ## 28. Excepciones más comunes 4:49 
 
