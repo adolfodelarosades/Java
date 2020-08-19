@@ -711,15 +711,193 @@ Cualquier código hecho por Java de las miles de clases que Java ofrece implemen
 
 ![29_Lanzamiento_y_propagacion_de_excepciones-4](images/29_Lanzamiento_y_propagacion_de_excepciones-4.png)
 
+Aparejado al lanzamiento de excepciones propias de Java, nos podemos plantear el hecho de crear excepciones propias, esto nos puede servir para dar tratamiento a situaciones de error que no son propios de Java, no es un problema de acceso a un fichero, no es una operación aritmética de división entre 0, sino que son errores asociados a nuestra lógica de negocio, por lógica de negocio entendemos pues a lo más esencial y propio característico de nuestro sistema, si pensamos por ejemplo en un sistema bancario de cuentas corrientes y la posibilidad de hacer traspasos entre cuentas de nuestra entidad podríamos tener una excepción que nos indicará cuando una cuenta a la hora de hacer un traspaso o sacar dinero desde un cajero se queda con saldo negativo y podríamos crear una excepción de tipo `SaldoNegativoException`. Para crear una excepción propia lo que hacemos es extender de la clase `Exception` y eso nos permitiría tener nuestras propias clases. 
+
+Como podemos comprobar es muy sencillo crear una excepción propia porque tan solo tendríamos que extender la clase `Exception` y aportar un constructor que tuviera o no parámetros en este caso nos interesaría tener un constructor con un parámetro que sería el `saldo` negativo y tan solo tendríamos que llamar al constructor de la clase base de `Exception` con `super` para modelar el mensaje de expresión que vamos a mostrar.
+
 ![29_Lanzamiento_y_propagacion_de_excepciones-5](images/29_Lanzamiento_y_propagacion_de_excepciones-5.png)
 
-aparejado al lanzamiento de excepciones propias de cada nos podemos plantear el hecho de crear excepciones propias que esto no puede servir para dar tratamiento a situaciones de error que no son propios de cada no es un problema de acceso a un fichero no es una operación aritmética de división entre 0 sino que son errores asociados a nuestra lógica de negocio por lógica de negocio entendemos pues a lo más esencial y propio característico de nuestro sistema si pensamos por ejemplo de un sistema bancario de cuentas corrientes y la posibilidad de hacer traspasos entre cuentas de nuestra de nuestra entidad podríamos tener una excepción que nos indicará cuando una cuenta a la hacer un traspaso o a sacar dinero desde un cajero pues se queda con saldo negativo y podríamos crear una excepción de tipo saldo negativo crear una gestión propia lo que hacemos es extender de la clase excepción vale y eso nos permitiría tener nuestras propias clase como podemos comprobar es muy sencillo crear una excepción propia porque tan solo tendríamos que extender la clase y aportar un constructor vale es que tuviera o no parámetros en este caso no interesaría tener un constructor con un parámetro que sería el saldo negativo y tan solo tendríamos que llamar al constructor de la clase base de excepción con súper para modelar el mensaje de expresión que vamos a mostrar cualquier código para mí
+Por último aparejado al uso del lanzamiento de excepciones por parte de un método, podríamos indicar el lanzamiento explícito de una excepción, eso viene íntimamente relacionado sobre todo con las excepciones propias, si tenemos un método que va a permitirnos sacar una cantidad de dinero de un cajero para sacar dinero de una cuenta, podríamos tener la posibilidad de lanzar explícitamente una excepción, eso se hace a través de la palabra reservada `throw` sin `s` que nos va a permitir lanzar una nueva instancia de una excepción, lo podríamos hacer dentro de un bloque normal de código como es el caso en la diapositiva, sabiendo que el método `sacarDinero` relanza la excepción hacia quien lo este invocando o lo podríamos hacer también para encadenar un tratamiento parcial a una excepción pero aún así querer relanzarla con lo cual podríamos en un bloque `catch` recoger una excepción, darle un tratamiento, pero relanzarla para que el método que nos ha invocado la pudiera también tratar. 
+
+### :computer: `101-29-Lanzamiento`
+
+Vamos a ver algunos ejemplos, en este caso ejemplos sin y con `throws`.
+
+*`EjemploConThrows`*
+
+```java
+package conthrows;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class EjemploConThrows {
+
+   public static void main(String[] args) {
+		
+      try {
+         writeList();
+         System.out.println("Fichero escrito correctamente");
+      } catch (IOException e) {
+         System.out.println("Error al intentar abrir un fichero de texto");
+      }
+   }
+	
+   public static void writeList() throws IOException {
+      PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
+		
+      for(int i = 0; i < 10; i++) {
+         out.println("Mensaje nº " + i);
+      }
+		
+      out.close();
+   }
+
+}
+```
+
+*`OutFile.txt`*
+
+```txt
+Mensaje nº 0
+Mensaje nº 1
+Mensaje nº 2
+Mensaje nº 3
+Mensaje nº 4
+Mensaje nº 5
+Mensaje nº 6
+Mensaje nº 7
+Mensaje nº 8
+Mensaje nº 9
+```
+
+![29-01](images/29-01.png)
+
+En este ejemplo nos podemos dar cuenta que en la clase `EjemploConThrows` en el método `writeList()` lanzamos la excepción `throws IOException`.
+
+Esto es un código que lo de dentro como es natural no lo vamos a conocer, el tratamiento de ficheros cosa que nos queda fuera del ámbito de este curso, tratamos de escribir dentro de un fichero de texto una serie de mensajes, la operación de abrir un nuevo flujo hacia un fichero de caracteres va a producir potencialmente una excepción de tipo `IOException`.
+
+```java
+
+   public static void writeList() throws IOException {
+      PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
+		
+      for(int i = 0; i < 10; i++) {
+         out.println("Mensaje nº " + i);
+      }
+		
+      out.close();
+   }
+
+```
+
+Si eliminamos dicha excepción Eclipse nos marcará una serie de errores de compilación.
+
+![29-03](images/29-03.png)
+
+Ya Eclipse se anticipa al posible error de compilación que pudiéramos tener y entonces nos da la posibilidad de o bien englobar el código de estas sentencias dento de un bloque `try-catch` o  añadir `throws` a la declaración del método, que va a ser la opción que hagamos aquí, de esa manera ya no tendríamos que darle tratamiento a esta excepción si no que lo delegamos, relanzamos esta excepción hacia arriba, lo delegamos en el método que nos ha llamado, en este caso el método `main` que es el que se encarga de manejar la `IOException`.
 
 
-Modelar el mensaje de sesión que vamos a mostrar por último aparejado al uso del lanzamiento de excepciones por parte de un método podríamos indicar el lanzamiento explícito de una excepción en su tiene íntimamente relacionado sobre todo con las excepciones propias si tenemos un método que va a permitirnos sacar una cantidad de dinero de un cajero para sacar dinero de una cuenta podríamos tener la posibilidad de lanzar explícitamente una excepción eso se hace a través de la palabra reservada pero sin este que nos va a permitir lanzar una nueva instancia de una excepción lo podríamos hacer dentro de mono lo que normal de código como ese caso sabiendo que el método sacar dinero relanza la expresión hacia quien lo tengo cuando o lo podríamos hacer también para encadenar un tratamiento parcial a una excepción pero aún así quiere relanzar la con lo cual podríamos en un bloque catch recoger una excepción David o tratamiento pero relanzar la para que el método que nos ha invocado lo pudiera también tratar vale vamos a ver alguno ejemplo en este caso ejemplo sin Proust y ejemplo control en este ejemplo nos podemos dar cuenta como si eliminamos aquí vale esto es un código que lo de dentro como es natural no lo vamos a conocer el tratamiento de ficheros cosa que no queda dentro del ámbito de este curso que tratamos de escribir dentro de un fichero de texto una serie de mensaje la operación de abrir un nuevo flujo hacia un fichero de caracteres va a producir en potencialmente una excepción de tipo entrada-salida 1 io exception ya eclipse se anticipa al posible error de compilación que pudiéramos tener y entonces nos da la posibilidad de o bien el código anticipa al posible error de compilación que pudiéramos tener y entonces nos da la posibilidad de obien englobar el código está sentencia dentro de un bloque try-catch o añadir froze a la declaración del método que va a ser la opción que hagamos aquí de esa manera ya no tendríamos que darle tratamiento a esta sección si no que lo delegamos relajamos esta sesión hacia arriba lo delegamos en el método que nos ha llamado quisiéramos comprobar lo podríamos comentar estás en línea y desconectar está todo y veríamos como aquí ya nos está obligando de nuevo eclipse a que tenemos tratamiento anestesiaron o bien relación con la sesión vamos a borrar este código de aquí y podemos comprobar como a que lo trate la infección aquí no genera ya este bloque try catch podríamos darle al tratamiento que quisiéramos no
+```java
+
+   public static void main(String[] args) {
+		
+      try {
+         writeList();
+         System.out.println("Fichero escrito correctamente");
+      } catch (IOException e) {
+         System.out.println("Error al intentar abrir un fichero de texto");
+      }
+   }
+
+```
+
+Si en este método no tuvieramos el bloque `try catch` es decir:
+
+```java
+
+   public static void main(String[] args) {
+		
+      
+         writeList();
+         System.out.println("Fichero escrito correctamente");
+      
+   }
+
+```
+
+![29-04](images/29-04.png)
+
+Veríamos como aquí ya nos está obligando de nuevo Eclipse a que o bien le demos tratamiento a la excepción o bien relancemos la excepción. en este caso como ya queremos manejar la excepción aquí implica meter el bloque `try catch`, incluso nos podemos apoyar de Eclipse para generar el bloque `try catch` para que envuelva más de una sentencia dentro del bloque.
+
+![29-05](images/29-05.png)
+
+y ya nosotros podríamos darle al tratamiento que quisiéramos.
+
+### :computer: `101-29-Lanzamiento`
+
+En el ejemplo sin `Throws` que tenemos aquí abajo.
+
+*`EjemploSinThrows`*
+
+```java
+package conthrows;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class EjemploSinThrows {
+
+   public static void main(String[] args) {
+      writeList();
+      System.out.println("Fichero escrito correctamente");
+   }
+
+   public static void writeList() {
+      PrintWriter out = null;
+      try {
+         out = new PrintWriter(new FileWriter("OutFile.txt"));
+
+         for (int i = 0; i < 10; i++) {
+            out.println("Mensaje nº " + i);
+         }
+      } catch (IOException ex) {
+         System.err.println("Error al abrir o escribir en el fichero");
+      } finally {
+         out.close();
+      }
+
+   }
+
+}
+```
+
+![29-02](images/29-02.png)
+
+*`OutFile.txt`*
+
+```txt
+Mensaje nº 0
+Mensaje nº 1
+Mensaje nº 2
+Mensaje nº 3
+Mensaje nº 4
+Mensaje nº 5
+Mensaje nº 6
+Mensaje nº 7
+Mensaje nº 8
+Mensaje nº 9
+```
+
+Tendríamos aquí que el tratamiento de la excepción lo tendríamos que dar dentro del propio método `writeList()`, en este caso tanto el método de apertura del fichero como el método de escritura del fichero podrían provocar que algún tipo de error de entrada salida `IOException` ocurriera y que capturara el bloque `catch` y por ilustrar también un bloque `finally` totalmente real, tendríamos aquí la posibilidad de cerrar una instancia de un fichero, de un flujo de salida, tanto algún error de escritura como si no sé produce.
+
+En ambos ejemplos se produce el mismo fichero `OutFile.txt` por que ambos programas hacen exactamente lo mismo, como no hemos puesto ninguna ruta se crea dentro del mismo proyecto.
 
 
-Ejemplos en frozen tendríamos aquí que el tratamiento de la infección lo tendríamos que dar dentro del propio método Franklin vale en este caso tanto el método de apertura del fichero como el método de escritura del fichero podrían provocar que algún tipo de error de entrada salida que capturar y amo en el bloque K y por ilustrar también un bloque finally totalmente real tendríamos aquí la posibilidad de cerrar una instancia de flujo de salida tantos y bueno pues ha producido algún error de escritura como si no sé cómo se produce ejecutamos este ejemplo pero de esto como si juntamos este otro con con el con el código froze vale también tendríamos el mismo contenido porque ambos programa hacen esta por ilustrar también el ejemplo que decía muerte de un especial de tipo propio y el uso de froze podríamos tener una clase banco con una cuenta corriente para Luis Miguel cuenta corriente es una clase que tiene un string como propietario y un saldo y tendríamos la posibilidad de ingresar dinero y de sacar dinero a la hora de sacar dinero nos daríamos con que si el saldo que queda al sacar dinero en negativo se lanzaría una excepción proporcionando ese salto la infección que ya la hemos visto antes en propia entiende de excepción vale esto de aquí es un warning no es un error sino bueno una advertencia que no hace triste nos dice que como todas las estancias de excepción también están implementando una interfaz que se llama serializable deberíamos añadir algo no tenemos por que hacerlo le digo los warnings son mensajes de error pero no son aplicaciones bueno como hemos visto tendríamos que sobre escribir o implementar mejor dicho un método de concierto en este caso recibe un parámetro y llamar al constructor de excepción para que primera ese mensaje de error en este caso nuestra cuenta corriente empieza con un valor de Rosario de pie si queremos sacar 160 € e imprimir el saldo actual nos daremos de luces con qué se ha producido una excepción estamos en la cuenta quedado en descubierto con un con un saldo de menos 60 € y tendríamos que ponernos en contacto con nuestro banco con esto terminamos el bloque de tratamiento de excepciones y nos lanzamos de lleno al último bloque de nuestro
+
+ejecutamos este ejemplo pero de esto como si juntamos este otro con con el con el código froze vale también tendríamos el mismo contenido porque ambos programa hacen esta por ilustrar también el ejemplo que decía muerte de un especial de tipo propio y el uso de froze podríamos tener una clase banco con una cuenta corriente para Luis Miguel cuenta corriente es una clase que tiene un string como propietario y un saldo y tendríamos la posibilidad de ingresar dinero y de sacar dinero a la hora de sacar dinero nos daríamos con que si el saldo que queda al sacar dinero en negativo se lanzaría una excepción proporcionando ese salto la infección que ya la hemos visto antes en propia entiende de excepción vale esto de aquí es un warning no es un error sino bueno una advertencia que no hace triste nos dice que como todas las estancias de excepción también están implementando una interfaz que se llama serializable deberíamos añadir algo no tenemos por que hacerlo le digo los warnings son mensajes de error pero no son aplicaciones bueno como hemos visto tendríamos que sobre escribir o implementar mejor dicho un método de concierto en este caso recibe un parámetro y llamar al constructor de excepción para que primera ese mensaje de error en este caso nuestra cuenta corriente empieza con un valor de Rosario de pie si queremos sacar 160 € e imprimir el saldo actual nos daremos de luces con qué se ha producido una excepción estamos en la cuenta quedado en descubierto con un con un saldo de menos 60 € y tendríamos que ponernos en contacto con nuestro banco con esto terminamos el bloque de tratamiento de excepciones y nos lanzamos de lleno al último bloque de nuestro
 
 
 
