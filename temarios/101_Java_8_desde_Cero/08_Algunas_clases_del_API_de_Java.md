@@ -459,29 +459,48 @@ public class J_CompararFechas {
 
 ![31-13](images/31-13.png)
 
- el año como por 
+Para fechas fijas del mes del año como por ejemplo la caducidad de una tarjeta de crédito, no caducan nunca un determinado día del mes si no que si miran vuestra tarjeta de débito o crédito caduca en un mes y un año, pues lo podríamos hacer con la clase `YearMonth` que nos permitiría obtener un año y mes actual, aquí por ejemplo actual sería Afosto del 2020 y podemos también ver la longitud en días del mes actual con el método `lengthOfMonth()` y si quisieramos como decía antes usarlo por ejemplo para una tarjeta de crédito, podríamos decir su tarjeta caduca en febrero de 2022 creandolo con el con el método `of` de esta manera.
+
+*`K_FechasFijas`*
+
+```java
+package fechas;
+
+import java.time.Month;
+import java.time.YearMonth;
+
+public class K_FechasFijas {
+	
+   public static void main(String[] args) {
+		
+      YearMonth anioYMesActual = YearMonth.now();
+      System.out.printf("Días en la clase MonthYear %s: %d%n", anioYMesActual, anioYMesActual.lengthOfMonth());
+      YearMonth caducidadTarjetaCredito = YearMonth.of(2022, Month.FEBRUARY);
+      System.out.printf("Su tarjeta de crédito caduca en %s ", caducidadTarjetaCredito);
+
+   }
+
+}
+```
+
+![31-14](images/31-14.png)
+
+
+
+
+
+
+un auténtico quebradero de cabeza que hay siempre en el manejo de fecha el manejo de si una fecha pertenece a un año bisiesto con el método que nos devuelve verdadero si el año de la fecha si cierto y falso si no lo es particular el año 2017 no es bisiesto solamente podemos manejar un momento concreto sino que podemos querer modificar o manejar un periodo de tiempo cómo salir a las 8 ya lleva algún tiempo y liberada hace escasas semanas que ha liberado una primera versión de Java 9 vale podríamos ver con la clase superior el periodo que hay entre la fecha de liberación de la primera versión de Java 8 de la primera versión de Java 9 y guardarlo en una instancia de periodo cómo podéis comprobar no es un instante de tiempo sino que en el fondo lo que estamos almacenando es la diferencia entre los peces no bueno pues lo podríamos ver y expresar está diferencia por ejemplo en una cantidad de meses he habido 42 meses de diferencia entre la liberación de Java 8 y dejaba nuevo para procesar fecha tenemos también la posibilidad de usar el método parte el método parte que es estático lo que haría sería procesar una fecha que estaría en una cadena de caracteres para obtener en este caso por ejemplo un local de la clase datetimeformatter nos proporciona una serie de constante vale invitando bueno el formato en el que tiene estás hecha una de ellas el basket Izzo day nos vendría la fecha con el año el mes y el día sin ningún tipo de preparación tendríamos la posibilidad de crear un DAI un datetimeformatter a partir de un patrón siguiendo bueno utilizando una serie de caracteres en este caso la termino con la representan un día con un día del mes vale en la M mayúscula los meses del año y la y el año expresado en cuatro cifras vale esto se le llaman máscara de formato la cantidad diferente de elementos que podemos usar en una máscara de formato lo podéis encontrar en la documentación porque es bastante bastante extensa y os recomiendo que la leáis con detenimiento aquí podríamos crear un formateador y utilizarlo por la clase parte para traducir la clase viernes perdón para traducir la cadena pierna en un local de si se produjera algún tipo de situación especial no podríamos manejar con la excepción del time passed precio vale tiene que ser mira también dentro de la pide estaba time y bueno podríamos decir que esa fecha pues por ejemplo no sería para se hable en este caso sí que lo ha sido y por ejemplo le añadiéramos otro cuatro aquí pues nos daría una excepción
 
 *``*
 
 ```java
 ```
 
-
 *``*
 
 ```java
 ```
-
-*``*
-
-```java
-```
-
-
-
-
-
-ejemplo la caducidad de una tarjeta de crédito no caducan nunca un determinado día del mes y no tendréis vuestra tarjeta de débito crédito caduca en un mes y un año pues lo podríamos hacer con la clase tía como que nos permitiría obtener un año y mes actual por ejemplo actual feria febrero perdón noviembre del 2017 vale aquí podríamos ver la longitud en días del mes actual vale hiciéramos como decía antes usarlo por ejemplo para una tarjeta de crédito podríamos decir su tarjeta caduca en febrero de 2018 no podíamos quitar perdón crear con el con el método de esta manera un auténtico quebradero de cabeza que hay siempre en el manejo de fecha el manejo de si una fecha pertenece a un año bisiesto con el método que nos devuelve verdadero si el año de la fecha si cierto y falso si no lo es particular el año 2017 no es bisiesto solamente podemos manejar un momento concreto sino que podemos querer modificar o manejar un periodo de tiempo cómo salir a las 8 ya lleva algún tiempo y liberada hace escasas semanas que ha liberado una primera versión de Java 9 vale podríamos ver con la clase superior el periodo que hay entre la fecha de liberación de la primera versión de Java 8 de la primera versión de Java 9 y guardarlo en una instancia de periodo cómo podéis comprobar no es un instante de tiempo sino que en el fondo lo que estamos almacenando es la diferencia entre los peces no bueno pues lo podríamos ver y expresar está diferencia por ejemplo en una cantidad de meses he habido 42 meses de diferencia entre la liberación de Java 8 y dejaba nuevo para procesar fecha tenemos también la posibilidad de usar el método parte el método parte que es estático lo que haría sería procesar una fecha que estaría en una cadena de caracteres para obtener en este caso por ejemplo un local de la clase datetimeformatter nos proporciona una serie de constante vale invitando bueno el formato en el que tiene estás hecha una de ellas el basket Izzo day nos vendría la fecha con el año el mes y el día sin ningún tipo de preparación tendríamos la posibilidad de crear un DAI un datetimeformatter a partir de un patrón siguiendo bueno utilizando una serie de caracteres en este caso la termino con la representan un día con un día del mes vale en la M mayúscula los meses del año y la y el año expresado en cuatro cifras vale esto se le llaman máscara de formato la cantidad diferente de elementos que podemos usar en una máscara de formato lo podéis encontrar en la documentación porque es bastante bastante extensa y os recomiendo que la leáis con detenimiento aquí podríamos crear un formateador y utilizarlo por la clase parte para traducir la clase viernes perdón para traducir la cadena pierna en un local de si se produjera algún tipo de situación especial no podríamos manejar con la excepción del time passed precio vale tiene que ser mira también dentro de la pide estaba time y bueno podríamos decir que esa fecha pues por ejemplo no sería para se hable en este caso sí que lo ha sido y por ejemplo le añadiéramos otro cuatro aquí pues nos daría una excepción
 
 Todavía no hemos llegado al año 20.000 vale esa fecha no sería pasear como mecanismo análogo tenemos la posibilidad de formatear una fecha para obtener una cadena de caracteres que poder visualizar y aquí tendríamos la fecha y hora de hoy con la clase localdatetime vale profesora de manera que visualizamos el día del mes el mes con 3 caracteres el año con cuatro cifras la hora y 2 minutos vale y lo formateé haríamos utilizando un determinado formateado vale una instancia de venta en formato y no se pudiera procesar porque no hemos equivocado en la máscara de formato porque no se tiene que está información también nos daría una excepción de tipo venta con esto terminamos el vídeo referente a fecha ha sido una introducción hemos podido conocer a vista de pájaro muchos de los métodos que no ofrece os recomiendo que vayáis trabajando poco a poco con las diferentes clases jefe ese apasionante accidente tratamiento de fecha y de hora y que poco a poco también Vallés practicando con luces
 
