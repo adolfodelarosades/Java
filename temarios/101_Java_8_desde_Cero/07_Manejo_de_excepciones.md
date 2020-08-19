@@ -895,10 +895,109 @@ Tendríamos aquí que el tratamiento de la excepción lo tendríamos que dar den
 
 En ambos ejemplos se produce el mismo fichero `OutFile.txt` por que ambos programas hacen exactamente lo mismo, como no hemos puesto ninguna ruta se crea dentro del mismo proyecto.
 
+### :computer: `101-29-Lanzamiento`
+
+Por ilustrar también el ejemplo que decíamos antes de una excepción de tipo propio y el uso de `throw` podríamos tener una clase `Banco`  con una `CuentaCorriente` para Luis Miguel
 
 
-ejecutamos este ejemplo pero de esto como si juntamos este otro con con el con el código froze vale también tendríamos el mismo contenido porque ambos programa hacen esta por ilustrar también el ejemplo que decía muerte de un especial de tipo propio y el uso de froze podríamos tener una clase banco con una cuenta corriente para Luis Miguel cuenta corriente es una clase que tiene un string como propietario y un saldo y tendríamos la posibilidad de ingresar dinero y de sacar dinero a la hora de sacar dinero nos daríamos con que si el saldo que queda al sacar dinero en negativo se lanzaría una excepción proporcionando ese salto la infección que ya la hemos visto antes en propia entiende de excepción vale esto de aquí es un warning no es un error sino bueno una advertencia que no hace triste nos dice que como todas las estancias de excepción también están implementando una interfaz que se llama serializable deberíamos añadir algo no tenemos por que hacerlo le digo los warnings son mensajes de error pero no son aplicaciones bueno como hemos visto tendríamos que sobre escribir o implementar mejor dicho un método de concierto en este caso recibe un parámetro y llamar al constructor de excepción para que primera ese mensaje de error en este caso nuestra cuenta corriente empieza con un valor de Rosario de pie si queremos sacar 160 € e imprimir el saldo actual nos daremos de luces con qué se ha producido una excepción estamos en la cuenta quedado en descubierto con un con un saldo de menos 60 € y tendríamos que ponernos en contacto con nuestro banco con esto terminamos el bloque de tratamiento de excepciones y nos lanzamos de lleno al último bloque de nuestro
+*`Banco`*
 
+```java
+package misexcepciones;
+
+public class Banco {
+
+   public static void main(String[] args) {
+		
+      CuentaCorriente cc = new CuentaCorriente("Luis Miguel", 100.0);
+		
+      try {
+         cc.sacarDinero(160.0);
+         System.out.println("Saldo actual " + cc.getSaldo());
+      } catch (SaldoNegativoException e) {
+         System.err.println(e.getMessage());
+         System.err.println("Póngase en contacto con su banco");
+      }
+      
+   }
+
+}
+```
+
+`CuentaCorriente` es una clase que tiene dos atributos `propietario` y `saldo`, tendríamos la posibilidad de ingresar dinero y de sacar dinero.
+
+*`CuentaCorriente`*
+
+```java
+package misexcepciones;
+
+public class CuentaCorriente {
+
+   private String propietario;
+   private double saldo;
+
+   public CuentaCorriente(String propietario, double saldo) {
+      this.propietario = propietario;
+      this.saldo = saldo;
+   }
+
+   public String getPropietario() {
+      return propietario;
+   }
+
+   public void setPropietario(String propietario) {
+      this.propietario = propietario;
+   }
+
+   public double getSaldo() {
+      return saldo;
+   }
+
+   public void ingresarDinero(double cantidad) {
+      saldo += cantidad;
+   }
+
+   public void sacarDinero(double cantidad) throws SaldoNegativoException {
+      saldo -= cantidad;
+      if (saldo < 0) {
+         throw new SaldoNegativoException(saldo);
+      }
+   }
+
+}
+```
+
+A la hora de sacar dinero nos daríamos con que si el `saldo` que queda al sacar dinero es en negativo se lanzaría una excepción proporcionando ese `saldo`.
+
+La excepción que ya la hemos visto antes, es propia, extiende de `Exception`.
+
+*`SaldoNegativoException`*
+
+```java
+package misexcepciones;
+
+public class SaldoNegativoException extends Exception {
+	
+   public SaldoNegativoException(double saldo) {
+      super("La cuenta ha quedado en descubierto (" + Double.toString(saldo) + ")");
+   }
+
+}
+```
+
+Eclipse nos marca un warning en esta última clase:
+
+`The serializable class SaldoNegativoException does not declare a static final serialVersionUID field of type long`,
+
+no es un error sino una advertencia que nos hace Eclipse nos dice que como todas las instancias de excepción también están implementando una interfaz que se llama serializable deberíamos añadir algo, no tenemos por que hacerlo, ya digo los warnings son mensajes de error, pero no son obligaciones.
+
+Como hemos visto tendríamos que implementar un método de constructor, en este caso recibe un parámetro y llamar al constructor de `Exception` para que imprimiera ese mensaje de error. 
+
+En este caso nuestra cuenta corriente empieza con un saldo de 100, si queremos sacar 160 € e imprimir el saldo actual nos daremos de bruces con qué se ha producido una excepción, estamos en la cuenta quedado en descubierto con un con un saldo de menos 60 € y tendríamos que ponernos en contacto con nuestro banco.
+
+![29-06](images/29-06.png)
+
+Con esto terminamos el bloque de tratamiento de excepciones y nos lanzamos de lleno al último bloque de nuestro curso.
 
 
 ## Contenido adicional 4   
