@@ -512,24 +512,75 @@ public class L_Bisiesto {
 
 ![31-15](images/31-15.png)
 
-solamente podemos manejar un momento concreto sino que podemos querer modificar o manejar un periodo de tiempo cómo salir a las 8 ya lleva algún tiempo y liberada hace escasas semanas que ha liberado una primera versión de Java 9 vale podríamos ver con la clase superior el periodo que hay entre la fecha de liberación de la primera versión de Java 8 de la primera versión de Java 9 y guardarlo en una instancia de periodo cómo podéis comprobar no es un instante de tiempo sino que en el fondo lo que estamos almacenando es la diferencia entre los peces no bueno pues lo podríamos ver y expresar está diferencia por ejemplo en una cantidad de meses he habido 42 meses de diferencia entre la liberación de Java 8 y dejaba nuevo para procesar fecha tenemos también la posibilidad de usar el método parte el método parte que es estático lo que haría sería procesar una fecha que estaría en una cadena de caracteres para obtener en este caso por ejemplo un local de la clase datetimeformatter nos proporciona una serie de constante vale invitando bueno el formato en el que tiene estás hecha una de ellas el basket Izzo day nos vendría la fecha con el año el mes y el día sin ningún tipo de preparación tendríamos la posibilidad de crear un DAI un datetimeformatter a partir de un patrón siguiendo bueno utilizando una serie de caracteres en este caso la termino con la representan un día con un día del mes vale en la M mayúscula los meses del año y la y el año expresado en cuatro cifras vale esto se le llaman máscara de formato la cantidad diferente de elementos que podemos usar en una máscara de formato lo podéis encontrar en la documentación porque es bastante bastante extensa y os recomiendo que la leáis con detenimiento aquí podríamos crear un formateador y utilizarlo por la clase parte para traducir la clase viernes perdón para traducir la cadena pierna en un local de si se produjera algún tipo de situación especial no podríamos manejar con la excepción del time passed precio vale tiene que ser mira también dentro de la pide estaba time y bueno podríamos decir que esa fecha pues por ejemplo no sería para se hable en este caso sí que lo ha sido y por ejemplo le añadiéramos otro cuatro aquí pues nos daría una excepción
+No solamente podemos manejar un momento concreto, sino que podemos querer modificar o manejar un periodo de tiempo, cómo saben Java 8 ya lleva algún tiempo liberado, en 2017 se libero una primera versión de Java 9, podríamos ver con la clase `Period` el periodo que hay entre la fecha de liberación de la primera versión de Java 8 y de la primera liberación de la versión de Java 9 y guardarlo en una instancia de periodo, cómo podéis comprobar no es un instante de tiempo sino que en el fondo lo que estamos almacenando es la diferencia entre dos fechas, lo podríamos ver y expresar está diferencia por ejemplo en una cantidad de meses, ha habido 42 meses de diferencia entre la liberación de Java 8 y de Java 9.
+
+*`M_Periodo`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+
+public class M_Periodo {
+	
+   public static void main(String[] args) {
+      LocalDate java8Release = LocalDate.of(2014, Month.MARCH, 14);
+      LocalDate java9Release = LocalDate.of(2017, Month.SEPTEMBER, 27);
+      Period periodToNextJavaRelease = Period.between(java8Release, java9Release);
+      System.out.println("Meses transcurridos entre la liberación de Java 8 y Java 9 : " + periodToNextJavaRelease.toTotalMonths());
+
+   }
+
+}
+```
+
+![31-16](images/31-16.png)
+
+Para procesar fecha tenemos también la posibilidad de usar el método `parse` que es estático, lo que haría sería procesar una fecha que estaría en una cadena de caracteres para obtener en este caso por ejemplo un `LocalDate` la clase `DateTimeFormatter` nos proporciona una serie de constantes indicando el formato que tiene esa fecha, una de ellas el `BASIC_ISO_DATE` nos vendría la fecha con el año, el mes y el día sin ningún tipo de separación, tendríamos la posibilidad de crear un `DateTimeFormatter` a partir de un patrón utilizando una serie de caracteres `dd/MM/yyyy` en este caso las `dd` representan un día del mes, las `MM` mayúscula los meses del año y la `yyyy` el año expresado en cuatro cifras, esto se le llaman **máscara de formato**, la cantidad diferente de elementos que podemos usar en una máscara de formato lo podéis encontrar en la documentación, porque es bastante bastante extensa y os recomiendo que la leáis con detenimiento, aquí podríamos crear un formateador `formatter` y utilizarlo con la clase `parse` para traducir la cadena `viernes` en un `LocalDate`,  si se produjera algún tipo de situación excepcional lo podríamos manejar con la excepción `DateTimeParseException` que viene definida también dentro del API de `java.time` y bueno podríamos decir que esa fecha por ejemplo no sería parseable, en este caso sí que lo ha sido y por ejemplo si le añadiéramos otro cuatro en `String viernes = "18/04/20144";` pues nos daría una excepción esa fecha no sería parseable, no hemos llegado al año 20000.
+
+*`N_ParseFormat`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+public class N_ParseFormat {
+	
+   public static void main(String[] args) {
+      String diaDespuesDeHoy = "20171112";
+      LocalDate formateada = LocalDate.parse(diaDespuesDeHoy, DateTimeFormatter.BASIC_ISO_DATE);
+      System.out.printf("La fecha generada de un String %s es %s %n", diaDespuesDeHoy, formateada);
+
+      String viernes = "18/04/2014";
+      try {
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+         LocalDate holiday = LocalDate.parse(viernes, formatter);
+         System.out.printf("Cadena formateada correctamente %s, la fecha es %s%n", viernes, holiday);
+      } catch (DateTimeParseException ex) {
+         System.out.printf("%s no es parseable!%n", viernes);
+         ex.printStackTrace();
+      }
+
+   }
+
+}
+```
+
+![31-17](images/31-17.png)
+
+
+
+Como mecanismo análogo tenemos la posibilidad de formatear una fecha para obtener una cadena de caracteres que poder visualizar y aquí tendríamos la fecha y hora de hoy con la clase localdatetime vale profesora de manera que visualizamos el día del mes el mes con 3 caracteres el año con cuatro cifras la hora y 2 minutos vale y lo formateé haríamos utilizando un determinado formateado vale una instancia de venta en formato y no se pudiera procesar porque no hemos equivocado en la máscara de formato porque no se tiene que está información también nos daría una excepción de tipo venta con esto terminamos el vídeo referente a fecha ha sido una introducción hemos podido conocer a vista de pájaro muchos de los métodos que no ofrece os recomiendo que vayáis trabajando poco a poco con las diferentes clases jefe ese apasionante accidente tratamiento de fecha y de hora y que poco a poco también Vallés practicando con luces
 
 *``*
 
 ```java
 ```
-
-*``*
-
-```java
-```
-
-*``*
-
-```java
-```
-
-Todavía no hemos llegado al año 20.000 vale esa fecha no sería pasear como mecanismo análogo tenemos la posibilidad de formatear una fecha para obtener una cadena de caracteres que poder visualizar y aquí tendríamos la fecha y hora de hoy con la clase localdatetime vale profesora de manera que visualizamos el día del mes el mes con 3 caracteres el año con cuatro cifras la hora y 2 minutos vale y lo formateé haríamos utilizando un determinado formateado vale una instancia de venta en formato y no se pudiera procesar porque no hemos equivocado en la máscara de formato porque no se tiene que está información también nos daría una excepción de tipo venta con esto terminamos el vídeo referente a fecha ha sido una introducción hemos podido conocer a vista de pájaro muchos de los métodos que no ofrece os recomiendo que vayáis trabajando poco a poco con las diferentes clases jefe ese apasionante accidente tratamiento de fecha y de hora y que poco a poco también Vallés practicando con luces
 
 # 32. Colecciones ArrayList 11:30 
 
