@@ -1,9 +1,10 @@
 # 8. Algunas clases del API de Java 82m
-   * Manipulación de datos con Stringbuilder 8:01 
-   * Manejo de fechas 17:31 
-   * Colecciones ArrayList 11:30 
-   * Introducción a las expresiones lambda 20:21 
-   * Práctica: Creando un gestor de aparcamiento de coches 25:16 
+
+   * 30 Manipulación de datos con Stringbuilder 8:01 
+   * 31 Manejo de fechas 17:31 
+   * 32 Colecciones ArrayList 11:30 
+   * 33 Introducción a las expresiones lambda 20:21 
+   * 34 Práctica: Creando un gestor de aparcamiento de coches 25:16 
    * Contenido adicional 6
       
 # 30. Manipulación de datos con Stringbuilder 8:01 
@@ -18,19 +19,107 @@ Conoce el tipo de cadena Stringbuilder en esta lección
 
 ![30_StringBuilder-1](images/30_StringBuilder-1.png)
 
+Vamos a comenzar el último bloque de este curso de Java desde cero en el que vamos a conocer algunas de las clases más utilizadas del API de Java de las clases que Java nos proporciona, así como una introducción a la gran novedad de Java 8 qué ha sido el uso de la expresión Lambda.
+
 ![30_StringBuilder-2](images/30_StringBuilder-2.png)
+
+Comencemos en este caso con la manipulación de cadenas de caracteres de datos con la clase `StringBuilder`. `StringBuilder` surge a raíz de la cuestión de que la clase **`String` es una clase inmutable**, con inmutable queremos decir que **es una clase cuyo valor no se puede modificar**, una vez inicializado no se puede modificar su valor, esto ofrece sus ventajas pero también tienes sus inconvenientes y es que si nosotros queremos hacer operaciones sobre todo de concatenación de varias cadenas de caracteres o de sustitución parcial de algún fragmento de la cadena, nos encontramos con que cualquier operación de este tipo **producíra siempre una nueva cadena** por lo cual vamos a sobrecargando la memoria y las operaciones son francamente ineficientes.
+
+**Un objeto de `StringBuilder`** nos va a permitir representar una cadena un `String` pero que si será modificable, que **será mutable** y por ende será más eficiente para cadenas que van a ser modificadas o que queremos darle otro tratamiento que no sea diferente a simplemente crearlas y utilizarlas tal cual.
 
 ![30_StringBuilder-3](images/30_StringBuilder-3.png)
 
+A la hora de construir una instancia de tipo `StringBuilder` tenemos que tener en cuenta los conceptos de **tamaño y capacidad**, el tamaño de un `StringBuilder` va a ser igual que el de un `String` es decir el número de caracteres que tenga, sin embargo **`StringBuilder` incorpora el concepto de capacidad** y es que podemos crear una instancia de `StringBuilder` que tenga un tamaño menor a la capacidad que tenga, es decir al cuál le quepan todavía más caracteres, pueda alojar un número de caracteres superior, de hecho cuando nosotros creamos una instancia de `StringBuilder` con su constructor sin parámetros, crea un `StringBuilder` vacío pero con una capacidad de 16 caracteres, es decir si invocaramos directamente a `length()` devolvería 0 pero el método `capacity()` devolvería 16. Tenemos otra serie de constructores en particular parece interesante el que permite construir un `StringBuilder` a partir de una instancia de `String` o el que nos permite indicar la capacidad inicial de un `StringBuilder` si es que prevemos que va a ser muy superior a los 16 caracteres. 
+
 ![30_StringBuilder-4](images/30_StringBuilder-4.png)
+
+Aquí tenemos un pequeño gráfico que ilustra la diferencia entre tamaño y capacidad, si creamos un `StringBuilder` vacío y le añadimos una serie de caracteres para saludar, podemos comprobar como le hemos añadido una cadena con 9 caracteres que ocuparían desde el índice 0 hasta el 8, pero desde el índice 9 hasta el 15, es decir hasta completar la capacidad 16 estaría vacío, pero estaría disponible para que nosotros lo pudiéramos utilizar. 
 
 ![30_StringBuilder-5](images/30_StringBuilder-5.png)
 
+La clase `StringBuilder` tiene una serie de métodos que nos van a permitir manejar la longitud, nos va a permitir cambiar la longitud de un `StringBuilder`, si la nueva longitud es menor que la actual los caracteres que quedarían a la derecha de esa longitud son truncados, de decir que se perderían, si es mayor lo que se añadirían serían elementos vacíos y a diferencia de `setLength` lo que hace el método `ensureCapacity` es asegurar que la capacidad de este `StringBuilder` sea al menos la del `minCapacity` que le estamos pasando.
+
+Algunos métodos como `append()` que acabamos de ver que lo que hace es agregar una serie de caracteres al final del `StringBuilder`, es decir a continuación del último carácter, pueden aumentar la capacidad de nuestros `StringBuilder` de manera transparente a nosotros. 
+
 ![30_StringBuilder-6](images/30_StringBuilder-6.png)
 
-Comenzar el último bloque de este curso de Java desde cero en el que vamos a conocer algunas de las clases más utilizadas del API de Java vale me las clases que estaba nos proporciona así como una introducción a la gran novedad de cada 8 qué ha sido el uso de la expresión snapchat comencemos en este caso con la manipulación de cadenas de caracteres de datos con la clase 33 surge a raíz de la sesión de que la clase String es una clase e inmutable con inmutable queremos decir que una clase puede valor no no se puede modificar una vez inicializado no se puede modificar solo yo ofrece sus ventajas pero también tienes un inconveniente y es que si nosotros queremos hacer operaciones sobre todo de concatenación de varias cadenas de caracteres o de sustitución parcial de algún fragmento de la cadena no encontramos conque cualquier operación de este tipo producía siempre una nueva cadena por lo cual vamos sobrecargando la memoria y las operaciones son francamente ineficiente nos va a permitir representar una cadena un string pero que si será modificable que será mutable y por ende será más eficiente para cadenas que van a ser modificada o que queremos pues darle otro tratamiento que no sea diferente o sea que sea diferente a enfrente crearla y utilizarlas tal cual a la hora de construir una una instancia de tipo String Builder tenemos que tener en cuenta los conceptos de tamaño y capacidad el tamaño de un string Builder va a ser igual que el de un string es decir el número de caracteres que tenga sin embargo streambuilder incorpora el concepto de capacidad y es que podemos crear una instancia descendientes que tenga un tamaño menor a la capacidad que tenga decir al cuál le quepan todavía más caracteres pueda alojar un número de caracteres superior de hecho cuando nosotros creamos una instancia de streambuilder con su constructor sin parámetros crea un streambuilder vacío pero con una capacidad de 16 caracteres decir sin boca vamos directamente al en devolvería 00 el método capacitivo devolvería 16 tenemos otra serie de constructores en particular parece interesante el que permite construir o el que nos permite indicar la capacidad inicial de un streambuilder y es que prevemos que va a ser muy superior a los 16 caracteres aquí tenemos un pequeño gráfico que ilustra la diferencia entre tamaño y capacidad si creamos en streaming del vacío y le añadimos una serie de caracteres para saludar podemos comprobar como le hemos añadido una cadena con 9 caracteres que ocuparían desde el índice 0 hasta el 8 pero desde el índice 9 hasta el 15 es decir hasta completar la capacidad 16 y estaría vacío pero estaría disponible para que nosotros lo pudiéramos utilizar la clase sin Builder tiene una serie de métodos que nos van a permitir o no puedes manejar la longitud vale nos va a permitir cambiar la longitud de un string Builder y la nueva longitud es menor que la actual los caracteres que quedarían a la derecha de esta noche y tú son truncado de decir que se perdería si es mayor lo que se añadirían serían elementos paseo a diferencia de Cetelem lo que hace el método ensurecapacity es asegurar que la capacidad de este finde sea al menos la del mail capacity que le estamos pasando algunos métodos como Apple y acabamos de ver que lo que hace es agregar una serie de caracteres al final del streambuilder es decir a continuación del último crack te pueden aumentar la capacidad de nuestras team builder de manera transparente a nosotros descargar novedad de
+Antes de ver los ejemplos conozcamos algunos de las operaciones que podemos hacer con `StringBuilder`. Ya hemos visto que podemos usar el método `append()` que nos permite añadir a continuación del último carácter que tengamos una cadena de caracteres y también tiene sobreescrito el método `append()` para los diferentes tipos primitivos, si le pasamos un tipo de dato que no es primitivo lo que hace es transformarlo antes de pasarlo. 
 
-La del Milka Pacific que estamos pasando algunos métodos como Apple y acabamos de ver que lo que hace es agregar una serie de caracteres al final del Springfield es decir a continuación del último carácter pueden aumentar la capacidad de nuestras team builder de manera transparente antes de verlo ejemplo conozcamos algunos de las operaciones que podemos hacer con streambuilder ya hemos visto que podemos usar el método app que nos permite añadir a continuación del último carácter que tengamos una cadena de caracteres y también tiene sobreescrito el método hacen para los diferentes tipos primitivos vale si le pasamos un tipo de dato que nos primitivos lo que hace es transformarlo antes de pasarlo tenemos también el método de leche que elimina una secuencia de caracteres dentro de este finde tenemos el método insert que inserta el segundo argumento tanto siete tipos tren como de tipo primitivo en la cadena es el primero el ojo lo que indica la posición a partir de la cual se va insertar el método replace que lo que hace reemplazar un carácter o una cadena de caracteres a partir de una posición o a partir de un inicio y un fin y otros métodos bastante útiles que nos devuelve la cadena pero dada la vuelta por último decir que si necesitamos utilizar el método streambuilder como si fuera una cadena de caracteres tenemos el método to String que nos devolvería una instancia inmutable del contenido de ese finde que inicialmente es mutable veamos algunos ejemplos tendríamos la posibilidad de hacer una especie de conversor de palíndromos un palíndromo en una frase que en principio se lee igual de izquierda a derecha o de derecha izquierda o viendo un poco los espacios no uno de los más clásicos se dábale arroz a la zorra el Abad y lo leyera y de derecha izquierda que digo que ando un poco espacio en blanco veríamos que se leería igualito que por no son las mismas palabras son como los números capicúa pero aplicado a la frase tendríamos aquí la posibilidad de darle un tratamiento con extreme ineficiente y con streambuilder bastante más eficiente aquí tendríamos que el la frase ver su longitud construirá una serie de arrays de Char para darle ese tratamiento transformar el string en un array fecha que lo haríamos posición a posición lo invertiría Moss crearía Moss la nueva frases y podríamos comprobar si al darle la vuelta a la frase pues lo mejor vayamos nosotros manualmente no nos hemos parado a implementar la comprobación vale p**** enmarañar el ejemplo si esto que tenemos aquí escrito se parece a esto que tenemos una cadena de tipo String es muy ineficiente sería bastante más sencillo con el uso de la clase StringBuilder cómo podemos comprobar podemos construir un streambuilder a partir de un string tan solo tendríamos que darle la vuelta con el método reversa y lo imprimimos no teníamos que hacer toda esta sucesión de operaciones auxiliares por lo cual os recomiendo que íbamos a trabajar con una cadena de caracteres que va a ser modificadas en el tiempo usamos siempre la clase en Builder a través de su método AP entreverse insert y si por contra vamos a crear una cadena de caracteres que no y no vaya a ser modificada nunca pues podemos usar la clase String
+Tenemos también el método `delete()` que elimina una secuencia de caracteres dentro del `StringBuilder`. 
+
+Tenemos el método `insert()` que inserta el segundo argumento tanto si es de tipo `String` como de tipo primitivo en la cadena, `offset` es el primero lo que indica la posición a partir de la cual se va insertar.
+
+El método `replace()` que lo que hace es reemplazar un carácter o una cadena de caracteres a partir de una posición o a partir de un inicio y un fin.
+
+Y otros métodos bastante útiles como el método `reverse()` que nos devuelven la cadena pero dada la vuelta.
+
+Por último decir que si necesitamos utilizar el método `StringBuilder` como si fuera una cadena de caracteres tenemos el método `toString()` que nos devolvería una instancia inmutable del contenido de ese `StringBuilder` que inicialmente es mutable.
+
+### :computer: `101-30-StringBuilder`
+
+Veamos algunos ejemplos, tendríamos la posibilidad de hacer una especie de conversor de palíndromos, un palíndromo en una frase que en principio se lee igual de izquierda a derecha o de derecha a izquierda obviando un poco los espacios, uno de los más clásicos es `dabale arroz a la zorra el Abad` si lo leyera de derecha izquierda ya digo obviando un poco los espacios en blanco, veríamos que se leería igual, que en el fondo son las mismas palabras, son como los números capicúa pero aplicado a la frase.
+
+Tendríamos la posibilidad de darle un tratamiento con `String` ineficiente y con `StringBuilder` bastante más eficiente.
+
+*`PalindromosString`*
+
+```java
+package usodestringbuilder;
+
+public class PalindromosString {
+   public static void main(String[] args) {
+
+      String palindromo = "Dabale arroz a la zorra el abad";
+      int longitud = palindromo.length();
+      char[] tempCharArray = new char[longitud];
+      char[] charArray = new char[longitud];
+
+      // transformamos el string en un array de char
+      for (int i = 0; i < longitud; i++) {
+         tempCharArray[i] = palindromo.charAt(i);
+      }
+
+      // lo invertimos
+      for (int j = 0; j < longitud; j++) {
+         charArray[j] = tempCharArray[longitud - 1 - j];
+      }
+
+      String palindromoInvertido = new String(charArray);
+      System.out.println(palindromoInvertido);
+
+   }
+}
+```
+
+![30-01](images/30-01.png)
+
+Tendríamos la frase, recuperamos su longitud, construiriamos una serie de arrays de Char para darle ese tratamiento, transformar el `String` en un array `char` que lo haríamos posición a posición, lo invertiríamos, crearíamos la nueva frases y podríamos comprobar si al darle la vuelta a la frase, lo comprobariamos manualmente no nos hemos parado a implementar la comprobación, si esto que tenemos aquí escrito se parece a esto que tenemos en la salida.
+
+Esto que con una cadena de tipo `String` es muy ineficiente sería bastante más sencillo con el uso de la clase `StringBuilder` cómo podemos comprobar.
+
+*`PalindromosStringBuilder`*
+
+```java
+package usodestringbuilder;
+
+public class PalindromosStringBuilder {
+
+   public static void main(String[] args) {
+
+      String palindromo = "Dabale arroz a la zorra el abad";
+      StringBuilder sb = new StringBuilder(palindromo);
+      sb.reverse(); // lo invertimos
+      System.out.println(sb); // llamada implícita a sb.toString().
+
+   }
+}
+```
+
+![30-02](images/30-02.png)
+
+Podemos construir un `StringBuilder` a partir de un `String` tan solo tendríamos que darle la vuelta con el método `reverse()` y lo imprimimos, no teníamos que hacer toda esta sucesión de operaciones auxiliares.
+
+Por lo cual os recomiendo que si vamos a trabajar con una cadena de caracteres que va a ser modificadas en el tiempo usemos siempre la clase `StringBuilder` a través de su método `append()`,  `reverse()`, `insert()` y si por contra vamos a crear una cadena de caracteres que no vaya a ser modificada nunca pues podemos usar la clase `String`
 
 
 # 31. Manejo de fechas 17:31 
