@@ -573,14 +573,39 @@ public class N_ParseFormat {
 
 ![31-17](images/31-17.png)
 
+Como mecanismo análogo tenemos la posibilidad de formatear una fecha para obtener una cadena de caracteres que poder visualizar y aquí tendríamos la fecha y hora de hoy con la clase `LocalDateTime.now()` procesada de manera que visualizamos el día del mes, el mes con 3 caracteres, el año con cuatro cifras, la hora y los minutos y lo formatearíamos utilizando un determinado formateador, una instancia de `DateTimeFormatter`, si no se pudiera procesar porque nos hemos equivocado en la máscara de formato o porque no se tiene esa información también nos daría una excepción de tipo `DateTimeException`.
 
-
-Como mecanismo análogo tenemos la posibilidad de formatear una fecha para obtener una cadena de caracteres que poder visualizar y aquí tendríamos la fecha y hora de hoy con la clase localdatetime vale profesora de manera que visualizamos el día del mes el mes con 3 caracteres el año con cuatro cifras la hora y 2 minutos vale y lo formateé haríamos utilizando un determinado formateado vale una instancia de venta en formato y no se pudiera procesar porque no hemos equivocado en la máscara de formato porque no se tiene que está información también nos daría una excepción de tipo venta con esto terminamos el vídeo referente a fecha ha sido una introducción hemos podido conocer a vista de pájaro muchos de los métodos que no ofrece os recomiendo que vayáis trabajando poco a poco con las diferentes clases jefe ese apasionante accidente tratamiento de fecha y de hora y que poco a poco también Vallés practicando con luces
-
-*``*
+*`O_FechaAString`*
 
 ```java
+package fechas;
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class O_FechaAString {
+	
+   public static void main(String[] args) {
+      LocalDateTime fechaLlegada = LocalDateTime.now();
+      try {
+         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+         String landing = fechaLlegada.format(format);
+         System.out.printf("Llegada a : %s %n", landing);
+      } catch (DateTimeException ex) {
+         System.out.printf("%s no puede ser formateada!%n", fechaLlegada);
+         ex.printStackTrace();
+      }
+
+   }
+
+}
 ```
+
+![31-18](images/31-18.png)
+
+
+Con esto terminamos la lección referente a fechas, ha sido una introducción hemos podido conocer a vista de pájaro muchos de los métodos que nos ofrece Java 8, os recomiendo que vayáis trabajando poco a poco con las diferentes clases que nos ofrece este apasionante API de tratamiento de fecha y de hora y que poco a poco también vayas practicando con el.
 
 # 32. Colecciones ArrayList 11:30 
 
