@@ -56,7 +56,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * 25 Clases abstractas e interfaces II 9:48 
    * Contenido adicional 5
    
-7. [Manejo de excepciones](101_Java_8_desde_Cero/07_Manejo_de_excepciones.md) 39m
+7. [Manejo de excepciones](101_Java_8_desde_Cero/07_Manejo_de_excepciones.md) 39m :+1:
    * 26 Excepciones y errores 9:28 
    * 27 Tratamiento de excepciones 13:36 
    * 28 Excepciones más comunes 4:49 
@@ -64,11 +64,11 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * Contenido adicional 4
    
 8. [Algunas clases del API de Java](101_Java_8_desde_Cero/08_Algunas_clases_del_API_de_Java.md) 82m
-   * 3 Manipulación de datos con Stringbuilder 8:01 
-   * 3 Manejo de fechas 17:31 
-   * 3 Colecciones ArrayList 11:30 
-   * 4 Introducción a las expresiones lambda 20:21 
-   * 4 Práctica: Creando un gestor de aparcamiento de coches 25:16 
+   * 30 Manipulación de datos con Stringbuilder 8:01 
+   * 31 Manejo de fechas 17:31 
+   * 32 Colecciones ArrayList 11:30 
+   * 33 Introducción a las expresiones lambda 20:21 
+   * Práctica: Creando un gestor de aparcamiento de coches 25:16 
    * Contenido adicional 6
    
 9. Contenido extra
