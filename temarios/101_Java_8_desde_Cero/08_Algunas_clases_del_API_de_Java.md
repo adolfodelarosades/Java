@@ -148,19 +148,99 @@ Nombre | Tipo     | Uso
 
 ![31_Manejo_de_fechas-1](images/31_Manejo_de_fechas-1.png)
 
+Vamos a continuar con el uso de alguna de las clases que no ofrece Java conociendo otra gran novedad de Java 8 que el manejo de fecha.
+
+Hasta las versiones anteriores de Java el manejo de fecha en Java era horrible, por no decir alguna cosa peor, el tratamiento de fechas se hacía a través de una sola clase `Date` donde los métodos que a priori podrían parecer más interesantes estaban deprecados desde la versión 2 de Java aproximadamente, con lo cual para crear una fecha necesitas otra clase auxiliar que era una clase de tipo `Calendar` sobre todo en calendario gregoriano que es el que nosotros manejamos y bueno todo el tratamiento de fechas era horriblemente tedioso.
+
 ![31_Manejo_de_fechas-2](images/31_Manejo_de_fechas-2.png)
+
+Java 8 se ha puesto las pilas en ese sentido y basándose en una librería llamada **joda-time** que ya existía desde hace tiempo, lo ha incorporado al estándar y lo ha definido mediante el documento JSR-310. Utilizando además con un calendario predeterminado que el que define la normativa ISO-8601.
 
 ![31_Manejo_de_fechas-3](images/31_Manejo_de_fechas-3.png)
 
+Es decir ahora para el manejo de fechas, Java nos ofrece un buen grueso de clases diferentes entre las que destacan `LocalDate` y `LocalDateTime` que serán clases que nos permitirán manejar fechas o fechas y horas pero dentro de nuestro ámbito horario.
+
+También podremos crear una fecha o una fecha y hora que estará en una determinada zona que nosotros podremos manejar o incluso tendrá clases que nos permitirán manejar no instante concreto o fechas concretas o fecha y hora sino periodos de tiempo o periodo de duración. Además nos va a ayudar a manejar elementos complejos como no podíamos hacerlo antes como el uso del años bisiestos, la zona horaria, horario de verano, horarios de invierno, todo eso es capaz de manejarlo el nuevo API.
+
 ![31_Manejo_de_fechas-4](images/31_Manejo_de_fechas-4.png)
+
+Se ha hecho siguiendo una serie de principios de diseño, que os presentamos por aquí el uso tenía que ser claro, es decir en el uso de los distintos métodos de la clases tiene que ser el esperado según su nombre, que fuese fluido, es decir que pudiéramos encadenar llamadas a métodos que nos hicieran un código legible y todo muy en el estilo de Java 8, que los objetos sean inmutables y que además fuese extensible, por ejemplo si nosotros tuviéramos que crear nuestro propio sistema de calendario lo pudiéramos hacer. 
+
+En la diapositiva algún ejemplo de cómo crear una fecha, de cómo manejar una fecha para ajustarle un determinado día o para obtener una fecha no solo la de hoy sino a partir de una serie de cifras, añadirle, restarle cantidades etc.
+
+Si accedemos a la documentación de Java DOC del paquete `java.time`.
+
+https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/time/package-summary.html
+
+![31-01](images/31-01.png)
+
+![31-02](images/31-02.png)
+
+Podría encontrar todas y cada una de las clases que ofrece y encontrareis un montón de información súper concreta sobre cada una de las clases.
 
 ![31_Manejo_de_fechas-5](images/31_Manejo_de_fechas-5.png)
 
+**Si les puedo decir a modo común que todas las clases siguen una serie de convención de métodos**, suelen tener el método `of` y el método `from` ambos estático y qué **el método `of` sirve para crear una instancia del objeto del tipo sobre el que estamos llamando a partir de una serie de datos entrada**, en la diapositiva pasada teníamos la manera de crear un objeto de tipo `LocalDate` a partir de un año, mes y día. 
+
+Tenemos también la posibilidad de **convertir algo que no es** un `LocalDate` o un `LocalDateTime` o un `ZoneTime` en un objeto **a partir de ese parámetro de entrada** con el **método `from`**
+
+El **método `parse`** nos permiten procesar una cadena de caracteres para obtener una instancia de esa clase.
+
+El **método `format`** procesaría los datos de una cadena sobre la cual estamos llamando, para producir una cadena de caracteres, usualmente para visualizar una parte o todos los datos de esa fecha u hora.
+
+El **método `get`**, el **método `is`**, el **método `with`**, que veremos que tiene bastante implementaciones nos permite devolver una parte de un objeto, consulta una parte de un objeto, el estado, si se cumpla una determinada propiedad, por ejemplo si un año es bisiesto o alguna fecha es posterior a otra, lo podríamos hacer mediante métodos `is` y el método `with` en donde devuelve una copia de un objeto ajustando algún tipo de parámetro, por ejemplo el día de cobro lo podríamos ubicar como dos días antes del último día del mes de la fecha actual, esto lo podemos hacer con el método `with` como lo muestra la diapositiva pasada.
+
 ![31_Manejo_de_fechas-6](images/31_Manejo_de_fechas-6.png)
 
-Vamos a continuar con el uso de alguna de las clases que no ofrece Java conociendo otra gran novedad de Java 8 que el manejo de fecha hasta las versiones anteriores de Java el manejo de fecha de fecha en Java era horrible por no decir alguna cosa pero el tratamiento de fechas se hacía través de una sola clase de donde los métodos que a priori puede días podrían parecer más interesante estaban desplegados desde la versión 2 dejabas aproximadamente con lo cual para crear una fecha necesitas otra clase auxiliar que era una clase de tipo calendar sobre todo en calendario gregoriano que el que nosotros manejamos y bueno todo el tratamiento que se dedicó era horriblemente tedioso Java 8 se ha puesto las pilas en ese sentido y basándose en una librería llamada Yoda time que ya existía desde hace tiempo pues lo ha incorporado al estándar y lo habéis tenido mediante el documento jsr310 utilizando además con un calendario predeterminado que el que define la normativa ISO en la en los 80 y 60 ahora para el manejo de fechas Java no ofrece un buen grueso de clases diferentes entre las que destacan localdate to localdatetime que serán clases que nos permitirán manejar fechas o 6 horas espero dentro de nuestro ámbito horario también podremos crear una fecha o una fecha y hora que estará en una determinada zona que nosotros podremos manejar o incluso tendrá clases que nos permitirán manejar no instante concreto o fechas concretas y ahora sino periodos de tiempo o periodo de duración además nos va a ayudar a manejar elementos complejos como no podíamos hacerlo antes como el uso del año bisiesto la zona horaria horario de verano horarios de invierno todo eso es capaz de manejarlo el nuevo el nuevo aquí serie de principios de diseño que os presentamos por aquí el uso tenía que ser claro es decir en el uso de los distintos métodos de la clase tiene que ser el esperado según su nombre que fuese fluido es decir que pudiéramos encadenar llamadas a métodos que nos hicieron un código legible y todas muy en el estilo de Java 8 que los objetos sean inmutables y que además fuese extensible no por ejemplo si nosotros tuviéramos que crear nuestro propio sistema de calendario lo pudiéramos hacer aquí algún ejemplo de cómo crear una fecha de cómo manejar una fecha para para bueno pues ajustarle un determinado una determinada día o para obtener una fecha no sobre las de hoy sino a partir de una serie de cifra añadirle restarle cantidades etcétera accedeix a a la documentación de javadoc del paquete Java time a ti podría encontrar todas y cada una de las clases que que ofrece y encontrareis un montón de información súper concreta sobre cada una de las clases vale yo puedo decir a a modo como que todas las clases siguen una serie de convención de método suelen tener el método y el método from ambos estático y qué sirven el método para crear una instancia del objeto del tipo del que estamos llamando a partir de una serie de una serie de datos entrada aquí teníamos la manera de crear un objeto de tipo localdate a partir de un año mes día canción
+Algunos métodos más que nos vamos a encontrar, los **métodos `plus`** y **`minus`** que nos permiten añadir una unidad o restar una unidad en días, meses o años a una determinada fecha y los **métodos `to`** y **`at`**, el método `to` que nos permite **convertir un objeto en otro tipo** y el método `at` que **combina un objeto con otro objeto para producir otro**.
 
-Parce nos permiten procesar una cadena de caracteres para obtener una instancia de esa clase forma procesar y a los datos de una cadena sobre la cual estamos llamando para producir una cadena de caracteres usualmente por para visualizar una parte o toda todos los datos de café segura método qué método thinking método quiz queremos que tiene bastante implementaciones pues nos permite devolver una parte de un objeto consulta objeto el Estado se te cumpla una determinada propiedad por ejemplo si un año es bisiesto o alguna fecha no podremos hacer mediante métodos y algunos métodos más que nos vamos a encontrar los métodos plus vinimos ya veremos que además tienen alguna no sobre escritura sino no hay métodos con este prefijos que nos permiten añadir una unidad o restar a una unidad días meses años a una determinada fecha y los métodos tú ya el método que nos permite consultar convertir un objeto en otro tipo y el método que combina un objeto con otro objeto para para producir andando vamos a ver una sucesión de ejemplo sencillo que tenéis aquí al lado para poder ver elementos sencillos de tratamiento obtener la fecha concreta de hoy día mes y año lo podríamos hacer con el método estático Nau de la clase localdate si tenemos podemos ver cómo está tomando la fecha actual y después la hacen pimientos sobre el formato de impresión está imprimiendo en un formato estándar y este veremos juntos pues como se puede modificar obtener el día el mes y el año de un localdate lo podríamos hacer a través de los diferentes métodos dientes que nos ofrecen 10 días nos devuelve el año que salió nos devuelve el mes y el día del mes nos podríamos tener con el método que estéis noviembre usar la fecha de hoy queremos colocar la fecha de nacimiento lo podríamos hacer a través del método estático a partir de voz el año descendió podemos tener una instancia de lo cantes algo muy como ya digo solamente proceso con la fecha antes de Java 8 ya era tedioso utilizando de utilizando un calendar terriblemente tedioso esto es mucho más conciso y más concreto podemos comparar y saber si dos fechas son iguales a través de este ejemplo si por ejemplo queremos obtener la fecha del 11 del 11 de 2017 y la fecha de hoy lo podríamos comparar son la misma mediante su método si son la misma el manejo de otro tipo de fecha que son un poco peculiares lo podemos plantear con lo de Mad o eventos recurrentes para ellos no plantea Java time otra clase por ejemplo nosotros cumplimos años normalmente nacido el 29 de febrero no 4 años el mismo día por ejemplo tenemos aquí el día del nacimiento vale si alguien naciera por ejemplo en el día de hoy en el 11/11 podríamos guardar su día y mes de nacimiento en un
+### :computer: `101-31-Fechas`
+
+Vamos a ver una sucesión de ejemplo sencillo que tenéis aquí de la A a la O para poder ver elementos sencillos de tratamiento de fechas.
+
+Por ejemplo si quisieramos obtener la fecha concreta de hoy día mes y año lo podríamos hacer con el método estático `now()` de la clase `LocalDate`, si imprimimos podemos ver cómo está tomando la fecha actual y después la esta imprimiendo sobre el formato de impresión, está imprimiendo en un formato estándar, veremos después como se puede modificar.
+
+*`A_FechaHoy`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+
+public class A_FechaHoy {
+	
+   public static void main(String[] args) {
+
+      LocalDate hoy = LocalDate.now();
+      System.out.println("La fecha actual es : " + hoy);
+
+   }
+
+}
+```
+
+![31-03](images/31-03.png)
+
+ obtener el día el mes y el año de un localdate lo podríamos hacer a través de los diferentes métodos dientes que nos ofrecen 10 días nos devuelve el año que salió nos devuelve el mes y el día del mes nos podríamos tener con el método que estéis noviembre usar la fecha de hoy queremos colocar la fecha de nacimiento lo podríamos hacer a través del método estático a partir de voz el año descendió podemos tener una instancia de lo cantes algo muy como ya digo solamente proceso con la fecha antes de Java 8 ya era tedioso utilizando de utilizando un calendar terriblemente tedioso esto es mucho más conciso y más concreto podemos comparar y saber si dos fechas son iguales a través de este ejemplo si por ejemplo queremos obtener la fecha del 11 del 11 de 2017 y la fecha de hoy lo podríamos comparar son la misma mediante su método si son la misma el manejo de otro tipo de fecha que son un poco peculiares lo podemos plantear con lo de Mad o eventos recurrentes para ellos no plantea Java time otra clase por ejemplo nosotros cumplimos años normalmente nacido el 29 de febrero no 4 años el mismo día por ejemplo tenemos aquí el día del nacimiento vale si alguien naciera por ejemplo en el día de hoy en el 11/11 podríamos guardar su día y mes de nacimiento en un
+
+
+
+*``*
+
+```java
+```
+
+
+*``*
+
+```java
+```
+
+
+*``*
+
+```java
+```
 
 El manejo de otro tipo de fecha que son un poco peculiares lo podemos plantear con lo llamado elementos recurrentes para ellos no plantea Java time otra clase por ejemplo nosotros cumplimos años normalmente todos los años salvo los que han nacido el 29 de febrero no lo cumplen cada cuatro años el mismo día del cumpleaños el 18 de septiembre y 8 de septiembre 18 de septiembre de todo el baño y el mes pero no guardaría el año y lo podríamos utilizar para almacenar o para comparar eventos recurrentes no y como por ejemplo tenemos aquí el día del nacimiento vale si alguien naciera por ejemplo el día de hoy en el 11/11 podríamos guardar su día y mes de nacimiento en un monte o también tenemos aquí un ejemplo del uso de from del método from que nos permite obtener un monstre a partir de un local de procesa este local de obtiene la información que quiere y lo conseguiría cómo vemos que hoy el día de hoy es igual al día de nacimiento que hemos construido de diferente manera es igual pues no quería felicidades porque hoy es tu cumple para manejarla ahora tenemos otra clase que localizan su metronaut es análogo al de local de y nos permite conocer la hora actual como nos permite conocer incluso hasta los nanosegundos vale o sea que antes no podíamos manejar si queremos manejar añadiros disminuir una serie de días horas en este caso a una hora determinada un local time le queremos añadir 2 horas pues podríamos añadirlo a través de los métodos plus II llamamos aquí podemos ver que tenemos varias implementaciones Plus y de minutos para sumar o restar un número de horas determinado en el que le podemos indicar una cantidad y a partir de una enumeración de Crono YoUnique le podemos indicar el tipo de unidad de tiempo que le estamos añadido por ejemplo a una fecha ni siquiera sumarle una semana pues podríamos tomárselo con plus indicando unos y espero no yome podemos ver como tenemos diferentes unidades de tiempo centurias día de cada 12 horas milenios vale la verdad que está muy muy completo y podríamos ver la diferencia entre la fecha de hoy y la fecha de dentro de una podemos también ver y sumar años o restar años vale a una determinada fecha vale con el método con el método Plus y el metro 200 para comparar fechas decíamos que teníamos algunos métodos y por ejemplo tenemos y hamsters y el método y porque nos permiten indicar si una fecha es anterior o el posterior a otra el año como por ejemplo la caducidad de una tarjeta de crédito no caducan nunca un determinado día del mes y no tendréis vuestra tarjeta de débito crédito caduca en un mes y un año pues lo podríamos hacer con la clase tía como que nos permitiría obtener un año y mes actual por ejemplo actual feria febrero perdón noviembre del 2017 vale aquí podríamos ver la longitud en días del mes actual vale hiciéramos como decía antes usarlo por ejemplo para una tarjeta de crédito podríamos decir su tarjeta caduca en febrero de 2018 no podíamos quitar perdón crear con el con el método de esta manera un auténtico quebradero de cabeza que hay siempre en el manejo de fecha el manejo de si una fecha pertenece a un año bisiesto con el método que nos devuelve verdadero si el año de la fecha si cierto y falso si no lo es particular el año 2017 no es bisiesto solamente podemos manejar un momento concreto sino que podemos querer modificar o manejar un periodo de tiempo cómo salir a las 8 ya lleva algún tiempo y liberada hace escasas semanas que ha liberado una primera versión de Java 9 vale podríamos ver con la clase superior el periodo que hay entre la fecha de liberación de la primera versión de Java 8 de la primera versión de Java 9 y guardarlo en una instancia de periodo cómo podéis comprobar no es un instante de tiempo sino que en el fondo lo que estamos almacenando es la diferencia entre los peces no bueno pues lo podríamos ver y expresar está diferencia por ejemplo en una cantidad de meses he habido 42 meses de diferencia entre la liberación de Java 8 y dejaba nuevo para procesar fecha tenemos también la posibilidad de usar el método parte el método parte que es estático lo que haría sería procesar una fecha que estaría en una cadena de caracteres para obtener en este caso por ejemplo un local de la clase datetimeformatter nos proporciona una serie de constante vale invitando bueno el formato en el que tiene estás hecha una de ellas el basket Izzo day nos vendría la fecha con el año el mes y el día sin ningún tipo de preparación tendríamos la posibilidad de crear un DAI un datetimeformatter a partir de un patrón siguiendo bueno utilizando una serie de caracteres en este caso la termino con la representan un día con un día del mes vale en la M mayúscula los meses del año y la y el año expresado en cuatro cifras vale esto se le llaman máscara de formato la cantidad diferente de elementos que podemos usar en una máscara de formato lo podéis encontrar en la documentación porque es bastante bastante extensa y os recomiendo que la leáis con detenimiento aquí podríamos crear un formateador y utilizarlo por la clase parte para traducir la clase viernes perdón para traducir la cadena pierna en un local de si se produjera algún tipo de situación especial no podríamos manejar con la excepción del time passed precio vale tiene que ser mira también dentro de la pide estaba time y bueno podríamos decir que esa fecha pues por ejemplo no sería para se hable en este caso sí que lo ha sido y por ejemplo le añadiéramos otro cuatro aquí pues nos daría una excepción
 
