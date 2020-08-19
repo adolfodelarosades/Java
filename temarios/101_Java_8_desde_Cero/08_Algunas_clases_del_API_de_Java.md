@@ -221,15 +221,114 @@ public class A_FechaHoy {
 
 ![31-03](images/31-03.png)
 
- obtener el día el mes y el año de un localdate lo podríamos hacer a través de los diferentes métodos dientes que nos ofrecen 10 días nos devuelve el año que salió nos devuelve el mes y el día del mes nos podríamos tener con el método que estéis noviembre usar la fecha de hoy queremos colocar la fecha de nacimiento lo podríamos hacer a través del método estático a partir de voz el año descendió podemos tener una instancia de lo cantes algo muy como ya digo solamente proceso con la fecha antes de Java 8 ya era tedioso utilizando de utilizando un calendar terriblemente tedioso esto es mucho más conciso y más concreto podemos comparar y saber si dos fechas son iguales a través de este ejemplo si por ejemplo queremos obtener la fecha del 11 del 11 de 2017 y la fecha de hoy lo podríamos comparar son la misma mediante su método si son la misma el manejo de otro tipo de fecha que son un poco peculiares lo podemos plantear con lo de Mad o eventos recurrentes para ellos no plantea Java time otra clase por ejemplo nosotros cumplimos años normalmente nacido el 29 de febrero no 4 años el mismo día por ejemplo tenemos aquí el día del nacimiento vale si alguien naciera por ejemplo en el día de hoy en el 11/11 podríamos guardar su día y mes de nacimiento en un
+Si quisieamos obtener el día, el mes y el año de un `LocalDate` lo podríamos hacer a través de los diferentes **métodos `get`** que nos ofrecen, `getYear()` nos devuelve el año, `getMonthValue()` nos devuelve el mes y el día del mes lo podríamos obtener con el método `getDayOfMonth()`, usamos `printf` para formatear la salida.
 
+*`B_DiaMesAnio`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+
+public class B_DiaMesAnio {
+
+   public static void main(String[] args) {
+      LocalDate hoy = LocalDate.now();
+      int year = hoy.getYear();
+      int month = hoy.getMonthValue();
+      int day = hoy.getDayOfMonth();
+      System.out.printf("Año : %d Mes : %d Día : %d \t %n", year, month, day);
+
+   }
+}
+```
+
+![31-04](images/31-04.png)
+
+Si en lugar de usar la fecha de hoy queremos colocar la fecha de nacimiento lo podríamos hacer a través del método estático `of(1982, 9, 18)` con el año, mes y día podríamos obtener una instancia de `LocalDate` algo muy comodo ya digo, solamente este proceso con la fecha antes de Java 8 ya era tedioso utilizando `Date` utilizando `Calendar` terriblemente tedioso, esto es mucho más conciso y más concreto.
+
+
+*`C_FechaConcreta`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+
+public class C_FechaConcreta {
+
+   public static void main(String[] args) {
+
+      LocalDate nacimiento = LocalDate.of(1982, 9, 18);
+      System.out.println("Tu fecha de nacimiento es : " + nacimiento);
+
+   }
+	
+}
+```
+
+![31-05](images/31-05.png)
+
+Podemos comparar y saber si dos fechas son iguales a través de este ejemplo si por ejemplo queremos obtener la fecha del 19 del 08 del 2020 y la fecha de hoy, las podríamos comparar si son la misma fecha mediante el método `equals` que nos permitiría saber si son o no son la misma fecha. 
+
+*`D_FechasIguales`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+
+public class D_FechasIguales {
+
+   public static void main(String[] args) {
+      LocalDate fecha = LocalDate.of(2020, 8, 19);
+      LocalDate hoy = LocalDate.now();
+      if (fecha.equals(hoy)) {
+         System.out.printf("Hoy %s y la fecha %s son la misma fecha", hoy, fecha);
+      } else {
+         System.out.println("Las fechas no son iguales");
+      }
+
+   }
+
+}
+```
+
+![31-06](images/31-06.png)
+
+El manejo de otro tipo de fechas que son un poco peculiares, lo podemos plantear con los llamados eventos recurrentes y para ellos nos plantea `java.time` otra clase, por ejemplo nosotros cumplimos años el mismo día del mismo mes de todos los años ( a excepción de los nacidos el 29 de Febrero), pues tenemos una clase `MonthDay` que nos permite albergar una fecha sin año, nos permite guardar el día y mes de una fecha pero no el año y lo podríamos utilizar para almacenar eventos recurrentes como por ejemplo tenemos aquí el día del nacimiento, si alguien naciera por ejemplo en el día `11/11/2017` podríamos guardar su día y mes de nacimiento en un `MonthDay` llamado `diaNacimiento` o también tenemos un ejemplo de `MonthDay` con `from` que nos permite obtener un `MonthDay` a partir de un `LocalDate` procesa este `LocalDate` obtiene lo que quiere y lo construye. Despúes compara ambos `MonthDay` si estos fueran iguales nos felicitaría por que hoy será nuestro cumpleaños.
+
+*`E_EventosRecurrentes`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+import java.time.MonthDay;
+
+public class E_EventosRecurrentes {
+
+   public static void main(String[] args) {
+      LocalDate nacimiento = LocalDate.of(2017, 11, 11);
+      MonthDay diaNacimiento = MonthDay.of(nacimiento.getMonth(), nacimiento.getDayOfMonth());
+      MonthDay diaMesHoy = MonthDay.from(LocalDate.now());
+      if (diaMesHoy.equals(diaNacimiento)) {
+         System.out.println("Muchas felicidades, porque es tu cumpleaños");
+      } else {
+         System.out.println("Lo siento, pero no es tu cumpleaños");
+      }
+
+   }
+}
+```
+
+![31-07](images/31-07.png)
 
 
 *``*
 
 ```java
 ```
-
 
 *``*
 
