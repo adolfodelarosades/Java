@@ -325,6 +325,148 @@ public class E_EventosRecurrentes {
 ![31-07](images/31-07.png)
 
 
+Para manejar la hora tenemos otra clase que es `LocalTime` que es análoga a la de `LocalDate` y nos permite conocer la hora actual, fijaos como nos permite conocer incluso hasta los nanosegundos, cosa que antes no podíamos manejar.
+
+*`F_HoraActual`*
+
+```java
+package fechas;
+
+import java.time.LocalTime;
+
+public class F_HoraActual {
+	
+   public static void main(String[] args) {
+      LocalTime time = LocalTime.now();
+      System.out.println("La hora actual es : " + time);
+
+   }
+
+}
+```
+
+![31-08](images/31-08.png)
+
+Si queremos añadir o disminuir una serie de días, horas, en este caso una hora determinada a un `LocalTime` le queremos añadir 2 horas, podríamos añadirlo a través de los métodos `plus`, podemos ver que tenemos varias implementaciones de `plus` y de `minus` para sumar o restar un número de horas determinado. En este ejemplo estamos añadiendo dos horas al hora actual.
+
+*`G_AniadirHoras`*
+
+```java
+package fechas;
+
+import java.time.LocalTime;
+
+public class G_AniadirHoras {
+	
+   public static void main(String[] args) {
+		
+      LocalTime time = LocalTime.now();
+      LocalTime newTime = time.plusHours(2); // añadiendo dos horas 
+      System.out.println("Hora, después de 2 horas : " + newTime);
+
+   }
+
+}
+```
+
+![31-09](images/31-09.png)
+
+Tenemos también un método generico `plus` y `minus` en el que le podemos indicar una cantidad y a partir de una enumeración de `ChronoUnit` le podemos indicar el tipo de unidad de tiempo que le estamos añadido, por ejemplo a una fecha si siquiera sumarle una semana, pues podríamos sumarselo con `plus` indicando 1 y en `ChronoUnit` podemos ver como tenemos diferentes unidades de tiempo centurias, días, decadas, medios días, horas, milenios.
+
+![31-11](images/31-11.png)
+
+la verdad que está muy muy completo y podríamos ver la diferencia entre la fecha de hoy y la fecha de dentro de una semana. 
+
+
+*`H_UnaSemanaDespues`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class H_UnaSemanaDespues {
+	
+   public static void main(String[] args) {
+
+      LocalDate nextWeek = LocalDate.now().plus(1, ChronoUnit.WEEKS);
+      System.out.println("Hoy es : " + LocalDate.now());
+      System.out.println("Dentro de 1 semana: " + nextWeek);
+
+   }
+
+}
+```
+
+![31-10](images/31-10.png)
+
+Podemos también sumar años o restar años a una determinada fecha con los métodos `plus` y `minus`.
+
+*`I_FechaHaceUnAnio`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class I_FechaHaceUnAnio {
+	
+   public static void main(String[] args) {
+
+      LocalDate today = LocalDate.now();
+      LocalDate previousYear = today.minus(1, ChronoUnit.YEARS);
+      System.out.println("Fecha hace un año: " + previousYear);
+      LocalDate nextYear = today.plus(1, ChronoUnit.YEARS);
+      System.out.println("Fecha dentro de 1 año : " + nextYear);
+
+   }
+
+}
+```
+
+![31-12](images/31-12.png)
+
+Para comparar fechas decíamos que teníamos algunos métodos y por ejemplo tenemos los método `isAfter` e `isBefore` que nos permiten indicar si una fecha es posterior o es anterior a otra.
+
+*`J_CompararFechas`*
+
+```java
+package fechas;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class J_CompararFechas {
+	
+   public static void main(String[] args) {
+		
+      LocalDate today = LocalDate.now();
+      LocalDate otraFecha = LocalDate.of(2017, 12, 24);
+      if (otraFecha.isAfter(today)) {
+         System.out.println("La otra fecha es posterior a la de hoy");
+      }
+      LocalDate ayer = today.minus(1, ChronoUnit.DAYS);
+      if (ayer.isBefore(today)) {
+         System.out.println("Ayer es anterior a hoy");
+      }
+
+   }
+
+}
+```
+
+![31-13](images/31-13.png)
+
+ el año como por 
+
+*``*
+
+```java
+```
+
+
 *``*
 
 ```java
@@ -336,12 +478,10 @@ public class E_EventosRecurrentes {
 ```
 
 
-*``*
 
-```java
-```
 
-El manejo de otro tipo de fecha que son un poco peculiares lo podemos plantear con lo llamado elementos recurrentes para ellos no plantea Java time otra clase por ejemplo nosotros cumplimos años normalmente todos los años salvo los que han nacido el 29 de febrero no lo cumplen cada cuatro años el mismo día del cumpleaños el 18 de septiembre y 8 de septiembre 18 de septiembre de todo el baño y el mes pero no guardaría el año y lo podríamos utilizar para almacenar o para comparar eventos recurrentes no y como por ejemplo tenemos aquí el día del nacimiento vale si alguien naciera por ejemplo el día de hoy en el 11/11 podríamos guardar su día y mes de nacimiento en un monte o también tenemos aquí un ejemplo del uso de from del método from que nos permite obtener un monstre a partir de un local de procesa este local de obtiene la información que quiere y lo conseguiría cómo vemos que hoy el día de hoy es igual al día de nacimiento que hemos construido de diferente manera es igual pues no quería felicidades porque hoy es tu cumple para manejarla ahora tenemos otra clase que localizan su metronaut es análogo al de local de y nos permite conocer la hora actual como nos permite conocer incluso hasta los nanosegundos vale o sea que antes no podíamos manejar si queremos manejar añadiros disminuir una serie de días horas en este caso a una hora determinada un local time le queremos añadir 2 horas pues podríamos añadirlo a través de los métodos plus II llamamos aquí podemos ver que tenemos varias implementaciones Plus y de minutos para sumar o restar un número de horas determinado en el que le podemos indicar una cantidad y a partir de una enumeración de Crono YoUnique le podemos indicar el tipo de unidad de tiempo que le estamos añadido por ejemplo a una fecha ni siquiera sumarle una semana pues podríamos tomárselo con plus indicando unos y espero no yome podemos ver como tenemos diferentes unidades de tiempo centurias día de cada 12 horas milenios vale la verdad que está muy muy completo y podríamos ver la diferencia entre la fecha de hoy y la fecha de dentro de una podemos también ver y sumar años o restar años vale a una determinada fecha vale con el método con el método Plus y el metro 200 para comparar fechas decíamos que teníamos algunos métodos y por ejemplo tenemos y hamsters y el método y porque nos permiten indicar si una fecha es anterior o el posterior a otra el año como por ejemplo la caducidad de una tarjeta de crédito no caducan nunca un determinado día del mes y no tendréis vuestra tarjeta de débito crédito caduca en un mes y un año pues lo podríamos hacer con la clase tía como que nos permitiría obtener un año y mes actual por ejemplo actual feria febrero perdón noviembre del 2017 vale aquí podríamos ver la longitud en días del mes actual vale hiciéramos como decía antes usarlo por ejemplo para una tarjeta de crédito podríamos decir su tarjeta caduca en febrero de 2018 no podíamos quitar perdón crear con el con el método de esta manera un auténtico quebradero de cabeza que hay siempre en el manejo de fecha el manejo de si una fecha pertenece a un año bisiesto con el método que nos devuelve verdadero si el año de la fecha si cierto y falso si no lo es particular el año 2017 no es bisiesto solamente podemos manejar un momento concreto sino que podemos querer modificar o manejar un periodo de tiempo cómo salir a las 8 ya lleva algún tiempo y liberada hace escasas semanas que ha liberado una primera versión de Java 9 vale podríamos ver con la clase superior el periodo que hay entre la fecha de liberación de la primera versión de Java 8 de la primera versión de Java 9 y guardarlo en una instancia de periodo cómo podéis comprobar no es un instante de tiempo sino que en el fondo lo que estamos almacenando es la diferencia entre los peces no bueno pues lo podríamos ver y expresar está diferencia por ejemplo en una cantidad de meses he habido 42 meses de diferencia entre la liberación de Java 8 y dejaba nuevo para procesar fecha tenemos también la posibilidad de usar el método parte el método parte que es estático lo que haría sería procesar una fecha que estaría en una cadena de caracteres para obtener en este caso por ejemplo un local de la clase datetimeformatter nos proporciona una serie de constante vale invitando bueno el formato en el que tiene estás hecha una de ellas el basket Izzo day nos vendría la fecha con el año el mes y el día sin ningún tipo de preparación tendríamos la posibilidad de crear un DAI un datetimeformatter a partir de un patrón siguiendo bueno utilizando una serie de caracteres en este caso la termino con la representan un día con un día del mes vale en la M mayúscula los meses del año y la y el año expresado en cuatro cifras vale esto se le llaman máscara de formato la cantidad diferente de elementos que podemos usar en una máscara de formato lo podéis encontrar en la documentación porque es bastante bastante extensa y os recomiendo que la leáis con detenimiento aquí podríamos crear un formateador y utilizarlo por la clase parte para traducir la clase viernes perdón para traducir la cadena pierna en un local de si se produjera algún tipo de situación especial no podríamos manejar con la excepción del time passed precio vale tiene que ser mira también dentro de la pide estaba time y bueno podríamos decir que esa fecha pues por ejemplo no sería para se hable en este caso sí que lo ha sido y por ejemplo le añadiéramos otro cuatro aquí pues nos daría una excepción
+
+ejemplo la caducidad de una tarjeta de crédito no caducan nunca un determinado día del mes y no tendréis vuestra tarjeta de débito crédito caduca en un mes y un año pues lo podríamos hacer con la clase tía como que nos permitiría obtener un año y mes actual por ejemplo actual feria febrero perdón noviembre del 2017 vale aquí podríamos ver la longitud en días del mes actual vale hiciéramos como decía antes usarlo por ejemplo para una tarjeta de crédito podríamos decir su tarjeta caduca en febrero de 2018 no podíamos quitar perdón crear con el con el método de esta manera un auténtico quebradero de cabeza que hay siempre en el manejo de fecha el manejo de si una fecha pertenece a un año bisiesto con el método que nos devuelve verdadero si el año de la fecha si cierto y falso si no lo es particular el año 2017 no es bisiesto solamente podemos manejar un momento concreto sino que podemos querer modificar o manejar un periodo de tiempo cómo salir a las 8 ya lleva algún tiempo y liberada hace escasas semanas que ha liberado una primera versión de Java 9 vale podríamos ver con la clase superior el periodo que hay entre la fecha de liberación de la primera versión de Java 8 de la primera versión de Java 9 y guardarlo en una instancia de periodo cómo podéis comprobar no es un instante de tiempo sino que en el fondo lo que estamos almacenando es la diferencia entre los peces no bueno pues lo podríamos ver y expresar está diferencia por ejemplo en una cantidad de meses he habido 42 meses de diferencia entre la liberación de Java 8 y dejaba nuevo para procesar fecha tenemos también la posibilidad de usar el método parte el método parte que es estático lo que haría sería procesar una fecha que estaría en una cadena de caracteres para obtener en este caso por ejemplo un local de la clase datetimeformatter nos proporciona una serie de constante vale invitando bueno el formato en el que tiene estás hecha una de ellas el basket Izzo day nos vendría la fecha con el año el mes y el día sin ningún tipo de preparación tendríamos la posibilidad de crear un DAI un datetimeformatter a partir de un patrón siguiendo bueno utilizando una serie de caracteres en este caso la termino con la representan un día con un día del mes vale en la M mayúscula los meses del año y la y el año expresado en cuatro cifras vale esto se le llaman máscara de formato la cantidad diferente de elementos que podemos usar en una máscara de formato lo podéis encontrar en la documentación porque es bastante bastante extensa y os recomiendo que la leáis con detenimiento aquí podríamos crear un formateador y utilizarlo por la clase parte para traducir la clase viernes perdón para traducir la cadena pierna en un local de si se produjera algún tipo de situación especial no podríamos manejar con la excepción del time passed precio vale tiene que ser mira también dentro de la pide estaba time y bueno podríamos decir que esa fecha pues por ejemplo no sería para se hable en este caso sí que lo ha sido y por ejemplo le añadiéramos otro cuatro aquí pues nos daría una excepción
 
 Todavía no hemos llegado al año 20.000 vale esa fecha no sería pasear como mecanismo análogo tenemos la posibilidad de formatear una fecha para obtener una cadena de caracteres que poder visualizar y aquí tendríamos la fecha y hora de hoy con la clase localdatetime vale profesora de manera que visualizamos el día del mes el mes con 3 caracteres el año con cuatro cifras la hora y 2 minutos vale y lo formateé haríamos utilizando un determinado formateado vale una instancia de venta en formato y no se pudiera procesar porque no hemos equivocado en la máscara de formato porque no se tiene que está información también nos daría una excepción de tipo venta con esto terminamos el vídeo referente a fecha ha sido una introducción hemos podido conocer a vista de pájaro muchos de los métodos que no ofrece os recomiendo que vayáis trabajando poco a poco con las diferentes clases jefe ese apasionante accidente tratamiento de fecha y de hora y que poco a poco también Vallés practicando con luces
 
