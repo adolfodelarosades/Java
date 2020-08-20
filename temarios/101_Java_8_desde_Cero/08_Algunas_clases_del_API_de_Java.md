@@ -1634,9 +1634,83 @@ Cómo podemos comprobar esta manera de recorrer una colección, un `ArrayList` e
 
 ![33_ExpresionesLambda-9](images/33_ExpresionesLambda-9.png)
 
-y como decíamos aparejado al uso de expresiones lambda Java 8
+Y como decíamos aparejado al uso de expresiones lambda Java 8 nos ofrece el **API Stream**, el API Stream **es un nuevo API que nos permite trabajar con una colección como si se tratara de un flujo de información**, con lo cual vamos a poder hacer junto con las expresiones lambda muy fácilmente operaciones de recorrido, filtrado, transformación, ordenación, agrupación y presentación de la información con un código muy conciso y expresado en pocas líneas, para lo que antes requeríamos muchas líneas de código a priori incluso recorrer varias veces un array lo vamos a poder hacer mediante el API Stream.
 
-Lambda Java 8 nos ofrece la piel entre el API Stream es nuevo app que nos permite trabajar con una colección como si se tratara de un flujo de información con lo cual vamos a hacer a poder hacer punto con las expresiones lambda muy fácilmente operaciones de recorrido filtrado transformación ordenación agrupación y presentación de la información con un código muy conciso y fresador pocas líneas para lo que antes requeríamos muchas líneas de código a priori incluso recorrer vale hacerse una raíz lo vamos a poder hacer mediante lápiz os lo voy a presentar brevemente y queréis conocer el API stream en profundidad os recomiendo que cuando terminéis en el curso de Java 8 desde cero por ahí hacer el curso de Java 8 para programadores Java en este punto podemos utilizar el API stream a partir de el método trim que tiene bueno pues todas las conexiones podríamos transformar una lista en un gym cómo podemos comprobar si es una una interfaz que tenemos en Java vale que además es para metérsela también un stream de algo en nuestro caso sería un stream de número entero vale para poder trabajar con ella esto no estás internamente por nosotros pero si quisiéramos hacer algún tipo de operación intermedia como por ejemplo infiltrada no podríamos hacer con alguno de los métodos que tiene ese interfaz el método filter espera un predicado otra interfaz funcional en los permitiría a partir de un determinado valor hacer una comparación y por ejemplo podríamos filtrar para que solamente se quedarán después de este filtro los valores que fueran mayores iguales que 5 es imprimirlos por persona hiciéramos imprimir solo los mayores iguales que 5 pero ordenado inversamente podríamos utilizar otra operación intermedia de los Extreme qué es sorted y que nos permite ordenar un string pasándole un comparato podemos reutilizar una de las expresiones lambda del ejemplo anterior para ordenar los a la inversa no vamos a comentar este código que no emborrone de manera que como aquí no imprimiría los números de mayores que 5 pero lo haría de un determinado orden o en el orden inverso al orden natural por último podríamos ver cómo los streams los podemos utilizar también para agrupar todos los valores en un solo valor haciendo antes una transformación de los distintos valores lo que se conoce como un mapeo fijado que potente está operación en la que podríamos crear un string mapear el valor de integrar a un valor entero primitivo filtrar para que ese valor sea mayor o igual que 5 los que sean menores que 5 los descartar y amos y SUM haríamos todo eso para Lore reduciendo el string a un solo valor resultado que obtenemos aquí y que podríamos imprimir si sumamos los números 5 + 6 + 7 + 8 + 9 + 10 la operación no sería 45 si estaba en un código bastante bastante elegante conecta introducción a ala spring y expresiones lambda finalizamos el curso de Java 8 desde cero o agradezco la paciencia que habéis tenido viendo todos los vídeos y practicando con todos los ejemplo o animo a que pueda ir hacer todas las preguntas que necesitéis en los foros y os ánimo a que os lancéis al finalizarlo a hacer el curso de Java 8 para programadores
+### :computer: `101-33-Lambda`
+
+Lo voy a presentar brevemente, si  queréis conocer el API Stream en profundidad os recomiendo que cuando terminéis en el curso de Java 8 desde cero por ahí hacer el curso de Java 8 para programadores Java.
+
+En este punto podemos utilizar el API Stream a partir de el método `.stream()` que tiene toda la colección, podríamos transformar una lista en un `stream` cómo podemos comprobar **`stream` es una una interfaz** que tenemos en Java, que además es parametrízada `Interface Stream<T>` en nuestro caso sería un `stream` de número entero.
+
+![33-18](images/33-18.png)
+
+![33-20](images/33-20.png)
+
+![33-21](images/33-21.png)
+
+![33-22](images/33-22.png)
+
+Vemos el primer ejemplo del uso de `stream`.
+
+*`C_ApiStream`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class C_ApiStream {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1º Imprimir todos los elementos de la lista
+      lista
+         .stream()
+	 .forEach(System.out::println);
+
+   }
+	
+}
+```
+
+![33-19](images/33-19.png)
+
+Aquí ya vemos el uso de `stream` pero realmente esto no nos aporta mucho ya que la colección por si sola ya cuenta con el método `forEach` no es necesario convertirlo a un `stream`. 
+
+Pero si quisiéramos hacer algún tipo de operación intermedia como por ejemplo un filtrado lo podríamos hacer con alguno de los métodos que tiene esa interfaz `Stream` el método `filter (Predicate<? super T> predicate)` espera **un predicado otra interfaz funcional** que nos permitiría a partir de un determinado valor hacer una comparación y por ejemplo podríamos filtrar para que solamente se quedarán después de este filtro los valores que fueran mayores iguales que 5 e imprimirlos por consola.
+
+*`C_ApiStream`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class C_ApiStream {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1º Imprimir todos los elementos de la lista
+      lista
+         .stream()
+	 .forEach(System.out::println);
+
+   }
+	
+}
+```
+
+![33-23](images/33-23.png)
+
+
+
+hiciéramos imprimir solo los mayores iguales que 5 pero ordenado inversamente podríamos utilizar otra operación intermedia de los Extreme qué es sorted y que nos permite ordenar un string pasándole un comparato podemos reutilizar una de las expresiones lambda del ejemplo anterior para ordenar los a la inversa no vamos a comentar este código que no emborrone de manera que como aquí no imprimiría los números de mayores que 5 pero lo haría de un determinado orden o en el orden inverso al orden natural por último podríamos ver cómo los streams los podemos utilizar también para agrupar todos los valores en un solo valor haciendo antes una transformación de los distintos valores lo que se conoce como un mapeo fijado que potente está operación en la que podríamos crear un string mapear el valor de integrar a un valor entero primitivo filtrar para que ese valor sea mayor o igual que 5 los que sean menores que 5 los descartar y amos y SUM haríamos todo eso para Lore reduciendo el string a un solo valor resultado que obtenemos aquí y que podríamos imprimir si sumamos los números 5 + 6 + 7 + 8 + 9 + 10 la operación no sería 45 si estaba en un código bastante bastante elegante conecta introducción a ala spring y expresiones lambda finalizamos el curso de Java 8 desde cero o agradezco la paciencia que habéis tenido viendo todos los vídeos y practicando con todos los ejemplo o animo a que pueda ir hacer todas las preguntas que necesitéis en los foros y os ánimo a que os lancéis al finalizarlo a hacer el curso de Java 8 para programadores
 
 
 
