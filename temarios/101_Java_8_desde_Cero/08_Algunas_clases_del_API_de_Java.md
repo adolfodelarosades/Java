@@ -3297,10 +3297,87 @@ public class Parking {
 }
 ```
 
+Un parking por un lado va a tener el listado de vehículos que tiene dentro, de manera que vamos a poder consultar qué vehículos son los que hay dentro, a qué hora entraron, su matrícula, su marca, etc. También va a tener las plazas de aparcamiento para saber si están libres u ocupadas, ya digo que con esto simulamos el hecho de que tuviéramos parking físico con unos sensores de presencia en cada una de las plazas que nos permitirán verificar si una determinada plaza está libre o está ocupada, lo haremos mediante un array bidimensional de la clase `PlazaAparcamiento`.
 
+```java
+   // Mantenemos una lista con los vehículos que hay dentro del parking
+   private List<Vehiculo> vehiculos;
+	
+   // Además, necesitamos saber qué plazas están libres o cuales están ocupadas
+   private PlazaAparcamiento[][] plazasAparcamiento;
+```
 
+`PlazaAparcamiento` la tenemos aquí.
 
-un parking váter por un lado el listado de vehículos que tiene dentro vale de manera que vamos a poder consultar qué vehículos son los que hay dentro a qué hora entraron su matrícula su marca etcétera también va a tener las plazas de aparcamiento para saber si están libres ocupada simulamos pues el hecho de que tuviéramos parking físico con unos sensores de presencia en cada una de las plazas que nos permitirán pues verificarse una determinada plaza está libre o estás ocupada no lo haremos mediante una un array bidimensional de la clase plaza aparcamiento que tenemos por aquí que sencilla vale que solamente tiene el número de plaza de aparcamiento de donante tendríamos también entero con el número de plazas disponibles para poder gestionarlo rápidamente el saldo acumulado dónde vamos a ir añadiendo no puedo conforme se registre la salida de los vehículos cuánto dinero hemos ido cobrando a lo largo de toda la sesión también tenemos aquí alguna constante definida como static final qué bueno dónde podemos definir el precio base por minuto el precio por metro 13 % habría mil maneras de implementar esta parte nombre de un fichero de perfil o algo similar o un fichero de configuración en algún formato conocido pero no teníamos tampoco si el ejemplo un poco más la lógica de inicio de un parque la tenemos por aquí cuando nosotros podremos decir empieza la jornada del parking el saldo acumulado se pone a cero no debe haber ningún vehículo dentro con lo cual tendríamos 100 plazas disponibles en la lista de vehículos que hay dentro estaría vacía mapa de plaza de aparcamiento comienza con todas las plazas libres y como podemos comprobar aquí empezamos ya a manejar la correspondiente valen las impares vale se fueran numerando de abajo arriba no según este este dibujo que tenemos para si tienes cuidado con si trabajáis en Windows en el cuidado con el tema de la codificación de fichero Windows utiliza una poco específica cuando trabajéis con Eclipse en Windows que no es f8hp 1252
+*PlazaAparcamiento.java*
+
+```java
+package parking.modelo;
+
+public class PlazaAparcamiento {
+	
+   private int numero;
+   private boolean libre;
+	
+   public PlazaAparcamiento() { }
+	
+   public PlazaAparcamiento(int numero) {
+      this.numero = numero;
+      // Por defecto, al crear una plaza está libre
+      this.libre = true;
+   }
+
+   public int getNumero() {
+      return numero;
+   }
+
+   public void setNumero(int numero) {
+      this.numero = numero;
+   }
+
+   public boolean isLibre() {
+      return libre;
+   }
+
+   public void setLibre(boolean libre) {
+      this.libre = libre;
+   }
+
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + (libre ? 1231 : 1237);
+      result = prime * result + numero;
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (!(obj instanceof PlazaAparcamiento))
+         return false;
+      PlazaAparcamiento other = (PlazaAparcamiento) obj;
+      if (libre != other.libre)
+         return false;
+      if (numero != other.numero)
+         return false;
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return "PlazaAparcamiento [numero=" + numero + ", libre=" + libre + "]";
+   }
+}
+```
+
+AQUIIIIIIII
+
+`PlazaAparcamiento` es una clase sencilla que solamente tiene el número de plaza de aparcamiento de donante tendríamos también entero con el número de plazas disponibles para poder gestionarlo rápidamente el saldo acumulado dónde vamos a ir añadiendo no puedo conforme se registre la salida de los vehículos cuánto dinero hemos ido cobrando a lo largo de toda la sesión también tenemos aquí alguna constante definida como static final qué bueno dónde podemos definir el precio base por minuto el precio por metro 13 % habría mil maneras de implementar esta parte nombre de un fichero de perfil o algo similar o un fichero de configuración en algún formato conocido pero no teníamos tampoco si el ejemplo un poco más la lógica de inicio de un parque la tenemos por aquí cuando nosotros podremos decir empieza la jornada del parking el saldo acumulado se pone a cero no debe haber ningún vehículo dentro con lo cual tendríamos 100 plazas disponibles en la lista de vehículos que hay dentro estaría vacía mapa de plaza de aparcamiento comienza con todas las plazas libres y como podemos comprobar aquí empezamos ya a manejar la correspondiente valen las impares vale se fueran numerando de abajo arriba no según este este dibujo que tenemos para si tienes cuidado con si trabajáis en Windows en el cuidado con el tema de la codificación de fichero Windows utiliza una poco específica cuando trabajéis con Eclipse en Windows que no es f8hp 1252
 
 ```java
 ```
