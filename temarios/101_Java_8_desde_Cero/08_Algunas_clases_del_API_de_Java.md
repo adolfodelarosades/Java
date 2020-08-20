@@ -677,11 +677,450 @@ Cómo se soluciona a partir de Java 5, con el uso de genéricos, lo que queráis
 Java 7 incorporo el operador *diamond* el operador diamante que nos permite ahorrarnos el hecho de escribir dos veces el tipo, si miramos la sentencia de inicialización del primer `ArrayList` en la diapositiva podemos ver al indicar que es de tipo `String` tenemos que llamar al constructor de tipo `String` a partir de Java 7 nos podemos ahorrar ese segundo tipo porque entiende que si estamos creando un `ArrayList` para almacenarlo en una referencia de `List<String>` el tipo que tiene que crear es un `ArrayList` de `String`.
 
 ![32_Arraylist-8](images/32_Arraylist-8.png)
-AQUIIIIII
-Antes de conocer algún ejemplo de uso de Raily por conocer alguno de los métodos tenemos los métodos Adolf que nos permiten añadir elementos al final de la lista haz añadiría un solo elemento a añade todos los elementos de otra colección el método Clear eliminaría todos los elementos de una lista contains nos va a permitir comprobar si un elemento está o no en una determinada lista nos permite devolver el elemento de una posición específica ese aspecto posicional y sentí nos verifica si una lista está vacía Remu elimina un elemento de la lista 6 nos devuelve el número de elementos de una lista y tú arrays nos devolvería a partir de una raíz un array con los elementos que tenía SS Reyes vamos a ver un ejemplo de uso de la clase ArrayList vale hemos definido como hemos reutilizado una estancia de persona que teníamos por ahí otra dar una definición de persona pero la hemos modificado para que guarde nombre apellido y teléfono podríamos utilizar la clase era ArrayList para hacer una pequeña aplicación que nos sirviera de agenda de contactos cómo podemos comprobar el método main tiene una manera muy parecida a la calculadora que hicimos un bucle do while dónde vamos a recoger una opción y vamos a mostrar un menú recoger la opción tiempo en ción de esta opción o hacer alguna de la operación listar todos los contactos de la agenda añadir un contacto a la agenda eliminar un contacto eliminarlos todo o salir del programa primero la aplicación de después de momento donde todo como se está usando el arrays inicialmente podríamos ver que la agenda no tiene contactos está vacía si queremos añadir un contacto lo haríamos introduciendo el nombre y ahora pasaremos a analizar todos los contactos veríamos que la agenda tiene la posición cero un contacto que en este caso sería sería yo podríamos eliminar este contacto pasando la posición del contacto y si ahora la lista mo es comprobar como la agenda se ha quedado vacía podríamos eliminar todo y salir no
 
-Bueno vamos a ver cómo vamos a trabajar con un ArrayList en este caso como lo estamos haciendo todo en una sola clase a raíz del método mes creamos el ArrayList como estático esto no es para nada hubiera producción no te preocupes tranquila tendríamos una lista de personas al comenzar el método me inicializamos este ArrayList vale como siempre usamos la clase Scanner para poder leer de teclado y entramos en el bucle guay para hacer las distintas opciones si queremos vamos a empezar por el principio a añadir una persona nos podríamos ir al método de añadir y vemos cómo lo único que estamos haciendo llamar al método a de Raily para añadir una nueva instancia de personas que hemos creado con los valores que hemos recogido de teclado una vez que hayamos añadido una o más personas podríamos recorrer el array y paralizar su contenido lo tenemos aquí la manera de listar un array pues es múltiple no podríamos hacer mediante un bucle for mejorado bucle FOR EACH en este caso no escogido no hacerlo para poder indicar la posición de los distintos elementos en el array para poder utilizar esta posición para eliminar vale podemos comprobar como estamos dando trimestre para imprimir una persona que está en una determinada posición aquí recorremos el array desde la posición cero hasta su tamaño vale vamos tomando posición a posición imprimimos y vuelta a empezar antes de ello comprobamos mediante el método y Vicente y el ArrayList está vacío no y si no tiene agenda no perdón si no tiene contactos pues tenemos un mensaje de error y terminaríamos el mensaje el de eliminar una persona requiere que solicitemos la posición y siempre y cuando la posición sea correcta decir mayor que 0 y menor que el tamaño pues ejecutar y amo la eliminación como suele ser usual en los sistemas cuando vamos eliminar algún dato como una operación que no suele poder deshacerse requiere de una confirmación no tiene ese caso eliminaríamos el elemento que esté en esa posición por último si queremos eliminar los todos tan solo tendríamos que confirmar pero sería más fácil porque no queríamos sería invocar al método tío con este sencillo ejemplo hemos querido ilustrar el uso de la clase ArrayList como una de las colecciones más utilizadas en Java como una de las clases que estamos viendo en este blog
+Antes de conocer algún ejemplo de uso de `ArrayList` vamos a conocer algunos de los métodos, tenemos los métodos `add` y `addAll` que nos permiten añadir elementos al final de la lista, `add` añadiría un solo elemento `addAll` añade todos los elementos de otra colección, el método `clear` eliminaría todos los elementos de una lista, `contains ` nos va a permitir comprobar si un elemento está o no en una determinada lista, `get` nos permite devolver el elemento de una posición específica, ese aspecto posicional, `isEmpty` nos verifica si una lista está vacía, `remove` elimina un elemento de la lista, `size` nos devuelve el número de elementos de una lista y `toArray` nos devolvería a partir de un `ArrayList` un `array` con los elementos que tenía ese `ArrayList`.
 
+### :computer: `101-32-Arraylist`
+
+Vamos a ver un ejemplo de uso de la clase `ArrayList`, hemos reutilizado una definición de `Persona` que teníamos por ahí pero la hemos modificado para que guarde nombre, apellido y teléfono.
+
+*`Persona`*
+
+```java
+package usoarraylist;
+
+public class Persona {
+	
+   private String nombre;
+   private String apellidos;
+   private String telefono;
+	
+   public Persona() {}
+	
+   public Persona(String nombre, String apellidos, String telefono) {
+      this.nombre = nombre;
+      this.apellidos = apellidos;
+      this.telefono = telefono;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getApellidos() {
+      return apellidos;
+   }
+
+   public void setApellidos(String apellidos) {
+      this.apellidos = apellidos;
+   }
+
+   public String getTelefono() {
+      return telefono;
+   }
+
+   public void setTelefono(String telefono) {
+      this.telefono = telefono;
+   }
+
+   @Override
+   public String toString() {
+      return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono + "]";
+   }
+
+}
+```
+
+Podríamos utilizar la clase `ArrayList` para hacer una pequeña aplicación que nos sirviera de agenda de contactos. Cómo podemos comprobar el método `main` tiene de una manera muy parecida a la calculadora que hicimos, un bucle `do while` dónde vamos a recoger una opción y vamos a mostrar un menú, recoger la opción y en función de esta opción hacer alguna de las operaciones, listar todos los contactos de la agenda, añadir un contacto a la agenda, eliminar un contacto, eliminarlos todo o salir del programa.
+
+Primero vamos a ejecutar la aplicación y después vemos método a método como se esta usando el `ArrayList`.
+
+*`UsoArrayList`*
+
+```java
+package usoarraylist;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class UsoArrayList {
+
+   // Declaramos estas dos referencias como estáticas, para poder usarlas en todos
+   // los métodos
+   static Scanner sc;
+   static ArrayList<Persona> listaPersonas;
+
+   public static void main(String[] args) {
+
+      // Inicializamos la lista y la lectura por teclado
+      listaPersonas = new ArrayList<>();
+      sc = new Scanner(System.in);
+      int opcion;
+
+      do {
+         // Al inicio de cada iteración mostramos el menú, y recogemos la opción
+         menu();
+         opcion = Integer.parseInt(sc.nextLine());
+
+         switch (opcion) {
+            case 1:
+               listarPersonas();
+               break;
+            case 2:
+               aniadirPersona();
+               break;
+            case 3:
+               eliminarPersona();
+               break;
+            case 4:
+               eliminarTodas();
+               break;
+
+            default:
+               System.out.println("Opción no válida. Introduzca una opción válida, por favor.");
+         }
+
+      } while (opcion != 0);
+
+      sc.close();
+
+   }
+
+   /*
+    * MÉTODO QUE IMPRIME EL MENÚ
+    */
+   public static void menu() {
+      System.out.println("AGENDA DE CONTACTOS");
+      System.out.println("===================");
+      System.out.println("1. Listar todos los contactos");
+      System.out.println("2. Añadir un contacto");
+      System.out.println("3. Eliminar un contacto");
+      System.out.println("4. Eliminar todos los contactos");
+      System.out.println("0. Salir del programa\n\n");
+      System.out.print("Introduzca una opción: ");
+
+   }
+
+   /*
+    * MÉTODO QUE LISTA TODOS LOS CONTACTOS DE LA AGENDA O MUESTRA UN MENSAJE SI NO
+    * HAY NINGUNO QUE MOSTRAR
+    */
+   public static void listarPersonas() {
+      if (listaPersonas.isEmpty()) {
+         System.out.println("La agenda no tiene contactos\n");
+      } else {
+         for (int i = 0; i < listaPersonas.size(); i++) {
+            Persona p = listaPersonas.get(i);
+            System.out.printf("%d %s %s (%s) %n", i, p.getNombre(), p.getApellidos(), p.getTelefono());
+         }
+         System.out.println("");
+      }
+   }
+
+   /*
+    * MÉTODO QUE RECOGE LOS DATOS DEL USUARIO PARA AÑADIR UNA NUEVA PERSONA, Y LA
+    * INSERTA EN LA LISTA
+    */
+   public static void aniadirPersona() {
+      System.out.println("\n\nAÑADIR NUEVO CONTACTO");
+      System.out.print("Introduzca el nombre: ");
+      String nombre = sc.nextLine();
+      System.out.print("Introduzca los apellidos: ");
+      String apellidos = sc.nextLine();
+      System.out.print("Introduzca su número de teléfono: ");
+      String telefono = sc.nextLine();
+
+      listaPersonas.add(new Persona(nombre, apellidos, telefono));
+
+      System.out.println("");
+
+   }
+
+   /*
+    * MÉTODO QUE ELIMINA UNA PERSONA DE LA AGENDA EN FUNCIÓN DE UNA POSICIÓN
+    * RECOGIDA DEL TECLADO
+    */
+   public static void eliminarPersona() {
+      System.out.println("\n\nELIMINAR CONTACTO");
+      System.out.print("Introduzca la posición del contacto: ");
+      int posicion = Integer.parseInt(sc.nextLine());
+      if (posicion < 0 || posicion >= listaPersonas.size()) {
+         System.out.println("Posición erronea");
+      } else {
+         System.out.print("¿Está usted seguro de querer eliminar el contacto? (S/N): ");
+         String siono = sc.nextLine();
+         if (siono.equalsIgnoreCase("S")) {
+            listaPersonas.remove(posicion);
+         }
+      }
+      System.out.println("");
+
+   }
+
+   /*
+    * MÉTODO QUE ELIMINA TODOS LOS CONTACTOS DE LA AGENDA PREVIA CONFIRMACIÓN DE LA
+    * OPERACIÓN
+    */
+   public static void eliminarTodas() {
+      System.out.println("\n\nELIMINAR CONTACTO");
+      System.out.print("¿Está usted seguro de querer eliminar el contacto? (S/N): ");
+      String siono = sc.nextLine();
+      if (siono.equalsIgnoreCase("S")) {
+         listaPersonas.clear();
+      }
+      System.out.println("");
+
+   }
+
+}
+```
+
+Inicialmente podríamos ver que la agenda no tiene contactos está vacía, si queremos añadir un contacto lo haríamos introduciendo los datos, ahora pasaremos a analizar todos los contactos veríamos que la agenda tiene la posición cero un contacto que en este caso sería yo, podríamos eliminar este contacto pasando la posición del contacto y si ahora la lista podemos comprobar como la agenda se ha quedado vacía podríamos eliminar todo y salir.
+
+*`Salida`*
+
+```sh
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 1
+La agenda no tiene contactos
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 2
+
+
+AÑADIR NUEVO CONTACTO
+Introduzca el nombre: Adolfo
+Introduzca los apellidos: De la Rosa
+Introduzca su número de teléfono: 666778899
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 1
+0 Adolfo De la Rosa (666778899) 
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 3
+
+
+ELIMINAR CONTACTO
+Introduzca la posición del contacto: 1
+Posición erronea
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 1
+0 Adolfo De la Rosa (666778899) 
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 4
+
+
+ELIMINAR CONTACTO
+¿Está usted seguro de querer eliminar el contacto? (S/N): S
+
+AGENDA DE CONTACTOS
+===================
+1. Listar todos los contactos
+2. Añadir un contacto
+3. Eliminar un contacto
+4. Eliminar todos los contactos
+0. Salir del programa
+
+
+Introduzca una opción: 0
+Opción no válida. Introduzca una opción válida, por favor.
+```
+
+Vamos a analizar el código, vamos a trabajar con un `ArrayList` en este caso como lo estamos haciendo todo en una sola clase a raíz del método `main` creamos el `ArrayList` como estático.
+
+
+```java
+// Declaramos estas dos referencias como estáticas, para poder usarlas en todos
+// los métodos
+static Scanner sc;
+static ArrayList<Persona> listaPersonas;
+```
+
+Esto no es para nada obligatorio sino que es propio de este ejemplo tendríamos un `ArrayList` de `Persona` llamdo `listaPersonas`.
+
+Al comenzar el método `main` inicializamos este `ArrayList` como siempre usamos la clase `Scanner` para poder leer de teclado.
+
+```java
+// Inicializamos la lista y la lectura por teclado
+listaPersonas = new ArrayList<>();
+sc = new Scanner(System.in);
+int opcion;
+```
+
+Y entramos en el bucle `do while` para hacer las distintas opciones.
+
+
+```java
+      do {
+         // Al inicio de cada iteración mostramos el menú, y recogemos la opción
+         menu();
+         opcion = Integer.parseInt(sc.nextLine());
+
+         switch (opcion) {
+            case 1:
+               listarPersonas();
+               break;
+            case 2:
+               aniadirPersona();
+               break;
+            case 3:
+               eliminarPersona();
+               break;
+            case 4:
+               eliminarTodas();
+               break;
+
+            default:
+               System.out.println("Opción no válida. Introduzca una opción válida, por favor.");
+         }
+
+      } while (opcion != 0);
+```
+
+Si queremos vamos a empezar por el principio a añadir una persona nos podríamos ir al método de añadir y vemos cómo lo único que estamos haciendo llamar al método `add` de `ArrayList` para añadir una nueva instancia de personas, que hemos creado con los valores que hemos recogido del teclado.
+
+```java
+   /*
+    * MÉTODO QUE RECOGE LOS DATOS DEL USUARIO PARA AÑADIR UNA NUEVA PERSONA, Y LA
+    * INSERTA EN LA LISTA
+    */
+   public static void aniadirPersona() {
+      System.out.println("\n\nAÑADIR NUEVO CONTACTO");
+      System.out.print("Introduzca el nombre: ");
+      String nombre = sc.nextLine();
+      System.out.print("Introduzca los apellidos: ");
+      String apellidos = sc.nextLine();
+      System.out.print("Introduzca su número de teléfono: ");
+      String telefono = sc.nextLine();
+
+      listaPersonas.add(new Persona(nombre, apellidos, telefono));
+
+      System.out.println("");
+
+   }
+```
+
+Una vez que hayamos añadido una o más personas podríamos recorrer el `ArrayList` para listar su contenido, lo tenemos aquí, la manera de listar un array pues es múltiple, lo podríamos hacer mediante un bucle `for` mejorado, un bucle `for each`, en este caso hemos escogido no hacerlo para poder indicar la posición de los distintos elementos en el array para poder utilizar esa posición para listarlo, podemos comprobar como estamos utilizando `printf` para imprimir una `Persona` que está en una determinada posición, aquí recorremos el array desde la posición cero hasta su tamaño, vamos tomando posición a posición imprimimos y vuelta a empezar, antes de ello comprobamos mediante el método `isEmpty()` si el `ArrayList` está vacío o no y si no tiene contactos pues imprimimos un mensaje de error y terminaríamos el método.
+
+
+```java
+   /*
+    * MÉTODO QUE LISTA TODOS LOS CONTACTOS DE LA AGENDA O MUESTRA UN MENSAJE SI NO
+    * HAY NINGUNO QUE MOSTRAR
+    */
+   public static void listarPersonas() {
+      if (listaPersonas.isEmpty()) {
+         System.out.println("La agenda no tiene contactos\n");
+      } else {
+         for (int i = 0; i < listaPersonas.size(); i++) {
+            Persona p = listaPersonas.get(i);
+            System.out.printf("%d %s %s (%s) %n", i, p.getNombre(), p.getApellidos(), p.getTelefono());
+         }
+         System.out.println("");
+      }
+   }
+```
+
+El método de eliminar una persona requiere que solicitemos la posición y siempre y cuando la posición sea correcta, es decir mayor que 0 y menor que el tamaño ejecutariamos la eliminación, como suele ser usual en los sistemas cuando vamos eliminar algún dato como una operación que no suele poder deshacerse requiere de una confirmación, y en ese caso eliminaríamos el elemento que esté en esa posición.
+
+```java
+   /*
+    * MÉTODO QUE ELIMINA UNA PERSONA DE LA AGENDA EN FUNCIÓN DE UNA POSICIÓN
+    * RECOGIDA DEL TECLADO
+    */
+   public static void eliminarPersona() {
+      System.out.println("\n\nELIMINAR CONTACTO");
+      System.out.print("Introduzca la posición del contacto: ");
+      int posicion = Integer.parseInt(sc.nextLine());
+      if (posicion < 0 || posicion >= listaPersonas.size()) {
+         System.out.println("Posición erronea");
+      } else {
+         System.out.print("¿Está usted seguro de querer eliminar el contacto? (S/N): ");
+         String siono = sc.nextLine();
+         if (siono.equalsIgnoreCase("S")) {
+            listaPersonas.remove(posicion);
+         }
+      }
+      System.out.println("");
+
+   }
+```
+
+Por último si queremos eliminarlos todos tan solo tendríamos que confirmar pero sería más fácil porque lo que haríamos sería invocar al método `clear()`. 
+
+```java
+   /*
+    * MÉTODO QUE ELIMINA TODOS LOS CONTACTOS DE LA AGENDA PREVIA CONFIRMACIÓN DE LA
+    * OPERACIÓN
+    */
+   public static void eliminarTodas() {
+      System.out.println("\n\nELIMINAR CONTACTO");
+      System.out.print("¿Está usted seguro de querer eliminar el contacto? (S/N): ");
+      String siono = sc.nextLine();
+      if (siono.equalsIgnoreCase("S")) {
+         listaPersonas.clear();
+      }
+      System.out.println("");
+
+   }
+```
+
+Con este sencillo ejemplo hemos querido ilustrar el uso de la clase `ArrayList` como una de las colecciones más utilizadas en Java. 
 
 
 # 33. Introducción a las expresiones lambda 20:21 
