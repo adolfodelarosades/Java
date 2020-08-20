@@ -1205,27 +1205,187 @@ lista
 
 ![33_ExpresionesLambda-1](images/33_ExpresionesLambda-1.png)
 
+Hola a todos **no podíamos concluir este curso de Java 8 sin presentar las expresiones lambda qué es la gran novedad junto a la API Stream que Java 8 nos ofrece**.
+
 ![33_ExpresionesLambda-2](images/33_ExpresionesLambda-2.png)
+
+Para hablar de **expresiones lambda** tenemos que hablar primero de **programación funcional**, la programación funcional, el paradigma de programación funcional es diferente al de la programación imperativa y también diferente al de la programación orientada a objetos como tal y como lo conocemos. **La programación funcional se basa en un lenguaje matemático formal llamado el cálculo lambda que se inventa en los años 30** y que con posterioridad se incorpora a algunos lenguajes de programación, Java lo toma ahora en su versión 8, **este paradigma permite trabajar o centrarse en el uso de funciones y centrándose en la idea de que una función dependerá única y exclusivamente de sus parámetros de entrada para producir la salida**. Como ventaja de uso de la programación funcional podemos darnos cuenta y eso nos daremos cuenta al ver los ejemplo de que **el código va a ser mucho más expresivo, es decir haremos más cosas con menos código y el código será mucho más elegante** porque la orientación al uso de métodos encadenado hara que podemos tener un código muy elegante a la hora de hacer las mismas operaciones para las cuales antes hacíamos un montón de sentencias de código. La programación funcional está presente en otros lenguajes de programación desde hace mucho tiempo sobre todo en algunos competidores de Java desde hace un tiempo acá como Python y C#  y bueno nunca es tarde si la dicha es buena, para que Java lo haya incorporado ahora a sus posibilidades.
 
 ![33_ExpresionesLambda-3](images/33_ExpresionesLambda-3.png)
 
+**La programación funcional también se centra en la idea de convertir las funciones en entidades de primer nivel, hasta ahora las *entidades de primer nivel, es decir lo que podíamos pasar como argumento de un método* eran variables, literales u objetos y alguna combinación de ella arrays, objetos, un tipo primitivo, un literal concreto**.
+
+**Si convertimos las funciones en entidades de primer nivel, podríamos utilizar una función allá donde antes usábamos una variable, con lo cual podríamos guardar una función dentro de una variable o *podríamos pasar una función como argumento de un método***.
+
 ![33_ExpresionesLambda-4](images/33_ExpresionesLambda-4.png)
+
+Con todo ello nos centramos ahora en la sintaxis para ver cómo podemos hacer **expresiones lambda**, en Java **una expresiones lambda no va a ser más que una especie de método abstracto es decir una función sin nombre** cuya estructura puede ser alguna de las que tenemos en la diapositva.
+
+```java
+
+() -> expresión
+
+(parámetros) -> expresión
+
+(parámetros) -> { sentencias; }
+
+```
+
+A la izquierda de la flecha tendremos los argumentos que recibiría la función, los parámetros que recibía esa función y a la derecha tendríamos el código que se ejecutaría como cuerpo de esa función. Si solamente va a ser una expresión lo podríamos poner tal cual sin punto y coma, si va a ser un conjunto de sentencias lo encerraríamos en un bloque entre llaves separando cada sentencia por un punto y coma.
 
 ![33_ExpresionesLambda-5](images/33_ExpresionesLambda-5.png)
 
+Algunas expresiones lambda de ejemplo las tenemos aquí, la primera nos permitiría crear un nuevo `ArrayList`, la segunda devolvería porque hay implícito una sentencia `return` a la derecha de la flecha recibiendo dos parámetros de tipo entero y en la tercera tendríamos que se recibiría un argumento `a` el tipo se inferiria a raíz del contexto donde esté la expresión lambda y dónde haríamos dos sentencias en este caso imprimirlo por consola y devolver un valor verdad.
+
+
 ![33_ExpresionesLambda-6](images/33_ExpresionesLambda-6.png)
+
+De forma pareja a las expresiones lambda Java a incorporado el **concepto de interfaz funcional** que no trabajamos en su momento cuando vimos las interfaces, si no que lo presentamos ahora. **Una interfaz funcional va a ser una interfaz que tenga un solo método** y **esto se matiza diciendo que sera una interfaz con un solo método que no sea ni estático, ni default y en los cuales tampoco contemos los métodos propios de la clase `Objeto`**, es decir podríamos tener una interfaz con un solo método abstracto y sería funcional o una interfaz con un método abstracto y 10 métodos estáticos default que seguiría siendo una interfaz funcional. Cuando trabajamos con interfaces funcionales lo normal es que utilicemos **clases anónimas** el concepto de clase anónima también dejamos su presentación para el curso de Java 8 para programadores Java, pero simplemente decir que será una una clase que no tenemos que crear en un fichero aparte, si no que la podremos crear en un punto concreto del código. En lugar de que una clase implemente esta interfaz funcional o incluso hagamos una clase anónima en el sitio que lo necesitemos, podremos utilizar una expresión lambda. 
+
+Un ejemplo de interfaz funcional en Java 8 es la interfaz `Interface Comparator<T>`.
+
+https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html
+
+![33-01](images/33-01.png)
+
+Está interfaz nos va a permitir o **va a tener métodos para comparar dos objetos de un mismo tipo**, de un tipo `T` que le pasemos, teniendo además un montón de métodos estáticos para hacer comparaciones rápidas.
+
+![33-02](images/33-02.png)
+
+También tiene un montón de métodos por defecto, **sin embargo solamente tiene un método, el método `compare(T o1, T o2)` como método abstracto**, con lo cual independientemente de `equals(Object obj)` que ya hemos dicho que tampoco cuenta por ser un método heredado de `Object` **con lo cual está interfaz sería una interfaz funcional** para forzar que se compruebe si una interfaz es funcional surgue la anotación `@FunctionalInterface` aunque eso a nosotros ahora mismo no nos va a afectar, pero ya digo que para nosotros **la interfaz funcional nos basta con que sepamos que tiene solamente un método abstracto**.
+
+Nosotros podríamos intentar utilizar una interfaz funcional implementando la clase, a través de una clase anónima o mediante una expresión lambda. 
+
+### :computer: `101-33-Lambda`
+
+Tendríamos varios ejemplos aquí.
+
+Si tuviéramos una lista de integers, de enteros y queremos crear una `List` a partir de ella podemos usar el método estático `asList` de la clase `Arrays` que devuelve como una lista una sucesión de elementos que le proporcionamos.
+
+```java
+List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+```
+
+Si quisiéramos ordenarla, la interfaz `List`, la clase `ArrayList` que hemos estudiado antes incluye el método `sort`, pero el método `sort` espera que nosotros le proporcionemos una instancia de `Comparator`.
+ 
+![33-03](images/33-03.png)
+
+`The method sort(Comparator<? super Integer>) in the type List<Integer> is not applicable for the 
+ arguments ()`
+
+**Nuestra primera manera de trabajar sería el que creáramos una clase llamada `MayorAMenor`** que nos permitirá definir el orden, para ordenar los números, el orden comparando dos números. 
+
+Podríamos crear nuestra clase `MayorAMenor` que implementará esa interfaz `Comparator` de `Integer` solo que vamos a hacer un pequeño cambio, en lugar de dar el orden natural vamos a invertir el orden natural, de forma que la clase `Integer` ya tienes su método `compareTo` si viéramos la documentación de la clase `Integer` veríamos que implementa `Comparator` y que ya nos permite comparar dos números, indicando el orden natural de los números, bueno pues si nosotros lo que hacemos es devolver la inversa de lo que devuelve `compareTo` lo que hacemos es ordenarlos al revés.
+
+*`MayorAMenor`*
+
+```java
+package lambda;
+
+import java.util.Comparator;
+
+public class MayorAMenor implements Comparator<Integer> {
+	
+   /*
+    * ESTE MÉTODO SOBREESCRIBE EL "ORDEN NATURAL"
+    * DE LOS NÚMEROS DE FORMA QUE:
+    * 
+    * - Si el primer número es menor que el segundo, devuelve un valor positivo.
+    * - Si son iguales devuelve un cero.
+    * - Si el primer número es mayor que el segundo, devuelve un valor negativo.  
+    */
+	
+   @Override
+   public int compare(Integer o1, Integer o2) {
+      return -(o1.compareTo(o2));
+   }
+
+}
+```
+
+Ahora ya podemos ordenar la lista de números e imprimirla.
+
+*`A_Lambda`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class A_Lambda {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+
+      //1ª Forma: una clase que implementa comparator
+      lista.sort(new MayorAMenor());
+		
+      for (Integer i : lista)
+         System.out.println(i);
+   }	
+
+}
+```
+
+![33-04](images/33-04.png)
+
+Esta sería una manera de ordenar los números al revés. Esta manera es válida lo que pasa que el código ha sido bastante tedioso hemos tenido que crear un fichero aparte, implementar la interfaz, darle código, cuando lo meramente funcional de este código está en la línea `return -(o1.compareTo(o2));`.
+
+**Una segunda manera sería con el uso de una clase anónima** como decía antes las trabajaremos en profundidad aquellos que queráis hacer el curso de Java 8 para progamadores, la vamos a presentar aquí.
+
+**Una clase anónima es una clase** que creamos en un punto de nuestro código, **que la instanciamos y la declaramos a la vez**, la instanciamos con el operador `new` pero a la vez la declaramos, le damos cuerpo, con lo cual solo la vamos a poder utilizar en esta parte del código. Esto nos ahorraría el uso de un nuevo fichero con una clase que ya no lo vamos a reutilizar nunca. el código lo ponemos en este único archivo.
+
+*`A_Lambda`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+
+      //1ª Forma: una clase que implementa comparator
+      //lista.sort(new MayorAMenor());
+      
+      //2ª Forma: una clase "anónima"
+      //¿Qué tal si ponemos el cursor sobre la instanciación de la clase
+      //anónima y pulsamos Ctrl+1?
+      //Eclipse permite convertir esto en una expresión lambda automáticamente
+      lista.sort(new Comparator<Integer>() {
+
+         @Override
+         public int compare(Integer o1, Integer o2) {
+            return -(o1.compareTo(o2));
+         }
+		
+      });
+		
+      for (Integer i : lista)
+         System.out.println(i);
+   }	
+
+}
+```
+
+![33-05](images/33-05.png)
+
+La funcionalidad es la misma que antes, sin embargo nos volvemos a centrar con que el meoyo de todo está en esta única línea de código `return -(o1.compareTo(o2));`, si tuviéramos la manera de decirle oye que el orden quiero que sea así, sería muy sencillo.
+
+**La tercera manera sería a través de una expresión lambda** y bueno Java perdón eclipse no ofrece la funcionalidad de que si pulsamos control 1 sobre 1 instancia anónima de una clase es capaz de convertirla en una expresión lanza directamente o como nosotros tenemos aquí vale esto lo vamos a dejar conforme estaba o como teníamos aquí abajo podríamos hacer nosotros manera a sort en lugar de proporcionarle una instancia de una clase que implementa una interfaz le proporcionamos una expresión Landa el uso de la expresión lambda aquí es posible porque la interfaz compare perdón comparato que funcionar si la interfaz tuvieras dos tres cuatro metros por incrementar posiblemente no supiera cuál escoger por eso las expresiones lambda tienen aparejada a las interfaces funcionales como podemos comprobar si nosotros le decimos aquí que sol que espero comparato le proporcionamos un comparato de la clase integral haría la misma operación pero en un código mucho más conciso por qué el uso de expresiones lambda nos permite inferir los tipos si la lista es un lifting pegué y el método sort espera un comparato del tipo de la lista no sería necesario que nosotros le indicaremos el tipo de los argumentos sino que es capaz es capaz de ingerirlo a través del concepto con lo cual el código sería aún más conciso todavía la expresión es Landa también nos han permitido junto con el uso de las colecciones el aprovechamiento de un nuevo llamado por y el bucle for que será un método de todas las colecciones recibe como parámetro un objeto que instancia otra interfaz funcional en particular la interfaz consumer tiene un solo método que lo que va a ir haciendo tomando los elementos de la colección y haciendo con él pues no que indique el cuerpo
 
 ![33_ExpresionesLambda-7](images/33_ExpresionesLambda-7.png)
 
 ![33_ExpresionesLambda-8](images/33_ExpresionesLambda-8.png)
 
 ![33_ExpresionesLambda-9](images/33_ExpresionesLambda-9.png)
-
-Hola a todos no podíamos concluir este curso de Java 8 sin presentar las expresiones lambda qué es la gran novedad junto a la piste que Java 8 nos ofrece para hablar de expresiones lambda tenemos que hablar primero de programación funcional la programación funcional el paradigma de programación funcional es diferente al de la programación imperativa y también diferencial de la programación orientada a objetos como tal y como lo conocemos no la programación funcional se baja en un lenguaje matemático formal llamado el cálculo lambda que se inventa en los años 30 y que con posterioridad vale se incorpora algunos lenguajes de programación Java lo toma ahora en su versión 8 este paradigma permite trabajar o centrarse en el uso de funciones y centrándose en la idea de que una función dependerá única y exclusivamente de sus parámetros de entrada para producir la salida no ventaja de uso de la programación funcional podemos darnos cuenta y eso nos daremos cuenta el ejemplo de que el código va a ser mucho más expresivos decir haremos más cosas con menos código y el código será mucho más elegante vale porque bueno la orientación al uso de métodos encadenado ahora que podemos tener un código muy elegante a la hora de hacer de hacer las mismas operaciones para las cuales antes hacíamos un montón de sentencias de código la programación funcional está presente en otros lenguajes de programación desde hace mucho tiempo vale sobre todo en algunos competidores de estaba desde de un tiempo acá como faltó pisar y bueno tarde si la dicha es buena para que Java lo haya incorporado ahora a posibilidad la programación funcional también se centra en la idea de convertir las funciones en entidades de primer nivel no hasta ahora la entidades de primer nivel es decir lo que podíamos pasar a través de como argumento de un método eran variables literales objetos y alguna combinación de ella array objeto es un tipo primitivo un literal concreto convertimos las funciones en entidades de primer nivel podríamos utilizar una función allá donde antes usábamos una variable con lo cual podríamos guardar una función de una variable o podríamos pasar una función como argumento de un metro vale con todo ello nos entramos ahora en la sintaxis para ver cómo podemos hacer expresiones lambda expression de andar no va a ser más que una especie de método abstracto es decir una función sin nombre cuya estructura puede ser alguna de las que tenemos aquí a continuación a la izquierda de la flecha tendremos los argumentos que recibiría la función los parámetros que recibía esta moción y a la derecha tendríamos el código que se ejecutaría como cuerpo de esa función solamente va a ser una expresión lo podríamos poner el tal cual sin; si va a ser un conjunto de sentencias no encerrar y amos en un bloque entrellaves separado cada sentencia por un público la primera nos permitiría crear cada sentencia por un público la primera nos permitiría crear un nuevo ArrayList la segunda devolvería porque hay implícito una sentencia ruiton a la derecha de la flecha recibiendo dos parámetros de tipo entero y en la tercera tendríamos que se recibiría un argumento a el tipo C inferir y a raíz del contexto donde esté la expresión Landa y dónde haríamos puestos sentencia en este caso imprimirlo por consola y devolver un valor un valor verdad de forma pareja a las expresiones lambda Java incorporado el concepto de interfaz funcional que no trabajamos en su momento cuando cuando vimos los interfaces que no que lo presentamos ahora una interfaz funcional Barcelona interfaz que tenga un solo metro y esto se matiza diciendo que era una interfaz con un solo método que no sea ni estático ni de FOL y en los cuales tampoco contemos los métodos propios de la clase hostia es decir podríamos tener una interfaz con un solo método abstracto y sería funcional o una interfaz con un método abstracto y 10 metros está disco de folk que seguiría siendo una interfaz funcional cuando trabajamos con interfaces funcionales lo normal es que utilicemos clase anónima el concepto de clase anónima también dejamos su presentación para para el curso de Java 8 para programadores Java pero simplemente decir que será una una clase que bueno no tenemos que crear en un fichero aparte si no te la podremos quedar en un punto concreto del código pues en lugar de implementar una clase de que una clase mejor dicho tienes esta interfaz funcional o incluso hagamos una clase anónima en el sitio que lo necesitemos podremos utilizar una expresión lambda un ejemplo de interfaz funcional en Java 8 es la interfaz barato vale está interfaz nos va a permitir el va a tener métodos para comparar dos dos objetos de un mismo tipo de un tipo T que le pasemos no teniendo además un montón de métodos estáticos para hacer comparaciones rápidas no vale también tiene un montón de métodos por defecto vale por internet acción por defecto sin embargo solamente tiene un método el método compare vale como método abstracto no con lo cual independientemente de igual que ya hemos dicho que tampoco cuenta con lo cual está interfaz sería una interfaz funcional para forzar que se compró cenar pues aunque eso nosotros ahora mismo no nos va a afectar la anotación@japón tiene internet pero ya digo que para nosotros la interfaz funcional nos basta con que sepamos que tiene solamente un método abstracto vale pues nosotros podríamos intentar utilizar una interfaz funcional y amigo implementando la clase a través de una clase anónima o mediante una expresión tendríamos varios ejemplos aquí si tuviéramos una lista de integer de enteros y que Ángela creamos a partir de un método estático de la clase arrays que devuelve como una lista una sucesión de elementos que le proporcionamos vale si quisiéramos ordenar la clase la interfaz list ArrayList que hemos estudiado antes incluye el método short pero el método son espera que nosotros le proporcione moment ancia de comparato pues bien nosotros nuestra primera manera de trabajar sería el que creáramos una clase llamada mayor a menor que nos permitirá definir el orden vale para ordenar los números el orden comparando dos números podríamos crear nuestra clase mayor a menor que implementará este interfaz más baratos de internet la primera galería porque yo
-
-Primera manera de trabajar sería el que creáramos una clase de hada mayor a menor que nos permitirá definir el orden vale para ordenar los números el orden comparando dos números podríamos crear nuestra clase mayor a menor que implementará este interfaz baratos de internet bueno lo que vamos a hacer en lugar de dar el orden natural vamos a invertir el orden natural de forma que la clase integra ya tienes un método compare to y viéramos la documentación la clase integer veríamos que incrementa comparato vale y que ya nos permite comparar dos dos números indicando el orden natural de los números pues si nosotros lo que hacemos es devolver la inversa de lo que de lo que devuelve compare two lo que se mueve ordenarlos al revés pues aquí y ordenamos sentimos después que saliste de número tenemos cómo puedo conseguir una manera de imprimir los números ordenados al revés esta manera es válida no te pasa que el código ha sido bastante tedioso hemos tenido que crear un fichero aparte implementar la interfaz darle código cuando los meramente funcional de este código está aquí una segunda manera sería el uso de una clase anónima como decía antes las trabajaremos en profundidad aquellos que queráis hacer el curso de Java Java 8 para perdonar reventada la vamos a presentar aquí una clase anónima es una clase que creamos en un punto de nuestro código vale que la distanciamos y la declaramos a la vez vale la damos aquí estancias medias el operador mío pero además la estamos declarando a la venta con lo cual solamente la vamos a poder utilizar en este punto del código no ahorraría el uso de un nuevo fichero por una clase pues no hombre que no vamos a reutilizar nunca más y lo podríamos poner el código así si juntamos la funcionalidad es la misma que antes sin embargo no volvemos a centrar con que el neo yo de todo está única línea de código si tuviéramos la manera de decirle oye que el orden quiero que sea así sería muy sencilla la tercera manera sería a través de una expresión lambda y bueno Java perdón eclipse no ofrece la funcionalidad de que si pulsamos control 1 sobre 1 instancia anónima de una clase es capaz de convertirla en una expresión lanza directamente o como nosotros tenemos aquí vale esto lo vamos a dejar conforme estaba o como teníamos aquí abajo podríamos hacer nosotros manera a sort en lugar de proporcionarle una instancia de una clase que implementa una interfaz le proporcionamos una expresión Landa el uso de la expresión lambda aquí es posible porque la interfaz compare perdón comparato que funcionar si la interfaz tuvieras dos tres cuatro metros por incrementar posiblemente no supiera cuál escoger por eso las expresiones lambda tienen aparejada a las interfaces funcionales como podemos comprobar si nosotros le decimos aquí que sol que espero comparato le proporcionamos un comparato de la clase integral haría la misma operación pero en un código mucho más conciso por qué el uso de expresiones lambda nos permite inferir los tipos si la lista es un lifting pegué y el método sort espera un comparato del tipo de la lista no sería necesario que nosotros le indicaremos el tipo de los argumentos sino que es capaz es capaz de ingerirlo a través del concepto con lo cual el código sería aún más conciso todavía la expresión es Landa también nos han permitido junto con el uso de las colecciones el aprovechamiento de un nuevo llamado por y el bucle for que será un método de todas las colecciones recibe como parámetro un objeto que instancia otra interfaz funcional en particular la interfaz consumer tiene un solo método que lo que va a ir haciendo tomando los elementos de la colección y haciendo con él pues no que indique el cuerpo
-
-
 Cuerpo de examen todo es perfecto para que nosotros lo podamos utilizar con expresiones lanza pero antes si nos vamos a centrarnos en mente en este nuevo operador que nos presentará la expresión es Landa y es que bueno podemos incluso abreviar mucho más algunas expresiones lambda de una manera por ejemplo si tenemos un determinado método nos podemos entrar en el último como sistem. Auto sprint LN qué bueno espera recibir un argumento para poder imprimirlo podemos utilizar la notación de los dos puntos vale de esta manera que tenemos aquí para decirle oye espera un argumento y está el momento me lo vas a proporcionar aquí de esta manera podremos usarla la referencia a los métodos para para hacerlo más rápido todavía podemos utilizarlo también para instanciar objeto para llamar a métodos de un objeto en particular para llamar a distintos métodos incluso indicando de qué clase vienen vale etcétera etcétera está referencia método también eh bastante potente aquí tenemos el uso de los bucles For y vamos a ver diferente formas de hacerlo la manera clásica de imprimir una serie de elementos digo clásica aunque ya era la más novedosa que teníamos era a través del bucle for mejorado en la cual bueno pues nosotros recorríamos hoy te la vamos a partir de esta colección uno a uno y lo íbamos teniendo y lo íbamos imprimiendo no el uso de for each nos va a permitir el utilizar expresiones lambda de manera que bueno podríamos decir que por qué espera un consumer la interfaz consumer nos va a permitir un método hacer que lo que aceptas son elemento y no devuelve nada bueno pues nosotros le daríamos el elemento cada elemento del array y con el tipo inferido lo podríamos imprimir y sería igual de funcionar podemos incluso utilizar la referencia a los métodos exactamente un método estático pero sea una referencia a método con 2 puntos vale esto es una abreviatura de estas personas Landa incluso en lugar de utilizar anda que tan solo mira una expresión vale podríamos utilizar una expresión anda que incluyera más de una sentencia para ir haciendo algo tipo de operaciones como por ejemplo incrementar el valor en uno antes de imprimirlo por consola cómo podemos comprobar esta manera de recorrer colección una raíz e bastante potente y como decíamos aparejado al uso de expresiones lambda Java 8
 
 
