@@ -1370,7 +1370,7 @@ public class A_Lambda {
 		
       for (Integer i : lista)
          System.out.println(i);
-   }	
+   }
 
 }
 ```
@@ -1379,15 +1379,262 @@ public class A_Lambda {
 
 La funcionalidad es la misma que antes, sin embargo nos volvemos a centrar con que el meoyo de todo está en esta única línea de código `return -(o1.compareTo(o2));`, si tuviéramos la manera de decirle oye que el orden quiero que sea así, sería muy sencillo.
 
-**La tercera manera sería a través de una expresión lambda** y bueno Java perdón eclipse no ofrece la funcionalidad de que si pulsamos control 1 sobre 1 instancia anónima de una clase es capaz de convertirla en una expresión lanza directamente o como nosotros tenemos aquí vale esto lo vamos a dejar conforme estaba o como teníamos aquí abajo podríamos hacer nosotros manera a sort en lugar de proporcionarle una instancia de una clase que implementa una interfaz le proporcionamos una expresión Landa el uso de la expresión lambda aquí es posible porque la interfaz compare perdón comparato que funcionar si la interfaz tuvieras dos tres cuatro metros por incrementar posiblemente no supiera cuál escoger por eso las expresiones lambda tienen aparejada a las interfaces funcionales como podemos comprobar si nosotros le decimos aquí que sol que espero comparato le proporcionamos un comparato de la clase integral haría la misma operación pero en un código mucho más conciso por qué el uso de expresiones lambda nos permite inferir los tipos si la lista es un lifting pegué y el método sort espera un comparato del tipo de la lista no sería necesario que nosotros le indicaremos el tipo de los argumentos sino que es capaz es capaz de ingerirlo a través del concepto con lo cual el código sería aún más conciso todavía la expresión es Landa también nos han permitido junto con el uso de las colecciones el aprovechamiento de un nuevo llamado por y el bucle for que será un método de todas las colecciones recibe como parámetro un objeto que instancia otra interfaz funcional en particular la interfaz consumer tiene un solo método que lo que va a ir haciendo tomando los elementos de la colección y haciendo con él pues no que indique el cuerpo
+**La tercera manera sería a través de una expresión lambda** y bueno Eclipse nos ofrece la funcionalidad de que si pulsamos CTRL+1 sobre una instancia anónima de una clase es capaz de convertirla en una expresión lambda directamente. Vamos a ver como se hace.
+
+![33-06](images/33-06.png)
+
+![33-07](images/33-07.png)
+
+Vamos a dejar conforme estaba para mantener comentadas las diferentes formas de hacerlo y lo podríamos hacer nosotros manualmente. De esta manera a `sort` en lugar de proporcionarle una instancia de una clase que implementa una interfaz le proporcionamos una expresión lamdda, el uso de la expresión lambda aquí es posible porque la interfaz `Comparator` es funcional, si la interfaz tuvieras dos, tres, cuatro métodos por incrementar posiblemente no supiera cuál escoger, por eso las expresiones lambda tienen aparejadas a las interfaces funcionales. Como podemos comprobar si nosotros le decimos aquí que como `sort` espera un `Comparator` y le proporcionamos un `Comparator` de la clase `Integer` haría la misma operación pero en un código mucho más conciso.
+
+*`A_Lambda`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	
+   public static void main(String[] args) {
+		
+       List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+
+       //1ª Forma: una clase que implementa comparator
+       //lista.sort(new MayorAMenor());
+      
+       //2ª Forma: una clase "anónima"
+       //¿Qué tal si ponemos el cursor sobre la instanciación de la clase
+       //anónima y pulsamos Ctrl+1?
+       //Eclipse permite convertir esto en una expresión lambda automáticamente
+//     lista.sort(new Comparator<Integer>() {
+//
+//	  @Override
+//	  public int compare(Integer o1, Integer o2) {
+//	     return -(o1.compareTo(o2));
+//	  }
+//
+//    });
+		
+      // 3ª Forma: una expresion lambda
+      // Los tipos de datos ¡no son obligatorios! Se infieren del contexto
+      lista.sort((Integer n1, Integer n2) -> -(n1.compareTo(n2))); 
+		
+      for (Integer i : lista)
+         System.out.println(i);
+   }
+
+}
+```
+
+![33-08](images/33-08.png)
+
+Mucho más conciso sería por qué el uso de expresiones lambda nos permite inferir los tipos, si la lista es un `List<Integer>` y el método `sort` espera un `Comparator` del tipo de la lista, no sería necesario que nosotros le indicaremos el tipo de los argumentos sino que es capaz de inferirlo a través del contexto, con lo cual el código sería aún más conciso todavía.
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class A_Lambda {
+	
+   public static void main(String[] args) {
+		
+       List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+
+       //1ª Forma: una clase que implementa comparator
+       //lista.sort(new MayorAMenor());
+      
+       //2ª Forma: una clase "anónima"
+       //¿Qué tal si ponemos el cursor sobre la instanciación de la clase
+       //anónima y pulsamos Ctrl+1?
+       //Eclipse permite convertir esto en una expresión lambda automáticamente
+//     lista.sort(new Comparator<Integer>() {
+//
+//	  @Override
+//	  public int compare(Integer o1, Integer o2) {
+//	     return -(o1.compareTo(o2));
+//	  }
+//
+//    });
+		
+      // 3ª Forma: una expresion lambda
+      // Los tipos de datos ¡no son obligatorios! Se infieren del contexto
+      //lista.sort((Integer n1, Integer n2) -> -(n1.compareTo(n2)));
+      lista.sort((n1, n2) -> -(n1.compareTo(n2)));
+		
+      for (Integer i : lista)
+         System.out.println(i);
+   }
+
+}
+```
+
+![33-09](images/33-09.png)
 
 ![33_ExpresionesLambda-7](images/33_ExpresionesLambda-7.png)
 
+Las expresiones lambda también nos han permitido junto con el uso de las colecciones el aprovechamiento de un nuevo bucle llamado `forEach`, **el bucle `forEach` que será un método de todas las colecciones** recibe como parámetro un objeto que instancia otra interfaz funcional en particular la interfaz funcional `Consumer<T>` tiene un solo método que lo que va a ir haciendo es ir tomando los elementos de la colección y haciendo con él lo que indique el cuerpo de ese método, es perfecto para usarlo con expresiones lambda.
+
 ![33_ExpresionesLambda-8](images/33_ExpresionesLambda-8.png)
 
-![33_ExpresionesLambda-9](images/33_ExpresionesLambda-9.png)
-Cuerpo de examen todo es perfecto para que nosotros lo podamos utilizar con expresiones lanza pero antes si nos vamos a centrarnos en mente en este nuevo operador que nos presentará la expresión es Landa y es que bueno podemos incluso abreviar mucho más algunas expresiones lambda de una manera por ejemplo si tenemos un determinado método nos podemos entrar en el último como sistem. Auto sprint LN qué bueno espera recibir un argumento para poder imprimirlo podemos utilizar la notación de los dos puntos vale de esta manera que tenemos aquí para decirle oye espera un argumento y está el momento me lo vas a proporcionar aquí de esta manera podremos usarla la referencia a los métodos para para hacerlo más rápido todavía podemos utilizarlo también para instanciar objeto para llamar a métodos de un objeto en particular para llamar a distintos métodos incluso indicando de qué clase vienen vale etcétera etcétera está referencia método también eh bastante potente aquí tenemos el uso de los bucles For y vamos a ver diferente formas de hacerlo la manera clásica de imprimir una serie de elementos digo clásica aunque ya era la más novedosa que teníamos era a través del bucle for mejorado en la cual bueno pues nosotros recorríamos hoy te la vamos a partir de esta colección uno a uno y lo íbamos teniendo y lo íbamos imprimiendo no el uso de for each nos va a permitir el utilizar expresiones lambda de manera que bueno podríamos decir que por qué espera un consumer la interfaz consumer nos va a permitir un método hacer que lo que aceptas son elemento y no devuelve nada bueno pues nosotros le daríamos el elemento cada elemento del array y con el tipo inferido lo podríamos imprimir y sería igual de funcionar podemos incluso utilizar la referencia a los métodos exactamente un método estático pero sea una referencia a método con 2 puntos vale esto es una abreviatura de estas personas Landa incluso en lugar de utilizar anda que tan solo mira una expresión vale podríamos utilizar una expresión anda que incluyera más de una sentencia para ir haciendo algo tipo de operaciones como por ejemplo incrementar el valor en uno antes de imprimirlo por consola cómo podemos comprobar esta manera de recorrer colección una raíz e bastante potente y como decíamos aparejado al uso de expresiones lambda Java 8
+Pero antes vamos a centrarnos en este nuevo operador que nos presenta las expresiones lambda y es que bueno podemos incluso abreviar mucho más algunas expresiones lambda de una manera sencilla, por ejemplo si tenemos un determinado método nos podemos centrar en el último como `System.out.println` qué espera recibir un argumento para poder imprimirlo, podemos utilizar la notación de los dos puntos `::` de esta manera que tenemos para decirle, oye espera un argumento y este argumento me lo vas a proporcionar con `::` de esta manera podremos usar la la referencia a los métodos para hacerlo más rápido todavía. Podemos utilizarlo también para instanciar objetos, para llamar a métodos de un objeto en particular, para llamar a distintos métodos incluso indicando de qué clase vienen, etc. Está **referencia a método** también es bastante potente.
 
+### :computer: `101-33-Lambda`
+
+Aquí tenemos el uso de los bucles `forEach` y vamos a ver las diferente formas de hacerlo, la manera clásica de imprimir una serie de elementos, digo clásica aunque ya era la más novedosa que teníamos era a través del bucle `for` mejorado, en la cual nosotros recorríamos o iteravamos a partir de la colección uno a uno y lo íbamos obteniendo y lo íbamos imprimiendo.
+
+*`B_Foreach`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1ª Forma clásica de imprimir los elementos de una lista
+      for(Integer i: lista)
+         System.out.println(i);
+
+   }
+
+}
+```
+
+![33-10](images/33-10.png)
+
+
+El uso de `forEach` nos va a permitir el utilizar expresiones lambda de manera que bueno podríamos decir que `forEach` qué espera un `Consumer` [la interfaz `Consumer`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html) nos va a permitir un método `accept(T t)`.
+
+![33-11](images/33-11.png)
+
+Ojo también podemos abrir la ayuda desde el propio Eclipse.
+
+![33-12](images/33-12.png)
+
+![33-13](images/33-13.png)
+
+![33-14](images/33-14.png)
+
+El método `accept(T t)` lo que aceptas son elemento y no devuelve nada, nosotros le daríamos el elemento de cada elemento del array y con el tipo inferido lo podríamos imprimir.
+
+
+*`B_Foreach`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1ª Forma clásica de imprimir los elementos de una lista
+//    for(Integer i: lista)
+//	 System.out.println(i);
+		
+      //2ª Uso de forEach
+      lista.forEach(e -> System.out.println(e));
+
+   }
+
+}
+```
+
+![33-15](images/33-15.png)
+
+y sería igual de funcional.
+
+Podemos incluso utilizar la **referencia a los métodos** exactamente en este caso no es un método estático pero podemos usar una referencia a método con `::`.
+
+*`B_Foreach`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1ª Forma clásica de imprimir los elementos de una lista
+//    for(Integer i: lista)
+//	 System.out.println(i);
+		
+      //2ª Uso de forEach
+//    lista.forEach(e -> System.out.println(e));
+
+      //3ª Uso de referencias a métodos con ::
+      lista.forEach(System.out::println);
+
+   }
+
+}
+```
+
+![33-16](images/33-16.png)
+
+Esto es una abreviatura de la expresión lambda.
+
+Incluso en lugar de utilizar una expresión lambda que tan solo tuviera una expresión, podríamos utilizar una expresión lambda que incluyera más de una sentencia para ir haciendo algún tipo de operaciones como por ejemplo incrementar el valor en uno antes de imprimirlo por consola.
+
+*`B_Foreach`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class B_Foreach {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1ª Forma clásica de imprimir los elementos de una lista
+//    for(Integer i: lista)
+//	 System.out.println(i);
+		
+      //2ª Uso de forEach
+//    lista.forEach(e -> System.out.println(e));
+
+      //3ª Uso de referencias a métodos con ::
+//    lista.forEach(System.out::println);
+
+
+
+   }
+
+}
+```
+
+![33-17](images/33-17.png)
+
+
+Cómo podemos comprobar esta manera de recorrer una colección, un `ArrayList` es bastante potente.
+
+![33_ExpresionesLambda-9](images/33_ExpresionesLambda-9.png)
+
+y como decíamos aparejado al uso de expresiones lambda Java 8
 
 Lambda Java 8 nos ofrece la piel entre el API Stream es nuevo app que nos permite trabajar con una colección como si se tratara de un flujo de información con lo cual vamos a hacer a poder hacer punto con las expresiones lambda muy fácilmente operaciones de recorrido filtrado transformación ordenación agrupación y presentación de la información con un código muy conciso y fresador pocas líneas para lo que antes requeríamos muchas líneas de código a priori incluso recorrer vale hacerse una raíz lo vamos a poder hacer mediante lápiz os lo voy a presentar brevemente y queréis conocer el API stream en profundidad os recomiendo que cuando terminéis en el curso de Java 8 desde cero por ahí hacer el curso de Java 8 para programadores Java en este punto podemos utilizar el API stream a partir de el método trim que tiene bueno pues todas las conexiones podríamos transformar una lista en un gym cómo podemos comprobar si es una una interfaz que tenemos en Java vale que además es para metérsela también un stream de algo en nuestro caso sería un stream de número entero vale para poder trabajar con ella esto no estás internamente por nosotros pero si quisiéramos hacer algún tipo de operación intermedia como por ejemplo infiltrada no podríamos hacer con alguno de los métodos que tiene ese interfaz el método filter espera un predicado otra interfaz funcional en los permitiría a partir de un determinado valor hacer una comparación y por ejemplo podríamos filtrar para que solamente se quedarán después de este filtro los valores que fueran mayores iguales que 5 es imprimirlos por persona hiciéramos imprimir solo los mayores iguales que 5 pero ordenado inversamente podríamos utilizar otra operación intermedia de los Extreme qué es sorted y que nos permite ordenar un string pasándole un comparato podemos reutilizar una de las expresiones lambda del ejemplo anterior para ordenar los a la inversa no vamos a comentar este código que no emborrone de manera que como aquí no imprimiría los números de mayores que 5 pero lo haría de un determinado orden o en el orden inverso al orden natural por último podríamos ver cómo los streams los podemos utilizar también para agrupar todos los valores en un solo valor haciendo antes una transformación de los distintos valores lo que se conoce como un mapeo fijado que potente está operación en la que podríamos crear un string mapear el valor de integrar a un valor entero primitivo filtrar para que ese valor sea mayor o igual que 5 los que sean menores que 5 los descartar y amos y SUM haríamos todo eso para Lore reduciendo el string a un solo valor resultado que obtenemos aquí y que podríamos imprimir si sumamos los números 5 + 6 + 7 + 8 + 9 + 10 la operación no sería 45 si estaba en un código bastante bastante elegante conecta introducción a ala spring y expresiones lambda finalizamos el curso de Java 8 desde cero o agradezco la paciencia que habéis tenido viendo todos los vídeos y practicando con todos los ejemplo o animo a que pueda ir hacer todas las preguntas que necesitéis en los foros y os ánimo a que os lancéis al finalizarlo a hacer el curso de Java 8 para programadores
 
