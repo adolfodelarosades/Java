@@ -63,7 +63,7 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    * 29 Lanzamiento y propagación de excepciones 11:25 
    * Contenido adicional 4
    
-8. [Algunas clases del API de Java](101_Java_8_desde_Cero/08_Algunas_clases_del_API_de_Java.md) 82m
+8. [Algunas clases del API de Java](101_Java_8_desde_Cero/08_Algunas_clases_del_API_de_Java.md) 82m :+1:
    * 30 Manipulación de datos con Stringbuilder 8:01 
    * 31 Manejo de fechas 17:31 
    * 32 Colecciones ArrayList 11:30 
