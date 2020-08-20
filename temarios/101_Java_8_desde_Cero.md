@@ -73,3 +73,8 @@ Aprende programación en Java realizando esta formación Java online, y comienza
    
 9. Contenido extra
    * https://github.com/OpenWebinarsNet/Curso-Java-desde-0/
+   
+[Examen](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero/09_Examen.md)
+
+[Diploma](https://github.com/adolfodelarosades/Java/blob/master/temarios/101_Java_8_desde_Cero/pdfs/certificado.pdf)
+
