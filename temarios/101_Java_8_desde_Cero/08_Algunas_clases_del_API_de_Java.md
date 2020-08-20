@@ -2009,9 +2009,6 @@ public class App {
 *Vehiculo.java*
 
 ```java
-/**
- * 
- */
 package parking.modelo;
 
 import java.time.LocalDateTime;
@@ -2542,6 +2539,8 @@ public class Utils {
 }
 ```
 
+Al comenzar la jornada en el parking no tiene ningún coche dentro y abriría y comenzarían los vehículos a llegar, este sería el menú con las distintas operaciones que tendríamos, desde registrar la la entrada de un vehículo, la salida, ver el número de plazas que quedan disponibles, imprimir el estado del parking se imprimir el mapa del estado indicando el número de plazas y las plazas que están libres o las que están ocupadas y iremos acumulando el saldo del día para saber la caja al final del día y si queremos saber los vehículos que tenemos dentro con sus características los podremos listar.
+
 **SALIDA:**
 
 ```sh
@@ -2889,15 +2888,191 @@ Introduzca la opción seleccionada: 0
 Introduzca una opción correcta
 ```
 
+Hemos añadido ciertos elemento aleatorio que simulen que el usuario buscaría la plaza de aparcamiento más adecuada para el y aparcaría el coche, eso lo hace el programa de forma aleatoria para añadir una cierta simulación de lo que  sería que entre el vehículo, se situe, que el sensor detecte donde ha aparcado y nos lo indica.
 
-marihuana al comenzar en la jornada el parking no tiene ningún coche dentro y bueno avería y comenzarían los vehículos a llegar este sería el menú con las distintas operaciones que tendríamos no se puede registrar la la entrada de un vehículo la salida pero el número de plazas que quedan disponibles imprimir el estado del parque vale imprimir el mapa del Estado indicando el número de plazas y las plazas están libro las que están ocupada y hemos acumulando el saldo del día para saber luego bueno pues la caja al final del día y si queremos saber los vehículos que tenemos dentro con sus características que hacen lo podremos estar vamos a registrar la entrada de algunos vehículos furgoneta exteriores tipo 2 de la marca Ford con matrícula nueva vale va medir 6 con 3 metros aquí cada vehículo que se injerta pues Seba dibujando en el parque hemos añadido cierto componente aleatorio aleatoria para añadir una una cierta simulación no de lo que sería que entre el vehículo se sitúe que el sensor detectaran dónde aparcado y si queremos ver la lista de vehículos que hay ahora mismo en el parking podíamos ver como tenemos nuestra furgoneta de la marca Ford de 6 con 3 metros de longitud también hemos añadido un elemento aleatorio a la fecha de entrada vale para qué bueno el cálculo del importe tenga elementos suficientes tenga minutos suficientes pues lo demuestras John en restarle una cantidad de tiempo aleatoria a la fecha de entrada de entre lo hice llorar más porque tenga cierta funcionalidad la ejemplificación de Freddy quisiéramos ahora pero el número de plazas disponible en principio tenemos 99 solo vehículo dentro y la operación más interesante que sería registrar la salida no sería solamente la matrícula del vehículo a ti todos podremos ver como como hemos añadido cierta lógica incluso hemos modificado el método igual la clase vehículo para que nos permita con solo poder detectar que el mismo que tenemos dentro y María bueno pues llegar al usuario a la máquina introdujera su ticket no estaría asociado a su vehículo de esta manera calcularía con el ticket de salida no imprimiría los datos del vehículo la matrícula suspense y hora de llegada tu fecha y hora de salida la diferencia de ambas empezado el minuto la longitud de la furgoneta y el importe total de la estancia no sumando los minutos por Supreme precio correspondiente y ahora consultar amor el número de plazas disponibles pues ya veremos y comprobamos el estado del parking que tenemos que estar completamente el código de las clases modelo a partir de ahí podremos ver la lógica de negocio
+También hemos añadido un elemento aleatorio a la fecha de entrada para que bueno el cálculo del importe tenga elementos suficientes, tenga minutos suficientes, lo que hemos hecho es restarle una cantidad de tiempo aleatoria a la fecha de entrada de entre 2 y 6 horas para que tenga cierta funcionalidad la ejemplificación del proyecto.
 
-Clase que son fundamentales que son vehículo y parte vale y luego pues las demás que también vamos a necesitar vehículo es la base de la herencia de los tipos de vehículo que podemos manejar que modifiques un vehículo estoy en coche o moto furgoneta y autobuses y por ser la base de la herencia tiene los atributos que serían vale así como algunos constructores ya hemos intentado ilustrar el uso de protectores pero al igual que os decía en el en el vídeo correspondiente a la herencia o vuelvo a insistir ahora en la propia Oracle la que no recomienda demasiado el uso de protectores aquí lo hemos puesto los atributos conejo modificador de acceso por qué pudierais ver un ejemplo si os dais cuenta qué intentáis utilizar algún atributo de vehículos en clase que tienen el mismo paquete también tendrías eso porque el modificador Pro incluyo también las posibilidades de acceso del modificador sería bastante más recomendable en este ejemplo usaremos atributos privado y si necesitamos acceder a atributo en algún momento por lo que el correspondiente bueno ya digo tenemos aquí la clase vehículo me bueno quién es el método de calcular el importe vale justificaría los minutos por el precio base por minuto y mi amigo el método y lo que hemos hecho autogenerar lo con irse hemos modificado mucho código de relleno de borrado directamente y alguno lo he dejado comentado para para que podamos entender lo que estamos centro primero en la segunda parte para nosotros dos vehículos van a ser iguales en el programa del parking cuando es una tripulación de esa manera nos va a servir fácilmente para poder localizar el vehículo dentro de una colección cuando utilizamos métodos como Remus en la clase ArrayList of content dónde le pasamos un objeto para que compruebe si está dentro y el Ramón y además lo borré es lo que comparar con cada uno de los elementos del array en base al neto de impuestos para nosotros dos vehículos serán iguales en cuanto matrícula lo sé no puede haber en la calle dos vehículos que tengan la misma matrícula y siempre vale simplemente estamos tratando de modelar ese comportamiento así que esta parte lo que hace comprobar que un vehículo tiene matrícula que la matrícula no es nula y se la matrícula es igual vale a la del otro vehículo en lugar de que utilicé igual que sería con en tramitación por defecto bueno pues si el usuario ha introducido una matrícula minúscula A mayúscula para evitar esos problemas lo que hacemos es comparar con el método igual que tiene la clase String y qué bueno si la cadena echan en mayúscula o minúscula a la hora de hacer la compra de la primera parte lo que hacemos con la implementación que hace por defecto eclipse cuando general método igual vale sí bueno se cumple el operador igual igual devuelve tu nosotros seríamos tú porque son realmente la referencia referencia a un mismo objeto vale falso porque de dejarla activa la misma implementación
+La operación más interesante que sería registrar la salida del vehículo, nos pediría solamente la matrícula del vehículo, podremos ver como como hemos añadido cierta lógica incluso hemos modificado el método `equals` de la clase vehículo para que nos permita con solo gestionar la matrícula del vehículo poder detectar que el mismo que tenemos dentro. esto simularia que el usuario llefara a la máquina, introdujera su ticket que estaría asociado a su vehículo, de esta manera calcularía el ticket de salida, nos imprimiría los datos del vehículo, la matrícula, su fecha y hora de llegada, su fecha y hora de salida, la diferencia de ambas expresada en minutos, la longitud de la furgoneta y el importe total de la estancia, sumando los minutos por su precio la longitud de la furgoneta por el precio correspondiente
+
+Vamos a pasar a ver el código de las diferentes partes, vamos a comenzar por las clases modelo, a partir de allí podemos ver la lógica de negocio y veremos también los distintos métodos estáticos que hemos añadido en la clase principal para recoger los datos.
+
+Del modelo hay dos clases que son fundamentales que son `Vehiculo` y `Parking` y luego las demás que también vamos a necesitar.
+
+`Vehiculo` es la base de la herencia de los tipos de vehículo que podemos manejar que ya habíamos dicho que son vehículo, coche o moto, furgoneta y autobuses, y por ser la base de la herencia tiene los atributos que serían comunes, así como algunos constructores y métodos getters y setters. Hemos intentado ilustrar el uso de `protected` pero al igual que os decía en la lección correspondiente a la herencia, vuelvo a insistir ahora que es el propio Oracle el que no recomienda demasiado el uso de `protected`, aquí hemos puesto los atributos con este modificador de acceso para poder ver un ejemplo. Si os dais cuenta qué si intentáis utilizar algún atributo de `Vehiculo` en clases que estan el mismo paquete, también tendrías acceso a los atributos, porque el modificador `protected` incluye también las posibilidades de acceso del modificador por defecto, sería bastante más recomendable en este ejemplo que usaremos atributos privados y si necesitamos acceder a esos atributos en algún momento que usaramos los getters y setters correspondiente. Bueno ya digo tenemos aquí la clase vehículo que bueno que ya digo son getters, setters
+
+*Vehiculo.java*
+
+```java
+package parking.modelo;
+
+import java.time.LocalDateTime;
+
+public class Vehiculo {
+	
+   // Dejamos las propiedades como protected de forma didáctica, aunque su uso no está muy recomendado
+   // Sería más recomendable que fuera private, y acceder desde las clases hija mediante getters/setters
+   protected String matricula;
+   protected String marca;
+   protected LocalDateTime fechaEntrada;
+   protected int minutos;
+   protected int numPlazaAparcamiento; 
+	
+   public Vehiculo() { }
+	
+   public Vehiculo(String matricula) {
+      this.matricula = matricula;
+   }
+	
+   public Vehiculo(String matricula, String marca) {
+      this.matricula = matricula;
+      this.marca = marca;		
+   }
+
+   public String getMatricula() {
+      return matricula;
+   }
+
+   public void setMatricula(String matricula) {
+      this.matricula = matricula;
+   }
+
+   public String getMarca() {
+      return marca;
+   }
+
+   public void setMarca(String marca) {
+      this.marca = marca;
+   }
+
+   public LocalDateTime getFechaEntrada() {
+      return fechaEntrada;
+   }
+
+   public void setFechaEntrada(LocalDateTime fechaEntrada) {
+      this.fechaEntrada = fechaEntrada;
+   }
+
+   public int getMinutos() {
+      return minutos;
+   }
+
+   public void setMinutos(int minutos) {
+      this.minutos = minutos;
+   }
+	
+   public int getNumPlazaAparcamiento() {
+      return numPlazaAparcamiento;
+   }
+
+   public void setNumPlazaAparcamiento(int numPlazaAparcamiento) {
+      this.numPlazaAparcamiento = numPlazaAparcamiento;
+   }
+
+   public float calcularImporte() {
+      return Parking.PRECIO_BASE_POR_MINUTO * minutos;
+   }
+	
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((fechaEntrada == null) ? 0 : fechaEntrada.hashCode());
+      result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+      result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
+      result = prime * result + minutos;
+      return result;
+   }
+
+   // Modificamos la implementación por defecto del método equals para 
+   // identificar que dos vehículos serán iguales si lo es su matrícula
+	
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+//    if (getClass() != obj.getClass())
+//	 return false;
+      Vehiculo other = (Vehiculo) obj;
+      if (matricula == null) {
+         if (other.matricula != null)
+            return false;
+         } else if (!matricula.equalsIgnoreCase(other.matricula))
+            return false;
+         return true;
+      }
+
+      @Override
+      public String toString() {
+         return "Vehiculo [matricula=" + matricula + ", marca=" + marca + ", fechaEntrada=" 
+	      + fechaEntrada + ", minutos=" + minutos + "]";
+      }
+}
+```
+
+El método de `calcularImporte()` multiplicaría los minutos por el precio base por minuto.
+
+```java
+   public float calcularImporte() {
+      return Parking.PRECIO_BASE_POR_MINUTO * minutos;
+   }
+```
+
+El método `equals` lo que hemos hecho es autogenerarlo con Eclipse pero después lo hemos modificado, mucho código de relleno lo he borrado directamente y alguno lo he dejado comentado para que podamos entender lo que estamos haciendo.
+
+```java
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+//    if (getClass() != obj.getClass())
+//	 return false;
+      Vehiculo other = (Vehiculo) obj;
+      if (matricula == null) {
+         if (other.matricula != null)
+            return false;
+         } else if (!matricula.equalsIgnoreCase(other.matricula))
+            return false;
+         return true;
+      }
+```
+
+Me centro primero en la segunda parte, para nosotros dos vehículos van a ser iguales en el programa del parking cuando su matrícula lo sea de esa manera nos va a servir fácilmente para poder localizar el vehículo dentro de una colección, cuando utilizamos métodos como `remove()` en la clase `ArrayList` o `contains(obj)` dónde le pasamos un objeto para que compruebe si está dentro y `remove()` para que compruebe y además lo borré, lo que va  haciendo es comparar con cada uno de los elementos del `ArrayList` en base al método `equals`, como ya digo para nosotros dos vehículos serán iguales en tanto y cuanto su matrícula lo sea, no puede haber en la calle dos vehículos que tengan la misma matrícula y sean diferentes, simplemente estamos tratando de modelar ese comportamiento. Así que esta parte 
 
 
+```java
+      Vehiculo other = (Vehiculo) obj;
+      if (matricula == null) {
+         if (other.matricula != null)
+            return false;
+         } else if (!matricula.equalsIgnoreCase(other.matricula))
+            return false;
+         return true;
+      }
+```
 
-Sería falso y hemos comentado esta línea porque de dejarla activa necesitaríamos hacer la misma implementación de este método en las clases que dar afecto para que bueno fuera comparando tipo de clase vehículos con vehículos furgonetas furgonetas y autobuses para nosotros ahorramos la comprobación de clase vale porque porque no va a ser necesario de esa manera aunque utilicemos para comparar una instancia de vehículo con una pon una matrícula específica con una furgoneta o un autobús nos va esta parte médico en la maicena a partir de aquí para poder implementar el polimorfismo hemos customizado en los métodos el método calcular importe en furgoneta y en autobús de manera que el importe de la estancia de una furgoneta es el importe como vehículo más el precio por metro por la longitud en metro y en el caso del autobús el precio por asiento por el número de plaza añadido al importe base como como dijo hasta aquí en los tres tipos de vehículos que vamos a dejar la siguiente clase que importante en la clase parking que podríamos decir que es el núcleo de toda de toda la aplicación porque además tiene dentro la lógica de negocio de entrada de un vehículo en el parking y de salida de un vehículo despacio un parking váter por un lado el listado de vehículos que tiene dentro vale de manera que vamos a poder consultar qué vehículos son los que hay dentro a qué hora entraron su matrícula su marca etcétera también va a tener las plazas de aparcamiento para saber si están libres ocupada simulamos pues el hecho de que tuviéramos parking físico con unos sensores de presencia en cada una de las plazas que nos permitirán pues verificarse una determinada plaza está libre o estás ocupada no lo haremos mediante una un array bidimensional de la clase plaza aparcamiento que tenemos por aquí que sencilla vale que solamente tiene el número de plaza de aparcamiento de donante tendríamos también entero con el número de plazas disponibles para poder gestionarlo rápidamente el saldo acumulado dónde vamos a ir añadiendo no puedo conforme se registre la salida de los vehículos cuánto dinero hemos ido cobrando a lo largo de toda la sesión también tenemos aquí alguna constante definida como static final qué bueno dónde podemos definir el precio base por minuto el precio por metro 13 % habría mil maneras de implementar esta parte nombre de un fichero de perfil o algo similar o un fichero de configuración en algún formato conocido pero no teníamos tampoco si el ejemplo un poco más la lógica de inicio de un parque la tenemos por aquí cuando nosotros podremos decir empieza la jornada del parking el saldo acumulado se pone a cero no debe haber ningún vehículo dentro con lo cual tendríamos 100 plazas disponibles en la lista de vehículos que hay dentro estaría vacía mapa de plaza de aparcamiento comienza con todas las plazas libres y como podemos comprobar aquí empezamos ya a manejar la correspondiente valen las impares vale se fueran numerando de abajo arriba no según este este dibujo que tenemos para si tienes cuidado con si trabajáis en Windows en el cuidado con el tema de la codificación de fichero Windows utiliza una poco específica cuando trabajéis con Eclipse en Windows que no es f8hp 1252
+lo que hace es comprobar que un vehículo tiene matrícula, que la matrícula no es nula y que la matrícula es igual a la del otro vehículo, en lugar de que utilicé `equals` que sería el tramitación por defecto, bueno pues si el usuario ha introducido una matrícula unas en minúsculas otras en mayúscula para evitar esos problemas lo que hacemos es comparar con el método `equalsIgnoreCase` que tiene la clase `String` y qué bueno ignora si la cadena esta en mayúscula o minúscula a la hora de hacer la comparación. 
 
+De la primera parte lo que hacemos es dejar la implementación que hace por defecto Eclipse, cuando nos general el método `equals`, sí se cumple que el operador `==` devuelve `true` nosotros devolveríamos `true` porque son realmente dos referencias a un mismo objeto. si el obeto que proporcionamos obviamente sería falso y hemos comentado dos líneas porque de dejarlas activas necesitariamos hacer la misma implementación de este método en las clases que heredaran de `Vehiculo`, para que fuera comparando tipo de clase con tipo de clase, es decir `Vehiculo` con `Vehiculo`, `Furgoneta` con `Furgoneta` y `Autobus` con `Autobus`. Para nosotros como digo como no puede haber en el mercado dos vehículos con la misma matrícula y que sean vehículos distintos incluso entre tipos pues nos ahorramos la comprobación de clases por que no va a ser necesario, de esta manera aun que utilicemos para comparar una instancia de `Vehiculo` con una matricula específica con una `Furgoneta` o `Autobus` si son la misma matrícula nos va a devolver `true` la coparación con `equals`.
+
+```java
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+//    if (getClass() != obj.getClass())
+//	 return false;
+```
+
+A partir de aquí para poder implementar el polimorfismo hemos customizado en los métodos el método calcular importe en furgoneta y en autobús de manera que el importe de la estancia de una furgoneta es el importe como vehículo más el precio por metro por la longitud en metro y en el caso del autobús el precio por asiento por el número de plaza añadido al importe base como como dijo hasta aquí en los tres tipos de vehículos que vamos a dejar la siguiente clase que importante en la clase parking que podríamos decir que es el núcleo de toda de toda la aplicación porque además tiene dentro la lógica de negocio de entrada de un vehículo en el parking y de salida de un vehículo despacio un parking váter por un lado el listado de vehículos que tiene dentro vale de manera que vamos a poder consultar qué vehículos son los que hay dentro a qué hora entraron su matrícula su marca etcétera también va a tener las plazas de aparcamiento para saber si están libres ocupada simulamos pues el hecho de que tuviéramos parking físico con unos sensores de presencia en cada una de las plazas que nos permitirán pues verificarse una determinada plaza está libre o estás ocupada no lo haremos mediante una un array bidimensional de la clase plaza aparcamiento que tenemos por aquí que sencilla vale que solamente tiene el número de plaza de aparcamiento de donante tendríamos también entero con el número de plazas disponibles para poder gestionarlo rápidamente el saldo acumulado dónde vamos a ir añadiendo no puedo conforme se registre la salida de los vehículos cuánto dinero hemos ido cobrando a lo largo de toda la sesión también tenemos aquí alguna constante definida como static final qué bueno dónde podemos definir el precio base por minuto el precio por metro 13 % habría mil maneras de implementar esta parte nombre de un fichero de perfil o algo similar o un fichero de configuración en algún formato conocido pero no teníamos tampoco si el ejemplo un poco más la lógica de inicio de un parque la tenemos por aquí cuando nosotros podremos decir empieza la jornada del parking el saldo acumulado se pone a cero no debe haber ningún vehículo dentro con lo cual tendríamos 100 plazas disponibles en la lista de vehículos que hay dentro estaría vacía mapa de plaza de aparcamiento comienza con todas las plazas libres y como podemos comprobar aquí empezamos ya a manejar la correspondiente valen las impares vale se fueran numerando de abajo arriba no según este este dibujo que tenemos para si tienes cuidado con si trabajáis en Windows en el cuidado con el tema de la codificación de fichero Windows utiliza una poco específica cuando trabajéis con Eclipse en Windows que no es f8hp 1252
+
+```java
+```
 
 
 
