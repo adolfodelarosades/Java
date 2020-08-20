@@ -1652,6 +1652,7 @@ En este punto podemos utilizar el API Stream a partir de el método `.stream()` 
 
 Vemos el primer ejemplo del uso de `stream`.
 
+
 *`C_ApiStream`*
 
 ```java
@@ -1697,9 +1698,15 @@ public class C_ApiStream {
       List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
 		
       //1º Imprimir todos los elementos de la lista
+//    lista
+//	     .stream()
+//	     .forEach(System.out::println);
+		
+      //2º Imprimir solo los mayores o iguales que 5
       lista
-         .stream()
-	 .forEach(System.out::println);
+	     .stream()
+	     .filter((x) -> x >= 5)
+	     .forEach(System.out::println);
 
    }
 	
@@ -1708,12 +1715,102 @@ public class C_ApiStream {
 
 ![33-23](images/33-23.png)
 
+Si quiciéramos imprimir solo los mayores o iguales que 5 pero ordenado inversamente podríamos utilizar otra operación intermedia de los `Stream` qué es `sorted (Comparator<? super T> comparator)` y que nos permite ordenar un `stream` pasándole un `Comparator`, podemos reutilizar una de las expresiones lambda del ejemplo anterior para ordenar los a la inversa.
+
+*`C_ApiStream`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class C_ApiStream {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1º Imprimir todos los elementos de la lista
+//    lista
+//	     .stream()
+//	     .forEach(System.out::println);
+		
+      //2º Imprimir solo los mayores o iguales que 5
+//    lista
+//	     .stream()
+//	     .filter((x) -> x >= 5)
+//	     .forEach(System.out::println);
+		
+      //3º Imprimir solo los mayores o iguales que 5, ordenados inversamente
+      lista
+	     .stream()
+	     .filter((x) -> x >= 5)
+	     .sorted((n1, n2) -> -(n1.compareTo(n2)))
+	     .forEach(System.out::println);
+   }
+	
+}
+```
+
+![33-24](images/33-24.png)
 
 
-hiciéramos imprimir solo los mayores iguales que 5 pero ordenado inversamente podríamos utilizar otra operación intermedia de los Extreme qué es sorted y que nos permite ordenar un string pasándole un comparato podemos reutilizar una de las expresiones lambda del ejemplo anterior para ordenar los a la inversa no vamos a comentar este código que no emborrone de manera que como aquí no imprimiría los números de mayores que 5 pero lo haría de un determinado orden o en el orden inverso al orden natural por último podríamos ver cómo los streams los podemos utilizar también para agrupar todos los valores en un solo valor haciendo antes una transformación de los distintos valores lo que se conoce como un mapeo fijado que potente está operación en la que podríamos crear un string mapear el valor de integrar a un valor entero primitivo filtrar para que ese valor sea mayor o igual que 5 los que sean menores que 5 los descartar y amos y SUM haríamos todo eso para Lore reduciendo el string a un solo valor resultado que obtenemos aquí y que podríamos imprimir si sumamos los números 5 + 6 + 7 + 8 + 9 + 10 la operación no sería 45 si estaba en un código bastante bastante elegante conecta introducción a ala spring y expresiones lambda finalizamos el curso de Java 8 desde cero o agradezco la paciencia que habéis tenido viendo todos los vídeos y practicando con todos los ejemplo o animo a que pueda ir hacer todas las preguntas que necesitéis en los foros y os ánimo a que os lancéis al finalizarlo a hacer el curso de Java 8 para programadores
+Imprimiría los números de mayores o iguales que 5 pero lo haría en el orden inverso al orden natural.
+
+Por último podríamos ver cómo los `Streams` los podemos utilizar también para agrupar todos los valores en un solo valor, haciendo antes una transformación de los distintos valores, lo que se conoce como **un mapeo**, fijado que potente es está operación en la que podríamos crear un `stream`, mapear el valor de `Integar` a un valor entero primitivo, filtrar para que ese valor sea mayor o igual que 5 los que sean menores que 5 los descartariamos y sumaríamos todos esos valores reduciendo el `stream` a un solo valor resultado que obtenemos y que podríamos imprimir.
+
+*`C_ApiStream`*
+
+```java
+package lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class C_ApiStream {
+	
+   public static void main(String[] args) {
+		
+      List<Integer> lista = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+      //1º Imprimir todos los elementos de la lista
+//    lista
+//	     .stream()
+//	     .forEach(System.out::println);
+		
+      //2º Imprimir solo los mayores o iguales que 5
+//    lista
+//	     .stream()
+//	     .filter((x) -> x >= 5)
+//	     .forEach(System.out::println);
+		
+      //3º Imprimir solo los mayores o iguales que 5, ordenados inversamente
+//    lista
+//           .stream()
+//	     .filter((x) -> x >= 5)
+//	     .sorted((n1, n2) -> -(n1.compareTo(n2)))
+//	     .forEach(System.out::println);
+   
+      //4º Sumar todos los elementos mayores o igual que 5
+      int resultado = lista
+			.stream()
+			.mapToInt(v -> v.intValue())
+			.filter((x) -> x >= 5)
+			.sum();
+      System.out.println(resultado);
+ 
+   }
+   
+}
+```
+
+![33-25](images/33-25.png)
 
 
+Si sumamos los números 5 + 6 + 7 + 8 + 9 + 10 la operación nos daría 45 en un código bastante elegante.
 
+Con esta introducción al API Stream y expresiones lambda finalizamos el curso de Java 8 desde cero o agradezco la paciencia que habéis tenido viendo todos los vídeos y practicando con todos los ejemplos, los animo a que pueda ir hacer todas las preguntas que necesitéis en los foros y os ánimo a que os lancéis al finalizarlo a hacer el curso de Java 8 para programadores Java.
 
 ## Práctica: Creando un gestor de aparcamiento de coches 25:16 
 
