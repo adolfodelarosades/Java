@@ -1816,35 +1816,51 @@ Con esta introducción al API Stream y expresiones lambda finalizamos el curso d
 
 [Proyecto_Final.pptx](otros/Proyecto_Final.pptx)
 
+### Resumen del Profesor
+
+En esta sesión práctica veremos como crear un gestor de aparcamiento de coches, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0/tree/master/Final_Parking).
+
+### Transcripción.
+
 [Gráfico.xlsx](otros/Gráfico.xlsx)
 
 ![34-Parking-1](images/34-Parking-1.png)
 
+Hola a todos vamos a concluir nuestro curso con un ejemplo final qué trata de aglutinar alguno de los conceptos que hemos venido trabajando a lo largo de todo el curso y para ello vamos a implementar la gestión de un parking.
+
 ![34-Parking-2](images/34-Parking-2.png)
+
+Nuestro parking será un parking de unas 100 plazas en el que vamos a plantear las plazas de aparcamiento simulando que tienen carriles intermedios por los cuales podemos circular y que alternativamente al dejarnos circular de arriba a abajo y a continuacón de abajo a arriba pues la numeración de las plazas de parking le hehemos hecho en forma de serpiente, es decir empezando la primera columna desde arriba abajo, la segunda de abajo arriba y así sucesivamente, eso pues va a añadir algo de complejidad en la gestión de manera que bueno pues nos tocará implementarla.
 
 ![34-Parking-3](images/34-Parking-3.png)
 
+Nuestro parking permitirá el acceso a a **tres tipos de vehículos** normales **coches o motos**, donde el precio del vehículo será de 4 céntimos de euro por minuto, añadiremos también dos clases que heredarán de vehículos **furgoneta y autobús** y que tendrán alguna modificación para que veamos cómo funciona el polimorfismo en el cálculo del importe que hay que pagar por la estancia en el parking. La furgoneta pues además de pagar lo que paga un vehículo adicionalmente pagará 20 céntimos por cada metro de longitud que tenga y los autobuses pagarán 25 céntimos adicionales por cada asiento que tengan. 
+
 ![34-Parking-4](images/34-Parking-4.png)
+
+Vamos a trabajar bastantes elementos tecnológicos de los que hemos trabajado a lo largo del curso cómo son la herencia y polimorfismo, arrays bidimensionales, alguna colección con ArrayList, métodos estáticos y métodos de instancia, vamos a hacer una customización del método equals, la entrada y salida al ser especifica de nuestro  parking tendrá cierta lógica de negocio que también implementaremos.
 
 ![34-Parking-5](images/34-Parking-5.png)
 
-En esta sesión práctica veremos como crear un gestor de aparcamiento de coches, tienes el código de ejemplo en el [repositorio de GitHub](https://github.com/OpenWebinarsNet/Curso-Java-desde-0/tree/master/Final_Parking).
+Como no podía ser de otra manera para gestionar el precio de la estancia de los vehículos tendremos que manejar fecha y hora, para imprimir el ticket por pantalla usaremos el formateo de cadena y la clase StringBuilder y también usaremos alguna expresión lambda sencilla que hará que podamos evidenciar como se utilizan pero que no añada excesiva complejidad al uso de este ejemplo.
+
+Bueno aquí tenemos el código dónde tenemos varias clases, si os parece lo primero que hacemos es ponerlo en ejecución, vemos cómo funciona y después iremos visitando el código para ver los apartados más importantes.
 
 ### Código
 
 *dibujoParking.txt*
 
 ```sh
-		//   1     20     21      .. .. .. .. .. ..  100 
-		//   2  |  19     22  |   ..                  99
-		//   3  ▼  18  ▲  23  ▼                       98
-		//   4     17  |  24         ..               97
-		//   5     16     25                          96
-		//   6     15     25            ..            95
-		//   7  |  14     27  |                       94
-		//   8  ▼  13  ▲  28  ▼            ..         93
-		//   9     12  |  29      ..          ..      92
-		//  10     11     30      31 .. .. .. .. ..   91
+//   1     20     21      .. .. .. .. .. ..  100 
+//   2  |  19     22  |   ..                  99
+//   3  ▼  18  ▲  23  ▼                       98
+//   4     17  |  24         ..               97
+//   5     16     25                          96
+//   6     15     25            ..            95
+//   7  |  14     27  |                       94
+//   8  ▼  13  ▲  28  ▼            ..         93
+//   9     12  |  29      ..          ..      92
+//  10     11     30      31 .. .. .. .. ..   91
 ```
 
 *App.java*
@@ -1862,135 +1878,128 @@ import parking.modelo.Furgoneta;
 import parking.modelo.Parking;
 import parking.modelo.Vehiculo;
 
-/**
- * @author Openwebinars
- *
- */
 public class App {
 
-	static Parking parking;
+   static Parking parking;
 
-	static Scanner sc;
+   static Scanner sc;
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
 
-		// Inicializamos las clases necesarias
-		sc = new Scanner(System.in);
-		// Ponemos en marcha el Parking.
-		parking = new Parking();
+      // Inicializamos las clases necesarias
+      sc = new Scanner(System.in);
+      // Ponemos en marcha el Parking.
+      parking = new Parking();
 
-		int opcion = 0;
+      int opcion = 0;
 
-		do {
-			// Imprimimos el menú
-			menu();
-			System.out.print("Introduzca la opción seleccionada: ");
-			opcion = Integer.parseInt(sc.nextLine());
-			System.out.println("");
-			switch (opcion) {
-			case 1:
-				registrarEntradaVehiculo();
-				parking.imprimirEstadoParking();
-				break;
-			case 2:
-				registrarSalidaVehiculo();
-				parking.imprimirEstadoParking();
-				break;
-			case 3:
-				if (parking.getPlazasDisponibles() > 0) {
-					System.out.printf("Hay %d plazas disponibles %n", parking.getPlazasDisponibles());
-				} else {
-					System.out.println("El parking está COMPLETO");
-				}
-				break;
-			case 4:
-				parking.imprimirEstadoParking();
-				break;
-			case 5:
-				System.out.printf("El saldo acumulado es de %.2f", parking.getSaldoAcumulado());
-				break;
-			case 6:
-				parking.getVehiculos().forEach(System.out::println);
-				break;
-			default:
-				System.out.println("Introduzca una opción correcta");
-			}
-			
-		
+      do {
+         // Imprimimos el menú
+         menu();
+         System.out.print("Introduzca la opción seleccionada: ");
+         opcion = Integer.parseInt(sc.nextLine());
+         System.out.println("");
+         switch (opcion) {
+         case 1:
+            registrarEntradaVehiculo();
+            parking.imprimirEstadoParking();
+            break;
+         case 2:
+            registrarSalidaVehiculo();
+            parking.imprimirEstadoParking();
+            break;
+         case 3:
+            if (parking.getPlazasDisponibles() > 0) {
+               System.out.printf("Hay %d plazas disponibles %n", parking.getPlazasDisponibles());
+            } else {
+               System.out.println("El parking está COMPLETO");
+            }
+            break;
+         case 4:
+            parking.imprimirEstadoParking();
+            break;
+         case 5:
+            System.out.printf("El saldo acumulado es de %.2f", parking.getSaldoAcumulado());
+            break;
+         case 6:
+            parking.getVehiculos().forEach(System.out::println);
+            break;
+         default:
+            System.out.println("Introduzca una opción correcta");
+         }
+      } while (opcion != 0);
 
-		} while (opcion != 0);
+         sc.close();
+      }
 
-		sc.close();
-	}
+      public static void menu() {
 
-	public static void menu() {
+         System.out.println("BIENVENIDO AL PARKING CORONAVIRUS");
+         System.out.println("==================================\n");
+         System.out.println("0. Salir del programa");
+         System.out.println("1. Registrar la entrada de un vehículo");
+         System.out.println("2. Registrar la salida de un vehículo");
+         System.out.println("3. Número de plazas disponibles");
+         System.out.println("4. Imprimir estado del parking");
+         System.out.println("5. Saldo acumulado del día");
+         System.out.println("6. Imprimir la lista de vehiculos que hay en el parking");
 
-		System.out.println("BIENVENIDO AL PARKING CORONAVIRUS");
-		System.out.println("==================================\n");
-		System.out.println("0. Salir del programa");
-		System.out.println("1. Registrar la entrada de un vehículo");
-		System.out.println("2. Registrar la salida de un vehículo");
-		System.out.println("3. Número de plazas disponibles");
-		System.out.println("4. Imprimir estado del parking");
-		System.out.println("5. Saldo acumulado del día");
-		System.out.println("6. Imprimir la lista de vehiculos que hay en el parking");
+      }
 
-	}
+      public static void registrarEntradaVehiculo() {
+         // Identificamos el tipo de vehículo
+         int opcion = 0;
+         do {
+            System.out.println("1. Coche o moto");
+            System.out.println("2. Furgoneta");
+            System.out.println("3. Autobús");
+            System.out.print("Introduzca el tipo de vehículo: ");
 
-	public static void registrarEntradaVehiculo() {
-		// Identificamos el tipo de vehículo
-		int opcion = 0;
-		do {
-			System.out.println("1. Coche o moto");
-			System.out.println("2. Furgoneta");
-			System.out.println("3. Autobús");
-			System.out.print("Introduzca el tipo de vehículo: ");
+            opcion = Integer.parseInt(sc.nextLine());
+         } while (opcion < 0 || opcion > 3);
 
-			opcion = Integer.parseInt(sc.nextLine());
-		} while (opcion < 0 || opcion > 3);
+         // Recogemos los datos propios de cualquier vehículo
+         System.out.print("Introduzca la marca del vehículo: ");
+         String marca = sc.nextLine();
+         System.out.print("Introduzca la matrícula del vehículo: ");
+         String matricula = sc.nextLine();
 
-		// Recogemos los datos propios de cualquier vehículo
-		System.out.print("Introduzca la marca del vehículo: ");
-		String marca = sc.nextLine();
-		System.out.print("Introduzca la matrícula del vehículo: ");
-		String matricula = sc.nextLine();
+         Vehiculo v = null;
 
-		Vehiculo v = null;
+         // En función del tipo de vehículo, creamos una u otra referencia
+         switch (opcion) {
+            case 1:
+               //Almacenamos los datos en mayúsculas
+               v = new Vehiculo(matricula.toUpperCase(), marca.toUpperCase());
+               break;
+            case 2:
+               // Si es una furgoneta, solicitamos la longitud
+               System.out.print("Introduzca la longitud en metros de la furgoneta (puede incluir decimales): ");
+               float longitud = Float.parseFloat(sc.nextLine());
+               v = new Furgoneta(matricula, marca, longitud);
+               break;
+            case 3:
+               // Si es un autobús, solicitamos el número de plazas
+               System.out.print("Introduzca el número de plazas del autobús: ");
+               int numPlazas = Integer.parseInt(sc.nextLine());
+               v = new Autobus(matricula, marca, numPlazas);
+         }
 
-		// En función del tipo de vehículo, creamos una u otra referencia
-		switch (opcion) {
-		case 1:
-			//Almacenamos los datos en mayúsculas
-			v = new Vehiculo(matricula.toUpperCase(), marca.toUpperCase());
-			break;
-		case 2:
-			// Si es una furgoneta, solicitamos la longitud
-			System.out.print("Introduzca la longitud en metros de la furgoneta (puede incluir decimales): ");
-			float longitud = Float.parseFloat(sc.nextLine());
-			v = new Furgoneta(matricula, marca, longitud);
-			break;
-		case 3:
-			// Si es un autobús, solicitamos el número de plazas
-			System.out.print("Introduzca el número de plazas del autobús: ");
-			int numPlazas = Integer.parseInt(sc.nextLine());
-			v = new Autobus(matricula, marca, numPlazas);
-		}
-
-		// Registramos la entrada del vehículo
-		parking.registrarEntradaVehiculo(v);
-		System.out.println("");
-	}
+         // Registramos la entrada del vehículo
+         parking.registrarEntradaVehiculo(v);
+         System.out.println("");
+      }
 	
-	public static void registrarSalidaVehiculo() {
-		System.out.print("\nIntroduzca la matrícula del veh�culo: ");
-		String matricula = sc.nextLine();
-		// Para registrar la salida de un vehículo solamente
-		// necesitamos su matrícula
-		parking.registrarSalidaVehiculo(new Vehiculo(matricula.toUpperCase()));
-	}
+      public static void registrarSalidaVehiculo() {
+         System.out.print("\nIntroduzca la matrícula del vehículo: ");
+         String matricula = sc.nextLine();
+         // Para registrar la salida de un vehículo solamente
+         // necesitamos su matrícula
+         parking.registrarSalidaVehiculo(new Vehiculo(matricula.toUpperCase()));
+      }
 
 }
 ```
@@ -2007,203 +2016,181 @@ package parking.modelo;
 
 import java.time.LocalDateTime;
 
-/**
- * @author Openwebinars
- *
- */
 public class Vehiculo {
 	
-	// Dejamos las propiedades como protected de forma didáctica, aunque su uso no está muy recomendado
-	// Sería más recomendable que fuera private, y acceder desde las clases hija mediante getters/setters
-	protected String matricula;
-	protected String marca;
-	protected LocalDateTime fechaEntrada;
-	protected int minutos;
-	protected int numPlazaAparcamiento; 
+   // Dejamos las propiedades como protected de forma didáctica, aunque su uso no está muy recomendado
+   // Sería más recomendable que fuera private, y acceder desde las clases hija mediante getters/setters
+   protected String matricula;
+   protected String marca;
+   protected LocalDateTime fechaEntrada;
+   protected int minutos;
+   protected int numPlazaAparcamiento; 
 	
+   public Vehiculo() { }
 	
-	public Vehiculo() { }
+   public Vehiculo(String matricula) {
+      this.matricula = matricula;
+   }
 	
-	public Vehiculo(String matricula) {
-		this.matricula = matricula;
-	}
+   public Vehiculo(String matricula, String marca) {
+      this.matricula = matricula;
+      this.marca = marca;		
+   }
+
+   public String getMatricula() {
+      return matricula;
+   }
+
+   public void setMatricula(String matricula) {
+      this.matricula = matricula;
+   }
+
+   public String getMarca() {
+      return marca;
+   }
+
+   public void setMarca(String marca) {
+      this.marca = marca;
+   }
+
+   public LocalDateTime getFechaEntrada() {
+      return fechaEntrada;
+   }
+
+   public void setFechaEntrada(LocalDateTime fechaEntrada) {
+      this.fechaEntrada = fechaEntrada;
+   }
+
+   public int getMinutos() {
+      return minutos;
+   }
+
+   public void setMinutos(int minutos) {
+      this.minutos = minutos;
+   }
 	
-	public Vehiculo(String matricula, String marca) {
-		this.matricula = matricula;
-		this.marca = marca;
-		
-	}
+   public int getNumPlazaAparcamiento() {
+      return numPlazaAparcamiento;
+   }
 
-	public String getMatricula() {
-		return matricula;
-	}
+   public void setNumPlazaAparcamiento(int numPlazaAparcamiento) {
+      this.numPlazaAparcamiento = numPlazaAparcamiento;
+   }
 
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
-
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public LocalDateTime getFechaEntrada() {
-		return fechaEntrada;
-	}
-
-	public void setFechaEntrada(LocalDateTime fechaEntrada) {
-		this.fechaEntrada = fechaEntrada;
-	}
-
-	public int getMinutos() {
-		return minutos;
-	}
-
-	public void setMinutos(int minutos) {
-		this.minutos = minutos;
-	}
+   public float calcularImporte() {
+      return Parking.PRECIO_BASE_POR_MINUTO * minutos;
+   }
 	
-	public int getNumPlazaAparcamiento() {
-		return numPlazaAparcamiento;
-	}
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((fechaEntrada == null) ? 0 : fechaEntrada.hashCode());
+      result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+      result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
+      result = prime * result + minutos;
+      return result;
+   }
 
-	public void setNumPlazaAparcamiento(int numPlazaAparcamiento) {
-		this.numPlazaAparcamiento = numPlazaAparcamiento;
-	}
-
-	public float calcularImporte() {
-		return Parking.PRECIO_BASE_POR_MINUTO * minutos;
-	}
+   // Modificamos la implementación por defecto del método equals para 
+   // identificar que dos vehículos serán iguales si lo es su matrícula
 	
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+//    if (getClass() != obj.getClass())
+//	 return false;
+      Vehiculo other = (Vehiculo) obj;
+      if (matricula == null) {
+         if (other.matricula != null)
+            return false;
+         } else if (!matricula.equalsIgnoreCase(other.matricula))
+            return false;
+         return true;
+      }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((fechaEntrada == null) ? 0 : fechaEntrada.hashCode());
-		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
-		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
-		result = prime * result + minutos;
-		return result;
-	}
-
-	// Modificamos la implementación por defecto del método equals para 
-	// identificar que dos vehículos serán iguales si lo es su matrícula
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-		Vehiculo other = (Vehiculo) obj;
-		if (matricula == null) {
-			if (other.matricula != null)
-				return false;
-		} else if (!matricula.equalsIgnoreCase(other.matricula))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Vehiculo [matricula=" + matricula + ", marca=" + marca + ", fechaEntrada=" + fechaEntrada + ", minutos="
-				+ minutos + "]";
-	}
+      @Override
+      public String toString() {
+         return "Vehiculo [matricula=" + matricula + ", marca=" + marca + ", fechaEntrada=" 
+	      + fechaEntrada + ", minutos=" + minutos + "]";
+      }
 }
 ```
 
 *Autobus.java*
 
 ```java
-/**
- * 
- */
 package parking.modelo;
 
-/**
- * @author Openwebinars
- *
- */
 public class Autobus extends Vehiculo {
 	
-	private int numPlazas;
+   private int numPlazas;
 	
-	public Autobus() { }
+   public Autobus() { }
 	
-	public Autobus(String matricula, String marca, int numPlazas) {
-		super(matricula, marca);
-		this.numPlazas = numPlazas;		
-	}
+   public Autobus(String matricula, String marca, int numPlazas) {
+      super(matricula, marca);
+      this.numPlazas = numPlazas;		
+   }
 
-	public int getNumPlazas() {
-		return numPlazas;
-	}
+   public int getNumPlazas() {
+      return numPlazas;
+   }
 
-	public void setNumPlazas(int numPlazas) {
-		this.numPlazas = numPlazas;
-	}
+   public void setNumPlazas(int numPlazas) {
+      this.numPlazas = numPlazas;
+   }
 	
-	@Override
-	public float calcularImporte() {		
-		return super.calcularImporte() + (Parking.PRECIO_POR_ASIENTO * numPlazas);
-	}
+   @Override
+   public float calcularImporte() {		
+      return super.calcularImporte() + (Parking.PRECIO_POR_ASIENTO * numPlazas);
+   }
 
-	@Override
-	public String toString() {
-		return "Autobus [numPlazas=" + numPlazas + ", matricula=" + matricula + ", marca=" + marca + ", fechaEntrada="
-				+ fechaEntrada + ", minutos=" + minutos + "]";
-	}
+   @Override
+   public String toString() {
+      return "Autobus [numPlazas=" + numPlazas + ", matricula=" + matricula + ", marca=" 
+             + marca + ", fechaEntrada=" + fechaEntrada + ", minutos=" + minutos + "]";
+   }
 }
 ```
 
 *Furgoneta.java*
 
 ```java
-/**
- * 
- */
 package parking.modelo;
 
-/**
- * @author Openwebinars
- *
- */
 public class Furgoneta extends Vehiculo {
 	
-	private float longitud;
+   private float longitud;
 	
-	public Furgoneta() { }
+   public Furgoneta() { }
 	
-	public Furgoneta(String matricula, String marca, float longitud) {
-		super(matricula, marca);
-		this.longitud = longitud;
-	}
+   public Furgoneta(String matricula, String marca, float longitud) {
+      super(matricula, marca);
+      this.longitud = longitud;
+   }
 
-	public float getLongitud() {
-		return longitud;
-	}
+   public float getLongitud() {
+      return longitud;
+   }
 
-	public void setLongitud(float longitud) {
-		this.longitud = longitud;
-	}
+   public void setLongitud(float longitud) {
+      this.longitud = longitud;
+   }
 			
-	@Override
-	public float calcularImporte() {		
-		return super.calcularImporte() + (Parking.PRECIO_POR_METRO * longitud);
-	}
+   @Override
+   public float calcularImporte() {		
+      return super.calcularImporte() + (Parking.PRECIO_POR_METRO * longitud);
+   }
 
-
-	@Override
-	public String toString() {
-		return "Furgoneta [longitud=" + longitud + ", matricula=" + matricula + ", marca=" + marca + ", fechaEntrada="
-				+ fechaEntrada + ", minutos=" + minutos + "]";
-	}
+   @Override
+   public String toString() {
+      return "Furgoneta [longitud=" + longitud + ", matricula=" + matricula + ", marca=" 
+             + marca + ", fechaEntrada=" + fechaEntrada + ", minutos=" + minutos + "]";
+   }
 }
 ```
 
@@ -2214,62 +2201,62 @@ package parking.modelo;
 
 public class PlazaAparcamiento {
 	
-	private int numero;
-	private boolean libre;
+   private int numero;
+   private boolean libre;
 	
-	public PlazaAparcamiento() { }
+   public PlazaAparcamiento() { }
 	
-	public PlazaAparcamiento(int numero) {
-		this.numero = numero;
-		// Por defecto, al crear una plaza está libre
-		this.libre = true;
-	}
+   public PlazaAparcamiento(int numero) {
+      this.numero = numero;
+      // Por defecto, al crear una plaza está libre
+      this.libre = true;
+   }
 
-	public int getNumero() {
-		return numero;
-	}
+   public int getNumero() {
+      return numero;
+   }
 
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
+   public void setNumero(int numero) {
+      this.numero = numero;
+   }
 
-	public boolean isLibre() {
-		return libre;
-	}
+   public boolean isLibre() {
+      return libre;
+   }
 
-	public void setLibre(boolean libre) {
-		this.libre = libre;
-	}
+   public void setLibre(boolean libre) {
+      this.libre = libre;
+   }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (libre ? 1231 : 1237);
-		result = prime * result + numero;
-		return result;
-	}
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + (libre ? 1231 : 1237);
+      result = prime * result + numero;
+      return result;
+   }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof PlazaAparcamiento))
-			return false;
-		PlazaAparcamiento other = (PlazaAparcamiento) obj;
-		if (libre != other.libre)
-			return false;
-		if (numero != other.numero)
-			return false;
-		return true;
-	}
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (!(obj instanceof PlazaAparcamiento))
+         return false;
+      PlazaAparcamiento other = (PlazaAparcamiento) obj;
+      if (libre != other.libre)
+         return false;
+      if (numero != other.numero)
+         return false;
+      return true;
+   }
 
-	@Override
-	public String toString() {
-		return "PlazaAparcamiento [numero=" + numero + ", libre=" + libre + "]";
-	}
+   @Override
+   public String toString() {
+      return "PlazaAparcamiento [numero=" + numero + ", libre=" + libre + "]";
+   }
 }
 ```
 
@@ -2294,190 +2281,186 @@ import java.util.Random;
 
 import parking.utils.Utils;
 
-/**
- * @author Openwebinars
- *
- */
 public class Parking {
 	
-	// Mantenemos una lista con los vehículos que hay dentro del parking
-	private List<Vehiculo> vehiculos;
+   // Mantenemos una lista con los vehículos que hay dentro del parking
+   private List<Vehiculo> vehiculos;
 	
-	// Además, necesitamos saber qué plazas están libres o cuales están ocupadas
-	private PlazaAparcamiento[][] plazasAparcamiento;
+   // Además, necesitamos saber qué plazas están libres o cuales están ocupadas
+   private PlazaAparcamiento[][] plazasAparcamiento;
 	
-	// El número de plazas disponibles, para poder visualizarlo en el cartel de la entrada
-	// Si el número de plazas disponibles es 0, el parking está COMPLETO
-	private int plazasDisponibles;
+   // El número de plazas disponibles, para poder visualizarlo en el cartel de la entrada
+   // Si el número de plazas disponibles es 0, el parking está COMPLETO
+   private int plazasDisponibles;
 	
-	// Almacenamos el importe total que hemos cobrado a lo largo de la sesión
-	private float saldoAcumulado;
+   // Almacenamos el importe total que hemos cobrado a lo largo de la sesión
+   private float saldoAcumulado;
 	
-	// La carta de precios la establecemos estáticamente en constantes, si bien
-	// sería positivo buscar otro sistema, como un fichero de properties.
-	public static final float PRECIO_BASE_POR_MINUTO = 0.04f;
-	public static final float PRECIO_POR_METRO = 0.2f;
-	public static final float PRECIO_POR_ASIENTO = 0.25f;
-	
-	
-	public Parking() {
-		saldoAcumulado = 0.0f;
-		plazasDisponibles = 100;
-		vehiculos = new ArrayList<>();
-		// nuestro parking es cuadrado, así que lo representamos en
-		// un array bidimensional de 10x10
-		plazasAparcamiento = new PlazaAparcamiento[10][10];
-		int numPlaza = 0;
-		for(int j = 0; j < 10; j++) {
-			// Las columnas pares se recorren de arriba a abajo
-			// y las impares de abajo a arriba
-			if (j % 2 == 0)
-				for(int i = 0; i < 10; i++)		
-					plazasAparcamiento[i][j] = new PlazaAparcamiento(++numPlaza);
-			else
-				for(int i = 9; i >= 0; i--)
-					plazasAparcamiento[i][j] = new PlazaAparcamiento(++numPlaza);
-		}
+   // La carta de precios la establecemos estáticamente en constantes, si bien
+   // sería positivo buscar otro sistema, como un fichero de properties.
+   public static final float PRECIO_BASE_POR_MINUTO = 0.04f;
+   public static final float PRECIO_POR_METRO = 0.2f;
+   public static final float PRECIO_POR_ASIENTO = 0.25f;
 		
-		// Recorremos así el array para que quede de la siguiente forma
-		// NOTA: Las flechas hacia abajo y arriba simulan el sentido de
-		// los carriles por los que circularían los coches. 
+   public Parking() {
+      saldoAcumulado = 0.0f;
+      plazasDisponibles = 100;
+      vehiculos = new ArrayList<>();
+      // nuestro parking es cuadrado, así que lo representamos en
+      // un array bidimensional de 10x10
+      plazasAparcamiento = new PlazaAparcamiento[10][10];
+      int numPlaza = 0;
+      for(int j = 0; j < 10; j++) {
+         // Las columnas pares se recorren de arriba a abajo
+         // y las impares de abajo a arriba
+         if (j % 2 == 0)
+            for(int i = 0; i < 10; i++)		
+               plazasAparcamiento[i][j] = new PlazaAparcamiento(++numPlaza);
+            else
+               for(int i = 9; i >= 0; i--)
+                  plazasAparcamiento[i][j] = new PlazaAparcamiento(++numPlaza);
+      }
 		
-		//   1     20     21      .. .. .. .. .. ..  100 
-		//   2  |  19     22  |   ..                  99
-		//   3  ▼  18  ▲  23  ▼                       98
-		//   4     17  |  24         ..               97
-		//   5     16     25                          96
-		//   6     15     25            ..            95
-		//   7  |  14     27  |                       94
-		//   8  ▼  13  ▲  28  ▼            ..         93
-		//   9     12  |  29      ..          ..      92
-		//  10     11     30      31 .. .. .. .. ..   91
+      // Recorremos así el array para que quede de la siguiente forma
+      // NOTA: Las flechas hacia abajo y arriba simulan el sentido de
+      // los carriles por los que circularían los coches. 
 		
-	}
+      //   1     20     21      .. .. .. .. .. ..  100 
+      //   2  |  19     22  |   ..                  99
+      //   3  ▼  18  ▲  23  ▼                       98
+      //   4     17  |  24         ..               97
+      //   5     16     25                          96
+      //   6     15     25            ..            95
+      //   7  |  14     27  |                       94
+      //   8  ▼  13  ▲  28  ▼            ..         93
+      //   9     12  |  29      ..          ..      92
+      //  10     11     30      31 .. .. .. .. ..   91
+		
+   }
 
-	public int getPlazasDisponibles() {
-		return plazasDisponibles;
-	}
+   public int getPlazasDisponibles() {
+      return plazasDisponibles;
+   }
 
-	public List<Vehiculo> getVehiculos() {
-		return vehiculos;
-	}
+   public List<Vehiculo> getVehiculos() {
+      return vehiculos;
+   }
 
-	public PlazaAparcamiento[][] getPlazasAparcamiento() {
-		return plazasAparcamiento;
-	}
+   public PlazaAparcamiento[][] getPlazasAparcamiento() {
+      return plazasAparcamiento;
+   }
 			
-	public float getSaldoAcumulado() {
-		return saldoAcumulado;
-	}
+   public float getSaldoAcumulado() {
+      return saldoAcumulado;
+   }
 
-	/*
-	 * Método que imprime, de forma conveniente, el mapa del parking, 
-	 * indicando todas las plazas que hay y si están ocupadas o no.
-	 */
-	public void imprimirEstadoParking() {
+   /*
+    * Método que imprime, de forma conveniente, el mapa del parking, 
+    * indicando todas las plazas que hay y si están ocupadas o no.
+    */
+   public void imprimirEstadoParking() {
 		
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
-				PlazaAparcamiento plaza = plazasAparcamiento[i][j]; 
-				String strPlaza = String.format("%3s", Integer.toString(plaza.getNumero())) + " " + ((plaza.isLibre()) ? "L" : "O") + "  "; 
-				System.out.print(strPlaza);
-			}
-			System.out.println();
-		}
-		System.out.println("");
+      for(int i = 0; i < 10; i++) {
+         for(int j = 0; j < 10; j++) {
+            PlazaAparcamiento plaza = plazasAparcamiento[i][j]; 
+            String strPlaza = String.format("%3s", Integer.toString(plaza.getNumero())) + " " + ((plaza.isLibre()) ? "L" : "O") + "  "; 
+            System.out.print(strPlaza);
+         }
+         System.out.println();
+      }
+      System.out.println("");
 		
-	}
+   }
 
-	/*
-	 * Método que registra la entrada de un vehículo en el parking.
-	 */
-	public void registrarEntradaVehiculo(Vehiculo v) {
+   /*
+    * Método que registra la entrada de un vehículo en el parking.
+    */
+   public void registrarEntradaVehiculo(Vehiculo v) {
 		
-		if (plazasDisponibles > 0) {
-			// Asignamos la fecha y hora de entrada
-			v.setFechaEntrada(Utils.fechaYHoraAleatoriaAlrededorFechaYHoraActual());
+      if (plazasDisponibles > 0) {
+         // Asignamos la fecha y hora de entrada
+         v.setFechaEntrada(Utils.fechaYHoraAleatoriaAlrededorFechaYHoraActual());
 			
-			// Colocamos el coche en una plaza de aparcamiento
-			// Simularemos que esto se produce de forma aleatoria
-			Random r = new Random();
-			boolean cocheAparcado;
-			int i, j, numPlaza = 0;
+         // Colocamos el coche en una plaza de aparcamiento
+         // Simularemos que esto se produce de forma aleatoria
+         Random r = new Random();
+         boolean cocheAparcado;
+         int i, j, numPlaza = 0;
 			
-			do {
-				cocheAparcado = false;		
-				i = r.nextInt(10);
-				j = r.nextInt(10);
+         do {
+            cocheAparcado = false;		
+            i = r.nextInt(10);
+            j = r.nextInt(10);
 				
-				if (plazasAparcamiento[i][j].isLibre()) {
-					plazasAparcamiento[i][j].setLibre(false);
-					cocheAparcado = true;
-					numPlaza = plazasAparcamiento[i][j].getNumero();
-				}
-			} while (!cocheAparcado);
+            if (plazasAparcamiento[i][j].isLibre()) {
+               plazasAparcamiento[i][j].setLibre(false);
+               cocheAparcado = true;
+               numPlaza = plazasAparcamiento[i][j].getNumero();
+            }
+         } while (!cocheAparcado);
 			
-			// Añadimos el coche a la lista de coches que tenemos
-			// dentro del parking, asignándole el número de plaza que ocupa
-			v.setNumPlazaAparcamiento(numPlaza);		
-			vehiculos.add(v);
-			--plazasDisponibles;
-		} else {
-			System.out.println("EL PARKING ESTÁ COMPLETO\n");
-		}
-	}
-	/*
-	 * Método que registra la salida de un vehículo del parking
-	 */
-	public void registrarSalidaVehiculo(Vehiculo v) {
+         // Añadimos el coche a la lista de coches que tenemos
+         // dentro del parking, asignándole el número de plaza que ocupa
+         v.setNumPlazaAparcamiento(numPlaza);		
+         vehiculos.add(v);
+         --plazasDisponibles;
+      } else {
+         System.out.println("EL PARKING ESTÁ COMPLETO\n");
+      }
+   }
+   
+   /*
+    * Método que registra la salida de un vehículo del parking
+    */
+   public void registrarSalidaVehiculo(Vehiculo v) {
 		
-		if (!vehiculos.contains(v)) {
-			System.out.println("ESTE VEHÍCULO NO ESTÁ EN EL PARKING");
-			return;
-		} else {
-			// Rescatamos la instacia de vehículo que tenemos
-			// almacenada, ya que es la que tiene registrada
-			// la fecha y hora de entrada
-			v = vehiculos.get(vehiculos.indexOf(v));
-		}
+      if (!vehiculos.contains(v)) {
+         System.out.println("ESTE VEHÍCULO NO ESTÁ EN EL PARKING");
+         return;
+      } else {
+         // Rescatamos la instacia de vehículo que tenemos
+         // almacenada, ya que es la que tiene registrada
+         // la fecha y hora de entrada
+	 v = vehiculos.get(vehiculos.indexOf(v));
+      }
 		
-		LocalDateTime salida = LocalDateTime.now();
+      LocalDateTime salida = LocalDateTime.now();
 		
-		// Asignamos el número de minutos para calcular el importe
-		v.setMinutos(Utils.minutosEntreDosFechas(v.getFechaEntrada(), salida));
+      // Asignamos el número de minutos para calcular el importe
+      v.setMinutos(Utils.minutosEntreDosFechas(v.getFechaEntrada(), salida));
 		
-		// Imprimimos el mensaje con el importe del pago
-		StringBuilder ticket = new StringBuilder(String.format("TICKET DE SALIDA: %nMatrícula %s %nFecha y hora de llegada: %s "
-				+ "%nFecha y hora de salida: %s %nMinutos de estancia: %d%n", 
-				v.getMatricula(), 
-				v.getFechaEntrada().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
-				salida.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)), 
-				v.getMinutos()));
+      // Imprimimos el mensaje con el importe del pago
+      StringBuilder ticket = new StringBuilder(
+      	   String.format("TICKET DE SALIDA: %nMatrícula %s %nFecha y hora de llegada: %s "
+      		+ "%nFecha y hora de salida: %s %nMinutos de estancia: %d%n", v.getMatricula(), 
+		v.getFechaEntrada().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
+		salida.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)), 
+		v.getMinutos()));
 		
-		if (v instanceof Furgoneta) {
-			Furgoneta furgo = (Furgoneta) v;
-			ticket.append(String.format("Longitud de la furgoneta %.2f ", furgo.getLongitud()));
-		} else if (v instanceof Autobus) {
-			Autobus bus = (Autobus) v;
-			ticket.append(String.format("Núm. de plazas del autobús: %d " , bus.getNumPlazas()));
-		}
+      if (v instanceof Furgoneta) {
+         Furgoneta furgo = (Furgoneta) v;
+         ticket.append(String.format("Longitud de la furgoneta %.2f ", furgo.getLongitud()));
+      } else if (v instanceof Autobus) {
+         Autobus bus = (Autobus) v;
+         ticket.append(String.format("Núm. de plazas del autobús: %d " , bus.getNumPlazas()));
+      }
 		
-		ticket.append(String.format("%nImporte total de la estancia: %.2f€ %n%n", v.calcularImporte()));
+      ticket.append(String.format("%nImporte total de la estancia: %.2f€ %n%n", v.calcularImporte()));
 		
-		System.out.printf(ticket.toString());
+      System.out.printf(ticket.toString());
 		
-		// Añadimos el importe al saldo acumulado
-		saldoAcumulado += v.calcularImporte();
+      // Añadimos el importe al saldo acumulado
+      saldoAcumulado += v.calcularImporte();
 		
-		// Identificamos la posición que tenía ocupada el coche para dejarla libre
-		int[] coordenadas = Utils.posicionNumeroPlaza(v.getNumPlazaAparcamiento());
-		plazasAparcamiento[coordenadas[0]][coordenadas[1]].setLibre(true);
+      // Identificamos la posición que tenía ocupada el coche para dejarla libre
+      int[] coordenadas = Utils.posicionNumeroPlaza(v.getNumPlazaAparcamiento());
+      plazasAparcamiento[coordenadas[0]][coordenadas[1]].setLibre(true);
 		
-		// Eliminamos el vehículo de la lista
-		vehiculos.remove(v);
+      // Eliminamos el vehículo de la lista
+      vehiculos.remove(v);
 		
-		++plazasDisponibles;
-	}
+      ++plazasDisponibles;
+   }
 }
 ```
 
@@ -2495,70 +2478,67 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
-/**
- * @author Openwebinars
- *
- */
 public class Utils {
 	
-	/*
-	 * Este método nos devuelve una instancia de LocalDateTime aleatoria,
-	 * anterior a la fecha y hora actual, pero no muy lejana (en el intervalo
-	 * de entre 2 y 6 horas).
-	 */
-	public static LocalDateTime fechaYHoraAleatoriaAlrededorFechaYHoraActual() {
-		Random r = new Random();
-		return LocalDateTime.now().minusHours(r.nextInt(4) + 2).minusMinutes(r.nextInt(60)).minusSeconds(r.nextInt(60));		
-	}
+   /*
+    * Este método nos devuelve una instancia de LocalDateTime aleatoria,
+    * anterior a la fecha y hora actual, pero no muy lejana (en el intervalo
+    * de entre 2 y 6 horas).
+    */
+   public static LocalDateTime fechaYHoraAleatoriaAlrededorFechaYHoraActual() {
+      Random r = new Random();
+      return LocalDateTime.now().minusHours(r.nextInt(4) 
+             + 2).minusMinutes(r.nextInt(60)).minusSeconds(r.nextInt(60));		
+   }
 	
-	/*
-	 * Nos devuelve la duración en minutos entre dos fechas
-	 */
-	public static int minutosEntreDosFechas(LocalDateTime anterior, LocalDateTime posterior) {
-		// Le sumamos un minuto a posterior, ya que al usar el método between, la fecha
-		// más reciente es exclusiva.
-		posterior = posterior.plusMinutes(1L);
-		// Devolvemos la diferencia entre ambas fechas en minutos
-		return (int) ChronoUnit.MINUTES.between(anterior, posterior); 
-	}
+   /*
+    * Nos devuelve la duración en minutos entre dos fechas
+    */
+   public static int minutosEntreDosFechas(LocalDateTime anterior, LocalDateTime posterior) {
+      // Le sumamos un minuto a posterior, ya que al usar el método between, la fecha
+      // más reciente es exclusiva.
+      posterior = posterior.plusMinutes(1L);
+      // Devolvemos la diferencia entre ambas fechas en minutos
+      return (int) ChronoUnit.MINUTES.between(anterior, posterior); 
+   }
 	
-	public static int[] posicionNumeroPlaza(int n) {
+   public static int[] posicionNumeroPlaza(int n) {
 		
-		int[] result;
+      int[] result;
 
-		int unidades = n % 10;
-		int decenas = n / 10;
-		int fila, columna;
+      int unidades = n % 10;
+      int decenas = n / 10;
+      int fila, columna;
 
-		// Este cálculo tenemos que hacerlo por la forma
-		// en que hemos "dibujado" las plazas en el parking
-		// Si n % 10 == 0 
-		//    la decena es impar -> [9][decena-1]
-		//    la decena es par -> [0][decena-1]
-		// Si no
-		//    Si la decena es par 
-		//       [unidad-1][decena]
-		//    Si no
-		//       [10-unidad][decena]
-		if (n % 10 == 0) {
-			if (decenas % 10 == 1)
-				fila = 9;
-			else 
-				fila = 0;
-			columna = decenas - 1;
-		} else {
-			if (decenas % 2 == 0) 
-				fila = unidades -1;
-			else
-				fila = 10 - unidades;
-			columna = decenas;
-		}
+      // Este cálculo tenemos que hacerlo por la forma
+      // en que hemos "dibujado" las plazas en el parking
+      // Si n % 10 == 0 
+      //    la decena es impar -> [9][decena-1]
+      //    la decena es par -> [0][decena-1]
+      // Si no
+      //    Si la decena es par 
+      //       [unidad-1][decena]
+      //    Si no
+      //       [10-unidad][decena]
+      if (n % 10 == 0) {
+         if (decenas % 10 == 1)
+            fila = 9;
+         else 
+            fila = 0;
+         columna = decenas - 1;
+      } else {
+         if (decenas % 2 == 0) 
+            fila = unidades -1;
+         else
+            fila = 10 - unidades;
+         columna = decenas;
+      }
 		
-		// devolvemos las posiciones del resultado
-		result = new int[]{fila, columna};
+      // devolvemos las posiciones del resultado
+      result = new int[]{fila, columna};
 		
-		return result;
-	}
+      return result;
+   }
 }
 ```
 
@@ -2721,7 +2701,7 @@ BIENVENIDO AL PARKING CORONAVIRUS
 Introduzca la opción seleccionada: 2
 
 
-Introduzca la matrícula del veh�culo: 333LPU
+Introduzca la matrícula del vehículo: 333LPU
 TICKET DE SALIDA: 
 Matrícula 333LPU 
 Fecha y hora de llegada: 26-abr-2020 19:08:44 
@@ -2803,7 +2783,7 @@ BIENVENIDO AL PARKING CORONAVIRUS
 Introduzca la opción seleccionada: 2
 
 
-Introduzca la matrícula del veh�culo: 123ABC
+Introduzca la matrícula del vehículo: 123ABC
 TICKET DE SALIDA: 
 Matrícula 123ABC 
 Fecha y hora de llegada: 26-abr-2020 17:17:07 
@@ -2849,7 +2829,7 @@ BIENVENIDO AL PARKING CORONAVIRUS
 Introduzca la opción seleccionada: 2
 
 
-Introduzca la matrícula del veh�culo: 898SDR
+Introduzca la matrícula del vehículo: 898SDR
 TICKET DE SALIDA: 
 Matrícula 898SDR 
 Fecha y hora de llegada: 26-abr-2020 16:57:28 
@@ -2909,10 +2889,8 @@ Introduzca la opción seleccionada: 0
 Introduzca una opción correcta
 ```
 
-### Transcripción.
 
-
-Hola tonto vamos a concluir nuestro curso de programación Java 8 de tercera con un ejemplo final qué trata de aglutinar alguno de los conceptos que hemos venido trabajando lo largo de todo el curso y para ello vamos a implementar la gestión del parque nuestro parking gran parque de unas 100 plazas en el que bueno pues vamos a plantear la plaza de aparcamiento simulando que tienen que circular alternativamente pues la numeración de las plazas de parking empezando la primera columna desde arriba abajo la segunda de abajo arriba y así sucesivamente añadir algo de complejidad en la gestión de manera que bueno pues nos tocará incrementar vale parking permitirá el acceso a a tres tipos de vehículos vehículos normales concert Moto2 del precio del vehículo será de 4 sentimos o 4 centenas de euro por minuto añadiremos también dos clases que heredarán de vehículos furgoneta y autobús y que tendrán alguna modificación para que veamos cómo funciona el polimorfismo en el cálculo del importe que hay que pagar por la estación hasta que no la furgoneta pues además de pagar lo que paga un vehículo adicionalmente para ganar 20 sentimos porro por cada longitud por cada metro de longitud que tenga y los autobuses para grandes de 5 céntimo adicionales por cada centro vamos a trabajar bastante elementos tecnológicos de los que hemos trabajado a lo largo del curso cómo son la herencia y polimorfismo arrays bidimensionales openwebinars pues tendrá cierta lógica de negocio que también implementaremos como no podía ser de otra manera para gestionar el precio de la estancia de los vehículos que tendremos que manejar fecha y hora para imprimir el ticket por pantalla usaremos el formateo de cadena y la clase StringBuilder y también usaremos alguna especial Landa sencilla que hará que podamos evidenciar como se utilizan pero que no añada excesiva complejidad al uso de ejemplo bueno aquí tenemos el código dónde tenemos varias clase si os parece lo primero que hacemos ser ponerlo en ejecución vemos cómo funciona y después iremos visitando el código para ver los apartados marihuana al comenzar en la jornada el parking no tiene ningún coche dentro y bueno avería y comenzarían los vehículos a llegar este sería el menú con las distintas operaciones que tendríamos no se puede registrar la la entrada de un vehículo la salida pero el número de plazas que quedan disponibles imprimir el estado del parque vale imprimir el mapa del Estado indicando el número de plazas y las plazas están libro las que están ocupada y hemos acumulando el saldo del día para saber luego bueno pues la caja al final del día y si queremos saber los vehículos que tenemos dentro con sus características que hacen lo podremos estar vamos a registrar la entrada de algunos vehículos furgoneta exteriores tipo 2 de la marca Ford con matrícula nueva vale va medir 6 con 3 metros aquí cada vehículo que se injerta pues Seba dibujando en el parque hemos añadido cierto componente aleatorio aleatoria para añadir una una cierta simulación no de lo que sería que entre el vehículo se sitúe que el sensor detectaran dónde aparcado y si queremos ver la lista de vehículos que hay ahora mismo en el parking podíamos ver como tenemos nuestra furgoneta de la marca Ford de 6 con 3 metros de longitud también hemos añadido un elemento aleatorio a la fecha de entrada vale para qué bueno el cálculo del importe tenga elementos suficientes tenga minutos suficientes pues lo demuestras John en restarle una cantidad de tiempo aleatoria a la fecha de entrada de entre lo hice llorar más porque tenga cierta funcionalidad la ejemplificación de Freddy quisiéramos ahora pero el número de plazas disponible en principio tenemos 99 solo vehículo dentro y la operación más interesante que sería registrar la salida no sería solamente la matrícula del vehículo a ti todos podremos ver como como hemos añadido cierta lógica incluso hemos modificado el método igual la clase vehículo para que nos permita con solo poder detectar que el mismo que tenemos dentro y María bueno pues llegar al usuario a la máquina introdujera su ticket no estaría asociado a su vehículo de esta manera calcularía con el ticket de salida no imprimiría los datos del vehículo la matrícula suspense y hora de llegada tu fecha y hora de salida la diferencia de ambas empezado el minuto la longitud de la furgoneta y el importe total de la estancia no sumando los minutos por Supreme precio correspondiente y ahora consultar amor el número de plazas disponibles pues ya veremos y comprobamos el estado del parking que tenemos que estar completamente el código de las clases modelo a partir de ahí podremos ver la lógica de negocio
+marihuana al comenzar en la jornada el parking no tiene ningún coche dentro y bueno avería y comenzarían los vehículos a llegar este sería el menú con las distintas operaciones que tendríamos no se puede registrar la la entrada de un vehículo la salida pero el número de plazas que quedan disponibles imprimir el estado del parque vale imprimir el mapa del Estado indicando el número de plazas y las plazas están libro las que están ocupada y hemos acumulando el saldo del día para saber luego bueno pues la caja al final del día y si queremos saber los vehículos que tenemos dentro con sus características que hacen lo podremos estar vamos a registrar la entrada de algunos vehículos furgoneta exteriores tipo 2 de la marca Ford con matrícula nueva vale va medir 6 con 3 metros aquí cada vehículo que se injerta pues Seba dibujando en el parque hemos añadido cierto componente aleatorio aleatoria para añadir una una cierta simulación no de lo que sería que entre el vehículo se sitúe que el sensor detectaran dónde aparcado y si queremos ver la lista de vehículos que hay ahora mismo en el parking podíamos ver como tenemos nuestra furgoneta de la marca Ford de 6 con 3 metros de longitud también hemos añadido un elemento aleatorio a la fecha de entrada vale para qué bueno el cálculo del importe tenga elementos suficientes tenga minutos suficientes pues lo demuestras John en restarle una cantidad de tiempo aleatoria a la fecha de entrada de entre lo hice llorar más porque tenga cierta funcionalidad la ejemplificación de Freddy quisiéramos ahora pero el número de plazas disponible en principio tenemos 99 solo vehículo dentro y la operación más interesante que sería registrar la salida no sería solamente la matrícula del vehículo a ti todos podremos ver como como hemos añadido cierta lógica incluso hemos modificado el método igual la clase vehículo para que nos permita con solo poder detectar que el mismo que tenemos dentro y María bueno pues llegar al usuario a la máquina introdujera su ticket no estaría asociado a su vehículo de esta manera calcularía con el ticket de salida no imprimiría los datos del vehículo la matrícula suspense y hora de llegada tu fecha y hora de salida la diferencia de ambas empezado el minuto la longitud de la furgoneta y el importe total de la estancia no sumando los minutos por Supreme precio correspondiente y ahora consultar amor el número de plazas disponibles pues ya veremos y comprobamos el estado del parking que tenemos que estar completamente el código de las clases modelo a partir de ahí podremos ver la lógica de negocio
 
 Clase que son fundamentales que son vehículo y parte vale y luego pues las demás que también vamos a necesitar vehículo es la base de la herencia de los tipos de vehículo que podemos manejar que modifiques un vehículo estoy en coche o moto furgoneta y autobuses y por ser la base de la herencia tiene los atributos que serían vale así como algunos constructores ya hemos intentado ilustrar el uso de protectores pero al igual que os decía en el en el vídeo correspondiente a la herencia o vuelvo a insistir ahora en la propia Oracle la que no recomienda demasiado el uso de protectores aquí lo hemos puesto los atributos conejo modificador de acceso por qué pudierais ver un ejemplo si os dais cuenta qué intentáis utilizar algún atributo de vehículos en clase que tienen el mismo paquete también tendrías eso porque el modificador Pro incluyo también las posibilidades de acceso del modificador sería bastante más recomendable en este ejemplo usaremos atributos privado y si necesitamos acceder a atributo en algún momento por lo que el correspondiente bueno ya digo tenemos aquí la clase vehículo me bueno quién es el método de calcular el importe vale justificaría los minutos por el precio base por minuto y mi amigo el método y lo que hemos hecho autogenerar lo con irse hemos modificado mucho código de relleno de borrado directamente y alguno lo he dejado comentado para para que podamos entender lo que estamos centro primero en la segunda parte para nosotros dos vehículos van a ser iguales en el programa del parking cuando es una tripulación de esa manera nos va a servir fácilmente para poder localizar el vehículo dentro de una colección cuando utilizamos métodos como Remus en la clase ArrayList of content dónde le pasamos un objeto para que compruebe si está dentro y el Ramón y además lo borré es lo que comparar con cada uno de los elementos del array en base al neto de impuestos para nosotros dos vehículos serán iguales en cuanto matrícula lo sé no puede haber en la calle dos vehículos que tengan la misma matrícula y siempre vale simplemente estamos tratando de modelar ese comportamiento así que esta parte lo que hace comprobar que un vehículo tiene matrícula que la matrícula no es nula y se la matrícula es igual vale a la del otro vehículo en lugar de que utilicé igual que sería con en tramitación por defecto bueno pues si el usuario ha introducido una matrícula minúscula A mayúscula para evitar esos problemas lo que hacemos es comparar con el método igual que tiene la clase String y qué bueno si la cadena echan en mayúscula o minúscula a la hora de hacer la compra de la primera parte lo que hacemos con la implementación que hace por defecto eclipse cuando general método igual vale sí bueno se cumple el operador igual igual devuelve tu nosotros seríamos tú porque son realmente la referencia referencia a un mismo objeto vale falso porque de dejarla activa la misma implementación
 
