@@ -3069,7 +3069,238 @@ De la primera parte lo que hacemos es dejar la implementación que hace por defe
 //	 return false;
 ```
 
-A partir de aquí para poder implementar el polimorfismo hemos customizado en los métodos el método calcular importe en furgoneta y en autobús de manera que el importe de la estancia de una furgoneta es el importe como vehículo más el precio por metro por la longitud en metro y en el caso del autobús el precio por asiento por el número de plaza añadido al importe base como como dijo hasta aquí en los tres tipos de vehículos que vamos a dejar la siguiente clase que importante en la clase parking que podríamos decir que es el núcleo de toda de toda la aplicación porque además tiene dentro la lógica de negocio de entrada de un vehículo en el parking y de salida de un vehículo despacio un parking váter por un lado el listado de vehículos que tiene dentro vale de manera que vamos a poder consultar qué vehículos son los que hay dentro a qué hora entraron su matrícula su marca etcétera también va a tener las plazas de aparcamiento para saber si están libres ocupada simulamos pues el hecho de que tuviéramos parking físico con unos sensores de presencia en cada una de las plazas que nos permitirán pues verificarse una determinada plaza está libre o estás ocupada no lo haremos mediante una un array bidimensional de la clase plaza aparcamiento que tenemos por aquí que sencilla vale que solamente tiene el número de plaza de aparcamiento de donante tendríamos también entero con el número de plazas disponibles para poder gestionarlo rápidamente el saldo acumulado dónde vamos a ir añadiendo no puedo conforme se registre la salida de los vehículos cuánto dinero hemos ido cobrando a lo largo de toda la sesión también tenemos aquí alguna constante definida como static final qué bueno dónde podemos definir el precio base por minuto el precio por metro 13 % habría mil maneras de implementar esta parte nombre de un fichero de perfil o algo similar o un fichero de configuración en algún formato conocido pero no teníamos tampoco si el ejemplo un poco más la lógica de inicio de un parque la tenemos por aquí cuando nosotros podremos decir empieza la jornada del parking el saldo acumulado se pone a cero no debe haber ningún vehículo dentro con lo cual tendríamos 100 plazas disponibles en la lista de vehículos que hay dentro estaría vacía mapa de plaza de aparcamiento comienza con todas las plazas libres y como podemos comprobar aquí empezamos ya a manejar la correspondiente valen las impares vale se fueran numerando de abajo arriba no según este este dibujo que tenemos para si tienes cuidado con si trabajáis en Windows en el cuidado con el tema de la codificación de fichero Windows utiliza una poco específica cuando trabajéis con Eclipse en Windows que no es f8hp 1252
+A partir de aquí para poder implementar el polimorfismo hemos customizado el método `calcularImporte` en las clases `Furgoneta` y `Autobus` de manera que el importe de la estancia de una `Furgoneta` es:
+
+```java
+   @Override
+   public float calcularImporte() {		
+      return super.calcularImporte() + (Parking.PRECIO_POR_METRO * longitud);
+   }
+```
+
+el importe como vehículo más el precio por metro por la longitud en metros y en el caso del autobús:
+
+```java
+   @Override
+   public float calcularImporte() {		
+      return super.calcularImporte() + (Parking.PRECIO_POR_ASIENTO * numPlazas);
+   }
+```
+
+el precio por asiento por el número de plaza añadido al importe base como vehículo.
+
+Hasta aquí los tres tipos de vehículos que estamos manejando.
+
+La siguiente clase que es importante es la clase `Parking` que podríamos decir que es el núcleo de toda la aplicación, porque además tiene dentro la lógica de negocio de entrada de un vehículo en el parking y de salida de un vehículo del parking.
+
+*Parking.java*
+
+```java
+/**
+ * Clase que modela el Parking y su lógica de negocio.
+ * 
+ * IMPORTANTE: Para representar en algunos comentarios un mapa del parking, se ha modificado
+ * la codificación de este fichero  UTF-8. Posiblemente, sea necesario que modifiques la misma
+ * en eclipse para poder visualizarlo correctamente.
+ */
+package parking.modelo;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import parking.utils.Utils;
+
+public class Parking {
+	
+   // Mantenemos una lista con los vehículos que hay dentro del parking
+   private List<Vehiculo> vehiculos;
+	
+   // Además, necesitamos saber qué plazas están libres o cuales están ocupadas
+   private PlazaAparcamiento[][] plazasAparcamiento;
+	
+   // El número de plazas disponibles, para poder visualizarlo en el cartel de la entrada
+   // Si el número de plazas disponibles es 0, el parking está COMPLETO
+   private int plazasDisponibles;
+	
+   // Almacenamos el importe total que hemos cobrado a lo largo de la sesión
+   private float saldoAcumulado;
+	
+   // La carta de precios la establecemos estáticamente en constantes, si bien
+   // sería positivo buscar otro sistema, como un fichero de properties.
+   public static final float PRECIO_BASE_POR_MINUTO = 0.04f;
+   public static final float PRECIO_POR_METRO = 0.2f;
+   public static final float PRECIO_POR_ASIENTO = 0.25f;
+		
+   public Parking() {
+      saldoAcumulado = 0.0f;
+      plazasDisponibles = 100;
+      vehiculos = new ArrayList<>();
+      // nuestro parking es cuadrado, así que lo representamos en
+      // un array bidimensional de 10x10
+      plazasAparcamiento = new PlazaAparcamiento[10][10];
+      int numPlaza = 0;
+      for(int j = 0; j < 10; j++) {
+         // Las columnas pares se recorren de arriba a abajo
+         // y las impares de abajo a arriba
+         if (j % 2 == 0)
+            for(int i = 0; i < 10; i++)		
+               plazasAparcamiento[i][j] = new PlazaAparcamiento(++numPlaza);
+            else
+               for(int i = 9; i >= 0; i--)
+                  plazasAparcamiento[i][j] = new PlazaAparcamiento(++numPlaza);
+      }
+		
+      // Recorremos así el array para que quede de la siguiente forma
+      // NOTA: Las flechas hacia abajo y arriba simulan el sentido de
+      // los carriles por los que circularían los coches. 
+		
+      //   1     20     21      .. .. .. .. .. ..  100 
+      //   2  |  19     22  |   ..                  99
+      //   3  ▼  18  ▲  23  ▼                       98
+      //   4     17  |  24         ..               97
+      //   5     16     25                          96
+      //   6     15     25            ..            95
+      //   7  |  14     27  |                       94
+      //   8  ▼  13  ▲  28  ▼            ..         93
+      //   9     12  |  29      ..          ..      92
+      //  10     11     30      31 .. .. .. .. ..   91
+		
+   }
+
+   public int getPlazasDisponibles() {
+      return plazasDisponibles;
+   }
+
+   public List<Vehiculo> getVehiculos() {
+      return vehiculos;
+   }
+
+   public PlazaAparcamiento[][] getPlazasAparcamiento() {
+      return plazasAparcamiento;
+   }
+			
+   public float getSaldoAcumulado() {
+      return saldoAcumulado;
+   }
+
+   /*
+    * Método que imprime, de forma conveniente, el mapa del parking, 
+    * indicando todas las plazas que hay y si están ocupadas o no.
+    */
+   public void imprimirEstadoParking() {
+		
+      for(int i = 0; i < 10; i++) {
+         for(int j = 0; j < 10; j++) {
+            PlazaAparcamiento plaza = plazasAparcamiento[i][j]; 
+            String strPlaza = String.format("%3s", Integer.toString(plaza.getNumero())) + " " + ((plaza.isLibre()) ? "L" : "O") + "  "; 
+            System.out.print(strPlaza);
+         }
+         System.out.println();
+      }
+      System.out.println("");
+		
+   }
+
+   /*
+    * Método que registra la entrada de un vehículo en el parking.
+    */
+   public void registrarEntradaVehiculo(Vehiculo v) {
+		
+      if (plazasDisponibles > 0) {
+         // Asignamos la fecha y hora de entrada
+         v.setFechaEntrada(Utils.fechaYHoraAleatoriaAlrededorFechaYHoraActual());
+			
+         // Colocamos el coche en una plaza de aparcamiento
+         // Simularemos que esto se produce de forma aleatoria
+         Random r = new Random();
+         boolean cocheAparcado;
+         int i, j, numPlaza = 0;
+			
+         do {
+            cocheAparcado = false;		
+            i = r.nextInt(10);
+            j = r.nextInt(10);
+				
+            if (plazasAparcamiento[i][j].isLibre()) {
+               plazasAparcamiento[i][j].setLibre(false);
+               cocheAparcado = true;
+               numPlaza = plazasAparcamiento[i][j].getNumero();
+            }
+         } while (!cocheAparcado);
+			
+         // Añadimos el coche a la lista de coches que tenemos
+         // dentro del parking, asignándole el número de plaza que ocupa
+         v.setNumPlazaAparcamiento(numPlaza);		
+         vehiculos.add(v);
+         --plazasDisponibles;
+      } else {
+         System.out.println("EL PARKING ESTÁ COMPLETO\n");
+      }
+   }
+   
+   /*
+    * Método que registra la salida de un vehículo del parking
+    */
+   public void registrarSalidaVehiculo(Vehiculo v) {
+		
+      if (!vehiculos.contains(v)) {
+         System.out.println("ESTE VEHÍCULO NO ESTÁ EN EL PARKING");
+         return;
+      } else {
+         // Rescatamos la instacia de vehículo que tenemos
+         // almacenada, ya que es la que tiene registrada
+         // la fecha y hora de entrada
+	 v = vehiculos.get(vehiculos.indexOf(v));
+      }
+		
+      LocalDateTime salida = LocalDateTime.now();
+		
+      // Asignamos el número de minutos para calcular el importe
+      v.setMinutos(Utils.minutosEntreDosFechas(v.getFechaEntrada(), salida));
+		
+      // Imprimimos el mensaje con el importe del pago
+      StringBuilder ticket = new StringBuilder(
+      	   String.format("TICKET DE SALIDA: %nMatrícula %s %nFecha y hora de llegada: %s "
+      		+ "%nFecha y hora de salida: %s %nMinutos de estancia: %d%n", v.getMatricula(), 
+		v.getFechaEntrada().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
+		salida.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)), 
+		v.getMinutos()));
+		
+      if (v instanceof Furgoneta) {
+         Furgoneta furgo = (Furgoneta) v;
+         ticket.append(String.format("Longitud de la furgoneta %.2f ", furgo.getLongitud()));
+      } else if (v instanceof Autobus) {
+         Autobus bus = (Autobus) v;
+         ticket.append(String.format("Núm. de plazas del autobús: %d " , bus.getNumPlazas()));
+      }
+		
+      ticket.append(String.format("%nImporte total de la estancia: %.2f€ %n%n", v.calcularImporte()));
+		
+      System.out.printf(ticket.toString());
+		
+      // Añadimos el importe al saldo acumulado
+      saldoAcumulado += v.calcularImporte();
+		
+      // Identificamos la posición que tenía ocupada el coche para dejarla libre
+      int[] coordenadas = Utils.posicionNumeroPlaza(v.getNumPlazaAparcamiento());
+      plazasAparcamiento[coordenadas[0]][coordenadas[1]].setLibre(true);
+		
+      // Eliminamos el vehículo de la lista
+      vehiculos.remove(v);
+		
+      ++plazasDisponibles;
+   }
+}
+```
+
+
+
+
+un parking váter por un lado el listado de vehículos que tiene dentro vale de manera que vamos a poder consultar qué vehículos son los que hay dentro a qué hora entraron su matrícula su marca etcétera también va a tener las plazas de aparcamiento para saber si están libres ocupada simulamos pues el hecho de que tuviéramos parking físico con unos sensores de presencia en cada una de las plazas que nos permitirán pues verificarse una determinada plaza está libre o estás ocupada no lo haremos mediante una un array bidimensional de la clase plaza aparcamiento que tenemos por aquí que sencilla vale que solamente tiene el número de plaza de aparcamiento de donante tendríamos también entero con el número de plazas disponibles para poder gestionarlo rápidamente el saldo acumulado dónde vamos a ir añadiendo no puedo conforme se registre la salida de los vehículos cuánto dinero hemos ido cobrando a lo largo de toda la sesión también tenemos aquí alguna constante definida como static final qué bueno dónde podemos definir el precio base por minuto el precio por metro 13 % habría mil maneras de implementar esta parte nombre de un fichero de perfil o algo similar o un fichero de configuración en algún formato conocido pero no teníamos tampoco si el ejemplo un poco más la lógica de inicio de un parque la tenemos por aquí cuando nosotros podremos decir empieza la jornada del parking el saldo acumulado se pone a cero no debe haber ningún vehículo dentro con lo cual tendríamos 100 plazas disponibles en la lista de vehículos que hay dentro estaría vacía mapa de plaza de aparcamiento comienza con todas las plazas libres y como podemos comprobar aquí empezamos ya a manejar la correspondiente valen las impares vale se fueran numerando de abajo arriba no según este este dibujo que tenemos para si tienes cuidado con si trabajáis en Windows en el cuidado con el tema de la codificación de fichero Windows utiliza una poco específica cuando trabajéis con Eclipse en Windows que no es f8hp 1252
 
 ```java
 ```
