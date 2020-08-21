@@ -490,7 +490,6 @@ En la imagen vemos un ejemplo de un sistema donde los datos no cambian, pero la 
 
 <img src="images/5-04.png">
 
-
 Y que se rige por un principio llamado el principio de Hollywood en el que bueno podríamos decir "No nos llames. Nosotros te llamaremos a ti" qué es una frase que se acuño en Hollywood cuando algunos actores hacían las pruebas y los productores directores y los actores se interesaban ellos decían "buenos llamaré para ver qué tal ha salido la prueba para ver si me va a contratar o no" y los productores y directores decian "No nos llames. Nosotros te llamaremos a ti", pues la inversión de control se va a regir mediante este principio.
 
 La Inversion de Control se rige bajo este principio de Hollywood.
