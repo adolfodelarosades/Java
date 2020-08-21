@@ -15,22 +15,33 @@
 
 <img src="images/1-01.png">
 
+Vengo a presentaros el curso de Spring core 5.
+
 <img src="images/1-02.png">
+
+Si quieren realizar el curso de Spring 5 tendríamos algunos requisitos iniciales importante y otros que son deseables, es necesario conocer Java para poder trabajar con Spring os recomiendo que además que trabajen con Java con soltura sobre todo Java SE 8, también sería necesario que manejemos conceptos de metodología de programación orientado a objetos como pueden ser clase, interfaz, herencia, polimorfismo, etc., además estaría muy bien si sabéis algo sobre Java EE versión 7, Maven y también de patrones de diseño aunque no es estrictamente obligatorio.
 
 <img src="images/1-03.png">
 
+¿Qué me va aportar a mí el poder saber sobre Spring? si hacemos este curso de Spring y aprendemos esta tecnología sobre todo en la parte Core vamos a poder conocer algunos de los patrones de diseño que se utilizan más en el desarrollo de aplicaciones empresariales, también vamos a poder reconocer la utilidad del uso de la **inversión de control y la inyección de dependencias** como mecanismo que nos permiten desacoplar nuestro software y hacer un sobre que sea robusto, refactorisable, reutilizable y en definitiva manejar unos conceptos que son transversales al resto de proyectos y de módulos de Spring.
+
 <img src="images/1-04.png">
 
+Los contenidos del curso son sencillos comenzaremos haciendo una introducción a esta tecnología por poder centrarnos y aterrizar, instalaremos el entorno de desarrollo a partir de ahí empezamos a conocer el contenedor de inversión de control de Spring, las interfaces y clases que orbitan al rededor de este concepto, que es un *bean*, veremos también cual es su ámbito, su ciclo de vida y por último terminaremos con dos secciones en las que aprenderemos además de lo que ya hayamos aprendido a configurar nuestras aplicaciones vía XML, lo aprenderemos a hacer a través de anotaciones con las distintas anotaciones que podemos utilizar y por último la configuración a través de Java, finalizaremos el curso con un ejemplo que integren la gran mayoría de los conceptos que hayamos visto lo largo de las diferentes lecciones. 
+
 <img src="images/1-05.png">
+
+Si bien es cierto en cada una de las lecciones podemos ir viendo un pequeño proyecto, uno o varios pequeños proyectos de ejemplos que ponen en practica esos conceptos.
 
 <img src="images/1-06.png">
 
 <img src="images/1-07.png">
 
+¿Qué seré capaz al finalizar el curso? serás capaz de haber aprendido el uso de algunos patrones de diseño, serás capaz de diferenciar cuáles son los módulos más típicos de Spring y algunos de los proyectos que existen, también en reconocer la importancia de la inversión de control y de inyección de dependencia, habrás instalado el entorno de desarrollo con el cual vamos a poder trabajar con tus proyectos de Spring, el mecanismo de creación de beans y la configuración a través de las distintas tecnología y utilizar el contenedor de inversión de control y toda la potencia que ofrece.
+
 <img src="images/1-08.png">
 
-Hola a todos mi nombre es Luis Miguel López vengo a presentaros el curso de Spring core 5 como decía mi nombre es Miguel López Magaña tengo experiencia en el desarrollo de aplicaciones sobre el ecosistema a va a cenar os deja de ser Sabadell estén líder mail Android y además soy profesor de ciclos formativos desde hace algunos años realizar el curso de 5 tendríamos algunos requisitos iniciales importante y otra persona que sea necesario conocer Java para poder trabajar con stream os recomiendo que además pues te contaba con soltura no sobre todo para este ya que estamos con lo que vamos a utilizar la versión 8 también sería necesario que aparte de tabaco en conceptos de metodología de programación orientado a objetos de clase interfaz herencia polimorfismo etcétera además estaría muy bien si sabéis algo sobre Java deseablemente la última versión 7 algo y también de patrones de diseño aunque no estrictamente obligatorio aportar a mí el poder saber sobre bueno pues si hacemos este curso de frente y aprendemos tecnología sobre todo en la parte 40 vamos a poder conocer alguno de los patrones de diseño que se utilizan más en el desarrollo de aplicaciones empresariales también vamos a poder reconocer la utilidad del uso de la inversión de control y la inyección de dependencias como mecanismo que nos permiten desacoplar nuestro software igual hacer un sobre que sea robusto refractory sable reutilizable y en definitiva puede manejar unos conceptos que son transversales al resto de proyectos y de módulos de los contenidos del curso son sencillos comenzaremos haciendo una introducción a esta tecnología por poder centrarnos y aterrizar estaremos el entorno de desarrollo este traje a partir de ahí empezamos a conocer el contenedor de su ciclo de vida y por último terminaremos con dos secciones en las que ascenderemos además de lo que ya hayamos aprendido a configurar las aplicaciones día XML lo aprenderemos a hacer a través de anotaciones diferentes vídeos sobre las distintas anotaciones que podemos utilizar y por último la configuración a través de Java finalizaremos el curso con un ejemplo que integren la gran mayoría de los conceptos que hayamos visto lo largo de los diferentes vídeos que vienen cada uno de los vídeos podemos ir viendo un pequeño proyecto uno varios pequeños proyectos ejemplos al finalizar el curso serás capaz de manejar habrá aprendido el uso de algunos patrones de diseño serás capaz de diferenciar cuáles son los módulos más típicos de Trini y algunos de los proyectos que existen también en reconocer en la importancia de ese mecanismo de inversión de control y de inyección de dependencia habrá instalado el entorno de desarrollo con el cuarto no va a poder trabajar con su proyección detén el mecanismo de creación de Link y la configuración a través de las distintas tecnología y utilizar el contenedor de inversión de control y toda la potencia que ofrece una vez finalizado el curso te puedo recomendar alguno otro de los que tenemos nuestro catálogo por si quieres funcionar en tecnologías que son adyacentes como puede ser de desarrollo de Java orientado a la web el de Hibernate también el de introducción assainies o el de SQL desde cero
-
+Una vez finalizado el curso te puedo recomendar algunos otro de los que tenemos en nuestro catálogo por si quieres continuar en tecnologías que son adyacentes.
 
 # 02 Introducción a Spring 14:25
 
