@@ -184,11 +184,6 @@ Ya podemos usarlo para instalar Spring Tool Suite
 ```sh
 $ umake ide spring-tools-suite
 ```
-## Preguntas
-
-* Ya no esta disponible la version de STS 3, se podria seguir el curso con la version STS 4?
-   
-   No debe haber ningún problema para hacerlo. La única dificultad puede estribar en que la versión 3 de STS sí que tenía alguna vista asociada a facilitar la gestión de ficheros de beans XML. La versión 4 no incluye alguna de esas vistas o asistentes, pero igualmente se pueden gestionar. Para cualquier duda, puedes contar conmigo para solucionarla.
 
 ## Transcripción
 
