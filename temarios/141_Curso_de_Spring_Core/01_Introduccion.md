@@ -448,22 +448,21 @@ En los años 90 cuatro autores llamados la banda de los cuatro se plantearon sob
 
 <img src="images/4-10.png">
 
-en otros patrones como el de la inversión de control ese sí hablaremos en ninguna lesión posterior porque es la parte nuclear se escribe vale la inversión de control a través de inyección de dependencia patrones como el modelo vista controlador el vigente el patrón dao del objeto de acceso a datos son controles se retrase también puedes poner utilizaste pues principalmente el patrón de la inyección de dependencia que le digo que veremos en una lesión posterior otros patrones que utilizamos en el en los ámbitos de un bin sería el patrón Singleton protones el patrón Singleton es aquel que nos va a permitir que hagamos una restricción sobre la creación de objetos de un tipo para que tengamos de una clase particular de un tipo particular un solo objeto frente a single no tenemos prototype que nos va a permitir la creación de nuevo objeto suplicante no lo queremos como la posibilidad de el patrón proxy que nos va a permitir definir un representante de un objeto para controlar el acceso a este la palabra proxys posible que no la conozcamos no se me ve la navegación a Internet y de interponer una máquina en nuestra nada de nuestra navegación bueno pues algo parecido podemos hacer a nivel de objeto y de hecho se utiliza en la programación orientada a aspectos patrones cómo vamos antes de modelo vista controlador que nos va a permitir separar la lógica y los datos de la interfaz y del control de peticiones o el patrón FrontController que nos va a permitir tener un solo controlador de fachada vale que está el principio al frente de la aplicación para manejar todas las peticiones todo ellos lo utiliza el fin en su módulo de web web en bici utilizar as24 factoría que centraliza la construcción de objeto bueno pues lo utilizaría el contenedor de inversión de control de este ya podéis comprobar como algunos de estos patrones son los utilizado médico que no los podemos nos podemos parar a conocerlo en profundidad pero si es verdad que estaría bien que no suenen para motivar el porqué spring realiza así las cosas y también el cómo diseñar nuestra
-
-
-
-
-
-
-
+Otros autores proponen otros patrones como el de la **Inversión de Control** de ese sí hablaremos en una lección posterior porque **es la parte nuclear de Spring**, la inversión de control a través de la inyección de dependencias, patrones como el Modelo Vista Controlador MVC, el View Helper, el patrón DAO Objeto de Acceso a Datos, Front-Controller son otros que también nos pueden sonar.
 
 <img src="images/4-11.png">
 
+**¿Qué patrones utiliza Spring? principalmente el patrón de la Inyección de Dependencia**.
+
+Otros patrones que utilizamos en el en los ámbitos de un *Bean* serían *el patrón Singleton* o *Prototype*,  **el patrón Singleton es aquel que nos va a permitir que hagamos** una restricción sobre la creación de objetos de un tipo para que tengamos de una clase particula,r de un tipo particular **un solo objeto**. Frente a Singleton no tenemos **Prototype que nos va a permitir la creación de nuevos objetos duplicándolos**, ambos los veremos como la posibilidad de definir un ámbito de un Bean.
+
+**El patrón Proxy que nos va a permitir definir un representante de un objeto para controlar el acceso a este**, la palabra Proxy es posible que la conozcamos, nos suene por la navegación a Internet y de interponer una máquina en nuestra navegación, pues algo parecido podemos hacer a nivel de objeto y de hecho se utiliza en la programación orientada a aspectos.
+
 <img src="images/4-12.png">
 
+Otros patrones cómo el **patrón Modelo Vista Controlador que nos va a permitir separar la lógica y los datos de la interfaz y del control de peticiones** o **el patrón FrontController que nos va a permitir tener un solo controlador de fachada** que está al frente de la aplicación para manejar todas las peticiones, todo ellos lo utiliza Spring Web MVC. El **patrón Factory que centraliza la construcción de objetos lo utilizaría el Contenedor de Inversión de Control de Spring**.
 
--------------
-
+Ya podéis comprobar como algunos de estos patrones son los utilizados, no nos podemos parar a conocerlo en profundidad pero si es verdad que estaría bien que no suenen para motivar el porqué Spring realiza así las cosas y también el cómo diseñar nuestras aplicaciones empresariales.
 
 # 05 Inversión de control e inyección de dependencias 15:09 
 
