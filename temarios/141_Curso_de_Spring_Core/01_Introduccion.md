@@ -209,19 +209,9 @@ Actualmente 5.2.8 CURRENT GA 21/08/2020
 
 <img src="images/2-14.png">
 
-Qué novedades nos trae Spring 5 para aquellos que no conozcáis algo sobre Spring. El primero es el uso totalmente adaptado del JDK 8 y de la especificación 7 de Java EE, ya Spring 5 viene totalmente adaptado a Java 8, incluso se plantearon el que estuviese totalmente adaptado JDK 9 pero bueno la diferencia de velocidades en la publicación de ambos no lo ha permitido, si es verdad que nos permite tener compatibilidad con el JDK 9 y con la especificación 8.  Las versiones mínimas de algunos APIs que utilizamos son Servlet 3.1 en el caso de los servlets, Validation 1.1 en la validación, JPA 2.1 si bien entre Spring 5 y la versión candidata que tenemos de la 5.1 vamos a poder ver como ya podremos tener acceso a las APIs de Servlet 4.0, Validation 2.0, JPA 2.2 que trae algunas novedades interesantes etc. Con respecto a los servidores sobre los cuales puede correr pues también tenéis aquí algunas personas con las que ya es disponible y bueno podríamos decir que dos de las novedades más interesantes que ofrece es la posibilidad de hacer aplicaciones web reactiva mediante el módulo webflux y también la programación funcional Hong Kong Hong Kong este otro nuevo lenguaje de programación es súper gente dejaba serían las dos novedades más interesantes que nos ofrece spring 5 nosotros en este curso Serra que nos centraremos en la parte Core i5 aprender todo lo transversal a sprint que podemos utilizar con el resto de una vez y ya conocemos qué es spring las presiones y las novedades que no ofrecen en la próxima elección vamos a instalar nuestro entorno de desarrollo para poder comenzar a trabajar francamente sencilla
+Qué novedades nos trae Spring 5 para aquellos que no conozcáis algo sobre Spring. El primero es el uso totalmente adaptado del JDK 8 y de la especificación 7 de Java EE, ya Spring 5 viene totalmente adaptado a Java 8, incluso se plantearon el que estuviese totalmente adaptado JDK 9 pero bueno la diferencia de velocidades en la publicación de ambos no lo ha permitido, si es verdad que nos permite tener compatibilidad con el JDK 9 y con la especificación 8.  Las versiones mínimas de algunos APIs que utilizamos son Servlet 3.1 en el caso de los servlets, Validation 1.1 en la validación, JPA 2.1 si bien entre Spring 5 y la versión candidata que tenemos de la 5.1 vamos a poder ver como ya podremos tener acceso a las APIs de Servlet 4.0, Validation 2.0, JPA 2.2 que trae algunas novedades interesantes etc. Con respecto a los servidores sobre los cuales puede correr pues también tenéis aquí algunas versiones con las que ya es disponible y bueno podríamos decir que dos de las novedades más interesantes que ofrece es la posibilidad de **hacer aplicaciones web reactivas mediante el módulo webflux** y también **la programación funcional con Kotlin** este otro nuevo lenguaje de programación este superset de Java serían las dos novedades más interesantes que nos ofrece Spring 5.
 
-
-
-
-
-
-
-
-
-
-----
-
+Nosotros en este curso nos centraremos en la parte Core y en comprender todo lo transversal a Sprint que podemos utilizar con el resto de módulos, una vez que ya conocemos qué es Spring las versiones y las novedades que nos ofrecen, en la próxima lección vamos a instalar nuestro entorno de desarrollo para poder comenzar a trabajar.
 
 # 03 Instalación del entorno de trabajo 13:55
 
