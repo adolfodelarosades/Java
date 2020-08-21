@@ -47,12 +47,6 @@ En este enlace podrás encontrar todas las novedades incluidas en las últimas v
 
 https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Framework-5.x
 
-## Preguntas
-
-* Tengo la siguiente duda con relacion al modulo para web reactiva. Solo aplica este modulo si utilizo el motor de plantillas Thymeleaf? O se puede hacer uso del mismo si mi frontend esta hecho en Angular?
-
-   Podrías utilizar la web reactiva tanto con Thymeleaf como con Angular. De hecho, este segundo esquema está siendo utilizado en muchos desarrollos, aprovechando toda la potencia de Spring para el backend y todas las funcionalidades de Angular para el frontend.
-
 ## Transcripción
 
 <img src="images/2-01.png">
