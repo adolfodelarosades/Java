@@ -352,53 +352,11 @@ Con esto terminamos la lección de la instalación del entorno.
 
 ## Transcripción
 
-<img src="images/4-01.png">
 
-<img src="images/4-02.png">
 
-<img src="images/4-03.png">
 
-<img src="images/4-04.png">
-
-Algunos autores dividen una aplicación empresarial en varios bloques:
-
-* Personas
-   * Propietarios del sistema
-   * Usuarios
-   * Diseñadores
-   * Desarrolladores
-   * ...
-* Datos: Materia prima usada por el sistema de información, permiten
-   * Crear información útil
-   * Toma de desiciones
-   * etc.
-* Procesos: Todas aquellas actividades que se llevan dentro de la empresa 
-   * Procesan datos
-   * Generan información
-* Redes: Aquellos canales que vamos a utilizar y diferenciar a la hora de desplegar y utilizar la aplicación
-   * Centros de produción
-   * Oficinas
-   * etc.
-* Tecnología que soporta nuestro sistema de información
-   * Hardware
-   * Software
    
-<img src="images/4-05.png">
 
-A nivel de capas una aplicación empresarial esta formada por:
-
-* Infraestructura del hardware
-   * En que servidor va a recidir nuestra aplicación
-   * Que tipo de conectividad tenemos para acceder a el
-   * Plataforma que hay sobre ese hardware
-* Infraestructura de la plataforma
-   * Sistema operativo, versión de maquinas virtuales
-* Datos
-   * Relacional o no relacional
-* Aplicación
-* Interfaz de usuario
-
-**Spring trabaja sobre todo el nivel de aplicación y sus fronteras**
 
 <img src="images/4-06.png">
 
@@ -437,10 +395,68 @@ Los *sistemas de plantillas* conectan la *Aplicación* y la *Interfaz de Usuario
 
 <img src="images/4-12.png">
 
-Hola a todos vamos a continuar en esta lección hablando un poco sobre la estructura de una aplicación empresarial y también sobre patrones de diseño que no puede otro ámbito que se suele trabajar y que nos servirá como base también pues para para poder utilizar un buen diseño en nuestros proyectos este aplicaciones empresariales aplicación empresarial pues es una gran aplicación comercial y me pongo en cursiva gran porque normalmente esto podríamos decir con aplicación especiales cualquier aplicación dedicada una empresa si bien me está fuera pequeña mediana o grande vale pero en el mundo de la programación se habla sobre todo de aplicaciones que requieren de un rato módulo que normalmente unas integrar diferentes apartados de una misma empresa nos van a permitir gestionar todo el flujo de trabajo de la misma van a manejar un gran volumen de datos etcétera normalmente se espera de la aplicaciones empresariales que sean compleja por todas las razones graciante que sean escalable no es lo mismo diseñar una aplicación para una empresa que tiene mil clientes que para una que tiene un millón distribuida es decir que no tenga porqué recibir solamente en un único en un único servidor por ejemplo tener los datos alojados en un único sitio y también que sea crítica es decir que bueno fue que no bueno que tengas fallos menos espera de cualquiera pero que en el caso de que de que sucediera algún tipo de fallo conectividad o no pues fuera reaccionar rápidamente no aplicaciones empresariales se suelen despegar tanto en internet como en ocasiones también dentro de redes corporativas suelen estar centrada dentro de en torno a los datos nos los datos que les eres la parte nuclear no el manejo de la información Réquiem de que sea intuitiva y de un uso fácil sobre todo para evitar el rechazo de trabajadores de empresa en definitiva lo usuario y también que tenga unos ciertos requisitos de seguridad y de mantenibilidad porque como decías una aplicación en normalmente grande algunas de ellas puede requieren de adaptaciones a lo largo del tiempo pensemos en aquellas que tienes que tener algún tipo de adaptación a la ley vale es que moros que van a lo largo de su vida útil fue variando y tienen que ser más temible y está triste podremos decir que esta sería la radiografía de una aplicación empresarial algunos autores como Witt medley y barro pues escribe en una aplicación empresariales en varios bloques elementales particular en 5 para poder definir un sistema de información en general la aplicación empresariales en particular cómo serían las personas los datos los procesos las redes y la tecnología la persona en lo darían pues tanto los propietarios del sistema los que son directamente los usuarios diseñadores desarrolladores y todas las personas que estarían implicados dentro del proyecto de una u otra manera con los datos bueno pues sería en la materia prima que este sistema de información y si no pues nos van a permitir crear información útil toma de decisiones en los procesos serían pues todas aquellas actividades que se llevan a cabo dentro de la empresa Vale y qué bueno fue en definitiva van a procesar datos y van a generar información las redes serían bueno pues aquellos canales que vamos nosotros a utilizar y diferenciar vale a la hora de desplegar y utilizar la aplicación como podrían ser bueno pues centro de producción oficina delegaciones etcétera y la tecnología pues haría referencia también tanto el hardware como el software que van a soportar nuestro nuestro sistema de información no esto sería de alguna manera los cinco bloques que la conformaría hola a todos vamos a continuar en estación hablando un poco la plataforma
 
+-------------
+<img src="images/4-01.png">
 
-Los cinco bloques que la conformaría a nivel de capa vale podríamos hablar de que una aplicación empresarial está formada por todas estas capas que encontramos aquí desde la infraestructura del propio hardware F5 no fue en qué servidor va a recibir nuestra aplicación qué tipo de conectividad de red tenemos para acceder a él la plataforma que hay sobre César Huete decir qué sistema operativo que verte al incluso de Buenafuente máquinas virtuales sea de trabajo o se piensan otros sistemas servidores cetera por encima de ellas tenían los datos vale corriendo seguramente en un sistema gestor de base de datos ya sea relacionarlo no relacional la propia aplicación y sobre ella la interfaz de usuario a la cual monoconductor yo para nada a poder acceder Efrén nos va a permitir trabajar sobre todo vale dentro de nivel de aplicación y también con sus fronteras no lo que quería hacia la interfaz de usuario y también en la parte de acceso a datos lo tenemos regresado en bueno fue en aquellos componentes cuyas nomenclatura será habitual en si nos centramos en la parte de interfaz de usuario aplicación y datos los datos veremos o con alguno de vosotros ya sabéis que podemos acceder a ellos de diversas maneras que están en una base de datos las podríamos dividir en dos grandes tipos que serían las bases de datos relacionales hola Noe se cuela se cuela y no significa que no sean es secuela y no que no solo son ese cuerno not only SQL algún sistema de ejemplo podría ser MongoDB modernidad y cómo vas a ir a Torre la cenar pues muchas gracias conoces como soy Esther MySQL Oracle SQL Server etcétera bueno pues en la frontera entre los datos y la aplicación vamos a tener las clases especiales que serían los repositorios permitirían acceder a los datos vale desde la aplicación ya dentro de la aplicación podríamos dividirlo en tres grandes tipos que serían las entidades que en el fondo modela vale fue el dominio de nuestra aplicación los servicios de Amanecer digamos que los que realmente trabajen los que se encarguen de aplicar lo que se conoce como la lógica de negocio los controladores que serán aquellos que reciban las peticiones y sean capaz de esta charla vale bueno delegando el trabajo en los servicios que sean necesarios y conectándolos posteriormente con el sistema de plantillas que sería algo en la parte más visual maléolo más cercano alovisual que tendríamos a la hora de trabajar con una aplicación con espejo hacemos ahora hablar de patrones de diseño un patrón de diseño lo vamos a poder definir a partir de esta idea cuando no encontramos antes análisis y diseño de una aplicación podemos encontrarnos con algunos problemas cuando nos encontramos con un problema nos podríamos hacer la pregunta seguro que esto no le ha pasado a nadie más probablemente la respuesta es que si le haya pasado alguien más de hecho en un alto porcentaje de situaciones alguien ya tuvo ese problema y lo resolvió de hecho nos podríamos plantear sí y está solución que esa persona película podríamos adaptar a nuestra versión del problema pues bien podríamos decir que un patrón de diseño es una solución a un problema dado que ya se utiliza da cuya efectividad sino probada y que además será reutilizable en problemas que tengan circunstancias similares los patrones de diseño los podemos pensar en el caso del software y en otro ámbito científico como podría hacer la arquitectura no cómo podemos salvar un tipo de terreno que tengo una pendiente ya alguien se inventó que la idea podría ser puente o un túnel no pues nosotros podemos aplicar algo algo por el estilo al mundo del software en los años 90 4 autores llamados la panda de los cuatro vale se plantearon sobre todo sobre ese magma en plantear una serie de patrones de diseño son veintitantos patrones 23 24 patrones que son altamente reutilizable y aplicable en múltiples situaciones a nivel de capa vale podríamos hablar de él que una aplicación Empresarial está formada por todas la
+Hola a todos vamos a continuar en esta lección hablando un poco sobre la estructura de una aplicación empresarial y también sobre patrones de diseño que es otro ámbito que se suele trabajar y que nos servirá como base también para poder utilizar un buen diseño en nuestros proyectos de Spring.
+
+<img src="images/4-02.png">
+
+<img src="images/4-03.png">
+
+Hablemos primero de **Aplicaciones Empresariales**, podemos decir que una aplicación empresarial es una *gran* aplicación comercial y pongo en cursiva *gran* porque normalmente podríamos decir que una aplicación empresarial es cualquier aplicación dedicada a una empresa, si bien está fuera pequeña, mediana o grand, pero en el mundo de la programación se habla sobre todo de aplicaciones que requieren de un gran número de módulos que normalmente van a integrar diferentes apartados de una misma empresa, nos van a permitir gestionar todo el flujo de trabajo de la misma, van a manejar un gran volumen de datos, etc. 
+
+Normalmente se espera de las aplicaciones empresariales que sean complejas por todas las razones anteriores, que sean escalables, no es lo mismo diseñar una aplicación para una empresa que tiene mil clientes que para una que tiene un millón, que sea distribuida es decir que no tenga porqué recibir solamente en un único servidor, por ejemplo tener los datos alojados en un único sitio y también que sea crítica, es decir que no  tengas fallos, eso se espera de cualquiera pero que en el caso de que de que sucediera algún tipo de fallo, conectividad pueda reaccionar rápidamente.
+
+Las aplicaciones empresariales se suelen desplegar tanto en internet como en ocasiones también dentro de redes corporativas, suelen estar centradas entorno a los datos, los datos suelen ser la parte nuclear, el manejo de la información. Requiere de que sea intuitiva y de un uso fácil sobre todo para evitar el rechazo de trabajadores de empresa, en definitiva los usuarios y también que tenga unos ciertos requisitos de seguridad y de mantenibilidad, porque como decía son aplicacionen normalmente grandes, algunas de ellas requieren de adaptaciones a lo largo del tiempo, pensemos en aquellas que tienes que tener algún tipo de adaptación a la ley, que van a lo largo de su vida útil van variando y tienen que ser mantenibles y extensibles, podremos decir que esta sería la radiografía de una aplicación empresarial.
+
+<img src="images/4-04.png">
+
+Algunos autores dividen una aplicación empresarial en varios bloques elementales, en particular en cinco para poder definir un sistema de información en general y las aplicación empresariales en particular cómo serían:
+
+* Personas
+   * Propietarios del sistema
+   * Usuarios
+   * Diseñadores
+   * Desarrolladores
+   * ...
+* Datos: Materia prima usada por el sistema de información, permiten
+   * Crear información útil
+   * Toma de desiciones
+   * etc.
+* Procesos: Todas aquellas actividades que se llevan dentro de la empresa 
+   * Procesan datos
+   * Generan información
+* Redes: Aquellos canales que vamos a utilizar y diferenciar a la hora de desplegar y utilizar la aplicación
+   * Centros de produción
+   * Oficinas
+   * Delegaciones
+   * etc.
+* Tecnología que soporta nuestro sistema de información
+   * Hardware
+   * Software
+
+Estos serían de alguna manera los cinco bloques que la conformarían.
+
+<img src="images/4-05.png">
+
+A nivel de capas una aplicación empresarial esta formada por:
+
+* Infraestructura del hardware
+   * En que servidor va a recidir nuestra aplicación
+   * Que tipo de conectividad tenemos para acceder a el
+   * Plataforma que hay sobre ese hardware
+* Infraestructura de la plataforma
+   * Sistema operativo, versión de maquinas virtuales
+* Datos
+   * Relacional o no relacional
+* Aplicación
+* Interfaz de usuario
+
+**Spring trabaja sobre todo el nivel de aplicación y sus fronteras**
+
+A nivel de capa vale podríamos hablar de que una aplicación empresarial está formada por todas estas capas que encontramos aquí desde la infraestructura del propio hardware F5 no fue en qué servidor va a recibir nuestra aplicación qué tipo de conectividad de red tenemos para acceder a él la plataforma que hay sobre César Huete decir qué sistema operativo que verte al incluso de Buenafuente máquinas virtuales sea de trabajo o se piensan otros sistemas servidores cetera por encima de ellas tenían los datos vale corriendo seguramente en un sistema gestor de base de datos ya sea relacionarlo no relacional la propia aplicación y sobre ella la interfaz de usuario a la cual monoconductor yo para nada a poder acceder Efrén nos va a permitir trabajar sobre todo vale dentro de nivel de aplicación y también con sus fronteras no lo que quería hacia la interfaz de usuario y también en la parte de acceso a datos lo tenemos regresado en bueno fue en aquellos componentes cuyas nomenclatura será habitual en si nos centramos en la parte de interfaz de usuario aplicación y datos los datos veremos o con alguno de vosotros ya sabéis que podemos acceder a ellos de diversas maneras que están en una base de datos las podríamos dividir en dos grandes tipos que serían las bases de datos relacionales hola Noe se cuela se cuela y no significa que no sean es secuela y no que no solo son ese cuerno not only SQL algún sistema de ejemplo podría ser MongoDB modernidad y cómo vas a ir a Torre la cenar pues muchas gracias conoces como soy Esther MySQL Oracle SQL Server etcétera bueno pues en la frontera entre los datos y la aplicación vamos a tener las clases especiales que serían los repositorios permitirían acceder a los datos vale desde la aplicación ya dentro de la aplicación podríamos dividirlo en tres grandes tipos que serían las entidades que en el fondo modela vale fue el dominio de nuestra aplicación los servicios de Amanecer digamos que los que realmente trabajen los que se encarguen de aplicar lo que se conoce como la lógica de negocio los controladores que serán aquellos que reciban las peticiones y sean capaz de esta charla vale bueno delegando el trabajo en los servicios que sean necesarios y conectándolos posteriormente con el sistema de plantillas que sería algo en la parte más visual maléolo más cercano alovisual que tendríamos a la hora de trabajar con una aplicación con espejo hacemos ahora hablar de patrones de diseño un patrón de diseño lo vamos a poder definir a partir de esta idea cuando no encontramos antes análisis y diseño de una aplicación podemos encontrarnos con algunos problemas cuando nos encontramos con un problema nos podríamos hacer la pregunta seguro que esto no le ha pasado a nadie más probablemente la respuesta es que si le haya pasado alguien más de hecho en un alto porcentaje de situaciones alguien ya tuvo ese problema y lo resolvió de hecho nos podríamos plantear sí y está solución que esa persona película podríamos adaptar a nuestra versión del problema pues bien podríamos decir que un patrón de diseño es una solución a un problema dado que ya se utiliza da cuya efectividad sino probada y que además será reutilizable en problemas que tengan circunstancias similares los patrones de diseño los podemos pensar en el caso del software y en otro ámbito científico como podría hacer la arquitectura no cómo podemos salvar un tipo de terreno que tengo una pendiente ya alguien se inventó que la idea podría ser puente o un túnel no pues nosotros podemos aplicar algo algo por el estilo al mundo del software en los años 90 4 autores llamados la panda de los cuatro vale se plantearon sobre todo sobre ese magma en plantear una serie de patrones de diseño son veintitantos patrones 23 24 patrones que son altamente reutilizable y aplicable en múltiples situaciones a nivel de capa vale podríamos hablar de él que una aplicación Empresarial está formada por todas la
 
 
 Cuatro autores de Amador la panda de los cuatro vale se plantearon sobre todo sobre este magma en plantear una serie de patrones de diseño son veintitantos patrones 23 24 patrones que son altamente reutilizable y aplicable en múltiples situaciones estructura y su ámbito general a un objeto en particular y según su propósito en patrones creacionales estructurales o de comportamiento por lo dejo por aquí porque es posible que a la hora de desarrollar aplicaciones en otros patrones como el de la inversión de control ese sí hablaremos en ninguna lesión posterior porque es la parte nuclear se escribe vale la inversión de control a través de inyección de dependencia patrones como el modelo vista controlador el vigente el patrón dao del objeto de acceso a datos son controles se retrase también puedes poner utilizaste pues principalmente el patrón de la inyección de dependencia que le digo que veremos en una lesión posterior otros patrones que utilizamos en el en los ámbitos de un bin sería el patrón Singleton protones el patrón Singleton es aquel que nos va a permitir que hagamos una restricción sobre la creación de objetos de un tipo para que tengamos de una clase particular de un tipo particular un solo objeto frente a single no tenemos prototype que nos va a permitir la creación de nuevo objeto suplicante no lo queremos como la posibilidad de el patrón proxy que nos va a permitir definir un representante de un objeto para controlar el acceso a este la palabra proxys posible que no la conozcamos no se me ve la navegación a Internet y de interponer una máquina en nuestra nada de nuestra navegación bueno pues algo parecido podemos hacer a nivel de objeto y de hecho se utiliza en la programación orientada a aspectos patrones cómo vamos antes de modelo vista controlador que nos va a permitir separar la lógica y los datos de la interfaz y del control de peticiones o el patrón FrontController que nos va a permitir tener un solo controlador de fachada vale que está el principio al frente de la aplicación para manejar todas las peticiones todo ellos lo utiliza el fin en su módulo de web web en bici utilizar as24 factoría que centraliza la construcción de objeto bueno pues lo utilizaría el contenedor de inversión de control de este ya podéis comprobar como algunos de estos patrones son los utilizado médico que no los podemos nos podemos parar a conocerlo en profundidad pero si es verdad que estaría bien que no suenen para motivar el porqué spring realiza así las cosas y también el cómo diseñar nuestra
