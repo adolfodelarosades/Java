@@ -258,40 +258,93 @@ $ umake ide spring-tools-suite
 
 <img src="images/3-01.png">
 
+Hola a todos vamos a lanzarnos de lleno ahora a poder utilizar Spring y lo vamos a hacer instalando nuestro entorno de trabajo.
+
 <img src="images/3-02.png">
 
+Lo primero que tenemos que ver es que requisitos previos necesitamos para poder trabajar con Spring.
+
 <img src="images/3-03.png">
+
+Deberíamos manejar la tecnología Java, el lenguaje de programación Java, sobre todo la parte de metodología de programación, sintaxis básica y orientación a objetos con eso será suficiente si bien nos vendrá bien que sepamos algo de Java EE o por lo menos algunos conceptos saber que puede llegar a ser un Servlet, algunos elementos de aplicaciones empresariales, es verdad que hemos nombrado lo de EJB, también vendría bien manejar algunos de esos conceptos, también algo sobre patrones de diseño y el manejo de Maven que lo utilizaremos para gestionar las dependencias asociadas a Spring, veremos cuál es la dependencia que tenemos que añadir en nuestro proyecto para poder utilizar al menos el contenedor de inversión de control de Spring. 
 
 <img src="images/3-04.png">
 
 <img src="images/3-05.png">
 
+Para poder trabajar con Spring realmente podríamos trabajar con cualquier entorno de desarrollo integrado que nos permita trabajar con Java y con Maven preferentemente con que nos permitierá trabajar con Java sería suficiente. Podemos optar por usar Gradle en lugar de Maven para la gestión de dependencia también podríamos trabajar con el. El primero que siempre surge cuando hablamos de programación Java es Eclipse porque es un IDE de que está ampliamente extendido su uso por la comunidad y francamente es uno de los más potentes del mercado, también tenemos otras alternativas como son Netbeans, IntelliJ Idea de la empresa Jetbrains, Visual Studio Code cualquiera de ellos nos permitiría trabajar con Sprint por el mero hecho de que podemos trabajar directamente con JAVA.
+
 <img src="images/3-06.png">
+
+Si es verdad que vamos a escojer como IDE preferido uno que nos propone directamente desde la comunidad de desarrolladores de Spring que es **Spring Tool Suite** se trata de un plugin para Eclipse o que también vamos a comprobar que lo podemos encontrar como un Bundle como un integrado que nos podemos descargar. Viene ya perfectamente listo para poder utilizar Spring con un monton de capacidades tiene todas las ventajas del uso de Eclipse de hecho si ya has trabajado con Eclipse todo lo que sepa se podrá aplicar con Spring Tool Suite pero añade también algunas ventajas algunas de ellas son el soporte para **Cloud Foundry** o para **Pivotal tc Server**. [Cloud Foundry](https://www.cloudfoundry.org/) nos permite acceder a una infraestructura una plataforma como un servicio donde podemos construir, probar y desplegar nuestras aplicaciones que además serán escalable y [Pivotal tc Server](https://www.vmware.com/products/pivotal-tcserver.html) es un servidor de Tomcat tuneado, es un servidor que tiene lo mejor de Tomcat y algunos elementos de servidores de aplicaciones que no incluye Tomcat. Incluye soporte para Maven y Gradle.
 
 <img src="images/3-07.png">
 
+https://spring.io/tools
+
+A día de hoy la última versión publicada en la 3.9.5 (The all-new Spring Tool Suite 4. Free. el 21/08/2020) está basada en Eclipse Oxygen la versión 4.8 con la versión del Pivotal TC Server 3.2.6 y ofrece ya soporte para Java 9. Es gratuito lo podemos descargar desde la misma Web de Spring y vamos a aprender en esta lección 
+cómo podemos instalarla.
+
 <img src="images/3-08.png">
+
+Para ello vamos a realizar la instalación yo este curso ya lo habéis comprobado que estoy trabajando sobre Ubuntu y vamos a hacer o voy a hacer una demostración de la instalaciones en una máquina virtual que tengo por aquí.
 
 <img src="images/3-09.png">
 
+Lo primero que tendríamos que hacer es comprobar si tenemos instalada la máquina virtual de Java JDK y comprobar la versión que tenemos para ver que sea la 1.8 que será la que utilizamos a lo largo de este curso podemos comprobar con
+
+```sh
+java -version
+```
+
+En caso de no tenerla instalada os recomiendo que con el gestor de paquetes que utililicen habitualmente la puedan descargar.
+
 <img src="images/3-10.png">
+
+Una vez que hemos comprobado que tenemos Java listo nos descargamos el Bundle de Spring Tool Suite en https://spring.io/tools para nuestro sistema operativo en nuestro caso la versión de 64 bits de Linux. Si trabajan sobre Windows o sobre Mac también lo podéis descargar directamente, incluso si queréis alguna versión más antigua también hay posibilidad de descargarla, una vez descargado en la carpeta de descarga es un fichero tar.gz el que se descargaría, en el caso de una Mac es `spring-tool-suite-4-4.7.1.RELEASE-e4.16.0-macosx.cocoa.x86_64.dmg`.
 
 <img src="images/3-11.png">
 
+A partir de allí lo que lo que vamos a hacer un sencillo proceso de instalación nos vamos a ir a la carpeta de descarga, vamos a mover este fichero a la carpeta `opt` y allí lo vamos a descomprimir, el nombre de fichero que se van descomponiendo.
+
 <img src="images/3-12.png">
+
+Una vez que se hayan descomprimido vamos a referenciar el ejecutable, la verdad es que sería tan sencillo como que descomprimiéramos la carpeta aquellos que se sienten menos cómodos por la línea comando a través del gestor de archivos comprimidos y la tuvieramos por ejemplo en el escritorio y con un doble click pudiéramos iniciar nuestro entorno de desarrollo, haciendo doble clic sobre el fichero STS, pero bueno vamos a tratar de hacer una instalación un poco mejor y que la tengamos con un Launcher. Vamos a crear un enlace simbólico para tenerlo dentro de la carpeta de binarios locales. Lo hacemos directamente con la ruta completa.
 
 <img src="images/3-13.png">
 
+Realmente ya podríamos invocar a Spring Tool Suite desde la línea de comandos pero bueno si nos interesa incluir algún tipo de icono, lanzador para poder utilizarlo pues sería interesante que lo pudiéramos hacer, para ello vamos a incluir esto dentro de la carpeta application, dónde vamos a crear un lanzador habitual de los lanzadores, podéis copiar directamente y de esa manera vamos a poder utilizar el lanzador.
+
 <img src="images/3-14.png">
+
+Se crearían nuestro lanzador ya lo tenemos por aquí, lo podríamos ejecutar, incluso si queremos lo podemos anclar al dock para tenerlo más a la vista si lo vamos a utilizar con frecuencia.
+
+La primera vez que arranca nos pregunta donde queremos situar el Workspace esto es una característica básica de Eclipse, podemos seleccionar el Workspace que queramos.
 
 <img src="images/3-15.png">
 
 <img src="images/3-16.png">
 
-Hola a todos llama a lanzarnos de lleno ahora a poder utilizar friend y lo vamos a hacer instalando nuestro entorno de trabajo lo primero que tenemos que ver es que requisitos previos necesitamos para poder trabajar con Extreme deberíamos manejar las tecnologías Java lenguaje de programación Java sobre todo bueno pues con toda la parte de metodología de programación sintaxis básica y orientación a objetos con eso será suficiente si bien nos vendrá bien que estamos conocer algo de Java e vale o por lo menos algunos conceptos a ver que puede llegar a ser un elemento de aplicaciones empresariales es verdad que hemos nombrado también vendría bien manejar algunos conceptos sobre todo si sobre todo para gestionar las dependencias Diada veremos cuál es la pendiente que tenemos que crear añadir en nuestro proyecto para poder utilizar al menos el contenedor de trabajar con Spring podríamos trabajar con cualquier entorno de desarrollo integrado que nos permita trabajar con Java preferentemente bueno con que nos permitirá trabajar para la gestión de dependencia pues también podríamos trabajar con el el primero que siempre surge cuando hablamos de programación Java efectista cómo es porque es un uni de que está ampliamente extendido su uso por la comunidad y francamente uno de los más potentes del mercado también tenemos otra alternativa idea del empresario spring pistol estudios González cualquiera de ellos nos permitiría trabajar con pon sprint derecho de trabajar directamente con JAVA cómo ir de preferido uno que nos propone directamente desde la comunidad de desarrolladores de qué se trata de un plugin para eclipse o que también vamos a comprobar que lo conozco perfectamente todas las ventajas del uso de Eclipse de sushi trabajado con existen aplicaciones
+Por último decir que está es la dependencia Maven que vamos a utilizar, siempre que vayamos a trabajar con proyectos de Spring Core, la dependencia Spring Context comprobaremos que se descarga varios jars por detrás varias "librerías" de manera que nos da todo lo necesario para poder trabajar con Spring Context, si no recordamos esto que cuando va a ir trabajando poco a poco la verdad es que no es tan difícil de recordar, el grupo y el artefacto, siempre podemos acceder a la web del repositorio Maven https://mvnrepository.com/ para poder copiar la dependencia, primero la buscamos en su buscador seleccionamos la versión, estamos trabajando con la 5.0.8
 
-Cómo servicio donde nosotros podemos construir probar y desplegar una aplicación es que además serán escalable y votel TC Server es un servidor de Tomcat servidor que tiene lo mejor de todo y algunos elementos de servidores de aplicaciones a día de hoy la última versión publicada en la 395 vale está basada en Eclipse oxygen la versión 48 con la versión del TC server de Vocal 326 y ofrece ya soporte para jabones no lo podemos descargar desde la misma fuente y vamos a aprender en este vídeo a cómo podemos instalarla para ello vamos a realizar la instalación yo este curso ya lo habéis comprobado que estoy trabajando sobre Ubuntu y vamos a hacer o voy a hacer una demostración de la instalaciones en una máquina virtual que tengo por aquí lo primero que tendríamos que hacer es comprobar si tenemos instalada la máquina virtual de Java JDK y comprobar la versión que tenemos para ver que sea la 18 que será la que utilizamos a lo largo de este curso podemos comprobar como Java bueno pues os recomiendo que con el gestor de paquetes que utiliza habitualmente pues la descarga una vez que hemos comprobado que tenemos Java vale nos descargamos el battlefield 1 suite para nuestro sistema operativo nosotros lo haremos para para decirte la web la tenéis en las slide vale dentro de steam.io barra azul podemos encontrarlo con esto hace algo así como un escaneo del sistema operativo que tenemos a través del encabezado y es capaz de decirnos la versión sin embargo si pulsamos aquí en en ver todas las versiones para que lo veáis mejor podemos encontrar que podemos descargarla que nosotros necesitamos en nuestro caso la versión de 64 bits de domingos trabaje sobre Windows o sobre más también lo podéis descargar directamente incluso si queréis alguna versión más antigua también hay posibilidad de descargarla nosotros lo podemos descargar yo ya lo tengo descargado en mi carpeta de descarga fichero tar.gz a partir de ahí bueno pues lo que vamos a hacer un sencillo proceso de instalación nos vamos a ir a la carpeta de descarga vamos a mover este fichero a la carpeta o que te y allí lo vamos a descubrir vale el nombre de fichero que se van descomponiendo una vez que se hayan descomprimido vamos a bueno referenciar el ejecutable la verdad es que sería tan sencillo como que descomprimir éramos la carpeta aquellos que sienten menos cómodos por la línea comando a través del gestor de archivos comprimidos por ejemplo en el escritorio y pudiéramos iniciar nuestro entorno de desarrollo no es haciendo doble clic sobre sobre el chiste pero bueno vamos a crear un enlace simbólico para tenerlo dentro de la carpeta de binarios locales vale lo hacemos directamente que con la ruta completa en la carpeta prefería el nombre del ejecutable minúscula correctamente el enlace simbólico crear realmente ya podríamos invocar a spring tool suite desde la línea de comandos pero bueno si nos interesa incluir algún tipo de bono aquí lanzador para poder utilizarlo pues sería interesante que lo pudiéramos hacer para ello vamos a bueno incluir esto dentro de la carpeta application en VCR application dónde vamos a crear lanzador habitual de los lanzadores no podéis copiar directamente y de esa manera vamos a poder utilizar en la zona ejecutable apuntaremos estupendo se crearían nuestro ya lo tenemos por aquí no podríamos ejecutar incluso si queremos lo podemos anclar aquí al dock para tenerlo más no sé que lo vamos a utilizar con frecuencia y de esa manera la primera vez que arranca nos pregunta donde queremos situar el huésped y es una característica básica de gente que vamos a cenar el cuerpo y te llamo o cargar el alguno que ya tengamos por ahí y directamente ya podríamos crear nuestro primer proyecto que lo haremos en algún vídeo posterior lo dejamos cargando por último decir que está en la dependencia may ven que vamos a utilizar siempre que vayamos a trabajar con proyectos de Spring core la dependencia context comprobaremos que se descarga varios heart por detrás variar me ya estaremos decir librería en ballet Mario Fisher Óscar por detrás de manera que nos da todo lo necesario para poder trabajar con este entonces si no recordamos esto que cuando va a ir trabajando poco a poco la verdad es que no es tan difícil de recordar el grupo y el artista bueno pues siempre podemos acceder a la web del repositorio name para poder 508 para poder copiarla y pegarla en el tapicero con esto terminamos el vídeo de instalación del entorno y bueno de ejecución del mismo en los próximos vídeos y hemos aprendido algo más sobre patrones de diseño y aplicaciones
+<img src="images/3-100.png">
 
+<img src="images/3-101.png">
+
+<img src="images/3-102.png">
+
+y directamente tendríamos la dependencia Maven para poder copiarla y pegarla directamente en nuestro archivo `pom.xml`
+
+```sh
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.8.RELEASE</version>
+</dependency>
+```
+
+Con esto terminamos la lección de la instalación del entorno.
 
 # 04 Estructura de una aplicación empresarial y patrones de diseño 12:55
 
