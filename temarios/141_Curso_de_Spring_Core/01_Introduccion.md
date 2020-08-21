@@ -64,10 +64,70 @@ https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Fr
 ## Transcripción
 
 
+<img src="images/2-11.png">
+
+[Framework Modules](https://docs.spring.io/spring/docs/5.0.0.RC2/spring-framework-reference/overview.html#overview-modules)
+
+<img src="images/2-12.png">
+
+<img src="images/2-13.png">
+
+Actualmente 5.2.6 GA 27/05/2020
+
+<img src="images/2-14.png">
+
+
+
+----
+
+<img src="images/2-01.png">
+
+Hola a todos y bienvenidos a esta primera lección de este curso de Spring Core en el que vamos a introducirnos en esta apasionante tecnología.
+
+<img src="images/2-02.png">
+
+Bueno y vamos a conocer un poco cuando hablamos de Spring a qué nos referimos exactamente. 
+Comencemos con esta parte que para los que se introducen en esta tecnología a veces le causa algo de desazón porque cuando decimos Spring a que nos estamos refiriendo.
+
+<img src="images/2-03.png">
+
+Vamos a tratar de dar una definición sencilla y después vamos a ir conociendolo poco a poco. Spring es un framework, de código abierto, para la creación de aplicaciones empresariales Java, que además tiene soporte para otros lenguaje como Grovy y Kotlin, con estructura modular que tiene una gran flexibilidad y que nos permite implementar diferentes tipos de arquitecturas según las necesidades que tenga la aplicación.
+
+Podremos decir que esto es a vista de pajaro una definición de lo que podría ser Spring.
+
+<img src="images/2-04.png">
+
+Lo que pasa que sobre Spring hay mucha literatura encontrarán toneladas de artículos de post en algunos blogs pueden encontrar de todo y cuando hacen referencia a Spring pueden estar haciendo referencia a muchas cosas. La mayoría de ellas harán referencia al proyecto Spring Framework qué dentro del ecosistema de Spring es el proyecto nuclear, sobre todo en la parte de dentro de este núcleo, bueno pues el contenedor de inversión de control, el que nos va a permitir gestionar la inyección de dependencias, pero también por muchas más funcionalidades como Programación Orientada a Aspectos, el uso de recursos, la validación de datos, etc.
+
+Cuando también leamos por ahí Spring quiza se estarán refiriendo a toda la familia de proyectos que vamos a ver que son muchos los proyectos que han ido creciendo en ese en este ecosistema, algunos de ellos con con varios módulos.
+
+Incluso haciendo un abuso del lenguaje pues también podríamos encontrar con que alguien habla de Spring y se está refiriendo a un entorno de desarrollo, que instalaremos en las próximas lesiones basada en Eclipse y que se llama Spring Tool Suite.
+
+Ya nos vamos haciendo poco a poco una idea.
+
+<img src="images/2-05.png">
+
+Dentro de cualquier rama de conocimiento, dentro de la computación también no está mal conocer algo historia y porque surge Spring. 
+
+<img src="images/2-06.png">
+
+A finales de los noventa en el inicio del siglo 21 las aplicaciones empresariales desarrolladas sobre Java, se desarrollaba dentro de la especificación de Java EE, que en aquel entonces se le conocía como Java2EE y utilizando un modelo conocido como los **EJB los Enterprise Java Bean** en el que bueno una aplicación podía tener esta arquitectura, una base de datos que normalmente era relacional, sobre esa base de datos descansaba el servidor de Java EE, en ocaciones podríamos encontrar esta capa también fragmentada en dos servidores distintos incluso podrían estar en máquinas distintas, el contenedor de EJB en el servidor de Java EE empresarial propiamente dicho donde tendríamos los Enterprise JavaBeans que son unas clases especiales gestionadas por este contenedor sobre el encontraríamos el contenedor Web el contenedor de Servlets donde podíamos trabajar con Servlets o directamente con páginas JSP y en la capa cliente podríamos encontrar aplicaciones web que se conectaría a este contenedor Web directamente o incluso podríamos tener también desarrolladas aplicaciones que mediante algún tipo de tecnología por ejemplo RMI se podían conectar directamente a los objetos del contenedor de EJBs.
+
+<img src="images/2-07.png">
+
+Este modelo es ciertamente complejo tenía sus ventajas y sobre todo sus desventajas y Spring surge como respuesta a este modelo. Algunas desventajas del modelo de EJB es que es altamente complejo, la productividad no era para nada buena, es decir que el programador tenía que invertir mucho trabajo en programar y configurar para poder hacer algo de código que diera rendimiento, la conectividad entre componentez está basada en la tecnología RMI, que ya digo también que es un protocolo complejo, frente a otros protocolos mucho más extendidos como HTTP, estaba basada en el uso de componentes remotos cuando hay aplicaciones de tamaño mediano o pequeño incluso que no necesitan que esos componentes residan en un servidor independiente sin embargo el modelo de EJB nos obligaba al uso de componentes remotos, una gran dificultad a la hora de depurar y buscar errores y un mapeo objeto-relacional pues ciertamente limitado. 
+
+<img src="images/2-08.png">
+
+Toda esta serie de dificultades dan como respuesta que en el año 2003 y gracias al trabajo de un señor llamado Rob Jonson naciera Spring como respuesta a su experiencia, con su mala experiencia sobre todo con el desarrollo de aplicaciones empresariales Java. Spring nace como un complemento a esa especificación, a la especificación de Java EE y no como un sustituto directo sino que bueno pues dentro de esa gran especificación de Java EE va integrando algunos componentes como el API de Servlets, el API de los WebSocket,  el bloque de concurrencia, el Binding de JSON, la validación de beans, la API de persistencia, los va integrando de tal manera que incluso nosotros podremos hacer uso de algunos de estos componentes sueltos sin tener que utilizar todos los demás.
 
 <img src="images/2-09.png">
 
+Ya hemos visto algo sobre los orígenes de Sprint vamos a conocerlo los proyectos y algunos de los módulos que lo integran.
+
 <img src="images/2-10.png">
+
+Si entráis en la página de Spring https://spring.io/ podemos comprobar que en el apartado de proyectos https://spring.io/projects hay bastantes, les presento aquí algunos.
 
 ### [Spring Projects](https://spring.io/projects)
 
@@ -132,68 +192,12 @@ Spring Security es un marco que se centra en proporcionar autenticación y autor
 * Integración opcional con Spring Web MVC
 * Mucho más...
 
-<img src="images/2-11.png">
-
-[Framework Modules](https://docs.spring.io/spring/docs/5.0.0.RC2/spring-framework-reference/overview.html#overview-modules)
-
-<img src="images/2-12.png">
-
-<img src="images/2-13.png">
-
-Actualmente 5.2.6 GA 27/05/2020
-
-<img src="images/2-14.png">
-
-
-
-----
-
-<img src="images/2-01.png">
-
-Hola a todos y bienvenidos a esta primera lección de este curso de Spring Core en el que vamos a introducirnos en esta apasionante tecnología.
-
-<img src="images/2-02.png">
-
-Bueno y vamos a conocer un poco cuando hablamos de Spring a qué nos referimos exactamente. 
-Comencemos con esta parte que para los que se introducen en esta tecnología a veces le causa algo de desazón porque cuando decimos Spring a que nos estamos refiriendo.
-
-<img src="images/2-03.png">
-
-Vamos a tratar de dar una definición sencilla y después vamos a ir conociendolo poco a poco. Spring es un framework, de código abierto, para la creación de aplicaciones empresariales Java, que además tiene soporte para otros lenguaje como Grovy y Kotlin, con estructura modular que tiene una gran flexibilidad y que nos permite implementar diferentes tipos de arquitecturas según las necesidades que tenga la aplicación.
-
-Podremos decir que esto es a vista de pajaro una definición de lo que podría ser Spring.
-
-<img src="images/2-04.png">
-
-Lo que pasa que sobre Spring hay mucha literatura encontrarán toneladas de artículos de post en algunos blogs pueden encontrar de todo y cuando hacen referencia a Spring pueden estar haciendo referencia a muchas cosas. La mayoría de ellas harán referencia al proyecto Spring Framework qué dentro del ecosistema de Spring es el proyecto nuclear, sobre todo en la parte de dentro de este núcleo, bueno pues el contenedor de inversión de control, el que nos va a permitir gestionar la inyección de dependencias, pero también por muchas más funcionalidades como Programación Orientada a Aspectos, el uso de recursos, la validación de datos, etc.
-
-Cuando también leamos por ahí Spring quiza se estarán refiriendo a toda la familia de proyectos que vamos a ver que son muchos los proyectos que han ido creciendo en ese en este ecosistema, algunos de ellos con con varios módulos.
-
-Incluso haciendo un abuso del lenguaje pues también podríamos encontrar con que alguien habla de Spring y se está refiriendo a un entorno de desarrollo, que instalaremos en las próximas lesiones basada en Eclipse y que se llama Spring Tool Suite.
-
-Ya nos vamos haciendo poco a poco una idea.
-
-<img src="images/2-05.png">
-
-Dentro de cualquier rama de conocimiento, dentro de la computación también no está mal conocer algo historia y porque surge Spring. 
-
-<img src="images/2-06.png">
-
-A finales de los noventa en el inicio del siglo 21 las aplicaciones empresariales desarrolladas sobre Java, se desarrollaba dentro de la especificación de Java EE, que en aquel entonces se le conocía como Java2EE y utilizando un modelo conocido como los **EJB los Enterprise Java Bean** en el que bueno una aplicación podía tener esta arquitectura, una base de datos que normalmente era relacional, sobre esa base de datos descansaba el servidor de Java EE, en ocaciones podríamos encontrar esta capa también fragmentada en dos servidores distintos incluso podrían estar en máquinas distintas, el contenedor de EJB en el servidor de Java EE empresarial propiamente dicho donde tendríamos los Enterprise JavaBeans que son unas clases especiales gestionadas por este contenedor sobre el encontraríamos el contenedor Web el contenedor de Servlets donde podíamos trabajar con Servlets o directamente con páginas JSP y en la capa cliente podríamos encontrar aplicaciones web que se conectaría a este contenedor Web directamente o incluso podríamos tener también desarrolladas aplicaciones que mediante algún tipo de tecnología por ejemplo RMI se podían conectar directamente a los objetos del contenedor de EJBs.
-
-<img src="images/2-07.png">
-
-Este modelo es ciertamente complejo tenía sus ventajas y sobre todo sus desventajas y Spring surge como respuesta a este modelo. Algunas desventajas del modelo de EJB es que es altamente complejo, la productividad no era para nada buena, es decir que el programador tenía que invertir mucho trabajo en programar y configurar para poder hacer algo de código que diera rendimiento, la conectividad entre componentez está basada en la tecnología RMI, que ya digo también que es un protocolo complejo, frente a otros protocolos mucho más extendidos como HTTP, estaba basada en el uso de componentes remotos cuando hay aplicaciones de tamaño mediano o pequeño incluso que no necesitan que esos componentes residan en un servidor independiente sin embargo el modelo de EJB nos obligaba al uso de componentes remotos, una gran dificultad a la hora de depurar y buscar errores y un mapeo objeto-relacional pues ciertamente limitado. 
-
-<img src="images/2-08.png">
-
-Toda esta serie de dificultades dan como respuesta que en el año 2003 y gracias al trabajo de un señor llamado Rob Jonson naciera Spring como respuesta a su experiencia, con su mala experiencia sobre todo con el desarrollo de aplicaciones empresariales Java. Spring nace como un complemento a esa especificación, a la especificación de Java EE y no como un sustituto directo sino que bueno pues dentro de esa gran especificación de Java EE va integrando algunos componentes como el API de Servlets, el API de los WebSocket,  el bloque de concurrencia, el Binding de JSON, la validación de beans, la API de persistencia, los va integrando de tal manera que incluso nosotros podremos hacer uso de algunos de estos componentes sueltos sin tener que utilizar todos los demás.
 
 
 
 
 
-hemos visto algo de sobre los orígenes de Sprint vamos a conocerlo los proyectos y algunos de los módulos que lo integran si entráis en la página de Spring spring. Io poder comprobar que en el apartado del proyecto ay qué bueno pues el primero que se escriba y sobre el cual han nacido los demás y que el que nos da soporte para la inyección de dependencia que 100 de transacciones aplicaciones web recursos mensajería programación orientada a aspectos tuyo va incluido eh en el proyecto de Spencer hace algunos años tiene facebook que es un acelerador de construcción de aplicaciones comprobaremos en este curso que configurara una aplicación de precisamente y bueno pues utiliza el principio de convención sobre configuración para que el programador se centre en programar y ofrecerle una configuración acelerada de nuestro proyecto para que esté disponible lo antes posible spring-data no ofrece una interfaz común de acceso a datos y hacían relacionales no relacionales se integran pues diría que entre 20 y 25 sus proyectos diferentes para para poder acceder a datos nos permite proteger nuestra aplicaciones dando un soporte sencillo y sensible para realizar la operación esvástica de autenticación y autorización alemán diferente esquema conjunto de herramienta para muchas tareas de sistemas distribuidos y que están bastante de moda ahora asociada al concepto de construcción y despliegue de microservicios el siguiente porque tiene un nombre algo innombrable el principito y simplifica la construcción de representaciones red vale siguiendo fue el principio de perfecto como el motor del estado de la aplicación en los significa acrónimo y que en definitiva pues
+qué bueno pues el primero que se escriba y sobre el cual han nacido los demás y que el que nos da soporte para la inyección de dependencia que 100 de transacciones aplicaciones web recursos mensajería programación orientada a aspectos tuyo va incluido eh en el proyecto de Spencer hace algunos años tiene facebook que es un acelerador de construcción de aplicaciones comprobaremos en este curso que configurara una aplicación de precisamente y bueno pues utiliza el principio de convención sobre configuración para que el programador se centre en programar y ofrecerle una configuración acelerada de nuestro proyecto para que esté disponible lo antes posible spring-data no ofrece una interfaz común de acceso a datos y hacían relacionales no relacionales se integran pues diría que entre 20 y 25 sus proyectos diferentes para para poder acceder a datos nos permite proteger nuestra aplicaciones dando un soporte sencillo y sensible para realizar la operación esvástica de autenticación y autorización alemán diferente esquema conjunto de herramienta para muchas tareas de sistemas distribuidos y que están bastante de moda ahora asociada al concepto de construcción y despliegue de microservicios el siguiente porque tiene un nombre algo innombrable el principito y simplifica la construcción de representaciones red vale siguiendo fue el principio de perfecto como el motor del estado de la aplicación en los significa acrónimo y que en definitiva pues
 
 
 
