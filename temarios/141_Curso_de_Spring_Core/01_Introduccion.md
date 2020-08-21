@@ -352,51 +352,6 @@ Con esto terminamos la lección de la instalación del entorno.
 
 ## Transcripción
 
-
-
-
-   
-
-
-<img src="images/4-06.png">
-
-Aquí podemos verlo desglosado en aquellos componentes que seran habituales en Spring.
-
-### Datos
-
-Para acceder a la capa de Datos existen varias formas de hacerlo, existen dos grandes tipos:
-
-* Relacionales
-* NoSQL
-
-En la frontera ente la capa de *Datos* y *Aplicación* vamos a tener unas clases especiales lladados ***Repositorios*** que nos permiten acceder a los datos desde la *Aplicación*.
-
-### Aplicación
-
-Dentro de la aplicación podemos dividirlos en tres grandes tipos:
-
-* **Entidades** modelan el dominio de nuestra aplicación.
-* **Servicios** tienen la lógica de negocio de nuestra aplicación
-* **Controladores** son los que reciben las peticiones y son capaces de despacharlas delegando el trabajo en los servicios que sean necesarios.
-
-### Interfaz de Usuario
-
-Los *sistemas de plantillas* conectan la *Aplicación* y la *Interfaz de Usuario*.
-
-<img src="images/4-07.png">
-
-<img src="images/4-08.png">
-
-<img src="images/4-09.png">
-
-<img src="images/4-10.png">
-
-<img src="images/4-11.png">
-
-<img src="images/4-12.png">
-
-
--------------
 <img src="images/4-01.png">
 
 Hola a todos vamos a continuar en esta lección hablando un poco sobre la estructura de una aplicación empresarial y también sobre patrones de diseño que es otro ámbito que se suele trabajar y que nos servirá como base también para poder utilizar un buen diseño en nuestros proyectos de Spring.
@@ -460,6 +415,47 @@ A nivel de capa vale podríamos hablar de que una aplicación empresarial está 
 
 
 Cuatro autores de Amador la panda de los cuatro vale se plantearon sobre todo sobre este magma en plantear una serie de patrones de diseño son veintitantos patrones 23 24 patrones que son altamente reutilizable y aplicable en múltiples situaciones estructura y su ámbito general a un objeto en particular y según su propósito en patrones creacionales estructurales o de comportamiento por lo dejo por aquí porque es posible que a la hora de desarrollar aplicaciones en otros patrones como el de la inversión de control ese sí hablaremos en ninguna lesión posterior porque es la parte nuclear se escribe vale la inversión de control a través de inyección de dependencia patrones como el modelo vista controlador el vigente el patrón dao del objeto de acceso a datos son controles se retrase también puedes poner utilizaste pues principalmente el patrón de la inyección de dependencia que le digo que veremos en una lesión posterior otros patrones que utilizamos en el en los ámbitos de un bin sería el patrón Singleton protones el patrón Singleton es aquel que nos va a permitir que hagamos una restricción sobre la creación de objetos de un tipo para que tengamos de una clase particular de un tipo particular un solo objeto frente a single no tenemos prototype que nos va a permitir la creación de nuevo objeto suplicante no lo queremos como la posibilidad de el patrón proxy que nos va a permitir definir un representante de un objeto para controlar el acceso a este la palabra proxys posible que no la conozcamos no se me ve la navegación a Internet y de interponer una máquina en nuestra nada de nuestra navegación bueno pues algo parecido podemos hacer a nivel de objeto y de hecho se utiliza en la programación orientada a aspectos patrones cómo vamos antes de modelo vista controlador que nos va a permitir separar la lógica y los datos de la interfaz y del control de peticiones o el patrón FrontController que nos va a permitir tener un solo controlador de fachada vale que está el principio al frente de la aplicación para manejar todas las peticiones todo ellos lo utiliza el fin en su módulo de web web en bici utilizar as24 factoría que centraliza la construcción de objeto bueno pues lo utilizaría el contenedor de inversión de control de este ya podéis comprobar como algunos de estos patrones son los utilizado médico que no los podemos nos podemos parar a conocerlo en profundidad pero si es verdad que estaría bien que no suenen para motivar el porqué spring realiza así las cosas y también el cómo diseñar nuestra
+
+
+<img src="images/4-06.png">
+
+Aquí podemos verlo desglosado en aquellos componentes que seran habituales en Spring.
+
+### Datos
+
+Para acceder a la capa de Datos existen varias formas de hacerlo, existen dos grandes tipos:
+
+* Relacionales
+* NoSQL
+
+En la frontera ente la capa de *Datos* y *Aplicación* vamos a tener unas clases especiales lladados ***Repositorios*** que nos permiten acceder a los datos desde la *Aplicación*.
+
+### Aplicación
+
+Dentro de la aplicación podemos dividirlos en tres grandes tipos:
+
+* **Entidades** modelan el dominio de nuestra aplicación.
+* **Servicios** tienen la lógica de negocio de nuestra aplicación
+* **Controladores** son los que reciben las peticiones y son capaces de despacharlas delegando el trabajo en los servicios que sean necesarios.
+
+### Interfaz de Usuario
+
+Los *sistemas de plantillas* conectan la *Aplicación* y la *Interfaz de Usuario*.
+
+<img src="images/4-07.png">
+
+<img src="images/4-08.png">
+
+<img src="images/4-09.png">
+
+<img src="images/4-10.png">
+
+<img src="images/4-11.png">
+
+<img src="images/4-12.png">
+
+
+-------------
 
 
 # 05 Inversión de control e inyección de dependencias 15:09 
