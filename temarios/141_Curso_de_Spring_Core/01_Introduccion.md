@@ -63,23 +63,6 @@ https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Fr
 
 ## Transcripción
 
-
-<img src="images/2-11.png">
-
-[Framework Modules](https://docs.spring.io/spring/docs/5.0.0.RC2/spring-framework-reference/overview.html#overview-modules)
-
-<img src="images/2-12.png">
-
-<img src="images/2-13.png">
-
-Actualmente 5.2.6 GA 27/05/2020
-
-<img src="images/2-14.png">
-
-
-
-----
-
 <img src="images/2-01.png">
 
 Hola a todos y bienvenidos a esta primera lección de este curso de Spring Core en el que vamos a introducirnos en esta apasionante tecnología.
@@ -208,10 +191,36 @@ Spring Security es un marco que se centra en proporcionar autenticación y autor
 * Integración opcional con Spring Web MVC
 * Mucho más...
 
+<img src="images/2-11.png">
+
+[Framework Modules](https://docs.spring.io/spring/docs/5.0.0.RC2/spring-framework-reference/overview.html#overview-modules)
+
+Dentro de del proyecto de Spring Framework lo que está más cercano a él encontramos que también tiene algunos de los módulos, estos módulos también están integrados dentro de algunos paquetes que a su vez tienen otros módulos dentro como es el caso del **Core Container** que a su vez ya digo tiene dentro de algunos submodulos como el Context, Core, Beans, el expresión language. Tambien tenemos el de acceso a datos, el web nos vamos a ir haciendo un poco una idea. De todas formas ya veremos como en este curso trabajamos los proyectos sobre todo dentro del  **Core Container** nos vamos a centrar en aprender lo que transversalmente vamos a necesitar para cualquier tipo de otro proyecto de Spring ya sea Web, de acceso a datos, de seguridad, un servicio web REST, etc.
+
+<img src="images/2-12.png">
+
+<img src="images/2-13.png">
+
+Spring como hemos visto desde 2003 a día de hoy ha tenido un largo recorrido, hace algunos meses veíamos el lanzamiento de  Spring 5, de hecho nos encontramos con que la versión actual, la que está publicada con disponibilidad general en la 5.0.8 si bien ya tenemos una versión candidata de la 5.1 como podéis ver en el gráfico de la derecha, también tenemos ya versiones no liberadas algunas SNAPSHOT como la 5.0.9, sigue estando también la posibilidad de usar la versión se Spring 4, la última versión publicada es la 4.3.18 por si queremos seguir teniendo algo de compatibilidad con otras librerías que todavía no estén preparadas para para Spring 5.
+
+Actualmente 5.2.6 GA 27/05/2020
+
+Actualmente 5.2.8 CURRENT GA 21/08/2020
+
+<img src="images/2-14.png">
+
+Qué novedades nos trae Spring 5 para aquellos que no conozcáis algo sobre Spring. El primero es el uso totalmente adaptado del JDK 8 y de la especificación 7 de Java EE, ya Spring 5 viene totalmente adaptado a Java 8, incluso se plantearon el que estuviese totalmente adaptado JDK 9 pero bueno la diferencia de velocidades en la publicación de ambos no lo ha permitido, si es verdad que nos permite tener compatibilidad con el JDK 9 y con la especificación 8.  Las versiones mínimas de algunos APIs que utilizamos son Servlet 3.1 en el caso de los servlets, Validation 1.1 en la validación, JPA 2.1 si bien entre Spring 5 y la versión candidata que tenemos de la 5.1 vamos a poder ver como ya podremos tener acceso a las APIs de Servlet 4.0, Validation 2.0, JPA 2.2 que trae algunas novedades interesantes etc. Con respecto a los servidores sobre los cuales puede correr pues también tenéis aquí algunas personas con las que ya es disponible y bueno podríamos decir que dos de las novedades más interesantes que ofrece es la posibilidad de hacer aplicaciones web reactiva mediante el módulo webflux y también la programación funcional Hong Kong Hong Kong este otro nuevo lenguaje de programación es súper gente dejaba serían las dos novedades más interesantes que nos ofrece spring 5 nosotros en este curso Serra que nos centraremos en la parte Core i5 aprender todo lo transversal a sprint que podemos utilizar con el resto de una vez y ya conocemos qué es spring las presiones y las novedades que no ofrecen en la próxima elección vamos a instalar nuestro entorno de desarrollo para poder comenzar a trabajar francamente sencilla
 
 
 
-centro de del proyecto de framework vale y bueno lo que está más cercano a él encontramos que bueno que también tiene algunos de los módulos están integrados pues dentro de algunos paquetes que a su vez tienen otros módulos dentro como como es el caso del corecontainer Ikea sube ya digo tiene dentro de algunos productos como como el contexto el cobre Bing el expresión lingüística extreme tambien tenemos el de acceso a datos el web nos vamos a ir haciendo un poco una idea de todas formas ya veremos como en este proyecto el perdón dime este curso trabajamos los proyectos sobre todo dentro del cole con Time vale nos vamos a centrar en aprender lo que transversalmente vamos a necesitar para cualquier tipo de otro proyecto de Friends ya sea suerte acceso a datos de seguridad un servicio web 3 ps3 hemos visto desde 2003 a día de hoy fue ha tenido un largo recorrido hace algunos meses veíamos el lanzamiento de 35 de hecho nos encontramos con que la versión actual panela la que está publicada con disponibilidad general en la 508 si bien ya tenemos una versión candidata de la 51 como podéis ver en el gráfico de la derecha vale también tenemos ya persiane no liberada algunas naps otmane de conocerla 5097 Z sigue estando también la posibilidad de usarla 4 la última versión publicada en la 43 18 por si queremos seguir teniendo algo de compatibilidad que no he puesto con otra librerías que todavía no estén preparadas para para sprint qué novedades nos 35 para aquellos que no conozcáis algo sobre el primer vez el uso totalmente a la estado del JDK 8 y de la especificación 7 de cava eh vale ya es principio viene totalmente adaptado a Java 8 incluso se plantearon el que estuviese totalmente adaptado JDK 9 pero bueno la diferencia de velocidades en la publicación de este amor pues no la ha permitido si es verdad que nos permite tener compatibilidad con el JDK 9 y con la especificación la tercera es mínima de alguno así que utilizamos pozo en el 31 en el caso de los servlets en 11 en la validación JP a 2.1 si tiene entre Springfield y la versión candidata que tenemos de las 51 vamos a poder ver como ya podremos tener acceso a lápiz de hacerles 40 la validación del Punto Cero JP a 2.2 que trae algunas novedades interesantes etcétera etcétera con respecto a los servidores sobre los cuales puede correr pues también tenéis aquí algunas personas con las que ya es disponible y bueno podríamos decir que dos de las novedades más interesantes que ofrece es la posibilidad de hacer aplicaciones web reactiva mediante el módulo webflux y también la programación funcional Hong Kong Hong Kong este otro nuevo lenguaje de programación es súper gente dejaba serían las dos novedades más interesantes que nos ofrece spring 5 nosotros en este curso Serra que nos centraremos en la parte Core i5 aprender todo lo transversal a sprint que podemos utilizar con el resto de una vez y ya conocemos qué es spring las presiones y las novedades que no ofrecen en la próxima elección vamos a instalar nuestro entorno de desarrollo para poder comenzar a trabajar francamente sencilla
+
+
+
+
+
+
+
+----
 
 
 # 03 Instalación del entorno de trabajo 13:55
