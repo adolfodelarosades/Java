@@ -68,6 +68,17 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [616 Microservicios con Spring Boot y Cloud]()
 * [617 Git en Eclipse para Proyectos Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/617_Git_en_Eclipse_para_Proyectos_Java.md) :+1:
 
+# Chad Darby
+
+* [630 Eclipse IDE for Beginners: Increase Your Java Productivity]
+* [631 Java Database Connection: JDBC and MySQL]
+* [632 JSP, Servlets and JDBC for Beginners: Build a Database App]
+* [633 JSF 2.2 - Java Server Faces for Beginners - Build a DB App]
+* [634 Hibernate: Advanced Development Techniques]
+* [635 Spring & Hibernate for Beginners (includes Spring Boot)]
+* [636 Deploy Java Spring Apps Online to Amazon Cloud (AWS)]
+* [637 Full Stack: Angular and Spring Boot]
+
 # Cursos Madrid
 
 * [701 Desarrollo de aplicaciones con Java IFCT034PO](https://github.com/adolfodelarosades/Java/blob/master/temarios/701_Desarrollo_de_aplicaciones_con_Java_IFCT034PO.md)
