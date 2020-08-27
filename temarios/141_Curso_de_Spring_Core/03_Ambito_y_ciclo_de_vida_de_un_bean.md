@@ -369,7 +369,7 @@ La ventaja es que la interfaz nos ofrece un contrato, nos da la firma del métod
 
 <img src="images/12-04.png">
 
-### :computer: Ejemplo Proyecto usando `InitializingBean`
+### :computer: Ejemplo Proyecto usando `InitializingBean` `141-12-01-LifeCycle-InitializingBean`
 
 <img src="images/12-08.png">
 
