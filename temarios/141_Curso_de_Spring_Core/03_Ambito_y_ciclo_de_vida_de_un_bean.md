@@ -371,6 +371,8 @@ La ventaja es que la interfaz nos ofrece un contrato, nos da la firma del métod
 
 ### :computer: Ejemplo Proyecto usando `InitializingBean` `141-12-01-LifeCycle-InitializingBean`
 
+La estructura de este ejemplo cambia en relación a todos los que veniamos haciendo.
+
 <img src="images/12-08.png">
 
 *`beans.xml`*
@@ -386,7 +388,7 @@ La ventaja es que la interfaz nos ofrece un contrato, nos da la firma del métod
 </beans>
 ```
 
-Tenemos la clase modelo Persona.
+Tenemos la clase modelo `Persona`.
 
 *`Persona.java`*
 
@@ -562,7 +564,7 @@ public class App {
 }
 ```
 
-Al ejecutar la aplicación tenemos:
+Al ejecutar la aplicación tenemos los elementos cargados porque se han cargado manejando el ciclo de vida del bean.
 
 <img src="images/12-09.png">
 
@@ -570,7 +572,7 @@ Al ejecutar la aplicación tenemos:
 
 Analogamente tenemos tenemos la interfgaz `DisposableBean` que nos permite a traves del método `destroy()` realizar alguna tarea justo antes de que se destuya el bean.
 
-### :computer: Ejemplo Proyecto usando `DisposableBean`
+### :computer: Ejemplo Proyecto usando `DisposableBean` `141-12-02-LifeCycle-DisposableBean`
 
 <img src="images/12-10.png">
 
@@ -633,21 +635,25 @@ public class PersonaDAOImplMemory implements PersonaDAO, InitializingBean, Dispo
 }
 ```
 
-Al ejecutal la aplicación tenemos:
+Al ejecutal la aplicación podemos comprobar como realiza las mismas operaciones pero que también se han limpiado los datos de la lista.
 
 <img src="images/12-11.png">
 
+Esto con respecto a manejar el ciclo de vida mediante los interfaces.
+
 <img src="images/12-05.png">
 
-También tenemos la posibilidad de configurar el ciclo de vida vía XML usando las propiedades `init-method` y `destroy-method` las cuales aceptan un String con el nombre del método que queremos utilizar como *calback* del ciclo de vida de un bean.
+También tenemos la posibilidad de configurar el ciclo de vida vía XML usando las propiedades `init-method` y `destroy-method` aplicables al elemento bean, las cuales aceptan un String con el nombre del método que queremos utilizar como *calback* del ciclo de vida de un bean.
 
-Esto ayuda a rebajar el acoplamiento ya que si definimos el método pero en el xml no hacemos referencia a que un método es de inicialización simplemente es un método más en nuestra clase bean pero que no se invocaría en ese momento. Sin embargo si lo configuramos con XML si que se ejecutaría.
+El método tiene que ser `void`, sin parámetros, puede lanzar una excepción, esto ayuda a rebajar el acoplamiento ya que si definimos el método pero en el xml no hacemos referencia a que un método es de inicialización simplemente es un método más en nuestra clase bean pero que no se invocaría en ese momento. Sin embargo si lo configuramos con XML si que se ejecutaría.
 
-### :computer: Ejemplo Proyecto Init
+<img src="images/12-06.png">
+
+### :computer: Ejemplo Proyecto Init `141-12-03-LifeCycle-Init`
 
 <img src="images/12-12.png">
 
-A comparación de los ejemplos solo vamos a poner los archivos que han cambiado.
+A comparación de los ejemplos anteriores solo vamos a poner los archivos que han cambiado.
 
 En nuestro archivo `beans.xml` hemos colocado el atributo `init-method="init"` dentro de nuestro bean para indicar que el método inicial de este bean se llama `init`.
 
@@ -664,7 +670,7 @@ En nuestro archivo `beans.xml` hemos colocado el atributo `init-method="init"` d
 </beans>
 ```
 
-En la implementación de nuestro bean tenemos una clase que *ya no implementa ninguna interfaz*, pero implementa el método `init()` según las reglas antes indicadas y la tarea que hace es inicializar la lista. 
+En la implementación de nuestro bean tenemos una clase que *ya no implementa ninguna interfaz*, pero implementa el método `init()` según las reglas antes indicadas y la tarea que hace es inicializar la lista, no esta anotado con nada. 
 
 *`PersonaDAOImplMemory.java`*
 
@@ -721,9 +727,11 @@ Al ejecutar la aplicación Spring se encarga mediante a la metainformación ejec
 
 En el caso de `destroy` es muy similar a `init` pero se ejecutará justo antes de destruir el bean.
 
-### :computer: Ejemplo Proyecto Destroy
+### :computer: Ejemplo Proyecto Destroy `141-12-04-LifeCycle-Destroy`
 
 <img src="images/12-14.png">
+
+El método de destrucción en este caso se llama `destroy`.
 
 *`beans.xml`*
 
@@ -794,22 +802,21 @@ public class PersonaDAOImplMemory implements PersonaDAO {
 }
 ```
 
-Al ejecutar el proyecto tenemos:
+Al ejecutar el proyecto se tiene la misma lógica que antes:
 
 <img src="images/12-15.png">
 
-<img src="images/12-06.png">
-
-Si vamos a tener más de un bean que va a requerir de manejar su ciclo de vida podemos usar las opciones de `default-init-method` y `default-destroy-method` que pertenece a la etiqueta `<beans>`, la raíz, que nos permite definir un nombre de inicialización por defecto para todos nuestros beans y también un nombre de destrucción. Esto nos permite no estar declarando estos métodos en cada uno de los beans como lo hemos hecho hasta ahora, por lo que se podría usar en más de una clase que represente al bean.
+Podemos ver como funciona pero en este caso la configuración la hemos hecho vía XML.
 
 <img src="images/12-07.png">
 
+Si vamos a tener más de un bean que va a requerir de manejar su ciclo de vida podemos usar las opciones de `default-init-method` y `default-destroy-method` que pertenece a la etiqueta `<beans>` de la raíz, que nos permite definir un nombre de método de inicialización por defecto para todos nuestros beans y también un nombre de destrucción. Esto nos permite no estar declarando estos métodos en cada uno de los beans como lo hemos hecho hasta ahora, por lo que se podría usar en más de una clase que represente al bean.
 
-### :computer: Ejemplo Proyecto Default Init-Destroy
+### :computer: Ejemplo Proyecto Default Init-Destroy `141-12-05-LifeCycle-Default`
 
 <img src="images/12-16.png">
 
-Declaramos de forma "global" los nombres de los metodos de inicalización y destrucción para todos los beans que tengamos declarados (en este caso solo tenemos uno).
+Declaramos de forma "global" los nombres de los metodos de inicalización y destrucción para todos los beans que tengamos declarados (en este caso solo tenemos uno). Los hemos llamado `init` y `destroy` como antes.
 
 *`beans.xml`*
 
@@ -825,9 +832,71 @@ Declaramos de forma "global" los nombres de los metodos de inicalización y dest
 </beans>
 ```
 
+En todos los beans que se creen en este caso tenemos el mismo de antes se ejecutarían esos métodos.
+
+*`PersonaDAOImplMemory`*
+
+```java
+package com.openwebinars.lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+public class PersonaDAOImplMemory implements PersonaDAO {
+
+	List<Persona> personas = new ArrayList<Persona>();
+
+	public Persona findByIndex(int index) {
+		return personas.get(index);
+	}
+
+	public List<Persona> findAll() {
+		return personas;
+	}
+
+	public void insert(Persona persona) {
+		personas.add(persona);
+	}
+
+	public void edit(int index, Persona persona) {
+		personas.remove(index);
+		personas.add(index, persona);
+	}
+
+	public void delete(int index) {
+		personas.remove(index);
+	}
+
+	public void delete(Persona persona) {
+		personas.remove(persona);
+	}
+
+	public void init() throws Exception {
+		insert(new Persona("Luismi", 35));
+		insert(new Persona("Ana", 32));
+		insert(new Persona("Pepe", 34));
+		insert(new Persona("Julia", 39));
+	}
+
+	public void destroy() throws Exception {
+		System.out.println("");
+		System.out.println("Limpiando los datos de la lista");
+		personas.clear();
+	}
+
+}
+```
+
+Si tuvieramos más de un bean declarado en nuestro XML buscaría siempre los métodos `init` y `destroy` para poderlos llamar en el ciclo de vida adecuado. 
+
 Al ejecutar la aplicación tenemos:
 
 <img src="images/12-17.png">
+
+Y de esta manera vamos dando un comportamiento compacto con un hilo conductor en esta matería del manejo del ciclo de vida de un bean.
 
 # Contenido adicional 3
 
