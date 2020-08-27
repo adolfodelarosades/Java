@@ -9,16 +9,6 @@
 
 [PDF 3-1_Singleton_y_Prototype.pdf](pdfs/3-1_Singleton_y_Prototype.pdf)
 
-## Pregunta
-
-* Si estoy en una aplicacion web y tengo mis bean's con un scope singleton y dos usuarios se conectan a consumir el mismo bean , ¿se creara el mismo objeto para mis dos usuarios? ¿Cada usuario tendra su objeto independiente?
-
-R= El ámbito singleton indica que debería ser la misma instancia del bean. Es decir, que los dos usuarios tendrían acceso al mismo objeto. Por tanto, en un escenario así, sería siempre recomendable que los beans no almacenen ningún tipo de estado, evitando así posibles interferencias entre diferentes usuarios.
-
-* En una aplicacion con el protocolo REST usando el framework Spring cuando seria necesario el uso del ambito Prototype de un bean. Gracias por la respuesta.
-
-R= Es una buena pregunta. La verdad es que no se me han presentado muchas ocasiones de utilizarlo. Se me ocurre que se tuvieran que utilizar en algún tipo de contexto multihilo, en el cuál cada hilo de ejecución necesitaria algún tipo de copia original del bean. Lo habitual suele ser utilizar otro ámbitos, como el singleton o el de sesión.
-
 ## Transcripción
 
 <img src="images/10-01.png">
@@ -350,31 +340,6 @@ Finalmente el que vamos a ver es el de ámbito `application`, usamos `scope="app
 # 12 Manejo del ciclo de vida de un bean 9:16 
 
 [PDF 3-3_Manejo_del_ciclo_de_vida.pdf](pdfs/3-3_Manejo_del_ciclo_de_vida.pdf)
-
-## Preguntas
-
-* La configuración basada en XML no lo he utilizado mucho. Sin embargo en algunas entrevistas de trabajo me preguntan si conozco el manejo de estas pero para versiones de Spring 3.x o 4.x. ¿Que tanto a variado los conceptos,los paquetes, clases y métodos que vimos en esta sección con respecto a Spring 5?
-Y mi segunda observación es: los beans, Core y Context son la base del IoC y la inyección de dependencias. Entonces quiere decir que los demás productos como Spring Boot, internamente manejan estos mismos conceptos solo que son más transparentes para nostros. En Spring Boot vi que se puede definir beans en los mismos métodos de una clase con la antoción @Bean y desde otra clase invocar a esta dependencia. Me parecio extraño que al Contenedor no le importe si el bean nace de una clase o de un metodo, si lo encuentra dentro del contendedor le asigna esa dependecia al que lo necesita. ¿Es así o me equivoco?
-
-R= Tendríamos que ver casi clase a clase, pero en la gran mayoría de las ocasiones, las clases son las mismas en las versiones 3.X, 4.X y 5.X. Spring Framework, en sus primeras versiones, externalizaba la configuración de los beans a través de XML. Esto permitía configurar beans sin necesidad de acceder a su código fuente. Una de las grandes dificultades del uso de XML es lo verboso, es decir, para definir y usar unos pocos beans, hay que escribir mucho mucho código XML.
-
-A partir de la versión 2.5, se incorpora la posibilidad del uso de anotaciones y estereotipos; esto, conjugado con XML, permitía minimizar el código XML, definiendo algunos aspectos de configuración de los beans en el código fuente. Esto hace que código y configuración estén más cerca (principio de localidad).
-
-JavaConfig viene a posibilitar la eliminación completa de XML, realizando todas las configuraciones a través de código Java (es quién posibilita crear un bean como la instanciación de una clase dentro de un método).
-
-Por último, Spring Boot, nos permite realizar la configuración de aplicaciones Spring de una forma muy sencilla. Su uso no es obligatorio, pero es cierto que facilita grandemente la configuración e implementación de nuestras aplicaciones. Él se encarga de configurar muchos beans por nosotros que, de otra forma, tendríamos que configurar a mano (ya fuera por XML, anotaciones o Javaconfig).
-
-* Queria hacer dos preguntas:
-
-1. ¿Cómo se relacionan los metodos de inicializacion con los constructores de los beans?
-2. Si defino las propiedades de inicialozacion y destruccion a nivel de la etqueta beans, ¿todos los bean que defina dentro tienen que definir esos dos metodos obligatoriamente?
-
-R= Posiblemente ande algo espeso, y no soy capaz de entender bien tus preguntas. Si lo que te respondo no se corresponde con lo que me preguntas, te pido que me lo indiques y tratamos de solucionarlo.
-
-1. Spring Framework se encarga de que, una vez que se haya invocado el constructor del bean, se llame a los métodos que afectan al ciclo de vida. Si se utilizan las anotaciones @PostConstruct y @PreDestroy para anotar un método, estamos indicando que dichos métodos se ejecutan, respectivamente, justo después de la construcción del bean y justo antes de la destrucción del mismo, respectivamente. Sucede análogamente con los otros mecanismos (uso de interfaces o configuración a través de XML).
-2. Si en un bean, que podemos llamar MiBean, anotas algún método con, por ejemplo @PostConstruct, todas las instancias de dicho bean se verán afectadas por ese cambio en su ciclo de vida. Sin embargo si en un bean inyectas otro (algo que se va a ir haciendo a lo largo de este curso), por ejemplo, llamado MiOtroBean, y este segundo bean no tiene ningún método anotado con @PostConstruct, la instancia inyectada de tipo MiOtroBean no debe verse afectada por el cambio en el ciclo de vida que hemos hecho en MiBean.
-
-Como te decía si esto no es exactamente lo que preguntas te animo a que me lo puedas hacer saber y concretar un poco más.
 
 ## Transcripción
 
