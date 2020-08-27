@@ -33,7 +33,7 @@ En este ejemplo tenemos tres beans que hacen referencia al bean `accountDao`, es
 
 Para poder indicarlo explícitamente, a un que como ya dijimos para el caso de singleton es el comportamiento por defecto, se hace con el atributo `scope=singleton` de manera que reforzamos la idea de que de este bean solo va existir una instancia compartida para todos.
 
-### :computer: Ejemplo Proyecto Singleton
+### :computer: Ejemplo Proyecto Singleton `141-10-01-Singleton`
 
 <img src="images/10-07.png">
 
@@ -153,9 +153,11 @@ Este es el comportamiento que podemos encontrar.
 
 <img src="images/10-05.png">
 
-Frente al ambito Singleton tenemos el ambito Prototype, en este caso cada vez que hagamos referencia al bean, cada vez que lo requiramos se creara una nueva instancia. Esta instancia además se va a crear en tiempo de ejecución y lo hariamos con `scope="prototype"`. Este uso es muy  poco usual.
+Frente al ambito Singleton tenemos el ambito **Prototype**, en este caso cada vez que hagamos referencia al bean, cada vez que lo requiramos se creara una nueva instancia. 
 
 <img src="images/10-06.png">
+
+Esta instancia además se va a crear en tiempo de ejecución y lo hariamos con `scope="prototype"`. Este uso es muy  poco usual.
 
 ### :computer: Ejemplo Proyecto Prototype
 
@@ -181,7 +183,7 @@ Frente al ambito Singleton tenemos el ambito Prototype, en este caso cada vez qu
 
 Usamos `scope="prototype"`.
 
-*`Saludator.java`*
+*`Saludator.java`*  Este archivo sigue sindo igual.
 
 ```java
 package com.openwebinars.beans;
@@ -200,8 +202,6 @@ public class Saludator {
 
 }
 ```
-
-Este archivo sigue sindo igual.
 
 *`IEmailService.java`*
 
@@ -300,7 +300,7 @@ Si el alcance lo tuvieramos como `scope="singleton"` si los mensajes si se envia
 
 <img src="images/10-10.png">
 
-Aquí la idea es ilustrar `scope="prototype"` para comprobar que cada que requiramos un bean se crea una nueva instancia caso contrario con `scope="singleton"` donde se usa la misma instancia.
+Aquí la idea es ilustrar `scope="prototype"` para comprobar que cada que requiramos un bean se crea una nueva instancia, caso contrario con `scope="singleton"` donde se usa la misma instancia.
 
 # 11 Otros ámbitos 4:25 
 
