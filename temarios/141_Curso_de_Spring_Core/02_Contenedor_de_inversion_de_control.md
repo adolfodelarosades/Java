@@ -79,10 +79,12 @@ Es todo un ecosistema de clases que nos van a permitir construir ese *Contenedor
 El contenedor lo que va a gestionar son *Beans*, **un *Bean* no es más que un *objeto* gestionado por el contenedor de Inversión de Control**, y que defineremos a partir de una serie de Metadatos, es decir es un como un objeto empoderado.
 
 <img src="images/6-06.png">
-AAAA
-Comenzaremos con XML.
+
+Si seguimos hablando del Contenedor de Inversión de Control, hemos visto las interfases o clases que lo pueden articular, como lo podríamos usar, nos centraremos en estas primeras lecciones sobre todo en usar la interfaz `ApplicationContext` aunque construyamos sobre una referencia a esa interfaz un objeto en particular, de alguno de los que ya hemos visto, este interfaz será el responsable de crear la instancia, de configurar los beans, de ensamblarlo, etc. y la meta información la podremos proporcionar de distintas maneras a través de **descritores XML** usando **anotaciones sobre clases** o incluso **directamente con código Java** a lo largo del curso iremos aprendiendo estas tres maneras si bien comenzaremos con XML.
 
 <img src="images/6-07.png">
+
+Vamos a pasar a crear nuestro primer proyecto. 
 
 ### :computer: Ejemplo Proyecto con `ClassPathXmlApplicationContext`
 
