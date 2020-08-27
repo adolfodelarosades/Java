@@ -38,22 +38,6 @@ Cabe recordar que la dependencia *maven* que necesitamos para comenzar a usar el
 
 En esta lección hemos visto el uso de ambas clases. Durante el resto de lecciones utilizaremos la primera de ellas.
 
-
-## Preguntas
-
-* Tal vez sea una pregunta muy básica pero solo para entender. ¿A qué te refieres con "Class Path" ?, al conjunto de directorios y archivos dentro del proyecto que estan en "src/main" ? Porque en los sistemas operativos como Windows y Linux existe también una variable de entorno llamado CLASSPATH. Y si es así ¿El segundo ejemplo el archivo "beans02.xml" se podría llamar con "ClassPathXMLApplicationContext"?
-
-   El classpath es el conjunto de rutas donde la JVM busca las clases definidas por el usuario a la hora de ejecutar una aplicación Java. En el contexto de este ejemplo, se plantean diferentes formas de cargar la definición de beans. Una de ellas sería ubicando el fichero de configuración en algún lugar del classpath.
-
-* Estoy con STS 4, ya que no esta disponible STS 3 y no me aparece la opcion de "spring bean configuration file" para generar el bean, como puedo hacerlo?
-
-   Para que no tengas que crear dicho bean como un fichero más de texto o XML, cosa que se podría hacer, y que al final tendría el mismo efecto, puedes tratar de aplicar dos soluciones. A través del Marketplace de Eclipse (Help > Eclipse Marketplace)
-
-Sobre una instalación "fresca" de eclipse, puedes instalar Spring Tool Suite 3, a través del marketplace. Tienes el enlace del plugin aquí: https://marketplace.eclipse.org/content/spring-tools-3-standalone-edition
-Sobre tu instalación de Spring Tool Suite 4, puedes instalar Spring Tools 3 Add-On for Spring Tools 4. Según la web de este plugin, trata de añadir las funcionalidades de la versión 3, enfocado sobre todo en el tratamiento de XML.
-
-* Acabo de instalar Spring Tools 3 Add-On for Spring Tools 4 y ya me aparecen las opciones de STS 3 por lo que puedo generar "spring bean configuration file"
-
 ## Transcripción
 
 <img src="images/6-01.png">
@@ -568,28 +552,6 @@ Spring nos ofrece la posibilidad de inyectar valores dentro de una colección. L
 </bean>
 ```
 
-## Preguntas
-
-* Con relacion a la inyeccion de dependencias dada una interface, tengo las siguientes dudas:
-1- ¿No es posible implementar dicha interface en dos clases? ¿Estaria en contra de las buenas practicas de programacion?
-
-2- Existe alguna forma de indicarle al contexto cual bean (de las dos que implementan una interface) usar?
-
-R= 1 - Si se puede. En principio no vas a repetir una interfaz si ya la tienes.
-2- Los bean los puedes crear con diferentes ID´s y que se construyan con la misma clase, el problemas es que tendras que decir en algún momento a la interfaz que bean coger para mostrar los datos correctos.
-
-* En el ejemplo del proyecto 07.3-Referencias "Un bean que referencia a otro bean", por casualidad añadi a los metodos que ya existian, un constructor en la clase Saludator así
-private String mensaje; public Saludator(String mensaje) { this.mensaje = mensaje; }
-Y automáticamente me aparecio un error en el "beans.xml": No constructor with 0 arguments defined in class 'com.openwebinars.referencias.Saludator',.
-Y cuando elimine el constructor, el programa funcionó sin problemas.
-Mi pregunta es, si en el beans.xml defino el bean "saludator" se va inyectar vía "Setter", ¿por qué le importa que exista un constructor, no debería de obviarlo?
-
-R= Java crea por defecto un constructor sin argumentos para cualquier clase que no tenga constructor. Pero en el momento que tenemos un constructor definido por el usuario, ese constructor ppr defecto desaparece.
-
-¿Puedes probar a crear, además del constructor con argumentos, uno vacío, y comprobar si el error no aparece?
-
-R= Con ese constructor estas forzando que al crear la clase se le pase algún parámetro, cosa que si lo sobrecargas poniendo uno sin parámetros te aceptará las dos opciones.
-
 ## Transcripción
 
 <img src="images/8-01.png">
@@ -1074,16 +1036,6 @@ En el resumen del profesor hay más información para complementar.
 Podemos excluir un bean de ser *candidato* a inyectarse automáticamente mediante el atributo `autowired-candidate=false`. De esa forma, solo podrá inyectarse de forma explícita.
 
 También podemos limitar los candidatos a ser autoinyectados utilizando un patrón sobre los nombres de los beans y el atributo `default-autowired-candidates` (***este es solo aplicable al elemento raiz `<beans>`***). Por ejemplo, para que todos ellos incluyeran el nombre repository, podríamos usar el patrón `*Repository`.
-
-## Preguntas
-
-* Estimado buen dia. Como podria utilizar de forma explicita el bean identificado como englishSaludator Agradezco la colaboracion y la calidad del curso.
-
-R= Deberia realizar algo como esto:
-
-`saludador = appContext.getBean("englishSaludator", Saludator.class);`
-
-Se podria realizar de alguna forma anexa cuando al metodo getBean( ) solo le especifico el tipo. Gracias de antemano
 
 ## Transcripción
 
