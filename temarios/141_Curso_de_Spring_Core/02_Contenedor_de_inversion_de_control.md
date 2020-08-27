@@ -569,14 +569,13 @@ Spring nos ofrece la posibilidad de inyectar valores dentro de una colección. L
 
 <img src="images/8-02.png">
 
-Si recordamos cuando hablamos sobre la Inyección de dependencias haciamos referencia a que si un objeto necesita de otros dos 
-objetos no va a tener que instanciarlos, sino que va a tener que tiene dos dependencias y espera que alguien se las proporcione.
+Si recordamos cuando hablamos sobre la Inyección de dependencias haciamos referencia a que si un objeto necesita de otros dos objetos no va a tener que instanciarlos, sino que va a declarar que tiene dos o más dependencias y que espera que alguien se las proporcione.
 
 <img src="images/8-03.png">
 
 Con Spring podemos crear esas dependencias de varias maneras:
 
-* Vía Setters
+* Vía Setters(o property)
 * Vía Constructor
 * Referencias entre beans
 
@@ -592,7 +591,7 @@ Como se observa en el código estamos declarando la dependencia(el mensaje) como
 
 Lo hacemos anidando dentro del elemento `bean` el elemento `property` que hace referencia mediante su atributo `name` al nombre de la propiedad y mediante `value` el valor que va a ser inyectado. De esta forma cuando se carge el Contenedor de IoC podremos comprobar como `mensaje` a través de el setter `setMensaje(String str)` Spring asigna el valor y ya podemos hacer con el lo que corresponda.
 
-### :computer: Ejemplo Proyecto Setter
+### :computer: Ejemplo Proyecto Setter `141-08-01-inyeccion-via-setter`
 
 <img src="images/8-09.png">
 
@@ -612,7 +611,6 @@ En este proyecto tenemos nuestro archivo `beans.xml`:
 ```
 
 Hemos añadido el elemento `property` al bean para asignar un valor a la propiedad `mensaje` de la clase `Saludator`.
-
 
 Por lo tanto la clase `Saludator` cuenta con la propiedad `mensaje` y el método `setMensaje(String str)` para asignarle un valor.
 
@@ -706,7 +704,7 @@ El secreto se encuentra dentro de la declaración de nuestro `bean` donde hemos 
 
 Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes, incluso podemos añadir los elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
 
-### :computer: Ejemplo Proyecto Inyección Vía Constructor
+### :computer: Ejemplo Proyecto Inyección Vía Constructor `141-08-02-inyeccion-via-constructor`
 
 <img src="images/8-12.png">
 
@@ -798,7 +796,7 @@ La clase o bean `EmailService` tiene una propiedad llamada `saludator` de tipo `
 
 De esta forma tenemos la posibilidad de inyectar un bean dentro de otro.
 
-### :computer: Ejemplo Proyecto Referencias con Clases
+### :computer: Ejemplo Proyecto Referencias con Clases `141-08-03-referencias-a-beans`
 
 <img src="images/8-14.png">
 
@@ -921,7 +919,7 @@ Podemos tener beans que implementan Interfaces, de manera que podemos declarar p
 
 Todo esto lo tenemos en el siguiente ejemplo.
 
-### :computer: Ejemplo Proyecto Referencias con Interfaces
+### :computer: Ejemplo Proyecto Referencias con Interfaces `141-08-04-interfaz`
 
 <img src="images/8-16.png">
 
