@@ -42,9 +42,11 @@ En esta lección hemos visto el uso de ambas clases. Durante el resto de leccion
 
 <img src="images/6-01.png">
 
+Hola a todos vamos a continuar con nuestro curso de Spring hablando del contenedor de inversión de control de Spring.
+
 <img src="images/6-02.png">
 
-Tenemos el modulo del *Core Container* el curso esta basado en este modulo sobre todo en la parte de `Context`.
+Si recordamos esta imágen sobre el proyecto de Spring Framework y los módulos que lo conforman veíamos que había un apartado podremos decir un pequeño módulo o incluso submódulo dentro del llamado **Core Container** será en el uso de este en el que nosotros centraremos el curso, sobre todo en la parte de **Context**.
 
 <img src="images/6-03.png">
 
@@ -56,7 +58,7 @@ El Contenedor de Inversión de Control de Spring se basa en el uso de dos paquet
 Los elementos más básicos que utilizaremos seran:
 
 * `BeanFactory` lo más elemental para poder manejar cualquier bean - objeto.
-* `ApplicationContext` (la que usaremos) es una interfaz superset de `BeanFactory` que añade más funcionalidades.
+* `ApplicationContext` (la que usaremos) es una interfaz superset de `BeanFactory` que añade más funcionalidades como la programación orientada a Aspectos, manejo de recursos, contexto especifico, internacionalización, etc. Será la interfaz que nosotros utilizaremos.
 
 <img src="images/6-04.png">
 
@@ -64,19 +66,20 @@ Diagrama de clases que vamos poder tener a nuestra disposición.
 
 * `BeanFactory` Partimos de la raíz el más sencillo de todos.
 * `ApplicationContext`: Trabajaremos con esta Interfaz y tiene dos clases principales que la implementan, aun que existen otras.
-* `ClassPathXMLApplicatioContext`: Se encargara de cargar el contexto desde un archivo XML que esta ubicado dentro del classpath
+* `ClassPathXMLApplicatioContext`: Se encargará de cargar el contexto desde un archivo XML que esta ubicado dentro del classpath.
 * `FileSystemXMLApplicationContext`: Busca la configuración en el sistema de ficheros.
 * `WebApplicationContext`: Interfaz para aplicaciones Web.
 * `XMLBeanFactory` Esta no la usaremos
+* `AnnotationConfigApplicationContext` Son algunas otras que veremos más adelante
 
-Es todo un ecosistema de clases que nos van a permitir construir ese __*Contenedor de Inversión de Control*__.
+Es todo un ecosistema de clases que nos van a permitir construir ese *Contenedor de Inversión de Control*.
 
 <img src="images/6-05.png">
 
-El contenedor lo que va a gestionar son *Beans*, un *Bean* no es más que un *objeto* gestionado por el contenedor de Inversión de Control, y que defineremos a partir de una serie de Metadatos, es decir es un como un objeto empoderado.
+El contenedor lo que va a gestionar son *Beans*, **un *Bean* no es más que un *objeto* gestionado por el contenedor de Inversión de Control**, y que defineremos a partir de una serie de Metadatos, es decir es un como un objeto empoderado.
 
 <img src="images/6-06.png">
-
+AAAA
 Comenzaremos con XML.
 
 <img src="images/6-07.png">
