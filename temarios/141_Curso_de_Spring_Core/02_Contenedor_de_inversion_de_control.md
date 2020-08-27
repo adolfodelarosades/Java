@@ -350,7 +350,7 @@ Durante este ejemplo solo utilizaremos algunas de las propiedades necesarias de 
 
 ## Transcripción
 
-En esta lección aprenderemos a crear un *bean* para poderlo utilizar.
+En esta lección aprenderemos saber que es un bean y a crear un *bean* para poderlo utilizar.
 
 <img src="images/7-01.png">
 
@@ -360,9 +360,9 @@ Un bean no deja de ser un simple objeto, una clase *pojo* manejada por el Conten
 
 <img src="images/7-03.png">
 
-En XML aquí tenemos un ejemplo muy básico de una clase llamada `Saludator` la cual será un servicio encargada de saludar. Se utiliza la etiqueta `<bean>` con el atributo `id` identificamos al bean y con el atributo `class` proporcinamos la ruta completa de la clase 
+En XML aquí tenemos un ejemplo muy básico de una clase llamada `Saludator` la cual será un servicio encargada de saludar. Se utiliza la etiqueta `<bean>` con el atributo `id` identificamos al bean y con el atributo `class` proporcinamos la ruta completa de la clase, incluyendo el paquete y subpaquetes, el nombre tiene que ser único. 
 
-### :computer: Ejemplo Proyecto Beans 
+### :computer: Ejemplo Proyecto Beans `141-07-MiPrimerBean` 
 
 <img src="images/7-05.png">
 
@@ -424,7 +424,7 @@ public class App {
       //Abrir contexto
       ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
 			
-      Saludator saludator = null;
+      Saludator saludador = null;
 		
       // 1. getBean con ID y casting
       //saludador = (Saludator) appContext.getBean("saludator");
@@ -446,13 +446,19 @@ public class App {
 
 Lo que queremos es que se imprima el saludo y comprobar que se puede hacer de estas 3 maneras.
 
+La primera es a través del método `getBean("saludator")` que recibe el `id` del bean y que como podemos comprobar en la documentación devuelve un Object lo cual nos obliga a que nosotros hagamos un casting.
+
 Probando el caso 1 tenemos:
 
 <img src="images/7-05.png">
 
+La segunda es a través del método `getBean("saludator", Saludator.class)` donde indicamos el `id` y el tipo si es verdad que estamos acotando bastante mucho más que con las otras dos versiones el bean que queremos por que le indicamos el `id` del bean y le indicamos también la clase de esta manera no puede haber margen de error.
+
 Probando el caso 2 tenemos:
 
 <img src="images/7-06.png">
+
+La tercera y última opción es a través del método `getBean(Saludator.class)`, en apariencia parece ser que es la menos útil sin embargo va a ser la que más lo sea si recuperamos el bean a partir de su `.class` a sabiendas de que no este repetido.
 
 Probando el caso 3 tenemos:
 
