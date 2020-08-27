@@ -1,9 +1,9 @@
 # 2. Contenedor de inversión de control 42m
 
-* Contenedor de IoC 13:01 
-* Mi primer Bean 6:49 
-* Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
-* Inyeccion automática 9:22 
+* 06 Contenedor de IoC 13:01 
+* 07 Mi primer Bean 6:49 
+* 08 Inyeccion de dependencias: vía setter vs. vía constructor 12:58 
+* 09 Inyeccion automática 9:22 
 * Contenido adicional  4
 
 # 06 Contenedor de IoC 13:01 
@@ -1080,11 +1080,11 @@ Los tipos de AUTOWIRED que tenemos son:
 
 <img src="images/9-06.png">
 
-### :computer: Ejemplo Proyecto Autowired
+### :computer: Ejemplo Proyecto Autowired `141-09-01-Autowired`
 
 <img src="images/9-09.png">
 
-El único archivo que sufre cambios en comparación con el ejemplo antterior es `beans.xml`.
+El único archivo que sufre cambios en comparación con el ejemplo anterior es `beans.xml`.
 
 *`beans.xml`*
 
@@ -1142,7 +1142,7 @@ De forma que al ejecutar la aplicación tenemos:
 
 <img src="images/9-11.png">
 
-Tendríamos que se ha cargado el bean `Saludator` cuando lo requerimos individualmente, pero sin embargo `EmailService` que tiene la dependencia de `Saludator` al no poder satisfacerla se ha quedado como `null` y conado lo invocamos con el método `enviarEmailSaludo` que es donde hace referencia a `saludator.saludo()` al ser una referencia nula a provocado un `NullPoiterException` por que no se ha provocado la auto-inyección automática.
+Tendríamos que se ha cargado el bean `Saludator` cuando lo requerimos individualmente, pero sin embargo `EmailService` que tiene la dependencia de `Saludator` al no poder satisfacerla se ha quedado como `null` y cuando lo invocamos con el método `enviarEmailSaludo` que es donde hace referencia a `saludator.saludo()` al ser una referencia nula a provocado un `NullPoiterException` por que no se ha provocado la auto-inyección automática.
 
 *`EmailService.java`*
 
@@ -1192,6 +1192,8 @@ De forma que al ejecutar la aplicación todo vuelve a funcionar.
 
 <img src="images/9-08.png">
 
+La opción Primary en el caso de que tengamos más de un bean de un mismo tipo supongamos que tenemos dos `saludator` para saludar en inglés y en castellano nos podría dar un quebradero de cabeza.
+
 ### :computer: Ejemplo Proyecto Primary
 
 <img src="images/9-13.png">
@@ -1221,6 +1223,8 @@ En ocaciones puede que tengamos dos beans del mismo tipo. Por ejemplo tenemos do
 	
 </beans>
 ```
+
+Como podemos comprobar tenemos dos beans del mismo tipo en el cual se inyectan dos mensajes distintos uno en castellano y el otro en inglés.
 
 Al ejecutar la aplicación tenemos:
 
