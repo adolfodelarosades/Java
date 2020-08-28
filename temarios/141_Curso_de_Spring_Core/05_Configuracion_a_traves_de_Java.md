@@ -355,7 +355,7 @@ De esta forma podríamos tener un comportamiento muy parecido al del ejemplo 16-
 
 ### ¿Es mejor definir un `@Bean` a través de una interfaz o del tipo concreto de una clase?
 
-Hemos podido ver en el vídeo que el tipo de retorno de un método anotado con `@Bean` puede ser una clase o bien una interfaz (o supertipo).
+Hemos podido ver que el tipo de retorno de un método anotado con `@Bean` puede ser una clase o bien una interfaz (o supertipo).
 
 ```java
 @Configuration
@@ -372,7 +372,7 @@ El uso de una interfaz, en lugar del tipo concreto, limita la visibilidad del be
 
 ### Un ejemplo más completo del uso de `@Bean`
 
-Es posible que con el ejemplo del vídeo no le veamos toda la utilidad a la configuración JavaConfig con `@Bean`. Eso se debe a que estamos trabajando con una serie de clases para las cuales tenemos acceso al código fuente. Es más, las hemos codificado todas, y podemos añadirle los estereotipos. Pero, ¿y si no fuera el caso? ¿Y si quisieramos crear una serie de beans a partir de clases implementadas por terceros, a cuyo código fuente no tenemos acceso y que no están estereotipadas? Ahí, el uso de JavaConfig y `@Bean` cobran más sentido.
+Es posible que con el ejemplo de la lección no le veamos toda la utilidad a la configuración JavaConfig con `@Bean`. Eso se debe a que estamos trabajando con una serie de clases para las cuales tenemos acceso al código fuente. Es más, las hemos codificado todas, y podemos añadirle los estereotipos. Pero, ¿y si no fuera el caso? ¿Y si quisieramos crear una serie de beans a partir de clases implementadas por terceros, a cuyo código fuente no tenemos acceso y que no están estereotipadas? Ahí, el uso de JavaConfig y `@Bean` cobran más sentido.
 
 A continuación os dejo el código fuente de un ejemplo completo de nuestro curso de Hibernate:
 
@@ -528,11 +528,11 @@ Ejemplo de `@Primary` con `@Bean`
 
 Vamos a ir viendo algunos de los ejemplos que hemos creado para ilustrarlo.
 
-### :computer: Ejemplo Proyecto JavaConfig Bean
+### :computer: Ejemplo Proyecto JavaConfig Bean `141-19-01-Bean`
 
 <img src="images/19-13.png">
 
-En este primer ejemplo hemos cambiado radicalmente hemos pasado de de usar el escaneo de componentes a crear todos nuestros beans, de manera que se creen dentro de esta clase de configuración.
+En este primer ejemplo hemos cambiado radicalmente, hemos pasado de de usar el escaneo de componentes a crear todos nuestros beans, de manera que se creen dentro de esta clase de configuración.
 
 *`AppConfig.java`*
 
@@ -792,7 +792,7 @@ Nosotros vamos a ver un ejemplo de como crear la inyección de una propiedad que
 
 Vamos a ver el ejemplo.
 
-### :computer: Ejemplo Proyecto Value
+### :computer: Ejemplo Proyecto Value `141-19-02-Value`
 
 <img src="images/19-15.png">
 
@@ -806,7 +806,8 @@ mensaje=Hola a todos desde un fichero de propiedades!
 
 Dónde tenemos una propiedad, los ficheros de properties son ficheros muy sencillos que nos permiten crear un listado de pares clave-valor, dentro de un fichero textual dónde se pone primero la clave = y el valor, incluso no es necesario que pongamos comillas a las a las cadenas de caracteres.
 
-Para configurar el uso de las properties usamos la anotación `@PropertySource("classpath:/ejemplo.properties")` donde indicamos como parámetro el fichero de properties, usamos la palabra `classpath` para que busque el archivo dentro del class path de la aplicación. 
+Para configurar el uso de las properties usamos la anotación `@PropertySource("classpath:/ejemplo.properties")` donde indicamos como parámetro el fichero de properties, usamos la palabra `classpath` para que busque el archivo dentro del class path de la aplicación. Como sabemos la carpeta `src/main/resources` esta dentro del class path, no lo tenemos definido dentro de ningún paquete con lo cual esta en la raí 
+Para configurar el uso de las properties usamos la anotación `@PropertySource("classpath:/ejemplo.properties")` donde indicamos como parámetro el fichero de properties, usamos la palabra `classpath` para que busque el archivo dentro del class path de la aplicación. Como sabemos la carpeta `src/main/resources` esta dentro del class path, no lo tenemos definido dentro de ninun paquete por lo cual esta en la raíz del class path, cargaría el fichero de properties y nos permitiría utilizarlo. 
 
 *`AppConfig.java`*
 
@@ -827,7 +828,7 @@ public class AppConfig {
 
 Con esto carga el fichero de properties y ya podemos usarlo.
 
-En la clase `Saludator` que es un componente, es donde vamos a inyectar el valor del mensaje:
+En la clase `Saludator`  que es un componente, es donde vamos a inyectar el valor del mensaje:
 
 *`Saludator.java`*
 
