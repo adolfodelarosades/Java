@@ -16,7 +16,7 @@
 
 <img src="images/20-01.png">
 
-Vamos a finalizar nuestro curso de Spring Core con una sucesión de lecciones en la que iremos construyendo poco a poco una aplicación sencilla, pero que integre la mayoría de los conceptos con los que hemos trabajado a lo largo del curso. A este proyecto lo vamos a llamar MovieAdvisor y va a ser un sencillo recomendador de películas.
+Vamos a finalizar nuestro curso de Spring Core con una sucesión de lecciones en la que iremos construyendo poco a poco una aplicación sencilla, pero que integre la mayoría de los conceptos con los que hemos trabajado a lo largo del curso. A este proyecto lo vamos a llamar **MovieAdvisor** y va a ser un sencillo recomendador de películas.
 
 <img src="images/20-02.png">
 
@@ -24,7 +24,7 @@ Vamos a trabajar con un fichero que es fácilmente descargable, yo lo he tuneado
 
 Lo que vamos a desarrollar es una herramienta de línea de comandos, veremos después que sintaxis queremos tener a la hora de invocarla, aunque nosotros fuera por no emborronar un poco lo mismo invocaremos directamente desde Eclipse.
 
-Los datos los tendremos en un fichero CSV que hemos procesado y que lo tendréis disponible en el código fuente y que para cada película tiene asignado un `id` identificador, `title` en idioma original, `year` año y `genres` una sucesión separada por comas de los géneros en los cuales podemos enmarcar esa película, cómo vemos el separador de datos de columnas sería (`;`) como separador de géneros tendríamos la coma (`,`) para hacer de separador dentro de esa columna.
+Los datos los tendremos en un fichero CSV que hemos procesado y que lo tendréis disponible en el código fuente y que para cada película tiene asignado un `id` identificador, `title` en idioma original, `year` año y `genres` una sucesión separada por comas de los géneros en los cuales podemos enmarcar esa película, cómo vemos el separador de datos de columnas sería (`;`) y como separador de géneros tendríamos la coma (`,`) para hacer de separador dentro de esa columna.
 
 
 ```txt
@@ -182,6 +182,8 @@ Aunque tambén podríamos utilizar alguna otra variante o usar [Lombok](https://
 *`Film.java`*
 
 ```java
+package com.openwebinars.movieadvisor.model;
+
 import java.util.List;
 
 /**
@@ -304,7 +306,7 @@ Aquí creamos una nueva clase que llamaremos `Appconfig`
 
 <img src="images/21-17.png">
 
-Debemos indicar que es una clase de configuración con la anotación `@Configuration` ya que estamos usando Java Config, también vamos a indicar que vamos a escanear los componentes indicando el paquete base con `@PropertySource("classpath:/movieadvisor.properties")` escaneará todos los beans que se encuentren en este paquete o por debajo, esto nos va a permitir un sistema de configuración mixto de Java Config con Anotaciones. Por ahora esto es todo lo que necesitamos.
+Debemos indicar que es una clase de configuración con la anotación `@Configuration` ya que estamos usando Java Config, también vamos a indicar que vamos a escanear los componentes indicando el paquete base con `@ComponentScan(basePackages="com.openwebinars.movieadvisor")` escaneará todos los beans que se encuentren en este paquete o por debajo, esto nos va a permitir un sistema de configuración mixto de Java Config con Anotaciones. Por ahora esto es todo lo que necesitamos.
 
 *`AppConfig.java`*
 
@@ -316,7 +318,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages="com.openwebinars.movieadvisor")
-@PropertySource("classpath:/movieadvisor.properties")
 public class AppConfig {
 
 }
@@ -437,7 +438,7 @@ Para ello vamos a crear una nueva clase, en este caso no lo voy a crear como un 
 
 <img src="images/21-23.png">
 
-Si alguien quiere, se podría transformar esto en un bean que pudiera ser capaz de leer el fichero. Está separación es porque este implementación del DAO es en memoria, es decír sabe que lo va a tener, pero no sabe de dónde surgen los datos. Si lo hiciera con otro bean los datos podrían surgir de otro sitio que no fuese un fichero `csv` eso también lo dejo para que ustedes puedan tener cancha.
+Si alguien quiere, se podría transformar esto en un bean que pudiera ser capaz de leer el fichero. Está separación es porque esta implementación del DAO es en memoria, es decír sabe que lo va a tener, pero no sabe de dónde surgen los datos. Si lo hiciera con otro bean los datos podrían surgir de otro sitio que no fuese un fichero `csv` eso también lo dejo para que ustedes puedan tener cancha.
 
 En este caso vamos a crear un método estatico `readFile` que va a devolver una lista de películas, podriamos ponerla también como colección, va a recibir tres argumentos `path`, `separator` y `listSeparator`. Ahora veremos que los podemos colocar en el fichero de properties que vamos a crear.
 
@@ -490,7 +491,7 @@ y ahora ya nos podemos centrar en el mapeo, que queda asi:
 })
 ```
 
-Cada línea del fichero incluye todos los datos de una película, lo que tenemos que hacer es "splitiarlos" es decir trocearlos, por el separador que utilizamos, que en primera instancia es el punto y coma (;), esto nos devolverá un array de Strings el cual ammacenamos en `values`. Por lo que en `value[0]` tendríamos el `id` (como String) pero nosotros lo declaramos como `long` por lo que tendíamos que hacer un cast `Long.parseLong(values[0])`, en `value[1]` tendríamos el título de la película, en `value[2]` tendríamos el año de la película (como String) y en el último `value[3]` tendríamos el listado con los generos, por lo que si queremos obtener cada uno de ellos tendriamos que "splitiarlos" por la coma que es el separador de los generos, `Arrays.asList(values[3].split(listSeparator))` y lo que hacemos es construir con `Arrays.asList` una lista de Strings con cada uno de los generos. Todo esto se lo pasamos al constructor con parámetros `Film(...)` y es lo que devolvemos, por cada línea devolvemos un objeto `Film`.
+Cada línea del fichero incluye todos los datos de una película, lo que tenemos que hacer es "splitiarlos" es decir trocearlos, por el separador que utilizamos, que en primera instancia es el punto y coma (;), esto nos devolverá un array de Strings el cual almacenamos en `values`. Por lo que en `value[0]` tendríamos el `id` (como String) pero nosotros lo declaramos como `long` por lo que tendíamos que hacer un cast `Long.parseLong(values[0])`, en `value[1]` tendríamos el título de la película, en `value[2]` tendríamos el año de la película (como String) y en el último `value[3]` tendríamos el listado con los generos, por lo que si queremos obtener cada uno de ellos tendriamos que "splitiarlos" por la coma que es el separador de los generos, `Arrays.asList(values[3].split(listSeparator))` y lo que hacemos es construir con `Arrays.asList` una lista de Strings con cada uno de los generos. Todo esto se lo pasamos al constructor con parámetros `Film(...)` y es lo que devolvemos, por cada línea devolvemos un objeto `Film`.
 
 
 ```java
@@ -506,7 +507,7 @@ result = Files.lines(Paths.get(ResourceUtils.getFile(path).toURI()))
 
 Este bloque leerá línea a línea el fichero y procesara todas las películas almacenandolas en el listado.
 
-Pero se nos obliga a que pongamos un bloque try catch sobre el bloque, porque tenemos posibilidad de tener algún problemilla a la hora de leer el fichero o a la hora de cualquier cosa, podríamos indicar un mensaje de error y con `System.exit(-1)` podemos indicar que hemos salido de manera erronea de la aplicación.
+Pero se nos obliga a que pongamos un bloque `try catch` sobre el bloque, porque tenemos posibilidad de tener algún problemilla a la hora de leer el fichero o a la hora de cualquier cosa, podríamos indicar un mensaje de error y con `System.exit(-1)` podemos indicar que hemos salido de manera erronea de la aplicación.
 
 El código completo de nuestra clase `UtilFilmFileReader` es el siguiente:
 
@@ -515,6 +516,7 @@ El código completo de nuestra clase `UtilFilmFileReader` es el siguiente:
 ```java
 package com.openwebinars.movieadvisor.dao;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -525,6 +527,7 @@ import java.util.stream.Collectors;
 import org.springframework.util.ResourceUtils;
 
 import com.openwebinars.movieadvisor.model.Film;
+
 
 /**
  * Clase de utilidad, que incluye un método estático para la lectura
@@ -553,7 +556,7 @@ public class UtilFilmFileReader {
  			// @formatter:on
 
 
-		} catch (Exception e) {
+		} catch (IOException e) {
 			System.err.println("Error de lectura del fichero de datos: imdb_data");
 			System.exit(-1);
 		}
@@ -584,10 +587,6 @@ public void init() {
 Pero nos falta saber de donde vamos a recuperar el valor para cada uno de los parámetros. Lo veremos en la próxima lección
 
 # 23 Repositorio y acceso a datos (Parte II) 9:30 
-
-## Resumen Profesor
-
-No existe.
 
 ## Transcripción
 
