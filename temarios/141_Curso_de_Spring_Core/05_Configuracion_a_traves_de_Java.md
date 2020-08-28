@@ -35,11 +35,11 @@ Más cambios en nuestra clase principal, en lugar de usar `ClassPathXmlApplicati
 
 Lo podemos comprobar en el siguiente ejemplo.
 
-### :computer: Ejemplo Proyecto JavaConfig
+### :computer: Ejemplo Proyecto JavaConfig `141-18-01-JavaConfig`
 
 <img src="images/18-08.png">
 
-Volvemos al ejemplo del principio (*Ej. 141-03-Bean*), en el que tenemos un bean, una clase pojo totalmente sin ningún tipo de anotación.
+Volvemos al ejemplo del principio (*Ej. 141-03-Bean*), en el que tenemos un bean, una clase pojo sin ningún tipo de anotación.
 
 *`Saludator.java`*
 
@@ -76,7 +76,7 @@ public class AppConfig {
 }
 ```
 
-De esta manera levantamos el contexto haciendo referencia a la clase de configuración `AnnotationConfigApplicationContext` y  obtenemos el bean.
+De esta manera levantamos el contexto haciendo referencia a la clase de configuración `AnnotationConfigApplicationContext` y obtenemos el bean.
 
 *`App.java`*
 
@@ -123,7 +123,7 @@ También lo podemos hacer programaticamente aunque te digo a mí me gusta algo m
 
 Lo tendremos en el siguiente ejemplo.
 
-### :computer: Ejemplo Proyecto JavaConfigScan
+### :computer: Ejemplo Proyecto JavaConfigScan `141-18-02-JavaConfig-Scan`
 
 <img src="images/18-10.png">
 
@@ -144,7 +144,7 @@ public class AppConfig {
 }
 ```
 
-Las clases anotadas son las siguientes:
+Las clases anotadas son las siguientes que ya habámos anotado en el ejemplo anterior:
 
 *`CatalogoPeliculasActuales.java`*
 
