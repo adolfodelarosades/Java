@@ -1,13 +1,13 @@
 # 4. Configuración basada en anotaciones 38m
 
-* 13 Uso de @Required 8:58 
-* 14 Uso de @Autowired 10:58 
-* 15 Uso de Primary y @Qualifier 7:04 
-* 16 Uso de @PostConstruct y @PreDestroy 3:28 
+* 13 Uso de `@Required` 8:58 
+* 14 Uso de `@Autowired` 10:58 
+* 15 Uso de Primary y `@Qualifier` 7:04 
+* 16 Uso de `@PostConstruct` y `@PreDestroy` 3:28 
 * 17 Uso de estereotipos 7:51 
 * Contenido adicional  5
 
-# 13 Uso de @Required 8:58 
+# 13 Uso de `@Required` 8:58 
 
 [PDF 4-1_Configuracion_a_traves_de_anotaciones_Required.pdf](pdfs/4-1_Configuracion_a_traves_de_anotaciones_Required.pdf)
 
