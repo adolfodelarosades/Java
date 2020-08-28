@@ -891,7 +891,7 @@ De esta forma como hemos visto se ha inyectado dentro de una colección una seri
 
 Vamos a ver otro ejemplo de lo que pasa cuando no sea obligatorio entre comillas satisfacer la dependencia.
 
-### :computer: Ejemplo Proyecto Autowired RNO
+### :computer: Ejemplo Proyecto Autowired RNO `141-14-03-anotaciones-autowired-RNO`
 
 <img src="images/14-14.png">
 
@@ -1072,7 +1072,7 @@ Será lo que vamos a aprender en esta lección.
 
 La propiedad `primary` que ya la hemos utilizado, ya la hemos visto a nivel de XML, permite definir lo que en latin se llamaría *primus inter pares*  es decir un bean que entre iguales es el primero.
 
-Si hay más de un bean y uno de ellos es marcado cob la propiedad `primary=true`, si tenemos una inyección marcada con `autowired`, veremos como no hay problema porque se inyectará ese bean primary.
+Si hay más de un bean y uno de ellos es marcado con la propiedad `primary=true`, si tenemos una inyección marcada con `autowired`, veremos como no hay problema porque se inyectará ese bean primary.
 
 Si tenemos más de un bean marcado cómo primary se produce una excepción al intentar levantar el contenedor de inversión de control. 
 
@@ -1080,7 +1080,7 @@ Por defecto los beans aun que no aparezca tienen el valor de primary a `false`.
 
 Vamos a verlo mediante un ejemplo.
 
-### :computer: Ejemplo Proyecto Primary
+### :computer: Ejemplo Proyecto Primary `141-15-01-primary`
 
 <img src="images/15-10.png">
 
@@ -1181,7 +1181,7 @@ En otra ocasión necesitaremos afinar mucho más el auto cableado indicando si s
 
 Lo podemos seleccionar mediante la anotación `@Qualifier` que en su comportamiento más sencillo, nos permite indicar el nombre o un alias del bean, asociado siempre al uso de la anotación `@Autowired`. De esta manera, aunque ninguno de ellos tenga `primary`, como le estamos diciendo exactamente entre los beans del mismo tipo, cuál queremos funcionará.
 
-### :computer: Ejemplo Proyecto Qualifier
+### :computer: Ejemplo Proyecto Qualifier `141-15-02-qualifier`
 
 <img src="images/15-12.png">
 
@@ -1295,7 +1295,7 @@ Y en el que nosotros vamos a poder decir, oye pues mira quiero que me auto-inyec
 
 Aquí tenemos el ejemplo de extensión de `qualifier` mediante el que nosotros tendríamos que crear nuestra anotación.
 
-### :computer: Ejemplo Proyecto Qualifier Extendido
+### :computer: Ejemplo Proyecto Qualifier Extendido `141-15-03-extendiendo-qualifier`
 
 <img src="images/15-15.png">
 
@@ -1433,13 +1433,43 @@ Ya hemos visto en alguna lección anterior cómo manejar el ciclo de vida de los
 
 <img src="images/16-03.png">
 
-Pero vamos a ver ahora cómo podemos hacerlo mediante antotaciones, estas anotaciones, decir que no son propias de Spring, sino que son de la especificación de Java JSR 250, lo que pasa que Spring les proporciona funcionalidad, y nos permiten anotar un método que se llamará como queramos y que simplemente regresa `void` y no recibe ningún argumento. 
+Pero vamos a ver ahora cómo podemos hacerlo mediante anotaciones, estas anotaciones, decir que no son propias de Spring, sino que son de la especificación de Java JSR 250, lo que pasa que Spring les proporciona funcionalidad, y nos permiten anotar un método que se llamará como queramos y que simplemente regresa `void` y no recibe ningún argumento. 
 
 Simplemente estar anotado con `@PostConstruct` o `@PreDestroy` estando en el bean que esten, ya se encargará Spring de ejecutar ese método en el momento adecuado del ciclo de vida del bean, es decir justo después de construirlo o justo antes de destruirlo.
 
-### :computer: Ejemplo Proyecto PostConstruct-PreDestroy
+### :computer: Ejemplo Proyecto PostConstruct-PreDestroy `141-16-01-postconstruct-predestroy`
 
 <img src="images/16-04.png">
+
+Es necesario añadir la dependencia `javax.annotation-api` para reconocer las anotaciones `@PostConstruct` y ` @PreDestroy`
+
+*`pom.xml`*
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.openwebinars</groupId>
+  <artifactId>141-16-01-postconstruct-predestroy</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>141-16-01-postconstruct-predestroy</name>
+  <description>Uso de PostConstruct-PreDestroy</description>
+  <dependencies>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>5.0.8.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+	<dependency>
+	    <groupId>javax.annotation</groupId>
+	    <artifactId>javax.annotation-api</artifactId>
+	    <version>1.3.2</version>
+	</dependency>
+  </dependencies>
+</project>
+```
+
 
 Vamos a iniciar nuestros catalogos de película mediante el método `init()` precedido de la anotación `@PostConstruct` pero que no se le hace ninguna referencia en el archivo `beans.xml`.
 
