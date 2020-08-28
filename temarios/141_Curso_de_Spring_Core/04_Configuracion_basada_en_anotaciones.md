@@ -1667,13 +1667,13 @@ A continuación tenemos un ejemplo:
 
 <img src="images/17-01.png">
 
-Vamos a concluir esta sección del curso en la cual hemos empezado a conocer las aotaciones para configurar nuestros beans y vamos a hablar de Estereotipos y del Escaneo automático de componentes.
+Vamos a concluir esta sección del curso en la cual hemos empezado a conocer las anotaciones para configurar nuestros beans y vamos a hablar de **Estereotipos** y del **Escaneo automático de componentes**.
 
 <img src="images/17-02.png">
 
 <img src="images/17-03.png">
 
-Hablemos primero del Escaneo automático, nos hemos dado cuenta hasta ahora que aun que usemos anotaciones hemos tenido que declarar en el archivo XML todos y cada uno de los beans que ibamos a utilizar, esto es muy *verboso* requiere de mucho texto, de mucha configuración de nuestra parte. Las anotaciones nos van a permitir ahorrarnos parte de esa configuración siempre y cuando le digamos a spring que se encargue de detectar que clases son candidatos a ser beans gestionados por el contenedor.
+Hablemos primero del **Escaneo automático**, nos hemos dado cuenta hasta ahora que aun que usemos anotaciones hemos tenido que declarar en el archivo XML todos y cada uno de los beans que ibamos a utilizar, esto es muy *verboso* requiere de mucho texto, de mucha configuración de nuestra parte. Las anotaciones nos van a permitir ahorrarnos parte de esa configuración siempre y cuando le digamos a Spring que se encargue de detectar que clases son candidatos a ser beans gestionados por el contenedor.
 
 <img src="images/17-04.png">
 
@@ -1685,7 +1685,7 @@ Aquí tenemos la anotación que es:
 
 Que se encargará de hacer el escaneo de componentes y a la cual le tenemos que proporcionar un paquete base sobre el cual dentro de ese paquete y sus subpaquetes realizara la busqueda de componentes.
 
-### :computer: Ejemplo Proyecto EscaneoComponentes
+### :computer: Ejemplo Proyecto EscaneoComponentes `141-17-01-escaneo-componentes`
 
 <img src="images/17-09.png">
 
@@ -1732,7 +1732,9 @@ Podemos ver como `PeliculaService` lo hemos anotado con `@Component`:
 *`PeliculaService.java`*
 
 ```java
-mport java.util.ArrayList;
+package com.openwebinars.stereotypes;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -1903,21 +1905,27 @@ Al ejecutar la aplicación tenemos:
 
 <img src="images/17-09.png">
 
-Hemos visto como hemos declarado una serie de componentes que utilizamos y hemos quitado la declaración de los beans en nuestro archivo xml. Seguimos usando las auto-inyecciones y el ciclo de vida de los beans con anotaciones.
+Hemos visto como hemos declarado una serie de componentes que utilizamos y hemos quitado la declaración de los beans en nuestro archivo xml. Seguimos usando las auto-inyecciones y el ciclo de vida de los beans con anotaciones, para autoinyectar el DAO en el servicio, para autoinyectar todos los catalogos de películas en el DAO.
+
+En `App` de manera explicita requerimos el servicio para buscar las peliculas de Ciencia ficción.
 
 De esta manera nos hemos evitado declarar de una manera tan *verbosa* en el XML todos los beans y lo hemos hecho anotando cada una de las clases que van a ser gestionadas por el contenedor de inversión de control.
+
+Esto sobretodo cuando nos estamos iniciando en el desarrollo de Spring es una gran ventaja que podemos utilizar. 
 
 <img src="images/17-06.png">
 
 <img src="images/17-07.png">
 
-`@Component` Es el estereotipo más básico que encontramos en Spring los demás son derivados de él, pero en determinados contextos será mejor utilizar los derivados para poder indicar algún tipo de comportamiento adicional. Los más usuales son:
+* `@Component` Es el estereotipo más básico que encontramos en Spring los demás son derivados de él, pero en determinados contextos será mejor utilizar los derivados para poder indicar algún tipo de comportamiento adicional. Los más usuales son:
 
 * `@Service`: Es un estereotipo que nos permite anotar aquellos componentes que esten orientadas a clase de Servicio, lógica de negocio, aquellas clases currantes que se encargan de plasmar la lógica de negocio de nuestra aplicación. 
+
 * `@Repository`: Con esta anotación tenemos la oportunidad de indicar que una clase representa un DAO, una clase que nos permite acceso a datos, muy útil al usar *Spring Data* o *Spring Data REST* que expone un servicio web completo con todos los métodos CRUD necesarios con solo anotarla con este esteretipo.
+
 * `@Controller`: Clase orientada a gestionar las peticiones que recibe, muy usada en aplicaciones web.
 
-### :computer: Ejemplo Proyecto Estereotipos
+### :computer: Ejemplo Proyecto Estereotipos `141-17-02-estereotipos`
 
 <img src="images/17-10.png">
 
