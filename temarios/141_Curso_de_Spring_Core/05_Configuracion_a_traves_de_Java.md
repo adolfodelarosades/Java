@@ -1,18 +1,12 @@
 # 5. Configuración a través de Java 14m
 
-* 18 Uso de @Configuration 4:48 
-* 19 Uso de @Bean 9:49 
+* 18 Uso de `@Configuration` 4:48 
+* 19 Uso de `@Bean` 9:49 
 * Contenido adicional 2
 
-# 18 Uso de @Configuration 4:48 
+# 18 Uso de `@Configuration` 4:48 
 
 [PDF 5-1_Configuracion_a_traves_de_Java.pdf](pdfs/5-1_Configuracion_a_traves_de_Java.pdf)
-
-## Preguntas
-
-* En otras palabras el `@ComponentScan` solo busca clases con la anotación `@Component` en la ruta del paquete que le indicamos. A comparación del `@Configuration` que sirve para indicarle al `AnnotationConfigApplicationContext` dónde encontrará otros beans que tiene que gestionar también.
-
-R= Según la documentación, `@ComponentScan` sirve para configurar las directivas de escaneo de componentes para ser usadas con clases anotadas con `@Configuration`. De hecho, `@ComponentScan` debe ser usada sobre una clase con `@Configuration`. En la práctica, nos permite buscar componentes (y sus derivados: servicios, controladores, ...) en un paquete o conjunto de paquetes.
 
 ## Transcripción
 
@@ -54,9 +48,9 @@ package com.openwebinars.javaconfig;
 
 public class Saludator {
 	
-	public String saludo() {
-		return "Hola mundo!!!";
-	}
+   public String saludo() {
+      return "Hola mundo!!!";
+   }
 
 }
 ```
@@ -74,10 +68,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 	
-	@Bean
-	public Saludator saludator() {
-		return new Saludator();
-	}
+   @Bean
+   public Saludator saludator() {
+      return new Saludator();
+   }
 
 }
 ```
@@ -478,57 +472,6 @@ public class DatabaseConfig {
 
 }
 ```
-
-## Preguntas
-
-* Como podria agregar multiples properties sobre el estereotipo `@PropertySource`.
-
-R= La anotación `@PropertySource` acepta bien la ruta de un fichero de properties (usualmente, usando el prefijo classpath:), bien un array de rutas, con lo que podrías pasarle como argumento dos ficheros de properties diferentes.
-
-```java
-@Configuration
- @PropertySource({"classpath:/com/myco/prop1.properties", classpath:/com/myco/prop2.properties"})
- public class AppConfig {
-
-     @Autowired
-     Environment env;
-
-     @Bean
-     public TestBean testBean() {
-         TestBean testBean = new TestBean();
-         testBean.setName(env.getProperty("testbean.name"));
-         return testBean;
-     }
- }
-```
-
-También existe la anotación `@PropertySources`, que acepta un array de `@PropertySource`. El mismo código de ejemplo sería:
-
-```java
-@Configuration
- @PropertySources({
-                     @PropertySource("classpath:/com/myco/prop1.properties"),
-                     @PropertySource("classpath:/com/myco/prop2.properties")
-    })
- public class AppConfig {
-
-     @Autowired
-     Environment env;
-
-     @Bean
-     public TestBean testBean() {
-         TestBean testBean = new TestBean();
-         testBean.setName(env.getProperty("testbean.name"));
-         return testBean;
-     }
- }
-```
-
-Recuerda que, según la documentación de Spring, para usar `@Value` con `@PropertySource`, es necesario tener un bean estático de tipo `PropertySourcesPlaceholderConfigurer`
-
-* ¿Y cómo sería la configuración si uso en lugar de archivos properties, usaría archivos yaml? ¿Que otros tipos de archivos externos que contengan datos se puede inyectar a traves de `@Value`?
-
-R= En principio, si usas yaml, no debería de tener dificultad para usar la anotación `@Value` para inyectar el valor de una propiedad definida en dicho fichero. Sí es cierto que la anotación `@PropertySource` está limitada al uso de fichero de properties, y no se puede usar directamente con ficheros yaml.
 
 ## Transcripción
 
