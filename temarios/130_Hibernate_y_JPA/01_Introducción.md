@@ -29,7 +29,7 @@ En el tercer capítulo realizaremos nuestro primer proyecto con Hibernate, nuest
 
 En el capítulo 4 vamos a saber cómo mapear nuestras entidades en la base de datos haciéndolo a través de anotaciones y a través de fichero de descriptores XML y también conoceremos el ciclo de vida de las entidades.
 
-En el capítulo 5 conoceremos cómo asociar una entidad desconocida y los diferentes tipos de asociaciones que existen.
+En el capítulo 5 conoceremos cómo asociar unas entidades con otras y los diferentes tipos de asociaciones que existen.
 
 <img src="images/1-03.png">
 
