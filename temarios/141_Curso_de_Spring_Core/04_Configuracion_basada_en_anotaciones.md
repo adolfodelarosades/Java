@@ -1,10 +1,10 @@
 # 4. Configuración basada en anotaciones 38m
 
-* Uso de @Required 8:58 
-* Uso de @Autowired 10:58 
-* Uso de Primary y @Qualifier 7:04 
-* Uso de @PostConstruct y @PreDestroy 3:28 
-* Uso de estereotipos 7:51 
+* 13 Uso de @Required 8:58 
+* 14 Uso de @Autowired 10:58 
+* 15 Uso de Primary y @Qualifier 7:04 
+* 16 Uso de @PostConstruct y @PreDestroy 3:28 
+* 17 Uso de estereotipos 7:51 
 * Contenido adicional  5
 
 # 13 Uso de @Required 8:58 
@@ -22,18 +22,6 @@ La introducción de la configuración basada en anotaciones planteó la pregunta
 No importa la elección, Spring puede acomodar ambos estilos e incluso mezclarlos. Vale la pena señalar que a través de su opción JavaConfig, Spring permite que las anotaciones se utilicen de forma no invasiva, sin tocar el código fuente de los componentes objetivo.
 
 *La inyección por anotación se realiza antes de la inyección de XML, por lo tanto, la última configuración anulará la anterior para las propiedades inyectadas a través de ambos enfoques.*
-
-## Preguntas
-
-* Las anotaciones bajo el estandar JSR-250 son con las que actualmente se trabajan o existe una alternativa o nueva version. Agradezco la resolucion de la duda.
-
-R= Yo suelo utilizar más las anotaciones propias de Spring que las del estándar JSR-250, pero se podrían usar bien las unas o bien las otras.
-
-* Con spring-context 5.2.6 y la anotación `@Required` ha sido "deprecated". ¿Cuál es la alternativa que se tiene que aplicar?
-
-R= Desde la versión 5.1 hay algunas anotaciones que han propuesto deprecar, como `@Required` o `@Autowired`.
-
-La alternativa sería siempre el realizar la inyección a través de constructor. Eso nos permite librerarnos de las anotaciones. Cuando se inyectan las dependencias vía constructor estas son obligatorias por defecto; si queremos que sean opcionales, el tipo de dato de la inyección sería `Optional<MiBean> .
 	
 ## Transcripción
 
@@ -1419,12 +1407,6 @@ Como podemos ver la anotación `@Epoca(actuales)` es más cercana y concreta al 
 
 [PDF 4-4_PostConstruct_y_PreDestroy.pdf](pdfs/4-4_PostConstruct_y_PreDestroy.pdf)
 
-## Preguntas
-
-* ¿Qué diferencias hay entre utilizar estas dos etiquetas o implementar las interfaces InitializingBean y DisposableBean?
-
-R= Se pueden conseguir funcionalidades idénticas. Cambia el estilo de programación utilizado. Además, la anotaciones citadas son estándar Java (JSR250), y los interfaces son propios de Spring.
-
 ## Transcripción
 
 Vamos a continuar trabajando y configurarlo nuestros beans mediante anotaciones.
@@ -1636,30 +1618,6 @@ A continuación tenemos un ejemplo:
     </context:component-scan>
 </beans>
 ```
-
-## Preguntas
-
-* Es mucha la información que das por digerir y gracias por eso. Pero hasta el momento trato de comprender la evolución de modos de crear un Bean desde XML hasta el uso de anotaciones. Y en esta sección veo , corrigeme si me equivoco, que no todas las anotaciones serán bean, sino que hay anotaciones que funcionaran solo un elemento de configuración, claro que siempre declarados en una clase que no necesariamente se convertira en un bean. Me explico: el `<context:component-scan base-package="com.openwebinars...."/>` a las finales utilizando anotación se convertira en un `@ComponetScan`. En este caso no es un bean el que se forma sino es una configuración que le dejo al contenedor de IoC.
-Sin embargo en este video hablas de los estereotipos y de la anotación @Component que es la más básica y de la cual se deriban las demas: @Controller, @Service y @Repository:
-
-   * ¿Se podría decir que verdaderamente solo estas anotaciones (@Component y sus derivados) convierten a sus respectivas clases en beans?
-   * ¿Hay alguna otra categoria de anotaciones a parte de las de que, configuran el contenedor de IoC y las que crean los beans? Hago esta pregunta porque en SpringBoot es muy frecuente usar anotaciones, creia que todo "@LoQueSea" llegaría a ser un bean. Por ejemplo: Colocando @SpringBootApplication, esta anotación incluira:
-* `@EnableAutoConfiguracion`
-* `@ComponentScan`
-* `@SpringBootConfiguration`
-
-Ninguna de estas se convertira en bean, solo configuran el contenedor de IoC y buscan los beans con `@Component`.
-
-R= Existen 3 tipos de formas de crear un bean cuando se trabaja con Spring:
-
-1. A través del uso de XML. Una clase cualquiera, para la cual se añade la configuración necesaria en un fichero XML de descripción de beans, puede convertirse en un bean. Con todo, el uso de XML está quedando en la práctica circunscrito a proyectos legacy. No conozco ningún proyecto que haya comenzado últimamente y utilice este enfoque.
-2. A través del uso de anotaciones. La anotación troncal, en este sentido, es `@Component`, y sus derivados estereotipados: `@Service`, `@Controller` y `@Repository`. Para configurar el uso de anotaciones, necesitamos soporte bien de la configuración XML, de configuración JavaConfig o de Spring Boot.
-3. A través de JavaConfig. Esto permite que se pueda crear un bean con la anotación `@Bean` sobre un método que retorna un objeto. De esa forma, ese objeto devuleto será un bean.
-
-El enfoque que suele utilizarse a día de hoy es el uso de Spring Boot, con JavaConfig y anotaciones.
-
-Con todo, existen más anotaciones que nos permiten definir una clase como bean, y que en muchas ocasiones son un derivado de las anteriores. Un ejemplo sería `@RestController`, que es un derivado de `@Controller`, al cual se le añade `@ResponseBody`, y que está orientado a ser un controlador en un API Rest. De hecho, cualquier programador podría crear sus propias anotaciones, derivando de alguna de las anteriores, que permitieran crear directamente un bean con características especiales o propias.
-
 ## Transcripción
 
 <img src="images/17-01.png">
