@@ -1306,7 +1306,6 @@ public Collection<String> findAllGenres() {
 
 Lo que hacemos es listar todas las películas, nos quedamos con los géneros `.map(f -> f.getGenres())`, a través de `.flatMap(lista -> lista.stream())` los unimos todos los géneros, aplicamos `.distinct()` y para que aparezcan en orden alfabético los ordenamos con `.sorted()` y lo devolvemos como lista para que puedan ser pintados.
 
-
 Por otro lado ofrecemos la operaciones de alto nivel, que no serían acumuladas, no necesitaríamos el servicio, encontrar solamente por algún género:
 
 ```java
@@ -1354,12 +1353,6 @@ Este servicio lo tendríamos aquí preparado por si además de hacer una aplicac
 Con esto terminamos el apartado de los servicios y nos lanzamos de lleno a terminar de crear la última lógica de la aplicación recogida de argumento y la invocación de los servicios.
 
 # 25 Ejecución de la app 22:28 
-
-## Preguntas
-
-* Genial el cierre de este curso con el ejemplo de la aplicación. Solo una observación, se pudo omitir la llamada a autowired de FilmQueryService en la clase MovieAdvisorRunApp. Ya que como comentabas en el anterior video la clase FilmService (que tambien es un estereotipo @sService) incluye métodos que llaman a los metodos implementados de FilmQueryService. Por lo cual me parece que esta de más llamarlo en la clase principal de que maneja los comandos.
-
-R= Te en cuenta que a lo mejor, por lo didáctico, el código ha quedado un poco raro. En un sistema "real", en el que si se usa Spring Data JPA, lo repositorios trabajarán con una base de datos, tenemos diferentes alternativas para plantear el código. A mi me suele gustar elaborar un servicio que envuelve al repositorio, y utilizar en componentes y controladores solo el servicio, pero es solo un estilo; se pueden usar, tanto repositorios como servicios en componentes y controladores con total normalidad.
 
 ## Transcripción
 
@@ -1459,6 +1452,8 @@ Esta clase va a ser un bean en particular, como no estamos trabajando con aplica
 ```java
 package com.openwebinars.movieadvisor;
 
+import org.springframework.stereotype.Component;
+
 @Component
 public class MovieAdvisorRunApp {
 
@@ -1508,21 +1503,21 @@ public class MovieAdvisorApp {
 
 Ya tendríamos listo nuestro nuestro main porque la lógica la vamos a incluir directamente en `MovieAdvisorRunApp`.
 
-Parece normal según el diagrama de clases que vimos que en el bean ``MovieAdvisorRunApp`` necesitamos auto inyectar los dos servicios.
+Parece normal según el diagrama de clases que vimos que en el bean `MovieAdvisorRunApp` necesitamos auto inyectar los dos servicios.
 
 ```java
 @Autowired
-FilmService filmService;
+private FilmService filmService;
 	
 @Autowired
-FilmQueryService filmQueryService;
+private FilmQueryService filmQueryService;
 ```
 
 Vamos a ver la estructura que tendría esto para poder manejar la sintaxis, parece claro que sí se invoca nuestra aplicación y el número de argumentos es menor que uno, quiere decir que la sintaxis es erróneo, es decir, lo que podemos hacer es simplemente indicarme que hay un error de sintaxis y mostrarle el mensaje de ayuda, cómo le vamos a mostrar el mensaje de error, bueno pues creariamos otro bean que vamos a llamar `MovieAdvisorHelp`
 
 <img src="images/21-35.png">
 
-y que será el encargado de cargar en una cadena de caracteres, todo el mensaje de ayuda, de forma que nosotros después a través del método `getHelp()` lo vamos a poder utilizar, como lo podemos hacer.
+y que será el encargado de cargar en una cadena de caracteres, todo el mensaje de ayuda, de forma que nosotros después a través del método `getHelp()` lo vamos a poder utilizar, ¿Cómo lo podemos hacer?.
 
 *`MovieAdvisorHelp`*
 
@@ -1574,13 +1569,19 @@ public class MovieAdvisorHelp {
 }
 ```
 
-Añadiríamos el método `init()` anotado con `@PostConstruct` y cargaríamos las líneas del fichero, le indicamos cuál es el fichero de ayuda, directamente lo hemos hardcodeado la ruta del fichero y en caso de que haya algún error, directamente también saldríamos de la aplicación.
+Añadiríamos el método `init()` anotado con `@PostConstruct` y cargaríamos las líneas del fichero, lo podriamos hacer con ReadOnLines aun que esta manera me suele gustar más al igual que la otra ocación le indicamos cuál es el fichero de ayuda, directamente lo hemos hardcodeado la ruta del fichero y en caso de que haya algún error, directamente también saldríamos de la aplicación. No nos queremos parar en esta parte de la aplicación.
 
 Cargaríamos el contenido de `help` en una cadena de caracteres y ya lo podríamos obtener.
 
 De forma que en el método `run(String[] args)` de `MovieAdvisorRunApp` si queremos imprimir la ayuda, primero tenemos que  auto inyectar la ayuda y ya la prodríamos mostrar:
 
 ```java
+@Autowired
+private FilmService filmService;
+	
+@Autowired
+private FilmQueryService filmQueryService;
+
 @Autowired
 MovieAdvisorHelp help;
 
@@ -1593,7 +1594,7 @@ public void run(String[] args) {
 }
 ```
 
-Qué sucede si tenemos más de un argumento, bueno pues tendremos que ver cuántos tenemos, si tenemos solamente uno, es posible que la búsqueda la estemos haciendo por alguno de los argumentos que queremos sueltos, cuál tenemos que procesar exactamente, para ello nos quedamos con el argumento cero, lo pasamos a minúscula y lo podemos comparar con lo que tenemos aquí:
+Qué sucede si tenemos más de un argumento, bueno pues tendremos que ver cuántos tenemos, si tenemos solamente uno, es posible que la búsqueda la estemos haciendo por alguno de los argumentos que queremos sueltos es el caso `} else if (args.length == 1) {`, cuál tenemos que procesar exactamente, para ello nos quedamos con el argumento cero, lo pasamos a minúscula y lo podemos comparar con lo que tenemos aquí:
 
 ```java
 @Autowired
@@ -1655,7 +1656,7 @@ Lo vamos a guardar en una lista de array de cadenas de caracteres, llamada `argu
 
 `List<String[]> argumentos = new ArrayList<>();`
 
-El bucle para hacerlo,  lo dejamos aquí planteado:
+El bucle para hacerlo, lo dejamos aquí planteado:
 
 ```java
 for (int i = 0; i < args.length; i += 2) {
@@ -1713,7 +1714,7 @@ filmQueryService.betweenYears(years[0], years[1]);
 
 Y en el caso del título, directamente compraríamos con el título `filmQueryService.titleContains(argumento[1]);`.
 
-si nos damos cuenta lo que va haciendo aquí es ir llamando a `filmQueryService`, lo hemos inyectado previamente, y de esta forma lo que iria haciendo sería ir acumulando, si hemos pasado dos parejas de argumentos, acumularía los predicados correspondientes.
+Si nos damos cuenta lo que va haciendo aquí es ir llamando a `filmQueryService`, lo hemos inyectado previamente, y de esta forma lo que iria haciendo sería ir acumulando, si hemos pasado dos parejas de argumentos, acumularía los predicados correspondientes.
 
 En `default` añadimos esta posibilidad por si hay algún tipo de fallo, es decir si alguien ha pasado un `--z` por ejemplo como argumento, directamente le tenemos que decir que hay un error de sintaxis, la variable `error` inicia a `false`, sería verdadera si hubiera algún problema y lo que hacemos entonces es, en caso de que haya algún error, no imprimir los resultados de la busqueda, no ejecutaremos los resultados.
 
@@ -1724,7 +1725,7 @@ default: error = true;
 }
 ```
 
-Imprimiir los los resultados lo hacemos aquí:
+Imprimir los los resultados lo hacemos aquí:
 
 ```java
 if (!error) {
@@ -1867,7 +1868,6 @@ public class MovieAdvisorRunApp {
 
 }
 ```
-
 
 Puede ocurrir que el resultado esté vacío porque las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo, vamos a ejecutar nuestra aplicación.
 
