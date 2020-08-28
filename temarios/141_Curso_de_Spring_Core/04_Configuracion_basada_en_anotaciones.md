@@ -410,17 +410,27 @@ Esta anotación tiene el mismo efecto que la configuración del auto cableado, d
 
 <img src="images/14-03.png">
 
-<img src="images/14-04.png">
+¿Dónde podemos usar `@Autowired`?
+
+Se puede usar en:
+
+* Método setter
+* Definición de la propiedad
+* Constructor
 
 La anotación `@autowired` la podemos usar en un método setter, lo podemos usar en la propia definición de la propiedad de la declaración de la misma o también lo podemos usar a nivel de constructor.
 
-Incluso podemos mezclar los tres tipos de `autowired`, en la propiedad es realmente cómodo, cómo podemos comprobar en la imágen, si tenemos una clase que tiene dos o tres dependencia, en la declaración de referencia, poner directamente el `autowired` es francamente comodo.
+Como podemos comprobar en los tipos de inyección que ya hemos venido viendo.
 
-El método setter nos va a permitir que si tiene algún tipo de lógica especial, algún tipo de adaptación, inicializacion cualquier cosa, lo podríamos incluir ahí y para atributos de tipo final alguno de ellos que no queremos que sean modificables después, pues la inyección se lo podríamos plantear vía constructor, para que esa referencia no se podrá modificar.
+<img src="images/14-04.png">
+
+Incluso podemos mezclar los tres tipos de `autowired`, en la propiedad es realmente cómodo, cómo podemos comprobar en la imágen anterior, si tenemos una clase que tiene dos o tres dependencia, en la declaración de referencia, poner directamente el `autowired` es francamente comodo.
+
+El método setter nos va a permitir que si tiene algún tipo de lógica especial, algún tipo de adaptación, inicializacion cualquier cosa, lo podríamos incluir ahí y para atributos de tipo `final` alguno de ellos que no queremos que sean modificables después, pues la inyección se lo podríamos plantear vía constructor, para que esa referencia no se podrá modificar.
 
 Ahora veremos un ejemplo lo vamos a ver primero y después os comento alguna cosa más
 
-### :computer: Ejemplo Proyecto Autowired
+### :computer: Ejemplo Proyecto Autowired `141-14-01-anotaciones-autowired`
 
 <img src="images/14-08.png">
 
@@ -452,7 +462,7 @@ Es muy similar al ejemplo anterior con pequeños cambios que se describen a cont
 
 Hemos eliminado `autowire="byType"` del bean `peliculaService`, esto implica que ya no se hara la auto-inyección vía XML.
 
-La Inyección se hara vía anotacion en `PeliculaService`, la cual como podemos ver la podemos poner en la propiedad, en el setter o en el constructor.
+La Inyección se hara vía anotacion en `PeliculaService`, la cual como podemos ver la podemos poner en la propiedad, en el setter o en el constructor (solo en una de las tres).
 
 *PeliculaService.java*
 
@@ -493,6 +503,8 @@ public class PeliculaService {
 }
 ```
 
+Independiente de la opción que se use lo que va a pasar es que se va autoinyectar `PeliculaDao` que en el fondo se inyecta la implementación `PeliculaDaoImplMemory`  
+
 Ejecución vía Propiedad:
 
 <img src="images/14-09.png">
@@ -529,7 +541,7 @@ El `@Autowired(required=false)` en este caso sería más recomendable que usar e
 
 Vamos a ver algún ejemplo de anotación `@Autowired`.
 
-### :computer: Ejemplo Proyecto Autowired Multiple 
+### :computer: Ejemplo Proyecto Autowired Multiple `141-14-02-anotaciones-autowired-multiples`
 
 <img src="images/14-12.png">
 
