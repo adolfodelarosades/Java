@@ -18,7 +18,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [120 Curso JavaServer Faces](https://github.com/adolfodelarosades/Java/blob/master/temarios/120_Curso_JavaServer_Faces.md)
 * [130 Hibernate y JPA](https://github.com/adolfodelarosades/Java/blob/master/temarios/130_Hibernate_y_JPA.md)
 * [140 Spring Framework](https://github.com/adolfodelarosades/Java/blob/master/temarios/140_Spring_Framework.md)
-* [141 Curso de Spring Core](https://github.com/adolfodelarosades/Java/blob/master/temarios/141_Curso_de_Spring_Core.md)
+* [141 Curso de Spring Core](https://github.com/adolfodelarosades/Java/blob/master/temarios/141_Curso_de_Spring_Core.md) :+1:
 * [142 Spring Boot y Spring MVC](https://github.com/adolfodelarosades/Java/blob/master/temarios/142_Spring_Boot_y_Spring_MVC.md)
 * [143 Curso de desarrollo de una API REST con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot.md)
 * [144 Curso de elementos avanzados en tu API REST con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/144_Curso_de_elementos_avanzados_en_tu_API_REST_con_Spring_Boot.md)
