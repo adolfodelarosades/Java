@@ -1470,8 +1470,7 @@ Es necesario añadir la dependencia `javax.annotation-api` para reconocer las an
 </project>
 ```
 
-
-Vamos a iniciar nuestros catalogos de película mediante el método `init()` precedido de la anotación `@PostConstruct` pero que no se le hace ninguna referencia en el archivo `beans.xml`.
+Vamos a iniciar nuestros catalogos de película mediante el método `init()` al cual no precedido de la anotación `@PostConstruct` pero que no se le hace ninguna referencia en el archivo `beans.xml`.
 
 *`beans.xml`*
 
@@ -1566,7 +1565,9 @@ public class CatalogoPeliculasClasicas implements CatalogoPeliculas {
 }
 ```
 
-En el archivo `PeliculaDaoImplMemory` hemos vuelto a la versión en que se auto-inyectan los dos beans de catalogo de películas en el `Set`. Además usa las notaciones `@PostConstruct` para cargar ambos catalogos y `@PreDestroy` para limpiar el catalogo de películas justo antes de destruir el bean.
+De esta manera las películas quedan totalmente cargadas.
+
+En el archivo `PeliculaDaoImplMemory` hemos vuelto a la versión en que se auto-inyectan los dos beans de catalogo de películas en el `Set`. Además usa las anotaciones `@PostConstruct` para cargar ambos catalogos y `@PreDestroy` para limpiar el catalogo de películas justo antes de destruir el bean.
 
 *`PeliculaDaoImplMemory.java`*
 
@@ -1637,6 +1638,8 @@ Hemos tuneado un poco el método `init()` para usar el API de Stream, sobre todo
 Al ejecutar la aplicación tenemos:
 
 <img src="images/16-05.png">
+
+De esta manera con anotaciones podemos manejar también el ciclo de vida de nuestro bean. 
 
 # 17 Uso de estereotipos 7:51 
 
