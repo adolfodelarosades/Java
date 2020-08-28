@@ -63,7 +63,7 @@ Para que nosotros podamos utilizar la configuración a través de anotaciones te
 
 Esta anotacion es `<context:annotation-config>` y declarando esto nada más, Spring se va a encargar de registrar los `BeanPostProcessor` necesarios para que nosotros podamos trabajar con las anotaciones. Como podemos comprobar esto es francamente comodo, mucho más que si nosotros tuviéramos que que registrar todos los `BeanPostProcessor` necesarios para poder trabajar con las anotaciones.
 
-### :computer: Ejemplo Proyecto Anotaciones
+### :computer: Ejemplo Proyecto Anotaciones `141-13-01-anotaciones`
 
 **ESTE EJEMPLO ES EL PRIMERO QUE USA UN SERVICE**
 
@@ -273,9 +273,9 @@ La anotación `@Required` tiene una utilización muy básica y es que nos permit
 
 ¿Qué sucede si no se satisface esta dependencia?
 
-Se va a producir una excepción, esto nos permite evitar errores de tipo `NullPointerException` porque esta sesión se va a producir a lo largo de la carga del contenedor y no de la ejecución del programa. Esto nos permite prevenir posibles errores que vayamos a tener con objetos que sean críticos y que necesiten dependencias que estén totalmente satisfechas en ese momento.
+Se va a producir una excepción, esto nos permite evitar errores de tipo `NullPointerException` porque esta excepción se va a producir a lo largo de la carga del contenedor y no de la ejecución del programa. Esto nos permite prevenir posibles errores que vayamos a tener con objetos que sean críticos y que necesiten dependencias que estén totalmente satisfechas en ese momento.
 
-La utilización sería muy sencilla en el bean `PeliculaService` que es el que permite interactuar con `PeliculaDao`, es capaz de devolvernos las películas por genero. Este bean tiene como dependencia en bean `PeliculaDao` la anotación `@Request` se asocia al método `setPeliculaDao` pero inclusive se podría asociar a la propiedad `peliculaDao`, *de manera que si no hacemos esa referencia entre los beans nos dara un error*. 
+La utilización sería muy sencilla, en el bean `PeliculaService` que es el que permite interactuar con `PeliculaDao` y que en este caso es capaz de devolvernos las películas por genero, tenemos como dependencia el bean `PeliculaDao`, la anotación `@Required` se puede asocia al método `setPeliculaDao` e incluso se podría asociar a la propiedad `peliculaDao`, *de manera que si no hacemos esa referencia entre los beans nos dara un error*. 
 
 *`PeliculaService.java`*
 
@@ -355,7 +355,7 @@ Al ejecutar la aplicación tenemos:
 
 Nos muestra las dos películas con el genero Drama.
 
-Se esta manera la anotación `@Require` ha obligada a que está dependencia este satisfecha.
+De esta manera la anotación `@Required` ha obligada a que está dependencia este satisfecha.
 
 # 14 Uso de @Autowired 10:58 
 
