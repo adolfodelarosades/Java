@@ -788,7 +788,7 @@ public void delete(long id) {
 }
 ```
 
-La clase `` completa es:
+La clase `FilmDaoImplMemory` completa es:
 
 ```java
 package com.openwebinars.movieadvisor.dao;
@@ -872,21 +872,9 @@ public class FilmDaoImplMemory implements FilmDao {
 }
 ```
 
-Con esto tenemos nuestra clase DAO implementada, tenemos toda nuestra capa de repositorio implementada. En la siguiente sección vamos a crear los diferentes servicios que lo van a utilizar.
+Con esto tenemos nuestra clase DAO implementada, tenemos toda nuestra capa de Repository repositorio implementada. En la siguiente sección vamos a crear los diferentes servicios que lo van a utilizar.
 
 # 24 Servicios 13:28 
-
-## Preguntas
-
-* No acabo de enteder muy bien para que queremos tener 2 servicios diferentes para acceder a los datos.
-
-R= Necesidad, lo que se dice necesidad, no existe. Se trata solo de un ejemplo. En él, he tratado de separar por un lado un servicio específico para realizar consultas sobre los datos, y otro servicio que, utilizando el anterior, tiene métodos de más alto nivel. Podría haberse implementado todo en una misma clase, o incluso a través de una clase (servicio) con una clase interna (pensada para las consultas).
-
-* Por favor me podrías decir cúal es la última versión del OpenJDK 8 que hayas utilizado y que por el momento no hayas encontrado problemas para usarlos en tus proyectos. Ya que en otro curso mencionas que habia un bug en el OpenJDK8 y por ello utilizas el de Oracle. ¿O conoces algún recurso donde pueda encontrar información de los bugs en esta versión de OpenJDK?
-
-R= El fallo sucedió en la época en la que grabamos el curso, y por el cual daba problema con algunos certificados de seguridad en ubuntu; al final, la solución menos complicada fue usar el JDK de oracle. La lista activa de incidencias de openjdk la puedes encontrar aquí: https://bugs.openjdk.java.net/browse/JDK-8238966?filter=-4.
-
-Si trabajas en Linux, puedes utilizar herramientas como SDKMAN (https://sdkman.io/) para poder instalar y probar entre diferentes versiones y sabores de JDK diferentes. También puedes utilizarlo en Windows (en su web hay un apartado donde lo explica).
 
 ## Transcripción
 
