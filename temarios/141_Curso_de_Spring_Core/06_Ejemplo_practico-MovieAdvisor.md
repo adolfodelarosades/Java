@@ -193,9 +193,6 @@ import java.util.List;
  * Si hubíeramos utilizado Spring Data y una base de datos, 
  * seguramente estaría anotada con @Entity 
  * 
- * 
- * @author OpenWebinars
- *
  */
 public class Film {
 	
@@ -813,9 +810,6 @@ import com.openwebinars.movieadvisor.model.Film;
  * Implementación en memoria de la interfaz FilmDao.
  * Además, incluye la lectura de los datos, a través de un método estático,
  * desde un fichero CSV.
- * 
- * 
- * @author OpenWebinars
  *
  */
 @Repository
@@ -926,9 +920,6 @@ import com.openwebinars.movieadvisor.model.Film;
  * ¿Serías capaz de añadir la lógica necesaria para que se pudieran
  * utilizar AND y OR?
  * 
- * 
- * @author OpenWebinars
- *
  */
 public interface FilmQueryService {
 	
@@ -1152,9 +1143,6 @@ import com.openwebinars.movieadvisor.model.Film;
  * de datos, y tener una implementación de este servicio que hiciera
  * uso de Criteria API o QueryDSL. 
  * 
- * 
- * @author OpenWebinars
- *
  */
 @Service
 public class FilmQueryServiceImpl implements FilmQueryService{
@@ -1570,9 +1558,6 @@ import org.springframework.util.ResourceUtils;
  * Es un ejemplo de un componente (gestionado por el contenedor de IoC)
  * con gestiónd el ciclo de vida (@PostConstruct).
  * 
- * 
- * @author OpenWebinars
- *
  */
 @Component
 public class MovieAdvisorHelp {
@@ -1802,9 +1787,6 @@ import com.openwebinars.movieadvisor.service.FilmService;
  * son, verifica si la sintaxis es correcta o no, y ejecuta
  * la consulta correspondiente.
  * 
- * 
- * @author OpenWebinars
- *
  */
 @Component
 public class MovieAdvisorRunApp {
