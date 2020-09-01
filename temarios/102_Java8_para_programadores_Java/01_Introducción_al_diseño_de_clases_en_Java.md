@@ -17,6 +17,10 @@
 
 Conoce al profesor de Java desde 0, los requisitos y los objetivos del curso.
 
+## Transcripción
+
+<img src="images/00-01.png>
+
 # 01 Implementación de la encapsulación 12:31 
 
 [Implementación de la encapsulación](pdfs/01_Implementación_de_la_encapsulación.pdf)
