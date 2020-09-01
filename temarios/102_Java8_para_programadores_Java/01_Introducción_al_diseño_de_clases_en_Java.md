@@ -1,23 +1,27 @@
 # 1. Introducción al diseño de clases en Java 73m
    
-   * Presentación del profesor y curso 7:36 
-   * Implementación de la encapsulación 12:31 
-   * Implementación de herencia con modificadores de acceso y composición 9:55 
-   * Polimorfismo 10:37 
-   * Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
-   * Uso del ámbito static para variables, métodos y clases 9:30 
-   * Clases singleton y clases de inmutables 9:09 
+   * 00 Presentación del profesor y curso 7:36 
+   * 01 Implementación de la encapsulación 12:31 
+   * 02 Implementación de herencia con modificadores de acceso y composición 9:55 
+   * 03 Polimorfismo 10:37 
+   * 04 Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
+   * 05 Uso del ámbito static para variables, métodos y clases 9:30 
+   * 06 Clases singleton y clases de inmutables 9:09 
    * Contenido adicional 10
    
-## Presentación del profesor y curso 7:36
+# 00 Presentación del profesor y curso 7:36
 
 [Presentación](pdfs/Presentación.pdf)
 
+## Resumen del Profesor
+
 Conoce al profesor de Java desde 0, los requisitos y los objetivos del curso.
 
-## Implementación de la encapsulación 12:31 
+# 01 Implementación de la encapsulación 12:31 
 
 [Implementación de la encapsulación](pdfs/01_Implementación_de_la_encapsulación.pdf)
+
+## Resumen del Profesor
 
 ### 1.1 Encapsulación
 
@@ -56,9 +60,13 @@ Aunque Java tiene solamente una forma de crear clases, los patrones de diseño n
 
 * ...
 
-## Implementación de herencia con modificadores de acceso y composición 9:55 
+## Transcripción
+
+# 02 Implementación de herencia con modificadores de acceso y composición 9:55 
 
 [Herencia](pdfs/02_Herencia.pdf)
+
+## Resumen del Profesor
 
 ### 2.1 Herencia de clases
 
@@ -69,21 +77,21 @@ Si usamos `protected` en la clase base, tendremos acceso directo a los atributos
 ```java
 public class Base {
 
-    private String nombre;
-    protected String apellidos;
+   private String nombre;
+   protected String apellidos;
 
-    //...
+   //...
 }
 
 public class Hija extends Base {
 
-  public void metodo() {
-          //this.nombre = "Pepe";  //Imposible acceder. Nos da error
-          this.setNombre("Pepe"); //Funciona perfectamente
-          this.apellidos = "Perez";
-      }
+   public void metodo() {
+      //this.nombre = "Pepe";  //Imposible acceder. Nos da error
+      this.setNombre("Pepe"); //Funciona perfectamente
+      this.apellidos = "Perez";
+   }
 
-      //...
+   //...
 }
 ```
 
@@ -103,9 +111,13 @@ Dentro de la clase Todo tendremos una referencia a la clase Parte. También es p
 
 <img src="images/diagrama02.png">
 
-## Polimorfismo 10:37 
+## Transcripción
+
+# 03 Polimorfismo 10:37 
 
 [Polimorfismo](pdfs/03_Polimorfismo.pdf)
+
+## Resumen del Profesor
 
 ### 3.1 Polimorfismo
 
@@ -144,9 +156,13 @@ Base c3 = new ClaseQueImplementaInterfaz();
 c3.saludar("Hola Mundo, por tercera vez");
 ```
 
-## Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
+## Transcripción
+
+# 04 Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
 
 [Sobreescribir los métodos hashcode, equals y to string de la clase object](pdfs/04_Equals_hashCode_y_toString.pdf)
+
+## Resumen del Profesor
 
 ### 4.1 Herencia de `Object`
 
@@ -172,9 +188,13 @@ Devuelve un número asociado a la clase. Sirve como posición de memoria en hexa
 
 Devuelve una representación en `String` del objeto. Por defecto, devuelve el tipo (la clase) y su `hashCode`. Lo podemos sobrescribir para que represente los valores. Dos objetos iguales deben tener la misma representación.
 
-## Uso del ámbito static para variables, métodos y clases 9:30 
+## Transcripción
+
+# 05 Uso del ámbito static para variables, métodos y clases 9:30 
 
 [Uso del ámbito static para variables, métodos y clases](pdfs/05_Uso_de_static.pdf)
+
+## Resumen del Profesor
 
 ### 5.1 Atributos de objeto y de clase
 
@@ -209,41 +229,45 @@ Para crear una instancia de la clase interna, si esta es estática, no necesitam
 ```java
 public class EjemploClaseStatic {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
 
-        Persona p = new Persona("Pepe");        
-        System.out.println(p);
+      Persona p = new Persona("Pepe");        
+      System.out.println(p);
 
-    }
+   }
 
-public static class Persona {
-   //...
-}        
+   public static class Persona {
+       //...
+   }        
 
-public class OtroEjemplo {
+   public class OtroEjemplo {
 
-  /**
-     * @param args
-     */
-    public static void main(String[] args) {
+      /**
+       * @param args
+       */
+      public static void main(String[] args) {
 
-        EjemploClaseStatic.Persona p = new EjemploClaseStatic.Persona("Pepe");        
-        System.out.println(p);
+         EjemploClaseStatic.Persona p = new EjemploClaseStatic.Persona("Pepe");        
+         System.out.println(p);
 
-    }
-
+      }
+   }
 
 }
 ```
 
-## Clases singleton y clases de inmutables 9:09 
+## Transcripción
+
+# 06 Clases singleton y clases de inmutables 9:09 
 
 [Clases singleton y clases de inmutables](pdfs/06_Singleton_e_inmutables.pdf)
 
 <img src="images/singleton.png">
+
+## Resumen del Profesor
 
 ### 6.1 Singleton
 
@@ -257,18 +281,18 @@ Para implementarla, podemos seguir los siguientes pasos:
 ```java
 public class MiServicioSingleton {
 
-    //Una instancia del objeto que va a existir
-    private static MiServicioSingleton instance = null;
+   //Una instancia del objeto que va a existir
+   private static MiServicioSingleton instance = null;
 
-    //Evitamos así la instanciación directa
-    private MiServicioSingleton() {    }
+   //Evitamos así la instanciación directa
+   private MiServicioSingleton() {    }
 
-    public static MiServicioSingleton getInstance() {
-        if (instance == null)
-            instance = new MiServicioSingleton();
+   public static MiServicioSingleton getInstance() {
+      if (instance == null)
+         instance = new MiServicioSingleton();
 
-        return instance;
-    }
+         return instance;
+   }
 
 
 }
@@ -284,6 +308,7 @@ Algunas recomendaciones para crear objetos inmutables:
 2. No añadir métodos *setter*
 3. Evitar que existiendan la clase, añadiendole el modificador `final a la definición.
 
+## Transcripción
 
 ## Contenido adicional 10   
 
