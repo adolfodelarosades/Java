@@ -20,6 +20,17 @@ Conoce al profesor de Java desde 0, los requisitos y los objetivos del curso.
 ## Transcripción
 
 <img src="images/00-01.png">
+<img src="images/00-02.png">
+<img src="images/00-03.png">
+<img src="images/00-04.png">
+<img src="images/00-05.png">
+<img src="images/00-06.png">
+<img src="images/00-07.png">
+<img src="images/00-08.png">
+<img src="images/00-09.png">
+<img src="images/00-10.png">
+<img src="images/00-11.png">
+<img src="images/00-12.png">
 
 # 01 Implementación de la encapsulación 12:31 
 
