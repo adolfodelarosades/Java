@@ -7,13 +7,13 @@ Aprende a programar con Java 8, la nueva versión de uno de los lenguajes más u
 ## Contenido
 
 1. [Introducción al diseño de clases en Java](102_Java8_para_programadores_Java/01_Introducción_al_diseño_de_clases_en_Java.md) 73m
-   * Presentación del profesor y curso 7:36 
-   * Implementación de la encapsulación 12:31 
-   * Implementación de herencia con modificadores de acceso y composición 9:55 
-   * Polimorfismo 10:37 
-   * Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
-   * Uso del ámbito static para variables, métodos y clases 9:30 
-   * Clases singleton y clases de inmutables 9:09 
+   * 00 Presentación del profesor y curso 7:36 
+   * 01 Implementación de la encapsulación 12:31 
+   * 02 Implementación de herencia con modificadores de acceso y composición 9:55 
+   * 03 Polimorfismo 10:37 
+   * 04 Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
+   * 05 Uso del ámbito static para variables, métodos y clases 9:30 
+   * 06 Clases singleton y clases de inmutables 9:09 
    * Contenido adicional 10
 
 2. [Diseño avanzado de clases](102_Java8_para_programadores_Java/02_Diseño_avanzado_de_clases.md) 43m
