@@ -112,16 +112,16 @@ Algunos de los métodos de búsqueda son:
 
 ## Transcripción
 
+<img src="images/17-01.png">
+<img src="images/17-02.png">
+<img src="images/17-03.png">
+<img src="images/17-04.png">
+
 # 18 Métodos de datos, cálculo y ordenación 10:25 
 
 [Métodos de datos, cálculo y ordenación](pdfs/18_Métodos_de_datos_cálculo_y_ordenación.pdf)
 
 ## Resumen del Profesor
-
-<img src="images/17-01.png">
-<img src="images/17-02.png">
-<img src="images/17-03.png">
-<img src="images/17-04.png">
 
 ### 18.1 Métodos de datos y cálculo
 
