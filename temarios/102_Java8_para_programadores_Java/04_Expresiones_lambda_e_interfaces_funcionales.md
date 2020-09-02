@@ -1,13 +1,14 @@
 # 4. Expresiones lambda e interfaces funcionales 21m
 
-   * Interfaces funcionales 8:01 
-   * Predicate, consumer, function y supplier 13:22 
+   * 14 Interfaces funcionales 8:01 
+   * 15 Predicate, consumer, function y supplier 13:22 
    * Contenido adicional 2
    
-   
-## Interfaces funcionales 8:01 
+# 14 Interfaces funcionales 8:01 
 
 [Interfaces funcionales](pdfs/14_Interfaces_funcionales.pdf)
+
+## Resumen del Profesor
 
 ### 14.1 Interfaces
 
@@ -22,17 +23,15 @@ Desde Java SE 8, las interfaces pueden incluir la implementación de algunos mé
 ```java
 public interface Interfaz {
 
-    public void metodo();
+   public void metodo();
 
-    default public void metodoPorDefecto() {
-        System.out.println("Este es uno de los nuevos
-                    métodos por defecto");
-    }
+   default public void metodoPorDefecto() {
+      System.out.println("Este es uno de los nuevos métodos por defecto");
+   }
 
-    public static void metodoEstatico() {
-        System.out.println("Método estático en
-                        un interfaz");
-    }
+   public static void metodoEstatico() {
+      System.out.println("Método estático en un interfaz");
+   }
 
 }
 ```
@@ -46,11 +45,11 @@ Normalmente, son interfaces que implementamos mediante una clase anónima. Mucho
 ```java
 Collections.sort(lista, new Comparator<String>() {
 
-    //Ordenamos la cadena por su longitud
-    @Override
-    public int compare(String str1, String str2) {
-        return str1.length()-str2.length();
-    }
+   //Ordenamos la cadena por su longitud
+   @Override
+   public int compare(String str1, String str2) {
+      return str1.length()-str2.length();
+   }
 
 });
 ```
@@ -63,9 +62,13 @@ Las interfaces funcionales y las expresiones lambda están áltamente ligadas, d
 Collections.sort(lista, (str1, str2)-> str1.length()-str2.length());
 ```
 
-## Predicate, consumer, function y supplier 13:22 
+## Transcripción
+
+# 15 Predicate, consumer, function y supplier 13:22 
 
 [Predicate, consumer, function y supplier](pdfs/15_Uso_de_interfaces_como_Predicate_Consumer_Function_y_Supplier.pdf)
+
+## Resumen del Profesor
 
 ### 15.1 `Predicate<T>`
 
@@ -138,6 +141,8 @@ Tiene algunos interfaces *especializados* para tipos básicos:
 * `LongSupplier`
 * `DoubleSupplier`
 * `BooleanSupplier`
+
+## Transcripción
 
 ## Contenido adicional 2   
 
