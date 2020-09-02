@@ -75,6 +75,19 @@ Provocan que se ejecuten todas las operaciones intermedias. Las hay de varios ti
 
 ## Transcripción
 
+<img src="images/16-01.png">
+<img src="images/16-02.png">
+<img src="images/16-03.png">
+<img src="images/16-04.png">
+<img src="images/16-05.png">
+<img src="images/16-06.png">
+<img src="images/16-07.png">
+<img src="images/16-08.png">
+<img src="images/16-09.png">
+<img src="images/16-10.png">
+<img src="images/16-11.png">
+<img src="images/16-12.png">
+
 # 17 Métodos de búsqueda de datos 6:27 
 
 [Métodos de búsqueda de datos](pdfs/17_Métodos_de_búsqueda_de_datos.pdf)
