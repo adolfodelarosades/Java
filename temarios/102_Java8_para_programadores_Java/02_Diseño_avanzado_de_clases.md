@@ -1,14 +1,16 @@
 # 2. Diseño avanzado de clases 43m
 
-   * Clases y métodos abstractos 9:13 
-   * Código que usa final 7:22 
-   * Clases internas, locales y anónimas 19:25 
-   * Uso de enumeraciones 7:18 
+   * 07 Clases y métodos abstractos 9:13 
+   * 08 Código que usa final 7:22 
+   * 09 Clases internas, locales y anónimas 19:25 
+   * 10 Uso de enumeraciones 7:18 
    * Contenido adicional  4
    
-## Clases y métodos abstractos 9:13 
+# 07 Clases y métodos abstractos 9:13 
 
 [Clases y métodos abstractos](pdfs/07_Clases_y_métodos_abstractos.pdf)
+
+## Resumen del Profesor
 
 ### 7.1 `Abstract`
 
@@ -21,16 +23,16 @@ Son clases que no se pueden instanciar. Puede tener métodos con implementación
 ```java
 public abstract class ObjectoGrafico implements Transformable {
 
-    protected int x, y;
+   protected int x, y;
 
-    public void moverA(int nuevaX, int nuevaY) {
-        this.x = nuevaX;
-        this.y = nuevaY;
-    }
+   public void moverA(int nuevaX, int nuevaY) {
+      this.x = nuevaX;
+      this.y = nuevaY;
+   }
 
-    abstract public void dibujar();
+   abstract public void dibujar();
 
-    abstract public void cambiarTamanio(int factorAumento);
+   abstract public void cambiarTamanio(int factorAumento);
 
 }
 ```
@@ -46,30 +48,40 @@ Una clase que implementa una interfaz tiene obligación de implementar todos sus
 ```java
 public interface Transformable {
 
-    public void rotar();
-    public void voltearHorizontal();
-    public void voltearVertical();
+   public void rotar();
+   public void voltearHorizontal();
+   public void voltearVertical();
 }
 
 public abstract class ObjectoGrafico implements Transformable {
 
-    protected int x, y;
+   protected int x, y;
 
-    public void moverA(int nuevaX, int nuevaY) {
-        this.x = nuevaX;
-        this.y = nuevaY;
-    }
+   public void moverA(int nuevaX, int nuevaY) {
+      this.x = nuevaX;
+      this.y = nuevaY;
+   }
 
-    abstract public void dibujar();
+   abstract public void dibujar();
 
-    abstract public void cambiarTamanio(int factorAumento);
+   abstract public void cambiarTamanio(int factorAumento);
 
 }
 ```
 
-## Código que usa final 7:22 
+## Transcripción
+
+<img src="images/07-01.png">
+<img src="images/07-02.png">
+<img src="images/07-03.png">
+<img src="images/07-04.png">
+<img src="images/07-05.png">
+
+# 08 Código que usa final 7:22 
 
 [Código que usa final](pdfs/08_Código_que_usa_final.pdf)
+
+## Resumen del Profesor
 
 ### 8.1 Modificador final
 
@@ -97,9 +109,19 @@ Basicamente indican que aquella variable a la que afectan no se puede modificar.
 
 * Objetos: si declaramos una **referencia** como `final`, estamos diciendo que esa referencia no podrá asignarse a otro objeto. Sin embargo sí que podemos modificar el estado del objeto con sus propios métodos. Lo mismo sucedería en el caso de arrays.
 
-## Clases internas, locales y anónimas 19:25 
+## Transcripción
+
+<img src="images/08-01.png">
+<img src="images/08-02.png">
+<img src="images/08-03.png">
+<img src="images/08-04.png">
+<img src="images/08-05.png">
+
+# 09 Clases internas, locales y anónimas 19:25 
 
 [Clases internas, locales y anónimas](pdfs/09_Clases_internas_locales_y_anónimas.pdf)
+
+## Resumen del Profesor
 
 ### 9.1 Clases dentro de otras clases
 
@@ -127,9 +149,25 @@ Permiten definir e instanciar una clase a la vez. Son como clases locales sin no
 
 Las podemos definir a partir de otra clase o de una interfaz. Podemos crearlas en el cuerpo de un método, de una clase, o como argumento de un método.
 
-## Uso de enumeraciones 7:18 
+## Transcripción
+
+<img src="images/09-01.png">
+<img src="images/09-02.png">
+<img src="images/09-03.png">
+<img src="images/09-04.png">
+<img src="images/09-05.png">
+<img src="images/09-06.png">
+<img src="images/09-07.png">
+<img src="images/09-08.png">
+<img src="images/09-09.png">
+<img src="images/09-10.png">
+<img src="images/09-11.png">
+
+# 10 Uso de enumeraciones 7:18 
 
 [Uso de enumeraciones](pdfs/10_Uso_de_enumeraciones.pdf)
+
+## Resumen del Profesor
 
 ### 10.1 Tipos enumerados
 
@@ -142,6 +180,12 @@ public enum Direccion {
 ```
 
 En Java, los tipos enumerados son más potentes que en otros lenguajes. Para Java son un tipo de clase, que pueden incluir métodos y otros atributos. De hecho, el compilador añade métodos especiales (`values`), que incluso nos permite recorrer todas las instancias. Podemos pensar en que tenemos un conjunto cerrado de instancias de una clase.
+
+## Transcripción
+
+<img src="images/10-01.png">
+<img src="images/10-02.png">
+<img src="images/10-03.png">
 
 ## Contenido adicional  4   
 
