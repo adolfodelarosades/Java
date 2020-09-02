@@ -1,20 +1,37 @@
 # 7. Concurrencia en Java 65m
-   * Programación concurrente 12:51 
-   * Programación concurrente 14:07 
-   * Runnable, Callable, y ExecutorService 15:16 
-   * Código sincronizado y uso de valores atómicos 12:49 
-   * Colecciones concurrentes 10:19 
+   * 29 Programación concurrente 12:51 
+   * 30 Programación concurrente 14:07 
+   * 31 Runnable, Callable, y ExecutorService 15:16 
+   * 32 Código sincronizado y uso de valores atómicos 12:49 
+   * 33 Colecciones concurrentes 10:19 
    * Contenido adicional 5
    
-## Programación concurrente 12:51 
+# 29 Programación concurrente 12:51 
 
 [Programación concurrente](pdfs/29_Programación_concurrente.pdf)
 
+## Resumen del Profesor
+
 Empezamos un nuevo bloque en el curso de Java 8 para desarrolladores Java profundizando sobre la programación recurrente. 
 
-## Thread y su ciclo de vida 14:07 
+## Transcripción
+
+<img src="images/29-01.png">
+<img src="images/29-02.png">
+<img src="images/29-03.png">
+<img src="images/29-04.png">
+<img src="images/29-05.png">
+<img src="images/29-06.png">
+<img src="images/29-07.png">
+<img src="images/29-08.png">
+<img src="images/29-09.png">
+<img src="images/29-10.png">
+
+# 30 Thread y su ciclo de vida 14:07 
 
 [Thread y su ciclo de vida](pdfs/30_Hilos_y_su_ciclo_de_vida.pdf)
+
+## Resumen del Profesor
 
 ### 30.1 Hilos con la clase `Thread`
 
@@ -85,9 +102,13 @@ Lo podemos hacer usando el método estático `sleep`. Recibe como argumento un n
 Thread.sleep(1000);
 ```
 
-## Runnable, Callable, y ExecutorService 15:16 
+## Transcripción
+
+# 31 Runnable, Callable, y ExecutorService 15:16 
 
 [Runnable, Callable, y ExecutorService](pdfs/31_Runnable_Callable_y_ExecutorService.pdf)
+
+## Resumen del Profesor
 
 ### 31.1 Runnable
 
@@ -138,9 +159,13 @@ Los pools pueden ser de tres tipos:
 
 * *Cached*: Crea hilos conforme enviamos tareas. Reutiliza los hilos cuyas tareas han finalizado, para ejecutar tareas nuevas.
 
-## Código sincronizado y uso de valores atómicos 12:49 
+## Transcripción
+
+# 32 Código sincronizado y uso de valores atómicos 12:49 
 
 [Código sincronizado y uso de valores atómicos](pdfs/32_Código_sincronizado_y_uso_de_valores_atómicos.pdf)
+
+## Resumen del Profesor
 
 ### 32.1 Introducción
 
@@ -233,9 +258,13 @@ Algunas de las clases más usuales son:
 * `LongAdder`
 * `DoubleAdder`
 
-## Colecciones concurrentes 10:19 
+## Transcripción
+
+# 33 Colecciones concurrentes 10:19 
 
 [Colecciones concurrentes](pdfs/33_Colecciones_concurrentes.pdf)
+
+## Resumen del Profesor
 
 ### 33.1 Problemas en colecciones de acceso concurrente
 
@@ -294,6 +323,8 @@ Se trata de una estructura FIFO: first-in-first-out (primero en entrar, primero 
 * `LinkedBlockingQueue`: su capacidad inicial es `Integer.MAX_VALUE` (el mayor valor entero que podemos almacenar en un `int`).
 * `PriorityBlockingQueue`: permite ordenar los elementos según prioridad.
 * ...
+
+## Transcripción
 
 ## Contenido adicional 5   
 
