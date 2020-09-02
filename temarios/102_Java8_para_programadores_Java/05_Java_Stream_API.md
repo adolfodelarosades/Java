@@ -118,6 +118,11 @@ Algunos de los métodos de búsqueda son:
 
 ## Resumen del Profesor
 
+<img src="images/17-01.png">
+<img src="images/17-02.png">
+<img src="images/17-03.png">
+<img src="images/17-04.png">
+
 ### 18.1 Métodos de datos y cálculo
 
 Los streams nos ofrecen varios tipos de métodos terminales para realizar operaciones y cálculos con los datos. Durante el curso trabajaremos con tres tipos:
@@ -148,6 +153,12 @@ Son operaciones intermedias, que devuelven un stream con sus elementos ordenados
 * `sorted(Comparator<T>)` el stream se ordena según el orden indicado por la instancia de `Comparator`.
 
 ## Transcripción
+
+<img src="images/18-01.png">
+<img src="images/18-02.png">
+<img src="images/18-03.png">
+<img src="images/18-04.png">
+<img src="images/18-05.png">
 
 # 19 Uso de Map y flapMap 12:04 
 
@@ -204,6 +215,18 @@ Arrays
 ```
 
 ## Transcripción
+
+<img src="images/19-01.png">
+<img src="images/19-02.png">
+<img src="images/19-03.png">
+<img src="images/19-04.png">
+<img src="images/19-05.png">
+<img src="images/19-06.png">
+<img src="images/19-07.png">
+<img src="images/19-08.png">
+<img src="images/19-09.png">
+<img src="images/19-10.png">
+<img src="images/19-11.png">
 
 # 19 Uso de la clase Collector 19:28 
 
@@ -273,6 +296,16 @@ Map<String, Double> mapEmpleados = empleados.stream().distinct()
 
 ## Transcripción
 
+<img src="images/19-12.png">
+<img src="images/19-13.png">
+<img src="images/19-14.png">
+<img src="images/19-15.png">
+<img src="images/19-16.png">
+<img src="images/19-17.png">
+<img src="images/19-18.png">
+<img src="images/19-19.png">
+<img src="images/19-20.png">
+
 # 20 Uso de streams y filtros 8:27 
 
 [Uso de streams y filtros](pdfs/20_Uso_de_streams_y_filtros.pdf)
@@ -313,6 +346,9 @@ personas.entrySet()
 ```
 
 ## Transcripción
+
+<img src="images/20-01.png">
+<img src="images/20-02.png">
 
 # 21 Referencias a métodos con stream 10:55 
 
@@ -357,6 +393,12 @@ personas.sort(Persona::compararPorEdad);
 * `Clase::new`: referencia a un constructor.
 
 ## Transcripción
+
+<img src="images/21-01.png">
+<img src="images/21-02.png">
+<img src="images/21-03.png">
+<img src="images/21-04.png">
+
 
 # Práctica: Todos los elementos del API stream trabajando conjuntamente 22:25 
 
