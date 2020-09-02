@@ -81,6 +81,20 @@ Aunque Java tiene solamente una forma de crear clases, los patrones de diseño n
 
 ## Transcripción
 
+<img src="images/01-01.png">
+<img src="images/01-02.png">
+<img src="images/01-03.png">
+<img src="images/01-04.png">
+<img src="images/01-05.png">
+<img src="images/01-06.png">
+<img src="images/01-07.png">
+<img src="images/01-08.png">
+<img src="images/01-09.png">
+<img src="images/01-10.png">
+<img src="images/01-11.png">
+<img src="images/01-12.png">
+<img src="images/01-13.png">
+
 # 02 Implementación de herencia con modificadores de acceso y composición 9:55 
 
 [Herencia](pdfs/02_Herencia.pdf)
