@@ -7,7 +7,7 @@
    * 19 Uso de la clase Collector 19:28 
    * 20 Uso de streams y filtros 8:27 
    * 21 Referencias a métodos con stream 10:55 
-   * Práctica: Todos los elementos del API stream trabajando conjuntamente 22:25 
+   * 22 Práctica: Todos los elementos del API stream trabajando conjuntamente 22:25 
    * Contenido adicional 7
    
 # 16 Introducción al API Stream 16:04 
