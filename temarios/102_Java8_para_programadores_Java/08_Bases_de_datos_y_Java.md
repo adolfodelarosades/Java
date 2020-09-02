@@ -1,12 +1,14 @@
 # 8. Bases de datos y Java 66m
-   * Conexión con una base de datos 20:27 
-   * Lanzar consultas y procesar resultados 28:52 
-   * Uso de RowSet 17:30 
+   * 34 Conexión con una base de datos 20:27 
+   * 35 Lanzar consultas y procesar resultados 28:52 
+   * 36 Uso de RowSet 17:30 
    * Contenido adicional 3
    
-## Conexión con una base de datos 20:27 
+# 34 Conexión con una base de datos 20:27 
 
 [Conexión con una base de datos](pdfs/34_Conexión_con_una_base_de_datos.pdf)
+
+## Resumen del Profesor
 
 ### 34.1 Introducción
 
@@ -55,9 +57,13 @@ Aunque las consultas las trabajaremos en profundidad en el siguiente capítulo, 
 5. Los resultados se almacenan en un objeto `ResultSet`, donde se pueden consultar.
 6. Cerrar los objetos (`ResultSet`, `Statement` y `Connection`).
 
-## Lanzar consultas y procesar resultados 28:52 
+## Transcripción
+
+# 35 Lanzar consultas y procesar resultados 28:52 
 
 [Lanzar consultas y procesar resultados](pdfs/35_Lanzar_consultas_y_procesar_resultados.pdf)
+
+## Resumen del Profesor
 
 ### 35.1 Introducción
 
@@ -120,9 +126,13 @@ PreparedStatement ps = conn.prepareStatement(sql);
 ps.setFloat(1, valor);
 ```
 
-## Uso de RowSet 17:30 
+## Transcripción
+
+# 36 Uso de RowSet 17:30 
 
 [Uso de RowSet](pdfs/36_Uso_de_RowSet.pdf)
+
+## Resumen del Profesor
 
 ### 36.1 Introducción
 
@@ -197,6 +207,8 @@ rowSet.insertRow();
 Se trata del interfaz base de todos los `RowSet` de tipo desconectado (`FilteredRowSet`, `JoinRowSet` y `WebRowSet` heredan de este interfaz). La principal diferencia es que solo abre la conexión para rellenar el `RowSet` de datos, y posteriormente, para enviar las modificaciones a la base de datos.
 
 Al inicializarlo, tenemos que indicar que (índices de) columnas forman parte de la clave (primaria). Y para aceptar los cambios, necesitamos una conexión que tenga el modo auto-commit en `false`.
+
+## Transcripción
 
 ## Contenido adicional 3   
 
