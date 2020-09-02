@@ -202,6 +202,13 @@ c3.saludar("Hola Mundo, por tercera vez");
 
 ## Transcripción
 
+<img src="images/03-01.png">
+<img src="images/03-02.png">
+<img src="images/03-03.png">
+<img src="images/03-04.png">
+<img src="images/03-05.png">
+<img src="images/03-06.png">
+
 # 04 Sobreescribir los métodos hashcode, equals y to string de la clase object 14:34 
 
 [Sobreescribir los métodos hashcode, equals y to string de la clase object](pdfs/04_Equals_hashCode_y_toString.pdf)
