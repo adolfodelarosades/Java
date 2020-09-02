@@ -1,17 +1,19 @@
 # 6. Java I/O y NIO.2 105m
 
-   * Uso de flujos de salida 19:34 
-   * Uso de flujos de entrada 22:13 
-   * Trabajar con la clase file 7:09 
-   * Trabajar con la interfaz path 13:30 
-   * Utilizar métodos de la clase files 13:55 
-   * Uso de API Stream con NIO.2 9:07 
-   * Práctica de uso de Java NIO.2 19:51 
+   * 23 Uso de flujos de salida 19:34 
+   * 24 Uso de flujos de entrada 22:13 
+   * 25 Trabajar con la clase file 7:09 
+   * 26 Trabajar con la interfaz path 13:30 
+   * 27 Utilizar métodos de la clase files 13:55 
+   * 28 Uso de API Stream con NIO.2 9:07 
+   * 29 Práctica de uso de Java NIO.2 19:51 
    * Contenido adicional 21
-   
-## Uso de flujos de salida 19:34 
+
+# 23 Uso de flujos de salida 19:34 
 
 [Uso de flujos de salida ](pdfs/23_Uso_de_flujos_de_salida.pdf)
+
+## Resumen del Profesor
 
 ### 23.1 Flujos
 
@@ -68,9 +70,13 @@ BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("ficher
 
 <img src="images/stream.png">
 
-## Uso de flujos de entrada 22:13 
+## Transcripción
+
+# 24 Uso de flujos de entrada 22:13 
 
 [Uso de flujos de entrada](pdfs/24_Flujos_de_entrada.pdf)
+
+## Resumen del Profesor
 
 ## 24.1 Patrón básico de los flujos de entrada
 
@@ -101,9 +107,13 @@ Algunas de las clases que podemos usar son:
 * `StringReader`: flujo que permite leer desde la memoria.
 * `InputStreamReader`: flujo que permite transformar un InputStream en un Reader.
 
-## Trabajar con la clase file 7:09 
+## Transcripción
+
+# 25 Trabajar con la clase file 7:09 
 
 [Trabajar con la clase file](pdfs/25_Trabajar_con_la_clase_File.pdf)
+
+## Resumen del Profesor
 
 ### 25.1 Clase `File`
 
@@ -116,9 +126,13 @@ File f = new File("./", "nuevo.txt");
 f.createNewFile();
 ```
 
-## Trabajar con la interfaz path 13:30 
+## Transcripción
+
+# 26 Trabajar con la interfaz path 13:30 
 
 [Trabajar con la interfaz path](pdfs/26_Trabajar_con_la_interfaz_Path.pdf)
+
+## Resumen del Profesor
 
 ### 26.1 Introducción
 
@@ -130,21 +144,35 @@ Decimos que una ruta es **absoluta** cuando contiene el elemento raíz y la list
 
 Se introdujo en Java SE 7, como parate de Java NIO.2. Representa una ruta en el sistema de ficheros, y permite manejar diferentes sistemas de ficheros (Windows, Linux, Mac, …). Contiene el nombre del fichero, así coo la lista de directorios usada para construir la ruta.
 
-## Utilizar métodos de la clase files 13:55 
+## Transcripción
+
+# 27 Utilizar métodos de la clase files 13:55 
 
 [Utilizar métodos de la clase files](pdfs/27_Utilizar_los_métodos_de_la_clase_Files.pdf)
 
+## Resumen del Profesor
+
 En esta sección vemos la clase flies, que tiene decenas de métodos estáticos para hacer múltiples operaciones con ficheros y directorios.
 
-## Uso de API Stream con NIO.2 9:07 
+## Transcripción
+
+# 28 Uso de API Stream con NIO.2 9:07 
 
 [Uso de API Stream con NIO.2](pdfs/28_Uso_del_API_Stream_con_NIO_2.pdf)
 
+## Resumen del Profesor
+
 En esta lección pondremos en práctica lo que acabamos de aprender de la API Stream con NIO.2
 
-## Práctica de uso de Java NIO.2 19:51 
+## Transcripción
+
+# 29 Práctica de uso de Java NIO.2 19:51 
+
+## Resumen del Profesor
 
 Práctica de uso de Java NIO.2
+
+## Transcripción
 
 ## Contenido adicional 21   
 
