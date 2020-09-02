@@ -64,6 +64,13 @@ Collections.sort(lista, (str1, str2)-> str1.length()-str2.length());
 
 ## Transcripción
 
+<img src="images/14-01.png">
+<img src="images/14-02.png">
+<img src="images/14-03.png">
+<img src="images/14-04.png">
+<img src="images/14-05.png">
+<img src="images/14-06.png">
+
 # 15 Predicate, consumer, function y supplier 13:22 
 
 [Predicate, consumer, function y supplier](pdfs/15_Uso_de_interfaces_como_Predicate_Consumer_Function_y_Supplier.pdf)
@@ -143,6 +150,20 @@ Tiene algunos interfaces *especializados* para tipos básicos:
 * `BooleanSupplier`
 
 ## Transcripción
+
+<img src="images/15-01.png">
+<img src="images/15-02.png">
+<img src="images/15-03.png">
+<img src="images/15-04.png">
+<img src="images/15-05.png">
+<img src="images/15-06.png">
+<img src="images/15-07.png">
+<img src="images/15-08.png">
+<img src="images/15-09.png">
+<img src="images/15-10.png">
+<img src="images/15-11.png">
+<img src="images/15-12.png">
+<img src="images/15-13.png">
 
 ## Contenido adicional 2   
 
