@@ -1,18 +1,20 @@
 # 5. Java Stream API 106m
 
-   * Introducción al API Stream 16:04 
-   * Métodos de búsqueda de datos 6:27 
-   * Métodos de datos, cálculo y ordenación 10:25 
-   * Uso de Map y flapMap 12:04 
-   * Uso de la clase Collector 19:28 
-   * Uso de streams y filtros 8:27 
-   * Referencias a métodos con stream 10:55 
+   * 16 Introducción al API Stream 16:04 
+   * 17 Métodos de búsqueda de datos 6:27 
+   * 18 Métodos de datos, cálculo y ordenación 10:25 
+   * 19 Uso de Map y flapMap 12:04 
+   * 19 Uso de la clase Collector 19:28 
+   * 20 Uso de streams y filtros 8:27 
+   * 21 Referencias a métodos con stream 10:55 
    * Práctica: Todos los elementos del API stream trabajando conjuntamente 22:25 
    * Contenido adicional 7
    
-## Introducción al API Stream 16:04 
+# 16 Introducción al API Stream 16:04 
 
 [Introducción al API Stream](pdfs/16_Introducción_al_API_Stream.pdf)
+
+## Resumen del Profesor
 
 ### 16.1 Introducción
 
@@ -29,7 +31,6 @@ Un Stream es una secuencia de elementos que soporta operaciones para procesarlos
 En Java, los streams vienen definidos por el interfaz `java.util.stream.Stream<T>`.
 
 ### 16.2 Características de un Stream
-
 
 * Las operaciones intermedias retornan un Stream (permitiendo así el encadenamiento de llamadas a métodos).
 * Las operaciones intermedias se encolan, y son invocadas al invocar una operación terminal.
@@ -72,9 +73,13 @@ Provocan que se ejecuten todas las operaciones intermedias. Las hay de varios ti
 * Para obtener datos de un stram (agregación)
 * Para recolectar los elementos y transformarlos en otro objeto, como una colección.
 
-## Métodos de búsqueda de datos 6:27 
+## Transcripción
+
+# 17 Métodos de búsqueda de datos 6:27 
 
 [Métodos de búsqueda de datos](pdfs/17_Métodos_de_búsqueda_de_datos.pdf)
+
+## Resumen del Profesor
 
 ### 17.1 Métodos de búsqueda
 
@@ -92,9 +97,13 @@ Algunos de los métodos de búsqueda son:
 * `findAny()`: devuelve en un `Optional<T>` un elemento (cualquiera) del stream. Recomendado en streams paralelos.
 * `findFirst()` devuelve en un `Optional<T>` el primer elemento del stream. *NO RECOMENDADO* en streams paralelos.
 
-## Métodos de datos, cálculo y ordenación 10:25 
+## Transcripción
+
+# 18 Métodos de datos, cálculo y ordenación 10:25 
 
 [Métodos de datos, cálculo y ordenación](pdfs/18_Métodos_de_datos_cálculo_y_ordenación.pdf)
+
+## Resumen del Profesor
 
 ### 18.1 Métodos de datos y cálculo
 
@@ -125,9 +134,13 @@ Son operaciones intermedias, que devuelven un stream con sus elementos ordenados
 * `sorted()` el stream se ordena según el orden natural.
 * `sorted(Comparator<T>)` el stream se ordena según el orden indicado por la instancia de `Comparator`.
 
-## Uso de Map y flapMap 12:04 
+## Transcripción
+
+# 19 Uso de Map y flapMap 12:04 
 
 [Uso de Map y flapMap](pdfs/19_Uso_de_map_flatMap_y_Collector.pdf)
+
+## Resumen del Profesor
 
 ### 19.1 Uso de map
 
@@ -177,9 +190,13 @@ Arrays
     .forEach(System.out::println);
 ```
 
-## Uso de la clase Collector 19:28 
+## Transcripción
+
+# 19 Uso de la clase Collector 19:28 
 
 [Uso de la clase Collector](pdfs/19_Uso_de_map_flatMap_y_Collector.pdf)
+
+## Resumen del Profesor
 
 ### 19.3 Collectors
 
@@ -241,9 +258,13 @@ Map<String, Double> mapEmpleados = empleados.stream().distinct()
                 .collect(Collectors.toMap(Empleado::getNombre, Empleado::getSalario));
 ```
 
-## Uso de streams y filtros 8:27 
+## Transcripción
+
+# 20 Uso de streams y filtros 8:27 
 
 [Uso de streams y filtros](pdfs/20_Uso_de_streams_y_filtros.pdf)
+
+## Resumen del Profesor
 
 ### 20.1 `streams` y `filtros`
 
@@ -251,19 +272,19 @@ Map<String, Double> mapEmpleados = empleados.stream().distinct()
 
 ```java
 personas
-            .stream()
-            .filter(p -> p.getEdad() >= 18 && p.getEdad() <= 65)
-            .forEach(persona -> System.out.printf("%s (%d años)%n", persona.getNombre(), persona.getEdad()));
+      .stream()
+      .filter(p -> p.getEdad() >= 18 && p.getEdad() <= 65)
+      .forEach(persona -> System.out.printf("%s (%d años)%n", persona.getNombre(), persona.getEdad()));
 ```            
             
 Es muy combinable con algunos métodos como `findAny` o `findFirst`:
 
 ```java
 Persona p1 = personas
-                        .stream()
-                        .filter(p -> p.getNombre().equalsIgnoreCase("Andrés"))
-                        .findAny()
-                        .orElse(new Persona());
+                   .stream()
+                   .filter(p -> p.getNombre().equalsIgnoreCase("Andrés"))
+                   .findAny()
+                   .orElse(new Persona());
 ```
 
 Y se puede usar también en streams sobre colecciones tipo `Map`.
@@ -278,9 +299,13 @@ personas.entrySet()
             .forEach((key, value) -> System.out.printf("%d: %s%n", key, value.getNombre()));
 ```
 
-## Referencias a métodos con stream 10:55 
+## Transcripción
+
+# 21 Referencias a métodos con stream 10:55 
 
 [Referencias a métodos con stream](pdfs/21_Referencias_a_métodos.pdf)
+
+## Resumen del Profesor
 
 ### 21.1 Referencias a métodos
 
@@ -288,12 +313,11 @@ Las referencias a métodos son una forma de hacer nuestro código aun más conci
 
 ```java
 public class Persona {
-//…
- public static int
-   compararPorEdad(Persona a, Persona b) {
+   //…
+   public static int compararPorEdad(Persona a, Persona b) {
       return a.fechaNacimiento
-             .compareTo(b.fechaNacimiento);
- }
+                  .compareTo(b.fechaNacimiento);
+   }
 }
 
 //...
@@ -307,7 +331,7 @@ personas.sort((Persona p1, Persona p2) -> {
 });
 
 personas.sort((p1, p2) -> p1.getFechaNacimiento()
-            .compareTo(p2.getFechaNacimiento()));
+                                .compareTo(p2.getFechaNacimiento()));
 
 personas.sort(Persona::compararPorEdad);
 ```
@@ -319,9 +343,13 @@ personas.sort(Persona::compararPorEdad);
 * `Tipo::nombreMetodo`: referencia a un método de instancia de un objeto arbitrario de un tipo en particular.
 * `Clase::new`: referencia a un constructor.
 
-## Práctica: Todos los elementos del API stream trabajando conjuntamente 22:25 
+## Transcripción
+
+# Práctica: Todos los elementos del API stream trabajando conjuntamente 22:25 
 
 Ponemos en práctica todo los elementos del API stream trabajando conjuntamente
+
+## Transcripción
 
 ## Contenido adicional 7   
 
