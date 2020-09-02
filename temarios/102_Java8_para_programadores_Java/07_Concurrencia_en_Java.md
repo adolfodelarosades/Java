@@ -53,24 +53,23 @@ Una primera forma de crear un hilo es extendiendo la clase `Thread`, y aportando
 ```java
 public class PrimoThread extends Thread {
 
-    //propiedades y constructores
+   //propiedades y constructores
 
-    @Override
-    public void run() {
-        long n = minimo;
-        while(!testPrimalidad(n)) {
-            System.out.printf("%d no es primo %n", n);
-            ++n;
-        }
+   @Override
+   public void run() {
+      long n = minimo;
+      while(!testPrimalidad(n)) {
+         System.out.printf("%d no es primo %n", n);
+         ++n;
+      }
 
-        System.out.printf("El número primo es %d %n", n);
-    }
+      System.out.printf("El número primo es %d %n", n);
+  }
 
-
-    public static boolean testPrimalidad(long n) {
-
-        //cuerpo del método
-    }
+  public static boolean testPrimalidad(long n) {
+  
+     //cuerpo del método
+  }
 }
 ```
 
@@ -103,6 +102,15 @@ Thread.sleep(1000);
 ```
 
 ## Transcripción
+
+<img src="images/30-01.png">
+<img src="images/30-02.png">
+<img src="images/30-03.png">
+<img src="images/30-04.png">
+<img src="images/30-05.png">
+<img src="images/30-06.png">
+<img src="images/30-07.png">
+<img src="images/30-08.png">
 
 # 31 Runnable, Callable, y ExecutorService 15:16 
 
@@ -161,6 +169,22 @@ Los pools pueden ser de tres tipos:
 
 ## Transcripción
 
+<img src="images/31-01.png">
+<img src="images/31-02.png">
+<img src="images/31-03.png">
+<img src="images/31-04.png">
+<img src="images/31-05.png">
+<img src="images/31-06.png">
+<img src="images/31-07.png">
+<img src="images/31-08.png">
+<img src="images/31-09.png">
+<img src="images/31-10.png">
+<img src="images/31-11.png">
+<img src="images/31-12.png">
+<img src="images/31-13.png">
+<img src="images/31-14.png">
+<img src="images/31-15.png">
+
 # 32 Código sincronizado y uso de valores atómicos 12:49 
 
 [Código sincronizado y uso de valores atómicos](pdfs/32_Código_sincronizado_y_uso_de_valores_atómicos.pdf)
@@ -179,19 +203,19 @@ Supongamos la siguiente clase:
 
 ```java
 class Counter {
-  private int c = 0;
+   private int c = 0;
 
-  public void increment() {
-    c++;
-  }
+   public void increment() {
+      c++;
+   }
 
-  public void decrement() {
-    c--;
-  }
+   public void decrement() {
+      c--;
+   }
 
-  public int value() {
-    return c;
-  }
+   public int value() {
+      return c;
+   }
 }
 ```
 
@@ -222,19 +246,19 @@ El lenguaje de programación Java proporciona dos métodos básicos sincronizaci
 
 ```java
 public class SyncCounter {
-  private int c = 0;
+   private int c = 0;
 
-  public synchronized void increment() {
+   public synchronized void increment() {
       c++;
-  }
+   }
 
-  public synchronized void decrement() {
+   public synchronized void decrement() {
       c--;
-  }
+   }
 
-  public synchronized int value() {
-    return c;
-  }
+   public synchronized int value() {
+      return c;
+   }
 }
 ```
 
@@ -260,6 +284,12 @@ Algunas de las clases más usuales son:
 
 ## Transcripción
 
+<img src="images/32-01.png">
+<img src="images/32-02.png">
+<img src="images/32-03.png">
+<img src="images/32-04.png">
+<img src="images/32-05.png">
+
 # 33 Colecciones concurrentes 10:19 
 
 [Colecciones concurrentes](pdfs/33_Colecciones_concurrentes.pdf)
@@ -278,33 +308,33 @@ Son método de la clase `Object`, disponibles en cualquier clase Java que implem
 public synchronized String take() {
 
    // Esperamos a que esté disponible
-     while (empty) {
-         try {
-             wait();
-         } catch (InterruptedException e) {}
-     }
-     // Modificamos el estado
-     empty = true;
-     // Notificamos al productor que el estado ha cambiado
-     notifyAll();
-     return message;
- }
+   while (empty) {
+      try {
+         wait();
+      } catch (InterruptedException e) {}
+   }
+   // Modificamos el estado
+   empty = true;
+   // Notificamos al productor que el estado ha cambiado
+   notifyAll();
+   return message;
+}
 
- public synchronized void put(String message) {
-     // Esperamos a que el mensaje haya sido leído
-     while (!empty) {
-         try {
-             wait();
-         } catch (InterruptedException e) {}
-     }
-     // Cambiamos el estado
-     empty = false;
-     // Almacenamos el mensaje
-     this.message = message;
+public synchronized void put(String message) {
+   // Esperamos a que el mensaje haya sido leído
+   while (!empty) {
+      try {
+         wait();
+      } catch (InterruptedException e) {}
+   }
+   // Cambiamos el estado
+   empty = false;
+   // Almacenamos el mensaje
+   this.message = message;
 
-     // Notificamos al consumidor que el estado ha cambiado.
-     notifyAll();
- }
+   // Notificamos al consumidor que el estado ha cambiado.
+   notifyAll();
+}
 ```
 
 ### 33.3 Colecciones concurrentes
@@ -325,6 +355,13 @@ Se trata de una estructura FIFO: first-in-first-out (primero en entrar, primero 
 * ...
 
 ## Transcripción
+
+<img src="images/33-01.png">
+<img src="images/33-02.png">
+<img src="images/33-03.png">
+<img src="images/33-04.png">
+<img src="images/33-05.png">
+<img src="images/33-06.png">
 
 ## Contenido adicional 5   
 
