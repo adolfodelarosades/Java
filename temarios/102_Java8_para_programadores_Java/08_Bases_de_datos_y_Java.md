@@ -59,6 +59,15 @@ Aunque las consultas las trabajaremos en profundidad en el siguiente capítulo, 
 
 ## Transcripción
 
+<img src="images/34-01.png">
+<img src="images/34-02.png">
+<img src="images/34-03.png">
+<img src="images/34-04.png">
+<img src="images/34-05.png">
+<img src="images/34-06.png">
+<img src="images/34-07.png">
+<img src="images/34-08.png">
+
 # 35 Lanzar consultas y procesar resultados 28:52 
 
 [Lanzar consultas y procesar resultados](pdfs/35_Lanzar_consultas_y_procesar_resultados.pdf)
@@ -127,6 +136,16 @@ ps.setFloat(1, valor);
 ```
 
 ## Transcripción
+
+<img src="images/35-01.png">
+<img src="images/35-02.png">
+<img src="images/35-03.png">
+<img src="images/35-04.png">
+<img src="images/35-05.png">
+<img src="images/35-06.png">
+<img src="images/35-07.png">
+<img src="images/35-08.png">
+<img src="images/35-09.png">
 
 # 36 Uso de RowSet 17:30 
 
@@ -209,6 +228,14 @@ Se trata del interfaz base de todos los `RowSet` de tipo desconectado (`Filtered
 Al inicializarlo, tenemos que indicar que (índices de) columnas forman parte de la clave (primaria). Y para aceptar los cambios, necesitamos una conexión que tenga el modo auto-commit en `false`.
 
 ## Transcripción
+
+<img src="images/36-01.png">
+<img src="images/36-02.png">
+<img src="images/36-03.png">
+<img src="images/36-04.png">
+<img src="images/36-05.png">
+<img src="images/36-06.png">
+<img src="images/36-07.png">
 
 ## Contenido adicional 3   
 
