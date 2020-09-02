@@ -72,6 +72,18 @@ BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("ficher
 
 ## Transcripción
 
+<img src="images/23-01.png">
+<img src="images/23-02.png">
+<img src="images/23-03.png">
+<img src="images/23-04.png">
+<img src="images/23-05.png">
+<img src="images/23-06.png">
+<img src="images/23-07.png">
+<img src="images/23-08.png">
+<img src="images/23-09.png">
+<img src="images/23-10.png">
+<img src="images/23-11.png">
+
 # 24 Uso de flujos de entrada 22:13 
 
 [Uso de flujos de entrada](pdfs/24_Flujos_de_entrada.pdf)
@@ -109,6 +121,15 @@ Algunas de las clases que podemos usar son:
 
 ## Transcripción
 
+<img src="images/24-01.png">
+<img src="images/24-02.png">
+<img src="images/24-03.png">
+<img src="images/24-04.png">
+<img src="images/24-05.png">
+<img src="images/24-06.png">
+<img src="images/24-07.png">
+<img src="images/24-08.png">
+
 # 25 Trabajar con la clase file 7:09 
 
 [Trabajar con la clase file](pdfs/25_Trabajar_con_la_clase_File.pdf)
@@ -128,6 +149,10 @@ f.createNewFile();
 
 ## Transcripción
 
+<img src="images/25-01.png">
+<img src="images/25-02.png">
+<img src="images/25-03.png">
+
 # 26 Trabajar con la interfaz path 13:30 
 
 [Trabajar con la interfaz path](pdfs/26_Trabajar_con_la_interfaz_Path.pdf)
@@ -146,6 +171,12 @@ Se introdujo en Java SE 7, como parate de Java NIO.2. Representa una ruta en el 
 
 ## Transcripción
 
+<img src="images/26-01.png">
+<img src="images/26-02.png">
+<img src="images/26-03.png">
+<img src="images/26-04.png">
+<img src="images/26-05.png">
+
 # 27 Utilizar métodos de la clase files 13:55 
 
 [Utilizar métodos de la clase files](pdfs/27_Utilizar_los_métodos_de_la_clase_Files.pdf)
@@ -155,6 +186,15 @@ Se introdujo en Java SE 7, como parate de Java NIO.2. Representa una ruta en el 
 En esta sección vemos la clase flies, que tiene decenas de métodos estáticos para hacer múltiples operaciones con ficheros y directorios.
 
 ## Transcripción
+
+<img src="images/27-01.png">
+<img src="images/27-02.png">
+<img src="images/27-03.png">
+<img src="images/27-04.png">
+<img src="images/27-05.png">
+<img src="images/27-06.png">
+<img src="images/27-07.png">
+
 
 # 28 Uso de API Stream con NIO.2 9:07 
 
@@ -166,7 +206,14 @@ En esta lección pondremos en práctica lo que acabamos de aprender de la API St
 
 ## Transcripción
 
-# 29 Práctica de uso de Java NIO.2 19:51 
+<img src="images/28-01.png">
+<img src="images/28-02.png">
+<img src="images/28-03.png">
+<img src="images/28-04.png">
+<img src="images/28-05.png">
+<img src="images/28-06.png">
+
+#  Práctica de uso de Java NIO.2 19:51 
 
 ## Resumen del Profesor
 
