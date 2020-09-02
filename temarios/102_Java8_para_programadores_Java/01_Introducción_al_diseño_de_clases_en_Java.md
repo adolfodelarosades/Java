@@ -319,6 +319,13 @@ public class EjemploClaseStatic {
 
 ## Transcripción
 
+<img src="images/05-01.png">
+<img src="images/05-02.png">
+<img src="images/05-03.png">
+<img src="images/05-04.png">
+<img src="images/05-05.png">
+<img src="images/05-06.png">
+
 # 06 Clases singleton y clases de inmutables 9:09 
 
 [Clases singleton y clases de inmutables](pdfs/06_Singleton_e_inmutables.pdf)
@@ -367,6 +374,13 @@ Algunas recomendaciones para crear objetos inmutables:
 3. Evitar que existiendan la clase, añadiendole el modificador `final a la definición.
 
 ## Transcripción
+
+<img src="images/06-01.png">
+<img src="images/06-02.png">
+<img src="images/06-03.png">
+<img src="images/06-04.png">
+<img src="images/06-05.png">
+<img src="images/06-06.png">
 
 ## Contenido adicional 10   
 
