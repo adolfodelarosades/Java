@@ -146,6 +146,17 @@ Dentro de la clase Todo tendremos una referencia a la clase Parte. También es p
 
 ## Transcripción
 
+<img src="images/02-01.png">
+<img src="images/02-02.png">
+<img src="images/02-03.png">
+<img src="images/02-04.png">
+<img src="images/02-05.png">
+<img src="images/02-06.png">
+<img src="images/02-07.png">
+<img src="images/02-08.png">
+<img src="images/02-09.png">
+<img src="images/02-10.png">
+
 # 03 Polimorfismo 10:37 
 
 [Polimorfismo](pdfs/03_Polimorfismo.pdf)
