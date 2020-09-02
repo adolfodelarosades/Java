@@ -1,12 +1,14 @@
 # 3. Clases genéricas y colecciones 37m
-   * Creación de una clase genérica 10:22 
-   * Creación y uso de list, set y map 18:19 
-   * Interfaces Comparable y Comparator 9:07 
+   * 11 Creación de una clase genérica 10:22 
+   * 12 Creación y uso de list, set y map 18:19 
+   * 13 Interfaces Comparable y Comparator 9:07 
    * Contenido adicional 3
    
-## Creación de una clase genérica 10:22 
+# 11 Creación de una clase genérica 10:22 
 
 [Creación de una clase genérica](pdfs/11_Creación_de_una_clase_genérica.pdf)
+
+## Resumen del Profesor
 
 ### 11.1 Clases genéricas
 
@@ -14,15 +16,15 @@ Java permite desde sus orígenes usar clases genéricas, utilizando referencias 
 
 ```java
 public class Box {
-     private Object object;
+   private Object object;
 
-     public void set(Object object) {
-          this.object = object;
-     }
+   public void set(Object object) {
+      this.object = object;
+   }
 
-     public Object get() {
-          return object;
-     }
+   public Object get() {
+      return object;
+   }
 }
 ```
 
@@ -30,15 +32,15 @@ Desde Java SE 5, podemos crear clases cuyo tipo se indica en tiempo de compilaci
 
 ```java
 public class Box<T> {
-     private T object;
+   private T object;
 
-     public void set(T object) {
-          this.object = object;
-     }
+   public void set(T object) {
+      this.object = object;
+   }
 
-     public T get() {
-          return object;
-     }
+   public T get() {
+      return object;
+   }
 }
 ```
 
@@ -46,10 +48,10 @@ Podemos utilizar más de un tipo diferente a la vez:
 
 ```java
 public class Par<T, S> {
-     private T obj1;
-     private S obj2;
+   private T obj1;
+   private S obj2;
 
-     //Resto de la clase
+   //Resto de la clase
 
 }
 ```
@@ -84,9 +86,9 @@ Podemos acotar el tipo parametrizado, para que sea uno en particular o sus deriv
 ```java
 public class NumericBox<T extends Number> {
 
-     private T object;
+   private T object;
 
-     //resto de la clase
+   //resto de la clase
 }
 ```
 
@@ -94,16 +96,16 @@ Se puede indicar más de un tipo. Uno de ellos (y solo uno) se corresponderá co
 
 ```java
 public class A {
- //resto de la clase
+   //resto de la clase
 }
 
 public interface B {
- //resto de la interfaz
+   //resto de la interfaz
 }
 
 public class StrangeBox <T extends A & B> {
 
-     //resto de la clase
+   //resto de la clase
 }
 ```
 
@@ -113,15 +115,32 @@ Los tipos comodín nos permiten *relajar* el tipo concreto de una clase genéric
 
 ```java
 public static double sumOfList(List<? extends Number> list) {
-    double s = 0.0;
-    for (Number n : list)
-        s += n.doubleValue();
-    return s;
+   double s = 0.0;
+   for (Number n : list)
+      s += n.doubleValue();
+   return s;
 }
 ```
-## Creación y uso de list, set y map 18:19 
+
+## Transcripción
+
+<img src="images/11-01.png">
+<img src="images/11-02.png">
+<img src="images/11-03.png">
+<img src="images/11-04.png">
+<img src="images/11-05.png">
+<img src="images/11-06.png">
+<img src="images/11-07.png">
+<img src="images/11-08.png">
+<img src="images/11-09.png">
+<img src="images/11-10.png">
+<img src="images/11-11.png">
+
+# 12 Creación y uso de list, set y map 18:19 
 
 [Creación y uso de list, set y map](pdfs/12_Creación_y_uso_de_List_Set_y_Map.pdf)
+
+## Resumen del Profesor
 
 ### 12.1 API de colecciones
 
@@ -163,9 +182,28 @@ Se trata de una colección que no puede contener repetidos. Java propone tres im
 
 No es un subtipo de `Collection` (`List` y `Set` sí que lo son). Cada elemento tiene estructura clave, valor. La clave sirve para acceder directamente al valor. Las implementaciones son `HashMap`, `TreeMap` y `LinkedHashMap`. Las consideraciones son análogas a Set.
 
-## Interfaces Comparable y Comparator 9:07 
+## Transcripción
+
+<img src="images/12-01.png">
+<img src="images/12-02.png">
+<img src="images/12-03.png">
+<img src="images/12-04.png">
+<img src="images/12-05.png">
+<img src="images/12-06.png">
+<img src="images/12-07.png">
+<img src="images/12-08.png">
+<img src="images/12-09.png">
+<img src="images/12-10.png">
+<img src="images/12-11.png">
+<img src="images/12-12.png">
+<img src="images/12-13.png">
+<img src="images/12-14.png">
+
+# 13 Interfaces Comparable y Comparator 9:07 
 
 [Interfaces Comparable y Comparator](pdfs/13_Interfaces_Comparable_y_Comparator.pdf)
+
+## Resumen del Profesor
 
 ### 13.1 Introducción
 
@@ -202,6 +240,15 @@ public interface Comparator<T> {
 Recibe dos argumentos, y su valor de retorno es análogo al de comparable.
 
 `Comparator` nos servirá para indicar un orden diferente al orden natural definido con `Comparable` (no es necesario haber definido un orden con `Comparable` para poder utilizar `Comparator`, aunque sí es recomendable).
+
+## Transcripción
+
+<img src="images/13-01.png">
+<img src="images/13-02.png">
+<img src="images/13-03.png">
+<img src="images/13-04.png">
+<img src="images/13-05.png">
+<img src="images/13-06.png">
 
 ## Contenido adicional 3   
 
