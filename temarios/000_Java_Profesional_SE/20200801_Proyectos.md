@@ -18,15 +18,15 @@ nuevas cuentas, nuevos clientes y titulares asociados a cuentas.
 3. Dado el documento JSON con los datos de países, realizar una capa de lógica de negocio
 que permita obtener los siguientes datos:
 
-* Lista de países pertenecientes a la región indicada como parámetro
-* País más poblado
-* Total de países cuyo número de habitantes supere el valor recibido como parámetro
-* Paises cuyos nombres contengan la combinación de letras recibida como parámetro
-* Posición (longitud y latitud) del país cuyo alfa2code se recibe como parámetro
-* Población media de la región que se recibe como parámetro
-* Tabla con las regiones y la población total de cada una
+   * Lista de países pertenecientes a la región indicada como parámetro
+   * País más poblado
+   * Total de países cuyo número de habitantes supere el valor recibido como parámetro
+   * Paises cuyos nombres contengan la combinación de letras recibida como parámetro
+   * Posición (longitud y latitud) del país cuyo alfa2code se recibe como parámetro
+   * Población media de la región que se recibe como parámetro
+   * Tabla con las regiones y la población total de cada una
 
-Nota: Un país contiene la siguiente información: Nombre, capital, área y población
+   Nota: Un país contiene la siguiente información: Nombre, capital, área y población
 
 4. Desarrollar una aplicación cliente-servidor para la gestión de los datos Covid. Por un lado, el
 servidor será una aplicación que recibirá por parte del cliente el nombre de la comunidad
