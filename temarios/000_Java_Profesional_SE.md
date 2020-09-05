@@ -23,6 +23,7 @@
    * [20200729 Miercoles](/temarios/000_Java_Profesional_SE/20200729_Miercoles.md) :+1: :eyes:
    * [20200730 Jueves](/temarios/000_Java_Profesional_SE/20200730_Jueves.md) :+1: :eyes:
    * [20200731 Viernes](/temarios/000_Java_Profesional_SE/20200731_Viernes.md) :+1: :eyes:
+   * [20200801 Proyectos](/temarios/000_Java_Profesional_SE/20200801_Proyectos.md) :+1: :eyes:
    
 ## Contenido
    * [Modulo I](/temarios/000_Java_Profesional_SE/Modulo_I.md)
