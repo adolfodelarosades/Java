@@ -49,3 +49,26 @@ autónoma, entregándole como respuesta un resumen de datos de esa comunidad:
    
    Implementar también un cliente que conecte con el servidor, mande el nombre de la
 comunidad y guarde los resultados en un fichero de texto local
+
+
+## 1. Realizar una aplicación para cargar los datos de COVID de un cvs o un JSON a base de datos.
+
+Al iniciarse la aplicación, solicitará la dirección del fichero y procederá a cargar en la base de
+datos los datos del fichero que no estén ya cargados. Es decir, aquellas combinaciones de
+**fecha** y **abreviatura de comunidad** que ya estén en la BD no se cargarán de nuevo.
+
+### Creación de la BD `covid`
+
+```sql
+CREATE TABLE `covid` (
+  `idcovid` int NOT NULL AUTO_INCREMENT,
+  `ccaa_iso` varchar(2) NOT NULL,
+  `fecha` date NOT NULL,
+  `num_casos` int DEFAULT '0',
+  `num_casos_prueba_pcr` int DEFAULT '0',
+  `num_casos_prueba_test_ac` int DEFAULT '0',
+  `num_casos_prueba_otras` int DEFAULT '0',
+  `num_casos_prueba_desconocida` varchar(45) DEFAULT '0',
+  PRIMARY KEY (`idcovid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+```
