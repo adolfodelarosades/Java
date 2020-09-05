@@ -12,7 +12,8 @@ programa finalizará. Las opciones que debe permitir el programa son:
 
    * Sacar dinero
    * Ingresar dinero
-   * Mostrar saldo y últimos movimientos (de los últimos 30 días)
+   * Mostrar saldo 
+   * Últimos movimientos (de los últimos 30 días)
    * Realizar transferencia a otra cuenta.
 
    Se realizará una segunda parte de la aplicación para administradores, que permitirá:
