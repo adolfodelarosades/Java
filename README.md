@@ -208,3 +208,27 @@ mini-de-adolfo:tmp adolfodelarosa$
 [Hosting on AWS](https://happycoding.io/tutorials/java-server/hosting-aws)
 
 [startbootstrap](https://startbootstrap.com/themes/)
+
+### Infografías
+
+[Genially](https://www.genial.ly/es)
+
+[Visme](https://www.visme.co/)
+
+[Canva](https://www.canva.com/)
+
+[Piktochart](https://piktochart.com)
+
+[Easelly](https://www.easel.ly/)
+
+[Figma](https://www.figma.com/)
+
+### Grabar Video-PC
+
+[OBS](https://obsproject.com/es)
+
+### APIs
+
+[REST Countries](https://restcountries.eu/)
+[country.io](http://country.io/)
+
