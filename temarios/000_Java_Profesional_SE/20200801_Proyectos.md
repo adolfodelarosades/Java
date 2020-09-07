@@ -18,8 +18,8 @@ programa finalizará. Las opciones que debe permitir el programa son:
 
    Se realizará una segunda parte de la aplicación para administradores, que permitirá:
    
-   * Añadir nuevas cuentas
    * Nuevos clientes 
+   * Añadir nuevas cuentas
    * Titulares asociados a cuentas.
 
 3. Dado el documento JSON con los datos de países, realizar una capa de lógica de negocio
