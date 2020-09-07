@@ -2,7 +2,15 @@
 
 El curso de Análisis y Diseño Orientado a Objetos usando UML combina efectivamente la instrucción sobre los procesos de desarrollo de software, tecnologías orientadas a objetos y el Lenguaje de Modelado Unificado (UML). Este curso dirigido por un instructor utiliza conferencias, debates en grupo y actividades dirigidas por un facilitador (como el análisis de entrevistas con las partes interesadas) para presentar una hoja de ruta de análisis y diseño (OOAD) práctica, completa y orientada a objetos desde la recopilación de requisitos hasta la implementación del sistema.
 
-Los estudiantes reciben un enfoque pragmático para el desarrollo de software orientado a objetos (OO) utilizando una metodología ampliamente adoptada (el Proceso Unificado), la especificación 1.4 UML y tecnologías OO, como el lenguaje de programación Java (TM). Este curso avanza a través de: una introducción a la tecnología OO y las metodologías de desarrollo de software, la recopilación y el análisis de requisitos (incluida la entrevista a las partes interesadas), la arquitectura y el diseño del sistema, la implementación, las pruebas y el despliegue. Las clases teóricas exponen a los estudiantes a otras prácticas de OOAD comprobadas, como el análisis de colaboración de responsabilidad de clase (CRC) (utilizado para descubrir las entidades del dominio) y el análisis de robustez (utilizado para pasar del análisis al diseño).
+Los estudiantes reciben un enfoque pragmático para el desarrollo de software orientado a objetos (OO) utilizando una metodología ampliamente adoptada (el Proceso Unificado), la especificación 1.4 UML y tecnologías OO, como el lenguaje de programación Java (TM). Este curso avanza a través de: 
+
+* Una introducción a la tecnología OO y las metodologías de desarrollo de software
+* La recopilación y el análisis de requisitos (incluida la entrevista a las partes interesadas)
+* La arquitectura y el diseño del sistema
+* La implementación
+* Las pruebas y el despliegue. 
+
+Las clases teóricas exponen a los estudiantes a otras prácticas de OOAD comprobadas, como el análisis de colaboración de responsabilidad de clase (CRC) (utilizado para descubrir las entidades del dominio) y el análisis de robustez (utilizado para pasar del análisis al diseño).
 
 ## Complete Course
 
