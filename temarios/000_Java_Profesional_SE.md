@@ -26,7 +26,7 @@
    * [20200801 Proyectos](/temarios/000_Java_Profesional_SE/20200801_Proyectos.md) :+1: :eyes:
    * [20200907 Lunes](/temarios/000_Java_Profesional_SE/20200907_Lunes.md)
    
-## Contenido
+## Contenido - Diapositivas
    * [Modulo I](/temarios/000_Java_Profesional_SE/Modulo_I.md)
    * [Modulo II](/temarios/000_Java_Profesional_SE/Modulo_II.md)
    * [Modulo III](/temarios/000_Java_Profesional_SE/Modulo_III.md)
