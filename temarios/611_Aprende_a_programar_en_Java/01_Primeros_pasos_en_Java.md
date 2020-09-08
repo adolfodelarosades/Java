@@ -126,7 +126,7 @@ Que luego te puedes crear un acceso directo al escritorio como tengo yo por aqu�
 
 En la siguiente lección vamos a ver precisamente como crear nuestro primer programa una vez que tengamos instaladas estas herramientas.
 
-# 03 :computer: Primer programa en Java `601-01_Primer_Programa` 10:11
+# 03 :computer: Primer programa en Java `611-01_Primer_Programa` 10:11
 
 <img src="images/03-01.png">
 
@@ -150,7 +150,7 @@ Si nosotros ahora mismo tenemos una perspectiva JavaEE que es la por defecto, si
 
 Vamos a seleccionar la perspectiva Java y entonces se adaptará nuestro entorno a este tipo de programas que vamos a realizar simplemente ves que desaparecen algunas pestañas que no son necesarias para este tipo de programas.
 
-Vamos a crear nuestro primer programa o proyecto como se le llama en Eclipse, como es un proyecto de Java estándar, vamos a *File - New - Java Project*  es lo mismo que decir Java estándar,  aparecerá otro cuadro de diálogo en el que se nos va a solicitar el nombre del proyecto le vamos a llamar `601-01_Primer_Programa`.
+Vamos a crear nuestro primer programa o proyecto como se le llama en Eclipse, como es un proyecto de Java estándar, vamos a *File - New - Java Project*  es lo mismo que decir Java estándar,  aparecerá otro cuadro de diálogo en el que se nos va a solicitar el nombre del proyecto le vamos a llamar `611-01_Primer_Programa`.
 
 <img src="images/03-03.png">
 
