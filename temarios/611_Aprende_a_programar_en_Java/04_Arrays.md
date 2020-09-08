@@ -145,7 +145,7 @@ Es una instrucción que encontramos en el lenguaje Java desde la versión Java 5
 
 Y como digo si no necesitas el índice para nada resulta bastante más compacta.
 
-# 20 :computer: Ejercicio práctico VII `601-08-Ejercicio_Practico_7` 09:12
+# 20 :computer: Ejercicio práctico VII `611-08-Ejercicio_Practico_7` 09:12
 
 <img src="images/20-01.png">
 
@@ -155,7 +155,7 @@ Muy bien vamos a realizar un par de ejercicios donde pongamos en práctica el us
 
 En este primer ejercicio vamos a realizar un programa en el que a partir de un array que tiene almacenados 10 números enteros cualquiera se nos va a mostrar en pantalla la media de esos valores almacenados así como también su valor máximo.
 
-Vamos a nuestro entorno de desarrollo Eclipse y vamos a crear el proyecto Java `601-07-Ejercicio_Practico_7` y creamos la clase principal `CalculosArray`.
+Vamos a nuestro entorno de desarrollo Eclipse y vamos a crear el proyecto Java `611-07-Ejercicio_Practico_7` y creamos la clase principal `CalculosArray`.
 
 
 *`CalculosArray`*
@@ -197,7 +197,7 @@ En la siguiente lección vamos a realizar otro ejercicio de arrays y ahí lo que
 Por eso te recomiendo que la siguiente lección leas el documento que tenemos dentro de la sección de material adicional que explica el funcionamiento de la clase `Scanner` que es una de las clase de Java estándar, porque hay otras opciones pero quizás `Scanner` es la más sencilla para lectura de datos desde el teclado.
 
 
-# 21 :computer: Ejercicio práctico VIII `601-09-Ejercicio_Practico_8` 09:49   
+# 21 :computer: Ejercicio práctico VIII `611-09-Ejercicio_Practico_8` 09:49   
 
 <img src="images/21-01.png">
 
@@ -209,7 +209,7 @@ Vamos a hacer un programa en el que se van a leer por el teclado la introducció
 
 Una particularidad del ejercicio es que si se introduce un número negativo mientras el usuario está solicitando esos números el programa le dirá que es erróneo que vuelva de nuevo a intentarlo así hasta conseguir diez números positivos.
 
-Vamos al entorno de desarrollo Eclipse y vamos a crear el proyecto `601-09-Ejercicio_Practico_8` con la clase principal `NumerosOrdenados` con el siguiente código.
+Vamos al entorno de desarrollo Eclipse y vamos a crear el proyecto `611-09-Ejercicio_Practico_8` con la clase principal `NumerosOrdenados` con el siguiente código.
 
 *`NumerosOrdenados`*
 
