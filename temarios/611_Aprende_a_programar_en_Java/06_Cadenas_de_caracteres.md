@@ -201,7 +201,7 @@ System.out.println(cad.substring(2,8)); //Muestra: xto pr
 
 Has visto alguno de los métodos más interesantes de `String` en las siguientes lecciones vamos a hacer algunos ejercicios aplicando dichos métodos.
 
-# 28 :computer: Ejercicio práctico X `601-11-Ejercicio_Practico_10` 08:05
+# 28 :computer: Ejercicio práctico X `611-11-Ejercicio_Practico_10` 08:05
 
 <img src="images/28-01.png">
 
@@ -211,7 +211,7 @@ A continuación vamos a realizar un ejercicio en el que vamos a poner en prácti
 
 El ejercicio va a consistir en un programa que solicitará al usuario la introducción de una cadena de texto y después de eso nos dirá cuántos vocales contiene dicho texto.
 
-Vamos al entorno de desarrollo para crear el proyecto que vamos a llamar `601-11-Ejercicio_Practico_10`, vamos a crear la clase `ContarVocales` con método `main` que va a contener el siguiente código:
+Vamos al entorno de desarrollo para crear el proyecto que vamos a llamar `611-11-Ejercicio_Practico_10`, vamos a crear la clase `ContarVocales` con método `main` que va a contener el siguiente código:
 
 *`ContarVocales`*
 
@@ -247,7 +247,7 @@ Si ejecutamos el programa tenemos.
 
 <img src="images/28-03.png">
 
-# 29 :computer: Ejercicio práctico XI `601-12-Ejercicio_Practico_11` 08:52 
+# 29 :computer: Ejercicio práctico XI `611-12-Ejercicio_Practico_11` 08:52 
 
 <img src="images/29-01.png">
 
@@ -257,7 +257,7 @@ Vamos a realizar un nuevo ejercicio en el que vamos a poner en práctica más m�
 
 En este caso se trata de hacer un programa que va a solicitar al usuario la introducción de una cadena de texto, una cadena de texto que va a consistir en una serie de nombres, nombres de personas separadas por comas. A continuación el programa le va a solicitar al usuario la introducción de un nombre y qué es lo que va a hacer el programa, decirnos cuántas veces aparece este nombre en la lista de nombres introducidas en primer lugar.
 
-Vamos a crear el proyecto `601-12-Ejercicio_Practico_11` con la clase `BuscadorNombres` con método `main` y que contiene el siguiente código.
+Vamos a crear el proyecto `611-12-Ejercicio_Practico_11` con la clase `BuscadorNombres` con método `main` y que contiene el siguiente código.
 
 ```java
 import java.util.Scanner;
