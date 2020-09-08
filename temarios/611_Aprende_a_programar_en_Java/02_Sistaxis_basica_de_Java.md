@@ -289,7 +289,7 @@ La siguiente tabla nos muestra la preferencia de los operadores Java en orden de
 
 [L6-Operadores.pdf](/temarios/611_Aprende_a_programar_en_Java/pdfs/L6-Operadores.pdf)
 
-# 07 :computer: Ejercicio práctico I `601-02_Ejercicio_Practico_1` 04:39  
+# 07 :computer: Ejercicio práctico I `611-02_Ejercicio_Practico_1` 04:39  
 
 <img src="images/05-08.png">
 
@@ -301,7 +301,7 @@ El enunciado del ejercicio consiste en realizar un programa que a partir de los 
 
 Para ello nos vamos a ir a nuestro entorno de desarrollo Eclipse y damos File - New - Java Project.
 
-Y ahí nos aparecerá un cuadro de diálogo en el que nos van a pedir el nombre del proyecto, la localización donde tuviéramos el Workspace que creamos al principio, donde teníamos el primer programa. Vamos a llamarle `601-02_Ejercicio_Practico_1`, lo siguiente que tenemos que hacer es crear una clase con su método main que es donde vamos a crear todo el código de nuestro primer programa, vamos a llamarle `DivideNumeros` elegimos método main para que nos lo cree.
+Y ahí nos aparecerá un cuadro de diálogo en el que nos van a pedir el nombre del proyecto, la localización donde tuviéramos el Workspace que creamos al principio, donde teníamos el primer programa. Vamos a llamarle `611-02_Ejercicio_Practico_1`, lo siguiente que tenemos que hacer es crear una clase con su método main que es donde vamos a crear todo el código de nuestro primer programa, vamos a llamarle `DivideNumeros` elegimos método main para que nos lo cree.
 
 Y sobre ese método es donde vamos a crear todo el código de este sencillo programa que vamos a hacer.
 
