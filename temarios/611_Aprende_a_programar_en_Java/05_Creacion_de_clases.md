@@ -429,7 +429,7 @@ Gracias a la existencia de este constructor, pudimos crear objetos de la clase C
 Calculadora c=new Calculadora();
 ```
  
-# 25 :computer: Ejemplo práctico IX `601-10-Ejercicio_Practico_9` 16:02 
+# 25 :computer: Ejemplo práctico IX `611-10-Ejercicio_Practico_9` 16:02 
 
 <img src="images/25-01.png">
 
@@ -445,7 +445,7 @@ Dicho menú tendrá cuatro opciones para un programa de gestión de notas y en l
 
 Las notas se van a guardar en un array, como los arrays tienen un tamaño fijo y en nuestro caso vamos a limitarlo a 10 el tamaño del array va a ser 10. Por tanto si se elige la opción 1, teniendo ya 10 elementos nos informará de que el array está lleno y que no se admiten más notas. En cuanto a la opción 2 simplemente se mostrará la media de todas las notas que estén registradas hasta el momento. En la opción 3 el número de aprobados. Y se elija la que se elija tras procesarse dicha opción se volverá de nuevo a presentar el menú y así hasta que se elija la opción 4 que es la que teníamos prevista para abandonar el programa.
 
-Vamos a crear el proyecto de Java en Eclipse llamado `601-10-Ejercicio_Practico_9`.
+Vamos a crear el proyecto de Java en Eclipse llamado `611-10-Ejercicio_Practico_9`.
 
 En este caso lo que vamos a hacer para poder desarrollar dicha aplicación es crearnos dos clases, en una clase vamos a aislar todo lo que sería la lógica del programa, es decir la gestión de las notas, las operaciones donde vamos a añadir la nota, comprobar que sí hay espacio, hacer el cálculo de la media, el cálculo de los aprobados, etc. y la otra clase que es donde tenemos el método principal que es el punto de entrar al programa, esta la vamos a dejar para todo lo que es la interacción con el usuario y la entrada salida, la generación del menú, solicita las opciones y demás es lo que habitualmente se suele hacer en un programa ya mínimamente grande, tener esa separación como mínimo de dos capas y cada una creada con su clase correspondiente.
 
