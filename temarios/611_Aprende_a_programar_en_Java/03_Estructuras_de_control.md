@@ -38,7 +38,7 @@ Las llaves solamente son obligatorias si hay más de una instrucción dentro del
 
 El bloque `else if` es una manera de crear un `if` dentro de un bloque `else` es decir puede ocurrir que si no se cumple una condición queramos evaluar otra, en ese caso utilizaremos este bloque llamado `else if`, en este caso como ves se comprueba si el contiene de una variable es igual a 1 y si no queremos comprobar si es otro valor diferente, si `p` es mayor que 10, en ese caso en vez de abrir la llave y poner otro `if` anidado utilizamos la expresión `else if`.
 
-# 09 :computer: Ejercicio práctico II `601-03_Ejercicio_Practico_2` 04:30
+# 09 :computer: Ejercicio práctico II `611-03_Ejercicio_Practico_2` 04:30
 
 <img src="images/09-01.png">
 
@@ -48,7 +48,7 @@ Seguidamente vamos a realizar un ejercicio en el que vamos a poner en práctica 
 
 El ejercicio va a consistir en un programa que dados dos números nos va a mostrar cuál es el mayor de los dos en caso de que sean iguales pues nos saldrá un mensaje indicando que se trata de dos números iguales.
 
-Vamos a ir de nuevo a nuestro entorno de desarrollo Eclipse y vamos a crear el siguiente proyecto java `601-03_Ejercicio_Practico_2` y añadiremos una clase `MayorNumeros` con su método `main`. 
+Vamos a ir de nuevo a nuestro entorno de desarrollo Eclipse y vamos a crear el siguiente proyecto java `611-03_Ejercicio_Practico_2` y añadiremos una clase `MayorNumeros` con su método `main`. 
 
 Vamos a incluir el siguiente codigo en la clase.
 
@@ -121,7 +121,7 @@ Aunque no conocemos el tipo de texto que lo veremos más adelante en lecciones p
 
 Como ves en el ejemplo de la diapositiva tienes una variable de tipo cadena de caracteres `Strings` y es posible utilizar como expresión del `switch` un `String` estamos evaluando la variable `cad`, en ese caso los valores de los `case` deben ser obligatoriamente de tipo texto y como decíamos en las consideraciones anteriores no podemos poner variables, tienen que ser literales, valores fijos, si `cad` es `String` sólo podríamos utilizar en cada `case` valores de tipo texto, además fijos, literales. 
 
-# 11 :computer: Ejercicio práctico III `601-04-Ejercicio_Practico_3` 05:58
+# 11 :computer: Ejercicio práctico III `611-04-Ejercicio_Practico_3` 05:58
 
 <img src="images/11-01.png">
 
@@ -131,7 +131,7 @@ Para ver el funcionamiento de la instrucción `switch` explicada en la lección 
 
 Vamos a hacer un programa que da una nota almacenada en una variable nos va a indicar si se trata de un suspenso si se está entre el rango de 1 a 4, aprobado 5 y 6, notable 7 y 8 o sobresaliente si es un 9 ó 10, si es otro valor diferente a estos debe mostrar un mensaje indicando que se trata de una nota no válida.
 
-Vamos a nuestro entorno de desarrollo Eclipse y a crear un proyecto `601-04-Ejercicio_Practico_3`, añadimos la clase `CalculoNota` e insertamos el siguiente código.
+Vamos a nuestro entorno de desarrollo Eclipse y a crear un proyecto `611-04-Ejercicio_Practico_3`, añadimos la clase `CalculoNota` e insertamos el siguiente código.
 
 *`CalculoNota`*
 
@@ -256,7 +256,7 @@ Otras consideración es que la variable de control que habitualmente la declaram
 
 Esto es todo sobre `for` en la siguiente lección vamos a ver varios ejemplos de utilización del `for` por que es una de las instituciones más utilizadas en cualquier programa Java.
 
-# 13 :computer: Ejercicio práctico IV 601-05-Ejercicio_Practico_4 07:13
+# 13 :computer: Ejercicio práctico IV 611-05-Ejercicio_Practico_4 07:13
 
 <img src="images/13-01.png">
 
@@ -266,7 +266,7 @@ Muy bien pues vamos a ver un ejercicio en el que vamos a poner en práctica el u
 
 El ejercicio va a consistir en un programa que dados dos números nos va a calcular la suma de todos los números pares comprendidos entre ambos números, extremos incluidos.
 
-Vamos al entorno de desarrollo Eclipse y vamos a crear el proyecto `601-05-Ejercicio_Practico_4` y añadimos la clase `SumaPares` con el siguiente código.
+Vamos al entorno de desarrollo Eclipse y vamos a crear el proyecto `611-05-Ejercicio_Practico_4` y añadimos la clase `SumaPares` con el siguiente código.
 
 *`SumaPares`*
 
@@ -309,7 +309,7 @@ Vamos a ejecutar el programa con los diferentes casos que pueden existir.
 
 <img src="images/13-06.png">
 
-# 14 :computer: Ejercicio práctico V `601-06-Ejercicio_Practico_5` 05:38
+# 14 :computer: Ejercicio práctico V `611-06-Ejercicio_Practico_5` 05:38
 
 <img src="images/14-01.png">
 
@@ -319,7 +319,7 @@ Vamos a ver un nuevo ejercicio práctico de utilización de la instrucción repe
 
 En este caso vamos a realizar un programa que dado un número nos indica si se trata de un número primo o no. Recordemos que los números primos son aquellos que sólo son divisibles entre sí mismo y 1. Los no primos serían aquellos que pueden ser divididos y divisibles, división exacta entre cualquier número comprendido entre uno y ese mismo número.
 
-Vamos a nuestro entorno de desarrollo Eclipse y creamos un Proyecto Java con nombre `601-06-Ejercicio_Practico_5` y creamos una nueva clase `ComprobarPrimos` donde insertamos el siguiente código.
+Vamos a nuestro entorno de desarrollo Eclipse y creamos un Proyecto Java con nombre `611-06-Ejercicio_Practico_5` y creamos una nueva clase `ComprobarPrimos` donde insertamos el siguiente código.
 
 *`ComprobarPrimos`*
 
@@ -424,7 +424,7 @@ En este otro caso pues tenemos ya algo más propio de utilización de `while`, e
 
 Muy importante lo que te decimos aquí con respecto a la utilización de `while`, cuidado con los bucles infinitos. Y es que si no se establece correctamente la condición o las instrucciones no las hemos preparado adecuadamente para que en algún momento dejemos de cumplirse la condición, nos podemos encontrar con situaciones que provoquen ciclos infinitos por no definir bien la condición o no establecer bien las instrucciones que hagan que en algún momento la condición deje de cumplirse y se salga del bucle lo que provocaría como digo un bucle infinito.
 
-# 16 :computer:  Ejercicio práctico VI `601-07-Ejercicio_Practico_6` 04:05
+# 16 :computer:  Ejercicio práctico VI `611-07-Ejercicio_Practico_6` 04:05
 
 <img src="images/16-01.png">
 
@@ -436,7 +436,7 @@ Se trata de un programa en el que vamos a ir realizando una suma de números nat
 
 En este caso estamos ante una clara situación en la que no sabemos cuántos números tendremos que sumar uno más dos más ... no sabremos hasta cual tenemos que llegar para poder alcanzar 1000, es el típico caso de utilización de una instrucción repetitiva.
 
-Vamos a nuestro entorno de desarrollo Eclipse y vamos a crear un nuevo proyecto Java con nombre `601-07-Ejercicio_Practico_6` y vamos a añadir la clase `SumaMil` con el siguiente código:
+Vamos a nuestro entorno de desarrollo Eclipse y vamos a crear un nuevo proyecto Java con nombre `611-07-Ejercicio_Practico_6` y vamos a añadir la clase `SumaMil` con el siguiente código:
 
 *`SumaMil`*
 
@@ -481,7 +481,7 @@ En ejemplo tienes un pequeño progrma en el cual se van recorriendo una serie de
 
 La otra instruciones es `continue`, `continue` no provoca una salida forzada del bucle como tal, sino de la iteración actual, es decir nosotros estamos en un `for` o `while` y será una condición que haga que ya no tengamos que seguir ejecutando ese bloque de sentencias para ese valor de la variable de control, entonces llamamos a `continue`, `continue` lo que hace es ir al final del `for` como si saltarse todas las instrucciones que quedan y por lo tanto volver otra vez de nuevo a ejecutar la operación incremento a comprobar la condición y si se cumple volver a entrar, no es una salida que haga que salgamos completamente del `for` o `while` sino que simplemente de la iteración actual.
 
-Vamos a hacer un ajuste en el proyecto `601-06-Ejercicio_Practico_5` tenemos la clase `ComprobarPrimos`.
+Vamos a hacer un ajuste en el proyecto `611-06-Ejercicio_Practico_5` tenemos la clase `ComprobarPrimos`.
 
 *`ComprobarPrimos`*
 
