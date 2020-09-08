@@ -67,7 +67,7 @@ En este caso tenemos una array de cinco elementos de tipo `Persona` declaró la 
 
 Como ves se trata de una clase muy práctica y que se utiliza como he dicho antes muchísimo en las aplicaciones Java cuando vamos a trabajar con conjuntos de datos asociados a la entidad. Vas a ver en el siguiente ejercicio un caso muy concreto de utilización y que nos da la idea de lo interesante y de lo ampliamente utilizados que son este tipo de clases.
 
-# 31 :computer: Ejercicio práctio XII `601-13-Ejercicio_Practico_12` 13:20  
+# 31 :computer: Ejercicio práctio XII `611-13-Ejercicio_Practico_12` 13:20  
 
 <img src="images/31-01.png">
 
@@ -85,7 +85,7 @@ En la opción 3 se van a mostrar los datos de todos los contactos almacenados ha
 
 La opción 4 es para salir.
 
-Vamos a ir al entorno de desarrollo Eclipse y creamos el proyecto `601-13-Ejercicio_Practico_12` vamos a tener el paquete `beans` y la clase `Contacto`, luego vamos a tener un paquete `logica` con la clase `GestionContacto` donde tendremos toda la llógica para poder añadir, buscar y mostrar un contacto y otro paquete `presentacion` con la clase `Principal` encargada de interactuar con el usuario para mostrarle el menú lo que se conoce como la *Capa de Presentación*.
+Vamos a ir al entorno de desarrollo Eclipse y creamos el proyecto `611-13-Ejercicio_Practico_12` vamos a tener el paquete `beans` y la clase `Contacto`, luego vamos a tener un paquete `logica` con la clase `GestionContacto` donde tendremos toda la llógica para poder añadir, buscar y mostrar un contacto y otro paquete `presentacion` con la clase `Principal` encargada de interactuar con el usuario para mostrarle el menú lo que se conoce como la *Capa de Presentación*.
 
 
 *`Contacto`*
