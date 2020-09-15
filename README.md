@@ -239,3 +239,7 @@ mini-de-adolfo:tmp adolfodelarosa$
 [Código Limpio](https://drive.google.com/file/d/0B_rRtttpELcPSVZsVmtBTGQ4eEE/view)
 
 [Código Limpio](https://vanjota.wordpress.com/)
+
+### Links Interesantes
+
+[https://enmilocalfunciona.io/principios-solid/](Principios SOLID)
