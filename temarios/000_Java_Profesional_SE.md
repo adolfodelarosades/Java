@@ -24,7 +24,15 @@
    * [20200730 Jueves](/temarios/000_Java_Profesional_SE/20200730_Jueves.md) :+1: :eyes:
    * [20200731 Viernes](/temarios/000_Java_Profesional_SE/20200731_Viernes.md) :+1: :eyes:
    * [20200801 Proyectos](/temarios/000_Java_Profesional_SE/20200801_Proyectos.md) :+1: :eyes:
-   * [20200907 Lunes](/temarios/000_Java_Profesional_SE/20200907_Lunes.md) :eyes:
+   * [20200907 Lunes](/temarios/000_Java_Profesional_SE/20200907_Lunes.md) :eyes: Swing
+   * [20200908 Martes](/temarios/000_Java_Profesional_SE/20200908_Martes.md) :-1: Swing
+   * [20200909 Miercoles](/temarios/000_Java_Profesional_SE/20200909_Miercoles.md) :-1: Swing
+   * [20200910 Jueves](/temarios/000_Java_Profesional_SE/20200910_Jueves.md) :-1: Swing
+   * [20200911 Viernes](/temarios/000_Java_Profesional_SE/20200911_Viernes.md) :-1: FX
+   * [20200915 Martes](/temarios/000_Java_Profesional_SE/20200915_Martes.md) :-1: FX y UML
+   * [20200916 Miercoles](/temarios/000_Java_Profesional_SE/20200916_Miercoles.md) :-1: UML y Patrones
+   * [20200917 Jueves](/temarios/000_Java_Profesional_SE/20200917_Jueves.md) :-1: Patrones
+   * [20200918 Viernes](/temarios/000_Java_Profesional_SE/20200918_Viernes.md) :-1: Patrones
    
 ## Contenido - Diapositivas
    * [Modulo I](/temarios/000_Java_Profesional_SE/Modulo_I.md)
