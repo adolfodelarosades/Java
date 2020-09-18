@@ -1,36 +1,32 @@
-1. Construir software de la manera correcta
-Shekhar Gulati 1 y Rahul Sharma 2
-
-(1)Gurgaon, Haryana, India
-
-(2)Delhi, Delhi, India
+# 1. Construir software de la manera correcta
 
 Los programadores aprenden muy rápidamente que la escritura de software es difícil y propensa a errores. Una y otra vez los proyectos de software fallan porque los equipos no pueden hacer frente a la complejidad del software. Como resultado, el proyecto no cumple con el plazo, cuesta mucho más de lo esperado y no entrega el valor comercial previsto.
 
-Si miramos hacia atrás, la programación de software como profesión tiene solo unas pocas décadas. En su corta vida útil, hemos visto múltiples procesos de desarrollo de software y hemos descubierto algunas mejores prácticas. Hemos aprendido que, como cualquier otro proceso evolutivo, el software también evoluciona con el tiempo. Por lo tanto, debemos adaptarnos al cambio en lugar de ceñirnos a un plan estricto. También hemos descubierto que el desarrollo es un proceso colaborativo: muchas personas trabajan en diferentes partes del software para crear algo que satisfaga las necesidades del cliente. Diferentes personas desempeñan diferentes roles de manera iterativa para determinar el futuro de un producto. Muchas organizaciones están adoptando el proceso de desarrollo de software ágil para ayudarlas a hacer frente a los requisitos comerciales en constante cambio. Como dicen, la única constante es el cambio.
+Si miramos hacia atrás, la programación de software como profesión tiene solo unas pocas décadas. En su corta vida útil, hemos visto múltiples procesos de desarrollo de software y hemos descubierto algunas mejores prácticas. Hemos aprendido que, como cualquier otro proceso evolutivo, el software también evoluciona con el tiempo. Por lo tanto, debemos adaptarnos al cambio en lugar de ceñirnos a un plan estricto. También hemos descubierto que el desarrollo es un proceso colaborativo: muchas personas trabajan en diferentes partes del software para crear algo que satisfaga las necesidades del cliente. Diferentes personas desempeñan diferentes roles de manera iterativa para determinar el futuro de un producto. Muchas organizaciones están adoptando el proceso de desarrollo de software ágil para ayudarlas a hacer frente a los requisitos comerciales en constante cambio. Como dicen, *la única constante es el cambio*.
 
 El desarrollo basado en pruebas (TDD) es una de las prácticas del desarrollo de software ágil que muchos desarrolladores utilizan de alguna forma. La premisa de TDD es que escribe un caso de prueba fallido antes de escribir el código de producción en sí. TDD, si se hace correctamente, puede ayudarlo a escribir software que cumpla con las expectativas del cliente , tenga un diseño simple y tenga menos defectos.
 
 En este capítulo, lo ayudaremos a comprender por qué, como programador profesional, debe aprender y seguir las prácticas de TDD. Aprenderá a configurar un proyecto JUnit 5 de Java 8 basado en Gradle. Proporcionaremos una breve introducción a las nuevas funciones de Java 8 para que se sienta como en casa en caso de que no haya trabajado con Java 8 antes. Terminaremos el capítulo escribiendo un ejemplo sencillo siguiendo la práctica de TDD. Este capítulo lo preparará para futuros capítulos en los que usaremos TDD para crear una aplicación que funcione completamente y demostrar las características avanzadas de JUnit 5.
 
-Desarrollo basado en pruebas
+## Desarrollo basado en pruebas
+
 ¿Recuerda la última vez que quiso hacer un cambio para corregir un defecto crítico que descubrió un cliente? ¿Estaba seguro de que su solución no introduciría un error de regresión? Además, piense en la última vez que quiso refactorizar su código pero temió que su cambio pudiera romper algo más. Esto sucede mucho en el desarrollo de software: el miedo a romper el software. Incluso los mejores programadores cometen errores e introducen defectos.
 
 Los proyectos de software implican muchas incertidumbres. Trabajamos con nuevas tecnologías, requisitos en constante cambio, movimiento de personas o una combinación de estos. Para superar el miedo y gestionar estas incertidumbres, necesitamos una práctica de desarrollo de software que pueda ayudarnos a producir software que funcione. Debe mantener las cosas simples y proporcionarnos comentarios rápidos en caso de que algo salga mal.
 
 El desarrollo impulsado por pruebas, redescubierto por Kent Beck en 2003, es una práctica de desarrollo que aumenta la confianza del desarrollador al recomendar pruebas para todos los requisitos de software. Nos hace trabajar en ciclos de desarrollo incrementales cortos (unos minutos), proporcionando así una rápida retroalimentación sobre nuestro progreso. TDD nos obliga a escribir una prueba fallida antes de escribir el código de producción . El proceso completo se ve como sigue:
 
-Agregue una prueba para la nueva funcionalidad o comportamiento.
+1. Agregue una prueba para la nueva funcionalidad o comportamiento.
 
-Véalo fallar.
+2. Véalo fallar.
 
-Escriba suficiente código para aprobar la prueba.
+3. Escriba suficiente código para aprobar la prueba.
 
-Asegúrese de que todas las pruebas anteriores también pasen.
+4. Asegúrese de que todas las pruebas anteriores también pasen.
 
-Refactorice el código.
+5. Refactorice el código.
 
-Repita hasta que esté listo.
+6. Repita hasta que esté listo.
 
 La parte clave aquí es escribir primero una prueba fallida. La prueba especifica nuestra comprensión del sistema. Estamos escribiendo lo que esperamos que haga el sistema cuando se realice alguna acción. Esto nos ayuda a comprender claramente el sistema.
 
@@ -40,48 +36,38 @@ En el desarrollo de software, la retroalimentación rápida es la clave para la 
 
 TDD nos ayuda a lograr dos objetivos importantes:
 
-Detecta errores de regresión.
+* Detecta errores de regresión.
 
-Mantenga el diseño del sistema simple.
+* Mantenga el diseño del sistema simple.
 
 Analicemos cada uno de estos aspectos en detalle.
 
-DETECTAR ERRORES DE REGRESIÓN
+### DETECTAR ERRORES DE REGRESIÓN
+
 La razón más obvia para seguir TDD es detectar errores de regresión de forma automatizada. Los equipos que siguen TDD tienen la libertad de cambiar y agregar nuevas funciones sin preocuparse por introducir regresiones. Si todos los casos de prueba anteriores funcionaron bien, entonces podemos estar seguros de que no hemos introducido ningún error de regresión. Además, a medida que seguimos agregando pruebas para el nuevo comportamiento, la red de seguridad sigue creciendo. Estos casos de prueba dan sus frutos cada vez que alguien hace un cambio. Cuanto antes detectemos un error en el código, más rápido y económico será solucionarlo. Esto está validado por los datos compartidos por Google que puede ver en la Tabla 1-1 .
 
 Tabla 1-1. Costo de corregir errores
-Fase de prueba de software donde se encontró el error
 
-Costo estimado por error
-
-Prueba del sistema
-
-$ 5,000
-
-Examen de integración
-
-$ 500
-
-Construcción completa
-
-$ 50
-
-Prueba unitaria / Desarrollo basado en pruebas
-
-$ 5
+Fase de prueba de software donde se encontró el error | Costo estimado por error
+------------------------------------------------------|-------------------------
+Prueba del sistema | $ 5,000
+Examen de integración | $ 500
+Construcción completa | $ 50
+Prueba unitaria / Desarrollo basado en pruebas | $ 5
 
 Algunas personas pueden no ver el valor de escribir pruebas. Prefieren probar el código manualmente o usar declaraciones de registro para depurar el código cuando las cosas van mal. El acto de probar manualmente es engorroso y requiere mucho tiempo. Además de esto, es difícil cubrir manualmente todos los casos de esquina de cualquier software no trivial. Los humanos suelen ser buenos para comprobar los caminos felices (es decir, escenarios que siempre funcionan). Por lo tanto, existe una gran posibilidad de que las pruebas manuales pierdan algunos casos de esquina.
 
 Si el sistema está escrito siguiendo TDD , cada vez que descubra un error, el equipo agregará un caso de prueba adicional que reproduzca el error. Ahora, podrá realizar cambios en el código de producción para aprobar el caso de prueba fallido. Esto asegurará que se maneje la caja de la esquina. Además, como este estuche de esquina ahora es parte del conjunto de pruebas automatizadas, puede estar seguro de que no se lo volverá a perder.
 
-MANTENGA EL DISEÑO DEL SISTEMA SIMPLE
+### MANTENGA EL DISEÑO DEL SISTEMA SIMPLE
+
 Las pruebas automatizadas escritas por programadores se han considerado tradicionalmente un esfuerzo de garantía de calidad. Su objetivo es verificar la corrección de una implementación en el momento de redactarla y verificar su corrección en el futuro a medida que evoluciona el código. Las pruebas son solo la mitad de la historia. Demostraremos, a lo largo de este libro, que TDD es esencialmente una herramienta de diseño y que las pruebas son solo un efecto secundario.
 
 Una de las formas en que las personas ven el desarrollo de software es dividiéndolo en diferentes fases. Las dos fases más comunes son
 
-Diseño
+* Diseño
 
-Codificación
+* Codificación
 
 A menudo, un equipo diseña el sistema y otro equipo lo implementa. Cuando las personas intentan implementar un diseño creado por otros, a menudo no funciona. Los programadores enfrentan muchos desafíos cuando comienzan a implementar el diseño propuesto.
 
@@ -91,7 +77,7 @@ Cuando comenzamos a escribir pruebas , comenzamos a diseñar el código con una 
 
 La fase de refactorización de TDD es la fase más crítica. Mientras refactoriza, piense en el Código de conducta de Boy Scout:
 
-Siempre deje el campamento más limpio de lo que lo encontró.
+**Siempre deje el campamento más limpio de lo que lo encontró.**
 
 Refactorizar no significa que tengas que perfeccionar tu código. Intente hacer que el código sea un poco mejor que cuando lo revisó por primera vez. Puede mejorar el nombre de una variable, método o clase. Puede dividir una función grande en funciones más pequeñas o extraer una preocupación a una clase diferente. El objetivo es hacer que la versión actual sea mejor que la versión anterior. Si seguimos esta práctica todos los días, avanzaremos hacia una base de código más simple y legible.
 
@@ -99,19 +85,22 @@ TDD como herramienta de diseño requiere un cambio de mentalidad. No sucederá e
 
 TDD nos obliga a escribir clases poco acopladas para que podamos probarlas fácilmente de forma aislada. Nos vemos obligados a hacer que las dependencias sean explícitas para probar el código específico de forma aislada. Escribimos pequeños módulos cohesivos que hacen una cosa para que podamos probar comportamientos específicos. Los módulos se pueden ampliar en el futuro para cumplir con los requisitos cambiantes . Todas estas son buenas prácticas de diseño impuestas por TDD. Todo esto facilita la lectura y la comprensión del código. Varios estudios nos dicen que los programadores dedican más tiempo a leer y comprender el código que a escribirlo. En 2007, Microsoft realizó una encuesta en la que el 95% de los encuestados estuvo de acuerdo en que comprender el código existente es una parte importante de su trabajo.
 
-Niveles de prueba
+## Niveles de prueba
+
 A medida que comience a practicar TDD, redactará diferentes niveles de pruebas. Su aplicación debe estar compuesta por pruebas en cada uno de los siguientes niveles. Cada uno de estos niveles se centra en un aspecto diferente del código y proporciona diferentes comentarios. Veámoslos uno por uno.
 
-Prueba unitaria : aquí prueba componentes de software individuales para verificar si la unidad individual hace lo correcto de forma aislada.
+* Prueba unitaria : aquí prueba componentes de software individuales para verificar si la unidad individual hace lo correcto de forma aislada.
 
-Prueba de integración: aquí prueba varias unidades juntas para verificar si funcionan correctamente como una unidad.
+* Prueba de integración: aquí prueba varias unidades juntas para verificar si funcionan correctamente como una unidad.
 
-Prueba de aceptación: aquí prueba el sistema completo para verificar si funciona según las expectativas del usuario. A menudo se denomina prueba funcional.
+* Prueba de aceptación: aquí prueba el sistema completo para verificar si funciona según las expectativas del usuario. A menudo se denomina prueba funcional.
 
 La figura 1-1 muestra una pirámide de prueba. El punto que transmite la Figura 1-1 es que debe tener muchas más pruebas unitarias que pruebas funcionales o de integración. Este libro se centrará principalmente en las pruebas unitarias, pero también debería dedicar tiempo a aprender sobre los otros dos tipos de pruebas.
 
-A429029_1_En_1_Fig1_HTML.gif
+<img src="images/Figura-01-01.png">
+
 Figura 1-1. Pirámide de prueba
+
 El concepto de prueba unitaria se remonta a 1976 cuando David J. Panzal presentó Procedimientos de prueba: un nuevo enfoque para la verificación de software en la segunda conferencia internacional sobre ingeniería de software. El documento describe el procedimiento de prueba como una forma de invocar un caso de prueba en un módulo de destino para generar un informe que indique si el "caso de prueba" ha fallado. Estos procedimientos de prueba son parte de los entregables del producto y se pueden utilizar como validación inicial del producto y prueba de regresión posterior. Estos procedimientos se escribieron para FORTRAN en un lenguaje llamado lenguaje de procedimientos de prueba (TPL)
 
 Beneficios de las pruebas unitarias
