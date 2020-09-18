@@ -1,5 +1,7 @@
 # Java Unit Testing with JUnit 5: Test Driven Development with JUnit 5
 
+<img src="images/Portada.png">
+
 by Shekhar Gulati, Rahul Sharma<br/>
 Publisher: Apress<br/>
 Release Date: November 2017<br/>
