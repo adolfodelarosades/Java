@@ -1,6 +1,6 @@
 # Java Unit Testing with JUnit 5: Test Driven Development with JUnit 5
 
-<img src="901_Java_Unit_Testing/images/Portada.png">
+<img src="901_Java_Unit_Testing/images/Portada-01.png">
 
 by Shekhar Gulati, Rahul Sharma<br/>
 Publisher: Apress<br/>
