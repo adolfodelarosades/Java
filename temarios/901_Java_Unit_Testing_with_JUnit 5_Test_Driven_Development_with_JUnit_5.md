@@ -57,7 +57,7 @@ Cubrir
 
 Frontmatter
 
-1. [Construir software de la manera correcta](temarios/901_Java_Unit_Testing/01_Construir_software_de_la_manera_correcta.md)
+1. [Construir software de la manera correcta](901_Java_Unit_Testing/01_Construir_software_de_la_manera_correcta.md)
 
 2. Comprensión de Core JUnit 5
 
