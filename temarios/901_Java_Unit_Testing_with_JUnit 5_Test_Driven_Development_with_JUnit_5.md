@@ -1,10 +1,10 @@
 # Java Unit Testing with JUnit 5: Test Driven Development with JUnit 5
 
-by Shekhar Gulati, Rahul Sharma
-Publisher: Apress
-Release Date: November 2017
-ISBN: 9781484230152
-Topic: Java
+by Shekhar Gulati, Rahul Sharma<br/>
+Publisher: Apress<br/>
+Release Date: November 2017<br/>
+ISBN: 9781484230152<br/>
+Topic: Java<br/>
 
 ### Descripción del libro
 
