@@ -1,20 +1,26 @@
 # 000 Java Profesional SE
 
 ## Clases
+
+### Módulo 1.
+
    * [20200702 Jueves](/temarios/000_Java_Profesional_SE/20200702_Jueves.md) :-1:
    * [20200703 Viernes](/temarios/000_Java_Profesional_SE/20200703_Viernes.md) :-1:
    * [20200706 Lunes](/temarios/000_Java_Profesional_SE/20200706_Lunes.md) :-1:
-   * [20200707 Martes](/temarios/000_Java_Profesional_SE/20200707_Martes.md) :-1:
-   * [20200708 Miercoles](/temarios/000_Java_Profesional_SE/20200708_Miercoles.md) :-1:
-   * [20200709 Jueves](/temarios/000_Java_Profesional_SE/20200709_Jueves.md) :-1:
-   * [20200710 Viernes](/temarios/000_Java_Profesional_SE/20200710_Viernes.md) :-1:
-   * [20200713 Lunes](/temarios/000_Java_Profesional_SE/20200713_Lunes.md) :-1:
-   * [20200714 Martes](/temarios/000_Java_Profesional_SE/20200714_Martes.md) :+1: :eyes:
-   * [20200715 Miercoles](/temarios/000_Java_Profesional_SE/20200715_Miercoles.md) :+1: :eyes:
-   * [20200716 Jueves](/temarios/000_Java_Profesional_SE/20200716_Jueves.md) :-1:
-   * [20200717 Viernes](/temarios/000_Java_Profesional_SE/20200717_Viernes.md) :-1:
-   * [20200720 Lunes](/temarios/000_Java_Profesional_SE/20200720_Lunes.md) :+1: :eyes:
-   * [20200721 Martes](/temarios/000_Java_Profesional_SE/20200721_Martes.md) :+1: :eyes:
+   * [20200707 Martes](/temarios/000_Java_Profesional_SE/20200707_Martes.md) :-1: Métodos Estaticos,Clases envoltorio, Colecciones
+   * [20200708 Miercoles](/temarios/000_Java_Profesional_SE/20200708_Miercoles.md) :-1: Git, HashMap
+   * [20200709 Jueves](/temarios/000_Java_Profesional_SE/20200709_Jueves.md) :-1: Clase Array, POO, Constructores, Métodos - Atributos - Bloques Estaticos, Herencia, Clases Finales, SobreEscribir Métodos 
+   * [20200710 Viernes](/temarios/000_Java_Profesional_SE/20200710_Viernes.md) :-1: JUnit, Maven, Métodos Equals y Hashcode, Java Bean, Modificadores de Acceso, Polimorfismo, Clases Abstractas, Polimorfismo
+   * [20200713 Lunes](/temarios/000_Java_Profesional_SE/20200713_Lunes.md) :-1: Clases Genericas, Cast, Interfaces
+
+### Módulo 2.
+
+   * [20200714 Martes](/temarios/000_Java_Profesional_SE/20200714_Martes.md) :+1: :eyes: Multitarea - MultiHilo o Concurrencia, Multitarea Clásica, Bloques Sincronizados, Thread-Safe, Novedades de Interfaces en Java 8, Interfaces Funcionales, Predicate, Expresiones Lambda, 
+   * [20200715 Miercoles](/temarios/000_Java_Profesional_SE/20200715_Miercoles.md) :+1: :eyes: BiPredicate, Transformaciones, BiFunction, Consumer, Supplier, UnaryOperator, Nuevos métods de colecciones, Comparator
+   * [20200716 Jueves](/temarios/000_Java_Profesional_SE/20200716_Jueves.md) :-1: Ejercicio, Excepciones, Multicatch
+   * [20200717 Viernes](/temarios/000_Java_Profesional_SE/20200717_Viernes.md) :-1: IO, Try con Recursos, Acceso ficheros, Ejercicio Fin de Semana, Streams
+   * [20200720 Lunes](/temarios/000_Java_Profesional_SE/20200720_Lunes.md) :+1: :eyes: Streams
+   * [20200721 Martes](/temarios/000_Java_Profesional_SE/20200721_Martes.md) :+1: :eyes: Streams, Collectors, Referencia a métodos,  NIO
    * [20200722 Miercoles](/temarios/000_Java_Profesional_SE/20200722_Miercoles.md) :+1: :eyes:
    * [20200723 Jueves](/temarios/000_Java_Profesional_SE/20200723_Jueves.md) :+1: :eyes:
    * [20200724 Viernes](/temarios/000_Java_Profesional_SE/20200724_Viernes.md) :-1:
