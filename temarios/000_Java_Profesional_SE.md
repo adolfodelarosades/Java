@@ -21,15 +21,17 @@
    * [20200717 Viernes](/temarios/000_Java_Profesional_SE/20200717_Viernes.md) :-1: IO, Try con Recursos, Acceso ficheros, Ejercicio Fin de Semana, Streams
    * [20200720 Lunes](/temarios/000_Java_Profesional_SE/20200720_Lunes.md) :+1: :eyes: Streams
    * [20200721 Martes](/temarios/000_Java_Profesional_SE/20200721_Martes.md) :+1: :eyes: Streams, Collectors, Referencia a métodos,  NIO
-   * [20200722 Miercoles](/temarios/000_Java_Profesional_SE/20200722_Miercoles.md) :+1: :eyes:
-   * [20200723 Jueves](/temarios/000_Java_Profesional_SE/20200723_Jueves.md) :+1: :eyes:
-   * [20200724 Viernes](/temarios/000_Java_Profesional_SE/20200724_Viernes.md) :-1:
-   * [20200727 Lunes](/temarios/000_Java_Profesional_SE/20200727_Lunes.md) :+1: :eyes:
-   * [20200728 Martes](/temarios/000_Java_Profesional_SE/20200728_Martes.md) :eyes:
-   * [20200729 Miercoles](/temarios/000_Java_Profesional_SE/20200729_Miercoles.md) :+1: :eyes:
-   * [20200730 Jueves](/temarios/000_Java_Profesional_SE/20200730_Jueves.md) :+1: :eyes:
-   * [20200731 Viernes](/temarios/000_Java_Profesional_SE/20200731_Viernes.md) :+1: :eyes:
+   * [20200722 Miercoles](/temarios/000_Java_Profesional_SE/20200722_Miercoles.md) :+1: :eyes: JSON, 
+   * [20200723 Jueves](/temarios/000_Java_Profesional_SE/20200723_Jueves.md) :+1: :eyes: Fechas
+   * [20200724 Viernes](/temarios/000_Java_Profesional_SE/20200724_Viernes.md) :-1: Fechas
+   * [20200727 Lunes](/temarios/000_Java_Profesional_SE/20200727_Lunes.md) :+1: :eyes: Nueva Multitarea
+   * [20200728 Martes](/temarios/000_Java_Profesional_SE/20200728_Martes.md) :eyes: Solución Ejercicio
+   * [20200729 Miercoles](/temarios/000_Java_Profesional_SE/20200729_Miercoles.md) :+1: :eyes: Base de Datos
+   * [20200730 Jueves](/temarios/000_Java_Profesional_SE/20200730_Jueves.md) :+1: :eyes: Fechas SQL, Procedimientos Almacenados
+   * [20200731 Viernes](/temarios/000_Java_Profesional_SE/20200731_Viernes.md) :+1: :eyes: Comunicación Java entre sí
+   
    * [20200801 Proyectos](/temarios/000_Java_Profesional_SE/20200801_Proyectos.md) :+1: :eyes:
+   
    * [20200907 Lunes](/temarios/000_Java_Profesional_SE/20200907_Lunes.md) :eyes: Swing
    * [20200908 Martes](/temarios/000_Java_Profesional_SE/20200908_Martes.md) :-1: Swing
    * [20200909 Miercoles](/temarios/000_Java_Profesional_SE/20200909_Miercoles.md) :-1: Swing
