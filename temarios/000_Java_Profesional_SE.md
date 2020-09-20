@@ -34,6 +34,43 @@
    * [20200917 Jueves](/temarios/000_Java_Profesional_SE/20200917_Jueves.md) :-1: Patrones
    * [20200918 Viernes](/temarios/000_Java_Profesional_SE/20200918_Viernes.md) :-1: Patrones
    
+   * [20200921 Lunes](/temarios/000_Java_Profesional_SE/20200921_Lunes.md) :-1:
+   * [20200922 Martes](/temarios/000_Java_Profesional_SE/20200922_Martes.md) :-1:
+   * [20200923 Miercoles](/temarios/000_Java_Profesional_SE/20200923_Miercoles.md) :-1:
+   * [20200924 Jueves](/temarios/000_Java_Profesional_SE/20200924_Jueves.md) :-1:
+   * [20200925 Viernes](/temarios/000_Java_Profesional_SE/20200925_Viernes.md) :-1:
+   
+   * [20200928 Lunes](/temarios/000_Java_Profesional_SE/20200928_Lunes.md) :-1:
+   * [20200929 Martes](/temarios/000_Java_Profesional_SE/20200929_Martes.md) :-1:
+   * [20200930 Miercoles](/temarios/000_Java_Profesional_SE/20200930_Miercoles.md) :-1:
+   * [20201001 Jueves](/temarios/000_Java_Profesional_SE/20201001_Jueves.md) :-1:
+   * [20201002 Viernes](/temarios/000_Java_Profesional_SE/20201002_Viernes.md) :-1:
+   
+   * [20201005 Lunes](/temarios/000_Java_Profesional_SE/20201005_Lunes.md) :-1:
+   * [20201006 Martes](/temarios/000_Java_Profesional_SE/20201006_Martes.md) :-1:
+   * [20201007 Miercoles](/temarios/000_Java_Profesional_SE/20201007_Miercoles.md) :-1:
+   * [20201008 Jueves](/temarios/000_Java_Profesional_SE/20201008_Jueves.md) :-1:
+   * [20201009 Viernes](/temarios/000_Java_Profesional_SE/20201009_Viernes.md) :-1:
+   
+   * [20201013 Martes](/temarios/000_Java_Profesional_SE/20201013_Martes.md) :-1:
+   * [20201014 Miercoles](/temarios/000_Java_Profesional_SE/20201014_Miercoles.md) :-1:
+   * [20201015 Jueves](/temarios/000_Java_Profesional_SE/20201015_Jueves.md) :-1:
+   * [20201016 Viernes](/temarios/000_Java_Profesional_SE/20201016_Viernes.md) :-1:
+   
+   * [20201019 Lunes](/temarios/000_Java_Profesional_SE/20201019_Lunes.md) :-1:
+   * [20201020 Martes](/temarios/000_Java_Profesional_SE/20201020_Martes.md) :-1:
+   * [20201021 Miercoles](/temarios/000_Java_Profesional_SE/20201021_Miercoles.md) :-1:
+   * [20201022 Jueves](/temarios/000_Java_Profesional_SE/20201022_Jueves.md) :-1:
+   * [20201023 Viernes](/temarios/000_Java_Profesional_SE/20201023_Viernes.md) :-1:
+   
+   * [20201026 Lunes](/temarios/000_Java_Profesional_SE/20201026_Lunes.md) :-1:
+   * [20201027 Martes](/temarios/000_Java_Profesional_SE/20201027_Martes.md) :-1:
+   * [20201028 Miercoles](/temarios/000_Java_Profesional_SE/20201028_Miercoles.md) :-1:
+   * [20201029 Jueves](/temarios/000_Java_Profesional_SE/20201029_Jueves.md) :-1:
+   * [20201030 Viernes](/temarios/000_Java_Profesional_SE/20201030_Viernes.md) :-1:
+   
+   
+   
 ## Contenido - Diapositivas
    * [Modulo I](/temarios/000_Java_Profesional_SE/Modulo_I.md)
    * [Modulo II](/temarios/000_Java_Profesional_SE/Modulo_II.md)
