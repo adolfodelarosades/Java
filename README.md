@@ -74,7 +74,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 * [630 Eclipse IDE for Beginners: Increase Your Java Productivity]
 * [631 Java Database Connection: JDBC and MySQL]
-* [632 JSP, Servlets and JDBC for Beginners: Build a Database App]
+* [632 JSP, Servlets and JDBC for Beginners: Build a Database App](https://github.com/adolfodelarosades/Java/blob/master/temarios/632_JSP_Servlets_and_JDBC_for_Beginners.md)
 * [633 JSF 2.2 - Java Server Faces for Beginners - Build a DB App]
 * [634 Hibernate: Advanced Development Techniques]
 * [635 Spring & Hibernate for Beginners (includes Spring Boot)]
