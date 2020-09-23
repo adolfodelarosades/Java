@@ -13,7 +13,7 @@ El curso proporciona a los estudiantes experiencia práctica en el diseño de un
 * [Table of Contents](004_Java_SE_7_Develop_Rich_Client_Applications/toc.pdf)
 * [Lesson 1: Introduction to the Course](004_Java_SE_7_Develop_Rich_Client_Applications/les01.pdf)
 * [Lesson 2: Introduce Rich Client Applications](004_Java_SE_7_Develop_Rich_Client_Applications/les02.pdf)
-* [Lesson 3: JavaFX]](004_Java_SE_7_Develop_Rich_Client_Applications/les03.pdf)
+* [Lesson 3: JavaFX](004_Java_SE_7_Develop_Rich_Client_Applications/les03.pdf)
 * [Lesson 4: Generics and JavaFX Collections](004_Java_SE_7_Develop_Rich_Client_Applications/les04.pdf)
 * [Lesson 5: UI Controls](004_Java_SE_7_Develop_Rich_Client_Applications/les05.pdf)
 * [Lesson 6: Visual Effects](004_Java_SE_7_Develop_Rich_Client_Applications/les06.pdf)
