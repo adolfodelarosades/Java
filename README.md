@@ -242,6 +242,8 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [Código Limpio](https://vanjota.wordpress.com/)
 
+[Beginning Java Objects](https://github.com/apress/beg-java-objects)
+
 ### Links Interesantes
 
 [https://enmilocalfunciona.io/principios-solid/](Principios SOLID)
