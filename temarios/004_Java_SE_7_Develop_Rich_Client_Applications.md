@@ -1,8 +1,10 @@
 # Java SE 7: Develop Rich Client Applications
 
-Complete Course	File Size	
+El curso proporciona a los estudiantes experiencia práctica en el diseño de una aplicación utilizando el patrón Model-View-Controller (MVC), JavaFX y funciones de base de datos utilizando JPA.
 
-Java SE 7: Develop Rich Client Applications Ed 1 (Student Guide - Volume 1)	7.55 MB	Download
+## Complete Course
+
+* [Java SE 7: Develop Rich Client Applications Ed 1 Student Guide - Volume 1](temarios/004_Java_SE_7_Develop_Rich_Client_Applications/sg1.pdf)
 
 Java SE 7: Develop Rich Client Applications Ed 1 (Student Guide - Volume 2)	9.45 MB	Download
 
