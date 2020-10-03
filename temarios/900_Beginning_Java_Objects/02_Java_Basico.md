@@ -404,6 +404,8 @@ El siguiente error del compilador surgiría en la última línea de código:
 variable bar might not have been initialized 
 foo = foo + bar;
             ^
+            
+The local variable bar may not have been initialized (ECLIPSE)           
 ```
 
 Para corregir este error, necesitaríamos asignar un valor explícito a `bar`, así como a `foo`, antes
@@ -419,7 +421,87 @@ foo = foo + bar; // Esta línea ahora se compilará correctamente.
 ```
 
 <hr>
-142/5000
 En el Capítulo 13, aprenderá que las reglas de inicialización automática son algo diferentes cuando se trata del "funcionamiento interno" de los objetos.
 <hr>
+
+## El tipo `String`
+
+Veremos otro tipo de Java importante en este capítulo: el tipo `String`. Un `String` representa una secuencia de cero o más caracteres Unicode.
+
+**El símbolo `String` comienza con una "S" mayúscula, mientras que los nombres de los tipos primitivos se expresan en minúsculas: `int`, `float`, `boolean`, etc.** Esta diferencia de uso de mayúsculas es deliberada y obligatoria; **`string` (minúscula) no funciona como un tipo** :
+
+```java
+string s = "foo"; // Esto no se compilará.
+```
+
+Aquí está el mensaje de error:
+
+```sh
+cannot find symbol
+symbol:  string
+
+string cannot be resolved to a type (ECLIPSE)
+```
+
+(Explicaré la importancia de la capitalización de `String` como tipo a su debido tiempo).
+
+Hay varias formas de crear e inicializar una variable `String`. La más fácil y más cómoda 
+es declarar una variable de tipo `String` y asignar un valor a la variable utilizando un **string literal** literal de cadena. Un literal de cadena es cualquier texto entre comillas dobles, incluso si consta de un solo carácter:
+
+```java
+String name = "Steve";    // Tenga en cuenta el uso de comillas dobles, independientemente de la
+String shortString = "A"; // longitud, cuando estamos asignando un valor literal
+                          // a una variable String.
+```
+
+Dos enfoques comúnmente utilizados para inicializar una variable `String` con un placeholder temporal son los siguientes:
+
+* Asignar una cadena vacía, representada por dos comillas dobles consecutivas:
+   
+   `String s = "";`
+
+* Asignar el valor `null`, que es una palabra clave Java que se usa para indicar que a un `String` aún no se le ha asignado un valor "real" (como aprenderá más adelante en el libro, usaremos la palabra clave nula de la misma manera para referencias de objetos en general):
+   
+   `String s = null;`
+
+El operador de signo más (`+`) se usa normalmente para la suma aritmética, pero cuando se usa junto con `Strings`, **representa la concatenación de cadenas**. Se puede concatenar cualquier número de valores de cadena con el operador `+`, como ilustra el siguiente fragmento de código:
+
+
+
+```java
+
+```
+
+```java
+
+```
+
+
+```java
+
+```
+
+
+```java
+
+```
+
+
+```java
+
+```
+
+
+```java
+
+```
+
+
+```java
+
+```
+
+```java
+
+```
 
