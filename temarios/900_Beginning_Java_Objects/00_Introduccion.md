@@ -1,7 +1,6 @@
 # Introducción
 
-## STUDENT REGISTRATION SYSTEM (SRS) CASO DE ESTUDIO: 
-## SRS ESPECIFICACION DE REQUERIMIENTOS
+### STUDENT REGISTRATION SYSTEM (SRS) CASO DE ESTUDIO: SRS ESPECIFICACION DE REQUERIMIENTOS
 
 Se nos ha pedido que desarrollemos un Sistema de Registro de Estudiantes (SRS) automatizado. Este sistema permitirá que los estudiantes se registren en línea para los cursos de cada semestre, así como realizar un seguimiento del progreso del estudiante hacia la finalización de su título.
 
