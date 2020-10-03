@@ -865,7 +865,7 @@ Muy raramente un programa se ejecutará secuencialmente, línea por línea, de p
     
 El lenguaje Java proporciona varios tipos diferentes de bucles y otras estructuras de control de flujo para solucionar estas situaciones.
 
-### if Statements
+### `if` Statements
 
 La instrucción `if` es una instrucción de rama condicional básica que ejecuta una o más líneas de código si se satisface una condición, representada como una expresión lógica. Alternativamente, se pueden ejecutar una o más líneas de código si la condición **no** se satisface colocando ese código después de la palabra clave `else`. El uso de una cláusula `else` con una instrucción `if` es opcional.
 
@@ -935,11 +935,211 @@ if (finished) { // equivalente a:  if (finished == true) {
 }
 ```
 
+El operador `!` ("not") se puede usar para negar una expresión lógica, de modo que el bloque de código asociado con una instrucción `if` se ejecuta cuando la expresión se evalúa como falsa en su lugar:
+
+```java
+if (!finished) { // equivale a:  if (finished == false)
+   System.out.println("Nosotros NO hemos terminado ... :op"); 
+}
+```
+
+Al probar la igualdad de dos expresiones, recuerde que debemos usar dos signos iguales consecutivos, no solo uno:
+
+```java
+if (x == 3) { // Note el uso del doble signo de igual (==) para probar la igualdad.
+y = x; }
+```
+
+<hr>
+Un error común que cometen los programadores principiantes de Java, particularmente aquellos que han programado previamente en C o C ++, es intentar usar un solo signo igual para probar la igualdad, como en este ejemplo:
+
+:fire:
+```java
+// Note el uso incorrecto del signo simple de igualdad. 
+if (x = 3) {
+   y = x; 
+}
+```
+
+```sh
+ECLIPSE
+Type mismatch: cannot convert from int to boolean
+```
+
+En Java, una prueba `if` debe basarse en una expresión lógica válida; `x = 3` no es una expresión lógica, sino más bien una expresión de asignación. De hecho, **la declaración if anterior ni siquiera se compilará en Java**, mientras que se compilaría en los lenguajes de programación C y C ++, porque en esos lenguajes, si las pruebas se basan en la evaluación de expresiones al valor entero 0 (interpretado como falso ) o distinto de cero (interpretado como verdadero).
+<hr>
+
+Es posible anidar construcciones `if-else` para probar más de una condición. Si está anidado, una instrucción `if` interna (más opcional `else`) se coloca dentro de la parte `else` de un `if` externo. La sintaxis básica para una construcción `if-else` anidada de dos niveles se muestra aquí:
+  
+```java
+if (logical-expression-1) { 
+   ejecuta este código
+}
+else {
+   if (logical-expression-2) { 
+      ejecuta este código alterno
+   }
+   else {
+        ejecuta este código si ninguna de las expresiones de arriba se evalua a true
+   } 
+}
+```
+
+No hay límite para la cantidad de construcciones `if-else` anidadas que se pueden usar, aunque si se anidan demasiado profundamente, el código puede resultar difícil de entender y, por lo tanto, de mantener para un lector humano.
+
+La instrucción `if` anidada que se muestra en el ejemplo anterior se puede escribir alternativamente sin utilizar la anidación de la siguiente manera:
+
+```java
+if (logical-expression-1) { 
+   ejecuta este código
+}
+else if (logical-expression-2) {
+   ejecuta este código alterno
+}
+else {
+   ejecuta este código si ninguna de las expresiones de arriba se evalua a true
+}
+```
+
+Tenga en cuenta que las dos formas son lógicamente equivalentes.
+
+### `switch` Statements
+
+Una instrucción `switch` es similar a una construcción `if-else` en que permite la ejecución condicional de una o más líneas de código. Sin embargo, en lugar de evaluar una expresión lógica como lo hace una construcción `if-else`, una instrucción `switch` compara el valor de una expresión `int` o `char` con los valores definidos por una o más etiquetas de caso. Si se encuentra una coincidencia, se ejecuta el código que sigue a la etiqueta de caso coincidente. Se puede incluir una etiqueta `default` opcional para definir el código que se ejecutará si la expresión `int` o `char` no coincide con ninguna de las etiquetas de caso.
+
+La sintaxis general de una sentencia `switch` es la siguiente:
+
+```java
+switch (int-or-char-expression) { 
+   case value1:
+      una o más líneas de código para ejecutar si el valor de la expresión coincide con  value1
+      break; 
+   case value2:
+      una o más líneas de código para ejecutar si el valor de la expresión coincide con  value2
+      break;
+   // más etiquetas de case, según sea necesario ...
+   case valueN:
+      una o más líneas de código para ejecutar si el valor de la expresión coincide con  valueN 
+      break;
+   default:
+      código predeterminado para ejecutar si ninguno de los casos coincide
+}
+```
+
+Por ejemplo:
+
+```java
+// x se supone que se ha declarado previamente como int. 
+switch (x) {
+   case 1: 
+      // se ejecuta si x es igual a 1 
+      System.out.println("Uno ..."); 
+      break;
+   case 2: 
+      // se ejecuta si x es igual a 2 
+      System.out.println("Dos ..."); 
+      break;
+   default: 
+      // se ejecuta si x tiene un valor diferente de 1 ó 2 
+      System.out.println("Ni uno ni dos ...");
+}
+```
+
+Tenga en cuenta lo siguiente:
+
+* La expresión entre paréntesis que sigue a la palabra clave `switch` debe ser una expresión que evalúe un valor `char` o `int`.
+* Los valores que siguen a las etiquetas `case` deben ser valores constantes (un número entero "hardwired" constante o literal de carácter).
+* Dos puntos (:), no puntos y coma (;), terminan las etiquetas `case` y `default`.
+* Las sentencias que siguen a una etiqueta `case` dada no deben estar entre llaves. Ellas constituyen una lista de sentencias en lugar de un bloque de código.
+
+A diferencia de una instrucción `if`, una instrucción `switch` no se termina automáticamente cuando se encuentra una coincidencia y se ejecuta el código que sigue a la etiqueta `case` coincidente. Para salir de una instrucción `switch`, se debe utilizar una instrucción `break`. Si no se incluye una declaración de interrupción después de una etiqueta `case` determinada, la ejecución "pasará" al siguiente `case` o etiqueta `default`. Este comportamiento se puede utilizar para nuestra ventaja: cuando se va a ejecutar la misma lógica para más de una etiqueta de caso, se pueden apilar dos o más etiquetas `case` una tras otra, como se muestra aquí:
+
+
+```java
+// x se supone que ha sido previamente declarado como int
+switch (x) {
+   case 1:
+      código a ejecutar si x es igual a 1
+   case 2:
+      código a ejecutar si x es igual a 1 OR 2 
+   case 3:
+      código a ejecutar si x es igual a 1, 2, OR 3
+      break;
+   case 4:
+       código a ejecutar si x es igual a 4
+}
+```
+
+
 ```java
 
 ```
 
-```java
+### `for` Statements
 
-```
+Una instrucción for es una construcción de programación que se utiliza para ejecutar una o más instrucciones un cierto número de veces. La sintaxis general de la instrucción for es la siguiente:
+for (inicializador; condición; iterador) {
+código para ejecutar mientras la condición se evalúa como verdadera
+}
+Una instrucción for define tres elementos que están separados por punto y coma y entre paréntesis después de la palabra clave for: el inicializador, la condición y el iterador. El inicializador se utiliza para proporcionar un valor inicial para una variable de control de bucle. La variable puede declararse como parte del inicializador, o puede declararse antes en el código, antes de la instrucción for, por ejemplo:
+// La variable de control de bucle 'i' se declara dentro de la instrucción for: for (int i = 0; condición; iterador) {
+    código para ejecutar mientras la condición se evalúa como verdadera
+}
+// Tenga en cuenta que i ya no es reconocido por el compilador cuando el bucle 'for' sale, // porque se declaró efectivamente dentro del bucle 'for'; hablaremos sobre el // alcance de una variable más adelante en este capítulo .
+versus
+// La variable de control de bucle 'i' se declara antes del inicio del bucle 'for':
+int i;
+para (i = 0; condición; iterador) {
+código para ejecutar mientras la condición se evalúa como verdadera
+}
+para (int i = 0; i <5; iterador) {
+código para ejecutar siempre que el valor de i sea menor que 5
+}
+para (int i = 0; i <5; i ++) {
+código para ejecutar siempre que el valor de i sea menor que 5
+}
+Nuevamente, observe el uso de un punto y coma (;) después del inicializador y la condición, pero no después del iterador.
+A continuación, se muestra un desglose de cómo funciona un bucle for:
+1. Cuando la ejecución del programa alcanza la declaración, el inicializador se ejecuta primero (y
+sólo una vez).
+2. Elcondicionamientoeselnevaluado.Silacondiciónevalúaverdadero, se ejecuta el bloque de código que sigue al paréntesis.
+CAPÍTULO 2 ■ ALGUNOS FUNDAMENTOS DE JAVA 49
+   La condición es una expresión lógica que normalmente involucra la variable de control de bucle:
+ El iterador normalmente incrementa o reduce la variable de control de bucle:
+ 
+                                        50 CAPÍTULO 2 ■ ALGUNOS CONCEPTOS BÁSICOS DE JAVA
+3. Una vez finalizado el bloque de código, se ejecuta la iteración.
+4. Luego se evalúa la condición. Si la condición sigue siendo cierta, el bloque de código es
+una vez más, seguido de la ejecución de la declaración del iterador.
+Este proceso se repite hasta que la condición se vuelve falsa, momento en el que termina el ciclo for. A continuación, se muestra un ejemplo simple que utiliza declaraciones for anidadas para generar una tabla de multiplicar simple. Las variables de control de bucle, j y k, se declaran dentro de sus respectivas declaraciones for.
+Siempre que se cumplan las condiciones de las instrucciones for respectivas, se ejecuta el bloque de código que sigue a la instrucción for. El operador ++ se utiliza para incrementar los valores de j y k cada vez que se ejecuta el bloque de código respectivo.
+public class ForDemo {
+    public static void main (String [] args) {
+// Calcula una tabla de multiplicar simple. para (int j = 1; j <= 4; j ++) {
+para (int k = 1; k <= 4; k ++) {
+System.out.println (j + "*" + k + "=" + (j * k));
+}}
+}}
+Aquí está el resultado:
+1 * 1 = 1 1 * 2 = 2 1 * 3 = 3 1 * 4 = 4 2 * 1 = 2 2 * 2 = 4 2 * 3 = 6 2 * 4 = 8 3 * 1 = 3 3 * 2 = 6 3 * 3 = 9 3 * 4 = 12 4 * 1 = 4 4 * 2 = 8 4 * 3 = 12 4 * 4 = 16
+Al igual que con otras estructuras de control de flujo, si solo se especifica una declaración después de la condición for, se pueden omitir las llaves:
+para (int i = 0; i <3; i ++) sum = sum + i;
+pero se considera una buena práctica de programación utilizar llaves independientemente de:
+para (int i = 0; i <3; i ++) {suma = suma + i;
+}
 
+### `while` Statements
+
+Una instrucción while tiene una función similar a una instrucción for, ya que ambas se utilizan para ejecutar repetidamente un bloque de código asociado. Sin embargo, si no es práctico predecir el número de veces que se ejecutará el bloque de código cuando comience el ciclo, una instrucción while es la opción preferida, porque una instrucción while continúa ejecutándose siempre que se cumpla una condición específica.
+La sintaxis general de la instrucción while es la siguiente:
+while (condición) {
+código para ejecutar repetidamente mientras la condición continúa evaluándose como verdadera
+}
+La condición puede ser una expresión lógica simple o compleja que se evalúa como un valor verdadero o falso, por ejemplo:
+int x = 1; int y = 1;
+mientras que ((x <20) || (y <10)) {
+con suerte haremos algo dentro de este cuerpo de bucle que incremente el valor de
+    ya sea xo y, para evitar un bucle infinito.
+}
+Cuando la ejecución del programa alcanza una instrucción while, la condición se evalúa primero. Si la condición es verdadera, se ejecuta el bloque de código que sigue a la condición. Cuando el bloque de código finaliza, la condición se evalúa nuevamente y, si sigue siendo verdadera, el proceso se repite hasta que la condición se evalúa como falsa, momento en el que termina el ciclo while.
+A continuación, se muestra un ejemplo simple que ilustra el uso de un ciclo while para imprimir valores enteros consecutivos de 0 a 3. Una variable booleana denominada finalizada se establece inicialmente en falso. La variable finalizada se usa como bandera: mientras finalizada sea falsa, el bloque de código que sigue al ciclo while continuará ejecutándose. Cuando el valor de i llega a 4, el indicador de finalización se establecerá en verdadero, momento en el que terminará el ciclo while.
