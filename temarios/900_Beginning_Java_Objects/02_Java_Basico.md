@@ -1,6 +1,6 @@
 # 02 Java Básico
 
-<spam style="background-color: #FFE34F;">Java está orientado a objetos en su esencia. ***Casi todo*** en Java es un objeto</spam>:
+<p style="background-color: #FFE34F;">Java está orientado a objetos en su esencia. ***Casi todo*** en Java es un objeto</p>:
 
 * Todos los datos, con la excepción de unos pocos tipos primitivos, se encuentran registrados como objetos.
 * Todos los bloques de construcción de GUI (ventanas, botones, campos de entrada de texto, barras de desplazamiento, listas, menús, etc.) son objetos.
