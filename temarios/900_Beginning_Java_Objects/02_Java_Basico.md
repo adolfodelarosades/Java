@@ -466,14 +466,53 @@ Dos enfoques comúnmente utilizados para inicializar una variable `String` con u
 
 El operador de signo más (`+`) se usa normalmente para la suma aritmética, pero cuando se usa junto con `Strings`, **representa la concatenación de cadenas**. Se puede concatenar cualquier número de valores de cadena con el operador `+`, como ilustra el siguiente fragmento de código:
 
-
-
 ```java
-
+String x = "foo";
+String y = "bar";
+String z = x + y + "!"; // z asume el valor "foobar!" 
+                        //(los valores de x y y no se afectan)
+                  
 ```
 
-```java
+Aprenderá sobre algunas de las muchas otras operaciones que se pueden realizar con o sobre `Strings`, junto con información sobre su naturaleza OO, en el Capítulo 13.
 
+## Case Sensitivity
+
+Java es un lenguaje **case-sensitive** que distingue entre mayúsculas y minúsculas. Es decir, el uso de mayúsculas frente a minúsculas en Java es deliberado y obligatorio, por ejemplo:
+
+* Los nombres de las variables que se escriben de la misma manera pero que difieren en su uso de caso representan diferentes variables:
+
+```java
+// Estas son dos variables DIFERENTES en lo que respecta al compilador de Java
+int x; // lowercase - minúsculas
+int X; // uppercase - mayúsculas
+```
+
+• Todas las palabras clave se representan en minúsculas: `public`, `class`, `int`, `boolean` y en adelante. **No sea “creativo” al ponerlas en mayúsculas**, ya que el compilador objetará violentamente, a menudo con mensajes de error de compilación ininteligibles, como en el siguiente ejemplo, donde la palabra reservada `for` es mayúsculas incorrectamente:
+
+```java
+// La palabra reservada 'for' debe estar en minúsculas. 
+For (int i = 0; i < 3; i++) {
+```
+que a su vez produce el siguiente error de compilador aparentemente extraño:
+
+```sh
+'.class' expected
+For (int i = 0; i < 3; i++) {
+         ^
+         
+ECLIPSE
+Multiple markers at this line
+	- i cannot be resolved to a variable
+	- i cannot be resolved to a variable
+	- Syntax error, insert ")" to complete MethodInvocation
+	- Syntax error, insert ";" to complete Statement
+	- Syntax error on token "<", invalid AssignmentOperator
+	- Syntax error on token ")", ; expected
+	- The method For(Class<Integer>) is undefined for the type 
+	 SimpleProgram
+	- Syntax error, insert ". class" to complete Expression
+	- i cannot be resolved to a variable
 ```
 
 
