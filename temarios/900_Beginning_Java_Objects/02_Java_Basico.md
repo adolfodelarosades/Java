@@ -56,6 +56,7 @@ j = s + c + f;
 
 Tenga en cuenta que no podemos **anidar** comentarios de bloque, es decir, lo siguiente no se compilará:
 
+:fire:
 ```java
 / * Esto inicia un comentario ...
 x = 3;
@@ -370,6 +371,7 @@ boolean weAreFinished;
 
 Recuerde que, como se mencionó anteriormente, **las palabras clave de Java no se pueden usar como nombres de variables**. Lo siguiente no se compilará, porque `public` es una palabra clave de Java:
 
+:fire:
 ```java
 int public;
 ```
@@ -390,6 +392,7 @@ int public;
 
 En Java, a las variables no se les asigna necesariamente un valor inicial cuando se declaran, **pero a todas las variables se les debe asignar un valor antes de usar el valor de la variable en una sentencia de asignación**. Por ejemplo, en el siguiente fragmento de código, se declaran dos variables int(eger); un valor inicial se asigna explícitamente a la variable `foo`, pero no a la variable `bar`. Un intento posterior de sumar los valores de las dos variables da como resultado **un error del compilador**:
 
+:fire:
 ```java
 int foo;
 int bar;
@@ -490,6 +493,7 @@ int X; // uppercase - mayúsculas
 
 • Todas las palabras clave se representan en minúsculas: `public`, `class`, `int`, `boolean` y en adelante. **No sea “creativo” al ponerlas en mayúsculas**, ya que el compilador objetará violentamente, a menudo con mensajes de **error de compilación** ininteligibles, como en el siguiente ejemplo, donde la palabra reservada `for` es mayúsculas incorrectamente:
 
+:fire:
 ```java
 // La palabra reservada 'for' debe estar en minúsculas. 
 For (int i = 0; i < 3; i++) {
@@ -649,10 +653,221 @@ Operador       | Descripción
 `!exp`         | `not` lógico; alterna el valor de una expresión lógica de `true` a `false` y viceversa
 
 
-```java
+A continuación, se muestra un ejemplo que utiliza el operador lógico `"and"` para programar la expresión lógica compuesta "si x es mayor que 2.0 e y no es igual a 4.0":
 
+```java
+if ((x > 2.0) && (y != 4.0)) { ... }
 ```
 
+Las expresiones lógicas se utilizan más comúnmente con estructuras de control de flujo, que se describen más adelante en este capítulo.
+
+### Evaluación de Expresiones y Precedencia de Operadores
+
+Como se mencionó anteriormente en el capítulo, las expresiones de complejidad arbitraria se pueden construir colocando en capas paréntesis anidados, por ejemplo, `(((8 * (y + z)) + y) * x)`. El compilador generalmente evalúa tales expresiones desde el paréntesis más interno al más externo, de izquierda a derecha. Suponiendo que `x`, `y` y `z` se declaran e inicializan como se muestra aquí:
+
+```java
+int x = 1; 
+int y = 2; 
+int z = 3;
+```
+
+luego la expresión en el lado derecho de la siguiente declaración de asignación
+
+```java
+int answer = ((8 * (y + z)) + y) * x;
+```
+
+se evaluaría pieza por pieza de la siguiente manera:
+
+```java
+                               ((8 * (y + z)) + y) * x
+                                  ((8 * 5) + y) * x
+                                     (40 + y) * x
+                                        42 * x
+                                          42
+```					  
+
+En ausencia de paréntesis, ciertos operadores tienen prioridad sobre otros en términos de cuándo se aplicarán al evaluar una expresión. Por ejemplo, la multiplicación o la división se realiza antes que la suma o la resta. La precedencia del operador se puede alterar explícitamente mediante el uso de paréntesis; las operaciones realizadas entre paréntesis tienen prioridad sobre las operaciones fuera de paréntesis. Considere el siguiente fragmento de código:
+
+```java
+int j = 2 + 3 * 4; // j se le asignará el valor 14
+int k = (2 + 3) * 4; // k se le asignará el valor 20
+```
+
+En la primera línea de código, que no usa paréntesis, la operación de multiplicación tiene prioridad sobre la operación de suma, por lo que la expresión general se evalúa con el valor `2 + 12 = 14;` es como si hubiéramos escrito explícitamente `2 + (3 * 4)` sin tener que hacerlo.
+
+En la segunda línea de código, los paréntesis se colocan explícitamente alrededor de la operación `2 + 3` para que la operación de suma se realice primero y la suma resultante luego se multiplique por `4` para un valor de expresión general de `5 * 4 = 20`.
+
+Volviendo a un ejemplo anterior
+
+```java
+if ((x > 2.0) && (y != 4.0)) { ... }
+```
+tenga en cuenta que los operadores `>` y `!=` tienen prioridad sobre el operador `&&`, de modo que podríamos eliminar los paréntesis anidados de la siguiente manera:
+
+```java
+if (x > 2.0 && y != 4.0) { ... }
+```
+
+Sin embargo, los paréntesis adicionales ciertamente no hacen daño y, de hecho, se puede argumentar que aclaran la intención de la expresión.
+
+### El tipo de una Expresión
+
+El tipo de una expresión es el tipo Java del valor al que la expresión finalmente evalúa.  Por ejemplo, dado el fragmento de código
+
+```java
+double x = 3.0;
+double y = 2.0;
+if ((x > 2.0) && (y != 4.0)) { ... }
+```
+
+la expresión `(x > 2.0) && (y != 4.0)` se evalúa como verdadera y, por lo tanto, la expresión `(x > 2.0) && (y != 4.0)` se dice que es una expresión de tipo booleano. Y, en el siguiente fragmento de código
+
+```java
+int x = 1;
+int y = 2;
+int z = 3;
+int answer = ((8 * (y + z)) + y) * x;
+```
+
+la expresión `((8 * (y + z)) + y) * x` se evalúa en 42, y de ahí la expresión `((8 * (y + z)) + y) * x` se dice que es una expresión de tipo `int`(eger).
+
+### Conversiones de Tipo Automáticas y Casting Explicito
+
+Java admite la **conversión automática de tipos**. Esto significa que si intentamos asignar un valor a una variable 
+
+```java
+// Pseudocode.
+x = expression;
+```
+
+y la expresión en el lado derecho de la declaración de asignación se evalúa como un tipo diferente al tipo con el que se declaró la variable en el lado izquierdo de la declaración de asignación, Java convertirá automáticamente el valor de la expresión de la derecha para que coincida con el tipo de x, **pero solo si no se perderá precisión al hacerlo**. Esto se comprende mejor mirando un ejemplo:
+
+:fire:
+```java
+int x;
+double y;
+y = 2.7;
+x = y; // Estamos tratando de asignar un valor doble a una variable int.
+```
+
+En el fragmento de código anterior, intentamos asignar el valor `double` de `y`, `2.7`, a `x`, que se declara como un `int`. Si esta asignación tuviera lugar, la parte fraccionaria de `y` se truncaría y `x` terminaría con un valor entero de `2`. Esto representa una pérdida de precisión, también conocida como **conversión de restricción - narrowing conversion**.
+
+Un compilador C o C ++ permitirá esta asignación, truncando silenciosamente el valor. Sin embargo, en lugar de asumir que esto es lo que pretendemos hacer, el compilador de Java generará un error en la última línea de código de la siguiente manera:
+
+
+```sh
+possible loss of precision
+found: double
+required: int
+
+ECLIPSE
+Type mismatch: cannot convert from double to int
+```
+
+Para indicarle al compilador de Java que estamos dispuestos a aceptar la pérdida de precisión, debemos realizar una **conversión explícita - explicit cast**, es decir, debemos preceder a la expresión cuyo valor se convertirá con el tipo de destino, entre paréntesis:
+
+```java
+// Pseudocode.
+x = (type) expression;
+```
+
+En otras palabras, tendríamos que reescribir la última línea del ejemplo anterior de la siguiente manera para que el compilador de Java permita la asignación de un valor de punto flotante más preciso a una variable entera menos precisa:
+
+```java
+int x;
+double y;
+y = 2.7;
+x = (int) y; // Esto se compilará ahora, porque tenemos explícitamente
+	     // informó al compilador que QUEREMOS que se produzca una 
+	     // conversión de reducción (narrowing conversion).
+```
+
+int x;
+Por supuesto, si tuviéramos que invertir la dirección de la asignación, asignando el valor `int` de la variable `x` a la variable `double y`, el compilador de Java no tendría ningún problema con la asignación:
+
+```java
+int x;
+double y;
+x = 2;
+y = x; // Asignar un valor int menos preciso a una variable doble que sea capaz de
+       // manejando más precisión - esto está bien como está.
+```
+
+
+En este caso particular, estamos asignando un valor de menor precisión, `2`, a una variable capaz de manejar mayor precisión; `y` terminará con el valor de `2.0`. Esto se conoce como **conversión de ampliación - widening conversion**. Estas conversiones se realizan automáticamente en Java y no es necesario convertirlas explícitamente.
+
+
+Tenga en cuenta que existe una idiosincrasia con respecto a la asignación de valores constantes a variables de tipo `float` en Java; la siguiente declaración no se compilará:
+
+:fire:
+```java
+float y = 3.5; // Esto no compila!
+```
+
+```sh
+ECLIPSE
+Type mismatch: cannot convert from double to 
+ float
+```
+
+porque Java trata automáticamente un valor constante numérico con un componente fraccionario como `3.5` como un valor `double` de mayor presición, por lo que el compilador verá esto como una *conversión de restricción* y se negará a realizar la asignación. Para **forzar** tal asignación, debemos convertir explícitamente la constante de punto flotante (floating-point) en un `float`:
+
+```java
+float y = (float) 3.5; // Esto compilará, gracias por el cast.
+```
+
+o, alternativamente, podemos forzar la constante en el lado derecho de la instrucción de asignación para que sea vista por el compilador de Java como un flotante usando el sufijo F, como se muestra aquí:
+flotar y = 3.5F; // Bien, porque estamos indicando que la constante debe // tratarse como un flotante, no como un doble.
+Otra opción más es simplemente declarar variables dobles en lugar de variables flotantes siempre que deseemos representar valores numéricos de coma flotante en un programa.
+Normalmente usaremos dobles en lugar de flotantes siempre que necesitemos declarar variables de punto flotante en nuestra aplicación SRS en la Parte 3 del libro, solo para evitar estos problemas de conversión de tipos.
+Las expresiones de tipo char se pueden convertir a cualquier otro tipo numérico, como se ilustra en el siguiente ejemplo:
+char c = 'a';
+// Asignar un valor de carácter a una variable numérica transfiere su // valor numérico ASCII equivalente.
+int x = c;
+flotar y = c;
+doble z = c;
+System.out.println (x); System.out.println (y); System.out.println (z);
+Aquí está el resultado:
+97 97,0 97,0
+El único tipo de Java que no se puede convertir, ni implícita ni explícitamente, en otro tipo es el tipo booleano.
+Verás otras aplicaciones de transmisión, que involucran objetos, más adelante en el libro.
+Lazos y otras estructuras de control de flujo
+Muy raramente un programa se ejecutará secuencialmente, línea por línea, de principio a fin. En cambio, la ruta de ejecución a través de la lógica de un programa a menudo será condicional.
+• Puede ser necesario que el programa se ejecute en un cierto bloque de código si se cumple alguna condición, o en un bloque de código diferente si no se cumple la condición.
+• Un programa puede tener que ejecutar repetidamente un bloque particular de código un número fijo de veces, o hasta que se logre un resultado particular.
+    
+                                        El lenguaje Java proporciona varios tipos diferentes de bucles y otras estructuras de control de flujo para solucionar estas situaciones.
+si declaraciones
+La instrucción if es una instrucción de rama condicional básica que ejecuta una o más líneas de código si se satisface una condición, representada como una expresión lógica. Alternativamente, se pueden ejecutar una o más líneas de código si la condición no se satisface colocando ese código después de la palabra clave else. El uso de una cláusula else con una instrucción if es opcional.
+La sintaxis básica de la instrucción if es la siguiente:
+// Pseudocódigo.
+if (expresión-lógica) {
+    ejecutar cualquier código contenido dentro de estas llaves
+si la expresión lógica se evalúa como verdadera
+}
+O agregando una cláusula else opcional:
+// Pseudocódigo.
+if (expresión-lógica) {
+    ejecutar cualquier código contenido dentro de estas llaves
+si la expresión lógica se evalúa como verdadera
+}
+else {
+    ejecutar cualquier código que esté contenido dentro de estas llaves si
+expresión-lógica se evalúa como falsa
+}
+Si solo una instrucción ejecutable sigue a la palabra clave if u (opcional) else, la
+Las llaves se pueden omitir, como se muestra aquí:
+// Pseudocódigo.
+if (expresión-lógica) declaración única para ejecutar si expresión-lógica es verdadera; else declaración única para ejecutar si la expresión lógica es falsa;
+Por ejemplo:
+si (x> 3) y = x; si no z = x;
+Pero, en general, se considera una buena práctica usar siempre aparatos ortopédicos de la siguiente manera:
+si (x> 3) {y = x;
+}
+else {
+z = x; }
+Una sola variable booleana, como una forma simple de expresión booleana, puede servir como expresión / condición lógica de una instrucción if. Por ejemplo, es perfectamente aceptable escribir lo siguiente:
 
 ```java
 
