@@ -15,7 +15,7 @@ Debido a esto, Java se presta particularmente bien para escribir aplicaciones qu
 
 En la figura se muestra una clase java de las más sencillas, la cuenta con los siguientes elementos:
 
-### Comentarios
+## Comentarios
 
 Los comentarios comienzan con `//`
 
@@ -29,7 +29,7 @@ Java soporta tres diferentes estilos de comentarios:
 * end-of-line
 * Java documentation comments.
 
-#### Traditional Comments
+### Traditional Comments
 
 Los comentarios tradicionales de Java derivan del lenguaje C y comienzan con una barra inclinada seguida de un asterisco (`/*`) y terminan con un asterisco seguido de una barra inclinada (`*/`). Todo lo que se incluye entre estos delimitadores se trata como un comentario y, por lo tanto, el compilador de Java lo ignora, sin importar cuántas líneas abarque el comentario.
 
@@ -83,7 +83,7 @@ y
      ^
 ```
 
-#### End-of-Line Comments - Comentarios de fin de línea
+### End-of-Line Comments - Comentarios de fin de línea
 
 El segundo tipo de comentario de Java se deriva de C++ y se conoce como comentario de fin de línea. Usamos una barra doble (`//`) para anotar el comienzo de un comentario que termina automáticamente cuando se llega al final de la línea, como se muestra aquí:
 
@@ -100,8 +100,52 @@ x = y + z; // el texto del comentario continúa hasta el final de la línea ==> 
 m = n * p;
 ```
 
-#### Java Documentation Comments - Comentarios de la documentación de Java
+### Java Documentation Comments - Comentarios de la documentación de Java
 
 El tercer y último tipo de comentario de Java, los comentarios de documentación de Java (también conocidos como comentarios de Javadoc), se pueden analizar a partir de archivos de código fuente mediante un programa de utilidad de línea de comandos especial javadoc (que viene de serie con el SDK de Java) y se pueden utilizar para generar automáticamente documentación HTML para una aplicación.
 Aplazaremos una mirada en profundidad a los comentarios de Javadoc hasta el Capítulo 13.
 
+## Declaración de la Clase
+
+Para declarar una clase usamos la sintaxís:
+
+```java
+public class ClassName { 
+   ...
+}
+```
+
+por ejemplo:
+
+```java
+public class SimpleProgram { 
+   ...
+}
+```
+
+donde las llaves `{...}` encierran el cuerpo de la clase que incluye la lógica principal del programa junto con otros bloques de construcción opcionales de una clase.
+
+Las palabras `public` y `class` son dos de las palabras clave de Java, es decir, palabras reservadas para uso específico dentro del lenguaje Java, mientras que `SimpleProgram` es un nombre inventado.
+
+### El método `main`
+
+Dentro de la declaración de la clase `SimpleProgram`, encontramos el punto de partida para el programa, llamado método `main`. El método `main` sirve como punto de entrada para un programa Java. Cuando ejecutamos un programa Java la JVM llama al método `main` para iniciar nuestra aplicación.
+
+Con aplicaciones triviales como el ejemplo de `SimpleProgram`, toda la lógica del programa se puede contener dentro de este único método principal. Para aplicaciones más complejas, el método `main` posiblemente no puede contener toda la lógica para todo el sistema. 
+
+La primera línea de la clase `SimpleProgram` es:
+
+```java
+public static void main(String[] args) {
+```
+
+método, que se muestra aquí
+public static void main (String [] args) {
+define lo que se conoce como el encabezado del método del método principal, y debe aparecer exactamente como se muestra (con una excepción menor que explicaré en el Capítulo 13 que tiene que ver con la recepción opcional de argumentos desde la línea de comandos).
+El cuerpo del método de nuestro método principal, encerrado entre llaves {...}, consta de una sola declaración: System.out.println ("¡Hola!");
+que imprime el mensaje
+¡Hola!
+a la ventana de comandos (DOS / Solaris / Linux) desde la que se inicia nuestro programa. Examinaremos la sintaxis de esta declaración con más detalle en un momento, pero por ahora, observe el uso de un punto y coma (;) al final de la declaración. Como en C y C ++, los puntos y comas se colocan al final de todas las declaraciones individuales de Java. Las llaves {...}, a su vez, delimitan bloques de código, cuya importancia analizaré con más detalle más adelante en este capítulo.
+Otras cosas que normalmente hacemos dentro del método principal de un programa más elaborado incluyen declarar variables, crear objetos y llamar a otros métodos.
+Ahora que hemos visto la anatomía de un programa Java simple, analicemos cómo se compila y ejecuta dicho programa.
+Consulte el Apéndice C para obtener detalles sobre cómo instalar el Kit de desarrollo de software (SDK) de Java 2 correctamente en su computadora antes de continuar.
