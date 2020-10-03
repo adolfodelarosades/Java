@@ -36,8 +36,11 @@ Los comentarios tradicionales de Java derivan del lenguaje C y comienzan con una
 ```java
 /* Este es un comentario tradicional (Estilo C). */
 
-/* Este es un comentario tradicional de varias líneas. Esta es una forma práctica de comentar temporalmente secciones enteras de código sin tener que eliminarlas.
-Desde el momento en que el compilador encuentra el primer "slash asterisk" anterior, no le importa lo que escriba aquí; incluso líneas de código legítimas,como se muestra a continuación, se tratan como líneas de comentarios hasta que el  compilador se encuentre la primera combinación de "asterisk slash".
+/* Este es un comentario tradicional de varias líneas. Esta es una forma práctica de comentar temporalmente 
+   secciones enteras de código sin tener que eliminarlas.
+   Desde el momento en que el compilador encuentra el primer "slash asterisk" anterior, no le importa lo que 
+   escriba aquí; incluso líneas de código legítimas,como se muestra a continuación, se tratan como líneas de 
+   comentarios hasta que el  compilador se encuentre la primera combinación de "asterisk slash".
 
 x = y + z;
 a = b / c;
@@ -45,8 +48,8 @@ j = s + c + f;
 */
 
 /* A menudo utilizamos asteriscos iniciales desde la segunda y hasta la penúltima línea
- * de un comentario tradicional simplemente por razones estéticas, para que el comentario sea más visual
- * distinto; pero, estos asteriscos adicionales son estrictamente cosméticos, solo los
- * "slash asterisk" inicial y "asterisk slash" final tiene algún significado para el 
+ * de un comentario tradicional simplemente por razones estéticas, para que el comentario 
+ * sea más visual distinto; pero, estos asteriscos adicionales son estrictamente cosméticos, 
+ * solo los "slash asterisk" inicial y "asterisk slash" final tiene algún significado para el 
  * compilador.* /
 ```
