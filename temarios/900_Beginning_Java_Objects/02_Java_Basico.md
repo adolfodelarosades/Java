@@ -11,7 +11,7 @@ Debido a esto, Java se presta particularmente bien para escribir aplicaciones qu
 
 ## Anatomia de un Sencillo Programa Java
 
-![02-08][images/02-08.png]
+![02-08](images/02-08.png)
 
 En la figura se muestra una clase java de las más sencillas, la cuenta con los siguientes elementos:
 
