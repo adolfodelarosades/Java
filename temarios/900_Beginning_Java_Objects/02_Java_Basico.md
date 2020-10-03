@@ -350,6 +350,7 @@ int more$money_is_2much; // puede contener signos de dólar y/o guiones bajos, y
 
 mientras estos no son válidos:
 
+:fire:
 ```java
 int 1bad;         // carácter inicial inapropiado
 int number#sign;  // contiene un carácter no válido
@@ -608,7 +609,7 @@ b = a++;
 es lógicamente equivalente a las siguientes dos líneas de código: 
 
 ```java
-b = a; // Usa el valor de a primero ...
+b = a;     // Usa el valor de a primero ...
 a = a + 1; // ... ENTONCES incrementa su valor.
 ```
 
@@ -794,9 +795,7 @@ y = x; // Asignar un valor int menos preciso a una variable doble que sea capaz 
        // manejando más precisión - esto está bien como está.
 ```
 
-
 En este caso particular, estamos asignando un valor de menor precisión, `2`, a una variable capaz de manejar mayor precisión; `y` terminará con el valor de `2.0`. Esto se conoce como **conversión de ampliación - widening conversion**. Estas conversiones se realizan automáticamente en Java y no es necesario convertirlas explícitamente.
-
 
 Tenga en cuenta que existe una idiosincrasia con respecto a la asignación de valores constantes a variables de tipo `float` en Java; la siguiente declaración no se compilará:
 
@@ -817,22 +816,48 @@ porque Java trata automáticamente un valor constante numérico con un component
 float y = (float) 3.5; // Esto compilará, gracias por el cast.
 ```
 
-o, alternativamente, podemos forzar la constante en el lado derecho de la instrucción de asignación para que sea vista por el compilador de Java como un flotante usando el sufijo F, como se muestra aquí:
-flotar y = 3.5F; // Bien, porque estamos indicando que la constante debe // tratarse como un flotante, no como un doble.
-Otra opción más es simplemente declarar variables dobles en lugar de variables flotantes siempre que deseemos representar valores numéricos de coma flotante en un programa.
-Normalmente usaremos dobles en lugar de flotantes siempre que necesitemos declarar variables de punto flotante en nuestra aplicación SRS en la Parte 3 del libro, solo para evitar estos problemas de conversión de tipos.
-Las expresiones de tipo char se pueden convertir a cualquier otro tipo numérico, como se ilustra en el siguiente ejemplo:
+o, alternativamente, podemos forzar la constante en el lado derecho de la instrucción de asignación para que sea vista por el compilador de Java como un `float` usando el sufijo `F`, como se muestra aquí:
+
+```java
+float y = 3.5F; // OK, porque estamos indicando que la constante debe 
+                // tratarse como un flotante, no como un doble.
+```
+
+Otra opción más es simplemente declarar variables `double` en lugar de variables `float` siempre que deseemos representar valores numéricos de coma flotante en un programa.
+
+<hr>
+Normalmente usaremos `doubles` en lugar de `floats` siempre que necesitemos declarar variables de punto flotante en nuestra aplicación SRS en la Parte 3 del libro, solo para evitar estos problemas de conversión de tipos.
+<hr>
+
+Las expresiones de tipo `char` se pueden convertir a cualquier otro tipo numérico, como se ilustra en el siguiente ejemplo:
+
+```java
 char c = 'a';
-// Asignar un valor de carácter a una variable numérica transfiere su // valor numérico ASCII equivalente.
+
+// Asignar un valor de carácter a una variable numérica transfiere su
+// valor numérico ASCII equivalente.
 int x = c;
-flotar y = c;
-doble z = c;
-System.out.println (x); System.out.println (y); System.out.println (z);
-Aquí está el resultado:
-97 97,0 97,0
-El único tipo de Java que no se puede convertir, ni implícita ni explícitamente, en otro tipo es el tipo booleano.
-Verás otras aplicaciones de transmisión, que involucran objetos, más adelante en el libro.
-Lazos y otras estructuras de control de flujo
+float y = c;
+double z = c;
+System.out.println(x); 
+System.out.println(y); 
+System.out.println(z);
+```
+
+La salida será
+
+```sh
+97 
+97.0 
+97.0
+```
+
+**El único tipo de Java que no se puede convertir (castear), ni implícita ni explícitamente, en otro tipo es el tipo `boolean`.**
+
+Verás otras aplicaciones de casting, que involucran objetos, más adelante en el libro.
+
+## Loops y Otras Estructuras de Flujo de Control
+
 Muy raramente un programa se ejecutará secuencialmente, línea por línea, de principio a fin. En cambio, la ruta de ejecución a través de la lógica de un programa a menudo será condicional.
 • Puede ser necesario que el programa se ejecute en un cierto bloque de código si se cumple alguna condición, o en un bloque de código diferente si no se cumple la condición.
 • Un programa puede tener que ejecutar repetidamente un bloque particular de código un número fijo de veces, o hasta que se logre un resultado particular.
