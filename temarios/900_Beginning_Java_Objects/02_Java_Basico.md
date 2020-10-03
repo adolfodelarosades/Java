@@ -559,14 +559,94 @@ Operador | Descripción
 `/=`     | `a /= b` es equivalente `a = a / b`.
 `%=`     | `a %= b` es equivalente `a = a % b`.
 
-```java
+Los dos últimos operadores aritméticos que veremos son los operadores de **incremento unario** (`++`) y decremento (`--`), que se utilizan para aumentar o disminuir el valor de una variable `int` en 1 o de punto flotante (`float`, `double`) valor por 1.0. Se les conoce como operadores unarios porque se aplican a una sola variable, mientras que los operadores binarios combinan los valores de dos expresiones como se discutió anteriormente.
 
+Los operadores unarios de incremento y decremento también se pueden aplicar a variables `char` para avanzar o retroceder una posición de carácter en la secuencia de clasificación Unicode. Por ejemplo, en el siguiente fragmento de código, el valor de la variable `c` se incrementará de `'e'` a `'f'`:
+
+```java
+char c = 'e';
+c ++; // c se incrementará de 'e' a 'f'.
 ```
 
+Los operadores de incremento y decremento se pueden utilizar de forma **prefijo** o **sufijo**. Si el operador se coloca antes de la variable en la que está operando (modo de prefijo), **el incremento o decremento de esa variable se realiza antes de que el valor actualizado de la variable se use** en cualquier asignación realizada a través de esa declaración. Por ejemplo, considere el siguiente fragmento de código, que utiliza el operador de incremento de prefijo (`++`). Supongamos que `a` y `b` se han declarado previamente como variables `int` en nuestro programa:
 
 ```java
-
+a = 1;
+b = ++a;
 ```
+
+Después de que se hayan ejecutado las líneas de código anteriores, el valor de la variable `a` será `2`, al igual que el valor de la variable `b`. Esto se debe a que, en la segunda línea de código, el incremento de la variable `a` (de 1 a 2) ocurre antes de que el valor de `a` se asigne a la variable `b`. Por tanto, la única línea de código
+
+```java
+b = ++a;
+```
+
+es lógicamente equivalente a las siguientes dos líneas de código:
+
+```java
+a = a + 1; // Incrementa el valor de a primero ...
+b = a;     // ... ENTONCES usa su valor.
+```
+
+Por otro lado, si el operador de incremento/decremento se coloca después de la variable en la que está operando (modo postfijo), el incremento o decremento ocurre después de que el valor original de la variable se use en cualquier asignación realizada a través de esa declaración. Veamos el mismo fragmento de código con el operador de incremento escrito en forma de sufijo:
+
+```java
+a = 1;
+b = a++;
+```
+
+Después de que se hayan ejecutado las líneas de código anteriores, el valor de la variable `b` será `1`, mientras que el valor de la variable `a` será `2`. Esto se debe a que, en la segunda línea de código, el incremento de la variable `a` (de 1 a 2) ocurre después de que el valor de `a` se asigna a la variable `b`. Por tanto, la única línea de código
+
+```java
+b = a++;
+```
+
+es lógicamente equivalente a las siguientes dos líneas de código: 
+
+```java
+b = a; // Usa el valor de a primero ...
+a = a + 1; // ... ENTONCES incrementa su valor.
+```
+
+Aquí hay un ejemplo un poco más complejo; lea el comentario adjunto para asegurarse de que puede ver cómo a `x` se le asignará el valor `10`:
+
+```java
+int y = 2;
+int z = 4;
+int x = y++ * ++z; // x se le asignará el valor 10, porque z será
+                   // incrementado de 4 a 5 ANTES de que su valor se use en la
+                   // expresión de multiplicación, mientras que y permanecerá en 2 hasta                      // DESPUÉS de que su valor se use en la expresión de multiplicación.
+```
+
+Como verá en un momento, los operadores de incremento y decremento se utilizan comúnmente junto con los bucles.
+
+### Operadores relacionales y lógicos
+
+Una expresión lógica compara dos expresiones (simples o complejas) `exp1` y `exp2` de una manera específica, resolviéndose con un valor `boolean` `true` o `false`.
+
+Para crear expresiones lógicas, Java proporciona los operadores relacionales que se muestran en la Tabla 2-3. 
+
+**Tabla2-3.** Operadores Relacionales
+Operador       | Descripción
+---------------|------------
+`exp1 == exp2` | `true` si `exp1` es igual a `exp2` (note el uso de doble signo igual para la equivalencia)
+`exp1 > exp2`  | `true` si `exp1` es mayor que `exp2`
+`exp1 >= exp2` | `true` si `exp1` es mayor o igual que `exp2`
+`exp1 < exp2`  | `true` si `exp1` es menor que `exp2`
+`exp1 <= exp2` | `true` si `exp1` es menor o igual que `exp2`
+`exp1 != exp2` | `true` si `exp1` no es igual a `exp2`
+`!exp`         | `true` si `exp` es `false` y `false` si `exp` es `true`
+
+ 
+Además de los operadores relacionales, Java proporciona operadores lógicos que se pueden utilizar para combinar / modificar expresiones lógicas. Los operadores lógicos más utilizados se enumeran en la Tabla 2-4.
+
+**Table2-4.** Operadores Logicos
+
+Operador       | Descripción
+---------------|------------
+`exp1 && exp2` | `and` lógico; la expresión compuesta es `true` solo si `exp1` y `exp2` son `true`
+`exp1 || exp2` | `or` lógico; la expresión compuesta es `true` si `exp1` o `exp2` es `true`
+`!exp`         | `not` lógico; alterna el valor de una expresión lógica de `true` a `false` y viceversa
 
 
 ```java
