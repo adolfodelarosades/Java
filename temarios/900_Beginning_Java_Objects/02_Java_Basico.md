@@ -53,3 +53,55 @@ j = s + c + f;
  * solo los "slash asterisk" inicial y "asterisk slash" final tiene algún significado para el 
  * compilador.* /
 ```
+
+Tenga en cuenta que no podemos **anidar** comentarios de bloque, es decir, lo siguiente no se compilará:
+
+```java
+/ * Esto inicia un comentario ...
+x = 3;
+/ * ¡Ups! Intentamos anidar un SEGUNDO comentario por error antes de terminar el PRIMER!
+Esto nos va a causar problemas de compilación, porque el compilador IGNORARÁ el comienzo 
+de este segundo comentario interno; después de todo, ¡ya estamos EN un comentario! - y tan 
+pronto como intentemos terminar este SEGUNDO comentario interno, el compilador pensará que 
+hemos terminado el PRIMER comentario externo en su lugar ... * /
+z = 2;
+// El compilador se "quejará" en la siguiente línea.
+* /
+```
+
+Cuando el compilador alcanza lo que pretendíamos que fuera la terminación * / del comentario "externo" en la última línea del ejemplo de código anterior, se informarán los siguientes dos errores de compilación:
+
+```java
+illegal start of expression
+ */
+ ^
+```
+y 
+```java
+';' expected 
+   */
+     ^
+```
+
+#### End-of-Line Comments - Comentarios de fin de línea
+
+El segundo tipo de comentario de Java se deriva de C++ y se conoce como comentario de fin de línea. Usamos una barra doble (`//`) para anotar el comienzo de un comentario que termina automáticamente cuando se llega al final de la línea, como se muestra aquí:
+
+x = y + z; 
+// Aquí hay un BLOQUE de comentarios secuenciales de fin de línea.
+// Esto sirve como una alternativa al uso de comentarios tradicionales // (/ * ... * /) y es preferido por muchos programadores de Java.
+m = n * p;
+```java
+x = y + z; // el texto del comentario continúa hasta el final de la línea ==> a = b / c;
+// Aquí hay un BLOQUE de comentarios secuenciales de fin de línea.
+// Esto sirve como una alternativa al uso de comentarios tradicionales 
+// (/ * ... * /) y es preferido por muchos programadores de Java.
+
+m = n * p;
+```
+
+#### Java Documentation Comments - Comentarios de la documentación de Java
+
+El tercer y último tipo de comentario de Java, los comentarios de documentación de Java (también conocidos como comentarios de Javadoc), se pueden analizar a partir de archivos de código fuente mediante un programa de utilidad de línea de comandos especial javadoc (que viene de serie con el SDK de Java) y se pueden utilizar para generar automáticamente documentación HTML para una aplicación.
+Aplazaremos una mirada en profundidad a los comentarios de Javadoc hasta el Capítulo 13.
+
