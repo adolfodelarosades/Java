@@ -182,7 +182,6 @@ javac *.java
 
 para compilar varios archivos al mismo tiempo.
 
-
 Si todo va bien, es decir, si no surgen errores del compilador, aparecerá un archivo de código de bytes con el nombre de `SimpleProgram.class` en el mismo directorio donde reside el archivo de código fuente `SimpleProgram.java`. Si surgen errores del compilador, por otro lado, por supuesto, debemos corregir nuestro código fuente e intentar recompilarlo.
 
 #### Ejecutar Bytecode
@@ -198,16 +197,11 @@ tenga en cuenta que OMITIMOS el sufijo .class por ejemplo:
 java SimpleProgram
 ```
 
-```sh
-
-```
-
 Tenga en cuenta que es importante omitir el sufijo `.class` del nombre del archivo de código de bytes (que en este caso se llama `SimpleProgram.class`).
 
 De forma predeterminada, la JVM buscará en su directorio de trabajo predeterminado junto con el directorio "home" donde se ha instalado el lenguaje Java en su sistema para dichos archivos de código de bytes. Si la JVM encuentra el archivo de código de bytes especificado, ejecuta su método `main` y su programa está funcionando.
 
 Si por alguna razón el código de bytes que está intentando ejecutar no se encuentra en ninguna de estas dos ubicaciones predeterminadas, debe informar a la JVM de directorios adicionales en los que buscar. Puede hacerlo especificando una lista de directorios (separados por punto y coma [;] en Windows, o por dos puntos [:] en Solaris y Linux) después de la marca `-cp` en el comando java de la siguiente manera:
-
 
 ```sh
 java –cp list_of_directory_names_to_be_searched bytecode_filename
@@ -253,12 +247,14 @@ Se dice que Java es un lenguaje de programación fuertemente tipado, en el senti
 El lenguaje **Java define ocho tipos primitivos** (los ocho nombres de estos tipos son palabras clave de Java), de la siguiente manera.
 
 **Cuatro tipos de datos numéricos enteros**: 
+
 * `byte`:  entero sin signo de 8 bits
 * `short`: entero de 16 bits con signo
 * `int`:   entero de 32 bits con signo
 * `long`:  entero de 64 bits con signo
 
 **Dos tipos numéricos de coma flotante**:
+
 • `float`: punto flotante de precisión única de 32 bits
 • `double`: punto flotante de doble precisión de 64 bits 
 
@@ -327,7 +323,6 @@ Se puede asignar un valor literal a una variable de tipo `char` encerrando el va
 char c = 'A';
 ```
 
-
 El uso de comillas dobles (`"..."`) está reservado para asignar valores literales a las variables de tipo `String`. **Lo siguiente no se compilaría en Java**:
 
 ```java
@@ -363,47 +358,68 @@ int x@y;          // contiene un carácter no válido
 int dot.notation; // contiene un carácter no válido
 ```
 
-
-```java
-```
+Dicho esto, la convención que se observa en toda la comunidad de programación OO es formar nombres de variables utilizando principalmente caracteres alfabéticos, evitando el uso de guiones bajos y, además, adherirse a un estilo conocido como **camel casing** o **camelCase**. Con el formato camelCase, la primera letra del nombre de una variable está en ***minúsculas***, la primera letra de cada palabra concatenada subsiguiente en el nombre de la variable está en ***mayúsculas*** y el resto de los caracteres en minúsculas. Todos los siguientes nombres de variables son válidos y convencionales:
 
 
 ```java
-int simple;
-int _under;
-int more$money_is_2much;
-while these are invalid:
-int 1bad;
-int number#sign; int foo-bar;
-int plus+sign; int x@y;
-int dot.notation;
-// starts with alphabetic character
-// starts with underscore
-// may contain dollar signs, and/or underscores, and/or
-// digits, and/or alphabetic characters
-// inappropriate starting character
-// contains invalid character
-// ditto
-// ditto
-// ditto
-// ditto
+int grade;
+double averageGrade;
+String myPetRat;
+boolean weAreFinished;
 ```
 
+Recuerde que, como se mencionó anteriormente, **las palabras clave de Java no se pueden usar como nombres de variables**. Lo siguiente no se compilará, porque `public` es una palabra clave de Java:
 
 ```java
+int public;
 ```
 
+De hecho, el compilador generaría los siguientes dos mensajes de error:
+
+```sh
+not a statement
+int public;
+^
+
+';' expected 
+int public;
+    ^
+```
+
+## Inicialización de Variable
+
+En Java, a las variables no se les asigna necesariamente un valor inicial cuando se declaran, **pero a todas las variables se les debe asignar un valor antes de usar el valor de la variable en una sentencia de asignación**. Por ejemplo, en el siguiente fragmento de código, se declaran dos variables int(eger); un valor inicial se asigna explícitamente a la variable `foo`, pero no a la variable `bar`. Un intento posterior de sumar los valores de las dos variables da como resultado **un error del compilador**:
 
 ```java
+int foo;
+int bar;
+// Nosotras estamos inicializando explícitamente foo, pero no bar. 
+foo = 3;
+foo = foo + bar; // Esta línea no se compilará.
 ```
 
+El siguiente error del compilador surgiría en la última línea de código:
+
+```sh
+variable bar might not have been initialized 
+foo = foo + bar;
+            ^
+```
+
+Para corregir este error, necesitaríamos asignar un valor explícito a `bar`, así como a `foo`, antes
+de usarlos en la expresión de suma:
 
 ```java
+int foo;
+int bar;
+foo = 3;
+// Ahora estamos inicializando AMBAS variables explícitamente. 
+bar = 7;
+foo = foo + bar; // Esta línea ahora se compilará correctamente.
 ```
 
-```java
-```
-
-
-
+<hr>
+142/5000
+En el Capítulo 13, aprenderá que las reglas de inicialización automática son algo diferentes cuando se trata del "funcionamiento interno" de los objetos.
+<hr>
 
