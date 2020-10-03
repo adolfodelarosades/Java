@@ -138,14 +138,116 @@ La primera línea de la clase `SimpleProgram` es:
 ```java
 public static void main(String[] args) {
 ```
+define lo que se conoce como el **encabezado del método** del método `main`, y ***debe aparecer exactamente como se muestra*** (con una excepción menor que explicaré en el Capítulo 13 que tiene que ver con la recepción opcional de argumentos desde la línea de comandos).
 
-método, que se muestra aquí
-public static void main (String [] args) {
-define lo que se conoce como el encabezado del método del método principal, y debe aparecer exactamente como se muestra (con una excepción menor que explicaré en el Capítulo 13 que tiene que ver con la recepción opcional de argumentos desde la línea de comandos).
-El cuerpo del método de nuestro método principal, encerrado entre llaves {...}, consta de una sola declaración: System.out.println ("¡Hola!");
-que imprime el mensaje
-¡Hola!
-a la ventana de comandos (DOS / Solaris / Linux) desde la que se inicia nuestro programa. Examinaremos la sintaxis de esta declaración con más detalle en un momento, pero por ahora, observe el uso de un punto y coma (;) al final de la declaración. Como en C y C ++, los puntos y comas se colocan al final de todas las declaraciones individuales de Java. Las llaves {...}, a su vez, delimitan bloques de código, cuya importancia analizaré con más detalle más adelante en este capítulo.
+El cuerpo del método de nuestro método `main`, encerrado entre llaves `{...}`, consta de una sola sentencia: 
+
+```java
+System.out.println("Hello!");
+```
+
+Note el uso de un punto y coma (;) al final de la sentencia. . Las llaves `{...}`, a su vez, delimitan bloques de código.
+
 Otras cosas que normalmente hacemos dentro del método principal de un programa más elaborado incluyen declarar variables, crear objetos y llamar a otros métodos.
+
 Ahora que hemos visto la anatomía de un programa Java simple, analicemos cómo se compila y ejecuta dicho programa.
-Consulte el Apéndice C para obtener detalles sobre cómo instalar el Kit de desarrollo de software (SDK) de Java 2 correctamente en su computadora antes de continuar.
+
+#### Compilar el archivo fuente de código Java a Bytecode
+
+Para compilar el código fuente de Java desde la línea de comandos, usamos el comando `cd`, según sea necesario, para navegar al directorio de trabajo donde reside nuestro código fuente. Luego escribimos el siguiente comando:
+
+```sh
+javac sourcecode_filename
+```
+
+Por ejemplo:
+
+```sh
+javac SimpleProgram.java
+```
+
+para compilarlo
+
+Si hubiera más de un archivo de código fuente .java en el mismo directorio, podríamos enumere los nombres de los archivos a compilar, separados por espacios:
+
+```sh
+javac Foo.java Bar.java Another.java
+```
+
+o utilice el carácter comodín (`*`), por ejemplo: 
+
+```sh
+javac *.java
+```
+
+para compilar varios archivos al mismo tiempo.
+
+
+Si todo va bien, es decir, si no surgen errores del compilador, aparecerá un archivo de código de bytes con el nombre de `SimpleProgram.class` en el mismo directorio donde reside el archivo de código fuente `SimpleProgram.java`. Si surgen errores del compilador, por otro lado, por supuesto, debemos corregir nuestro código fuente e intentar recompilarlo.
+
+#### Ejecutar Bytecode
+
+Una vez que un programa se ha compilado con éxito, ejecutamos la versión del código de bytes mediante el comando
+
+```sh
+java bytecode_filename 
+```
+tenga en cuenta que OMITIMOS el sufijo .class por ejemplo:
+
+```sh
+java SimpleProgram
+```
+
+```sh
+
+```
+
+Tenga en cuenta que es importante omitir el sufijo `.class` del nombre del archivo de código de bytes (que en este caso se llama `SimpleProgram.class`).
+
+De forma predeterminada, la JVM buscará en su directorio de trabajo predeterminado junto con el directorio "home" donde se ha instalado el lenguaje Java en su sistema para dichos archivos de código de bytes. Si la JVM encuentra el archivo de código de bytes especificado, ejecuta su método `main` y su programa está funcionando.
+
+Si por alguna razón el código de bytes que está intentando ejecutar no se encuentra en ninguna de estas dos ubicaciones predeterminadas, debe informar a la JVM de directorios adicionales en los que buscar. Puede hacerlo especificando una lista de directorios (separados por punto y coma [;] en Windows, o por dos puntos [:] en Solaris y Linux) después de la marca `-cp` en el comando java de la siguiente manera:
+
+
+```sh
+java –cp list_of_directory_names_to_be_searched bytecode_filename
+```
+
+Por ejemplo, en DOS / Windows:
+
+```sh
+java –cp C:\home\javastuff;D:\reference\workingdir;S:\foo\bar\files SimpleProgram
+```
+
+o en Solaris/Linux:
+
+```sh
+java –cp /barkerj/work:/java/examples/ex1 SimpleProgram
+```
+
+Todo lo anterior es para ejecutarlo desde la línea de comandos.
+
+### Una mirada entre bastidores a la JVM
+
+Echemos un vistazo más en profundidad a lo que realmente sucede detrás de escena cuando escribimos el comando
+
+```sh
+java SimpleProgram
+```
+
+para ejecutar nuestro programa.
+
+• El comando Java hace que se inicie la JVM.
+• La JVM busca el archivo de código de bytes que hemos nombrado en el comando (`SimpleProgram.class` en este caso), buscando en los directorios enumerados por el indicador `–cp`, si se proporciona, o en el directorio de trabajo predeterminado si no se usa `–cp`.
+• Suponiendo que la JVM de hecho encuentra el archivo de código de bytes apropiado, carga el código de bytes en su memoria (conceptualmente, el código de bytes sirve como un "complemento" para la JVM).
+• A continuación, el JVM busca el código de bytes que acaba de cargar para la presencia del encabezado del método `main`. Si se encuentra este método, la JVM lo ejecuta y nuestro programa se ejecuta.
+
+#### Ejecutandolo desde Eclipse
+
+![02-08-01](images/02-08-01.png)
+
+## Tipos Primitivos
+
+
+
+
