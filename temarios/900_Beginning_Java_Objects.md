@@ -2,9 +2,9 @@
 
 ## Parte 1 El ABC de los Objetos
 
-### Capítulo 01 Abstración y Modelado
-### Capítulo 02 Java Básico
-### Capítulo 03 Objectos y Clases
+* Capítulo 01 Abstración y Modelado
+* Capítulo 02 Java Básico
+* Capítulo 03 Objectos y Clases
 ### Capítulo 04 Interacciones entre Objetos
 ### Capítulo 05 Relaciones entre Objetos
 ### Capítulo 06 Colecciones de Objetos
