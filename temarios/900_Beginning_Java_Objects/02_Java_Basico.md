@@ -488,7 +488,7 @@ int x; // lowercase - minúsculas
 int X; // uppercase - mayúsculas
 ```
 
-• Todas las palabras clave se representan en minúsculas: `public`, `class`, `int`, `boolean` y en adelante. **No sea “creativo” al ponerlas en mayúsculas**, ya que el compilador objetará violentamente, a menudo con mensajes de error de compilación ininteligibles, como en el siguiente ejemplo, donde la palabra reservada `for` es mayúsculas incorrectamente:
+• Todas las palabras clave se representan en minúsculas: `public`, `class`, `int`, `boolean` y en adelante. **No sea “creativo” al ponerlas en mayúsculas**, ya que el compilador objetará violentamente, a menudo con mensajes de **error de compilación** ininteligibles, como en el siguiente ejemplo, donde la palabra reservada `for` es mayúsculas incorrectamente:
 
 ```java
 // La palabra reservada 'for' debe estar en minúsculas. 
@@ -515,6 +515,49 @@ Multiple markers at this line
 	- i cannot be resolved to a variable
 ```
 
+## Java Expressions
+
+Java es un **lenguaje orientado a expresiones**. Una expresión simple en Java es:
+
+* Una constante: `7`, `false`
+* Una literal `char`(acter) encerrado entre apostrofes: `'A'`, `'3'`
+* Una literal `String` encerrada entre comillas: `"foo"`, `"Java"`
+* El nombre de cualquier variable declarada correctamente: `myString`, `x`
+* Cualquiera de los dos tipos de expresión anteriores que se combinan con uno de los operadores binarios de Java (discutidos en detalle más adelante en este capítulo): `x + 2`
+* Cualquiera de los tipos de expresión anteriores que hayan sido modificados por uno de los operadores (discutidos en detalle más adelante en este capítulo): `i++`
+* Cualquiera de los tipos de expresión anteriores entre paréntesis: `(x + 2)`
+
+Además de algunos tipos más de expresión que tienen que ver con objetos sobre los que aprenderá más adelante en el libro.
+
+Las expresiones de complejidad arbitraria se pueden ensamblar a partir de los diferentes tipos de expresiones simples anidando paréntesis, por ejemplo: `((((4 / x) + y) * 7) + z)`.
+
+### Operadores aritméticos
+
+El lenguaje Java proporciona una serie de operadores aritméticos básicos, como se muestra en la Tabla 2-1.
+
+**Tabla 2-1.** Operadores Artméticos
+
+Operador | Descripción
+---------|------------
+`+`      | Suma
+`-`      | Resta
+`*`      | Multiplicación
+`/`      | División
+`%`      | Resto (el resto cuando el operando a la izquierda del operador% se divide por el operando a la derecha; por ejemplo, 10% 3 = 1, porque 3 entra en 10 tres veces, dejando un resto de 1)
+
+Los operadores `+` y `-` también se pueden utilizar como operadores unarios para indicar números positivos o negativos: `-3.7`, `+42`.
+
+Además del operador de asignación simple, `=`, hay varios operadores de asignación compuestos especializados, que combinan la asignación de variables con una operación aritmética, como se muestra en la Tabla 2-2.
+
+**Tabla2-2.** Operadores de Asignación Compuestos 
+
+Operador | Descripción
+---------|------------
+`+=`     | `a += b` es equivalente `a = a + b`.
+`-=`     | `a -= b` es equivalente `a = a - b`.
+`*=`     | `a *= b` es equivalente `a = a * b`.
+`/=`     | `a /= b` es equivalente `a = a / b`.
+`%=`     | `a %= b` es equivalente `a = a % b`.
 
 ```java
 
