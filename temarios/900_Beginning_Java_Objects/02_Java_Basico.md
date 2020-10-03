@@ -859,45 +859,81 @@ Verás otras aplicaciones de casting, que involucran objetos, más adelante en e
 ## Loops y Otras Estructuras de Flujo de Control
 
 Muy raramente un programa se ejecutará secuencialmente, línea por línea, de principio a fin. En cambio, la ruta de ejecución a través de la lógica de un programa a menudo será condicional.
-• Puede ser necesario que el programa se ejecute en un cierto bloque de código si se cumple alguna condición, o en un bloque de código diferente si no se cumple la condición.
-• Un programa puede tener que ejecutar repetidamente un bloque particular de código un número fijo de veces, o hasta que se logre un resultado particular.
+
+* Puede ser necesario que el programa se ejecute en un cierto bloque de código si se cumple alguna condición, o en un bloque de código diferente si no se cumple la condición.
+* Un programa puede tener que ejecutar repetidamente un bloque particular de código un número fijo de veces, o hasta que se logre un resultado particular.
     
-                                        El lenguaje Java proporciona varios tipos diferentes de bucles y otras estructuras de control de flujo para solucionar estas situaciones.
-si declaraciones
-La instrucción if es una instrucción de rama condicional básica que ejecuta una o más líneas de código si se satisface una condición, representada como una expresión lógica. Alternativamente, se pueden ejecutar una o más líneas de código si la condición no se satisface colocando ese código después de la palabra clave else. El uso de una cláusula else con una instrucción if es opcional.
-La sintaxis básica de la instrucción if es la siguiente:
-// Pseudocódigo.
-if (expresión-lógica) {
+El lenguaje Java proporciona varios tipos diferentes de bucles y otras estructuras de control de flujo para solucionar estas situaciones.
+
+### if Statements
+
+La instrucción `if` es una instrucción de rama condicional básica que ejecuta una o más líneas de código si se satisface una condición, representada como una expresión lógica. Alternativamente, se pueden ejecutar una o más líneas de código si la condición **no** se satisface colocando ese código después de la palabra clave `else`. El uso de una cláusula `else` con una instrucción `if` es opcional.
+
+La sintaxis básica de la instrucción `if` es la siguiente:
+
+```java
+// Pseudocode.
+if (logical-expression) {
     ejecutar cualquier código contenido dentro de estas llaves
-si la expresión lógica se evalúa como verdadera
+    si la expresión lógica se evalúa como verdadera
 }
-O agregando una cláusula else opcional:
-// Pseudocódigo.
-if (expresión-lógica) {
+```
+
+O agregando una cláusula `else` opcional:
+
+```java
+// Pseudocode.
+if (logical-expression) {
     ejecutar cualquier código contenido dentro de estas llaves
-si la expresión lógica se evalúa como verdadera
+    si la expresión lógica se evalúa como verdadera
 }
 else {
     ejecutar cualquier código que esté contenido dentro de estas llaves si
-expresión-lógica se evalúa como falsa
+    expresión-lógica se evalúa como falsa
 }
-Si solo una instrucción ejecutable sigue a la palabra clave if u (opcional) else, la
-Las llaves se pueden omitir, como se muestra aquí:
-// Pseudocódigo.
-if (expresión-lógica) declaración única para ejecutar si expresión-lógica es verdadera; else declaración única para ejecutar si la expresión lógica es falsa;
-Por ejemplo:
-si (x> 3) y = x; si no z = x;
-Pero, en general, se considera una buena práctica usar siempre aparatos ortopédicos de la siguiente manera:
-si (x> 3) {y = x;
-}
-else {
-z = x; }
-Una sola variable booleana, como una forma simple de expresión booleana, puede servir como expresión / condición lógica de una instrucción if. Por ejemplo, es perfectamente aceptable escribir lo siguiente:
-
-```java
-
 ```
 
+Si solo una instrucción ejecutable sigue a la palabra clave `if` u (opcional) `else`, las llaves se pueden omitir, como se muestra aquí:
+
+```java
+// Pseudocode.
+if (logical-expression) declaración única para ejecutar si expresión-lógica es verdadera;
+else declaración única para ejecutar si la expresión lógica es falsa;
+```
+Por ejemplo:
+
+```java
+if (x > 3) y = x; 
+else z = x;
+```
+
+Pero, en general, se considera una buena práctica usar siempre llaves de la siguiente manera:
+
+```java
+if (x > 3) { 
+   y = x;
+}
+else {
+   z = x; 
+}
+```
+
+Una sola variable `boolean`, como una forma simple de expresión booleana, puede servir como expresión/condición lógica de una instrucción `if`. Por ejemplo, es perfectamente aceptable escribir lo siguiente:
+
+```java
+// Utilice la variable boolean "finished" como una bandera que se establecerá a true  
+// cuando se completa alguna operación en particular.
+boolean finished;
+
+// Inicializarla a false. 
+finished = false;
+// Los detalles del código que interviene, en el que la bandera puede o no establecerse en 
+// true, se han omitido ...
+// Prueba la bandera.
+if (finished) { // equivalente a:  if (finished == true) {
+   System.out.println("¡Hemos terminado! :O)"); 
+}
+```
 
 ```java
 
