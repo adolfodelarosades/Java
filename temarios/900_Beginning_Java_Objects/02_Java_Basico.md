@@ -645,7 +645,7 @@ Además de los operadores relacionales, Java proporciona operadores lógicos que
 Operador       | Descripción
 ---------------|------------
 `exp1 && exp2` | `and` lógico; la expresión compuesta es `true` solo si `exp1` y `exp2` son `true`
-`exp1 || exp2` | `or` lógico; la expresión compuesta es `true` si `exp1` o `exp2` es `true`
+`exp1  exp2` | `or` lógico; la expresión compuesta es `true` si `exp1` o `exp2` es `true`
 `!exp`         | `not` lógico; alterna el valor de una expresión lógica de `true` a `false` y viceversa
 
 
