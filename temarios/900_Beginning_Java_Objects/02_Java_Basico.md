@@ -248,6 +248,162 @@ para ejecutar nuestro programa.
 
 ## Tipos Primitivos
 
+Se dice que Java es un lenguaje de programación fuertemente tipado, en el sentido de que cuando se declara una variable, también se debe declarar su tipo. Entre otras cosas, declarar el tipo de una variable le dice al compilador cuánta memoria asignar para la variable en tiempo de ejecución, y también restringe el contexto(s) en el que esa variable se puede usar posteriormente en nuestro programa.
+
+El lenguaje **Java define ocho tipos primitivos** (los ocho nombres de estos tipos son palabras clave de Java), de la siguiente manera.
+
+**Cuatro tipos de datos numéricos enteros**: 
+* `byte`:  entero sin signo de 8 bits
+* `short`: entero de 16 bits con signo
+* `int`:   entero de 32 bits con signo
+* `long`:  entero de 64 bits con signo
+
+**Dos tipos numéricos de coma flotante**:
+• `float`: punto flotante de precisión única de 32 bits
+• `double`: punto flotante de doble precisión de 64 bits 
+
+Más dos tipos primitivos adicionales:
+
+* `char`: Un carácter único, almacenado con codificación Unicode de 16 bits (en lugar de codificación ASCII de 8 bits), que permite a Java manejar una amplia gama de juegos de caracteres internacionales.
+* `boolean`: una variable que solo puede asumir uno de dos valores: `true` o `false` (ambos valores son palabras reservadas en Java). Las variables booleanas se utilizan a menudo como indicadores para señalar si algún código debe ejecutarse condicionalmente o no, como en el siguiente fragmento de código:
+
+```java
+boolean error = false; // Inicializa la bandera.
+// ...
+// Más adelante en el programa (pseudocódigo): si (surge alguna situación de error) {
+// Establezca el indicador en verdadero para indicar que se ha producido un error.
+error = true;
+}
+// ...
+// Más adelante en el programa:
+// Prueba el valor de la bandera. si (error == true) {
+// Pseudocódigo.
+tomar acción correctiva ...
+```
+
+## Variables
+
+Antes de que se pueda utilizar una variable en un programa Java, el tipo y el nombre de la variable deben **declararse**, por ejemplo:
+
+```java
+int count;
+```
+
+La asignación de un valor a una variable se logra mediante el **operador de asignación** `=`. Una sentencia de asignación consta de un nombre de variable (previamente declarado) a la izquierda del `=` y una expresión que evalúa el tipo apropiado a la derecha del `=`. Por ejemplo:
+
+```java
+...
+int count = 1;
+total = total + 4.0; // Aquí, asumimos que el total se declaró como una 
+                     // variable double anterior en el programa.
+price = cost + (a + b)/length; // Una vez más asumimos que todas las variables fueron 
+                               // declaradas correctamente anteriormente en el programa.
+```
+
+Se puede proporcionar un valor inicial cuando se declara una variable por primera vez:
+
+```java
+int count = 3;
+```
+
+o se puede declarar una variable en una sentencia, luego se le puede asignar un valor en una sentencia separada más adelante en el programa:
+
+```java
+double total;
+// código intermedio ... detalles omitidos
+total = total + 4.0;
+```
+
+Se puede asignar un valor a una variable booleana usando los literales `true` o `false`:
+
+```java
+boolean finished; 
+// ...
+finished = true;
+```
+Se puede asignar un valor literal a una variable de tipo `char` encerrando el valor (un solo carácter Unicode) entre comillas simples:
+
+```java
+char c = 'A';
+```
+
+
+El uso de comillas dobles (`"..."`) está reservado para asignar valores literales a las variables de tipo `String`. **Lo siguiente no se compilaría en Java**:
+
+```java
+char c = "A"; // Debemos usar comillas simples al asignar valores a variables char.
+```
+
+### Convenciones de Nombres de Variables
+
+Al discutir los nombres de las variables de Java, hay dos aspectos a considerar:
+
+* Primero, ¿el compilador Java considera válido un nombre en particular?
+* En segundo lugar, ¿se adhiere un nombre válido en particular a la convención de nombres que ha sido adoptada por la comunidad de programación OO en todos los lenguajes?
+
+Los nombres de variables válidos en Java **deben comenzar con un carácter alfabético**, **un guion bajo  o un signo de dólar** (cuyo uso no se recomienda, ya que el compilador lo usa al generar código) y pueden contener cualquiera de estos caracteres más dígitos numéricos. **No se permiten otros caracteres en los nombres de las variables**.
+
+Los siguientes son todos nombres de variables válidos en Java:
+
+```java
+int simple; // comienza con un carácter alfabético
+int _under; // comienza con guion bajo
+int more$money_is_2much; // puede contener signos de dólar y/o guiones bajos, y/o
+                         // dígitos y/o caracteres alfabéticos
+```
+
+mientras estos no son válidos:
+
+```java
+int 1bad;         // carácter inicial inapropiado
+int number#sign;  // contiene un carácter no válido
+int foo-bar;      // contiene un carácter no válido
+int plus+sign;    // contiene un carácter no válido
+int x@y;          // contiene un carácter no válido
+int dot.notation; // contiene un carácter no válido
+```
+
+
+```java
+```
+
+
+```java
+int simple;
+int _under;
+int more$money_is_2much;
+while these are invalid:
+int 1bad;
+int number#sign; int foo-bar;
+int plus+sign; int x@y;
+int dot.notation;
+// starts with alphabetic character
+// starts with underscore
+// may contain dollar signs, and/or underscores, and/or
+// digits, and/or alphabetic characters
+// inappropriate starting character
+// contains invalid character
+// ditto
+// ditto
+// ditto
+// ditto
+```
+
+
+```java
+```
+
+
+```java
+```
+
+
+```java
+```
+
+```java
+```
+
 
 
 
