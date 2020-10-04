@@ -192,4 +192,66 @@ advisor     | ???
 courseLoad  | ??? 
 transcript  | ???
 
+Tenga en cuenta que muchos de los atributos de Student se pueden representar mediante tipos simples de Java predefinidos (p. Ej., `String`, `double` y `Date`), pero algunos de los atributos (`advisor`, `courseLoad` y `transcript`) son demasiado complejos para que los tipos de Java integrados encargarse de. Aprenderá a abordar estos atributos un poco más adelante en el libro.
 
+En términos de operaciones, la clase `Student` podría definir cinco métodos cuyos nombres son los siguientes:
+
+* `registerForCourse`
+* `dropCourse`
+* `chooseMajor`
+* `changeAdvisor`
+* `printTranscript`
+
+Aprenderá a declarar métodos formalmente en Java en el Capítulo 4.
+
+Tenga en cuenta que un objeto solo puede hacer aquellas cosas para las que los métodos han sido definidos por la clase del objeto. En ese sentido, un objeto es como un electrodoméstico: puede hacer cualquier cosa para la que fue diseñado (un reproductor de DVD proporciona botones para reproducir, pausar, detener y buscar una escena de película en particular) y nada más (no se puede preguntar un DVD para tostar un bagel, ¡al menos no con muchas posibilidades de éxito!). Por lo tanto, un aspecto importante del diseño exitoso de un objeto es asegurarse de anticipar todos los comportamientos que necesitará realizar para llevar a cabo su "misión" dentro del sistema. Aprenderá a determinar formalmente cuál debe ser la misión, la estructura de datos y los comportamientos de un objeto, en función de los requisitos generales de la aplicación que debe admitir, en la Parte 2 del libro.
+
+El término **característica** se usa informalmente para referirse colectivamente tanto a los atributos como a los métodos de una clase. Es decir, se dice que una definición de clase que incluye nueve declaraciones de atributos y cinco declaraciones de métodos tiene 14 características.
+
+<hr>
+El término específico de Java para la noción de característica es **miembro**. Sin embargo, el término "característica", tal como lo usaremos de manera informal a lo largo del libro, y el significado ***preciso*** de "miembro" en el sentido de Java no son exactamente lo mismo. Aplazaremos una discusión en profundidad de qué es un miembro de Java específicamente hasta el Capítulo 13.
+<hr>
+     
+### Una nota sobre las Convenciones de Nomenclatura
+
+Todos los lenguajes de programación orientados a objetos (OOPL), incluido Java, mantienen las siguientes convenciones de nomenclatura:
+
+* Al nombrar clases, ***comenzamos con una letra mayúscula***, pero usamos mayúsculas y minúsculas para el nombre general: `Student`, `Course`, `Professor`, etc. Cuando el nombre de una clase se indicaría idealmente como una frase de varias palabras, como "catálogo de cursos", comenzamos cada palabra con una letra mayúscula y concatenamos las palabras sin usar espacios, guiones o guiones bajos para separarlas, por ejemplo, `CourseCatalog`. Este estilo se conoce como **Pascal casing**.
+
+* La convención para ***los nombres de los atributos y métodos comienza con una letra minúscula***, pero para poner en mayúscula la primera letra de las palabras subsiguientes del nombre. Los nombres de atributos típicos pueden ser, por tanto, `name`, `studentId` o `courseLoad`, mientras que los nombres de métodos típicos pueden ser `registerForCourse` e `printTranscript`. Este estilo se conoce como **camel casing**.
+
+### Declarar una Clase, estilo Java
+
+Una vez que hemos determinado qué estructura de datos y comportamientos comunes deseamos impartir a un conjunto de objetos similares, debemos declararlos formalmente como atributos y métodos en el contexto de una clase Java. Por ejemplo, programaríamos la estructura de datos de la clase del `Student` como se presenta en la Tabla 3-1 de la siguiente manera:
+
+
+// Las declaraciones de atributos suelen aparecer primero en una 
+
+```java
+public class Student {
+   // Las declaraciones de atributos suelen aparecer primero en una declaración de clase ... 
+   String name;
+   String studentId;
+   Date birthDate;
+   String address;
+   String major;
+   double gpa;
+   // type? advisor – ¡declararemos este atributo en serio más adelante!
+   // type? courseLoad - ídem
+   // type? transcript - ídem
+   // ... seguido de declaraciones de método (detalles omitidos - usted
+   // aprende a programar métodos en Java en el Capítulo 4.)
+}
+```
+
+Al igual que con todas las definiciones de clases de Java que ha visto hasta ahora en el libro, esta definición de clase residiría en un archivo fuente llamado `ClassName.java` (`Student.java`, para ser específico) y se compilaría posteriormente en forma de código de bytes como un archivo llamado `Student.class`.
+
+Tenga en cuenta que, para que se compile el código anterior, debemos insertar la declaración
+
+`import java.util.Date;`
+
+antes de la declaración
+
+`public class Student { ... }`
+
+Analizaremos las directivas de importación en el Capítulo 6.
