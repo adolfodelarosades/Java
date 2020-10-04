@@ -8,7 +8,7 @@
 
 * Capítulo 01 Abstración y Modelado
 * Capítulo [02 Java Básico](900_Beginning_Java_Objects/02_Java_Basico.md)
-* Capítulo 03 Objectos y Clases
+* Capítulo [03 Objectos y Clases](900_Beginning_Java_Objects/03_Objectos_y_Clases.md)
 * Capítulo 04 Interacciones entre Objetos
 * Capítulo 05 Relaciones entre Objetos
 * Capítulo 06 Colecciones de Objetos
