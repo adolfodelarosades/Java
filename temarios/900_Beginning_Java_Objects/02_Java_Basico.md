@@ -1258,14 +1258,115 @@ for (int x = 1; x <= 4; x++) {
    if (x == 3) break;
    System.out.println(x);
 }
-System.out.println("Loop finished");
+System.out.println("Ciclo finalizado");
 ````
 
+La salida producida por este código es:
 
+```sh
+1
+2
+Ciclo finalizado
+```
 
+Una instrucción `continue`, por otro lado, se usa para salir de la iteración actual de un bucle sin terminar la ejecución general del bucle. Es decir, una instrucción `continue` transfiere la ejecución del programa de nuevo al principio del ciclo sin terminar la iteración particular que ya está en progreso; el contador de bucle se incrementa, en el caso de un bucle `for`, y la ejecución continúa.
 
-``java
+Veamos el mismo ejemplo que antes, pero reemplazaremos la instrucción `break` con una instrucción `continue`:
+
+// Empezamos con la intención de incrementar x de 1 a 4 ...
+
+```java
+// Empezamos con la intención de incrementar x de 1 a 4 ...
+for (int x = 1; x <= 4; x++) {
+   // ... pero cuando x alcanza el valor 3, terminamos prematuramente 
+   // esta iteración del ciclo (solo) con una instrucción continue.
+   if (x == 3) continue;
+   System.out.println(x); 
+}
+System.out.println("Ciclo finalizado");
+```
+
+La salida producida por este código es:
+
+```sh
+1
+2
+4
+Ciclo finalizado
+```
+
+## Lenguajes Estructurados en Bloques y el Alcance(Scope) de una Variable
+
+Java (como C y C ++) es un lenguaje estructurado en bloques. Como se mencionó anteriormente en el capítulo, un "bloque" de código es una serie de cero o más líneas de código encerradas entre llaves `{...}`.
+
+Los bloques se pueden anidar unos dentro de otros a cualquier profundidad arbitraria, como se ilustra en el siguiente ejemplo de código:
+
+```java
+public class SimpleProgram {
+   // Estamos dentro del bloque "class" (un nivel de profundidad). 
+   public static void main(String[] args) {
+      // Estamos dentro del bloque "main method" (dos niveles de profundidad). 
+      int x = 3;
+      int y = 4;
+      int z = 5;
+
+      if (x > 2) {
+         // Ahora estamos un nivel más profundo (nivel 3), en un bloque "if". 
+	 if (y > 3) {
+            // Estamos un nivel más profundo aún (nivel 4), en un 
+	    // bloque "if" anidado.
+            // (¡Podriamos seguir y seguir!)
+         } // Acabamos de terminar el bloque de nivel 4.
+           // (Podríamos tener código adicional aquí, en el nivel 3.) 
+      } // ¡El nivel 3 ha terminado!
+        // (Podríamos tener código adicional aquí, en el nivel 2.)
+   } // ¡Eso es todo para el nivel 2!
+     // (Podríamos tener código adicional aquí, en el nivel 1.)
+} // Adios, amigos! El nivel 1 (el bloque "class") acaba de finalizar.
+```
+
+Las variables se pueden declarar en cualquier bloque dentro de un programa. El **alcance - scope** de una variable es la parte del código en la que se puede hacer referencia a la variable por su nombre, específicamente, desde el punto donde el nombre de la variable se declara por primera vez hasta la llave de cierre (derecha) del bloque de código en el que se declaró. Se dice que una variable está **dentro del alcance** siempre que el compilador reconozca su nombre. *Una vez que la ejecución del programa sale de un bloque de código, las variables que se declararon dentro de ese bloque quedan fuera del alcance y serán inaccesibles para el programa*; el compilador olvida efectivamente que la variable alguna vez fue declarada.
+
+Como ejemplo de las consecuencias del alcance de variable, veamos un programa simple llamado `ScopeExample`. Este programa hace uso de tres bloques de código anidados: uno para el cuerpo de la clase, uno para el cuerpo del método principal y otro como parte de una instrucción `if` dentro del cuerpo del método principal. A su vez, declaramos dos variables: `x`, en el bloque de código principal (en el nivel 2), e `y`, en el bloque `if` (nivel 3).
+
+:fire:
+```java
+public class ScopeExample { // Inicio del del bloque de nivel 1.
+   public static void main(String[] args) { // Inicio del bloque de nivel 2.
+      double x = 2.0; // Declara "x" en el bloque de nivel 2.
+      if (x < 5.0) { // Inicio del del bloque de nivel 3.
+         double y = 1.0; // Declara "y" dentro del bloque de nivel 3. 
+	 System.out.println("El valor de x = " + x); // x, declararada en el nivel 2, esta
+                                                      // todavía en el ámbito del nivel 3. 
+      } // La variable "y" queda fuera de alcance cuando finaliza el bloque "if" (nivel 3) termina.
+      
+        // "y" ha salido del alcance y el compilador ya no lo reconoce.
+       // Si intentamos hacer referencia a "y" en una declaración posterior, el compilador
+       // genera un error. "x", por otro lado, permanece en el alcance hasta que 
+      // finaliza el método main (nivel 2).
+      
+      System.out.println("El valor de x = " + x); //  Esto se compilará.
+      System.out.println("El valor de y = " + y); //  Esto NO se compilará.
+   } // La variable "x" sale del alcance cuando finaliza el bloque del método main (nivel 2).
+}
+```
+      
+```java
 ```
 
 ```java
 ```
+
+```java
+```
+
+```java
+```
+
+```java
+```
+```java
+```
+```java
+```
+
