@@ -1468,3 +1468,320 @@ JAVA!!!
 
 Cuando una sola sentencia `print` se vuelve demasiado larga para caber en una sola línea, como en este ejemplo:
 
+```java
+// Pseudocódigo.
+sentencia;
+otra sentencia;
+System.out.println("Aquí hay un ejemplo de una declaración de impresión única
+eso es muy largo ... TAN largo que se envuelve y hace que la lista de programas sea difícil de leer. ");
+otra sentencia;
+```
+
+podemos hacer que una lista de programas sea más legible dividiendo el contenido de dicha sentencia en múltiples expresiones String concatenadas y luego dividiendo la sentencia a lo largo de los límites del signo más:
+
+```java
+// Pseudocódigo.
+sentencia;
+otra sentencia;
+System.out.println("Aquí hay un ejemplo de cómo" +
+                   "para romper una declaración de impresión larga" +
+                   "con signos más".);
+otra sentencia;
+```
+
+Aunque la llamada `System.out.println` anterior se divide en tres líneas de código, se imprimirá como una sola línea de salida:
+
+```sh
+Aquí hay un ejemplo de cómo para romper una declaración de impresión larga con signos más
+```
+
+### Escape Sequences
+
+Java define una serie de **secuencias de escape** para que podamos representar caracteres especiales, como caracteres de nueva línea y tabulación, dentro de los literales `String` o `char`. Las secuencias de escape más utilizadas se enumeran en la Tabla 2-5.
+
+**Tabla 2-5.** Secuencias de Escape
+
+Secuencias de Escape | Descripción
+---------------------|------------
+`\n`                 | Nueva línea 
+`\b`                 | Backspace
+`\t`                 | Tabulador
+`\\`                 | Backslash
+`\'`                 | Comilla simple; usada dentro de comillas simples (ej. char singleQuote = '\'';)
+`\"`                 | Comilla doble; usada dentro de comillas dobles (ej. String doubleQuote = "\"";)
+
+Se pueden incluir una o más secuencias de escape en la expresión que se pasa a los métodos `print` e `println`. Por ejemplo, considere el siguiente fragmento de código:
+
+```java
+System.out.println("Uno ..."); 
+System.out.println("\t... Dos ..."); 
+System.out.println("\t\t... Tres ... \"WHEEE!!!\"");
+```
+
+Cuando ejecutamos el código anterior tenemos la siguiente salida:
+
+```sh
+One ...
+    ... Dos ...
+ 	... Tres ... "WHEEE!!!"
+```
+
+La segunda y tercera líneas de salida han sido sangradas en una y dos posiciones de tabulación, respectivamente, en virtud del uso de `\t`, y la expresión `"WHEEE!!!"` se imprime entre comillas dobles debido a nuestro uso de `\"`.
+
+## Elementos del estilo Java
+
+Una de las marcas registradas de los buenos programadores es que producen código legible por humanos, de modo que sus colegas puedan trabajar y modificar sus programas. Las siguientes secciones presentan algunas pautas y convenciones que le ayudarán a producir código Java claro y legible.
+
+### Uso adecuado de la Indentation
+
+Una de las mejores formas de hacer que un programa Java sea legible es mediante el uso adecuado de sangría para delinear claramente su estructura de bloques. Las declaraciones dentro de un bloque de código deben tener sangría en relación con la línea inicial/final del bloque adjunto (es decir, con sangría en relación con las líneas que llevan las llaves). La recomendación de Sun Microsystems es utilizar cuatro espacios (tenga en cuenta que algunos de los ejemplos de este libro varían de ese estándar).
+
+Para ver cómo la sangría puede hacer que un programa sea legible, considere los siguientes dos programas. En el primer programa simple, se usa la sangría adecuada:
+
+```java
+public class IndentationExample {
+   public static void main(String[] args) {
+      for (int i = 1; i <= 4; i++) { 
+         System.out.print(i);
+	 
+         if ((i == 2) || (i == 4)) { 
+	    if (i == 2) {
+               System.out.print("Dos "); }
+            else {
+               System.out.print("Cuatro ");
+            }
+            System.out.println("es un número par"); 
+	 }
+         else if ((i == 1) || (i == 3)) { 
+	    if (i == 1) {
+               System.out.print("Uno "); 
+	    }
+            else {
+               System.out.print("Tres ");
+            }
+            System.out.println("es un numero impar"); 
+         } 
+      }
+   }
+}
+```
+
+y es relativamente fácil ver cómo se produciría el siguiente resultado:
+
+```sh
+1 es un numero impar
+2 es un numero par
+3 es un numero impar
+4 es un numero par
+```
+
+Ahora eliminemos todas las sangrías del programa:
+
+```java
+public class IndentationExample {
+public static void main(String[] args) { for (int i = 1; i <= 4; i++) { System.out.print(i);
+if ((i == 2) || (i == 4)) { if (i == 2) { System.out.print("Two ");
+}
+else {
+System.out.print("Four ");
+}
+System.out.println("is an even number"); }
+else if ((i == 1) || (i == 3)) {
+if (i == 1) {
+System.out.print("One ");
+}
+else {
+System.out.print("Three ");
+}
+System.out.println("is an odd number"); }
+}
+}
+}
+```
+
+El compilador Java entiende ambas versiones de este programa, y ambas producen el mismo resultado cuando se ejecutan, pero la primera versión es mucho más legible para un ser humano.
+
+La falta de sangría adecuada no solo hace que los programas sean ilegibles, sino que también los hace más difíciles de depurar, particularmente si surge un error de compilación debido a llaves no balanceadas/faltantes. En tal situación, el mensaje de error de compilación a menudo se informa en una línea mucho más tarde en el programa que donde realmente existe el problema. Por ejemplo, al siguiente programa le falta una llave de apertura/izquierda en la línea 9, pero el compilador no informa un error hasta la línea 23:
+
+:fire:
+```java
+public class IndentationExample2 {
+   public static void main(String[] args) {
+      int x = 2; 
+      int y = 3; 
+      int z = 1;
+      if (x >= 0) {
+         if (y > x) {
+            if (y > 2) // nos falta una llave izquierda aquí en la línea 9, pero ...
+               System.out.println("A");
+               z = x + y; 
+	    }
+            else { 
+	       System.out.println("B"); 
+	       z = x - y;
+            } 
+	 }
+         else { 
+	    System.out.println("C"); 
+	    z = y - x;
+         } 
+      }
+      else 
+         System.out.println("D"); // ... ¡El compilador primero se queja aquí! 
+	                          // (línea 23)
+   } 
+}
+```
+
+Lo que es aún peor, el mensaje de error que genera el compilador en tal situación puede ser bastante críptico. En este ejemplo en particular, el compilador (incorrectamente) señala la línea 23 como el problema, con un mensaje de error engañoso:
+
+```sh
+IndentationExample2.java:23: illegal start of type 
+else System.out.println("D");
+^
+```
+
+Este mensaje de error no nos ayuda a localizar el problema real en la línea 9. Sin embargo, al menos hemos sangrado correctamente nuestro código, por lo que probablemente será mucho más fácil localizar la llave faltante de lo que sería si nuestra sangría eran descuidados o inexistentes.
+
+<hr>
+Si alguna vez obtiene un error de compilación que no tiene absolutamente ningún sentido, considere buscar antes en el programa la puntuación faltante, es decir, **¡faltan llaves, paréntesis o punto y coma!**
+<hr>
+
+A veces, tenemos tantos niveles de sangría anidada, o las declaraciones individuales son tan largas, que las líneas se ajustan cuando se ven en un editor o se imprimen en papel:
+
+```java
+while (a < b) {
+    while (c > d) {
+      for (int j = 0; j < 29; j++) {
+         x = y + z + a - b + (c * (d / e) + f) - 
+g + h + j - l - m - n + o + p * q / r + s;
+      } 
+   }
+}
+```
+Para evitar esto, es mejor romper la línea en cuestión a lo largo de los espacios en blanco o los límites de puntuación, sangrando las líneas de continuación en relación con el inicio de la línea:
+
+```java
+while (a < b) {
+   while (c > d) {
+      for (int j = 0; j < 29; j++) {
+         // Esto es cosméticamente preferido. Note la indentation
+         // a continuación de las líneas.
+         x = y + z + a - b + (c * (d / e) + f) -
+	     g + h + j - l - m - n + o + p *
+	     q / r + s;
+      }
+   } 
+}
+```
+
+### Utilice los comentarios con prudencia
+
+Otra característica importante que hace que el código sea más legible es el uso liberal de comentarios significativos. Al escribir código, siempre tenga en cuenta que es posible que sepa lo que está tratando de hacer, pero que otra persona que intente leer su código puede que no. (De hecho, a veces incluso necesitamos recordarnos a nosotros mismos por qué hicimos lo que hicimos si no hemos mirado el código que hemos escrito en un tiempo).
+
+Aquí hay algunas reglas básicas:
+
+* Si puede haber duda sobre lo que ocurre con un pasaje de código, preceda con un comentario.
+* Indente cada comentario al mismo nivel en el bloque de código o declaración al que corresponda.
+* Asegúrese de que todos los comentarios añadan valor; no diga lo obvio, como en el siguiente comentario bastante inútil:
+
+```java
+// Declare x como un número entero y asígnele un valor inicial de 3. 
+int x = 3;
+```
+
+### Colocación de llaves
+
+Para los lenguajes estructurados por bloques que usan llaves para delimitar el inicio/final de los bloques (por ejemplo, C, C ++, C #, Java), existen dos escuelas de pensamiento generales sobre dónde se debe colocar la llave izquierda/de apertura de un bloque de código.
+
+El primer estilo consiste en colocar una llave de apertura al final de la línea de código que inicia un bloque determinado. Cada llave de cierre va en su propia línea, alineada con el primer carácter de la línea que contiene la llave de apertura:
+
+```java
+public class Test {
+   public static void main(String[] args) {
+      for (int i = 0; i < 3; i++) { 
+         System.out.println(i);
+       } 
+   }
+}
+```
+
+Un estilo alternativo de colocación de llaves es colocar cada llave de apertura en una línea por sí misma, alineada con la línea inmediatamente anterior. Cada llave de cierre sigue su propia línea como antes, alineada con la llave de apertura correspondiente:
+
+
+
+```java
+public class Test
+{
+   public static void main(String[] args)
+   {
+      for (int i = 0; i < 3; i++) 
+      {
+         System.out.println(i); 
+      }
+   } 
+}
+```
+
+Cualquiera de los dos enfoques para la colocación de la llave izquierda/de apertura está bien; el primero de los dos enfoques produce listados de código que son un poco más compactos (es decir, contienen menos espacios en blanco) y es el más popular de los dos estilos. Sin embargo, es una buena práctica mantener la coherencia en su código, así que elija el estilo de colocación de llaves que prefiera y cúmplalo.
+
+### Nombres de variables descriptivas
+
+Al igual que con la sangría y los comentarios, el objetivo al elegir nombres de variables es hacer que un programa sea lo más legible y, por lo tanto, autodocumentado, como sea posible. Evite el uso de letras simples como nombres de variables, excepto para las variables de control de bucle (o como parámetros de métodos, que se describen más adelante en el libro).
+
+Las abreviaturas deben usarse con moderación y solo cuando la abreviatura se usa comúnmente y los desarrolladores la entienden ampliamente. Considere la siguiente declaración de variable:
+
+`int grd;`
+
+No está completamente claro qué se supone que representa el nombre de variable `grd`. ¿Se supone que la variable representa una cuadrícula, un grado o una calabaza? Una mejor práctica sería deletrear la palabra completa:
+
+`int grado;`
+
+En el otro extremo del espectro, los nombres que son demasiado largos, como quizás
+
+`double averageThirdQuarterReturnOnInvestment;`
+
+puede hacer que una lista de códigos sea abrumadora para cualquiera que intente leerla. A veces puede ser difícil acortar el nombre de una variable sin dejar de ser descriptivo, pero intente mantener la longitud de los nombres de las variables dentro de lo razonable, por ejemplo:
+
+`double avg3rdQtrROI;`
+
+
+### Resumen
+
+En este capítulo, ha aprendido algunas de las ventajas de Java como lenguaje de programación OO, a saber, que
+
+* Java es un lenguaje elegante de programación que mejora a muchos lenguajes que lo precedieron.
+* Java fue diseñado desde el suelo y completamente orientado a objetos.
+* Java tiene una arquitectura neutral.
+* Todas las instalaciones necesarias para la construcción de aplicaciones de fuerza industrial están integradas en el Core de Java.
+* Java es un lenguaje de código abierto.
+* Java se puede descargar de forma gratuita desde el sitio web http: //java.sun.com.
+
+Además de explorar algunas de las ventajas de Java, también ha aprendido algunos elementos básicos de la sintaxis de Java. En particular, cubrimos
+
+* La anatomía de un sencillo programa Java
+* El mecanismo de cómo compilar y ejecutar un programa Java desde la línea de comandos
+* Los ocho tipos primitivos Java y el tipo `String`
+* Cómo se declaran y se inicializan las variables de estos tipos
+* Cómo se puede convertir una expresión de un tipo en un tipo diferente y cuándo es necesario hacerlo
+* Expresiones aritméticas, de asignación, lógicas y relacionales y operadores
+* Loops y otras estructuras de control de flujo disponibles con Java
+* Cómo definir bloques de código y el concepto de alcance variable
+* Cómo imprimir mensajes de texto con los métodos `System.out.println` y `System.out.print`
+* Algunos elementos básicos de un buen estilo de programación de Java
+
+Hay mucho más que aprender sobre Java, cosas que necesitará saber para construir la aplicación SRS en la Parte 3 del libro, pero primero necesito explicar una serie de conceptos básicos de objetos. ¡Entonces, pasemos al Capítulo 3!
+
+### Ejercicios
+1. Investigue el sitio web de Java Sun, http: //java.sun.com, y cite las ventajas o características de Java que no se mencionen en este capítulo.
+2. Navegue un poco por Internet para ver cuántos otros proveedores han adoptado el lenguaje Java, por ejemplo, IBM, Oracle, Microsoft y Apple.
+3. Compare lo que ha aprendido sobre Java con otro lenguaje de programación con el que ya está familiarizado. ¿Qué tienen de parecido los dos lenguajes? ¿Que es diferente?
+4. [Codificación] Cree un bucle de código que imprimirá los números pares del 2 al 10 en la ventana de comandos usando (a) un bucle `for` y una instrucción `continue` y (b) un bucle `while` y una variable `boolean` como una bandera.
+5. Proporcione las siguientes declaraciones iniciales de variables y asignaciones de valores, evalúe la expresión en la última línea de código:
+
+```java
+int a = 1;
+int b = 1;
+int c = 1;
+((((c ++ + --a) * b)! = 2) && true)
+```
