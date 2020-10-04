@@ -1350,23 +1350,121 @@ public class ScopeExample { // Inicio del del bloque de nivel 1.
    } // La variable "x" sale del alcance cuando finaliza el bloque del método main (nivel 2).
 }
 ```
-      
-```java
+  
+En el ejemplo anterior, la variable `y` sale del alcance tan pronto como finaliza el bloque `if`. Si intentamos acceder a `y` más adelante en el programa, como hacemos en la línea en negrita del código anterior, el compilador generará el siguiente mensaje de error:
+    
+```sh
+cannot resolve symbol
+symbol : variable y
+System.out.println("The value of y = " + y);
+                                         ^
 ```
 
-```java
-```
+Tenga en cuenta que una variable determinada es accesible para cualquier bloque de código interno ***anidado*** que siga a su declaración. Por ejemplo, en el programa `ScopeExample` anterior, la variable `x`, declarada en el nivel del bloque de método `main` (nivel 2), es accesible dentro del bloque de código de instrucción `if` (nivel 3).
+
+## Printing to the Screen
+
+La mayoría de las aplicaciones comunican información a los usuarios mostrando mensajes a través de la GUI de una aplicación. Sin embargo, en ocasiones también es útil poder mostrar mensajes de texto simples en la ventana de la línea de comandos desde la que estamos ejecutando un programa como *una forma rápida y sucia* de verificar que un programa está funcionando correctamente. Hasta que analicemos cómo crear una GUI de Java en los capítulos 16 y 17, esta será la forma principal de comunicación de nuestro programa con el mundo exterior.
+
+Para imprimir mensajes de texto en la pantalla, usamos la siguiente sintaxis:
 
 ```java
+System.out.println(expression to be printed);
 ```
 
-```java
-```
+El método `System.out.println` puede aceptar expresiones muy complejas y hace todo lo posible para convertirlas en un solo valor de cadena, que luego se muestra en la pantalla. Aquí están algunos ejemplos:
 
 ```java
+System.out.println("Hi!"); 	// Imprimiendo una cadena literal/constante.
+
+String s = "Hi!"; 
+System.out.println(s);		// Imprimiendo el valor de una variable String.
+
+String t = "foo";
+String u = "bar"; 
+System.out.println(t + u + "!");// Usando el operador de concatenación de cadenas (+) 
+				// para imprimir "foobar!".
+
+int x = 3;
+int y = 4; 
+System.out.println(x);		// Imprime la representación String del
+				// valor entero 3 en la pantalla.
+System.out.println(x + y);	// Calcula la suma de x e y, luego imprime la 
+				// Representación de cadena del valor entero 7 
+				// en la pantalla.
 ```
+
+Tenga en cuenta que en la última línea de código, el signo más (+) se interpreta como el operador de suma, no como el operador de concatenación de cadenas, porque separa dos variables que se declaran ambas de tipo `int`. Entonces, la suma de `3 + 4` se calcula como `7`, que luego se imprime. En el siguiente ejemplo, sin embargo, obtenemos un comportamiento diferente (y posiblemente no deseado):
+
 ```java
+System.out.println("La suma de x más y es: " + x + y);
 ```
+
+La línea anterior de código hace que se imprima lo siguiente:
+
+```sh
+La suma de x más y es: 34
+```
+
+¿Por qué es esto? Recuerde que evaluamos expresiones de izquierda a derecha, por lo que, dado que el primero de los dos signos más separa un literal de cadena y un `int`
+
 ```java
+System.out.println("La suma de x más y es: " + x + y);
 ```
+
+el primer signo más se interpreta como un operador de concatenación de cadenas, produciendo el valor intermedio de cadena "La suma de x más y es: 3". El segundo signo más separa este valor de cadena intermedio de un `int`, por lo que el segundo signo más también se interpreta como un operador de concatenación de cadenas, el valor de cadena final `"La suma de x más y es: 34"`, que se imprime en la ventana de comandos.
+
+Para imprimir la suma correcta de `x` e `y`, debemos forzar que el segundo signo más se interprete como un operador de suma entera encerrando la expresión de suma entre paréntesis anidados:
+
+```java
+System.out.println("La suma de x más y es: " + (x + y));
+```
+
+Los paréntesis anidados hacen que la expresión más interna se evalúe primero, calculando así la suma de `x + y` correctamente. Por lo tanto, esta declaración `println` muestra el mensaje correcto en la pantalla:
+
+```sh
+La suma de x más y es: 7
+```
+
+Al escribir código que involucra expresiones complejas, es una buena idea usar paréntesis libremente para dejar claras sus intenciones al compilador. Los paréntesis adicionales, cuando se usan correctamente, ¡nunca hacen daño!
+
+### print vs. println
+
+Cuando llamamos al método `System.out.println`, se imprimirá cualquier expresión entre paréntesis, seguida de un terminador de línea (dependiente de la plataforma). El siguiente fragmento de código
+
+```java
+System.out.println("Primer línea."); 
+System.out.println("Segunda línea."); 
+System.out.println("Tercer línea.");
+```
+
+Produce tres líneas separadas en la salida:
+
+```sh
+Primer línea.
+Segunda línea.
+Tercer línea.
+```
+
+En contraste la sentencia:
+
+```java
+System.out.print(expresión a ser impresa);
+```
+
+hace que cualquier expresión que esté entre paréntesis se imprima sin un terminador de línea final. El uso de `print` en combinación con `println` nos permite generar una sola línea de salida a través de una serie de declaraciones de Java, como se muestra en el siguiente ejemplo:
+
+```java
+System.out.print("J");  // Usando print aquí
+System.out.print("AV"); // Usando print aquí
+System.out.println("A!!!"); // Note el uso de println en la última sentencia
+```
+
+Este fragmento de código produce una sola línea de salida:
+
+```sh
+JAVA!!!
+```
+
+Cuando una sola sentencia `print` se vuelve demasiado larga para caber en una sola línea, como en este ejemplo:
 
