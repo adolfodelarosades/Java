@@ -255,3 +255,16 @@ antes de la declaración
 `public class Student { ... }`
 
 Analizaremos las directivas de importación en el Capítulo 6.
+
+Tenga en cuenta que nuestra clase de `Student` no está obligada a declarar un método `main`. A diferencia de las clases mostradas anteriormente en el libro, que sirvieron para encapsular el método principal de un programa
+
+```java
+public class Simple {
+   public static void main(String[] args) {
+      System.out.println("I love Java!!!"); 
+   }
+}
+```
+
+
+la clase `Student` tiene un propósito diferente: es decir, estamos definiendo cuál es la estructura de datos y los comportamientos de los objetos de los estudiantes deben ser.
