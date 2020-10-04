@@ -1070,76 +1070,202 @@ switch (x) {
 }
 ```
 
-
-```java
-
-```
-
 ### `for` Statements
 
-Una instrucción for es una construcción de programación que se utiliza para ejecutar una o más instrucciones un cierto número de veces. La sintaxis general de la instrucción for es la siguiente:
-for (inicializador; condición; iterador) {
-código para ejecutar mientras la condición se evalúa como verdadera
+Una instrucción `for` es una construcción de programación que se utiliza para ejecutar una o más instrucciones un cierto número de veces. La sintaxis general de la instrucción `for` es la siguiente:
+
+
+```java
+for (initializer; condition; iterator) {
+   código para ejecutar mientras la condición se evalúa como verdadera
 }
-Una instrucción for define tres elementos que están separados por punto y coma y entre paréntesis después de la palabra clave for: el inicializador, la condición y el iterador. El inicializador se utiliza para proporcionar un valor inicial para una variable de control de bucle. La variable puede declararse como parte del inicializador, o puede declararse antes en el código, antes de la instrucción for, por ejemplo:
-// La variable de control de bucle 'i' se declara dentro de la instrucción for: for (int i = 0; condición; iterador) {
+```
+
+Una instrucción `for` define tres elementos que están separados por punto y coma y entre paréntesis después de la palabra clave `for`: el **inicializador**, la **condición** y el **iterador**. El ***inicializador*** se utiliza para proporcionar un valor inicial para una **variable de control de bucle**. *La variable puede declararse como parte del inicializador, o puede declararse antes en el código, antes de la instrucción `for`*, por ejemplo:
+
+```java
+// La variable de control de bucle 'i' se declara dentro de la instrucción for:
+for (int i = 0; condition; iterator) {
     código para ejecutar mientras la condición se evalúa como verdadera
 }
-// Tenga en cuenta que i ya no es reconocido por el compilador cuando el bucle 'for' sale, // porque se declaró efectivamente dentro del bucle 'for'; hablaremos sobre el // alcance de una variable más adelante en este capítulo .
+// Tenga en cuenta que i ya no es reconocida por el compilador cuando el bucle 'for' termina, 
+// porque se declaró efectivamente dentro del bucle 'for'; hablaremos sobre el 
+// alcance de una variable más adelante en este capítulo .
+```
+
 versus
+
+```java
 // La variable de control de bucle 'i' se declara antes del inicio del bucle 'for':
 int i;
-para (i = 0; condición; iterador) {
-código para ejecutar mientras la condición se evalúa como verdadera
+for (i = 0; condition; iterator) {
+   código para ejecutar mientras la condición se evalúa como verdadera
 }
-para (int i = 0; i <5; iterador) {
-código para ejecutar siempre que el valor de i sea menor que 5
+```
+
+La ***condición*** es una expresión lógica que normalmente involucra la variable de control de bucle:
+
+```java
+for (int i = 0; i < 5; iterator) {
+   código para ejecutar siempre que el valor de i sea menor que 5
 }
-para (int i = 0; i <5; i ++) {
-código para ejecutar siempre que el valor de i sea menor que 5
+```
+
+El ***iterador*** normalmente incrementa o decrementa la variable de control de bucle:
+
+```java
+for (int i = 0; i < 5; i++) {
+   código para ejecutar siempre que el valor de i sea menor que 5
 }
+```
+
 Nuevamente, observe el uso de un punto y coma (;) después del inicializador y la condición, pero no después del iterador.
-A continuación, se muestra un desglose de cómo funciona un bucle for:
-1. Cuando la ejecución del programa alcanza la declaración, el inicializador se ejecuta primero (y
-sólo una vez).
-2. Elcondicionamientoeselnevaluado.Silacondiciónevalúaverdadero, se ejecuta el bloque de código que sigue al paréntesis.
-CAPÍTULO 2 ■ ALGUNOS FUNDAMENTOS DE JAVA 49
-   La condición es una expresión lógica que normalmente involucra la variable de control de bucle:
- El iterador normalmente incrementa o reduce la variable de control de bucle:
- 
-                                        50 CAPÍTULO 2 ■ ALGUNOS CONCEPTOS BÁSICOS DE JAVA
+
+A continuación, se muestra un desglose de cómo funciona un bucle `for`:
+
+1. Cuando la ejecución del programa alcanza la declaración, el inicializador se ejecuta primero (y sólo una vez).
+2. La condición es evaluada.Si la condición evalúada es verdadera, se ejecuta el bloque de código que sigue al paréntesis.
 3. Una vez finalizado el bloque de código, se ejecuta la iteración.
-4. Luego se evalúa la condición. Si la condición sigue siendo cierta, el bloque de código es
-una vez más, seguido de la ejecución de la declaración del iterador.
-Este proceso se repite hasta que la condición se vuelve falsa, momento en el que termina el ciclo for. A continuación, se muestra un ejemplo simple que utiliza declaraciones for anidadas para generar una tabla de multiplicar simple. Las variables de control de bucle, j y k, se declaran dentro de sus respectivas declaraciones for.
-Siempre que se cumplan las condiciones de las instrucciones for respectivas, se ejecuta el bloque de código que sigue a la instrucción for. El operador ++ se utiliza para incrementar los valores de j y k cada vez que se ejecuta el bloque de código respectivo.
+4. Luego se evalúa la condición. Si la condición sigue siendo cierta, el bloque de código es una vez más ejecutado, seguido se ejecuta la sentencia del iterador.
+
+Este proceso se repite hasta que la condición se vuelve falsa, momento en el que termina el ciclo `for`. A continuación, se muestra un ejemplo simple que utiliza sentencias `for` anidadas para generar una tabla de multiplicar simple. Las variables de control de bucle, `j` y `k`, se declaran dentro de sus respectivas sentencias `for`. Siempre que se cumplan las condiciones de las instrucciones `for` respectivas, se ejecuta el bloque de código que sigue a la instrucción `for`. El operador `++` se utiliza para incrementar los valores de `j` y `k` cada vez que se ejecuta el bloque de código respectivo.
+
+
+```java
 public class ForDemo {
-    public static void main (String [] args) {
-// Calcula una tabla de multiplicar simple. para (int j = 1; j <= 4; j ++) {
-para (int k = 1; k <= 4; k ++) {
-System.out.println (j + "*" + k + "=" + (j * k));
-}}
-}}
-Aquí está el resultado:
-1 * 1 = 1 1 * 2 = 2 1 * 3 = 3 1 * 4 = 4 2 * 1 = 2 2 * 2 = 4 2 * 3 = 6 2 * 4 = 8 3 * 1 = 3 3 * 2 = 6 3 * 3 = 9 3 * 4 = 12 4 * 1 = 4 4 * 2 = 8 4 * 3 = 12 4 * 4 = 16
-Al igual que con otras estructuras de control de flujo, si solo se especifica una declaración después de la condición for, se pueden omitir las llaves:
-para (int i = 0; i <3; i ++) sum = sum + i;
-pero se considera una buena práctica de programación utilizar llaves independientemente de:
-para (int i = 0; i <3; i ++) {suma = suma + i;
+   public static void main(String[] args) {
+      // Calcular una tabla de multiplicar simple. 
+      for (int j = 1; j <= 4; j++) {
+         for (int k = 1; k <= 4; k++) {
+            System.out.println(j + " * " + k + " = " + (j * k));
+         } 
+      }
+   } 
 }
+```
+
+Aquí la salida:
+
+```sh
+1 * 1 = 1 
+1 * 2 = 2 
+1 * 3 = 3 
+1 * 4 = 4 
+2 * 1 = 2 
+2 * 2 = 4 
+2 * 3 = 6 
+2 * 4 = 8 
+3 * 1 = 3 
+3 * 2 = 6 
+3 * 3 = 9 
+3 * 4 = 12 
+4 * 1 = 4 
+4 * 2 = 8 
+4 * 3 = 12 
+4 * 4 = 16
+```
+
+Al igual que con otras estructuras de control de flujo, si solo se especifica una declaración después de la condición `for`, se pueden omitir las llaves:
+
+```java
+for (int i = 0; i < 3; i++) sum = sum + i;
+```
+
+pero se considera una buena práctica de programación utilizar llaves:
+
+```java
+for (int i = 0; i < 3; i++) { 
+   sum = sum + i;
+}
+```
 
 ### `while` Statements
 
-Una instrucción while tiene una función similar a una instrucción for, ya que ambas se utilizan para ejecutar repetidamente un bloque de código asociado. Sin embargo, si no es práctico predecir el número de veces que se ejecutará el bloque de código cuando comience el ciclo, una instrucción while es la opción preferida, porque una instrucción while continúa ejecutándose siempre que se cumpla una condición específica.
-La sintaxis general de la instrucción while es la siguiente:
-while (condición) {
-código para ejecutar repetidamente mientras la condición continúa evaluándose como verdadera
+Una instrucción `while` tiene una función similar a una instrucción `for`, ya que ambas se utilizan para ejecutar repetidamente un bloque de código asociado. Sin embargo, si no es práctico predecir el número de veces que se ejecutará el bloque de código cuando comience el ciclo, una instrucción `while` es la opción preferida, porque una instrucción `while` continúa ejecutándose siempre que se cumpla una condición específica.
+
+La sintaxis general de la instrucción `while` es la siguiente:
+
+```java
+while (condition) {
+   código para ejecutar repetidamente mientras la condición continúa evaluándose como verdadera
 }
+```
+
 La condición puede ser una expresión lógica simple o compleja que se evalúa como un valor verdadero o falso, por ejemplo:
-int x = 1; int y = 1;
-mientras que ((x <20) || (y <10)) {
-con suerte haremos algo dentro de este cuerpo de bucle que incremente el valor de
-    ya sea xo y, para evitar un bucle infinito.
+
+```java
+int x = 1; 
+int y = 1;
+while ((x < 20) || (y < 10)) {
+   con suerte haremos algo dentro de este cuerpo de bucle que incremente el valor de
+   x e y, para evitar un bucle infinito.
 }
-Cuando la ejecución del programa alcanza una instrucción while, la condición se evalúa primero. Si la condición es verdadera, se ejecuta el bloque de código que sigue a la condición. Cuando el bloque de código finaliza, la condición se evalúa nuevamente y, si sigue siendo verdadera, el proceso se repite hasta que la condición se evalúa como falsa, momento en el que termina el ciclo while.
-A continuación, se muestra un ejemplo simple que ilustra el uso de un ciclo while para imprimir valores enteros consecutivos de 0 a 3. Una variable booleana denominada finalizada se establece inicialmente en falso. La variable finalizada se usa como bandera: mientras finalizada sea falsa, el bloque de código que sigue al ciclo while continuará ejecutándose. Cuando el valor de i llega a 4, el indicador de finalización se establecerá en verdadero, momento en el que terminará el ciclo while.
+```
+
+Cuando la ejecución del programa alcanza una instrucción `while`, la condición se evalúa primero. Si la condición es verdadera, se ejecuta el bloque de código que sigue a la condición. Cuando el bloque de código finaliza, la condición se evalúa nuevamente y, si sigue siendo verdadera, el proceso se repite hasta que la condición se evalúa como falsa, momento en el que termina el ciclo `while`.
+
+A continuación, se muestra un ejemplo simple que ilustra el uso de un ciclo `while` para imprimir valores enteros consecutivos de 0 a 3. Una variable booleana denominada `finished` se establece inicialmente en falso. La variable `finished` se usa como bandera: mientras `finished` sea falsa, el bloque de código que sigue al ciclo  `while` continuará ejecutándose. Cuando el valor de `i` llega a 4, el indicador de `finished` se establecerá en verdadero, momento en el que terminará el ciclo  `while`.
+
+
+```java
+public class WhileDemo {
+   public static void main(String[] args) {
+      boolean finished = false; 
+      int i = 0;
+      while (!finished) {
+         System.out.println(i);
+         i++;
+         if (i == 4) finished = true; // alternar la bandera para terminar el ciclo
+       } 
+   }
+}
+```
+
+Aquí esta la salida:
+
+```sh
+0
+1
+2
+3
+```
+
+Al igual que con las otras estructuras de control de flujo, si solo se especifica una declaración después de la condición, las llaves se pueden omitir:
+
+```java
+while (x < 20) x = x * 2;
+```
+
+pero se considera una buena práctica de programación utilizar llaves:
+
+```java
+while (x < 20) { 
+   x = x * 2;
+}
+```
+
+## Jump Statements
+
+El lenguaje Java define dos **sentencias de salto** que se utilizan para redirigir la ejecución del programa a otra sentencia en otra parte del código. Los dos tipos de sentencias de salto son las sentencias `break` y `continue`.
+
+Ya ha visto declaraciones de interrupción en acción anteriormente en este capítulo, cuando se usaron junto con sentencias `switch`. También se puede usar una instrucción `break` para terminar abruptamente un bucle `for` o `while`. Cuando se encuentra una instrucción `break` durante la ejecución del ciclo, el ciclo termina inmediatamente y la ejecución del programa se transfiere a la línea de código que sigue inmediatamente al ciclo, como en el siguiente ejemplo:
+
+```java
+// Comenzamos con la intención de incrementar x de 1 a 4 ... 
+for (int x = 1; x <= 4; x++) {
+   // ... pero cuando x alcanza el valor 3, terminamos prematuramente este 
+   // ciclo con una sentencia break.
+   if (x == 3) break;
+   System.out.println(x);
+}
+System.out.println("Loop finished");
+````
+
+
+
+
+``java
+```
+
+```java
+```
