@@ -14,7 +14,7 @@ En este capítulo, aprenderá
 
 En su forma más simple, cada aplicación de software consta de dos componentes principales: datos y funciones que operan (es decir, ingresan, emiten, calculan, almacenan, recuperan, imprimen, etc.) esos datos. (Vea la Figura 3-1.)
 
-![03-01](03-01.png)
+![03-01](images/03-01.png)
 
 La forma anterior a OO de diseñar software se conocía como descomposición funcional (de arriba hacia abajo). Comparemos el enfoque de descomposición funcional del diseño de software con el enfoque OO.
 
@@ -37,11 +37,11 @@ descomponer "Permitir que el alumno se inscriba en un curso" en
 
 etc. Seguimos descomponiendo funciones en piezas lógicas cada vez más pequeñas hasta que no pudimos subdividirlas más, como se ilustra en la Figura 3-2.
 
-![03-02](03-02.png)
+![03-02](images/03-02.png)
 
 Luego asignamos las funciones de nivel más bajo a diferentes programadores para codificar y realizar **pruebas unitarias** (es decir, probar de forma aislada). Finalmente, ensamblamos estas funciones de forma modular de abajo hacia arriba, probando los resultados de cada etapa sucesiva en el proceso de integración, hasta tener una aplicación completa construida, como se ilustra en la Figura 3-3.
 
-![03-03](03-03.png)
+![03-03](images/03-03.png)
 
 Con el enfoque de descomposición funcional para el desarrollo de software, nuestro enfoque principal
 estaba en las funciones que debía realizar una aplicación; los ***datos*** fueron una ocurrencia tardía. Es decir,
@@ -90,7 +90,7 @@ y, por supuesto, muchos otros. Aunque no podamos verlos, tocarlos, saborearlos, 
 
 Desde la perspectiva del software, un **objeto** (software) es una construcción/módulo de software que agrupa el **estado(datos)** y el **comportamiento(funciones)** que, en conjunto, representan una abstracción de un objeto del mundo real (físico o conceptual). Esto se ilustra conceptualmente en la Figura 3-4.
 
-![03-04](03-04.png)
+![03-04](images/03-04.png)
 
 Exploremos los dos lados de los objetos, su estado y comportamiento, por separado, con más profundidad.
 
