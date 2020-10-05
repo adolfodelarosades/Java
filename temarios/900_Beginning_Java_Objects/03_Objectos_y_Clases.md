@@ -798,8 +798,57 @@ objeto siempre que lo necesite a través de su `advisor` attribute/handle/***ref
 
 ### Las Ventajas de las Referencias como Atributos
 
-¿Qué ganamos al definir el atributo asesor del estudiante como una referencia a un objeto del profesor, en lugar de simplemente almacenar el nombre del asesor como un atributo de cadena del objeto del estudiante? Evitamos la redundancia de datos y la posible pérdida asociada de la integridad de los datos. Veamos cómo funciona esto.
-Al encapsular el nombre de cada profesor dentro del objeto Professor correspondiente, cada nombre se representará en un solo lugar dentro de una aplicación: es decir, dentro del objeto al que pertenece el nombre, que es precisamente donde pertenece. (Aprenderá en el Capítulo 4 cómo pedirle su nombre a un objeto Professor siempre que necesite saberlo). Luego, si el nombre de un profesor dado cambia por alguna razón, solo tenemos una copia de ese nombre para cambiar en nuestra aplicación - el nombre que está encapsulado dentro del objeto Profesor correspondiente.
-Si, en cambio, diseñáramos nuestra aplicación de manera que almacenáramos de forma redundante el nombre del profesor como un atributo String del objeto Professor y como un atributo String de cada objeto Student que el profesor aconseja, ¡tendríamos mucho más trabajo por hacer! Tendríamos que recordar
+¿Qué ganamos al definir el atributo `advisor` de `Student` como una referencia a un objeto `Professor`, en lugar de simplemente almacenar el nombre del asesor como un atributo `String` del objeto `Student`? ***Evitamos la redundancia de datos y la posible pérdida asociada de la integridad de los datos**. Veamos cómo funciona esto.
+
+Al encapsular el nombre de cada profesor dentro del objeto `Professor` correspondiente, cada nombre se representará en un solo lugar dentro de una aplicación: es decir, ***dentro del objeto al que pertenece el nombre**, que es ***precisamente*** donde pertenece. (Aprenderá en el Capítulo 4 cómo pedirle su nombre a un objeto `Professor` siempre que necesite saberlo). Luego, si el nombre de un profesor dado cambia por alguna razón, solo tenemos una copia de ese nombre para cambiar en nuestra aplicación - el nombre que está encapsulado dentro del objeto `Professor` correspondiente.
+
+Si, en cambio, diseñáramos nuestra aplicación de manera que almacenáramos de forma redundante el nombre del profesor como un atributo `String` del objeto `Professor` y como un atributo `String` de cada objeto `Student` que el profesor aconseja, ¡tendríamos mucho más trabajo por hacer! Tendríamos que recordar para actualizar el nombre del profesor no solo en el objeto `Professor`, sino también en potencialmente muchos objetos `Student` diferentes. Si nos olvidamos de actualizar todos esos objetos, entonces el nombre del profesor podría terminar siendo inconsistente de una instancia de estudiante a otra.
+
+Igual de importante, al mantener un identificador en el objeto `Professor` a través del atributo `advisor` de `Student`, el objeto `Student` también puede ***solicitar otros servicios*** de este objeto `Professor` a través de los métodos definidos para la clase `Professor`. Además de preguntar por el nombre del asesor (`Professor`), un objeto `Student` puede, por ejemplo, preguntar a su asesor (`Student`) dónde se encuentra la oficina del profesor, o qué cursos está impartiendo el profesor para que el estudiante pueda inscribirse en uno de ellos.
+
+Una ventaja final de utilizar referencias a objetos desde el punto de vista de la implementación es que también reducen la sobrecarga de memoria. El almacenamiento de una referencia a (también conocido como la dirección de memoria de) un objeto solo requiere 4 bytes (en máquinas de 32 bits) u 8 bytes (en máquinas de 64 bits) de memoria, en lugar de la cantidad de bytes de almacenamiento que ocupe el objeto referenciado como un todo en memoria. Si tuviéramos que hacer una copia de un objeto completo en cualquier lugar donde necesitáramos hacer referencia a él en nuestra aplicación, podríamos agotar rápidamente la cantidad total de memoria disponible para la JVM.
+
+## Tres Características Distintivas de un Lenguaje de Programación Orientado a Objetos
+
+Para ser considerado verdaderamente orientado a objetos, un lenguaje de programación debe proporcionar soporte para tres mecanismos clave:
+
+* Tipos definidos por el usuario (referencia)
+* Herencia
+* Polimorfismo
+
+Acaba de conocer el primero de estos mecanismos; analizaremos los otros dos en los capítulos siguientes.
+
+## Resumen
+
+En este capítulo, ha aprendido que
+* Un ***objeto*** es una abstracción de un objeto físico o conceptual del mundo real.
+
+* Una ***clase*** sirve como modelo para la creación de objetos. Específicamente, una clase define (a) los datos que un objeto encapsulará, conocidos como ***atributos*** del objeto, y (b) los comportamientos/***servicios*** que un objeto podrá realizar, conocidos como operaciones/***métodos*** de un objeto.
+
+* Un objeto puede ser considerado como una ***instancia*** de una clase a la que se le han asignado ***valores*** de atributo, en esencia, una ***plantilla completa***.
+
+* Justo como podemos declarar que las variables son de tipos primitivos, como `int`, `double` y `boolean`, también podemos declarar variables como ***tipos definidos por el usuario***, como `Student` y `Professor`. Los tipos definidos por el usuario se declaran como clases.
+
+* Cuando creamos un objeto nuevo en tiempo de ejecución (proceso conocido como ***instancia***), normalmente almacenamos una referencia a ("maneja") ese objeto en una ***variable de referencia***. Luego podemos usar la variable de referencia como un nombre simbólico para acceder y comunicarnos con el objeto.
+
+* Podemos definir atributos de una clase A para servir como referencias a objetos que pertenecen a otra clase B. Al hacerlo, permitimos que cada objeto encapsule la información que legítimamente pertenece a ese objeto, pero permitimos que los objetos se encuentren entre sí en la memoria en tiempo de ejecución para que puedan contactarse entre sí para compartir información cuando sea necesario.
+
+## Ejercicios
+
+1. Desde la perspectiva de un entorno académico (pero no necesariamente el estudio de casos de SRS específicamente), piense cuáles podrían ser los atributos y métodos apropiados de las siguientes clases:
+
+* `Classroom`
+* `Department`
+* `Degree`
+
+2. [Codificación] Presente las clases de `Student` y `Professor` como se presenta en este capítulo en el código Java. Para ello, (a) omita las declaraciones de métodos, (b) declare cualquier atributo de fecha como de tipo String en su lugar. Finalmente, cree una tercera clase llamada `MainClass` para que sirva como un "contenedor" para un método principal que instancia un objeto `Student` y un objeto `Professor`.
+
+3. [Codificación] Revise el código que escribió para el ejercicio2 anterior para incluir una tercera clase, `Department`; declare los atributos de `Department` que parezcan razonables pero, una vez más, omita las declaraciones de métodos por ahora. Luego, retroceda y modifique el atributo `major` de `Student` para hacer referencia a un `Department`, y el atributo `worksFor` de `Professor` para referirse a un `Department`. Finalmente, modifique el método principal de `MainClass` para crear una instancia de un objeto `Department` junto con un `Student` y `Professor`.
+
+4. Para el problema de cuyos requisitos definió para el ejercicio 3 en el Capítulo 1, enumere las clases que podría necesitar crear para modelarlo correctamente.
+
+5. Enumere las clases que podría necesitar para crear un modelo o un modelo del Sistema de seguimiento de recetas (PTS) analizado en el Apéndice B.
+
+6. ¿`Color` sería un buen candidato para un tipo/clase definido por el usuario? ¿Por qué o por qué no?
 
 
