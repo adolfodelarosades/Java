@@ -288,3 +288,88 @@ Por tanto, las clases se pueden diferenciar de los objetos de la siguiente maner
 * Un ***objeto***, por otro lado, es una instancia única de una ***plantilla completa*** para la cual se han proporcionado valores de atributo y sobre el cual se pueden ejecutar métodos, como se ilustra en la Figura 3-6.
 
 ![03-06](images/03-06.png)
+
+### Encapsulamiento
+
+La **encapsulación** es un término formal que se refiere al mecanismo que agrupa el estado y el comportamiento de un objeto en una sola unidad lógica. Todo lo que necesitamos saber sobre un estudiante dado está, en teoría, contenido dentro de los límites de un objeto `Student`, ya sea
+
+* Directamente, como atributo de un objetivo.
+* Indirectamente, un método que puede responder a una pregunta o hacer una determinación sobre el estado del objeto.
+
+<hr>
+La encapsulación no es exclusiva de los lenguajes OO, pero en algunos sentidos la perfeccionan. 
+
+Pero solo con los lenguajes de programación OO es la noción de encapsular datos y comportamiento en una construcción de una sola clase, para representar una abstracción de una entidad del mundo real, verdaderamente adoptada.
+<hr>
+
+### Tipos Definidos por el Usuario y Variables de Referencia
+
+En un lenguaje de programación que no es OO como C, la declaración
+
+`int x;`
+
+es una **declaración** de que la variable `x` es un `int`(eger), uno de varios tipos de datos primitivos definidos para ser parte del lenguaje C. ¿Qué significa esto realmente? Esto significa que
+
+* `x` es un nombre simbólico que hemos inventado para guardar un valor `int`(eger) almacenado en algún lugar de la memoria de la computadora. Sin embargo, no nos importa dónde se almacena este valor, porque
+
+* Siempre que queramos operar en este valor entero en particular en nuestro programa, lo remitimos a través de su nombre simbólico `x`, por ejemplo:
+
+`if (x > 17) x = x + 5;`
+
+* Además, la "cosa" que hemos llamado `x` comprende cómo responder a un número de operaciones diferentes, como suma (`+`), resta (`-`), multiplicación (`*`), división (`/`), comparaciones lógicas (`>`, `<`, `=`), etc. según lo definido por el tipo `int`.
+
+En un lenguaje OO como Java, podemos definir una clase como `Student`, y luego declarar una variable como de tipo `Student`, de la siguiente manera:
+
+`Student y;`
+
+¿Qué significa esto realmente? Esto significa que
+
+* Su nombre simbólico que hemos inventado para referirse a un objeto de `Student` (es decir, una instancia de la clase `Student`) que está almacenado en algún lugar de la memoria de la computadora. Sin embargo, no nos importa dónde se almacena este objeto, porque
+* Siempre que queramos operar en este objeto particular en nuestro programa, es preferible utilizar su nombre simbólico y, por ejemplo:
+
+```java
+if (y.isOnAcademicProbation()) System.out.println ("Uh oh ...");
+```
+
+• Además, la "cosa" que hemos llamado y comprende cómo responder a una serie de solicitudes de servicio diferentes (cómo registrarse en un curso, abandonar un curso, etc.) que han sido definidas por la clase `Student`.
+
+Tenga en cuenta los paralelismos entre `y` como `Student` y `x` como `int` en los ejemplos anteriores. Así como se dice que `int` es un ***tipo predefinido*** en Java (y otros lenguajes), se dice que la clase `Student` es un tipo definido por el usuario. Y, como y en el ejemplo anterior es una variable que se refiere a una instancia (objeto) de la clase `Student`, y se conoce como **variable de referencia**.
+
+Por el contrario, las variables declaradas como uno de los ocho tipos primitivos en Java (`int`, `double`, `float`, `byte`, `short`, `long`, `char` y `boolean`) ***no son*** variables de referencia, porque en Java, los tipos primitivos **no son tipos de referencia**; es decir, no se refieren a ***objetos***.
+
+```java
+// x NO es una variable de referencia, porque en Java,
+// un int NO es un objeto.
+int x;
+
+// yesNo NO es una variable de referencia, porque en Java, 
+// un booleano NO es un objeto.
+boolean yesNo;
+```
+
+Varios lenguajes OO difieren en su tratamiento de tipos simples. En algunos lenguajes OO (por ejemplo, Smalltalk), todos los tipos, incluidos los tipos "simples" como `int` y `char`, son tipos de referencia, mientras que en otros lenguajes (por ejemplo, Java y C ++), no lo son.
+
+<hr>
+El hecho de que Java contenga una combinación de tipos de referencia y tipos de no referencia afecta la forma en que manipulamos las variables en determinadas circunstancias, como cuando colocamos valores primitivos en colecciones, un tema que exploraremos en el Capítulo 6. Analizaré en el Capítulo 6 y nuevamente en el Apéndice G, las mejoras realizadas en el lenguaje Java a partir de la versión 5.0 reducen un poco el impacto de esta diferencia.
+<hr>
+
+#### Convenciones de Nomenclatura para Variables de Referencia
+
+Los nombres de las variables de referencia siguen la misma convención que los nombres de método y atributo, es decir, usan camel casing. Algunas declaraciones de variables de referencia de muestra son las siguientes:
+
+```java
+Course prerequisiteOfThisCourse;
+Professor facultyAdvisor;
+Student s;
+Student student;
+```
+
+El último de estos, `Student student;`, puede tomar un tiempo para acostumbrarse si es nuevo en los lenguajes de programación que distinguen entre mayúsculas y minúsculas. Sin embargo, se considera una buena práctica de programación crear un patrón de nombres de variables de referencia después del nombre de la clase a la que pertenecen si solo hay una de esas variables dentro del alcance en un cuerpo de código en particular. Debido a que el nombre de la clase comienza con una "S" mayúscula y el nombre de la variable de referencia comienza con una "s" minúscula, el `Student` y `student` son ***símbolos completamente diferentes*** en lo que respecta al compilador.
+
+### Instanciación de Objetos: Una Mirada más Cercana
+
+Los diferentes lenguajes de OO difieren en términos de cuándo se crea una instancia (creación) de un objeto. En Java, cuando declaramos que una variable es de un tipo definido por el usuario, como en
+
+`Student y;`
+
+***aún no hemos creado un objeto en la memoria***. Más bien, simplemente hemos declarado una variable de referencia de tipo `Student` llamada `y`. Esta variable de referencia tiene el ***potencial*** de hacer referencia a un objeto `Student`, ***pero todavía no se refiere a uno***; más bien, al igual que con las variables de varios tipos simples, el valor de `y` no está definido en lo que respecta al compilador ***hasta que le asignamos explícitamente un valor***.
