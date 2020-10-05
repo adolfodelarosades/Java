@@ -689,6 +689,7 @@ public class Student {
    // etc.
 }
 ```
+
 :fire:
 sin haber escrito todavía el código para la clase de `Professor` (`Professor.java`), obtendríamos un error de compilación en `Student` de la siguiente manera:
 
@@ -700,8 +701,92 @@ Professor advisor;
 ^
 ```
 
+porque todavía no hemos definido "`Professor`" como un tipo para el compilador de Java.
+
+Podríamos esperar hasta que hayamos programado las clases de `Student` y `Professor` antes intentando compilar cualquiera de ellos, pero ¿y si tuviéramos que introducir una tercera clase en la mezcla?
+
+```java
+public class Student {
+    String name;
+    Professor advisor;
+    Department major;
+    // etc. 
+}
+
+public class Professor {
+    String name;
+    Student advisee;
+    Department worksFor;
+    // etc. 
+}
+
+public class Department {
+    String name; 
+    Professor chairman; 
+    // etc.
+}
+```
+
+o una cuarta clase, o una quinta? ¿Debemos programarlos **todos** antes de compilar cualquiera de ellos? 
+
+Afortunadamente, podemos utilizar la técnica de **"eliminar"** una clase para solucionar temporalmente problemas relacionados con la compilación de una clase X que se refiere a una clase Y, que aún no hemos programado. Volviendo a nuestra clase de estudiantes como se escribió originalmente
+
+```java
+//Student.java
+
+public class Student {
+   // Las declaraciones de atributos suelen aparecer primero ...
+   String name;
+   // etc.
+   Professor advisor;
+   // etc.
+}
+```
+
+podemos codificar temporalmente una clase `Professor` "básica" de la siguiente manera:
+
+```java
+//Professor.java
+
+// Una clase "stub": tenga en cuenta que el cuerpo consta de un par de llaves vacías. 
+public class Professor { }
+```
+
+Por trivial que pueda ser esta definición de clase `Professor`, el compilador Java la considera una definición de clase legítima que, cuando se compila, producirá un archivo de código de bytes `Professor.class`.
+
+Cuando ahora intentemos compilar nuestro archivo `Student.java`, el compilador de hecho considerará que “Professor” es un símbolo válido, específicamente, el nombre de un tipo definido por el usuario, y `Student` también lo compilará correctamente.
+
+<hr>
+Recuerde que podemos compilar los archivos `Student.java` y `Professor.java` ("stub") simultáneamente con un solo comando
+
+`javac * .java`
+
+Es decir, `Professor.java` no necesita compilarse primero por separado.
+<hr>
+
+### Composición
+
+Siempre que creamos una clase, como `Student` o `Professor`, en la que uno o más de los atributos son en sí mismos referencias a otros objetos, estamos empleando una técnica OO conocida como **composición**. El número de niveles en los que los objetos pueden agruparse conceptualmente entre sí es infinito, por lo que la composición nos permite modelar conceptos muy sofisticados del mundo real. Resulta que la mayoría de las clases "interesantes" emplean composición.
+
+Con la composición, puede parecer conceptualmente como si estuviéramos anidando objetos físicamente uno dentro del otro, como se muestra en la Figura 3-15.
 
 ![03-15](images/03-15.png)
+
+El anidamiento de objetos real (es decir, declarar una clase dentro de otra) es posible en muchos lenguajes de programación OO, y de hecho a veces tiene sentido, es decir, si un objeto A no necesita tener vida propia desde el punto de vista de una aplicación OO, y existe solo con el propósito de servir al objeto B.
+
+* Piense en su cerebro, por ejemplo, como un objeto que existe solamente dentro del contexto de su cuerpo (otro objeto).
+
+* Como ejemplo de un objeto relevante para el SRS, consideremos el libro de calificación utilizado para realizar un seguimiento del desempeño de los estudiantes en un curso en particular. Si tuviéramos que definir una clase de `GradeBook` y luego crear objetos de `GradeBook` como atributos (uno por objeto de curso), entonces podría ser razonable que cada objeto `GradeBook` exista completamente dentro del contexto de su objeto de curso asociado. Ningún otro objeto necesitaría comunicarse directamente con el `GradeBook`; Si un objeto `Student` desea preguntarle a un objeto `Course` qué calificación ha obtenido el `Student`, el objeto `Course` puede consultar internamente su objeto `GradeBook` incrustado y simplemente devolverle una calificación en letra al `Student`.
+
+<hr>
+De hecho, ilustraremos la noción de un libro de calificaciones cuando analicemos las **clases internas - inner classes** en el capítulo 13.
+<hr>
+
+Sin embargo, a menudo nos encontramos con la situación, como con las clases de ejemplo de `Student` y `Professor`, en la que un objeto A necesita referirse a un objeto B, el objeto B necesita referirse nuevamente al objeto A, y ***ambos*** objetos deben poder responder a solicitudes de forma independiente entre sí, tal como las realiza la aplicación en su conjunto. En tal caso, ¡los handles vienen al rescate!
+
+En realidad, ***no*** almacenamos objetos completos como atributos dentro de otros objetos; más bien, almacenamos ***referencias*** a objetos. Cuando un atributo de un objeto A se define en términos de una referencia de objeto B, los dos objetos existen por separado en la memoria y simplemente tienen una forma conveniente de encontrarse el uno al otro siempre que sea necesario para interactuar. Piense en usted mismo como un objeto y su número de teléfono celular como su referencia. Otras personas ("objetos") pueden comunicarse con usted a través de su número de teléfono celular para hablar con usted cuando lo necesiten, aunque no sepan dónde se encuentra físicamente; y a la inversa, si tienes sus números de celular, puedes llamarlos cuando quieras.
+
+La asignación de memoria mediante handles puede parecerse a la Figura 3-16 conceptualmente.
 
 
 ![03-16](images/03-16.png)
