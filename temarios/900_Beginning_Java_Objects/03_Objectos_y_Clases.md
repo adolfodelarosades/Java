@@ -80,7 +80,7 @@ Etcétera.
 
 Por supuesto, si bien todos estos tipos de objetos se encuentran comúnmente en un campus universitario típico, no todos son relevantes para inscribir a los estudiantes en los cursos, ni todos son necesariamente señalados por el estudio de caso de SRS, pero no nos preocuparemos sobre eso por el momento. En la Parte 2 de este libro, aprenderá una técnica para utilizar una especificación de requisitos como base para identificar qué tipos de objetos son relevantes para una abstracción particular.
 
-Ahora, centrémonos en la segunda mitad de la definición, particularmente en la frase ***"algo mental. . . hacia el cual se dirige el pensamiento, sentimiento o acción"***. Hay una gran cantidad de objetos conceptuales que juegan un papel importante en un entorno académico; algunos de estos son
+Ahora, centrémonos en la segunda mitad de la definición, particularmente en la frase ***"algo mental. . . hacia el cual se dirige el pensamiento, sentimiento o acción"***. Hay una gran cantidad de **objetos conceptuales** que juegan un papel importante en un entorno académico; algunos de estos son
 
 * Los ***cursos*** a los que asisten los estudiantes
 * Los ***departamentos*** para los que trabaja el profesorado 
@@ -103,16 +103,16 @@ Si deseamos registrar información sobre un estudiante, ¿qué datos podríamos 
 * La fecha de nacimiento del estudiante
 * Su dirección
 * El campo principal de estudio designado por el estudiante
-* Su promedio de calificaciones acumulativas (es decir, el promedio de calificaciones del estudiante)
+* Su promedio de calificaciones acumulativas (es decir, el promedio de calificaciones del estudiante ***GPA***)
 * El asesor de la facultad del alumno
-* Una lista de los cursos que el estudiante está inscrito actualmente en el semestre (es decir, la carga de cursos actual del estudiante)
-* Un historial de todos los cursos que el estudiante ha realizado hasta la fecha, el semestre/año en el que se tomó cada uno y la calificación que obtuvo para cada uno (es decir, el expediente académico del estudiante)
+* Una lista de los cursos que el estudiante está inscrito actualmente en el semestre (es decir, la carga de **cursos actual del estudiante***)
+* Un historial de todos los cursos que el estudiante ha realizado hasta la fecha, el semestre/año en el que se tomó cada uno y la calificación que obtuvo para cada uno (es decir, el ***expediente académico del estudiante***)
 
 y así. Ahora, ¿qué tal un curso académico? Quizás deseamos grabar
 
 * El número de curso (p. Ej., "ART101")
 * El nombre del curso (p. Ej., "Introducción al tejido de cestas")
-* Una lista de todos los cursos que debe haber sido completado con éxito por un estudiante antes de registrarse para este curso (es decir, los requisitos previos del curso)
+* Una lista de todos los cursos que debe haber sido completado con éxito por un estudiante antes de registrarse para este curso (es decir, los ***requisitos*** previos del curso)
 * El número de créditos que vale el curso
 * Todos los profesores que han sido aprobados para enseñar este curso
 
@@ -120,8 +120,8 @@ y así. En la nomenclatura de objetos, los elementos de datos que se utilizan pa
 
 Se dice que los valores de los atributos de un objeto, cuando se toman colectivamente, definen el **estado** o condición del objeto. Por ejemplo, si quisiéramos determinar si un estudiante es "elegible para graduarse" (un **estado**), podríamos buscar una combinación de lo siguiente:
 
-* La transcripción del estudiante (valor de atributo)
-* La lista de los estudiantes actualmente inscritos (como valor de atributo)
+* La transcripción del estudiante (***valor de atributo***)
+* La lista de los estudiantes actualmente inscritos (como ***valor de atributo***)
 
 para determinar si se espera que el estudiante haya cumplido con los requisitos del curso para su campo de estudio principal elegido (un tercer valor de atributo) al final del año académico actual. Un atributo dado puede ser simple, por ejemplo, "GPA", que puede representarse como un número de punto flotante simple (quizás un duoble en Java), o complejo, por ejemplo, "transcripción", que representa una colección bastante extensa de información sin una simple representación.
 
@@ -164,24 +164,24 @@ de estudio "atributo
 
 Dado que recientemente aprendió que el conjunto colectivo de valores de atributo para un objeto define su estado, ahora puede ver que las operaciones son capaces de ***cambiar el estado de un objeto***. Supongamos que definimos el estado de un estudiante que aún no ha seleccionado un campo de estudio principal como estudiante "no declarado". Pedirle a un objeto de estudiante que realice su método de “elegir un campo de estudio principal” hará que el objeto actualice el valor de su atributo de “campo de estudio principal” para reflejar el campo principal recién seleccionado. Esto, entonces, cambia el estado del estudiante de "no declarado" a "declarado".
 
-Otra forma más de pensar en las operaciones de un objeto son los ***servicios*** que se pueden solicitar al objeto en nombre de la aplicación. Por ejemplo, un servicio que podríamos pedirle a un objeto de curso que realice es proporcionarnos una lista de todos los estudiantes que están actualmente registrados para el curso (es decir, una lista de estudiantes).
+Otra forma más de pensar en las operaciones de un objeto son los ***servicios*** que se pueden solicitar al objeto en nombre de la aplicación. Por ejemplo, un servicio que podríamos pedirle a un objeto de curso que realice es proporcionarnos una lista de todos los estudiantes que están actualmente registrados para el curso (es decir, una ***lista de estudiantes***).
 
 Cuando realmente nos dedicamos a programar los comportamientos de un objeto en un lenguaje como Java, nos referimos a la representación del lenguaje de programación de una operación como un **método**, mientras que, estrictamente hablando, el término "operación" se usa típicamente para referirse a un comportamiento conceptualmente.
 
-## ¿Qué es una clase?
+## ¿Qué es una Clase?
 
-Una clase es una abstracción que describe las características comunes de todos los objetos en un grupo de objetos similares. Por ejemplo, se podría crear una clase llamada "Estudiante" para describir todos los objetos de estudiante reconocidos por el SRS.
+Una **clase** es una abstracción que describe las características comunes de todos los objetos en un grupo de objetos similares. Por ejemplo, se podría crear una clase llamada "Estudiante" para describir todos los objetos de estudiante reconocidos por el SRS.
 
 Una clase define
 
-* La **estructura de datos** (es decir, los nombres y tipos de ***atributos***) de cada objeto que pertenece a esa clase.
+* La ***estructura de datos*** (es decir, los nombres y tipos de ***atributos***) de cada objeto que pertenece a esa clase.
 * Las operaciones/***métodos*** que se deben realizar por medio de estos objetos: específicamente, cuáles son estas operaciones, cómo se llama formalmente a un objeto para realizarlas y qué acciones detrás de escena debe realizar un objeto para llevarlas a cabo.
 
 Por ejemplo, la clase de Estudiante podría diseñarse para tener los nueve atributos enumerados en la Tabla 3-1.
 
 **Tabla 3-1.** Atributos propuestos de la Clase Student
 Atributo    | Tipo
-------------|------
+------------|------------------------
 name        | String
 studentId   | String
 birthDate   | Date 
@@ -212,7 +212,7 @@ El término **característica** se usa informalmente para referirse colectivamen
 El término específico de Java para la noción de característica es **miembro**. Sin embargo, el término "característica", tal como lo usaremos de manera informal a lo largo del libro, y el significado ***preciso*** de "miembro" en el sentido de Java no son exactamente lo mismo. Aplazaremos una discusión en profundidad de qué es un miembro de Java específicamente hasta el Capítulo 13.
 <hr>
      
-### Una nota sobre las Convenciones de Nomenclatura
+### Una Nota sobre las Convenciones de Nomenclatura
 
 Todos los lenguajes de programación orientados a objetos (OOPL), incluido Java, mantienen las siguientes convenciones de nomenclatura:
 
@@ -246,6 +246,7 @@ public class Student {
 
 Al igual que con todas las definiciones de clases de Java que ha visto hasta ahora en el libro, esta definición de clase residiría en un archivo fuente llamado `ClassName.java` (`Student.java`, para ser específico) y se compilaría posteriormente en forma de código de bytes como un archivo llamado `Student.class`.
 
+<hr>
 Tenga en cuenta que, para que se compile el código anterior, debemos insertar la declaración
 
 `import java.util.Date;`
@@ -255,6 +256,7 @@ antes de la declaración
 `public class Student { ... }`
 
 Analizaremos las directivas de importación en el Capítulo 6.
+<hr>
 
 Tenga en cuenta que nuestra clase de `Student` no está obligada a declarar un método `main`. A diferencia de las clases mostradas anteriormente en el libro, que sirvieron para encapsular el método principal de un programa
 
@@ -266,5 +268,23 @@ public class Simple {
 }
 ```
 
-
 la clase `Student` tiene un propósito diferente: es decir, estamos definiendo cuál es la estructura de datos y los comportamientos de los objetos de los estudiantes deben ser.
+
+### Instantiation
+
+Una definición de clase se puede considerar como una plantilla para crear objetos de software, un "patrón" utilizado para
+
+* Asignar una cantidad prescrita de memoria dentro de la JVM para almacenar los ***atributos*** de un nuevo objeto.
+* Asociar un determinado conjunto de ***conductas*** con ese objeto.
+
+El término **instanciación** se utiliza para hacer referencia al proceso mediante el cual se crea un objeto en la memoria en tiempo de ejecución según una definición de clase. A partir de una sola definición de clase, por ejemplo, `Student`, podemos crear muchos objetos con estructuras de datos y comportamientos idénticos, de la misma manera que usamos un solo cortador de galletas para hacer muchas galletas de la misma forma. Entonces, otra forma de referirse a **un objeto es como una instancia de una clase** en particular, por ejemplo, "Un objeto `Student` es una instancia de la clase `Student`". (Hablaremos sobre el proceso físico de instanciar objetos tal como ocurre en Java con un poco más de detalle más adelante en este capítulo).
+
+Por tanto, las clases se pueden diferenciar de los objetos de la siguiente manera:
+
+* Una ***clase*** define las características — atributos, métodos — que debe poseer todo objeto que pertenece a la clase; por tanto, se puede pensar que una clase sirve como ***una plantilla de objetos***, como se ilustra en la Figura 3-5.
+
+![03-05](images/03-05.png)
+
+* Un ***objeto***, por otro lado, es una instancia única de una ***plantilla completa*** para la cual se han proporcionado valores de atributo y sobre el cual se pueden ejecutar métodos, como se ilustra en la Figura 3-6.
+
+![03-06](images/03-06.png)
