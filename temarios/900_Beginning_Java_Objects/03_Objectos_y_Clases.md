@@ -373,3 +373,15 @@ Los diferentes lenguajes de OO difieren en términos de cuándo se crea una inst
 `Student y;`
 
 ***aún no hemos creado un objeto en la memoria***. Más bien, simplemente hemos declarado una variable de referencia de tipo `Student` llamada `y`. Esta variable de referencia tiene el ***potencial*** de hacer referencia a un objeto `Student`, ***pero todavía no se refiere a uno***; más bien, al igual que con las variables de varios tipos simples, el valor de `y` no está definido en lo que respecta al compilador ***hasta que le asignamos explícitamente un valor***.
+
+Si queremos crear una instancia de un nuevo objeto `Student` para que haga referencia a él, tenemos que dar el paso distintivo de usar una palabra clave especial de Java, `new`, para asignar un nuevo objeto `Student` dentro de la memoria de la JVM en tiempo de ejecución. Asociamos el nuevo objeto con la variable de referencia y mediante una instrucción de asignación, como sigue:
+
+`y = new Student();`
+
+<hr>
+No se preocupe por los paréntesis al final de la declaración anterior. Hablaré de su importancia en el Capítulo 4, cuando analicemos la noción de **constructores**.
+<hr>
+
+Piense en el objeto recién creado como un globo de helio, como se muestra en la Figura 3-7, y una variable de referencia como la mano que sostiene una cuerda atada al globo para que podamos acceder al objeto cuando queramos.
+ 
+![03-07](images/03-07.png)
