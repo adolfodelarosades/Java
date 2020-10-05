@@ -385,3 +385,87 @@ No se preocupe por los paréntesis al final de la declaración anterior. Hablar�
 Piense en el objeto recién creado como un globo de helio, como se muestra en la Figura 3-7, y una variable de referencia como la mano que sostiene una cuerda atada al globo para que podamos acceder al objeto cuando queramos.
  
 ![03-07](images/03-07.png)
+
+Debido a que a veces se dice informalmente que una variable de referencia "se aferra" a un objeto, a menudo usamos el término informal **handle** (identificador), como en la expresión "La variable de referencia `y` mantiene un handle en un objeto `Student`".
+
+<hr>
+Si está familiarizado con el concepto de punteros de lenguajes como C y C ++, una referencia es similar a un puntero, en el sentido de que se refiere detrás de escena a la ubicación/dirección de memoria donde se almacena un objeto en particular. Sin embargo, las referencias de Java difieren de los punteros en que las referencias no se pueden manipular aritméticamente de la forma en que lo hacen los punteros.
+<hr>
+
+También podríamos crear un nuevo objeto sin asignarlo inmediatamente a una variable de referencia, como en la siguiente línea de código:
+
+`new Student();`
+
+pero tal objeto sería como un globo de helio sin una cuerda: de hecho existiría, pero nunca podríamos acceder a este objeto en nuestro programa. En esencia, "se alejaría flotando" de nosotros en la memoria inmediatamente después de haber sido "inflado".
+
+Tenga en cuenta que podemos combinar los dos pasos (declarar una variable de referencia y, de hecho, instaurar un objeto para que esa variable se refiera) en una sola línea de código:
+
+`Student y = new Student();`
+
+Otra forma de inicializar la variable de referencia `y` es usar una instrucción de asignación para "entregar" `y` una referencia a un objeto ya existente: es decir, un objeto ("globo de helio") que ya está siendo referenciado por una variable de referencia diferente `x`. Veamos un ejemplo:
+
+```java
+// Declaramos una variable de referencia e instanciamos nuestro primer objeto Student. 
+Student x = new Student();
+
+// Declaramos una segunda variable de referencia, pero "NO" la  instanciamos 
+// un segundo objeto Student.
+Student y;
+
+// Asignamos y una referencia al MISMO objeto al que x se refiere 
+// (x también continúa refiriéndose a él). Nosotros ahora, en esencia,
+// tiene dos "cadenas" atadas al mismo "globo".
+y = x;
+```
+
+El resultado conceptual de la declaración de asignación anterior se ilustra en la Figura 3-8: dos "cuerdas", sostenidas por dos "manos" diferentes, atadas al mismo "globo", es decir, dos variables de referencia diferentes que se refieren al mismo objeto en la memoria.
+
+![03-08](images/03-08.png)
+
+Por tanto, vemos que ***múltiples*** variables de referencia pueden referirse simultáneamente al mismo objeto. Sin embargo, cualquier variable de referencia solo puede retener/hacer referencia ***a un objeto*** a la vez. Por lo tanto, si una variable de referencia ya se aferra a un objeto, debe soltar ese objeto para hacer referencia a un objeto diferente. Si llega un momento en el que se han liberado todas las asas de un objeto en particular, ese objeto ya no es accesible para nuestro programa, como un globo de helio que se ha soltado.
+
+Ampliemos nuestro ejemplo anterior para ilustrar estos conceptos (observe el código resaltado que se ha agregado):
+
+```java
+// Declaramos una variable de referencia e instanciamos nuestro primer objeto Student x = new Student();
+
+// Declaramos una segunda variable de referencia, pero no instanciamos un 
+// segundo objeto.
+Student y;
+
+// Asignamos y a una referencia al MISMO objeto al que x se refiere 
+// (x también continúa refiriéndose a él).
+y = x;
+
+// Declaramos una TERCERA variable de referencia e instanciamos un SEGUNDO 
+// objeto Student.
+Student z = new Student();
+```
+
+En este momento, ahora tenemos dos referencias al ***primer*** objeto de `Student`, `x` e `y`, y una referencia, `z`, al ***segundo*** objeto `Student`, como se ilustra en la Figura 3-9.
+
+
+![03-09](images/03-09.png)
+
+
+![03-10](images/03-10.png)
+
+
+![03-11](images/03-11.png)
+
+
+![03-12](images/03-12.png)
+
+
+![03-13](images/03-13.png)
+
+
+![03-14](images/03-14.png)
+
+
+![03-15](images/03-15.png)
+
+
+![03-16](images/03-16.png)
+
+
