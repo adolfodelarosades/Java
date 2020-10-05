@@ -788,7 +788,18 @@ En realidad, ***no*** almacenamos objetos completos como atributos dentro de otr
 
 La asignación de memoria mediante handles puede parecerse a la Figura 3-16 conceptualmente.
 
-
 ![03-16](images/03-16.png)
+
+Con este enfoque, cada objeto se asigna en la memoria solo una vez:
+
+* El object `Student` sabe cómo encontrar y comunicarse con su asesor (`Professor`)
+objeto siempre que lo necesite a través de su `advisor` attribute/handle/***reference***.
+* El object `Professor` sabe cómo encontrar y comunicarse con su aconsejado (`Student`) objeto siempre que lo necesite a través de su `advisee` attribute/handle/***reference***.
+
+### Las Ventajas de las Referencias como Atributos
+
+¿Qué ganamos al definir el atributo asesor del estudiante como una referencia a un objeto del profesor, en lugar de simplemente almacenar el nombre del asesor como un atributo de cadena del objeto del estudiante? Evitamos la redundancia de datos y la posible pérdida asociada de la integridad de los datos. Veamos cómo funciona esto.
+Al encapsular el nombre de cada profesor dentro del objeto Professor correspondiente, cada nombre se representará en un solo lugar dentro de una aplicación: es decir, dentro del objeto al que pertenece el nombre, que es precisamente donde pertenece. (Aprenderá en el Capítulo 4 cómo pedirle su nombre a un objeto Professor siempre que necesite saberlo). Luego, si el nombre de un profesor dado cambia por alguna razón, solo tenemos una copia de ese nombre para cambiar en nuestra aplicación - el nombre que está encapsulado dentro del objeto Profesor correspondiente.
+Si, en cambio, diseñáramos nuestra aplicación de manera que almacenáramos de forma redundante el nombre del profesor como un atributo String del objeto Professor y como un atributo String de cada objeto Student que el profesor aconseja, ¡tendríamos mucho más trabajo por hacer! Tendríamos que recordar
 
 
