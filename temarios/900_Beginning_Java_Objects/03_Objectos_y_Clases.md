@@ -647,6 +647,60 @@ public class Professor {
 
 Esta definición de clase residiría en un archivo fuente llamado `Professor.java`, y luego se compilaría en forma de código de bytes como un archivo llamado `Professor.class`.
 
+<hr>
+Tenga en cuenta que, como se mencionó anteriormente para la clase `Student`, necesitaríamos insertar la declaración 
+
+`import java.util.Date;`
+
+antes de la declaración
+
+`public class Professor { ... }`
+
+para que el código se compile correctamente. Hablaremos sobre el tipo de fecha de Java en el Capítulo 13.
+<hr>
+
+Los siguientes son algunos puntos notables sobre la clase de `Professor`:
+
+* Es probable que un profesor asesore a varios estudiantes simultáneamente, por lo que tener un atributo como `StudentAdvisee` que solo puede hacer referencia a un ***único*** objeto `Student` no es muy útil. Analizaremos las técnicas para manejar esto en el Capítulo 6, cuando analicemos las **colecciones**, que también veremos como útiles para definir el atributo `teachAssignments` de `Professor`, y los atributos `courseLoad` y `transcript` de `Student`.
+
+* El atributo `worksFo` representa el departamento al que se asigna un profesor. Podemos elegir representar esto como una cadena simple que represente el nombre del departamento, por ejemplo, "MATH", o como una variable de referencia que mantiene un identificador en un objeto Department, específicamente, el objeto `Department` que representa el "mundo real". ”Departamento de Matemáticas. Por supuesto, hacerlo requeriría definir los atributos y métodos para una nueva clase llamada `Department`.
+
+Como discutiremos más adelante en la Parte 2 de este libro, la decisión de si necesitamos o no inventar un nuevo tipo/clase definida por el usuario para representar un concepto/abstracción particular del mundo real no siempre es clara.
+
+
+### Un truco de compilación: “Stubbing Out” Classes - Clases de "Taponamiento"
+
+Si quisiéramos programar las clases `Student` y `Professor` en Java como se mostró anteriormente, ninguna de las dos podría compilarse de forma aislada; es decir, si simplemente escribimos el código para la clase `Student`:
+
+```java
+//Student.java
+
+public class Student {
+   // Las declaraciones de atributos suelen aparecer primero ...
+   String name;
+   String studentId;
+   Date birthDate;
+   String address;
+   String major;
+   double gpa;
+   // Una clase es un tipo definido por el usuario, por lo que podemos declarar  
+   // atributos de ese tipo.
+   Professor advisor;
+   // etc.
+}
+```
+:fire:
+sin haber escrito todavía el código para la clase de `Professor` (`Professor.java`), obtendríamos un error de compilación en `Student` de la siguiente manera:
+
+```sh
+Student.java: cannot find symbol 
+symbol : class Professor 
+location : class Student 
+Professor advisor;
+^
+```
+
+
 ![03-15](images/03-15.png)
 
 
