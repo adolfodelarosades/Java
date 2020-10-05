@@ -444,24 +444,208 @@ Student z = new Student();
 
 En este momento, ahora tenemos dos referencias al ***primer*** objeto de `Student`, `x` e `y`, y una referencia, `z`, al ***segundo*** objeto `Student`, como se ilustra en la Figura 3-9.
 
-
 ![03-09](images/03-09.png)
 
+Ampliemos nuestro ejemplo una vez más (observe el código que se ha agregado):
+
+```java
+// Declaramos una variable de referencia e instanciamos nuestro primer objeto Student x = new Student();
+
+// Declaramos una segunda variable de referencia, pero no instanciamos un 
+// segundo objeto.
+Student y;
+
+// Asignamos y a una referencia al MISMO objeto al que x se refiere 
+// (x también continúa refiriéndose a él).
+y = x;
+
+// Declaramos una TERCERA variable de referencia e instanciamos un SEGUNDO 
+// objeto Student.
+Student z = new Student();
+
+// Reasignamos y para referirnos al mismo objeto al que se refiere z;
+// y por lo tanto, suelta el primer objeto Student y agarra el segundo. 
+y = z;
+```
+
+Debido a que ahora le pedimos a `y` que se refiera al mismo objeto al que se refiere `z`, es decir, el ***segundo*** objeto `Student`, y debe liberar su identificador en el ***primer*** objeto `Student`. Esto se ilustra en la Figura 3-10. (Sin embargo, tenga en cuenta que `x` todavía se aferra al primer objeto `Student`).
 
 ![03-10](images/03-10.png)
 
+Ahora completaremos nuestro ejemplo con el código que hemos agregado:
+
+```java
+// Declaramos una variable de referencia e instanciamos nuestro primer objeto Student x = new Student();
+
+// Declaramos una segunda variable de referencia, pero no instanciamos un 
+// segundo objeto.
+Student y;
+
+// Asignamos y a una referencia al MISMO objeto al que x se refiere 
+// (x también continúa refiriéndose a él).
+y = x;
+
+// Declaramos una TERCERA variable de referencia e instanciamos un SEGUNDO 
+// objeto Student.
+Student z = new Student();
+
+// Reasignamos y para referirnos al mismo objeto al que se refiere z;
+// y por lo tanto, suelta el primer objeto Student y agarra el segundo. 
+y = z;
+
+// Reasignamos x para hacer referencia al mismo objeto al que se refiere z. 
+// x, por lo tanto, suelta el primer objeto Student y se agarra 
+// al segundo también.
+x = z;
+```
+
+Debido a que ahora le pedimos a `x` que se refiera al mismo objeto al que se refiere `z`, es decir, el segundo objeto `Student`, `x` debe liberar su identificador en el primer objeto de estudiante. Dado que ya no mantenemos ninguna referencia al primer objeto `Student` (`x`, `y`, `z` ahora se refieren al segundo), el primer objeto `Student` ahora se pierde en el programa, como se ilustra en la Figura 3-11. .
 
 ![03-11](images/03-11.png)
 
+Otra forma de hacer que una variable de referencia libere su identificador en un objeto es establecer la variable de referencia en el valor `null`, que como discutimos en el Capítulo 2 es la palabra clave de Java que se usa para representar un objeto inexistente. Continuando con nuestro ejemplo anterior
+
+* Establecer `x` a `null` obtiene `x` para liberar su handle (identificador) en el segundo objeto `Student`, como se ilustra en la Figura 3-12.
+
+```java
+x = null;
+```
 
 ![03-12](images/03-12.png)
 
+* Establecer `y` a `null` hace que `y` libere su handle (identificador) en el segundo objeto `Student`, como se ilustra en la Figura 3-13.
+
+```java
+x = null;
+y = null;
+```
 
 ![03-13](images/03-13.png)
 
+* Lo mismo ocurre con z, como se ilustra en la Figura 3-14.
+
+```java
+x = null;
+y = null;
+z = null;
+```
+
+¡Ahora, ambos objetos `Student` se han perdido en nuestro programa!
 
 ![03-14](images/03-14.png)
 
+### Garbage Collection - Recolección de basura
+Resulta que si se liberan todos los identificadores de un objeto, podría parecer que la memoria que ocupa el objeto dentro de la JVM se desperdiciaría permanentemente. En un lenguaje como C++, esto puede suceder si los programadores no se preocupan explícitamente de recuperar la memoria de un objeto que ya no es necesario antes de que se eliminen todos sus identificadores. No hacerlo es una fuente crónica de problemas en los programas C++ y se conoce comúnmente como pérdida de memoria.
+
+<hr>
+En C ++, esto se logra mediante la siguiente declaración:
+`x.delete ();`
+pero tal declaración es innecesaria en Java, por razones que vamos a discutir.
+<hr>
+
+Con Java, por otro lado, la JVM realiza periódicamente la recolección de basura, un proceso que automáticamente recupera la memoria de los objetos “perdidos” mientras se ejecuta una aplicación. Así es como funciona el recolector de basura de Java:
+
+*  Si quedan referencias activas a un objeto, se convierte en un candidato para la recolección de basura.
+* Sin embargo, el recolector de basura ***no recicla inmediatamente*** el objeto; más bien, la recolección de basura ocurre cuando la JVM determina que la aplicación se está quedando sin memoria libre, o cuando la JVM está inactiva.
+* Por lo tanto, durante un período de tiempo, el objeto "huérfano" seguirá existiendo en la memoria, simplemente no tendremos handles(identificadores)/variables de referencia con las que acceder.
+
+<hr>
+Tenga en cuenta que hay una manera de solicitar explícitamente que la recolección de basura ocurra en Java a través de la siguiente declaración:
+
+```java
+Runtime.getRuntime().gc();
+```
+
+Incluso entonces, sin embargo, el ***momento preciso*** en el que ocurre la recolección de basura está fuera del control del programador, así como cuáles y cuántos de los objetos elegibles se recolectarán.
+<hr>
+
+La inclusión de la recolección de basura en Java prácticamente ha eliminado las pérdidas de memoria del tipo que surgió en C++. Tenga en cuenta que aún es posible que la JVM se quede sin memoria, sin embargo, si mantenemos identificadores en demasiados objetos activos simultáneamente. Por tanto, un programador de Java no puede ser totalmente ajeno a la gestión de la memoria; la gestión de la memoria es menos propensa a errores en Java que en C/C ++.
+
+## Objects As Attributes - Objetos como atributos
+
+Cuando hablé por primera vez de los atributos y métodos asociados con la clase `Student`, indiqué que algunos de los atributos podrían estar representados por tipos predefinidos proporcionados por el lenguaje Java, mientras que los tipos de algunos otros (`advisor`, `courseLoad`, y `transcript`) fueron temporalmente dejado sin especificar. Ahora, hagamos un buen uso de lo que ha aprendido sobre los tipos definidos por el usuario con respecto a uno de estos atributos: el atributo de `advisor` (asesor) de la clase `Student`.
+
+En lugar de declarar el atributo `advisor` como simplemente `String` que representa el nombre del asesor, declararemos que es del tipo definido por el usuario, es decir, tipo `Professor` (Profesor), otra clase que hemos inventado. Este tipo de atributo se refleja en la Tabla 3-2.
+
+**Tabla 3-2.** Atributos propuestos de la Clase `Student`
+Atributo    | Tipo
+------------|------------------------
+name        | String
+studentId   | String
+birthDate   | Date 
+address     | String 
+major       | String 
+gpa         | double 
+**advisor     | Professor**
+courseLoad  | ??? 
+transcript  | ???
+
+
+Esto también se refleja en nuestra declaración de clase `Student`:
+
+```java
+public class Student {
+   // Las declaraciones de atributos suelen aparecer primero ...
+   String name;
+   String studentId;
+   Date birthDate;
+   String address;
+   String major;
+   double gpa;
+   // Una clase es un tipo definido por el usuario, por lo que podemos declarar  
+   // atributos de ese tipo.
+   Professor advisor;
+   // type? courseLoad -declararemos este atributo más tarde.
+   // type? transcript – declararemos este atributo más tarde.
+   // ... seguido de declaraciones de método (detalles omitidos por ahora). 
+}
+```
+
+Al haber declarado que el atributo `advisor` es de tipo `Professor`, es decir, al hacer que el atributo `advisor` sirva como una ***variable de referencia***, acabamos de habilitar un objeto `Student` para mantener un control sobre el objeto `Professor` real que representa al profesor que está asesorando al estudiante.
+
+La clase `Professor`, a su vez, podría definirse para tener los atributos enumerados en la Tabla 3-3.
+
+**Tabla 3-2.** Atributos de la Clase `Professor`
+Atributo    | Tipo
+------------|------------------------
+name        | String
+employeeId  | String
+birthDate   | Date 
+address     | String 
+worksFor    | String (o Department)
+gpa         | double 
+**advisee   | Student**
+teachingAssignments  | ??? 
+
+Una vez más, al haber declarado que el atributo `advisee`(aconsejado) es de tipo `Student`, es decir, al hacer que el atributo `advisee` sea una variable de referencia, acabamos de darle a un objeto `Professor` una forma de retener/referirse al objeto `Student` real que representa el estudiante a quien el profesor está asesorando.
+
+Los métodos de la clase de `Professor` pueden ser los siguientes:
+
+* `transferToDepartment`
+* `adviseStudent`
+* `agreeToTeachCourse`
+* `assignGrades`
+
+Etcétera.
+
+Al igual que hicimos para la clase `Student` anteriormente en este capítulo, renderizaremos este diseño de clase `Professor` en código Java de la siguiente manera:
+
+```java
+public class Professor { 
+   // Attributes.
+   String name;
+   String employeeId;
+   Date birthDate;
+   String address;
+   String worksFor;
+   Student advisee;
+   double gpa;
+   // type? teachingAssignments – declararemos este atributo más tarde.
+   // ... seguido de declaraciones de método (detalles omitidos por ahora) 
+}
+```
+
+Esta definición de clase residiría en un archivo fuente llamado `Professor.java`, y luego se compilaría en forma de código de bytes como un archivo llamado `Professor.class`.
 
 ![03-15](images/03-15.png)
 
