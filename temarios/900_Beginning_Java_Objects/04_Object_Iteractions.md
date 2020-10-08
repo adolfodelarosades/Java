@@ -178,6 +178,47 @@ double sqrt(double x) {
 
 Aunque los términos “parámetro” y “argumento” se usan indistintamente con frecuencia y de manera casual, la conclusión es que son conceptos diferentes, es decir, ***los argumentos son valores; los parámetros son variables***.
 <hr>
+
+### Tipos de Retorno de un Método
+
+Se muestra que el método `registerForCourse` como se declaró anteriormente tiene un tipo de retorno de `boolean`, lo que implica que este método devolverá uno de los siguientes dos valores:
+
+* Un valor de verdadero, para indicar “misión cumplida”, es decir, que el estudiante objeto se ha registrado con éxito en el curso para el que se le indicó que se registre.
+* Un valor de falso, para indicar que la solicitud de registro ha sido denegada por alguna razón. Quizás la sección deseada estaba llena, o el estudiante no cumplía con los requisitos previos del curso, o el curso/sección solicitada se ha cancelado, etc.
+
+<hr>
+En el Capítulo 13, aprenderá técnicas para comunicarse y determinar con precisión ***por qué*** ha fallado la misión de un método cuando analicemos el **manejo de excepciones**.
+<hr>
+
+Tenga en cuenta que un método puede diseñarse de manera que no devuelva nada, es decir, puede realizar sus actividades en silencio, sin necesidad de informar el resultado de sus esfuerzos. Si es así, se declara que tiene un tipo de retorno de `void` (vacío) (otra de las palabras clave de Java). Como ejemplo, considere el encabezado del método `Student`:
+
+```java
+void setName(String newName)
+```
+
+Este método requiere un argumento (una cadena que representa el nuevo nombre que queremos que asuma este objeto `Student`) y funciona "silenciosamente" al establecer el atributo de nombre interno del objeto `Student` en cualquier valor que se esté pasando al método, sin devolver ninguna respuesta.
+
+Aquí hay un ejemplo adicional de un encabezado de método que podríamos declarar para la clase `Student` con un tipo de retorno `void`:
+
+```java
+void switchMajor(String newDepartment, Professor newAdvisor)
+```
+
+Este método representa una solicitud para que un objeto `Student` cambie su campo principal de estudio, lo que implica la designación de un nuevo departamento académico (por ejemplo, "BIOLOGÍA") y una referencia al objeto de profesor que debe servir como asesor del estudiante en este nuevo departamento.
+
+Este método representa una solicitud para que un objeto `Student` cambie su campo principal de estudio, lo que implica la designación de un nuevo departamento académico (por ejemplo, "BIOLOGÍA") y una referencia al objeto de profesor que debe servir como asesor del estudiante en este nuevo departamento.
+El ejemplo anterior demuestra que podemos declarar parámetros de cualquier tipo, incluidos los tipos definidos por el usuario, como `Professor`. Lo mismo ocurre con el tipo de retorno de un método, por ejemplo, un método con el siguiente encabezado:
+
+```java
+Professor getAdvisor()
+```
+
+podría usarse para preguntar a un objeto `Student` quién es su asesor. En lugar de simplemente devolver el nombre del asesor, el objeto `Student` devuelve una referencia al objeto `Professor` en su conjunto (según lo registrado por el atributo interno de la facultad del StudentAdvisor; aprenderá a informar a un objeto Student de qué objeto Professor debe servir como su consejero de la facultad un poco más adelante en el capítulo).
+Tenga en cuenta que un método puede devolver como máximo un resultado, lo que puede parecer limitante. ¿Qué pasa si, por ejemplo, queremos pedirle a un objeto Estudiante una lista de todos los Cursos que el Estudiante ha tomado alguna vez? ¿Debemos pedirlos uno por uno a través de múltiples llamadas a métodos? Afortunadamente no: el resultado devuelto por un método en realidad puede ser una referencia a un objeto de complejidad arbitraria, incluido un tipo especial de objeto llamado colección que puede contener referencias a muchos otros objetos. Hablaremos sobre colecciones en profundidad en el Capítulo 6.
+Una analogía
+Usemos una analogía para ayudar a ilustrar lo que hemos discutido hasta ahora sobre los métodos. Con respecto a las tareas del hogar, digamos que una persona es capaz de
+• Sacar la basura • Cortar el césped
+• Lavando el carro
  
 
 ![04-02](images/04-02.png)
