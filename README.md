@@ -207,6 +207,18 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [Welcome to the Documentation Library](https://docs.oracle.com/cd/B14099_19/index.htm)
 
+## Tutoriales Arduino - Java
+
+[Arduino and Java](https://playground.arduino.cc/Interfacing/Java/)
+
+[Ardulink](http://www.ardulink.org/)
+
+[Arduino y Java](http://www.unipamplona.edu.co/unipamplona/portalIG/home_74/recursos/visual-basic-para-excel/27112017/u8_arduino_java.jsp)
+
+[RXTX](http://users.frii.com/jarvi/rxtx/)
+
+[RXTX](http://rxtx.qbang.org/wiki/index.php/Main_Page)
+
 ### Java Web to AWS
 
 [Video](https://www.youtube.com/watch?time_continue=1181&v=Ozc5Yu_IcaI&feature=emb_logo)
