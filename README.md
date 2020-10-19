@@ -99,6 +99,16 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [950 Professional Java for Web Applications]
 * [90001 Java EE 8 Development with Eclipse](https://github.com/adolfodelarosades/Java/blob/master/temarios/90001_Java_EE_8_Development_with_Eclipse.md)
 
+### APLICACIONES
+
+* [WebLogic Consola](https://129.213.150.5:7002/console/console.portal?_nfpb=true&_pageLabel=AppDeploymentsRuntimePage)
+
+* [22_megusta_listener_usuarios](https://129.213.144.95/22_megusta_listener_usuarios/)
+
+* [997-AdminPro](https://129.213.144.95/997-AdminPro/)
+
+* [43_visor_paises_25](https://129.213.144.95/43_visor_paises_25/)
+
 # Enlaces Interesantes Java
 
 ## Java
