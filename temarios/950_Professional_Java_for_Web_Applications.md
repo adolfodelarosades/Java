@@ -99,7 +99,7 @@ Professional Java for Web Applications es la guía completa de Wrox para desarro
 * Replacing Java Code with Custom JSP Tags
 * Summary
 
-#### Chapter 9: Improving Your Application Using Filters
+#### Chapter 9: [Improving Your Application Using Filters](https://github.com/adolfodelarosades/Java/blob/master/temarios/950_Professional_Java_for_Web_Applications/09_Improving_Your_Application_Using_Filters.md)
 * Understanding the Purpose of Filters
 * Creating, Declaring, and Mapping Filters
 * Ordering Your Filters Properly
