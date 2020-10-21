@@ -1,8 +1,11 @@
 # 950 Professional Java for Web Applications
 
 Publisher: Wrox
+
 Release Date: March 2014
+
 ISBN: 9781118656464
+
 Topic: Java
 
 ### Descripción del libro
@@ -54,7 +57,7 @@ Professional Java for Web Applications es la guía completa de Wrox para desarro
 * Summary
 
 #### Chapter 4: Using JSPs to Display Content
-* '<br/>' Is Easier Than output.println("'<br />'")
+* `<br/>` Is Easier Than output.println("`<br />`")
 * Creating Your First JSP
 * Using Java within a JSP (and Why You Shouldn't!)
 * Combining Servlets and JSPs
