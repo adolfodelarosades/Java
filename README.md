@@ -217,6 +217,8 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [Welcome to the Documentation Library](https://docs.oracle.com/cd/B14099_19/index.htm)
 
+[Create a simple Login application and secure pages with Java Servlet Filter](https://o7planning.org/en/11071/create-a-simple-login-application-and-secure-pages-with-java-servlet-filter)
+
 ## Tutoriales Arduino - Java
 
 [Arduino and Java](https://playground.arduino.cc/Interfacing/Java/)
