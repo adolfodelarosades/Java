@@ -167,13 +167,13 @@ En este ejemplo, el filtro se agrega al `ServletContext` usando el método `addF
 
 El segundo parámetro del método indica el orden del filtro en relación con los filtros en el deployment descriptor. Si es falso (como en este caso), la asignación de filtro programática se ordena antes de cualquier asignación de filtro en el descriptor de implementación. Si es verdadero, las asignaciones en el descriptor de implementación son lo primero. Aprenderá más sobre el orden de los filtros en la siguiente sección. El parámetro final es un parámetro vararg para especificar los patrones de URL (para `addMappingForUrlPatterns`) o los nombres de servlet (para `addMappingForServletNames`) para asignar el filtro.
 
-## ORDENAR CORRECTAMENTE SUS FILTERS ADECUADAMENTE
+## ORDENAR SUS FILTERS ADECUADAMENTE
 
-Hasta ahora, a lo largo de este capítulo, ha visto varias referencias al orden de los filtros, pero sin duda se está preguntando qué es exactamente. El orden de los filtros determina en qué parte de la cadena de filtros aparece un filtro, que a su vez determina cuándo un filtro procesa una solicitud en relación con otros filtros. En algunos casos, no importa en qué orden procesen las solicitudes sus filtros; en otros casos, sin embargo, puede ser crítico, depende completamente de cómo esté usando los filtros. Por ejemplo, un filtro que configura la información de registro para una solicitud (o ingresa la solicitud en un registro) probablemente debería ir antes que cualquier otro filtro porque otros filtros podrían alterar el destino de la solicitud. Como se mencionó anteriormente, no puede ordenar filtros declarados usando anotaciones, lo que los hace virtualmente inútiles para la mayoría de las aplicaciones empresariales. Utilizará ampliamente el descriptor de implementación o la configuración programática, pero probablemente nunca utilice anotaciones para configurar filtros.
+Hasta ahora, a lo largo de este capítulo, ha visto varias referencias al orden de los filtros, pero sin duda se está preguntando qué es exactamente. El orden de los filtros determina en qué parte de la filter chain (cadena de filtros) aparece un filtro, que a su vez determina cuándo un filtro procesa una solicitud en relación con otros filtros. En algunos casos, no importa en qué orden procesen las solicitudes sus filtros; en otros casos, sin embargo, puede ser crítico, depende completamente de cómo esté usando los filtros. Por ejemplo, un filtro que configura la información de registro para una solicitud (o ingresa la solicitud en un registro) probablemente debería ir antes que cualquier otro filtro porque otros filtros podrían alterar el destino de la solicitud. Como se mencionó anteriormente, no puede ordenar filtros declarados usando anotaciones, lo que los hace virtualmente inútiles para la mayoría de las aplicaciones empresariales. Utilizará ampliamente el deployment descriptor o la configuración programática, pero probablemente nunca utilice anotaciones para configurar filtros.
 
 ### URL PATTERN MAPPING VERSUS SERVLET NAME MAPPING
 
-Definir el orden de los filtros es simple: los filtros que coinciden con una solicitud se agregan a la cadena de filtros en el orden en que aparecen sus asignaciones en el descriptor de implementación o en la configuración programática. (Y recuerde, si configura algunos filtros en el descriptor de implementación y otros mediante programación, puede determinar si una asignación programática viene antes que las asignaciones XML utilizando el segundo argumento de los métodos `addMapping*`). El orden de los filtros se muestra en la Figura 9-2, donde diferentes solicitudes coinciden con diferentes filtros pero siempre en el mismo orden. Sin embargo, el orden no es tan simple: las asignaciones de URL tienen preferencia sobre las asignaciones de nombres de Servlet. Si dos filtros coinciden con una solicitud, uno por un patrón de URL y el otro por un nombre de Servlet, el filtro que coincide con el patrón de URL siempre está presente en la cadena antes del filtro que coincide con el nombre de Servlet, como se muestra en la Figura 9-3. incluso si su mapeo aparece después. Para demostrar esto, considere las siguientes asignaciones:
+Definir el orden de los filtros es simple: los filtros que coinciden con una solicitud se agregan a la filter chain en el orden en que aparecen sus asignaciones en el deployment descriptor o en la configuración programática. (Y recuerde, si configura algunos filtros en el deployment descriptor y otros mediante programación, puede determinar si una asignación programática viene antes que las asignaciones XML utilizando el segundo argumento de los métodos `addMapping*`). El orden de los filtros se muestra en la Figura 9-2, donde diferentes solicitudes coinciden con diferentes filtros pero siempre en el mismo orden. Sin embargo, el orden no es tan simple: las asignaciones de URL tienen preferencia sobre las asignaciones de nombres de Servlet. Si dos filtros coinciden con una solicitud, uno por un patrón de URL y el otro por un nombre de Servlet, el filtro que coincide con el patrón de URL siempre está presente en la chain(cadena) *antes* del filtro que coincide con el nombre de Servlet, como se muestra en la Figura 9-3. incluso si su mapeo aparece después. Para demostrar esto, considere las siguientes mappings (asignaciones):
 
 ![09-02](images/09-02.png)
 
@@ -201,8 +201,113 @@ Definir el orden de los filtros es simple: los filtros que coinciden con una sol
     </filter-mapping>
 ```
 
+Si llega una solicitud normal a la URL `/foo/bar`, coincidirá con los tres filtros. La filter chain (cadena de filtros) constará, en orden, de `myFilter`, `anotherFilter` y luego `servletFilter.myFilter` se ejecuta antes que `anotherFilter` porque ese es el orden en el que aparecen en el deployment descriptor. Ambos se ejecutan antes de `servletFilter` porque las asignaciones de URL siempre vienen antes que las asignaciones de nombres de servlet. Si la solicitud es un envío de reenvío, inclusión, error o envío asíncrono, no coincidirá con ninguno de estos filtros, porque las asignaciones no especifican ningún `<dispatcher>` explícitamente.
+
+#### EXPLORANDO EL ORDEN DEL FILTRO CON UN EJEMPLO SIMPLE
+
+Para comprender mejor cómo funciona el orden de filtro, eche un vistazo al proyecto Filter-Order. Contiene tres servlets y tres filtros. El siguiente fragmento de código, `ServletOne`, es idéntico a sus homólogos `ServletTwo` y `ServletThree`, excepto que todas las apariciones de "One" se han reemplazado por "Two" y "Three", respectivamente:
+
+```java
+package com.wrox;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(name = "servletOne", urlPatterns = "/servletOne")
+public class ServletOne extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        System.out.println("Entering ServletOne.doGet().");
+        response.getWriter().write("Servlet One");
+        System.out.println("Leaving ServletOne.doGet().");
+    }
+}
+```
+
+```java
+package com.wrox;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(name = "servletTwo", urlPatterns = "/servletTwo")
+public class ServletTwo extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        System.out.println("Entering ServletTwo.doGet().");
+        response.getWriter().write("Servlet Two");
+        System.out.println("Leaving ServletTwo.doGet().");
+    }
+}
+```
+
+```java
+package com.wrox;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(name = "servletThree", urlPatterns = "/servletThree")
+public class ServletThree extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        System.out.println("Entering ServletThree.doGet().");
+        response.getWriter().write("Servlet Three");
+        System.out.println("Leaving ServletThree.doGet().");
+    }
+}
+
+```
+
+
+```java
+```
+
+```java
+```
+
+```java
+```
+
+
 ## Investigación de usos prácticos de filtros
 
 ## Simplificar la autenticación con un filtro
 
 ## Resumen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
