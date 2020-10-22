@@ -397,7 +397,6 @@ public class ServletOne extends HttpServlet
 }
 ```
 
-
 `ServletTwo`
 
 ```java
@@ -598,7 +597,454 @@ Leaving FilterA.doFilter().
 
 5. Realice los cambios que se le ocurran en las asignaciones para explorar cómo afecta la ejecución de la filter chain. Intente cambiar una o más de las asignaciones de URL a asignaciones de nombres de servlet y observe cómo cambia la filter chain nuevamente.
 
-## Investigación de usos prácticos de filtros
+#### UTILIZAR FILTROS CON MANEJO ASÍNCRONO DE SOLICITUDES
+
+Como se mencionó en la sección anterior, los filtros que se aplican al manejo de solicitudes asincrónicas pueden ser difíciles de implementar y configurar correctamente. El problema clave con el manejo de solicitudes asincrónicas es que el método `service` del servlet puede regresar antes de que se envíe una respuesta al cliente. El manejo de solicitudes se puede delegar a otro hilo o completar en función de algún evento.
+
+Por ejemplo, el método de servicio (o, por extensión, `doGet`, `doPost` u otro método) podría iniciar `AsyncContext`, registrar un oyente para algún tipo de mensaje hipotético (como una solicitud de chat recibida) y luego regresar. Luego, cuando el oyente de mensajes hipotéticos recibe un mensaje, podría enviar la respuesta al usuario. Con esta técnica, un subproceso de solicitud no se bloquea en espera mientras el manejo de la solicitud está en pausa. Un filtro que intercepta una solicitud de este tipo se completará antes de que se envíe la respuesta porque cuando el servicio regresa, el método doChain de FilterChain regresa.
+
+Los filtros mapeados al `ASYNC` dispatcher interceptan las solicitudes internas realizadas como resultado de llamar a uno de los métodos `dispatch` de `AsyncContext`. Para demostrar este filtrado más complejo, consulte el proyecto **950-09-02-FILTER-ASYNC**. Su `AnyRequestFilter` envuelve la solicitud y la respuesta (algo que explorará más en la siguiente sección) y puede filtrar cualquier tipo de solicitud. Si detecta que el Servlet inició un `AsyncContext`, imprime esa información e indica si el `AsyncContext` está usando la solicitud y respuesta original o la solicitud y respuesta no envuelta.
+
+![950-09-02](images/950-09-02.png)
+
+`pom.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wrox</groupId>
+    <artifactId>filter-async</artifactId>
+    <version>1.0.0.SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+            <version>1.2.1</version>
+            <scope>compile</scope>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.servlet.jsp.jstl</artifactId>
+            <version>1.2.2</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp.jstl</groupId>
+                    <artifactId>jstl-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>source/production/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>source/production/resources</directory>
+            </resource>
+        </resources>
+
+        <testSourceDirectory>source/test/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>source/test/resources</directory>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <warSourceDirectory>web</warSourceDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+```
+
+`web.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>Filter Async Application</display-name>
+
+    <filter>
+        <filter-name>normalFilter</filter-name>
+        <filter-class>com.wrox.AnyRequestFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>normalFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>forwardFilter</filter-name>
+        <filter-class>com.wrox.AnyRequestFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>forwardFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>asyncFilter</filter-name>
+        <filter-class>com.wrox.AnyRequestFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>asyncFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>ASYNC</dispatcher>
+    </filter-mapping>
+
+</web-app>
+```
+
+`AnyRequestFilter.java`
+
+```java
+package com.wrox;
+
+import javax.servlet.AsyncContext;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+import java.io.IOException;
+
+public class AnyRequestFilter implements Filter
+{
+    private String name;
+
+    @Override
+    public void init(FilterConfig config)
+    {
+        this.name = config.getFilterName();
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException
+    {
+        System.out.println("Entering " + this.name + ".doFilter().");
+        chain.doFilter(
+                new HttpServletRequestWrapper((HttpServletRequest)request),
+                new HttpServletResponseWrapper((HttpServletResponse)response)
+        );
+        if(request.isAsyncSupported() && request.isAsyncStarted())
+        {
+            AsyncContext context = request.getAsyncContext();
+            System.out.println("Leaving " + this.name + ".doFilter(), async " +
+                    "context holds wrapped request/response = " +
+                    !context.hasOriginalRequestAndResponse());
+        }
+        else
+            System.out.println("Leaving " + this.name + ".doFilter().");
+    }
+
+    @Override
+    public void destroy() { }
+}
+```
+
+`NonAsyncServlet.java`
+
+```java
+package com.wrox;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(name = "nonAsyncServlet", urlPatterns = "/regular")
+public class NonAsyncServlet extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        System.out.println("Entering NonAsyncServlet.doGet().");
+        request.getRequestDispatcher("/WEB-INF/jsp/view/nonAsync.jsp")
+                .forward(request, response);
+        System.out.println("Leaving NonAsyncServlet.doGet().");
+    }
+}
+
+```
+
+`AsyncServlet.java`
+
+```java
+package com.wrox;
+
+import javax.servlet.AsyncContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(name = "asyncServlet", urlPatterns = "/async", asyncSupported = true)
+public class AsyncServlet extends HttpServlet
+{
+    private static volatile int ID = 1;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        final int id;
+        synchronized(AsyncServlet.class)
+        {
+            id = ID++;
+        }
+        long timeout = request.getParameter("timeout") == null ?
+                10_000L : Long.parseLong(request.getParameter("timeout"));
+
+        System.out.println("Entering AsyncServlet.doGet(). Request ID = " + id +
+                ", isAsyncStarted = " + request.isAsyncStarted());
+
+        final AsyncContext context = request.getParameter("unwrap") != null ?
+                request.startAsync() : request.startAsync(request, response);
+        context.setTimeout(timeout);
+
+        System.out.println("Starting asynchronous thread. Request ID = " + id +
+                ".");
+
+        AsyncThread thread = new AsyncThread(id, context);
+        context.start(thread::doWork);
+
+        System.out.println("Leaving AsyncServlet.doGet(). Request ID = " + id +
+                ", isAsyncStarted = " + request.isAsyncStarted());
+    }
+
+    private static class AsyncThread
+    {
+        private final int id;
+        private final AsyncContext context;
+
+        public AsyncThread(int id, AsyncContext context)
+        {
+            this.id = id;
+            this.context = context;
+        }
+
+        public void doWork()
+        {
+            System.out.println("Asynchronous thread started. Request ID = " +
+                    this.id + ".");
+
+            try {
+                Thread.sleep(5_000L);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            HttpServletRequest request =
+                    (HttpServletRequest)this.context.getRequest();
+            System.out.println("Done sleeping. Request ID = " + this.id +
+                    ", URL = " + request.getRequestURL() + ".");
+
+            this.context.dispatch("/WEB-INF/jsp/view/async.jsp");
+
+            System.out.println("Asynchronous thread completed. Request ID = " +
+                    this.id + ".");
+        }
+    }
+}
+```
+
+`async.jsp`
+
+```html
+<% System.out.println("In async.jsp."); %>
+Async JSP
+```
+
+`nonAsync.jsp`
+
+```html
+<% System.out.println("In nonAsync.jsp."); %>
+Non-Async JSP
+```
+
+
+Este filtro se crea una instancia y se mappean tres veces en `web.xml`. Las tres asignaciones pueden interceptar cualquier URL, pero la instancia `normalFilter` solo intercepta solicitudes normales; `forwardFilter` solo intercepta solicitudes reenviadas; y `asyncFilter` solo intercepta solicitudes enviadas desde `AsyncContext`. Observe la adición de `<async-supported>true</async-supported>` a cada elemento `<filter>`. Esto le dice al contenedor que el filtro está preparado para solicitudes asincrónicas. Si un filtro sin `<async-supported>` habilitado filtra una solicitud, intentar iniciar un `AsyncContext` en esa solicitud resultará en una `IllegalStateException`.
+
+`NonAsyncServlet` es muy sencillo: responde a las solicitudes de `/regular` y las reenvía a la vista `nonAsync.jsp`.
+
+`AsyncServlet` es mucho más complejo. Para que el registro sea muy claro, genera una ID única para la solicitud actual. Si el parámetro `unwrap` no está presente, inicia `AsyncContext` con `startAsync` (`ServletRequest`, `ServletResponse`). Esto asegura que `AsyncContext` obtenga la solicitud y la respuesta tal como se pasa a `doGet`. Si un filtro envolvió la solicitud o respuesta, el envoltorio es lo que usa `AsyncContext`. Sin embargo, si el `unwrap` está presente, `doGet` inicia `AsyncContext` utilizando el método `startAsync` sin argumentos. En este caso, `AsyncContext` obtiene la solicitud y la respuesta originales, no los request y response wrapped. Observe la llamada al método `start`(`Runnable`) de `AsyncContext` (usando referencias de método Java 8). El uso de esto le dice al contenedor que ejecute `Runnable` con su grupo de subprocesos interno. También puede simplemente iniciar su propio hilo, pero usar el grupo de hilos del contenedor es más seguro y evita el agotamiento de los recursos.
+
+Ahora experimente con estos Servlets y filtros:
+
+1. Compile la aplicación e inicie Tomcat desde su IDE; luego vaya a `http://localhost:8080/filter-async/regular` en su navegador. Debería ver lo siguiente en la ventana de salida del depurador. Observe que `normalFilter` interceptó el request del Servlet y `forwardFilter` interceptó la solicitud reenviada al JSP.
+
+![09-XX-07](images/09-XX-07.png)
+
+![09-XX-08](images/09-XX-08.png)
+
+```sh
+Entering normalFilter.doFilter().
+Entering NonAsyncServlet.doGet().
+Entering forwardFilter.doFilter().
+In nonAsync.jsp.
+Leaving forwardFilter.doFilter().
+Leaving NonAsyncServlet.doGet().
+Leaving normalFilter.doFilter().
+```
+
+2. Vaya a `http://localhost:8080/filter-async/async`. La siguiente salida del debugger aparece inmediatamente. Observe que `normalFilter` intercepta el request pero completa antes de que el response se envíe realmente.
+
+![09-XX-09](images/09-XX-09.png)
+
+![09-XX-10](images/09-XX-10.png)
+
+```sh
+Entering normalFilter.doFilter().
+Entering AsyncServlet.doGet(). Request ID = 3, isAsyncStarted = false
+Starting asynchronous thread. Request ID = 3.
+Leaving AsyncServlet.doGet(). Request ID = 3, isAsyncStarted = true
+Leaving normalFilter.doFilter(), async context holds wrapped request/response = true
+Asynchronous thread started. Request ID = 3.
+```
+
+Después de una espera de 5 segundos, la clase interna `AsyncThread` envía la respuesta al usuario y aparece el siguiente resultado del depurador. Cuando la solicitud se envía a JSP mediante el método de envío de `AsyncContext`, `asyncFilter` intercepta la solicitud interna a esa JSP.
+
+```sh
+Done sleeping. Request ID = 3, URL = http://localhost:8080/filter-async/async.
+Asynchronous thread completed. Request ID = 3.
+Entering asyncFilter.doFilter().
+In async.jsp.
+Leaving asyncFilter.doFilter().
+```
+
+3. Vaya a `http://localhost:8080/filter-async/async?unwrap` y espere a que se complete la respuesta. Aparece la siguiente salida del depurador (parte de ella después de 5 segundos). Es idéntico excepto que, en este caso, `AsyncContext` contiene la solicitud y la respuesta originales en lugar de la solicitud y la respuesta envueltas(wrapped) (la salida en negrita cambió[**response=false**]).
+
+![09-XX-11](images/09-XX-11.png)
+
+![09-XX-12](images/09-XX-12.png)
+
+```sh
+Entering normalFilter.doFilter().
+Entering AsyncServlet.doGet(). Request ID = 6, isAsyncStarted = false
+Starting asynchronous thread. Request ID = 6.
+Leaving AsyncServlet.doGet(). Request ID = 6, isAsyncStarted = true
+Leaving normalFilter.doFilter(), async context holds wrapped request/response = false
+Asynchronous thread started. Request ID = 6.
+Done sleeping. Request ID = 6, URL = http://localhost:8080/filter-async/async.
+Asynchronous thread completed. Request ID = 6.
+Entering asyncFilter.doFilter().
+In async.jsp.
+Leaving asyncFilter.doFilter().
+```
+
+4. Vaya a `http://localhost:8080/filter-async/async?timeout=3000`. Aparece el siguiente resultado del depurador y, 5 segundos después, se completa la suspensión y la recuperación de la solicitud del `AsyncContext` da como resultado una `IllegalStateException`. Esto se debe a que el tiempo de espera de `AsyncContext` expiró y la respuesta se cerró antes de que la clase interna `AsyncThread` pudiera completar su trabajo.
+
+![09-XX-13](images/09-XX-13.png)
+
+![09-XX-14](images/09-XX-14.png)
+
+```sh
+Entering normalFilter.doFilter().
+Entering AsyncServlet.doGet(). Request ID = 8, isAsyncStarted = false
+Starting asynchronous thread. Request ID = 8.
+Leaving AsyncServlet.doGet(). Request ID = 8, isAsyncStarted = true
+Leaving normalFilter.doFilter(), async context holds wrapped request/response = true
+Asynchronous thread started. Request ID = 8.
+oct. 22, 2020 6:06:53 P. M. org.apache.catalina.core.AsyncContextImpl$RunnableWrapper run
+SEVERE: Error during processing of asynchronous Runnable via AsyncContext.start()
+java.lang.IllegalStateException: El requerimiento asociado con AsyncContext ya ha completado su procesamiento.
+```
+
+A estas alturas debería estar claro lo complejo y poderoso que es el manejo de solicitudes asincrónicas. El punto importante es que si maneja la respuesta usando `AsyncContext` directamente, el código se ejecuta fuera del alcance de los filtros. Sin embargo, si usa el método `dispatch` de `AsyncContext` para reenviar internamente la solicitud a una URL, un filtro asignado para las solicitudes `ASYNC` puede interceptar el reenvío interno y aplicar cualquier lógica adicional necesaria. Debe decidir cuándo es apropiado cada enfoque, pero en la mayoría de los casos no necesitará el manejo asincrónico de solicitudes. Ninguna otra parte de este libro utiliza el manejo de solicitudes asincrónicas.
+
+## INVESTIGANDO USOS PRÁCTICOS PARA FILTROS
+
+Al comienzo del capítulo se discutieron muchos usos prácticos de los filtros. El proyecto **Compression-Filter** demuestra dos de estos usos: un filtro de registro(logging filter) y un filtro de compresión de respuesta (response compression filter). El proyecto contiene un Servlet simple asignado a `/servlet` que responde con "Esta respuesta de Servlet puede estar comprimida". También contiene un simple archivo `/index.jsp` que responde con "Este contenido puede estar comprimido". Este proyecto utiliza el siguiente `ServletContextListener` para configurar mediante programación los filtros para la aplicación.
 
 ## Simplificar la autenticación con un filtro
 
