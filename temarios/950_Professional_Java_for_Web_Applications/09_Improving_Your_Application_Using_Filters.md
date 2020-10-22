@@ -205,7 +205,173 @@ Si llega una solicitud normal a la URL `/foo/bar`, coincidirá con los tres filt
 
 #### EXPLORANDO EL ORDEN DEL FILTRO CON UN EJEMPLO SIMPLE
 
-Para comprender mejor cómo funciona el orden de filtro, eche un vistazo al proyecto Filter-Order. Contiene tres servlets y tres filtros. El siguiente fragmento de código, `ServletOne`, es idéntico a sus homólogos `ServletTwo` y `ServletThree`, excepto que todas las apariciones de "One" se han reemplazado por "Two" y "Three", respectivamente:
+Para comprender mejor cómo funciona el orden de filtro, eche un vistazo al proyecto **950-09-01-FILTER-ORDER**. Contiene tres servlets y tres filtros. El siguiente fragmento de código, `ServletOne`, es idéntico a sus homólogos `ServletTwo` y `ServletThree`, excepto que todas las apariciones de "One" se han reemplazado por "Two" y "Three", respectivamente:
+
+![950-09-01](images/950-09-01.png)
+
+`pom.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wrox</groupId>
+    <artifactId>filter-order</artifactId>
+    <version>1.0.0.SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+            <version>1.2.1</version>
+            <scope>compile</scope>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.servlet.jsp.jstl</artifactId>
+            <version>1.2.2</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp.jstl</groupId>
+                    <artifactId>jstl-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>source/production/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>source/production/resources</directory>
+            </resource>
+        </resources>
+
+        <testSourceDirectory>source/test/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>source/test/resources</directory>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <warSourceDirectory>web</warSourceDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+```
+
+`web.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>Filter Order Application</display-name>
+
+    <filter>
+        <filter-name>filterA</filter-name>
+        <filter-class>com.wrox.FilterA</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>filterA</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>filterB</filter-name>
+        <filter-class>com.wrox.FilterB</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>filterB</filter-name>
+        <url-pattern>/servletTwo</url-pattern>
+        <url-pattern>/servletThree</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>filterC</filter-name>
+        <filter-class>com.wrox.FilterC</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>filterC</filter-name>
+        <url-pattern>/servletTwo</url-pattern>
+    </filter-mapping>
+
+</web-app>
+```
+
+`ServletOne`
 
 ```java
 package com.wrox;
@@ -231,6 +397,9 @@ public class ServletOne extends HttpServlet
 }
 ```
 
+
+`ServletTwo`
+
 ```java
 package com.wrox;
 
@@ -255,6 +424,8 @@ public class ServletTwo extends HttpServlet
 }
 ```
 
+`ServletThree`
+
 ```java
 package com.wrox;
 
@@ -277,19 +448,155 @@ public class ServletThree extends HttpServlet
         System.out.println("Leaving ServletThree.doGet().");
     }
 }
-
 ```
 
+`FilterA.java`
 
 ```java
+package com.wrox;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
+
+public class FilterA implements Filter
+{
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException
+    {
+        System.out.println("Entering FilterA.doFilter().");
+        chain.doFilter(request, response);
+        System.out.println("Leaving FilterA.doFilter().");
+    }
+
+    @Override
+    public void init(FilterConfig config) throws ServletException { }
+
+    @Override
+    public void destroy() { }
+}
 ```
+
+`FilterB.java`
 
 ```java
+package com.wrox;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
+
+public class FilterB implements Filter
+{
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException
+    {
+        System.out.println("Entering FilterB.doFilter().");
+        chain.doFilter(request, response);
+        System.out.println("Leaving FilterB.doFilter().");
+    }
+
+    @Override
+    public void init(FilterConfig config) throws ServletException { }
+
+    @Override
+    public void destroy() { }
+}
 ```
+
+`FilterC.java`
 
 ```java
+package com.wrox;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
+
+public class FilterC implements Filter
+{
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException
+    {
+        System.out.println("Entering FilterC.doFilter().");
+        chain.doFilter(request, response);
+        System.out.println("Leaving FilterC.doFilter().");
+    }
+
+    @Override
+    public void init(FilterConfig config) throws ServletException { }
+
+    @Override
+    public void destroy() { }
+}
 ```
 
+Para probar esto:
+
+1. Compile la aplicación e inicie Tomcat desde su IDE.
+2. Vaya a `http://localhost:8080/filters/servletOne` en su navegador. Puede ver varios mensajes impresos en la salida estándar de Tomcat en su IDE:
+
+![09-XX-01](images/09-XX-01.png)
+
+![09-XX-02](images/09-XX-02.png)
+
+```sh
+Entering FilterA.doFilter().
+Entering ServletOne.doGet().
+Leaving ServletOne.doGet().
+Leaving FilterA.doFilter().
+```
+
+3. Cambie la dirección en su navegador a `http://localhost:8080/filters/servletTwo` y observe la nueva salida:
+
+![09-XX-03](images/09-XX-03.png)
+
+![09-XX-04](images/09-XX-04.png)
+
+```sh
+Entering FilterA.doFilter().
+Entering FilterB.doFilter().
+Entering FilterC.doFilter().
+Entering ServletTwo.doGet().
+Leaving ServletTwo.doGet().
+Leaving FilterC.doFilter().
+Leaving FilterB.doFilter().
+Leaving FilterA.doFilter().
+```
+
+Observe cómo la Filter chain progresa de A a C y luego al servlet. Luego, después de que el Servlet completa el procesamiento de la solicitud, la cadena sale en orden inverso de C a A.
+
+4. Cambie la dirección en su navegador a `http://localhost:8080/filters/servletThree`. Su salida debería verse como el siguiente código.
+
+![09-XX-05](images/09-XX-05.png)
+
+![09-XX-05](images/09-XX-06.png)
+
+```sh
+Entering FilterA.doFilter().
+Entering FilterB.doFilter().
+Entering ServletThree.doGet().
+Leaving ServletThree.doGet().
+Leaving FilterB.doFilter().
+Leaving FilterA.doFilter().
+```
+
+5. Realice los cambios que se le ocurran en las asignaciones para explorar cómo afecta la ejecución de la filter chain. Intente cambiar una o más de las asignaciones de URL a asignaciones de nombres de servlet y observe cómo cambia la filter chain nuevamente.
 
 ## Investigación de usos prácticos de filtros
 
