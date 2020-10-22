@@ -1571,7 +1571,13 @@ Para probar los filtros de registro y compresión (logging y compression):
 
 Tenga en cuenta que el `Accept-Encoding` request header contiene la codificación "gzip" y el `Content-Encoding` response header tiene el valor "gzip". Esto significa que su navegador anuncia que puede aceptar respuestas gzip-encoded, y el filtro de compresión está obligando a la solicitud y comprimiendo los datos de respuesta antes de enviarlos al navegador.
 
-![09-04](images/09-04.png)
+![09-XX-15](images/09-XX-15.png)
+
+![09-XX-16](images/09-XX-16.png)
+
+![09-XX-17](images/09-XX-17.png)
+
+![09-XX-18](images/09-XX-18.png)
 
 ## SIMPLIFICANDO LA AUTENTICACIÓN CON UN FILTRO
 
