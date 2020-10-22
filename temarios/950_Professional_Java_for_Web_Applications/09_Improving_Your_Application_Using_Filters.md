@@ -1583,32 +1583,77 @@ Tenga en cuenta que el `Accept-Encoding` request header contiene la codificació
 
 Un uso fundamental de los filtros en las aplicaciones web es proteger las aplicaciones contra el acceso no deseado. La aplicación de soporte al cliente que está creando para Multinational Widget Corporation utiliza un mecanismo de autenticación muy primitivo para proteger sus páginas. Probablemente ya haya notado que muchos lugares de la aplicación contienen el mismo código duplicado para verificar la autenticación:
 
+```java
+   if(request.getSession().getAttribute("username") == null)
+   {
+   	response.sendRedirect("login");
+        return;
+   }
+```
+
 En algún momento, es posible que haya pensado que una mejor solución es crear un método estático público en alguna clase para realizar esta verificación y llamarlo en todas partes. Por supuesto, esto reduce el código duplicado, pero aún da como resultado la realización de esa llamada al método en varios lugares. A medida que aumentara la cantidad de servlets en su aplicación, también aumentaría la cantidad de llamadas a ese método estático.
 
-Después de lo que ha aprendido en este capítulo, debe quedar claro que un filtro es un lugar mejor para colocar este código. El proyecto Customer-Support-v7 en el sitio de descarga de código wrox.com demuestra esto agregando la clase de escucha Configurator y la clase AuthenticationFilter. El fragmento de código anterior se ha eliminado de los métodos doGet y doPost en TicketServlet y del método doGet en SessionListServlet. El configurador es simple: declara el AuthenticationFilter y lo asigna a / tickets y / sessions:
+Después de lo que ha aprendido en este capítulo, debe quedar claro que un filtro es un lugar mejor para colocar este código. El proyecto **950-09-04-CUSTOMER-SUPPORT** demuestra esto agregando la clase listener `Configurator` y la clase `AuthenticationFilter`. 
 
-A medida que agrega más Servlets u otros recursos protegidos (como JSP) a su aplicación, solo necesita agregar sus patrones de URL al registro del filtro para asegurarse de que los usuarios inicien sesión antes de acceder a esos recursos. Por supuesto, este filtro no protege el Servlet de inicio de sesión porque no desea proteger la pantalla de inicio de sesión. Tampoco es necesario que proteja ninguno de los recursos de imagen, JavaScript o CSS porque no contienen datos confidenciales. AuthenticationFilter realiza la verificación de autenticación en cada solicitud de cualquier método HTTP y redirige a los usuarios a la pantalla de inicio de sesión si no han iniciado sesión:
+![950-09-04](images/950-09-04.png)
 
-Una cosa hermosa sobre este cambio es que si modifica el algoritmo de autenticación, solo necesita cambiar el filtro para continuar protegiendo los recursos en su aplicación. Anteriormente, habría tenido que realizar cambios en cada Servlet. Pruebe estos cambios compilando, iniciando Tomcat en su IDE y navegando a http: // localhost: 8080 / support en su navegador. Aunque la verificación de autenticación se eliminó de todos los Servlets, aún se le pedirá que inicie sesión antes de ver o crear tickets, o ver la lista de sesiones.
+El fragmento de código anterior se ha eliminado de los métodos `doGet` y `doPost` en `TicketServlet` y del método `doGet` en `SessionListServlet`. El configurador es simple: declara el `AuthenticationFilter` y lo asigna a `/tickets` y `/sessions`:
+
+
+
+```java
+@WebListener
+public class Configurator implements ServletContextListener
+{
+    @Override
+    public void contextInitialized(ServletContextEvent event)
+    {
+        ServletContext context = event.getServletContext();
+ 
+        FilterRegistration.Dynamic registration = context.addFilter(
+                "authenticationFilter", new AuthenticationFilter()
+        );
+        registration.setAsyncSupported(true);
+        registration.addMappingForUrlPatterns(
+                null, false, "/sessions", "/tickets"
+        );
+    }
+ 
+    @Override
+    public void contextDestroyed(ServletContextEvent event) { }
+}
+```
+
+A medida que agrega más Servlets u otros recursos protegidos (como JSP) a su aplicación, solo necesita agregar sus URL patterns al registro del filtro para asegurarse de que los usuarios inicien sesión antes de acceder a esos recursos. Por supuesto, este filtro no protege el Servlet de inicio de sesión porque no desea proteger la pantalla de inicio de sesión. Tampoco es necesario que proteja ninguno de los recursos de imagen, JavaScript o CSS porque no contienen datos confidenciales. `AuthenticationFilter` realiza la verificación de autenticación en cada solicitud de cualquier método HTTP y redirige a los usuarios a la pantalla de inicio de sesión si no han iniciado sesión:
+
+```java
+public class AuthenticationFilter implements Filter
+{
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException
+    {
+        HttpSession session = ((HttpServletRequest)request).getSession(false);
+        if(session != null && session.getAttribute("username") == null)
+            ((HttpServletResponse)response).sendRedirect("login");
+        else
+            chain.doFilter(request, response);
+    }
+ 
+    @Override
+    public void init(FilterConfig config) throws ServletException { }
+ 
+    @Override
+    public void destroy() { }
+}
+```
+
+Una cosa hermosa sobre este cambio es que si modifica el algoritmo de autenticación, solo necesita cambiar el filtro para continuar protegiendo los recursos en su aplicación. Anteriormente, habría tenido que realizar cambios en cada Servlet. Pruebe estos cambios compilando, iniciando Tomcat en su IDE y navegando a `http://localhost:8080/customer-support/login` en su navegador. Aunque la verificación de autenticación se eliminó de todos los Servlets, aún se le pedirá que inicie sesión antes de ver o crear tickets, o ver la lista de sesiones.
+
+![09-XX-19](images/09-XX-19.png)
 
 ## RESUMEN
 
 En este capítulo, exploró el propósito de los filtros y las muchas razones por las que podría usarlos. Aprendió sobre la interfaz de filtro y cómo crear, declarar y mapear filtros en sus aplicaciones. Experimentó con la importantísima cadena de filtros y aprendió cómo el orden en el que se ejecutan los filtros puede ser poco importante en algunos escenarios y bastante crítico en otros. Se le presentó el concepto de manejo de solicitudes asincrónicas y utilizó filtros para explorar ese tema más a fondo y comprender lo complicado que puede ser el manejo de solicitudes asincrónicas. Finalmente, después de explorar las tres formas diferentes de declarar y mapear filtros (en el descriptor de implementación, usando anotaciones y programáticamente) experimentó con un filtro de registro, un filtro de compresión de respuesta y un filtro de autenticación.
 
 En el siguiente capítulo, explorará la tecnología de WebSockets, cómo mejoran drásticamente las aplicaciones web interactivas y cómo usarlas en Java y JavaScript. Un punto interesante es que el código en Tomcat que hace posible WebSockets en realidad usa un filtro para interceptar todas las solicitudes vinculadas a WebSocket en su aplicación y enviarlas a sus puntos finales de WebSocket (sobre los cuales aprenderá más en el próximo capítulo). Entonces, sin siquiera hacer nada, tu aplicación ya tiene filtros inspeccionando y, si es necesario, modificando solicitudes.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
