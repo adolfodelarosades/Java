@@ -952,7 +952,6 @@ Async JSP
 Non-Async JSP
 ```
 
-
 Este filtro se crea una instancia y se mappean tres veces en `web.xml`. Las tres asignaciones pueden interceptar cualquier URL, pero la instancia `normalFilter` solo intercepta solicitudes normales; `forwardFilter` solo intercepta solicitudes reenviadas; y `asyncFilter` solo intercepta solicitudes enviadas desde `AsyncContext`. Observe la adición de `<async-supported>true</async-supported>` a cada elemento `<filter>`. Esto le dice al contenedor que el filtro está preparado para solicitudes asincrónicas. Si un filtro sin `<async-supported>` habilitado filtra una solicitud, intentar iniciar un `AsyncContext` en esa solicitud resultará en una `IllegalStateException`.
 
 `NonAsyncServlet` es muy sencillo: responde a las solicitudes de `/regular` y las reenvía a la vista `nonAsync.jsp`.
@@ -1044,33 +1043,535 @@ A estas alturas debería estar claro lo complejo y poderoso que es el manejo de 
 
 ## INVESTIGANDO USOS PRÁCTICOS PARA FILTROS
 
-Al comienzo del capítulo se discutieron muchos usos prácticos de los filtros. El proyecto **Compression-Filter** demuestra dos de estos usos: un filtro de registro(logging filter) y un filtro de compresión de respuesta (response compression filter). El proyecto contiene un Servlet simple asignado a `/servlet` que responde con "Esta respuesta de Servlet puede estar comprimida". También contiene un simple archivo `/index.jsp` que responde con "Este contenido puede estar comprimido". Este proyecto utiliza el siguiente `ServletContextListener` para configurar mediante programación los filtros para la aplicación.
+Al comienzo del capítulo se discutieron muchos usos prácticos de los filtros. El proyecto **950-09-03-COMPRESSION-FILTER** demuestra dos de estos usos: un filtro de registro(logging filter) y un filtro de compresión de respuesta (response compression filter). El proyecto contiene un Servlet simple asignado a `/servlet` que responde con "This Servlet response may be compressed.". También contiene un simple archivo `/index.jsp` que responde con "This content may be compressed.". Este proyecto utiliza el siguiente `ServletContextListener` para configurar mediante programación los filtros para la aplicación.
 
-### AÑADIR UN FILTRO DE REGISTRO SIMPLE
+![950-09-03](images/950-09-03.png)
 
-La clase RequestLogFilter en el Listado 9-2 es el primer filtro en la cadena de filtros para todas las solicitudes a la aplicación. Mide el tiempo que tarda una solicitud en procesar y registra información sobre cada solicitud que llega a la aplicación: la dirección IP, la marca de tiempo, el método de solicitud, el protocolo, el estado y la duración de la respuesta y el tiempo para procesar la solicitud, similar al HTTP de Apache formato de registro. El registro ocurre en el bloque finalmente para que cualquier excepción lanzada más abajo en la cadena de filtros no impida que se escriba la declaración de registro.
+`pom.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wrox</groupId>
+    <artifactId>compression-filter</artifactId>
+    <version>1.0.0.SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+            <version>1.2.1</version>
+            <scope>compile</scope>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.servlet.jsp.jstl</artifactId>
+            <version>1.2.2</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp.jstl</groupId>
+                    <artifactId>jstl-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>source/production/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>source/production/resources</directory>
+            </resource>
+        </resources>
+
+        <testSourceDirectory>source/test/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>source/test/resources</directory>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <warSourceDirectory>web</warSourceDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+```
+
+`web.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>Compression Filter Application</display-name>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <url-pattern>*.jspf</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <scripting-invalid>true</scripting-invalid>
+            <include-prelude>/WEB-INF/jsp/base.jspf</include-prelude>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+            <default-content-type>text/html</default-content-type>
+        </jsp-property-group>
+    </jsp-config>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <distributable />
+
+</web-app>
+```
+
+`CompressedServlet.java`
+
+```java
+package com.wrox;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(name = "compressedServlet", urlPatterns = "/servlet")
+public class CompressedServlet extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getOutputStream()
+                .println("This Servlet response may be compressed.");
+    }
+}
+```
+
+`CompressionFilter.java`
+
+```java
+package com.wrox;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.WriteListener;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.zip.GZIPOutputStream;
+
+public class CompressionFilter implements Filter
+{
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException
+    {
+        if(((HttpServletRequest)request).getHeader("Accept-Encoding")
+                .contains("gzip"))
+        {
+            System.out.println("Encoding requested.");
+            ((HttpServletResponse)response).setHeader("Content-Encoding", "gzip");
+            ResponseWrapper wrapper =
+                    new ResponseWrapper((HttpServletResponse)response);
+            try
+            {
+                chain.doFilter(request, wrapper);
+            }
+            finally
+            {
+                try {
+                    wrapper.finish();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else
+        {
+            System.out.println("Encoding not requested.");
+            chain.doFilter(request, response);
+        }
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException { }
+
+    @Override
+    public void destroy() { }
+
+    private static class ResponseWrapper extends HttpServletResponseWrapper
+    {
+        private GZIPServletOutputStream outputStream;
+        private PrintWriter writer;
+
+        public ResponseWrapper(HttpServletResponse request)
+        {
+            super(request);
+        }
+
+        @Override
+        public synchronized ServletOutputStream getOutputStream()
+                throws IOException
+        {
+            if(this.writer != null)
+                throw new IllegalStateException("getWriter() already called.");
+            if(this.outputStream == null)
+                this.outputStream =
+                        new GZIPServletOutputStream(super.getOutputStream());
+            return this.outputStream;
+        }
+
+        @Override
+        public synchronized PrintWriter getWriter() throws IOException
+        {
+            if(this.writer == null && this.outputStream != null)
+                throw new IllegalStateException(
+                        "getOutputStream() already called.");
+            if(this.writer == null)
+            {
+                this.outputStream =
+                        new GZIPServletOutputStream(super.getOutputStream());
+                this.writer = new PrintWriter(new OutputStreamWriter(
+                        this.outputStream, this.getCharacterEncoding()
+                ));
+            }
+            return this.writer;
+        }
+
+        @Override
+        public void flushBuffer() throws IOException
+        {
+            if(this.writer != null)
+                this.writer.flush();
+            else if(this.outputStream != null)
+                this.outputStream.flush();
+            super.flushBuffer();
+        }
+
+        @Override
+        public void setContentLength(int length) { }
+
+        @Override
+        public void setContentLengthLong(long length) { }
+
+        @Override
+        public void setHeader(String name, String value)
+        {
+            if(!"content-length".equalsIgnoreCase(name))
+                super.setHeader(name, value);
+        }
+
+        @Override
+        public void addHeader(String name, String value)
+        {
+            if(!"content-length".equalsIgnoreCase(name))
+                super.setHeader(name, value);
+        }
+
+        @Override
+        public void setIntHeader(String name, int value)
+        {
+            if(!"content-length".equalsIgnoreCase(name))
+                super.setIntHeader(name, value);
+        }
+
+        @Override
+        public void addIntHeader(String name, int value)
+        {
+            if(!"content-length".equalsIgnoreCase(name))
+                super.setIntHeader(name, value);
+        }
+
+        public void finish() throws IOException
+        {
+            if(this.writer != null)
+                this.writer.close();
+            else if(this.outputStream != null)
+                this.outputStream.finish();
+        }
+    }
+
+    private static class GZIPServletOutputStream extends ServletOutputStream
+    {
+        private final ServletOutputStream servletOutputStream;
+        private final GZIPOutputStream gzipStream;
+
+        public GZIPServletOutputStream(ServletOutputStream servletOutputStream)
+                throws IOException
+        {
+            this.servletOutputStream = servletOutputStream;
+            this.gzipStream = new GZIPOutputStream(servletOutputStream);
+        }
+
+        @Override
+        public boolean isReady()
+        {
+            return this.servletOutputStream.isReady();
+        }
+
+        @Override
+        public void setWriteListener(WriteListener writeListener)
+        {
+            this.servletOutputStream.setWriteListener(writeListener);
+        }
+
+        @Override
+        public void write(int b) throws IOException
+        {
+            this.gzipStream.write(b);
+        }
+
+        @Override
+        public void close() throws IOException
+        {
+            this.gzipStream.close();
+        }
+
+        @Override
+        public void flush() throws IOException
+        {
+            this.gzipStream.flush();
+        }
+
+        public void finish() throws IOException
+        {
+            this.gzipStream.finish();
+        }
+    }
+}
+
+```
+
+`Configurator.java`
+
+```java
+package com.wrox;
+
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+@WebListener
+public class Configurator implements ServletContextListener
+{
+    @Override
+    public void contextInitialized(ServletContextEvent event)
+    {
+        ServletContext context = event.getServletContext();
+
+        FilterRegistration.Dynamic registration =
+                context.addFilter("requestLogFilter", new RequestLogFilter());
+        registration.addMappingForUrlPatterns(null, false, "/*");
+
+        registration = context.addFilter("compressionFilter",
+                new CompressionFilter());
+        registration.setAsyncSupported(true);
+        registration.addMappingForUrlPatterns(null, false, "/*");
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent event) { }
+}
+
+```
+
+`RequestLogFilter.java`
+
+```java
+package com.wrox;
+
+import org.apache.commons.lang3.time.StopWatch;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.Instant;
+
+public class RequestLogFilter implements Filter
+{
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException
+    {
+        Instant time = Instant.now();
+        StopWatch timer = new StopWatch();
+        try
+        {
+            timer.start();
+            chain.doFilter(request, response);
+        }
+        finally
+        {
+            timer.stop();
+            HttpServletRequest in = (HttpServletRequest)request;
+            HttpServletResponse out = (HttpServletResponse)response;
+            String length = out.getHeader("Content-Length");
+            if(length == null || length.length() == 0)
+                length = "-";
+            System.out.println(in.getRemoteAddr() + " - - [" + time + "]" +
+                    " \"" + in.getMethod() + " " + in.getRequestURI() + " " +
+                    in.getProtocol() + "\" " + out.getStatus() + " " + length +
+                    " " + timer);
+        }
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException { }
+
+    @Override
+    public void destroy() { }
+}
+
+```
+
+`base.jspf`
+
+```html
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+```
+
+
+`index.jsp`
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Compressed Index Page</title>
+    </head>
+    <body>
+        This content may be compressed.
+    </body>
+</html>
+
+```
+
+
+### AÑADIR UN SIMPLE LOGGING FILTER
+
+La clase `RequestLogFilter` es el primer filtro en la filter chain (cadena de filtros) para todas las solicitudes a la aplicación. Mide el tiempo que tarda una solicitud en procesar y registra información sobre cada solicitud que llega a la aplicación: — the IP address, timestamp, request method, protocol, response status and length, and time to process the request — (la dirección IP, la marca de tiempo, el método de solicitud, el protocolo, el estado y la duración de la respuesta y el tiempo para procesar la solicitud), similar a Apache HTTP log format. El logging(registro) ocurre en el bloque `finally` para que cualquier excepción lanzada más abajo en la cadena de filtros no impida que se escriba la declaración de registro.
 
 <hr>
-**NOTA**: El RequestLogFilter no funcionará correctamente con el manejo de solicitudes asincrónicas. Si un servlet inicia un AsyncContext, doFilter regresará antes de que se envíe la respuesta, lo que significa que el filtro registrará información incompleta o incorrecta. Hacer que este filtro funcione correctamente para solicitudes asincrónicas es una tarea importante y compleja que se deja como un ejercicio para que el lector lo considere.
+**NOTA**: El `RequestLogFilter` no funcionará correctamente con el manejo de solicitudes asincrónicas. Si un servlet inicia un `AsyncContext`, `doFilter` regresará antes de que se envíe la respuesta, lo que significa que el filtro registrará información incompleta o incorrecta. Hacer que este filtro funcione correctamente para solicitudes asincrónicas es una tarea importante y compleja que se deja como un ejercicio para que el lector lo considere.
 <hr>
 
-#### COMPRIMIR EL CONTENIDO DE LA RESPUESTA CON UN FILTRO
+### COMPRIMIR EL RESPONSE CONTENT USANDO UN FILTRO
 
-CompressionFilter en el Listado 9-3 es significativamente más complejo que RequestLogFilter. Cuando piense en comprimir la respuesta, podría pensar que debería ejecutar la cadena de filtros y luego realizar la lógica de compresión en el camino de regreso. Sin embargo, recuerde que los datos de respuesta pueden comenzar a fluir de regreso al cliente antes de que el servlet haya completado el servicio de la solicitud. También puede comenzar a fluir de regreso al cliente después de que el servlet haya completado el servicio de la solicitud, en el caso del manejo de solicitudes asincrónicas. Debido a esto, si desea alterar el contenido de la respuesta, debe ajustar el objeto de respuesta pasado más abajo en la cadena. CompressionFilter hace precisamente esto.
+`CompressionFilter` en el Listado 9-3 es significativamente más complejo que `RequestLogFilter`. Cuando piense en comprimir la respuesta, podría pensar que debería ejecutar la cadena de filtros y luego realizar la lógica de compresión en el camino de regreso. Sin embargo, recuerde que los datos de respuesta pueden comenzar a fluir de regreso al cliente antes de que el servlet haya completado el servicio de la solicitud. También puede comenzar a fluir de regreso al cliente después de que el servlet haya completado el servicio de la solicitud, en el caso del manejo de solicitudes asincrónicas. Debido a esto, si desea alterar el contenido de la respuesta, debe ajustar el objeto de respuesta pasado más abajo en la cadena. `CompressionFilter` hace precisamente esto.
 
-Tómese un minuto para leer el código y examinar lo que está haciendo CompressionFilter. Primero, verifica si el cliente ha incluido un encabezado de solicitud Accept-Encoding que contiene la codificación "gzip". Esta es una verificación muy importante porque si no es así, esto significa que es posible que el cliente no comprenda las respuestas comprimidas con gzip. Si es así, establece el encabezado Content-Encoding en "gzip" y luego envuelve el objeto de respuesta con una instancia de la clase interna privada ResponseWrapper. Esta clase, a su vez, envuelve el PrintWriter o ServletOutputStream que envía datos de vuelta al cliente con la clase interna privada GZIPServletOutputStream. Este contenedor contiene un java.util.zip.GZIPOutputStream interno. Los datos de respuesta se escriben primero en GZIPOutputStream y, cuando se completa la solicitud, finaliza la compresión y escribe la respuesta comprimida en el ServletOutputStream envuelto. ResponseWrapper también evita que cualquier código de Servlet establezca el encabezado de longitud del contenido para la respuesta porque la longitud del contenido no se puede conocer hasta después de que se comprime la respuesta.
+Tómese un minuto para leer el código y examinar lo que está haciendo `CompressionFilter`. Primero, verifica si el cliente ha incluido un encabezado de solicitud `Accept-Encoding` que contiene la codificación "gzip". Esta es una verificación muy importante porque si no es así, esto significa que es posible que el cliente no comprenda las respuestas comprimidas con gzip. Si es así, establece el encabezado `Content-Encoding` en "gzip" y luego envuelve el objeto de respuesta con una instancia de la clase interna privada `ResponseWrapper`. Esta clase, a su vez, envuelve el `PrintWriter` o `ServletOutputStream` que envía datos de vuelta al cliente con la clase interna privada `GZIPServletOutputStream`. Este contenedor contiene un `java.util.zip.GZIPOutputStream` interno. Los datos de respuesta se escriben primero en `GZIPOutputStream` y, cuando se completa la solicitud, finaliza la compresión y escribe la respuesta comprimida en el wrapped `ServletOutputStream`. `ResponseWrapper` también evita que cualquier código de Servlet establezca el encabezado de longitud del contenido para la respuesta porque la longitud del contenido no se puede conocer hasta después de que se comprime la respuesta.
 
-El patrón de envoltura es un patrón muy común que probablemente verá aplicado en muchos filtros. Se pueden ajustar tanto los objetos de solicitud como de respuesta; sin embargo, envolver la respuesta suele ser más común. Envolver la respuesta le permite interceptar cualquier llamada de método en la respuesta envuelta, lo que facilita la capacidad de modificar los datos de la respuesta. También puede usar un filtro muy similar al del Listado 9-3 para cifrar los datos de respuesta en lugar de comprimirlos. El objeto de la solicitud se podría ajustar para descifrar su contenido.
+El patrón de envoltura (**wrapper pattern**) es un patrón muy común que probablemente verá aplicado en muchos filtros. Se pueden ajustar tanto los objetos de solicitud como de respuesta; sin embargo, envolver la respuesta suele ser más común. Envolver la respuesta le permite interceptar cualquier llamada de método en la respuesta envuelta, lo que facilita la capacidad de modificar los datos de la respuesta. También puede usar un filtro muy similar al de `CompressionFilter.java` para cifrar los datos de respuesta en lugar de comprimirlos. El objeto de la solicitud se podría ajustar para descifrar su contenido.
 
-Para probar los filtros de registro y compresión:
+Para probar los filtros de registro y compresión (logging y compression):
 
-Compile su aplicación e inicie Tomcat desde su IDE.
-Vaya a http: // localhost: 8080 / compress / y http: // localhost: 8080 / compress / servlet en su navegador.
-Con las herramientas de desarrollo creadas para su navegador, comience a monitorear los encabezados de las solicitudes y las respuestas de la aplicación. (Microsoft Internet Explorer y Google Chrome tienen herramientas de desarrollo integradas que pueden hacer esto, y el complemento Firebug para Mozilla Firefox tiene esta capacidad). Debería ver una pantalla como la de la Figura 9-4.
+1. Compile su aplicación e inicie Tomcat desde su IDE.
+2. Vaya a `http://localhost:8080/compression/` y `http://localhost:8080/compression/servlet` en su navegador.
+3. Con las herramientas de desarrollo creadas para su navegador, comience a monitorear los encabezados de las solicitudes y las respuestas de la aplicación. (Microsoft Internet Explorer y Google Chrome tienen herramientas de desarrollo integradas que pueden hacer esto, y el complemento Firebug para Mozilla Firefox tiene esta capacidad). Debería ver una pantalla como la de la Figura 9-4.
 
 ![09-04](images/09-04.png)
 
-Tenga en cuenta que el encabezado de solicitud Accept-Encoding contiene la codificación "gzip" y el encabezado de respuesta Content-Encoding tiene el valor "gzip". Esto significa que su navegador anuncia que puede aceptar respuestas codificadas en gzip, y el filtro de compresión está obligando a la solicitud y comprimiendo los datos de respuesta antes de enviarlos al navegador.
+Tenga en cuenta que el `Accept-Encoding` request header contiene la codificación "gzip" y el `Content-Encoding` response header tiene el valor "gzip". Esto significa que su navegador anuncia que puede aceptar respuestas gzip-encoded, y el filtro de compresión está obligando a la solicitud y comprimiendo los datos de respuesta antes de enviarlos al navegador.
+
+![09-04](images/09-04.png)
 
 ## SIMPLIFICANDO LA AUTENTICACIÓN CON UN FILTRO
 
