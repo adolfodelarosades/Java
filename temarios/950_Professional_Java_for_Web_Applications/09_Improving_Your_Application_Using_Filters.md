@@ -1046,9 +1046,50 @@ A estas alturas debería estar claro lo complejo y poderoso que es el manejo de 
 
 Al comienzo del capítulo se discutieron muchos usos prácticos de los filtros. El proyecto **Compression-Filter** demuestra dos de estos usos: un filtro de registro(logging filter) y un filtro de compresión de respuesta (response compression filter). El proyecto contiene un Servlet simple asignado a `/servlet` que responde con "Esta respuesta de Servlet puede estar comprimida". También contiene un simple archivo `/index.jsp` que responde con "Este contenido puede estar comprimido". Este proyecto utiliza el siguiente `ServletContextListener` para configurar mediante programación los filtros para la aplicación.
 
-## Simplificar la autenticación con un filtro
+### AÑADIR UN FILTRO DE REGISTRO SIMPLE
 
-## Resumen
+La clase RequestLogFilter en el Listado 9-2 es el primer filtro en la cadena de filtros para todas las solicitudes a la aplicación. Mide el tiempo que tarda una solicitud en procesar y registra información sobre cada solicitud que llega a la aplicación: la dirección IP, la marca de tiempo, el método de solicitud, el protocolo, el estado y la duración de la respuesta y el tiempo para procesar la solicitud, similar al HTTP de Apache formato de registro. El registro ocurre en el bloque finalmente para que cualquier excepción lanzada más abajo en la cadena de filtros no impida que se escriba la declaración de registro.
+
+<hr>
+**NOTA**: El RequestLogFilter no funcionará correctamente con el manejo de solicitudes asincrónicas. Si un servlet inicia un AsyncContext, doFilter regresará antes de que se envíe la respuesta, lo que significa que el filtro registrará información incompleta o incorrecta. Hacer que este filtro funcione correctamente para solicitudes asincrónicas es una tarea importante y compleja que se deja como un ejercicio para que el lector lo considere.
+<hr>
+
+#### COMPRIMIR EL CONTENIDO DE LA RESPUESTA CON UN FILTRO
+
+CompressionFilter en el Listado 9-3 es significativamente más complejo que RequestLogFilter. Cuando piense en comprimir la respuesta, podría pensar que debería ejecutar la cadena de filtros y luego realizar la lógica de compresión en el camino de regreso. Sin embargo, recuerde que los datos de respuesta pueden comenzar a fluir de regreso al cliente antes de que el servlet haya completado el servicio de la solicitud. También puede comenzar a fluir de regreso al cliente después de que el servlet haya completado el servicio de la solicitud, en el caso del manejo de solicitudes asincrónicas. Debido a esto, si desea alterar el contenido de la respuesta, debe ajustar el objeto de respuesta pasado más abajo en la cadena. CompressionFilter hace precisamente esto.
+
+Tómese un minuto para leer el código y examinar lo que está haciendo CompressionFilter. Primero, verifica si el cliente ha incluido un encabezado de solicitud Accept-Encoding que contiene la codificación "gzip". Esta es una verificación muy importante porque si no es así, esto significa que es posible que el cliente no comprenda las respuestas comprimidas con gzip. Si es así, establece el encabezado Content-Encoding en "gzip" y luego envuelve el objeto de respuesta con una instancia de la clase interna privada ResponseWrapper. Esta clase, a su vez, envuelve el PrintWriter o ServletOutputStream que envía datos de vuelta al cliente con la clase interna privada GZIPServletOutputStream. Este contenedor contiene un java.util.zip.GZIPOutputStream interno. Los datos de respuesta se escriben primero en GZIPOutputStream y, cuando se completa la solicitud, finaliza la compresión y escribe la respuesta comprimida en el ServletOutputStream envuelto. ResponseWrapper también evita que cualquier código de Servlet establezca el encabezado de longitud del contenido para la respuesta porque la longitud del contenido no se puede conocer hasta después de que se comprime la respuesta.
+
+El patrón de envoltura es un patrón muy común que probablemente verá aplicado en muchos filtros. Se pueden ajustar tanto los objetos de solicitud como de respuesta; sin embargo, envolver la respuesta suele ser más común. Envolver la respuesta le permite interceptar cualquier llamada de método en la respuesta envuelta, lo que facilita la capacidad de modificar los datos de la respuesta. También puede usar un filtro muy similar al del Listado 9-3 para cifrar los datos de respuesta en lugar de comprimirlos. El objeto de la solicitud se podría ajustar para descifrar su contenido.
+
+Para probar los filtros de registro y compresión:
+
+Compile su aplicación e inicie Tomcat desde su IDE.
+Vaya a http: // localhost: 8080 / compress / y http: // localhost: 8080 / compress / servlet en su navegador.
+Con las herramientas de desarrollo creadas para su navegador, comience a monitorear los encabezados de las solicitudes y las respuestas de la aplicación. (Microsoft Internet Explorer y Google Chrome tienen herramientas de desarrollo integradas que pueden hacer esto, y el complemento Firebug para Mozilla Firefox tiene esta capacidad). Debería ver una pantalla como la de la Figura 9-4.
+
+![09-04](images/09-04.png)
+
+Tenga en cuenta que el encabezado de solicitud Accept-Encoding contiene la codificación "gzip" y el encabezado de respuesta Content-Encoding tiene el valor "gzip". Esto significa que su navegador anuncia que puede aceptar respuestas codificadas en gzip, y el filtro de compresión está obligando a la solicitud y comprimiendo los datos de respuesta antes de enviarlos al navegador.
+
+## SIMPLIFICANDO LA AUTENTICACIÓN CON UN FILTRO
+
+Un uso fundamental de los filtros en las aplicaciones web es proteger las aplicaciones contra el acceso no deseado. La aplicación de soporte al cliente que está creando para Multinational Widget Corporation utiliza un mecanismo de autenticación muy primitivo para proteger sus páginas. Probablemente ya haya notado que muchos lugares de la aplicación contienen el mismo código duplicado para verificar la autenticación:
+
+En algún momento, es posible que haya pensado que una mejor solución es crear un método estático público en alguna clase para realizar esta verificación y llamarlo en todas partes. Por supuesto, esto reduce el código duplicado, pero aún da como resultado la realización de esa llamada al método en varios lugares. A medida que aumentara la cantidad de servlets en su aplicación, también aumentaría la cantidad de llamadas a ese método estático.
+
+Después de lo que ha aprendido en este capítulo, debe quedar claro que un filtro es un lugar mejor para colocar este código. El proyecto Customer-Support-v7 en el sitio de descarga de código wrox.com demuestra esto agregando la clase de escucha Configurator y la clase AuthenticationFilter. El fragmento de código anterior se ha eliminado de los métodos doGet y doPost en TicketServlet y del método doGet en SessionListServlet. El configurador es simple: declara el AuthenticationFilter y lo asigna a / tickets y / sessions:
+
+A medida que agrega más Servlets u otros recursos protegidos (como JSP) a su aplicación, solo necesita agregar sus patrones de URL al registro del filtro para asegurarse de que los usuarios inicien sesión antes de acceder a esos recursos. Por supuesto, este filtro no protege el Servlet de inicio de sesión porque no desea proteger la pantalla de inicio de sesión. Tampoco es necesario que proteja ninguno de los recursos de imagen, JavaScript o CSS porque no contienen datos confidenciales. AuthenticationFilter realiza la verificación de autenticación en cada solicitud de cualquier método HTTP y redirige a los usuarios a la pantalla de inicio de sesión si no han iniciado sesión:
+
+Una cosa hermosa sobre este cambio es que si modifica el algoritmo de autenticación, solo necesita cambiar el filtro para continuar protegiendo los recursos en su aplicación. Anteriormente, habría tenido que realizar cambios en cada Servlet. Pruebe estos cambios compilando, iniciando Tomcat en su IDE y navegando a http: // localhost: 8080 / support en su navegador. Aunque la verificación de autenticación se eliminó de todos los Servlets, aún se le pedirá que inicie sesión antes de ver o crear tickets, o ver la lista de sesiones.
+
+## RESUMEN
+
+En este capítulo, exploró el propósito de los filtros y las muchas razones por las que podría usarlos. Aprendió sobre la interfaz de filtro y cómo crear, declarar y mapear filtros en sus aplicaciones. Experimentó con la importantísima cadena de filtros y aprendió cómo el orden en el que se ejecutan los filtros puede ser poco importante en algunos escenarios y bastante crítico en otros. Se le presentó el concepto de manejo de solicitudes asincrónicas y utilizó filtros para explorar ese tema más a fondo y comprender lo complicado que puede ser el manejo de solicitudes asincrónicas. Finalmente, después de explorar las tres formas diferentes de declarar y mapear filtros (en el descriptor de implementación, usando anotaciones y programáticamente) experimentó con un filtro de registro, un filtro de compresión de respuesta y un filtro de autenticación.
+
+En el siguiente capítulo, explorará la tecnología de WebSockets, cómo mejoran drásticamente las aplicaciones web interactivas y cómo usarlas en Java y JavaScript. Un punto interesante es que el código en Tomcat que hace posible WebSockets en realidad usa un filtro para interceptar todas las solicitudes vinculadas a WebSocket en su aplicación y enviarlas a sus puntos finales de WebSocket (sobre los cuales aprenderá más en el próximo capítulo). Entonces, sin siquiera hacer nada, tu aplicación ya tiene filtros inspeccionando y, si es necesario, modificando solicitudes.
+
 
 
 
