@@ -14,8 +14,8 @@ El lenguaje Java y sus plataformas han tenido una larga historia. Desde su inven
 
 La historia de Java se resume en la Figura 1-1, una línea de tiempo de las plataformas Java. En el momento de la publicación de este libro, el lenguaje Java y la plataforma Java SE siempre han evolucionado juntos: las nuevas versiones de cada uno siempre se lanzan al mismo tiempo y están estrechamente acopladas entre sí. La plataforma se llamó JDK hasta la versión 1.1 en 1997, pero en la versión 1.2 estaba claro que el JDK y la plataforma no eran sinónimos. A partir de la versión 1.2 a finales de 1998, la pila de tecnología Java se dividió en los siguientes componentes clave:
 
-![01-01](images/01-01.png)
+![01-01](images/01_01.png)
 
-![01-02](images/01-02.png)
+![01-02](images/01_02.png)
 
-![01-03](images/01-03.png)
+![01-03](images/01_03.png)
