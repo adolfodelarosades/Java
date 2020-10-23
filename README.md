@@ -285,3 +285,7 @@ mini-de-adolfo:tmp adolfodelarosa$
 ### Links Interesantes
 
 [https://enmilocalfunciona.io/principios-solid/](Principios SOLID)
+
+### Articulos
+
+[Qué es y cómo funciona el type erasure en Java](https://picodotdev.github.io/blog-bitix/2018/03/que-es-y-como-funciona-el-type-erasure-en-java/)
