@@ -50,6 +50,38 @@ Tomcat proporciona implementaciones de las especificaciones de Servlet, Java Ser
 
 TABLA 2-1: Versiones de Tomcat y sus especificaciones
 
+![02-01-T](images/02-01-T.png)
+
+![02-02-T](images/02-02-T.png)
+
+![02-01](images/02-01.png)
+
+![02-02](images/02-02.png)
+
+![02-03](images/02-03.png)
+
+![02-04](images/02-04.png)
+
+![02-05](images/02-05.png)
+
+![02-06](images/02-06.png)
+
+![02-06-2](images/02-06-2.png)
+
+![02-07](images/02-07.png)
+
+![02-08](images/02-08.png)
+
+![02-09](images/02-09.png)
+
+![02-10](images/02-10.png)
+
+![02-11](images/02-11.png)
+
+![02-12](images/02-12.png)
+
+![02-13](images/02-13.png)
+
 
 
 ## Instalación de Tomcat en su máquina
