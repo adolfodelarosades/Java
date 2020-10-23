@@ -354,9 +354,7 @@ Como habrá imaginado, los archivos empresariales también vienen con su propia 
 
 Si bien es útil comprender los archivos empresariales, son una característica de la especificación Java EE completa y la mayoría de los servidores de contenedores web (como Apache Tomcat) no los admiten. Como tales, no se tratan más a fondo en este libro.
 
-<hr>
 **ADVERTENCIA** *Los ejemplos de `ClassLoader` descritos en esta sección son solo eso: ejemplos. Aunque las especificaciones de Java EE describen la carga de clases parent-first y parent-last, diferentes implementaciones logran estos modelos de diferentes maneras, y cada servidor podría tener ciertos matices que podrían causar problemas según sus necesidades. Siempre debe leer la documentación del servidor que elija para poder determinar si la arquitectura `ClassLoader` de ese servidor en particular es adecuada para usted*.
-<hr>
 
 ### RESUMEN
 
