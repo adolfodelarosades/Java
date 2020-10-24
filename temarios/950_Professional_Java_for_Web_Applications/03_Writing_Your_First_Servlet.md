@@ -298,28 +298,123 @@ Ahora que ha creado su primer Servlet y está familiarizado con el ciclo de vida
 
 ## COMPRENDER `DOGET()`, `DOPOST()` Y OTROS MÉTODOS
 
-En la sección anterior, aprendió sobre el método doGet y otros métodos que se asignan a los diversos métodos de solicitud HTTP. Pero, ¿qué puede hacer exactamente con estos métodos? Más importante aún, ¿qué debe hacer con estos métodos? Las respuestas breves a estas preguntas son "casi cualquier cosa" y "no mucho", respectivamente. Esta sección explora algunas de las cosas que puede hacer y cómo hacerlo.
+En la sección anterior, aprendió sobre el método `doGet` y otros métodos que se asignan a los diversos métodos de solicitud HTTP. Pero, ¿qué puede hacer exactamente con estos métodos? Más importante aún, ¿qué debe hacer con estos métodos? Las respuestas breves a estas preguntas son "casi cualquier cosa" y "no mucho", respectivamente. Esta sección explora algunas de las cosas que puede hacer y cómo hacerlo.
 
-¿QUÉ DEBERÍA SUCEDER DURANTE LA EJECUCIÓN DEL MÉTODO DE SERVICIO?
-El método de servicio de la clase Servlet, como aprendió anteriormente, atiende todas las solicitudes entrantes. En última instancia, debe analizar y manejar los datos de la solicitud entrante según el protocolo en uso y luego devolver al cliente una respuesta aceptable para el protocolo. Si el método de servicio regresa sin enviar datos de respuesta al socket, es probable que el cliente observe un error de red, como "restablecimiento de la conexión". Específicamente en el protocolo HTTP, el método de servicio debe comprender los encabezados y parámetros que envía el cliente y luego devolver una respuesta HTTP adecuada que al menos incluya los encabezados HTTP mínimos (incluso si el cuerpo de la respuesta está vacío). En realidad, la implementación de esto es compleja (e implica muchos pasos) y puede diferir de un contenedor web a otro.
+### ¿QUÉ DEBERÍA SUCEDER DURANTE LA EJECUCIÓN DEL MÉTODO DE SERVICIO?
 
-La belleza de extender HttpServlet es que no tiene que preocuparse por ninguno de estos detalles. Aunque la realidad es que el método de servicio debe hacer muchas cosas antes de responder al usuario, el desarrollador que usa HttpServlet debe hacer poco. En realidad, en el proyecto Hello-World que usó en las dos últimas secciones, si elimina la única línea de código del método doGet y ejecuta la aplicación, ¡todo seguirá funcionando bien! Una respuesta HTTP estructurada correctamente con contenido de longitud cero devuelve al cliente. El único requisito es que anule el método doGet (o doPost o doPut o lo que quiera admitir); no es necesario poner nada en él. Pero, ¿cuán útil es esto realmente?
+El método `service` de la clase `Servlet`, como aprendió anteriormente, atiende todas las solicitudes entrantes. En última instancia, debe analizar y manejar los datos de la solicitud entrante según el protocolo en uso y luego devolver al cliente una respuesta aceptable para el protocolo. Si el método `service` regresa sin enviar datos de respuesta al socket, es probable que el cliente observe un error de red, como "connection reset". Específicamente en el protocolo HTTP, el método de servicio debe comprender los encabezados y parámetros que envía el cliente y luego devolver una respuesta HTTP adecuada que al menos incluya los encabezados HTTP mínimos (incluso si el cuerpo de la respuesta está vacío). En realidad, la implementación de esto es compleja (e implica muchos pasos) y puede diferir de un contenedor web a otro.
 
-La respuesta a eso es "en absoluto". El hecho de que pueda devolver una respuesta vacía no significa que deba hacerlo. Aquí es donde entran HttpServletRequest y HttpServletResponse. Estos parámetros en los diversos métodos definidos por HttpServlet le permiten leer los parámetros pasados ​​desde el cliente, aceptar archivos cargados desde un formulario publicado, leer los datos sin procesar contenidos en el cuerpo de la solicitud (para hacer cosas como como manejar solicitudes PUT o aceptar cuerpos de solicitud JSON), leer encabezados de solicitud y manipular encabezados de respuesta, y escribir contenido de respuesta al cliente. Estas son algunas de las muchas cosas que puede hacer al atender una solicitud y, en realidad, generalmente debe hacer una o más de estas cosas.
+La belleza de extender `HttpServlet` es que no tiene que preocuparse por ninguno de estos detalles. Aunque la realidad es que el método `service` debe hacer muchas cosas antes de responder al usuario, el desarrollador que usa `HttpServlet` debe hacer poco. En realidad, en el proyecto **950-03-01-hello-world** que usó en las dos últimas secciones, si elimina la única línea de código del método `doGet` y ejecuta la aplicación, ¡todo seguirá funcionando bien! Una respuesta HTTP estructurada correctamente con contenido de longitud cero devuelve al cliente. El único requisito es que override el método `doGet` (o `doPost` o `doPut` o lo que quiera admitir); no es necesario poner nada en él. Pero, ¿cuán útil es esto realmente?
 
-USANDO HTTPSERVLETREQUEST
-La interfaz HttpServletRequest es una extensión de ServletRequest que proporciona información adicional específica del protocolo HTTP sobre una solicitud recibida. Especifica docenas de métodos que puede utilizar para obtener detalles sobre una solicitud HTTP. También le permite establecer atributos de solicitud (diferentes de los parámetros de solicitud).
+La respuesta a eso es "en absoluto". El hecho de que pueda devolver una respuesta vacía no significa que deba hacerlo. Aquí es donde entran `HttpServletRequest` y `HttpServletResponse`. Estos parámetros en los diversos métodos definidos por `HttpServlet` le permiten leer los parámetros pasados desde el cliente, aceptar archivos cargados desde un formulario publicado, leer los datos sin procesar(raw data) contenidos en el body de la solicitud (para hacer cosas como como manejar solicitudes PUT o aceptar cuerpos de solicitud JSON), leer encabezados de solicitud y manipular encabezados de respuesta, y escribir contenido de respuesta al cliente. Estas son algunas de las muchas cosas que puede hacer al atender una solicitud y, en realidad, generalmente debe hacer una o más de estas cosas.
 
-NOTA Aprenderá sobre los atributos de solicitud y la inspección de los detalles de autenticación en el siguiente capítulo. Este libro no cubre los detalles de cada método (para eso, puede consultar la documentación de la API) pero cubre las características más importantes.
+### USANDO HTTPSERVLETREQUEST
 
-Obtener parámetros de solicitud
-Quizás la capacidad más importante de HttpServletRequest, y una que explora a través de ejemplos en la siguiente sección, es recuperar los parámetros de solicitud pasados ​​por el cliente. Los parámetros de solicitud vienen en dos formas diferentes: a través de parámetros de consulta (también llamados parámetros URI), o en un cuerpo de solicitud codificado application / x-www-form-urlencoded o multipart / form-data (generalmente llamado variables de publicación o variables de formulario). Los parámetros de consulta son compatibles con todos los métodos de solicitud y están contenidos en la primera línea de datos en una solicitud HTTP, como en el siguiente ejemplo:
+La interfaz `HttpServletRequest` es una extensión de `ServletRequest` que proporciona información adicional específica del protocolo HTTP sobre una solicitud recibida. Especifica docenas de métodos que puede utilizar para obtener detalles sobre una solicitud HTTP. También le permite establecer atributos de solicitud (diferentes de los parámetros de solicitud).
 
-```java
+**NOTA** *Aprenderá sobre los atributos de solicitud y la inspección de los detalles de autenticación en el siguiente capítulo. Este libro no cubre los detalles de cada método (para eso, puede consultar la documentación de la API) pero cubre las características más importantes*.
+
+#### Obtener Request Parameters
+
+Quizás la capacidad más importante de `HttpServletRequest`, y una que explora a través de ejemplos en la siguiente sección, es recuperar los parámetros de solicitud pasados por el cliente. Los parámetros del request vienen en dos formas diferentes: a través de *query parameters* (también llamados *parámetros URI*), o en `application/x-www-form-urlencoded` o `multipart/form-data` (generalmente llamado *post variables* o *form variables*). Los Query parameters son compatibles con todos los métodos de solicitud y están contenidos en la primera línea de datos en una solicitud HTTP, como en el siguiente ejemplo:
+
+```sh
+GET /index.jsp?productId=9781118656464&category=Books HTTP/1.1
 ```
 
-```java
+**NOTA** *Técnicamente hablando, la especificación RFC para el protocolo HTTP no rechaza los parámetros de consulta en ninguno de los métodos HTTP. Sin embargo, muchos servidores web ignoran los parámetros de consulta pasados a `DELETE`, `TRACE` y `OPTIONS`, y la utilidad de los parámetros de consulta en tales solicitudes es cuestionable. Por lo tanto, es mejor no depender de los parámetros de consulta para este tipo de solicitudes. Este libro no cubre todas las reglas y complejidades del protocolo HTTP. Ese ejercicio queda en tus manos*.
+
+En este ejemplo, hay dos parámetros de consulta incluidos en la solicitud: `productId`, que tiene el ISBN de este libro como valor, y `category`, que tiene el valor Books. Estos mismos parámetros también podrían pasarse en el body del request como post variables. Las post variables pueden, como su nombre lo indica, incluirse solo en las solicitudes de POST. Considere el siguiente ejemplo:
+
+```sh
+POST /index.jsp?returnTo=productPage HTTP/1.1
+Host: www.example.com
+Content-Length: 48
+Content-Type: application/x-www-form-urlencoded
+ 
+addToCart&productId=9781118656464&category=Books
 ```
+
+Esta solicitud `POST` tiene post variables (indicando al sitio web que agregue este libro al carrito) y query parameters (indicando al sitio web que vuelva a la página del producto cuando se complete la tarea). Aunque existe una diferencia en la entrega de estos dos tipos de parámetros, son esencialmente los mismos y transmiten esencialmente la misma información. La API de Servlet no diferencia entre los dos tipos de parámetros. Una llamada a cualquiera de los métodos relacionados con parámetros en un objeto de solicitud devuelve parámetros, ya sea que se hayan entregado como query parameters o post variables.
+
+El método `getParameter` devuelve un solo valor para un parámetro. Si el parámetro tiene varios valores, `getParameter` devuelve el primer valor, mientras que `getParameterValues` devuelve un array de valores para un parámetro. Si el parámetro tiene solo un valor, este método devuelve un array con un elemento. El método `getParameterMap` devuelve un `java.util.Map <String, String []>` que contiene todos los nombres de los parámetros asignados a sus valores, mientras que el método `getParameterNames` devuelve una enumeración de los nombres de todos los parámetros disponibles; ambos son útiles para iterar sobre todos los parámetros de la solicitud.
+
+**ADVERTENCIA** *La primera vez que llama a `getParameter`, `getParameterMap`, `getParameterNames` o `getParameterValues` en un objeto request, el contenedor web determina si la solicitud contiene post variables y, si lo hace, lee y analiza esas post variables obteniendo el `InputStream` de la solicitud. El `InputStream` de una solicitud solo se puede leer una vez. Si llama a `getInputStream` o `getReader` en una solicitud que contiene post variables y luego intenta recuperar parámetros en esa solicitud, el intento de recuperar los parámetros da como resultado una `IllegalStateException`. Del mismo modo, si recupera parámetros en una solicitud que contiene post variables y luego llama a `getInputStream` o `getReader`, la llamada a `getInputStream` o `getReader` falla con una `IllegalStateException`*.
+
+*En pocas palabras, cada vez que anticipa que una solicitud puede contener post variables, es mejor usar solo los métodos de parámetro y dejar `getInputStream` y `getReader` en paz*.
+
+#### Determinar información sobre el contenido de la solicitud
+
+Hay varios métodos disponibles para ayudar a determinar el tipo, la longitud y la codificación del contenido de la solicitud HTTP. El método `getContentType` devuelve el *tipo de contenido MIME* de la solicitud, como `application/x-www-form-urlencoded, application/json, text/plain, o application/zip`, por nombrar algunos. Un MIME content type describe que los datos que marca contienen algún tipo. Por ejemplo, los archivos ZIP tienen un tipo `application/zip` para indicar que contienen datos de archivos ZIP.
+
+Los métodos `getContentLength` y `getContentLengthLong` devuelven el número de bytes en el cuerpo de la solicitud (la *longitud del contenido*), siendo el último método útil para solicitudes cuyo contenido puede superar los 2 gigabytes (inusual, pero no imposible). El método `getCharacterEncoding` devuelve la codificación de caracteres (como UTF-8 o ISO-8859-1) del contenido de la solicitud siempre que la solicitud contenga contenido de tipo carácter. (`text/plain, application/json, y application/x-www-form-urlencoded` son algunos ejemplos de tipos de contenido MIME de tipo carácter). Aunque estos métodos pueden resultar útiles en muchas situaciones, ninguno de ellos es necesario si obtiene post variables desde el request body utilizando los métodos de parámetro.
+
+**NOTA** *La especificación Servlet 3.1 en Java EE 7 es la primera versión que admite el método `getContentLengthLong`. Antes de esta versión, tenía que llamar a `getHeader("Content-Length")` y convertir el `String` devuelto en un `long` para las solicitudes que podrían ser mayores de 2,147,483,647 bytes*.
+
+#### Leer el contenido de un Request
+
+Los métodos `getInputStream`, que devuelve un `javax.servlet.ServletInputStream`, y `getReader`, que devuelve un `java.io.BufferedReader`, se pueden utilizar para leer el contenido de la solicitud. Cuál es mejor depende completamente del contexto en el que se leen los contenidos de la solicitud. Si se espera que los contenidos sean datos codificados con caracteres, como texto UTF-8 o ISO-8859-1, utilizar `BufferedReader` suele ser la ruta más fácil de tomar porque le permite leer fácilmente los datos `char`. Sin embargo, si los datos de la solicitud son de naturaleza binaria, debe utilizar `ServletInputStream` para poder acceder al contenido del request en formato `byte`. Nunca debe usarlos a ambos en la misma solicitud. Después de una llamada a cualquiera de los métodos, una llamada al otro fallará con una `IllegalStateException`. Recuerde la advertencia anterior y no utilice estos métodos en una solicitud con variables de publicación.
+
+#### Obtener características del Request, tales como URL, URI y Headers
+
+Hay muchas características de la solicitud que es posible que deba conocer, como la URL o la URI con la que se realizó la solicitud. Estos son fáciles de obtener del objeto de solicitud:
+
+* `getRequestURL`: Devuelve la URL completa que el cliente utilizó para realizar la solicitud, incluido el protocolo (`http` o `https`), el nombre del servidor, el número de puerto y la ruta del servidor, pero sin incluir la query string. Entonces, en una solicitud a http://www.example.org/application/index.jsp?category=Books, `getRequestURL` devuelve http://www.example.org/application/index.jsp.
+
+* `getRequestURI`: Esto es ligeramente diferente de `getRequestURL` en que solo devuelve la parte de la ruta del servidor de la URL; utilizando el ejemplo anterior, sería `/application/index.jsp`.
+
+* `getServletPath`: Similar a `getRequestURI`, devuelve incluso menos URL. Si el request es `/hello-world/greeting?foo=world`, la aplicación se implementa como `/hello-world` en Tomcat, y las asignaciones de servlet son `/greeting`, `/salutation` y `/wazzup`, `getServletPath` devuelve solo la parte del URL utilizada para coincidir con la asignación de servlet: `/greeting`.
+
+* `getHeader`: Devuelve el valor de un encabezado con el nombre dado. El caso del encabezado no tiene por qué coincidir con el caso de la cadena pasada al método, por lo que `getHeader("content-type")` puede coincidir con el encabezado `Content-Type`. Si hay varios encabezados con el mismo nombre, esto devuelve solo el primer valor. En tales casos, querrá utilizar el método `getHeaders` para devolver una enumeración de todos los valores.
+
+* `getHeaderNames`: Devuelve una enumeración de los nombres de todos los encabezados de la solicitud, una excelente manera de iterar sobre los encabezados disponibles.
+
+* `getIntHeader`: Si tiene un encabezado en particular que sabe que siempre es un número, puede llamarlo para devolver el valor ya convertido en un número. Lanza una `NumberFormatException` si el encabezado no se puede convertir en un número entero.
+
+* `getDateHeader`: Puede llamar a esto para devolver el (milisegundo) equivalente a la marca de tiempo Unix de un valor de encabezado que representa una marca de tiempo válida. Lanza una `IllegalArgumentException` si el valor del encabezado no se reconoce como una fecha.
+
+#### Sesiones y Cookies
+
+Los métodos `getSession` y `getCookies` se mencionan solo el tiempo suficiente para decirle que este capítulo no los cubre, pero ambos son ciudadanos importantes en el ámbito `HttpServletRequest`. Puede obtener más información sobre estos en el Capítulo 5.
+
+### USANDO HTTPSERVLETRESPONSE
+
+Como la interfaz `HttpServletRequest` extiende `ServletRequest` y brinda acceso a las propiedades específicas del protocolo HTTP de una solicitud, la interfaz `HttpServletResponse` extiende `ServletResponse` y brinda acceso a las propiedades específicas del protocolo HTTP de una respuesta. Utiliza el objeto response para hacer cosas como *establecer encabezados de respuesta, escribir en el cuerpo de la respuesta, redirigir la solicitud, establecer el código de estado HTTP y enviar cookies al cliente*. Nuevamente, aquí se tratan las características más comunes de este objeto.
+
+#### Escribiendo en el Response Body
+
+Lo más común que puede hacer con un objeto de respuesta, y algo que ya ha hecho con un objeto de respuesta, es escribir contenido en el response body. Puede ser HTML para mostrar en un navegador, una imagen que el navegador está recuperando o el contenido de un archivo que el cliente está descargando. Puede ser texto sin formato o datos binarios. Puede tener solo unos pocos bytes o gigabytes.
+
+El método `getOutputStream`, que devuelve un `javax.servlet.ServletOutputStream`, y el método `getWriter`, que devuelve un `java.io.PrintWriter`, le permiten escribir datos en la respuesta. Al igual que sus contrapartes en `HttpServletRequest`, probablemente desee utilizar `PrintWriter` para devolver HTML o algún otro texto codificado con caracteres al cliente porque esto facilita la escritura de cadenas y caracteres codificados en la respuesta. Sin embargo, para devolver datos binarios, debe utilizar `ServletOutputStream` para enviar los bytes de respuesta. Además, nunca debe usar `getOutputStream` y `getWriter` en la misma respuesta. Después de llamar a uno, la llamada al otro fallará con una `IllegalStateException`.
+
+Mientras escribe en el cuerpo de la respuesta, es posible que sea necesario configurar el tipo de contenido o la codificación. Puede hacer esto con `setContentType` y `setCharacterEncoding`. Puede llamar a estos métodos tantas veces como desee; la última llamada al método es la que importa. Sin embargo, si planea llamar a `setContentType` y `setCharacterEncoding` junto con `getWriter`, debe llamar a `setContentType` y `setCharacterEncoding` antes de `getWriter` para que el writer devuelto esté configurado para la codificación de caracteres correcta. Las llamadas realizadas después de `getWriter` se ignoran. Si no llama a `setContentType` y `setCharacterEncoding` antes de llamar a `getWriter`, el writer devuelto usa la codificación predeterminada del contenedor.
+
+A su disposición, también tiene los métodos `setContentLength` y `setContentLengthLong`. En casi todos los casos, no es necesario llamarlos. El contenedor web establece el encabezado `Content-Length` cuando finaliza su respuesta, y es más seguro dejar que lo haga.
+
+**NOTA** *La especificación Servlet 3.1 en Java EE 7 es la primera versión que admite el método `setContentLengthLong`. Antes de esta versión, tenía que llamar a `setHeader("Content-Length", Long.toString (length))` para obtener respuestas que pudieran ser mayores que 2,147,483,647 bytes.
+
+#### Establecer Headers y otras Propiedades del Response
+
+Sirviendo como contrapartes de los métodos en `HttpServletRequest`, puede llamar a `setHeader`, `setIntHeader` y `setDateHeader` para 
+establecer casi cualquier valor de encabezado que desee. Si los encabezados de respuesta existentes ya incluyen un encabezado con el nombre que está configurando, el valor de ese encabezado se overridden. Para evitar esto, puede usar `addHeader`, `addIntHeader` o `addDateHeader`. Estas versiones no anulan los valores de encabezado existentes, sino que agregan valores adicionales para los encabezados dados. También puede llamar a `getHeader`, `getHeaders`, `getHeaderNames` y  `containsHeader` para investigar qué encabezados ya se han establecido en el response.
+
+Además, puede utilizar:
+
+* `setStatus`: para establecer el código de estado de respuesta HTTP
+
+* `getStatus`: para determinar cuál es el estado actual de la respuesta
+
+* `sendError`: para establecer el código de estado, indique un mensaje de error opcional para escribir en los datos de respuesta, indique al contenedor web que proporcione una página de error al cliente y borre el búfer
+
+* `sendRedirect`: para redirigir al cliente a una URL diferente
+
+Esta sección cubrió la mayoría de las cosas que puede hacer mientras atiende una solicitud HTTP en su Servlet y señaló detalles importantes y precauciones cuando sea necesario. En varias secciones anteriores, ha utilizado el proyecto **950-03-01-hello-world** para demostrar cómo trabaja con Servlets. En la siguiente sección, pasa a un ejemplo un poco más complejo.
+
+## USO DE PARÁMETROS Y ACEPTACIÓN DE ENVÍOS DE FORMULARIOS
+
+En esta sección, hará que su proyecto Hello-World sea un poco más dinámico al aceptar parámetros y envíos de formularios. También explora la configuración de anotaciones y omite temporalmente el descriptor de implementación. Para los ejemplos de esta sección, puede seguir el proyecto completo de Hello-User, o simplemente puede incorporar los cambios en su proyecto existente a medida que se tratan.
+
+Se han realizado varios cambios en el proyecto. Lo primero que debe notar es que el método doGet es mucho más complejo ahora:
 
 ```java
 ```
