@@ -491,8 +491,212 @@ Aún obtiene una instancia de `HelloServlet` llamada `helloServlet`; todavía co
 
 ![03-02](images/03-02.png)
 
+Para entender lo que puede hacer este Servlet, primero agregue la cadena de consulta `user=Allison` a la URL para que sea http://localhost:8080/hello-world/greeting?user=Allison. La pantalla debería cambiar ahora y, en lugar de decir "Hello, Guest!" debería decir "Hello, Allison!" En este caso, la solicitud fue atendida por el método `doGet`, que encontró el parámetro de consulta del usuario y lo mostró en la pantalla.
+
+Puede confirmar esto colocando puntos de interrupción en `doGet` y `doPost` y actualizando la página. Ahora, escriba su nombre en el campo del formulario en la pantalla y haga clic en el botón Submit. Si examina la URL en la barra de direcciones, ***no tiene ningún parámetro de consulta(query parameters)***. En cambio, su nombre se incluyó en la solicitud como una post variable, y cuando el método `doPost` atendió la solicitud y se delegó al método `doGet`, la llamada a `getParameter` recuperó la variable post, lo que hizo que su nombre se mostrara en la pantalla. Alcanzar los breakpoints confirmará que esto ha sucedido.
+
+Recuerde de la sección anterior que los valores de un solo parámetro no son lo único que pueden aceptar sus Servlets. También puede aceptar varios valores de parámetros. El ejemplo más común de esto es un conjunto de casillas de verificación relacionadas, donde el usuario puede marcar uno o más valores. Consulte el Listado de código 3-1, el `MultiValueParameterServlet`, mapeado a `/checkboxes`. Compile y ejecute este código en Tomcat usando su depurador y navegue en su navegador hasta http://localhost:8080/hello-world/checkboxes. El método `doGet` en este Servlet imprime un formulario simple con cinco casillas de verificación. El usuario puede seleccionar cualquier número de estas casillas de verificación y hacer clic en Submit, que es atendido por el método `doPost`. Este método recupera todos los valores de frutas y los enumera en la pantalla usando una lista desordenada. Pruebe esto seleccionando varias combinaciones de casillas de verificación y haciendo clic en Submit.
+
+LISTING 3-1: MULTIVALUEPARAMETERSERVLET.JAVA
+
 ```java
+@WebServlet(
+        name = "multiValueParameterServlet",
+        urlPatterns = {"/checkboxes"}
+)
+public class MultiValueParameterServlet extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+ 
+        PrintWriter writer = response.getWriter();
+        writer.append("<!DOCTYPE html>\r\n")
+              .append("<html>\r\n")
+              .append("    <head>\r\n")
+              .append("        <title>Hello User Application</title>\r\n")
+              .append("    </head>\r\n")
+              .append("    <body>\r\n")
+              .append("        <form action=\"checkboxes\" method=\"POST\">\r\n")
+              .append("Select the fruits you like to eat:<br/>\r\n")
+              .append("<input type=\"checkbox\" name=\"fruit\" value=\"Banana\"/>")
+              .append(" Banana<br/>\r\n")
+              .append("<input type=\"checkbox\" name=\"fruit\" value=\"Apple\"/>")
+              .append(" Apple<br/>\r\n")
+              .append("<input type=\"checkbox\" name=\"fruit\" value=\"Orange\"/>")
+              .append(" Orange<br/>\r\n")
+              .append("<input type=\"checkbox\" name=\"fruit\" value=\"Guava\"/>")
+              .append(" Guava<br/>\r\n")
+              .append("<input type=\"checkbox\" name=\"fruit\" value=\"Kiwi\"/>")
+              .append(" Kiwi<br/>\r\n")
+              .append("<input type=\"submit\" value=\"Submit\"/>\r\n")
+              .append("        </form>")
+              .append("    </body>\r\n")
+              .append("</html>\r\n");
+    }
+ 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        String[] fruits = request.getParameterValues("fruit");
+ 
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+ 
+        PrintWriter writer = response.getWriter();
+        writer.append("<!DOCTYPE html>\r\n")
+              .append("<html>\r\n")
+              .append("    <head>\r\n")
+              .append("        <title>Hello User Application</title>\r\n")
+              .append("    </head>\r\n")
+              .append("    <body>\r\n")
+              .append("        <h2>Your Selections</h2>\r\n");
+ 
+        if(fruits == null)
+            writer.append("        You did not select any fruits.\r\n");
+        else
+        {
+            writer.append("        <ul>\r\n");
+            for(String fruit : fruits)
+            {
+                writer.append("        <li>").append(fruit).append("</li>\r\n");
+            }
+            writer.append("        </ul>\r\n");
+        }
+ 
+        writer.append("    </body>\r\n")
+              .append("</html>\r\n");
+    }
+}
 ```
 
+Esta sección le ha mostrado las diversas formas en que puede usar los parámetros de solicitud dentro de sus métodos de Servlet. Ha explorado parámetros de consulta y variables de publicación, junto con parámetros de valor único y multiválvulas. En la siguiente sección, aprenderá sobre varias formas de configurar su aplicación usando parámetros de inicio.
+
+## CONFIGURAR SU APLICACIÓN USANDO INIT PARAMETERS
+
+Al escribir una aplicación web Java, inevitablemente surgirá la necesidad de proporcionar formas de configurar su aplicación y los Servlets que contiene. Hay muchas formas de hacerlo utilizando numerosas tecnologías, y explorará algunas de ellas en este libro. Los medios más simples de configurar su aplicación, a través de parámetros de inicialización de contexto (generalmente abreviado como init parameters) y parámetros de inicio de Servlet, se tratan en esta sección. Estos parámetros se pueden utilizar para cualquier número de usos, desde definir información de conexión para comunicarse con una base de datos relacional, hasta proporcionar una dirección de correo electrónico para enviar alertas de pedidos de tiendas. Se definen al inicio de la aplicación y no pueden cambiar sin reiniciar la aplicación.
+
+### UTILIZAR CONTEXT INIT PARAMETERS
+
+Anteriormente, vació el archivo deployment descriptor y reemplazó su declaración y asignaciones de Servlet con anotaciones en las clases reales. Aunque esto es una cosa (agregada en la especificación Servlet 3.0 en Java EE 6) que puede hacer sin el deployment descriptor, varias cosas aún requieren el deployment descriptor. Los init parameters de contexto son una de esas características. Usted declara los init parameters de contexto usando la etiqueta `<context-param>` dentro del archivo `web.xml`. El siguiente ejemplo de código muestra dos init parameters de contexto agregados al deployment descriptor:
+
+```sh
+    <context-param>
+        <param-name>settingOne</param-name>
+        <param-value>foo</param-value>
+    </context-param>
+    <context-param>
+        <param-name>settingTwo</param-name>
+        <param-value>bar</param-value>
+    </context-param>
+```
+
+Esto crea dos init parameters de contexto: `settingOne` que tiene un valor de `foo` y `settingTwo` que tiene un valor de `bar`. Puede obtener y utilizar fácilmente estos valores de parámetros desde cualquier lugar de su código de Servlet. El `ContextParameterServlet` demuestra esta capacidad:
 
 
+```java
+@WebServlet(
+        name = "contextParameterServlet",
+        urlPatterns = {"/contextParameters"}
+)
+public class ContextParameterServlet extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        ServletContext c = this.getServletContext();
+        PrintWriter writer = response.getWriter();
+        
+        writer.append("settingOne: ").append(c.getInitParameter("settingOne"))
+              .append(", settingTwo: ").append(c.getInitParameter("settingTwo"));
+    }
+}
+```
+
+Si compila, depura y navega a http://localhost:8080/hello-user/contextParameters, puede ver estos parámetros enumerados en la pantalla. Cada servlet de su aplicación comparte estos parámetros de inicialización y sus valores son los mismos en todos los servlets. Sin embargo, puede haber casos en los que necesite una configuración que se aplique a un solo Servlet. Para este propósito, usaría los Servlet init parameters.
+
+**NOTA** *Debe tenerse en cuenta que a partir de Servlet 3.0 puede llamar al método `setInitParameter` de `ServletContext` como una alternativa para definir los init parameters de contexto usando `<context-param>`. Sin embargo, este método solo se puede llamar dentro del método `contextInitialized` de un `javax.servlet.ServletContextListener` (del cual aprenderá en el Capítulo 9) o el método `onStartup` de un `javax.servlet.ServletContainerInitializer` (del cual aprenderá en el Capítulo 12). Aun así, cambiar los valores requeriría volver a compilar su aplicación, por lo que XML suele ser la mejor opción para los parámetros de inicio de contexto*.
+
+### USO DE LOS SERVLET INIT PARAMETERS
+
+Considere el código de la clase `ServletParameterServlet`. Puede notar inmediatamente que no está anotado con `@WebServlet`. No se preocupe; aprendes por qué en un minuto. Por lo demás, el código es casi idéntico al `ContextParameterServlet`. En lugar de obtener sus parámetros de inicio del objeto `ServletContext`, los obtiene del objeto `ServletConfig`:
+
+```java
+public class ServletParameterServlet extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        ServletConfig c = this.getServletConfig();
+        PrintWriter writer = response.getWriter();
+ 
+        writer.append("database: ").append(c.getInitParameter("database"))
+              .append(", server: ").append(c.getInitParameter("server"));
+    }
+}
+```
+
+Por supuesto, tener el código de Servlet no es suficiente. El siguiente XML agregado al deployment descriptor declara y mapea el servlet y también hace un poco más:
+
+```html
+    <servlet>
+        <servlet-name>servletParameterServlet</servlet-name>
+        <servlet-class>com.wrox.ServletParameterServlet</servlet-class>
+        <init-param>
+            <param-name>database</param-name>
+            <param-value>CustomerSupport</param-value>
+        </init-param>
+        <init-param>
+            <param-name>server</param-name>
+            <param-value>10.0.12.5</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletParameterServlet</servlet-name>
+        <url-pattern>/servletParameters</url-pattern>
+    </servlet-mapping>
+```
+
+La etiqueta `<init-param>`, como la etiqueta `<context-param>` para el contexto del Servlet, crea un parámetro de inicio específico para este Servlet. Si compila, depura y navega a http://localhost:8080/hello-user/servletParameters, puede ver los parámetros `database` y `server` del servidor especificados en el deployment descriptor. Entonces, ¿por qué, podría preguntarse, no puede usar anotaciones para esto como puede hacerlo para el resto del mapeo de Servlet? Bueno, técnicamente puedes. Puede lograr el mismo resultado que en el código anterior eliminando la initialization y mapping del deployment descriptor y agregando esta anotación a la declaración del servlet:
+
+```java
+@WebServlet(
+        name = "servletParameterServlet",
+        urlPatterns = {"/servletParameters"},
+        initParams = {
+                @WebInitParam(name = "database", value = "CustomerSupport"),
+                @WebInitParam(name = "server", value = "10.0.12.5")
+        }
+)
+public class ServletParameterServlet extends HttpServlet
+{
+...
+}
+```
+
+El inconveniente de hacer esto, sin embargo, es que los valores de los parámetros de inicio de Servlet ya no se pueden cambiar sin recompilar la aplicación. Claro, puede haber configuraciones que no le gustaría cambiar sin volver a compilar la aplicación, pero en ese momento, ¿por qué no simplemente convertirlas en constantes de clase? ***La ventaja de colocar los parámetros de inicio de Servlet en el deployment descriptor es que el administrador del servidor necesita cambiar solo unas pocas líneas de XML y reiniciar la aplicación implementada para efectuar el cambio***. Si dicha configuración contiene información de conexión para una base de datos relacional, lo último que desea hacer es volver a compilar la aplicación para cambiar la dirección IP del servidor de la base de datos.
+
+La siguiente sección presenta una nueva característica de `HttpServletRequests` agregada en la especificación Servlet 3.0 y una nueva aplicación de ejemplo que mejorará a lo largo del resto del libro.
+
+
+#### LAS VENTAJAS DE `@CONFIG`
+
+Como se mencionó anteriormente, existen ventajas y desventajas en el uso de la configuración basada en anotaciones (a menudo simplemente llamada `@Config`) en su aplicación web. La principal ventaja es la falta de XML y el lenguaje de anotaciones directo y conciso que se utiliza para configurar su aplicación. Sin embargo, también existen numerosos inconvenientes en este enfoque.
+
+Un ejemplo de esto es la imposibilidad de crear múltiples instancias de una sola clase de Servlet. Ya viste anteriormente en el capítulo cómo se podría usar ese patrón. Esto es imposible usando anotaciones y solo se puede lograr usando la configuración XML o la configuración programática de Java.
+
+En el Capítulo 9, aprenderá sobre los filtros y por qué es importante construir cuidadosamente el orden en el que se ejecutan. Puede hacer que los filtros se ejecuten en un orden específico al declararlos usando la configuración XML o la configuración programática de Java. Sin embargo, si declara sus filtros usando `@javax.servlet.annotation.WebFilter`, es imposible hacer que se ejecuten en un orden específico (algo que muchos sienten es un descuido flagrante en las especificaciones de Servlet 3.0 y 3.1). A menos que su aplicación tenga un solo filtro, `@WebFilter` es virtualmente inútil.
+
+Hay muchas cosas más pequeñas que aún requieren que el deployment descriptor XML se cumpla, como definir páginas de manejo de errores, configurar los parámetros JSP y proporcionar una lista de páginas de bienvenida. **Afortunadamente, puede mezclar y combinar XML, anotaciones y Java programático**, y la configuración, para que pueda usar cada uno cuando sea más conveniente. A lo largo de este libro, utilizará las tres técnicas.
+
+```html
+```
+
+```html
+```
