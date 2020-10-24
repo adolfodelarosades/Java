@@ -892,18 +892,24 @@ Puede emplear algunas técnicas para proteger los recursos compartidos de estos 
 private volatile int TICKET_ID_SEQUENCE = 1;
 ```
 
-```java
-```
+En Java, a veces es posible que un subproceso lea el valor anterior de una variable incluso después de que el valor se haya cambiado en otro subproceso. Esto puede causar problemas de coherencia en algunas circunstancias. La palabra clave `volatile` en este caso establece una relación de pasa antes de todas las lecturas futuras de la variable y garantiza que otros hilos siempre verán el último valor de la variable.
+
+A continuación, recuerde el bloque de código sincronizado en el método `createTicket` del Listado 3-2:
 
 ```java
+        synchronized(this)
+        {
+            id = this.TICKET_ID_SEQUENCE++;
+            this.ticketDatabase.put(id, ticket);
+        }
 ```
 
+En este bloque de código suceden dos cosas: se incrementa `TICKED_ID_SEQUENCE` y se recupera su valor, y el `Ticket` se inserta en el hash map de los tickets. Ambas variables son variables de instancia del Servlet, lo que significa que varios subprocesos pueden tener acceso a ellas simultáneamente. Poner estas acciones dentro del bloque sincronizado garantiza que ningún otro hilo pueda ejecutar estas dos líneas de código al mismo tiempo. El hilo que actualmente ejecuta este bloque de código tiene acceso exclusivo para ejecutar el bloque hasta que se complete. Por supuesto, siempre se debe tener cuidado al usar bloques de código o métodos sincronizados porque la aplicación incorrecta de la sincronización puede resultar en un punto muerto, un problema más allá del alcance de este libro.
 
-```java
-```
+**ADVERTENCIA** *Una última cosa a tener en cuenta al escribir sus métodos Servlet: **Nunca** almacene objetos request o response en variables estáticas o de instancia. Simplemente no lo hagas. No hay tal vez; le causará problemas. Cualquier objeto y recurso que pertenezca a una solicitud debe existir solo como variables locales y argumentos de método*.
 
+## RESUMEN
 
-```java
-```
+En este capítulo, se le presentó la interfaz `Servlet` y las clases abstractas `GenericServlet` y `HttpServlet`, junto con las interfaces `HttpServletRequest` y `HttpServletResponse`. Aprendió cómo atender las solicitudes entrantes y responderlas de manera adecuada utilizando los objetos request y response. Experimentó con el deployment descriptor y exploró cómo configurar Servlets usando `web.xml` y anotaciones. También descubrió una de las tareas más importantes al tratar con solicitudes HTTP: manejar los parámetros de la solicitud, incluidos los query parameters y post variables, y aceptar la carga de archivos a través de envíos de formularios. Se le presentó el contexto y los parámetros de inicio de Servlet y cómo usarlos para configurar su aplicación. Finalmente, aprendió acerca de los subprocesos de solicitud y los grupos de subprocesos y por qué las consideraciones de subprocesos múltiples son tan importantes en la programación de aplicaciones web.
 
-
+En este punto, debe tener un conocimiento firme de los conceptos básicos para crear y usar Servlets en su aplicación web. Uno de los principales inconvenientes que puede haber notado durante este capítulo es la complejidad y la dificultad de escribir HTML simple en la respuesta. En el próximo capítulo, explorará la respuesta a este problema y cómo hace la vida mucho más fácil en el mundo Java EE: JavaServer Pages.
