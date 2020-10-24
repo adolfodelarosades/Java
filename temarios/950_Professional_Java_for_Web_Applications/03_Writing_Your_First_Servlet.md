@@ -412,18 +412,87 @@ Esta sección cubrió la mayoría de las cosas que puede hacer mientras atiende 
 
 ## USO DE PARÁMETROS Y ACEPTACIÓN DE ENVÍOS DE FORMULARIOS
 
-En esta sección, hará que su proyecto Hello-World sea un poco más dinámico al aceptar parámetros y envíos de formularios. También explora la configuración de anotaciones y omite temporalmente el descriptor de implementación. Para los ejemplos de esta sección, puede seguir el proyecto completo de Hello-User, o simplemente puede incorporar los cambios en su proyecto existente a medida que se tratan.
+En esta sección, hará que su proyecto **950-03-01-hello-world** sea un poco más dinámico al aceptar parámetros y envíos de formularios. También explora la configuración de anotaciones y omite temporalmente el deployment descriptor. Para los ejemplos de esta sección, puede seguir el proyecto completo de **950-03-01-hello-world** Hello-User, o simplemente puede incorporar los cambios en su proyecto existente a medida que se tratan.
 
-Se han realizado varios cambios en el proyecto. Lo primero que debe notar es que el método doGet es mucho más complejo ahora:
-
-```java
-```
+Se han realizado varios cambios en el proyecto. Lo primero que debe notar es que el método `doGet` es mucho más complejo ahora:
 
 ```java
+    private static final String DEFAULT_USER = "Guest";
+ 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        String user = request.getParameter("user");
+        if(user == null)
+            user = HelloServlet.DEFAULT_USER; 
+        
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        
+        PrintWriter writer = response.getWriter();
+        writer.append("<!DOCTYPE html>\r\n")
+              .append("<html>\r\n")
+              .append("    <head>\r\n")
+              .append("        <title>Hello User Application</title>\r\n")
+              .append("    </head>\r\n")
+              .append("    <body>\r\n")
+              .append("        Hello, ").append(user).append("!<br/><br/>\r\n")
+              .append("        <form action=\"greeting\" method=\"POST\">\r\n")
+              .append("            Enter your name:<br/>\r\n")
+              .append("            <input type=\"text\" name=\"user\"/><br/>\r\n")
+              .append("            <input type=\"submit\" value=\"Submit\"/>\r\n")
+              .append("        </form>\r\n")
+              .append("    </body>\r\n")
+              .append("</html>\r\n");
+    }
 ```
+
+El código ha cambiado. Está haciendo un poco de lógica ahora:
+
+* Prueba si el parámetro `user` está incluido en la solicitud y, si no lo está, usa la constante `DEFAULT_USER` en su lugar.
+
+* Establece el tipo de contenido de la respuesta en `text/html` y la codificación de caracteres en UTF-8.
+
+* Obtiene un `PrintWriter` de la respuesta y escribe un documento HTML5 compatible (tenga en cuenta el DOCTYPE HTML5), incluido el saludo (ahora dirigido a un usuario en particular) y un formulario para proporcionar su nombre de usuario.
+
+Quizás se pregunte cómo el método `doGet` puede recibir el envío del formulario cuando el tipo de método para el formulario está configurado como `POST`. Esto se maneja con la implementación simple de `doPost`, que también es nueva:
 
 ```java
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        this.doGet(request, response);
+    }
+```
+  
+Esta implementación simplemente se delega en el método `doGet`. Ya sea un query parameter o un post variable denominada `user` puede activar el saludo para cambiar.
+
+Lo último que debe notar es la anotación justo encima de la declaración de Servlet:
+
+```java
+@WebServlet(
+        name = "helloServlet",
+        urlPatterns = {"/greeting", "/salutation", "/wazzup"},
+        loadOnStartup = 1
+)
+public class HelloServlet extends HttpServlet
+{
+...
+}
 ```
 
+**NOTA** *Notarás que las importaciones de clases se han omitido en el ejemplo de código `HelloServlet` más reciente. A medida que su código se vuelve más complejo, las importaciones pueden comenzar a ocupar muchas docenas de líneas de código. Esto es demasiado para imprimirlo en este libro de manera eficiente. Un buen IDE, como el que usa para este libro, puede reconocer los nombres de las clases y sugerirle las importaciones, lo que le quita el trabajo duro de las manos. Con pocas excepciones, las declaraciones de importación y paquete se omiten del resto de los ejemplos de este libro. Las nuevas clases estarán en el paquete com.wrox a menos que se indique lo contrario*.
+
+Si también echas un vistazo al deployment descriptor, notarás que la declaración y el mapeo del Servlet se eliminaron del archivo `web.xml`. (O si realizó estos cambios en el proyecto existente, debe eliminar todo en el deployment descriptor excepto la etiqueta `<display-name>`). La anotación en el ejemplo anterior reemplaza el XML que escribió en su proyecto anterior y agrega un un poco más.
+
+Aún obtiene una instancia de `HelloServlet` llamada `helloServlet`; todavía comienza cuando se inicia la aplicación; y todavía está asignado a la URL `/greeting`. Ahora también se asigna a las URL `/salutation` y `/wazzup`. Como puede ver, este es un enfoque mucho más directo y conciso para instanciar y mapear servlets. Sin embargo, tiene algunos inconvenientes, que se señalan a lo largo del resto del capítulo. Por ahora, compile su proyecto e inicie Tomcat en su depurador; luego vaya a http://localhost:8080/hello-world/greeting en su navegador. Debería ver una pantalla como se muestra en la Figura 3-2.
 
 ![03-02](images/03-02.png)
+
+```java
+```
+
+
+
