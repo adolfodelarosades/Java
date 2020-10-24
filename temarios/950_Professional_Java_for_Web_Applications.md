@@ -48,7 +48,7 @@ Professional Java for Web Applications es la guía completa de Wrox para desarro
 * Debugging Tomcat from Your IDE
 * Summary
 
-#### Chapter 3: Writing Your First Servlet
+#### Chapter 3:[Writing Your First Servlet](950_Professional_Java_for_Web_Applications/03_Writing_Your_First_Servlet.md)
 * Creating a Servlet Class
 * Configuring a Servlet for Deployment
 * Understanding doGet(), doPost(), and Other Methods
