@@ -695,8 +695,215 @@ En el Capítulo 9, aprenderá sobre los filtros y por qué es importante constru
 
 Hay muchas cosas más pequeñas que aún requieren que el deployment descriptor XML se cumpla, como definir páginas de manejo de errores, configurar los parámetros JSP y proporcionar una lista de páginas de bienvenida. **Afortunadamente, puede mezclar y combinar XML, anotaciones y Java programático**, y la configuración, para que pueda usar cada uno cuando sea más conveniente. A lo largo de este libro, utilizará las tres técnicas.
 
-```html
+## UPLOADING FILES DESDE UN FORM
+
+La carga de archivos a los servlets Java EE casi siempre ha sido posible, pero solía requerir un esfuerzo considerable. La tarea era tan compleja que Apache Commons hizo un proyecto completo, llamado Commons FileUpload, para manejar todo el trabajo. Por lo tanto, lo que parecía ser el simple requisito de aceptar envíos de carga de archivos requería introducir una dependencia de terceros en su aplicación. Servlet 3.0 en Java EE 6 cambió todo eso cuando introdujo las opciones de configuración multiparte para Servlets y los métodos `getPart` y `getParts` en `HttpServletRequest`.
+
+Puede utilizar esta función como punto de partida para su aplicación de ejemplo entre capítulos: el proyecto de atención al cliente. Aunque cada capítulo tiene ejemplos más pequeños para demostrar puntos específicos, cada capítulo también incluye una nueva versión del proyecto de soporte al cliente que incorpora los nuevos temas aprendidos en ese capítulo.
+
+### PRESENTANDO EL PROYECTO DE SOPORTE AL CLIENTE
+
+EL PROYECTO DE SOPORTE AL CLIENTE es un sitio web global que atiende a clientes de todo el mundo para Multinational Widget Corporation. Sus gerentes de producto tienen la tarea de agregar una aplicación interactiva de atención al cliente al sitio web de la empresa. ***Debería permitir a los usuarios publicar preguntas o tickets de soporte y permitir a los empleados responder a esas consultas. Tanto los tickets de soporte como los comentarios deben contener archivos adjuntos. Para asuntos urgentes, los clientes deben ingresar a una ventana de chat con un representante de soporte dedicado. Y, para colmo, debido a que se trata de Multinational Widget Corporation, toda la aplicación debería ser localizable en tantos idiomas como la empresa decida traducir***. Eso no es pedir mucho, ¿verdad?
+
+Oh, sí. También debe ser realmente seguro.
+
+Obviamente, no puede abordar todo esto de una vez, especialmente con lo poco que ha aprendido hasta ahora, por lo que para cada capítulo aborda una pequeña característica o mejora el código escrito en el capítulo anterior. Para el resto de este capítulo, consulte el proyecto **950-03-03-Customer-Support-v1**. El proyecto es relativamente simple en este momento. ***Consta de tres páginas, gestionadas por `doGet`: una lista de tickets, una página para crear tickets y una página para ver un ticket. También tiene la capacidad de descargar un archivo adjunto a un ticket y de aceptar una solicitud POST para crear un nuevo ticket***. Aunque el código no es complejo y consta en gran parte de conceptos que ya ha cubierto en este capítulo, hay demasiado para imprimirlo todo aquí. Debe seguir el código descargado del sitio web.
+
+### CONFIGURACIÓN DEL SERVLET PARA CARGAS DE ARCHIVOS
+
+En el proyecto puede encontrar una clase `Ticket`, una clase `Attachment` y la clase `TicketServlet`. Las clases `Ticket` y `Attachment` son ***POJO simples: objetos Java antiguos y sencillos***. El `TicketServlet` hace todo el trabajo duro en este momento, así que comience por mirar su declaración y campos:
+
+```java
+@WebServlet(
+        name = "ticketServlet",
+        urlPatterns = {"/tickets"},
+        loadOnStartup = 1
+)
+@MultipartConfig(
+        fileSizeThreshold = 5_242_880, //5MB
+        maxFileSize = 20_971_520L, //20MB
+        maxRequestSize = 41_943_040L //40MB
+)
+public class TicketServlet extends HttpServlet
+{
+    private volatile int TICKET_ID_SEQUENCE = 1;
+ 
+    private Map<Integer, Ticket> ticketDatabase = new LinkedHashMap<>();
+...
+}
 ```
 
-```html
+Ya deberías ver algunas cosas que reconoces y otras que no. La anotación `@MultipartConfig` indica al contenedor web que proporcione soporte de carga de archivos para este servlet. Tiene varios atributos importantes que debe tener en cuenta. El primero, que no se muestra aquí, es la ubicación. Esto indica al contenedor web en qué directorio almacenar archivos temporales si es necesario. En la mayoría de los casos, sin embargo, es suficiente omitir este campo y dejar que el servidor de aplicaciones use su directorio temporal predeterminado. `FileSizeThreshold` le dice al contenedor web qué tan grande debe ser el archivo antes de que se escriba en el directorio temporal.
+
+En este ejemplo, los archivos cargados de menos de 5 megabytes se mantienen en la memoria hasta que se completa la solicitud y luego son elegibles para la basura. Después de que un archivo supera los 5 megabytes, el contenedor lo almacena en la ubicación (o por defecto) hasta que se completa la solicitud, después de lo cual elimina el archivo del disco. Los dos últimos parámetros, `maxFileSize` y `maxRequestSize`, limitan los archivos cargados: `maxFileSize` en este ejemplo prohíbe que un archivo cargado exceda los 20 megabytes, mientras que `maxRequestSize` prohíbe que el tamaño total de una solicitud exceda los 40 megabytes, independientemente de la cantidad de archivos cargados contiene. Eso es realmente todo lo que hay que hacer. El servlet ahora está configurado para aceptar cargas de archivos.
+
+**NOTA** *Al igual que con la configuración de los parámetros de inicio de Servlet mediante anotaciones, los parámetros de configuración de varias partes del ejemplo anterior no se pueden cambiar sin volver a compilar la aplicación. Si anticipa que los administradores del servidor necesitarán personalizar esta configuración sin volver a compilar la aplicación, debe usar el deployment descriptor en lugar de `@WebServlet` y `@MultipartConfig`. Dentro de la etiqueta `<servlet>` puede colocar una etiqueta `<multipart-config>`, y dentro de ella puede usar `<location>`, `<file-size-threshold>`, `<max-file-size>` y `<max-request-size>` etiquetas.
+
+También puede notar que la "ticket database" no es una base de datos en absoluto (¿O lo es? Es un medio para almacenar datos, ¿no?), Sino más bien un simple hash map. Finalmente, en la Parte III de este libro, respaldará su aplicación con una base de datos relacional. Sin embargo, por ahora, desea obtener la interfaz de usuario correcta y comprender los requisitos comerciales para que la administración de productos en Multinational Widget Corporation sea feliz. Después de eso, puede preocuparse por conservar sus datos.
+
+Ahora que comprende lo que ha visto hasta ahora, eche un vistazo a la implementación de `doGet`:
+
+```java
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        String action = request.getParameter("action");
+        if(action == null)
+            action = "list";
+        switch(action)
+        {
+            case "create":
+                this.showTicketForm(response);
+                break;
+            case "view":
+                this.viewTicket(request, response);
+                break;
+            case "download":
+                this.downloadAttachment(request, response);
+                break;
+            case "download":
+            default:
+                this.listTickets(response);
+                break;
+        }
+    }
 ```
+
+Hay mucho que hacer para poner todo en el método `doGet`; en poco tiempo, podría tener un método que abarque cientos de líneas. En este ejemplo, el método `doGet` usa un patrón de action/executor primitivo: la acción se pasa a través de un parámetro de solicitud y el método `doGet` envía la solicitud a un ejecutor (método) en función de esa acción. El método `doPost` es similar:
+
+```java
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        String action = request.getParameter("action");
+        if(action == null)
+            action = "list";
+        switch(action)
+        {
+            case "create":
+                this.createTicket(request, response);
+                break;
+            case "download":
+            default:
+                response.sendRedirect("tickets");
+                break;
+        }
+    }
+```
+
+Una cosa nueva que puede notar en `doPost` es el uso del método de redireccionamiento. Aprendió sobre este método hace algunas secciones. En este caso, si el cliente realiza un `POST` con un parámetro `action` no válido o faltante, su navegador se redirige a la página que enumera los tickets. La mayoría de los métodos de esta clase no son nada nuevo: uso de parámetros, uso de `PrintWriter` para enviar contenido al navegador del cliente, etc. No todo el código puede caber en este libro, pero hay algunas características nuevas que se utilizan aquí que debería considerar. El siguiente ejemplo es un fragmento del método `downloadAttachment`, solo la parte que contiene algo nuevo que aún no has visto:
+
+```java
+        response.setHeader("Content-Disposition",
+                "attachment; filename=" + attachment.getName());
+        response.setContentType("application/octet-stream");
+        
+        ServletOutputStream stream = response.getOutputStream();
+        stream.write(attachment.getContents());
+```
+
+Este simple código es responsable de entregar la descarga del archivo al navegador del cliente. El encabezado `Content-Disposition`, tal como está configurado, obliga al navegador a pedirle al cliente que guarde o descargue el archivo en lugar de simplemente abrirlo en línea en el navegador. El tipo de contenido es un tipo de contenido binario genérico que evita que los datos tengan algún tipo de codificación de caracteres aplicada. (Una implementación más correcta conocería el tipo de contenido MIME real del adjunto y usaría ese valor, pero esa tarea está fuera del alcance de este libro). Finalmente, `ServletOutputStream` se usa para escribir el contenido del archivo en la respuesta. Es posible que esta no sea la forma más eficiente de escribir el contenido del archivo en la respuesta porque puede sufrir problemas de memoria para archivos grandes. Si prevé permitir descargas de archivos grandes, no debe almacenar archivos en la memoria y debe copiar los bytes del `InputStream` de un archivo al `ResponseOutputStream`. Luego, debe vaciar el `ResponseOutputStream` con frecuencia para que los bytes se transmitan continuamente al navegador del usuario en lugar de almacenarse en la memoria. El ejercicio de mejorar este código queda en tus manos.
+
+### ACEPTAR LA CARGA DE UN ARCHIVO
+
+Por último, observe el método `createTicket` y el método que usa, `processAttachment`, en el Listado 3-2. Estos métodos son particularmente importantes porque se ocupan del manejo de la carga de un archivo, algo que aún no ha hecho. El método `processAttachment` obtiene `InputStream` de la solicitud multiparte y lo copia en el objeto `Attachment`. Utiliza el método `getSubmittedFileName` agregado en Servlet 3.1 para identificar el nombre del archivo original antes de que se cargara. El método `createTicket` usa este método y otros parámetros de solicitud para completar el objeto `Ticket` y agregarlo a la base de datos.
+
+LISTING 3-2: PART OF TICKETSERVLET.JAVA
+
+```java
+    private void createTicket(HttpServletRequest request,
+                              HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        Ticket ticket = new Ticket();
+        ticket.setCustomerName(request.getParameter("customerName"));
+        ticket.setSubject(request.getParameter("subject"));
+        ticket.setBody(request.getParameter("body"));
+        
+        Part filePart = request.getPart("file1");
+        if(filePart != null)
+        {
+            Attachment attachment = this.processAttachment(filePart);
+            if(attachment != null)
+                ticket.addAttachment(attachment);
+        }
+        
+        int id;
+        synchronized(this)
+        {
+            id = this.TICKET_ID_SEQUENCE++;
+            this.ticketDatabase.put(id, ticket);
+        }
+        
+        response.sendRedirect("tickets?action=view&ticketId=" + id);
+    }
+ 
+    private Attachment processAttachment(Part filePart)
+            throws IOException
+    {
+        InputStream inputStream = filePart.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        
+        int read;
+        final byte[] bytes = new byte[1024];
+        
+        while((read = inputStream.read(bytes)) != -1)
+        {
+            outputStream.write(bytes, 0, read);
+        }
+        
+        Attachment attachment = new Attachment();
+ 
+        attachment.setName(filePart.getSubmittedFileName());
+        attachment.setContents(outputStream.toByteArray());
+        
+        return attachment;
+    }
+```
+
+Una cosa que puede notar en el método `createTicket` es el uso de un bloque `synchronized` para bloquear el acceso a la base de datos de tickets. Explora esto un poco más en la siguiente y última sección del capítulo.
+
+## HACIENDO SU APLICACIÓN SEGURA PARA MULTITHREADING
+
+Las aplicaciones web son, por naturaleza, aplicaciones multiproceso. En un momento dado, cero, una o mil personas pueden estar usando su aplicación web simultáneamente, y su código debe anticiparlo y tenerlo en cuenta. Hay docenas de facetas diferentes en este tema, y se han escrito libros completos sobre multiproceso y administración de concurrencia en aplicaciones. Obviamente, este libro no puede cubrir todas las discusiones importantes de múltiples subprocesos. Sin embargo, debe saber dos cosas por encima de todo al considerar la concurrencia en sus aplicaciones web.
+
+### ENTENDIENDO REQUESTS, THREADS, Y METHOD EXECUTION
+
+Cada contenedor web es, por supuesto, ligeramente diferente. Pero en el mundo Java EE, en términos generales, un contenedor web contiene algún tipo de grupo de subprocesos, posiblemente llamado grupo de conectores o grupo de ejecutores.
+
+Cuando el contenedor recibe una solicitud, busca un subproceso disponible en el grupo. Si no encuentra un subproceso disponible y el grupo de subprocesos ya ha alcanzado su tamaño máximo, la solicitud entra en una cola (primero en entrar, primero en salir) y espera un subproceso disponible. (Por lo general, también hay un límite más alto, llamado valor **`acceptCount` en Tomcat, que define el número máximo de conexiones que se pueden poner en cola antes de que el contenedor comience a rechazar conexiones**). Una vez que un hilo está disponible, el contenedor toma prestado el hilo del grupo. y entrega la solicitud para que la maneje el hilo. En este punto, el hilo ya no está disponible para otras solicitudes entrantes. En una solicitud normal, el hilo y la solicitud se vincularán durante la vida de la solicitud. Siempre que la solicitud sea procesada por su código, ese hilo se dedicará a la solicitud. Solo cuando la solicitud se haya completado y el contenido de su respuesta se haya escrito de nuevo al cliente, el hilo estará libre de la solicitud y volverá al grupo para atender otra solicitud.
+
+La creación y destrucción de subprocesos incluye una gran cantidad de sobrecarga que puede ralentizar una aplicación, por lo que emplear un grupo de subprocesos reutilizables de esta manera elimina esta sobrecarga y mejora el rendimiento.
+
+El thread pool tiene un tamaño configurable que determina cuántas conexiones pueden ser atendidas a la vez. Aunque esta no es una discusión sobre las técnicas y prácticas de administración de servidores de aplicaciones, las limitaciones de hardware imponen un límite práctico al tamaño de este grupo, después de lo cual aumentar el tamaño del grupo no logra ganancias de rendimiento (y a menudo puede afectar el rendimiento). El tamaño de maximum pool máximo predeterminado en Tomcat es de 200 subprocesos y este número se puede aumentar o disminuir. Debe comprender esto porque significa que, en el peor de los casos, 200 subprocesos diferentes (o más, si aumenta el número) podrían estar ejecutando el mismo método en su código en la misma instancia de ese código simultáneamente. Por lo tanto, debe considerar la forma en que funciona el código para que las ejecuciones simultáneas del código en varios subprocesos no den como resultado un comportamiento excepcional.
+
+**NOTA** *Sobre el tema de las requests y threads, hay circunstancias durante las cuales un hilo puede no estar dedicado a una solicitud durante toda la vida de la solicitud. Servlet 3.0 en Java EE 6 agregó el concepto de contextos de solicitud asincrónicos. Básicamente, cuando su servlet atiende una solicitud, puede llamar al método `startAsync` de `ServletRequest`. Esto devuelve un objeto `javax.servlet.AsyncContext` en el que reside esa solicitud. Luego, su servlet puede regresar desde el método de servicio del servlet sin responder a la solicitud, y el hilo se devolverá al grupo. La solicitud no se cierra, sino que permanece abierta, sin respuesta. Más tarde, cuando ocurre algún evento, su aplicación puede recuperar el objeto de respuesta del `AsyncContext` y usarlo para enviar una respuesta al cliente. Aprenderá más sobre el uso de contextos de solicitud asíncronos en el Capítulo 9. Este enfoque se emplea a menudo para una técnica llamada sondeo largo, algo que se analiza en el Capítulo 10*.
+
+### PROTEGER LOS RECURSOS COMPARTIDOS
+
+La complicación más típica al codificar para una aplicación multiproceso(multithreaded) es el acceso a recursos compartidos. Los objetos y variables creados durante la ejecución de un método son seguros siempre y cuando ese método se esté ejecutando; otros subprocesos no tienen acceso a ellos. Sin embargo, las variables estáticas y de instancia en un Servlet, por ejemplo, podrían ser accedidas por múltiples subprocesos simultáneamente (recuerde: en el peor de los casos, incluso 200 subprocesos simultáneamente). Es importante sincronizar el acceso a estos recursos compartidos para evitar que su contenido se corrompa y pueda causar errores en su aplicación.
+
+Puede emplear algunas técnicas para proteger los recursos compartidos de estos problemas. Considere la primera línea de código en `TicketServlet`:
+
+
+```java
+private volatile int TICKET_ID_SEQUENCE = 1;
+```
+
+```java
+```
+
+```java
+```
+
+
+```java
+```
+
+
+```java
+```
+
+
