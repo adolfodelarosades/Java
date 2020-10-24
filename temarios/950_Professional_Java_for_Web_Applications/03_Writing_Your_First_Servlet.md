@@ -8,3 +8,9 @@
 * Carga de archivos desde un formulario
 * Hacer que su aplicación sea segura para Multithreading
 * Resumen
+
+![03-01-T](images/03-01-T.png)
+
+![03-01](images/03-01.png)
+
+![03-02](images/03-02.png)
