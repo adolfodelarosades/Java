@@ -217,6 +217,8 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [Welcome to the Documentation Library](https://docs.oracle.com/cd/B14099_19/index.htm)
 
+[Java Servlet/Jsp Tutorials](https://o7planning.org/en/10979/java-servlet-jsp)
+
 [Create a simple Login application and secure pages with Java Servlet Filter](https://o7planning.org/en/11071/create-a-simple-login-application-and-secure-pages-with-java-servlet-filter)
 
 ## Tutoriales Arduino - Java
@@ -289,3 +291,7 @@ mini-de-adolfo:tmp adolfodelarosa$
 ### Articulos
 
 [Qué es y cómo funciona el type erasure en Java](https://picodotdev.github.io/blog-bitix/2018/03/que-es-y-como-funciona-el-type-erasure-en-java/)
+
+### APIs
+
+[IMDB Películas](https://developer.imdb.com/)
