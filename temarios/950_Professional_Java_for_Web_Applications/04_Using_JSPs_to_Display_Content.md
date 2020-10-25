@@ -464,6 +464,50 @@ Los capítulos 7 y 8 hablan más sobre las bibliotecas de etiquetas, pero ahora 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 ```
 
+El atributo `uri` especifica el espacio de nombres URI en el que se define la biblioteca de etiquetas, y el atributo de prefijo define el alias con el que hace referencia a las etiquetas en esa biblioteca. Aprenderá más sobre lo que esto significa en el Capítulo 7.
+
+### USO DE LA ETIQUETA <JSP>
+
+Todas las JSP admiten un tipo especial de etiqueta con un prefijo XMLNS de `jsp`. Esta etiqueta tiene muchos usos y características. La mayoría de las características se utilizan en documentos JSP (versiones XML de JSP que conocerá en la última sección de este capítulo) o reliquias de versiones anteriores de JSP en las que algunas cosas eran mucho más difíciles de hacer que ahora (y también lo son). no cubierto aquí). Sin embargo, debería conocer algunas funciones útiles de esta etiqueta.
+
+Ya ha aprendido sobre `<jsp:include>` y en qué se diferencia de la directiva `include`. Una etiqueta similar es la etiqueta `<jsp:forward>`. Esto le permite reenviar una solicitud desde la JSP que se está ejecutando actualmente a alguna otra JSP. A diferencia de `<jsp:include>`, ***la solicitud no vuelve a la JSP original***. Esto no es una redirección; el navegador del cliente no ve el cambio. Además, todo lo que JSP escribe en la respuesta permanece en la respuesta cuando se produce el reenvío(forward); no se borra, como lo haría con una redirección. Usar la etiqueta `<jsp:forward>` es simple:
+
+```html
+<jsp:forward page="/some/other/page.jsp" />
+```
+
+En este ejemplo, la solicitud se reenvía internamente a `/some/other/page.jsp`. Cualquier contenido de respuesta generado antes de la etiqueta todavía se envía al navegador del cliente. Cualquier código que venga después de la etiqueta se ignora y no se evalúa. Así es como esta etiqueta se diferencia de la etiqueta `<jsp:include>`. Si el código después de la etiqueta `<jsp:forward>` no fuera ignorado, esta etiqueta se comportaría como la etiqueta `<jsp:include>`.
+
+Otras tres etiquetas relacionadas son `<jsp:useBean>`, `<jsp:getProperty>` y `<jsp:setProperty>`. La etiqueta `<jsp:useBean>` declara la presencia de un JavaBean en la página, mientras que `<jsp:getProperty>` recupera propiedades (usando métodos getter) de beans declarados con <jsp: useBean>. De manera similar, <jsp: setProperty> establece propiedades (usando métodos setter). Un bean Java en este caso es cualquier objeto instanciado.`<jsp:useBean>` instancia una clase para crear un bean, y luego se puede acceder a este bean utilizando las otras dos etiquetas de bean, etiquetas personalizadas y scriptlets y expresiones JSP. ***La ventaja de declarar un bean de esta forma es que hace que el bean esté disponible para otras etiquetas JSP; si simplemente declarara el bean en un scriptlet, solo estaría disponible para scriptlets y expresiones***.
+
+Finalmente, está la etiqueta `<jsp:plugin>`, que es una herramienta útil para incrustar Applets de Java en el HTML renderizado. Esta etiqueta elimina el riesgo de estropear la estructura cuidadosa de las etiquetas `<object>` y `<embed>` necesarias para que los applets de Java funcionen en todos los navegadores. Maneja la creación de estas etiquetas HTML para que el Applet funcione en todos los navegadores convencionales que admiten el complemento Java. A continuación, se muestra un ejemplo del uso de la etiqueta `<jsp:plugin>`:
+
+
+```html
+<jsp:plugin type="applet" code="MyApplet.class" jreversion="1.8">
+    <jsp:params>
+        <jsp:param name="appletParam1" value="paramValue1"/>
+    </jsp:params>
+    <jsp:fallback>
+        The browser you are using does not support Java Applets. You might
+        consider switching browsers.
+    </jsp:fallback>
+</jsp:plugin>
+```
+
+Tenga en cuenta que `<jsp:plugin>` también puede contener atributos estándar HTML object/embed, como `name`, `align`, `height`, `width`, `hspace` y `vspace`. Estos atributos se copian en el marcado HTML.
+
+**NOTA** *Los Java Applets son un tema completamente diferente de las aplicaciones web y están fuera del alcance de este libro. Si desea obtener más información sobre los applets de Java, la mayoría de los libros de Java para principiantes cubren el tema*.
+
+AQUI
+## USANDO JAVA DENTRO DE UNA JSP (¡Y POR QUÉ NO DEBE USTED!)
+
+En esta sección, explorará un poco más el uso de Java dentro de una JSP reemplazando el Servlet en el proyecto Hello-User (del capítulo anterior) con solo una JSP. Luego, considera brevemente por qué se desaconseja el uso de Java en una JSP (y por qué existe realmente una configuración de descriptor de implementación para deshabilitarlo). Para el resto de esta sección, utiliza el proyecto Hello-User-JSP en el sitio de descarga de wrox.com.
+
+USANDO LAS VARIABLES IMPLÍCITAS EN UNA JSP
+Los archivos JSP tienen varias variables implícitas (objetos) disponibles para su uso dentro de scriptlets y expresiones en JSP. Se consideran implícitos porque no tiene que definirlos ni declararlos en ninguna parte de su código. La especificación JSP requiere que el traductor y el compilador de JSP proporcionen estas variables, con los nombres exactos especificados. Las variables tienen alcance de método. Se definen al principio del método Servlet en el que se ejecuta JSP (en Tomcat 8.0, el método _jspService). Esto significa que no puede usarlos dentro de ningún código que coloque dentro de las declaraciones JSP. Las declaraciones tienen alcance de clase. Debido a que las variables implícitas están dentro del alcance solo dentro del método en el que se ejecuta JSP, el código dentro de las declaraciones no puede usarlas. Puede ver un ejemplo de cómo se definen las variables implícitas observando el método _jspService de cualquiera de las JSP compiladas previamente que examinó en el último sección:
+
+
 ```html
 ```
 
