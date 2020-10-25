@@ -418,7 +418,50 @@ Incluir otras JSP en una JSP es fácil, pero hay algunas reglas y opciones inter
 <%@ include file="/path/to/some/file.jsp" %>
 ```
 
+El atributo `file` proporciona al contenedor la ruta al archivo JSP que debe incluirse. Si es absoluta, la ruta se resuelve desde la web root de la aplicación, por lo que un archivo llamado `included.jsp` en el directorio `WEB-INF` podría incluirse con la ruta `/WEB-INF/included.jsp`. Si la ruta es relativa, se resuelve desde el mismo directorio en el que existe la JSP incluida. La directiva `include` se evalúa en el momento de la traducción. Antes de que JSP se traduzca a Java, la directiva `include` se reemplaza (virtualmente) con el contenido del archivo JSP incluido. Después de que esto suceda, los contenidos combinados se traducen a Java y se compilan. Por lo tanto, como puede ver, este proceso es estático y solo ocurre una vez.
+
+Para demostrar esto, siga estos pasos:
+
+1. Cree un JSP llamado `includer.jsp` en la raíz web de su proyecto **904-04-01-Hello-World-JSP** y coloque la siguiente línea de código en él (eliminando cualquier código generado por su IDE). Alternativamente, simplemente use el proyecto **904-04-01-Hello-World-JSP**.
+
 ```html
+<%@ include file="index.jsp" %>
+```
+
+2. Compile y depure su aplicación y navegue hasta http://localhost:8080/hello-world/includer.jsp en su navegador favorito. Debería ver la página familiar, lo que significa que su inclusión ha funcionado.
+
+3. Ahora vaya al directorio de trabajo de Tomcat y abra el archivo `includer_jsp.java` que creó Tomcat. Debería notar inmediatamente que, además del nombre de la clase, es idéntico a `index_jsp.java`. Esto se debe a que la JSP se incluyó de forma estática en el momento de la traducción.
+
+Hay una forma diferente de incluir otras JSP que da como resultado una inclusión dinámica (tiempo de ejecución) en lugar de una inclusión estática (tiempo de traducción). Utiliza la etiqueta `<jsp:include>` para lograr esto:
+
+```html
+<jsp:include page="/path/to/some/page.jsp" />
+```
+
+La etiqueta `<jsp:include>` no tiene un atributo `file`; tiene un atributo `page`. La ruta sigue siendo relativa al archivo actual o absoluta desde la raíz web, al igual que con la directiva `include`. Pero no está incluido en el momento de la traducción. En cambio, el archivo incluido se compila por separado. En tiempo de ejecución, la solicitud se reenvía temporalmente a la JSP incluida, la salida resultante de esa JSP se escribe en la respuesta y luego el control vuelve a la JSP incluida. Esto se puede ver fácilmente creando un archivo llamado `dynamicIncluder.jsp` en la raíz web de tu proyecto con la siguiente línea de código (o usa el proyecto **904-04-01-Hello-World-JSP**):
+
+```html
+<jsp:include page="index.jsp" />
+```
+
+Compile y depure nuevamente y navegue a http://localhost:8080/hello-world/dynamicIncluder.jsp, luego abra el archivo `dynamicIncluder_jsp.java` que creó Tomcat. Ahora puede ver que el contenido de este archivo Java es bastante diferente. La línea más interesante del archivo es:
+
+```html
+org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "index.jsp", out, false);
+```
+
+Esto envía la solicitud y la respuesta a otro método, que ejecuta el JSP incluido, escribe su contenido en la respuesta y regresa.
+
+Ambos métodos de inclusión tienen sus puntos fuertes y débiles. La directiva `include` es rápida porque se evalúa solo una vez, y todas las variables definidas en la JSP incluida están dentro del alcance y pueden ser referenciadas por la JSP incluida. Pero este método hace que su JSP (y el método `_jspService`, como resultado) sea más largo, lo cual es importante tener en cuenta porque el código de bytes de **los métodos Java compilados no puede tener más de 65 534 bytes**. La etiqueta `<jsp:include>` no causa este problema, pero tampoco funciona tan bien porque debe evaluarse cada carga de página, y las variables definidas en el JSP incluido están fuera del alcance y no se pueden usar en el JSP incluido. En última instancia, debe decidir cuál es el apropiado cada vez que necesite incluir un archivo, pero en ***la mayoría de los casos, la directiva `include` es una buena opción***.
+
+**NOTA** *De forma predeterminada, los contenedores web traducen y compilan archivos que terminan en `.jsp` y `.jspx` (que conocerá más adelante) como JSP. Es posible que también haya visto la extensión `.jspf`. Los archivos JSPF generalmente se denominan Fragmentos JSP y no los compila el contenedor web. Aunque no existen reglas estrictas que rijan los archivos JSPF (técnicamente, puede configurar la mayoría de los contenedores web para compilarlos si lo desea), existen algunas mejores prácticas acordadas. Los archivos JSPF representan fragmentos de JSP que no pueden ser independientes y que siempre deben incluirse, no se debe acceder a ellos directamente. Por eso, los contenedores web normalmente no los compilan. De hecho, en muchos casos, un archivo JSPF hace referencia a variables que solo pueden existir si se incluyen en otro archivo JSP. Por esta razón, **los archivos JSPF deben incluirse solo utilizando la directiva include porque las variables definidas en el JSP incluido deben estar dentro del alcance del JSP incluido***.
+
+#### Incluyendo Tag Libraries
+
+Los capítulos 7 y 8 hablan más sobre las bibliotecas de etiquetas, pero ahora se mencionan debido a cómo están incluidas. Utiliza la directiva `taglib` para hacer referencia a una biblioteca de etiquetas de modo que pueda usar las etiquetas definidas por esa biblioteca de etiquetas en su JSP. Al igual que la directiva `include`, la directiva `taglib` es bastante simple:
+
+```html
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 ```
 
 ```html
