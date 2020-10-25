@@ -247,6 +247,10 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [startbootstrap](https://startbootstrap.com/themes/)
 
+### Tutoriales JS
+
+[JavaScript libraries](https://www.javascripting.com/)
+
 ### Plantillas
 
 [Bootstrap Templates & Themes](https://startbootstrap.com/themes/)
