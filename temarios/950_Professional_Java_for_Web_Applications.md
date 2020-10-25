@@ -58,7 +58,7 @@ Professional Java for Web Applications es la guía completa de Wrox para desarro
 * Making Your Application Safe for Multithreading
 * Summary
 
-#### Chapter 4: Using JSPs to Display Content
+#### Chapter 4: [Using JSPs to Display Content](950_Professional_Java_for_Web_Applications/04_Using_JSPs_to_Display_Content.md)
 * `<br/>` Is Easier Than output.println("`<br />`")
 * Creating Your First JSP
 * Using Java within a JSP (and Why You Shouldn't!)
