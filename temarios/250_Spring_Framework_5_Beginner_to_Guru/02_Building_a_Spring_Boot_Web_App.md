@@ -27,7 +27,7 @@
 
 ## Spring Initializer 15:25
 
-![02-02-01](02-02-01.png)
+![02-02-01](images/02-02-01.png)
 
 En este video, le mostraré lo fácil que es crear un proyecto Spring Framework.
 
