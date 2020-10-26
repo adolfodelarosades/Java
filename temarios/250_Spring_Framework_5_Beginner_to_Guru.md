@@ -426,363 +426,224 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Assignment Review - Refactor Image Service 09:16
 * Conclusion 01:12
 
-Introduction to Spring Web Flux
-02:18
-Spring WebFlux Dependencies
-06:15
-Reactive Thymeleaf Configuration
-04:29
-Going Reactive With Thymeleaf
-05:38
-Assignment - Refactor Recipe and Ingredient Controllers
-01:29
-Assignment Review - Refactor Recipe and Ingredient Controllers
-03:29
-Binding Validation
-04:32
-Assignment - Update Binding Validation for Ingredient Controller
-01:28
-Assignment Review - Update Binding Validation for Ingredient Controller
-14:12
-Common Model Attributes
-03:26
-WebFlux Exception Handling
-03:50
-WebFlux Controller Advice
-06:22
-Multipart Upload
-01:17
-Introduction to Router Functions
-06:13
-Introduction to Spring WebTestClient
-05:15
-Spring WebFlux Conclusion
-01:15
-Introduction to RESTFul Web Services
-03:15
-Beginners Guide to REST
-08:49
-Richardson Maturity Model
-07:38
-Introduction to Postman
-04:34
-Assignment - Create Data Model
-03:15
-Assignment Review - Create Data Model
-03:23
-Introduction to Spring RestTemplate
-09:29
-Using WebFlux to Display API Data
-05:15
-URI Components Builder
-03:41
-Rest Template Examples
-10:18
-Going Reactive with Spring WebClient
-06:34
-Conclusion
-01:01
-Introduction to RESTFul Web Services with Spring MVC
-02:45
-New Spring Boot Project
-03:58
-Spring Boot Command Line Runner
-03:38
-Introduction to MapStruct
-06:59
-Using MapStruct
-05:42
-MapStruct IntelliJ Plugin
-02:20
-Category Service
-05:41
-List Categories
-05:49
-Testing with Postman
-02:38
-Assignment - Create Get API for Customers
-02:09
-Assignment Review
-10:21
-Create New Customer With Post
-09:54
-Update Customer with PUT
-04:43
-Integration Testing with DataJPATest
-06:13
-Update Customer with PATCH
-04:52
-Delete Customer
-03:59
-Externalize API URL Value
-03:15
-Exception Handling
-05:49
-Spring Rest Controller
-04:14
-Assignment: Create Vendors API
-02:24
-Assignment Review
-12:32
-Conclusion
-01:19
-Introduction to Swagger
-01:08
-What is Swagger
-08:29
-Configuring Swagger
-06:01
-Swagger UI
-03:46
-Customizing Swagger with Meta Data
-03:14
-Customizing Endpoint Documention
-07:17
-Assignment: Customize Vendors
-01:22
-Assignment Review
-04:18
-Introduction to Swagger Editor
-04:34
-Swagger Code Gen
-06:43
-Conclusion
-01:43
-Introduction
-01:42
-New Spring Boot Project
-04:00
-Creating Data Model and Repositories
-03:50
-Assignment - Create Vendor Data Model, Populate Data
-02:41
-Assignment Review
-12:37
-Create Category Controller
-04:17
-Testing Category Controller
-06:30
-Assignment: Create Get Endpoints for Vendors
-01:57
-Assignment Review: Create Get Endpoints for Vendors
-10:51
-Create Category with POST
-08:39
-Update Category with PUT
-07:23
-Assignment: Implement POST for Vendors
-01:23
-Assignment Review: Implement POST for Vendors
-08:21
-Assignment: Implement PUT for Vendors
-01:18
-Assignment Review: Implement PUT for Vendors
-08:55
-Update Category with PATCH
-10:14
-Assignment Implement PATCH for Vendors
-01:38
-Assignment Review: Implement PATCH for Vendors
-10:41
-Conclusion
-01:38
-Introduction
-01:28
-Spring MVC Content Negotiation Overview
-06:56
-Maven Dependencies to Render XML with Spring MVC
-08:58
-Introduction to XML Schema
-06:37
-Using Multi-Module Maven Builds with Spring Boot
-10:40
-Using JAXB to Generate Java Classes
-09:24
-Refactor for JAXB Generated Classes
-08:45
-Testing and Running JAXB Generated Classes in Spring Boot Application
-09:35
-Conclusion
-01:20
-Introduction
-02:01
-Spring REST Docs Introduction
-05:06
-Project Code Review
-05:54
-Maven Configuration
-06:20
-Spring Mock MVC Configuration
-04:32
-Documenting Path Parameters
-06:08
-Documenting Query Parameters
-02:26
-Documenting Responses
-03:12
-Documenting Requests
-04:12
-Documenting Validation Constraints
-10:41
-URI Customization
-03:17
-Documentation Generation
-08:53
-Serving Docs with Spring Boot
-04:03
-Assignment - Add Spring REST Doc to Project
-02:25
-Assignment Review
-07:24
-Conclusion
-01:53
-Introduction
-02:38
-Introduction to JMS
-12:29
-Initial Project and Maven Dependencies
-07:29
-Java Message Object
-04:44
-Embedded Server Configuration
-04:58
-Task Configuration
-03:14
-Message Converter Configuration
-05:49
-Sending JMS Messages
-05:42
-Receiving JMS Messages
-11:02
-Send and Receive of JMS Messages
-12:17
-Running Active MQ in Docker
-06:39
-Using Local ActiveMQ Broker with Spring Boot
-06:39
-JMS and Spring Message Data Types
-07:14
-Conclusion
-01:49
-Debugging Thymeleaf
-06:43
-Problems with Spring Security and H2 Database Console
-09:45
-Configuring Spring Sec DAO Provider
-34:27
-Troubleshooting Spring MVC Request Mapping
-04:32
-H2 Database Connection Timeouts
-12:01
-Troubleshooting Spring Cloud Sleuth
-07:14
-Troubleshooting NPE with Mockito Mocks
-07:39
-500 Error from Thymeleaf
-06:28
-Missing tables in H2 Console
-07:17
-Troubleshooting Maven Release Plugin
-18:42
-Introduction to Building a Spring Boot Web App
-03:29
-Vista previa
-04:55
-Vista previa
-10:37
-Vista previa
-14:09
-Vista previa
-04:04
-Vista previa
-04:06
-Vista previa
-03:03
-Vista previa
-07:53
-Vista previa
-06:45
-Vista previa
-01:34
-Vista previa
-05:08
-Vista previa
-05:11
-Configuring Spring MVC Controllers
-06:07
-Thymeleaf Templates
-08:28
-Assignment - Display List of Authors
-00:53
-Assignment Review - Display List of Authors
-06:39
-Conclusion
-01:03
-Introduction to Dependency Injection with Spring
-02:15
-SOLID Principles of OOP
-09:52
-Create an Spring Framework DI Example Project
-06:58
-The Spring Framework Context
-05:07
-Basics of DI
-09:26
-Dependency Injection without the Spring Framework
-10:42
-Dependency Injection using Spring Framework
-07:14
-Using Spring Qualifier Annotations
-06:46
-Primary Annotation for Spring Beans
-08:38
-Spring Profiles
-06:05
-Default Profile Behavior for Spring Context
-05:23
-Spring Bean Life Cycle
-06:59
-Dependency Injection Assignment
-01:11
-Dependency Injection Assignment Review
-04:20
-Spring Bean Life Cycle Demo
-05:14
-Flashcards
-05:46
-Interface Naming Conventions
-07:59
-Spring Boot Cookbook Introduction
-01:28
-Spring Boot Mongo DB
-06:04
-Spring Boot MySQL
-08:11
-Spring Boot Postgres Example
-09:03
-Spring Boot Maria DB Example
-09:37
-Spring Boot DB2 Express Example
-07:32
-Spring Boot Oracle Database Example
-12:46
-Spring Boot Redis Example
-06:48
-Spring Boot Neo4J Example
-08:50
-Spring Boot Cassandra Example
-10:17
-Spring Boot Active MQ Example
-09:15
-Spring Boot RabbitMQ Example
-11:56
-Spring Framework Guru - August 2017 Group Coaching Call
-29:49
-Git and GitHub Basics - Start here!
-00:37
-RESTful Webservices with Spring MVC 5
-49:47
-Dependency Injection Best Practices with Spring
-18:49
-Introduction to Testing with Spring
-17:28
+#### Introduction to Spring Framework WebFlux • 16 clases • 1h 11min
+
+* Introduction to Spring Web Flux 02:18
+* Spring WebFlux Dependencies 06:15
+* Reactive Thymeleaf Configuration 04:29
+* Going Reactive With Thymeleaf 05:38
+* Assignment - Refactor Recipe and Ingredient Controllers 01:29
+* Assignment Review - Refactor Recipe and Ingredient Controllers 03:29
+* Binding Validation 04:32
+* Assignment - Update Binding Validation for Ingredient Controller 01:28
+* Assignment Review - Update Binding Validation for Ingredient Controller 14:12
+* Common Model Attributes 03:26
+* WebFlux Exception Handling 03:50
+* WebFlux Controller Advice 06:22
+* Multipart Upload 01:17
+* Introduction to Router Functions 06:13
+* Introduction to Spring WebTestClient 05:15
+* Spring WebFlux Conclusion 01:15
+
+#### Introduction to RESTFul Web Services • 12 clases • 1h 7min
+
+* Introduction to RESTFul Web Services 03:15
+* Beginners Guide to REST 08:49
+* Richardson Maturity Model 07:38
+* Introduction to Postman 04:34
+* Assignment - Create Data Model 03:15
+* Assignment Review - Create Data Model 03:23
+* Introduction to Spring RestTemplate 09:29
+* Using WebFlux to Display API Data 05:15
+* URI Components Builder 03:41
+* Rest Template Examples 10:18
+* Going Reactive with Spring WebClient 06:34
+* Conclusion 01:01
+
+#### RESTFul WebServices with Spring MVC • 22 clases • 1h 51min
+
+* Introduction to RESTFul Web Services with Spring MVC 02:45
+* New Spring Boot Project 03:58
+* Spring Boot Command Line Runner 03:38
+* Introduction to MapStruct 06:59
+* Using MapStruct 05:42
+* MapStruct IntelliJ Plugin 02:20
+* Category Service 05:41
+* List Categories 05:49
+* Testing with Postman 02:38
+* Assignment - Create Get API for Customers 02:09
+* Assignment Review 10:21
+* Create New Customer With Post 09:54
+* Update Customer with PUT 04:43
+* Integration Testing with DataJPATest 06:13
+* Update Customer with PATCH 04:52
+* Delete Customer 03:59
+* Externalize API URL Value 03:15
+* Exception Handling 05:49
+* Spring Rest Controller 04:14
+* Assignment: Create Vendors API 02:24
+* Assignment Review 12:32
+* Conclusion 01:19
+
+#### Using Swagger with Spring Boot • 11 clases • 49min
+
+* Introduction to Swagger 01:08
+* What is Swagger 08:29
+* Configuring Swagger 06:01
+* Swagger UI 03:46
+* Customizing Swagger with Meta Data 03:14
+* Customizing Endpoint Documention 07:17
+* Assignment: Customize Vendors 01:22
+* Assignment Review 04:18
+* Introduction to Swagger Editor 04:34
+* Swagger Code Gen 06:43
+* Conclusion 01:43
+
+#### RESTFul WebServices with Spring WebFlux • 19 clases • 1h 49min
+
+* Introduction 01:42
+* New Spring Boot Project 04:00
+* Creating Data Model and Repositories 03:50
+* Assignment - Create Vendor Data Model, Populate Data 02:41
+* Assignment Review 12:37
+* Create Category Controller 04:17
+* Testing Category Controller 06:30
+* Assignment: Create Get Endpoints for Vendors 01:57
+* Assignment Review: Create Get Endpoints for Vendors 10:51
+* Create Category with POST 08:39
+* Update Category with PUT 07:23
+* Assignment: Implement POST for Vendors 01:23
+* Assignment Review: Implement POST for Vendors 08:21
+* Assignment: Implement PUT for Vendors 01:18
+* Assignment Review: Implement PUT for Vendors 08:55
+* Update Category with PATCH 10:14
+* Assignment Implement PATCH for Vendors 01:38
+* Assignment Review: Implement PATCH for Vendors 10:41
+* Conclusion 01:38
+
+#### Spring MVC Content Negotiation • 9 clases • 1h 4min
+
+* Introduction 01:28
+* Spring MVC Content Negotiation Overview 06:56
+* Maven Dependencies to Render XML with Spring MVC 08:58
+* Introduction to XML Schema 06:37
+* Using Multi-Module Maven Builds with Spring Boot 10:40
+* Using JAXB to Generate Java Classes 09:24
+* Refactor for JAXB Generated Classes 08:45
+* Testing and Running JAXB Generated Classes in Spring Boot Application 09:35
+* Conclusion 01:20
+
+#### Spring MVC REST Docs • 16 clases • 1h 18min
+
+* Introduction 02:01
+* Spring REST Docs Introduction 05:06
+* Project Code Review 05:54
+* Maven Configuration 06:20
+* Spring Mock MVC Configuration 04:32
+* Documenting Path Parameters 06:08
+* Documenting Query Parameters 02:26
+* Documenting Responses 03:12
+* Documenting Requests 04:12
+* Documenting Validation Constraints 10:41
+* URI Customization 03:17
+* Documentation Generation 08:53
+* Serving Docs with Spring Boot 04:03
+* Assignment - Add Spring REST Doc to Project 02:25
+* Assignment Review 07:24
+* Conclusion 01:53
+
+#### JMS Messaging • 14 clases • 1h 33min
+
+* Introduction 02:38
+* Introduction to JMS 12:29
+* Initial Project and Maven Dependencies 07:29
+* Java Message Object 04:44
+* Embedded Server Configuration 04:58
+* Task Configuration 03:14
+* Message Converter Configuration 05:49
+* Sending JMS Messages 05:42
+* Receiving JMS Messages 11:02
+* Send and Receive of JMS Messages 12:17
+* Running Active MQ in Docker 06:39
+* Using Local ActiveMQ Broker with Spring Boot 06:39
+* JMS and Spring Message Data Types 07:14
+* Conclusion 01:49
+
+#### Troubleshooting Spring • 10 clases • 1h 55min
+
+* Debugging Thymeleaf 06:43
+* Problems with Spring Security and H2 Database Console 09:45
+* Configuring Spring Sec DAO Provider 34:27
+* Troubleshooting Spring MVC Request Mapping 04:32
+* H2 Database Connection Timeouts 12:01
+* Troubleshooting Spring Cloud Sleuth 07:14
+* Troubleshooting NPE with Mockito Mocks 07:39
+* 500 Error from Thymeleaf 06:28
+* Missing tables in H2 Console 07:17
+* Troubleshooting Maven Release Plugin 18:42
+
+#### DEPRECATED - 2 - Building a Spring Boot Web App • 17 clases • 1h 34min
+
+* Introduction to Building a Spring Boot Web App 03:29
+* Spring Initializer 04:55
+* Open Project in IntelliJ 10:37
+* Using JPA Entities 14:09
+* Equality in Hibernate 04:04
+* Using GitHub 04:06
+* Cod Examples in GitHub 03:03
+* Spring Data JPA Repositories 07:53
+* Initializing Data with Spring Framework Events 06:45
+* Assignment - Add Publisher Entity 01:34
+* Assignment Review of Add Publisher Entity 05:08
+* Introduction to Spring MVC 05:11
+* Configuring Spring MVC Controllers 06:07
+* Thymeleaf Templates 08:28
+* Assignment - Display List of Authors 00:53
+* Assignment Review - Display List of Authors 06:39
+* Conclusion 01:03
+
+#### DEPRECATED - 3 - Dependency Injection with the Spring Framework • 17 clases • 1h 50min
+
+* Introduction to Dependency Injection with Spring 02:15
+* SOLID Principles of OOP 09:52
+* Create an Spring Framework DI Example Project 06:58
+* The Spring Framework Context 05:07
+* Basics of DI 09:26
+* Dependency Injection without the Spring Framework 10:42
+* Dependency Injection using Spring Framework 07:14
+* Using Spring Qualifier Annotations 06:46
+* Primary Annotation for Spring Beans 08:38
+* Spring Profiles 06:05
+* Default Profile Behavior for Spring Context 05:23
+* Spring Bean Life Cycle 06:59
+* Dependency Injection Assignment 01:11
+* Dependency Injection Assignment Review 04:20
+* Spring Bean Life Cycle Demo 05:14
+* Flashcards 05:46
+* Interface Naming Conventions 07:59
+
+#### Spring Boot Cookbook • 13 clases • 2h 12min
+
+* Spring Boot Cookbook Introduction 01:28
+* Spring Boot Mongo DB 06:04
+* Spring Boot MySQL 08:11
+* Spring Boot Postgres Example 09:03
+* Spring Boot Maria DB Example 09:37
+* Spring Boot DB2 Express Example 07:32
+* Spring Boot Oracle Database Example 12:46
+* Spring Boot Redis Example 06:48
+* Spring Boot Neo4J Example 08:50
+* Spring Boot Cassandra Example 10:17
+* Spring Boot Active MQ Example 09:15
+* Spring Boot RabbitMQ Example 11:56
+* Spring Framework Guru - August 2017 Group Coaching Call 29:49
+
+#### Appendix A: Using GitHub • 1 clases • 1min
+
+* Git and GitHub Basics - Start here! 00:37
+
+#### Appendix B: Spring Framework YouTube Tutorials • 3 clases • 1h 26min
+
+* RESTful Webservices with Spring MVC 5 49:47
+* Dependency Injection Best Practices with Spring 18:49
+* Introduction to Testing with Spring 17:28
