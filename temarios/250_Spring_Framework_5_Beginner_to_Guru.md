@@ -18,7 +18,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 
 35 secciones • 524 clases • 56h 59m de duración total
 
-#### Introduction to Spring Framework 5: Beginner to Guru 9 clases • 43 min
+#### 1. Introduction to Spring Framework 5: Beginner to Guru 9 clases • 43 min
 
 * Getting the Most out of Your Spring Framework 5 Course! 10:12
 * Spring Framework 5 - Course Introduction 04:15
@@ -30,7 +30,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Getting Help with the Spring Framework 06:06
 * Course Slack Room - Chat Live with Me and Other Gurus! 00:57
 
-#### Building a Spring Boot Web App • 19 clases • 2h 24min
+#### 2. Building a Spring Boot Web App • 19 clases • 2h 24min
 
 * Introduction 03:14
 * Spring Initializer 15:25
@@ -55,7 +55,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Task Planning 05:47
 * Conclusion 00:32
 
-#### Dependency Injection with Spring • 24 clases • 2h 54min
+#### 3. Dependency Injection with Spring • 24 clases • 2h 54min
 
 * Introduction 02:15
 * SOLID Principles of OOP 09:52
@@ -83,7 +83,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Implement Base Entity 04:56
 * Conclusion 01:00
 
-#### Building A Spring Boot Jokes App • 16 clases • 1h 21min
+#### 4. Building A Spring Boot Jokes App • 16 clases • 1h 21min
 
 * Introduction to Building a Spring Boot Jokes App 02:39
 * Assignment - Build a Spring Boot Jokes App 02:15
@@ -102,7 +102,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Create Owner Page and Controller 05:33
 * Conclusion 01:20
 
-#### Spring Framework Configuration • 17 clases • 1h 52min
+#### 5. Spring Framework Configuration • 17 clases • 1h 52min
 
 * Introduction to Spring Framework Configuration 00:40
 * Spring Configuration Options 05:11
@@ -122,7 +122,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Auto Generate Map IDs 12:08
 * Conclusion 01:46
 
-#### External Properties with Spring Framework • 10 clases • 48min
+#### 6. External Properties with Spring Framework • 10 clases • 48min
 
 * Section Overview 01:30
 * Property Source 08:38
@@ -135,7 +135,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Boot Profile Properties 06:15
 * Conclusion 01:27
 
-#### Web Development with Spring MVC • 32 clases • 3h 20min
+#### 7. Web Development with Spring MVC • 32 clases • 3h 20min
 
 * Introduction to Web Development with Spring MVC 02:58
 * Assignment: Create a Recipe Project using Spring Boot 01:29
@@ -170,7 +170,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Fixing Broken Links 10:00
 * Conclusion 01:41
 
-#### JPA Data Modeling with Spring and Hibernate • 32 clases • 3h 46min
+#### 8. JPA Data Modeling with Spring and Hibernate • 32 clases • 3h 46min
 
 * Introduction - JPA Data Modeling with Spring and Hibernate 01:34
 * JPA Entity Relationships 10:44
@@ -205,7 +205,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Using Spring Profiles for Configuration 09:30
 * Conclusion 01:01
 
-#### Project Lombok • 9 clases • 52min
+#### 9. Project Lombok • 9 clases • 52min
 
 * Introduction to Project Lombok 01:46
 * Project Lombok Features 09:30
@@ -239,7 +239,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Bug - JUnit 5 Tests not running from Maven 10:45
 * Conclusion 00:51
 
-#### CRUD Operations with Spring MVC • 33 clases • 4h 43min
+#### 10. CRUD Operations with Spring MVC • 33 clases • 4h 43min
 
 * Introduction 01:23
 * Using WebJars with Spring Boot 05:12
@@ -275,7 +275,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Task Planning 08:19
 * Conclusion 01:58
 
-#### Validation and Constraints with Spring MVC • 23 clases • 2h 15min
+#### 11. Validation and Constraints with Spring MVC • 23 clases • 2h 15min
 
 * Introduction to Validation and Constraints with Spring MVC 01:44
 * Overview of Exception Handling 08:46
@@ -301,7 +301,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Pet Clinic - Implement Vets JSON Endpoint 05:05
 * Conclusion 02:14
 
-#### Introduction to Docker • 11 clases • 59min
+#### 12. Introduction to Docker • 11 clases • 59min
 
 * Course Extra - Docker 03:10
 * Discussion about Docker with Rob A 14:08
@@ -315,7 +315,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Assignment - Run Hello World Nginx 01:01
 * Conclusion 01:04
 
-#### Working with Containers and Images • 15 clases • 1h 30min
+#### 13. Working with Containers and Images • 15 clases • 1h 30min
 
 * Introduction 01:53
 * Running Mongo DB Docker Container 10:01
@@ -333,7 +333,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Flash Cards 06:56
 * Conclusion 01:49
 
-#### Running Spring Boot in a Centos Image • 10 clases • 48min
+#### 14. Running Spring Boot in a Centos Image • 10 clases • 48min
 
 * Introduction 00:53
 * Preparing CentOS for Java development 08:25
@@ -346,7 +346,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Conclusion 01:01
 * Docker Section Conclusion 01:51
 
-#### Introduction and Installation of MySQL • 12 clases • 1h 5min
+#### 15. Introduction and Installation of MySQL • 12 clases • 1h 5min
 
 * Introduction 02:00
 * History of MySQL 10:33
@@ -361,7 +361,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * MySQL Linux Installation Ubuntu 03:21
 * MySQL Linux Installation CentOS 04:51
 
-#### Connecting to MySQL • 8 clases • 32min
+#### 16. Connecting to MySQL • 8 clases • 32min
 
 * Introduction 01:58
 * Connecting to MySQL Overview 07:41
@@ -372,7 +372,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * MySQL Workbench OSX Installation 07:14
 * MySQL Workbench Linux Installation Quick Start 00:49
 
-#### Using MySQL with Spring Boot • 11 clases • 1h 1min
+#### 17. Using MySQL with Spring Boot • 11 clases • 1h 1min
 
 * Introduction 02:02
 * Introduction to MySQL 09:29
@@ -386,7 +386,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Refactor Database Initialization for MySQL 07:52
 * Conclusion 01:37
 
-#### Spring Data MongoDB • 10 clases • 47min
+#### 18. Spring Data MongoDB • 10 clases • 47min
 
 * Introduction to Spring Data MongoDB 01:43
 * Introduction to MongoDB 06:40
@@ -399,7 +399,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Integration Testing with MongoDB 06:37
 * Conclusion 01:36
 
-#### Introduction to Reactive Programming • 6 clases • 41min
+#### 19. Introduction to Reactive Programming • 6 clases • 41min
 
 * Introduction to Reactive Programming with Spring Framework 5 01:00
 * Reactive Manifesto 12:18
@@ -408,7 +408,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Reactive Programming Examples 08:10
 * Conclusion 01:11
 
-#### Reactive Programming with Spring and MongoDB • 15 clases • 1h 24min
+#### 20. Reactive Programming with Spring and MongoDB • 15 clases • 1h 24min
 
 * Introduction 01:51
 * Reactive Repositories 06:38
@@ -426,7 +426,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Assignment Review - Refactor Image Service 09:16
 * Conclusion 01:12
 
-#### Introduction to Spring Framework WebFlux • 16 clases • 1h 11min
+#### 21. Introduction to Spring Framework WebFlux • 16 clases • 1h 11min
 
 * Introduction to Spring Web Flux 02:18
 * Spring WebFlux Dependencies 06:15
@@ -445,7 +445,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Introduction to Spring WebTestClient 05:15
 * Spring WebFlux Conclusion 01:15
 
-#### Introduction to RESTFul Web Services • 12 clases • 1h 7min
+#### 22. Introduction to RESTFul Web Services • 12 clases • 1h 7min
 
 * Introduction to RESTFul Web Services 03:15
 * Beginners Guide to REST 08:49
@@ -460,7 +460,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Going Reactive with Spring WebClient 06:34
 * Conclusion 01:01
 
-#### RESTFul WebServices with Spring MVC • 22 clases • 1h 51min
+#### 23. RESTFul WebServices with Spring MVC • 22 clases • 1h 51min
 
 * Introduction to RESTFul Web Services with Spring MVC 02:45
 * New Spring Boot Project 03:58
@@ -485,7 +485,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Assignment Review 12:32
 * Conclusion 01:19
 
-#### Using Swagger with Spring Boot • 11 clases • 49min
+#### 24. Using Swagger with Spring Boot • 11 clases • 49min
 
 * Introduction to Swagger 01:08
 * What is Swagger 08:29
@@ -499,7 +499,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Swagger Code Gen 06:43
 * Conclusion 01:43
 
-#### RESTFul WebServices with Spring WebFlux • 19 clases • 1h 49min
+#### 25. RESTFul WebServices with Spring WebFlux • 19 clases • 1h 49min
 
 * Introduction 01:42
 * New Spring Boot Project 04:00
@@ -521,7 +521,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Assignment Review: Implement PATCH for Vendors 10:41
 * Conclusion 01:38
 
-#### Spring MVC Content Negotiation • 9 clases • 1h 4min
+#### 26. Spring MVC Content Negotiation • 9 clases • 1h 4min
 
 * Introduction 01:28
 * Spring MVC Content Negotiation Overview 06:56
@@ -533,7 +533,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Testing and Running JAXB Generated Classes in Spring Boot Application 09:35
 * Conclusion 01:20
 
-#### Spring MVC REST Docs • 16 clases • 1h 18min
+#### 27. Spring MVC REST Docs • 16 clases • 1h 18min
 
 * Introduction 02:01
 * Spring REST Docs Introduction 05:06
@@ -552,7 +552,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Assignment Review 07:24
 * Conclusion 01:53
 
-#### JMS Messaging • 14 clases • 1h 33min
+#### 28. JMS Messaging • 14 clases • 1h 33min
 
 * Introduction 02:38
 * Introduction to JMS 12:29
@@ -569,7 +569,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * JMS and Spring Message Data Types 07:14
 * Conclusion 01:49
 
-#### Troubleshooting Spring • 10 clases • 1h 55min
+#### 29. Troubleshooting Spring • 10 clases • 1h 55min
 
 * Debugging Thymeleaf 06:43
 * Problems with Spring Security and H2 Database Console 09:45
@@ -582,7 +582,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Missing tables in H2 Console 07:17
 * Troubleshooting Maven Release Plugin 18:42
 
-#### DEPRECATED - 2 - Building a Spring Boot Web App • 17 clases • 1h 34min
+#### 30. DEPRECATED - 2 - Building a Spring Boot Web App • 17 clases • 1h 34min
 
 * Introduction to Building a Spring Boot Web App 03:29
 * Spring Initializer 04:55
@@ -602,7 +602,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Assignment Review - Display List of Authors 06:39
 * Conclusion 01:03
 
-#### DEPRECATED - 3 - Dependency Injection with the Spring Framework • 17 clases • 1h 50min
+#### 31. DEPRECATED - 3 - Dependency Injection with the Spring Framework • 17 clases • 1h 50min
 
 * Introduction to Dependency Injection with Spring 02:15
 * SOLID Principles of OOP 09:52
@@ -622,7 +622,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Flashcards 05:46
 * Interface Naming Conventions 07:59
 
-#### Spring Boot Cookbook • 13 clases • 2h 12min
+#### 32. Spring Boot Cookbook • 13 clases • 2h 12min
 
 * Spring Boot Cookbook Introduction 01:28
 * Spring Boot Mongo DB 06:04
@@ -638,11 +638,11 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Spring Boot RabbitMQ Example 11:56
 * Spring Framework Guru - August 2017 Group Coaching Call 29:49
 
-#### Appendix A: Using GitHub • 1 clases • 1min
+#### 33. Appendix A: Using GitHub • 1 clases • 1min
 
 * Git and GitHub Basics - Start here! 00:37
 
-#### Appendix B: Spring Framework YouTube Tutorials • 3 clases • 1h 26min
+#### 34. Appendix B: Spring Framework YouTube Tutorials • 3 clases • 1h 26min
 
 * RESTful Webservices with Spring MVC 5 49:47
 * Dependency Injection Best Practices with Spring 18:49
