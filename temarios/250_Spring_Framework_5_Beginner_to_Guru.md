@@ -30,7 +30,7 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Getting Help with the Spring Framework 06:06
 * Course Slack Room - Chat Live with Me and Other Gurus! 00:57
 
-#### 2. Building a Spring Boot Web App • 19 clases • 2h 24min
+#### 2. [Building a Spring Boot Web App](250_Spring_Framework_5_Beginner_to_Guru/02_Building_a_Spring_Boot_Web_App.md) • 19 clases • 2h 24min
 
 * Introduction 03:14
 * Spring Initializer 15:25
