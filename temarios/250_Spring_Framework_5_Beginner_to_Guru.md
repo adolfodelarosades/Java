@@ -649,11 +649,14 @@ Spring Framework 5: Aprenderá Spring Framework 5, Spring Boot 2, Spring MVC, Sp
 * Introduction to Testing with Spring 17:28
 
 
-Requisitos
-Se requieren conocimientos básicos de Java
-El conocimiento HTML es muy útil
-El conocimiento de SQL y bases de datos es útil
-Descripción
+#### Requisitos
+
+* Se requieren conocimientos básicos de Java
+* El conocimiento HTML es muy útil
+* El conocimiento de SQL y bases de datos es útil
+
+#### Descripción
+
 Aprenda Spring con el curso más moderno y completo disponible para Spring Framework 5 y Spring Boot 2. Verá cómo construir múltiples aplicaciones del mundo real usando Spring Framework 5.
 
 Este es el único curso importante de Spring Framework en Udemy desarrollado completamente en la versión 5 de Spring Framework.
@@ -678,41 +681,26 @@ Este curso le muestra las últimas tecnologías de programación de Spring y las
 
 ★★★★★ Calidad incomparable. El gran volumen de contenido de este curso es absurdo. Hay tantos recursos únicos que puede aprovechar para aprender Spring. Nunca he visto a un instructor trabajar tan duro para proporcionar a sus estudiantes el valor de un curso.
 
-Dentro de este curso
+##### Dentro de este curso
 
 Las tecnologías en demanda que utilizará para crear aplicaciones Spring Framework incluyen:
 
-Marco de primavera 5
-
-Bota de primavera 2
-
-Spring Data JPA
-
-Primavera MVC
-
-Primavera MockMVC
-
-Spring WebFlux
-
-Cliente web Spring
-
-Spring Data MongoDB
-
-Resto de primavera
-
-Hibernar
-
-Proyecto Lombok
-
-MapStruct
-
-Maven
-
-Gradle
-
-JUnit 4 y JUnit 5
-
-Mockito
+* Spring Framework 5
+* Spring Boot 2
+* Spring Data JPA
+* Spring MVC
+* Spring MockMVC
+* Spring WebFlux
+* Spring Web Client
+* Spring Data MongoDB
+* Spring RestDocs
+* Hibernate
+* Project Lombok
+* MapStruct
+* Maven
+* Gradle
+* JUnit 4 and JUnit 5
+* Mockito
 
 Todos los ejemplos de código fuente utilizados en este curso se han desarrollado utilizando la última versión de Spring Framework: Spring Framework 5 y Spring Boot 2.
 
@@ -720,11 +708,11 @@ Verá cómo se realiza el desarrollo moderno de Spring Framework al aprovechar l
 
 ¡Entra y crea una aplicación Spring MVC con Spring Boot!
 
-Saltaremos directamente al desarrollo web con Spring Framework. Le mostraré cómo iniciar un proyecto de Spring Boot utilizando Spring Initializr. Luego, avanzaremos paso a paso para crear una aplicación web simple de libro / autor.
+Saltaremos directamente al desarrollo web con Spring Framework. Le mostraré cómo iniciar un proyecto de Spring Boot utilizando Spring Initializr. Luego, avanzaremos paso a paso para crear una aplicación web simple de libro/autor.
 
 Verá lo fácil que es usar Spring Boot, Spring MVC y Spring Data JPA para crear una aplicación web funcional que se ejecute en Tomcat con una base de datos H2 en memoria.
 
-¡Utilice el desarrollo basado en pruebas!
+##### Use Test Driven Development!
 
 Además de enseñarle Spring Framework 5, aprenderá sobre las mejores prácticas modernas utilizadas en el desarrollo de aplicaciones empresariales.
 
@@ -738,7 +726,7 @@ También verá cómo se puede utilizar el contexto Spring para pruebas de integr
 
 Estas técnicas son las mejores prácticas utilizadas por empresas de todo el mundo para crear y administrar aplicaciones Spring Framework a gran escala.
 
-Código fuente de GitHub
+##### GitHub Source Code
 
 Tendrá acceso completo a todos los ejemplos de código fuente utilizados en el curso.
 
@@ -754,21 +742,21 @@ De hecho, tendrá acceso a 24 (¡y en aumento!) Diferentes repositorios de GitHu
 
 Y, le recomendamos que bifurque mis repositorios de GitHub para que pueda compartir las aplicaciones Spring Framework, que creó, con futuros empleadores.
 
-Construcciones de integración continua
+##### Continuous Integration Builds
 
-Como usamos GitHub y tenemos una gran cobertura de pruebas, también les muestro lo fácil que es vert up Integración continua se construye con CircleCI.
+Como usamos GitHub y tenemos una gran cobertura de pruebas, también les muestro lo fácil que es Continuous Integration builds with CircleCI. 
 
 Las compilaciones de integración continua son otra de las mejores prácticas utilizadas por los desarrolladores empresariales.
 
 El uso de CircleCI hace que sus compilaciones de CI sean instantáneas.
 
-Proyecto Lombok
+##### Project Lombok
 
 Todos sabemos que el desarrollo de Java puede requerir mucho código de placa de caldera. Es simplemente la naturaleza de Java.
 
 ¿Le gustaría ver cómo recortar el código de la placa de su caldera usando Project Lombok?
 
-Spring Data JPA e Hibernate
+##### Spring Data JPA and Hibernate
 
 Spring MVC e Hibernate han sido durante mucho tiempo piedras angulares de Spring Framework. Aprenderá a usar Spring MVC, Spring Data JPA e Hibernate para crear una aplicación web del mundo real. Aprenderá sobre la configuración de Hibernate y sobre el mapeo de entidades JPA.
 
@@ -776,17 +764,17 @@ El motor de plantillas Thymeleaf es muy popular entre la comunidad de Spring. Ve
 
 Si bien Bootstrap CSS no es un enfoque del curso, aprovecharemos Bootstrap CSS para que nuestras páginas web se vean increíbles.
 
-Primavera MVC
+##### Spring MVC
 
 Spring MVC tiene muchas capacidades sólidas.
 
-Empiezo mostrándote cómo crear una aplicación de recetas (usando TDD, por supuesto).
+Empiezo mostrándote cómo crear una recipe application (usando TDD, por supuesto).
 
 Inicialmente, todo es un desarrollo de camino feliz. Regresamos y agregamos manejo de excepciones personalizado, validación de formularios e internacionalización.
 
 En el curso también aprenderá a utilizar Spring MVC para crear API RESTful.
 
-Programación reactiva
+##### Reactive Programming
 
 Un gran tema de Spring Framework 5 es la programación reactiva.
 
@@ -796,9 +784,9 @@ Luego tomamos la aplicación MongoDB que creamos y la convertimos en una aplicac
 
 Podrá ver paso a paso cómo convertir una aplicación Spring MVC tradicional en una aplicación reactiva de extremo a extremo utilizando el marco WebFlux, que es nuevo en Spring Framework 5.
 
-Clínica de mascotas de primavera
+##### Spring Pet Clinic
 
-Spring Pet Clinic es una aplicación de referencia clásica que se utiliza para demostrar las mejores prácticas. La aplicación Pet Clinic tiene su origen en la comunidad J2EE / JEE.
+Spring Pet Clinic es una aplicación de referencia clásica que se utiliza para demostrar las mejores prácticas. La aplicación Pet Clinic tiene su origen en la comunidad J2EE/JEE.
 
 El equipo de Spring Framework tomó la aplicación original de Pet Clinic y la reconstruyó con Spring para demostrar las mejores prácticas.
 
@@ -822,11 +810,11 @@ A partir de ahí, usamos los problemas de GitHub para completar las asignaciones
 
 Verá cómo crear una aplicación Spring Framework, paso a paso, utilizando las mejores prácticas en el desarrollo de software.
 
-Curso adicional - IntelliJ IDEA Ultimate
+##### Course Extra - IntelliJ IDEA Ultimate
 
 ¡Los estudiantes que se inscriban en el curso pueden recibir una licencia de prueba gratuita de 4 meses para IntelliJ IDEA Ultimate! Obtenga experiencia práctica utilizando el IDE de Java preferido por los profesionales de Spring Framework.
 
-Curso adicional: acceso a una comunidad privada de Slack
+##### Course Extra - Access to a Private Slack Community
 
 No solo te estás inscribiendo en un curso -> Te estás uniendo a una comunidad de Spring Learning.
 
@@ -838,33 +826,24 @@ Esta es la comunidad en línea más grande de personas que aprenden Spring en el
 
 ¡Con su inscripción, puede unirse a esta comunidad de increíbles gurús!
 
-Curso adicional - ¡Libro de cocina Spring Boot!
+#### Course Extra - Spring Boot Cookbook!
 
-Dentro de este curso, incluyo un libro de cocina Spring Boot. Tendrá ejemplos completos del uso de Spring Framework con tecnologías populares de código abierto. Cuando lo contraten como desarrollador de Spring Framework, ¡tendrá ejemplos de Spring Framework listos para usar!
+Dentro de este curso, incluyo un Spring Boot Cookbook. Tendrá ejemplos completos del uso de Spring Framework con tecnologías populares de código abierto. Cuando lo contraten como desarrollador de Spring Framework, ¡tendrá ejemplos de Spring Framework listos para usar!
 
-Mi libro de cocina de Spring Boot incluye ejemplos de proyectos de Spring Boot para:
+Spring Boot Cookbook incluye ejemplos de proyectos de Spring Boot para:
 
-MongoDB
+* MongoDB
+* MySQL
+* Postgres
+* Maria DB
+* DB2 Express
+* Neo4J
+* Redis
+* Cassandra
+* ActiveMQ
+* RabbitMQ
 
-MySQL
-
-Postgres
-
-Maria DB
-
-DB2 Express
-
-Neo4J
-
-Redis
-
-Casandra
-
-ActiveMQ
-
-RabbitMQ
-
-Curso adicional: ¡Aprenda Docker!
+##### Course Extra - Learn Docker!
 
 ¡Docker es una tecnología emocionante que está en llamas ahora mismo!
 
@@ -872,23 +851,15 @@ Como extra del curso, incluyo las primeras 3 secciones de mi Docker para Jav mej
 
 Para los desarrolladores de Java, Docker realmente cambia las reglas del juego.
 
-Subtítulos ocultos / subtítulos
+##### Closed Captioning / Subtitles
 
 ¡Hay subtítulos en inglés disponibles para todos los videos del curso!
 
-Descargas PDF
+##### PDF Downloads
 
 Todas las presentaciones principales están disponibles para que las descargue como archivos PDF.
 
-Acceso de por vida
-
-¡Cuando compre este curso, recibirá acceso de por vida! Puede iniciar sesión en cualquier momento desde cualquier lugar para acceder al contenido del curso.
-
-Sin riesgo: garantía de devolución de dinero
-
-Puedes comprar este curso sin riesgo. Si no está satisfecho con el curso, por cualquier motivo, puede obtener un reembolso completo. El curso tiene una garantía de devolución de dinero de 30 días.
-
-Prepare su carrera de programación para el futuro
+##### Prepare su carrera de programación para el futuro
 
 Existe una gran demanda de desarrolladores de Spring Framework. Las descargas de Spring Boot aumentaron un 425% año tras año, mientras que Gartner Research llama a Java EE "Obsoleto".
 
@@ -908,9 +879,8 @@ Spring Framework 5 está repleto de funciones nuevas e innovadoras que lo convie
 
 ★★★★★ La conferencia es tan asombrosa. Aprendí esto durante aproximadamente un mes con excelentes resultados. Conseguí un nuevo trabajo como desarrollador backend. ¡Gracias GURU! ¡Sigue trabajando para otra gran conferencia!
 
-
-
 Prepara tu carrera de programación para el futuro. ¡Empiece a aprender a crear aplicaciones modernas con Spring Framework e inscríbase en este curso hoy mismo!
 
-¿Para quién es este curso?
+#### ¿Para quién es este curso?
+
 Este curso es ideal para desarrolladores de Java que deseen utilizar Spring Framework para el desarrollo de aplicaciones empresariales.
