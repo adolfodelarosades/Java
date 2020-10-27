@@ -173,6 +173,8 @@ Esta es una forma rápida y práctica de verificar la configuración y las depen
 
 Otra característica más pequeña de Spring Initializr, pero que ha sido bien recibida por numerosos desarrolladores, es el modo oscuro. Al deslizar el interruptor de la interfaz de usuario oscura en la parte superior de la página hacia la derecha, cambia al modo oscuro de Initializr y lo convierte en el predeterminado cada vez que visita la página. Es una característica pequeña, pero si mantiene su máquina en modo oscuro en cualquier otro lugar, ciertamente hace que cargar Initializr sea menos discordante y más agradable. ¡Querrás seguir regresando!
 
+![02-06](images/02-06.png)
+
 **NOTA**
 
 Aparte de la clase de aplicación principal y su método principal, más una prueba vacía, Spring Initializr no genera código por usted; genera el proyecto para usted, según su orientación. Es una pequeña distinción, pero muy importante: la generación de código tiene resultados muy variados y, a menudo, lo paraliza en el momento en que comienza a hacer cambios. Al generar la estructura del proyecto, incluido el archivo de compilación con las dependencias especificadas, Initializr le proporciona un comienzo en ejecución para escribir el código que necesita para aprovechar la configuración automática de Spring Boot. Autoconfig te da superpoderes sin la camisa de fuerza.
@@ -181,14 +183,85 @@ A continuación, haga clic en el botón Generar para generar, empaquetar y desca
 
 ## Línea de comandos directa de Outta (Outta Commandline)
 
+Si felizmente pasa tanto tiempo como sea posible en la línea de comando o desea eventualmente crear un proyecto de script, la Interfaz de línea de comando (CLI) de Spring Boot fue hecha para usted. La CLI de Spring Boot tiene muchas capacidades poderosas, pero por ahora, limitaremos nuestro enfoque a crear un nuevo proyecto de arranque.
+
+#### INSTALACIÓN DE LA CLI SPRING BOOT
+
+Quizás la forma más fácil de instalar Spring Boot CLI es a través de SDKMAN !, como con su JDK, las utilidades de Kotlin y más. Desde la ventana de su terminal, puede ejecutar
+
+```sh
+sdk list
+```
+
+para ver todos los distintos paquetes disponibles para la instalación; La Figura 2-7 muestra la entrada de la CLI de Spring Boot. Next, run
+
+```sh
+sdk list springboot
+```
+
+para ver las versiones disponibles de Spring Boot CLI, luego instale la más reciente (actual) con
+
+```sh
+sdk install springboot
+```
+
+¡Si no proporciona un identificador de versión específico con el SDKMAN! comando `sdk install <tool> <version_identifier>`, SDKMAN! normalmente instala la última versión de producción recomendada del lenguaje/herramienta. Esto tiene diferentes significados para diferentes paquetes compatibles; a modo de ejemplo, se instalará la última versión de soporte a largo plazo (LTS) de Java, no una versión más reciente (no LTS) que pueda estar disponible. Esto se debe a que se lanza una nueva versión numerada de Java cada seis meses, y periódicamente, una versión se designa como una versión LTS, lo que significa que a menudo hay una o más versiones más nuevas que solo son oficialmente compatibles durante seis meses cada una (para la evaluación de funciones, pruebas, o incluso implementaciones de producción) mientras que una versión de LTS en particular es totalmente compatible con actualizaciones y correcciones de errores.
+
+La nota anterior es una generalización que puede variar un poco entre los proveedores de JDK, aunque la mayoría no se aleja mucho (si es que lo hace) de las designaciones habituales. Se han dedicado charlas enteras a los detalles, pero para nuestros propósitos aquí, no tienen ningún efecto.
+
+![02-07](images/02-07.png)
+
+Una vez que haya instalado Spring Boot CLI, puede crear el mismo proyecto que creamos anteriormente con el siguiente comando:
+
+```sh
+spring init
+```
+
+Para extraer el proyecto comprimido en un directorio llamado *demo*, puede ejecutar el siguiente comando:
+
+```sh
+unzip demo.zip -d demo
+```
+
+Espera, ¿cómo puede ser tan fácil? En una palabra, valores predeterminados. Spring CLI usa la misma configuración predeterminada que Spring Initializr (Maven, Java, etc.), lo que le permite proporcionar solo argumentos para los valores que desea cambiar. Proporcionemos valores específicos para algunos de esos valores predeterminados (y agreguemos un giro útil para la extracción de proyectos) solo para ver mejor lo que está involucrado.
+
+```sh
+spring init -a demo -l java --build maven demo
+```
+
+Todavía estamos inicializando un proyecto con Spring CLI, pero ahora proporcionamos los siguientes argumentos:
+
+* `-a demo` (o `--artifactId demo`) nos permite proporcionar un ID de artefacto para el proyecto; en este caso, lo llamamos "demo"
+
+* `-l java` (o `--language java`) nos permite especificar Java, Kotlin o Groovy 1 como el lenguaje principal que usaremos para este proyecto.
+
+* `--build` es la bandera para el argumento del sistema de construcción; los valores válidos son `maven` y `gradle`
+
+* `-x demo` solicita a la CLI que extraiga el archivo .zip del proyecto resultante devuelto por Initializr; tenga en cuenta que la `-x` es opcional y que especificar una etiqueta de texto sin una extensión (como lo hemos hecho aquí) se infiere útilmente como un directorio de extracción
+
+**NOTA**
+
+Todas estas opciones se pueden revisar más a fondo ejecutando `spring help init` desde la línea de comando.
+
+Las cosas se complican un poco más al especificar dependencias. Como puede imaginar, es difícil superar la facilidad de elegirlos del "menú" presentado por Spring Initializr. Pero la flexibilidad de Spring CLI es extremadamente útil para inicios rápidos, secuencias de comandos y canalizaciones de compilación.
+
+Una cosa más: de forma predeterminada, la CLI aprovecha Initializr para proporcionar sus capacidades de creación de proyectos, lo que significa que los proyectos creados mediante cualquiera de los mecanismos (CLI o mediante la página web de Initializr) son idénticos. Esa consistencia es absolutamente esencial en un taller que utiliza directamente las capacidades de Spring Initializr.
+
+Sin embargo, ocasionalmente, una organización controla estrictamente qué dependencias sus desarrolladores pueden incluso usar para crear proyectos. Para ser completamente honesto, este enfoque me entristece y se siente muy limitado por el tiempo, lo que impide la agilidad de una organización y la capacidad de respuesta del usuario/mercado. Si está en una organización de este tipo, esto complica su capacidad para "hacer el trabajo" en cualquier cosa que se proponga lograr.
+
+Siendo ese el caso, es posible crear su propio generador de proyectos (incluso clonando el repositorio para Spring Initializr) y usarlo directamente a través de la página web resultante ... o solo exponer la parte de la API REST y utilizarla desde Spring CLI. Para hacerlo, simplemente agregue este parámetro a los comandos mostrados anteriormente:
+
+```sh
+--target https://insert.your.url.here.org (reemplazando con su URL válida, por supuesto)
+```
 
 ## Permanecer en entornos de desarrollo integrados (IDE)
 ## Cruising down main()
 ## Resumen
 
 
-![02-06](images/02-06.png)
-![02-07](images/02-07.png)
+
+
 ![02-08](images/02-08.png)
 ![02-09](images/02-09.png)
 ![02-10](images/02-10.png)
