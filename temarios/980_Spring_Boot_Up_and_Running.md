@@ -31,7 +31,7 @@ Mark Heckler de VMware, la compañía detrás de Spring, lo guía a través de l
    * Autoconfiguration
 * Summary
 
-#### 2. Choosing Your Tools and Getting Started
+#### 2. [Choosing Your Tools and Getting Started](980_Spring_Boot_Up_and_Running/02_Choosing_Your_Tools_and_Getting_Started.md)
 
 * Maven or Gradle?
    * Apache Maven
