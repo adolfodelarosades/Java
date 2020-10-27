@@ -256,13 +256,76 @@ Siendo ese el caso, es posible crear su propio generador de proyectos (incluso c
 ```
 
 ## Permanecer en entornos de desarrollo integrados (IDE)
+
+Independientemente de cómo cree su proyecto Spring Boot, deberá abrirlo y escribir un código para crear una aplicación útil.
+
+Hay tres IDE principales y numerosos editores de texto que hacen un trabajo respetable al ayudarlo como desarrollador. Los IDE incluyen, pero no se limitan a, [Apache NetBeans](https://netbeans.apache.org/), [Eclipse](https://www.eclipse.org/) e [IntelliJ IDEA](https://www.jetbrains.com/idea/). Los tres son software de código abierto (OSS) y los tres son gratuitos en muchas circunstancias 2
+
+En este libro, como en mi vida diaria, utilizo principalmente IntelliJ Ultimate Edition. En realidad, no existe una elección incorrecta, sino una preferencia personal (o mandato o preferencia organizacional) para elegir un IDE, así que utilice lo que mejor se adapte a usted y a sus gustos. La mayoría de los conceptos se transfieren bastante bien entre las principales ofertas.
+
+También hay varios editores que han obtenido un gran número de seguidores entre los desarrolladores. Algunas, como [Sublime Text](https://www.sublimetext.com/), son aplicaciones pagas que tienen muchos seguidores debido a su calidad y longevidad. Otros participantes más recientes en el campo, como [Atom](https://atom.io/) (creado por Github, que ahora es propiedad de Microsoft) y [Visual Studio Code](https://code.visualstudio.com/) (abreviado a VSCode, creado por Microsoft) están ganando capacidades y seguidores leales rápidamente.
+
+En este libro, de vez en cuando utilizo VSCode o su homólogo creado a partir de la misma base de código pero con la telemetría/seguimiento desactivado, [VSCodium](https://vscodium.com/). Para admitir algunas de las características que la mayoría de los desarrolladores esperan y/o requieren de su entorno de desarrollo, agrego las siguientes extensiones a VSCode/VSCodium:
+
+* [Spring Boot Extension Pack (Pivotal)](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack): esto incluye varias otras extensiones, incluido Spring Initializr Java Support, Spring Boot Tools y Spring Boot Dashboard, que facilitan la creación, edición y administración de aplicaciones Spring Boot dentro de VSCode respectivamente
+
+* [Depurador para Java (Microsoft)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug): dependencia del panel de Spring Boot
+
+* [IntelliJ IDEA Keybindings (Keisuke Kato)](https://marketplace.visualstudio.com/items?itemName=k%E2%80%94kato.intellij-idea-keybindings): debido a que uso principalmente IntelliJ, esto me facilita cambiar entre los dos más fácilmente
+
+* [Soporte de lenguaje para Java ™ (Red Hat)](https://marketplace.visualstudio.com/items?itemName=redhat.java): dependencia de las herramientas Spring Boot
+
+* [Maven para Java (Microsoft)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven): facilita el uso de proyectos basados en Maven
+
+Hay otras extensiones que pueden resultarle útiles para manipular XML, Docker u otras tecnologías auxiliares, pero estas son las esenciales para nuestros propósitos actuales.
+
+Continuando con nuestro proyecto Spring Boot, querrá abrirlo en el IDE o editor de texto que elija. Para la mayoría de los ejemplos de este libro, usaremos IntelliJ IDEA, un IDE muy capaz (escrito en Java y Kotlin) producido por JetBrains. Si ya ha asociado su IDE con archivos de compilación del proyecto, puede hacer doble clic en el archivo pom.xml en el directorio de su proyecto (usando Finder en Mac, Explorador de archivos en Windows o uno de los varios administradores de archivos en Linux) y cargue el proyecto en su IDE automáticamente. De lo contrario, puede abrir el proyecto desde su IDE o editor de la manera recomendada por sus desarrolladores.
+
+**NOTA**
+
+Muchos IDE y editores ofrecen una forma de crear atajos de línea de comandos para iniciar y cargar, lo que abre su proyecto con un comando corto. Los ejemplos incluyen la idea de IntelliJ, el código de VSCode / VSCodium y los atajos de átomo de Atom.
+
 ## Cruising down main()
-## Resumen
 
-
-
+Ahora que hemos cargado el proyecto en nuestro IDE (o editor), echemos un vistazo a lo que hace que un proyecto Spring Boot (Figura 2-8) sea un poco diferente a una aplicación Java estándar.
 
 ![02-08](images/02-08.png)
+
+Una aplicación Java estándar contiene (por defecto) un método principal vacío estático público vacío. Cuando ejecutamos una aplicación Java, la JVM busca este método como punto de partida de la aplicación, y sin él, el inicio de la aplicación falla con un error como este que se muestra en la Figura 2-9.
+
 ![02-09](images/02-09.png)
+
+Por supuesto, puede colocar el código que se ejecutará al iniciar la aplicación en el método principal de una clase Java, y una aplicación Spring Boot hace exactamente eso. Al iniciarse, una aplicación Spring Boot verifica el entorno, configura la aplicación, crea el contexto inicial e inicia la aplicación Spring Boot. Lo hace mediante una única anotación de nivel superior y una única línea de código, como se muestra en la Figura 2-10.
+
 ![02-10](images/02-10.png)
+
+Nos sumergiremos bajo las cubiertas de estos mecanismos a medida que se desarrolle el libro. Por ahora, basta con decir que Boot le quita de las manos una gran cantidad de tediosa configuración de la aplicación durante el inicio de la aplicación por diseño y de forma predeterminada para que pueda comenzar rápidamente a escribir código significativo.
+
+## Resumen
+
+Este capítulo ha examinado algunas de las opciones de primera clase que tiene para crear aplicaciones Spring Boot. Ya sea que prefiera construir sus proyectos usando Maven o Gradle, escribir código en Java o Kotlin, o crear proyectos desde la interfaz web proporcionada por Spring Initializr o su socio de línea de comandos, Spring Boot CLI, tiene todo el poder y la facilidad de Spring Boot al alcance de su mano sin compromiso. También puede trabajar con proyectos de arranque utilizando una variedad impresionante de IDE y editores de texto con soporte Spring Boot de primer nivel.
+
+Como se explica aquí y en el capítulo 1, Spring Initializr trabaja arduamente para que su proyecto se cree rápida y fácilmente. Spring Boot contribuye de manera significativa a lo largo del ciclo de vida del desarrollo con su:
+
+* Gestión de dependencias simplificada, que entra en juego desde la creación del proyecto hasta el desarrollo y mantenimiento
+
+* Autoconfiguración que reduce/elimina drásticamente el texto estándar que de otro modo podría escribir antes de trabajar en el dominio del problema
+
+* Implementación simplificada que simplifica el empaquetado y la implementación
+
+Y todas estas capacidades son totalmente compatibles independientemente del sistema de compilación, el lenguaje o las opciones de la cadena de herramientas que realice en el camino. Es una combinación increíblemente flexible y poderosa.
+
+En el próximo capítulo, crearemos nuestra primera aplicación Spring Boot realmente significativa: una aplicación que proporciona una API REST.
+
+<hr>
+
+1 El soporte Groovy todavía se proporciona dentro de Spring Boot, pero no es tan ampliamente utilizado como Java o Kotlin
+
+2 Hay dos opciones disponibles: Community Edition (CE) y Ultimate Edition (UE). Community Edition admite el desarrollo de aplicaciones Java y Kotlin, pero para tener acceso a todo el soporte disponible de Spring, debe usar Ultimate Edition. Ciertos casos de uso califican para una licencia gratuita para UE o, por supuesto, también puede comprar una. Además, los tres brindan un excelente soporte para las aplicaciones Spring Boot.
+
+
+
+
+
+
 
