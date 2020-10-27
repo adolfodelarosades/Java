@@ -80,8 +80,58 @@ Comenzamos como de costumbre con Spring Initializr, como se muestra en la Figura
 
 ![03-01](images/03-01.png)
 
+Una vez que hayamos generado el proyecto en Initializr y guardado el archivo .zip resultante localmente, extraeremos los archivos del proyecto comprimidos, normalmente haciendo doble clic en el archivo `sbur-rest-demo.zip` que se descargó en su navegador de archivos o utilizando descomprimir desde una ventana de shell/terminal - y luego abra el proyecto ahora extraído en su IDE o editor de texto elegido para una vista similar a la Figura 3-2.
+
+![03-02](images/03-02.png)
+
+#### CREANDO UN DOMINIO SIMPLE
+
+Para *trabajar con* recursos, necesitaremos escribir código para *acomodar algunos recursos*. Comencemos por crear una clase de dominio muy simple que represente un recurso que queremos administrar.
+
+Soy un aficionado al café, como saben mis buenos amigos, esto ahora te incluye a ti. Con eso en mente, usaré un dominio de café, con una clase que representa un tipo particular de café, como dominio para este ejemplo.
+
+Comencemos por crear la clase `Coffee`. Esto es esencial para el ejemplo, ya que necesitamos un recurso de algún tipo para demostrar cómo administrar los recursos a través de una API REST. Pero la simplicidad o complejidad del dominio es secundaria al ejemplo, así que mantendré la sencillez para centrarme en el objetivo: la API REST resultante.
+
+Como se muestra en la Figura 3-3, la clase `Coffee` tiene dos variables miembro:
+
+* Un campo `id` utilizado para identificar de forma única un tipo particular de café.
+
+* Un campo `name` que describe el café por su nombre.
+
+![03-03](images/03-03.png)
+
+Declaro el campo `id` como `final` para que pueda asignarse solo una vez y nunca modificarse; como tal, esto también requiere que se asigne al crear una instancia de la clase `Coffee` e implica que no tiene un método mutador.
+
+Crearemos métodos de acceso y mutación - o métodos getter y setter, si prefiere llamarlos así, para el campo de `name`, que no se declara `final` y, por lo tanto, es mutable. Esta es una decisión de diseño discutible, pero satisface nuestras necesidades futuras para este ejemplo.
+
+Con eso, ahora tenemos un dominio básico en su lugar. A continuación, es hora de un REST.
 
 ### GET-ting
+
+Quizás el más utilizado de los verbos es `GET`. Así que comencemos (*get*) (juego de palabras).
+
+#### `@RESTCONTROLLER` EN POCAS PALABRAS
+
+Sin profundizar demasiado en el rabbithole, Spring MVC (Model-View-Controller) se creó para separar las preocupaciones entre los datos, su entrega y su presentación, asumiendo que las vistas se proporcionarían como una página web renderizada por el servidor. La anotación `@Controller` ayuda a unir las distintas piezas.
+
+`@Controller` es un estereotipo/alias para la anotación `@Component`, lo que significa que al iniciar la aplicación, un Spring Bean, un objeto creado y administrado por el contenedor Spring Inversion of Control (IoC) dentro de la aplicación, se crea a partir de esa clase. Las clases con anotaciones de `@Controller` acomodan un objeto `Model` para proporcionar datos basados en el modelo a la capa de presentación y trabajan con un `ViewResolver` para dirigir la aplicación para que muestre una vista en particular, según lo representa una tecnología de vista.
+
+**NOTA**
+
+Spring admite varias tecnologías de vista y motores de plantillas, que se tratan en un capítulo posterior.
+
+También es posible indicar a una clase `Controller` que devuelva una respuesta formateada como notación de objetos JavaScript (JSON) o como otro formato orientado a datos, como XML, simplemente agregando una anotación `@ResponseBody` a la clase o método (JSON de forma predeterminada). Esto da como resultado que el valor de retorno Objeto/Iterable de un método sea el *entire body* (cuerpo completo) del response a una solicitud web, en lugar de devolverse como parte del `Model`.
+
+La anotación `@RestController` es una anotación de conveniencia que combina `@Controller` con `@ResponseBody` en una sola anotación descriptiva, simplificando su código y haciendo que la intención sea más obvia. Una vez que hemos anotado una clase como `@RestController`, podemos comenzar a crear nuestra API REST.
+
+#### OCUPÉMONOS (LET’S `GET` BUSY)
+
+Las API REST tratan con objetos, y los objetos pueden venir solos o como un grupo de objetos relacionados. Para aprovechar nuestro escenario de café, es posible que desee recuperar un café en particular; en su lugar, es posible que desee recuperar todos los cafés, o todos los que se consideran tostados oscuros, que se encuentren dentro de un rango de identificadores o que incluyan "colombiano" en la descripción, por ejemplo. Para adaptarse a la necesidad de recuperar una instancia o más de una instancia de un objeto, es una buena práctica crear varios métodos en nuestro código.
+
+Comenzaré creando una lista de objetos `Coffee` para admitir el método que devuelve múltiples objetos `Coffee`, como se muestra en la Figura 3-4. Defino la variable que contiene este grupo de cafés como una `List` de objetos `Coffee`. Elijo `List` como la interfaz de nivel superior para mi tipo de variable miembro, pero en realidad asignaré una `ArrayList` vacía para usar dentro de la clase `RestApiDemoController`.
+
+![03-04](images/03-04.png)
+
 ### POST-ing
 ### PUT-ting
 ### DELETE-ing
@@ -89,9 +139,8 @@ Comenzamos como de costumbre con Spring Initializr, como se muestra en la Figura
 ## Confiar pero verificar
 ## Resumen
 
-![03-02](images/03-02.png)
-![03-03](images/03-03.png)
-![03-04](images/03-04.png)
+
+
 ![03-05](images/03-05.png)
 ![03-06](images/03-06.png)
 ![03-07](images/03-07.png)
