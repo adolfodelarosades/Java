@@ -48,7 +48,7 @@ Mark Heckler de VMware, la compañía detrás de Spring, lo guía a través de l
 * Cruising down main()
 * Summary
 
-#### 3. Creating Your first Spring Boot REST API
+#### 3. [Creating Your first Spring Boot REST API](980_Spring_Boot_Up_and_Running/03_Creating_Your_first_Spring_Boot_REST_API.md)
 
 * The Hows and Whys of APIs
 * What is REST and Why Does it Matter?
