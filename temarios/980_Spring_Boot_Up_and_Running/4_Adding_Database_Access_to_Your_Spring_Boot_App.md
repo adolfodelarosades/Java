@@ -166,7 +166,41 @@ Un enfoque alternativo para probar la funcionalidad, y una práctica recomendada
 
 ## Guardar y recuperar datos
 
+Una vez más hasta la brecha, queridos amigos, una vez más: accediendo a la API desde la línea de comandos usando HTTPie.
+
+Al consultar el endpoint de los cafés, los mismos cuatro cafés que se devuelven de nuestra base de datos H2 como antes, como se muestra en la Figura 4-11.
+
+![04-11](images/04-11.png)
+
+Copiar el campo id de uno de los cafés que se acaban de enumerar y pegarlo en una solicitud `GET` específica de café produce la salida que se muestra en la Figura 4-12.
+
+![04-12](images/04-12.png)
+
+En la Figura 4-13, Posteamos un nuevo café a la aplicación y su base de datos.
+
+![04-13](images/04-13.png)
+
+Como se discutió en el capítulo anterior, un comando `PUT` debería permitir actualizar un recurso existente o agregar uno nuevo si el recurso solicitado aún no existe. En la Figura 4-14, especifico el `id` del café que acabo de agregar y paso al comando un objeto JSON con un cambio en el nombre de ese café. Después de la actualización, el café con `id` "99999" ahora tiene un nombre de "Caribou Coffee" en lugar de "Kaldi’s Coffee", y el código de retorno es 200 (OK), como se esperaba.
+
+![04-14](images/04-14.png)
+
+A continuación, inicio una solicitud `PUT` similar, pero especifico un  `id` en el URI que no existe. La aplicación agrega un nuevo café a la base de datos de acuerdo con el comportamiento especificado por IETF y devuelve correctamente un estado HTTP de 201 (Created), como se muestra en la Figura 4-15.
+
+![04-15](images/04-15.png)
+
+Finalmente, pruebo la eliminación de un café específico emitiendo una solicitud `DELETE`, que devuelve solo un código de estado HTTP de 200 (OK) que indica que el recurso se eliminó con éxito y nada más, ya que el recurso ya no existe, según la Figura 4-16.
+
+![04-16](images/04-16.png)
+
+Para comprobar nuestro estado final, consultamos una vez más la lista completa de cafés (Figura 4-17). Como antes, ahora tenemos un café adicional que inicialmente no estaba en nuestro repositorio: Mötor Oil Coffee.
+
+![04-17](images/04-17.png)
+
 ## Un poco de pulido
+
+![04-18](images/04-18.png)
+
+![04-19](images/04-19.png)
 
 ## Resumen
 
@@ -174,13 +208,4 @@ Un enfoque alternativo para probar la funcionalidad, y una práctica recomendada
 
 
 
-![04-11](images/04-11.png)
-![04-12](images/04-12.png)
-![04-13](images/04-13.png)
-![04-14](images/04-14.png)
-![04-15](images/04-15.png)
-![04-16](images/04-16.png)
-![04-17](images/04-17.png)
-![04-18](images/04-18.png)
-![04-19](images/04-19.png)
 
