@@ -61,7 +61,7 @@ Mark Heckler de VMware, la compañía detrás de Spring, lo guía a través de l
 * Trust, but Verify
 * Summary
 
-#### 4. [Adding Database Access to Your Spring Boot App](980_Spring_Boot_Up_and_Running/4_Adding_Database_Access_to_Your_Spring_Boot_App.md)
+#### 4. [Adding Database Access to Your Spring Boot App](980_Spring_Boot_Up_and_Running/04_Adding_Database_Access_to_Your_Spring_Boot_App.md)
 
 * Priming Autoconfig for Database Access
 * What do We Hope to Gain?
@@ -71,7 +71,7 @@ Mark Heckler de VMware, la compañía detrás de Spring, lo guía a través de l
 * A Bit of Polishing
 * Summary
 
-#### 5. Configuring and Inspecting Your Spring Boot App
+#### 5. [Configuring and Inspecting Your Spring Boot App](980_Spring_Boot_Up_and_Running/05_Configuring_and_Inspecting_Your_Spring_Boot_App.md)
 
 * Application Configuration
    * @Value
