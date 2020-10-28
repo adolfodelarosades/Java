@@ -144,25 +144,93 @@ Como se muestra en la Figura 3-6, creo un método que devuelve un grupo iterable
 
 ![03-06](images/03-06.png)
 
+A la anotación `@RequestMapping`, agrego una especificación de ruta de `/coffees` y un tipo de método de `RequestMethod.GET`, lo que indica que el método responderá a las solicitudes con la ruta de `/coffees` y restringirá las solicitudes solo a las solicitudes HTTP GET. Este método maneja la recuperación de datos, pero no las actualizaciones de ningún tipo. Spring Boot, a través de las dependencias de Jackson incluidas en Spring Web, realiza la clasificación y la eliminación de la clasificación de objetos a JSON u otros formatos automáticamente.
+
+Podemos simplificar esto aún más usando otra anotación de conveniencia. El uso de `@GetMapping` incorpora la dirección para permitir solo solicitudes `GET`, lo que reduce el texto estándar y requiere que solo se especifique la ruta, incluso omitiendo la `path =` ya que no se requiere la eliminación de conflictos de parámetros. La Figura 3-7 muestra el resultado de este intercambio de anotaciones.
+
+![03-07](images/03-07.png)
+
+#### CONSEJOS ÚTILES SOBRE `@REQUESTMAPPING`
+
+`@RequestMapping` tiene varias anotaciones de conveniencia especializadas:
+
+* `@GetMapping`
+* `@PostMapping`
+* `@PutMapping`
+* `@PatchMapping`
+* `@DeleteMapping`
+
+Cualquiera de estas anotaciones de mapeo se puede aplicar a nivel de clase o método, y las rutas son aditivas. Por ejemplo, si tuviera que anotar el `RestApiDemoController` y su método `getCoffees()` como se muestra en la Figura 3-8, la aplicación respondería exactamente igual que con el código que se muestra en las Figuras 3-6 y 3-7.
+
+![03-08](images/03-08.png)
+
+Recuperar todos los cafés de nuestro almacén de datos improvisado es útil, pero no es suficiente. ¿Y si queremos recuperar un café en particular?
+
+Recuperar un solo elemento funciona de manera similar a recuperar varios de ellos. Agregaré otro método llamado `getCoffeeById` para administrar esto por nosotros, como se muestra en la Figura 3-9.
+
+La parte `{id}` de la ruta especificada es una variable URI (Uniform Resource Identifier- Identificador uniforme de recursos), y su valor se pasa al método `getCoffeeById` a través del parámetro del método `id` anotándolo con `@PathVariable`.
+
+Iterando sobre la lista de cafés, el método devuelve un poblado `Optional<Coffee>` si encuentra una coincidencia, o un `Optional<Coffee>` vacío si el `id` solicitada no está presente en nuestro pequeño grupo de cafés.
+
+![03-09](images/03-09.png)
+
 ### POST-ing
+
+Para crear recursos, un método `HTTP POST` es la opción preferida.
+
+**NOTA**
+
+Un `POST` proporciona detalles de un recurso, generalmente en formato JSON, y solicita que el servicio de destino cree ese recurso *bajo* el URI especificado.
+
+Como se muestra en la Figura 3-10, un `POST` es un asunto relativamente simple: nuestro servicio recibe los detalles de café especificados como un objeto `Coffee`, gracias a la clasificación automática de Spring Boot, y lo agrega a nuestra lista de cafés. A continuación, devuelve el objeto de café, que Spring Boot no asigna automáticamente a JSON de forma predeterminada, a la aplicación o servicio solicitante.
+
+![03-10](images/03-10.png)
+
 ### PUT-ting
+
+En términos generales, las solicitudes `PUT` se utilizan para actualizar recursos existentes con URI conocidos.
+
+**NOTA**
+
+Según el documento del IETF titulado [Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://tools.ietf.org/html/rfc7231), las solicitudes `PUT` deben actualizar el recurso especificado si está presente; si el recurso aún no existe, debe crearse.
+
+La Figura 3-11 funciona de acuerdo con la especificación: busque el café con el identificador especificado y, si lo encuentra, actualícelo. Si no hay tal café en la lista, créelo.
+
+![03-11](images/03-11.png)
+
 ### DELETE-ing
+
+Para eliminar un recurso, usamos una solicitud `HTTP DELETE`. Como se muestra en la Figura 3-12, creamos un método que acepta el identificador de un café como una `@PathVariable` y elimina el café correspondiente de nuestra lista utilizando el método `removeIf Collection`. `removeIf` acepta un `Predicate`, lo que significa que podemos proporcionar una lambda para evaluar que devolverá un valor booleano de `true` para eliminar el café deseado . Agradable y ordenado.
+
+![03-12](images/03-12.png)
+
 ### Y más
+
+Si bien hay muchas más cosas que se podrían hacer para mejorar este escenario, me centraré en dos en particular: reducir la repetición y devolver los códigos de estado HTTP cuando lo requiera la especificación.
+
+Para reducir la repetición en el código, elevaré la parte de la asignación de URI que es común a todos los métodos dentro de la clase `RestApiDemoController` a la anotación `@RequestMapping` de nivel de clase, `"/coffees"`. Luego, podemos eliminar esa misma parte del URI de la especificación del URI de mapeo de cada método, reduciendo un poco el nivel de ruido textual, como muestra el ejemplo abreviado de la Figura 3-13.
+
+![03-13](images/03-13.png)
+
+A continuación, consulto el documento IETF al que se hizo referencia anteriormente y observo que, si bien los códigos de estado HTTP no se especifican para `GET` y no se sugieren para los métodos `POST` y `DELETE`, son necesarios para las respuestas del método `POST`. Para lograr esto, modifico el método `putCoffee` como se muestra en la Figura 3-14. En lugar de devolver solo el objeto `Coffee` actualizado o creado, el método `putCoffee` ahora devolverá una `ResponseEntity` que contiene dicho `Coffee` y el código de estado HTTP `status code: 201` (Created) si el `PUT` coffee aún no existía y 200 (OK) si existía y se actualizó. Por supuesto, podríamos hacer más, pero el código de la aplicación actual cumple con los requisitos y representa API internas y externas sencillas y limpias.
+
+![03-14](images/03-14.png)
+
 ## Confiar pero verificar
+
+Con todo el código en su lugar, pongamos a prueba esta API.
+
+**NOTA**
+Utilizo el cliente HTTP de línea de comando [HTTPie](https://httpie.org/) para casi todas mis tareas basadas en HTTP. De vez en cuando también usaré [curl](https://curl.haxx.se/) o [Postman](https://www.postman.com/), pero encuentro que HTTPie es un cliente versátil con una interfaz de línea de comandos optimizada y una utilidad excelente.
+
+Como se muestra en la Figura 3-15, consulto el endpoint `coffees` para recuperar todos los cafés actualmente en nuestra lista. HTTPie toma por defecto una solicitud GET y asume *localhost* si no se proporciona un nombre de host, lo que reduce la escritura innecesaria. Como era de esperar, vemos los cuatro cafés con los que completamos previamente nuestra lista.
+
+![03-15](images/03-15.png)
+
 ## Resumen
 
 
 
-
-![03-07](images/03-07.png)
-![03-08](images/03-08.png)
-![03-09](images/03-09.png)
-![03-10](images/03-10.png)
-![03-11](images/03-11.png)
-![03-12](images/03-12.png)
-![03-13](images/03-13.png)
-![03-14](images/03-14.png)
-![03-15](images/03-15.png)
 ![03-16](images/03-16.png)
 ![03-17](images/03-17.png)
 ![03-18](images/03-18.png)
