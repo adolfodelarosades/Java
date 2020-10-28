@@ -198,14 +198,35 @@ Para comprobar nuestro estado final, consultamos una vez más la lista completa 
 
 ## Un poco de pulido
 
+Como siempre, hay muchas áreas que podrían beneficiarse de una atención adicional, pero limitaré el enfoque a dos: extraer la población inicial de datos de muestra a un componente separado y un poco de reordenación de condiciones para mayor claridad.
+
+En el último capítulo, llené la lista de cafés con algunos valores iniciales en la clase `RestApiDemoController`, por lo que mantuve esa misma estructura, hasta ahora, en este capítulo después de convertirlo a una base de datos con acceso al repositorio. Una mejor práctica es extraer esa funcionalidad en un componente separado que se pueda habilitar o deshabilitar rápida y fácilmente.
+
+Hay muchas formas de ejecutar código automáticamente al iniciar la aplicación, incluido el uso de `CommandLineRunner` o `ApplicationRunner` y especificar una lambda para lograr el objetivo deseado: en este caso, crear y guardar datos de muestra. Pero prefiero usar una clase `@Component` y un método `@PostConstruct` para lograr lo mismo por las siguientes razones:
+
+* Cuando los métodos de producción de beans `CommandLineRunner` y `ApplicationRunner` conectan(autowire) automáticamente un bean de repositorio, las pruebas unitarias que simulan el bean de repositorio dentro de la prueba (como suele ser el caso) se rompen.
+
+* Si mock el repository bean dentro del test o desea ejecutar la aplicación sin crear datos de muestra, es rápido y fácil deshabilitar el bean real que llena los datos simplemente comentando su anotación `@Component`.
+
+Recomiendo crear una clase `DataLoader` similar a la Figura 4-18. Extraer la lógica para crear datos de muestra en el método `loadData()` de la clase `DataLoader` y anotarla con `@PostContruct` restaura `RestApiDemoController` a su único propósito previsto de proporcionar una API externa y hace que `DataLoader` sea responsable de su propósito previsto (y obvio).
+
 ![04-18](images/04-18.png)
+
+El otro toque de pulido es un pequeño ajuste a la condición booleana del operador ternario dentro del método `putCoffee()`. Después de refactorizar el método para usar un repository, no queda ninguna justificación convincente para evaluar primero la condición negativa. La eliminación del operador not(!) De la condición mejora ligeramente la claridad; Por supuesto, se requiere intercambiar los valores verdadero y falso del operador ternario para mantener los resultados originales, como se refleja en la Figura 4-19.
 
 ![04-19](images/04-19.png)
 
 ## Resumen
 
+Este capítulo demostró cómo agregar acceso a la base de datos a la aplicación Spring Boot creada en el último capítulo. Si bien estaba destinado a ser una introducción concisa a las capacidades de datos de Spring Boot, proporcioné una descripción general de:
 
+* Acceso a la base de datos de Java
+* La API de persistencia de Java (JPA)
+* La base de datos H2
+* Spring Data JPA
+* Repositorios de Spring Data
+* Mecanismos para crear datos de muestra a través de repositorios
 
+Los capítulos siguientes profundizarán mucho más en el acceso a la base de datos Spring Boot, pero los conceptos básicos cubiertos en este capítulo proporcionan una base sólida sobre la cual construir y, en muchos casos, son suficientes por sí mismos.
 
-
-
+En el próximo capítulo, discutiré y demostraré herramientas útiles que Spring Boot proporciona para obtener información sobre sus aplicaciones cuando las cosas no funcionan como se esperaba o cuando necesita verificar que sí.
