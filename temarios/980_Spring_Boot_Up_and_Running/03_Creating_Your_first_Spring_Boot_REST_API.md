@@ -227,14 +227,47 @@ Como se muestra en la Figura 3-15, consulto el endpoint `coffees` para recuperar
 
 ![03-15](images/03-15.png)
 
-## Resumen
-
-
+A continuación, copio el campo de identificación de uno de los cafés que acabo de enumerar y lo pego en otra solicitud GET. La Figura 3-16 muestra la respuesta correcta.
 
 ![03-16](images/03-16.png)
+
+Ejecutar una solicitud `POST` con HTTPie es simple: simplemente canalice un archivo de texto sin formato que contenga una representación JSON de un objeto `Coffee` con campos `id` y `name` y HTTPie asume que una operación POST está en orden. La Figura 3-17 muestra el comando y su resultado exitoso.
+
 ![03-17](images/03-17.png)
+
+Como se mencionó anteriormente, un comando `PUT` debería permitir actualizar un recurso existente o agregar uno nuevo si el recurso solicitado aún no existe. En la Figura 3-18, especifico la identificación del café que acabo de agregar y paso otro objeto JSON con un nombre diferente al comando. El resultado es que el café con la identificación "99999" ahora tiene un `name` de "Caribou Coffee" en lugar de "Kaldi’s Coffee" como antes. El código de retorno es 200 (OK) como se esperaba también.
+
 ![03-18](images/03-18.png)
+
+En la Figura 3-19, inicio una solicitud `PUT` de la misma manera, pero hago referencia a una identificación en el URI que no existe. La aplicación lo agrega diligentemente de acuerdo con el comportamiento especificado por IETF y devuelve correctamente un estado HTTP de 201 (Creado).
+
 ![03-19](images/03-19.png)
+
+Crear una solicitud `DELETE` con HTTPie es muy similar a crear una solicitud `PUT`: se debe especificar el verbo HTTP y el URI del recurso debe estar completo. La Figura 3-20 muestra el resultado: un código de estado HTTP de 200 (OK) que indica que el recurso se eliminó correctamente y no se muestra ningún valor, ya que el recurso ya no existe.
+
 ![03-20](images/03-20.png)
+
+Finalmente, volvemos a consultar nuestra lista completa de cafés para confirmar el estado final esperado. Como lo demuestra la Figura 3-21, ahora tenemos un café adicional que no estaba en nuestra lista antes, como se esperaba: Mötor Oil Coffee. La validación de API es un éxito.
+
 ![03-21](images/03-21.png)
+
+## Resumen
+
+Este capítulo demostró cómo desarrollar una aplicación de trabajo básica usando Spring Boot. Dado que la mayoría de las aplicaciones implican exponer a los usuarios recursos de backend en la nube, generalmente a través de una interfaz de usuario de front-end, mostré cómo crear y desarrollar una API REST útil que se puede consumir de numerosas formas consistentes para proporcionar la funcionalidad necesaria para crear, leer y actualizar y la eliminación de recursos centrales para casi todos los sistemas críticos.
+
+Examiné y expliqué la anotación `@RequestMapping` y sus diversas especializaciones de anotación de conveniencia que se alinean con los verbos HTTP definidos:
+
+* `@GetMapping`
+* `@PostMapping`
+* `@PutMapping`
+* `@PatchMapping`
+* `@DeleteMapping`
+
+Después de crear métodos que abordaron muchas de estas anotaciones y sus acciones asociadas, luego refactoré un poco el código para simplificarlo y proporcionar códigos de respuesta HTTP donde sea necesario. Validar la API confirmó su correcto funcionamiento.
+
+En el próximo capítulo, discutiré y demostraré cómo agregar acceso a la base de datos a nuestra aplicación Spring Boot para que sea cada vez más útil y esté lista para la producción.
+
+
+
+
 
