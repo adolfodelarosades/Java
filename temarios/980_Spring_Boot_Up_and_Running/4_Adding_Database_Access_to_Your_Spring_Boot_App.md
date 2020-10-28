@@ -20,7 +20,7 @@ Claramente, esta no es una forma de hacer funcionar un ferrocarril.
 
 Cubriré algunas formas diferentes de resolver completamente estos problemas tan reales en los próximos capítulos. Pero por ahora, establezcamos algunas bases que servirán como pasos útiles en el camino hacia allí.
 
-#### Agregar una Dependencia a Base de Datos
+### Agregar una Dependencia a Base de Datos
 
 Para acceder a una base de datos desde su aplicación Spring Boot, necesita algunas cosas:
 
@@ -56,7 +56,7 @@ El alcance del tiempo de ejecución de la dependencia del controlador de la base
 
 Una vez que guarde su `pom.xml` actualizado y (si es necesario) vuelva a importar/actualizar sus dependencias de Maven, tendrá acceso a la funcionalidad incluida dentro de las dependencias agregadas. A continuación, es hora de escribir un poco de código para usarlo.
 
-#### Agregar código
+### Agregar código
 
 Dado que ya tenemos un código para administrar los cafés de alguna manera, necesitaremos refactorizar un poco mientras agregamos nuestras nuevas capacidades de base de datos. Creo que el mejor lugar para comenzar es con la clase(s) de dominio, en este caso, `Coffee`.
 
@@ -142,9 +142,27 @@ Como una simple recuperación de todos los cafés sin parámetros, el método `g
 
 ![04-06](images/04-06.png)
 
-### Agregar una dependencia de base de datos
+Refactorizar el método `getCoffeeById()` presenta algunas ideas sobre cuánto más simple puede ser su código gracias a la funcionalidad que aportan los repositorios a la mezcla. Ya no tenemos que buscar manualmente en la lista de cafés una identificación que coincida; El método `findById()` de `CrudRepository` lo maneja por nosotros, como se muestra en la Figura 4-7. Y dado que `findById()` devuelve un tipo Opcional, no se requieren cambios de ningún tipo para la firma de nuestro método.
 
-### Agregar código
+![04-07](images/04-07.png)
+
+Convertir el método `postCoffee()` para usar el repositorio también es una tarea bastante sencilla, como se muestra en la Figura 4-8.
+
+![04-08](images/04-08.png)
+
+Con el método `putCoffee()`, nuevamente vemos algunas de las funciones sustanciales de ahorro de tiempo y código del `CrudRepository` en exhibición. Utilizo el método de repositorio integrado `existingById()` para determinar si se trata de un `Coffee` nuevo o existente y devuelvo el código de estado HTTP apropiado junto con el `Coffee` guardado, según la Figura 4-9.
+
+![04-09](images/04-09.png)
+
+Finalmente, actualizo el método `deleteCoffee()` para usar el método `deleteById()` incorporado de `CrudRepository`, como en la Figura 4-10.
+
+![04-10](images/04-10.png)
+
+Ahora todo lo que queda es verificar que nuestra aplicación funciona como se esperaba y la funcionalidad externa sigue siendo la misma.
+
+**NOTA**
+
+Un enfoque alternativo para probar la funcionalidad, y una práctica recomendada, es crear primero pruebas unitarias, a la Test Driven Development (TDD). Recomiendo encarecidamente este enfoque en entornos de desarrollo de software del mundo real, pero he descubierto que cuando el objetivo es demostrar y explicar conceptos de desarrollo de software discretos, menos es mejor; mostrar lo menos posible para comunicar claramente los conceptos clave aumenta la señal y disminuye el ruido, incluso si el ruido es útil más adelante. Como tal, cubro las pruebas en un capítulo dedicado más adelante en este libro.
 
 ## Guardar y recuperar datos
 
@@ -153,10 +171,9 @@ Como una simple recuperación de todos los cafés sin parámetros, el método `g
 ## Resumen
 
 
-![04-07](images/04-07.png)
-![04-08](images/04-08.png)
-![04-09](images/04-09.png)
-![04-10](images/04-10.png)
+
+
+
 ![04-11](images/04-11.png)
 ![04-12](images/04-12.png)
 ![04-13](images/04-13.png)
