@@ -132,6 +132,18 @@ Comenzaré creando una lista de objetos `Coffee` para admitir el método que dev
 
 ![03-04](images/03-04.png)
 
+**NOTA**
+
+Es una práctica recomendada adoptar el nivel más alto de tipo (clase, interfaz) que pueda satisfacer limpiamente las API internas y externas. Es posible que no coincidan en todos los casos, ya que no están aquí. Internamente, `List` proporciona el nivel de API que me permite crear la implementación más limpia según mis criterios; externamente, podemos definir una abstracción de nivel incluso superior, como demostraré en breve.
+
+Siempre es una buena idea tener algunos datos para recuperar para confirmar que todo funciona como se esperaba. En la Figura 3-5, creo un constructor para la clase `RestApiDemoController`, agregando código para completar la lista de cafés al crear el objeto.
+
+![03-05](images/03-05.png)
+
+Como se muestra en la Figura 3-6, creo un método que devuelve un grupo iterable de cafés representado por nuestros variables miembro coffees. Elijo usar un `Iterable<Coffee>` porque cualquier tipo iterable proporcionará satisfactoriamente la funcionalidad deseada de esta API.
+
+![03-06](images/03-06.png)
+
 ### POST-ing
 ### PUT-ting
 ### DELETE-ing
@@ -141,8 +153,7 @@ Comenzaré creando una lista de objetos `Coffee` para admitir el método que dev
 
 
 
-![03-05](images/03-05.png)
-![03-06](images/03-06.png)
+
 ![03-07](images/03-07.png)
 ![03-08](images/03-08.png)
 ![03-09](images/03-09.png)
