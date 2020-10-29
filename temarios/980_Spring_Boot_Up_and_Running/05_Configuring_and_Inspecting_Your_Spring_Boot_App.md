@@ -96,7 +96,97 @@ Al ejecutar la aplicación y consultar el endpoint `/greeting`, la aplicación r
 
 ![05-03](images/05-03.png)
 
+Para verificar que se está evaluando el valor predeterminado, comento la siguiente línea en `application.properties` con un `#` como se muestra a continuación y reinicio la aplicación.
+
+```html
+#greeting-name=Dakota
+```
+
+La consulta del endpoint `greeting` ahora da como resultado la respuesta que se muestra en la Figura 5-4. Dado que `greeting-name` ya no está definido en ninguna fuente para el entorno de la aplicación, el valor predeterminado de "Mirage" se activa, como se esperaba.
+
+![05-04](images/05-04.png)
+
+El uso de `@Value` con propiedades propias proporciona otra capacidad útil: el valor de una propiedad se puede derivar/construir utilizando el valor de otra.
+
+Para demostrar cómo funciona el anidamiento de propiedades, necesitaremos al menos dos propiedades. Creo una segunda propiedad `greeting-coffee` en `application.properties`, como en la Figura 5-5.
+
+![05-05](images/05-05.png)
+
+A continuación, agrego un poco de código a nuestro `GreetingController` para representar un saludo con coffee-fied y un endpoint al que podemos acceder para ver los resultados. Tenga en cuenta que también proporciono un valor predeterminado para el valor del `coffee`, según la Figura 5-6.
+
+![05-06](images/05-06.png)
+
+Para verificar el resultado correcto, reinicio la aplicación y consulto el nuevo endpoint `/greeting/coffee`, lo que da como resultado lo que se muestra en la Figura 5-7. Tenga en cuenta que, dado que ambas propiedades en cuestión están definidas en `application.properties`, los valores mostrados son coherentes con las definiciones de esos valores.
+
+![05-07](images/05-07.png)
+
+Como ocurre con todas las cosas en la vida y el desarrollo de software, `@Value` tiene algunas limitaciones. Dado que proporcionamos un valor predeterminado para la propiedad `greeting-coffee`, podemos comentar su definición en `application.properties` y la anotación `@Value` aún procesa correctamente su valor (predeterminado) utilizando la variable de miembro `coffee` dentro de `GreetingController`. Sin embargo, comentar tanto `greeting-name` y `greeting-coffee` en el archivo de propiedades da como resultado que ninguna `Environment` source (fuente de entorno) los defina, lo que da como resultado el error que se muestra en la Figura 5-8 cuando la aplicación intenta inicializar el bean `GreetingController` usando una referencia a (ahora indefinido) `greeting-name` dentro de `greeting-coffee`.
+
+![05-08](images/05-08.png)
+
+**NOTA**
+
+Se eliminó el rastro de pila completo para mayor brevedad y claridad.
+
+Otra limitación con las propiedades definidas en `application.properties` y utilizadas únicamente a través de `@Value`: el IDE no las reconoce como utilizadas por la aplicación, ya que solo se hace referencia a ellas en el código dentro de las variables `String` delimitadas por comillas; como tal, no existe un vínculo directo con el código. Por supuesto, los desarrolladores pueden verificar visualmente la ortografía correcta de los nombres y el uso de las propiedades, pero esto es completamente manual y, por lo tanto, más propenso a errores.
+
+Como se puede imaginar, un mecanismo seguro de tipos y verificable por herramientas para el uso y la definición de propiedades sería una mejor opción general.
+
 ### `@ConfigurationProperties`
+
+Apreciando la flexibilidad de `@Value` pero reconociendo sus deficiencias, el equipo de Spring creó `@ConfigurationProperties`. Con `@ConfigurationProperties`, un desarrollador puede definir propiedades, agrupar propiedades relacionadas y hacer referencia a ellas/usarlas de una manera segura y verificable con herramientas.
+
+Por ejemplo, si una propiedad está definida en el archivo `application.properties` de una aplicación que no se usa en el código, el desarrollador verá el nombre resaltado para marcarlo como una propiedad no utilizada confirmada. De manera similar, si la propiedad se define como una cadena pero está asociada con una variable miembro de tipo diferente, el IDE señalará la falta de coincidencia de tipos. Estas son ayudas valiosas que detectan errores simples pero frecuentes.
+
+Para demostrar cómo poner en funcionamiento `@ConfigurationProperties`, comenzaré por definir un POJO para encapsular las propiedades relacionadas deseadas: en este caso, nuestras propiedades `greeting-name` y `greeting-coffee` a las que se hizo referencia anteriormente. Como se muestra en la Figura 5-9, creo una clase de saludo para contener ambos.
+
+![05-09](images/05-09.png)
+
+Para registrar `Greeting` para administrar las propiedades de configuración, agrego la anotación `@ConfigurationProperties` que se muestra en la Figura 5-10 y especifico el prefijo que se usará para todas las propiedades del `Greeting`. Esta anotación solo prepara la clase para su uso con propiedades de configuración; También se debe indicar a la aplicación que procese las clases anotadas de tal manera para que las propiedades se incluyan en el entorno de la aplicación. Tenga en cuenta el útil mensaje de error que resulta.
+
+![05-10](images/05-10.png)
+
+Instruir a la aplicación para que procese las clases `@ConfigurationProperties` y agregue sus propiedades al entorno de la aplicación, en la mayoría de los casos, se logra mejor agregando la anotación `@ConfigurationPropertiesScan` a la clase principal de la aplicación, como se muestra en la Figura 5-11.
+
+![05-11](images/05-11.png)
+
+**NOTA**
+
+Las excepciones a la regla de tener Boot scan para las clases `@ConfigurationProperties` son si necesita habilitar ciertas clases `@ConfigurationProperties` condicionalmente o si está creando su propia autoconfiguración. En todos los demás casos, sin embargo, `@ConfigurationPropertiesScan` debe usarse para buscar y habilitar las clases `@ConfigurationProperties` de manera similar al mecanismo de escaneo de componentes de Boot.
+
+Para generar metadatos usando el procesador de anotaciones, permitiendo que el IDE conecte los puntos entre las clases `@ConfigurationProperties` y las propiedades relacionadas definidas en el archivo `application.properties`, agrego la siguiente dependencia al archivo de compilación `pom.xml` del proyecto:
+
+```html
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-configuration-processor</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+
+**NOTA**
+
+Esta dependencia también se puede seleccionar y agregar automáticamente desde Spring Initializr en el momento de la creación del proyecto.
+
+Una vez que se agrega la dependencia del procesador de configuración al archivo de compilación, es necesario actualizar/volver a importar las dependencias y reconstruir el proyecto para aprovecharlas. Para reimportar departamentos, abro el menú Maven en IntelliJ y hago clic en el botón Reimportar en la parte superior izquierda, como se muestra en la Figura 5-12.
+
+![05-12](images/05-12.png)
+
+Una vez que se actualizan las dependencias, reconstruyo el proyecto desde el IDE para incorporar el procesador de configuración.
+
+Ahora, para definir algunos valores para estas propiedades. Volviendo a `application.properties`, cuando comienzo a escribir el saludo, el IDE muestra de manera útil los nombres de las propiedades que coinciden, como se muestra en la Figura 5-13.
+
+![05-13](images/05-13.png)
+
+Para usar estas propiedades en lugar de las que estábamos usando antes, se requiere un poco de refactorización.
+
+Puedo eliminar por completo el nombre de las variables miembro `name` y `coffee` de `GreetingController` junto con sus anotaciones `@Value`; en su lugar, creo un memvar para el bean `Greeting` que ahora administra las propiedades `greeting.name` y `greeting.coffee` y lo inyecto en `GreetingController` mediante la inyección del constructor, como se muestra en la Figura 5-14.
+
+![05-14](images/05-14.png)
+
+Al ejecutar la aplicación y consultar los endpoints `greeting` y `greeting/coffee`, se obtienen los resultados capturados en la Figura 5-15.
+
+![05-15](images/05-15.png)
 
 ### Posible opción de "terceros"
 
