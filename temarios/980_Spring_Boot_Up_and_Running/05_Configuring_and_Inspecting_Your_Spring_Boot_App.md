@@ -563,4 +563,36 @@ Como parte de su misión de proporcionar las funciones listas para producción d
 
 ![05-26](images/05-26.png)
 
+De particular interés es que, dado que no se configuró un nivel de registro para este componente, se utiliza un nivel efectivo de "INFO". Nuevamente, Spring Boot proporciona un valor predeterminado sensato cuando no se proporcionan detalles.
+
+Si me notifican de un problema con una aplicación en ejecución y me gustaría aumentar el registro para ayudar a diagnosticarlo y resolverlo, todo lo que se necesita para hacerlo para un componente en particular es POST un nuevo valor con formato JSON para `configurationLevel` en su endpoint `/actuator/loggers`, como se muestra aquí:
+
+```sh
+echo '{"configuredLevel": "TRACE"}' | http :8080/actuator/loggers/org.springframework.data.web
+```
+
+Solicitar el nivel de registro ahora devuelve la confirmación de que el registrador para `org.springframework.data.web` ahora está configurado en "TRACE" y proporcionará un registro de diagnóstico intensivo para la aplicación, como se muestra en la Figura 5-27.
+
+![05-27](images/05-27.png)
+
+**ADVERTENCIA(WARNING)**
+
+"TRACE" puede ser esencial para identificar un problema difícil de alcanzar, pero es un nivel de registro bastante pesado, que captura información aún más detallada que "DEBUG". El uso en aplicaciones de producción puede proporcionar información esencial, pero tenga en cuenta el impacto.
+
 ## Resumen
+
+Es fundamental que un desarrollador tenga herramientas útiles para establecer, identificar y aislar los comportamientos manifestados en las aplicaciones de producción. A medida que las aplicaciones se vuelven más dinámicas y distribuidas, a menudo es necesario:
+
+* Configurar y reconfigurar aplicaciones de forma dinámica
+
+* Determinar/confirmar la configuración actual y sus orígenes
+
+* Inspeccionar y monitorear el entorno de la aplicación y los indicadores de salud
+
+* Ajuste temporalmente los niveles de registro de aplicaciones en vivo para identificar las causas raíz
+
+Este capítulo demostró cómo usar las capacidades de configuración integradas de Spring Boot, su Informe de configuración automática y Spring Boot Actuator para crear, identificar y modificar la configuración del entorno de la aplicación de manera flexible y dinámica.
+
+En el próximo capítulo, profundizaré en los datos: cómo definir su almacenamiento y recuperación utilizando varios estándares de la industria y motores de base de datos líderes y los proyectos e instalaciones de Spring Data que permiten su uso de la manera más eficiente y poderosa posible.
+
+
