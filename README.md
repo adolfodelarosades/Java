@@ -104,6 +104,10 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 * [950 Professional Java for Web Applications](https://github.com/adolfodelarosades/Java/blob/master/temarios/950_Professional_Java_for_Web_Applications.md)
 
+* [951 Core Java Volume I—Fundamentals, Eleventh Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/951_Core_Java_Volume_I.md)
+
+* [952 Core Java Volume II-Advanced Features](https://github.com/adolfodelarosades/Java/blob/master/temarios/952_Core_Java_Volume_II.md)
+
 * [979 Beginning Spring 5: From Novice to Professional](https://github.com/adolfodelarosades/Java/blob/master/temarios/979_Beginning_Spring_5.md)
 * [980 Spring Boot Up and Running](https://github.com/adolfodelarosades/Java/blob/master/temarios/980_Spring_Boot_Up_and_Running.md)
 * [981 Mastering Spring 5](https://github.com/adolfodelarosades/Java/blob/master/temarios/981_Mastering_Spring_5.md)
