@@ -426,106 +426,57 @@ Contenido complementario: https://downloads.packtpub.com/code/9781789955644.zip
    * Data analysis using Data Lake
    * Summary
 
-Containerizing Microservices with Docker
+* Containerizing Microservices with Docker
+   * Understanding gaps in the BrownField PSS microservices
+   * What are containers?
+   * Difference between VM and containers
+   * Benefits of containers
+   * Microservices and containers
+   * Introduction to Docker
+      * Key components of Docker
+         * The Docker daemon
+         * The Docker client
+         * The Docker image
+         * The Docker container
+         * The Docker registry
+         * Dockerfile
+   * Deploying microservices into Docker
+   * Running RabbitMQ on Docker
+   * Using the Docker registry
+      * Setting up the Docker Hub
+      * Publish microservices to the Docker Hub
+   * Microservices on Cloud
+      * Installing Docker on AWS EC2
+   * Running BrownField services on EC2
+   * Future of containerization
+   * Summary
 
-Understanding gaps in the BrownField PSS microservices
+* Scaling Dockerized Microservices with Mesos and Marathon
+   * Scaling microservices
+      * Understanding autoscaling
+      * The missing pieces
+   * Container orchestration
+      * Why is container orchestration is important
+      * What does container orchestration do?
+      * Relationship with microservices
+      * Relationship with virtualization
+      * Container orchestration solutions
+         * Docker Swarm
+         * Kubernetes
+         * Apache Mesos
+         * HashiCorp Nomad
+         * CoreOS Fleet
+   * Container orchestration with Mesos and Marathon
+      * Mesos in details
+         * Mesos architecture
+         * Marathon
+   * Implementing Mesos and Marathon with DCOS
+   * Implementing Mesos and Marathon for BrownField microservices
+      * Installing Mesos, Marathon, and related components
+      * Running Mesos and Marathon
+   * Preparing BrownField PSS services
+      * Deploying BrownField PSS services
+   * Summary
 
-What are containers?
-
-Difference between VM and containers
-
-Benefits of containers
-
-Microservices and containers
-
-Introduction to Docker
-
-Key components of Docker
-
-The Docker daemon
-
-The Docker client
-
-The Docker image
-
-The Docker container
-
-The Docker registry
-
-Dockerfile
-
-Deploying microservices into Docker
-
-Running RabbitMQ on Docker
-
-Using the Docker registry
-
-Setting up the Docker Hub
-
-Publish microservices to the Docker Hub
-
-Microservices on Cloud
-
-Installing Docker on AWS EC2
-
-Running BrownField services on EC2
-
-Future of containerization
-
-Summary
-
-Scaling Dockerized Microservices with Mesos and Marathon
-
-Scaling microservices
-
-Understanding autoscaling
-
-The missing pieces
-
-Container orchestration
-
-Why is container orchestration is important
-
-What does container orchestration do?
-
-Relationship with microservices
-
-Relationship with virtualization
-
-Container orchestration solutions
-
-Docker Swarm
-
-Kubernetes
-
-Apache Mesos
-
-HashiCorp Nomad
-
-CoreOS Fleet
-
-Container orchestration with Mesos and Marathon
-
-Mesos in details
-
-Mesos architecture
-
-Marathon
-
-Implementing Mesos and Marathon with DCOS
-
-Implementing Mesos and Marathon for BrownField microservices
-
-Installing Mesos, Marathon, and related components
-
-Running Mesos and Marathon
-
-Preparing BrownField PSS services
-
-Deploying BrownField PSS services
-
-Summary
-
-Other Books You May Enjoy
-
-Leave a review - let other readers know what you think
+* Other Books You May Enjoy
+   * Leave a review - let other readers know what you think
