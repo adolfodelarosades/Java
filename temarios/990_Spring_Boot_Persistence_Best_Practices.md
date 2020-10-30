@@ -12,7 +12,7 @@ ISBN: 9781484256268
 
 Topic: Spring
 
-![990-portada]()
+![990-portada](https://github.com/adolfodelarosades/Java/blob/master/temarios/990_Spring_Boot_Persistence_Best_Practices/images/990-portada.png)
 
 ### Descripción del libro
 
