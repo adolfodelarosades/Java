@@ -12,5 +12,5 @@ ISBN: 9781789615692
 
 Topic: Spring
 
-![portada](images/981-portada.png)
+![portada](https://github.com/adolfodelarosades/Java/blob/master/temarios/981_Mastering_Spring_5/images/981-portada.png)
 
