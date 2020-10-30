@@ -69,7 +69,7 @@ Descarga del código de ejemplo para este libro electrónico: puede descargar lo
    * Get in touch
       * Reviews
 * Section 1: [Getting Started with Spring and Spring Boot](981_Mastering_Spring_5/Seccion_01.md)
-* Spring Landscape - Framework, Modules, and Projects
+* 1. Spring Landscape - Framework, Modules, and Projects
    * Exploring Spring and its evolution
       * Beginning with the first version of the Spring Framework
          * Loose coupling and testability
