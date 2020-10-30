@@ -227,413 +227,215 @@ Contenido complementario: https://github.com/PacktPublishing/Spring-Boot-2.0-Pro
             * The for loop with a value range
          * The while loop
    * Object-oriented programming with Kotlin
-
-Learning about visibility modifiers
-
-Classes in Kotlin
-
-Abstract classes
-
-Concrete classes
-
-The concept of interfaces in Kotlin
-
-Learning about extensions
-
-Generic types in Kotlin
-
-Enums in Kotlin
-
-Objects in Kotlin
-
-Object expressions
-
-Object declarations
-
-Companion objects
-
-Advanced programming with Kotlin
-
-Functions
-
-Infix notation in functions
-
-Local functions in Kotlin
-
-Default arguments in functions
-
-Named arguments in functions
-
-Generics in functions
-
-Variable number of arguments (vararg) in functions
-
-Summary
-
-Questions
-
-Further reading
-
-Building a Reactive Movie Rating API Using Kotlin
-
-Technical requirements
-
-Getting started
-
-REST architecture
-
-Requirements&#xA0;of REST architecture
-
-The use case diagram
-
-Using Spring Data MongoDB for persistence
-
-Understanding&#xA0;MongoDB&#xA0;
-
-Understanding Spring Data MongoDB
-
-Class diagram for the domain model
-
-Implementation of the domain model using Spring Data MongoDB annotations
-
-Setting up dependencies and configuration
-
-Implementing the domain model
-
-Implementing of Spring Data MongoDB repositories
-
-Using a service to encapsulate business logic
-
-Testing Services
-
-Using Spring WebFlux for controllers
-
-Implementation of controllers
-
-Testing controllers
-
-Using Spring Security for basic authorization
-
-Demonstrating Moviee
-
-Integration testing
-
-Demonstrating the use of Postman
-
-Accessing the List Movies endpoint
-
-Accessing the Get Movie endpoint
-
-Accessing the Get Movie endpoint with an invalid Movie ID
-
-Accessing the Rate Movie endpoint
-
-Summary
-
-Questions
-
-Further reading
-
-Building an API with Reactive Microservices
-
-Technical requirements
-
-Getting started
-
-Microservices architecture
-
-The requirements of microservices architecture
-
-The use case diagram
-
-The project structure to develop microservices
-
-Using Spring Data Redis for persistence
-
-Understanding Redis
-
-Understanding Spring Data Redis
-
-Class diagram for the domain model
-
-Implementation of domain model using Spring Data Redis annotations
-
-Setting up dependencies and configuration
-
-&#xA0;Implementing the domain model
-
-Implementation of Spring Data Redis repositories
-
-Using a Service to encapsulate business logic&#xA0;
-
-Using Spring WebFlux for a controller
-
-Implementation of controllers
-
-Using asynchronous data transfer for cross-microservice communication
-
-Asynchronous data transfer using Redis
-
-Using Docker to support microservices
-
-Understanding Docker
-
-Using Maven to build Docker images
-
-Building a system of microservices with Docker
-
-Deploying microservices with Docker
-
-Demonstrating Saber
-
-Submitting to the Register Taxi endpoint
-
-Submitting&#xA0;location to update Taxi Location endpoint
-
-Submitting to Update Taxi Status endpoint
-
-Accessing the Get Taxi Status endpoint
-
-Accessing the GET available Taxis endpoint
-
-Submitting to Book Taxi endpoint
-
-Submitting to Accept Taxi Booking endpoint
-
-Submitting to cancel Taxi Booking endpoint
-
-Accessing Taxi Bookings endpoint
-
-Summary&#xA0;
-
-Questions
-
-Further reading
-
-Building a Twitter Clone with Spring Boot
-
-Technical requirements
-
-Getting started
-
-Beginning with the Tweety architecture
-
-Tweety requirements
-
-The use case diagram
-
-Using Spring Data JPA for persistence
-
-Class diagram for the domain model
-
-Implementation of the domain model using Spring Data JPA annotations
-
-Setting up dependencies and configuration
-
-Implementing the domain model
-
-Implementing Spring Data JPA repositories
-
-Caveat for going reactive with blocking JDBC&#xA0;
-
-Using&#xA0;Service to encapsulate business logic&#xA0;
-
-Using Angular 5 for the frontend
-
-Getting started with Angular 5 application development
-
-Generating Angular services
-
-Generating the users service
-
-Generating Angular page components
-
-Generating the Tweets Add page
-
-Generating the User Profile page
-
-Using Spring Web Flux for the REST controller
-
-Implementing controllers
-
-Enabling Angular frontend access to controllers
-
-Using Spring Security for authentication and authorization
-
-Understanding OAuth2&#xA0;
-
-Setting up dependencies and configuration
-
-Configuring the Resource Server
-
-Configuring the Authorization Server
-
-Configuring web security
-
-Using an&#xA0;Angular service for OAuth2 authentication and authorization
-
-Demonstrating Tweety
-
-Accessing the login page
-
-Accessing the List Tweets page
-
-Accessing the Send Tweet page
-
-Accessing the User Profile page
-
-Summary
-
-Questions
-
-Further reading
-
-Introducing Spring Boot 2.0 Asynchronous
-
-Technical requirements
-
-Getting started
-
-Synchronous applications
-
-Asynchronous applications
-
-The requirement of asynchronous applications
-
-The use case diagram
-
-The architecture of an image resizing application
-
-Using Spring Kafka for communication
-
-Understanding Apache Kafka
-
-Setting up dependencies and configuration
-
-Configuration for the Image Resize Request Producer
-
-Configuration for Image Resize Request Consumer
-
-Starting Spring Boot applications in a&#xA0;non-web mode
-
-Using Quartz for scheduling
-
-Understanding Quartz
-
-Setting up dependencies and configuration
-
-Configuration for Quartz scheduling
-
-Demonstrating Image Resizer
-
-Building all dependencies&#xA0;
-
-Running Apache Kafka
-
-Running Apache ZooKeeper on Windows
-
-Running Apache Kafka on Linux/Unix
-
-Running Apache Kafka on Windows
-
-Running Image Resize Request Consumer
-
-Running Image Resize Request Producer
-
-Summary
-
-Questions
-
-Further reading
-
-Building an Asynchronous Email Formatter
-
-Technical requirements
-
-Getting started
-
-Why Email Formatter is useful
-
-The use case diagram
-
-The architecture of the Email Formatter application
-
-Using Spring Data JPA for persistence
-
-Class diagram for the&#xA0;domain model
-
-Implementation of the domain model using JPA annotations
-
-Setting up dependencies and the configuration class
-
-Implementing the domain model
-
-Implementation of Spring Data JPA repositories
-
-Using Services to encapsulate business logic
-
-Using Apache FreeMarker for templates
-
-Using Spring Kafka for communication
-
-Setting up dependencies and the configuration class
-
-Configuration for User Registration
-
-Configuration for the Email Formatter consumer
-
-Configuring Java Mail
-
-Using Spring Web MVC for the REST controller
-
-Implementation of controller annotations
-
-Using Spring Security for authentication and authorization
-
-Demonstrating Email Formatter
-
-Building all dependencies&#xA0;
-
-Running Apache Kafka
-
-Running Apache ZooKeeper on Windows
-
-Running Apache Kafka on Linux/Unix
-
-Running Apache Kafka on Windows
-
-Running SMTP server
-
-Running the Email Formatter consumer
-
-Running the User Registration microservice
-
-Summary
-
-Questions
-
-Further reading
-
-Assessments
-
-Chapter 1,&#xA0;Introduction
-
-Chapter 2, Building a Basic Web Application
-
-Chapter 3, Building a Simple Blog Management System
-
-Chapter 4,&#xA0;Introduction to Kotlin
-
-Chapter 5,&#xA0;Building a Reactive Movie Rating API Using Kotlin
-
-Chapter 6,&#xA0;Building an API with Reactive Microservices
-
-Chapter 7,&#xA0;Building a Twitter Clone with Spring Boot
-
-Chapter 8,&#xA0;Introducing Spring Boot 2.0 Asynchronous
-
-Chapter 9,&#xA0;Building an Asynchronous Email Formatter
-
-Other Books You May Enjoy
-
-Leave a review - let other readers know what you think
+      * Learning about visibility modifiers
+      * Classes in Kotlin
+         * Abstract classes
+         * Concrete classes
+      * The concept of interfaces in Kotlin
+      * Learning about extensions
+      * Generic types in Kotlin
+      * Enums in Kotlin
+      * Objects in Kotlin
+         * Object expressions
+         * Object declarations
+         * Companion objects
+   * Advanced programming with Kotlin
+      * Functions
+         * Infix notation in functions
+         * Local functions in Kotlin
+         * Default arguments in functions
+         * Named arguments in functions
+         * Generics in functions
+         * Variable number of arguments (vararg) in functions
+   * Summary
+   * Questions
+   * Further reading
+
+* Building a Reactive Movie Rating API Using Kotlin
+   * Technical requirements
+   * Getting started
+      * REST architecture
+      * Requirements&#xA0;of REST architecture
+         * The use case diagram
+   * Using Spring Data MongoDB for persistence
+      * Understanding&#xA0;MongoDB&#xA0;
+      * Understanding Spring Data MongoDB
+      * Class diagram for the domain model
+      * Implementation of the domain model using Spring Data MongoDB annotations
+         * Setting up dependencies and configuration
+         * Implementing the domain model
+      * Implementing of Spring Data MongoDB repositories
+      * Using a service to encapsulate business logic
+      * Testing Services
+   * Using Spring WebFlux for controllers
+      * Implementation of controllers
+      * Testing controllers
+   * Using Spring Security for basic authorization
+   * Demonstrating Moviee
+      * Integration testing
+      * Demonstrating the use of Postman
+         * Accessing the List Movies endpoint
+         * Accessing the Get Movie endpoint
+         * Accessing the Get Movie endpoint with an invalid Movie ID
+         * Accessing the Rate Movie endpoint
+   * Summary
+   * Questions
+   * Further reading
+
+* Building an API with Reactive Microservices
+   * Technical requirements
+   * Getting started
+      * Microservices architecture
+      * The requirements of microservices architecture
+         * The use case diagram
+         * The project structure to develop microservices
+   * Using Spring Data Redis for persistence
+      * Understanding Redis
+      * Understanding Spring Data Redis
+      * Class diagram for the domain model
+      * Implementation of domain model using Spring Data Redis annotations
+         * Setting up dependencies and configuration
+         * &#xA0;Implementing the domain model
+      * Implementation of Spring Data Redis repositories
+      * Using a Service to encapsulate business logic&#xA0;
+   * Using Spring WebFlux for a controller
+      * Implementation of controllers
+   * Using asynchronous data transfer for cross-microservice communication
+      * Asynchronous data transfer using Redis
+   * Using Docker to support microservices
+      * Understanding Docker
+      * Using Maven to build Docker images
+      * Building a system of microservices with Docker
+      * Deploying microservices with Docker
+   * Demonstrating Saber
+      * Submitting to the Register Taxi endpoint
+      * Submitting&#xA0;location to update Taxi Location endpoint
+      * Submitting to Update Taxi Status endpoint
+      * Accessing the Get Taxi Status endpoint
+      * Accessing the GET available Taxis endpoint
+      * Submitting to Book Taxi endpoint
+      * Submitting to Accept Taxi Booking endpoint
+      * Submitting to cancel Taxi Booking endpoint
+      * Accessing Taxi Bookings endpoint
+   * Summary&#xA0;
+   * Questions
+   * Further reading
+
+* Building a Twitter Clone with Spring Boot
+   * Technical requirements
+   * Getting started
+      * Beginning with the Tweety architecture
+      * Tweety requirements
+         * The use case diagram
+   * Using Spring Data JPA for persistence
+      * Class diagram for the domain model
+      * Implementation of the domain model using Spring Data JPA annotations
+         * Setting up dependencies and configuration
+         * Implementing the domain model
+      * Implementing Spring Data JPA repositories
+         * Caveat for going reactive with blocking JDBC&#xA0;
+      * Using&#xA0;Service to encapsulate business logic&#xA0;
+   * Using Angular 5 for the frontend
+      * Getting started with Angular 5 application development
+      * Generating Angular services
+         * Generating the users service
+         * Generating Angular page components
+         * Generating the Tweets Add page
+         * Generating the User Profile page
+   * Using Spring Web Flux for the REST controller
+      * Implementing controllers
+      * Enabling Angular frontend access to controllers
+   * Using Spring Security for authentication and authorization
+      * Understanding OAuth2&#xA0;
+      * Setting up dependencies and configuration
+         * Configuring the Resource Server
+         * Configuring the Authorization Server
+         * Configuring web security
+         * Using an&#xA0;Angular service for OAuth2 authentication and authorization
+   * Demonstrating Tweety
+      * Accessing the login page
+      * Accessing the List Tweets page
+      * Accessing the Send Tweet page
+      * Accessing the User Profile page
+   * Summary
+   * Questions
+   * Further reading
+
+* Introducing Spring Boot 2.0 Asynchronous
+   * Technical requirements
+   * Getting started
+      * Synchronous applications
+      * Asynchronous applications
+      * The requirement of asynchronous applications
+         * The use case diagram
+      * The architecture of an image resizing application
+   * Using Spring Kafka for communication
+      * Understanding Apache Kafka
+      * Setting up dependencies and configuration
+      * Configuration for the Image Resize Request Producer
+      * Configuration for Image Resize Request Consumer
+      * Starting Spring Boot applications in a&#xA0;non-web mode
+   * Using Quartz for scheduling
+      * Understanding Quartz
+      * Setting up dependencies and configuration
+      * Configuration for Quartz scheduling
+   * Demonstrating Image Resizer
+      * Building all dependencies&#xA0;
+      * Running Apache Kafka
+         * Running Apache ZooKeeper on Windows
+         * Running Apache Kafka on Linux/Unix
+         * Running Apache Kafka on Windows
+      * Running Image Resize Request Consumer
+      * Running Image Resize Request Producer
+   * Summary
+   * Questions
+   * Further reading
+
+* Building an Asynchronous Email Formatter
+   * Technical requirements
+   * Getting started
+      * Why Email Formatter is useful
+         * The use case diagram
+      * The architecture of the Email Formatter application
+   * Using Spring Data JPA for persistence
+      * Class diagram for the&#xA0;domain model
+      * Implementation of the domain model using JPA annotations
+         * Setting up dependencies and the configuration class
+         * Implementing the domain model
+      * Implementation of Spring Data JPA repositories
+      * Using Services to encapsulate business logic
+   * Using Apache FreeMarker for templates
+   * Using Spring Kafka for communication
+      * Setting up dependencies and the configuration class
+      * Configuration for User Registration
+      * Configuration for the Email Formatter consumer
+         * Configuring Java Mail
+   * Using Spring Web MVC for the REST controller
+      * Implementation of controller annotations
+   * Using Spring Security for authentication and authorization
+   * Demonstrating Email Formatter
+      * Building all dependencies&#xA0;
+      * Running Apache Kafka
+         * Running Apache ZooKeeper on Windows
+         * Running Apache Kafka on Linux/Unix
+         * Running Apache Kafka on Windows
+      * Running SMTP server
+      * Running the Email Formatter consumer
+      * Running the User Registration microservice
+   * Summary
+   * Questions
+   * Further reading
+
+* Assessments
+   * Chapter 1,&#xA0;Introduction
+   * Chapter 2, Building a Basic Web Application
+   * Chapter 3, Building a Simple Blog Management System
+   * Chapter 4,&#xA0;Introduction to Kotlin
+   * Chapter 5,&#xA0;Building a Reactive Movie Rating API Using Kotlin
+   * Chapter 6,&#xA0;Building an API with Reactive Microservices
+   * Chapter 7,&#xA0;Building a Twitter Clone with Spring Boot
+   * Chapter 8,&#xA0;Introducing Spring Boot 2.0 Asynchronous
+   * Chapter 9,&#xA0;Building an Asynchronous Email Formatter
+
+* Other Books You May Enjoy
+   * Leave a review - let other readers know what you think
