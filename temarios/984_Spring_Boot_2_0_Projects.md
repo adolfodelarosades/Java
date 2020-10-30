@@ -12,6 +12,8 @@ ISBN: 9781789136159
 
 Topic: Spring
 
+![portada](https://github.com/adolfodelarosades/Java/blob/master/temarios/984_Spring_Boot_2_0_Projects/images/984-portada.png)
+
 ### Descripción del libro
 
 Desarrolle diversos proyectos de la vida real, incluidos la mayoría de los aspectos de Spring Boot
@@ -48,351 +50,183 @@ Contenido complementario: https://github.com/PacktPublishing/Spring-Boot-2.0-Pro
 
 ### Table of Contents
 
-Title Page
-
-Copyright and Credits
-
-Spring Boot 2.0 Projects
-
-Dedication
-
-Packt Upsell
-
-Why subscribe?
-
-PacktPub.com
-
-Contributors
-
-About the author
-
-About the reviewers
-
-Packt is searching for authors like you
-
-Preface
-
-Who this book is for
-
-What this book covers
-
-To get the most out of this book
-
-Download the example code files
-
-Conventions used
-
-Get in touch
-
-Reviews
-
-Introduction
-
-Technical requirements
-
-Generating Spring Boot Projects
-
-Opening the generated project with IntelliJ
-
-Opening the generated project with STS
-
-Getting started with Spring Boot
-
-Learning about Spring Boot
-
-Anatomy of a Spring Boot application
-
-Supporting the Spring Framework ecosystem in Spring Boot
-
-Changes since Spring Boot 1.x
-
-Registering a Spring Bean using ApplicationContextInitializer
-
-Configuration property binding
-
-New property binding API
-
-Property origin
-
-Tightened rules for&#xA0;governing relaxed property binding
-
-Environment variables with indices
-
-Direct binding of property type&#xA0;java.time.Duration&#xA0;in the ISO-8601 form
-
-Custom endpoints for Spring Boot Actuator using annotations
-
-Exposing a custom Spring Boot Actuator endpoint
-
-Extending a custom endpoint with a specialized implementation for the web
-
-Connecting to a custom endpoint using monitoring and management tools
-
-Custom metrics using Micrometer
-
-Custom health indicator
-
-Using the HTTP/2 protocol
-
-Securing applications with Spring Security
-
-The next milestone
-
-Migration
-
-Using the correct JDK and JVM
-
-Running on Java 9
-
-Tackling JAXBException
-
-Using the correct AspectJ version
-
-Being aware of limitations on Apache Cassandra drivers
-
-Being aware of issues with the Maven Surefire Plugin
-
-Using the upgraded Spring Framework 5.0
-
-Modified CORS support behavior
-
-Removed packages, classes, and methods
-
-Dropped support for frameworks
-
-Using the updated configuration properties
-
-Using the changed servlet-specific server properties
-
-Using the modified template engine extension handling
-
-Using the changed actuator configuration properties
-
-Using the changed actuator base path
-
-Using the renamed actuator endpoints
-
-Using the changed Embedded Container Configuration&#xA0;
-
-Using the changed default behavior for path mapping
-
-Using the changed default dispatcher types for the servlet filter&#xA0;
-
-Using the modified transitive dependency to spring-boot-web-starter
-
-Using the changed default proxying strategy&#xA0;
-
-Using the modified configuration location strategy
-
-Using the changed Jackson/JSON support
-
-Using the changed Spring Boot Actuator security
-
-Using the changed HikariCP default connection pool for JPA
-
-Using the changed default database initialization strategy
-
-Using the changed database schema creation strategy
-
-Using the changed testing support
-
-Using the revised Spring Security
-
-Using the changed default security auto-configuration strategy
-
-Spring Security OAuth2 is migrated to Spring Security core&#xA0;
-
-Using the AuthenticationManager bean&#xA0;
-
-Understanding removed features
-
-Summary
-
-Questions
-
-Further reading
-
-Building a Basic Web Application
-
-Technical requirements
-
-Getting started
-
-Web application architecture
-
-Workflow of Spring Web MVC&#xA0;
-
-Requirements for our web application
-
-The use case diagram&#xA0;
-
-Using Spring Data JPA for persistence
-
-Understanding the Java Persistence API (JPA)
-
-Understanding Spring Data JPA
-
-Class diagram for the domain model
-
-Implementation of the domain model using JPA annotations
-
-Setting up dependencies and configuration
-
-Implementing the domain model
-
-Implementation of Spring Data JPA repositories
-
-Testing Spring Data JPA repositories
-
-Using Spring Boot Devtools for database visualization
-
-Using Services to encapsulate business logic
-
-Testing&#xA0;Services
-
-Using Spring Thymeleaf for the view
-
-Understanding template engines
-
-Spring Thymeleaf&#xA0;
-
-UI design for the Retro Board
-
-UI implementation for the Retro Board&#xA0;using Spring Thymeleaf
-
-Using Spring Web MVC with servlet 3.x for the controller
-
-Implementation of Controllers annotations
-
-Testing controllers
-
-Using Spring Security for authentication and authorization
-
-Demonstrating the Retro Board
-
-Summary
-
-Questions
-
-Further reading
-
-Building a Simple Blog Management System
-
-Technical requirements
-
-Getting started
-
-Web application architecture
-
-Workflow of Spring WebFlux
-
-Requirements of the Bloggest system
-
-The use&#xA0;case diagram&#xA0;
-
-Using Spring Data Elasticsearch for persistence
-
-Understanding Elasticsearch
-
-Understanding Spring Data Elasticsearch
-
-Class diagram for the domain model
-
-Implementation of the domain model using Spring Data Elasticsearch annotations
-
-Setting up dependencies and configuration classes
-
-Implementing the domain model
-
-Implementation of Spring Data Elasticsearch repositories
-
-Using Apache FreeMarker for the view
-
-Understanding template engines
-
-Apache FreeMarker
-
-UI design for Bloggest
-
-UI implementation for Bloggest using Apache FreeMarker
-
-Implementing a common layout using Apache FreeMarker
-
-Implementing a List Articles page
-
-Implementing a Create Article page
-
-Implementing a Show Article page
-
-Implementing an error page
-
-Using Spring WebFlux for controller
-
-Implementation of controllers
-
-Implementation of ControllerAdvice
-
-Using Spring Security for authentication and authorization
-
-Demonstrating Bloggest
-
-Summary
-
-Questions
-
-Further reading
-
-Introduction to Kotlin
-
-Technical requirements
-
-Getting started with Kotlin
-
-Default imports
-
-Basic data types
-
-Numeric data types
-
-Learning numeric literals
-
-Numeric representation
-
-Numeric operations
-
-String literals
-
-The syntax for Kotlin code
-
-The Kotlin packages
-
-String interpolation
-
-Functions in Kotlin
-
-Variables in Kotlin
-
-Conditional statements
-
-The if statement
-
-The when statement&#xA0;
-
-Type checking and automatic casting
-
-Nullable values and compile-time null safety&#xA0;
-
-The for loop
-
-The for loop with an array
-
-The for loop with a&#xA0;collection
-
-The for loop with a value range
-
-The while loop
-
-Object-oriented programming with Kotlin
+* Title Page
+* Copyright and Credits
+   * Spring Boot 2.0 Projects
+* Dedication
+* Packt Upsell
+   * Why subscribe?
+   * PacktPub.com
+* Contributors
+   * About the author
+   * About the reviewers
+   * Packt is searching for authors like you
+* Preface
+   * Who this book is for
+   * What this book covers
+   * To get the most out of this book
+      * Download the example code files
+      * Conventions used
+   * Get in touch
+      * Reviews
+
+* Introduction
+   * Technical requirements
+   * Generating Spring Boot Projects
+      * Opening the generated project with IntelliJ
+      * Opening the generated project with STS
+   * Getting started with Spring Boot
+      * Learning about Spring Boot
+         * Anatomy of a Spring Boot application
+         * Supporting the Spring Framework ecosystem in Spring Boot
+   * Changes since Spring Boot 1.x
+      * Registering a Spring Bean using ApplicationContextInitializer
+      * Configuration property binding
+         * New property binding API
+         * Property origin
+         * Tightened rules for&#xA0;governing relaxed property binding
+         * Environment variables with indices
+         * Direct binding of property type&#xA0;java.time.Duration&#xA0;in the ISO-8601 form
+      * Custom endpoints for Spring Boot Actuator using annotations
+         * Exposing a custom Spring Boot Actuator endpoint
+         * Extending a custom endpoint with a specialized implementation for the web
+         * Connecting to a custom endpoint using monitoring and management tools
+      * Custom metrics using Micrometer
+      * Custom health indicator
+      * Using the HTTP/2 protocol
+      * Securing applications with Spring Security
+   * The next milestone
+   * Migration
+      * Using the correct JDK and JVM
+         * Running on Java 9
+            * Tackling JAXBException
+            * Using the correct AspectJ version
+            * Being aware of limitations on Apache Cassandra drivers
+            * Being aware of issues with the Maven Surefire Plugin
+      * Using the upgraded Spring Framework 5.0
+         * Modified CORS support behavior
+         * Removed packages, classes, and methods
+         * Dropped support for frameworks
+      * Using the updated configuration properties
+      * Using the changed servlet-specific server properties
+      * Using the modified template engine extension handling
+      * Using the changed actuator configuration properties
+      * Using the changed actuator base path
+      * Using the renamed actuator endpoints
+      * Using the changed Embedded Container Configuration&#xA0;
+      * Using the changed default behavior for path mapping
+      * Using the changed default dispatcher types for the servlet filter&#xA0;
+      * Using the modified transitive dependency to spring-boot-web-starter
+      * Using the changed default proxying strategy&#xA0;
+      * Using the modified configuration location strategy
+      * Using the changed Jackson/JSON support
+      * Using the changed Spring Boot Actuator security
+      * Using the changed HikariCP default connection pool for JPA
+      * Using the changed default database initialization strategy
+      * Using the changed database schema creation strategy
+      * Using the changed testing support
+      * Using the revised Spring Security
+         * Using the changed default security auto-configuration strategy
+         * Spring Security OAuth2 is migrated to Spring Security core&#xA0;
+         * Using the AuthenticationManager bean&#xA0;
+      * Understanding removed features
+   * Summary
+   * Questions
+   * Further reading
+
+* Building a Basic Web Application
+   * Technical requirements
+   * Getting started
+      * Web application architecture
+         * Workflow of Spring Web MVC&#xA0;
+      * Requirements for our web application
+         * The use case diagram&#xA0;
+   * Using Spring Data JPA for persistence
+      * Understanding the Java Persistence API (JPA)
+      * Understanding Spring Data JPA
+      * Class diagram for the domain model
+      * Implementation of the domain model using JPA annotations
+         * Setting up dependencies and configuration
+         * Implementing the domain model
+      * Implementation of Spring Data JPA repositories
+      * Testing Spring Data JPA repositories
+         * Using Spring Boot Devtools for database visualization
+      * Using Services to encapsulate business logic
+      * Testing&#xA0;Services
+   * Using Spring Thymeleaf for the view
+      * Understanding template engines
+      * Spring Thymeleaf&#xA0;
+      * UI design for the Retro Board
+      * UI implementation for the Retro Board&#xA0;using Spring Thymeleaf
+   * Using Spring Web MVC with servlet 3.x for the controller
+      * Implementation of Controllers annotations
+      * Testing controllers
+   * Using Spring Security for authentication and authorization
+   * Demonstrating the Retro Board
+   * Summary
+   * Questions
+   * Further reading
+
+* Building a Simple Blog Management System
+   * Technical requirements
+   * Getting started
+      * Web application architecture
+         * Workflow of Spring WebFlux
+      * Requirements of the Bloggest system
+         * The use&#xA0;case diagram&#xA0;
+   * Using Spring Data Elasticsearch for persistence
+      * Understanding Elasticsearch
+      * Understanding Spring Data Elasticsearch
+      * Class diagram for the domain model
+      * Implementation of the domain model using Spring Data Elasticsearch annotations
+         * Setting up dependencies and configuration classes
+         * Implementing the domain model
+      * Implementation of Spring Data Elasticsearch repositories
+   * Using Apache FreeMarker for the view
+      * Understanding template engines
+      * Apache FreeMarker
+      * UI design for Bloggest
+      * UI implementation for Bloggest using Apache FreeMarker
+         * Implementing a common layout using Apache FreeMarker
+         * Implementing a List Articles page
+         * Implementing a Create Article page
+         * Implementing a Show Article page
+         * Implementing an error page
+   * Using Spring WebFlux for controller
+      * Implementation of controllers
+      * Implementation of ControllerAdvice
+   * Using Spring Security for authentication and authorization
+   * Demonstrating Bloggest
+   * Summary
+   * Questions
+   * Further reading
+
+* Introduction to Kotlin
+   * Technical requirements
+   * Getting started with Kotlin
+      * Default imports
+      * Basic data types
+         * Numeric data types
+         * Learning numeric literals
+         * Numeric representation
+         * Numeric operations
+         * String literals
+      * The syntax for Kotlin code
+         * The Kotlin packages
+         * String interpolation
+         * Functions in Kotlin
+         * Variables in Kotlin
+         * Conditional statements
+            * The if statement
+            * The when statement&#xA0;
+         * Type checking and automatic casting
+         * Nullable values and compile-time null safety&#xA0;
+         * The for loop
+            * The for loop with an array
+            * The for loop with a&#xA0;collection
+            * The for loop with a value range
+         * The while loop
+   * Object-oriented programming with Kotlin
 
 Learning about visibility modifiers
 
