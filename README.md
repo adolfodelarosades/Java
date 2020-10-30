@@ -111,6 +111,8 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 * [983 Mastering Spring Boot 2.0](https://github.com/adolfodelarosades/Java/blob/master/temarios/983_Mastering_Spring_Boot.md)
 * [984 Spring Boot 2.0 Projects](https://github.com/adolfodelarosades/Java/blob/master/temarios/984_Spring_Boot_2_0_Projects.md)
 
+* [990 Spring Boot Persistence Best Practices: Optimize Java Persistence Performance in Spring Boot Applications](https://github.com/adolfodelarosades/Java/blob/master/temarios/990_Spring_Boot_Persistence_Best_Practices.md)
+
 * [90001 Java EE 8 Development with Eclipse](https://github.com/adolfodelarosades/Java/blob/master/temarios/90001_Java_EE_8_Development_with_Eclipse.md)
 
 ### APLICACIONES
