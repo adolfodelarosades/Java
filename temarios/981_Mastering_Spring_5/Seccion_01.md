@@ -7,8 +7,8 @@ Esta sección lo ayudará a comenzar con los dos proyectos Spring más important
 
 Los siguientes capítulos están cubiertos en esta sección:
 
-* Capítulo 1, Spring Landscape: marco, módulos y proyectos
-* Capítulo 2, Inyección de dependencia y pruebas unitarias
-* Capítulo 3, Creación de aplicaciones web con Spring MVC
+* Capítulo 1, Spring Landscape: Framework, Módulos y Proyectos
+* Capítulo 2, Inyección de Dependencia y Pruebas Unitarias
+* Capítulo 3, Creación de Aplicaciones Web con Spring MVC
 * Capítulo 4, Introducción a Spring Boot
-* Capítulo 5, Profundizando en el marco de Spring
+* Capítulo 5, Profundizando en Spring Framework
