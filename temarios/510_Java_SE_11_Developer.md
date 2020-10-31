@@ -34,6 +34,21 @@ Esta ruta de aprendizaje cubre:
 * Herencia e interfaces
 * Java en OCI
 
+1. [Descripción General](510_Java_SE_11_Developer/01_Overview.md) 25m
+2. [Introduction to Java Basic](510_Java_SE_11_Developer/02_Introduction_to_Java_Basic.md) 23m
+3. What is a Java Program 25
+4. Handling Text and Numbers 49m
+5. Arrays, Conditions, and Loops 49m
+6. Defining classes and Creating Object 1h
+7. Working with Objects 34m
+8. Handling Exceptions 14m
+9. Object-Oriented Approach to Code Reuse 34m
+10. Oracle Cloud and Beyond 30m
+11. Case Stydy 40m
+12. Continue Your Learning as a Java Proggammer 10m
+13. Java Explorer Assessment 
+
+
 ![portada](https://github.com/adolfodelarosades/Java/blob/master/temarios/510_Java_SE_11_Developer/images/510-02.png)
 ![portada](https://github.com/adolfodelarosades/Java/blob/master/temarios/510_Java_SE_11_Developer/images/510-01.png)
 
