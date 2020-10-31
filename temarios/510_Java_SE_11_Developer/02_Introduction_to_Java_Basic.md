@@ -1,6 +1,10 @@
 
 # 02. Introduction to Java Basic
 
+### Description
+
+Overview of the Java Basics course, audience, cloud lab environment and where to go for more information.
+
 ## Java Basic Overview
 
 Introduction. This learning path is designed for beginners, novices, and those students beginning their study to become an Oracle-certified professional. Now, beginners should have basic mathematical, logical, and analytical problem solving skills, and novice programmers are those who've maybe programmed a little bit and want to started at an introductory level.
