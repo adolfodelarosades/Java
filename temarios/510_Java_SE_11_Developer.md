@@ -38,7 +38,7 @@ Esta ruta de aprendizaje cubre:
 2. [Introduction to Java Basic](510_Java_SE_11_Developer/02_Introduction_to_Java_Basic.md) 23m
 3. [What is a Java Program](510_Java_SE_11_Developer/03_What_is_a_Java%20Program.md) 25
 4. [Handling Text and Numbers](510_Java_SE_11_Developer/04_Handling_Text_and_Numbers.md) 49m
-5. Arrays, Conditions, and Loops 49m
+5. [Arrays, Conditions, and Loops](510_Java_SE_11_Developer/05_Arrays_Conditions_and_Loops.md) 49m
 6. Defining classes and Creating Object 1h
 7. Working with Objects 34m
 8. Handling Exceptions 14m
