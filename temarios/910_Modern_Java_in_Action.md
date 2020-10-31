@@ -1,5 +1,19 @@
 # 910 Modern Java in Action
 
+by Raoul-Gabriel Urma, Alan Mycroft, Mario Fusco
+
+Publisher: Manning Publications
+
+Release Date: October 2018
+
+Pages 592 
+
+ISBN: 9781617293566
+
+Topic: Java
+
+![portada](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action/images/910-portada.png)
+
 ### Descripción del libro
 
 Modern Java in Action conecta las nuevas características del lenguaje Java con sus aplicaciones prácticas. Con ejemplos claros como el agua y una cuidadosa atención a los detalles, este libro respeta su tiempo. Le ayudará a ampliar su conocimiento existente del núcleo de Java a medida que domine las adiciones modernas como la API Streams y el Java Module System, explore nuevos enfoques para la simultaneidad y aprenda cómo los conceptos funcionales pueden ayudarlo a escribir código que sea más fácil de leer y mantener.
