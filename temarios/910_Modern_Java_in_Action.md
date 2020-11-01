@@ -43,7 +43,7 @@ Modern Java in Action conecta las nuevas características del lenguaje Java con 
 
 * Capítulo 1. [Java 8, 9, 10 y 11: ¿qué está pasando?](910_Modern_Java_in_Action/01_Java_8_9_10_y_11.md)
 
-* Capítulo 2. Pasando código con parametrización de comportamiento
+* Capítulo 2. [Pasando código con parametrización de comportamiento](910_Modern_Java_in_Action/02_Pasando_codigo.md)
 
 * Capítulo 3. Expresiones lambda
 
