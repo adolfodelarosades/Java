@@ -71,10 +71,24 @@ y entre todos las opciones que aparece seleccionamos **Spring Tools 3 (Standalon
 
 ![09-09](images/09-09.png)
 
-no es necesario que instalemos todas las opciones que nos aparecerá (yo lo hare) ahí pues con por supuesto el sobre requerido el springboard por ejemplo el 
-autowired station IES boot Service para que te aparezca la opción de menú y el editor etcétera pues spring dentro de la cuerpos tenemos en Spring bean configuration file que es para lo que digo fundamentalmente pues nos facilita el proceso este mes acabo de cenar ya veremos cuando estemos alguno de los ejercicios pues acuérdate alguna utilizaremos configuración XML y
+no es necesario que instalemos todas las opciones que nos aparecerá (yo lo hare), una vez instalado esto supone que cuado le damos en un proyecto la opción New -> Other -> Spring tendremos la opción Spring Bean Configuration File.
+
+![09-10](images/09-10.png)
+
+Esta opción nos facilita la creación de archivo de configuración XML gracias a el pluging que intalamos.
 
 ## Aplicaciones Web con Spring 04:20
+
+![09-11](images/09-11.png)
+
+![09-12](images/09-12.png)
+
+![09-13](images/09-13.png)
+
+![09-14](images/09-14.png)
+
+![09-15](images/09-15.png)
+
 ## El controlador en Spring 09:53
 ## Aplicación ejemplo: buscador de cursos parte 1 14:59
 ## Aplicación ejemplo: buscador de cursos parte 2 13:44
