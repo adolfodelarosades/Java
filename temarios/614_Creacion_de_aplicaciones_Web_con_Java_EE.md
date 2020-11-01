@@ -90,7 +90,7 @@ Si quieres trabajar como programador Java, sin duda, ¡este es tu curso!
    * Ejercicio práctico: Utilización de AJAX en un buscador de contactos I 16:34
    * Ejercicio práctico: Utilización de AJAX en un buscador de contactos II 11:30
    
-9. Spring • 18 clases • 3h 10m
+9. [Spring](614_Creacion_de_aplicaciones_Web_con_Java_EE/09_Spring.md) • 18 clases • 3h 10m
    * Fundamentos de Spring 06:46
    * Preparación del entorno 03:02
    * Aplicaciones Web con Spring 04:20
