@@ -20,9 +20,7 @@ Para realizar este curso necesitas tener conocimientos básicos de lenguaje Java
 
 Si quieres trabajar como programador Java, sin duda, ¡este es tu curso!
 
-## Contenido del curso
-
-9 secciones • 68 clases • 10h 59m de duración total
+## Contenido del curso  • 9 secciones • 68 clases • 10h 59m de duración total
 
 1. Introducción a las aplicaciones Web • 4 clases • 29m
    * Introducción a Java EE 09:36
