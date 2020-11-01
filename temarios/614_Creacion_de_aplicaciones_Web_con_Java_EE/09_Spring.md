@@ -111,7 +111,15 @@ La configuración como hemos comentado anteriormente es habitual que cada módul
 
 ## El controlador en Spring 09:53
 
+![09-16](images/09-16.png)
 
+![09-17](images/09-17.png)
+
+![09-18](images/09-18.png)
+
+![09-19](images/09-19.png)
+
+![09-20](images/09-20.png)
 
 ## Aplicación ejemplo: buscador de cursos parte 1 14:59
 ## Aplicación ejemplo: buscador de cursos parte 2 13:44
