@@ -24,13 +24,13 @@ Si quieres trabajar como programador Java, sin duda, ¡este es tu curso!
 
 9 secciones • 68 clases • 10h 59m de duración total
 
-* 1. Introducción a las aplicaciones Web • 4 clases • 29m
+1. Introducción a las aplicaciones Web • 4 clases • 29m
    * Introducción a Java EE 09:36
    * Estructura de una aplicación Web Java EE 04:33
    * Software para crear una aplicación Web 08:42
    * Configuración del entorno de desarrollo 06:33
 
-* 2. Servlets • 8 clases • 1h 15m
+2. Servlets • 8 clases • 1h 15m
    * Fundamentos de servlets 10:57
    * Ejercicio práctico: Ejemplo de creación de un servlet 10:01
    * Recogida de parámetros de una petición 07:48
@@ -40,7 +40,7 @@ Si quieres trabajar como programador Java, sin duda, ¡este es tu curso!
    * Transferencia de peticiones 06:01
    * Ejercicio práctico: Ejemplo de transferencia de una petición 12:34
 
-* 3. Mantenimiento de datos en una aplicación • 11 clases • 1h 42m
+3. Mantenimiento de datos en una aplicación • 11 clases • 1h 42m
    * Atributos de petición 04:34
    * Ejercicio práctico: utilización de atributos de petición 12:46
    * Atributos de sesión 09:37
@@ -53,7 +53,7 @@ Si quieres trabajar como programador Java, sin duda, ¡este es tu curso!
    * Eventos en una aplicación 05:05
    * Ejercicio práctico: Uso de la gestión de eventos para inicializar atributos 08:50
 
-* 4. Páginas JSP • 8 clases • 1h 3m
+4. Páginas JSP • 8 clases • 1h 3m
    * Fundamentos de Java Server Pages 06:26
    * Ejercicio práctico: Creación de una página JSP 07:58
    * Componentes de una página JSP 05:29
@@ -63,7 +63,7 @@ Si quieres trabajar como programador Java, sin duda, ¡este es tu curso!
    * Ejercicio práctico: Ejemplo uso de acción useBean 10:36
    * Integración servlets-JSP 09:11
 
-* 5. Acceso a datos en una aplicación Web • 6 clases • 1h 3m
+5. Acceso a datos en una aplicación Web • 6 clases • 1h 3m
    * Acceso a datos en Java con JDBC 00:07
    * Instalación de MySQL 00:12
    * Ejercicio práctico: Ejemplo acceso a base de datos desde un servlet 24:35
@@ -71,26 +71,26 @@ Si quieres trabajar como programador Java, sin duda, ¡este es tu curso!
    * Ejercicio práctico: Desarrollo de una aplicación Web de agenda de contactos II 08:58
    * Ejercicio práctico: Desarrollo de una aplicación Web de agenda de contactos III 13:13
 
-* 6. Patrón Modelo Vista Controlador • 5 clases • 57m
+6. Patrón Modelo Vista Controlador • 5 clases • 57m
    * Patrón Modelo Vista Controlador 09:37
    * Ejercicio práctico: aplicación patrón MVC I 06:21
    * Ejercicio práctico: aplicación patrón MVC II 12:50
    * Utilización de DataSources 10:41
    * Ejercicio práctico: Uso de un DataSource en aplicación 17:34
    
-* 7. JSTL/EL • 5 clases • 46m    
+7. JSTL/EL • 5 clases • 46m    
    * El lenguaje de expresiones EL 12:13
    * La librería de acciones JSTL 04:10
    * Incorporar JSTL a una aplicación mediante Maven 10:28
    * Principales acciones JSTL 09:26
    * Ejercicio práctico: Empleo de EL/JSTL en una página 09:20
 
-* 8. AJAX • 3 clases • 35m 
+8. AJAX • 3 clases • 35m 
    * Fundamentos de AJAX 06:44
    * Ejercicio práctico: Utilización de AJAX en un buscador de contactos I 16:34
    * Ejercicio práctico: Utilización de AJAX en un buscador de contactos II 11:30
    
-* 9. Spring • 18 clases • 3h 10m
+9. Spring • 18 clases • 3h 10m
    * Fundamentos de Spring 06:46
    * Preparación del entorno 03:02
    * Aplicaciones Web con Spring 04:20
