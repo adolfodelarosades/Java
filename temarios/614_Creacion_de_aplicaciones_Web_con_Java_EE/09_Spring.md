@@ -590,14 +590,48 @@ Vamos a pasar a la creación de las vistas las cuales son dos páginas JSP `dato
 			</tbody>
 		</table>
 	</div>
-
 </body>
 </html>
 ```
 
 3. Crear archivos de configuración
 
-
+   ¿Qué archivos de configuración necesitamos?
+   
+   Por un lado el `web.xml` que es donde necesitamos registrar el DispatcherServlet y ademas el archivo de configuración propio de Spring `mvcConfig.xml` que es donde indicamos que es lo que tiene que hacer con el Controlador donde indicamos el paquete donde esta la clase que tiene que instanciar y resuelve los temas de la navegación.
+   
+   * Crear el archivo `web.xml`, como no lo creamos en el momento del proyecto hay una alternativa poniendonos en el nombre del proyecto y dar botón derecho, seleccionar Java EE Tools y seleccionar Generate Deployment Descriptor Stub.
+   
+   ![09-37](images/09-37.png)
+   
+      * Por un lado vamos a definir la página de inicio cuando se cargue la aplicación es decir `datos.jsp`
+      * Registrar el Servlet Dispatcher
+         * Por un lado la etiqueta `<servlet>` donde se registra la clase del Servlet 
+	 * Por otro lado el `<servlet-mapping>` donde se asocia como dirección cualquier cosa que venga después de la URL de la aplicación, del ContextRoot, pasara cualquier petición traiga lo que traiga entrará por el DispatcherServlet que la controlara y determinara que hacer.
+   
+   El código completo del archivo `web.xml` queda así:
+   
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>614-01-Buscador-Cursos</display-name>
+  <welcome-file-list>
+    <welcome-file>datos.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/mvcConfig.xml</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
 
 ## El modelo en Spring 14:04
 ## Configuración mediante clases 06:32
