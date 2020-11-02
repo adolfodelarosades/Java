@@ -744,6 +744,13 @@ Lo que nos queda es probar la aplicación.
 ![09-49](images/09-49.png)
 
 ## El modelo en Spring 14:04
+
+![09-50](images/09-50.png)
+
+![09-51](images/09-51.png)
+
+![09-52](images/09-52.png)
+
 ## Configuración mediante clases 06:32
 ## Ejemplo de aplicación configurada mediante clases 05:04
 ## Configuración sin web.xml 07:38
