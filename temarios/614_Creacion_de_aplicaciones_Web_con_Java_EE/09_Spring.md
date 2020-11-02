@@ -158,7 +158,329 @@ Vamos a Eclipse para desarrollar la aplicación.
    
    ![09-26](images/09-26.png)
    
+   En este ultimo paso deberiamos haber seleccionado el check para generar el archivo `web.xml` ya que necesitamos configurar el DispatcherServlet, pero no lo he seleccionado para posteriormente ver como lo podemos añadir de otra forma.
    
+2. Mavemizamos el proyecto para poder incluir las dependencias al proyecto.
+
+   ![09-27](images/09-27.png)
+   
+   ![09-28](images/09-28.png)
+   
+   Al Mavenizar el proyecto se incluye el archivo `pom.xml` con el siguiente contenido:
+
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>614-01-Buscador-Cursos</groupId>
+  <artifactId>614-01-Buscador-Cursos</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+        <configuration>
+          <warSourceDirectory>WebContent</warSourceDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>14</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
+3. Ir al repositorio de Maven https://mvnrepository.com/
+   
+   Nuestro proyecto necesita las dependencias de Spring Core, Context, Web y WebMVC, en el repositorio Maven podemos localizar todas las dependencias que necesitemos.
+
+   ![09-29](images/09-29.png)
+   
+   En repositorio vamos a buscar Spring Core
+   
+   ![09-30](images/09-30.png)
+   
+   Seleccionamos la versión más reciente en este caso es la `5.2.10.RELEASE` 
+   
+   ![09-31](images/09-31.png)
+   
+   Copiamos la dependecia.
+
+```html
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.2.10.RELEASE</version>
+</dependency>
+```
+   Esta dependencia la tenemos que añadir en nuestro archivo `pom.xml`
+
+   Repetimos los mismos pasos para las restantes dependencias.
+   
+```html
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.10.RELEASE</version>
+</dependency>
+```
+
+```html
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-web</artifactId>
+    <version>5.2.10.RELEASE</version>
+</dependency>
+```
+
+```html
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.2.10.RELEASE</version>
+</dependency>
+```
+   Una cosa importante es que las versiones de las dependencias que seleccionemos y tengan relación sean la misma en este caso todas tienen la versión `5.2.10.RELEASE` para no mezclar versiones que podría dar algun tipo de incompatibilidad.
+   
+   También vamos a incluir la dependecia para JSTL.
+   
+```html
+<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+```
+   
+   Nuestro archivo `pom.xml` final queda así:
+   
+```html
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>614-01-Buscador-Cursos</groupId>
+  <artifactId>614-01-Buscador-Cursos</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+        <configuration>
+          <warSourceDirectory>WebContent</warSourceDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>14</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-web</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
+  </dependencies>
+</project>
+```
+
+4. Implentear un JavaBean que encapsule los datos del Curso. Creanos una nueva Clase llamada `Curso` en el paquete `com.formacion.model`. 
+
+   ![09-32](images/09-32.png)
+   
+   Su contenido es el siguiente:
+   
+```java
+package com.formacion.model;
+
+public class Curso {
+	
+	private String nombre;
+	private String tema;
+	private int duracion;
+	
+	public Curso() {
+		super();
+	}
+
+	public Curso(String nombre, String tema, int duracion) {
+		super();
+		this.nombre = nombre;
+		this.tema = tema;
+		this.duracion = duracion;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getTema() {
+		return tema;
+	}
+
+	public void setTema(String tema) {
+		this.tema = tema;
+	}
+
+	public int getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
+	}
+	
+}
+```
+
+5. Vamos a definir el Controlador creando una Clase llamada `CursosController` en el paquete `com.formacion.controller`.
+
+   ![09-33](images/09-33.png)
+   
+   En Spring el Controlador es una Clase Standard Java, ***en Spring no se utilizan Servlets*** sino clases normales Java eso si en el controlador debe estar anotado con `@Controller`.
+
+   En memoria vamos a crear una lista de Cursos que va a ser un atributo de la clase y en el Constructor de  `CursosController` vamos a crear dicha lista.
+   
+```java
+@Controller
+public class CursosController {
+
+	List<Curso> cursos;
+	
+	public CursosController() {
+		
+		cursos = new ArrayList<>();
+		cursos.add(new Curso("Java", "Programación", 50));
+		cursos.add(new Curso("Angular", "Programación", 30));
+		cursos.add(new Curso("Linux", "Sistemas", 40));
+		cursos.add(new Curso("Big Data", "Datos", 30));
+		cursos.add(new Curso("SQL", "Datos", 20));
+		
+	}
+}
+```
+
+   Ahora vamos a crear el Controlador de Acción a través de un método que va a responder a una petición `POST` por que va a responder a un formulario donde se recoje un dato la tematica de los Cursos a buscar.
+   
+   * Lo antotamos con `@PostMapping(value="buscar")` y con value indicamos que dirección vamos a asociar a esa posición, es la dirección que ponemos en el `action` del formulario.
+   * Debe devolver un `String` que indicará el nombre de la página a donde nos va a redireccionar.
+   * El nombre del método es indiferente en este caso se llama `buscador`
+   * El método va a recibir un parámetro que es el dato que nos va a llegar en la petición es decir `String tema` pero muy importante a Spring hay que indicarle que en ese parámetro vamos a recibir lo que se manda desde la petición y eso lo hacemos anotando el parámetro con `@RequestParam` donde indicaremos el nombre hipotetico que tendrá ese parámetro es decir `@RequestParam("tema")` (Algo como lo que haciamos con `String tema = request.getParameter("tema");`).
+   * Como parámetro también vamos a necesitar un `HttpServletRequest request` por que necesitamos tener acceso al `request` para guardar en un atributo de petición la lista de Cursos que cumplan con la condición de busqueda.
+   * Y dentro del método implementamos el filtro de los Cursos usando `Streams`.
+   * Guardamos el resutado en un atributo de petición.
+   * Retornamos la página a donde se nos redirigirá.
+   
+```java
+  @PostMapping(value="buscar")
+	public String buscador(@RequestParam("tema") String tema, HttpServletRequest request) {
+		List<Curso> resultado = cursos.stream()
+			.filter(curso -> curso.getTema().equalsIgnoreCase(tema))
+			.collect(Collectors.toList());
+		
+		request.setAttribute("cursos", resultado);
+		
+		return "cursos";
+	}
+```
+   
+   Ya será el DispatcherServlet utilizando el objeto que se comento en lecciones anteriores que debe estar registrado en el archivo de configuración para que localice la página a donde se debe redirigir.
+   
+   La clase completa del Controlaror queda así:
+   
+```java
+package com.formacion.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.formacion.model.Curso;
+
+@Controller
+public class CursosController {
+
+	List<Curso> cursos;
+	
+	public CursosController() {
+		
+		cursos = new ArrayList<>();
+		cursos.add(new Curso("Java", "Programación", 50));
+		cursos.add(new Curso("Angular", "Programación", 30));
+		cursos.add(new Curso("Linux", "Sistemas", 40));
+		cursos.add(new Curso("Big Data", "Datos", 30));
+		cursos.add(new Curso("SQL", "Datos", 20));
+		
+	}
+	
+	@PostMapping(value="buscar")
+	public String buscador(@RequestParam("tema") String tema, HttpServletRequest request) {
+  
+		List<Curso> resultado = cursos.stream()
+			.filter(curso -> curso.getTema().equalsIgnoreCase(tema))
+			.collect(Collectors.toList());
+		
+		request.setAttribute("cursos", resultado);
+		
+		return "cursos";
+	}
+}
+```
+   
+   Ahora lo que toca es crear las Vistas y posteriormente la configuración que es una parte importate de Spring.
 
 ## Aplicación ejemplo: buscador de cursos parte 2 13:44
 ## El modelo en Spring 14:04
