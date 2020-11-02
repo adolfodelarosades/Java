@@ -433,7 +433,7 @@ public class CursosController {
    
    Ya será el DispatcherServlet utilizando el objeto que se comento en lecciones anteriores que debe estar registrado en el archivo de configuración para que localice la página a donde se debe redirigir.
    
-   La clase completa del Controlaror queda así:
+   La clase completa del Controlaror `CursosController` queda así:
    
 ```java
 package com.formacion.controller;
@@ -483,6 +483,67 @@ public class CursosController {
    Ahora lo que toca es crear las Vistas y posteriormente la configuración que es una parte importate de Spring.
 
 ## Aplicación ejemplo: buscador de cursos parte 2 13:44
+
+![09-34](images/09-34.png)
+
+Vamos a pasar a la creación de las vistas las cuales son dos páginas JSP `datos.jsp` y `cursos.jsp` las cuales se crean exactamente como en Java EE.
+
+1. Crear la página `datos.jsp`
+
+   ![09-35](images/09-35.png)
+
+   * Tiene estilos de Bootstrap
+   * El formulario tiene `form action="buscar" method="post"` que es lo que corresponde con lo que pusimos en el método Controlador de Acción `@PostMapping(value="buscar")`
+   * El campo para recoger el tema en el formulario es `input type="text" name="tema"` el cual casa con lo que ponemos como parámetro en el método de Control de Acción `public String buscador(@RequestParam("tema") String tema, ...`
+   
+   El código completo de la página `datos.jsp` es el siguiente:
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>Cursos</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Buscador de Cursos</h1>
+		
+		<form action="buscar" method="post" class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-sm-2">Introduce tema:</label>
+				<input type="text" name="tema" class="form-control" style="width:30%">
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default" style="width:30%">Buscar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	
+	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>
+```
+
+2. Crear la página `cursos.jsp`
+
+```html
+```
+
 ## El modelo en Spring 14:04
 ## Configuración mediante clases 06:32
 ## Ejemplo de aplicación configurada mediante clases 05:04
