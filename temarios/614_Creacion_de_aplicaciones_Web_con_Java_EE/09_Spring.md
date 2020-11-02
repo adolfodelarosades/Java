@@ -541,8 +541,63 @@ Vamos a pasar a la creación de las vistas las cuales son dos páginas JSP `dato
 
 2. Crear la página `cursos.jsp`
 
+   ![09-36](images/09-36.png)
+   
+   Esta es una página dinámica donde pintaremos la lista de los curso localizados para un tema determinado.
+   
+   * El nombre del JSP es `cursos.jsp` que es lo que machea con lo que se retorna en el método buscar `return "cursos";` que es donde nos redirigirá el DispatcherServlet.
+   * Usamos la `taglib core` para pintar la tabla.
+   * Recuperamos el atributo de petición `requestScope.cursos` que incluimos en el Controlador con `request.setAttribute("cursos", resultado);`. 
+   * Recorremos los cursos con un `c:forEach` y vamos pintando cada uno de los campos que definimos en nuestro JavaBean `Curso`, son las propiedades a las que accede implicitamente a los métodos `getters` usando expresiones EL
+   
+   El codigo completo de la página `cursos.jsp` es el siguiente:
+
 ```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>Cursos Encontrados</title>
+</head>
+<body>
+	<h1>Cursos</h1>
+	<div class="container">
+		<table border="1" class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Tema</th>
+					<th>Duración</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="curso" items="${requestScope.cursos}">
+				<tr>
+					<td>${curso.nombre}</td>
+					<td>${curso.tema}</td>
+					<td>${curso.duracion}</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
 ```
+
+3. Crear archivos de configuración
+
+
 
 ## El modelo en Spring 14:04
 ## Configuración mediante clases 06:32
