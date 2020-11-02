@@ -134,6 +134,32 @@ Una vez que ya tenemos implementado el Controlador, el Modelo ahora de momento l
 Nos quedaría los archivos de configuración propios de Spring, el `mvcConfig.xml` para el Controlador y el `springConfig.xml` para el Modelo. En el caso del Controlador en la imágen vemos el aspecto de dicho archivo `mvcConfig.xml`, por un lado tenemos una etiqueta `<mvc:annotation-driver/>` qué le indica a Spring que permita el uso de anotaciones para configuración, por ejemplo las anotaciones `@Controller`, `@GetMapping` o `@PostMapping` que vamos a utilizar en la configuaración del Controlador, le indicamos con la etiqueta `<context:component-scan-base-package="controller"/>` en que paquete se encuentra el Controlador, esto lo que hace es decirle a Spring que busque en esos paquetes Clases anotadas con `@Controller` que es nuestro caso o con cualquier otra anotación propia de Spring para instanciar Clases, si es más de uno se separan con comas y busca todas esas clases que tengan esa anotación especial para intanciarlas en el momento que Spring se inicia. Por otro lado tenemos la etiqueta `<bean...>` que es el la que se encarga de resolver las Vistas, ya habíamos visto que los Controladores de Acción (métodos `@GetMapping` o `@PostMapping`) devuelven un `String`, una cadena de caracteres que el DispatcherServlet lo interpreta como la dirección de la página, ¿Por qué? porque eso es lo que le indica todo el contenido de la etiqueta `<bean...>` donde estamos registrando el objeto `InternalResourceViewResolver`, le asignamos un identificador `id` y unas propiedades `prefix` y `suffix`. Finalmente ahí peticiones que no necesitan ser gestionadas por un Control de Acción, sino que simplemente llevar al usuario a una determinada página, como le invitamos al DispatcherServlet que haga esa tarea, a través de los Controladores para navegación estática son etiquetas `<mvc:view-controller path="alta" view-name="datos" />` donde se les indica que cuando llegue una dirección `path="alta"` llevamonos a la página `view-name="datos"`.  
 
 ## Aplicación ejemplo: buscador de cursos parte 1 14:59
+
+![09-21](images/09-21.png)
+
+A continuación vamos a desarrollar nuestra primer aplicación Spring se trata de una aplicación Web buscador de cursos sin BD, los cursos los almacenaremos en memoría para su busqueda.
+
+![09-22](images/09-22.png)
+
+El aspecto de la aplicación lo podemos ver en la imágen, tenemos dos páginas en la primera vamos a poder introducir el tema a buscar, los cursos van a tener un Nombre, Tema y Duración. Cuando introduzcamos el tema y pulsemos el botón `Buscar` nos llevará a otra página donde se listarán todos los cursos de el tema introducido, en dicha página tendremos un enlace `Volver` para regresar a la página inicial.
+
+![09-23](images/09-23.png)
+
+En esta primera aplicación Spring que vamos a desarrollar no vamos a tener Modelo es decir, vamos a tener un Front Controller (DispatcherServlet) al que le van a llegar las peticiones `/buscar` y `/volver`. `/buscar` es la petición del formulario y es la que tiene asociado el Controlador de Acción por lo que tendremos que implementar una clase con `@Controller` en la cual crearemos un método asociado a la petición `/buscar` de tipo `POST` por que viene de un formulario, el enlace `/volver` como es una navegación estatica no lleva asociado ningun Controlador de Acción simplemente nos lleva nuevamente a la página de Inicio. 
+
+Vamos a Eclipse para desarrollar la aplicación.
+
+1. Crear nuevo proyecto Dynamic Web Project con nombre **614-01-Buscador-Cursos**.
+   A pesar de que vayamos a usar Spring, como se trata de una aplicación Web el proceso de creación de la aplicación Web es el mismo que hemos seguido con las aplicaciones Java EE Standar.
+   
+   ![09-24](images/09-24.png)
+   
+   ![09-25](images/09-25.png)
+   
+   ![09-26](images/09-26.png)
+   
+   
+
 ## Aplicación ejemplo: buscador de cursos parte 2 13:44
 ## El modelo en Spring 14:04
 ## Configuración mediante clases 06:32
