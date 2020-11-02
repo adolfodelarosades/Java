@@ -97,7 +97,6 @@ Aquí tienes como sería el esquema global Modelo Vista Controlador de una aplic
 
 Como vemos el ***Modelo se implementaría mediante clases normales al igual que el Controlador*** y cada bloque tendría su archivo de configuración en el que se definen las tareas, digamos, que tiene que realizar Spring. Ya sabemos que en el caso de las aplicaciones Java EE Standard el Controlador esta implementado con Servlets, aquí en Spring no, son clases normales y además no vamos a tener que crear un FromController puesto que ya nos lo proporciona Spring, es decir, ese Servlet que recibe las peticiones y reparte va a seguir existiendo, pero es un Servlet proporcionado por el propio Framework Spring que nosotros no vamos a tener que implementar, solo nos encargaremos de los Controladores de Acción que como ya se indica aquí, ya veremos en el ejercicio que hagamos son clases normales y corrientes que también tendrán su módulo de configuración específico en el que se le dira a Spring las tareas a realizar. Para la Vista vamos a seguir utilizando páginas JSPs, aunque hay ciertas tareas como la recogida de datos de los formularios se van a simplificar gracias a Spring.
 
-
 ![09-14](images/09-14.png)
 
 La interacción entre el Modelo y el Controlador son clases normales gestionadas por Spring ¿Cómo se va a realizar? En primer lugar esas clases las va a instanciar Spring, tanto el Modelo como el Controlador, clases que tendrán que estar anotadas con las anotaciones especificas de Spring para indicarle que tiene que instanciar dicha clase, `@Service` en el caso del Modelo, `@Controller` en el caso del Controlador, todo esto lo veremos con 
@@ -747,9 +746,194 @@ Lo que nos queda es probar la aplicación.
 
 ![09-50](images/09-50.png)
 
+En la arquitectura MVC el Modelo es el que se encarga de encapsular toda la lógica de negocio de la aplicación. 
+
 ![09-51](images/09-51.png)
 
+En el caso de Spring el modelo lo vamos a implementar en clases standars que las va a gestionar Spring y las va a instanciar y luego las va a inyectar, para ello esas clases deben estar anotadas con `@Service` este modelo realmente debería estar dividido en dos partes una que se encargue al acceso a datos como tal (que en este ejemplo no vamos a tener) y la otra parte la que tenga la lógica de negocios de la aplicación y que es la clase que realmente va a estar anotada con `@Service`. 
+
+Vamos a disponer de una Interfaz que exponga hacia el Controlador esos métodos ya que la interacción entre el Controlador y el Modelo se va a realizar a través de la Interfaz para poder desacoplar las capas. Utilizando otras anotaciones de Spring `@Autowired` le diremos al Controlador que Spring nos inyecte una implementación de la Interfaz del Modelo.
+
 ![09-52](images/09-52.png)
+
+El Modelo tendrá su propio archivo de configuración que llamaremos `springConfig.xml` lo que incluiremos en este archivo además de habilitar la configuración por anotaciones con `<context:annotation-config/>` algo similar a lo que había en la configuración del Controlador, también incluimos la etiqueta `<context:component-scan base-package="service" />` para indicarle donde esta el paquete o paquetes que contiene las clases que debe instanciar, esto es lo minimo ya después podemos indicarle si se van a utilizar objetos a acceso a datos con `<bean ...` que son las que le indican a Spring que tiene que instanciar sus propios objetos, en este primer objeto no los usaremos.
+
+Vamos a copiar una copia del proyecto **614-01-Buscador-Cursos** que llamaremos **614-02-Buscador-Cursos-Modelo** (no olvidar cambiar el Context Root).
+
+En esta nueva versión del proyecto vamos a separar la lógica de negocio del Controlador, las operaciones de busqueda de los cursos las vamos a meter en la capa independiente de Modelo con una clase que va a tener un método `buscador` que va a recibir el `tema` y va a devolver la lista de los cursos asociados a ese `tema`, la gestión de la lista de cursos por que de momento seguimos sin usar BD se va a arealizar en el Modelo en vez del Controlador como lo teniamos antes.
+
+1. Gestionar las dependencias, que son exactamente las mismas que ya teniamos.
+
+2. La creación de los JavaBenas que ya lo tenemos creado.
+
+3. Creación del Modelo que va a estar formado por una pareja de Interfaz-Clase de implementación.
+
+   * Creamos la Interfaz.
+   
+   ![09-53](images/09-53.png)
+   
+   ![09-54](images/09-54.png)
+   
+   La vamos a llamar `CursosService` por que `Service` por que a la capa del Modelo en Spring se le suele llamar capa de Servicio en el paquete `com.formacion.service`.
+   
+   En esta Interfaz vamos a declarar los métodos que queremos exponer hacia el Controlador y que van a tener que estar implementados en la Clase. El código de la Interfaz `CursosService` queda así:
+   
+```java
+package com.formacion.service;
+
+import java.util.List;
+import com.formacion.model.Curso;
+
+public interface CursosService {	
+   List<Curso> buscadorCursos(String tema);
+}
+```   
+
+   * Creamos la Clase que implemente la Interfaz llamada `CursosServiceImpl`.
+
+   ![09-55](images/09-55.png)
+   
+   En esta clase vamos a realizar lo que se hace actualmente en el Controlador es decir, crear la lista de Cursos por un lado y por otro filtrar los cursos. Nuestro código quedaría así:
+   
+```java
+package com.formacion.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.formacion.model.Curso;
+
+@Service
+public class CursosServiceImpl implements CursosService {
+	
+   List<Curso> cursos;
+	
+   public CursosServiceImpl() {
+		
+      cursos = new ArrayList<>();
+      cursos.add(new Curso("Java", "Programación", 50));
+      cursos.add(new Curso("Angular", "Programación", 30));
+      cursos.add(new Curso("Linux", "Sistemas", 40));
+      cursos.add(new Curso("Big Data", "Datos", 30));
+      cursos.add(new Curso("SQL", "Datos", 20));
+		
+   }
+
+   @Override
+   public List<Curso> buscadorCursos(String tema) {
+      List<Curso> resultado = cursos.stream()
+				.filter(curso -> curso.getTema().equalsIgnoreCase(tema))
+				.collect(Collectors.toList());
+		
+      return resultado;
+   }
+}
+``` 
+   Observece la notación `@Service` en la Clase no en la Interfaz, le indica a Spring que debe instanciarla para posteriormente inyectarla en el Controlador.
+   
+4. Modificar el Controlador.
+
+   Como hemos quitado la lógica de negocios del Controlador y la hemos pasado al Servicio, lo que vamos a hacer para poderla usar es inyectarla con la anotación `@Autowired` **la variable no va a ser del tipo de la Clase sino de la Interfaz** ¿Por qué? por que esto nos permite separar las capas adecuadamente, lo que se llama ***desacoplar*** las capas. El Controlador no debe conocer con que clases se implementa el Modelo, la lógica de negocios, simplemente necesita usar la Interfaz que expone los métodos que tiene que utilizar el Controlador, el como lo implemente no es cosa del Controlador por eso utilizamos Interfaces. El código del Controlador queda así:
+   
+```java 
+package com.formacion.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.formacion.model.Curso;
+import com.formacion.service.CursosService;
+
+@Controller
+public class CursosController {
+
+   @Autowired
+   CursosService service;
+	
+   @PostMapping(value="buscar")
+   public String buscador(@RequestParam("tema") String tema, HttpServletRequest request) {
+		
+      List<Curso> cursos = service.buscadorCursos(tema);
+      request.setAttribute("cursos", cursos);
+      return "cursos";
+   }
+}
+```
+
+   Lo que ha cambiado es la manera en que obtenemos los datos, se la pedimos a un Modelo que hemos implementado dentro de nuestra aplicación.
+   
+5. Configuración del Modelo
+
+   Debemos crear el nuevo archivo de configuarción `springConfig.xml` el cual por ahora solo va a incluir `<context:annotation-config/>` para habilitar la configuración por anotaciones, también incluimos la etiqueta `<context:component-scan base-package="service" />` para indicarle donde esta el paquete o paquetes que contiene las clases que debe instanciar Spring. Nuevamente para crear este archivo utilizamos el Pluging instalado en las primeras lecciones. 
+   
+   ![09-56](images/09-56.png)
+   
+   ![09-57](images/09-57.png)
+   
+   ![09-58](images/09-58.png)
+   
+   El código de `springConfig.xml` queda así:
+   
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- permitir configuración basada en anotaciones -->
+	<context:annotation-config />
+	<!-- escaneado del paquete que contiene la clase del modelo para instanciarla -->
+	<context:component-scan base-package="com.formacion.service" />
+
+</beans>
+```
+
+6. Incluir `springConfig.xml` dentro de `web.xml`.
+
+   Como hemos incluido un nuevo archivo de configuración esto lo debemos indicar dentro del archivo `web.xml` por lo que el código quedaría así:
+   
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>614-02-Buscador-Cursos-Modelo</display-name>
+  <welcome-file-list>
+    <welcome-file>datos.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/mvcConfig.xml
+  		/WEB-INF/springConfig.xml
+  		</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+   
+Finalmente vamos a probar nuestra aplicación, el funcionamiento debe ser exactamente el mismo.
+
+![09-59](images/09-59.png)
+
+![09-60](images/09-60.png)
+
+![09-61](images/09-61.png)
 
 ## Configuración mediante clases 06:32
 ## Ejemplo de aplicación configurada mediante clases 05:04
