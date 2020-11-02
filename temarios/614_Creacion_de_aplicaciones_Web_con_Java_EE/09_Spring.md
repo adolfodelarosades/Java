@@ -499,42 +499,38 @@ Vamos a pasar a la creación de las vistas las cuales son dos páginas JSP `dato
    El código completo de la página `datos.jsp` es el siguiente:
 
 ```html
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="ISO-8859-1">
+<title>Buscador de Cursos</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <title>Cursos</title>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
 </head>
 <body>
-	<div class="container">
-		<h1>Buscador de Cursos</h1>
-		
-		<form action="buscar" method="post" class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-2">Introduce tema:</label>
-				<input type="text" name="tema" class="form-control" style="width:30%">
+<div class="container">
+	<h1>Buscador de cursos</h1>
+	<br/>
+	<form action="buscar" method="post" class="form-horizontal" >
+		<div class="form-group">
+			<label class="control-label col-sm-2">Introduce tema:</label>
+			<input type="text" name="tema" class="form-control" style="width:30%"/>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default" style="width:30%">Buscar</button>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default" style="width:30%">Buscar</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	
-	
-	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
+		</div>
+	</form>
+</div>
 </body>
 </html>
 ```
@@ -553,48 +549,49 @@ Vamos a pasar a la creación de las vistas las cuales son dos páginas JSP `dato
    El codigo completo de la página `cursos.jsp` es el siguiente:
 
 ```html
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="ISO-8859-1">
+<title>Buscador de Cursos</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <title>Cursos Encontrados</title>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
 </head>
 <body>
-	<h1>Cursos</h1>
+<h1>Cursos</h1>	
+		<br/>
 	<div class="container">
-		<table border="1" class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Tema</th>
-					<th>Duración</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="curso" items="${requestScope.cursos}">
-				<tr>
-					<td>${curso.nombre}</td>
-					<td>${curso.tema}</td>
-					<td>${curso.duracion}</td>
-				</tr>
+		<div >
+			<table border="1" class="table table-striped table-bordered" >
+				<thead><tr><th>Nombre</th><th>Tema</th><th>Duración</th></tr></thead>
+				<tbody>
+				<c:forEach var="c" items="${requestScope.cursos}">
+					<tr>
+						<td>${c.nombre}</td>
+						<td>${c.tema}</td>
+						<td>${c.duracion}</td>					
+					</tr>
 				</c:forEach>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
+		<br/>
+		<a href="volver">Volver</a>
 	</div>
 </body>
 </html>
 ```
 
-3. Crear archivos de configuración
+3. Crear archivos de configuración `web.xml`
 
    ¿Qué archivos de configuración necesitamos?
    
@@ -632,6 +629,119 @@ Vamos a pasar a la creación de las vistas las cuales son dos páginas JSP `dato
   </servlet-mapping>
 </web-app>
 ```
+
+   En este DispatcherServlet dentro de `<init-param>` definimos el otro archivo de configuración `mvcConfig.xml` que debemos implementar (el nombre es que queramos poner).
+   
+4. Crear archivos de configuración `mvcConfig.xml` 
+
+   Para crear este archivo utilizaremos el Pluging instalado en las primeras lecciones, nos colocamos en el nombre del proyecto - New - Other - Spring Bean Configuration File
+
+   ![09-38](images/09-38.png)
+   
+   ![09-39](images/09-39.png)
+   
+   Selecciomos la carpeta donde debe almacenarse el archivo que debe ser `WEB-INF` y le ponemos el nombre `mvcConfig.xml`
+   
+   ![09-40](images/09-40.png)
+   
+   En el siguiente paso nos pide los NameSpaces, los archivos XML estan formados por etiquetas las cuales estan en diferentes espacios de nombre, librerías de etiquetas, una librería de etiquetas que siempre se va a incluir la marquemos o no es `beans` que es la que sirve para definir los objetos, lo marquemos o no se va a incluir, ademas de esta necesitamos incluir `mvc` al hacerlo aparecen opciones abajo, no seleccionaremos nada con lo que recuperamos solo las que vengan por defecto, damos Finish y se nos genera el archivo `mvcConfig.xml`.
+   
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+
+</beans>
+```   
+
+   Se nos han creado dos NameSpace `beans` que no lleva ningun prefijo y `mvc` con el prefijo `xmlns:mvc`.
+   
+   Que pasa si nos damos cuenta que necesitamos alguna etiqueta adicional por que no incluimos su NameSpace, podemos dar en la pestaña NameSpace para incorporar el que nos haya faltado.
+   
+   ![09-41](images/09-41.png)
+   
+   Como podemos ver aun que no marcamos `beans` implicitamente se incluiyo.
+   
+   Las etiquetas que debemos incluir son las siguientes:
+   
+```html
+<mvc:annotation-driven/>
+<context:component-scan base-package="com.formacion.controller"/>
+
+<bean id="resolver"
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/"></property>
+	<property name="suffix" value=".jsp"></property>
+</bean>
+<!-- controladores para navegación estática -->
+<mvc:view-controller path="volver" view-name="datos"/>
+```
+   
+   ![09-42](images/09-42.png)
+   
+   Como podemos ver nos esta marcando un error esto es por que nos falto incluir el NameSpace `context`, volvemos a la pestaña NameSpace e incluimos `context`:
+   
+   ![09-43](images/09-43.png)
+   
+   Dentro del NameSpace `context` tenemos algunas etiquetas necesarias como el `<context:component-scan...` que le dice a Spring donde estan los paquetes donde estan las clases que hay que instanciar, las clases que encuentre en ese paquete o paquetes anotadas con `@Controller` o con algunas anotaciones más que veremos después como `@Repository`, `@Service` etc. las instanciara.
+   
+   Con `<mvc:annotation-driven/>` la cual es una etiquete de `mvc` para permitir el uso de anotaciones en Spring.
+   
+   Con `<bean id="resolver" ...` definimos el objeto encargado de resolver las vistas es decir, cuando se devuelve el `String` en un método de Controlador de Acción Spring nos redireccionar a una página que se ubique en `/` indicado en la propiedad `prefix` y que tengan una extensión `.jsp` indicada en la propiedad `suffix`. Es decir en la raíz de `WebContext` y que sea `.jsp`.
+   
+   También tenemos un controlador de navegación estatica donde el `path="volver"` es el enlace URL que tenemos en la página de `cursos.jsp` es decir `<a href="volver">Volver</a>`. En los URLs de las páginas JSP en lugar de poner direcciones de directas a otro JSP ponemos direcciones "virtuales" para que el Front Controller sea siempre el que reciba las peticiones y las vaya redirigiendo. Por lo que ese `"volver"` es interpretado en el Front Controller gracias a los controladores de navegación `<mvc:view-controller path="volver" view-name="datos"/>`, al recibir el DispatcherServlet el `path="volver"` comprobara en `view-name="datos"` el nombre de la página y a través del `InternalResourceViewResolver` intentara localizar una página llamada `datos` en la dirección `/` con extensión `.jsp` es decir, `/datos.jsp`.
+   
+   El código completo de `mvcConfig.xml` es:
+   
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<mvc:annotation-driven/>
+	<context:component-scan base-package="com.formacion.controller"/>
+	
+	<bean id="resolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!-- controladores para navegación estática -->
+	<mvc:view-controller path="volver" view-name="datos"/>
+
+</beans>
+```   
+   
+Con esto ya tenemos toda la información registrada, hemos seguido todos los pasos:
+
+* Crear las dependencias
+* Crear el JavaBean
+* Crear el Controller
+* Crear las Vistas
+* Crear los archivos de configuración
+
+![09-44](images/09-44.png)
+
+Lo que nos queda es probar la aplicación.
+
+![09-45](images/09-45.png)
+
+![09-46](images/09-46.png)
+
+![09-47](images/09-47.png)
+
+![09-48](images/09-48.png)
+
+![09-49](images/09-49.png)
 
 ## El modelo en Spring 14:04
 ## Configuración mediante clases 06:32
