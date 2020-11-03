@@ -970,6 +970,163 @@ Por otro lado tenemos las anotaciones iniciales que tienen que ir delante de la 
 ¿Cómo le indicamos en el archivo `web.xml` que no vamos a utilizar archivos XML sino Clases Java de configuración? Lo tenemos en la imagen, lo primero el `DispatcherServlet` es registrado igual que antes pero los parámetros si cambian en vez de indicarle el parámetro que utilizamos anteriormente para decirle que íbamos a realizar configuración basada en XML, tendremos que registrar el `AnnotationConfigWebApplicationContext` qué es el objeto que permite resolver la configuración a través de Clases, lo definimos con el nombre `contextClass`, en otro `<init-param>` definimos el `contextConfigLocation` donde le vamos a indicar la localización de dichas Clases de configuración con la sintaxis paquete.NombreClase es decir `config.MvcConfig` y `config.springConfig` cada una en una línea separada.
 
 ## Ejemplo de aplicación configurada mediante clases 05:04
+
+En este ejemplo vamos a hacer una copia del proyecto **614-02-Buscador-Cursos-Modelo** para cambiar la configuración del proyecto utilizando Clases Java en lugar de archivos XML. Llamaremos a nueva versión del proyecto **614-03-Buscador-Cursos-Config-Clases**.
+
+Vamos a realizar los siguientes pasos:
+
+1. Eliminar los archivos `mvcConfig.xml` y `springConfig.xml` del directorio `WEB-INF`.
+
+2. Crear la clase `SpringConfig` en el paquete `com.formacion.config` con el siguiente contenido.
+
+   Si recordamos lo que teniamos en el archivo de configuración XML `springConfig.xml`.
+   
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- permitir configuración basada en anotaciones -->
+	<context:annotation-config />
+	<!-- escaneado del paquete que contiene la clase del modelo para instanciarla -->
+	<context:component-scan base-package="com.formacion.service" />
+
+</beans>
+```   
+   Aquí tenemos la etiqueta que nos permite la configuración por anotaciones que a nivel de clases no se lo tenemos que decir va digamos implicito y la otra parte es el `component-scan` para indicarle el paquete donde estan las Clases que debe scanear.
+   
+   Por lo tanto nuestro archivo `SpringConfig` va a tener el siguiente código:
+   
+```java
+package com.formacion.config;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@ComponentScan(basePackages = {"com.formacion.service"})
+@Configuration
+public class SpringConfig {
+
+}
+```
+ 
+   Estamos usando la anotación `@ComponentScan` que es el similar de la etiqueta `<context:component-scan...` en el archivo XML para indicar el paquete a Scanear para las Clases de Servicio y además usamos `@Configuration` para indicar que es una Clase de Configuración, como no vamos a crear ningún objeto no contamos con ningun método anotado con `@Bean`, en este ejemplo la clase esta vacía es un ejemplo muy sencillo.
+   
+3. Crear la clase `MvcConfig` en el paquete `com.formacion.config` con el siguiente contenido.
+
+   Si recordamos lo que teniamos en el archivo de configuración XML `mvcConfig.xml`.
+   
+```html  
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<mvc:annotation-driven/>
+	<context:component-scan base-package="com.formacion.controller"/>
+	
+	<bean id="resolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!-- controladores para navegación estática -->
+	<mvc:view-controller path="volver" view-name="datos"/>
+
+</beans>
+```
+
+   Nuestro archivo `MvcConfig` va a tener el siguiente contenido:
+   
+```java
+package com.formacion.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+@ComponentScan(basePackages = {"com.formacion.controller"})
+@EnableWebMvc
+@Configuration
+public class MvcConfig implements WebMvcConfigurer {
+
+   @Bean
+   public InternalResourceViewResolver getInternalResourceViewResolver() {
+      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+      resolver.setPrefix("/");
+      resolver.setSuffix(".jsp");
+      return resolver;
+   }
+	
+   @Override
+   public void addViewControllers(ViewControllerRegistry registry) {
+      registry.addViewController("/volver").setViewName("datos");
+   }
+}
+```
+
+   * La anotamos con `@ComponentScan` para indicarle el paquete donde esta el Controller para que lo instancie.
+   * Con `@EnableWebMvc` habilitamos el módulo Spring Web MVC
+   * Con `@Configuration` le indicamos que es una Clase de configuración
+   * Esta clase tiene que implementar `WebMvcConfigurer` por que esa interfaz tiene un método `addViewControllers` donde indicamos las reglas de navegación estática, es decir cuando llega una petición que no necesita ser gestionada por ningún controlador debe saber a que vista hay que dirigirlo, por lo que vamos añadiendo `addViewController` lo que haciamos en el archivo XML con la etiqueta `<mvc:view-controller...`., en `setViewName("datos")` indicamos a que vista queremos que nos redirigá.
+   * El objeto que hay que crear en el archivo XML lo haciamos con el tag `<bean id="resolver"` en este caso lo hacemos con el método `getInternalResourceViewResolver()` anotado con `@Bean` nos devuelve una "cadena" para saber a que vista hay que redirigirse basandose en una ubicación `/` con la extensión `.jsp`. Ya que esta anotado con `@Bean` Spring lo llama nada más iniciarse ya que evalua todas las clases de configuración llama a los métodos `@Bean` para que le de los objetos y los tenga listos Spring para realizar su tarea.
+   
+4. Modificar el archivo `web.xml` para indicar que usaremos clases de configuración en lugar de archivos XML. El archivo queda así:
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+	<display-name>614-03-Buscador-Cursos-Config-Clases</display-name>
+	<welcome-file-list>
+		<welcome-file>datos.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>
+ 				org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+ 			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+ 				com.formacion.config.MvcConfig
+ 				com.formacion.config.SpringConfig
+ 			</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
+```
+   * Hemos cambiado los parámetros incluyendo el `AnnotationConfigWebApplicationContext` que a su vez le del otro parámetro `contextConfigLocation` donde encuentra las rutas de las clases de configuración `com.formacion.config.MvcConfig` y `com.formacion.config.SpringConfig`
+   
+Lo ultimo es probar nuestro proyecto **614-03-Buscador-Cursos-Config-Clases**.
+
+![09-67](images/09-67.png)
+
+![09-68](images/09-68.png)
+
+![09-69](images/09-69.png)
+
 ## Configuración sin web.xml 07:38
 ## Acceso a datos en Spring 11:01
 ## Implementación de la agenda de contactos en Spring parte 1 18:14
