@@ -1128,6 +1128,14 @@ Lo ultimo es probar nuestro proyecto **614-03-Buscador-Cursos-Config-Clases**.
 ![09-69](images/09-69.png)
 
 ## Configuración sin web.xml 07:38
+
+![09-70](images/09-70.png)
+
+![09-71](images/09-71.png)
+
+![09-72](images/09-72.png)
+
+
 ## Acceso a datos en Spring 11:01
 ## Implementación de la agenda de contactos en Spring parte 1 18:14
 ## Implementación de la agenda de contactos en Spring parte 2 13:16
