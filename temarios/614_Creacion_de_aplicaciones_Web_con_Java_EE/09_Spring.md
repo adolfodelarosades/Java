@@ -1131,12 +1131,112 @@ Lo ultimo es probar nuestro proyecto **614-03-Buscador-Cursos-Config-Clases**.
 
 ![09-70](images/09-70.png)
 
+Acabamos de ver cómo podemos eliminar los archivos de configuración XML, la configuración Spring y sustituilo por Clases. ¿Podríamos hacer lo mismo con el archivo de configuración oficial Java EE `web.xml`? pues sí también podemos prescindir de este archivo y sustituido por una clase de configuración.
+
 ![09-71](images/09-71.png)
+
+Tendría que ser una clase que implemente la interfaz `WebApplicationInitializer` dentro de la cual encontramos un método `onStartUp()` que va a ser ejecutado durante el inicio de la aplicación y por lo tanto en el que habrá que hacer ciertas tareas como ***la creación del contexto de aplicación web*** y ***el registro de DispatcherServer***.
+
 
 ![09-72](images/09-72.png)
 
+¿Cómo es esa Clase? esa Clase se puede llamar de cualquier manera en este caso la estamos llamando `Inicializador` y como comentamos debe implementar `WebApplicationInitializer` donde vamos a sobreescribir el método `onStartUp()`. ¿No debemos indicarle a Spring la ubicación de esa clase en ningún sitio? pues no porque las implementaciones de estas interfaces son detectadas automáticamente por un objeto de Spring que se llama el 
+`SpringServletContainerInitializer` objeto que es iniciado automáticamente por el contenedor web Java EE, ese objeto digamos va dentro de la librería de Spring, entonces al iniciarse el contenedor, el servidor de aplicaciones Tomcat por ejemplo inicia este objeto `SpringServletContainerInitializer` que se encarga de detectar todas las implementaciones de `WebApplicationInitializer` y de instanciarlas y llamar al método `onStartUp()` todo eso durante el arranque de la aplicación, bueno al inicializarce el servidor y por lo tanto  al iniciarse la aplicación que esta dentro de dicho servidor. ¿Qué es lo que tendríamos que programar dentro del método `onStartUp()` vamos a verlo en el siguiente proyecto que es una nueva versión del proyecto **614-03-Buscador-Cursos-Config-Clases**, vamos a hacer una copia que llamaremos **614-04-Buscador-Cursos-Sin-WebXML**.
+
+1. Vamos a eliminar el archivo `web.xml`
+
+2. Crear la Clase `Inicializador.java` que implementa la interface `WebApplicationInitializer` dentro del paquete `com.formacion.config`, que es la clase que va a sustituir la configuración que haciamos con `web.xml`. El código de esta Clase es el siguiente:
+
+```java
+package com.formacion.config;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
+
+public class Inicializador implements WebApplicationInitializer {
+
+   @Override
+   public void onStartup(ServletContext container) {
+      // Registra la clase de configuración del modelo
+      AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+      rootContext.register(SpringConfig.class);
+		
+      // Registra la clase de configuración del controlador
+      AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+      dispatcherContext.register(MvcConfig.class);
+		
+      // Gestiona el ciclo de vida del contexto de aplicación
+      container.addListener(new ContextLoaderListener(rootContext));
+		
+      // Crea y registra el DispatcherServlet
+      ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
+      dispatcher.setLoadOnStartup(1);
+      dispatcher.addMapping("/");
+   }
+}
+```
+
+   * El método `onStartup(...)` tiene que realizar una serie de tareas:
+      * Registrar las clases de configuración que vamos a utilizar usando el método `register(...)` del objeto `AnnotationConfigWebApplicationContext` para cada una de esas clases. ¿Por qué dos objetos? Cada uno sirve para los objetos principales de la aplicación correspondiente.
+      * A partir del `ServletContext` tenemos que registrar dos objetos, usando el método `addListener(...)` añadimos el `ContextLoaderListener` que es escuchador de aplicación, gestiona el ciclo de vida de la aplicación y es al que le vamos a pasar la configuración del modelo `rootContext`. El segundo objeto que tenemos que registrar es el DispatcherServer, el Servlet que se encarga de hacer de Front Controller y atender todas las peticiones que vienen del cliente, a traves del método `addServlet` del `ServletContext` añadimos un Server que llamamos `dispatcher` que es un objeto `DispatcherServlet(dispatcherContext)` al que le pasamos el objeto de configuración del Controlador y le asignamos un par de propiedades `setLoadOnStartup(1)` para que se arranque al principio y `.addMapping("/")` para que atienda a todas las peticiones que llegan a la aplicación. 
+      
+   ESTE ARCHIVO VA A SER SIMILAR EN TODAS LAS APLICACIONES WEB QUE CREEMOS CON SPRING.
+
+   ¿Qué pasa con la página de bienvenida?
+   
+3. Gestionar la página de bienvenida desde el archivo `MvcConfig.java`.
+
+   Cuando llegue la petición `/` vamos a redirigirle a la página `datos`. El codigo queda así:
+   
+```java
+package com.formacion.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+@ComponentScan(basePackages = {"com.formacion.controller"})
+@EnableWebMvc
+@Configuration
+public class MvcConfig implements WebMvcConfigurer {
+
+   @Bean
+   public InternalResourceViewResolver getInternalResourceViewResolver() {
+      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+      resolver.setPrefix("/");
+      resolver.setSuffix(".jsp");
+      return resolver;
+   }
+	
+   @Override
+   public void addViewControllers(ViewControllerRegistry registry) {
+      registry.addViewController("/").setViewName("datos");
+      registry.addViewController("/volver").setViewName("datos");
+   }
+}
+```
+
+Con esto tenemos lista nuestra aplicación **614-04-Buscador-Cursos-Sin-WebXML** que vamos a probar.
+
+![09-73](images/09-73.png)
+
+![09-74](images/09-74.png)
+
+![09-75](images/09-75.png)
+
+La aplicación sigue trabajando de la misma forma pero sin utilizar ningún archivo de configuración XML, toda la configuración no solo la de Spring sino también la oficial de Java EE realizandola a través de Clases con anotaciones. 
 
 ## Acceso a datos en Spring 11:01
+
 ## Implementación de la agenda de contactos en Spring parte 1 18:14
 ## Implementación de la agenda de contactos en Spring parte 2 13:16
 ## Implementación de la agenda de contactos en Spring parte 3 11:45
