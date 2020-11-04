@@ -1368,7 +1368,38 @@ En Eclipse vamos a crear una nueva aplicación Dynamic Web Project llamada **614
 
 Vamos a seguir los siguientes pasos para crear nuestra aplicación.
 
-1. Mavenizar nuestra aplicación.
+### O. Base de Datos
+
+Contamos con la Base de Datos Agenda con dos tablas `contactos` y `usuarios`, para nuestra aplicación solo vamos a usar la tabla `contactos`.
+
+![09-92](images/09-92.png)
+
+![09-93](images/09-93.png)
+
+![09-94](images/09-94.png)
+
+```sql
+CREATE TABLE `contactos` (
+  `idContacto` int unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `telefono` int unsigned NOT NULL,
+  PRIMARY KEY (`idContacto`)
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1
+```
+
+```sql
+CREATE TABLE `usuarios` (
+  `idUsuario` int unsigned NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`idUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1
+```
+
+### 1. Mavenizar Aplicación
+
+Mavenizar nuestra aplicación.
 
 ![09-86](images/09-86.png)
 
@@ -1459,7 +1490,9 @@ El código completo es:
 </project>
 ```
 
-2. Vamos a crear los JavaBeans que vayamos a necesitar. Normalmente se asocia un JavaBean con cada tabla de la base de datos con la que se vaya a trabajar, en este caso tenemos la tabla `contactos`:
+### 2. Crear JavaBeans
+
+Vamos a crear los JavaBeans que vayamos a necesitar. Normalmente se asocia un JavaBean con cada tabla de la base de datos con la que se vaya a trabajar, en este caso tenemos la tabla `contactos`:
 
 ```sql
 CREATE TABLE `contactos` (
@@ -1531,10 +1564,12 @@ public class Contacto {
 ```
 
 ## Implementación de la agenda de contactos en Spring parte 2 13:16
- 
-3. Vamos a trabajar sobre la Capa Repository creando una Interface y una Clase que implemente dicha interface.
 
-   * 3.1 Vamos a crear en el paquete `com.agenda.repository`  la Interface `ContactoRepository`
+### 3. Crear la Capa Repository
+ 
+Vamos a trabajar sobre la Capa Repository creando una Interface y una Clase que implemente dicha interface.
+
+#### 3.1 Vamos a crear en el paquete `com.agenda.repository`  la Interface `ContactoRepository`
 
    ![09-88](images/09-88.png)
    
@@ -1580,7 +1615,7 @@ public interface ContactoRepository {
 
    Estos son lo métodos que expone la Capa Repository que estan centrados en las tareas de acceso a datos lo que se suele llamar las operaciones CRUD.
    
-   * 3.2 Vamos a implementar la Interface, creamos en el mismo paquete la clase `ContactosRepositoryImpl` que va a implementar la Interface `ContactoRepository`.
+#### 3.2 Vamos a implementar la Interface, creamos en el mismo paquete la clase `ContactosRepositoryImpl` que va a implementar la Interface `ContactoRepository`.
    
    ![09-89](images/09-89.png)
 
@@ -1603,7 +1638,7 @@ public class ContactosRepositoryImpl implements ContactoRepository {
 
    @Override
    public void altaContacto(Contacto contacto) {
-      String sql = "INSERT INTO (nombre, email, telefono) VALUES (?, ? , ?)";
+      String sql = "INSERT INTO contactos(nombre, email, telefono) VALUES (?, ? , ?)";
       template.update(sql, contacto.getNombre(), contacto.getEmail(), contacto.getTelefono());
    }
 
@@ -1657,10 +1692,12 @@ public class ContactosRepositoryImpl implements ContactoRepository {
    * Para SQL de acción (`insert`, `update`, `delete`) usamos el método `update` del `JdbcTemplate` y como habiamos visto reciben como primer parámetro el `sql` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
    * Para los SQL de consulta (`select`) usamos el método `query` del `JdbcTemplate` que recibe como primer parámetro el `sql`, como segundo parámetro tenemos que pasar la implementación de la Interface `RowMapper` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
    * Para implementar la Interface Funcional `RowMapper` la cual tiene un único método `mapRow(ResultSet rs, int rowNum)` que indica como se tiene que transformar un `ResultSet` en un objeto en nuestro caso de tipo `Contacto`. Para implementarla lo más sencillo es utilizar una expresión Lambda que realice la implementación de ese método. Como vemos `mapRow(ResultSet rs, int rowNum)` recibe dos parametros y en cada método indicmos como se debe construir nuestro objeto `Contacto`.
-      
-4. Vamos a crear la Capa Service
 
-   * 4.1 En el paquete `com.agenda.service` vamos a crear la Interface `ContactosService`.
+### 4. Crear la Capa Service
+
+Vamos a crear la Capa Service
+
+#### 4.1 En el paquete `com.agenda.service` vamos a crear la Interface `ContactosService`.
    
    ![09-90](images/09-90.png)
    
@@ -1687,7 +1724,7 @@ public interface ContactosService {
    * Obtener la lista de contactos
    * Eliminar un contacto, devuelve un `boolean` para saber si pudo o no eliminar el contacto
       
-   * 4.2 En el paquete `com.agenda.service` vamos a crear la Clase `ContactosServiceImpl` que implementa la Interface `ContactosService`.
+#### 4.2 En el paquete `com.agenda.service` vamos a crear la Clase `ContactosServiceImpl` que implementa la Interface `ContactosService`.
    
    ![09-91](images/09-91.png)
 
@@ -1746,7 +1783,7 @@ Con esto ya tenemos implementada todo el Modelo, toda la Capa de Lógica de Nego
       
 ## Implementación de la agenda de contactos en Spring parte 3 11:45
 
-### Creación de la Capa del Controlador
+### 5. Creación de la Capa del Controlador
 
 Es el turno del desarrollo del Controlador, vamos a desarrollar una Clase Controladora de Acción con tres métodos que van a responder a las tres peticiones que pueden hacer los clientes que requieren alguna acción, dar de alta un nuevo contacto, recuperar la lista de contactos o eliminar un contacto. Vamos a seguir los siguientes pasos:
 
@@ -1813,7 +1850,7 @@ public class ContactosController {
    
 Ya tenemos la Capa del Controlador.   
 
-### Creación de la Capa Vistas
+### 6. Creación de la Capa Vistas
 
 Ahora vamos a realizar las diferentes Vistas.
 
@@ -1977,6 +2014,151 @@ Los códigos de las vistas son los siguientes:
 ```
 
 ## Implementación de la agenda de contactos en Spring parte 4 11:13
+
+### 7. Archivos de Configuración.
+
+Lo que nos falta para concluir el ejercicio es la configuración Spring, las clases de configuración que serían la clase de configuración del Modelo, la clase de configuración del Controlador y el equivalente al `web.xml` que es la clase `Inicializador`.
+
+1. Crear en el paquete `com.agenda.config` la Clase `SpringConfig` con el siguiente código.
+
+```java
+package com.agenda.config;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+@ComponentScan(basePackages = {"com.agenda.repository", "com.agenda.service"})
+@Configuration
+public class SpringConfig {
+	
+   @Bean
+   public DriverManagerDataSource getDataSource() {
+      DriverManagerDataSource data = new DriverManagerDataSource();
+      data.setDriverClassName("com.mysql.jdbc.Driver");
+      data.setUrl("jdbc:mysql://localhost:3306/agenda?serverTimezone=Europe/Madrid");
+      data.setUsername("root");
+      data.setPassword("root");
+      return data;
+   }
+	
+   @Bean 
+   public JdbcTemplate getTemplate(DataSource datasource) {
+      return new JdbcTemplate(datasource);
+   }
+
+}
+```
+   Observaciones sobre la clase:
+   
+   * Anotada con `@Configuration`
+   * Anotarla con `@CoponentScan` indicando la lista de los paquetes donde estan las clases que tiene que instanciar es decir, tanto las clases del Repository como las del Service.
+   * En el interior de la clase vamos a crear los dos objetos del Modelo, por un lado el DataSource con toda la información de conexión a la base de datos que tendrá que ser inyectado en el Constructor del `JdbcTemplate` que es el otro objeto que también tiene que crear Spring dentro del Modelo. Son dos métodos anotados con `@Bean` por un lado el `getDataSource()` crea el `DataSource` indicandole todos los datos necesarios para conectarse a la BD y por otro ladio tenemos el método `getTemplate(DataSource datasource)` para crear un objeto `JdbcTemplate` como necesita un `DataSource` lo paseamos como parámetro en el método y con eso ya sabe Spring que lo tiene que inyectar allí.
+   
+Con esto ya tenemos completa la configuración del Modelo.
+
+2. Crear en el paquete `com.agenda.config` la Clase `MvcConfig` con el siguiente código.
+
+```java
+package com.agenda.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+@ComponentScan(basePackages = {"com.agenda.controller"})
+@EnableWebMvc
+@Configuration
+public class MvcConfig implements WebMvcConfigurer {
+   @Bean
+   public InternalResourceViewResolver getInternalResourceViewResolver() {
+      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+      resolver.setPrefix("/");
+      resolver.setSuffix(".jsp");
+      return resolver;
+   }
+	
+   @Override
+   public void addViewControllers(ViewControllerRegistry registry) {
+      registry.addViewController("/").setViewName("inicio");
+      registry.addViewController("/volver").setViewName("inicio");
+      registry.addViewController("/paginaAlta").setViewName("datos");
+   }
+
+}
+``` 
+   Observaciones de la Clase.
+   
+   * Implementa la Interface `WebMvcConfigurer` donde se tiene que sebreescribir por tanto el método `addViewControllers(...)`
+   * La clase esta anotada con `@Configuration`
+   * La clase esta anotada con `@EnableWebMvc`
+   * La clase esta anotada con `@ComponentScan(basePackages = {"com.agenda.controller"})`, indica donde esta el paquete del Controlador.
+   * Método `getInternalResourceViewResolver()` para resolver las vistas.
+   * Método `addViewControllers(...)` para las navegaciones estáticas, página de bienvenida, enlace volver y el enlace para dar de alta un nuevo contacto.
+
+3. Crear en el paquete `com.agenda.config` la Clase `Inicializador` con el siguiente código.
+
+```java
+package com.agenda.config;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
+
+public class Inicializador implements WebApplicationInitializer {
+
+    @Override
+    public void onStartup(ServletContext container) {
+      // Registra la clase de configuración del modelo
+      AnnotationConfigWebApplicationContext rootContext =
+        new AnnotationConfigWebApplicationContext();
+      rootContext.register(SpringConfig.class);
+      // Registra la clase de configuración del controlador
+      AnnotationConfigWebApplicationContext dispatcherContext =
+        new AnnotationConfigWebApplicationContext();
+      dispatcherContext.register(MvcConfig.class);
+      // Gestiona el ciclo de vida del contexto de aplicación
+      container.addListener(new ContextLoaderListener(rootContext));     
+
+      // Crea y registra el DispatcherServlet
+      ServletRegistration.Dynamic dispatcher =
+        container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
+      dispatcher.setLoadOnStartup(1);
+      dispatcher.addMapping("/");
+    }
+
+ }
+```
+   Esta clase practicamente la misma siempre y cuando no cambien los nombres de los archivos de configuración.
+
+### 8. Probar la Aplicación
+
+Tenemos listo todo el código vamos a probar la aplicación **614-05-Agenda**.
+
+![09-95](images/09-95.png)
+
+![09-96](images/09-96.png)
+
+![09-97](images/09-97.png)
+
+![09-98](images/09-98.png)
+
+![09-99](images/09-99.png)
+
+![09-100](images/09-100.png)
+
 ## Utilización de un datasource del servidor en Spring 08:47
 ## Encapsulación de datos de un formulario 13:15
 ## Ajax en Spring 16:13
