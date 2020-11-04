@@ -1272,7 +1272,6 @@ Y también vamos a necesitar la dependencia para el conector de MySQL o de la BD
 
 Una vez que ya tenemos las dependencias podemos utilizar `jdbcTemplate` que se encarga de gestionar todo el tema de las conexiones, el statment y para ello se basa en el uso de un `DataSource`, por lo tanto a la hora de configurar `jdbcTemplate` para poder utilizarlo después en la aplicación, por un lado debemos registrar un objeto `DataSource`, crear un `DataSource` en definitiva dentro de la clase de configuración, por lo que vamos a tener un método anotado con `@Bean` que nos devuelva un `DriverManagerDataSource` que es la Clase de Spring que implementa la Interfaz `DataSource`, ya sabemos como funciona un `DataSource`. En el caso que estamos viendo lo crearía directamente Spring el propio `DataSource` aunque también sabemos que los `DataSource` son objetos que viven en el servidor de aplicaciones por lo que no necesitaríamos crearlo desde aquí sino llamarlo directamente desde nuestra clase de configuración. Así que tenemos dos opciones que Spring cree el `DataSource` con una clase para gestionar `DataSource` o bien utilizando el del Servidor de Aplicaciones. En el caso que se cree con una Clase de Spring se le tiene que proporcionar el `DriverClassName`, la cadena de conexión (`URL`), el usuario y la contraseña lo habitual. Luego ya con este Objeto lo utilizamos para crear el `jdbcTemplate` para eso tenemos un segundo método `getTemplate(DataSource datasource)` anotado con `@Bean` que devuelve un `jdbcTemplate` que será encargado de crear presisamente ese `jdbcTemplate`, para ello le pasamos el parámetro `DataSource datasource` con esto Spring sabe que tiene que inyectar un objeto que implemente esa Interfaz es decir el objeto `DriverManagerDataSource` definido en el método anterior `getDataSource`, por lo tanto sabremos que en `datasource` estará inyectado el otro objeto que Spring habrá Inyectado.
 
-
 ![09-79](images/09-79.png)
 
 ¿Qué métodos nos proporciona `jdbcTemplate` para poder operar con una base de datos que son tan sencillos de manejar. En primer lugar como `jdbcTemplate` es un objeto Spring, Spring se encarga de crearlo de instanciarlo y cuando nosotros lo necesitemos en la lógica de negocios, en el Modelo, lo inyectaremos con:
@@ -1535,7 +1534,7 @@ public class Contacto {
  
 3. Vamos a trabajar sobre la Capa Repository creando una Interface y una Clase que implemente dicha interface.
 
-   * Vamos a crear en el paquete `com.agenda.repository`  la Interface `ContactoRepository`
+   3.1 Vamos a crear en el paquete `com.agenda.repository`  la Interface `ContactoRepository`
 
    ![09-88](images/09-88.png)
    
@@ -1581,7 +1580,7 @@ public interface ContactoRepository {
 
    Estos son lo métodos que expone la Capa Repository que estan centrados en las tareas de acceso a datos lo que se suele llamar las operaciones CRUD.
    
-   * Vamos a implementar la Interface, creamos en el mismo paquete la clase `ContactosRepositoryImpl` que va a implementar la Interface `ContactoRepository`.
+   3.2 Vamos a implementar la Interface, creamos en el mismo paquete la clase `ContactosRepositoryImpl` que va a implementar la Interface `ContactoRepository`.
    
    ![09-89](images/09-89.png)
 
@@ -1651,16 +1650,17 @@ public class ContactosRepositoryImpl implements ContactoRepository {
 }
 ```
    En esta Clase tenemos las siguientes observaciones:
-      * La anotamos con `@Repository` para que Spring la instancie, es la anotación que se suele poner a las clases que acceden a datos.
-      * Como vamos a usar Spring JDBC debemos inyectar el objeto `JdbcTemplate` que es la base de Spring JDBC
-      * Implementamos cada método de la interface, aquí nos olvidamos de conexiones, statement, cierre de conexiones, etc, no tenemos que preocuparnos de nada solo de la implementación de cada método. Con respecto a las excepciones tampoco las capturamos, se pueden dar pero no son obligatorias, no son excepciones Checked sin RunTimeException, en este caso no vamos a capturar ninguna excepción.
-      * Para SQL de acción (`insert`, `update`, `delete`) usamos el método `update` del `JdbcTemplate` y como habiamos visto reciben como primer parámetro el `sql` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
-      * Para los SQL de consulta (`select`) usamos el método `query` del `JdbcTemplate` que recibe como primer parámetro el `sql`, como segundo parámetro tenemos que pasar la implementación de la Interface `RowMapper` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
-      * Para implementar la Interface Funcional `RowMapper` la cual tiene un único método `mapRow(ResultSet rs, int rowNum)` que indica como se tiene que transformar un `ResultSet` en un objeto en nuestro caso de tipo `Contacto`. Para implementarla lo más sencillo es utilizar una expresión Lambda que realice la implementación de ese método. Como vemos `mapRow(ResultSet rs, int rowNum)` recibe dos parametros y en cada método indicmos como se debe construir nuestro objeto `Contacto`.
+   
+   * La anotamos con `@Repository` para que Spring la instancie, es la anotación que se suele poner a las clases que acceden a datos.
+   * Como vamos a usar Spring JDBC debemos inyectar el objeto `JdbcTemplate` que es la base de Spring JDBC
+   * Implementamos cada método de la interface, aquí nos olvidamos de conexiones, statement, cierre de conexiones, etc, no tenemos que preocuparnos de nada solo de la implementación de cada método. Con respecto a las excepciones tampoco las capturamos, se pueden dar pero no son obligatorias, no son excepciones Checked sin RunTimeException, en este caso no vamos a capturar ninguna excepción.
+   * Para SQL de acción (`insert`, `update`, `delete`) usamos el método `update` del `JdbcTemplate` y como habiamos visto reciben como primer parámetro el `sql` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
+   * Para los SQL de consulta (`select`) usamos el método `query` del `JdbcTemplate` que recibe como primer parámetro el `sql`, como segundo parámetro tenemos que pasar la implementación de la Interface `RowMapper` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
+   * Para implementar la Interface Funcional `RowMapper` la cual tiene un único método `mapRow(ResultSet rs, int rowNum)` que indica como se tiene que transformar un `ResultSet` en un objeto en nuestro caso de tipo `Contacto`. Para implementarla lo más sencillo es utilizar una expresión Lambda que realice la implementación de ese método. Como vemos `mapRow(ResultSet rs, int rowNum)` recibe dos parametros y en cada método indicmos como se debe construir nuestro objeto `Contacto`.
       
 4. Vamos a crear la Capa Service
 
-   * En el paquete `com.agenda.service` vamos a crear la Interface `ContactosService`.
+   4.1 En el paquete `com.agenda.service` vamos a crear la Interface `ContactosService`.
    
    ![09-90](images/09-90.png)
    
@@ -1683,11 +1683,11 @@ public interface ContactosService {
 ```
    Estos métodos representan las acciones a realizar por parte de nuestra aplicación que son:
    
-      * Dar de alta un nuevo contacto, devuelve un `boolean` para saber si pudo o no dar de alta el contacto
-      * Obtener la lista de contactos
-      * Eliminar un contacto, devuelve un `boolean` para saber si pudo o no eliminar el contacto
+   * Dar de alta un nuevo contacto, devuelve un `boolean` para saber si pudo o no dar de alta el contacto
+   * Obtener la lista de contactos
+   * Eliminar un contacto, devuelve un `boolean` para saber si pudo o no eliminar el contacto
       
-   * En el paquete `com.agenda.service` vamos a crear la Clase `ContactosServiceImpl` que implementa la Interface `ContactosService`.
+   4.2 En el paquete `com.agenda.service` vamos a crear la Clase `ContactosServiceImpl` que implementa la Interface `ContactosService`.
    
    ![09-91](images/09-91.png)
 
