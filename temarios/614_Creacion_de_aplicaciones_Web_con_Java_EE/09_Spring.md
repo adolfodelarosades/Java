@@ -1745,6 +1745,80 @@ public class ContactosServiceImpl implements ContactosService {
 Con esto ya tenemos implementada todo el Modelo, toda la Capa de Lógica de Negocios es decir la Capa Service y la Capa Repository.      
       
 ## Implementación de la agenda de contactos en Spring parte 3 11:45
+
+### Creación de la Capa del Controlador
+
+Es el turno del desarrollo del Controlador, vamos a desarrollar una Clase Controladora de Acción con tres métodos que van a responder a las tres peticiones que pueden hacer los clientes que requieren alguna acción, dar de alta un nuevo contacto, recuperar la lista de contactos o eliminar un contacto. Vamos a seguir los siguientes pasos:
+
+1. Crear la Clase `ContactosController` en el paquete `com.agenda.controller`.
+
+   Todos los métodos que van a responder a las peticiones del cliente estan relacionados con la gestión del Contacto por lo que podemos agruparlas en la misma Clase.
+   
+   El código de esta Clase es el siguiente:
+   
+```java
+package com.agenda.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.agenda.model.Contacto;
+import com.agenda.service.ContactosService;
+
+@Controller
+public class ContactosController {
+	
+   @Autowired
+   ContactosService service;
+	
+   @PostMapping("alta")
+   public String nuevoContacto(@RequestParam("nombre") String nombre,
+         @RequestParam("email") String email,
+         @RequestParam("telefono") int telefono) {
+      Contacto contacto = new Contacto(0, nombre, email, telefono);
+      if(!service.nuevoContacto(contacto)) {
+         return "repetido";
+      }
+      return "inicio";
+   }
+	
+   @GetMapping(value="recuperar")
+   public String recuperarContactos(HttpServletRequest request) {
+      request.setAttribute("contactos", service.obtenerContactos());
+      return "contactos";
+   }
+	
+   @GetMapping(value="eliminar")
+   public String eliminarContacto(@RequestParam("idContacto") int idContacto) {
+      if(!service.eliminarContacto(idContacto)) {
+         return "noexistente";
+      }
+      return "forward:/recuperar";
+   }
+
+}
+``` 
+   Observaciones sobre la Clase:
+   
+   * Debemos anotarla con `@Controller`
+   * Esta capa hara uso de la Capa de Servicio por lo que la inyectamos una implementación de la Interface `ContactosService` con `@Autowired`.
+   * Crear los diferentes métodos el primero es `nuevoContacto(...)` el cual es anotado con `@PostMapping("alta")` lo que quiere decir que desde la página JSP se hace una petición `POST` a la `action="alta"`, esta petición envía tres parámetros `nombre`, `email` y `telefono` los cuales se deben anotar con `@RequestParam` para hacer el match entre lo que se envía desde el formulario con el parámetro del método. Con los parámetros recibidos creamos un objeto `Contacto`, si se pudo insertar no manda a la vista `inicio` y si no se pudo a la vista `repetido`. Hay que observar que no se necesita transformar los parámetros para que el puedan recibir lo que se envía, ya que como podemos ver algunos son `String` y otros son `int` y la conversión es transparente, no necesitamos usar `Integer.parseInt()`.
+   * En el caso del método `recuperarContactos` es anotado con `@GetMapping` por que en la JSP será un link con un `href="recuperar"`, no vamos recibir ningún parámetro pero nosotros vamos a inyectarle un objeto `HttpServletRequest` para poder guardar la lista de contactos recuperada en un atributo de petición para que en la JSP que nos redirige que es `contactos` pueda pintarla.
+   * Finalmente tenemos el `eliminarContacto(...)` que tiene un detalle interesante, es anotado con `@GetMapping(value="eliminar")` por que en la vista tendremos un link apuntando a `eliminar` manda el parámetro `idContacto`. Eliminamos el contacto y si no es posible hacerlo nos envia a la vista `noexistente` pero en el caso de que si fue posible eliminarlo lo que se debe hacer es quedarse en la misma página `contactos`, pero no se puede ir directamente a la página `contactos` por que esta página pinta los contactos a través de un atributo de petición que es recuperado en el método `recuperarContactos`, esto es una situación muy habitual que ***desde un controlador de acción tenga que pasar a otro controlador de acción***, no a la vista directamente, sino a otro controlador de acción por que hay que hacer algo antes de pintar esa vista, eso lo hacemos con `return "forward:/recuperar";` que es una transferencia de petición como lo que se hacia en los servlets pero aquí el código es más sencillo. Con esto logramos que si fue posible elimar el contacto se va a `recuperar` donde se obtienen nuevamente los contactos se cargan el el atributo de petición y redirige a la vista `contactos` que es la vista donde estabamos.
+   
+Ya tenemos la Capa del Controlador.   
+
+### Creación de la Capa Vistas
+
+Ahora vamos a realizar las Vistas.
+
+
+
 ## Implementación de la agenda de contactos en Spring parte 4 11:13
 ## Utilización de un datasource del servidor en Spring 08:47
 ## Encapsulación de datos de un formulario 13:15
