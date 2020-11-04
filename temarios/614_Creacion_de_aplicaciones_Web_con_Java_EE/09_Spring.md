@@ -1738,9 +1738,9 @@ public class ContactosServiceImpl implements ContactosService {
 
    Observaciones sobre la Clase
       
-      * Lo primero es anotarla con `@Service` para que Spring sea capas de instanciarla.
-      * Esta capa de Servicio va a utilizar la capa de Repositorio por lo tanto le decimos a Spring que nos inyecte una implementación de la Interface del Repositorio con `@Autowired`. Estando en la Capa de Servicio no nos interesa saber exactamente que Clase utiliza Spring para implementar esa Interface si utiliza Spring JDBC o no, simplemente le pedimos a Spring que nos de una implementación de la Interface `ContactosRepository` de esta manera estamos ailando la lógica de negocios que implementamos en los métodos de esta clase.
-      * Implementamos los 3 métodos aplicando cierta lógica de negoccio para que su funcionamiento sea el correcto, por ejemplo solo inserto un Contaco si no existe ya ese email, etc.
+   * Lo primero es anotarla con `@Service` para que Spring sea capas de instanciarla.
+   * Esta capa de Servicio va a utilizar la capa de Repositorio por lo tanto le decimos a Spring que nos inyecte una implementación de la Interface del Repositorio con `@Autowired`. Estando en la Capa de Servicio no nos interesa saber exactamente que Clase utiliza Spring para implementar esa Interface si utiliza Spring JDBC o no, simplemente le pedimos a Spring que nos de una implementación de la Interface `ContactosRepository` de esta manera estamos ailando la lógica de negocios que implementamos en los métodos de esta clase.
+   * Implementamos los 3 métodos aplicando cierta lógica de negoccio para que su funcionamiento sea el correcto, por ejemplo solo inserto un Contaco si no existe ya ese email, etc.
       
 Con esto ya tenemos implementada todo el Modelo, toda la Capa de Lógica de Negocios es decir la Capa Service y la Capa Repository.      
       
