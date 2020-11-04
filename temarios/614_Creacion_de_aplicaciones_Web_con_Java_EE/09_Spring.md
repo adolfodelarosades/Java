@@ -1363,6 +1363,308 @@ Por último tenemos las Vistas que vamos a necesitar todas ellas JSP.
 * `noexiste.jsp` Cuando se trata de eliminar que ya no existe
 * `repetido.jsp` Cuando se quiere ingresar un Contacto ya existente
 
+En Eclipse vamos a crear una nueva aplicación Dynamic Web Project llamada **614-05-Agenda**
+
+![09-85](images/09-85.png)
+
+Vamos a seguir los siguientes pasos para crear nuestra aplicación.
+
+1. Mavenizar nuestra aplicación.
+
+![09-86](images/09-86.png)
+
+![09-87](images/09-87.png)
+
+En nuestro archivo `pom.xml` vamos a ingresar todas las dependencias que vamos a necesitar:
+
+* Spring Core
+* Sprint Context
+* Spring Web
+* Spring WebMvc
+* Spring JDBC
+* JSTL
+* Driver de MySQL por que vamos a crear el DataSource desde Spring y no en el Servidor de Aplicaciones.
+
+El código completo es:
+
+```html
+   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>614-04-Buscador-Cursos-Sin-WebXML</groupId>
+  <artifactId>614-04-Buscador-Cursos-Sin-WebXML</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+        <configuration>
+          <warSourceDirectory>WebContent</warSourceDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>14</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-web</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>5.2.10.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.22</version>
+	</dependency>
+  </dependencies>
+</project>
+```
+
+2. Vamos a crear los JavaBeans que vayamos a necesitar. Normalmente se asocia un JavaBean con cada tabla de la base de datos con la que se vaya a trabajar, en este caso tenemos la tabla `contactos`:
+
+```sql
+CREATE TABLE `contactos` (
+  `idContacto` int unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `telefono` int unsigned NOT NULL,
+  PRIMARY KEY (`idContacto`)
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1
+```
+
+   Por lo que vamos a crear en el paquete `com.agenda.model` la clase `Contacto` con el siguiente código:
+   
+```java
+package com.agenda.model;
+
+public class Contacto {
+	
+   private int idContacto;
+   private String nombre;
+   private String email;
+   private int telefono;
+	
+   public Contacto() {
+      super();
+   }
+
+   public Contacto(int idContacto, String nombre, String email, int telefono) {
+      super();
+      this.idContacto = idContacto;
+      this.nombre = nombre;
+      this.email = email;
+      this.telefono = telefono;
+   }
+
+   public int getIdContacto() {
+      return idContacto;
+   }
+
+   public void setIdContacto(int idContacto) {
+      this.idContacto = idContacto;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public int getTelefono() {
+      return telefono;
+   }
+
+   public void setTelefono(int telefono) {
+      this.telefono = telefono;
+   }
+
+}
+```
+ 
+3. Vamos a trabajar sobre la Capa Repository creando una Interface y una Clase que implemente dicha interface.
+
+   * Vamos a crear en el paquete `com.agenda.repository`  la Interface `ContactoRepository`
+
+   ![09-88](images/09-88.png)
+   
+   En esta Interface vamos a declarar los métodos que necesitamos implementar, nuestro código queda así:
+
+```java
+package com.agenda.repository;
+
+import java.util.List;
+
+import com.agenda.model.Contacto;
+
+public interface ContactoRepository {
+	
+   public void altaContacto(Contacto contacto);
+   public Contacto recuperarContactoEmail(String email);
+   public Contacto recuperarContactoId(int idContacto);
+   public void eliminarContacto(int idContacto);
+   public List<Contacto> recuperarContactos();
+
+}
+```
+
+   En una Interface Java sabemos que todos lo métodos son publicos por defecto por lo que es redundante poner la palabra `public`, la vamos a eliminar el código queda así:
+
+```java
+package com.agenda.repository;
+
+import java.util.List;
+
+import com.agenda.model.Contacto;
+
+public interface ContactoRepository {
+	
+   void altaContacto(Contacto contacto);
+   Contacto recuperarContactoEmail(String email);
+   Contacto recuperarContactoId(int idContacto);
+   void eliminarContacto(int idContacto);
+   List<Contacto> recuperarContactos();
+
+}
+```
+
+   Estos son lo métodos que expone la Capa Repository que estan centrados en las tareas de acceso a datos lo que se suele llamar las operaciones CRUD.
+   
+   * Vamos a implementar la Interface, creamos en el mismo paquete la clase `ContactosRepositoryImpl` que va a implementar la Interface `ContactoRepository`.
+   
+   ![09-89](images/09-89.png)
+
+```java
+package com.agenda.repository;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.agenda.model.Contacto;
+
+@Repository
+public class ContactosRepositoryImpl implements ContactoRepository {
+	
+   @Autowired
+   JdbcTemplate template;
+
+   @Override
+   public void altaContacto(Contacto contacto) {
+      String sql = "INSERT INTO (nombre, email, telefono) VALUES (?, ? , ?)";
+      template.update(sql, contacto.getNombre(), contacto.getEmail(), contacto.getTelefono());
+   }
+
+   @Override
+   public Contacto recuperarContactoEmail(String email) {
+      String sql = "SELECT * FROM contactos WHERE email = ? ";
+      List<Contacto> contactos = template.query(sql,				
+			(rs, fila) -> new Contacto(rs.getInt("idContacto"),
+					   rs.getString("nombre"),
+					   rs.getString("email"),
+					   rs.getInt("telefono")),
+			email);
+      return contactos.size() > 0 ? contactos.get(0) : null;
+   }
+
+   @Override
+   public Contacto recuperarContactoId(int idContacto) {
+      String sql = "SELECT * FROM contactos WHERE idContacto = ? ";
+      List<Contacto> contactos = template.query(sql,				
+			(rs, fila) -> new Contacto(rs.getInt("idContacto"),
+					   rs.getString("nombre"),
+					   rs.getString("email"),
+					   rs.getInt("telefono")),
+			idContacto);
+      return contactos.size() > 0 ? contactos.get(0) : null;
+   }
+
+   @Override
+   public void eliminarContacto(int idContacto) {
+      String sql = "DELETE FROM contactos WHERE idContacto = ? ";
+      template.update(sql, idContacto);
+   }
+
+   @Override
+   public List<Contacto> recuperarContactos() {
+      String sql = "SELECT * FROM contactos";
+      return template.query(sql,	
+		(rs, fila) -> new Contacto(rs.getInt("idContacto"),
+					rs.getString("nombre"),
+					rs.getString("email"),
+					rs.getInt("telefono")));
+   }
+
+}
+```
+   En esta Clase tenemos las siguientes observaciones:
+      * La anotamos con `@Repository` para que Spring la instancie, es la anotación que se suele poner a las clases que acceden a datos.
+      * Como vamos a usar Spring JDBC debemos inyectar el objeto `JdbcTemplate` que es la base de Spring JDBC
+      * Implementamos cada método de la interface, aquí nos olvidamos de conexiones, statement, cierre de conexiones, etc, no tenemos que preocuparnos de nada solo de la implementación de cada método. Con respecto a las excepciones tampoco las capturamos, se pueden dar pero no son obligatorias, no son excepciones Checked sin RunTimeException, en este caso no vamos a capturar ninguna excepción.
+      * Para SQL de acción (`insert`, `update`, `delete`) usamos el método `update` del `JdbcTemplate` y como habiamos visto reciben como primer parámetro el `sql` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
+      * Para los SQL de consulta (`select`) usamos el método `query` del `JdbcTemplate` que recibe como primer parámetro el `sql`, como segundo parámetro tenemos que pasar la implementación de la Interface `RowMapper` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
+      * Para implementar la Interface Funcional `RowMapper` la cual tiene un único método `mapRow(ResultSet rs, int rowNum)` que indica como se tiene que transformar un `ResultSet` en un objeto en nuestro caso de tipo `Contacto`. Para implementarla lo más sencillo es utilizar una expresión Lambda que realice la implementación de ese método. Como vemos `mapRow(ResultSet rs, int rowNum)` recibe dos parametros y en cada método indicmos como se debe construir nuestro objeto `Contacto`.
+      
+
+```java
+
+```
+
+```java
+
+```
+
 
 
 ## Implementación de la agenda de contactos en Spring parte 2 13:16
