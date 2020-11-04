@@ -2159,7 +2159,36 @@ Tenemos listo todo el código vamos a probar la aplicación **614-05-Agenda**.
 
 ![09-100](images/09-100.png)
 
+![09-101](images/09-101.png)
+
+![09-102](images/09-102.png)
+
 ## Utilización de un datasource del servidor en Spring 08:47
+
+![09-103](images/09-103.png)
+
+![09-104](images/09-104.png)
+
+![09-105](images/09-105.png)
+
+![09-106](images/09-106.png)
+
 ## Encapsulación de datos de un formulario 13:15
+
+![09-107](images/09-107.png)
+
+![09-108](images/09-108.png)
+
+![09-109](images/09-109.png)
+
+![09-110](images/09-110.png)
+
 ## Ajax en Spring 16:13
+
+![09-111](images/09-111.png)
+
+![09-112](images/09-112.png)
+
+![09-113](images/09-113.png)
+
    
