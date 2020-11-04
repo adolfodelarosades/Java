@@ -1534,7 +1534,7 @@ public class Contacto {
  
 3. Vamos a trabajar sobre la Capa Repository creando una Interface y una Clase que implemente dicha interface.
 
-   3.1 Vamos a crear en el paquete `com.agenda.repository`  la Interface `ContactoRepository`
+   * 3.1 Vamos a crear en el paquete `com.agenda.repository`  la Interface `ContactoRepository`
 
    ![09-88](images/09-88.png)
    
@@ -1580,7 +1580,7 @@ public interface ContactoRepository {
 
    Estos son lo métodos que expone la Capa Repository que estan centrados en las tareas de acceso a datos lo que se suele llamar las operaciones CRUD.
    
-   3.2 Vamos a implementar la Interface, creamos en el mismo paquete la clase `ContactosRepositoryImpl` que va a implementar la Interface `ContactoRepository`.
+   * 3.2 Vamos a implementar la Interface, creamos en el mismo paquete la clase `ContactosRepositoryImpl` que va a implementar la Interface `ContactoRepository`.
    
    ![09-89](images/09-89.png)
 
@@ -1660,7 +1660,7 @@ public class ContactosRepositoryImpl implements ContactoRepository {
       
 4. Vamos a crear la Capa Service
 
-   4.1 En el paquete `com.agenda.service` vamos a crear la Interface `ContactosService`.
+   * 4.1 En el paquete `com.agenda.service` vamos a crear la Interface `ContactosService`.
    
    ![09-90](images/09-90.png)
    
@@ -1687,7 +1687,7 @@ public interface ContactosService {
    * Obtener la lista de contactos
    * Eliminar un contacto, devuelve un `boolean` para saber si pudo o no eliminar el contacto
       
-   4.2 En el paquete `com.agenda.service` vamos a crear la Clase `ContactosServiceImpl` que implementa la Interface `ContactosService`.
+   * 4.2 En el paquete `com.agenda.service` vamos a crear la Clase `ContactosServiceImpl` que implementa la Interface `ContactosService`.
    
    ![09-91](images/09-91.png)
 
