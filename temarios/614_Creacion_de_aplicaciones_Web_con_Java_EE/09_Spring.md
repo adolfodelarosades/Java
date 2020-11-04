@@ -1388,10 +1388,10 @@ En nuestro archivo `pom.xml` vamos a ingresar todas las dependencias que vamos a
 El código completo es:
 
 ```html
-   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>614-04-Buscador-Cursos-Sin-WebXML</groupId>
-  <artifactId>614-04-Buscador-Cursos-Sin-WebXML</artifactId>
+  <groupId>614-05-Agenda</groupId>
+  <artifactId>614-05-Agenda</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
@@ -1530,6 +1530,8 @@ public class Contacto {
 
 }
 ```
+
+## Implementación de la agenda de contactos en Spring parte 2 13:16
  
 3. Vamos a trabajar sobre la Capa Repository creando una Interface y una Clase que implemente dicha interface.
 
@@ -1610,7 +1612,7 @@ public class ContactosRepositoryImpl implements ContactoRepository {
    public Contacto recuperarContactoEmail(String email) {
       String sql = "SELECT * FROM contactos WHERE email = ? ";
       List<Contacto> contactos = template.query(sql,				
-			(rs, fila) -> new Contacto(rs.getInt("idContacto"),
+			(rs, f) -> new Contacto(rs.getInt("idContacto"),
 					   rs.getString("nombre"),
 					   rs.getString("email"),
 					   rs.getInt("telefono")),
@@ -1622,7 +1624,7 @@ public class ContactosRepositoryImpl implements ContactoRepository {
    public Contacto recuperarContactoId(int idContacto) {
       String sql = "SELECT * FROM contactos WHERE idContacto = ? ";
       List<Contacto> contactos = template.query(sql,				
-			(rs, fila) -> new Contacto(rs.getInt("idContacto"),
+			(rs, f) -> new Contacto(rs.getInt("idContacto"),
 					   rs.getString("nombre"),
 					   rs.getString("email"),
 					   rs.getInt("telefono")),
@@ -1640,7 +1642,7 @@ public class ContactosRepositoryImpl implements ContactoRepository {
    public List<Contacto> recuperarContactos() {
       String sql = "SELECT * FROM contactos";
       return template.query(sql,	
-		(rs, fila) -> new Contacto(rs.getInt("idContacto"),
+		(rs, f) -> new Contacto(rs.getInt("idContacto"),
 					rs.getString("nombre"),
 					rs.getString("email"),
 					rs.getInt("telefono")));
@@ -1656,18 +1658,92 @@ public class ContactosRepositoryImpl implements ContactoRepository {
       * Para los SQL de consulta (`select`) usamos el método `query` del `JdbcTemplate` que recibe como primer parámetro el `sql`, como segundo parámetro tenemos que pasar la implementación de la Interface `RowMapper` seguido de los parámetros en caso de que el `sql` haya sido parametrizado.
       * Para implementar la Interface Funcional `RowMapper` la cual tiene un único método `mapRow(ResultSet rs, int rowNum)` que indica como se tiene que transformar un `ResultSet` en un objeto en nuestro caso de tipo `Contacto`. Para implementarla lo más sencillo es utilizar una expresión Lambda que realice la implementación de ese método. Como vemos `mapRow(ResultSet rs, int rowNum)` recibe dos parametros y en cada método indicmos como se debe construir nuestro objeto `Contacto`.
       
+4. Vamos a crear la Capa Service
+
+   * En el paquete `com.agenda.service` vamos a crear la Interface `ContactosService`.
+   
+   ![09-90](images/09-90.png)
+   
+   Vamos a declarar los métodos que queremos exponer al Controlador, los métodos de Servicio, el código es el siguiente:
 
 ```java
+package com.agenda.service;
 
+import java.util.List;
+
+import com.agenda.model.Contacto;
+
+public interface ContactosService {
+
+   boolean nuevoContacto(Contacto contacto);
+   List<Contacto> obtenerContactos();
+   boolean eliminarContacto(int idContacto);
+	
+}
 ```
+   Estos métodos representan las acciones a realizar por parte de nuestra aplicación que son:
+   
+      * Dar de alta un nuevo contacto, devuelve un `boolean` para saber si pudo o no dar de alta el contacto
+      * Obtener la lista de contactos
+      * Eliminar un contacto, devuelve un `boolean` para saber si pudo o no eliminar el contacto
+      
+   * En el paquete `com.agenda.service` vamos a crear la Clase `ContactosServiceImpl` que implementa la Interface `ContactosService`.
+   
+   ![09-91](images/09-91.png)
+
+   El código es:
 
 ```java
+package com.agenda.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.agenda.model.Contacto;
+import com.agenda.repository.ContactosRepository;
+
+@Service
+public class ContactosServiceImpl implements ContactosService {
+	
+   @Autowired
+   ContactosRepository cRepository;
+
+   @Override
+   public boolean nuevoContacto(Contacto contacto) {
+      if(cRepository.recuperarContactoEmail(contacto.getEmail()) == null) {
+         cRepository.altaContacto(contacto);
+         return true;
+      }
+      return false;
+   }
+
+   @Override
+   public List<Contacto> obtenerContactos() {
+      return cRepository.recuperarContactos();
+   }
+
+   @Override
+   public boolean eliminarContacto(int idContacto) {
+      if(cRepository.recuperarContactoId(idContacto) != null) {
+         cRepository.eliminarContacto(idContacto);
+         return true;
+      }
+      return false;
+   }
+
+}
 ```
 
-
-
-## Implementación de la agenda de contactos en Spring parte 2 13:16
+   Observaciones sobre la Clase
+      
+      * Lo primero es anotarla con `@Service` para que Spring sea capas de instanciarla.
+      * Esta capa de Servicio va a utilizar la capa de Repositorio por lo tanto le decimos a Spring que nos inyecte una implementación de la Interface del Repositorio con `@Autowired`. Estando en la Capa de Servicio no nos interesa saber exactamente que Clase utiliza Spring para implementar esa Interface si utiliza Spring JDBC o no, simplemente le pedimos a Spring que nos de una implementación de la Interface `ContactosRepository` de esta manera estamos ailando la lógica de negocios que implementamos en los métodos de esta clase.
+      * Implementamos los 3 métodos aplicando cierta lógica de negoccio para que su funcionamiento sea el correcto, por ejemplo solo inserto un Contaco si no existe ya ese email, etc.
+      
+Con esto ya tenemos implementada todo el Modelo, toda la Capa de Lógica de Negocios es decir la Capa Service y la Capa Repository.      
+      
 ## Implementación de la agenda de contactos en Spring parte 3 11:45
 ## Implementación de la agenda de contactos en Spring parte 4 11:13
 ## Utilización de un datasource del servidor en Spring 08:47
