@@ -1307,11 +1307,63 @@ La Capa de Repositorio se suele anotar con `@Repository` mientras que la Capa de
 
 ![09-81](images/09-81.png)
 
+Vamos a desarrolar una aplicación de Agenda de Contactos completamente en Spring incluyendo el módulo Spring JDBC para el acceso a datos.
+
 ![09-82](images/09-82.png)
+
+Aquí tenemos el Esquema de Bloques del Modelo de la aplicación, como vemos el Modelo esta separado en dos capas:
+
+* Service
+* Repository
+
+En el Repository vamos a tener toda la lógica de acceso a datos por lo que aquí es donde vamos a usar Spring JDBC para acceder a nuestra base de datos de Agenda. Vamos a tener 5 métodos básicos:
+
+* `void altaContaco(Contacto contacto);`
+* `Contacto recuperarContactoEmail(String email);`
+* `Contacto recuperarContactoId(int idContacto);`
+* `void eliminarContacto(int idContacto);`
+* `List<Contacto> recuperarContactos();`
+
+Todos estos métodos serán usados desde la lógica de negocio la que esta implementada en la Capa Service la cual contiente 3 métodos:
+
+* `boolean nuevoContacto(Contacto contacto);`
+* `List<Contacto> obtenerContactos();`
+* `boolean eliminarContacto(int idContacto);`
+
+Son las tres funcionalidades de la aplicación ingresar un Contacto, listar los contactos en una tabla y eliminar un Contacto.
+
+Toda la Capa de Modelo será configurada mediante una Clase Java llamada `SpringConfig.class`.
 
 ![09-83](images/09-83.png)
 
+Por otro lado tenemos la Capa del Controlador el cual tiene:
+
+* Front Controller
+* Controller
+
+El Front Controller es el DispatcherServlet que ya nos viene dado con Spring como ya sabemos.
+
+Y tenemos una clase Controladora de Acción donde vamos a tener 3 métodos para gestionar las 3 peticiones que requieren algún tipo de acción:
+
+* `String nuevoContacto(...)` cuando se pulsa el botón de añadir nuevo contacto
+* `String recuperarContactos(...)` cuando se pulsa el botón de recuperar los contactos
+* `String eliminarContacto(...)` cuando se pulsa el enlace para eliminar un contacto
+
+Esta Capa del Controlador va a intereraccionar con la Capa del Modelo, con la capa de Servicio concretamente, con los 3 métodos que habíamos visto que tiene la Capa Service, una vez echo esto nos tiene que redirigir a la Vista correspondiente.
+
+La Clase controladora de Acción va a ser configurada mediante la Clase Java `MvcConfig.class` mientras que el DispatcherServlet va a ser configurado mediante la clase `Inicializador.class`, estamos haciendo toda la configuración mediante clases.
+
 ![09-84](images/09-84.png)
+
+Por último tenemos las Vistas que vamos a necesitar todas ellas JSP.
+
+* `inicio.jsp` Contiene el menú
+* `datos.jsp` Datos para dar un nuevo Contacto
+* `contactos.jsp` Listado de Contactos
+* `noexiste.jsp` Cuando se trata de eliminar que ya no existe
+* `repetido.jsp` Cuando se quiere ingresar un Contacto ya existente
+
+
 
 ## Implementación de la agenda de contactos en Spring parte 2 13:16
 ## Implementación de la agenda de contactos en Spring parte 3 11:45
