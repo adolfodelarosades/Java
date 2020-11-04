@@ -1540,23 +1540,23 @@ public class Contacto {
    
    En esta Interface vamos a declarar los métodos que necesitamos implementar, nuestro código queda así:
 
-```java
-package com.agenda.repository;
+   ```java
+   package com.agenda.repository;
 
-import java.util.List;
+   import java.util.List;
 
-import com.agenda.model.Contacto;
+   import com.agenda.model.Contacto;
 
-public interface ContactoRepository {
+   public interface ContactoRepository {
 	
-   public void altaContacto(Contacto contacto);
-   public Contacto recuperarContactoEmail(String email);
-   public Contacto recuperarContactoId(int idContacto);
-   public void eliminarContacto(int idContacto);
-   public List<Contacto> recuperarContactos();
+      public void altaContacto(Contacto contacto);
+      public Contacto recuperarContactoEmail(String email);
+      public Contacto recuperarContactoId(int idContacto);
+      public void eliminarContacto(int idContacto);
+      public List<Contacto> recuperarContactos();
 
-}
-```
+   }
+   ```
 
    En una Interface Java sabemos que todos lo métodos son publicos por defecto por lo que es redundante poner la palabra `public`, la vamos a eliminar el código queda así:
 
