@@ -1815,9 +1815,166 @@ Ya tenemos la Capa del Controlador.
 
 ### Creación de la Capa Vistas
 
-Ahora vamos a realizar las Vistas.
+Ahora vamos a realizar las diferentes Vistas.
 
+Los códigos de las vistas son los siguientes:
 
+`inicio.jsp`
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+</head>
+<body>
+   <div class="container">
+      <br/><br/>
+      <h1><a href="paginaAlta">Alta contacto</a></h1>
+      <br/><br/>
+      <h1><a href="recuperar">Ver contactos</a></h1>
+   </div>
+</body>
+</html>
+```
+
+`datos.jsp`
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+</head>
+<body>
+   <div class="container">
+      <h1>Buscador de cursos</h1>
+      <br/>
+      <form action="alta" method="post" class="form-horizontal" >
+         <div class="form-group">
+            <label class="control-label col-sm-2">Nombre:</label>
+            <input type="text" name="nombre" class="form-control" style="width:30%"/>
+         </div>
+         <div class="form-group">
+            <label class="control-label col-sm-2">Email:</label>
+            <input type="text" name="email" class="form-control" style="width:30%"/>
+         </div>
+         <div class="form-group">
+            <label class="control-label col-sm-2">Teléfono:</label>
+            <input type="text" name="telefono" class="form-control" style="width:30%"/>
+         </div>
+         <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+               <button type="submit" class="btn btn-default" style="width:30%">Guardar</button>
+            </div>
+         </div>
+      </form>
+   </div>
+</body>
+</html>
+```
+
+`contacto.jsp`
+
+```html
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+</head>
+<body>
+   <div class="container">
+      <div >
+         <table border="1" class="table table-striped table-bordered" >
+            <thead><tr><th>Nombre</th><th>Email</th><th>Telefono</th><th></th></tr></thead>
+            <tbody>
+               <c:forEach var="ct" items="${requestScope.contactos}">
+                  <tr>
+                     <td>${ct.nombre}</td>
+                     <td>${ct.email}</td>
+                     <td>${ct.telefono}</td>
+                     <td><a href="eliminar?idContacto=${ct.idContacto}">Eliminar</a></td>
+                  </tr>
+               </c:forEach>
+            </tbody>	
+         </table>
+      </div>
+      <br/><br/>	
+      <a href="volver">Volver</a>
+   </div>
+</body>
+</html>
+```
+
+`repetido.jsp`
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>Ese email ya existe, intente de nuevo</h1>
+   <br/>
+   <a href="volver">Volver</a>
+</body>
+</html>
+```
+
+`noexistente.jsp`
+
+```html
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>El contacto no existe, no se puede borrar</h1>
+   <br/>
+   <a href="volver">Volver</a>
+</body>
+</html>
+```
 
 ## Implementación de la agenda de contactos en Spring parte 4 11:13
 ## Utilización de un datasource del servidor en Spring 08:47
