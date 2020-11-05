@@ -5,6 +5,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 # CFTIC
 
 * [000 Java Profesional SE](https://github.com/adolfodelarosades/Java/blob/master/temarios/000_Java_Profesional_SE.md)
+* [000 592 DESARROLLADOR JAVA EE FRONT END MULTIPLATAFORMA](https://github.com/adolfodelarosades/Java/blob/master/temarios/000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA.md)
 * [001 Java SE Programación I](https://github.com/adolfodelarosades/Java/blob/master/temarios/001_Java_SE_Programacion_I.md)
 * [002 Java SE Programación II](https://github.com/adolfodelarosades/Java/blob/master/temarios/002_Java_SE_Programacion_II.md)
 * [003 Object-Oriented Analysis and Design Using UML Ed 2](https://github.com/adolfodelarosades/Java/blob/master/temarios/003_Object-Oriented_Analysis_and_Design_Using_UML_Ed_2.md)
