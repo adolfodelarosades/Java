@@ -946,13 +946,116 @@ El último método que necesita cambiar es el método `listTickets`. Nuevamente,
 </html>
 ```
 
+Como puede ver, esta JSP necesita `ticketDatabase`, por lo que debe cambiar el método `listTickets` para proporcionar esta variable y reenviar la solicitud:
+
+```java
+private void listTickets(HttpServletRequest request,
+                             HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        request.setAttribute("ticketDatabase", this.ticketDatabase);
+ 
+        request.getRequestDispatcher("/WEB-INF/jsp/view/listTickets.jsp")
+                .forward(request, response);
+    }
+```
+
+#### Prueba de la aplicación Customer Support actualizada
+
+En este punto, su código de Servlet debería verse mucho menos desordenado. Ha movido el código de presentación a JSP y se ha centrado en la lógica empresarial en el Servlet. Hay dos métodos de la versión anterior de `TicketServlet`, `writeHeader` y `writeFooter`, que ahora no se utilizan y se pueden eliminar. Esto hizo que escribir el código de presentación en el Servlet fuera un poco más fácil, pero ahora no es necesario. Finalmente, `doGet` y `doPost` tuvieron que actualizarse para reflejar la firma modificada de los métodos que llaman.
+
+Compile la aplicación de soporte al cliente y ejecute Tomcat en su depurador IDE. Navegue en su navegador favorito a http://localhost:8080/support/. Debería ser redirigido a http://localhost:8080/support/tickets debido al código de redireccionamiento en el archivo `index.jsp`. Debería ver la página en la Figura 4-2. Cree algunos tickets, cargando archivos adjuntos con algunos y no con otros; view tickets; y download attachments. En general, la aplicación debería funcionar de manera idéntica a la versión 1 creada en el Capítulo 3. Sin embargo, ahora que ya no está escribiendo el código de la capa de presentación en Java, es mucho más fácil mejorar y expandir la aplicación.
+
+![04-02](images/04-02.png)
+
+En el siguiente capítulo, continuará mejorando la aplicación de soporte al cliente al presentar el soporte de sesión y la capacidad de agregar comentarios a los tickets de soporte.
+
+## UNA NOTA SOBRE LOS DOCUMENTOS JSP (JSPX)
+
+Al principio del capítulo, vio una referencia de pasada a una tecnología conocida como Documentos JSP, que terminan en la extensión `.jspx`. No se utilizan tanto como las JSP estándar y, aunque admiten las mismas funciones, lo hacen de diferentes formas. En general, el aumento de la dificultad y el código que conlleva el uso de JSP Documents en lugar de JSP pueden no ser triviales, como se demuestra en esta sección. Además, debido a la menor popularidad de los JSP Documents, puede encontrar menos ejemplos y muestras de código en línea que usen JSP Documents, y puede ser más difícil encontrar usuarios de foros y listas de correo con experiencia en JSP Documents para ayudarlo con cualquier pregunta que pueda tener. Por esta razón, los JSP Documents no se utilizan en este libro. Solo en este capítulo verá un ejemplo de JSP Documents con el fin de comprender la diferencia entre las dos tecnologías relacionadas. Sin embargo, la tecnología existe en caso de que prefiera trabajar con XML puro.
+
+Los JSP Documents son documentos XML (de ahí su nombre) y, por lo tanto, muchas de las características que ha visto, como las directivas, no pueden funcionar de la misma manera. Los documentos XML deben adherirse a un esquema estricto o no se analizarán correctamente. La principal ventaja de utilizar JSP Documents sobre las JSP estándar es que es un poco más fácil detectar problemas con las JSP en tiempo de compilación que en tiempo de ejecución. Sin embargo, en muchos casos, este beneficio no compensa el costo adicional de manejar JSP Documents. La Tabla 4-1 enumera varias características JSP y compara su sintaxis JSP con la sintaxis de su JSP Documents.
+
+![04-03](images/04-03.png)
+
+Debería notar dos patrones en esta tabla:
+
+* Todo es una etiqueta `jsp`. Las directivas, declaraciones, scriptlets y expresiones ahora son etiquetas XML, con el prefijo de espacio de nombres `jsp`. La única excepción es la directiva de biblioteca de etiquetas, que se convierte en un atributo de la etiqueta del documento raíz.
+
+* Ya no diferencia entre comentarios JSP y comentarios XML. Todos los comentarios son comentarios XML. (Por supuesto, dentro de declaraciones y scriptlets, aún puede usar comentarios de Java).
+
+* Para demostrar cómo esto puede cambiar un documento, considere el Listado 4-1. Este es un archivo JSP simple con todas las características cubiertas en este capítulo. Luego, compare ese código con el Listado 4-2, el documento JSP equivalente al Listado 4-1. Observe cómo cambian las directivas, declaraciones, scriptlets, expresiones y comentarios. Preste especial atención al tipo de documento XML, el elemento <jsp:root> y los atributos XMLNS. Como puede ver, es notablemente más fácil trabajar con JSP que con JSP Documents.
 
 
+LISTING 4-1: A STANDARD JSP FILE
 
+```java
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/WEB-INF/jsp/base.jspf" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%!
+    private static final String DEFAULT_USER = "Guest";
+%>
+<%
+    String user = request.getParameter("user");
+    if(user == null)
+        user = DEFAULT_USER;
+%>
+<%--<%= "This code is commented" %>--%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello User Application</title>
+    </head>
+    <body>
+        Hello, <%= user %>!<br /><br />
+        <form action="greeting.jsp" method="POST">
+            Enter your name:<br />
+            <input type="text" name="user" /><br />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>
+```
 
+LISTING 4-2: THE JSP DOCUMENT-EQUIVALENT OF LISTING 4-1
 
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8" language="java" />
+    <jsp:directive.include file="/WEB-INF/jsp/base.jspx" />
+    <jsp:declaration>
+        private static final String DEFAULT_USER = "Guest";
+    </jsp:declaration>
+    <jsp:scriptlet>
+        String user = request.getParameter("user");
+        if(user == null)
+            user = DEFAULT_USER;
+    </jsp:scriptlet>
+    <!--<jsp:expression>"This code is commented"</jsp:expression> -->
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Hello User Application</title>
+        </head>
+        <body>
+            Hello, <jsp:expression>user</jsp:expression>!<br /><br />
+            <form action="greeting.jsp" method="post">
+                Enter your name:<br />
+                <input type="text" name="user" /><br />
+                <input type="submit" value="Submit" />
+            </form>
+        </body>
+    </html>
+</jsp:root>
+```
 
+## RESUMEN
 
+En este capítulo, exploró el mundo de las JSP y aprendió cómo pueden hacer su vida más fácil simplificando la tarea de escribir HTML markup en la salida de respuesta. Le presentaron directivas, declaraciones, scriptlets y expresiones. Aprendió sobre las diversas formas en que puede comentar el código en JSP y sobre las muchas formas en que puede incluir código Java en un archivo JSP. También descubrió las nueve variables Java implícitas disponibles en su JSP y leyó por qué no se recomienda el uso de scriptlets y declaraciones de Java. Finalmente, aplicó estos principios y mejoró la aplicación Customer Support agregando propiedades JSP al deployment descriptor y separando la lógica de negocios en el Servlet del código de presentación en JSP.
 
-
+En el siguiente capítulo aprenderá sobre las sesiones HTTP, su propósito y cómo usarlas en aplicaciones web Java EE.
 
