@@ -107,7 +107,7 @@ En este capítulo, explorará las reglas básicas de las JSP y aprenderá sobre 
 
 Existen alternativas a las JSP. Quizás la alternativa más común es ***Facelets***, parte de la tecnología más amplia de ***JavaServer Faces*** (o JSF para abreviar, lo que facilita su confusión con JSP). También existen marcos de trabajo de plantillas, como ***Velocity***, ***Freemarker***, ***SiteMesh*** y ***Tiles***, que, de alguna manera, complementan o reemplazan las características proporcionadas por JSP. Este libro no puede cubrir todas las opciones y variaciones de las tecnologías de presentación que funcionan con la especificación Servlet 3.1. Por tanto, se centrará en la tecnología más popular y utilizada.
 
-El siguiente ejemplo, que puede encontrar en el archivo `index.jsp` del proyecto **Hello-World-JSP**, recrea el proyecto **950-03-01-hello-world** del Capítulo 2, pero usa una JSP en lugar de un Servlet. para mostrar el saludo al usuario.
+El siguiente ejemplo, que puede encontrar en el archivo :computer: 01 `index.jsp` del proyecto **950-04-01-Hello-World-JSP**, recrea el proyecto **950-03-01-hello-world** del Capítulo 3, pero usa una JSP en lugar de un Servlet. para mostrar el saludo al usuario.
 
 ```html
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -158,7 +158,7 @@ Ha explorado una JSP que ya fue escrita para usted, así que ahora trabaje en la
 
 En el capítulo anterior, exploró los servlets y respondió la pregunta: "¿Qué debe hacer en el método de servicio?" La respuesta fue que *debe* responder adecuadamente a la solicitud HTTP con una respuesta HTTP válida, pero debido a que `HttpServlet` se encarga de todo eso por usted, sus métodos `doGet` y `doPost` podrían ser literalmente métodos vacíos (por inútiles que sean). Resulta que la pregunta en este caso sigue siendo la misma. Hay muchas cosas que deben suceder cuando se ejecuta una JSP, pero todos esos "deberes" se manejan por usted.
 
-Para demostrar esto, cree un archivo llamado `blank.jsp` en la raíz web de un proyecto vacío; elimine todo su contenido (su IDE podría poner algún código allí para usted, elimínelo todo); y vuelva a implementar su proyecto. Alternativamente, simplemente use **950-04-01-Hello-World-JSP** que descargó, que ya contiene un `blank.jsp`. Cuando vas a http://localhost:8080/hello-world/blank.jsp, no obtienes ningún error. Todo funciona bien; acaba de obtener una página en blanco inútil. Ahora ingrese el siguiente código, vuelva a implementar y vuelva a cargar:
+Para demostrar esto, cree un archivo llamado :computer: 02 `blank.jsp` en la raíz web de un proyecto vacío; elimine todo su contenido (su IDE podría poner algún código allí para usted, elimínelo todo); y vuelva a implementar su proyecto. Alternativamente, simplemente use **950-04-01-Hello-World-JSP** que descargó, que ya contiene un `blank.jsp`. Cuando vas a http://localhost:8080/hello-world/blank.jsp, no obtienes ningún error. Todo funciona bien; acaba de obtener una página en blanco inútil. Ahora ingrese el siguiente código, vuelva a implementar y vuelva a cargar:
 
 ```html
 <!DOCTYPE html>
@@ -279,7 +279,7 @@ Eche un vistazo al siguiente código de ejemplo. En realidad, no hace nada útil
 
 #### Poniendolo todo junto
 
-Cree un archivo JSP llamado `gibberish.jsp` en la raíz web de un proyecto vacío y coloque el código gibberish anterior allí (o simplemente use el JSP en el proyecto **904-04-01-Hello-World-JSP**). Compile y ejecute su aplicación y vaya a http://localhost:8080/hello-world/gibberish.jsp. Obviamente, esta página no es útil en el navegador; el punto que debe comprender está en el archivo fuente. Vuelva al directorio de trabajo de Tomcat y busque el archivo `gibberish_jsp.java`. Examine cómo se tradujo el código en su JSP al código Java en la clase JSP Servlet para comprender mejor los diferentes propósitos de las directivas, declaraciones, scriptlets y expresiones.
+Cree un archivo JSP llamado :computer: 03 `gibberish.jsp` en la raíz web de un proyecto vacío y coloque el código gibberish anterior allí (o simplemente use el JSP en el proyecto **904-04-01-Hello-World-JSP**). Compile y ejecute su aplicación y vaya a http://localhost:8080/hello-world/gibberish.jsp. Obviamente, esta página no es útil en el navegador; el punto que debe comprender está en el archivo fuente. Vuelva al directorio de trabajo de Tomcat y busque el archivo `gibberish_jsp.java`. Examine cómo se tradujo el código en su JSP al código Java en la clase JSP Servlet para comprender mejor los diferentes propósitos de las directivas, declaraciones, scriptlets y expresiones.
 
 ### COMENTAR SU CÓDIGO
 
@@ -296,7 +296,7 @@ El comentario XML (también conocido como comentario HTML) es una sintaxis con l
 <!-- This is an HTML/XML comment -->
 ```
 
-Este tipo de comentario se transmite al cliente porque es un marcado XML y HTML estándar. El navegador lo ignora, pero aparece en la fuente de la respuesta. Más importante aún, ***se evaluarán todas las etiquetas JSP incluidas en este comentario***. Es esencial recordar esto porque ***comentar el código con este estilo de comentario no impide que se ejecute el código Java interno**. Para demostrar esto, considere el siguiente ejemplo:
+Este tipo de comentario se transmite al cliente porque es un marcado XML y HTML estándar. El navegador lo ignora, pero aparece en la fuente de la respuesta. Más importante aún, ***se evaluarán todas las etiquetas JSP incluidas en este comentario***. Es esencial recordar esto porque ***comentar el código con este estilo de comentario no impide que se ejecute el código Java interno***. Para demostrar esto, considere el siguiente ejemplo:
 
 ```html
 <!-- This is an HTML/XML comment: <%= someObject.dumpInfo() %> -->
@@ -422,13 +422,13 @@ El atributo `file` proporciona al contenedor la ruta al archivo JSP que debe inc
 
 Para demostrar esto, siga estos pasos:
 
-1. Cree un JSP llamado `includer.jsp` en la raíz web de su proyecto **904-04-01-Hello-World-JSP** y coloque la siguiente línea de código en él (eliminando cualquier código generado por su IDE). Alternativamente, simplemente use el proyecto **904-04-01-Hello-World-JSP**.
+1. Cree un JSP llamado :computer: 04`includer.jsp` en la raíz web de su proyecto **904-04-01-Hello-World-JSP** y coloque la siguiente línea de código en él (eliminando cualquier código generado por su IDE). 
 
 ```html
 <%@ include file="index.jsp" %>
 ```
 
-2. Compile y depure su aplicación y navegue hasta http://localhost:8080/hello-world/includer.jsp en su navegador favorito. Debería ver la página familiar, lo que significa que su inclusión ha funcionado.
+2. Compile y depure su aplicación y navegue hasta http://localhost:8080/hello-world/includer.jsp en su navegador favorito. Debería ver una página que ya nos es familiar, lo que significa que su inclusión ha funcionado.
 
 3. Ahora vaya al directorio de trabajo de Tomcat y abra el archivo `includer_jsp.java` que creó Tomcat. Debería notar inmediatamente que, además del nombre de la clase, es idéntico a `index_jsp.java`. Esto se debe a que la JSP se incluyó de forma estática en el momento de la traducción.
 
@@ -438,7 +438,7 @@ Hay una forma diferente de incluir otras JSP que da como resultado una inclusió
 <jsp:include page="/path/to/some/page.jsp" />
 ```
 
-La etiqueta `<jsp:include>` no tiene un atributo `file`; tiene un atributo `page`. La ruta sigue siendo relativa al archivo actual o absoluta desde la raíz web, al igual que con la directiva `include`. Pero no está incluido en el momento de la traducción. En cambio, el archivo incluido se compila por separado. En tiempo de ejecución, la solicitud se reenvía temporalmente a la JSP incluida, la salida resultante de esa JSP se escribe en la respuesta y luego el control vuelve a la JSP incluida. Esto se puede ver fácilmente creando un archivo llamado `dynamicIncluder.jsp` en la raíz web de tu proyecto con la siguiente línea de código (o usa el proyecto **904-04-01-Hello-World-JSP**):
+La etiqueta `<jsp:include>` no tiene un atributo `file`; tiene un atributo `page`. La ruta sigue siendo relativa al archivo actual o absoluta desde la raíz web, al igual que con la directiva `include`. Pero no está incluido en el momento de la traducción. En cambio, el archivo incluido se compila por separado. En tiempo de ejecución, la solicitud se reenvía temporalmente a la JSP incluida, la salida resultante de esa JSP se escribe en la respuesta y luego el control vuelve a la JSP incluida. Esto se puede ver fácilmente creando un archivo llamado ;computer: 05 `dynamicIncluder.jsp` en la raíz web de tu proyecto con la siguiente línea de código (o usa el proyecto **904-04-01-Hello-World-JSP**):
 
 ```html
 <jsp:include page="index.jsp" />
@@ -482,7 +482,6 @@ Otras tres etiquetas relacionadas son `<jsp:useBean>`, `<jsp:getProperty>` y `<j
 
 Finalmente, está la etiqueta `<jsp:plugin>`, que es una herramienta útil para incrustar Applets de Java en el HTML renderizado. Esta etiqueta elimina el riesgo de estropear la estructura cuidadosa de las etiquetas `<object>` y `<embed>` necesarias para que los applets de Java funcionen en todos los navegadores. Maneja la creación de estas etiquetas HTML para que el Applet funcione en todos los navegadores convencionales que admiten el complemento Java. A continuación, se muestra un ejemplo del uso de la etiqueta `<jsp:plugin>`:
 
-
 ```html
 <jsp:plugin type="applet" code="MyApplet.class" jreversion="1.8">
     <jsp:params>
@@ -499,17 +498,88 @@ Tenga en cuenta que `<jsp:plugin>` también puede contener atributos estándar H
 
 **NOTA** *Los Java Applets son un tema completamente diferente de las aplicaciones web y están fuera del alcance de este libro. Si desea obtener más información sobre los applets de Java, la mayoría de los libros de Java para principiantes cubren el tema*.
 
-AQUI
+
 ## USANDO JAVA DENTRO DE UNA JSP (¡Y POR QUÉ NO DEBE USTED!)
 
 En esta sección, explorará un poco más el uso de Java dentro de una JSP reemplazando el Servlet en el proyecto Hello-User (del capítulo anterior) con solo una JSP. Luego, considera brevemente por qué se desaconseja el uso de Java en una JSP (y por qué existe realmente una configuración de descriptor de implementación para deshabilitarlo). Para el resto de esta sección, utiliza el proyecto Hello-User-JSP en el sitio de descarga de wrox.com.
 
-USANDO LAS VARIABLES IMPLÍCITAS EN UNA JSP
-Los archivos JSP tienen varias variables implícitas (objetos) disponibles para su uso dentro de scriptlets y expresiones en JSP. Se consideran implícitos porque no tiene que definirlos ni declararlos en ninguna parte de su código. La especificación JSP requiere que el traductor y el compilador de JSP proporcionen estas variables, con los nombres exactos especificados. Las variables tienen alcance de método. Se definen al principio del método Servlet en el que se ejecuta JSP (en Tomcat 8.0, el método _jspService). Esto significa que no puede usarlos dentro de ningún código que coloque dentro de las declaraciones JSP. Las declaraciones tienen alcance de clase. Debido a que las variables implícitas están dentro del alcance solo dentro del método en el que se ejecuta JSP, el código dentro de las declaraciones no puede usarlas. Puede ver un ejemplo de cómo se definen las variables implícitas observando el método _jspService de cualquiera de las JSP compiladas previamente que examinó en el último sección:
+### USANDO LAS VARIABLES IMPLÍCITAS EN UNA JSP
 
+Los archivos JSP tienen varias variables implícitas (objetos) disponibles para su uso dentro de scriptlets y expresiones en JSP. Se consideran implícitos porque no tiene que definirlos ni declararlos en ninguna parte de su código. La especificación JSP requiere que el traductor y el compilador de JSP proporcionen estas variables, con los nombres exactos especificados. Las variables tienen alcance de método. Se definen al principio del método Servlet en el que se ejecuta JSP (en Tomcat 8.0, el método `_jspService`). Esto significa que no puede usarlos dentro de ningún código que coloque dentro de las declaraciones JSP. Las declaraciones tienen alcance de clase. Debido a que las variables implícitas están dentro del alcance solo dentro del método en el que se ejecuta JSP, el código dentro de las declaraciones no puede usarlas. Puede ver un ejemplo de cómo se definen las variables implícitas observando el método `_jspService` de cualquiera de las JSP compiladas previamente que examinó en el último sección:
 
-```html
+```java
+public void _jspService(final javax.servlet.http.HttpServletRequest request,
+                            final javax.servlet.http.HttpServletResponse response)
+            throws java.io.IOException, javax.servlet.ServletException
+    {
+        final javax.servlet.jsp.PageContext pageContext;
+        javax.servlet.http.HttpSession session = null;
+        final javax.servlet.ServletContext application;
+        final javax.servlet.ServletConfig config;
+        javax.servlet.jsp.JspWriter out = null;
+        final java.lang.Object page = this;
+        javax.servlet.jsp.JspWriter _jspx_out = null;
+        javax.servlet.jsp.PageContext _jspx_page_context = null;
+ 
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            pageContext = _jspxFactory.getPageContext(this, request, response,
+                    null, true, 8192, true);
+            _jspx_page_context = pageContext;
+            application = pageContext.getServletContext();
+            config = pageContext.getServletConfig();
+            session = pageContext.getSession();
+            out = pageContext.getOut();
+            _jspx_out = out;
+            ...
+        }
+        ...
+    }
 ```
+
+El código no es exactamente la imagen de un código limpio, pero las partes importantes del código están en negrita para que pueda comprender lo que está sucediendo. El código en negrita enfatiza la declaración o asignación (o ambas) de variables implícitas requeridas por la especificación JSP. Las variables que no están en negrita (como `_jspx_out` o `_jspx_page_context`) son variables específicas de Tomcat que no se garantiza que existan y nunca deben usarse en su JSP. En este código hay ocho variables implícitas, pero la especificación JSP define nueve variables implícitas. Ahora eche un vistazo a cada una de estas variables implícitas y comprenderá por qué falta una.
+
+#### `request` y `response`
+
+La variable `request` es una instancia de `HttpServletRequest` y la variable `response` es una instancia de `HttpServletResponse`, de las cuales aprendió en detalle en el Capítulo 3. Cualquier cosa que pueda hacer con una solicitud en un Servlet también puede hacer en una JSP, incluida la obtención solicitar parámetros, obtener y establecer atributos, e incluso leer del cuerpo de la respuesta. Aquí se aplican las mismas reglas que aprendió en el capítulo anterior. Sin embargo, existen algunas restricciones sobre lo que puede hacer con el objeto de respuesta en una JSP. Estas restricciones no son restricciones de contrato, por lo que no se aplican en el momento de la compilación. En cambio, se aplican en tiempo de ejecución porque violarlos podría provocar un comportamiento inesperado o incluso errores. Por ejemplo, no debe llamar a `getWriter` o `getOutputStream` porque el JSP ya está escribiendo en la salida de respuesta. Tampoco debe establecer el tipo de contenido o la codificación de caracteres, vaciar o restablecer el búfer o cambiar el tamaño del búfer. Estas son todas las cosas que hace JSP, y si su código también las hace, puede causar problemas.
+
+#### `session`
+
+Esta variable es una instancia de `HttpSession`. Aprenderá más sobre las sesiones en el siguiente capítulo. Recuerde de la sección anterior que la directiva de página tiene un atributo de sesión que por defecto es verdadero. Es por eso que la variable de sesión está disponible en el ejemplo de código anterior y estará disponible de forma predeterminada en todas sus JSP. Si establece el atributo de sesión de la directiva de página en falso, la variable de sesión en la JSP no está definida y no se puede utilizar.
+
+#### `out`
+
+`JspWriter` instancia `out` está disponible para que la use en todas sus JSP. Es un `Writer`, como lo que se obtiene al llamar al método `getWriter` en `HttpServletResponse`. Si por alguna razón necesita escribir directamente en la respuesta, debe usar la variable `out`. Sin embargo, en la mayoría de los casos, simplemente puede usar una expresión o escribir texto o contenido HTML en la JSP.
+
+#### `application`
+
+Esta es una instancia de la interfaz `ServletContext`. Recuerde del Capítulo 3 que esta interfaz le da acceso a la configuración de la aplicación web como un todo, incluidos todos los parámetros de inicio de contexto. Por qué esta variable se denominó `application` en lugar de `context` o `servletContext` es un misterio.
+
+#### `config`
+
+La variable `config` es una instancia de la interfaz `ServletConfig`. A diferencia de la variable `application`, su nombre en realidad refleja lo que es. Como aprendió en el Capítulo 3, puede usar este objeto para acceder a la configuración del JSP Servlet, tales como los parámetros init del Servlet.
+
+#### `pageContext`
+
+Este objeto, una instancia de la clase `PageContext`, proporciona varios métodos convenientes para obtener atributos de solicitud y atributos de sesión, acceder a la solicitud y respuesta, incluidos otros archivos, y reenviar la solicitud. Probablemente nunca necesitará usar esta clase dentro de una JSP. Sin embargo, será útil cuando escriba etiquetas JSP personalizadas en el Capítulo 8.
+
+#### `page`
+
+La variable `page` es un objeto interesante de examinar. Es una instancia de `java.lang.Object`, que inicialmente hace que parezca inútil. Sin embargo, es esencialmente la variable `this` del objeto JSP Servlet. Por lo tanto, puede convertirlo en Servlet y usar métodos definidos en la interfaz de Servlet. También es un `javax.servlet.jsp.JspPage` (que extiende Servlet) y un `javax.servlet.jsp.HttpJspPage` (que extiende JspPage), por lo que puede convertirlo en cualquiera de esos y usar métodos definidos en esas interfaces. En realidad, probablemente nunca tendrá una razón para usar esta variable. Puede resultar útil si alguna vez se admiten otros lenguajes de secuencias de comandos JSP. Sin embargo, la especificación JSP 2.3, sección 1.8.3 nota "a", dice que la página es siempre un sinónimo de esto cuando el lenguaje de programación es Java. Por lo tanto, cualquier cosa que pueda hacer con la página (como obtener el nombre del Servlet o los métodos de acceso o las variables de instancia que definió en una declaración JSP) también puede hacer con esto.
+
+#### exception
+
+Esta es la variable que faltaba en el ejemplo de código anterior. Recuerde de la sección anterior que puede especificar como verdadero el atributo `isErrorPage` en la directiva `page` para indicar que el propósito de JSP es manejar errores. Si lo hace, la variable `exception` estará disponible para su uso dentro de la JSP. Debido a que el valor predeterminado para `isErrorPage` es `false` y no lo ha usado en ninguna parte, la variable de excepción no se ha definido en ninguna JSP que haya creado. Si crea una JSP con `isErrorPage` establecido con `true`, la variable `exception` implícita, `Throwable`, se define automáticamente.
+
+**NOTA**
+<hr>
+Puede leer el documento de especificación de JavaServer Pages 2.3 en la página de especificación JSP.
+<hr>
+
+#### Probar las variables implícitas
+AQUIIII
+
+Ahora que comprende las variables implícitas disponibles y sus propósitos, debería explorar esto más escribiendo código JSP que use las variables implícitas. En su proyecto , cree un archivo :computer: 01 greeting.jsp en la raíz web y coloque el siguiente código en él (o simplemente use el proyecto Hello-User-JSP):
 
 ```html
 ```
