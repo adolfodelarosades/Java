@@ -577,14 +577,382 @@ Puede leer el documento de especificación de JavaServer Pages 2.3 en la página
 <hr>
 
 #### Probar las variables implícitas
-AQUIIII
 
-Ahora que comprende las variables implícitas disponibles y sus propósitos, debería explorar esto más escribiendo código JSP que use las variables implícitas. En su proyecto , cree un archivo :computer: 01 greeting.jsp en la raíz web y coloque el siguiente código en él (o simplemente use el proyecto Hello-User-JSP):
+Ahora que comprende las variables implícitas disponibles y sus propósitos, debería explorar esto más escribiendo código JSP que use las variables implícitas. En su proyecto **950-04-02-Hello-User-JSP**, cree un archivo :computer: 01 `greeting.jsp` en la raíz web y coloque el siguiente código en él:
 
-```html
+```java
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    private static final String DEFAULT_USER = "Guest";
+%>
+<%
+    String user = request.getParameter("user");
+    if(user == null)
+        user = DEFAULT_USER;
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello User Application</title>
+    </head>
+    <body>
+        Hello, <%= user %>!<br /><br />
+        <form action="greeting.jsp" method="POST">
+            Enter your name:<br />
+            <input type="text" name="user" /><br />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>
 ```
 
+Compare esto con el código que escribió en `HelloServlet.java` para el proyecto **950-03-02-Hello-User** en el capítulo anterior. Hay mucho menos, pero logra lo mismo. Observe el uso de una declaración para definir la variable `DEFAULT_USER`, un scriptlet para buscar el parámetro de solicitud `user` y predeterminado si no está configurado, y una `expression` para generar el valor de la variable `user`. Ahora compile y depure este código y vaya a http://localhost:8080/hello-world/greeting.jsp en su navegador. Intente ingresar un nombre en el campo de entrada y haga clic en el botón Submit: la variable post se detecta y se usa. Ahora intente ir a http://localhost:8080/hello-world/greeting.jsp?user=Allison, y debería ver que el parámetro query también se detecta y se usa. Se le anima a explorar el código Java al que Tomcat tradujo su JSP.
+
+Otra cosa que hizo en el proyecto **950-03-02-Hello-User** fue crear un servlet para demostrar el uso de parámetros de valor múltiple. Esto también se puede replicar mediante JSP. Cree un archivo en la raíz web de su proyecto llamado :computer: 02 `checkboxes.jsp` (o use el proyecto **950-04-02-Hello-User-JSP**):
+
 ```html
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello User Application</title>
+    </head>
+    <body>
+        <form action="checkboxesSubmit.jsp" method="POST">
+            Select the fruits you like to eat:<br />
+            <input type="checkbox" name="fruit" value="Banana" /> Banana<br />
+            <input type="checkbox" name="fruit" value="Apple" /> Apple<br />
+            <input type="checkbox" name="fruit" value="Orange" /> Orange<br />
+            <input type="checkbox" name="fruit" value="Guava" /> Guava<br />
+            <input type="checkbox" name="fruit" value="Kiwi" /> Kiwi<br />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>
 ```
+
+Este archivo replica la salida del método `doGet` en el archivo `MultiValueParameterServlet.java` del proyecto **950-03-02-Hello-User**. A continuación, cree `checkboxesSubmit.jsp` (también en el proyecto **950-04-02-Hello-User-JSP**):
+
 ```html
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String[] fruits = request.getParameterValues("fruit");
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello User Application</title>
+    </head>
+    <body>
+        <h2>Your Selections</h2>
+        <%
+            if(fruits == null)
+            {
+        %>You did not select any fruits.<%
+            }
+            else
+            {
+        %><ul><%
+                for(String fruit : fruits)
+                {
+                    out.println("<li>" + fruit + "</li>");
+                }
+        %></ul><%
+            }
+        %>
+    </body>
+</html>
 ```
+
+Este archivo replica la lógica y la salida del método `doPost` de la clase `MultiValueParameterServlet`. Observe cómo el código en negrita entra y sale de los scriptlets, utilizando Java solo donde los requisitos lógicos lo exigen y dejando que los scriptlets utilicen la salida directa en lugar de escribir con la variable de salida implícita. La excepción está dentro del ciclo `for`, que demuestra un caso de uso para la variable `out`. Esto podría haberse reemplazado fácilmente con `%><li><%= fruit %></li><%` para lograr lo mismo. Ahora compile y depure el proyecto y vaya a http://localhost:8080/hello-world/checkboxes.jsp en su navegador. Debería ver una página como la de la Figura 4-1. Experimente con diferentes combinaciones de casillas de verificación y verifique que se comporte de manera idéntica al proyecto **950-03-02-Hello-User** en el Capítulo 3. Intente reemplazar el uso de out en el ciclo `for` con `%><li><%= fruit %></li><%`. Cuando recompile y ejecute el proyecto nuevamente, la salida no debería cambiar.
+
+![04-01](images/04-01.png)
+
+Finalmente, cree un archivo llamado `contextParameters.jsp` para explorar el uso de la variable implícita `application` y la recuperación de los parámetros de inicio de contexto. Alternativamente, use el archivo que ya está en el proyecto **950-04-02-Hello-User-JSP**.
+
+```html
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello User Application</title>
+    </head>
+    <body>
+        settingOne: <%= application.getInitParameter("settingOne") %>,
+        settingTwo: <%= application.getInitParameter("settingTwo") %>
+    </body>
+</html>
+```
+
+Además, debe tener algunos parámetros de inicio de contexto definidos en su descriptor de implementación, como en el Capítulo 3:
+
+```html
+    <context-param>
+        <param-name>settingOne</param-name>
+        <param-value>foo</param-value>
+    </context-param>
+    <context-param>
+        <param-name>settingTwo</param-name>
+        <param-value>bar</param-value>
+    </context-param>
+```
+Ahora compile, depure y navegue hasta http://localhost:8080/hello-world/contextParameters.jsp. Al igual que con el proyecto **950-03-02-Hello-User** basado en Servlet, debería ver los valores de los parámetros de inicio de contexto.
+
+### POR QUÉ NO DEBE USAR JAVA EN UNA JSP
+
+Hay muchas ventajas en el uso de Java dentro de una JSP y, además de los usos señalados anteriormente en este capítulo, es probable que esté pensando en otros usos al leer este párrafo. Lo mejor de usar Java en una JSP es que casi todo lo que puede hacer en una clase Java normal lo puede hacer en una JSP. Sin embargo, uno de los mayores peligros de usar Java en una JSP es que casi todo lo que puede hacer en una clase Java normal lo puede hacer en una JSP. Estas frases pueden parecer una locura, pero es verdad. Piense en todas las cosas que puede hacer con el código Java. Aquí hay algunos que le ayudarán.
+
+Puede conectarse, consultar y manipular una base de datos relacional (o una base de datos NoSQL, según sea el caso). También puede acceder y escribir archivos en el sistema de archivos del servidor. Puede conectarse a servidores remotos, realizar transacciones de servicios web REST e interactuar con los periféricos del sistema. Incluso podría hacer algunos cálculos numéricos, ordenar un árbol binario con mil millones de nodos, recorrer un gran conjunto de datos en busca de datos sospechosos o buscar un modelo de objetos de documento para un conjunto particular de nodos. Ahora levante la mano si cree que alguna de estas cosas son buenas ideas en una JSP.
+
+Java es un lenguaje poderoso, y el problema de tener todo ese poder al alcance de la mano es que es muy difícil no usarlo. Dependiendo de la aplicación, cualquiera de esas tareas pueden ser tareas que deba realizar dentro de una aplicación web. Pero considere esto: en una aplicación limpiamente estructurada, ¿sería apropiado poner todo el acceso a la base de datos, la manipulación de archivos y el código de procesamiento de números en una sola clase? Probablemente no. Lo más probable es que tenga varias clases que realicen funciones especializadas y luego use esas clases donde sea necesario. JavaServer Pages es una tecnología que fue diseñada para la capa de presentación, también conocida como vista. Aunque es posible mezclar el acceso a la base de datos con la capa de presentación, o mezclar el procesamiento de números con la capa de presentación, no es una buena idea. Los lenguajes funcionales, los lenguajes de secuencias de comandos y otros lenguajes que se ejecutan desde la parte superior de un archivo hasta la parte inferior de un archivo, como PHP, ciertamente tienen sus usos. Pero es probable que no eligió Java como su plataforma de elección para poder crear páginas escritas de esta manera. Lo más probable es que haya elegido Java por su elegancia, tipado fuerte y estructura estricta orientada a objetos, entre otras razones.
+
+Además, en la mayoría de las organizaciones, los desarrolladores de interfaces de usuario son responsables de crear la capa de presentación. Estos desarrolladores rara vez tienen experiencia en escribir código Java y proporcionarles esa capacidad puede ser peligroso. En cambio, a menudo tiene sentido proporcionarles un conjunto de herramientas menos poderosas con las que trabajar.
+
+En una aplicación bien estructurada y codificada de forma limpia, la capa de presentación está separada de la lógica empresarial, que también está separada de la capa de persistencia de datos. De hecho, es posible crear JSP que muestren contenido dinámico sin una sola línea de Java dentro de JSP. Esto permite a los desarrolladores de aplicaciones concentrarse en la lógica empresarial y de datos mientras los desarrolladores de interfaces de usuario trabajan en las JSP. Quizás se pregunte cómo es posible esto, pero no se sentirá decepcionado. Aprenderá el primer paso en la siguiente sección y explorará tecnologías JSP aún más potentes en los capítulos 6, 7 y 8.
+
+## COMBINACIÓN DE SERVLETS Y JSPS
+
+Para el resto de este capítulo, mejorará la aplicación de soporte al cliente en la que comenzó a trabajar en el Capítulo 3. Puede seguir los ejemplos y encontrar el código fuente completo en el proyecto **950-04-03-Customer-Support-v2**. Cuando se trata de lógica compleja, validación de datos, persistencia de datos y una capa de presentación detallada, tiene más sentido utilizar una combinación de Servlets y JSP en lugar de utilizar exclusivamente uno u otro. En esta sección, separará la lógica empresarial de la atención al cliente de la capa de presentación.
+
+### CONFIGURACIÓN DE LAS PROPIEDADES JSP EN EL DESCRIPTOR DE DESPLIEGUE
+
+Anteriormente en el capítulo, aprendió sobre la directiva `page` y los muchos atributos que proporciona para permitirle personalizar cómo se traduce, compila y procesa su JSP. Sin embargo, si tiene muchas JSP con propiedades similares, puede resultar complicado colocar esta directiva de página en la parte superior de cada archivo JSP. Afortunadamente, existe una forma de configurar propiedades JSP comunes dentro del deployment descriptor. En el archivo `web.xml`, que debería estar vacío excepto por el <display-name>, agregue el siguiente contenido:
+
+```html
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <url-pattern>*.jspf</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <scripting-invalid>false</scripting-invalid>
+            <include-prelude>/WEB-INF/jsp/base.jspf</include-prelude>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+            <default-content-type>text/html</default-content-type>
+        </jsp-property-group>
+    </jsp-config>
+```
+
+#### Comprensión de los JSP Property Groups
+
+La etiqueta `<jsp-config>` contiene cualquier número de etiquetas `<jsp-property-group>`. Estos grupos de propiedades se utilizan para diferenciar propiedades para diferentes grupos de JSP. Por ejemplo, es posible que desee definir un conjunto de propiedades comunes para todas las JSP en la carpeta `/WEB-INF/jsp/admin` y un conjunto diferente de propiedades comunes para todas las JSP en la carpeta `/WEB-INF/jsp/help `. Puede diferenciar estos grupos de propiedades definiendo etiquetas `<url-pattern>` distintas para cada `<jsp-property-group>`. En el ejemplo de código anterior, las etiquetas `<url-pattern>` indican que este grupo de propiedades se aplica a todos los archivos que terminan en `.jsp` y `.jspf`, en cualquier lugar de la aplicación web. Si desea tratar las JSP en una carpeta de manera diferente a las JSP en otra de la manera mencionada anteriormente, podría tener dos (o más) etiquetas `<jsp-property-group>`, una de las cuales tiene `<url-pattern>/WEB-INF/jsp/admin/*.jsp</url-pattern>` y el otro tiene `<url-pattern>/WEB-INF/jsp/help/*.jsp</url-pattern>`.
+
+Considere algunas reglas importantes al tratar con la etiqueta `<url-pattern>`:
+
+* Si algún archivo en sus aplicaciones coincide con un `<url-pattern>` tanto en un `<servlet-mapping>` como en un grupo de propiedades JSP, la coincidencia más específica gana. Por ejemplo, si un `<url-pattern>` coincidente fuera `*.jsp` y el otro fuera `/WEB-INF/jsp/admin/*.jsp`, el que tenga `/WEB-INF/jsp/admin/*.jsp` ganaría. Si las etiquetas `<url-pattern>` son idénticas, el grupo de propiedades JSP gana sobre el mapping del servlet.
+
+* Si algún archivo coincide con un `<url-pattern>` en más de un grupo de propiedades JSP, gana la coincidencia más específica. Si dos o más coincidencias más específicas son idénticas, gana el primer grupo de propiedades JSP coincidente en el orden en que aparece en el descriptor de implementación.
+
+* Si algún archivo coincide con un `<url-pattern>` en más de un grupo de propiedades JSP y más de uno de esos grupos de propiedades contiene reglas `<include-prelude>` o `<include-coda>`, se aplican las reglas de inclusión de todos los grupos de propiedades JSP para ese archivo, aunque solo uno de los grupos de propiedades se utiliza para las otras propiedades.
+
+Para comprender ese último punto, considere los siguientes grupos de propiedades hipotéticos:
+
+```html
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <url-pattern>*.jspf</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <include-prelude>/WEB-INF/jsp/base.jspf</include-prelude>
+        </jsp-property-group>
+        <jsp-property-group>
+            <url-pattern>/WEB-INF/jsp/admin/*.jsp</url-pattern>
+            <url-pattern>/WEB-INF/jsp/admin/*.jspf</url-pattern>
+            <page-encoding>ISO-8859-1</page-encoding>
+            <include-prelude>/WEB-INF/jsp/admin/include.jspf</include-prelude>
+        </jsp-property-group>
+```
+
+Un archivo llamado `/WEB-INF/jsp/user.jsp` coincidiría solo con el primer grupo de propiedades. Tendría una codificación de caracteres de UTF-8 y el archivo `/WEB-INF/jsp/base.jspf` se incluiría al principio. Por otro lado, `/WEB-INF/jsp/admin/user.jsp` coincidiría con ambos grupos de propiedades. Debido a que el segundo grupo de propiedades es una coincidencia más específica, este archivo tendría una codificación de caracteres de ISO-8859-1. Sin embargo, tanto `/WEB-INF/jsp/base.jspf` como `/WEB-INF/jsp/admin/include.jspf` se incluirían al principio de este archivo. Esto puede resultar muy confuso, por lo que se le insta a mantener sus grupos de propiedades JSP lo más simples posible.
+
+#### Usar propiedades JSP
+
+La etiqueta `<include-prelude>` en el descriptor de implementación del proyecto Customer Support le dice al contenedor que incluya el archivo `/WEB-INF/jsp/base.jspf` al *comienzo* de cada JSP que pertenece a este grupo de propiedades. Esto es útil para definir variables comunes, declaraciones de bibliotecas de etiquetas u otros recursos que deberían estar disponibles para todas las JSP del grupo. De manera similar, una etiqueta `<include-coda>` define un archivo que se incluirá al final de cada JSP en el grupo. Puede utilizar estas dos etiquetas más de una vez en un solo grupo JSP. Puede, por ejemplo, crear archivos `header.jspf` y `footer.jspf` para incluirlos al principio y al final, respectivamente, de cada JSP. Estos archivos pueden contener contenido HTML de encabezado y pie de página para que funcionen como una especie de plantilla para su aplicación. Por supuesto, debe tener cuidado al hacer esto, porque podría incluir fácilmente estos archivos en lugares que no desea.
+
+La etiqueta `<page-encoding>` es idéntica al atributo `pageEncoding` de la directiva de página. Debido a que las JSP ya tienen un tipo de contenido de `text/html` de forma predeterminada, simplemente puede especificar una `<page-encoding>` de UTF-8 para cambiar la codificación de caracteres del tipo de contenido de sus JSP de `text/html;ISO-8859-1` a `text/html;UTF-8`. También puede usar la etiqueta `<default-content-type>` para sobreescribir el `text/html` con algún otro tipo de contenido predeterminado.
+
+Una propiedad particularmente útil es `<trim-directive-whitespaces>`. Esta propiedad indica al traductor JSP que elimine de la salida de respuesta cualquier texto de espacio en blanco creado por directivas, declaraciones, scriptlets y otras etiquetas JSP. Anteriormente en este capítulo, aprendió cómo encadenar el final de una directiva al comienzo de la siguiente para evitar que aparezcan nuevas líneas adicionales en la respuesta. Esta etiqueta se encarga de eso por usted para que pueda escribir un código más limpio.
+
+También se mencionó anteriormente la posibilidad de usar el deployment descriptor para deshabilitar completamente Java dentro de las JSP. La etiqueta `<scripting-invalid>` sirve para ese propósito. El valor predeterminado y el valor en su código, `false`, permite Java en todas las JSP del grupo. Más adelante en el libro, cambia este valor a `true`. Una vez `true`, el uso de Java dentro de una JSP coincidente da como resultado un error de traducción. La etiqueta `<el-ignored>` es similar y corresponde al atributo `isELIgnored` de la directiva `page`. Si es `true`, el lenguaje de expresión está prohibido en las JSP del grupo (lo que da como resultado un error de traducción si se usa EL). Este valor predeterminado es `false` (permitir lenguaje de expresión), y puede dejarlo así.
+
+Hay un puñado de otras etiquetas de grupo de propiedades JSP que probablemente nunca utilizará. `<is-xml>` indica que las JSP coincidentes son documentos JSP (que conocerá en la siguiente sección). La etiqueta `<deferred-syntax-allowed-as-literal>` es una característica del lenguaje de expresión que aprendió en el Capítulo 6. `<buffer>` corresponde al atributo `buffer` de la directiva `page` que aprendió anteriormente en el capítulo. Finalmente, `<error-on-undeclared-namespace>` indica si se genera un error si se usa una etiqueta con un espacio de nombres desconocido dentro de una JSP coincidente, y el valor predeterminado es `false`.
+
+A excepción de `<url-pattern>`, todas las etiquetas dentro de `<jsp-property-group>` son opcionales, pero deben aparecer en el siguiente orden, con las etiquetas no utilizadas omitidas: `<url-pattern>`, `<el-ignored>`, `<page-encoding>`, `<scripting-invalid>`, `<is-xml>`, `<include-prelude>`, `<include-coda>`, `<deferred-syntax-allowed-as-literal>`, `<trim-directive-whitespace>`, `<default-content-type>`, `<buffer>`, `<error-on-undeclared-namespace>`.
+
+En el proyecto Customer Support, tiene que incluir `/WEB-INF/jsp/base.jspf` en todas las JSP de la aplicación. (El contenedor web es lo suficientemente inteligente como para no aplicar esta regla de inclusión al propio base.jspf). Su contenido es simple:
+
+```html
+<%@ page import="com.wrox.TicketServlet, com.wrox.Attachment" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+```
+
+Esto logra dos cosas: importa estas clases para todas las JSP y declara la biblioteca de etiquetas del núcleo JSTL con un prefijo XMLNS de `c`. Aprenderá más sobre JSTL en el Capítulo 7. Quizás se pregunte por qué este archivo se coloca en el directorio `/WEB-INF/jsp` en lugar de en la raíz web. **Recuerde que los archivos dentro del directorio `WEB-INF` están protegidos del acceso web. Colocar el archivo JSP en este directorio evita que los usuarios accedan al JSP desde su navegador. Desearía hacer esto para cualquier JSP a la que no desee que los navegadores accedan directamente**, como las JSP que dependen de los atributos de sesión y solicitud proporcionados por un servlet de reenvío(forwarding) y las JSP que solo están incluidas(included).
+
+Lo último que debe mirar antes de continuar es el archivo `included` en la raíz web del proyecto Customer Support . Este es un *archivo de índice de directorio(directory index file)* de la aplicaciones web, y su existencia en la raíz web significa que puede responder a las solicitudes de la deployed application root (`/`)  sin estar directamente identificado en la URL. Tiene dos líneas simples de código:
+
+```html
+<%@ page session="false" %>
+<c:redirect url="/tickets" />
+```
+
+La segunda línea de código redirige al usuario a la URL del servlet `/tickets` en relación con la aplicación implementada. La primera línea de código deshabilita las sessions en el archivo `index.jsp` para evitar que el parámetro `JSESSIONID` innecesario se agregue automáticamente a la URL de redireccionamiento (lo que ocurre cuando se crea una sesión y el cliente es redirigido en la misma solicitud).
+
+### ENVIAR UNA SOLICITUD DE UN SERVLET A UNA JSP (FORWARDING A REQUEST FROM A SERVLET TO A JSP)
+
+Un patrón típico cuando se combinan Servlets y JSP es hacer que el Servlet acepte la solicitud, realice cualquier procesamiento de lógica empresarial y almacenamiento o recuperación de datos necesarios, prepare un modelo que pueda usarse fácilmente en una JSP y luego reenvíe la solicitud a la JSP. Los métodos del `TicketServlet` de la aplicación dCustomer Support necesitan algunos cambios para que esto suceda. Puede aplicar estos cambios usted mismo o simplemente verlos en el proyecto que descargó.
+
+#### Uso del Request Dispatcher (despachador de solicitudes)
+
+Primero debe abordar el método `showTicketForm` porque es el más simple de cambiar. Debe cambiar su firma para aceptar también un `HttpServletRequest` y luego reemplazar todo el contenido con un simple reenvío al JSP:
+
+```java
+private void showTicketForm(HttpServletRequest request,
+                            HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        request.getRequestDispatcher("/WEB-INF/jsp/view/ticketForm.jsp")
+               .forward(request, response);
+    }
+```
+
+El nuevo código para este método le presenta una nueva característica de `HttpServletRequest`. El método `getRequestDispatcher` obtiene un `javax.servlet.RequestDispatcher`, que maneja forwards e includes internos para una ruta específica (en este caso `/WEB-INF/jsp/view/ticketForm.jsp`). Con este objeto, puede reenviar(forward) la solicitud actual a esa JSP llamando al método `forward`. Tenga en cuenta que esto no es un redireccionamiento: el navegador del usuario no recibe un código de estado(status code) de redireccionamiento y la barra de URL del navegador no cambia. En cambio, el manejo de solicitudes internas se reenvía(forwarded) a una parte diferente de la aplicación. Después de llamar al `forward`, su código de Servlet nunca debe manipular la respuesta nuevamente. Hacerlo podría resultar en errores o comportamiento errático. Ahora cree el archivo JSP al que reenvía este método (o véalo en el proyecto que descargó):
+
+```html
+<%@ page session="false" %> 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Customer Support</title>
+    </head>
+    <body>
+        <h2>Create a Ticket</h2>
+        <form method="POST" action="tickets" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="create"/>
+            Your Name<br/>
+            <input type="text" name="customerName"><br/><br/>
+            Subject<br/>
+            <input type="text" name="subject"><br/><br/>
+            Body<br/>
+            <textarea name="body" rows="5" cols="30"></textarea><br/><br/>
+            <b>Attachments</b><br/>
+            <input type="file" name="file1"/><br/><br/>
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
+```
+
+#### Diseñar para la Capa de Presentación
+
+Este no es un ejemplo impresionante porque todo lo que ha hecho es copiar algo de código de Java a JSP, no es algo nuevo en este momento. Aún no está utilizando sesiones, por lo que se ha desactivado en la JSP. A continuación, debe cambiar el método `viewTicket` de `TicketServlet`, que es más complicado. ***Un buen enfoque es pensar en su presentación, primero***: ¿qué elementos de datos necesita para funcionar? - ***y luego codifique su método Servlet para proporcionar esa información***. Con esto en mente, comience con el archivo `/WEB-INF/jsp/view/viewTicket.jsp`:
+
+
+```html
+<%@ page session="false" %> 
+<%
+    String ticketId = (String)request.getAttribute("ticketId");
+    Ticket ticket = (Ticket)request.getAttribute("ticket");
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Customer Support</title>
+    </head>
+    <body>
+        <h2>Ticket #<%= ticketId %>: <%= ticket.getSubject() %></h2>
+        <i>Customer Name - <%= ticket.getCustomerName() %></i><br /><br />
+        <%= ticket.getBody() %><br /><br />
+        <%
+            if(ticket.getNumberOfAttachments() > 0)
+            {
+                %>Attachments: <%
+                int i = 0;
+                for(Attachment a : ticket.getAttachments())
+                {
+                    if(i++ > 0)
+                        out.print(", ");
+                    %><a href="<c:url value="/tickets">
+                        <c:param name="action" value="download" />
+                        <c:param name="ticketId" value="<%= ticketId %>" />
+                        <c:param name="attachment" value="<%= a.getName() %>" />
+                    </c:url>"><%= a.getName() %></a><%
+                }
+            }
+        %>
+        <a href="<c:url value="/tickets" />">Return to list tickets</a>
+    </body>
+</html>
+```
+
+La creación de esta JSP debería mostrarle que la capa de presentación necesita un `ticketId` y un `ticket` para mostrarse correctamente (el código en negrita). El método `viewTicket` se puede cambiar para proporcionar estas variables y reenviar la solicitud a la JSP:
+
+```java
+private void viewTicket(HttpServletRequest request,
+                            HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        String idString = request.getParameter("ticketId");
+        Ticket ticket = this.getTicket(idString, response);
+        if(ticket == null)
+            return;
+ 
+        request.setAttribute("ticketId", idString);
+        request.setAttribute("ticket", ticket); 
+ 
+        request.getRequestDispatcher("/WEB-INF/jsp/view/viewTicket.jsp")
+               .forward(request, response);
+    }
+```
+
+Las primeras líneas del método realizan la lógica empresarial de analizar el parámetro de solicitud y obtener el ticket de la base de datos. Luego, el código en negrita agrega dos atributos a la solicitud. Este es el propósito principal de los atributos de solicitud. Se pueden usar para pasar datos entre diferentes elementos de la aplicación que manejan la misma solicitud, como entre un Servlet y una JSP. **Los atributos de la solicitud son diferentes de los parámetros de la solicitud: *los atributos de la solicitud son Objetos mientras que los parámetros de la solicitud son Cadenas*, y los clientes no pueden pasar atributos como si fueran parámetros**. **Los atributos de solicitud existen únicamente para uso interno dentro de su aplicación**. Si el servlet coloca un `Ticket` en un atributo de solicitud, JSP lo recupera como un `ticket`. Durante la vida del request, cualquier componente de la aplicación que tenga acceso a la instancia de `HttpServletRequest` tiene acceso a los atributos del request. Cuando se completa el request, los atributos del request se descartan.
+
+El último método que necesita cambiar es el método `listTickets`. Nuevamente, comience por crear el archivo de presentación `/WEB-INF/jsp/view/listTickets.jsp` en la aplicación Customer Support. Debido a que los atributos del request son Objetos, debe convertirlos cuando los recupere. En este caso, el cast a `Map<Integer, Ticket>` es una operación unchecked, por lo que debe suprimir la advertencia.
+
+```html
+<%@ page session="false" import="java.util.Map" %>
+<%
+    @SuppressWarnings("unchecked")
+    Map<Integer, Ticket> ticketDatabase =
+            (Map<Integer, Ticket>)request.getAttribute("ticketDatabase");
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Customer Support</title>
+    </head>
+    <body>
+        <h2>Tickets</h2>
+        <a href="<c:url value="/tickets">
+            <c:param name="action" value="create" />
+        </c:url>">Create Ticket</a><br /><br />
+        <%
+            if(ticketDatabase.size() == 0)
+            {
+                %><i>There are no tickets in the system.</i><%
+            }
+            else
+            {
+                for(int id : ticketDatabase.keySet())
+                {
+                    String idString = Integer.toString(id);
+                    Ticket ticket = ticketDatabase.get(id);
+                    %>Ticket #<%= idString %>: <a href="<c:url value="/tickets">
+                        <c:param name="action" value="view" />
+                        <c:param name="ticketId" value="<%= idString %>" />
+                    </c:url>"><%= ticket.getSubject() %></a> (customer:
+        <%= ticket.getCustomerName() %>)<br /><%
+                }
+            }
+        %>
+    </body>
+</html>
+```
+
+
+
+
+
+
+
+
+
+
+
