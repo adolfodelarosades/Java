@@ -66,7 +66,7 @@ Professional Java for Web Applications es la guía completa de Wrox para desarro
 * A Note about JSP Documents (JSPX)
 * Summary
 
-#### Chapter 5: Maintaining State Using Sessions
+#### Chapter 5: [Maintaining State Using Sessions](https://github.com/adolfodelarosades/Java/blob/master/temarios/950_Professional_Java_for_Web_Applications/05_Maintaining_State_Using_Sessions.md)
 * Understanding Why Sessions Are Necessary
 * Using Session Cookies and URL Rewriting
 * Storing Data in a Session
