@@ -304,7 +304,7 @@ Ahora que se le presentó a las sesiones, aprendió sobre la cookie `JSESSIONID`
 
 ## ALMACENAMIENTO DE DATOS EN UNA SESIÓN
 
-A medida que aprenda a utilizar sesiones en Java EE, utilizará el proyecto de ejemplo Shopping-Cart. No creará un sitio de compras completo con sistemas de pago y funciones relacionadas. Simplemente explorará el concepto de usar sesiones para agregar datos recopilados en varias páginas (en este caso, productos agregados a un carrito de compras). Puede crear el proyecto usted mismo o seguir el proyecto Shopping-Cart. Su proyecto debe comenzar con el deployment descriptor `<jsp-config>` del Capítulo 4 y el siguiente archivo `/WEB-INF/jsp/base.jspf`:
+A medida que aprenda a utilizar sesiones en Java EE, utilizará el proyecto de ejemplo **950-05-01-Shopping-Cart**. No creará un sitio de compras completo con sistemas de pago y funciones relacionadas. Simplemente explorará el concepto de usar sesiones para agregar datos recopilados en varias páginas (en este caso, productos agregados a un carrito de compras). Puede crear el proyecto usted mismo o seguir el proyecto **950-05-01-Shopping-Cart**. Su proyecto debe comenzar con el deployment descriptor `<jsp-config>` del Capítulo 4 y el siguiente archivo `/WEB-INF/jsp/base.jspf`:
 
 ```java
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -365,7 +365,7 @@ La etiqueta `<cookie-config>` se aplica solo cuando se especifica `COOKIE` como 
 <hr>
 *A partir de Servlet 3.0/Java EE 6,, puede omitir el deployment descriptor y configurar la mayoría de estas opciones mediante programación utilizando `ServletContext`. Utilice el método `setSessionTrackingModes` para especificar un conjunto de una o más constantes de enumeración `javax.servlet.SessionTrackingMode`. `getSessionCookieConfig` devuelve un `javax.servlet.SessionCookieConfig`: use este objeto para configurar cualquiera de las opciones de `<cookie-config>`. Puede configurar los modos de seguimiento o la configuración de cookies solo dentro del método `contextInitialized` de un `ServletContextListener` o del método `onStartup` de un `ServletContainerInitializer`. Aprenderá sobre los escuchas en la sección "Aplicar sesiones de manera útil" y `ServletContainerInitializers` en el Capítulo 12. Actualmente no puede configurar el tiempo de espera de la sesión de manera programática; esta omisión debe corregirse en Java EE 8.
 
-Ahora que comprende las opciones disponibles, la configuración de sesión para el proyecto Shopping-Cart es la siguiente:
+Ahora que comprende las opciones disponibles, la configuración de sesión para el proyecto **950-05-01-Shopping-Cart** es la siguiente:
 
 ```html
     <session-config>
@@ -386,7 +386,7 @@ Esto hace que las sesiones duren 30 minutos, indica al contenedor que solo use c
 
 ### ALMACENAMIENTO Y RECUPERACIÓN DE DATOS
 
-En su proyecto, cree un Servlet llamado `com.wrox.StoreServlet` y anótelo como un Servlet con el patrón de URL `/shop`. Además, cree un mapa simple en su Servlet que represente una base de datos de productos. (O simplemente use el proyecto Shopping-Cart).
+En su proyecto, cree un Servlet llamado `com.wrox.StoreServlet` y anótelo como un Servlet con el patrón de URL `/shop`. Además, cree un mapa simple en su Servlet que represente una base de datos de productos. (O simplemente use el proyecto **950-05-01-Shopping-Cart**).
 
 ```java
 @WebServlet(
@@ -638,38 +638,186 @@ Quizás uno de los métodos de `HttpSession` más importantes que debe conocer e
 
 ### ALMACENAMIENTO DE DATOS MÁS COMPLEJOS EN SESIONES
 
-Hasta ahora, ha aprendido cómo usar el objeto `HttpSession` y cómo agregar datos y eliminarlos de la sesión. Sin embargo, solo trabajó con un mapa simple con claves y valores enteros. ¿Es esto todo lo que puede hacer una sesión? La respuesta es no. Teóricamente hablando, una sesión puede almacenar casi cualquier cosa que desee poner en ella.
+Hasta ahora, ha aprendido cómo usar el objeto `HttpSession` y cómo agregar datos y eliminarlos de la sesión. Sin embargo, solo trabajó con un `Map` simple con claves y valores enteros. ¿Es esto todo lo que puede hacer una sesión? La respuesta es no. Teóricamente hablando, una sesión puede almacenar casi cualquier cosa que desee poner en ella.
 
 Por supuesto, debe pensar en consideraciones de tamaño. Si coloca demasiados datos en sus sesiones, podría comenzar a agotar el grupo de memoria de la máquina virtual. Luego, hay que tener en cuenta la agrupación. La agrupación en clústeres se trata en la sección "Agrupación de una aplicación que usa sesiones", pero desea asegurarse de que puede serializar y transmitir los datos de su sesión a través del clúster (por lo que los atributos de la sesión deberían implementar `Serializable`). Aparte de esas dos restricciones, realmente no hay muchas cosas que no puedas poner en una sesión.
 
-
-AQUI
-Para demostrar esto, considere el proyecto de ejemplo Session-Activity disponible en el sitio de descarga de wrox.com. Tiene el mismo descriptor de implementación y el archivo /WEB-INF/jsp/base.jspf y un archivo index.jsp ligeramente diferente:
+Para demostrar esto, considere el proyecto de ejemplo **950-05-02-Session-Activity**. Tiene el mismo deployment descriptor y el archivo `/WEB-INF/jsp/base.jspf` y un archivo `index.jsp` ligeramente diferente:
 
 ```java
+<c:redirect url="/do/home" />
 ```
+
+En el paquete com.wrox hay un POJO llamado `PageVisit`. La clase y sus campos se muestran en el siguiente código. Los métodos de acceso simple(getter) y mutador(setter) para esta clase se dejan al lector para que los complete.
 
 ```java
+import java.io.Serializable;
+import java.net.InetAddress;
+ 
+public class PageVisit implements Serializable
+{
+    private long enteredTimestamp;
+ 
+    private Long leftTimestamp;
+ 
+    private String request;
+ 
+    private InetAddress ipAddress;
+ 
+    // accessor and mutator methods
+}
 ```
+
+Tenga en cuenta que, aunque `enteredTimestamp` es un primitivo `long`, `leftTimestamp` es un wrapper `Long`. Esto es para que `leftTimestamp` pueda ser `null`. El `ActivityServlet` del Listado 5-1 no es muy complejo. El método estándar `doGet` llama a `recordSessionActivity` y luego a `viewSessionActivity`. El método `viewSessionActivity` simplemente reenvía a una JSP. `recordSessionActivity` está haciendo todo el trabajo divertido: obtiene la sesión; asegura que la `activity Vector` existe en la sesión; actualiza el `leftTimestamp` para la última `PageVisit` en el `Vector`, si hay uno; y luego agrega información sobre la solicitud actual al `Vector`. `Vector` se utiliza aquí porque, a diferencia de `ArrayList`, es una thread-safe `List`. El patrón de URL del servlet tiene un comodín. Este patrón de URL significa que este Servlet responde a cualquier solicitud que comience con `/do/`, lo que puede ser útil cuando pruebe esto.
+
+LISTING 5-1: ACTIVITYSERVLET.JAVA
 
 ```java
+@WebServlet(
+        name = "storeServlet",
+        urlPatterns = "/do/*"
+)
+public class ActivityServlet extends HttpServlet
+{
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        this.recordSessionActivity(request);
+ 
+        this.viewSessionActivity(request, response);
+    }
+ 
+    private void recordSessionActivity(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+ 
+        if(session.getAttribute("activity") == null)
+            session.setAttribute("activity", new Vector<PageVisit>());
+        @SuppressWarnings("unchecked")
+        Vector<PageVisit> visits =
+                (Vector<PageVisit>)session.getAttribute("activity");
+ 
+        if(!visits.isEmpty())
+        {
+            PageVisit last = visits.lastElement();
+            last.setLeftTimestamp(System.currentTimeMillis());
+        }
+ 
+        PageVisit now = new PageVisit();
+        now.setEnteredTimestamp(System.currentTimeMillis());
+        if(request.getQueryString() == null)
+            now.setRequest(request.getRequestURL().toString());
+        else
+            now.setRequest(request.getRequestURL()+"?"+request.getQueryString());
+        try
+        {
+            now.setIpAddress(InetAddress.getByName(request.getRemoteAddr()));
+        }
+        catch (UnknownHostException e)
+        {
+            e.printStackTrace();
+        }
+        visits.add(now);
+    }
+    private void viewSessionActivity(HttpServletRequest request,
+                                     HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        request.getRequestDispatcher("/WEB-INF/jsp/view/viewSessionActivity.jsp")
+               .forward(request, response);
+    }
+}
 ```
 
-```java
-```
+La última cosa a mirar en este proyecto es el archivo `/WEB-INF/jsp/view/viewSessionActivity.jsp` en el Listado 5-2. Es menos complicado de lo que parece. Todo lo que hace es mostrar todos los datos de visitas a la página acumulados en la sesión de forma legible. Ahora para probar esto, siga estos pasos:
 
-```java
-```
-```java
-```
+1. Compile y depure su aplicación y navegue hasta http://localhost:8080/session-activity/do/home/ en su navegador. Debería ver alguna información sobre su sesión, una indicación de que la sesión es nueva e información sobre la solicitud que acaba de realizar.
 
-```java
-```
+2. Comience a agregar rutas y parámetros de consulta al final de la URL. Pruebe diferentes URL y espere diferentes períodos de tiempo entre cada solicitud. Incluso puede reemplazar `home/` con otra cosa, solo asegúrese de dejar `/do/` en la URL.
 
-
-
+Después de un tiempo, debería empezar a ver emerger algo como la Figura 5-3. Su aplicación rastrea la actividad de la solicitud y la mantiene entre solicitudes para mostrarla al usuario.
 
 ![05-03](images/05-03.png)
+
+LISTING 5-2: VIEWSESSIONACTIVITY.JSP
+
+```java
+<%@ page import="java.util.Vector, com.wrox.PageVisit, java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%!
+    private static String toString(long timeInterval)
+    {
+        if(timeInterval < 1_000)
+            return "less than one second";
+        if(timeInterval < 60_000)
+            return (timeInterval / 1_000) + " seconds";
+        return "about " + (timeInterval / 60_000) + " minutes";
+    }
+%>
+<%
+    SimpleDateFormat f = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Session Activity Tracker</title>
+    </head>
+    <body>
+        <h2>Session Properties</h2>
+        Session ID: <%= session.getId() %><br />
+        Session is new: <%= session.isNew() %><br />
+        Session created: <%= f.format(new Date(session.getCreationTime()))%><br />
+ 
+        <h2>Page Activity This Session</h2>
+        <%
+            @SuppressWarnings("unchecked")
+            Vector<PageVisit> visits =
+                    (Vector<PageVisit>)session.getAttribute("activity");
+ 
+            for(PageVisit visit : visits)
+            {
+                out.print(visit.getRequest());
+                if(visit.getIpAddress() != null)
+                    out.print(" from IP " + visit.getIpAddress().getHostAddress());
+                out.print(" (" + f.format(new Date(visit.getEnteredTimestamp())));
+                if(visit.getLeftTimestamp() != null)
+                {
+                    out.print(", stayed for " + toString(
+                            visit.getLeftTimestamp() - visit.getEnteredTimestamp()
+                    ));
+                }
+                out.println(")<br />");
+            }
+        %>
+    </body>
+</html>
+```
+
+AQUIII
+## APLICAR LAS SESIONES DE MANERA ÚTIL
+
+En este punto, debe estar familiarizado con cómo funcionan las sesiones y cómo usarlas en aplicaciones web Java EE. Hay muchas cosas que puede hacer con las sesiones. Además, hay algunas herramientas adicionales disponibles para ayudarlo a rastrear cuándo se crean, destruyen y actualizan las sesiones. Los explora más en esta sección. Durante el resto del capítulo, trabajará con el proyecto Customer-Support-v3 que se encuentra en el sitio de descarga de códigos wrox.com e integrará sesiones en la aplicación Customer Support.
+
+AÑADIR INICIO DE SESIÓN A LA APLICACIÓN DE ATENCIÓN AL CLIENTE
+En el último capítulo, desactivó las sesiones en la aplicación de soporte al cliente agregando session = "false" a los atributos de la página en todas las JSP. Desea utilizar sesiones ahora, y esto puede evitar que lo haga, así que elimine el atributo session = "false" de todas las JSP en la versión 3 de la aplicación de soporte al cliente. Recuerde que el valor predeterminado de este atributo es verdadero, por lo que eliminar el atributo por completo habilita las sesiones.
+
+También debe agregar el XML <session-config> de la aplicación Shopping-Cart al descriptor de implementación para que las sesiones estén configuradas para una mejor seguridad y los ID de sesión no terminen en URL. Debería ser obvio en este punto que la aplicación de soporte al cliente necesita algún tipo de base de datos de usuarios con inicios de sesión. En esta sección, agregará una capacidad de inicio de sesión muy rudimentaria y poco segura a su aplicación. En la última parte del libro, varios capítulos cubren la protección de su aplicación con un sistema de autenticación y autorización más completo, para que pueda mantenerlo simple por ahora.
+
+Configuración de la base de datos de usuarios
+Agregue una clase LoginServlet a su aplicación y cree una base de datos de usuario estática en memoria en ella:
+
+```java
+```
+```java
+```
+
+```java
+```
+
+
+
+
 ![05-04](images/05-04.png)
 ![05-05](images/05-05.png)
 
