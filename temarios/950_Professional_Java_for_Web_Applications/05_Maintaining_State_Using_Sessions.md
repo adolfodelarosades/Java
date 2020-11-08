@@ -60,9 +60,9 @@ En la teoría general de las sesiones web, una sesión es un archivo, segmento d
 
 ![05-01](05-01.png)
 
-![05-02](05-02.png)
-![05-03](05-03.png)
-![05-04](05-04.png)
-![05-05](05-05.png)
+![05-02](images/05-02.png)
+![05-03](images/05-03.png)
+![05-04](images/05-04.png)
+![05-05](images/05-05.png)
 
 
