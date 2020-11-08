@@ -83,14 +83,14 @@ Host: www.example.com
 
 RESPONSE 1
 
-```java
+```sh
 HTTP/1.1 302 Moved Temporarily
 Location: https://www.example.com/support/login
 Set-Cookie: JSESSIONID=NRxclGg2vG7kI4MdlLn; Domain=.example.com; Path=/; HttpOnly
 ```
 REQUEST 2
 
-```java
+```sh
 GET /support/login HTTP/1.1
 Host: www.example.com
 Cookie: JSESSIONID=NRxclGg2vG7kI4MdlLn
@@ -98,7 +98,7 @@ Cookie: JSESSIONID=NRxclGg2vG7kI4MdlLn
 
 RESPONSE 2
 
-```java
+```sh
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=UTF-8
 Content-Length: 21765
@@ -106,7 +106,7 @@ Content-Length: 21765
 
 REQUEST 3
 
-```java
+```sh
 POST /support/login HTTP/1.1
 Host: www.example.com
 Cookie: JSESSIONID=NRxclGg2vG7kI4MdlLn
@@ -114,7 +114,7 @@ Cookie: JSESSIONID=NRxclGg2vG7kI4MdlLn
 
 RESPONSE 3
 
-```java
+```sh
 HTTP/1.1 302 Moved Temporarily
 Location: http://www.example.com/support/home
 Set-Cookie: remusername=Nick; Expires=Wed, 02-Jun-2021 12:15:47 GMT; 
@@ -123,7 +123,7 @@ Set-Cookie: remusername=Nick; Expires=Wed, 02-Jun-2021 12:15:47 GMT;
 
 REQUEST 4
 
-```java
+```sh
 GET /support/home HTTP/1.1
 Host: www.example.com
 Cookie: JSESSIONID=NRxclGg2vG7kI4MdlLn; remusername=Nick
@@ -131,7 +131,7 @@ Cookie: JSESSIONID=NRxclGg2vG7kI4MdlLn; remusername=Nick
 
 RESPONSE 4
 
-```java
+```sh
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=UTF-8
 Content-Length: 56823
@@ -168,28 +168,28 @@ La técnica específica que utiliza una tecnología determinada es irrelevante p
 
 REQUEST 1
 
-```java
+```sh
 GET /support HTTP/1.1
 Host: www.example.com
 ```
 
 RESPONSE 1
 
-```java
+```sh
 HTTP/1.1 302 Moved Temporarily
 Location: https://www.example.com/support/login;JSESSIONID=NRxclGg2vG7kI4MdlLn
 ```
 
 REQUEST 2
 
-```java
+```sh
 GET /support/login;JSESSIONID=NRxclGg2vG7kI4MdlLn HTTP/1.1
 Host: www.example.com
 ```
 
 RESPONSE 2
 
-```java
+```sh
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=UTF-8
 Content-Length: 21796
@@ -201,28 +201,28 @@ Content-Length: 21796
 
 REQUEST 3
 
-```java
+```sh
 POST /support/login;JSESSIONID=NRxclGg2vG7kI4MdlLn HTTP/1.1
 Host: www.example.com
 ```
 
 RESPONSE 3
 
-```java
+```sh
 HTTP/1.1 302 Moved Temporarily
 Location: http://www.example.com/support/home;JSESSIONID=NRxclGg2vG7kI4MdlLn
 ```
 
 REQUEST 4
 
-```java
+```sh
 GET /support/home;JSESSIONID=NRxclGg2vG7kI4MdlLn HTTP/1.1
 Host: www.example.com
 ```
 
 RESPONSE 4
 
-```java
+```sh
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=UTF-8
 Content-Length: 56854
@@ -270,9 +270,9 @@ Hay dos formas de abordar el problema:
 
 **ADVERTENCIA**
 <hr>
-Existe otro tipo de ataque de fijación de sesión en el que un sitio web malintencionado escribe una cookie de identificación de sesión utilizando el nombre de dominio de otro sitio web, configurando efectivamente la identificación de sesión para el otro sitio web en el navegador de la víctima. Este ataque tiene el mismo efecto que el ataque de fijación de sesión de URL. Sin embargo, no hay forma de que las aplicaciones web se protejan contra esta vulnerabilidad sin deshabilitar las sesiones por completo. Esta vulnerabilidad es en realidad una vulnerabilidad del navegador, no una vulnerabilidad de las aplicaciones web.
+*Existe otro tipo de ataque de fijación de sesión en el que un sitio web malintencionado escribe una cookie de identificación de sesión utilizando el nombre de dominio de otro sitio web, configurando efectivamente la identificación de sesión para el otro sitio web en el navegador de la víctima. Este ataque tiene el mismo efecto que el ataque de fijación de sesión de URL. Sin embargo, no hay forma de que las aplicaciones web se protejan contra esta vulnerabilidad sin deshabilitar las sesiones por completo. Esta vulnerabilidad es en realidad una vulnerabilidad del navegador, no una vulnerabilidad de las aplicaciones web*.
 
-Todos los navegadores modernos han solucionado esta vulnerabilidad para los ataques entre dominios (el sitio `example.net` establece una cookie para el sitio `example.net`). Sin embargo, el sitio `malicioso.example.net` aún podría establecer una cookie de sesión para el dominio `.example.net`, que luego sería recogida por el sitio `vulnerable.example.net`. Este problema se puede evitar por completo siguiendo una regla simple: no comparta un nombre de dominio con aplicaciones que no sean de confianza.
+*Todos los navegadores modernos han solucionado esta vulnerabilidad para los ataques entre dominios (el sitio `example.net` establece una cookie para el sitio `example.net`). Sin embargo, el sitio `malicioso.example.net` aún podría establecer una cookie de sesión para el dominio `.example.net`, que luego sería recogida por el sitio `vulnerable.example.net`. Este problema se puede evitar por completo siguiendo una regla simple: no comparta un nombre de dominio con aplicaciones que no sean de confianza*.
 <hr>
 
 #### Cross-Site Scripting y Session Hijacking
@@ -283,7 +283,7 @@ La defensa más obvia contra este ataque es proteger su sitio contra las secuenc
 
 **NOTA**
 <hr>
-Aunque el atributo `HttpOnly` evita que JavaScript acceda a la cookie utilizando la propiedad DOM `document.cookie`, las solicitudes AJAX que se originan en el código JavaScript seguirán incluyendo la cookie de ID de sesión porque el navegador, no el código JavaScript, es responsable de formar los encabezados de solicitud AJAX. Esto significa que el servidor aún podrá asociar las solicitudes AJAX con la sesión del usuario.
+*Aunque el atributo `HttpOnly` evita que JavaScript acceda a la cookie utilizando la propiedad DOM `document.cookie`, las solicitudes AJAX que se originan en el código JavaScript seguirán incluyendo la cookie de ID de sesión porque el navegador, no el código JavaScript, es responsable de formar los encabezados de solicitud AJAX. Esto significa que el servidor aún podrá asociar las solicitudes AJAX con la sesión del usuario*.
 <hr>
 
 #### Cookies Inseguras
@@ -306,13 +306,13 @@ Ahora que se le presentó a las sesiones, aprendió sobre la cookie `JSESSIONID`
 
 A medida que aprenda a utilizar sesiones en Java EE, utilizará el proyecto de ejemplo **950-05-01-Shopping-Cart**. No creará un sitio de compras completo con sistemas de pago y funciones relacionadas. Simplemente explorará el concepto de usar sesiones para agregar datos recopilados en varias páginas (en este caso, productos agregados a un carrito de compras). Puede crear el proyecto usted mismo o seguir el proyecto **950-05-01-Shopping-Cart**. Su proyecto debe comenzar con el deployment descriptor `<jsp-config>` del Capítulo 4 y el siguiente archivo `/WEB-INF/jsp/base.jspf`:
 
-```java
+```html
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 ```
 
 Además, debe tener un archivo `index.jsp` simple en su raíz web para redirigir a su tienda Servlet:
 
-```java
+```html
 <c:redirect url="/shop" />
 ```
 
@@ -320,7 +320,7 @@ Además, debe tener un archivo `index.jsp` simple en su raíz web para redirigir
 
 En muchos casos, las sesiones HTTP están listas para funcionar en Java EE y no requieren una configuración explícita. Sin embargo, configúrelos que pueda, y por motivos de seguridad debería hacerlo. Las sesiones se configuran en el deployment descriptor mediante la etiqueta `<session-config>`. Dentro de esta etiqueta, puede configurar el método mediante el cual se rastrean las sesiones, la edad después de la cual se agota el tiempo de espera de las sesiones y los detalles de la cookie de identificación de sesión, si la usa. Muchos de estos tienen valores predeterminados que nunca es necesario cambiar. El siguiente código muestra todas las configuraciones posibles del deployment descriptor settings para las sesiones.
 
-```java
+```html
     <session-config>
         <session-timeout>30</session-timeout>
         <cookie-config>
@@ -363,7 +363,8 @@ La etiqueta `<cookie-config>` se aplica solo cuando se especifica `COOKIE` como 
 
 **NOTA**
 <hr>
-*A partir de Servlet 3.0/Java EE 6,, puede omitir el deployment descriptor y configurar la mayoría de estas opciones mediante programación utilizando `ServletContext`. Utilice el método `setSessionTrackingModes` para especificar un conjunto de una o más constantes de enumeración `javax.servlet.SessionTrackingMode`. `getSessionCookieConfig` devuelve un `javax.servlet.SessionCookieConfig`: use este objeto para configurar cualquiera de las opciones de `<cookie-config>`. Puede configurar los modos de seguimiento o la configuración de cookies solo dentro del método `contextInitialized` de un `ServletContextListener` o del método `onStartup` de un `ServletContainerInitializer`. Aprenderá sobre los escuchas en la sección "Aplicar sesiones de manera útil" y `ServletContainerInitializers` en el Capítulo 12. Actualmente no puede configurar el tiempo de espera de la sesión de manera programática; esta omisión debe corregirse en Java EE 8.
+*A partir de Servlet 3.0/Java EE 6,, puede omitir el deployment descriptor y configurar la mayoría de estas opciones mediante programación utilizando `ServletContext`. Utilice el método `setSessionTrackingModes` para especificar un conjunto de una o más constantes de enumeración `javax.servlet.SessionTrackingMode`. `getSessionCookieConfig` devuelve un `javax.servlet.SessionCookieConfig`: use este objeto para configurar cualquiera de las opciones de `<cookie-config>`. Puede configurar los modos de seguimiento o la configuración de cookies solo dentro del método `contextInitialized` de un `ServletContextListener` o del método `onStartup` de un `ServletContainerInitializer`. Aprenderá sobre los escuchas en la sección "Aplicar sesiones de manera útil" y `ServletContainerInitializers` en el Capítulo 12. Actualmente no puede configurar el tiempo de espera de la sesión de manera programática; esta omisión debe corregirse en Java EE 8*.
+<hr>
 
 Ahora que comprende las opciones disponibles, la configuración de sesión para el proyecto **950-05-01-Shopping-Cart** es la siguiente:
 
@@ -532,7 +533,7 @@ El código de Servlet puede manejar la lógica en su aplicación, pero necesita 
 Esta JSP tiene pocas novedades y simplemente enumera todos los productos. Explorará las etiquetas `<c:url>` y `<c:param>` con más detalle en el Capítulo 7. Al hacer clic en el nombre de un producto, se agrega al carrito. A continuación, cree `/WEB-INF/jsp/view/viewCart.jsp`:
 
 
-```java
+```html
 <%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html>
@@ -618,7 +619,7 @@ Como puede ver, este es el método más simple en su Servlet. El código elimina
 
 3. Ahora necesita una forma de navegar hasta el enlace para vaciar el carrito. Modifique `/WEB-INF/jsp/view/viewCart.jsp` y agregue el siguiente enlace:
 
-```java
+```html
 <a href="<c:url value="/shop?action=emptyCart" />">Empty Cart</a><br /><br />
 ```
 
@@ -644,7 +645,7 @@ Por supuesto, debe pensar en consideraciones de tamaño. Si coloca demasiados da
 
 Para demostrar esto, considere el proyecto de ejemplo **950-05-02-Session-Activity**. Tiene el mismo deployment descriptor y el archivo `/WEB-INF/jsp/base.jspf` y un archivo `index.jsp` ligeramente diferente:
 
-```java
+```html
 <c:redirect url="/do/home" />
 ```
 
@@ -742,7 +743,7 @@ Después de un tiempo, debería empezar a ver emerger algo como la Figura 5-3. S
 
 LISTING 5-2: VIEWSESSIONACTIVITY.JSP
 
-```java
+```html
 <%@ page import="java.util.Vector, com.wrox.PageVisit, java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%!
@@ -794,26 +795,201 @@ LISTING 5-2: VIEWSESSIONACTIVITY.JSP
 </html>
 ```
 
-AQUIII
 ## APLICAR LAS SESIONES DE MANERA ÚTIL
 
-En este punto, debe estar familiarizado con cómo funcionan las sesiones y cómo usarlas en aplicaciones web Java EE. Hay muchas cosas que puede hacer con las sesiones. Además, hay algunas herramientas adicionales disponibles para ayudarlo a rastrear cuándo se crean, destruyen y actualizan las sesiones. Los explora más en esta sección. Durante el resto del capítulo, trabajará con el proyecto Customer-Support-v3 que se encuentra en el sitio de descarga de códigos wrox.com e integrará sesiones en la aplicación Customer Support.
+En este punto, debe estar familiarizado con cómo funcionan las sesiones y cómo usarlas en aplicaciones web Java EE. Hay muchas cosas que puede hacer con las sesiones. Además, hay algunas herramientas adicionales disponibles para ayudarlo a rastrear cuándo se crean, destruyen y actualizan las sesiones. Los explora más en esta sección. Durante el resto del capítulo, trabajará con el proyecto **950-05-03-Customer-Support-v3** que integrará sesiones en la aplicación Customer Support.
 
-AÑADIR INICIO DE SESIÓN A LA APLICACIÓN DE ATENCIÓN AL CLIENTE
-En el último capítulo, desactivó las sesiones en la aplicación de soporte al cliente agregando session = "false" a los atributos de la página en todas las JSP. Desea utilizar sesiones ahora, y esto puede evitar que lo haga, así que elimine el atributo session = "false" de todas las JSP en la versión 3 de la aplicación de soporte al cliente. Recuerde que el valor predeterminado de este atributo es verdadero, por lo que eliminar el atributo por completo habilita las sesiones.
+### AÑADIR INICIO DE SESIÓN A LA APLICACIÓN DE ATENCIÓN AL CLIENTE (CUSTOMER SUPPORT)
 
-También debe agregar el XML <session-config> de la aplicación Shopping-Cart al descriptor de implementación para que las sesiones estén configuradas para una mejor seguridad y los ID de sesión no terminen en URL. Debería ser obvio en este punto que la aplicación de soporte al cliente necesita algún tipo de base de datos de usuarios con inicios de sesión. En esta sección, agregará una capacidad de inicio de sesión muy rudimentaria y poco segura a su aplicación. En la última parte del libro, varios capítulos cubren la protección de su aplicación con un sistema de autenticación y autorización más completo, para que pueda mantenerlo simple por ahora.
+En el último capítulo, desactivó las sesiones en la aplicación de soporte al cliente agregando `session="false"` a los atributos de la página en todas las JSP. Desea utilizar sesiones ahora, y esto puede evitar que lo haga, así que elimine el atributo `session="false"` de todas las JSP en la versión 3 de la aplicación de soporte al cliente. Recuerde que el valor predeterminado de este atributo es verdadero, por lo que eliminar el atributo por completo habilita las sesiones.
 
-Configuración de la base de datos de usuarios
-Agregue una clase LoginServlet a su aplicación y cree una base de datos de usuario estática en memoria en ella:
+También debe agregar el XML `<session-config>` de la aplicación Shopping-Cart al deployment descriptor para que las sesiones estén configuradas para una mejor seguridad y los ID de sesión no terminen en URL. Debería ser obvio en este punto que la aplicación de soporte al cliente necesita algún tipo de base de datos de usuarios con inicios de sesión. En esta sección, agregará una capacidad de inicio de sesión muy rudimentaria y poco segura a su aplicación. En la última parte del libro, varios capítulos cubren la protección de su aplicación con un sistema de autenticación y autorización más completo, para que pueda mantenerlo simple por ahora.
+
+#### Configuración de la base de datos de usuarios (User Database)
+
+Agregue una clase `LoginServlet` a su aplicación y cree una base de datos de usuario estática en memoria en ella:
+
+```java
+@WebServlet(
+        name = "loginServlet",
+        urlPatterns = "/login"
+)
+public class LoginServlet extends HttpServlet
+{
+    private static final Map<String, String> userDatabase = new Hashtable<>();
+ 
+    static {
+        userDatabase.put("Nicholas", "password");
+        userDatabase.put("Sarah", "drowssap");
+        userDatabase.put("Mike", "wordpass");
+        userDatabase.put("John", "green");
+    }
+}
+```
+
+Como puede ver, la base de datos `user` es un mapa simple de nombres de usuario a contraseñas sin respetar ningún tipo de nivel de permisos variable. Los usuarios pueden acceder al sistema o no, y las contraseñas no se almacenan de forma segura. El método `doGet` es responsable de mostrar la pantalla de inicio de sesión, así que créelo ahora.
+
+```java
+@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("username") != null)
+        {
+            response.sendRedirect("tickets");
+            return;
+        }
+ 
+        request.setAttribute("loginFailed", false);
+        request.getRequestDispatcher("/WEB-INF/jsp/view/login.jsp")
+               .forward(request, response);
+    }
+```
+
+Lo primero que hace el método en el ejemplo anterior es verificar si un usuario ya ha iniciado sesión (existe un atributo `username`) y redirigirlo a la pantalla del ticket si lo está. Si el usuario no ha iniciado sesión, establece un atributo de solicitud `loginFailed` en `false` y reenvía la solicitud a la JSP de inicio de sesión. Cuando se envía el formulario de inicio de sesión en la JSP, se publica en el método `doPost`:
+
+```java
+@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("username") != null)
+        {
+            response.sendRedirect("tickets");
+            return;
+        }
+ 
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if(username == null || password == null ||
+                !LoginServlet.userDatabase.containsKey(username) ||
+                !password.equals(LoginServlet.userDatabase.get(username)))
+        {
+            request.setAttribute("loginFailed", true);
+            request.getRequestDispatcher("/WEB-INF/jsp/view/login.jsp")
+                   .forward(request, response);
+        }
+        else
+        {
+            session.setAttribute("username", username);
+            request.changeSessionId();
+            response.sendRedirect("tickets");
+        }
+    }
+```
+
+No hay muchas novedades en el método `doPost`. De nuevo, se asegura de que el usuario no haya iniciado sesión y luego verifica el nombre de usuario y la contraseña con la "base de datos". Si el inicio de sesión falló, establece el atributo de solicitud `loginFailed` a `true` y envía al usuario de vuelta a la JSP de inicio de sesión. Si las credenciales coinciden, establece el atributo `username` en la sesión, cambia el ID de la sesión y luego redirige al usuario a la pantalla del ticket. El método `changeSessionId` (código en negrita) es una nueva característica en Servlet 3.1 de Java EE 7 que protege contra los ataques de fijación de sesión sobre los que leyó anteriormente en el capítulo al migrar la sesión (cambiando el ID de la sesión).
+
+#### Creación del Login Form
+
+A continuación, cree `/WEB-INF/jsp/view/login.jsp` y coloque un formulario de inicio de sesión en él:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Customer Support</title>
+    </head>
+    <body>
+        <h2>Login</h2>
+        You must log in to access the customer support site.<br /><br />
+        <%
+            if(((Boolean)request.getAttribute("loginFailed")))
+            {
+                %>
+        <b>The username or password you entered are not correct. Please try
+            again.</b><br /><br />
+                <%
+            }
+        %>
+        <form method="POST" action="<c:url value="/login" />">
+            Username<br />
+            <input type="text" name="username" /><br /><br />
+            Password<br />
+            <input type="password" name="password" /><br /><br />
+            <input type="submit" value="Log In" />
+        </form>
+    </body>
+</html>
+```
+
+Esta sencilla página escribe un formulario de inicio de sesión en la pantalla y, utilizando el atributo `loginFailed`, notifica a los usuarios cuando sus credenciales de inicio de sesión fueron rechazadas. Junto con `LoginServlet`, completa la función de inicio de sesión simple. Sin embargo, esto no impide que los usuarios accedan a las pantallas de tickets. Debe agregar un cheque en `TicketServlet` para asegurarse de que los usuarios hayan iniciado sesión antes de mostrar la información del ticket o permitirles publicar tickets. Esto se logra fácilmente agregando el siguiente código en la parte superior de los métodos `doGet` y `doPost` en TicketServlet:
+
+```java
+   if(request.getSession().getAttribute("username") == null)
+   {
+       response.sendRedirect("login");
+       return;
+   }
+```
+
+Ahora que los usuarios inician sesión antes de crear tickets, su código ya tiene acceso a sus nombres cuando crean nuevos tickets. Esto significa que ya no necesita el campo de nombre en el formulario del ticket. En el método `createTicket` de `TicketServlet`, cambie el código actual, que establece el nombre del cliente del ticket usando el parámetro de solicitud, de modo que ahora use el username de la sesión como se muestra en el siguiente código. También puede eliminar el campo de entrada “Your Name” (`customerName`) de `/WEB-INF/jsp/view/ticketForm.jsp`.
+
+```java
+   ticket.setCustomerName(
+       (String)request.getSession().getAttribute("username")
+   );
+```
+
+#### Probar el Log In(inicio de sesión)
+
+Ahora que su aplicación requiere inicios de sesión, siga estos pasos para probarla:
+
+1. Compile el proyecto y depúrelo usando su IDE.
+2. Navegue a la aplicación en su navegador (http://localhost:8080/support/) y debería ser llevado inmediatamente a la página de inicio de sesión.
+3. Intente iniciar sesión con nombres de usuario y contraseñas incorrectos (ambos distinguen entre mayúsculas y minúsculas) y se le debe negar la entrada.
+4. Pruebe con un nombre de usuario y contraseña válidos, y debería aterrizar en la lista de boletos.
+5. Cree algunos tickets como lo hizo en capítulos anteriores, y su nombre de usuario debe estar adjunto a ellos.
+6. Cierre su navegador, vuelva a abrirlo y vuelva a iniciar sesión con un nombre de usuario y una contraseña diferentes.
+7. Cree otro ticket y podrá ver que el nuevo ticket tiene el nombre del usuario con el que está conectado actualmente, mientras que los tickets antiguos tienen el nombre del otro usuario.
+
+#### Agregar un enlace de Logout(cierre de sesión)
+
+Al realizar la prueba, tuvo que cerrar su navegador para cerrar sesión en la aplicación de Customer Support. Esto puede no ser deseable y no es el sello distintivo de una aplicación empresarial. Agregar un enlace de cierre de sesión es bastante trivial. Primero, modifique el código en la parte superior del método `doGet` de `LoginServlet` para agregar soporte para cerrar la sesión del usuario:
+
+```java
+        HttpSession session = request.getSession();
+        if(request.getParameter("logout") != null)
+        {
+            session.invalidate();
+            response.sendRedirect("login");
+            return;
+        }
+        else if(session.getAttribute("username") != null)
+        {
+            response.sendRedirect("tickets");
+            return;
+        }
+```
+
+Lo único que debe hacer es agregar un enlace de cierre de sesión en la parte superior de los archivos `listTickets.jsp`, `ticketForm.jsp` y `viewTicket.jsp` en `/WEB-INF/jsp/view`, justo encima de los headers `<h2>`:
+
+
+```html
+<a href="<c:url value="/login?logout" />">Logout</a>
+```
+
+Ahora reconstruya y ejecute nuevamente, e inicie sesión en su aplicación. Debería ver un enlace para cerrar sesión en la parte superior de cada página. Haga clic en el enlace de cierre de sesión y volverá a la página de inicio de sesión, lo que indica que se ha cerrado correctamente.
+
+## DETECTANDO CAMBIOS EN LAS SESIONES USANDO LISTENERS
 
 ```java
 ```
-```java
-```
+
 
 ```java
 ```
+
+
+```java
+```
+
+
+```java
+```
+
 
 
 
