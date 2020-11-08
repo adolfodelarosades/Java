@@ -58,7 +58,7 @@ Ahora que comprende la importancia de las sesiones, probablemente se esté pregu
 En la teoría general de las sesiones web, una sesión es un archivo, segmento de memoria, objeto o contenedor administrado por el servidor o la aplicación web que contiene varios elementos de datos asignados. Estos elementos de datos pueden ser un nombre de usuario, un carrito de compras, detalles del flujo de trabajo y más. El navegador del usuario no guarda ni mantiene ninguno de estos datos. Es administrado únicamente por el servidor o el código de la aplicación web. La única pieza que falta es un vínculo entre este contenedor y el navegador del usuario. Para este propósito, a las sesiones se les asigna una cadena generada aleatoriamente llamada ID de sesión. La primera vez que se crea una sesión (como resultado de la recepción de una solicitud), el ID de sesión para esa sesión se transmite al navegador del usuario como parte de la respuesta. Cada solicitud posterior del navegador de ese usuario incluye el ID de sesión de alguna manera. Cuando la aplicación recibe la solicitud con el ID de sesión, puede vincular la sesión existente a esa solicitud. Esto se demuestra en la Figura 5-1.
 
 
-![05-01](05-01.png)
+![05-01](images/05-01.png)
 
 ![05-02](images/05-02.png)
 ![05-03](images/05-03.png)
