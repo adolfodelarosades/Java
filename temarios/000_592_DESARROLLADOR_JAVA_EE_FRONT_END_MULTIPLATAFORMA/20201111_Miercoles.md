@@ -1,4 +1,4 @@
-# 20201111 Miercoles
+# 20201111 Miercoles
 
 ![05-23](images/05-23.png)
 ![05-24](images/05-24.png)
