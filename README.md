@@ -324,3 +324,8 @@ mini-de-adolfo:tmp adolfodelarosa$
 ### APIs
 
 [IMDB Películas](https://developer.imdb.com/)
+
+### RECURSOS
+
+* https://placeholder.com/
+
