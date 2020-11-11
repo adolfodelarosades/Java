@@ -76,20 +76,23 @@ Front Matter
 Back Matter
 
 ### TABLE OF CONTENTS
-Chapter 1 :​ Introduction
-Relational Databases
-Object-Relational Mapping
-The Impedance Mismatch
-Java Support for Persistence
-Proprietary Solutions
-JDBC
-Enterprise JavaBeans
-Java Data Objects
-Why Another Standard?​
-The Java Persistence API
-History of the Specification
-Overview
-Summary
+
+# Chapter 1 : Introduction
+
+* Relational Databases
+* Object-Relational Mapping
+   * The Impedance Mismatch
+* Java Support for Persistence
+   * Proprietary Solutions
+   * JDBC
+   * Enterprise JavaBeans
+   * Java Data Objects
+* Why Another Standard?
+* The Java Persistence API
+   * History of the Specification
+   * Overview
+* Summary
+
 Chapter 2 :​ Getting Started
 Entity Overview
 Persistability
