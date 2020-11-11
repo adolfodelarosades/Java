@@ -591,6 +591,9 @@ Partiendo de la aplicación `16_gestion_candidatos_persistencia_namedquery` vamo
 
 IMAGEN PIZARRA
 
+
+![17-01-ej](images/17-01-ej.png)
+
 Este cambio principalmente afecta a los Servlets y la Capa de Vista.
 
 A los Servlets existentes los vamos a Renombrar para que terminen con `Action` para saber que son Controladores Actions y desde ningún Controladores Actions debemos invocar a ninguna vista que es una de las cosas que debemos cambiar en estos Servlets.
@@ -600,7 +603,67 @@ A los Servlets existentes los vamos a Renombrar para que terminen con `Action` p
 `AltaCandidatoAction`
 
 ```java
+package servlets;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import model.Candidato;
+import service.CandidatosService;
+
+@MultipartConfig //permite al servlet procesar objetos Part (objetos binarios)
+@WebServlet("/AltaCandidatoAction")
+public class AltaCandidatoAction extends HttpServlet {
+	
+   private static final long serialVersionUID = 1L;
+
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      CandidatosService service = new CandidatosService();
+		
+      String nombre=request.getParameter("nombre");
+      int edad=Integer.parseInt(request.getParameter("edad"));
+      String puesto=request.getParameter("puesto");
+      String email=request.getParameter("email");
+      Part foto=request.getPart("foto");
+		
+      String nombreFichero=obtenerNombreFichero(foto);
+      guardarFicheroEnServidor(request,foto,nombreFichero);
+		
+      Candidato cand = new Candidato(0,edad,email,nombreFichero,nombre,puesto);
+      service.altaCandidato(cand);
+		
+      //request.getRequestDispatcher("menu.html").forward(request, response);
+
+   }
+	
+   private String obtenerNombreFichero(Part part) {
+      for (String cd : part.getHeader("content-disposition").split(";")) { 
+         if (cd.trim().startsWith("filename")) { 
+            String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", ""); 
+            return fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1); // MSIE fix. 
+         } 
+      } 
+      return null; 
+   }
+	
+   private void guardarFicheroEnServidor(HttpServletRequest request, Part part, String nombreFichero) {
+      String url=request.getServletContext().getRealPath("/");
+      try {
+         //part.write(url+"\\"+nombreFichero);		//Windows
+         part.write(url+"/"+nombreFichero);		//Mac
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+	
+}
 ```
 
 Comentamos la llamada a la página `menu.html` ya que esto va a ser tarea del FrontController.
@@ -610,7 +673,36 @@ Comentamos la llamada a la página `menu.html` ya que esto va a ser tarea del Fr
 `EliminarCandidatoPorEmailAction`
 
 ```java
+package servlets;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import service.CandidatosService;
+
+
+@WebServlet("/EliminarCandidatoPorEmailAction")
+public class EliminarCandidatoPorEmailAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      CandidatosService service = new CandidatosService();
+      String email=request.getParameter("email");
+      if (service.buscarCandidatoPorEmail(email) != null ) {
+         service.eliminarCandidatoPorEmail(email);
+         request.setAttribute("resultado", true);
+         //request.getRequestDispatcher("menu.html").forward(request, response);
+      }else {
+         request.setAttribute("resultado", false);
+         //request.getRequestDispatcher("noexisteemail.html").forward(request, response);
+      }	
+   }
+}
 ```
 
 Comentamos la llamada a las dos páginas que llamamos pero hemos tenido que meter un atributo de solicitud para que el FronController sepa a que página debe redirigirse.
@@ -620,7 +712,29 @@ Comentamos la llamada a las dos páginas que llamamos pero hemos tenido que mete
 `EliminarCandidatoPorIdAction`
 
 ```java
+package servlets;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import service.CandidatosService;
+
+@WebServlet("/EliminarCandidatoPorIdAction")
+public class EliminarCandidatoPorIdAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+   
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      CandidatosService service = new CandidatosService();
+      int idCandidato=Integer.parseInt(request.getParameter("idCandidato"));
+      service.eliminarCandidato(idCandidato);
+      //request.getRequestDispatcher("candidatos.jsp").forward(request, response);
+   }
+}
 ```
 
 Simplemente comentamos la llamada a la página `candidatos.jsp`.
@@ -630,7 +744,32 @@ Simplemente comentamos la llamada a la página `candidatos.jsp`.
 `RecupeperarCandidatosAction`
 
 ```java
+package servlets;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Candidato;
+import service.CandidatosService;
+
+@WebServlet("/RecuperarCandidatosAction")
+public class RecuperarCandidatosAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      CandidatosService service = new CandidatosService();
+      List<Candidato> candidatos = service.recuperarCandidatos();
+      // guardar los candidatos en un atributo de petición
+      // para la página a la que nos enviará el Front Controller
+      request.setAttribute("candidatos", candidatos);
+   }
+}
 ```
 
 * Debemos crear el Servlet para el `FrontController`, el cual va a ser el encargado todo el flujo de nuestra aplicación. Recibira el parámetro `option` para distingir que petición se esta solicitando y de acuerdo a ella redirigira a una nueva vista o realizará una tarea y posteriormente redirigira a una nueva vista. El código es el siguiente.
@@ -638,7 +777,61 @@ Simplemente comentamos la llamada a la página `candidatos.jsp`.
 `FrontController`
 
 ```java
+package servlets;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@MultipartConfig //permite al servlet procesar objetos Part (objetos binarios)
+@WebServlet("/FrontController")
+public class FrontController extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String option = request.getParameter("option");
+      String url = "";
+      //en función del valor del parámetro option, decidimos que acción realizar y a que vista
+      //hay que pasar la petición
+      switch(option) {
+         case "toAlta":
+            url = "alta.html";
+            break;
+         case "toEliminarPorEmail":
+            url = "eliminarcandidatoxemail.html";
+            break;
+         case "doRecuperar":
+            request.getRequestDispatcher("RecuperarCandidatosAction").include(request, response);
+            url = "candidatos.jsp";
+            break;
+         case "doAlta":
+            request.getRequestDispatcher("AltaCandidatoAction").include(request, response);
+            url = "menu.html";
+            break;
+         case "doEliminarPorId":
+            request.getRequestDispatcher("EliminarCandidatoPorIdAction").include(request, response);
+            //esto se hace para poder recuperar de nuevo la lista de candidatos
+            //y que esté a disposición de la página candidatos.jsp
+            request.getRequestDispatcher("RecuperarCandidatosAction").include(request, response);
+            url="candidatos.jsp";
+            break;
+         case "toMenu":
+            url = "menu.html";
+            break;
+         case "doEliminarPorEmail":
+            request.getRequestDispatcher("EliminarCandidatoPorEmailAction").include(request, response);
+            boolean resultado=(boolean)request.getAttribute("resultado");
+            url=resultado?"menu.html":"noexisteemail.html";
+            break;
+      }	
+      request.getRequestDispatcher(url).forward(request, response);
+   }
+}
 ```
 
 En los archivos HTML y JSP principalmente vamos a cambiar los enlaces a otros HTML, JSP o Servlets los cambiaremos por llamadas al FrontController pasandole el parámetro `option` para que sepa que tarea necesita realizar.
@@ -648,7 +841,23 @@ En los archivos HTML y JSP principalmente vamos a cambiar los enlaces a otros HT
 `menu.html`
 
 ```html
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Menú</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <div align="center">
+      <h1 class="w3-jumbo">Candidatos</h1>
+      <p class="w3-xlarge w3-text-dark-grey">Los mejores candidatos del mercado</p>
+      <a href="FrontController?option=toAlta" class="w3-button w3-dark-grey">Nuevo Candidato</a>
+      <a href="FrontController?option=doRecuperar" class="w3-button w3-dark-grey">Mostrar Candidatos</a>
+      <a href="FrontController?option=toEliminarPorEmail" class="w3-button w3-dark-grey">Eliminar Candidatos por Email</a>
+   </div>
+</body>
+</html>
 ```
 
 * Página `alta.html`
@@ -656,7 +865,33 @@ En los archivos HTML y JSP principalmente vamos a cambiar los enlaces a otros HT
 `alta.html`
 
 ```html
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Nuevo candidato</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <div class="w3-padding">
+      <h1>Nuevo candidato</h1>
+      <form action="FrontController?option=doAlta" method="post" enctype="multipart/form-data">	
+         <label for="nombre">Nombre:</label><br>
+         <input type="text" name="nombre" placeholder="Introduce tu nombre" required="required"><br/><br/>
+         <label for="edad">Edad:</label><br>
+         <input type="number" name="edad" placeholder="Introduce tu edad" required="required"><br/><br/>
+         <label for="puesto">Puesto:</label><br>
+         <input type="text" name="puesto" placeholder="Introduce tu puesto" required="required"><br/><br/>
+         <label for="email">Email:</label><br>
+         <input type="email" name="email" placeholder="Introduce tu email" required="required"><br/><br/>
+         <label for="foto">Foto:</label><br>
+         <input type="file" name="foto" value="Buscar" accept="image/*"/><br/><br/>
+			
+         <input type="submit" value="Guardar">	
+      </form>
+   </div>
+</body>
+</html>
 ```
 
 * Página `candidatos.jsp`
@@ -664,7 +899,50 @@ En los archivos HTML y JSP principalmente vamos a cambiar los enlaces a otros HT
 `candidatos.jsp`
 
 ```html
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="java.util.List, model.Candidato, service.CandidatosService"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista de Candidatos</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <% List<Candidato> empleados = (List<Candidato>)request.getAttribute("candidatos");
+      if (empleados.size() > 0){%>
+         <div align="center" class="w3-padding">
+            <h1>Lista de Candidatos</h1>
+            <table>
+               <tr>
+                  <th>Nombre</th>
+                  <th>Edad</th>
+                  <th>Puesto</th>
+                  <th>Email</th>
+                  <th></th>
+               </tr>
+                  <%for(int i=0;i<empleados.size();i++){ %>
+                     <tr>
+                        <td><img alt="" style="width:50px;vertical-align:middle" src="<%=empleados.get(i).getFoto()%>"> <span style=""><%=empleados.get(i).getNombre()%></span></td>
+                        <td><%=empleados.get(i).getEdad()%></td>	
+                        <td><%=empleados.get(i).getPuesto()%></td>
+                        <td><%=empleados.get(i).getEmail()%></td>
+                        <td><a href="FrontController?option=doEliminarPorId&idCandidato=<%=empleados.get(i).getIdCandidato()%>">Eliminar</a></td>
+                     </tr>
+                  <%}%>
+               </table>
+            </div>
+      <%}else{%>
+         <div align="center" class="w3-padding">
+            <h1>No existe ningún candidato.</h1>
+         </div>
+      <%}%>
+      <br><br>
+      <div align="right" class="w3-padding">
+         <a href="FrontController?option=toMenu" class="w3-button w3-dark-grey">Volver al menú</a>
+      </div>
+</body>
+</html>
 ```
 
 La Lista de Candidatos la recuperamos del atributo de solicitud en lugar del Service.
@@ -674,7 +952,25 @@ La Lista de Candidatos la recuperamos del atributo de solicitud en lugar del Ser
 `eliminarcandidatoxemail.html`
 
 ```html
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Nuevo candidato</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <div class="w3-padding">
+      <h1>Eliminar Candidato por email</h1>
+      <form action="FrontController?option=doEliminarPorEmail" method="post">	
+         <label for="email">Email:</label><br>
+         <input type="email" name="email" placeholder="Introduce tu email" required="required"><br/><br/>
+			
+         <input type="submit" value="Eliminar">	
+      </form>
+   </div>
+</body>
+</html>
 ```
 
 * Página `noexisteemail.html`
@@ -682,6 +978,34 @@ La Lista de Candidatos la recuperamos del atributo de solicitud en lugar del Ser
 `noexisteemail.html`
 
 ```html
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>No existe el Email</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <div align="center" class="w3-padding">
+      <h1>No existe el Email.</h1>
+   </div>
+   <br><br>
+   <div align="right" class="w3-padding">
+      <a href="FrontController?option=toMenu" class="w3-button w3-dark-grey">Volver al menú</a>
+   </div>
+</body>
+</html>
 ```
+
+### Probando la Aplicación
+
+![17-02-ej](images/17-02-ej.png)
+![17-03-ej](images/17-03-ej.png)
+![17-04-ej](images/17-04-ej.png)
+![17-05-ej](images/17-05-ej.png)
+![17-06-ej](images/17-06-ej.png)
+![17-07-ej](images/17-07-ej.png)
+![17-08-ej](images/17-08-ej.png)
+![17-09-ej](images/17-09-ej.png)
+![17-10-ej](images/17-10-ej.png)
 
