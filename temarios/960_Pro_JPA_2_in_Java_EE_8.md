@@ -75,9 +75,9 @@ Front Matter
 
 Back Matter
 
-### TABLE OF CONTENTS
+## TABLE OF CONTENTS
 
-# Chapter 1 : Introduction
+### Chapter 1 : Introduction
 
 * Relational Databases
 * Object-Relational Mapping
