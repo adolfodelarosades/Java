@@ -207,10 +207,142 @@ Esta capa no ha sufrido ningun cambio.
 
 ### Probar la Aplicación
 
+![14-43-ej](images/14-43-ej.png)
+
 ![14-39-ej](images/14-39-ej.png)
 ![14-40-ej](images/14-40-ej.png)
 ![14-41-ej](images/14-41-ej.png)
 ![14-42-ej](images/14-42-ej.png)
+
+## :computer: `15_gestion_candidatos_persistencia_eliminacion`
+
+Partiendo del proyecto `14_gestion_candidatos_persistencia` vamos a crear el proyecto `15_gestion_candidatos_persistencia_eliminacion` en el cual vamos a implementar la funcionalidad de eliminar el Contacto por Email.
+
+![15-01-eje](images/15-01-eje.png)
+
+Nuestra pantalla de Menú debe incluir la nueva opción de Eliminar por Email.
+
+`menu.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Menú</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <div align="center">
+      <h1 class="w3-jumbo">Candidatos</h1>
+      <p class="w3-xlarge w3-text-dark-grey">Los mejores candidatos del mercado</p>
+  	  <a href="alta.html" class="w3-button w3-dark-grey">Nuevo Candidato</a>
+      <a href="candidatos.jsp" class="w3-button w3-dark-grey">Mostrar Candidatos</a>
+      <a href="eliminarcandidatoxemail.html" class="w3-button w3-dark-grey">Eliminar Candidatos por Email</a>
+   </div>
+</body>
+</html>
+```
+
+Tenemos una nueva página HTML para capturar el Email del contacto que queremos eliminar.
+
+`eliminarcandidatoxemail.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Nuevo candidato</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <div class="w3-padding">
+      <h1>Eliminar Candidato por email</h1>
+      <form action="EliminarCandidatoPorEmail" method="post">	
+         <label for="email">Email:</label><br>
+         <input type="email" name="email" placeholder="Introduce tu email" required="required"><br/><br/>
+			
+         <input type="submit" value="Eliminar">	
+      </form>
+   </div>
+</body>
+</html>
+```
+
+En caso de que el email no exista vamos a mostrar una nueva pantalla indicando que ese email no existe.
+
+`noexisteemail.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>No existe el Email</title>
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+</head>
+<body>
+   <div align="center" class="w3-padding">
+      <h1>No existe el Email.</h1>
+   </div>
+   <br><br>
+   <div align="right" class="w3-padding">
+      <a href="menu.html" class="w3-button w3-dark-grey">Volver al menú</a>
+   </div>
+</body>
+</html>
+```
+
+Para eliminar el Contacto por Email necesitamos un nuevo Servlet `EliminarCandidatoPorEmail` con el siguiente código.
+
+`EliminarCandidatoPorEmail`
+
+```java
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Candidato;
+import service.CandidatosService;
+
+@WebServlet("/EliminarCandidatoPorEmail")
+public class EliminarCandidatoPorEmail extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      CandidatosService service = new CandidatosService();
+      String email=request.getParameter("email");
+      Candidato candidato = service.buscarCandidatoPorEmail(email);
+      if (candidato != null ) {
+         service.eliminarCandidatoPorEmail(email);
+         request.getRequestDispatcher("menu.html").forward(request, response);
+      }else {
+         request.getRequestDispatcher("noexisteemail.html").forward(request, response);
+      }	
+   }
+}
+```
+
+En este nuevo Servlet usamos dos de los métodos implementados en `CandidatosService` con consultas JPA, primero recuperamos el Candidato por Email si existe lo eliminamos y nos vamos a la pantalla de menú, si no existe mostramos una pantalla indicandolo.
+
+Básicamente eso es todo lo que teniamos que hacer para implementar la funcionalidad de Eliminar Contacto por Email.
+
+### Probar la Aplicación.
+
+![15-02-eje](images/15-02-eje.png)
+![15-03-eje](images/15-03-eje.png)
+![15-04-eje](images/15-04-eje.png)
+![15-05-eje](images/15-05-eje.png)
+![15-06-eje](images/15-06-eje.png)
+
+
 
 
 
