@@ -361,7 +361,7 @@ Las Named Queries nos permiten limpiar nuestras consultas JPA de la capa de Serv
 
 Partiendo del proyecto `15_gestion_candidatos_persistencia_eliminacion` vamos a crear el proyecto `16_gestion_candidatos_persistencia_namedquery` en el cual vamos a pasar todas las sentencias JPQL desde la clase  `CandidatosService` al la Entidad `Contacto`.
 
-![15-01-eje](images/15-01-eje.png)
+![16-01-ej](images/16-01-ej.png)
 
 Nuestra Entidad `Candidato` modificada nos queda así:
 
@@ -472,6 +472,107 @@ Lo que hemos hecho en la Entidad es añadir las siguientes anotaciones:
 @NamedQuery(name="Candidato.deleteByEmail", query="Delete From Candidato c Where c.email = ?1")
 ```
 
+Son las sentencias JPQL que teniamos en la Clase `CandidatosService` y las hemos colocandolas aquí asignandoles un nombre.
+
+La Clase `CandidatosService` obviamente se ha modificado quedando así:
+
+```java
+package service;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import org.hibernate.NonUniqueResultException;
+
+import model.Candidato;
+
+public class CandidatosService {
+	
+   private static EntityManager em;
+   static {
+      EntityManagerFactory factory=Persistence.createEntityManagerFactory("empresaPU");
+      em=factory.createEntityManager();
+   }
+   
+   public void altaCandidato(Candidato candidato) {
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      em.persist(candidato);
+      tx.commit();
+   }
+	
+   public void eliminarCandidato(int idCandidato) {
+      Candidato candidato=em.find(Candidato.class, idCandidato);
+		
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      if(candidato!=null) {
+         em.remove(candidato);
+      }
+      tx.commit();
+   }
+	
+   public List<Candidato> recuperarCandidatos(){	
+      //Query query = em.createQuery(jpql);
+      //return (List<Candidato>)query.getResultList();
+      TypedQuery<Candidato> query = em.createNamedQuery("Candidato.findAll", Candidato.class);
+      return query.getResultList();
+   }
+	
+   public List<Candidato> recuperarCandidatosPuesto(String puesto){
+      TypedQuery<Candidato> query = em.createNamedQuery("Candidato.findByPuesto", Candidato.class);
+      query.setParameter(1, puesto);
+      return query.getResultList();
+   }
+	
+   public Candidato buscarPorCandidato(String email){
+      TypedQuery<Candidato> query = em.createNamedQuery("Candidato.findByEmail", Candidato.class);
+      query.setParameter(1, email);
+		
+      // 1er Forma de hacerlo
+      /*
+      List<Candidato> candidatos = query.getResultList();
+      return candidatos.size()>0  ? candidatos.get(0):null;
+      */
+		
+      //2da Forma //Si no encuentra o encuentra más de 1 devuelve excepcion
+      try {
+         return query.getSingleResult();
+      }catch(NoResultException | NonUniqueResultException ex) {
+         return null;
+      }	
+   }
+	
+   public void eliminarCandidatoPorEmail(String email){	
+      EntityTransaction tx=em.getTransaction();
+      tx.begin(); //inicio tx siempre que sea consulta de acción
+      Query query = em.createNamedQuery("Candidato.deleteByEmail");
+      query.setParameter(1, email);
+      query.executeUpdate();
+      tx.commit();	
+   }
+}
+```
+
+En esta clase hemos quitado todas las sentencias JPQL y donde se se utilizaba colocamos el nombre que le asignamos en la Entidad.
+
+### Probar la Aplicación
+
+![16-02-ej](images/16-02-ej.png)
+![16-03-ej](images/16-03-ej.png)
+![16-04-ej](images/16-04-ej.png)
+![16-05-ej](images/16-05-ej.png)
+![16-06-ej](images/16-06-ej.png)
+![16-07-ej](images/16-07-ej.png)
+![16-08-ej](images/16-08-ej.png)
+![16-09-ej](images/16-09-ej.png)
 
 ![05-39](images/05-39.png)
 ![05-40](images/05-40.png)
