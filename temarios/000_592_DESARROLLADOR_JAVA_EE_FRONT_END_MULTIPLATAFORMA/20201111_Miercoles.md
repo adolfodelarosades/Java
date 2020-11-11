@@ -574,6 +574,16 @@ En esta clase hemos quitado todas las sentencias JPQL y donde se se utilizaba co
 ![16-08-ej](images/16-08-ej.png)
 ![16-09-ej](images/16-09-ej.png)
 
+## MVC
+
+![04-01](images/04-01.png)
+![04-02](images/04-02.png)
+![04-03](images/04-03.png)
+![04-04](images/04-04.png)
+![04-05](images/04-05.png)
+![04-06](images/04-06.png)
+![04-07](images/04-07.png)
+
 ![05-39](images/05-39.png)
 ![05-40](images/05-40.png)
 ![05-41](images/05-41.png)
