@@ -53,6 +53,12 @@ Vamos a ver algunos otros ejemplos para familiarizarnos con las Consultas JPA, p
 ![05-30](images/05-30.png)
 ![05-31](images/05-31.png)
 
+### Consultas de Acción
+
+![05-36](images/05-36.png)
+![05-37](images/05-37.png)
+![05-38](images/05-38.png)
+
 ¿Cómo recuperariamos los Candidatos de un Puesto determinado?
 
 ```java
@@ -342,17 +348,131 @@ Básicamente eso es todo lo que teniamos que hacer para implementar la funcional
 ![15-05-eje](images/15-05-eje.png)
 ![15-06-eje](images/15-06-eje.png)
 
-
-
-
+### Named Queries o Consultas Nominadas
 
 ![05-32](images/05-32.png)
 ![05-33](images/05-33.png)
 ![05-34](images/05-34.png)
 ![05-35](images/05-35.png)
-![05-36](images/05-36.png)
-![05-37](images/05-37.png)
-![05-38](images/05-38.png)
+
+Las Named Queries nos permiten limpiar nuestras consultas JPA de la capa de Servicio y a la vez siverve para la reutilización de código ya que las sentencias estan en las Entidades y cualquier otra clase que use esas entidades ya puede usar esas sentencias. Como desventaja no se ve exactamente lo que se ejecuta desde las Clases que usen las Entidades siempre habría que consultar la Entidad para visualizar la consulta.
+
+## :computer: `16_gestion_candidatos_persistencia_namedquery`
+
+Partiendo del proyecto `15_gestion_candidatos_persistencia_eliminacion` vamos a crear el proyecto `16_gestion_candidatos_persistencia_namedquery` en el cual vamos a pasar todas las sentencias JPQL desde la clase  `CandidatosService` al la Entidad `Contacto`.
+
+![15-01-eje](images/15-01-eje.png)
+
+Nuestra Entidad `Candidato` modificada nos queda así:
+
+`Candidato`
+
+```java
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the candidatos database table.
+ * 
+ */
+@Entity
+@Table(name="candidatos")
+@NamedQuery(name="Candidato.findAll", query="SELECT c FROM Candidato c")
+@NamedQuery(name="Candidato.findByPuesto", query="Select c From Candidato c Where c.puesto = ?1")
+@NamedQuery(name="Candidato.findByEmail", query="Select c From Candidato c Where c.email = ?1")
+@NamedQuery(name="Candidato.deleteByEmail", query="Delete From Candidato c Where c.email = ?1")
+public class Candidato implements Serializable {
+   private static final long serialVersionUID = 1L;
+
+   @Id
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
+   private int idCandidato;
+
+   @Column(name="edad")
+   private int edad;
+
+   private String email;
+   private String foto;
+   private String nombre;
+   private String puesto;
+
+   public Candidato() {
+   }
+
+   public Candidato(int idCandidato, int edad, String email, String foto, String nombre, String puesto) {
+      super();
+      this.idCandidato = idCandidato;
+      this.edad = edad;
+      this.email = email;
+      this.foto = foto;
+      this.nombre = nombre;
+      this.puesto = puesto;
+   }
+
+   public int getIdCandidato() {
+      return this.idCandidato;
+   }
+
+   public void setIdCandidato(int idCandidato) {
+      this.idCandidato = idCandidato;
+   }
+
+   public int getEdad() {
+      return this.edad;
+   }
+
+   public void setEdad(int edad) {
+      this.edad = edad;
+   }
+
+   public String getEmail() {
+      return this.email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public String getFoto() {
+      return this.foto;
+   }
+
+   public void setFoto(String foto) {
+      this.foto = foto;
+   }
+
+   public String getNombre() {
+      return this.nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getPuesto() {
+      return this.puesto;
+   }
+
+   public void setPuesto(String puesto) {
+      this.puesto = puesto;
+   }
+
+}
+```
+
+Lo que hemos hecho en la Entidad es añadir las siguientes anotaciones:
+
+```java
+@NamedQuery(name="Candidato.findAll", query="SELECT c FROM Candidato c")
+@NamedQuery(name="Candidato.findByPuesto", query="Select c From Candidato c Where c.puesto = ?1")
+@NamedQuery(name="Candidato.findByEmail", query="Select c From Candidato c Where c.email = ?1")
+@NamedQuery(name="Candidato.deleteByEmail", query="Delete From Candidato c Where c.email = ?1")
+```
+
+
 ![05-39](images/05-39.png)
 ![05-40](images/05-40.png)
 ![05-41](images/05-41.png)
