@@ -584,19 +584,104 @@ En esta clase hemos quitado todas las sentencias JPQL y donde se se utilizaba co
 ![04-06](images/04-06.png)
 ![04-07](images/04-07.png)
 
-![05-39](images/05-39.png)
-![05-40](images/05-40.png)
-![05-41](images/05-41.png)
-![05-42](images/05-42.png)
-![05-43](images/05-43.png)
-![05-44](images/05-44.png)
-![05-45](images/05-45.png)
-![05-46](images/05-46.png)
-![05-47](images/05-47.png)
-![05-48](images/05-48.png)
-![05-49](images/05-49.png)
-![05-50](images/05-50.png)
-![05-51](images/05-51.png)
-![05-52](images/05-52.png)
-![05-53](images/05-53.png)
-![05-54](images/05-54.png)
+
+## :computer: `17_gestion_candidatos_persistencia_mvc` Continuación...
+
+Partiendo de la aplicación `16_gestion_candidatos_persistencia_namedquery` vamos a crear la versión MVC de nuestro proyecto `17_gestion_candidatos_persistencia_mvc`.
+
+IMAGEN PIZARRA
+
+Este cambio principalmente afecta a los Servlets y la Capa de Vista.
+
+A los Servlets existentes los vamos a Renombrar para que terminen con `Action` para saber que son Controladores Actions y desde ningún Controladores Actions debemos invocar a ninguna vista que es una de las cosas que debemos cambiar en estos Servlets.
+
+* En el Servlet `AltaCandidatoAction` los cambios son:
+
+`AltaCandidatoAction`
+
+```java
+
+```
+
+Comentamos la llamada a la página `menu.html` ya que esto va a ser tarea del FrontController.
+
+* En el Servlet `EliminarCandidatoPorEmailAction` los cambios son los siguientes:
+
+`EliminarCandidatoPorEmailAction`
+
+```java
+
+```
+
+Comentamos la llamada a las dos páginas que llamamos pero hemos tenido que meter un atributo de solicitud para que el FronController sepa a que página debe redirigirse.
+
+* En el Servlet `EliminarCandidatoPorIdAction` los cambios son:
+
+`EliminarCandidatoPorIdAction`
+
+```java
+
+```
+
+Simplemente comentamos la llamada a la página `candidatos.jsp`.
+
+* Debemos Crear un Nuevo Servlet `RecupeperarCandidatosAction` que nos ca a poner la lista de Candidatos en un atributo de solicitud, en el proyecto anterior la página JSP lo consultaba directamente del Servicio. El código es el siguiente:
+
+`RecupeperarCandidatosAction`
+
+```java
+
+```
+
+* Debemos crear el Servlet para el `FrontController`, el cual va a ser el encargado todo el flujo de nuestra aplicación. Recibira el parámetro `option` para distingir que petición se esta solicitando y de acuerdo a ella redirigira a una nueva vista o realizará una tarea y posteriormente redirigira a una nueva vista. El código es el siguiente.
+
+`FrontController`
+
+```java
+
+```
+
+En los archivos HTML y JSP principalmente vamos a cambiar los enlaces a otros HTML, JSP o Servlets los cambiaremos por llamadas al FrontController pasandole el parámetro `option` para que sepa que tarea necesita realizar.
+
+* Página `menu.html`
+
+`menu.html`
+
+```html
+
+```
+
+* Página `alta.html`
+
+`alta.html`
+
+```html
+
+```
+
+* Página `candidatos.jsp`
+
+`candidatos.jsp`
+
+```html
+
+```
+
+La Lista de Candidatos la recuperamos del atributo de solicitud en lugar del Service.
+
+* Página `eliminarcandidatoxemail.html`
+
+`eliminarcandidatoxemail.html`
+
+```html
+
+```
+
+* Página `noexisteemail.html`
+
+`noexisteemail.html`
+
+```html
+
+```
+
