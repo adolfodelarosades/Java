@@ -33,7 +33,7 @@ Después de completar Pro JPA 2 en Java EE 8, tendrá un conocimiento completo d
 * Empaquete, implemente y pruebe sus aplicaciones empresariales habilitadas para la persistencia de Java
 
 
-#### Para quien es este libro
+#### Para quien es este libro
 
 Programadores y desarrolladores de Java experimentados con al menos algo de experiencia previa con las API de la plataforma J2EE o Java EE.
 
