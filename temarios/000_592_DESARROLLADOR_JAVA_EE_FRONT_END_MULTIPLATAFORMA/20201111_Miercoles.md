@@ -585,12 +585,11 @@ En esta clase hemos quitado todas las sentencias JPQL y donde se se utilizaba co
 ![04-07](images/04-07.png)
 
 
-## :computer: `17_gestion_candidatos_persistencia_mvc` Continuación...
+## :computer: `17_gestion_candidatos_persistencia_mvc`
 
 Partiendo de la aplicación `16_gestion_candidatos_persistencia_namedquery` vamos a crear la versión MVC de nuestro proyecto `17_gestion_candidatos_persistencia_mvc`.
 
 IMAGEN PIZARRA
-
 
 ![17-01-ej](images/17-01-ej.png)
 
