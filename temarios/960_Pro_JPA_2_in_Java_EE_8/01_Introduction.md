@@ -223,4 +223,103 @@ La figura 1-8 muestra JPA en el entorno Java EE.
 
 ![01-08](images/01-08.png)
 
+#### JPA 2.0
 
+Cuando se inició la primera versión de JPA, la persistencia de ORM ya había evolucionado durante una década. Desafortunadamente, solo hubo un período de tiempo relativamente corto disponible (aproximadamente dos años) en el ciclo de desarrollo de la especificación para crear la especificación inicial, por lo que no todas las características posibles que se habían encontrado pudieron incluirse en la primera versión. Aún así, se especificó una cantidad impresionante de características, y el resto se dejó para versiones posteriores y para que los proveedores las respalden de manera patentada mientras tanto.
+
+La siguiente ***versión, JPA 2.0, fue definitiva en 2009*** e incluyó una serie de características que no estaban presentes en la primera versión, específicamente aquellas que habían sido más solicitadas por los usuarios. Estas nuevas características incluyeron capacidades de mapeo adicionales, formas flexibles de determinar la forma en que el proveedor accedió al estado de la entidad y extensiones del lenguaje de consulta de persistencia de Java (JP QL). Probablemente la característica más significativa fue la Java Criteria API, una forma programática de crear consultas dinámicas. Esto permitió principalmente que los frameworks usaran JPA como un medio para construir código mediante programación para acceder a los datos.
+
+#### JPA 2.1
+
+El lanzamiento de **JPA 2.1 en 2013** hizo posible que casi todas las aplicaciones basadas en JPA estuvieran satisfechas con las características incluidas en el estándar sin tener que volver a las adiciones de los proveedores. Sin embargo, no importa cuántas características se especifiquen, siempre habrá aplicaciones que necesiten capacidades adicionales para trabajar en circunstancias inusuales. La especificación JPA 2.1 agregó algunas de las características más exóticas, como mapping converters, compatibilidad con procedimientos almacenados y contextos de persistencia no sincronizados para mejorar las operaciones de conversación. También agregó la capacidad de crear gráficos de entidades y pasarlos a consultas, lo que equivale a lo que comúnmente se conoce como restricciones de grupo de recuperación en el conjunto de objetos devueltos.
+
+#### JPA 2.2 y EJB 3.2
+
+La versión de mantenimiento de **JPA 2.2 fue publicada por Oracle en junio de 2017**. En general, los cambios en JPA 2.2, enumerados en el archivo de registro de cambios, incluyeron:
+
+* Capacidad para transmitir el resultado de la ejecución de una consulta
+
+* `@Repeatable` para todas las anotaciones relevantes
+
+* Soporte para tipos básicos de fecha y hora de Java 8
+
+* Permitir que `AttributeConverters` admita la inyección de CDI
+
+* Actualización del mecanismo de descubrimiento del proveedor de persistencia
+
+* Permitir que todas las anotaciones JPA se utilicen en metaanotaciones
+
+El archivo de registro de cambios de JPA 2.2 se puede encontrar aquí:
+
+https://jcp.org/aboutJava/communityprocess/maintenance/jsr338/ChangeLog-JPA-2.2-MR.txt
+
+Dado que JPA 2.2 es solo una versión pequeña, a lo largo de este libro notamos cuándo se describirán las nuevas características agregadas en JPA 2.2, mientras que el resto de ellas seguirá siendo parte de JPA 2.1.
+
+Desde 2013, también se desarrolló una versión final de EJB 3.2 como parte de Java EE 7.
+
+Las nuevas características de la versión Enterprise JavaBeans 3.2 (EJB 3.2) incluyen JNDI y EJB Lite.
+
+#### JPA y tu
+
+Al final, es posible que todavía haya alguna característica que usted, o algún otro usuario de JPA, podría buscar en el estándar que aún no se ha incluido. Si la función es solicitada por un número suficiente de usuarios, es probable que eventualmente se convierta en parte del estándar, pero eso depende en parte de los desarrolladores. Si cree que una función debería estar estandarizada, debe hablar y solicitarla a su proveedor de JPA; también debe ponerse en contacto con el grupo de expertos de la próxima versión de JPA. La comunidad ayuda a moldear e impulsar los estándares, y es usted, la comunidad, quien debe dar a conocer sus necesidades.
+
+Sin embargo, tenga en cuenta que siempre habrá un subconjunto de características que se utilizan con poca frecuencia y que probablemente nunca se incluirán en el estándar simplemente porque no son lo suficientemente convencionales como para justificar su inclusión. La conocida filosofía de que las “necesidades de muchos” superan las “necesidades de unos pocos” (ni siquiera pretenda que no se sabe el episodio exacto en el que se expresó por primera vez esta filosofía) debe tenerse en cuenta porque cada nueva La característica agrega una cantidad distinta de cero de complejidad a la especificación, haciéndola mucho más grande y mucho más difícil de entender, usar e implementar. La lección es que, aunque le pedimos su opinión, no es posible incorporarla en su totalidad a la especificación.
+
+### OVERVIEW
+
+El modelo de JPA es simple y elegante, potente y flexible. Es natural de usar y fácil de aprender, especialmente si ha utilizado alguno de los productos de persistencia existentes en el mercado hoy en día en los que se basó la API. La API operativa principal a la que se expondrá una aplicación está contenida en un pequeño número de clases.
+
+**NOTA** ***Si está interesado en las herramientas JPA de Java de código abierto, le proporcioné una breve descripción de tres de las más populares como parte de la descarga gratuita del código fuente disponible en www.apress.com/9781484234198***.
+
+#### Persistencia POJO
+
+Quizás el aspecto más importante de JPA es el hecho de que los objetos son POJO, lo que significa que no hay nada especial en ningún objeto que se vuelva persistente. De hecho, casi cualquier objeto de aplicación no final existente con un constructor predeterminado se puede hacer persistente capaz sin cambiar ni una sola línea de código. El mapeo relacional de objetos con JPA se basa completamente en metadatos. Se puede hacer agregando anotaciones al código o usando XML definido externamente. Los objetos que se conservan son tan pesados como los datos que se definen o mapean con ellos.
+
+#### No intrusividad
+
+La API de persistencia existe como una capa separada de los objetos persistentes. La lógica empresarial de la aplicación llama a la API de persistencia, se le pasan los objetos de persistencia y se le indica que opere sobre ellos. Entonces, aunque la aplicación debe conocer la API de persistencia porque tiene que llamar a ella, los objetos persistentes en sí mismos no necesitan ser conscientes. Como la API no se entromete en el código de las clases de objetos persistentes, se denomina persistencia no intrusiva.
+
+Algunas personas tienen la idea errónea de que la persistencia no intrusiva significa que los objetos persisten mágicamente, como solían hacer las bases de datos de objetos de antaño cuando se comprometía una transacción. A esto a veces se le llama persistencia transparente y es una noción incorrecta que es aún más irracional cuando se piensa en realizar consultas. Necesita tener alguna forma de recuperar los objetos del almacén de datos. Esto requiere un objeto API separado y, de hecho, algunas bases de datos de objetos requieren que los usuarios invoquen objetos Extent especiales para emitir consultas. Las aplicaciones necesitan absolutamente administrar sus objetos persistentes de formas muy explícitas y requieren una API designada para hacerlo.
+
+#### Object Queries
+
+Un potente marco de consulta ofrece la capacidad de consultar entre entidades y sus relaciones sin tener que utilizar claves externas concretas o columnas de base de datos. Las consultas se pueden expresar en JP QL, un lenguaje de consulta que se modela después de SQL por su familiaridad, pero que no está vinculado al esquema de la base de datos, o definido mediante la API de criteria. Las consultas utilizan una abstracción de esquema que se basa en el modelo de entidad en contraposición a las columnas en las que se almacena la entidad. Las entidades Java y sus atributos se utilizan como esquema de consulta, por lo que no se requiere conocimiento de la información de mapeo de la base de datos. Las consultas eventualmente serán traducidas por la implementación de JPA al SQL apropiado para la base de datos de destino y se ejecutarán en la base de datos.
+
+En general, una entidad es un objeto de dominio de persistencia ligero.
+
+En la práctica, una entidad es una tabla en una base de datos relacional donde cada instancia de entidad corresponde a una determinada fila en esa tabla.
+
+Una consulta puede definirse estáticamente en metadatos o crearse dinámicamente pasando criterios de consulta al construirla. También es posible escapar a SQL si existe un requisito de consulta especial que la generación de SQL desde el marco de persistencia no puede cumplir. Estas consultas pueden devolver resultados en forma de entidades, proyecciones de atributos de entidad específicos o incluso valores de función agregados, entre otras opciones. Las consultas JPA son abstracciones valiosas que permiten realizar consultas en el modelo de dominio de Java en lugar de en tablas de bases de datos concretas.
+
+#### Mobile Entities
+
+Las aplicaciones cliente/servidor y web y otras arquitecturas distribuidas son claramente los tipos de aplicaciones más populares en un mundo conectado. Reconocer este hecho significa reconocer que las entidades persistentes deben ser móviles en la red. Los objetos se deben poder mover de una máquina virtual Java (JVM) a otra y luego volver de nuevo, y la aplicación debe seguir utilizándolos.
+
+Los objetos que abandonan la capa de persistencia se denominan separados. Una característica clave del modelo de persistencia es la capacidad de cambiar entidades separadas y luego volver a unirlas cuando regresen a la JVM de origen. El modelo de desapego proporciona una forma de reconciliar el estado de una entidad que se vuelve a unir con el estado en el que se encontraba antes de que se desapegara. Esto permite que los cambios de entidad se realicen fuera de línea mientras se mantiene la coherencia de la entidad frente a la concurrencia.
+
+#### Configuración sencilla
+
+Hay una gran cantidad de características de persistencia que la especificación tiene para ofrecer y que explicaremos en los capítulos de este libro. Todas las funciones se pueden configurar mediante el uso de anotaciones, XML o una combinación de ambos. Las anotaciones ofrecen una facilidad de uso incomparable en la historia de los metadatos de Java. Son cómodos de escribir y fáciles de leer, y permiten que los principiantes pongan en marcha una aplicación rápida y fácilmente. La configuración también se puede hacer en XML para aquellos a quienes les gusta XML o desean externalizar los metadatos del código.
+
+De mayor importancia que el lenguaje de metadatos es el hecho de que JPA hace un uso intensivo de los valores predeterminados. Esto significa que no importa qué método se elija, la cantidad de metadatos que se requerirán solo para comenzar a funcionar es el mínimo absoluto. En algunos casos, si los valores predeterminados son lo suficientemente buenos, casi no se requerirán metadatos.
+
+#### Integration y Testability
+
+Las aplicaciones de varios niveles alojadas en un servidor de aplicaciones se han convertido en el estándar de facto para las arquitecturas de aplicaciones. Prueba en un servidor de aplicaciones es un desafío que pocos disfrutan. Puede traer dolor y dificultades, y a menudo es prohibitivo practicar pruebas unitarias y pruebas de caja blanca.
+
+Esto se resuelve definiendo la API para que funcione tanto fuera como dentro del servidor de aplicaciones. Aunque no es un caso de uso tan común, las aplicaciones que se ejecutan en dos niveles (la aplicación que habla directamente con el nivel de la base de datos) pueden usar la API de persistencia sin la existencia de un servidor de aplicaciones. El escenario más común es para pruebas unitarias y marcos de pruebas automatizados que se pueden ejecutar fácil y convenientemente en entornos Java SE.
+
+Con la API de persistencia de Java, ahora es posible escribir código de persistencia integrado en el servidor y poder reutilizarlo para realizar pruebas fuera del servidor. Cuando se ejecuta dentro de un contenedor de servidor, se aplican todos los beneficios de la compatibilidad con contenedores y la facilidad de uso superior, pero con algunos cambios y un poco de compatibilidad con el marco de prueba, la misma aplicación también se puede configurar para que se ejecute fuera del contenedor.
+
+## Resumen
+
+Este capítulo presentó una introducción a la API de persistencia de Java. Comenzamos con una introducción al problema principal al que se enfrentan los desarrolladores que intentan utilizar modelos de dominio orientados a objetos junto con una base de datos relacional: el desajuste de impedancia. Para demostrar la complejidad de cerrar la brecha, presentamos tres modelos de objetos pequeños y nueve formas diferentes de representar la misma información. Exploramos cada uno un poco y discutimos cómo la asignación de objetos a diferentes configuraciones de tabla puede causar diferencias, no solo en la forma en que evolucionan los datos en la base de datos, sino también en lo costosas que son las operaciones de la base de datos resultantes y cómo funciona la aplicación.
+
+Luego presentamos una descripción general de algunas de las soluciones patentadas y los estándares actuales de persistencia, analizando JDBC, EJB y JDO. En cada caso, analizamos la evolución del estándar y dónde se quedó corto. Obtuvo algunas ideas generales sobre aspectos particulares del problema de persistencia que se aprendieron a lo largo del camino.
+
+Concluimos el capítulo con una breve mirada a JPA. Analizamos el historial de la especificación y los proveedores que se unieron para crearla. Luego, analizamos el papel que desempeña en el desarrollo de aplicaciones empresariales y presentamos algunas de las características que ofrece la especificación.
+
+En el siguiente capítulo, podrá disfrutar de JPA realizando un recorrido relámpago de los conceptos básicos y creando una aplicación empresarial Java sencilla en el proceso.
+
+***Footnotes***
+[1] Fowler, Martin. Patrones de arquitectura de aplicaciones empresariales, Addison-Wesley, 2003.
