@@ -45,7 +45,7 @@ Front Matter
 
 1. [Introduction](960_Pro_JPA_2_in_Java_EE_8/01_Introduction.md)
 
-2. Getting Started
+2. [Getting Started](960_Pro_JPA_2_in_Java_EE_8/02_Getting_Started.md)
 
 3. Enterprise Applications
 
@@ -93,31 +93,32 @@ Back Matter
    * Overview
 * Summary
 
-Chapter 2 :​ Getting Started
-Entity Overview
-Persistability
-Identity
-Transactionality​
-Granularity
-Entity Metadata
-Annotations
-XML
-Configuration by Exception
-Creating an Entity
-Entity Manager
-Obtaining an Entity Manager
-Persisting an Entity
-Finding an Entity
-Removing an Entity
-Updating an Entity
-Transactions
-Queries
-Putting It All Together
-Packaging It Up
-Persistence Unit
-Persistence Archive
-Summary
-Chapter 3 :​ Enterprise Applications
+### Chapter 2: Getting Started
+* Entity Overview
+   * Persistability
+   * Identity
+   * Transactionality
+   * Granularity
+* Entity Metadata
+   * Annotations
+   * XML
+   * Configuration by Exception
+* Creating an Entity
+* Entity Manager
+   * Obtaining an Entity Manager
+   * Persisting an Entity
+   * Finding an Entity
+   * Removing an Entity
+   * Updating an Entity
+   * Transactions
+   * Queries
+* Putting It All Together
+* Packaging It Up
+   * Persistence Unit
+   * Persistence Archive
+* Summary
+
+### Chapter 3 :​ Enterprise Applications
 Application Component Models
 Session Beans
 Stateless Session Beans
