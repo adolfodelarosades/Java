@@ -9,7 +9,7 @@
    * Acceso a BD en Java
       * JDBC
       * Persistencia JPA
-   * Ej. `13_gestion_candidatos_basedatos`
+   * :computer: `13_gestion_candidatos_basedatos`
       * 1.- BD
       * 2.- Mavenizar el proyecto e incluir dependencias
       * 3.- JavaBean de la Tabla
@@ -41,7 +41,7 @@
       * `@GeneratedValue`
    * `persistence.xml`
    * Utilización motor Hibernate
-   * Ej. `14_gestion_candidatos_persistencia`
+   * :computer: `14_gestion_candidatos_persistencia`
       * 1.- BD `empresa`
       * 2.- Mavenizar el proyecto e incluir dependencias
       * 3.- Añadir la Característica de JPA
