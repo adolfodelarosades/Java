@@ -10,14 +10,14 @@
       * JDBC
       * Persistencia JPA
    * Ej. `13_gestion_candidatos_basedatos`
-      1. BD
-      2. Mavenizar el proyecto e incluir dependencias
-      3. JavaBean de la Tabla
-      4. Conexión a la BD (Clase Datos)
-      5. Capa de Negocio o Capa de Servicio con JDBC
-      6. Servlets
-      7. Capa de Vista
-      8. Probando la Aplicación
+      * 1. BD
+      * 2. Mavenizar el proyecto e incluir dependencias
+      * 3. JavaBean de la Tabla
+      * 4. Conexión a la BD (Clase Datos)
+      * 5. Capa de Negocio o Capa de Servicio con JDBC
+      * 6. Servlets
+      * 7. Capa de Vista
+      * 8. Probando la Aplicación
    * La Capa de Persistencia de una Aplicación
       * ¿Qué es la capa de persistencia?
       * Entidades
@@ -42,17 +42,17 @@
    * `persistence.xml`
    * Utilización motor Hibernate
    * Ej. `14_gestion_candidatos_persistencia`
-      1. BD `empresa`
-      2. Mavenizar el proyecto e incluir dependencias
-      3. Añadir la Característica de JPA
+      * 1. BD `empresa`
+      * 2. Mavenizar el proyecto e incluir dependencias
+      * 3. Añadir la Característica de JPA
          * Crea la carpeta META-INF y dentro el archivo `persistence.xml`
-      4. Uso del Asistente para Crear Entidades
+      * 4. Uso del Asistente para Crear Entidades
          * Crear Conexión a la BD
          * Crear la Entidad `Candidato`
-      5. Editar `persistence.xml`
+      * 5. Editar `persistence.xml`
          * Incluir conexión a la BD
          * Incluir Proveedor de Persistencia Hibernate
-      6. Capa de Servicio con Persistencia
+      * 6. Capa de Servicio con Persistencia
    * Acceso a la Capa de Persistencia con Métodos Básicos
       * Objeto EntityManager
       * Obtención de un EntityManager
