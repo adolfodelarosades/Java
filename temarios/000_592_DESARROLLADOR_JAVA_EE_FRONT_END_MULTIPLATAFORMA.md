@@ -102,7 +102,9 @@
    * :computer: `09_buscador_sesion`
    
       Basandonos en el proyecto `08_buscador_servlet_jsp` vamos a crear `09_buscador_sesion` donde vamos a usar un atributo de sesión para que nos pinte en la parte superior el nombre del usuario en cualquier página que estemos, como esto va a estar en casí todas las páginas usaremos la directiva `include` para tener esa información en un JSP que incluiremos en otras donde lo necesitemos. 
-         
+
+# Listeners
+
 * [20201109 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201109_Lunes.md)
 
    * :scroll: Eventos de Aplicación
@@ -346,7 +348,7 @@
       * 9.- Vistas igual.
       * 10.- Probar la aplicación.
       
-# Relación Entre Entidades
+# Relación Entre Entidades
 
    * :scroll: Relación Entre Entidades 
       * Concepto
@@ -367,6 +369,9 @@
          * En las relaciones Muchos a Muchos, cualquiera puede incluir la información de la relación con `@JoinColumn`
       * Diagrama Relación Uno a Muchos.
       * Diagrama Relación Uno a Muchos - Muchos a Uno.
+
+# Relación Uno a Muchos
+
    * :computer: 22_ejemplo_relaciones
    
       Este proyecto nuevo nos va a servir para ver algunos ejemplos de Relación Entre Entidades, no tiene parte visual, solo sirve para ver las relaciones existentes entre las Tablas `Cursos` y `Preguntas` de la BD Formacion.
@@ -389,6 +394,9 @@
       * Fundamentos
       * Clase Primary Key
       * Definición de Primary Key en Entidad
+
+# Relación Uno a Muchos y Muchos a Uno
+
    * :computer: `23_formacion_ejb_weblogic_v2`   
       
       Partiendo del proyecto `21_formacion_ejb_weblogic` vamos a realizar una versión. Un alumno puede estar matriculado en uno o más cursos y un curso puede pertenecer a varias matriculas
