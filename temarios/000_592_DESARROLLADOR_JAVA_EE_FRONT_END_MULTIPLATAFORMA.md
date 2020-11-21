@@ -133,7 +133,7 @@
 * [20201112 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201112_Jueves.md) :+1:
 
    * :computer: `18_formacion_v1`
-      Nuevo proyecto partiendo de cero, usando BD, persistencia y patrón MVC.
+      * Nuevo proyecto partiendo de cero, usando BD, persistencia y patrón MVC.
       * 1.- BD `Formacion`
       * 2.- Crear proyecto en Eclipse
       * 3.- Mavenizar el Proyecto y añadir dependencias
