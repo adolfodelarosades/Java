@@ -1,6 +1,41 @@
 # 000 592 DESARROLLADOR JAVA EE FRONT END MULTIPLATAFORMA
 
 * [20201105 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201105_Jueves.md) :+1:
+   * Inicio de Curso
+   * :scroll: ¿Qué es Java EE?
+      * Arquitectura aplicaciones Web
+      * Interacción Cliente-Servidor
+      * Definición Java EE
+      * Tecnologías Java EE
+      * Contenedores
+      * Servidores de Aplicaciones
+      * Servidor Web
+      * Aplicación Web
+      * Distribución de Aplicaciones
+   * :computer: `01_ejemplo_app`
+      
+      Aplicación básica.
+   * :scroll: Programación con Servlets
+      * ¿Qué es un Servlet?
+      * Ciclo de Vida
+      * Métodos del Ciclo de Vida
+         * `init`
+         * `service`
+         * `destroy`
+      * Concurrencia de peticiones
+      * La Clase Servlet
+      * Generación de respuestas
+   * :computer: `02_generador_frases`     
+         
+      Aplicación que usa Servlets.
+   * :scroll: Recogida de Parámetros desde un Servlet
+      * Formulario HTML
+      * Controles gráficos HTML
+      * Recuperación de parámetros
+   * :computer: `03_datos_clientes`
+   
+      Aplicación Web que recupera parámetros
+      
 * [20201106 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201106_Viernes.md) :+1:
 
 * [20201109 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201109_Lunes.md)
