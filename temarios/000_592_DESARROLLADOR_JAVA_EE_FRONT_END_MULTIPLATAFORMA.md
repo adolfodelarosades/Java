@@ -38,6 +38,70 @@
       
 * [20201106 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201106_Viernes.md) :+1:
 
+   * :computer: `04_buscador`     
+         
+      Aplicación Buscador "Mini Google".
+      
+   * :scroll: Parámetros en URL
+   * :computer: `05_texto`     
+         
+      Aplicación que pasa parámetros mediante la URL.
+   * :scroll: Transferencia de Peticiones
+      * Concepto de Transferencia
+      * Proceso
+         * 1.- Objeto `RequestDispatcher`
+         * 2.- Transferencia por medio de los métodos:
+            * `forward()`
+            * `include()`
+      * Métodos `forward()` e `include()`
+      * Redireccionamiento
+   * :computer: `04_buscador` Ajustes    
+         
+      Aplicación Buscador "Mini Google", cuando no localizabamos información de algún tema nos mostraba una pantalla en blanco, vamos a usar la Transferencia de Peticiones para pintar una pantalla cuando no existan datos.
+      
+   * :computer: `06_buscador_login`
+   
+      Vamos a realizar un ajuste de la aplicacíon `04_buscador` que permita logearse y si lo hacemos podamos usar el buscador y si no que nos lo indique.
+   * :scroll: Java Server Pages
+      * Definición y características
+      * Código Java en JSP
+      * Ciclo de vida de una página JSP
+   * :computer: `07_generador_frase_jsp`   
+   
+      Vamos a rehacer el ejemplo `02_generador_frase` que hicimos con Servlets haciendolo ahora con JSPs
+   * :scroll: Mantenimiento de Datos en la Aplicación
+      * Mantenimiento de Datos
+   * :scroll: Atributos de Petición
+      * Definición
+      * Acceso a Atributos
+   * :computer: `08_buscador_servlet_jsp`
+   
+      Basandonos en el proyecto `06_buscador_login` hecho con Servlets lo vamos a rehacer con JSP para reemplazar los Servlets que regresaban HTML.
+   * :scroll: Atributos de Sesión
+      * Características
+      * Acceso a Atributos
+      * Control de Sesiones
+   * :scroll: Componentes de una Página JSP
+      * Objetos Implícitos
+         * `request`
+         * `response`
+         * `session`
+         * `application`
+         * `exception`
+         * `out`
+      * Directivas JSP
+         * `page`
+         * `include`
+         * `taglib`
+      * Acciones JSP
+   * :scroll: Directivas JSP
+      * Directiva `page`
+      * Directiva `include`
+   * :computer: `09_buscador_sesion`
+   
+      Basandonos en el proyecto 08_buscador_servlet_jsp vamos a crear 09_buscador_sesion donde vamos a usar un atributo de sesión para que nos pinte en la parte superior el nombre del usuario en cualquier página que estemos, como esto va a estar en casí todas las páginas usaremos la directiva `include` para tener esa información en un JSP que incluiremos en otras donde lo necesitemos. 
+         
+      
 * [20201109 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201109_Lunes.md)
 * [20201110 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201110_Martes.md) :+1:
    * Instalación de MySQL y Workbench
