@@ -313,7 +313,80 @@
       * 5.- Probar la Aplicación
 * [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md)
 
+   * Instalación de Web Logic
+   * (FALTA)
+
 * [20201114 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201116_Lunes.md) :+1:
+
+   * :computer: `21_formacion_ejb_weblogic`
+      
+      Partiendo del proyecto `19_formacion_factoria` vamos a realizar una versión usando EJB.
+      
+      * 1.- Creación del Data Source en WebLogic
+      * 2.- Creación Proyecto en Eclipse
+      * 3.- Mavenizar Proyecto
+      * 4.- Dar Características JPA
+      * 5.- Modificación del Archivo `persistence.xml`
+      * 6.- Creación del EJB. (Antes se usaban Clases, Interfaces y Factoria. Con EJBs solo Clases, Interfaces, el Factory  EJB nos lo proporciona implícitamente.)
+      * 7.- Modificar Actions para que Inyecten el EJB.
+      * 8.- FrontController igual.
+      * 9.- Vistas igual.
+      * 10.- Probar la aplicación.
+   * :scroll: Relación Entre Entidades 
+      * Concepto
+      * Tipos de Relaciones
+         * Uno a Uno
+         * Uno a Muchos
+         * Muchos a Uno
+         * Muchos a Muchos
+      * Definición de Entidades
+      * Configuración de Relaciones con Anotaciones
+         * `@OneToOne`
+         * `@OneToMany`
+         * `@ManyToOne`
+         * `@ManyToMany`
+      * Configuración de Relaciones II
+         * En las relaciones Uno a Muchos y Muchos a Uno, La Entidad del lado Muchos es la PROPIETARIA DE LA RELACIÓN.
+         * El atributo del lado Muchos incluye la anotación `@JoinColumn` con la información de la relación
+         * En las relaciones Muchos a Muchos, cualquiera puede incluir la información de la relación con `@JoinColumn`
+      * Diagrama Relación Uno a Muchos.
+      * Diagrama Relación Uno a Muchos - Muchos a Uno.
+   * :computer: 22_ejemplo_relaciones
+   
+      Este proyecto nuevo nos va a servir para ver algunos ejemplos de Relación Entre Entidades, no tiene parte visual, solo sirve para ver las relaciones existentes entre las Tablas `Cursos` y `Preguntas` de la BD Formacion.
+      
+      * 1.- BD `formacion`
+      * 2.- Creación del Proyecto Eclipse
+      * 3.- Mavenizar el Proyecto e incluir las dependencias de Hibernate.
+      * 4.- Creación de una Nueva Conexión con MySQL 5 para evitar error de duplicados
+      * 5.- Generar las Entidades con el Asistente RELACIÓN UNO A MUCHOS, cada `Curso` tiene muchas `Preguntas`.
+      * 6.- Creación de los EJBs.
+      * SIN PRUEBAS
+   * :scroll: JOINS
+      * Definición
+         * Dos Tipos:
+            * JOINs implícitos
+            * JOINs explícitos
+      * JOIN Implícito 
+      * JOIN Explícito
+   * :scroll: Claves Primarias Compuestas
+      * Fundamentos
+      * Clase Primary Key
+      * Definición de Primary Key en Entidad
+   * :computer: `23_formacion_ejb_weblogic_v2`   
+      
+      Partiendo del proyecto `21_formacion_ejb_weblogic` vamos a realizar una versión. Un alumno puede estar matriculado en uno o más cursos y un curso puede pertenecer a varias matriculas
+     
+      * 1.- Generación de Entidades Con el Asistente RELACIÓN UNO A MUCHOS y RELACIÓN MUCHOS A UNO. (Creación de MatriculaPK)
+      * 2.- Ajustes en las Entidades (entre ellos `insertable = false, updatable = false`)
+      * 3.- Ajustes `persistence.xml` para manejo de Transaccionalidad.
+      * 4.- Añadir Métodos en los EJBs.
+      * 5.- Añadir Actions
+      * 6.- FrontController
+      * 7.- Añadir Vistas
+      * 8.- Probar la Aplicación
+   * Otros Querys que podemos usar con JPA      
+      
 * [20201115 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201117_Martes.md)
    * Spring
    * Introducción a Spring
