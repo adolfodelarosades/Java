@@ -1,5 +1,7 @@
 # 000 592 DESARROLLADOR JAVA EE FRONT END MULTIPLATAFORMA
 
+# Java EE
+
 * [20201105 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201105_Jueves.md) :+1:
    * Inicio de Curso
    * :scroll: ¿Qué es Java EE?
@@ -129,7 +131,6 @@
       
       Basandonos en proyecto `09_buscador_sesion` que tiene una pantalla de Logeo queremos hacer una nueva aplicación que detecte si existen Cookies de Logeo ya no vaya a la pantalla de Logeo si no a la pantallade Buscar. (FALTA EL CODIGO)
    
-   
    (ESTAS PRESENTACIONES NO VAN AQUÍ
    * :scroll: Directiva `taglib`
    * :scroll: Acciones implícitas JSP
@@ -163,6 +164,9 @@
       
          
 * [20201110 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201110_Martes.md) :+1:
+
+# JDBC
+
    * Instalación de MySQL y Workbench
    * Acceso a BD en Java
       * JDBC
@@ -176,6 +180,9 @@
       * 6.- Servlets
       * 7.- Capa de Vista
       * 8.- Probando la Aplicación
+      
+# Persistencia JPA
+
    * :scroll: La Capa de Persistencia de una Aplicación
       * ¿Qué es la capa de persistencia?
       * Entidades
@@ -275,6 +282,8 @@
       * 1.- Entidad con `@NamedQuery`
       * 2.- Cambiar el Service para usar `createNamedQuery` en lugar de `createQuery`
       * 3.- Probar la Aplicación
+      
+# Patrón MVC      
    * :scroll: Patrón MVC
       * Patrones de diseño
       * Patrón MVC
@@ -303,6 +312,8 @@
       * 9.- Crear el FrontController
       * 10.- Creación de las Vistas
       * 11.- Probar la Aplicación
+
+# Patrón Factory
    * Uso del Patrón Factory.
    * :computer: `19_formacion_factoria`
       * 1.- Renombrar las Clases de Services
@@ -312,6 +323,8 @@
       * 4.- Cambiar los Actions
       * 5.- Probar la Aplicación
 * [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md)
+
+# EJBs
 
    * Instalación de Web Logic
    * (FALTA)
@@ -332,6 +345,9 @@
       * 8.- FrontController igual.
       * 9.- Vistas igual.
       * 10.- Probar la aplicación.
+      
+# Relación Entre Entidades
+
    * :scroll: Relación Entre Entidades 
       * Concepto
       * Tipos de Relaciones
@@ -386,6 +402,8 @@
       * 7.- Añadir Vistas
       * 8.- Probar la Aplicación
    * Otros Querys que podemos usar con JPA      
+
+# Spring
       
 * [20201115 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201117_Martes.md)
    * Spring
