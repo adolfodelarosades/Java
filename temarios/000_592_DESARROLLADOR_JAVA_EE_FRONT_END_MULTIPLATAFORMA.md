@@ -99,10 +99,69 @@
       * Directiva `include`
    * :computer: `09_buscador_sesion`
    
-      Basandonos en el proyecto 08_buscador_servlet_jsp vamos a crear 09_buscador_sesion donde vamos a usar un atributo de sesión para que nos pinte en la parte superior el nombre del usuario en cualquier página que estemos, como esto va a estar en casí todas las páginas usaremos la directiva `include` para tener esa información en un JSP que incluiremos en otras donde lo necesitemos. 
+      Basandonos en el proyecto `08_buscador_servlet_jsp` vamos a crear `09_buscador_sesion` donde vamos a usar un atributo de sesión para que nos pinte en la parte superior el nombre del usuario en cualquier página que estemos, como esto va a estar en casí todas las páginas usaremos la directiva `include` para tener esa información en un JSP que incluiremos en otras donde lo necesitemos. 
          
-      
 * [20201109 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201109_Lunes.md)
+
+   * :scroll: Eventos de Aplicación
+      * Características
+      * Interfaces de Escucha
+      * Implementación de un Manejador
+   * :computer: Ejercicio `10_gestion_candidatos` 
+   
+      Aplcación "Info-Curro" que permite Ingresar Candidatos con Foto y Ver la Lista de Candidatos. Usa el Listener para crear la Lista en la Sesión.
+      
+   * :scroll: Atributos de Aplicación
+      * Características
+      * Acceso a Atributos
+      * Control de Atributos de Aplicación
+   * :computer: `11_gestion_candidatos_aplicacion`
+      
+      En el ejemplo `10_gestion_candidatos` cada Cliente de la aplicación tenia su propia lista de candidatos, vamos usar los atributos de aplicación para que se maneje la misma lista para todos los clientes metiendo la lista de candidatos como atributo de aplicación.
+
+   * :scroll: Cookies
+      * Características
+      * Funcionamiento
+      * Creación de una Cookie
+      * Recuperación de una Cookie
+   * :scroll: Filtros (FALTA IMAGENES)
+   * :computer: `12_buscador_cookie_filtros`
+      
+      Basandonos en proyecto `09_buscador_sesion` que tiene una pantalla de Logeo queremos hacer una nueva aplicación que detecte si existen Cookies de Logeo ya no vaya a la pantalla de Logeo si no a la pantallade Buscar. (FALTA EL CODIGO)
+   
+   
+   (ESTAS PRESENTACIONES NO VAN AQUÍ
+   * :scroll: Directiva `taglib`
+   * :scroll: Acciones implícitas JSP
+      * Definición y tipos
+      * `forward` e `include`
+   * :scroll: Integración Servlets - JSP
+      * Criterios de utilización
+   * :scroll: El Lenguaje de Expresiones EL
+      * Fundamentos
+      * Objetos Implícitos
+         * `param`
+         * `requestScope`
+         * `sessionScope`
+         * `applicationScope`
+         * `cookie`
+      * Ejemplo de uso I
+      * Ejemplo de uso II
+      * Operadores EL
+   * :scroll: La Librería de Acciones JSTL
+      * Java Standard Tag Library
+      * Grupos de acciones JSTL
+      * Utilización de JSTL en JSP
+   * :scroll: Principales Acciones JSTL
+      * Acción `set`
+      * Acción `forEach`
+      * `forEach` Atributo `varStatus` 
+      * `forEach` como `for` estándar
+      * Acción `if`
+      * Acción `choose`
+      * Utilización de JSTL en JSP
+      
+         
 * [20201110 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201110_Martes.md) :+1:
    * Instalación de MySQL y Workbench
    * Acceso a BD en Java
