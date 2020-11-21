@@ -415,8 +415,54 @@
 # Spring
       
 * [20201115 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201117_Martes.md)
-   * Spring
-   * Introducción a Spring
+   * :scroll: Introducción a Spring
+      * ¿Qué es Spring?
+      * Principales Módulos Spring
+      * Spring Core
+      * Otros Módulos
+   * :scroll: Aplicaciones Web con Spring
+      * Características
+      * Estructura General
+      * Interacción Modelo - Controlador
+         * Spring instancia Componentes
+         * Inyección de dependenicas (del Modelo al Controlador)
+      * Configuración en Spring
+         * Controlador `mvcConfig.xml o .java`
+         * Modelo `springConfig.xml o .java`
+   * Generación de un Nuevo Workspace.
+   * Instalación de Spring Tools 3(Standalone Edition) 3.9.14.RELEASE
+   * :computer: `01_buscador_base`
+   
+      Aplicación Base para ver como va evolucionando cuando empecemos a usar Spring. No usa BD, EJBs, Factoria, Interfaces. ACTION ESTA TOTALMENTE ACOPLADO CON LA CAPA DE SERVICIO.
+      
+      * 1.- JavaBean
+      * 2.- Capa de Servicio
+      * 3.- Servlets
+      * 4.- Vistas
+      * 5.- Probar la Aplicación
+
+   * :computer: `02_buscador_spring`
+      
+      Partiendo de `01_buscador_base` vamos a aplicar Spring dentro de la Capa de Negocios.
+      
+      * 1.- Mavenizar la Aplicación
+          * Dependencias `Spring-Core` y `Spring-Context`
+      * 2.- Modificaciones a Nivel de Código
+         * Implentar Clase e Interface en la Capa de Servicio. 
+         * Anotar con `@Service` la Clase del Servicio 
+         * En el Servlet Inyectar la Interfaz con `@Autowired` 
+      * 3.- Añadiendo las Configuraciones XML 
+         * Añadir la dependencia `spring-web`
+         * Añadir Archivo `web.xml`
+            * Registrar el `ContextLoaderListener`
+            * Con parámetro `springConfig.xml`
+         * Añadir Archivo `springConfig.xml`
+            * 1.- Habilite la configuración mediante anotaciones
+            * 2.- Escanee los paquetes en los que se encuentran las clases que debe instanciar
+      * 4.- Probar la Aplicación (FALLA)
+      * 5.- Dar Acceso a Spring desde el Servidor de Aplicaciones
+         * Sobreescribir el método `init` del Servlet para que le informa al servidor de aplicaciones que Spring va a realizar inyección de objetos en este servlet
+      * 6.- Probar la Aplicación (TODO FUNCIONA)         
 * [20201116 Miercoles]()
 * [20201117 Jueves]()
 * [20201118 Viernes]()
