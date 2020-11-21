@@ -131,6 +131,28 @@
       * 3.- En la Vista usar referencias a `FrontController?option=doAlgo`
       * 4.- Probar la Aplicación
 * [20201112 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201112_Jueves.md) :+1:
+
+   * :computer: `18_formacion_v1`
+      * Nuevo proyecto partiendo de cero, usando BD, persistencia y patrón MVC.
+      * 1.- BD `Formacion`
+      * 2.- Crear proyecto en Eclipse
+      * 3.- Mavenizar el Proyecto y añadir dependencias
+      * 4.- Añadir la Característica JPA al Proyecto
+      * 5.- Generer las Entidades `Alumno` y `Curso` con el Asistente
+      * 6.- Completar el archivo `persistence.xml`
+      * 7.- Crear el Service
+      * 8.- Crear los Controladores de Acción
+      * 9.- Crear el FrontController
+      * 10.- Creación de las Vistas
+      * 11.- Probar la Aplicación
+   * Uso del Patrón Factory.
+   * :computer: `19_formacion_factoria`
+      * 1.- Renombrar las Clases de Services
+         * `AlumnosService` a `AlumnosServiceImpl` y `CursoService` a `CursoServiceImpl`
+      * 2.- Generar las Interfaces a través de las Clases
+      * 3.- Crear el Factory
+      * 4.- Cambiar los Actions
+      * 5.- Probar la Aplicación
 * [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md)
 
 * [20201114 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201116_Lunes.md) :+1:
