@@ -324,9 +324,10 @@
       * 3.- Crear el Factory
       * 4.- Cambiar los Actions
       * 5.- Probar la Aplicación
-* [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md)
 
 # EJBs
+
+* [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md)
 
    * Instalación de Web Logic
    * (FALTA)
