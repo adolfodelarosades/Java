@@ -71,6 +71,65 @@
             * `commit()`
       
 * [20201111 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201111_Miercoles.md) :+1:
+
+   * Consultas JPA
+      * Fundamentos
+      * El lenguaje JPQL
+      * Objeto `Query`
+         * `createQuery()` de `EntityManager`
+      * Métodos de `Query`
+         * `getResultList()` Devuelve un `List`
+         * `getSingleResult` Devuelve una única entidad
+         * `executeUpdate()` para instrucciones de acción
+      * Objeto `TypedQuery` Subinterfaz de `Query`
+      * Métodos de `TypedQuery`
+         * `getResultList()` Devuelve un `List` tipada
+         * `getSingleResult` Devuelve una única entidad tipada
+   * Consultas Parametrizadas
+      * Definición
+         * Parámetros
+            * Con un nombre
+            * Con una posición
+      * Asignación de valores a parámetros
+         * Métodos de `Query`
+            * `setParameter(String nombre, Object value)`
+            * `setParameter(int pos, Object value)`
+   * Consultas de Acción
+      * Instrucciones JPQL de acción
+         * `Update`
+         * `Delete`
+      * Ejecución
+         * `executeUpdate()`
+   * :computer: 14_gestion_candidatos_persistencia Continuación...         
+      * 6.- Capa de Servicio con Persistencia (ya no usamos el Objeto EntityManager usamos los objetos `Query`, `TypeQuery`y `EntityTransaction`)      
+      * 7.- Servlets (Sin cambios)
+      * 8.- Vista (Sin cambios)
+      * 9.- Probar la Aplicación
+   * :computer: `15_gestion_candidatos_persistencia_eliminacion` 
+      * Funcionalidad de eliminar el Contacto por Email
+   * Named Queries o Consultas Nominadas
+      * Definición
+      * Creación
+         * Anotación `@NamedQuery`
+      * Utilización
+         * Método `createNamedQuery()` de `EntityManager`
+   * :computer: `16_gestion_candidatos_persistencia_namedquery`
+      * 1.- Entidad con `@NamedQuery`
+      * 2.- Cambiar el Service para usar `createNamedQuery` en lugar de `createQuery`
+      * 3.- Probar la Aplicación
+   * Patrón MVC
+      * Patrones de diseño
+      * Patrón MVC
+      * Esquema general
+      * El Modelo
+      * La vista
+      * El Controlador
+   * :computer: `17_gestion_candidatos_persistencia_mvc`
+      * Este cambio principalmente afecta a los Servlets y la Capa de Vista.
+      * 1.- Cambiar los Servlets por Actions
+      * 2.- Crear el `FrontController`
+      * 3.- En la Vista usar referencias a `FrontController?option=doAlgo`
+      * 4.- Probar la Aplicación
 * [20201112 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201112_Jueves.md) :+1:
 * [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md)
 
