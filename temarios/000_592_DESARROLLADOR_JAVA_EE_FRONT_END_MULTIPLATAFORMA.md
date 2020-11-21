@@ -18,29 +18,29 @@
       * 6.- Servlets
       * 7.- Capa de Vista
       * 8.- Probando la Aplicación
-   * La Capa de Persistencia de una Aplicación
+   * :scroll: La Capa de Persistencia de una Aplicación
       * ¿Qué es la capa de persistencia?
       * Entidades
       * Frameworks de Persistencia
       * Java Persistence API
       * Ventajas de una Capa de Persistencia
-   *  Java Persistence API
+   * :scroll: Java Persistence API
       * Java Persistence API
       * Componentes JPA
-   * Crear la Capa de Persistencia
+   * :scroll: Creación de la Capa de Persistencia JPA
       * Proceso
          * Creación de Entidades y configuración con anotaciones
          * Configurar con `persistence.xml`
-   * BD
-   * Creación de la Entidad
-   * Principales Anotaciones
-      * `@Entity`
-      * `@Table`
-      * `@Id`
-      * `@Column`
-      * `@GeneratedValue`
-   * `persistence.xml`
-   * Utilización motor Hibernate
+      * BD
+      * Creación de la Entidad
+      * Principales Anotaciones
+         * `@Entity`
+         * `@Table`
+         * `@Id`
+         * `@Column`
+         * `@GeneratedValue`
+      * `persistence.xml`
+      * Utilización motor Hibernate
    * :computer: `14_gestion_candidatos_persistencia`
       * 1.- BD `empresa`
       * 2.- Mavenizar el proyecto e incluir dependencias
@@ -53,10 +53,10 @@
          * Incluir conexión a la BD
          * Incluir Proveedor de Persistencia Hibernate
       * 6.- Capa de Servicio con Persistencia
-   * Acceso a la Capa de Persistencia con Métodos Básicos
-      * Objeto EntityManager
-      * Obtención de un EntityManager
-      * Métodos básicos de EntityManager
+   * :scroll: El API JPA
+      * Objeto `EntityManager`
+      * Obtención de un `EntityManager`
+      * Métodos básicos de `EntityManager`
          * CRUD
             * `persist`
             * `merge`
@@ -72,7 +72,7 @@
       
 * [20201111 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201111_Miercoles.md) :+1:
 
-   * Consultas JPA
+   * :scroll: Consultas JPA
       * Fundamentos
       * El lenguaje JPQL
       * Objeto `Query`
@@ -85,7 +85,7 @@
       * Métodos de `TypedQuery`
          * `getResultList()` Devuelve un `List` tipada
          * `getSingleResult` Devuelve una única entidad tipada
-   * Consultas Parametrizadas
+   * :scroll: Consultas Parametrizadas
       * Definición
          * Parámetros
             * Con un nombre
@@ -94,7 +94,7 @@
          * Métodos de `Query`
             * `setParameter(String nombre, Object value)`
             * `setParameter(int pos, Object value)`
-   * Consultas de Acción
+   * :scroll: Consultas de Acción
       * Instrucciones JPQL de acción
          * `Update`
          * `Delete`
@@ -107,7 +107,7 @@
       * 9.- Probar la Aplicación
    * :computer: `15_gestion_candidatos_persistencia_eliminacion` 
       * Funcionalidad de eliminar el Contacto por Email
-   * Named Queries o Consultas Nominadas
+   * :scroll: Named Queries o Consultas Nominadas
       * Definición
       * Creación
          * Anotación `@NamedQuery`
@@ -117,7 +117,7 @@
       * 1.- Entidad con `@NamedQuery`
       * 2.- Cambiar el Service para usar `createNamedQuery` en lugar de `createQuery`
       * 3.- Probar la Aplicación
-   * Patrón MVC
+   * :scroll: Patrón MVC
       * Patrones de diseño
       * Patrón MVC
       * Esquema general
