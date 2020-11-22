@@ -304,7 +304,7 @@ Lo cambiamos por esto
 
 Esto implica cambios en los Servlets para enviarle ese atributo `"candidatos"`.
 
-### 08. Ajustes en los Servlets.
+### 09. Ajustes en los Servlets.
 
 `BuscarCandidatos`
 
@@ -358,11 +358,11 @@ public class EliminarCandidato extends HttpServlet {
 }
 ```
 
-### 09. Probar la Aplicación
+### 10. Probar la Aplicación
 
 Si probamos aquí la aplicación FUNCIONA correctamente pero usando un DataSource Spring dentro de la aplicación.
 
-### 10. Anotación `@Qualifier("data")`
+### 11. Anotación `@Qualifier("data")`
 
 Una vez que ya hemos creado nuestra aplicación Spring con un DataSource vamos a observar algunas cosas, es posible que tengamos dos DataSources apuntando a diferentes BDs, por ejemplo en nuestro archivo `springConfig.xml` tendríamos:
 
@@ -404,7 +404,7 @@ Nos esta indicando que existen dos objetos que implementan la Interface `DataSou
 Al probar nuevamente nuestra aplicación esta ya FUNCIONA.
 
 
-### 11. Usar DataSource del Servidor
+### 12. Usar DataSource del Servidor
 
 También se le puede decir a Spring vía configuración que use el DataSource del Servidor en lugar del definido en la Aplicación.
 
@@ -728,7 +728,7 @@ public class Inscripcion {
 }
 ```
 
-Pudimos solo meter el `idCandidato` pero de cara a la presentación de los datos es mejor meter todo el objeto `Candidato`
+Pudimos solo meter el `idCandidato` pero de cara a la presentación de los datos es mejor meter todo el objeto `Candidato` esto obviamente complica modelar lo que tenemos en la Tabla con el uso de Clases, ya lo veremos cuando implementemos el SQL. Con persistencia esto se simplifica.
 
 ### 03. Capa de Servicio
 
@@ -998,4 +998,4 @@ public class FrontController extends HttpServlet {
 
 ### 07. Probar la Aplicación
 
-Si probamos la aplicación FUNCIONA.
+Si probamos la aplicación FUNCIONA. PERO NUESTRA APLICACIÓN TAL COMO ESTA PUEDE PROBOCAR ALGUNAS INCONSISTENCIAS EN EL CASO DE QUE BORREMOS UN CANDIDATO QUE ESTE ASOCIADO A UNA OFERTA. EL CANDIDATO SE ELIMINA PERO LA OFERTA SE SIGUE MANTENIENDO ALMACENADA CON UN CANDIDATO QUE YA NO EXISTE.
