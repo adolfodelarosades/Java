@@ -141,23 +141,60 @@ Si se quiere usar una Clase de Spring no se crea con el `new` en ningún sitio. 
 Pero primero que nada necesitamos añadir una nueva dependencia que es la que nos va a permitir usar los DataSources, esa **dependencia es `spring-jdbc`**:
 
 ```html
+<dependency>
+   <groupId>org.springframework</groupId>
+   <artifactId>spring-jdbc</artifactId>
+   <version>5.2.9.RELEASE</version>
+</dependency>
 ```
 
-Podemos auxiliarnos de la pestaña `beans` para añadir los Objetos de Spring que necesitemos.
+Una vez añadida la dependencia, en el archivo `springConfig.xml` podemos auxiliarnos de la pestaña `beans` para añadir los Objetos de Spring que necesitemos.
 
 ![03-01-s-ej](images/03-01-s-ej.png)
+
+Presionamos `New Bean...` para crear un Objeto o Bean de Spring, le asignamos un `Id` y un `Name`.
+
 ![03-02-s-ej](images/03-02-s-ej.png)
+
+En `Class` debemos indicar la Clase de Spring que queremos crear que en este caso es un `DriverManagerDataSource`
+
 ![03-03-s-ej](images/03-03-s-ej.png)
+
+Aun que nos muestr error un error damos en Siguiente.
+
 ![03-04-s-ej](images/03-04-s-ej.png)
+
+El Objeto `DriverManagerDataSource` necesita unas propiedades para que pueda trabajar y que nos van a ser familiares.
+
 ![03-05-s-ej](images/03-05-s-ej.png)
+
+Debemos presionar `Add` para poder añadir las propiedades.
+
+Gracias a que añadimos la dependencia `spring-jdbc` al insertar los nombres de las propiedades ya me las reconoce.
+
 ![03-06-s-ej](images/03-06-s-ej.png)
+
+Ingreso el valor de la propiedad `url`.
+
 ![03-07-s-ej](images/03-07-s-ej.png)
 ![03-08-s-ej](images/03-08-s-ej.png)
+
+Repito el proceso para `DriverManager`.
+
 ![03-09-s-ej](images/03-09-s-ej.png)
 ![03-10-s-ej](images/03-10-s-ej.png)
+
+Repito el proceso para `username`.
+
 ![03-11-s-ej](images/03-11-s-ej.png)
 ![03-12-s-ej](images/03-12-s-ej.png)
+
+
+
 ![03-13-s-ej](images/03-13-s-ej.png)
+
+Y finalmente para `password`
+
 ![03-14-s-ej](images/03-14-s-ej.png)
 ![03-15-s-ej](images/03-15-s-ej.png)
 ![03-16-s-ej](images/03-16-s-ej.png)
