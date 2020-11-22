@@ -469,7 +469,44 @@
 
 ## Spring DataSource
 
+* :computer: `03_gestion_candidatos_basedatos`
+   * 1.- Incorporar las Dependencias de Spring en el archivo `pom.xml`
+   * 2.- Adaptar nuestra Capa de Servicio para que tenga Clase e Interface.
+   * 3.- Modificar los Servlets
+   * 4.- Añadir la Configuración XML
+   * 5.- Probar la Aplicación
+   * 6.- DataSources con Spring
+   * 7.- Modificar el Servicio para que llame al DataSource
+   * 8.- Ajustes en la JSP
+   * 9.- Ajustes en los Servlets.
+   * 10.- Probar la Aplicación
+   * 11.- Anotación @Qualifier("data")
+   * 12.- Usar DataSource del Servidor
+   * 13.- Configurar Archivos de Tomcat
+   * 14.- Usar el DataSource del Servidor
+   * 15.- Probar la Aplicación
+   
+## Acceso a Datos con Spring-JDBC
 
+* :scroll: Acceso a Datos con Spring-JDBC
+   * Características
+   * El Objeto `JdbcTemplate`
+   * Métodos del `JdbcTemplate`
+   * La Capa de Repositorio
+
+* :computer: `04_gestion_candidatos_spring-jdbc`
+   * 1.- Crear la Clase `JdbcTemplate`
+   * 2.- Cambios en la Capa de Servicio
+   * 3.- Probar la Aplicación
+   
+* :computer: `05_gestion_candidatos_ofertas`
+   * 1.- Añadir Tabla `inscripciones` a la BD `empresa`.
+   * 2.- Añadir el JavaBean `Inscripcion`
+   * 3.- Capa de Servicio
+   * 4.- Actions
+   * 5.- FrontController
+   * 6.- Vistas
+   * 7.- Probar la Aplicación
 
 * [20201117 Jueves]()
 * [20201118 Viernes]()
