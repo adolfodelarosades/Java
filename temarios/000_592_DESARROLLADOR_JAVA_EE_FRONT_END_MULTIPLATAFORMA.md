@@ -463,7 +463,7 @@
       * 5.- Dar Acceso a Spring desde el Servidor de Aplicaciones
          * Sobreescribir el método `init` del Servlet para que le informa al servidor de aplicaciones que Spring va a realizar inyección de objetos en este servlet
       * 6.- Probar la Aplicación (TODO FUNCIONA)         
-* [20201116 Miercoles]()
+* [20201116 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201118_Miercoles.md)
 * [20201117 Jueves]()
 * [20201118 Viernes]()
 
