@@ -685,22 +685,317 @@ El método `query` ejecuta la instruccón SQL y devuelve una lista de objetos.
 ¿Cómo hace las transformaciones de las filas de las tablas en Objetos? 
 Eso lo hacemos a través del `RowMapper` que es una Interfaz Funcional con un método `mapRow` que tenemos que implementar con una clase o con una expresión lambda, para indicar como debe hacer la transormación de las filas de las tablas en objetos Java. `mapRow` usa dos parámetros pero en este caso `f` que representa el número de fila no lo estamos usando.
 
+### 03. Probar la Aplicación
+
+Funciona Correctamente.
+
+## :computer: `05_gestion_candidatos_ofertas`
+
+Vamos a partir del proyecto `04_gestion_candidatos_spring-jdbc` para añadir una nueva funcionalidad a la aplicación. Nos va a permitir Inscribir Ofertas y Consultar las Inscripciones. Usaremos Spring para la Lógica de Negocio, Acceso a datos con JDBCTemplate, y añadir el MVC. 
+
+### 01. Añadir Tabla `inscripciones` a la BD `empresa`.
+
+![05-01-s-ej](images/05-01-s-ej.png)
+
+### 02. Añadir el JavaBean `Inscripción`
+
+```java
+package model;
+
+public class Inscripcion {
+	
+   private int idInscripcion;
+   private String empresa;
+   private String  posicion;
+   private double salario;
+   //private int idCandidato;
+   private Candidato candidato;
+	
+   public Inscripcion() {
+      super();
+   }
+
+   public Inscripcion(int idInscripcion, String empresa, String posicion, double salario, Candidato candidato) {
+      super();
+      this.idInscripcion = idInscripcion;
+      this.empresa = empresa;
+      this.posicion = posicion;
+      this.salario = salario;
+      this.candidato = candidato;
+   }
+   
+   ...	
+}
+```
+
+Pudimos solo meter el `idCandidato` pero de cara a la presentación de los datos es mejor meter todo el objeto `Candidato`
+
+### 03. Capa de Servicio
+
+`InscripcionesService`
+
+```java
+...
+public interface InscripcionesService {
+   void altaInscripcion(Inscripcion inscripcion);
+   List<Inscripcion> recuperarInscripciones();
+}
+```
+
+`InscripcionesServiceImpl`
+
+```java
+@Service
+public class InscripcionesServiceImpl implements InscripcionesService {
+
+   @Autowired
+   JdbcTemplate template;
+	
+   @Override
+   public void altaInscripcion(Inscripcion inscripcion) {
+      String sql = "INSERT INTO inscripciones(empresa, posicion, salario, idCandidato)"
+                 + " VALUES(?,?,?,?)";
+      template.update(sql, inscripcion.getEmpresa(),
+                           inscripcion.getPosicion(),
+                           inscripcion.getSalario(),
+                           inscripcion.getCandidato().getIdCandidato());
+   }
+
+   @Override
+   public List<Inscripcion> recuperarInscripciones() {
+      String sql = "SELECT * "
+                 + "  FROM inscripciones i, candidatos c "
+                 + " WHERE i.idCandidato = c.idCandidato ";
+      return template.query(sql, 
+                            (rs,f) -> new Inscripcion(rs.getInt("i.idInscripcion"),
+                                                      rs.getString("i.empresa"),
+                                                      rs.getString("i.posicion"),
+                                                      rs.getDouble("i.salario"),
+                                                      new Candidato(rs.getInt("c.idCandidato"),
+                                                                    rs.getString("c.nombre"),
+                                                                    rs.getInt("c.edad"),
+                                                                    rs.getString("c.puesto"),
+                                                                    rs.getString("c.foto"),
+                                                                    rs.getString("c.email"))));
+   }
+
+}
+```
+
+Observese como se recupera en un mismo Query los datos de la Inscripción y del Candidato y como se hace la implementación del `RowMapper` para devolver los Objetos `Incripcion` que contiene un Objeto `Candidato`.
 
 
+### 04. Actions
 
+`AltaInscripcionAction`
 
+```java
+@WebServlet("/AltaInscripcionAction")
+public class AltaInscripcionAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+	
+   @Autowired
+   InscripcionesService service;
+   @Autowired
+   CandidatosService candiatoService;
+	
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      //le informa al servidor de aplicaciones que Spring va a realizar inyección
+      //de objetos en este servlet
+      SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+      super.init(config);
+   }
+      
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+      String empresa  = request.getParameter("empresa");
+      String posicion = request.getParameter("posicion");
+      double salario  = Double.parseDouble(request.getParameter("salario"));
+      int idCandidato = Integer.parseInt(request.getParameter("idCandidato"));
+		
+      //Candidato candidato = candiatoService.
+      Inscripcion inscripcion = new Inscripcion(0,empresa,posicion, salario,
+      			                        new Candidato(idCandidato, null, 0, null, null, null)); 
+				//OJO Con el ID Candidato recupero el candidato y es el que mando	
+				
+      service.altaInscripcion(inscripcion);
+	
+   }
+}
+```
 
+`BuscarInscripcionesAction`
 
+```java
+@WebServlet("/BuscarInscripcionesAction")
+public class BuscarInscripcionesAction extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+	
+   @Autowired
+   InscripcionesService service;
+	
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      //le informa al servidor de aplicaciones que Spring va a realizar inyección
+      //de objetos en este servlet
+      SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+      super.init(config);
+   }
+	
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      request.setAttribute("inscripciones", service.recuperarInscripciones());
+   }
+}
+```
 
+### 05. FrontController
 
+`FrontController`
 
+```java
+@MultipartConfig //permite al servlet procesar objetos Part (objetos binarios)
+@WebServlet("/FrontController")
+public class FrontController extends HttpServlet {
+   private static final long serialVersionUID = 1L;
 
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String url = "";
+      String option = request.getParameter("option");
+      switch(option) {
+         case "doAltaCandidato":
+            request.getRequestDispatcher("AltaCandidatoAction").include(request, response);
+            url = "menu.html";
+            break;
+         case "doBuscarCandidatos":
+            request.getRequestDispatcher("BuscarCandidatosAction").include(request, response);
+            url = "candidatos.jsp";
+            break;
+         case "doEliminarCandidato":
+            request.getRequestDispatcher("EliminarCandidatoAction").include(request, response);
+            request.getRequestDispatcher("BuscarCandidatosAction").include(request, response);
+            url = "candidatos.jsp";
+            break;
+         case "doAFormularioAltaInscripcion":
+            request.getRequestDispatcher("BuscarCandidatosAction").include(request, response);
+            url = "altainscripcion.jsp";
+            break;
+         case "doAltaInscripcion":
+            request.getRequestDispatcher("AltaInscripcionAction").include(request, response);
+            url = "menu.html";
+            break;
+         case "doBuscarInscripciones":
+            request.getRequestDispatcher("BuscarInscripcionesAction").include(request, response);
+            url = "inscripciones.jsp";
+            break;
+         case "toMenu":
+            url="menu.html";
+            break;
+         case "toAltaCandidato":
+            url="altacandidato.html";
+            break;
+         default:
+            url="error.html";
+            break;		
+      }
+      request.getRequestDispatcher(url).forward(request, response);
+   }
+}
+```
 
+### 06. Vistas
 
+`menu.html`
 
+```html
+...
+<body>
+   <div align="center">
+      <h1 class="w3-jumbo">InfoCurro</h1>
+      <p class="w3-xlarge w3-text-dark-grey">Los mejores candidatos - Las mejores ofertas</p>
+      <p>
+         <a href="FrontController?option=toAltaCandidato" class="w3-button w3-dark-grey">Alta Candidato</a>
+         <a href="FrontController?option=doBuscarCandidatos" class="w3-button w3-dark-grey">Mostrar Candidatos</a>
+      </p>
+      <p>
+         <a href="FrontController?option=doAFormularioAltaInscripcion" class="w3-button w3-dark-grey">Inscribir a Oferta</a>
+         <a href="FrontController?option=doBuscarInscripciones" class="w3-button w3-dark-grey">Consultar Inscrpciones</a>
+      </p>
+   </div>
+</body>
+</html>
+```
 
+`altacandidato.jsp`
 
+```html
+...
+<body>
+   <%List<Candidato> candidatos=(List<Candidato>)request.getAttribute("candidatos"); %>
+   <div class="w3-padding">
+      <h1>Datos de la Inscripcion</h1>
+      <form action="FrontController?option=doAltaInscripcion" method="post">	
+         <label for="empresa">Empresa:</label><br>
+         <input type="text" name="empresa" placeholder="Introduce la empresa" required><br/><br/>
+         <label for="posicion">Posicion:</label><br>
+         <input type="text" name="posicion" placeholder="Introduce la posición" required><br/><br/>
+         <label for="salario">Salario:</label><br>
+         <input type="number" name="salario" placeholder="Introduce el salario" required><br/><br/>
+         Candidato: <select name="idCandidato" required>
+                       <option value="">Selecciona un candidato</option>
+                       <%for(Candidato candidato:candidatos){ %>
+                          <option value="<%=candidato.getIdCandidato() %>"><%=candidato.getNombre()%></option>
+	               <%} %>
+         </select>
+         <br/><br/>
+         <input type="submit" value="Guardar">	
+      </form>
+   </div>
+</body>
+</html>
+```
 
+`inscripciones.jsp`
 
+```html
+<body>
+   <%
+     List<Inscripcion> inscripciones = (List<Inscripcion>)request.getAttribute("inscripciones");
+     if (inscripciones.size() > 0){
+   %>
+   <div align="center" class="w3-padding">
+      <h1>Lista de Inscripciones</h1>
+      <table>
+         <tr>
+            <th>Empresa</th>
+            <th>Posición</th>
+            <th>Salario</th>
+            <th>Candidato</th>
+         </tr>
+         <%
+            for(Inscripcion inscripcion: inscripciones){ %>
+               <tr>
+                  <td><%=inscripcion.getEmpresa()%></td>	
+                  <td><%=inscripcion.getPosicion()%></td>
+                  <td><%=inscripcion.getSalario()%></td>
+                  <td><img alt="" style="width:50px;vertical-align:middle" src="<%=inscripcion.getCandidato().getFoto()%>"><%=inscripcion.getCandidato().getNombre()%></td>
+               </tr>
+         <%}%>
+      </table>
+   </div>
+   <%}else{%>
+      <div align="center" class="w3-padding">
+         <h1>No existe ninguna Inscripción.</h1>
+      </div>
+   <%}%>
+   <br><br>
+   <div align="right" class="w3-padding">
+      <a href="menu.html" class="w3-button w3-dark-grey">Volver al menú</a>
+   </div>
+</body>
+</html>
+```
 
+### 07. Probar la Aplicación
 
+Si probamos la aplicación FUNCIONA.
