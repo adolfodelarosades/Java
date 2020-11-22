@@ -62,7 +62,7 @@ public class CandidatosServiceImpl implements CandidatosService {
    ...
 ```
 
-**Como esta Clase la debe instanciar Spring la anotamos con `@Service`.
+**Como esta Clase la debe instanciar Spring la anotamos con `@Service`**.
 
 ### 03. Modificar los Servlets
 
