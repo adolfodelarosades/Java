@@ -362,4 +362,107 @@ public class EliminarCandidato extends HttpServlet {
 
 Si probamos aquí la aplicación FUNCIONA correctamente pero usando un DataSource Spring dentro de la aplicación.
 
+### 10. Anotación `@Qualifier("data")`
+
+Una vez que ya hemos creado nuestra aplicación Spring con un DataSource vamos a observar algunas cosas, es posible que tengamos dos DataSources apuntando a diferentes BDs, por ejemplo en nuestro archivo `springConfig.xml` tendríamos:
+
+```html
+<bean id="data" name="data" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   <property name="url" 
+      value="jdbc:mysql://localhost:3306/empresa?serverTimezone=Europe/Madrid">
+   </property>
+   <property name="driverClassName"
+      value="com.mysql.cj.jdbc.Driver">
+   </property>
+   <property name="username" value="root"></property>
+   <property name="password" value="root"></property>
+</bean>
+<bean id="data2" name="data2" 	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   <property name="url"
+      value="jdbc:mysql://localhost:3306/formacion?serverTimezone=Europe/Madrid">
+   </property>
+   <property name="driverClassName"
+      value="com.mysql.cj.jdbc.Driver">
+   </property>
+   <property name="username" value="root"></property>
+   <property name="password" value="root"></property>
+</bean>
+```
+
+Con esto tenemos dos objetos el `data` y el `data2` que implementan la misma Interface `DataSource`. 
+¿Qué va a pasar cuando ejecutemos nuestra aplicación?
+
+Apenas ejecutamos la aplicación y ya nos manda el siguiente error.
+
+![03-17-s-ej](images/03-17-s-ej.png)
+![03-18-s-ej](images/03-18-s-ej.png)
+
+`'javax.sql.DataSource' available: expected single matching bean but found 2: data,data2`
+
+Nos esta indicando que existen dos objetos que implementan la Interface `DataSource` y no sabe cual seleccionar. Cuando exista más de un Objeto que implemente una Interface que estemos Inyectando estamos en la obligación de indicarle cual de ellos queremos usar eso lo hacemos con la Anotación `@Qualifier("data")` e indicando cual de los dos objetos queremos usar.
+
+Al probar nuevamente nuestra aplicación esta ya FUNCIONA.
+
+
+### 11. Usar DataSource del Servidor
+
+También se le puede decir a Spring vía configuración que use el DataSource del Servidor en lugar del definido en la Aplicación.
+
+Esto lo podemos hacer configurandolo en nuestro archivo `springConfig.xml` usando una etiqueta que se encuentra en un NameSpace diferente de los que hemos utilizado es el NameSpace `jee`.
+
+![03-19-s-ej](images/03-19-s-ej.png)
+
+
+y en incluimos lo siguiente:
+
+```html
+<!-- DataSources del Servidor -->
+<jee:jndi-lookup jndi-name="refempresa" id="data3" />
+```
+
+Lo que pongamos en `jndi-name` va a depender que Servidor usamos si Tomcat o Web-Logic, en este caso estamos usando Tomcat.
+
+### 13. Configurar Archivos de Tomcat
+
+En `context.xml` incluimos lo siguiente:
+
+```html
+ <ResourceLink global="jdbc/empresads" name="refempresa" type="javax.sql.DataSource"/>
+```
+
+En `server.xml` incluimos lo siguiente:
+
+```html
+ <GlobalNamingResources>
+    <Resource driverClassName="com.mysql.cj.jdbc.Driver" 
+	      name="jdbc/empresads" 
+	      password="root" 
+	      type="javax.sql.DataSource" 
+	      url="jdbc:mysql://localhost:3306/empresa?serverTimezone=Europe/Madrid" 
+	      username="root"/>
+  </GlobalNamingResources>
+```
+
+### 14. Usar el DataSource del Servidor
+
+Por lo que si queremos usar el DataSource del servidor en nuestro Servicio se lo indicamos.
+
+```java
+@Service
+public class CandidatosServiceImpl implements CandidatosService {
+	
+   @Autowired
+   @Qualifier("data3")
+   DataSource datasource;	
+```
+
+### 15. Probar la Aplicación
+
+Si probamos aquí la aplicación FUNCIONA correctamente pero usando un DataSource Spring del Servidor de Aplicación.
+
+
+
+
+
+
 
