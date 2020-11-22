@@ -10,30 +10,30 @@
 
 ```html
 <dependencies>
-  	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-	<dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>8.0.19</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-core</artifactId>
-	    <version>5.2.9.RELEASE</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-context</artifactId>
-	    <version>5.2.9.RELEASE</version>
-	</dependency>
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-web</artifactId>
-	    <version>5.2.9.RELEASE</version>
-	</dependency>
-  </dependencies>
+   <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+   <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.19</version>
+   </dependency>
+   <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+   <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>5.2.9.RELEASE</version>
+   </dependency>
+   <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+   <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.2.9.RELEASE</version>
+   </dependency>
+   <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>5.2.9.RELEASE</version>
+   </dependency>
+</dependencies>
 ```
 
 ### 02. Adaptar nuestra Capa de Servicio para que tenga Clase e Interfaz.
@@ -41,11 +41,7 @@
 `CandidatosService`
 
 ```java
-package service;
-
-import java.util.List;
-import model.Candidato;
-
+...
 public interface CandidatosService {
    void altaCandidato(Candidato candidato);
    void eliminarCandidato(int idCandidato);
@@ -56,86 +52,14 @@ public interface CandidatosService {
 `CandidatosServiceImpl`
 
 ```java
-package service;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import model.Candidato;
-
+...
 @Service
 public class CandidatosServiceImpl implements CandidatosService {
 	
-	@Override
-	public void altaCandidato(Candidato candidato) {
-		try(Connection con = datasource.getConnection()){
-			String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
-					   + " VALUES(?,?,?,?,?)";
-			
-			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, candidato.getNombre());
-			st.setInt(2, candidato.getEdad());
-			st.setString(3, candidato.getPuesto());
-			st.setString(4, candidato.getFoto());
-			st.setString(5, candidato.getEmail());
-			st.execute();
-					  
-		}catch(SQLException ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void eliminarCandidato(int idCandidato) {
-		try(Connection con = datasource.getConnection()){
-			String sql = "DELETE FROM candidatos"
-					   + " WHERE idCandidato = ?";
-			
-			PreparedStatement st = con.prepareStatement(sql);
-			st.setInt(1, idCandidato);
-			st.execute();
-					  
-		}catch(SQLException ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	@Override
-	public List<Candidato> recuperarCandidatos(){
-		List<Candidato> candidatos = new ArrayList<>();
-		
-		try(Connection con = datasource.getConnection()){
-			String sql = "SELECT * FROM candidatos";
-			
-			PreparedStatement st = con.prepareStatement(sql);
-			ResultSet rs = st.executeQuery();
-			while(rs.next()) {
-				Candidato candidato = new Candidato(rs.getInt("idCandidato"),
-						rs.getString("nombre"),
-						rs.getInt("edad"),
-						rs.getString("puesto"),
-						rs.getString("foto"),
-						rs.getString("email"));
-				candidatos.add(candidato);
-			}
-			return candidatos;	  
-		}catch(SQLException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	}
+   @Override
+   public void altaCandidato(Candidato candidato) {
 
-}
+   ...
 ```
 
 **Como esta Clase la debe instanciar Spring la anotamos con `@Service`.
@@ -155,7 +79,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 
    ```java
    @Override
-	 public void init(ServletConfig config) throws ServletException {
+   public void init(ServletConfig config) throws ServletException {
       //le informa al servidor de aplicaciones que Spring va a realizar inyección
       //de objetos en este servlet
       SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
@@ -165,7 +89,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 ### 04. Añadir la Configuración XML
 
-* Añadir `web.xml` y añadir el registro del Listener.
+* Añadir el archivo `web.xml` y añadir el registro del Listener.
 
    ```html
    <context-param>
@@ -179,12 +103,22 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 * Añadir el `springConfig.xml` (Usando el Pluging) o copiar de otro proyecto.
 
+   ![03-00-01-s-ej](images/03-00-01-s-ej.png)
+   
+   ![03-00-02-s-ej](images/03-00-02-s-ej.png)
+   
+   Añadimos los NameSpaces que vayamos a utilizar en la pestaña `NameSpaces`
+   
+   ![03-00-03-s-ej](images/03-00-03-s-ej.png)
+   
+   Añadimos las siguientes anotaciones.
+
    ```html
    <!-- 1. Hailite la configuración mediante anotaciones -->
    <context:annotation-config />
 	
-	 <!-- 2. Escanee los paquetes en los que se encuentran las clases que debe instanciar -->
-	 <context:component-scan base-package="service" />
+   <!-- 2. Escanee los paquetes en los que se encuentran las clases que debe instanciar -->
+   <context:component-scan base-package="service" />
    ```
 
 ### 05. Probar la Aplicación
