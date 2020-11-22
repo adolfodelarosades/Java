@@ -130,6 +130,9 @@ Hasta aquí la Aplicación debe funcionar como lo hacia antes pero usando Spring
 
 ## DataSources con Spring
 
+
+### 06. DataSources con Spring
+
 **UNA DE LAS COSAS QUE NOS APORTA SPRING Y QUE SIN ESTE FRAMEWORK NO SE PUEDE HACER ES QUE CON SPRING LA PROPIA APLICACIÓN PUEDE CREAR UN DATASOURCE, SIN NECESIDAD DE DEPENDER DEL SERVIDOR DE APLICACIONES.** Pero si se prefiere usar el del Servidor de Aplicaciones se puede hacer.
 
 Spring tiene una Clase para crear un DataSource con la misma eficiencia que el Servidor de Aplicaciones. 
@@ -179,7 +182,6 @@ Gracias a que añadimos la dependencia `spring-jdbc` al insertar los nombres de 
 Ingreso el valor de la propiedad `url`.
 
 ![03-08-s-ej](images/03-08-s-ej.png)
-
 ![03-09-s-ej](images/03-09-s-ej.png)
 
 Repito el proceso para `DriverManager`.
@@ -196,6 +198,9 @@ Y finalmente para `password`
 
 ![03-14-s-ej](images/03-14-s-ej.png)
 ![03-15-s-ej](images/03-15-s-ej.png)
+
+Al presionar Finish se crea mi Bean `data` que me representa un Objeto DataSource de Spring.
+
 ![03-16-s-ej](images/03-16-s-ej.png)
 
 Lo que se ha generado en el archivo `springConfig.xml` es:
@@ -212,5 +217,147 @@ Lo que se ha generado en el archivo `springConfig.xml` es:
    <property name="password" value="root"></property>
 </bean>
 ```
+
+ESTA ES LA FORMA EN QUE SPRING CREA LOS OBJETOS DE SU PROPIEDAD. PERO DE IGUAL MANERA PODRÍMAOS USAR LA ETIQUETA `<bean` PARA QUE SPRING INSTANCIE LOS OBJETOS QUE NOSOTROS HEMOS CÓDIFICADO EN LUGAR DE USAR LA ANOTACIÓN `@Service`, REGISTRARIAMOS EN `springConfig.xml` UN NUEVO BEAN CON LA INFORMACIÓN DE MI CLASE. A ESTO ES LO QUE LLAMAN CONFIGURACIÓN XML, PERO ACTUALMENTE ESTA SIENDO SUSTITUIDO CON LAS ANOTACIONES. **CON LAS CLASES DEL PROPIO SPRING NO TENGO OTRA ALTERNATIVA QUE INSTANCIARLAS EN EL `springConfig.xml`**. 
+
+Con esto podemo eliminar la clase `Datos.java` que habíamos arrastrado del proyecto anterior. Ya no le vamos a pedir las conexiones directamente a la BD sino que lo vamos a solicitar directamente a nuestro DataSource que hemos incluido.
+
+### 07. Modificar el Servicio para que llame al DataSource 
+
+En nuestra Clase de Servicio actualmente usamos
+
+`CandidatosServiceImpl`
+
+```java
+try(Connection con=Datos.getConnection()){
+   ...
+```
+
+Pero ya no contamos con `Datos` queremos usar el `DriverManagerDataSource` que esta instanciando Spring por lo que en nuestra clase de Servicio debo inyectar la Interface `DataSource` cuyo objeto instanciado en `springConfig.xml` me la implementa.
+
+Por lo que nuestro Servicio cambiado nos queda así:
+
+`CandidatosServiceImpl`
+
+```java
+...
+@Autowired
+DataSource datasource;
+	
+@Override
+public void altaCandidato(Candidato candidato) {
+   try(Connection con = datasource.getConnection()){
+   
+   ...
+   
+@Override
+public void eliminarCandidato(int idCandidato) {
+   try(Connection con = datasource.getConnection()){
+   
+   ...
+   
+@Override
+public List<Candidato> recuperarCandidatos(){
+   List<Candidato> candidatos = new ArrayList<>();
+		
+   try(Connection con = datasource.getConnection()){   
+   
+   ... 
+```
+
+**Lo debemos cambiar en nuestros tres métodos**
+
+### Conclusiones.
+
+* La clase `DriverManagerDataSource` de Spring nos permite crear un DataSource dentro de la propia aplicación.
+* La clase `DriverManagerDataSource` la incluyo en `springConfig.xml` para que Spring la pueda instanciar.
+* Uso la Inyección de Dependencias para poder usar un Objeto `DataSource`
+
+### 08. Ajustes en la JSP
+
+Debemos realizar unos pequeños ajustes en la JSP por que en la aplicación copiada accediamos directamente a la Capa de Servicio cosa que no debe ser.
+
+`candidatos.jsp`
+
+```html
+...
+<%CandidatosService service=new CandidatosService();
+  List<Candidato> empleados= service.recuperarCandidatos();
+  for(int i=0;i<empleados.size();i++){ %>
+     <tr><td> 
+     ...   	    
+```
+
+Lo cambiamos por esto
+
+```html
+<%List<Candidato> empleados = (List<Candidato>)request.getAttribute("candidatos");
+  if (empleados.size() > 0){
+     for(int i=0;i<empleados.size();i++){%>
+	<tr><td> 
+     ...   	
+```
+
+**EN LOS JSP NO HAY INYECCIÓN DE DEPENDENCIA. SERÍA UN PLATEAMENTO ERRONEO**
+
+Esto implica cambios en los Servlets para enviarle ese atributo `"candidatos"`.
+
+### 08. Ajustes en los Servlets.
+
+`BuscarCandidatos`
+
+```java
+@WebServlet("/BuscarCandidatos")
+public class BuscarCandidatos extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   @Autowired
+   CandidatosService service;
+	
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      //le informa al servidor de aplicaciones que Spring va a realizar inyección
+      //de objetos en este servlet
+      SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+      super.init(config);
+   }
+	
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      request.setAttribute("candidatos", service.recuperarCandidatos());
+         request.getRequestDispatcher("candidatos.jsp").forward(request, response);
+   }
+}
+```
+
+`EliminarCandidato`
+
+```java
+@WebServlet("/EliminarCandidato")
+public class EliminarCandidato extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+
+   @Autowired
+   CandidatosService service;
+	
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      //le informa al servidor de aplicaciones que Spring va a realizar inyección
+      //de objetos en este servlet
+      SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+      super.init(config);
+   }
+	
+   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+      int idCandidato=Integer.parseInt(request.getParameter("idCandidato"));
+      service.eliminarCandidato(idCandidato);
+      request.getRequestDispatcher("BuscarCandidatos").forward(request, response);
+   }
+}
+```
+
+### 09. Probar la Aplicación
+
+Si probamos aquí la aplicación FUNCIONA correctamente pero usando un DataSource Spring dentro de la aplicación.
 
 
