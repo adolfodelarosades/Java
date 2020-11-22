@@ -460,6 +460,27 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 Si probamos aquí la aplicación FUNCIONA correctamente pero usando un DataSource Spring del Servidor de Aplicación.
 
+El Código Completo de este ejemplo esta al final.
+
+## Acceso a Datos con Spring-JDBC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
