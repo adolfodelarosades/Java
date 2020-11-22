@@ -464,9 +464,226 @@ El Código Completo de este ejemplo esta al final.
 
 ## Acceso a Datos con Spring-JDBC
 
+Spring nos aporta simplificar el acceso a datos con JDBC con el módulo `Spring-JDBC`. Con esta simplificación practicamente el programador solo se preocupa de la instrucción SQL olvidandose de la conexión, los ResulSet, las Statment, etc. que se usan en el JDBC de JavaEE, todo eso lo simplifica Spring.
 
+![03-01-s](images/03-01-s.png)
+![03-02-s](images/03-02-s.png)
 
+### Objeto `jdbcTemplate`
 
+![03-03-s](images/03-03-s.png)
+
+### Métodos de `jdbcTemplate`
+
+![03-04-s](images/03-04-s.png)
+
+### La Capa de Repositorio
+
+![03-05-s](images/03-05-s.png)
+
+## :computer: `04_gestion_candidatos_spring-jdbc`
+
+Vamos a partir del proyecto `03_gestion_candidatos_basedatos` para simplificar instrucciones JDBC. No necesitamos más dependencias ya en el proyecto anterior ya habíamos incluido todas las necesarias entre ellas `Spring-JDBC`.
+
+### 01. Crear la Clase `jdbcTemplate`
+
+En nuestro archivo `springConfig.xml` vamos a configurar ese archivo `jdbcTemplate`, nos vamos a apoyar en la pestaña `beans` para crearlo.
+
+Indicamos el identificado y nombre del nuevo bean `jdbcTemplate`.
+
+![04-01-s-ej](images/04-01-s-ej.png)
+
+Para que `jdbcTemplate` trabaje necesitamos indicarle una propiedad donde le indiquemos que DataSource va a usar para poder conectarse. En este caso el `dataSource` queremos hacer referencia al Objeto DataSource que ya habíamos configurado por lo que en este caso una referencia se indica en `Ref` y no en `Value` como habíamos visto hasta el momento. 
+
+![04-02-s-ej](images/04-02-s-ej.png)
+
+![04-03-s-ej](images/04-03-s-ej.png)
+
+![04-04-s-ej](images/04-04-s-ej.png)
+
+Esto nos agrega el siguiente código:
+
+`springConfig.xml`
+
+```html
+...
+<bean id="template" name="template" 
+      class="org.springframework.jdbc.core.JdbcTemplate">
+   <property name="dataSource" ref="data"></property>
+</bean>
+```
+
+El atributo `ref="data"` hace referencia al `id` del objeto.
+
+### 02. Cambios en la Capa de Servicio
+
+Para usar el objeto `jdbcTemplate` configurado en `springConfig.xml` tenemos que Inyectarlo en nuestra capa de Servicio. Actualmente estamos inyectando el Objeto `DataSource`:
+
+`CandidatosServiceImpl`
+
+```java
+@Service
+public class CandidatosServiceImpl implements CandidatosService {
+	
+   @Autowired
+   @Qualifier("data3")
+   DataSource datasource;
+	
+   @Override
+   public void altaCandidato(Candidato candidato) {
+      try(Connection con = datasource.getConnection()){
+         String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
+		   + " VALUES(?,?,?,?,?)";
+````
+
+**Ya no vamos a necesitar el `DataSource` por que eso ya lo usa internamente `jdbcTemplate`, por lo que basta simplemente Inyectar el `jdbcTemplate` por lo que el código nos va a quedar así:
+
+`CandidatosServiceImpl`
+
+```java
+@Service
+public class CandidatosServiceImpl implements CandidatosService {
+	
+   @Autowired
+   JdbcTemplate template;
+   
+   ...
+```
+
+Como solo tenemos un `JdbcTemplate` no usamos `@Qualifier`.
+
+`JdbcTemplate` tiene dos métodos:
+
+* `int update(String sql, Object...args)` para operaciones de acción.
+* `List<T> query(String sql, RowMapper<T> mapper, Object...args)` para operaciones de selección.
+
+Vamos a transformar cada uno de los métodos que tenemos.
+
+El método `altaCandidato` actual es:
+
+```java
+@Override
+public void altaCandidato(Candidato candidato) {
+   try(Connection con = datasource.getConnection()){
+      String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
+		 + " VALUES(?,?,?,?,?)";
+			
+      PreparedStatement st = con.prepareStatement(sql);
+      st.setString(1, candidato.getNombre());
+      st.setInt(2, candidato.getEdad());
+      st.setString(3, candidato.getPuesto());
+      st.setString(4, candidato.getFoto());
+			st.setString(5, candidato.getEmail());
+			st.execute();
+					  
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+```
+
+Usando `Spring-JDBC` nos queda así:
+
+```java
+@Override
+public void altaCandidato(Candidato candidato) {
+   try(Connection con = datasource.getConnection()){
+      String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
+		 + " VALUES(?,?,?,?,?)";
+			
+      String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
+				   + " VALUES(?,?,?,?,?)";
+      template.update(sql, candidato.getNombre(),
+                           candidato.getEdad(),
+                           candidato.getPuesto(),
+                           candidato.getFoto(),
+                           candidato.getEmail() );
+}
+```
+
+No estamos obligados a capturar ninguna excepción, se puede producir alguna pero es el tipo `RunTimeException`.
+
+El método `eliminarCandidato` actual es:
+
+```java
+@Override
+public void eliminarCandidato(int idCandidato) {
+   try(Connection con = datasource.getConnection()){
+      String sql = "DELETE FROM candidatos"
+                 + " WHERE idCandidato = ?";
+			
+      PreparedStatement st = con.prepareStatement(sql);
+      st.setInt(1, idCandidato);
+      st.execute();
+					  
+   }catch(SQLException ex) {
+      ex.printStackTrace();
+   }
+}
+```
+
+Usando `Spring-JDBC` nos queda así:
+
+```java
+@Override
+public void eliminarCandidato(int idCandidato) {
+   String sql = "DELETE FROM candidatos"
+              + " WHERE idCandidato = ?";
+   template.update(sql,idCandidato);
+}
+```
+
+El método `eliminarCandidato` actual es:
+
+```java
+@Override
+public List<Candidato> recuperarCandidatos(){
+   List<Candidato> candidatos = new ArrayList<>();
+		
+   try(Connection con = datasource.getConnection()){
+      String sql = "SELECT * FROM candidatos";
+			
+      PreparedStatement st = con.prepareStatement(sql);
+      ResultSet rs = st.executeQuery();
+      while(rs.next()) {
+         Candidato candidato = new Candidato(rs.getInt("idCandidato"),
+                                             rs.getString("nombre"),
+                                             rs.getInt("edad"),
+                                             rs.getString("puesto"),
+                                             rs.getString("foto"),
+                                             rs.getString("email"));
+         candidatos.add(candidato);
+   }
+      return candidatos;	  
+   }catch(SQLException ex) {
+      ex.printStackTrace();
+      return null;
+   }
+}
+```
+
+En este caso no es una operación de acción sino de recuperación de datos, para transformarla usaremos el método `query`.
+
+Usando `Spring-JDBC` nos queda así:
+
+```java
+@Override
+public List<Candidato> recuperarCandidatos(){
+		
+   String sql = "SELECT * FROM candidatos";
+      return template.query(sql, 
+                              (rs,f) -> new Candidato(rs.getInt("idCandidato"),
+                                                      rs.getString("nombre"),
+                                                      rs.getInt("edad"),
+                                                      rs.getString("puesto"),
+                                                      rs.getString("foto"),
+                                                      rs.getString("email")));
+}
+```
+
+El método `query` ejecuta la instruccón SQL y devuelve una lista de objetos. 
+¿Cómo hace las transformaciones de las filas de las tablas en Objetos? 
+Eso lo hacemos a través del `RowMapper` que es una Interfaz Funcional con un método `mapRow` que tenemos que implementar con una clase o con una expresión lambda, para indicar como debe hacer la transormación de las filas de las tablas en objetos Java. `mapRow` usa dos parámetros pero en este caso `f` que representa el número de fila no lo estamos usando.
 
 
 
