@@ -332,7 +332,7 @@
 * :computer: `20_gestion_candidatos_ejb_weblogic`
 * (FALTA)
 
-# [20201114 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201116_Lunes.md) :+1:
+# [20201116 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201116_Lunes.md) :+1:
 
 * :computer: `21_formacion_ejb_weblogic`
       
@@ -412,7 +412,7 @@
    * 8.- Probar la Aplicación
 * Otros Querys que podemos usar con JPA      
       
-# [20201115 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201117_Martes.md)
+# [20201117 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201117_Martes.md)
    
 ## Spring
 
@@ -465,7 +465,7 @@
       * Sobreescribir el método `init` del Servlet para que le informa al servidor de aplicaciones que Spring va a realizar inyección de objetos en este servlet
    * 6.- Probar la Aplicación (TODO FUNCIONA)  
 
-# [20201116 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201118_Miercoles.md)
+# [20201118 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201118_Miercoles.md)
 
 ## Spring DataSource
 
@@ -508,14 +508,14 @@
    * 6.- Vistas
    * 7.- Probar la Aplicación
 
-* [20201117 Jueves]()
-* [20201118 Viernes]()
+* [20201119 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201119_Jueves.md)
+* [20201120 Viernes]()
 
-* [20201121 Lunes]()
-* [20201122 Martes]()
-* [20201123 Miercoles]()
-* [20201124 Jueves]()
-* [20201125 Viernes]()
+* [20201123 Lunes]()
+* [20201124 Martes]()
+* [20201125 Miercoles]()
+* [20201126 Jueves]()
+* [20201127 Viernes]()
 
 * [20201128 Lunes]()
 * [20201129 Martes]()
