@@ -412,7 +412,7 @@
    * 8.- Probar la Aplicación
 * Otros Querys que podemos usar con JPA      
       
-# [20201117 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201117_Martes.md)
+# [20201117 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201117_Martes.md) :+1:
    
 ## Spring
 
