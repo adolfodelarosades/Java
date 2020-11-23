@@ -689,6 +689,12 @@ Eso lo hacemos a través del `RowMapper` que es una Interfaz Funcional con un m�
 
 Funciona Correctamente.
 
+![04-05-s-ej](images/04-05-s-ej.png)
+![04-06-s-ej](images/04-06-s-ej.png)
+![04-07-s-ej](images/04-07-s-ej.png)
+![04-08-s-ej](images/04-08-s-ej.png)
+![04-09-s-ej](images/04-09-s-ej.png)
+
 ## :computer: `05_gestion_candidatos_ofertas`
 
 Vamos a partir del proyecto `04_gestion_candidatos_spring-jdbc` para añadir una nueva funcionalidad a la aplicación. Nos va a permitir Inscribir Ofertas y Consultar las Inscripciones. Usaremos Spring para la Lógica de Negocio, Acceso a datos con JDBCTemplate, y añadir el MVC. 
