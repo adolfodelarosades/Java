@@ -403,7 +403,6 @@ Nos esta indicando que existen dos objetos que implementan la Interface `DataSou
 
 Al probar nuevamente nuestra aplicación esta ya FUNCIONA.
 
-
 ### 12. Usar DataSource del Servidor
 
 También se le puede decir a Spring vía configuración que use el DataSource del Servidor en lugar del definido en la Aplicación.
@@ -411,7 +410,6 @@ También se le puede decir a Spring vía configuración que use el DataSource de
 Esto lo podemos hacer configurandolo en nuestro archivo `springConfig.xml` usando una etiqueta que se encuentra en un NameSpace diferente de los que hemos utilizado es el NameSpace `jee`.
 
 ![03-19-s-ej](images/03-19-s-ej.png)
-
 
 y en incluimos lo siguiente:
 
@@ -460,7 +458,11 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 Si probamos aquí la aplicación FUNCIONA correctamente pero usando un DataSource Spring del Servidor de Aplicación.
 
-El Código Completo de este ejemplo esta al final.
+![03-20-s-ej](images/03-20-s-ej.png)
+![03-21-s-ej](images/03-21-s-ej.png)
+![03-22-s-ej](images/03-22-s-ej.png)
+![03-23-s-ej](images/03-23-s-ej.png)
+![03-24-s-ej](images/03-24-s-ej.png)
 
 ## Acceso a Datos con Spring-JDBC
 
