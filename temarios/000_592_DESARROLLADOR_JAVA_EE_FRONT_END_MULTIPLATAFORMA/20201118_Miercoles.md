@@ -999,3 +999,14 @@ public class FrontController extends HttpServlet {
 ### 07. Probar la Aplicación
 
 Si probamos la aplicación FUNCIONA. PERO NUESTRA APLICACIÓN TAL COMO ESTA PUEDE PROBOCAR ALGUNAS INCONSISTENCIAS EN EL CASO DE QUE BORREMOS UN CANDIDATO QUE ESTE ASOCIADO A UNA OFERTA. EL CANDIDATO SE ELIMINA PERO LA OFERTA SE SIGUE MANTENIENDO ALMACENADA CON UN CANDIDATO QUE YA NO EXISTE.
+
+![05-02-s-ej](images/05-02-s-ej.png)
+![05-03-s-ej](images/05-03-s-ej.png)
+![05-04-s-ej](images/05-04-s-ej.png)
+![05-05-s-ej](images/05-05-s-ej.png)
+![05-06-s-ej](images/05-06-s-ej.png)
+![05-07-s-ej](images/05-07-s-ej.png)
+![05-08-s-ej](images/05-08-s-ej.png)
+![05-09-s-ej](images/05-09-s-ej.png)
+![05-10-s-ej](images/05-10-s-ej.png)
+![05-11-s-ej](images/05-11-s-ej.png)
