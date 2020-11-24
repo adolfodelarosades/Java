@@ -508,7 +508,7 @@
    * 6.- Vistas
    * 7.- Probar la Aplicación
 
-* [20201119 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201119_Jueves.md) :+1:
+# [20201119 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201119_Jueves.md) :+1:
 
 ## Spring - Persistencia
 ### Anotación `@Transactional`
