@@ -508,7 +508,46 @@
    * 6.- Vistas
    * 7.- Probar la Aplicación
 
-* [20201119 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201119_Jueves.md)
+* [20201119 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201119_Jueves.md) :+1:
+
+## Spring - Persistencia
+### Anotación `@Transactional`
+* `06_gestion_candidatos_spring_jpa`
+   * 1.- Dependencias
+   * 2.- Añadir Manualmente Anotaciones al JavaBean para convertirlo en Entidad
+   * 3.- Modificar la Capa de Servicio para Manejar Persistencia
+   * 4.- Configuración XML
+   * 5.- Probar la Aplicación
+
+* `07_gestion_candidatos_ofertas_jpa`
+   * 1.- Añadir las Dependencias `spring-orm` y `hibernate-core` y quitamos `spring-jdbc` en `pom.xml` 
+   * 2.- Vamos a activar la Característica JPA
+   * 3.- Crear las Entidades con el Asistente
+   * 4.- Capa de Servicio
+   * 5.- Eliminar `persistence.xml` y Características JPA.
+   * 6.- Probar la Aplicación
+   
+* `08_gestion_candidatos_ofertas_jpa_v2`
+   * 1.- Cambios en las Entidades
+   * 2.- Cambios en la Capa de Servicios
+   * 3.- Actions
+   * 4.- Controller
+   * 5.- Vistas
+   * 6.- Probar la Aplicación
+   
+* :scroll: Ajustes en Relaciones
+   * Carga de datos relacionados
+      * Atributo `fetch`
+         * `FetchType.EAGER`
+         * `FetchType.LAZY`
+   * Actualizaciones en Cascada
+      * Atributo `cascade`
+         * `CascadeType.PERSIST`
+         * `CascadeType.MERGE`
+         * `CascadeType.REMOVE`
+         * `CascadeType.REFRESH`
+         * `CascadeType.ALL`
+
 * [20201120 Viernes]()
 
 * [20201123 Lunes]()
