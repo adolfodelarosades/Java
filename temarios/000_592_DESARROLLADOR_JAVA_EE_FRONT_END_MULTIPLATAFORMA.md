@@ -512,6 +512,7 @@
 
 ## Spring - Persistencia
 ### Anotación `@Transactional`
+* :scroll: Documentos Relaciones
 * `06_gestion_candidatos_spring_jpa`
    * 1.- Dependencias
    * 2.- Añadir Manualmente Anotaciones al JavaBean para convertirlo en Entidad
@@ -548,7 +549,8 @@
          * `CascadeType.REFRESH`
          * `CascadeType.ALL`
 
-* [20201120 Viernes]()
+# [20201120 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201120_Viernes.md)
+* :scroll: Documentos Relaciones
 
 * [20201123 Lunes]()
 * [20201124 Martes]()
