@@ -24,8 +24,6 @@
    * Persistence Archive
 * Summary
 
-2. Comenzando
-
 Uno de los principales objetivos de JPA era que fuera simple de usar y fácil de entender. Aunque el dominio de su problema no puede trivializarse ni diluirse, la tecnología que permite a los desarrolladores abordarlo puede ser sencilla e intuitiva. Este capítulo muestra lo sencillo que puede resultar desarrollar y utilizar entidades.
 
 Comenzamos describiendo las características básicas de las entidades y revisamos los requisitos que debe seguir una clase de entidad. Definimos qué es una entidad y cómo crear, leer, actualizar y eliminar una. También presentamos a los administradores de entidades y cómo se obtienen y utilizan. Luego, echamos un vistazo rápido a las consultas y cubrimos cómo especificar y ejecutar una consulta utilizando los objetos EntityManager y Query. El capítulo concluye mostrando una aplicación de trabajo simple que se ejecuta en un entorno estándar de Java SE y demuestra todo el código de ejemplo en acción.
@@ -65,3 +63,25 @@ Finalmente, una buena forma de mostrar qué son las entidades es describir qué 
 Las entidades están diseñadas para ser objetos detallados que tienen un conjunto de estados agregados que normalmente se almacenan en un solo lugar, como una fila en una tabla, y normalmente tienen relaciones con otras entidades. En el sentido más general, son objetos de dominio empresarial que tienen un significado específico para la aplicación que accede a ellos.
 
 Si bien es cierto que las entidades pueden definirse de manera exagerada para ser tan precisas como almacenar una sola cadena o lo suficientemente generales como para contener 500 columnas de datos, las entidades JPA definitivamente estaban destinadas a estar en el extremo más pequeño de el espectro de granularidad. Idealmente, las entidades deberían diseñarse y definirse como objetos bastante ligeros de un tamaño comparable al del objeto Java medio.
+
+## Entity Metadata
+
+Además de su estado persistente, cada entidad JPA tiene algunos metadatos asociados (aunque sea una cantidad muy pequeña) que la describe. Estos metadatos pueden existir como parte del archivo de clase guardado o pueden almacenarse fuera de la clase, pero no se conservan en la base de datos. Permite que la capa de persistencia reconozca, interprete y administre adecuadamente la entidad desde el momento en que se carga hasta su invocación en tiempo de ejecución.
+
+Los metadatos que realmente se requieren para cada entidad son mínimos, lo que hace que las entidades sean fáciles de definir y usar. Sin embargo, como cualquier tecnología sofisticada con su parte de interruptores, palancas y botones, también existe la posibilidad de especificar muchos, muchos más metadatos de los necesarios. Pueden ser grandes cantidades, según los requisitos de la aplicación, y pueden usarse para personalizar cada detalle de la configuración de la entidad o las asignaciones de estado.
+
+Los metadatos de la entidad se pueden especificar de dos formas: anotaciones o XML. Cada uno es igualmente válido, pero el que utilice dependerá de sus preferencias o proceso de desarrollo.
+
+### ANOTACIONES
+
+Los metadatos de anotación son una característica del lenguaje introducida en Java SE 5 que permite adjuntar metadatos estructurados y mecanografiados al código fuente. Aunque JPA no requiere anotaciones, son una forma conveniente de aprender y usar la API. Debido a que las anotaciones ubican conjuntamente los metadatos con los artefactos del programa, no es necesario escapar a un archivo adicional y un lenguaje especial (XML) solo para especificar los metadatos.
+
+Las anotaciones se utilizan en todos los ejemplos y las explicaciones adjuntas en este libro. Todas las anotaciones JPA que se muestran y describen (excepto en el Capítulo 3, que habla de las anotaciones Java EE) se definen en el paquete `javax.persistence`. Se puede suponer que los fragmentos de código de ejemplo tienen una importación implícita del formulario `import javax.persistence. * ;`.
+AQUIII
+Como dijimos en el Capítulo 1, una de las nuevas características de JPA 2.2 es hacer una anotación @Repeatable. Esto es en realidad un cambio de Java 8 y se rastreó en el número 115 de la especificación JPA.
+
+Esta nueva característica de JPA 2.2 permitirá a los desarrolladores usar la misma anotación varias veces para una determinada clase o atributo sin usar una anotación de contenedor. Esta característica ayudará a que su código Java sea mucho más fácil de leer.
+
+Prácticamente, podrá anotar cualquiera de sus clases de entidad con múltiples anotaciones @NamedQuery sin necesidad de envolverlas en una anotación @NamedQueries.
+
+Estas son las anotaciones que se pueden repetir cuando se usa JPA 2.2:
