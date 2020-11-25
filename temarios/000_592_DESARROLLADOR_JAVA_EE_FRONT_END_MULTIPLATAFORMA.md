@@ -549,11 +549,11 @@
          * `CascadeType.REFRESH`
          * `CascadeType.ALL`
 
-# [20201120 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201120_Viernes.md)
+# [20201120 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201120_Viernes.md):-1:
 * :scroll: Documentos Relaciones
 
-* [20201123 Lunes]()
-* [20201124 Martes]()
+* [20201123 Lunes]():-1:
+* [20201124 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201124_Martes.md)
 * [20201125 Miercoles]()
 * [20201126 Jueves]()
 * [20201127 Viernes]()
