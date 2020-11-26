@@ -45,8 +45,8 @@ Esta aplicación la comenzamos desde cero y es una página de Login, si la clave
 `pom.xml`
 
 ```java
- <dependencies>
-  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependencies>
+ 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-core</artifactId>
@@ -113,14 +113,15 @@ Las vistas deben ser JSPs.
 
 ```html
 <body>
-	<div align="center">
-		<h1>Página de autenticación</h1>
-		<form action="login" method="post">
-			Usuario:<input type="text" name="usuario"/><br/><br/>
-			Contraseña:<input type="password" name="password"/><br/><br/>
-			<input type="submit" value="Entrar"/>
-		</form>
-	</div>
+   <div align="center">
+      <h1>Página de autenticación</h1>
+      <form action="login" method="post">
+         Usuario:<input type="text" name="usuario"/><br/><br/>
+         Contraseña:<input type="password" name="password"/><br/><br/>
+         <input type="submit" value="Entrar"/>
+      </form>
+   </div>
+</body>
 ```
 
 Los `name` que ponemos aquí deben coincidir con los que pusimos en el Controlador.
@@ -145,7 +146,7 @@ Las otras páginas las vamos a meter dentro del `WEB-INF` para que esten protegi
 </body>
 ```
 
-### 04. Configuración
+### 04. Configuración `web.xml`
 
 Como esta es una aplicación Web necesitamos el `web.xml`. En las aplicaciones anteriores que no usaban Spring MVC usabamos un Listener en este caso que ya usamos Spring MVC esto va a cambiar.
 
@@ -183,6 +184,57 @@ Observaciones del `web.xml`:
 * `mvcConfig.xml` Define la configuración del Controlador.
 * `springConfig.xml` Define la configuración de la Lógica de Negocio.
 * El `servlet-mapping` nos permite mapear cualquier petición `/` la va a gestionar el `Dispacher`.
+
+### 04. Configuración `mvcConfig.xml`
+
+![15-02-s-ej](images/15-02-s-ej.png)
+![15-03-s-ej](images/15-03-s-ej.png)
+![15-04-s-ej](images/15-04-s-ej.png)
+![15-05-s-ej](images/15-05-s-ej.png)
+
+Nuestro archivo nos va a quedar así:
+
+`mvcConfig.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+   <!-- 1. Habilite configuración mediante anotaciones -->
+   <mvc:annotation-driven/>
+	
+   <context:component-scan base-package="controller"/>
+   <!-- objeto encargado de resolver la navegación -->	
+   <bean id="resolver"
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/WEB-INF/"></property>
+	<property name="suffix" value=".jsp"></property>
+   </bean>
+   <mvc:view-controller path="volver" view-name="../login"/>
+</beans>
+```
+
+Observaciones de `mvcConfig.xml`
+
+1. Habilite configuración mediante anotaciones
+2. Indicar el paquete donde se van a escanear las Clases para el controler.
+3. Objeto encargado de resolver la navegación
+4. Navegación de páginas estatícas.
+
+
+### 05. Probar la Aplicación
+
+![15-06-s-ej](images/15-06-s-ej.png)
+![15-07-s-ej](images/15-07-s-ej.png)
+![15-08-s-ej](images/15-08-s-ej.png)
+![15-09-s-ej](images/15-09-s-ej.png)
+![15-10-s-ej](images/15-10-s-ej.png)
+
 
 
 
