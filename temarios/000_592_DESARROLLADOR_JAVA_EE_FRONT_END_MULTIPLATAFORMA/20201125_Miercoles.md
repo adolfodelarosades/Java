@@ -226,7 +226,6 @@ Observaciones de `mvcConfig.xml`
 3. Objeto encargado de resolver la navegación
 4. Navegación de páginas estatícas.
 
-
 ### 05. Probar la Aplicación
 
 ![15-06-s-ej](images/15-06-s-ej.png)
@@ -234,6 +233,83 @@ Observaciones de `mvcConfig.xml`
 ![15-08-s-ej](images/15-08-s-ej.png)
 ![15-09-s-ej](images/15-09-s-ej.png)
 ![15-10-s-ej](images/15-10-s-ej.png)
+
+## :computer: `16_buscador_spring_mvc` Segundo Ejemplo de Spring MVC.
+
+Partiendo de `02_buscador_spring` vamos a generar una nueva versión con Spring MVC. Aquí ya tenemos una Capa de Negocio.
+
+### 01. Añadir la Dependencia `spring-webmvc` en el `pom.xml`
+
+`pom.xml`
+
+```html
+<dependency>
+   <groupId>org.springframework</groupId>
+   <artifactId>spring-webmvc</artifactId>
+   <version>5.2.9.RELEASE</version>
+</dependency>
+<dependency>
+   <groupId>javax.servlet</groupId>
+   <artifactId>jstl</artifactId>
+   <version>1.2</version>
+</dependency>
+```
+
+### 02. Borrar el Paquete Servlets y Remplazarlo por un Paquete Controller con los Controladores.
+
+`LoginController`
+
+```java
+@Controller
+public class LoginController {
+   
+   @PostMapping("doLogin")
+   //@RequestMapping("doLogin") Valida para Post o Get
+   public String login(@RequestParam("usuario") String usuario, 
+      		@RequestParam("password") String pwd,
+		HttpSession sesion) {
+      if(usuario.equals("admin")&&pwd.equals("admin")) {
+         sesion.setAttribute("usuario", usuario);
+	 return "buscador";
+      }else {
+         return "error";
+      }
+   }
+}
+```
+
+Esta Clase `LoginController` es muy parecida al controlador del ejercicio anterior. Con los siguientes cambios:
+
+1. Hemos añadido un parámetro `HttpSession sesion` que nos va a permitir poner en un atributo de sesión al usuario para poderlo pintar en las siguientes páginas.
+2. Hemos cambiado la página de `bienvenida` por la de `buscar`.
+
+`BuscadorController`
+
+```java
+@Controller
+public class BuscadorController {
+   @Autowired
+   BuscadorService service;
+   
+   @PostMapping("doBuscar")
+   public String buscar(@RequestParam("tema") String palabra,HttpServletRequest request) {
+      List<Item> items=service.buscarItems(palabra);
+      request.setAttribute("items", items);
+      return "resultados";
+		
+      //return "forward:/doLogin"; Indica a  a Dispacher que transfiera a otra petición
+   }
+}
+````
+
+Observaciones de la Clase `BuscadorController`:
+
+* En esta Clase ya inyectamos la capa de Servicio con `@Autowired BuscadorService service;`.
+
+
+
+
+
 
 
 
