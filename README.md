@@ -331,3 +331,7 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 * https://placeholder.com/
 
+### SQL
+
+* https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/
+
