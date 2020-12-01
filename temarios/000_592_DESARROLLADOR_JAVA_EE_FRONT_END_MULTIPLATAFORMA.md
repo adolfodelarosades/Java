@@ -558,8 +558,8 @@
 * [20201126 Jueves]()
 * [20201127 Viernes]()
 
-* [20201128 Lunes]()
-* [20201129 Martes]()
-* [20201130 Miercoles]()
-* [20201201 Jueves]()
-* [20201202 Viernes]()
+* [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md)
+* [20201101 Martes]()
+* [20201102 Miercoles]()
+* [20201203 Jueves]()
+* [20201204 Viernes]()
