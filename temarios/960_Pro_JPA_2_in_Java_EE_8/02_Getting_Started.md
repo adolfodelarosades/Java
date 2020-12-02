@@ -252,8 +252,8 @@ La Tabla 2-1 resume los conceptos y objetos de API mencionados o discutidos ante
 
 Objeto | Objeto API | Descripción
 -------|------------|--------------
-Persistence            | Persistence | Clase de Bootstrap utilizada para obtener una entity manager factory
-Entity Manager Factory | EntityManagerFactory | Objeto factory configurado utilizado para obtener entity manager
+Persistence            | `Persistence` | Clase de Bootstrap utilizada para obtener una entity manager factory
+Entity Manager Factory | `EntityManagerFactory` | Objeto factory configurado utilizado para obtener entity manager
 Persistence Unit       | --                   | Configuración con nombre que declara las clases de entidad y la información del almacén de datos
 Entity Manager         | `EntityManager`      | Objeto API principal utilizado para realizar operaciones y consultas en entidades
 Persistence Context    | --                   | Conjunto de todas las instancias de entidad administradas por un entity manager específico
@@ -292,7 +292,7 @@ La siguiente línea usa el entity manager para conservar la entidad. **Llamar a 
 
 El Listado 2-3 muestra cómo incorporar esto en un método simple que crea un nuevo empleado y lo persiste en la base de datos.
 
-***Listado 2-3** Método que crea un nuevo empleado.
+***Listado 2-3*** Método que crea un nuevo empleado.
 
 ```java
 public Employee createEmployee(int id, String name, long salary) {
@@ -398,19 +398,21 @@ Una vez más, la clave es el entorno en el que se ejecuta el código. La situaci
 Sin embargo, en el ejemplo de este capítulo, no estamos ejecutando Java EE. Fue en un entorno Java SE, y el servicio de transacciones que debe usarse en Java SE es el servicio `javax.persistence.EntityTransaction`. Cuando ejecutamos en Java SE, necesitamos comenzar y confirmar la transacción en los métodos operativos, o debemos comenzar y confirmar la transacción antes y después de llamar a un método operativo. En cualquier caso, una transacción se inicia llamando a `getTransaction()` en el administrador de la entidad para obtener `EntityTransaction` y luego invocando `begin()` en él. Asimismo, para confirmar la transacción, se invoca la llamada `commit()` en el objeto `EntityTransaction` obtenido del entity manager. Por ejemplo, iniciar y confirmar antes y después del método produciría un código que crea un empleado de la forma en que se hace en el Listado 2-7.
 
 ***Listado 2-7*** Comenzar y Committing un EntityTransaction
+
 ```java
 em.getTransaction().begin();
 createEmployee(158, "John Doe", 45000);
 em.getTransaction().commit();
 ```
-En el Capítulo 6 se incluyen más detalles sobre las transacciones a nivel de recursos y la API EntityTransaction.
+En el Capítulo 6 se incluyen más detalles sobre las transacciones a nivel de recursos y la API `EntityTransaction`.
 
-CONSULTAS
+#### QUERIES
+
 En general, dado que la mayoría de los desarrolladores han usado una base de datos relacional en algún momento u otro de sus vidas, la mayoría de nosotros sabemos qué es una consulta de base de datos. En JPA, una consulta es similar a una consulta de base de datos, excepto que en lugar de usar el Lenguaje de consulta estructurado (SQL) para especificar los criterios de consulta, estamos consultando entidades y usando un lenguaje llamado Lenguaje de consulta de persistencia Java (JP QL).
 
-Una consulta se implementa en código como un objeto Query o TypedQuery <X>. Se construye utilizando EntityManager como fábrica. La interfaz EntityManager incluye una variedad de llamadas a API que devuelven un nuevo objeto Query o TypedQuery <X>. Como objeto de primera clase, una consulta se puede personalizar a su vez de acuerdo con las necesidades de la aplicación.
+Una query o consulta se implementa en código como un objeto `Query` o `TypedQuery<X>`. Se construye utilizando `EntityManager` como un factory. La interfaz `EntityManager` incluye una variedad de llamadas a API que devuelven un nuevo objeto `Query` o `TypedQuery<X>`. Como objeto de primera clase, una consulta se puede personalizar a su vez de acuerdo con las necesidades de la aplicación.
 
-Tenga en cuenta que la versión 2.2 de JPA introdujo para las interfaces JPA Query y TypedQuery un nuevo método llamado getResultStream (), que devolverá un flujo de Java 8 del resultado de la consulta. Este método, por defecto, se delegará en getResultList (). Stream (). Este método proporciona una mejor manera de moverse por el conjunto de resultados de la consulta.
+Tenga en cuenta que la versión 2.2 de JPA introdujo para las interfaces JPA `Query` y `TypedQuery` un nuevo método llamado `getResultStream()`, que devolverá un stream de Java 8 del resultado de la consulta. Este método, por defecto, se delegará en `getResultList().stream()`. Este método proporciona una mejor manera de moverse por el conjunto de resultados de la consulta.
 
 Este cambio se rastreó en el número 99 de la especificación JPA, donde se notó que cuando el método de lista es JPA 2.1 se usaba para leer grandes conjuntos de datos, el resultado era agregar todo el "conjunto de resultados" en la memoria antes de que pudiera usarse en la aplicación.
 
@@ -418,16 +420,208 @@ Una consulta se puede definir de forma estática o dinámica. Una consulta está
 
 Se puede emitir una consulta dinámica en tiempo de ejecución proporcionando los criterios de consulta JP QL o un objeto de criterios. Pueden ser un poco más caras de ejecutar porque el proveedor de persistencia no puede preparar ninguna consulta de antemano, pero las consultas JP QL son, sin embargo, muy sencillas de usar y pueden emitirse en respuesta a la lógica del programa o incluso a la lógica del usuario.
 
-Entonces, cuando usa JPA 2.2, llama al método getResultStream () en lugar del método getResultList (). El resto de la API no ha cambiado, por lo que aún puede crear la consulta como lo hizo en JPA 2.1.
+Entonces, cuando usa JPA 2.2, llama al método `getResultStream()` en lugar del método `getResultList()`. El resto de la API no ha cambiado, por lo que aún puede crear la consulta como lo hizo en JPA 2.1.
 
 El siguiente ejemplo muestra cómo crear una consulta dinámica y luego ejecutarla para obtener todos los empleados en la base de datos. Por supuesto, esta puede no ser una consulta muy buena para ejecutar si la base de datos es grande y contiene cientos de miles de empleados, pero es un ejemplo legítimo. La consulta simple es la siguiente:
 
-```java
-```
-
+Ejemplo usando JPA 2.1:
 
 ```java
+TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+List<Employee> emps = query.getResultList();
 ```
 
+Ejemplo usando JPA 2.2 si queremos tener un Java 8 Stream del resultado de la consulta: 
+
 ```java
+Stream<Employee> employee = em.createQuery("SELECT a FROM Employee e", Employee.class).getResultStream();
 ```
+
+Creamos un objeto `TypedQuery<Employee>` emitiendo la llamada `createQuery()` en el `EntityManager` y pasando la cadena JP QL que especifica los criterios de consulta, así como la clase en la que se debe parametrizar la consulta. La cadena JP QL no se refiere a una tabla de la base de datos `EMPLOYEE` sino a la entidad `Employee`, por lo que esta consulta selecciona todos los objetos `Employee` sin filtrarlos más. Se sumergirá en consultas en el Capítulo 7, JP QL en los Capítulos 7 y 8, y consultas de criterios en el Capítulo 9. Verá que puede ser mucho más discrecional sobre qué objetos desea que se devuelvan.
+
+Al igual que cuando se usa JPA 2.2, el nuevo método llamado `getResultStream()` devuelve un stream de Java 8 del resultado de la consulta. Entonces, en este caso, devolverá el stream del resultado de la consulta del `Employee`.
+
+Para usar el método `getResultList` en lugar de ejecutar la consulta, simplemente invocamos `getResultList()` en él. Esto devuelve una `List<Employee>` que contiene los objetos `Employee` que coinciden con los criterios de consulta. Observe que la Lista es parametrizada por `Employee` ya que el tipo parametrizado se propaga desde el argumento de clase inicial pasado al método `createQuery()`. Podemos crear fácilmente un método que devuelva todos los empleados, como se muestra en el Listado 2-8.
+
+
+***Listado 2-8*** Método para emitir una consulta
+```java
+public List<Employee> findAllEmployees() {
+   TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+   return query.getResultList();
+}
+```
+
+Este ejemplo muestra lo simple que es crear, ejecutar y procesar consultas, pero no muestra cuán poderosas son las consultas. En el Capítulo 7, verá muchas otras formas extremadamente útiles e interesantes de definir y usar consultas en una aplicación.
+
+## Poniendolo todo junto
+
+Ahora podemos tomar todos los métodos que creamos y combinarlos en una clase. La clase actúa como una clase de servicio, a la que llamamos `EmployeeService`, y nos permite realizar operaciones en los empleados. El código debería ser bastante familiar ahora. El listado 2-9 muestra la implementación completa.
+
+***Listado 2-9*** Clase de servicio para operar en entidades de empleados
+
+```java
+import javax.persistence.*;
+import java.util.List;
+
+public class EmployeeService {
+   
+   protected EntityManager em;
+   
+   public EmployeeService(EntityManager em) {
+      this.em = em;
+   }
+   
+   public Employee createEmployee(int id, String name, long salary) {
+      Employee emp = new Employee(id);
+      emp.setName(name);
+      emp.setSalary(salary);
+      em.persist(emp);
+      return emp;
+   }
+   
+   public void removeEmployee(int id) {
+      Employee emp = findEmployee(id);
+      if (emp != null) {
+         em.remove(emp);
+      }
+   }
+    
+   public Employee raiseEmployeeSalary(int id, long raise) {
+      Employee emp = em.find(Employee.class, id);
+      if (emp != null) {
+         emp.setSalary(emp.getSalary() + raise);
+      }
+      return emp;
+   }
+   
+   public Employee findEmployee(int id) {
+      return em.find(Employee.class, id);
+   }
+   
+   public List<Employee> findAllEmployees() {
+      TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+      return query.getResultList();
+   }
+}
+```
+
+Esta es una clase simple pero completamente funcional que se puede utilizar para ejecutar las operaciones típicas de creación, lectura, actualización y eliminación (CRUD) en entidades `Employee`. Esta clase requiere que la persona que llama cree un administrador de entidad y que la persona que llama inicie y comprometa todas las transacciones necesarias. Puede parecer extraño al principio, pero desacoplar la lógica de transacción de la lógica de operación hace que esta clase sea más portátil para el entorno Java EE. Revisamos este ejemplo en el siguiente capítulo, que se centra en las aplicaciones Java EE.
+
+En el Listado 2-10 se muestra un programa principal simple que utiliza este servicio y realiza toda la creación del administrador de entidad y la gestión de transacciones necesarias.
+
+***Listado 2-10*** Uso de `EmployeeService`
+
+```java
+import javax.persistence.*;
+import java.util.List;
+public class EmployeeTest {
+
+   public static void main(String[] args) {
+      
+      EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
+      EntityManager em = emf.createEntityManager();
+      EmployeeService service = new EmployeeService(em);
+        
+      //  create and persist an employee
+      em.getTransaction().begin();
+      Employee emp = service.createEmployee(158, "John Doe", 45000);
+      em.getTransaction().commit();
+        
+      System.out.println("Persisted " + emp);
+        
+      // find a specific employee
+      emp = service.findEmployee(158);
+        
+      System.out.println("Found " + emp);
+      
+      // find all employees
+      List<Employee> emps = service.findAllEmployees();
+      for (Employee e : emps)
+         System.out.println("Found employee: " + e);
+        
+      // update the employee
+      em.getTransaction().begin();
+      emp = service.raiseEmployeeSalary(158, 1000);
+      em.getTransaction().commit();
+        
+      System.out.println("Updated " + emp);
+      
+      // remove an employee
+      em.getTransaction().begin();
+      service.removeEmployee(158);
+      em.getTransaction().commit();
+        
+      System.out.println("Removed Employee 158");
+      
+      // close the EM and EMF when done
+      em.close();
+      emf.close();
+   }
+}
+```
+
+Tenga en cuenta que al final del programa, usamos los métodos `close()` para limpiar el entity manager y la factory que usamos para crearlo. Esto asegura que todos los recursos que puedan haber asignado se liberen correctamente.
+
+## Empaquetarlo(Packaging It Up)
+
+Ahora que conoce los componentes básicos de JPA, está listo para organizar las piezas en una aplicación que se ejecuta en Java SE. Lo único que queda por discutir es cómo armarlo para que funcione.
+
+### UNIDAD DE PERSISTENCIA
+
+La configuración que describe la unidad de persistencia se define en un archivo XML llamado `persistence.xml`. Cada unidad de persistencia tiene un nombre, por lo que cuando una aplicación de referencia desea especificar la configuración de una entidad, solo necesita hacer referencia al nombre de la unidad de persistencia que define esa configuración. Un solo archivo `persistence.xml` puede contener una o más configuraciones de unidades de persistencia con nombre, pero cada unidad de persistencia es independiente y distinta de las demás, y lógicamente se puede pensar que están en archivos `persistence.xml` separados.
+
+Muchos de los elementos de la unidad de persistencia en el archivo `persistence.xml` se aplican a las unidades de persistencia que se implementan dentro del contenedor Java EE. Los únicos que necesitamos especificar para este ejemplo son el nombre, el tipo de transacción, la clase y las propiedades. Hay una serie de otros elementos que se pueden especificar en la configuración de la unidad de persistencia en el archivo `persistence.xml`, pero se tratan con más detalle en el Capítulo 13. El Listado 2-11 muestra las partes relevantes del archivo `persistence.xml` para este ejemplo.
+
+***Listado 2-11*** Elementos en el archivo `persistence.xml`
+
+```java
+<persistence>
+   <persistence-unit name="EmployeeService" transaction-type="RESOURCE_LOCAL">
+      <class>examples.model.Employee</class>
+      <properties>
+         <property name="javax.persistence.jdbc.driver"
+                   value="org.apache.derby.jdbc.ClientDriver"/>
+         <property name="javax.persistence.jdbc.url"
+                   value="jdbc:derby://localhost:1527/EmpServDB;create=true"/>
+         <property name="javax.persistence.jdbc.user" value="APP"/>
+         <property name="javax.persistence.jdbc.password" value="APP"/>
+      </properties>
+   </persistence-unit>
+</persistence>
+```
+
+El atributo `name` del elemento `persistence-unit` indica el nombre de la unidad de persistencia y es la cadena que especificamos cuando creamos `EntityManagerFactory`. Usamos `EmployeeService` como nombre. El `transaction-type` de transacción indica que la unidad de persistencia utiliza `EntityTransaction` a nivel de recursos en lugar de transacciones JTA. El elemento `class` enumera la entidad que forma parte de la unidad de persistencia. Se pueden especificar varios elementos `class` cuando hay más de una entidad. Normalmente no serían necesarios cuando se implementan en un contenedor Java EE porque el contenedor buscará automáticamente clases de entidad anotadas con `@Entity` como parte del proceso de implementación, pero son necesarios para la ejecución portátil cuando se ejecuta en Java SE. Tenemos una sola entidad `Employee`.
+
+La última sección es solo una lista de propiedades que pueden ser estándar o específicas del proveedor. Los parámetros de inicio de sesión de la base de datos JDBC deben especificarse cuando se ejecuta en un entorno Java SE para indicarle al proveedor a qué recurso conectarse. Otras propiedades del proveedor, como las opciones de registro, son específicas del proveedor y también pueden resultar útiles.
+
+### ARCHIVO DE PERSISTENCIA
+
+Los artefactos de persistencia están empaquetados en lo que en general llamaremos un archivo de persistencia. En realidad, esto es solo un archivo con formato JAR que contiene el archivo `persistence.xml` en el directorio `META-INF` y normalmente los archivos de clase de entidad.
+
+Debido a que la aplicación se ejecuta como una aplicación Java SE simple, todo lo que tenemos que hacer es colocar el archivo de persistencia, las clases de aplicación que usan las entidades y los JAR del proveedor de persistencia en la ruta de clases cuando se ejecuta el programa.
+
+## Resumen
+
+Este capítulo analizó lo suficiente de los conceptos básicos de la API de persistencia de Java para desarrollar y ejecutar una aplicación simple en un tiempo de ejecución de Java SE.
+
+Comenzamos discutiendo la entidad, cómo definir una y cómo convertir una clase Java existente en una. Hablamos de los administradores de entidades y cómo se obtienen y construyen en el entorno Java SE.
+
+El siguiente paso fue crear una instancia de la entidad y usar el administrador de la entidad para conservarla en la base de datos. Después de insertar una nueva entidad, podríamos recuperarla nuevamente y luego eliminarla. También hicimos algunas actualizaciones y nos aseguramos de que los cambios se volvieran a escribir en la base de datos.
+
+Hablamos sobre la API de transacciones locales de recursos y cómo usarla. Luego repasamos algunos de los diferentes tipos de consultas y cómo definirlas y ejecutarlas. Finalmente, agregamos todas estas técnicas y las combinamos en una aplicación simple que podemos ejecutar de forma aislada de un entorno empresarial.
+
+En el próximo capítulo, analizamos el impacto del entorno Java EE al desarrollar aplicaciones empresariales utilizando la API de persistencia de Java.
+
+#### Notas al pie
+
+1
+Peter P. Chen, “El modelo entidad-relación: hacia una vista unificada de los datos”, Transacciones ACM en sistemas de base de datos 1, no. 1 (1976): 9–36.
+
+ 
+2
+En la mayoría de los casos, esto es un requisito, pero en determinadas configuraciones, es posible que la transacción no se inicie hasta después de la operación.
+
+ 
+3
+Las anotaciones sobre los métodos setter simplemente se ignorarán.
