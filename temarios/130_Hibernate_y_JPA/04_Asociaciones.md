@@ -3421,9 +3421,259 @@ En la Base de Datos podemos ver que lo que se nos ha generado es la tabla `Addre
 
 Esto sería el tratamiento unidireccional de las asociaciones Muchos a Muchos.
 
+### :computer: Código Completo - 0130-14-HibernateJPA_ManyToManyUni
+
+
+`pom.xml`
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.openwebinars.hibernate.hibernatejpamanytomany</groupId>
+	<artifactId>0130-14-HibernateJPA_ManyToManyUni</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>0130-14-HibernateJPA_ManyToManyUni</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.18.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+`persistence.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="ManyToManyUni" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>com.openwebinars.hibernate.hibernatejpamanytomanyuni.Person</class>
+		<class>com.openwebinars.hibernate.hibernatejpamanytomanyuni.Address</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate?serverTimezone=Europe/Madrid"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+`Person`
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytomanyuni;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class Person {
+	
+   @Id
+   @GeneratedValue
+   private Long id;
+   
+   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   private List<Address> addresses = new ArrayList<>();
+
+   public Person() {
+   }
+
+   public List<Address> getAddresses() {
+      return addresses;
+   }
+
+}
+```
+
+`Address`
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytomanyuni;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Address {
+	
+   @Id
+   @GeneratedValue
+   private Long id;
+
+   private String street;
+
+   private String number;
+
+   public Address() {
+   }
+
+   public Address(String street, String number) {
+      this.street = street;
+      this.number = number;
+   }
+
+   public Long getId() {
+      return id;
+   }
+
+   public String getStreet() {
+      return street;
+   }
+
+   public String getNumber() {
+      return number;
+   }
+
+}
+```
+
+`App`
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytomanyuni;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Asociaciones ManyToMany unidireccionales
+ *
+ */
+public class App {
+   public static void main(String[] args) {
+      // Configuramos el EMF a través de la unidad de persistencia
+      EntityManagerFactory emf = Persistence.createEntityManagerFactory("ManyToManyUni");
+      
+      // Generamos un EntityManager
+      EntityManager em = emf.createEntityManager();
+
+      // Iniciamos una transacción
+      em.getTransaction().begin();
+
+      Person person1 = new Person();
+      Person person2 = new Person();
+
+      Address address1 = new Address("Rue del Percebe", "13");
+      Address address2 = new Address("Av. de la Constitución", "1");
+
+      person1.getAddresses().add(address1);
+      person1.getAddresses().add(address2);
+
+      person2.getAddresses().add(address1);
+
+      em.persist(person1);
+      em.persist(person2);
+
+      em.flush();
+
+      person1.getAddresses().remove(address1);
+
+      // Commiteamos la transacción
+      em.getTransaction().commit();
+
+      // Cerramos el EntityManager
+      em.close();
+      emf.close();
+   }
+}
+```
+
 <img src="images/13-03.png">
 
 ¿Cómo sería un tratamiento bidireccional? 
+
 AQUIIIII
 Este tratamiento tiene un poco más de empaque y al igual que en anteriores ocasiones lo haríamos añadiendo una asociación en este caso del mismo tipo many-to-many el lado opuesto es decir en el lado a ver es que estaría mapeado a la asociación Benito menni que ya hemos definido anteriormente de esa manera manejaremos las personas una lista de direcciones direcciones una lista de personas jurídicas que la asociación que tenemos establecido en la clase persona no hemos completado con algunos atributos más bueno en este caso tendríamos aquí la los métodos qué emplean para añadir a y para eliminar lista que como hemos visto ese tratamiento del que hemos hablado antes el p al manejar tablas que se llamen igualhemos dicho que va a tener un número de registro y que va a ser un líder natural se lo vamos a a proporcionar bien en lugar de ponerle un nombre se han generado las tablas la tabla address la tabla peso personajes tal y como hemos visto antes es decir a nivel relacional hay pocos cambios lo único que hayamos añadido en las clases entidad lo único que vamos a tener a nuestra disposición tanto en el lado como en la lista de direcciones en este caso que ya lo teníamos en el unidireccional y aquí en este caso pues son las que son propietarios de esta dirección en principio ya habremos terminado con la asociación es muchos a muchos lo que pasa es que bueno pues existe una situación algo especial que se nos puede presentar se llaman las asociaciones mucho a mucho con atributos extra supongamos que bueno a la asociación muchos a muchos que hemos visto antes entre persona y dirección bueno pues existe por ahí algún atributo que no no encaja en ninguna de las dos entidades como por ejemplo podría ser el nombre de esa dirección pero haciendo referencia a que bueno pues la dirección en particular para alguien puede ser no pues su vivienda habitual y para otro puede ser su dirección de trabajo no para un empleado del hogar si quisiéramos añadir atributo y atributo pues no sería ni le el lado peso ni del lado Alex sino que sería de las asociaciones a esa situación en ese caso y tal y como tenemos representados en el diagrama tenemos una clase de asociación qué es una asociación especial que aporta atributos extra si bien es cierto que no es exclusivo de la asociación es mucho mucho si es el caso más frecuente en el que nos podemos encontrar qué podemos hacer para manejarla bien nos va a dar bastante guerra contratar de manejar este tipo de caso y vamos a necesitar dar una serie de paso el primero hacer generar una nueva entidad que tendrá el nombre de la clase de asociación en el nuestro caso personales asociación muchos a muchos que teníamos la vamos a romper la cama en dos parejas de asociaciones onetomany y many to one de manera que de esa forma vamos a mantener la semántica de la asociación entre personas y direcciones pero vamos a poder manejar la atributos está cómo pasó añadido como ibermir tampoco los vas a manejar los vales car manejar de una manera sencilla las claves primarias compuestas decir las que están formadas por más de un atributo vamos a necesitar de una clase que vamos a tener que crear específicamente que la llamaremos person address aire y que nos va a permitir el manejo de esa clave primaria compuesta por aquí llevamos dando alguna en el caso de la entidad dirección bueno pues lo que haríamos sería olvidarnos un poco de lo que sucede con person y centrarlo en bueno pues en este nuevo enfoque y ver qué sucede entre Avilés y personales en este caso tendríamos que bueno pues una dirección un address tendría pues muchos elementos de tipo person address frente a qué bueno pues un personaje solamente se va a asociarlo en ese caso tendríamos una asociación onetomany y que parezcan apeada en esa nueva clase de entidad que se llama personales en el lado opuesto en peso pues nos va a suceder algo parecido vamos a tener también una lista de elementos personales que estará mapeado por una asociación many-to-one que encontraremos allí y equipo de mujer como la clase personales que es una entidad va a tener bueno pues eso que ambos cada uno con la anotación de identificado sin solamente lo dejáramos sin dar ningún paso + hibernate se queje ni nos diría que no se puede utilizar para crear clave primaria compuesta que necesitamos para manejar bueno tenemos distintos enfoques uno de ellos es el uso de anotaciónimplementar serializable que tenga keter setters implementación del método y bueno en este caso va a representar las claves externas los dos y de numéricos en este caso son de tipo long los va a almacenar aquí de esta manera mediante las ya si podemos anotar con arroba IBI porque realmente lo que está haciendo y verme por debajo es para este campo que hemos anotado como aire lo que hace es buscarlo aquí y para ese otro que bueno todo lo está buscando aquí la clase y de clase de esta forma hemos podido hacer una clave primaria puesta bien a este elemento el personales lo veremos ahora después en el ejemplo podemos añadir los atributos que nosotros como no podía ser de otra manera vamos a necesitar de una clase que nos va a ayudar a manejar esta asociación de forma que bueno pues crearemos un elemento personales donde le pasaremos los datos que son necesarios y añadiremos este personales a las asociaciones mi amor es ejemplo si asociaciones que hacen referencia many-to-one que tenemos dentro de personajes además de bueno pues algún que otro atributo aquí encontramos cómo hacemos referencia mediante la notación a ivi Clash a esta clase que implementa serializable que implementa como podéis comprobar en este caso hemos utilizado el hashCode equals que autogenera eclipse que todavía en la clase aplicación encontramos cómo gestionar esta asociación las asociaciones la mediante el nombre si nos vamos ahora bachillerato podemos comprobar como tenemos tablas en el caso de las direcciones posibles direcciones en el caso de las personas pues tenemos estas de aquí en este caso personales se ha creado con una tabla que refleje a una entidad vale de que no tenga el idioma Jo y cómo podemos comprobar mediante ese eyeglass lo que está almacenando son bueno por la clave externa hacia las dos entidades que asocia así como el nombre que no añadido como atributo de esta forma fue está haciendo tabla Joy y además está almacenando los atributos extra que necesitamos con esta lección hemos terminado con el capítulo de las asociaciones y a partir de ahora seguiremos trabajando con otros capítulos de referencia directa auron
 
