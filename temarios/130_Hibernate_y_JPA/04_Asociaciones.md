@@ -3423,6 +3423,7 @@ Esto sería el tratamiento unidireccional de las asociaciones Muchos a Muchos.
 
 ### :computer: Código Completo - 0130-14-HibernateJPA_ManyToManyUni
 
+<img src="images/14-07-ej.png">
 
 `pom.xml`
 ```html
