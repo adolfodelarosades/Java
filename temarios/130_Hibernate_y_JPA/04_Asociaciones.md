@@ -3260,12 +3260,177 @@ R= La sentencia commit provoca que se finalice la transacción y se confirmen lo
 
 ## Transcripción
 
-hola a todos vamos a acabar el capítulo de trabajo con la asociación es con las que más guerra no puede ser que son las asociaciones muchos famosos este tipo de asociaciones tienen también un tratamiento unidireccional y un tratamiento bidireccional comencemos con el unidireccional la asociación como no podía ser de otra manera también tienen su propia anotaciónalmacenar la asociación con las diferentes entidades del lado de enfrente en este caso tenemos personas y tenemos direcciones colocaríamos la asociación la entidad persona y almacén haríamos la lista de direcciones con las cuales pues está asociado el tratamiento el ciclo de vida que tendría como podemos comprobar pues sería que encajamos las direcciones dentro del marco de trabajo de las personas con las notaciones encargadas de forma que sí bueno pues vamos añadiendo vamos eliminando asociaciones de la lista de la persona podrían realizarse en caja de la operación en este caso hacemos la la cascada con la persistencia y la actualización el borrado de problema en las elecciones mini tu mini unidireccionales porque lo que va haciendo hibernate en este caso cuando eliminamos una es borrarlas todas y posteriormente volver a insertar las que todavía quedan la verdad es que eso es algo algo que puede penalizar no en cuestión de rendimiento veamos un ejemplo de asociación de mí tú viniste como decíamos teníamos persona y dirección en este caso la dirección hace ningún tipo de referencia la persona porque sería la entidad distancia de la entidad a tres ballet tendríamos persona direcciones por simplicidad le hemos quitado lo demás atributos a la persona vamos a ejecuta y si no vamos podemos ver que lo que se nos ha generado es la tabla de direcciones la tabla de persona y una tabla que va a ser indispensable para todas las asociaciones muchos somos otro tratamiento relacional que quedan por lo menos otro lógico está tabla yo en sería la quería de pegamento entre la tabla peso y la tabla podríamos comprobar vale como hemos podido comprobar se hace un borrado y también se hace alguna inserción en este caso solamente para la primera o la segunda persona tendríamos las dos direcciones porque lo que hemos borrado ha sido una una redonda esto sería en tratamiento unidireccional de las asociaciones muchos a muchos cómo sería un tratamiento bidireccional este tratamiento tiene un poco más de empaque y al igual que en anteriores ocasiones lo haríamos añadiendo una asociación en este caso del mismo tipo many-to-many el lado opuesto es decir en el lado a ver es que estaría mapeado a la asociación Benito menni que ya hemos definido anteriormente de esa manera manejaremos las personas una lista de direcciones direcciones una lista de personas jurídicas que la asociación que tenemos establecido en la clase persona no hemos completado con algunos atributos más bueno en este caso tendríamos aquí la los métodos qué emplean para añadir a y para eliminar lista que como hemos visto ese tratamiento del que hemos hablado antes el p al manejar tablas que se llamen igualhemos dicho que va a tener un número de registro y que va a ser un líder natural se lo vamos a a proporcionar bien en lugar de ponerle un nombre se han generado las tablas la tabla address la tabla peso personajes tal y como hemos visto antes es decir a nivel relacional hay pocos cambios lo único que hayamos añadido en las clases entidad lo único que vamos a tener a nuestra disposición tanto en el lado como en la lista de direcciones en este caso que ya lo teníamos en el unidireccional y aquí en este caso pues son las que son propietarios de esta dirección en principio ya habremos terminado con la asociación es muchos a muchos lo que pasa es que bueno pues existe una situación algo especial que se nos puede presentar se llaman las asociaciones mucho a mucho con atributos extra supongamos que bueno a la asociación muchos a muchos que hemos visto antes entre persona y dirección bueno pues existe por ahí algún atributo que no no encaja en ninguna de las dos entidades como por ejemplo podría ser el nombre de esa dirección pero haciendo referencia a que bueno pues la dirección en particular para alguien puede ser no pues su vivienda habitual y para otro puede ser su dirección de trabajo no para un empleado del hogar si quisiéramos añadir atributo y atributo pues no sería ni le el lado peso ni del lado Alex sino que sería de las asociaciones a esa situación en ese caso y tal y como tenemos representados en el diagrama tenemos una clase de asociación qué es una asociación especial que aporta atributos extra si bien es cierto que no es exclusivo de la asociación es mucho mucho si es el caso más frecuente en el que nos podemos encontrar qué podemos hacer para manejarla bien nos va a dar bastante guerra contratar de manejar este tipo de caso y vamos a necesitar dar una serie de paso el primero hacer generar una nueva entidad que tendrá el nombre de la clase de asociación en el nuestro caso personales asociación muchos a muchos que teníamos la vamos a romper la cama en dos parejas de asociaciones onetomany y many to one de manera que de esa forma vamos a mantener la semántica de la asociación entre personas y direcciones pero vamos a poder manejar la atributos está cómo pasó añadido como ibermir tampoco los vas a manejar los vales car manejar de una manera sencilla las claves primarias compuestas decir las que están formadas por más de un atributo vamos a necesitar de una clase que vamos a tener que crear específicamente que la llamaremos person address aire y que nos va a permitir el manejo de esa clave primaria compuesta por aquí llevamos dando alguna en el caso de la entidad dirección bueno pues lo que haríamos sería olvidarnos un poco de lo que sucede con person y centrarlo en bueno pues en este nuevo enfoque y ver qué sucede entre Avilés y personales en este caso tendríamos que bueno pues una dirección un address tendría pues muchos elementos de tipo person address frente a qué bueno pues un personaje solamente se va a asociarlo en ese caso tendríamos una asociación onetomany y que parezcan apeada en esa nueva clase de entidad que se llama personales en el lado opuesto en peso pues nos va a suceder algo parecido vamos a tener también una lista de elementos personales que estará mapeado por una asociación many-to-one que encontraremos allí y equipo de mujer como la clase personales que es una entidad va a tener bueno pues eso que ambos cada uno con la anotación de identificado sin solamente lo dejáramos sin dar ningún paso + hibernate se queje ni nos diría que no se puede utilizar para crear clave primaria compuesta que necesitamos para manejar bueno tenemos distintos enfoques uno de ellos es el uso de anotaciónimplementar serializable que tenga keter setters implementación del método y bueno en este caso va a representar las claves externas los dos y de numéricos en este caso son de tipo long los va a almacenar aquí de esta manera mediante las ya si podemos anotar con arroba IBI porque realmente lo que está haciendo y verme por debajo es para este campo que hemos anotado como aire lo que hace es buscarlo aquí y para ese otro que bueno todo lo está buscando aquí la clase y de clase de esta forma hemos podido hacer una clave primaria puesta bien a este elemento el personales lo veremos ahora después en el ejemplo podemos añadir los atributos que nosotros como no podía ser de otra manera vamos a necesitar de una clase que nos va a ayudar a manejar esta asociación de forma que bueno pues crearemos un elemento personales donde le pasaremos los datos que son necesarios y añadiremos este personales a las asociaciones mi amor es ejemplo si asociaciones que hacen referencia many-to-one que tenemos dentro de personajes además de bueno pues algún que otro atributo aquí encontramos cómo hacemos referencia mediante la notación a ivi Clash a esta clase que implementa serializable que implementa como podéis comprobar en este caso hemos utilizado el hashCode equals que autogenera eclipse que todavía en la clase aplicación encontramos cómo gestionar esta asociación las asociaciones la mediante el nombre si nos vamos ahora bachillerato podemos comprobar como tenemos tablas en el caso de las direcciones posibles direcciones en el caso de las personas pues tenemos estas de aquí en este caso personales se ha creado con una tabla que refleje a una entidad vale de que no tenga el idioma Jo y cómo podemos comprobar mediante ese eyeglass lo que está almacenando son bueno por la clave externa hacia las dos entidades que asocia así como el nombre que no añadido como atributo de esta forma fue está haciendo tabla Joy y además está almacenando los atributos extra que necesitamos con esta lección hemos terminado con el capítulo de las asociaciones y a partir de ahora seguiremos trabajando con otros capítulos de referencia directa auron
-
+Hola a todos, vamos a acabar el capítulo de trabajo con las asociaciones con las que más guerra nos pueden dar que son las **asociaciones Muchos a Muchos**. 
 
 <img src="images/13-01.png">
 
+Este tipo de asociaciones tienen también un tratamiento unidireccional y un tratamiento bidireccional, comencemos con el tratamiento unidireccional.
+
 <img src="images/13-02.png">
+
+Las asociación Many To Many como no podía ser de otra manera también tienen su propia anotación que es `@ManyToMany` y como cabía esperar también van a necesitar de una colección en este caso vamos a trabajar con una lista de elementos que van a almacenar las asociaciones con las diferentes entidades del lado de enfrente en este caso tenemos Personas y tenemos Direcciones, colocaríamos la asociación en la entidad Persona y almacenaríamos la lista de Direcciones con las cuales está asociado. El tratamiento del ciclo de vida que tendría como podemos comprobar sería que encajamos las Direcciones dentro del marco de trabajo de las Personas con las anotaciones encargadas, de forma que sí vamos añadiendo o vamos eliminando asociaciones de la lista de la Persona podrían realizarse en cascada de la operación, en este caso hacemos la cascada con la persistencia y la actualización, el borrado es un problema en las asociacciones Many To Many unidireccionales porque por detrás lo que va haciendo Hibernate en este caso cuando eliminamos una, es borrarlas todas y posteriormente volver a insertar las que todavía quedan, la verdad es que eso es algo que puede penalizarnos en cuestión de rendimiento.
+
+Veamos un ejemplo de asociación de Many To Many como decíamos teníamos Persona y Dirección
+
+`Person`
+
+```java
+ackage com.openwebinars.hibernate.hibernatejpamanytomany;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class Person {
+	
+   @Id
+   @GeneratedValue
+   private Long id;
+   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   private List<Address> addresses = new ArrayList<>();
+
+   public Person() {
+   }
+
+   public List<Address> getAddresses() {
+      return addresses;
+   }
+
+}
+```
+
+`Address`
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytomany;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Address {
+	
+   @Id
+   @GeneratedValue
+   private Long id;
+
+   private String street;
+
+   private String number;
+
+   public Address() {
+   }
+
+   public Address(String street, String number) {
+      this.street = street;
+      this.number = number;
+   }
+
+   public Long getId() {
+      return id;
+   }
+
+   public String getStreet() {
+      return street;
+   }
+
+   public String getNumber() {
+      return number;
+   }
+
+}
+```
+
+En este caso la Dirección no hace ningún tipo de referencia a la Persona porque sería la entidad `Person` la que tendría una lista de instancias de la entidad `Address`.
+
+En la clase de `App` tenemos lo siguiente:
+
+`App`
+
+```java
+package com.openwebinars.hibernate.hibernatejpamanytomany;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * Asociaciones ManyToMany unidireccionales
+ *
+ */
+public class App {
+   public static void main(String[] args) {
+		
+      //Configuramos el EMF a través de la unidad de persistencia
+      EntityManagerFactory emf = Persistence.createEntityManagerFactory("ManyToManyUni");
+
+      //Generamos un EntityManager
+      EntityManager em = emf.createEntityManager();
+
+      //Iniciamos una transacción
+      em.getTransaction().begin();
+		
+      Person person1 = new Person();
+      Person person2 = new Person();
+
+      Address address1 = new Address( "Rue del Percebe", "13" );
+      Address address2 = new Address( "Av. de la Constitución", "1" );
+
+      person1.getAddresses().add(address1);
+      person1.getAddresses().add(address2);
+
+      person2.getAddresses().add(address1);
+
+      em.persist(person1);
+      em.persist(person2);
+
+      em.flush();
+
+      person1.getAddresses().remove( address1 );
+
+      //Commiteamos la transacción
+      em.getTransaction().commit();
+		
+      //Cerramos el EntityManager
+      em.close();
+      emf.close();
+		
+   }
+}
+```
+
+Por simplicidad le hemos quitado lo demás atributos a la persona vamos a ejecuta.
+
+<img src="images/14-01-ej.png">
+<img src="images/14-02-ej.png">
+<img src="images/14-03-ej.png">
+<img src="images/14-04-ej.png">
+<img src="images/14-05-ej.png">
+<img src="images/14-06-ej.png">
+
+
+
+En la Base de Datos podemos ver que lo que se nos ha generado es la tabla `Address`, la tabla `Person`, la tabla `Person_Address` y la tabla `hibernate_secuence`. La tabla `Person_Address` es una tabla join que va a ser indispensable para todas las asociaciones Muchos a Muchos, no hay otro tratamiento relacional que darle por lo menos otro lógico. Está tabla join sería la que haría de pegamento entre la tabla `Person` y la tabla `Address`. Podemos comprobar como la Dirección 2 esta asiciada a la Persona 4 y la Dirección 3 esta Asocidada a la Persona 1. (También habíamos asociado la Dirección 2 esta asiciada a la Persona 1, pero antes de commitear la removimos por eso no aparece reflejada en la BD, si comentamos esa instrucción podemos ver como si se rellena el registro).
+
+Esto sería el tratamiento unidireccional de las asociaciones Muchos a Muchos.
+
+<img src="images/13-03.png">
+
+¿Cómo sería un tratamiento bidireccional? 
+AQUIIIII
+Este tratamiento tiene un poco más de empaque y al igual que en anteriores ocasiones lo haríamos añadiendo una asociación en este caso del mismo tipo many-to-many el lado opuesto es decir en el lado a ver es que estaría mapeado a la asociación Benito menni que ya hemos definido anteriormente de esa manera manejaremos las personas una lista de direcciones direcciones una lista de personas jurídicas que la asociación que tenemos establecido en la clase persona no hemos completado con algunos atributos más bueno en este caso tendríamos aquí la los métodos qué emplean para añadir a y para eliminar lista que como hemos visto ese tratamiento del que hemos hablado antes el p al manejar tablas que se llamen igualhemos dicho que va a tener un número de registro y que va a ser un líder natural se lo vamos a a proporcionar bien en lugar de ponerle un nombre se han generado las tablas la tabla address la tabla peso personajes tal y como hemos visto antes es decir a nivel relacional hay pocos cambios lo único que hayamos añadido en las clases entidad lo único que vamos a tener a nuestra disposición tanto en el lado como en la lista de direcciones en este caso que ya lo teníamos en el unidireccional y aquí en este caso pues son las que son propietarios de esta dirección en principio ya habremos terminado con la asociación es muchos a muchos lo que pasa es que bueno pues existe una situación algo especial que se nos puede presentar se llaman las asociaciones mucho a mucho con atributos extra supongamos que bueno a la asociación muchos a muchos que hemos visto antes entre persona y dirección bueno pues existe por ahí algún atributo que no no encaja en ninguna de las dos entidades como por ejemplo podría ser el nombre de esa dirección pero haciendo referencia a que bueno pues la dirección en particular para alguien puede ser no pues su vivienda habitual y para otro puede ser su dirección de trabajo no para un empleado del hogar si quisiéramos añadir atributo y atributo pues no sería ni le el lado peso ni del lado Alex sino que sería de las asociaciones a esa situación en ese caso y tal y como tenemos representados en el diagrama tenemos una clase de asociación qué es una asociación especial que aporta atributos extra si bien es cierto que no es exclusivo de la asociación es mucho mucho si es el caso más frecuente en el que nos podemos encontrar qué podemos hacer para manejarla bien nos va a dar bastante guerra contratar de manejar este tipo de caso y vamos a necesitar dar una serie de paso el primero hacer generar una nueva entidad que tendrá el nombre de la clase de asociación en el nuestro caso personales asociación muchos a muchos que teníamos la vamos a romper la cama en dos parejas de asociaciones onetomany y many to one de manera que de esa forma vamos a mantener la semántica de la asociación entre personas y direcciones pero vamos a poder manejar la atributos está cómo pasó añadido como ibermir tampoco los vas a manejar los vales car manejar de una manera sencilla las claves primarias compuestas decir las que están formadas por más de un atributo vamos a necesitar de una clase que vamos a tener que crear específicamente que la llamaremos person address aire y que nos va a permitir el manejo de esa clave primaria compuesta por aquí llevamos dando alguna en el caso de la entidad dirección bueno pues lo que haríamos sería olvidarnos un poco de lo que sucede con person y centrarlo en bueno pues en este nuevo enfoque y ver qué sucede entre Avilés y personales en este caso tendríamos que bueno pues una dirección un address tendría pues muchos elementos de tipo person address frente a qué bueno pues un personaje solamente se va a asociarlo en ese caso tendríamos una asociación onetomany y que parezcan apeada en esa nueva clase de entidad que se llama personales en el lado opuesto en peso pues nos va a suceder algo parecido vamos a tener también una lista de elementos personales que estará mapeado por una asociación many-to-one que encontraremos allí y equipo de mujer como la clase personales que es una entidad va a tener bueno pues eso que ambos cada uno con la anotación de identificado sin solamente lo dejáramos sin dar ningún paso + hibernate se queje ni nos diría que no se puede utilizar para crear clave primaria compuesta que necesitamos para manejar bueno tenemos distintos enfoques uno de ellos es el uso de anotaciónimplementar serializable que tenga keter setters implementación del método y bueno en este caso va a representar las claves externas los dos y de numéricos en este caso son de tipo long los va a almacenar aquí de esta manera mediante las ya si podemos anotar con arroba IBI porque realmente lo que está haciendo y verme por debajo es para este campo que hemos anotado como aire lo que hace es buscarlo aquí y para ese otro que bueno todo lo está buscando aquí la clase y de clase de esta forma hemos podido hacer una clave primaria puesta bien a este elemento el personales lo veremos ahora después en el ejemplo podemos añadir los atributos que nosotros como no podía ser de otra manera vamos a necesitar de una clase que nos va a ayudar a manejar esta asociación de forma que bueno pues crearemos un elemento personales donde le pasaremos los datos que son necesarios y añadiremos este personales a las asociaciones mi amor es ejemplo si asociaciones que hacen referencia many-to-one que tenemos dentro de personajes además de bueno pues algún que otro atributo aquí encontramos cómo hacemos referencia mediante la notación a ivi Clash a esta clase que implementa serializable que implementa como podéis comprobar en este caso hemos utilizado el hashCode equals que autogenera eclipse que todavía en la clase aplicación encontramos cómo gestionar esta asociación las asociaciones la mediante el nombre si nos vamos ahora bachillerato podemos comprobar como tenemos tablas en el caso de las direcciones posibles direcciones en el caso de las personas pues tenemos estas de aquí en este caso personales se ha creado con una tabla que refleje a una entidad vale de que no tenga el idioma Jo y cómo podemos comprobar mediante ese eyeglass lo que está almacenando son bueno por la clave externa hacia las dos entidades que asocia así como el nombre que no añadido como atributo de esta forma fue está haciendo tabla Joy y además está almacenando los atributos extra que necesitamos con esta lección hemos terminado con el capítulo de las asociaciones y a partir de ahora seguiremos trabajando con otros capítulos de referencia directa auron
+
+
+
+
+
 
 <img src="images/13-03.png">
 
