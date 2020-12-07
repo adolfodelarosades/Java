@@ -948,15 +948,126 @@ public class ProjectServlet extends HttpServlet {
     }
 }
 ```
+
+## Poniendolo todo junto
+
+Ahora que hemos analizado el modelo de componentes de la aplicación y los servicios disponibles como parte de un servidor de aplicaciones Java EE, podemos volver a visitar el ejemplo de `EmployeeService` del capítulo anterior y llevarlo al entorno Java EE. A lo largo del camino, proporcionamos código de ejemplo para mostrar cómo encajan los componentes y cómo se relacionan con el ejemplo de Java SE.
+
+### DEFINIENDO EL COMPONENTE
+
+Para comenzar, consideremos la definición de la clase `EmployeeService` del Listado 2-9 en el Capítulo 2. El objetivo de esta clase es proporcionar operaciones comerciales relacionadas con el mantenimiento de los datos de los empleados. Al hacerlo, encapsula todas las operaciones de persistencia. Para introducir esta clase en el entorno Java EE, primero debemos decidir cómo se debe representar. El patrón de servicio exhibido por la clase sugiere un bean de sesión o un componente similar. Debido a que los métodos de negocio del bean no tienen dependencia entre sí, podemos decidir además que cualquier bean sin estado, como un bean de sesión sin estado, es adecuado. De hecho, este bean demuestra un patrón de diseño muy típico llamado *fachada de sesión(session façade)*, <sup>4</sup> en el que se utiliza un bean de sesión sin estado para proteger a los clientes de tratar con una API de persistencia particular. Para convertir la clase `EmployeeService` en un bean de sesión sin estado, solo necesitamos anotarlo con `@Stateless`.
+
+En el ejemplo de Java SE, la clase `EmployeeService` debe crear y mantener su propia instancia de administrador de entidad. Podemos reemplazar esta lógica con inyección de dependencia para adquirir el administrador de la entidad automáticamente. Habiendo decidido un bean de sesión sin estado y una inyección de dependencia, el bean de sesión sin estado convertido se muestra en el Listado 3-29. Con la excepción de cómo se adquiere el administrador de la entidad, el resto de la clase es idéntico. Esta es una característica importante de la API de persistencia de Java porque la misma interfaz `EntityManager` se puede utilizar tanto dentro como fuera del servidor de aplicaciones.
+
+***Listado 3-29*** El EmployeeService Session Bean
+
 ```java
+@Stateless
+public class EmployeeService {
+
+   @PersistenceContext(unitName="EmployeeService")
+   protected EntityManager em;
+   
+   EntityManager getEntityManager() {
+        return em;
+   }
+   
+   public Employee createEmployee(int id, String name, long salary) {
+      Employee emp = new Employee(id);
+      emp.setName(name);
+      emp.setSalary(salary);
+      getEntityManager().persist(emp);
+      return emp;
+   }
+    
+   public void removeEmployee(int id) {
+      Employee emp = findEmployee(id);
+      if (emp != null) {
+         getEntityManager().remove(emp);
+      }
+   }
+    
+   public Employee changeEmployeeSalary(int id, long newSalary) {
+      Employee emp = findEmployee(id);
+      if (emp != null) {
+         emp.setSalary(newSalary);
+      }
+      return emp;
+   }
+    
+   public Employee findEmployee(int id) {
+      return getEntityManager().find(Employee.class, id);
+   }
+    
+   public List<Employee> findAllEmployees() {
+      TypedQuery query = getEntityManager().createQuery("SELECT e FROM Employee e", Employee.class);
+      return query.getResultList();
+   }
+}
 ```
-``
+
+### DEFINIENDO LA INTERFACE USER 
+
+La siguiente pregunta a considerar es cómo se accederá al bean. Una interfaz web es un método de presentación común para aplicaciones empresariales. Para demostrar cómo un servlet puede utilizar este bean de sesión sin estado, considere el Listado 3-30. Los parámetros de la solicitud se interpretan para determinar la acción, que luego se lleva a cabo invocando métodos en el bean `EmployeeService` inyectado. Aunque solo se describe la primera acción, puede ver cómo esto podría extenderse fácilmente para manejar cada una de las operaciones definidas en EmployeeService.
+
+***Listado 3-30*** Uso del Bean de Sesión `EmployeeService` desde un Servlet
+
 ```java
+public class EmployeeServlet extends HttpServlet {
+   @EJB 
+   EmployeeService bean;
+   
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+      String action = request.getParameter("action");
+      if (action.equals("create")) {
+         String id = request.getParameter("id");
+         String name = request.getParameter("name");
+         String salary = request.getParameter("salary");
+         bean.createEmployee(Integer.parseInt(id), name, Long.parseLong(salary));
+      }
+      // ...
+    }
+}
 ```
 
+### PACKAGING IT UP
 
+En el entorno Java EE, se pueden omitir muchas propiedades necesarias en el archivo `persistence.xml` para Java SE. En el Listado 3-31, verá el archivo `persistence.xml` del Listado 2-11 convertido para su implementación como parte de una aplicación Java EE. En lugar de las propiedades de JDBC para crear una conexión, ahora declaramos que el administrador de la entidad debe usar el nombre de la fuente de datos `jdbc/EmployeeDS`. Si la fuente de datos se definió para estar disponible en el espacio de nombres de la aplicación en lugar del contexto de nomenclatura del componente local, en su lugar podríamos usar el nombre de la fuente de datos de `java:app/jdbc/EmployeeDS`. El atributo de tipo de transacción también se ha eliminado para permitir que la unidad de persistencia se establezca por defecto en JTA. El servidor de aplicaciones encontrará automáticamente las clases de entidad, por lo que incluso la lista de clases se ha eliminado. Este ejemplo representa la configuración mínima ideal de Java EE.
 
+Debido a que la lógica empresarial que utiliza esta unidad de persistencia se implementa en un bean de sesión sin estado, el archivo `persistence.xml` normalmente se ubicaría en el directorio `META-INF` del correspondiente EJB JAR, o en el directorio `WEB-INF/classes/META-INF` del WAR. Describimos completamente el archivo `persistence.xml` y su ubicación dentro de una aplicación Java EE en el Capítulo 14.
 
+***Listado 3-31*** Definición de una Unidad de Persistencia en Java EE
 
+```html
+<persistence>
+   <persistence-unit name="EmployeeService">
+      <jta-data-source>jdbc/EmployeeDS</jta-data-source>
+   </persistence-unit>
+</persistence>
+```
 
+## Resumen
 
+Sería imposible proporcionar detalles sobre todas las características de la plataforma Java EE en un solo capítulo. Sin embargo, no podemos poner JPA en contexto sin explicar el entorno del servidor de aplicaciones en el que se utilizará. Con este fin, presentamos las tecnologías que son de mayor relevancia para el desarrollador que utiliza la persistencia en aplicaciones empresariales.
+
+Comenzamos con una introducción a los componentes de software empresarial y presentamos el modelo de componentes EJB. Argumentamos que el uso de componentes es más importante que nunca e identificamos algunos de los beneficios que se obtienen al aprovecharlos. Introdujimos los fundamentos de los beans de sesión sin estado, con estado y singleton y mostramos la sintaxis para declararlos, así como la diferencia en el estilo de interacción entre ellos.
+
+A continuación, analizamos la gestión de dependencias en los servidores de aplicaciones Java EE. Discutimos los tipos de anotaciones de referencia y cómo declararlos. También analizamos la diferencia entre la dependency lookup (búsqueda de dependencia ) y la ependency injection (inyección de dependencia). En el caso de la inyección, analizamos la diferencia entre la inyección de campo y la de incubadora. Luego exploramos cada uno de los tipos de recursos, demostrando cómo adquirir e inyectar recursos de servidor y JPA.
+
+Sobre la base de la inyección de recursos Java EE, pasamos a presentar el modelo CDI con su noción generalizada de bean administrado. Enumeramos los ámbitos predefinidos y explicamos los contextos que usa CDI para almacenar en caché las instancias contextuales que inyecta. Mostramos cómo los calificadores pueden contribuir con restricciones adicionales al proceso de resolución de la inyección y cómo se pueden definir los productores para devolver las instancias que el contenedor CDI usa para la inyección. Luego demostramos una forma de utilizar a los productores para inyectar recursos de persistencia calificados.
+
+En la sección sobre gestión de transacciones, analizamos JTA y su función en la creación de aplicaciones centradas en datos. Luego, analizamos la diferencia entre las transacciones administradas por bean y las transacciones administradas por contenedor para EJB y no EJB. Documentamos los diferentes tipos de atributos de transacción para los beans CMT y mostramos cómo controlar manualmente las transacciones administradas por beans.
+
+Concluimos el capítulo explorando cómo usar componentes Java EE con JPA convirtiendo la aplicación de ejemplo presentada en el capítulo anterior de una aplicación Java SE de línea de comandos a una aplicación basada en web que se ejecuta en un servidor de aplicaciones.
+
+Ahora que hemos introducido JPA en los entornos Java SE y Java EE, es hora de profundizar en la especificación en detalle. En el siguiente capítulo, comenzamos este viaje con el enfoque central de JPA: el mapeo relacional de objetos.
+
+#### Notas al pie
+
+**1** Todas las anotaciones utilizadas en este capítulo se definen en los paquetes `javax.ejb`, `javax.inject`, `javax.enterprise.inject` o `javax.annotation`.
+
+**2** Se excluyen las clases internas no estáticas.
+ 
+**3** Kapila Bogahapitiya, Sandeep Nair. *Mastering Java EE 8 Application Development. Paperback: 2018*
+
+**4** Alur et al., *Core J2EE Patterns*.
