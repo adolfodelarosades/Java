@@ -1045,93 +1045,93 @@ import com.jpapro.model.Employee;
 import com.jpapro.service.EmployeeService;
 
 public class EmployeeTestInteractive {
-	public static void main(String[] args) {
-		// Crear el EntityManager
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
-		EntityManager em = emf.createEntityManager();
+   public static void main(String[] args) {
+      
+      // Crear el EntityManager
+      EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
+      EntityManager em = emf.createEntityManager();
 
-		// Crear un Servicio
-		EmployeeService service = new EmployeeService(em);
+      // Crear un Servicio
+      EmployeeService service = new EmployeeService(em);
 		
-		
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        String accion ="";
-        int id;
-        try {
-        	while (true) {
-        		System.out.println("\n\n\n[L]istar| [A]ñadir | [E]liminar | [S]alir: \n\t\t\t");
-        		try {
-					accion = in.readLine();
-				} catch (IOException e1) {
-					break;
-				}
-                if ((accion.length() == 0) || accion.toUpperCase().charAt(0) == 'S') {
-                    break;
-                }
-                switch (accion.toUpperCase().charAt(0)) {
-                	case 'A':
-                		System.out.println("Introduce un valor entero para el ID del Empleado: \n\t\t\t");
-                		try {
-                            id = new Integer(in.readLine());
-                        } catch (NumberFormatException | IOException e) {
-                            break;
-                        }
-                    
-                        System.out.println("Introduce un valor para el Nombre del Empleado: \n\t\t\t");
-						String name ="";
-						try {
-							name = in.readLine();
-						} catch (IOException e) {
-							break;
-						}
+      BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+      String accion ="";
+      int id;
+      try {
+         while (true) {
+            System.out.println("\n\n\n[L]istar| [A]ñadir | [E]liminar | [S]alir: \n\t\t\t");
+            try {
+               accion = in.readLine();
+            } catch (IOException e1) {
+               break;
+            }
+            if ((accion.length() == 0) || accion.toUpperCase().charAt(0) == 'S') {
+               break;
+            }
+            switch (accion.toUpperCase().charAt(0)) {
+               case 'A':
+                  System.out.println("Introduce un valor entero para el ID del Empleado: \n\t\t\t");
+                  try {
+                     id = new Integer(in.readLine());
+                  } catch (NumberFormatException | IOException e) {
+                     break;
+                  }
+                  
+		  System.out.println("Introduce un valor para el Nombre del Empleado: \n\t\t\t");
+                  
+		  String name ="";
+                  try {
+                     name = in.readLine();
+                  } catch (IOException e) {
+                     break;
+                  }
 					
-						System.out.println("Introduce un valor entero para el Salario del Empleado: \n\t\t\t");
-						long salary;
-						try {
-							salary = new Long(in.readLine());
-						} catch (NumberFormatException | IOException e) {
-							break;
-						}
+                  System.out.println("Introduce un valor entero para el Salario del Empleado: \n\t\t\t");
+                  
+		  long salary;
+                  try {
+                     salary = new Long(in.readLine());
+                  } catch (NumberFormatException | IOException e) {
+                     break;
+                  }
                    
-						em.getTransaction().begin();
-						Employee emp = service.createEmployee(id, name, salary);
-						em.getTransaction().commit();
+                  em.getTransaction().begin();
+                  Employee emp = service.createEmployee(id, name, salary);
+                  em.getTransaction().commit();
                     
-						System.out.println("\n\nCreado " + emp);
-						break;
-                	case 'L':
-                        Collection<Employee> emps = service.findAllEmployees();
-                        System.out.println("\n\nEmpleados Encontrados: ");
-                        for (Employee e : emps)
-                            System.out.println("\t" + e);                        
-                        break;
-                	case 'E':
-                        System.out.println("Introduzca el valor entero para el ID del Empleado: \n\t\t\t");
-                        try {
-                            id = new Integer(in.readLine());
-                        } catch (NumberFormatException | IOException e) {
-                            break;
-                        }
+                  System.out.println("\n\nCreado " + emp);
+                  break;
+               case 'L':
+                  Collection<Employee> emps = service.findAllEmployees();
+                  System.out.println("\n\nEmpleados Encontrados: ");
+                  for (Employee e : emps)
+                     System.out.println("\t" + e);                        
+                  break;
+               case 'E':
+                  System.out.println("Introduzca el valor entero para el ID del Empleado: \n\t\t\t");
+                  try {
+                     id = new Integer(in.readLine());
+                  } catch (NumberFormatException | IOException e) {
+                     break;
+                  }
                         
-                        em.getTransaction().begin();
-                        service.removeEmployee(id);
-                        em.getTransaction().commit();
+                  em.getTransaction().begin();
+                  service.removeEmployee(id);
+                  em.getTransaction().commit();
                         
-                        System.out.println("\n\nEmpleado Eliminado: " + id);
-                        break;
-                	default:
-                        continue;
-               }
-        		
-        	}
-        } finally {        
-        	// Cerrar el EM y EMF cuando todo este hecho
-    		em.close();
-    		emf.close();
-        }
-	}
+                  System.out.println("\n\nEmpleado Eliminado: " + id);
+                  break;
+               default:
+                  continue;
+            }	
+         }
+      } finally {        
+         // Cerrar el EM y EMF cuando todo este hecho
+         em.close();
+         emf.close();
+      }
+   }
 }
-
 ```
 
 
