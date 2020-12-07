@@ -1134,8 +1134,9 @@ public class EmployeeTestInteractive {
 }
 ```
 
+Al ejecutar este Test tenemos:
 
-
-
-
-
+![02-01-23-ej](images/02-01-23-ej.png)
+![02-01-24-ej](images/02-01-24-ej.png)
+![02-01-25-ej](images/02-01-25-ej.png)
+![02-01-26-ej](images/02-01-26-ej.png)
