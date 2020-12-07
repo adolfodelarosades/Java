@@ -634,7 +634,16 @@ Aquí vamos a describir todos los pasos para la creación de este proyecto.
 
 ### 1. Base de Datos
 
-Debemos crear la BD `EmpServDB` y dentro debe tener la tabla `employee` el Script para crearla es el siguiente:
+Debemos crear la BD `EmpServDB`.
+
+Creamos un usaurio para esta BD:
+
+```sql
+CREATE USER 'app'@'localhost' IDENTIFIED BY 'app';
+GRANT ALL PRIVILEGES ON * . * TO 'app'@'localhost';
+```
+
+Crear la tabla `employee` con el siguiente Script:
 
 ```sql
 DROP TABLE EMPLOYEE;
