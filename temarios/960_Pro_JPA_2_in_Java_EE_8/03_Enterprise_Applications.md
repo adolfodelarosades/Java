@@ -412,6 +412,7 @@ La función del nombre es proporcionar una forma para que el cliente resuelva la
 
 Considere el bean de sesión `DeptService` que se muestra en el Listado 3-9. Ha declarado una dependencia de un bean de sesión utilizando la anotación `@EJB` y le ha dado el nombre `deptAudit`. El elemento `beanInterface` de la anotación `@EJB` hace referencia a la clase de bean de sesión. En el `PostConstruct` callback, el bean de auditoría se busca y se almacena en el campo `audit`. Las interfaces `Context` e `InitialContext` están definidas por la API JNDI. El método `lookup()` de la interfaz de contexto es la forma tradicional de recuperar objetos de un contexto JNDI. Para encontrar la referencia denominada `deptAudit`, la aplicación busca el nombre `java:comp/env/deptAudit` y envía el resultado a `AuditService`. El prefijo `java:comp/env/` que se agregó al nombre de la referencia indica al servidor que se debe buscar el contexto de nomenclatura del entorno para encontrar la referencia. Si el nombre se especifica incorrectamente, la búsqueda fallará.
 
+***Listado 3-9*** Buscando una Dependencia de EJB
 
 ```java
 @Stateless
@@ -432,9 +433,227 @@ public class DeptService {
 }
 ```
 
+Todos los componentes de Java EE admiten el uso de la API JNDI para buscar referencias de recursos en el contexto de denominación del entorno. Sin embargo, es un método algo engorroso para encontrar un recurso debido a los requisitos de manejo de excepciones de JNDI. Los EJB también admiten una sintaxis alternativa utilizando el método `lookup()` de la interfaz `EJBContext`. La interfaz `EJBContext` (y subinterfaces como `SessionContext`) está disponible para cualquier EJB y proporciona al bean acceso a servicios de tiempo de ejecución como el servicio de temporizador. El Listado 3-10 muestra el mismo ejemplo que el Listado 3-9 usando el método `lookup()`. La instancia de `SessionContext` en este ejemplo se proporciona a través de un método de establecimiento que es llamado por el contenedor. Volvemos a visitar este ejemplo más adelante en la sección denominada "Referencias a los recursos del servidor" para ver cómo se invoca.
+
+
+***Listado 3-10*** Usando el método `EJBContext lookup()`
+
+```java
+@Stateless
+@EJB(name="deptAudit", beanInterface=AuditService.class)
+public class DeptService  {
+   SessionContext context;
+   AuditService audit;
+    
+   public void setSessionContext(SessionContext context) {
+      this.context = context;
+   }
+    
+   @PostConstruct
+   public void init() {
+      audit = (AuditService) context.lookup("deptAudit");
+   }
+   // ...
+}
+```
+
+El método `EJBContext lookup()` tiene dos ventajas sobre la API JNDI. La primera es que el argumento del método es el nombre exactamente como se especificó en la referencia del recurso. La segunda es que solo se lanzan excepciones de tiempo de ejecución desde el método `lookup()` para evitar el manejo de excepciones comprobado de la API JNDI. Detrás de escena, se realiza exactamente la misma secuencia de llamadas a la API JNDI del Listado 3-9, pero las excepciones JNDI se manejan automáticamente.
+
+### DEPENDENCY INJECTION
+
+Cuando se coloca una anotación de recurso en un campo o método de establecimiento, ocurren dos cosas. Primero, se declara una referencia de recurso como si se hubiera colocado en la clase de bean (similar a la forma en que funcionaba la anotación `@EJB` en el ejemplo del Listado 3-9), y el nombre de ese recurso se vinculará al entorno contexto de nomenclatura cuando se crea el componente. En segundo lugar, el servidor realiza la búsqueda automáticamente en su nombre y establece el resultado en la clase instanciada.
+
+El proceso de buscar automáticamente un recurso y configurarlo en la clase se llama inyección de dependencia porque se dice que el servidor inyecta la dependencia resuelta en la clase. Esta técnica, una de las varias comúnmente denominadas inversión de control, elimina la carga de buscar recursos manualmente en el contexto del entorno JNDI.
+
+La inyección de dependencias se considera una práctica recomendada para el desarrollo de aplicaciones, no solo porque reduce la necesidad de búsquedas JNDI sino también porque simplifica las pruebas. Sin ningún código de API JNDI en la clase que tenga dependencias en el entorno de ejecución del servidor de aplicaciones, la clase de bean se puede instanciar directamente en una prueba unitaria. Luego, el desarrollador puede proporcionar manualmente las dependencias necesarias y probar la funcionalidad de la clase en cuestión en lugar de preocuparse por cómo solucionar la búsqueda de JNDI.
+
+#### ***Field Injection***
+
+La primera forma de inyección de dependencia se llama ***Field Injection***. Inyectar una dependencia en un campo significa que después de que el servidor busca la dependencia en el contexto de nomenclatura del entorno, asigna el resultado directamente al campo anotado de la clase. El Listado 3-11 revisita el ejemplo del Listado 3-9 y demuestra un uso más simple de la anotación `@EJB`, esta vez inyectando el resultado en el campo `audit`. El código de la interfaz de directorio utilizado antes desapareció y los métodos de negocio del bean pueden asumir que el campo de auditoría contiene una referencia al bean `AuditService`.
+
+***Listado 3-11*** Uso de Field Injection
+
+```java
+@Stateless
+public class DeptService {
+   @EJB AuditService audit;
+   // ...
+}
+```
+
+La Field Injection (inyección de campo) es sin duda la más fácil de implementar, y los ejemplos de este libro siempre optan por utilizar este formulario en lugar del formulario de búsqueda dinámica. Lo único que se debe tener en cuenta con la inyección de campo es que si está planeando realizar pruebas unitarias, debe agregar un método de establecimiento o hacer que el campo sea accesible para sus pruebas unitarias para satisfacer manualmente la dependencia. Los campos privados, aunque legales, requieren hacks desagradables si no hay una forma accesible de establecer su valor. Considere el alcance del paquete para la inyección de campo si desea realizar una prueba unitaria sin tener que agregar un establecedor.
+
+Mencionamos en la sección anterior que se genera automáticamente un nombre para la referencia cuando se coloca una anotación de recurso en un campo o método de establecimiento. Para completar, describimos el formato de este nombre, pero es poco probable que encuentre muchas oportunidades para usarlo. El nombre generado es el nombre de clase completo, seguido de una barra diagonal y luego el nombre del campo o propiedad. Esto significa que si el bean `DeptService` se encuentra en el paquete `persistence.session`, el EJB inyectado al que se hace referencia en el Listado 3-9 sería accesible en el contexto de nomenclatura del entorno con el nombre `persistence.session.DeptService/audit`. La especificación del elemento `name` para la anotación de recurso anulará este valor predeterminado.
+
+#### ***Setter Injection***
+
+La segunda forma de inyección de dependencia se llama *setter injection* (inyección de setter) e implica anotar un método de setter en lugar de un campo de clase. Cuando el servidor resuelve la referencia, invocará el método de establecimiento anotado con el resultado de la búsqueda. El Listado 3-12 vuelve a visitar el Listado 3-9 una vez más para demostrar el uso de la inyección de setter.
+
+***Listado 3-12*** Uso de Setter Injection
+
+```java
+@Stateless
+public class DeptService {
+   private AuditService audit;
+   @EJB
+   public void setAuditService(AuditService audit) {
+      this.audit = audit;
+   }
+   // ...
+}
+```
+
+Este estilo de inyección permite campos privados, pero también funciona bien con pruebas unitarias. Cada prueba puede simplemente instanciar la clase de bean y realizar manualmente la inyección de dependencia invocando el método setter, generalmente proporcionando una implementación del recurso requerido que se adapta a la prueba.
+
+### DECLARACIÓN DE DEPENDENCIAS
+
+Las siguientes secciones describen algunas de las anotaciones de recursos descritas en la especificación Java EE. Cada anotación tiene un atributo de nombre para especificar opcionalmente el nombre de referencia para la dependencia. Otros atributos de las anotaciones son específicos del tipo de recurso que se debe adquirir.
+
+#### ***Referenciar un Persistence Context (Contexto de Persistencia)***
+
+En el capítulo anterior, demostramos cómo crear un administrador de entidad para un contexto de persistencia usando un `EntityManagerFactory` devuelto por la clase `Persistence`. En el entorno Java EE, la anotación `@PersistenceContext` se puede utilizar para declarar una dependencia en un contexto de persistencia y hacer que el administrador de entidades para ese contexto de persistencia se adquiera automáticamente.
+
+El Listado 3-13 demuestra el uso de la anotación `@PersistenceContext` para adquirir un administrador de entidades mediante la inyección de dependencias en un bean de sesión sin estado. El elemento `unitName` especifica el nombre de la unidad de persistencia en la que se basará el contexto de persistencia.
+
+**TIP** ***Si se omite el elemento `unitName`, la forma en que se determina el nombre de la unidad para el contexto de persistencia depende del proveedor. Algunos proveedores pueden proporcionar un valor predeterminado si solo hay una unidad de persistencia para una aplicación, mientras que otros pueden requerir que el nombre de la unidad se especifique en un archivo de configuración específico del proveedor***.
+
+***Listado 3-13*** Inyectando una instancia EntityManager
+
+```java
+@Stateless
+public class EmployeeService {
+   @PersistenceContext(unitName="EmployeeService")
+   EntityManager em;
+   // ...
+}
+```
+
+Quizás se pregunte por qué existe un campo de estado en un bean de sesión sin estado; después de todo, los administradores de entidades deben mantener su propio estado para poder administrar un contexto de persistencia específico. La buena noticia es que la especificación se diseñó teniendo en cuenta la integración de contenedores, por lo que lo que realmente se inyecta en el Listado 3-13 no es una instancia de administrador de entidades como las que usamos en el capítulo anterior. El valor inyectado en el bean es un proxy administrado por contenedor que adquiere y libera contextos de persistencia en nombre del código de la aplicación. Esta es una característica poderosa de la API de persistencia de Java en Java EE y se trata ampliamente en el Capítulo 6.
+
+Por ahora, es seguro asumir que el valor inyectado "hará lo correcto". No es necesario eliminarlo y funciona automáticamente con la gestión de transacciones del servidor de aplicaciones. Otros contenedores que admiten JPA, como Spring, ofrecerán una funcionalidad similar, pero generalmente requerirán alguna configuración adicional para que funcione.
+
+#### ***Referenciar una Unidad de Persistencia***
+
+Se puede hacer referencia a `EntityManagerFactory` para una unidad de persistencia usando la anotación `@PersistenceUnit`. Al igual que la anotación `@PersistenceContext`, el elemento `unitName` identifica la unidad de persistencia para la instancia `EntityManagerFactory` a la que queremos acceder. Si el nombre de la unidad persistente no se especifica en la anotación, la forma en que se determina el nombre depende del proveedor.
+
+El listado 3-14 demuestra la inyección de una instancia de `EntityManagerFactory` en un bean de sesión con estado. Luego, el bean crea una instancia de `EntityManager` desde la fábrica durante la devolución de llamada del ciclo de vida de `PostConstruct`. Una instancia de `EntityManagerFactory` inyectada se puede almacenar de forma segura en cualquier instancia de componente. Es seguro para subprocesos y no es necesario eliminarlo cuando se elimina la instancia del bean.
+
+
+***Listado 3-14*** Inyectando una instancia EntityManagerFactory
+
+```java
+@Stateful
+public class EmployeeService {
+   
+   @PersistenceUnit(unitName="EmployeeService")
+   private EntityManagerFactory emf;
+   
+   private EntityManager em;
+   
+   @PostConstruct
+   public void init() {
+      em = emf.createEntityManager();
+   }
+   // ...
+}
+```
+
+`EntityManagerFactory` para una unidad de persistencia no se usa con tanta frecuencia en el entorno Java EE porque los administradores de entidades inyectados son más fáciles de adquirir y usar. Como verá en el Capítulo 6, existen diferencias importantes entre los administradores de entidades devueltos de fábrica y los proporcionados por el servidor en respuesta a la anotación `@PersistenceContext`.
+
+#### ***Referencia a Server Resources (Recursos del Servidor)***
+
+La anotación `@Resource` es la referencia general para los tipos de recursos de Java EE que no tienen anotaciones dedicadas. Se utiliza para definir referencias a fábricas de recursos, fuentes de datos y otros recursos del servidor. La anotación `@Resource` también es la más simple de definir porque el único elemento adicional es `resourceType`, que le permite especificar el tipo de recurso si el servidor no puede resolverlo automáticamente. Por ejemplo, si el campo en el que está inyectando es de tipo `Object`, entonces el servidor no puede saber que usted desea una fuente de datos. El elemento `resourceType` se puede establecer en `javax.sql.DataSource` para hacer explícita la necesidad.
+
+Una de las características de la anotación `@Resource` es que se utiliza para adquirir recursos lógicos específicos del tipo de componente. Esto incluye implementaciones de `EJBContext`, así como servicios como el servicio de temporizador EJB. Sin definirlo como tal, usamos la inyección de setter para adquirir la instancia `EJBContext` en el Listado 3-10. Para completar ese ejemplo, la anotación `@Resource` podría haberse colocado en el método `setSessionContext()`. El Listado 3-15 revisa el ejemplo del Listado 3-10, esta vez demostrando la inyección de campo con `@Resource` para adquirir una instancia de SessionContext.
+
+***Listado 3-15*** Inyectando una Instancia SessionContext
+
+```java
+@Stateless
+@EJB(name="audit", beanInterface=AuditService.class)
+public class DeptService {
+   @Resource
+   SessionContext context;
+    
+   AuditService audit;
+    
+   @PostConstruct
+   public void init() {
+      audit = (AuditService) context.lookup("audit");
+   }
+   // ...
+}
+```
+
+## CDI y Contextual Injection
+AQUIIII
+Si bien las instalaciones básicas de inyección de la plataforma son útiles, están claramente limitadas tanto en términos de lo que se puede inyectar como de cuánto control se puede ejercer sobre el proceso de inyección. CDI proporciona un estándar de inyección más poderoso que primero amplía la noción de un bean administrado y una inyección de recursos de plataforma y luego pasa a definir un conjunto de servicios de inyección adicionales disponibles para beans administrados por CDI. Por supuesto, la característica clave de la inyección contextual es la capacidad de inyectar una instancia de objeto determinada de acuerdo con el contexto actualmente activo.
+
+Las capacidades de CDI son amplias y extensas, y obviamente más allá del alcance de un libro sobre JPA. Para los propósitos de este libro, solo rascamos la superficie y mostramos cómo crear y usar beans CDI simples con calificadores. Sugerimos que los lectores interesados ​​consulten algunos de los muchos libros escritos sobre CDI para obtener más información sobre interceptores, decoradores, eventos y muchas otras características disponibles dentro de un contenedor CDI.
+
+FRIJOLES CDI
+Uno de los beneficios de los EJB es que brindan todos los servicios que uno pueda necesitar, desde seguridad hasta administración automática de transacciones y control de concurrencia. Sin embargo, el modelo de servicio completo puede verse como un inconveniente si no usa o no desea algunos de los servicios, ya que la percepción es que hay al menos algún costo asociado con tenerlos. Los beans administrados y las extensiones CDI para ellos brindan un modelo más de pago por uso. Solo obtiene los servicios que especifique. Sin embargo, no se deje engañar pensando que los beans CDI son menos voluminosos que un EJB moderno. Cuando se trata de la implementación, ambos tipos de objetos son enviados por el contenedor de la misma manera y los enlaces de servicio se agregarán y activarán según sea necesario.
+
+¿Qué son los frijoles CDI, de todos modos? Un bean CDI es cualquier clase que califica para los servicios de inyección de CDI, cuyo requisito principal es simplemente que sea una clase concreta.2 Incluso los beans de sesión pueden ser beans de CDI y, por lo tanto, calificar para los servicios de inyección de CDI, aunque hay algunas advertencias sobre sus contextos de ciclo de vida.
+
+INYECCION Y RESOLUCION
+Un bean puede tener sus campos o propiedades como destino de la inyección si están anotados por @ javax.inject.Inject. CDI define un algoritmo sofisticado para resolver el tipo correcto de objeto a inyectar, pero en el caso general, si tiene un campo declarado de tipo X, entonces se inyectará una instancia de X en él. Podemos reescribir el ejemplo del Listado 3-10 para usar beans CDI administrados simples en lugar de EJB. El listado 3-16 muestra el uso de la anotación de inyección en un campo. La instancia de AuditService se inyectará después de que se instancia la instancia de DeptService.
+
 ``
 ```java
 ```
+
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+``
+```java
+```
+``
+```java
+```
+``
+```java
+```
+``
+```java
+```
+``
+```java
+```
+v
+``
+```java
+`````
+```java
+`````
+```java
+```
+``
+```java
+```
+
 
 
 
