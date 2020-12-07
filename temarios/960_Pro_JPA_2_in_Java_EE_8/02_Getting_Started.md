@@ -625,3 +625,517 @@ En la mayoría de los casos, esto es un requisito, pero en determinadas configur
  
 3
 Las anotaciones sobre los métodos setter simplemente se ignorarán.
+
+## :computer: `960-02-01-EmployeeService`
+
+![02-01-01-ej](images/02-01-01-ej.png)
+
+Aquí vamos a describir todos los pasos para la creación de este proyecto.
+
+### 1. Base de Datos
+
+Debemos crear la BD `EmpServDB` y dentro debe tener la tabla `employee` el Script para crearla es el siguiente:
+
+```sql
+DROP TABLE EMPLOYEE;
+
+CREATE TABLE EMPLOYEE (ID INTEGER NOT NULL, NAME VARCHAR(255), SALARY BIGINT, NUMBER INTEGER, PRIMARY KEY (ID));
+```
+
+![02-01-16-ej](images/02-01-16-ej.png)
+
+![02-01-17-ej](images/02-01-17-ej.png)
+
+### 2. Creación del Proyecto
+
+Vamos a crear un nuevo proyecto Maven como sigue:
+
+![02-01-02-ej](images/02-01-02-ej.png)
+![02-01-03-ej](images/02-01-03-ej.png)
+![02-01-04-ej](images/02-01-04-ej.png)
+![02-01-05-ej](images/02-01-05-ej.png)
+
+### 3. Añadir las Dependencias en el `pom.xml`
+
+Debemos añadir las dependencias `hibernate-core` y `mysql-connector-java` en el `pom.xml`.
+
+`pom.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.jpapro.jpa</groupId>
+	<artifactId>960-02-01-EmployeeService</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>960-02-01-EmployeeService</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.18.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+```
+
+### 4. Añadir la Característica JPA
+
+![02-01-06-ej](images/02-01-06-ej.png)
+![02-01-07-ej](images/02-01-07-ej.png)
+![02-01-08-ej](images/02-01-08-ej.png)
+
+Con estos pasos se genera el archivo `persistence.xml` con los datos básicos.
+
+### 5. Crear Conexión a la BD `EmpServDB`
+
+Vamos a crear la conexión a la BD `EmpServDB` con el Data Source Explorer.
+
+![02-01-09-ej](images/02-01-09-ej.png)
+![02-01-10-ej](images/02-01-10-ej.png)
+![02-01-11-ej](images/02-01-11-ej.png)
+
+### 6. Modificaciones del `persistence.xml`
+
+#### Conectar BD al `persistence.xml`
+
+Abrimos el archivo `persistence.xml` y en la pestaña de Connection seleccionamos como **Transaction Type: Resource Local** para indicar que vamos a tener la conexión internamente desde la aplicación. Además asignamos la conexión que habíamos realizado anteriormente:
+
+![02-01-12-ej](images/02-01-12-ej.png)
+
+#### Dar Nombre a la Unidad de Persistencia
+
+En la pestaña General asignamos el nombre a la unidad de persistencia `EmployeeService`.
+
+![02-01-13-ej](images/02-01-13-ej.png)
+
+#### Añadir Opciones Hibernate en `persistence.xml`
+
+Ademas opcionalmente podemos añadir las siguientes características de hibernate en `persistence.xml`
+
+```html
+<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+<property name="hibernate.hbm2ddl.auto" value="create"/>
+<property name="hibernate.show_sql" value="true"/>
+<property name="hibernate.format_sql" value="true"/>
+```
+
+#### Indicar el Validate Mode.
+
+En la pestaña ***Options*** indicamos el **Validate mode: None** que es un requisto del ejemplo original.
+
+![02-01-14-ej](images/02-01-14-ej.png)
+
+### 7. Crear el Model `Employee`
+
+`Employee`
+
+```java
+package com.jpapro.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Employee {
+	
+   @Id
+   private int id;
+   private String name;
+   private long salary;
+	
+   public Employee() {
+   }
+	
+   public Employee(int id) {
+      this.id = id;
+   }
+   
+   public int getId() {
+      return id;
+   }
+   public void setId(int id) {
+      this.id = id;
+   }
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+   public long getSalary() {
+      return salary;
+   }
+   public void setSalary(long salary) {
+      this.salary = salary;
+   }
+   public String toString() {
+      return "ID Empleado: " + getId() + " Nombre: " + getName() + " Salario: " + getSalary();
+   }
+}
+```
+
+### 8. Añadir la Entidad `Employee` al `persistence.xml`
+
+Volvemos al archivo `persistence.xml` y en la pestaña ***General*** añadimos la entidad `Employee`.
+
+![02-01-15-ej](images/02-01-14-ej.png)
+
+Con esto ya tenemos nuestro archivo `persistence.xml` completo:
+
+`persistence.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="EmployeeService" transaction-type="RESOURCE_LOCAL">
+		<class>com.jpapro.model.Employee</class>
+		<validation-mode>NONE</validation-mode>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/EmpServDB?serverTimezone=Europe/Madrid"/>
+			<property name="javax.persistence.jdbc.user" value="app"/>
+			<property name="javax.persistence.jdbc.password" value="app"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<!--  
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			-->
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+### 9. Crear el Service `EmployeeService`
+
+`EmployeeService`
+
+```java
+package com.jpapro.service;
+
+import java.util.Collection;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import com.jpapro.model.Employee;
+
+public class EmployeeService {
+	
+   protected EntityManager em;
+	
+   public EmployeeService(EntityManager em) {
+      this.em = em;
+   }
+	
+   public Employee createEmployee(int id, String name, long salary) {
+      Employee emp = new Employee(id);
+      emp.setName(name);
+      emp.setSalary(salary);
+      em.persist(emp);
+      return emp;
+   }
+	
+   public void removeEmployee(int id) {
+      Employee emp = findEmployee(id);
+      if(emp != null) {
+         em.remove(emp);
+      }
+   }
+	
+   public Employee raiseEmployeeSalary(int id, long raise) {
+      //OJO nunca se hace un merge
+      Employee emp = em.find(Employee.class, id);
+      if(emp != null) {
+         emp.setSalary(emp.getSalary() + raise);
+      }
+      return emp;
+   }
+	
+   public Employee findEmployee(int id) {
+      return em.find(Employee.class, id);
+   }
+	
+   public Collection<Employee> findAllEmployees(){
+      TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+      return query.getResultList();
+   }
+
+}
+```
+
+### 9. Crear un Cliente para Probar la Aplicación
+
+`EmployeeTest`
+
+```java
+package com.jpapro;
+
+import java.util.Collection;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import com.jpapro.model.Employee;
+import com.jpapro.service.EmployeeService;
+
+public class EmployeeTest {
+
+   public static void main(String[] args) {
+		
+      // Crear el EntityManager
+      EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
+      EntityManager em = emf.createEntityManager();
+		
+      // Crear un Servicio
+      EmployeeService service = new EmployeeService(em);
+		
+      // Crear y Persistir un empleado
+      em.getTransaction().begin();
+      Employee emp = service.createEmployee(158, "John Doe", 45000);
+      em.getTransaction().commit();
+      System.out.println("Persistido " + emp);
+		
+      // Buscar un Empleado Especifico
+      emp = service.findEmployee(158);
+      System.out.println("Encontrado " + emp);
+		
+      // Buscar Todos los Empleados
+      Collection<Employee> emps = service.findAllEmployees();
+      for(Employee e: emps) {
+         System.out.println("Encontrado el Empleado: " + e);
+      }
+		
+      //Actualizar el Empleado
+      em.getTransaction().begin();
+      emp = service.raiseEmployeeSalary(158, 1000);
+      em.getTransaction().commit();
+      System.out.println("Actualizado " + emp);
+		
+      // Eliminar un Empleado
+      em.getTransaction().begin();
+      service.removeEmployee(158);
+      em.getTransaction().commit();
+      System.out.println("Eliminar Empleado 158");
+		
+      // Cerrar el EM y EMF cuando todo este hecho
+      em.close();
+      emf.close();
+   }
+
+}
+```
+
+Con este Test vamo a realizar las siguientes acciones:
+
+* Crear y Persistir un Empleado
+* Buscar un Empleado Especifico
+* Buscar Todos los Empleados
+* Actualizar el Empleado
+* Eliminar un Empleado
+
+La primera prueba vamos a hacerla comentando la eliminación para que podamos ver el registro en la BD.
+
+![02-01-18-ej](images/02-01-18-ej.png)
+
+![02-01-19-ej](images/02-01-19-ej.png)
+
+La segunda prueba la hacemos descomentando la eliminación.
+
+![02-01-20-ej](images/02-01-20-ej.png)
+
+Al probar el ejemplo nos muestra un error esto pasa por que ya tenemos un empleado con ID 158 vamos a borrarlo y volver a ejecutar la aplicación.
+
+![02-01-21-ej](images/02-01-21-ej.png)
+![02-01-22-ej](images/02-01-22-ej.png)
+
+### 10. Crear un Cliente Interactivo para Probar la Aplicación
+
+``
+```java
+package com.jpapro;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collection;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import com.jpapro.model.Employee;
+import com.jpapro.service.EmployeeService;
+
+public class EmployeeTestInteractive {
+	public static void main(String[] args) {
+		// Crear el EntityManager
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
+		EntityManager em = emf.createEntityManager();
+
+		// Crear un Servicio
+		EmployeeService service = new EmployeeService(em);
+		
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String accion ="";
+        int id;
+        try {
+        	while (true) {
+        		System.out.println("\n\n\n[L]istar| [A]ñadir | [E]liminar | [S]alir: \n\t\t\t");
+        		try {
+					accion = in.readLine();
+				} catch (IOException e1) {
+					break;
+				}
+                if ((accion.length() == 0) || accion.toUpperCase().charAt(0) == 'S') {
+                    break;
+                }
+                switch (accion.toUpperCase().charAt(0)) {
+                	case 'A':
+                		System.out.println("Introduce un valor entero para el ID del Empleado: \n\t\t\t");
+                		try {
+                            id = new Integer(in.readLine());
+                        } catch (NumberFormatException | IOException e) {
+                            break;
+                        }
+                    
+                        System.out.println("Introduce un valor para el Nombre del Empleado: \n\t\t\t");
+						String name ="";
+						try {
+							name = in.readLine();
+						} catch (IOException e) {
+							break;
+						}
+					
+						System.out.println("Introduce un valor entero para el Salario del Empleado: \n\t\t\t");
+						long salary;
+						try {
+							salary = new Long(in.readLine());
+						} catch (NumberFormatException | IOException e) {
+							break;
+						}
+                   
+						em.getTransaction().begin();
+						Employee emp = service.createEmployee(id, name, salary);
+						em.getTransaction().commit();
+                    
+						System.out.println("\n\nCreado " + emp);
+						break;
+                	case 'L':
+                        Collection<Employee> emps = service.findAllEmployees();
+                        System.out.println("\n\nEmpleados Encontrados: ");
+                        for (Employee e : emps)
+                            System.out.println("\t" + e);                        
+                        break;
+                	case 'E':
+                        System.out.println("Introduzca el valor entero para el ID del Empleado: \n\t\t\t");
+                        try {
+                            id = new Integer(in.readLine());
+                        } catch (NumberFormatException | IOException e) {
+                            break;
+                        }
+                        
+                        em.getTransaction().begin();
+                        service.removeEmployee(id);
+                        em.getTransaction().commit();
+                        
+                        System.out.println("\n\nEmpleado Eliminado: " + id);
+                        break;
+                	default:
+                        continue;
+               }
+        		
+        	}
+        } finally {        
+        	// Cerrar el EM y EMF cuando todo este hecho
+    		em.close();
+    		emf.close();
+        }
+	}
+}
+
+```
+
+
+
+
+
+
