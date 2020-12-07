@@ -884,12 +884,70 @@ public class ShoppingCart {
    // ...
 }
 ```
-v
-``
+
+**TIP** ***`@Transactional` se puede utilizar en beans gestionados o beans CDI, pero no se puede utilizar en EJB. Por el contrario, `@TransactionAttribute` solo se puede utilizar en EJB.***
+
+#### ***Bean-Managed Transactions***
+
+Otra forma de demarcar transacciones es utilizar BMT. Esto solo significa que la aplicación necesita iniciar y detener transacciones explícitamente haciendo llamadas a la API. Con la excepción de los EJB, todos los componentes administrados utilizan de forma predeterminada transacciones administradas por beans y deben hacer su propia demarcación de transacciones si no especifican el interceptor `@Transactional`. Solo los EJB reciben transacciones gestionadas por contenedor de forma predeterminada.
+
+Declarar que un EJB está utilizando transacciones gestionadas por beans significa que la clase de beans asume la responsabilidad de comenzar y confirmar las transacciones siempre que lo considere necesario. Sin embargo, con esta responsabilidad viene la expectativa de que la clase bean lo haga bien. Los EJB que utilizan BMT deben asegurarse de que cada vez que se inicia una transacción, también se debe completar antes de regresar del método que la inició. De no hacerlo, el contenedor revertirá la transacción automáticamente y se lanzará una excepción.
+
+Una penalización de las transacciones administradas por los EJB en lugar del contenedor es que no se propagan a los métodos llamados en otro BMT EJB. Por ejemplo, si EJB A comienza una transacción y luego llama a EJB B, que utiliza transacciones gestionadas por bean, la transacción no se propagará al método en EJB B. Siempre que una transacción esté activa cuando se invoca un método BMT EJB, la transacción activa se suspenderá hasta que el control vuelva al método de llamada. Esto no es cierto para los componentes que no son de EJB.
+
+Por lo general, no se recomienda el uso de BMT en EJB porque agrega complejidad a la aplicación y requiere que la aplicación realice un trabajo que el servidor ya puede hacer. Si bien otros tipos de componentes pueden usar interceptores transaccionales si así lo desean, no tienen las mismas restricciones de BMT que los EJB, por lo que es más común que adopten un enfoque de BMT controlado por aplicaciones. También han utilizado tradicionalmente BMT porque nunca hubo realmente una opción en el pasado. Solo recientemente, en Java EE 7, se introdujeron los interceptores de transacciones.
+
+#### ***UserTransaction***
+
+Para que un componente pueda comenzar y confirmar transacciones de contenedor manualmente, la aplicación debe tener una interfaz que lo admita. La interfaz `javax.transaction.UserTransaction` es el objeto designado en el JTA al que los componentes de la aplicación pueden aferrarse e invocar para gestionar los límites de las transacciones. Una instancia de `UserTransaction` no es en realidad la instancia de transacción actual; es una especie de proxy que proporciona la API de transacciones y representa la transacción actual. Se puede inyectar una instancia de `UserTransaction` en los componentes utilizando las anotaciones Java EE `@Resource` o CDI `@Inject`. Una `UserTransaction` también está presente en el contexto de nomenclatura del entorno con el nombre reservado `java:comp/UserTransaction`. La interfaz `UserTransaction` se muestra en el Listado 3-27.
+
+
+***Listado 3-27*** La Interface UserTransaction 
+
 ```java
-`````
+public interface UserTransaction {
+   public abstract void begin();
+   public abstract void commit();
+   public abstract int getStatus();
+   public abstract void rollback();
+   public abstract void setRollbackOnly();
+   public abstract void setTransactionTimeout(int seconds);
+}
+```
+
+Cada transacción JTA está asociada con un hilo de ejecución, por lo que se deduce que no puede haber más de una transacción activa en un momento dado. Entonces, si una transacción está activa, el usuario no puede iniciar otra en el mismo hilo hasta que la primera se haya confirmado o revertido. Alternativamente, la transacción puede expirar, haciendo que la transacción se revierta.
+
+Discutimos anteriormente que en ciertas condiciones de CMT, el contenedor suspenderá la transacción actual. En la API anterior, puede ver que no existe un método `UserTransaction` para suspender una transacción. Solo el contenedor puede hacer esto mediante una API de gestión de transacciones interna. De esta manera, se pueden asociar múltiples transacciones con un solo hilo, aunque solo una pueda estar activa a la vez.
+
+Las reversiones pueden ocurrir en varios escenarios diferentes. El método `setRollbackOnly()` indica que la transacción actual no se puede confirmar, dejando la reversión como el único resultado posible. La transacción se puede revertir inmediatamente llamando al método `rollback()`. Alternativamente, se puede establecer un límite de tiempo para la transacción con el método `setTransactionTimeout()`, lo que hace que la transacción retroceda cuando se alcanza el límite. El único inconveniente con los tiempos de espera de las transacciones es que el límite de tiempo debe establecerse antes de que comience la transacción y no se puede cambiar una vez que la transacción está en curso.
+
+En JTA, cada hilo tiene un estado transaccional al que se puede acceder a través de la llamada `getStatus()`. El valor de retorno de este método es una de las constantes definidas en la interfaz `javax.transaction.Status`. Si no hay ninguna transacción activa, por ejemplo, el valor devuelto por `getStatus()` será `STATUS_NO_TRANSACTION`. Del mismo modo, si se ha llamado a `setRollbackOnly()` en la transacción actual, el estado será `STATUS_MARKED_ROLLBACK` hasta que la transacción haya comenzado a retroceder.
+
+El Listado 3-28 muestra un fragmento de un servlet que usa el bean `ProjectService` para demostrar el uso de `UserTransaction` para invocar múltiples métodos EJB dentro de una sola transacción. El método `doPost()` usa la instancia `UserTransaction` inyectada con la anotación `@Resource` para iniciar y confirmar una transacción. Tenga en cuenta el bloque `try… catch` requerido alrededor de las operaciones de transacción para garantizar que la transacción se limpie correctamente en caso de falla. Detectamos la excepción y luego la volvemos a lanzar dentro de una excepción de tiempo de ejecución después de realizar el rollback.
+
+***Listado 3-28*** Usando la Interface UserTransaction 
+
 ```java
-`````
+public class ProjectServlet extends HttpServlet {
+    @Resource UserTransaction tx;
+    @EJB ProjectService bean;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        // ...
+        try {
+            tx.begin();
+            bean.assignEmployeeToProject(projectId, empId);
+            bean.updateProjectStatistics();
+            tx.commit();
+        } catch (Exception e) {
+            // Try to roll back (may fail if exception came from begin() or commit(), but that's ok)
+            try { tx.rollback(); } catch (Exception e2) {}
+            throw new MyRuntimeException(e);
+        }
+        // ...
+    }
+}
+```
 ```java
 ```
 ``
