@@ -362,9 +362,37 @@ El ciclo de vida del bean de sesión singleton está vinculado al ciclo de vida 
 
 Las devoluciones de llamada del ciclo de vida de los beans de sesión singleton son las mismas que las de los beans de sesión sin estado: `PostConstruct` y `PreDestroy`. El contenedor invocará la devolución de llamada de `PostConstruct` después de la inicialización del servidor de la instancia de bean y de la misma manera invocará la devolución de llamada de `PreDestroy` antes de eliminar la instancia de bean. La diferencia clave aquí con respecto a los beans de sesión sin estado es que `PreDestroy` se invoca solo cuando la aplicación se apaga como un todo. Por lo tanto, se llamará solo una vez, mientras que las devoluciones de llamada del ciclo de vida de los beans de sesión sin estado se invocan con frecuencia a medida que se crean y destruyen las instancias de bean.
 
-``
+## Servlets
+
+Los servlets son una tecnología de componentes diseñada para satisfacer las necesidades de los desarrolladores web que necesitan responder a las solicitudes HTTP y generar contenido dinámico a cambio. Los servlets son la tecnología más antigua y popular introducida como parte de la plataforma Java EE. Son la base de tecnologías como JavaServer Pages (JSP) y la columna vertebral de marcos web como JavaServer Faces (JSF).
+
+Aunque es posible que tenga algo de experiencia con servlets, vale la pena describir el impacto que los modelos de aplicaciones web han tenido en el desarrollo de aplicaciones empresariales. Debido a su dependencia del protocolo HTTP, la Web es inherentemente un medio sin estado. Al igual que los beans de sesión sin estado descritos anteriormente, un cliente realiza una solicitud, el servidor activa el método de servicio apropiado en el servlet y el contenido se genera y se devuelve al cliente. Cada solicitud es completamente independiente de la anterior.
+
+Esto presenta un desafío porque muchas aplicaciones web implican algún tipo de conversación entre el cliente y el servidor en el que las acciones previas del usuario influyen en los resultados devueltos en las páginas siguientes. Para mantener ese estado de conversación, muchas aplicaciones tempranas intentaron incrustar dinámicamente información de contexto en URL. Desafortunadamente, esta técnica no solo no escala muy bien, sino que también requiere un elemento dinámico para toda la generación de contenido que dificulta que los no desarrolladores escriban contenido para una aplicación web.
+
+Los servlets resuelven el problema del estado conversacional con la sesión. No debe confundirse con el bean de sesión, la sesión HTTP es un mapa de datos asociados con un ID de sesión. Cuando la aplicación solicita que se cree una sesión, el servidor genera un nuevo ID y devuelve un objeto `HTTPSession` que la aplicación puede usar para almacenar pares de datos key/value. Luego utiliza técnicas como las cookies del navegador para vincular el ID de sesión con el cliente, uniendo los dos en una conversación. Para las aplicaciones web, el cliente ignora en gran medida el estado conversacional que rastrea el servidor.
+
+El uso eficaz de la sesión HTTP es un elemento importante del desarrollo de servlets. El Listado 3-8 muestra los pasos necesarios para solicitar una sesión y almacenar datos de conversación en ella. En este ejemplo, asumiendo que el usuario ha iniciado sesión, el servlet almacena el ID de usuario en la sesión, haciéndolo disponible para su uso en todas las solicitudes posteriores del mismo cliente. La llamada `getSession()` en el objeto `HttpServletRequest` devolverá la sesión activa o creará una nueva si no existe una. Una vez obtenida, la sesión actúa como un mapa, con pares key/value establecidos y recuperados con los métodos `setAttribute()` y `getAttribute()`, respectivamente. Como verá más adelante en este capítulo, la sesión del servlet, que almacena datos no estructurados, a veces se empareja con un bean de sesión con estado para administrar la información de la sesión con el beneficio de una interfaz comercial bien definida.
+
+***Listado 3-8*** Mantenimiento del Estado Conversacional con un Servlet
+
 ```java
+public class LoginServlet extends HttpServlet {
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+      String userId = request.getParameter("user");
+      HttpSession session = request.getSession();
+      session.setAttribute("user", userId);
+      // ...
+   }
+}
 ```
+
+El auge de los frameworks de aplicaciones dirigidos a la Web también ha cambiado la forma en que desarrollamos aplicaciones web. El código de aplicación escrito en servlets se está reemplazando rápidamente con código de aplicación extraído del modelo base utilizando marcos como JSF. Cuando se trabaja en un entorno como este, los problemas básicos de persistencia de la aplicación, como dónde adquirir y almacenar el administrador de la entidad y cómo utilizar las transacciones de manera eficaz y rápida, se vuelven relevantes.
+
+Aunque exploramos algunos de estos problemas, la persistencia en el contexto de un marco como JSF está más allá del alcance de este libro. Como solución general, recomendamos adoptar un modelo de componentes en el que centrar las operaciones de persistencia. Los beans de sesión, por ejemplo, son fácilmente accesibles desde cualquier lugar dentro de una aplicación Java EE, lo que los convierte en un terreno neutral perfecto para los servicios empresariales. La capacidad de intercambiar entidades dentro y fuera del modelo de bean de sesión significa que los resultados de las operaciones de persistencia se podrán utilizar directamente en marcos web sin tener que acoplar estrechamente el código de presentación a la API de persistencia.
+
+## Dependency Management y CDI
 
 ``
 ```java
