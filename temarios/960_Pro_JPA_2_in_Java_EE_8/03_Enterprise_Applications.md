@@ -586,61 +586,303 @@ public class DeptService {
 ```
 
 ## CDI y Contextual Injection
-AQUIIII
+
 Si bien las instalaciones básicas de inyección de la plataforma son útiles, están claramente limitadas tanto en términos de lo que se puede inyectar como de cuánto control se puede ejercer sobre el proceso de inyección. CDI proporciona un estándar de inyección más poderoso que primero amplía la noción de un bean administrado y una inyección de recursos de plataforma y luego pasa a definir un conjunto de servicios de inyección adicionales disponibles para beans administrados por CDI. Por supuesto, la característica clave de la inyección contextual es la capacidad de inyectar una instancia de objeto determinada de acuerdo con el contexto actualmente activo.
 
-Las capacidades de CDI son amplias y extensas, y obviamente más allá del alcance de un libro sobre JPA. Para los propósitos de este libro, solo rascamos la superficie y mostramos cómo crear y usar beans CDI simples con calificadores. Sugerimos que los lectores interesados ​​consulten algunos de los muchos libros escritos sobre CDI para obtener más información sobre interceptores, decoradores, eventos y muchas otras características disponibles dentro de un contenedor CDI.
+Las capacidades de CDI son amplias y extensas, y obviamente más allá del alcance de un libro sobre JPA. Para los propósitos de este libro, solo rascamos la superficie y mostramos cómo crear y usar beans CDI simples con calificadores. Sugerimos que los lectores interesados consulten algunos de los muchos libros escritos sobre CDI para obtener más información sobre interceptores, decoradores, eventos y muchas otras características disponibles dentro de un contenedor CDI.
 
-FRIJOLES CDI
+### CDI BEANS
+
 Uno de los beneficios de los EJB es que brindan todos los servicios que uno pueda necesitar, desde seguridad hasta administración automática de transacciones y control de concurrencia. Sin embargo, el modelo de servicio completo puede verse como un inconveniente si no usa o no desea algunos de los servicios, ya que la percepción es que hay al menos algún costo asociado con tenerlos. Los beans administrados y las extensiones CDI para ellos brindan un modelo más de pago por uso. Solo obtiene los servicios que especifique. Sin embargo, no se deje engañar pensando que los beans CDI son menos voluminosos que un EJB moderno. Cuando se trata de la implementación, ambos tipos de objetos son enviados por el contenedor de la misma manera y los enlaces de servicio se agregarán y activarán según sea necesario.
 
-¿Qué son los frijoles CDI, de todos modos? Un bean CDI es cualquier clase que califica para los servicios de inyección de CDI, cuyo requisito principal es simplemente que sea una clase concreta.2 Incluso los beans de sesión pueden ser beans de CDI y, por lo tanto, calificar para los servicios de inyección de CDI, aunque hay algunas advertencias sobre sus contextos de ciclo de vida.
+¿Qué son los CDI beans, de todos modos? Un bean CDI es cualquier clase que califica para los servicios de inyección de CDI, cuyo requisito principal es simplemente que sea una clase concreta. <sup>2</sup> Incluso los beans de sesión pueden ser beans de CDI y, por lo tanto, calificar para los servicios de inyección de CDI, aunque hay algunas advertencias sobre sus contextos de ciclo de vida.
 
-INYECCION Y RESOLUCION
-Un bean puede tener sus campos o propiedades como destino de la inyección si están anotados por @ javax.inject.Inject. CDI define un algoritmo sofisticado para resolver el tipo correcto de objeto a inyectar, pero en el caso general, si tiene un campo declarado de tipo X, entonces se inyectará una instancia de X en él. Podemos reescribir el ejemplo del Listado 3-10 para usar beans CDI administrados simples en lugar de EJB. El listado 3-16 muestra el uso de la anotación de inyección en un campo. La instancia de AuditService se inyectará después de que se instancia la instancia de DeptService.
+### INYECCION Y RESOLUCION
 
-``
+Un bean puede tener sus campos o propiedades como destino de la inyección si están anotados por `@javax.inject.Inject`. CDI define un algoritmo sofisticado para resolver el tipo correcto de objeto a inyectar, pero en el caso general, si tiene un campo declarado de tipo X, entonces se inyectará una instancia de X en él. Podemos reescribir el ejemplo del Listado 3-10 para usar beans CDI administrados simples en lugar de EJB. El listado 3-16 muestra el uso de la anotación de inyección en un campo. La instancia de `AuditService` se inyectará después de que se instancia la instancia de `DeptService`.
+
+***Listado 3-16*** CDI Bean con Field Injection
+
 ```java
-```
-
-
-``
-```java
-```
-
-``
-```java
+public class DeptService {
+   @Inject AuditService audit;
+   // ...
+}
 ```
 
-``
+La anotación podría colocarse de manera similar en un método de propiedad para emplear la inyección de setter. Otra forma más de lograr el mismo resultado es utilizar un tercer tipo de inyección llamada *constructor injection* (inyección de constructor). Como sugiere el nombre, la inyección del constructor implica que el contenedor invoca el método del constructor e inyecta los argumentos. El listado 3-17 muestra cómo se puede configurar la inyección del constructor. La inyección de constructor es particularmente buena para probar fuera del contenedor, ya que un marco de prueba puede realizar fácilmente la inyección necesaria simplemente llamando al constructor sin tener que usar el proxy del objeto.
+
+***Listing 3-17*** CDI Bean con Constructor Injection
+
 ```java
+public class DeptService {
+   private AuditService audit;
+   @Inject DeptService(AuditService audit) {
+      this.audit = audit;
+   }
+   // ...
+}
 ```
 
-``
+### SCOPES Y CONTEXTS
+
+Un alcance(scope) define un par de puntos de demarcación temporal: un principio y un final. Por ejemplo, el alcance de una solicitud comenzaría cuando la solicitud comienza y finalizaría cuando la respuesta se haya devuelto. De manera similar, otros alcances definen duraciones en función de las acciones y condiciones del cliente. Hay cinco ámbitos predefinidos, tres de los cuales (request, session y application) están definidos por la especificación del servlet, uno más (conversación) que fue agregado por CDI y otro que fue agregado por la especificación JTA:
+
+* ***Request***: Delineada por una solicitud de método de cliente específico.
+
+* ***Session***: Comienza al iniciarse desde un cliente HTTP y finaliza al finalizar la sesión HTTP. Compartido por todas las solicitudes en la misma sesión HTTP.
+
+* ***Application***: Global para toda la aplicación mientras esté activa.
+
+* ***Conversation***: Abarca una serie de solicitudes JSF secuenciales.
+
+* ***Transaction***: Se asigna a la vida útil de una transacción JTA activa.
+
+Un tipo de bean se asocia con un alcance anotando la clase de bean con la anotación de alcance deseada. Las instancias administradas de ese bean tendrán un ciclo de vida similar al alcance declarado.
+
+Cada ámbito que esté activo tendrá un contexto actual asociado. Por ejemplo, cuando llega una solicitud, se creará un contexto de solicitud para ese alcance de solicitud. Cada solicitud tendrá su propio contexto de solicitud actual, pero habrá un contexto de ámbito de sesión único para todas las solicitudes provenientes de la misma sesión HTTP. El contexto es solo el lugar donde residen las instancias con ámbito durante la duración del ámbito. Solo puede haber una instancia de cada tipo de bean en cada contexto.
+
+El bean `AuditService` de ámbito de aplicación que se inyectaría en el bean `DeptService` en los listados 3-16 o 3-17 tendría el siguiente aspecto:
+
 ```java
+@ApplicationScoped
+public class AuditService { ... }
 ```
 
-``
+Debido a que está dentro del ámbito de la aplicación, CDI crearía solo una instancia y residiría en el contexto del ámbito de la aplicación. Tenga en cuenta que esto es similar a un EJB singleton en el sentido de que toda la aplicación crearía y utilizaría una única instancia.
+
+También existe un alcance adicional, dependiente, pero en realidad es la ausencia de alcance. Si no se especifica ningún alcance, se asume el alcance dependiente, lo que significa que no se colocan instancias del bean en ningún contexto y se crea una nueva instancia cada vez que se produce una inyección de ese tipo de bean. La anotación `@Dependent` se puede utilizar para marcar explícitamente un bean como dependiente. Las anotaciones de alcance se definen en el paquete `javax.enterprise.context`.
+
+**TIP** ***Se requería el descriptor `beans.xml` en CDI 1.0. En CDI 1.1, los beans se pueden anotar con una anotación que define el bean (es decir, una anotación de alcance) para evitar que se requiera el descriptor `beans.xml`. En los ejemplos que usan CDI, usamos anotaciones de alcance para evitar tener que especificar un archivo `beans.xml`.
+
+### QUALIFIED INJECTION
+
+Un calificador es una anotación que se utiliza para restringir o distinguir un tipo de bean de otros tipos de bean que tienen el mismo tipo de interfaz heredado o implementado. Un calificador puede ayudar al contenedor a resolver qué tipo de bean inyectar.
+
+La clase de anotación de calificador normalmente la define la aplicación y luego se utiliza para anotar una o más clases bean. La definición de anotación de calificador debe anotarse con la metaanotación `@Qualifier`, definida en el paquete `javax.inject`. Un ejemplo de cómo definir una anotación de calificador se encuentra en el Listado 3-18.
+
+***Listado 3-18*** Definición Qualifier Annotation
+
 ```java
+@Qualifier
+@Target({METHOD, FIELD, PARAMETER, TYPE})
+@Retention(RUNTIME)
+public @interface Secure { }
 ```
 
-``
+
+Esta anotación ahora se puede usar en una clase de bean, como el nuevo bean `SecureDeptService` que se muestra en el Listado 3-19. El calificador indica que el bean es una variedad segura de `DeptService`, a diferencia de uno normal (¿no seguro?).
+
+***Listado 3-19*** Qualified Bean Class
+
 ```java
+@Secure
+public class SecureDeptService extends DeptService { ... }
 ```
-``
+
+Cuando se va a inyectar un `DeptService` en otro componente, el calificador se puede colocar en el sitio de inyección y CDI activará su algoritmo de resolución para determinar qué instancia crear. Coincidirá con los calificadores para utilizar `SecureDeptService` en lugar de `DeptService`. El Listado 3-20 muestra cómo un servlet, por ejemplo, podría inyectar un `DeptService` seguro sin siquiera tener que saber el nombre de la subclase.
+
+***Listado 3-20*** Qualified Injection
+
 ```java
+public class LoginServlet extends HttpServlet {
+   @Inject @Secure DeptService deptService ;
+   // ...
+}
 ```
-``
+
+### PRODUCER METHODS Y FIELDS
+
+Cuando el contenedor necesita inyectar una instancia de un tipo de bean, primero buscará en los contextos actuales para ver si ya existe uno. Si no encuentra uno, debe obtener o crear una nueva instancia. CDI proporciona una forma para que la aplicación controle la instancia que se "crea" para un tipo determinado mediante el uso de un método o campo de productor.
+
+Un método de productor es un método que el contenedor CDI invocará para obtener una nueva instancia de bean. La instancia puede ser instanciada por el método del productor o el productor puede obtenerla por algún otro medio; depende completamente de la implementación del método de productor cómo produce la instancia. Los métodos de productor pueden incluso decidir, basándose en las condiciones de tiempo de ejecución, devolver una subclase de bean diferente.
+
+Un método de productor se puede anotar con un calificador. Luego, cuando un sitio de inyección está calificado de manera similar, el contenedor llamará al método de productor calificado correspondiente para obtener la instancia.
+
+En el Listado 3-21, mostramos un método de productor que devuelve nuevas instancias seguras de `DeptService`. Esto podría ser útil, por ejemplo, si no pudiéramos modificar la clase `SecureDeptService` para anotarla con la anotación `@Secure` como hicimos en el Listado 3-19. En su lugar, podríamos declarar un método de productor que devolviera instancias de `SecureDeptService` y se inyectarían en campos calificados con `@Secure` (como el que se muestra en el Listado 3-20). Tenga en cuenta que un método de productor puede estar en cualquier bean administrado. Puede ser un método estático o de instancia, pero debe estar anotado con `@Produces`. Hemos creado una clase bean llamada `ProducerMethods` para contener el método producer y separarlo del resto de la lógica de la aplicación.
+
+***Listado 3-21*** Producer Method
+
 ```java
+public class ProducerMethods {
+   @Produces @Secure
+   DeptService secureDeptServiceProducer() {
+      return new SecureDeptService();
+   }
+}
 ```
-``
+
+Los campos Producer funcionan de la misma manera que los métodos de productor, excepto que el contenedor accede al campo para obtener la instancia en lugar de invocar un método. Depende de la aplicación asegurarse de que el campo contenga una instancia cuando el contenedor la necesite. Verá un ejemplo del uso de un campo de productor en la siguiente sección.
+
+### USO DE MÉTODOS PRODUCER CON JPA RESOURCES
+
+Ahora que conoce algunos de los conceptos básicos de CDI, es hora de aprender cómo se puede usar CDI para ayudar a administrar las unidades de persistencia y los contextos de JPA. Puede utilizar una combinación de inyección de recursos Java EE con campos de productor de CDI y calificadores para inyectar y mantener sus contextos de persistencia.
+
+Supongamos que tenemos dos unidades de persistencia, una llamada `Employee` y la otra llamada `Audit`. Queremos utilizar beans CDI e inyección contextual. Creamos una clase llamada `EmProducers` y usamos campos de productor e inyección de recursos Java EE para obtener los administradores de entidad. El código de productor y las definiciones de anotación de calificador se encuentran en el Listado 3-22.
+
+***Listado 3-22*** Producer Class y Definiciones Qualifier Annotation  
+
 ```java
+@RequestScoped
+public class EmProducers {
+   @Produces @EmployeeEM
+   @PersistenceContext(unitName="Employee")
+   private EntityManager em1;
+    
+   @Produces @AuditEM
+   @PersistenceContext(unitName="Audit")
+   private EntityManager em2;
+}
+
+@Qualifier
+@Target({METHOD, FIELD, PARAMETER, TYPE})
+@Retention(RUNTIME)
+public @interface EmployeeEM { }
+
+@Qualifier
+@Target({METHOD, FIELD, PARAMETER, TYPE})
+@Retention(RUNTIME)
+public @interface AuditEM { }
 ```
-``
+
+La anotación Java EE `@PersistenceContext` hará que el contenedor Java EE inyecte los campos del productor con el administrador de la entidad para la unidad de persistencia dada. Luego, CDI utilizará los campos del productor para obtener el administrador de la entidad con el calificador correspondiente del sitio de inyección. Debido a que la clase de productor tiene un alcance de solicitud, se usarán nuevos administradores de entidad para cada solicitud. El alcance apropiado dependerá obviamente de la arquitectura de la aplicación. Lo único que queda por hacer es tener un bean que se inyecte con estos administradores de entidades. Un bean `DeptService` correspondiente que hace referencia a los administradores de entidades se muestra en el Listado 3-23. Un mismo enfoque podría usarse fácilmente para inyectar una fábrica de administradores de entidades utilizando la anotación de recursos `@PersistenceUnit`.
+
+
+***Listado 3-23*** DeptService Bean con Injected EntityManager Fields
+
 ```java
+public class DeptService {
+   @Inject @EmployeeEM
+   private EntityManager empEM;
+   @Inject @AuditEM
+   private EntityManager auditEM;
+   // ...
+}
 ```
-``
+
+## Transaction Management
+
+Más que cualquier otro tipo de aplicación empresarial, las aplicaciones que utilizan la persistencia requieren una cuidadosa atención a los problemas de gestión de transacciones. Cuándo comienzan las transacciones, cuándo terminan y cómo el administrador de la entidad participa en las transacciones administradas por contenedores son temas esenciales para los desarrolladores que usan JPA. Las siguientes secciones establecen la base para las transacciones en Java EE; volvemos a examinar este tema en detalle en el Capítulo 6 al observar al administrador de la entidad y cómo participa en las transacciones. Los temas de transacciones avanzadas están fuera del alcance de este libro. Recomendamos ***Mastering Java EE 8 Application Development***  <sup>3</sup> para una discusión en profundidad sobre el desarrollo de aplicaciones en Java EE 8.
+
+### TRANSACTION REVIEW
+
+Una ***transacción*** es una abstracción que se utiliza para agrupar una serie de operaciones. Una vez agrupado, el conjunto de operaciones se trata como una sola unidad y todas las operaciones deben tener éxito o ninguna de ellas puede tener éxito. La consecuencia de que solo algunas de las operaciones sean exitosas es producir una vista inconsistente de los datos que será dañina o indeseable para la aplicación. ***El término utilizado para describir si las operaciones tienen éxito juntas o no se llama*** **atomicidad**, y es posiblemente la más importante de las cuatro propiedades básicas que se utilizan para caracterizar cómo se comportan las transacciones. Comprender estas cuatro propiedades es fundamental para comprender las transacciones. La siguiente lista resume estas propiedades:
+
+* ***Atomicity*** (Atomicidad): Ya sea todas las operaciones de una transacción son exitosas o ninguna de ellas. El éxito de cada operación individual está ligado al éxito de todo el grupo.
+
+* ***Consistency*** (Coherencia): El estado resultante al final de la transacción se adhiere a un conjunto de reglas que definen la aceptabilidad de los datos. Los datos de todo el sistema son legales o válidos con respecto al resto de datos del sistema.
+
+* ***Isolation*** (Aislamiento): Los cambios realizados dentro de una transacción son visibles solo para la transacción que realiza los cambios. Una vez que una transacción confirma los cambios, son visibles atómicamente para otras transacciones.
+
+* ***Durability*** (Durabilidad): Los cambios realizados dentro de una transacción perduran más allá de la finalización de la transacción.
+
+Se dice que una transacción que cumple con todos estos requisitos es una transacción ACID (el término familiar ACID se obtiene al combinar la primera letra de cada una de las cuatro propiedades).
+
+No todas las transacciones son transacciones ACID, y aquellas que lo son a menudo ofrecen cierta flexibilidad en el cumplimiento de las propiedades ACID. Por ejemplo, el nivel de aislamiento es una configuración común que se puede configurar para proporcionar grados de aislamiento más flexibles o más estrictos que los descritos anteriormente. Por lo general, se realizan por razones de mayor rendimiento o, en el otro lado del espectro, si una aplicación tiene requisitos de coherencia de datos más estrictos. Las transacciones que discutimos en el contexto de Java EE son normalmente de la variedad ACID.
+
+### TRANSACCIONES EMPRESARIALES EN JAVA
+
+En realidad, las transacciones existen en diferentes niveles dentro del servidor de aplicaciones empresariales. La transacción más baja y básica está al nivel del recurso, que en nuestra discusión se supone que es una base de datos relacional encabezada por una interfaz `DataSource`. Esto se denomina transacción local de recursos y es equivalente a una transacción de base de datos. Estos tipos de transacciones se manipulan interactuando directamente con el JDBC `DataSource` que se obtiene del servidor de aplicaciones. Las transacciones de recursos locales se utilizan con menos frecuencia en servidores que las transacciones de contenedor.
+
+La transacción de contenedor más amplia utiliza la API Java Transaction API (JTA) que está disponible en todos los servidores de aplicaciones Java EE compatibles y en la mayoría de los servidores web basados en Java. Esta es la transacción típica que se utiliza para aplicaciones empresariales y puede involucrar o incorporar una serie de recursos, incluidas las fuentes de datos y otros tipos de recursos transaccionales. Los recursos definidos mediante componentes de Java Connector Architecture (JCA) también se pueden incluir en la transacción del contenedor.
+
+Los contenedores generalmente agregan su propia capa sobre JDBC `DataSource` para realizar funciones como la administración de conexiones y la agrupación que hacen un uso más eficiente de los recursos y proporcionan una integración perfecta con el sistema de administración de transacciones. Esto también es necesario porque es responsabilidad del contenedor realizar la operación de confirmación o reversión en el origen de datos cuando se completa la transacción del contenedor.
+
+Debido a que las transacciones de contenedor usan JTA y debido a que pueden abarcar varios recursos, también se denominan transacciones JTA o transacciones globales. La transacción del contenedor es un aspecto central de la programación dentro de los servidores Java.
+
+#### ***Transaction Demarcation***
+
+Cada transacción tiene un principio y un final. Comenzar una transacción permitirá que las operaciones posteriores se conviertan en parte de la misma transacción hasta que la transacción se haya completado. Las transacciones se pueden completar de dos formas. Se pueden comprometer, provocando todos los cambios a ser persistir en el almacén de datos o revertir, lo que indica que los cambios deben descartarse. El acto de hacer que una transacción comience o se complete se denomina ***demarcación de transacción***. Esta es una parte fundamental de la escritura de aplicaciones empresariales, porque la demarcación de transacciones de forma incorrecta es una de las fuentes más comunes de degradación del rendimiento.
+
+Las transacciones de recursos locales siempre son demarcadas explícitamente por la aplicación, mientras que las transacciones de contenedor pueden ser demarcadas automáticamente por el contenedor o usando una interfaz JTA que admita la demarcación controlada por la aplicación. El primer caso, cuando el contenedor asume la responsabilidad de la demarcación de transacciones, se denomina gestión de transacciones gestionadas por contenedor (CMT), pero cuando la aplicación es responsable de la demarcación, se denomina gestión de transacciones gestionadas por bean (BMT).
+
+Los EJB pueden utilizar transacciones gestionadas por contenedor o transacciones gestionadas por bean. Los servlets se limitan a la transacción gestionada por beans con un nombre deficiente. El estilo de gestión de transacciones predeterminado para un componente EJB está gestionado por contenedor. Para configurar explícitamente un EJB para que sus transacciones estén demarcadas de una forma u otra, la anotación `@TransactionManagement` debe especificarse en la clase EJB. El tipo enumerado `TransactionManagementType` define `BEAN` para transacciones administradas por bean y `CONTAINER` para transacciones administradas por contenedor. El Listado 3-24 demuestra cómo habilitar transacciones administradas por beans usando este enfoque.
+
+***Listado 3-24*** Cambiar la Transaction Management Type de un EJB
+
 ```java
+@Stateless
+@TransactionManagement(TransactionManagementType.BEAN)
+public class ProjectService {
+   // methods in this class manually control transaction demarcation
+}
+```
+
+**NOTA** ***Debido a que la administración de transacciones predeterminada para un EJB es administrada por contenedor, la anotación `@TransactionManagement` solo debe especificarse si se desean transacciones administradas por bean.
+
+#### ***Container-Managed Transactions***
+
+La forma más común de demarcar transacciones es usar CMT, que ahorran a la aplicación el esfuerzo y el código para comenzar y confirmar transacciones de manera explícita.
+
+Los requisitos de transacción están determinados por metadatos y se pueden configurar según la granularidad de la clase o incluso de un método. Por ejemplo, un bean de sesión puede declarar que cada vez que se invoca un método específico en ese bean, el contenedor debe asegurarse de que se inicie una transacción antes de que comience el método. El contenedor también es responsable de confirmar la transacción después de completar el método.
+
+Es bastante común que un bean invoque a otro bean desde uno o más de sus métodos. En este caso, una transacción iniciada por el método de llamada no se habrá confirmado porque el método de llamada no se completará hasta que se complete su llamada al segundo bean. Es por eso que necesitamos configuraciones para definir cómo debe comportarse el contenedor cuando se invoca un método dentro de un contexto transaccional específico.
+
+Por ejemplo, si una transacción ya está en curso cuando se llama a un método, se puede esperar que el contenedor solo use esa transacción, mientras que se le puede indicar que inicie una nueva si no hay ninguna transacción activa. Estas configuraciones se denominan atributos de transacción y determinan el comportamiento transaccional administrado por el contenedor.
+
+Las opciones de atributos de transacción definidos son las siguientes:
+
+* `MANDATORY`: Si se especifica este atributo para un método, se espera que una transacción ya se haya iniciado y esté activa cuando se llame al método. Si no hay ninguna transacción activa, se lanza una excepción. Este atributo rara vez se usa, pero puede ser una herramienta de desarrollo para detectar errores de demarcación de transacciones cuando se espera que una transacción ya se haya iniciado.
+
+* `REQUIRED`: Este atributo es el caso más común en el que se espera que un método esté en una transacción. El contenedor proporciona una garantía de que una transacción está activa para el método. Si uno ya está activo, se utiliza; si no existe, se crea una nueva transacción para la ejecución del método.
+
+* `REQUIRES_NEW`: Este atributo se usa cuando el método siempre necesita estar en su propia transacción; es decir, el método debe confirmarse o deshacerse independientemente de los métodos que se encuentran más arriba en la pila de llamadas. Debe utilizarse con precaución porque puede generar una sobrecarga de transacción excesiva.
+
+* `SUPPORTS`: Los métodos marcados con apoyos no dependen de una transacción, pero tolerarán la ejecución dentro de una si existe. Este es un indicador de que no se accede a recursos transaccionales en el método.
+
+* `NOT_SUPPORTED`: Un método marcado para no admitir transacciones hará que el contenedor suspenda la transacción actual si hay una activa cuando se llama al método. Implica que el método no realiza operaciones transaccionales, pero puede fallar de otras formas que podrían afectar indeseablemente el resultado de una transacción. Este no es un atributo de uso común.
+
+* `NEVER`: Un método marcado para no admitir nunca transacciones hará que el contenedor genere una excepción si una transacción está activa cuando se llama al método. Este atributo se usa muy poco, pero puede ser una herramienta de desarrollo para detectar errores de demarcación de transacciones cuando se espera que las transacciones ya se hayan completado.
+
+Cada vez que el contenedor inicia una transacción para un método, se supone que el contenedor también intenta confirmar la transacción al final del método. Cada vez que se debe suspender la transacción actual, el contenedor es responsable de reanudar la transacción suspendida al finalizar el método.
+
+En realidad, hay dos formas diferentes de especificar transacciones administradas por contenedor, una para EJB y otra para beans CDI, servlets, clases de recursos JAX-RS y todos los demás tipos de componentes administrados de Java EE. Los EJB fueron el primer tipo de componente en ofrecer una función de transacción administrada por contenedor y metadatos específicos definidos para este propósito. Los beans CDI y otros tipos de componentes Java EE, como servlets o clases de recursos JAX-RS, utilizan un interceptor transaccional.
+
+#### ***EJB Container-Managed Transactions***
+
+El atributo de transacción para un EJB se puede indicar anotando la clase EJB, o uno de sus métodos que forma parte de la interfaz empresarial opcional, con la anotación `@TransactionAttribute`. Esta anotación requiere un único argumento del tipo enumerado `TransactionAttributeType`, cuyos valores se definen en la lista anterior. Anotar la clase bean hará que el atributo de transacción se aplique a todos los métodos comerciales de la clase, mientras que anotar un método aplica el atributo sólo al método. Si existen anotaciones tanto a nivel de clase como a nivel de método, la anotación a nivel de método tiene prioridad. En ausencia de anotaciones `@TransactionAttribute` de nivel de clase o de método, el atributo predeterminado `REQUIRED` sera aplicado.
+
+El Listado 3-25 muestra cómo el método `addItem()` del bean de carrito de compras en el Listado 3-5 podría usar un atributo de transacción. No se proporcionó ninguna configuración de gestión de transacciones, por lo que se utilizarán transacciones gestionadas por contenedor. No se especificó ningún atributo en la clase, por lo que el comportamiento predeterminado de `REQUIRED` se aplicará a todos los métodos de la clase. La excepción es que el método `addItem()` ha declarado un atributo de transacción de `SUPPORTS`, que anula la configuración `REQUIRED`. Siempre que se haga una llamada para agregar un artículo, ese artículo se agregará al carrito, pero si no hay ninguna transacción activa, no será necesario iniciar ninguna.
+
+***Listado 3-25*** Especificación de un EJB Transaction Attribute
+
+```java
+@Stateful
+public class ShoppingCart {
+   @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+   public void addItem(String item, Integer quantity) {
+      verifyItem(item, quantity);
+      // ...
+   }
+   // ...
+}
+```
+
+Además, antes de que el método `addItem()` agregue el artículo al carrito, realiza alguna validación en un método privado llamado `verifyItem()` que no se muestra en el ejemplo. Cuando se invoca este método desde `addItem()`, se ejecutará en cualquier contexto transaccional que se haya invocado `addItem()`.
+
+Cualquier bean que desee provocar la reversión de una transacción gestionada por contenedor puede hacerlo invocando el método `setRollbackOnly()` en el objeto `EJBContext`. Aunque esto no provocará la reversión inmediata de la transacción, es una indicación para el contenedor de que la transacción debe revertirse cuando se complete. Tenga en cuenta que los administradores de entidad también harán que la transacción actual se configure para revertir cuando se lanza una excepción durante la invocación de un administrador de entidad o cuando se completa la transacción.
+
+#### ***Transactional Interceptors***
+
+Cuando se introdujeron los interceptores en la plataforma Java EE 6, abrieron la posibilidad futura de desacoplar la facilidad de transacción administrada por contenedor de EJB y ofrecerla a cualquier componente que admitiera la interceptación. En Java EE 7, se agregó la anotación `@javax.transaction.Transactional` como un medio para especificar que se aplicaría un interceptor transaccional al componente de destino. El mecanismo actúa de manera similar a las transacciones administradas por contenedor de EJB, ya que se aplica de forma declarativa en una clase o método y una semántica de clase puede ser anulada por una basada en un método. La principal diferencia es que se usa la anotación `@Transactional` en lugar de `@TransactionAttribute`, y el tipo de valor enumerado es una enumeración anidada llamada `Transactional.TxType` en lugar del `TransactionAttributeType` que se usa en EJB. Estas constantes de enumeración se denominan exactamente igual en `Transactional.TxType` y tienen la misma semántica.
+
+Quizás la diferencia más relevante entre los componentes basados en interceptores transaccionales y EJB CMT es el hecho de que los componentes que utilizan interceptores transaccionales no obtienen CMT automáticamente, sino que deben optar por utilizar la anotación `@Transactional`. Los EJB obtienen CMT de forma predeterminada y deben optar por no participar si prefieren utilizar BMT.
+
+Ahora podemos reescribir el Listado 3-25 para usar un bean CDI en lugar de un bean de sesión con estado. El bean `ShoppingCart` del Listado 3-26 tiene un ámbito de sesión para que su estado se mantenga durante toda la sesión. La anotación `@Transactional` vacía hace que la transaccionalidad predeterminada se establezca en `REQUIRED` para todos los métodos de la clase, excepto para el método `addItem()` que se anula explícitamente para ser `SUPPORTS`.
+
+***Listado 3-26*** Transactional Interceptor en un CDI Bean
+
+```java
+@Transactional
+@SessionScoped
+public class ShoppingCart {
+   @Transactional(TxType.SUPPORTS)
+   public void addItem(String item, Integer quantity) {
+      verifyItem(item, quantity);
+      // ...
+   }
+   // ...
+}
 ```
 v
 ``
