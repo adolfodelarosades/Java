@@ -394,8 +394,42 @@ Aunque exploramos algunos de estos problemas, la persistencia en el contexto de 
 
 ## Dependency Management y CDI
 
-``
+La lógica empresarial de un componente Java EE no suele ser completamente autónoma. La mayoría de las veces, la implementación depende de otros recursos. Esto puede incluir recursos del servidor, como una fuente de datos JDBC, o recursos definidos por la aplicación, como otro componente o administrador de entidad para una unidad de persistencia específica. La plataforma central Java EE contiene un soporte bastante limitado para inyectar dependencias en una cantidad limitada de recursos de servidor predefinidos, como fuentes de datos, transacciones administradas y otros. Sin embargo, el estándar CDI va mucho más allá de la simple inyección de dependencia (DI) y proporciona un marco extenso para soportar una amplia gama de requisitos, desde los más triviales hasta los exóticos. Comenzamos describiendo los conceptos básicos y el soporte contenido dentro de la plataforma desde antes de CDI y luego pasamos a CDI y su modelo de DI contextual.
+
+Los componentes de Java EE admiten la noción de referencias a recursos. Una referencia es un enlace con nombre a un recurso que puede resolverse dinámicamente en tiempo de ejecución desde el código de la aplicación o resolverse automáticamente por el contenedor cuando se crea la instancia del componente. Cubrimos cada uno de estos escenarios en breve.
+
+Una referencia consta de dos partes: un nombre y un objetivo. El código de la aplicación usa el nombre para resolver la referencia de forma dinámica, mientras que el servidor usa la información de destino para encontrar el recurso que la aplicación está buscando. El tipo de recurso que se ubicará determina el tipo de información requerida para coincidir con el objetivo. Cada referencia de recurso requiere un conjunto diferente de información específica del tipo de recurso al que se refiere.
+
+Una referencia se declara utilizando una de las anotaciones de referencia de recursos: `@Resource`, `@EJB`, `@PersistenceContext` o `@PersistenceUnit`. Estas anotaciones se pueden colocar en una clase, campo o método de establecimiento. La elección de la ubicación determina el nombre predeterminado de la referencia y si el servidor resuelve o no la referencia automáticamente.
+
+### DEPENDENCY LOOKUP
+
+La primera estrategia para resolver dependencias en el código de la aplicación que discutimos se llama búsqueda de dependencias. Esta es la forma tradicional de gestión de dependencias en Java EE, en la que el código de la aplicación es responsable de buscar una referencia con nombre utilizando la Interfaz de directorio y nombres de Java (JNDI) Java Naming and Directory Interface.
+
+Todas las anotaciones de recursos admiten un atributo llamado `name` que define el nombre JNDI de la referencia. Cuando la anotación de recurso se coloca en la definición de clase, este atributo es obligatorio. Si la anotación de recursos se coloca en un campo o en un método de establecimiento, el servidor generará un nombre predeterminado. Cuando se usa la búsqueda de dependencias, las anotaciones generalmente se colocan en el nivel de clase y el nombre se especifica explícitamente. Colocar una referencia de recurso en un campo o método de establecimiento tiene otros efectos además de generar un nombre predeterminado que discutiremos en la siguiente sección.
+
+La función del nombre es proporcionar una forma para que el cliente resuelva la referencia de forma dinámica. Cada servidor de aplicaciones Java EE admite JNDI, aunque las aplicaciones lo utilizan con menos frecuencia desde el advenimiento de la inyección de dependencias, y cada componente Java EE tiene su propio contexto de denominación JNDI de ámbito local denominado contexto de denominación del entorno. El nombre de la referencia está vinculado al contexto de nomenclatura del entorno y, cuando se busca mediante la API JNDI, el servidor resuelve la referencia y devuelve el destino de la referencia.
+
+Considere el bean de sesión `DeptService` que se muestra en el Listado 3-9. Ha declarado una dependencia de un bean de sesión utilizando la anotación `@EJB` y le ha dado el nombre `deptAudit`. El elemento `beanInterface` de la anotación `@EJB` hace referencia a la clase de bean de sesión. En el `PostConstruct` callback, el bean de auditoría se busca y se almacena en el campo `audit`. Las interfaces `Context` e `InitialContext` están definidas por la API JNDI. El método `lookup()` de la interfaz de contexto es la forma tradicional de recuperar objetos de un contexto JNDI. Para encontrar la referencia denominada `deptAudit`, la aplicación busca el nombre `java:comp/env/deptAudit` y envía el resultado a `AuditService`. El prefijo `java:comp/env/` que se agregó al nombre de la referencia indica al servidor que se debe buscar el contexto de nomenclatura del entorno para encontrar la referencia. Si el nombre se especifica incorrectamente, la búsqueda fallará.
+
+
 ```java
+@Stateless
+@EJB(name="deptAudit", beanInterface=AuditService.class)
+public class DeptService {
+   private AuditService audit;
+    
+   @PostConstruct
+   void init() {
+      try {
+         Context ctx = new InitialContext();
+         audit = (AuditService) ctx.lookup("java:comp/env/deptAudit");
+      } catch (NamingException e) {
+         throw new EJBException(e);
+      }
+   }
+   // ...
+}
 ```
 
 ``
