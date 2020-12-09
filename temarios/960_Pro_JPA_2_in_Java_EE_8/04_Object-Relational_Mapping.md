@@ -197,7 +197,6 @@ public class Employee { ... }
 
 La anotación `@Table` brinda la capacidad no solo de nombrar la tabla en la que se almacena el estado de la entidad, sino también de nombrar un esquema o catálogo de base de datos. El nombre de esquema se usa comúnmente para diferenciar un conjunto de tablas de otro y se indica mediante el elemento `schema`. El Listado 4-5 muestra una entidad `Employee` que está mapped a la tabla `EMP` en el esquema de `HR`.
 
-
 ***Listado 4-5*** Establecer un Schema
 
 ```java
@@ -220,40 +219,91 @@ Algunas bases de datos apoyan la noción de catálogo. Para estas bases de datos
 public class Employee { ... }
 ```
 
-## Mapeo de tipos simples
+## Mapeo de Tipos Simples
+
 Los tipos simples de Java se asignan como parte del estado inmediato de una entidad en sus campos o propiedades. La lista de tipos persistentes es bastante extensa e incluye prácticamente todos los tipos integrados que le gustaría conservar. Incluyen lo siguiente:
-Tipos primitivos de Java: byte, int, short, long, boolean, char, float y double
 
-Clases de envoltura de tipos primitivos de Java: Byte, Integer, Short, Long, Boolean, Character, Float y Double
+* ***Tipos primitivos de Java***: `byte`, `int`, `short`, `long`, `boolean`, `char`, `float` y `double`
 
-Tipos de matriz de bytes y caracteres: byte [], Byte [], char [] y Character []
+* ***Clases de envoltura de tipos primitivos de Java**: `Byte`, `Integer`, `Short`, `Long`, `Boolean`, `Character`, `Float` y `Double`
 
-Tipos numéricos grandes: java.math.BigInteger y java.math.BigDecimal
+* ***Tipos array de byte y character***: `byte[]`, `Byte[]`, `char[]` y `Character[]`
 
-Cadenas: java.lang.String
+* ***Tipos numéricos grandes***: `java.math.BigInteger` y `java.math.BigDecimal`
 
-Tipos temporales de Java: java.util.Date y java.util.Calendar
+* ***Strings***: `java.lang.String`
 
-Tipos temporales de JDBC: java.sql.Date, java.sql.Time y java.sql.Timestamp
+* ***Tipos temporal de Java***: `java.util.Date` y `java.util.Calendar`
 
-Tipos enumerados: cualquier sistema o tipo enumerado definido por el usuario
+* ***Tipos temporal de JDBC***: `java.sql.Date`, `java.sql.Time` y `java.sql.Timestamp`
 
-Objetos serializables: cualquier sistema o tipo serializable definido por el usuario
+* ***Tipos enumerados***: Cualquier sistema o tipo enumerado definido por el usuario
+
+* ***Objetos serializables***: Cualquier sistema o tipo serializable definido por el usuario
 
 A veces, el tipo de columna de la base de datos que se asigna no es exactamente el mismo que el tipo de Java. En casi todos los casos, el tiempo de ejecución del proveedor puede convertir el tipo devuelto por JDBC en el tipo Java correcto del atributo. Si el tipo de la capa JDBC no se puede convertir al tipo Java del campo o propiedad, normalmente se lanzará una excepción, aunque no se garantiza.
 
-SUGERENCIA Cuando el tipo persistente no coincide con el tipo JDBC, algunos proveedores pueden optar por realizar una acción propietaria o realizar la mejor suposición para convertir entre los dos. En otros casos, el controlador JDBC podría realizar la conversión por sí solo.
-Al conservar un campo o propiedad, el proveedor observa el tipo y se asegura de que sea uno de los tipos persistentes enumerados anteriormente. Si está en la lista, el proveedor lo conservará usando el tipo de JDBC apropiado y lo pasará al controlador JDBC. En ese momento, si el campo o la propiedad no se pueden serializar, el resultado no se especifica. El proveedor puede optar por lanzar una excepción o simplemente intentar pasar el objeto a JDBC. Verá en el Capítulo 10 cómo se pueden usar los convertidores para ampliar la lista de tipos que pueden persistir en JPA.
+**TIP** ***Cuando el tipo persistente no coincide con el tipo JDBC, algunos proveedores pueden optar por realizar una acción propietaria o realizar la mejor suposición para convertir entre los dos. En otros casos, el controlador JDBC podría realizar la conversión por sí solo.***
 
-Se puede colocar una anotación @Basic opcional en un campo o propiedad para marcarlo explícitamente como persistente. Esta anotación es principalmente para fines de documentación y no es necesaria para que el campo o la propiedad sean persistentes. Si no está allí, se asume implícitamente en ausencia de cualquier otra anotación de mapeo. Debido a la anotación, las asignaciones de tipos simples se denominan asignaciones básicas, ya sea que la anotación @Basic esté realmente presente o simplemente se esté asumiendo.
+Al persistir un campo o propiedad, el proveedor observa el tipo y se asegura de que sea uno de los tipos persistentes enumerados anteriormente. Si está en la lista, el proveedor lo persistirá usando el tipo de JDBC apropiado y lo pasará al controlador JDBC. En ese momento, si el campo o la propiedad no se pueden serializar, el resultado no se especifica. El proveedor puede optar por lanzar una excepción o simplemente intentar pasar el objeto a JDBC. Verá en el Capítulo 10 cómo se pueden usar los convertidores para ampliar la lista de tipos que pueden persistir en JPA.
 
-NOTA Ahora que ha visto cómo puede persistir campos o propiedades y cómo son virtualmente equivalentes en términos de persistencia, simplemente los llamaremos atributos. Un atributo es un campo o propiedad de una clase, y usaremos el término atributo de ahora en adelante para evitar tener que referirnos continuamente a campos o propiedades en términos específicos.
-MAPAS DE COLUMNA
-La anotación @Basic (o asignación básica asumida en su ausencia) se puede considerar como una indicación lógica de que un atributo dado es persistente. La anotación física que es la anotación que acompaña a la asignación básica es la anotación @Column. La especificación de @Column en el atributo indica características específicas de la columna de la base de datos física por las que el modelo de objetos está menos preocupado. De hecho, es posible que el modelo de objetos nunca necesite saber a qué columna está asignado, y el nombre de la columna y los metadatos de asignación física se pueden ubicar en un archivo XML separado.
+Se puede colocar una anotación `@Basic` opcional en un campo o propiedad para marcarlo explícitamente como persistente. Esta anotación es principalmente para fines de documentación y no es necesaria para que el campo o la propiedad sean persistentes. Si no está allí, se asume implícitamente en ausencia de cualquier otra anotación de mapeo. Debido a la anotación, las asignaciones de tipos simples se denominan asignaciones básicas, ya sea que la anotación `@Basic` esté realmente presente o simplemente se esté asumiendo.
 
-Se pueden especificar varios elementos de anotación como parte de @Column, pero la mayoría de ellos se aplican solo a la generación de esquemas y se tratan más adelante en el libro. El único que tiene importancia es el elemento de nombre, que es solo una cadena que especifica el nombre de la columna a la que se ha asignado el atributo. Esto se usa cuando el nombre de columna predeterminado no es apropiado o no se aplica al esquema que se está usando. Puede pensar en el elemento de nombre de la anotación @Column como un medio para anular el nombre de columna predeterminado que de otro modo se habría aplicado. El ejemplo del Listado 4-7 muestra cómo anular el nombre de columna predeterminado para un atributo.
+**NOTA** ***Ahora que ha visto cómo puede persistir campos o propiedades y cómo son virtualmente equivalentes en términos de persistencia, simplemente los llamaremos atributos. Un atributo es un campo o propiedad de una clase, y usaremos el término atributo de ahora en adelante para evitar tener que referirnos continuamente a campos o propiedades en términos específicos.***
+
+### MAPPINGS DE COLUMNA
+
+La anotación `@Basic` (o asignación básica asumida en su ausencia) se puede considerar como una indicación lógica de que un atributo dado es persistente. La anotación física que es la anotación que acompaña a la asignación básica es la anotación `@Column`. La especificación de `@Column` en el atributo indica características específicas de la columna de la base de datos física por las que el modelo de objetos está menos preocupado. De hecho, es posible que el modelo de objetos nunca necesite saber a qué columna está asignado, y el nombre de la columna y los metadatos de asignación física se pueden ubicar en un archivo XML separado.
+
+Se pueden especificar varios elementos de anotación como parte de `@Column`, pero la mayoría de ellos se aplican solo a la generación de esquemas y se tratan más adelante en el libro. El único que tiene importancia es el elemento de nombre, que es solo una cadena que especifica el nombre de la columna a la que se ha asignado el atributo. Esto se usa cuando el nombre de columna predeterminado no es apropiado o no se aplica al esquema que se está usando. Puede pensar en el elemento de nombre de la anotación `@Column` como un medio para anular el nombre de columna predeterminado que de otro modo se habría aplicado. El ejemplo del Listado 4-7 muestra cómo anular el nombre de columna predeterminado para un atributo.
+
+***Listing 4-7*** Mapping Attributes a Columns
+
+```java
+@Entity
+public class Employee {
+   @Id
+   @Column(name="EMP_ID")
+   private long id;
+   
+   private String name;
+   
+   @Column(name="SAL")
+   private long salary;
+   
+   @Column(name="COMM")
+   private String comments;
+   // ...
+}
+```
+
+Para poner estas anotaciones en contexto, veamos el mapeo de la tabla completo representado por esta entidad. Lo primero que debe notar es que no existe una anotación `@Table` en la clase, por lo que se le aplicará el nombre de tabla predeterminado `EMPLOYEE`.
+
+A continuación, tenga en cuenta que `@Column` se puede usar con asignaciones de `@Id`, así como con asignaciones básicas. El campo de `id` se anula para asignarlo a la columna `EMP_ID` en lugar de a la columna predeterminada `ID`. El campo `name` no está anotado con `@Column`, por lo que el nombre de columna predeterminado `NAME` se usaría para almacenar y recuperar el nombre del empleado. Los campos `salary` y `comments`, sin embargo, están anotados para asignarlos a las columnas `SAL` y `COMM`, respectivamente. Por lo tanto, la entidad `Employee` se asigna a la tabla que se muestra en la Figura 4-2.
 
 ![04-02](images/04-02.png)
+
+### LAZY FETCHING
+
+En ocasiones, se sabrá de antemano que rara vez se accederá a determinadas partes de una entidad. En estas situaciones, puede optimizar el rendimiento al recuperar la entidad obteniendo solo los datos a los que espera que se acceda con frecuencia; el resto de los datos se puede recuperar solo cuando o si es necesario. Hay muchos nombres para este tipo de función, incluida la carga diferida (lazy loading,), la carga diferida, la obtención diferida, la obtención bajo demanda, la lectura justo a tiempo, la indirección y otros. Todos significan más o menos lo mismo, que es solo que algunos datos pueden no cargarse cuando el objeto se lee inicialmente desde la base de datos, pero solo se recuperarán cuando se haga referencia a ellos o se acceda a ellos.
+
+El tipo de búsqueda(fetch) de un mapeo básico se puede configurar para que se cargue de manera perezosa o con entusiasmo (lazily or eagerly) especificando el elemento `fetch` en la anotación `@Basic` correspondiente. El tipo enumerado `FetchType` define los valores para este elemento, que pueden ser `EAGER` o `LAZY`. Establecer el tipo de recuperación de una asignación básica en `LAZY` significa que el proveedor puede aplazar la carga del estado de ese atributo hasta que se haga referencia a él. El valor predeterminado es cargar todas las asignaciones básicas con entusiasmo (eagerly). El Listado 4-8 muestra un ejemplo de cómo anular un mapeo básico para cargarlo de forma diferida (lazily loaded).
+
+***Listado 4-8*** Lazy Field Loading
+
+```java
+@Entity
+public class Employee {
+   // ...
+   @Basic(fetch=FetchType.LAZY)
+   @Column(name="COMM")
+   private String comments;
+   // ...
+}
+```
+
+AQUIIIIIIIIIIIIII
+
 ![04-03](images/04-03.png)
 ![04-04](images/04-04.png)
 ![04-05](images/04-05.png)
