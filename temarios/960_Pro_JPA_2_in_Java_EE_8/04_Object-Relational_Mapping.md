@@ -847,39 +847,197 @@ La entidad de destino de one-to-one a menudo tiene una relación con la entidad 
 
 ![04-14](images/04-14.png)
 
-```java
-```
+Ya aprendió que la tabla de entidades que contiene la join column(columna de combinación) determina la entidad propietaria de la relación. En una relación bidireccional de uno a uno, ambas asignaciones son asignaciones de uno a uno, y cualquiera de los lados puede ser el propietario, por lo que la join column(columna de unión) puede terminar en un lado o en el otro. Esta sería normalmente una decisión de modelado de datos, no una decisión de programación de Java, y probablemente se tomaría en función de la dirección de recorrido más frecuente.
 
+Considere la clase de entidad `ParkingSpace` que se muestra en el Listado 4-19. Este ejemplo asume el mapeo de la tabla que se muestra en la Figura 4-13 y asume que `Employee` es el lado propietario de la relación. Ahora tenemos que agregar una referencia de `ParkingSpace` a `Employee`. Esto se logra agregando la anotación de relación `@OneToOne` en el campo `employee`. Como parte de la anotación, debemos agregar un elemento `mappedBy` para indicar que el lado propietario es el `Employee`, no el `ParkingSpace`. Dado que `ParkingSpace` es el lado inverso de la relación, no tiene que proporcionar la información de la columna de combinación.
 
-```java
-```
-```java
-```
+***Listado 4-19*** Inverse Side of a Bidirectional One-to-One Relationship
 
 ```java
+@Entity
+public class ParkingSpace {
+   @Id 
+   private long id;
+   
+   private int lot;
+   
+   private String location;
+   
+   @OneToOne(mappedBy="parkingSpace")
+   private Employee employee;
+   // ...
+}
 ```
-```java
-```
 
-```java
-```
-```java
-```
+El elemento `mappedBy` en el mapeo uno a uno del atributo `employee` de `ParkingSpace` es necesario para hacer referencia al atributo `parkingSpace` en la clase `Employee`. El valor de `mappedBy` es el nombre del atributo en la entidad propietaria que apunta a la entidad inversa.
 
+Las dos reglas, entonces, para las asociaciones bidireccionales uno a uno son las siguientes:
 
+* La anotación `@JoinColumn` va en el mapeo de la entidad que está mapeada a la tabla que contiene la join column(columna de unión), o el propietario de la relación. Esto podría estar en cualquier lado de la asociación.
 
+* El elemento `mappedBy` debe especificarse en la anotación `@OneToOne` en la entidad que no define una join column(columna de unión), o el lado inverso de la relación.
 
+No sería legal tener una asociación bidireccional que hubiera `mappedBy` en ambos lados, así como sería incorrecto no tenerla en ninguno de los lados. La diferencia es que si estuviera ausente en ambos lados de la relación, el proveedor trataría a cada lado como una relación unidireccional independiente. Esto estaría bien, excepto que supondría que cada lado es el propietario y que cada uno tiene una columna de unión.
 
+Las relaciones bidireccionales de muchos a uno se explican más adelante como parte de la discusión de las asociaciones bidireccionales multivalor.
 
+### ASOCIACIONES CON COLLECTION-VALUED
 
+Cuando la entidad de origen hace referencia a una o más instancias de la entidad de destino, se utiliza una asociación de muchos valores o una colección asociada. Tanto los mapeos one-to-many y many-to-many se ajustan al criterio de tener muchas entidades de destino, y aunque la asociación de uno a muchos es la que se usa con más frecuencia, las asignaciones de muchos a muchos también son útiles cuando existen está compartiendo en ambas direcciones.
 
+#### ***One-to-Many Mappings***
 
-
-
+Cuando una entidad está asociada con una `Collection` de otras entidades, lo más frecuente es que tenga la forma de un mapeo one-to-many. Por ejemplo, un departamento normalmente tendría varios empleados. La Figura 4-15 muestra la relación de `Employee` y `Department` que mostramos anteriormente en la sección “Many-to-One Mappings”, solo que esta vez la relación es de naturaleza bidireccional.
 
 ![04-15](images/04-15.png)
+
+Como se mencionó anteriormente, cuando una relación es bidireccional, en realidad hay dos asignaciones, una para cada dirección. Una relación bidireccional de uno a muchos siempre implica un mapeo de muchos a uno de regreso a la fuente, por lo que en nuestro ejemplo de `Employee` y `Department` hay un mapeo de uno a muchos de `Department` a `Employee` y un mapeo de muchos a uno del `Employee` al `Department`. Podríamos decir con la misma facilidad que la relación es bidireccional de varios a uno si la viéramos desde la perspectiva del `Employee`. Son equivalentes porque las relaciones bidireccionales de varios a uno implican un mapeo de uno a varios desde el destino al origen y viceversa.
+
+Cuando una entidad de origen tiene un número arbitrario de entidades de destino almacenadas en su colección, no existe una forma escalable de almacenar esas referencias en la tabla de la base de datos a la que se asigna. ¿Cómo almacenaría una cantidad arbitraria de claves externas en una sola fila? En su lugar, debe permitir que las tablas de las entidades de la colección tengan claves externas a la tabla de la entidad de origen. **Esta es la razón por la que la asociación de uno a muchos es casi siempre bidireccional y el lado "uno" no es normalmente el lado propietario**.
+
+Además, si las tablas de la entidad de destino tienen foreign keys(claves externas) que apuntan a la tabla de la entidad de origen, las entidades de destino deben tener asociaciones de muchos a uno con el objeto de la entidad de origen. Tener una clave externa en una tabla para la que no hay asociación en el modelo de objeto de entidad correspondiente no es fiel al modelo de datos. No obstante, todavía es posible configurarlo.
+
+Veamos un ejemplo concreto de un mapeo de uno a muchos basado en el ejemplo de `Employee` y `Department` que se muestra en la Figura 4-15. Las tablas para esta relación son exactamente las mismas que las que se muestran en la Figura 4-11, que muestra una relación de muchos a uno. La única diferencia entre el ejemplo de muchos a uno y este es que ahora estamos implementando el lado inverso de la relación. Como `Employee` tiene la join column y es el propietario de la relación, la clase `Employee` no ha cambiado del Listado 4-16.
+
+En el lado del `Department` de la relación, necesitamos mapear la colección de `employees` de las entidades de `Employee` como una asociación de uno a muchos usando la anotación `@OneToMany`. El Listado 4-20 muestra la clase de `Department` que usa esta anotación. Tenga en cuenta que debido a que este es el lado inverso de la relación, debemos incluir el elemento `mappedBy`, tal como hicimos en el ejemplo de relación bidireccional uno a uno.
+
+***Listing 4-20*** One-to-Many Relationship
+
+```java
+@Entity
+public class Department {
+   @Id 
+   private long id;
+   
+   private String name;
+    
+   @OneToMany(mappedBy="department")
+   private Collection<Employee> employees;
+   // ...
+}
+```
+
+Hay un par de puntos dignos de mención sobre esta clase. La primera es que se está utilizando una `Collection` genérica con parámetros de tipo para almacenar las entidades `Employee`. Esto proporciona el tipo estricto que garantiza que solo los objetos de tipo `Employee` existirán en la `Collection`. Esto es bastante útil porque no solo proporciona verificación en tiempo de compilación de nuestro código, sino que también nos ahorra tener que realizar operaciones de conversión cuando recuperamos las instancias de `Employee` de la colección.
+
+JPA asume la disponibilidad de genéricos; sin embargo, sigue siendo perfectamente aceptable utilizar una colección que no tenga parámetros de tipo. También podríamos haber definido la clase `Department` sin usar genéricos pero definiendo solo un tipo de `Collection` simple, como lo hubiéramos hecho en versiones de Java estándar anteriores a Java SE 5 (excepto para JDK 1.0 o 1.1, cuando `java.util.Collection` ¡ni siquiera estaba estandarizado!). Si lo hiciéramos, tendríamos que especificar el tipo de entidad que se almacenará en la `Collection` que necesita el proveedor de persistencia. El código se muestra en el Listado 4-21 y parece casi idéntico, excepto por el elemento `targetEntity` que indica el tipo de entidad.
+
+***Listado 4-21*** Usando targetEntity
+
+```java
+@Entity
+public class Department {
+   @Id 
+   private long id;
+   
+   private String name;
+   
+   @OneToMany(targetEntity=Employee.class, mappedBy="department")
+   private Collection employees;
+   // ...
+}
+```
+
+Hay dos puntos importantes que recordar al definir relaciones bidireccionales one-to-many (o many-to-one) uno a varios (o varios a uno):
+
+* El lado many-to-one debe ser el lado propietario, por lo que la join column debe definirse en ese lado.
+
+* El mapeo one-to-many debe ser el lado inverso, por lo que se debe usar el elemento `mappedBy`.
+
+Si no se especifica el elemento `mappedBy` en la anotación `@OneToMany`, el proveedor lo tratará como una relación unidireccional de uno a muchos que se define para usar una join table(tabla de combinación) (que se describe más adelante). Este es un error fácil de cometer y debería ser lo primero que busque si ve un error de tabla faltante con un nombre que tiene dos nombres de entidad concatenados.
+
+#### ***Many-to-Many Mappings***
+
+Cuando una o más entidades están asociadas con una `Collection` de otras entidades, y las entidades tienen asociaciones superpuestas con las mismas entidades de destino, debemos modelarla como una relación de muchos a muchos. Cada una de las entidades de cada lado de la relación tendrá una asociación de valor de colección que contiene entidades del tipo de destino. La Figura 4-16 muestra una relación many-to-many entre `Employee` y `Project`. Cada empleado puede trabajar en varios proyectos y varios empleados pueden trabajar en cada proyecto.
+
 ![04-16](images/04-16.png)
+
+Un mapeo many-to-many (muchos a muchos) se expresa tanto en las entidades de origen como en las de destino como una anotación `@ManyToMany` en los atributos de la colección. Por ejemplo, en el Listado 4-22, el `Employee` tiene un atributo `projects` que se ha anotado con `@ManyToMany`. Asimismo, la entidad `Project` tiene un atributo `employees` que también ha sido anotado con `@ManyToMany`.
+
+***Listado 4-22*** Relación Many-to-Many entre Employee y Project
+
+
+```java
+@Entity
+public class Employee {
+   @Id 
+   private long id;
+    
+   private String name;
+   
+   @ManyToMany
+   private Collection<Project> projects;
+   // ...
+}
+
+@Entity
+public class Project {
+   @Id 
+   private long id;
+    
+   private String name;
+   @ManyToMany(mappedBy="projects")
+   private Collection<Employee> employees;
+   // ...
+}
+```
+
+Existen algunas diferencias importantes entre esta relación de muchos a muchos y la relación de uno a muchos discutida anteriormente. La primera es una inevitabilidad matemática: cuando una relación de muchos a muchos es bidireccional, ambos lados de la relación son asignaciones de muchos a muchos.
+
+La segunda diferencia es que no hay columnas de combinación en ninguno de los lados de la relación. Verá en la siguiente sección que la única forma de implementar una relación de muchos a muchos es con una join table(tabla de combinación) separada. La consecuencia de no tener columnas de combinación en ninguna de las tablas de entidad es que no hay forma de determinar qué lado es el propietario de la relación. Debido a que toda relación bidireccional debe tener un lado propietario y un lado inverso, debemos elegir una de las dos entidades para que sea el propietario. En este ejemplo, elegimos a `Employee` como propietario de la relación, pero podríamos haber elegido `Project` con la misma facilidad. Como en cualquier otra relación bidireccional, el lado inverso debe usar el elemento `mappedBy` para identificar el atributo propietario.
+
+Tenga en cuenta que no importa qué lado se designe como propietario, el otro lado debe incluir el elemento `mappedBy`; de lo contrario, el proveedor pensará que ambos lados son propietarios y que las asignaciones son relaciones unidireccionales separadas.
+
+#### ***Using Join Tables***
+
+Debido a que la multiplicidad de ambos lados de una relación de muchos a muchos es plural, ninguna de las dos tablas de entidad puede almacenar un conjunto ilimitado de valores de clave externa en una sola fila de entidad. Debemos usar una tercera tabla para asociar los dos tipos de entidad. Esta tabla de asociación se denomina tabla de combinación y cada relación de varios a varios debe tener una. También pueden usarse para los otros tipos de relaciones, pero no son obligatorios y, por lo tanto, son menos comunes.
+
+Una join table consta simplemente de dos claves externas o columnas de combinación para hacer referencia a cada uno de los dos tipos de entidad en la relación. Luego, una colección de entidades se asigna como múltiples filas en la tabla, cada una de las cuales asocia una entidad con otra. El conjunto de filas que contiene un identificador de entidad dado en la columna de clave externa de origen representa la colección de entidades relacionadas con esa entidad dada.
+
+La Figura 4-17 muestra las tablas `EMPLOYEE` y `PROJECT` para las entidades `Employee` y `Project` y la tabla de combinación `EMP_PROJ` que las asocia. La tabla `EMP_PROJ` contiene solo columnas de clave externa que forman su clave primaria compuesta. La columna `EMP_ID` se refiere a la clave primaria `EMPLOYEE`, mientras que la columna `PROJ_ID` se refiere a la clave primaria `PROJECT`.
+
 ![04-17](images/04-17.png)
+
+Para mapear las tablas descritas en la Figura 4-17, necesitamos agregar algunos metadatos a la clase `Employee` que hemos designado como propietario de la relación. El Listado 4-23 muestra la relación many-to-many con las anotaciones de la join table adjuntas.
+
+***Listado 4-23*** Usando un Join Table
+
+```java
+@Entity
+public class Employee {
+   @Id 
+   private long id;
+   
+   private String name;
+   
+   @ManyToMany
+   @JoinTable(name="EMP_PROJ",
+      joinColumns=@JoinColumn(name="EMP_ID"),
+      inverseJoinColumns=@JoinColumn(name="PROJ_ID"))
+   
+   private Collection<Project> projects;
+   // ...
+}
+```
+
+```java
+```
+```java
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ![04-18](images/04-18.png)
 ![04-19](images/04-19.png)
 ![04-20](images/04-20.png)
