@@ -462,7 +462,7 @@ public class Employee {
 
 Cada entidad que se asigna a una base de datos relacional debe tener una asignación a una clave principal en la tabla. Ya ha aprendido los conceptos básicos de cómo la anotación `@Id` indica el identificador de la entidad. En esta sección, explorará identificadores simples y claves primarias con un poco más de profundidad y aprenderá cómo puede permitir que el proveedor de persistencia genere valores de identificadores únicos.
 
-**NOTA** ***Cuando un identificador de entidad se compone de un solo atributo, se denomina identificador simple.**
+**NOTA** ***Cuando un identificador de entidad se compone de un solo atributo, se denomina identificador simple.***
 
 ### OVERRIDING DE LA COLUMNA PRIMARY KEY
 
@@ -500,7 +500,7 @@ Los generadores de tablas y secuencias se pueden definir específicamente y lueg
 
 Si a una aplicación no le importa qué tipo de generación usa el proveedor pero quiere que ocurra la generación, puede especificar una estrategia de `AUTO`. Esto significa que el proveedor utilizará cualquier estrategia que desee para generar identificadores. El listado 4-14 muestra un ejemplo del uso de la generación automática de ID. Esto hará que el proveedor cree un valor de identificador y lo inserte en el campo `id` de cada entidad `Employee` que se conserva.
 
-**TIP** ***No se requiere explícitamente que el campo de identificador de entidad sea un tipo integral, pero normalmente es el único tipo que creará `AUTO`. Recomendamos que se utilice `long` para acomodar la extensión completa del dominio de identificador generado.
+**TIP** ***No se requiere explícitamente que el campo de identificador de entidad sea un tipo integral, pero normalmente es el único tipo que creará `AUTO`. Recomendamos que se utilice `long` para acomodar la extensión completa del dominio de identificador generado.***
 
 ***Listing 4-14*** Usando Auto ID Generation
 
@@ -565,7 +565,6 @@ En nuestro ejemplo, llamamos a nuestro generador `Emp_Gen` para que nuestra tabl
 
 ![04-03](images/04-03.png)
 
-
 Tenga en cuenta que el último identificador `Employee` asignado es 0, lo que nos indica que aún no se han generado identificadores. Se puede especificar un elemento `initialValue` que represente el último identificador asignado como parte de la definición del generador, pero el valor predeterminado de 0 será suficiente en casi todos los casos. Esta configuración se usa solo durante la generación del esquema cuando se crea la tabla. Durante ejecuciones posteriores, el proveedor leerá el contenido de la columna de valor para determinar el siguiente identificador que se dará.
 
 Para evitar actualizar la fila para cada identificador que se solicita, se usa un tamaño de asignación. Esto hará que el proveedor preasigne un bloque de identificadores y luego proporcione identificadores de la memoria según lo solicitado hasta que se agote el bloque. Una vez que este bloque se agota, la siguiente solicitud de un identificador activa otro bloque de identificadores para ser preasignado, y el valor del identificador se incrementa por el tamaño de la asignación. De forma predeterminada, el tamaño de la asignación se establece en 50. Este valor se puede anular para que sea mayor o menor mediante el uso del elemento `allocationSize` al definir el generador.
@@ -606,27 +605,237 @@ INSERT INTO id_gen (gen_name, gen_val) VALUES ('Emp_Gen', 0);
 INSERT INTO id_gen (gen_name, gen_val) VALUES ('Addr_Gen', 10000);
 ```
 
-```java
-```
-```java
-```
+#### ***ID Generation Usando a Database Sequence***
+
+Muchas bases de datos admiten un mecanismo interno para la generación de ID llamado ***sequences***. Se puede utilizar una secuencia de base de datos para generar identificadores cuando la base de datos subyacente los admite.
+
+Como vio con los generadores de tablas, si se sabe que se debe usar una secuencia de base de datos para generar identificadores, y no le preocupa que sea una secuencia en particular, especificar el tipo de generador solo debería ser suficiente:
 
 ```java
+@Id 
+@GeneratedValue(strategy=GenerationType.SEQUENCE)
+private long id;
 ```
+
+En este caso, no se nombra ningún generador, por lo que el proveedor utilizará un objeto de secuencia predeterminado de su propia elección. Tenga en cuenta que si se definen varios generadores de secuencia pero no se nombran, no se especifica si utilizan la misma secuencia predeterminada o diferentes. La única diferencia entre usar una secuencia para múltiples tipos de entidad y usar una para cada entidad sería el orden de los números de secuencia y la posible contención de la secuencia. La ruta más segura sería definir un generador de secuencia con nombre y hacer referencia a él en la anotación `@GeneratedValue`:
+
 ```java
+@SequenceGenerator(name="Emp_Gen", sequenceName="Emp_Seq")
+@Id 
+@GeneratedValue(generator="Emp_Gen")
+private long getId;
 ```
 
+A menos que la generación de esquemas esté habilitada, sería necesario que la secuencia esté definida y ya exista. El SQL para crear tal secuencia sería el siguiente:
 
+```java
+CREATE SEQUENCE Emp_Seq
+   MINVALUE 1
+   START WITH 1
+   INCREMENT BY 50
+```
 
+El valor inicial y el tamaño de asignación también se pueden usar en generadores de secuencias y deberían reflejarse en el SQL para crear la secuencia. Tenga en cuenta que el tamaño de asignación predeterminado es 50, al igual que con los generadores de tablas. Si no se está utilizando la generación de esquemas y la secuencia se está creando manualmente, la cláusula `INCREMENT BY` deberá configurarse para que coincida con el elemento `allocationSize` o el tamaño de asignación predeterminado de la anotación `@SequenceGenerator` correspondiente.
 
+#### ***ID Generation Usando Database Identity***
+
+Algunas bases de datos admiten una columna de identidad de clave principal, a veces denominada columna de numeración automática. Cada vez que se inserta una fila en la tabla, la columna de identidad recibirá un identificador único asignado. Se puede utilizar para generar los identificadores de objetos, pero una vez más está disponible solo cuando la base de datos subyacente lo admite. La identidad se usa a menudo cuando la base de datos no admite las secuencias de la base de datos o porque un esquema heredado ya ha definido la tabla para usar columnas de identidad. Por lo general, son menos eficientes para la generación de identificadores relacionales de objetos porque no se pueden asignar en bloques y porque el identificador no está disponible hasta después del tiempo de confirmación.
+
+Para indicar que debe producirse la generación `IDENTITY`, la anotación `@GeneratedValue` debe especificar una estrategia de generación de `IDENTITY`. Esto le indicará al proveedor que debe volver a leer la fila insertada de la tabla después de que se haya producido una inserción. Esto le permitirá obtener el identificador recién generado de la base de datos y colocarlo en la entidad en memoria que acaba de persistir:
+
+```java
+@Id 
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+private long id;
+```
+
+No hay una anotación de generador para `IDENTITY` porque debe definirse como parte de la definición del esquema de la base de datos para la columna de clave primaria de la entidad. Dado que cada columna de clave primaria de entidad define su propia característica de identidad, la generación de `IDENTITY` no se puede compartir entre varios tipos de entidad.
+
+Otra diferencia, insinuada anteriormente, entre el uso de `IDENTITY` y otras estrategias de generación de ID es que el identificador no será accesible hasta después de que se haya producido la inserción. Aunque no se garantiza la accesibilidad del identificador antes de que se complete la transacción, al menos es posible que otros tipos de generación asignen con entusiasmo el identificador (eagerly allocate the identifier). Pero cuando se usa la identidad, es la acción de insertar lo que hace que se genere el identificador. Sería imposible que el identificador esté disponible antes de que la entidad se inserte en la base de datos, y debido a que la inserción de entidades se difiere con mayor frecuencia hasta el momento de la confirmación, el identificador no estará disponible hasta después de que se haya committed la transacción.
+
+**TIP** ***Si usa `IDENTITY`, asegúrese de estar al tanto de lo que está haciendo su proveedor de persistencia y de que cumple con sus requisitos. Algunos proveedores insertan ansiosamente (eagerly insert) (cuando se invoca el método de persistencia) entidades que están configuradas para usar la generación de `IDENTITY` ID, en lugar de esperar hasta la hora de confirmación. Esto permitirá que la identificación esté disponible de inmediato, a expensas del bloqueo prematuro y la reducción de la concurrencia. Algunos proveedores incluso tienen una opción que le permite configurar qué enfoque se utiliza.***
+
+## Relationships
+
+Si las entidades contuvieran solo un estado persistente simple, el negocio del mapeo relacional de objetos sería trivial, de hecho. La mayoría de las entidades necesitan poder hacer referencia a otras entidades o tener relaciones con ellas. Esto es lo que produce los gráficos del modelo de dominio que son comunes en las aplicaciones comerciales.
+
+En las siguientes secciones, exploramos los diferentes tipos de relaciones que pueden existir y mostramos cómo definirlas y mapearlas utilizando metadatos de mapeo JPA.
+
+### CONCEPTOS DE RELACIÓN
+
+Antes de comenzar a mapear las relaciones, hagamos un recorrido rápido por algunos de los conceptos y terminología básicos de las relaciones. Tener un conocimiento firme de estos conceptos facilitará la comprensión del resto de las secciones de mapeo de relaciones.
+
+#### ***Roles***
+
+Hay un viejo adagio que dice que cada historia tiene tres lados: el tuyo, el mío y la verdad. Las relaciones son similares en el sentido de que hay tres perspectivas diferentes. La primera es la vista desde un lado de la relación, la segunda es desde el otro lado y la tercera es desde una perspectiva global que conoce a ambos lados. ***Los "lados" se llaman roles***. En cada relación hay dos entidades que están relacionadas entre sí, y se dice que cada entidad juega un papel en la relación.
+
+Las relaciones están en todas partes, por lo que no es difícil encontrar ejemplos. Un empleado tiene una relación con el departamento en el que trabaja. La entidad `Employee` desempeña el papel de trabajar en el departamento, mientras que la entidad `Department` desempeña el papel de tener un empleado trabajando en él.
+
+Por supuesto, el papel que desempeña una entidad determinada difiere según la relación, y una entidad puede participar en muchas relaciones diferentes con muchas entidades diferentes. Podemos concluir, por tanto, que cualquier en La ciudadanía podría estar desempeñando una serie de roles diferentes en cualquier modelo dado. Si pensamos en una entidad `Employee`, nos damos cuenta de que, de hecho, desempeña otros roles en otras relaciones, como el rol de trabajar para un gerente en su relación con otra entidad `Employee`, trabajar en un proyecto en su relación con el Entidad `Project`, etc. Aunque no existen requisitos de metadatos para declarar el papel que desempeña una entidad, los roles siguen siendo útiles como medio para comprender la naturaleza y estructura de las relaciones.
+
+#### ***Direccionalidad***
+
+Para tener relaciones, tiene que haber una forma de crearlas, eliminarlas y mantenerlas. La forma básica en que esto se hace es mediante una entidad que tiene un atributo de relación que se refiere a su entidad relacionada de una manera que la identifica como desempeñando el otro rol de la relación. A menudo ocurre que la otra entidad, a su vez, tiene un atributo que apunta a la entidad original. ***Cuando cada entidad apunta a la otra, la relación es bidireccional***. ***Si solo una entidad tiene un puntero hacia la otra, se dice que la relación es unidireccional***.
+
+La relación de un `Employee` con el `Project` en el que trabaja sería bidireccional. El `Employee` debe conocer su `Project` y el `Project` debe señalar al `Employee` que está trabajando en él. En la Figura 4-5 se muestra un modelo UML de esta relación. Las flechas que van en ambas direcciones indican la bidireccionalidad de la relación.
 
 ![04-05](images/04-05.png)
+
+Un `Employee` y su `Address` probablemente se modelarían como una relación unidireccional porque no se espera que la `Address` necesite conocer a su residente. Si lo hiciera, por supuesto, tendría que convertirse en una relación bidireccional. La figura 4-6 muestra esta relación. Debido a que la relación es unidireccional, la flecha apunta del Empleado a la Dirección.
+
 ![04-06](images/04-06.png)
+
+Como verá más adelante en el capítulo, aunque ambos comparten el mismo concepto de direccionalidad, los modelos de objetos y de datos lo ven de manera un poco diferente debido a la diferencia de paradigma. En algunos casos, las relaciones unidireccionales en el modelo de objetos pueden plantear un problema en el modelo de base de datos.
+
+Podemos usar la direccionalidad de una relación para ayudar a describir y explicar un modelo, pero cuando se trata de discutirlo en términos concretos, tiene sentido pensar en cada relación bidireccional como un par de relaciones unidireccionales. En lugar de tener una única relación bidireccional de un `Employee` que trabaja en un `Project`, tendríamos una relación de "proyecto" unidireccional donde el `Employee` apunta al `Project` en el que trabaja y otra relación de "trabajador" unidireccional donde el `Project` apunta al `Employee` que trabaja en eso. Cada una de estas relaciones tiene una entidad que es el rol de origen o de referencia y el lado que es el rol de destino o al que se hace referencia. La belleza de esto es que podemos usar los mismos términos sin importar de qué relación estemos hablando y sin importar qué roles haya en la relación. La Figura 4-7 muestra cómo las dos relaciones tienen entidades de origen y destino, y cómo, desde la perspectiva de cada relación, las entidades de origen y destino son diferentes.
+
 ![04-07](images/04-07.png)
+
+#### ****Cardinalidad***
+
+No es muy frecuente que un proyecto tenga un solo empleado trabajando en él. Nos gustaría poder capturar el aspecto de cuántas entidades existen en cada lado de la misma instancia de relación. Esto se llama cardinalidad de la relación. Cada rol en una relación tendrá su propia cardinalidad, que indica si puede haber solo una instancia de la entidad o muchas instancias.
+
+En nuestro ejemplo de `Employee` y `Department`, primero podríamos decir que un empleado trabaja en un departamento, por lo que la cardinalidad de ambos lados sería uno. Pero lo más probable es que más de un empleado trabaje en el departamento, por lo que haríamos que la relación tenga muchas cardinalidades en el lado del `Employee` o de la fuente, lo que significa que muchas instancias de `Employee` podrían apuntar al mismo `Department`. El lado objetivo o `Department` mantendría su cardinalidad de uno. La figura 4-8 muestra esta relación de muchos a uno. El lado "muchos" está marcado con un asterisco (`*`).
+
 ![04-08](images/04-08.png)
+
+En nuestro ejemplo de `Employee` y `Project`, tenemos una relación bidireccional o dos direcciones de relación. Si un empleado puede trabajar en varios proyectos, y un proyecto puede tener varios empleados trabajando en él, terminaríamos con cardinalidades de "muchos" en las fuentes y objetivos de ambas direcciones. La figura 4-9 muestra el diagrama UML de esta relación.
+
 ![04-09](images/04-09.png)
+
+Como dice el refrán, una imagen vale más que mil palabras, y describir estas relaciones en el texto es mucho más difícil que mostrar una imagen. Sin embargo, en palabras, esta imagen indica lo siguiente:
+
+* Cada empleado puede trabajar en varios proyectos.
+
+* Muchos empleados pueden trabajar en el mismo proyecto.
+
+* Cada proyecto puede tener varios empleados trabajando en él.
+
+* Muchos proyectos pueden tener el mismo empleado trabajando en ellos.
+
+Implícito en este modelo está el hecho de que se pueden compartir las instancias de `Employee` y `Project` entre múltiples instancias de relación.
+
+#### ***Ordinalidad***
+
+Un rol se puede especificar más determinando si podría estar presente o no. Esto se llama ***ordinalidad*** y sirve para mostrar si la entidad de destino(target) debe especificarse cuando se crea la entidad de origen(source). Debido a que la ordinalidad es en realidad solo un valor booleano, también se denomina opcionalidad de la relación.
+
+En términos de cardinalidad, la ordinalidad estaría indicada por la cardinalidad como un rango en lugar de un valor simple, y el rango comenzaría con 0 o 1 dependiendo de la ordinalidad. Sin embargo, es más sencillo decir simplemente que la relación es opcional u obligatoria. Si es opcional, es posible que el target no esté presente; si es obligatorio, una entidad source(origen) sin una referencia a su entidad target(destino) asociada se encuentra en un estado no válido.
+
+### DESCRIPCIÓN GENERAL DE MAPPINGS
+
+Ahora que conoce la teoría suficiente y tiene los antecedentes conceptuales para poder discutir las relaciones, podemos continuar explicando y usando los mapeos de relaciones.
+
+Cada una de las asignaciones recibe el nombre de la cardinalidad de los roles de origen y destino (source and target ). Como se muestra en las secciones anteriores, una relación bidireccional puede verse como un par de dos asignaciones unidireccionales. Cada uno de estos mapeos es realmente un mapeo de relación unidireccional, y si tomamos las cardinalidades de la fuente y el destino de la relación y las combinamos en ese orden, permutando con los dos valores posibles de "uno" y "muchos", terminan con los siguientes nombres dados a las asignaciones:
+
+* Many-to-one
+
+* One-to-one
+
+* One-to-many
+
+* Many-to-many
+
+Estos nombres de asignación también son los nombres de las anotaciones que se utilizan para indicar los tipos de relación en los atributos que se asignan. Son la base de las anotaciones de relaciones lógicas y contribuyen a los aspectos de modelado de objetos de la entidad. Al igual que las asignaciones básicas, las asignaciones de relaciones se pueden aplicar a campos o propiedades de la entidad.
+
+### ASOCIACIONES SINGLE-VALUED
+
+Una asociación de una instancia de entidad a otra instancia de entidad (donde la cardinalidad del objetivo es "uno") se denomina asociación de un solo valor (single-valued). Las asignaciones de relaciones many-to-one y de one-to-one se incluyen en esta categoría porque la entidad de origen se refiere como máximo a una entidad de destino. Primero discutimos estas relaciones y algunas de sus variantes.
+
+#### ***Many-to-One Mappings***
+
+En nuestra discusión sobre la cardinalidad de la relación `Employee` y `Department` (que se muestra en la Figura 4-8), primero pensamos en un empleado que trabaja en un departamento, por lo que simplemente asumimos que era una relación uno a uno. Sin embargo, cuando nos dimos cuenta de que más de un empleado trabaja en el mismo departamento, lo cambiamos a un mapeo de relaciones de muchos a uno. Resulta que muchos a uno es el mapeo más común y es el que se usa normalmente al crear una asociación a una entidad.
+
+La figura 4-10 muestra una relación de varios a uno entre `Employee` y `Department`. El `Employee` es el lado "muchos" y el source(origen) de la relación, y el `Department` es el lado "uno" y el target(objetivo). Una vez más, debido a que la flecha apunta en una sola dirección, de `Employee` a `Department`, la relación es unidireccional. Tenga en cuenta que en UML, la clase de origen tiene un atributo implícito del tipo de clase de destino si se puede navegar a él. Por ejemplo, `Employee` tiene un atributo llamado `department` que contendrá una referencia a una única instancia de `Department`. El atributo real no se muestra en la clase `Employee`, pero está implícito en la presencia de la flecha de relación.
+
 ![04-10](images/04-10.png)
+
+Un mapeo many-to-one se define anotando el atributo en la entidad de origen(source) (el atributo que se refiere a la entidad de destino(target)) con la anotación `@ManyToOne`. El Listado 4-16 muestra cómo se usa la anotación `@ManyToOne` para mapear esta relación. El campo de `department` en `Employee` es el atributo de origen anotado.
+
+***Listado 4-16*** Many-to-One Relationship desde Employee a Department
+
+```java
+@Entity
+public class Employee {
+   // ...
+   @ManyToOne
+   private Department department;
+   // ...
+}
+```
+
+Hemos incluido solo los segmentos de la clase que son relevantes para nuestra discusión, pero puede ver en el ejemplo anterior que el código fue bastante anticlimático. Una sola anotación era todo lo que se requería para mapear la relación, y resultó ser bastante aburrida, en realidad. Por supuesto, cuando se trata de configuración, lo aburrido es hermoso.
+
+Los mismos tipos de flexibilidad de atributos y requisitos de modificadores que se describieron para las asignaciones básicas también se aplican a las asignaciones de relaciones. La anotación puede estar presente en el campo o en la propiedad, según la estrategia utilizada para la entidad.
+
+#### ***Usar Join Columns***
+
+En la base de datos, un mapeo de relaciones significa que una tabla tiene una referencia a otra tabla. El término de la base de datos para una columna que se refiere a una clave (generalmente la clave principal) en otra tabla es una ***foreign key column (columna de clave externa)***. En JPA, se denominan join columns(columnas de unión), y la anotación `@JoinColumn` es la anotación principal que se utiliza para configurar este tipo de columnas.
+
+**NOTA** ***Más adelante en el capítulo, hablaremos de columnas de combinación que están presentes en otras tablas llamadas tablas de combinación. En el Capítulo 10, cubrimos un caso más avanzado del uso de una tabla de combinación para asociaciones de un solo valor.***
+
+Considere las tablas `EMPLOYEE` y `DEPARTMENT` que se muestran en la Figura 4-11 que corresponden a las entidades `Employee` y `Department`. La tabla `EMPLOYEE` tiene una columna foreign key denominada `DEPT_ID` que hace referencia a la tabla `DEPARTMENT`. Desde la perspectiva de la relación entre entidades, `DEPT_ID` es la columna de combinación que asocia las entidades `Employee` y `Department`.
+
 ![04-11](images/04-11.png)
+
+***En casi todas las relaciones, independientemente de los lados de origen y destino, uno de los dos lados tendrá la join column(columna de combinación) en su tabla***. Ese lado se llama **el lado propietario o el propietario de la relación**. ***El lado que no tiene la columna de unión se denomina lado no propietario o inverso***.
+
+La propiedad es importante para la asignación porque las anotaciones físicas que definen las asignaciones a las columnas en la base de datos (por ejemplo, `@JoinColumn`) siempre se definen en el lado propietario de la relación. Si no están allí, los valores están predeterminados desde la perspectiva del atributo en el lado propietario.
+
+**NOTA**: ***Aunque hemos descrito el lado propietario como determinado por el esquema de datos, el modelo de objeto debe indicar el lado propietario mediante el uso de anotaciones de mapeo de relaciones. La ausencia del elemento `mappedBy` en la anotación de mapeo implica la propiedad de la relación, mientras que la presencia del elemento `mappedBy` significa que la entidad está en el lado inverso de la relación. El elemento `mappedBy` se describe en secciones posteriores.***
+
+
+Las Many-to-one mappings siempre están en el lado propietario de una relación, por lo que si hay una `@JoinColumn` en la relación que tiene un lado de muchos a uno, ahí es donde se ubicará. Para especificar el nombre de la columna de combinación, se utiliza el elemento `name`. Por ejemplo, la anotación `@JoinColumn(name="DEPT_ID")` significa que la columna `DEPT_ID` en la tabla de la entidad de origen es la clave externa a la tabla de la entidad de destino, cualquiera que sea la entidad de destino de la relación.
+
+Si ninguna anotación `@JoinColumn` acompaña a la many-to-one mapping, se asumirá un nombre de columna predeterminado. El nombre que se utiliza como predeterminado se forma a partir de una combinación de las entidades de origen y de destino. Es el nombre del atributo de relación en la entidad de origen, que es `department` en nuestro ejemplo, más un carácter de subrayado (`_`), más el nombre de la columna de clave principal de la entidad de destino. Por lo tanto, si la entidad `Department` se asignó a una tabla que tenía una columna de clave principal denominada `ID`, se supondría que la columna de combinación en la tabla `EMPLOYEE` se denominaría `DEPARTMENT_ID`. Si este no es realmente el nombre de la columna, se debe definir la anotación `@JoinColumn` para anular la predeterminada.
+
+Volviendo a la Figura 4-11, la columna de foreign key (clave externa) se denomina `DEPT_ID` en lugar del nombre predeterminado de la columna `DEPARTMENT_ID`. El Listado 4-17 muestra la anotación `@JoinColumn` que se usa para override el nombre de la join column(columna de unión) para que sea `DEPT_ID`.
+
+***Listado 4-17*** Many-to-One Relationship Overriding the Join Column
+
+```java
+@Entity
+public class Employee {
+   @Id 
+   private long id;
+   
+   @ManyToOne
+   @JoinColumn(name="DEPT_ID")
+   private Department department;
+   
+   // ...
+}
+```
+
+```java
+```
+```java
+```
+
+
+```java
+```
+```java
+```
+
+```java
+```
+```java
+```
+
+```java
+```
+```java
+```
+
+
+
+
+
+
+
+
+
+
 ![04-12](images/04-12.png)
 ![04-13](images/04-13.png)
 ![04-14](images/04-14.png)
