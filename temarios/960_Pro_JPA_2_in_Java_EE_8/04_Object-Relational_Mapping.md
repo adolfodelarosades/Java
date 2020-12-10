@@ -1019,28 +1019,173 @@ public class Employee {
 }
 ```
 
-```java
-```
-```java
-```
+La anotación `@JoinTable` se usa para configurar la tabla de combinación para la relación. Las dos columnas de combinación en la tabla de combinación se distinguen por el lado propietario y el lado inverso. La columna de unión al lado propietario se describe en el elemento `joinColumns`, mientras que la columna de unión al lado inverso se especifica mediante el elemento `inverseJoinColumns`. Puede ver en el Listado 4-23 que los valores de estos elementos son en realidad anotaciones `@JoinColumn` incrustadas dentro de la anotación `@JoinTable`. Esto proporciona la capacidad de declarar toda la información sobre las columnas de combinación dentro de la tabla que las define. Los nombres están en plural para las ocasiones en las que puede haber varias columnas para cada clave externa (ya sea la entidad propietaria o la entidad inversa tiene una clave primaria multiparte). Este caso más complicado se analiza en el Capítulo 10.
 
+En nuestro ejemplo, especificamos completamente los nombres de la tabla de combinación y sus columnas porque este es el caso más común. Pero si estuviéramos generando el esquema de la base de datos a partir de las entidades, en realidad no necesitaríamos especificar esta información. Podríamos haber confiado en los valores predeterminados que se asumirían y usarían cuando el proveedor de persistencia genera la tabla por nosotros. Cuando no hay una anotación `@JoinTable` presente en el lado propietario, entonces se asume una tabla de unión predeterminada llamada `<Owner>_<Inverse>`, donde `<Owner>` es el nombre de la entidad propietaria y `<Inverse>` es el nombre de la inversa  o entidad no propietaria. Por supuesto, el propietario básicamente es elegido al azar por el desarrollador, por lo que estos valores predeterminados se aplicarán de acuerdo con la forma en que se mapee la relación y la entidad que se designe como propietario.
 
+Las join column se establecerán de forma predeterminada de acuerdo con las reglas predeterminadas de la columna de combinación que se describieron anteriormente en la sección "Uso de join column". El nombre predeterminado de la join column que apunta a la entidad propietaria es el nombre del atributo en la entidad inversa que apunta a la entidad propietaria, adjuntado con un guión bajo y el nombre de la columna de clave principal de la tabla de la entidad propietaria. Entonces, en nuestro ejemplo, el `Employee` es la entidad propietaria y el `Project` tiene un atributo `employees` que contiene la colección de instancias de `Employee`. La entidad `Employee` se asigna a la tabla `EMPLOYEE` y tiene una columna de clave principal de `ID`, por lo que el nombre predeterminado de la columna de unión a la entidad propietaria sería `EMPLOYEES_ID`. La columna de combinación inversa también estaría predeterminada en `PROJECTS_ID`.
 
+Es bastante claro que los nombres predeterminados de una  join table y las join columns dentro de ella probablemente no coincidan con una tabla existente. Es por eso que mencionamos que los valores predeterminados son realmente útiles solo si el esquema de la base de datos que se asigna fue generado por el proveedor.
 
+#### Unidirectional Collection Mappings
 
-
-
-
-
-
-
-
-
-
+Cuando una entidad tiene una asignación de uno a muchos a una entidad de destino, pero la anotación `@OneToMany` no incluye el elemento `mappedBy`, se supone que está en una relación unidireccional con la entidad de destino. Esto significa que la entidad de destino no tiene un mapeo de varios a uno con la entidad de origen. La Figura 4-18 muestra una asociación unidireccional de uno a varios entre `Employee` y `Phone`.
 
 ![04-18](images/04-18.png)
+
+Considere el modelo de datos de la Figura 4-19. No hay una  join column para almacenar la asociación desde el `Phone` al empleado. Por lo tanto, hemos utilizado una join table para asociar la entidad `Phone` con la entidad `Employee`.
+
 ![04-19](images/04-19.png)
+
+De manera similar, cuando un lado de una relación de muchos a muchos no tiene una correspondencia con el otro, se trata de una relación unidireccional. La tabla de combinación aún debe usarse; la única diferencia es que solo uno de los dos tipos de entidad realmente usa la tabla para cargar sus entidades relacionadas o la actualiza para almacenar asociaciones de entidades adicionales.
+
+En estos dos casos unidireccionales con valor de colección, el código fuente es similar a los ejemplos anteriores, pero no hay ningún atributo en la entidad de destino para hacer referencia a la entidad de origen, y el elemento mappedBy no estará presente en la anotación @OneToMany en la entidad fuente. La tabla de combinación ahora debe especificarse como parte del mapeo. El Listado 4-24 muestra al Empleado con una relación de uno a varios con el Teléfono usando una tabla de combinación.
+
+Listing 4-24 Unidirectional One-to-Many Relationship
+
+```java
+@Entity
+public class Employee {
+    @Id private long id;
+    private String name;
+    @OneToMany
+    @JoinTable(name="EMP_PHONE",
+          joinColumns=@JoinColumn(name="EMP_ID"),
+          inverseJoinColumns=@JoinColumn(name="PHONE_ID"))
+    private Collection<Phone> phones;
+    // ...
+}
+```
+
+Tenga en cuenta que al generar el esquema, el nombre predeterminado de las columnas de combinación es ligeramente diferente en el caso unidireccional porque no hay un atributo inverso. El nombre de la tabla de combinación sería de forma predeterminada EMPLOYEE_PHONE y tendría una columna de combinación denominada EMPLOYEE_ID después del nombre de la entidad Empleado y su columna de clave principal. La columna de combinación inversa se llamaría PHONES_ID, que es la concatenación del atributo de teléfonos en la entidad Empleado y la columna de clave principal ID de la tabla TELÉFONO.
+
+RELACIONES PEREZAS
+Las secciones anteriores mostraron cómo configurar un atributo para que se cargue cuando se accede a él y no necesariamente antes. Aprendió que la carga diferida a nivel de atributo normalmente no es muy beneficiosa.
+
+Sin embargo, a nivel de relación, la carga diferida puede ser una gran ayuda para mejorar el rendimiento. Puede reducir la cantidad de SQL que se ejecuta y acelerar considerablemente las consultas y la carga de objetos.
+
+El modo de búsqueda se puede especificar en cualquiera de los cuatro tipos de mapeo de relaciones. Cuando no se especifica en una relación de valor único, se garantiza que el objeto relacionado se cargará con entusiasmo. Las relaciones con valores de colección se cargan por defecto de forma diferida, pero debido a que la carga diferida es solo una pista para el proveedor, se pueden cargar con entusiasmo si el proveedor decide hacerlo.
+
+En los casos de relaciones bidireccionales, el modo de búsqueda puede ser perezoso por un lado pero ansioso por el otro. Este tipo de configuración es bastante común porque a menudo se accede a las relaciones de diferentes maneras según la dirección desde la que se produce la navegación.
+
+Un ejemplo de cómo anular el modo de recuperación predeterminado es si no queremos cargar el ParkingSpace para un Empleado cada vez que cargamos el Empleado. El listado 4-25 muestra el atributo parkingSpace configurado para usar la carga diferida.
+
+```java
+@Entity
+public class Employee {
+    @Id private long id;
+    @OneToOne(fetch=FetchType.LAZY)
+    private ParkingSpace parkingSpace;
+    // ...
+}
+Listing 4-25Changing the Fetch Mode on a Relationship
+```
+
+La relación TIPA que se especifica o está predeterminada para cargarse de forma diferida puede o no causar que el objeto relacionado se cargue cuando se usa el método getter para acceder al objeto. El objeto podría ser un proxy, por lo que podría ser necesario invocar un método en él para provocar una falla.
+Objetos incrustados
+Un objeto incrustado es aquel que depende de una entidad para su identidad. No tiene identidad propia, sino que es simplemente parte del estado de la entidad que ha sido tallado y almacenado en un objeto Java separado que cuelga de la entidad. En Java, los objetos incrustados parecen similares a las relaciones en el sentido de que son referenciados por una entidad y, en el sentido de Java, parecen ser el objetivo de una asociación. En la base de datos, sin embargo, el estado del objeto incrustado se almacena con el resto del estado de la entidad en la fila de la base de datos, sin distinción entre el estado de la entidad Java y el de su objeto incrustado.
+
+SUGERENCIA: aunque las entidades que los poseen hacen referencia a los objetos incrustados, no se dice que estén en relación con las entidades. El término relación solo se puede aplicar cuando ambos lados son entidades.
+Si la fila de la base de datos contiene todos los datos tanto de la entidad como de su objeto incrustado, ¿por qué tener ese objeto de todos modos? ¿Por qué no simplemente definir los campos de la entidad para hacer referencia a todo su estado de persistencia en lugar de dividirlo en uno o más subobjetos que son objetos persistentes de segunda clase que dependen de la entidad para su existencia?
+
+Esto nos lleva de nuevo al desajuste de impedancia relacional de objeto del que hablamos en el Capítulo 1. Debido a que el registro de la base de datos contiene más de un tipo lógico, tiene sentido hacer esa separación explícita en el modelo de objeto de la aplicación aunque la representación física sea diferente. Casi se podría decir que el objeto incrustado es una representación más natural del concepto de dominio que una simple colección de atributos en la entidad. Además, una vez que haya identificado una agrupación de estado de entidad que forma un objeto incrustado, puede compartir el mismo tipo de objeto incrustado con otras entidades que también tienen la misma representación interna.
+
+Un ejemplo de dicha reutilización es la información de dirección. La Figura 4-20 muestra una tabla de EMPLEADOS que contiene una combinación de información básica del empleado, así como columnas que corresponden a la dirección del hogar del empleado.
+
 ![04-20](images/04-20.png)
+
+Las columnas STREET, CITY, STATE y ZIP_CODE se combinan lógicamente para formar la dirección. En el modelo de objetos, este es un candidato excelente para ser abstraído en un tipo incrustado de dirección separado en lugar de enumerar cada atributo en la clase de entidad. La clase de entidad simplemente tendría un atributo de dirección apuntando a un objeto incrustado de tipo Dirección. La figura 4-21 muestra cómo el empleado y la dirección se relacionan entre sí. La asociación de composición UML se usa para indicar que el Empleado es el propietario total de la Dirección y que una instancia de la Dirección no puede ser compartida por ningún otro objeto que no sea la instancia del Empleado que la posee.
+
 ![04-21](images/04-21.png)
+
+Con esta representación, la información de la dirección no solo está perfectamente encapsulada dentro de un objeto, sino que si otra entidad, como la Compañía, también tiene información de la dirección, también puede tener un atributo que apunte a su propio objeto de dirección integrado. Describimos este escenario en la siguiente sección.
+
+Un tipo incrustado se marca como tal agregando la anotación @Embeddable a la definición de clase. Esta anotación sirve para distinguir la clase de otros tipos regulares de Java. Una vez que una clase se ha designado como incrustable, sus campos y propiedades serán persistentes como parte de una entidad. También podríamos querer definir el tipo de acceso del objeto incrustable para que se acceda de la misma manera independientemente de la entidad en la que esté incrustado. El Listado 4-26 muestra la definición del tipo incrustado Dirección.
+
+```java
+@Embeddable @Access(AccessType.FIELD)
+public class Address {
+    private String street;
+    private String city;
+    private String state;
+    @Column(name="ZIP_CODE")
+    private String zip;
+    // ...
+}
+Listing 4-26Embeddable Address Type
+```
+
+Para usar esta clase en una entidad, la entidad debe tener solo un atributo del tipo incrustable. El atributo se anota opcionalmente con la anotación @Embedded para indicar que es un mapeo integrado. El Listado 4-27 muestra la clase Empleado usando un objeto Dirección incrustado.
+
+
+```java
+@Entity
+public class Employee {
+    @Id private long id;
+    private String name;
+    private long salary;
+    @Embedded private Address address;
+    // ...
+}
+Listing 4-27Using an Embedded Object
+```
+
+Cuando el proveedor persiste en una instancia de Empleado, accederá a los atributos del objeto Dirección como si estuvieran presentes en la propia instancia de la entidad. Las asignaciones de columnas en el tipo Dirección realmente pertenecen a las columnas de la tabla EMPLEADO, aunque se enumeran en un tipo diferente.
+
+La decisión de utilizar entidades o objetos incrustados depende de si cree que alguna vez necesitará crear relaciones con ellos o a partir de ellos. Los objetos incrustados no están destinados a ser entidades, y tan pronto como empiece a tratarlos como entidades, probablemente debería convertirlos en entidades de primera clase en lugar de objetos incrustados si el modelo de datos lo permite.
+
+SUGERENCIA No es portátil definir objetos incrustados como parte de las jerarquías de herencia. Una vez que comienzan a extenderse entre sí, la complejidad de incorporarlos aumenta y la relación valor por costo disminuye.
+Antes de llegar a nuestro ejemplo, mencionamos que una clase de dirección podría reutilizarse tanto en las entidades de empleado como de empresa. Idealmente, nos gustaría la representación que se muestra en la Figura 4-22. Aunque las clases Empleado y Compañía comprenden la clase Dirección, esto no es un problema porque cada instancia de Dirección será utilizada por una única instancia de Empleado o Compañía.
+
+
 ![04-22](images/04-22.png)
+
+Dado que las asignaciones de columnas del tipo incrustado Dirección se aplican a las columnas de la entidad contenedora, es posible que se pregunte cómo es posible compartir si las dos tablas de entidades tienen diferentes nombres de columna para los mismos campos. La figura 4-23 demuestra este problema. La tabla EMPRESA coincide con los atributos predeterminados y asignados del tipo de dirección definido anteriormente, pero la tabla EMPLEADO de este ejemplo se ha modificado para que coincida con los requisitos de dirección de una persona que vive en Canadá. Necesitamos una forma para que una entidad asigne el objeto incrustado de acuerdo con sus propias necesidades de tabla de entidad, y tenemos una en la anotación @AttributeOverride.
+
 ![04-23](images/04-23.png)
+
+Usamos una anotación @AttributeOverride para cada atributo del objeto incrustado que queremos anular en la entidad. Anotamos el campo o propiedad incrustado en la entidad y especificamos en el elemento de nombre el campo o propiedad en el objeto incrustado que estamos anulando. El elemento de columna nos permite especificar la columna a la que se asigna el atributo en la tabla de la entidad. Lo indicamos en forma de una anotación @Column anidada. Si anulamos varios campos o propiedades, podemos usar la anotación @AttributeOverrides en plural y anidar varias anotaciones @AttributeOverride dentro de ella.
+
+El Listado 4-28 muestra un ejemplo del uso de Dirección tanto en Empleado como en Compañía. La entidad Compañía usa el tipo Dirección sin cambios, pero la entidad Empleado especifica dos invalidaciones de atributos para asignar el estado y los atributos zip de la Dirección a las columnas PROVINCE y POSTAL_CODE de la tabla EMPLOYEE.
+
+```java
+@Entity
+public class Employee {
+    @Id private long id;
+    private String name;
+    private long salary;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name="state", column=@Column(name="PROVINCE")),
+        @AttributeOverride(name="zip", column=@Column(name="POSTAL_CODE"))
+    })
+    private Address address;
+    // ...
+}
+@Entity
+public class Company {
+    @Id private String name;
+    @Embedded
+    private Address address;
+    // ...
+}
+Listing 4-28Reusing an Embedded Object in Multiple Entities
+```
+
+## Resumen
+La asignación de objetos a bases de datos relacionales es de vital importancia para las aplicaciones de persistencia. Lidiar con el desajuste de impedancia requiere un conjunto sofisticado de metadatos. JPA no solo proporciona estos metadatos, sino que también facilita el desarrollo fácil y conveniente.
+
+En este capítulo, analizamos el proceso de mapeo del estado de la entidad que incluía tipos simples de Java, objetos grandes, tipos enumerados y tipos temporales. También usamos los metadatos para hacer un mapeo de encuentro en el medio a nombres de tablas y columnas específicas.
+
+Explicamos cómo se generan los identificadores y describimos cuatro estrategias diferentes de generación. Viste las diferentes estrategias en acción y aprendiste a diferenciarlas unas de otras.
+
+Luego revisamos algunos de los conceptos de relación y los aplicamos a metadatos de mapeo relacional de objetos. Usamos unir columnas y unir tablas para mapear asociaciones de un solo valor y de colección y repasamos algunos ejemplos. También discutimos tipos especiales de objetos llamados incrustables que están mapeados pero no tienen identificadores y solo pueden existir dentro de entidades persistentes.
+
+El próximo capítulo analiza más las complejidades de mapear relaciones valoradas por colecciones, así como también cómo mapear colecciones de objetos que no son entidades. Profundizamos en los diferentes tipos de Colección y las formas en que estos tipos se pueden usar y mapear, y vemos cómo afectan las tablas de la base de datos que se están mapeando.
+
+#### Notas al pie
+
+1 Aunque los tipos incrustados se pueden compartir o reutilizar, las instancias no. Una instancia de objeto incrustado pertenece a la entidad que hace referencia a ella; y ninguna otra instancia de entidad, de ese tipo de entidad o de cualquier otro, puede hacer referencia a la misma instancia incorporada.
+
+
+
