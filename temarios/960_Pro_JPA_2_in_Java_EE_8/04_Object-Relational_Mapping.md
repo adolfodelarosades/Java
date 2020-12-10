@@ -806,39 +806,77 @@ public class Employee {
 }
 ```
 
-```java
-```
-```java
-```
+Las anotaciones nos permiten especificar `@JoinColumn` en la misma línea que `@ManyToOne` o en una línea separada, arriba o abajo. **Por convención, el mapeo lógico debería aparecer primero, seguido del mapeo físico**. Esto aclara el modelo de objetos porque la parte física es menos importante para el modelo de objetos.
 
+#### ***One-to-One Mappings***
 
-```java
-```
-```java
-```
-
-```java
-```
-```java
-```
-
-```java
-```
-```java
-```
-
-
-
-
-
-
-
-
-
+Si solo un empleado pudiera trabajar en un departamento, volveríamos a la asociación uno a uno. Sin embargo, un ejemplo más realista de una asociación uno a uno sería un empleado que tiene una plaza de aparcamiento. Suponiendo que a cada empleado se le asignara su propio espacio de estacionamiento, crearíamos una relación uno a uno entre el `Employee` y `ParkingSpace`. La figura 4-12 muestra esta relación.
 
 ![04-12](images/04-12.png)
+
+Definimos el mapeo de forma similar a como definimos un mapeo de many-to-one, excepto que usamos la anotación `@OneToOne` en lugar de una anotación `@ManyToOne` en el atributo `parkingSpace`. Al igual que con el mapeo de many-to-one, el mapeo one-to-one tiene una join column(columna de combinación) en la base de datos y debe anular el nombre de la columna en una anotación `@JoinColumn` cuando el nombre predeterminado no se aplica. El nombre predeterminado se compone de la misma manera que para el mapeo de many-to-one utilizando el nombre del atributo de origen y el nombre de la columna de clave principal de destino.
+
+La Figura 4-13 muestra las tablas mapeadas por las entidades `Employee` y `ParkingSpace`. La columna de clave externa en la tabla `EMPLOYEE` se denomina `PSPACE_ID` y hace referencia a la tabla `PARKING_SPACE`.
+
 ![04-13](images/04-13.png)
+
+Resulta que el mapeo one-to-one son casi las mismas que el mapeo many-to-one, excepto que solo una instancia de la entidad de origen puede hacer referencia a la misma instancia de entidad de destino. En otras palabras, la instancia de la entidad de destino no se comparte entre las instancias de la entidad de origen. En la base de datos, esto equivale a tener una restricción de unicidad en la columna de la foreign key de origen (es decir, la columna de foreign key en la tabla de entidad de origen). Si hubiera más de un valor de foreign key que fuera el mismo, infringiría la regla de que no más de una instancia de entidad de origen puede hacer referencia a la misma instancia de entidad de destino.
+
+El listado 4-18 muestra el mapeo de esta relación. La anotación `@JoinColumn` se ha utilizado para anular el nombre predeterminado de la columna de unión de `PARKINGSPACE_ID` para que sea `PSPACE_ID`.
+
+***Listado 4-18*** One-to-One Relationship desde Employee a ParkingSpace
+
+```java
+@Entity
+public class Employee {
+   @Id 
+   private long id;
+   
+   private String name;
+   
+   @OneToOne
+   @JoinColumn(name="PSPACE_ID")
+   private ParkingSpace parkingSpace;
+   // ...
+}
+```
+
+#### ***Bidirectional One-to-One Mappings***
+
+La entidad de destino de one-to-one a menudo tiene una relación con la entidad de origen; por ejemplo, `ParkingSpace` tiene una referencia al `Employee` que lo usa. Cuando este es el caso, se denomina **relación bidireccional uno a uno**. Como vio anteriormente, en realidad tenemos dos mapeos uno a uno separados, uno en cada dirección, pero la combinación de los dos se llama relación bidireccional uno a uno. Para hacer que nuestro ejemplo de espacio de estacionamiento y empleado individual existente sea bidireccional, solo necesitamos cambiar el `ParkingSpace` para que apunte al `Employee`. La figura 4-14 muestra la relación bidireccional.
+
 ![04-14](images/04-14.png)
+
+```java
+```
+
+
+```java
+```
+```java
+```
+
+```java
+```
+```java
+```
+
+```java
+```
+```java
+```
+
+
+
+
+
+
+
+
+
+
+
+
 ![04-15](images/04-15.png)
 ![04-16](images/04-16.png)
 ![04-17](images/04-17.png)
