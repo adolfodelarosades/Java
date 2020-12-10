@@ -285,7 +285,7 @@ A continuación, tenga en cuenta que `@Column` se puede usar con asignaciones de
 
 ### LAZY FETCHING
 
-En ocasiones, se sabrá de antemano que rara vez se accederá a determinadas partes de una entidad. En estas situaciones, puede optimizar el rendimiento al recuperar la entidad obteniendo solo los datos a los que espera que se acceda con frecuencia; el resto de los datos se puede recuperar solo cuando o si es necesario. Hay muchos nombres para este tipo de función, incluida la carga diferida (lazy loading,), la carga diferida, la obtención diferida, la obtención bajo demanda, la lectura justo a tiempo, la indirección y otros. Todos significan más o menos lo mismo, que es solo que algunos datos pueden no cargarse cuando el objeto se lee inicialmente desde la base de datos, pero solo se recuperarán cuando se haga referencia a ellos o se acceda a ellos.
+En ocasiones, se sabrá de antemano que rara vez se accederá a determinadas partes de una entidad. En estas situaciones, puede optimizar el rendimiento al recuperar la entidad obteniendo solo los datos a los que espera que se acceda con frecuencia; el resto de los datos se puede recuperar solo cuando o si es necesario. Hay muchos nombres para este tipo de función, incluida la carga diferida (lazy loading), la carga diferida, la obtención diferida, la obtención bajo demanda, la lectura justo a tiempo, la indirección y otros. Todos significan más o menos lo mismo, que es solo que algunos datos pueden no cargarse cuando el objeto se lee inicialmente desde la base de datos, pero solo se recuperarán cuando se haga referencia a ellos o se acceda a ellos.
 
 El tipo de búsqueda(fetch) de un mapeo básico se puede configurar para que se cargue de manera perezosa o con entusiasmo (lazily or eagerly) especificando el elemento `fetch` en la anotación `@Basic` correspondiente. El tipo enumerado `FetchType` define los valores para este elemento, que pueden ser `EAGER` o `LAZY`. Establecer el tipo de recuperación de una asignación básica en `LAZY` significa que el proveedor puede aplazar la carga del estado de ese atributo hasta que se haga referencia a él. El valor predeterminado es cargar todas las asignaciones básicas con entusiasmo (eagerly). El Listado 4-8 muestra un ejemplo de cómo anular un mapeo básico para cargarlo de forma diferida (lazily loaded).
 
@@ -302,10 +302,324 @@ public class Employee {
 }
 ```
 
-AQUIIIIIIIIIIIIII
+Suponemos en este ejemplo que las aplicaciones rara vez accederán a los comentarios en un registro de empleado, por lo que lo marcamos como obtenido de manera perezosa. Tenga en cuenta que, en este caso, la anotación `@Basic` no solo está presente para fines de documentación, sino que también es necesaria para especificar el tipo de búsqueda para el campo. Configurar el campo `comments` para que se recupere de forma perezosa permitirá que una instancia de `Empleado` devuelta de una consulta tenga el campo `comments` vacío. Sin embargo, la aplicación no tiene que hacer nada especial para obtenerla. Simplemente accediendo al campo `comments`, el proveedor lo leerá y completará de forma transparente si aún no se ha cargado.
+
+Antes de utilizar esta función, debe tener en cuenta algunos puntos pertinentes sobre la búsqueda diferida de atributos. En primer lugar, la directiva para obtener un atributo de forma perezosa solo debe ser una sugerencia para el proveedor de persistencia para ayudar a la aplicación a lograr un mejor rendimiento. No se requiere que el proveedor respete la solicitud porque el comportamiento de la entidad no se ve comprometido si el proveedor sigue adelante y carga el atributo. Sin embargo, lo contrario no es cierto, porque especificar que un atributo debe buscarse con eagerly fetched puede ser fundamental para poder acceder al estado de la entidad una vez que la entidad se separa del contexto de persistencia. Hablamos más sobre el desapego en el Capítulo 6 y exploramos la conexión entre la carga diferida y el desapego (lazy loading and detachment).
+
+En segundo lugar, en la superficie podría parecer que esta es una buena idea para ciertos atributos de una entidad, pero en la práctica casi nunca es una buena idea lazily fetch tipos simples. Es poco lo que se puede ganar al devolver solo una parte de una fila de la base de datos a menos que esté seguro de que no se accederá al estado en la entidad más adelante. Las únicas ocasiones en las que se debe considerar la carga diferida(lazy loading) de una asignación básica son cuando hay muchas columnas en una tabla (por ejemplo, docenas o cientos) o cuando las columnas son grandes (por ejemplo, cadenas de caracteres o cadenas de bytes muy grandes). La carga de los datos podría requerir una cantidad significativa de recursos y no cargarlos podría ahorrar mucho esfuerzo, tiempo y recursos. A menos que cualquiera de estos dos casos sea cierto, en la mayoría de los casos, la búsqueda perezosa de un subconjunto de atributos de objeto terminará siendo más costosa que la obtención con entusiasmo.
+
+Sin embargo, la búsqueda diferida es bastante relevante cuando se trata de mapeos de relaciones, por lo que discutiremos este tema más adelante en el capítulo.
+
+### OBJETOS GRANDES
+
+Un término de base de datos común para un carácter o un objeto basado en bytes que puede ser muy grande (hasta el rango de gigabytes) es un objeto grande, o LOB para abreviar. Las columnas de la base de datos que pueden almacenar este tipo de objetos grandes requieren que se acceda a llamadas JDBC especiales desde Java. Para indicar al proveedor que debe utilizar los métodos LOB al pasar y recuperar estos datos hacia y desde el controlador JDBC, se debe agregar una anotación adicional a la asignación básica. La anotación `@Lob` actúa como la anotación de marcador para cumplir con este propósito y puede aparecer junto con la anotación `@Basic`, o puede aparecer cuando `@Basic` está ausente y se asume implícitamente que está en el mapeo.
+
+Debido a que la anotación `@Lob` en realidad solo califica la asignación básica, también puede ir acompañada de una anotación `@Column` cuando el nombre de la columna LOB debe anularse del nombre predeterminado asumido.
+
+Los LOB vienen en dos tipos en la base de datos: objetos grandes de caracteres, llamados CLOB, y objetos grandes binarios, o BLOB. Como implican sus nombres, una columna CLOB contiene una secuencia de caracteres grande, y una columna BLOB puede almacenar una secuencia de bytes grande. Los tipos de Java asignados a las columnas BLOB son los tipos `byte[]`, `Byte[]` y `Serializable`, mientras que los objetos `char[]`, `Character[]` y `String` se asignan a las columnas CLOB. El proveedor es responsable de hacer esta distinción según el tipo de atributo que se asigna.
+
+Un ejemplo de mapeo de una imagen a una columna BLOB se muestra en el Listado 4-9. Aquí, se supone que la columna `PIC` es una columna BLOB para almacenar la imagen del empleado que está en el campo `picture`. También hemos marcado este campo para que se cargue de forma diferida, una práctica común aplicada a los LOB a los que no se hace referencia con frecuencia.
+
+***Listado 4-9*** Mapping una Columna BLOB 
+
+```java
+@Entity
+public class Employee {
+   @Id
+   private long id;
+   
+   @Basic(fetch=FetchType.LAZY)
+   @Lob @Column(name="PIC")
+   private byte[] picture;
+   
+   // ...
+}
+```
+
+### TIPOS ENUMERADOS
+
+Otro de los tipos simples que se pueden tratar de forma especial es el enumerado. Los valores de un tipo enumerado son constantes que pueden manejarse de manera diferente según las necesidades de la aplicación.
+
+Como ocurre con los tipos enumerados en otros lenguajes, los valores de un tipo enumerado en Java tienen una asignación ordinal implícita que está determinada por el orden en que fueron declarados. Este ordinal no se puede modificar en tiempo de ejecución y se puede utilizar para representar y almacenar los valores del tipo enumerado en la base de datos. La interpretación de los valores como ordinales es la forma predeterminada en que los proveedores asignarán tipos enumerados a la base de datos, y el proveedor asumirá que la columna de la base de datos es un tipo entero.
+
+Considere el siguiente tipo enumerado:
+
+
+```java
+public enum EmployeeType {
+   FULL_TIME_EMPLOYEE,
+   PART_TIME_EMPLOYEE,
+   CONTRACT_EMPLOYEE
+}
+```
+
+Los ordinales asignados a los valores de este tipo enumerado en tiempo de compilación serían 0 para `FULL_TIME_EMPLOYEE`, 1 para `PART_TIME_EMPLOYEE` y 2 para `CONTRACT_EMPLOYEE`. En el Listado 4-10, definimos un campo persistente de este tipo.
+
+***Listado 4-10*** Mapping un Enumerated Type Usando Ordinales
+
+```java
+@Entity
+public class Employee {
+   @Id private long id;
+   
+   private EmployeeType type;
+   
+   // ...
+}
+```
+
+Puede ver que el mapeo de `EmployeeType` es trivialmente fácil hasta el punto en que en realidad no tiene que hacer nada en absoluto. Se aplican los valores predeterminados y todo funcionará. El campo `type` se asignará a una columna `TYPE` de números enteros y todos los empleados de tiempo completo tendrán asignado un ordinal de 0. De manera similar, los otros empleados tendrán sus tipos almacenados en la columna `TYPE` en consecuencia.
+
+Sin embargo, si cambia un tipo enumerado, entonces tenemos un problema. Los datos ordinales persistentes en la base de datos ya no se aplicarán al valor correcto. En este ejemplo, si la política de beneficios de la empresa cambiara y comenzáramos a brindar beneficios adicionales a los empleados a tiempo parcial que trabajaron más de 20 horas por semana, querríamos diferenciar entre los dos tipos de empleados a tiempo parcial. Al agregar un valor `PART_TIME_BENEFITS_EMPLOYEE` después de `PART_TIME_EMPLOYEE`, estaríamos provocando una nueva asignación ordinal, donde a nuestro nuevo valor se le asignaría el ordinal de 2 y `CONTRACT_EMPLOYEE` obtendría 3. Esto tendría el efecto de causar que todos los empleados contratados en el registro de repente se convierten en empleados a tiempo parcial con beneficios, claramente no el resultado que esperábamos.
+
+Podríamos revisar la base de datos y ajustar todas las entidades de `Employee` para que tengan su tipo correcto, pero si el tipo de empleado se usa en otro lugar, entonces tendríamos que asegurarnos de que todas estén arregladas también. Esta no es una buena situación de mantenimiento.
+
+Una mejor solución sería almacenar el nombre del valor como una cadena en lugar de almacenar el ordinal. Esto nos aislaría de cualquier cambio en la declaración y nos permitiría agregar nuevos tipos sin tener que preocuparnos por los datos existentes. Podemos hacer esto agregando una anotación `@Enumerated` en el atributo y especificando un valor de `STRING`.
+
+La anotación `@Enumerated` realmente permite que se especifique un `EnumType`, y el `EnumType` es en sí mismo un tipo enumerado que define valores de `ORDINAL` y `STRING`. Si bien es algo irónico que se utilice un tipo enumerado para indicar cómo el proveedor debe representar los tipos enumerados, es totalmente apropiado. Debido a que el valor predeterminado de `@Enumerated` es `ORDINAL`, especificar `@Enumerated(ORDINAL)` es útil solo cuando desea que esta asignación sea explícita.
+
+En el Listado 4-11, estamos almacenando cadenas para los valores enumerados. Ahora la columna `TYPE` debe ser un tipo basado en cadenas, y todos los empleados de tiempo completo tendrán la cadena `FULL_TIME_EMPLOYEE` almacenada en su columna `TYPE` correspondiente.
+
+***Listado 4-11*** Mapping un Enumerated Type Usando Strings
+
+```java
+@Entity
+public class Employee {
+   @Id
+   private long id;
+   
+   @Enumerated(EnumType.STRING)
+   private EmployeeType type;
+   
+   // ...
+}
+```
+
+Tenga en cuenta que el uso de cadenas resolverá el problema de insertar valores adicionales en el medio del tipo enumerado, pero dejará los datos vulnerables a cambios en los nombres de los valores. Por ejemplo, si quisiéramos cambiar `PART_TIME_EMPLOYEE` a `PT_EMPLOYEE`, entonces tendríamos problemas. Sin embargo, este es un problema menos probable porque cambiar los nombres de un tipo enumerado haría que todo el código que usa el tipo enumerado también tenga que cambiar. Esto sería una molestia mayor que reasignar valores en una columna de la base de datos.
+
+En general, almacenar el ordinal es la mejor y más eficiente forma de almacenar tipos enumerados siempre que la probabilidad de que se inserten valores adicionales en el medio no sea alta. Aún se podrían agregar nuevos valores al final del tipo sin consecuencias negativas.
+
+Una nota final sobre los tipos enumerados es que se definen de forma bastante flexible en Java. De hecho, incluso es posible tener valores que contengan estado. Actualmente no hay soporte dentro de la JPA para mapear el estado contenido en los valores enumerados. Tampoco hay soporte para la posición de compromiso entre `STRING` y `ORDINAL` de mapear explícitamente cada valor enumerado a un valor numérico dedicado diferente de su valor ordinal asignado por el compilador. Se está considerando un soporte enumerado más extenso para versiones futuras.
+
+### TIPOS TEMPORAL
+
+Los tipos temporales son el conjunto de tipos basados en el tiempo que se pueden usar en asignaciones de estado persistentes. La lista de tipos temporales admitidos incluye los tres tipos `java.sql`: —`java.sql.Date`, `java.sql.Time` y `java.sql.Timestamp` — y los dos tipos `java.util`: —`java.util.Date` y `java.util.Calendar`.
+
+Los tipos `java.sql` son completamente sencillos. Actúan como cualquier otro tipo de mapeo simple y no necesitan ninguna consideración especial. Sin embargo, los dos tipos de `java.util` necesitan metadatos adicionales para indicar cuál de los tipos de `java.sql` de JDBC se debe usar al comunicarse con el controlador JDBC. Esto se hace anotándolos con la anotación `@Temporal` y especificando el tipo JDBC como un valor del tipo enumerado `TemporalType`. Hay tres valores enumerados de `DATE`, `TIME` y `TIMESTAMP` para representar cada uno de los tipos `java.sql`.
+
+El listado 4-12 muestra cómo `java.util.Date` y `java.util.Calendar` se pueden asignar a columnas de fecha en la base de datos.
+
+***Listado 4-12*** Mapping Temporal Types
+
+```java
+@Entity
+public class Employee {
+   @Id
+   private long id;
+    
+   @Temporal(TemporalType.DATE)
+   private Calendar dob;
+
+   @Temporal(TemporalType.DATE)
+   @Column(name="S_DATE")
+   private Date startDate;
+   // ...
+}
+```
+
+Al igual que las otras variedades de asignaciones básicas, la anotación `@Column` se puede utilizar para anular el nombre de columna predeterminado.
+
+### TRANSIENT STATE
+
+Los atributos que forman parte de una entidad persistente pero que no están destinados a ser persistentes pueden modificarse con el modificador `transient` en Java o anotarse con la anotación `@Transient`. Si se especifica alguno, el tiempo de ejecución del proveedor no aplicará sus reglas de asignación predeterminadas al atributo en el que se especificó.
+
+Los campos Transient se utilizan por varias razones. Uno podría ser el caso anteriormente en el capítulo cuando mezclamos el modo de acceso y no queríamos mantener el mismo estado dos veces. Otro podría ser cuando desea almacenar en caché algún estado en la memoria que no desea tener que volver a calcular, redescubrir o reinicializar. Por ejemplo, en el Listado 4-13 estamos usando un campo transitorio para guardar la palabra específica de la localidad correcta para `Employee` para que la imprimamos correctamente donde sea que se muestre. Hemos utilizado el modificador transitorio en lugar de la anotación `@Transient` para que si el empleado se serializa de una máquina virtual a otra, el nombre traducido se reinicializará para corresponder con la configuración regional de la nueva máquina virtual. En los casos en los que el valor no persistente deba retenerse durante la serialización, se debe usar la anotación en lugar del modificador.
+
+***Listado 4-13*** Usando un Transient Field
+
+```java
+@Entity
+public class Employee {
+   @Id private long id;
+   
+   private String name;
+   private long salary;
+
+   transient private String translatedName;
+   
+   // ...
+   
+   public String toString() {
+      if (translatedName == null) {
+         translatedName = ResourceBundle.getBundle("EmpResources").getString("Employee");
+      }
+      return translatedName + ": " + id + " " + name;
+   }
+}
+```
+
+## Mapeo de la Primary Key
+
+Cada entidad que se asigna a una base de datos relacional debe tener una asignación a una clave principal en la tabla. Ya ha aprendido los conceptos básicos de cómo la anotación `@Id` indica el identificador de la entidad. En esta sección, explorará identificadores simples y claves primarias con un poco más de profundidad y aprenderá cómo puede permitir que el proveedor de persistencia genere valores de identificadores únicos.
+
+**NOTA** ***Cuando un identificador de entidad se compone de un solo atributo, se denomina identificador simple.**
+
+### OVERRIDING DE LA COLUMNA PRIMARY KEY
+
+Las mismas reglas predeterminadas se aplican a las asignaciones de ID que a las asignaciones básicas, que es que se supone que el nombre de la columna es el mismo que el nombre del atributo. Al igual que con las asignaciones básicas, la anotación `@Column` se puede utilizar para anular el nombre de la columna al que se asigna el atributo ID.
+
+Se asume que las claves primarias son insertables, pero no nulables ni actualizables(nullable or updatable). Al overriding una columna de clave principal, los elementos que aceptan valores `nullable` y `updatable` no deben overridden. Solo en la circunstancia muy específica de mapear la misma columna a múltiples campos/relaciones (como se describe en el Capítulo 10), el elemento `insertable` debe establecerse a `false`.
+
+### PRIMARY KEY TYPES
+
+Excepto por su significado especial al designar el mapeo a la columna de clave principal, un mapeo de ID es casi lo mismo que el mapeo básico. La otra diferencia principal es que las asignaciones de ID generalmente están restringidas a los siguientes tipos:
+
+* ***Tipos primitivos de Java***: `byte`, `int`, `short`, `long` y `char`
+
+* ***Clases contenedoras de tipos primitivos de Java***: `Byte`, `Integer`, `Short`, `Long` y `Character`
+
+* ***String***: `java.lang.String`
+
+* ***Tipo numérico grande***: `java.math.BigInteger`
+
+* ***Tipos temporales***: `java.util.Date` y `java.sql.Date`
+
+Los tipos de coma flotante como `float` y `double` también están permitidos, así como las clases de envoltura `Float` y `Double` y `java.math.BigDecimal`, pero se desaconsejan debido a la naturaleza del error de redondeo y la falta de confianza del operador `equals()` cuando se aplica a ellos. El uso de tipos flotantes para claves primarias es una tarea arriesgada y definitivamente no se recomienda.
+
+### IDENTIFIER GENERATION
+
+A veces, las aplicaciones no quieren molestarse en tratar de definir y garantizar la unicidad en algún aspecto de su modelo de dominio y se contentan con permitir que los valores de identificador se generen automáticamente para ellas. Esto se denomina generación de ID y se especifica mediante la anotación `@GeneratedValue`.
+
+Cuando la generación de ID está habilitada, el proveedor de persistencia generará un valor de identificador para cada instancia de ese tipo de entidad. Una vez que se obtiene el valor del identificador, el proveedor lo insertará en la entidad recién persistente; sin embargo, dependiendo de la forma en que se genere, es posible que no esté presente en el objeto hasta que la entidad se haya insertado en la base de datos. En otras palabras, la aplicación no puede confiar en poder acceder al identificador hasta después de que se haya producido una descarga o se haya completado la transacción.
+
+Las aplicaciones pueden elegir una de las cuatro estrategias de generación de ID diferentes especificando una estrategia en el elemento de estrategia. El valor puede ser cualquiera de los valores enumerados `AUTO`, `TABLE`, `SEQUENCE` o `IDENTITY` del tipo enumerado `GenerationType`.
+
+Los generadores de tablas y secuencias se pueden definir específicamente y luego reutilizar por múltiples clases de entidades. Estos generadores se nombran y son globalmente accesibles para todas las entidades en la unidad de persistencia.
+
+#### ***Automatic ID Generation***
+
+Si a una aplicación no le importa qué tipo de generación usa el proveedor pero quiere que ocurra la generación, puede especificar una estrategia de `AUTO`. Esto significa que el proveedor utilizará cualquier estrategia que desee para generar identificadores. El listado 4-14 muestra un ejemplo del uso de la generación automática de ID. Esto hará que el proveedor cree un valor de identificador y lo inserte en el campo `id` de cada entidad `Employee` que se conserva.
+
+**TIP** ***No se requiere explícitamente que el campo de identificador de entidad sea un tipo integral, pero normalmente es el único tipo que creará `AUTO`. Recomendamos que se utilice `long` para acomodar la extensión completa del dominio de identificador generado.
+
+***Listing 4-14*** Usando Auto ID Generation
+
+```java
+@Entity
+public class Employee {
+   @Id 
+   @GeneratedValue(strategy=GenerationType.AUTO)
+   private long id;
+   // ...
+}
+```
+
+Sin embargo, hay una trampa para usar `AUTO`. El proveedor puede elegir su propia estrategia para almacenar los identificadores, pero necesita tener algún tipo de recurso persistente para poder hacerlo. Por ejemplo, si elige una estrategia basada en tablas, necesita crear una tabla; si elige una estrategia basada en secuencia, necesita crear una secuencia. El proveedor no siempre puede confiar en la conexión de base de datos que obtiene del servidor para tener permisos para crear una tabla en la base de datos. Esta es normalmente una operación privilegiada que a menudo está restringida al DBA. Será necesario que haya algún tipo de fase de creación o generación de esquema para hacer que el recurso se cree antes de que la estrategia `AUTO` pueda funcionar.
+
+El modo `AUTO` es realmente una estrategia de generación para el desarrollo o la creación de prototipos. Funciona bien como un medio para ponerlo en funcionamiento más rápidamente cuando se genera el esquema de la base de datos. En cualquier otra situación, sería mejor utilizar una de las otras estrategias de generación discutidas en las secciones posteriores.
+
+#### ***ID Generation Using a Table(Generación de ID usando una tabla)***
+
+La forma más flexible y portátil de generar identificadores es utilizar una tabla de base de datos. No solo se transferirá a diferentes bases de datos, sino que también permite almacenar múltiples secuencias de identificadores diferentes para diferentes entidades dentro de la misma tabla.
+
+Una tabla de generación de ID debe tener dos columnas. La primera columna es un tipo de cadena que se utiliza para identificar la secuencia del generador en particular. Es la clave principal para todos los generadores de la tabla. La segunda columna es un tipo integral que almacena la secuencia de ID real que se está generando. El valor almacenado en esta columna es el último identificador que se asignó en la secuencia. Cada generador definido representa una fila en la tabla.
+
+La forma más fácil de usar una tabla para generar identificadores es simplemente especificar la estrategia de generación para que sea `TABLE` en el elemento `strategy`:
+
+```java
+@Id 
+@GeneratedValue(strategy=GenerationType.TABLE)
+private long id;
+```
+
+Debido a que se indica la estrategia de generación pero no se ha especificado ningún generador, el proveedor asumirá una tabla de su propia elección. Si se utiliza la generación de esquemas, se creará; si no, la tabla predeterminada asumida por el proveedor debe ser conocida y debe existir en la base de datos.
+
+Un enfoque más explícito sería especificar realmente la tabla que se utilizará para el almacenamiento de ID. Esto se hace mediante la definición de un generador de tablas que, contrariamente a lo que su nombre implica, en realidad no genera tablas. Más bien, es un generador de identificadores que usa una tabla para almacenar los valores de los identificadores. Podemos definir uno usando una anotación `@TableGenerator` y luego referirnos a él por su nombre en la anotación `@GeneratedValue`:
+
+```java
+@TableGenerator(name="Emp_Gen")
+@Id @GeneratedValue(generator="Emp_Gen")
+private long id;
+```
+
+Aunque estamos mostrando `@TableGenerator` anotando el atributo identificador, en realidad se puede definir en cualquier atributo o clase. Independientemente de dónde se defina, estará disponible para toda la unidad de persistencia. Una buena práctica sería definirlo localmente en el atributo ID si solo lo usa una clase, pero definirlo en XML, como se describe en el Capítulo 13, si se usará para varias clases.
+
+El elemento `name` nombra globalmente al generador, lo que nos permite hacer referencia a él en el elemento `generator` de la anotación `@GeneratedValue`. Esto es funcionalmente equivalente al ejemplo anterior donde simplemente dijimos que queríamos usar la generación de tablas pero no especificamos el generador. Ahora estamos especificando el nombre del generador, pero no proporcionamos ninguno de los detalles del generador, dejando que sean predeterminados por el proveedor.
+
+Otro enfoque de calificación sería especificar los detalles de la tabla, como se muestra a continuación:
+
+```java
+@TableGenerator(name="Emp_Gen",
+   table="ID_GEN",
+   pkColumnName="GEN_NAME",
+   valueColumnName="GEN_VAL")
+```
+
+Hemos incluido algunos elementos adicionales después del nombre del generador. Después del nombre hay tres elementos (`table`, `pkColumnName` y `valueColumnName`) que definen la tabla real que almacena los identificadores de `Emp_Gen`.
+
+El elemento `table` solo indica el nombre de la tabla. El elemento `pkColumnName` es el nombre de la columna de clave principal en la tabla que identifica de forma única al generador, y el elemento `valueColumnName` es el nombre de la columna que almacena el valor de secuencia de ID real que se está generando. En este caso, la tabla se llama `ID_GEN`, el nombre de la columna de clave primaria (la columna que almacena los nombres del generador) se llama `GEN_NAME` y la columna que almacena los valores de secuencia de ID se llama `GEN_VAL`.
+
+El nombre del generador se convierte en el valor almacenado en la columna `pkColumnName` para esa fila y el proveedor lo usa para buscar el generador y obtener su último valor asignado.
+
+En nuestro ejemplo, llamamos a nuestro generador `Emp_Gen` para que nuestra tabla se pareciera a la de la Figura 4-3.
 
 ![04-03](images/04-03.png)
+
+
+Tenga en cuenta que el último identificador `Employee` asignado es 0, lo que nos indica que aún no se han generado identificadores. Se puede especificar un elemento `initialValue` que represente el último identificador asignado como parte de la definición del generador, pero el valor predeterminado de 0 será suficiente en casi todos los casos. Esta configuración se usa solo durante la generación del esquema cuando se crea la tabla. Durante ejecuciones posteriores, el proveedor leerá el contenido de la columna de valor para determinar el siguiente identificador que se dará.
+
+Para evitar actualizar la fila para cada identificador que se solicita, se usa un tamaño de asignación. Esto hará que el proveedor preasigne un bloque de identificadores y luego proporcione identificadores de la memoria según lo solicitado hasta que se agote el bloque. Una vez que este bloque se agota, la siguiente solicitud de un identificador activa otro bloque de identificadores para ser preasignado, y el valor del identificador se incrementa por el tamaño de la asignación. De forma predeterminada, el tamaño de la asignación se establece en 50. Este valor se puede anular para que sea mayor o menor mediante el uso del elemento `allocationSize` al definir el generador.
+
+**TIP** ***El proveedor puede asignar identificadores dentro de la misma transacción que la entidad que se persiste o en una transacción separada. No está especificado, pero debe consultar la documentación de su proveedor para ver cómo puede evitar el riesgo de un punto muerto cuando los subprocesos concurrentes están creando entidades y bloqueando recursos.***
+
+El Listado 4-15 muestra un ejemplo de cómo definir un segundo generador que se usará para las entidades `Address`, pero que usa la misma tabla `ID_GEN` para almacenar la secuencia del identificador. En este caso, en realidad estamos dictando explícitamente el valor que estamos almacenando en la columna de clave primaria de la tabla de identificadores especificando el elemento `pkColumnvalue`. Este elemento permite que el nombre del generador sea diferente del valor de la columna, aunque rara vez es necesario hacerlo. El ejemplo muestra un generador `Address` ID llamado `Address_Gen` pero luego define el valor almacenado en la tabla para la generación de `Address` ID como `Addr_Gen`. El generador también establece el valor inicial en 10000 y el tamaño de asignación en 100.
+
+***Listado 4-15*** Usando Table ID Generation
+
+```java
+@TableGenerator(name="Address_Gen",
+   table="ID_GEN",
+   pkColumnName="GEN_NAME",
+   valueColumnName="GEN_VAL",
+   pkColumnValue="Addr_Gen",
+   initialValue=10000,
+   allocationSize=100)
+@Id 
+@GeneratedValue(generator="Address_Gen")
+private long id;
+```
+
+Si se definieron los generadores `Emp_Gen` y `Address_Gen`, al iniciar la aplicación, la tabla `ID_GEN` debería verse como la Figura 4-4. A medida que la aplicación asigna identificadores, los valores almacenados en la columna `GEN_VAL` aumentarán.
+
 ![04-04](images/04-04.png)
+
+Si no ha utilizado la función de generación automática de esquemas (discutida en el Capítulo 14), la tabla ya debe existir o estar creada en la base de datos a través de algún otro medio y estar configurada para estar en este estado cuando la aplicación se inicie por primera vez. Se podría aplicar el siguiente SQL para crear e inicializar esta tabla:
+
+```java
+CREATE TABLE id_gen (
+   gen_name VARCHAR(80),
+   gen_val INTEGER,
+   CONSTRAINT pk_id_gen
+      PRIMARY KEY (gen_name)
+);
+INSERT INTO id_gen (gen_name, gen_val) VALUES ('Emp_Gen', 0);
+INSERT INTO id_gen (gen_name, gen_val) VALUES ('Addr_Gen', 10000);
+```
+
+```java
+```
+```java
+```
+
+```java
+```
+```java
+```
+
+
+
+
+
 ![04-05](images/04-05.png)
 ![04-06](images/04-06.png)
 ![04-07](images/04-07.png)
