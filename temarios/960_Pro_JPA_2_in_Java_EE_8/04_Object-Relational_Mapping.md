@@ -1037,6 +1037,8 @@ Considere el modelo de datos de la Figura 4-19. No hay una  join column para alm
 
 ![04-19](images/04-19.png)
 
+AQUIIIIIIIIIIIIIIIIIII
+
 De manera similar, cuando un lado de una relación de muchos a muchos no tiene una correspondencia con el otro, se trata de una relación unidireccional. La tabla de combinación aún debe usarse; la única diferencia es que solo uno de los dos tipos de entidad realmente usa la tabla para cargar sus entidades relacionadas o la actualiza para almacenar asociaciones de entidades adicionales.
 
 En estos dos casos unidireccionales con valor de colección, el código fuente es similar a los ejemplos anteriores, pero no hay ningún atributo en la entidad de destino para hacer referencia a la entidad de origen, y el elemento mappedBy no estará presente en la anotación @OneToMany en la entidad fuente. La tabla de combinación ahora debe especificarse como parte del mapeo. El Listado 4-24 muestra al Empleado con una relación de uno a varios con el Teléfono usando una tabla de combinación.
