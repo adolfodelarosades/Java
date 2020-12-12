@@ -172,7 +172,7 @@
 * Acceso a BD en Java
    * JDBC
    * Persistencia JPA
-* :computer: `13_gestion_candidatos_basedatos`
+* :computer: `13_gestion_candidatos_basedatos` **Primer Ejemplo JDBC**
    * 1.- BD
    * 2.- Mavenizar el proyecto e incluir dependencias
    * 3.- JavaBean de la Tabla
@@ -207,7 +207,7 @@
       * `@GeneratedValue`
    * `persistence.xml`
    * Utilización motor Hibernate
-* :computer: `14_gestion_candidatos_persistencia`
+* :computer: `14_gestion_candidatos_persistencia` **Primer Ejemplo JPA**
    * 1.- BD `empresa`
    * 2.- Mavenizar el proyecto e incluir dependencias
    * 3.- Añadir la Característica de JPA
@@ -271,7 +271,7 @@
    * 7.- Servlets (Sin cambios)
    * 8.- Vista (Sin cambios)
    * 9.- Probar la Aplicación
-* :computer: `15_gestion_candidatos_persistencia_eliminacion` 
+* :computer: `15_gestion_candidatos_persistencia_eliminacion` **Segundo Ejemplo JPA** 
    * Funcionalidad de eliminar el Contacto por Email
 * :scroll: Named Queries o Consultas Nominadas
    * Definición
@@ -279,7 +279,7 @@
       * Anotación `@NamedQuery`
    * Utilización
       * Método `createNamedQuery()` de `EntityManager`
-* :computer: `16_gestion_candidatos_persistencia_namedquery`
+* :computer: `16_gestion_candidatos_persistencia_namedquery` **Tercer Ejemplo JPA con Named Query**
    * 1.- Entidad con `@NamedQuery`
    * 2.- Cambiar el Service para usar `createNamedQuery` en lugar de `createQuery`
    * 3.- Probar la Aplicación
@@ -292,7 +292,7 @@
    * El Modelo
    * La vista
    * El Controlador
-* :computer: `17_gestion_candidatos_persistencia_mvc`
+* :computer: `17_gestion_candidatos_persistencia_mvc` **Primer Ejemplo MVC y JPA**
    * Este cambio principalmente afecta a los Servlets y la Capa de Vista.
    * 1.- Cambiar los Servlets por Actions
    * 2.- Crear el `FrontController`
@@ -300,7 +300,7 @@
    * 4.- Probar la Aplicación
 # [20201112 Jueves](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201112_Jueves.md) :+1:
 
-* :computer: `18_formacion_v1`
+* :computer: `18_formacion_v1` **Segundo Ejemplo MVC y JPA Con dos Entidades Independientes**
    * Nuevo proyecto partiendo de cero, usando BD, persistencia y patrón MVC.
    * 1.- BD `Formacion`
    * 2.- Crear proyecto en Eclipse
@@ -316,7 +316,7 @@
 
 ## Patrón Factory
 * Uso del Patrón Factory.
-* :computer: `19_formacion_factoria`
+* :computer: `19_formacion_factoria` **Tercer Ejemplo MVC y JPA Con dos Entidades Independientes con Uso del Patrón Factory**
    * 1.- Renombrar las Clases de Services
       * `AlumnosService` a `AlumnosServiceImpl` y `CursoService` a `CursoServiceImpl`
    * 2.- Generar las Interfaces a través de las Clases
@@ -329,12 +329,12 @@
 # [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md) :-1:
 
 * Instalación de Web Logic
-* :computer: `20_gestion_candidatos_ejb_weblogic`
+* :computer: `20_gestion_candidatos_ejb_weblogic` **Primer Ejemplo EJB Web Logic**
 * (FALTA)
 
 # [20201116 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201116_Lunes.md) :+1:
 
-* :computer: `21_formacion_ejb_weblogic`
+* :computer: `21_formacion_ejb_weblogic` **Segundo Ejemplo EJB Web Logic**
       
    Partiendo del proyecto `19_formacion_factoria` vamos a realizar una versión usando EJB.
       
@@ -373,7 +373,7 @@
 
 ## Relación Uno a Muchos
 
-* :computer: 22_ejemplo_relaciones
+* :computer: 22_ejemplo_relaciones **Tercer Ejemplo EJB Web Logic - RELACIÓN UNO A MUCHOS**
    
    Este proyecto nuevo nos va a servir para ver algunos ejemplos de Relación Entre Entidades, no tiene parte visual, solo sirve para ver las relaciones existentes entre las Tablas `Cursos` y `Preguntas` de la BD Formacion.
       
@@ -398,7 +398,7 @@
 
 ## Relación Uno a Muchos y Muchos a Uno
 
-* :computer: `23_formacion_ejb_weblogic_v2`   
+* :computer: `23_formacion_ejb_weblogic_v2` **Cuarto Ejemplo EJB Web Logic - RELACIÓN UNO A MUCHOS y RELACIÓN MUCHOS A UNO**   
       
    Partiendo del proyecto `21_formacion_ejb_weblogic` vamos a realizar una versión. Un alumno puede estar matriculado en uno o más cursos y un curso puede pertenecer a varias matriculas
      
@@ -432,7 +432,7 @@
       * Modelo `springConfig.xml o .java`
 * Generación de un Nuevo Workspace.
 * Instalación de Spring Tools 3(Standalone Edition) 3.9.14.RELEASE
-* :computer: `01_buscador_base`
+* :computer: `01_buscador_base` **Proyecto Base**
   
    Aplicación Base para ver como va evolucionando cuando empecemos a usar Spring. No usa BD, EJBs, Factoria, Interfaces. ACTION ESTA TOTALMENTE ACOPLADO CON LA CAPA DE SERVICIO.
       
@@ -520,7 +520,7 @@
    * 4.- Configuración XML
    * 5.- Probar la Aplicación
 
-* `07_gestion_candidatos_ofertas_jpa` **Segundo Ejemplo Spring-JPA**
+* `07_gestion_candidatos_ofertas_jpa` **Segundo Ejemplo Spring-JPA - RELACIÓN UNO A MUCHOS**
    * 1.- Añadir las Dependencias `spring-orm` y `hibernate-core` y quitamos `spring-jdbc` en `pom.xml` 
    * 2.- Vamos a activar la Característica JPA
    * 3.- Crear las Entidades con el Asistente
@@ -528,7 +528,7 @@
    * 5.- Eliminar `persistence.xml` y Características JPA.
    * 6.- Probar la Aplicación
    
-* `08_gestion_candidatos_ofertas_jpa_v2` **Tercer Ejemplo Spring-JPA**
+* `08_gestion_candidatos_ofertas_jpa_v2` **Tercer Ejemplo Spring-JPA - RELACIÓN UNO A MUCHOS**
    * 1.- Cambios en las Entidades
    * 2.- Cambios en la Capa de Servicios
    * 3.- Actions
