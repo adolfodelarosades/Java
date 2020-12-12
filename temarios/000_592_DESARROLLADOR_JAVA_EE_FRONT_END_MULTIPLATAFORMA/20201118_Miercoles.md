@@ -589,15 +589,14 @@ Usando `Spring-JDBC` nos queda así:
 ```java
 @Override
 public void altaCandidato(Candidato candidato) {
-   try(Connection con = datasource.getConnection()){
-			
-      String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
+   
+   String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
 				   + " VALUES(?,?,?,?,?)";
-      template.update(sql, candidato.getNombre(),
-                           candidato.getEdad(),
-                           candidato.getPuesto(),
-                           candidato.getFoto(),
-                           candidato.getEmail() );
+   template.update(sql, candidato.getNombre(),
+                        candidato.getEdad(),
+                        candidato.getPuesto(),
+                        candidato.getFoto(),
+                        candidato.getEmail() );
 }
 ```
 
@@ -671,8 +670,7 @@ Usando `Spring-JDBC` nos queda así:
 public List<Candidato> recuperarCandidatos(){
 		
    String sql = "SELECT * FROM candidatos";
-      return template.query(sql, 
-                              (rs,f) -> new Candidato(rs.getInt("idCandidato"),
+   return template.query(sql, (rs,f) -> new Candidato(rs.getInt("idCandidato"),
                                                       rs.getString("nombre"),
                                                       rs.getInt("edad"),
                                                       rs.getString("puesto"),
