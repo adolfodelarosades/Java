@@ -549,7 +549,7 @@
          * `CascadeType.REFRESH`
          * `CascadeType.ALL`
 
-# [20201120 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201120_Viernes.md):1:
+# [20201120 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201120_Viernes.md):+1:
 * :scroll: Documentos Relaciones
    * Relaciones Muchos a Muchos
 * Base de Datos bancabd
