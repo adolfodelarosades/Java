@@ -442,7 +442,7 @@
    * 4.- Vistas
    * 5.- Probar la Aplicación
 
-* :computer: `02_buscador_spring`
+* :computer: `02_buscador_spring` **Primer Ejemplo Spring**
       
    Partiendo de `01_buscador_base` vamos a aplicar Spring dentro de la Capa de Negocios.
       
@@ -469,7 +469,7 @@
 
 ## Spring DataSource
 
-* :computer: `03_gestion_candidatos_basedatos`
+* :computer: `03_gestion_candidatos_basedatos` **Primer Ejemplo Spring DataSource con JDBC**
    * 1.- Incorporar las Dependencias de Spring en el archivo `pom.xml`
    * 2.- Adaptar nuestra Capa de Servicio para que tenga Clase e Interface.
    * 3.- Modificar los Servlets
@@ -494,12 +494,12 @@
    * Métodos del `JdbcTemplate`
    * La Capa de Repositorio
 
-* :computer: `04_gestion_candidatos_spring-jdbc`
+* :computer: `04_gestion_candidatos_spring-jdbc` **Primer Ejemplo Spring-JDBC**
    * 1.- Crear la Clase `JdbcTemplate`
    * 2.- Cambios en la Capa de Servicio
    * 3.- Probar la Aplicación
    
-* :computer: `05_gestion_candidatos_ofertas`
+* :computer: `05_gestion_candidatos_ofertas` **Segundo Ejemplo Spring-JDBC**
    * 1.- Añadir Tabla `inscripciones` a la BD `empresa`.
    * 2.- Añadir el JavaBean `Inscripcion`
    * 3.- Capa de Servicio
@@ -513,14 +513,14 @@
 ## Spring - Persistencia
 ### Anotación `@Transactional`
 * :scroll: Documentos Relaciones
-* `06_gestion_candidatos_spring_jpa`
+* `06_gestion_candidatos_spring_jpa` **Primer Ejemplo Spring-JPA**
    * 1.- Dependencias
    * 2.- Añadir Manualmente Anotaciones al JavaBean para convertirlo en Entidad
    * 3.- Modificar la Capa de Servicio para Manejar Persistencia
    * 4.- Configuración XML
    * 5.- Probar la Aplicación
 
-* `07_gestion_candidatos_ofertas_jpa`
+* `07_gestion_candidatos_ofertas_jpa` **Segundo Ejemplo Spring-JPA**
    * 1.- Añadir las Dependencias `spring-orm` y `hibernate-core` y quitamos `spring-jdbc` en `pom.xml` 
    * 2.- Vamos a activar la Característica JPA
    * 3.- Crear las Entidades con el Asistente
@@ -528,7 +528,7 @@
    * 5.- Eliminar `persistence.xml` y Características JPA.
    * 6.- Probar la Aplicación
    
-* `08_gestion_candidatos_ofertas_jpa_v2`
+* `08_gestion_candidatos_ofertas_jpa_v2` **Tercer Ejemplo Spring-JPA**
    * 1.- Cambios en las Entidades
    * 2.- Cambios en la Capa de Servicios
    * 3.- Actions
