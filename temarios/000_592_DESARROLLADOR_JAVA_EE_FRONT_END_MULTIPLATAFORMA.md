@@ -513,14 +513,14 @@
 ## Spring - Persistencia
 ### Anotación `@Transactional`
 * :scroll: Documentos Relaciones
-* `06_gestion_candidatos_spring_jpa` **Primer Ejemplo Spring-JPA**
+* :computer: `06_gestion_candidatos_spring_jpa` **Primer Ejemplo Spring-JPA**
    * 1.- Dependencias
    * 2.- Añadir Manualmente Anotaciones al JavaBean para convertirlo en Entidad
    * 3.- Modificar la Capa de Servicio para Manejar Persistencia
    * 4.- Configuración XML
    * 5.- Probar la Aplicación
 
-* `07_gestion_candidatos_ofertas_jpa` **Segundo Ejemplo Spring-JPA - RELACIÓN UNO A MUCHOS**
+* :computer: `07_gestion_candidatos_ofertas_jpa` **Segundo Ejemplo Spring-JPA - RELACIÓN UNO A MUCHOS**
    * 1.- Añadir las Dependencias `spring-orm` y `hibernate-core` y quitamos `spring-jdbc` en `pom.xml` 
    * 2.- Vamos a activar la Característica JPA
    * 3.- Crear las Entidades con el Asistente
@@ -528,7 +528,7 @@
    * 5.- Eliminar `persistence.xml` y Características JPA.
    * 6.- Probar la Aplicación
    
-* `08_gestion_candidatos_ofertas_jpa_v2` **Tercer Ejemplo Spring-JPA - RELACIÓN UNO A MUCHOS**
+* :computer: `08_gestion_candidatos_ofertas_jpa_v2` **Tercer Ejemplo Spring-JPA - RELACIÓN UNO A MUCHOS**
    * 1.- Cambios en las Entidades
    * 2.- Cambios en la Capa de Servicios
    * 3.- Actions
@@ -549,9 +549,24 @@
          * `CascadeType.REFRESH`
          * `CascadeType.ALL`
 
-# [20201120 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201120_Viernes.md):-1:
+# [20201120 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201120_Viernes.md):1:
 * :scroll: Documentos Relaciones
-
+   * Relaciones Muchos a Muchos
+* Base de Datos bancabd
+* :computer: `09_cajero_virtual` Primer Ejemplo Relación Muchos A Muchos
+   * 01. Mavenizar el Proyecto y Meter las Dependencias
+   * 02. Poner Características JPA para poder usar el Asistente
+   * 03. Generar Entidades con el Asistente.
+   * 04. Quitar Características JPA y Eliminar persistence.xml
+   * 05. Configuración XML
+      * `web.xml`
+      * `springConfig.xml`
+   * 06. Capa de Servicio
+   * 07. Actions
+   * 08. FrontController
+   * 09. Vistas
+   * 10. Probar la Aplicación
+   
 * [20201123 Lunes]():-1:
 * [20201124 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201124_Martes.md) :-1:
 * [20201125 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201125_Miercoles.md)
