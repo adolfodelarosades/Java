@@ -554,20 +554,20 @@
    * Relaciones Muchos a Muchos
 * Base de Datos bancabd
 * :computer: `09_cajero_virtual` Primer Ejemplo Relación Muchos A Muchos
-   * 01. Mavenizar el Proyecto y Meter las Dependencias
-   * 02. Poner Características JPA para poder usar el Asistente
-   * 03. Generar Entidades con el Asistente.
-   * 04. Quitar Características JPA y Eliminar persistence.xml
-   * 05. Configuración XML
+   * 1.- Mavenizar el Proyecto y Meter las Dependencias
+   * 2.- Poner Características JPA para poder usar el Asistente
+   * 3.- Generar Entidades con el Asistente.
+   * 4.- Quitar Características JPA y Eliminar persistence.xml
+   * 5.- Configuración XML
       * `web.xml`
       * `springConfig.xml`
-   * 06. Capa de Servicio
-   * 07. Actions
-   * 08. FrontController
-   * 09. Vistas
-   * 10. Probar la Aplicación
+   * 6.- Capa de Servicio
+   * 7.- Actions
+   * 8.- FrontController
+   * 9.- Vistas
+   * 10.- Probar la Aplicación
    
-* [20201123 Lunes]():-1:
+* [20201123 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201123_Lunes.md):-1:
 * [20201124 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201124_Martes.md) :-1:
 * [20201125 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201125_Miercoles.md)
 * [20201126 Jueves]()
