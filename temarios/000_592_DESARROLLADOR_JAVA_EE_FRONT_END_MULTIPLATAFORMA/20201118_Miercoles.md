@@ -489,7 +489,7 @@ Vamos a partir del proyecto `03_gestion_candidatos_basedatos` para simplificar i
 
 ### 01. Crear la Clase `jdbcTemplate`
 
-En nuestro archivo `springConfig.xml` vamos a configurar ese archivo `jdbcTemplate`, nos vamos a apoyar en la pestaña `beans` para crearlo.
+En nuestro archivo `springConfig.xml` vamos a configurar ese objeto `jdbcTemplate`, nos vamos a apoyar en la pestaña `beans` para crearlo.
 
 Indicamos el identificado y nombre del nuevo bean `jdbcTemplate`.
 
@@ -590,8 +590,6 @@ Usando `Spring-JDBC` nos queda así:
 @Override
 public void altaCandidato(Candidato candidato) {
    try(Connection con = datasource.getConnection()){
-      String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
-		 + " VALUES(?,?,?,?,?)";
 			
       String sql = "INSERT INTO candidatos(nombre, edad, puesto, foto, email)"
 				   + " VALUES(?,?,?,?,?)";
