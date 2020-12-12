@@ -538,7 +538,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 		   + " VALUES(?,?,?,?,?)";
 ````
 
-**Ya no vamos a necesitar el `DataSource` por que eso ya lo usa internamente `jdbcTemplate`, por lo que basta simplemente Inyectar el `jdbcTemplate` por lo que el código nos va a quedar así:
+**Ya no vamos a necesitar el `DataSource` por que eso ya lo usa internamente `jdbcTemplate`, por lo que basta simplemente Inyectar el `jdbcTemplate` por lo que el código nos va a quedar así**:
 
 `CandidatosServiceImpl`
 
