@@ -571,7 +571,7 @@
 * :scroll: Documentos Relaciones
    * Relaciones Muchos a Muchos
 * Base de Datos bancabd
-* :computer: `09_cajero_virtual` Primer Ejemplo Relación Muchos A Muchos
+* :computer: `09_cajero_virtual` **Primer Ejemplo Relación Muchos A Muchos**
    * 1.- Mavenizar el Proyecto y Meter las Dependencias
    * 2.- Poner Características JPA para poder usar el Asistente
    * 3.- Generar Entidades con el Asistente.
