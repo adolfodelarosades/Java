@@ -326,11 +326,29 @@
 
 ## EJBs
 
-# [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md) :-1:
-
+# [20201113 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201113_Viernes.md) :+1:
+* :scroll: EJBs
+   * Definición
+   * Contenedor EJB
+   * Servicios del Contenedor
+   * Estructura de un EJB
+   * Tipos de EJBs
+   * Implementación de un EJB
+   * Acceso desde el Cliente
+   * JPA en EJB
 * Instalación de Web Logic
+* Creación del DataSource en WebLogic
+* Copiar Driver de MySQL dentro del Servidor WebLogic
+* Crear Servidor Web Logic en Eclipse :-1:
 * :computer: `20_gestion_candidatos_ejb_weblogic` **Primer Ejemplo EJB Web Logic**
-* (FALTA)
+   * 1.- Mavenizar el Proyecto y poner las dependencias
+   * 2.- Cambiar el Servidor de Tomcat a WebLogic
+   * 3.- Crear la Entidad `Candidato`
+   * 4.- Añadir Entidad al `persistence.xml`
+   * 5.- Creación de la Capa de Negocios con EJBs.
+   * 6.- Capa de Controller
+   * 7.- Vistas
+   * 8.- Probar la aplicación
 
 # [20201116 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201116_Lunes.md) :+1:
 
