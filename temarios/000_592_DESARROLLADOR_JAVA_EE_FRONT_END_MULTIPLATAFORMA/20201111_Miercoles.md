@@ -1,6 +1,6 @@
 # 20201111 Miercoles
 
-## :computer: `14_gestion_candidatos_persistencia` Continuación...
+## :computer: `14_gestion_candidatos_persistencia` Continuación...<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer Ejemplo JPA
 
 ### Acceso a la Capa de Persistencia con consultas JPA
 
@@ -220,7 +220,7 @@ Esta capa no ha sufrido ningun cambio.
 ![14-41-ej](images/14-41-ej.png)
 ![14-42-ej](images/14-42-ej.png)
 
-## :computer: `15_gestion_candidatos_persistencia_eliminacion`
+## :computer: `15_gestion_candidatos_persistencia_eliminacion`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo Ejemplo JPA
 
 Partiendo del proyecto `14_gestion_candidatos_persistencia` vamos a crear el proyecto `15_gestion_candidatos_persistencia_eliminacion` en el cual vamos a implementar la funcionalidad de eliminar el Contacto por Email.
 
@@ -357,7 +357,7 @@ Básicamente eso es todo lo que teniamos que hacer para implementar la funcional
 
 Las Named Queries nos permiten limpiar nuestras consultas JPA de la capa de Servicio y a la vez siverve para la reutilización de código ya que las sentencias estan en las Entidades y cualquier otra clase que use esas entidades ya puede usar esas sentencias. Como desventaja no se ve exactamente lo que se ejecuta desde las Clases que usen las Entidades siempre habría que consultar la Entidad para visualizar la consulta.
 
-## :computer: `16_gestion_candidatos_persistencia_namedquery`
+## :computer: `16_gestion_candidatos_persistencia_namedquery`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer Ejemplo JPA con Named Query
 
 Partiendo del proyecto `15_gestion_candidatos_persistencia_eliminacion` vamos a crear el proyecto `16_gestion_candidatos_persistencia_namedquery` en el cual vamos a pasar todas las sentencias JPQL desde la clase  `CandidatosService` al la Entidad `Contacto`.
 
@@ -585,7 +585,7 @@ En esta clase hemos quitado todas las sentencias JPQL y donde se se utilizaba co
 ![04-07](images/04-07.png)
 
 
-## :computer: `17_gestion_candidatos_persistencia_mvc`
+## :computer: `17_gestion_candidatos_persistencia_mvc`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer Ejemplo MVC y JPA
 
 Partiendo de la aplicación `16_gestion_candidatos_persistencia_namedquery` vamos a crear la versión MVC de nuestro proyecto `17_gestion_candidatos_persistencia_mvc`.
 
