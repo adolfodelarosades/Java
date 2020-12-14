@@ -586,12 +586,83 @@
    * 10.- Probar la Aplicación
    
 # [20201123 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201123_Lunes.md):-1:
+* :computer: `10_formacion_springjpa` **Segundo Ejemplo Relación Muchos A Muchos**
+   * 01.- Mavenizar Proyecto y poner Dependencias
+   * 02.- Generación de Entidades Alumnos y Cursos
+   * 03.- Capa de Servicio
+   * 04.- Configuración de Archivos XML
+   * 05.- Cambios en los Actions
+   * 06.- Cambios en el Controller
+   * 07.- Cambios enlas Vistas.
+   * 08.- Probar la Aplicación.
+* :computer: `11_formacion_springjpa_matricular` **Segundo Ejemplo Relación Muchos A Muchos - Añadir Funcionalidad Matricular**
+   * 01.- Capa de Servicio
+   * 02.- Actions
+   * 03.- FrontController
+   * 04.- Vistas
+   * 05.- Probar la Aplicación
+   
 # [20201124 Martes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201124_Martes.md) :-1:
-# [20201125 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201125_Miercoles.md)
+* :scroll: Spring Data JPA
+   * Métodos `JpaRepository`
+      * `save`
+      * `findById`
+      * `findAll`
+      * `deleteById`
+   * Métodos Específicos
+* :computer: `13_gestion_candidatos_spring_data_jpa` **Primer Proyecto Spring-Data-JPA**
+   * 01.- Añadir Dependencia Spring Data JPA.
+   * 02.- Implementar Interface que extienda `JpaRepository`.
+   * 03.- En la Capa de Servicio.
+   * 04.- Configuración en `springConfig.xml`.
+   * 05.- Probar la Aplicación
+   * 06.- Añadir Otros Métodos
+* :computer: `14_formacion_spring_data_jpa` **Segundo Proyecto Spring-Data-JPA**
+   * 01.- Capa de Repository
+   * 02.- Crear la Implementacíon con Spring Data JPA. Interfaces que extiendan de `JpaRepository` y Clases que usan Spring Data -JPA
+   * 03.- Cambios en la Capa de Servicio.
+   * 04.- Configuración
+   * 05.- Probar la Aplicación
+   
+# [20201125 Miercoles](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201125_Miercoles.md) :-1:
+* :scroll: Spring MVC
+   * El Controlador en Spring
+   * Estructura General
+   * Métodos Controladores de Action
+   * El archivo `web.xml`
+   * El archivo `mvcConfig.xml`
+   * Controlador Spring MVC
+* :computer: `15_ejemplo_spring_mvc` **Primer Ejemplo de Spring MVC**.
+   * 01.- Mavenizar el Proyecto y meter las dependencias necesarias.
+   * 02.- Controladores
+   * 03.- Las Vistas.
+   * 04. Configuración `web.xml`
+   * 05. Configuración `mvcConfig.xml`
+   * 06. Probar la Aplicación
+* :computer: `16_buscador_spring_mvc` **Segundo Ejemplo de Spring MVC**.
+   * 01.- Añadir la Dependencia `spring-webmvc` en el `pom.xml`
+   * 02.- Borrar el Paquete Servlets y Remplazarlo por un Paquete Controller con los Controladores.
+
 # [20201126 Jueves]()
 # [20201127 Viernes]()
 
-# [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md) 
+# [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md) :-1:
+* :scroll: Arquitectura Hexagonal
+   * El Hexágono
+   * Puertos y Adaptadores
+   * Otras Arquitecturas
+* :computer: `22_gestion_candidatos_hexagonal`
+   * 01.- Mavenizar el proyecto y poner las Dependencias.
+   * 02.- Modelo de Datos
+   * 03.- Repository
+   * 04.- Capa de Servicio
+   * 05.- Adaptadores
+   * 06.- Adaptador JPA
+   * 07.- Adaptador Web
+   * 08.- Vistas
+   * 09.- Configuración
+   * 10.- Probar la Aplicación
+   
 # [20201101 Martes]()
 # [20201102 Miercoles]()
 # [20201203 Jueves]()
