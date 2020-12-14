@@ -591,7 +591,7 @@
 # [20201126 Jueves]()
 # [20201127 Viernes]()
 
-# [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md)
+# [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md) :-1:
 
 * :computer: `04_formacion_ajax_en_angularjs` **Segundo Proyecto AngulaJS con AJAX**
 * :computer: `05_gestion_candidatos_ofertas_angularjs` **Tercer Proyecto AngulaJS con AJAX**
