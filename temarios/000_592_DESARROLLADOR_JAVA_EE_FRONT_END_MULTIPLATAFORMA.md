@@ -591,8 +591,22 @@
 # [20201126 Jueves]()
 # [20201127 Viernes]()
 
-# [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md) :-1:
+# [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md) 
+# [20201101 Martes]()
+# [20201102 Miercoles]()
+# [20201203 Jueves]()
+# [20201204 Viernes]()
 
+
+# [20201209 Miercoles]()
+# [20201210 Jueves]()
+# [20201211 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201211_Viernes.md)
+* AngularJS
+* :computer: `01_ejemplos_angularjs` **Primer Proyecto AngulaJS**
+* :computer: `02_formacion_validacion_en_angularjs` **Primer Proyecto AngulaJS con Java**
+* :computer: `03_buscador_spring_ajax_en_angularjs` **Primer Proyecto AngulaJS con AJAX**
+
+# [20201214 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201214_Lunes.md) :-1:
 * :computer: `04_formacion_ajax_en_angularjs` **Segundo Proyecto AngulaJS con AJAX**
 * :computer: `05_gestion_candidatos_ofertas_angularjs` **Tercer Proyecto AngulaJS con AJAX**
    * 1.- Incluir la Dependencia JSONSimple
@@ -607,22 +621,6 @@
    * 10.- Modificar FrontController
    * 11.- Modificar las Vistas
    * 12.- Probar Aplicación
-
-# [20201101 Martes]()
-# [20201102 Miercoles]()
-# [20201203 Jueves]()
-# [20201204 Viernes]()
-
-
-# [20201209 Miercoles]()
-# [20201210 Jueves]()
-# [20201211 Viernes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201211_Viernes.md)
-* AngularJS
-* :computer: `01_ejemplos_angularjs` **Primer Proyecto AngulaJS**
-   
-
-
-# [20201214 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201214_Lunes.md)
 # [20201215 Martes]()
 # [20201216 Miercoles]()
 # [20201217 Jueves]()
