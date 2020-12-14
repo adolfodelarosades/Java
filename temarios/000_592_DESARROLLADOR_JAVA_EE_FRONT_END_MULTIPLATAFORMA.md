@@ -592,6 +592,22 @@
 # [20201127 Viernes]()
 
 # [20201130 Lunes](000_592_DESARROLLADOR_JAVA_EE_FRONT_END_MULTIPLATAFORMA/20201130_Lunes.md)
+
+* :computer: `04_formacion_ajax_en_angularjs` **Segundo Proyecto AngulaJS con AJAX**
+* :computer: `05_gestion_candidatos_ofertas_angularjs` **Tercer Proyecto AngulaJS con AJAX**
+   * 1.- Incluir la Dependencia JSONSimple
+   * 2.- Mostrar las "Ofertas por Empresa"
+   * 3.- Modificar el FrontController
+   * 4.- Probar el JSON
+   * 5.- Modificar Vistas
+   * 6.- Probar Aplicación
+   * 7.- Mostrar Candidato
+   * 8.- Modificar el FrontController
+   * 9.- Probar el JSON
+   * 10.- Modificar FrontController
+   * 11.- Modificar las Vistas
+   * 12.- Probar Aplicación
+
 # [20201101 Martes]()
 # [20201102 Miercoles]()
 # [20201203 Jueves]()
