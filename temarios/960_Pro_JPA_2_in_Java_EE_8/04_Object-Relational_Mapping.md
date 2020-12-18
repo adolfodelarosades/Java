@@ -48,15 +48,15 @@ Hemos mostrado en capítulos anteriores cómo las anotaciones se han utilizado a
 
 Las anotaciones JPA fueron diseñadas para ser legibles, fáciles de especificar y lo suficientemente flexibles como para permitir diferentes combinaciones de metadatos. La mayoría de las anotaciones se especifican como hermanas en lugar de estar anidadas entre sí, lo que significa que varias anotaciones pueden anotar la misma clase, campo o propiedad en lugar de tener anotaciones incrustadas dentro de otras anotaciones. Sin embargo, al igual que con todas las compensaciones, se debe pagar el gaitero y el costo de la flexibilidad es que muchas posibles permutaciones de metadatos de nivel superior serán sintácticamente correctas pero semánticamente inválidas. El compilador no será de utilidad, pero el tiempo de ejecución del proveedor a menudo hará algunas comprobaciones básicas en busca de agrupaciones de anotaciones incorrectas. Sin embargo, la naturaleza de las anotaciones es que, cuando son inesperadas, a menudo no se notan en absoluto. Vale la pena recordar esto cuando intente comprender un comportamiento que podría no coincidir con lo que pensó que había especificado en las anotaciones. Puede ser que se estén ignorando una o más de las anotaciones.
 
-***Las anotaciones de mapeo se pueden clasificar en una de dos categorías: anotaciones lógicas y anotaciones físicas***. Las anotaciones en el grupo lógico son aquellas que describen el modelo de entidad desde una vista de modelado de objetos. Están estrechamente vinculados al modelo de dominio y son el tipo de metadatos que quizás desee especificar en UML o en cualquier otro lenguaje o marco de modelado de objetos. Las anotaciones físicas se relacionan con el modelo de datos concreto en la base de datos. Se ocupan de tablas, columnas, restricciones y otros artefactos a nivel de base de datos que el modelo de objetos nunca podría conocer de otra manera.
+**Las anotaciones de mapeo se pueden clasificar en una de dos categorías: anotaciones lógicas y anotaciones físicas**. ***Las anotaciones en el grupo lógico son aquellas que describen el modelo de entidad desde una vista de modelado de objetos. Están estrechamente vinculados al modelo de dominio y son el tipo de metadatos que quizás desee especificar en UML o en cualquier otro lenguaje o marco de modelado de objetos. Las anotaciones físicas se relacionan con el modelo de datos concreto en la base de datos. Se ocupan de tablas, columnas, restricciones y otros artefactos a nivel de base de datos que el modelo de objetos nunca podría conocer de otra manera.***
 
 Usamos ambos tipos de anotaciones a lo largo de los ejemplos y para demostrar los metadatos del mapeo. Comprender y poder distinguir entre estos dos niveles de metadatos lo ayudará a tomar decisiones sobre dónde declarar metadatos y dónde usar anotaciones y XML. Como verá en el Capítulo 13, existen equivalentes XML para todas las anotaciones de mapeo descritas en este capítulo, lo que le brinda la libertad de utilizar el enfoque que mejor se adapte a sus necesidades de desarrollo.
 
 ## Acceder al Entity State (Estado de la Entidad)
 
-El proveedor debe poder acceder al estado mapeado de una entidad en tiempo de ejecución, de modo que cuando llegue el momento de escribir los datos, puedan obtenerse de la instancia de la entidad y almacenarse en la base de datos. De manera similar, cuando el estado se carga desde la base de datos, el tiempo de ejecución del proveedor debe poder insertarlo en una nueva instancia de entidad. La forma en que se accede al estado en la entidad se denomina modo de acceso.
+***El proveedor debe poder acceder al estado mapeado de una entidad en tiempo de ejecución***, de modo que cuando llegue el momento de escribir los datos, puedan obtenerse de la instancia de la entidad y almacenarse en la base de datos. De manera similar, cuando el estado se carga desde la base de datos, el tiempo de ejecución del proveedor debe poder insertarlo en una nueva instancia de entidad. ***La forma en que se accede al estado en la entidad se denomina modo de acceso***.
 
-En el Capítulo 2, aprendió que hay dos formas diferentes de especificar el estado de la entidad persistente: puede anotar los campos o anotar las propiedades de estilo JavaBean. El mecanismo que usa para designar el estado persistente es el mismo que el modo de acceso que usa el proveedor para acceder a ese estado. Si anota campos, el proveedor obtendrá y establecerá los campos de la entidad *mediante la reflexión*. Si las anotaciones se establecen en los métodos getter de las propiedades, el proveedor invocará esos métodos getter y setter para acceder y establecer el estado.
+***En el Capítulo 2, aprendió que hay dos formas diferentes de especificar el estado de la entidad persistente: puede anotar los campos o anotar las propiedades de estilo JavaBean***. El mecanismo que usa para designar el estado persistente es el mismo que el modo de acceso que usa el proveedor para acceder a ese estado. Si anota campos, el proveedor obtendrá y establecerá los campos de la entidad *mediante la reflexión*. Si las anotaciones se establecen en los métodos getter de las propiedades, el proveedor invocará esos métodos getter y setter para acceder y establecer el estado.
 
 ### ACCESO AL CAMPO
 
@@ -84,6 +84,247 @@ public class Employee {
 }
 ```
 
+### :computer: `960-04-01-fieldAccess`
+
+![960-04-01-01](images/960-04-01-01.png)
+
+`persistence.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="EmployeeService" transaction-type="JTA">
+		<jta-data-source>jdbc/EmployeeDS</jta-data-source>
+		<class>model.examples.model.Employee</class>
+	</persistence-unit>
+</persistence>
+```
+
+#### Model
+
+`Employee.java`
+
+```java
+package model.examples.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Employee {
+   @Id
+   private int id;
+   private String name;
+   private long salary;
+
+   public int getId() {
+      return id;
+   }
+    
+   public void setId(int id) {
+      this.id = id;
+   }
+    
+   public String getName() {
+      return name;
+   }
+    
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public long getSalary() {
+      return salary;
+   }
+
+   public void setSalary(long salary) {
+      this.salary = salary;
+   }
+
+   public String toString() {
+      return "ID Empleado: " + getId() + " Nombre: " + getName() + " Salario: " + getSalary();
+   }
+}
+```
+
+
+#### Capa de Servios con EJBs
+
+`EmployeeService.java`
+
+```java
+package model.examples.stateless;
+
+import java.util.Collection;
+
+import model.examples.model.Employee;
+
+public interface EmployeeService {
+   public Employee createEmployee(int id, String name, long salary);
+   public Collection<Employee> findAllEmployees();
+}
+```
+
+`EmployeeServiceBean.java`
+
+```java
+package model.examples.stateless;
+
+import java.util.Collection;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import model.examples.model.Employee;
+
+@Stateless
+public class EmployeeServiceBean implements EmployeeService {
+   @PersistenceContext(unitName="EmployeeService")
+   protected EntityManager em;
+
+   public Employee createEmployee(int id, String name, long salary) {
+      Employee emp = new Employee();
+      emp.setId(id);
+      emp.setName(name);
+      emp.setSalary(salary);
+      em.persist(emp);
+        
+      return emp;
+   }
+
+   public Collection<Employee> findAllEmployees() {
+      Query query = em.createQuery("SELECT e FROM Employee e");
+      return (Collection<Employee>) query.getResultList();
+   }
+}
+```
+
+#### Capa Controller - Servlet
+
+`EmployeeServlet.java`
+
+```java
+package servlet.examples.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.examples.model.Employee;
+import model.examples.stateless.EmployeeService;
+
+@WebServlet(name="EmployeeServlet", 
+            urlPatterns="/EmployeeServlet")
+public class EmployeeServlet extends HttpServlet {
+
+   private final String TITLE = "Capítulo 4: Ejemplo de Acceso al Campo (Field Access)";
+    
+   private final String DESCRIPTION =
+      "Este ejemplo demuestra cómo especificar el acceso al campo(field access) para las entidades. </br>" +
+      "Te permite crear/buscar empleados. Todas las operaciones " +
+      "se conservan en la base de datos.";
+    
+   // inyectar una referencia al EmployeeService slsb
+   @EJB EmployeeService service;
+    
+   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      response.setContentType("text/html");
+      PrintWriter out = response.getWriter();
+      printHtmlHeader(out);
+        
+      // process request
+      String action = request.getParameter("action");
+      if (action == null) {
+         // do nothing if no action requested
+      } else if (action.equals("Crear")) {
+         Employee emp = service.createEmployee(
+                     parseInt(request.getParameter("id")),
+                     request.getParameter("name"),
+                     parseLong(request.getParameter("salary")));
+         out.println("<b>Creado:</b> " + emp);
+      } else if (action.equals("Buscar Todo")) {
+         Collection<Employee> emps = service.findAllEmployees();
+         if (emps.isEmpty()) {
+            out.println("<b>No se encontraron empleados</b> ");
+         } else {
+            out.println("<b>Empleados encontrados:</b> </br></br>");
+            for (Employee emp : emps) {
+               out.println(emp + "<br/>");
+            }
+         }
+      }
+        
+      printHtmlFooter(out);
+   }
+    
+   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      doPost(request, response);
+   }
+    
+   private int parseInt(String intString) {
+      try {
+         return Integer.parseInt(intString);
+      } catch (NumberFormatException e) {
+         return 0;
+      }
+   }
+    
+   private long parseLong(String longString) {
+      try {
+         return Long.parseLong(longString);
+      } catch (NumberFormatException e) {
+         return 0;
+      }
+   }
+
+   private void printHtmlHeader(PrintWriter out) throws IOException {
+      out.println("<body>");
+      out.println("<html>");
+      out.println("<head><title>" + TITLE + "</title></head>");
+      out.println("<center><h1>" + TITLE + "</h1></center>");
+      out.println("<p>" + DESCRIPTION + "</p>");
+      out.println("<hr/>");
+      out.println("<form action=\"EmployeeServlet\" method=\"POST\">");
+      // form to create and Employee and Address
+      out.println("<h3>Crear un Empleado</h3>");
+      out.println("<table><tbody>");
+      out.println("<tr><td>ID de Empleado:</td><td><input type=\"text\" name=\"id\"/>(int)</td></tr>");
+      out.println("<tr><td>Nombre de Empleado:</td><td><input type=\"text\" name=\"name\"/>(String)</td></tr>");
+      out.println("<tr><td>Salario de Empleado:</td><td><input type=\"text\" name=\"salary\"/>(long)</td></tr>");
+      out.println("<td><input name=\"action\" type=\"submit\" value=\"Crear\"/></td></tr>");
+      out.println("</tbody></table>");
+      out.println("<hr/>");
+      // form to find all
+      out.println("<h3>Buscar todos los Empleados</h3>");
+      out.println("<input name=\"action\" type=\"submit\" value=\"Buscar Todo\"/>");
+      out.println("</form>");
+      out.println("<hr/>");
+   }
+    
+    
+   private void printHtmlFooter(PrintWriter out) throws IOException {
+      out.println("</html>");
+      out.println("</body>");
+      out.close();
+   }
+}
+```
+
+![960-04-01-02](images/960-04-01-02.png)
+![960-04-01-03](images/960-04-01-03.png)
+![960-04-01-04](images/960-04-01-04.png)
+![960-04-01-05](images/960-04-01-05.png)
+![960-04-01-06](images/960-04-01-06.png)
+
 ### ACCESO A LA PROPIEDAD
 
 Cuando se usa el modo de acceso a la propiedad, se aplica el mismo contrato que para los JavaBeans, y debe haber métodos getter y setter para las propiedades persistentes. El tipo de propiedad está determinado por el tipo de retorno del método getter y debe ser el mismo que el tipo del parámetro único pasado al método setter. Ambos métodos deben tener visibilidad `public` or `protected`. Las anotaciones de mapeo de una propiedad deben estar en el método getter.
@@ -109,6 +350,8 @@ public class Employee {
    public void setSalary(long salary) { this.wage = salary; }
 }
 ```
+
+````````
 
 ### ACCESO MIXTO
 
