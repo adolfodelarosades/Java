@@ -1150,35 +1150,37 @@ Dado que las asignaciones de columnas(column mappings) del tipo embedded(incrust
 
 ![04-23](images/04-23.png)
 
-Usamos una anotación `@AttributeOverride` para cada atributo del objeto incrustado que queremos anular en la entidad. Anotamos el campo o propiedad incrustado en la entidad y especificamos en el elemento de nombre el campo o propiedad en el objeto incrustado que estamos anulando. El elemento de columna nos permite especificar la columna a la que se asigna el atributo en la tabla de la entidad. Lo indicamos en forma de una anotación @Column anidada. Si anulamos varios campos o propiedades, podemos usar la anotación @AttributeOverrides en plural y anidar varias anotaciones @AttributeOverride dentro de ella.
+Usamos una anotación `@AttributeOverride` para cada atributo del objeto incrustado que queremos anular en la entidad. Anotamos el campo o propiedad incrustado en la entidad y especificamos en el elemento de nombre el campo o propiedad en el objeto incrustado que estamos anulando(overriding). El elemento `column` nos permite especificar la columna a la que se asigna el atributo en la tabla de la entidad. Lo indicamos en forma de una anotación anidada `@Column`. Si anulamos varios campos o propiedades, podemos usar la anotación `@AttributeOverrides` en plural y anidar varias anotaciones `@AttributeOverride` dentro de ella.
 
-El Listado 4-28 muestra un ejemplo del uso de Dirección tanto en Empleado como en Compañía. La entidad Compañía usa el tipo Dirección sin cambios, pero la entidad Empleado especifica dos invalidaciones de atributos para asignar el estado y los atributos zip de la Dirección a las columnas PROVINCE y POSTAL_CODE de la tabla EMPLOYEE.
+El Listado 4-28 muestra un ejemplo del uso de `Address` tanto en `Employee` como en `Company`. La entidad `Company` usa el tipo `Address` sin cambios, pero la entidad `Employee` especifica dos invalidaciones de atributos para asignar (overrides to map) el `state` y los atributos `zip` de la `Address` a las columnas `PROVINCE` y `POSTAL_CODE` de la tabla `EMPLOYEE`.
+
+***Listado 4-28*** Reutilización de un Embedded Object(objeto incrustado) en varias entidades
 
 ```java
 @Entity
 public class Employee {
-    @Id private long id;
-    private String name;
-    private long salary;
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name="state", column=@Column(name="PROVINCE")),
-        @AttributeOverride(name="zip", column=@Column(name="POSTAL_CODE"))
-    })
-    private Address address;
-    // ...
+   @Id private long id;
+   private String name;
+   private long salary;
+   @Embedded
+   @AttributeOverrides({
+      @AttributeOverride(name="state", column=@Column(name="PROVINCE")),
+      @AttributeOverride(name="zip", column=@Column(name="POSTAL_CODE"))
+   })
+   private Address address;
+   // ...
 }
 @Entity
 public class Company {
-    @Id private String name;
-    @Embedded
-    private Address address;
-    // ...
+   @Id private String name;
+   @Embedded
+   private Address address;
+   // ...
 }
-Listing 4-28Reusing an Embedded Object in Multiple Entities
 ```
 
 ## Resumen
+
 La asignación de objetos a bases de datos relacionales es de vital importancia para las aplicaciones de persistencia. Lidiar con el desajuste de impedancia requiere un conjunto sofisticado de metadatos. JPA no solo proporciona estos metadatos, sino que también facilita el desarrollo fácil y conveniente.
 
 En este capítulo, analizamos el proceso de mapeo del estado de la entidad que incluía tipos simples de Java, objetos grandes, tipos enumerados y tipos temporales. También usamos los metadatos para hacer un mapeo de encuentro en el medio a nombres de tablas y columnas específicas.
@@ -1191,7 +1193,4 @@ El próximo capítulo analiza más las complejidades de mapear relaciones valora
 
 #### Notas al pie
 
-1 Aunque los tipos incrustados se pueden compartir o reutilizar, las instancias no. Una instancia de objeto incrustado pertenece a la entidad que hace referencia a ella; y ninguna otra instancia de entidad, de ese tipo de entidad o de cualquier otro, puede hacer referencia a la misma instancia incorporada.
-
-
-
+**1** Aunque los tipos incrustados se pueden compartir o reutilizar, las instancias no. Una instancia de objeto incrustado pertenece a la entidad que hace referencia a ella; y ninguna otra instancia de entidad, de ese tipo de entidad o de cualquier otro, puede hacer referencia a la misma instancia incorporada.
