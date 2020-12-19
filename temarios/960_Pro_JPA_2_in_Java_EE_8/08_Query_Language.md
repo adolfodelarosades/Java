@@ -515,15 +515,113 @@ Tenga en cuenta que en cada uno de los ejemplos de joined de mapas unimos una en
 
 #### ***Outer Joins***
 
-AQUIIIIIIIII
+Una outer join entre dos entidades produce un dominio en el que solo se requiere que un lado de la relación esté completo. En otras palabras, la outer join de `Employee` a `Department` en la relación de `department` de empleados devuelve todos los empleados y el departamento al que se ha asignado el empleado, pero el departamento se devuelve solo si está disponible. Esto contrasta con una inner join que devolvería solo a los empleados asignados a un departamento.
+
+Una outer join se especifica utilizando la siguiente sintaxis: `LEFT [OUTER] JOIN <path_expression> [AS] <identifier>`. El siguiente query demuestra una outer join  entre dos entidades:
 
 ```sql
-
+SELECT e, d
+FROM Employee e LEFT JOIN e.department d
 ```
 
+Si el empleado no ha sido asignado a un departamento, el objeto del departamento (el segundo elemento del array de `Object`) será nulo.
 
+En una generación típica de SQL de proveedor, verá que la consulta anterior sería equivalente a lo siguiente:
+
+```sql
+SELECT e.id, e.name, e.salary, e.manager_id, e.dept_id, e.address_id, d.id, d.name
+  FROM employee e LEFT OUTER JOIN department d 
+    ON (d.id = e.department_id)
+```
+
+El SQL resultante muestra que cuando se genera una outer join a partir de JP QL, siempre especifica una condición `ON` de igualdad entre la join column que mapea la relación que se está joined(uniendo) y la primary key a la que hace referencia.
+
+Se puede proporcionar una expresión `ON` adicional para agregar restricciones(constraints) a los objetos que se devuelven desde el lado derecho de la combinación. Por ejemplo, podemos modificar la consulta JP QL anterior para tener una condición `ON` adicional para limitar los departamentos devueltos solo a aquellos que tienen un prefijo '`QA`':
+
+```sql
+SELECT e, d
+  FROM Employee e LEFT JOIN e.department d
+    ON d.name LIKE 'QA%'
+```
+
+Esta consulta aún devuelve todos los empleados, pero los resultados no incluirán ningún departamento que no coincida con la condición `ON` agregada. El SQL generado se vería así:
+
+```sql
+SELECT e.id, e.name, e.salary, e.department_id, e.manager_id, e.address_id, 
+       d.id, d.name
+FROM employee e LEFT OUTER JOIN department d
+  ON ((d.id = e.department_id) and (d.name like 'QA%'))
+```
+
+Tenga en cuenta que esta consulta es muy diferente de usar una expresión `WHERE`:
+
+```sql
+SELECT e, d
+  FROM Employee e LEFT JOIN e.department d
+ WHERE d.name LIKE 'QA%'
+```
+
+La cláusula `WHERE` da como resultado una semántica de inner join entre `Employee` y `Department`, por lo que esta consulta solo devolvería los empleados que estaban en un departamento con un nombre con el prefijo '`QA`'.
+
+> **TIP** *La capacidad de agregar condiciones de outer join con `ON` se agregó en JPA 2.1.*
+
+#### ***Fetch Joins***
+
+Las **Fetch joins(uniones de recuperación)** están destinadas a ayudar a los diseñadores de aplicaciones a optimizar el acceso a la base de datos y preparar los resultados de las consultas para la separación. Permiten que las consultas especifiquen una o más relaciones por las que el motor de consultas debe navegar y buscar previamente para que no se carguen de forma diferida más tarde en tiempo de ejecución.
+
+Por ejemplo, si tenemos una entidad `Employee` con una relación de carga diferida(lazy loading) con su dirección, la siguiente consulta puede usarse para indicar que la relación debe resolverse con eagerly durante la ejecución de la consulta:
+
+```sql
+SELECT e
+  FROM Employee e JOIN FETCH e.address
+```
+
+Tenga en cuenta que no se establece ninguna variable de identificación para la path expression(expresión de ruta) `e.address`. Esto se debe a que, aunque la entidad `Address` se une para resolver la relación, no forma parte del tipo de resultado de la consulta. El resultado de ejecutar la consulta sigue siendo una colección de instancias de entidad de `Employee`, excepto que la relación de `address` en cada entidad no provocará un viaje secundario a la base de datos cuando se acceda a ella. Esto también permite acceder de forma segura a la relación de `address` si la entidad `Employee` se separa(detached). Una fetch join se distingue de una regular join al agregar la palabra clave `FETCH` al operador `JOIN`.
+
+Para implementar las fetch joins, el proveedor debe convertir la asociación obtenida en una combinación regular del tipo apropiado: inner por defecto o outer si se especificó la palabra clave `LEFT`. La expresión `SELECT` de la consulta también debe expandirse para incluir la joined relationship(relación unida). Expresado en JP QL, una interpretación de proveedor equivalente del ejemplo anterior de combinación de búsqueda se vería así:
+
+
+```sql
+SELECT e, a
+  FROM Employee e JOIN e.address a
+```
+
+La única diferencia es que el proveedor no devuelve las entidades de `Address` al caller(persona que llama). Debido a que los resultados se procesan a partir de esta consulta, el query engine(motor de consultas) crea la entidad `Address` en la memoria y la asigna a la entidad `Employee`, pero luego la elimina de la colección de resultados que crea para el cliente. Esto carga eagerly (con entusiasmo) la relación `address`, a la que luego se puede acceder mediante la navegación desde la entidad `Employee`.
+
+Una consecuencia de implementar las fetch joins de esta manera es que la búsqueda de una asociación de colección da como resultado resultados duplicados. Por ejemplo, considere una consulta de departamento en la que la relación de `employees` de la entidad `Department` se busca con eagerly fetched(entusiasmo). La consulta fetch join, esta vez utilizando una outer join para garantizar que se recuperen los departamentos sin empleados, se escribiría de la siguiente manera:
+
+```sql
+SELECT d
+FROM Department d LEFT JOIN FETCH d.employees
+```
+
+Expresado en JP QL, la interpretación del proveedor reemplazaría la búsqueda con una combinación externa en la relación de los `employees`:
+
+```sql
+SELECT d, e
+FROM Department d LEFT JOIN d.employees e
+```
+
+Una vez más, a medida que se procesan los resultados, la entidad `Employee` se construye en la memoria pero se elimina de la colección de resultados. Cada entidad `Department` ahora tiene una colección de `employees` completamente resuelta, pero el cliente recibe una referencia a cada departamento por empleado. Por ejemplo, si se recuperaran cuatro departamentos con cinco empleados cada uno, el resultado sería una colección de 20 instancias de `Department`, con cada departamento duplicado cinco veces. Todas las instancias de entidad reales apuntan a las mismas versiones administradas, pero los resultados son algo extraños como mínimo.
+
+Para eliminar los valores duplicados, se debe utilizar el operador `DISTINCT` o los resultados se deben colocar en una estructura de datos como un `Set`. Debido a que no es posible escribir una consulta SQL que utilice el operador `DISTINCT` mientras se conserva la semántica de la combinación de recuperación, el proveedor tendrá que eliminar los duplicados en la memoria después de que se hayan obtenido los resultados. Esto podría tener implicaciones de rendimiento para conjuntos de resultados grandes.
+
+Dados los resultados algo peculiares generados a partir de una combinación de búsqueda en una colección, puede que no sea la forma más adecuada de cargar entidades relacionadas con eagerly en todos los casos. Si una colección requiere una eager fetching (búsqueda ansiosa) de manera regular, considere hacer que la relación sea eager de forma predeterminada. Algunos proveedores de persistencia también ofrecen lecturas por lotes como alternativa a la fetch joins(búsqueda de combinaciones) que emiten varias consultas en un solo lote y luego correlacionan los resultados para cargar relaciones con entusiasmo. Otra alternativa es utilizar un entity graph para determinar dinámicamente los atributos de relación que se cargarán mediante una consulta. Los Entity graphs se describen en detalle en el Capítulo 11.
 
 ### WHERE Clause
+
+```sql
+```
+
+```sql
+```
+
+```sql
+```
+
+```sql
+```
+
 ### Inheritance and Polymorphism
 ### Scalar Expressions
 ### ORDER BY Clause
