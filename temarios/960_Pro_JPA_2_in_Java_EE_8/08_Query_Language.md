@@ -297,18 +297,232 @@ Cuando se ejecuta, se devolverá una colección de cero o más instancias de arr
 
 La proyección es una técnica útil para aplicaciones web en las que solo se muestran unos pocos datos de un gran conjunto de instancias de entidades. Dependiendo de cómo se haya asignado la entidad, es posible que se requiera una consulta SQL compleja para recuperar completamente el estado de la entidad. Si solo se requieren dos campos, el esfuerzo adicional invertido en la construcción de la instancia de entidad podría haberse desperdiciado. Una consulta de proyección que devuelve solo la cantidad mínima de datos es más útil en estos casos.
 
+#### ***Constructor Expressions***
+
+Una forma más poderosa de la cláusula `SELECT` que involucra múltiples expresiones es la constructor expression(expresión de constructor), que especifica que los resultados de la consulta deben almacenarse utilizando un tipo de objeto especificado por el usuario. Considere la siguiente consulta:
 
 ```sql
+SELECT NEW example.EmployeeDetails(e.name, e.salary, e.department.name)
+FROM Employee e
 ```
+
+El tipo de resultado de esta consulta es la clase `example.EmployeeDetails Java class`. A medida que el procesador de consultas itera sobre los resultados de la consulta, crea instancias nuevas de `EmployeeDetails` utilizando el constructor que coincide con los tipos de expresión enumerados en la consulta. En este caso, los expression types(tipos de expresión) son `String`, `Double` y `String`, por lo que el query engine(motor de consulta) buscará un constructor con esos tipos de clase para argumentos. Cada fila de la colección de consultas resultante es, por tanto, una instancia de `EmployeeDetails` que contiene el nombre del empleado, el salario y el nombre del departamento.
+
+Se debe hacer referencia al tipo de objeto de resultado mediante el nombre completo del objeto. Sin embargo, la clase no tiene que estar asignada a la base de datos de ninguna manera. Cualquier clase con un constructor compatible con las expresiones enumeradas en la cláusula SELECT se puede usar en una constructor expression(expresión de constructor).
+
+Las constructor expression(expresión de constructor) son herramientas poderosas para construir objetos de transferencia de datos de coarse-grained(grano grueso) u objetos de vista para usar en otros niveles de aplicación. En lugar de construir manualmente estos objetos, se puede utilizar una sola consulta para reunir los objetos de vista listos para su presentación en una página web.
+
+### CLÁUSULA FROM
+
+La cláusula `FROM` se utiliza para declarar una o más variables de identificación, derivadas opcionalmente de relaciones unidas, que forman el dominio sobre el que la consulta debe extraer sus resultados. La sintaxis de la cláusula `FROM` consta de una o más variables de identificación y declaraciones de join clause(cláusula de unión).
+
+#### ***Identification Variables (Variables de identificación)***
+
+La variable de identificación es el punto de partida para todas las query expressions(expresiones de consulta). Cada consulta debe tener al menos una variable de identificación definida en la cláusula `FROM`, y esa variable debe corresponder a un tipo de entidad. Cuando una declaración de variable de identificación no usa una path expression(expresión de ruta) (es decir, cuando es un nombre de entidad única), se denomina declaración de variable de rango(range variable declaration). Esta terminología proviene de la teoría de conjuntos, ya que se dice que la variable abarca la entidad.
+
+Las declaraciones de variables de rango(range variable) utilizan la sintaxis `<entity_name> [AS] <identifier>`. Hemos estado usando esta sintaxis en todos nuestros ejemplos anteriores, pero sin la palabra clave opcional `AS`. El identificador debe seguir las reglas de nomenclatura estándar de Java y se puede hacer referencia a él en toda la consulta sin distinción entre mayúsculas y minúsculas. Se pueden especificar varias declaraciones separándolas con comas.
+
+Las path expressions(expresiones de ruta) también pueden tener un alias para las variables de identificación en el caso de uniones y subconsultas. La sintaxis para las declaraciones de variables de identificación en estos casos se tratará en las dos secciones siguientes.
+
+#### ***Joins (Uniones)***
+
+Un **join** es un query que combina resultados de varias entidades. Los Joins en las consultas JP QL son lógicamente equivalentes a las joins SQL. En última instancia, una vez que la consulta se traduce a SQL, es bastante probable que las combinaciones entre entidades produzcan combinaciones similares entre las tablas a las que se asignan las entidades. Por lo tanto, comprender cuándo se producen los joins es importante para escribir consultas eficaces.
+
+Los Joins se producen siempre que se cumple alguna de las siguientes condiciones en una consulta `SELECT`.
+
+* Dos o más declaraciones de range variable(variable de rango) se enumeran en la cláusula `FROM` y aparecen en la cláusula `SELECT`.
+
+* El operador `JOIN` se usa para extender una identification variable(variable de identificación) usando una path expression(expresión de ruta).
+
+* Una path expression(expresión de ruta) en cualquier parte de la consulta navega a través de un campo de asociación, a la misma entidad o a una diferente.
+
+* Una o más condiciones `WHERE` comparan atributos de diferentes variables de identificación.
+
+La semántica de un join entre entidades es la misma que la de los joins SQL entre tablas. La mayoría de las consultas contienen una serie de condiciones de combinación(join conditions), que son expresiones que definen las reglas para hacer coincidir una entidad con otra. Las  join conditions(condiciones de combinación) se pueden especificar explícitamente, usando el operador `JOIN` en la cláusula `FROM` de un query, o implícitamente como resultado de la path navigation(navegación de ruta).
+
+Una **inner join(unión interna)** entre dos entidades devuelve los objetos de ambos tipos de entidad que satisfacen todas las condiciones de unión. La path navigation (navegación de ruta) de una entidad a otra es una forma de inner join(unión interna). La **outer join (unión externa)** de dos entidades es el conjunto de objetos de ambos tipos de entidad que satisfacen las condiciones de combinación más el conjunto de objetos de un tipo de entidad (designado como left entity(entidad izquierda)) que no tienen una condición de combinación coincidente en el otro.
+
+En ausencia de join conditions(condiciones de unión) entre dos entidades, las consultas producirán un producto cartesiano. Cada objeto del primer tipo de entidad se empareja con cada objeto del segundo tipo de entidad, elevando al cuadrado el número de resultados<sup>1</sup>. Los productos cartesianos son raros con las consultas JP QL dadas las capacidades de navegación del lenguaje, pero son posibles si se especifican dos declaraciones de range variable(variable de rango) en la cláusula `FROM` sin condiciones adicionales especificadas en la cláusula `WHERE`.
+
+En las siguientes secciones se proporcionan más discusiones y ejemplos de cada estilo de combinación.
+
+#### ***Inner Joins***
+
+Todas las consultas de ejemplo hasta ahora han estado utilizando la forma más simple de la cláusula `FROM`, un solo tipo de entidad con alias de una variable de identificación. Sin embargo, como lenguaje relacional, JP QL admite consultas que se basan en múltiples entidades y las relaciones entre ellas.
+
+Los Inner joins(uniones internas) entre dos entidades se pueden especificar de una de las formas que se enumeraron anteriormente. La primera forma preferida, porque es explícito y obvio que se está produciendo una combinación, es el operador `JOIN` en la cláusula `FROM`. Otro formulario requiere varias declaraciones de variable de rango en las condiciones de la cláusula `FROM` y `WHERE` para proporcionar las join conditions(condiciones de combinación).
+
+
+#### ***JOIN Operator y Collection Association Fields***
+
+La sintaxis de una inner join que utiliza el operador `JOIN` es `[INNER] JOIN <path_expression> [AS] <identifier>`. Considere el siguiente query:
 
 ```sql
+SELECT p
+FROM Employee e JOIN e.phones p
 ```
+
+Esta consulta utiliza el operador `JOIN` para unir la entidad `Employee` a la entidad `Phone` en la relación de `phones`. La join condition(condición de unión) en esta consulta se define mediante el mapeo relacional de objeto de la relación de `phones`. No es necesario especificar criterios adicionales para vincular las dos entidades. Al unir las dos entidades, esta consulta devuelve todas las instancias de la entidad `Phone` asociadas con los empleados de la empresa.
+
+La sintaxis de los joins es similar a las expresiones `JOIN` compatibles con ANSI SQL. Para los lectores que no estén familiarizados con esta sintaxis, considere la forma SQL equivalente de la consulta anterior escrita con la forma de combinación tradicional:
 
 ```sql
+SELECT p.id, p.phone_num, p.type, p.emp_id
+  FROM emp e, phone p
+ WHERE e.id = p.emp_id
+```
+
+El mapeo de la tabla para la entidad `Phone` reemplaza la expresión `e.phones`. La cláusula `WHERE` también incluye los criterios necesarios para unir las dos tablas a través de las join columns(columnas de unión) definidas por lel mapping de `phones`.
+
+Tenga en cuenta que la relación de los `phones` se ha asignado a la variable de identificación `p`. Aunque la entidad `Phone` no aparece directamente en el query, el destino de la relación `phones` es la entidad `Phone`, y esto determina el tipo de variable de identificación. Esta determinación implícita del tipo de variable de identificación puede llevar algún tiempo acostumbrarse. Es necesario estar familiarizado con cómo se definen las relaciones en el modelo de objetos para navegar a través de una consulta escrita.
+
+Cada aparición de `p` fuera de la cláusula `FROM` ahora se refiere a un solo teléfono propiedad de un empleado. Aunque se especificó un campo de asociación de colección en la cláusula `JOIN`, ***la variable de identificación en realidad se refiere a las entidades a las que llega esa asociación, no a la colección en sí***. La variable ahora se puede usar como si la entidad `Phone` estuviera listada directamente en la cláusula `FROM`. Por ejemplo, en lugar de devolver instancias de entidad de `Phone`, se pueden devolver números de teléfono.
+
+```sql
+SELECT p.number
+FROM Employee e JOIN e.phones p
+```
+
+En la definición anterior de path expressions(expresiones de ruta), se observó que una ruta no podía continuar desde un state field(campo de estado) o un campo de asociación de colección. Para solucionar esta situación, el campo de asociación de colección debe unirse en la cláusula `FROM` para que se cree una nueva variable de identificación para la ruta, lo que le permite ser la raíz de las nuevas expresiones de ruta.
+
+> **IN VERSUS JOIN**
+> EJBQL, según lo definido por las especificaciones EJB 2.0 y EJB 2.1, utilizó un operador especial `IN` en la cláusula `FROM` para asignar asociaciones de colección a variables de identificación. El apoyo a este operador se transfirió a JP QL. La forma equivalente de la consulta utilizada anteriormente en esta sección podría especificarse como:
+
+```sql
+SELECT DISTINCT p
+FROM Employee e, IN(e.phones) p
+```
+
+> El operador `IN` está destinado a indicar que la variable `p` es una enumeración de la colección `phones`. El operador `JOIN` es una forma más poderosa y expresiva de declarar relaciones y es el operador recomendado para consultas.
+
+#### ***JOIN Operator y Single-Valued Association Fields***
+
+El operador `JOIN` funciona tanto con expresiones de ruta de asociación con valores de colección como con expresiones de ruta de asociación con un solo valor. Considere el siguiente ejemplo:
+
+```sql
+SELECT d
+FROM Employee e JOIN e.department d
+```
+
+Esta consulta define una unión de `Employee` a `Department` en toda la relación del `department`. Esto es semánticamente equivalente a usar una path expression(expresión de ruta) en la cláusula `SELECT` para obtener el departamento para el empleado. Por ejemplo, la siguiente consulta debería dar como resultado representaciones SQL similares, si no idénticas, que implican una unión entre las entidades `Employee` y `Department`:
+
+```sql
+SELECT e.department
+FROM Employee e
+```
+
+El caso de uso principal para usar una expresión de ruta de asociación de un solo valor en la cláusula `FROM` (en lugar de simplemente usar una expresión de ruta en la cláusula `SELECT`) es para outer joins(combinaciones externas). La Path navigation(navegación de ruta) es equivalente a la inner join(unión interna) de todas las entidades asociadas atravesadas en la path expression(expresión de ruta).
+
+La posibilidad de inner joins(uniones internas) implícitas resultantes de las (path expressions)expresiones de ruta es algo de lo que hay que estar consciente. Considere el siguiente ejemplo que ***muestra los distintos departamentos con sede en California que participan en el proyecto `Release1`***:
+
+
+```sql
+SELECT DISTINCT e.department
+  FROM Project p JOIN p.employees e
+ WHERE p.name = 'Release1' 
+   AND e.address.state = 'CA'
+```
+
+En realidad, hay cuatro joins lógicos aquí, no dos. El traductor tratará la consulta como si se hubiera escrito con joins explícitos entre las distintas entidades. Cubriremos la sintaxis para múltiples combinaciones más adelante en la sección "Múltiples combinaciones", pero por ahora considere la siguiente consulta que es equivalente a la consulta anterior, leyendo las join conditions(condiciones de combinación) de izquierda a derecha:
+
+
+```sql
+SELECT DISTINCT d
+  FROM Project p JOIN p.employees e JOIN e.department d JOIN e.address a
+ WHERE p.name = 'Release1' AND
+       a.state = 'CA'
+```
+
+Indicamos cuatro joins lógicos porque el mapeo físico real podría involucrar más tablas. En este caso, las entidades `Employee` y `Project` están relacionadas mediante una asociación de many-to-many mediante una join table(tabla de combinación). Por lo tanto, el SQL real para dicha query utiliza cinco tablas, no cuatro.
+
+
+```sql
+SELECT DISTINCT d.id, d.name
+  FROM project p, emp_projects ep, emp e, dept d, address a
+ WHERE p.id = ep.project_id 
+   AND ep.emp_id = e.id
+   AND e.dept_id = d.id
+   AND e.address_id = a.id
+   AND p.name = 'Release1'
+   AND a.state = 'CA'
+```
+
+La primera forma de la consulta es ciertamente más fácil de leer y comprender. Sin embargo, durante el ajuste del rendimiento, puede resultar útil comprender cuántas joins pueden producirse como resultado de path expressions(expresiones de ruta) aparentemente triviales.
+
+#### ***Join Conditions en la Cláusula WHERE***
+
+Las consultas SQL tradicionalmente han unido tablas al enumerar las tablas que se unirán en la cláusula `FROM` y proporcionar criterios en la cláusula `WHERE` de la consulta para determinar las join conditions(condiciones de unión). Para unir dos entidades sin usar una relación, use una declaración de range variable(variable de rango) para cada entidad en la cláusula `FROM`.
+
+El ejemplo de join anterior entre las entidades `Employee` y `Department` también podría haberse escrito así:
+
+```sql
+SELECT DISTINCT d
+  FROM Department d, Employee e
+ WHERE d = e.department
+```
+
+Este estilo de consulta se usa generalmente para compensar la falta de una relación explícita entre dos entidades en el modelo de dominio. Por ejemplo, no existe asociación entre la entidad `Department` y el `Employee` que es el gerente(manager) del departamento.
+
+Podemos usar una join condition(condición de combinación) en la cláusula `WHERE` para que esto sea posible.
+
+```sql
+SELECT d, m
+  FROM Department d, Employee m
+ WHERE d = m.department 
+   AND m.directs IS NOT EMPTY
+```
+
+En este ejemplo, estamos usando una de las expresiones de colección especiales, `IS NOT EMPTY`, para verificar que la colección de informes directos(direct reports) al empleado no esté vacía. Cualquier empleado con una colección no vacía de directivas es, por definición, un gerente(manager).
+
+#### ***Multiple Joins***
+
+Se puede conectar en cascada más de una combinación si es necesario. Por ejemplo, la siguiente consulta devuelve el conjunto distinto de proyectos que pertenecen a empleados que pertenecen a un departamento:
+
+```sql
+SELECT DISTINCT p
+FROM Department d JOIN d.employees e JOIN e.projects p
+```
+
+El procesador de consultas interpreta la cláusula `FROM` de izquierda a derecha. Una vez que se ha declarado una variable, otras expresiones `JOIN` pueden hacer referencia a ella posteriormente. En este caso, se navega por la relación de proyectos `projects` de la entidad `Employee` una vez declarada la variable empleado.
+
+#### ***Map Joins***
+
+Una path expression(expresión de ruta) que navega a través de una asociación con valor de colección implementada como un `Map` es un caso especial. A diferencia de una colección normal, cada elemento de un map corresponde a dos piezas de información: la clave y el valor (key/value). Al trabajar con JP QL, es importante tener en cuenta que las variables de identificación basadas en mapas se refieren al valor por defecto. Por ejemplo, considere el caso en el que la relación de teléfonos de la entidad `Employee` se modela como un map, donde la clave es el tipo de número (trabajo, celular, casa, etc.) y el valor es el número de teléfono. La siguiente consulta enumera los números de teléfono de todos los empleados:
+
+```sql
+SELECT e.name, p
+FROM Employee e JOIN e.phones p
+```
+
+Este comportamiento se puede resaltar explícitamente mediante el uso de la palabra clave `VALUE`. Por ejemplo, la consulta anterior es funcionalmente idéntica a la siguiente:
+
+```sql
+SELECT e.name, VALUE(p)
+FROM Employee e JOIN e.phones p
+```
+
+Para acceder a la clave en lugar del valor de un elemento de mapa dado, podemos usar la palabra clave `KEY` para anular el comportamiento predeterminado y devolver el valor de clave para un elemento de mapa dado. El siguiente ejemplo demuestra cómo agregar el tipo de teléfono a la consulta anterior:
+
+```sql
+SELECT e.name, KEY(p), VALUE(p)
+  FROM Employee e JOIN e.phones p
+ WHERE KEY(p) IN ('Work', 'Cell')
+```
+
+Finalmente, en el caso de que queramos que la clave y el valor se devuelvan juntos en la forma de un objeto `java.util.Map.Entry`, podemos especificar la palabra clave `ENTRY` de la misma manera. Tenga en cuenta que la palabra clave `ENTRY` solo se puede utilizar en la cláusula `SELECT`. Las palabras clave `KEY` y `VALUE` también se pueden usar como parte de expresiones condicionales en las cláusulas `WHERE` y `HAVING` de la consulta.
+
+Tenga en cuenta que en cada uno de los ejemplos de joined de mapas unimos una entidad con uno de sus atributos de Map y obtuvimos una clave, valor o un par key-value (entrada). Sin embargo, cuando se ve desde la perspectiva de las tablas, el join solo se realiza en el nivel de la clave principal de la entidad de origen y los valores en el Map. Actualmente, no hay ninguna función disponible en JPA para unir la entidad de origen con las claves del Map.
+
+#### ***Outer Joins***
+
+AQUIIIIIIIII
+
+```sql
+
 ```
 
 
-### FROM Clause
+
 ### WHERE Clause
 ### Inheritance and Polymorphism
 ### Scalar Expressions
