@@ -610,8 +610,118 @@ Dados los resultados algo peculiares generados a partir de una combinación de b
 
 ### WHERE Clause
 
+La cláusula `WHERE` de una consulta se usa para especificar condiciones de filtrado para reducir el conjunto de resultados. En esta sección, exploramos las características de la cláusula `WHERE` y los tipos de expresiones que se pueden formar para filtrar los resultados de la consulta.
+
+La definición de la cláusula `WHERE` es engañosamente simple. Es simplemente la palabra clave `WHERE`, seguida de una expresión condicional. Sin embargo, como demuestran las siguientes secciones, JP QL admite un poderoso conjunto de expresiones condicionales para filtrar las consultas más sofisticadas.
+
+#### ***Input Parameters (Parámetros de Entrada)***
+
+Los parámetros de entrada para consultas se pueden especificar usando notación posicional o con nombre. La notación posicional se define anteponiendo el número de variable con un signo de interrogación. Considere la siguiente consulta:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.salary > ?1
+```
+
+Con la interfaz `Query`, cualquier valor double o valor que sea compatible con el tipo de atributo de `salary` se puede vincular al primer parámetro para indicar el límite inferior para los salarios de los empleados en esta consulta. El mismo parámetro posicional puede aparecer más de una vez en la consulta. El valor enlazado en el parámetro se sustituirá por cada una de sus apariciones.
+
+Los Named parameters(parámetros con nombre) se especifican mediante dos puntos seguidos de un identificador. Aquí está la misma consulta, esta vez usando un parámetro con nombre:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.salary > :sal
+```
+
+Los parámetros de entrada se tratan en detalle en el Capítulo 7.
+
+#### ***Basic Expression Form***
+
+Gran parte del soporte de expresión condicional en JP QL se toma prestado directamente de SQL. Esto es intencional y ayuda a facilitar la transición para los desarrolladores que ya están familiarizados con SQL. La diferencia clave entre las expresiones condicionales en JP QL y SQL es que las expresiones JP QL pueden aprovechar las identification variables y path expressions para navegar por las relaciones durante la evaluación de expresiones.
+
+Las expresiones condicionales se construyen con el mismo estilo que las expresiones condicionales SQL, utilizando una combinación de operadores lógicos, expresiones de comparación, operaciones primitivas y de función en campos, etc. Aunque más adelante se proporciona un resumen de los operadores, la gramática de las expresiones condicionales no se repite aquí. La especificación JPA contiene la gramática en formato Backus-Naur (BNF) y es el lugar para buscar las reglas exactas sobre el uso de expresiones básicas. Sin embargo, las siguientes secciones explican los operadores y expresiones de nivel superior, en particular los únicos de JP QL, y proporcionan ejemplos para cada uno.
+
+La sintaxis literal también es similar a SQL (consulte la sección "Literales").
+
+La precedencia del operador es la siguiente.
+
+1. Operador de navegación (.)
+2. Unario `+/-`
+3. Multiplicación (`*`) y división (`/`)
+4. Suma (`+`) y resta (`-`)
+5. Operadores de Compraración `=, >, >=, <, <=, <>, [NOT] BETWEEN, [NOT] LIKE, [NOT] IN, IS [NOT] NULL, IS [NOT] EMPTY, [NOT] MEMBER [OF]`
+6. Operadores lógicos (`AND`, `OR`, `NOT`)
+
+#### ***BETWEEN Expressions***
+
+El operador `BETWEEN` se puede utilizar en expresiones condicionales para determinar si el resultado de una expresión se encuentra dentro de un rango inclusivo de valores. Las expresiones numéricas, de string y date se pueden evaluar de esta manera. Considere el siguiente ejemplo:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.salary BETWEEN 40000 AND 45000
+```
+
+Cualquier empleado que gane entre $40,000 y $45,000 inclusive se incluye en los resultados. Es idéntica a la siguiente consulta que utiliza operadores de comparación básicos:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.salary >= 40000 AND e.salary <= 45000
+```
+
+El operador `BETWEEN` también se puede negar con el operador `NOT`.
+
+#### ***LIKE Expressions***
+
+JP QL admite la condición SQL `LIKE` para proporcionar una forma limitada de coincidencia de patrones de string. Cada expresión `LIKE` consta de una expresión de cadena que se buscará, una cadena de patrón y una secuencia de escape opcional que define las condiciones de coincidencia. Los caracteres comodín utilizados por la cadena de patrón son el subrayado (`_`) para los comodines de un solo carácter y el signo de porcentaje (`%`) para los comodines de varios caracteres.
+
+```sql
+SELECT d
+  FROM Department d
+ WHERE d.name LIKE '__Eng%'
+```
+
+Estamos utilizando un prefijo de dos caracteres de subrayado para utilizar como comodín los dos primeros caracteres de los candidatos de cadena, por lo que los nombres de departamento de ejemplo para coincidir con esta consulta serían `CAEngOtt` o `USEngCal`, pero no `CADocOtt`. Tenga en cuenta que las coincidencias de patrones distinguen entre mayúsculas y minúsculas.
+
+Si la pattern string contiene un guión bajo o un signo de porcentaje que debe coincidir literalmente, la cláusula `ESCAPE` se puede usar para especificar un carácter que, al anteponer un carácter comodín, indica que debe tratarse literalmente:
+
+```sql
+SELECT d
+  FROM Department d
+ WHERE d.name LIKE 'QA\_%' ESCAPE '\'
+```
+
+Escapar del subrayado lo convierte en una parte obligatoria de la expresión. Por ejemplo, `QA_East` coincidiría, pero `QANorth` no.
+
+#### ***Subqueries***
+
+Las subconsultas se pueden utilizar en las cláusulas `WHERE` y `HAVING` de una consulta. Una subconsulta es una consulta de selección completa dentro de un par de paréntesis que está incrustada dentro de una expresión condicional. Los resultados de la ejecución de la subconsulta (que será un resultado escalar o una colección de valores) se evalúan luego en el contexto de la expresión condicional. Las subconsultas son una técnica poderosa para resolver los escenarios de consulta más complejos.
+
+Considere la siguiente consulta:
+
+```sql
+SELECT e
+FROM Employee e
+WHERE e.salary = (SELECT MAX(emp.salary)
+                  FROM Employee emp)
+```
+aquiiiiiiiiii
+Esta consulta devuelve el empleado con el salario más alto entre todos los empleados. Una subconsulta que consiste en una consulta agregada (descrita más adelante en este capítulo) se usa para devolver el valor de salario máximo, y luego este resultado se usa como clave para filtrar la lista de empleados por salario. Una subconsulta se puede usar en la mayoría de las expresiones condicionales y puede aparecer en el lado izquierdo o derecho de una expresión.
+
+El alcance de un nombre de variable de identificador comienza en la consulta donde se define y se extiende hacia las subconsultas. Los identificadores de la consulta principal pueden ser referenciados por una subconsulta, y los identificadores introducidos por una subconsulta pueden ser referenciados por cualquier subconsulta que cree. Si una subconsulta declara una variable identificadora del mismo nombre, anula la declaración principal y evita que la subconsulta haga referencia a la variable principal.
+
+NOTA No se garantiza que todos los proveedores admitan la anulación de un nombre de variable de identificación en una subconsulta. Deben utilizarse nombres únicos para garantizar la portabilidad.
+La capacidad de hacer referencia a una variable de la consulta principal en la subconsulta permite correlacionar las dos consultas. Considere el siguiente ejemplo:
+
 ```sql
 ```
+
+
+```sql
+```
+
 
 ```sql
 ```
@@ -619,8 +729,7 @@ Dados los resultados algo peculiares generados a partir de una combinación de b
 ```sql
 ```
 
-```sql
-```
+
 
 ### Inheritance and Polymorphism
 ### Scalar Expressions
