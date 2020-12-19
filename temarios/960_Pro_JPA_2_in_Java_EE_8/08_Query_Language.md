@@ -867,27 +867,140 @@ WHERE e.department = ANY (SELECT DISTINCT d
 
 ### INHERITANCE y POLYMORPHISM
 
+JPA soporta la herencia entre entidades. Como resultado, el lenguaje de consulta admite resultados polimórficos donde la misma consulta puede devolver múltiples subclases de una entidad.
+
+En el modelo de ejemplo, `Project` es una clase base para `QualityProject` y `DesignProject`. Si se forma una variable de identificación a partir de la entidad `Project`, los resultados de la consulta incluirán una mezcla de objetos `Project`, `QualityProject` y `DesignProject`, y el caller(llamador) puede convertir los resultados a las subclases según sea necesario. La siguiente consulta recupera todos los proyectos con al menos un empleado:
+
+```sql
+SELECT p
+  FROM Project p
+ WHERE p.employees IS NOT EMPTY
+```
+
+#### ***Subclass Discrimination***
+
+Si queremos restringir el resultado de la consulta a una subclase en particular, podemos usar esa subclase en particular en la cláusula `FROM` en lugar de la raíz. Sin embargo, si queremos restringir los resultados a más de una subclase en la consulta pero no a todas las subclases, podemos usar una type expression(expresión de tipo) en la cláusula `WHERE` para filtrar los resultados. Una type expression(expresión de tipo) consta de la palabra clave `TYPE` seguida de una expresión entre paréntesis que se resuelve en una entidad. El resultado de una type expression(expresión de tipo) es el nombre de la entidad, que luego se puede utilizar para comparar tipos. La ventaja de una type expression(expresión de tipo) es que podemos distinguir entre tipos sin depender de un mecanismo de discriminación en el propio modelo de dominio.
+
+El siguiente ejemplo demuestra el uso de una expresión `TYPE` para devolver solo proyectos de diseño y calidad:
+
+
+```sql
+SELECT p
+  FROM Project p
+ WHERE TYPE(p) = DesignProject OR TYPE(p) = QualityProject
+```
+
+Tenga en cuenta que no hay comillas en torno a los identificadores `DesignProject` y `QualityProject`. Estos se tratan como nombres de entidad en JP QL, no como cadenas. A pesar de esta distinción, los parámetros de entrada se pueden utilizar en lugar de nombres codificados en cadenas de consulta. La creación de una consulta parametrizada que devuelve instancias de un tipo de subclase determinado es sencilla, como lo ilustra la siguiente consulta:
+
+```sql
+SELECT p
+  FROM Project p
+ WHERE TYPE(p) = :projectType
+```
+
+#### ***Downcasting***
+
+En la mayoría de los casos, al menos una de las subclases contiene algún estado adicional, como el atributo `qaRating` en `QualityProject`. Se puede acceder directamente a un atributo de subclase si la consulta se extiende solo a las entidades de subclase, pero cuando la consulta se extiende a lo largo de una superclase, se debe utilizar la conversión descendente. Downcasting es la técnica de hacer que una expresión que se refiere a una superclase se aplique a una subclase específica. Se logra utilizando el operador `TREAT`.
+
+`TREAT` se puede utilizar en la cláusula `WHERE` para filtrar los resultados según el estado de subtipo de las instancias. La siguiente consulta devuelve todos los proyectos de diseño más todos los proyectos de calidad que tienen una calificación de calidad superior a 4:
+
+
+```sql
+SELECT p
+  FROM Project p
+ WHERE TREAT(p AS QualityProject).qaRating > 4 OR TYPE(p) = DesignProject
+```
+
+La sintaxis de la expresión comienza con la palabra clave `TREAT`, seguida de su argumento entre paréntesis. El argumento es una expresión de ruta, seguida de la palabra clave `AS` y luego el nombre de entidad del subtipo de destino. La expresión de la ruta debe resolverse en una superclase del tipo de destino. La expresión reducida resultante se resuelve en el subtipo de destino, por lo que cualquiera de los atributos específicos del subtipo se puede agregar a la expresión de ruta resultante, tal como `qaRating` en el ejemplo.
+
+Se pueden incluir varias expresiones `TREAT` en la cláusula WHERE, cada una de las cuales se rebaja al mismo tipo de entidad o a un tipo diferente.
+
+Normalmente, cuando se realiza un join, incluye todas las subclases del tipo de entidad de destino en la relación que se une. Para limitar la combinación para considerar solo una jerarquía de subclase específica, se puede usar una expresión `TREAT` en la cláusula `FROM`. Asignarle un identificador proporciona la ventaja adicional de que se puede hacer referencia al identificador tanto en la cláusula `WHERE` como en la cláusula `SELECT`. La siguiente consulta devuelve todos los empleados que trabajan en proyectos de calidad con una calificación de calidad superior a 4, más el nombre del proyecto en el que trabajan y su calificación de calidad:
+
+```sql
+SELECT e, q.name, q.qaRating
+  FROM Employee e JOIN TREAT(e.projects AS QualityProject) q
+ WHERE q.qaRating > 4
+```
+
+La expresión `TREAT` también se puede utilizar de forma similar para otros tipos de joins, como las outer joins y las fetch joins.
+
+> **TIP** Downcasting con la expresión `TREAT` se agregó en JPA 2.1.
+
+Es importante comprender el impacto que tiene la herencia entre entidades en el SQL generado por razones de rendimiento y se describe en el Capítulo 10.
+
+### SCALAR EXPRESSIONS
+
+Una expresión escalar es un valor literal, secuencia aritmética, expresión de función, expresión de tipo o case expression(expresión de caso) que se resuelve en un solo valor escalar. Se puede utilizar en la cláusula `SELECT` para formatear campos proyectados en consultas de informes o como parte de expresiones condicionales en la cláusula `WHERE` o `HAVING` de una consulta. Las subconsultas que se resuelven en valores escalares también se consideran expresiones escalares, pero solo se pueden usar al redactar criterios en la cláusula `WHERE` de una consulta. Las subconsultas nunca se pueden usar en la cláusula `SELECT`.
+
+#### ***Literales***
+
+Hay varios tipos de literales diferentes que se pueden usar en JP QL, incluidas strings, números, valores booleanos, enumeraciones, tipos de entidad y tipos temporales.
+
+A lo largo de este capítulo, hemos mostrado muchos ejemplos de literales de cadena, enteros y booleanos. Las comillas simples se utilizan para demarcar cadenas literales y se escapan dentro de una cadena anteponiendo la cita con otra comilla simple. Los números exactos y aproximados se pueden definir de acuerdo con las convenciones del lenguaje de programación Java o utilizando la sintaxis estándar SQL-92. Los valores booleanos están representados por los literales `TRUE` y `FALSE`.
+
+Las consultas pueden hacer referencia a tipos de enumeración de Java especificando el nombre completo de la clase de enumeración. El siguiente ejemplo demuestra el uso de una enumeración en una expresión condicional, usando la enumeración `PhoneType` que se muestra en el Listado 5-8 del Capítulo 5:
+
+```sql
+SELECT e
+  FROM Employee e JOIN e.phoneNumbers p
+ WHERE KEY(p) = com.acme.PhoneType.Home
+```
+
+Un tipo de entidad es solo el nombre de entidad de alguna entidad definida, y es válido solo cuando se usa con el operador `TYPE`. No se utilizan cotizaciones. Consulte la sección "Herencia y polimorfismo" para ver ejemplos de cuándo utilizar un literal de tipo de entidad.
+
+Los literales temporales se especifican utilizando la sintaxis de escape JDBC, que define que las llaves encierran el literal. El primer carácter de la secuencia es una "d" o una "t" para indicar que el literal es una fecha o una hora, respectivamente. Si el literal representa una marca de tiempo, se usa "ts" en su lugar. A continuación del indicador de tipo hay un separador de espacio y, a continuación, la información de fecha, hora o marca de tiempo real entre comillas simples. Las formas generales de los tres tipos literales temporales, con ejemplos adjuntos, son las siguientes:
+
+```json
+{d 'yyyy-mm-dd'}               e.g. {d '2009-11-05'}
+{t 'hh-mm-ss'}                 e.g. {t '12-45-52'}
+{ts 'yyyy-mm-dd hh-mm-ss.f'}   e.g. {ts '2009-11-05 12-45-52.325'}
+```
+
+Toda la información temporal entre comillas simples se expresa como dígitos. La parte fraccionaria de la marca de tiempo (la parte ".f") puede tener varios dígitos y es opcional.
+
+Cuando utilice cualquiera de estos literales temporales, recuerde que solo los interpretan controladores que admiten la sintaxis de escape de JDBC. El proveedor normalmente no intentará traducir o preprocesar literales temporales.
+
+
+#### ***Function Expressions***
+
+Las expresiones escalares pueden aprovechar las funciones que se pueden utilizar para transformar los resultados de las consultas. La Tabla 8-1 resume la sintaxis de cada una de las expresiones de función admitidas.
+
+***Tabla 8-1*** Expresiones de Funciones Soportadas
+
+FUNCIÓN | DESCRIPCIÓN
+`ABS(number)` | Devuelve la versión sin firmar del argumento numérico. El tipo de resultado es el mismo que el tipo de argumento (integer, float, o double).
+`CONCAT(string1, string2)` | Devuelve un nuevo string que es la concatenación de sus argumentos, `string1` y `string2`.
+`CURRENT_DATE` | Devuelve la fecha actual definida por el servidor de la base de datos.
+`CURRENT_ TIME` | Devuelve la hora actual definida por el servidor de la base de datos.
+`CURRENT_TIMESTAMP` | Devuelve la timestamp actual definida por el servidor de la base de datos.
+`INDEX(identification variable)` | Devuelve la posición de una entidad dentro de una lista ordenada.
+`LENGTH(string)` | Devuelve el número de caracteres del argumento de string.
+`LOCATE(string1, string2 [, start])` | Devuelve la posición de `string1` en `string2`, comenzando opcionalmente en la posición indicada por `start`. El resultado es cero si no se puede encontrar la cadena.
+`LOWER(string)` | Devuelve la forma en minúsculas del argumento de string.
+`MOD(number1, number2)` | Devuelve el módulo de los argumentos numéricos `number1` y `number2` como un entero.
+`SIZE(collection)` | Devuelve el número de elementos de la colección o cero si la colección está vacía.
+`SQRT(number)` | Devuelve la raíz cuadrada del argumento numérico como un doble.
+`SUBSTRING(string, start, end)` | Devuelve una parte de la cadena de entrada, comenzando en el índice indicado por `start` hasta la longitud de los caracteres. Los índices de cadena se miden a partir de uno.
+`UPPER(string)` | Devuelve la forma en mayúsculas del argumento de string.
+`TRIM([[LEADING|TRAILING|BOTH] [char] FROM] string)` | Elimina los caracteres iniciales y/o finales de un string. Si no se utiliza la palabra clave opcional `LEADING`, `TRAILING` o `BOTH`, se eliminan tanto los caracteres iniciales como los finales. El carácter de recorte predeterminado es el carácter de espacio.
+AQUIIIIIIII
+
+
+
+```sql
+```
+
+```sql
+```
+
+```sql
+```
+
 ```sql
 ```
 
 
-```sql
-```
-
-```sql
-```
-
-```sql
-```
-
-```sql
-```
-
-```sql
-```
-
-### Inheritance and Polymorphism
-### Scalar Expressions
 ### ORDER BY Clause
 ## Aggregate Queries
 ### Aggregate Functions
