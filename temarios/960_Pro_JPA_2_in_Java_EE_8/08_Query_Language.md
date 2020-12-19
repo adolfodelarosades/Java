@@ -707,17 +707,165 @@ FROM Employee e
 WHERE e.salary = (SELECT MAX(emp.salary)
                   FROM Employee emp)
 ```
-aquiiiiiiiiii
-Esta consulta devuelve el empleado con el salario más alto entre todos los empleados. Una subconsulta que consiste en una consulta agregada (descrita más adelante en este capítulo) se usa para devolver el valor de salario máximo, y luego este resultado se usa como clave para filtrar la lista de empleados por salario. Una subconsulta se puede usar en la mayoría de las expresiones condicionales y puede aparecer en el lado izquierdo o derecho de una expresión.
 
-El alcance de un nombre de variable de identificador comienza en la consulta donde se define y se extiende hacia las subconsultas. Los identificadores de la consulta principal pueden ser referenciados por una subconsulta, y los identificadores introducidos por una subconsulta pueden ser referenciados por cualquier subconsulta que cree. Si una subconsulta declara una variable identificadora del mismo nombre, anula la declaración principal y evita que la subconsulta haga referencia a la variable principal.
+Esta consulta devuelve el empleado con el salario más alto entre todos los empleados. Una subconsulta que consiste en una aggregate query(consulta agregada) (descrita más adelante en este capítulo) se usa para devolver el valor de salario máximo, y luego este resultado se usa como clave para filtrar la lista de empleados por salario. Una subconsulta se puede usar en la mayoría de las expresiones condicionales y puede aparecer en el lado izquierdo o derecho de una expresión.
 
-NOTA No se garantiza que todos los proveedores admitan la anulación de un nombre de variable de identificación en una subconsulta. Deben utilizarse nombres únicos para garantizar la portabilidad.
+El alcance de un nombre de identifier variable(variable de identificador) comienza en la consulta donde se define y se extiende hacia las subconsultas. ***Los identificadores de la consulta principal pueden ser referenciados por una subconsulta, y los identificadores introducidos por una subconsulta pueden ser referenciados por cualquier subconsulta que cree***. Si una subconsulta declara una variable identificadora del mismo nombre, anula la declaración principal y evita que la subconsulta haga referencia a la variable principal.
+
+> **NOTA** *No se garantiza que todos los proveedores admitan la Overriding de un nombre de variable de identificación en una subconsulta. Deben utilizarse nombres únicos para garantizar la portabilidad.
+
 La capacidad de hacer referencia a una variable de la consulta principal en la subconsulta permite correlacionar las dos consultas. Considere el siguiente ejemplo:
 
 ```sql
+SELECT e
+FROM Employee e
+WHERE EXISTS (SELECT 1
+              FROM Phone p
+              WHERE p.employee = e AND p.type = 'Cell')
 ```
 
+Esta consulta devuelve todos los empleados que tienen un número de teléfono celular. Este también es un ejemplo de una subconsulta que devuelve una colección de valores. La expresión `EXISTS` en este ejemplo devuelve verdadero si la subconsulta devuelve algún resultado. Devolver el literal `1` de la subconsulta es una práctica estándar con expresiones `EXISTS` porque los resultados reales seleccionados por la subconsulta no importan; solo el número de resultados es relevante. Tenga en cuenta que la cláusula `WHERE` de la subconsulta hace referencia a la variable de identificador `e` de la consulta principal y la usa para filtrar los resultados de la subconsulta. Conceptualmente, se puede pensar que la subconsulta se ejecuta una vez para cada empleado. En la práctica, muchos servidores de bases de datos optimizarán este tipo de consultas en combinaciones o vistas en línea para maximizar el rendimiento.
+
+Esta consulta también podría haberse escrito utilizando una combinación entre las entidades `Employee` y `Phone` con el operador `DISTINCT` utilizado para filtrar los resultados. La ventaja de utilizar la subconsulta correlacionada es que la consulta principal permanece libre de uniones a otras entidades. Muy a menudo, si una combinación se usa solo para filtrar los resultados, existe una condición de subconsulta equivalente que se puede usar alternativamente para eliminar restricciones en la cláusula de combinación de la consulta principal o incluso para mejorar el rendimiento de la consulta.
+
+La cláusula `FROM` de una subconsulta también puede crear nuevas variables de identificación a partir de path expressions(expresiones de ruta) utilizando una identification variable(variable de identificación) de la consulta principal. Por ejemplo, la consulta anterior también podría haberse escrito de la siguiente manera:
+
+
+```sql
+SELECT e
+FROM Employee e
+WHERE EXISTS (SELECT 1
+              FROM e.phones p
+              WHERE p.type = 'Cell')
+```
+
+En esta versión de la consulta, la subconsulta usa los `phones` de la ruta de asociación de colección de la variable de identificación `e` de `Employee` en la subconsulta. Luego, esto se asigna a una variable de identificación local `p` que se utiliza para filtrar los resultados por tipo de teléfono. Cada aparición de `p` se refiere a un solo teléfono asociado con el empleado.
+
+Para ilustrar mejor cómo el traductor maneja esta consulta, considere la consulta equivalente escrita en SQL:
+
+```sql
+SELECT e.id, e.name, e.salary, e.manager_id, e.dept_id, e.address_id
+  FROM emp e
+ WHERE EXISTS (SELECT 1
+                 FROM phone p
+                WHERE p.emp_id = e.id 
+                  AND p.type = 'Cell')
+```
+
+La expresión `e.phones` se convierte en la tabla asignada por la entidad `Phone`. La cláusula `WHERE` para la subconsulta luego agrega la condición de unión necesaria para correlacionar la subconsulta con la consulta principal, en este caso la expresión `p.emp_id = e.id`. Los criterios de join(unión) aplicados a la tabla `PHONE` dan como resultado todos los teléfonos que pertenecen al empleado relacionado.
+
+#### IN Expressions
+
+La expresión `IN` se puede utilizar para comprobar si una path expression(expresión de ruta) de un solo valor es miembro de una colección. La colección se puede definir en línea como un conjunto de valores literales o se puede derivar de una subconsulta. La siguiente consulta demuestra la notación literal al seleccionar todos los empleados que viven en Nueva York o California:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.address.state IN ('NY', 'CA')
+```
+
+La forma de subconsulta de la expresión es similar, reemplazando la lista literal con una consulta anidada. La siguiente consulta devuelve empleados que trabajan en departamentos que contribuyen a proyectos que comienzan con el prefijo `QA`:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.department IN (SELECT DISTINCT d
+                          FROM Department d JOIN d.employees de JOIN de.projects p
+                         WHERE p.name LIKE 'QA%')
+```
+
+La expresión `IN` también se puede negar utilizando el operador `NOT`. Por ejemplo, la siguiente consulta devuelve todas las entidades de teléfono que representan números de teléfono distintos a los de la oficina o el hogar:
+
+```sql
+SELECT p
+  FROM Phone p
+ WHERE p.type NOT IN ('Office', 'Home')
+```
+
+### Collection Expressions
+
+El operador `IS EMPTY` es el equivalente lógico de `IS NULL`, pero para colecciones. Las consultas pueden usar el operador `IS EMPTY` o su forma negada `IS NOT EMPTY` para verificar si una ruta de asociación de colección se resuelve en una colección vacía o tiene al menos un valor. Por ejemplo, la siguiente consulta devuelve todos los empleados que son gerentes en virtud de tener al menos un subordinado directo:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.directs IS NOT EMPTY
+```
+
+Tenga en cuenta que las expresiones `IS EMPTY` se traducen a SQL como expresiones de subconsulta. La consulta `tqwranslator` puede usar una subconsulta agregada o usar la expresión SQL `EXISTS`. Por tanto, la siguiente consulta es equivalente a la anterior:
+
+```sql
+SELECT m
+FROM Employee m
+WHERE (SELECT COUNT(e)
+       FROM Employee e
+       WHERE e.manager = m) > 0
+```
+
+El operador `MEMBER OF` y su forma negada `NOT MEMBER OF` son una forma abreviada de verificar si una entidad es miembro de una ruta de asociación de colección. La siguiente consulta devuelve todos los administradores que se ingresaron incorrectamente como informantes a sí mismos:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e MEMBER OF e.directs
+```
+
+Un uso más típico del operador `MEMBER OF` es junto con un parámetro de entrada. Por ejemplo, la siguiente consulta selecciona a todos los empleados asignados a un proyecto específico:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE :project MEMBER OF e.projects
+```
+
+Al igual que la expresión `IS EMPTY`, la expresión `MEMBER OF` se traducirá a SQL utilizando una expresión `EXISTS` o la forma de subconsulta de la expresión `IN`. El ejemplo anterior es equivalente a la siguiente consulta:
+
+```sql
+SELECT e
+FROM Employee e
+WHERE :project IN (SELECT p
+                   FROM e.projects p)
+```
+
+#### EXISTS Expressions
+
+La condición `EXISTS` devuelve `true` si una subconsulta devuelve filas. Los ejemplos de `EXISTS` se demostraron anteriormente en la introducción a las subconsultas. El operador `EXISTS` también se puede negar con el operador `NOT`. La siguiente consulta selecciona a todos los empleados que no tienen teléfono celular:
+
+```sql
+SELECT e
+FROM Employee e
+WHERE NOT EXISTS (SELECT p
+                  FROM e.phones p
+                  WHERE p.type = 'Cell')
+```
+
+#### ANY, ALL, y SOME Expressions
+
+Los operadores `ANY`, `ALL` y `SOME` se pueden utilizar para comparar una expresión con los resultados de una subconsulta. Considere el siguiente ejemplo:
+
+```sql
+SELECT e
+  FROM Employee e
+ WHERE e.directs IS NOT EMPTY AND
+       e.salary < ALL (SELECT d.salary
+                         FROM e.directs d)
+```
+
+Esta consulta devuelve los gerentes a quienes se les paga menos que a todos los empleados que trabajan para ellos. La subconsulta se evalúa y luego cada valor de la subconsulta se compara con la expresión de la izquierda, en este caso el salario del gerente. Cuando se utiliza el operador `ALL`, la comparación entre el lado izquierdo de la ecuación y todos los resultados de la subconsulta debe ser verdadera para que la condición general sea verdadera.
+
+El operador `ANY` se comporta de manera similar, pero la condición general es verdadera siempre que al menos una de las comparaciones entre la expresión y el resultado de la subconsulta sea verdadera. Por ejemplo, si se especificara `ANY` en lugar de `ALL` en el ejemplo anterior, el resultado de la consulta serían todos los gerentes a quienes se les pagó menos que al menos uno de sus empleados. El operador `SOME` es un alias del operador `ANY`.
+
+Existe simetría entre las expresiones `IN` y el operador `ANY`. Considere la siguiente variación del ejemplo del departamento de proyectos utilizado anteriormente, modificado solo ligeramente para usar `ANY` en lugar de `IN`:
+
+```sql
+SELECT e
+FROM Employee e
+WHERE e.department = ANY (SELECT DISTINCT d
+                            FROM Department d JOIN d.employees de JOIN de.projects p
+                           WHERE p.name LIKE 'QA%')
+```
+
+### INHERITANCE y POLYMORPHISM
 
 ```sql
 ```
@@ -729,7 +877,14 @@ La capacidad de hacer referencia a una variable de la consulta principal en la s
 ```sql
 ```
 
+```sql
+```
 
+```sql
+```
+
+```sql
+```
 
 ### Inheritance and Polymorphism
 ### Scalar Expressions
