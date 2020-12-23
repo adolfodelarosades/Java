@@ -192,46 +192,46 @@ Podemos encontrar un listado exhaustivo de códigos de respuesta y su motivo en 
 
 <img src="images/03-01.png">
 
-En esta lección vamos a hablar del protocolo HTTP.
+En esta lección vamos a hablar del protocolo **HTTP**.
 
 <img src="images/03-02.png">
 
-HTTP o Protocolo de Transferencia de HiperTexto, es un protocolo que permite la transferencia de información en la web, está desarrollado por el Consorcio 3W y la y la IETF Internet Engineering Task, comenzó a funcionar a finales de los 80 a principios de los 90  y aquí os dejo por ejemplo una preview de lo que fue, no se veía exactamente, es una reproducción, lo que fue una de las primeras páginas web que se crearon, se produjo en el CERT en el centro de investigaciones nucleares que está con su sede en Ginebra a través de el autor que es Tim Berners-Lee. 
+**HTTP o Protocolo de Transferencia de HiperTexto**, es un protocolo que permite la transferencia de información en la web, está desarrollado por el ***Consorcio 3W*** y la ***IETF Internet Engineering Task***, comenzó a funcionar a finales de los 80 a principios de los 90 y aquí os dejo por ejemplo una preview de lo que fue, no se veía exactamente igual, es una reproducción, lo que fue una de las primeras páginas web que se crearon, se produjo en el ***CERT*** en el centro de investigaciones nucleares que está con su sede en Ginebra, el autor es Tim Berners-Lee. 
 
-HTTP desde los años noventa hasta ahora ha ido evolucionando no tanto como cabría pensar la versión 1 del protocolo ha estado funcionando mucho mucho mucho mucho tiempo con pocas variaciones, aunque si es verdad que ahora ya nos encontramos en la versión del protocolo en particular a día 2 de abril de 2019 se publicó la versión 2.4.39 que ahora mismo es la versión podríamos decir estándar del propio protocolo HTTP.
+HTTP desde los años noventa hasta ahora ha ido evolucionando, no tanto como cabría pensar, la versión 1 del protocolo ha estado funcionando mucho mucho mucho mucho tiempo con pocas variaciones, aunque si es verdad que ahora ya nos encontramos en la versión 2 del protocolo en particular a día 2 de abril de 2019 se publicó la versión 2.4.39 que ahora mismo es la versión podríamos decir estándar del propio protocolo HTTP.
 
 <img src="images/03-03.png">
 
-Tiene unas características diferenciales frente a otros protocolos, es un protocolo sin estado, es decir cada petición no se ve influenciada por la petición anterior y contiene toda la información para ser procesada, tiene un esquema de Petición-Respuesta Request-Response en el que nosotros le haremos nosotros al servidor una petición y nos remitira una respuesta. El protocolo HTTP/1.X a sido orientado a carácter ya en el HTTP/2 se ha hecho binario se ha mejorado mucho, con la comprensión incluso en la aplicación de algoritmos de compresión a la hora de transmitir la información etc. una serie de ventajas y bueno está definido sobre un conjunto de verbos u operaciones.
+Tiene unas características diferenciales frente a otros protocolos, **es un protocolo sin estado**, ***es decir cada petición no se ve influenciada por la petición anterior y contiene toda la información para ser procesada***, **tiene un esquema de Petición-Respuesta Request-Response** en el que nosotros le haremos al servidor una petición y nos remitira una respuesta. El protocolo HTTP/1.X a sido orientado a carácter, ya en el HTTP/2 se ha hecho binario, se ha mejorado mucho, con la comprensión incluso en la aplicación de algoritmos de compresión a la hora de transmitir la información etc. y una serie de ventajas, ***está definido sobre un conjunto de verbos u operaciones***.
 
 <img src="images/03-04.png">
 
-El esquema de petición y respuesta lo tenemos aquí en un gráfico sencillo en el que un cliente, agente de usuario y user-agents realiza una petición enviando un mensaje al servidor, el servidor recibe la petición recoge ese mensaje y lo que hace es enviar otro mensaje de respuesta, en este caso al cliente si os ponéis en situación cuando escribe una URL en un navegador o pinchas a través de algún enlace, lo que se está haciendo es una petición a un servidor, que puede que haga un determinado procesamiento como mínimo buscar un recurso, aplicar algún tipo de procesamiento y devolverlo una respuesta en este caso nuestro navegador posiblemente sea HTML, imágenes, CSS, Javascript todo ellos lo recibe nuestro navegador lo renderiza y nos lo muestra.
+El esquema de petición y respuesta lo tenemos aquí en un gráfico sencillo en el que **un cliente**(agente de usuario user-agents) ***realiza una petición enviando un mensaje al servidor***, **el servidor** ***recibe la petición recoge ese mensaje y lo que hace es enviar otro mensaje de respuesta, en este caso al cliente***, si os ponéis en situación cuando escribe una URL en un navegador o pinchas a través de algún enlace, lo que se está haciendo es una petición a un servidor, que puede que haga un determinado procesamiento como mínimo buscar un recurso, aplicar algún tipo de procesamiento y devolverlo una respuesta, en este caso nuestro navegador posiblemente sea HTML, imágenes, CSS, Javascript, todo ellos lo recibe nuestro navegador lo renderiza y nos lo muestra.
 
 <img src="images/03-05.png">
 
-El mensaje muy muy muy sencillo tenemos aquí una representación visual que tendría unas cabecera o encabezado y un cuerpo, este formato es el mismo tanto para peticiones como para respuesta y de hecho a nivel interno solamente cambiaría la línea inicial, por dentro ya  iremos viendo poco a poco la estructura que tiene. La línea inicial que termina con un retorno de carro para las peticiones, lo que va a ir indicando es el tipo del verbo de petición, seguido de la URL a la cual se está haciendo la petición, la versión de HTTP soportada por el cliente y sin embargo en las respuestas lo que tendremos será la versión de HTTP usado, seguido por un espacio el código de respuesta que indica ya veremos qué es lo que ha pasado con esa petición y algunos metadatos más y luego en el cuerpo del mensaje que en las peticiones es opcional, normalmente en la respuesta lo que obtendremos es un recurso, un tipo determinado o un fichero html, una imagen, etc. aquí serán los datos que típicamente se van a intercambiar entre entre cliente y servidor, para un API REST por ejemplo posiblemente sea un montón de caracteres, una cadena de caracteres que representan a determinados objeto en JSON o en XML.
+El **formato del mensaje** es muy sencillo, tenemos aquí una representación visual, ***tendría unas cabecera o encabezado y un cuerpo***, este formato es el mismo ***tanto para peticiones como para respuesta*** y de hecho a nivel interno solamente cambiaría la línea inicial, por dentro ya iremos viendo poco a poco la estructura que tiene. La línea inicial que termina con un retorno de carro para ***las peticiones, lo que va a ir indicando es el tipo del verbo de petición***, seguido de la ***URL*** a la cual se está haciendo la petición, la ***versión de HTTP soportada*** por el cliente y sin embargo en ***las respuestas lo que tendremos será la versión de HTTP usado, seguido por un espacio, el código de respuesta que indica qué es lo que ha pasado con esa petición y algunos metadatos más*** y luego ***en el cuerpo del mensaje que en las peticiones es opcional, normalmente en la respuesta lo que obtendremos es un recurso, un tipo determinado o un fichero html, una imagen, etc.*** aquí serán los datos que típicamente se van a intercambiar entre entre cliente y servidor, para un API REST por ejemplo posiblemente sea un montón de caracteres, una cadena de caracteres que representan a determinados objeto en JSON o en XML.
 
 <img src="images/03-06.png">
 
-Qué método ofrece HTTP, métodos conocidos también como verbos, son los tipos de peticiones que tenemos e indican la acción que se realiza por el servidor, lo veremos más adelante con detenimiento, los más conocidos son:
+Qué **método ofrece HTTP**, métodos conocidos también como **verbos**, son los tipos de peticiones que tenemos e indican la acción que se realiza por el servidor, lo veremos más adelante con detenimiento, los más conocidos son:
 
 * `GET`: para solicitar un recurso servidor
 * `POST`: para enviar la información al servidor para poder crear un nuevo recurso
 * `PUT`: para actualizar un recurso de forma completa
 * `DELETE`: para borrar un recurso
 
-Estos son algunos de los más conocidos, el protocolo soporta muchos tipos de operaciones muchos tipos de verbos mas.
+Estos son algunos de los más conocidos, el protocolo soporta muchos tipos de operaciones, muchos tipos de verbos mas.
 
 <img src="images/03-07.png">
 
-Los códigos de respuestas que también son bastantes, nos indican que ha pasado con la petición, cada código tiene un significado concreto y son códigos numéricos de tres cifras por aquí tenemos algunos de ellos en la documentación de desarrolladores de Mozilla [Códigos de estado de respuesta HTTP](https://developer.mozilla.org/es/docs/Web/HTTP/Status) por si lo queréis ver.
+Los códigos de respuestas que también son bastantes, nos indican que ha pasado con la petición, cada código tiene un significado concreto y son códigos numéricos de tres cifras, por aquí tenemos algunos de ellos en la documentación de desarrolladores de Mozilla [Códigos de estado de respuesta HTTP](https://developer.mozilla.org/es/docs/Web/HTTP/Status) por si lo queréis ver.
 
-Algunos los más conocidos vale cómo serían cómo serían los códigos de tipo 200 con respuestas correctas como el 200 201 204.
+Algunos los más conocidos serían los **códigos de tipo 200 con respuestas correctas** como el **200**, **201**, **204**.
 
 <img src="images/03-08.png">
 
-Los códigos 400 que son de errores de cliente, cómo serían path request una petición errónea, no autorizado o una solicitud legal pero sin privilegios.
+Los **códigos 400 que son de errores de cliente**, cómo serían **400** ***Bad request*** una petición errónea, **401** no autorizado o **403** una solicitud legal pero sin privilegios.
 
 <img src="images/03-09.png">
 
@@ -239,7 +239,7 @@ Los códigos 400 que son de errores de cliente, cómo serían path request una p
 
 <img src="images/03-11.png">
 
-En [Códigos de estado de respuesta HTTP](https://developer.mozilla.org/es/docs/Web/HTTP/Status) tenemos la posibilidad de ver cada uno de ellos, los códigos de respuesta nos traen un número y también un mensaje, dentro del conjunto de los 200 tenemos que la solicitud se ha hecho con éxito en una petición GET en el 201 no indica que la solicitud ha tenido éxito y se ha creado un nuevo recurso, hay algunos que se utilizan más y otros menos, 202 y 203 se utilizan menos, 204 sí que se utiliza con más frecuencia la petición se ha completado con éxito y se devuelve sin cuerpo, contenido parcial, tenemos luego las peticiones por ejemplo las de tipos 400 bad request una petición errónea, la petición de no autorizado si estamos haciendo algún tipo de autenticación pues tendremos ese tipo de respuesta. Trabajaremos con estos códigos y de hecho seremos nosotros los que en nuestros API los iremos generando para que le demos una respuesta al cliente sobre lo que ha ha sucedido. 
+En [Códigos de estado de respuesta HTTP](https://developer.mozilla.org/es/docs/Web/HTTP/Status) tenemos la posibilidad de ver cada uno de ellos, los códigos de respuesta nos traen un número y también un mensaje, dentro del conjunto de los 200 tenemos que la solicitud se ha hecho con éxito en una petición GET, en el 201 no indica que la solicitud ha tenido éxito y se ha creado un nuevo recurso, hay algunos que se utilizan más y otros menos, 202 y 203 se utilizan menos, 204 sí que se utiliza con más frecuencia, la petición se ha completado con éxito y se devuelve sin cuerpo, contenido parcial, tenemos luego las peticiones por ejemplo las de tipos 400 bad request una petición errónea, la petición de no autorizado si estamos haciendo algún tipo de autenticación tendremos ese tipo de respuesta. Trabajaremos con estos códigos y de hecho seremos nosotros los que en nuestros API los iremos generando para que le demos una respuesta al cliente sobre lo que ha ha sucedido. 
 
 Ya hemos conocido el protocolo HTTP en la próxima lección vamos a profundizar un poco más.
 
