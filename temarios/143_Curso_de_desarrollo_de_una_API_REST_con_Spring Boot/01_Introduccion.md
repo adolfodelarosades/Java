@@ -110,6 +110,11 @@ Si queréis podéis clonar este repositorio lo podría ejecutar desde la misma c
 ![04-pet](images/04-pet.png)
 ![05-pet](images/05-pet.png)
 ![06-pet](images/06-pet.png)
+![09-pet](images/09-pet.png)
+![10-pet](images/10-pet.png)
+![11-pet](images/11-pet.png)
+![12-pet](images/12-pet.png)
+![13-pet](images/13-pet.png)
 ![07-pet](images/07-pet.png)
 ![08-pet](images/08-pet.png)
 
