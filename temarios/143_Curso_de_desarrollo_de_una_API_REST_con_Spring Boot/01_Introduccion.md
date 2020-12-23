@@ -21,39 +21,46 @@ No existe.
 
 <img src="images/01-01.png">
 
-Hola a todos y bienvenido a este curso en el que vas a aprender a desarrollar un API REST con Spring Boot. 
+Bienvenido a este curso en el que vas a aprender a desarrollar un API REST con Spring Boot. 
 
 <img src="images/01-02.png">
 
-Antes de nada me gustaría comentaros los requisitos que serían deseables para poder realizar con garantía este curso, es muy bueno que podáis manejar con algunos conceptos de Spring, sobre todo de la parte de podríamos llamar del nucleo, lo qué es el contenedor de inversión de control, inyección de dependencia, sino lo conocer podéis visitar nuestro curso de Spring Core.
+Antes de nada me gustaría comentaros los requisitos que serían deseables para poder realizar con garantía este curso, es muy bueno que podáis manejar con algunos conceptos de Spring, sobre todo de la parte que podríamos llamar el nucleo, lo qué es el **contenedor de inversión de control**, **inyección de dependencia**, sino lo conocen podéis visitar el ***curso de Spring Core***.
 
-También sería muy bueno que ya manejaran algún concepto de Modelo Vista Controlador controladores, servicios que lo podéis también aprender si sino no pensáis que tengáis demasiadas solvencia en nuestro curso de Spring Boot y Spring Web MVC.
+También sería muy bueno que ya manejaran algún concepto de **Modelo Vista Controlador**, **Controladores**, **Servicios**, lo podéis aprender en ***curso de Spring Boot y Spring Web MVC***.
 
-Cómo es natural pues para poder hacerlo bien es bueno que tengáis conocimiento de Java si queréis también por repasar incluso puedes visitar nuestros cursos de Java 8 desde cero si lo consideráis necesario o si no el de Java 8 para programadores Java.
+Cómo es natural para poder hacerlo bien es bueno que tengáis **conocimiento de Java**, si queréis repasar puedes visitar el ***curso de Java 8 desde cero*** si lo consideráis necesario o si no el ***curso de Java 8 para programadores Java***.
 
-Y también aunque no es estrictamente imprescindible porque el modelo de datos que vamos a manejar en este curso va a ser muy sencillo pero es recomendable tener conocimientos de JPA en particular de la capa de encima que utiliza Spring es decir Spring Data JPA y para ello también si visita el curso de JPA e Hibernate o el de Spring Framework podran trabajarlo adecuadamente.
+Y también aunque no es estrictamente imprescindible porque el modelo de datos que vamos a manejar en este curso va a ser muy sencillo pero es recomendable tener conocimientos de **JPA** en particular de la capa de encima que utiliza Spring, es decir **Spring Data JPA** y para ello cuenta con el ***curso de JPA e Hibernate*** o el ***curso de Spring Framework*** para trabajarlo adecuadamente.
 
 <img src="images/01-03.png">
 
-Que vamos a aprender en este curso, vamos a aprender bastantes conceptos que nos van a servir para apuntalar qué es eso del mundillo REST y como implementar nuestras APIs con Spring Boots, principalmente empezaremos aprendiendo qué es la arquitectura REST, en qué está basada, a nivel de protocolo en qué consiste el protocolo HTTP y cómo lo podemos utilizar para implementar sistemas que siguen esta arquitectura. Generar un proyecto de Spring Boot para tener un API REST. Utilizar algunas librerías de utilidad como Lombok que nos van a hacer la vida bastante más fácil. Cuál sería la estructura de un controlador REST que va a diferir mínimamente con respecto a lo que sería un controlador de una aplicación MVC de Spring.
+Que vamos a aprender en este curso, vamos a aprender bastantes conceptos que nos van a servir para apuntalar qué es eso del mundillo REST y como implementar nuestras APIs con **Spring Boots**, principalmente empezaremos aprendiendo ***qué es la arquitectura REST***, en qué está basada, a nivel de protocolo ***en qué consiste el protocolo HTTP*** y cómo lo podemos utilizar para implementar sistemas que siguen esta arquitectura. ***Generar un proyecto de Spring Boot para tener un API REST***. Utilizar algunas ***librerías de utilidad como Lombok***, que nos van a hacer la vida bastante más fácil. ***Cuál sería la estructura de un controlador REST*** que va a diferir mínimamente con respecto a lo que sería un controlador de una aplicación MVC de Spring.
 
 <img src="images/01-04.png">
 
-En qué consiste eso del patrón  *Data Transfer Object*. Cómo manejar errores y excepciones dentro de nuestra API REST. Y también veremos al final cómo subir ficheros no solamente enviar información, ya veremos en un formato conocido como JSON practicamente siempre sino también poder subir ficheros y cómo documentar nuestra API con con una herramienta que se llama *Swagger*. 
+En qué consiste eso del patrón  **Data Transfer Object**. Cómo manejar errores y excepciones dentro de nuestra API REST. Y también veremos al final ***cómo subir ficheros***, no solamente enviar información en un formato conocido como **JSON** practicamente siempre, sino también poder subir ficheros y ***cómo documentar nuestra API con con una herramienta que se llama*** **Swagger**. 
 
 Todo eso es lo que vamos a aprender.
 
 <img src="images/01-05.png">
 
-Lo estructuraremos aproximadamente en 6 bloques en el cual cada uno de ellos habrá una serie de lecciones, el primero será más de introducción para conocer eso del patrón REST, del protocolo HTTP y algunos elementos más a partir de ahí desarrollaremos nuestra primera API REST con Spring Boot, después aprenderemos a hacer el manejo de errores y excepciones de la forma más conveniente veremos que tenemos diferente alternativa algunas que vienen desde Sprint 3, otras que se propusieron en Spring 4 alguna que se ha propuesto desde Spring 5. Cómo manejar qué es, en qué consiste eso del *CORS* y cómo poder manejarlo. La subida de ficheros y cómo documentar nuestra API.
+Lo estructuraremos aproximadamente en 6 bloques en el cual en cada uno de ellos habrá una serie de lecciones, el primero será más de introducción para conocer eso del **patrón REST**, el **protocolo HTTP** y algunos elementos más, a partir de ahí desarrollaremos **nuestra primera API REST con Spring Boot**, después aprenderemos a hacer el **manejo de errores y excepciones** de la forma más conveniente veremos que tenemos diferente alternativas, algunas que vienen desde Sprint 3, otras que se propusieron en Spring 4, alguna que se ha propuesto desde Spring 5. Cómo manejar, qué es, en qué consiste eso del **CORS** y cómo poder manejarlo. La **subida de ficheros** y **cómo documentar nuestra API**.
 
 <img src="images/01-06.png">
 
-Con respecto a la práctica, no será un curso nada teóricos sera muy práctico en cada lección, en casi todas las lecciones iremos desarrollando algo de código, de hecho poco a poco iremos construyendo un proyecto de un API REST que integre todos los contenidos que hemos visto antes y en casi todas las lecciones además encontrará un pequeño reto para complementar todo lo que hemos ido desarrollando en cada una de las lecciones.
+Con respecto a la práctica, no será un curso nada teórico, sera muy práctico en cada lección, en casi todas las lecciones iremos desarrollando algo de código, de hecho poco a poco ***iremos construyendo un proyecto de un API REST que integre todos los contenidos que hemos visto*** antes y en casi todas las lecciones además ***encontrará un pequeño reto*** para complementar todo lo que hemos ido desarrollando en cada una de las lecciones.
 
 <img src="images/01-07.png">
 
-Una vez que termine este curso puede hacer alguno de otro de los cursos que tenemos en el catálogo, si aún no lo ha hecho porque bueno tuvieras algún tipo de conocimiento y te hayan lanzado a la piscina pero quiere apuntalar sus conocimientos sobre Spring puede hacer el curso de Spring Core o el de Spring Boot y Spring MVC, si quieres mejorar tu conocimiento a nivel de la capa de acceso a datos de persistencia de datos el de JPA e Hibernate, si quieres aprender a interactuar mejor con tu API, para hacer consultas, pruebas, incluso para mejorar el desarrollo de la misma puedes hacer el curso de Postman, si quieres aprender a empezar a desarrollar una pequeña aplicación con Android que sea capaz de interactuar con nuestra API REST desarrollada en Spring Boot puede hacer el curso de cómo consumir datos de una API con Android usando Retrofit2 y si quieres empezar a tener conocimiento sobre cómo coger nuestra aplicación y gestionarla a través de contenedores también podría hacer el curso de introducción a Docker
+Una vez que termine este curso puede hacer alguno de los otro cursos:
+
+* El curso de Spring Core
+* El curso de Spring Boot y Spring MVC
+* El curso de JPA e Hibernate, si quiere mejorar su conocimiento a nivel de la capa de acceso a datos, de persistencia de datos.
+* El curso de de Postman, si quieres aprender a interactuar mejor con tu API, para hacer consultas, pruebas, incluso para mejorar el desarrollo de la misma. 
+* El curso de cómo consumir datos de una API con Android usando Retrofit2, si quieres aprender a empezar a desarrollar una pequeña aplicación con Android que sea capaz de interactuar con nuestra API REST desarrollada en Spring Boot
+* El curso de introducción a Docker, si quieres empezar a tener conocimiento sobre cómo coger nuestra aplicación y gestionarla a través de contenedores. 
 
 # 02 ¿Qué es un servicio REST? 15:06 
 
@@ -69,21 +76,21 @@ Este autor fue quién propuso la arquitectura REST en su tesis doctoral. Si quie
 
 <img src="images/02-01.png">
 
-Vamos a comenzar con este primer bloque que va a hacer de introducción y en el cual pues nos vamos a ir acercando desde distintas perspectivas a eso de que es eso de un API REST y como desarrollarlo con Spring Boot.
+Vamos a comenzar con este primer bloque que va a hacer de introducción y en el cual nos vamos a ir acercando desde distintas perspectivas a eso de que es un API REST y como desarrollarlo con Spring Boot.
 
-Vamos a comenzar en esta lección intentando desentrañar un poco que es eso de REST muchos de vosotros ya habéis programado seguro que habéis programado o bien consola, algún entorno gráfico, aplicaciones web, pero a lo mejor este concepto que os suena, que lo habéis leído, algo de APIs, queda un poco en el aire no si os pregunta alguien que es un API REST seguramente a lo mejor no sabemos dar una definición formal o completa vamos a tratar de desentrañarlo.
+Vamos a comenzar en esta lección intentando desentrañar un poco que es eso de **REST**, muchos de vosotros ya habéis programado, seguro que habéis programado o bien en la consola, algún entorno gráfico, aplicaciones web, pero a lo mejor este concepto que os suena, que lo habéis leído, algo de APIs, queda un poco en el aire, si os pregunta alguien ***¿Qué es un API REST?*** seguramente a lo mejor no sabemos dar una definición formal o completa vamos a tratar de desentrañarlo.
 
 <img src="images/02-02.png">
 
-Nos vamos a ir acercando primero a través de la arquitectura de lo que sería una aplicación empresarial, pero desde hace mucho tiempo incluso a día de hoy y de forma independiente a las tecnologías, no solamente en proyecto Java o de Spring, durante muchos años se ha tendido la construcción de auténticos monolitos, entendemos monolito como una aplicación que incluye dentro, un conjunto podríamos llamar desplegable, con toda su funcionalidad, lógica de negocio, capa de acceso a datos, motor de plantillas, la renderizacion del contenido, de manera que bueno solamente tenemos como elemento externo quizá un navegador web que accede a un determinado URL o conjunto de URL y por otro lado al final tenemos la base de datos, que es verdad que normalmente está como un sistema externo, salvando esos dos sistemas externos nuestra aplicación a tendido a ser monolítica.
+Nos vamos a ir acercando primero a través de la arquitectura de lo que sería una aplicación empresarial, pero desde hace mucho tiempo incluso a día de hoy y de forma independiente a las tecnologías, no solamente en proyectos Java o de Spring, durante muchos años se ha tendido la construcción de auténticos **monolitos**, entendemos ***monolito como una aplicación que incluye dentro, un conjunto podríamos llamar desplegable, con toda su funcionalidad, lógica de negocio, capa de acceso a datos, motor de plantillas, la renderizacion del contenido, de manera que bueno solamente tenemos como elemento externo quizá un navegador web que accede a un determinado URL o conjunto de URL y por otro lado al final tenemos la base de datos, que es verdad que normalmente está como un sistema externo, salvando esos dos sistemas externos nuestra aplicación a tendido a ser monolítica***.
 
 <img src="images/02-03.png">
 
-De hecho a día de hoy lo podemos construir, si construimos una aplicación de Spring Boot, alguna aplicación Web MVC con Thymeleaf todo el código fuente podría quedar recogido en un mismo proyecto, en el cual tendríamos clases, modelo, entidades, repositorio, controladores servicio y además las plantillas, el código JavaScript, todo el código HTML, CSS todo quedaría recogido en un único elemento desplegable. Eso tiene una serie de ventajas porque da una uniformidad en el desarrollo, tendremos sobre todo en la parte de programación un único lenguaje de programación, si la aplicaciones es Web es verdad que crece el número de lenguaje porque necesitamos saber posiblemente JavaScript, CSS, HTML y alguna tecnología más. El despliegue suele ser más sencillo, incluso si tiene una arquitectura donde tengamos replicación, balanceo de carga, etc. tenemos un solo desplegable ya sea un Jar o un War por ejemplo en Java que podemos desplegar en determinados servidores y lo tenemos toda allí y suele ser fácil cuando se comienza este tipo de programación suele ser fácil a la hora de empezar a aprender una tecnología, un lenguaje de programación, en pequeños proyectos incluso podríamos decir que en medianos.
+De hecho ***a día de hoy lo podemos construir, si construimos una aplicación de Spring Boot, alguna aplicación Web MVC con Thymeleaf, todo el código fuente podría quedar recogido en un mismo proyecto en el cual tendríamos clases, modelo, entidades, repositorio, servicio, controladores y además las plantillas, el código JavaScript, todo el código HTML, CSS todo quedaría recogido en un único elemento desplegable***. Eso tiene una serie de ventajas porque da una uniformidad en el desarrollo, ***tendremos sobre todo en la parte de programación un único lenguaje de programación***, ***si la aplicaciones es Web es verdad que crece el número de lenguaje porque necesitamos saber posiblemente JavaScript, CSS, HTML y alguna tecnología más***. ***El despliegue suele ser más sencillo***, incluso si tiene una arquitectura donde tengamos replicación, balanceo de carga, etc. ***tenemos un solo desplegable*** ya sea un Jar o un War por ejemplo en Java que podemos desplegar en determinados servidores y lo tenemos toda allí y suele ser fácil cuando se comienza este tipo de programación a la hora de empezar a aprender una tecnología, un lenguaje de programación, en pequeños proyectos incluso podríamos decir que en medianos.
 
 <img src="images/02-04.png">
 
-Tenemos un ejemplo de aplicacion monolitica sería el clásico Pet Clinic que lo hay en diferentes versiones en JavaEE, también para Spring, incluso con Spring + Thymeleaf podríamos ver su código fuente aquí:
+Tenemos **un ejemplo de una aplicacion monolitica sería el clásico Pet Clinic** que lo hay en diferentes versiones en JavaEE, también para Spring, incluso con Spring + Thymeleaf podríamos ver su código fuente aquí:
 
 https://github.com/spring-projects/spring-petclinic
 
@@ -92,6 +99,19 @@ https://github.com/thymeleaf/thymeleafexamples-petclinic
 https://github.com/spring-petclinic
 
 Si queréis podéis clonar este repositorio lo podría ejecutar desde la misma consola con `mvn tomcat7:run` lo podría abrir podréis ver como está súper completo, está bastante bien podríamos tener las distintas plantillas Thymeleaf y podemos ver todo el código de la estructuración con fragmetos, podríamos buscar el código Java, las clases modelo donde tenemos por ejemplo una clase modelo persona con todo lo que conlleve, la herencia, entidades etc. una aplicación bastante completa.
+
+### :computer: `spring-petclinic` Ejemplo de Aplicación Monolitica
+
+![00-pet](images/00-pet.png)
+![000-pet](images/000-pet.png)
+![01-pet](images/01-pet.png)
+![02-pet](images/02-pet.png)
+![03-pet](images/03-pet.png)
+![04-pet](images/04-pet.png)
+![05-pet](images/05-pet.png)
+![06-pet](images/06-pet.png)
+![07-pet](images/07-pet.png)
+![08-pet](images/08-pet.png)
 
 <img src="images/02-05.png">
 
