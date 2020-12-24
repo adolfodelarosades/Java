@@ -30,41 +30,45 @@ Vamos a comenzar el segundo bloque y vamos a crear nuestro primera API REST, nue
 
 Para ello nos vamos a ir a la fuente, nos vamos a ir directamente a [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/) o directamente desde nuestro Spring Tool Suite. 
 
-Vamos a ver un ejemplo muy básico que vamos a ir desgranando poco a poco de hecho vamos a traernos el código completo y lo vamos a ir analizando para aprender los distintos elementos que lo componen y en las siguientes lecciones, poder crearlo por nuestra cuenta.
+Vamos a ver un ejemplo muy básico que vamos a ir desgranando poco a poco, de hecho vamos a traernos el código completo y lo vamos a ir analizando para aprender los distintos elementos que lo componen y en las siguientes lecciones, poder crearlo por nuestra cuenta.
 
-Ya digo desde esta web URL https://spring.io/guides/gs/rest-service/ que podemos visitar tendríamos la posibilidad si queréis lo podemos buscar en las guias este primero cómo construir un servicio web sera el que vayamos trabajando.
+Ya digo desde esta web URL https://spring.io/guides/gs/rest-service/ que podemos visitar. 
 
-Para traernos el código desde Spring Tool Suite lo podríamos hacer así nos venimos a File - New - Import Spring Getting Started Content 
+Si queréis lo podemos buscar en https://spring.io, ir a las guias que se encuentran en el footer y el primero que nos aparece **Building a RESTful Web Service** (Construir un RESTful Web Service), sera el que vayamos trabajando.
 
-<img src="images/08-09.png">
+### :computer: `gs-rest-service-complete` Ejemplo de Construir un RESTful Web Service
+
+Para traernos el código desde Eclipse o Spring Tool Suite lo podríamos hacer así, nos venimos a ***File - New - Import Spring Getting Started Content***
+
+![01-rfws](images/01-rfws.png)
 
 y lo podríamos buscar aquí sería si buscamos `Rest Service`.
 
-<img src="images/08-10.png">
+![02-rfws](images/02-rfws.png)
 
 y nos traemos solamente el código completo 
 
-<img src="images/08-11.png">
+![03-rfws](images/03-rfws.png)
 
 le damos a Finish, nos importaría todo el proyecto `gs-rest-service-complete`, nos abre una ventana incluso con el tutorial.
 
-<img src="images/08-12.png">
+![04-rfws](images/04-rfws.png)
 
-No nos va a hacer falta y tendríamos el código fuente disponible por aquí.
+Tendríamos el código fuente disponible.
 
-<img src="images/08-13.png">
+![05-rfws](images/05-rfws.png)
 
 <img src="images/08-03.png">
 
-Vamos ir desgranandolo poquito a poco. Primero nos vamos a situar, ¿Qué es lo que vamos a hacer? vamos a implementar una aplicación de servidor que va a aceptar peticiones GET en una determinada ruta `/greeting` y que nos va a devolver un JSON como el de la transparencia. Un mensaje de respuesta que vas a tener un `id` que va a ser de tipo numérico un long y un mensaje en una cadena de caracteres petición-respuesta como hemos ido viendo y en una determinada URL devolveremos un JSON. 
+Vamos ir desgranandolo poquito a poco. Primero nos vamos a situar, ¿Qué es lo que vamos a hacer? vamos a implementar una aplicación de servidor que va a aceptar peticiones GET en una determinada ruta `/greeting` y que nos va a devolver un JSON como el de la transparencia. Un mensaje de respuesta que vas a tener un `id` que va a ser de tipo numérico un long y un mensaje en una cadena de caracteres, petición-respuesta como hemos ido viendo y en una determinada URL devolveremos un JSON. 
 
 <img src="images/08-04.png">
 
-Si además le proporcionamos como parámetro opcional `name` este `/greeting` de manera que podríamos tener una URL como está `/greeting?name=User` cambiaremos en lugar de decir hola mundo haremos un hola usuario, de manera que lo podemos cambiar.
+Si además le proporcionamos como parámetro opcional `name` este `/greeting` de manera que podríamos tener una URL como está `/greeting?name=User` cambiaremos en lugar de decir ***hola mundo*** haremos un ***hola usuario***, de manera que lo podemos cambiar.
 
 <img src="images/08-05.png">
 
-La interacción cómo podemos ver va a ser hacer peticiones GET a `/greeting` y como respuesta deberíamos obtener un código 200 OK y en el cuerpo de la respuesta deberíamos tener un JSON como el que hemos visto antes, si pasamos `/greeting?name=User` pues obtendríamos el hello con el name en partícular. El objeto además llevará un id que veremos cómo se va incrementándo si hacemos más de una petición. 
+La interacción cómo podemos ver va a ser hacer peticiones GET a `/greeting` y como respuesta deberíamos obtener un código 200 OK y en el cuerpo de la respuesta deberíamos tener un JSON como el que hemos visto antes, si pasamos `/greeting?name=User` pues obtendríamos el hello con el name en partícular. El objeto además llevará un ID que veremos cómo se va incrementándo si hacemos más de una petición. 
 
 <img src="images/08-06.png">
 
@@ -121,11 +125,11 @@ public class GreetingController {
 }
 ```
 
-Que para aquellos que tenga ya algunos conocimientos de Spring MVC llamara la atención que en lugar de ser con el `@Controller` esto ya lo comentamos también antes sera con `@RestController` esto es la combinación de `@Controller` y `@ResponseBody` tenemos también la versión con `@GetMapping` pero hay otra con `@RequestMapping` yo que tengo son SonarLint  me hace algunos análisis del código que voy poniendo y entonces no no invita que pongamos el código correcto por lo que `@RequestMapping` debería quedar así: `@RequestMapping(value = "/greeting", method = RequestMethod.GET)`, definitivamente la anotación `@GetMapping("/greeting")` es más comoda sea como fuere tendríamos que aceptar peticiones GET en una determinada URL que hara que se invoque este método. 
+Que para aquellos que tenga ya algunos conocimientos de Spring MVC llamara la atención que en lugar de ser con el `@Controller`, esto ya lo comentamos también antes, sera con `@RestController` esto es la combinación de `@Controller` y `@ResponseBody` tenemos anotado el método `greeting` con `@GetMapping` hay otra versión con `@RequestMapping("/greeting")`, yo que tengo SonarLint  me hace algunos análisis del código que voy poniendo y entonces nos invita que pongamos el código correcto por lo que `@RequestMapping` debería quedar así: `@RequestMapping(value = "/greeting", method = RequestMethod.GET)`, definitivamente la anotación `@GetMapping("/greeting")` es más comoda sea como fuere tendríamos que aceptar peticiones GET en una determinada URL, que hara que se invoque este método. 
 
-Además podemos ver como el método `greeting(@RequestParam(value = "name", defaultValue = "World") String name)` recibe un parámetro que será el parámetro `name` lo inyectamos con `@RequestParam` recogera de la parte `query` de la URL algo llamado `value = "name"` y lo inyectará en `name`, sino lo encuentra inyectara un valor por defecto `defaultValue = "World"` para poderlo utilizar en el método.  
+Además podemos ver como el método `greeting(@RequestParam(value = "name", defaultValue = "World") String name)` recibe un parámetro que será el parámetro `name` lo inyectamos con `@RequestParam` recogera de la parte `query` de la URL algo llamado `value = "name"` y lo inyectará en `name`, si no lo encuentra inyectara un valor por defecto `defaultValue = "World"` para poderlo utilizar en el método.  
 
-Como deciamos como se devuelve JSON si el método lo que retorna es un objeto de tipo `Greeting`:
+Como deciamos, ¿Cómo se devuelve JSON? si el método lo que retorna es un objeto de tipo `Greeting`:
 
 `return new Greeting(counter.incrementAndGet(), String.format(template, name));`
 
@@ -135,101 +139,49 @@ Bueno podemos verlo por aquí.
 
 <img src="images/08-08.png">
 
-`@RestController` como hemos dicho es la combinación de `@Controller` + `@ResponseBody` y `@ResponseBody` lo que hace es que lo que se devuelve en el método como cuerpo de la respuesta, si recordáis el formato de los mensajes de respuesta como un cajón que tenía las cabeceras y el cuerpo, pues dentro del cuerpo lo que se hace es poner lo que nosotros devolvamos, lo que pasa, es que pasa antes por el filtro de un `HTTPMessageConverter` que lo que hace es transformarlo de un objeto Java a un objeto de tipo JSON, a una cadena de tipo JSON.
+`@RestController` como hemos dicho es la combinación de `@Controller` + `@ResponseBody` y `@ResponseBody` devuelve en el body lo devuelto por el método como respuesta, si recordáis el formato de los mensajes de respuesta como un cajón que tenía las cabeceras y el cuerpo, pues dentro del cuerpo lo que se hace es poner lo que nosotros devolvamos, lo que pasa, es que pasa antes por el filtro de un `HTTPMessageConverter` que lo que hace es transformarlo de un objeto Java a un objeto de tipo JSON, a una cadena de tipo JSON.
 
 ### Probando la Aplicación
 
 Vamos a probar a ponerlo en ejecución la aplicación.
 
-<img src="images/08-14.png">
+![06-rfws](images/06-rfws.png)
 
 Vemos como nuestra aplicación se ha lanzado.
 
-<img src="images/08-15.png">
+![07-rfws](images/07-rfws.png)
 
 Ya estaría disponible en el puerto 8080 y en primera instancia podríamos comprobarlo desde el propio navegador con el URL `http://localhost:8080/greeting` y aquí tendríamos nuestro `Hello, World!`.
 
-<img src="images/08-16.png">
+![08-rfws](images/08-rfws.png)
 
-Cómo podemos ver la creación de un servicio es bastante sencillo, solo necesitaríamos tener una clase controladora anotada con `@RestController` en la que tengamos algunos métodos anotado bien con `@RequestMapping` o `@GetMapping` y el método correspondiente cómo podría ser con `@GetMapping`, `@PostMapping`, `@PutMapping` o `@DeleteMapping` y en el cual pues podamos atender peticiones que recibirán o no alguna serie de argumentos y en la que podamos devolver valores que dentro de este método estamos devolviendo una clase Java que serán transformadas a través de un `HTTPMessageConverter`.
+Cómo podemos ver la creación de un servicio es bastante sencillo, solo necesitaríamos tener una clase controladora anotada con `@RestController`, en la que tengamos algunos métodos anotado bien con `@RequestMapping` o `@GetMapping` y el método correspondiente cómo podría ser con `@GetMapping`, `@PostMapping`, `@PutMapping` o `@DeleteMapping` y en el cual pues podamos atender peticiones que recibirán o no alguna serie de argumentos y en la que podamos devolver valores que dentro de este método estamos devolviendo una clase Java que serán transformadas a través de un `HTTPMessageConverter`.
 
 Aunque tengamos solamente el navegador y le damos a inspeccionar Network y recargamos podríamos ver que ha sucedido por aquí detrás y si pinchamos en greeting
 
-<img src="images/08-17.png">
-
-<img src="images/08-18.png">
-
-<img src="images/08-19.png">
+![09-rfws](images/09-rfws.png)
+![10-rfws](images/10-rfws.png)
+![11-rfws](images/11-rfws.png)
+![12-rfws](images/12-rfws.png)
+![13-rfws](images/13-rfws.png)
+![14-rfws](images/14-rfws.png)
 
 podemos ver como el navegador por detrás con esa petición GET ha enviado alguna serie de elementos y ha recibido la respuesta, tendríamos incluso los encabezados de la respuesta así como de la petición, como lo ha ido gestionando el propio navegador para que veamos que todo eso va sucediendo de verdad. todas las anotaciones que hemos visto antes se van utilizando tanto en peticiones como en respuestas, el tipo de contenido, la fecha, el código de estado 200 y lo ponen en verde como OK, lo que nosotros hemos enviado como parte de la petición para que veamos que esto ha sucedido conforme a nosotros lo hemos programado.
 
 Podemos probar mandando un nombre con el URL `http://localhost:8080/greeting?name=Pedro` obtenemos.
 
-<img src="images/08-20.png">
-
-<img src="images/08-21.png">
-
-<img src="images/08-22.png">
+![15-rfws](images/15-rfws.png)
+![16-rfws](images/16-rfws.png)
+![17-rfws](images/17-rfws.png)
+![18-rfws](images/18-rfws.png)
+![19-rfws](images/19-rfws.png)
+![20-rfws](images/20-rfws.png)
 
 Hasta aquí nuestro primer servicio, vamos a ver ahora como con Postman como cliente en el lugar del propio navegador poder interactuar con nuestro API REST.
 
-### :computer: Código Completo - gs-rest-service-complete -  143-02-API_REST
+### :computer: Código Completo `gs-rest-service-complete`
 
-<img src="images/08-23.png">
-
-*`pom.xml`*
-
-```html
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>rest-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>rest-service</name>
-	<description>Demo project for Spring Boot</description>
-
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-</project>
-```
+![21-rfws](images/21-rfws.png)
 
 *`Greeting`*
 
@@ -238,21 +190,21 @@ package com.example.restservice;
 
 public class Greeting {
 
-	private final long id;
-	private final String content;
+   private final long id;
+   private final String content;
 
-	public Greeting(long id, String content) {
-		this.id = id;
-		this.content = content;
-	}
+   public Greeting(long id, String content) {
+      this.id = id;
+      this.content = content;
+   }
 
-	public long getId() {
-		return id;
-	}
+   public long getId() {
+      return id;
+   }
 
-	public String getContent() {
-		return content;
-	}
+   public String getContent() {
+      return content;
+   }
 }
 ```
 
@@ -272,14 +224,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
+   private static final String template = "Hello, %s!";
+   private final AtomicLong counter = new AtomicLong();
 
-	//@RequestMapping(value = "/greeting", method = RequestMethod.GET)
-	@GetMapping("/greeting")
-	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
-	}
+   //@RequestMapping(value = "/greeting", method = RequestMethod.GET)
+   @GetMapping("/greeting")
+   public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+      return new Greeting(counter.incrementAndGet(), String.format(template, name));
+   }
 }
 ```
 
@@ -294,9 +246,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RestServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(RestServiceApplication.class, args);
-    }
+   public static void main(String[] args) {
+      SpringApplication.run(RestServiceApplication.class, args);
+   }
 
 }
 ```
