@@ -486,17 +486,23 @@ public class ProductoController {
 
 <img src="images/10-01.png">
 
-Hola a todos vamos a seguir con nuestro curso en el que estamos aprendiendo a desarrollar una API con Sprint Boot, a partir de esta lección vamos a desarrollar una API casi desde cero, os dejo un pequeño código base para no pararnos en cosas que ya hemos aprendido antes, vamos a partir de una estructura de un controlador que vamos a explicar y lo vamos a ir completando poco a poco.
+Vamos a seguir con nuestro curso en el que estamos aprendiendo a desarrollar una API con Sprint Boot, a partir de esta lección vamos a desarrollar una API casi desde cero, os dejo un pequeño código base para no pararnos en cosas que ya hemos aprendido antes, vamos a partir de una estructura de un controlador que vamos a explicar y lo vamos a ir completando poco a poco.
 
 <img src="images/10-02.png">
 
-El ejemplo va a ser una especie de API de productos, vamos a gestionar una serie de productos simples, como campo van a tener un ID, el nombre del producto y el precio. Vamos a crear también un repositorio y vamos a insertar unos datos de ejemplo desde `data.sql`, ya digo esto este código de base ya lo vas a tener en el repositorio del curso para que no tengas que pararnos a crear la clase Modelo, el repositorio, para que no tengáis que hacer la creación de datos de ejemplo, cosas que si habéis visitado los otros cursos como por ejemplo el de Spring Boot y Spring Web se explica con mayor detenimiento, es cuestión de que nos parecemos en la capa de acceso a datos en esta parte, sino que nos vamos a centrar sobre todo en el controlador y en la parte más REST.
+El ejemplo va a ser una especie de API de productos, vamos a gestionar una serie de productos simples, como campo van a tener:
+
+* Un ID
+* El nombre del producto 
+* El precio del producto
+
+Vamos a crear también un repositorio y vamos a insertar unos datos de ejemplo desde `data.sql`, este código de base ya lo vas a tener en el repositorio del curso para que no tengas que pararnos a crear la clase Modelo, el repositorio, para que no tengáis que hacer la creación de datos de ejemplo, cosas que si habéis visitado los otros cursos como por ejemplo el de Spring Boot y Spring Web se explica con mayor detenimiento, no es cuestión de que nos parecemos en la capa de acceso a datos en esta parte, sino que nos vamos a centrar sobre todo en el controlador y en la parte más REST.
 
 <img src="images/10-03.png">
 
-Vamos a ver cómo mapear las rutas de nuestro controlador con las diferentes operaciones CRUD, en el fondo vamos hacer un CRUD de productos y entonces necesitamos para cada una de las operaciones CRUD hacer una determinada ruta en el controlador, esta estructura veréis que va a ser muy común si lo que necesitáis es generar CRUD y de hecho si trabajáis alguna vez con Spring Data REST veréis que no dista de la que genera automáticamente,
+Vamos a ver cómo mapear las rutas de nuestro controlador con las diferentes operaciones CRUD, en el fondo vamos hacer un CRUD de productos y entonces necesitamos para cada una de las operaciones CRUD hacer una determinada ruta en el controlador, esta estructura veréis que va a ser muy común si lo que necesitáis es generar CRUD y de hecho si trabajáis alguna vez con **Spring Data REST** veréis que no dista de la que genera automáticamente.
 
-Dentro de CRUD la operación `Read` la de obtener datos la haremos a través de peticiones de tipo `GET` es decirme métodos del controlador que irán anotados con `@GetMapping` y como nosotros vamos a trabajar con productos la ruta de obtener todos los productos será una petición `@GetMapping("/producto")` lo vamos a poner en singular, tampoco sería demasiado dramático si lo pusieramos en plural, si queremos obtener un producto en particular lo haremos con su `id` y entonces será la ruta `@GetMapping("/producto/{id}")` el producto 1, el 2 el producto 114, ambas peticiones de tipo `GET`.
+Dentro de CRUD la operación `Read` la de obtener datos la haremos a través de peticiones de tipo `GET`, es decir métodos del controlador que irán anotados con `@GetMapping` y como nosotros vamos a trabajar con productos la ruta de obtener todos los productos será una petición `@GetMapping("/producto")` lo vamos a poner en singular, tampoco sería demasiado dramático si lo pusieramos en plural, si queremos obtener un producto en particular lo haremos con su `id` y entonces será la ruta `@GetMapping("/producto/{id}")` el producto 1, el 2 el producto 114, ambas peticiones de tipo `GET`.
 
 Para crear un producto lo que haremos será una petición de tipo POST anotada con `@PostMapping` a la propia ruta `/producto` es decir `@PostMapping("/producto")`.
 
@@ -504,17 +510,21 @@ Para crear un producto lo que haremos será una petición de tipo POST anotada c
 
 Para actualizar la petición de tipo UPDATE será con `Put` con una anotación `@PutMapping` y está usualmente aunque el `id` vaya dentro del objeto que le estamos pasando es muy habitual que se lo proporcionemos dentro de la ruta y entonces así lo vamos a hacer con `@PutMapping("/producto/{id}")` 
 
-La estructura sería la misma para la petición de borrado sería con un deleite mapping y también sería con la anotación `@DeleteMapping` completa tendríamos `@DeleteMapping("/producto/{id}")`.
+La estructura sería la misma para la petición de borrado sería con la anotación `@DeleteMapping`, completa tendríamos `@DeleteMapping("/producto/{id}")`.
 
 <img src="images/10-05.png">
 
-Algunas notaciones que vamos a usar para que no nos suenen raro y que las reconozcamos sería la anotación `@RequestBody` que nos va a permitir inyectar el cuerpo de la petición en un objeto, es decir nos enviara una petición, aquello trae datos y hemos visto que cuando nosotros en una petición GET devolvemos algo en el cuerpo el `HTTPMessageConverter` transforma nuestro objeto Java en un JSON, pero ahora lo necesitamos a la hora de recibirlo, vamos a recibir una petición en la cual se va a enviar un JSON y vamos a necesitar sacar ese JSON como un objeto Java para poder interactuar con nuestro repositorio y almacenarlo en  la base de datos.
+Algunas notaciones que vamos a usar para que no nos suenen raro y que las reconozcamos, sería la anotación `@RequestBody` que nos va a permitir inyectar el cuerpo de la petición en un objeto, es decir nos enviara una petición, aquello trae datos y hemos visto que cuando nosotros en una petición GET devolvemos algo en el cuerpo el `HTTPMessageConverter` transforma nuestro objeto Java en un JSON, pero ahora lo necesitamos a la hora de recibirlo, vamos a recibir una petición en la cual se va a enviar un JSON y vamos a necesitar sacar ese JSON como un objeto Java para poder interactuar con nuestro repositorio y almacenarlo en la base de datos.
 
-Hasta aquí ya nos podemos venir a nuestro código vamos al proyecto base lo vamos a copiar y pegar del repositorio y le vamos a asignar el nombre `143-03-09_EstructuraRutas`.
+### :computer: `143-02-EstructuraRutas` Primer Ejemplo de un API REST de Productos
 
-<img src="images/10-07.png">
+Hasta aquí ya nos podemos venir a nuestro código, vamos al proyecto base lo vamos a copiar y pegar del repositorio y le vamos a asignar el nombre `143-02-EstructuraRutas`.
 
-Tenemos nuestro archivo `pom.xml`.
+**DUDA: COMO SE CREA EL PROYECTO DESDE CERO.**
+
+![143-02-01](images/143-02-01.png)
+
+Tenemos nuestro archivo `pom.xml`
 
 *`pom.xml`*
 
@@ -523,60 +533,61 @@ Tenemos nuestro archivo `pom.xml`.
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.8.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.openwebinars.rest</groupId>
-	<artifactId>143-03-09_EstructuraRutas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>143-03-09_EstructuraRutas</name>
-	<description>Ejemplo de métodos crud en un API REST</description>
+   <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.1.8.RELEASE</version>
+      <relativePath/> <!-- lookup parent from repository -->
+   </parent>
+   <groupId>com.openwebinars.rest</groupId>
+   <artifactId>143-02-EstructuraRutas</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>143-02-EstructuraRutas</name>
+   <description>Ejemplo de métodos crud en un API REST</description>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
+   <properties>
+      <java.version>1.8</java.version>
+   </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
 
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+      <dependency>
+         <groupId>com.h2database</groupId>
+         <artifactId>h2</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
 </project>
 ```
+
+**NOTA** ***Cuando importemos o copiemos un proyecto es importante cambiar los nombres en los tags `artifactId` y `name` para evitar problemas si importamos este proyecto en otro sitio.*** 
 
 Tenemos una clase Modelo `Producto`.
 
@@ -607,7 +618,7 @@ public class Producto {
 }
 ```
 
-En esta clase `Producto` usamos Lombok lo cual la hace muy sencilla con una `id` y ya sabéis que Spring Data JPA nos permite tener estas anotación `@Id @GeneratedValue` y que tiene que tener `@Entity` para que sea una auténtica entidad, las demás anotaciones `@Data @NoArgsConstructor @AllArgsConstructor` son de Lombok. Vemos cómo tiene los atributos `id`, `nombre` y `precio`.
+En esta clase `Producto` usamos Lombok lo cual la hace muy sencilla con una `id` y ya sabéis que **Spring Data JPA** nos permite tener estas anotación `@Id @GeneratedValue` y que tiene que tener `@Entity` para que sea una auténtica entidad, las demás anotaciones `@Data @NoArgsConstructor @AllArgsConstructor` son de Lombok. Vemos cómo tiene los atributos `id`, `nombre` y `precio`.
 
 *`ProductoRepositorio`*
 
@@ -623,7 +634,7 @@ public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
 
 El repositorio es sencillo no vamos a necesitar ninguna consulta rara para hacerlo, entiende a los repositorios de `JpaRepository`.
 
-*`ProductoRepositorio`*
+*`ProductoController`*
 
 ```java
 package com.openwebinars.rest.controller;
@@ -798,10 +809,7 @@ El método `borrarProducto(@PathVariable Long id)` para eliminar un producto ano
 
 También usa `@PathVariable` para inyectar el valor de la ruta y tomarlo como parámetro.
 
-Bueno pues por lo pronto lo que necesitamos aquí es obtener el repositorio que lo tenemos declarado con la línea `private final ProductoRepositorio productoRepositorio;` aque ahora iremos utilizando.
-
-Fijarnos que no hemos utilizado la anotación `@Autowire` ni nada, Lombok nos permite también anotar con la anotación `@RequiredArgsConstructor` un controlador y como este repositorio no se va a haber modificado, lo podemos declarar como final y directamente cuando se instancie el Bean se autoinyectaran las dependencias y lo hacemos de una manera limpia y utilizándo Lombok.
-
+Bueno pues por lo pronto lo que necesitamos aquí es obtener el repositorio que lo tenemos declarado con la línea `private final ProductoRepositorio productoRepositorio;` aque ahora iremos utilizando, fijarnos que no hemos utilizado la anotación `@Autowire` ni nada. Lombok nos permite también anotar con la anotación `@RequiredArgsConstructor` un controlador. Como el repositorio no se va a haber modificado, lo podemos declarar como final y directamente cuando se instancie el `Bean` se autoinyectaran las dependencias y lo hacemos de una manera limpia y utilizándo Lombok.
 
 ```java
 @RestController
@@ -814,7 +822,7 @@ public class ProductoController {
    
 ```
 
-También contamos dentro de los recursos contamos con el archivo `data.sql` con el siguiente contenido.
+También dentro de los recursos contamos con el archivo `data.sql` con el siguiente contenido.
 
 ```sql
 insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Juice - Orange, Concentrate', 91);
@@ -874,7 +882,6 @@ Con esto ya se devolverían todos los productos.
 
 Para devolver un solo producto lo que podríamos hacer es cambiar el método `obtenerUno(@PathVariable Long id)`. 
 
-
 ```java
    @GetMapping("/producto/{id}")
    public Producto obtenerUno(@PathVariable Long id) {
@@ -892,29 +899,31 @@ Por esto, ya sabes que el `productoRepositorio` tiene una serie de métodos solo
    }
 ```
 
-Como `findById` devuelve un opcional y no nos vamos a poner a manejar los errores, sino lo encuentra usamos `orElse(null)` para mandar un nulo.
+Como `findById` devuelve un ***opcional*** y no nos vamos a poner a manejar los errores, sino lo encuentra usamos `orElse(null)` para mandar un nulo.
 
 Con estas dos peticiones modificadas ya podemos probarlas con Postman e ir haciendo peticiones a estos URL.
 
-<img src="images/10-08.png">
+![143-02-02](images/143-02-02.png)
 
-<img src="images/10-09.png">
+![143-02-03](images/143-02-03.png)
 
 Empezamos por hacer una petición a `http://localhost:8080/producto`.
 
-<img src="images/10-10.png">
+![143-02-04](images/143-02-04.png)
 
 En la cual obtenemos un código 200 OK y todos los productos que tenemos ahora mismo en la base de datos que son 30.
 
+![143-02-05](images/143-02-05.png)
+
 Si hacemos la petición para obtener un solo producto `http://localhost:8080/producto/3`.
 
-<img src="images/10-11.png">
+![143-02-06](images/143-02-06.png)
 
 Nos devuelve solamente el producto con el `id` indicado.
 
 Si hacemos la petición de un producto que no existe `http://localhost:8080/producto/31`.
 
-<img src="images/10-12.png">
+![143-02-07](images/143-02-07.png)
 
 Es una situación que ahora mismo no estamos contemplando, devolvemos nulo pero todavía no lo estamos gestionando lo haremos más adelante.
 
@@ -941,13 +950,13 @@ Bastaría devolver lo que almacenemos aquí como nuevo, esto lo que hace es reco
 
 Vamos a relanzar la aplicación con el botón `Relaunch` y comprobar que funciona.
 
-Tendríamos que hacer una petición a `http://localhost:8080/producto/` y tendríamos que usar el verbo POST, y para enviar datos en el cuerpo tenemos que irnos a Body - raw - JSON y mandar los datos de nuestro producto en formato JSON. El `id` se autogenera, necesitariamos mandar un nombre y precio de nuestro producto.
+Tendríamos que hacer una petición a `http://localhost:8080/producto/` y tendríamos que usar el verbo POST, y para enviar datos en el cuerpo tenemos que irnos a ***Body - raw - JSON*** y mandar los datos de nuestro producto en formato JSON. El `id` se autogenera, necesitariamos mandar un nombre y precio de nuestro producto.
 
-<img src="images/10-13.png">
+![143-02-08](images/143-02-08.png)
 
 Al enviar la petición nos indica que se ha generado un nuevo Producto con un `id` 31 y vemos también algo que tendremos que gestionar después y es el código de respuesta en este caso nos a devuelto 200 OK que esta más asociado a obtener un recurso, el 101 esta más asociado a la creación de un nuevo recurso, veremos como hacerlo en siguientes lecciones. 
 
-<img src="images/10-14.png">
+![143-02-09](images/143-02-09.png)
 
 Nos faltaría el método `editarProducto(@RequestBody Producto editar, @PathVariable Long id)` para editar un producto.
 
@@ -959,7 +968,7 @@ Nos faltaría el método `editarProducto(@RequestBody Producto editar, @PathVari
    }
 ```
 
-Tendríamos diferentes de hacerlo lo haremos de una manera muy sencilla 
+Tendríamos diferentes formas de hacerlo, lo haremos de una manera muy sencilla 
 
 ```java
    @PutMapping("/producto/{id}")
@@ -975,23 +984,22 @@ Tendríamos diferentes de hacerlo lo haremos de una manera muy sencilla
 
 Si el producto existe lo que hacemos es asegurarnos que el objeto `editar` que recogemos tenga el `id`, salvamos el objeto y lo devolvemos y sino devolvemos nulo. En posteriores lecciones optimizaremos este código. Pero por ahora nos puede servir si lo encontramos lo modificamos y sino lo encontramos devolvemos nulo.
 
-Vamos a relanzar la aplicación y probar a modificar el `Jamón de Bellota` para que sea un `Jamón Ibérico de Bellota`. En este caso usamos el verbo PUT con el URL `http://localhost:8080/producto/31` y con el Body
+Vamos a relanzar la aplicación y probar a modificar el `Paleta de Jamón de Bellota` para que sea un `Paleta de Jamón Ibérico de Bellota`. En este caso usamos el verbo PUT con el URL `http://localhost:8080/producto/31` y con el Body
 
 ```html
 {
-   "nombre": "Jamón Ibérico de Bellota",
-   "precio": 1234
+   "nombre": "Paleta de Jamón Ibérico de Bellota",
+   "precio": 435
 }
 ```
 
-<img src="images/10-15.png">
+![143-02-10](images/143-02-10.png)
 
-<img src="images/10-16.png">
+![143-02-11](images/143-02-11.png)
 
 Obtenemos los datos del Producto actualizado.
 
-**NOTA**: Como estamos relanzando de nuevo la aplicación es necesario rimero volver a insertar el Producto 31 antes de quererlo modificar, por que cada que se relanza la aplicación se vuelve a inicializar la base de datos.
-
+**NOTA**: Como estamos relanzando de nuevo la aplicación es necesario primero volver a insertar el Producto 31 antes de quererlo modificar, por que cada que se relanza la aplicación se vuelve a inicializar la base de datos.
 
 Por último nos queda el método `borrarProducto(@PathVariable Long id)` para eliminar un producto.
 
@@ -1024,11 +1032,12 @@ Vamos a reelanzar la aplicación para comprobar que esto funciona.
 
 Damos de alta el Jamón y ahora hacemos una petción `DELETE` a la URL `http://localhost:8080/producto/31`
 
-<img src="images/10-17.png">
+![143-02-12](images/143-02-12.png)
+![143-02-13](images/143-02-13.png)
 
 A la hora de enviar nos regresa como respuesta el objeto eliminado, si lo solicitamos con un GET veremos que el producto realmente ya no existe.
 
-<img src="images/10-18.png">
+![143-02-14](images/143-02-14.png)
 
 Con lo cual ya hemos implementado CRUD completo tenemos los métodos:
 
@@ -1051,16 +1060,22 @@ public Producto borrarProducto(@PathVariable Long id)
 
 Hemos guardado en Postman nuestras cinco peticiones.
 
-<img src="images/10-20.png">
+![143-02-15](images/143-02-15.png)
 
 <img src="images/10-06.png">
 
-¿Qué nos faltaría entonces? Nos falta manejar correctamente los cóigos de respuesta, las peticiones de creación deberían devolver un 201, las peticiones que no encuentren un recurso 
-deberían devolver un 404, si la petición de borrado devuelve datos esta bien que devuelva un 200 pero si no devuelve datos deveria devolver un 204 que es vacío, todo eso lo haremos en las próximas lecciones donde iremos modificando este código poco a poco.
+¿Qué nos faltaría entonces? 
 
-### :computer: Código Completo - 143-03-09_EstructuraRutas
+* Nos falta manejar correctamente los cóigos de respuesta.
+* Las peticiones de creación deberían devolver un 201
+* Las peticiones que no encuentren un recurso deberían devolver un 404
+* Si la petición de borrado devuelve datos esta bien que devuelva un 200 pero si no devuelve datos deberia devolver un 204 que es vacío.
 
-<img src="images/10-19.png">
+Todo eso lo haremos en las próximas lecciones donde iremos modificando este código poco a poco.
+
+### :computer: Código Completo - `143-02-EstructuraRutas`
+
+![143-02-16](images/143-02-16.png)
 
 *`pom.xml`*
 
@@ -1076,9 +1091,9 @@ deberían devolver un 404, si la petición de borrado devuelve datos esta bien q
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.openwebinars.rest</groupId>
-	<artifactId>143-03-09_EstructuraRutas</artifactId>
+	<artifactId>143-02-EstructuraRutas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>143-03-09_EstructuraRutas</name>
+	<name>143-02-EstructuraRutas</name>
 	<description>Ejemplo de métodos crud en un API REST</description>
 
 	<properties>
