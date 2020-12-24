@@ -13,6 +13,15 @@
 This is *red*{: style="color: red"}.<br>
 
 <span style="color:blue">some *This is Blue italic.* text</span>
+
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+
 # 01 Presentación 6:01 
 
 [PDF Presentacion.pdf](pdfs/00._Presentacion.pdf)
