@@ -9,6 +9,14 @@
 * 07 Soporte de Spring Boot para servicios REST 6:34 
 * Contenido adicional  7
 
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+
 # 01 Presentación 6:01 
 
 [PDF Presentacion.pdf](pdfs/00._Presentacion.pdf)
@@ -273,33 +281,33 @@ Los métodos que más vamos a usar serán sobre todo **GET**, **POST**, **PUT** 
 
 <img src="images/04-03.png">
 
-***PUT se debería utilizar en operaciones de actualización completas, es decir que este recurso que enviamos sustituye a uno que exista*** y <span style="color:yellow">**suele ser *IDEMPOTENTE* es decir que si enviáramos N veces está petición debería producir la misma modificación que enviarla una sola vez, es decir que no debería acumular modificación**</span>.
+***PUT se debería utilizar en operaciones de actualización completas***, es decir que este recurso que enviamos sustituye a uno que exista y **suele ser IDEMPOTENTE** es decir que si enviáramos N veces está petición debería producir la misma modificación que enviarla una sola vez, es decir que no debería acumular modificación.
 
-La petición DELETE que es bastante sencilla porque debería dedicarse a borrar el recurso especificado.
+***La petición DELETE que es bastante sencilla porque debería dedicarse a borrar el recurso especificado***.
 
 Como decía estos son los que más vamos a utilizar pero no son los únicos.
 
 <img src="images/04-04.png">
 
-Otros que son útiles como por ejemplo HEAD qué es idéntico a el método GET pero en lugar de que el cuerpo de la respuesta venga relleno, en este vendrían solamente los encabezados, es útil para obtener metadatos, por ejemplo si queremos saber un determinado fichero que nos vamos a descargar cuánto pesa, pues le podríamos hacer primero una petición HEAD y así tendríamos esos datos.
+Otros que son útiles como por ejemplo ***HEAD qué es idéntico a el método GET pero en lugar de que el cuerpo de la respuesta venga relleno, en este vendrían solamente los encabezados, es útil para obtener metadatos, por ejemplo si queremos saber un determinado fichero que nos vamos a descargar cuánto pesa, pues le podríamos hacer primero una petición HEAD y así tendríamos esos datos***.
 
-La petición OPTIONS que devuelve la lista de métodos HTTP que soporta un recurso y qué se utiliza en bastantes contextos, por ejemplo si no estoy equivocado, sin ser experto pero creo que en Angular a la hora de crear servicios que van a interactuar con un API también lo utiliza.
+***La petición OPTIONS que devuelve la lista de métodos HTTP que soporta un recurso y qué se utiliza en bastantes contextos***, por ejemplo si no estoy equivocado, sin ser experto pero creo que en Angular a la hora de crear servicios que van a interactuar con un API también lo utiliza.
 
-La petición PATCH que nos permita actualizar parcialmente un recurso sin tener que hacerlo de forma completa.
+***La petición PATCH que nos permita actualizar parcialmente un recurso sin tener que hacerlo de forma completa***.
 
 Esto con respecto a los métodos.
 
 <img src="images/04-05.png">
 
-Si hablamos de encabezados o cabeceras en inglés HEADERS son metadatos que contextualizan nuestro mensaje, cada cabecera es especificada por un nombre de cabecera seguida por dos puntos, tiene una estructura clave-valor y después de esos dos puntos un espacio en blanco y el valor de dicha cabecera y además después un retorno de carro, una especie de intro para que se espere una nueva cabecera en la siguiente línea. De hecho si viéramos esto por dentro lo que se envia en realidad al servidor podríamos ver aquí una serie de encabezados, una línea en blanco para indicar el final de la cabecera y si no hay cabecera la línea en blanco debería permanecer por si estamos desarrollando un cliente a bajo nivel para nuestra para API REST.
+Si hablamos de encabezados o cabeceras en inglés **HEADERS** ***son metadatos que contextualizan nuestro mensaje, cada cabecera es especificada por un nombre de cabecera seguida por dos puntos, tiene una estructura clave-valor y después de esos dos puntos un espacio en blanco y el valor de dicha cabecera y además después un retorno de carro, una especie de intro para que se espere una nueva cabecera en la siguiente línea***. De hecho si viéramos esto por dentro lo que se envia en realidad al servidor podríamos ver aquí una serie de encabezados, una línea en blanco para indicar el final de la cabecera y si no hay cabecera la línea en blanco debería permanecer por si estamos desarrollando un cliente a bajo nivel para nuestra para API REST.
 
 <img src="images/04-06.png">
 
-Como decía este encabezado o cabecera van a dar una gran flexibilidad porque el protocolo dice que debe haber encabezado pero a lo largo del tiempo han ido apareciendo más, con lo cual no nos ceñimos a tener solamente unos pocos, frente a otros esquemas, como decíamos antes otros tipo de protocolos donde cualquier cambio produccia un gran impacto, aquí con el tiempo han ido apareciendo nuevos encabezados que han resultado francamente útiles. Deben ser interpretados por el cliente o por el servidor o por los intermediarios si tuvieron algún tipo de proxy, de Gateway.
+Como decía este encabezado o cabecera va a dar una gran flexibilidad porque el protocolo dice que debe haber encabezado pero a lo largo del tiempo han ido apareciendo más, con lo cual no nos ceñimos a tener solamente unos pocos, frente a otros esquemas, como decíamos antes otros tipo de protocolos donde cualquier cambio producia un gran impacto, aquí con el tiempo han ido apareciendo nuevos encabezados que han resultado francamente útiles. Deben ser interpretados por el cliente o por el servidor o por los intermediarios si tuvieron algún tipo de Proxy, de Gateway.
 
 <img src="images/04-07.png">
 
-Como tipos tenemos tres los encabezados de petición, los encabezados de respuesta y los encabezados de peticiones respuesta que podemos encontrar los mensajes de ambos tipos hay muchos que son estándares los podemos visitar por aquí:
+Tenemos tres tipos ***los encabezados de petición, los encabezados de respuesta y los encabezados de peticiones-respuesta*** que podemos encontrar los mensajes de ambos tipos hay muchos que son estándares los podemos visitar por aquí:
 
 https://developer.mozilla.org/es/docs/Web/HTTP/Headers
 
@@ -307,11 +315,11 @@ Los tipos de cabeceras que hay.
 
 <img src="images/04-08.png">
 
-Vamos a ver alguna pequeña clasificación en función de a qué se dedican, si hablamos de por ejemplo el clientes y queremos ver qué son aceptadas por el cliente que envía el mensaje uno de los encabezados de las cabeceras más importantes es **Accept** esto se envían una petición y le estamos diciendo al servidor el tipo de formato que vamos a aceptar normalmente se envía un tipo MIME, entonces si nosotros tenemos una API que soporta la representación de los recursos en distintos formatos podríamos decirle oye yo en particular ahora en lugar de en JSON quiero tener esto en XML o si puedes me envías una representación en HTML del recurso y esto es francamente útil porque ya digo que si es soportado por el servidor podríamos variando.
+Vamos a ver alguna pequeña clasificación en función de a qué se dedican, si hablamos de por ejemplo el clientes y queremos ver qué son aceptadas por el cliente que envía el mensaje uno de los encabezados de las cabeceras más importantes es **Accept** esto se envían una petición y le estamos diciendo al servidor el tipo de formato que vamos a aceptar normalmente se envía un tipo MIME, entonces si nosotros tenemos una API que soporta la representación de los recursos en distintos formatos podríamos decirle oye yo en particular ahora en lugar de un JSON quiero tener esto en XML o si puedes me envías una representación en HTML del recurso y esto es francamente útil porque ya digo que si es soportado por el servidor podríamos ir variando.
 
 También hay veces que utilizamos **Accept-Charset** para indicar oye pues yo lo quiero en UTF-8, en latín o en otro tipo de codificación.
 
-Otro muy como suele ser **User-Agent** que se utiliza para hacer una descripción del cliente que hace la petición.
+Otro muy común suele ser **User-Agent** que se utiliza para hacer una descripción del cliente que hace la petición.
 
 <img src="images/04-09.png">
 
