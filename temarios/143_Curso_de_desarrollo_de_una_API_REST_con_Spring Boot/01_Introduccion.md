@@ -539,15 +539,15 @@ Puedes encontrar más información en https://projectlombok.org/features/all y e
 
 <img src="images/06-01.png">
 
-Vamos a complementar todo lo que hemos hablado en la lección anterior de nuestro entorno de desarrollo con Project Lombok. 
+Vamos a complementar todo lo que hemos hablado en la lección anterior de nuestro entorno de desarrollo con **Project Lombok**. 
 
 <img src="images/06-02.png">
 
-Estoy completamente seguro de que si te pregunto me dirás que te da un montón de pereza en tus clases modelo cada vez que le añades una serie de datos tener que generar getter, setter, método equals, hashCode, toString ahora le añade una nueva propiedad, tengo que añadir el getter y setter, modificar el hashCode, el toString, el equals, ahora quito una igual, ahora que pasa con el constructor, da un montón, un montón de pereza, bueno pues para ellos Project Lombok viene a nuestro rescate.
+Estoy completamente seguro de que si te pregunto, me dirás que te da un montón de pereza en tus clases modelo cada vez que le añades una serie de datos tener que generar *getter*, *setter*, el método *equals*, *hashCode*, *toString*, ahora le añade una nueva propiedad, tengo que añadir el getter y setter, modificar el hashCode, el toString, el equals, ahora quito una igual, ahora que pasa con el constructor, da un montón, un montón de pereza, bueno pues para ello Project Lombok viene a nuestro rescate.
 
 <img src="images/06-03.png">
 
-Y es que vamos a pasar de tener esas clases dónde ya digo que aunque no tengamos que programarlo y se auto genere por el IDE, la verdad es que así lo vamos a tener francamente más cómodo y más flexible frente a cambios. Podemos ver como nuestra clase va a pasar ahora a ser netamente las propiedades y un conjunto anotaciones, si solamente queremos sobrescribir algún método, añadir alguno más, pues lo podemos tener pero si es solamente getter, setter, método equals, hashCode, toString que suele pasar que en nuestro proyecto tengamos algunas clases así, solamente tendríamos que trabajar con algunas anotaciones.
+Y es que vamos a pasar de tener esas clases dónde aunque no tengamos que programarlo y se auto genere por el IDE, la verdad es que así lo vamos a tener francamente más cómodo y más flexible frente a cambios. Podemos ver como nuestra clase va a pasar ahora a ser netamente ***las propiedades y un conjunto anotaciones***, si solamente si queremos sobrescribir algún método * añadir alguno más lo podemos tener, pero si es solamente getter, setter, método equals, hashCode, toString que suele pasar que en nuestro proyecto tengamos algunas clases así, solamente tendríamos que trabajar con algunas anotaciones.
 
 <img src="images/06-04.png">
 
@@ -555,7 +555,7 @@ Vamos a ver como Lombok tiene algunas anotaciones clave:
 
 * `@Getter` nos va a permitir general los metodos getter de nuestras propiedades
 * `@Setter` nos va a permitir general los metodos setter de nuestras propiedades
-* `@RequiredArgsConstructor` el constructor de argumentos requerido no construirá un constructor con los argumentos que tenga la anotación notNull o que sean final
+* `@RequiredArgsConstructor` el constructor de argumentos requerido no construirá un constructor con los argumentos que tenga la anotación `notNull` o que sean `final`
 * `@AllArgsConstructor` el de todos los argumentos con constructor para todos 
 * `@NoArgsConstructor` el de sin argumento un constructor sin argumentos
 * `@EqualsAndHashCode` genera los métos equals y hashCode
@@ -563,14 +563,14 @@ Vamos a ver como Lombok tiene algunas anotaciones clave:
 
 <img src="images/06-05.png">
 
-También tenemos algunas anotaciones derivadas o digamos que complementan que aglutina algunas del anterior, una muy útiles es:
+También tenemos algunas anotaciones derivadas o digamos que complementan, que aglutinan algunas de las anteriores, una muy útiles es:
 
 * `@Data` que es equivalente a utilizar `@Getter`, `@Setter`, `@RequiredArgsConstructor`, `@EqualsAndHashCode` y `@ToString`
 
 
 ### Instalar Lombok
 
-Bueno pues vamos manos a la obra, esto a cómo vas como dirían. Vamos a descargarnos [Project Lombok](https://projectlombok.org/) descargamos el archivo `lombok.jar` lo que tenemos que hacer es instalar un pequeño complemento en nuestro Spring Tools Suit o en nuestro Eclipse que lo hacemos a través de esta librería `lombok.jar` y abriendo el terminal lo que hacemos es ejecutarla con `java -jar lombok.jar`.
+Bueno pues vamos manos a la obra, vamos a descargarnos [Project Lombok](https://projectlombok.org/), descargamos el archivo `lombok.jar` lo que tenemos que hacer es instalar un pequeño complemento en nuestro Spring Tools Suit o en nuestro Eclipse que lo hacemos a través de esta librería `lombok.jar` y abriendo el terminal lo que hacemos es ejecutarla con `java -jar lombok.jar`.
 
 <img src="images/06-06.png">
 
@@ -586,7 +586,6 @@ Vamos a volver a ejecutar `java -jar lombok.jar` para localizar Spring Toos Suit
 
 <img src="images/06-09.png">
 
-
 Al darle en instalar nos lo instala en Spring Toos Suite.
 
 <img src="images/06-10.png">
@@ -597,29 +596,33 @@ Lo único que tenemos que hacer ahora es incluir Lombok en nuestro proyecto.
 
 Otra cosa que daría también un montón de pereza sería tener que añadir ahora Lombok como un Jar a mano, pues no os preocupéis porque esto no tiene por que suceder y es que lo podemos ir haciendo con nuestros proyectos de Spring y lo podríamos hacer con el modo tradicional que tiene Spring para hacerlo.
 
-### Proyecto Demo Lombok
+### :computer: `143-01-Demo_Lombok` Proyecto que muestra uso de Lombok
 
 Vamos a crear un nuevo proyecto `Spring Starter Project`.
 
-<img src="images/06-11.png">
+![143-01-01](images/143-01-01.png)
 
 Lo vamos a llamar `143-01-Demo_Lombok`
 
-<img src="images/06-12.png">
+![143-02-02](images/143-02-02.png)
 
-Aquí podemos añadir las dependencias de Spring Web y Lombok es decir que lo podemos gestionar a través de Maven y que no necesitamos hacerlo con una dependencia externa que sabéis que eso es un gran quebradero de cabeza.
+Aquí podemos añadir las dependencias de Lombok y Spring Web es decir que lo podemos gestionar a través de Maven y que no necesitamos hacerlo con una dependencia externa que sabéis que eso es un gran quebradero de cabeza.
 
-<img src="images/06-13.png">
+![143-02-03](images/143-02-03.png)
+
+![143-02-04](images/143-02-04.png)
+
+![143-02-05](images/143-02-05.png)
 
 Con esto ya tenemos la estructura básica de nuestro proyecto.
 
-<img src="images/06-14.png">
+![143-02-06](images/143-02-06.png)
 
 Podríamos crear la clase modelo `Persona`
 
-<img src="images/06-15.png">
+![143-02-07](images/143-02-07.png)
 
-<img src="images/06-16.png">
+![143-02-08](images/143-02-08.png)
 
 ```java
 package com.openwebinars.lombok;
@@ -638,122 +641,66 @@ import java.time.LocalDate;
 
 public class Persona {
 	
-	private String nombre;
-	private String apellidos;
-	private LocalDate fechaNacimiento;
+   private String nombre;
+   private String apellidos;
+   private LocalDate fechaNacimiento;
 
 }
 ```
-<img src="images/06-17.png">
+
+![143-02-09](images/143-02-09.png)
 
 Y lo único que tendríamos que hacer sería añadirle anotaciones de Lombok, con `@Data`
 
-<img src="images/06-18.png">
+![143-02-10](images/143-02-10.png)
 
-vea la magia que ha sucedido, a la derecha se han generado getter, setter, equal, hashCode, toString, incluso tenemos un constructor sin argumentos esto viene definido a nivel del propio Java, cuando no hay ningún constructor definido el solo no genera un constructor sin argumentos, sin embargo si nosotros anotamos también con `@AllArgsConstructor` generamos un constructor con argumento el constructor sin argumentos desaparece.
+vea la magia que ha sucedido, a la derecha se han generado ***getter, setter, equal, hashCode, toString, incluso tenemos un constructor sin argumentos***, esto viene definido a nivel del propio Java, cuando no hay ningún constructor definido el solo nos genera un constructor sin argumentos, sin embargo si nosotros anotamos también **con `@AllArgsConstructor` generamos un constructor con argumento** el constructor sin argumentos desaparece.
 
-<img src="images/06-19.png">
+![143-02-11](images/143-02-11.png)
 
-Si quisieramos también un constructor sin argumentos Lombok tiene una anotación para ello `@NoArgsConstructor`
+Si quisieramos también **un constructor sin argumentos Lombok tiene una anotación para ello `@NoArgsConstructor`**
 
-<img src="images/06-20.png">
+![143-02-12](images/143-02-12.png)
 
 Y fijarse en la cantidad de elementos que ya tenemos disponibles.
 
-Podríamos hacer una prueba de nuestro código de Persona, en la clase `Application` podemos insertar el siguiente código que nos va a permitir ejecutarlo como si fuera un pequeño main.
+Podríamos hacer una prueba de nuestro código de `Persona`, en la clase `Application` podemos insertar el siguiente código que nos va a permitir ejecutarlo como si fuera un pequeño main.
 
 ```java
+...
 @Bean
 public CommandLineRunner lombokTest() {
 		
    return args -> {
 			
-	  Persona p1 = new Persona();
-	  p1.setNombre("Pepe");
-	  p1.setApellidos("Pérez");
-	  p1.setFechaNacimiento(LocalDate.of(1999, 1, 31) );
+      Persona p1 = new Persona();
+      p1.setNombre("Pepe");
+      p1.setApellidos("Pérez");
+      p1.setFechaNacimiento(LocalDate.of(1999, 1, 31) );
 			
-	  System.out.println(p1);
+      System.out.println(p1);
    };
 }
+...
 ```
 
-Creamos una nueva persona con su constructor sin parámetros, usamos los setter para asignarle valores a sus 3 propiedades y en el Sysout usamos no de la manera más ortodoxa el `toString`.
+Creamos una nueva `Persona` con su constructor sin parámetros, usamos los `setter` para asignarle valores a sus 3 propiedades y usamos el `Sysout` para imprimirlo usando el `toString`.
 
 Podemos ejecutar el proyecto.
 
-<img src="images/06-21.png">
+![143-02-13](images/143-02-13.png)
 
 Y ver como en la consola nos muestra `Persona(nombre=Pepe, apellidos=Pérez, fechaNacimiento=1999-01-31)`.
 
-<img src="images/06-22.png">
+![143-02-14](images/143-02-14.png)
 
-Como vemos Persona es un objeto totalmente funcional pero si nos damos cuenta su código es francamente más cómodo.
+Como vemos `Persona` es un objeto totalmente funcional pero si nos damos cuenta su código es francamente más cómodo.
 
 Hasta aquí lo que hemos aprendido de Lombok, ya estamos totalmente preparado para lanzarnos a la piscina a poder crear nuestra primera API REST con Spring Boot.
 
-### :computer: Código Completo - 143-01-Demo_Lombok
+### :computer: Código Completo `143-01-Demo_Lombok` Proyecto que muestra uso de Lombok
 
-<img src="images/06-23.png">
-
-*`pom.xml`*
-
-```html
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.openwebinars</groupId>
-	<artifactId>143-01-Demo_Lombok</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>143-01-Demo_Lombok</name>
-	<description>Práctica Lombok</description>
-
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-</project>
-```
+![143-02-15](images/143-02-15.png)
 
 *`Personana.java`*
 
@@ -769,9 +716,9 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Persona {
 	
-	private String nombre;
-	private String apellidos;
-	private LocalDate fechaNacimiento;
+   private String nombre;
+   private String apellidos;
+   private LocalDate fechaNacimiento;
 
 }
 ```
@@ -792,7 +739,7 @@ import org.springframework.context.annotation.Bean;
 public class Application {
 
    public static void main(String[] args) {
-	  SpringApplication.run(Application.class, args);
+      SpringApplication.run(Application.class, args);
    }
 	
    @Bean
@@ -805,7 +752,7 @@ public class Application {
          p1.setApellidos("Pérez");
          p1.setFechaNacimiento(LocalDate.of(1999, 1, 31) );
 			
-		 System.out.println(p1);
+         System.out.println(p1);
       };
    }
 }
