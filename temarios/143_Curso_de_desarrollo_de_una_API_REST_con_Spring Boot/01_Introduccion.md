@@ -15,6 +15,7 @@ This is *red*{: style="color: red"}.<br>
 <span style="color:blue">some *This is Blue italic.* text</span>
 
 ```diff
+Texto normal
 + this will be highlighted in green
 - this will be highlighted in red
 ```
