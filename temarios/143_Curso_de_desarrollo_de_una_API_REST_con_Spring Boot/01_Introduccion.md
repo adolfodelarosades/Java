@@ -273,7 +273,7 @@ Los métodos que más vamos a usar serán sobre todo **GET**, **POST**, **PUT** 
 
 <img src="images/04-03.png">
 
-***PUT se debería utilizar en operaciones de actualización completas, es decir que este recurso que enviamos sustituye a uno que exista*** y <span style="backcolor:yellow">**suele ser *IDEMPOTENTE* es decir que si enviáramos N veces está petición debería producir la misma modificación que enviarla una sola vez, es decir que no debería acumular modificación**</span>.
+***PUT se debería utilizar en operaciones de actualización completas, es decir que este recurso que enviamos sustituye a uno que exista*** y <span style="color:yellow">**suele ser *IDEMPOTENTE* es decir que si enviáramos N veces está petición debería producir la misma modificación que enviarla una sola vez, es decir que no debería acumular modificación**</span>.
 
 La petición DELETE que es bastante sencilla porque debería dedicarse a borrar el recurso especificado.
 
