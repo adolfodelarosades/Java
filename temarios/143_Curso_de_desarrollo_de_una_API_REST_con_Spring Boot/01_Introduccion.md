@@ -261,19 +261,19 @@ También podemos encontrar un listado exhaustivo de encabezados o cabeceras de H
 
 <img src="images/04-01.png">
 
-Vamos a congtinuar hablando del protocolo HTTP y conociendo algunos elementos más hablamos antes de los métodos y los presentamos, vamos a verloos con más detenimiento.
+Vamos a continuar hablando del protocolo HTTP y conociendo algunos elementos más, hablamos antes de los métodos y los presentamos, vamos a verlos con más detenimiento.
 
 <img src="images/04-02.png">
 
 Los métodos que más vamos a usar serán sobre todo **GET**, **POST**, **PUT** y **DELETE** que son los métodos más básico y los que podemos alinear a lo que serían los distintos verbos de un CRUD la creación de recursos, la lectura de recursos, la actualización de recurso y el borrado de recurso. 
 
-La petición GET nos sirve para solicitar un recurso al servidor y cuando lo implementemos no debería tener otro efecto que devolver el recurso solicitado, para otro tipo de efectos deberíamos utilizar otro tipo de método o verbo.
+***La petición GET nos sirve para solicitar un recurso al servidor*** y cuando lo implementemos no debería tener otro efecto que devolver el recurso solicitado, para otro tipo de efectos deberíamos utilizar otro tipo de método o verbo.
 
-Una petición POST será aquella petición que envíe datos para que sean procesados, los datos se deben incluir en el cuerpo de la petición y deberíamos utilizar este tipo de petición para crear recursos en el servidor, que el impacto sea la creación de un recurso, si lo que vamos a hacer es editar deberíamos usar el verbo PUT ya veréis como hay mucha gente que por ahí ha desarrollado cosas que parecen REST pero que en el fondo no lo son y que utiliza POST tanto para editar como para crear nuevo recurso, deberíamos utilizar solamente para esto ultimo.
+***Una petición POST será aquella petición que envíe datos para que sean procesados, los datos se deben incluir en el cuerpo de la petición y deberíamos utilizar este tipo de petición para crear recursos en el servidor***, que el impacto sea la creación de un recurso, ***si lo que vamos a hacer es editar deberíamos usar el verbo PUT***, ya veréis como hay mucha gente que por ahí ha desarrollado cosas que parecen REST pero que en el fondo no lo son y que utiliza POST tanto para editar como para crear nuevo recurso, deberíamos utilizar solamente para esto ultimo.
 
 <img src="images/04-03.png">
 
-PUT se debería utilizar en operaciones de actualización completas, es decir que este recurso que enviamos sustituye a uno que exista y suele ser *IDEMPOTENTE* es decir que si enviáramos N veces está petición debería producir la misma modificación que enviarla una sola vez, es decir que no debería acumular modificación.
+***PUT se debería utilizar en operaciones de actualización completas, es decir que este recurso que enviamos sustituye a uno que exista*** y <span style="backcolor:yellow">**suele ser *IDEMPOTENTE* es decir que si enviáramos N veces está petición debería producir la misma modificación que enviarla una sola vez, es decir que no debería acumular modificación**</span>.
 
 La petición DELETE que es bastante sencilla porque debería dedicarse a borrar el recurso especificado.
 
