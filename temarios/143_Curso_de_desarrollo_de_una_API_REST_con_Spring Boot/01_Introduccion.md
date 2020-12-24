@@ -273,7 +273,7 @@ Vamos a continuar hablando del protocolo HTTP y conociendo algunos elementos má
 
 <img src="images/04-02.png">
 
-Los métodos que más vamos a usar serán sobre todo **GET**, **POST**, **PUT** y **DELETE** que son los métodos más básico y los que podemos alinear a lo que serían los distintos verbos de un CRUD la creación de recursos, la lectura de recursos, la actualización de recurso y el borrado de recurso. 
+Los métodos que más vamos a usar serán sobre todo **GET**, **POST**, **PUT** y **DELETE** que son los métodos más básico y los que podemos alinear a lo que serían los distintos verbos de un CRUD, la creación de recursos, la lectura de recursos, la actualización de recurso y el borrado de recurso. 
 
 ***La petición GET nos sirve para solicitar un recurso al servidor*** y cuando lo implementemos no debería tener otro efecto que devolver el recurso solicitado, para otro tipo de efectos deberíamos utilizar otro tipo de método o verbo.
 
@@ -285,7 +285,7 @@ Los métodos que más vamos a usar serán sobre todo **GET**, **POST**, **PUT** 
 
 ***La petición DELETE que es bastante sencilla porque debería dedicarse a borrar el recurso especificado***.
 
-Como decía estos son los que más vamos a utilizar pero no son los únicos.
+Estos son los que más vamos a utilizar pero no son los únicos.
 
 <img src="images/04-04.png">
 
@@ -303,37 +303,41 @@ Si hablamos de encabezados o cabeceras en inglés **HEADERS** ***son metadatos q
 
 <img src="images/04-06.png">
 
-Como decía este encabezado o cabecera va a dar una gran flexibilidad porque el protocolo dice que debe haber encabezado pero a lo largo del tiempo han ido apareciendo más, con lo cual no nos ceñimos a tener solamente unos pocos, frente a otros esquemas, como decíamos antes otros tipo de protocolos donde cualquier cambio producia un gran impacto, aquí con el tiempo han ido apareciendo nuevos encabezados que han resultado francamente útiles. Deben ser interpretados por el cliente o por el servidor o por los intermediarios si tuvieron algún tipo de Proxy, de Gateway.
+Este encabezado o cabecera va a dar una gran flexibilidad porque el protocolo dice que debe haber encabezado pero a lo largo del tiempo han ido apareciendo más, con lo cual no nos ceñimos a tener solamente unos pocos, frente a otros esquemas, como decíamos antes otros tipo de protocolos donde cualquier cambio producia un gran impacto, aquí con el tiempo han ido apareciendo nuevos encabezados que han resultado francamente útiles. Deben ser interpretados por el cliente o por el servidor o por los intermediarios si tuvieron algún tipo de Proxy, de Gateway.
 
 <img src="images/04-07.png">
 
-Tenemos tres tipos ***los encabezados de petición, los encabezados de respuesta y los encabezados de peticiones-respuesta*** que podemos encontrar los mensajes de ambos tipos hay muchos que son estándares los podemos visitar por aquí:
+Tenemos tres tipos de encabezados: ***los encabezados de petición, los encabezados de respuesta y los encabezados de peticiones-respuesta*** que podemos encontrarlos en mensajes de ambos tipos, hay muchos que son estándares los podemos visitar por aquí:
 
 https://developer.mozilla.org/es/docs/Web/HTTP/Headers
 
-Los tipos de cabeceras que hay.
+Para ver los tipos de cabeceras que hay.
 
 <img src="images/04-08.png">
 
-Vamos a ver alguna pequeña clasificación en función de a qué se dedican, si hablamos de por ejemplo el clientes y queremos ver qué son aceptadas por el cliente que envía el mensaje uno de los encabezados de las cabeceras más importantes es **Accept** esto se envían una petición y le estamos diciendo al servidor el tipo de formato que vamos a aceptar normalmente se envía un tipo MIME, entonces si nosotros tenemos una API que soporta la representación de los recursos en distintos formatos podríamos decirle oye yo en particular ahora en lugar de un JSON quiero tener esto en XML o si puedes me envías una representación en HTML del recurso y esto es francamente útil porque ya digo que si es soportado por el servidor podríamos ir variando.
+Vamos a ver alguna pequeña clasificación en función de a qué se dedican, si hablamos de por ejemplo del clientes y queremos ver qué cuales son aceptadas por el cliente que envía el mensaje, uno de los encabezados de las cabeceras más importantes es **Accept** esto se envían una petición y le estamos diciendo al servidor el tipo de formato que vamos a aceptar normalmente se envía un tipo MIME, entonces si nosotros tenemos una API que soporta la representación de los recursos en distintos formatos podríamos decirle, oye yo en particular ahora en lugar de un JSON quiero tener esto en XML, o si puedes me envías una representación en HTML del recurso, esto es francamente útil porque si es soportado por el servidor podríamos ir variandolo.
 
-También hay veces que utilizamos **Accept-Charset** para indicar oye pues yo lo quiero en UTF-8, en latín o en otro tipo de codificación.
+También hay veces que utilizamos **Accept-Charset** para indicar, oye pues yo lo quiero en UTF-8, en latín ISO o en otro tipo de codificación.
 
 Otro muy común suele ser **User-Agent** que se utiliza para hacer una descripción del cliente que hace la petición.
 
 <img src="images/04-09.png">
 
-Para la descripción del contenido por ejemplo pues tendríamos **Content-Type** o **Content-Length** no podría venir una respuesta y no diría que el contenido que te estoy enviando es de este tipo MIME particular o tiene esta longitud.
+Para la descripción del contenido tendríamos **Content-Type** o **Content-Length**, nos podría venir una respuesta y nos diría que el contenido que te estoy enviando es de este tipo MIME en particular o tiene esta longitud.
 
 <img src="images/04-10.png">
 
-A nivel de hacer referencia a las URIs tenemos algunas como `Location` que indica dónde está el contenido posiblemente completo, también para autenticación tenemos alguna como `Authorization` o `WWW-Authenticate` que se utilizan en mecanismo de seguridad.
+A nivel de hacer referencia a las **URIs** tenemos algunas como `Location` que indica dónde está el contenido posiblemente completo, también para **autenticación** tenemos alguna como `Authorization` o `WWW-Authenticate` que se utilizan en mecanismo de seguridad.
 
 Estás serían una de las más conocidas o de las cuales nos podemos ir encontrar.
 
 <img src="images/04-11.png">
 
-Si queremos ver un diálogo que está extraído de la Wikipedia, si dijéramos descargar en el navegador esta URL `www.example.com/index.html` por debajo en la cocina podríamos decir del navegador y el servidor esto es lo que sucedería, se abre una conexión en el puerto 80, el mensaje del lado derecho es el que se enviaría como petición indicando el tipo de petición,  hacia quién se hace, la versión del protocolo, a qué Host, quíen es el user-agents como no se envía ningún tipo de dato en el cuerpo de la petición vendría una línea en blanco y nada más y en la respuesta, la del lado derecho, podemos ver como nos respondería con la versión del protocolo, el código 200 que todo va bien ,la fecha, el tipo de contenido, el tamaño, un espacio en blanco porque terminan las cabeceras y a partir de aquí todo el contenido.
+Si queremos ver un diálogo que está extraído de la Wikipedia, si dijéramos descargar en el navegador esta URL `www.example.com/index.html` por debajo, en la cocina podríamos decir del navegador y el servidor esto es lo que sucedería:
+
+* Se abre una conexión en el puerto 80
+* El mensaje del lado derecho es el que se enviaría como petición indicando el tipo de petición,  hacia quién se hace, la versión del protocolo, a qué Host, quíen es el user-agents como no se envía ningún tipo de dato en el cuerpo de la petición vendría una línea en blanco y nada más.
+* En la respuesta, la del lado derecho, podemos ver como nos respondería con la versión del protocolo, el código 200 OK que todo va bien ,la fecha, el tipo de contenido, el tamaño, un espacio en blanco porque terminan las cabeceras y a partir de aquí todo el contenido.
 
 Con esto podemos ver cómo va funcionando el protocolo HTTP sobre el cual se va a basar REST y a partir de ahora en la próxima lección ya podemos ir viendo cómo ir montando nuestro entorno para empezar a poner ya el foco en programar nuestras APIs REST.
 
@@ -447,37 +451,37 @@ Vamos a continuar con nuestro curso de desarrollo de un API REST con Spring Boot
 
 <img src="images/05-02.png">
 
-Podemos crear proyectos con Spring con alguna de nuestro IDEs favorito cómo puede ser Eclipse, IntelliJ J IDEA o Visual Studio nosotros vamos a utilizar Spring Tool Suite es una extensión para algunos IDEs conocidos y que nos permite trabajar con proyectos Spring de una manera súper fácil y conveniente, está disponible para Eclipse, de hecho para nosotros será el Bounden que utilizamos, se puede descargar Eclipse ya con el con el plugin instalado de Spring Tool Suite y bueno si no también lo tenemos como extensión disponible para Visual Studio Code para Thela y si quisiera mas alla también con IntelliJ J aunque Spring Tool Suite plugin no existe para IntelliJ J pero es verdad que sobre todo en su versión de pago tiene una serie de extensiones que nos permitirían trabajar con un proyecto con total tranquilidad, que no tenéis la versión de pago y tenéis la versión gratuita pues también a través del servicio Starter se pueden generar fácilmente los proyectos, se importan como maven y podrían funcionar, ya digo nosotros vamos a trabajar con Spring Tool Suite.
+Podemos crear proyectos con Spring con alguna de nuestro IDEs favorito cómo puede ser Eclipse, IntelliJ J IDEA o Visual Studio, nosotros vamos a utilizar Spring Tool Suite es una extensión para algunos IDEs conocidos y que nos permite trabajar con proyectos Spring de una manera súper fácil y conveniente, está disponible para Eclipse, de hecho para nosotros será el Bounden que utilizamos, se puede descargar Eclipse ya con el con el plugin instalado de Spring Tool Suite y bueno si no también lo tenemos como extensión disponible para Visual Studio Code, para Thela y si quisiera ir mas alla también podemos usar IntelliJ IDEA aunque Spring Tool Suite plugin no existe para IntelliJ J, pero es verdad que sobre todo en su versión de pago tiene una serie de extensiones que nos permitirían trabajar con un proyecto con total tranquilidad, que no tenéis la versión de pago y tenéis la versión gratuita pues también a través del servicio Starter se pueden generar fácilmente los proyectos, se importan como maven y podrían funcionar, ya digo nosotros vamos a trabajar con Spring Tool Suite.
 
 <img src="images/05-03.png">
 
-El Bounden para Eclipse esta disponible para Windows para para Mac para Linux también hay extensiones para Visual Studio Code para Thela para alguno de vuestros IDEs favoritos, nosotros trabajaremos con Spring Tool Suite os lo podéis descargar desde la web de [Spring Tool Suite](https://spring.io/tools) desde aquí lo podéis descargar con total tranquilidad para Linux, para Mac, para Windows simplemente hay que descomprimirlo allá donde lo queráis utilizar y ni siquiera instalarlo y doble click y lo podría empezar a ejecutar, con una serie de funcionalidades ya digo bastante interesante y francamente cómodo. También para los más viejos del lugar tienen la versión 3 por si quieren todavía trabajar con ella, útil sobre todo si van a trabajar con algún proyecto Legacy que no utilice Spring Boot o alguna cosa bastante bastante más vieja.
+El Bounden para Eclipse esta disponible para Windows, para para Mac, para Linux, también hay extensiones para Visual Studio Code, para Thela, para alguno de vuestros IDEs favoritos, nosotros trabajaremos con Spring Tool Suite os lo podéis descargar desde la web de [Spring Tool Suite](https://spring.io/tools) desde aquí lo podéis descargar con total tranquilidad para Linux, para Mac, para Windows, simplemente hay que descomprimirlo allá donde lo queráis utilizar y ni siquiera instalarlo y doble click y lo podría empezar a ejecutar, con una serie de funcionalidades bastante interesante y francamente cómodo. También para los más viejos del lugar tienen la versión 3 por si quieren todavía trabajar con ella, útil sobre todo si van a trabajar con algún proyecto Legacy que no utilice Spring Boot o alguna cosa bastante bastante más vieja.
 
 <img src="images/05-04.png">
 
-A nivel de Java deciros que la versión mínima será la versión 8, de hecho la 8 la tienes que tener instalada porque a día de hoy es necesaria para poder ejecutar Eclipse con Spring Tool Suite pero también podríais tener alguna versión adicional como la versión 9, la 11, versiones LTS que ofrecen alguna funcionalidad más, de hecho a lo mejor en algún punto del curso digo si estuvierais Java 9 o Java 11 lo podrían hacer así. 
+A nivel de Java deciros que la versión mínima será la versión 8, de hecho la 8 la tienes que tener instalada porque a día de hoy es necesaria para poder ejecutar Eclipse con Spring Tool Suite, pero también podríais tener alguna versión adicional como la versión 9, la 11, versiones LTS que ofrecen alguna funcionalidad más, de hecho a lo mejor en algún punto del curso digo si estuvierais Java 9 o Java 11 lo podrían hacer así. 
 
-Si trabajáis en Linux es verdad que además para poder gestionar estas varias versiones de Java tenemos por ahí algún alguna herramienta como es [SDK-MAN](https://sdkman.io/) que a través de la consola o permitirían que pudiera ir gestionar la descarga de distintos JDK en realidad ya no es el momento de comentarlo pero no son el JDK oficial de Oracle cuyo licenciamiento pues cambio hace ya un tiempo sino que son otros open JDK podríamos descargar y tener diferentes versión instalada y conmutar entre algunas de ellas en determinados momentos.
+Si trabajáis en Linux es verdad que además para poder gestionar estas varias versiones de Java tenemos por ahí algún alguna herramienta como es [SDK-MAN](https://sdkman.io/) que a través de la consola o permitirían que pudiera ir gestionar la descarga de distintos JDK, en realidad ya no es el momento de comentarlo pero no son el JDK oficial de Oracle cuyo licenciamiento pues cambio hace ya un tiempo, sino que son otros open JDK que podríamos descargar y tener diferentes versiones instaladas y conmutar entre algunas de ellas en determinados momentos.
 
 <img src="images/05-05.png">
 
-Decir que Sprint ya hemos hablado en nuestro entorno de desarrollo como tal, ahora hablar del entorno en el cual nos vamos a mover en el Framework es un gran ecosistema de proyectos que incluye un montón de proyecto y además alguno de esos proyectos también son proyectos que podríamos llamar paraguas sobre otros que van dentro. Algunos de ellos como por ejemplo los que tenemos aquí Spring Boot, Spring Framework, Spring Security, Spring Data algunos de ellos o con muchos de ellos lo utilizaremos a lo largo de este curso o de sucesivos curso sobre sobre API REST con Spring.
+Decir que Spring, ya hemos hablado en nuestro entorno de desarrollo como tal, ahora hablar del entorno en el cual nos vamos a mover en el Framework es un gran ecosistema de proyectos que incluye un montón de proyecto y además alguno de esos proyectos también son proyectos que podríamos llamar paraguas sobre otros que van dentro. Algunos de ellos como por ejemplo los que tenemos aquí ***Spring Boot, Spring Framework, Spring Security, Spring Data*** algunos de ellos o muchos de ellos los utilizaremos a lo largo de este curso o de sucesivos curso sobre API REST con Spring.
 
 <img src="images/05-06.png">
 
-Vamos a conocer alguno con algo más de profundidad cómo sería Spring Boot que facilita la creación de aplicaciones basadas con Spring de manera que sea independiente y lista para usar con un esfuerzo mínimo, tiene una gestión superfácil a través de dependiendo de si usamos Maven o Gradel a través del fichero `pom.xml` o `build.gradle`, nosotros trabajaremos con Maven, nos permite tener el servidor embebido dentro de la aplicación en lugar de hacerlo al contrario, ya no tenemos que tener un servidor instalado, generar un WAR y mandar allí la aplicación si no que vamos a tener nuestro servidor dentro de nuestro WAR lo cual será más fácil de ejecutar. Una serie de dependencia Starter dependencia iniciales que facilitan la configuración de componentes, que son capaces de escanear si tenemos en el ClassPath alguna librería incluida para activar o no determinada acción de configuración, de alguna librería de terceros y todo ello sin generar ni una línea prácticamente de codigo o de configuración XML, no es que por detrás se vaya generando clase y clase sino que todo sucede de manera transparente o como a mí me gusta decir auto mágica.
+Vamos a conocer alguno con algo más de profundidad cómo sería ***Spring Boot que facilita la creación de aplicaciones basadas con Spring*** de manera que sean independientes y listas para usar con un esfuerzo mínimo, tiene una gestión superfácil a través de dependiendo de si usamos **Maven** o **Gradel** a través del fichero `pom.xml` o `build.gradle`, nosotros trabajaremos con Maven, nos permite tener el servidor embebido dentro de la aplicación en lugar de hacerlo al contrario, ya no tenemos que tener un servidor instalado, generar un WAR y mandar allí la aplicación si no que vamos a tener nuestro servidor dentro de nuestro WAR lo cual será más fácil de ejecutar. Una serie de dependencia Starter dependencia iniciales que facilitan la configuración de componentes, que son capaces de escanear si tenemos en el ClassPath alguna librería incluida para activar o no determinada acción de configuración, de alguna librería de terceros y todo ello sin generar ni una línea prácticamente de codigo o de configuración XML, no es que por detrás se vaya generando clase y clase sino que todo sucede de manera transparente o como a mí me gusta decir auto mágica.
 
 <img src="images/05-07.png">
 
-Tenemos también un servicio que es Spring Initializr y que nos va a permitir generar rápidamente nuestros proyectos, quien quiera sobre todo aquellos que uséis Inteligente IDEA necesitaran esto para generar de una manera más fácil un project Spring, incluso hay alguna herramienta que nos permite hacerlo desde la línea de comandos, aunque está es exactamente comoda, nosotros tendremos esta herramienta integrada dentro de nuestro Spring Tools Suit no nos hará falta recurrir a esta herramienta externa.
+Tenemos también un servicio que es **Spring Initializr** que nos va a permitir generar rápidamente nuestros proyectos, quien quiera sobre todo aquellos que uséis Inteligente IDEA necesitaran esto para generar de una manera más fácil un project Spring, incluso hay alguna herramienta que nos permite hacerlo desde la línea de comandos, aunque está es exactamente comoda, nosotros tendremos esta herramienta integrada dentro de nuestro Spring Tools Suit, no nos hará falta recurrir a esta herramienta externa.
 
 <img src="images/05-08.png">
 
-Como elemento más de entorno decir que utilizaremos Postman, Postman es un cliente que nos va a permitir interactuar con nuestra API REST, de hecho nos ayuda un montón al desarrollo y al testeo, existen versiones tanto para Windows, como para Linux, para Mac, tenéis web para descargar [Postman](https://www.postman.com) y podéis acceder y descargar la versión del sistema operativo Mac, Windows la instalación es bastante sencilla. Tiene una serie de pestañas en las cuales vamos a poder hacer diferentes peticiones en las cuales podemos pasar algunos datos y que nos dará la respuesta, tiene una API REST que existe de ejemplo y podríamos hacer una petición GET y por detrás suceden cosas, nos devuelve la respuesta ya incluso en un formato Pretty en el cual podemos ir viendo el tipo de código de respuesta, las cookies que hay, los distintos encabezados que hemos tenido como respuesta, en otro tipo de peticiones si fueran POST nosotros podremos crear recursos, aplicar elementos de seguridad, enviar otros encabezdos, elementos en el cuerpo, etc. la verdad es que Postman va a ser para nosotros de una gran utilidad ya digo lo podremos utilizar en nuestra API REST de una manera súper cómoda.
+Como elemento más de entorno decir que utilizaremos **Postman**, ***Postman es un cliente que nos va a permitir interactuar con nuestra API REST***, de hecho nos ayuda un montón al desarrollo y al testeo, existen versiones tanto para Windows, como para Linux, para Mac, tenéis web para descargar [Postman](https://www.postman.com) y podéis acceder y descargar la versión del sistema operativo Mac, Windows, la instalación es bastante sencilla. Tiene una serie de pestañas en las cuales vamos a poder hacer diferentes peticiones en las cuales podemos pasar algunos datos y que nos dará la respuesta, tiene una API REST que existe de ejemplo y podríamos hacer una petición GET y por detrás suceden cosas, nos devuelve la respuesta ya incluso en un formato Pretty en el cual podemos ir viendo, el tipo de código de respuesta, las cookies que hay, los distintos encabezados que hemos tenido como respuesta, en otro tipo de peticiones si fueran POST nosotros podremos crear recursos, aplicar elementos de seguridad, enviar otros encabezdos, elementos en el cuerpo, etc. la verdad es que Postman va a ser para nosotros de una gran utilidad ya digo lo podremos utilizar en nuestra API REST de una manera súper cómoda.
 
 <img src="images/05-09.png">
 
-Si eres más de consola puede utilizarse **cURL** esto se usa en un terminal, nos permitiría hacer diferentes peticiones, en el material adicional dice como instalarlo en Ubuntu, en Mac o en Windows. Es verdad que hay que conocer su sintaxis, de cómo hacer peticiones pero también es verdad que nos permitiría sin necesidad de ningún otro tipo de herramienta gráfica hacer peticiones y ver todo ello desde el terminal, de hecho nos permitiría interactuar y construir herramientas complementarias haciendo algún tipo de Script que hiciera petición a algún tipo de servicio, que recibirá después datos, encadenarlo con otra petición etc.
+Si eres más de consola puede utilizarse **cURL** esto se usa en un terminal, nos permitiría hacer diferentes peticiones, en el material adicional dice como instalarlo en Ubuntu, en Mac o en Windows. Es verdad que hay que conocer su sintaxis, de cómo hacer peticiones, pero también es verdad que nos permitiría sin necesidad de ningún de otro tipo de herramienta gráfica hacer peticiones y ver todo ello desde el terminal, de hecho nos permitiría interactuar y construir herramientas complementarias, haciendo algún tipo de Script que hiciera petición a algún tipo de servicio, que recibirá después datos, encadenarlo con otra petición etc.
 
 Bueno con esto hemos visto todas las herramientas, proyectos, el framework que vamos a utilizar en nuestro entorno y ya lo que nos queda es lanzarnos a su uso y aprendizaje.
 
