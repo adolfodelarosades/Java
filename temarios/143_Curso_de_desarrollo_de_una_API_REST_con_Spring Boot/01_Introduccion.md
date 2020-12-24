@@ -764,7 +764,7 @@ public class Application {
 
 ## Resumen Profesor
 
-### `HttpMessageConverter`s por defecto
+### `HttpMessageConverter` por defecto
 
 Spring Boot ofrece una serie de instancias de `HttpMessageCoverter` por defecto en nuestros proyectos web:
 
@@ -787,46 +787,44 @@ Vamos a completar este bloque viendo que no ofreces Spring Boots para poder desa
 
 <img src="images/07-02.png">
 
-
-Por lo pronto si desarrollamos nuestras API REST con Spring Boot vamos a tener toda la potencia de Spring Boots, es decir que podemos aprovechar inyección de dependencia, acceso datos, seguridad, utilidades todo lo que ya nos ofrecía lo podemos aprovechar en este contexto.
+Por lo pronto si desarrollamos nuestras API REST con **Spring Boot** vamos a tener toda la potencia de Spring Boots, es decir que podemos aprovechar ***inyección de dependencia, acceso datos, seguridad***, utilidades todo lo que ya nos ofrecía lo podemos aprovechar en este contexto.
 
 <img src="images/07-03.png">
 
-De hecho ya nos ofrece elementos específicos para REST, frente a anotaciones como `@Controller`, los beans de tipo `@Controller` que teníamos en en aplicaciones MVC normales tenemos `@RestController` que nos permite tener una combinación de `@Controller` y `@ResponseBody` es decir se modifica el mecanismo de renderizacion de la vista y en lugar de redirigirnos a través de una compleja cadena Beans de Beoresolver tal, una plantilla de Thymeleaf o de JSP ubicada en una determinada carpeta, el procesamiento de la misma lo que hace que lo que devolvamos en el método será lo que se envía al cliente, si es posible que pase por un filtro ya veremos de qué tipo, que lo que hace es transformarlo de Java a un JSON o XML.
+De hecho ya nos ofrece elementos específicos para REST, frente a anotaciones como `@Controller`, los beans de tipo `@Controller` que teníamos en en aplicaciones MVC normales tenemos `@RestController` que nos permite tener una combinación de `@Controller` y `@ResponseBody` es decir se modifica el mecanismo de renderizacion de la vista y en lugar de redirigirnos a través de una compleja cadena `Beans` de `Beresolver` tal, una plantilla de Thymeleaf o de JSP ubicada en una determinada carpeta, el procesamiento de la misma, lo que devolvamos en el método será lo que se envía al cliente, si es posible que pase por un filtro ya veremos de qué tipo, que lo que hace es transformarlo de Java a un JSON o XML.
 
 <img src="images/07-04.png">
 
 Aquí tenemos por ejemplo un pequeño fragmento de código de lo que sería un `@RestController`
-en el cual podemos dar cuenta que está en negrita, la anotación cambia, la del método si es verdad que puede ser la misma y el tipo de retorno en lugar de ser String, ModelAndView etc. de los clásicos que podemos tener, puede ser un tipo de dato de nuestro modelo que a través de un determinado mecanismo se transformara ese recurso en una representación normalmente en JSON. 
+en el cual podemos dar cuenta que está en negrita, la anotación cambia, la del método si es verdad que puede ser la misma y el tipo de retorno en lugar de ser `String`, `ModelAndView` etc. de los clásicos que podemos tener, puede ser un tipo de dato de nuestro modelo que a través de un determinado mecanismo se transformara ese recurso en una representación normalmente en JSON. 
 
 <img src="images/07-05.png">
 
-De eso se encarga un tipo de Beans especial que son `HTTPMessageConverter` y que serán los qué formaten el contenido que le entreguemos al cliente, al incluir la dependencia *starter web* se añade alguna librería entre ellas *Jackson 2* y entre otro, tenemos algunos Converter como por ejemplo el de `MappingJackson[2]HttpMessageConverter` que lo que hace es convertir por ejemplo la respuesta, una clase Java en un objeto JSON, en una cadena JSON y eso será bastante útil, ya digo que esto sucederá casi que automámagicamente porque por incluir en Spring Boot la dependencia *starter web* y por utilizar la anotación `@RestController` todo sucederá como por arte de magia.
+De eso se encarga un tipo de Bean especial que son `HTTPMessageConverter` y que serán los qué formaten el contenido que le entreguemos al cliente, al incluir la dependencia *starter web* se añade alguna librería entre ellas *Jackson 2* y entre otro, tenemos algunos Converter como por ejemplo el de `MappingJackson[2]HttpMessageConverter` que lo que hace es convertir por ejemplo la respuesta, una clase Java en un objeto JSON, en una cadena JSON y eso será bastante útil, ya digo que esto sucederá casi que automámagicamente porque por incluir en Spring Boot la dependencia *starter web* y por utilizar la anotación `@RestController` todo sucederá como por arte de magia.
 
 Hay más `MessageConverter` en el material adicional os dejo un listado de los más habituales e incluso vosotros podría implementar el propio vuestro customizado.
 
 <img src="images/07-06.png">
 
-Algunas de las clases que utilizaremos y que posiblemente algunas de ellas las desgranaremos más adelante son `HTTPEntity` que representa una petición o respuesta un mensaje, tenemos la 
-concreción en `RequestEntity` y `ResponseEntity` que utilizaremos más, que nos permite modelar muy bien la respuesta que se le va a dar al usuario, añadiendo el código de estado que enviamos en el cuerpo, encabezados que se manden, etc. la clase `MediaType` qué es una subclase de MIME y que tiene un listado de constantes con los diferentes tipos de datos `ApplicationJason`, `application.xml`, etc. La clase `HTTPHeaders` que representa los encabezados de una petición o respuesta estas serán algunas de las que más podamos utilizar.
+Algunas de las clases que utilizaremos y que posiblemente algunas de ellas las desgranaremos más adelante son `HTTPEntity` que representa una petición o respuesta un mensaje, tenemos la concreción en `RequestEntity` y `ResponseEntity` que utilizaremos más, que nos permite modelar muy bien la respuesta que se le va a dar al usuario, añadiendo el código de estado que enviamos en el cuerpo, encabezados que se manden, etc. la clase `MediaType` qué es una subclase de MIME y que tiene un listado de constantes con los diferentes tipos de datos `ApplicationJason`, `ApplicationXml`, etc. La clase `HTTPHeaders` que representa los encabezados de una petición o respuesta estas serán algunas de las que más podamos utilizar.
 
 <img src="images/07-07.png">
 
-Si hablamos de seguridad, no vamos a implementar la seguridad dentro de este curso, porque entonces sería inabarcable, pero decir que nos permite Spring integral Spring Security y por tanto aplicar la configuración tal cual la podemos aplicar en una en un proyecto web, tendríamos diferentes posibilidades de llegar a la autenticación como sería la Basic que es una que está definida en un RFC, la JWT, OAuth sobre todo en la versión OAuth2, tendremos diferentes tipo de alternativa.
+Si hablamos de seguridad, no vamos a implementar la seguridad dentro de este curso, porque entonces sería inabarcable, pero decir que nos permite Spring integrar Spring Security y por tanto aplicar la configuración tal cual la podemos aplicar en una en un proyecto web, tendríamos diferentes posibilidades de llegar a la autenticación como sería la Basic que es una que está definida en un RFC, la JWT, OAuth sobre todo en la versión OAuth2, tendremos diferentes tipo de alternativa.
 
 <img src="images/07-08.png">
 
-Spring también nos ofrece no solamente hacer la parte servidora sino que podriamos hacer una applicación por ejemplo Cliente que por poner tuviera una serie de controladores que nos remitirá a una plantilla de Thymeleaf pero que en lugar de extraer los datos desde un servicio hacia una base de datos que lo pudieran hacer desde un API REST remota a través de la clase RestTemplate, si alguna vez nuestra API tiene que hacer peticiones a otra API, que eso sucede con más frecuencia de la que podemos imaginar, pues nos permitirá hacer peticiones de este tipo, de hecho utiliza todas las clases que veníamos explicando antes de RequestEntity, ResponseEntity, HTTPHeader, etc. 
+Spring también nos ofrece no solamente hacer la parte servidora sino que podriamos hacer una applicación Cliente que por poner tuviera una serie de controladores que nos remitirá a una plantilla de Thymeleaf, pero que en lugar de extraer los datos desde un servicio hacia una base de datos, que lo pudieran hacer desde un API REST remota a través de la clase `RestTemplate`, si alguna vez nuestra API tiene que hacer peticiones a otra API, que eso sucede con más frecuencia de la que podemos imaginar, pues nos permitirá hacer peticiones de este tipo, de hecho utiliza todas las clases que veníamos explicando antes de `RequestEntity`, `ResponseEntity`, `HTTPHeader`, etc. 
 
 <img src="images/07-09.png">
 
-Como elementos más avanzados tenemos también que Spring ofrece el soporte para servicio REST a través de Spring Data REST qué es algo así como mezclar Spring Data con la generación rápida de un API REST y que veremos cómo es capaz de transformar rápidamente un repositorio de Spring Data en toda una API con todo su controlador ya montado y sin que tengamos que poner casi ni una línea de código adicional.
+Como elementos más avanzados tenemos también que Spring ofrece el soporte para servicio REST a través de **Spring Data REST** qué es algo así como mezclar Spring Data con la generación rápida de un API REST y que veremos cómo es capaz de transformar rápidamente un repositorio de Spring Data en toda una API con todo su controlador ya montado y sin que tengamos que poner casi ni una línea de código adicional.
 
-Tenemos también el proyecto Spring HATEOAS son las siglas de Hipermedia as the Engine of Application State, la hipermedia como el motor del estado de la aplicación que nos permite crear fácilmente este proyecto en la aplicación siguiendo este principio y además aprovechando el uso de HAL de un lenguaje específico de hipertexto y qué bueno planteando la facilidad que existe a día de hoy en cualquier web de pinchando enlaces pásate un recurso otro que aplicarlo mismo en nuestra API REST. 
+Tenemos también el proyecto **Spring HATEOAS** son las siglas de ***Hipermedia as the Engine of Application State***, la hipermedia como el motor del estado de la aplicación, que nos permite crear fácilmente este proyecto en la aplicación siguiendo este principio y además aprovechando el uso de **HAL** de un lenguaje específico de hipertexto y qué bueno planteando la facilidad que existe a día de hoy en cualquier web de pinchando enlaces pásate un recurso otro que aplicarlo mismo en nuestra API REST. 
 
 <img src="images/07-10.png">
 
-También Spring Rest Docs que nos permite documentar un servicio RST combinando Sprint MVC Test o Asciidoctor, todo este sería el soporte que nos ofrece Spring a la hora de crear nuestro API REST y que en las próximas lecciones pondremos en práctica.
+También **Spring Rest Docs** que nos permite documentar un servicio REST combinando **Sprint MVC Test** o **Asciidoctor**, todo este sería el soporte que nos ofrece Spring a la hora de crear nuestro API REST y que en las próximas lecciones pondremos en práctica.
 
 # Contenido adicional  7
 
