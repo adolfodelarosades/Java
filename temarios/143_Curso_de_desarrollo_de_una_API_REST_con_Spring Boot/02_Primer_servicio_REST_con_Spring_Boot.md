@@ -166,7 +166,7 @@ Aunque tengamos solamente el navegador y le damos a inspeccionar Network y recar
 ![13-rfws](images/13-rfws.png)
 ![14-rfws](images/14-rfws.png)
 
-podemos ver como el navegador por detrás con esa petición GET ha enviado alguna serie de elementos y ha recibido la respuesta, tendríamos incluso los encabezados de la respuesta así como de la petición, como lo ha ido gestionando el propio navegador para que veamos que todo eso va sucediendo de verdad. todas las anotaciones que hemos visto antes se van utilizando tanto en peticiones como en respuestas, el tipo de contenido, la fecha, el código de estado 200 y lo ponen en verde como OK, lo que nosotros hemos enviado como parte de la petición para que veamos que esto ha sucedido conforme a nosotros lo hemos programado.
+Podemos ver como el navegador por detrás con esa petición GET ha enviado alguna serie de elementos y ha recibido la respuesta, tendríamos incluso los encabezados de la respuesta así como de la petición, como lo ha ido gestionando el propio navegador para que veamos que todo eso va sucediendo de verdad. Todas las anotaciones que hemos visto antes se van utilizando tanto en peticiones como en respuestas, el tipo de contenido, la fecha, el código de estado 200 y lo ponen en verde como OK, lo que nosotros hemos enviado como parte de la petición para que veamos que esto ha sucedido conforme a nosotros lo hemos programado.
 
 Podemos probar mandando un nombre con el URL `http://localhost:8080/greeting?name=Pedro` obtenemos.
 
@@ -182,6 +182,60 @@ Hasta aquí nuestro primer servicio, vamos a ver ahora como con Postman como cli
 ### :computer: Código Completo `gs-rest-service-complete`
 
 ![21-rfws](images/21-rfws.png)
+
+*`Pom.xml`*
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.3.2.RELEASE</version>
+      <relativePath/> <!-- lookup parent from repository -->
+   </parent>
+   <groupId>com.example</groupId>
+   <artifactId>rest-service</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>rest-service</name>
+   <description>Demo project for Spring Boot</description>
+
+   <properties>
+      <java.version>1.8</java.version>
+   </properties>
+
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+         <exclusions>
+            <exclusion>
+               <groupId>org.junit.vintage</groupId>
+               <artifactId>junit-vintage-engine</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
+
+</project>
+```
 
 *`Greeting`*
 
@@ -279,9 +333,9 @@ Para ejecutar nuestra aplicación tenemos dos mecanismos, hacerlo desde el propi
 
 La ventaja de usar el IDE es que tenemos varios botones que nos permiten hacer varias cosas como:
 
-* Botón de parada 
-* Botón de relanzamiento de la aplicación
-* Botón Relauch que resulta súper cómodo cuando estamos trabajando y si no estamos utilizando DevTools que no puede relanzar la aplicación con cambios de código para parar la aplicación y volverla a lanzar.
+* **Botón de parada** 
+* **Botón de relanzamiento** de la aplicación
+* **Botón Relauch** que resulta súper cómodo cuando estamos trabajando y si no estamos utilizando **DevTools** que nos relanza automáticamente la aplicación cuando hacemos cambios en el código, con este botón podemos parar la aplicación y volverla a lanzar.
 
 <img src="images/09-13.png">
 
@@ -295,17 +349,19 @@ $ mvn install
 $ mvn spring-boot:run
 ```
 
-Tendríamos que estar en el directorio raíz de la aplicación y tener instalado Maven. 
+Tendríamos que estar en el directorio raíz de la aplicación y tener instalado Maven. Con `mvn clean` hariamos alguna limpieza con cosas que no esten bien. 
 
-<img src="images/09-10.png">
+![22-rfws](images/22-rfws.png)
 
-Con `mvn clean` hariamos alguna limpieza con cosas que no esten bien y con `mvn install` para realizar las descargas de las dependencias y todo lo que necesite. 
+ y con `mvn install` para realizar las descargas de las dependencias y todo lo que necesite. 
 
-<img src="images/09-11.png">
+![23-rfws](images/23-rfws.png)
 
-Y con `mvn spring-boot:run` que nos permite ejecutar la aplicación sin necesidad de estar dentro del IDE, con el IDE apagado podríamos hacer estar puesta en marcha de la propia aplicación.
+![24-rfws](images/24-rfws.png)
 
-<img src="images/09-12.png">
+Y con `mvn spring-boot:run` que nos permite ejecutar la aplicación sin necesidad de estar dentro del IDE, **con el IDE apagado podríamos hacer esta puesta en marcha de la propia aplicación**.
+
+![25-rfws](images/25-rfws.png)
 
 Ya tenemos arrancada nuestra aplicación cuando deseemos detenerla bastaría pulsar Ctrl+C, sería más que suficiente.
 
@@ -317,11 +373,11 @@ Postman es muy cómodo nos permite en un sistema de pestañas poder consumir des
 
 Y nos devolvería el resultado.
 
-<img src="images/09-14.png">
+![26-rfws](images/26-rfws.png)
 
 Tenemos el botón + para poder crear nuevas peticiones añadiendo nuevas pestaña.
 
-<img src="images/09-04.png">
+![27-rfws](images/27-rfws.png)
 
 Al ingresar el URL debemos presionar el botón Send para hacer la petición al Servidor.
 
@@ -331,27 +387,38 @@ Se nos muestra la respuesta.
 
 <img src="images/09-08.png">
 
-La respuesta la podemos ver en diferentes formatos JSON, XML, HTML, Text y Auto  si el formato que no hubiera llegado no lo hubiera reconocido automáticamente podemos cambiarlo en el desplegable. Ademas tenemos una vista Pretty que pinta el JSON con formato, Raw lo muestra en crudo y algunas vistas más como Preview y Visualice pero la que se usa más es Pretty. 
+La respuesta la podemos ver en diferentes formatos JSON, XML, HTML, Text y Auto  si el formato que no hubiera llegado no lo hubiera reconocido automáticamente podemos cambiarlo en el desplegable. 
 
-Y a nivel de respuesta podemos ver el código de estado, tiempo que tarde en ejecutase, tamaño de respuesta, también podemos salvar la respuesta en un fichero.
+![28-rfws](images/28-rfws.png)
+
+Ademas tenemos una vista Pretty que pinta el JSON con formato, Raw lo muestra en crudo y algunas vistas más como Preview y Visualice pero la que se usa más es Pretty. 
+
+![29-rfws](images/29-rfws.png)
+![30-rfws](images/30-rfws.png)
+![31-rfws](images/31-rfws.png)
+![32-rfws](images/32-rfws.png)
+
+Y a nivel de respuesta podemos ver el código de estado, tiempo que tarde en ejecutase, tamaño de respuesta. 
 
 <img src="images/09-09.png">
 
-Tenemos una secció dónde podemos pasar diferentes parámetros a nuestra petición.
+También podemos salvar la respuesta en un fichero.
+
+![33-rfws](images/33-rfws.png)
+![34-rfws](images/34-rfws.png)
+![35-rfws](images/35-rfws.png)
+
+Tenemos una sección dónde podemos pasar diferentes parámetros a nuestra petición.
 
 <img src="images/09-07.png">
 
-Vamos abrir unanueva pestaña y lanzar la petición mandando el parámetro `name`.
+Vamos a cambiar el parámetro `name` que lanzamos.
 
-<img src="images/09-15.png">
+![36-rfws](images/36-rfws.png)
 
 Si no queremos tener que escribir el parámetro directamente en la URL lo podríamos escribir en la sección `Query Params` indicando una Key/Value, en este caso name/Pedro.
 
-Vemos como la respuesta donde saludamos a Pedro.
-
-Podemos saludar a otra persona cambiando el valor de `name`.
-
-<img src="images/09-17.png">
+Vemos la respuesta donde saludamos a Pedro.
 
 Las pestañas las podemos almacenar en la raíz o incluso si queremos gestionarlas en colecciones que se muestran a la izquierda. Al presionar Save sobre una pestaña se nos muestra la siguiente ventana:
 
