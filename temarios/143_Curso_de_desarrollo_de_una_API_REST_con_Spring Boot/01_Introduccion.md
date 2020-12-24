@@ -8,6 +8,9 @@
 * 06 Uso de la librería Lombok 7:22 
 * 07 Soporte de Spring Boot para servicios REST 6:34 
 * Contenido adicional  7
+
+```diff + this will be highlighted in green - this will be highlighted in networking ``` 
+
 <font color='red'>test blue color font</font><br>
 
 This is *red*{: style="color: red"}.<br>
