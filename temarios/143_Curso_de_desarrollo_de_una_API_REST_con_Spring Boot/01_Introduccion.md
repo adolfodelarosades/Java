@@ -604,25 +604,25 @@ Vamos a crear un nuevo proyecto `Spring Starter Project`.
 
 Lo vamos a llamar `143-01-Demo_Lombok`
 
-![143-02-02](images/143-02-02.png)
+![143-01-02](images/143-01-02.png)
 
 Aquí podemos añadir las dependencias de Lombok y Spring Web es decir que lo podemos gestionar a través de Maven y que no necesitamos hacerlo con una dependencia externa que sabéis que eso es un gran quebradero de cabeza.
 
-![143-02-03](images/143-02-03.png)
+![143-01-03](images/143-01-03.png)
 
-![143-02-04](images/143-02-04.png)
+![143-01-04](images/143-01-04.png)
 
-![143-02-05](images/143-02-05.png)
+![143-01-05](images/143-01-05.png)
 
 Con esto ya tenemos la estructura básica de nuestro proyecto.
 
-![143-02-06](images/143-02-06.png)
+![143-01-06](images/143-01-06.png)
 
 Podríamos crear la clase modelo `Persona`
 
-![143-02-07](images/143-02-07.png)
+![143-01-07](images/143-01-07.png)
 
-![143-02-08](images/143-02-08.png)
+![143-01-08](images/143-01-08.png)
 
 ```java
 package com.openwebinars.lombok;
@@ -648,19 +648,19 @@ public class Persona {
 }
 ```
 
-![143-02-09](images/143-02-09.png)
+![143-01-09](images/143-01-09.png)
 
 Y lo único que tendríamos que hacer sería añadirle anotaciones de Lombok, con `@Data`
 
-![143-02-10](images/143-02-10.png)
+![143-01-10](images/143-01-10.png)
 
 vea la magia que ha sucedido, a la derecha se han generado ***getter, setter, equal, hashCode, toString, incluso tenemos un constructor sin argumentos***, esto viene definido a nivel del propio Java, cuando no hay ningún constructor definido el solo nos genera un constructor sin argumentos, sin embargo si nosotros anotamos también **con `@AllArgsConstructor` generamos un constructor con argumento** el constructor sin argumentos desaparece.
 
-![143-02-11](images/143-02-11.png)
+![143-01-11](images/143-01-11.png)
 
 Si quisieramos también **un constructor sin argumentos Lombok tiene una anotación para ello `@NoArgsConstructor`**
 
-![143-02-12](images/143-02-12.png)
+![143-01-12](images/143-01-12.png)
 
 Y fijarse en la cantidad de elementos que ya tenemos disponibles.
 
@@ -688,11 +688,11 @@ Creamos una nueva `Persona` con su constructor sin parámetros, usamos los `sett
 
 Podemos ejecutar el proyecto.
 
-![143-02-13](images/143-02-13.png)
+![143-01-13](images/143-01-13.png)
 
 Y ver como en la consola nos muestra `Persona(nombre=Pepe, apellidos=Pérez, fechaNacimiento=1999-01-31)`.
 
-![143-02-14](images/143-02-14.png)
+![143-01-14](images/143-01-14.png)
 
 Como vemos `Persona` es un objeto totalmente funcional pero si nos damos cuenta su código es francamente más cómodo.
 
@@ -700,7 +700,7 @@ Hasta aquí lo que hemos aprendido de Lombok, ya estamos totalmente preparado pa
 
 ### :computer: Código Completo `143-01-Demo_Lombok` Proyecto que muestra uso de Lombok
 
-![143-02-15](images/143-02-15.png)
+![143-01-15](images/143-01-15.png)
 
 *`Personana.java`*
 
