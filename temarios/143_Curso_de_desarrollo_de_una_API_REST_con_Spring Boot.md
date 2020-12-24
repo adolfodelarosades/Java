@@ -19,7 +19,7 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 
 ## Contenido
 
-### 1. [Introducción](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/01_Introduccion.md) 60m
+### 1. [Introducción](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/01_Introduccion.md) 60m :+1:
 
 * 01 Presentación 6:01 
 * 02 ¿Qué es un servicio REST? 15:06 
