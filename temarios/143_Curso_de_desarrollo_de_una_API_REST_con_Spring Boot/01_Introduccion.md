@@ -8,7 +8,9 @@
 * 06 Uso de la librería Lombok 7:22 
 * 07 Soporte de Spring Boot para servicios REST 6:34 
 * Contenido adicional  7
+<font color='red'>test blue color font</font>
 
+<span style="color:blue">some *This is Blue italic.* text</span>
 # 01 Presentación 6:01 
 
 [PDF Presentacion.pdf](pdfs/00._Presentacion.pdf)
