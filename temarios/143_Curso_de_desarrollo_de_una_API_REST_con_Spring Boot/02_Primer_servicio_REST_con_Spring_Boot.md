@@ -438,11 +438,16 @@ Con esto ya podemos recuperarlas y ejecutarlas cuando volvamos a acceder a Postm
 
 <img src="images/09-21.png">
 
+![38-rfws](images/38-rfws.png)
+![38-rfws](images/39-rfws.png)
+
 También podemos trabajar con diferentes métodos, tenemos un desplegable para seleccionarlos.
 
 <img src="images/09-05.png">
 
-Para que en lugar de hacer peticiones GET poder hacer peticiones POST, PUT, PATCH, DELETE, etc. un montón de peticiones.
+Para que en lugar de hacer peticiones **`GET`** poder hacer peticiones **`POST`**, **`PUT`**, **`PATCH`**, **`DELETE`**, etc. un montón de peticiones.
+
+![37-rfws](images/37-rfws.png)
 
 # 10 Estructura de las rutas 15:31 
 
