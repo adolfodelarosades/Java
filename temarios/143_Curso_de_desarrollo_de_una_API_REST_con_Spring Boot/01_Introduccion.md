@@ -9,68 +9,6 @@
 * 07 Soporte de Spring Boot para servicios REST 6:34 
 * Contenido adicional  7
 
-```diff + this will be highlighted in green - this will be highlighted in networking ``` 
-
-<font color='red'>test blue color font</font><br>
-
-This is *red*{: style="color: red"}.<br>
-
-<span style="color:blue">some *This is Blue italic.* text</span>
-
-```diff
-Texto normal
-+ this will be highlighted in green
-- this will be highlighted in red
-```
-
-```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
-
-<p style='color:red'>This is some red text.</p>
-<font color="red">This is some text!</font>
-These are <b style='color:red'>red words</b>.
-
-- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
-- ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `#c5f015`
-- ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `#1589F0`
-
-<div class="text-blue mb-2">
-  .text-blue on white
-</div>
-<div class="text-gray-dark mb-2">
-  .text-gray-dark on white
-</div>
-<div class="text-gray mb-2">
-  .text-gray on white
-</div>
-<div class="text-red mb-2">
-  .text-red on white
-</div>
-<div class="text-orange mb-2">
-  .text-orange on white
-</div>
-<span class="float-left text-red tooltipped tooltipped-n" aria-label="Does not meet accessibility standards"><%= octicon("alert") %></span>
-<div class="text-orange-light mb-2">
-  .text-orange-light on white
-</div>
-<span class="float-left text-red tooltipped tooltipped-n" aria-label="Does not meet accessibility standards"><%= octicon("alert") %></span>
-<div class="text-green mb-2 ml-4">
-  .text-green on white
-</div>
-<div class="text-purple mb-2">
-  .text-purple on white
-</div>
-
-
-::: warning
-*here be dragons*
-:::
-
 # 01 Presentación 6:01 
 
 [PDF Presentacion.pdf](pdfs/00._Presentacion.pdf)
