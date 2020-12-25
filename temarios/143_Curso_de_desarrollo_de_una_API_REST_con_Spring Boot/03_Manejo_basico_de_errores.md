@@ -1,14 +1,14 @@
 # 3. Manejo de errores y excepciones
 
-* 16 Manejo básico de errores 14:40 
-* 17 Modelo para la respuesta de un error 4:58 
-* 18 Manejo de errores con @ExceptionHandler 12:25 
-* 19 Manejo de errores con @ControllerAdvice (Parte I) 11:22 
-* 20 Manejo de errores con @ControllerAdvice (Parte II) 8:06 
-* 21 Novedades en Spring 5: ResponseStatusException 12:39 
+* 14 Manejo básico de errores 14:40 
+* 15 Modelo para la respuesta de un error 4:58 
+* 16 Manejo de errores con @ExceptionHandler 12:25 
+* 17 Manejo de errores con @ControllerAdvice (Parte I) 11:22 
+* 18 Manejo de errores con @ControllerAdvice (Parte II) 8:06 
+* 19 Novedades en Spring 5: ResponseStatusException 12:39 
 * Contenido adicional 6
 
-* 16 Manejo básico de errores 14:40 
+* 14 Manejo básico de errores 14:40 
 
 [PDF Manejo_básico_de_errores.pdf](pdfs/13_Manejo_básico_de_errores.pdf)
 
@@ -18,7 +18,16 @@ La información sobre la anotación `@ResponseStatus` la puedes encontrar aquí 
 
 ## Transcripción
 
-# 17 Modelo para la respuesta de un error 4:58 
+![14-01](images/14-01.png)
+![14-02](images/14-02.png)
+![14-03](images/14-03.png)
+![14-04](images/14-04.png)
+![14-05](images/14-05.png)
+![14-06](images/14-06.png)
+![14-07](images/14-07.png)
+![14-08](images/14-08.png)
+
+# 15 Modelo para la respuesta de un error 4:58 
 
 [PDF Modelo_de_respuesta_para_un_error.pdf](pdfs/14_Modelo_de_respuesta_para_un_error.pdf)
 
@@ -83,7 +92,18 @@ class ApiValidationError extends ApiSubError {
 ```
 ## Transcripción
 
-# 18 Manejo de errores con `@ExceptionHandler` 12:25 
+![15-01](images/15-01.png)
+![15-02](images/15-02.png)
+![15-03](images/15-03.png)
+![15-04](images/15-04.png)
+![15-05](images/15-05.png)
+![15-06](images/15-06.png)
+![15-07](images/15-07.png)
+![15-08](images/15-08.png)
+![15-09](images/15-09.png)
+![15-10](images/15-10.png)
+
+# 16 Manejo de errores con `@ExceptionHandler` 12:25 
 
 [PDF ExceptionHandler.pdf](pdfs/15_ExceptionHandler.pdf)
 
@@ -93,7 +113,15 @@ La información sobre la anotación `@ExceptionHandler` la puedes encontrar aqu�
 
 ## Transcripción
 
-# 19 Manejo de errores con `@ControllerAdvice` (Parte I) 11:22 
+![16-01](images/16-01.png)
+![16-02](images/16-02.png)
+![16-03](images/16-03.png)
+![16-04](images/16-04.png)
+![16-05](images/16-05.png)
+![16-06](images/16-06.png)
+![16-07](images/16-07.png)
+
+# 17 Manejo de errores con `@ControllerAdvice` (Parte I) 11:22 
 
 [PDF ControllerAdvice.pdf](pdfs/16_ControllerAdvice.pdf)
 
@@ -103,7 +131,17 @@ La información sobre la clase `ResponseEntityExceptionHandler` la puedes encont
 
 ## Transcripción
 
-# 20 Manejo de errores con `@ControllerAdvice (Parte II)` 8:06 
+![17-01](images/17-01.png)
+![17-02](images/17-02.png)
+![17-03](images/17-03.png)
+![17-04](images/17-04.png)
+![17-05](images/17-05.png)
+![17-06](images/17-06.png)
+![17-07](images/17-07.png)
+![17-08](images/17-08.png)
+![17-09](images/17-09.png)
+
+# 18 Manejo de errores con `@ControllerAdvice (Parte II)` 8:06 
 
 [PDF Controller_Advice_II.pdf](pdfs/17_Controller_Advice_II.pdf)
 
@@ -113,7 +151,12 @@ No existe.
 
 ## Transcripción
 
-# 21 Novedades en Spring 5: ResponseStatusException 12:39 
+![18-01](images/18-01.png)
+![18-02](images/18-02.png)
+![18-03](images/18-03.png)
+![18-04](images/18-04.png)
+
+# 19 Novedades en Spring 5: ResponseStatusException 12:39 
 
 [PDF ResponseStatusException.pdf](pdfs/18_ResponseStatusException.pdf)
 
@@ -131,6 +174,17 @@ Puede ser interesante fijarse en algunas de sus subclases:
 * `UnsupportedMediaTypeStatusException`: excepción que encaja con el código de respuesta 415.
 
 ## Transcripción
+
+![19-01](images/19-01.png)
+![19-02](images/19-02.png)
+![19-03](images/19-03.png)
+![19-04](images/19-04.png)
+![19-05](images/19-05.png)
+![19-06](images/19-06.png)
+![19-07](images/19-07.png)
+![19-08](images/19-08.png)
+![19-09](images/19-09.png)
+![19-10](images/19-10.png)
 
 # Contenido adicional 6
 
