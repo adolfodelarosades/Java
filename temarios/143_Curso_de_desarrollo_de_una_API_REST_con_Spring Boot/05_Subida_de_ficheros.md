@@ -26,6 +26,7 @@ El código en el que nos hemos basado para implementar este ejemplo es una guía
 ![23-09](images/23-09.png)
 ![23-10](images/23-10.png)
 ![23-11](images/23-11.png)
+![23-12](images/23-12.png)
 
 # 24 Implementación de la subida de ficheros 17:45 
 
