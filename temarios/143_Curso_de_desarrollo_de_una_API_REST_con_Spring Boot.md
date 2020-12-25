@@ -30,7 +30,7 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 * 07 Soporte de Spring Boot para servicios REST 6:34 
 * Contenido adicional  7
 
-### 2. [Primer servicio REST con Spring Boot](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/02_Primer_servicio_REST_con_Spring_Boot.md) 76m
+### 2. [Primer servicio REST con Spring Boot](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/02_Primer_servicio_REST_con_Spring_Boot.md) 76m :+1:
 
 * 08 Mi primer servicio REST 9:33 
 * 09 Puesta en marcha de la aplicación 7:48 
