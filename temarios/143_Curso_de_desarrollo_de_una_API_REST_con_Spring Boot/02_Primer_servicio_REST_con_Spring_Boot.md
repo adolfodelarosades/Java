@@ -1992,6 +1992,13 @@ public class Categoria {
 
 > En este caso no se esta incluyendo ninguna relación con `Productos`
 
+Si nosotros probamos la aplicación devolviendo la lista completa de productos vamos a tener los siguientes resultados.
+
+![143-04-03](images/143-04-03.png)
+
+Fijemonos como se nos devuelven los datos, se nos devuelven objetos anidados es decir para cada `Producto` tenemos anidada la categoría con todos sus atributos. Esto quiza según el caso sean demasiados datos si no los vamos a necesitar y es allí donde entran los DTO para devolver solo lo que nosotros especifiquemos. 
+
+Vamos a empezar a modificar nuestro código.
 
 #### 01. Añadir Dependencia `modelmapper`
 Lo primero que vamos a hacer es añadir a las dependencias que ya tenemos la del **`modelmapper`**:
@@ -2071,11 +2078,129 @@ public class ProductoDTOConverter {
 }
 ```
 
-Como es un componente lo anotamos con `@Component` y también con `@RequiredArgsConstructor` para que se le inyecte ModelMapper
+Como es un componente lo anotamos con `@Component` y también con `@RequiredArgsConstructor` para que se le inyecte ModelMapper. 
+
+Para hacer la conversión fijarse que facíl es trabajar con `ModelMapper` tenemos el método `convertToDto` que devuelve un objeto `ProductoDTO` y que recibe un `Producto`, ***Es decir va a transformar un `Producto` en un `ProductoDTO`***. Tan facíl como hacerlo con el método `map` que recibe el objeto origen `producto` y el tipo de clase de destino `ProductoDTO.class`, **aquí es donde sucede la magia**. `ModelMapper` tiene algunas reglas inteligentes que aplica por defecto y se pregunta ¿oye un `Producto` para ti que es? A la hora de convertirlo se fija y dice si tengo `Producto` y `ProductoDTO`.
+
+![143-04-02](images/143-04-02.png)
+
+* Y dice el `nombre` de `Producto` será el `nombre` de `ProductoDto`.
+* El `precio` de `Producto` será el `precio` de `ProductoDto`.
+* Y si en `Producto` tenemos un objeto `categoria` que dentro tiene un `nombre` entonces deduce que `categoriasNombre` de `ProductoDto` debe hacer referencia al `nombre` de la `categoria` del `Producto` y entonces hara la asignación automáticamente. 
+
+Asi es como funciona este `Converter`, será así de sencillo.
+
+#### 05. Cambios en el Controlador 
+
+Añadir en el Controlador el Converter.
+
 ```java
+...
+private final ProductoDTOConverter productoDTOConverter;
+...
 ```
 
+Actualmente para devolver la lista de todos los `Productos` (como Entidades) tenemos:
+
+```java
+@GetMapping("/producto")
+public ResponseEntity<?> obtenerTodos() {
+   List<Producto> result = productoRepositorio.findAll();
+
+   if (result.isEmpty()) {
+      return ResponseEntity.notFound().build();
+   } else {
+      return ResponseEntity.ok(result);
+   }
+
+}
+```
+
+Ahora lo que vamos a hacer en lugar de devolverlos todos con `return ResponseEntity.ok(result);` vamos a obtener un listado de `ProductoDTO` a partir de los `Productos` esto lo haremos con un Stream.
+
+```java
+@GetMapping("/producto")
+public ResponseEntity<?> obtenerTodos() {
+   List<Producto> result = productoRepositorio.findAll();
+
+   if (result.isEmpty()) {
+      return ResponseEntity.notFound().build();
+   } else {
+      //return ResponseEntity.ok(result);
+      List<ProductoDTO> dtoList = 
+            result.stream()
+                  .map(productoDTOConverter::convertToDto)
+                  .collect(Collectors.toList());
+      return ResponseEntity.ok(dtoList);
+   }
+
+}
+```
+
+Si probamos nuestra aplicación ahora podemos ver lo siguiente:
+
+![143-04-04](images/143-04-04.png)
+
+Podemos ver ahora que los datos que nos aparecen no son todos los datos del `Producto` sino que serían los datos del DTO, lo que se nos devuelve es netamente lo que utilizariamos con lo cual es francamente comodo.
+
+El otro DTO lo podríamos utilizar a la hora de crear un nuevo `Producto` actualmente tenemos nuestra petición `@PostMapping("/producto")` como sigue:
+
+```java
+@PostMapping("/producto")
+public ResponseEntity<?> nuevoProducto(@RequestBody Producto nuevo) {
+   Producto saved = productoRepositorio.save(nuevo);
+   return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+}
+```
+
+En lugar de recoger un `Producto` podemos recoger un `ProductoDTO`, el propio SonarLink nos suguiere que cremos un DTO `Replace this persistent entity with a simple POJO or DTO object.`
+
+Lo vamos a cambiar por lo siguiente:
+
+```java
+...
+private final CategoriaRepositorio categoriaRepositorio;
+...
+
+@PostMapping("/producto")
+public ResponseEntity<?> nuevoProducto(@RequestBody CreateProductoDTO nuevo) {
+
+   //Crear el nuevo Producto
+   Producto nuevoProducto = new Producto();
+   nuevoProducto.setNombre(nuevo.getNombre());
+   nuevoProducto.setPrecio(nuevo.getPrecio());
+   
+   //Rescatamos la categoría para poder asignarla
+   Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+   nuevoProducto.setCategoria(categoria);
+
+   //salvar y devolver
+   return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+		
+}
+```
+
+Lo primero que hacemos es que en lugar de recibir un `Producto` recibimos un `CreateProductoDTO`.
+En este caso la asignación la vamos a hacer manualmente en el Controlador.
+
+Los emplazo a que sean ustedes lo que creen un método Conversor o bien un Servicio que recoja el `CreateProductoDTO` y lo transforme en un `Producto`, lo salve y lo devuelva, quiza el lugar más adecuado es un Servicio que utilice el repositorio. En este caso lo estamos haciendo directamente para ver como se crea de forma manual. 
+
+Como rescatamos la categoría para inyectarla tenemos que inyectar el Repositorio de Categoria. Se puede mejorar el código para que no se reguese una categoría nula si no la encuentra.
+
+Una vez que ya construimos el `Producto` debemos salvarlo y devolverlo, en este caso debemos reeplantearnos si también devolvemos el DTO o el nuevo `Producto`, en este caso estamos devolviendo el `Producto` entero pero podemos plantearnos hacer la prueba para transformar el `Producto` que recojamos y transformalo a un nuevo DTO.
+
+De manera que ahora al hacer la prueba solo le tenemos que pasar un `CreateProductoDTO` como vemos en la siguiente imagen:
+
+![143-04-05](images/143-04-05.png)
+![143-04-06](images/143-04-06.png)
+
+Como podemos observar nos devuelve todo el `Producto`, podríamos plantearnos como reto transformarlo a DTO para que devolvierá en lugar del `Producto`.
+
 <img src="images/13-08.png">
+
+Los retos son los anteriores.
+
+Hasta aquí este bloque donde hemos aprendido a crear nuestra primera API con Spring Boot en las siguientes lecciones trabajaremos con la gestión de errores.
 
 # Contenido adicional 6
 
