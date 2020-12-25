@@ -2202,10 +2202,444 @@ Los retos son los anteriores.
 
 ### :computer: Código Completo `143-04-ImplementacionDTO` Uso de DTOs y `Modelmapper` 
 
-![143-04-07](images/143-04-07.png)
+![143-04-08](images/143-04-08.png)
 
+#### Dependencias
 
+`pom.xml`
 
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.1.8.RELEASE</version>
+      <relativePath/> <!-- lookup parent from repository -->
+   </parent>
+   <groupId>com.openwebinars.rest</groupId>
+   <artifactId>143-04-ImplementacionDTO</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>143-04-ImplementacionDTO</name>
+   <description>Ejemplo de uso del patrón DTO</description>
+
+   <properties>
+      <java.version>1.8</java.version>
+   </properties>
+
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>com.h2database</groupId>
+         <artifactId>h2</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.modelmapper</groupId>
+         <artifactId>modelmapper</artifactId>
+         <version>2.3.5</version>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
+
+</project>
+```
+
+#### Base de Datos
+
+`data.sql`
+
+```java
+
+insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Comida');
+insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Bebida');
+insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Complementos');
+
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Juice - Orange, Concentrate', 91, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Beef - Ground, Extra Lean, Fresh', 87, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Cheese - Parmesan Grated', 39, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Cups 10oz Trans', 67, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Wine - Beringer Founders Estate', 27, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Bread - Wheat Baguette', 82, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Quail - Eggs, Fresh', 3, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Cheese - Mascarpone', 97, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Mace', 25, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Oil - Shortening - All - Purpose', 63, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Marjoram - Fresh', 60, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Turnip - White', 74, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Pork Salted Bellies', 38, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Longos - Greek Salad', 15, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Amaretto', 85, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Godiva White Chocolate', 97, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Tomatoes - Roma', 61, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Oven Mitt - 13 Inch', 1, 3);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Vermouth - White, Cinzano', 72, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Club Soda - Schweppes, 355 Ml', 38, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Fenngreek Seed', 1, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Dill Weed - Dry', 72, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Pepper - Green', 56, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Bacardi Breezer - Tropical', 35, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Wine - Merlot Vina Carmen', 14, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Sauce - Black Current, Dry Mix', 9, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Crab - Soft Shell', 17, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Jameson Irish Whiskey', 19, 2);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Muffin Chocolate Individual Wrap', 77, 1);
+insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Mussels - Frozen', 95, 1);
+```
+
+#### Modelo
+
+`Producto`
+
+```java
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+   @Id @GeneratedValue
+   private Long id;
+	
+   private String nombre;
+	
+   private float precio;
+	
+   @ManyToOne
+   @JoinColumn(name="categoria_id")
+   private Categoria categoria;
+	
+}
+```
+
+`Categoria`
+
+```java
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Categoria {
+
+   @Id @GeneratedValue
+   private Long id;
+	
+   private String nombre;
+	
+}
+```
+
+#### Repositorio (Parte del Modelo)
+
+`ProductoRepositorio`
+
+```java
+package com.openwebinars.rest.modelo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
+
+}
+```
+
+`CategoriaRepositorio` 
+
+```java
+package com.openwebinars.rest.modelo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
+
+}
+```
+
+#### DTOs
+
+`ProductoDTO`
+
+```java
+package com.openwebinars.rest.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+public class ProductoDTO {
+	
+   private String nombre;
+   private float precio;
+   private String categoriaNombre;
+
+}
+```
+
+`CreateProductoDTO`
+
+```java
+package com.openwebinars.rest.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+public class CreateProductoDTO {
+
+	private String nombre;
+	private float precio;
+	private long categoriaId;
+}
+```
+
+#### Converters
+
+`ProductoDTOConverter`
+
+```java
+package com.openwebinars.rest.dto.converter;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
+
+import com.openwebinars.rest.dto.ProductoDTO;
+import com.openwebinars.rest.modelo.Producto;
+
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class ProductoDTOConverter {
+	
+   private final ModelMapper modelMapper;
+	
+   public ProductoDTO convertToDto(Producto producto) {
+      return modelMapper.map(producto,  ProductoDTO.class);
+   }
+}
+```
+
+#### Configuración
+
+`MiConfiguracion`
+
+```java
+package com.openwebinars.rest.configuracion;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MiConfiguracion {
+	
+   @Bean
+   public ModelMapper modelMapper() {
+      return new ModelMapper();
+   }
+
+}
+```
+
+#### Controller
+
+`ProductoController`
+
+```java
+package com.openwebinars.rest.controller;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.openwebinars.rest.dto.CreateProductoDTO;
+import com.openwebinars.rest.dto.ProductoDTO;
+import com.openwebinars.rest.dto.converter.ProductoDTOConverter;
+import com.openwebinars.rest.modelo.Categoria;
+import com.openwebinars.rest.modelo.CategoriaRepositorio;
+import com.openwebinars.rest.modelo.Producto;
+import com.openwebinars.rest.modelo.ProductoRepositorio;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductoController {
+
+   private final ProductoRepositorio productoRepositorio;
+   private final ProductoDTOConverter productoDTOConverter;
+   private final CategoriaRepositorio categoriaRepositorio;
+
+   /**
+    * Obtenemos todos los productos
+    * 
+    * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
+    */
+   @GetMapping("/producto")
+   public ResponseEntity<?> obtenerTodos() {
+      List<Producto> result = productoRepositorio.findAll();
+
+      if (result.isEmpty()) {
+         return ResponseEntity.notFound().build();
+      } else {
+         //return ResponseEntity.ok(result);
+         List<ProductoDTO> dtoList = 
+            result.stream()
+                  .map(productoDTOConverter::convertToDto)
+                  .collect(Collectors.toList());
+            return ResponseEntity.ok(dtoList);
+      }
+
+   }
+
+   /**
+    * Obtenemos un producto en base a su ID
+    * 
+    * @param id
+    * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
+    */
+   @GetMapping("/producto/{id}")
+   public ResponseEntity<?> obtenerUno(@PathVariable Long id) {
+      Producto result = productoRepositorio.findById(id).orElse(null);
+      if (result == null)
+         return ResponseEntity.notFound().build();
+      else
+         return ResponseEntity.ok(result);
+   }
+
+   /**
+    * Insertamos un nuevo producto
+    * 
+    * @param nuevo
+    * @return 201 y el producto insertado
+    */
+   @PostMapping("/producto")
+   //public ResponseEntity<?> nuevoProducto(@RequestBody Producto nuevo) {
+   public ResponseEntity<?> nuevoProducto(@RequestBody CreateProductoDTO nuevo) {
+      //Producto saved = productoRepositorio.save(nuevo);
+      //return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+		
+      //Crear el nuevo Producto
+      Producto nuevoProducto = new Producto();
+      nuevoProducto.setNombre(nuevo.getNombre());
+      nuevoProducto.setPrecio(nuevo.getPrecio());
+		
+      //Rescatamos la categoría para poder asignarla
+      Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+      nuevoProducto.setCategoria(categoria);
+		
+      //salvar y devolver
+      return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+		
+   }
+
+   /**
+    * 
+    * @param editar
+    * @param id
+    * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
+    */
+   @PutMapping("/producto/{id}")
+   public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+
+      return productoRepositorio.findById(id).map(p -> {
+                  p.setNombre(editar.getNombre());
+                  p.setPrecio(editar.getPrecio());
+                  return ResponseEntity.ok(productoRepositorio.save(p));
+      }).orElseGet(() -> {
+                  return ResponseEntity.notFound().build();
+      });
+   }
+
+   /**
+    * Borra un producto del catálogo en base a su id
+    * 
+    * @param id
+    * @return Código 204 sin contenido
+    */
+   @DeleteMapping("/producto/{id}")
+   public ResponseEntity<?> borrarProducto(@PathVariable Long id) {
+      productoRepositorio.deleteById(id);
+      return ResponseEntity.noContent().build();
+   }
+
+}
+```
+
+#### Base
+
+`Application`
+
+```java
+package com.openwebinars.rest;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Application {
+
+   public static void main(String[] args) {
+      SpringApplication.run(Application.class, args);
+   }
+
+}
+```
 
 Hasta aquí este bloque donde hemos aprendido a crear nuestra primera API con Spring Boot en las siguientes lecciones trabajaremos con la gestión de errores.
 
