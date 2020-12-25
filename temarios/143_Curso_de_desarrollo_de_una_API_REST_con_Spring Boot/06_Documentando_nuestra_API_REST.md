@@ -1,10 +1,10 @@
 # 6. Documentando nuestra API REST 22m
 
-* 27 ¿Qué es Swagger? 5:43 
-* 28 ¿Cómo incluir Swagger en nuestra API? 17:13 
+* 26 ¿Qué es Swagger? 5:43 
+* 27 ¿Cómo incluir Swagger en nuestra API? 17:13 
 * Contenido adicional 2
 
-# 27 ¿Qué es Swagger? 5:43 
+# 26 ¿Qué es Swagger? 5:43 
 
 [PDF Qué_es_Swagger_.pdf](pdfs/25_Qué_es_Swagger_.pdf)
 
@@ -75,7 +75,16 @@ En los ejemplos de esta lección hemos usado algunas anotaciones. La lista compl
 
 ## Transcripción
 
-# 28 ¿Cómo incluir Swagger en nuestra API? 17:13 
+![26-01](images/26-01.png)
+![26-02](images/26-02.png)
+![26-03](images/26-03.png)
+![26-04](images/26-04.png)
+![26-05](images/26-05.png)
+![26-06](images/26-06.png)
+![26-07](images/26-07.png)
+![26-08](images/26-08.png)
+
+# 27 ¿Cómo incluir Swagger en nuestra API? 17:13 
 
 [PDF Cómo_incluir_Swagger_en_nuestro_proyecto.pdf](pdfs/26_Cómo_incluir_Swagger_en_nuestro_proyecto.pdf)
 
@@ -84,6 +93,17 @@ En los ejemplos de esta lección hemos usado algunas anotaciones. La lista compl
 No existe.
 
 ## Transcripción
+
+![27-01](images/27-01.png)
+![27-02](images/27-02.png)
+![27-03](images/27-03.png)
+![27-04](images/27-04.png)
+![27-05](images/27-05.png)
+![27-06](images/27-06.png)
+![27-07](images/27-07.png)
+![27-08](images/27-08.png)
+![27-09](images/27-09.png)
+![27-10](images/27-10.png)
 
 # Contenido adicional 2
 
