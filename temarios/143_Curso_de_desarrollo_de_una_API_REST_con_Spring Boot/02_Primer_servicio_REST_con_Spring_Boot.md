@@ -1884,11 +1884,28 @@ Nosotros lo que vamos a hacer es crear un componente independiente que haga la t
 
 ### Creacion Proyecto Eclipse
 
-<img src="images/13-09.png">
+Vamos a importarnos del Repositorio del curso el proyecto `12_ImplementacionDTOBase` y lo vamos a copiar dentro de nuestro propio WorkSpace con el nombre `143-04-ImplementacionDTO`, el proyecto tiene la siguiente estructura:
 
-*`data.sql`*
+![143-04-01](images/143-04-01.png)
+
+**NOTA** No olvidemos cambiar las etiquetas `artifactId` y `name` dentro del `pom.xml` con las del nombre de nuestro proyecto.
+
+```html
+...
+   <artifactId>143-04-ImplementacionDTO</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>143-04-ImplementacionDTO</name>
+...
+```
+
+Como este proyecto tiene varios cambios con respecto al anterior vamos a ver algunas de las clases desde las cuales estamos partiendo. 
+
+Para empezar la BD ha cambiado un poco, aparte de los Productos estamos añadiendo Categorias.
+
+`data.sql`
 
 ```sql
+
 insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Comida');
 insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Bebida');
 insert into categoria (id, nombre) values (NEXTVAL('hibernate_sequence'), 'Complementos');
@@ -1925,86 +1942,138 @@ insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hiberna
 insert into producto (id, nombre, precio, categoria_id) values (NEXTVAL('hibernate_sequence'), 'Mussels - Frozen', 95, 1);
 ```
 
-*`Producto`*
+Contamos con tres categorias y dentro del del Producto hemos añadido el campo `categoria_id` como pegamento entre tablas.
+
+El modelo del `Producto` es el siguiente:
+
+`Producto`
 
 ```java
-package com.openwebinars.rest.modelo;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Producto {
 
-	@Id @GeneratedValue
-	private Long id;
+   @Id @GeneratedValue
+   private Long id;
 	
-	private String nombre;
+   private String nombre;
 	
-	private float precio;
+   private float precio;
 	
-	@ManyToOne
-	@JoinColumn(name="categoria_id")
-	private Categoria categoria;
+   @ManyToOne
+   @JoinColumn(name="categoria_id")
+   private Categoria categoria;
 	
 }
 ```
 
-*`Categoria`*
+> Dentro del `Producto` estamos incluyendo la `Categoria` con una relación anotada con `@ManyToOne`.
+
+> `@ManyToOne`: Es una de las anotaciones mas habituales a nivel de JPA y se encarga de generar una relación de muchos a uno. Es decir muchos Productos pertenecen a una Categoria.
+
+> `@JoinColumn`: Esta anotación sirve en JPA para hacer referencia a la columna que es clave externa en la tabla y que se encarga de definir la relación. 
+
+> Una vez realizadas estas operaciones ya tenemos la primera parte de la relación construida. Sin embargo aunque puede ser que para algunas aplicaciones esto sea suficiente el framework Hibernate entre sus buenas prácticas recomienda que las relaciones sean bidireccionales. Es decir que tambíen la clase Categoría tenga relación con los Productos.
+
+Y el modelo de la `Categoria` es el siguiente:
 
 ```java
-package com.openwebinars.rest.modelo;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Categoria {
 
-	@Id @GeneratedValue
-	private Long id;
+   @Id @GeneratedValue
+   private Long id;
 	
-	private String nombre;
+   private String nombre;
 	
 }
 ```
 
-*`CategoriaRepositorio`*
+> En este caso no se esta incluyendo ninguna relación con `Productos`
+
+
+#### 01. Añadir Dependencia `modelmapper`
+Lo primero que vamos a hacer es añadir a las dependencias que ya tenemos la del **`modelmapper`**:
+
+```html
+...
+   <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>2.3.5</version>
+   </dependency>
+...
+```
+
+#### 02. Crear Clase de Configuración 
+
+Lo siguiente que vamos a hacer es dentro de nuestro código vamos a crear un paquete `configuracion` y dentro una llamada `MiConfiguracion` anotada con `@Configuration` y aquí es donde vamos a crear el Bean de tipo `ModelMapper`. 
+
 
 ```java
-package com.openwebinars.rest.modelo;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
+@Configuration
+public class MiConfiguracion {
+	
+   @Bean
+   public ModelMapper modelMapper() {
+      return new ModelMapper();
+   }
 
 }
 ```
 
+#### 03. Crear DTOs
 
+Vamos a crear dentro del paquete `dto` la Clase `ProductoDTO`
 
+```java
+@Getter @Setter
+public class ProductoDTO {
+	
+   private String nombre;
+   private float precio;
+   private String categoriaNombre;
 
+}
+```
 
+También vamos a crear un DTO para crear nuevos productos llamado `CreateProductoDTO`:
 
+En este caso lo que queremos recoger es lo que nos podrían enviar por ejemplo desde una aplicación Angular a nuestra API.
 
+```java
+@Getter @Setter
+public class CreateProductoDTO {
 
+   private String nombre;
+   private float precio;
+   private long categoriaId;
+}
+```
 
-AQUIIIIIIII
-Vamos a hacer esto nuestro proyecto como decía tenemos por aquí el proyecto bajo vale implementación de Teo base vamos a hacer copia para poder trabajar con tranquilidad nombre para que no haya problema y lo primero que hacemos en el Pou es añadir la dependencia de modelmapper vale vamos añadir la dependencia paper artifacts y de ferias modelmapper y la versión en este caso sí que la tenemos que añadir vale ya tendríamos modelmapper y miramos en las dependencias Maiden por aquí debe aparecer vale lo siguiente que vamos a hacer es dentro de nuestro código vamos a crear un paquete de configuración y dentro una en un alarde de imaginación me lo he puesto en una mezcla de español y en mi configuración anotadas con configuration vale y aquí es donde vamos a crear el bean dónde vamos a poner modelo más moderno centro podemos hacer creando directamente la clase
+Rescatamos el ID de la categoría para rescatar la categoría en nuestra capa de acceso a datos. Ya tenemos dos DTOs.
+
+#### 04. Crear Componente de Conversión 
+
+Ahora lo que vamos a hacer es crear nuestro componente de Conversión `ProductoDTOConverter`
+
+```java
+@Component
+@RequiredArgsConstructor
+public class ProductoDTOConverter {
+	
+   private final ModelMapper modelMapper;
+	
+   public ProductoDTO convertToDto(Producto producto) {
+      return modelMapper.map(producto,  ProductoDTO.class);
+   }
+}
+```
+
+Como es un componente lo anotamos con `@Component` y también con `@RequiredArgsConstructor` para que se le inyecte ModelMapper
+```java
+```
 
 <img src="images/13-08.png">
 
