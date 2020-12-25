@@ -1882,7 +1882,7 @@ Dónde vamos a hacer la transformación hacia nuestro DTO, bueno pues explísita
 
 Nosotros lo que vamos a hacer es crear un componente independiente que haga la transformación de un objeto en otro e inyectar ese componente allá donde lo necesiten el componente podría ser como este, observen que sería una clase con `@Component` no llega quizá a servicio, es simplemente un componente de utilidad dónde utilizando el ModelMapper va a hacer la construcción de un producto DTO a partir de un producto, va a ser así de sencillo y esto lo utilizaremos dentro de un controlador, por ejemplo en `@GetMapping("/producto")` donde queremos hacer la transformación podríamos tener la lista de todos y hacer esta conversión aprovechando el API Stream eso sí lo podríamos hacer aquí ya, porque a partir de la capa de acceso a datos tenemos todos los productos y los procesamos aquí mismo 1 a 1 pero a través del API Stream con Map vamos llamando al conversor de DTO, construye por cada producto un producto DTO lo almacenamos en una lista y es lo que devolveríamos entonces a nuestro cliente.
 
-### Creacion Proyecto Eclipse
+### :computer: `143-04-ImplementacionDTO` Uso de DTOs y `Modelmapper` 
 
 Vamos a importarnos del Repositorio del curso el proyecto `12_ImplementacionDTOBase` y lo vamos a copiar dentro de nuestro propio WorkSpace con el nombre `143-04-ImplementacionDTO`, el proyecto tiene la siguiente estructura:
 
@@ -2199,6 +2199,13 @@ Como podemos observar nos devuelve todo el `Producto`, podríamos plantearnos co
 <img src="images/13-08.png">
 
 Los retos son los anteriores.
+
+### :computer: Código Completo `143-04-ImplementacionDTO` Uso de DTOs y `Modelmapper` 
+
+![143-04-07](images/143-04-07.png)
+
+
+
 
 Hasta aquí este bloque donde hemos aprendido a crear nuestra primera API con Spring Boot en las siguientes lecciones trabajaremos con la gestión de errores.
 
