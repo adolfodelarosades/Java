@@ -100,7 +100,6 @@ No existe.
 ![27-04](images/27-04.png)
 ![27-05](images/27-05.png)
 ![27-06](images/27-06.png)
-![27-07](images/27-07.png)
 ![27-08](images/27-08.png)
 ![27-09](images/27-09.png)
 ![27-10](images/27-10.png)
