@@ -518,11 +518,15 @@ Algunas notaciones que vamos a usar para que no nos suenen raro y que las recono
 
 ### :computer: `143-02-EstructuraRutas` Primer Ejemplo de un API REST de Productos
 
-Hasta aquí ya nos podemos venir a nuestro código, vamos al proyecto base lo vamos a copiar y pegar del repositorio y le vamos a asignar el nombre `143-02-EstructuraRutas`.
+Hasta aquí ya nos podemos venir a nuestro código, del repositorio del curso vamos al proyecto base `09_EstructuraRutasBase` lo vamos a copiar y pegar del repositorio y le vamos a asignar el nombre `143-02-EstructuraRutas`. 
+
+**Nota** Como el proyecto `09_EstructuraRutasBase` tiene algunos fallos tuvimos que tomar el proyecto `09_EstructuraRutasCompleto`.
 
 **DUDA: COMO SE CREA EL PROYECTO DESDE CERO.**
 
 ![143-02-01](images/143-02-01.png)
+
+**Nota** En el archivo `pom.xml` cambiar los tags `<artifactId>` y `<name>` con el nombre de nuestro proyecto.
 
 Tenemos nuestro archivo `pom.xml`
 
