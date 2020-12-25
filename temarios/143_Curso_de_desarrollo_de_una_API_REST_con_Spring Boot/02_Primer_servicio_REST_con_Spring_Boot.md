@@ -741,7 +741,6 @@ que devolverá un listado de productos.
 
 El método `obtenerUno(@PathVariable Long id)` anotado con `@GetMapping("/producto/{id}")` que devolvera un producto. 
 
-
 ```java
 /**
     * Obtenemos un producto en base a su ID
@@ -1065,8 +1064,8 @@ Hemos guardado en Postman nuestras cinco peticiones.
 <img src="images/10-06.png">
 
 ¿Qué nos faltaría entonces? 
+Nos falta manejar correctamente los cóigos de respuesta.
 
-* Nos falta manejar correctamente los cóigos de respuesta.
 * Las peticiones de creación deberían devolver un 201
 * Las peticiones que no encuentren un recurso deberían devolver un 404
 * Si la petición de borrado devuelve datos esta bien que devuelva un 200 pero si no devuelve datos deberia devolver un 204 que es vacío.
@@ -1083,7 +1082,7 @@ Todo eso lo haremos en las próximas lecciones donde iremos modificando este có
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+   <modelVersion>4.0.0</modelVersion>
    <parent>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-parent</artifactId>
@@ -1354,7 +1353,7 @@ DELETE | `204 No Content` |
 
 <img src="images/11-01.png">
 
-Vamos a seguir mejorando nuestra aplicación y para ello vamos a volver a recordar y vamos a ver cómo funciona en algunas clases y anotaciones.
+Vamos a seguir mejorando nuestra aplicación y para ello vamos a volver a recordar y vamos a ver cómo funcionan algunas clases y anotaciones.
 
 <img src="images/11-02.png">
 
@@ -1382,7 +1381,7 @@ En `@PutMapping` devolveremos 200 OK si localizamos y modificamos el recurso si 
 
 Tenemos que pensar siempre que lo que vayamos enviando como respuesta será siempre teniendo en mente que en este caso estamos programando para otros programadores que puede que sean de nuestro propio equipo o no. Estamos desarrollando un API REST para que gente que va a desarrollar aplicaciones cliente ya sea en Angular, en Android, en iOS o en otro tipo de tecnología vayan a utilizar nuestra API REST, pues teniendo esto en mente vamos a hacer las modificaciones sobre nuestro código.
 
-Nos venimos por aquí sobre el proyecto de antes voy a hacer una nueva copia para que tengamos el código lo más organizado posible, lo hemos llamado `143-04-11_Clases_Anotaciones`. Nos vamos al controlador que es donde vamos a hincar el diente y vamos a ir haciendo una serie de modificaciones.
+Nos venimos por aquí sobre el proyecto de antes voy a hacer una nueva copia para que tengamos el código lo más organizado posible, lo hemos llamado `143-03-EstructuraRutas-Clases-Anotaciones`. Nos vamos al controlador que es donde vamos a hincar el diente y vamos a ir haciendo una serie de modificaciones.
 
 Nosotros antes hemos devuelto directamente el `findAll()` del repositorio de productos.
 
@@ -1393,11 +1392,11 @@ public List<Producto> obtenerTodos() {
 }
 ```
 
-En este caso lo que vamos a hacer es que lo vamos a guardar en una lista, la podemos llamar por ejemplo `result` de resultado y lo que vamos a hacer es que si la lista está vacía lo que vamos a tratar es de devolver una respuesta y si la lista tiene elementos devolvemos otra. Si la lista tiene elementos podríamos devolver directamente la lista, pero si la lista no tiene elementos vamos a querer devolver una instancia de `ResponseEntity` en la que vemos que tiene una serie de métodos como por ejemplo `notFound()` en la que directamente nos construye un `ResponseEntity` con código 404 y que faltaría para construirlo llamar a `builder()`. 
+En este caso lo que vamos a hacer es que lo vamos a guardar en una lista, la podemos llamar por ejemplo `result` de resultado y lo que vamos a hacer es que si la lista está vacía lo que vamos a tratar es de devolver una respuesta y si la lista tiene elementos devolvemos otra. Si la lista tiene elementos podríamos devolver directamente la lista, pero si la lista no tiene elementos vamos a querer devolver una instancia de `ResponseEntity` en la que vemos que tiene una serie de métodos como por ejemplo `notFound()` en la que directamente nos construye un `ResponseEntity` con código 404 y que faltaría para construirlo, llamar a `builder()`. 
 
 <img src="images/11-06.png">
 
-Que pasa, que en este caso queríamos devolver un `ResponseEntity` y aquí un `result` que es de tipo `List<Producto>` tenemos una poca de discordia, lo que podemos hacer es refactorizando la firma método para que devuelva un `ResponseEntity` en este caso de algo `?` en caso de que `result` este vacío será con el cuerpo vacío y si no con un ok pasándole el resultado como cuerpo.
+Que pasa, que en un caso queremos devolver un `ResponseEntity` y en otro caso un `result` que es de tipo `List<Producto>` tenemos una poca de discordia, lo que podemos hacer es refactorizando la firma del método para que devuelva un `ResponseEntity` en el primer caso de algo `?` con el cuerpo vacío y en el otro caso un `ok` pasándole el `result` como cuerpo.
 
 <img src="images/11-07.png">
 
@@ -1417,15 +1416,15 @@ public ResponseEntity<?> obtenerTodos() {
 }
 ```
 
-Podemos comprobar que sigue funcionando, para el 404 haremos la comprobación con un producto que es más cómodo, si no tendríamos que borrar todo lo que tengamos en la base de datos.
+Podemos comprobar que sigue funcionando. Para el 404 haremos la comprobación con un producto que es más cómodo, si no tendríamos que borrar todo lo que tengamos en la base de datos.
 
 Arrancamos el proyecto y desde Postman hacemos una petición GET con el URL `http://localhost:8080/producto`
 
 <img src="images/11-08.png">
 
-Podemos ver como ahora nos está devolviendo 200 OK, si limpiaramos la base de datos o comentáramos el `data.sql` podríamos ver cómo no nos devolvería ninguno.
+Podemos ver como ahora nos está devolviendo 200 OK, si limpiaramos la base de datos o comentáramos el `data.sql` podríamos ver cómo no nos devolvería ningun dato y nos tendría que devolver un 404.
 
-A la hora de buscar uno lo que hacíamos era esto:
+A la hora de buscar un producto lo que hacíamos era esto:
 
 ```java
 @GetMapping("/producto/{id}")
@@ -1457,9 +1456,9 @@ Ahora hacemos la petición del producto 31.
 
 <img src="images/11-10.png">
 
-Vemos cómo nos devuelve un código 404 Not Found, qué significa que no ha encontrado el recurso, es bastante más conveniente, aquellos programadores que utilicen nuestra API y que hagan una petición de búsqueda si reciben un 404 como respuesta sabrán que tendrán que mostrarle al usuarios que no se ha encontrado el recurso o tendrán que hacer otro tipo de mecanismo.
+Vemos cómo nos devuelve un código `404 Not Found`, qué significa que no ha encontrado el recurso, es bastante más conveniente, aquellos programadores que utilicen nuestra API y que hagan una petición de búsqueda si reciben un `404` como respuesta sabrán que tendrán que mostrarle al usuarios que no se ha encontrado el recurso o tendrán que hacer otro tipo de mecanismo.
 
-Si nos vamos a la petición de `@PostMapping` actualmente tenemos:
+Si nos vamos a la petición de `@PostMapping("/producto")` actualmente tenemos:
 
 ```java
 @PostMapping("/producto")
@@ -1468,7 +1467,7 @@ public Producto nuevoProducto(@RequestBody Producto nuevo) {
 }
 ```
 
-Aquí tenemos varias alternativa, podemos recoger el producto en un nuevo producto y tendríamos la posibilidad, existe el método `created`, el problema está en lo siguiente, lo normal es que `REST` nos invita que cuando se haga una petición POST para crear un recurso además de devolver un 201, se devuelva la URI dónde podemos consultar ese producto, lo podríamos hacer aquí a través de una base hardcodeada de la URL y añadiendo el id del nuevo producto, realmente no se hace así, se hace a través de utilizar unas clases que permiten manejar la URI extraer una parte incluso desde un servlet o desde una petición y construirla convenientemente, como no nos vamos a parar a esa parte ahora, para aprender también que podemos hacerlo, podemos crear una nueva petición donde el código de estado lo pasemos o bien con un número o a través de las constantes de una enumeración qué en este caso es `HttpStatus.CREATED` y devolveremos el objeto salvado en el cuerpo, también devolveremos un `ResponseEntity` en este caso puede ser de Producto.
+Aquí tenemos varias alternativa, podemos recoger el producto en un nuevo producto y tendríamos la posibilidad, existe el método `created`, el problema está en lo siguiente, lo normal es que `REST` nos invita que cuando se haga una petición POST para crear un recurso, además de devolver un 201, se devuelva la URI dónde podemos consultar ese producto, lo podríamos hacer aquí a través de una base hardcodeada de la URL y añadiendo el id del nuevo producto, realmente no se hace así, se hace a través de utilizar unas clases que permiten manejar la URI, extraer una parte incluso desde un servlet o desde una petición y construirla convenientemente, como no nos vamos a parar a esa parte ahora, para aprender también que podemos hacerlo, podemos crear una nueva petición donde el código de estado lo pasemos o bien con un número o a través de las constantes de una enumeración qué en este caso es `HttpStatus.CREATED` y devolveremos el objeto salvado en el cuerpo, también devolveremos un `ResponseEntity` en este caso puede ser de Producto.
 
 ```java
 @PostMapping("/producto")
@@ -1480,13 +1479,13 @@ public ResponseEntity<Producto> nuevoProducto(@RequestBody Producto nuevo) {
 
 Podríamos recargar y crear un nuevo Producto con Postman.
 
-<img src="images/11-11.png">
+![143-03-01](images/143-03-01.png)
 
-Ahora ya está el producto jamón de bellota ya se encuentra vemos como nos devuelve como código de estado 201 Created se ha creado un nuevo recurso. 
+Ahora ya se ha incluido el producto *Paleta de Jamón de Bellota* y vemos como nos devuelve como código de estado `201 Created`, se ha creado un nuevo recurso. 
 
-Si a la hora tampoco lo vamos a programar ahora mismo, pero si a la hora de crear el nuevo producto hubiera algún tipo de fallo por ejemplo que el nombre no lo mandaramos y fuera obligatorio podríamos devolver a lo mejor un código 400 de peticion erronea.
+Si a la hora, tampoco lo vamos a programar ahora mismo, pero si a la hora de crear el nuevo producto hubiera algún tipo de fallo por ejemplo que el nombre no lo mandaramos y fuera obligatorio podríamos devolver a lo mejor un código `400` de peticion erronea.
 
-Si nos vamos a la petición de `@PutMapping` actualmente tenemos:
+Si nos vamos a la petición de `@PutMapping("/producto/{id}")` actualmente tenemos:
 
 ```java
 @PutMapping("/producto/{id}")
@@ -1500,11 +1499,11 @@ public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long 
 }
 ```
 
-Podemos cambiar el código para que en lugar de hacerse de esta manera se hiciera de una manera un poco más conveniente, devolver un `ResponseEntity`, sabemos que el `productoRepositorio` tiene un método `findById(id)` y que devuelve un `Optional`, `Optional` tiene un método fantástico `map` que nos va a permitir transformar el objeto en otro objeto y si no lo encuentra nos devolvera otra cosa que ya veremos la que será.
+Podemos cambiar el código para que en lugar de hacerse de esta manera se hiciera de una manera un poco más conveniente. Lo primero es que devolveremos un `ResponseEntity<?>`. Por otro lado sabemos que el `productoRepositorio` tiene un método `findById(id)` que devuelve un `Optional`, **`Optional` tiene un método fantástico `map` que nos va a permitir transformar el objeto en otro objeto**, en caso de que no lo encuentre nos devolvera otra cosa, que ya veremos la que será. Por lo pronto esto será lo que se devuelva.
 
-<img src="images/11-12.png">
+![143-03-02](images/143-03-02.png)
 
-Por lo pronto esto será lo que se devuelva lo que devolvamos aquí dentro será el producto editado y dentro del Else ya lo podemos ir viendo, si no ha encontrado el producto lo que hacemos es devolver `return ResponseEntity.notfound().build();` y en el otro caso lo que vamos a ir haciendo es que el nombre y precio del producto será el que hemos pasado y después de editar todo el producto tendríamos que devolverlo. 
+Lo que devolvamos en el caso de que encuentre el producto será el producto editado, el nombre y precio del producto será el que hemos pasado y después de editar todo el producto tendríamos que devolverlo. Dentro del Else si no ha encontrado el producto lo que hacemos es devolver `return ResponseEntity.notfound().build();` 
 
 ```java
 @PutMapping("/producto/{id}")
@@ -1520,17 +1519,21 @@ public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVaria
 }
 ```
 
-En el Map devolvemos un `ResponseEntity` del producto ya almacenado porque lo estamos almacenando con `productoRepositorio.save(p)` con código `ok` 200 OK y el código y el producto modificado que es lo que vamos buscando y si no lo que se devuelve sería un `notFound()` porque no lo hemos encontrado, el comportamiento que andábamos buscando.
+En el Map devolvemos un `ResponseEntity` del producto ya almacenado, porque lo estamos almacenando con `productoRepositorio.save(p)` con `ok` indicamos un código `200 OK` y el producto modificado que es lo que vamos buscando y si no lo que se devuelve sería un `notFound()` porque no lo hemos encontrado, el comportamiento que andábamos buscando.
 
 Relanzamos la aplicación y probamos nuevamente con Postman.
 
-<img src="images/11-13.png">
+![143-03-03](images/143-03-03.png)
 
-Nuestro jamón de bellota lo transformamos a ibérico de bellota y vemos que sucede lo mismo, si lo que quisiéramos transformar el producto 33 que no existe nos devolvería de nuevo un 404 Not Found qué es lo que hablamos.
+Nuestra `Paleta de Jamón de Bellota` la transformamos a `Paleta de Jamón Ibérico de Bellota` y vemos que nos retorna el recurso modificado.
 
-<img src="images/11-14.png">
+![143-03-04](images/143-03-04.png)
 
-Por último a la hora de modificar donde actualmente tenemos:
+Si lo que quisiéramos es transformar el producto 33 que no existe, nos devolvería un `404 Not Found` qué es lo que andabamos buscando.
+
+![143-03-05](images/143-03-05.png)
+
+Por último a la hora de borrar, donde actualmente tenemos:
 
 ```java
 @DeleteMapping("/producto/{id}")
@@ -1559,149 +1562,13 @@ Relanzamos la aplicación y probamos con Postman el borrar el Prodducto 31.
 
 <img src="images/11-15.png">
 
-Nos devolvería vacío pero nos devuelve el código correcto que es 204 No Content y así hemos completado nuestra API para que los códigos de retorno que vamos teniendo se vayan acercando a lo que debería.
+Nos devolvería vacío pero nos devuelve el código correcto que es `204 No Content` y así hemos completado nuestra API para que los códigos de retorno que vamos teniendo se vayan acercando a lo que debería.
 
-### :computer: Código Completo - 143-04-11_Clases_Anotaciones
+### :computer: Código Completo - `143-03-EstructuraRutas-Clases-Anotaciones`
 
-<img src="images/11-16.png">
+![143-03-06](images/143-03-06.png)
 
-*`pom.xml`*
-
-```html
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.8.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.openwebinars.rest</groupId>
-	<artifactId>143-04-11_Clases_Anotaciones</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>143-04-11_Clases_Anotaciones</name>
-	<description>Ejemplo de métodos crud en un API REST</description>
-
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-</project>
-```
-
-*`data.sql`*
-
-```sql
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Juice - Orange, Concentrate', 91);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Beef - Ground, Extra Lean, Fresh', 87);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cheese - Parmesan Grated', 39);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cups 10oz Trans', 67);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Wine - Beringer Founders Estate', 27);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Bread - Wheat Baguette', 82);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Quail - Eggs, Fresh', 3);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Cheese - Mascarpone', 97);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Mace', 25);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Oil - Shortening - All - Purpose', 63);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Marjoram - Fresh', 60);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Turnip - White', 74);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Pork Salted Bellies', 38);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Longos - Greek Salad', 15);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Amaretto', 85);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Godiva White Chocolate', 97);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Tomatoes - Roma', 61);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Oven Mitt - 13 Inch', 1);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Vermouth - White, Cinzano', 72);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Club Soda - Schweppes, 355 Ml', 38);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Fenngreek Seed', 1);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Dill Weed - Dry', 72);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Pepper - Green', 56);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Bacardi Breezer - Tropical', 35);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Wine - Merlot Vina Carmen', 14);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Sauce - Black Current, Dry Mix', 9);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Crab - Soft Shell', 17);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Jameson Irish Whiskey', 19);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Muffin Chocolate Individual Wrap', 77);
-insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Mussels - Frozen', 95);
-```
-
-**Modelo**
-
-*`Producto`*
-
-```java
-package com.openwebinars.rest.modelo;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data @NoArgsConstructor @AllArgsConstructor
-@Entity
-public class Producto {
-
-   @Id @GeneratedValue
-   private Long id;
-	
-   private String nombre;
-	
-   private float precio;
-	
-}
-```
-
-*`ProductoRepositorio`*
-
-```java
-package com.openwebinars.rest.modelo;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
-
-}
-```
+La única clase que cambio en comparación al proyecto pasado es las siguite que es la única que ponemos aquí.
 
 **Controller**
 
@@ -1731,101 +1598,81 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductoController {
 
-	private final ProductoRepositorio productoRepositorio;
+   private final ProductoRepositorio productoRepositorio;
 
-	/**
-	 * Obtenemos todos los productos
-	 * 
-	 * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
-	 */
-	@GetMapping("/producto")
-	public ResponseEntity<?> obtenerTodos() {
+   /**
+    * Obtenemos todos los productos
+    * 
+    * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
+    */
+   @GetMapping("/producto")
+   public ResponseEntity<?> obtenerTodos() {
 		
-		List<Producto> result = productoRepositorio.findAll();
+      List<Producto> result = productoRepositorio.findAll();
 		
-		if(result.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(result);
-		}
-	}
+      if(result.isEmpty()) {
+         return ResponseEntity.notFound().build();
+      } else {
+         return ResponseEntity.ok(result);
+      }
+   }
 
-	/**
-	 * Obtenemos un producto en base a su ID
-	 * 
-	 * @param id
-	 * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
-	 */
-	@GetMapping("/producto/{id}")
-	public ResponseEntity<?> obtenerUno(@PathVariable Long id) {
-		Producto result = productoRepositorio.findById(id).orElse(null);
+   /**
+    * Obtenemos un producto en base a su ID
+    * 
+    * @param id
+    * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
+    */
+   @GetMapping("/producto/{id}")
+   public ResponseEntity<?> obtenerUno(@PathVariable Long id) {
+      Producto result = productoRepositorio.findById(id).orElse(null);
 		
-		if(result == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(result);
-		}
-	}
+      if(result == null) {
+         return ResponseEntity.notFound().build();
+      } else {
+         return ResponseEntity.ok(result);
+      }
+   }
 
-	/**
-	 * Insertamos un nuevo producto
-	 * 
-	 * @param nuevo
-	 * @return 201 y el producto insertado
-	 */
-	@PostMapping("/producto")
-	public ResponseEntity<Producto> nuevoProducto(@RequestBody Producto nuevo) {
-		Producto saved = productoRepositorio.save(nuevo);
-		return ResponseEntity.status(HttpStatus.CREATED).body(saved);
-	}
+   /**
+    * Insertamos un nuevo producto
+    * 
+    * @param nuevo
+    * @return 201 y el producto insertado
+    */
+   @PostMapping("/producto")
+   public ResponseEntity<Producto> nuevoProducto(@RequestBody Producto nuevo) {
+      Producto saved = productoRepositorio.save(nuevo);
+      return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+   }
 
-	/**
-	 * 
-	 * @param editar
-	 * @param id
-	 * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
-	 */
-	@PutMapping("/producto/{id}")
-	public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+   /**
+    * 
+    * @param editar
+    * @param id
+    * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
+    */
+   @PutMapping("/producto/{id}")
+   public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
 		
-		return productoRepositorio.findById(id).map(p -> {
+      return productoRepositorio.findById(id).map(p -> {
 			p.setNombre(editar.getNombre());
 			p.setPrecio(editar.getPrecio());
 			return ResponseEntity.ok(productoRepositorio.save(p));
-		}).orElseGet(() -> {
+             }).orElseGet(() -> {
 			return ResponseEntity.notFound().build();
-		});
-	}
+             });
+   }
 
-	/**
-	 * Borra un producto del catálogo en base a su id
-	 * @param id
-	 * @return Código 204 sin contenido
-	 */
-	@DeleteMapping("/producto/{id}")
-	public ResponseEntity<?>  borrarProducto(@PathVariable Long id) {
-		productoRepositorio.deleteById(id);
-		return ResponseEntity.noContent().build();
-	}
-
-}
-```
-
-**Base**
-
-*`Application`*
-
-```
-package com.openwebinars.rest;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class Application {
-
-   public static void main(String[] args) {
-      SpringApplication.run(Application.class, args);
+   /**
+    * Borra un producto del catálogo en base a su id
+    * @param id
+    * @return Código 204 sin contenido
+    */
+   @DeleteMapping("/producto/{id}")
+   public ResponseEntity<?>  borrarProducto(@PathVariable Long id) {
+      productoRepositorio.deleteById(id);
+      return ResponseEntity.noContent().build();
    }
 
 }
