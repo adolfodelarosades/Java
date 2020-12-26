@@ -40,15 +40,212 @@ Si lo implementamos vamos a ver como la respuesta al tratarse de una excepción 
 
 ![14-06](images/14-06.png)
 
-A nivel elemental, es decir lo más básico que tiene Spring para que podamos hacer eso es la anotación `@ResponseStatus` que nos va a permitir anotar una excepción y bueno cuando se lance esa excepción de alguna manera se va a capturar que la respuesta debe llevar un código de respuesta como el que le estamos proporcionando en la propia excepción,
+A nivel elemental, es decir lo más básico que tiene Spring para que podamos hacer eso es la anotación `@ResponseStatus` que nos va a permitir anotar una excepción y cuando se lance esa excepción de alguna manera se va a capturar que la respuesta debe llevar un código de respuesta como el que le estamos proporcionando en la propia excepción, también podríamos añadir un mensaje, lo que pasa que aquí el mensaje lo estamos indicando dentro de la propia excepción así que por eso no lo vamos a hacer, pero anotando esta excepción, ahora lo vamos a hacer en un ejemplo, vamos a poder comprobar como el código de respuesta que obtendríamos sería un `404` y no un `500`, para ello vamos ir modificando el código que habíamos hecho en la lección anterior y en lugar de manejar con `if-else`y en función de una cosa u otra devolver dos tipos de `ResponseEntity` lo vamos a simplificar para que lo hagamos gestionando excepciones y de esa manera si por ejemplo no encontramos un producto devolvamos la excepción y sea la excepción la que devuelva la respuesta correcta.
 
+### :computer: `143-05-ManejoBasicoErrores` Ejemplo para manejar Excepciónes
 
+Partiendo del proyecto `143-04-ImplementacionDTO` vamos a hacer una copia y renombrar el proyecto como `143-05-ManejoBasicoErrores`
 
+#### 01. Modificar `pom.xml`
 
+Cambiar en el `pom.xml` el `artifactId` y el `name`
 
+```html
+...
+<artifactId>143-05-ManejoBasicoErrores</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-05-ManejoBasicoErrores</name>
+...
+```
+
+#### 02. Crear la Clase `ProductoNotFoundException`
+
+Dentro del paquete `error` donde vamos ir poniendo cuestiones de error o de excepciones vamos a crear la clase `ProductoNotFoundException`.
+
+`ProductoNotFoundException`
+
+```java
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ProductoNotFoundException extends RuntimeException{
+
+   private static final long serialVersionUID = 1L;
+
+   public ProductoNotFoundException(Long id) {
+      super("No se puede encontrar el producto con el ID: " + id);
+   }
+}
+```
+
+Observaciones de `ProductoNotFoundException`
+
+* Extiende a `RuntimeException`
+* Añadimos el `serialVersionUID` por si la clase es serializable
+* Creamos el constructor que recibe el ID del producto no encontrado y creamos un mensaje a partir de el.
+* Anotamos la clase con `@ResponseStatus(HttpStatus.NOT_FOUND)` que nos permite indicar el estado `NOT_FOUND` que indicará que no hemos encontrado el producto.
+
+De esta manera cuando devolvamos la excepción será un código `404` el que reciba el cliente.
+
+#### 03. Modificar el Controlador 
 
 ![14-07](images/14-07.png)
+
+Actualente tenemos nuestro método `obtenerUno` con el siguiente código:
+
+```java
+@GetMapping("/producto/{id}")
+public ResponseEntity<?> obtenerUno(@PathVariable Long id) {
+   Producto result = productoRepositorio.findById(id).orElse(null);
+	if (result == null)
+      return ResponseEntity.notFound().build();
+   else
+      return ResponseEntity.ok(result);
+}
+```
+
+Lo vamos a refactorizar por lo siguiente:
+
+```java
+@GetMapping("/producto/{id}")
+public Producto obtenerUno(@PathVariable Long id) {
+   return productoRepositorio.findById(id)
+              .orElseThrow(() -> new ProductoNotFoundException(id));
+}
+```
+
+Observaciones.
+
+* `findById(id)` nos devuelve un Optional por lo que si lo encuentra devolvemos el `Producto`
+* Si no lo encuentra en lugar de usar el `.orElse(...)` normal, hay otro que es `.orElseThrow(...)`
+* `.orElseThrow(...)` nos permite poder lanzar una excepción. 
+* `.orElseThrow(...)` lo que espera es un `Supplier` es decir lo tenemos que realizar con una expresión lambda.
+* Debemos devolver un `Producto` en lugar del `ResponseEntity` que usabamos antes.
+
+Así que si encuentra el `Producto` lo devuelve con un código `200` y si no lanzará una excepción.
+
+Vamos a comprobar que esto funciona y después hacemos el resto de cambios en el código.
+
+![143-05-01](images/143-05-01.png)
+
+Si nos venimos a Postman podríamos buscar el producto 4.
+
+![143-05-01](images/143-05-01.png)
+
+Lo encontraríamos perfectamente, si buscamos el 44.
+
+![143-05-02](images/143-05-02.png)
+
+Podemos ver cómo se ha producido una excepción, la respuesta es diferente nos da algo así como el momento en el que se produce la excepción, el código de estado, el error, el mensaje que le hemos proporcionado nosotros `"No se puede encontrar el producto con el ID: 44"`, y el `path` sobre el que se ha producido el error.
+
+```html
+{
+   "timestamp": "2020-12-26T09:25:42.285+0000",
+   "status": 404,
+   "error": "Not Found",
+   "message": "No se puede encontrar el producto con el ID: 44",
+   "path": "/producto/44"
+}
+```
+
+De esta manera podemos comprobar como estamos obteniendo un mensaje de error y el cliente lo podría aprovechar para incluso el mensaje `"No se puede encontrar el producto con el ID: 44"` poder imprimirlo al usuario, indicándole que no se han podido encontrar el producto con ese ID o alguna otra versión de este mismo mensaje.
+
+El otro cambio que podemos hacer es sombre el método `editarProducto(...)` que actualmente lo tenemos así:
+
+```java
+@PutMapping("/producto/{id}")
+public ResponseEntity<?> editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+
+   return productoRepositorio.findById(id).map(p -> {
+			p.setNombre(editar.getNombre());
+			p.setPrecio(editar.getPrecio());
+			return ResponseEntity.ok(productoRepositorio.save(p));
+		}).orElseGet(() -> {
+			return ResponseEntity.notFound().build();
+   });
+}
+```
+
+En lugar de devolver un `ResponseEntity` y hacer un `orElseGet(...)`, podemos cambiarlo por lo siguiente:
+
+```java
+@PutMapping("/producto/{id}")
+public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+
+   return productoRepositorio.findById(id).map(p -> {
+			p.setNombre(editar.getNombre());
+			p.setPrecio(editar.getPrecio());
+			return productoRepositorio.save(p);
+   }).orElseThrow(() -> new ProductoNotFoundException(id));
+}
+```
+
+Observaciones:
+
+* En caso de que lo encuentre en lugar de devolver el `ResponseEntity` devolvemos el `Producto` recien guardado.
+* Si no lo encuentra devuelve un `ProductoNotFoundException`.
+* El método ya no devuelve un `ResponseEntity` sino un `Producto`.
+
+De esta forma si se encuentra el `Producto` se edita y se devuelve y sino lanzamos un `ProductoNotFoundException`.
+
+Vamos a hacer también el codigo para el método `borrarProducto(...)` que actualmente lo tenemos así:
+
+```java
+@DeleteMapping("/producto/{id}")
+public ResponseEntity<?> borrarProducto(@PathVariable Long id) {
+   productoRepositorio.deleteById(id);
+   return ResponseEntity.noContent().build();
+}
+```
+
+Si queremos mamejar la situación de que no encontramos el `Producto` a eliminar vamos a cambiarlo como sigue:
+
+```java
+@DeleteMapping("/producto/{id}")
+public ResponseEntity<?> borrarProducto(@PathVariable Long id) {
+   Producto producto = productoRepositorio.findById(id)
+				.orElseThrow(() -> new ProductoNotFoundException(id));
+		
+   productoRepositorio.delete(producto);
+	return ResponseEntity.noContent().build();
+}
+```
+
+Observaciones:
+
+* Primero buscamos el `Producto` y si no lo encontramos devuelve un `ProductoNotFoundException`.
+* Si lo encuentra lo elimina y devolvemos `ResponseEntity.noContent().build();`
+* Estamos dejando como respuesta del método un `ResponseEntity` para la respuesta correcta.
+
+Vamos a probar nuestros cambios.
+
+Primero creamos un nuevo producto.
+
+![143-05-03](images/143-05-03.png)
+
+Ahora vamos a hacer el `PUT` para modificar el producto.
+
+![143-05-04](images/143-05-04.png)
+
+Si intentamos modificar un `Producto` que no existe tenemos:
+
+![143-05-05](images/143-05-05.png)
+
+Nos devuelve lo esperado.
+
+Y si tratamos de eliminar el `Producto` 34
+
+![143-05-06](images/143-05-06.png)
+
+Lo elimina correctamente y si lo intento borrar nuevamente ya me devuelve un `404` que es lo correcto junto con el mensaje.
+
+![143-05-07](images/143-05-07.png)
+
+De esta manera como podemos comprobar podemos asociar el mecanismo de manejo de excepciones de Java cortocircuitandolo de determinada manera con Spring para que produzca una un mensaje, un código de respuesta más adecuada.
+
 ![14-08](images/14-08.png)
+
+Llegado este punto os propongo como reto que podáis crear algún tipo de error más, por ejemplo uno que se lance cuando no haya productos en el catálogo y se solicite todos, es posible que podíamos devolver el `404`, podrían crear otra excepción que sería `CatalogoProductosVaciosException` o algo por el estilo o por ejemplo también podrían bien gestionar bien la creación de un nuevo producto y si hay algo, algún dato que esperamos y que no viene o algo por el estilo, crear una excepción también que devolviera el código correcto que en este caso sería un `Bad Request` un `400`. Esto como reto para que lo podáis ir haciendo vosotros.
+
+En las siguientes lecciones de este bloque vamos a seguir manejando errores de otras maneras que nos ofrece Spring.
 
 # 15 Modelo para la respuesta de un error 4:58 
 
@@ -125,6 +322,11 @@ class ApiValidationError extends ApiSubError {
 ![15-08](images/15-08.png)
 ![15-09](images/15-09.png)
 ![15-10](images/15-10.png)
+
+
+```java
+```
+
 
 # 16 Manejo de errores con `@ExceptionHandler` 12:25 
 
