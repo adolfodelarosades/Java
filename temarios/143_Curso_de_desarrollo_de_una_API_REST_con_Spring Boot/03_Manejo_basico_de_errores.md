@@ -1225,16 +1225,66 @@ No existe.
 
 ## Transcripción
 
-```java
-```
-
-```java
-```
-
 ![18-01](images/18-01.png)
+
+Vamos a continuar hablando del manejo de errores y de excepciones y vamos a hacer mejoras en nuestra clase la que hemos creado en la lección anterior utilizando una clase base conveniente.
+
 ![18-02](images/18-02.png)
+
+Como veíamos en la lección anterior hemos anotado una clase para el manejo de errores pero, ¿no hay ninguna clase base o una interfaz que pudiéramos implementar para tener un tratamiento sistemático conveniente de más tipos de errores que no nos obligue a ir nosotros uno a uno? pues la respuesta es que sí y es la clase `ResponseEntityExceptionHandler` según la propiedad documentación de Spring se trata de una clase base conveniente para `@ControllerAdvice` y también `@RestControllerAdvice`, para ese tipo de clases que desea proporcionar un manejo de errores centralizado en todos los métodos `@RequestMapping` o sus derivados a través de métodos `@ExceptionHandler`
+
+De hecho si vemos la documentación oficial de [`ResponseEntityExceptionHandler`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html)
+
+![18-05](images/18-05.png)
+
+La cual tiene un monton de métodos para manejar diferentes tipos de excepciones.
+
+![18-06](images/18-06.png)
+
+Hay un método especial que es el siguiente:
+
+![18-07](images/18-07.png)
+
+que como nos dice es un buen sitio común para customizar el tipo de respuesta de error, para cualquier excepción y es que va a ser el momento en el que vamos a poder conseguir que casi cualquier tipo de error que nos devuelva Spring en nuestro API de los que ya veníamos manejando u otros que no nos hemos planteado, como por ejemplo pedirle una conversión XML que antes no lo habíamos hecho, un mediatype no soportado, o un mensaje que no fuera elegible, algo de los que todavía ni siquiera habíamos interactuado con él, bueno pues ya todos esos mensajes se van a encausar a través de este método y ya veréis como vamos a conseguir entonces que el tratamiento de errores sea totalmente comodo.
+
 ![18-03](images/18-03.png)
+
+Con `haddleExceptionInternal` lo vamos a hacer, tenemos algunos más, una serie de tratamiento de errores frecuentes o comunes que podéis ver en la documentación de la clase y que podéis customizar si es que nos hace falta, pero la customización más básica va a ser la de este método que va a incidir en el resto, porque ya digo que nos va a permitir ajustar la salida comun de todos los errores.
+
 ![18-04](images/18-04.png)
+
+Que es lo que venía contando hasta ahora, vamos a hacerlo en nuestro código.
+
+### :computer:
+
+Partiendo del proyecto anterior `143-07-ControllerAdvice` vamos a hacer una copia y lo vamos a llamar `143-07-ControllerAdvice`
+
+#### 01. Modificar el `pom.xml`
+
+```html
+<artifactId>143-08-ControllerAdviceII</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-08-ControllerAdviceII</name>
+<description>Ejemplo de manejo de errores con ControllerAdvice y ResponseEntityExceptionHandler</description>
+```
+
+#### 02. Modificar la Clase `GlobalControllerAdvice`
+
+`GlobalControllerAdvice`
+
+```java
+```
+
+Observaciones de `GlobalControllerAdvice`
+
+* Extendemos `ResponseEntityExceptionHandler`
+* El método `handleJsonMappingException` ya no lo vamos a usar
+* Vamos a sobreescribir el método `handleExceptionInternal` el cual recibe la excepción que se produce, el cuerpo para la respuesta, los encabezados, el estado y la petición. Podemos tomar solo lo que nos haga falta.
+* Lo implementamos con nuestra clase `ApiError`, el estado lo tomamos directamente de aquí. AQUUIIIII 
+
+
+
+
 
 # 19 Novedades en Spring 5: ResponseStatusException 12:39 
 
