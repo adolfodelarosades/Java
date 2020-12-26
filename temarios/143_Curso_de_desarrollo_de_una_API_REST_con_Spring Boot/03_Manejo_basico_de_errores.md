@@ -461,20 +461,52 @@ class ApiValidationError extends ApiSubError {
 ## Transcripción
 
 ![15-01](images/15-01.png)
+
+Vamos a seguir manejando errores en nuestra API REST, en este caso vamos a reflexionar un poco sobre la información que enviamos al cliente cuándo se produce un error, una excepción.
+
 ![15-02](images/15-02.png)
+
+En el ejemplo anterior veíamos como podíamos utilizar con `@ResponseStatus(...)` determinadas excepciones y que se devolvierá un código de respuesta mas adecuado, pero la información que se devuelve en el mensaje de error por defecto lo fábrica Spring, contiene la *fecha*, el *estado*, el *nombre del error*, un *mensaje* y la *ruta* en la cual se ha producido. 
+
 ![15-03](images/15-03.png)
+
+Podemos ver alguno como el anterior en el que nosotros habíamos modificado el mensaje, pero el resto de datos vienen tal cual. En realidad lo que nos está devolviendo es una especie de instancia de `DefaultErrorAttribute` que lo podemos ver en la [documentación oficial](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/web/servlet/error/DefaultErrorAttributes.html).
+
+![15-11](images/15-11.png)
+
+`DefaultErrorAttribute` es una clase que contiene todo lo que veniamos comentando. Tiene todos los campos de error que podemos ver en la imagen y es la implementación por defecto de la `Interface ErrorAttributes` que es la que utiliza Spring a la hora de devolver un error.
+
+Una de las maneras que tendríamos lo podemos ver incluso más adelante de modificar lo que se devuelve como error sería hacer nuestra implementación de l`Interface ErrorAttributes` o extender la clase `DefaultErrorAttribute`. En este caso vamos a crear nosotros un modelo de error y lo haremos desde cero.
+
+Nos interesaría customizarlo porque en realidad aquí hay determinados datos que bien son redundante como el tema de `404`, el `Not found` quizás si sea interesante pero el `404` lo podemos sacar desde el propio código de respuesta, la fecha viene en un formato que ciertamente es poco legible para nosotros.
+
 ![15-04](images/15-04.png)
+
+Puede que nos interese customizarlo y agregar algunos campos nuevos, hacer algunos cambios, si estamos implementando un mecanismo de validación imaginos que mandamos un formulario entero en el cual se producen más de un error y queremos mandar de un golpe varios errores por que determinado campo lo han deja vacío y no debería o determinado campo numérico debería estar en un rango y no lo han puesto en su rango, nos podría interesar también tener una respuesta que tuviera adentro varios errores de alguna forma anidados o en alguna colección.
+
 ![15-05](images/15-05.png)
+
+El modelo para un error que vamos implementar sería una clase plana de Java, de hecho vamos a poder utilizar Lombok si lo estimamos necesario y pondremos los campos que nosotros creamos conveniente.
+
 ![15-06](images/15-06.png)
+
+Vamos a partir de un modelo base con el que solamente vamos a poner el *Estado* como en el de antes del `404` obviaríamos el número nos quedaríamos con el `Not Found`, ya digo el número lo podemos sacar del propio código de respuesta, la *Fecha* pero formateada de una forma adecuada a través de un `LocalDateTime` y un mensaje como `String`, ese sería un modelo en el que básicamente le podíamos decir este el tipo de error que ha sucedido en este momento con este mensaje de error. 
+
 ![15-07](images/15-07.png)
+
+Podríamos pensar en algún modelo más complejo que incluyera además del *Estado* y la *Fecha* una lista de mensajes en lugar de indicar solamente un mensaje, como deciamos antes en una situación de validación podríamos devolver todos los mensajes de una vez y que el cliente ya se encargará de pintarlos.
+
 ![15-08](images/15-08.png)
+
+Podríamos tener un modelo aún más complejo en el que tuviéramos varias clases anidadas, podríamos imaginarnos, aprovechando que las excepciones suelen tener también un mensaje corto y uno más largo, podríamos tener esos 2 mensajes, sobre todo por incluir el mensaje con mayor grado de descripción y tener una lista de sub-errores.
+
 ![15-09](images/15-09.png)
+
+Y para cada sub-error pues posiblemente nos interesaría o bien definir uno Abstracto o tener uno Genérico o como decía tener uno Abstracto y crear subtipos, por ejemplo el de validación y en el que incluya, bueno esto ha sucedido en este objeto, sobre este campo o con determinado valor, toma este mensaje de validación, en el que lo podíamos dar de una forma un poco más completa.
+
 ![15-10](images/15-10.png)
 
-
-```java
-```
-
+Bueno pues vamos a ver en la próxima lección como incluirlo dentro de nuestro ejemplo, vamos a crear nuestro propio modelo para manejar las excepciones, en la respuesta que le vamos a dar al cliente y vamos a ver cómo implementarlo y cuál sería la respuesta que recibirían los clientes.
 
 # 16 Manejo de errores con `@ExceptionHandler` 12:25 
 
@@ -487,12 +519,27 @@ La información sobre la anotación `@ExceptionHandler` la puedes encontrar aqu�
 ## Transcripción
 
 ![16-01](images/16-01.png)
+
+Vamos a ver ahora en esta nueva lección cómo incorporar el modelo de error que teníamos antes y hacer el manejo de errores con `@ExceptionHandler`
+
 ![16-02](images/16-02.png)
+
+Nuestro modelo de error que proponíamos en la clase anterior de manera teórica, lo vamos a implementar a través de una clase plana de Java, vamos a utilizar las anotaciones `@Getter` y `@Setter` de **Lombok** para poder incluirla y decíamos que iba a tener solamente tres atributos el `estado` que será el mensaje del Estado que podemos sacar de la enumeración `HttpStatus`, la `fecha` y hora y un `mensaje`. La fecha y hora aprovecharemos la ***anotaciones de Lombok*** `@JsonFormat` para indicar que la queremos obtener como un `String` con el patrón que indicamos a la derecha en pantalla el día barra mes barra año con cuatro cifras horas minutos y segundos que en el contexto por lo menos castellano a nivel europeo se utiliza mucho, lo podríamos cambiar si nuestro formato de hora fuese diferente lo podríamos cambiar en el patrón que utilizaría para enviarlo lo más acordé a lo que necesitamos, desde luego quizás sea un poco más interpretando que el formato que nos brinda por defecto Spring.
+
 ![16-03](images/16-03.png)
+
+De manera que lo que buscamos sean errores de este tipo frente a los que veíamos en lecciones anteriores no donde el código de estado bueno podemos aprovechar directamente la enumeración no tener que hacer una traducción que bueno si alguien le interesara pues podría hacerlo una traducción de esa y numeración a algún otro texto la fecha que podría ser con con este formato no debía mes año hora minuto segundo y con el mensaje que sería el mismo de antes pero en un campo llamado mensaje bueno lo que tenemos que ver cómo poder utilizar está este modelo de sesión como lo vamos a poder utilizar pues vamos a tener que tratar de encajar dos cosas utilizar este está en mensaje personalizado y el tratamiento de excepciones y ellos lo vamos a hacer a través de la notación@excepción hand vale como tenía en pantalla es anotación aceptará un tipo o varios tipos de excepción vale y aunque una primera ubicación luego una primera aproximación nos permite ubicarla en un método cualquiera del controlador ya veremos que se puede poner en más sitios no decir que quizás más adecuado y será la encargada de manejar las sesiones de uno o varios tipos dependiendo de los que les hayamos asociados vale cuando se produzcan en un determinado controlador esto nos va a permitir que el tratamiento de la estación se cortocircuita se haga a través de este método que hemos anotado con esta excepción y bueno pues ahí podemos hacer lo que estime conveniente como por ejemplo devolver una respuesta con el tipo de error que hemos definido antes no lo podemos hacer anotando un método del controlador decir también que puede tener una firma bastante variopinta es decir que bueno pues lo podemos encontrar recibiendo diferentes tipos de argumento y devolviendo diferentes tipos de datos puede recibir una instancia de una excepción que se haya producido al expropiación que queremos necesito cortocircuitar y capturar los objetos de petición y respuesta por si queremos sacar algo de información de la petición aportar algo a la respuesta si tenemos sesiones activas los objetos de sesión y bueno pues nos manejamos en un entorno internacionalizado el locale para saber el idioma en el que se ha producido ese error y como tipo de retorno puede volver vacío en un contexto en el que usemos un motor de plantillas cómo está English modela envío map que se utiliza puede volver una cadena de caracteres puede devolver algo anotado con responsebody o incluso un HTTP entity o response entity será para nosotros francamente coma en definitiva vamos a ver qué podemos añadir a nuestro proyecto lo que vamos a hacer es hola a todos vamos a ver ahora en esta nueva lección , incorporar el modelo de los de teníamos que hacer el manejo de errores son excepción no he hecho modelo de error que proponemos en la casa anterior de manera teórica no vamos implementar a través de la clase la dejaba vamos a utilizar la anotaciones meterse pero de Lombo para poder incluir la y decimos que iba a tener solamente entre atributos el estado que será eso no puede ser código de Estado perdón el mensaje del Estado que podemos sacar de nadie numeración HTTP status la fecha y hora y un mensaje en el que la fecha y hora aprovecharemos la natación es de Lombo como es arroba Jason forma para indicar que la queremos obtener como un estoy con el patrón clínica Mora la derecha no me pantalla espía barra mes barra año con cuatro cifras hora minutos y segundos que bueno pues en el concepto por lo menos castellano a nivel europeo pues el utiliza mucho no podríamos cambiar si no te lo formato de hora pues diferente bueno podríamos cambiar aquí en el el patrón del comisaría para enviarlo para que fuese no me acordé a lo que necesitan de Lugo hija sea un poco más interpreta lo que me han errores de equipo frente a los que vayamos elecciones anteriores no donde el código de Estado bueno podemos aprovechar
+
+
+
 ![16-04](images/16-04.png)
 ![16-05](images/16-05.png)
 ![16-06](images/16-06.png)
 ![16-07](images/16-07.png)
+
+```java
+```
+
 
 # 17 Manejo de errores con `@ControllerAdvice` (Parte I) 11:22 
 
