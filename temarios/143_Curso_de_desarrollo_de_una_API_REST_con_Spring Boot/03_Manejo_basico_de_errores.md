@@ -528,18 +528,152 @@ Nuestro modelo de error que proponíamos en la clase anterior de manera teórica
 
 ![16-03](images/16-03.png)
 
-De manera que lo que buscamos sean errores de este tipo frente a los que veíamos en lecciones anteriores no donde el código de estado bueno podemos aprovechar directamente la enumeración no tener que hacer una traducción que bueno si alguien le interesara pues podría hacerlo una traducción de esa y numeración a algún otro texto la fecha que podría ser con con este formato no debía mes año hora minuto segundo y con el mensaje que sería el mismo de antes pero en un campo llamado mensaje bueno lo que tenemos que ver cómo poder utilizar está este modelo de sesión como lo vamos a poder utilizar pues vamos a tener que tratar de encajar dos cosas utilizar este está en mensaje personalizado y el tratamiento de excepciones y ellos lo vamos a hacer a través de la notación@excepción hand vale como tenía en pantalla es anotación aceptará un tipo o varios tipos de excepción vale y aunque una primera ubicación luego una primera aproximación nos permite ubicarla en un método cualquiera del controlador ya veremos que se puede poner en más sitios no decir que quizás más adecuado y será la encargada de manejar las sesiones de uno o varios tipos dependiendo de los que les hayamos asociados vale cuando se produzcan en un determinado controlador esto nos va a permitir que el tratamiento de la estación se cortocircuita se haga a través de este método que hemos anotado con esta excepción y bueno pues ahí podemos hacer lo que estime conveniente como por ejemplo devolver una respuesta con el tipo de error que hemos definido antes no lo podemos hacer anotando un método del controlador decir también que puede tener una firma bastante variopinta es decir que bueno pues lo podemos encontrar recibiendo diferentes tipos de argumento y devolviendo diferentes tipos de datos puede recibir una instancia de una excepción que se haya producido al expropiación que queremos necesito cortocircuitar y capturar los objetos de petición y respuesta por si queremos sacar algo de información de la petición aportar algo a la respuesta si tenemos sesiones activas los objetos de sesión y bueno pues nos manejamos en un entorno internacionalizado el locale para saber el idioma en el que se ha producido ese error y como tipo de retorno puede volver vacío en un contexto en el que usemos un motor de plantillas cómo está English modela envío map que se utiliza puede volver una cadena de caracteres puede devolver algo anotado con responsebody o incluso un HTTP entity o response entity será para nosotros francamente coma en definitiva vamos a ver qué podemos añadir a nuestro proyecto lo que vamos a hacer es hola a todos vamos a ver ahora en esta nueva lección , incorporar el modelo de los de teníamos que hacer el manejo de errores son excepción no he hecho modelo de error que proponemos en la casa anterior de manera teórica no vamos implementar a través de la clase la dejaba vamos a utilizar la anotaciones meterse pero de Lombo para poder incluir la y decimos que iba a tener solamente entre atributos el estado que será eso no puede ser código de Estado perdón el mensaje del Estado que podemos sacar de nadie numeración HTTP status la fecha y hora y un mensaje en el que la fecha y hora aprovecharemos la natación es de Lombo como es arroba Jason forma para indicar que la queremos obtener como un estoy con el patrón clínica Mora la derecha no me pantalla espía barra mes barra año con cuatro cifras hora minutos y segundos que bueno pues en el concepto por lo menos castellano a nivel europeo pues el utiliza mucho no podríamos cambiar si no te lo formato de hora pues diferente bueno podríamos cambiar aquí en el el patrón del comisaría para enviarlo para que fuese no me acordé a lo que necesitan de Lugo hija sea un poco más interpreta lo que me han errores de equipo frente a los que vayamos elecciones anteriores no donde el código de Estado bueno podemos aprovechar
-
-
+De manera que lo que buscamos sean errores de este tipo frente a los que veíamos en lecciones anteriores  donde el código de estado, bueno podemos aprovechar directamente la enumeración no tener que hacer una traducción, que bueno si alguien le interesara podría hacer una traducción de esa enumeración a algún otro texto, la fecha que podría ser con este formato día mes año hora minuto segundo y con el mensaje que sería el mismo de antes pero en un campo llamado mensaje.
 
 ![16-04](images/16-04.png)
+
+Lo que tenemos que ver es cómo poder utilizar este modelo de excepción, como lo vamos a poder utilizar. Vamos a tener que tratar de encajar dos cosas, utilizar este mensaje personalizado y el tratamiento de excepciones y ellos lo vamos a hacer a través de la anotación `@ExceptionHandler` esa anotación aceptará un tipo o varios tipos de excepción y aunque una primera aproximación nos permite ubicarla en un método cualquiera del controlador, ya veremos que se puede poner en más sitios, en sitios quizás más adecuado y será la encargada de manejar las excepción de uno o varios tipos dependiendo de los que les hayamos asociados cuando se produzcan en un determinado controlador, esto nos va a permitir que el tratamiento de la excepción se cortocircuita, se haga a través de este método que hemos anotado con esta excepción y bueno pues ahí podemos hacer lo que estime conveniente como por ejemplo devolver una respuesta con el tipo de error que hemos definido antes.
+
 ![16-05](images/16-05.png)
+
+Lo podemos hacer anotando un método del controlador, decir también que puede tener una firma bastante variopinta, es decir que lo podemos encontrar recibiendo diferentes tipos de argumento y devolviendo diferentes tipos de datos, puede recibir una instancia de una excepción que se haya producido, la propia excepción que queremos en ese sentido cortocircuitar y capturar, los objetos de petición y respuesta por si queremos sacar algo de información de la petición, aportar algo a la respuesta, si tenemos sesiones activas los objetos de sesión, si nos manejamos en un entorno internacionalizado el `Locale` para saber el idioma en el que se ha producido ese error.
+
 ![16-06](images/16-06.png)
+
+Y como tipo de retorno puede volver vacío en un contexto en el que usemos un motor de plantillas cómo  Thymeleaf objetos `Model`, `ModelAndView`, `Map` que se utilizan, puede devolver una cadena de caracteres, puede devolver algo anotado con `@ResponseBody` o incluso un `HTTPEntity` o `ResponseEntity` y que será para nosotros francamente comodo. 
+
 ![16-07](images/16-07.png)
 
-```java
+En definitiva vamos a ver qué podemos añadir a nuestro proyecto lo que vamos a hacer es tener dos métodos `handleProductoNotFoundException` para manejar excepciones de productos no encontrados y vamos a manejar otra excepción que aunque no sea nuestra también se puede producir que son errores en el Parseo a la hora de crear o editar un producto, a la hora de serializar o deserializar podemos encontrar algún tipo de problema, todo ello produciría un error de tipo `JsonMappingException` vamos a ver como capturarla y que entoces el error que produzca sea el que a nosotros nos pueda interesar.
+
+
+### :computer: `143-06-ExceptionHandler` Manejo de errores con `@ExceptionHandler`
+
+Partimos del proyecto `143-05-ManejoBasicoErrores` y realizamos una copia y le llamaremos `143-06-ExceptionHandler`.
+
+#### 01. Modificar el `pom.xml`
+
+```html
+<artifactId>143-06-ExceptionHandler</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-06-ExceptionHandler</name>
+<description>Ejemplo de manejo de errores con ExceptionHandler</description>
 ```
 
+#### 02. Crear la Clase `ApiError`
+
+Dentro del paquete `error` creamos la clase `ApiError`
+
+`ApiError`
+
+```java
+@Setter @Getter
+public class ApiError {
+	
+   private HttpStatus estado;
+	
+   @JsonFormat(shape = Shape.STRING, pattern="dd/MM/yyyy hh:mm:ss")
+   private LocalDateTime fecha;
+	
+   private String mensaje;
+
+}
+```
+
+Observaciones de `ApiError`
+
+* Anotada con `@Setter` y `@Getter` de Lombok
+* Usamos la anotación ` @JsonFormat` para dar un formato a nuestro `LocalDateTime`
+
+
+Ya veríamos si nos puede interesar agregar un `Builder` o un constructor lo podríamos hacer si nos interesa más adelante.
+
+#### 03. Modificar el Controlador
+
+Vamos a añadir los métodos anotados con `@ExceptionHandler(...)`
+
+```java
+@ExceptionHandler(ProductoNotFoundException.class)
+public ResponseEntity<ApiError> handleProductoNoEncontrado(ProductoNotFoundException ex) {
+   ApiError apiError = new ApiError();
+   apiError.setEstado(HttpStatus.NOT_FOUND);
+   apiError.setFecha(LocalDateTime.now());
+   apiError.setMensaje(ex.getMessage());
+   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+}
+```
+
+Método `handleProductoNoEncontrado`
+
+En el momento que se produzca una excepción del tipo `ProductoNotFoundException` en lugar de hacer el tratamiento de errores por defecto se vendrá a este método, pasará la excepción como argumento y regresamos una respuesta del tipo `ResponseEntity`.
+
+* Anotado con `@ExceptionHandler(ProductoNotFoundException.class)`
+* Retorna un `ResponseEntity<ApiError>`
+* Recibe una excepción de tipo  `ProductoNotFoundException`
+* Creamos el objeto `ApiError` y asignamos los valores a sus atributos
+* Devolvemos un `ResponseEntity` con un estado `HttpStatus.NOT_FOUND` y en el cuerpo devolvemos el `apiError` que creamos.
+
+De esta manera ahora comprobaremos que cuando vayamos a buscar un producto y no se encuentre, el error en lugar de ser el que veniamos teniendo hasta este momento será este que acabamos de definir.
+
+Si volvemos a Postman este es el mensaje que mostrabamos antes:
+
+![143-06-01](images/143-06-01.png)
+
+Si probamos nuestro nueva aplicación al hacer lo mismo obtendremos lo siguiente:
+
+![143-06-02](images/143-06-02.png)
+
+La respuesta ya esta totalmente personalizada a nuestro gusto.
+
+```json
+{
+    "estado": "NOT_FOUND",
+    "fecha": "26/12/2020 03:05:35",
+    "mensaje": "No se puede encontrar el producto con el ID: 34"
+}
+```
+
+Vamos a realizar la implementación del otro método `handleJsonMappingException` el cual se va a parecer mucho.
+
+```java
+@ExceptionHandler(JsonMappingException.class)
+public ResponseEntity<ApiError> handleJsonMappingException(JsonMappingException ex) {
+   ApiError apiError = new ApiError();
+   apiError.setEstado(HttpStatus.BAD_REQUEST);
+   apiError.setFecha(LocalDateTime.now());
+   apiError.setMensaje(ex.getMessage());
+   return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+}
+```
+
+Método `handleJsonMappingException`
+
+* Anotado con `@ExceptionHandler(JsonMappingException.class)`
+* Retorna un `ResponseEntity<ApiError>`
+* Recibe una excepción de tipo  `JsonMappingException`
+* Creamos el objeto `ApiError` y asignamos los valores a sus atributos
+* Devolvemos un `ResponseEntity` con un estado `HttpStatus.BAD_REQUEST` y en el cuerpo devolvemos el `apiError` que creamos.
+
+Ambos métodos son tan parecidos que nos da la pista para en un futuro optimizar nuestro código.
+
+Vamos a probar nuestra aplicación en Postman comprobando que si damos de alta un producto correcto no pasaría nada.
+
+![143-06-03](images/143-06-03.png)
+
+Pero si en lugar de pasar un Producto correcto pasamos uno incorrecto donde los campos númericos los pasamos como `String` se nos indica lo siguiente:
+
+![143-06-04](images/143-06-04.png)
+
+
+Se nos produce un `BAD_REQUEST` donde el mensaje es el que se nos da por defecto:
+
+```sh
+"mensaje": "Cannot deserialize value of type `long` from String \"UNO\": not a valid Long value\n at [Source: (PushbackInputStream); line: 4, column: 19] (through reference chain: com.openwebinars.rest.dto.CreateProductoDTO[\"categoriaId\"])"
+```
+
+Es un mensaje de la propia librería Jackson de la excepción `JsonMappingException` que de alguna manera nos esta devolviendo este mensaje de error. Podríamos crear nosotros una excepción que la extendiera y así también customizar el mensaje de error para que fuera lo más adecuado posible.
+
+Hasta aquí poco a poco vamos mejorando nuestro modelo de error, el tratamiento de errores, en las próximas lecciones vamos a ver que más alternativas para este tratamiento de errores nos ofrece Spring.
 
 # 17 Manejo de errores con `@ControllerAdvice` (Parte I) 11:22 
 
@@ -550,6 +684,10 @@ De manera que lo que buscamos sean errores de este tipo frente a los que veíamo
 La información sobre la clase `ResponseEntityExceptionHandler` la puedes encontrar aquí: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html
 
 ## Transcripción
+
+
+```java
+```
 
 ![17-01](images/17-01.png)
 ![17-02](images/17-02.png)
