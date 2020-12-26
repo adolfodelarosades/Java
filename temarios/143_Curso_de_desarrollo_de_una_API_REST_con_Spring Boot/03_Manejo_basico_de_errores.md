@@ -664,7 +664,6 @@ Pero si en lugar de pasar un Producto correcto pasamos uno incorrecto donde los 
 
 ![143-06-04](images/143-06-04.png)
 
-
 Se nos produce un `BAD_REQUEST` donde el mensaje es el que se nos da por defecto:
 
 ```sh
@@ -672,6 +671,192 @@ Se nos produce un `BAD_REQUEST` donde el mensaje es el que se nos da por defecto
 ```
 
 Es un mensaje de la propia librería Jackson de la excepción `JsonMappingException` que de alguna manera nos esta devolviendo este mensaje de error. Podríamos crear nosotros una excepción que la extendiera y así también customizar el mensaje de error para que fuera lo más adecuado posible.
+
+### :computer: Código Completa `143-06-ExceptionHandler` Manejo de errores con `@ExceptionHandler`
+
+![143-06-05](images/143-06-05.png)
+
+Vamos a listar las clases nuevas o modificadas que se han realizado en este proyecto.
+
+`ApiError`
+
+```java
+package com.openwebinars.rest.error;
+
+import java.time.LocalDateTime;
+
+import org.springframework.http.HttpStatus;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter @Getter
+public class ApiError {
+	
+   private HttpStatus estado;
+	
+   @JsonFormat(shape = Shape.STRING, pattern="dd/MM/yyyy hh:mm:ss")
+   private LocalDateTime fecha;
+	
+   private String mensaje;
+
+}
+```
+
+`ProductoController`
+
+```java
+package com.openwebinars.rest.controller;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.openwebinars.rest.dto.CreateProductoDTO;
+import com.openwebinars.rest.dto.ProductoDTO;
+import com.openwebinars.rest.dto.converter.ProductoDTOConverter;
+import com.openwebinars.rest.error.ApiError;
+import com.openwebinars.rest.error.ProductoNotFoundException;
+import com.openwebinars.rest.modelo.Categoria;
+import com.openwebinars.rest.modelo.CategoriaRepositorio;
+import com.openwebinars.rest.modelo.Producto;
+import com.openwebinars.rest.modelo.ProductoRepositorio;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductoController {
+
+   private final ProductoRepositorio productoRepositorio;
+   private final ProductoDTOConverter productoDTOConverter;
+   private final CategoriaRepositorio categoriaRepositorio;
+
+   /**
+    * Obtenemos todos los productos
+    * 
+    * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
+    */
+   @GetMapping("/producto")
+   public ResponseEntity<?> obtenerTodos() {
+      List<Producto> result = productoRepositorio.findAll();
+
+      if (result.isEmpty()) {
+         return ResponseEntity.notFound().build();
+      } else {
+         //return ResponseEntity.ok(result);
+         List<ProductoDTO> dtoList = 
+                              result.stream()
+                                 .map(productoDTOConverter::convertToDto)
+                                 .collect(Collectors.toList());
+         return ResponseEntity.ok(dtoList);
+      }
+
+   }
+
+   /**
+    * Obtenemos un producto en base a su ID
+    * 
+    * @param id
+    * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
+    */
+   @GetMapping("/producto/{id}")
+   public Producto obtenerUno(@PathVariable Long id) {
+      return productoRepositorio.findById(id)
+				.orElseThrow(() -> new ProductoNotFoundException(id));
+   }
+
+   /**
+    * Insertamos un nuevo producto
+    * 
+    * @param nuevo
+    * @return 201 y el producto insertado
+    */
+   @PostMapping("/producto")
+   public ResponseEntity<?> nuevoProducto(@RequestBody CreateProductoDTO nuevo) {
+      // En este caso, para contrastar, lo hacemos manualmente
+		
+      // Este código sería más propio de un servicio. Lo implementamos aquí
+      // por no hacer más complejo el ejercicio.
+      Producto nuevoProducto = new Producto();
+      nuevoProducto.setNombre(nuevo.getNombre());
+      nuevoProducto.setPrecio(nuevo.getPrecio());
+		
+      //Rescatamos la categoría para poder asignarla
+      Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+      nuevoProducto.setCategoria(categoria);
+		
+      //salvar y devolver
+      return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+		
+   }
+
+   /**
+    * 
+    * @param editar
+    * @param id
+    * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
+    */
+   @PutMapping("/producto/{id}")
+   public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+
+      return productoRepositorio.findById(id).map(p -> {
+			p.setNombre(editar.getNombre());
+			p.setPrecio(editar.getPrecio());
+			return productoRepositorio.save(p);
+      }).orElseThrow(() -> new ProductoNotFoundException(id));
+   }
+
+   /**
+    * Borra un producto del catálogo en base a su id
+    * 
+    * @param id
+    * @return Código 204 sin contenido
+    */
+   @DeleteMapping("/producto/{id}")
+   public ResponseEntity<?> borrarProducto(@PathVariable Long id) {
+      Producto producto = productoRepositorio.findById(id)
+                              .orElseThrow(() -> new ProductoNotFoundException(id));
+		
+      productoRepositorio.delete(producto);
+      return ResponseEntity.noContent().build();
+   }
+	
+   @ExceptionHandler(ProductoNotFoundException.class)
+   public ResponseEntity<ApiError> handleProductoNoEncontrado(ProductoNotFoundException ex) {
+      ApiError apiError = new ApiError();
+      apiError.setEstado(HttpStatus.NOT_FOUND);
+      apiError.setFecha(LocalDateTime.now());
+      apiError.setMensaje(ex.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+   }
+	
+   @ExceptionHandler(JsonMappingException.class)
+   public ResponseEntity<ApiError> handleJsonMappingException(JsonMappingException ex) {
+      ApiError apiError = new ApiError();
+      apiError.setEstado(HttpStatus.BAD_REQUEST);
+      apiError.setFecha(LocalDateTime.now());
+      apiError.setMensaje(ex.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+   }
+
+}
+```
 
 Hasta aquí poco a poco vamos mejorando nuestro modelo de error, el tratamiento de errores, en las próximas lecciones vamos a ver que más alternativas para este tratamiento de errores nos ofrece Spring.
 
@@ -685,7 +870,6 @@ La información sobre la clase `ResponseEntityExceptionHandler` la puedes encont
 
 ## Transcripción
 ![17-01](images/17-01.png)
-
 
 Vamos a continuar manejando los errores de nuestra API REST con Spring Boot y en este caso lo vamos a hacer utilizando `@ControllerAdvise`.
 
@@ -702,21 +886,334 @@ Existe también la especialización `@RestControllerAdvise` de hecho será la qu
 Para manejar una determinada excepción, cómo estás clases podrán tener varios métodos, lo que hará Spring será el primer método que encuentre dentro de esa clase que esté anotado para tratar esa excepción será quién lo trate, ***tenemos que ser cuidadoso en ese sentido, en el orden.*** 
 
 ![17-04](images/17-04.png)
-AQUIIIII
-Podríamos tener más de una claseanotada con `@ControllerAdvise` si queremos tener diferentes prioridades o un orden determinado e indeterminado caso utiliza siempre y si no está otra y está otra podríamos anotar las con order of priority para que bueno pues pudiéramos establecer una secuencia en ese tratamiento de errores una presidencia y también tendremos que tener cuidado en las jerarquías de errores no por si estamos tratando antes la excepción qué es una excepción por ejemplo más general y entonces a lo mejor no va a entrar nunca hacer el tratamiento de un FileNotFoundException qué es no pues de alguna manera una hija de esta primera no de ellos de excepción tenemos que ser cuidadoso en el diseño de nuestras clases con controller advice or red controlled by y cómo van a hacer el tratamiento de él indicamos nada controller advice o red 3 controller advice Spain está notación hará que se traten las excepciones de cualquier controlador pero es verdad que lo podemos acotar lo podemos acotar a través de el nombre del paquete como como una cadena de caracteres vale las dos primeras son equivalentes con beige para kids el control a la Paix afectara al paquete de esta clase vale conecta con esta notación sino con los tipos que le podamos listar aquí o con aquellos controladores que tengan una determinada anotación como por ejemplo hoy puede darle tratamiento si tenemos controladores red y controladores normal es darle tratamiento solamente a los controladores que sean de tipo rescordera pero también lo podríamos hacer nosotros haremos un tratamiento para en principio todos los controladores que tengamos pero ya digo que podríamos acotar el uso que se pueda tener hola a todos vamos a continuar manejando lo errores de nuestra aburres con el Facebook y en este caso no vamos a hacer utilizando control era para ya está ahora hemos podido manejar es precioso para salud en nos lo mensaje de error es personalizado y entonces no podemos preguntar y que no jaja bueno el tema es que excepción Henderson no permite manejar las que se tiene que se escribe en ese controlador tal y como no hemos planteado en el la lección anterior entonces y quisiéramos hacer una gestión lo Valderrobres tuviéramos diferente controladores que en algún caso utilizar a producto imaginaba propio controlador de producto y el controlador de Versalles la ventaja necesitamos buscar algún tipo de productos también utilizando mismo servicio pero controladores diferente por a ir manejo del producto en encontrado de varios ser muy buenos deberíamos de tener porque réplica del manejo de error en uno y en otro y no te controlador porque su sería y mantener necesitamos de alguna manera la gestión global de errores y utilizamos excepción caldera nivel de un método controlado solamente funcionará bueno pues vamos a ver cómo la natación control estáis no va a permitir aportar esa gestión lugar se trata de una especialización de la anotación arroba componentes orientada a tener métodos a notado a su vez con excepción Harlem que será lo que nosotros empezamos y alguna otra anotación vale besitos también las tres habitaciones control era para ir al que podríamos utilizar hecho será la de utilizamos sería también la combinación al igual que pasaba con tres controles pues es la la combinación de control de la Paz si tres polvo día de pensando en que lo que devuelvan los métodos era algo que se devuelva directamente al cliente para manejar una determinada extensión como está la suegra no tener varios métodos lo que hará será lo creas trincheras el primer método que encuentre metro de esa clase que sea notado para trabajar la para tratar esa sección será que no te la cena tenemos que ser cuidadoso m s sentido en enorme podríamos tener más de una clase no está la con control de la vais si queremos tener diferente felicidades un orden he terminado de terminar unas utilizar para siempre si no está otra dictado trapo veremos a notar la honor de ser un poco frío ni ti para que bueno pues pudiéramos estar de ser una secuencia en eso tratamiento de terror es una presencia y también tendremos que tener cuidado en la jerarquía de errores no es por si estamos tratando antes la yo esté tío crea un s siempre Campomar general y y entonces a lo mejor no va a entrar nunca hacer el tratamiento de un fallo son excepción que no puede dar una manera una hija de p*** primera no me has leído que yo tengo que ser cuidados en el diseño de nuestra clase con control de nada y Torres controle gafas y cómo van a ser el el tratamiento de sino indica por nada controlar Advisor S3 controlar Advanced está noche a cenar a que se trata la sesión es de cualquier controlador empresa que lo podemos aportar no podemos aportar a través de él nombre del paquete como como una cadena de caracteres vale la tos primeras son equivalentes con veis Paqui se le controla la paisajes Arahal paquete de Bea clase malecón está con ella natación si no por los tipos de que le podamos estar aquí o con la que yo controladores de tengan una determinada natación como por ejemplo hoy pues dale tratamiento sin el controlador eres y hola a todos vamos a continuar manejando lo errores de nuestra aburres con el Facebook y en este caso no vamos a hacer utilizando control era para ya está ahora hemos podido manejar es precioso para salud en nos lo mensaje de error es personalizado y entonces no podemos preguntar y que no jaja bueno el tema es que excepción Henderson no permite manejar las que se tiene que se escribe en ese controlador tal y como no hemos planteado en el la lección anterior entonces y quisiéramos hacer una gestión lo Valderrobres tuviéramos diferente controladores que en algún caso utilizar a producto imaginaba propio controlador de producto y el controlador de Versalles la ventaja necesitamos buscar algún tipo de productos también utilizando mismo servicio pero controladores diferente por a ir manejo del producto en encontrado de varios ser muy buenos deberíamos de tener porque réplica del manejo de error en uno y en otro y no te controlador porque su sería y mantener necesitamos de alguna manera la gestión global de errores y utilizamos excepción caldera nivel de un método controlado solamente funcionará bueno pues vamos a ver cómo la natación control estáis no va a permitir aportar esa gestión lugar se trata de una especialización de la anotación arroba componentes orientada a tener métodos a notado a su vez con excepción Harlem que será lo que nosotros empezamos y alguna otra anotación vale besitos también las tres habitaciones control era para ir al que podríamos utilizar hecho será la de utilizamos sería también la combinación al igual que pasaba con tres controles pues es la la combinación de control de la Paz si tres polvo día de pensando en que lo que devuelvan los métodos era algo que se devuelva directamente al cliente para manejar una determinada extensión como está la suegra no tener varios métodos lo que hará será lo creas trincheras el primer método que encuentre metro de esa clase que sea notado para trabajar la para tratar esa sección será que no te la cena tenemos que ser cuidadoso m s sentido en enorme podríamos tener más de una clase no está la con control de la vais si queremos tener diferente felicidades un orden he terminado de terminar unas utilizar para siempre si no está otra dictado trapo veremos a notar la honor de ser un poco frío ni ti para que bueno pues pudiéramos estar de ser una secuencia en eso tratamiento de terror es una presencia y también tendremos que tener cuidado en la jerarquía de errores no es por si estamos tratando antes la yo esté tío crea un s siempre Campomar general y y entonces a lo mejor no va a entrar nunca hacer el tratamiento de un fallo son excepción que no puede dar una manera una hija de p*** primera no me has leído que yo tengo que ser cuidados en el diseño de nuestra clase con control de nada y Torres controle gafas y cómo van a ser el el tratamiento de sino indica por nada controlar Advisor S3 controlar Advanced está noche a cenar a que se trata la sesión es de cualquier controlador empresa que lo podemos aportar no podemos aportar a través de él nombre del paquete como como una cadena de caracteres vale la tos primeras son equivalentes con veis Paqui se le controla la paisajes Arahal paquete de Bea clase malecón está con ella natación si no por los tipos de que le podamos estar aquí o con la que yo controladores de tengan una determinada natación como por ejemplo hoy pues dale tratamiento sin el controlador eres y controladores normal es tan de tratamiento solamente a los controladores que ser de ti por recordármelo podemos estar
 
+Podríamos tener más de una clase anotada con `@ControllerAdvise` si queremos tener diferentes prioridades o un orden determinado, en determinados casos utilizar siempre y si no está otra y está otra, podríamos anotarlas con `@Order` o `@Priority` para que pudiéramos establecer una secuencia en ese tratamiento de errores, una presedencia y también tendremos que tener cuidado en las jerarquías de errores, por si estamos tratando antes la `IOException` qué es una excepción más general y entonces a lo mejor no va a entrar nunca hacer el tratamiento de un `FileNotFoundException` qué es de alguna manera una hija de esta primera, de `IOException`, tenemos que ser cuidadoso en el diseño de nuestras clases con `@ControllerAdvise` o `@RestControllerAdvise` y cómo van a hacer el tratamiento de errores. 
+
+![17-05](images/17-05.png)
+
+Si no indicamos nada `@ControllerAdvise` o `@RestControllerAdvise` estás anotaciones harán que se traten las excepciones de cualquier controlador, pero es verdad que lo podemos acotar, lo podemos acotar a través de el nombre del paquete como una cadena de caracteres, las dos primeras son equivalentes. 
+
+Con `basePackages` el `@ControllerAdvise` hara referencia a ese paquete. 
+
+Con `basePackagesClasses` afecta a la clase que indiquemos.
+
+Con `assignableTypes` podemos listar una serie de clases.
+
+Con `annotations` con aquellos controladores que tengan una determinada anotación, como por ejemplo puede darle tratamiento si tenemos controladores Rest  y controladores normal, es darle tratamiento solamente a los controladores que sean de tipo RestController también lo podríamos hacer.
+
+Nosotros haremos un tratamiento en principio para todos los controladores que tengamos, pero ya digo que podríamos acotar el uso que se pueda tener.
+
+![17-06](images/17-06.png)
+
+Un primer ejemplo puede ser la anterior donde la arquitectura de la clase es así de sencilla, una clase llamada `GlobalControllerAdvice` para denotar que es un tratamiento de errores global anotada con `@RestControllerAdvise` y dentro vamos a incluir los métodos `@ExceptionHandler(...)` que veniamos definiendo antes.
+
+![17-07](images/17-07.png)
+
+También vamos a incluir en el ejemplo que vamos a hacer ahora algunas mejoras en las clases del Modelo de error, por que hemos visto antes que se ha hecho un poco pesado estaban definidas muy básicamente por lo que vamos a meter algunas mejoras, podemos usar algunas otras anotaciones de Lombok como la de un constructor con argumentos requeridos `@RequiredArgsConstructor` para que genere almenos un constructor del `estado` y el `mensaje`, un constructor vacío con `@NoArgsConstructor` por si alguna vez nos hace falta y la fecha y hora del momento que la podemos asignar por defecto. Vamos ir incluyendo estos cambios.
+
+### :computer: `143-07-ControllerAdvice` Manejo de errores con `@ControllerAdvise` o `@RestControllerAdvise`
+
+Partiendo del proyecto `143-06-ExceptionHandler` vamos a copiarlo y crear el proyecto `143-07-ControllerAdvice`
+
+#### 01. Modificar el `pom.xml`
+
+```html
+<artifactId>143-07-ControllerAdvice</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-07-ControllerAdvice</name>
+<description>Ejemplo de manejo de errores con ControllerAdvice</description>
+```
+
+#### 02. Mejoramos nuestra `ApiError`
+
+Vamos a hacer mejoras en nuestra `ApiError`
+
+`ApiError`
 
 ```java
+@Setter
+@Getter
+@RequiredArgsConstructor
+@NoArgsConstructor
+public class ApiError {
+
+   @NonNull
+   private HttpStatus estado;
+   @JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
+   private LocalDateTime fecha = LocalDateTime.now();
+   @NonNull
+   private String mensaje;
+	
+}
+```
+
+Observaciones de `ApiError`
+
+* Le hemos añadido las anotaciones `@RequiredArgsConstructor` y `@NoArgsConstructor`.
+* Añadimos la anotación `@NonNull` de Lombok a los campos que no queremos que sean nulos.
+* Le asignamos un valor por defecto a la `fecha`.
+
+Ya tenemos mejorado nuestr Modelo de error.
+
+#### 03. Crear la Clase `GlobalControllerAdvice`
+
+Creamos la clase `GlobalControllerAdvice` dentro del paquete `error`
+
+`GlobalControllerAdvice`
+
+```java
+@RestControllerAdvice
+public class GlobalControllerAdvice {
+	
+   @ExceptionHandler(ProductoNotFoundException.class)
+   public ResponseEntity<ApiError> handleProductoNoEncontrado(ProductoNotFoundException ex) {
+      ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+   }
+	
+   @ExceptionHandler(JsonMappingException.class)
+   public ResponseEntity<ApiError> handleJsonMappingException(JsonMappingException ex) {
+      ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+   }
+
+}
+```
+
+Observaciones de `GlobalControllerAdvice`
+
+* Clase anotada con @RestControllerAdvice
+* Hemos movidos los métodos definidos en el Controller y los hemos incluido aquí, para que el tratamiento que se haga sea totalmente global.
+* Como ya tenemos constructor en el `ApiError` lo utilizamos para construir nuestro objeto.
+
+Al igualmente estos métodos se pueden optimizar ya que son muy parecidos.
+
+Ya no solo se manejaria en el `ProductoController` sino que si tuvieramos más controllers se podría manejar.
+
+Si comprobamos nuestra aplicación buscando el `Producto` 34.
+
+![143-07-01](images/143-07-01.png)
+
+La respuesta sigue siendo la misma solo cambia la hora obviamente, pero el tratamiento de errores lo estamos haciendo de una forma global.
+
+Esta otra petición sigue dando los mismos resultados, pero el tratamiento de errores lo estamos haciendo de una forma global.
+
+![143-07-02](images/143-07-02.png)
+
+### :computer: Código Completo `143-07-ControllerAdvice` Manejo de errores con `@ControllerAdvise` o `@RestControllerAdvise`
+
+![143-07-03](images/143-07-03.png)
+
+Vamos a listar las clases modificadas o nuevas.
+
+`ApiError`
+
+```java
+package com.openwebinars.rest.error;
+
+import java.time.LocalDateTime;
+
+import org.springframework.http.HttpStatus;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@RequiredArgsConstructor
+@NoArgsConstructor
+public class ApiError {
+
+   @NonNull
+   private HttpStatus estado;
+   @JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
+   private LocalDateTime fecha = LocalDateTime.now();
+   @NonNull
+   private String mensaje;
+	
+}
 ```
 
 
+`GlobalControllerAdvice`
 
+```java
+package com.openwebinars.rest.error;
 
-![17-05](images/17-05.png)
-![17-06](images/17-06.png)
-![17-07](images/17-07.png)
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+@RestControllerAdvice
+public class GlobalControllerAdvice {
+	
+   @ExceptionHandler(ProductoNotFoundException.class)
+   public ResponseEntity<ApiError> handleProductoNoEncontrado(ProductoNotFoundException ex) {
+      ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+   }
+	
+   @ExceptionHandler(JsonMappingException.class)
+   public ResponseEntity<ApiError> handleJsonMappingException(JsonMappingException ex) {
+      ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+   }
+
+}
+```
+
+`ProductoController`
+
+```java
+package com.openwebinars.rest.controller;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.openwebinars.rest.dto.CreateProductoDTO;
+import com.openwebinars.rest.dto.ProductoDTO;
+import com.openwebinars.rest.dto.converter.ProductoDTOConverter;
+import com.openwebinars.rest.error.ApiError;
+import com.openwebinars.rest.error.ProductoNotFoundException;
+import com.openwebinars.rest.modelo.Categoria;
+import com.openwebinars.rest.modelo.CategoriaRepositorio;
+import com.openwebinars.rest.modelo.Producto;
+import com.openwebinars.rest.modelo.ProductoRepositorio;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductoController {
+
+   private final ProductoRepositorio productoRepositorio;
+   private final ProductoDTOConverter productoDTOConverter;
+   private final CategoriaRepositorio categoriaRepositorio;
+
+   /**
+    * Obtenemos todos los productos
+    * 
+    * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
+    */
+   @GetMapping("/producto")
+   public ResponseEntity<?> obtenerTodos() {
+      List<Producto> result = productoRepositorio.findAll();
+
+      if (result.isEmpty()) {
+         return ResponseEntity.notFound().build();
+      } else {
+         //return ResponseEntity.ok(result);
+         List<ProductoDTO> dtoList = 
+                              result.stream()
+                                 .map(productoDTOConverter::convertToDto)
+                                 .collect(Collectors.toList());
+         return ResponseEntity.ok(dtoList);
+      }
+
+   }
+
+   /**
+    * Obtenemos un producto en base a su ID
+    * 
+    * @param id
+    * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
+    */
+   @GetMapping("/producto/{id}")
+   public Producto obtenerUno(@PathVariable Long id) {
+      return productoRepositorio.findById(id)
+				.orElseThrow(() -> new ProductoNotFoundException(id));
+   }
+
+   /**
+    * Insertamos un nuevo producto
+    * 
+    * @param nuevo
+    * @return 201 y el producto insertado
+    */
+   @PostMapping("/producto")
+   public ResponseEntity<?> nuevoProducto(@RequestBody CreateProductoDTO nuevo) {
+      // En este caso, para contrastar, lo hacemos manualmente
+		
+      // Este código sería más propio de un servicio. Lo implementamos aquí
+      // por no hacer más complejo el ejercicio.
+      Producto nuevoProducto = new Producto();
+      nuevoProducto.setNombre(nuevo.getNombre());
+      nuevoProducto.setPrecio(nuevo.getPrecio());
+		
+      //Rescatamos la categoría para poder asignarla
+      Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+      nuevoProducto.setCategoria(categoria);
+		
+      //salvar y devolver
+      return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+		
+   }
+
+   /**
+    * 
+    * @param editar
+    * @param id
+    * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
+    */
+   @PutMapping("/producto/{id}")
+   public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+
+      return productoRepositorio.findById(id).map(p -> {
+			p.setNombre(editar.getNombre());
+			p.setPrecio(editar.getPrecio());
+			return productoRepositorio.save(p);
+      }).orElseThrow(() -> new ProductoNotFoundException(id));
+   }
+
+   /**
+    * Borra un producto del catálogo en base a su id
+    * 
+    * @param id
+    * @return Código 204 sin contenido
+    */
+   @DeleteMapping("/producto/{id}")
+   public ResponseEntity<?> borrarProducto(@PathVariable Long id) {
+      Producto producto = productoRepositorio.findById(id)
+                              .orElseThrow(() -> new ProductoNotFoundException(id));
+		
+      productoRepositorio.delete(producto);
+      return ResponseEntity.noContent().build();
+   }
+   
+}
+```
+
 ![17-08](images/17-08.png)
+
+Lo prometido es deuda os decía de hacer un reto ahora es un buen momento,  hemos sobrepasado el ecuador del curso y es un buen momento para que vayáis soltando con alguna de las cosas que veníamos haciendo hasta ahora, he ído soltando algunos pequeños retos en alguna lección, ahora sería un buen momento para que, ya que tenéis un modelo de categoría pudierais crear a partir del repositorio que tenemos, un servicio y un controlador que nos permitirá poder interactuar tal y como hicimos con el de producto, de hecho os podéis basar en ese esqueleto de controlador que teníais por ahí, que en una lección para crear los productos que fuimos rellenando poco a poco y que hemos ido mejorando, pues podéis crear el controlador de categoría para obtener todas las categorías, una categoría por el ID, crear nuevas categorías, actualizar una categoría y borrarlas también.
+
 ![17-09](images/17-09.png)
+
+Complementariamente con lo de errores pues también podríais crear alguna subclase de `ApiError` donde el código de estado se pueda añadir por defecto, ya digo cada vez el mecanismo de lanzamiento de excepción sea mas sencillo, por ejemplo podremos crear una `NotFoundApierror` en el que el código de estado `404` ya estuviera por defecto, incluso como los invitaba también a crear algún tipo de método dentro de la propia clase `GlobalControllerAdvice` en el que se fabrique el `ResponseEntity` para devolverlo directamente y de esta manera quizá podríamos resumir el cuerpo de cada uno de esos métodos en una sola línea de código.
+
+Hasta aquí esta primera aproximación a `ControllerAdvice` vamos a hacer una mejora de nuestro código también avanzando en este sentido con el `RestControllerAdvice` en la siguiente lección.
 
 # 18 Manejo de errores con `@ControllerAdvice (Parte II)` 8:06 
 
@@ -727,6 +1224,12 @@ Podríamos tener más de una claseanotada con `@ControllerAdvise` si queremos te
 No existe.
 
 ## Transcripción
+
+```java
+```
+
+```java
+```
 
 ![18-01](images/18-01.png)
 ![18-02](images/18-02.png)
