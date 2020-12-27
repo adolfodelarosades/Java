@@ -50,7 +50,7 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 * 19 Novedades en Spring 5: ResponseStatusException 12:39 
 * Contenido adicional 6
 
-### 4. [Manejo de CORS](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/04_Manejo_de_CORS.md) 19m
+### 4. [Manejo de CORS](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/04_Manejo_de_CORS.md) 19m :+1:
 
 * 20 ¿Qué es CORS y por qué me va a dar problemas? 6:28 
 * 21 ¿Cómo habilitar a nivel de método? 4:51 
