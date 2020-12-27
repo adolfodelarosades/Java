@@ -448,16 +448,188 @@ No existe.
 
 ## Transcripción
 
-Hola hola a todos vamos a seguir hablando de course y en este caso vamos a hacer una configuración global la configuración en nivel de clase método y asumible sin número de método clase no es muy grande y si empieza a crecer pues se empieza a volver un poco y manejable imaginas por cada método de cada controlador de cena de controladores de cena de método en cada uno múltiples peticiones acordarnos de ir poniendo la notación no sería asumible si queremos actualizar la configuración y añadir un nuevo origen porque además de la aplicación angular tenemos una aplicación Android tampoco sería demasiado interesante no entonces quién dice una aplicación en lugar de Android podría ser de otro servidor vale o que nuestra API pues pudiera servir para de tercero no si tuviéramos la lista de orígenes sería difícilmente mantenible spring nos permite realizar una configuración global para todos los controladores que es similar al uso de filtros no es que funcionará básicamente cómo superar un filtro esto nos obliga a descartar crossorigin podemos definir elemento a nivel global y matizarlo a nivel local con la anotación cross origin of clans a nivel de método o a nivel de clase una configuración básica que está algo deprecada sería como en esta clase no tendríamos un método añadiendo un cos mapping y le daría tarifa plana a todo pero la configuración básica utilizando spring boot sería más recomendable de esta manera que tenemos por aquí no a diferencia del uso de la clase de web en bici configura after podríamos devolver un web en bici configure como un bin configurando Kors vale y esto sería una configuración que quizá nos valdría al inicio del desarrollo en el que nuestra fiesta todavía desplegada en algún tipo de servidor ciertamente local que le daremos acceso cualquiera una configuración más ajustada y que no invitaría que restringe éramos determinada ruta para permitir determinado orígenes solamente determinado un método quizá con una caché que dure un cierto tiempo y que nos permita pues sentar muy bien y proteger muy bien toda nuestra vamos a aprobar a alguno de estos códigos vale vamos a coger el proyecto 21 base y vamos a hacer una copia y bueno nos vamos a venir por aquí y vamos a crear vale en la clase de mi configuración esta misma clase con arroba configura eso que nos permite lanzar ping podemos crear un nuevo método vamos a hacer primero una configuración un poco más laxa que permita acceder a más gente con configure mamá de mar al metro está notado con el roba aquí tenemos que devolver un pin de este tipo como esto es una interfaz no vamos a crear este huevo en bici configure el vuelo y Aquiles sobre escribiríamos para equipo de amor el método addcorsmappings en el que no queríamos salir una configuración un poco más global vamos a ponernos este proyecto en funcionamiento
-
-
-
 ![22-01](images/22-01.png)
+
+Vamos a seguir hablando de CORS y en este caso vamos a hacer una configuración global.
+
 ![22-02](images/22-02.png)
+
+La configuración a nivel de clase o método es asumible si el número de métodos o clases no es muy grande y si empieza a crecer se empieza a volver un poco inmanejable, imaginemse por cada método de cada controlador, si tenemos decenas de controladores, decenas de métodos en cada uno, múltiples peticiones, acordarnos de ir poniendo la anotación, no sería asumible. 
+
+Si queremos actualizar la configuración y añadir un nuevo origen porque además de la aplicación Angular tenemos una aplicación Android, tampoco sería demasiado interesante, quién dice una aplicación en lugar de Android podría ser de otro servidor o que nuestra API pudiera servir para APIs de terceros, si tuviéramos la lista de orígenes sería difícilmente mantenible. 
+
+Spring nos permite realizar una configuración global para todos los controladores que es similar al uso de filtros, que funcionará básicamente cómo si fuera un filtro, esto no nos obliga a descartar `@CrossOrigin`  podemos definir elemento a nivel global y matizarlo a nivel local con la anotación `@CrossOrigin` tanto a nivel de método o a nivel de clase. 
+
 ![22-03](images/22-03.png)
+
+Una configuración básica que está algo deprecada sería como en esta clase, tendríamos un método `addCorsMappings` y le daría tarifa plana a todo (`"/**"`) pero la configuración básica utilizando Spring Boot sería más recomendable de esta manera que tenemos por aquí. A diferencia del uso de la clase `WebMvcConfigurerAdapter()` podríamos devolver un `WebMvcConfigurer` como un Bean configurando CORS y esto sería una configuración que quizá nos valdría al inicio del desarrollo en el que nuestra API esta todavía desplegada en algún tipo de servidor ciertamente local y que le daremos acceso a cualquiera.
+
 ![22-04](images/22-04.png)
+
+Una configuración más ajustada si que nos invitaría a que restringieramos determinada ruta, para permitir determinados orígenes, solamente determinados métodos, quizá con una caché que dure un cierto tiempo y que nos permita segmentar muy bien y proteger muy bien toda nuestra API.
+
+Vamos a aprobar a alguno de estos códigos.
+
+### :computer: `143-12-CORSGlobal`
+
+Vamos a coger el proyecto `143-11-CORSMetodo` y vamos a hacer una copia que llamaremos `143-12-CORSGlobal`.
+
+#### 01. Modificar el `pom.xml`
+
+```html
+<artifactId>143-12-CORSGlobal</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-12-CORSGlobal</name>
+<description>Ejemplo de solución CORS global</description>
+```
+
+#### 02. Modificar la Clase `MiConfiguracion`
+
+Esta clase anotada con `@Configuration` que nos permite lanzar Beans podemos crear un nuevo método, vamos a empezar con una configuración más laxa que permita acceder a más gente, vamos a llamar al método `corsConfigurer`.
+
+```java
+/**
+ * Configuración más básica. Por defecto se permite
+ * - Todos los orígnenes
+ * - Métodos GET, HEAD, POST
+ * 
+ */
+@Bean
+public WebMvcConfigurer corsConfigurer() {
+   return new WebMvcConfigurer() {
+
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+         registry.addMapping("/**");
+      }
+			
+   };
+}
+```
+
+Observaciones del método `corsConfigurer`
+
+* Anotado con `@Bean`
+* Devuelve un Bean del tipo `WebMvcConfigurer`
+* Como es una Interfaz lo creamos así.
+* Sobreescribimos el método `addCorsMappings` en el que hacemos una configuración más global.
+
+Vamos a ejecutar la aplicación y nuestro Cliente en el puerto 9001.
+
+![143-12-01](images/143-12-01.png)
+
+Nos permite hacer la petición `http://localhost:9001/` por que hemos hecho una configuración un poco más laxa y nos permitiria hacer peticiones de cualquier tipo.
+
 ![22-05](images/22-05.png)
+
+Sin embargo si nos regresamos al código y queremos hacer una configuración más ajustada vamos a tener:
+
+```java
+/**
+ * Configuración más ajustada.
+ */
+@Bean
+public WebMvcConfigurer corsConfigurer() {
+   return new WebMvcConfigurer() {
+
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+                  registry.addMapping("/producto/**")
+                        .allowedOrigins("http://localhost:9001")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .maxAge(3600);
+      }		
+   };
+}
+```
+
+Observaciones del método `corsConfigurer` más ajustado.
+
+* Solo permitimos la ruta de Producto y no de Categorias.
+* Solo permitimos el origen `http://localhost:9001`, normalmente aquí van dominios.
+* Podemos limitar a los métodos que deseemos `"GET", "POST", "PUT", "DELETE"`, Angular podría usar alguno más como `OPTIONS`.
+* Asignamos valor para `maxAge`.
+
+Vamos a volver a probar la aplicación con estas modificaciones,
+
+![143-12-01](images/143-12-01.png)
+
+El listado lo seguimos pudiendo recuperar sin ningún tipo de problema. Pero si cambiamos el Cliente al puerto 9002 tendremos.
+
+![143-12-02](images/143-12-02.png)
+
+El problema de que no es un origen permitido por lo cual no nos deja hacer la petición desde `http://localhost:9002`, de esta manera bloqueamos a un origen que no sea permitido y si daríamos acceso a uno que si con una politica un poco más global.
+
 ![22-06](images/22-06.png)
+
+Como reto les animo a que jueguen un poco con la configuración global de CORS permitiendo una URL si y otra no, podemos añadir dos origenes 9001 y 9002 y ejecutar dos clientes diferentes en cada puerto verificar que lo permita, pueden limitar el tipo de peticiones que todos puedan hacer GET pero solo alguno de ellos pueda hacer POST y así ver como la configuración de CORS va funcionando de la manera más adecuada posible.
+
+### :computer: código Completo `143-12-CORSGlobal`
+
+![143-12-03](images/143-12-02.png)
+
+La clase que se modifico es `MiConfiguracion`
+
+`MiConfiguracion`
+
+```java
+package com.openwebinars.rest.configuracion;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class MiConfiguracion {
+	
+   @Bean
+   public ModelMapper modelMapper() {
+      return new ModelMapper();
+   }
+	
+   /**
+    * Configuración más básica. Por defecto se permite
+    * - Todos los orígnenes
+    * - Métodos GET, HEAD, POST
+    * 
+    */
+	
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurer() {
+//
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**");
+//			}
+//			
+//		};
+//	}
+	
+   /**
+    * Configuración más ajustada.
+    */
+   @Bean
+   public WebMvcConfigurer corsConfigurer() {
+      return new WebMvcConfigurer() {
+
+         @Override
+         public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/producto/**")
+                     .allowedOrigins("http://localhost:9001")
+                     .allowedMethods("GET", "POST", "PUT", "DELETE")
+                     .maxAge(3600);
+            }
+			
+      };
+   }
+
+}
+```
+
+Hasta aquí este bloque de CORS, en el bloque siguiente vamos a seguir trabajando con nuestro API REST añadiendole nuevas funcionalidades.
 
 # Contenido adicional 3
 
