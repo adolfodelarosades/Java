@@ -40,7 +40,7 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 * 13 Implementando DTO con ModelMapper 17:58 
 * Contenido adicional 6
 
-### 3. [Manejo de errores y excepciones](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/03_Manejo_basico_de_errores.md) 64m
+### 3. [Manejo de errores y excepciones](143_Curso_de_desarrollo_de_una_API_REST_con_Spring%20Boot/03_Manejo_basico_de_errores.md) 64m :+1:
 
 * 14 Manejo básico de errores 14:40 
 * 15 Modelo para la respuesta de un error 4:58 
