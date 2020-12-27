@@ -261,11 +261,9 @@ y que no permite que desde el origen `http://localhost:9001/` se haga una petici
 
 Por seguridad los navegadores prohíben las llamadas Ajax a recursos fuera del origen actual, ¿Por qué? bueno pues pongámonos en situación, supongamos que nosotros estamos con el navegador y varias pestañas abiertas, una de las pestañas que tenemos abiertas es nuestro banco online que estamos haciendo para hacer algún tipo de transacción y en otra pestaña sin querer tenemos abierto un sitio que tiene código malicioso llamémoslo ***evil.com***, los script de este sitio malicioso, si no existiera este bloqueo podrían acceder a otra pestaña del navegador, porque a través de JavaScript se podría y realizar algún tipo de solicitud AJAX podrían escanear los bancos más usuales, algún tipo de transacción y hacer solicitudes AJAXs a la API del banco para hacer que digo yo una transferencia, eso es peligroso, bueno pues esto no debería de poder hacerse, quién dice la transferencia de dinero podría ser simplemente de datos que en ocasiones puede ser tan o más dañina, entonces no debería poder hacerse ese tipo de peticiones porque si estamos logeados en el banco con nuestras credenciales a lo mejor si no está bien protegido el sitio del banco lo podría hacer. Bueno pues CORS lo prohíbe.
 
-
 ![20-06](images/20-06.png)
 
 CORS es una especificación del Consorcio W3C que está implementada prácticamente en la totalidad de los navegadores y que permite especificar qué dominios podrán acceder a un determinado servidor, en nuestro caso a nuestra API REST  y para que estarán autorizados, para qué tipo de peticiones estarán autorizados, por tanto podemos decir que ***CORS es una política de seguridad** es decir una forma de entender que es ser seguro para unas determinadas entidades.
-
 
 ![20-07](images/20-07.png)
 
@@ -285,9 +283,9 @@ Toda esta cuestión de CORS veréis que se va a manejar al final a través de un
 
 Hay una serie de encabezados más que vamos a ver en alguna de las lecciones próximas y que se utilizan con esto de CORS.
 
-En las próximas lecciones vamos a ver cómo Spring nos permite gestionar esto de CORS, permitir determinados orígenes para que nuestras aplicaciones cliente pueden consumir desde nuestra API y lo podamos hacer con garantías.
-
 ![20-11](images/20-11.png)
+
+En las próximas lecciones vamos a ver cómo Spring nos permite gestionar esto de CORS, permitir determinados orígenes para que nuestras aplicaciones cliente pueden consumir desde nuestra API y lo podamos hacer con garantías.
 
 # 21 ¿Cómo habilitar a nivel de método? 4:51 
 
@@ -299,14 +297,146 @@ La información sobre la anotación @CrossOrigin la puedes encontrar aquí: http
 
 ## Transcripción
 
-Hola a todos vamos a seguir hablando de coros y vamos a ver cómo podemos configurar cors en nuestro servidor en nuestra apired con la anotación crossorigin está disponible desde la versión 42 de Spring y la podemos utilizar a nivel de método o a nivel de una clase controladora y tiene una serie de atributos como pueden ser origin donde nos permite utilizar o bien un asterisco para indicar cualquier origen no sería una práctica sexualmente adecuada o una lista de orígenes que serían permitidos methods por si quisiéramos semental qué métodos se van a poder soportar me imaginado a nivel de una clase controladora podríamos decir que aplicará para un determinado origen vale para las peticiones que tipos y a lo mejor bueno pues luego a nivel de método podríamos permitirle otro tipo de odeleite a algún algún sitio en particular no también el atributo más age la duración máxima en segundos de la caché vale también lo podríamos lo podríamos indicar tiene otra serie de atributos como Halo credencial Head2Head vale que también tienen que ver con todo esto de curso y que os dejo que investigue un poco por la cuenta habla de Cuqui de encabezados que se pueden exponer que no vale que encabezados si nos permitiría un determinado origen enviar cuales no no vamos a entrar mucho en esa parte nos vamos a centrar en ver el nos permitiría un código así el que pudiéramos revisar course a nivel de un metro de un particular del get de producto para que lo dicen el proyecto como el que teníamos antes si pudiera hacer un tipo de petición que sobre este método vale vamos a ver cómo sería a nivel de clase vale no podremos tener igual y fijado como podríamos indicar también los métodos para este mismo origen que solamente se pudieran hacer peticiones que oposiciones post no merece la pena para añadir una sola línea de código que copiemos el proyecto y tal nos podemos venir aquí y ver cómo perdón este vez sería el 20 vale y aquí en el controlador podemos ver como tenemos el que vamos a permitir hacer las peticiones que para ello vamos a ejecutar el cliente que teníamos en el ejemplo anterior ejecutaría muestra servidor pero antes vamos a comentar esta línea de código vale y vamos a ver que si la comentamos seguimos teniendo el mismo problema de antes no estos ejecutaría en el puerto 8080 necesitaría vale y necesitaríamos una ventana de navegador si hacemos a localhost 9001 seguimos teniendo el mismo problema de sin embargo si aquí descomentamos lo volvemos a lanzar y refrescamos por aquí podemos ver como Justin no aparece nuestro listado de productos porque se ha hecho la petición AJAX a la URL de localhost 8080 barra producto se ha traído todo el Jason ha montado la tabla HTML y nos lo está pintando por aquí cómo podéis comprobar esas sola anotación ha marcado la diferencia para permitir al origen 9001 el hecho de que se pudiera hacer la petición si ahora el cliente vale lo tendremos por aquí si paramos el cliente y nos viniéramos a cambiar el puerto sobre el que se ejecuta teniendo el servidor ese gustado todavía que no tenemos por aquí está ejecutándose cambiamos para que el cliente se ejecute en el puerto 9002 comprobar los ejecutan en el 9002 ahora nosotros hiciéramos aquí desde 9002 a petición course vuelve activar vuelve a bloquear no es un origen que esté permitido y entonces no podríamos hacer la petición esta es un sencillo tratamiento de course a nivel de método de clase vamos a ver en la siguiente lección cómo podemos hacer un tratamiento global que nos va a permitir para diferentes controladores aplicar una política con
-
-
 ![21-01](images/21-01.png)
+
+Vamos a seguir hablando de CORS y vamos a ver cómo podemos configurar CORS en nuestro servidor, en nuestra API REST con la anotación `@CrossOrigin`.
+
 ![21-02](images/21-02.png)
+
+`@CrossOrigin` está disponible desde la versión 4.2 de Spring y la podemos utilizar a nivel de método o a nivel de una clase controladora. Tiene una serie de atributos como pueden ser:
+
+* `origins` donde nos permite utilizar o bien un asterisco (`*`) para indicar cualquier origen, no sería una práctica excesivamente adecuada, o una lista de orígenes que serían permitidos.
+
+* `methods` por si quisiéramos segmentar qué métodos se van a poder soportar, imaginemos a nivel de una clase controladora podríamos decir que aplicará para un determinado origen, para las peticiones tipo GET y POST y a lo mejor luego a nivel de métodos podríamos permitirle otro tipo de PUT o DELETE a algún sitio en particular.
+
+* `maxAge` también el atributo `maxAge` la duración máxima en segundos de la caché, también lo podríamos indicar.
+
 ![21-03](images/21-03.png)
+
+Tiene otra serie de atributos como:
+
+* `allowCredentials`
+* `allowHeaders`
+* `exposedHeaders`
+
+que también tienen que ver con todo esto de CORS y que os dejo que investiguen un poco por su cuenta, habla de Cookies, de encabezados que se pueden exponer, que no, que encabezados si nos permitiría un determinado origen enviar, cuales no, nos vamos a entrar mucho en esa parte nos vamos a centrar en ver el código.
+
 ![21-04](images/21-04.png)
+
+Esto nos permitiría tener un código así el que pudiéramos revisar CORS a nivel de un método en particular del GET del producto, para que el proyecto como el que teníamos antes si pudiera hacer un tipo de petición GET sobre este método. 
+
 ![21-05](images/21-05.png)
+
+Vamos a ver cómo sería a nivel de clase, lo podremos tener igual y fijado como podríamos indicar también los métodos para este mismo origen que solamente se pudieran hacer peticiones GET o POST.
+
+### :computer: `143-11-CORSMetodo`
+
+Vamos a copiar el proyecto `143-10-ProblemasCORS` y los renombraremos como `143-11-CORSMetodo`. Realmente solo vamos a añadir una línea en el Controller. 
+
+En el proyecto `143-11-CORSMetodo` cambiamos el `pom.xml`
+
+`pom.xml`
+
+```html
+<artifactId>143-11-CORSMetodo</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-11-CORSMetodo</name>
+<description>Ejemplo de manejo de CORS a nivel de método</description>
+```
+
+**NOTA** ***Para que obtuviera la misma salida tuve que hacer ajustes en las clases `ProductoDTO` y 
+`ProductoDTOConverter` que no se a partir de que proyecto cambiaron, Abría que revisar donde se cambio***
+
+`ProductoDTO`
+
+```java
+package com.openwebinars.rest.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+public class ProductoDTO {
+	
+   private long id;
+   private String nombre;
+   private String categoria;
+
+}
+```
+
+`ProductoDTOConverter`
+
+```java
+package com.openwebinars.rest.dto.converter;
+
+import javax.annotation.PostConstruct;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
+import org.springframework.stereotype.Component;
+
+import com.openwebinars.rest.dto.ProductoDTO;
+import com.openwebinars.rest.modelo.Producto;
+
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class ProductoDTOConverter {
+	
+   private final ModelMapper modelMapper;
+	
+   @PostConstruct
+   public void init() {
+      modelMapper.addMappings(new PropertyMap<Producto, ProductoDTO>() {
+
+         @Override
+         protected void configure() {
+            map().setCategoria(source.getCategoria().getNombre());
+         }
+      });
+   }
+	
+   public ProductoDTO convertToDto(Producto producto) {
+      return modelMapper.map(producto,  ProductoDTO.class);
+   }
+}
+```
+
+Y en el controlador solo añadimos la línea `@CrossOrigin(origins = "http://localhost:9001")` al método `obtenerTodos()`.
+
+```java
+@CrossOrigin(origins = "http://localhost:9001")
+@GetMapping("/producto")
+public ResponseEntity<?> obtenerTodos() {
+   ...
+```
+
+Como Cliente vamos a seguir usando `143-10-ProblemasCORSCliente`.
+
+Vamos a lanzar ambas aplicaciones y ver los resultados y tenemos como salida lo siguiente:
+
+![143-11-01](images/143-11-01.png)
+
+Nos aparece nuestro listado de productos porque se ha hecho la petición AJAX a la URL `http://localhost:8080/producto/`, se ha traído todo el Jackson, ha montado la tabla HTML y nos lo está pintando.
+
+Cómo podéis comprobar esta sola anotación `@CrossOrigin(origins = "http://localhost:9001")` ha marcado la diferencia para permitir al origen `9001` el hecho de que se pudiera hacer la petición.
+
+Si paramos el cliente y nos viniéramos a cambiar el puerto sobre el que se ejecuta teniendo el servidor todavía ejecutándose, cambiamos para que el cliente se ejecute en el puerto `9002` en `application.properties`
+
+```html
+server.port=9002
+```
+
+y volvemos a ejecutar el cliente vamos a tener:
+
+![143-11-02](images/143-11-02.png)
+
+
+Ahora nosotros hiciéramos la petición desde `http://localhost:9002/` y CORS vuelve a bloquear ya que no es un origen que esté permitido y entonces no podríamos hacer la petición. 
+
+Esta es un sencillo tratamiento de CORS a nivel de método de clase, vamos a ver en la siguiente lección cómo podemos hacer un tratamiento global que nos va a permitir, para diferentes controladores aplicar una política común.
 
 # 22 Configuración CORS global 8:22 
 
