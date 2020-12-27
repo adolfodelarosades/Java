@@ -433,9 +433,14 @@ y volvemos a ejecutar el cliente vamos a tener:
 
 ![143-11-02](images/143-11-02.png)
 
+Ahora nosotros hiciéramos la petición desde `http://localhost:9002/` y CORS vuelve a bloquear ya que no es un origen que esté permitido y entonces no podríamos hacer la petición.
 
-Ahora nosotros hiciéramos la petición desde `http://localhost:9002/` y CORS vuelve a bloquear ya que no es un origen que esté permitido y entonces no podríamos hacer la petición. 
+### :computer: Código Completo `143-11-CORSMetodo`
 
+![143-11-03](images/143-11-03.png)
+
+Solo se añadio la linea `@CrossOrigin(origins = "http://localhost:9001")` en el Controller.
+ 
 Esta es un sencillo tratamiento de CORS a nivel de método de clase, vamos a ver en la siguiente lección cómo podemos hacer un tratamiento global que nos va a permitir, para diferentes controladores aplicar una política común.
 
 # 22 Configuración CORS global 8:22 
@@ -560,10 +565,6 @@ El listado lo seguimos pudiendo recuperar sin ningún tipo de problema. Pero si 
 
 El problema de que no es un origen permitido por lo cual no nos deja hacer la petición desde `http://localhost:9002`, de esta manera bloqueamos a un origen que no sea permitido y si daríamos acceso a uno que si con una politica un poco más global.
 
-![22-06](images/22-06.png)
-
-Como reto les animo a que jueguen un poco con la configuración global de CORS permitiendo una URL si y otra no, podemos añadir dos origenes 9001 y 9002 y ejecutar dos clientes diferentes en cada puerto verificar que lo permita, pueden limitar el tipo de peticiones que todos puedan hacer GET pero solo alguno de ellos pueda hacer POST y así ver como la configuración de CORS va funcionando de la manera más adecuada posible.
-
 ### :computer: código Completo `143-12-CORSGlobal`
 
 ![143-12-03](images/143-12-02.png)
@@ -628,6 +629,10 @@ public class MiConfiguracion {
 
 }
 ```
+
+![22-06](images/22-06.png)
+
+Como reto les animo a que jueguen un poco con la configuración global de CORS permitiendo una URL si y otra no, podemos añadir dos origenes 9001 y 9002 y ejecutar dos clientes diferentes en cada puerto verificar que lo permita, pueden limitar el tipo de peticiones que todos puedan hacer GET pero solo alguno de ellos pueda hacer POST y así ver como la configuración de CORS va funcionando de la manera más adecuada posible.
 
 Hasta aquí este bloque de CORS, en el bloque siguiente vamos a seguir trabajando con nuestro API REST añadiendole nuevas funcionalidades.
 
