@@ -1512,7 +1512,11 @@ Pero con los cambios realizados ahora tendremos esto:
 
 ![143-09-02](images/143-09-02.png)
 
-Vemos que hemos vuelto al modelo de error antiguo y eso es verdad que era previsible que nos pasará, porque volvemos a tener ese `DefaultErrorAttributes`. ¿Qué podemos hacer al respecto? podemos crear nuestros propios componentes de error, creando un componente (`@Component`) que extienda a este `DefaultErrorAttributes` y dándole un tratamiento. 
+Vemos que hemos vuelto al modelo de error antiguo y eso es verdad que era previsible que nos pasará, porque volvemos a tener ese `DefaultErrorAttributes`.
+
+![19-09](images/19-09.png)
+
+¿Qué podemos hacer al respecto? podemos crear nuestros propios componentes de error, creando un componente (`@Component`) que extienda a este `DefaultErrorAttributes` y dándole un tratamiento. 
 
 Este es un código que vamos a crear nosotros en nuestro paquete de `error`.
 
@@ -1575,7 +1579,6 @@ Si ejecutamos el proyecto la salida se vuelve a parecer a lo que veniamos tenien
 ![143-09-03](images/143-09-03.png)
 
 Para lo que tuvimos que modificar el `DefaultErrorAttributes`
-
 
 ### :computer: Código Completo `143-09-ResponseStatusException`
 
@@ -1770,9 +1773,6 @@ public class ApiErrorAttributes extends DefaultErrorAttributes {
 ```
 
 Se Eliminarón las clases `ApiError` y `GlobalControllerAdvice`
-   
-![19-09](images/19-09.png)
-
 
 ![19-10](images/19-10.png)
 
