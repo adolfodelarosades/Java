@@ -1382,15 +1382,405 @@ Puede ser interesante fijarse en algunas de sus subclases:
 ## Transcripción
 
 ![19-01](images/19-01.png)
+
+Vamos a cerrar el bloque del tratamiento de excepciones con el manejo de errores con `ResponseStatusException`.
+
 ![19-02](images/19-02.png)
+
+Alguno podrían decir, ¿oye no hemos dado un paso atrás? porque eso de `ResponseStatusException` nos recuerda a la primera lección de este bloque en la cual dabamos un tratamiento a los errores con la anotación `@ResponseStatus`, no son lo mismo pero ciertamente si podríamos decir que están relacionados y es que el modelo de errores que hemos presentado en las lecciones anteriores si es verdad que sería compatible con lo que hemos visto hasta ahora, pero vamos a tratar de poner las cosas en su sitio. 
+
 ![19-03](images/19-03.png)
+
+Presentamos este esquema para el tratamiento de excepciones, el último de todo porque es el último que ha llegado a la familia de Spring de hecho si vuestro proyecto no trabaja con Spring 5 no podréir plantearos utilizarlo, tendrían que usar alguno de los elementos anteriores que vienen algunos, desde Spring 3 y pico y otros desde Spring 4, este está solo disponible desde Spring 5.
+
+Se trata como cualquier otra excepción, de hecho tendremos que hacer un `throw new...` y sería de un tipo de excepción, sin embargo lo que pasa que nos permite indicar un *estado* obligatorio, una *razón* opcional con un `String` y un `Throwable`, la *causa* que también sería opcional.
+
 ![19-04](images/19-04.png)
+
+Veámoslo en su contexto, esto sería la modificación de uno de los de los ejemplos que hemos venido haciendo hasta ahora, en el cual haríamos el tratamiento con `ResponseStatusException` ya digo que parece quedamos un pequeño paso hacia atrás pero bueno ahora podremos explicar el por qué, vemos como se lanzaría como una excepción cualquiera pasándole un código de estado y un determinado mensaje.
+
 ![19-05](images/19-05.png)
+
+El manejo que nos permite esto nos permitiría integrarlo con el tratamiento del resto de excepciones, de hecho podríamos hacer un `try-catch`, incluso recoger nuestras propias excepciones definidas antes como la de `ProductoNotFoundException` y aprovechar digamos para mutar un poco la excepción y lanzar entonces una excepción de este tipo que devolvería una respuesta con un determinado código y un mensaje.
+
 ![19-06](images/19-06.png)
+
+Qué ventajas tiene el uso de `ResponseStatusException`, cuando se comienza a desarrollar un API suele ser bastante cómodo porque nos permite hacer el manejo de errores con muy poco esfuerzo, si en un determinado contexto en una aplicación, un mismo tipo de excepción puede tener distintos código de respuesta dependiendo de alguna situación, con lo que veníamos haciendo hasta ahora sería un poquito complicado para tener diferentes tipos de código de estado, sin embargo aquí cómo lo podemos lanzar sobre la marcha el tratamiento es programático, podemos hacer un `throw new...` donde queramos y podríamos cambiar el código de estado con mucho más tranquilidad. Además si no queremos ir creando tantas clases de excepción, imaginemos que nuestro modelo no fuese tan sencillo como el de este ejemplo, sino que tuviera muchas más clases, por cada `Not Found` ¿vamos a ir creando una excepción personalizada?  `Producto Not Found`,  `Categoria Not Found`, `User Not Found`, posiblemente esto nos simplificaría ese manejo.
+
 ![19-07](images/19-07.png)
+
+Por contra también tiene unas desventajas y es que hemos perdido la globalidad ganada con `@ControllerAdvice`, tenemos que lanzar en cada sitio la excepción para que se le dé el tratamiento y por tanto tendremos a duplicar el código y veremos cómo puede que demos un paso atrás y que el modelo volvamos a tener el del `DefaultErrorAttributes` y tengamos que hacer alguna modificación.
+
 ![19-08](images/19-08.png)
+
+¿Qué conclusiones sacamos de todo esto? bueno no tenemos que casarnos con un esquema exclusivamente , podemos hacer una combinación de ambos, podemos combinar el uso de `@ControllerAdvice` o `@RestControllerAdvice` para elementos globales con `ResponseStatusException` para elementos muy peculiares, puntuales o específico, si es verdad que nos tenemos que guardar muy mucho de hacer el tratamiento de una excepción específica más de una vez con ambos tipos, no con `ResponseStatusException` y con `@ControllerAdvice`, tenemos que tener ciertamente cuidado.
+
+### :computer: `143-09-ResponseStatusException`
+
+Partiendo del proyecto `143-08-ControllerAdviceII` vamos a hacer una copia y vamos a llamar el proyecto como `143-09-ResponseStatusException`.
+
+#### 01. Modificar el `pom.xml`
+
+```html
+<artifactId>143-09-ResponseStatusException</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-09-ResponseStatusException</name>
+<description>Ejemplo de manejo de errores con ResponseStatusException</description>
+```
+
+#### 02. Eliminación de `ApiError` y `GlobalControllerAdvice`
+
+Nosotros lo vamos a hacer un poco heavy y lo que vamos a hacer es eliminar las dos clases que veníamos construyendo en las lecciones anteriores que se encuentran en el paquete `error`, es decir eliminamos `ApiError` y `GlobalControllerAdvice` solo conservamos `ProductoNotFoundException`.
+
+#### 03. Cambios en el Controller
+
+Vamos a volver al controlador y vamos a hacer algunos cambios en el código, vamos a modificar el método `obtenerTodos()` que actualmente lo tenemos así:
+
+```java
+@GetMapping("/producto")
+public ResponseEntity<?> obtenerTodos() {
+   List<Producto> result = productoRepositorio.findAll();
+
+   if (result.isEmpty()) {
+      return ResponseEntity.notFound().build();
+   } else {
+      //return ResponseEntity.ok(result);
+      List<ProductoDTO> dtoList = 
+                          result.stream()
+                                  .map(productoDTOConverter::convertToDto)
+                                  .collect(Collectors.toList());
+      return ResponseEntity.ok(dtoList);
+   }
+
+}
+```
+
+Y lo vamos a cambiar para que en el caso de que el resultado este vacío en lugar de devolver ese código de respuesta lo cambiamos para lanzar una excepción:
+
+```java
+@GetMapping("/producto")
+public ResponseEntity<?> obtenerTodos() {
+   List<Producto> result = productoRepositorio.findAll();
+
+   if (result.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay productos registrados");
+   } else {
+      //return ResponseEntity.ok(result);
+      List<ProductoDTO> dtoList = 
+                          result.stream()
+                                  .map(productoDTOConverter::convertToDto)
+                                  .collect(Collectors.toList());
+      return ResponseEntity.ok(dtoList);
+   }
+
+}
+```
+
+Observaciones
+
+* en lugar de devolver ese código de respuesta lo cambiamos para lanzar una excepción `ResponseStatusException` con un `status` y un mensaje de error.
+
+También vamos a modificar el método `obtenerUno(...)` que actualmente lo tenemos así:
+
+```java
+@GetMapping("/producto/{id}")
+public Producto obtenerUno(@PathVariable Long id) {
+   return productoRepositorio.findById(id)
+		.orElseThrow(() -> new ProductoNotFoundException(id));
+}
+```
+
+Como nos interesa mantener la excepción `ProductoNotFoundException` la encerramos en un `try-catch` para relanzarla con el estado `NOT_FOUND` y el mensaje que le corresponda. El código nos queda así:
+
+```java
+@GetMapping("/producto/{id}")
+public Producto obtenerUno(@PathVariable Long id) {
+   try {
+      return productoRepositorio.findById(id)
+		.orElseThrow(() -> new ProductoNotFoundException(id));
+   } catch (ProductoNotFoundException ex) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+   }
+}
+```
+
+Vamos a lanzar el proyecto y vamos a ver qué nos devuelve. Si buscamos el producto 34 antes teniamos esto:
+
+![143-09-01](images/143-09-01.png)
+
+Pero con los cambios realizados ahora tendremos esto:
+
+![143-09-02](images/143-09-02.png)
+
+Vemos que hemos vuelto al modelo de error antiguo y eso es verdad que era previsible que nos pasará, porque volvemos a tener ese `DefaultErrorAttributes`. ¿Qué podemos hacer al respecto? podemos crear nuestros propios componentes de error, creando un componente (`@Component`) que extienda a este `DefaultErrorAttributes` y dándole un tratamiento. 
+
+Este es un código que vamos a crear nosotros en nuestro paquete de `error`.
+
+#### 04. Crear la clase `ApiErrorAttributes`
+
+`ApiErrorAttributes`
+
+```java
+@Component
+public class ApiErrorAttributes extends DefaultErrorAttributes {
+
+@Override
+public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
+   
+   Map<String, Object> allErrorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
+   Map<String, Object> errorAttributes = new HashMap<>();
+   int statusCode = (int) allErrorAttributes.get("status");
+   errorAttributes.put("estado", HttpStatus.valueOf(statusCode));
+   errorAttributes.put("fecha", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+
+   String mensaje = "";
+		
+   Throwable throwable = getError(webRequest);
+		
+   if (throwable instanceof ResponseStatusException) {
+      ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
+      mensaje = responseStatusException.getReason() == null ? "" : responseStatusException.getReason(); 
+   } else {
+      if (throwable.getCause() != null)
+         mensaje = throwable.getCause().getMessage() == null ? throwable.getCause().toString() 
+							     : throwable.getCause().getMessage();
+      else
+         mensaje = throwable.toString();
+      }
+		
+      errorAttributes.put("mensaje", mensaje);
+		
+      return errorAttributes;
+   }
+
+}
+```
+
+Observaciones de `ApiErrorAttributes`
+
+* Como es un componente lo anotamos con `@Component`
+* Extiende a `DefaultErrorAttributes`
+* Sobreescribimos el método `getErrorAttributes` el cual retorna un `Map`
+   * Disfrazamos un poco nuestra salida de error para que se parezca a lo que veniamos teniendo en nuestro ApiError.
+   * Retorna un `Map` por que esto se puede montar en una versión Web
+   * El `Map` es transformado a un Jackson con la clave y el Objeto
+   * Obtenemos todos los errores
+   * Obtenemos el `statusCode`
+   * Establecemos el `status` y la `fecha`
+   * Dependiendo del tipo de error de clase que nos venga armamos un `mensaje`
+   * Retornamos el `Map` armado.
+   
+Si ejecutamos el proyecto la salida se vuelve a parecer a lo que veniamos teniendo hasta ajora.
+
+![143-09-03](images/143-09-03.png)
+
+Para lo que tuvimos que modificar el `DefaultErrorAttributes`
+
+
+### :computer: Código Completo `143-09-ResponseStatusException`
+
+![18-10](images/18-10.png)
+
+Vamos a listar solo las clases modificadas.
+
+`ProductoController`
+
+```java
+package com.openwebinars.rest.controller;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.openwebinars.rest.dto.CreateProductoDTO;
+import com.openwebinars.rest.dto.ProductoDTO;
+import com.openwebinars.rest.dto.converter.ProductoDTOConverter;
+import com.openwebinars.rest.error.ProductoNotFoundException;
+import com.openwebinars.rest.modelo.Categoria;
+import com.openwebinars.rest.modelo.CategoriaRepositorio;
+import com.openwebinars.rest.modelo.Producto;
+import com.openwebinars.rest.modelo.ProductoRepositorio;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductoController {
+
+   private final ProductoRepositorio productoRepositorio;
+   private final ProductoDTOConverter productoDTOConverter;
+   private final CategoriaRepositorio categoriaRepositorio;
+
+   /**
+    * Obtenemos todos los productos
+    * 
+    * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
+    */
+   @GetMapping("/producto")
+   public ResponseEntity<?> obtenerTodos() {
+      List<Producto> result = productoRepositorio.findAll();
+
+      if (result.isEmpty()) {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay productos registrados");
+      } else {
+         //return ResponseEntity.ok(result);
+         List<ProductoDTO> dtoList = 
+               result.stream()
+                        .map(productoDTOConverter::convertToDto)
+                        .collect(Collectors.toList());
+         return ResponseEntity.ok(dtoList);
+      }
+
+   }
+
+   /**
+    * Obtenemos un producto en base a su ID
+    * 
+    * @param id
+    * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
+    */
+   @GetMapping("/producto/{id}")
+   public Producto obtenerUno(@PathVariable Long id) {
+      try {
+         return productoRepositorio.findById(id)
+                  .orElseThrow(() -> new ProductoNotFoundException(id));
+      } catch (ProductoNotFoundException ex) {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+      }
+   }
+
+   /**
+    * Insertamos un nuevo producto
+    * 
+    * @param nuevo
+    * @return 201 y el producto insertado
+    */
+   @PostMapping("/producto")
+   public ResponseEntity<?> nuevoProducto(@RequestBody CreateProductoDTO nuevo) {
+      // En este caso, para contrastar, lo hacemos manualmente
+		
+      // Este código sería más propio de un servicio. Lo implementamos aquí
+      // por no hacer más complejo el ejercicio.
+      Producto nuevoProducto = new Producto();
+      nuevoProducto.setNombre(nuevo.getNombre());
+      nuevoProducto.setPrecio(nuevo.getPrecio());
+		
+      //Rescatamos la categoría para poder asignarla
+      Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+      nuevoProducto.setCategoria(categoria);
+		
+      //salvar y devolver
+      return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+		
+   }
+
+   /**
+    * 
+    * @param editar
+    * @param id
+    * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
+    */
+   @PutMapping("/producto/{id}")
+   public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+
+      return productoRepositorio.findById(id).map(p -> {
+			p.setNombre(editar.getNombre());
+			p.setPrecio(editar.getPrecio());
+			return productoRepositorio.save(p);
+      }).orElseThrow(() -> new ProductoNotFoundException(id));
+   }
+
+   /**
+    * Borra un producto del catálogo en base a su id
+    * 
+    * @param id
+    * @return Código 204 sin contenido
+    */
+   @DeleteMapping("/producto/{id}")
+   public ResponseEntity<?> borrarProducto(@PathVariable Long id) {
+      Producto producto = productoRepositorio.findById(id)
+				.orElseThrow(() -> new ProductoNotFoundException(id));
+		
+      productoRepositorio.delete(producto);
+      return ResponseEntity.noContent().build();
+   }
+
+}
+```
+
+`ApiErrorAttributes`
+
+```java
+package com.openwebinars.rest.error;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.server.ResponseStatusException;
+
+@Component
+public class ApiErrorAttributes extends DefaultErrorAttributes {
+
+   @Override
+   public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
+      Map<String, Object> allErrorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
+
+      Map<String, Object> errorAttributes = new HashMap<>();
+      int statusCode = (int) allErrorAttributes.get("status");
+      errorAttributes.put("estado", HttpStatus.valueOf(statusCode));
+      errorAttributes.put("fecha", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+
+      String mensaje = "";
+		
+      Throwable throwable = getError(webRequest);
+		
+      if (throwable instanceof ResponseStatusException) {
+         ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
+         mensaje = responseStatusException.getReason() == null ? "" : responseStatusException.getReason(); 
+      } else {
+         if (throwable.getCause() != null)
+            mensaje = throwable.getCause().getMessage() == null ? throwable.getCause().toString() 
+	                                                        : throwable.getCause().getMessage();
+         else
+            mensaje = throwable.toString();
+      }
+		
+      errorAttributes.put("mensaje", mensaje);
+		
+      return errorAttributes;
+   }
+
+}
+```
+
+Se Eliminarón las clases `ApiError` y `GlobalControllerAdvice`
+   
 ![19-09](images/19-09.png)
+
+
 ![19-10](images/19-10.png)
+
+Cómo reto os propongo extenderé este tipo de manejo de error al resto de métodos del controlador y que podáis hacer una comparativa entre el uso del tratamiento global y de este tipo de tratamiento. Os recomiendo poder utilizarlo sobre todo cuando estoy empezando un API nueva, si está definida sobre Spring 5 si es nueva debería estarlo siempre y que podáis hacer el manejo de errores rápido hasta que podáis refactorizar dicho código y a lo mejor hacer un tratamiento más global.
+
+También podéis jugar con los posibles campos de error si queréis meter alguno más, si queréis anidar un objeto dentro de otro, no tendréis más que como parte de este código del tratamiento de errores, ver como se mapea un String y un Object, lo que podríamos hacer es que el Object, si quisiéramos anidar un objeto dentro de otro, este Object fuera otro más y entonces tendríamos un objeto anidado dentro, por si queréis hacer un modelo de error que fuese algo más complejo.
+
+Esto lo propongo como reto, para cerrar también este bloque en el que hemos venido trabajando con los errores y las excepciones de nuestra API REST con Spring boot.
 
 # Contenido adicional 6
 
