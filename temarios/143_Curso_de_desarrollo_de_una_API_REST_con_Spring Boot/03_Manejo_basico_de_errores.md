@@ -546,7 +546,6 @@ Y como tipo de retorno puede volver vacío en un contexto en el que usemos un mo
 
 En definitiva vamos a ver qué podemos añadir a nuestro proyecto lo que vamos a hacer es tener dos métodos `handleProductoNotFoundException` para manejar excepciones de productos no encontrados y vamos a manejar otra excepción que aunque no sea nuestra también se puede producir que son errores en el Parseo a la hora de crear o editar un producto, a la hora de serializar o deserializar podemos encontrar algún tipo de problema, todo ello produciría un error de tipo `JsonMappingException` vamos a ver como capturarla y que entoces el error que produzca sea el que a nosotros nos pueda interesar.
 
-
 ### :computer: `143-06-ExceptionHandler` Manejo de errores con `@ExceptionHandler`
 
 Partimos del proyecto `143-05-ManejoBasicoErrores` y realizamos una copia y le llamaremos `143-06-ExceptionHandler`.
@@ -1255,9 +1254,9 @@ Con `haddleExceptionInternal` lo vamos a hacer, tenemos algunos más, una serie 
 
 Que es lo que venía contando hasta ahora, vamos a hacerlo en nuestro código.
 
-### :computer:
+### :computer: `143-08-ControllerAdviceII`
 
-Partiendo del proyecto anterior `143-07-ControllerAdvice` vamos a hacer una copia y lo vamos a llamar `143-07-ControllerAdvice`
+Partiendo del proyecto anterior `143-07-ControllerAdvice` vamos a hacer una copia y lo vamos a llamar `143-08-ControllerAdviceII`
 
 #### 01. Modificar el `pom.xml`
 
@@ -1270,9 +1269,17 @@ Partiendo del proyecto anterior `143-07-ControllerAdvice` vamos a hacer una copi
 
 #### 02. Modificar la Clase `GlobalControllerAdvice`
 
+Vamos a modificar el método `handleExceptionInternal` del `GlobalControllerAdvice`
+
 `GlobalControllerAdvice`
 
 ```java
+@Override
+protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
+			HttpStatus status, WebRequest request) {
+   ApiError  apiError = new ApiError(status, ex.getMessage());
+   return ResponseEntity.status(status).headers(headers).body(apiError);
+}
 ```
 
 Observaciones de `GlobalControllerAdvice`
@@ -1280,11 +1287,41 @@ Observaciones de `GlobalControllerAdvice`
 * Extendemos `ResponseEntityExceptionHandler`
 * El método `handleJsonMappingException` ya no lo vamos a usar
 * Vamos a sobreescribir el método `handleExceptionInternal` el cual recibe la excepción que se produce, el cuerpo para la respuesta, los encabezados, el estado y la petición. Podemos tomar solo lo que nos haga falta.
-* Lo implementamos con nuestra clase `ApiError`, el estado lo tomamos directamente de aquí. AQUUIIIII 
+* Lo implementamos con nuestra clase `ApiError`, el estado lo tomamos directamente de lo que recibimos. Ya el estado de cualquiera de los otros métodos de esta clase lo tendra marcado, a lo mejor un 415 o cualquier error que no veniamos manejando hasta ahora, ya lo tenemos desde aquí tomando el `status`.
+* El mensaje va a seguir siendo el de la propia excepción.
+* Devolvemos un `ResponseEntity` con su respectivo `status`
+* Podemos añadir para la devolución alguna cabecera que ya se nos proporciona con `headers(headers)` y que puede contener alguna información de error que desemos informar.
+* Y en la devolución devolvemos dentro del cuerpo el propio ApiError con `body(apiError)`.
 
+Si lanzamos la aplicación para probar la nueva excepción vamos a ver en que cambia, lo que se nos mostraba antes del cambio era esto:
 
+![143-08-01](images/143-08-01.png)
 
+Con el cambio ahora se nos muestra esto:
 
+![143-08-02](images/143-08-02.png)
+
+Hemos quitado el mapeo de esa excepción pero nos sigue dando el mensaje aun que es distinto por que el cause de la excepción va a ser diferente pero básicamente el error sigue consistiendo en lo mismo que "UNO" no es un número y no es capaz de formatearlo donde es necesario.
+
+```json
+{
+    "estado": "BAD_REQUEST",
+    "fecha": "27/12/2020 10:54:02",
+    "mensaje": "JSON parse error: Cannot deserialize value of type `long` from String \"UNO\": not a valid Long value; nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `long` from String \"UNO\": not a valid Long value\n at [Source: (PushbackInputStream); line: 4, column: 19] (through reference chain: com.openwebinars.rest.dto.CreateProductoDTO[\"categoriaId\"])"
+}
+```
+
+De esta manera estamos manejando algún tipo de error como es el mapeo a Jackson desde Java o viceversa y lo estamos haciendo a través del propio mecanismo interno, esto no nos quita que las excepciones asociadas a nuestro modelo de datos como por ejemplo `handleProductoNoEncontrado(...)` la tengamos que seguir manteniendo, recojamos una excepción personalizada por nosotros y que sigamos dandole este tipo de tratamiento.
+
+Sin embargo para los errores comunes, si no los queremos sobreescribir, también podemos sobreescribir cualquiera de los métodos de `ResponseEntityExceptionHandler` que son el tratamiento de excepciones que se producen por defecto.
+
+![18-08](images/18-08.png)
+
+Podríamos hacer el tratamiento personalizado de cualquiera de estas excepciones, pero si no queremos hacerlo ya nos hemos dado cuenta que con el código anterior le estamos dando una especie de embudo donde salen todos por el mismo cause y utilizaría nuestra clase `ApiError` como un modelo de error bastante mas conveniente. 
+
+Les invito a que el tratamiento que haciamos en el reto anterior lo puedan modificar ahora para ver si ese nuevo controlador de categorias junto con las excepciones que hayan podido crear se pueden ir también manejando en una clase `ControllerAdvice` que extienda `ResponseEntityExceptionHandler` y poder allí combinando los diferentes elementos que vayamos viendo durante el curso.
+
+En la próxima lección vamos a seguir trabajando con errores pero con un enfoque un poco diferente.
 
 # 19 Novedades en Spring 5: ResponseStatusException 12:39 
 
