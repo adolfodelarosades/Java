@@ -1321,6 +1321,45 @@ Podríamos hacer el tratamiento personalizado de cualquiera de estas excepciones
 
 Les invito a que el tratamiento que haciamos en el reto anterior lo puedan modificar ahora para ver si ese nuevo controlador de categorias junto con las excepciones que hayan podido crear se pueden ir también manejando en una clase `ControllerAdvice` que extienda `ResponseEntityExceptionHandler` y poder allí combinando los diferentes elementos que vayamos viendo durante el curso.
 
+
+### :computer: Código Completo `143-08-ControllerAdviceII`
+
+![18-09](images/18-09.png)
+
+La unica clase que se modifico con respecto al proyecto anterior es `GlobalControllerAdvice` donde eliminamos un método y sobreescribimos otro.
+
+`GlobalControllerAdvice`
+
+```java
+package com.openwebinars.rest.error;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+@RestControllerAdvice
+public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
+	
+   @ExceptionHandler(ProductoNotFoundException.class)
+   public ResponseEntity<ApiError> handleProductoNoEncontrado(ProductoNotFoundException ex) {
+      ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+   }
+	
+   @Override
+   protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
+			HttpStatus status, WebRequest request) {
+      ApiError  apiError = new ApiError(status, ex.getMessage());
+      return ResponseEntity.status(status).headers(headers).body(apiError);
+   }
+
+}
+```
+
 En la próxima lección vamos a seguir trabajando con errores pero con un enfoque un poco diferente.
 
 # 19 Novedades en Spring 5: ResponseStatusException 12:39 
