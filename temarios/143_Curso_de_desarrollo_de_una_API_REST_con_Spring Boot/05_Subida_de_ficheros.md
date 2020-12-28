@@ -495,7 +495,6 @@ El almacenamiento de la imagen no se hace embebido en la BD sino que lo hacemos 
 
 #### PAQUETE `rest`
 
-
 Por ultimo lo que hacemos al iniciar la aplicación es borrar todos los ficheros y después inicializar el servicio justo para empezar.
 
 `Application`
@@ -528,37 +527,63 @@ public class Application {
 }
 ```
 
+Este es el código base que tenemos.
+
 ![24-03](images/24-03.png)
 
-``
-```java
-```
+Vamos a implementar ahora un método de subida, lo vamos a llamar `nuevoProducto` con algunas modificaciones para que veamos cómo se puede utilizar, no es obligatorio pero le vamos a indicar el tipo MIME de datos indicando qué es un `MULTIPART_FORM_DATA_VALUE` qué es el que ***nos permite subir muchas partes dentro de una petición***.
 
-``
-```java
-```
+Es verdad que no vamos a poder obtener como teníamos antes con `@RequestBody` inyectar todo el cuerpo en un objeto Java porque vamos a tener diferentes partes.
 
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-
+Tenemos dos alternativas `@RequestParam` o `@RequestPart` y vamos a utilizar esta segunda y vamos a ver por qué.
 
 ![24-04](images/24-04.png)
+
+`@RequestParam` asocia un parámetro de la petición a un argumento de un método de controlador, una especie de inyección, se puede usar en peticiones multiparte y es válido para anotar `MultipartFile`, el inconveniente que tenemos es que si no es de tipo `String` o `MultipartFile` entonces necesita un `Converter`, y como nosotros transformamos de Jackson a objetos Java o viceversa vía un `HttpMessageConverter` que no es lo mismo de antes, tendríamos que crear un `Converter` para poder, todo lo que no sea el multipart.
+
+Imaginar que ahora vamos a dar de alta un nuevo productoDTO con una imagen y queremos mandarlo todo de una vez, como no lo hagamos en una misma petición tuviéramos que hacer un `Converter` para ese Jackson, no sería la transformación del Jackson a un objeto Java y nosotros queremos ya que tenemos definido el mensaje `MessageConverter` de Jackson, de nuestra librería de Jackson queremos aprovecharlo. 
+
 ![24-05](images/24-05.png)
+
+¿Cómo lo podemos hacer?, utilizando `@RequestPart` que nos permite asociar una parte de una petición multiparte a un argumento del método del controlador.
+
+En realidad es análogo a `@RequestBody`, puede usarse como `MultipartFile` o con cualquier otro tipo de dato que tenga asociado un `HttpMessageConverter` es decir, lo que nosotros buscamos.
+
+Con lo cual podríamos diferenciar si lo que nos envié el cliente es un Jackson y un `MultipartFile`, un fichero, usaríamos `@RequestPart` y si lo que nos envía es un formulario por campos clave-valor, clave-valor, clave-valor en multipartes sí que podríamos utilizar `@RequestParam`, nosotros usaremos `@RequestPart` nos quedamos con la segunda opción.
+
 ![24-06](images/24-06.png)
+
+con locual la firma del método va a quedar de esta manera si nos damos cuenta será una petición POST que va a obtener multipart-form-data en lo que va a consumir que se llama nuevo producto que después de volver a un responseentity y que recibe estos argumentos el crea-t producto de Teo dónde vendrán todos los campos textuales o todo aquellos que sean de tipo numérico Boolean no sé de lo que va a llegar en el Jason en una parte que se llamará nuevo y el fichero que llevar a llegar en una parte que se llamará five la petición que realizamos deberá incluir dos partes la que vaya en Jason llamada nuevo y la otra fine que será de tipo fichero no uno Extreme la subida de la imagen ya digo lo haremos a través de nuestro servicio o tendremos el nombre del fichero a partir del nombre del fichero obtenemos la URI del mismo vamos a ver que tendremos por ahí un mecanismo para hacerlo asignamos Lauri al producto y entonces podremos almacenarlo en la base de datos después veremos cómo se puede hacer una modificación la hemos visto antes pero en el código para que el de Teo incluye la imágenes en el listado de productos lo hemos visto en el modelo el cambio que tendríamos que hacer también en el código del controlador a la hora de devolver ese de Teo para que para que lo incluyera no vamos a verlo como lo haríamos en nuestro código nos vamos a ir
+
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+
+
+
+
 ![24-07](images/24-07.png)
 ![24-08](images/24-08.png)
 ![24-09](images/24-09.png)
