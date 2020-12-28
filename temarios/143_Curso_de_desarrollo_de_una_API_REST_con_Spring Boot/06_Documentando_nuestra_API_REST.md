@@ -115,7 +115,7 @@ El corazón de lo que va de lo que vamos a tener con Swagger es utilizar un JSON
 
 Este JSON utilizado por Swagger UI transforma esto en una web que podríamos llamar interactiva y que nos va a permitir bueno pues ver nuestra API de una manera pues súper conveniente.
 
-Vamos a abrir la documentación de un proyecto, el típico [***Petstore***] (https://petstore.swagger.io/v2/swagger.json) o PetClinic que es un proyecto recurrente que existe en el ecosistema Java.
+Vamos a abrir la documentación de un proyecto, el típico [***Petstore***](https://petstore.swagger.io/v2/swagger.json) o PetClinic que es un proyecto recurrente que existe en el ecosistema Java.
 
 ![26-09](images/26-09.png)
 
