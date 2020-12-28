@@ -634,31 +634,60 @@ Observaciones del método `nuevoProducto(...)`
 * Si ejecutamos nuestro proyecto con `http://localhost:8080/` y la imagen se llama `imagen.jpg` la URL que devolvería la llamada al método `.fromMethodName(...)` sería `http://localhost:8080/files/imagen.jpg` por lo que montamos convenientemente la URI.
 * Si en algun momento queremos cambiar la ruta de almacenamiento solo lo hacemos en `FicherosController`, `ProductoController` no sufriría ningún cambio.
 * El parámetro `null` que mandamos en `.fromMethodName(...)` es solo por que en otras acciones necesita ese parámetro pero para este caso es inecesario por eso pasamos `null`.
+* Finalmente esta URL obtenida la asignamos en nuestro producto `nuevoProducto.setImagen(urlImagen);` 
 
-``
-```java
+
+De esta manera ya tenemos la implementación de subida de ficheros. En resumen si subimos un fichero y no esta vacío lo almacenamos con el Servicio de almacenamiento, tomamos la URL y la asignamos al nuevo producto.
+
+Vamos a probar la aplicación.
+
+Si intentamos ejecutar la petición para crear un nuevo Producto como lo veniamos haciendo hasta ahora:
+
+![143-13-03](images/143-13-03.png)
+
+Vamos a obtener lo siguiente:
+
+![143-13-04](images/143-13-04.png)
+
+Ya no lo podemos mandar como antes ya que la petición tiene que ser de forma MultiParte, rescatamos también lo que hablabamos sobre el tratamiento de errores no hemos tratado explicitamente los errores `415` pero con el tratamiento global de errores tendríamos que nuestro APIError nos devuelve:
+
+```json
+{
+   "estado": "UNSUPPORTED_MEDIA_TYPE",
+   "fecha": "28/12/2020 02:00:39",
+   "mensaje": "Content type 'application/json' not supported"
+}
 ```
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-
-
-
 
 ![24-08](images/24-08.png)
+
+Para probar esta aplicación desde Postman es de una manera y desde una aplicación Cliente se haría algo diferente.
+
 ![24-09](images/24-09.png)
+
+Antes de seguir con la siguiente lección vamos a proponer un reto en el que podáis implementar en lugar de la subida de un solo fichero, si les interesara dar de alta un producto en el contexto de un producto la verdad que tendría mucho sentido subir varios ficheros de una vez, os dejo las pistas para poder implementarlo.
+
 ![24-10](images/24-10.png)
+
+Necesitan recibir como argumento más de un MultipartFile aunque todos se llamarían igual, es decir en el mismo `@RequestPart` varios MultipartFile con lo cual posiblemente lo pueda hacer a partir de un array de MultipartFile.
+
+A la hora de procesar la subida de fichero necesitarás un bucle para repetir el procesamiento que hemos hecho sobre un solo fichero sobre varios.
+
+Tendrás que incluir algún cambio en el modelo de producto para que soporte más de una imagen, si estamos guardando un Stream podría hacer un List de Streams y qué tal usar `@ElementCollection` para no meternos en tener que crear otra nueva entidad, asociaciones y tal, sería una buena pista.
+
+La petición GET de todos los productos solo debería incluir la primera imagen, mientras que la petición GET es de un producto es verdad que debería devolver todas las imágenes para que podamos diferenciarlo.
+
 ![24-11](images/24-11.png)
+
+Otro posible reto sería la subida de imágenes, separar la subida imágenes de la subida de un producto y esto nos permitiría hacerlo de forma independiente.
+
+Si por ejemplo quisiéramos implementar un Drag and Drop en nuestra aplicación cliente en el que fuéramos subiendo diferentes ficheros, aun que fuesen de uno en uno o incluso de varios en varios, lo podríamos tener por separado y lo invocaremos y no tendría que enviarsé toda la información en una misma petición.
+
+Para ello ya digo que tendríamos que desgajar está petición en dos y una sería atender la subida de ficheros y otra el envío de información. Si lo haces también necesitarías tener, ya que vas a recibir directamente solo el MultipartFile solo uno o varios dentro de este nuevo método en el controlador, tendrías que crear una especie de DTO de respuesta, para que esa aplicación cliente fuera recibiendo lo que has subido vía AJAX y tuviera la información por ejemplo los nombres de los archivos o sus rutas completa o lo que vosotros crean conveniente.
+
+Todo ello ya digo lo podríais plantear como retos, estos dos retos para para poder implementarlos en este segundo caso en el contexto del uso de un  Drag and Drop.
+
+En la siguiente lección vamos a ver cómo utilizar el servicio que hemos implementado desde Postman.
 
 # 25 Uso del servicio 5:13 
 
@@ -672,6 +701,21 @@ No existe.
 
 Hola hola todos vamos a cerrar este bloque de subida de ficheros haciendo la prueba del servicio que hemos implementado en el vídeo anterior recordemos la estructura de la petición tiene que recibir dos partes una llamado Nuevo de tipo application Jason y otra llamada file de tipo application octet-stream en recibir un fichero podemos probar día de URL object Postman vamos a empezar por cbrl tendríamos que hacer una petición como está en la que indiquemos qué es una petición de tipo post donde vamos a pasar contenido multiparte en el que vamos a mandar dos partes no la primera el fichero este arroba. Café. JPG porque por facilidad nos vamos a ubicar en la ruta donde esté el fichero y aquí mandaría más el objeto Jason que otra parte llamada nuevo fijado que aquí tenemos que parar escapar perdón las comillas para que no se metan dentro de la cadena de caracteres no que sería el el objeto en Jason yo lo tengo preparado por aquí vale sería lo que tendríamos que escribirse URL con las diferentes opciones fijaos como en la parte del fichero solamente tenemos que indicar el nombre igual y la ruta y sin embargo cuando estamos mandando aquí el Jason para indicar que es Jason tenemos que poner el objeto encerrado entre llave y terminar con un punto type application Jason para que sepa que eso que estamos mandando ahí no es una cadena de caracteres cualquiera sino que eso no es correcto Jason o si hacemos la petición vemos que la respuesta es 201 creado y que nos está devolviendo nuestro objeto con IDE 34 café con el precio y la URL de la imagen y además Manolo metido dentro de la categoría de bebida si nos vamos el proyecto en ejecución y refrescamos por aquí podemos comprobar como aquí nublado útil que es donde hemos configurado que suban los ficheros pues tendríamos nuestra imagen del café y se ha subido todo correctamente tanto que hiciéramos ahora bueno pues la petición del girl del producto 34 también lo podríamos tener etcétera etcétera vamos a ver cómo lo podríamos hacer compost tendríamos que hacer una petición de tipo post donde el cuerpo ya hemos visto que no puede ser con Raúl tiene que ser con data donde pasamos todas partes aquí tenemos la dificultad de que no vamos a poder escribir no lo podríamos hacer de una manera sencilla y es más fácil que hace que encapsular el Jason en un fichero tener en cuenta que no vamos a desarrollar nunca una API para qué se utiliza da solamente por Postma lo más normal es que desarrollen una API para que otra persona nosotros o un tercero pueda desarrollar una aplicación cliente en cualquier tecnología angular pues simplemente JavaScript para Android iOS cualquiera una aplicación cliente que interactúe con nuestro a ti vale y ya se encargará de montar en dicha tecnología la petición y pasar el Jason como corresponda vale pero para poder testearlo desde post no tendríamos que hacerlo pasándole el pizzero de café vale la imagen que corresponda y el Jason lo vamos a pasar en un fichero que tendrá solamente ese ese contenido Jason y que lo vamos a mandar en una parte que se llame nuevo si nos venimos a Postman sería aquí mismo en Fortnite a y entonces tendríamos que pasar la parte nuevo si no le cambiamos el tipo antes no suele dejar vale a tipo file nuevo ahora lo marcaremos buscamos por aquí café Jason que lo tenemos por aquí haciendo la prueba del servicio que me comentaron interior competición con
 
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
 
 ![25-01](images/25-01.png)
 ![25-02](images/25-02.png)
