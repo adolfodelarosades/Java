@@ -79,8 +79,483 @@ No existe.
 ## Transcripción
 
 ![24-01](images/24-01.png)
+
+Vamos a implementar entonces ya que lo hemos explicado en la lección anterior cómo sería la subida de ficheros en nuestra API REST.
+
 ![24-02](images/24-02.png)
+
+
+### :computer: `143-13-Upload` Subida de Ficheros
+
+Vamos a partir del proyecto base del repositorio del curso `23_UploadBase` y haremos una copia con el nombre `143-13-Upload`, la estructura base de la cual partimos es la siguiente:
+
+![143-13-01](images/143-13-01.png)
+
+#### 01. Modificar el `pom.xml`
+
+```html
+<artifactId>143-13-Upload</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-13-Upload</name>
+<description>Ejemplo de subida de ficheros</description>
+```
+
+#### PAQUETE `upload`
+
+Todo el código Base que comentamos en la lección anterior lo tenemos en el paquete `upload`.
+
+Para empezar tenemos la `interface StorageService`:
+
+`StorageService`
+
+```java
+package com.openwebinars.rest.upload;
+
+import java.nio.file.Path;
+import java.util.stream.Stream;
+
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
+
+/**
+ * Este interfaz nos permite definir una abstracción de lo que debería
+ * ser un almacén secundario de información, de forma que podamos usarlo
+ * en un controlador.
+ * 
+ * De esta forma, vamos a poder utilizar un almacen que acceda a nuestro 
+ * sistema de ficheros, o también podríamos implementar otro que estuviera
+ * en un sistema remoto, almacenar los ficheros en un sistema GridFS, ...
+ * 
+ * 
+ * @author Equipo de desarrollo de Spring
+ *
+ */
+public interface StorageService {
+
+   void init();
+
+   String store(MultipartFile file);
+
+   Stream<Path> loadAll();
+
+   Path load(String filename);
+
+   Resource loadAsResource(String filename);
+    
+   void delete(String filename);
+
+   void deleteAll();
+
+}
+```
+
+Se ha modificado minimamente en qcomparación del tutorial que nos ofrece Spring.
+
+También tenemos la clase `FileSystemStorageService`
+
+`FileSystemStorageService`
+
+```java
+package com.openwebinars.rest.upload;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.stream.Stream;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+
+/**
+ * Implementación de un {@link StorageService} que almacena
+ * los ficheros subidos dentro del servidor donde se ha desplegado
+ * la apliacación.
+ * 
+ * ESTO SE REALIZA ASÍ PARA NO HACER MÁS COMPLEJO EL EJEMPLO.
+ * EN UNA APLICACIÓN EN PRODUCCIÓN POSIBLEMENTE SE UTILICE
+ * UN ALMACÉN REMOTO.
+ * 
+ * 
+ * @author Equipo de desarrollo de Spring
+ *
+ */
+@Service
+public class FileSystemStorageService implements StorageService{
+
+   // Directorio raiz de nuestro almacén de ficheros
+   private final Path rootLocation;
+
+   public FileSystemStorageService(@Value("${upload.root-location}") String path) {
+      this.rootLocation = Paths.get(path);
+   }
+    
+   /**
+    * Método que almacena un fichero en el almacenamiento secundario
+    * desde un objeto de tipo {@link org.springframework.web.multipart#MultipartFile} MultipartFile
+    * 
+    * Modificamos el original del ejemplo de Spring para cambiar el nombre
+    * del fichero a almacenar. Como lo asociamos al Empleado que se ha
+    * dado de alta, usaremos el ID de empleado como nombre de fichero.
+    * 
+    */
+   @Override
+   public String store(MultipartFile file) {
+      String filename = StringUtils.cleanPath(file.getOriginalFilename());
+      String extension = StringUtils.getFilenameExtension(filename);
+      String justFilename = filename.replace("."+extension, "");
+      String storedFilename = System.currentTimeMillis() + "_" + justFilename + "." + extension;
+      try {
+         if (file.isEmpty()) {
+            throw new StorageException("Failed to store empty file " + filename);
+         }
+         if (filename.contains("..")) {
+            // This is a security check
+            throw new StorageException(
+                  "Cannot store file with relative path outside current directory "
+                              + filename);
+         }
+         try (InputStream inputStream = file.getInputStream()) {
+            Files.copy(inputStream, this.rootLocation.resolve(storedFilename),
+                     StandardCopyOption.REPLACE_EXISTING);
+            return storedFilename;
+         }
+      }
+      catch (IOException e) {
+         throw new StorageException("Failed to store file " + filename, e);
+      }  
+   }
+
+   /**
+    * Método que devuelve la ruta de todos los ficheros que hay
+    * en el almacenamiento secundario del proyecto.
+    */
+   @Override
+   public Stream<Path> loadAll() {
+      try {
+         return Files.walk(this.rootLocation, 1)
+                  .filter(path -> !path.equals(this.rootLocation))
+                  .map(this.rootLocation::relativize);
+      }
+      catch (IOException e) {
+         throw new StorageException("Failed to read stored files", e);
+      }
+
+   }
+
+   /**
+    * Método que es capaz de cargar un fichero a partir de su nombre
+    * Devuelve un objeto de tipo Path
+    */
+   @Override
+   public Path load(String filename) {
+      return rootLocation.resolve(filename);
+   }
+
+   /**
+    * Método que es capaz de cargar un fichero a partir de su nombre
+    * Devuelve un objeto de tipo Resource
+    */
+   @Override
+   public Resource loadAsResource(String filename) {
+      try {
+         Path file = load(filename);
+         Resource resource = new UrlResource(file.toUri());
+         if (resource.exists() || resource.isReadable()) {
+            return resource;
+         }
+         else {
+            throw new StorageFileNotFoundException("Could not read file: " + filename);
+         }
+      }
+      catch (MalformedURLException e) {
+         throw new StorageFileNotFoundException("Could not read file: " + filename, e);
+      }
+   }
+
+   /**
+    * Método que elimina todos los ficheros del almacenamiento
+    * secundario del proyecto.
+   */
+   @Override
+   public void deleteAll() {
+      FileSystemUtils.deleteRecursively(rootLocation.toFile());
+   }
+
+   /**
+    * Método que inicializa el almacenamiento secundario del proyecto
+    */
+   @Override
+   public void init() {
+      try {
+         Files.createDirectories(rootLocation);
+      }
+      catch (IOException e) {
+         throw new StorageException("Could not initialize storage", e);
+      }
+   }
+
+   @Override
+   public void delete(String filename) {
+      String justFilename = StringUtils.getFilename(filename);
+      try {
+         Path file = load(justFilename);
+         Files.deleteIfExists(file);
+      } catch (IOException e) {
+         throw new StorageException("Error al eliminar un fichero", e);
+      }
+   }
+}
+```
+El método `store(...)`
+
+* El método `store(...)` que es el método de almacenamiento lo que hace es tomar el `MultipartFile` y arma los nombres de `filename`, `extension`, `justFilename`, `storedFilename`.
+* Si el archivo esta vacío o es un archivo raro dispara una excepción.
+* Si todo va bien lo tratamos de almacenar a través de `Files.copy(...)` (Java 7)
+
+
+También tenemos dos archivos para manejar las excepciones.
+
+`StorageException`
+
+```java
+package com.openwebinars.rest.upload;
+
+public class StorageException extends RuntimeException {
+
+   private static final long serialVersionUID = -5502351264978098291L;
+
+   public StorageException(String message) {
+      super(message);
+   }
+
+   public StorageException(String message, Throwable cause) {
+      super(message, cause);
+   }
+
+}
+```
+
+`StorageFileNotFoundException`
+
+```java
+package com.openwebinars.rest.upload;
+
+public class StorageFileNotFoundException extends StorageException {
+	
+   private static final long serialVersionUID = 8482217129851689197L;
+
+   public StorageFileNotFoundException(String message) {
+      super(message);
+   }
+
+   public StorageFileNotFoundException(String message, Throwable cause) {
+      super(message, cause);
+   }
+
+}
+```
+
+#### PAQUETE `controller`
+
+Dentro del paquete `controller` tenemos la clase 
+
+`FicherosController`
+
+```java
+package com.openwebinars.rest.controller;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.openwebinars.rest.upload.StorageService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class FicherosController {
+	
+   private static final Logger logger = LoggerFactory.getLogger(FicherosController.class);
+   private final StorageService storageService;
+	
+   @GetMapping(value="/files/{filename:.+}")
+   @ResponseBody
+   public ResponseEntity<Resource> serveFile(@PathVariable String filename, HttpServletRequest request) {
+      Resource file = storageService.loadAsResource(filename);
+		
+      String contentType = null;
+      try {
+         contentType = request.getServletContext().getMimeType(file.getFile().getAbsolutePath());
+      } catch (IOException ex) {
+         logger.info("Could not determine file type.");
+      }
+
+      if(contentType == null) {
+         contentType = "application/octet-stream";
+      }
+		
+      return ResponseEntity.ok()
+            .contentType(MediaType.parseMediaType(contentType))
+            .body(file);
+   }
+
+}
+```
+
+Observaciones de `FicherosController`
+
+* Este controlador se encarga de cargar un fichero como un recurso
+* Sacar el `contentType` para dejarlo establecido en la respuesta 
+* Y poder devolver una respuesta `200` con el respectivo `contentType` (podriamos tener ademas de las imagenes archivos PDFs u otros)
+* Si no somos capaces de determinar el `contentType` devolvemos un `application/octet-stream` que significa que es un fichero generico.
+
+#### PAQUETE `modelo`
+
+Dentro del paquete también hemos realizado algunas modificaciones.
+
+`Producto`
+
+```java
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+   @Id @GeneratedValue
+   private Long id;
+	
+   private String nombre;
+	 private float precio;
+   private String imagen;
+	
+   @ManyToOne
+   @JoinColumn(name="categoria_id")
+   private Categoria categoria;
+	
+}
+```
+
+#### PAQUETE `dto`
+
+En el `ProductoDTO` hemos añadido el atributo `imagen` para poder devolver la imagen.
+
+`ProductoDTO`
+
+```java
+package com.openwebinars.rest.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ProductoDTO {
+	
+   private long id;
+   private String nombre;
+   private String imagen;
+   private String categoria;
+
+}
+```
+
+El almacenamiento de la imagen no se hace embebido en la BD sino que lo hacemos en un sitio de nuestro sistema de ficheros y lo que le damos a la BD es el URL de la imagen.
+
+#### PAQUETE `rest`
+
+
+Por ultimo lo que hacemos al iniciar la aplicación es borrar todos los ficheros y después inicializar el servicio justo para empezar.
+
+`Application`
+
+```java
+package com.openwebinars.rest;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.openwebinars.rest.upload.StorageService;
+
+@SpringBootApplication
+public class Application {
+
+   public static void main(String[] args) {
+      SpringApplication.run(Application.class, args);
+   }
+	
+   @Bean
+   public CommandLineRunner init(StorageService storageService) {
+      return args -> {
+            // Inicializamos el servicio de ficheros
+            storageService.deleteAll();
+            storageService.init();
+      };
+   }
+}
+```
+
 ![24-03](images/24-03.png)
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+
+
 ![24-04](images/24-04.png)
 ![24-05](images/24-05.png)
 ![24-06](images/24-06.png)
