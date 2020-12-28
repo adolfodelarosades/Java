@@ -587,7 +587,6 @@ public ResponseEntity<?> nuevoProducto(@RequestBody CreateProductoDTO nuevo) {
 
 Lo vamos a cambiar por 
 
-``
 ```java
 ...
 private final StorageService storageService;
