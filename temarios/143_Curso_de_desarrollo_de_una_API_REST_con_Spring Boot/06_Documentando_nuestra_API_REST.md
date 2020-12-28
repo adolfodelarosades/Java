@@ -35,36 +35,36 @@ Sin embargo, se ha detectado que a día de hoy se puede producir en el log una e
 Para la segunda solución, debemos modificar las dependencias anteriores por estas:
 
 ```html
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-models</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
+   <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.9.2</version>
+      <exclusions>
+         <exclusion>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>1.5.21</version>
-        </dependency>
-        <dependency>
+         </exclusion>
+         <exclusion>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-models</artifactId>
-            <version>1.5.21</version>
-        </dependency>
+         </exclusion>
+      </exclusions>
+   </dependency>
+   <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.9.2</version>
+   </dependency>
+   <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>1.5.21</version>
+   </dependency>
+   <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-models</artifactId>
+      <version>1.5.21</version>
+   </dependency>
 ```
 
 La versión correcta de *annotations* y *models* eliminan dicho error.
@@ -75,16 +75,61 @@ En los ejemplos de esta lección hemos usado algunas anotaciones. La lista compl
 
 ## Transcripción
 
-, hola todo vamos a continuar con el último bloque del curso en el que vamos a documentar nuestra app con Suárez hablemos de documentación de API una Piqué no está documentada posiblemente sea sino imposible muy difícil de utilizar sobre todo sea una pic que queremos ofrecer a tercero en la gente de nuestra organización no todo el mundo va a entender lo mismo corre hay gente que por ejemplo aún hace peticiones post para modificar y no crear recursos nuevo cosa que por ejemplo nosotros no hemos venido implementando la modificación se hace compost compost se hace la creación de recurso o en ocasiones tenemos determinadas reglas de validación que nos obligan a utilizar un tipo de dato concreto números con decimales cadena de caracteres que sigan un determinado patrón etcétera que estaría muy bien que aquello usuario recordar que desarrollamos nuestra piel para otros programadores que yo otros programadores que vayan a interactuar con nuestro país deberán conocer cómo podemos crear la documentación pues tenemos dos posibilidades spring rest Docs y Swagger con Swagger with alternativa spring 32 combina la documentación escrita a mano con asciidoctor con fragmento autogenerado y producidos por spring en visitaste qué tiene de positivo bueno en definitiva lo que hacemos escribir nuestros tes y a partir de ir generar la documentación y tiene como positivo que nos obliga lo invita vale nos conmina a que escribamos los test y a tenerlo actualizados para tener nuestra documento nuestra documentación actualizada y que un proyecto dentro del paraguas de lo que sería el primer la gran familia de estreno la parte negativa es que si no queremos implementar los test de la manera de Spring testing nos obligaría escribir un hostel que posiblemente bueno un determinado momento pues a lo mejor nos vayamos a utilizar no no es que no no sé bueno que designamos los test pero alomejor no queremos poner el énfasis en esa parte y siempre da que queremos tener unos una documentación o queremos tener la documentación antes de escribir los tres bueno entonces eso sería un elemento que podría ser dificultosos en la otra mano tenemos suague Swagger no solamente es para documentar nuestra piel todo un framework de código abierto respaldado por un gran ecosistema de herramienta que nos va a permitir diseñar construir documental consumir nuestra API RESTful entre todas las herramientas que tiene una de las más útiles las más conocidas swagger-ui y tú que nos va a permitir interactuar con nuestra pink con una interfaz bastante bastante cómoda diría que incluso bonita y muy muy muy útil vale con lo cual para nosotros en el contexto de este bloque Swagger será una serie de reglas especificaciones y herramientas que nos ayudan a documentar nuestra el corazón de lo que va de lo que vamos a tener con Swagger es utilizar un Jason que describe por completo vale toda nuestra API y dónde va a estar totalmente mía digamos y una especie de catálogo de EMT información de todo en nuestra app y dónde están documentadas pues todas las peticiones los verbos que se pueden hacer que para qué sirve cada una qué tipo de datos consume qué tipo de datos produce los diferentes datos qué tipos tienen las posibles respuestas código de respuesta de error etcétera etcétera eso sería lo que nosotros en principio si utilizáramos suegra seca teníamos que escribir a mano y alguien se puede tirar lo puede echar las manos a la cabeza eso es complicado de escribir sí pero bueno nosotros vamos a tener una determinada herramienta que nos va ayudar que se llamará springfox y que hará la generación de este Jason de manera automática este Jason utilizado por Swagger UI transforma esto en una web que podríamos llamar interactiva y que nos va a permitir bueno pues ver nuestra API de una manera pues súper conveniente vale hija os lo tenemos por aquí vamos a abrir una la documentación de un proyecto el típico pectore de Open Clinic de un proyecto recurrente que existe en el ecosistema Java pues tendríamos aquí para la versión que tiene una pic la documentación con su ayer Luis fijado como esto nos muestra aquí de los diferentes controladores nos vamos tirando cuáles serían las peticiones la descripción de la misma el dato que podríamos que tendríamos que pasarle
-
 ![26-01](images/26-01.png)
+
+Vamos a continuar con el último bloque del curso en el que vamos a documentar nuestra API con **Swagger**.
+
 ![26-02](images/26-02.png)
+
+Hablemos de documentación de API, una API qué no está documentada posiblemente sea sino imposible muy difícil de utilizar, sobre todo si es un API que queremos ofrecer a terceros, no a gente de nuestra organización.
+
+No todo el mundo va a entender lo mismo por REST, hay gente que por ejemplo aún hace peticiones POST para modificar y no crear recursos nuevos, cosa que por ejemplo nosotros no hemos venido implementando, la modificación se hace con PUT, con POST se hace la creación de recurso. 
+
+O en ocasiones tenemos determinadas reglas de validación que nos obligan a utilizar un tipo de dato concreto, números con decimales, cadena de caracteres que sigan un determinado patrón, etc. que estaría muy bien que aquellow usuarios, recordar que desarrollamos nuestra API para otros programadores, que aquellos otros programadores que vayan a interactuar con nuestro API deberán conocer.
+
+¿Cómo podemos crear la documentación? tenemos dos posibilidades **Spring Rest Docs** y **Swagger** con **Swagger UI**, vamos a ver las dos alternativas.
+
 ![26-03](images/26-03.png)
+
+**Spring Rest Docs** combina la documentación escrita a mano con **Asciidoctor** con fragmentos autogenerado y producidos por **Spring MVC Test**.
+
+¿Qué tiene de positivo? En definitiva lo que hacemos es escribir nuestros tests y a partir de ahí generar la documentación y tiene como positivo que nos obliga, nos invita, nos conmina a que escribamos los test y a tenerlos actualizados para tener nuestra documentación actualizada y que es un proyecto dentro del paraguas de lo que sería la gran familia de Spring.
+
+La parte negativa es que si no queremos implementar los test de la manera de **Spring Testing** nos obligaría a escribir unos test que posiblemente en un determinado momento a lo mejor no vayamos a utilizar, no es que no no séa bueno que designemos los test, pero a lo mejor no queremos poner el énfasis en esa parte y si es verdad que queremos tener unos una documentación o queremos tener la documentación antes de escribir los test, bueno entonces eso sería un elemento que podría ser un poco dificultosos.
+
 ![26-04](images/26-04.png)
-![26-05](images/26-05.png)
-![26-06](images/26-06.png)
+
+En la otra mano tenemos **Swagger**, Swagger no solamente es para documentar nuestra API, es todo un Framework de código abierto respaldado por un gran ecosistema de herramientas que nos va a permitir diseñar, construir, documentar, consumir nuestra API REST FULL.
+
 ![26-07](images/26-07.png)
+
+Entre todas las herramientas que tiene Swagger, una de las más útiles, la más conocida es **Swagger UI Tools** que nos va a permitir interactuar con nuestra API, con una interfaz bastante bastante cómoda, diría que incluso bonita y muy muy muy útil.
+
+Con lo cual para nosotros en el contexto de este bloque Swagger será una serie de reglas, especificaciones y herramientas que nos ayudan a documentar nuestra API.
+
+![26-05](images/26-05.png)
+
+El corazón de lo que va de lo que vamos a tener con Swagger es utilizar un JSON que describe por completo toda nuestra API y dónde va a estar totalmente, ya digamos una especie de catálogo, de meta información de toda nuestra API y dónde están documentadas todas las peticiones, los verbos que se pueden hacer, para qué sirve cada una, qué tipo de datos consume, qué tipo de datos produce, los diferentes datos, qué tipos tienen, las posibles respuestas, códigos de respuesta de error, etc., eso sería lo que nosotros en principio, si utilizáramos Swagger a secas, tendríamos que escribir a mano y alguien se puede echar las manos a la cabeza, eso es complicado de escribir, sí, pero bueno nosotros vamos a tener una determinada herramienta que nos va ayudar que se llamará **SpringFox** y que hará la generación de este JSON de manera automática.
+
+![26-06](images/26-06.png)
+
+Este JSON utilizado por Swagger UI transforma esto en una web que podríamos llamar interactiva y que nos va a permitir bueno pues ver nuestra API de una manera pues súper conveniente.
+
+Vamos a abrir la documentación de un proyecto, el típico [***Petstore***] (https://petstore.swagger.io/v2/swagger.json) o PetClinic que es un proyecto recurrente que existe en el ecosistema Java.
+
+![26-09](images/26-09.png)
+
+Tendríamos aquí para la versión que tiene un API la documentación con Swagger, esto nos muestra los diferentes controladores, nos va mostrando cuáles serían las peticiones, la descripción de la misma, el dato que tendríamos que pasarle, nos ofrese incluso la posibilidad de probarlo.
+
+![26-10](images/26-10.png)
+
+![26-11](images/26-11.png)
+
+Esta herramienta es un verdadero Cañon que nos va a permitir no solamente que la gente pueda conocer la estructura de nuestra API sino que comprobarla para ir montando sus clientes
+
 ![26-08](images/26-08.png)
+
+Lo que nos quedaría en la próxima lección sería ver los elementos que nos van a hacer falta para integrar Swagger con Spring Boots dentro de nuestro proyecto.
 
 # 27 ¿Cómo incluir Swagger en nuestra API? 17:13 
 
