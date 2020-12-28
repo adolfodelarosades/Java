@@ -698,28 +698,96 @@ No existe.
 
 ## Transcripción
 
-Hola hola todos vamos a cerrar este bloque de subida de ficheros haciendo la prueba del servicio que hemos implementado en el vídeo anterior recordemos la estructura de la petición tiene que recibir dos partes una llamado Nuevo de tipo application Jason y otra llamada file de tipo application octet-stream en recibir un fichero podemos probar día de URL object Postman vamos a empezar por cbrl tendríamos que hacer una petición como está en la que indiquemos qué es una petición de tipo post donde vamos a pasar contenido multiparte en el que vamos a mandar dos partes no la primera el fichero este arroba. Café. JPG porque por facilidad nos vamos a ubicar en la ruta donde esté el fichero y aquí mandaría más el objeto Jason que otra parte llamada nuevo fijado que aquí tenemos que parar escapar perdón las comillas para que no se metan dentro de la cadena de caracteres no que sería el el objeto en Jason yo lo tengo preparado por aquí vale sería lo que tendríamos que escribirse URL con las diferentes opciones fijaos como en la parte del fichero solamente tenemos que indicar el nombre igual y la ruta y sin embargo cuando estamos mandando aquí el Jason para indicar que es Jason tenemos que poner el objeto encerrado entre llave y terminar con un punto type application Jason para que sepa que eso que estamos mandando ahí no es una cadena de caracteres cualquiera sino que eso no es correcto Jason o si hacemos la petición vemos que la respuesta es 201 creado y que nos está devolviendo nuestro objeto con IDE 34 café con el precio y la URL de la imagen y además Manolo metido dentro de la categoría de bebida si nos vamos el proyecto en ejecución y refrescamos por aquí podemos comprobar como aquí nublado útil que es donde hemos configurado que suban los ficheros pues tendríamos nuestra imagen del café y se ha subido todo correctamente tanto que hiciéramos ahora bueno pues la petición del girl del producto 34 también lo podríamos tener etcétera etcétera vamos a ver cómo lo podríamos hacer compost tendríamos que hacer una petición de tipo post donde el cuerpo ya hemos visto que no puede ser con Raúl tiene que ser con data donde pasamos todas partes aquí tenemos la dificultad de que no vamos a poder escribir no lo podríamos hacer de una manera sencilla y es más fácil que hace que encapsular el Jason en un fichero tener en cuenta que no vamos a desarrollar nunca una API para qué se utiliza da solamente por Postma lo más normal es que desarrollen una API para que otra persona nosotros o un tercero pueda desarrollar una aplicación cliente en cualquier tecnología angular pues simplemente JavaScript para Android iOS cualquiera una aplicación cliente que interactúe con nuestro a ti vale y ya se encargará de montar en dicha tecnología la petición y pasar el Jason como corresponda vale pero para poder testearlo desde post no tendríamos que hacerlo pasándole el pizzero de café vale la imagen que corresponda y el Jason lo vamos a pasar en un fichero que tendrá solamente ese ese contenido Jason y que lo vamos a mandar en una parte que se llame nuevo si nos venimos a Postman sería aquí mismo en Fortnite a y entonces tendríamos que pasar la parte nuevo si no le cambiamos el tipo antes no suele dejar vale a tipo file nuevo ahora lo marcaremos buscamos por aquí café Jason que lo tenemos por aquí haciendo la prueba del servicio que me comentaron interior competición con
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
 ![25-01](images/25-01.png)
+
+Vamos a cerrar este bloque de subida de ficheros haciendo la prueba del servicio que hemos implementado en la lección anterior.
+
 ![25-02](images/25-02.png)
+
+Recordemos la estructura de la petición, tiene que recibir dos partes una llamado `nuevo` de tipo `application/json` y otra llamada `file` de tipo `application/octet-stream` en recibir un fichero.
+
 ![25-03](images/25-03.png)
+
+Podemos probarlo vía CURL o vía Postman, vamos a empezar por CURL, tendríamos que hacer una petición como está:
+
+```sh
+curl -i -X POST 
+-H "Content-Type: multipart/form-data" 
+-F "file=@./cafe.jpg" 
+-F "nuevo={\"nombre\":\"Café\", \"precio\": 3, \"categoriaId\": 2};type=application/json" http://localhost:8080/producto
+```
+
+* En la que indiquemos qué es una petición de tipo POST.
+* Donde vamos a pasar contenido MultiParte.
+* En el que vamos a mandar dos partes:
+   * La primera el fichero `file`, en la parte del fichero solamente tenemos que indicar el nombre y la ruta este `@./cafe.jpg`, por facilidad nos vamos a ubicar en la ruta donde esté el fichero.
+   * Y por otro lado mandaríamos el objeto JSON tenemos que poner el objeto encerrado entre llave, la parte llamada `nuevo`, fijarse que tenemos que escapar las comillas para que se metan dentro de la cadena de caracteres, que sería el objeto JSON y al finalizar con `;type=application/json`
+
+Sería lo que tendríamos que escribirse en la consola con las diferentes opciones, si hacemos la petición.
+
+![143-13-06](images/143-13-06.png)
+
+Vemos que la respuesta es `201` creado y que nos está devolviendo nuestro objeto con ID 34, café, con el precio y la URL de la imagen y además lo hemos metido dentro de la categoría de bebida.
+
+Si nos vamos el proyecto en ejecución y refrescamos, podemos comprobar como en la carpeta `upload-dir` que es donde hemos configurado que se suban los ficheros tendríamos nuestra imagen del café y se ha subido todo correctamente.
+
+![143-13-07](images/143-13-07.png)
+
+Tanto que hiciéramos ahora la petición del producto 34 también lo podríamos recuperar.
+
+![143-13-08](images/143-13-08.png)
+
 ![25-04](images/25-04.png)
+
+Vamos a ver cómo lo podríamos hacer con Postman, tendríamos que hacer una petición de tipo POST donde el cuerpo (body) ya hemos visto que no puede ser con `raw` tiene que ser con `form-data` donde le pasamos dos partes. En `form-data` tenemos la dificultad de que no vamos a poder escribir, no lo podríamos hacer de una manera sencilla y es más fácil encapsular el JSON en un fichero por ejemplo `cafe.json`, tener en cuenta que no vamos a desarrollar nunca una API para qué se utilizada solamente por Postman, lo más normal es que desarrollemos un API para que otra persona, nosotros o un tercero pueda desarrollar una aplicación cliente en cualquier tecnología, Angular, Vue, simplemente JavaScript, para Android, iOS, cualquiera, una aplicación cliente que interactúe con nuestro API y ya se encargará de montar en dicha tecnología la petición y pasar el JSON como corresponda.
+
+Pero para poder testearlo desde Postman tendríamos que hacerlo pasándole el fichero `cafe.jpg` la imagen que corresponda y el JSON lo vamos a pasar en un fichero `cafe.json` que tendrá solamente ese contenido JSON y que lo vamos a mandar en una parte que se llame `nuevo`.
+
+`cafe.json`
+
+```json
+{
+   "nombre": "Café", 
+   "precio": 3,
+   "categoriaId": 2
+}
+```
+
+Si nos venimos a Postman sería una petición POST y dentro de Body seleccionamos la opción `form-data` y entonces tendríamos que pasar la parte nuevo que hace referencia al archivo JSON `cafe.json` y por otro lado tenemos `file` que hace referencia al archivo de imagen `cafe.jpg`.
+
+![143-13-09](images/143-13-09.png)
+
+Al hacer la petición:
+
+![143-13-10](images/143-13-10.png)
+
+Vemos como se ha dado de alta el Café, podemos comprobar que el propio enlace de la imagen funciona desde Postman si lo invocamos.
+
+![143-13-11](images/143-13-11.png)
+
+Y si refrescamos la carpeta del proyecto vemos como se ha subido esta segunda imagen.
+
+![143-13-12](images/143-13-12.png)
+
+si no le cambiamos el tipo antes no suele dejar vale a tipo file nuevo ahora lo marcaremos buscamos por aquí café Jason que lo tenemos por aquí haciendo la prueba del servicio que me comentaron interior competición c
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+
+
 ![25-05](images/25-05.png)
 
 # Contenido adicional 3
