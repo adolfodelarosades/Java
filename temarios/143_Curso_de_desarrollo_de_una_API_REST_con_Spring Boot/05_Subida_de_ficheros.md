@@ -553,38 +553,108 @@ Con lo cual podríamos diferenciar si lo que nos envié el cliente es un Jackson
 
 ![24-06](images/24-06.png)
 
-con locual la firma del método va a quedar de esta manera si nos damos cuenta será una petición POST que va a obtener multipart-form-data en lo que va a consumir que se llama nuevo producto que después de volver a un responseentity y que recibe estos argumentos el crea-t producto de Teo dónde vendrán todos los campos textuales o todo aquellos que sean de tipo numérico Boolean no sé de lo que va a llegar en el Jason en una parte que se llamará nuevo y el fichero que llevar a llegar en una parte que se llamará five la petición que realizamos deberá incluir dos partes la que vaya en Jason llamada nuevo y la otra fine que será de tipo fichero no uno Extreme la subida de la imagen ya digo lo haremos a través de nuestro servicio o tendremos el nombre del fichero a partir del nombre del fichero obtenemos la URI del mismo vamos a ver que tendremos por ahí un mecanismo para hacerlo asignamos Lauri al producto y entonces podremos almacenarlo en la base de datos después veremos cómo se puede hacer una modificación la hemos visto antes pero en el código para que el de Teo incluye la imágenes en el listado de productos lo hemos visto en el modelo el cambio que tendríamos que hacer también en el código del controlador a la hora de devolver ese de Teo para que para que lo incluyera no vamos a verlo como lo haríamos en nuestro código nos vamos a ir
+Con lo cual la firma del método va a quedar de esta manera, si nos damos cuenta será una petición POST que va a obtener `MULTIPART_FORM_DATA` es lo que va a consumir, que se llama `nuevoProducto(...)`, que después devolvera un `ResponseEntity` y que recibe dos argumentos, el `createProductoDTO`  dónde vendrán todos los campos textuales o todo aquellos que sean de tipo numérico, Booleano, todo lo que va a llegar en el Jackson, en una parte que se llamará `nuevo` y el fichero que llevara en una parte que se llamará `file`.
 
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-
-
-
+Como digo, la petición que realizamos deberá incluir dos partes, la que vaya en Jackson llamada `nuevo` y la otra `file` que será de tipo fichero, un `octet-stream`.
 
 ![24-07](images/24-07.png)
+
+La subida de la imagen la haremos a través de nuestro servicio, obtendremos el nombre del fichero, a partir del nombre del fichero obtendremos la URI del mismo, vamos a ver que tendremos por ahí un mecanismo para hacerlo, asignamos la URI al producto y entonces podremos almacenarlo en la base de datos.
+
+Después veremos cómo se puede hacer una modificación, la hemos visto antes, pero en el código para que el DTO incluya la imágenes en el listado de productos, lo hemos visto en el modelo el cambio que tendríamos que hacer también en el código del controlador a la hora de devolver ese DTO para que lo incluyera.
+
+Vamos a verlo como lo haríamos en nuestro código nos vamos a ir
+
+#### Modificar `ProductoController`
+
+Vamos a modificar el método `nuevoProducto` que actualmente lo tenemos así:
+
+```java
+@PostMapping("/producto")
+public ResponseEntity<?> nuevoProducto(@RequestBody CreateProductoDTO nuevo) {
+   // En este caso, para contrastar, lo hacemos manualmente
+		
+   // Este código sería más propio de un servicio. Lo implementamos aquí
+   // por no hacer más complejo el ejercicio.
+   Producto nuevoProducto = new Producto();
+   nuevoProducto.setNombre(nuevo.getNombre());
+   nuevoProducto.setPrecio(nuevo.getPrecio());
+   Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+   nuevoProducto.setCategoria(categoria);
+   return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+}
+```
+
+Lo vamos a cambiar por 
+
+``
+```java
+...
+private final StorageService storageService;
+...
+
+@PostMapping(value = "/producto", consumes= MediaType.MULTIPART_FORM_DATA_VALUE) //Aunque no es obligatorio, podemos indicar que se consume multipart/form-data
+public ResponseEntity<?> nuevoProducto(@RequestPart("nuevo") CreateProductoDTO nuevo, @RequestPart("file") MultipartFile file) {
+		
+   // Almacenamos el fichero y obtenemos su URL
+   String urlImagen = null;
+		
+   if (!file.isEmpty()) {
+      String imagen = storageService.store(file);
+      urlImagen = MvcUriComponentsBuilder
+         // El segundo argumento es necesario solo cuando queremos obtener la imagen
+         // En este caso tan solo necesitamos obtener la URL
+         .fromMethodName(FicherosController.class, "serveFile", imagen, null)  
+         .build().toUriString();
+   }
+		
+   // Construimos nuestro nuevo Producto a partir del DTO
+   // Como decíamos en ejemplos anteriores, esto podría ser más bien código
+   // de un servicio, pero lo dejamos aquí para no hacer más complejo el código.
+   Producto nuevoProducto = new Producto();
+   nuevoProducto.setNombre(nuevo.getNombre());
+   nuevoProducto.setPrecio(nuevo.getPrecio());
+   nuevoProducto.setImagen(urlImagen);
+   Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+   nuevoProducto.setCategoria(categoria);
+   return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+}	
+```
+
+Observaciones del método `nuevoProducto(...)`
+
+* Complementamos la anotación `@PostMapping(value = "/producto", consumes= MediaType.MULTIPART_FORM_DATA_VALUE)`
+* Modificamos la firma del método `nuevoProducto(@RequestPart("nuevo") CreateProductoDTO nuevo, @RequestPart("file") MultipartFile file)` para recibir los dos datos `nuevo` y `file` con `@RequestPart`.
+* Si el fichero no esta vacío obtenemos el nombre de la imagen usando el `StorageService` que debemos inyectar.
+* Obtenemos la URL de la imagen, para crear la URI de manera conveniente invocamos a la clase `MvcUriComponentsBuilder` y su método `.fromMethodName(...)` que lo que hace es cojer el nombre del fichero, y construye la URI completa que vamos a almacenar en la BD invocando al método `serveFile(...)` del controlador `FicherosController`.
+
+![143-13-02](images/143-13-02.png)
+
+* Si nos damos cuenta esta definido sonre una URI `"/files/{filename:.+}"`, pasa ese nombre aquí como argumento y devuelve la URL que se devolvería con todo ello. 
+* Si ejecutamos nuestro proyecto con `http://localhost:8080/` y la imagen se llama `imagen.jpg` la URL que devolvería la llamada al método `.fromMethodName(...)` sería `http://localhost:8080/files/imagen.jpg` por lo que montamos convenientemente la URI.
+* Si en algun momento queremos cambiar la ruta de almacenamiento solo lo hacemos en `FicherosController`, `ProductoController` no sufriría ningún cambio.
+* El parámetro `null` que mandamos en `.fromMethodName(...)` es solo por que en otras acciones necesita ese parámetro pero para este caso es inecesario por eso pasamos `null`.
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+``
+```java
+```
+
+
+
+
+
 ![24-08](images/24-08.png)
 ![24-09](images/24-09.png)
 ![24-10](images/24-10.png)
