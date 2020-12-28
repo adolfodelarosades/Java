@@ -142,11 +142,250 @@ No existe.
 ## Transcripción
 
 ![27-01](images/27-01.png)
+
+Vamos a comenzar con esta última lección en la que vamos a incluir Swagger en nuestro proyecto.
+
 ![27-02](images/27-02.png)
+
+Como decía vamos a incluir **Swagger** también con **SpringFox** qué es un conjunto de librerías que nos permite generar automáticamente la documentación de nuestra API y en particular, la combinación de ambas nos permite general la documentación en formato Swagger, con lo cual no tenemos que generar ese Swagger JSON de manera manual y además lo podemos hacer de una manera un poco más genérica o podremos acotar y customizar un poco esa configuración, para que el resultado en **Swagger UI** sea lo más fino posible.
+
 ![27-03](images/27-03.png)
+
+Tendríamos que añadir una serie de dependencias, la última versión a día de hoy que podríamos usar, la versión última que podría utilizar sería la 2.9.2 de SpringFox con Swagger ahora los añadiremos.
+
 ![27-04](images/27-04.png)
+
+Vamos a ver que la configuración es sencilla, tenemos una clase anotada con `@Configuration` y con la anotación `@EnableSwagger2` y tendremos que crear un `Bean` de tipos `Docker` que es el que va a incluir alguna información para generar la documentación.
+
 ![27-05](images/27-05.png)
+
+Si queremos puede tener una documento una configuración tan básicas como está que es con la que vamos a comenzar, en la que le digamos oye todos los controladores que estén a partir del paquete con `com.openwebinar.rest.controller` serán los que incluya, cualquier ruta dentro de este controlador será la que tú vas a documentar, vamos a tratar de implementar esto. 
+
+### :computer: `143-14-Swagger`
+
+Vamos a partir de un proyecto base del repositorio del curso llamado `26_SwaggerBase` lo copiamos y lo llamaremos `143-14-Swagger`. La estructura del proyecto es la siguiente:
+
+![143-14-01](images/143-14-01.png)
+
+#### 01. Modificar el `pom.xml` 
+
+Cambiamos el `artifactId` y el `name`
+
+```html
+<artifactId>143-14-Swagger</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>143-14-Swagger</name>
+<description>Ejemplo de configuración de Swagger</description>
+```
+
+También vamos a añdir las dependencias para Swagger y SpringFox
+
+```html
+   <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.9.2</version>
+      <exclusions>
+         <exclusion>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+         </exclusion>
+         <exclusion>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+         </exclusion>
+      </exclusions>
+   </dependency>
+   <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.9.2</version>
+   </dependency>
+   <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>1.5.21</version>
+   </dependency>
+   <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-models</artifactId>
+      <version>1.5.21</version>
+   </dependency>
+```
+
+#### 02. Crear la Configuración Swagger
+
+Creamos la clase `SwaggerConfig` dentro del paquete `config`
+
+`SwaggerConfig`
+
+```java
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+	
+   @Bean
+   public Docket api() {
+      return new Docket(DocumentationType.SWAGGER_2)
+               .select()
+               .apis(RequestHandlerSelectors.basePackage("com.openwebinars.rest.controller"))
+               .paths(PathSelectors.any())
+               .build();
+   }
+}
+```
+
+Observaciones de `SwaggerConfig`
+
+* Anotada con `@Configuration` y con `@EnableSwagger2`
+* Creamos un `Bean` de tipo `Docket`
+   * Indicamos que el paquete base es `"com.openwebinars.rest.controller"`
+   * También indicamos cualquier ruta de este paquete
+   * Con esto ya tenemos Swagger configurado
+
+Si aquí ejecutamos nuestra aplicación e invocamos la ruta `http://localhost:8080/swagger-ui.html` se nos presenta la siguiente pantalla:
+
+![143-14-02](images/143-14-02.png)
+
+Se ha incluido la información de los dos Controladores que tenemos, sobre todo el de `producto-controller` es el más completo, donde podemos probar incluso la obtención de todos los productos.
+
+![143-14-03](images/143-14-03.png)
+
+Podemos hacer una prueba para obtener un producto en particular.
+
+![143-14-04](images/143-14-04.png)
+![143-14-05](images/143-14-05.png)
+
+Podríamos también crear un nuevo Producto, editarlo, borrarlo.
+
+![143-14-06](images/143-14-06.png)
+![143-14-07](images/143-14-07.png)
+
+Ya tendríamos programada nuestra documentación con Swagger.
+
 ![27-06](images/27-06.png)
+
+Sin embargo vamos a ver que podemos personalizar un poco lo que nos aparece por aquí por lo pronto podemos incluir algo de información sobre nuestra API, vamos a definir un `Bean` de tipo `ApiInfo` donde podamos modificar, si nos damos cuenta por aquí.
+
+![143-14-08](images/143-14-08.png)
+
+Ha aparecido algo de información un poco genérica, vamos a poner que todo esto que aparezca por aquí sea algo customizado, sino todo algunos de los elementos que aparecen por aquí.
+
+Para ello tendríamos que venir a `SwaggerConfig` y definir otro `Bean`
+
+```java
+   @Bean
+   public ApiInfo apiInfo() {
+
+      return new ApiInfoBuilder()
+               .title("API de ejemplo")
+               .description("API de ejemplo del curso Desarrollo de un API REST con Spring Boot de openwebinars")
+               .version("1.0")
+               .contact(new Contact("Luis Miguel López", "http://www.openwebinars.net", ""))
+               .build();
+   }
+```
+
+Donde:
+
+* Construimos el `ApiInfo` a partir de un `ApiInfoBuilder`.
+* Damos un título
+* Damos una descripción
+* Indicamos una versión
+* Indicamos un Contacto
+* Este ApiInfo lo debemos adjuntar a nuestro primer Bean con 
+
+Nuestro código completo nos queda así:
+
+```java
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+	
+   @Bean
+   public Docket api() {
+      return new Docket(DocumentationType.SWAGGER_2)
+               .select()
+               .apis(RequestHandlerSelectors.basePackage("com.openwebinars.rest.controller"))
+               .paths(PathSelectors.any())
+               .build()
+               .apiInfo(apiInfo());
+   }
+	
+   @Bean
+   public ApiInfo apiInfo() {
+
+		return new ApiInfoBuilder()
+               .title("API de ejemplo")
+               .description("API de ejemplo del curso Desarrollo de un API REST con Spring Boot de openwebinars")
+               .version("1.0")
+               .contact(new Contact("Luis Miguel López", "http://www.openwebinars.net", ""))
+               .build();
+   }
+
+}
+```
+
+Si recargamos nuestra aplicación tenemos:
+
+![143-14-09](images/143-14-09.png)
+
+Ya viene con nuestra información personalizada.
+
+Podemos seguir customizando, además de esta `ApiInfo` tenemos a nuestra disposición algunas anotaciones que nos van a permitir definir un poco la información que por ahí aparece a nivel de método del controlador, tenemos las anotaciones:
+
+* `@ApiOperation` que describe qué hace ese método del controlador.
+*  `@ApiResponse/s` que describen las diferentes respuestas que puede dar.
+*  `@ApiParam` que describe el parámetro que recibe el método.
+
+Vamos a incluir dentro de nuestra clase controladora en nuestro `ProductoController` podemos añadir algunos elementos.
+
+Por ejemplo en el método `obtenerUno(...)` que actualmente lo tenemos así:
+
+```java
+@GetMapping("/producto/{id}")
+public Producto obtenerUno(@PathVariable Long id) {
+   try {
+      return productoRepositorio.findById(id)
+                     .orElseThrow(() -> new ProductoNotFoundException(id));
+   } catch (ProductoNotFoundException ex) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+   }
+				
+}
+```
+
+Lo vamos a cambiar por:
+
+```java
+@ApiOperation(value="Obtener un producto por su ID", notes="Provee un mecanismo para obtener todos los datos de un producto por su ID")
+@ApiResponses(value= {
+            @ApiResponse(code=200, message="OK", response=Producto.class),
+            @ApiResponse(code=404, message="Not Found", response=ApiError.class),
+            @ApiResponse(code=500, message="Internal Server Error", response=ApiError.class)
+})
+@GetMapping("/producto/{id}")
+public Producto obtenerUno(@ApiParam(value="ID del producto", required=true, type = "long") @PathVariable Long id) {
+   try {
+      return productoRepositorio.findById(id)
+               .orElseThrow(() -> new ProductoNotFoundException(id));
+   } catch (ProductoNotFoundException ex) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+   }
+				
+}
+```
+
+AQUIIIIII
+
+
+```java
+
+```
+
+
+de obtener uno podríamos añadir me vaya a permitir que lo copié y lo pegue
+
 ![27-08](images/27-08.png)
 ![27-09](images/27-09.png)
 ![27-10](images/27-10.png)
