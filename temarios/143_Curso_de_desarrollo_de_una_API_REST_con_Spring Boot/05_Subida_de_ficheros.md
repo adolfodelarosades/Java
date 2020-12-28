@@ -737,9 +737,13 @@ Tanto que hiciéramos ahora la petición del producto 34 también lo podríamos 
 
 ![143-13-08](images/143-13-08.png)
 
+![25-05](images/25-05.png)
+
+Vamos a ver cómo lo podríamos hacer con Postman.
+
 ![25-04](images/25-04.png)
 
-Vamos a ver cómo lo podríamos hacer con Postman, tendríamos que hacer una petición de tipo POST donde el cuerpo (body) ya hemos visto que no puede ser con `raw` tiene que ser con `form-data` donde le pasamos dos partes. En `form-data` tenemos la dificultad de que no vamos a poder escribir, no lo podríamos hacer de una manera sencilla y es más fácil encapsular el JSON en un fichero por ejemplo `cafe.json`, tener en cuenta que no vamos a desarrollar nunca una API para qué se utilizada solamente por Postman, lo más normal es que desarrollemos un API para que otra persona, nosotros o un tercero pueda desarrollar una aplicación cliente en cualquier tecnología, Angular, Vue, simplemente JavaScript, para Android, iOS, cualquiera, una aplicación cliente que interactúe con nuestro API y ya se encargará de montar en dicha tecnología la petición y pasar el JSON como corresponda.
+ Tendríamos que hacer una petición de tipo POST donde el cuerpo (body) ya hemos visto que no puede ser con `raw` tiene que ser con `form-data` donde le pasamos dos partes. En `form-data` tenemos la dificultad de que no vamos a poder escribir, no lo podríamos hacer de una manera sencilla y es más fácil encapsular el JSON en un fichero por ejemplo `cafe.json`, tener en cuenta que no vamos a desarrollar nunca una API para qué se utilizada solamente por Postman, lo más normal es que desarrollemos un API para que otra persona, nosotros o un tercero pueda desarrollar una aplicación cliente en cualquier tecnología, Angular, Vue, simplemente JavaScript, para Android, iOS, cualquiera, una aplicación cliente que interactúe con nuestro API y ya se encargará de montar en dicha tecnología la petición y pasar el JSON como corresponda.
 
 Pero para poder testearlo desde Postman tendríamos que hacerlo pasándole el fichero `cafe.jpg` la imagen que corresponda y el JSON lo vamos a pasar en un fichero `cafe.json` que tendrá solamente ese contenido JSON y que lo vamos a mandar en una parte que se llame `nuevo`.
 
@@ -769,26 +773,7 @@ Y si refrescamos la carpeta del proyecto vemos como se ha subido esta segunda im
 
 ![143-13-12](images/143-13-12.png)
 
-si no le cambiamos el tipo antes no suele dejar vale a tipo file nuevo ahora lo marcaremos buscamos por aquí café Jason que lo tenemos por aquí haciendo la prueba del servicio que me comentaron interior competición c
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-``
-```java
-```
-
-
-
-![25-05](images/25-05.png)
+Hasta aquí todo lo que sería el tratamiento de ficheros con nuestra API REST, vamos a comenzar con un nuevo bloque donde podremos hacer la documentación de nuestra API con Swagger.
 
 # Contenido adicional 3
 
