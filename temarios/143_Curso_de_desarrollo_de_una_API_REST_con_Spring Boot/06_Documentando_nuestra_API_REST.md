@@ -572,7 +572,7 @@ Vamos a listar los archivos que cambiamos en este proyecto.
 
 `SwaggerConfig`
 
-```
+```java
 package com.openwebinars.rest.config;
 
 import org.springframework.context.annotation.Bean;
@@ -617,7 +617,7 @@ public class SwaggerConfig {
 
 `ProductoController`
 
-```
+```java
 package com.openwebinars.rest.controller;
 
 import java.util.List;
@@ -777,7 +777,7 @@ public class ProductoController {
 
 `Producto`
 
-```
+```java
 package com.openwebinars.rest.modelo;
 
 import javax.persistence.Entity;
