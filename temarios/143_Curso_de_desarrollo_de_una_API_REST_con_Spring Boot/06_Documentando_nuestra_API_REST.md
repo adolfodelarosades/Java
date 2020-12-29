@@ -463,6 +463,355 @@ Si volvemos a relanzar la aplicación vamos a ver donde se reflejan estos cambio
 
 Ya no es un ejemplo cualquiera sino el que nosotros hemos ido montado con las distintas anotaciones `@ApiModelProperty`, nos faltaria quiza montar la categoria que sería añadir lo mismo en la Clase `Categoria` incluso en el DTO.
 
+### :computer: Código Completo `143-14-Swagger`
+
+![143-14-01](images/143-14-01.png)
+
+Vamos a listar los archivos que cambiamos en este proyecto.
+
+`pom.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.1.8.RELEASE</version>
+      <relativePath /> <!-- lookup parent from repository -->
+   </parent>
+   <groupId>com.openwebinars.rest</groupId>
+   <artifactId>143-14-Swagger</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>143-14-Swagger</name>
+   <description>Ejemplo de configuración de Swagger</description>
+
+   <properties>
+      <java.version>1.8</java.version>
+   </properties>
+
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>com.h2database</groupId>
+         <artifactId>h2</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.modelmapper</groupId>
+         <artifactId>modelmapper</artifactId>
+         <version>2.3.5</version>
+      </dependency>
+      <dependency>
+         <groupId>io.springfox</groupId>
+         <artifactId>springfox-swagger2</artifactId>
+         <version>2.9.2</version>
+         <exclusions>
+            <exclusion>
+               <groupId>io.swagger</groupId>
+               <artifactId>swagger-annotations</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>io.swagger</groupId>
+               <artifactId>swagger-models</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>io.springfox</groupId>
+         <artifactId>springfox-swagger-ui</artifactId>
+         <version>2.9.2</version>
+      </dependency>
+      <dependency>
+         <groupId>io.swagger</groupId>
+         <artifactId>swagger-annotations</artifactId>
+         <version>1.5.21</version>
+      </dependency>
+      <dependency>
+         <groupId>io.swagger</groupId>
+         <artifactId>swagger-models</artifactId>
+         <version>1.5.21</version>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
+
+</project>
+```
+
+`SwaggerConfig`
+
+```
+package com.openwebinars.rest.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+	
+   @Bean
+   public Docket api() {
+      return new Docket(DocumentationType.SWAGGER_2)
+                     .select()
+                     .apis(RequestHandlerSelectors.basePackage("com.openwebinars.rest.controller"))
+                     .paths(PathSelectors.any())
+                     .build()
+                     .apiInfo(apiInfo());
+   }
+	
+   @Bean
+   public ApiInfo apiInfo() {
+
+      return new ApiInfoBuilder()
+                     .title("API de ejemplo")
+                     .description("API de ejemplo del curso Desarrollo de un API REST con Spring Boot de openwebinars")
+                     .version("1.0")
+                     .contact(new Contact("Luis Miguel López", "http://www.openwebinars.net", ""))
+                     .build();	
+   }
+
+}
+```
+
+`ProductoController`
+
+```
+package com.openwebinars.rest.controller;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+
+import com.openwebinars.rest.dto.CreateProductoDTO;
+import com.openwebinars.rest.dto.ProductoDTO;
+import com.openwebinars.rest.dto.converter.ProductoDTOConverter;
+import com.openwebinars.rest.error.ApiError;
+import com.openwebinars.rest.error.ProductoNotFoundException;
+import com.openwebinars.rest.modelo.Categoria;
+import com.openwebinars.rest.modelo.CategoriaRepositorio;
+import com.openwebinars.rest.modelo.Producto;
+import com.openwebinars.rest.modelo.ProductoRepositorio;
+import com.openwebinars.rest.upload.StorageService;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductoController {
+
+   private final ProductoRepositorio productoRepositorio;
+   private final CategoriaRepositorio categoriaRepositorio;
+   private final ProductoDTOConverter productoDTOConverter;
+   private final StorageService storageService;
+
+   /**
+    * Obtenemos todos los productos
+    * 
+    * @return 404 si no hay productos, 200 y lista de productos si hay uno o más
+    */
+   @GetMapping("/producto")
+   public ResponseEntity<?> obtenerTodos() {
+      List<Producto> result = productoRepositorio.findAll();
+
+      if (result.isEmpty()) {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay productos registrados");
+      } else {
+
+         List<ProductoDTO> dtoList = result.stream().map(productoDTOConverter::convertToDto)
+                                                 .collect(Collectors.toList());
+
+         return ResponseEntity.ok(dtoList);
+      }
+
+   }
+
+   /**
+    * Obtenemos un producto en base a su ID
+    * 
+    * @param id
+    * @return 404 si no encuentra el producto, 200 y el producto si lo encuentra
+    */
+   @ApiOperation(value="Obtener un producto por su ID", notes="Provee un mecanismo para obtener todos los datos de un producto por su ID")
+   @ApiResponses(value= {
+                  @ApiResponse(code=200, message="OK", response=Producto.class),
+                  @ApiResponse(code=404, message="Not Found", response=ApiError.class),
+                  @ApiResponse(code=500, message="Internal Server Error", response=ApiError.class)
+   })
+   @GetMapping("/producto/{id}")
+   public Producto obtenerUno(@ApiParam(value="ID del producto", required=true, type = "long") @PathVariable Long id) {
+      try {
+         return productoRepositorio.findById(id)
+                                 .orElseThrow(() -> new ProductoNotFoundException(id));
+      } catch (ProductoNotFoundException ex) {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+      }
+				
+   }
+
+   /**
+    * Insertamos un nuevo producto
+    * 
+    * @param nuevo
+    * @return 201 y el producto insertado
+    */
+   @PostMapping(value = "/producto", consumes= MediaType.MULTIPART_FORM_DATA_VALUE) //Aunque no es obligatorio, podemos indicar que se consume multipart/form-data
+   public ResponseEntity<?> nuevoProducto(@RequestPart("nuevo") CreateProductoDTO nuevo, 
+			@RequestPart("file") MultipartFile file) {
+		
+      // Almacenamos el fichero y obtenemos su URL
+      String urlImagen = null;
+		
+      if (!file.isEmpty()) {
+         String imagen = storageService.store(file);
+         urlImagen = MvcUriComponentsBuilder
+            // El segundo argumento es necesario solo cuando queremos obtener la imagen
+            // En este caso tan solo necesitamos obtener la URL
+            .fromMethodName(FicherosController.class, "serveFile", imagen, null)  
+            .build().toUriString();
+      }
+		
+      // Construimos nuestro nuevo Producto a partir del DTO
+      // Como decíamos en ejemplos anteriores, esto podría ser más bien código
+      // de un servicio, pero lo dejamos aquí para no hacer más complejo el código.
+      Producto nuevoProducto = new Producto();
+      nuevoProducto.setNombre(nuevo.getNombre());
+      nuevoProducto.setPrecio(nuevo.getPrecio());
+      nuevoProducto.setImagen(urlImagen);
+      Categoria categoria = categoriaRepositorio.findById(nuevo.getCategoriaId()).orElse(null);
+      nuevoProducto.setCategoria(categoria);
+      return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(nuevoProducto));
+   }
+
+   /**
+    * 
+    * @param editar
+    * @param id
+    * @return 200 Ok si la edición tiene éxito, 404 si no se encuentra el producto
+    */
+   @PutMapping("/producto/{id}")
+   public Producto editarProducto(@RequestBody Producto editar, @PathVariable Long id) {
+
+      return productoRepositorio.findById(id).map(p -> {
+                        p.setNombre(editar.getNombre());
+                        p.setPrecio(editar.getPrecio());
+                        return productoRepositorio.save(p);
+               }).orElseThrow(() -> new ProductoNotFoundException(id));
+   }
+
+   /**
+    * Borra un producto del catálogo en base a su id
+    * 
+    * @param id
+    * @return Código 204 sin contenido
+    */
+   @DeleteMapping("/producto/{id}")
+   public ResponseEntity<?> borrarProducto(@PathVariable Long id) {
+      Producto producto = productoRepositorio.findById(id)
+                                    .orElseThrow(() -> new ProductoNotFoundException(id));
+		
+      productoRepositorio.delete(producto);
+      return ResponseEntity.noContent().build();
+   }
+}
+```
+
+`Producto`
+
+```
+package com.openwebinars.rest.modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+   @ApiModelProperty(value="ID del Producto", dataType="long",  example="1", position=1)
+   @Id @GeneratedValue
+   private Long id;
+	
+   @ApiModelProperty(value="Nombre del producto", dataType="String", example="Jamón ibérico de bellota", position=2)
+   private String nombre;
+	
+   @ApiModelProperty(value="Precio del producto", dataType = "float", example="253.27", position=3)
+   private float precio;
+	
+   @ApiModelProperty(value="Imagen del producto", dataType = "String", example="http://www.midominio.com/files/12345-imagen.jpg", position=4)
+   private String imagen;
+
+   @ApiModelProperty(value="Categoría del producto", dataType="Categoria", position=5)
+   @ManyToOne
+   @JoinColumn(name="categoria_id")
+   private Categoria categoria;
+	
+}
+```
+
 ![27-10](images/27-10.png)
 
 Como reto te propongo finalizar la documentación del resto de clases, de métodos del controlador para documentar toda nuestra API lo más posible.
