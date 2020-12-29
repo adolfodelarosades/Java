@@ -332,11 +332,13 @@ Si recargamos nuestra aplicación tenemos:
 
 Ya viene con nuestra información personalizada.
 
+![27-08](images/27-08.png)
+
 Podemos seguir customizando, además de esta `ApiInfo` tenemos a nuestra disposición algunas anotaciones que nos van a permitir definir un poco la información que por ahí aparece a nivel de método del controlador, tenemos las anotaciones:
 
 * `@ApiOperation` que describe qué hace ese método del controlador.
-*  `@ApiResponse/s` que describen las diferentes respuestas que puede dar.
-*  `@ApiParam` que describe el parámetro que recibe el método.
+* `@ApiResponse/s` que describen las diferentes respuestas que puede dar.
+* `@ApiParam` que describe el parámetro que recibe el método.
 
 Vamos a incluir dentro de nuestra clase controladora en nuestro `ProductoController` podemos añadir algunos elementos.
 
@@ -387,26 +389,85 @@ Si probamos nuevamente este método tenemos:
 ![143-14-10](images/143-14-10.png)
 ![143-14-11](images/143-14-11.png)
 
-Todos los mensajes personalizados ya nos aparecen.
+Todos los mensajes personalizados ya nos aparecen y le dan un poco más de sentido a nuestra documentación.
 
-![27-08](images/27-08.png)
-
-```
-```
-
-AQUIIIIII
-
-
-```java
-
-```
-
-
-de obtener uno podríamos añadir me vaya a permitir que lo copié y lo pegue
-
+Podríamos segir añadiendo más elementos dentro de otros métodos del Controlador. 
 
 ![27-09](images/27-09.png)
+
+Vamos a ver la posibilidad de añadir documentación también dentro de las clases del Modelo con `@ApiModelProperty` que nos permite también modificar un poco la información que nos vamos a encontrar aquí.
+
+En el modelo del Producto actualmente lo tenemos así:
+
+`Producto`
+
+```java
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+   @Id @GeneratedValue
+   private Long id;
+	
+   private String nombre;	
+   private float precio;	
+   private String imagen;
+	
+   @ManyToOne
+   @JoinColumn(name="categoria_id")
+   private Categoria categoria;
+	
+}
+```
+
+Vamos a añadir algunos elementos.
+
+```java
+@Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+public class Producto {
+
+   @ApiModelProperty(value="ID del Producto", dataType="long",  example="1", position=1)
+   @Id @GeneratedValue
+   private Long id;
+	
+   @ApiModelProperty(value="Nombre del producto", dataType="String", example="Jamón ibérico de bellota", position=2)
+   private String nombre;
+	
+   @ApiModelProperty(value="Precio del producto", dataType = "float", example="253.27", position=3)
+   private float precio;
+	
+   @ApiModelProperty(value="Imagen del producto", dataType = "String", example="http://www.midominio.com/files/12345-imagen.jpg", position=4)
+   private String imagen;
+	
+	
+   @ApiModelProperty(value="Categoría del producto", dataType="Categoria", position=5)
+   @ManyToOne
+   @JoinColumn(name="categoria_id")
+   private Categoria categoria;
+	
+}
+```
+
+Observaciones:
+
+* Con `@ApiModelProperty` describimos cada uno de nuestros atributos.
+
+Actualmente dentro de la documentación vemos:
+
+![143-14-12](images/143-14-12.png)
+
+Si volvemos a relanzar la aplicación vamos a ver donde se reflejan estos cambio.
+
+![143-14-13](images/143-14-13.png)
+
+Ya no es un ejemplo cualquiera sino el que nosotros hemos ido montado con las distintas anotaciones `@ApiModelProperty`, nos faltaria quiza montar la categoria que sería añadir lo mismo en la Clase `Categoria` incluso en el DTO.
+
 ![27-10](images/27-10.png)
+
+Como reto te propongo finalizar la documentación del resto de clases, de métodos del controlador para documentar toda nuestra API lo más posible.
+
+Hasta aquí este curso de implementación de un API REST con Spring Boots 
 
 # Contenido adicional 2
 
