@@ -376,6 +376,24 @@ public Producto obtenerUno(@ApiParam(value="ID del producto", required=true, typ
 }
 ```
 
+Observaciones:
+
+* Con `@ApiOperation` describimos al método con un mensaje corto y otro más largo.
+* Con `@ApiResponses` describimos las posibles respuestas 
+* Con `@ApiParam(value="ID del producto", required=true, type = "long")` documentamos el `@PathVariable`.
+
+Si probamos nuevamente este método tenemos:
+
+![143-14-10](images/143-14-10.png)
+![143-14-11](images/143-14-11.png)
+
+Todos los mensajes personalizados ya nos aparecen.
+
+![27-08](images/27-08.png)
+
+```
+```
+
 AQUIIIIII
 
 
@@ -386,7 +404,7 @@ AQUIIIIII
 
 de obtener uno podríamos añadir me vaya a permitir que lo copié y lo pegue
 
-![27-08](images/27-08.png)
+
 ![27-09](images/27-09.png)
 ![27-10](images/27-10.png)
 
