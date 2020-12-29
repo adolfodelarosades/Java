@@ -340,6 +340,8 @@ Podemos seguir customizando, además de esta `ApiInfo` tenemos a nuestra disposi
 * `@ApiResponse/s` que describen las diferentes respuestas que puede dar.
 * `@ApiParam` que describe el parámetro que recibe el método.
 
+#### 03. Modificar `ProductoController`
+
 Vamos a incluir dentro de nuestra clase controladora en nuestro `ProductoController` podemos añadir algunos elementos.
 
 Por ejemplo en el método `obtenerUno(...)` que actualmente lo tenemos así:
@@ -396,6 +398,8 @@ Podríamos segir añadiendo más elementos dentro de otros métodos del Controla
 ![27-09](images/27-09.png)
 
 Vamos a ver la posibilidad de añadir documentación también dentro de las clases del Modelo con `@ApiModelProperty` que nos permite también modificar un poco la información que nos vamos a encontrar aquí.
+
+#### 04. Modificar `Producto`
 
 En el modelo del Producto actualmente lo tenemos así:
 
