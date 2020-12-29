@@ -6,6 +6,8 @@ Aprende con este curso a desarrollar una API REST utilizando para ello Spring Bo
 
 **Profesor**: Luis Miguel López Magaña Experto en Java
 
+**Repositorio**: https://github.com/OpenWebinarsNet/spring-rest-apis
+
 #### Con este curso aprenderás
 
 * Conocerás las características de la arquitectura REST.
