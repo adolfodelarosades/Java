@@ -17,6 +17,15 @@ No existe.
 
 ## Transcripción
 
+![07-01](images/07-01.png)
+![07-02](images/07-02.png)
+![07-03](images/07-03.png)
+![07-04](images/07-04.png)
+![07-05](images/07-05.png)
+![07-06](images/07-06.png)
+![07-07](images/07-07.png)
+![07-08](images/07-08.png)
+
 # 08 Ajustando nuestras clases con JSONView 11:42 
 
 [PDF 06_JsonViews.pdf](pdfs/06_JsonViews.pdf)
@@ -248,6 +257,16 @@ De esta forma, el resultado podría ser:
 
 ## Transcripción
 
+![08-01](images/08-01.png)
+![08-02](images/08-02.png)
+![08-03](images/08-03.png)
+![08-04](images/08-04.png)
+![08-05](images/08-05.png)
+![08-06](images/08-06.png)
+![08-07](images/08-07.png)
+![08-08](images/08-08.png)
+![08-09](images/08-09.png)
+
 # 09 Asociaciones many-to-one 8:42 
 
 [PDF 07_Asociaciones_ManyToOne.pdf](pdfs/07_Asociaciones_ManyToOne.pdf)
@@ -257,6 +276,20 @@ De esta forma, el resultado podría ser:
 No existe.
 
 ## Transcripción
+
+![09-01](images/09-01.png)
+![09-02](images/09-02.png)
+![09-03](images/09-03.png)
+![09-04](images/09-04.png)
+![09-05](images/09-05.png)
+![09-06](images/09-06.png)
+![09-07](images/09-07.png)
+![09-08](images/09-08.png)
+![09-09](images/09-09.png)
+![09-10](images/09-10.png)
+![09-11](images/09-11.png)
+![09-12](images/09-12.png)
+![09-13](images/09-13.png)
 
 # 10 Asociaciones one-to-many 24:31 
 
@@ -360,6 +393,25 @@ En esta lección nuestra aplicación ha crecido un poco (sobre todo en modelo). 
 
 ## Transcripción
 
+![10-01](images/10-01.png)
+![10-02](images/10-02.png)
+![10-03](images/10-03.png)
+![10-04](images/10-04.png)
+![10-05](images/10-05.png)
+![10-06](images/10-06.png)
+![10-07](images/10-07.png)
+![10-08](images/10-08.png)
+![10-09](images/10-09.png)
+![10-10](images/10-10.png)
+![10-11](images/10-11.png)
+![10-12](images/10-12.png)
+![10-13](images/10-13.png)
+![10-14](images/10-14.png)
+![10-15](images/10-15.png)
+![10-16](images/10-16.png)
+![10-17](images/10-17.png)
+![10-18](images/10-18.png)
+
 # 11 Asociaciones many-to-many 17:13 
 
 [PDF Asociaciones_ManyToMany.pdf](pdfs/09_Asociaciones_ManyToMany.pdf)
@@ -424,6 +476,15 @@ Si tenemos una categoría llamada Comida con dos productos llamados Pan y Aceite
 Con todo, si se puede elegir, **yo personalmente prefiero el uso de las anotaciones `@JsonManagedReference` o `@JsonBackReference`, vistas en la lección anterior.**
 
 ## Transcripción
+
+![11-01](images/11-01.png)
+![11-02](images/11-02.png)
+![11-03](images/11-03.png)
+![11-04](images/11-04.png)
+![11-05](images/11-05.png)
+![11-06](images/11-06.png)
+![11-07](images/11-07.png)
+![11-08](images/11-08.png)
 
 # Contenido adicional 5
 
