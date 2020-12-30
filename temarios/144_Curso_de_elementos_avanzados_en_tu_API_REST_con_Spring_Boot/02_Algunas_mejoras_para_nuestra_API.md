@@ -34,6 +34,19 @@ Según el *request for comments* 5988, en un API Rest paginado deberíamos inclu
 
 ## Transcripción
 
+![03-01](images/03-01.png)
+![03-02](images/03-02.png)
+![03-03](images/03-03.png)
+![03-04](images/03-04.png)
+![03-05](images/03-05.png)
+![03-06](images/03-06.png)
+![03-07](images/03-07.png)
+![03-08](images/03-08.png)
+![03-09](images/03-09.png)
+![03-10](images/03-10.png)
+![03-11](images/03-11.png)
+![03-12](images/03-12.png)
+
 # 04 Manejo de parámetros en el Query (Parte I) 16:49 
 
 [PDF Manejo_de_parámetros_en_el_query.pdf](pdfs/02_Manejo_de_parámetros_en_el_query.pdf)
@@ -60,6 +73,16 @@ public ResponseEntity<?> controllerMethod(@RequestParam("param") Optional<String
 Si bien con la propia anotación `@RequestParam` podemos *jugar* con `required` y `defaultValue`, el uso de `Optional` nos permite construir métodos versátiles con garantías de evitar cadenas vacías, número inicializados a cero o situaciones similares.
 
 ## Transcripción
+
+![04-01](images/04-01.png)
+![04-02](images/04-02.png)
+![04-03](images/04-03.png)
+![04-04](images/04-04.png)
+![04-05](images/04-05.png)
+![04-06](images/04-06.png)
+![04-07](images/04-07.png)
+![04-08](images/04-08.png)
+![04-09](images/04-09.png)
 
 # 05 Manejo de parámetros en el Query (Parte II) 17:25 
 
@@ -137,6 +160,13 @@ public class MyConfig implements WebMvcConfigurer {
 
 ## Transcripción
 
+![05-01](images/05-01.png)
+![05-02](images/05-02.png)
+![05-03](images/05-03.png)
+![05-04](images/05-04.png)
+![05-05](images/05-05.png)
+![05-06](images/05-06.png)
+
 # 06 Soporte para XML 7:19 
 
 [PDF Soporte_para_XML.pdf](pdfs/04_Soporte_para_XML.pdf)
@@ -153,6 +183,14 @@ La dependencia de Jackson para poder transformar en XML es:
 ```
 
 ## Transcripción
+
+![06-01](images/06-01.png)
+![06-02](images/06-02.png)
+![06-03](images/06-03.png)
+![06-04](images/06-04.png)
+![06-05](images/06-05.png)
+![06-06](images/06-06.png)
+![06-07](images/06-07.png)
 
 # Contenido adicional 4
 
