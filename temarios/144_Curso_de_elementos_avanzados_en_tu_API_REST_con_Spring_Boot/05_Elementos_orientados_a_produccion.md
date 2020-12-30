@@ -57,6 +57,23 @@ Para acceder, a través de nuestro navegador cargamos la http://localhost:5050.
 
 ## Transcripción
 
+![19-01](images/19-01.png)
+![19-02](images/19-02.png)
+![19-03](images/19-03.png)
+![19-04](images/19-04.png)
+![19-05](images/19-05.png)
+![19-06](images/19-06.png)
+![19-07](images/19-07.png)
+![19-08](images/19-08.png)
+![19-09](images/19-09.png)
+![19-10](images/19-10.png)
+![19-11](images/19-11.png)
+![19-12](images/19-12.png)
+![19-13](images/19-13.png)
+![19-14](images/19-14.png)
+![19-15](images/19-15.png)
+![19-16](images/19-16.png)
+
 # 20 Creación de un nuevo perfil de configuración 11:01 
 
 [PDF Perfiles.pdf](pdfs/18_Perfiles.pdf)
@@ -66,6 +83,16 @@ Para acceder, a través de nuestro navegador cargamos la http://localhost:5050.
 No existe.
 
 ## Transcripción
+
+![20-01](images/20-01.png)
+![20-02](images/20-02.png)
+![20-03](images/20-03.png)
+![20-04](images/20-04.png)
+![20-05](images/20-05.png)
+![20-06](images/20-06.png)
+![20-07](images/20-07.png)
+![20-08](images/20-08.png)
+![20-09](images/20-09.png)
 
 # 21 Monitorización con Actuator 8:54
 
@@ -119,6 +146,15 @@ Puedes encontrar información, el código fuente y screenshots sobre el proyecto
 
 ## Transcripción
 
+![21-01](images/21-01.png)
+![21-02](images/21-02.png)
+![21-03](images/21-03.png)
+![21-04](images/21-04.png)
+![21-05](images/21-05.png)
+![21-06](images/21-06.png)
+![21-07](images/21-07.png)
+![21-08](images/21-08.png)
+
 # 22 Dockerización de nuestra aplicación 17:48
 
 [PDF Dockerizacion.pdf](pdfs/20_Dockerizacion.pdf)
@@ -143,6 +179,12 @@ donde `hello.Application` es el nombre cualificado de la clase anotada con `@Spr
 
 ## Transcripción
 
+![22-01](images/22-01.png)
+![22-02](images/22-02.png)
+![22-03](images/22-03.png)
+![22-04](images/22-04.png)
+![22-05](images/22-05.png)
+
 # 23 Despliegue en Heroku 16:18 
 
 [PDF Heroku.pdf](pdfs/21_Heroku.pdf)
@@ -152,6 +194,13 @@ donde `hello.Application` es el nombre cualificado de la clase anotada con `@Spr
 No existe.
 
 ## Transcripción
+
+![23-01](images/23-01.png)
+![23-02](images/23-02.png)
+![23-03](images/23-03.png)
+![23-04](images/23-04.png)
+![23-05](images/23-05.png)
+![23-06](images/23-06.png)
 
 # Contenido adicional 5
 
