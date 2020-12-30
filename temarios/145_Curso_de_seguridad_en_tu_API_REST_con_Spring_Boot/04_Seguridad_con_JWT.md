@@ -24,6 +24,16 @@ Para depurar tus tokens JWT, puedes utilizar la siguiente herramienta: https://j
 
 ## Transcripción
 
+![15-01](images/15-01.png)
+![15-02](images/15-02.png)
+![15-03](images/15-03.png)
+![15-04](images/15-04.png)
+![15-05](images/15-05.png)
+![15-06](images/15-06.png)
+![15-07](images/15-07.png)
+![15-08](images/15-08.png)
+![15-09](images/15-09.png)
+
 # 16 Librerías necesarias 4:07 
 
 [PDF JWT_Liberías_necesarias.pdf](pdfs/15_JWT_Liberías_necesarias.pdf)
@@ -76,6 +86,12 @@ El resultado parecerá algo así:
 
 ## Transcripción
 
+![16-01](images/16-01.png)
+![16-02](images/16-02.png)
+![16-03](images/16-03.png)
+![16-04](images/16-04.png)
+![16-05](images/16-05.png)
+
 # 17 Implementación de la seguridad con JWT 6:37 
 
 [PDF JWT_seguridad.pdf](pdfs/16_JWT_seguridad.pdf)
@@ -85,6 +101,10 @@ El resultado parecerá algo así:
 No existe.
 
 ## Transcripción
+
+![17-01](images/17-01.png)
+![17-02](images/17-02.png)
+![17-03](images/17-03.png)
 
 # 18 Customización del AuthenticationEntryPoint 4:37 
 
@@ -96,6 +116,9 @@ No existe.
 
 ## Transcripción
 
+![18-01](images/18-01.png)
+![18-02](images/18-02.png)
+
 # 19 Modelo de usuario y UserDetailService 4:49 
 
 [PDF JWT_Users.pdf](pdfs/18_JWT_Users.pdf)
@@ -105,6 +128,10 @@ No existe.
 No existe.
 
 ## Transcripción
+
+![19-01](images/19-01.png)
+![19-02](images/19-02.png)
+![19-03](images/19-03.png)
 
 # 20 Manejo del token JWT 15:07 
 
@@ -150,6 +177,13 @@ public Long getUserIdFromJWT(String token) {
 
 ## Transcripción
 
+![20-01](images/20-01.png)
+![20-02](images/20-02.png)
+![20-03](images/20-03.png)
+![20-04](images/20-04.png)
+![20-05](images/20-05.png)
+![20-06](images/20-06.png)
+
 # 21 JWTAuthenticationFilter 10:51 
 
 [PDF JWT_AuthorizationFilter.pdf](pdfs/20_JWT_AuthorizationFilter.pdf)
@@ -174,6 +208,10 @@ if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
 
 ## Transcripción
 
+![21-01](images/21-01.png)
+![21-02](images/21-02.png)
+![21-03](images/21-03.png)
+
 # 22 Modelo para el login y su respuesta 7:18 
 
 [PDF JWT_Modelo_de_login_y_respuesta.pdf](pdfs/21_JWT_Modelo_de_login_y_respuesta.pdf)
@@ -184,6 +222,11 @@ No existe.
 
 ## Transcripción
 
+![22-01](images/22-01.png)
+![22-02](images/22-02.png)
+![22-03](images/22-03.png)
+![22-04](images/22-04.png)
+
 # 23 Refactorización del controlador 11:58 
 
 [PDF JWT_Controladores.pdf](pdfs/22_JWT_Controladores.pdf)
@@ -193,6 +236,11 @@ No existe.
 No existe.
 
 ## Transcripción
+
+![23-01](images/23-01.png)
+![23-02](images/23-02.png)
+![23-03](images/23-03.png)
+![23-04](images/23-04.png)
 
 # 24 Despliegue y pruebas con JWT 4:12 
 
