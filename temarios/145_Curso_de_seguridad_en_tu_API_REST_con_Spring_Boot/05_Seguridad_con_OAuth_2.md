@@ -34,6 +34,13 @@ Sobre Tokens y su gestión
 
 ## Transcripción
 
+![25-01](images/25-01.png)
+![25-02](images/25-02.png)
+![25-03](images/25-03.png)
+![25-04](images/25-04.png)
+![25-05](images/25-05.png)
+![25-06](images/25-06.png)
+
 # 26 Roles 4:25 
 
 [PDF OAuth2_roles.pdf](pdfs/25_OAuth2_roles.pdf)
@@ -43,6 +50,14 @@ Sobre Tokens y su gestión
 No existe.
 
 ## Transcripción
+
+![26-01](images/26-01.png)
+![26-02](images/26-02.png)
+![26-03](images/26-03.png)
+![26-04](images/26-04.png)
+![26-05](images/26-05.png)
+![26-06](images/26-06.png)
+![26-07](images/26-07.png)
 
 # 27 Flujo abstracto del protocolo 6:42 
 
@@ -54,6 +69,20 @@ No existe.
 
 ## Transcripción
 
+![27-01](images/27-01.png)
+![27-02](images/27-02.png)
+![27-03](images/27-03.png)
+![27-04](images/27-04.png)
+![27-05](images/27-05.png)
+![27-06](images/27-06.png)
+![27-07](images/27-07.png)
+![27-08](images/27-08.png)
+![27-09](images/27-09.png)
+![27-10](images/27-10.png)
+![27-11](images/27-11.png)
+![27-12](images/27-12.png)
+![27-13](images/27-13.png)
+
 # 28 Grant Types 11:28 
 
 [PDF OAuth2_Grant_Types.pdf](pdfs/27_OAuth2_Grant_Types.pdf)
@@ -63,6 +92,27 @@ No existe.
 No existe.
 
 ## Transcripción
+
+![28-01](images/28-01.png)
+![28-02](images/28-02.png)
+![28-03](images/28-03.png)
+![28-04](images/28-04.png)
+![28-05](images/28-05.png)
+![28-06](images/28-06.png)
+![28-07](images/28-07.png)
+![28-08](images/28-08.png)
+![28-09](images/28-09.png)
+![28-10](images/28-10.png)
+![28-11](images/28-11.png)
+![28-12](images/28-12.png)
+![28-13](images/28-13.png)
+![28-14](images/28-14.png)
+![28-15](images/28-15.png)
+![28-16](images/28-16.png)
+![28-17](images/28-17.png)
+![28-18](images/28-18.png)
+![28-19](images/28-19.png)
+![28-20](images/28-20.png)
 
 # 29 Implementando el servidor de autorización 14:46 
 
@@ -83,6 +133,13 @@ donde `2.X.Y.RELEASE` es la versión de Spring Boot.
 
 ## Transcripción
 
+![29-01](images/29-01.png)
+![29-02](images/29-02.png)
+![29-03](images/29-03.png)
+![29-04](images/29-04.png)
+![29-05](images/29-05.png)
+![29-06](images/29-06.png)
+
 # 30 Implementando el servidor de recursos 5:33 
 
 [PDF OAuth2_Servidor_de_recursos.pdf](pdfs/29_OAuth2_Servidor_de_recursos.pdf)
@@ -92,6 +149,11 @@ donde `2.X.Y.RELEASE` es la versión de Spring Boot.
 No existe.
 
 ## Transcripción
+
+![30-01](images/30-01.png)
+![30-02](images/30-02.png)
+![30-03](images/30-03.png)
+![30-04](images/30-04.png)
 
 # 31 Reconfigurando CORS 9:19 
 
@@ -103,6 +165,12 @@ No existe.
 
 ## Transcripción
 
+![31-01](images/31-01.png)
+![31-02](images/31-02.png)
+![31-03](images/31-03.png)
+![31-04](images/31-04.png)
+![31-05](images/31-05.png)
+
 # 32 Despliegue y prueba de ejecución 12:25 
 
 [PDF OAuth2_Ejecución.pdf](pdfs/31_OAuth2_Ejecución.pdf)
@@ -112,6 +180,13 @@ No existe.
 No existe.
 
 ## Transcripción
+
+![32-01](images/32-01.png)
+![32-02](images/32-02.png)
+![32-03](images/32-03.png)
+![32-04](images/32-04.png)
+![32-05](images/32-05.png)
+![32-06](images/32-06.png)
 
 # 33 Tokens en base de datos 12:12 
 
@@ -197,6 +272,14 @@ En esta web se indica que se ha probado con HSQL, y también funciona en H2.
 
 ## Transcripción
 
+![33-01](images/33-01.png)
+![33-02](images/33-02.png)
+![33-03](images/33-03.png)
+![33-04](images/33-04.png)
+![33-05](images/33-05.png)
+![33-06](images/33-06.png)
+![33-07](images/33-07.png)
+
 # 34 Integrando OAuth 2 y JWT 7:28 
 
 [PDF OAuth2_JsonWebToken.pdf](pdfs/33_OAuth2_JsonWebToken.pdf)
@@ -206,6 +289,11 @@ En esta web se indica que se ha probado con HSQL, y también funciona en H2.
 No existe.
 
 ## Transcripción
+
+![34-01](images/34-01.png)
+![34-02](images/34-02.png)
+![34-03](images/34-03.png)
+![34-04](images/34-04.png)
 
 # Contenido adicional 10
 
