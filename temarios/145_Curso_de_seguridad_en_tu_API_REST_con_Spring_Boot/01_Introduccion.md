@@ -17,6 +17,13 @@ No existe.
 
 ## Transcripción
 
+![01-01](images/01-01.png)
+![01-02](images/01-02.png)
+![01-03](images/01-03.png)
+![01-04](images/01-04.png)
+![01-05](images/01-05.png)
+![01-06](images/01-06.png)
+
 # 02 Introducción a Spring Security 10:28 
 
 [PDF Introducción_a_Spring_Security.pdf](pdfs/01_Introducción_a_Spring_Security.pdf)
@@ -26,6 +33,17 @@ No existe.
 Puedes encontrar toda la documentación del proyecto Spring Security en https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/
 
 ## Transcripción
+
+![02-01](images/02-01.png)
+![02-02](images/02-02.png)
+![02-03](images/02-03.png)
+![02-04](images/02-04.png)
+![02-05](images/02-05.png)
+![02-06](images/02-06.png)
+![02-07](images/02-07.png)
+![02-08](images/02-08.png)
+![02-09](images/02-09.png)
+![02-10](images/02-10.png)
 
 # 03 Autenticación vs. autorización 10:34 
 
@@ -47,6 +65,20 @@ En el mecanismo de autenticación, se utiliza en el método `AuthenticationManag
 
 ## Transcripción
 
+![03-01](images/03-01.png)
+![03-02](images/03-02.png)
+![03-03](images/03-03.png)
+![03-04](images/03-04.png)
+![03-05](images/03-05.png)
+![03-06](images/03-06.png)
+![03-07](images/03-07.png)
+![03-08](images/03-08.png)
+![03-09](images/03-09.png)
+![03-10](images/03-10.png)
+![03-11](images/03-11.png)
+![03-12](images/03-12.png)
+![03-13](images/03-13.png)
+
 # 04 Clases e interfaces de Spring Security 14:22 
 
 [PDF Algunas_clases_e_interfaces_de_Spring_Security.pdf](pdfs/03_Algunas_clases_e_interfaces_de_Spring_Security.pdf)
@@ -66,6 +98,18 @@ A continuación podemos ver el listado de enlaces a la documentación de las cla
 * `UserDetailsService: https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetailsService.html`
 
 ## Transcripción
+
+![04-01](images/04-01.png)
+![04-02](images/04-02.png)
+![04-03](images/04-03.png)
+![04-04](images/04-04.png)
+![04-05](images/04-05.png)
+![04-06](images/04-06.png)
+![04-07](images/04-07.png)
+![04-08](images/04-08.png)
+![04-09](images/04-09.png)
+![04-10](images/04-10.png)
+![04-11](images/04-11.png)
 
 # 05 Posibilidades para implementar la seguridad de una API REST 12:21 
 
@@ -100,6 +144,17 @@ Puedes leer algunos RFCs
 También puedes encontrar más información en la web https://oauth.net/2/
 
 ## Transcripción
+
+![05-01](images/05-01.png)
+![05-02](images/05-02.png)
+![05-03](images/05-03.png)
+![05-04](images/05-04.png)
+![05-05](images/05-05.png)
+![05-06](images/05-06.png)
+![05-07](images/05-07.png)
+![05-08](images/05-08.png)
+![05-09](images/05-09.png)
+![05-10](images/05-10.png)
 
 # Contenido adicional  5
 
