@@ -238,6 +238,14 @@ curl -X PUT -H "Authorization: Basic YWRtaW46QWRtaW4x" -H "Content-Type: applica
 
 ## Transcripción
 
+![11-01](images/11-01.png)
+![11-02](images/11-02.png)
+![11-03](images/11-03.png)
+![11-04](images/11-04.png)
+![11-05](images/11-05.png)
+![11-06](images/11-06.png)
+![11-07](images/11-07.png)
+
 # 12 Implementación de la seguridad básica 14:07 
 
 [PDF Seguridad_básica_implementación.pdf](pdfs/11_Seguridad_básica_implementación.pdf)
@@ -247,6 +255,12 @@ curl -X PUT -H "Authorization: Basic YWRtaW46QWRtaW4x" -H "Content-Type: applica
 No existe.
 
 ## Transcripción
+
+![12-01](images/12-01.png)
+![12-02](images/12-02.png)
+![12-03](images/12-03.png)
+![12-04](images/12-04.png)
+![12-05](images/12-05.png)
 
 # 13 Refactorización del controlador 15:01 
 
@@ -258,6 +272,13 @@ No existe.
 
 ## Transcripción
 
+![13-01](images/13-01.png)
+![13-02](images/13-02.png)
+![13-03](images/13-03.png)
+![13-04](images/13-04.png)
+![13-05](images/13-05.png)
+![13-06](images/13-06.png)
+
 # 14 Despliegue y pruebas 12:46 
 
 [PDF Seguridad_Despliegue_y_prueba.pdf](pdfs/13_Seguridad_Despliegue_y_prueba.pdf)
@@ -267,6 +288,13 @@ No existe.
 No existe.
 
 ## Transcripción
+
+![14-01](images/14-01.png)
+![14-02](images/14-02.png)
+![14-03](images/14-03.png)
+![14-04](images/14-04.png)
+![14-05](images/14-05.png)
+![14-06](images/14-06.png)
 
 # Contenido adicional 4
 
