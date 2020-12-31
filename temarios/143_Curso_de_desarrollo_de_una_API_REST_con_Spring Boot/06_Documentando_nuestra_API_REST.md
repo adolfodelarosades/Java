@@ -469,7 +469,7 @@ Ya no es un ejemplo cualquiera sino el que nosotros hemos ido montado con las di
 
 ### :computer: Código Completo `143-14-Swagger`
 
-![143-14-01](images/143-14-01.png)
+![143-14-99](images/143-14-99.png)
 
 Vamos a listar los archivos que cambiamos en este proyecto.
 
