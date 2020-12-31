@@ -273,20 +273,20 @@ Hemos trabajado sobre tres archivos:
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.openwebinars</groupId>
-	<artifactId>141-02-FileSystemXMLApplicationContext</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>141-02-FileSystemXMLApplicationContext</name>
-	<description>Ejemplo usando FileSystemXMLApplicationContext</description>
-	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>5.2.6.RELEASE</version>
-		</dependency>
-	</dependencies>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.openwebinars</groupId>
+   <artifactId>141-02-FileSystemXMLApplicationContext</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>141-02-FileSystemXMLApplicationContext</name>
+   <description>Ejemplo usando FileSystemXMLApplicationContext</description>
+   <dependencies>
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+         <version>5.2.6.RELEASE</version>
+      </dependency>
+   </dependencies>
 </project>
 ```
 
@@ -312,13 +312,13 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 public class App {
 
-	public static void main(String[] args) {
-		//Abrir contexto
-		ApplicationContext appContext = new FileSystemXmlApplicationContext("beans.xml");
+   public static void main(String[] args) {
+      //Abrir contexto
+      ApplicationContext appContext = new FileSystemXmlApplicationContext("beans.xml");
 		
-		//Cerrar contexto
-		((FileSystemXmlApplicationContext) appContext).close();
-	}
+      //Cerrar contexto
+      ((FileSystemXmlApplicationContext) appContext).close();
+   }
 
 }
 ```
