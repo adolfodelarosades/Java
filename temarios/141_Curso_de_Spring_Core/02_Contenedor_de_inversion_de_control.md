@@ -86,7 +86,8 @@ Si seguimos hablando del Contenedor de Inversión de Control, hemos visto las in
 
 Vamos a pasar a crear nuestro primer proyecto. 
 
-### :computer: `141-01-ClassPathXMLApplicatioContext`  Ejemplo Proyecto con `ClassPathXmlApplicationContext`
+### :computer: `141-01-ClassPathXMLApplicatioContext`  
+#### Ejemplo Proyecto con `ClassPathXmlApplicationContext`
 
 <img src="images/141-01-12.png">
 
