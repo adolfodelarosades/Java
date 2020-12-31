@@ -367,7 +367,7 @@ En XML aquí tenemos un ejemplo muy básico de una clase llamada `Saludator` la 
 
 ### :computer: `141-03-PrimerBean`
 
-<img src="images/141-03-01">
+<img src="images/141-03-01.png">
 
 #### Ejemplo Primer Bean 
 
@@ -599,7 +599,7 @@ Lo hacemos anidando dentro del elemento `bean` el elemento `property` que hace r
 
 ### :computer: Ejemplo Proyecto Setter `141-04-InyeccionViaSetter`
 
-<img src="images/141-04-01">
+<img src="images/141-04-01.png">
 
 En este proyecto tenemos nuestro archivo `beans.xml`:
 
