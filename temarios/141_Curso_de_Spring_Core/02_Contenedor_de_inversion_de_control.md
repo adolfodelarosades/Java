@@ -86,7 +86,9 @@ Si seguimos hablando del Contenedor de Inversión de Control, hemos visto las in
 
 Vamos a pasar a crear nuestro primer proyecto. 
 
-### :computer: Ejemplo Proyecto con `ClassPathXmlApplicationContext`
+### :computer: `141-01-ClassPathXMLApplicatioContext`  Ejemplo Proyecto con `ClassPathXmlApplicationContext`
+
+<img src="images/141-01-12.png">
 
 En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura parecida a esta:
 
@@ -106,21 +108,21 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
 
 * Maven se basa en la creación de artefactos y los artefactos se basan en un Group Id y un Artifact Id.
 
-   <img src="images/6-10.png">
+   <img src="images/141-01-01.png">
 
 * Se crea la estructura de nuestro proyecto Maven
 
-   <img src="images/6-11.png">
+   <img src="images/141-01-02.png">
 
    Maven arrastra de cierta manera el uso de Java 5.
 
 * Cambiamos a Java 8 pulsando en el proyecto con el botón derecho.
 
-   <img src="images/6-12.png">
+   <img src="images/141-01-03.png">
 
    <img src="images/6-13.png">
    
-   <img src="images/6-14.png">
+   <img src="images/141-01-04.png">
    
 * Como proyecto Maven se nos genero el archivo `pom.xml` con el siguiente contenido: 
 
@@ -128,10 +130,10 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.openwebinars</groupId>
-  <artifactId>141-01-PrimerEjemplo</artifactId>
+  <artifactId>141-01-ClassPathXMLApplicatioContext</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>141-01-PrimerEjemplo</name>
-  <description>Primer ejemplo de uso de Spring</description>
+  <name>141-01-ClassPathXMLApplicatioContext</name>
+  <description>Primer ejemplo de uso de Spring con ClassPathXMLApplicatioContext</description>
 </project>    
 ```
 
@@ -145,14 +147,14 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
 
    Tenemos que incluir:
    
-   ```js
-   <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-   <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>5.2.6.RELEASE</version>
-   </dependency>
-   ```
+```js
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+   <groupId>org.springframework</groupId>
+   <artifactId>spring-context</artifactId>
+   <version>5.2.6.RELEASE</version>
+</dependency>
+```
    
 * Por lo que el archivo `pom.xml` quedara así:
 
@@ -160,41 +162,40 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.openwebinars</groupId>
-	<artifactId>141-01-PrimerEjemplo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>141-01-PrimerEjemplo</name>
-	<description>Primer ejemplo de uso de Spring</description>
-	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>5.2.6.RELEASE</version>
-		</dependency>
-
-	</dependencies>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.openwebinars</groupId>
+   <artifactId>141-01-ClassPathXMLApplicatioContext</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>141-01-ClassPathXMLApplicatioContext</name>
+   <description>Primer ejemplo de uso de Spring con ClassPathXMLApplicatioContext</description>
+   <dependencies>
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+         <version>5.2.6.RELEASE</version>
+      </dependency>
+   </dependencies>
 </project>
 ```
 
-   Es importante saber que inmediatamente cuando se inserta una nueva dependencia en `pom.xml` y se salva el archivo se descargan automaticamente todos los `jars` necesarios dentro de la carpeta `Maven Dependencies` y reconstruye el proyecto.
+Es importante saber que inmediatamente cuando se inserta una nueva dependencia en `pom.xml` y se salva el archivo se descargan automaticamente todos los `jars` necesarios dentro de la carpeta `Maven Dependencies` y reconstruye el proyecto.
    
-   <img src="images/6-18.png">
+<img src="images/141-01-05.png">
 
 * Otra parte importante de la estructura creada es que existe una carpeta `src/main/java` donde colocaremos los archivos java y la carpeta `src/main/resources` donde colocaremos nuestross recursos como archivos `html`, `css`, `js`, `properties`, etc.
 
 * Dentro de `src/main/java` creamos un nuevo paquete llamado `com.openwebinars.spring`
 
-   <img src="images/6-19.png">
+   <img src="images/141-01-06.png">
    
-   <img src="images/6-20.png">
+   <img src="images/141-01-07.png">
 
 * Dentro del nuevo paquete creamos la clase llamada `App` con un `main`.
 
-   <img src="images/6-21.png">
+   <img src="images/141-01-08.png">
    
-   <img src="images/6-22.png">
+   <img src="images/141-01-09.png">
    
 * Una vez que tenemos creada nuestra clase de aplicación, como hemos visto antes el algoritmp básico es 
 
@@ -213,16 +214,15 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
 
    public class App {
 
-	public static void main(String[] args) {
+      public static void main(String[] args) {
 		
-		//Abrir contexto
-		ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
-		
-		
-		//Cerrar contexto
-		((ClassPathXmlApplicationContext) appContext).close();
+         //Abrir contexto
+         ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+			
+         //Cerrar contexto
+         ((ClassPathXmlApplicationContext) appContext).close();
 
-	}
+      }
 
    }
    ```
@@ -231,13 +231,13 @@ En nuestro primer ejemplo nuestro Contenedor de IoC tendra una estructura pareci
    
    <img src="images/6-23.png">
    
-   <img src="images/6-24.png">
+   <img src="images/141-01-10.png">
    
    <img src="images/6-25.png">
    
    No seleccionamos ninguno de ellos por que no usaremos en este ejemplo ningún bean
    
-   <img src="images/6-26.png">
+   <img src="images/141-01-11.png">
    
    Ya tenemos nuestro fichero XML.
    
