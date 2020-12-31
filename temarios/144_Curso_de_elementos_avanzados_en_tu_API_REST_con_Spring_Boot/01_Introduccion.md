@@ -127,7 +127,6 @@ Los DTOs aunque también hablaremos de ellos en este curso, se presentaban en el
 
 Como por ejemplo `ProductoDTO` que nos permitía resumir las propiedades más fundamentales como podían ser el nombre, la imagen y el nombre de la categoría que tendríamos dentro de una sola clase, es una especie de resumen de ambas clases en un solo objeto que nos permiten en una sola petición mandarlo todo hacia el cliente esto es lo que devolvería el método `"/producto" .... obtenerTodos()` del `ProductoController`. 
 
-
 También teníamos el método `"/producto/{id}" .... obtenerUno(@PathVariable Long id)`,
 
 ![144-00-03](images/144-00-03.png)
@@ -163,6 +162,12 @@ Dentro del servicio de producto `ProductoServicio` que lo tenemos definido por a
 ![144-00-08](images/144-00-08.png)
 
 Teníamos el método `nuevoProducto(CreateProductoDTO nuevo, MultipartFile file) {`  de nuevo producto que recibe ese DTO, recibe el fichero multiparte, guardaba el fichero si es que no estaba vacío y transformaba el `ProductoDTO` en un nuevo `Producto` para almacenarlo en la base de datos y devolverlo al controlador.
+
+Cabe hacer notar que nuestro servicio `ProductoServicio` extiende a `BaseService<Producto, Long, ProductoRepositorio>` que tenemos aquí definido:
+
+![144-00-16](images/144-00-16.png)
+
+La clase es una clase abstracta que nos va a ayudar que en el controlador en lugar de usar los distintos servicios y repositorios, este servicio envuelve a cualquier repositorio y nos permite usar en los controladores solo este servicio que hace llamadas, envoltorio, a los que tengamos definidos dentro del repositorio.
 
 En el controlador tenemos también la posibilidad de actualizar un producto que ya existe en la base de datos.
 
