@@ -253,7 +253,11 @@ Es importante saber que inmediatamente cuando se inserta una nueva dependencia e
    
    **ESTE SERA EL ESQUEMA QUE UTILIZAREMOS EN LOS PRÓXIMOS EJEMPLOS**
 
-### :computer: Ejemplo Proyecto con `FileSystemXmlApplicationContext`
+### :computer: `141-02-FileSystemXMLApplicationContext`
+
+#### Ejemplo Proyecto con `FileSystemXmlApplicationContext`
+
+<img src="images/141-02-01.png">
 
 Nuestro segundo ejemplo lo crearemos de la misma forma como creamos el primero. La estructurta generada es la siguiente:
 
