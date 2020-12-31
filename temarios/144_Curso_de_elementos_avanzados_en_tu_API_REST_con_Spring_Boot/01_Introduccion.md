@@ -84,7 +84,7 @@ En este curso seguiremos hablando del desarrollo de aplicaciones con Spring Boot
 
 A lo largo del curso de ***Desarrollo de un API REST con Spring Boot*** habéis podido ir aprendiendo poco a poco y de cero a desarrollar un API sencilla con Spring Boot que incluia alguna clase de modelo y en el cual hemos ido incluyendo una serie de elementos cómo sería la parte de acceso a datos a través del modelo, la transformación de esos objetos que vamos a necesitar en DTOs, la creación de unos controladores que manejan las peticiones necesarias para hacer un CRUD, para crear nuevos elementos, consultar, actualizar y borrar. También la gestión de errores, la gestión de la seguridad a nivel de CORS y la subida de ficheros. 
 
-Ese era el proyecto de ejemplo del cual vamos a partir en este nuevo curso en el que veremos elemento avanzada.
+Ese era el proyecto de ejemplo del cual vamos a partir en este nuevo curso en el que veremos elemento avanzada. Cabe aclarar que en comparación con el proyecto que terminamos en el curso pasado, este del cual partimos esta más estructurado ya que se separan las capas de repositorio y ya se tiene una capa de servicios que antes no teniamos entre algunos detalles más.
 
 Veamos el código, si veis que hay alguno de los elementos en el código que suenan un poco más raro o no lo conocéis, sería bueno que primero pudiera ir a repasar con ese curso el ***Desarrollo de un API REST con Spring Boot*** antes de empezar este.
 
