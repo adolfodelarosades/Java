@@ -254,7 +254,6 @@ Es importante saber que inmediatamente cuando se inserta una nueva dependencia e
    **ESTE SERA EL ESQUEMA QUE UTILIZAREMOS EN LOS PRÓXIMOS EJEMPLOS**
 
 ### :computer: `141-02-FileSystemXMLApplicationContext`
-
 #### Ejemplo Proyecto con `FileSystemXmlApplicationContext`
 
 Nuestro segundo ejemplo lo crearemos de la misma forma como creamos el primero. La estructurta generada es la siguiente:
@@ -366,10 +365,9 @@ Un bean no deja de ser un simple objeto, una clase *pojo* manejada por el Conten
 En XML aquí tenemos un ejemplo muy básico de una clase llamada `Saludator` la cual será un servicio encargada de saludar. Se utiliza la etiqueta `<bean>` con el atributo `id` identificamos al bean y con el atributo `class` proporcinamos la ruta completa de la clase, incluyendo el paquete y subpaquetes, el nombre tiene que ser único. 
 
 ### :computer: `141-03-PrimerBean`
+#### Ejemplo Primer Bean
 
 <img src="images/141-03-01.png">
-
-#### Ejemplo Primer Bean 
 
 <img src="images/7-05.png">
 
@@ -597,7 +595,8 @@ Como se observa en el código estamos declarando la dependencia(el mensaje) como
 
 Lo hacemos anidando dentro del elemento `bean` el elemento `property` que hace referencia mediante su atributo `name` al nombre de la propiedad y mediante `value` el valor que va a ser inyectado. De esta forma cuando se carge el Contenedor de IoC podremos comprobar como `mensaje` a través de el setter `setMensaje(String str)` Spring asigna el valor y ya podemos hacer con el lo que corresponda.
 
-### :computer: Ejemplo Proyecto Setter `141-04-InyeccionViaSetter`
+### :computer:  `141-04-InyeccionViaSetter`
+#### Ejemplo Proyecto Setter
 
 <img src="images/141-04-01.png">
 
@@ -711,7 +710,6 @@ El secreto se encuentra dentro de la declaración de nuestro `bean` donde hemos 
 Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes, incluso podemos añadir los elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
 
 ### :computer: `141-05-InyeccionViaConstructor`
-
 #### Ejemplo Proyecto Inyección Vía Constructor 
 
 <img src="images/141-05-01.png">
@@ -930,7 +928,6 @@ Podemos tener beans que implementan Interfaces, de manera que podemos declarar p
 Todo esto lo tenemos en el siguiente ejemplo.
 
 ### :computer: `141-07-ReferenciaInterface`
-
 #### Ejemplo Proyecto Referencias con Interfaces 
 
 <img src="images/141-07-01.png">
