@@ -365,7 +365,11 @@ Un bean no deja de ser un simple objeto, una clase *pojo* manejada por el Conten
 
 En XML aquí tenemos un ejemplo muy básico de una clase llamada `Saludator` la cual será un servicio encargada de saludar. Se utiliza la etiqueta `<bean>` con el atributo `id` identificamos al bean y con el atributo `class` proporcinamos la ruta completa de la clase, incluyendo el paquete y subpaquetes, el nombre tiene que ser único. 
 
-### :computer: Ejemplo Proyecto Beans `141-07-MiPrimerBean` 
+### :computer: `141-03-PrimerBean`
+
+<img src="images/141-03-01">
+
+#### Ejemplo Primer Bean 
 
 <img src="images/7-05.png">
 
@@ -379,7 +383,7 @@ En nuestro archivo `beans.xml` declaramos nuestro bean como se explico anteriorm
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="saludator" class="com.openwebinars.beans.Saludator"></bean>
+   <bean id="saludator" class="com.openwebinars.beans.Saludator"></bean>
 
 </beans>
 ```
@@ -474,9 +478,8 @@ En este ultimo caso estamos haciendolo a sabiendas de que no existe otro bean co
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id="saludator" class="com.openwebinars.beans.Saludator"></bean>
-	<bean id="otro" class="com.openwebinars.beans.Saludator" />
+   <bean id="saludator" class="com.openwebinars.beans.Saludator"></bean>
+   <bean id="otro" class="com.openwebinars.beans.Saludator" />
 
 </beans>
 ```
@@ -594,9 +597,9 @@ Como se observa en el código estamos declarando la dependencia(el mensaje) como
 
 Lo hacemos anidando dentro del elemento `bean` el elemento `property` que hace referencia mediante su atributo `name` al nombre de la propiedad y mediante `value` el valor que va a ser inyectado. De esta forma cuando se carge el Contenedor de IoC podremos comprobar como `mensaje` a través de el setter `setMensaje(String str)` Spring asigna el valor y ya podemos hacer con el lo que corresponda.
 
-### :computer: Ejemplo Proyecto Setter `141-08-01-inyeccion-via-setter`
+### :computer: Ejemplo Proyecto Setter `141-04-InyeccionViaSetter`
 
-<img src="images/8-09.png">
+<img src="images/141-04-01">
 
 En este proyecto tenemos nuestro archivo `beans.xml`:
 
@@ -707,9 +710,11 @@ El secreto se encuentra dentro de la declaración de nuestro `bean` donde hemos 
 
 Los elementos del constructor también se pueden indicar a través de su índice, si los tipos de datos del constructor son diferentes, incluso podemos añadir los elementos en orden sin especificar más datos, pero es mejor siempre hacer referencia por índice o por `name`.
 
-### :computer: Ejemplo Proyecto Inyección Vía Constructor `141-08-02-inyeccion-via-constructor`
+### :computer: `141-05-InyeccionViaConstructor`
 
-<img src="images/8-12.png">
+#### Ejemplo Proyecto Inyección Vía Constructor 
+
+<img src="images/141-05-01.png">
 
 En nuestro `beans.xml` hemos cambiado el elemento `property` por `constructor-arg`:
 
@@ -720,13 +725,14 @@ En nuestro `beans.xml` hemos cambiado el elemento `property` por `constructor-ar
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <constructor-arg name="str" value="Hola alumnos de openwebinars"></constructor-arg>
-	</bean>
+      
+      <bean id="saludator" class="com.openwebinars.beans.Saludator">
+         <constructor-arg name="str" value="Hola alumnos de openwebinars"></constructor-arg>
+      </bean>
 	
 </beans>
 ```
+
 En este caso podríamos eliminar `name="str"` y funcionaria igual. Pero si lo ponemos el nombre debe coincidir con el nombre del argumento en el constructor de la clase ` Saludator`.
 
 Así mismo en nuestra clase `Saludator` hemos sustituido el método setter por un constructor:
@@ -751,7 +757,7 @@ public class Saludator {
 }
 ```
 
-Nuestra clase de la aplicación no ha sufrido ningún cambio.
+Nuestra clase de la aplicación NO ha sufrido ningún cambio.
 
 *`App.java`*
 
@@ -799,9 +805,10 @@ La clase o bean `EmailService` tiene una propiedad llamada `saludator` de tipo `
 
 De esta forma tenemos la posibilidad de inyectar un bean dentro de otro.
 
-### :computer: Ejemplo Proyecto Referencias con Clases `141-08-03-referencias-a-beans`
+### :computer: `141-06-BeanReferenciaBean`
+#### Ejemplo Proyecto Referencias con Clases
 
-<img src="images/8-14.png">
+<img src="images/141-06-01.png">
 
 En nuestro archivo `beans.xml` vemos la definición de los dos beans.
 
@@ -812,14 +819,14 @@ En nuestro archivo `beans.xml` vemos la definición de los dos beans.
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id="emailService" class="com.openwebinars.beans.EmailService">
-	   <property name="saludator" ref="saludator"></property>
-	</bean>
 	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
+      <bean id="saludator" class="com.openwebinars.beans.Saludator">
+         <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+      </bean>
+	
+      <bean id="emailService" class="com.openwebinars.beans.EmailService">
+         <property name="saludator" ref="saludator"></property>
+      </bean>
 	
 </beans>
 ```
@@ -922,9 +929,11 @@ Podemos tener beans que implementan Interfaces, de manera que podemos declarar p
 
 Todo esto lo tenemos en el siguiente ejemplo.
 
-### :computer: Ejemplo Proyecto Referencias con Interfaces `141-08-04-interfaz`
+### :computer: `141-07-ReferenciaInterface`
 
-<img src="images/8-16.png">
+#### Ejemplo Proyecto Referencias con Interfaces 
+
+<img src="images/141-07-01.png">
 
 La declaración de beans es identica que el ejemplo anterior.
 
@@ -936,13 +945,13 @@ La declaración de beans es identica que el ejemplo anterior.
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="emailService" class="com.openwebinars.beans.EmailService">
-	   <property name="saludator" ref="saludator"></property>
-	</bean>
+      <bean id="saludator" class="com.openwebinars.beans.Saludator">
+         <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+      </bean>
 	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
+      <bean id="emailService" class="com.openwebinars.beans.EmailService">
+         <property name="saludator" ref="saludator"></property>
+      </bean>
 	
 </beans>
 ```
