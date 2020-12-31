@@ -134,44 +134,67 @@ También teníamos el método `"/producto/{id}" .... obtenerUno(@PathVariable Lo
 
 que nos devolvía la información de un producto en particular al cual le proporcionamos un `id`, podemos ver como se recoje este `id` con un `@PathVariable`, buscamos a través del servicio correspondiente el producto si no lo encontramos remitimos una excepción.
 
-Sobre excepciones hablamos ahora y decir que en el curso pasado había varias estrategías, aquí hemos planteado una gestión de errores a traves de un `@RestControllerAdvice`.
+Sobre excepciones hablamos ahora y decir que en el curso pasado habíamos planteado varias estrategías, aquí nos hemos quedado con una gestión de errores a traves de un `ControllerAdvice` en particular con la anotación `@RestControllerAdvice`.
 
 ![144-00-04](images/144-00-04.png)
 
-AQUIIIIII
+Dónde encausabamos, para dar un modelo personalizado de error de todas a través del método `handleExceptionInternal` y en el cual definiamos una clase de error `ApiError`
 
+![144-00-05](images/144-00-05.png)
 
-Hemos planteado bueno pues una gestión de errores se veía en el curso anterior que podíamos atacarlo desde diferentes frentes aquí lo hemos hecho a través de un controller advice vale en particular con la anotación rest controller advice dónde en causa vamos para dar un modelo personalizado de error todas a través de este método vale dejarle excepción interna y en el cual definimos una clase de error que fuera algo más sencilla de toda la información en algún caso repetitiva que nos daba stream por defecto no dando el estado de la petición en este caso el estado del error el código numérico también vendrá no hace falta resumirlo en este objeto Jason la fecha y hora en un formato que fuera más amigable para nosotros y un mensaje pues todas las excepciones send causarían por aquí dentro y se le daría este tipo de tratamiento en particular las excepciones nuevas definidas por nosotros con los productos no son excepción también las podemos manejar aquí para dar en nuestro caso en 404 con el mensaje de error correspondiente no el que pudiéramos definir por ejemplo como el que tenemos por aquí y entramos dentro de la clase según pues no se puede encontrar un producto en particular con una idea concreta o no se pueden encontrar productos en general dentro del catálogo por aquí tendríamos algún tipo de petición más cómo sería la petición POST que nos permite crear un nuevo producto en el proyecto anterior llegábamos a incluir en uno del último aparcado la subida de ficheros mediante la cual me en una petición multiparte podíamos pasarle dos partes una con el tete o con los datos en Jason que queríamos incluir como nuevo producto y otra parte dale un fichero con la imagen que queríamos incluir dentro del servicio de producto que lo tenemos definido por aquí bueno pues teníamos el metro de nuevo producto que recibiese de Teo recibir el fichero multiparte guardaba el 60 si es que no estaba vacío y transformaba el producto de Teo en un nuevo producto para almacenarlo en la base de datos y devolverlo al controlador no tenemos por aquí la posibilidad también de actualizar un producto que ya existe en la base de datos o la posibilidad de borrar productos que ella se enteran nos queda poco por verde del ejemplo solamente decir que este primer proyecto parte del tratamiento de Teo se realiza en esta clase Converter qué es capaz de transformar un producto en un producto de Teo y se realiza con modelmapper era la manera de tratar de Teo que veíamos en ese curso de desarrollo de una pirámide con Spring boot en este en particular complementaremos lo que ya sabemos de terminando otro tipo de tratamiento ya veremos qué haremos incluso con el propio loco ojo o con algún anotaciones de Jackson cómo son los costos son viejos para estos requeríamos de una pequeña configuración no para incluir modelmapper como un diferente como un bin diferente también estuvimos viendo la configuración de Cox y veíamos cómo incluir que esto tampoco que ya lo vimos en su momento y no lo vamos a tocar cómo generar la documentación con springfox y Swagger toda la documentación de Nacha Aguirre para incluir también el componente de Swagger with y poder hacer una consulta sobre los distintos elementos los distintos controladores que tenemos definido dentro de dentro de nuestro proyecto como podemos comprobar un proyecto bastante extenso aunque en apariencia cuando consultamos sobre el bueno pues puede resultar sencillo pero a nivel de clase la verdad que bastante extenso nos vamos a apoyar sobre el y iremos trabajando en los diferentes bloques sobre todo en lo primero a partir del tercer bloque crearemos utilizando otra parte de lo que no te amo bueno pues una gestión de errores y mandes el día en el bus anterior que podíamos sacar lo tiene diferentes frente aquí no hemos hecho a través de un control era para ya le particular con la natación tres controles vais dónde causa para dar un modelo personalizado de error todas a través de este método vale déjame existencia linterna y en el bar de que mismo una clase de Roque fuera algo más sencilla de todo la información en algún caso repetitivo que no sabes primor teléfono del Estado de la petición en este caso le estado de de perros en código numérico también vendrá no hace falta resumen de deseo que soy hay sola fecha y hora en un formato de fuera mami grande para nosotros y un mensaje pues todas las Mercedes encantaría por aquí dentro y se le darías el tiempo debe tratamiento en particular la ese tienes nueva de Sanidad para nosotros como producto no son excepción también la podemos manejar aquí
+que fuera algo más sencilla, de toda la información, en algún caso repetitiva, que nos daba Spring por defecto, dando el estado de la petición, en este caso el *estado del error*, el *código numérico* también vendrá no hace falta resumirlo en este objeto JSON, la *fecha y hora* en un formato que fuera más amigable para nosotros y un *mensaje*. 
 
+![144-00-04](images/144-00-04.png)
 
+Todas las excepciones se encausarían por el método `handleExceptionInternal` y se les daría este tipo de tratamiento. En particular las excepciones nuevas definidas por nosotros como `ProductoNotFoundException` también las podemos manejar aquí para dar una respuesta, en nuestro caso un `404` con el mensaje de error correspondiente, el que pudiéramos definir, por ejemplo como el que tenemos por aquí, si entramos dentro de la clase `ProductoNotFoundException`
 
-`ProductoController`
+![144-00-06](images/144-00-06.png)
 
-```java
-```
+vemos nuestros mensajes personalizados.
 
+En el Controller tendríamos algún tipo de petición más, cómo sería la petición `POST` que nos permite crear un nuevo `Producto`.
 
+![144-00-07](images/144-00-07.png)
 
-```java
-```
+En el proyecto anterior llegábamos a incluir en uno del último aparcados la subida de ficheros, mediante la cual en una petición multiparte podíamos pasarle dos partes, una con el DTO con los datos en JSON que queríamos incluir como nuevo producto y otra parte, un fichero con la imagen que queríamos incluir.
 
+Dentro del servicio de producto `ProductoServicio` que lo tenemos definido por aquí.
 
+![144-00-08](images/144-00-08.png)
 
-```java
-```
+Teníamos el método `nuevoProducto(CreateProductoDTO nuevo, MultipartFile file) {`  de nuevo producto que recibe ese DTO, recibe el fichero multiparte, guardaba el fichero si es que no estaba vacío y transformaba el `ProductoDTO` en un nuevo `Producto` para almacenarlo en la base de datos y devolverlo al controlador.
 
+En el controlador tenemos también la posibilidad de actualizar un producto que ya existe en la base de datos.
 
+![144-00-09](images/144-00-09.png)
 
-```java
-```
+O la posibilidad de borrar productos que ya existe en la base de datos.
 
+![144-00-10](images/144-00-10.png)
 
-```java
-```
+Nos queda poco por ver del ejemplo, solamente decir que en este primer proyecto, parte del tratamiento DTO se realiza en esta clase Converter `ProductoDTOConverter`
 
+![144-00-11](images/144-00-11.png)
 
+Qué es capaz de transformar un `Producto` en un `ProductoDTO` y se realiza con `ModelMapper` era la manera de tratar DTOs que veíamos en ese curso de *Desarrollo de un API REST con Spring Boot*, en este en particular, complementaremos lo que ya sabemos de DTO dando otro tipo de tratamiento, ya veremos qué lo haremos incluso con el propio Lombok o con algunas anotaciones de Jackson cómo son los `JSONViews`. Para incluir `ModelMapper` requeríamos de una pequeña configuración en la clase `MiConfiguracion` para incluirlo como un `Bean` diferente.
 
+![144-00-12](images/144-00-12.png)
 
+También estuvimos viendo la configuración de CORS tambien en `MiConfiguracion`
+
+![144-00-13](images/144-00-13.png)
+
+y veíamos cómo incluir, ya lo vimos en su momento y no lo vamos a tocar, cómo generar la documentación con *SpringFox* y *Swagger* con una clase de configuración `SwaggerConfig`.
+
+![144-00-14](images/144-00-14.png)
+
+Con lo que podíamos incluir toda la documentación de nuestra API REST para incluir también el componente de Swagger UI y poder hacer una consulta sobre los distintos elementos, los distintos controladores que tenemos definido dentro de nuestro proyecto.
+
+Como podemos comprobar es un proyecto bastante extenso, aunque en apariencia cuando consultamos sobre el puede resultar sencillo.
+
+![144-00-15](images/144-00-15.png)
+
+Pero a nivel de clases la verdad que es bastante extenso. Nos vamos a apoyar sobre el e iremos trabajando en los diferentes bloques sobre todo en los dos primero a partir del tercer bloque crearemos, utilizando otra parte de lo que nos ofrece Spring un proyecto nuevo desde cero, pero este proyecto en los dos primeros bloques lo iremos mejorando con funcionalidades como podrían ser la paginación de resultados, la inclusion de consulta para afinar más en los resultados que queremos obtener, la posibilidad de negociar el contenido en XML, crear un modelo de datos más complejo para que se parezca más a un proyecto real. 
 
 # Contenido adicional 1
 
