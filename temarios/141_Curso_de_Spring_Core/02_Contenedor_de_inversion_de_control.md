@@ -257,11 +257,9 @@ Es importante saber que inmediatamente cuando se inserta una nueva dependencia e
 
 #### Ejemplo Proyecto con `FileSystemXmlApplicationContext`
 
-<img src="images/141-02-01.png">
-
 Nuestro segundo ejemplo lo crearemos de la misma forma como creamos el primero. La estructurta generada es la siguiente:
 
-<img src="images/6-28.png">
+<img src="images/141-02-01.png">
 
 Hemos trabajado sobre tres archivos:
 
