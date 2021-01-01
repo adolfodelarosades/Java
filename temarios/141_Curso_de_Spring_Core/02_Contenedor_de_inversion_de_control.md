@@ -1089,9 +1089,10 @@ Los tipos de AUTOWIRED que tenemos son:
 
 <img src="images/9-06.png">
 
-### :computer: Ejemplo Proyecto Autowired `141-09-01-Autowired`
+### :computer: `141-08-Autowired`
+#### Ejemplo de la Inyección Automática Autowired
 
-<img src="images/9-09.png">
+<img src="images/141-08-00.png">
 
 El único archivo que sufre cambios en comparación con el ejemplo anterior es `beans.xml`.
 
@@ -1103,13 +1104,13 @@ El único archivo que sufre cambios en comparación con el ejemplo anterior es `
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
-	   
-	</bean>
+   <bean id="saludator" class="com.openwebinars.beans.Saludator">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
 	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	   
+   </bean>
 	
 </beans>
 ```
@@ -1135,21 +1136,20 @@ Si el bean `saludator` fuera uno de esos *beans conflictivos*, lo podríamos mar
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+	
+   <bean id="saludator" class="com.openwebinars.beans.Saludator" autowire-candidate="false">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
+	
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
 	   
-	</bean>
-	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator" autowire-candidate="false">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
-	
+   </bean>
 </beans>
 ```
 
 De forma que al ejecutar la aplicación tenemos:
 
-<img src="images/9-11.png">
+<img src="images/141-08-01.png">
 
 Tendríamos que se ha cargado el bean `Saludator` cuando lo requerimos individualmente, pero sin embargo `EmailService` que tiene la dependencia de `Saludator` al no poder satisfacerla se ha quedado como `null` y cuando lo invocamos con el método `enviarEmailSaludo` que es donde hace referencia a `saludator.saludo()` al ser una referencia nula a provocado un `NullPoiterException` por que no se ha provocado la auto-inyección automática.
 
@@ -1183,14 +1183,14 @@ Por lo en este ejemplo concreto sería necesario declarar explícitamente a la p
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
-	   <property name="saludator" ref="saludator"></property>
-	</bean>
 	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator" autowire-candidate="false">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
+   <bean id="saludator" class="com.openwebinars.beans.Saludator" autowire-candidate="false">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
+	
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+      <property name="saludator" ref="saludator"></property>
+   </bean>
 	
 </beans>
 ```
@@ -1203,9 +1203,10 @@ De forma que al ejecutar la aplicación todo vuelve a funcionar.
 
 La opción Primary en el caso de que tengamos más de un bean de un mismo tipo supongamos que tenemos dos `saludator` para saludar en inglés y en castellano nos podría dar un quebradero de cabeza.
 
-### :computer: Ejemplo Proyecto Primary
+### :computer: `141-09-Primary`
+#### Ejemplo sobre el Atributo Primary de un Bean
 
-<img src="images/9-13.png">
+<img src="images/141-09-00.png">
 
 En ocaciones puede que tengamos dos beans del mismo tipo. Por ejemplo tenemos dos `Saludator` uno para saludar en Inglés y otro en Castellano.
 
@@ -1216,19 +1217,18 @@ En ocaciones puede que tengamos dos beans del mismo tipo. Por ejemplo tenemos do
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+   <bean id="saludator" class="com.openwebinars.beans.Saludator">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
+	
+   <bean id="englishSaludator" class="com.openwebinars.beans.Saludator">
+      <property name="mensaje" value="Hello world!!!"></property>
+   </bean>
+	
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
 
-	
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
-	   
-	</bean>
-	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
-	
-	<bean id="englishSaludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hello world!!!"></property>
-	</bean>
+   </bean>
 	
 </beans>
 ```
@@ -1249,18 +1249,17 @@ Esto provoca una excepción `Caused by: org.springframework.beans.factory.NoUniq
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+   <bean id="saludator" class="com.openwebinars.beans.Saludator" primary="true">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
 	
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
-	   
-	</bean>
+   <bean id="englishSaludator" class="com.openwebinars.beans.Saludator">
+      <property name="mensaje" value="Hello world!!!"></property>
+   </bean>
 	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator" primary="true">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
-	
-	<bean id="englishSaludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hello world!!!"></property>
-	</bean>
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+
+   </bean>
 	
 </beans>
 ```
@@ -1279,18 +1278,17 @@ Podríamos poner como primary el otro bean.
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+   <bean id="saludator" class="com.openwebinars.beans.Saludator">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
 	
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
-	   
-	</bean>
+   <bean id="englishSaludator" class="com.openwebinars.beans.Saludator" primary="true">
+      <property name="mensaje" value="Hello world!!!"></property>
+   </bean>
 	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
-	
-	<bean id="englishSaludator" class="com.openwebinars.beans.Saludator" primary="true">
-	   <property name="mensaje" value="Hello world!!!"></property>
-	</bean>
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" autowire="byType">
+
+   </bean>
 	
 </beans>
 ```
