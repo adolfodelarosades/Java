@@ -33,9 +33,10 @@ En este ejemplo tenemos tres beans que hacen referencia al bean `accountDao`, es
 
 Para poder indicarlo explícitamente, a un que como ya dijimos para el caso de singleton es el comportamiento por defecto, se hace con el atributo `scope=singleton` de manera que reforzamos la idea de que de este bean solo va existir una instancia compartida para todos.
 
-### :computer: Ejemplo Proyecto Singleton `141-10-01-Singleton`
+### :computer: `141-10-Singleton`
+#### Ejemplo sobre Alcance Singleton
 
-<img src="images/10-07.png">
+<img src="images/141-10-00.png">
 
 *`beans.xml`*
 
@@ -45,13 +46,13 @@ Para poder indicarlo explícitamente, a un que como ya dijimos para el caso de s
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" scope="singleton">
-	   <property name="saludator" ref="saludator"></property>
-	</bean>
+   <bean id="saludator" class="com.openwebinars.beans.Saludator">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
 	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" scope="singleton">
+      <property name="saludator" ref="saludator"></property>
+   </bean>
 	
 </beans>
 ```
@@ -65,15 +66,15 @@ package com.openwebinars.beans;
 
 public class Saludator {
 	
-	private String mensaje;
+   private String mensaje;
 	
-	public void setMensaje(String str) {
-		this.mensaje = str; 
-	}
+   public void setMensaje(String str) {
+      this.mensaje = str; 
+   }
 	
-	public String saludo() {
-		return (mensaje == null) ? "Hola mundo!!!" : mensaje;
-	}
+   public String saludo() {
+      return (mensaje == null) ? "Hola mundo!!!" : mensaje;
+   }
 
 }
 ```
@@ -85,7 +86,7 @@ package com.openwebinars.beans;
 
 public interface IEmailService {
 	
-	public void enviarEmailSaludo(String str);
+   public void enviarEmailSaludo(String str);
 
 }
 ```
@@ -97,16 +98,16 @@ package com.openwebinars.beans;
 
 public class EmailService implements IEmailService{
 	
-	private Saludator saludator;
+   private Saludator saludator;
 	
-	public void setSaludator(Saludator saludator) {
-		this.saludator = saludator;
-	}
+   public void setSaludator(Saludator saludator) {
+      this.saludator = saludator;
+   }
 	
-	public void enviarEmailSaludo(String destinatario) {
-		System.out.println("Enviando email a " + destinatario);
-		System.out.println("Mensaje: " + saludator.saludo());
-	}
+   public void enviarEmailSaludo(String destinatario) {
+      System.out.println("Enviando email a " + destinatario);
+      System.out.println("Mensaje: " + saludator.saludo());
+   }
 
 }
 ```
@@ -121,22 +122,21 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 
-	public static void main(String[] args) {
+   public static void main(String[] args) {
 		
-		//Abrir contexto
-		ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+      //Abrir contexto
+      ApplicationContext appContext = new ClassPathXmlApplicationContext("beans.xml");
+			
+      IEmailService emailService1 = appContext.getBean(IEmailService.class);
+      IEmailService emailService2 = appContext.getBean(IEmailService.class);
 		
+      System.out.println(emailService1);
+      System.out.println(emailService2);
 		
-		IEmailService emailService1 = appContext.getBean(IEmailService.class);
-		IEmailService emailService2 = appContext.getBean(IEmailService.class);
-		
-		System.out.println(emailService1);
-		System.out.println(emailService2);
-		
-		//Cerrar contexto
-		((ClassPathXmlApplicationContext) appContext).close();
+      //Cerrar contexto
+      ((ClassPathXmlApplicationContext) appContext).close();
 
-	}
+   }
 
 }
 ```
@@ -159,7 +159,10 @@ Frente al ambito Singleton tenemos el ambito **Prototype**, en este caso cada ve
 
 Esta instancia además se va a crear en tiempo de ejecución y lo hariamos con `scope="prototype"`. Este uso es muy  poco usual.
 
-### :computer: Ejemplo Proyecto Prototype
+### :computer: `141-11-Prototype`
+#### Ejemplo sobre Alcance Prototype
+
+<img src="images/141-11-00.png">
 
 *`beans.xml`*
 
@@ -170,13 +173,13 @@ Esta instancia además se va a crear en tiempo de ejecución y lo hariamos con `
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	
-	<bean id="emailService" class="com.openwebinars.beans.EmailService" scope="prototype">
-	   <property name="saludator" ref="saludator"></property>
-	</bean>
-	
-	<bean id="saludator" class="com.openwebinars.beans.Saludator">
-	   <property name="mensaje" value="Hola alumnos de openwebinars"></property>
-	</bean>
+   <bean id="saludator" class="com.openwebinars.beans.Saludator">
+      <property name="mensaje" value="Hola alumnos de openwebinars"></property>
+   </bean>
+
+   <bean id="emailService" class="com.openwebinars.beans.EmailService" scope="prototype">
+      <property name="saludator" ref="saludator"></property>
+   </bean>
 	
 </beans>
 ```
@@ -337,7 +340,7 @@ Si lo que necesitamos es tener un bean que tenga una vida mayor a la de una peti
 
 Finalmente el que vamos a ver es el de ámbito `application`, usamos `scope="application"`, en este caso se creara un solo objeto por cada `ServletContext` que nosotros creemos, en la práctica se trata de un objeto por cada ejecución de la aplicación que nosotros hagamos. Por ejemplo para una serie de preferencias globales de la aplicación, por ejemplo textos que salgan en los encabezados o pies de página de toda la aplicación.  
 
-# 12 Manejo del ciclo de vida de un bean 9:16 
+# 12 Manejo del Ciclo de Vida de un Bean 9:16 
 
 [PDF 3-3_Manejo_del_ciclo_de_vida.pdf](pdfs/3-3_Manejo_del_ciclo_de_vida.pdf)
 
@@ -369,11 +372,12 @@ La ventaja es que la interfaz nos ofrece un contrato, nos da la firma del métod
 
 <img src="images/12-04.png">
 
-### :computer: Ejemplo Proyecto usando `InitializingBean` `141-12-01-LifeCycle-InitializingBean`
+### :computer: `141-12-LifeCycle-InitializingBean`
+#### Ejemplo Ciclo de Vida de un Bean uso de `InitializingBean`
 
 La estructura de este ejemplo cambia en relación a todos los que veniamos haciendo.
 
-<img src="images/12-08.png">
+<img src="images/141-12-00.png">
 
 *`beans.xml`*
 
@@ -572,9 +576,12 @@ Al ejecutar la aplicación tenemos los elementos cargados porque se han cargado 
 
 Analogamente tenemos tenemos la interfgaz `DisposableBean` que nos permite a traves del método `destroy()` realizar alguna tarea justo antes de que se destuya el bean.
 
-### :computer: Ejemplo Proyecto usando `DisposableBean` `141-12-02-LifeCycle-DisposableBean`
+### :computer: `141-13-LifeCycle-DisposableBean`
+#### Ejemplo Ciclo de Vida de un Bean uso de DisposableBean
 
-<img src="images/12-10.png">
+Ejemplo Proyecto usando `DisposableBean` `141-12-02-LifeCycle-DisposableBean`
+
+<img src="images/141-13-00.png">
 
 El proyecto es muy similar al anterior solo se implementa la interfaz `DisposableBean` que nos obliga a definir el método `destroy()` que lo usaremos para limpiar la lista. 
 
@@ -649,9 +656,10 @@ El método tiene que ser `void`, sin parámetros, puede lanzar una excepción, e
 
 <img src="images/12-06.png">
 
-### :computer: Ejemplo Proyecto Init `141-12-03-LifeCycle-Init`
+### :computer: `141-14-LifeCycle-XML-Method-Init`
+#### Ejemplo Ciclo de Vida de un Bean mediante XML, método init
 
-<img src="images/12-12.png">
+<img src="images/141-14-00.png">
 
 A comparación de los ejemplos anteriores solo vamos a poner los archivos que han cambiado.
 
@@ -727,9 +735,10 @@ Al ejecutar la aplicación Spring se encarga mediante a la metainformación ejec
 
 En el caso de `destroy` es muy similar a `init` pero se ejecutará justo antes de destruir el bean.
 
-### :computer: Ejemplo Proyecto Destroy `141-12-04-LifeCycle-Destroy`
+### :computer: `141-15-LifeCycle-XML-Method-Destroy`
+#### Ejemplo Ciclo de Vida de un Bean mediante XML, método destroy 
 
-<img src="images/12-14.png">
+<img src="images/141-15-00.png">
 
 El método de destrucción en este caso se llama `destroy`.
 
@@ -812,9 +821,10 @@ Podemos ver como funciona pero en este caso la configuración la hemos hecho ví
 
 Si vamos a tener más de un bean que va a requerir de manejar su ciclo de vida podemos usar las opciones de `default-init-method` y `default-destroy-method` que pertenece a la etiqueta `<beans>` de la raíz, que nos permite definir un nombre de método de inicialización por defecto para todos nuestros beans y también un nombre de destrucción. Esto nos permite no estar declarando estos métodos en cada uno de los beans como lo hemos hecho hasta ahora, por lo que se podría usar en más de una clase que represente al bean.
 
-### :computer: Ejemplo Proyecto Default Init-Destroy `141-12-05-LifeCycle-Default`
+### :computer: `141-16-LifeCycle-XML-Default-Init-Destroy`
+#### Ejemplo Ciclo de Vida de un Bean mediante XML, Defaul init-destroy
 
-<img src="images/12-16.png">
+<img src="images/141-16-00.png">
 
 Declaramos de forma "global" los nombres de los metodos de inicalización y destrucción para todos los beans que tengamos declarados (en este caso solo tenemos uno). Los hemos llamado `init` y `destroy` como antes.
 
@@ -826,8 +836,8 @@ Declaramos de forma "global" los nombres de los metodos de inicalización y dest
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-init-method="init" default-destroy-method="destroy"	>
-
-	<bean id="personaDao" class="com.openwebinars.lifecycle.PersonaDAOImplMemory" />
+   
+   <bean id="personaDao" class="com.openwebinars.lifecycle.PersonaDAOImplMemory" />
 	
 </beans>
 ```
@@ -847,45 +857,45 @@ import org.springframework.beans.factory.InitializingBean;
 
 public class PersonaDAOImplMemory implements PersonaDAO {
 
-	List<Persona> personas = new ArrayList<Persona>();
+   List<Persona> personas = new ArrayList<Persona>();
 
-	public Persona findByIndex(int index) {
-		return personas.get(index);
-	}
+   public Persona findByIndex(int index) {
+      return personas.get(index);
+   }
 
-	public List<Persona> findAll() {
-		return personas;
-	}
+   public List<Persona> findAll() {
+      return personas;
+   }
 
-	public void insert(Persona persona) {
-		personas.add(persona);
-	}
+   public void insert(Persona persona) {
+      personas.add(persona);
+   }
 
-	public void edit(int index, Persona persona) {
-		personas.remove(index);
-		personas.add(index, persona);
-	}
+   public void edit(int index, Persona persona) {
+      personas.remove(index);
+      personas.add(index, persona);
+   }
 
-	public void delete(int index) {
-		personas.remove(index);
-	}
+   public void delete(int index) {
+      personas.remove(index);
+   }
 
-	public void delete(Persona persona) {
-		personas.remove(persona);
-	}
+   public void delete(Persona persona) {
+      personas.remove(persona);
+   }
 
-	public void init() throws Exception {
-		insert(new Persona("Luismi", 35));
-		insert(new Persona("Ana", 32));
-		insert(new Persona("Pepe", 34));
-		insert(new Persona("Julia", 39));
-	}
+   public void init() throws Exception {
+      insert(new Persona("Luismi", 35));
+      insert(new Persona("Ana", 32));
+      insert(new Persona("Pepe", 34));
+      insert(new Persona("Julia", 39));
+   }
 
-	public void destroy() throws Exception {
-		System.out.println("");
-		System.out.println("Limpiando los datos de la lista");
-		personas.clear();
-	}
+   public void destroy() throws Exception {
+      System.out.println("");
+      System.out.println("Limpiando los datos de la lista");
+      personas.clear();
+   }
 
 }
 ```
