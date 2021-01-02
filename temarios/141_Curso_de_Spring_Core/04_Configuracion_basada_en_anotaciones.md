@@ -1657,7 +1657,7 @@ Al ejecutar la aplicación tenemos:
 
 De esta manera con anotaciones podemos manejar también el ciclo de vida de nuestro bean. 
 
-# 17 Uso de estereotipos 7:51 
+# 17 Uso de Estereotipos 7:51 
 
 [PDF 4-5_Uso_de_estereotipos.pdf](pdfs/4-5_Uso_de_estereotipos.pdf)
 
@@ -1671,12 +1671,10 @@ A continuación tenemos un ejemplo:
 
 ```html
 <beans>
-    <context:component-scan base-package="org.example">
-        <context:include-filter type="regex"
-                expression=".*Service.*Repository"/>
-        <context:exclude-filter type="annotation"
-                expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+   <context:component-scan base-package="org.example">
+      <context:include-filter type="regex" expression=".*Service.*Repository"/>
+      <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+   </context:component-scan>
 </beans>
 ```
 ## Transcripción
@@ -1701,9 +1699,10 @@ Aquí tenemos la anotación que es:
 
 Que se encargará de hacer el escaneo de componentes y a la cual le tenemos que proporcionar un paquete base sobre el cual dentro de ese paquete y sus subpaquetes realizara la busqueda de componentes.
 
-### :computer: Ejemplo Proyecto EscaneoComponentes `141-17-01-escaneo-componentes`
+### :computer: `141-25-EscaneoComponentes`
+#### Ejemplo del Escaneo de Componentes
 
-<img src="images/17-09.png">
+<img src="images/141-25-00.png">
 
 Aquí tenemos nuestro archivo `beans.xml` el cual contiene `component-scan` indicando que el paquete base es `com.openwebinars.stereotypes`.
 
@@ -1722,19 +1721,24 @@ Spring hace varias cosas, lo primero es que incorpora todo el comportamiento que
 			    http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 
-	<!-- Esta anotación ya no es necesaria. La anotación de escaneo de componentes 
-		incluye su funcionamiento -->
-	<!--<context:annotation-config /> -->
+   <!-- Esta anotación ya no es necesaria. La anotación de escaneo de componentes incluye su funcionamiento -->
+   <!--<context:annotation-config /> -->
 
-	<context:component-scan
-		base-package="com.openwebinars.stereotypes" />
+   <context:component-scan base-package="com.openwebinars.stereotypes" />
 
-	<!-- <bean id="peliculaDaoMemory" class="com.openwebinars.annotation.PeliculaDaoImplMemory" 
-		/> <bean id="peliculaService" class="com.openwebinars.annotation.PeliculaService" 
-		/> <bean id="catalogoClasicas" class="com.openwebinars.annotation.CatalogoPeliculasClasicas" 
-		/> <bean id="catalogoActuales" class="com.openwebinars.annotation.CatalogoPeliculasActuales" 
-		primary="true" /> -->
-
+   <!-- 
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory" 
+		/>
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService" 
+		/>
+   <bean id="catalogoClasicas"
+         class="com.openwebinars.annotation.CatalogoPeliculasClasicas" 
+		/>
+   <bean id="catalogoActuales"
+         class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
+   -->
 
 </beans>
 ```
@@ -1941,9 +1945,10 @@ Esto sobretodo cuando nos estamos iniciando en el desarrollo de Spring es una gr
 
 * `@Controller`: Clase orientada a gestionar las peticiones que recibe, muy usada en aplicaciones web.
 
-### :computer: Ejemplo Proyecto Estereotipos `141-17-02-estereotipos`
+### :computer: `141-26-Estereotipos`
+#### Ejemplo del Uso de Estereotipos
 
-<img src="images/17-10.png">
+<img src="images/141-26-00.png">
 
 Tenemos nuestro archivo `beans.xml` lo más limpio posible
 
@@ -1959,8 +1964,7 @@ Tenemos nuestro archivo `beans.xml` lo más limpio posible
 						http://www.springframework.org/schema/context 
 						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:component-scan
-		base-package="com.openwebinars.stereotypes" />
+   <context:component-scan base-package="com.openwebinars.stereotypes" />
 
 </beans>
 ```
