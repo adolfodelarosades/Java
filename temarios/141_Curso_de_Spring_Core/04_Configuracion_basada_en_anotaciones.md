@@ -72,8 +72,6 @@ Esta anotacion es `<context:annotation-config>` y declarando esto nada más, Spr
 
 Aplicación CRUD muy sencilla sobre películas.
 
-<img src="images/13-10.png">
-
 Como indicamos anteriormente marcamos en la pestaña *NameSpaces* la opción de *Context*
 
 <img src="images/13-11.png">
