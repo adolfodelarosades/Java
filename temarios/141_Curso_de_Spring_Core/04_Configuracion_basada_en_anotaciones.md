@@ -63,7 +63,10 @@ Para que nosotros podamos utilizar la configuración a través de anotaciones te
 
 Esta anotacion es `<context:annotation-config>` y declarando esto nada más, Spring se va a encargar de registrar los `BeanPostProcessor` necesarios para que nosotros podamos trabajar con las anotaciones. Como podemos comprobar esto es francamente comodo, mucho más que si nosotros tuviéramos que que registrar todos los `BeanPostProcessor` necesarios para poder trabajar con las anotaciones.
 
-### :computer: Ejemplo Proyecto Anotaciones `141-13-01-anotaciones`
+### :computer: `141-17-Anotacion-Required`
+#### Ejemplo de la Anotación Required
+
+<img src="images/141-17-00.png">
 
 **ESTE EJEMPLO ES EL PRIMERO QUE USA UN SERVICE**
 
@@ -94,14 +97,15 @@ Nuestro archivo completo es:
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
-	<context:annotation-config />
+   <context:annotation-config />
 
-	<bean id="peliculaDaoMemory"
-		class="com.openwebinars.annotation.PeliculaDaoImplMemory"
-		init-method="init" />
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory"
+         init-method="init" />
 		
-	<bean id="peliculaService"
-		class="com.openwebinars.annotation.PeliculaService" autowire="byType" />
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService"
+	 autowire="byType" />
 	
 </beans>
 ```
@@ -117,80 +121,80 @@ package com.openwebinars.annotation;
 
 public class Pelicula {
 	
-	private String titulo;
-	private String anyo;
-	private String genero;
+   private String titulo;
+   private String anyo;
+   private String genero;
 	
-	public Pelicula() {	}
+   public Pelicula() {	}
 	
-	public Pelicula(String titulo, String anyo, String genero) {
-		this.titulo = titulo;
-		this.anyo = anyo;
-		this.genero = genero;
-	}
+   public Pelicula(String titulo, String anyo, String genero) {
+      this.titulo = titulo;
+      this.anyo = anyo;
+      this.genero = genero;
+   }
 
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+   public String getTitulo() {
+      return titulo;
+   }
+   public void setTitulo(String titulo) {
+      this.titulo = titulo;
+   }
 	
-	public String getAnyo() {
-		return anyo;
-	}
+   public String getAnyo() {
+      return anyo;
+   }
 
-	public void setAnyo(String anyo) {
-		this.anyo = anyo;
-	}
+   public void setAnyo(String anyo) {
+      this.anyo = anyo;
+   }
 
-	public String getGenero() {
-		return genero;
-	}
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
+   public String getGenero() {
+      return genero;
+   }
+   public void setGenero(String genero) {
+      this.genero = genero;
+   }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((anyo == null) ? 0 : anyo.hashCode());
-		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
-		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-		return result;
-	}
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((anyo == null) ? 0 : anyo.hashCode());
+      result = prime * result + ((genero == null) ? 0 : genero.hashCode());
+      result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+      return result;
+   }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pelicula other = (Pelicula) obj;
-		if (anyo == null) {
-			if (other.anyo != null)
-				return false;
-		} else if (!anyo.equals(other.anyo))
-			return false;
-		if (genero == null) {
-			if (other.genero != null)
-				return false;
-		} else if (!genero.equals(other.genero))
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
-			return false;
-		return true;
-	}
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Pelicula other = (Pelicula) obj;
+      if (anyo == null) {
+         if (other.anyo != null)
+            return false;
+      } else if (!anyo.equals(other.anyo))
+         return false;
+      if (genero == null) {
+         if (other.genero != null)
+            return false;
+      } else if (!genero.equals(other.genero))
+         return false;
+      if (titulo == null) {
+         if (other.titulo != null)
+            return false;
+      } else if (!titulo.equals(other.titulo))
+         return false;
+      return true;
+   }
 
-	@Override
-	public String toString() {
-		return "Pelicula [titulo=" + titulo + ", anyo=" + anyo + ", genero=" + genero + "]";
+   @Override
+   public String toString() {
+      return "Pelicula [titulo=" + titulo + ", anyo=" + anyo + ", genero=" + genero + "]";
 	}
 
 }
@@ -207,11 +211,11 @@ import java.util.Collection;
 
 public interface PeliculaDao {
 	
-	public Pelicula findById(int id);
-	public Collection<Pelicula> findAll();
-	public void insert(Pelicula pelicula);
-	public void edit(Pelicula antigua, Pelicula nueva);
-	public void delete(Pelicula pelicula);
+   public Pelicula findById(int id);
+   public Collection<Pelicula> findAll();
+   public void insert(Pelicula pelicula);
+   public void edit(Pelicula antigua, Pelicula nueva);
+   public void delete(Pelicula pelicula);
 }
 ```
 
@@ -230,35 +234,35 @@ public class PeliculaDaoImplMemory implements PeliculaDao {
 
 private List<Pelicula> peliculas = new ArrayList<>();
 	
-	public Pelicula findById(int id) {
-		return peliculas.get(id);
-	}
+   public Pelicula findById(int id) {
+      return peliculas.get(id);
+   }
 
-	public Collection<Pelicula> findAll() {
-		return peliculas;
-	}
+   public Collection<Pelicula> findAll() {
+      return peliculas;
+   }
 
-	public void insert(Pelicula pelicula) {
-		peliculas.add(pelicula);
-	}
+   public void insert(Pelicula pelicula) {
+      peliculas.add(pelicula);
+   }
 
-	public void edit(Pelicula antigua, Pelicula nueva) {		
-		peliculas.remove(antigua);
-		peliculas.add(nueva);		
-	}
+   public void edit(Pelicula antigua, Pelicula nueva) {		
+      peliculas.remove(antigua);
+      peliculas.add(nueva);		
+   }
 
-	public void delete(Pelicula pelicula) {
-		peliculas.remove(pelicula);
-	}
+   public void delete(Pelicula pelicula) {
+      peliculas.remove(pelicula);
+   }
 	
-	public void init() {
-		insert(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
-		insert(new Pelicula("La lista de Schindler","1993","Drama"));
-		insert(new Pelicula("El Padrino", "1972", "Drama"));
-		insert(new Pelicula("Apocalypse Now", "1979", "Bélico"));
-		insert(new Pelicula("Gladiator", "2000", "Acción"));
-		insert(new Pelicula("El Gran Dictador","1940","Comedia"));	
-	}
+   public void init() {
+      insert(new Pelicula("La guerra de las galaxias", "1977","Ciencia ficción"));
+      insert(new Pelicula("La lista de Schindler","1993","Drama"));
+      insert(new Pelicula("El Padrino", "1972", "Drama"));
+      insert(new Pelicula("Apocalypse Now", "1979", "Bélico"));
+      insert(new Pelicula("Gladiator", "2000", "Acción"));
+      insert(new Pelicula("El Gran Dictador","1940","Comedia"));	
+   }
     
 }
 ```
@@ -430,9 +434,11 @@ El método setter nos va a permitir que si tiene algún tipo de lógica especial
 
 Ahora veremos un ejemplo lo vamos a ver primero y después os comento alguna cosa más
 
-### :computer: Ejemplo Proyecto Autowired `141-14-01-anotaciones-autowired`
+### :computer: `141-18-Anotacion-Autowired`
+#### Ejemplo de la Anotación Autowired
 
-<img src="images/14-08.png">
+
+<img src="images/141-18-00.png">
 
 Es muy similar al ejemplo anterior con pequeños cambios que se describen a continuación.
 
@@ -541,9 +547,10 @@ El `@Autowired(required=false)` en este caso sería más recomendable que usar e
 
 Vamos a ver algún ejemplo de anotación `@Autowired`.
 
-### :computer: Ejemplo Proyecto Autowired Multiple `141-14-02-anotaciones-autowired-multiples`
+### :computer: `141-19-Anotacion-Autowired-Multiple`
+#### Ejemplo de la Anotación Autowired Multiple
 
-<img src="images/14-12.png">
+<img src="images/141-19-00.png">
 
 En este ejemplo vamos a contar con varios catalogos diferentes de películas para traernos una colección.
 
@@ -560,16 +567,19 @@ En este ejemplo vamos a contar con varios catalogos diferentes de películas par
 						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
 	default-init-method="init">
 
-	<context:annotation-config />
+   <context:annotation-config />
 
-	<bean id="peliculaDaoMemory"
-		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
 		
-	<bean id="peliculaService"  class="com.openwebinars.annotation.PeliculaService" />
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService" />
 	
-	<bean id="catalogoClasicas" class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+   <bean id="catalogoClasicas"
+         class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
 
-	<bean id="catalogoActuales" class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
+   <bean id="catalogoActuales"
+         class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
 
 </beans>
 ```
@@ -590,81 +600,81 @@ package com.openwebinars.annotation;
 
 public class Pelicula {
 	
-	private String titulo;
-	private String anyo;
-	private String genero;
+   private String titulo;
+   private String anyo;
+   private String genero;
 	
-	public Pelicula() {	}
+   public Pelicula() {	}
 	
-	public Pelicula(String titulo, String anyo, String genero) {
-		this.titulo = titulo;
-		this.anyo = anyo;
-		this.genero = genero;
-	}
+   public Pelicula(String titulo, String anyo, String genero) {
+      this.titulo = titulo;
+      this.anyo = anyo;
+      this.genero = genero;
+   }
 
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+   public String getTitulo() {
+      return titulo;
+   }
+   public void setTitulo(String titulo) {
+      this.titulo = titulo;
+   }
 	
-	public String getAnyo() {
-		return anyo;
-	}
+   public String getAnyo() {
+      return anyo;
+   }
 
-	public void setAnyo(String anyo) {
-		this.anyo = anyo;
-	}
+   public void setAnyo(String anyo) {
+      this.anyo = anyo;
+   }
 
-	public String getGenero() {
-		return genero;
-	}
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
+   public String getGenero() {
+      return genero;
+   }
+   public void setGenero(String genero) {
+      this.genero = genero;
+   }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((anyo == null) ? 0 : anyo.hashCode());
-		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
-		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-		return result;
-	}
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((anyo == null) ? 0 : anyo.hashCode());
+      result = prime * result + ((genero == null) ? 0 : genero.hashCode());
+      result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+      return result;
+   }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pelicula other = (Pelicula) obj;
-		if (anyo == null) {
-			if (other.anyo != null)
-				return false;
-		} else if (!anyo.equals(other.anyo))
-			return false;
-		if (genero == null) {
-			if (other.genero != null)
-				return false;
-		} else if (!genero.equals(other.genero))
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Pelicula [titulo=" + titulo + ", anyo=" + anyo + ", genero=" + genero + "]";
-	}
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Pelicula other = (Pelicula) obj;
+      if (anyo == null) {
+         if (other.anyo != null)
+            return false;
+      } else if (!anyo.equals(other.anyo))
+         return false;
+      if (genero == null) {
+         if (other.genero != null)
+            return false;
+      } else if (!genero.equals(other.genero))
+         return false;
+      if (titulo == null) {
+         if (other.titulo != null)
+            return false;
+      } else if (!titulo.equals(other.titulo))
+         return false;
+      return true;
+   }
+   
+   @Override
+   public String toString() {
+      return "Pelicula [titulo=" + titulo + ", anyo=" + anyo + ", genero=" + genero + "]";
+   }
 }
 ```
 
@@ -891,9 +901,10 @@ De esta forma como hemos visto se ha inyectado dentro de una colección una seri
 
 Vamos a ver otro ejemplo de lo que pasa cuando no sea obligatorio entre comillas satisfacer la dependencia.
 
-### :computer: Ejemplo Proyecto Autowired RNO `141-14-03-anotaciones-autowired-RNO`
+### :computer: `141-20-Anotacion-Autowired-RNO`
+#### Ejemplo de la Anotación Autowired Con Valor No Requerido
 
-<img src="images/14-14.png">
+<img src="images/141-20-00.png">
 
 Solo vamos a poner los dos archivos que han cambiado en comporaración al ejemplo anterior.
 
@@ -912,18 +923,21 @@ En nuestro archivo XML los catalogos no existen.
 						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
 	default-init-method="init">
 
-	<context:annotation-config />
+   <context:annotation-config />
 
-	<bean id="peliculaDaoMemory"
-		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
 		
-	<bean id="peliculaService"	class="com.openwebinars.annotation.PeliculaService" />
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService" />
 	
-	<!--  
-	<bean id="catalogoClasicas" class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+   <!--  
+   <bean id="catalogoClasicas"
+         class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
 
-	<bean id="catalogoActuales" class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
-	-->
+   <bean id="catalogoActuales"
+         class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
+   -->
 </beans>
 ```
 
@@ -1080,9 +1094,10 @@ Por defecto los beans aun que no aparezca tienen el valor de primary a `false`.
 
 Vamos a verlo mediante un ejemplo.
 
-### :computer: Ejemplo Proyecto Primary `141-15-01-primary`
+### :computer: `141-21-Anotacion-Propiedad-Primary`
+#### Ejemplo de la Propiedad Primary
 
-<img src="images/15-10.png">
+<img src="images/141-21-00.png">
 
 Este proyecto es muy similar al anterior solo ponemos los archivos que han cambiado.
 
@@ -1099,20 +1114,20 @@ Este proyecto es muy similar al anterior solo ponemos los archivos que han cambi
 			    http://www.springframework.org/schema/context/spring-context-4.3.xsd"
 	default-init-method="init">
 
-	<context:annotation-config />
+   <context:annotation-config />
 
-	<bean id="peliculaDaoMemory"
-		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
 
-	<bean id="peliculaService"
-		class="com.openwebinars.annotation.PeliculaService" />
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService" />
 
-	<bean id="catalogoClasicas"
-		class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+   <bean id="catalogoClasicas"
+         class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
 
-	<bean id="catalogoActuales"
-		class="com.openwebinars.annotation.CatalogoPeliculasActuales"
-		primary="true" />
+   <bean id="catalogoActuales"
+         class="com.openwebinars.annotation.CatalogoPeliculasActuales"
+         primary="true" />
 
 </beans>
 ```
@@ -1155,9 +1170,9 @@ public class PeliculaDaoImplMemory implements PeliculaDao {
       peliculas.add(pelicula);
    }
 
-   public void edit(Pelicula antigua, Pelicula nueva) {		
+   public void edit(Pelicula antigua, Pelicula nueva) {
       peliculas.remove(antigua);
-      peliculas.add(nueva);		
+      peliculas.add(nueva);
    }
 
    public void delete(Pelicula pelicula) {
@@ -1171,7 +1186,7 @@ De esta manera si no tuvieramos marcado un bean como `primary` se encontraría c
 
 <img src="images/15-11.png">
 
-Utiliza el catalogo de películas actual para poder realizar la busqueda de los datos. Esto es por que estamos utilizando la propiedad `primary` para indicar que bean es el primero entre sus iguales.
+Utiliza el catalogo de películas actuales para poder realizar la busqueda de los datos. Esto es por que estamos utilizando la propiedad `primary` para indicar que bean es el primero entre sus iguales.
 
 <img src="images/15-04.png">
 
@@ -1181,9 +1196,10 @@ En otra ocasión necesitaremos afinar mucho más el auto cableado indicando si s
 
 Lo podemos seleccionar mediante la anotación `@Qualifier` que en su comportamiento más sencillo, nos permite indicar el nombre o un alias del bean, asociado siempre al uso de la anotación `@Autowired`. De esta manera, aunque ninguno de ellos tenga `primary`, como le estamos diciendo exactamente entre los beans del mismo tipo, cuál queremos funcionará.
 
-### :computer: Ejemplo Proyecto Qualifier `141-15-02-qualifier`
+### :computer: `141-22-Anotacion-Qualifier`
+#### Ejemplo de la Anotacion Qualifier
 
-<img src="images/15-12.png">
+<img src="images/141-22-00.png">
 
 Este proyecto es muy similar al anterior solo ponemos los archivos que han cambiado.
 
@@ -1200,19 +1216,19 @@ Este proyecto es muy similar al anterior solo ponemos los archivos que han cambi
 						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
 	default-init-method="init">
 
-	<context:annotation-config />
+   <context:annotation-config />
 
-	<bean id="peliculaDaoMemory"
-		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
 
-	<bean id="peliculaService"
-		class="com.openwebinars.annotation.PeliculaService" />
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService" />
 
-	<bean id="catalogoClasicas"
-		class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+   <bean id="catalogoClasicas"
+         class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
 
-	<bean id="catalogoActuales"
-		class="com.openwebinars.annotation.CatalogoPeliculasActuales"/>
+   <bean id="catalogoActuales"
+         class="com.openwebinars.annotation.CatalogoPeliculasActuales"/>
 
 </beans>
 ```
@@ -1295,9 +1311,10 @@ Y en el que nosotros vamos a poder decir, oye pues mira quiero que me auto-inyec
 
 Aquí tenemos el ejemplo de extensión de `qualifier` mediante el que nosotros tendríamos que crear nuestra anotación.
 
-### :computer: Ejemplo Proyecto Qualifier Extendido `141-15-03-extendiendo-qualifier`
+### :computer: `141-23-Anotacion-QualifierExtendido`
+#### Ejemplo de la Anotacion Qualifier Extendido
 
-<img src="images/15-15.png">
+<img src="images/141-23-00.png">
 
 Este proyecto es muy similar al anterior solo ponemos los archivos que han cambiado.
 
@@ -1314,23 +1331,23 @@ Este proyecto es muy similar al anterior solo ponemos los archivos que han cambi
 						http://www.springframework.org/schema/context/spring-context-4.3.xsd"
 	default-init-method="init">
 
-	<context:annotation-config />
+   <context:annotation-config />
 
-	<bean id="peliculaDaoMemory"
-		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
 
-	<bean id="peliculaService"
-		class="com.openwebinars.annotation.PeliculaService" />
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService" />
 
-	<bean id="catalogoClasicas"
-		class="com.openwebinars.annotation.CatalogoPeliculasClasicas">
-		<qualifier type="Epoca" value="clasicas" />
-	</bean>
+   <bean id="catalogoClasicas"
+         class="com.openwebinars.annotation.CatalogoPeliculasClasicas">
+      <qualifier type="Epoca" value="clasicas" />
+   </bean>
 
-	<bean id="catalogoActuales"
-		class="com.openwebinars.annotation.CatalogoPeliculasActuales">
-		<qualifier type="Epoca" value="actuales" />	
-	</bean>
+   <bean id="catalogoActuales"
+         class="com.openwebinars.annotation.CatalogoPeliculasActuales">
+      <qualifier type="Epoca" value="actuales" />	
+   </bean>
 
 </beans>
 ```
@@ -1415,7 +1432,7 @@ y si cambiamos a `actuales` tenemos:
 
 Como podemos ver la anotación `@Epoca(actuales)` es más cercana y concreta al dominio de este problema que estamos resolviendo. 
 
-# 16 Uso de @PostConstruct y @PreDestroy 3:28 
+# 16 Uso de `@PostConstruct` y `@PreDestroy` 3:28 
 
 [PDF 4-4_PostConstruct_y_PreDestroy.pdf](pdfs/4-4_PostConstruct_y_PreDestroy.pdf)
 
@@ -1437,9 +1454,10 @@ Pero vamos a ver ahora cómo podemos hacerlo mediante anotaciones, estas anotaci
 
 Simplemente estar anotado con `@PostConstruct` o `@PreDestroy` estando en el bean que esten, ya se encargará Spring de ejecutar ese método en el momento adecuado del ciclo de vida del bean, es decir justo después de construirlo o justo antes de destruirlo.
 
-### :computer: Ejemplo Proyecto PostConstruct-PreDestroy `141-16-01-postconstruct-predestroy`
+### :computer: `141-24-Anotaciones-PostConstruct-PreDestroy`
+#### Ejemplo de las Anotaciones PostConstruct PreDestroy
 
-<img src="images/16-04.png">
+<img src="images/141-24-00.png">
 
 Es necesario añadir la dependencia `javax.annotation-api` para reconocer las anotaciones `@PostConstruct` y ` @PreDestroy`
 
@@ -1484,19 +1502,19 @@ Vamos a iniciar nuestros catalogos de película mediante el método `init()` al 
 						http://www.springframework.org/schema/context 
 						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:annotation-config />
+   <context:annotation-config />
 
-	<bean id="peliculaDaoMemory"
-		class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
+   <bean id="peliculaDaoMemory"
+         class="com.openwebinars.annotation.PeliculaDaoImplMemory" />
 
-	<bean id="peliculaService"
-		class="com.openwebinars.annotation.PeliculaService" />
+   <bean id="peliculaService"
+         class="com.openwebinars.annotation.PeliculaService" />
 
-	<bean id="catalogoClasicas"
-		class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
+   <bean id="catalogoClasicas"
+         class="com.openwebinars.annotation.CatalogoPeliculasClasicas" />
 
-	<bean id="catalogoActuales"
-		class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
+   <bean id="catalogoActuales"
+         class="com.openwebinars.annotation.CatalogoPeliculasActuales" />
 
 </beans>
 ```
