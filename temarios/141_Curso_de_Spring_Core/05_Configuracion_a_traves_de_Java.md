@@ -23,7 +23,7 @@ Spring soporta desde la versión 3 la configuración de código Java, lo cual no
 Para poder usar la configuración con Java Config tenemos que utilizar dos anotaciones concretamente que son:
 
 * `@Configuration`: se utiliza a nivel de clase, indica que una clase va a tener aspectos de configuración, en particular que va a reunir más de un método anotado con `@Bean`.
-* `@Bean`: se utiliza nivel de método y qué es equivalente a la declaración de un bien en el XML.
+* `@Bean`: se utiliza nivel de método y qué es equivalente a la declaración de un Bean en el XML.
 
 <img src="images/18-04.png">
 
@@ -35,11 +35,12 @@ Más cambios en nuestra clase principal, en lugar de usar `ClassPathXmlApplicati
 
 Lo podemos comprobar en el siguiente ejemplo.
 
-### :computer: Ejemplo Proyecto JavaConfig `141-18-01-JavaConfig`
+### :computer: `141-27-JavaConfig`
+#### Uso de Spring vía JavaConfig
 
-<img src="images/18-08.png">
+<img src="images/141-27-00.png">
 
-Volvemos al ejemplo del principio (*Ej. 141-03-Bean*), en el que tenemos un bean, una clase pojo sin ningún tipo de anotación.
+Volvemos al ejemplo del principio (*Ej. `141-03-PrimerBean`*), en el que tenemos un bean, una clase pojo sin ningún tipo de anotación.
 
 *`Saludator.java`*
 
@@ -90,13 +91,15 @@ public class App {
 
    public static void main(String[] args) {
 		
+      // Abrir contexto		
       ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		
-	  Saludator saludator = appContext.getBean(Saludator.class);
+      Saludator saludator = appContext.getBean(Saludator.class);
 		
-	  System.out.println(saludator.saludo());
-		
-	  ((AnnotationConfigApplicationContext) appContext).close();
+      System.out.println(saludator.saludo());
+	
+      // Cerrar contexto
+      ((AnnotationConfigApplicationContext) appContext).close();
 
    }
 
@@ -123,9 +126,10 @@ También lo podemos hacer programaticamente aunque te digo a mí me gusta algo m
 
 Lo tendremos en el siguiente ejemplo.
 
-### :computer: Ejemplo Proyecto JavaConfigScan `141-18-02-JavaConfig-Scan`
+### :computer: `141-28-JavaConfigScan`
+#### Configuración con JavaConfig y escaneo de componentes
 
-<img src="images/18-10.png">
+<img src="images/141-28-00.png">
 
 La configuración de `AppConfig` escanearía el paquete `com.openwebinars.javaconfig` y encontraría todas las clases anotadas.
 
@@ -528,9 +532,10 @@ Ejemplo de `@Primary` con `@Bean`
 
 Vamos a ir viendo algunos de los ejemplos que hemos creado para ilustrarlo.
 
-### :computer: Ejemplo Proyecto JavaConfig Bean `141-19-01-Bean`
+### :computer: `141-29-Bean`
+#### Configuración con JavaConfig con `@Bean`
 
-<img src="images/19-13.png">
+<img src="images/141-29-00.png">
 
 En este primer ejemplo hemos cambiado radicalmente, hemos pasado de de usar el escaneo de componentes a crear todos nuestros beans, de manera que se creen dentro de esta clase de configuración.
 
@@ -570,7 +575,7 @@ public class AppConfig {
 }
 ```
 
-Y no tengamos ninguna anotación de tipo de estereotipo sobre ninguna clase.
+**Y no tengamos ninguna anotación de tipo de estereotipo sobre ninguna clase**.
 
 Las clases que estaban anotadas con esteotipos y ya no lo estan son las siguientes:
 
@@ -745,13 +750,15 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class App {
 
    public static void main(String[] args) {
-		
+   
+      // Abrir contexto		
       ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		
       PeliculaService peliculaService = appContext.getBean(PeliculaService.class);
 		
       peliculaService.pelisPorGenero("Ciencia ficción").forEach(System.out::println);
-				
+
+      // Cerrar contexto
       ((AnnotationConfigApplicationContext) appContext).close();
 
    }
@@ -792,9 +799,10 @@ Nosotros vamos a ver un ejemplo de como crear la inyección de una propiedad que
 
 Vamos a ver el ejemplo.
 
-### :computer: Ejemplo Proyecto Value `141-19-02-Value`
+### :computer: `141-30-Value`
+#### Inyección de valores con `@Value`
 
-<img src="images/19-15.png">
+<img src="images/141-30-00.png">
 
 Dentro de la carpeta `resources` hemos creado el fichero de properties llamado `ejemplo.properties`.
 
@@ -806,7 +814,6 @@ mensaje=Hola a todos desde un fichero de propiedades!
 
 Dónde tenemos una propiedad, los ficheros de properties son ficheros muy sencillos que nos permiten crear un listado de pares clave-valor, dentro de un fichero textual dónde se pone primero la clave = y el valor, incluso no es necesario que pongamos comillas a las a las cadenas de caracteres.
 
-Para configurar el uso de las properties usamos la anotación `@PropertySource("classpath:/ejemplo.properties")` donde indicamos como parámetro el fichero de properties, usamos la palabra `classpath` para que busque el archivo dentro del class path de la aplicación. Como sabemos la carpeta `src/main/resources` esta dentro del class path, no lo tenemos definido dentro de ningún paquete con lo cual esta en la raí 
 Para configurar el uso de las properties usamos la anotación `@PropertySource("classpath:/ejemplo.properties")` donde indicamos como parámetro el fichero de properties, usamos la palabra `classpath` para que busque el archivo dentro del class path de la aplicación. Como sabemos la carpeta `src/main/resources` esta dentro del class path, no lo tenemos definido dentro de ninun paquete por lo cual esta en la raíz del class path, cargaría el fichero de properties y nos permitiría utilizarlo. 
 
 *`AppConfig.java`*
@@ -867,13 +874,15 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class App {
 
    public static void main(String[] args) {
-		
+	
+      // Abrir contexto	
       ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		
-      Saludator s = appContext.getBean(Saludator.class);
+      Saludator saludator = appContext.getBean(Saludator.class);
 		
-      System.out.println(s.saludo());
-				
+      System.out.println(saludator.saludo());
+	
+      // Cerrar contexto	
       ((AnnotationConfigApplicationContext) appContext).close();
 
    }
