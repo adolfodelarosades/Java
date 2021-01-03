@@ -447,6 +447,90 @@ Fuente: https://docs.spring.io/spring/docs/current/spring-framework-reference/we
 
 ## Transcripción
 
+Hola a todos mano a la obra que vamos a empezar con la primera aplicación web de verdad porque comenzamos viendo los controladores si recordáis el controlador en la clase que se va a encargar de atender peticiones vale va a delegar en el procesamiento de ella en bueno en el modelo normalmente dónde se puede aplicar alguna serie de servicio y a partir de ahí rescatar algunos datos que enviaremos la vista no pero digamos que el controlador es el primero que recibe el balón vale pues vamos a ver cómo se crea un controlador la ventaja tremenda con respecto a otros primos y es que el controlador puede ser una clase Pojo Java es decir una clase de las de toda la vida pollo significa o son las siglas de Playmobil javadocs es decir de una de un objeto Java vale totalmente plano es decir que no tiene que heredar de nadie ni tiene que entender a nadie frente a otro modelo de trabajo donde si se nos obliga a que clase sobre privados métodos no aquí no vamos a tener las manos atadas y esto puede ser una clase cualquiera que va a tener solamente la cosa de estar anotada con arroba controles a partir de ahí los métodos veremos que tienen que estar anotado para que podamos hacer el mapeo de bueno una ruta determinada con un método determinado para saber que cuando escribamos en el navegador algo vamos a procesar este algo la petición que se haga la vamos a procesar en ese método hasta la versión 43 y lo digo de memoria si no mal recuerdo teníamos disponible siempre la anotación request mapping genérica que recibía la URL y el método HTTP con el cual al cual había que estar atento no igual se estaba la palabra suele ser escucha desde la versión 43 tenemos disponible una anotaciones derivadas que no evitan tener que poner el método ya que lo ponemos en la propia anotación no que es más peticiones que os más peticiones post y así sucesivamente vamos a crear nuestro primer controlador vale lo vamos a hacer a través de un nuevo proyecto vamos a crear un nuevo proyecto
+
+
+### :computer: `142-02-Controladores`
+#### Ejemplo de creación de controladores
+
+![142-02-00](images/142-02-00.png)
+
+![142-02-01](images/142-02-01.png)
+![142-02-02](images/142-02-02.png)
+![142-02-03](images/142-02-03.png)
+
+#### Cambiar el Puerto
+
+```txt
+server.port=9000
+```
+
+#### Crear `MainController` 
+
+![142-02-04](images/142-02-04.png)
+
+Lo anotamos con `@Controller`
+
+Añadimos método `welcome()`
+
+```java
+@Controller
+public class MainController {
+	
+   @GetMapping("/")
+   public String welcome() {
+      return "index";
+   }
+
+}
+```
+
+#### Crear Plantilla
+
+![142-02-05](images/142-02-05.png)
+![142-02-06](images/142-02-06.png)
+![142-02-07](images/142-02-07.png)
+
+Para que sea una plantilla Thymeleaf hay que añadir `xlmns:th="http://www.thymeleaf.org"`
+
+```html
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>Hola Mundo!!!</h1>
+</body>
+</html>
+```
+
+#### Ejecutar la Aplicación
+
+![142-02-08](images/142-02-08.png)
+
+AQUIIIIIIIII
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+
+
+
 # 14 Vistas 14:10 
 
 [PDF Vistas.pdf](pdfs/13._Vistas.pdf)
