@@ -74,6 +74,242 @@ No existe.
 
 ## Transcripción
 
+![142-01-01](images/142-01-01.png)
+![142-01-02](images/142-01-02.png)
+![142-01-03](images/142-01-03.png)
+![142-01-04](images/142-01-04.png)
+
+`pom.xml`
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.openwebinars</groupId>
+	<artifactId>142-01-Estructura</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>142-01-Estructura</name>
+	<description>Ejemplo de estructura de un proyecto web con Spring</description>
+
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+```
+
+![142-01-05](images/142-01-05.png)
+![142-01-06](images/142-01-06.png)
+
+
+La debemos anotar con `@Controller`
+
+```java
+package com.openwebinars.spring.controladores;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class UnControlador {
+
+}
+```
+
+![142-01-07](images/142-01-07.png)
+![142-01-08](images/142-01-08.png)
+![142-01-09](images/142-01-09.png)
+
+![142-01-10](images/142-01-10.png)
+
+La debemos anotar con `@Controller`
+
+```java
+package com.openwebinars.spring.entidades;
+
+import javax.persistence.Entity;
+
+@Entity
+public class UnaEntidad {
+
+}
+```
+
+![142-01-11](images/142-01-11.png)
+
+```java
+package com.openwebinars.spring.repositorios;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.openwebinars.spring.entidades.UnaEntidad;
+
+public interface UnRepositorio extends CrudRepository<UnaEntidad, Long>{
+
+}
+```
+
+![142-01-12](images/142-01-12.png)
+
+La debemos anotar con `@Service`
+
+```java
+package com.openwebinars.spring.servicios;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UnServicio {
+
+}
+```
+
+![142-01-13](images/142-01-13.png)
+![142-01-14](images/142-01-14.png)
+![142-01-15](images/142-01-15.png)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+Para que sea una plantilla Thymeleaf hay que añadir `xlmns:th="http://www.thymeleaf.org"`
+
+```html
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+![142-01-16](images/142-01-16.png)
+![142-01-17](images/142-01-17.png)
+![142-01-18](images/142-01-18.png)
+![142-01-19](images/142-01-19.png)
+![142-01-20](images/142-01-20.png)
+![142-01-21](images/142-01-21.png)
+
+```html
+@charset "UTF-8";
+```
+
+![142-01-22](images/142-01-22.png)
+![142-01-23](images/142-01-23.png)
+![142-01-24](images/142-01-24.png)
+
+La debemos anotar con `@Configuration`
+
+```java
+package com.openwebinars.spring.configuracion;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MyConfig {
+
+}
+```
+
+![142-01-25](images/142-01-25.png)
+![142-01-26](images/142-01-26.png)
+![142-01-27](images/142-01-27.png)
+
+La debemos anotar con `@Configuration` y `@EnableWebSecurity` y debe extender `WebSecurityConfigurerAdapter` 
+
+```java
+package com.openwebinars.spring.seguridad;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter{
+
+}
+```
+
+![142-01-28](images/142-01-28.png)
+![142-01-29](images/142-01-29.png)
+![142-01-30](images/142-01-30.png)
+
+```java
+package com.openwebinars.spring.utilidades;
+
+public class Utils {
+
+}
+```
+
 # 12 Conceptos de Java EE 12:25 
 
 [PDF Estructura_de_un_proyecto_web_.pdf](pdfs/11._Conceptos_de_Java_EE_necesarios.pdf)
