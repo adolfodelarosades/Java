@@ -887,13 +887,13 @@ Vamos a continuar desarrollando nuestra aplicación, ya que tenemos montado y bi
 
 Vamos a empezar por el segundo, el que nos va a permitir generar cualquier consulta, para ello vamos a crear el paquete `com.openwebinars.movieadvisor.service`
 
-<img src="images/21-27.png">
+<img src="images/141-31-26.png">
 
 Dentro de este paquete vamos a crear una nueva Interfaz llamada `FilmQueryService`
 
-<img src="images/21-28.png">
+<img src="images/141-31-27.png">
 
-y a la hora de diseñarla vamos a aplicar algo parecido al patrón builder, en el caso del patrón builder, cuando para generar un objeto, para construirlo, se requieren de mucho mucho mucho parámetros, la llamada tan enorme a un constructor no suele ser operativa y elegante, entonces se suele construir en alguna ocasión una clase estática interna, que nos ayuda a construir el objeto, en definitiva lo que va haciendo, es que los métodos de esa clase, van devolviendo una referencia a la propia clase, para que podamos encadenar diferentes llamadas al método. Este esquema es el que vamos a seguir en este servicio, de manera que podamos encadenar llamadas, a más de un método, para ir conjugando la consulta tal y cual si fuera una consulta SQL, donde pusiéramos diferentes condiciones y pusiéramos el operador AND en medio.
+y a la hora de diseñarla vamos a aplicar algo parecido al ***patrón builder***, en el caso del patrón builder, cuando para generar un objeto, para construirlo, se requieren de mucho mucho mucho parámetros, la llamada tan enorme a un constructor no suele ser operativa y elegante, entonces se suele construir en alguna ocasión una clase estática interna, que nos ayuda a construir el objeto, en definitiva lo que va haciendo, es que los métodos de esa clase, van devolviendo una referencia a la propia clase, para que podamos encadenar diferentes llamadas al método. Este esquema es el que vamos a seguir en este servicio, de manera que podamos encadenar llamadas, a más de un método, para ir conjugando la consulta tal y cual si fuera una consulta SQL, donde pusiéramos diferentes condiciones y pusiéramos el operador AND en medio.
 
 Los métodos que vamos a tener en la interface son los siguientes:
 
@@ -941,9 +941,11 @@ Lo que haríamos sería ir llamando a uno o varios de estos métodos encadenado,
 
 Vamos a crear el servicio, lo vamos a llamar `FilmQueryServiceImpl` y va a implementar a `FilmQueryService`.
 
-<img src="images/21-29.png">
+<img src="images/141-31-28.png">
 
-<img src="images/21-30.png">
+<img src="images/141-31-29.png">
+
+<img src="images/141-31-30.png">
 
 Lo que nos genera es lo siguiente:
 
@@ -1205,7 +1207,7 @@ public class FilmQueryServiceImpl implements FilmQueryService{
 
 Como deciamos vamos a crear también otro servicio llamado `FilmService`,  este `FilmService` tendrá alguno elemento de más alto nivel, vamos a crear la clase.
 
-<img src="images/21-31.png">
+<img src="images/141-31-31.png">
 
 Cómo anécdota decir que este servicio va a utilizar el anterior también para algunos de sus métodos, el código es el siguiente:
 
@@ -1365,7 +1367,7 @@ Vamos a seguir desarrollando nuestra aplicación y vamos a crear ahora las clase
 
 Lo primero que vamos a hacer es crear un fichero de texto `ayuda.txt`, dentro de los recursos que va a tener todo el texto de la sintaxis de la ayuda, se imprimirá cuando haya algún problema.
 
-<img src="images/21-32.png">
+<img src="images/141-31-32.png">
 
 *`ayuda.txt`*
 
@@ -1424,7 +1426,7 @@ que solo puede ser usada con fines personales y no comerciales.
 
 Vamos a crear una nueva clase directamente en el paquete raíz llamada `MovieAdvisorApp` y que está si va a tener un método `main`.
 
-<img src="images/21-33.png">
+<img src="images/141-31-33.png">
 
 Lo que vamos a hacer aquí es sencillo, porque la lógica la vamos a desplazar hacia otra clase, hacia otro bean, aquí lo único que vamos a hacer es cargar el contexto, no nos olvidamos de cerrarlo. En medio lo que haremos es rescatar el bean que vamos a utilizar como ejecutor de la aplicación y lo ejecutariamos.
 
@@ -1434,11 +1436,12 @@ Lo que vamos a hacer aquí es sencillo, porque la lógica la vamos a desplazar h
 public class MovieAdvisorApp {
 
    public static void main(String[] args) {
-		
+
+      //Abrir contexto
       ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		
 		
-		
+      //Cerrar contexto		
       ((AnnotationConfigApplicationContext) appContext).close();
 
    }
@@ -1447,7 +1450,7 @@ public class MovieAdvisorApp {
 
 Para ello vamos a crear primero la clase que la llamamos `MovieAdvisorRunApp`.
 
-<img src="images/21-34.png">
+<img src="images/141-31-34.png">
 
 Esta clase va a ser un bean en particular, como no estamos trabajando con aplicaciones web, no lo he querido llamar con el estereotipo de controlador, lo pondremos como `@Component` pero sería algo parecido a un controlador, tendrá un método `run(String[] args)`, va a recibir los argumentos que le podamos proporcionar
 
@@ -1520,7 +1523,7 @@ private FilmQueryService filmQueryService;
 
 Vamos a ver la estructura que tendría esto para poder manejar la sintaxis, parece claro que sí se invoca nuestra aplicación y el número de argumentos es menor que uno, quiere decir que la sintaxis es erróneo, es decir, lo que podemos hacer es simplemente indicarme que hay un error de sintaxis y mostrarle el mensaje de ayuda, cómo le vamos a mostrar el mensaje de error, bueno pues creariamos otro bean que vamos a llamar `MovieAdvisorHelp`
 
-<img src="images/21-35.png">
+<img src="images/141-31-35.png">
 
 y que será el encargado de cargar en una cadena de caracteres, todo el mensaje de ayuda, de forma que nosotros después a través del método `getHelp()` lo vamos a poder utilizar, ¿Cómo lo podemos hacer?.
 
@@ -1876,43 +1879,43 @@ public class MovieAdvisorRunApp {
 
 Puede ocurrir que el resultado esté vacío porque las películas no cumpla con ninguno de los criterios que nosotros estamos siguiendo, vamos a ejecutar nuestra aplicación.
 
-<img src="images/21-36.png">
+<img src="images/141-31-36.png">
 
-<img src="images/21-37.png">
+<img src="images/141-31-37.png">
 
 Como no hemos puesto ningún argumento, no mostraría el mensaje de ayuda, tenemos un error de sintaxis, y bueno ya nos quería probar con la sintaxis correcta.
 
 Si queremos listar todos los géneros, lo vamos a ser directamente desde Eclipse, podemos crear una configuración de ejecución.
 
-<img src="images/21-38.png">
+<img src="images/141-31-38.png">
 
 En la pestaña `Arguments` pasaremos argumentos, si queremos lista todos los generos, tendremos que poner `-lg`.
 
-<img src="images/21-39.png">
+<img src="images/141-31-39.png">
 
 Aquí procesar los datos, son muchas películas, con lo cual es posible que tarde un ratito en procesar todos los resultados.
 
-<img src="images/21-40.png">
+<img src="images/141-31-40.png">
 
 Nos muestra un listado con todos los géneros.
 
-<img src="images/21-41.png">
+<img src="images/141-31-41.png">
 
-<img src="images/21-42.png">
+<img src="images/141-31-42.png">
 
 Nota: si ponemos `war` no las encuentra, podría mejorarse.
 
 Si queremos hacer alguna otra búsqueda tenemos que volver a crear el la configuración de ejecución, buscar película de guerra y documentales que estén entre los años 1995 y 2005
 
-<img src="images/21-43.png">
+<img src="images/141-31-43.png">
 
-<img src="images/21-44.png">
+<img src="images/141-31-44.png">
 
 Por último si queremos podemos ver el mensaje de ayuda.
 
-<img src="images/21-45.png">
+<img src="images/141-31-45.png">
 
-<img src="images/21-46.png">
+<img src="images/141-31-46.png">
 
 Podríamos utilizar la sintaxis de nuestra aplicación para poder consultar y poco a poco poder acotar y obtener una recomendación de las películas que queríamos ver, con esto concluimos el curso de Spring Core.
 
