@@ -91,35 +91,40 @@ Ya digo una aplicación que es sencilla, aunque si es nuestro primer proyecto Sp
 
 ## Transcripción
 
+### :computer: `141-31-MovieAdvisor`
+#### Un gran recomendador de péliculas
+
+<img src="images/141-31-00.png">
+
 Vamos a continuar creando todo el esqueleto de nuestro proyecto de ejemplo para que podamos empezar a codificarlo, para ello al igual que en otras ocasiones vamos a crear un nuevo proyecto Maven.
 
 <img src="images/21-01.png">
 
 Podemos evitar el uso de cualquier arquetipo porque no lo vamos a necesitar.
 
-<img src="images/21-02.png">
+<img src="images/141-31-01.png">
 
-<img src="images/21-03.png">
+<img src="images/141-31-02.png">
 
-<img src="images/21-04.png">
+<img src="images/141-31-03.png">
 
 Recordemos que Eclipse a la hora de crear los proyectos con Java 5, tenemos que cambiar para qué en lugar de Java 5 podamos usar Java 8.
 
-<img src="images/21-05.png">
+<img src="images/141-31-04.png">
 
-<img src="images/21-06.png">
+<img src="images/141-31-05.png">
 
-<img src="images/21-07.png">
+<img src="images/141-31-06.png">
 
 También debemos cambiarlo en Java Compiler.
 
-<img src="images/21-08.png">
+<img src="images/141-31-07.png">
 
-<img src="images/21-09.png">
+<img src="images/141-31-08.png">
 
-<img src="images/21-10.png">
+<img src="images/141-31-09.png">
 
-<img src="images/21-11.png">
+<img src="images/141-31-10.png">
 
 A partir de aquí vamos a comenzar a códificar nuestra aplicación.
 
@@ -136,20 +141,20 @@ Vamos a incluir en el `pom.xml` la dependencia que necesitamos.
   <name>MovieAdvisor</name>
   <description>Un gran recomendador de películas</description>
   
-  <dependencies>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>5.2.6.RELEASE</version>
-		</dependency>
-		<!-- Necesaria por usar Java 14 -->
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-	</dependencies>
+   <dependencies>
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+         <version>5.2.6.RELEASE</version>
+      </dependency>
+      <!-- Necesaria por usar Java 14 -->
+      <dependency>
+         <groupId>javax.annotation</groupId>
+         <artifactId>javax.annotation-api</artifactId>
+         <version>1.3.2</version>
+      </dependency>
+   </dependencies>
 </project>
 ```
 
@@ -157,21 +162,21 @@ Recordar que podemos buscar la dependencia en [Maven Repository](https://mvnrepo
 
 Estupendo ya la tenemos, lo siguiente que podríamos hacer de una manera sencilla sería incluir dentro de nuestra carpeta `resources` el fichero con todos los datos de las películas que hemos visto antes, el archivo se llama `imdb_data.csv` y pesa 16MB porque son muchísimos los registros que tiene millones de películas, al incluir aquí directamente ya lo tendríamos disponible en nuestro proyecto. Incluso si lo queremos abrir desde aquí lo podríamos abrir con el con el editor de texto.
 
-<img src="images/21-12.png">
+<img src="images/141-30-11.png">
 
-Lo que es interesante que conozcamos su estructura y hemos visto que tiene un Id, un título, el año de estreno y que también tiene un listado con los diferentes géneros que conforman o los géneros a los que pertenece la película.
+Lo que es interesante es que conozcamos su estructura y hemos visto que tiene un *Id*, un *título*, el *año de estreno* y que también tiene un *listado con los diferentes géneros* que conforman o los géneros a los que pertenece la película.
 
 Vamos a crear nuestra clase que represente esa entidad, hasta ahora no nos hemos preocupado mucho en los proyectos anteriores de la estructuración en paquetes, porque realmente tampoco hemos tenido ninguna aplicación compleja, aunque aquí vamos a hacer más grande la parte práctica, sí lo vamos a estructura.
 
 Vamos a crear un nuevo paquete llamado `com.openwebinars.movieadvisor.model`
 
-<img src="images/21-13.png">
+<img src="images/141-30-12.png">
 
 Dentro de este package vamos a crear nuestra nueva clase `Film`.
 
-<img src="images/21-14.png">
+<img src="images/141-30-13.png">
 
-<img src="images/21-15.png">
+<img src="images/141-30-14.png">
 
 Nuestra clase `Film` va a tener un `id` de tipo `long`, `title` de tipo `String`, `year` de tipo `String` por no complicarnos el manejo de fechas si usamos el manejo de fecha anterior a Java 8 o el manejo de fechas en Java 8, otra librería como [Joda Time](https://www.joda.org/joda-time/) por eso lo guardaremos dentro de una cadena de caracteres y si después tenemos que hacer algún tipo de transformación la podemos hacer y por último tendríamos el listado de los generos de tipo `List<String>`.
 
@@ -196,96 +201,96 @@ import java.util.List;
  */
 public class Film {
 	
-	private long id;
-	private String title;
-	private List<String> genres;
-	private String year;
+   private long id;
+   private String title;
+   private List<String> genres;
+   private String year;
 	
-	public Film() { }
+   public Film() { }
 
-	public Film(long id, String title, String year, List<String> genres) {
-		this.id = id;
-		this.title = title;
-		this.genres = genres;
-		this.year = year;
-	}
+   public Film(long id, String title, String year, List<String> genres) {
+      this.id = id;
+      this.title = title;
+      this.genres = genres;
+      this.year = year;
+   }
 
-	public long getId() {
-		return id;
-	}
+   public long getId() {
+      return id;
+   }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+   public void setId(long id) {
+      this.id = id;
+   }
 
-	public String getTitle() {
-		return title;
-	}
+   public String getTitle() {
+      return title;
+   }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+   public void setTitle(String title) {
+      this.title = title;
+   }
 
-	public List<String> getGenres() {
-		return genres;
-	}
+   public List<String> getGenres() {
+      return genres;
+   }
 
-	public void setGenres(List<String> genres) {
-		this.genres = genres;
-	}
+   public void setGenres(List<String> genres) {
+      this.genres = genres;
+   }
 
-	public String getYear() {
-		return year;
-	}
+   public String getYear() {
+      return year;
+   }
 
-	public void setYear(String year) {
-		this.year = year;
-	}
+   public void setYear(String year) {
+      this.year = year;
+   }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((genres == null) ? 0 : genres.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((year == null) ? 0 : year.hashCode());
-		return result;
-	}
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((genres == null) ? 0 : genres.hashCode());
+      result = prime * result + (int) (id ^ (id >>> 32));
+      result = prime * result + ((title == null) ? 0 : title.hashCode());
+      result = prime * result + ((year == null) ? 0 : year.hashCode());
+      return result;
+   }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Film other = (Film) obj;
-		if (genres == null) {
-			if (other.genres != null)
-				return false;
-		} else if (!genres.equals(other.genres))
-			return false;
-		if (id != other.id)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (year == null) {
-			if (other.year != null)
-				return false;
-		} else if (!year.equals(other.year))
-			return false;
-		return true;
-	}
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Film other = (Film) obj;
+      if (genres == null) {
+         if (other.genres != null)
+            return false;
+      } else if (!genres.equals(other.genres))
+         return false;
+      if (id != other.id)
+         return false;
+      if (title == null) {
+         if (other.title != null)
+            return false;
+      } else if (!title.equals(other.title))
+         return false;
+      if (year == null) {
+         if (other.year != null)
+            return false;
+      } else if (!year.equals(other.year))
+         return false;
+      return true;
+   }
 
-	@Override
-	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", genres=" + genres + ", year=" + year + "]";
-	}
+   @Override
+   public String toString() {
+      return "Film [id=" + id + ", title=" + title + ", genres=" + genres + ", year=" + year + "]";
+   }
 }
 ```
 
