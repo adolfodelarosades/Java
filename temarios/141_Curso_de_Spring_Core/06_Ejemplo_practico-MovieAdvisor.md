@@ -162,7 +162,7 @@ Recordar que podemos buscar la dependencia en [Maven Repository](https://mvnrepo
 
 Estupendo ya la tenemos, lo siguiente que podríamos hacer de una manera sencilla sería incluir dentro de nuestra carpeta `resources` el fichero con todos los datos de las películas que hemos visto antes, el archivo se llama `imdb_data.csv` y pesa 16MB porque son muchísimos los registros que tiene millones de películas, al incluir aquí directamente ya lo tendríamos disponible en nuestro proyecto. Incluso si lo queremos abrir desde aquí lo podríamos abrir con el con el editor de texto.
 
-<img src="images/141-30-11.png">
+<img src="images/141-31-11.png">
 
 Lo que es interesante es que conozcamos su estructura y hemos visto que tiene un *Id*, un *título*, el *año de estreno* y que también tiene un *listado con los diferentes géneros* que conforman o los géneros a los que pertenece la película.
 
@@ -170,13 +170,13 @@ Vamos a crear nuestra clase que represente esa entidad, hasta ahora no nos hemos
 
 Vamos a crear un nuevo paquete llamado `com.openwebinars.movieadvisor.model`
 
-<img src="images/141-30-12.png">
+<img src="images/141-31-12.png">
 
 Dentro de este package vamos a crear nuestra nueva clase `Film`.
 
-<img src="images/141-30-13.png">
+<img src="images/141-31-13.png">
 
-<img src="images/141-30-14.png">
+<img src="images/141-31-14.png">
 
 Nuestra clase `Film` va a tener un `id` de tipo `long`, `title` de tipo `String`, `year` de tipo `String` por no complicarnos el manejo de fechas si usamos el manejo de fecha anterior a Java 8 o el manejo de fechas en Java 8, otra librería como [Joda Time](https://www.joda.org/joda-time/) por eso lo guardaremos dentro de una cadena de caracteres y si después tenemos que hacer algún tipo de transformación la podemos hacer y por último tendríamos el listado de los generos de tipo `List<String>`.
 
