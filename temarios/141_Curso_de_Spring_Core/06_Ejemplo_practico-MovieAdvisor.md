@@ -87,7 +87,7 @@ Por último la opción `-h` que mostrara el mensaje de ayuda.
 
 Ya digo una aplicación que es sencilla, aunque si es nuestro primer proyecto Spring completo tendrá una complejidad media y además haremos un buen uso del API Strem de Java 8, para poder hacer los filtrados, las búsquedas, los mapeo, etcétera etcétera. 
 
-# 21 Creación del proyecto y modelo de datos 5:49 
+# 21 Creación del Proyecto y Modelo de Datos 5:49 
 
 ## Transcripción
 
@@ -296,17 +296,17 @@ public class Film {
 
 Teniendo este modelo ya tenemos ya tenemos todo lo necesario para poder empezar desde abajo hacia arriba, es decir vamos a empezar a codificar primero la parte de los DAO, para poder rescatar los datos, a partir de ahí iremos subiendo hacia los servicios, etcétera etcétera y lo vamos a ir haciendo poco a poco en las siguiente lecciones.
 
-# 22 Repositorio y acceso a datos (Parte I) 12:55 
+# 22 Repositorio y Acceso a Datos (Parte I) 12:55 
 
 ## Transcripción
 
 Vamos a continuar con nuestro proyecto MovieAdvisor, vamos a crear un nuevo paquete que va a contener la configuración de la clase o clases de configuración, en nuestro caso será solamente una, pero podríamos tener más de una clase. Para ello creamos el paquete `com.openwebinars.movieadvisor.config` 
 
-<img src="images/21-16.png">
+<img src="images/141-31-15.png">
 
-Aquí creamos una nueva clase que llamaremos `Appconfig`
+Aquí creamos una nueva clase que llamaremos `AppConfig`
 
-<img src="images/21-17.png">
+<img src="images/141-31-16.png">
 
 Debemos indicar que es una clase de configuración con la anotación `@Configuration` ya que estamos usando Java Config, también vamos a indicar que vamos a escanear los componentes indicando el paquete base con `@ComponentScan(basePackages="com.openwebinars.movieadvisor")` escaneará todos los beans que se encuentren en este paquete o por debajo, esto nos va a permitir un sistema de configuración mixto de Java Config con Anotaciones. Por ahora esto es todo lo que necesitamos.
 
@@ -327,11 +327,11 @@ public class AppConfig {
 
 Ahora vamos a crear la interfaz DAO para poder trabajar con un repositorio de Film, vamos a crear un nuevo paquete `com.openwebinars.movieadvisor.dao`
 
-<img src="images/21-18.png">
+<img src="images/141-31-17.png">
 
 y dentro de este paquete vamos a crear una nueva interfaz llamada `FilmDao`
 
-<img src="images/21-19.png">
+<img src="images/141-31-18.png">
 
 Esta interfaz va a tener los métodos que debería implementar cualquier clase que quiera ser un DAO de películas.
 
@@ -352,11 +352,11 @@ import com.openwebinars.movieadvisor.model.Film;
  */
 public interface FilmDao {
 	
-	public Film findById(long id);
-	public Collection<Film> findAll();
-	public void insert(Film film);
-	public void edit(Film film);
-	public void delete(long id);
+   public Film findById(long id);
+   public Collection<Film> findAll();
+   public void insert(Film film);
+   public void edit(Film film);
+   public void delete(long id);
 
 }
 ```
@@ -365,13 +365,13 @@ Ahora vamos a crear una clase que implemente en memoria, que sea capaz de cargar
 
 Vamos a crear una nueva clase llamada `FilmDaoImplMemory` 
 
-<img src="images/21-20.png">
+<img src="images/141-31-19.png">
 
 Si pulsamos en `Add` podemos indicar la interfaz que queremos implementar
 
-<img src="images/21-21.png">
+<img src="images/141-31-20.png">
 
-<img src="images/21-22.png">
+<img src="images/141-31-21.png">
 
 Esto nos inserta la estructura de los métodos que debemos implementar por la implementación de `FilmDao`
 
@@ -386,35 +386,35 @@ import com.openwebinars.movieadvisor.model.Film;
 
 public class FilmDaoImplMemory implements FilmDao {
 
-	@Override
-	public Film findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+   @Override
+   public Film findById(long id) {
+      // TODO Auto-generated method stub
+      return null;
+   }
 
-	@Override
-	public Collection<Film> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+   @Override
+   public Collection<Film> findAll() {
+      // TODO Auto-generated method stub
+      return null;
+   }
 
-	@Override
-	public void insert(Film film) {
-		// TODO Auto-generated method stub
+   @Override
+   public void insert(Film film) {
+      // TODO Auto-generated method stub
 
-	}
+   }
 
-	@Override
-	public void edit(Film film) {
-		// TODO Auto-generated method stub
+   @Override
+   public void edit(Film film) {
+      // TODO Auto-generated method stub
 
-	}
+   }
 
-	@Override
-	public void delete(long id) {
-		// TODO Auto-generated method stub
+   @Override
+   public void delete(long id) {
+      // TODO Auto-generated method stub
 
-	}
+   }
 
 }
 ```
@@ -423,7 +423,7 @@ Ademas de lo que pone vamos a necesitar una lista de películas usando el operad
 
 
 ```java
-public List<Film> pelicula = new ArrayList<>();
+public List<Film> peliculas = new ArrayList<>();
 ```
 
 Tambien indicaremos que este es un bean anotandolo con la anotación `@Repository`
@@ -438,7 +438,7 @@ public void init() {
  
 Para ello vamos a crear una nueva clase, en este caso no lo voy a crear como un bean, sino que lo voy a dejar para que lo podáis hacer vosotros, que sería la encargada de cargar o de procesar el fichero, la clase se llamará `UtilFilmFileReader` dentro del paquete `com.openwebinars.movieadvisor.dao`, va a ser una clase con un método estático.  
 
-<img src="images/21-23.png">
+<img src="images/141-31-22.png">
 
 Si alguien quiere, se podría transformar esto en un bean que pudiera ser capaz de leer el fichero. Está separación es porque esta implementación del DAO es en memoria, es decír sabe que lo va a tener, pero no sabe de dónde surgen los datos. Si lo hiciera con otro bean los datos podrían surgir de otro sitio que no fuese un fichero `csv` eso también lo dejo para que ustedes puedan tener cancha.
 
@@ -495,7 +495,6 @@ y ahora ya nos podemos centrar en el mapeo, que queda asi:
 
 Cada línea del fichero incluye todos los datos de una película, lo que tenemos que hacer es "splitiarlos" es decir trocearlos, por el separador que utilizamos, que en primera instancia es el punto y coma (;), esto nos devolverá un array de Strings el cual almacenamos en `values`. Por lo que en `value[0]` tendríamos el `id` (como String) pero nosotros lo declaramos como `long` por lo que tendíamos que hacer un cast `Long.parseLong(values[0])`, en `value[1]` tendríamos el título de la película, en `value[2]` tendríamos el año de la película (como String) y en el último `value[3]` tendríamos el listado con los generos, por lo que si queremos obtener cada uno de ellos tendriamos que "splitiarlos" por la coma que es el separador de los generos, `Arrays.asList(values[3].split(listSeparator))` y lo que hacemos es construir con `Arrays.asList` una lista de Strings con cada uno de los generos. Todo esto se lo pasamos al constructor con parámetros `Film(...)` y es lo que devolvemos, por cada línea devolvemos un objeto `Film`.
 
-
 ```java
 // @formatter:off
 result = Files.lines(Paths.get(ResourceUtils.getFile(path).toURI()))
@@ -530,7 +529,6 @@ import org.springframework.util.ResourceUtils;
 
 import com.openwebinars.movieadvisor.model.Film;
 
-
 /**
  * Clase de utilidad, que incluye un método estático para la lectura
  * y procesamiento del fichero CSV que incluye todos los datos.
@@ -541,31 +539,30 @@ import com.openwebinars.movieadvisor.model.Film;
  */
 public class UtilFilmFileReader {
 
-	public static List<Film> readFile(final String path, final String separator, final String listSeparator) {
-		List<Film> result = new ArrayList<>();
+   public static List<Film> readFile(final String path, final String separator, final String listSeparator) {
+      List<Film> result = new ArrayList<>();
+
+      try {
+         // @formatter:off
+         result = Files
+                     .lines(Paths.get(ResourceUtils.getFile(path).toURI()))
+                     .skip(1)
+                     .map(line -> {
+                        String[] values = line.split(separator);
+                        return new Film(Long.parseLong(values[0]), values[1], values[2], 
+                                          Arrays.asList(values[3].split(listSeparator)));
+                     }).collect(Collectors.toList());
+         // @formatter:on
 
 
-		try {
-			// @formatter:off
-			result = Files
-						.lines(Paths.get(ResourceUtils.getFile(path).toURI()))
-						.skip(1)
-						.map(line -> {
-							String[] values = line.split(separator);
-							return new Film(Long.parseLong(values[0]), values[1], values[2], 
-									Arrays.asList(values[3].split(listSeparator)));
-					}).collect(Collectors.toList());
- 			// @formatter:on
+      } catch (IOException e) {
+         System.err.println("Error de lectura del fichero de datos: imdb_data");
+         System.exit(-1);
+      }
 
+      return result;
 
-		} catch (IOException e) {
-			System.err.println("Error de lectura del fichero de datos: imdb_data");
-			System.exit(-1);
-		}
-
-		return result;
-
-	}
+   }
 
 }
 ```
@@ -602,7 +599,7 @@ public void init() {
 
 y habíamos pensado que la mejor manera es proporcionarlo a través de un fichero de properties, para ellos nos vamos a venir a la carpeta recursos y no existe un asistente para crear un fichero de properties, con lo cual podemos usar directamente un fichero de texto.
 
-<img src="images/21-24.png">
+<img src="images/141-31-23.png">
 
 En este fichero de texto vamos añadir tres propiedades:
 
@@ -614,11 +611,11 @@ file.csv.list_separator=,
 
 Lo salvamos con el nombre `movieadvisor.properties` en la carpeta resource.
 
-<img src="images/21-25.png">
+<img src="images/141-31-24.png">
 
-<img src="images/21-26.png">
+<img src="images/141-31-25.png">
 
-Ahora lo que tenemos que hacerlo es cargarlo desde nuestra clase de configuración `Appconfig` usando la anotación `@PropertySource()` al cual le debemos pasar la ruta y nombre del archivo properties. 
+Ahora lo que tenemos que hacerlo es cargarlo desde nuestra clase de configuración `AppConfig` usando la anotación `@PropertySource()` al cual le debemos pasar la ruta y nombre del archivo properties. 
 
 `@PropertySource("classpath:/movieadvisor.properties")`
 
@@ -698,7 +695,8 @@ De esta manera cuando queramos utilizar los valores de configuración simplement
 ```java
 @Autowired
 private AppConfig appConfig;
-	
+
+@PostConstruct
 public void init() {
    peliculas = UtilFilmFileReader.readFile(appConfig.getFile(), appConfig.getSeparator(), appConfig.getListSeparator());
 }
@@ -831,11 +829,13 @@ public class FilmDaoImplMemory implements FilmDao {
    }
 
    public Film findById(long id) {
-		
+	
+      // @formatter:off	
       Optional<Film> result = peliculas
 	 			.stream()
 				.filter(f -> f.getId() == id)
 				.findFirst();
+      // @formatter:on
       return result.orElse(null);	
 	
    }
