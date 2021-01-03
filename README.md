@@ -234,6 +234,8 @@ mini-de-adolfo:tmp adolfodelarosa$
 
 [JavaGuides](https://www.javaguides.net/)
 
+[JavaDeveloperZone](https://javadeveloperzone.com/)
+
 [Baeldung](https://www.baeldung.com/)
 
 [geeksforgeeks](https://www.geeksforgeeks.org/java/)
