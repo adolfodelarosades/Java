@@ -74,6 +74,11 @@ No existe.
 
 ## Transcripción
 
+### :computer: `142-01-Estructura`
+#### Ejemplo de estructura de un proyecto web con Spring
+
+![142-01-00](images/142-01-00.png)
+
 ![142-01-01](images/142-01-01.png)
 ![142-01-02](images/142-01-02.png)
 ![142-01-03](images/142-01-03.png)
