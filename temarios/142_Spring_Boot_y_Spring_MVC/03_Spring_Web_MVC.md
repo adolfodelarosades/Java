@@ -589,7 +589,6 @@ public class MainController {
 ![142-02-10](images/142-02-10.png)
 ![142-02-11](images/142-02-11.png)
 
-
 Lanzada tendríamos por aquí que sigue devolviendo no están en la ruta raíz y en saludo vale lo vamos a quitar algo de eso o lo podríamos poner al 100% seguro que has visto otras plataformas con miles de cursos pero no tengo evina nos enteramos emite como profesional tecnológico de ver estar al día en las tecnologías más demandadas yo tengo vida en la solución sería un mensaje que podríamos incluir de saludo en nuestra aplicación como podemos comprobar hemos podido tener en un solo controlador dos métodos diferentes que atienden a dos rutas distintas y que bueno fue terminan renderizando en en dos plantillas diferentes vale con lo cual estoy francamente cómodo en la mayoría de las lesiones que veremos de ahora en adelante os pondré alguna pequeña práctica que en principio no tendréis resuelta y que servirá como acicate vale como reto para que vosotros podáis practicar pasa aplicaron la primera que se está que tenemos aquí imagino que lo encarga en una web que podríamos llamar clásica la web clásica son aquellas que los pequeños negocios con el bueno el boom de las conexiones Internet empezaron a solicitar con el devenir del siglo 21 final del siglo 20 de venir del siglo 21 y en torno al año 2002 mil algo había muchos pequeños negocios que se pirran por poder tener presencia en Internet no esas web era muy sencilla y solían incluir una portada dónde se pone información sobre la organización vale lo que podríamos llamar el quiénes somos otro apartado con el que hacemos o que vendemos y la información de contacto con donde estamos e información de contacto pues yo ánimo a que crees un nuevo proyecto añadiendo los starters de Wendy de finding que creéis un controlador con tres métodos para que atienda la ruta raíz que y contacto que creéis tres plantillas vale de qué y contacto y que podáis pasar el contenido de esas plantillas a través de un objeto model vale podéis recurrir si queréis por ejemplo algún tipo de plantilla ya prevenida dvisual bonita que haya por ahí y te la tarde encajarlo vale si bien o aviso de que si tiene algunos recursos javascript css a lo mejor tenía alguna pequeña dificultad al principio vale si no puede ser algo normal algo normal perdón pero que podáis encajar un controlador con tres métodos tres plantillas distinta y os podéis pelear un poco os recuerdo que para pasar los datos ala vista tendríamos que tener controlado easy y mediante atribut iríamos añadir elemento a nuestra plantilla hasta aquí el capítulo de los controladores en los siguientes capítulos empecemos trabajando con vista y mejorando nuestros controladores para que sea más potente
 
 # 14 Vistas 14:10 
@@ -635,32 +634,6 @@ Si no tuviéramos el Facebook y lo tuviéramos que configurar manualmente tendr�
 
 Por nuestro curso de introducción a time live porque ayudará a profundizar en esta tecnología y si además sois capaces de llevarlo en paralelo veréis que la creación de las plantillas de los proyectos de Spring web en bici que vayamos haciendo serán mucho más fáciles con todo yo iré refrescando o presentando los conceptos de timely necesario que vayamos a utilizar en los distintos ejes como práctica os sugiero que proveía jugar con las distintas propiedades en el fichero de application properties con las que hemos visto antes como por ejemplo la de café poniendo café a true no entro el valor por defecto esto está mal tío me permití os lo cambio y lo vemos directamente si lo cambiamos directamente y lo ponemos a fons nos permitirá realizar los cambios en la plantilla y poder visualizarlo sin tener que relanzar de nuevo el proyecto con lo cual así lo podríamos hacer los cambios bastante más rápido sobre todo si lo que estamos haciendo es maquetación pero dentro de dentro de una aplicación de este también si no nos gusta la extensión HTML podríamos probar a poner otra extensión vale antaño que la extensiones tenían solamente tres caracteres pues los ficheros HTML tenían su extensión htm para cambiar la extensión de los ficheros y la configuración para comprobar que esto funciona con esto dejamos las vistas en la siguiente elección retomamos los controladores para recoger para hacerlo
 
-
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
 # 15 @RequestParam 12:42 
 
 [PDF RequestParam_y_PathVariable_.pdf](pdfs/14._RequestParam_y_PathVariable_.pdf)
@@ -691,6 +664,165 @@ public class OwnerController {
 De esta forma, necesitaríamos inyectar la variable a través de `@PathVariable` en cada método.
 
 ## Transcripción
+
+Hola Pili vamos a retomar los controladores y lo vamos a hacer para rescatar parámetros hasta ahora todas las rutas que hemos mapeado eran rutas que podríamos llamar física sin embargo vamos a ver como en la ruta de alguna u otra forma vamos a poder pasar información que podremos utilizar en el controlador para bueno pues bien hacer algún tipo de consulta o utilizar este parámetro dentro de nuestro servicio o para alguna cosa que los parámetros en en una petición porque tenemos bastantes maneras de hacerlo vale si veis este gráfico y recordáis como teníamos estructurado bueno pues recordaréis que vimos que es lo que hacíamos en los controladores era bueno puedes emitir peticiones y recibir respuestas no todo bajo el protocolo HTTP aprovechando esta arquitectura podemos pasar parámetro de dos formas lo que sería en la misma ruta de la URL en la parte que se conoce como el pan que ahora ahora la veremos y también en la parte que se conoce como la query de la URL vale vamos a ver como una URL puede tener más de una paja empecemos por la parte buena porque seguro que os suena y es que ese es muy fácil que hay navegado por alguna página y os hayáis encontrado que en la URL aparece el símbolo del interrogante eso suele ser un delimitador entre la parte paz es decir lo que es puramente la ruta que viene marcada por el protocolo: barra barra usualmente las www.open24.ie eso sería el pub y la parte query en la que viene delimitada por este interrogante es decir todo lo que hay después del interrogante sería la parte fuera usualmente ahí no encontraremos pares nombre o clave igual a valor vale es decir una palabra igual y bueno y un valor quién dice una palabra bueno usualmente la clave el nen no no suele llevar no suele llevar espacio vale pero sin embargo en el valor no podemos encontrar lo que queramos vale y bueno si no mal recuerdo tiene puede tener una longitud de hasta 4096 caracteres decir que puede que podemos pasar bastantes parámetros si queremos pasar más de 1 más de un par clave-valor o nombre valor bueno delimitamos uno y otro a través del carácter Amsterdam vale de forma que si quisiéramos pasar tres valores asociados a tres claves pues lo podríamos hacer como veis en pantalla no tiene uno igual AV1 & N2 igual AV2 & N3 igual outlet cómo podéis comprobar la parte query se suele utilizar para proporcionar al controlador alguna información adicional a la propia ruta para que bueno fue la información que muestre vaya en función de esos datos que hemos pasado en nuestro caso puede comprobar como aquí si está URL existiera completa vale pues seguramente lo que quisiéramos es verde todo el catálogo de cursos de openwebinar aquellos que estén relacionados con programacion backend vale lo bueno que tienen la URL con qué hacen uso de la query es que las podemos guardar en favoritos y entonces una búsqueda concreta bueno con la podríamos tener rápida a la hora de querer rescatarla no veamos cómo se hace esto con los controladores de Spring y bueno pues vamos a poder hacer un controlador muy parecido a los que ya teníamos y que reciba una un nuevo parámetro en la firma del controlador vale que vaya anotado con arroba request para vale de esa manera lo que haremos es buscar en la query de la URL un parámetro que se llame bien como la propia variable aquí lo he puesto que tengan el mismo nombre para ver la sintaxis completa
+
+
+
+
+Buscaremos un para Bretón un parámetro que tuviera este nombre no lo encontramos aquí vemos que este es el valor mi propio nombre Luismi y se inyecta el valor vale dentro de esta variable de manera que ya no podemos tomar lo podríamos pasar al modelo y por ejemplo visualizarlo dentro de la plantilla de esa forma podríamos pues que digo yo personalizar el saludo que vamos a lanzar a a la gente que visite nuestra página en este caso el campo name es de tipo String pero también podría ser un otro valor como por ejemplo entero long de tipo de ir una serie de campos que os tengo puesto en la documentación adicional vale vamos hace referencia la documentación de Spring donde podéis encontrar los tipos de datos más usuales que podrían poner otros campos pero implicarían la programación por nuestra parte de un conversor y eso sí es verdad que es menos menú sua vamos a hacer este ejemplo para ello bueno pues yo he creado una copia del proyecto de la elección de los controladores vale lo tengo por aquí en parámetros 
+
+### :computer: `142-03-RequestParam`
+#### Ejemplo de paso de Parámetros al Controlador
+
+![142-03-00](images/142-03-00.png)
+
+tenemos aquí nuestro controlador o mejor dicho nuestro controladores que hicimos en este momento y bueno tendríamos que añadir al controlador bueno pues este arroba request para vale ya digo si queremos que el parámetro que sepas te tenga el mismo valor que el nombre de la variable no le tenemos que indicar el nombre al rico espada sino me ha dicho esto también lo va a aceptar lo podemos hacer de esta manera y entonces buscaría el parámetro con este nombre dentro de la cuerda vale y lo inyectar y a en esta variable de aquí vale podríamos por ejemplo en lugar de poner este mensaje a hacer un saludo de Hola Mundo personalizado vale lo podemos comentar si queréis nombre INE y ahora en la plantilla en este caso en la plantilla de Indy o podríamos quitar este mensaje donde se va a pasar el nem y en lugar de llamarlo mensaje pues podríamos poner la cadena de caracteres hola más saluda vale saludos tenemos por aquí podemos tratar de de compilarlo vale y de ejecutarlo para ver cómo funciona ejecutamos principio todo va bien y aquí podríamos localcall barra name y por ejemplo podemos poner el mío vale no que yo escrito por aquí para que lo veáis más claro la ruta cómo es la ruta de raíz ponemos directamente la barra vale ponemos el interrogante para delimitar que es una query y ponemos el Parc name que el nombre de la variable igual al valor que en este caso sería Luis vale pues podemos comprobar como ya no aparece por aquí nuestro si lo cambiáramos a otra vale por ejemplo estaríamos saludando a Ángel vale y podríamos cambiar y poner el valor de n que quisiéramos por aquí detrás
+
+#### Modificar el Controlador
+
+```java
+@Controller
+public class MainController {
+	
+   @GetMapping("/")
+   public String welcome(@RequestParam String name, Model model) {
+      model.addAttribute("nombre", name);
+      return "index";
+   }
+	
+   ...
+
+}
+```
+
+O
+
+```java
+@Controller
+public class MainController {
+	
+   @GetMapping("/")
+   public String welcome(@RequestParam("name") String name, Model model) {
+      model.addAttribute("nombre", name);
+      return "index";
+   }
+	
+   ...
+
+}
+```
+
+#### Modificar la Vista `index.html`
+
+```html
+...
+<body>
+   <h1 th:text="${'Hola ' + nombre}">Hola Mundo!!!</h1>
+</body>
+</html>
+```
+
+#### Ejecutar la Aplicación
+
+Para ejecutar la aplicación invocamos la URL `http://localhost:9000/?name=Adolfo`
+
+![142-03-01](images/142-03-01.png)
+![142-03-02](images/142-03-02.png)
+
+
+¿Qué pasa si no se le pasa un valor a la URL? 
+Si invocamos la URL `http://localhost:9000/`
+
+Podemos comprobar recoger los parámetros desde request param algo francamente sencillo sin embargo nos vamos a encontrar con alguna pequeña dificultad y es que bueno qué pasa si no le pasamos ningún valor a esta ruta vayamos otra vez de nuevo vale al navegador y aquí en lugar de saludar a Ángel no saludamos a nadie cómo nos produce un error de tipo 400 hablábamos en las lecciones anteriores que los errores 400 se producen porque la petición no está bien formada en nuestro caso en el fondo es que no lo hemos programado bien porque lo ideal es que no seamos nosotros como programadores los que le demos un tratamiento y digamos algún tipo de parámetro por defecto vale ya que bueno si no está presente me vale pues el usuario lo quería sería un error que no merece
+
+![142-03-03](images/142-03-03.png)
+
+Tenemos un Error `400` por que la petición no esta bien formada.
+
+```java
+```
+
+
+```java
+```
+
+```java
+```
+
+por defecto como estábamos viendo en la slide request param tiene el atributo Ruiz wild a true es decir que es obligatorio y que se pase parámetros y no se lanza el error 400 tenemos dos opciones que las vamos a ver por un lado tendríamos el poner el retail AFOL y poner un valor por defecto si no pasamos ningún valor se muestra el valor por defecto si pasamos un valor pues se muestra el valor pasado y por otro el uso de la del contenedor opcional vale a la hora de darle tratamiento con lo cual ya sabemos que de Java 8 optional bueno pues no nos va a producir un error simplemente que el contenedor estaría vacío y tendremos que ser nosotros los que le demos tratamiento vamos a ver los dos los dos ejemplos un lado tendremos aquí que en lugar de poner solamente esto de esta forma tendríamos que añadirle algo más darme el nene vale decir que no es obligatorio y tendríamos que dar aquí un valor por defecto que podríamos poner como mundo de esta forma 
+
+```java
+@Controller
+public class MainController {
+	
+   @GetMapping("/")
+   public String welcome(@RequestParam(name="name", required=false, defaultValue="Mundo") String name, Model model) {
+      model.addAttribute("nombre", name);
+      return "index";
+   }
+   
+   ...
+
+}
+```
+
+![142-03-04](images/142-03-04.png)
+![142-03-05](images/142-03-05.png)
+
+
+relanzamos y recargamos en este caso sería un opcional de Stream lo que recogería mucho vale como name y nuestros móvil la clase de Java optional Java AWT y ahora que tendríamos que hacer pues aparte de redirigir a la plantilla que va a ser la misma tendríamos que darle tratamiento y recoger valor una manera sencilla de hacer el mismo comportamiento de antes de aquí que tiene valor y si no tiene valor pues puedes pasar directamente la cadena de caracteres vale y en lugar de hacerlo a través de la propia no está haciendo spring lo haríamos con nuestro conocimiento de Java 
+
+
+```java
+@Controller
+public class MainController {
+	
+   @GetMapping("/")
+   public String welcome(@RequestParam(name="name") Optional<String> name, Model model) {
+      model.addAttribute("nombre", name.orElse("Mundo"));
+      return "index";
+   }
+   
+   ...
+
+}
+```
+
+
+vale vemos que sigue saludando a Adolfo pero y lo quitamos vale sigue saludando mundo pero en este caso lo hemos hecho con JAVA 
+
+![142-03-06](images/142-03-06.png)
+![142-03-07](images/142-03-07.png)
+
+
+hasta aquí el tratamiento en la parte Queen
+
+
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
 
 # 16 @PathVariable 4:30 
 
