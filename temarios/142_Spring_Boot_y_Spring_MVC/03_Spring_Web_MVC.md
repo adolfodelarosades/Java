@@ -795,34 +795,7 @@ vale vemos que sigue saludando a Adolfo pero y lo quitamos vale sigue saludando 
 ![142-03-06](images/142-03-06.png)
 ![142-03-07](images/142-03-07.png)
 
-
 hasta aquí el tratamiento en la parte Queen
-
-
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
 
 # 16 @PathVariable 4:30 
 
@@ -834,6 +807,63 @@ No existe.
 
 ## Transcripción
 
+
+Ahora vamos a ver lo que sería incluir variables dentro del propio paz vale variable siempre vendrán encerrada entre llaves y vienen asociadas bueno pues está a esta moda de URL vale de reescritura de URL que tenemos desde 1 años hacia Castro y es que bueno en lugar de pasar aquí que además ese algo más verbos o pedidos interrogante cliente y de igual al valor del cliente pues lo pasamos directamente aquí y a lo mejor si queremos los pedidos del cliente siete pues es la ruta barra pedidos barrasiete no los valores pueden estar al final de la ruta o en medio de una ruta no sé que hiciéramos los artículos de un determinado pedido pues podríamos plantear un controlador con una ruta sino pedido barra pedido y de mal ejemplo 7 para artículos vale pathvariable funciona de forma similar a Rico es para vale de manera que si queremos con el controlador de saludo que saludé un determinado nombre no podríamos hacer vale y sería menos vergonzoso que en el caso anterior recordad que en este caso no podemos poner valores por defecto porque bueno sería en el fondo el que planteamos otra ruta totalmente distinta que posiblemente necesitará otro por separado siempre da que podríamos añadir más ruta aquí dentro vale ya veremos en alguno de los ejemplos cómo se hace para que un mismo método del controlador pueda mapear más de una vale sería la manera de dar un comportamiento por defecto pero como tal como lo teníamos en Rico es para no lo hay podemos vernos aquí directamente a saludo y tener buenos días queremos saludar a una persona en particular teníamos que inyectar el valor con arroba path variable y aquí lo tendríamos con esta notación y bueno podríamos añadir el saludo lo podemos concatenar directamente aquí sea hola vale más el propio leo hemos pasado lo de volveríamos a saludo vamos a revisar no hemos cambiado nada en la plantilla no lo vamos a quedar directamente aquí vale 
+
+
+```java
+@Controller
+public class MainController {
+	
+   ...
+	
+   @GetMapping("/saludo/{name}")
+   public String saludo(@PathVariable String name, Model model) {
+      model.addAttribute("saludo", "Hola " + name);
+      return "saludo";
+   }
+
+}
+```
+
+
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+volvemos a ejecutar saludo tendríamos un error 404 porque esta ruta realmente como tal sola no se encuentra mareada 
+
+http://localhost:9000/saludo
+
+![142-03-08](images/142-03-08.png)
+
+y si ponemos aquí barra Luismi en este caso no estaría haciendo el saludo a nosotros 
+
+![142-03-09](images/142-03-09.png)
+
+ya digo yo más que para cadena de caracteres que también se utiliza veréis como en los ejemplos lo utilizamos con número asociado a los Ibex vale para que podamos ir rescatando editando o accediendo a un determinado elemento 
+
+
+como siempre ya he dicho que me estás lecciones centrales vamos a tener algo para que podáis practicar por vuestra cuenta en este caso propongo que modifique y el controlador welcome vale para que reciban lugar de un parámetro en la parámetros en lugar de recibir un hombre puede recibir un fernet y un Lazne aquí os dejo un ejemplo de lo que sería la ruta para que para que podáis hacer vosotros al Mateo ya veréis como podéis ir mapeando cada uno de los elementos que está en la query a través de buenos días notaciones rico estarán en variables diferente podríais capturar los dos valores añadirlo al modelo pasarlo hacia la plantilla y hacer un saludo con nombre y apellido por separadas vale también podría hacer lo mismo pero con pathvariable para que comprobéis que bueno un buen pasando dos variables a través del PAN vale pues también funcionaria incluso lo podéis hacer con la misma plantilla hasta que la recogida de parámetros en la próxima elección vamos a hablar de cómo incluir elemento estático en nuestro proyecto
+
+
 # 17 Recursos estáticos 10:33 
 
 [PDF Contenido_estático.pdf](pdfs/15._Contenido_estático.pdf)
@@ -843,6 +873,93 @@ No existe.
 No existe.
 
 ## Transcripción
+
+Hola a todos vamos a continuar con el bloque de String en bici hablando sobre contenido estático y es que cualquier proyecto web va incluirlo por contenido estático entendemos al contenido de fichero html todo el código HTML imágenes imágenes que que puede incluir ya nuestra plantilla el código CSS destino otro tipo de hojas de estilo JavaScript fichero Pinario etcétera podremos decir casi de esta manera que es todo aquello que no es propiamente pues nuestro código fuente Java ni descriptores XML aproximadamente no bueno pues qué hacemos con el dónde lo ubicamos porque es que ahora hemos visto cómo estructurar la parte del proyecto sobre todo lo que aceptaba al código Java y hemos generado en nuestro proyecto de Spring boot con el servicio de Spring y se laisser con el mismo asistente que nos trae spring tool suite lo normal es que la estructura de ese proyecto generado incluya una ruta dentro de la carpeta SRC main resources vale llamada static y es el sitio idóneo para poder ubicarlo porque al generar el proyecto y utilizar el facebook todo aquello que esté localizada en esa carpeta a entender que es que es un recurso estático sino no interesa o bueno nuestro estilo de funcionamiento nuestra organización de código a distinta spring boot va mapear lo que encuentre tanto en la carpeta static como en la carpeta Public como en la carpeta rizos como meta in Three Souls vale va a hacer un mapeo de todo lo que se encuentre en esa carpeta en la raíz de nuestro proyecto es decir que si queremos un CSS dentro de la carpeta static vía URL decir a a través del navegador no podremos localizar bueno pues con con el la base nuestro dominio vale y justo en la raíz ahí lo tendríamos ubicado de forma que bueno puede spring nos sirve el contenido estático cuando se cuando me refiero a servir me refiero que no nos lo dan no nos sirve el contenido estático de una manera francamente es sencilla vale para comprobarlo vamos a añadir algo de código a nuestra aplicación vamos a copiar y pegar el proyecto de el proyecto anterior vale lo vamos a copiar lo vamos a pegar no vamos a llamar
+
+### :computer: `142-04-ContenidoEstatico`
+#### Ejemplo de uso de contenido estático
+
+![142-04-00](images/142-04-00.png)
+
+Vale cambiamos para que no haya problema cerrar íbamos añadirle algún elemento cómo podemos comprobar la carpeta static está vacía no bueno pues vamos a añadir por ejemplo una imagen vale dentro de la carpeta static para poder comprobar cómo cómo spring nos sirve ese contenido de una manera sencilla para ello vamos ayer no vale a por ejemplo la cualquier imagen que tengáis de cualquier imagen que tengáis en vuestro ordenador valdrá novio voy a descargarme la imagen de la NASA (https://apod.nasa.gov/apod/astropix.html) del día de hoy vale que bueno pues normalmente pues suelen poner alguna imagen de algún planeta o alguna fotografía espacial vale y esta misma la vamos a almacenar vale en el escritorio cómo Mazda la guardamos ahí mismo vale directamente la podríamos copiar vale desde el escritorio yo la tengo por aquí la podemos copiar vale y ahora estamos nuestro proyecto aquí mismo lo podremos abrir vale aquí no atiende y como como la lesión anterior y si ponemos por aquí el nombre de la imagen podemos ver como como nos está sirviendo este recurso 
+
+
+`http://localhost:9000/nasa-pod.jpg`
+
+![142-04-01](images/142-04-01.png)
+
+bueno esto como podemos comprobar pues funciona con con sencillez no también podríamos comprobarlo añadiendo algún fichero estático vale de html dentro de la propia carpeta static y podríamos comprobar como como también lo sirve podemos crear aquí un nuevo pero HTML lo vamos a llamar ml le vamos a copiar el código de de alguna plantilla que hemos usado anteriormente vale quitando alguna cosa
+
+![142-04-02](images/142-04-02.png)
+![142-04-03](images/142-04-03.png)
+![142-04-04](images/142-04-04.png)
+
+`static\index.html`
+
+```html
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Bootstrap 101 Template</title>
+<!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+   <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+   <h1>Openwebinars nos trae la imagen del día de la NASA</h1>
+   <img src="/nasa-pod.jpg" width="70%" />
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+```
+
+
+![142-04-05](images/142-04-05.png)
+
+
+, tenemos aquí a la imagen de como al recargar tenemos aquí a la imagen del día de la NASA el título y todo todo este contenido HTML estático que está haciendo el coche está haciendo servidor fácilmente también podemos organizar el contenido en carpeta y crear aquí una nueva carpeta new folder por ejemplo para para ubicar aquí todos los todas las hojas de estilo CSS no y dentro podríamos crear confitar CCC vale no podríamos llamar FCF y podríamos cambiar en plan todo el cuerpo el color de la fuente fuese rojo la familia de Cifuentes vale tipografía sea por ejemplo área San Félix vale de todas maneras como por debajo está utilizando boostrap ya tiene una bastante parecida a podríamos cambiar quizá bueno pues y añadimos en esta index HTML el enlace adecuado vale cómo podemos comprobar ahora estamos haciendo el referente a la raíz styles.css vale 
+
+![142-04-06](images/142-04-06.png)
+![142-04-07](images/142-04-07.png)
+
+`styles.css`
+
+```css
+@charset "UTF-8";
+
+body {
+   color: red;
+   font-family: 'Times New Roman', sans-serif;
+}
+```
+
+
+relanzamos el proyecto el proyecto nos damos cuenta como cambiado la tipografía ha cambiado el color y bueno está sirviendo todo el contenido estático en el siguiente vídeo vamos a ver cómo servir un contenido estático especial como son las webcam que nos van a permitir disponer de las librerías más utilizadas por ejemplo bootstrap y jQuery a través de dependencia en mail
+
+![142-04-08](images/142-04-08.png)
+
 
 # 18 WebJars 11:33 
 
@@ -873,6 +990,138 @@ Tan solo cambiando la versión, podemos tener diferentes versiones de bootstrap,
 ```
 
 ## Transcripción
+https://www.webjars.org/
+Hola a todos vamos a continuar hablando de recursos estáticos y lo vamos a hacer hablando de las cuencas y es que vamos a comprobar cómo podemos integrar nuestro estilo de trabajo con May venga otra vez de dependencias XML y el uso de alguna de las librerías más más típicas vale que se utilizan en contexto web alguno de los recursos estéticos más utilizados y que son un quebradero de cabeza para el programador pues suelen ser boostrap very moment diferentes librería de JavaScript vale o de hojas de estilo o tema vale que bueno pues que de alguna manera tenemos varias alternativas como suelen ser la primera de todas pues descargarnos y colocarla dentro de nuestra carpeta de recursos estáticos no pero eso es la verdad es que se vuelve tedioso sobre todo de mantener y de actualizar podemos tener al igual que nos sucede con nuestras librería alguna manera de bueno pues declarar una dependencia externa vinculado una versión mediante la cual si actualizamos la versión fue automáticamente desde un servidor remoto se descargue ese nuevo código fuente y lo integran nuestro proyecto pero para ese contenido estático del que estamos hablando antes la respuesta es si vamos a poder añadir estos recursos bootstrap de query a través de Maiden mediante las fuerzas vale podemos comprobar como como tenemos por aquí la posibilidad de integrar al una muchacha de la librería más típica vale utilizando utilizando M&B la verdad es que francamente cómodo la ventaja es que bueno pues no tenemos que descargarnos nosotros este contenido estático y meterlo dentro de nuestro proyecto lo cual requeriría de una automatización dónde que no podríamos automatizar la actualización tendría que ser un proceso manual por qué no nos obliga a que utilicemos un CDN externo que bueno no suelen ser enlace que se rompa con facilidad pero si es verdad que la velocidad de descarga no tiene porqué ser acordé a la de nuestra aplicación web con lo cual bueno pues podría llegar a ser un cuello de botella por mucho ancho de banda por muy rápido que fuesen nuestros servidores y para terminar de cargar nuestra página necesitamos lo estilo o el busca por ejemplo y utilizamos un CDN que sea lento o al final nuestra página también va a salir entonces si lo integramos como dependencia ganamos la ventaja de que la velocidad será acordé y también ganamos como ventaja que bueno que la actualización va a ser sencilla la integración y actualización va a ser sencilla cómo configurar muerto bueno pues spring boot y vuelve otra vez de nuevo a al rescate y es que todas las webcast que nosotros tengamos definidas dentro de nuestro pom.xml como dependencia estarás mapeadas a la ruta barra webhard barra Monopoly la que sea boostrap la librería que sea vale y en esta ruta se estará sirviendo el contenido del fichero heart que se habrá descargado mediante mediante la dependencia Maiden vamos a comprobarlo añadiendo en lugar desde un CDN como hemos hecho en el vídeo anterior que bueno que es donde estaba vinculado ese Asia donde hacíamos referencia para para obtenerlo estilo y el Javascript de de bushcraft de Idella Bakery vamos a usar está Cuenca en concreto utilizaremos una idea podemos comprobarlo hemos visto en su en su web no que podemos
+
+
+
+Utilizar una por cada librería que vamos a añadir más una adicional está adicional nos va a permitir disfrutar de versión agnóstica eso qué significa bueno fue si nos fijamos en el código fuente que hemos definido antes hemos tenido que indicar siempre la versión concreta de Jay query me gusta o de la librería en particular que estamos utilizándolo y eso es porque bueno para poder hacer un versionado correcto para mantener distintas versiones hacia las cuales apunten los usuarios en el CDN pues se tiene que decidir la versión hacia la cual pues estamos apuntando sin embargo mediante el uso de la versión agnóstica nosotros vamos a utilizar una versión concreta pero vamos a comprobar como en nuestra ruta no vamos a tener que indicar la versión esto va a ser transparente nos va a permitir hacer transparente el cambio de versión es decir no vamos a tener que visitar todas nuestras plantillas para cambiar por ejemplo de la versión 112 la que sea de Jake weary si se llegará publicar las 1:13 no nos hará falta simplemente con que modifiquemos la versión concreta de Jay query a hacia la cual estamos apuntando en la dependencia se actualizará y no tenemos que cambiar las plantillas como decía vamos añadir estás 3 dependencia a nuestro proyecto vale de recurso estático 
+
+### :computer: `142-05-WebJars`
+#### Ejemplo de uso de WebJars
+
+![142-05-00](images/142-05-00.png)
+
+`pom.xml`
+
+```html
+...
+   <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>3.3.7-1</version>
+   </dependency>
+
+   <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
+      <version>3.3.1-1</version>
+   </dependency>
+
+   <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>webjars-locator</artifactId>
+      <version>0.34</version>
+   </dependency>
+...
+```
+
+y ahora tenemos que hacer algunos cambios para poder integrar la y es que como decía vamos a tener que hacer algunos cambios en la ruta ya que en lugar de bueno de donde esté en la versión concreta de bus trapo daycare y en el CDN que estemos utilizando o si lo tuviéramos descargado como como un contenido estático dentro de nuestro proyecto lo que vamos a hacer directamente a apuntar a al contenido que nos ofrecen la cuenta vale para ellos lo que vamos a hacer es bueno pues la plantilla que antes teníamos directamente sirviendo en un contenido estático bueno pues todo ese contenido lo vamos a integrar aquí dentro vale vamos a salvar esto lo vamos a poner por aquí arriba y este que era solamente de contenido estático nos lo vamos a traer ahora como plantilla y esta primera línea el título por aquí
+
+
+`template\index.html`
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Bootstrap 101 Template</title>
+<!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+   <h1 th:text="${'Hola ' + nombre}">Hola Mundo!</h1>
+
+<!-- 	<h1>Openwebinars nos trae la imagen del día de la NASA</h1>
+ -->
+   <img src="/nasa-pod.jpg" width="70%" />
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+```
+
+
+Esta manera pues tenemos la misma de antes vale la imagen de la NASA en lugar de que venga este saludo puede ser hay que teníamos en vídeo anteriores lo tendríamos con vuestra aquí la cuestión sería ahora actualizar las rutas como estábamos diciendo y es que en lugar de él si queremos que apunten al CDN tendríamos que limpiar esta parte de aquí de forma que quedaría así barra la librería correspondiente y en este caso boostrap tiene una parte de CSS y quedaría integrada de esa forma aquí tendríamos que añadir barra rebajar del query por el uso de la Virgen atlántica podemos eliminar el número de versión y aquí pues nos pasaría como antes podemos quitar la versión el contenido JavaScript nos damos cuenta y venimos a las dependencias neiben podemos localizar la webcam Madrid que se han descargado por aquí por ejemplo la de boostrap y podemos comprobar como aquí dentro tenemos todo el contenido vale por ejemplo este que estamos haciendo referencia aquí vale cuando tendríamos directamente aquí pero está haciendo servido en esta ruta vale con lo cual es francamente como principio lo tenemos que tener listo y ejecutamos el proyecto
+
+![142-05-03](images/142-05-03.png)
+
+`template\index.html`
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Bootstrap 101 Template</title>
+<!-- Bootstrap -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+   <h1 th:text="${'Hola ' + nombre}">Hola Mundo!</h1>
+
+<!-- 	<h1>Openwebinars nos trae la imagen del día de la NASA</h1>
+ -->
+   <img src="/nasa-pod.jpg" width="70%" />
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="/webjars/jquery/jquery.min.js"></script>
+
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+   <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
+```
+
+![142-05-01](images/142-05-01.png)
+
+Con Hola Mundo vale en nuestra nuestra plantilla que hemos creado y podemos comprobar como se ha descargado correctamente vale pues todo el contenido y recargamos por aquí o no pues todo el contenido de me gusta pibakery y lo ha hecho desde la ruta a correspondiente es decir que está sirviendo todos los ficheros y lo está haciendo desde nuestro contenido nuestro contenido local que hemos tenido a través de las dependencias
+
+![142-05-02](images/142-05-02.png)
+
+os propongo como en lecciones anteriores para practicar algo con lo que podáis trabajar con el contenido web estático y es que si tenéis ya los conocimientos suficientes de HTML5 CSS3 JavaScript podéis probar a crear un sitio web completo vale típico de pantalla de inicio quiénes somos qué hacemos página de contacto y lo podéis servir entero dentro de la carpeta static y cómo puedes comprobar cómo poder invocar el html en CSS y todo lo podéis hacer en a través de esa carpeta y de cómo sirve el contenido estático spring boot también podéis probar a proyecto anterior en las plantillas añadirle bueno pues en calzado menú Maneto de este contenido HTML dándole estilo CSS propio y guardando esos estilos en un fichero CSS que sea independiente y que tengamos dentro de la carpeta static o en algún subdirectorio del mismo hasta aquí el contenido estático en los siguientes vídeos vamos a trabajar con formularios
+
+
+
 
 # 19 Creación de formularios 20:54 
 
