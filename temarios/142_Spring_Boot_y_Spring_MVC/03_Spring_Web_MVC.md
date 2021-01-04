@@ -459,8 +459,6 @@ Hola a todos mano a la obra que vamos a empezar con la primera aplicación web d
 ![142-02-02](images/142-02-02.png)
 ![142-02-03](images/142-02-03.png)
 
-Escribir localhost 9000 y ponerle una barra signifiquen lo mismo de hecho si nosotros se la ponemos posiblemente el navegador la limpie qué es lo que ha sucedido por aquí veamos no bueno por aquí vale vemos que tenemos la clase pollo anotada con arroba controles 10 la manera que tenemos de definir que eso es un controlador y además es un proyecto web pues será un controlador web la notación que va a indicar que este método se invoca cuando se produce una petición que las peticiones que se producen cuando escribimos en el navegador una dirección URL de un recurso suelen ser que vale siempre lo que viene a continuación entre paréntesis es la ruta que está escuchando que en este caso sería la ruta raíz con lo cual cuando se recibe una petición que a esa ruta spring va invocar directamente cemento el nombre del método como decía puede ser cualquiera y no tiene porqué recibir parámetro aunque veremos que será conveniente en la mayoría de los contextos por último y por simplificar veremos que el método devuelve un stream que va a hacer la ruta de la plantilla dentro de la carpeta configurada qué es la carpeta temple sin la extensión sin el sufijo HTML Como habéis comprobado el nombre del fichero era index HTML bueno nosotros hemos puesto solamente index aquí para poder atenderlo y ahora nosotros quisiéramos enviar algún tipo de dato a la vista lo haríamos a través de la clase módem la clase Model es un map que nos permite guardar estructuras clave-valor y con la cual nosotros vamos a poder pasarle al contexto de la vista una serie de objeto identificado vale aquí tenemos la estructura del código que vamos a hacer nosotros si nos venimos aquí podemos ver cómo podemos pasarle en nuestro controlador voy a comentar este porque lo voy a escribir de nuevo para que lo veáis bueno podemos reutilizar este mismo en esta misma ruta welcome ballet podríamos incluir aquí el objeto model vale como podéis comprobar este model es propio spring y bueno pues tiene una serie de métodos adecuados vale tiene una serie de métodos adecuados para que nosotros podamos añadir un atributo con un nombre vamos a mandar un mensaje tuyo valor sea fue
-
 #### Cambiar el Puerto
 
 ```txt
@@ -512,26 +510,87 @@ Para que sea una plantilla Thymeleaf hay que añadir `xlmns:th="http://www.thyme
 
 ![142-02-08](images/142-02-08.png)
 
-AQUIIIIIIIII
+Escribir localhost 9000 y ponerle una barra signifiquen lo mismo de hecho si nosotros se la ponemos posiblemente el navegador la limpie qué es lo que ha sucedido por aquí veamos no bueno por aquí vale vemos que tenemos la clase pollo anotada con arroba controles 10 la manera que tenemos de definir que eso es un controlador y además es un proyecto web pues será un controlador web la notación que va a indicar que este método se invoca cuando se produce una petición que las peticiones que se producen cuando escribimos en el navegador una dirección URL de un recurso suelen ser que vale siempre lo que viene a continuación entre paréntesis es la ruta que está escuchando que en este caso sería la ruta raíz con lo cual cuando se recibe una petición que a esa ruta spring va invocar directamente cemento el nombre del método como decía puede ser cualquiera y no tiene porqué recibir parámetro aunque veremos que será conveniente en la mayoría de los contextos por último y por simplificar veremos que el método devuelve un stream que va a hacer la ruta de la plantilla dentro de la carpeta configurada qué es la carpeta temple sin la extensión sin el sufijo HTML Como habéis comprobado el nombre del fichero era index HTML bueno nosotros hemos puesto solamente index aquí para poder atenderlo y ahora nosotros quisiéramos enviar algún tipo de dato a la vista lo haríamos a través de la clase módem la clase Model es un map que nos permite guardar estructuras clave-valor y con la cual nosotros vamos a poder pasarle al contexto de la vista una serie de objeto identificado vale aquí tenemos la estructura del código que vamos a hacer nosotros si nos venimos aquí podemos ver cómo podemos pasarle en nuestro controlador voy a comentar este porque lo voy a escribir de nuevo para que lo veáis bueno podemos reutilizar este mismo en esta misma ruta welcome ballet podríamos incluir aquí el objeto model vale como podéis comprobar este model es propio spring y bueno pues tiene una serie de métodos adecuados vale tiene una serie de métodos adecuados para que nosotros podamos añadir un atributo con un nombre vamos a mandar un mensaje tuyo valor sea fue
+
+#### Cambios en el Controlador para Enviar Datos a la Vista
 
 ```java
+@Controller
+public class MainController {
+	
+   @GetMapping("/")
+   public String welcome(Model model) {
+      model.addAttribute("mensaje", "¡Hola a todos los alumnos de OpenWebinars!");
+   }
 
+}
 ```
+
+#### Cambios en la Vista para Recibir Datos desde el Controlador
+
+```html
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1 th:text="${mensaje}">Hola Mundo!!!</h1>
+</body>
+</html>
+```
+
+#### Ejecutar la Aplicación
+
+![142-02-09](images/142-02-09.png)
+
+
+Vale y si nos venimos a nuestro navegador si refrescamos vemos que el mensaje ha cambiado si nosotros cambiáramos este mensaje también estaríamos cambiando lo que va a recibir aquí en la plantilla como podéis comprobar francamente estoy bastante potente ya digo que este móvil es el objeto que podemos utilizar si bien también tenemos otra clase modelmap vale que nos aporta Model es un interfaz model Maps una clase que nos aporta la llamada encadenada métodos podríamos llamar simplemente a y después otra vez a en un estilo que suele ser muy habitual últimamente y podríamos utilizar indistintamente las dos ya también veremos y usaremos la anotación arroba modelattribute que nos permite definir un método entre otros elementos un método que devuelva un objeto y guardar este objeto en el modelo de un controlador para que lo podamos usar siempre lo haremos sobre todo en el proyecto de ejemplo cómo posible argumentos que hemos visto que podía recibir el método del controlador teníamos no solamente modelo modelmap y no modelattribute el controlador también puede recoger una clase que esté anotada con Rico es body y así podremos recoger el cuerpo de la petición Thomann bajo nivel nos permitiría acceder a a la entidad HTTP de la petición con HTTP entity y como respuesta vale nosotros usaremos siempre un string o mejor dicho casi siempre porque es lo más usual últimamente en la última versiones de Spring y en el código de ejemplo que encontré de los últimos años ya que a través del Bio resolver que nosotros configuramos automáticamente con Spring boot y añadiendo same live pues es más sencillo que devolvamos el nombre de la plantilla y el resolver pues encargue de resolver es el nombre con un recurso en particular que vaya a utilizar si bien bueno pues hay otro esquemas de trabajo cómo cómo podemos ver otra manera sería devolver un responsebody y cualquier tipo de dato esto se suele utilizar en otros contextos sobre todo en el caso de las APIs donde el valor se convierte y el de vuelta en el cuerpo de la respuesta vale se convierte a través del conversor que esté configurado también podemos devolver una entera completa devolver un modelo envío vale donde se devuelve el modelo y David en un solo objeto que en la manera que se venía de trabajar antes y que podía encontrar también en la literatura o en ejemplos que sean más antiguos hasta ahora hemos hecho un controlador que tenía un solo método podemos hacer un controlador que tengan más de un método sin la única restricción que vamos a tener es que escuchen ruta diferente y que además no se llama igual como podría tener una restricción de cualquier clase imaginaos que tenemos una plantilla saludo igual que la plantilla que tenemos ahora que esa plantilla saludo espera un mensaje de saludo y que se saludo que habrá dicho antes bueno que como el que hemos estante pues puede hacer seguro que has visto otras plataformas con miles de curso pero no tengo evinar vale pues te ofrecemos otro elemento vamos a ver cómo podríamos crearlo nos vendríamos a nuestros main controller y tendremos crear bueno fue otro método que hemos visto que íbamos a llamar saludo vale anotado con getmapping
+
+#### Modificar el Controlador
 
 ```java
+@Controller
+public class MainController {
+	
+   @GetMapping("/")
+   public String welcome(Model model) {
+      model.addAttribute("mensaje", "¡Hola a todos los alumnos de OpenWebinars!");
+      return "index";
+   }
+	
+   @GetMapping("/saludo")
+   public String saludo(Model model) {
+      model.addAttribute("saludo", "Seguro que has visto otras plataformas con miles de cursos, pero en OpenWebinars nos centramos en IT. Como profesional tecnológico debes estar al día en las tecnologías más demandadas y OpenWebinars es la solución.");
+      return "saludo";
+   }
 
+}
 ```
 
-```java
+#### Añadir Vista `saludo.html`
 
+```html
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Saludo</title>
+</head>
+<body>
+   <h1 th:text="${saludo}">Hola Mundo!!!</h1>
+</body>
+</html>
 ```
 
-```java
+#### Ejecutar la Aplicación
 
-```
+![142-02-10](images/142-02-10.png)
+![142-02-11](images/142-02-11.png)
 
 
-
+Lanzada tendríamos por aquí que sigue devolviendo no están en la ruta raíz y en saludo vale lo vamos a quitar algo de eso o lo podríamos poner al 100% seguro que has visto otras plataformas con miles de cursos pero no tengo evina nos enteramos emite como profesional tecnológico de ver estar al día en las tecnologías más demandadas yo tengo vida en la solución sería un mensaje que podríamos incluir de saludo en nuestra aplicación como podemos comprobar hemos podido tener en un solo controlador dos métodos diferentes que atienden a dos rutas distintas y que bueno fue terminan renderizando en en dos plantillas diferentes vale con lo cual estoy francamente cómodo en la mayoría de las lesiones que veremos de ahora en adelante os pondré alguna pequeña práctica que en principio no tendréis resuelta y que servirá como acicate vale como reto para que vosotros podáis practicar pasa aplicaron la primera que se está que tenemos aquí imagino que lo encarga en una web que podríamos llamar clásica la web clásica son aquellas que los pequeños negocios con el bueno el boom de las conexiones Internet empezaron a solicitar con el devenir del siglo 21 final del siglo 20 de venir del siglo 21 y en torno al año 2002 mil algo había muchos pequeños negocios que se pirran por poder tener presencia en Internet no esas web era muy sencilla y solían incluir una portada dónde se pone información sobre la organización vale lo que podríamos llamar el quiénes somos otro apartado con el que hacemos o que vendemos y la información de contacto con donde estamos e información de contacto pues yo ánimo a que crees un nuevo proyecto añadiendo los starters de Wendy de finding que creéis un controlador con tres métodos para que atienda la ruta raíz que y contacto que creéis tres plantillas vale de qué y contacto y que podáis pasar el contenido de esas plantillas a través de un objeto model vale podéis recurrir si queréis por ejemplo algún tipo de plantilla ya prevenida dvisual bonita que haya por ahí y te la tarde encajarlo vale si bien o aviso de que si tiene algunos recursos javascript css a lo mejor tenía alguna pequeña dificultad al principio vale si no puede ser algo normal algo normal perdón pero que podáis encajar un controlador con tres métodos tres plantillas distinta y os podéis pelear un poco os recuerdo que para pasar los datos ala vista tendríamos que tener controlado easy y mediante atribut iríamos añadir elemento a nuestra plantilla hasta aquí el capítulo de los controladores en los siguientes capítulos empecemos trabajando con vista y mejorando nuestros controladores para que sea más potente
 
 # 14 Vistas 14:10 
 
@@ -564,6 +623,31 @@ public String nuevoEmpleadoSubmit(@ModelAttribute("empleadoForm") Empleado nuevo
 ```
 
 ## Transcripción
+
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
 
 # 15 @RequestParam 12:42 
 
