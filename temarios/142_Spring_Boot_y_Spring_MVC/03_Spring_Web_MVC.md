@@ -3048,6 +3048,76 @@ Aunque lo hemos utilizado en el proyecto de ejemplo, el conocimiento en profundi
 
 ## Transcripción
 
+### :computer: `142-10-Seguridad`
+#### Ejemplo de integración de Spring Security
+
+Vamos a partir del proyecto base que tiene la siguiente estructura:
+
+![142-10-01](images/142-10-01.png)
+
+#### Añadir Dependencias de Spring-Security
+
+```html
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+
+#### Paso 1: Configuración de la Seguridad
+
+![142-10-02](images/142-10-02.png)
+
+![142-10-03](images/142-10-03.png)
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+   @Override
+   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+      auth
+         .inMemoryAuthentication()
+         .passwordEncoder(NoOpPasswordEncoder.getInstance())
+         .withUser("admin")
+         .password("admin")
+         .roles("ADMIN");	
+   }
+}
+```
+
+
+#### Ejecutar la Aplicación
+
+![142-10-04](images/142-10-04.png)
+![142-10-05](images/142-10-05.png)
+![142-10-06](images/142-10-06.png)
+![142-10-07](images/142-10-07.png)
+![142-10-08](images/142-10-08.png)
+
+#### Paso 
+
+![142-10-09](images/142-10-09.png)
+
+```java
+package com.openwebinars.spring.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class MvcConfig implements WebMvcConfigurer {
+
+   @Override
+   public void addViewControllers(ViewControllerRegistry registry) {
+      registry.addViewController("/login");
+   }	
+}
+```
+
 # 26 Implementación del login con Spring Security 13:25 
 
 ## Resumen Profesor
@@ -3055,6 +3125,143 @@ Aunque lo hemos utilizado en el proyecto de ejemplo, el conocimiento en profundi
 No existe.
 
 ## Transcripción
+
+#### Paso 4
+
+![142-10-10](images/142-10-10.png)
+![142-10-11](images/142-10-11.png)
+
+
+```css
+@charset "UTF-8";
+
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+```
+
+![142-10-12](images/142-10-12.png)
+![142-10-13](images/142-10-13.png)
+
+```java
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Formulario de login</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="/css/signin.css" rel="stylesheet">
+
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+	<div class="container">
+
+		<form class="form-signin" th:action="@{/login}" method="post">
+			<h2 class="form-signin-heading">Por favor, introduzca sus datos</h2>
+			<label for="username" class="sr-only">Username</label> <input
+				type="text" id="username" name="username" class="form-control"
+				placeholder="Username" required autofocus> <label
+				for="password" class="sr-only">Password</label> <input
+				type="password" name="password"  id="password" class="form-control"
+				placeholder="Password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+				in</button>
+		</form>
+
+	</div>
+	<!-- /container -->
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+```
+
+#### Paso 5: Autorizar Peticiones
+
+AQUIIIIIII
+
+En la Clase de seguridad `SecurityConfig` añadimos el siguiente método:
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+   http
+			.authorizeRequests()
+				.antMatchers("/webjars/**", "/css/**").permitAll()
+				.anyRequest().authenticated()
+				.and()
+			.formLogin()
+				.loginPage("/login")
+				.permitAll();
+				
+	}
+```
+
+```java
+```
+
+```java
+```
 
 # 27 Manejo de sesiones con Spring Session 6:43 
 
