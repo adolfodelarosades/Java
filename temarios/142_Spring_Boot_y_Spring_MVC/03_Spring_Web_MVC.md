@@ -2460,22 +2460,9 @@ No existe.
 
 ## Transcripción
 
-```java
+Hola a todos vamos a continuar con la subida de ficheros ya hemos hecho el código que nos permitía llevar el fichero al servidor pero ahora tenemos que ver qué hacemos con el cómo intentar plantear un servicio de almacenamiento en un proyecto de ejemplo que nos proporciona stream vale y esperamos en esta guía podemos comprobar donde bueno se nos plantean cómo crear un servicio de almacenamiento para poder recoger nuestro fichero almacenarlo en algún lugar y poder después servirnos vale tomaremos este proyecto como ejemplo la idea es crear una interfaz es decir un servicio de almacenamiento que sea tanda y en este caso concreto haremos una implementación en el propio servidor dónde está desplegada la aplicación tuneamos un pelín la interfaz que viene en el ejemplo vale en el proyecto queremos al final sí sí lo tomaremos exactamente igual pero en este caso nos viene bien y hacemos algún pequeño cambio con respecto al del ejemplo y este interfaz pues tendrá una serie de métodos que vamos a ir desgranando la implementación de esta interfaz viene a través de la clase File System storage service vale que nos va a permitir implementar este servicio de almacenamiento en el sistema de ficheros que ya digo que sería una alternativa vayamos viendo los métodos el método Store como hemos visto antes recibe todo el multiparte y un long será el fichero el avatar y el líder del nuevo empleado vamos a suponer eso que estamos subiendo el avatar Mané y lo que haremos será modificar el nombre original del fichero para almacenarlo y le pondremos como nombre Eli ve con la extensión que tenga PNG JPG etcétera por ejemplo si es el empleado 5 pues 5 puntos Meneses o cuatro puntos JPG etcétera el método low lo que nos permitirá será obtener la ruta de un fichero desde su nombre que como podremos comprobar pues la implementación es sencilla lo único que hace es tomar una ruta base vale concatenar la con el nombre del fichero y ya está en otro contexto quizá fuese algo más complejo el método low as reasonably recibe el nombre de un fichero busca el fichero y lo devuelve como la instancia de Guíxols este lo veremos con mayor detenimiento más adelante un revisor un recurso será un envoltorio conveniente para para un fichero y será el que este método el que nos abstraiga entre cómo servimos el fichero y dónde está almacenado otros métodos como son y León nos van a permitir inicializar o eliminar todo el sistema de fichero cosa que nos vendrá muy bien a la hora de trabajar con el ejemplo esta clase File System storage service utiliza algunas clases más una alguna clase de error vale excepciones de configuración y bueno necesitará también ser invocada justo al lanzar el proyecto no con lo cual tendremos que crear también un commandlinerunner vamos a ir viéndolo poco a poco las clases de error grave excepción y straight file not found exception son dos excepciones propias que nos van a permitir gestionar el error de no encontrar un fichero odt un error general en este sistema de almacenamiento decimos que necesitábamos también algo de configuración y es que el valor de la ruta raíz vale lo vamos a tener configurado a través de un properties pero ese property que lo podríamos haber puesto directamente en alguno de los ficheros de Property que tenemos pues lo vamos a envolver mediante una clase que viene anotada con arroba configuration property vale
 
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
+Que nos va a permitir inyectarlo a través de auto White y no solamente con arroba valió y qué bueno pues nos permite algunas ventajas como por ejemplo el hecho de que algún valor de properties se ha validado con la técnica del Bean Validation que veíamos en vídeo anteriores no en lugar de que si lo hiciéramos con arroba valium pues no podríamos por ejemplo validarlo esta es la manera en la que no puede el personal de Spring pues no ha hecho el ejemplo la clase estoy protegerte y por último como decía a la hora de invocar el lanzamiento del proyecto necesitamos inicializar nuestro servicio y sería bueno que lo limpiaramos de ficheros puesto que vamos a comenzar con una nueva ejecución en nuestro caso ejecución de prueba no pues tendríamos que invocar esos dos lo haríamos a través de un command line crack así vamos a implementar el servicio de almacenamiento que lo haremos dentro de nuestro sistema de ficheros como estábamos diciendo y bueno lo vamos a hacer a través de una interfaz que nos permitiría en un futuro implementar este almacenamiento en otro lugar que no fuese nuestro sistema de fichero o podría ser pues una nube de Amazon en otro sistema externo en un grid FS en otro lugar que nos permitirá que nos permitirá integrarlo en servidor externo la integración con nuestra aplicación directamente la veremos en el siguiente vídeo
 
 # 24 Implementación de la subida de ficheros en nuestro proyecto 22:13 
 
@@ -2487,13 +2474,309 @@ No existe.
 
 ## Transcripción
 
-```java
+Hola a todos vamos a continuar con la subida de Cicero y en este caso vamos a ver cómo hacer la integración del ejemplo que veíamos antes de freír en nuestro proyecto lo primero es decir que bueno pues que hemos ido integrando ese código que teníamos del ejemplo de Spring dentro de nuestro proyecto vale vete copiando y pegando esas clases veíamos como como teníamos la interfaz vale del servicio de almacenamiento métodos 
 
+`StorageService`
+
+```java
+package com.openwebinars.spring.upload.storage;
+
+import java.nio.file.Path;
+import java.util.stream.Stream;
+
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
+
+/**
+ * Este interfaz nos permite definir una abstracción de lo que debería
+ * ser un almacén secundario de información, de forma que podamos usarlo
+ * en un controlador.
+ * 
+ * De esta forma, vamos a poder utilizar un almacen que acceda a nuestro 
+ * sistema de ficheros, o también podríamos implementar otro que estuviera
+ * en un sistema remoto, almacenar los ficheros en un sistema GridFS, ...
+ * 
+ * 
+ * @author Equipo de desarrollo de Spring
+ *
+ */
+public interface StorageService {
+
+   void init();
+   String store(MultipartFile file, long id);
+   Stream<Path> loadAll();
+   Path load(String filename);
+   Resource loadAsResource(String filename);
+   void deleteAll();
+
+}
 ```
 
-```java
 
+
+está interfaz que viene implementada por esta clase vale que tiene bueno pues una raíz la localización raíz de todo nuestro de todos nuestros ficheros como se auto inyecta la clase de properties 
+
+```java
+package com.openwebinars.spring.upload.storage;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.stream.Stream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+
+/**
+ * Implementación de un {@link StorageService} que almacena
+ * los ficheros subidos dentro del servidor donde se ha desplegado
+ * la apliacación.
+ * 
+ * ESTO SE REALIZA ASÍ PARA NO HACER MÁS COMPLEJO EL EJEMPLO.
+ * EN UNA APLICACIÓN EN PRODUCCIÓN POSIBLEMENTE SE UTILICE
+ * UN ALMACÉN REMOTO.
+ * 
+ * 
+ * @author Equipo de desarrollo de Spring
+ *
+ */
+@Service
+public class FileSystemStorageService implements StorageService{
+
+   // Directorio raiz de nuestro almacén de ficheros 
+   private final Path rootLocation;
+	
+   @Autowired
+   public FileSystemStorageService(StorageProperties properties) {
+      this.rootLocation = Paths.get(properties.getLocation());
+   }
+
+   /**
+    * Método que almacena un fichero en el almacenamiento secundario
+    * desde un objeto de tipo {@link org.springframework.web.multipart#MultipartFile} MultipartFile
+    * 
+    * Modificamos el original del ejemplo de Spring para cambiar el nombre
+    * del fichero a almacenar. Como lo asociamos al Empleado que se ha
+    * dado de alta, usaremos el ID de empleado como nombre de fichero.
+    * 
+    */
+   @Override
+   public String store(MultipartFile file, long id) {
+      String filename = StringUtils.cleanPath(file.getOriginalFilename());
+      String extension = StringUtils.getFilenameExtension(filename);
+      String storedFilename = Long.toString(id) + "." + extension;
+      try {
+         if (file.isEmpty()) {
+            throw new StorageException("Failed to store empty file " + filename);
+         }
+         if (filename.contains("..")) {
+            // This is a security check
+            throw new StorageException(
+               "Cannot store file with relative path outside current directory "
+               + filename);
+         }
+         try (InputStream inputStream = file.getInputStream()) {
+            Files.copy(inputStream, this.rootLocation.resolve(storedFilename),
+            StandardCopyOption.REPLACE_EXISTING);
+            return storedFilename;
+         }
+      }
+      catch (IOException e) {
+         throw new StorageException("Failed to store file " + filename, e);
+      }
+        
+    }
+
+   /**
+    * Método que devuelve la ruta de todos los ficheros que hay
+    * en el almacenamiento secundario del proyecto.
+    */
+   @Override
+   public Stream<Path> loadAll() {
+      try {
+         return Files.walk(this.rootLocation, 1)
+               .filter(path -> !path.equals(this.rootLocation))
+              .map(this.rootLocation::relativize);
+      }
+      catch (IOException e) {
+         throw new StorageException("Failed to read stored files", e);
+      }
+
+   }
+
+   /**
+    * Método que es capaz de cargar un fichero a partir de su nombre
+    * Devuelve un objeto de tipo Path
+    */
+   @Override
+   public Path load(String filename) {
+      return rootLocation.resolve(filename);
+   }
+
+    
+   /**
+    * Método que es capaz de cargar un fichero a partir de su nombre
+    * Devuelve un objeto de tipo Resource
+    */
+   @Override
+   public Resource loadAsResource(String filename) {
+      try {
+         Path file = load(filename);
+         Resource resource = new UrlResource(file.toUri());
+         if (resource.exists() || resource.isReadable()) {
+            return resource;
+         }
+         else {
+            throw new StorageFileNotFoundException(
+                        "Could not read file: " + filename);
+
+         }
+      }
+      catch (MalformedURLException e) {
+         throw new StorageFileNotFoundException("Could not read file: " + filename, e);
+      }
+   }
+
+   /**
+    * Método que elimina todos los ficheros del almacenamiento
+    * secundario del proyecto.
+    */
+   @Override
+   public void deleteAll() {
+      FileSystemUtils.deleteRecursively(rootLocation.toFile());
+   }
+
+   /**
+    * Método que inicializa el almacenamiento secundario del proyecto
+    */
+   @Override
+   public void init() {
+      try {
+         Files.createDirectories(rootLocation);
+      }
+      catch (IOException e) {
+         throw new StorageException("Could not initialize storage", e);
+      }
+   }
+
+}
 ```
+
+
+vale creíamos que esto era ese envoltorio conveniente para para una property o varios properties de manera que la podríamos gestionar desde una clase con getter setter aplicar la validación de bean vale viene directamente inicializada aquí para poder utilizarlo necesita la anotación configuration properties con este prefijo para que después podamos hacer referencia a él 
+
+```java
+package com.openwebinars.spring.upload.storage;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties(prefix="storage")
+public class StorageProperties {
+
+   private String location = "upload-dir";
+   
+   public String getLocation() {
+      return location;
+   }
+
+   public void setLocation(String location) {
+      this.location = location;
+   }
+
+}
+```
+
+
+y también que una clase anotada con arroba configura y son como ya teníamos una tuviera esta anotación de nable configuration properties haciendo referencia a esta clase de aquí 
+
+`MyConfig`
+
+```java
+package com.openwebinars.spring.config;
+
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+import com.openwebinars.spring.upload.storage.StorageProperties;
+
+@Configuration
+@EnableConfigurationProperties(StorageProperties.class)
+public class MyConfig {
+	
+   @Bean
+   public MessageSource messageSource() {
+      ReloadableResourceBundleMessageSource messageSource
+	      = new ReloadableResourceBundleMessageSource();
+	     
+      messageSource.setBasename("classpath:errors");
+      messageSource.setDefaultEncoding("UTF-8");
+      return messageSource;
+   }
+	
+   @Bean
+   public LocalValidatorFactoryBean getValidator() {
+      LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+      bean.setValidationMessageSource(messageSource());
+      return bean;
+   }
+
+}
+```
+
+
+por último la clase de error vale son simple excepciones que heredan de Ronda en excepción vale y que bueno que solamente mostraran el mensaje o causa cuando corresponda 
+
+`StorageException`
+
+```java
+package com.openwebinars.spring.upload.storage;
+
+public class StorageException extends RuntimeException {
+	
+   public StorageException(String message) {
+      super(message);
+   }
+	
+   public StorageException(String message, Throwable cause) {
+      super(message, cause);
+   }
+
+}
+```
+
+`StorageFileNotFoundException`
+
+```java
+package com.openwebinars.spring.upload.storage;
+
+public class StorageFileNotFoundException extends StorageException {
+	
+   public StorageFileNotFoundException(String message) {
+      super(message);
+   }
+
+   public StorageFileNotFoundException(String message, Throwable cause) {
+      super(message, cause);
+   }
+
+}
+```
+
+ya digo esta integración esta primera parte de la integración es muy muy sencilla ahora a partir de
 
 ```java
 
