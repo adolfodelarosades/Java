@@ -2776,15 +2776,131 @@ public class StorageFileNotFoundException extends StorageException {
 }
 ```
 
-ya digo esta integración esta primera parte de la integración es muy muy sencilla ahora a partir de
+#### Modificar el Controlador
+
+ya digo esta integración esta primera parte de la integración es muy muy sencilla ahora a partir de aquí vamos a ver cómo sería la lógica de negocio de nuestra propia aplicación para ver cómo utilizamos este servicio de almacenamiento nosotros queremos que cuando se creó nuevo empleado se suba un fichero y ese fichero pues se almacena la veces almacena el empleado antes de terminar la petición vamos a necesitar la ruta del fichero vale el nombre del fichero para poder guardarlo junto al empleado cuando pasemos a la vista vale al listado de empleado añadiremos lo necesario para poder visualizar en el avatar de desempleado vale y también bueno pues nos vamos a plantear a que la subida de ficheros no sea obligatoria y por ende que pongamos algún avatar aleatorio para que el usuario que no haya subido ninguno vamos a añadir un nuevo método este método será especial también lo hemos tomado del ejemplo de String y lo hemos tuneado para adaptarlo a nuestro proyecto este se lo vamos a ir haciendo poco a poco que es el que va a ser capaz de servirnos un fichero que esté almacenado donde corresponda vale y y así poder y así poder utilizarlo vale es muy importante porque este método nos ahí la del almacenamiento concreto que tengamos y bueno nos permitirá escribir una URL o bueno utilizarla en una etiqueta IMG de html o de timely y de esa manera invocar a una imagen que puede estar almacenada en cualquier implementación ser ya estaré aquí vale que la vamos a añadir a ahora a nuestra clase y controladora por lo pronto no encontramos algunas cosas distintas y otras pruebas alguna de las nueva es la doble anotación en el metro como es que es Martín que lo conocemos y responsebody esta anotación hace que a la hora de tomar el valor de retorno del método en el controlador en lugar de como hasta ahora que devolvamos entre otras cosas un String que se utilizaba para resolver el nombre de una vista no qué hacemos aquí es que con la anotación responsebody lo que se devuelve vale si devolverá tal cual vale se devolverá un recurso completo que en este caso es de tipo response entity esto quiere decir que vamos a devolver nosotros solos vamos a montar la respuesta con su encabezado y su pueblo iPhones en City va a llevar un recurso un risorse vale como parte de su cuerpo está interfaz como decíamos ya es un envoltorio conveniente de un recurso es decir de un fichero binario de un fichero en el classpath de cualquier tipo de recurso un envoltorio conveniente para poder devolverlo en este caso la anotación getmapping podemos comprobar como también tiene algo adicional y es que tiene una expresión vale a la hora de utilizar el pathvariable para qué sirve bueno pues te indica que vamos a tener una variable en el pub que se va a llamar filename vale allí me estás engañando el nombre de la variable y al poner: vale después este punto más nos va a permitir utilizar esta expresión regular vale este punto más para que la URL puede incluir un punto porque si no bueno spring en bici no nos serviría ese URL convenientemente porque cortaría en el path variable no cortaría en el punto no entonces de esa manera configuramos diciendo que el filename va a hacer de forma lo que sea un punto y algo más para poder solicitar la extensión del fichero este find se inyecta con la anotación pathvariable en stream vale que es el que utilizamos con el servicio de almacenamiento para cargar este fichero como un recurso y aquí directamente lo devolveremos aquí lo que hacemos en montar en este escritor montamos la respuesta con responseentity podemos invocar algunos métodos estáticos vale vamos en realidad se trata de un esquema del uso de patrón Builder mediante el cual con okay lo que hacemos es construir una petición de respuesta con código de respuesta 200 ok vale una respuesta 200 y que en el cuerpo lo que llevara será este recurso este sistema esta forma hemos solicitado una imagen en base a su nombre la hemos cargado y la estamos devolviendo de forma que podremos en la ruta va Rafael barra el nombre del fichero solicitar una imagen sobre todo a la hora de visualizar la y la podremos y la podremos servir esta línea de código de aquí nos aísla de dónde está almacenado fichero de imagen en un sistema tercero en remoto traerla a través de un API REST como fuese y de esa forma estamos cargando la imagen y devolviendo se la al usuario este código lo tendríamos que añadir en nuestro controlador
+
 
 ```java
+...
+@Autowired
+private StorageService storageService;
 
+...
+@GetMapping("/files/{filename:.+}")
+@ResponseBody
+public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+   Resource file = storageService.loadAsResource(filename);
+   return ResponseEntity.ok().body(file);
+}
+...
 ```
+
+En este mismo Controlador nos faltaba implementar la lógica
 
 ```java
+...
+@PostMapping("/empleado/new/submit")
+public String nuevoEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado nuevoEmpleado,
+			BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
 
+   if (bindingResult.hasErrors()) {			
+      return "form";	
+   } else {
+      if (!file.isEmpty()) {
+         // Lógica de almacenamiento del fichero
+      }
+      servicio.add(nuevoEmpleado);
+      return "redirect:/empleado/list";
+   }
+}
+...
 ```
+
+
+Lo modificamos por:
+
+```java
+...
+@PostMapping("/empleado/new/submit")
+public String nuevoEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado nuevoEmpleado,
+			BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+
+   if (bindingResult.hasErrors()) {			
+      return "form";	
+   } else {
+      if (!file.isEmpty()) {
+         String avatar = storageService.store(file, nuevoEmpleado.getId());
+         nuevoEmpleado.setImagen(MvcUriComponentsBuilder
+	 			.fromMethodName(EmpleadoController.class,
+					"serveFile",
+					avatar).build().toUriString());
+      }
+      servicio.add(nuevoEmpleado);
+      return "redirect:/empleado/list";
+   }
+}
+...
+```
+
+Vale a través de la clase en bici uricomponentsbuilder lo que vamos a hacer es utilizar el método cer file junto con el avatar para construir una URL una URI por parte vale de forma que invocar y a a este método que tenemos aquí abajo pasándole este argumento vale este filename el que viene incluido en el avatar y montaría toda la URI completa esto es mucho más seguro que nosotros nos pongamos con las distintas partes de la URI de la URL como trozo de cadena de caracteres a montarme no de esta manera mía digo que podríamos invocar a este método que para eso lo habíamos añadido aquí para pasándole este avatar que se pueda añadir la el parámetro y que nos monte la Lauri correspondiente vale que lo que lo que explicamos en este slime 
+
+
+por último vamos añadir los cambios necesarios en la visualización del listado y aquí donde entra es que Avatar por defecto que decimos estamos añadir una nueva columna en la tabla dónde se visualiza el avatar a un tamaño conveniente por ejemplo 64 bits en vales para que sea más o menos cuadrado estará bien y en el caso de que la imagen se anula es decir que el usuario al crear pues no tenga un avatar vamos a utilizar el servicio de Avatar adorable vale para poder visualizar un avatar al tamaño que nosotros que nosotros queramos y en base a la dirección de correo del usuario por ejemplo vale si lo hacemos de esta manera con el con el email siempre nos asignará el mismo el mismo avatar 
+
+
+
+para ello nos vamos al código del listado y como decía añadiríamos una nueva columna que la vamos a poner aquí en la avatar estaría después del ibex vamos añadir la imagen el atributo shows de HTML puro y duro lo vamos a dejar vacío porque utilizamos el de Time vale y aquí la expresión que vamos a poner en un poco compleja porque lo que le vamos a decir que esto va a ser una VTC y que la URL tiene que ser o viene el valor de empleado con tu imagen vale si el valor de empleado. Imagen no es nulo agua sale de aquí avatar que estábamos viendo que estábamos viendo antes vale avatar el tamaño barra el correo y la extensión PNG F API adorable y barra avatar el tamaño 64 pixel Málaga el email punto PNG y aquí el email vale se lo tenemos que dar a través de esta presión empleado.de email Colón tamaño amanecer nos veremos aquí mismo de 64 mediante el uso del operador Elvis lo que le decimos que de timeslip que si empleado imagen tiene valor que deje empleado imagen y si no lo tiene pues que le de este valor por defecto vale que en la URL que hemos visto que nos va a generar este este avatar 
+
+```html
+...
+   <table class="table">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>Avatar</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Operaciones</th>
+         </tr>		 
+      </thead>
+      <tbody>
+         <tr th:each="empleado : ${listaEmpleados}">
+            <td th:text="${empleado.id}">ID</td>
+            <td><img src="" th:src="@{${empleado.imagen} ?: 'https://api.adorable.io/avatars/64/{email}.png'(email=${empleado.email})}" width="64px" /></td>
+            <td th:text="${empleado.nombre}">Pepe Pérez</td>
+            <td th:text="${empleado.email}">pepe.perez@openwebinars.net</td>
+            <td th:text="${empleado.telefono}">954000000</td>
+            <td><a th:href="@{/empleado/edit/{id}(id=${empleado.id})}">Editar</a></td>        		
+         </tr>
+      </tbody>
+   </table>
+...
+```
+
+#### Ejecutar la Aplicación
+
+vamos a comprobar que nuestro proyecto funciona
+
+Equipo de Mos comprobar cómo está cargando los avatares por defecto de no empleado que nosotros teníamos dado de alta por defecto y si nosotros quisiéramos añadir aquí uno nuevo 4 ponte López openwebinar aquí tenemos el campo avatar vale yo tengo por aquí uno de ejemplo que generado he encontrado por internet no podríamos enviar ni aquí podríamos comprobar esta imagen vale la tendríamos que posiblemente me haya equivocado en el aquí en el valor de la propiedad y si ahora lo lanzamos y actualizamos seguro que se ve correctamente cuando lo volvamos a añadir no porque los datos ahora mismo estamos trabajando en memoria y no sé podemos comprobar como el fichero se sube y además lo podemos visualizar 
+
+![142-09-02](images/142-09-02.png)
+![142-09-03](images/142-09-03.png)
+![142-09-04](images/142-09-04.png)
+
+
+dónde se están subiendo los ficheros pues si recordamos hemos creado la propiedad vale a través de aquí la propiedad en Street properties en un directorio llamado loudeville si nosotros refrescamos nuestro proyecto podremos comprobar que tenemos aquí ese directorio y que dentro tiene el fichero PNG con el avatar que nosotros hemos subido.
+
+![142-09-05](images/142-09-05.png)
+
+estos ficheros como decíamos a través de este código el command line Runner que se inicia se lanza justo al iniciar la aplicación pues se borran todos vale cuando cuando se lanza el almacenamiento justo antes de inicializar lo para que podamos ir probando lo de forma de forma conveniente 
+
+![142-09-06](images/142-09-06.png)
+
+y hasta aquí el ejemplo de subida de ficheros que hemos hecho a lo largo de varios vídeos 
+
+ahora como en los anteriores os dejo algo para práctica cuenta hemos hecho la implementación de la subida de ficheros solamente en a la hora de crear un nuevo empleado os ánimo a que os plantee como se podría hacer a la hora de editar la imagen un registro que ya existe un empleado que ya está lo podríamos intentar atacar desde distinta alternativa como en la ficha de edición mostrar la imagen del empleado tener un botón de borrar o simplemente mostrar la imagen que ya existe y también el campo de edición y el usuario sube una nueva imagen se machaca la anterior si no sube ninguna pues se deja la que hubiera en su en su lugar también te propongo el que puedas cambiar los tipos de Avatar vale lo avatar los avatares adorable no son los únicos que existen podría utilizar Gravatar que si no me equivoco es el que el que utiliza github vale también como como servicio de avatares y sí bueno si maneja y algo más a nivel profesional de reprogramación o podría plantear el cambiar el servicio completo de almacenamiento de ficheros en lugar de hacerlo en el sistema de ficheros del proyecto utilizar algún servicio de almacenamiento de imágenes yo propongo por ejemplo y el de ING Kurt es gratuito nos permite subir imágenes a través de su API la subida pública no requieren de autenticación tan solo que nuestra aplicación esté registrada a través de lápiz de ING curo y podría ser una buena alternativa si queréis más información sobre cómo poder implementarlo vale cómo poder usarlo el lápiz de irme Hepburn desde dejaba ahí os dejo también la URL de la documentación con esto finalizamos los vídeos de subida de ficheros en los siguientes vídeos vamos a ver cómo hacer nuestra aplicación web más segura
 
 
 # 25 Aplicación web segura con Spring Security 13:31 
