@@ -1982,17 +1982,74 @@ Todo esto lo podemos conjugar con el uso de Bootstrap para la visualización de 
 
 ## Transcripción
 
-```java
 
+Hola a todos vamos a continuar hablando de formulario y en este caso vamos a hablar de la validación nos permite realizar la validación de bean de una manera más amplia que tan solo circunscrita a los formularios y es que nos lo permite a través de a través del estándar jsr-303 que se vio actualizado con el jfr 380 para la validación de Bean lo podríamos utilizar con cualquier clan lo que pasa que nosotros lo vamos a aprovechar para hacerlo asociado a los a los objetos que recibimos desde un formulario por defecto spring boot nos permite utilizar la implementación de este estándar vale del JCR 381 proporciona Hibernate ya digo que nos va a permitir hacer la validación de nuestras clases asociadas al uso de formulario a través de anotación alguna de las anotaciones que podemos utilizar son estas de aquí irían colocadas dentro de los coman o pie que en nuestro caso fue te digo que va a ser el mismo objeto que el de modelo del Mini las más usuales suelen ser NOT NULL que no indica no fuerza que el atributo no se anuló mi iMac que nos permiten establecer valores mínimos y máximos para que sea mayor igual o menor o igual vale que en determinado valor not empty el atributo no puede estar vacío haciendo referencia cadena condiciones array etcétera email el atributo tiene que ser tiene que tener por fuerza la estructura de un inválido con 6 le indicamos que tiene que tener un tamaño indicado todas y cada una de estas anotaciones que se pueden utilizar las podéis encontrar fácilmente dentro de la documentación del estándar vale de invalidez vamos a tratar de implementarlo en nuestro proyecto y para ello el código que estábamos trabajando y ya digo serían con anotaciones colocadas sobre nuestra clase coma nadie en particular sobre nuestro modelo vamos añadir alguna no queremos que esté sea negativo vale aunque como bebo el Long son números que pueden tener números negativos bueno pues le vamos a decir que por defecto queremos que este valor se hace un valor como 00 lo vamos a permitir porque hemos comprobado que cuando creamos una nueva instancia espero lo que queremos están valores positivos después para el nombre hemos dicho que para cadena de caracteres vale vamos a solicitar que no esté vacío y para el email aunque ya él lo HTML5 y algunos navegadores con estos campos nuevos que nos proporciona este Telecinco nos permite hacer una primera validación en local vale lo vamos a forzar para si de alguna manera pues se evitará que este campo se un email vale lo haríamos de esta forma no vamos a añadir ninguno más sería y de ahora que tenemos que incluir más pues nos tendríamos que ir a nuestra clase controladora
+
+### :computer: `142-08-Formularios-Validacion`
+#### Ejemplo de creación de un formulario de edición y con validación
+
+Vamos a partir del proyecto `142-07-Formularios-de-Edicion` haciendo una copia y llamandola `142-08-Formularios-Validacion`, la estructura es la misma que teniamos en el proyecto pasado.
+
+![142-08-01](images/142-08-01.png)
+
+#### Modificar la Clase `Empleado`
+
+```java
+...
+public class Empleado {
+   
+   @Min(0)
+   private long id;
+	
+   @NotEmpty
+   private String nombre;
+	
+   @Email
+   private String email;
+	
+   private String telefono;
+   
+   ...
+```
+
+#### Modificar el Controlador
+
+Que tenemos que incluir más pues nos tendríamos que ir a nuestra clase controladora y si queremos que sea válido no tendríamos que ir al método o en este caso los métodos más vale añadiendo lo siguiente lo primero que añadiríamos sería la notación arroba pan hecho para forzar a que cuando recibamos se te ven aquí este 2013 que ser vale por otro lado vamos a añadir la recepción de un nuevo treasure planet que nos va a permitir evaluar el resultado vale de esta validación y saber si el formulario ha incluido errores o no lo ha incluido de la siguiente manera si aquí tenemos errores pues lo que vamos a hacer es volver formulario en otro caso lo que queremos es que te haga lo que veníamos haciendo antes no si no tenemos errores pues no pusiste nada y que nos lleve directamente donde corresponda lo tendríamos que añadir también en el caso de Erika tenemos errores no volvemos al formulario y en otro caso que hacemos lo que tenemos por aquí ahora 
+
+```java
+@PostMapping("/empleado/new/submit")
+public String nuevoEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado nuevoEmpleado, 
+                                  BindingResult bindingResult) {
+
+   if (bindingResult.hasErrors()) {
+      return "form";
+   } else {
+      servicio.add(nuevoEmpleado);
+      return "redirect:/empleado/list";
+   }
+
+}
 ```
 
 ```java
+@PostMapping("/empleado/edit/submit")
+public String editarEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado empleado,
+                                   BindingResult bindingResult) {
 
+   if (bindingResult.hasErrors()) {
+      return "form";
+   } else {
+      servicio.edit(empleado);
+      return "redirect:/empleado/list";
+   }
+}
 ```
+#### Modificar la Vista
 
-```java
+por último tendríamos que como no hemos dado cuenta aquí vale por ejemplo no volvemos al formulario que sucede allí bueno pues allí podemos recoger en la plantilla el hecho de que existen errores y podemos visualizar para ellos pues
 
-```
+Tiramos también un poco de Time list vale y nos iríamos a la plantilla el formulario y haríamos lo siguiente tiraremos de Time list y también algo de pusta vale boostrap nos permite tener una serie de estilo vale para mostrar errores o mensajes de error o algún tipo de alerta vamos a visualizar los siempre y cuando estés error para ello vamos a utilizar y de cada campo del formulario vamos implementar solamente en este caso y vive en Vic vale bueno pues le vamos a decir que todo este grupo vale toda esta capa en el caso de que haya un error vale se le aplique un determinado estilo qué es el estilo jazz error vale demuestra que va a indicar bueno porque de alguna manera tiene ese lo hacemos de la siguiente manera para evaluar una expresión vale y en el caso de que sea expresión sea verdadera bueno pues va añadir una nueva clase CSS a esta cama la expresiones vale hacemos uso de esta función sin manejar error en particular sobre el campo de Mané y esto nos va a permitir evaluar y de está devolución que nos han hecho al formulario si el campo iré tiene algún tipo de error y en caso de que lo tenga lo que creemos es pequeña da qué señala esta nueva clase vale y este campo tuviera error esta clase genial iría Kinoko la hubiéramos puesto nosotros literal y también vamos a querer que enseñaba este se me permitió lo copio y lo pego lo vamos a hacer aquí abajo un mensaje de texto con el error correspondiente es decir que si hay un error se visualice ese texto lo hacemos a través de una etiqueta span por ejemplo que vuelva a comprobar si hay error vale como hemos hecho aquí y si lo hay porque se span se rellené con el mensaje de error lo hacemos de la manera y hay un error vale hacemos uso de TH error vale para rescatar el error del campo y ve puede que haya más de uno vale porque en la validación nosotros hemos añadido solamente uno pero podría haber más de uno que rescate los errores de Live y estos sean los errores que aquí se visualiza vale salva y vamos a comprobar cómo funciona
+
 
 ```java
 
