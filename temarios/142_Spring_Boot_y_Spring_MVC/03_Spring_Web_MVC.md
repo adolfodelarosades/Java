@@ -1246,8 +1246,6 @@ Vale y cuando ya hemos terminado de gestionar la información recibida del formu
 ### `142-06-Formularios`
 #### Ejemplo de creación de un formulario
 
-![142-06-00](images/142-06-00.png)
-
 Partimos de una estructura básica que es la siguiente:
 
 ![142-06-01](images/142-06-01.png)
@@ -1758,13 +1756,187 @@ No existe.
 
 ## Transcripción
 
-```java
+Hola a todos vamos a continuar con los formularios y en este caso creando un formulario que nos permita evitar los datos los formularios de edición y los de creación son estructuralmente idénticos van a cambiar solamente algunas cosas principalmente como Nokia que antes crea vamos y que no llevaba ningún dato pues ahora lo crearemos teniendo datos esos datos los rescataremos desde nuestro almacén de datos dónde lo tengamos almacenados nuestro repositorio usualmente a través de un servicio y y normalmente está operación de rescate la hacemos a través de Lidl o algún atributo que nos permite identificar unívocamente a ese objeto no vamos a verlo al igual que antes a través del flujo que vamos a llevar y también visualmente cómo podéis comprobar el flujo es casi idéntico algunos cambios que tenemos escrita una petición que MAPI vale añadimos al modelo el comedor en este caso por los datos a editar los rescatamos en base a un y de ese y lo tendremos que recibir en la ruta que invoque el formulario de edición nos vamos hacia la plantilla vale nos dirigimos hacia la plantilla este como no que ya tiene datos al hacer el viernes con los campos del formulario esos campos del formulario mostraran los datos del propio formulario perdón los gatos del coma no viene en el formulario cuando ejecutemos la acción del formulario pues recogeremos al igual que antes esos datos y le tendremos que dar el tratamiento correspondiente graficamente podemos comprobar que le digo que es casi idéntico lo único que van a cambiar son las URL de los demás manejar la operación primera pulsera algo más compleja porque tenemos que de alguna manera a través de S&D de esta de ese atributo univoco rescatar el registro para poder mandarlo al formulario y y bueno la edición que en algunos contextos puede que sea estrictamente idéntica que el almacenamiento no por lo cual en ocasiones será será francamente sencillo nos permitirá utilizar mi momento vamos a partir de este proyecto de ejemplo
 
+
+### :computer: `142-07-Formularios-de-Edicion`
+#### Ejemplo de creación de un formulario de edición y con validación
+
+Partimos de este proyecto base con la siguiente estructura:
+
+![142-07-01](images/142-07-01.png)
+
+
+#### Modifar el Servicio
+
+En nuestro servicio vamos a añadir los siguientes dos métodos:
+
+Y que además tiene aquí una serie de datos inicializar no a través de bueno del manejo del ciclo de vida de Stevie vamos añadir el siguiente código como no es estrictamente propio de quien simplemente voy a dar la implementación de un método de búsqueda muy ineficiente porque no es lo interesante de aquí y un método de edición pues que se le parece se le parece mucho que nos permita rescatar vale realmente rescatar mediante una búsqueda secuencial un objeto dentro de nuestro listado y la edición mares que también va a ser esa búsqueda secuencial si lo encuentra por lo que hace eliminar el objeto de donde esté y en la posición donde estaba añadir el objeto nuevo la parte que más no ocupa y es que tenemos el código no en el queríamos una búsqueda secuencial mientras no lo hayamos encontrado y no nos hemos salido de la colección pues vamos buscando uno otro se lo encontramos paramos y sino continuamos hasta el final y le dicen que ya digo que se me parece lo único que lo que hacemos es borrarlo y en su sitio lo ponemos ineficiente y fácil de implementar en caso de que estemos editando alguno que no exista pues directamente lo añadiría
+
+```java
+...
+public Empleado findById(long id) {
+   Empleado result = null;
+   boolean encontrado = false;
+   int i = 0;
+   while (!encontrado && i < repositorio.size()) {
+      if (repositorio.get(i).getId() == id) {
+         encontrado = true;
+         result = repositorio.get(i);
+      } else {
+         i++;
+      }
+   }
+		
+   return result;
+}
+...
 ```
 
 ```java
-
+...
+public Empleado edit(Empleado e) {
+   boolean encontrado = false;
+   int i = 0;
+   while (!encontrado && i < repositorio.size()) {
+      if (repositorio.get(i).getId() == e.getId()) {
+         encontrado = true;
+         repositorio.remove(i);
+         repositorio.add(i, e);
+      } else {
+         i++;
+      }
+   }
+		
+   if (!encontrado)
+      repositorio.add(e);
+		
+   return e;
+}
+...	
 ```
+
+#### Modificar el Controlador
+
+Cambios tenemos que hacer bueno pues ahora tendríamos que añadir en el controlador los mismos métodos que tipos que teníamos antes vale pero para él el formulario de edición así que podemos copiar y pegar en este caso en vez de nuevo máster de edición y di en vez de nuevo master editar vale empleado Ford y editar empleado SAP Malet aquí como no es nuevo pues lo vamos a cambiar el nombre vamos a refactorizar instalación si no terminamos antes aquí seguimos redirigiendo al listado y aquí como decíamos antes en lugar de inyectar uno nuevo lo que hacemos es lo siguiente tendríamos que buscar el empleado Mané en Bastian y de lo vamos a rescatar de aquí variable y como hemos incrementado ante el servicio tiene un nuevo método fine by ve que recibe precisamente que lo que estamos recibiendo desde el para un empleado ese distinto de nulo quiere decir que existe dentro de nuestra colección con lo cual no podemos evitar así que añadiremos este código de aquí por la modificación de que en lugar de que aquí llamemos al constructor directamente estamos pasando está referencia del empleado que acabamos de encontrar y si no lo que hacemos es redirigirlo al formulario de creación del nuevo empleado si quiere evitar si alguien malintencionadamente trata de tocar la ruta del formulario añadiendo nivel de empleado que no existe pues directamente como tiempo lo mandamos al formulario de uno nuevo vale redirigiendo y por aquí abajo lo único que tendríamos que cambiar además estoy aquí lugar de añadir sería editar 
+
+
+```java
+@GetMapping("/empleado/edit/{id}")
+public String editarEmpleadoForm(@PathVariable long id, Model model) {
+
+   Empleado empleado = servicio.findById(id);
+   if (empleado != null) {
+      model.addAttribute("empleadoForm", empleado);
+      return "form";
+   } else {
+      return "redirect:/empleado/new";
+   }
+
+}
+```
+
+```java
+@PostMapping("/empleado/edit/submit")
+public String editarEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado empleado) {
+   servicio.edit(empleado);
+   return "redirect:/empleado/list";
+}
+```
+
+#### Modificar la Vista
+Evita los quedaría modificar el formulario aquí tendríamos dos opciones la opción fácil de implementar pero que requerirían de copiar y pegar sería tener 2 plantillas distintas una de creación y una de Edition lo cual le digo a la hora de mantener pues va a ser tedioso si en algún momento determinado queremos añadir una propiedad nueva a este registro pues tendríamos que modificar las dos y queremos cambiar algún tipo de estilo tendríamos que cambiar las dos no nos podemos calentar un poco el tarro con timely y bueno con alguna especiales por aquí por allá podremos utilizar solamente uno que es lo que vamos a hacer nos vamos hacia el formulario hacia la plantilla de formulario y lo que vamos a hacer es lo siguiente directamente vamos a quitar esto de aquí fuera ya que lo tenemos por aquí dentro el título vale estaba duplicado lo vamos a quitar y y lo que vamos a hacer cambiar y diferenciar hacia dónde queremos enviar en función de si estamos editando o de este estamos creando un nuevo enfría vale lo hacemos de la siguiente forma como vamos a saber si estamos editando un un nuevo empleado está meditando un empleado queremos crear un nuevo normal es que los nuevos empleados como el Lidl un long long con minúsculas si no se suele venir con el valor 0 pues nos iremos de eso si el valor de Lidl del empleado es cero lo que haremos será pensar que queremos crear un nuevo con lo cual se quedará como esa hora y si es distinto de cero si un número positivo en 12 / etcétera quiere decir que es un empleado que ya existe con lo cual quiere editar y ya digo que para ellos lo que hacemos aquí dentro del th acción ponemos la siguiente expresión vale empleados foro punto y de es distinto de cero quiere decir que distinto de cero lo que queremos ser evitar y en otro caso crea uno nuevo el pH o que sigue siendo el mismo esta misma expresión la podemos utilizar aquí en este uno mediante THC bueno decirle empleado pero entonces queremos que el texto sea evitar empleado y en otro caso nuevo empleado de esta forma el título también se verá modificado nos quedaría añadir un cambio más y es que hemos dicho antes que cuando editamos hay un campo univoco vale como el Live en el concepto de la base de datos se le suele llamar clave primaria este campo no debería ser susceptible de ser modificado una vez que ya lo hemos creado vale porque el que nos permite identificar de manera que tenemos que bueno pues este campo en particular el de Lidl que cenar lo de tal forma que si no fue estamos creando un nuevo empleado sea editable y si lo que estamos haciendo es editar un o sea de solo lectura vale para que se iré no de pueda cambiar para ellos lo que hacemos ser utilizando la expresión anterior vale y algún y algún truquito de timely que nos va a permitir añadirle un atributo pues le vamos a añadir que sea de solo lectura lo hacemos de la siguiente manera Th2 nos va a permitir añadirle perdón attr Apple nos va a permitir añadir un atributo vale a etiqueta de html atributos el siguiente readonly igual vale y ahora aquí volvemos a meter la expresión de antes vale empleado por punto y desde entonces pero si es distinto de cero quiere decir que va a ser de doble con lo cual quedaría como read only wala read-only en definitiva quiere decir que es de solo lectura y en otro caso si es cero lo ponemos anulo con lo cual este atributo no se añadiría vale perdón igual a no nos añade con lo cual sería evitarla para poder terminar con la edición 
+
+```html
+...
+   <div class="container">
+      <div class="row">
+         <div class="col-md-offset-2 col-md-8">
+            <form method="post" action="#" 
+                  th:action="${empleadoForm.id != 0} ? @{/empleado/edit/submit} : @{/empleado/new/submit}"
+                  th:object="${empleadoForm}">
+               <h1 th:text="${empleadoForm.id != 0} ? 'Editar empleado' : 'Nuevo empleado'">Nuevo empleado</h1>
+               <div class="form-group"
+                    th:classappend="${#fields.hasErrors('id')} ? 'has-error'">
+                  <label for="id">ID</label> <input type="text"
+                                                   class="form-control" id="id" placeholder="1"
+                                                   th:field="*{id}"
+                                                   th:attrappend="readonly=${empleadoForm.id != 0} ? 'readonly' : null">
+               </div>
+               <div class="form-group">
+                  <label for="nombre">Nombre</label> <input type="text"
+                                                   class="form-control" id="nombre" placeholder="Nombre"
+                                                   th:field="*{nombre}" />
+               </div>
+               <div class="form-group">
+                  <label for="email">Email</label> <input type="email" 
+                                                   class="form-control" id="email"
+                                                   placeholder="emple@openwebinars.net"
+                                                   th:field="*{email}" />
+               </div>
+               <div class="form-group">
+                  <label for="telefono">Teléfono</label> <input type="tel"
+                                                   class="form-control" id="telefono" 
+                                                   placeholder="954000000" 
+                                                   th:field="*{telefono}" />
+
+               </div>
+               <button type="submit" class="btn btn-default">Enviar</button>
+            </form>
+         </div>
+      </div>
+
+
+   </div>
+   <!-- /.container -->
+...
+```
+
+Para poder terminar con la edición necesitamos además de esto que hemos añadido aquí irnos al listado añadir una nueva columna en la tabla vale que la podríamos llamar operaciones o de la manera que nosotros tenemos conveniente un enlace vale que nos permita y ir a y el formulario de edita hemos visto que este enlace debe incluir el ID del empleado que crees muy lista para ello utilizamos más la expresión de tenis para clase que se dice barra empleado barra Evi nos permite incluir aquí dentro de una variable y a continuación dar los malos no en vive queremos que sea el objeto empleado vale el atributo y de de esa manera este valor de aquí vale está cenando esta variable la busca dentro del PAN y quería que tienes criado del empleado uno pues está expresión se sustituye por uno por un 2 etcétera etcétera hablamos
+
+
+```html
+...
+<div class="container">
+
+   <div class="starter-template">
+      <h1>Listado de empleados de la empresa</h1>
+   </div>  
+   <table class="table">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Operaciones</th>
+	 </tr>
+      </thead>
+      <tbody>
+         <tr th:each="empleado : ${listaEmpleados}">
+            <td th:text="${empleado.id}">ID</td>
+            <td th:text="${empleado.nombre}">Pepe Pérez</td>
+            <td th:text="${empleado.email}">pepe.perez@openwebinars.net</td>
+            <td th:text="${empleado.telefono}">954000000</td>
+            <td><a th:href="@{/empleado/edit/{id}(id=${empleado.id})}">Editar</a></td>     		
+         </tr>
+      </tbody>
+   </table>
+
+</div><!-- /.container -->
+...
+```
+
+#### Ejecutar la Aplicación
+
+Probar este campo ahora es de solo lectura amanecer estacionamos podemos ver cómo se añadido el readonly vale y si editamos podemos comprobar como se ha editado este campo volver a borrar de José borra el decir que este es el objeto que se está evitando y queremos crear un nuevo bueno pues seguimos teniendo los tendré antes en este caso el campo ya sería editable no podríamos tener aquí vale podíamos cambiar el nombre Elide vuelve a ser de solo lectura Valencia haríamos y quedarían los cambios modificado con esto terminamos los formularios de edición vamos a continuar en el siguiente vídeo haciendo la validación de campos de un formulario
+
+![142-07-02](images/142-07-02.png)
+![142-07-03](images/142-07-03.png)
+![142-07-04](images/142-07-04.png)
+![142-07-05](images/142-07-05.png)
+![142-07-06](images/142-07-06.png)
+
 
 # 21 Validación de datos 21:04 
 
@@ -1809,6 +1981,22 @@ Todo esto lo podemos conjugar con el uso de Bootstrap para la visualización de 
 * Con `<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="help-block" id="id-error">Errores</span>` añadimos, justo debajo del campo del formulario, el/los mensaje/s de error.
 
 ## Transcripción
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
 
 # 22 Subida de ficheros 8:12 
 
