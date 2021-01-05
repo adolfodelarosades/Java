@@ -826,28 +826,6 @@ public class MainController {
 }
 ```
 
-
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
-```java
-
-```
-
 volvemos a ejecutar saludo tendríamos un error 404 porque esta ruta realmente como tal sola no se encuentra mareada 
 
 http://localhost:9000/saludo
@@ -935,9 +913,7 @@ bueno esto como podemos comprobar pues funciona con con sencillez no también po
 </html>
 ```
 
-
 ![142-04-05](images/142-04-05.png)
-
 
 , tenemos aquí a la imagen de como al recargar tenemos aquí a la imagen del día de la NASA el título y todo todo este contenido HTML estático que está haciendo el coche está haciendo servidor fácilmente también podemos organizar el contenido en carpeta y crear aquí una nueva carpeta new folder por ejemplo para para ubicar aquí todos los todas las hojas de estilo CSS no y dentro podríamos crear confitar CCC vale no podríamos llamar FCF y podríamos cambiar en plan todo el cuerpo el color de la fuente fuese rojo la familia de Cifuentes vale tipografía sea por ejemplo área San Félix vale de todas maneras como por debajo está utilizando boostrap ya tiene una bastante parecida a podríamos cambiar quizá bueno pues y añadimos en esta index HTML el enlace adecuado vale cómo podemos comprobar ahora estamos haciendo el referente a la raíz styles.css vale 
 
@@ -954,7 +930,6 @@ body {
    font-family: 'Times New Roman', sans-serif;
 }
 ```
-
 
 relanzamos el proyecto el proyecto nos damos cuenta como cambiado la tipografía ha cambiado el color y bueno está sirviendo todo el contenido estático en el siguiente vídeo vamos a ver cómo servir un contenido estático especial como son las webcam que nos van a permitir disponer de las librerías más utilizadas por ejemplo bootstrap y jQuery a través de dependencia en mail
 
@@ -990,7 +965,9 @@ Tan solo cambiando la versión, podemos tener diferentes versiones de bootstrap,
 ```
 
 ## Transcripción
+
 https://www.webjars.org/
+
 Hola a todos vamos a continuar hablando de recursos estáticos y lo vamos a hacer hablando de las cuencas y es que vamos a comprobar cómo podemos integrar nuestro estilo de trabajo con May venga otra vez de dependencias XML y el uso de alguna de las librerías más más típicas vale que se utilizan en contexto web alguno de los recursos estéticos más utilizados y que son un quebradero de cabeza para el programador pues suelen ser boostrap very moment diferentes librería de JavaScript vale o de hojas de estilo o tema vale que bueno pues que de alguna manera tenemos varias alternativas como suelen ser la primera de todas pues descargarnos y colocarla dentro de nuestra carpeta de recursos estáticos no pero eso es la verdad es que se vuelve tedioso sobre todo de mantener y de actualizar podemos tener al igual que nos sucede con nuestras librería alguna manera de bueno pues declarar una dependencia externa vinculado una versión mediante la cual si actualizamos la versión fue automáticamente desde un servidor remoto se descargue ese nuevo código fuente y lo integran nuestro proyecto pero para ese contenido estático del que estamos hablando antes la respuesta es si vamos a poder añadir estos recursos bootstrap de query a través de Maiden mediante las fuerzas vale podemos comprobar como como tenemos por aquí la posibilidad de integrar al una muchacha de la librería más típica vale utilizando utilizando M&B la verdad es que francamente cómodo la ventaja es que bueno pues no tenemos que descargarnos nosotros este contenido estático y meterlo dentro de nuestro proyecto lo cual requeriría de una automatización dónde que no podríamos automatizar la actualización tendría que ser un proceso manual por qué no nos obliga a que utilicemos un CDN externo que bueno no suelen ser enlace que se rompa con facilidad pero si es verdad que la velocidad de descarga no tiene porqué ser acordé a la de nuestra aplicación web con lo cual bueno pues podría llegar a ser un cuello de botella por mucho ancho de banda por muy rápido que fuesen nuestros servidores y para terminar de cargar nuestra página necesitamos lo estilo o el busca por ejemplo y utilizamos un CDN que sea lento o al final nuestra página también va a salir entonces si lo integramos como dependencia ganamos la ventaja de que la velocidad será acordé y también ganamos como ventaja que bueno que la actualización va a ser sencilla la integración y actualización va a ser sencilla cómo configurar muerto bueno pues spring boot y vuelve otra vez de nuevo a al rescate y es que todas las webcast que nosotros tengamos definidas dentro de nuestro pom.xml como dependencia estarás mapeadas a la ruta barra webhard barra Monopoly la que sea boostrap la librería que sea vale y en esta ruta se estará sirviendo el contenido del fichero heart que se habrá descargado mediante mediante la dependencia Maiden vamos a comprobarlo añadiendo en lugar desde un CDN como hemos hecho en el vídeo anterior que bueno que es donde estaba vinculado ese Asia donde hacíamos referencia para para obtenerlo estilo y el Javascript de de bushcraft de Idella Bakery vamos a usar está Cuenca en concreto utilizaremos una idea podemos comprobarlo hemos visto en su en su web no que podemos
 
 
@@ -1027,7 +1004,6 @@ Utilizar una por cada librería que vamos a añadir más una adicional está adi
 ```
 
 y ahora tenemos que hacer algunos cambios para poder integrar la y es que como decía vamos a tener que hacer algunos cambios en la ruta ya que en lugar de bueno de donde esté en la versión concreta de bus trapo daycare y en el CDN que estemos utilizando o si lo tuviéramos descargado como como un contenido estático dentro de nuestro proyecto lo que vamos a hacer directamente a apuntar a al contenido que nos ofrecen la cuenta vale para ellos lo que vamos a hacer es bueno pues la plantilla que antes teníamos directamente sirviendo en un contenido estático bueno pues todo ese contenido lo vamos a integrar aquí dentro vale vamos a salvar esto lo vamos a poner por aquí arriba y este que era solamente de contenido estático nos lo vamos a traer ahora como plantilla y esta primera línea el título por aquí
-
 
 `template\index.html`
 
@@ -1067,7 +1043,6 @@ y ahora tenemos que hacer algunos cambios para poder integrar la y es que como d
 </body>
 </html>
 ```
-
 
 Esta manera pues tenemos la misma de antes vale la imagen de la NASA en lugar de que venga este saludo puede ser hay que teníamos en vídeo anteriores lo tendríamos con vuestra aquí la cuestión sería ahora actualizar las rutas como estábamos diciendo y es que en lugar de él si queremos que apunten al CDN tendríamos que limpiar esta parte de aquí de forma que quedaría así barra la librería correspondiente y en este caso boostrap tiene una parte de CSS y quedaría integrada de esa forma aquí tendríamos que añadir barra rebajar del query por el uso de la Virgen atlántica podemos eliminar el número de versión y aquí pues nos pasaría como antes podemos quitar la versión el contenido JavaScript nos damos cuenta y venimos a las dependencias neiben podemos localizar la webcam Madrid que se han descargado por aquí por ejemplo la de boostrap y podemos comprobar como aquí dentro tenemos todo el contenido vale por ejemplo este que estamos haciendo referencia aquí vale cuando tendríamos directamente aquí pero está haciendo servido en esta ruta vale con lo cual es francamente como principio lo tenemos que tener listo y ejecutamos el proyecto
 
@@ -1119,8 +1094,6 @@ Con Hola Mundo vale en nuestra nuestra plantilla que hemos creado y podemos comp
 ![142-05-02](images/142-05-02.png)
 
 os propongo como en lecciones anteriores para practicar algo con lo que podáis trabajar con el contenido web estático y es que si tenéis ya los conocimientos suficientes de HTML5 CSS3 JavaScript podéis probar a crear un sitio web completo vale típico de pantalla de inicio quiénes somos qué hacemos página de contacto y lo podéis servir entero dentro de la carpeta static y cómo puedes comprobar cómo poder invocar el html en CSS y todo lo podéis hacer en a través de esa carpeta y de cómo sirve el contenido estático spring boot también podéis probar a proyecto anterior en las plantillas añadirle bueno pues en calzado menú Maneto de este contenido HTML dándole estilo CSS propio y guardando esos estilos en un fichero CSS que sea independiente y que tengamos dentro de la carpeta static o en algún subdirectorio del mismo hasta aquí el contenido estático en los siguientes vídeos vamos a trabajar con formularios
-
-
 
 
 # 19 Creación de formularios 20:54 
@@ -1264,6 +1237,517 @@ Puedes descargar estos tres ficheros pulsando [aquí](pdfs/ficheros.zip).
 
 ## Transcripción
 
+Hola a todos vamos a continuar con nuestro curso delfín en bici y vamos a iniciar una serie de vídeos en los que vamos a hablar sobre formularios y vamos a introducirnos en este primer vídeo en cómo crear formularios que nos permitan recoger información del usuario en particular nos va a ofrecer funcionalidades para manejar formularios en conjunción con el sistema de plantillas que se utilizando que nuestro caso está hija integración pues nos permite que a través de un objeto llamado el humano 10 vale podemos recoger la información que el usuario que el usuario escribe es seco mano pie es un bin vale podría llamar bien especial que nos servirá como una especie de copia de respaldo de todo lo que nosotros escribamos en un formulario No vamos a comprobar como estos gestos los con menos 10 deben tener tantos atributos con qué triste tener como campos tenga el formulario sobre el cual está queriendo hacer el respaldo no en alguna ocasiones será nuestro caso podemos utilizar como estos coman objet las propias entidades de nuestro modelo de dominio esto lo comprobaremos y lo entenderemos mejor en lo últimos vídeos del curso cuando hablemos de la integración con base de datos ID spring data JP a veamos con el flujo de un formulario en tengo en el formulario de por ejemplo de creación vale de una nueva instancia de un registro que estemos manejando en nuestra aplicación y lo vamos a comprender entre pasos vale lo vamos a dividir en tres pasos para para poder entenderlo mejor el primer paso lo que tenemos que hacer es enviar S10 al formulario lo hacemos a través de un método en el controlador anotado con getmapping Vale será como escuchara a una petición GET en la cual bueno pues lo que queremos hacer es añadir al modelo de ese controlador es un coma no 10 1 instancia lo normal es que esté vacía o con algún dato por defecto y a partir de ahí añadiendo el sol modelo nos lleve directamente hacia la plantilla del formulario ese sería el primer paso en el segundo paso que lo vivimos bueno pues directamente en la plantilla lo que hacemos es tomar ese coma o 10 y asociamos cada uno de los atributos que incluya con su correspondiente campo en el formulario vale imaginemos por ejemplo que estamos dando de alta a una persona de empleado pues el atributo nombre pues se mapea con el campo el input del formulario nombre el atributo apellidos pues con el campo apellidos y así sucesivamente también tendremos que asociar el formulario con la ruta del controlador que no va a procesar para poder pasar hacia el paso 3 esa ruta debería ser mateada con postmapping Vale y el método de envío del formulario debería ser siempre que tengamos posibilidad haciendo uso de esposo si lo hiciéramos con get se enviarían todos los parámetros en la URL y eso bueno pues en ocasiones no es viable por falta de seguridad que no entre otras cosas en este tercer paso en de nuevo no hay controlador recogemos el objeto enviado desde el formulario ya relleno con los datos del usuario aplicamos la lógica de negocio correspondiente cuando hablamos de lógica de negocio pues nos queremos referir a posiblemente al uso de algún servicio mediante el cual pues lo vamos a almacenar en algún repositorio con algún tipo de procesamiento antes o durante
+
+
+Vale y cuando ya hemos terminado de gestionar la información recibida del formulario lo normal sería que finalice la acción y para finalizar lo usual es que redirija Moss vale al usuario hacia otro controlador por ejemplo el de inicio el del listado de los registros del cuál hemos dado de alta un nuevo etcétera etcétera vamos a verlo graficamente partimos de un método del controlador anotado con getmapping por ejemplo empleado mío en el cual lo que hacemos es añadir una y nueva instancia del coma no te digo que si es para generar un nuevo lo normal es que esté vacío lo añadimos al modelo y lo mandamos directamente hacia la plantilla del formulario en esa plantilla indicamos por un lado que la acción del formulario va a hacer el paso 3 vale que será el método anotado con post mapping por otro lado recogemos el romano y sigamos vale asociamos cada uno de sus atributos con los distintos campos del formulario cuando el usuario pulse en el botón de enviar se ejecutará la acción que enviar a este Vale y lo recogeremos en otro método de mi controlador anotado con postmapping Vale y a través de la anotación model attribute a través de esa de esa anotación podremos recoger el coma nos 10 inyectarlo en un argumento de este método y dentro del método pues aplicar lo que corresponda como decía antes podría ser la llamada algún tipo de servicio que ese servicio desencadene la lógica de negocio de nuestra aplicación que lee en la base de datos o que haga lo que corresponda por último día digo que lo normal sería que no redirige era bien el listado bien de nuevo el formulario de creación de un nuevo una página de inicio lo que corresponda en nuestra aplicación en particular si trabajamos con con Spring y Time-Life vamos a ver el código que necesitaría y es que tendremos que añadir en el formulario algo de timely vale para poder darle este tratamiento con Express como decíamos antes tenemos que marcar la acción del formulario lo hacemos mediante el atributo Th está expresión que nos permite establecer una URL no nos dice que cuando se pulse o de alguna manera se desencadena el envío del formulario no redirigirá a estar ruta de aquí van enviando los datos por otro lado te hace oye nos permite Siscar el objeto el comando get en el marco de este formulario para poder después hacer el binding la asociación entre cada campo y el atributo del objeto lo cual lo hacemos aquí no por ejemplo en este input de tipo te contesté film vale es lo que hacemos es asociar este campo de texto con esta propiedad vale de este objeto de aquí vamos a hacerlo nosotros en la práctica vamos a partir de este proyecto de base vale proyecto de baja
+
+
+### `142-06-Formularios`
+#### Ejemplo de creación de un formulario
+
+![142-06-00](images/142-06-00.png)
+
+Partimos de una estructura básica que es la siguiente:
+
+![142-06-01](images/142-06-01.png)
+
+En nuestro archivo `pom.xml` tenemos todas las dependencias necesarias incluyendo los WebJars.
+
+```html
+...
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>bootstrap</artifactId>
+         <version>3.3.7-1</version>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>jquery</artifactId>
+         <version>3.3.1-1</version>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>webjars-locator</artifactId>
+         <version>0.34</version>
+      </dependency>
+   </dependencies>
+...
+```
+
+En `application.properties` hemos cambiado el puerto por default 8080 a 9000 tenemos:
+
+```txt
+server.port=9000
+```
+
+Hemos tomado como plantilla, una de las plantillas started de [Bootstrap de la versión 3.3](https://getbootstrap.com/docs/3.3/examples/starter-template/):
+
+![142-06-02](images/142-06-02.png)
+
+`list.html`
+
+```html
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Starter Template for Bootstrap</title>
+
+      <!-- Bootstrap core CSS -->
+      <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Custom styles for this template -->
+      <link href="/css/starter-template.css" rel="stylesheet">
+
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="#">Miempresa.com</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+               <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Inicio</a></li>
+                  <li><a href="/empleado/new">Nuevo empleado</a></li>
+               </ul>
+            </div><!--/.nav-collapse -->
+         </div>
+      </nav>
+      <div class="container">
+         <div class="starter-template">
+            <h1>Listado de empleados de la empresa</h1>
+         </div>  
+      </div><!-- /.container -->
+
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="/webjars/jquery/jquery.min.js"></script>
+      <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+   </body>
+</html>
+```
+
+Tenemos la plantilla que mencionabamos antes personalizada y adaptada a las WebJars.
+
+Tenemos otra plantilla para el formulario:
+
+`form.html`
+
+```html
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Starter Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="/css/starter-template.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+   <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Miempresa.com</a>
+         </div>
+         <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+               <li><a href="/">Inicio</a></li>
+               <li class="active"><a href="#">Nuevo empleado</a></li>
+            </ul>
+         </div>
+         <!--/.nav-collapse -->
+      </div>
+   </nav>
+   <div class="container">
+      <div class="starter-template">
+         <h1>Nuevo empleado</h1>
+      </div>
+   </div>
+   <!-- /.container -->
+
+   <!-- Bootstrap core JavaScript ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+   <script src="/webjars/jquery/jquery.min.js"></script>
+   <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
+```
+
+Tenemos una clase Modelo `Empleado`
+
+`Empleado`
+
+```java
+package com.openwebinars.spring.modelo;
+
+public class Empleado {
+	
+   private long id;
+   private String nombre;
+   private String email;
+   private String telefono;
+	
+   public Empleado() { }
+
+   public Empleado(long id, String nombre, String email, String telefono) {
+      this.id = id;
+      this.nombre = nombre;
+      this.email = email;
+      this.telefono = telefono;
+   }
+
+   public long getId() {
+      return id;
+   }
+   public void setId(long id) {
+      this.id = id;
+   }
+
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public String getTelefono() {
+      return telefono;
+   }
+
+   public void setTelefono(String telefono) {
+      this.telefono = telefono;
+   }
+
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((email == null) ? 0 : email.hashCode());
+      result = prime * result + (int) (id ^ (id >>> 32));
+      result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+      result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Empleado other = (Empleado) obj;
+      if (email == null) {
+         if (other.email != null)
+            return false;
+      } else if (!email.equals(other.email))
+         return false;
+      if (id != other.id)
+         return false;
+      if (nombre == null) {
+         if (other.nombre != null)
+            return false;
+      } else if (!nombre.equals(other.nombre))
+         return false;
+      if (telefono == null) {
+         if (other.telefono != null)
+            return false;
+      } else if (!telefono.equals(other.telefono))
+         return false;
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return "Empleado [id=" + id + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono + "]";
+   }
+
+}
+```
+
+que va a ser la que vamos a gestionar con este formulario.
+
+También podemos ver como tenemos un pequeño Servicio Dummy que nos va a permitir gestionar los Empleados:
+
+`EmpleadoService`
+
+```java
+package com.openwebinars.spring.servicios;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Service;
+
+import com.openwebinars.spring.modelo.Empleado;
+
+@Service
+public class EmpleadoService {
+	
+   private List<Empleado> repositorio = new ArrayList<>();
+
+   public Empleado add(Empleado e) {
+      repositorio.add(e);
+      return e;
+   }
+	
+   public List<Empleado> findAll() {
+      return repositorio;
+   }
+	
+   @PostConstruct
+   public void init() {
+      repositorio.addAll(
+         Arrays.asList(new Empleado(1,"Antonio García", "antonio.garcia@openwebinars.net", "954000000"),
+                     new Empleado(2,"María López", "maria.lopez@openwebinars.net", "954000000"),
+                     new Empleado(3,"Ángel Antúnez", "angel.antunez@openwebinars.net", "954000000")		
+         )
+      );
+   }
+
+}
+```
+
+#### Modificar el Controlador
+
+Lo  primero que vamos a hacer es modificar el Controlador que actualmente lo tenemos así:
+
+```java
+package com.openwebinars.spring.controladores;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class EmpleadoController {
+
+}
+```
+
+Vamos a añadir lo necesario para gestionar los Empleados
+
+Lo primero que vamos a hacer es un método para obtener todos los empleados:
+
+```java
+@Controller
+public class EmpleadoController {
+	
+   @Autowired
+   private EmpleadoService servicio;
+	
+   @GetMapping({"/", "empleado/list"})
+   public String listado(Model model) {
+      model.addAttribute("listaEmpleados", servicio.findAll());
+      return "list";
+   }
+
+}
+```
+
+#### Modificar la Vista
+
+Vamos a modificar la plantilla para que muestre el listado de Empleados:
+
+`list.html`
+
+```html
+...
+   <div class="starter-template">
+      <h1>Listado de empleados de la empresa</h1>
+      <table class="table">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>Nombre</th>
+               <th>Email</th>
+               <th>Teléfono</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr th:each="empleado : ${listaEmpleados}">
+               <td th:text="${empleado.id}">ID</td>
+               <td th:text="${empleado.nombre}">Pepe Pérez</td>
+               <td th:text="${empleado.email}">pepe.perez@openwebinars.net</td>
+               <td th:text="${empleado.telefono}">954000000</td>
+            </tr>
+         </tbody>
+      </table>
+   </div> 
+...
+```
+
+#### Ejecutar la Aplicación
+
+Vamos a ejecurar la aplicación y comprobar nuestros cambios
+
+![142-06-03](images/142-06-03.png)
+
+#### Añadir el Formulario
+
+Vamos a añadir lo necesario para pintar el Formulario, para ello añadimos el código de Thymeleaf necesario en la plantilla de formulario `form.htm`
+
+
+```html
+<form method="post" action="#" th:action="@{/empleado/new/submit}" th:object="${empleadoForm}">
+	
+</form>
+```
+
+Observaciones del formulario:
+
+* El formulario tiene el atributo `th:action="@{/empleado/new/submit}"` que apunta a una nueva ruta.
+* Con el atributo `th:object="${empleadoForm}"` indicamos donde vamos a recojer el objeto.
+
+
+Para generar el formulario lo podemos hacer a mano o podemos usar un Servicio Web que es francamente comodo https://bootsnipp.com/forms 
+
+![142-06-04](images/142-06-04.png)
+
+El código del Formulario completo y ajustado con Thymeleaf queda así:
+
+```html
+...
+   <div class="starter-template">
+      <h1>Nuevo empleado</h1>
+      <div class="row">
+         <div class="col-md-offset-2 col-md-8">
+            <form method="post" action="#" th:action="@{/empleado/new/submit}" th:object="${empleadoForm}">
+               <h1>Nuevo empleado</h1>
+               <div class="form-group">
+                  <label for="id">ID</label> <input type="text" class="form-control" id="id" placeholder="1" th:field="*{id}">
+               </div>
+
+               <div class="form-group">
+                  <label for="nombre">Nombre</label> <input type="text" class="form-control" id="nombre" placeholder="Nombre" th:field="*{nombre}" />
+               </div>
+               <div class="form-group">
+                  <label for="email">Email</label> <input type="email" class="form-control" id="email" placeholder="emple@openwebinars.net" th:field="*{email}" />
+               </div>
+               <div class="form-group">
+                  <label for="telefono">Teléfono</label> <input type="tel" class="form-control" id="telefono" placeholder="954000000" th:field="*{telefono}" />
+               </div>
+               <button type="submit" class="btn btn-default">Enviar</button>
+            </form>
+         </div>
+      </div>
+   </div>
+...
+```
+
+Observaciones del Formulario:
+
+* En cada campo se ha ido añadiendo el atributo `th:field="*{id}"`, `th:field="*{nombre}"`, `th:field="*{email}"` o `th:field="*{telefono}"` con el nombre del campo según corresponda. Para ir casando cada uno de los atributos del empleado con el campo correspondiente.
+
+Tendríamos la plantilla prerparada.
+
+#### Modificar el Controlador
+
+Para que nuestro formulario funcione tenemos que añadir dos métodos en el Controlador.
+
+```java
+@GetMapping("/empleado/new")
+public String nuevoEmpleadoForm(Model model) {
+   model.addAttribute("empleadoForm", new Empleado());
+   return "form";
+}
+```
+
+En este primer método:
+
+* Tenemos un método `GetMapping`
+* Le estamos pasando un atributo `empleadoForm` que es una nueva instancia de `Empleado` para poder pasarle el `CommandObject` 
+* Y nos va a permitir redirigirnos a la plantilla del formulario.
+
+```java	
+@PostMapping("/empleado/new/submit")
+public String nuevoEmpleadoSubmit(@ModelAttribute("empleadoForm") Empleado nuevoEmpleado) {
+   servicio.add(nuevoEmpleado);
+   return "redirect:/empleado/list";
+}
+```
+Por otro lado tenemos un segundo método con las siguientes observaciones: 
+
+* Tenemos un método `PostMapping`
+* Donde recibimos el `CommandObject` a través de la anotación `@ModelAttribute` que lo coje de `"empleadoForm"` desde el formulario, y lo inyecta en el atributo `nuevoEmpleado`.
+* Aplicamos la lógica de negocio en este caso es simplemente añadirlo a través del Servicio.
+* En este caso vamos a redirigir a traves de otro controlador `/empleado/list` nos lleve directamente al listado de Empleados.
+
+#### Ejecutar la Aplicación
+
+![142-06-05](images/142-06-05.png)
+![142-06-06](images/142-06-06.png)
+![142-06-07](images/142-06-07.png)
+
+Probar no le hemos cambiado de Lidl se ha quedado entero pero sería lo de menos porque bueno podemos comprobar como aquí se ha quedado añadido nuestro listado se han recogido los datos y buenos hemos añadido ese nuevo empleado a través del servicio al listado de empleado y hemos recogido los datos y y se muestran de nuevo en este listado con lo cual nuestro formulario funciona como práctica os propongo en primer lugar que visite nuestro curso de introducción a timely manner mediante el cual podréis profundizar en el tratamiento de formularios con esta tecnología vale que se puede utilizar de forma conjunta con de forma conjunta con Spring sobre todo para aprender otros tipos de campos que no son los campos de tipo input cómo son los chef y los radios y con ellos propongo que añade añadáis una nueva propiedad al empleador que sea booleana y que nos permita saber si es empleado es un directivo de la empresa honor me tendríais que modificar el código necesario constructor getter setter todo lo necesario añadir el campo check al formulario para saber si es un empleado directivo o no lo es modificar los datos de ejemplo para poner que algunos hilos sea y otro no y en el listado de empleados pues tendría que añadir una nueva columna indicando que empleado es directivo no podrías ponerlo a través de la palabra directivo a través de un color distinto a través de un icono diferenciando el tipo de empleado mediante un icono como sugerencias para que para que podáis practicar hasta que estoy traducción al formulario seguiremos trabajando con formularios de una forma más compleja en los siguientes vídeos.
+
 # 20 Formularios de edición 15:31 
 
 [PDF Formularios_Edicion.pdf](pdfs/17._1_Formularios_Edicion.pdf)
@@ -1273,6 +1757,14 @@ Puedes descargar estos tres ficheros pulsando [aquí](pdfs/ficheros.zip).
 No existe.
 
 ## Transcripción
+
+```java
+
+```
+
+```java
+
+```
 
 # 21 Validación de datos 21:04 
 
