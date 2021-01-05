@@ -2256,26 +2256,199 @@ Si quieres saber más sobre como montar URLs con Thymeleaf, puedes visitar nuest
 
 Hola a todos vamos a continuar hablando de formulario y en particular vamos a hablar ahora de formularios que nos van a permitir subir ficheros lo vamos a hacer primero de todo hablando de las peticiones multiparte en este caso con Spring una petición multiparte un mensaje multiparte es un mensaje vale en HTTP es uno especial que nos va a permitir diferenciar dentro del mensaje diferentes partes de ahí el nombre multiparte cada uno con su correspondiente tipo de contenido de manera que podremos mandar esto plano un fichero vale Génesis que tenemos en la imagen podemos ver como hay un mensaje de texto plano una cadena de caracteres de qué sirve de frontera entre partes y y después viene un stream de objetos que normas que bueno fue un flujo binario no podríamos tener diferentes partes dentro dentro de un mensaje bueno pues vamos a aprovechar este tipo MIME este tipo de codificación para cambiar el tipo de codificación de de nuestro formulario a multipart form-data para que de una sola vez de una tacada podamos enviar un formulario que tenga pues datos textuales y datos binarios los datos de formulario normal que hemos venido enviando y datos binarios adicionalmente nuestro formulario deberá tener un al menos un input que será de tipo especial hasta ahora casi todo han sido el tipo texto o alguno de sus subtipos ombuena email o URL o lo que sea no en este caso será de tipo de tipo fichero lo cual nos permitirá que usualmente se añada un selector de ficheros vale que al pulsarlo pues no aparece un diálogo que nos permita buscar el fichero correspondiente seleccionarlo cuando le demos al botón de enviar de esta forma pues se enviaría el contenido de este sitio ese que estoy como no podía ser de otra manera maneja perfectamente en soporte de peticiones multiparte nos proporciona la clase multipartfile que usada con la anotación request param nos va a permitir procesar las distintas partes de un mensaje multiparte en esta es la firma de este método que tenemos aquí como ejemplo sale un mensaje que en principio tendría dos partes vale una que sería el nombre y otra que se vea el fichero donde uno de ellos es el pizzero esta clase multipartfile tiene todos los métodos convenientes para poder procesar esta parte que contiene el fichero tamaño tipo de contenido el nombre nombre original y este que será el primero que utilizaremos no que si está vacío no si está vacío no es aparte vale con la cual queremos trabajar vamos añadir algunos cambios a nuestro a nuestro proyecto para ello vamos a copiar este proyecto de base qué es similar al anterior dónde lo dejamos
 
+### :computer: `142-09-Upload`
+#### Ejemplo de subida de ficheros mediante un formulario
 
-```java
+Partimos del proyecto base con la siguiente estructura:
 
+![142-09-01](images/142-09-01.png)
+
+#### Modificar Formulario
+
+Haciendo un poco una vez que lo hemos replicado si nos vamos a los formularios al formulario creemos que está como lo teníamos antes vale lo que teníamos que hacer como hemos dicho antes se cambiar el tipo de codificación vale el en style y lo cambiaríamos a multipart-form-data de manera que ya podremos mandar mensajes o objetos multiparte añadimos además al final un nuevo campo vale después de todo esto que venimos teniendo antes Fire Mané y que nos va a permitir subir de nuestro empleado su avatar vale una imagen que represente su avatar le damos aquí Facebook don vale clases abstractas los permite además de la de Ford control tener un input de tipo file vale me conecto tendríamos más que suficiente a nivel de formulario 
+
+
+```html
+...
+<form method="post" action="#" 
+                    enctype="multipart/form-data" 
+                    th:action="${empleadoForm.id != 0} ? @{/empleado/edit/submit} : @{/empleado/new/submit}"
+                    th:object="${empleadoForm}">
+...
 ```
 
-```java
-
+```html
+...
+<div class="form-group">
+   <label for="file">Avatar</label>
+   <input type="file" id="filebutton" name="file" class="form-control input-file" />
+</div>
+...
 ```
 
-```java
+#### Modificar Modelo `Empleado`
 
-```
+para poder almacenarlo asociado nuestro empleado pues nos tendríamos que venir a nuestro modelo añadirle nuevo atributo que sea la imagen vale será de tipo String porque aquí lo que almacenaremos será la ruta de donde tengamos almacenado el filtro para poder gestionarlo lo que vamos a hacer es añadir un nuevo constructor alquila gestión que más os guste vale una un constructor con todos los campos por si alguna veces se utilizara fijado como al añadir la validación por favor añade los elementos de validación también en el constructor tendríamos que añadir lo que te diste el correspondiente y para gestionar el casco de élite y el to screen lo que se muestra regenerarlo y ya está 
 
-```java
-
-```
+`Empleado`
 
 ```java
+package com.openwebinars.spring.modelo;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
+public class Empleado {
+	
+   @Min(value=0, message="{empleado.id.mayorquecero}")
+   private long id;
+	
+   @NotEmpty
+   private String nombre;
+	
+   @Email
+   private String email;
+	
+   private String telefono;
+	
+   private String imagen;
+	
+   public Empleado() { }
+
+   public Empleado(long id, String nombre, String email, String telefono) {
+      this.id = id;
+      this.nombre = nombre;
+      this.email = email;
+      this.telefono = telefono;
+   }
+	
+
+   public Empleado(@Min(value = 0, message = "{empleado.id.mayorquecero}") long id, @NotEmpty String nombre,
+			@Email String email, String telefono, String imagen) {
+      this.id = id;
+      this.nombre = nombre;
+      this.email = email;
+      this.telefono = telefono;
+      this.imagen = imagen;
+   }
+
+   public long getId() {
+      return id;
+   }
+
+   public void setId(long id) {
+      this.id = id;
+   }
+   public String getNombre() {
+      return nombre;
+   }
+
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public String getTelefono() {
+      return telefono;
+   }
+
+   public void setTelefono(String telefono) {
+      this.telefono = telefono;
+   }
+
+   public String getImagen() {
+      return imagen;
+   }
+
+   public void setImagen(String imagen) {
+      this.imagen = imagen;
+   }
+
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((email == null) ? 0 : email.hashCode());
+      result = prime * result + (int) (id ^ (id >>> 32));
+      result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());
+      result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+      result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Empleado other = (Empleado) obj;
+      if (email == null) {
+         if (other.email != null)
+            return false;
+      } else if (!email.equals(other.email))
+         return false;
+      if (id != other.id)
+         return false;
+      if (imagen == null) {
+         if (other.imagen != null)
+            return false;
+      } else if (!imagen.equals(other.imagen))
+         return false;
+      if (nombre == null) {
+         if (other.nombre != null)
+            return false;
+      } else if (!nombre.equals(other.nombre))
+         return false;
+      if (telefono == null) {
+         if (other.telefono != null)
+            return false;
+      } else if (!telefono.equals(other.telefono))
+         return false;
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return "Empleado [id=" + id + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono + ", imagen="
+				+ imagen + "]";
+   }
+	
+}
 ```
+
+#### Modificar Controlador
+
+qué más necesitamos bueno pues como hemos comprobado antes tenemos que añadir en la petición que va a gestionar la subida del fichero un rico es para de tipo multipartfile bueno pues nos tendríamos que ir en nuestro caso al controlador que va a recibir un nuevo empleado y tendríamos que añadir después del bindingresult Vale un rico estará llamado film que como hemos llamado al campo en el formulario añadir ahora por último la recepción aquí de DS file comprobar está vacío y si no lo está pues tendremos que plantearnos que hacer aquí 
+
+```java
+@PostMapping("/empleado/new/submit")
+public String nuevoEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado nuevoEmpleado,
+			BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+
+   if (bindingResult.hasErrors()) {			
+      return "form";	
+   } else {
+      if (!file.isEmpty()) {
+         // Lógica de almacenamiento del fichero
+      }
+      servicio.add(nuevoEmpleado);
+      return "redirect:/empleado/list";
+   }
+}
+```
+
+vale para almacenar el chichero una vez que lo hayamos recibido tendremos que ver dónde lo vamos a almacenar planteamiento o los distintos planteamientos que tengamos de almacenamiento del fichero lo vamos a ver en el siguiente vídeo
 
 # 23 Servicio de almacenamiento de ficheros 6:16 
 
@@ -2287,6 +2460,23 @@ No existe.
 
 ## Transcripción
 
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+
 # 24 Implementación de la subida de ficheros en nuestro proyecto 22:13 
 
 [PDF Subida_de_ficheros.pdf](pdfs/18._3_Subida_de_ficheros.pdf)
@@ -2296,6 +2486,23 @@ No existe.
 No existe.
 
 ## Transcripción
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
 
 # 25 Aplicación web segura con Spring Security 13:31 
 
