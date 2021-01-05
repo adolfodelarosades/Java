@@ -1988,6 +1988,8 @@ Hola a todos vamos a continuar hablando de formulario y en este caso vamos a hab
 ### :computer: `142-08-Formularios-Validacion`
 #### Ejemplo de creación de un formulario de edición y con validación
 
+![142-08-00](images/142-08-00.png)
+
 Vamos a partir del proyecto `142-07-Formularios-de-Edicion` haciendo una copia y llamandola `142-08-Formularios-Validacion`, la estructura es la misma que teniamos en el proyecto pasado.
 
 ![142-08-01](images/142-08-01.png)
@@ -2051,9 +2053,113 @@ por último tendríamos que como no hemos dado cuenta aquí vale por ejemplo no 
 Tiramos también un poco de Time list vale y nos iríamos a la plantilla el formulario y haríamos lo siguiente tiraremos de Time list y también algo de pusta vale boostrap nos permite tener una serie de estilo vale para mostrar errores o mensajes de error o algún tipo de alerta vamos a visualizar los siempre y cuando estés error para ello vamos a utilizar y de cada campo del formulario vamos implementar solamente en este caso y vive en Vic vale bueno pues le vamos a decir que todo este grupo vale toda esta capa en el caso de que haya un error vale se le aplique un determinado estilo qué es el estilo jazz error vale demuestra que va a indicar bueno porque de alguna manera tiene ese lo hacemos de la siguiente manera para evaluar una expresión vale y en el caso de que sea expresión sea verdadera bueno pues va añadir una nueva clase CSS a esta cama la expresiones vale hacemos uso de esta función sin manejar error en particular sobre el campo de Mané y esto nos va a permitir evaluar y de está devolución que nos han hecho al formulario si el campo iré tiene algún tipo de error y en caso de que lo tenga lo que creemos es pequeña da qué señala esta nueva clase vale y este campo tuviera error esta clase genial iría Kinoko la hubiéramos puesto nosotros literal y también vamos a querer que enseñaba este se me permitió lo copio y lo pego lo vamos a hacer aquí abajo un mensaje de texto con el error correspondiente es decir que si hay un error se visualice ese texto lo hacemos a través de una etiqueta span por ejemplo que vuelva a comprobar si hay error vale como hemos hecho aquí y si lo hay porque se span se rellené con el mensaje de error lo hacemos de la manera y hay un error vale hacemos uso de TH error vale para rescatar el error del campo y ve puede que haya más de uno vale porque en la validación nosotros hemos añadido solamente uno pero podría haber más de uno que rescate los errores de Live y estos sean los errores que aquí se visualiza vale salva y vamos a comprobar cómo funciona
 
 
-```java
-
+```html
+...
+<div class="container">
+   <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+         <form method="post" action="#" 
+               th:action="${empleadoForm.id != 0} ? @{/empleado/edit/submit} : @{/empleado/new/submit}"
+               th:object="${empleadoForm}">
+            <h1 th:text="${empleadoForm.id != 0} ? 'Editar empleado' : 'Nuevo empleado'">Nuevo empleado</h1>
+            <div class="form-group"
+                 th:classappend="${#fields.hasErrors('id')} ? 'has-error'">
+               <label for="id">ID</label> <input type="text"
+                                                 class="form-control" id="id" 
+						 placeholder="1"
+						 th:field="*{id}"
+						 th:attrappend="readonly=${empleadoForm.id != 0} ? 'readonly' : null">
+               <span th:if="${#fields.hasErrors('id')}" 
+                     th:errors="*{id}"
+                     class="help-block" 
+		     id="id-error">
+                  Errores
+               </span>
+            </div>
+	....	 
 ```
+
+Estos son los errores que aquí se visualiza vale salva y vamos a comprobar cómo funciona por aquí que nos permita editar leader vamos a tratar de guardar con menos 4 
+
+![142-08-02](images/142-08-02.png)
+![142-08-03](images/142-08-03.png)
+![142-08-04](images/142-08-04.png)
+
+cómo podemos comprobar este valor a la un error si nos damos cuenta nos ha redirigido de nuevo el formulario no ha coloreado el formulario en rojo y se ha añadido un nuevo mensaje en el que nos dice que ese valor tiene que ser mayor o igual que sé la verdad es que está francamente bien ese valor lo pudiéramos editar bueno pues lo podríamos solventar lo hemos hecho de una manera tan sencilla indicando que este valor fuera cero o distinto de cero que realmente tendríamos que haberlo hecho si fuese mayor que cero no porque con el valor 0 en si sería el que tendría creado y si no queremos que sean valores negativos pues ahora mismo no no lo podríamos herida aunque ya digo que no es la parte fundamental porque cuando utilicemos la base de datos en los próximos vídeos 
+
+este valor del Ibex se va otro general y que hace que no nos vamos a tener que preocuparte vamos a poder añadir adicionalmente la customización de los mensajes de validación como hemos comprobado entre string y no ofrecen un mensaje por defecto vale para esta validación sin embargo nosotros nos puede interesar poner mensajes propio porque el error sea de alguna manera más complejo el mensaje de error vaya asociado a la lógica de nuestra aplicación o incluso queremos aplicar algún tipo de internacionalización concreto para ello tenemos varias estrategias uno es directamente en la anotación de validación una cadena hardcodeada o también a través del uso de sistemas de protección vamos a tomar esta segunda opción porque ya digo que nos permitiría incluso hacer una internacionalización de los mensajes pero para poder utilizarlo vamos a necesitar algunos pin vale que nos permitan configurarlo en una clase de configuración nos tendríamos que ir a al código vale para para añadir este este código fuente y que nos permita después vale bueno pues este valor en realidad sería sería 0 no dejar la validación de manera que podamos decir que el mensaje sea bueno fue el que hemos establecido en nuestros ficheros de profe vamos a hacerlo y lo hacemos añadiendo este código en una clase de configuración para ello nos vamos al proyecto podríamos añadir un nuevo paquete un paquete de configuración y aquí podemos crear una clase configuración aquí tendríamos la creación de dos bean vale un lado
+
+![142-08-05](images/142-08-05.png)
+![142-08-06](images/142-08-06.png)
+
+La notación de configuración aquí tendríamos la creación de dos bean vale por un lado bueno eso es lo que nos va a permitir es cargar un recurso que no deja de ser un chistero vale como como un van del mar y nos va a permitir el qué bueno le digamos donde buscarlo o el nombre bajes vale la ruta de raíz y la codificación por defecto de este fichero de profe y lo queremos en el siguiente bien es utilizarlo diciendo que es bueno pues los mensajes el origen de los mensajes de validación vale cómo nombre le decimos que busque en el classpath un fichero llamado erros vale con la tensión que sea le decimos también que la codificación por defecto sea UTF8 por último tendríamos que crea en Cordovín encarga recrear el validador le asignamos el anterior esta clase de aquí implementa esto que seguramente sean interfaz vale y que el que podemos utilizar aquí ya tendríamos la clase de configuración 
+
+
+```java
+package com.openwebinars.spring.config;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+@Configuration
+public class MyConfig {
+	
+   @Bean
+   public MessageSource messageResource() {
+      ReloadableResourceBundleMessageSource messageSource =
+                        new ReloadableResourceBundleMessageSource();
+		
+      messageSource.setBasename("classpath:errors");
+      messageSource.setDefaultEncoding("UTF-8");
+		
+      return messageSource;
+   }
+	
+   @Bean
+   public LocalValidatorFactoryBean getValidator() {
+      LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+      bean.setValidationMessageSource(messageResource());
+      return bean;
+   }
+
+}
+```
+
+#### Crear el Archivo de `properties`
+
+ahora lo que nos quedaría es crear el fichero de properties en el cual vamos a tener nuestro para ellos nos vamos a la carpeta Souls me increase Ousmane y aquí mismo podríamos crear un nuevo fichero
+
+![142-08-07](images/142-08-07.png)
+![142-08-08](images/142-08-08.png)
+![142-08-09](images/142-08-09.png)
+
+```txt
+empleado.id.mayorquecero=El ID del empleado debe ser un numero entero positivo
+```
+
+![142-08-10](images/142-08-10.png)
+![142-08-11](images/142-08-11.png)
+![142-08-12](images/142-08-12.png)
+
+#### Modificar la Clase Empleado
+
+```java
+...
+public class Empleado {
+   @Min(value=0, message="{empleado.id.mayorquecero}")
+   private long id;
+...   
+```
+
+#### Ejecutar la Aplicación
+
+![142-08-13](images/142-08-13.png)
+
+Por las llaves ya ya lo rescatan conecta hemos visto cómo podemos customizar nuestros mensajes de validación y yo animo a que lo podáis a que lo podéis hacer si visitáis nuestro curso de introducción a timely podréis ver algo más sobre validación de formulario y de hecho ánimo como elecciones anteriores que a la hora de practicar pues siguiendo el esquema que hemos seguido en esta lección podáis añadir la validación de todos los campos del formulario que sea necesario añadiendo un mensaje customizado los estilos de error vale para para que podáis completar el formulario de una manera algo más integra con por la gestión de errores con esto terminamos esta parte de validación de formulario no queríamos en los siguientes vídeos que vamos a seguir con formularios son unos formularios especiales nos multiparte que nos van a permitir subir Sitges
+
 
 # 22 Subida de ficheros 8:12 
 
@@ -2147,6 +2253,26 @@ Además, en este valor, hemos usado la potencia de Thymeleaf para incluir el ema
 Si quieres saber más sobre como montar URLs con Thymeleaf, puedes visitar nuestro **Curso de introducción a Thymeleaf**.
 
 ## Transcripción
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
+
+```java
+
+```
 
 # 23 Servicio de almacenamiento de ficheros 6:16 
 
