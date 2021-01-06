@@ -669,6 +669,160 @@ public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>,
 
 ## Transcripción
 
+Vamos a continuar con la última elección de nuestro curso sobre spring data JP hablando sobre consultas básicas consultar una base de datos implica un proceso en el que queremos extraer una determinada información de ella spring data JP and ofrecen múltiples mecanismos para poder consultar la base de datos subyacente uno con el que con el cual trabajaremos qué son las consultas derivadas del nombre del método otro es a través de la notación@query que nos permitirá hacer consultas jpql o consultas nativa SQL y otros sistemas de consulta como son query DSL query based on criteria API y alguno más vamos a conocer algunos de ellos comencemos con las consultas derivadas del nombre del metro ya que esto es una gran facilidad que ofrece spring data para sobre todo encaminado aquellos programadores que estén menos duchos en el campo de las parcelas consiste en definir un método con un nombre muy particular dentro de nuestros repositorios y fin se encargará de partear el nombre de ese método para generar una consulta los métodos deben comenzar por algunos de estos nombres fine by tree by query by combining eBay dónde vais es el delimitador para definir los los criterios y podremos ver cómo es una operación francamente versátil veamos cómo sería un ejemplo y la traducción correspondiente tenemos una base de datos repositorio donde trabajamos con instancias de la entidad pers y uno de los atributos que tiene Slash men podríamos querer buscar una lista de personas en conjunto de personas que bueno que cumplen el criterio de que tienen un determinado apellido un determinado Lazne no bueno pues siempre y cuando sigamos está sintaxis el generaría vale automáticamente una consulta que para aquellos que sepáis algo de ese se cuele sería la que tenéis debajo en pantalla no a partir de ese método del generaría la consulta SELECT* from la tabla persona fuera el nombre perdón lo apellido en las net sea exactamente el que le hemos proporcionado en esta parte como como argumento y ya digo no nos obliga a conocer nada de base de datos no tenemos por que saber nada de ese cuela incluso de jpql para poder crear consulta podemos crear consulta francamente complejas y bien no está pensado vale este tipo de mecanismo para para consulta que sean muy muy muy completa pero si es verdad que podemos añadir algunos elementos más podemos verificar que sean elementos distintos podemos poner distintas cláusulas de búsqueda vale conjugadas con AND y OR podemos buscar valores en un rango con between comprobar si el valor es nulo con NULL en lugar de la comparación de igualdad podemos hacerlo con wildcard con Light no light no light si están dentro de un conjunto de valores con in y no pinta una cadena de caracteres contiene un determinado valor con container pueden ordenar los valores con ORDER BY y algunos más que podemos encontrar en la documentación de Spring data JP veamos algún ejemplo por ejemplo podríamos querer buscar a la entidad supongamos que sigue siendo persona por su dirección de correo electrónico y su apellido pues podríamos hacerlo y sería una consulta donde la parte de la condición tendría o no fue el and de dos condiciones no que la dirección de email sea la que proporcionemos y que el apellido sea ese en particular
+
+Podemos trabajar con fecha lo cual no resulta francamente como me ver si una secta está entre dos fechas en un intervalo con paint by start between también podríamos ver si el apellido está dentro de una colección de nombre con in vale también podemos añadir la limitación del número de resultados que queremos confer o dos vale indicando que solamente queríamos el primer resultado podemos utilizar oxinalde Java 8 para envolver el resultado el siempre y cuando sea una consulta que devuelva uno solo la palabra top la podemos acompañar de un número y entonces no te volverá a este número de resultados por ejemplo que nos devuelva las 10 primeras personas ordenadas por edad descendentemente y no podemos hacer en una línea de código de consulta simplemente escribiendo bien el nombre del metro también podemos convertir directamente lo que devuelva como resultado de la consulta en un string de Java 8 para poder trabajar procesando esos datos con un Street lo cual también resulta francamente cómodo ya que sino de volveríamos un listado un iterable tendríamos que convertirlo en un string y utilizarlo después etcétera cómo podemos ver es muy muy muy potentes este mecanismo si bien a la vez hecha vamos a tratar de aplicarlo a nuestro proyecto vamos a bueno vamos a quitar la validación del campo y ve que ya no no nos va a hacer falta ya que la va a generar el Live no va a generar él solo vale bueno vamos a implementar un buscador que nos permita bueno fue utilizar algún tipo de consulta y filtrar los resultados que queremos comprarlo vamos a ir haciendo estos cambios al igual que antes partimos de este proyecto de base que no es más que una copia de los anteriores
+
+
+### :computer: `142-14-Consultas`
+#### Ejemplo de manejo de Spring Data JPA
+
+Partimos del proyecto base con la siguiente estructura:
+
+![142-14-01](images/142-14-01.png)
+
+#### Modificamos el Modelo `Empleado`
+
+```java
+...
+@Id @GeneratedValue
+//@Min(value=0, message="{empleado.id.mayorquecero}")
+private long id;
+...
+```
+
+
+#### Modificamos la Vista `form.html`
+
+Comentamos el siguiente código
+```html
+<!-- 					<div class="form-group" -->
+<!-- 						th:classappend="${#fields.hasErrors('id')} ? 'has-error'"> -->
+<!-- 						<label for="id">ID</label> <input type="text" class="form-control" -->
+<!-- 							id="id" placeholder="1" th:field="*{id}" -->
+<!-- 							th:attrappend="readonly=${empleadoForm.id != 0} ? 'readonly' : null"> -->
+<!-- 						<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" -->
+<!-- 							class="help-block" id="id-error">Errores</span> -->
+<!-- 					</div> -->
+					<input type="hidden" id="id" name="id" th:field="*{id}" />
+```
+
+#### Modificar la Application
+
+Evision okay como decía vamos a implementar un buscador que nos permita buscar empleados para tener más empleados que buscar o pollo proporcionar un el código de bueno cómo generar al menos unos 40 empleados con nombre y apellidos y datos aleatorios no lo haremos de esa manera para no tener que pararnos insertar uno a uno datos vale ni tampoco para meternos en ningún otro mecanismo más complejo añadiremos el formulario de búsqueda en la plantilla del listado implementaremos la consulta y modificaremos el controlador para que para que pueda funcionar tendríamos que venir
+
+```java
+@Bean
+CommandLineRunner initData(EmpleadoRepository repositorio) {
+   return (args) -> {
+
+//			Empleado empleado = new Empleado("Luis Miguel López", "luismi.lopez@openwebinars.net", "954000000");
+//			Empleado empleado2 = new Empleado("José García", "jose.garcia@openwebinars.net", "954000000");
+//			
+//			repositorio.save(empleado);
+//			repositorio.save(empleado2);
+//			
+//			repositorio.findAll().forEach(System.out::println);
+
+//			repositorio.saveAll(
+//					Arrays.asList(new Empleado(1, "Antonio García", "antonio.garcia@openwebinars.net", "954000000"),
+//							new Empleado(2, "María López", "maria.lopez@openwebinars.net", "954000000"),
+//							new Empleado(3, "Ángel Antúnez", "angel.antunez@openwebinars.net", "954000000")));
+			
+      List<String> nombres = Arrays.asList("Lucas", "Hugo", "Martín", "Daniel", "Pablo", "Alejandro", "Mateo",
+         "Adrián", "Álvaro", "Manuel", "Leo", "David", "Mario", "Diego", "Javier", "Luis", "Marcos", "Juan",
+	 "José", "Gonzalo", "Lucía", "Sofía", "María", "Martina", "Paula", "Julia", "Daniela", "Valeria",
+	 "Alba", "Emma", "Carla", "Sara", "Noa", "Carmen", "Claudia", "Valentina", "Alma", "Ana", "Luisa",
+	 "Marta");
+
+      List<String> apellidos = Arrays.asList("García", "González", "López", "Rodríguez", "Martínez", "Sánchez",
+         "Pérez", "Gómez", "Martín", "Saez", "Velasco", "Moya", "Soler", "Parra", "Bravo", "Rojas", "Romero",
+	 "Sosa", "Torres", "Álvarez", "Flores", "Molina", "Ortiz", "Silva", "Torres");
+	 
+      Collections.shuffle(nombres);
+
+      repositorio.saveAll(IntStream.rangeClosed(1, nombres.size()).mapToObj((i) -> {
+         String nombre = nombres.get(i-1);
+         String apellido1 = apellidos.get(ThreadLocalRandom.current().nextInt(apellidos.size()));
+         String apellido2 = apellidos.get(ThreadLocalRandom.current().nextInt(apellidos.size()));
+         return new Empleado(String.format("%s %s %s", nombre, apellido1, apellido2),
+                String.format("%s.%s@openwebinars.net", nombre.toLowerCase(), apellido1.toLowerCase()), "954000000");
+      }).collect(Collectors.toList()));
+
+   };
+}
+```
+
+Aquí simplemente tenemos una lista de nombres y una lista de apellidos los nombres se han barajado con el método Schaeffer de la clase collection Mané y lo que hemos ido haciendo es recorrer cada uno de los nombres del array de nombre para transformarlo en un objeto en este caso lo vamos a ir transformando en un empleado vale cada uno de los nombres y los apellidos lo que hemos hecho ha sido tomar una un apellido aleatorio vale para el primer apellido y para el segundo del listado de apellidos aquí lo que hacemos es formatear el nombre completo con el nombre y primer apellido y segundo apellido en email con el nombre y el primer apellido en minúscula hemos puesto el mismo teléfono porque tampoco es tan interesante lo de ir poniendo vienen email viene motivado si recordáis porque el avatar los generaba a partir de este email para que los avatares entiendo todo ello lo hemos almacenado a través de tendremos en principio aquí hay 40 nombres pues tendríamos 40 empleados por defecto que en cada repetición que hagamos de la ejecución serán diferentes esto lo tenemos por aquí 
+
+
+vamos añadir el formulario de búsqueda para ello nos vamos a la plantilla de listado nos tendríamos que venir vale y aquí nos vamos a añadir este formulario de Movistar código de me gusta dónde
+
+#### Modificar `list.html`
+
+```java
+<form class="navbar-form navbar-right">
+   <input type="text" class="form-control" placeholder="Buscar..." name="q" th:value="${param.q}">
+</form>
+```
+
+Que venir por aquí mañana y aquí lo vamos a añadir este formulario código de me gusta donde tenemos simplemente un campo de búsqueda vale the time Live que nos va a permitir capturar se llama hecho ante alguna búsqueda el parámetro desde la URL y directamente ponerlo aquí para que cuando busquemos ese mismo valor que aparezca aquí aquí escrito vale lo tendríamos por aquí y ya digo con este formulario en cuanto pulsemos intro tendría que hacer la búsqueda como no le hemos añadido nada más esto es la acción de este formulario va a ser la propia página y como no le hemos cambiado el método va a ser el método que con lo cual lo va a añadir añadir el campo QD query vale de consulta a la URL para buscar con lo cual el controlador que tiene que gestionar será el mismo controlador que teníamos antes del dictado vamos añadir la consulta a nuestro repositorio
+
+
+```java
+public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
+	
+   List<Empleado> findByNombreContainsIgnoreCaseOrEmailContainsIgnoreCaseOrTelefonoContainsIgnoreCase(String nombre, String email, String telefono);
+
+}
+```
+
+Un poco tediosa de escribir pero ya veremos que en sencilla está no debería devolver un listado de empleados que contenga ignorando si está en mayúsculas o minúsculas el valor que le vamos a pasar o el email contenga el valor que le vamos a pasar también ignorando mayúscula o minúscula el número con una cadena de caracteres está mi hermano muerto el nombre queda muy largo y esto por esto no crecen este mecanismo es algo tedioso pero es fácil de implementar aquella empleados donde el nombre contenga este nombre sin importar mayúscula minúscula o el email contenga estime el teléfono contenga este de aquí 
+
+
+para poder invocar este método nos tendríamos que ir al servicio base de datos y añadir buscador vale permitir lo copié directamente
+
+
+```java
+public List<Empleado> buscador(String cadena) {
+   return repositorio.findByNombreContainsIgnoreCaseOrEmailContainsIgnoreCaseOrTelefonoContainsIgnoreCase(cadena, cadena, cadena);
+}
+```
+
+Vamos a repasar si tiene McBain nombre contains ignoré key or email por teléfono aquí falta ignoré case vale y aquí en este caso nosotros siempre pasaremos la cadena porque a la hora de buscar nosotros escribiremos algo en el buscador y queremos que lo busque bien en el nombre bien en el email bien en el teléfono 
+
+
+y ahora este método será el que tendremos que invocar desde el controlador en el controlador
+
+
+```java
+...
+@Autowired
+private EmpleadoServiceDB servicio;
+
+@Autowired
+private StorageService storageService;
+
+@GetMapping({ "/", "/empleado/list" })
+public String listado(Model model, @RequestParam(name="q", required=false) String query) {
+   List<Empleado> resultado = (query == null) ? servicio.findAll() : servicio.buscador(query);
+   model.addAttribute("listaEmpleados", resultado);
+   return "list";
+}
+```
+
+Y en otro caso nosotros siempre pasaremos la cadena porque a la hora de buscar nosotros escribiremos algo en el buscador tendríamos que añadir además del modelo que no sea requerido porque sino siempre nos obligaría a hacer una consulta bajón cenar de las siguientes formas en este caso el listado de empleado y en otro caso invocamos al buscador nos tendríamos que parar ahora a modificar el interfaz del servicio para añadir el método de buscador porque está referencia no nos está dejando acceder a los métodos que no estén en la interfaz simplemente vamos a cambiarlo aquí para que nos dé este y centrarnos en lo que en lo que no importa en este caso servicio. Buscador vale en este caso fue la cadena nocturna ahora lo que nos tocaría sería utilizar este resultado como el listado de empleo ejecutamos cómo se hace la intención de todos los datos de ejemplo tenemos aquí todos estos datos están los 40 con nombre aleatorio y podríamos que la tarde buscar alguno por ejemplo a todas las Sara que haya por aquí aparece solamente una volvemos a quitarlo todo ya nos aparecería podemos buscar a todos los García podemos ver como tía y alguno más nos busca en el primer apellido en el segundo apellido vale podríamos tratar de buscar que digo si buscamos por teléfono todos los teléfonos son iguales no con lo cual saldrían los 40 voy a buscar a quien tenga como email Alba moya@open ASP.NET con lo cual saldría solamente este de aquí y como podemos comprobar nuestro buscador que está utilizando una consulta funciona hasta aquí la búsqueda consulta qué son derivadas del nombre del método en el siguiente vídeo vamos a ver el resto de posibilidades a la hora de consultar que tenemos con Spring data Getafe
+
+![142-14-02](images/142-14-02.png)
+![142-14-03](images/142-14-03.png)
+![142-14-04](images/142-14-04.png)
+![142-14-05](images/142-14-05.png)
+![142-14-06](images/142-14-06.png)
+![142-14-07](images/142-14-07.png)
+![142-14-08](images/142-14-08.png)
+![142-14-09](images/142-14-09.png)
+![142-14-10](images/142-14-10.png)
+
 # 35 Otras consultas 12:40 
 
 ## Resumen Profesor
@@ -676,6 +830,37 @@ public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>,
 No existe.
 
 ## Transcripción
+
+```java
+```
+```java
+```
+
+```java
+```
+
+```java
+```
+
+```java
+```
+
+```java
+```
+
+```java
+public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
+	
+   List<Empleado> findByNombreContainsIgnoreCaseOrEmailContainsIgnoreCaseOrTelefonoContainsIgnoreCase(String nombre, String email, String telefono);
+	
+   @Query("select e from Empleado e where lower(e.nombre) like %?1% or lower(e.email) like %?1% or lower(e.telefono) like %?1%")
+   List<Empleado> encuentraPorNombreEmailOTelefono(String cadena);
+	
+   @Query(value="SELECT * FROM EMPLEADO WHERE LOWER(NOMBRE) LIKE CONCAT('%',?1,'%') OR LOWER(EMAIL) LIKE CONCAT('%',?1,'%') OR LOWER(TELEFONO) LIKE CONCAT('%',?1,'%')", nativeQuery=true)
+   List<Empleado> encuentraPorNombreEmailOTelefonoNativa(String cadena);
+
+}
+```
 
 # Contenido adicional 4
 
