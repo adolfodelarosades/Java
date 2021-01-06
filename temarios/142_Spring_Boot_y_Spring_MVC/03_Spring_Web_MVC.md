@@ -3351,19 +3351,18 @@ vale bueno lo podríamos hacer incluso con la misma vale aquí podríamos usar y
 
 ```html
 <a href="#" class="dropdown-toggle" 
-		          		   data-toggle="dropdown" role="button" 
-		          		   aria-haspopup="true" aria-expanded="false">
-		          		   		<span th:text="${#authentication.name}">Menú</span> <span class="caret"></span>
-		          		</a>
+      data-toggle="dropdown" role="button" 
+      aria-haspopup="true" aria-expanded="false">
+   <span th:text="${#authentication.name}">Menú</span> 
+   <span class="caret"></span>
+</a>
 ```
 
 
  hay algún usuario autenticado vale lo que va a hacer es que va a visualizar su nombre Vane y lo va a poner directamente aquí vamos a probarlo directamente en esta plantilla tendríamos que añadirlo a todas y cada una de las plantillas que tuvieron formulario de login vale nos podemos picar como tenemos aquí al admin vale no lo hemos añadido en la otra aquí aparece solamente menú pero aquí sí que aparece el nombre del usuario que ahora mismo está autenticado si tuviéramos más de un usuario nombre de usuario sería el que aparecería hay 
  
- 
 ![142-10-20](images/142-10-20.png)
 ![142-10-21](images/142-10-21.png)
-
  
  hasta aquí lo que vamos a trabajar de seguridad como siempre os propongo algo para practicar intentar un login fallido la URL a la cual se nos remite barra login interrogante error vale pues invito a qué intentáis añadir algún elemento de la interfaz de usuario por ejemplo una ley de vustra en el que se muestre algún mensaje de error vale si queréis podéis tomar directamente en la plantilla el parámetro de la request con la expresión dólar para. Error vale y de esa manera pues podría y darle algo de retroalimentación a al usuario también podrían modificar la autorización de manera que pudiéramos jugar y que el listado de empleados fuese de acceso público no fuese de Obligado login pero no el alta de un nuevo empleado o la edición de uno existente de manera que para ellos si tuviéramos que estar autenticado o invito a que a que lo podáis hacer como práctica en las próximas lecciones vamos a aprender a trabajar con Spring session
 
@@ -3426,15 +3425,9 @@ $ docker exec -ti myredis redis-cli
 
 ## Transcripción
 
+Hola a todos vamos a continuar con nuestro curso de String en bici hablando del manejo de septiembre ya hemos comentado que el protocolo hTTP es un protocolo sin estado es decir cuando realiza una petición no recuerda nada absolutamente nada de la petición anterior por lo cual entre un estado y el siguiente perdón entre una petición y la siguiente no puede recordar nada necesita de algún mecanismo auxiliar que nos permita que entre una petición y otra pueda sobrevivir al Puntal ha dicho mecanismo vale se le conoce como sesiones JavaEE nos propone una interfaz llamada HTTP session que no es más que un map que nos permite almacenar pares clave valor clave objeto esos objetos podrán vivir en tres diferentes peticiones cuando creamos una sesión se envía una cookie vale que el navegador va manteniendo en la distinta cabecera valen todas las peticiones siguientes la Cuqui J session ID que permite identificar la sesión de un usuario con respecto a la de otro y de esa manera pues los datos son de un solo usuario y no son compartidos es decir que el J sesión iré es único por usuario si utilizar en distintos contextos como por ejemplo Spring Security la utiliza cuando nos lo veamos y va manteniendo nuestra información de login al navegar entre distintas páginas y nos hemos dado cuenta en el los vídeos anteriores cuando nos hemos logueado al pasar del listado de empleados al formularios no no ha vuelto a pedir que nos lo que sería una locura porque porque la sesión recuerda que nosotros ya nos vemos lo que ha dado y lo vas recordando hace que nosotros cerramos sesión hasta que nos desbloquea masa qué hacemos logado pero también podríamos utilizar nosotros para la lógica de nuestra aplicación como por ejemplo para implementar un carrito de compra para hacer un asistente que implicará fue un proceso en varios pasos en varias plantillas distintas para que fuera recordando entre una y otra los datos que nosotros hemos ido introduciendo serían ejemplos sencillos de uso de HTTP presión de uso de sesión spring HTTP exception puede ser auto inyectada con autowire en cualquier controlador o adicionalmente no podemos añadir como el argumento de cualquier método del controlador vale para poder manejar y usar la expresión no todo son ventajas con HTTP session tiene algunas desventajas la primera es que dependemos de la implementación que haga de la sesión el propio servidor en nuestro caso el contenedor de Service Tomcat JBoss el servidor que sea va a hacer su propia implementación del manejo de sesiones y vamos a depender de ella eso nos va a producir algunos problemas de escalabilidad por ejemplo y en lugar de un servidor nuestra aplicación tiene una alta demanda y trabajamos con un grupo de servidores vamos a tener que puedes tener algún tipo de mecanismo de sincronización de sesiones entre ese conjunto de servidores con lo cual va a haber un tráfico bastante importante a la hora de trabajar con integración continua y liberamos una nueva versión que se va a poner en producción esa nueva release va a provoca la pérdida de las sesiones que estén habilitadas en este momento como casi siempre estoy viene al rescate para presentarnos spring session una integración transparente con HTTP session es decir nos va a permitir utilizar HTTPS 100 como lo veníamos utilizando antes pero francamente en la primera es que nos va a dar independencia de cómo y servidor concreto simplemente el manejo de esta sesión
 
-
-
-```java
-```
-
-```java
-```
-
+No para proporcionar también la posibilidad de manejar sesión en cluster multiple se tiene en un solo navegador el uso de las sesiones en API RESTful entre otras ventas cómo podemos trabajar con Spring session por lo vamos a ir viendo poco a poco la versión 2.0 qué es la que tenemos actualmente nos va a permitir el manejo de sesiones y hemos visto entre otras ventajas e incluso es decir teniendo un conjunto de servidores pero sin estar atado al contenedor de la aplicación entre otros módulos entre otras posibilidades tenemos spring session core spring session data Redis spring session data JDBC nosotros vamos a usar en particular el de Data rent que va a utilizar un servidor red para el almacenamiento de las sesiones en lugar de utilizar el almacenamiento que hagas Tomcat de esta sesión es un motor de base de datos NoSQL que trabaja en memoria y que almacena los datos como hace es decir como pares clave-valor donde el valor pues no tiene porqué ser solamente qué puede ser una lista de String un conjunto un setstring vale etcétera etcétera está implementado este tiene licencia de SD sirve sobre todo para almacenar sociales como motor de cachet y bueno en boca de sus programadores nos dicen que tiene un rendimiento extremo vale comparados con otros sistemas gestores de base de datos tanto relacionales como no relacionales y tiene la posibilidad también de bueno de no tener un solo un solo servidor y no de tener múltiples servidores con replicación maestro esclavo pudiéndose replicar los datos de un servidor maestro a muchos esclavos no para tener también está posibilidad de balancear la carga ya digo que tiene un alto rendimiento y ese el la razón de ser de por qué los cogemos en el siguiente vídeo vamos a ver cómo integrar Street spring-session y redes en nuestro
 
 # 28 Integración de Spring Session en nuestro proyecto 11:10 
 
@@ -3443,6 +3436,55 @@ $ docker exec -ti myredis redis-cli
 No existe.
 
 ## Transcripción
+
+Hola vamos a continuar trabajando con spring-session y vamos a ver en este vídeo como integrarlo en nuestro proyecto lo primero que tenemos que hacer es instalar Redis https://redis.io/ lo cual lo haremos vía Docker para no tener que bueno pues descargar no el código instalarlo en el servidor lo haremos mediante una instalación limpia con Docker actualizaremos el PON para actualizaremos el PON para añadir las dependencias necesarias añadiremos ya veremos cómo es muy sencillo la opción de configuración en el property para para indicar que la estación la vamos a guardar en Reddit y lo bueno que tiene el uso de Spring boot es que él se va a encargar de todo lo demás para instalar Redis como decía lo íbamos a hacer vía toque para ello bueno decir que Docker es un gestor de contenedores adicionalmente Docker Hub es un repositorio de imágenes prefabricada de manera que vamos a poder utilizar distintas aplicaciones en un contenedor que va a estar aislado de nuestro sistema en particular y que francamente en va a ser cómodo yo os invito a que si queréis conocer más cosas sobre lo que podáis visitar los diferentes cursos que hay disponible en el catálogo de openwebinars para instalar Docker tan solo tenemos que dependiendo del sistema operativo o no puedo acceder a su página y instalar la versión community ya digo si queréis aprender más sobre cómo instalarlo en nuestro curso de Docker lo podéis encontrar en Docker Hub que bueno pues es un repositorio de imágenes con cierto tinte social podemos encontrar muchas imágenes prefabricada y en particular una imagen con la última versión estable de red y lo podemos comprobar pinchando aquí y viendo la ficha de esta imagen que nos podremos descargar para bueno pues crear un contenedor para ello en una consola tan solo tendríamos que ejecutar esta opción 2 ROM menos de menos menos name may Reddit va a ser el nombre que le dé yo al servidor de Redis y con menos p63 79 lo que estamos haciendo es haciendo un mapeo del puerto 6379 de la imagen de Redis vale con el puerto local 6379 con local con lo cual cada vez que hagamos una conexión a este puerto en realidad no estaremos conectando al puerto interno y por último el nombre de la imagen si no la encuentras te la vas a descargar como yo ya tengo una imagen creada con llamada my Redis vale me voy a dar otro nombre distinto algunos y no tenéis Docker configurado convenientemente y como me sucede ami pues tendréis que usar sudo delante para para poder ejecutarlo para que podáis ver la instalación esto vale
+
+https://hub.docker.com/_/redis/
+
+![28-extra-01](images/28-extra-01.png)
+![28-extra-02](images/28-extra-02.png)
+![28-extra-03](images/28-extra-03.png)
+![28-extra-04](images/28-extra-04.png)
+![28-extra-05](images/28-extra-05.png)
+![28-extra-06](images/28-extra-06.png)
+![28-extra-07](images/28-extra-07.png)
+
+
+2731189488a4f08742c69fb1eb948eb5576bc76688245bd505054380edba69ac
+
+Instalado Mane para que lo podamos utiliza lo que tenemos que hacer es añadir en el pon las dependencias necesarias vale que por un lado sería spring-boot-starter-data-redis y también la de spring-session utilizando datarent tenemos que venir aquí para ello el proyecto 20 no vamos a copiar pegar hombre y hemos dicho que en el Pou perdón añadimos
+
+
+### :computer: `142-11-Sesiones`
+#### Ejemplo de manejo de sesiones con Redis
+
+Vamos a partir del proyecto base que tiene la siguiente estructura:
+
+![142-11-01](images/142-11-01.png)
+
+#### Añadir las dependencias
+
+```html
+...
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+<dependency>
+   <groupId>org.springframework.session</groupId>
+   <artifactId>spring-session-data-redis</artifactId>
+</dependency>
+```
+
+Dependencia starter de imputar data previa y en este otro caso hacer falta y ya tenemos actualizado nuestro pon XML a nivel de configuración gracias a spring boot la configuración se puede hacer a través del fichero de Property y es que añadiendo que el almacenamiento de la sesión de Spring sea en red y lo vamos a tener configurado adicionalmente spring boot crea un filtro llamado spring-session repository filter que será el encargado de que cada vez que tengamos que utilizar algo de la sesión nos desvíe directamente hacia remix vale properties vale hace falta inversión sobre vale perfecto 
+
+`spring.session.store-type=redis`
+
+
+configurar otro aspecto como por ejemplo el timeout de la sesión es decir es dura la duración del timeout de la sesión el modo de volcado de datos que solamente cuando explícitamente se almacene algo o simplemente cuando se cambia algún dato el name space de la sesión en red y se decir las claves qué prefijo van a tener el espacio de nombres el job vale el password el puerto todo esto podemos dejar los valores que vienen por defecto que son los que los que vamos los que vamos directos cómo vamos a comprobar que esto funciona pues ahora lo que tenemos que hacer es yo en particular como tengo que levantar el servidor del Betis llamado my ready vale que será el interesante vale posiblemente con este de myray Víctor que está configurado también vaya funcionar si queremos comprobar que funciona vale ejecutamos la aplicación y nos lo quedamos vale
+
+
+, vale ejecutamos la aplicación y nos lo que han vale en principio podemos decir que si no se ha quejado posiblemente hayamos tenido suerte vamos a comprobar queremos comprobar lo que podemos hacer es conectarnos al contenedor vale cuando queráis menos 6 el nombre del contenedor y la opción va y de estas de esta forma vamos a poder comprobar las claves que hay en en el en el sistema gestor Redis vale para ver si te ha creado alguna sesión despre vale yo como antes tengo que poner tu Docker de ir dos vas vale ya estoy aquí dentro de Dani majo un poco grande lo voy a hacer un poco más pequeño para que nos demos cuenta que ya hay por aquí la de Spring session spring session ballet y tenemos por aquí las diferentes claves Manel en particular de admin la tenemos por aquí tanto es así que si ahora paramos la ejecución de nuestro proyecto y lo volvemos a lanzar antes como hemos podido comprobar como era Tomcat quién estaba cenando la sesión cada vez que reinicia vamos se salía no ahora nos debería dejar ya me han tenido la sesión porque la sesión la teníamos en un servidor externo en este caso es redil propongo también que podáis bichear un poco y qué borréis la sesión directamente en red a través de redis-cli te vale con la sesión correspondiente para que podáis comprobar que entonces directamente nos va a llevar a login en el momento en el que te la tengo de cambiar de de página para que podamos comprobar que realmente está haciendo Redis quién está alojando en este caso la sesión con esto terminamos el vídeo de sobre la configuración de Spring session vale con Reddit y terminamos también el bloque de Spring en bici en el siguiente bloque vamos a poder utilizar base de datos relacionales a persistir nuestra información en base de datos relacionales con Spring data JP
 
 #  Contenido adicional 17
 
