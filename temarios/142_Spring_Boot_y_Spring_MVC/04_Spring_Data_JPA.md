@@ -114,6 +114,58 @@ No existe.
 
 ## Transcripción
 
+Hola hola a todos vamos a continuar como decíamos en el vídeo anterior aplicando las entidades a nuestro proyecto para ello vamos a partir de un proyecto de base vale que tenéis por aquí y que podemos copiar pegar bueno este proyecto no es más que el que hemos ido dejando en vídeo en vídeo anteriores 
+
+### :computer: `142-12-Entidades`
+#### Ejemplo de manejo de Spring Data JPA
+
+Partimos del proyecto base que tiene la siguiente estructura:
+
+![142-12-01](images/142-12-01.png)
+
+
+#### Añadir las Dependencias
+
+bueno tendremos que hacer algunos pequeños cambios el primero como habíamos visto era añadir las dependencias de Spring data j.p.a. y de H2 las podemos añadir al final vale tienen que aparecer aún más librería sobre persistencia y H2 vale que la tenemos también por aquí 
+
+```html
+...
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+   <groupId>com.h2database</groupId>
+   <artifactId>h2</artifactId>
+   <scope>runtime</scope>
+</dependency>
+...
+```
+
+por otro lado tendríamos que modificar nuestra entidad vale por un lado es añadirle arroba gente y nos damos cuenta de la propuesta que no hace de importación del tipo A importa siempre deberíamos escoger las dejaba x persisten y no las anotaciones concretas de Hibernate vale 
+
+![142-12-02](images/142-12-02.png)
+
+aquí la tendríamos no faltaría identificar nuestro campo y de que ya lo tenemos por aquí vale hemos dicho que vamos a generar el valor cuenta ya lo habíamos puesto de tipo long previendo vamos a añadir algún anotación más por ejemplo ya que este campo no queremos que esté vacío con arroba column vale lo vamos a poner como un roble afannes en esta forma acabamos de generar nuestra nuestra primera entidad 
+
+```java
+...
+@Entity
+public class Empleado {
+	
+   @Id @GeneratedValue
+   @Min(value=0, message="{empleado.id.mayorquecero}")
+   private long id;
+	
+   @Column(nullable=false)
+   @NotEmpty
+   private String nombre;
+   
+   ...
+```
+
+quiero decir que cuando corramos el proyecto que está todo correctamente configurado tendremos en la base de datos una tabla llamada empleado que tendrá está 5 columna dónde vive será la clave primaria y donde mal nombre no podrá ser nulo a la hora de insertarse cómo vemos es francamente sencillo mucho más que que si hubiéramos tenido que hacer todo este código de JDBC del que hablábamos en el vídeo en el vídeo anterior para poder ver los cambios tendremos que esperarnos al siguiente vídeo donde empezaremos a hablar sobre los repositorios para poder ir trabajando de alguna manera con nuestras entidades y poder persistir información rescatarla etcétera
+
 # 32 Repositorios 10:43 
 
 [PDF Repositorios.pdf](pdfs/23._Repositorios.pdf)
@@ -208,6 +260,97 @@ Necesitamos esto porque:
 
 ## Transcripción
 
+Hola a todos vamos a continuar hablando de Spring data JP y en particular sobre los repositorios spring data define una interfaz principal llamada repository y nos permite tomar una entidad su tipo de ID y trabajar con ella es una entidad perdona una interfaz muy muy básica pero se define una jerarquía de interfaces que nos permiten bueno pues tomar alguna como punto de partida como por ejemplo es Cruz repository este interfaz no incluye todas las operaciones Cruz es decir insertar actualizar borrar obtener toda la distancia obtener una envase Aribe contar cuántas hay verificar la existencia en base a nivel etcétera etcétera es decir nos permite la posibilidad de incluir muchas de ellas para usarlo para usar Cruz de repository tan solo tendríamos que extender ese repositorio con una interfaz vale indicándole como decía el tipo de dato de la entidad y el tipo de datos de la clave primaria y sin tener que implementar nada más que que dónde está la magia de este sin tener que añadir ninguna línea de código más de hecho no nos hace falta ni siquiera añadirle nada anotación@repository sin añadir como decía ninguna línea más tenemos todas estas funcionalidades le digo que quiero dónde viene la magia vamos a ver algo de esto en acción para estamos de este proyecto base
+
+### :computer: `142-13-Repositorios`
+#### Ejemplo de manejo de Spring Data JPA
+
+Partimos del proyecto base con la siguiente estructura:
+
+![142-13-01](images/142-13-01.png)
+
+Vamos a hacer algunos cambios lo primero de todo lo primero de todo que vamos a hacer es crear un nuevo paquete llamado repositorio dentro del paquete raíz que estamos utilizando repositorios y aquí dentro vamos a crear una nueva interfaz está interfaz la vamos a llamar empleado repository el nombre no es prescriptivo siempre y cuando sea una que sea identificable fácilmente y hemos dicho que vamos a extender Cruz repository de empleado que es de nuestra clase modelo y luego hacemos los import correspondientes aquí tenemos el código cómo podemos ver muy muy muy sencillo añadir algún cambio más
+
+![142-13-02](images/142-13-02.png)
+![142-13-03](images/142-13-03.png)
+
+```java
+package com.openwebinars.spring.repositorios;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.openwebinars.spring.modelo.Empleado;
+
+public interface EmpleadoRepository extends CrudRepository<Empleado, Long>{
+
+}
+```
+
+Por ejemplo en el modelo vamos a crear un constructor esto de estar autogenerado con todos los datos y recordáis como añadimos posteriormente la imagen pues generamos un nuevo constructor necesitaríamos un constructor que no incluyera Elide porque live va a ser autogenerado lo podríamos generar también aquí con el nombre por ejemplo el email y el teléfono ya que también vimos que el campo imagen no era obligatorio lo podríamos tener por aquí 
+
+
+```java
+...
+public Empleado(String nombre, String email, String telefono) {
+   this.nombre = nombre;
+   this.email = email;
+   this.telefono = telefono;
+}
+...
+```
+
+queremos comprobar ya que esto funciona la integración podríamos decir que es bueno la haremos después pero si queremos y somos impacientes y queremos comprobar que esto funciona podemos venirnos a la clase aplicación crear un nuevo commandlinerunner donde interactuar con el repositorio me vaya a permitir pero vaya creando por aquí crear al recibir aquí este empleado repositorio he repository es como si lo estuviéramos inyectando directamente vale aquí devolvemos el command line Runner y el cuerpo del método aquí y aquí podríamos crear uno o dos empleados y después almacenarlo en el repositorio mediante su método 6 que tengo el código por aquí como podéis comprobaremos que le ha creado dos nuevos creados mejor no empleado y los vamos a almacenar este repositorio este este interfaz que tiende a Cruz del repository incluye algunos métodos que vamos a ver después como sí que nos va a permitir almacenar una entidad y entre otros también tiene un método que faynore te devuelve en el caso de cruz de repository un iterable que nos va a permitir obtener todos y cada uno de los elementos de ese tipo que tengamos en la base de datos vale directamente los podríamos imprimir de esta zona 
+
+
+```java
+...
+@Bean
+CommandLineRunner initData(EmpleadoRepository repositorio) {
+   return (args) -> {
+
+      Empleado empleado = new Empleado("Luis Miguel López", "luismi.lopez@openwebinars.net", "954000000");
+      Empleado empleado2 = new Empleado("José García", "jose.garcia@openwebinars.net", "954000000");
+			
+      repositorio.save(empleado);
+      repositorio.save(empleado2);
+			
+      repositorio.findAll().forEach(System.out::println);
+      
+   };
+}
+...
+```
+
+ejecutamos esta aplicación Vale me voy a perdonar tengo que levantar que no estaba levantado ahora sí y aquí podemos comprobar como se han impreso por consola vale los dos empleados que hemos almacenado en la base de datos con los ID 1 y 2 y que no tienen imagen Héctor repositorio ya digo que francamente molan porque nos van a permitir hacer todas las operaciones cruz sin que nosotros tengamos que implementar nada de nada
+
+![142-13-04](images/142-13-04.png)
+
+Spring data JP and ofrece una cadena de repositorios de hecho Cruz de repository lo tenemos presente en más sus proyectos de Spring data y nos ofrece una jerarquía que nos va a permitir tener poco a poco algunos métodos más no si visitamos la documentación de crudo repository https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
+
+![142-13-05](images/142-13-05.png)
+![142-13-06](images/142-13-06.png)
+![142-13-07](images/142-13-07.png)
+![142-13-08](images/142-13-08.png)
+![142-13-09](images/142-13-09.png)
+![142-13-10](images/142-13-10.png)
+
+podemos ver la cantidad de métodos que tenemos que son los más elementales para salvar para obtener todos para poder borrar borrar todo y trabaja casi siempre con iterable no si vamos visitando el resto de su interfaz es que podemos encontrar como paging and sorting ojo tapea podremos ver que adicionalmente se van añadiendo algunos más algunos métodos más en el caso de cruz repository tenemos los métodos más básicos y que casi siempre trabajan con iterable si damos el salto al uso de paging and sorting repository tenemos todo lo que tiene crudo repository y además tenemos la posibilidad de obtener todos los datos con un determinado orden y obtener todos los datos por página los Juan nos permitiría paginar resultados es decir si queremos tener en nuestra aplicación los resultados que se visualicen siempre de 20 en 20 aunque tengamos un millón vale pues las consultas funcionaria mejor ya que se irían trayendo esos resultados de en páginas de tamaño 20 no para poder página vamos que como el más concreto y asociado a JP a tenemos JP repository que añade todo lo que teníamos antes del crudo y del facebook con la posibilidad de estos métodos no para que devuelvan un lis vale que suele ser más utilizado para nosotros que iterable 6 también puede devolver un Lis y estamos hablando varios plus 6 plus vale que permite descargar todas las tareas pendientes de la base de datos el borrado en un proceso por lotes elimina también un iterable de entidades etcétera etcétera es decir que podemos tener bastantes más operaciones y que sean francamente más cómoda y ya digo que para ello tan solo perdón tendríamos que en lugar de usar Bluetooth repository usar repository y nuestro proyecto en principio función haría igual los relanzamos funcionaria igual 
+
+```java
+package com.openwebinars.spring.repositorios;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.openwebinars.spring.modelo.Empleado;
+
+public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
+
+}
+```
+
+
+pero tendríamos adicionalmente a la hora de trabajar con este repositorio otra serie de metros como decía antes por ejemplo faenol ahora si devuelve un listado en lugar de devolver un iterable en el siguiente vídeo vamos a hacer la integración de estos repositorios con nuestro proyecto vamos a modificar el servicio para que lo pueda utilizar convenientemente vale y lo vamos a hacer paso a paso para que lo podáis aprender de la mejor manera posible
+
+
 # 33 Integración de los repositorios en nuestro proyecto 13:21 
 
 ## Resumen Profesor
@@ -215,6 +358,145 @@ Necesitamos esto porque:
 No existe.
 
 ## Transcripción
+
+Hola a todos vamos a aplicar lo que hemos aprendido sobre repositorios en el vídeo anterior a nuestro proyecto vamos a dar varios paso lo primero de todo que vamos a refactorizar la clase que hemos venido utilizando como servicio y la vamos a renombrar empleado service memory services memory con mamado oculte eso es porque será un servicio que nos permitiría gestionar los empleados pero siempre almacenando los mejores vamos a crear una interfaz llamada empleado services que tendría el contrato la firma de los métodos que debería tener un servicio que se tiene empleada adicionalmente vamos a crear un servicio llamado empleado services bien vale que nos va a permitir almacenarlo empleado esta vez y en una base de datos cargaremos algunos datos de ejemplo a través del command line Runner configuraremos algunas properties para que nuestra base de datos realmente se almacenes en un en un fichero qué es lo que hace H2 almacenar todos los datos en un fichero hasta ahora cuando hemos trabajado con H2 como no hemos indicado lo contrario bueno pues spring boot no está configurando la base de datos en memoria actualizaremos la seguridad de nuestro proyecto para que nos permita hacer alguna operación es más como por ejemplo visitar la consola de la base de datos y veremos si es necesario o no actualizar el formulario vayamos poco a poco como decía nos tendríamos que venir a los servicio y en este caso tendríamos que refactorizar esta clase vamos a llamarme
+
+#### Refactorizar `EmpleadoService` a `EmpleadoService`
+
+Ademas le añadimos un nombre
+
+```java
+...
+@Service("empleadoServiceMemory")
+public class EmpleadoServiceMemory {
+...
+```
+
+#### Crear nueva Interface `EmpleadoService`
+
+![142-13-11](images/142-13-11.png)
+
+
+```java
+package com.openwebinars.spring.servicios;
+
+import java.util.List;
+
+import com.openwebinars.spring.modelo.Empleado;
+
+public interface EmpleadoService {
+
+	public Empleado add(Empleado e);
+	public List<Empleado> findAll();
+	public Empleado findById(long id);
+	public Empleado edit(Empleado e);
+}
+```
+
+#### Crear nueva clase `EmpleadoServiceDB`
+
+![142-13-12](images/142-13-12.png)
+![142-13-13](images/142-13-13.png)
+![142-13-14](images/142-13-14.png)
+
+
+En lugar de utilizando como hemos venido usando aquí una lista como repositorio aquí utilizaremos un auténtico repositorio que ya tenemos definido no bueno esta implementación vamos a ver cómo es francamente sencilla porque nos va a permitir nos va a permitir hacer todas las operaciones de una manera muy fácil por ejemplo aquí hemos visto que el método 6 nos permitía almacenar una entidad y además podemos ver en la firma del método que devuelve la entidad recién guardada además con esos campos como el libre actualizados prefería así de sencillo tenemos otro método ya llamado también faenón en el repositorio vale con lo cual es simplemente un recubrimiento también tenemos uno lo tenemos por aquí aquí lo que nos damos cuenta es que el método Find hay desde repositorio devuelve un opcional para no tener que cambiar más cosas podemos hacer esta pequeña triquiñuela la clase obtiene al es un envoltorio conveniente para para objetos para evitar posibles errores de tipo NullPointerException para poder burlar la de alguna manera lo podemos hacer así esto devuelve un opcional y el método devuelve la distancia de empleados es que lo ha encontrado o en otro caso devuelve nulo tendremos por aquí la posibilidad de evitar vale editar no es más que en principio aplicar el mismo método seis ya que el dato que perdón la entidad que vamos almacenar ya tiene un y de lo que hace es evitar el que el que tengamos ahora hemos dicho que íbamos añadir algunos datos de ejemplo en el command line Runner lo que podríamos hacer comentaristas de aquí mira algunos
+
+
+```java
+package com.openwebinars.spring.servicios;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
+import com.openwebinars.spring.modelo.Empleado;
+import com.openwebinars.spring.repositorios.EmpleadoRepository;
+
+@Primary
+@Service("empleadoServiceDB")
+public class EmpleadoServiceDB implements EmpleadoService {
+	
+   @Autowired
+   private EmpleadoRepository repositorio;
+
+   @Override
+   public Empleado add(Empleado e) {
+      return repositorio.save(e);
+   }
+
+   @Override
+   public List<Empleado> findAll() {
+      return repositorio.findAll();
+   }
+
+   @Override
+   public Empleado findById(long id) {
+      return repositorio.findById(id).orElse(null);
+   }
+
+   @Override
+   public Empleado edit(Empleado e) {
+      return repositorio.save(e);
+   }
+	
+   public void delete(Empleado e) {
+      repositorio.delete(e);
+   }
+
+}
+```
+
+y como aquí puede haber puede no lo habría de hecho ahora mismo una colisión entre los dos servicios lo que hacemos es añadir aquel servicio en base de datos el principal en prima de esta manera aquí a la hora de inyectar buscar a primero en le va a hacer el rato y si no estuviera disponible vale pues utilizaría el almacenamiento en memoria
+
+#### Ingresar Datos de Inicio
+
+Permitir los podemos copiar por aquí lo único que va a hacer es salvar de una vez tres empleados cuyos datos ya teníamos de algún ejemplo anterior
+
+```java
+@Bean
+	CommandLineRunner initData(EmpleadoRepository repositorio) {
+		return (args) -> {
+
+//			Empleado empleado = new Empleado("Luis Miguel López", "luismi.lopez@openwebinars.net", "954000000");
+//			Empleado empleado2 = new Empleado("José García", "jose.garcia@openwebinars.net", "954000000");
+//			
+//			repositorio.save(empleado);
+//			repositorio.save(empleado2);
+//			
+//			repositorio.findAll().forEach(System.out::println);
+
+			repositorio.saveAll(
+					Arrays.asList(new Empleado(1, "Antonio García", "antonio.garcia@openwebinars.net", "954000000"),
+							new Empleado(2, "María López", "maria.lopez@openwebinars.net", "954000000"),
+							new Empleado(3, "Ángel Antúnez", "angel.antunez@openwebinars.net", "954000000")));
+
+		};
+	}
+```
+
+
+#### Modificar `EmpleadoController`
+
+
+también nos quedaría venir una a nuestra clase controlador como podemos comprobar ahora aquí al refactorizar lo que está haciendo es mirad el servicio en memoria queríamos que tirará a través de la interfaz 
+
+
+```java
+...
+@Autowired
+private EmpleadoService servicio;
+...
+```
+
+ como decía otro de los pasos que vamos a hacer es añadir una serie de propiedades en el application properties
+
+
+AQUIIIIIIIIIIIIIIII
+
+
 
 # 34 Consultas básicas 19:36 
 
