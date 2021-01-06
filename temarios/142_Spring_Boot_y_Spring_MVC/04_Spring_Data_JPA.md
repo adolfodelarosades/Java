@@ -483,6 +483,7 @@ Permitir los podemos copiar por aquí lo único que va a hacer es salvar de una 
 
 también nos quedaría venir una a nuestra clase controlador como podemos comprobar ahora aquí al refactorizar lo que está haciendo es mirad el servicio en memoria queríamos que tirará a través de la interfaz 
 
+Una colisión entre los dos servicios lo que hacemos he añadir aquel servicio en base de datos de el principal en prime aquí a la hora de inyectar buscar a primero en la base de datos y si no estuviera disponible vale pues utilizaría el almacenamiento en memoria 
 
 ```java
 ...
@@ -493,8 +494,84 @@ private EmpleadoService servicio;
 
  como decía otro de los pasos que vamos a hacer es añadir una serie de propiedades en el application properties
 
+#### Modificar `aplication.properties`
 
-AQUIIIIIIIIIIIIIIII
+
+como decía otro de los pasos que vamos a hacer es añadir una serie de propiedades en el application properties para que nos permita trabajar con una base de datos en fichero, lo hacemos a través de estas propiedades 
+
+vale esta es muy sencilla porque le decimos que una base de datos H2 que está en la raíz de nuestro proyecto el usuario y contraseña para H2 siempre que trabajemos con él por defecto es sysadmin y sin contraseña vamos a habilitar la consola de H2 lo cual nos va a permitir ocaso el puerto 9000 el él tiene shower GL podemos conectarnos a una aplicación cliente de la base de datos que nos permitirá consultar la que se muestren las consultas SQL de las operaciones que se vayan haciendo con la base de datos vale vale estupendo
+
+```txt
+# Puerto de la aplicación
+server.port=9000
+# Configuración del almacenamiento de sesiones con Redis
+spring.session.store-type=redis
+
+# URL jdbc de conexión a la base de datos
+# spring.datasource.url=jdbc:h2:mem:db
+spring.datasource.url=jdbc:h2:./openwebinars
+
+# Usuario y contraseña de la base de datos
+spring.datasource.username=sa
+spring.datasource.password=
+
+# Habilitamos la consola de H2
+# http://localhost:{server.port}/h2-console
+# En nuestro caso http://localhost:9000/h2-console
+spring.h2.console.enabled=true
+
+# Habilitamos los mensajes sql en el log
+spring.jpa.show-sql=true
+
+```
+
+#### Modificar la Seguridad `SecurityConfig`
+
+por último decimos también que teníamos que modificar nuestra configuración de seguridad ya que si queremos acceder a esta consola le tendríamos que dar permiso no es normal que digo lo vamos haciendo todo poco a poco no sería normal que le diéramos permiso a todo el mundo para acceder a esta base data vale lo normal es que tuviera que ser accesible a través de un usuario con un rol de administrador pero como ahora mismo ya digo que tenemos que estar parte de seguridad un poco en pañales pues lo único que tenemos que hacer aquí añadir la ruta por un lado H2 duerme también es cierto que H2 no es el sistema más idóneo para producción no con lo cual bueno pues posiblemente tuviéramos distintos perfiles a la hora de cargarlo los bean y el data shows y está configuración la podríamos la podríamos tunear con esos perfiles.
+
+Para poder utilizarlo también tenemos que añadir aquí la deshabilitacion de FRS porque sino la consola de H2 no podría trabajar vale y por defecto también te desabilita el príncipe Titi habilita la opción de bloquear los friends vale también lo deshabilitamos para que podamos ver la consola de H2 
+
+```java
+...
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+   http
+         .authorizeRequests()
+                .antMatchers("/webjars/**", "/css/**", "/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+         .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+         .logout();
+		
+   http.csrf().disable();
+   http.headers().frameOptions().disable();
+				
+}
+...
+```
+
+vamos a relanzar el proyecto aquí podemos ver como ya han sucedido más cosas vale se ha creado una unidad de persistencia por defecto se ha borrado el esquema de la base de datos si es que se te ha se ha vuelto a generar con una tabla empleado con varios campos entre ellos el Ibex en la clave primaria se han lanzado algunas consultas sobre la secuencia para poder realizar la inserción un artista
+
+![142-13-15](images/142-13-15.png)
+
+Para comprobar como estos datos ya están en la base de datos quitar ya digo que esto la modificación de Aquiles Teide hola hola dejaré a vosotros para que la podáis hacer aquí tendríamos visto como el Lidl autogenera vale lo ha llamado Juan y bueno no ha insertado en la base de datos para comprobar lo podríamos acceder a localhost vale para conectarnos tendríamos que poner aquí la URL de JDBC yo ya la tengo puesta con el usuario y contraseña que me podéis cambiar el idioma a castellano podemos ver aquí como tenemos la tabla empleado y cómo están los datos que acabamos de almacenar que acabamos de cenar 
+
+![142-13-16](images/142-13-16.png)
+![142-13-17](images/142-13-17.png)
+![142-13-18](images/142-13-18.png)
+![142-13-19](images/142-13-19.png)
+![142-13-20](images/142-13-20.png)
+![142-13-21](images/142-13-21.png)
+![142-13-22](images/142-13-22.png)
+![142-13-23](images/142-13-23.png)
+![142-13-24](images/142-13-24.png)
+
+
+con ella nos damos cuenta que hemos podido crear un servicio en volviendo nuestro repositorio y como ya si estamos persiguiendo la información en base de datos para practicar como en vídeo anteriores os dejo algunas algunas tareas como por ejemplo modificar el formulario para que ese campo de eBay que hemos visto que estaba ahí y que ya no nos sirve bueno pues este pero si me está porque digo esto porque si vienen el formulario de inserción no nos haría falta nada en referencia al Lidl porque será después dónde se genere estoy bien no se tiene que visualizar pero si no tiene que permitir utilizarlo y pasarlo en el formulario de edición con lo cual tendríamos que tratar de modificar dicho campo para que esté oculto que sea de tipo oculto y poder tunearlo lo suficiente para que la operación de edición sí que funcione vale porque ya digo que si lo eliminaremos simplemente la operación de inserción funcionando con esto hasta aquí en los repositorios en el siguiente vídeo no adentraremos en la última lección completa en la cual hablaremos sobre las consultas
+
 
 
 
