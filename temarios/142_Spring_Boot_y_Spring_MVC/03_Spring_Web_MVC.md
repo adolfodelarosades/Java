@@ -3048,6 +3048,10 @@ Aunque lo hemos utilizado en el proyecto de ejemplo, el conocimiento en profundi
 
 ## Transcripción
 
+
+Vamos a continuar trabajando con Spring en bici y aquí la vamos a enganchar con Spring Security para hacer nuestra aplicación más segura la seguridad con Spring equivalente a hablar a Spring Security Spring Security es por así decirlo pues un conjunto muy amplio vale de clases interfaces filtro etcétera etcétera es muy amplia nosotros nos vamos a circunscribir a una parte francamente pequeña pero suficiente para aplicar la seguridad nuestra prima no ofrece Spring Security servicios de seguridad para aplicaciones Java EE es decir que su seguridad va a ser compatible con la de Java EE iba a permitir hacer una integración prácticamente podríamos decir directa con proyectos de spinning en bici a través de Facebook y nos enteraremos en los procesos que son la autenticación y la autorización la autenticación para responder a la pregunta de quién eres vale y una vez que hemos hecho la autenticación la autorización es bueno siendo yo quién soy para que tengo permiso no vamos a ir viendo paso a paso vale para trabajar con Spring si quieres ir en nuestro pon XML tenemos que añadir el starter de security vale cuya cuya dependencia Maiden tenemos aquí vamos a aplicar el principio del learning-by-doing es decir en lugar de hacer una gran disertación sobre Spring Security y después aplicar el ejemplo paso a paso vamos a ir explicando lo y haciéndolo sobre nuestro proyecto para ellos yo voy a trabajar sobre este proyecto que se llama seguridad base no vamos a copiar vale nos vamos a pegar tendríamos que añadir la dependencia de Spring Security vale y el artifaks de Manet French butter King spring boot service security vale ya la tendríamos por aquí añadir varias varios ficheros car que tenemos por aquí no bastante sitio bueno eso ya lo tenemos por ahí el primer paso vale la configuración de la seguridad para ello vamos a crear un paquete vale seguridad tienen vamos a crear una clase que tendrá dos cosas lo primero es que va extender a websecurityconfigureradapter y por otro lado gira anotada con en Hable se quiere la combinación de ambas dos vale nos permite configurar la seguridad de una manera sencilla y sobre escribiendo algunos métodos vale de websecurityconfigurers hada vamos haciendo creamos nuestro paquete hemos dicho la clase que se va a llamar si quieres que come si vale una nueva clase configuration en able Web Security y hemos visto que debe tener suerte configura alarma ya lo tenemos por aquí siguiente paso vamos a configurar la autenticación como decíamos antes es preguntar tú quién eres en este primer ejemplo lo vamos a hacer en memoria es decir que se almacenará el usuario o usuarios con los cuales nos vamos a comprobar en memoria y además no vamos a codificar las contraseñas no las vamos a cifrar esto es simplemente para que podamos ver cómo sería el mecanismo de autenticación de una manera sencilla sin complicar la implementación más adelante en el proyecto de ejemplo veremos cómo hacer el almacenamiento a través de un servicio que nosotros implementaremos para almacenar todo en una base de datos lo hacemos ahora escribiendo el método configures que recibe un authenticationmanagerbuilder aquí mismo authenticationmanagerbuilder
+
+
 ### :computer: `142-10-Seguridad`
 #### Ejemplo de integración de Spring Security
 
@@ -3071,6 +3075,8 @@ Vamos a partir del proyecto base que tiene la siguiente estructura:
 
 ![142-10-03](images/142-10-03.png)
 
+Vale y aquí a través de este manager Builder vamos a declarar como va a ser el mecanismo de autenticación y lo hacemos vale le decimos que va a hacer que no va a tener llamar la admin contraseña admin y el rol del usuario amanecer solamente admin en mayúscula de esta manera si nos queremos auténticas tendremos que proporcionar como usuario admin y como contraseña admin o bueno no reconocer a quienes somos 
+
 ```java
 @Configuration
 @EnableWebSecurity
@@ -3088,8 +3094,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
+esto solo que hemos hecho hasta ahora solamente con este código Spring Security ha hecho por nosotros un montón de cosas lo primero de todo toda la URL de nuestra aplicación van a necesitar de un usuario autenticado nos ha autogenerado un formulario de login nos va a permitir el acceso como decíamos antes con un usuario llamado jazmín y contraseña admin nos permite hacer logout nos previene de ataque de CRS entre otros también de session fixation vale protección de ataque XS S Cristian King vale y una serie de ataque también no se ha hecho la integración con algunos métodos de lapicero le vale descargas de la clase HTTP servlet request cómo es get remote user getuserprincipal isuserinrole login logout etcétera además la clase de configuración a registrado un filtro filtro de servlets de los que hablamos especial llamado springsecurityfilterchain este filtro especial en realidad es una cadena de filtro responsable de todo el proceso de seguridad autenticación y autorización como por ejemplo proteger la URL validar usuario contraseña redirigir al formulario de login etcétera etcétera 
+
 
 #### Ejecutar la Aplicación
+
+vamos a comprobar la ejecución
 
 ![142-10-04](images/142-10-04.png)
 ![142-10-05](images/142-10-05.png)
@@ -3098,6 +3108,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 ![142-10-08](images/142-10-08.png)
 
 #### Paso 
+
+Ya no se nos muestra el listado de empleado sino que se nos muestra un formulario de login y nosotros a quién le decimos que el usuario es ppp prevenciones son erróneas pero sin embargo se lo indicamos que es Admin admin las credenciales serían totalmente correcta como hemos comprobado pasemos ahora hablar de la autorización para que tenemos permiso lo vamos a configurar también en la en la clase se quiere y pico office a través de un objeto HTTP se quiere que nos va a llevar al uso del mes 80 es decir de encadenar la llamada de un método con otro vale para la configuración vamos al código sobrevivimos las diferentes llamada que nos van a permitir configurar la autorización antes de ello en lugar de utilizar el login por defecto lo vamos a modificar vale para modificar lo necesario para para cambiar el formulario de login y hacer uno propio que podamos integrar dentro de la imagen de nuestra aplicación invocando a la ruta barra login Manet y qué bueno no nos permita el que cualquier usuario bueno pues pueda acceder desde nuestro log y después lo que haremos será en este paso configurar el la autenticación perdón la autorización para que el formulario de login esté en la página en la ruta que nosotros le indiquemos y que a cualquier usuario se le permita acceder al lo que vale porque no se puede tener la seguridad tan restrictiva de manera que para el login ya tengamos que estar autenticados para customizarlo vale vamos a necesitar una plantilla de Loki y algún controlador que nos lleve a ella pero vamos a comprobar como si tenemos solamente un controlador que nos va a llevar a la plantilla de los bien pues va a ser bastante simple para ellos para esos momentos donde simplemente necesitamos un controlador que nos lleve una plantilla vamos a poder crear esta esta clase de configuración vale que simplemente web en bici configure y que mediante el código de addviewcontrollers nos va a permitir añadir en la ruta barra login vale digamos que un mapeo directo a el formulario barra login HTML vale vamos a añadir esta clase haríamos en el paquete de configuración
+
 
 ![142-10-09](images/142-10-09.png)
 
@@ -3118,6 +3131,9 @@ public class MvcConfig implements WebMvcConfigurer {
 }
 ```
 
+En el siguiente vídeo vamos a añadir el código necesario para la pantalla de login para que quede como como podemos comprobar utilizando también booster 3 que el que venimos utilizando lo de estilos necesario y vamos a completar el proceso de autorización para que nos permita utilizar este login utilizar el hogar que nos permita servirlos estilos.css vale la cuescar etcétera etcétera de manera que nuestra aplicación pueda quedar segura pero nos permita mostrar con la información del usuario y todo lo que nosotros queramos configura
+
+
 # 26 Implementación del login con Spring Security 13:25 
 
 ## Resumen Profesor
@@ -3127,6 +3143,8 @@ No existe.
 ## Transcripción
 
 #### Paso 4
+
+Vamos a continuar incrementando la seguridad y en particular vamos a seguir en el paso 4 implementando el loco en concreto la plantilla para ello volvemos a nuestro proyecto y vamos a basarnos en un ejemplo que tenemos en también en la web te gusta vale me formulario de login uno que sea sencillo en nuestro proyecto vamos a irnos a los recursos estáticos y en CSS vamos añadir un nuevo fichero ya digo que lo he sacado directamente de esa plantilla lo podría ir nosotros directamente también copiar y pegar y también creariamos dentro de las plantillas nuestra plantilla de login hacer un fichero de HTML yo la he tuneado un poco para que funcione con las cuestas muy algo que ya hemos explicado pues no nos vamos a parar vale a volverlo a explicar podemos entrar en ver como trabaja el formulario consulte atracción apuntando también Navarra login con el mejor post que tiene los campos el campo usuario fijaos como este campo forzosamente sino configuramos de otra manera él se tiene que llamar el name username y el campo password le pasa lo mismo el name del campo también tiene que ser password sino no va a funcionar el proceso de autenticación vale ya tenemos nuestro formulario de login como decía para que funcione th acción tiene que apuntar a barrallon y estos campos se tienen que llamar de esta forma 
 
 ![142-10-10](images/142-10-10.png)
 ![142-10-11](images/142-10-11.png)
@@ -3238,7 +3256,7 @@ body {
 
 #### Paso 5: Autorizar Peticiones
 
-AQUIIIIIII
+vamos a ver como debería quedar nuestro código para poder autorizar peticiones como decía con la seguridad inicial la autorización prohibido incluso las peticiones a los recursos estáticos barra webcam barra CFS todo ello lo deberíamos permitir para ellos nos venimos a nuestra clase de seguridad y aquí vamos a autorizar las peticiones vale y mediante el método and match vale vamos a poder proporcionarle aquí un varar es decir un número variable de argumentos de tipo stream donde pongamos expresiones hello es decir son algo parecido expresiones regulares cadenas de caracteres que tienen algunos caracteres comodín vale donde le podemos decir oye pues vamos a ver si miro una regla para todo lo que haya dentro de webhard hola ruta hasta que por debajo todo lo que haya dentro de CCS y las rutas por debajo de manera que estén siempre permitidas es decir los recursos estáticos los vamos a permitir siempre cualquier otra petición vale tendrá que ser autenticada y además vamos a definir el formulario de login de forma que la página de login estará en barra login como hemos dicho antes y aquí también vamos a permitírselo a todo el mundo vale de esta manera se van a poder visualizar los estilos de nuestro formulario cuando nosotros queramos cuando queramos visualizarlo 
 
 En la Clase de seguridad `SecurityConfig` añadimos el siguiente método:
 
@@ -3257,11 +3275,97 @@ protected void configure(HttpSecurity http) throws Exception {
 	}
 ```
 
-```java
+podríamos comprobar sí sí nuestro proyecto ahora funciona relanzamos vale nos ven
+
+![142-10-14](images/142-10-14.png)
+![142-10-15](images/142-10-15.png)
+![142-10-16](images/142-10-16.png)
+
+
+Vale seguimos aquí ya el formulario de login es el que hemos implementado nosotros el techo viene en castellano y no estaría llevando aquí a administrada ahora en el siguiente paso no que tendríamos que hacer es implementar el logout el logout lo que va a realizar es una serie de paso cómo invalidar la sesión limpiar el contexto de seguridad con toda la información de seguridad que tuviera y almacenada y de dirigirnos a un sitio en particular a particular sería bueno a barra login vale con el argumento logout por ejemplo para hacer logout tenemos que añadir una serie de enlaces en la plantilla lo que vamos a hacer es que bueno aquí a la derecha arriba podamos tener la opción de pulsar unos 100 de menús que sea salir hay que tener en cuenta y ahora volveremos a ello que en la última versión de Spring en Logan no se puede realizar con una petición GET sino que tiene que ser con una petición POST el motivo es el uso de la prevención de ataques PCR no queremos utilizar peticiones post la opción queda clara cómo es deshabilitarse FR lo cual no es algo que se ha recomendado puesto que podríamos sufrir algún ataque vale desde otro sitio web intentaré invocar a nuestro alguna url de nuestro sitio realizar la petición POST vamos a comprobar como como es fácil vamos añadir el código nos tendríamos que ir a ambas plantillas a la plantilla de login perdón de lista y a la plantilla de formulario de manera que modificaría Moss el menú vale añadiendo aquí debajo vale después de este
+
+Código fuente cómo es código de vustra me permitís que lo copié y lo pegue vale y así no nos perdemos sería una opción para tener un desplegable y ese desplegable vale vamos a quedar en principio la palabra menú y cuando lo despegue en la opción salí y esta opción lo que va a hacer para poder implementar ese enlace compost es invocar un formulario donde vamos a poner el formulario o el formulario lo vamos a poner en tierra de nadie que como no va a tener ningún campo tan solo una acción cuando pulsemos estos 100 de aquí podemos comprobar como se va a buscar el elemento load form que estoy aquí en basketweave y se va a sus mitear es decir que se va a enviar con lo cual cuando pinchemos en salir se va a hacer una petición POST a Ferrer y de esta manera tan sencilla sin tener que usar ni siquiera Jay query para hacer la petición ni nada por el estilo lo podríamos integrar así de sencillo esto mismo deberíamos hacer también en el listado es decir que deberíamos venir aquí trabajo de este huele añadimos también el código debajo de la barra de navegación añadimos el formulario 
+
+
+```html
+...
+<body>
+   <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Miempresa.com</a>
+         </div>
+         <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+               <li class="active"><a href="#">Inicio</a></li>
+               <li><a href="/empleado/new">Nuevo empleado</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" 
+		          		   data-toggle="dropdown" role="button" 
+		          		   aria-haspopup="true" aria-expanded="false">Menú<span class="caret"></span>
+		          		</a>
+                  <ul class="dropdown-menu">          			
+                     <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Salir</a>
+                     </li>          			
+                  </ul>
+            </ul>
+         </div><!--/.nav-collapse -->
+      </div>
+   </nav>
+   <form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+   
+   <div class="container">
+      ...
 ```
 
-```java
+y volvemos a ejecutar
+
+Ascendente ahora tenemos aquí los 100 de menos salir y nos llevaría de nuevo al formulario de login y la sesión se ha invalidado el código que acabamos de añadir 
+
+![142-10-17](images/142-10-17.png)
+![142-10-18](images/142-10-18.png)
+![142-10-19](images/142-10-19.png)
+
+por último vamos a incluir la opción de que allí arriba a la derecha en lugar de menú aparezca el nombre del usuario logueado algo bastante usual nombre el email vale algún campo como el usuario que sea lo que ha dado queda almacenado en el contexto de seguridad en el securitycontextholder vale lo podemos sacar de allí y tomarlo vale añadirlo al modelo y pasarlo a la plantilla o utilizar alguna librería de extras de timeline con Spring Security mediante la cual pues eso lo vamos a poder hacer directamente en la plantilla para ello tenemos que añadir una nueva dependencia en el Pou con la dependencia para con la dependencia para esta librería con Spring Security cinco vale librería de extra.
+
+
+```html
+<dependency>
+   <groupId>org.thymeleaf.extras</groupId>
+   <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+</dependency>
 ```
+
+después tendríamos que añadir en por ejemplo anda de visado podemos comenzar aquí hemos añadido un espacio de nombres te hace letra English tendríamos que añadir un nuevo vale que sea el de seguridad con una nueva URL para poder utilizar todas estas etiquetas para mí sería estar aquí con los extras de 100 se quiere ti y ahora tendríamos que añadir allá donde antes solamente poníamos menú vale por aquí solamente poníamos este menú de aquí podríamos añadir vale que no soy capaz de verlo un pH lo podríamos hacer incluso con la misma vale
+
+vale bueno lo podríamos hacer incluso con la misma vale aquí podríamos usar ya las funciones de los extra dónde sacamos el nombre del usuario que actualmente esté autenticado vale de manera que lo ponemos aquí encerramos menú en Estepa
+
+```html
+<a href="#" class="dropdown-toggle" 
+		          		   data-toggle="dropdown" role="button" 
+		          		   aria-haspopup="true" aria-expanded="false">
+		          		   		<span th:text="${#authentication.name}">Menú</span> <span class="caret"></span>
+		          		</a>
+```
+
+
+ hay algún usuario autenticado vale lo que va a hacer es que va a visualizar su nombre Vane y lo va a poner directamente aquí vamos a probarlo directamente en esta plantilla tendríamos que añadirlo a todas y cada una de las plantillas que tuvieron formulario de login vale nos podemos picar como tenemos aquí al admin vale no lo hemos añadido en la otra aquí aparece solamente menú pero aquí sí que aparece el nombre del usuario que ahora mismo está autenticado si tuviéramos más de un usuario nombre de usuario sería el que aparecería hay 
+ 
+ 
+![142-10-20](images/142-10-20.png)
+![142-10-21](images/142-10-21.png)
+
+ 
+ hasta aquí lo que vamos a trabajar de seguridad como siempre os propongo algo para practicar intentar un login fallido la URL a la cual se nos remite barra login interrogante error vale pues invito a qué intentáis añadir algún elemento de la interfaz de usuario por ejemplo una ley de vustra en el que se muestre algún mensaje de error vale si queréis podéis tomar directamente en la plantilla el parámetro de la request con la expresión dólar para. Error vale y de esa manera pues podría y darle algo de retroalimentación a al usuario también podrían modificar la autorización de manera que pudiéramos jugar y que el listado de empleados fuese de acceso público no fuese de Obligado login pero no el alta de un nuevo empleado o la edición de uno existente de manera que para ellos si tuviéramos que estar autenticado o invito a que a que lo podáis hacer como práctica en las próximas lecciones vamos a aprender a trabajar con Spring session
 
 # 27 Manejo de sesiones con Spring Session 6:43 
 
@@ -3321,6 +3425,16 @@ $ docker exec -ti myredis redis-cli
 ```
 
 ## Transcripción
+
+
+
+
+```java
+```
+
+```java
+```
+
 
 # 28 Integración de Spring Session en nuestro proyecto 11:10 
 
