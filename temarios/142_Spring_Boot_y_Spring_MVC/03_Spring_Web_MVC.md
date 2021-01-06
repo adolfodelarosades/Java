@@ -3486,6 +3486,15 @@ configurar otro aspecto como por ejemplo el timeout de la sesión es decir es du
 
 , vale ejecutamos la aplicación y nos lo que han vale en principio podemos decir que si no se ha quejado posiblemente hayamos tenido suerte vamos a comprobar queremos comprobar lo que podemos hacer es conectarnos al contenedor vale cuando queráis menos 6 el nombre del contenedor y la opción va y de estas de esta forma vamos a poder comprobar las claves que hay en en el en el sistema gestor Redis vale para ver si te ha creado alguna sesión despre vale yo como antes tengo que poner tu Docker de ir dos vas vale ya estoy aquí dentro de Dani majo un poco grande lo voy a hacer un poco más pequeño para que nos demos cuenta que ya hay por aquí la de Spring session spring session ballet y tenemos por aquí las diferentes claves Manel en particular de admin la tenemos por aquí tanto es así que si ahora paramos la ejecución de nuestro proyecto y lo volvemos a lanzar antes como hemos podido comprobar como era Tomcat quién estaba cenando la sesión cada vez que reinicia vamos se salía no ahora nos debería dejar ya me han tenido la sesión porque la sesión la teníamos en un servidor externo en este caso es redil propongo también que podáis bichear un poco y qué borréis la sesión directamente en red a través de redis-cli te vale con la sesión correspondiente para que podáis comprobar que entonces directamente nos va a llevar a login en el momento en el que te la tengo de cambiar de de página para que podamos comprobar que realmente está haciendo Redis quién está alojando en este caso la sesión con esto terminamos el vídeo de sobre la configuración de Spring session vale con Reddit y terminamos también el bloque de Spring en bici en el siguiente bloque vamos a poder utilizar base de datos relacionales a persistir nuestra información en base de datos relacionales con Spring data JP
 
+![142-11-02](images/142-11-02.png)
+![142-11-03](images/142-11-03.png)
+![142-11-04](images/142-11-04.png)
+![142-11-05](images/142-11-05.png)
+![142-11-06](images/142-11-06.png)
+![142-11-07](images/142-11-07.png)
+![142-11-08](images/142-11-08.png)
+![142-11-09](images/142-11-09.png)
+
 #  Contenido adicional 17
 
 * [PDF 08._Cómo_funciona_una_aplicación_web.pdf](pdfs/08._Cómo_funciona_una_aplicación_web.pdf)
