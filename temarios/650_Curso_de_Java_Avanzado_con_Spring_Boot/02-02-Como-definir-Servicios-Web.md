@@ -1,5 +1,9 @@
 # 02 - Como definir Servicios Web
 
+En esta lección vamos a ver los servición que vamos a crear en esta sección, vemos a continuación un resumen de todos ellos:
+
+<hr>
+
 ## REST: Aproximación al diseño
 La clave es el concepto de Recurso
 
@@ -41,3 +45,5 @@ Body: Detalles del poder a añadir
 ```
 GET /hero/{id}/power/{powerId}
 ```
+
+<hr>
