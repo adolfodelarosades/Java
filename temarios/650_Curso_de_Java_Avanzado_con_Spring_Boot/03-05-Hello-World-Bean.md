@@ -54,5 +54,5 @@ Vamos a probar la aplicación, ahora tenemos dos recursos que podemos solicitar.
 ![02-03-02](images/02-03-02.png)
 ![03-05-01](images/03-05-01.png)
 
-Nos retorna on Objeto de tipo JSON que representa a nuestro `BeanResponse`
+Nos retorna un Objeto de tipo JSON que representa a nuestro `BeanResponse`
 
