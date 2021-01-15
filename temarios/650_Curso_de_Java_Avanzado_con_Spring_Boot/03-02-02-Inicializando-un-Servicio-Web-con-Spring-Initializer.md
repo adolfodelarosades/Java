@@ -1,4 +1,4 @@
-# 01 - Introducción a los Servicios Web
+# 02 - Inicializando un Servicio Web con Spring Initializer
 
 Si vamos a https://start.spring.io/ veremos Spring Initializr.
 
