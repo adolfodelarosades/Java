@@ -67,3 +67,9 @@ Pero las credenciales validas son `user` y el password indicado en el Log.
 Pero como nuestra aplicación no hace nada por ahora se nos presenta la siguiente pantalla.
 
 ![02-01-13](images/02-01-13.png)
+
+Finalmente vamos a renombrar nuestro proyecto con el nombre `650-02-Demo` para mantener nuestra organización
+
+![02-01-14](images/02-01-14.png)
+
+
