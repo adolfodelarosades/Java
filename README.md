@@ -91,7 +91,7 @@ Esta es una serie de varios cursos Java que se listan a continuación.
 
 # KeepCoding
 
-* [650 Curso de Java avanzado con Spring Boot]
+* [650 Curso de Java avanzado con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/650_Curso_de_Java_Avanzado_con_Spring_Boot.md)
 
 # Cursos Madrid
 
