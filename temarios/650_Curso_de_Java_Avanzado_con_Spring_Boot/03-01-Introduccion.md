@@ -1,6 +1,6 @@
-02 - Introducción
+# 01 - Introducción - Sección 03
 
-# SERVICIOS WEB CON SPRING BOOT
+## SERVICIOS WEB CON SPRING BOOT
 Este es el proyecto que contiene todo el código generado durante la sección Servicios Web con Spring Boot del curso Microservicios con Spring Cloud.
 
 En esta sección se desarrollará un Servicio Web de tipo REST full que contendrá dos recursos principales: Héroes y Poderes. 
