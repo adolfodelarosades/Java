@@ -52,9 +52,9 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class HelloWorldController {
-  public String helloWorld() {
-		return "Hello World!";
-	}
+   public String helloWorld() {
+      return "Hello World!";
+   }
 }
 ```
 
@@ -126,10 +126,10 @@ vemos que tiene la anotación `@ResponseBody` como global, esto implica que la a
 @RestController
 public class HelloWorldController {
 
-	@RequestMapping(value="/hello-world", method= RequestMethod.GET)
-	public String helloWorld() {
-		return "Hello World!";
-	}
+   @RequestMapping(value="/hello-world", method= RequestMethod.GET)
+   public String helloWorld() {
+      return "Hello World!";
+   }
 	
 }
 ```
@@ -144,7 +144,7 @@ public class HelloWorldController {
    @GetMapping(value="/hello-world")
    public String helloWorld() {
       return "Hello World!";
-	}
+   }
 	
 }
 ```
@@ -171,7 +171,3 @@ public class HelloWorldController {
 Con lo cual el método queda aun más simplificado. Si volvemos a probar la aplicación el resultado sigue siendo el mismo.
 
 ![02-03-02](images/02-03-02.png)
-
-
-
-
