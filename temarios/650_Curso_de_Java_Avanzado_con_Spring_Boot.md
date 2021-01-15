@@ -13,7 +13,7 @@
 
 ## Sección 02. Introducción a los Servicios Web
  
-* Introducción - Sección 02 (0:07)
+* [Introducción - Sección 02](650_Curso_de_Java_Avanzado_con_Spring_Boot/02-00-Introduccion.md) (0:07)
 * [01 - Introducción a los Servicios Web](650_Curso_de_Java_Avanzado_con_Spring_Boot/02-01-Introduccion-a-los-Servicios-Web.md) (6:19)
 * [02 - Como definir Servicios Web](650_Curso_de_Java_Avanzado_con_Spring_Boot/02-02-Como-definir-Servicios-Web.md) (4:50)
 * 03 - Servicios Web Conceptos Clave (3:45)
