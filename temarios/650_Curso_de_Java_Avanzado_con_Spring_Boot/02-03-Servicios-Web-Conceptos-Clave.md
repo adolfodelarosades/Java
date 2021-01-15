@@ -1,7 +1,9 @@
 # 03 - Servicios Web Conceptos Clave
 
 ## :computer: `650-03-Hello-World`
-### Ejemplo de básico 
+### Ejemplo de básico de un Controller y RestController 
+
+![02-03-04](images/02-03-04.png)
 
 Basados en el proyecto `650-02-Demo` vamos a realizar una copia que vamos a llamar `650-03-Hello-World`.
 
