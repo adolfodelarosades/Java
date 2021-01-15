@@ -4,6 +4,8 @@ En esta lección vamos a ver como usar una variable o mejor dicho una PathVariab
 
 ## :computer: `650-05-Hello-World-Path-Variable`
 
+![03-06-03](images/03-06-03.png)
+
 Vamos a realizar una nueva copia del proyecto `650-04-Hello-World-Bean` que llamaremos `650-05-Hello-World-Path-Variable`, donde vamos a añdir un método más que reciba un PathVariable.
 
 ```java
@@ -17,4 +19,3 @@ Tenemos un endpoint `/hello-world/path-variable/{name}` en el cual estamos pasan
 
 ![03-06-01](images/03-06-01.png)
 ![03-06-02](images/03-06-02.png)
-![03-06-03](images/03-06-03.png)
