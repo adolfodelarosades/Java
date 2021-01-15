@@ -15,7 +15,7 @@ public BeanResponse helloWorldVariable(@PathVariable String name) {
 }
 ```
 
-El RestController es:
+El RestController completo con los tres métodos es el siguiente:
 
 ```java
 package com.example.demo.helloworld;
