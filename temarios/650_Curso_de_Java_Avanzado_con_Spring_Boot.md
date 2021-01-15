@@ -13,10 +13,10 @@
 
 ## Sección 02. Introducción a los Servicios Web
  
-* [Introducción - Sección 02](650_Curso_de_Java_Avanzado_con_Spring_Boot/02-00-Introduccion.md) (0:07)
-* [01 - Introducción a los Servicios Web]() (6:19)
-* [02 - Como definir Servicios Web]() (4:50)
-* [03 - Servicios Web Conceptos Clave]() (3:45)
+* Introducción - Sección 02 (0:07)
+* 01 - Introducción a los Servicios Web (6:19)
+* 02 - Como definir Servicios Web (4:50)
+* 03 - Servicios Web Conceptos Clave (3:45)
 * 04 - Servicios Web SOAP (4:47)
 * 05 - Servicios Web REST (7:44)
 * 06 - REST vs SOAP (2:53)
@@ -28,7 +28,7 @@
 * [02 - Inicializando un Servicio Web con Spring Initializer](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-02-Inicializando-un-Servicio-Web-con-Spring-Initializer.md) (8:19)
 * [03 - Introducción a los Servicios que implementaremos](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-03-Introduccion-a-los-Servicios-que-implementaremos.md) (8:47)
 * [04 - Hello World](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-04-Hello-World.md) (6:59)
-* 05 - Hello World Bean (4:59)
+* [05 - Hello World Bean](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-05-Hello-World-Bean.md) (4:59)
 * 06 - Hello World Path Variable (3:07)
 * 07 - Hero Model y Hero Service (11:00)
 * 08 - Métodos GET de Hero (6:24)
