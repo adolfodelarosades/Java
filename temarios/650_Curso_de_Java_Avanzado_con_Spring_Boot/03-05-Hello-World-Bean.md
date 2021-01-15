@@ -4,6 +4,8 @@ Esta nueva lección vamos a crear una nueva versición del proyecto Hello World 
 
 ## :computer: `650-04-Hello-World-Bean`
 
+![03-05-02](images/03-05-02.png)
+
 Vamos a partir del proyecto `650-03-Hello-World` y vamos a hacer una copia a la que llamaremos `650-04-Hello-World-Bean`.
 
 ### Crear el POJO
