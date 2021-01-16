@@ -32,7 +32,7 @@
 * [06 - Hello World Path Variable](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-06-Hello-World-Path-Variable.md) (3:07)
 * [07 - Hero Model y Hero Service](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-07-Hero-Model-y-Hero-Service.md) (11:00)
 * [08 - Métodos GET de Hero](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-08-Metodos-GET-de-Hero.md) (6:24)
-* 09 - Métodos POST de Hero I (6:31)
+* [09 - Métodos POST de Hero I](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-09-Metodos-POST-de-Hero-I.md) (6:31)
 * 10 - Métodos POST de Hero II (5:36)
 * 11 - Manejo de Excepciones (5:50)
 * 12 - Excepciones Personalizadas (8:31)
