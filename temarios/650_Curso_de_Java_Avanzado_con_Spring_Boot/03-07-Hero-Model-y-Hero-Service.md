@@ -79,8 +79,7 @@ public class Hero {
 
 ## Creación del Servicio
 
-Dentro de nuestro paquete principal vamos a crear la clase `HeroDaoService` dentro del paquete `dao`. En esta clase va contener los datos en un array estático.
-
+Dentro de nuestro paquete principal vamos a crear la clase `HeroDaoService` dentro del paquete `dao`. 
 
 `HeroDaoService`
 
@@ -94,6 +93,7 @@ import java.util.List;
 
 import com.example.shield.model.Hero;
 
+@Service
 public class HeroeDaoService {
 	
    private static List<Hero> heroes = Arrays.asList(
@@ -142,7 +142,8 @@ public class HeroeDaoService {
    }
 }
 ```
-
+* Anotamos la clase con `@Service` para indicar que es una clase de Servicio
+* Declaramos un array estático con los datos de nuestros Heroes.
 * Declaramos la propiedad `counter` para ir contando el número existente de heroes que tenemos y nos servira para generar el nuevo `id` en caso de insertar un nuevo Heroe.
 * Va a tener una serie de métodos:
    * Obtener todos los heroes
