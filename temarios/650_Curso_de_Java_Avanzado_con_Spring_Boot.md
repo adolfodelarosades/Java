@@ -30,7 +30,7 @@
 * [04 - Hello World](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-04-Hello-World.md) (6:59)
 * [05 - Hello World Bean](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-05-Hello-World-Bean.md) (4:59)
 * [06 - Hello World Path Variable](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-06-Hello-World-Path-Variable.md) (3:07)
-* 07 - Hero Model y Hero Service (11:00)
+* [07 - Hero Model y Hero Service](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-07-Hero-Model-y-Hero-Service.md) (11:00)
 * 08 - Métodos GET de Hero (6:24)
 * 09 - Métodos POST de Hero I (6:31)
 * 10 - Métodos POST de Hero II (5:36)
