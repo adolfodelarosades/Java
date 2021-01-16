@@ -96,7 +96,7 @@ import org.springframework.stereotype.Service;
 import com.example.shield.model.Hero;
 
 @Service
-public class HeroeDaoService {
+public class HeroDaoService {
 	
    private static List<Hero> heroes = Arrays.asList(
          new Hero(1,"Peter Parker","Spiderman", new Date()),
