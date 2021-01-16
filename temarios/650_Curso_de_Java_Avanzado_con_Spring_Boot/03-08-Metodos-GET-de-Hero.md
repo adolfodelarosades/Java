@@ -59,10 +59,24 @@ http://localhost:8080/hero/3
 
 Vamos a inspección con las Herramientas de Desarrollador de Google Chrome que sucede cuando invocamos el URL http://localhost:8080/hero 
 
+Cuando invocamos la URL se hace la petición al endpoint `hero`
+
 ![03-08-04](images/03-08-04.png)
+
+Si pulsamos en el vemos más detalles, vemos que nos regresa un Status Code con un valor 200, el estado 200 en HTTP significa OK es decir que todo ha ido bien, podemos ver también las Headers de la Response y las Headers de la Request.
+
 ![03-08-05](images/03-08-05.png)
+
+Si cambiamos de pestaña podemos Previsualizar la respuesta de una forma formateada.
+
 ![03-08-06](images/03-08-06.png)
+
+O sin formatear
+
 ![03-08-07](images/03-08-07.png)
+
+Existen otras pestañas que nos ofrecen otro tipo de información.
+
 ![03-08-08](images/03-08-08.png)
 ![03-08-09](images/03-08-09.png)
 
