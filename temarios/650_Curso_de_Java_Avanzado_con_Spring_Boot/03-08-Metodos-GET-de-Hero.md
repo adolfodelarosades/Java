@@ -56,3 +56,13 @@ http://localhost:8080/hero
 http://localhost:8080/hero/3
 
 ![03-08-02](images/03-08-02.png)
+
+Vamos a inspección con las Herramientas de Desarrollador de Google Chrome que sucede cuando invocamos el URL http://localhost:8080/hero 
+
+![03-08-04](images/03-08-04.png)
+![03-08-05](images/03-08-05.png)
+![03-08-06](images/03-08-06.png)
+![03-08-07](images/03-08-07.png)
+![03-08-08](images/03-08-08.png)
+![03-08-09](images/03-08-09.png)
+
