@@ -99,6 +99,7 @@ public String helloWorld(@RequestHeader(name = "Accept-Language", required = fal
 
 Vamos a probar la aplicación.
 
+![03-15-04-02](images/03-15-04-02.png)
 ![03-15-05](images/03-15-05.png)
 ![03-15-06](images/03-15-06.png)
 ![03-15-07](images/03-15-07.png)
