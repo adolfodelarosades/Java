@@ -247,3 +247,70 @@ El resultado que obtenemos es:
 ![03-14-11](images/03-14-11.png)
 
 Tiene en un array todos los posibles errores que se puedan producir y esto al cliente o consumer le puede venir muy bien, como vemos la forma de retornar la respuesta puede variar dependiendo de nuestras necesidades.
+
+Tendríamos que darle una vuelta a esta solución para adaptarla a nuestra propia aplicación ya que podemos añadir el atributo `private List<String> errors;` a nuestro `CustomExceptionResponse` y debemos modificar nuestra clase `CustomResponseEntityExceptionHandler` por que al constructor hay que pasarle la lista de errores, una solucion provicional es:
+
+
+```java
+@ControllerAdvice
+@Controller
+public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+	
+   @ExceptionHandler(Exception.class)
+   public ResponseEntity<Object> handleCustomException(Exception ex, WebRequest request){
+		
+      List<String> errors = new ArrayList<String>();
+      errors.add(ex.getMessage());
+	    
+      CustomExceptionResponse customExceptionResponse = 
+           new CustomExceptionResponse(new Date(), 
+	                               ex.getMessage(), 
+				       request.getDescription(false),
+				       errors);
+	
+      return new ResponseEntity<>(customExceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+   }
+	
+   @ExceptionHandler(HeroNotFoundException.class)
+   public ResponseEntity<Object> handleHeroNotFoundException(Exception ex, WebRequest request){
+		
+      List<String> errors = new ArrayList<String>();
+      errors.add(ex.getMessage());
+		
+      CustomExceptionResponse customExceptionResponse = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false),errors);
+		
+      return new ResponseEntity<>(customExceptionResponse, HttpStatus.NOT_FOUND);
+   }
+	
+   @Override
+   protected ResponseEntity<Object> handleMethodArgumentNotValid(
+      MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+      List<String> errors = new ArrayList<String>();
+      for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+         errors.add(error.getField() + ": " + error.getDefaultMessage());
+      }
+      for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
+         errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
+      }
+	    
+      CustomExceptionResponse customExceptionResponse = 
+           new CustomExceptionResponse(new Date(), 
+                                       "Error de Validación", 
+                                       ex.getBindingResult().toString(),
+                                       errors);
+		
+      return new ResponseEntity<>(customExceptionResponse, HttpStatus.BAD_REQUEST);
+		
+   }
+}
+```
+
+Lo que obtendríamos cuando se lancen excepciones es lo siguiente:
+
+![03-14-12](images/03-14-12.png)
+![03-14-13](images/03-14-13.png)
+![03-14-14](images/03-14-14.png)
+
+
+
