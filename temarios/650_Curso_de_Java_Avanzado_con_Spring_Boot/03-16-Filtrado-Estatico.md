@@ -1,0 +1,2 @@
+# 16 - Filtrado Estatico
+
