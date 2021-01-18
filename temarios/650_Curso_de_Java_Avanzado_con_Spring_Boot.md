@@ -39,7 +39,7 @@
 * [13 - Borrando un Heroe](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-13-Borrando-un-Heroe.md) (3:00)
 * [14 - Validaciones](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-14-Validaciones.md) (7:41)
 * [15 - Internacionalización](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-15-Internacionalizacion.md) (7:20)
-* 16 - Filtrado Estatico (6:01)
+* [16 - Filtrado Estatico](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-16-Filtrado-Estatico.md) (6:01)
 * 17 - Filtrado Dinámico (7:16)
 * 18 - Versioning I (6:13)
 * 19 - Versioning II (8:16)
