@@ -9,39 +9,39 @@ package com.example.shield.filtering;
 
 public class UserFilteredDto {
 	
-	private int id;
-	private String name;
-	private String password;
+   private int id;
+   private String name;
+   private String password;
   
-  public UserFilteredDto() {
-		super();
-	}
+   public UserFilteredDto() {
+      super();
+   }
 	
-	public UserFilteredDto(int id, String name, String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.password = password;
-	}
+   public UserFilteredDto(int id, String name, String password) {
+      super();
+      this.id = id;
+      this.name = name;
+      this.password = password;
+   }
   
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+   public int getId() {
+      return id;
+   }
+   public void setId(int id) {
+      this.id = id;
+   }
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+   public String getPassword() {
+      return password;
+   }
+   public void setPassword(String password) {
+      this.password = password;
+   }
 }
 ```
 
@@ -59,10 +59,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FilteringController {
 	
-	@GetMapping("/filter")
-	public UserFilteredDto getUserFiltered() {
-		return new UserFilteredDto(1, "user1", "1234");
-	}
+   @GetMapping("/filter")
+   public UserFilteredDto getUserFiltered() {
+      return new UserFilteredDto(1, "user1", "1234");
+   }
 
 }
 ```
@@ -81,11 +81,11 @@ Ambas opciones funcionan igual, vamos a probar la primera opción con sus dos va
 ```java
 public class UserFilteredDto {
 	
-	private int id;
-	private String name;
-	@JsonIgnore
-	private String password;
-  ...
+   private int id;
+   private String name;
+   @JsonIgnore
+   private String password;
+   ...
 ```
 
 ```java
