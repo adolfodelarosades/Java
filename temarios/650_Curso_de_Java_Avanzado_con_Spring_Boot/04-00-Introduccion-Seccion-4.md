@@ -87,5 +87,3 @@ git commit -m "first commit"
 spring.cloud.config.failFast=true
 
 ```
-
-# 01 - Introducción a los microservicios
