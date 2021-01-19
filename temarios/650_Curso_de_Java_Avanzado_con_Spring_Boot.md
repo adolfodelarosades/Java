@@ -41,9 +41,9 @@
 * [15 - Internacionalización](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-15-Internacionalizacion.md) (7:20)
 * [16 - Filtrado Estatico](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-16-Filtrado-Estatico.md) (6:01)
 * [17 - Filtrado Dinámico](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-17-Filtrado-Dinamico.md) (7:16)
-* 18 - Versioning I (6:13)
-* 19 - Versioning II (8:16)
-* 20 - JPA I (20:50)
+* [18 - Versioning I](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-18-Versioning-I.md) (6:13)
+* [19 - Versioning II](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-19-Versioning-II.md) (8:16)
+* [20 - JPA I](650_Curso_de_Java_Avanzado_con_Spring_Boot/03-20-JPA-I.md) (20:50)
 * 21 - JPA II (9:33)
 * 22 - JPA III (17:29)
 * 23 - Swagger (14:07)
@@ -52,7 +52,7 @@
 
 ## Sección 04
  
-* 01 - Introducción a los microservicios (12:01)
+* [01 - Introducción a los microservicios](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-01-Introduccion-a-los-microservicios.md) (12:01)
 * 02 - Spring Cloud (10:14)
 * 03 - Análisis de la aplicacion de cambio de divisas (5:39)
 * 04 - Creando el microservicio de limites (4:35)
