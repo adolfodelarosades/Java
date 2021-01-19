@@ -55,7 +55,7 @@
 * [00 - Introducción a la sección](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-00-Introduccion-Seccion-4.md) 
 * [01 - Introducción a los microservicios](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-01-Introduccion-a-los-microservicios.md) (12:01)
 * [02 - Spring Cloud](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-02-Spring-Cloud.md) (10:14)
-* 03 - Análisis de la aplicacion de cambio de divisas (5:39)
+* [03 - Análisis de la aplicacion de cambio de divisas](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-03-Analisis-de-la-aplicacion-de-cambio-de-divisas.md) (5:39)
 * 04 - Creando el microservicio de limites (4:35)
 * 05 - Microservicio de Limites Hardcodeado (3:59)
 * 06 - Usando application.properties en el servicio de limites (6:30)
