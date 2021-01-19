@@ -77,15 +77,4 @@ En cuanto a los retos que se nos presentan a la hora de implementar los Microser
    
 * Tolerancia a Fallos   
 
-   Como los Microservicios interactuan entre ellos es necesaria la intervención de diferentes Microservicios para resolver una regla de negocio, o alguna peticición que se haya hecho a nuestra aplicación, entonces si en esta cadena de Microservicios alguno de esos Microservicios falla la petición entera va a fallar entonces
-   
-   
-   
-   
-   
-   
-
-
-
-
-
+   Como los Microservicios interactuan entre ellos es necesaria la intervención de diferentes Microservicios para resolver una regla de negocio, o alguna peticición que se haya hecho a nuestra aplicación, entonces si en esta cadena de Microservicios alguno de esos Microservicios falla, la petición entera va a fallar, entonces vamos a necesitar implementar alguna metodología de tolerancia a fallos que nos permita recuperarnos ante un fallo, que los fallos no sean criticos o que la caída de un Microservicio en concreto no haga que toda la aplicación entera se caiga.
