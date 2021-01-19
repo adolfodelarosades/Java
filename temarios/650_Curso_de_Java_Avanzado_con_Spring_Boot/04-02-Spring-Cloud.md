@@ -24,7 +24,24 @@ Spring Cloud consta de distintos proyectos que contienen una serie de caracterí
    El proyecto **Spring Cloud Bus** nos permite que todos nuestros servicios se suscriban a una cola de mensajería y ser capaces de comunicarnos con todos nuestros Microservicios mediante eventos, por ejemplo si tenemos varios Microservicios y varias instancias de estos Microservicios conectadas al servidor de configuración, si cambiamos la configuración podemos mandar un mensaje con Spring Cloud Bus a todos los Microservicios para decirles que hemos cambiado la configuración y que tiene que actualizarse, en lugar de estar llendo servicio por servicio e informando a cada uno, los servicios simplemente estaran suscritos a esta cola de mensajería y cuando se produzca un evento en la cola de mensajería se mandara un mensaje mediante Spring Cloud Bus para que se actualicen.
    
 ![04-02-03](images/04-02-03.png)   
+  
+Veíamos la problematica que teníamos con las aplicaciones con la arquitectura de Microservicios y hemos visto que Spring Cloud viene al rescate para resolver estos problemas, como se muestra en la diapositiva.
+
+Para la Monitorización vamos a usar **Zipkin** y **Zuul** vamos a ver la problematica que tenemos con el trazado distribuido, en aplicaciones distribuidas y como lo podemos solucionar con Zipkin por que tenemos que ser capaces de seguir una petición durante todo el flujo, imaginarse la encadenación de 5 microservicios y falla la petición en el tercer microservicio eso lo vamos a solucionar con **Hystrix** con la tolerancia a fallos, pero si quisieramos seguir todo el flujo de esa petición de un microservicio a otro nos costaria demasiado trabajo, tenríamos que mirar los logs del primer microservicio, averiguar que request es la que se ha hecho, mirar los logs del segundo microservicio y asi con todos, eso con Zipkin vamos a ser capaces de solucionarlo y Zipkin nos va a permitir mirar en un Dashboard ver todo ese flujo de llamadas agrupado como si estuvieramos viendo un mismo flujo, y luego la toleracia a fallos como deciamos si falla el tercer microservicio falla no queremos que toda la aplicación se caiga, lo que queremos es ser capaces de recuperar de ese error y que el fallo de un microservicio no haga que la aplicación entera falle, 
+
+![04-02-04](images/04-02-04.png)  
+
+Este sería un pequeño esquema de algunos de los elementos que vamos a usar, por ejemplo en este caso tendríamos dos microservicios en el cual el primero de ellos SERVICIO A tiene dos instancias y el segundo SERVICIO B tiene una instancia. Nosotros a través de la Interface nos vamos a comunicar a través de RIBBON, vamos a hacer una petición a los servicios y RIBBON con el servidor de nombres va a descubrir a que servicio tiene que redirigir la petición y en función de la carga RIBBON lo va a dirigir.
+
+![04-02-05](images/04-02-05.png) 
+
+¿Cuales son las ventajas de los MicroServicios? 
+
+* Flexibilidad de Tecnologías
+   Podemos tener una aplicación con el monton de Microservicios y que un Microservicio este escrito en Java, otro en NodeJS, otro en .NET, por lo que podemos tener un equipo multidisiplinar, podemos tener gente trabajando desde ya, por que no tiene que aprender una tecnología nueva.
    
-
-
-
+* Escalado Dinámico 
+   Nos puede ayudar a reducir los costes, por si hay una parte de la aplicación poder escalar solo esa parte, o poder desescalar parte de la aplicación cuando tengan muy baja carga es una ventaja muy grande.
+   
+* Ciclos de Entrega
+   Los ciclos de entrega suelen ser más rápidos ya que se puede aislar mucho el trabajo sobre una funcionalidad, sin que tenga dependencias con otros y con eso se pueden hacer pequeñas entregas de valor muy rapidamente por lo que es una arquitectura que es optima para el desarrollo Agile.
