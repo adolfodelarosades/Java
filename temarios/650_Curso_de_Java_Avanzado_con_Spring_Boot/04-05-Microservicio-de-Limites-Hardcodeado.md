@@ -2,12 +2,12 @@
 
 En esta lección vamos a crear nuestro primer Servicio para el LIMITS SERVICE que va a devolver los límites superior e inferior, vamos a hacer una primera versión Hardcodeando los valores de los límites, en la siguiente lección los recuperaremos del `application.properties` y en pasos posteriores crearemos el Servicio de Configuración y dede este Servicio de Configuración leeremos los límites.
 
-Empezamos por crear el paquete `controller` y dentro vamos a crear una clase `LimitsConfig`
+Empezamos por crear el paquete `model` y dentro vamos a crear una clase `LimitsConfig`:
 
 `LimitsConfig`
 
 ```java
-package com.example.limitsservice.controller;
+package com.example.limitsservice.model;
 
 public class LimitsConfig {
 	
@@ -42,7 +42,7 @@ public class LimitsConfig {
 }
 ```
 
-Vamos a crear nuestro RestController `LimitsConfigController`
+Vamos a crear dentro del paquete `controller` nuestro RestController `LimitsConfigController`
 
 `LimitsConfigController`
 
