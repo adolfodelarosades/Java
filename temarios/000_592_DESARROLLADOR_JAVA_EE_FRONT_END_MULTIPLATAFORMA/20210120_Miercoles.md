@@ -119,15 +119,84 @@ Vamos a aarancar la aplicación y en el navegador vamos a poner la URL http://lo
 
 Eureka nos ofrece un Dashboard en la que podemos ver varias cosas como los servicios que hay registrados, que por el momento no tenemos nada registrado, entre más información que nos proporciona como la Dirección IP.
 
-
-
-
+Una vez que ya tenemos configurado nuestro Servidor Eureka, el siguiente paso es registrar los Servicios en el, pero para poder hacer eso necesitamos añadir alguna dependencia a los MicroServicios.
 
 ![20210120-08](images/20210120-08.png)
 ![20210120-09](images/20210120-09.png)
+
+A cada servicio que queramos incorporamos incorporar en el Servidor Eureka debemos añadir la dependencia *Eureka Client* `spring-cloud-starter-netflix-eureka-client` y en el archivo de configuración de ese archivo que queramos registrar es muy importarle ademas de lo que tiene es un nombre de servicio que es el con el que se va a registrar en la tabla, con el identificador que le asociemos a esa propiedad y otra cosa importa es indicarle donde esta Eureka, si esta ultima propiedad parece ser que se busca por defecto en esta ruta. Euroka es necesario saber donde está, este no se descubre, que es un sitio unico que no se va a mover. Los que se mueven y no se sabe donde estan son los propios MicroServicios. ***En resumen es lo único que hay que hacer la dependencia y estas dos propiedades***.
+
 ![20210120-10](images/20210120-10.png)
+
+Una vez ya registrado el MicroServicio lo veremos registrado en Eureka.
+
+Vamos a hacerlo.
+
+## :computer: `27_microservicio_formacion_en_eureka`
+### MicroServicio que se va a registrar en Eureka.
+
+Vamos a hacer una copia del proyecto `15_microservicio_crud_formacion` y lo vamos a llamar `27_microservicio_formacion_en_eureka`, una vez hecho eso vamos a incluir la dependencia **Eureka Discovery Client**
+
+![20210120-30](images/20210120-30.png)
+
+Con esto se añade en el `pom.xml` el starter `spring-cloud-starter-netflix-eureka-client`, hacerlo con el ADD Dependencias y no manualmente que da problemas.
+
+Actualmente en este proyecto ya tenemos un `application.properties` con propiedades como el puerto, acceso a datos y propiedades Hibernate. Vamos a conservar el archivo `application.properties` y vamos a añadir el `application.yml` con las propiedades que comentabamos antes el ***Nombre de la Aplicación*** y ***Ubicación de Eureka***.
+
+```txt
+spring:
+ application:
+  name: servicio-formacion
+eureka:
+ client:
+  service-url:
+   defaultZone: http://localhost:8761/eureka 
+```
+
+Teniendo arrancado el Servidor Eureka, vamos a arrancar este servicio y vamos a recargar la URL http://localhost:8761/ tenemos:
+
+![20210120-31](images/20210120-31.png)
+![20210120-32](images/20210120-32.png)
+
+Como vemos ya nos aparece el nombre del servicio registrado.
+
+Si le damos al enlace abre el URL http://mini-de-adolfo.home:8000/actuator/info
+
+![20210120-33](images/20210120-33.png)
+
+Bueno con esto ya tenemos un Servicio para ser descubierto por otros MicroServicios que lo quieran usar, que es la otra pata.
+
 ![20210120-11](images/20210120-11.png)
+
+¿Cómo hago para que un servicio que esta usando otro servicio ahora lo pueda usar a través de Eureka?
+
+Ese servicio Cliente de este MicroServicio debe acceder por Eureka, va a necesitar también la dependencia **Eureka Client** por lo que necesitamos añadirla en los Starter. Además ahora el acceso se debe hacer a través de esa librería llamada RIBBON,  
+
+No es que el MicroServicio Cliente acceda directamente a Eureka, es RIBBON la que consulta esa tabla en Eureka y obtiene la dirección real que tenga en ese momento el MicroServicio al que se quiera acceder por parte del Servicio Cliente, con esa dirección ya el MicroServicio Cliente se lanza al otro MicroServicio.
+
+Para activar RIBBON es necesario que nuestro `RestTemplate` que es el objeto que usamos para acceder a un Servicio se genere mediante la anotación `@LoadBalanced` y ademas ese Cliente que antes usaba la  URL http://localhost:8080 ahora va a utilizar http://nombre-servicio la dirección digamos virtual, el nombre virtual con que esta registrado en Eureka, en la tabla que tenemos en el DashBoard de Eureka, y ya no vamos a tener que meter la dirección real de ese código que va a estar cambiando constantemente, gracias a que se ha activado RIBBON puede consultar a Eureka para que le diga donde esta ubicado fisicamente el MicroServicio que se quiere acceder.
+
+***En resumen en el MicroServicio Cliente debemos anotar con `@LoadBalanced` nuestro `RestTemplate` y además cambiar la dirección fisica por una dirección virtual del Servicio que necesitemos acceder***.
+
 ![20210120-12](images/20210120-12.png)
+
+A nivel de Configuración lo que debemos hacer es darle un nombre al MicroServicio, la configuración de Eureka donde le decimos si el MicroServicio cliete queremos que se registre o no con la propiedad `registerWithEureka: false` si queremos que se descubra no se pone esta propiedad que es la determinada, (El puero no me queda claro).
+
+## :computer: `28_micro_cliente_formacion_por_eureka` 
+### MicroServicio Cliente
+
+Vamos a copiar el proyecto `16_micro_cliente_formacion` que es el MicroServicio Cliente y lo vamos a llamar `28_micro_cliente_formacion_por_eureka`.
+
+
+
+
+
+
+
+
+## Servidor Zuul
+
+
 ![20210120-13](images/20210120-13.png)
 ![20210120-14](images/20210120-14.png)
 ![20210120-15](images/20210120-15.png)
