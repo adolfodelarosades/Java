@@ -59,7 +59,7 @@
 * [04 - Creando el microservicio de limites](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-04-Creando-el-MicroServicio-de-Limites.md) (4:35)
 * [05 - Microservicio de Limites Hardcodeado](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-05-Microservicio-de-Limites-Hardcodeado.md) (3:59)
 * [06 - Usando application.properties en el servicio de limites](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-06-Usando-application-properties-en-el-servicio-de-limites.md) (6:30)
-* 07 - Creando el servicio de configuración (4:38)
+* [07 - Creando el servicio de configuración](650_Curso_de_Java_Avanzado_con_Spring_Boot/04-07-Creando-el-servicio-de-configuracion.md) (4:38)
 * 08 - Git (9:15)
 * 09 - Conectando Spring Cloud config service con el repositorio de git (4:46)
 * 10 - Configurando distintos entornos (6:11)
