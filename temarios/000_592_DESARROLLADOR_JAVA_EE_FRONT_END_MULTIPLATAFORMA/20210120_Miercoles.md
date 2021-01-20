@@ -53,13 +53,71 @@ Esta es una configuración básica de ejemplo, pero en el momento que usamos Spr
 ## :computer: `26_servidor_eureka`
 ### Servidor Eureka
 
-
 ![20210120-18](images/20210120-18.png)
 ![20210120-19](images/20210120-19.png)
+
+Este proyecto solo necesita la dependencia Eureka Server. 
+
+Si vemos las dependencias Maven que se descargan al crear el proyecto veremos que tiene muchas.
+
+En el lanzador metemos la anotación `@EnableEurekaServer`.
+
+![20210120-24](images/20210120-24.png)
+
+Para la configuración no vamos a usar el `application.properties` que podríamos pero lo vamos a borrar y vamos a crear el archivo `application.yml` de la siguiente manera:
+
 ![20210120-20](images/20210120-20.png)
 ![20210120-21](images/20210120-21.png)
+
+En este archivo `application.yml` vamos a meter la configuración:
+
+```txt
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server
+eureka:
+  client:
+    register-with-eureka: false
+   
+```
+
+![20210120-25](images/20210120-25.png)
+
+Lo primero que hacemos es asignar el puerto, darle un nombre a este servicio, indicarle que que no se se registre Eureka en si mismo, por defecto es `true` por eso hay que ponerla explicitamente.
+
+Si arrancamos el servidor vemos en el Log lo siguiente:
+
+![20210120-26](images/20210120-26.png)
+![20210120-27](images/20210120-27.png)
+
+Vemos una serie de exepciones que tienen que ver con el `register-with-eureka: false`, al decirle que no se registre así mismo el intenta comprobar cosas y y algo allí que falla por eso vemos esas excepciones, esto se resuelve añadiendo otra propiedad, `fetch-registry: false`.
+
+
+```txt
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+```
+
+Si arrancamos nuevamente ya no vemos las excepciones.
+
+![20210120-28](images/20210120-28.png)
+![20210120-29](images/20210120-29.png)
+
+Vamos a aarancar la aplicación y en el navegador vamos a poner la URL http://localhost:8761/
+
 ![20210120-22](images/20210120-22.png)
 ![20210120-23](images/20210120-23.png)
+
+Eureka nos ofrece un Dashboard en la que podemos ver varias cosas como los servicios que hay registrados, que por el momento no tenemos nada registrado, entre más información que nos proporciona como la Dirección IP.
 
 
 
