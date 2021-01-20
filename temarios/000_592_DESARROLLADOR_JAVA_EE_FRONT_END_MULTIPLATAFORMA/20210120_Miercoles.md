@@ -187,10 +187,31 @@ A nivel de Configuración lo que debemos hacer es darle un nombre al MicroServic
 
 Vamos a copiar el proyecto `16_micro_cliente_formacion` que es el MicroServicio Cliente y lo vamos a llamar `28_micro_cliente_formacion_por_eureka`.
 
+Lo primero que vamos a hacer es añadir el Starter de Eureka Client
 
+![20210120-34](images/20210120-34.png)
 
+Cambios que debemos hacer en el código, en nuestra capa de Servicio tenemos la URL apuntando a la dirección física del MicroServicio que queremos consultar, 
 
+![20210120-35](images/20210120-35.png)
 
+la idea es que si lo vamos a consultar por Eureka no debemos conocer ni la dirección ni el puerto, solo el identificador del servicio es decir vamos a cambiar `http://localhost:8000/` por  `http://servicio-formacion/cursos`, sustituimos la combinación IP-puerto por el nombre del servicio que eso no va a cambiar. Gracias a que esto va a ser un servicio que se va a lanzar con Eureka cuando se haga una petición `getForObject` se activa RIBBON ve `http://servicio-formacion/cursos` y va a consultar en Eureka que le dice la dirección real y ya se puede ir al MicroServicio a consultar, pero para que se active ese RIBBON es necesario que el método que crea el `RestTemplate`  incluya `@LoadBalance` para activar la libreria RIBBON en el momento que cree los `RestTemplate` y pueda ese identificador y saber que se tiene que ir a Eureka a buscar.
+
+![20210120-36](images/20210120-36.png)
+
+En cuanto a la configuración necesitamos incluir el Nombre del Servicio y la ubicación del Servidor Eureka.
+
+```txt
+spring:
+  application:
+    name: servicio-cliente-formacion
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka 
+```
+En este caso no estamos registrando al Cliente con Eureka ya que estamos poniendo la propiedad `register-with-eureka: false` sino lo tuviera se registraría y podría ser descubierto por otros MicroServicios.
 
 
 
