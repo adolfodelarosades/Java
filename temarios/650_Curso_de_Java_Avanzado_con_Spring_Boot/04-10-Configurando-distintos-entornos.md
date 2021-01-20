@@ -12,9 +12,9 @@ Vamos al repositorio y vamos a crear los archivos para los diferentes entornos.
 
 Ahora si levantamos la aplicación `spring-cloud-config-server` con las diferentes URLs:
 
-http://localhost:8888/limits-service/default
-http://localhost:8888/limits-service/dev
-http://localhost:8888/limits-service/sta
+* http://localhost:8888/limits-service/default
+* http://localhost:8888/limits-service/dev
+* http://localhost:8888/limits-service/sta
 
 ![04-10-04](images/04-10-04.png)
 ![04-10-05](images/04-10-05.png)
