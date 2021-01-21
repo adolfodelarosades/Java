@@ -213,10 +213,38 @@ eureka:
 ```
 En este caso no estamos registrando al Cliente con Eureka ya que estamos poniendo la propiedad `register-with-eureka: false` sino lo tuviera se registraría y podría ser descubierto por otros MicroServicios.
 
+Teniendo ya arrancados el Servidor de Eureka y el MicroServicio de Formación, arrancamos el Cliente de Formación, como no le pusimos puerto se arranca en el 8080.
 
+![20210120-37](images/20210120-37.png)
+
+Para probar el MicroServicio Cliente nos vamos a Postman y metémos las URLs:
+
+* http://localhost:8080/cursos
+* http://localhost:8080/alumnos/1
+
+![20210120-38](images/20210120-38.png)
+![20210120-39](images/20210120-39.png)
+
+Que son los métodos en el Controlador del MicroServicio Cliente.
+
+![20210120-40](images/20210120-40.png)
+
+Como este MicroServicio Cliente no lo registramos en Eureka no cuenta con un Nombre en el Registro de Eureka 
+
+![20210120-41](images/20210120-41.png)
+
+Y aun que lo tuviera la forma de probar los MicroServicios en Postman se hace por medio de la dirección física por que Postman no tiene RIBBON integrado para usar la dirección virtual.
+
+NOTA: Podemos parar los tres servicios a la vez pero para arrancalos el primero que debe arrancar es Eureka y después los demas.
+
+## :computer: Ejercicio
+
+![20210120-42](images/20210120-42.png)
+![20210120-43](images/20210120-43.png)
+![20210120-44](images/20210120-44.png)
+![20210120-45](images/20210120-45.png)
 
 ## Servidor Zuul
-
 
 ![20210120-13](images/20210120-13.png)
 ![20210120-14](images/20210120-14.png)
