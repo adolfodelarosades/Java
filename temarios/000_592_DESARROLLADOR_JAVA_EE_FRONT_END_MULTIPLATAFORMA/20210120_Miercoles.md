@@ -609,6 +609,249 @@ En Postman debemos seguir usando la ruta real del servicio para poderlo probar p
 ![20210120-56](images2/20210120-56.png)
 ![20210120-57](images2/20210120-57.png)
 
+### :computer: `30_microservicio_pedidos_en_eureka`
+#### MicroServicio encargado de Gestionar la Tabla Pedidos de la BD.
+
+![20210120-58](images2/20210120-58.png)
+
+
+Este MicroServicio es muy similar al creado anteriormente, con el añadido de que este MicroServicio de Pedidos va a consumir al MicroServicio de Productos, por eso en este MicroServicio vamos a usar el RestTemplate ya que es un "Cliente" del MicroServicio de Productos.
+
+Vamos a crear el proyecto `30_microservicio_pedidos_en_eureka` como un proyecto Spring Boot con las siguientes dependencias:
+
+* Spring Web
+* Spring Data JPA
+* MySQL Driver.
+* Eureka Discovery Client
+
+#### Crear el Modelo
+
+Creamos la Entidad `Pedido` que refleja la tabla `pedidos` de la BD.
+
+`Pedido`
+
+```java
+package model;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="pedidos")
+public class Pedido {
+   @Id
+   private int idPedido;
+   private int codigoProducto;
+   private int unidades;
+   private double total;
+   private Date fechaPedido;
+   
+   public Pedido() {
+      super();
+   }
+	
+   public Pedido(int idPedido, int codigoProducto, int unidades, double total, Date fechaPedido) {
+      super();
+      this.idPedido = idPedido;
+      this.codigoProducto = codigoProducto;
+      this.unidades = unidades;
+      this.total = total;
+      this.fechaPedido = fechaPedido;
+   }
+	
+   public int getIdPedido() {
+      return idPedido;
+   }
+   public void setIdPedido(int idPedido) {
+      this.idPedido = idPedido;
+   }
+   public int getCodigoProducto() {
+      return codigoProducto;
+   }
+   public void setCodigoProducto(int codigoProducto) {
+      this.codigoProducto = codigoProducto;
+   }
+   public int getUnidades() {
+      return unidades;
+   }
+   public void setUnidades(int unidades) {
+      this.unidades = unidades;
+   }
+   public double getTotal() {
+      return total;
+   }
+   public void setTotal(double total) {
+      this.total = total;
+   }
+   public Date getFechaPedido() {
+      return fechaPedido;
+   }
+   public void setFechaPedido(Date fechaPedido) {
+      this.fechaPedido = fechaPedido;
+   }
+	
+}
+```
+
+#### Crear el Repositorio
+
+En el Repositorio vamos a comenzar creando la interface que `PedidosJpaRepository` que extiende a `JpaRepository`.
+
+`PedidosJpaRepository`
+
+```java
+package repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import model.Pedido;
+
+public interface PedidosJpaRepository extends JpaRepository<Pedido, Integer> {
+
+}
+```
+
+Lo siguiente que vamos a hacer es crear la Interface y Clase que vamos a usar en la Capa de Servicio.
+
+En la Interface vamos a colocar el Contrato de todos los métodos que vamos a usar en nuestro proyecto.
+
+`PedidosRepository`
+
+```java
+package repository;
+
+import java.util.List;
+
+import model.Pedido;
+
+public interface PedidosRepository {
+   List<Pedido> findAll();
+   void savePedido(Pedido prod);	
+}
+```
+
+Con la Clase `PedidosRepositoryImpl` vamos a implementar la Interface `PedidosRepository` apoyandonos de la Interface `PedidosJpaRepository` que tendremos que inyectar.
+
+`PedidosRepositoryImpl`
+
+```java
+package repository;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import model.Pedido;
+@Repository
+public class PedidosRepositoryImpl implements PedidosRepository {
+   @Autowired
+   PedidosJpaRepository repository;
+	
+   @Override
+   public List<Pedido> findAll() {		
+      return repository.findAll();
+   }
+
+   @Override
+   public void savePedido(Pedido prod) {
+      repository.save(prod);
+   }
+}
+```
+
+#### Crear el Servicio
+
+Vamos a crear la interface y clase para el Servicio.
+
+`PedidosService`
+
+```java
+package service;
+
+import java.util.List;
+
+import model.Pedido;
+
+public interface PedidosService {
+   List<Pedido> allPedidos();
+   void savePedido(Pedido pedido);
+}
+```
+
+`PedidosServiceImpl`
+
+```java
+package service;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import model.Pedido;
+import repository.PedidosRepository;
+@Service
+public class PedidosServiceImpl implements PedidosService {
+   
+   @Autowired
+   PedidosRepository repository;
+   
+   @Autowired
+   RestTemplate template;
+   
+   String url="http://servicio-productos";
+
+   @Override
+   public List<Pedido> allPedidos() {
+      return repository.findAll();
+   }
+   
+   @Override
+   public void savePedido(Pedido pedido) {
+      pedido.setFechaPedido(new Date());
+      //obtiene el total del pedido
+      pedido.setTotal(obtenerTotal(pedido));
+      repository.savePedido(pedido);
+      //actualizar stock de productos
+      template.put(url+"/producto/{cod}/{unit}", null, pedido.getCodigoProducto(),pedido.getUnidades());	
+   }
+	
+   //llama de nuevo al servicio de productos para obtener el precio
+   //del producto elegido y calcular el total
+   private double obtenerTotal(Pedido pedido) {
+      String precio=template.getForObject(url+"/precio/{cod}", String.class,pedido.getCodigoProducto());
+      double pUnitario= Double.parseDouble(precio);
+      return pUnitario*pedido.getUnidades();	
+   }
+}
+```
+* En este servicio usamos el `RestTemplate` para poder consumir el MicroServicio de Productos, observese que la URL  que usamos (`http://servicio-productos`) ya no es la fisica, sino la virtual que definimos en las propiedades del MicroServicio de Productos y que es la que se registra en Eureka.
+
+#### Crear el Controlador
+
+`ProductosController`
+
+```java
+```
+
+#### Configuración en el `application.yml`
+
+`application.yml`
+
+```txt
+```
+
+#### Probar el MicroServicio
+
+Vamos a arrancar nuestro Servidor Eureka y posteriormente vamos a arrancar nuestro MicroServicio de Gestión de Productos.
+
+
 
 ``
 ```java
