@@ -269,6 +269,366 @@ Vamos a crear el proyecto `29_microservicio_productos_en_eureka` como un proyect
 ![20210120-48](images/20210120-48.png)
 ![20210120-49](images/20210120-49.png)
 
+Este MicroServicio debe quedar registrado en el Servidor Eureka creado en el proyecto 26, por lo que también debemos incluir la dependencia:
+
+* Eureka Discovery Client
+
+![20210120-50](images/20210120-50.png)
+
+#### Crear el Modelo
+
+Vamos a crear la Entidad `Producto` con los atributos exactamente con los nombres que tenemos en la Tabla `productos` de la BD.
+
+`Producto`
+
+```java
+package model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "productos")
+public class Producto {
+   @Id
+   private int codigoProducto;
+   private String producto;
+   private double precioUnitario;
+   private int stock;
+	
+   public Producto() {
+      super();
+   }
+	
+   public Producto(int codigoProducto, String producto, double precioUnitario, int stock) {
+      super();
+      this.codigoProducto = codigoProducto;
+      this.producto = producto;
+      this.precioUnitario = precioUnitario;
+      this.stock = stock;
+   }
+	
+   public int getCodigoProducto() {
+      return codigoProducto;
+   }
+   public void setCodigoProducto(int codigoProducto) {
+      this.codigoProducto = codigoProducto;
+   }
+   public String getProducto() {
+      return producto;
+   }
+   public void setProducto(String producto) {
+      this.producto = producto;
+   }
+   public double getPrecioUnitario() {
+      return precioUnitario;
+   }
+   public void setPrecioUnitario(double precioUnitario) {
+      this.precioUnitario = precioUnitario;
+   }
+   public int getStock() {
+      return stock;
+   }
+   public void setStock(int stock) {
+      this.stock = stock;
+   }
+	
+}
+```
+
+#### Crear el Repositorio
+
+En el Repositorio vamos a comenzar creando la interface que `ProductosJpaRepository` que extiende a `JpaRepository`.
+
+`ProductosJpaRepository`
+```java
+package repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import model.Producto;
+
+public interface ProductosJpaRepository extends JpaRepository<Producto, Integer> {
+
+}
+```
+
+Lo siguiente que vamos a hacer es crear la Interface y Clase que vamos a usar en la Capa de Servicio.
+
+En la Interface vamos a colocar el Contrato de todos los métodos que vamos a usar en nuestro proyecto.
+
+`ProductosRepository`
+
+```java
+package repository;
+
+import java.util.List;
+
+import model.Producto;
+
+public interface ProductosRepository {
+   List<Producto> findAll();
+   void updateProducto(Producto prod);
+   Producto findByCodigo(int codigoProducto);
+   void saveProducto(Producto producto);
+}
+```
+
+Con la Clase `ProductosRepositoryImpl` vamos a implementar la Interface `ProductosRepository` apoyandonos de la Interface `ProductosJpaRepository` que tendremos que inyectar.
+
+`ProductosRepositoryImpl`
+
+```java
+package repository;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import model.Producto;
+@Repository
+public class ProductosRepositoryImpl implements ProductosRepository {
+   
+   @Autowired
+   ProductosJpaRepository repository;
+	
+   @Override
+   public List<Producto> findAll() {
+      return repository.findAll();
+   }
+
+   @Override
+   public void updateProducto(Producto prod) {
+      repository.save(prod);
+   }
+   
+   @Override
+   public Producto findByCodigo(int codigoProducto) {
+      return repository.findById(codigoProducto).orElse(null);  
+   }
+
+   @Override
+   public void saveProducto(Producto producto) {
+      repository.save(producto);
+   }
+
+}
+```
+
+#### Crear el Servicio
+
+Vamos a crear la interface y clase para el Servicio.
+
+`ProductosService`
+
+```java
+package service;
+
+import java.util.List;
+
+import model.Producto;
+
+public interface ProductosService {
+   List<Producto> allProductos();
+   void updateStock(int codigoProducto, int unidades);
+   void guardarProducto(Producto producto);
+}
+```
+
+`ProductosServiceImpl`
+
+```java
+package service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import model.Producto;
+import repository.ProductosRepository;
+@Service
+public class ProductosServiceImpl implements ProductosService {
+   @Autowired
+   ProductosRepository repository;
+	
+   @Override
+   public List<Producto> allProductos() {
+      return repository.findAll();
+   }
+
+   @Override
+   public void updateStock(int codigoProducto, int unidades) {
+      Producto prod=repository.findByCodigo(codigoProducto);
+      if(prod!=null&&prod.getStock()>=unidades) {
+         prod.setStock(prod.getStock()-unidades);
+         repository.updateProducto(prod);
+      }
+   }
+
+   @Override
+   public void guardarProducto(Producto producto) {
+      if(producto!=null) {
+         repository.saveProducto(producto);
+      }
+   }
+
+}
+```
+
+#### Crear el Controlador
+
+`ProductosController`
+
+```java
+package controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import model.Producto;
+import service.ProductosService;
+
+@CrossOrigin(origins = "*")
+@RestController
+public class ProductosController {
+
+   @Autowired
+   ProductosService service;
+   
+   @GetMapping(value="productos", produces=MediaType.APPLICATION_JSON_VALUE)
+   public List<Producto> productos(){
+      return service.allProductos();
+   }
+	
+   @PutMapping(value="producto/{codigo}/{unidades}")
+   public void actualizarProducto(@PathVariable("codigo") int codigo, @PathVariable("unidades") int unidades) {
+      service.updateStock(codigo, unidades);
+   }
+	
+   @GetMapping(value="precio/{codigo}",produces=MediaType.TEXT_PLAIN_VALUE)
+   public String consultarPrecio(@PathVariable("codigo") int codigo) {
+      return productos()
+            .stream()
+            .filter(p->p.getCodigoProducto()==codigo)
+            .findFirst()
+            .get()
+            .getPrecioUnitario()+"";
+   }
+   
+   @PostMapping(value="producto", consumes=MediaType.APPLICATION_JSON_VALUE)
+   public void guardarProducto(@RequestBody Producto producto) {
+      service.guardarProducto(producto);
+   }
+}
+```
+
+* Para el método `consultarPrecio` sería mejor tener un método en el servicio que nos regrese directamente el precio.
+
+#### Configuración en el Lanzador
+
+`Application`
+
+```java
+package lanzador;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@ComponentScan(basePackages = {"controller","service","repository"})
+@EntityScan(basePackages= {"model"})
+@EnableJpaRepositories(basePackages = {"repository"})
+@SpringBootApplication
+public class Application {
+
+   public static void main(String[] args) {
+      SpringApplication.run(Application.class, args);
+   }
+
+}
+```
+
+#### Configuración en el `application.yml`
+
+`application.yml`
+
+```txt
+spring:
+  application:
+    name: servicio-productos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tiendavirtual?serverTimezone=Europe/Madrid
+    username: root
+    password: root   
+  jpa:
+    hibernate:
+      naming.implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 9000  
+```
+
+#### Probar el MicroServicio
+
+Vamos a arrancar nuestro Servidor Eureka y posteriormente vamos a arrancar nuestro MicroServicio de Gestión de Productos.
+
+Vamos a probarlo usando Postman, recordemos que aun que le hemos asignado un nombre a nuestro servicio que se registra en Eureka como vemos en el Dashboard de Eureka.
+
+![20210120-51](images/20210120-51.png)
+
+En Postman debemos seguir usando la ruta real del servicio para poderlo probar por que Postman no incluye a Eureka, asi que probemos las siguientes URLs:
+
+* GET http://localhost:9000/productos/
+* POST http://localhost:9000/producto/ (Necesita BODY)
+* GET http://localhost:9000/precio/2000
+* PUT http://localhost:9000/producto/2000/20
+
+![20210120-52](images/20210120-52.png)
+![20210120-53](images/20210120-53.png)
+![20210120-54](images/20210120-54.png)
+![20210120-55](images/20210120-55.png)
+![20210120-56](images/20210120-56.png)
+![20210120-57](images/20210120-57.png)
+
+
+``
+```java
+```
+
+
+``
+```java
+```
+
+
+``
+```java
+```
+
+``
+```java
+```
+
+
 
 
 
