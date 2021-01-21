@@ -273,7 +273,7 @@ Este MicroServicio debe quedar registrado en el Servidor Eureka creado en el pro
 
 * Eureka Discovery Client
 
-![20210120-50](images/20210120-50.png)
+![20210120-50](images2/20210120-50.png)
 
 #### Crear el Modelo
 
@@ -593,7 +593,7 @@ Vamos a arrancar nuestro Servidor Eureka y posteriormente vamos a arrancar nuest
 
 Vamos a probarlo usando Postman, recordemos que aun que le hemos asignado un nombre a nuestro servicio que se registra en Eureka como vemos en el Dashboard de Eureka.
 
-![20210120-51](images/20210120-51.png)
+![20210120-51](images2/20210120-51.png)
 
 En Postman debemos seguir usando la ruta real del servicio para poderlo probar por que Postman no incluye a Eureka, asi que probemos las siguientes URLs:
 
@@ -602,12 +602,12 @@ En Postman debemos seguir usando la ruta real del servicio para poderlo probar p
 * GET http://localhost:9000/precio/2000
 * PUT http://localhost:9000/producto/2000/20
 
-![20210120-52](images/20210120-52.png)
-![20210120-53](images/20210120-53.png)
-![20210120-54](images/20210120-54.png)
-![20210120-55](images/20210120-55.png)
-![20210120-56](images/20210120-56.png)
-![20210120-57](images/20210120-57.png)
+![20210120-52](images2/20210120-52.png)
+![20210120-53](images2/20210120-53.png)
+![20210120-54](images2/20210120-54.png)
+![20210120-55](images2/20210120-55.png)
+![20210120-56](images2/20210120-56.png)
+![20210120-57](images2/20210120-57.png)
 
 
 ``
