@@ -237,12 +237,39 @@ Como este MicroServicio Cliente no lo registramos en Eureka no cuenta con un Nom
 
 Y aun que lo tuviera la forma de probar los MicroServicios en Postman se hace por medio de la dirección física por que Postman no tiene RIBBON integrado para usar la dirección virtual.
 
-NOTA: Podemos parar los tres servicios a la vez pero para arrancalos el primero que debe arrancar es Eureka y después los demas.
+**NOTA**: Podemos parar los tres servicios a la vez pero para arrancalos el primero que debe arrancar es Eureka y después los demas.
 
-## :computer: Ejercicio
+## :computer: Ejercicio MicroServicios Tienda Virtual
 
 ![20210120-42](images/20210120-42.png)
+
+Realizar los MicroServicios que se mencionan anterior.
+
+Tenemos la BD `tiendavirtual` con dos tablas `productos` y `pedidos`.
 ![20210120-43](images/20210120-43.png)
+
+Actualmente las tablas contienen los siguientes dataos.
 ![20210120-44](images/20210120-44.png)
+
 ![20210120-45](images/20210120-45.png)
+
+Este proyecto va a contener varios proyectos con diferentes MicroServicios, vamos a ir creando uno a uno.
+
+### :computer: `29_microservicio_productos_en_eureka`
+#### MicroServicio encargado de Gestionar la Tabla Productos de la BD.
+
+![20210120-47](images/20210120-47.png)
+
+Vamos a crear el proyecto `29_microservicio_productos_en_eureka` como un proyecto Spring Boot con las siguientes dependencias:
+
+* Spring Web
+* Spring Data JPA
+* MySQL Driver.
+
+![20210120-48](images/20210120-48.png)
+![20210120-49](images/20210120-49.png)
+
+
+
+
 
