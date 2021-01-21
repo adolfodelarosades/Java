@@ -246,10 +246,3 @@ NOTA: Podemos parar los tres servicios a la vez pero para arrancalos el primero 
 ![20210120-44](images/20210120-44.png)
 ![20210120-45](images/20210120-45.png)
 
-## Servidor Zuul
-
-![20210120-13](images/20210120-13.png)
-![20210120-14](images/20210120-14.png)
-![20210120-15](images/20210120-15.png)
-![20210120-16](images/20210120-16.png)
-![20210120-17](images/20210120-17.png)
