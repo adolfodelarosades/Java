@@ -242,6 +242,7 @@ Y aun que lo tuviera la forma de probar los MicroServicios en Postman se hace po
 ## :computer: Ejercicio MicroServicios Tienda Virtual
 
 ![20210120-42](images/20210120-42.png)
+![20210120-67](images2/20210120-67.png)
 
 Realizar los MicroServicios que se mencionan anterior.
 
@@ -354,7 +355,8 @@ public interface ProductosJpaRepository extends JpaRepository<Producto, Integer>
 }
 ```
 
-Lo siguiente que vamos a hacer es crear la Interface y Clase que vamos a usar en la Capa de Servicio.
+Lo siguiente que vamos a hacer es crear la Interface y Clase que vamos a usar en la Capa de Servicio. 
+> DE ESTA MANERA NO HACEMOS DEPENDIENTE A LA CAPA DE SERVICIO PARA QUE SIEMPRE UTILICE SPRING DATA JPA(ya que inyectamos la Interface). Lo suyo es que cada capa de Repositorio tenga una Interface Neutra que tenga los métodos necesarios de modo que la Capa de Servicio llame a estos métodos que no dan a entender que estoy usando Spring Data JPA, que si que lo hago inyectando directamente la Interface de SPRING DATA JPA en el Servicio. La implementación ya es la que va a determinar que tecnología estoy usando, si JDBC, JPA, Spring Data JPA, Spring Data Mongo, etc. incluso puedo tener todas a la vez. TENGO UNA INTERFACE NEUTRA y VARIAS IMPLEMEN¨TACIONES. 
 
 En la Interface vamos a colocar el Contrato de todos los métodos que vamos a usar en nuestro proyecto.
 
@@ -586,6 +588,7 @@ eureka:
 server:
   port: 9000  
 ```
+* Configuramos nombre del servicio, conexión a BD, propiedades Hibernate, dirección de Eureka y el Puerto.
 
 #### Probar el MicroServicio
 
@@ -622,7 +625,7 @@ Vamos a crear el proyecto `30_microservicio_pedidos_en_eureka` como un proyecto 
 * Spring Web
 * Spring Data JPA
 * MySQL Driver.
-* Eureka Discovery Client
+* Eureka Discovery Client: Para que se segistre en Eureka.
 
 #### Crear el Modelo
 
@@ -812,12 +815,18 @@ public class PedidosServiceImpl implements PedidosService {
       return repository.findAll();
    }
    
+   //a este método le llega el pedido incompleto y tiene que rellenar el resto de datos (total)
+   //invocando al servicio de productos
    @Override
    public void savePedido(Pedido pedido) {
+      
       pedido.setFechaPedido(new Date());
+      
       //obtiene el total del pedido
       pedido.setTotal(obtenerTotal(pedido));
+      
       repository.savePedido(pedido);
+      
       //actualizar stock de productos
       template.put(url+"/producto/{cod}/{unit}", null, pedido.getCodigoProducto(),pedido.getUnidades());	
    }
@@ -832,25 +841,160 @@ public class PedidosServiceImpl implements PedidosService {
 }
 ```
 * En este servicio usamos el `RestTemplate` para poder consumir el MicroServicio de Productos, observese que la URL  que usamos (`http://servicio-productos`) ya no es la fisica, sino la virtual que definimos en las propiedades del MicroServicio de Productos y que es la que se registra en Eureka.
+* En nuestro método `savePedido(...)` vamos a interactuar dos veces con el Servicio de Producto, una para recuperar el precio del Producto y poder calcular el Total del Pedido y otra para actualizar el Stock de productos.
+* En el `template.put(` mandamos la URL, el BODY que en este caso es `null` por que no mandamos nada a través del Body, lo estamos mandando a través de la URL, que son los dos parámetros que vienen a continuación `pedido.getCodigoProducto(),pedido.getUnidades()` que corresponden a los valores indicados en la URL `url+"/producto/{cod}/{unit}"`.
 
 #### Crear el Controlador
 
 `ProductosController`
 
 ```java
+package controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import model.Pedido;
+import service.PedidosService;
+
+@CrossOrigin(origins = "*")
+@RestController
+public class PedidosController {
+
+   @Autowired
+   PedidosService service;
+	
+   @GetMapping(value="pedidos", produces=MediaType.APPLICATION_JSON_VALUE)
+   public List<Pedido> pedidos(){
+      return service.allPedidos();
+   }
+   
+   @PostMapping(value="pedido",consumes=MediaType.APPLICATION_JSON_VALUE)
+   public void actualizarProducto(@RequestBody Pedido pedido) {
+      service.savePedido(pedido);
+   }
+}
 ```
+* En nuestro método POST le llega el parámetro Pedido, pero solo con los valores código de producto y unidades ya que los demás valores son calculados y como ya vimos se rellenan en la capa de Servicio antes de salvar el Pedido en la BD.
+
+#### Configuración en el Lanzador
+
+`Application`
+
+```java
+package lanzador;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.client.RestTemplate;
+@ComponentScan(basePackages = {"controller","service","repository"})
+@EntityScan(basePackages= {"model"})
+@EnableJpaRepositories(basePackages = {"repository"})
+@SpringBootApplication
+public class Application {
+
+   public static void main(String[] args) {
+      SpringApplication.run(Application.class, args);
+   }
+	
+   @Bean
+   @LoadBalanced
+   public RestTemplate getTemplate() {
+      return new RestTemplate();
+   }
+
+}
+```
+* En el lanzador por un lado añadimos el Bean `RestTemplate` anotado con `@Bean` ya que como va a ser un Cliente de otro servicio necesitamos intreractuar con el a través del objeto `RestTemplate`.
+* Por otro lado debemos anotar el `RestTemplate` con `@LoadBalanced` para que se active RIBBON dado que vamos a acceder desde Pedidos a Productos a través de Eureka.
 
 #### Configuración en el `application.yml`
 
 `application.yml`
 
 ```txt
+spring:
+  application:
+    name: servicio-pedidos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tiendavirtual?serverTimezone=Europe/Madrid
+    username: root
+    password: 'root'   
+  jpa:
+    hibernate:
+      naming.implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 8000  
 ```
+* Configuramos nombre del servicio, conexión a BD, propiedades Hibernate, dirección de Eureka y el Puerto.
 
 #### Probar el MicroServicio
 
-Vamos a arrancar nuestro Servidor Eureka y posteriormente vamos a arrancar nuestro MicroServicio de Gestión de Productos.
+Vamos a arrancar nuestro Servidor Eureka y posteriormente vamos a arrancar nuestro MicroServicio de Gestión de Productos y posteriormente el MicroServicio de Gestión de Pedidos.
 
+Lo primero que vamos a hacer es cargar es la URL http://localhost:8761/ para ver el Panel de Eureka.
+
+![20210120-59](images2/20210120-59.png)
+
+El MicroServicio de Gestión de Productos ya lo probamos en la sección anterior, ahora solo vamos a probar el MicroServicio de Gestión de Pedidos, el cual tiene dos URLs:
+
+* http://localhost:8000/pedido
+
+![20210120-60](images2/20210120-60.png)
+![20210120-61](images2/20210120-61.png)
+
+* http://localhost:8000/pedidos
+
+![20210120-62](images2/20210120-62.png)
+![20210120-63](images2/20210120-63.png)
+
+Cuando realicemos un nuevo pedido los datos en la BD se deben actualizar creando un nuevo pedido y actualizando el Stock.
+
+Lanzamos la petición http://localhost:8000/pedido en el Body mandamos los dator requeridos del Pedido.
+
+```js
+{
+   "codigoProducto": 2000,
+   "unidades": 5
+}
+```
+
+![20210120-64](images2/20210120-64.png)
+
+No ha habido excepciónes y nos retorna 200 que es una buena señal, vamos a comprobar si realizo los cambios en la BD.
+
+Vemos que se ha creado un nuevo Pedido y se ha actualizado el Stock del Producto.
+
+![20210120-65](images2/20210120-65.png)
+![20210120-66](images2/20210120-66.png)
+
+Como vemos el Servicio de Pedidos a accedido al Servicio de Productos a través de Eureka sin tener que conocer la dirección real de este, 
+
+
+**NOTA**: Cuando existe algún fallo entre un MicroServicios se usa el PROTOCOLO SAGA.
+
+### :computer: `31_cliente_front_pedidos`
+#### FrontEnd de la Aplicación realizada con JS, (ServerLess)
+
+![20210120-68](images2/20210120-68.png)
 
 
 ``
