@@ -988,35 +988,4 @@ Vemos que se ha creado un nuevo Pedido y se ha actualizado el Stock del Producto
 
 Como vemos el Servicio de Pedidos a accedido al Servicio de Productos a través de Eureka sin tener que conocer la dirección real de este, 
 
-
 **NOTA**: Cuando existe algún fallo entre un MicroServicios se usa el PROTOCOLO SAGA.
-
-### :computer: `31_cliente_front_pedidos`
-#### FrontEnd de la Aplicación realizada con JS, (ServerLess)
-
-![20210120-68](images2/20210120-68.png)
-
-
-``
-```java
-```
-
-
-``
-```java
-```
-
-
-``
-```java
-```
-
-``
-```java
-```
-
-
-
-
-
-
