@@ -1,6 +1,6 @@
-# Curso Definitivo Java
+# Java
 
-Esta es una serie de varios cursos Java que se listan a continuación.
+Serie de varios cursos Java.
 
 # CFTIC
 
