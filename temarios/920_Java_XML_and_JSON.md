@@ -1,6 +1,6 @@
 # 920 Java XML and JSON: Document Processing for Java SE
 
-![920-portada](images/920-portada.png)
+![920-portada](920_Java_XML_and_JSON/images/920-portada.png)
 
 ### Descripción del libro
 
