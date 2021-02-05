@@ -40,3 +40,151 @@ Gracias por comprar este libro. Espero que le resulte útil para comprender XML 
 Jeff Friesen (octubre de 2018)
 
 **NOTA** Puede descargar el código fuente de este libro apuntando su navegador web a www.apress.com/9781484243299 y haciendo clic en la pestaña Código fuente seguida del enlace Descargar ahora.
+
+<hr>
+
+### TABLE OF CONTENTS
+* Part I: Exploring XML
+* Chapter 1: Introducing XML
+   * What Is XML?
+   * Language Features Tour
+      * XML Declaration
+      * Elements and Attributes
+      * Character References and CDATA Sections
+      * Namespaces
+      * Comments and Processing Instructions
+   * Well-Formed Documents
+   * Valid Documents
+      * Document Type Definition
+      * XML Schema
+   * Summary
+* Chapter 2: Parsing XML Documents with SAX
+   * What Is SAX?
+   * Exploring the SAX API
+      * Obtaining a SAX 2 Parser
+      * Touring XMLReader Methods
+      * Touring the Handler and Resolver Interfaces
+   * Demonstrating the SAX API
+   * Creating a Custom Entity Resolver
+   * Summary
+* Chapter 3: Parsing and Creating XML Documents with DOM
+   * What Is DOM?
+   * A Tree of Nodes
+   * Exploring the DOM API
+      * Obtaining a DOM Parser/Document Builder
+      * Parsing and Creating XML Documents
+   * Demonstrating the DOM API
+      * Parsing an XML Document
+      * Creating an XML Document
+   * Working with Load and Save
+      * Loading an XML Document into a DOM Tree
+      * Configuring a Parser
+      * Filtering an XML Document While Parsing
+      * Saving a DOM Tree to an XML Document
+   * Working with Traversal and Range
+      * Performing Traversals
+      * Performing Range Operations
+   * Summary
+* Chapter 4: Parsing and Creating XML Documents with StAX
+   * What Is StAX?
+   * Exploring StAX
+      * Parsing XML Documents
+      * Creating XML Documents
+   * Summary
+* Chapter 5: Selecting Nodes with XPath
+   * What Is XPath?
+   * XPath Language Primer
+      * Location Path Expressions
+      * General Expressions
+   * XPath and DOM
+   * Advanced XPath
+      * Namespace Contexts
+      * Extension Functions and Function Resolvers
+      * Variables and Variable Resolvers
+   * Summary
+* Chapter 6: Transforming XML Documents with XSLT
+   * What Is XSLT?
+   * Exploring the XSLT API
+   * Demonstrating the XSLT API
+   * Going Beyond XSLT 1.0 and XPath 1.0
+      * Downloading and Testing SAXON-HE 9.9
+      * Playing with SAXON-HE 9.9
+   * Summary
+   
+* Part II: Exploring JSON
+* Chapter 7: Introducing JSON
+   * What Is JSON?
+   * JSON Syntax Tour
+   * Demonstrating JSON with JavaScript
+   * Validating JSON Objects
+   * Summary
+* Chapter 8: Parsing and Creating JSON Objects with mJson
+   * What Is mJson?
+      * Obtaining and Using mJson
+   * Exploring the Json Class
+      * Creating Json Objects
+      * Learning About Json Objects
+      * Navigating Json Object Hierarchies
+      * Modifying Json Objects
+      * Validation
+      * Customization via Factories
+   * Summary
+* Chapter 9: Parsing and Creating JSON Objects with Gson
+   * What Is Gson?
+      * Obtaining and Using Gson
+   * Exploring Gson
+      * Introducing the Gson Class
+      * Parsing JSON Objects Through Deserialization
+      * Creating JSON Objects Through Serialization
+      * Learning More About Gson
+   * Summary
+* Chapter 10: Extracting JSON Values with JsonPath
+   * What Is JsonPath?
+   * Learning the JsonPath Language
+   * Obtaining and Using the JsonPath Library
+   * Exploring the JsonPath Library
+      * Extracting Values from JSON Objects
+      * Using Predicates to Filter Items
+   * Summary
+* Chapter 11: Processing JSON with Jackson
+   * What Is Jackson?
+      * Obtaining and Using Jackson
+   * Working with Jackson’s Basic Features
+      * Streaming
+      * Tree Model
+      * Data Binding
+   * Working with Jackson’s Advanced Features
+      * Annotation Types
+      * Custom Pretty Printers
+      * Factory, Parser, and Generator Features
+   * Summary
+* Chapter 12: Processing JSON with JSON-P
+   * What Is JSON-P?
+      * JSON-P 1.0
+      * JSON-P 1.1
+      * Obtaining and Using JSON-P
+   * Working with JSON-P 1.0
+      * Working with the Object Model API
+      * Working with the Streaming Model API
+   * Working with JSON-P 1.1’s Advanced Features
+      * JSON Pointer
+      * JSON Patch
+      * JSON Merge Patch
+      * Editing/Transformation Operations
+      * Java SE 8 Support
+   * Summary
+* Part III: Appendixes
+* Appendix A: Answers to Exercises
+   * Chapter 1: Introducing XML
+   * Chapter 2: Parsing XML Documents with SAX
+   * Chapter 3: Parsing and Creating XML Documents with DOM
+   * Chapter 4: Parsing and Creating XML Documents with StAX
+   * Chapter 5: Selecting Nodes with XPath
+   * Chapter 6: Transforming XML Documents with XSLT
+   * Chapter 7: Introducing JSON
+   * Chapter 8: Parsing and Creating JSON Objects with mJson
+   * Chapter 9: Parsing and Creating JSON Objects with Gson
+   * Chapter 10: Extracting JSON Values with JsonPath
+   * Chapter 11: Processing JSON with Jackson
+   * Chapter 12: Processing JSON with JSON-P
+*Index
