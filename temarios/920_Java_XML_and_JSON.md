@@ -25,19 +25,19 @@ Programadores Java intermedios y avanzados que desarrollan aplicaciones que debe
 * Cover
 * Front Matter
 * Part I. Exploring XML
-   * 1. Introducing XML
-   * 2. Parsing XML Documents with SAX
-   * 3. Parsing and Creating XML Documents with DOM
-   * 4. Parsing and Creating XML Documents with StAX
-   * 5. Selecting Nodes with XPath
-   * 6. Transforming XML Documents with XSLT
+   * 1.- Introducing XML
+   * 2.- Parsing XML Documents with SAX
+   * 3.- Parsing and Creating XML Documents with DOM
+   * 4.- Parsing and Creating XML Documents with StAX
+   * 5.- Selecting Nodes with XPath
+   * 6.- Transforming XML Documents with XSLT
 * Part II. Exploring JSON
-   * 7. Introducing JSON
-   * 8. Parsing and Creating JSON Objects with mJson
-   * 9. Parsing and Creating JSON Objects with Gson
-   * 10. Extracting JSON Values with JsonPath
-   * 11. Processing JSON with Jackson
-   * 12. Processing JSON with JSON-P
+   * 7.- Introducing JSON
+   * 8.- Parsing and Creating JSON Objects with mJson
+   * 9.- Parsing and Creating JSON Objects with Gson
+   * 10.- Extracting JSON Values with JsonPath
+   * 11.- Processing JSON with Jackson
+   * 12.- Processing JSON with JSON-P
 * Part III. Appendixes
    * Answers to Exercises
 * Back Matter
