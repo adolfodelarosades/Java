@@ -34,7 +34,7 @@ Programadores Java intermedios y avanzados que desarrollan aplicaciones que debe
 * Cover
 * [Front Matter](920_Java_XML_and_JSON/00_Front_Matter.md)
 * Part I. Exploring XML
-   * 1.- Introducing XML
+   * [1.- Introducing XML](920_Java_XML_and_JSON/01_Introducing_XML.md)
    * 2.- Parsing XML Documents with SAX
    * 3.- Parsing and Creating XML Documents with DOM
    * 4.- Parsing and Creating XML Documents with StAX
