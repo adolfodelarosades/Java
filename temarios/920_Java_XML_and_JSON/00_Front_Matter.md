@@ -5,7 +5,7 @@ Jeff Friesen
 
 2nd ed.
 
-### Introducción
+# Introducción
 
 XML y (el más popular) JSON le permiten organizar datos en formatos textuales. Este libro le presenta estas tecnologías junto con las API de Java para integrarlas en su código Java. Este libro le presenta XML y JSON a partir de Java 11.
 
