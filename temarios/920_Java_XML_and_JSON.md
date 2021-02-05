@@ -1,5 +1,7 @@
 # 920 Java XML and JSON: Document Processing for Java SE
 
+![920-portada](images/920-portada.png)
+
 ### Descripción del libro
 
 Utilice esta guía para dominar el metalenguaje XML y el formato de datos JSON junto con importantes API de Java para analizar y crear documentos XML y JSON a partir del lenguaje Java. La novedad de esta edición es la cobertura de Jackson (un procesador JSON para Java) y la propia API Java de Oracle para procesamiento JSON (JSON-P), que es una API de procesamiento JSON para Java EE que también se puede utilizar con Java SE. Esta nueva edición de ***Java XML y JSON*** también amplía la cobertura de DOM y XSLT para incluir contenido API adicional y ejemplos útiles.
