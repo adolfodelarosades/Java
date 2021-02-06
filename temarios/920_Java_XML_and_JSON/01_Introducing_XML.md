@@ -241,6 +241,7 @@ El prefijo `h:` se asocia con el URI www.w3.org/1999/xhtml, y el prefijo `r:` se
 La separación de este documento de los datos de la receta de los elementos XHTML hace posible preservar la estructura de estos datos al mismo tiempo que permite que un navegador web compatible con XHTML (como Mozilla Firefox) presente la receta a través de una página web (consulte la Figura 1-2).
 
 ![1-2](images/1-2.png)
+
 ***Figura 1-2*** Google presenta los datos de la receta a través de etiquetas XHTML
 
 Los atributos de una etiqueta no necesitan tener un prefijo cuando esos atributos pertenecen al elemento. Por ejemplo, `qty` no tiene el prefijo en `<r:ingredient qty="2">`. Sin embargo, se requiere un prefijo para los atributos que pertenecen a otros namespaces. Por ejemplo, suponga que desea agregar un atributo `style` XHTML a la etiqueta `<r:title>` del documento para proporcionar estilo al título de la receta cuando se muestra a través de una aplicación. Puede realizar esta tarea insertando un atributo XHTML en la etiqueta del `title`, de la siguiente manera:
