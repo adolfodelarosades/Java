@@ -143,7 +143,6 @@ Una solución a este problema es reemplazar el carácter literal con una *charac
 
 * Una *referencia de entidad de carácter* se refiere a un carácter a través del nombre de una *entidad* (datos con alias) que especifica el carácter deseado como su texto de reemplazo. Las referencias a entidades de caracteres están predefinidas por XML y tienen el formato `&name;`, en el que `name` es el nombre de la entidad. XML predefine cinco referencias a entidades de caracteres: `<`(`<`),`>` (`>`), `&` (`&`), `&apos;` (`'`) y `&quot;` (`"`).
 
-
 Considere `<expression>6 < 4</expression>`. Puede reemplazar `<` con la referencia numérica `<`, dando `<expression>6 < 4</expression>`, o mejor aún con `<`, dando `<expression>6 < 4</expression>`. La segunda opción es más clara y fácil de recordar.
 
 Suponga que desea incrustar un documento HTML o XML dentro de un elemento. Para que el documento incrustado sea aceptable para un analizador XML, necesitaría reemplazar cada carácter literal `<`(inicio de etiqueta) y `&` (inicio de entidad) con su `<` y `&` referencia de entidad de carácter predefinida, una tarea tediosa y posiblemente propensa a errores : Es posible que se olvide de reemplazar uno de estos caracteres. Para evitar el tedio y los posibles errores, XML proporciona una alternativa en forma de una sección CDATA (datos de caracteres).
@@ -233,7 +232,214 @@ Cuando se especifica el *prefix* - prefijo, el prefijo y un carácter de dos pun
    </h:body>
 </h:html>
 ```
+***Listado 1-5*** Introducción de un par de Namespaces
 
+El Listado 1-5 describe un documento que combina elementos del lenguaje XHTML (ver http://en.wikipedia.org/wiki/XHTML) con elementos del lenguaje de recetas. Todas las etiquetas de elementos que se asocian con XHTML tienen el prefijo `h:` y todas las etiquetas de elementos que se asocian con el lenguaje de la receta tienen el prefijo `r:`.
+
+El prefijo `h:` se asocia con el URI www.w3.org/1999/xhtml, y el prefijo `r:` se asocia con el URI www.javajeff.ca. XML no exige que los URI apunten a archivos de documentos. Solo requiere que sean únicos para garantizar espacios de nombres únicos.
+
+La separación de este documento de los datos de la receta de los elementos XHTML hace posible preservar la estructura de estos datos al mismo tiempo que permite que un navegador web compatible con XHTML (como Mozilla Firefox) presente la receta a través de una página web (consulte la Figura 1-2).
+
+![1-2](images/1-2.png)
+***Figura 1-2*** Google presenta los datos de la receta a través de etiquetas XHTML
+
+Los atributos de una etiqueta no necesitan tener un prefijo cuando esos atributos pertenecen al elemento. Por ejemplo, `qty` no tiene el prefijo en `<r:ingredient qty="2">`. Sin embargo, se requiere un prefijo para los atributos que pertenecen a otros namespaces. Por ejemplo, suponga que desea agregar un atributo `style` XHTML a la etiqueta `<r:title>` del documento para proporcionar estilo al título de la receta cuando se muestra a través de una aplicación. Puede realizar esta tarea insertando un atributo XHTML en la etiqueta del `title`, de la siguiente manera:
+
+```xml
+<r:title h:style="font-family: sans-serif;">
+```
+
+El atributo `style` XHTML tiene el prefijo `h:` porque este atributo pertenece al namespace del lenguaje XHTML y no al namespace del lenguaje de recetas.
+
+Cuando hay varios espacios de nombres involucrados, puede ser conveniente especificar uno de estos espacios de nombres como el espacio de nombres predeterminado para reducir el tedio al ingresar prefijos de espacios de nombres. Considere el listado 1-6.
+
+```xml
+<?xml version="1.0"?>
+<html xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:r="http://www.javajeff.ca/">
+   <head>
+      <title>
+         Recipe
+      </title>
+   </head>
+   <body>
+   <r:recipe>
+      <r:title>
+         Grilled Cheese Sandwich
+      </r:title>
+      <r:ingredients>
+         <ul>
+         <li>
+         <r:ingredient qty="2">
+            bread slice
+         </r:ingredient>
+         </li>
+         <li>
+         <r:ingredient>
+            cheese slice
+         </r:ingredient>
+         </li>
+         <li>
+         <r:ingredient qty="2">
+            margarine pat
+         </r:ingredient>
+         </li>
+         </ul>
+      </r:ingredients>
+      <p>
+      <r:instructions>
+         Place frying pan on element and select medium
+         heat. For each bread slice, smear one pat of
+         margarine on one side of bread slice. Place
+         cheese slice between bread slices with
+         margarine-smeared sides away from the cheese.
+         Place sandwich in frying pan with one
+         margarine-smeared side in contact with pan.
+         Fry for a couple of minutes and flip. Fry
+         other side for a minute and serve.
+      </r:instructions>
+      </p>
+   </r:recipe>
+   </body>
+</html>
+```
+***Listado 1-6*** Especificación de un Namespace predeterminado
+
+El Listado 1-6 especifica un espacio de nombres predeterminado para el lenguaje XHTML. Ninguna etiqueta de elemento XHTML necesita tener el prefijo `h:`. Sin embargo, las etiquetas de elementos del lenguaje de recetas aún deben tener el prefijo `r:` prefijo.
+
+### COMENTARIOS E INSTRUCCIONES DE PROCESAMIENTO
+
+Los documentos XML pueden contener comentarios, que son secuencias de caracteres que comienzan con `<!--` y terminan con `-->`. Por ejemplo, puede colocar `<!-- Todo -->` en el elemento `body` del Listado 1-3 para recordar que necesita terminar de codificar este elemento.
+
+Los comentarios se utilizan para aclarar partes de un documento. Pueden aparecer en cualquier lugar después de la declaración XML, excepto dentro de las etiquetas, no se pueden anidar, no pueden contener un guión doble (`--`) porque hacerlo podría confundir al analizador XML de que el comentario se ha cerrado, no debe contener un guión (`-`) por el mismo motivo, y normalmente se ignoran durante el procesamiento. Los comentarios no son contenido.
+
+XML también permite la presencia de instrucciones de procesamiento. Una *instrucción de procesamiento* es una instrucción que está disponible para la aplicación que analiza el documento. La instrucción comienza con `<?` y termina con `?>`. El prefijo `<?` va seguido de un nombre conocido como el *target* (destino). Este nombre generalmente identifica la aplicación a la que está destinada la instrucción de procesamiento. El resto de la instrucción de procesamiento contiene texto en un formato apropiado para la aplicación. Dos ejemplos de instrucciones de procesamiento son `<? Xml-stylesheet href = "modern.xsl" type = "text / xml"?>` (Asocie un lenguaje de hoja de estilo extensible [XSL] [consulte http://en.wikipedia.org/wiki/ XSL] con un documento XML) y `<?php /* PHP code */ ?>` (Pase un fragmento de código PHP [ver http://en.wikipedia.org/wiki/PHP] a la aplicación). Aunque la declaración XML parece una instrucción de procesamiento, este no es el caso.
+
+> **NOTA** La declaración XML no es una instrucción de procesamiento.
+
+## Documentos Bien Formados
+
+HTML es un lenguaje descuidado en el que se pueden especificar elementos desordenados, se pueden omitir las etiquetas finales, etc. La complejidad del código de diseño de página de un navegador web se debe en parte a la necesidad de manejar estos casos especiales. Por el contrario, XML es un lenguaje mucho más estricto. Para que los documentos XML sean más fáciles de analizar, XML exige que los documentos XML sigan ciertas reglas:
+
+* *Todos los elementos deben tener etiquetas de inicio y finalización o constar de etiquetas de elementos vacíos*. Por ejemplo, a diferencia de la etiqueta HTML `<p>` que a menudo se especifica sin una contraparte `</p>`, `</p>` también debe estar presente desde la perspectiva de un documento XML.
+
+* *Las etiquetas deben estar anidadas correctamente*. Por ejemplo, aunque probablemente se saldrá con la suya al especificar `<b><i>XML</b></i>` en HTML, un analizador XML informaría de un error. Por el contrario, `<b><i>XML</i></b>` no genera un error, porque los pares de etiquetas anidados se reflejan entre sí.
+
+* *Todos los valores de los atributos deben estar entre comillas*. Se permiten las comillas simples (`'`) o las comillas dobles (`"`) (aunque las comillas dobles son las comillas más comúnmente especificadas). Es un error omitir estas comillas.
+
+* *Los elementos vacíos deben tener el formato adecuado*. Por ejemplo, la etiqueta `<br>` de HTML debería especificarse como `<br/>` en XML. Puede especificar un espacio entre el nombre de la etiqueta y el carácter `/` aunque el espacio es opcional.
+
+* *Tenga cuidado con el case*. XML es un lenguaje **case-sensitive** que distingue entre mayúsculas y minúsculas en el que las etiquetas que difieren en mayúsculas y minúsculas (como `394211_2_En` y `394211_2_En` :flushed:) se consideran diferentes. Es un error mezclar etiquetas de inicio y finalización de diferentes casos, por ejemplo, `394211_2_En` con `</Author>`.
+
+Los analizadores XML que conocen los espacios de nombres imponen dos reglas adicionales:
+
+* Cada nombre de elemento y atributo no debe incluir más de un carácter de dos puntos.
+
+* Ningún nombre de entidad, destino de instrucción de procesamiento o nombre de notación (discutido más adelante) puede contener dos puntos.
+
+Un documento XML que se ajuste a estas reglas está *bien formado*. El documento tiene una apariencia lógica y limpia y es mucho más fácil de procesar. Los analizadores XML solo analizarán documentos XML bien formados.
+
+## Documentos Válidos
+
+No siempre es suficiente que un documento XML esté bien formado; en muchos casos el documento también debe ser válido. Un *documento válido* se adhiere a las limitaciones. Por ejemplo, se podría imponer una restricción al documento de la receta del Listado 1-1 para garantizar que el elemento `ingredients` siempre precede al elemento `instructions`; quizás una aplicación primero deba procesar `ingredients`.
+
+> **NOTA** La validación de documentos XML es similar a un compilador que analiza el código fuente para asegurarse de que el código tenga sentido en el contexto de una máquina. Por ejemplo, cada uno de `int`, `count`, `=`, `1` y; es una secuencia de caracteres Java válida, pero `1 count ; int =` no es una construcción Java válida (mientras que `int count = 1;` es una construcción Java válida).
+
+Algunos analizadores(parsers) XML realizan la validación, mientras que otros analizadores no lo hacen porque los analizadores de validación son más difíciles de escribir. Un analizador que realiza la validación compara un documento XML con un *documento gramatical*. Cualquier desviación del documento de gramática se informa como un error a la aplicación; el documento XML no es válido. La aplicación puede optar por corregir el error o rechazar el documento XML. A diferencia de los errores de formato correcto, los errores de validez no son necesariamente fatales y el analizador puede continuar analizando el documento XML.
+
+> **NOTA** Los analizadores XML de validación a menudo no validan de forma predeterminada porque la validación puede llevar mucho tiempo. Deben recibir instrucciones para realizar la validación.
+
+Los documentos gramaticales están escritos en un idioma especial. Dos lenguajes gramaticales de uso común son la definición de tipo de documento y el esquema XML.
+
+### DOCUMENT TYPE DEFINITION - DEFINICIÓN DEL TIPO DE DOCUMENTO
+
+*Document Type Definition (DTD)* (La definición de tipo de documento (DTD)) es el lenguaje gramatical más antiguo para especificar la *gramática* de un documento XML. Los documentos de gramática DTD (conocidos como DTD) se escriben de acuerdo con una sintaxis estricta que establece qué elementos pueden estar presentes y en qué partes de un documento, y también qué está contenido dentro de los elementos (elementos hijos, contenido o contenido mixto) y qué se pueden especificar atributos. Por ejemplo, una DTD puede especificar que un elemento de `recipe` debe tener un elemento de `ingredients` seguido de un elemento de `instructions`.
+
+El Listado 1-7 presenta un DTD para el lenguaje de recetas que se utilizó para construir el documento del Listado 1-1.
+
+```xml
+<!ELEMENT recipe (title, ingredients, instructions)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT ingredients (ingredient+)>
+<!ELEMENT ingredient (#PCDATA)>
+<!ELEMENT instructions (#PCDATA)>
+<!ATTLIST ingredient qty CDATA "1">
+```
+***Listado 1-7*** DTD del Lenguaje de Recetas
+
+Este DTD primero declara los elementos del lenguaje de recetas. Las declaraciones de elementos toman la forma `<!ELEMENT name content-specifier>`, donde `name` es cualquier nombre XML legal (por ejemplo, no puede contener espacios en blanco), y `content-specifier` identifica lo que puede aparecer dentro del elemento.
+
+La declaración del primer elemento establece que puede aparecer exactamente un elemento `recipe` en el documento XML; esta declaración no implica que la `recipe` sea el elemento raíz. Además, este elemento debe incluir exactamente uno de cada uno de los elementos hijos `title`, `ingredients` e `instructions`, y en ese orden. Los elementos hijos deben especificarse como una lista separada por comas. Además, una lista siempre está entre paréntesis.
+
+La declaración del segundo elemento establece que el elemento `title` contiene datos de caracteres analizados (parsed character data) (texto sin marcas). La declaración del tercer elemento establece que al menos un elemento `ingredient` debe aparecer en `ingredients`. El carácter `+` es un ejemplo de una expresión regular que significa uno o más. Otras expresiones que se pueden utilizar son `*` (cero o más) y `?` (una vez o nunca). Las declaraciones del cuarto y quinto elemento son similares a la segunda al indicar que los elementos `ingredient` e `instructions` contienen datos de caracteres analizados (parsed character data).
+
+> **NOTA** Las declaraciones de elementos admiten otros tres especificadores de contenido. Puede especificar `<!ELEMENT name ANY>` para permitir cualquier tipo de contenido de elemento o `<!ELEMENT name EMPTY>` para no permitir cualquier contenido de elemento. Para indicar que un elemento contiene contenido mixto, debe especificar `#PCDATA` y una lista de elementos names, separados por barras verticales (`|`). Por ejemplo, `<!ELEMENT ingredient (#PCDATA | measure | note)*>` indica que el elemento `ingredient` puede contener una combinación de datos de caracteres analizados, cero o más elementos `measure` (de medida) y cero o más elementos `note`. No especifica el orden en el que ocurren los datos de caracteres analizados y estos elementos. Sin embargo, `#PCDATA` debe ser el primer elemento especificado en la lista. Cuando se usa una expresión regular en este contexto, debe aparecer a la derecha del paréntesis de cierre.
+
+El DTD del Listado 1-7 finalmente declara los atributos del lenguaje de la receta, de los cuales solo hay uno: `qty`. Las declaraciones de atributos toman la forma `<!ATTLIST ename aname type default-value>`, donde `ename` es el nombre del elemento al que pertenece el atributo, `aname` es el nombre del atributo, `type` es el tipo de atributo y `default-value` es el valor predeterminado del atributo.
+
+La declaración de atributos identifica `qty` como un atributo de `ingredient`. También establece que el tipo de `qty` es `CDATA` (cualquier cadena de caracteres que no incluya ampersand, los signos menor o mayor que, o comillas dobles; estos caracteres se pueden representar mediante `&`, `<`, `>` y `&quot;`, respectivamente) y `qty` es opcional, asumiendo el valor predeterminado `1` cuando está ausente.
+
+
+> MÁS SOBRE ATRIBUTOS
+>DTD le permite especificar tipos de atributos adicionales: `ID` (crea un identificador único para un atributo que identifica un elemento), `IDREF` (el valor de un atributo es un elemento ubicado en otra parte del documento), `IDREFS` (el valor consta de múltiples `IDREF`), `ENTITY` ( puede utilizar datos binarios externos o entidades sin analizar), `ENTITIES` (el valor consta de varias entidades), `NMTOKEN` (el valor está restringido a cualquier nombre XML válido), `NMTOKENS` (el valor se compone de varios nombres XML), `NOTATION` (el valor ya está especificado mediante una declaración de notación DTD) y enumerado (una lista de posibles valores para elegir; los valores están separados por barras verticales).
+
+> En lugar de especificar un valor predeterminado literalmente, puede especificar `#REQUIRED` para significar que el atributo debe estar siempre presente con algún valor (`<! ATTLIST ename aname type #REQUIRED>`), `#IMPLIED` para significar que el atributo es opcional y no tiene un valor predeterminado se proporciona (`<! ATTLIST ename aname type #IMPLIED>`), o `#FIXED` para significar que el atributo es opcional y siempre debe tomar el valor predeterminado asignado por DTD cuando se usa (`<! ATTLIST ename aname type #FIXED "value">`).
+
+> Puede especificar una lista de atributos en una declaración `ATTLIST`. Por ejemplo, `<!ATTLIST ename aname1 type1 default-value1 aname2 type2 default-value2>` declara dos atributos identificados como `aname1` y `aname2`.
+
+Un analizador XML de validación basado en DTD requiere que un documento incluya una *document type declaration* que identifique la DTD y que especifique la gramática del documento antes de validar el documento.
+
+> **NOTA** La Document Type Definition y la document type declaration son dos cosas diferentes. El acrónimo DTD identifica una definición de tipo de documento y nunca identifica una declaración de tipo de documento.
+
+Una declaración de tipo de documento aparece inmediatamente después de la declaración XML y se especifica de una de las siguientes formas:
+
+* `<! DOCTYPE root-element-name SYSTEM uri>` hace referencia a una DTD externa pero privada a través de una *uri*. La DTD referenciada no está disponible para el escrutinio público. Por ejemplo, podría almacenar el archivo DTD del idioma de mi receta (`receta.dtd`) en un directorio `dtds` privado en mi sitio web www.javajeff.ca y usar `<!DOCTYPE recipe SYSTEM " http://www.javajeff.ca/dtds/recipe.dtd ">` para identificar la ubicación del DTD a través del *system identifier* http://www.javajeff.ca/dtds/recipe.dtd.
+
+* `<!DOCTYPE root-element-name PUBLIC fpi uri>` hace referencia a una DTD externa pero pública via `fpi`(formal public identifier), un identificador público formal (consulte http://en.wikipedia.org/wiki/Formal_Public_Identifier) y *uri*. Si un analizador XML de validación no puede localizar la DTD a través del identificador público *fpi*, puede usar el identificador del sistema *uri* para localizar la DTD. Por ejemplo, `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" " http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd ">` hace referencia al XHTML 1.0 DTD primero a través del identificador público `-//W3C//DTD XHTML 1.0 Transitional//EN` y segundo a través del identificador del sistema http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd.
+
+* `<!DOCTYPE root-element [ dtd ]>` hace referencia a un DTD interno, uno que está incrustado en el documento XML. El DTD interno debe aparecer entre corchetes.
+
+El Listado 1-8 presenta el Listado 1-1 (menos los elementos secundarios entre las etiquetas `<recipe>` y `</recipe>`) con un DTD interno.
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE recipe [
+   <!ELEMENT recipe (title, ingredients, instructions)>
+   <!ELEMENT title (#PCDATA)>
+   <!ELEMENT ingredients (ingredient+)>
+   <!ELEMENT ingredient (#PCDATA)>
+   <!ELEMENT instructions (#PCDATA)>
+   <!ATTLIST ingredient qty CDATA "1">
+]>
+<recipe>
+   <!-- Child elements removed for brevity. -->
+</recipe>
+```
+***Listado 1-8*** El Documento de Recipe con un DTD interno
+
+> **NOTA** Un documento puede tener DTDs internas y externas, por ejemplo, `<!DOCTYPE recipe SYSTEM " http://www.javajeff.ca/dtds/recipe.dtd " [ <!ELEMENT ...>]>`. El DTD interno se conoce como el *internal DTD subset* (subconjunto de DTD interno), y el DTD externo se conoce como el *external DTD subset* (subconjunto de DTD externo). Ninguno de los subconjuntos puede invalidar las declaraciones de elementos del otro subconjunto.
+
+También puede declarar notaciones y entidades generales y de parámetros dentro de los DTDs. Una *notation* (notación) es un dato arbitrario que normalmente describe el formato de los datos binarios sin analizar y normalmente tiene la forma `<!NOTATION name SYSTEM uri>`, donde `name` identifica la notación y *uri* identifica algún tipo de complemento que puede procesar los datos en nombre de la aplicación que analiza el documento XML. Por ejemplo, `<!NOTATION image SYSTEM "psp.exe">` declara una notación denominada `image` e identifica el ejecutable de Windows `psp.exe` como un complemento para procesar imágenes.
+
+También es común usar notaciones para especificar tipos de datos binarios a través de tipos de medios (consulte http://en.wikipedia.org/wiki/Media_type). Por ejemplo, `<!NOTATION image SYSTEM "image/jpeg">` declara una notación de imagen que identifica el tipo de medio `image/jpeg` para las imágenes del Joint Photographic Experts Group.
+
+Las *General entities* (entidades generales) son entidades a las que se hace referencia desde el interior de un documento XML a través de *general entity references* (referencias de entidades generales), construcciones sintácticas de la forma `&name;`. Entre los ejemplos se incluyen las entidades de carácter predefinidas`lt`, `gt`, `amp`, `apos` y `quot`, cuyas `<`,`>`, `&`, `&apos;` y `&quot;` caracteres de entidades son alias para los caracteres `<`,`>`, `&`, `'` y `"` y , respectivamente.
+
+Las entidades generales se clasifican en internas o externas. Una entidad general interna es una entidad general cuyo valor se almacena en la DTD y tiene la forma `<! ENTITY name value>`, donde `name` identifica la entidad y `value` especifica su valor. Por ejemplo, `<!ENTITY copyright "Copyright &copy; 2019 Jeff Friesen. All rights reserved.">` declara una entidad general interna denominada `copyright`. El valor de esta entidad puede incluir otra entidad declarada, como `&copy;` (la entidad HTML para el símbolo de copyright), y se puede hacer referencia a él desde cualquier lugar de un documento XML especificando `&copyright;`.
+
+Una *external general entity* (entidad general externa) es una entidad general cuyo valor se almacena fuera de la DTD. El valor puede ser datos textuales (como un documento XML) o pueden ser datos binarios (como una imagen JPEG). Las entidades generales externas se clasifican como entidad general externa analizada y entidad general externa no analizada.
+
+Una  *external parsed general entity* (entidad general analizada externamente) hace referencia a un archivo externo que almacena los datos textuales de la entidad, que está sujeto a ser insertado en un documento y analizado por un analizador de validación cuando se especifica una referencia de entidad general en el documento, y que tiene la forma `<!ENTITY name SYSTEM uri>`, donde `name` identifica la entidad y *uri* identifica el archivo externo. Por ejemplo, `<!ENTITY chapter-header SYSTEM " http://www.javajeff.ca/entities/chapheader.xml ">` identifica `chapheader.xml` como el almacenamiento del contenido XML que se insertará en un documento XML donde `&chapter-header;` aparece en el documento. Se puede especificar la forma alternativa `<!ENTITY name PUBLIC fpi uri>`.
+
+> **PRECAUCIÓN** Debido a que el contenido de un archivo externo se puede analizar, este contenido debe estar bien formado.
+
+```xml
+```
+
+```xml
+```
+```xml
+```
 
 ```xml
 ```
