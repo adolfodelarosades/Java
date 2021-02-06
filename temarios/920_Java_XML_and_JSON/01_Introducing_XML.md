@@ -433,6 +433,51 @@ Una  *external parsed general entity* (entidad general analizada externamente) h
 
 > **PRECAUCIÓN** Debido a que el contenido de un archivo externo se puede analizar, este contenido debe estar bien formado.
 
+Una *external unparsed general entity* (entidad general no analizada externa) hace referencia a un archivo externo que almacena los datos binarios de la entidad y tiene la forma `<!ENTITY name SYSTEM uri NDATA nname>`, donde `name` identifica la entidad, *uri* ubica el archivo externo y `NDATA` identifica la declaración de notación denominada `nname`. La notación generalmente identifica un complemento para procesar los datos binarios o el tipo de medio de Internet de estos datos. Por ejemplo, `<!ENTITY photo SYSTEM "photo.jpg" NDATA image>` asocia la foto del nombre con el archivo binario externo `photo.png` y la notación `image`. Se puede especificar la forma alternativa `<!ENTITY name PUBLIC fpi uri NDATA nname>`.
+
+> **NOTA** XML no permite que aparezcan referencias a entidades generales externas en los valores de los atributos. Por ejemplo, no puede especificar `&chapter-header;` en el valor de un atributo.
+
+Las *Parameter entities* (entidades de parámetros) son entidades a las que se hace referencia desde dentro de una DTD a través de *parameter entity references* (referencias de entidades de parámetros), construcciones sintácticas de la forma `%name;`. Son útiles para eliminar el contenido repetitivo de las declaraciones de elementos. Por ejemplo, está creando una DTD para una gran empresa, y esta DTD contiene declaraciones de tres elementos: `<!ELEMENT salesperson (firstname, lastname)>`, `<!ELEMENT lawyer (firstname, lastname)>` y `<!ELEMENT accountant (firstname, lastname)>`. Cada elemento contiene elementos hijos repetidos. Si necesita agregar otro elemento hijo (como `middleinitial`), deberá asegurarse de que todos los elementos estén actualizados; de lo contrario, corre el riesgo de una DTD mal formada. Las entidades de parámetros pueden ayudarlo a resolver este problema.
+
+Las entidades de parámetros se clasifican como internas o externas. Una *internal parameter entity* (entidad de parámetro interna) es una entidad de parámetro cuyo valor se almacena en la DTD y tiene la forma `<!ENTITY % name value>`, donde `name` identifica la entidad y `value` especifica su valor. Por ejemplo, `<!ENTITY % person-name "firstname, lastname">` declara una entidad de parámetro denominada `person-name` con el valor `firstname`, `lastname`. Una vez declarada, esta entidad puede ser referenciada en las tres declaraciones de elementos anteriores, de la siguiente manera: `<!ELEMENT salesperson (%person-name;)>`, `<!ELEMENT lawyer (%person-name;)>` y `<!ELEMENT accountant (%person-name;)>`. En lugar de agregar `middleinitial` a cada `salesperson`, `lawyer`y `accountant`, como se hizo anteriormente, ahora agregaría este elemento hijo a `person-name`, como en `<!ENTITY % person-name "firstname, middleinitial, lastname">` y este cambio se aplicaría a estas declaraciones de elementos.
+
+Una *external parameter entity* (entidad de parámetro externa) es una entidad de parámetro cuyo valor se almacena fuera de la DTD. Tiene la forma `<!ENTITY % name SYSTEM uri>`, donde `name` identifica la entidad y `uri` ubica el archivo externo. Por ejemplo, `<!ENTITY % person-name SYSTEM " http://www.javajeff.ca/entities/names.dtd ">` identifica `names.dtd` como el almacenamiento del texto del `firstname`, `lastname` que se insertará en un DTD donde sea que `%person-name;` aparece en el DTD. Se puede especificar la forma alternativa `<!ENTITY % name PUBLIC fpi uri>`.
+
+> **NOTA** Esta discusión resume los conceptos básicos de DTD. Un tema adicional que no se cubrió (por brevedad) es la *inclusión condicional*, que le permite especificar las partes de una DTD para que estén disponibles para los analizadores y se usa normalmente con referencias de entidades de parámetros.
+
+### XML SCHEMA
+
+XML Schema es un lenguaje gramatical para declarar la estructura, el contenido y la semántica (significado) de un documento XML. Los documentos gramaticales de este lenguaje se conocen como esquemas que son en sí mismos documentos XML. Los esquemas deben ajustarse a la DTD de esquemas XML (consulte www.w3.org/2001/XMLSchema.dtd).
+
+El esquema XML fue introducido por el W3C para superar las limitaciones de DTD, como la falta de soporte de DTD para espacios de nombres. Además, XML Schema proporciona un enfoque orientado a objetos para declarar la gramática de un documento XML. Este lenguaje gramatical proporciona un conjunto mucho mayor de tipos primitivos que los tipos CDATA y PCDATA de DTD. Por ejemplo, encontrará enteros, puntos flotantes, varios tipos de fecha y hora y cadenas que forman parte del esquema XML.
+
+El esquema NOTEXML predefine 19 tipos primitivos, que se expresan mediante los siguientes identificadores: anyURI, base64Binary, boolean, date, dateTime, decimal, double, duration, float, hexBinary, gDay, gMonth, gMonthDay, gYear, gYearMonth, NOTATION, QName, string , y tiempo.
+El esquema XML proporciona métodos de derivación de restricción (reduciendo el conjunto de valores permitidos mediante restricciones), lista (permitiendo una secuencia de valores) y unión (permitiendo una elección de valores de varios tipos) para crear nuevos tipos simples a partir de estos tipos primitivos. Por ejemplo, XML Schema deriva 13 tipos de enteros desde decimal hasta restricción; estos tipos se expresan mediante los siguientes identificadores: byte, int, integer, long, negativeInteger, nonNegativeInteger, nonPositiveInteger, positiveInteger, short, unsignedByte, unsignedInt, unsignedLong y unsignedShort. También proporciona soporte para crear tipos complejos a partir de tipos simples.
+
+Una buena forma de familiarizarse con el esquema XML es seguir un ejemplo, como crear un esquema para el documento de lenguaje de recetas del Listado 1-1. El primer paso para crear este esquema de lenguaje de recetas es identificar todos sus elementos y atributos. Los elementos son receta, título, ingredientes, instrucciones e ingrediente; qty es el atributo solitario.
+
+El siguiente paso es clasificar los elementos de acuerdo con el modelo de contenido de XML Schema, que especifica los tipos de elementos secundarios y nodos de texto (ver http://en.wikipedia.org/wiki/Node_(computer_science)) que se pueden incluir en un elemento. Se considera que un elemento está vacío cuando no tiene elementos secundarios o nodos de texto, simple cuando solo se aceptan nodos de texto, complejo cuando solo se aceptan elementos secundarios y mezclado cuando se aceptan elementos secundarios y nodos de texto. Ninguno de los elementos del Listado 1-1 tiene modelos de contenido vacío o mixto. Sin embargo, los elementos de título, ingrediente e instrucciones tienen modelos de contenido simples; y los elementos de receta e ingredientes tienen modelos de contenido complejos.
+
+Para elementos que tienen un modelo de contenido simple, podemos distinguir entre elementos que tienen atributos y elementos que no tienen atributos. El esquema XML clasifica elementos que tienen un modelo de contenido simple y ningún atributo como tipos simples. Además, clasifica elementos que tienen un modelo de contenido simple y atributos, o elementos de otros modelos de contenido como tipos complejos. Además, XML Schema clasifica los atributos como tipos simples porque solo contienen valores de texto; los atributos no tienen elementos secundarios. Los elementos de título e instrucciones del listado 1-1 y su atributo qty son tipos simples. Su receta, ingredientes y elementos de ingredientes son tipos complejos.
+
+En este punto, podemos comenzar a declarar el esquema. El siguiente fragmento de código presenta el elemento de esquema introductorio:
+<xs: schema xmlns: xs = "http://www.w3.org/2001/XMLSchema">
+El elemento de esquema introduce la gramática. También asigna el prefijo del espacio de nombres xs de uso común al espacio de nombres del esquema XML estándar; xs: posteriormente se antepone a los nombres de los elementos del esquema XML.
+
+A continuación, usamos el elemento element para declarar el título y las instrucciones elementos de tipo simple, de la siguiente manera:
+<xs: nombre del elemento = "título" tipo = "xs: cadena" />
+<xs: nombre del elemento = "instrucciones" tipo = "xs: cadena" />
+El esquema XML requiere que cada elemento tenga un nombre y (a diferencia de DTD) esté asociado con un tipo, que identifica el tipo de datos almacenados en el elemento. Por ejemplo, la declaración del primer elemento identifica el título como el nombre a través de su atributo de nombre y la cadena como el tipo a través de su atributo de tipo (los datos de cadena o carácter aparecen entre las etiquetas <title> y </title>). El prefijo xs: en xs: string es obligatorio porque string es un tipo W3C predefinido.
+
+Continuando, ahora usamos el elemento de atributo para declarar el atributo de tipo simple qty, de la siguiente manera:
+<xs: atributo name = "qty" type = "xs: unsignedInt" default = "1" />
+Este elemento de atributo declara un atributo llamado qty. Elegí unsignedInt como el tipo de este atributo porque las cantidades son valores no negativos. Además, he especificado 1 como el valor predeterminado para cuando no se especifica la cantidad: los elementos de atributo declaran por defecto atributos opcionales.
+
+NOTA El orden de las declaraciones de elementos y atributos no es significativo dentro de un esquema.
+Ahora que hemos declarado los tipos simples, podemos comenzar a declarar los tipos complejos.
+
+Para comenzar, declararemos la receta de la siguiente manera:
+
 ```xml
 ```
 
