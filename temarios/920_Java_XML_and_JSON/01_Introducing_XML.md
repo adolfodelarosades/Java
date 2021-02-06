@@ -447,46 +447,201 @@ Una *external parameter entity* (entidad de parámetro externa) es una entidad d
 
 ### XML SCHEMA
 
-XML Schema es un lenguaje gramatical para declarar la estructura, el contenido y la semántica (significado) de un documento XML. Los documentos gramaticales de este lenguaje se conocen como esquemas que son en sí mismos documentos XML. Los esquemas deben ajustarse a la DTD de esquemas XML (consulte www.w3.org/2001/XMLSchema.dtd).
+*XML Schema* es un lenguaje gramatical para declarar la estructura, el contenido y la *semántica* (significado) de un documento XML. Los documentos gramaticales de este lenguaje se conocen como *esquemas* que son en sí mismos documentos XML. Los esquemas deben ajustarse a la XML Schema DTD (consulte www.w3.org/2001/XMLSchema.dtd).
 
 El esquema XML fue introducido por el W3C para superar las limitaciones de DTD, como la falta de soporte de DTD para espacios de nombres. Además, XML Schema proporciona un enfoque orientado a objetos para declarar la gramática de un documento XML. Este lenguaje gramatical proporciona un conjunto mucho mayor de tipos primitivos que los tipos CDATA y PCDATA de DTD. Por ejemplo, encontrará enteros, puntos flotantes, varios tipos de fecha y hora y cadenas que forman parte del esquema XML.
 
-El esquema NOTEXML predefine 19 tipos primitivos, que se expresan mediante los siguientes identificadores: anyURI, base64Binary, boolean, date, dateTime, decimal, double, duration, float, hexBinary, gDay, gMonth, gMonthDay, gYear, gYearMonth, NOTATION, QName, string , y tiempo.
-El esquema XML proporciona métodos de derivación de restricción (reduciendo el conjunto de valores permitidos mediante restricciones), lista (permitiendo una secuencia de valores) y unión (permitiendo una elección de valores de varios tipos) para crear nuevos tipos simples a partir de estos tipos primitivos. Por ejemplo, XML Schema deriva 13 tipos de enteros desde decimal hasta restricción; estos tipos se expresan mediante los siguientes identificadores: byte, int, integer, long, negativeInteger, nonNegativeInteger, nonPositiveInteger, positiveInteger, short, unsignedByte, unsignedInt, unsignedLong y unsignedShort. También proporciona soporte para crear tipos complejos a partir de tipos simples.
+> **NOTA** El esquema XML predefine 19 tipos primitivos, que se expresan mediante los siguientes identificadores: `anyURI`, `base64Binary`, `boolean`, `date`, `dateTime`, `decimal`, `double`, `duration`, `float`, `hexBinary`, `gDay`, `gMonth`, `gMonthDay`, `gYear`, `gYearMonth`, `NOTATION`, `QName`, `string` y `time`.
 
-Una buena forma de familiarizarse con el esquema XML es seguir un ejemplo, como crear un esquema para el documento de lenguaje de recetas del Listado 1-1. El primer paso para crear este esquema de lenguaje de recetas es identificar todos sus elementos y atributos. Los elementos son receta, título, ingredientes, instrucciones e ingrediente; qty es el atributo solitario.
+El esquema XML proporciona *restriction* (reduciendo el conjunto de valores permitidos mediante restricciones), `list`(permitiendo una secuencia de valores) y `union`(permitiendo una elección de valores de varios tipos) para crear nuevos *simple types* (tipos simples) a partir de estos tipos primitivos. Por ejemplo, XML Schema deriva 13 tipos de enteros desde `decimal` hasta `restriction`; estos tipos se expresan mediante los siguientes identificadores: `byte`, `int`, `integer`, `long`, `negativeInteger`, `nonNegativeInteger`, `nonPositiveInteger`, `positiveInteger`, `short`, `unsignedByte`, `unsignedInt`, `unsignedLong` y `unsignedShort`. También proporciona soporte para crear *complex types* (tipos complejos) a partir de tipos simples.
 
-El siguiente paso es clasificar los elementos de acuerdo con el modelo de contenido de XML Schema, que especifica los tipos de elementos secundarios y nodos de texto (ver http://en.wikipedia.org/wiki/Node_(computer_science)) que se pueden incluir en un elemento. Se considera que un elemento está vacío cuando no tiene elementos secundarios o nodos de texto, simple cuando solo se aceptan nodos de texto, complejo cuando solo se aceptan elementos secundarios y mezclado cuando se aceptan elementos secundarios y nodos de texto. Ninguno de los elementos del Listado 1-1 tiene modelos de contenido vacío o mixto. Sin embargo, los elementos de título, ingrediente e instrucciones tienen modelos de contenido simples; y los elementos de receta e ingredientes tienen modelos de contenido complejos.
+Una buena forma de familiarizarse con el esquema XML es seguir un ejemplo, como crear un esquema para el documento de lenguaje de recetas del Listado 1-1. El primer paso para crear este esquema de lenguaje de recetas es identificar todos sus elementos y atributos. Los elementos son `recipe`, `title`, `ingredients`, `instructions` y `ingredient; qty` es el atributo solitario.
 
-Para elementos que tienen un modelo de contenido simple, podemos distinguir entre elementos que tienen atributos y elementos que no tienen atributos. El esquema XML clasifica elementos que tienen un modelo de contenido simple y ningún atributo como tipos simples. Además, clasifica elementos que tienen un modelo de contenido simple y atributos, o elementos de otros modelos de contenido como tipos complejos. Además, XML Schema clasifica los atributos como tipos simples porque solo contienen valores de texto; los atributos no tienen elementos secundarios. Los elementos de título e instrucciones del listado 1-1 y su atributo qty son tipos simples. Su receta, ingredientes y elementos de ingredientes son tipos complejos.
+El siguiente paso es clasificar los elementos de acuerdo con el *modelo de contenido* de XML Schema, que especifica los tipos de elementos hijos y *nodos* de texto (ver http://en.wikipedia.org/wiki/Node_(computer_science)) que se pueden incluir en un elemento. Se considera que un elemento está vacío *empty* cuando no tiene elementos hijos o nodos de texto, *simple* cuando solo se aceptan nodos de texto, *complex* cuando solo se aceptan elementos hijos y *mixed* cuando se aceptan elementos hijos y nodos de texto. Ninguno de los elementos del Listado 1-1 tiene modelos de contenido empty o mixed. Sin embargo, los elementos de `title`, `ingredient` e `instructions` tienen modelos de contenido simples; y los elementos `recipe` e `ingredients` tienen modelos de contenido complejos.
 
-En este punto, podemos comenzar a declarar el esquema. El siguiente fragmento de código presenta el elemento de esquema introductorio:
-<xs: schema xmlns: xs = "http://www.w3.org/2001/XMLSchema">
-El elemento de esquema introduce la gramática. También asigna el prefijo del espacio de nombres xs de uso común al espacio de nombres del esquema XML estándar; xs: posteriormente se antepone a los nombres de los elementos del esquema XML.
+Para elementos que tienen un modelo de contenido simple, podemos distinguir entre elementos que tienen atributos y elementos que no tienen atributos. El esquema XML clasifica elementos que tienen un modelo de contenido simple y ningún atributo como tipos simples. Además, clasifica elementos que tienen un modelo de contenido simple y atributos, o elementos de otros modelos de contenido como tipos complejos. Además, XML Schema clasifica los atributos como tipos simples porque solo contienen valores de texto; los atributos no tienen elementos hijos. Los elementos `title` e `instructions` del listado 1-1 y su atributo `qty` son tipos simples. Su `recipe`, `ingredients` e `ingredient` son tipos complejos.
 
-A continuación, usamos el elemento element para declarar el título y las instrucciones elementos de tipo simple, de la siguiente manera:
-<xs: nombre del elemento = "título" tipo = "xs: cadena" />
-<xs: nombre del elemento = "instrucciones" tipo = "xs: cadena" />
-El esquema XML requiere que cada elemento tenga un nombre y (a diferencia de DTD) esté asociado con un tipo, que identifica el tipo de datos almacenados en el elemento. Por ejemplo, la declaración del primer elemento identifica el título como el nombre a través de su atributo de nombre y la cadena como el tipo a través de su atributo de tipo (los datos de cadena o carácter aparecen entre las etiquetas <title> y </title>). El prefijo xs: en xs: string es obligatorio porque string es un tipo W3C predefinido.
-
-Continuando, ahora usamos el elemento de atributo para declarar el atributo de tipo simple qty, de la siguiente manera:
-<xs: atributo name = "qty" type = "xs: unsignedInt" default = "1" />
-Este elemento de atributo declara un atributo llamado qty. Elegí unsignedInt como el tipo de este atributo porque las cantidades son valores no negativos. Además, he especificado 1 como el valor predeterminado para cuando no se especifica la cantidad: los elementos de atributo declaran por defecto atributos opcionales.
-
-NOTA El orden de las declaraciones de elementos y atributos no es significativo dentro de un esquema.
-Ahora que hemos declarado los tipos simples, podemos comenzar a declarar los tipos complejos.
-
-Para comenzar, declararemos la receta de la siguiente manera:
+En este punto, podemos comenzar a declarar el esquema. El siguiente fragmento de código presenta el elemento `schema` introductorio:
 
 ```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 ```
 
-```xml
-```
-```xml
-```
+El elemento `schema` introduce la gramática. También asigna el prefijo del namespace `xs` de uso común al espacio de nombres del esquema XML estándar; `xs:` posteriormente se antepone a los nombres de los elementos del esquema XML.
+
+A continuación, usamos el elemento `element` para declarar el `title` e `instructions` elementos de tipo simple, de la siguiente manera:
 
 ```xml
+<xs:element name="title" type="xs:string"/>
+<xs:element name="instructions" type="xs:string"/>
 ```
 
+El esquema XML requiere que cada elemento tenga un nombre y (a diferencia de DTD) esté asociado con un tipo, que identifica el tipo de datos almacenados en el elemento. Por ejemplo, la declaración del primer `element` identifica el `title` como el nombre a través de su atributo `name` y `string` como el tipo a través de su atributo `type` (los datos string o character aparecen entre las etiquetas `<title>` y `</title>`). El prefijo `xs:` en `xs:string` es obligatorio porque `string` es un tipo W3C predefinido.
+
+Continuando, ahora usamos el elemento `attribute` para declarar el atributo de tipo simple `qty`, de la siguiente manera:
+
+```xml
+<xs:attribute name="qty" type="xs:unsignedInt" default="1"/>
+```
+
+Este elemento `attribute` declara un atributo llamado `qty`. Elegí `unsignedInt` como este atributo `type` porque las cantidades son valores no negativos. Además, he especificado `1` como el valor `default` para cuando no se especifica `qty`: los elementos `attribute` declaran por defecto atributos opcionales.
+
+> **NOTA** El orden de las declaraciones de elementos y atributos no es significativo dentro de un esquema.
+
+Ahora que hemos declarado los tipos simples, podemos comenzar a declarar los tipos complejos. Para comenzar, declararemos `recipe` de la siguiente manera:
+
+```xml
+<xs:element name="recipe">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element ref="title"/>
+         <xs:element ref="ingredients"/>
+         <xs:element ref="instructions"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+```
+
+Esta declaración establece que `recipe` es un tipo complejo (a través del elemento `complexType`) que consta de una secuencia (a través del elemento `sequence`) de un elemento `title` seguido de un elemento `ingredients` seguido de un elemento `instructions`. Cada uno de estos elementos es declarado por un `element` diferente al que hace referencia el atributo `ref` de `element`.
+
+El siguiente tipo complejo a declarar son `ingredients`. El siguiente fragmento de código proporciona su declaración:
+
+```xml
+<xs:element name="ingredients">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element ref="ingredient"
+                     maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+```
+
+Esta declaración establece que `ingredients` son un tipo complejo que consta de una secuencia de uno o más elementos `ingredient`. El "o más" se especifica incluyendo el atributo `maxOccurs` del `element` y estableciendo el valor de este atributo en `unbounded`.
+
+> **NOTA** El atributo `maxOccurs` identifica el número máximo de veces que puede ocurrir un elemento. Un atributo `minOccurs` similar identifica el número mínimo de veces que un elemento puede ocurrir. A cada atributo se le puede asignar `0` o un número entero positivo. Además, puede especificar `unbounded` para `maxOccurs`, lo que significa que no hay un límite superior en las ocurrencias del elemento. Cada atributo tiene un valor predeterminado de `1`, lo que significa que un elemento puede aparecer solo una vez cuando ninguno de los atributos está presente.
+
+El último tipo de complejo a declarar es `ingredient`. Aunque `ingredient` solo puede contener nodos de texto, lo que implica que debe ser un tipo simple, es la presencia del atributo `qty` lo que lo hace complejo. Consulte la siguiente declaración:
+
+```xml
+<xs:element name="ingredient">
+   <xs:complexType>
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute ref="qty"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+</xs:element>
+```
+
+El elemento llamado `ingredient` es un tipo complejo (debido a su atributo opcional `qty`). El elemento `simpleContent` indica que `ingredient` solo puede contener contenido simple (nodos de texto), y el elemento `extension` indica que `ingredient` es un nuevo tipo que extiende el tipo predefinido `string`(especificado mediante el atributo `base`), lo que implica que `ingredient` hereda todos los atributos `string` y estructuras. Además, `ingredient` se le otorga un atributo adicional `qty`.
+
+El listado 1-9 combina los ejemplos anteriores en un esquema completo.
+
+```xml
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="title" type="xs:string"/>
+<xs:element name="instructions" type="xs:string"/>
+<xs:attribute name="qty" type="xs:unsignedInt" default="1"/>
+<xs:element name="recipe">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element ref="title"/>
+         <xs:element ref="ingredients"/>
+         <xs:element ref="instructions"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+<xs:element name="ingredients">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element ref="ingredient"
+                     maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+<xs:element name="ingredient">
+   <xs:complexType>
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute ref="qty"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+</xs:element>
+```
+***Listado 1-9*** El Esquema del Documento de Recipe (receta).
+
+Después de crear el esquema, puede hacer referencia a él desde un documento de receta. Realice esta tarea especificando los atributos `xmlns:xsi` y `xsi:schemaLocation` en la etiqueta de inicio del elemento raíz del documento (`<recipe>`), de la siguiente manera:
+
+```xml
+<recipe xmlns:="http://www.javajeff.ca/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.javajeff.ca/schemas 
+recipe.xsd">
+```
+
+El atributo `xmlns` identifica http://www.javajeff.ca/ como el espacio de nombres predeterminado del documento. Los elementos sin prefijo y sus atributos sin prefijo pertenecen a este namespace.
+
+El atributo `xmlns:xsi` asocia el prefijo `xsi` (instancia de esquema XML) convencional con el espacio de nombres estándar http://www.w3.org/2001/XMLSchema-instance. El único elemento del documento que tiene el prefijo `xsi:` es `schemaLocation`.
+
+El atributo `schemaLocation` se utiliza para localizar el esquema. El valor de este atributo puede ser varios pares de valores separados por espacios, pero se especifica como un solo par de dichos valores en este ejemplo. El primer valor (http://www.javajeff.ca/schemas) identifica el espacio de nombres de destino para el esquema y el segundo valor (`receta.xsd`) identifica la ubicación del esquema dentro de este espacio de nombres.
+
+> **NOTA** A los archivos de esquema que se ajustan a la gramática del esquema XML se les suele asignar la extensión de archivo `.xsd`.
+
+Si un documento XML declara un espacio de nombres (`xmlns` predeterminado o `xmlns:prefix`), ese espacio de nombres debe estar disponible para el esquema para que un analizador de validación pueda resolver todas las referencias a elementos y otros componentes del esquema para ese espacio de nombres. También necesitamos mencionar qué espacio de nombres describe el esquema, y lo hacemos al incluir el atributo `targetNamespace` en el elemento `schema`. Por ejemplo, supongamos que nuestro documento de recetas declara un espacio de nombres XML predeterminado, de la siguiente manera:
+
+```xml
+<?xml version="1.0"?>
+<recipe xmlns:="http://www.javajeff.ca/">
+```
+
+Como mínimo, necesitaríamos modificar el elemento de esquema del Listado 1-9 para incluir `targetNameSpace` y el espacio de nombres predeterminado del documento de receta como valor de `targetNameSpace`, de la siguiente manera:
+
+```xml
+<xs:schema targetNamespace="http://www.javajeff.ca/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+```
+
+#### EJERCICIOS
+
+Los siguientes ejercicios están diseñados para evaluar su comprensión del contenido del Capítulo 1:
+
+1. Defina XML.
+2. Verdadero o falso: XML y HTML son descendientes de SGML.
+3. ¿Qué características de lenguaje proporciona XML para su uso en la definición de lenguajes de marcado personalizados?
+4. ¿Qué es la declaración XML?
+5. Identifique los tres atributos de la declaración XML. ¿Qué atributo no es opcional?
+6. Verdadero o falso: un elemento siempre consta de una etiqueta de inicio seguida de un contenido seguido de una etiqueta de fin.
+7. Después de la declaración XML, ¿en qué tipo de elemento se ancla un documento XML?
+8. ¿Qué es contenido mixto?
+9. ¿Qué es una character reference? Identifica los dos tipos de referencias de personajes.
+10. ¿Qué es una sección CDATA? ¿Por qué lo usarías?
+11. Defina namespace.
+12. ¿Qué es un namespace prefix?
+13. Verdadero o falso: Los atributos de una etiqueta no necesitan tener un prefijo cuando esos atributos pertenecen al elemento.
+14. ¿Qué es un comentario? ¿Dónde puede aparecer en un documento XML?
+15. Definir instrucción de procesamiento.
+16. Identificar las reglas que debe seguir un documento XML para que se considere bien formado.
+17. ¿Qué significa que un documento XML sea válido?
+18. Un analizador que realiza la validación compara un documento XML con un documento gramatical. Identifica los dos lenguajes gramaticales comunes.
+19. ¿Cuál es la sintaxis general para declarar un elemento en una DTD?
+20. ¿Qué lenguaje gramatical le permite crear tipos complejos a partir de tipos simples?
+21. Cree un archivo de documento `books.xml` con un elemento raíz `books`. El elemento `books` debe contener uno o más elementos de `books`, donde un elemento `books` debe contener un elemento `title`, uno o más elementos `author` y un elemento `publisher` (y en ese orden). Además, la etiqueta `<book>` del elemento `books` debe contener los atributos `isbn` y `pubyear`. Grabe `Advanced C++/James Coplien/Addison Wesley/0201548550/1992` en el primer elemento `book`, `Beginning Groovy and Grails/Christopher M. Judd/Joseph Faisal Nusairat/James Shingler/Apress/9781430210450/2008` en el segundo elemento `book`, y `Effective Java/Joshua Bloch/Addison Wesley/0201310058/2001` en el tercer elemento `book`.
+ 
+22. Modifique `books.xml` para incluir una DTD interna que satisfaga los requisitos del ejercicio anterior.
+
+### Resumen
+
+Las aplicaciones suelen utilizar documentos XML para almacenar e intercambiar datos. XML define reglas para codificar documentos en un formato que es legible por humanos y legible por máquina. Es un metalenguaje para definir vocabularios, que es la clave de la importancia y popularidad de XML.
+
+XML proporciona varias funciones de lenguaje para su uso en la definición de lenguajes de marcado personalizados. Estas características incluyen la declaración XML, elementos y atributos, referencias de caracteres y secciones CDATA, espacios de nombres y comentarios e instrucciones de procesamiento.
+
+HTML es un lenguaje descuidado en el que se pueden especificar elementos desordenados, se pueden omitir las etiquetas finales, etc. Por el contrario, los documentos XML están bien formados porque se ajustan a reglas específicas, lo que los hace más fáciles de procesar. Los analizadores XML solo analizan documentos XML bien formados.
+
+En muchos casos, un documento XML también debe ser válido. Un documento válido se adhiere a las restricciones descritas por un documento gramatical. Los documentos gramaticales están escritos en un lenguaje gramatical, como la definición de tipo de documento y el esquema XML de uso común.
+
+El Capítulo 2 presenta la API SAX de Java para analizar documentos XML.
 
