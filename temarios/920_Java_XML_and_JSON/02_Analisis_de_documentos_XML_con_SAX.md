@@ -173,8 +173,31 @@ Se declara que cada método arroja(throw) `SAXException`, que un método de devo
 
 #### Touring EntityResolver
 
-EntityResolver declara el siguiente método de devolución de llamada:
-Se llama a InputSource resolveEntity (String publicId, String systemId) para permitir que la aplicación resuelva una entidad externa (como un subconjunto DTD externo) al devolver un objeto InputSource personalizado que se basa en un URI diferente. Se declara que este método arroja SAXException cuando detecta un problema orientado a SAX y también se declara que arroja IOException cuando encuentra un error de E / S, posiblemente en respuesta a la creación de un objeto InputStream o un objeto java.io.Reader para InputSource siendo creado.
+`EntityResolver` declara el siguiente método callback:
+
+* `InputSource resolveEntity(String publicId, String systemId)` es llamado para permitir que la aplicación resuelva una entidad externa (como un subconjunto DTD externo) al devolver un objeto `InputSource` personalizado que se basa en un URI diferente. Se declara que este método arroja(throw) `SAXException` cuando detecta un problema orientado a SAX y también se declara que arroja(throw) `IOException` cuando encuentra un error de I/O, posiblemente en respuesta a la creación de un objeto `InputStream` o un objeto `java.io.Reader` para `InputSource` siendo creado.
+
+#### Touring LexicalHandler
+
+LexicalHandler declara los siguientes métodos adicionales de devolución de llamada informativos orientados al contenido:
+comentario vacío (char [] ch, int start, int length) reporta un comentario a través de la matriz ch. Los argumentos que se pasan al inicio y la longitud identifican la parte de la matriz que es relevante para esta llamada al método.
+
+void endCDATA () informa el final de una sección CDATA.
+
+void endDTD () informa el final de una DTD.
+
+void endEntity (String name) informa el final de la entidad identificada por su nombre.
+
+void startCDATA () informa el inicio de una sección CDATA.
+
+void startDTD (String name, String publicId, String systemId) informa el inicio de la DTD identificado por su nombre. publicId especifica el identificador público declarado para el subconjunto DTD externo o es la referencia nula cuando no se declaró ninguno. De manera similar, systemId especifica el identificador del sistema declarado para el subconjunto DTD externo o es la referencia nula cuando no se declaró ninguno.
+
+void startEntity (String name) informa el inicio de la entidad identificada por su nombre.
+
+Se declara que cada método arroja SAXException, que un método de devolución de llamada primordial podría elegir lanzar cuando detecta un problema.
+
+Debido a que puede ser tedioso implementar todos los métodos en cada interfaz, la API de SAX proporciona convenientemente la clase de adaptador org.xml.sax.helpers.DefaultHandler para aliviarlo de este tedio. DefaultHandler implementa ContentHandler, DTDHandler, EntityResolver y ErrorHandler. SAX también proporciona org.xml.sax.ext.DefaultHandler2, que es una subclase de DefaultHandler y que también implementa LexicalHandler.
+
 
 
 ```java
