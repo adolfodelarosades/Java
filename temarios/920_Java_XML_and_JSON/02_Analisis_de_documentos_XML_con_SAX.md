@@ -117,35 +117,64 @@ La llamada `setProperty()` asigna una instancia de una clase que implementa la i
 
 Las características y propiedades pueden ser de solo lectura o de lectura y escritura. (En algunos casos raros, una característica o propiedad puede ser de solo escritura). Al configurar o leer una característica o propiedad, se pueden lanzar `SAXNotSupportedException` o `SAXNotRecognizedException`. Por ejemplo, si intenta modificar una característica/propiedad de solo lectura, se lanza una instancia de la clase `SAXNotSupportedException`. Además, esta excepción podría producirse si llama a `setFeature()` o `setProperty()` durante el análisis. Intentar configurar la característica de validación para un analizador que no realiza la validación es un escenario en el que se lanza una instancia de la clase `SAXNotRecognizedException`.
 
+### TOURING THE HANDLER AND RESOLVER INTERFACES - VISITA A LAS INTERFACES HANDLER Y RESOLVER
 
-### VISITA LAS INTERFACES DEL MANIPULADOR Y EL RESOLVER
-Los controladores basados ​​en interfaz instalados por setContentHandler (), setDTDHandler () y setErrorHandler (); el solucionador de entidades instalado por setEntityResolver (); y el manejador descrito por la propiedad lexical-handler proporciona varios métodos de devolución de llamada. Debe comprender estos métodos antes de poder codificarlos para responder eficazmente a los eventos de análisis.
+Los controladores basados en interfaz instalados por `setContentHandler()`, `setDTDHandler()` y `setErrorHandler()`;  el resolver de entidades instalado por `setEntityResolver();` y el handler descrito por la propiedad `lexical-handler` proporciona varios métodos callback. Debe comprender estos métodos antes de poder codificarlos para responder eficazmente a los eventos de análisis.
 
-Touring ContentHandler
-ContentHandler declara los siguientes métodos de devolución de llamada informativos orientados al contenido:
-void characters (char [] ch, int start, int length) reporta los datos de caracteres de un elemento a través de la matriz ch. Los argumentos que se pasan al inicio y la longitud identifican la parte de la matriz que es relevante para esta llamada al método. Los caracteres se pasan a través de una matriz char [] en lugar de a través de un objeto String como una optimización del rendimiento. Los analizadores suelen almacenar una gran cantidad del documento en una matriz y pasan repetidamente una referencia a esta matriz junto con los valores de inicio y longitud actualizados a los caracteres ().
+#### Touring ContentHandler
 
-void endDocument () informa que se ha llegado al final del documento. Una aplicación puede utilizar este método para cerrar un archivo de salida o realizar alguna otra limpieza.
+`ContentHandler` declara los siguientes métodos callback informativos orientados al contenido:
 
-void endElement (String uri, String localName, String qName) informa que se ha alcanzado el final de un elemento. uri identifica el URI del espacio de nombres del elemento o está vacío cuando no hay URI del espacio de nombres o no se ha habilitado el procesamiento del espacio de nombres. localName identifica el nombre local del elemento, que es el nombre sin prefijo (por ejemplo, el html en html o h: html). qName hace referencia al nombre calificado, por ejemplo, h: html o html cuando no hay prefijo. endElement () se invoca cuando se detecta una etiqueta final, o inmediatamente después de startElement () cuando se detecta una etiqueta de elemento vacío.
+* `void characters(char[] ch, int start, int length)` reporta los datos de caracteres de un elemento a través del array `ch`. Los argumentos que se pasan a `start` y a `length` identifican la parte del array que es relevante para esta llamada al método. Los caracteres se pasan a través de un array `char[]` en lugar de a través de un objeto `String` como una optimización del rendimiento. Los analizadores suelen almacenar una gran cantidad del documento en un array y pasan repetidamente una referencia a este array junto con los valores de `start` y `length` actualizados a los `characters()`.
 
-void endPrefixMapping (prefijo de cadena) informa que se ha alcanzado el final de una asignación de prefijo de espacio de nombres (por ejemplo, xmlns: h), y el prefijo informa de este prefijo (por ejemplo, h).
+* `void endDocument()` informa que se ha llegado al final del documento. Una aplicación puede utilizar este método para cerrar un archivo de salida o realizar alguna otra limpieza.
 
-void ignorableWhitespace (char [] ch, int start, int length) reporta espacios en blanco ignorables (espacios en blanco ubicados entre las etiquetas donde la DTD no permite contenido mixto). Este espacio en blanco se utiliza a menudo para sangrar etiquetas. Los parámetros tienen el mismo propósito que los del método characters ().
+* `void endElement(String uri, String localName, String qName)` informa que se ha alcanzado el final de un elemento. `uri` identifica el URI del namespace del elemento o está vacío cuando no hay URI del namespace o no se ha habilitado el procesamiento del namespace. `localName` identifica el nombre local del elemento, que es el nombre sin prefijo (por ejemplo, el `html` en `html` o `h: html`). `qName` hace referencia al nombre calificado, por ejemplo, `h:html` o `html` cuando no hay prefijo. `endElement()` se invoca cuando se detecta una etiqueta final, o inmediatamente después de `startElement()` cuando se detecta una etiqueta de elemento vacío.
 
-Void ProcessingInstruction (String target, String data) informa una instrucción de procesamiento, en la cual el destino identifica la aplicación a la que se dirige la instrucción y los datos proporcionan los datos de la instrucción (la referencia nula cuando no hay datos).
+* `void endPrefixMapping(String prefix)` informa que se ha alcanzado el final de una asignación de prefijo de namespace (por ejemplo, `xmlns:h`), y el `prefix` informa de este prefijo (por ejemplo, `h`).
 
-void setDocumentLocator (Locator locator) informa un objeto org.xml.sax.Locator (una instancia de una clase que implementa la interfaz Locator) cuyos métodos int getColumnNumber (), int getLineNumber (), String getPublicId () y String getSystemId () ser llamado para obtener información de ubicación en la posición final de cualquier evento relacionado con el documento, incluso cuando el analizador no informa un error. Este método se llama antes de startDocument () y es un buen lugar para guardar el objeto Locator para que se pueda acceder a él desde otros métodos de devolución de llamada.
+* `void ignorableWhitespace(char[] ch, int start, int length)` reporta *ignorable whitespace* (espacios en blanco ignorables) (espacios en blanco ubicados entre las etiquetas donde la DTD no permite contenido mixto). Este espacio en blanco se utiliza a menudo para sangrar etiquetas. Los parámetros tienen el mismo propósito que los del método `characters()`.
 
-void skippedEntity (nombre de cadena) informa todas las entidades omitidas. Los analizadores de validación resuelven todas las referencias de entidades generales, pero los analizadores de no validación tienen la opción de omitirlos porque los analizadores de no validación no leen DTD donde se declaran estas entidades. Si el analizador no validante no lee un DTD, no sabrá si una entidad está declarada correctamente. En lugar de intentar leer la DTD e informar el texto de reemplazo de la entidad, el analizador no validante llama a skippedEntity () con el nombre de la entidad.
+* `void processingInstruction(String target, String data)` informa una instrucción de procesamiento, en la cual el `target` (destino) identifica la aplicación a la que se dirige la instrucción y los datos proporcionan los datos de la instrucción (la referencia nula cuando no hay datos).
 
-void startDocument () informa que se ha alcanzado el inicio del documento. Una aplicación puede utilizar este método para crear un archivo de salida o realizar alguna otra inicialización.
+* `void setDocumentLocator(Locator locator)` informa un objeto `org.xml.sax.Locator` (una instancia de una clase que implementa la interfaz `Locator`) cuyos métodos `int getColumnNumber()`, `int getLineNumber()`, `String getPublicId()` y `String getSystemId()` pueden ser llamado para obtener información de ubicación en la posición final de cualquier evento relacionado con el documento, incluso cuando el analizador no informa un error. Este método se llama antes de `startDocument()` y es un buen lugar para guardar el objeto `Locator` para que se pueda acceder a él desde otros métodos callback.
 
-void startElement (String uri, String localName, String qName, Atributos atributos) informa que se ha alcanzado el inicio de un elemento. uri identifica el URI del espacio de nombres del elemento o está vacío cuando no hay URI del espacio de nombres o no se ha habilitado el procesamiento del espacio de nombres. localName identifica el nombre local del elemento, qName hace referencia a su nombre calificado y atributos hace referencia a una lista de los atributos del elemento; esta lista está vacía cuando no hay atributos. startElement () se invoca cuando se detecta una etiqueta de inicio o una etiqueta de elemento vacío.
+* `void skippedEntity(String name)` informa todas las entidades omitidas. Los analizadores de validación resuelven todas las referencias de entidades generales, pero los analizadores de no validación tienen la opción de omitirlos porque los analizadores de no validación no leen DTD donde se declaran estas entidades. Si el analizador no validante no lee un DTD, no sabrá si una entidad está declarada correctamente. En lugar de intentar leer la DTD e informar el texto de reemplazo de la entidad, el analizador no validante llama a `skippedEntity()` con el nombre de la entidad.
 
-void startPrefixMapping (String prefix, String uri) informa que se ha alcanzado el inicio de una asignación de prefijo de espacio de nombres (por ejemplo, xmlns: h = "http://www.w3.org/1999/xhtml"), en el que el prefijo informa de esto prefix (como h) y uri informa el URI al que se asigna el prefijo (por ejemplo, http://www.w3.org/1999/xhtml).
+* `void startDocument()` informa que se ha alcanzado el inicio del documento. Una aplicación puede utilizar este método para crear un archivo de salida o realizar alguna otra inicialización.
 
-Cada método, excepto setDocumentLocator (), se declara para lanzar SAXException, que un método de devolución de llamada primordial podría elegir lanzar cuando detecta un problema.
+* `void startElement(String uri, String localName, String qName, Attributes attributes)` informa que se ha alcanzado el inicio de un elemento. `uri` identifica el URI del espacio de nombres del elemento o está vacío cuando no hay URI del namespace o no se ha habilitado el procesamiento del espacio de nombres. `localName` identifica el nombre local del elemento, `qName` hace referencia a su nombre calificado y `attributes` hace referencia a una lista de los atributos del elemento; esta lista está vacía cuando no hay atributos. `startElement()` se invoca cuando se detecta una etiqueta de inicio o una etiqueta de elemento vacío.
+
+* `void startPrefixMapping(String prefix, String uri)` informa que se ha alcanzado el inicio de una asignación de prefijo de espacio de nombres (por ejemplo, `xmlns:h="http://www.w3.org/1999/xhtml"`), en el que el `prefix` informa de este prefix (como `h`) y `uri` informa el URI al que se asigna el prefijo (por ejemplo, http://www.w3.org/1999/xhtml).
+
+Cada método, excepto `setDocumentLocator()`, se declara para lanzar `SAXException`, que un método de devolución de llamada primordial podría elegir lanzar cuando detecta un problema.
+
+#### Touring DTDHandler
+
+`DTDHandler` declara los siguientes métodos de devolución de llamada informativos orientados a DTD:
+
+* `void notationDecl(String name, String publicId, String systemId)` informa una declaración de notación, en la que `name` proporciona el valor del atributo `name` de esta declaración, `publicId` proporciona el valor del atributo público de esta declaración (la referencia nula cuando este valor no está disponible) y `systemId` proporciona valor del atributo `system` de esta declaración.
+
+* `void unparsedEntityDecl(String name, String publicId, String systemId, String notationName)` informa una declaración de entidad externa no analizada, en la que `name` proporciona el valor del atributo `name` de esta declaración, `publicId` proporciona el valor del atributo `public` (la referencia nula cuando este valor es no esta disponible), `systemId` proporciona el valor del atributo `system` y `notationName` proporciona el nombre `NDATA`.
+
+Cada método se declara para lanzar(throw) `SAXException`, que un método overriding callback podría elegir lanzar cuando detecta un problema.
+
+#### Touring ErrorHandler
+
+`ErrorHandler` declara los siguientes métodos callback informativos orientados a errores:
+
+* `void error(SAXParseException exception)` informa que se ha producido un error del analizador recuperable (normalmente el documento no es válido); los detalles se especifican mediante el argumento pasado a `exception`. Este método generalmente se anula para informar el error a través de una ventana de comando o para registrarlo en un archivo o base de datos.
+
+* `void fatalError(SAXParseException exception)` informa que se ha producido un error irrecuperable del analizador (el documento no está bien formado); los detalles se especifican mediante el argumento pasado a `exception`. Este método generalmente se anula para que la aplicación pueda registrar el error antes de que deje de procesar el documento (porque el documento ya no es confiable).
+
+* `void warning(SAXParseException e)` informa que se ha producido un error no grave (como el nombre de un elemento que comienza con la secuencia de caracteres `xml` reservada); los detalles se especifican mediante el argumento pasado a `exception`. Este método generalmente se anula para informar la advertencia a través de una consola o para registrarla en un archivo o base de datos.
+
+Se declara que cada método arroja(throw) `SAXException`, que un método de devolución de llamada primordial podría elegir lanzar cuando detecta un problema.
+
+#### Touring EntityResolver
+
+EntityResolver declara el siguiente método de devolución de llamada:
+Se llama a InputSource resolveEntity (String publicId, String systemId) para permitir que la aplicación resuelva una entidad externa (como un subconjunto DTD externo) al devolver un objeto InputSource personalizado que se basa en un URI diferente. Se declara que este método arroja SAXException cuando detecta un problema orientado a SAX y también se declara que arroja IOException cuando encuentra un error de E / S, posiblemente en respuesta a la creación de un objeto InputStream o un objeto java.io.Reader para InputSource siendo creado.
 
 
 ```java
