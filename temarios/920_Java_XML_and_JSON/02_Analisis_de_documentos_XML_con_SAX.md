@@ -179,60 +179,571 @@ Se declara que cada método arroja(throw) `SAXException`, que un método de devo
 
 #### Touring LexicalHandler
 
-LexicalHandler declara los siguientes métodos adicionales de devolución de llamada informativos orientados al contenido:
-comentario vacío (char [] ch, int start, int length) reporta un comentario a través de la matriz ch. Los argumentos que se pasan al inicio y la longitud identifican la parte de la matriz que es relevante para esta llamada al método.
+`LexicalHandler` declara los siguientes métodos callback adicionales informativos orientados al contenido:
 
-void endCDATA () informa el final de una sección CDATA.
+* `void comment(char[] ch, int start, int length)` reporta un comentario a través del array `ch`. Los argumentos que se pasan `start` y `length` identifican la parte del array que es relevante para esta llamada al método.
 
-void endDTD () informa el final de una DTD.
+* `void endCDATA()` informa el final de una sección CDATA.
 
-void endEntity (String name) informa el final de la entidad identificada por su nombre.
+* `void endDTD()` informa el final de una DTD.
 
-void startCDATA () informa el inicio de una sección CDATA.
+* `void endEntity(String name)` informa el final de la entidad identificada por `name`.
 
-void startDTD (String name, String publicId, String systemId) informa el inicio de la DTD identificado por su nombre. publicId especifica el identificador público declarado para el subconjunto DTD externo o es la referencia nula cuando no se declaró ninguno. De manera similar, systemId especifica el identificador del sistema declarado para el subconjunto DTD externo o es la referencia nula cuando no se declaró ninguno.
+* `void startCDATA()` informa el inicio de una sección CDATA.
 
-void startEntity (String name) informa el inicio de la entidad identificada por su nombre.
+* `void startDTD(String name, String publicId, String systemId)` informa el inicio de la DTD identificado por `name. publicId` especifica el identificador público declarado para el subconjunto DTD externo o es la referencia nula cuando no se declaró ninguno. De manera similar, `systemId` especifica el identificador del sistema declarado para el subconjunto DTD externo o es la referencia nula cuando no se declaró ninguno.
 
-Se declara que cada método arroja SAXException, que un método de devolución de llamada primordial podría elegir lanzar cuando detecta un problema.
+* `void startEntity(String name)` informa el inicio de la entidad identificada por `name`.
 
-Debido a que puede ser tedioso implementar todos los métodos en cada interfaz, la API de SAX proporciona convenientemente la clase de adaptador org.xml.sax.helpers.DefaultHandler para aliviarlo de este tedio. DefaultHandler implementa ContentHandler, DTDHandler, EntityResolver y ErrorHandler. SAX también proporciona org.xml.sax.ext.DefaultHandler2, que es una subclase de DefaultHandler y que también implementa LexicalHandler.
+Se declara que cada método arroja(throw) `SAXException`, que un método de devolución de llamada primordial podría elegir lanzar cuando detecta un problema.
 
+Debido a que puede ser tedioso implementar todos los métodos en cada interfaz, la API de SAX proporciona convenientemente la clase de adaptador `org.xml.sax.helpers.DefaultHandler` para aliviarlo de este tedio. `DefaultHandler` implementa `ContentHandler`, `DTDHandler`, `EntityResolver` y `ErrorHandler`. SAX también proporciona `org.xml.sax.ext.DefaultHandler2`, que es una subclase de `DefaultHandler` y que también implementa `LexicalHandler`.
 
+<hr>
 
-```java
-```
+## Demostrando la API de SAX
 
-
-
-```java
-```
-
+El Listado 2-1 presenta el código fuente de `SAXDemo`, una aplicación que demuestra la API de SAX. La aplicación consta de una clase de punto de entrada `SAXDemo` y una subclase `Handler` de `DefaultHandler2`.
 
 ```java
+import java.io.FileReader;
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import static java.lang.System.*;
+
+public class SAXDemo{
+   
+   final static String FEAT_NSP = "http://xml.org/sax/features/namespace-prefixes";
+   final static String FEAT_VAL = "http://xml.org/sax/features/validation";
+   final static String PROP_LH = "http://xml.org/sax/properties/lexical-handler";
+   
+   public static void main(String[] args){
+   
+      if (args.length < 1 || args.length > 2){
+         err.println("usage: java SAXDemo xmlfile [v]");
+         return;
+      }
+      try{
+         SAXParserFactory spf = SAXParserFactory.newInstance();
+         spf.setNamespaceAware(true);
+         SAXParser sp = spf.newSAXParser();
+         XMLReader xmlr = sp.getXMLReader();
+         if (args.length == 2 && args[1].equals("v"))
+            xmlr.setFeature(FEAT_VAL, true);
+         xmlr.setFeature(FEAT_NSP, true);
+         Handler handler = new Handler();
+         xmlr.setContentHandler(handler);
+         xmlr.setDTDHandler(handler);
+         xmlr.setEntityResolver(handler);
+         xmlr.setErrorHandler(handler);
+         xmlr.setProperty(PROP_LH, handler);
+         FileReader fr = new FileReader(args[0]);
+         xmlr.parse(new InputSource(fr));
+      }catch (IOException ioe) {
+         err.printf("IOE: %s%n", ioe.toString());
+      }catch (ParserConfigurationException pce) {
+         err.printf("PCE: %s%n", pce.toString());
+      }catch (SAXException saxe) {
+         err.printf("SAXE: %s%n", saxe.toString());
+      }
+   }
+}
 ```
+***Listado 2-1*** SAXDemo
 
+El método `main()` de `SAXDemo` primero verifica que se hayan especificado uno o dos argumentos de la línea de comandos (el nombre de un documento XML seguido opcionalmente por una letra minúscula `v`, que le dice a `SAXDemo` que cree un analizador de validación). Luego crea un objeto `XMLReader`; habilita condicionalmente la característica `validation` y habilita la característica de `namespace-prefixes`; crea una instancia de la clase `Handler` complementaria; instala este objeto `Handler` como el controlador de contenido del analizador, el DTD handler, el entity resolver(solucionador de entidades) y el error handler(controlador de errores); instala este objeto `Handler` como el valor de la propiedad `lexical-handler`; crea una fuente de entrada para leer el documento desde un archivo; y analiza el documento.
 
+El código fuente de la clase `Handler` se presenta en el Listado 2-2.
 
 ```java
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.ext.DefaultHandler2;
+import static java.lang.System.*;
+public class Handler extends DefaultHandler2{
+   
+   private Locator locator;
+   
+   @Override
+   public void characters(char[] ch, int start, int length){
+      out.print("characters() [");
+      for (int i = start; i < start + length; i++)
+         out.print(ch[i]);
+      out.println("]");
+   }
+   
+   @Override
+   public void comment(char[] ch, int start, int length){
+      out.print("characters() [");
+      for (int i = start; i < start + length; i++)
+         out.print(ch[i]);
+      out.println("]");
+   }
+   
+   @Override
+   public void endCDATA(){
+      out.println("endCDATA()");
+   }
+   
+   @Override
+   public void endDocument(){
+      out.println("endDocument()");
+   }
+   
+   @Override
+   public void endDTD(){
+      out.println("endDTD()");
+   }
+   
+   @Override
+   public void endElement(String uri, String localName, String qName){
+      out.print("endElement() ");
+      out.printf("uri=[%s], ", uri);
+      out.printf("localName=[%s], ", localName);
+      out.printf("qName=[%s]%n", qName);
+   }
+   
+   @Override
+   public void endEntity(String name){
+      out.print("endEntity() ");
+      out.printf("name=[%s]%n", name);
+   }
+   
+   @Override
+   public void endPrefixMapping(String prefix){
+      out.print("endPrefixMapping() ");
+      out.printf("prefix=[%s]%n", prefix);
+   }
+   
+   @Override
+   public void error(SAXParseException saxpe){
+      out.printf("error() %s%n", saxpe.toString());
+   }
+   
+   @Override
+   public void fatalError(SAXParseException saxpe){
+      out.printf("fatalError() %s%n", saxpe.toString());
+   }
+   
+   @Override
+   public void ignorableWhitespace(char[] ch, int start, int length){
+      out.print("ignorableWhitespace() [");
+      for (int i = start; i < start + length; i++)
+         out.print(ch[i]);
+      out.println("]");
+   }
+   
+   @Override
+   public void notationDecl(String name, String publicId, String systemId){
+      out.print("notationDecl() ");
+      out.printf("name=[%s], ", name);
+      out.printf("publicId=[%s], ", publicId);
+      out.printf("systemId=[%s]%n", systemId);
+   }
+   
+   @Override
+   public void processingInstruction(String target, String data){
+      out.print("processingInstruction() ");
+      out.printf("target=[%s], ", target);
+      out.printf("data=[%s]%n", data);
+   }
+   
+   @Override
+   public InputSource resolveEntity(String publicId, String systemId){
+      out.print("resolveEntity() ");
+      out.printf("publicId=[%s], ", publicId);
+      out.printf("systemId=[%s]%n", systemId);
+      // Do not perform a remapping.
+      InputSource is = new InputSource();
+      is.setPublicId(publicId);
+      is.setSystemId(systemId);
+      return is;
+   }
+   
+   @Override
+   public void setDocumentLocator(Locator locator){
+      out.print("setDocumentLocator() ");
+      out.printf("locator=[%s]%n", locator);
+      this.locator = locator;
+   }
+   
+   @Override
+   public void skippedEntity(String name){
+      out.print("skippedEntity() ");
+      out.printf("name=[%s]%n", name);
+   }
+   
+   @Override
+   public void startCDATA(){
+      out.println("startCDATA()");
+   }
+   
+   @Override
+   public void startDocument(){
+      out.println("startDocument()");
+   }
+   
+   @Override
+   public void startDTD(String name, String publicId, String systemId){
+      out.print("startDTD() ");
+      out.printf("name=[%s], ", name);
+      out.printf("publicId=[%s], ", publicId);
+      out.printf("systemId=[%s]%n", systemId);
+   }
+   
+   @Override
+   public void startElement(String uri, String localName, String qName, Attributes attributes){
+      out.print("startElement() ");
+      out.printf("uri=[%s], ", uri);
+      out.printf("localName=[%s], ", localName);
+      out.printf("qName=[%s]%n", qName);
+      for (int i = 0; i < attributes.getLength(); i++)
+         out.printf("  Attribute: %s, %s%n", attributes.getLocalName(i),
+                            attributes.getValue(i));
+      out.printf("Column number=[%d]%n", locator.getColumnNumber());
+      out.printf("Line number=[%d]%n", locator.getLineNumber());
+   }
+   
+   @Override
+   public void startEntity(String name){
+      out.print("startEntity() ");
+      out.printf("name=[%s]%n", name);
+   }
+   
+   @Override
+   public void startPrefixMapping(String prefix, String uri){
+      out.print("startPrefixMapping() ");
+      out.printf("prefix=[%s], ", prefix);
+      out.printf("uri=[%s]%n", uri);
+   }
+   
+   @Override
+   public void unparsedEntityDecl(String name,
+                                  String publicId,
+                                  String systemId,
+                                  String notationName){
+      out.print("unparsedEntityDecl() ");
+      out.printf("name=[%s], ", name);
+      out.printf("publicId=[%s], ", publicId);
+      out.printf("systemId=[%s], ", systemId);
+      out.printf("notationName=[%s]%n", notationName);
+   }
+   
+   @Override
+   public void warning(SAXParseException saxpe){
+      out.printf("warning() %s%n", saxpe.toString());
+   }
+}
+```
+***Listado 2-2*** `Handler`
+
+La subclase `Handler` es bastante sencilla; genera toda la información posible sobre un documento XML, sujeto a la configuración de características y propiedades. Esta clase le resultará útil para explorar el orden en el que ocurren los eventos junto con varias características y propiedades.
+
+Suponiendo que los archivos basados en los listados 2-1 y 2-2 se encuentran en el mismo directorio, compílelos de la siguiente manera:
+
+```sh
+javac SAXDemo.java
 ```
 
+Ejecute el siguiente comando para analizar el documento `svg-examples.xml` del Listado 1-4:
+
+```sh
+java SAXDemo svg-examples.xml
+```
+
+`SAXDemo` responde presentando la siguiente salida (el hashcode probablemente será diferente):
+
+```sh
+setDocumentLocator() locator=[com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser$LocatorProxy@53b32d7]
+startDocument()
+startElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+Column number=[15]
+Line number=[2]
+characters() [
+   ]
+startElement() uri=[], localName=[example], qName=[example]
+Column number=[13]
+Line number=[3]
+characters() [
+      The following Scalable Vector Graphics document ]
+characters() [
+      describes a blue-filled and black-stroked
+      rectangle.]
+characters() [
+      ]
+startCDATA()
+characters() [<svg width="100%" height="100%"
+           version="1.1"
+           xmlns="http://www.w3.org/2000/svg">
+         <rect width="300" height="100"
+               style="fill:rgb(0,0,255);stroke-width:1;
+                      stroke:rgb(0,0,0)"/>
+      </svg>]
+endCDATA()
+characters() [
+   ]
+endElement() uri=[], localName=[example], qName=[example]
+characters() [
+]
+endElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+endDocument()
+```
+
+La primera línea de salida demuestra que `setDocumentLocator()` se llama primero. La segunda y tercera líneas también identifican el objeto `Locator` cuyos métodos `getColumnNumber()` y `getLineNumber()` son llamados para generar la ubicación del analizador cuando se llama a `startElement()`; estos métodos devuelven números de columna y línea que comienzan en 1.
+
+Tal vez sienta curiosidad por las cuatro instancias del siguiente resultado:
+
+```sh
+characters() [
+   ]
+```
+
+La instancia de esta salida que sigue a la salida `endCDATA()` informa una combinación de retorno de carro/salto de línea que no se incluyó en la llamada al método `characters()` anterior, que pasó el contenido de la sección CDATA menos estos caracteres de terminación de línea. Este es también el caso de la instancia de esta salida que sigue a la salida `rectangle.]`. En contraste, las instancias de esta salida que siguen a la llamada `startElement()` para `svg-examples` y siguen la llamada `endElement()`, por `example`, son algo curiosas. No hay contenido entre `<svg-examples>` y `<example>`, y entre `</example>` y `</svg-examples>`, ¿o sí?
+
+Puede satisfacer esta curiosidad modificando `svg-examples.xml` para incluir un DTD interno. Coloque el siguiente DTD (que indica que un elemento `svg-examples` contiene uno o más elementos de ejemplo y que un elemento `example` contiene datos de caracteres analizados) entre la declaración XML y la etiqueta de inicio `<svg-examples>`:
+
+
+```xml
+<!DOCTYPE svg-examples [
+<!ELEMENT svg-examples (example+)>
+<!ELEMENT example (#PCDATA)>
+]>
+```
+
+Continuando, ejecute el siguiente comando:
+
+```sh
+java SAXDemo svg-examples.xml
+```
+
+Esta vez, debería ver el siguiente resultado (aunque el hashcode probablemente será diferente):
+
+```sh
+setDocumentLocator() locator=[com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser$LocatorProxy@53b32d7]
+startDocument()
+startDTD() name=[svg-examples], publicId=[null], systemId=[null]
+endDTD()
+startElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+Column number=[15]
+Line number=[6]
+ignorableWhitespace() [
+   ]
+startElement() uri=[], localName=[example], qName=[example]
+Column number=[13]
+Line number=[7]
+characters() [
+      The following Scalable Vector Graphics document
+      describes a blue-filled and black-stroked ]
+characters() [
+      rectangle.
+      ]
+startCDATA()
+characters() [<svg width="100%" height="100%"
+           version="1.1"
+           xmlns="http://www.w3.org/2000/svg">
+         <rect width="300" height="100"
+               style="fill:rgb(0,0,255);stroke-width:1;
+                      stroke:rgb(0,0,0)"/>
+      </svg>]
+endCDATA()
+characters() [
+   ]
+endElement() uri=[], localName=[example], qName=[example]
+ignorableWhitespace() [
+]
+endElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+endDocument()
+```
+
+Esta salida revela que el método `ignorableWhitespace()` fue llamado después de `startElement()` para `svg-examples` y después de `endElement()` por `example`. Las dos primeras llamadas a `characters()` que produjeron la salida extraña informaban espacios en blanco ignorables.
+
+Recuerde que anteriormente definí los *ignorable whitespace* (espacios en blanco ignorables) como espacios en blanco ubicados entre etiquetas donde la DTD no permite contenido mixto. Por ejemplo, la DTD indica que `svg-examples` debe contener solo elementos `example`, no elementos `example` y datos de caracteres analizados. Sin embargo, el terminador de línea que sigue a la etiqueta `<svg-examples>` y el espacio en blanco inicial antes de `<example>` son datos de caracteres analizados. El analizador ahora informa estos caracteres llamando a `ignorableWhitespace()`.
+
+Esta vez, solo hay dos apariciones de la siguiente salida:
+
+```sh
+characters() [
+   ]
+```
+
+La primera aparición informa el terminador de línea por separado del texto del elemento `example` (antes de la sección CDATA); no lo hizo anteriormente, lo que demuestra que se llama a `characters()` con todo o parte del contenido de un elemento. Una vez más, la segunda aparición informa del terminador de línea que sigue a la sección CDATA.
+
+Validemos `svg-examples.xml` sin el DTD interno presentado anteriormente. Lo haremos ejecutando el siguiente comando; no olvide incluir el argumento de la línea de comando `v` o el documento no se validará:
+
+```sh
+java SAXDemo svg-examples.xml v
+```
+
+Entre su salida se encuentran el siguiente `error()` - líneas prefijadas:
+
+```sh
+error() org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 14; Document is invalid: no grammar found.
+error() org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 14; Document root element "svg-examples", must match DOCTYPE root "null".
+```
+
+Estas líneas revelan que no se ha encontrado una gramática DTD. Además, el analizador informa una falta de coincidencia entre `svg-examples` (considera que el primer elemento encontrado es el elemento raíz) y `null` (considera `null` como el nombre del elemento raíz en ausencia de una DTD). Ninguna violación se considera fatal, por lo que se llama a `error()` en lugar de `fatalError()`.
+
+Agregue el DTD interno a `svg-examples.xml` y vuelva a ejecutar `java SAXDemo svg-examples.xml v`. Esta vez, no debería ver ningún `error()` - líneas prefijadas en la salida.
+
+> **TIP** La validación de SAX 2 tiene como valor predeterminado la validación contra una DTD. En su lugar, para validar con un esquema basado en XML Schema, agregue la propiedad `schemaLanguage` con el valor http://www.w3.org/2001/XMLSchema al objeto `XMLReader`. Realice esta tarea para `SAXDemo` especificando `xmlr.setProperty(" http://java.sun.com/xml/jaxp/properties/schemaLanguage ", " http://www.w3.org/2001/XMLSchema "); before xmlr.parse(new InputSource(new FileReader(args[0])));`.
+
+<hr>
+
+## Creación de Custom Entity Resolver
+
+Mientras exploraba XML en el Capítulo 1, le presenté el concepto de *entities*, que son datos con alias. Luego discutí las entidades generales y las entidades paramétricas en términos de sus variantes internas y externas.
+
+A diferencia de las entidades internas, cuyos valores se especifican en una DTD, los valores de las entidades externas se especifican fuera de una DTD y se identifican mediante identificadores públicos y/o del sistema. El identificador del sistema es un URI, mientras que el identificador público es un identificador público formal.
+
+Un analizador XML lee una entidad externa (incluido el subconjunto DTD externo) a través de un objeto `InputSource` que está conectado al identificador del sistema apropiado. En muchos casos, pasa un identificador del sistema o un objeto `InputSource` al analizador y deja que descubra dónde encontrar otras entidades a las que se hace referencia desde la entidad del documento actual.
+
+Sin embargo, por razones de rendimiento u otras razones, es posible que desee que el analizador lea el valor de la entidad externa de un identificador de sistema diferente, como un identificador de sistema de copia DTD local. Puede realizar esta tarea creando un sistema de resolución de entidades que utilice el identificador público para elegir un identificador de sistema diferente. Al encontrar una entidad externa, el analizador llama al solucionador de entidades personalizado para obtener este identificador.
+
+Considere la especificación formal del Listado 2-3 de la receta de sándwich de queso a la parrilla del Listado 1-1.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE recipeml PUBLIC
+   "-//FormatData//DTD RecipeML 0.5//EN"
+   "http://www.formatdata.com/recipeml/recipeml.dtd">
+<recipeml version="0.5">
+   <recipe>
+      <head>
+         <title>Grilled Cheese Sandwich</title>
+      </head>
+      <ingredients>
+         <ing>
+            <amt><qty>2</qty><unit>slice</unit></amt>
+            <item>bread</item>
+         </ing>
+         <ing>
+            <amt><qty>1</qty><unit>slice</unit></amt>
+            <item>cheese</item>
+         </ing>
+         <ing>
+            <amt><qty>2</qty><unit>pat</unit></amt>
+            <item>margarine</item>
+         </ing>
+      </ingredients>
+      <directions>
+         <step>Place frying pan on element and select
+         medium heat.</step>
+         <step>For each bread slice, smear one pat of
+         margarine on one side of bread slice.</step>
+         <step>Place cheese slice between bread slices with
+         margarine-smeared sides away from the
+         cheese.</step>
+         <step>Place sandwich in frying pan with one
+         margarine-smeared size in contact with pan.</step>
+         <step>Fry for a couple of minutes and flip.</step>
+         <step>Fry other side for a minute and
+         serve.</step>
+      </directions>
+   </recipe>
+</recipeml>
+```
+***Listado 2-3*** Receta basada en XML para un Sándwich de Queso a la Parrilla Especificado en el Lenguaje de Marcado de Recetas
+
+El Listado 2-3 especifica la receta de sándwich de queso a la parrilla en *Recipe Markup Language* (*RecipeML*), un lenguaje basado en XML para marcar recetas. (Una empresa llamada FormatData [consulte www.formatdata.com] lanzó este formato en 2000).
+
+La declaración de tipo de documento informa: `-//FormatData//DTD RecipeML 0.5//EN` como identificador público formal y http://www.formatdata.com/recipeml/recipeml.dtd como identificador del sistema. En lugar de mantener el mapeo predeterminado, mapeemos este identificador público formal a `recipeml.dtd`, un identificador del sistema para una copia local de este archivo DTD.
+
+Para crear un resolutor de entidad personalizado para realizar esta asignación, declaramos una clase que implementa la interfaz `EntityResolver` en términos de su método `InputSource resolveEntity(String publicId, String systemId)`. Luego usamos el valor de `publicId` proporcionado como una clave en un mapa que apunta al valor de `systemId` deseado, y luego usamos este valor para crear y devolver un `InputSource` personalizado. El listado 2-4 presenta la clase resultante.
 
 ```java
+import java.util.HashMap;
+import java.util.Map;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import static java.lang.System.*;
+
+public class LocalRecipeML implements EntityResolver{
+
+   private Map<String, String> mappings = new HashMap<>();
+   
+   LocalRecipeML(){
+      mappings.put("-//FormatData//DTD RecipeML 0.5//EN", "recipeml.dtd");
+   }
+   
+   @Override
+   public InputSource resolveEntity(String publicId, String systemId){
+      if (mappings.containsKey(publicId)){
+         out.println("obtaining cached recipeml.dtd");
+         systemId = mappings.get(publicId);
+         InputSource localSource = new InputSource(systemId);
+         return localSource;
+      }
+      return null;
+   }
+}
+```
+***Listado 2-4*** `LocalRecipeML`
+
+El Listado 2-4 declara `LocalRecipeML`. El constructor de esta clase almacena el identificador público formal para el DTD RecipeML y el identificador del sistema para una copia local del documento de este DTD en un mapa.
+
+> **NOTA**: Aunque no es necesario utilizar un mapa en este ejemplo (un `if (publicId.equals("-//FormatData//DTD RecipeML 0.5//EN")) return new InputSource("recipeml.dtd") else return null;` declaración sería suficiente), he optado por utilizar un mapa en caso de que quiera ampliar el número de asignaciones en el futuro. En otro escenario, probablemente encontrará un mapa muy conveniente. Por ejemplo, es más fácil usar un mapa que usar una serie de declaraciones `if` en un entity resolver personalizado que mapea los identificadores públicos formales estrictos, de transición y de conjunto de marcos de XHTML y también asigna sus diversos conjuntos de entidades a copias locales de estos archivos de documentos.
+
+El método overriding `resolveEntity()` usa el argumento de `publicId` para ubicar el identificador del sistema correspondiente en el mapa; el valor del parámetro `systemId` se ignora porque nunca se refiere a la copia local de `recipeml.dtd`. Cuando se encuentra la asignación, se crea y se devuelve un objeto `InputSource`. Si no se puede encontrar la asignación, se devolverá un valor `null`.
+
+Para instalar este entity resolver personalizado en `SAXDemo`, especifique `xmlr.setEntityResolver(new LocalRecipeML());` antes de la llamada al método `parse()`. Después de recompilar el código fuente, ejecute el siguiente comando:
+
+```sh
+java SAXDemo gcs.xml
 ```
 
-```java
+Aquí, `gcs.xml` almacena el texto de la Lista 2-3. En la salida resultante, debe observar el mensaje `“obtaining cached recipeml.dtd”` antes de la llamada a `startEntity()`.
+
+> **TIP** La API SAX incluye una interfaz `org.xml.sax.ext.EntityResolver2` que proporciona un soporte mejorado para la resolución de entidades. Si prefiere implementar `EntityResolver2` en lugar de `EntityResolver`, reemplace la llamada `setEntityResolver()` para instalar el entity resolver con una llamada `setFeature()` cuyo nombre de característica es `use-entity-resolver2` (no olvide http://xml.org/sax/features/prefix).
+
+
+#### EJERCICIOS
+
+Los siguientes ejercicios están diseñados para evaluar su comprensión del contenido del Capítulo 2:
+
+1. Defina SAX.
+2. ¿Cómo se obtiene un analizador basado en SAX 2?
+3. ¿Cuál es el propósito de la interfaz XMLReader?
+4. ¿Cómo se le dice a un analizador SAX que realice la validación?
+5. Identifique los cuatro tipos de excepciones orientadas a SAX que se pueden generar al trabajar con SAX.
+6. ¿Qué interfaz implementa una clase de controlador para responder a eventos orientados al contenido?
+7. Identifique las otras tres interfaces principales que es probable que implemente una clase de controlador.
+8. Defina ignorable whitespace (espacios en blanco ignorables).
+9. Verdadero o falso: se llama al `void error(SAXParseException exception)` para todo tipo de errores.
+10. ¿Cuál es el propósito de la clase `DefaultHandler`?
+11. ¿Qué es una entidad? ¿Qué es un solucionador de entidades?
+12. Apache Tomcat es un servidor web de código abierto desarrollado por Apache Software Foundation. Tomcat almacena nombres de usuario, contraseñas y roles (con fines de autenticación) en su archivo de configuración `tomcat-users.xml`. Cree una aplicación `DumpUserInfo` que utilice SAX para analizar los elementos `user` en el siguiente archivo `tomcat-users.xml` de ejemplo y, para cada elemento `user`, descargue los valores de los atributos `username`, `password` y `roles` en la salida estándar en un formato *`key=value`*:
+
+```xml
+<?xml version='1.0' encoding='utf-8'?>
+<tomcat-users>
+   <role rolename="dbadmin"/>
+   <role rolename="manager"/>
+   <user username="JohnD" password="password1"
+         roles="dbadmin,manager"/>
+   <user username="JillD" password="password2"
+         roles="manager"/>
+</tomcat-users>
 ```
+ 
+13. Cree una aplicación `SAXSearch` que busque en el archivo `books.xml` del ejercicio 1-21 aquellos elementos `book` cuyos elementos hijos `publisher` contengan texto que sea igual al argumento del nombre del editor de la línea de comandos única de la aplicación. Una vez que haya una coincidencia, muestre el texto del elemento `title` seguido del valor del atributo `isbn` del elemento `book`. Por ejemplo, `java SAXSearch Apress` debería generar `title = Beginning Groovy and Grails, isbn = 9781430210450`, mientras que `java SAXSearch "Addison Wesley" should output title = Advanced C++, isbn = 0201548550` seguido de `title = Effective Java, isbn = 0201310058` en líneas separadas. No debe aparecer nada cuando el argumento del nombre del editor de la línea de comandos no coincide con el texto de un elemento `publisher`.
 
+ 
+14. Utilice la aplicación `SAXDemo` del Listado 2-1 para validar el contenido `books.xml` del Ejercicio 1-22 con su DTD. Ejecute `java SAXDemo books.xml -v` para realizar la validación.
 
+## Resumen
 
+SAX es una API Java basada en eventos para analizar un documento XML de forma secuencial de principio a fin. Cuando un analizador orientado a SAX encuentra un elemento del conjunto de información del documento, hace que este elemento esté disponible para una aplicación como un evento llamando a uno de los métodos en uno de los controladores de la aplicación, que la aplicación ha registrado previamente con el analizador. La aplicación puede consumir este evento procesando el elemento del conjunto de información de alguna manera.
 
+SAX existe en dos versiones principales: SAX 1 y SAX 2. Java implementa ambas versiones a través de las clases abstractas `SAXParser` y `SAXParserFactory` del paquete `javax.xml.parsers`. Los paquetes `org.xml.sax`, `org.xml.sax.ext` y `org.xml.sax.helpers` proporcionan varios tipos que aumentan ambas implementaciones de Java.
 
+`XMLReader` pone a disposición varios métodos para configurar el analizador y analizar el contenido de un documento. Algunos de estos métodos obtienen y configuran el content handler, el DTD handler, el entity resolver y el error handler, que se describen en las interfaces `ContentHandler`, `DTDHandler`, `EntityResolver` y `ErrorHandler`. Después de aprender sobre los métodos de `XMLReader` y estas interfaces, aprendió sobre la interfaz `LexicalHandler` no estándar y cómo crear un custom entity resolver.
 
-
-
-
-
-
-
-
+El Capítulo 3 presenta la API DOM de Java para parsing/creating (analizar/crear) documentos XML.
