@@ -294,6 +294,645 @@ Continuando, `main()` analiza el documento en un árbol de nodos; genera el núm
 
 Observe el uso de `getNodeType()` en una parte de este listado y de `instanceof` en otra parte. La llamada al método `getNodeType()` no es necesaria (solo está presente para demostración) porque en su lugar se puede usar `instanceof`. Sin embargo, la conversión de tipo de `Node` a tipo `Element` en las llamadas al método `dump()` es necesaria.
 
+Compile el Listado 3-1 de la siguiente manera:
+
+```sh
+javac DOMDemo.java
+```
+
+Ejecute la aplicación resultante para volcar el contenido XML del artículo del Listado 1-3, de la siguiente manera:
+
+```sh
+java DOMDemo article.xml
+```
+
+Debe observar el siguiente resultado:
+
+
+```sh
+Version = 1.0
+Encoding = null
+Standalone = false
+Element: article, article, null, null
+  Attribute lang = en
+  Attribute title = The Rebirth of JavaFX
+Element: abstract, abstract, null, null
+Element: code, code, null, null
+Element: body, body, null, null
+```
+
+Cada línea con `Element`-prefixed presenta el nombre del nodo, seguido del nombre local, seguido del prefijo del espacio de nombres, seguido del URI del espacio de nombres. El nodo y los nombres locales son idénticos porque no se utilizan espacios de nombres. Por la misma razón, el prefijo del espacio de nombres y el URI del espacio de nombres son `null`.
+
+Continuando, ejecute el siguiente comando para volcar el contenido de la receta del Listado 1-5:
+
+```sh
+java DOMDemo recipe.xml
+```
+
+Esta vez, observa el siguiente resultado, que incluye información sobre el namespace:
+
+```sh
+Version = 1.0
+Encoding = null
+Standalone = false
+Element: h:html, html, h, http://www.w3.org/1999/xhtml
+  Attribute xmlns:h = http://www.w3.org/1999/xhtml
+  Attribute xmlns:r = http://www.javajeff.ca/
+Element: h:head, head, h, http://www.w3.org/1999/xhtml
+Element: h:title, title, h, http://www.w3.org/1999/xhtml
+Element: h:body, body, h, http://www.w3.org/1999/xhtml
+Element: r:recipe, recipe, r, http://www.javajeff.ca/
+Element: r:title, title, r, http://www.javajeff.ca/
+Element: r:ingredients, ingredients, r, http://www.javajeff.ca/
+Element: h:ul, ul, h, http://www.w3.org/1999/xhtml
+Element: h:li, li, h, http://www.w3.org/1999/xhtml
+Element: r:ingredient, ingredient, r, http://www.javajeff.ca/
+  Attribute qty = 2
+Element: h:li, li, h, http://www.w3.org/1999/xhtml
+Element: r:ingredient, ingredient, r, http://www.javajeff.ca/
+Element: h:li, li, h, http://www.w3.org/1999/xhtml
+Element: r:ingredient, ingredient, r, http://www.javajeff.ca/
+  Attribute qty = 2
+Element: h:p, p, h, http://www.w3.org/1999/xhtml
+Element: r:instructions, instructions, r, http://www.javajeff.ca/
+```
+
+### CREAR UN DOCUMENTO XML
+
+El Listado 3-2 presenta otra versión de la aplicación `DOMDemo` que muestra brevemente la creación de un árbol DOM.
+
+```java
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.FactoryConfigurationError;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import static java.lang.System.*;
+public class DOMDemo{
+   public static void main(String[] args){
+      
+      try{
+         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+         DocumentBuilder db = dbf.newDocumentBuilder();
+         Document doc = db.newDocument();
+         
+         // Create the root element.
+         Element root = doc.createElement("movie");
+         doc.appendChild(root);
+         
+         // Create name child element and add it to the
+         // root.
+         Element name = doc.createElement("name");
+         root.appendChild(name);
+         
+         // Add a text element to the name element.
+         Text text = doc.createTextNode("Le Fabuleux " +
+                                        "Destin d'Amélie " +
+                                        "Poulain");
+         name.appendChild(text);
+         
+         // Create language child element and add it to the
+         // root.
+         Element language = doc.createElement("language");
+         root.appendChild(language);
+         
+         // Add a text element to the language element.
+         text = doc.createTextNode("français");
+         language.appendChild(text);
+         out.printf("Version = %s%n", doc.getXmlVersion());
+         out.printf("Encoding = %s%n",
+                    doc.getXmlEncoding());
+         out.printf("Standalone = %b%n%n",
+                    doc.getXmlStandalone());
+         NodeList nl = doc.getChildNodes();
+         for (int i = 0; i < nl.getLength(); i++){
+            Node node = nl.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+               dump((Element) node);
+         }
+      }catch (FactoryConfigurationError fce){
+         err.printf("FCE: %s%n", fce.toString());
+      }catch (ParserConfigurationException pce){
+         err.printf("PCE: %s%n", pce.toString());
+      }
+   }
+   static void dump(Element e){
+      out.printf("Element: %s, %s, %s, %s%n",
+                 e.getNodeName(), e.getLocalName(),
+                 e.getPrefix(), e.getNamespaceURI());
+      NodeList nl = e.getChildNodes();
+      for (int i = 0; i < nl.getLength(); i++){
+         Node node = nl.item(i);
+         if (node instanceof Element)
+            dump((Element) node);
+         else
+         if (node instanceof Text)
+            out.printf("Text: %s%n", ((Text) node).getWholeText());
+      }
+   }
+}
+```
+***Listado 3-2*** `DOMDemo` (Versión 2)
+
+`DOMDemo` crea el documento de película del Listado 1-2. Utiliza el método `createElement()` de `Document` para crear el elemento raíz `movie` los elementos hijos `name` y `language`. También utiliza el método `Text createTextNode(String data)` de `Document` para crear nodos de texto que se adjuntan a los nodos de `name` y `language`. Observe las llamadas al método `appendChild()` de `Node`, para agregar nodos hijos (como el `name`) a los nodos padres (como `movie`).
+
+Después de crear este árbol, `DOMDemo` genera los nodos de los elementos del árbol y otra información. Esta salida aparece como sigue:
+
+
+```sh
+Version = 1.0
+Encoding = null
+Standalone = false
+Element: movie, null, null, null
+Element: name, null, null, null
+Text: Le Fabuleux Destin d'Amélie Poulain
+Element: language, null, null, null
+Text: français
+```
+
+Hay un problema con la salida: el atributo `encoding` de la declaración XML no se ha establecido en `ISO-8859-1`. No puede realizar esta tarea a través de la API DOM. En su lugar, debe utilizar la API XSLT. Mientras explora XSLT en el Capítulo 6, aprenderá cómo establecer el atributo `encoding` y también aprenderá cómo generar este árbol en un archivo de documento XML.
+
+<hr>
+
+## Trabajar con Load y Save
+
+Antes de DOM Nivel 3, no había una forma estándar de cargar contenido XML en un nuevo árbol DOM y guardar un árbol DOM existente en un documento XML. El Consorcio World Wide Web (W3C) respondió a esta deficiencia desarrollando la Especificación de carga y guardado de nivel 3 de DOM (www.w3.org/TR/DOM-Level-3-LS/), que agrega este soporte. Aunque esta capacidad puede no parecer mucha, también se han incluido capacidades adicionales como el filtrado de datos durante una operación de carga.
+
+Java soporta la especificación de Load y Save de nivel 3 de DOM a través del paquete `org.w3c.dom.ls` y sus tipos de interfaz:
+
+* `DOMImplementationLS` contiene métodos factory para crear objetos Load y Save.
+
+* `LSInput` representa una fuente de entrada de datos.
+
+* `LSLoadEvent` representa un objeto de evento de carga que indica la finalización de la carga de un documento.
+
+* `LSOutput` representa un destino de salida para los datos.
+
+* `LSParser` proporciona una interfaz a un objeto que es capaz de construir o aumentar un árbol DOM a partir de varias fuentes de entrada.
+
+* `LSParserFilter` proporciona a las aplicaciones la capacidad de examinar los nodos a medida que se construyen durante el análisis.
+
+* `LSProgressEvent` representa un objeto de evento de progreso que notifica a la aplicación sobre el progreso a medida que se analiza un documento.
+
+* `LSResourceResolver` proporciona una forma para que las aplicaciones redirijan referencias a recursos externos.
+
+* `LSSerializer` proporciona una API para serializar (escribir) un documento DOM en un documento XML.
+
+* `LSSerializerFilter` proporciona a las aplicaciones la capacidad de examinar los nodos a medida que se serializan y decidir qué nodos deben serializarse (o no).
+
+Esta API revela que las operaciones de carga se basan en un analizador y las operaciones de guardado se basan en un serializador.
+
+Este paquete también proporciona la clase `LSException`, que describe una excepción que se lanza cuando el procesamiento se detiene debido a un error DOM durante una operación de análisis o escritura.
+
+### CARGAR UN DOCUMENTO XML EN UN ÁRBOL DOM
+
+El Listado 3-3 presenta una tercera versión de la aplicación `DOMDemo` que usa Load y Save para cargar un documento XML en un nuevo árbol DOM.
+
+```java
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSParser;
+import static java.lang.System.*;
+public class DOMDemo {
+   public static void main(String[] args) throws Exception {
+      
+      if (args.length != 1){
+         err.println("usage: java DOMDemo xmlfile");
+         return;
+      }
+      
+      DOMImplementationLS ls = (DOMImplementationLS)
+         DOMImplementationRegistry.newInstance().
+         getDOMImplementation("LS");
+      
+      if (ls == null){
+         err.println("load and save not supported");
+         return;
+      }
+      
+      LSParser parser =
+         ls.createLSParser(DOMImplementationLS.
+                           MODE_SYNCHRONOUS, null);
+      Document doc = parser.parseURI(args[0]);
+      
+      if (doc.hasChildNodes()){
+         NodeList nl = doc.getChildNodes();
+         for (int i = 0; i < nl.getLength(); i++){
+            Node node = nl.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+               dump((Element) node);
+         }
+      }
+   }
+   
+   static void dump(Element e){
+      out.printf("Element: %s, %s, %s, %s%n",
+                 e.getNodeName(), e.getLocalName(),
+                 e.getPrefix(), e.getNamespaceURI());
+      NamedNodeMap nnm = e.getAttributes();
+      if (nnm != null)
+         for (int i = 0; i < nnm.getLength(); i++){
+            Node node = nnm.item(i);
+            Attr attr = e.getAttributeNode(node.getNodeName());
+            out.printf("  Attribute %s = %s%n",
+                       attr.getName(), attr.getValue());
+         }
+      NodeList nl = e.getChildNodes();
+      for (int i = 0; i < nl.getLength(); i++){
+         Node node = nl.item(i);
+         if (node instanceof Element)
+            dump((Element) node);
+      }
+   }
+}
+```
+***Listado 3-3*** `DOMDemo` (Versión 3)
+
+El método `main()` de `DOMDemo` primero valida la línea de comando, que requiere que solo se especifique un único argumento (el nombre de un archivo XML). `main()` luego crea un objeto `DOMImplementationLS`, de la siguiente manera:
+
+1. Invoca el método `org.w3c.dom.bootstrap.DOMImplementationRegistry’s static DOMImplementationRegistry newInstance()` para obtener un objeto `DOMImplementationRegistry`.
+
+2. Invoca el método `DOMImplementationRegistry’s DOMImplementation getDOMImplementation(String features)` devuelto anteriormente `DOMImplementationRegistry` para obtener un objeto de una clase que implementa la interfaz `DOMImplementation`. La cadena `"LS"` se pasa a `getDOMImplementation()` porque se requiere una instancia de `DOMImplementation` que soporta Load y Save (`DOMImplementationLS`). Este método devuelve un valor `null` cuando no se encuentra una implementación con las `features` deseadas. (Para mayor brevedad, omito la comprobación de `null` en los siguientes ejemplos de "Load y Save").
+ 
+3. Transmite la instancia `org.w3c.dom.DOMImplementation` devuelta a una instancia `DOMImplementationLS`, que está permitida porque `getDOMImplementation()` devuelve un objeto cuya clase implementa `DOMImplementation` y `DOMImplementationLS`.
+
+`main()` luego invoca el método `LSParser createLSParser(short mode, String schemaType)` de `DOMImplementationLS` para crear un nuevo objeto `LSParser`. `DOMImplementationLS.MODE_SYNCHRONOUS` se pasa al `mode` para hacer que la aplicación espere hasta que finalice el análisis. `null` se pasa a `schemaType` para que el `LSParser` creado pueda trabajar con cualquier tipo de esquema (aunque no se utiliza ninguno en este ejemplo).
+
+`LSParser` proporciona un método `Document parseURI(String uri)` para analizar un documento XML ubicado en el valor `uri` especificado. `main()` llama a este método para realizar el análisis y devolver un documento, que posteriormente se vuelca a la salida estándar.
+
+
+> **NOTA** `LSParser` también proporciona los métodos para analizar `Document parse(LSInput input)` y `Node parseWithContext(LSInput input, Node contextArg, short action)`. El primer método toma un argumento `LSInput`, que puede representar un identificador público, un identificador de sistema, un flujo de bytes (posiblemente con una codificación especificada), un URI base o un flujo de caracteres. El último método le permite analizar un documento XML en otro documento XML. El valor pasado a la acción determina si el nuevo contenido precede, sigue o reemplaza al contenido existente.
+
+Compile el Listado 3-3 y ejecútelo con el documento `recipe.xml` del Listado 1-1. Debe observar el siguiente resultado:
+
+
+```sh
+Element: recipe, recipe, null, null
+Element: title, title, null, null
+Element: ingredients, ingredients, null, null
+Element: ingredient, ingredient, null, null
+  Attribute qty = 2
+Element: ingredient, ingredient, null, null
+Element: ingredient, ingredient, null, null
+  Attribute qty = 2
+Element: instructions, instructions, null, null
+```
+
+### CONFIGURAR UN PARSER
+
+La interfaz `LSParser` declara un método `DOMConfiguration getDomConfig()` que devuelve el objeto `org.w3c.dom.DOMConfiguration` utilizado al analizar una fuente de entrada. Puede utilizar el objeto `DOMConfiguration` para configurar el analizador antes de analizar un documento XML.
+
+`DOMConfiguration` declara el método `void setParameter(String name, Object value)` para establecer el valor de un parámetro de configuración. Los nombres y valores de los parámetros admitidos se describen en el Javadoc de `DOMConfiguration`.
+
+Varios parámetros se ocupan de la validación. Por ejemplo, `validation` requiere que el analizador valide el documento con un esquema (como XML Schema o DTD), pero solo cuando este parámetro se establece en `true` (el valor predeterminado es `false`). El Listado 3-4 presenta una aplicación `DOMDemo` que configura el analizador para validar.
+
+```java
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.DOMConfiguration;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSParser;
+import static java.lang.System.*;
+public class DOMDemo{
+   public static void main(String[] args) throws Exception{
+      
+      if (args.length != 1){
+         err.println("usage: java DOMDemo xmlfile");
+         return;
+      }
+      
+      DOMImplementationLS ls = (DOMImplementationLS)
+         DOMImplementationRegistry.newInstance().
+         getDOMImplementation("LS");
+      
+      LSParser parser =
+         ls.createLSParser(DOMImplementationLS.
+                           MODE_SYNCHRONOUS, null);
+      
+      DOMConfiguration config = parser.getDomConfig();
+      config.setParameter("validate", Boolean.TRUE);
+      Document doc = parser.parseURI(args[0]);
+      
+      if (doc.hasChildNodes()){
+         NodeList nl = doc.getChildNodes();
+         for (int i = 0; i < nl.getLength(); i++){
+            Node node = nl.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+               dump((Element) node);
+         }
+      }
+   }
+   
+   static void dump(Element e){
+      out.printf("Element: %s, %s, %s, %s%n",
+                 e.getNodeName(), e.getLocalName(),
+                 e.getPrefix(), e.getNamespaceURI());
+      NamedNodeMap nnm = e.getAttributes();
+      if (nnm != null)
+         for (int i = 0; i < nnm.getLength(); i++){
+            Node node = nnm.item(i);
+            Attr attr = e.getAttributeNode(node.getNodeName());
+            out.printf("  Attribute %s = %s%n",
+                       attr.getName(), attr.getValue());
+         }
+         
+      NodeList nl = e.getChildNodes();
+      for (int i = 0; i < nl.getLength(); i++){
+         Node node = nl.item(i);
+         if (node instanceof Element)
+            dump((Element) node);
+      }
+   }
+}
+```
+***Listado 3-4*** `DOMDemo` (Versión 4)
+
+`DOMDemo` ejecuta `DOMConfiguration config = parser.getDomConfig();` seguido de `config.setParameter("validate", Boolean.TRUE);` para configurar el analizador para realizar la validación.
+
+Compila el código fuente. Antes de ejecutar la aplicación, necesitará un archivo XML adecuado. El Listado 3-5 ofrece un candidato adecuado.
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE recipe [
+   <!ELEMENT recipe (title, ingredients, instructions)>
+   <!ELEMENT title (#PCDATA)>
+   <!ELEMENT ingredients (ingredient+)>
+   <!ELEMENT ingredient (#PCDATA)>
+   <!ELEMENT instructions (#PCDATA)>
+   <!ATTLIST ingredient qty CDATA "1">
+]>
+<recipe>
+   <title>
+      Grilled Cheese Sandwich
+   </title>
+   <instructions>
+      Place frying pan on element and select medium heat.
+      For each bread slice, smear one pat of margarine on
+      one side of bread slice. Place cheese slice between
+      bread slices with margarine-smeared sides away from
+      the cheese. Place sandwich in frying pan with one
+      margarine-smeared side in contact with pan. Fry for
+      a couple of minutes and flip. Fry other side for a
+      minute and serve.
+   </instructions>
+   <ingredients>
+      <ingredient qty="2">
+         bread slice
+      </ingredient>
+      <ingredient>
+         cheese slice
+      </ingredient>
+      <ingredient qty="2">
+         margarine pat
+      </ingredient>
+   </ingredients>
+</recipe>
+```
+***Listado 3-5*** Un Documento de Recipe No Válido
+
+El Listado 3-5 presenta el contenido de un documento de receta que es similar al contenido de la receta abreviada que se presenta en el Listado 1-8 (consulte el Capítulo 1). Sin embargo, hay una diferencia crucial: he colocado el elemento `instructions` antes del elemento `ingredients`, que viola la DTD interna del documento.
+
+Ejecute `DOMDemo` contra un archivo `recete.xml` que contenga este contenido y debe observar el siguiente resultado:
+
+```sh
+[Error] recipe.xml:35:10: The content of element type "recipe" must match "(title,ingredients,instructions)".
+Element: recipe, recipe, null, null
+Element: title, title, null, null
+Element: instructions, instructions, null, null
+Element: ingredients, ingredients, null, null
+Element: ingredient, ingredient, null, null
+  Attribute qty = 2
+Element: ingredient, ingredient, null, null
+  Attribute qty = 1
+Element: ingredient, ingredient, null, null
+  Attribute qty = 2
+```
+
+Puede usar `setParameter()` para registrar un error handler personalizado con el parser, tal vez para registrar errores. Comience subclasificando la clase `org.w3c.dom.DOMErrorHandler`, overriding su método `boolean handleError(DOMError error)`:
+
+```java
+public class ErrHandler implements DOMErrorHandler{
+   
+   @Override
+   public boolean handleError(DOMError error){
+      
+      short severity = error.getSeverity();
+      
+      if (severity == error.SEVERITY_ERROR)
+         System.out.printf("DOM3 error: %s%n", error.getMessage());
+      else if (severity == error.SEVERITY_FATAL_ERROR)
+         System.out.printf("DOM3 fatal error: %s%n", error.getMessage());
+      else if (severity == error.SEVERITY_WARNING)
+         System.out.printf("DOM3 warning: %s%n", error.getMessage());
+      return true;
+   }
+}
+```
+
+El objeto `org.w3c.dom.DOMError` pasado a `handleError()` describe un error DOM. Esta interfaz declara tres constantes de nivel de gravedad: `SEVERITY_ERROR`, `SEVERITY_FATAL_ERROR` y `SEVERITY_WARNING`. También declara `short getSeverity()` para devolver el nivel de gravedad y otros métodos útiles.
+
+El método `handleError()` devuelve `false` para informar al analizador que se detenga lo antes posible o `true` para informar al analizador que continúe (según el nivel de gravedad del error).
+
+Después de crear una instancia de la subclase del manejador de errores, regístrelo con el analizador invocando `setParameter()` con `"error-handler"` como nombre y una instancia de la subclase del manejador de errores como valor:
+
+```java
+DOMConfiguration config = parser.getDomConfig();
+config.setParameter("error-handler", new ErrHandler());
+```
+
+### FILTRAR UN DOCUMENTO XML MIENTRAS SE ANALIZA
+
+Puede instalar un *filtro* en una instancia de `LSParser` para determinar qué contenido aceptar y qué contenido ignorar al crear un árbol de análisis. Un filtro es una instancia de la interfaz `LSParserFilter` y debe implementar los siguientes métodos:
+
+* `short acceptNode(Node node)`: este método se llama después de analizar el contenido XML correspondiente al `node`. Devuelve `LSParserFilter.FILTER_ACCEPT` si el nodo debe incluirse en el árbol DOM, `LSParserFilter.FILTER_REJECT` si el nodo (y todos sus hijos) deben rechazarse, `LSParserFilter.FILTER_SKIP` si el nodo debe omitirse (todos sus hijos se insertan en su lugar), o `LSParserFilter.INTERRUPT` si el filtro quiere detener el procesamiento del documento (el nodo es rechazado).
+
+* `int getWhatToShow()`: Indique al analizador qué tipos de nodos mostrar para `acceptNode()`. Los nodos que no se muestran en el filtro se incluyen automáticamente en el árbol DOM que se está construyendo. Devuelve una combinación bitwise ORed de `org.w3c.dom.NodeFilter SHOW_`-prefixed constantes (por ejemplo, `SHOW_ELEMENT`). Las constantes `SHOW_ATTRIBUTE`, `SHOW_DOCUMENT`, `SHOW_DOCUMENT_TYPE`, `SHOW_NOTATION`, `SHOW_ENTITY` y `SHOW_DOCUMENT_FRAGMENT` no tienen sentido porque dichos nodos nunca se pasan a `acceptNode()`.
+
+* `short startElement(Element e)`: el analizador llama a este método después de que se escanea la etiqueta de inicio del elemento `e`, pero antes de que se procese el resto del elemento. La intención es permitir que el elemento, incluidos los elementos hijos, se omita de manera eficiente. Solo los nodos de elementos se pasan a `startElement()`, que devuelve las mismas constantes que `acceptNode()`.
+
+El Listado 3-6 presenta una aplicación `DOMDemo` que amplía el Listado 3-3 con un filtro.
+
+```java
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSParser;
+import org.w3c.dom.ls.LSParserFilter;
+import org.w3c.dom.traversal.NodeFilter;
+import static java.lang.System.*;
+
+class InputFilter implements LSParserFilter{
+
+   private boolean accept;
+   InputFilter(boolean accept){
+      this.accept = accept;
+   }
+   
+   @Override
+   public short acceptNode(Node node){
+      return (accept) ? FILTER_ACCEPT : FILTER_REJECT;
+   }
+   
+   @Override
+   public int getWhatToShow(){
+      return NodeFilter.SHOW_ELEMENT;
+   }
+   
+   @Override
+   public short startElement(Element e){
+      return LSParserFilter.FILTER_ACCEPT;
+   }
+}
+
+public class DOMDemo{
+   public static void main(String[] args) throws Exception{
+      
+      if (args.length != 2){
+         err.println("usage: java DOMDemo xmlfile " +
+                     "accept|reject");
+         return;
+      }
+      
+      DOMImplementationLS ls = (DOMImplementationLS)
+         DOMImplementationRegistry.newInstance().
+         getDOMImplementation("LS");
+         
+      LSParser parser =
+         ls.createLSParser(DOMImplementationLS.
+                           MODE_SYNCHRONOUS, null);
+      LSParserFilter filter =
+         new InputFilter(args[1].equals("accept"));
+      
+      parser.setFilter(filter);
+      Document doc = parser.parseURI(args[0]);
+      if (doc.hasChildNodes()){
+         NodeList nl = doc.getChildNodes();
+         for (int i = 0; i < nl.getLength(); i++){
+            Node node = nl.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+               dump((Element) node);
+         }
+      }
+   }
+   
+   static void dump(Element e){
+      out.printf("Element: %s, %s, %s, %s%n",
+                 e.getNodeName(), e.getLocalName(),
+                 e.getPrefix(), e.getNamespaceURI());
+      NamedNodeMap nnm = e.getAttributes();
+      if (nnm != null)
+         for (int i = 0; i < nnm.getLength(); i++){
+            Node node = nnm.item(i);
+            Attr attr =
+               e.getAttributeNode(node.getNodeName());
+            out.printf("  Attribute %s = %s%n",
+                       attr.getName(), attr.getValue());
+         }
+         
+      NodeList nl = e.getChildNodes();
+      for (int i = 0; i < nl.getLength(); i++){
+         Node node = nl.item(i);
+         if (node instanceof Element)
+            dump((Element) node);
+      }
+   }
+}
+```
+***Listado 3-6*** `DOMDemo` (Versión 5)
+
+Esta versión de `DOMDemo` introduce una clase `InputFilter` que extiende `LSParserFilter`. Su constructor guarda un argumento `accept` que le dice al filtro que acepte cada nodo (cuando sea `true`) o rechace cada nodo (cuando sea `false`). El filtro se registra con `LSParser` llamando al método `void setFilter​(LSParserFilter filter)` de esta interfaz.
+
+Compile la lista y ejecute la aplicación con el documento `recipe.xml` del Listado 1-1 de la siguiente manera:
+
+```sh
+java DOMDemo recipe.xml accept
+```
+
+Debe observar el siguiente resultado:
+
+```sh
+Element: recipe, recipe, null, null
+Element: title, title, null, null
+Element: ingredients, ingredients, null, null
+Element: ingredient, ingredient, null, null
+  Attribute qty = 2
+Element: ingredient, ingredient, null, null
+Element: ingredient, ingredient, null, null
+  Attribute qty = 2
+Element: instructions, instructions, null, null
+```
+
+Ahora, ejecute la aplicación de la siguiente manera:
+
+```sh
+java DOMDemo recipe.xml reject
+```
+
+Esta vez, debe observar el siguiente resultado:
+
+```sh
+Element: recipe, recipe, null, null
+```
+
+Es posible que se sorprenda de que todavía haya algo de salida, que revela `recipe` como el nombre del elemento. Recuerde que `recipe` es el elemento raíz del documento `recipe.xml`. Un árbol DOM requiere un elemento raíz, por lo que este elemento no se descarta.
+
+### GUARDAR UN ÁRBOL DOM EN UN DOCUMENTO XML
+
+El Listado 3-7 presenta una sexta versión de la aplicación `DOMDemo` que usa Load y Save para guardar un árbol DOM existente en un documento XML.
+
+```java
+import org.w3c.dom.Document;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSParser;
+import org.w3c.dom.ls.LSSerializer;
+import static java.lang.System.*;
+public class DOMDemo{
+   public static void main(String[] args) throws Exception{
+   
+      if (args.length != 1){
+         err.println("usage: java DOMDemo xmlfile");
+         return;
+      }
+   
+      DOMImplementationLS ls = (DOMImplementationLS)
+         DOMImplementationRegistry.newInstance().
+         getDOMImplementation("LS");
+      
+      LSParser parser =
+         ls.createLSParser(DOMImplementationLS.
+                           MODE_SYNCHRONOUS, null);
+      
+      Document doc = parser.parseURI(args[0]);
+      LSSerializer serializer = ls.createLSSerializer();
+      if (serializer.writeToURI(doc, "_" + args[0]))
+         out.println("serialization successful");
+   }
+}
+```
+***Listado 3-7*** `DOMDemo` (Versión 6)
+
+AQUIIIIII
 ```java
 
 ```
@@ -304,22 +943,21 @@ Observe el uso de `getNodeType()` en una parte de este listado y de `instanceof`
 ```
 
 
+```java
+
+```
+
+
 
 ```java
 
 ```
 
-```java
-
-```
 
 ```java
 
 ```
 
-```java
-
-```
 
 ```java
 
