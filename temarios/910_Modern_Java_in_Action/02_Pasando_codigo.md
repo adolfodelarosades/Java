@@ -81,8 +81,7 @@ Demasiado facil, verdad? Compliquemos un poco el ejemplo. El agricultor vuelve y
 Con su sombrero de ingeniero de software, se da cuenta de antemano de que el agricultor puede querer variar el peso. Entonces crea el siguiente método para hacer frente a varios pesos a través de un parámetro adicional:
 
 ```java
-public static List<Apple> filterApplesByWeight(List<Apple> inventory,
-int weight) {
+public static List<Apple> filterApplesByWeight(List<Apple> inventory, int weight) {
     List<Apple> result = new ArrayList<>();
     for (Apple apple: inventory){
         if ( apple.getWeight() > weight ) {
