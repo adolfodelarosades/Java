@@ -186,7 +186,7 @@ Vale la pena detenerse un momento para una pequeña celebración. Este código e
 public class AppleRedAndHeavyPredicate implements ApplePredicate {
    public boolean test(Apple apple){
       return RED.equals(apple.getColor())
-                     && apple.getWeight() > 150;
+             && apple.getWeight() > 150;
    }
 }
 List<Apple> redAndHeavyApples = filterApples(inventory, new AppleRedAndHeavyPredicate());
