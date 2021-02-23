@@ -37,13 +37,13 @@ Una primera solución podría ser la siguiente:
 
 ```java
 public static List<Apple> filterGreenApples(List<Apple> inventory) {
-    List<Apple> result = new ArrayList<>();                          1
-    for(Apple apple: inventory){
-        if( GREEN.equals(apple.getColor() ) {                        2
-            result.add(apple);
-        }
-    }
-    return result;
+   List<Apple> result = new ArrayList<>();                         1
+   for(Apple apple: inventory){
+      if( GREEN.equals(apple.getColor() ) {                        2
+         result.add(apple);
+      }
+   }
+   return result;
 }
 ```
 
@@ -58,10 +58,10 @@ La línea resaltada (2) muestra la condición requerida para seleccionar manzana
 
 ```java
 public static List<Apple> filterApplesByColor(List<Apple> inventory, Color color) {
-    List<Apple> result = new ArrayList<>();
-    for (Apple apple: inventory) {
-        if ( apple.getColor().equals(color) ) {
-            result.add(apple);
+   List<Apple> result = new ArrayList<>();
+   for (Apple apple: inventory) {
+   if ( apple.getColor().equals(color) ) {
+      result.add(apple);
         }
     }
     return result;
@@ -82,13 +82,13 @@ Con su sombrero de ingeniero de software, se da cuenta de antemano de que el agr
 
 ```java
 public static List<Apple> filterApplesByWeight(List<Apple> inventory, int weight) {
-    List<Apple> result = new ArrayList<>();
-    for (Apple apple: inventory){
-        if ( apple.getWeight() > weight ) {
-            result.add(apple);
-        }
-    }
-    return result;
+   List<Apple> result = new ArrayList<>();
+   for (Apple apple: inventory){
+      if ( apple.getWeight() > weight ) {
+         result.add(apple);
+      }
+   }
+   return result;
 }
 ```
 
@@ -102,14 +102,14 @@ Un feo intento de fusionar todos los atributos podría ser el siguiente:
 
 ```java
 public static List<Apple> filterApples(List<Apple> inventory, Color color, int weight, boolean flag) {
-    List<Apple> result = new ArrayList<>();
-    for (Apple apple: inventory) {
-        if ( (flag && apple.getColor().equals(color)) ||
-             (!flag && apple.getWeight() > weight) ){          1
-            result.add(apple);
-        }
-    }
-    return result;
+   List<Apple> result = new ArrayList<>();
+   for (Apple apple: inventory) {
+      if ( (flag && apple.getColor().equals(color)) ||
+            (!flag && apple.getWeight() > weight) ){          1
+         result.add(apple);
+      }
+   }
+   return result;
 }
 ```
 
@@ -141,14 +141,14 @@ Ahora puede declarar múltiples implementaciones de `ApplePredicate` para repres
 
 ```java
 public class AppleHeavyWeightPredicate implements ApplePredicate {   1
-    public boolean test(Apple apple) {
-        return apple.getWeight() > 150;
-    }
+   public boolean test(Apple apple) {
+      return apple.getWeight() > 150;
+   }
 }
 public class AppleGreenColorPredicate implements ApplePredicate {    2
-    public boolean test(Apple apple) {
-        return GREEN.equals(apple.getColor());
-    }
+   public boolean test(Apple apple) {
+      return GREEN.equals(apple.getColor());
+   }
 }
 ```
 
@@ -167,13 +167,13 @@ Nuestro método de filtro modificado, que utiliza un `ApplePredicate`, se ve as�
 
 ```java
 public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
-    List<Apple> result = new ArrayList<>();
-    for(Apple apple: inventory) {
-        if(p.test(apple)) {                       1
-            result.add(apple);
-        }
-    }
-    return result;
+   List<Apple> result = new ArrayList<>();
+   for(Apple apple: inventory) {
+      if(p.test(apple)) {                       1
+         result.add(apple);
+      }
+   }
+   return result;
 }
 ```
 
@@ -187,10 +187,9 @@ public class AppleRedAndHeavyPredicate implements ApplePredicate {
    public boolean test(Apple apple){
       return RED.equals(apple.getColor())
                      && apple.getWeight() > 150;
-        }
+   }
 }
-List<Apple> redAndHeavyApples =
-    filterApples(inventory, new AppleRedAndHeavyPredicate());
+List<Apple> redAndHeavyApples = filterApples(inventory, new AppleRedAndHeavyPredicate());
 ```
 
 Has logrado algo genial; el comportamiento del método `filterApples` depende del código que le pase a través del objeto `ApplePredicate`. ¡Ha parametrizado el comportamiento del método `filterApples`!
