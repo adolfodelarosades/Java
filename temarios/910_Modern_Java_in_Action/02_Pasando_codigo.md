@@ -101,8 +101,7 @@ Puede combinar el color y el peso en un método, llamado `filter`. Pero, de todo
 Un feo intento de fusionar todos los atributos podría ser el siguiente:
 
 ```java
-public static List<Apple> filterApples(List<Apple> inventory, Color color,
-                                       int weight, boolean flag) {
+public static List<Apple> filterApples(List<Apple> inventory, Color color, int weight, boolean flag) {
     List<Apple> result = new ArrayList<>();
     for (Apple apple: inventory) {
         if ( (flag && apple.getColor().equals(color)) ||
@@ -132,7 +131,7 @@ En la sección anterior vio que necesita una mejor manera que agregar muchos par
 
 ```java
 public interface ApplePredicate{
-    boolean test (Apple apple);
+   boolean test (Apple apple);
 }
 ```
 
@@ -167,8 +166,7 @@ Para lograr esto en el ejemplo en ejecución, agrega un parámetro al método `f
 Nuestro método de filtro modificado, que utiliza un `ApplePredicate`, se ve así:
 
 ```java
-public static List<Apple> filterApples(List<Apple> inventory,
-                                       ApplePredicate p) {
+public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
     List<Apple> result = new ArrayList<>();
     for(Apple apple: inventory) {
         if(p.test(apple)) {                       1
@@ -186,9 +184,9 @@ Vale la pena detenerse un momento para una pequeña celebración. Este código e
 
 ```java
 public class AppleRedAndHeavyPredicate implements ApplePredicate {
-        public boolean test(Apple apple){
-                return RED.equals(apple.getColor())
-                       && apple.getWeight() > 150;
+   public boolean test(Apple apple){
+      return RED.equals(apple.getColor())
+                     && apple.getWeight() > 150;
         }
 }
 List<Apple> redAndHeavyApples =
