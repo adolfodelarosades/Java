@@ -50,15 +50,14 @@ public static List<Apple> filterGreenApples(List<Apple> inventory) {
 1. Una lista acumulativa para manzanas
 2. Selecciona solo manzanas verdes
 
-La línea resaltada (`if`) muestra la condición requerida para seleccionar manzanas verdes. Puede suponer que tiene una enumeración `Color` con un conjunto de colores, como `GREEN`, disponible. Pero ahora el agricultor cambia de opinión y quiere filtrar también manzanas *rojas*. ¿Qué puedes hacer? Una solución ingenua sería duplicar su método, renombrarlo como `filterRedApples` y cambiar la condición if para que coincida con las manzanas rojas. Sin embargo, este enfoque no se adapta bien a los cambios si el agricultor quiere varios colores. ***Un buen principio es este: cuando se encuentre escribiendo código casi repetido, intente abstraerlo***.
+La línea resaltada (2) muestra la condición requerida para seleccionar manzanas verdes. Puede suponer que tiene una enumeración `Color` con un conjunto de colores, como `GREEN`, disponible. Pero ahora el agricultor cambia de opinión y quiere filtrar también manzanas *rojas*. ¿Qué puedes hacer? Una solución ingenua sería duplicar su método, renombrarlo como `filterRedApples` y cambiar la condición if para que coincida con las manzanas rojas. Sin embargo, este enfoque no se adapta bien a los cambios si el agricultor quiere varios colores. ***Un buen principio es este: cuando se encuentre escribiendo código casi repetido, intente abstraerlo***.
 
 ### 2.1.2. Segundo intento: parametrizar el color
 
 ¿Cómo evitamos duplicar la mayor parte del código en `filterGreenApples` para hacer `filterRedApples`? Para parametrizar el color y ser más flexible a tales cambios, lo que podría hacer es agregar un parámetro a su método:
 
 ```java
-public static List<Apple> filterApplesByColor(List<Apple> inventory,
-Color color) {
+public static List<Apple> filterApplesByColor(List<Apple> inventory, Color color) {
     List<Apple> result = new ArrayList<>();
     for (Apple apple: inventory) {
         if ( apple.getColor().equals(color) ) {
