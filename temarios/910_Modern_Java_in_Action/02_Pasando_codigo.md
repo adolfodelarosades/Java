@@ -60,11 +60,11 @@ La línea resaltada (2) muestra la condición requerida para seleccionar manzana
 public static List<Apple> filterApplesByColor(List<Apple> inventory, Color color) {
    List<Apple> result = new ArrayList<>();
    for (Apple apple: inventory) {
-   if ( apple.getColor().equals(color) ) {
-      result.add(apple);
-        }
-    }
-    return result;
+      if ( apple.getColor().equals(color) ) {
+         result.add(apple);
+      }
+   }
+   return result;
 }
 ```
 
