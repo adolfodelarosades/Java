@@ -24,8 +24,8 @@ Esta ruta de aprendizaje cubre:
 ![505-02](images/505-02.png)
 ![505-03](images/505-03.png)
 
-* Overview 25m
-* Introduction to Java Basics	23m
+* [01. Overview](505-Java-Explorer/01-Overview.md) 25m
+* [02. Introduction to Java Basics](505-Java-Explorer/02-Introduction-to-Java-Basics.md)	23m
 * Object-Oriented Programming	- Practical Object-Oriented Concepts: Part 1 33m
 * Object-Oriented Programming	- Practical Object-Oriented Concepts: Part 2 24m
 * What is a Java Program 25m
