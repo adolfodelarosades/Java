@@ -11,3 +11,9 @@ Java Learning Subscription
 ![950-07](500-Java-Oracle-University/images/950-07.png)
 ![950-08](500-Java-Oracle-University/images/950-08.png)
 ![950-09](500-Java-Oracle-University/images/950-09.png)
+
+### [Java Explorer](500-Java-Oracle-University/505-Java-Explorer.md)
+
+Ruta de aprendizaje 7h 26m
+
+Aprenda los conceptos básicos de programación de Java, como variables, clases, objetos, bucles, arrays y construcciones de decisiones. Conozca las capacidades orientadas a objetos de Java. 
