@@ -62,7 +62,7 @@ Serie de varios cursos Java.
 * [501 Java Coding & Concepts with a Game: Java Puzzle Ball](https://github.com/adolfodelarosades/Java/blob/master/temarios/501_Java_Coding-Concepts_with_a_Game_Java_Puzzle_Ball.md)
 
 * [510 Java SE 11 Developer](https://github.com/adolfodelarosades/Java/blob/master/temarios/510_Java_SE_11_Developer.md)
-* [550 Java Oracle University](https://github.com/adolfodelarosades/Java/blob/master/temarios/550-Java-Oracle-University.md)
+* [510 Java Oracle University](https://github.com/adolfodelarosades/Java/blob/master/temarios/510-Java-Oracle-University.md)
 
 
 # Novellius
