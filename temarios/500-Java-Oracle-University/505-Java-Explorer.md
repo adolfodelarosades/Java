@@ -24,19 +24,19 @@ Esta ruta de aprendizaje cubre:
 ![505-02](images/505-02.png)
 ![505-03](images/505-03.png)
 
-* [01. Overview](505-Java-Explorer/01-Overview.md) 25m
-* [02. Introduction to Java Basics](505-Java-Explorer/02-Introduction-to-Java-Basics.md)	23m
-* Object-Oriented Programming	- Practical Object-Oriented Concepts: Part 1 33m
-* Object-Oriented Programming	- Practical Object-Oriented Concepts: Part 2 24m
-* What is a Java Program 25m
-* Handling Text and Numbers	49m
-* Arrays, Conditions, and Loops 49m
-* Defining Classes and Creating Objects	1h
-* Working with Objects 34m
-* Handling Exceptions	14m
-* Object-Oriented Approach to Code Reuse 34m
-* Java on OCI	- Oracle Cloud and Beyond 32m
-* Case Study 40m
-* Become a Java Programmer	
-* Continue Your Learning as a Java Programmer 10m
-* Assessment - Java Explorer Assessment 
+* [00. Overview](505-Java-Explorer/00-Overview.md) 25m
+* [01. Introduction to Java Basics](505-Java-Explorer/01-Introduction-to-Java-Basics.md)	23m
+* [02. Object-Oriented Programming	- Practical Object-Oriented Concepts: Part 1](505-Java-Explorer/02-OOP-Part-1.md) 33m
+* [03. Object-Oriented Programming	- Practical Object-Oriented Concepts: Part 2](505-Java-Explorer/03-OOP-Part-2.md) 24m
+* [04. What is a Java Program](505-Java-Explorer/04-What-is-a-Java-Program.md) 25m
+* [05. Handling Text and Numbers](505-Java-Explorer/05-Handling-Text-and-Numbers.md)	49m
+* [06. Arrays, Conditions, and Loops](505-Java-Explorer/06-Arrays-Conditions-and-Loops.md) 49m
+* [07. Defining Classes and Creating Objects](505-Java-Explorer/07-Defining-Classes-and-Creating-Objects.md)	1h
+* [08. Working with Objects](505-Java-Explorer/08-Working-with-Objects.md) 34m
+* [09. Handling Exceptions](505-Java-Explorer/09-Handling-Exceptions.md)	14m
+* [10. Object-Oriented Approach to Code Reuse](505-Java-Explorer/10-Object-Oriented-Approach-to-Code-Reuse.md) 34m
+* [11. Java on OCI	- Oracle Cloud and Beyond](505-Java-Explorer/11-Java-on-OCI-Oracle-Cloud-and-Beyond.md) 32m
+* [12. Case Study](505-Java-Explorer/12-Case-Study.md) 40m
+* [13. Become a Java Programmer](505-Java-Explorer/13-Become-a-Java-Programmer.md)
+* [14. Continue Your Learning as a Java Programmer](505-Java-Explorer/14-Continue-Your-Learning-as-a-Java-Programmer.md) 10m
+* [15. Assessment - Java Explorer Assessment](505-Java-Explorer/15-Assessment-Java-Explorer-Assessment.md)
