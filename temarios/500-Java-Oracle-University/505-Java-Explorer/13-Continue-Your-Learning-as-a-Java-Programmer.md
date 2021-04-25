@@ -6,6 +6,8 @@ An overview of the Java Learning Subscription, Certification and digital+live se
 
 ## 01. What's Next 5m
 
+![13-Ruta](images/13-Ruta.png)
+
 Java Basics, What's Next. In this module, we'll learn a little bit more about the Java Learning Subscription from Oracle University, Java CE and EE certifications, methodology, tools, and techniques that are offered as part of the Java Learning Subscription, and the Digital+Live sessions. The Java Learning Subscription includes hundreds of hours of recorded training and education on Java and related topics. Right now, you're right here taking Java Basics. Once you sign up for the subscription, then you have access to the rest of our courses.
 
 The first one you probably want to look at is Java SE 11 Programming Complete. This is a full-blown in-depth course for teaching you all the aspects of Java SE programming, and start getting you prepared for certification. From there, it really depends on what your path is, and what you want to do. We suggest Java on Oracle Cloud Infrastructure First Steps to see how to work with Java in the Oracle Cloud, and then if you're doing Enterprise applications, to go on to Developing Applications for the Java EE 7 Platform. Both Java SE 11 Programming Complete and Developing Applications for Java EE 7 lead to certification.
