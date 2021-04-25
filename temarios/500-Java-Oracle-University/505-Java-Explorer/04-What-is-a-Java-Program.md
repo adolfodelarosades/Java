@@ -140,6 +140,43 @@ Now, if you think you can, try to do that in NetBeans just with the instructions
 
 ## 04. NetBeans Intro Demo 3m
 
+Exercise 2, creating a new project and Java class. In this exercise, we'll create a new job application using NetBeans, using the Java Application Wizard under Java With Ant category. We'll name it ShopApp, and we'll create a main class called duke.choice.ShopApp. We'll print "Welcome To Duke Choice Shop!" message from the main method and run the application.
+
+Looking at NetBeans, once we have NetBeans started, we can create a new project by going to the icon for a new project, or we can use the File menu. We're going to create a new project. It will be Java with Ant, Java Application, and we'll click Next. And we said we're gonna call this ShopApp.
+
+Notice I have a couple already, so I'm going to call this ShopAppExercise to distinguish it. The other ones are solutions I have and other demos that I'll be doing. We also want a ShopApp application with a main. There we go. Click Finish, and it creates the basic project for us. There it is.
+
+So it gives us a main method, and it gives us the basic class. Let's go back for a second and make sure we have everything we want-- Java application, ShopApp, duke.choice.ShopApp. Let's check this thing.
+
+OK, so the package is wrong. If you get the package wrong, it's actually pretty easy to change. You can right-click on it, and select Refactor, and then Rename. We want to call it duke.choice.ShopApp. Sorry, duke.choice. OK, so I'm going to change that to duke.choice. And notice, it renames it both the package, and it renames it in the file itself.
+
+All right, last thing we want to do is we need to print out, "Welcome to Duke Choice Shop!" from their main method. So to do that, we can actually write the words system out println. However, there are conveniences and code templates that are available. So if you press, in this case, S-O-U-T, for system out println, and then press Tab, it writes the entire phrase for you. There are other things as well-- IF statements, and other things we'll see later.
+
+All right, so for this, we want it to say, "Welcome to Duke Choice Shop!" OK, and then we can run it by clicking the green Run button. And it says, Welcome to Duke Choice Shop. So we've got our project. Project works. Works in NetBeans. And we're all good. That completes this exercise.
 
 ## 05. Jshell 3m
+
+ 
+JShell-- JShell is an interactive Read-Evaluate-Print Loop command line tool to light a test out Java code without having to write full programs. You can learn the Java programming language and even prototype Java code very simply and easily. It will evaluate declarations, statements, and expressions as they're typed in, as they're entered. It will show you the results immediately.
+
+So looking at an example, we can invoke JShell by just typing JShell at the command line. Then if we type int x, indicating we want an integer x variable equals 1, it will assign the value 1 to x. Then if we say int y equals 1, it will create an integer y variable and assign it the value 1.
+
+And then if we type x plus y, it'll add the two together. 1 plus 1 gives us 2. To exit JShell, we just simply do a forward slash exit. And that exits JShell back to the command line.
+
+Here's a reference for you if you need help and you want to play with this. Here's the slash exit that gets you out, slash list. Notice all the commands have a slash on the front. And you can do other things like edit, save, open, create variables and methods. And you can have a lot of fun with this without having to write full-blown Java programs and be able to test out code.
+
+OK, we've got a quiz for you. We have quizzes throughout the modules. The way we do this is that the quiz answers are on a separate slide. So after I read the question, you can pause the video and think about what the correct answer is and then when you're ready, resume the video and see if your answers match up.
+
+OK, which of the following are correct? Choose all that apply javac space OrderClass, will that work? java OrderClass, javac space OrderClass.java, java space OrderClass.class.
+
+OK, go ahead and pause the video. Think about your answers. And when you're ready, hit the Resume button.
+
+OK, so the answers here are b and c. Well, let's see why that is. OK, Java itself invokes the Java virtual machine. And the rule is, when you invoke the Java virtual machine, you pass in a class file. And since it has to be a class file, the .class is assumed. So b will work. d will not because of that very reason. We do not put .class on the end.
+
+However, almost the reverse is true with javac. javac is the compiler. And when you call a compiler, you have to pass it a file with .java as an extension. So a does not work because we don't have the Java extension.
+
+So b works because we pass an order class without .class to the Java virtual machine. And OrderClass.java with javac works because that invokes the compiler correctly. How did you do?
+
 ## 06. Summary 1m
+
+In this module, you learned the purpose of the Java Virtual Machine, the purpose of the javac and java executables, and how to create and run a Java program using the NetBeans integrated development environment.
