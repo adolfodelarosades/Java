@@ -15,3 +15,25 @@ Welcome to the Java SE 11 Developer learning path!
 * The Java SE: Programmer I (1Z0-815) and Java SE: Programmer II (1Z0-816) exams have been retired. They are replaced by the new exam Java SE 11 Developer (1Z0-819).
 
 ![510-temario](510_Java_SE_11_Developer/images/510-temario.png)
+
+
+* Course for Experienced Developers	- Java SE 11: Programming Complete
+   
+   Course 
+   15 Skill Checks 
+   Lab
+   30h 29m
+   
+* Java SE Exam Prep	- Prepare for Java SE Certification
+
+   Course
+   2h 53m
+   
+* Practice Exam	- Practice Exam - Java SE Certification
+
+   Module 
+   1 Skill Check
+
+* Certification - Java SE 11 Developer (1Z0-819)
+ 
+   Get certified online 
