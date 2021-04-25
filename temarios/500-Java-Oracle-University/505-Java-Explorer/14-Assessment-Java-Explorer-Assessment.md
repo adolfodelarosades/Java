@@ -20,3 +20,7 @@
 ![14-18](images/14-18.png)
 ![14-19](images/14-19.png)
 ![14-20](images/14-20.png)
+![14-21](images/14-21.png)
+![14-22](images/14-22.png)
+![14-23](images/14-23.png)
+![14-24](images/14-24.png)
