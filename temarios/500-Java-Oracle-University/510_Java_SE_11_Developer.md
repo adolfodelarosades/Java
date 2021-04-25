@@ -2,15 +2,16 @@
 
 Learning Path 31h 20m
 
-¡NUEVO! Obtenga una vista completa de la tecnología Java SE 11 y prepárese para el examen de certificación.
-
 ![portada](510_Java_SE_11_Developer/images/510-portada.png)
 
+NEW! Get a complete view of Java SE 11 technology and prepare for the certification exam.
+ 
+Welcome to the Java SE 11 Developer learning path!
 
-¡Bienvenido a la ruta de aprendizaje para desarrolladores de Java SE 11!
+* If you're completely new to programming, try the [Java Explorer]((https://learn.oracle.com/ols/learning-path/java-explorer/40805/79726)) learning path.
+* If you have some programming experience and would like to learn at an accelerated pace, try the course [Java SE 11: Programming Complete](https://learn.oracle.com/ols/course/java-se-11-programming-complete/40805/78835).
+* You'll also find resources on Java certification preparation, new features, and developing Java applications for Oracle Cloud Infrastructure.
+* The [Java SE: Programming I]((https://learn.oracle.com/ols/course/java-se-programming-i/40805/54605)) and [Java SE: Programming II](https://learn.oracle.com/ols/course/java-se-programming-ii/40805/54247) courses are scheduled to be archived soon. [Java SE 11: Programming Complete]((https://learn.oracle.com/ols/course/java-se-11-programming-complete/40805/78835)) will replace them.
+* The Java SE: Programmer I (1Z0-815) and Java SE: Programmer II (1Z0-816) exams have been retired. They are replaced by the new exam Java SE 11 Developer (1Z0-819).
 
-* Si es completamente nuevo en la programación, pruebe la ruta de aprendizaje de [Java Explorer](https://learn.oracle.com/ols/learning-path/java-explorer/40805/79726) 6+h.
-* Si tiene algo de experiencia en programación y le gustaría aprender a un ritmo acelerado, pruebe el curso [Java SE 11: Programación completa](https://learn.oracle.com/ols/course/java-se-11-programming-complete/40805/78835) 30h 26m.
-* También encontrará recursos sobre la preparación de la certificación Java, nuevas funciones y desarrollo de aplicaciones Java para Oracle Cloud Infrastructure.
-* Los cursos [Java SE: Programación I](https://learn.oracle.com/ols/course/java-se-programming-i/40805/54605) 19h 3m y [Java SE: Programación II](https://learn.oracle.com/ols/course/java-se-programming-ii/40805/54247) 18h 42m están programados para archivarse en breve. Java SE 11: Programming Complete los reemplazará.
-* Los exámenes Java SE: Programmer I (1Z0-815) y Java SE: Programmer II (1Z0-816) se han retirado. Son reemplazados por el nuevo examen [Java SE 11 Developer (1Z0-819)].
+![510-temario](510_Java_SE_11_Developer/images/510-temario.png)
