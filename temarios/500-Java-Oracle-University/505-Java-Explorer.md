@@ -37,6 +37,5 @@ Esta ruta de aprendizaje cubre:
 * [10. Object-Oriented Approach to Code Reuse](505-Java-Explorer/10-Object-Oriented-Approach-to-Code-Reuse.md) 34m
 * [11. Java on OCI	- Oracle Cloud and Beyond](505-Java-Explorer/11-Java-on-OCI-Oracle-Cloud-and-Beyond.md) 32m
 * [12. Case Study](505-Java-Explorer/12-Case-Study.md) 40m
-* [13. Become a Java Programmer](505-Java-Explorer/13-Become-a-Java-Programmer.md)
-* [14. Continue Your Learning as a Java Programmer](505-Java-Explorer/14-Continue-Your-Learning-as-a-Java-Programmer.md) 10m
-* [15. Assessment - Java Explorer Assessment](505-Java-Explorer/15-Assessment-Java-Explorer-Assessment.md)
+* [13. Become a Java Programmer - Continue Your Learning as a Java Programmer](505-Java-Explorer/13-Continue-Your-Learning-as-a-Java-Programmer.md) 10m
+* [14. Assessment - Java Explorer Assessment](505-Java-Explorer/14-Assessment-Java-Explorer-Assessment.md)
