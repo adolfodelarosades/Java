@@ -1,6 +1,6 @@
 # Java SE 11: Programming Complete
 
-## 01. Introduction to Java
+## [01. Introduction to Java](01-Java-SE-11-Programming-Complete/01-Introduction-to-Java.md)
 
    * Introduction to Java, Part 1 21m
    * Introduction to Java, Part 2 24m
