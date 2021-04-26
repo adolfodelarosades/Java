@@ -39,7 +39,7 @@
    * Practice 4-3: Document Classes 9m
    * Classes and Objects - Score 80% or higher to pass
 
-## 05: Improved Class Design
+## [05: Improved Class Design](01-Java-SE-11-Programming-Complete/05-Improved-Class-Design.md)
    
    * Improved Class Design, Part 1 New 21m
    * Improved Class Design, Part 2 16m
