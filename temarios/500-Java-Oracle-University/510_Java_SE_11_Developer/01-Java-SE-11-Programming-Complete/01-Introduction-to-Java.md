@@ -1,4 +1,4 @@
-## 01. Introduction to Java
+# 01. Introduction to Java
 
 1. Introduction to Java, Part 1 21m
 2. Introduction to Java, Part 2 24m
