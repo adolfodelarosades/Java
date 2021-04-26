@@ -18,7 +18,7 @@
    * Practice 2-2: Use the if/else and switch Constructs and a Ternary Operator 19m
    * Primitive Types, Operators, and Flow Control Statements - Score 80% or higher to pass
 
-## 03: Text, Date, Time, and Numeric Objects
+## [03: Text, Date, Time, and Numeric Objects](01-Java-SE-11-Programming-Complete/03-Text-Date-Time-and-Numeric-Objects.md)
 
    * Text, Date, Time, and Numeric Objects, Part 1 22m
    * Text, Date, Time, and Numeric Objects, Part 2 19m
