@@ -9,7 +9,7 @@
    * Practice 1-2: Create, Compile, and Execute a Java Application 6m
    * Introduction to Java - Score 80% or higher to pass
 
-## 02 Primitive Types, Operators, and Flow Control Statements
+## [02 Primitive Types, Operators, and Flow Control Statements](01-Java-SE-11-Programming-Complete/02-Primitive%20Types-Operators-and-Flow-Control-Statements.md)
 
    * Primitive Types, Operators, and Flow Control Statements, Part 1 16m
    * Primitive Types, Operators, and Flow Control Statements, Part 2 24m
