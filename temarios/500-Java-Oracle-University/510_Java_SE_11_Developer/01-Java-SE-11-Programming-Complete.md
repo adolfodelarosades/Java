@@ -29,7 +29,7 @@
    * Practice 3-4: Apply Localization and Format Messages 11m
    * Text, Date, Time, and Numeric Objects - Score 80% or higher to pass 
 
-## 04: Classes and Objects
+## [04: Classes and Objects](01-Java-SE-11-Programming-Complete/04-Classes-and-Objects.md)
 
    * Classes and Objects, Part 1 25m
    * Classes and Objects, Part 2 17m
