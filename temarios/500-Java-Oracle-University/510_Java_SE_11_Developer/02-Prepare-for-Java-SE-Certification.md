@@ -20,7 +20,7 @@ FILTERS
 * Solutions: Getting Started, Java IO/NIO, JDBC, DatabaseConnectivity
 * Language: English
 
-## 1. Java SE 11 Certification
+## 1. Java SE 11 Certification
    
    * Exam Overview 13m
    * Prepare for an Exam 14m
