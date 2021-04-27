@@ -792,7 +792,7 @@ View Quiz
 ![06-11](images/06-11.png)
 ![06-12](images/06-12.png)
 ![06-13](images/06-13.png)
-![06-14](images/06-14.png)
+![06-06](images/06-06.png)
 ![06-15](images/06-15.png)
 ![06-16](images/06-16.png)
 ![06-17](images/06-17.png)
