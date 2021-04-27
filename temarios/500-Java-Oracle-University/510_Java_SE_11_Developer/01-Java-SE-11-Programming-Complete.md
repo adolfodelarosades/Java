@@ -140,7 +140,7 @@
    * Practice 14-3: Simulate Concurrent Callers…Part 2 17m
    * Java Concurrency and Multithreading - Score 80% or higher to pass
 
-## 15: Open Module Content
+## [15: Open Module Content](01-Java-SE-11-Programming-Complete/15-Open-Module-Content.md)
 
    * Open Module Content, Part 1 24m
    * Open Module Content, Part 2 21m
