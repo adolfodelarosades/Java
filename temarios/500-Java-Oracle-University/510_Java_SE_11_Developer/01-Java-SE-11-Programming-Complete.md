@@ -62,7 +62,7 @@
    * Practice 6-3: Create Factory Methods 9m
    * Inheritance - Score 80% or higher to pass
 
-## 7: Interfaces
+## [7: Interfaces](01-Java-SE-11-Programming-Complete/07-Interfaces.md)
 
    * Interfaces, Part 1 24m
    * Interfaces, Part 2 22m
