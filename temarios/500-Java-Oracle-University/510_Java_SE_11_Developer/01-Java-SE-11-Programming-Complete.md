@@ -88,7 +88,7 @@
    * Practice 9-2: Implement Review Sort and Product Search Features 15m
    * Collections - Score 80% or higher to pass
 
-## 10: Nested Classes and Lambda Expressions
+## [10: Nested Classes and Lambda Expressions](01-Java-SE-11-Programming-Complete/10-Nested-Classes-and-Lambda-Expressions.md)
 
    * Nested Classes and Lambda Expressions, Part 1 28m
    * Nested Classes and Lambda Expressions, Part 2 21m
@@ -96,7 +96,7 @@
    * Practice 10-2: Produce Customized Product Reports 14m
    * Nested Classes and Lambda Expressions - Score 80% or higher to pass
 
-## 11: Java Streams API
+## [11: Java Streams API](01-Java-SE-11-Programming-Complete/11-Java-Streams-API.md)
 
    * Java Streams API, Part 1 24m
    * Java Streams API, Part 2 25m
@@ -105,7 +105,7 @@
    * Practice 11-2: Add Discount Per Rating Calculation 12m
    * Java Streams API - Score 80% or higher to pass
 
-## 12: Handle Exceptions and Fix Bugs
+## [12: Handle Exceptions and Fix Bugs](01-Java-SE-11-Programming-Complete/12-Handle-Exceptions-and-Fix-Bugs.md)
 
    * Handle Exceptions and Fix Bugs, Part 1 24m
    * Handle Exceptions and Fix Bugs, Part 2 24m
