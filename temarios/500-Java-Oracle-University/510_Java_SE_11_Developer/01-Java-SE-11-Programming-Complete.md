@@ -1,5 +1,25 @@
 # Java SE 11: Programming Complete
 
+DESCRIPTION
+
+Instructor Introduction
+
+NEW! This course is intended for students with some programming experience and is a comprehensive training for the Java programming language.
+
+BENEFITS TO YOU
+
+After completing this course, you should be able to:
+
+* Describe the object-oriented programming approach
+* Explain Java syntax and coding conventions
+* Use Java constructs and operators
+* Use core Java APIs, such as Collections, Streams, IO, and Concurrency
+* Deploy Java SE applications
+
+FILTERS
+
+* Getting Started and New Releases: New Content
+
 ## [01. Introduction to Java](01-Java-SE-11-Programming-Complete/01-Introduction-to-Java.md)
 
    * Introduction to Java, Part 1 21m
