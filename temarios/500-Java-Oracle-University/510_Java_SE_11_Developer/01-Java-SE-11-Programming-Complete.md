@@ -49,7 +49,7 @@
    * Practice 5-3: Make Product Objects Immutable 8m
    * Improved Class Design - Score 80% or higher to pass
 
-## 06: Inheritance
+## [06: Inheritance](01-Java-SE-11-Programming-Complete/06-Inheritance.md)
 
    * Inheritance, Part 1 24m
    * Inheritance, Part 2 21m
