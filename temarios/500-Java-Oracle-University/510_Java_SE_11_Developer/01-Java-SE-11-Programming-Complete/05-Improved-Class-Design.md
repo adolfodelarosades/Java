@@ -418,4 +418,10 @@ View Quiz
 ![05-10](images/05-10.png)
 ![05-11](images/05-11.png)
 ![05-12](images/05-12.png)
+![05-13](images/05-13.png)
+![05-14](images/05-14.png)
+![05-15](images/05-15.png)
+![05-16](images/05-16.png)
+![05-17](images/05-17.png)
+![05-18](images/05-18.png)
 
