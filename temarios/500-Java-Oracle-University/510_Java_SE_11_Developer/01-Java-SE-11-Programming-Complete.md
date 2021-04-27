@@ -116,7 +116,7 @@
    * Practice 12-2: Add Text Parsing Operations…Part 2 21m
    * Handle Exceptions and Bugs - Score 80% or higher to pass
 
-## 13: Java IO API
+## [13: Java IO API](01-Java-SE-11-Programming-Complete/13-Java-IO-API.md)
 
    * Java IO API, Part 1 26m
    * Java IO API, Part 2 26m
@@ -128,7 +128,7 @@
    * Practice 13-3: Implement Memory Swap Mechanism 24m
    * Java IO API - Score 80% or higher to pass
 
-## 14: Java Concurrency and Multithreading
+## [14: Java Concurrency and Multithreading](01-Java-SE-11-Programming-Complete/14-Java-Concurrency-and-Multithreading.md)
 
    * Java Concurrency and Multithreading, Part 1 29m
    * Java Concurrency and Multithreading, Part 2 New 28m
@@ -149,26 +149,27 @@
    * Practice 15-2: Separate Application into Several Modules 25m
    * Open Module Content - Score 80% or higher to pass
 
-## 16: Annotations
+## [16: Annotations](01-Java-SE-11-Programming-Complete/16-Annotations.md)
 
    * Annotations, Part 1 14m
    * Annotations, Part 2 16m
 
-## 17: Java Database Connectivity 
+## [17: Java Database Connectivity](01-Java-SE-11-Programming-Complete/17-Java-Database-Connectivity.md)
 
    * Java Database Connectivity, Part 1 16m
    * Java Database Connectivity, Part 2 20m
-## 18: Java Security
+   
+## [18: Java Security](01-Java-SE-11-Programming-Complete/18-Java-Security.md)
 
    * Java Security, Part 1 15m
    * Java  Security, Part 2 15m
 
-## 19: Advanced Generics
+## [19: Advanced Generics](01-Java-SE-11-Programming-Complete/19-Advanced-Generics.md)
 
    * Advanced Generics, Part 1 9m
    * Advanced Generics, Part 2 20m
 
-## 20: Oracle Cloud Deployment
+## [20: Oracle Cloud Deployment](01-Java-SE-11-Programming-Complete/20-Oracle-Cloud-Deployment.md)
 
    * Oracle Cloud Deployment, Part 1 21m
    * Oracle Cloud Deployment, Part 2 11m
