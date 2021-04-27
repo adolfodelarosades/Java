@@ -24,7 +24,7 @@ Welcome to the Java SE 11 Developer learning path!
    Lab
    30h 29m
    
-* Java SE Exam Prep	- Prepare for Java SE Certification
+* [Java SE Exam Prep	- Prepare for Java SE Certification](510_Java_SE_11_Developer/02-Prepare-for-Java-SE-Certification.md)
 
    Course
    2h 53m
