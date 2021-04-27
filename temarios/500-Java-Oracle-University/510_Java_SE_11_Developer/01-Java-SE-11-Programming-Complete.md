@@ -72,14 +72,14 @@
    * Practice 7-3: Test the Product Review Functionality 5m
    * Interfaces - Score 80% or higher to pass
 
-## 8: Arrays and Loops
+## [8: Arrays and Loops](01-Java-SE-11-Programming-Complete/08-Arrays-and-Loops.md)
 
    * Arrays and Loops, Part 1 24m
    * Arrays and Loops, Part 2 16m
    * Practice 8-1: Allow Multiple Reviews for a Product 22m
    * Arrays and Loops Score 80% or higher to pass
 
-## 9: Collections
+## [9: Collections](01-Java-SE-11-Programming-Complete/09-Collections.md)
 
    * Collections, Part 1 New 23m
    * Collections, Part 2 22m
