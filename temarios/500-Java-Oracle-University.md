@@ -29,3 +29,9 @@ NEW!   Get a complete view of Java SE 11 technology and prepare for the certific
 Current version: Java 11
 
 NEW!   Craft custom Java solutions that leverage OCI DevOps, cloud-native services like functions, APIs and streaming, perform
+
+### [Beyond Java SE 11](500-Java-Oracle-University/514-Beyond-Java-SE-11.md)
+
+Beyond Java SE 11 with JDKs 12, 13, 14, 15, and 16
+
+NEW!   This learning path discusses the JDK release cycle and significant new features introduced in the latest short term support
