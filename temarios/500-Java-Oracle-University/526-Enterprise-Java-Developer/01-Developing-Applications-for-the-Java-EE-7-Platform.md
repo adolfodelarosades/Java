@@ -38,7 +38,7 @@ FILTERS
 * Version: Java EE 7
 * Language: English
 
-## 1: Course Introduction
+## [1: Course Introduction](01-Developing-Applications-for-the-Java-EE-7-Platform/01-Introduction.md)
 
    * Course Introduction - 16m
    * Practices for Lesson 1: Overview - 6m
