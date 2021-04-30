@@ -22,7 +22,7 @@ FILTERS
 * Solutions: Getting Started, Java IO/NIO, JDBC, DatabaseConnectivity
 * Language: English
 
-## 1: Introduction to developing Java SE Apps on OCI
+## [1: Introduction to developing Java SE Apps on OCI](01-Java-Applications-on-OCI/01-Introduction-to-developing-Java-SE-Apps-on-OCI.md)
 
    * Introduction to developing Java SE Apps on OCI 14m
 
