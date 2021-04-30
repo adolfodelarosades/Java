@@ -39,3 +39,6 @@ NEW!   This learning path discusses the JDK release cycle and significant new fe
 ## [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
 
 Learn how to monitor, profile and tune your Java applications.
+
+
+## [Enterprise Java Developer](500-Java-Oracle-University/526-Enterprise-Java-Developer.md)
