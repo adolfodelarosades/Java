@@ -26,7 +26,7 @@ FILTERS
 
    * Introduction to developing Java SE Apps on OCI 14m
 
-## [2 : Develop a Java Application on OCI](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/512-Java-SE-on-OCI/02-Develop-a-Java-Application-on-OCI.md)
+## [2 : Develop a Java Application on OCI](01-Java-Applications-on-OCI/02-Develop-a-Java-Application-on-OCI.md)
 
    * Develop a Java application on OCI 23m
    * Solving the warranty claim problem 10m
