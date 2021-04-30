@@ -22,14 +22,14 @@ FILTERS
 * Solutions: Conditional Statements, Java Exception Handling Techniques
 * Language: English
 
-## 1: JDKs Beyond Java SE 11
+## [1: JDKs Beyond Java SE 11](Beyond-Java-SE-11/01-JDKs-Beyond-Java-SE-11.md)
 
    * JDKs Beyond Java SE 11 - New - 5m
    * Switch Expressions - 5m
    * Helpful NullPointerException - New - 3m
    * Text Blocks - New - 10m
 
-## 2 : JDK 16
+## [2 : JDK 16](Beyond-Java-SE-11/02-JDK-16.md)
 
    * JDK 16 New Features - New - 6m
    * JDK 16 Features Contd... - New - 8m
