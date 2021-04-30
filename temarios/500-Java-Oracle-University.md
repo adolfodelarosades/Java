@@ -14,13 +14,18 @@ Java Learning Subscription
 
 ### [Java Explorer](500-Java-Oracle-University/505-Java-Explorer.md)
 
-Ruta de aprendizaje 7h 26m
+Java Explorer
 
-Aprenda los conceptos básicos de programación de Java, como variables, clases, objetos, bucles, arrays y construcciones de decisiones. Conozca las capacidades orientadas a objetos de Java. 
+Learn Java programming basics such as variables, classes, objects, loops, arrays, and decision constructs. Get introduced to Java's
 
 ### [Java SE 11 Developer](500-Java-Oracle-University/510_Java_SE_11_Developer.md)
 
-¡NUEVO! Obtenga una vista completa de la tecnología Java SE 11 y prepárese para el examen de certificación.
- 
-¡Bienvenido a la ruta de aprendizaje para desarrolladores de Java SE 11!
+Java SE 11 Developer
 
+NEW!   Get a complete view of Java SE 11 technology and prepare for the certification exam.
+ 
+### [Java SE on OCI](500-Java-Oracle-University/512-Java-SE-on-OCI.md)
+
+Current version: Java 11
+
+NEW!   Craft custom Java solutions that leverage OCI DevOps, cloud-native services like functions, APIs and streaming, perform
