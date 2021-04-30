@@ -1,6 +1,7 @@
 # 01 Course Introduction
 
-1. Course Introduction
+1. Course Introduction - 16m
+2. Practices for Lesson 1: Overview - 6m
 
 ## 1. Course Introduction
 
@@ -59,3 +60,29 @@ Appendix E talks about JAXB annotations and JAXB API. That's for mapping XML and
 And it was quite a handful, coding-wise, so I think the main reason for Appendix C is sort of to give you a bit of a scare, you know, like ooh, with CDIs, it's that much easier. Yeah? So just a quick example of what it was like before. But I suppose there's another reason. You might have to deal with a legacy code. There might be Java EE applications already using that API-- you know, the older sort of approach-- so you understand what's going on, and maybe if you're updating the code, replace the older API approach with a newer API approach. So you see both in this particular training.
 
 Right. That's it for our first introductory presentation, just to make sure we understand what sort of a structure the course has and what things are covered and what is expected from you in terms of prerequisites and what do you expect from the course in terms of presentations and practices. Right, thank you. Let's progress to the next session.
+
+## 2. Practices for Lesson 1: Overview - 6m
+
+In your manual, you find practices for every lesson of this course. However, Practice 1 is not really a practice. It's not something that you need to do unless, in a later practice in the course, you encountered some problem and you decided you don't want to complete a particular exercise, so you want to load the exercise solution instead.
+
+So this practice for Lesson 1 isn't an exercise as such. But instead, it's the walk-through-- the procedure that allows you to load a solution project for a later exercise. If you want to do something like that, then that means you have to first close all currently open projects and then open whatever project you want to open. Each practice has a solution. So there's Lab Solutions folder-- so appropriate practice subfolder.
+
+For example, practice for Lesson 7 will be in a Practice 7 subfolder. There will be solution for Lesson 7. If you want to, for example, start from the beginning of Lesson 7, then I suppose you need to load the solution for Lesson 6.
+
+Select all the project's in appropriate subfolder and make sure you tick the required project checkbox as well. So let me just show you that. First, I go to [INAUDIBLE] and I close any currently open projects. Then I go and open a project. And I go to the Labs Solutions folder. I select whichever solution I like, so-- I don't know-- solution for Lesson 5, for example.
+
+Select all folders here. Make sure Open Required Project checkbox is ticked. And then open them. There you go. So that allows me to start from a particular end of a particular exercise. OK, so that's part of the procedure. So you opened the necessary projects.
+
+Now, this rule has a couple of exceptions. To start practices for Lessons 4 and 7, the solutions folder contains additional subfolders-- Start of Lesson 4 and Start of Lesson 7. So that allows you to start these two from scratch from this particular [INAUDIBLE] application folders. Again, procedures-- same-- make sure you open the Required Projects checkbox.
+
+If you deploy onto your server, in a WebLogic server, an application which is from the different solution folder and such application is already deployed-- so for example, you're getting an error message that looks like this-- product app cannot be deployed because it's already deployed-- which could happen if you start overriding deployment from one project with solution from another.
+
+So just in case-- OK, if that happens, you can go on a WebLogic server console and simply un-deploy whatever applications. It's pretty straightforward. Just open a browser. Go into the console. Tick the checkboxes-- which applications you want to get. Read off. And un-deploy them. Just hit Delete button. And then start the deployment of whatever you want to deploy properly.
+
+So we could go to our WebLogic console. This [INAUDIBLE]. You might have to log in first, of course. And then look at the list of deployments. And if you want to un-deploy any applications, just delete them, like so. That's it. Or whichever one is causing the conflict-- I suppose you don't have to un-deploy them all.
+
+Now, there is a lot of exceptions from this particular walk-through. So that's generally how you restore things. However, if you did not successfully complete practice for Lesson 2 or Practice 5, part 1, then appropriate solutions will not load, because both practice for Lesson 2 and 5-1 require you to go to the WebLogic server console and configure resources.
+
+Practice for Lesson 2-- you configure a database and the data source. Practice 5-1, you configure [? whichever ?] message in queues-- Java message queue-- so JMS system. And of course, you won't be able to deploy, let's say, a message-driven bean, if you don't have a JMS queue for it that it references. Or you won't be able to deploy Java Persistence API code if you haven't can configured your database.
+
+So these are the two practices that you really have to complete. Everything else can actually be loaded from solution, just as I've shown to you a moment ago. Well, that is it for this particular practice, which isn't really a practice but, rather, a rescue application for further exercises, should you run into any problems.
