@@ -54,7 +54,7 @@ FILTERS
    * Practice 2-3: Configuring a JDBC Data Source - 4m
    * Skill Check: Introduction to Java EE - Score 80% or higher to pass
 
-## 3: Managing Persistence by Using JPA Entities
+## [3: Managing Persistence by Using JPA Entities](01-Developing-Applications-for-the-Java-EE-7-Platform/03-Managing-Persistence-by-Using-JPA-Entities.md)
 
    * Managing Persistence by Using JPA Entities: Java Persistence API - 32m
    * Managing Persistence by Using JPA Entities: Container Managed Persistence - 32m
@@ -63,7 +63,7 @@ FILTERS
    * Practice 3-3: Testing JPA Functionalities - 22m
    * Skill Check: Managing Persistence by using JPA - Score 80% or higher to pass
 
-## 4: Implementing Business Logic by Using EJBs
+## [4: Implementing Business Logic by Using EJBs](01-Developing-Applications-for-the-Java-EE-7-Platform/04-Implementing-Business-Logic-by-Using-EJBs.md)
 
    * Implementing Business Logic by Using EJBs: EJBs and EJB Container - 30m
    * Implementing Business Logic by Using EJBs: Timers - 17m
@@ -73,7 +73,7 @@ FILTERS
    * Practice 4-4: Creating an EJB Timer - 9m
    * Skill Check: Implementing Business Logic by Using EJBs - Score 80% or higher to pass
 
-## 5: Using Java Message Service API
+## [5: Using Java Message Service API](01-Developing-Applications-for-the-Java-EE-7-Platform/05-Using-Java-Message-Service-API.md)
  
    * Using Java Message Service API - 26m
    * Practice 5-1: Configuring WebLogic JMS Server - 9m
