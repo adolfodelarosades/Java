@@ -10,7 +10,7 @@ Learning Path 2h 55m
 
    Course - Lab - 58m
    
-* [Java on OCl - Java on OCI: Develop a REST-based Microservice]()
+* [Java on OCl - Java on OCI: Develop a REST-based Microservice](512-Java-SE-on-OCI/02-Java-on-OCI-Develop-a-REST-based-Microservice.md)
 
    Course - Lab - 1h 58m
 
