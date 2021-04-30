@@ -35,3 +35,7 @@ NEW!   Craft custom Java solutions that leverage OCI DevOps, cloud-native servic
 Beyond Java SE 11 with JDKs 12, 13, 14, 15, and 16
 
 NEW!   This learning path discusses the JDK release cycle and significant new features introduced in the latest short term support
+
+## [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
+
+Learn how to monitor, profile and tune your Java applications.
