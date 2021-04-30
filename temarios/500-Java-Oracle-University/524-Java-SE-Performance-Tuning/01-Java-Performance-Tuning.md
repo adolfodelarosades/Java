@@ -8,7 +8,7 @@ BENEFITS TO YOU
 
 Learn how Java garbage collection works and how it affects your applications. Learn how to select the appropriate garbage collector and performance goal for your applications. Finally, use the Mission Control and Java Flight Recorder tools to monitor and analyze your applications.
 
-## 1: Introduction
+## [1: Introduction](01-Java-Performance-Tuning/01-Introduction.md)
 
    * Introduction - 7m
 
