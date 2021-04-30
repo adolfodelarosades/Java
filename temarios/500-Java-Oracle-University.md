@@ -42,3 +42,5 @@ Learn how to monitor, profile and tune your Java applications.
 
 
 ## [Enterprise Java Developer](500-Java-Oracle-University/526-Enterprise-Java-Developer.md)
+
+This path teaches Java EE and other technologies that enable you to develop enterprise-level applications. 
