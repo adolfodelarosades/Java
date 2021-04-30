@@ -43,7 +43,7 @@ FILTERS
    * Course Introduction - 16m
    * Practices for Lesson 1: Overview - 6m
 
-## 2: Introduction to Java EE
+## [2: Introduction to Java EE](01-Developing-Applications-for-the-Java-EE-7-Platform/02-Introduction-to-Java-EE.md)
 
    * Introduction to Java EE, Part 1: Requirements of Enterprise Applications - 33m
    * Introduction to Java EE, Part 2: Java EE 7 Web Services - 21m
