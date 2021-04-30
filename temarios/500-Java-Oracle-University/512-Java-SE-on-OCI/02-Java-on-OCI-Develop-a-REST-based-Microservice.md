@@ -13,7 +13,7 @@ FILTERS
 * Getting Started and New Releases: New Content
 * Version: Java SE 11
 
-## 1: Introduction and Practices
+## [1: Introduction and Practices](02-Java-on-OCI-Develop-a-REST-based-Microservice/01-Introduction-and-Practices.md)
 
    * Introduction 10m
    * Practice 1-1: Set Up the Development Environment New 7m
@@ -24,7 +24,7 @@ FILTERS
    * Practice 1-5: Implement Resources to Use Java Persistence New 16m
    * Practice 1-6: Migrate the Monolithic Service to Two Microservices New 6m
 
-## 2 : Project
+## [2 : Project](02-Java-on-OCI-Develop-a-REST-based-Microservice/02-Project.md)
 
    * Project Description New 6m
    * Demonstration of IntelliJ IDEA New 30m
