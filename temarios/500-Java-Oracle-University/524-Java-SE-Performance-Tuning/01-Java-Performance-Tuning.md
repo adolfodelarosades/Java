@@ -12,7 +12,7 @@ Learn how Java garbage collection works and how it affects your applications. Le
 
    * Introduction - 7m
 
-## 2: [Java Virtual Machine and Performance Overview](01-Java-Performance-Tuning/02-Java-Virtual-Machine-and-Performance-Overview.md)
+## [2: Java Virtual Machine and Performance Overview](01-Java-Performance-Tuning/02-Java-Virtual-Machine-and-Performance-Overview.md)
 
    * Java Virtual Machine and Performance Overview - 27m
    * Practice 2-1: Log into Oracle Linux; Practice 2-2: Open Terminal Windows in Oracle Linux; Practice 2-3: Add the Java bin Directory to the Path; Lesson 2-4: Open a Text File in Oracle Linux; Practice 2-5: Start NetBeans and Open a Project - 6m
