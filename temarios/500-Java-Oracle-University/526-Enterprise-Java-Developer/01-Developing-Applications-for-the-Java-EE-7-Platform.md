@@ -81,7 +81,7 @@ FILTERS
    * Practice 5-3: Testing the JMS Producer and the JMS Consumer - 5m
    * Skill Check: Using Java Message Services API - Score 80% or higher to pass
 
-## 6: Implementing SOAP Services by Using JAX-WS
+## [6: Implementing SOAP Services by Using JAX-WS](01-Developing-Applications-for-the-Java-EE-7-Platform/06-Implementing-SOAP-Services-by-Using-JAX-WS.md)
 
    * Implementing SOAP Services by Using JAX-WS - 25m
    * Practice 6-1: Exposing an Enterprise Java Bean as a JAX-WS Service - 21m
@@ -89,7 +89,7 @@ FILTERS
    * Practice 6-3: Creating a JAX-WS Client - 9m
    * Skill Check: Implementing SOAP Services by using JAX-WS - Score 80% or higher to pass
 
-## 7: Creating Java Web Applications by Using Servlets
+## [7: Creating Java Web Applications by Using Servlets](01-Developing-Applications-for-the-Java-EE-7-Platform/07-Creating-Java-Web-Applications-by-Using-Servlets.md)
 
    * Creating Java Web Applications by Using Servlets: HTTP Protocol Basics: Sending Requests - 27m
    * Creating Java Web Applications by Using Servlets: Request Dispatcher - 18m
@@ -98,14 +98,14 @@ FILTERS
    * Practice 7-3: Creating an Error-Handling Servlet - 10m
    * Skill Check: Creating Java Web Applications by using Servlet API - Score 80% or higher to pass
 
-## 8: Creating Java Web Applications by Using JSPs
+## [8: Creating Java Web Applications by Using JSPs](01-Developing-Applications-for-the-Java-EE-7-Platform/08-Creating-Java-Web-Applications-by-Using-JSPs.md)
 
    * Creating Java Web Applications by Using JSPs - 24m
    * Practice 8-1: Creating a JSP to Display the Product List - 23m
    * Practice 8-2: Creating a JSP for Editing a Product - 33m
    * Skill Check: Creating Java Web Applications by using JSPs - Score 80% or higher to pass
 
-## 9: Implementing REST Services using JAX-RS API
+## [9: Implementing REST Services using JAX-RS API](01-Developing-Applications-for-the-Java-EE-7-Platform/09-Implementing-REST-Services-using-JAX-RS-API.md)
    
    * Implementing REST Services using JAX-RS API - 31m
    * Practice 9-1: Creating a REST Service - 17m
@@ -113,7 +113,7 @@ FILTERS
    * Practice 9-3: Invoking a REST Service by Using Java - 15m
    * Skill Check: Implementing REST Services using JAX-RS API - Score 80% or higher to pass
 
-## 10: Creating Java Applications with WebSockets
+## [10: Creating Java Applications with WebSockets](01-Developing-Applications-for-the-Java-EE-7-Platform/10-Creating-Java-Applications-with-WebSockets.md)
 
    * Creating Java Applications with WebSockets - 41m
    * Practice 10-1: Creating a WebSocket Chat Server Endpoint - 14m
@@ -121,7 +121,7 @@ FILTERS
    * Practice 10-3: Invoking a WebSocket Chat Server by Using Java - 16m
    * Skill Check: Creating Java Applications with WebSockets - Score 80% or higher to pass
 
-## 11: Developing Web Applications Using JavaServer Faces
+## [11: Developing Web Applications Using JavaServer Faces](01-Developing-Applications-for-the-Java-EE-7-Platform/11-Developing-Web-Applications-Using-JavaServer-Faces.md)
 
    * Developing Web Applications Using JavaServer Faces: JavaServer Faces Concepts - 36m
    * Developing Web Applications Using JavaServer Faces: Describe JSF Navigation - 41m 
