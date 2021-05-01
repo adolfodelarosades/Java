@@ -15,6 +15,6 @@ FILTERS
 Version: Java SE 11, Java EE 7
 Language: English
 
-## 1. What's New in Java EE 8
+## [1. What's New in Java EE 8](02-JavaEE-8-Introduction/01-Whats-New-in-Java-EE-8.md)
    
    * What's New in Java EE 8 17m
