@@ -130,7 +130,7 @@ FILTERS
    * Practice 11-2: Creating JSF Pages - 44m
    * Skill Check: Developing Web Applications using JavaServer Faces - Score 80% or higher to pass
 
-## 12: Securing Java EE Applications
+## [12: Securing Java EE Applications](01-Developing-Applications-for-the-Java-EE-7-Platform/12-Securing-Java-EE-Applications.md)
 
    * Securing Java EE Applications - 38m
    * Practice 12-1: Adding Authentication and Authorization Logic - 17m
@@ -139,26 +139,26 @@ FILTERS
    * Practice 12-4: Adding Programmatic Security and Testing the Application - 16m
    * Skill Check: Securing Java EE Applications - Score 80% or higher to pass
 
-## 13: Java Logging
+## [13: Java Logging](01-Developing-Applications-for-the-Java-EE-7-Platform/13-Java-Logging.md)
 
    * Java Logging - 17m
 
-## 14: CDI Beans
+## [14: CDI Beans](01-Developing-Applications-for-the-Java-EE-7-Platform/14-CDI-Beans.md)
 
    * CDI Beans - 17m
 
-## 15: BeanValidation and JPA API
+## [15: BeanValidation and JPA API](01-Developing-Applications-for-the-Java-EE-7-Platform/15-BeanValidation-and-JPA-API.md)
 
    * BeanValidation and JPA API 33m
 
-## 16: Batch and Concurrency APIs
+## [16: Batch and Concurrency APIs](01-Developing-Applications-for-the-Java-EE-7-Platform/16-Batch-and-Concurrency-APIs.md)
 
    * Batch and Concurrency APIs - 21m
   
-## 17: JAXB API
+## [17: JAXB API](01-Developing-Applications-for-the-Java-EE-7-Platform/17-JAXB-API.md)
 
    * JAXB API - 11m
 
-## 18: Pre-CDI Servlet Examples
+## [18: Pre-CDI Servlet Examples](01-Developing-Applications-for-the-Java-EE-7-Platform/18-Pre-CDI-Servlet-Examples.md)
 
    * Pre-CDI Servlet Examples - 5m
