@@ -13,20 +13,20 @@ FILTERS
 * Version: Java SE 8
 * Language: English
 
-## 1: Lesson 1: Introduction to Modern Software Development
+## [1: Lesson 1: Introduction to Modern Software Development](02-Java-SE-8-Fundamentals/01-Lesson-1.md)
    
    * Lesson 1: Introduction to Modern Software Development, Part 1 - 18m
    * Lesson 1: Introduction to Modern Software Development, Part 2 - 16m
    * Skill Check: Introduction to Modern Software Development - Content Link
 
-## 2: Lesson 2: Java Programming and Git
+## [2: Lesson 2: Java Programming and Git](02-Java-SE-8-Fundamentals/02-Lesson-2.md)
 
    * Lesson 2: Java Programming and Git, Part 1 - 7m
    * Lesson 2: Java Programming and Git, Part 2 - 4m
    * Lesson 2: Java Programming and Git, Part 3 - 6m
    * Lesson 2: Java Programming and Git, Part 4 - 5m
    * Practices for Lesson 2 - 9m
-   * Quizzes for Lesson 2 - Content Link
+   * Quizzes for Lesson 2 
    * Skill Check: Java Programming and GIT - Score 80% or higher to pass
 
 ## 3: Lesson 3: Creating a Java Main Class
