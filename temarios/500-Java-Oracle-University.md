@@ -36,7 +36,11 @@ Beyond Java SE 11 with JDKs 12, 13, 14, 15, and 16
 
 NEW!   This learning path discusses the JDK release cycle and significant new features introduced in the latest short term support
 
-## [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
+### [Java SE 11 Upgrade](500-Java-Oracle-University/516-Java-SE-11-Upgrade.md)
+
+This path is for experienced Java SE 8 programmers who need to update their skills to Java SE 11, including features introduced in
+
+### [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
 
 Learn how to monitor, profile and tune your Java applications.
 
