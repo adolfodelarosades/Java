@@ -19,13 +19,13 @@ FILTERS
 * Version: Java SE 11
 * Language: English
 
-## 1: Prepare for Java SE 11 Upgrade Certification
+## [1: Prepare for Java SE 11 Upgrade Certification](03-Prepare-for-Java-SE-Certification/01-Prepare-for-Java-SE-11-Upgrade-Certification.md)
 
    * Prepare for Java SE 11 Upgrade Certification - New - 14m
    * Prepare for an Exam - New - 14m
    * How to Approach Questions - New - 11m
 
-## 2: Oracle Certification Program Resources
+## [2: Oracle Certification Program Resources](03-Prepare-for-Java-SE-Certification/02-Oracle-Certification-Program-Resources.md)
 
    * Taking your Exam Online - 10m
    * How to access your exam results - 5m
