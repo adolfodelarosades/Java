@@ -184,3 +184,5 @@ Skill Check: Introduction to Modern Software Development
 
 Quiz for Lesson 1
 
+[View Content](https://learn.oracle.com/education/html/pages/UPK/JavaFundamentals_quiz1/index.html?p_cloud_id=989)
+
