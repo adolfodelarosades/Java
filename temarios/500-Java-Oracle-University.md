@@ -40,6 +40,10 @@ NEW!   This learning path discusses the JDK release cycle and significant new fe
 
 This path is for experienced Java SE 8 programmers who need to update their skills to Java SE 11, including features introduced in
 
+### [Java SE 8 Programmer - Associate](500-Java-Oracle-University/518-Java-SE-8-Programmer-Associate.md)
+
+Programmers who will use Java SE 8 but are new to the Java language
+
 ### [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
 
 Learn how to monitor, profile and tune your Java applications.
