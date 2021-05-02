@@ -14,6 +14,6 @@ Learning Path 10h 15m
 
    Course - 53m
 
-* [Java SE 11 Upgrade Certification - Prepare for Java SE 11 Upgrade Certification](510_Java_SE_11_Developer/02-Prepare-for-Java-SE-Certification.md)
+* [Java SE 11 Upgrade Certification - Prepare for Java SE 11 Upgrade Certification](516-Java-SE-11-Upgrade/03-Prepare-for-Java-SE-Certification.md)
 
    Course - 52m
