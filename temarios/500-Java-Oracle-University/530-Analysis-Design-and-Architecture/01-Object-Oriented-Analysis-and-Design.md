@@ -36,12 +36,12 @@ Language: English
    * Lab 1 : Examining Object-Oriented Concepts and Terminology, Part 1 - 10m
    * Lab 1 : Examining Object-Oriented Concepts and Terminology, Part 2 - 5m
 
-## 2: Introducing Modeling and the Software Development Process
+## [2: Introducing Modeling and the Software Development Process](01-Object-Oriented-Analysis-and-Design/02-Introducing-Modeling-and-the-Software-Development-Process.md)
 
    * Introducing Modeling and the Software Development Process - 42m
    * Lab 2: Introducing Modeling and the Software Development Process - 5m
 
-## 3: Creating Use Case Diagrams
+## [3: Creating Use Case Diagrams](01-Object-Oriented-Analysis-and-Design/03-Creating-Use-Case-Diagrams.md)
 
    * Creating Use Case Diagrams - 54m
    * Lab 3: Creating Use Case Diagrams - 9m
