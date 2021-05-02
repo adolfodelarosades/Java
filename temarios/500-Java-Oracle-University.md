@@ -48,3 +48,7 @@ This path teaches Java EE and other technologies that enable you to develop ente
 ## [JavaScript and HTML](500-Java-Oracle-University/528-JavaScript-and-HTML.md)
 
 This JavaScript and HTML5 learning path features the JavaScript language, from language fundamentals to dynamic
+
+## [Analysis, Design and Architecture](500-Java-Oracle-University/530-Analysis-Design-and-Architecture.md)
+
+This path teaches object-oriented analysis and design.
