@@ -46,70 +46,70 @@ Language: English
    * Creating Use Case Diagrams - 54m
    * Lab 3: Creating Use Case Diagrams - 9m
 
-## 4: Creating Use Case Scenarios and Forms
+## [4: Creating Use Case Scenarios and Forms](01-Object-Oriented-Analysis-and-Design/04-Creating-Use-Case-Scenarios-and-Forms.md)
 
    * Creating Use Case Scenarios and Forms, Part 1 - 30m
    * Creating Use Case Scenarios and Forms, Part 2 - 34m
    * Lab 4: Creating Use Case Scenarios and Forms - 9m
 
-## 5: Creating Activity Diagrams
+## [5: Creating Activity Diagrams](01-Object-Oriented-Analysis-and-Design/05-Creating-Activity-Diagrams.md)
 
    * Creating Activity Diagrams - 45m
    * Lab 5: Creating Activity Diagrams - 8m
  
-## 6: Determining the Key Abstractions
+## [6: Determining the Key Abstractions](01-Object-Oriented-Analysis-and-Design/06-Determining-the-Key-Abstractions.md)
 
    * Determining the Key Abstractions - 34m
    * Lab 6: Determining the Key Abstractions - 5m
 
-## 7: Constructing the Problem Domain Model
+## [7: Constructing the Problem Domain Model](01-Object-Oriented-Analysis-and-Design/07-Constructing-the-Problem-Domain-Model.md)
 
    * Constructing the Problem Domain Model, Part 1 - 33m
    * Constructing the Problem Domain Model, Part 2 - 29m
    * Lab 7: Constructing the Problem Domain Model - 12m
 
-## 8: Transitioning from Analysis to Design Using Interaction Diagrams
+## [8: Transitioning from Analysis to Design Using Interaction Diagrams](01-Object-Oriented-Analysis-and-Design/08-Transitioning-from-Analysis-to-Design-Using-Interaction-Diagrams.md)
 
    * Transitioning from Analysis to Design Using Interaction Diagrams, Part 1 - 52m
    * Transitioning from Analysis to Design Using Interaction Diagrams, Part 2 - 44m
    * Lab 8: Transitioning from Analysis to Design Using Interaction Diagrams - 11m
 
-## 9: Modeling Object State Using State Machine Diagrams
+## [9: Modeling Object State Using State Machine Diagrams](01-Object-Oriented-Analysis-and-Design/09-Modeling-Object-State-Using-State-Machine-Diagrams.md)
 
    * Modeling Object State Using State Machine Diagrams - 43m
    * Lab 9: Modeling Object State Using State Machine Diagrams - 7m
 
-## 10: Applying Design Patterns to the Design Model
+## [10: Applying Design Patterns to the Design Model](01-Object-Oriented-Analysis-and-Design/10-Applying-Design-Patterns-to-the-Design-Model.md)
 
    * Applying Design Patterns to the Design Model, Part 1 - 30m
    * Applying Design Patterns to the Design Model, Part 2 - 45m
    * Lab 10: Applying Design Patterns to the Design Model - 9m
 
-## 11: Introducing Architectural Concepts and Diagrams
+## [11: Introducing Architectural Concepts and Diagrams](01-Object-Oriented-Analysis-and-Design/11-Introducing-Architectural-Concepts-and-Diagrams.md)
 
    * Introducing Architectural Concepts and Diagrams, Part 1 - 49m
    * Introducing Architectural Concepts and Diagrams, Part 2 - 48m
    * Introducing Architectural Concepts and Diagrams, Part 3 - 23m
    * Lab 11: Introducing Architectural Concepts and Diagrams - 14m
 
-## 12: Introducing the Architectural Tiers
+## [12: Introducing the Architectural Tiers](01-Object-Oriented-Analysis-and-Design/12-Introducing-the-Architectural-Tiers.md)
 
    * Introducing the Architectural Tiers, Part 1 - 48m
    * Introducing the Architectural Tiers, Part 2 - 32m
    * Introducing the Architectural Tiers, Part 3 - 37m
    * Lab 12: Introducing the Architectural Tiers - 6m
 
-## 13: Refining the Class Design Model
+## [13: Refining the Class Design Model](01-Object-Oriented-Analysis-and-Design/13-Refining-the-Class-Design-Model.md)
 
    * Refining the Class Design Model - 57m
    * Lab 13: Refining the Class Design Model - 17m
 
-## 14: Overview of Software Development Processes
+## [14: Overview of Software Development Processes](01-Object-Oriented-Analysis-and-Design/14-Overview-of-Software-Development-Processes.md)
 
    * Overview of Software Development Processes - 55m
    * Lab 14: Overview of Software Development Processes - 14m
 
-## 15: Overview of Frameworks
+## [15: Overview of Frameworks](01-Object-Oriented-Analysis-and-Design/15-Overview-of-Frameworks.md)
 
    * Overview of Frameworks - 23m
    * Lab 15: Overview of Frameworks - 6m
