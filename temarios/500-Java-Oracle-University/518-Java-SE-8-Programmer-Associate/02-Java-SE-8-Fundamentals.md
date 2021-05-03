@@ -94,7 +94,7 @@ FILTERS
    * Practices for Lesson 10 - 8m
    * Skill Check: Using Encapsulation - Score 80% or higher to pass
 
-## 11: Lesson 11: Using Conditionals
+## [11: Lesson 11: Using Conditionals](02-Java-SE-8-Fundamentals/11-Lesson-11.md)
 
    * Lesson 11: Using Conditionals, Part 1 - 10m
    * Lesson 11: Using Conditionals, Part 2 - 10m
@@ -103,7 +103,7 @@ FILTERS
    * Practices for Lesson 11 - 18m
    * Skill Check: Using Conditionals - Score 80% or higher to pass
 
-## 12: Lesson 12: Working with Arrays, Loops, and Dates
+## [12: Lesson 12: Working with Arrays, Loops, and Dates](02-Java-SE-8-Fundamentals/12-Lesson-12.md)
 
    * Lesson 12: Working with Arrays, Loops, and Dates, Part 1 - 11m
    * Lesson 12: Working with Arrays, Loops, and Dates, Part 2 - 3m
@@ -113,7 +113,7 @@ FILTERS
    * Practices for Lesson 12 - 20m
    * Skill Check: Working with Arrays, Loops, and Dates - Score 80% or higher to pass
 
-## 13: Lesson 13: Using Inheritance
+## [13: Lesson 13: Using Inheritance](02-Java-SE-8-Fundamentals/13-Lesson-13.md)
 
    * Lesson 13: Using Inheritance, Part 1 - 21m
    * Lesson 13: Using Inheritance, Part 2 - 8m
@@ -122,7 +122,7 @@ FILTERS
    * Practices for Lesson 13 - 21m
    * Skill Check: Using Inheritance - Score 80% or higher to pass
 
-## 14: Lesson 14: Using Interfaces
+## [14: Lesson 14: Using Interfaces](02-Java-SE-8-Fundamentals/14-Lesson-14.md)
 
    * Lesson 14: Using Interfaces, Part 1 - 26m
    * Lesson 14: Using Interfaces, Part 2 - 9m
@@ -130,7 +130,7 @@ FILTERS
    * Practices for Lesson 14 - 11m
    * Skill Check: Using Interfaces - Score 80% or higher to pass
 
-## 15: Lesson 15: Handling Exceptions
+## [15: Lesson 15: Handling Exceptions](02-Java-SE-8-Fundamentals/15-Lesson-15.md)
 
    * Lesson 15: Handling Exceptions, Part 1 - 20m
    * Lesson 15: Handling Exceptions, Part 2 - 13m
