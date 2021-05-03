@@ -21,29 +21,29 @@ FILTERS
 * Version: Java SE 8
 * Language: English
 
-## 1: Introduction
+## [1: Introduction](03-Java-SE-8-Programmer-I/01-Introduction.md)
 
    * Introduction Part 1 - 2m
    * Introduction Part 2 - 3m
    * Java Basics - 23m
 
-## 2: Working with Java Data Types
+## [2: Working with Java Data Types](03-Java-SE-8-Programmer-I/02-Working-with-Java-Data-Types.md)
 
    * Working with Java Data Types - 28m
 
-## 3: Using Operators and Decision Constructs
+## [3: Using Operators and Decision Constructs](03-Using-Operators-and-Decision-Constructs.md)
 
    * Using Operators and Decision Constructs - 19m
 
-## 4: Creating and Using Arrays
+## [4: Creating and Using Arrays](03-Java-SE-8-Programmer-I/04-Creating-and-Using-Arrays.md)
 
    * Creating and Using Arrays - 11m
 
-## 5: Using Loop Constructs
+## [5: Using Loop Constructs](03-Java-SE-8-Programmer-I/05-Using-Loop-Constructs.md)
 
    * Using Loop Constructs - 13m
 
-## 6: Working with Methods and Encapsulation
+## [6: Working with Methods and Encapsulation](03-Java-SE-8-Programmer-I/06-Working-with-Methods-and-Encapsulation.md)
 
    * Working with Methods and Encapsulation - 15m
 
