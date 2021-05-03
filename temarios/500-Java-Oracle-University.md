@@ -44,6 +44,10 @@ This path is for experienced Java SE 8 programmers who need to update their skil
 
 Programmers who will use Java SE 8 but are new to the Java language
 
+### [Java SE 8 Programmer - Professional](500-Java-Oracle-University/520-Java-SE-8-Programmer-Professional.md)
+
+Programmers who have completed "Java SE 8 Fundamentals"
+
 ### [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
 
 Learn how to monitor, profile and tune your Java applications.
