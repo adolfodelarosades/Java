@@ -47,23 +47,23 @@ FILTERS
 
    * Working with Methods and Encapsulation - 15m
 
-## 7: Working with Inheritance
+## [7: Working with Inheritance](03-Java-SE-8-Programmer-I/07-Working-with-Inheritance.md)
 
    * Working with Inheritance - 36m
 
-## 8: Handling Exceptions
+## [8: Handling Exceptions](03-Java-SE-8-Programmer-I/08-Handling-Exceptions.md)
 
    * Handling Exceptions - 14m
 
-## 9: Why Use Lambda Expressions?
+## [9: Why Use Lambda Expressions?](03-Java-SE-8-Programmer-I/09-Why-Use-Lambda-Expressions.md)
 
    * Why Use Lambda Expressions? - 2m
 
-## 10: Why Is There A New Date and Time API?
+## [10: Why Is There A New Date and Time API?](03-Java-SE-8-Programmer-I/10-Why-Is-There-A-New-Date-and-Time-API.md)
 
    * Why Is There A New Date and Time API? - 4m
 
-## 11: Working with Selected Classes from the Java API
+## [11: Working with Selected Classes from the Java API](03-Java-SE-8-Programmer-I/11-Working-with-Selected-Classes-from-the-Java-API.md)
 
    * Working with Selected Classes from the Java API - 29m
 
