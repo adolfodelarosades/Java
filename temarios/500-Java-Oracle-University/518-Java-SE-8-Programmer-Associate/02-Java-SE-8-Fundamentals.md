@@ -29,7 +29,7 @@ FILTERS
    * Quizzes for Lesson 2 
    * Skill Check: Java Programming and GIT - Score 80% or higher to pass
 
-## 3: Lesson 3: Creating a Java Main Class
+## [3: Lesson 3: Creating a Java Main Class](02-Java-SE-8-Fundamentals/03-Lesson-3.md)
 
    * Lesson 3: Creating a Java Main Class, Part 1 - 7m
    * Lesson 3: Creating a Java Main Class, Part 2 - 9m
@@ -37,14 +37,14 @@ FILTERS
    * Practices for Lesson 3 - 23m
    * Skill Check: Creating a Java Main Class - Score 80% or higher to pass
 
-## 4: Lesson 4: Storing and Managing Local Data
+## [4: Lesson 4: Storing and Managing Local Data](02-Java-SE-8-Fundamentals/04-Lesson-4.md)
 
    * Lesson 4: Storing and Managing Local Data, Part 1 - 15m
    * Lesson 4: Storing and Managing Local Data, Part 2 - 10m
    * Practices for Lesson 4 - 9m
    * Skill Check: Storing and Managing Local Data - Score 80% or higher to pass
 
-## 5: Lesson 5: Managing Multiple Items
+## [5: Lesson 5: Managing Multiple Items](02-Java-SE-8-Fundamentals/05-Lesson-5.md)
 
    * Lesson 5: Managing Multiple Items, Part 1 - 6m
    * Lesson 5: Managing Multiple Items, Part 2 - 9m
@@ -52,7 +52,7 @@ FILTERS
    * Practices for Lesson 5 - 13m
    * Skill Check: Managing Multiple Items - Score 80% or higher to pass
 
-## 6: Lesson 6: Describing Objects and Classes
+## [6: Lesson 6: Describing Objects and Classes](02-Java-SE-8-Fundamentals/06-Lesson-6.md)
 
    * Lesson 6: Describing Objects and Classes, Part 1 - 16m
    * Lesson 6: Describing Objects and Classes, Part 2 - 17m
@@ -60,7 +60,7 @@ FILTERS
    * Practices for Lesson 6 - 11m
    * Skill Check: Describing Objects and Classes - Score 80% or higher to pass
 
-## 7: Lesson 7: Manipulating and Formatting the Data in Your Program
+## [7: Lesson 7: Manipulating and Formatting the Data in Your Program](02-Java-SE-8-Fundamentals/07-Lesson-7.md)
 
    * Lesson 7: Manipulating and Formatting the Data in Your Program, Part 1 - 16m
    * Lesson 7: Manipulating and Formatting the Data in Your Program, Part 2 - 6m
@@ -69,7 +69,7 @@ FILTERS
    * Practices for Lesson 7 - 14m
    * Skill Check: Manipulating and Formatting the Data in Your Program - Score 80% or higher to pass
 
-## 8: Lesson 8: Creating and Using Methods
+## [8: Lesson 8: Creating and Using Methods](02-Java-SE-8-Fundamentals/08-Lesson-8.md)
 
    * Lesson 8: Creating and Using Methods, Part 1 - 26m
    * Lesson 8: Creating and Using Methods, Part 2 - 31m
@@ -77,7 +77,7 @@ FILTERS
    * Practices for Lesson 8 - 19m
    * Skill Check: Creating and Using Methods - Score 80% or higher to pass
 
-## 9: Lesson 9: Project Management
+## [9: Lesson 9: Project Management](02-Java-SE-8-Fundamentals/09-Lesson-9.md)
 
    * Lesson 9: Project Management, Part 1 - 5m
    * Lesson 9: Project Management, Part 2 - 9m
@@ -86,7 +86,7 @@ FILTERS
    * Practices for Lesson 9 - 15m
    * Skill Check: Managing Projects and Packages - Score 80% or higher to pass
    
-## 10: Lesson 10: Using Encapsulation
+## [10: Lesson 10: Using Encapsulation](02-Java-SE-8-Fundamentals/10-Lesson-10.md)
 
    * Lesson 10: Using Encapsulation, Part 1 - 15m
    * Lesson 10: Using Encapsulation, Part 2 - 9m
