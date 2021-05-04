@@ -143,13 +143,13 @@ FILTERS
    * Practice 15-2: Create a Network Client using the java.util.concurrent Package - 25m
    * Skill Check: Utilizing Concurrency - Score 80% or higher to pass
 
-## 16: The Fork-Join Framework
+## [16: The Fork-Join Framework](01-Java-SE-8-Programming/16-The-Fork-Join-Framework.md)
 
    * The Fork-Join Framework - 19m
    * Practice 16-1: Using the Fork-Join Framework - 15m
    * Skill Check: Utilizing The Fork-Join Framework - Score 80% or higher to pass
 
-## 17: Parallel Streams
+## [17: Parallel Streams](01-Java-SE-8-Programming/17-Parallel-Streams.md)
 
    * Parallel Streams - 25m
    * Practice 17-1: Calculate Total Sales without a Pipeline - 4m
@@ -157,13 +157,13 @@ FILTERS
    * Practice 17-3: Calculate Sales Totals Using Parallel Streams and Reduce - 4m
    * Skill Check: Using Parallel Streams - Score 80% or higher to pass
 
-## 18: Building Database Applications with JDBC
+## [18: Building Database Applications with JDBC](01-Java-SE-8-Programming/18-Building-Database-Applications-with-JDBC.md)
 
    * Building Database Applications with JDBC - 26m
    * Practice 18-1: Working with the Derby Database and JDBC - 9m
    * Skill Check: Building Database Applications with JDBC - Score 80% or higher to pass
 
-## 19: Localization
+## [19: Localization](01-Java-SE-8-Programming/19-Localization.md)
 
    * Localization - 17m
    * Practice 19-1: Creating a Localized Date Application - 14m
