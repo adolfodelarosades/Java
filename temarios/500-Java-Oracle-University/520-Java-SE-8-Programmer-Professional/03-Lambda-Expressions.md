@@ -19,7 +19,7 @@ FILTERS
 * **Solutions**: Lambda Expressions
 * **Language**: English
 
-## 1: Lambda Expressions for Cloud Services
+## [1: Lambda Expressions for Cloud Services](03-Lambda-Expressions/01-Lambda-Expressions-for-Cloud-Services.md)
 
    * Lambda Expressions Overview for Cloud Services - 25m
    * Lambda Expressions Case for Cloud Services - 19m
