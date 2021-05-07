@@ -18,7 +18,7 @@ FILTERS
 * **Version**: Java SE 8
 * **Language**: English
 
-## 1: Utilize Java Mission Control
+## [1: Utilize Java Mission Control](04-Java-SE-8-Advanced-Topics/01-Utilize-Java-Mission-Control.md)
 
    * Introduction to Java Mission Control - 24m
    * Mission Control, JMX Console - 19m
