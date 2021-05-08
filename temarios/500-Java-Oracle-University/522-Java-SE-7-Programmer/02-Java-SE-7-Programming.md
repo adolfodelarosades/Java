@@ -22,7 +22,7 @@ FILTERS
 * Solutions: Application Development
 * Language: English
 
-## 1: Introduction
+## [1: Introduction](01-Java-SE-7-Fundamentals/01-Introduction.md)
 
    * Introduction - 17m
    * Practices for Lesson 1 - 5m
