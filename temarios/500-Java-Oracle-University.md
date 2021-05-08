@@ -86,8 +86,7 @@ This entry-level course is aimed at programmers who are new to Java and who need
 
 This is a second-level course for programmers learning the Java language. It rounds-out the topics that were taught in the
 
-## [Java EE 6: Develop Web Services with JAX-WS and JAX-RS
-]()
+## [Java EE 6: Develop Web Services with JAX-WS and JAX-RS]()
 
 This Java EE 6 programming course covers the design and creation of SOAP and RESTful web services and clients. You'll use the
 
