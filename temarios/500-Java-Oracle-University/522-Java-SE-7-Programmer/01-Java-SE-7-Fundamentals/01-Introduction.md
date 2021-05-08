@@ -1,9 +1,8 @@
 # 1: Introduction
 
-1. Introduction - 17m
-2. Practices for Lesson 1 - 5m
+1. Introduction - 2m
 
-## 1. Introduction - 17m
+## 1. Introduction - 2m
 
 Hello, my name is Boulenouar. And I am a senior principal instructor with Oracle University. I will be delivering this Java SE fundamentals. I have been doing Java for a long time from the Java SC to the Java EE to the Java ME to the Java FX and all pretty much the Java technologies. In this particular course, we are going to look at a bunch of interesting concepts that will help you learn Java, of course. This would be the concept of the features of the Java technology, like object oriented, the fact that it's object oriented, and the fact that it is distributed, and the fact that it's platform independent.
 
