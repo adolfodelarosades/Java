@@ -230,7 +230,7 @@ El curso Nuevas funciones de la plataforma Java SE 7 ofrece a los estudiantes in
 
 This new feature course delves into the major changes and enhancement in Oracle Java SE 7 release. This course is meant for the Java
 
-## :es: [Java SE 7 Fundamentals Ed 2 (CS) TOD](500-Java-Oracle-University/551-Java-SE-7-Fundamentals-Ed-2-CS-TOD.md)
+## :es: [Java SE 7 Fundamentals Ed 2 (CS) TOD](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/551-Java-SE-7-Fundamentals-Ed-2-CS-TOD.md)
 
 This course will be archived on 05/21/2021
 
