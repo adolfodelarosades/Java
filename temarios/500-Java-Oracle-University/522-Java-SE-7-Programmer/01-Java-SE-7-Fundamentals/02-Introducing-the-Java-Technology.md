@@ -145,4 +145,215 @@ Everybody is following, folks? Everybody's with me? Good.
 So now, just for completeness, we have a small quiz, and this small quiz says "The Java programming language is said to be platform independent because" of what? We give you A, B, C, and D. Of course, if you take a look carefully, you see that A says "Compiled code runs on multiple platforms with few or no modifications," and of course, that would be the answer. OK? Good.
 
 ## 2. Introducing the Java Technology, Part 2 - 19m
+
+Now looking at the next topic within this lesson, and that's describing the Java technology and development environment. Well, just to let you know, folks, Oracle provides a complete line of Java technology products, ranking from kits that create Java technology programs to emulation testing environments for consumer devices such as cellular phones.
+
+Of course, as you see on this particular slide, you will see that we have the Java language that can be used for the Java Standard Edition that you folks are learning. You also can apply Java in the Micro Edition, and that's for what? For wireless devices and so forth.
+
+And you can use it also for Java Cards. And in addition, it has, in fact, for the Java Card, just to give you an idea-- I need, just forgive me, one minute. Let me just grab a--
+
+So here's an example where in my case, this is my former Sun ID that actually has a here, the Java Card. Actually, this is programmed, where I can, for example, go anywhere and slide it into the Sun Ray, my environment will just come up directly. This is what they mean by that. Lots of companies, by the way, use this. And there are millions and millions of these Java Cards that are created every year.
+
+Continuing with that, we also have the Java EE. And at some point in time you will get into the Java EE technology, which is the Java Enterprise Edition technology. This is for building enterprise applications. And as you see, you also can make use of it, of course, with the help of the Java SE. And that's for servers.
+
+You also can use a JavaFX API, which is a rich type of client, creates a rich type of clients, or used on a rich client for creating user interfaces for your Java programs. You also have the Java TV also, which is all technology related to the TV type of technology. And of course, the BD-J. And also the MSA, for mobile technology.
+
+So as you see, there are lots and lots of products that, of course, ship with Java, from servers to desktops to embedded chips-- as you know, we also can use Java to program embedded chips-- to the TV technology to mobile technology to Card technology and so forth. Everybody's following, folks?
+
+Of course, the one that we are focusing in this particular course is the Java SE, Standard Edition. This is used to develop applets and run within a web browser or application that runs on the desktop. In this particular course here, folks, we are going to use the Java SE to be an application that runs on your desktop computers.
+
+We also said that the Java EE technology is used to create a large enterprise server side and client side distributed applications. At some point in time, once you learn about the Java SE technology and you become fluent in Java, then at that time we get to the next level, which is the Java EE. As you know, the Java EE is really the one that makes money. And I bet you that many of you do actually have enterprise applications that you work on in your respective departments or companies.
+
+The Java ME is used to create applications for resource-constrained consumer devices. These are typically used for smartphones and Blu-ray-type disks and so forth. The Java Card is also typically used for to specify identity, like the one I showed you. This is one of them. Security transactions, mobile phones, SIMs and so forth.
+
+Now the question is, how are we going to set up the Java environment, development environment, on our desktop? It is actually quite easy to set up the Java development environment. All what you need to do, ladies and gentleman, is download and install the Java Development Kit, the JDK, from the oracle.com/java website. Set up your PATH to the installed JDK. And compile and run your Java applications using the command line.
+
+Again, to download the SDK, go to the oracle.com/java. Select the Java platform Standard Edition link that you want to download. Again, download the version of your platform, could be Windows version or Linux version or Solaris 11 version and so forth. Follow the installation instructions.
+
+Set up your Java PATH. Compile and run your sample of Java applications. We will get to actually use this. We say that, there's a note, the practice activities for this lesson show you how to complete steps 5 and 6.
+
+Examining the installed Java Development Kit. Well, when you download and install the Java SE Development Kit, typically you have all of these items installed, the Java runtime environment, the JVM for the platform you choose, the Java class libraries for platform you choose, the Java technology compiler, of course, a bunch of additional utilities, like utilities for creating a jar file-- How many of you have actually used jar files before? They are like ZIP files-- and for debugging the Java technology program. You get to actually play with this.
+
+And of course, examples of the Java programs. By the way, when you open a terminal, you can actually write java-version, and you can find out about the version of your Java SDK that you installed.
+
+Now we'll start by running applications from a terminal, folks. It's just because we want you to use an editor so that you can write everything from scratch. But at some point in time, you will migrate to using IDEs. IDEs are quite important and useful for developers, because they do help you build applications quite easily and, of course, fast.
+
+The one that you folks are going to work with is this integrated development environment called the Oracle NetBeans. It is a tool that can assist you with your application development. There are several available ones. The one that we use here is the NetBeans IDE.
+
+We also have JDeveloper. How many of you have used JDeveloper from Oracle? Or Eclipse from IBM and so forth. The features include full integration, easy development, smart editor, easy project development, and built-in source code control, CSVs.
+
+So in terms of where to download the Oracle NetBeans IDE, it is available, by the way folks, free from netbeans.org. Sets the application Java properties automatically. And of course, there are several available bundles. You can go ahead and pick and choose whatever you want.
+
+In general, people have the tendency to download the one to the right because it has everything from, in this case, the NetBeans SDK platform, SDK, Java SE, Java EE, ME, Java Card, C/C++, Groovy, PHP, and of course the servers, which are the Oracle GlassFish application server 3.1, which is the latest one, and/or the Apache Tomcat 7.0.11.
+
+In terms of how to work with NetBeans, you will get a chance to actually play with this. So in general, you go ahead and create your project. Once you've created, after you tell the NetBeans to create the new project and give it a name, then of course at that time NetBeans will create a source tree with an optional skeleton class inside.
+
+It creates a folder for unit tests. It sets the classpath for compiling, running, and testing; sets the Java platform on which the project runs; and creates an Ant build script, build.xml, which contains instructions that the IDE uses when you perform commands on your projects, such as compile or run.
+
+And by the way, just out of curiosity, just to show you this, I'm going to go ahead and start my NetBeans here. So while it's being started, let me just go ahead and continue with the lecture.
+
+And here we have a quiz. This quiz says, the Java technology product group that is designed for developing applications for consumer devices is what? The Java ME. And that's D.
+
+So looking at NetBeans, it looks like it's up and running. So when it starts, I just close this guy here, the start page. And now as you see, I have the Projects tab. That's where I'm going to create my projects. The Files is when you create, if you want to see the file version of your project.
+
+And Services has a bunch of services. You can actually set up the database. You also can go ahead and make use of the application server. And you can go ahead and start this application and so forth. We'll get to see that later on.
+
+But what I'm trying to show you here is I can go ahead and create a new project. And because I'm using Java, I'll go ahead and create Java application, click Next, and then I'm going to call it MyJavaApplication, in this case. And then I'll go ahead and, of course, specify the project location. It says NetBeans, or I can choose wherever I want to put my project. That's the folder.
+
+And what else? I create this. It has a main method. We're going to need the main method. We'll see that later on. And set it as the main project.
+
+If I click here, what's going to happen is NetBeans will go ahead and create the whole-- goes through the whole different steps that we showed you here-- oops-- that we showed you here. All these steps that you see here. All of these are created for us automatically by NetBeans.
+
+And the proof, you see them here. Here is, in this case, the template that it created for you for your class called MyJavaApplication. And that's why at the beginning we didn't want to use the NetBeans IDE. We wanted to use the command line to run your Java class so that you folks can actually use an editor and, of course, create your class from scratch.
+
+And of course, as you see here, we've got everything. Here is the library. If you go to the Programs tab and you open it, you have the NetBeans project. You see the build.xml, the end script that is created for you and so forth. Everybody's following, folks? So we'll get to actually play with this later on.
+
+Now looking at describing the product life cycle. That will be the last topic of this lesson. Well, folks, the product life cycle, or sometimes called PLC stages, are analysis, design, development, testing, implementation, maintenance, and of course, and end-of-life cycle.
+
+So looking at these steps, in general, the product life cycle usually is an interactive process used to develop your new products by solving problems. The first thing you start with is the analysis. And that would be step number one. So what do we do in analysis?
+
+That's where you investigate the problem. And you want to solve this with your product. And of course, among all the tasks in the analysis is clearly defining your problem domain that you want to solve, look at the market niche. Is it worth it to build this product? And is it going to make money for me?
+
+And then identify the key subcomponents of the overall big system. You should know that a good analysis of the problem leads to a good design of your solution and to decreased, in this case, development and testing time.
+
+After that, we get into the design. That's the process of applying your findings to be able to go through the design level and pretty much allow you to design your product. Then after that, the development. That's where you create your blueprint by coding your design, by, in this case, creating your actual component.
+
+After that, you have the testing. That's step 4. That's where you use the individual components, in this case, and ensure that all of them work in the product as a whole and meet all the requirements of your specifications that you described in the design stage. We should note that testing is usually performed by a team of folks other than the team who developed the product, of course. And that's for obvious reasons.
+
+Then after that you have the implementation. That's step number 5. And that would be that we making the product available to the consumer. That's the release of the product. After that, on step number 6, which is maintenance, that's fixing the problems of the product, and re-releasing the product with a newer version and so forth.
+
+And of course, the last step, which is number 7, it is the end-of-life cycle. It's called EOL. Although the PLC, which is pretty much the Product Life Cycle, does not have a separate stage for the start of a concept or project, it does have a stage for the end of the project.
+
+The EOL, of the end-of-life, consists of carrying out all the necessary tasks to ensure that the consumers and employees are aware that the product is no longer be sold and supported, and that a new product now is available. That's pretty much the end. The end-of-life is when, for example, you retire one of the products and you get the new version. And of course, you release the new version. Everybody's following, folks?
+
+So in summary, we looked at the key features of Java. We looked at the concept of the object oriented programming for Java. We looked at the difference between compiled and interpreted languages. The interpreted language is like Java. Compiled is like the C language, or C++.
+
+We looked at how to download and install the Java platform Standard Edition. We looked at how to run a Java application by using the command line. And of course, we looked at using the javac in Java. And we'll take a look at that again in the next lesson. And we looked at identifying the different Java technologies.
+
+We also in the end looked at the Java and related it to other languages. We looked at the concept of IDEs and how they support the Java language. And we looked at how we download and install an IDE like the Oracle NetBeans. And we looked, of course, at describing every phase of the product life cycle.
+
+Of course, we have some practice labs here for this lesson too. And the first one will be running a Java program using the command line. The second one, running a Java program using NetBeans IDE. And if we want to look at the details of these, we can go ahead and get into-- Lesson 1 there is no practice, just the introduction of the course.
+
+And now what we want to do, ladies and gentlemen, is we're going to get into these practices for Lesson 2. First, we make sure that the environment is already installed in terms of JDK and NetBeans, but that's already done in our lab environments. And of course, in Practice 1 of Lesson 2, we're going to run a Java program using the command line. You see we give you a snapshot on how to run these, in this case, using this run and then you write cmd here.
+
+And then, of course, after that, you get the command and you can go ahead and do cd.. And of course, go all the way, in this case, to the-- or we can do directly by doing a cd and then D: backslash labs and then backslash what is that? les 02, I think. And that's it. Now of course, we can do a dir and we see everything over there.
+
+All right. So you guys are going to do this Practice 1 for Lesson 2. And then you're going to get into Practice 2, which is running the program using the NetBeans IDE. So we show you step-by-step what you folks need to do to be able to create the program and run it.
+
 ## 3. Practices for Lesson 2 - 28m
+
+Now what we want to do is take a look at practices for lesson 2. So the practices for this course assume that we already have installed the following software that you see on this slide-- the JDK 1.7, the Java API Specification, installed, of course, locally, the Java SE 7 Specification, installed locally, and of course the NetBeans Enterprise Edition, 7.0.1, which, by the way, includes the GlassFish server, Oracle GlassFish server. And of course the Tomcat server-- it's not used in this case. We use the GlassFish server only for this particular course.
+
+Now let's look at practice 2.1. In this case, on this particular practice, what we're going to do is run a Java program using the command line. So of course, in this case, what they're asking us to do is first of all, open a terminal window, a DOS terminal window, and typically we do it through-- let me do it again-- by clicking on run, writing CMD, and now it's over.
+
+So the first thing they want to tell us, in this case, from the Windows startup, we select Select Run, and then enter CMD. And in this case, you will have your a DOS terminal open. And they want us to navigate to folder D column backslash labs backslash lesson 02, or Les02. That stands for lesson 02.
+
+Let's do that. So CD space D column backslash, and then labs, and then backslash, then lesson 02.
+
+And then after that, they said, OK, let's go ahead now and check the contents of this particular directory. And the way we do it on a Windows system is DIR, and of course, I hate that. So that allows us to see that there is only one file here-- it's a Java class, of course, called calcaverage.java.
+
+So continuing with that, and just so that we can see, step by step, what R, the next commands they're asking us, of course, in this case, to run. So first of all, they're telling us, confirm that the system path points to the correct folder location for the Java executable. Again, type path at the prompt.
+
+Let's go ahead and do that. For that, we're going to open again the DOS terminal, and then write path and capital, and then hit Return. And that shows us that it's pointing also to the Java, as you see here, D column backslash program flies Java, and then JDK 1.7.0 backslash bin. And of course, and in the bin directory. That's where we see, as they said here, all the Java executables.
+
+And if it's not there, then of course append this territory to the system path. Variable by entering, again, the following command. You can go ahead and write path space dash, and then percentage sign path, percentage sign semicolon, then D colon backslash program files backlash Java backslash JDK 1.7.0, and then backslash bin. But as you see, we already have that.
+
+Now what they want us to do next is, let just move down a little bit so we can see, again, step by step, what they're trying to ask us to do. Now we are, of course, at [UNINTELLIGIBLE] question part D, 2D, where they're asking us to compile the Java class called calcaverage.java.
+
+Let's go ahead and do that. By the way, in this case, they're asking us to compile this using a command line. So let's go ahead and do that. And pretty much what we want to do is use the Java C, which is Java compiler, and the name of the file.
+
+So let's go ahead and do that. We'll write Java C space, Java C space, and then the name of the file. Calc average dot Java.
+
+Let's go ahead and compile that. And as you see, took some time. And in just a few seconds, a second or two-- and now it came back with the prompt, back to us.
+
+And now what we want to do is check if this file got compiled. And the way we are going to find out if it's compiled is we look, of course that we see an extra file, in this case, and this file will have the dot class extension. That's in addition to the existing file that we already have over there. That's showing us the calcaverage.java.
+
+Let's go ahead and do a DIR to find out about that. And if we hit Return, as you see, we now have two files. So now we can see that there is the calcaverage.class and the calcaverage.java, which means our calcaverage.java class has been compiled by the compiler.
+
+Continuing with that-- now what they're asking us to do is to pretty much run the Calc Average program by invoking the Java runtime executable. Again, we do not need to use the dot class extension for the class. Type java space then Calc Average, and press Enter, and that will go ahead, and gives us-- the program will prompt us to enter three integers. Let's go ahead and do that.
+
+Let me go back to the DOS terminal, and now I'm going to go ahead and use Java, executor of space, and then Calc-- except that they do not want us to use the extension. Just the name of the file.
+
+So let's go ahead and hit return. And that will prompt us exactly with the message that is part of the code, and we'll get to see that in the next practice, where we see that through the NetBeans ID.
+
+So it says here, enter three integers separated only by spaces-- for example, 20, 30, and 50. Let's go ahead and use an example where, for example, I can enter 10, space, I can enter 40, space, and then I can enter, for example, another number. Could be, for example, let's assume in our case it would be 30. Or 40. Or another 40, for example, just out of curiosity.
+
+And we hit return, and that, of course, gives us the average, we use 30. So it added a 10 to 40, and then to 40, which is 90 divided by 3. Of course averaging that would be 30.
+
+And then you see here, as an example, they asked us to enter 246 and 88. We can always do that again, just out of curiosity. So we can always run the file on the class, and then enter exactly what they want us-- as you see here in the command, let's go ahead and enter, for example, 2, space 46, space 88, and then hit return, and that gives us the average-- it turns out that in this average, 88 is 45. So it's 2 plus 46 plus 88, and of course, in this case, the average is 45. So that pretty much sums up the first practice off lesson 2.
+
+Let's go ahead now and get into a practice 2 of lesson 2, where in this case, they want us to run a Java program using NetBeans ID. So in this case, we are using the Oracle NetBeans ID 7.0.1, which by the way is already installed here in the lab environment. What we need to do is double-click on it and start it up, and in this case, it's already up, and following the steps as you see here, we'll go ahead and make use of the--
+
+So first of all, they want us to create a project that includes the calc.java file in its source folder. Again, the way we do it is first of all, we'll go ahead and create a new project-- so let's go ahead and do that-- and then after that, they want us to create a new project wizard to choose, again, in this case, the project step, the categories Java, and the project would be the Java project with existing source. We want to use the existing source, and then next, and then after that, we'll go ahead and, in the new Project Wizard, name and location-- this would be practice 02-- and of course deselect the set [UNINTELLIGIBLE] project, checkbox. That's what we are going to do.
+
+And by the way, I'll go ahead and do that. And then after that in the next step, they will say, OK, in the new Project Wizard, existing sources step, and that would be a Browse to Select the D colon backslash labs backslash lesson 0, and then click Finish, and then the prop window, in this case delete the existing classes would be in the folder, and the new project appears in the project Windows of the NetBeans.
+
+And then after that they want us to select the New Project from the main NetBeans menu. Again, the new Project Wizard opens in the Choose Project [UNINTELLIGIBLE] step of the Wizard, select the Java from the Categories column, select a project with existing resource from the project, and click Next.
+
+And they show us also snapshots of what we see from the Wizard. And as you see, the name and the location, and pretty much showing us a step-by-step, what is it that we are doing? So after we go ahead and name the project Practice 02, and then deselect the set as Main Project, and then after that, in the existing resources, navigate-- in this case, browse and Add by clicking Add Folder, navigate to D column backslash labs backslash 02, and add that folder. And once you add that folder, click Finish, and now, in the new Java project with existing resources, go ahead and click on the Delete button. And then after that, in this case, the content of the project are now displayed on NetBeans. Click the project tab again to see that particular project.
+
+In this case, they want us to modify the properties of this project by going to the properties and setting up the source binary to JDK 7 and looking at the project window library category would be also Java 7, and click OK. And then select the project properties from the main menu, and alternatively right-click the project and select properties, and then select the sources in the category and set the source boundary to be JDK 7.
+
+And we see it here in the Wizard And we should say that NetBeans allows you to specify the lowest Java platform version with which the generated code should be compatible. For example, if you have not changed this setting to JDK 7, you would have seen error messages when using any of the core language changes included in JDK 7. NetBeans would warn you that the court would be incompatible with the earlier question.
+
+And again in this case, we'll go ahead and confirm that the Java platform setting for the practice 2 is 7, and select the libraries to set up that, to look at that. So we'll see all of this when I go through it. Again, they show you either here Wizards on how to do that. You can also go to the tools Java platform on the main menu. Again, this window shows all versions all of the JDK that have been properly installed on the machine. And you will see a window that looks like this.
+
+Again after that, you'll go and review the file, and after that, run it. And I will go ahead and see how we are going to run that. But when we compile it, as you see here, we'll see a .class, calcaverage.class, that is created, and in this case, the build. And that's by clicking on the Files tab, we'll see that. And after that, they want us to run the file, and we go ahead and do that.
+
+Let me go ahead now and go through the steps to do that. So they want us to create a new project, and then, as you see, Java, and then Existing Sources, and then next you'll go ahead and place your project-- name it, first of all, practice 02-- and it says, you cannot place a project in the folder that already contains a build folder. So in that case, we need to change that.
+
+But the reason why it's telling me this is because I already created that. So let me create something like this, just so that I can show you the steps, and then I'll open the one that I created.
+
+Next you are going to add where you navigate to the drive where the labs are-- in this case, it's the D drive-- and then from there, click on Labs, and from there, I highlight Lesson, and then I click Open, and I see the package already used in the project. It's already used in the project, and that's pretty much because I already have it. And then after that, you go ahead and click Finish.
+
+So it turns out that I already have it. So let me go ahead and open that project. Here it is. And of course, as you see here, in this case, you turn out that it's already compiled.
+
+So this is the code that we wrote, and I go through this code in a minute. But let me just go ahead and right-click on the project, and then go to Properties, and just show you what is it that they want us to, again, see in terms of making sure that NetBeans is using JDK7?
+
+So in that case, as you see, when I click on Library, I see that the Java platform is JDK 1.7. That's good. And even in the sources, again, I see that it's here. It's JDK one 7, and not 6, and not 5, and so forth. And that allows me to make sure that, in this case, I checked, and I know that NetBeans is using JDK 7.
+
+One more thing they want us to also check is when we go under the Tools menu and then we select the Java platforms. [UNINTELLIGIBLE] now that as you see here, we have all the-- we see it says that the user use the Java Dock tab to register the API documentation for your JDK in the IDE, [UNINTELLIGIBLE] add platform to [UNINTELLIGIBLE] Java SE, Java ME, and Java FX platform versions. [UNINTELLIGIBLE] here, we have the JDK 1.7 there. So we'll close that.
+
+And now let's go ahead and do a tool just with NetBeans to get familiar with NetBeans. It turned out that here, we have three different tabs. The first one represents the project. So you see, Java-- every type of a project will have its own icon. It turned out that here, a Java application has the icon of the typical icon that we see for Java, which is that mug, that coffee mug that we always see.
+
+And of course, the name of the project, and of course underneath, you would see your source, and then underneath here, you will see the libraries. It turned out that here, the libraries that we're adding is just the libraries of JDK 1.7. And other projects, for example, if there are Java EE projects, you might see other libraries that are required for either web application, or an EJB application. You will see that, of course, when you get into the Java EE courses, the Java Enterprise Edition courses.
+
+You also can see the files all of this project on the Files tab. In the Files tab here, pretty much, we have the source package. That's the origin of 1. And that's your practice O2 project that you have. It's a folder, as you see. And there is a build folder. Underneath, you will see the classes folder, and then underneath, you will see your class. That's the one that exists over there, because we compile the calcaverage.class. Again, the way we compile it is usually go to your project, and then you can actually click on Build, or Clean and Build, or you can even right-click on this and then, of course, compile it [UNINTELLIGIBLE].
+
+But as you see here, ladies and gentlemen, the Compile file is grayed out. Why? Because it's already compiled by NetBeans. In general, NetBeans is smart enough to actually, once you finish the program and you save it, it also does compile it for you automatically. By the way, you can compile by clicking on the F-9 key, too. That also allows you to compile your file.
+
+Going back again to the Files tab, you will see that underneath got your libraries, and this would be only the JDK 1.7. Again, you see all the Jar files that are part-- the API is part of the JDK 1.7. And that pretty much shows us, in general, what we have under this project.
+
+So again, under the file, so under the file tab, you would see that we now see under the build, there is the classes, and under the [UNINTELLIGIBLE] folder, and underneath, you have the calcaverage.class.
+
+In addition, by the way, there is another folder called NB Project that [UNINTELLIGIBLE] project, and underneath, you will see that all of these are files created by NetBeans. You have the config properties, you have, again, in this case, this is a file. You can go ahead and open it, if you want. There is nothing right now, but you can edit it and put whatever you want over there. You will see that maybe in a future implementation your applications. It has the build implementation dot xms. You can open that and see-- that's the build, again, and you would see that one of-- it's kind of similar to the [? end ?] script.
+
+Also, by the way, NetBeans also created the build.xml that you see here, which is quite similar to [? end ?] script. And this is just for this particular product. So this is under file tab. You pretty much can investigate and see all the different files that NetBeans creates for you when you create your projects.
+
+And of course, under the service tab, we also have a bunch of services provided to us by NetBeans. For example, in this particular NetBeans version that we downloaded and installed on this machine, it turned out that it has a database. This database is called the Java DB, which, by the way, it is the Derby database. This is a very, very interesting and nice type of database that actually allows you to create a database in it, from it, and occupy those databases, and use those databases to test your program or your application.
+
+You can also have drivers. In this case, we have all these drivers. The one that we are using is the one that is useful for Derby database, the Java DB embedded in the Java DB network. And you also have JDBC, ODBC bridge, you have MySQL, you have Oracle OCI, and so forth.
+
+But here, for this particular course, we don't deal with the database. But you will get a chance to take courses that actually will involve accessing the database JDBC or JPA, and at that time, you will get to work with this database.
+
+The other thing that I want to show you here, ladies and gentlemen-- here's a connection. Again, this connection is how you populate the database. You typically connect it first, and then as you see first what it does-- in general, by the way, we start the database first. It's already started. Here, when I try to connect, it automatically started the database.
+
+Once it's done, then I can go ahead now and execute command. And when I execute command, that's when I'm going to open the file and execute it so to populate the database. In this case, I don't need it so I'm not going to keep it open.
+
+And the other thing, also, is under here, it's all related to web services. Again, one of these days, when you learn about web services, you will get to use this service. The other one is the servers. It turned out that here, we have a GlassFish application server. You can actually right-click and start it from here, and you can view the admin console and so forth.
+
+Here we have the [UNINTELLIGIBLE] builder, and we have the issue trackers. But of course, in this case, we're more interested by the GlassFish application server and the Java DB, which, by the way, you will get to use in future courses.
+
+And now let me go back to my Project tab, and then try to investigate that file which is the class that we created. Again, this class is called Calc Average, and it has a main method, and inside, we create a new instance of the scanner. Scanner is one of the classes provided by the API, and in this case, we pass to its system.in. We're passing the input stream from the keyboard, and then after that we have a print [UNINTELLIGIBLE] that just prints an empty line, and then after that, it has a system, dot [UNINTELLIGIBLE] dot print LM-- this is the one that, pretty much, in this case, prints that message for you. If you remember, when we run the file, the Calc Average from the command line, we actually got this prompt. Enter three integers, separated only by spaces. Example, 20 space 30 space space 40.
+
+And of course here, what we're doing is when we enter them, it turns out that this class scanner has a bunch of methods. And we'll get, by the way, to see the API later on, in lesson 5. We'll get a chance to actually investigate a little bit the Java API, and look at the existing classes that are part of the API, that would be useful to you when you develop applications, or when you develop Java applications.
+
+So here we have the next integer, what it does. And we invoke it on the reference variable SC of type Scanner. What it does, is it actually grabs the first value that we entered, which is 20, if we enter 20, and save it into this variable of type integer called I1. We do the same thing for the second one, and we do the same thing for the third one.
+
+And then after that-- you recognize this from your calculus, where we declare a variable called average. And we save in it the sum of I1 plus I2 plus I3 divided by 3. That's the average. After that, we'll go ahead and print a new line, and then we'll invoke the print [UNINTELLIGIBLE] again from the system.out, bypassing a string here called average space equal space, and then, in this case, we wanted the average to be printed. So it would be 20 plus 30 plus 40, and the average would be 30.
+
+So in terms of how to run this file, what we do is we right-click this file then click Run. And then when we click Run here, we're provided with the prompt, which is enter three integers separated only by spaces. Let's go ahead and do that. So let's assume I enter 10, and then 40, and then 40, for example. And if I hit return, what's going to happen, is it's going to pretty much print for me. It's going to go through this, first of all, print a new line that you see here, an empty line, and then after that, prints exactly what I wanted it to print here.
+
+And that pretty much summarizes what we wanted to do from for this particular practice. OK? So that's exactly what we've seen, similar to the output that we have seen in NetBeans, which is this one. They just took a snapshot-- let me go ahead and run it again, and then put in 10 space 40 space 40, for example, and then hit return. And you see that this is the snapshot they're showing you here on the book.
+
+And that pretty much ends the practices for lesson 2. Thank you.
