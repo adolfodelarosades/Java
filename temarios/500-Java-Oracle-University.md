@@ -81,7 +81,6 @@ Java SE Programming I Ed 2
 
 This entry-level course is aimed at programmers who are new to Java and who need to learn its concepts, language
 
-
 ## [Java SE: Programming II]()
 
 This is a second-level course for programmers learning the Java language. It rounds-out the topics that were taught in the
@@ -113,13 +112,13 @@ In this course, you will learn how to Monitor, profile and tune your Java applic
 
 This Develop Mobile Front Ends Using Mobile Application Framework training teaches you how to use Oracle Mobile Application Framework (MAF) to develop application
 
-## [資格試験準備セミナー: OCJP Silver SE 8]()
+## 👎 [資格試験準備セミナー: OCJP Silver SE 8]()
 
 この資格試験準備セミナーは、OCJP Silver SE 8   認定資格試験の受験準備に役立ちます。
 試験の頻出トピックを模擬試験とインストラ
 
 
-## [資格試験準備セミナー: OCJP Gold SE 8]()
+## 👎 [資格試験準備セミナー: OCJP Gold SE 8]()
 
 この資格試験準備セミナーは、OCJP Gold SE 8  認定資格試験の受験準備に役立ちます。
 試験の頻出トピックを模擬試験とインストラ
@@ -148,7 +147,7 @@ In this series of lectures, Joe Boulenouar takes a further look at Lambda expres
 
 This JavaScript and HTML5 course features the JavaScript language, from language fundamentals to dynamic interactions with
 
-## [Java オブジェクト指向プログラミング]()
+## 👎 [Java オブジェクト指向プログラミング]()
 
 このコースでは、Java によるオブジェクト指向プログラミングにフォーカスして説明します。クラスとインスタンス、カプセル化、継承、ポリモフィズムなど、オブジェクト指向
 
@@ -166,7 +165,7 @@ This course introduces the Java module system and other new features originally 
 This course will be archived on 05/21/2021
 The Java SE 7 Fundamentals course is designed to enable students with little or no programming experience to begin using the
 
-## [Java SE Exploiting Modularity and Other New Features Ed 1 (JP)]()
+## 👎 [Java SE Exploiting Modularity and Other New Features Ed 1 (JP)]()
 
 このコースでは Java SE 9 から導入されたJava モジュール・システムと JShel, Stream API の変更点、新たに追加された便利なメソ
 
@@ -179,7 +178,7 @@ This Java SE 8 Programming training covers the core language features and Applic
 Course in the Java SE 8 Programmer Learning Path
 This covers the core language features and Application Programming Interfaces (API) you will use to design object-oriented applications
 
-## [Java SE 8 New Features Ed 1 (JP) TOD]()
+## 👎 [Java SE 8 New Features Ed 1 (JP) TOD]()
 
 Course from Java SE 8 Programmer - Professional (JP) Learning Path
 このコースでは、Java SE 8 の新機能について学習します。わかりやすい講義と実践的な演習を通して Java SE 8 の変更点を理解するこ
@@ -203,7 +202,7 @@ Course from Java SE 8 Programmer Learning Path
 
 This series provides additional Java SE 8 topics, notably Utilize Java Mission Control, which shows you a set of tools for performance monitoring / profiling
 
-## [Java SE 7 パフォーマンス・チューニング]()
+## 👎 [Java SE 7 パフォーマンス・チューニング]()
 
 Java SE 7u40対応。Java パフォーマンス・チューニングのエッセンスを身につけよう。 このコースでは、Javaプログラミング言語に適用可能なパフォーマンス・チューニングの手
 
@@ -305,7 +304,7 @@ Course from Java SE 8 Programmer - Professional (JP) Learning Path
 
 undefined
 
-## [Developing Applications for the Java EE 7 Platform Ed 1 (JP) | Java EE 7: アプリケーション開発]()
+## 👎 [Developing Applications for the Java EE 7 Platform Ed 1 (JP) | Java EE 7: アプリケーション開発]()
 
 このコースでは、Java EE 7 に準拠したエンタープライズ・アプリケーションの作成およびデプロイについて学習します。Servlet/JSPs, JSF, CDI, JPA, JTA, EJB, JAX-RS, WebSockets,
 
