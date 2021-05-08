@@ -125,7 +125,6 @@ This Develop Mobile Front Ends Using Mobile Application Framework training teach
 
 ## 👍 [Prepare for Java SE Certification]()
 
-
 Prepare for the Java SE certification by attempting and analyzing questions written in the style of what you'll likely encounter on the
 
 ## 👍 [Prepare for Java SE 11 Upgrade Certification]()
@@ -231,7 +230,7 @@ El curso Nuevas funciones de la plataforma Java SE 7 ofrece a los estudiantes in
 
 This new feature course delves into the major changes and enhancement in Oracle Java SE 7 release. This course is meant for the Java
 
-## :es: [Java SE 7 Fundamentals Ed 2 (CS) TOD]()
+## :es: [Java SE 7 Fundamentals Ed 2 (CS) TOD](500-Java-Oracle-University/551-Java-SE-7-Fundamentals-Ed-2-CS-TOD.md)
 
 This course will be archived on 05/21/2021
 
