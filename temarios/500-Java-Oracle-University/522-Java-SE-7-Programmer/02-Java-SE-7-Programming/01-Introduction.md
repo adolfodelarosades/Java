@@ -74,3 +74,21 @@ So this pretty much gives us a summary on the course objectives. The software us
 We looked at the Java platforms, which are the Java ME for Micro Edition. The Java SE was for Standard Edition. And the Java EE for Enterprise Edition. Of course, we looked at the Java SE version numbers. And of course, throughout the history and when were they created. And of course, we looked at how we obtain a JDK. We also looked at the open nature of the Java and its community. And we looked at the commercial support options for Java SE offered by Oracle.
 
 ## 2. Practices for Lesson 1 - 5m
+
+After looking at Lesson 1, where we discuss the objectives of the course, plus, in addition we looked at the lab environment or practices environment, we said that we need a JDK 7 installed, which is the Java SE development kit. That includes command line, JavaCompiler, javac, and the Java Runtime Environment, which supplies the Java command needed to execute Java applications.
+
+In addition, we said we need the NetBeans 7.x installed. And by the way, the Netbeans 7.0 fully supports the Java SE 7 platform. That support is provided by Oracle's development tools support offering. We also have the Java DB, which is also installed and plugged into the NetBeans. Java DB is an Oracle supported distribution of the open source Apache Derby 100% Java technology database, and is fully transactional, secure, easy-to-use, standard-based, ASCII [INAUDIBLE], JDBC API, and Java EE [INAUDIBLE] small, only 2.5 megabytes.
+
+So in practice 1, they want us to just verify the software installation. And for that, we need to install, we need to, rather, open a terminal window using the Run and CMD. In addition, first we need to try, they're asking us in this practice, the Java-version command. And we go ahead and do that.
+
+And we see that it's the 1.7 that is installed. So in addition, they want us to also try the Java.exe and, of course, the javac, which also, by the way, is another command, too. So let's go ahead now and get into the Java directory, then after that get into the JDK 1.7 and then after that get into the bin directory, the binary directory.
+
+And then after that, if we try the Java.exe, we are going to get, in this case, an output that says you need the class file first. So that's what you need, the class file that you need to add to the Java command executable. In addition, they give you a bunch of options that you can add if you want.
+
+And the same thing happens, by the way, if we use the javac, which is the compiler command. So as you see for the compile and command, it also asks for the source file to be added to the javac in this case. And that's pretty much what we want, that's what they want us to do for practice 1-1.
+
+In practice 1-2, they just talk about the software installation where, in this case, we'll give you, first of all, the link where to download the Oracle JDK 7 and install it, and the link to download the Netbeans IDE to install it, too.
+
+And of course, the last practice is related to the configuring NetBeans 7 to use the JDK 7. So in that case, when we open the IDE, they want us to select tools, and then the Java platforms from the main menu. And then after that, you will go ahead and add the JDK [? eternal ?] that, in this case, is already done. So if you go under Tools, and then Java Platforms, you will see that the Java Platform Manager shows that this NetBeans is using the JDK 1.7.
+
+And that pretty much ends the, in our case here, practices for lesson 1.
