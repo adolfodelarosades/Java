@@ -12,9 +12,9 @@ BENEFITS TO YOU
 
 STUDENT GUIDES
 
-* Conceptos fundamentales de Java SE 7 Volumen I - Guía del Alumno
-* Conceptos fundamentales de Java SE 7 Volumen II - Guía del Alumno
-* Conceptos fundamentales de Java SE 7 Guía de actividades
+* :closed_book: Conceptos fundamentales de Java SE 7 Volumen I - Guía del Alumno
+* :closed_book: Conceptos fundamentales de Java SE 7 Volumen II - Guía del Alumno
+* :closed_book: Conceptos fundamentales de Java SE 7 Guía de actividades
 
 ## 1: Introducción
 
