@@ -48,6 +48,10 @@ Programmers who will use Java SE 8 but are new to the Java language
 
 Programmers who have completed "Java SE 8 Fundamentals"
 
+### [Java SE 7 Programmer](500-Java-Oracle-University/522-Java-SE-7-Programmer.md)
+
+The legacy courses included in this path teach you about the Java language for SE 7.
+
 ### [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
 
 Learn how to monitor, profile and tune your Java applications.
