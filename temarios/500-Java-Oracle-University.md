@@ -68,3 +68,159 @@ This JavaScript and HTML5 learning path features the JavaScript language, from l
 ## [Analysis, Design and Architecture](500-Java-Oracle-University/530-Analysis-Design-and-Architecture.md)
 
 This path teaches object-oriented analysis and design.
+
+<hr>
+
+## [Java SE: Programming II Ed 1]()
+
+## [Java SE Programming I Ed 2 (CN)]()
+
+Java SE Programming I Ed 2
+
+## [Java SE: Programming I]()
+
+This entry-level course is aimed at programmers who are new to Java and who need to learn its concepts, language
+
+
+## [Java SE: Programming II]()
+
+This is a second-level course for programmers learning the Java language. It rounds-out the topics that were taught in the
+
+## [Java EE 6: Develop Web Services with JAX-WS and JAX-RS
+]()
+
+This Java EE 6 programming course covers the design and creation of SOAP and RESTful web services and clients. You'll use the
+
+## [XML Fundamentals Ed 1.1]()
+
+This XML Fundamentals training introduces you to the basics of XML. In this 2 day hands on course, you will learn the central XML
+
+## [Java EE 7: Front-end Web Application Development Ed 1]()
+
+This Java EE 7: Front-end Web Application Development training helps you explore building and deploying enterprise
+
+
+## 👍 [Developing Applications for the Java EE 7 Platform Ed 1]()
+
+Course from Java Track
+
+Learn how to use Java Persistence and Java Transaction APIs,create a flexible component model using EJB and CDI technology,provide
+
+## 👍 [Java Performance Tuning]()
+
+In this course, you will learn how to Monitor, profile and tune your Java applications, to use command line and visual tools to perform
+
+## [Develop Mobile Front Ends Using Mobile Application Framework Ed 1]()
+
+This Develop Mobile Front Ends Using Mobile Application Framework training teaches you how to use Oracle Mobile Application Framework (MAF) to develop application
+
+## [資格試験準備セミナー: OCJP Silver SE 8]()
+
+この資格試験準備セミナーは、OCJP Silver SE 8   認定資格試験の受験準備に役立ちます。
+試験の頻出トピックを模擬試験とインストラ
+
+
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
+## []()
