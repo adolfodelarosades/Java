@@ -9,5 +9,3 @@ Hello, my name is Boulenouar. And I am a senior principal instructor with Oracle
 And then we get into the concept of classes and how we declare classes and how we work with objects that do have attributes and, of course, have methods. And we learn how to work with fields that how to declare them, initialize them, and so forth. We get into also the concept of the conditional constructs and the loops and so forth. We'll also learn about arrays and array lists. And we get into the concept of inheritance values studying what's a super class and what's a sub-class. And we also finish by deploying a simple Java application using the Oracle based IDE.
 
 I hope you enjoy the course and looking forward to covering all these interesting topics that, of course, will help you to become Java developers. Thank you.
-
-## 2. Practices for Lesson 1 - 5m
