@@ -205,7 +205,7 @@ This series provides additional Java SE 8 topics, notably Utilize Java Mission C
 
 Java SE 7u40対応。Java パフォーマンス・チューニングのエッセンスを身につけよう。 このコースでは、Javaプログラミング言語に適用可能なパフォーマンス・チューニングの手
 
-## :es: [Java SE 7 Programming Ed 2 (CS) TOD]()
+## :es: [Java SE 7 Programming Ed 2 (CS) TOD](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/552-Java-SE-7-Programming-Ed-2-CS-TOD.md)
 
 Este curso, que es el segundo de una serie de dos cursos que tratan de la plataforma Java Standard Edition 7 (Java SE 7), describe las principales interfaces de programación de
 
