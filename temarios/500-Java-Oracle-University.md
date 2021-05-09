@@ -221,8 +221,7 @@ This course will be archived on 05/21/2021
 
 The second of two courses on the Java Standard Edition 7 (Java SE 7) Platform, this course covers the core Application
 
-## :es: [Java SE 7 New Features Ed 2 (CS) TOD]()
-
+## :es: [Java SE 7 New Features Ed 2 (CS) TOD](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/553-Java-SE-7-New-Features-Ed-2-CS-TOD.md)
 
 El curso Nuevas funciones de la plataforma Java SE 7 ofrece a los estudiantes información sobre la forma de programar aplicaciones con la tecnología Java utilizando
 
