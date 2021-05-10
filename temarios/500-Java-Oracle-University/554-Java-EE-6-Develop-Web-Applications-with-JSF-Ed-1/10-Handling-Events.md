@@ -3,6 +3,8 @@
    * Handling Events - 35m
    * Activity 32,33,34 - 25m
 
+## Handling Events - 35m
+
 It's time for us to continue with chapter 10, handling events. We are reaching to advanced JSF last chapter. In this chapter, we're going to see the JSF event model and how to use action and the value change events. Apart from this, register event listener, and capturing and responding to life cycle events we will discuss in this chapter.
 
 For this [INAUDIBLE] the topic which they have created here to let you understand the types of JSF events, event processing life cycle, value change event, action event, phase event, and system events. Let's start with the types of JSF event. JSF supports four types of events. Number one is value chain even. Number two, action event. Number three, phase event. Number four, system event.
@@ -92,6 +94,93 @@ Life cycle events, system events. It's a good way for the notification system th
 What you can do for this purpose. In a managed bean, in a managed bean, class A for example is my managed bean, in managed bean, if I type [INAUDIBLE] public void init. And I want to do something just after the class gets instantiated. I can here say @PostConstruct, which will help me to execute the set of instructions to do something just after the class gets instantiated.
 
 Similarly, you can type predestroy on the method, which will be invoked automatically when an object is going for destructions. It means it is going for the garbage collections. Several life cycle events that you have here, it's application event. But you see that post restore state. Remember create and restore? You see post restore is an event. This method will be invoked just after restore view phase.
+
+
+## Activity 32,33,34 - 25m
+
+Let's begin with the practice for lesson 10, handling event. This practice, we're going to implement preferences page and add in the capability of changing the languages without having to alter the browser language setting. So depending on the user choice, we will decide whether they would like to see the application in English or in German language.
+
+10.1, it's about implementing preferences pages. They would like you to have a page like this so that you can decide the [? list.xhtml ?] that shows the content should display title, EAR, or [? genre, ?] or only title, or only EAR, or the combination of any one of them. So for this purpose, we're just going to prepare our managed bean class with the name [? preps ?]. And as well, we're going to create it in [? com.example ?] beans.
+
+We will have here Boolean properties so that we can capture the user choice. And accordingly, we're going to render the column. First job is to go back to DVD library applications and, in this application, have a managed bean added into this package. New. I can say new Java class. Name, what it's listed as [? preps.java ?]. And as well you can type it here [? implements ?] [INAUDIBLE], because we're going to use name bean. Give here [? @name ?] [? annotations, ?] [? session ?] [? scope ?]. And click to [? fix ?] import.
+
+The spelling mistake, so you can fix it here. Just remove it. And now you again say [? fix ?] import. OK. Good.
+
+Under this, they want you to have three properties to capture your choice from the page that you will create. These three properties are for the title, genre, and for the [INAUDIBLE]. We can have [INAUDIBLE] for all of them. Insert code, and [INAUDIBLE]. Good.
+
+So that's what here they say in this constructor, you can decide the default value for them. By default, it's going to be false, but we're going to want to set them to true. So I'm just going to have this constructor added into my page, [INAUDIBLE] [? .javabeans ?], and I'm just going to add it here, constructor. And this constructor, we are initializing the value for them as true.
+
+Next, have a [? prep.xhtml ?] file open. It's already created, so we're just going to open it. And we have here Back button. Or if you want, you can let it be there. And they say change the command link placeholder to a button [INAUDIBLE] from the [? message ?] bundle. That's what we will make the changes.
+
+And then we can have a panel grid. And in this panel grid, we can have multiple checkboxes added. Very first, let's change this value part to command button. It's already there.
+
+All right. Now we just type here [? back ?] [? home. ?] Now we don't need. Delete it. We can say here close, and say, value equal to [? read ?] [? it ?] [? from ?] the [? message ?] bundle.
+
+[INAUDIBLE] properties that they want you to have it here, that is [? btn_preps. ?] This one. All right, good. After that, within this form, what we can have it, we can have a panel grid inside the form. And within the panel grid, we're just going to have all those check boxes.
+
+OK, panel grid. And then this [? says ?] bundle [? will be reading ?] the caption label from there, column title. And then we're going to have a check box. When [? inside ?] the check box, you check uncheck. Depending on your selection, the value will be updated and perhaps the title.
+
+All right. Second one. OK, now the panel grid is closed. And the form is closed.
+
+All right. On the [? list.xhtml, ?] we need to specify [? rendered ?] properties so that column can be rendered or cannot be rendered. And this is going to be determined by the value of managed bean preps title, EAR, or genre.
+
+So each one column, you have to use this. I'm just going to go with [? list.xhtml. ?] And see now here we have a column one, first column. This column is for what? For the title. We can decide here render. I'm not going to say true and false, I'm just going to [? read ?] this form my managed bean preps, which was set up with the help of given check boxes.
+
+So I can say here title. Same thing I can repeat it with other column as well. Make sure that you type right properties in the right column. This is for [INAUDIBLE]. And then I'm going to do this with the column genre. Title, render properties.
+
+All right. Once you do this all, you can redeploy your application and check how it goes. So let's go back to this. Save it. Save the changes.
+
+All right, this is going for redeployment. And now we can initiate a first request to this page. Type here username, password. It is showing me all the column right now, because all of them are by default true. Now if you say Set User Preferences, you have-- see the option-- they're by default checked.
+
+I just want to see the DVD title and the EAR. I just unchecked one of them. OK. We do not have here the button. Let's click on Update Preferences. And see, it is going to show you [? list.xhtml, ?] but only two column. Go back to Set Preferences, and say you just want to see one column. Only one column.
+
+So that's what all about the practices. Remember in this practice, here you have Update Preferences. I'm using command link, though they have suggested that should be command button. You can change it and put them down just after all the check boxes. Just to give them a similar look.
+
+So command link, which I have it here, I can put them down. It doesn't matter [INAUDIBLE] look and feel, and make it command button. Save it.
+
+All right. Try it. See now we're getting here button.
+
+Same thing you do if you want to see both. You want to see these two. And by default, it is going to be all true, because you set that value in constructor. Good.
+
+Next practice is little long practice, because here we have to configure our applications to accept user selection for localizations. So you first have to make changes in my page, [? prep.xhtml ?] page, so that the user can have these type of options to select. And for that, you have to copy some images and make some changes here. And to let your [? Faces ?] context be updated with requested locale, you have to type this code in your bean.
+
+So what they're saying here, copy the locale, change the Java class from this resource locale directory and paste it to the bean's package. We'll do this. Resources I have here the locale folder, a [? localechange.java ?], copy and paste it to the bean's package.
+
+Open this. See? [? com.example ?] [? bean's ?] perfectly right. It's a managed bean. Name is Locale. If you want to default this property, you call Locale. And it has here the method [? lang ?] [? changed ?], which is updating the [? Faces ?] context with your choice of locale.
+
+Now what else? Design your [? preps.xhtml ?] to give the choice to the user. And here they say that we want to have the command link so that locale change can be possible. And we have to display images as well. So what they're doing here, in the panel group that you already have it, or if you want you can have a new panel group, you just have a command link [? immediately ?] equal to true, [? action ?] equal to [? locale.linechanged ?], and have an image. So the link will be displayed as an image. So your graphic image is going to be surrounded by the command link.
+
+Very first, we need to add this JSF [? core ?] libraries and have this all information be added. I'm just going to copy this information on the page. Let's [INAUDIBLE] the form, paste it. And let's see what we have done it one by one, it is going to display the message, some messages waiting from resource bundle.
+
+Then we're going to have a panel group. In this panel group, we're going to have a command link. This command link is surrounding your images. We do not have image right now. We need to put them here. Let's check whether we have the images available or not.
+
+These images, we need to copy it from the resource file. We'll do that. And the next one is going to have another command link for the US flag.
+
+So you've got two command links and two images. And we have a panel group. It's a different group, so you can create a panel group.
+
+Let's copy these two images which is available to you in the source image directory to your web locations. So I'm just going to copy these two images from here-- one and two-- copy them back to [? image. ?] All right, see that graphic image libraries equal to images, it is referring to this folder available under Resources. This we don't need here. Just delete it. All right, good.
+
+Now see command link. When I click on the command link, which is now [? of ?] an image, the value's going to be image type, what value you want to be initiated. See the command link value, it does not have the value binding. We're not going to type anything. It is not input type, that we type and then we have a value binding that can be assigned to the bean properties. [? But ?] we want. If I click on this link, we want some value to be assigned to my bean locale.
+
+For this purpose, we have to take the help of setPropertyActionListener tag. This is in JSF [? core ?] libraries. The setPropertyActionListener tag will do what? Will help you to assign the value of your choice to a particular bean properties. So here they say value equal to DE will be assigned to [? locale.language ?]. When they hit on second command link, and value equal to EN will be assigned to [? locale.language ?].
+
+Once it is assigned to [? locale.language ?] at the time of update model, then you're going for invoke application, you're going for-- what you say-- render response. But look what, this say [INAUDIBLE] equal to true. That means the action listener property is going to processed just after Apply Value phase. Apply Value phase. And once the value's updated in your locale bean, which is here locale changer, this is the line-change method that we have to find it, we have to call it so that it can update the current [? Faces ?], [? Faces ?] context, locale.
+
+See what next. This say because the context is reset during the life cycle of JSF applications, you need to add a [? root ?] view tag the master layout. Master layout template. You know why? Because if you do it there, it will be applicable on every page that is implementing master layout. This is one of the benefits of template.
+
+So in this master layout, they want you to add f:view locale and [? locale.currentlocking ?]. [INAUDIBLE] [? HTML ?] tag you do this. So I'm just going to type it in my master layout. Master layout, it is in template [? just after ?] [? HTML ?]. And here, you can close it.
+
+This is f:view. This tag is available to you in JSF [? core ?] libraries. So you must have here JSF [? core ?] libraries added. I can type here a new set of [? core ?] libraries for JSF [? core ?]. See now I can copy this and paste it one more time, and make appropriate changes for JSF [? core ?]. And I'm going to type it here [? f. ?] That's what they wanted you to do it here.
+
+Save the master layout, and then open [? purse.xhtml ?]. This XHTML page is going to use the master layout template. UI composition template [? equals ?] the master layout template. You have to use it. So go to-- let's save it here. And see the [? preps.xhtml ?], this one.
+
+UI composition that you have it here template [? masterlayout.xhtml ?]. It's already there. You will define heading. You can have the heading, the content is all there.
+
+Now they say have this Facelets tag added into the root of XHTML tag in your [? preps.xhtml ?]. And add the following tags above the form tag at the beginning of the page. At the beginning of the page. And at the end of the page, they say add it.
+
+So we'll do this. We can add this [? URL ?]. Now once you complete this step and save it, you see what they have the next? They want you to add a UI composition so template can be implemented on the [? preps.xhtml ?]. So see the [? preps.xhtml, ?] the template is already implemented. If it is so that it is already implemented, UI compositions and all those things, then you do not have to do this all. In case if it is not available, not done, then you just add UI composition at the top of the form, and close it at the bottom at the end of the page so that everything's going to be a part of [? you ?] define content and [? you ?] define heading. So I don't have to do it here because I found everything is already there.
+
+Now if you see this page, refresh it. You will see it here that you have two command link which is displayed in the form of the images for German and for US. If I click on the first option, it is going to change the locale of your page, making it German. You see that second one, it displaying everything in English. So once you update the locale, it is actually doing what? It is using that [INAUDIBLE] resource bundles, and everything that you have used from the beginning, [? MSGF ?] name, [? MSG ?] column title, is all going to be read from the German from this default locale. So that's all about this practice.
 
 Pre validate, post validate. Before validation phase, after validation phase. Pre render view events. Before render response. Post construct view. A lot of options that you have it here that you can use to do something with the face events.
 
