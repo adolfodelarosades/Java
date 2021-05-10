@@ -316,5 +316,179 @@ So if you want to get some additional things to learn for the CDI, go to the tut
 This is a list of additional resources which are available that can help you to learn CDI in details and find more options to play with the CDI.
 
 ## Activity04 - 5m
+
+All right, now we're going to start with lesson four. All the practices we will do one by one. And let's see what we're going to learn with the practices. We're going to create the Managed Bean for the DVD library project, and use the classes provided to connect to database. So we're going to prepare our practice so that later we can have a database communications.
+
+All right, so we will do all those things here. Java class we will create Managed Bean. And of course, database preparation, we're going to do it here. Let's see the practice for Doc 1 that says creating login bean context dependency injection for the CDI bean. Remember that since you know what are CDI beans, you can go and start using name bean.
+
+So what we will do, we'll create a login bean that is Java class. We will annotate as well with app name. So that can be a name bean. If you wish, you can specify some name to that login bean Java class that will be used in the EL. You can also specify the session as code for that. And later, you can have some properties over there for the username and password so that login page-- remember that we have created login page and we can have the EL binding with these properties.
+
+All right, so that's sort of our practice for Doc 1. Let's see how to do those steps in the actual practices. You just have to continue with the previous practice. And what you have to do, you have to create a Java class. Let's see what package they want us to create. They say default package on the dot com examples, Bean is going to be your package name.
+
+So I'm just going to create a Java class, simple Java class. The name will say login bean. Login bean is the name. And com.example.beans is going to be the package. Finish. OK.
+
+Now as well to make it CDI bean, what you can do, you can hit type at name annotations and give a simple name to this. [INAUDIBLE] in an activity guide. Click import. [INAUDIBLE]. What else? Session and scope, you need to add it. All right, we will do this right now.
+
+Give the session and scope to this. Don't forget to take the session scope from javax.enterprise.context within the scope. Don't [INAUDIBLE] this one. The first one. CDI. This says error, because it must be serialized. So we must go for implement serializable Interface.
+
+We can also go set the fix import for this. Or we can type java.r.serializable. Later as well, this will have some properties. So we can type those properties over there. We can say here [INAUDIBLE] the string user name, [INAUDIBLE] string password. And then we can have a certain [INAUDIBLE]. So that I can take the help of net bean insert code, [INAUDIBLE]. And I can select these two properties, generate, and see that my [INAUDIBLE] are there in my code.
+
+When this is all done, see what next. This says save the login bean class. And then we will continue with the next practice. All right? Save it, and now the practice one is done.
+
 ## Activity05 - 3m
+
+The next practice, two, for lesson four is updating the home page is to use login bean.
+
+All right. Home page, that is your index.xhtml. And what they want-- They say, OK, there's a page that we have created in the package two, and in this index.xhtml they want us to do some modifications in the content. So they say instead of the current static welcome message, return the value of the username property from DBD Library Bean by replacing the Welcome To DBD Library applications. OK?
+
+What we would do is here. We just see index.xhtml. OK. It's there now. That's the heading two and the title, and they want us to have this, replacing "Welcome to DBD Library applications." We will replace this with this code.
+
+We can insert it here. "Welcome to DBD Library applications," and that's a output format value, empty login username, guest, and login username. This means what? You say output format, that means it is going to check the login bean. If the login bean holds the value of a username, if it is empty, it is going to display "Welcome to DBD Library application, Guest," else, it will say the actual username, along with the "Welcome to DBD Library application." All right? So this you can type like this.
+
+OK? So that's what we had to say. What else? We'll just save it, and then continue with the next practice.
+
 ## Activity06,07,08,09 - 44m
+
+Let's start with the practice 4.3, Updating the Login Page to Use LoginBean. All right, in this practice, you're going to update your login.xhtml page, which was created earlier in the practice 2. So very first we open that, and then we will insert some of that to view. Remember that we have input text, input secret over there, but we did not have the value binding. So we will do the value binding in this login.xhtml.
+
+See that? We just have input text, input secret. And we're going to go ahead with the value binding so that this component can be bound with the newly created LoginBean attribute Username. Similarly here, value equal to, let's say, login.password. Double code. We need to close it. That's what they say here. They do it.
+
+And command button. Action equal to index. And command button, they just say type your action. And once you click on the button, it will take you to index.xhtml. If it looks like that, you have logged in successfully. Though we are not right now going for authentications, we are not checking the username password is OK, Not OK, that we can do it in the Security Chapter, but just here we have the value binding for better understanding of the CDI Beans. An Action, that means when you hit the button, it will take you to index.xhtml.
+
+Now what next. It says Save it, and after saving you can clean and deploy and then you can try it and check whether it's display your information or not. So let's do it, go ahead and check it.
+
+I'm going to Run that against the clean and build and redeploy. And here we have a browser. We can type this. The URL for this is going to be DVDLibrary. Just type it. It's giving me right now this fixed URL what error is right now. Let me see that. If there's any error in this.
+
+OK, I have not deployed it. So just deploy it, and then give one more try. See, now it's saying it's starting DVDLibrary. So your DVDLibrary's going to be started, and then you can give this a try. If you have any error in your code, you're just going to get it right now once you build the applications.
+
+See that here? It says "Welcome to DVDLibrary application: Guest," since we have not entered any username, it shows here Guest. So if you go back to your index of xhtml, you'll see "Welcome to DVDLibrary application-- output format empty login username. Yes, it is empty, that's why it says "guest."
+
+I'll try opening the login page. faceslogin.xhml, type here some name, I said Tom, some password, you can type it. We're not going to do anything with the password. Just type it. It'll take you back to index.xhtml. And see now, it is displaying here Tom. That means you have instilled the username and your LoginBean.
+
+We're getting here some special characters printed. It's because of here some characters are inserted. Just to move it, and then if you try it, that's going to be all. That's for the practice 4.3.
+
+And now we will move to the practice 4.4. Practice 4 is just setting up the database and JPA files. You know that we are planning to let your DVDLibrary communicate with the database. So database must have some table, and you must have some records over there. So we're just going to prepare those things in the database.
+
+We have a Java DB database available here in the NetBean, and what we do with it, we're just going to create a database over there and have a table over there. So what they say, here that in the Properties, Java DBI Properties menu, you can make sure that Java DB installation directory is available. Set the database Path to this one database. This will be the location where the DVDLibrary database is going to be created.
+
+So we're just going to check this all. Ready for Service tab, Service tab, and here we have the database. Java DB's over there. You can start database server Java DB. After that, see?
+
+You can also stop it, and you can check. That's why they say that make sure that all those properties are properly configured or not. So we can just go to this Properties and check. See? Java DB installations, D Program file, Java JDKDB. And that is the database location by default available.
+
+If you wish, you can change it to something else. Like here they say, it should be DB Database. So you can copy, and here you can paste the path. Or you can find it with this Browse option. And you can set this option. Java DB JDK 1.74 folder, DB database.
+
+So what they say in the activity guide is there's no database folder available, so it's better you create a database folder. Otherwise, the path specified will not be available. So I can go to this Browse Options and we can find here JDK 1.7.0_07 folder, and we have DB over there and see this database. I think now it's going to be OK. And say start server. So now you create some database, the database file will be created at your designated location.
+
+When this is all done, we want you to create a database. Create database dvdlibrary, username, password, oracle, oracle. We will do that.
+
+Search Java DB. It's already started. Crate database, give the name, dvdlibrary. If you give some of the names, and make sure that you use the name and username, password as you entered here. I'm going to say oracle, oracle. so dvdlibrary. All right.
+
+What I'm going to get it here, I'm going to get here jdbc URL, jdbc [INAUDIBLE] local host 1527. 1527 is the port number where the database server is running and accepting the connections. And now we can, here, say Connect. See that? We are getting here Oracle as a schema and with that we have a table. And right now there's more table available.
+
+Now the next step that they want you to create table, but you don't need to tie the SQL statement to create table. We already have here a SQL script that you can it from this folder, from this location, and you can execute it. So I'm just going to open that particular file. That's the final. Open file. And that is available to you in D drive, Labs, Resources, and there we have JP folder and DVDLibrary. It's a SQL script.
+
+Here they're creating a table and they're inserting some records in the table. What you can do, you JST select here the JDBC URL for the database where you'd like to insert your records and create table. I've selected DVDLibrary, Execute Script, and see now all the scripts are executed successfully. And if you go back to Oracle, here in the schema, Expand Tables, you'll find Item Table is created that has one, two, three, four, four columns. If you select this item, right-click, and say View Data, and the SQL command is executed that shows all those records which you inserted with a script file.
+
+That's what our database set up now. We have executed all those scripts. And see now, we have this set of records. Now what next? The next step is to prepare our DVDLibrary projects with the JPA classes so that we can communicate with the database. We're using here JPA classes.
+
+So in JPA, we have the concept of the entity classes that can be generated from the database. So that's what here they say. Click the Project tab, right-click dvdlibrary project, select New, and in the persistence category, you can select Entity Classes from database and then click on the Next. So we'll do this, and then we'll come to this point.
+
+Go to the project here. Let it be in the Source Package. And I'm going to say Other. We will find here Option Persistence, and say Entity Classes from database. You can select here the database URL, if it is available. So it says New Data Source. So we do not have a data source. Connection available from your projects.
+
+That's what they say. Data Source, dropdown, select New Data Source, and then create a JNDI with this name and map it with this JDBC URL. I'm going to do this. New Data Source, JDBC DVDLibrary. Now I select here DVDLibrary. Say OK. Item is there. One table, move it to the second right-hand box, and then say Next.
+
+Item is database table, the class is going to be an item class, and it is going to be available to you in com.example.beans. Let's check. What they say? com.example.entities. But I'm using .beans. You can have a different package for this, which you can specify right now here. com.example.entities.
+
+And what they say, rest of everything's OK. Finish. In the Mapping Options dialog box, and then you will see that entity class is going to be created. Let this all be over there. I can say Finish right now. See, item.java is created.
+
+This is Entity Class, which is mapped to your table found in DVDLibrary database. it Is exactly the same item. It has the column-- see-- ID, it has Title, it has release here, it has Java. Everything's there now. This is a JP entity class, which we will use to insert a record, find the records into and from the database.
+
+Now, once it's in that XML file, which in fact let's see whether it's created or not. If we go to this Configurations file, there's a persistence.xml file is created. This file contains the information about the database that you're going to communicate to. See here, they have a data source of JNDI.
+
+It says, include all entity classes in DVDLibrary. All the classes which has at entity annotations, means mark as at entity will be used for the persistence logic through this JPA persistence unit. persitent.xml is containing the persistence unit. So that's what here is available.
+
+And now, if we go to the next, what they say? Create item EJB class that will use JPA to perform database operations. We do not have to create EJB, we're not learning here EJB, but we will use EJB. So your JSF applications can also communicate with enterprise JavaBeans, but you may have some business logic. In this case, we have item EJB that contains persistence logic.
+
+Now, for this purpose, we just have to Copy, Paste those files available in this Lab Resource folder. You do not have to go to Windows Explorer to see Labs and Resource folder and Copy and Paste it here. What we can do is, we can, here, have one more tab designated Favorites. In this Favorites, I can add a folder that is D drive, Labs, Resources.
+
+If you add this, the Resource's content, the folder content, will be available to you here in the NetBean. And you can explore the content. You can open it in the right-hand side. You can Copy, Paste. So we have here the JP folder, and there we have itemejb.java, some exceptions, and [INAUDIBLE] entity exceptions. That's all over there.
+
+So they say Copy Item EJB class from this folder in Favorites to your projects. So just go to the JPA folder in Favorites, select it, Copy it, and Paste it in com.example.beans in your project. Let's see. Item EJB, Copy, Project here, Paste it.
+
+We have Item EJB right now. It's giving me error, because this exception is not copied. So the next step is asking you to Copy all those exceptions, additional files, that you may need to let this project successfully compile. So that's what here they say, com.example.exception, a new package should be created.
+
+So I'll go and create a new package. New, Package. Package name is com.example.exceptions. Finish. Once a package is created, then you go back to your Favorites, the same folder, and copy these two exceptions Java class file. So Favorites, Item Exceptions, and Preexisting Entity Exceptions. Just copy it. Project, and go back to your exception package and Paste it here.
+
+Now, see errors remote. Why I have created this package? Because of the source code which they have provided, they already have returned here the package name com.example.exceptions. That's what all about the practice 4.
+
+Now it's time for us to continue with the practice 4.5. In practice 4.5, they want you to create a DVDLibraryBean class. Just like you created LoginBean, go ahead and create DVDLibraryBeans, NameBeans, and let this DVDLibraryBean communicate with EJB. And for that, we can take the help of dependency injections at Inject Innovations from CDI, which will obtain EJB references at the run time form the container.
+
+You can also create the instance of item over there. And if there's any compiler error, important error, just fix those all import, and then write this code for adding records in your table. Let's just try this.
+
+Go to this Example Beans. Just make sure they say that you have to put everything in Example Beans. So what they say here, DVDLibrary com.examplebeans. DVDLibrary is going to be your Bean Name. I'm just going to crate here new Java class. It is dvdlibrarybean com.examplebeans. Finish.
+
+It is CDA right, so as well you just type it @name, annotations. I can give some name to this. I can just set this to say DVD. You can also specify @sessionscopelibrary. You can, here, say implement serializable interface, and you can fix all those important problem together. Serializable, inject, and session scope like this. All done.
+
+Now what else? We can have this injection with the item EJB and declare a variable of item type. Let's see that. I'm declaring here private item. Item. Item is entity class. And I'm going to say @inject. I'd like to obtain EJB reference from the container through injections, and I'm going to give here EJB name, item EJB, and here specify some reference variable, as suggested here, ItemBean. Item bean; fiximport. So prepared import statement com.example entities @item Java and inject are going to be included here in your DVDLibraryBean.
+
+Next, they want you to type this code so that you can insert a DVD records in your table. So I'm just going to tie this all here. It's a method, @dvdmethod, that pulls some exceptions. And what else? To insert the records into table, you have to create an entity class object. Entity class item, if you see that here, it has ID, Title, Release Year, and Genre.
+
+Your item.java, it's exactly the same. It has the same structure as item table. So if you go to the item.java, you have ID. ID, that is the primary key. I have to say this-- @ID, that means it is a primary key. This column is a primary key.
+
+So Java class is now a map with a table, and that is what JPA object relational mapping. When you map an object with a table. So now, if you go to this, what they say, they say itembean.count. Itembean-- this is EJB-- in EJB they have a method, Count, which counts how many records are there in your table. So it will count how many records are there.
+
+So see? There are how many records right now? 19. So let's say it says 19. 19 plus 1, 20. This 20 is a value that will be used as a primary key for the record that you're going to insert in a table. So you will see when a record is inserted in a table, here, this primary key is going to be 20. That's what the logic they have used here.
+
+Now the next, Title. What is a title? Release year and Genre, all you need to here is specify so that they can be inserted. It's giving the error right now of Title, Genre, and all those things because we have not created those variables.
+
+All right, let's check what they say here. They just want us to tie this all, but where are you going to find this Title? Release Year and Genre. How you need to insert that.
+
+So this is the error that we need fix it. Let's say fix import. Some of the exception error that we'll be able to fix it. The Title, Release Year, and Genre is not the problem.
+
+So can I say here we can create this private variables? private string title. private-- this is going to be the string type. If you see that release year in item EJB. So in Item, it is what type? It is to string type, right? But we can have here as well.
+
+And similarly, we can create one more variable that is going to be string genre. As well what you can do it, you can here have setter and getter for these three [INAUDIBLE] variables that you have created. We can go to Insert Code, and we can say that we want Title, Release Year, and Genre. Like this. Setter and getter.
+
+The next practice, 4.6, you have to created add.xhtml. And the add.xhtml, you need to have three text boxes so that the user can enter the Title, Year, and Genre. And these text boxes you need to map with the variables that you have created and your DVDLibraryBean. So let's start creating add.xhtml.
+
+add.xhtml, we can create it here. Web page, server page, and click on add.xhtml JSF page. See? It's there. If it's not there, you can find it Other. You can go to Other web JSF page.
+
+Give the name add. It's going to be add.xhtml, and then say Finish. As well, you can type some headings over there as listed or as you like. Like I said, Title, DVDLibrary applications, and this is a heading that they want you to type it. You can type it there.
+
+All right. Like this. Some Title. You can say it is DVDLibrary Applications is going to be the title. I can type it here. So we'll just remove it. DVDLibrary Application.
+
+And next you can, here, create input text boxes. But let's say I have a two-column panel grid so that they can be properly aligned for Title, Year, Genre, and then have here input field. How you going to do this all? The panel grid, right? h:ppanelgridtwocolumn. Let's hit space bar here. C. And see here, columns = 2. Close it, and there type this statement.
+
+First you type title and then input field bound to title property of DVD managed bean. Right? So now say title: just give a space, and here you can have hinputtext. I can have a value binding, and this value binding attribute will be bound with DVDLibrary title. dvd.title.
+
+I can Copy, Paste, or if you want, you can type it. And then we do modifications. Two more. So I'll just change it. The next one is going to be here. And here you just have to bind it with the year attribute. It will save the time, but you continue typing. And the next one is Genre. And then I'm going to say here dvd.genre.
+
+So we dedicated three text boxes, and bound them with [INAUDIBLE] attributes. Now, we can have a command button element added that will call our DVD method in action attributes. Command button, right?
+
+Let's add a command button. h command button. And now we can say value = something you can type here add. We're adding records. And action you can call DVD method. Action processing method. dvd.adddvd. Let it be like this, or you can just removed these parentheses. No problem, no issue. And then close the command button.
+
+So when you hit the button, your page lifecycle will begin apply value phase, and we have validations, update model, invoke applications. So the model will be updated with the page that the value that you have submitted. Your DVDLibrary will hold the value of Title, Year, and Genre. And then at the time of invoke application, it is going to call dvd.@dvd method.
+
+Which you have it here included in your DVDLibraryBean, which will do what? Which will gather these values from Title, Release Year, Genre, and put them to the item object, which is entity class. Object that's going to be created. And then what it's going to do is it's going to call ItemBean. ejb@item. So if you see the item EJB, it has add item method. This add item method will call the persistence method em.persist and let your item object be inserted into table.
+
+So that's what is going to happen here. Let's see. After doing all 4.6, that's what they explain to you the code is going to look like this, you can give a try. You can check whether it works proper or not. Let's go ahead and Save it.
+
+One more time, you can say Clean and Build or just say Build. It's OK. I'm saying Clean and Build. I'm deploying everything, and then I'm going to deploy it. The [INAUDIBLE] server will be [INAUDIBLE] harder because it has to perform data source connection settings. You have created a JNDI name, which needs to be configured on the WebLogic server.
+
+I think all set now. Startup completed. We can now try it. Just go ahead and Refresh. Let's say DVDLibrary. Right now we have not mapped this link to add.xhtml. That we can do later on. And I can, here, directly open add.xhtml just to test it. Sorry. It should be add.xhtml. add. My bad.
+
+It's giving me error right now. It says DVD error. The class com.examplebeans DVDLibraryBean does not have the property. Here I think it is going to be years. We can check it. So this kind of error, you may get it, it is a little easier. It is not there, so we are just going to type that poverty and add add.xhtml, binding it is with the year. Some of it.
+
+Save it, which will make appropriate changes. See? It is redeploying your DVDLibrary, and we can give this Apply. It's refreshed this, see now it's OK. Type here the Title. I can say Title-- let's set some movie name you can type in here. I say Galaxy. I can say Year, 2015. And let's say the Genre is going to be science and fiction. And say Add.
+
+I click on Add. It should have called add DVD. Check that, and it should be able to take me back to index.xhtml. But I can see here, when I say Add, it is doing nothing. Let's see now what is the problem right now. It is not clicking the button and doing nothing when I hit the button, because we have here a form missing. Without form, you will have no data submissions.
+
+We can add here a form, and then we can try it. So when you do the practices, you may have these type of problems coming up, something you forget, you open the tag, but you forgot to close it. In those type of errors, you will get the compiler problem, but it's something like the form is missing, then you're going to see that form is not submitting.
+
+Now what we're doing here, we're just going to Save it and give this one more try. Let's make sure that it is deployed successfully. I can check now. All right.
+
+Let's say Galaxy 2, 2015, and here you can type the Genre as science and fictions, Sci-Fi, and say now Add. It has done something, that's why you're coming back to index.xhtml. That means it has processed the action. And action, what you have done it, you have written the code. The code to communication with the EJB to let your item class, which is entity class, be inserted into records and thereafter you're going back to render response the index.xhtml.
+
+So we can take this. But the record has been inserted into a table or not, we can go to SQL command-- it's already open here-- refresh and re-execute [INAUDIBLE] Start from Oracle Item. And see now, at the bottom you have a record, number 20, inserted. ID is 20, Galaxy 2, 2015, Sci-Fi is going to be the Genre. So what you did, you have checked that, verified that.
+
+So that's all about this practice. And you can try this SQL statement. And you can just check, verify, whether the records are inserted or not.
