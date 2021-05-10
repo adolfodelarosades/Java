@@ -10,11 +10,11 @@ BENEFITS TO YOU
 
 Java EE 6: Develop Web Applications with JSF Ed 1
 
-## 1: Introduction to the Course
+## [1: Introduction to the Course](554-Java-EE-6-Develop-Web-Applications-with-JSF-Ed-1/01-Introduction.md)
 
    * Introduction to the Course - 13m
 
-## 2: Introducing the JavaServer Faces (JSF) Technology
+## [2: Introducing the JavaServer Faces (JSF) Technology](02-Introducing-the-JavaServer-Faces-JSF-Technology.md)
 
    * Introducing the JavaServer Faces (JSF) Technology….Part 1 - 54m
    * Introducing the JavaServer Faces (JSF) Technology….Part 2 - 28m
