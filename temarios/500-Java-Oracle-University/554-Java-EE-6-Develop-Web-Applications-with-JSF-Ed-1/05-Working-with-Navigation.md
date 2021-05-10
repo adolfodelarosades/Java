@@ -302,3 +302,89 @@ So that's all about this chapter. In this chapter, we have discussed the navigat
 We have some additional resources available that you can go through to find more information on the JSF. We have seen some of the examples over there. Now we will talk about the practices.
 
 ## Activity10,11,12,13 - 21m
+
+All right. We're going to start with the Practice 5. In the Practice 5, we are going to play with navigation rules. We see that how to define implicit navigations and, of course, navigation rule with faces-config.xml. We will also see the conditional rules to have a fine-tuned navigation in our existing DVD library applications. OK?
+
+Practice 5.1. In this practice, we will start creating with new JSF page that is list.xhtml and one more for preferences. All right?
+
+So how are we going to do this all? We're just going to simply create a new pages. And then they want us to configure our link in the list.xhtml so that we can go back to home page. All right? There's an action equal to Home which right now not configured. But we will do it with upcoming practices. OK?
+
+Let's do this first job. Go back to your DVD library applications. And in those applications, they want you to create new pages. All right? Let me close this all. Create a page. New JSF Page. The name that they say, List.
+
+Finish. One more page for Preferences. Check the name. It is what they say here. Yep, right. And then finish.
+
+OK. List.xhtml. They want you to type a link, a command link, that can take you back to the home page. Don't forget to include [INAUDIBLE], otherwise page submission will not happen and server-side interaction will not be there. So I'm just going to replace this hello form from Facelets with form and command link. OK? OK, good.
+
+The same they want you to do it in preference.xhtml. As well. So I can go ahead and same thing. I can copy paste to this existing model. OK? All right, good. Now, what else?
+
+See the next? They want you to go to index.xhtml page. And where you have several command links to go to List, go to Add, that you have created earlier. Add this action attribute so that navigation will start working. OK? So I'm just going to go ahead to index.xhtml.
+
+And right now, we just type here Action. Equal to. It's going to take me to list.xhtml. Action equal to add.xhtml. Right? Command link action equal to that preference.xhtml. And command link for the login, right? Action equal to login.xhtml. OK? That's what we did it.
+
+Now you can run the DVD application, and you can see whether this is working or not. OK? It has already re-deployed. We can try here. Saying DVD library. OK. We can use this one.
+
+[INAUDIBLE]. See, if I click on Login, it is going to take me to login.xhtml. If I click on display my DVD, it is taking me to list.xhtml. There we have back to home, options, add DVD, [? right ?]. And, similarly, prefs.xhtml.
+
+When I'm clicking here, the set user preferences, says, "unable to find matching navigation case with from-view-id index.xhtml for action P-R-E-F. A spelling mistake. We will fix it right now. The page name is Prefs. All right? So I just say here s. And it's going to start working. Wait for a few seconds, and then try. This will work.
+
+When you're clicking on back home, it is generating an error. The same page is re-rendered with the error message saying, unable to find matching navigation case with from-view-id of prefs.xhtml for action Home with outcome home.
+
+Remember what happened that we have specified a link here to take you to home.xhtml. It's first going to check faces-config.xml, which, in fact, does not exist right now. All right? And then it's going to see if there's a page the domain home.xhtml available. No? There's no page? That's why it's giving you error.
+
+With the next practice, what you will do, you will create a configuration navigation rule. So that this Home starts working.
+
+So the next practice, they want you to have a faces-config.xml file added into WEB-INF folder. All right? That's what-- the snapshot. And then you can have a navigation rule defined over there where you say Home means index.xhtml. And then you can retry, and you can see that the link on list.xhtml and prefs.xhtml both will start working. OK? Try that.
+
+WEB-INF. Right click New. Here you have faces-config options, JSF faces configuration. Or, if you don't find it, you can go to other JSF. And from there, you can select JSF faces configuration. Next, Finish.
+
+Now, in this case, we can again type the navigation rule. Let's close this navigation rule. Here I can have from-view-id. I can say the cases that I'm planning to have it here for the home will be applicable on every pages. So I'm using wild card. Even if you don't type from-view-id, it is going to be the wild card-- it means applicable with every page-- if you don't type this.
+
+I can have a navigation case. All right? And this navigation case we can define which page to go to. I can say to go to index.xhtml. All right? And you can define an outcome value that will be used in navigations. That's going to be from outcome.
+
+We can give an outcome value to this, saying Home, right? And then close it. That's what they want you to do it. And you can try and check whether list.xhtml, prefs.xhtml links start working or not. OK?
+
+Save it. It will do re-deployment. I can just go ahead and-- I'm doing it in the Google Chrome. And just refresh it. All right? On the back home, it is taking me back to index.xhtml. Go to list.xhtml, same thing. That works fine. OK? All right.
+
+Now, what next? Try to add DVD to the library. That means they want you to open DVD library. But what they say-- the page flow should go back to the home page. All right? Yes? Click Login. And log in with some name. Username and password combination. Add DVD to collections. And verify the DVD successfully added to database or not. OK? And then you will go back to the home page. OK?
+
+That's what you can try. If you want to give a try, you can. It's going to work fine. Add DVD to my collections.
+
+But first, you can log in. Right? Username. Say here [INAUDIBLE]. Password, something like [INAUDIBLE]. Type anything. And now it says, welcome to DVD library application [INAUDIBLE]. DVD my applications.
+
+And now I'm saying enter some title, year, and genre for some movie, right? Some DVD name. Something you can type it here. Let's say Wrong Turn Two.
+
+Type something here. I'm just typing something. All right? I say here it's [? all movie ?]. And I'm going to click on add. See, you're coming back to index.xhtml. Right?
+
+And if you're verified, Go back to the services. Item, click on due date. You see your record now inserted in a table. No? OK? All right. If you go down here, and you will see that 20 records it is showing right now. Click on the Next. And see your record is now inserted. All right? But that's what up here they wanted you to try it in the practice of 5.2. All right? They say, give a try to add something. And check whether you're coming back to the home page or not.
+
+All right. Good. Now let's continue using some conditional navigation cases. Conditional navigation cases. We have faces-config.xml file. And we're going to add one more case over there. This case is for what purpose? This is for letting you go to login.xhtml if the user name, login.username, is empty. So any link that says Add means that you have created to go to add.xhtml. It's the outcome value. Add.
+
+We'll first check if the login username is empty. If empty, it will redirect you to login.xhtml. That's what they need to edit in existing navigation rule. And I'm just going to edit this option over here and save. One more case, navigation case outcome means Add. This will be applicable when you [INAUDIBLE] action value as Add.
+
+Check if login username empty. If empty, it is going to take you to login.xhtml. Else, can't take you to the add.xhtml. OK?
+
+I'll just save it and give a try. And side-by-side, I can also check your add.xhtml that is calling at DVD, right, and returning some outcome value. We can check right now that this add DVD, which is there in DVD library B, it is returning what value. .
+
+I'm typing here Index. Now, if I want, I can say here, Home. No issue. Home means index.xhtml. OK?
+
+All right. Let's give a try. Re-deploy it. Let's go to first page. Index.xhtml. It is saying Guest. Right? That means login. That username is empty. I'm going to click on Add, which lets me go to add.xhtml. Well, let's see. It is taking me to login.xhtml. You know why? Because you have conditional rules added in your faces-config.xml. Right?
+
+Going to Add. Let's check, verify. If it is true, go to login.xhtml. If it is false, then as well, it will decide at means what? Since we have not specified to view-id, it is going to be considered as add.xhtml. OK?
+
+This is applicable only on If. If it is true. So if I log in it, I type some name, let's say [INAUDIBLE] once again. [INAUDIBLE]. Login. All right? If I say Add, it is add DVD. OK? Good.
+
+That is our practice 5.3. And now we're going to move on to the next practice, 5.4. Changing the welcome page. Right now, the welcome page that you see it here, it is index.xhtml. All right? What do you think if I make login as a welcome page. The means first time when you type this URL, without specifying a page, it should open login page. Right? That will be good?
+
+And what I can do now, I can just go to web.xml and change welcome file. And then we can retry and check how it is going to look like. OK?
+
+Let's go to web.xml that contains welcome page name. See the source? Faces index.xhtml. You can replace this here. Or you can select here Pages. And here you can also use the browse to pick up the web page. OK? This will automatically update.
+
+But to do this, you need to try faces-config.xml. The URL for xhtml is going to be with the faces [INAUDIBLE]. OK. If you save it and go to the source to change [INAUDIBLE]. So you type it here or you just go and make changes from there. It is all the same.
+
+Now we can try this. And I'm going to say DVD library. It opens a login page. Well, what happened now? I think something happened to my page login. We can check what's on there in the login page. It is something that is not translated. I think it is not using the URL properly.
+
+So we can go to web.xml here and say, faces like this and try it. Wait for a second, and then give a try. Something wrong? OK, no problem. I'll just change it to login.xhtml. Save it. Login.xhtml.
+
+I actually don't need to start with slash. This is faces login.xhtml. That is going to be the relative URL, which we will use here as a home page. First page, welcome page. Homepage that you specified in the link, home means index.xhtml.
+
+All right. So that's what all about this practice.
