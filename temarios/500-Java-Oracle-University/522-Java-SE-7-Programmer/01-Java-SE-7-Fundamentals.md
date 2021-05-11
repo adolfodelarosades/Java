@@ -15,6 +15,12 @@ FILTERS
 * Version: Java SE 7
 * Language: English
 
+BOOKS
+
+* 📕 Java SE 7 Fundamentals Ed 2: Student Guide - Volume I
+* 📕 Java SE 7 Fundamentals Ed 2: Student Guide - Volume II
+* 📕 Java SE 7 Fundamentals Ed 2: Activity Guide
+
 ## [1: Introduction](01-Java-SE-7-Fundamentals/01-Introduction.md)
 
    * Introduction - 2m
