@@ -19,6 +19,11 @@ After completing this course, you should be able to:
 * Implement AJAX, REST, and WebSocket
 * Develop applications with JQuery
 
+BOOKS
+
+* 📕 JavaScript and HTML5: Develop Web Applications Ed 1 (Student Guide)
+* 📕 JavaScript and HTML5: Develop Web Applications Ed 1 (Activity Guide)
+
 ## [1: Introduction](01-JavaScript-and-HTML5/01-Introduction.md)
 
    * Introduction - 31m
