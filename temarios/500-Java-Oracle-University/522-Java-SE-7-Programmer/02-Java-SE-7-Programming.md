@@ -22,6 +22,12 @@ FILTERS
 * Solutions: Application Development
 * Language: English
 
+BOOKS
+
+* 📕 Java SE 7 Programming Ed 2: Student Guide - Volume I
+* 📕 Java SE 7 Programming Ed 2: Student Guide - Volume II
+* 📕 Java SE 7 Programming Ed 2: Activity Guide
+
 ## [1: Introduction](02-Java-SE-7-Programming/01-Introduction.md)
 
    * Introduction - 17m
