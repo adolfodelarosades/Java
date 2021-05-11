@@ -38,6 +38,12 @@ FILTERS
 * Version: Java EE 7
 * Language: English
 
+BOOKS
+
+* 📕 WDP Setup documetn linix
+* 📕 Activity Guide: Developing Applications for the Java EE 7 Platform Ed 1
+* 📕 Student Guide: Developing Applications for the Java EE 7 Platform Ed 1
+
 ## [1: Course Introduction](01-Developing-Applications-for-the-Java-EE-7-Platform/01-Introduction.md)
 
    * Course Introduction - 16m
