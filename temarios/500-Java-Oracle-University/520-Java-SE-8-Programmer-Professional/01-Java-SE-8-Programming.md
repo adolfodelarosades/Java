@@ -24,6 +24,17 @@ FILTERS
 * Version: Java SE 8
 * Language: English
 
+BOOKS
+
+* 📕 Java SE 8 Programming Ed 1: Student Guide Volume I
+* 📕 Java SE 8 Programming Ed 1; Student Guide Volume II
+* 📕 Java SE 8 Programming Ed 1: Activity Guide
+
+01-Java-SE-8-Programming-Ed-1-Student-Guide-Volume-I
+02-Java-SE-8-Programming-Ed-1-Student-Guide-Volume-II
+03-Java-SE-8-Programming-Ed-1-Activity-Guide
+
+
 ## [1: Introduction](01-Java-SE-8-Programming/01-Introduction.md)
 
    * Introduction - 15m
