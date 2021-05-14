@@ -13,6 +13,15 @@ FILTERS
 * Version: Java SE 8
 * Language: English
 
+BOOKS
+
+* 📕 Java Fundamentals (Java Programming Learning Subscription): Student Guide Volume I
+* 📕 Java Fundamentals (Java Programming Learning Subscription): Student Guide Volume II
+* 📕 Java Fundamentals (Java Programming Learning Subscription): Activity Guide
+* 📕 Java SE 8 Fundamentals Setup Document for Linux
+* 📕 Java SE 8 Fundamentals Setup Document for Windows
+* 📕 Lab files of Java SE 8 Fundamentals course
+
 ## [1: Lesson 1: Introduction to Modern Software Development](02-Java-SE-8-Fundamentals/01-Lesson-1.md)
    
    * Lesson 1: Introduction to Modern Software Development, Part 1 - 18m
