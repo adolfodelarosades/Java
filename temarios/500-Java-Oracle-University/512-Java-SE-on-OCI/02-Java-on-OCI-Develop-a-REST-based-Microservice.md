@@ -13,6 +13,12 @@ FILTERS
 * Getting Started and New Releases: New Content
 * Version: Java SE 11
 
+BOOKS
+
+* 📕 Student Guide - Java on OCI: Develop a REST-based Microservice
+* 📕 Activity Guide - Java on OCI: Develop a REST-based Microservice
+
+
 ## [1: Introduction and Practices](02-Java-on-OCI-Develop-a-REST-based-Microservice/01-Introduction-and-Practices.md)
 
    * Introduction 10m
