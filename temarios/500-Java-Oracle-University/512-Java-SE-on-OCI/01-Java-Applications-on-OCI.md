@@ -22,6 +22,11 @@ FILTERS
 * Solutions: Getting Started, Java IO/NIO, JDBC, DatabaseConnectivity
 * Language: English
 
+BOOKS
+
+* 📕 Develop, Test and Deploy Java Applications on OCI: Student Guide
+* 📕 Develop, Test and Deploy Java Applications on OCI: Activity Guide
+
 ## [1: Introduction to developing Java SE Apps on OCI](01-Java-Applications-on-OCI/01-Introduction-to-developing-Java-SE-Apps-on-OCI.md)
 
    * Introduction to developing Java SE Apps on OCI 14m
