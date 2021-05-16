@@ -20,6 +20,11 @@ FILTERS
 
 * Getting Started and New Releases: New Content
 
+BOOKS
+
+* 📕 Java SE 11: Programming Complete (Student Guide)
+* 📕 Java SE 11: Programming Complete (Activity Guide)
+
 ## [01. Introduction to Java](01-Java-SE-11-Programming-Complete/01-Introduction-to-Java.md)
 
    * Introduction to Java, Part 1 21m
