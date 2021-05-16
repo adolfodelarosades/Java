@@ -22,6 +22,10 @@ FILTERS
 * Solutions: Conditional Statements, Java Exception Handling Techniques
 * Language: English
 
+BOOKS
+
+* 📕 JDKs Beyond Java SE 11: Student Guide
+
 ## [1: JDKs Beyond Java SE 11](Beyond-Java-SE-11/01-JDKs-Beyond-Java-SE-11.md)
 
    * JDKs Beyond Java SE 11 - New - 5m
