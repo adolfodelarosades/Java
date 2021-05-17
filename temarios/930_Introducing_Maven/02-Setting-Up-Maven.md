@@ -86,10 +86,109 @@ mvn -h
 
 ![02-03](images/02-03.png)
 
+## Ajustes adicionales
 
+Los pasos de instalación que hemos proporcionado hasta ahora son suficientes para comenzar con Maven. Sin embargo, para la mayoría de los usos empresariales, debe proporcionar información de configuración adicional. Esta configuración específica del usuario se proporciona en un archivo `settings.xml`. Maven busca el archivo `settings.xml` en dos ubicaciones: en la carpeta `conf` de la instalación de Maven y la carpeta `.m2` en el directorio de inicio del usuario. El archivo `settings.xml` de la carpeta `conf` se denomina configuración global y el archivo de la carpeta `.m2` se denomina configuración de usuario. Si ambos archivos existen, Maven fusionará el contenido de dos archivos y la configuración del usuario tendrá prioridad.
 
+> **Nota**
+> 
+>  La carpeta `.m2` es importante para el buen funcionamiento de Maven. Entre muchas cosas, esta carpeta contiene un archivo `settings.xml` y una carpeta `repository`. La carpeta `repository` contiene archivos JAR de plug-in y metadatos que requiere Maven. También contiene los archivos JAR dependientes del proyecto que Maven descargó de Internet. Examinaremos más de cerca esta carpeta en el Capítulo 3.
+>
+> De forma predeterminada, la carpeta `.m2` se encuentra en su directorio personal. En Windows, este directorio suele ser `c:\Users\<<your_user_name>>`. En Mac, este directorio suele ser `/Users/<<your_user_name>>/.m2/repository`. Puede ejecutar el comando `mvn help:evaluate -Dexpression=settings.localRepository` para identificar la ubicación del repositorio local.
+> 
+> Cuando ejecuta un comando de Maven, Maven crea automáticamente la carpeta `.m2`. Sin embargo, si no ve esta carpeta en su computadora, continúe y cree una.
 
+Fuera de la caja, la carpeta `.m2` no contiene un archivo `settings.xml`. En la carpeta `.m2` de su computadora local, cree un archivo `settings.xml` y copie el contenido del archivo esqueleto `settings.xml` como se muestra en el Listado 2-1. Cubriremos algunos de estos elementos en los próximos capítulos. En la Tabla 2-1 se proporciona una breve descripción de algunos de los elementos.
 
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          http://maven.apache.org/xsd/settings-1.0.0.xsd">
+      <localRepository/>
+      <interactiveMode/>
+      <offline/>
+      <pluginGroups/>
+      <servers/>
+      <mirrors/>
+      <proxies/>
+      <profiles/>
+      <activeProfiles/>
+</settings>
+```
 
+***Listado 2-1*** Contenido Skeleton `Settings.xml` 
 
+***Tabla 2-1** Detalles de los elementos `settings.xml`
 
+Nombre del elemento | Descripción
+--------------------|------------
+`localRepository`   | Maven almacena copias de complementos y dependencias localmente en la carpeta `c:\Users\<<your_user_name>>\.m2\repository`. El elemento `localRepository` se puede utilizar para cambiar la ruta del repositorio local. Por ejemplo, `<localRepository>c:\mavenrepo</localRepository>` cambiará la ubicación del repositorio a la carpeta `mavenrepo`. 
+`interactiveMode`   | Como sugiere el nombre, cuando este valor se establece a `true`, Maven interactúa con el usuario para la entrada. Si el valor es `false`, Maven intentará utilizar valores predeterminados razonables. El default es `true`.
+`offline`           | Cuando se establece a `true`, esta configuración le indica a Maven que no se conecte a la red y opere en modo fuera de línea. Con el modo fuera de línea establecido a `true`, Maven no intentará descargar nuevas dependencias o actualizaciones a las dependencias. El valor predeterminado es `false`.
+`servers`           | Maven puede interactuar con una variedad de servidores, como servidores Git, build servers y servidores de repositorio remoto. Este elemento le permite especificar las credenciales de seguridad, como el nombre de usuario y la contraseña, que necesita para conectarse a esos servidores.
+`mirrors`           | Como sugiere el nombre, los espejos le permiten especificar ubicaciones alternativas para descargar dependencias de repositorios remotos. Por ejemplo, su organización podría haber duplicado un repositorio público en su red interna. El elemento mirror le permite forzar a Maven a usar el repositorio reflejado interno en lugar del repositorio público.
+`proxies`           | Los proxies contienen la información del proxy HTTP necesaria para conectarse a Internet.
+
+## Configurar un Proxy
+
+Como discutiremos en detalle en el Capítulo 3, Maven requiere una conexión a Internet para descargar complementos y dependencias. Algunas empresas emplean proxies HTTP para restringir el acceso a Internet. En esos escenarios, ejecutar Maven provocará que no se puedan descargar errores de artefactos. Para solucionar este problema, edite el archivo `settings.xml` y agregue la información de proxy específica de su empresa. En el Listado 2-2 se muestra una configuración de muestra.
+
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <proxies>
+    <proxy>
+      <id>companyProxy</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>proxy.company.com</host>
+      <port>8080</port>
+      <username>proxyusername</username>
+      <password>proxypassword</password>
+      <nonProxyHosts />
+    </proxy>
+  </proxies>
+ </settings>
+```
+
+***Listado 2-2*** `Settings.xml` con contenido de proxy
+
+### SECURING PASSWORDS
+
+La contraseña para conectarse al servidor proxy en la sección 2-2 se almacena en texto sin cifrar en el archivo `settings.xml`. Si compartiera accidentalmente su archivo `settings.xml`, su contraseña se verá comprometida. Para abordar esto, Maven proporciona un mecanismo para cifrar las contraseñas que se almacenan en el archivo `settings.xml`.
+
+Comenzamos el proceso de encriptación creando una contraseña maestra usando el siguiente código:
+
+```sh
+mvn -emp mymasterpassword
+{LCWw0+NAqw0HuYH9HNz+1D7aElXM242PtuyoDXDAuelxjwZC8MyXaACkHSy7tZwU}
+```
+
+Maven requiere que la contraseña maestra recién generada se guarde en un archivo `settings-security.xml` en la carpeta `.m2`. Cree un nuevo archivo `settings-security.xml` en la carpeta `.m2` y copie el siguiente contenido en ese archivo.
+
+```sh
+<settingsSecurity>
+<master>{LCWw0+NAqw0HuYH9HNz+1D7aElXM242PtuyoDXDAuelxjwZC8MyXaACkHSy7tZwU}</master>
+</settingsSecurity>
+```
+
+Ejecute el siguiente comando para cifrar la contraseña `"proxypassword"`. Una vez que se complete el comando, copie la salida y reemplace la contraseña de texto sin cifrar en el archivo `settings.xml` por ella:
+
+```sh
+mvn -ep proxypassword
+{i4RnaIHgxqgHyKYySxor+cvshmHweTAvNjuORNYyu5w=}
+```
+
+Aunque el proceso anterior cifra las contraseñas y evita la necesidad de guardar las contraseñas en texto sin cifrar, es importante recordar que cualquier persona que tenga acceso al archivo `settings-security.xml` puede decodificar fácilmente la contraseña maestra y posteriormente descifrar las contraseñas en la configuración `settings.xml`. Un mecanismo para solucionar este problema es almacenar el archivo `settings-security.xml` en un dispositivo externo como una unidad USB.
+
+## Soporte IDE
+
+A lo largo de este libro, usaremos la línea de comandos para crear y construir aplicaciones de muestra. Si está interesado en utilizar un IDE, la buena noticia es que todos los IDE modernos vienen con una integración completa de Maven sin necesidad de configuración adicional.
+
+## Resumen
+
+Este capítulo lo guió a través de la configuración de Maven en su computadora local. Aprendió que Maven descarga los complementos y los artefactos necesarios para su funcionamiento. Estos artefactos se almacenan en la carpeta `.m2\repository`. La carpeta `.m2` también contiene el archivo `settings.xml`, que se puede utilizar para configurar el comportamiento de Maven.
+En el próximo capítulo, analizaremos en profundidad la gestión de dependencias de Maven.
