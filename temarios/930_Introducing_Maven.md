@@ -44,18 +44,18 @@ Aquellos nuevos en Maven o aquellos que estén familiarizados con Maven, pero ta
 
 2. [Setting Up Maven](930_Introducing_Maven/02-Setting-Up-Maven.md)
 
-3. Maven Dependency Management
+3. [Maven Dependency Management](930_Introducing_Maven/03-Maven-Dependency-Management.md)
 
-4. Maven Project Basics
+4. [Maven Project Basics](930_Introducing_Maven/04-Maven-Project-Basics.md)
 
-5. Maven Lifecycle
+5. [Maven Lifecycle](930_Introducing_Maven/05-Maven-Lifecycle.md)
 
-6. Maven Archetypes
+6. [Maven Archetypes](930_Introducing_Maven/06-Maven-Archetypes.md)
 
-7. Documentation and Reporting
+7. [Documentation and Reporting](930_Introducing_Maven/07-Documentation-and-Reporting.md)
 
-8. Maven Release
+8. [Maven Release](930_Introducing_Maven/08-Maven-Release.md)
 
-9. Continuous Integration
+9. [Continuous Integration](930_Introducing_Maven/09-Continuous-Integration.md)
 
-Backmatter
+* Backmatter
