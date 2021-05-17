@@ -2,7 +2,7 @@
 
 ![portada](930_Introducing_Maven/images/portada.jpeg)
 
-by Balaji Varanasi
+by Balaji Varanasi http://blog.inflinx.com/
 
 Number of Pages: 140
 
