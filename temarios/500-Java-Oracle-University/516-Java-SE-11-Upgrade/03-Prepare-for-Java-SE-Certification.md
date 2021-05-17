@@ -19,6 +19,12 @@ FILTERS
 * Version: Java SE 11
 * Language: English
 
+BOOKS
+
+* 📕 Prepare for Java SE 11 Upgrade Certification
+
+01-Prepare-for-Java-SE-11-Upgrade-Certification
+
 ## [1: Prepare for Java SE 11 Upgrade Certification](03-Prepare-for-Java-SE-Certification/01-Prepare-for-Java-SE-11-Upgrade-Certification.md)
 
    * Prepare for Java SE 11 Upgrade Certification - New - 14m
