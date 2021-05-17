@@ -42,7 +42,7 @@ Aquellos nuevos en Maven o aquellos que estén familiarizados con Maven, pero ta
 
 1. [Getting Started with Maven](930_Introducing_Maven/01-Getting-Started-with-Maven.md)
 
-2. Setting Up Maven
+2. [Setting Up Maven](930_Introducing_Maven/02-Setting-Up-Maven.md)
 
 3. Maven Dependency Management
 
