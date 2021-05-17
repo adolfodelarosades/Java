@@ -36,9 +36,9 @@ Aquellos nuevos en Maven o aquellos que estén familiarizados con Maven, pero ta
 
 ## Table of Contents
 
-Cover
+* Cover
 
-Frontmatter
+* Frontmatter
 
 1. Getting Started with Maven
 
