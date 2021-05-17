@@ -34,3 +34,28 @@ Aprenderá todo sobre Maven y cómo configurarlo. En primer lugar, cubrirá el c
 
 Aquellos nuevos en Maven o aquellos que estén familiarizados con Maven, pero tal vez no con la última versión de Maven 3.6.
 
+## Table of Contents
+
+Cover
+
+Frontmatter
+
+1. Getting Started with Maven
+
+2. Setting Up Maven
+
+3. Maven Dependency Management
+
+4. Maven Project Basics
+
+5. Maven Lifecycle
+
+6. Maven Archetypes
+
+7. Documentation and Reporting
+
+8. Maven Release
+
+9. Continuous Integration
+
+Backmatter
