@@ -40,7 +40,7 @@ Aquellos nuevos en Maven o aquellos que estén familiarizados con Maven, pero ta
 
 * [Frontmatter](930_Introducing_Maven/00_Frontmatter.md)
 
-1. Getting Started with Maven
+1. [Getting Started with Maven](930_Introducing_Maven/01-Getting-Started-with-Maven.md)
 
 2. Setting Up Maven
 
