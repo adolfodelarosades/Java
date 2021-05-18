@@ -44,13 +44,41 @@ https://www.eclipse.org/downloads/
 
 Se puede visualizar la siguiente captura de pantalla. En el momento de escribir este libro, la última versión de Eclipse es Eclipse Kepler 4.3.2 SR2, y la descargaremos y usaremos durante el resto del libro.
 
-Elija un sistema operativo apropiado del menú desplegable y descargue el paquete Eclipse IDE para desarrolladores de Java para la arquitectura correspondiente, es decir, 32 o 64 bits (que se muestra en la siguiente captura de pantalla). Elija 32 bits para Java de 32 bits o 64 bits para Java de 64 bits instalado en el sistema.
+Elija un sistema operativo apropiado del menú desplegable y descargue el paquete **Eclipse IDE for Java Developers** para la arquitectura correspondiente, es decir, 32 o 64 bits (que se muestra en la siguiente captura de pantalla). Elija **32 bits** para Java de 32 bits o 64 bits para Java de **64 bits** instalado en el sistema.
 
+![02-01](images/02-01.png)
 
+![02-02](images/02-02.png)
 
 ## Installing and launching Eclipse
+
+![02-03](images/02-03.png)
+
+![02-04](images/02-04.png)
+
 ### Methods to install m2eclipse
 #### Using Eclipse Marketplace
+
+![02-05](images/02-05.png)
+
+![02-06](images/02-06.png)
+
+![02-07](images/02-08.png)
+
+![02-07](images/02-08.png)
+
 #### Using Update Site
+
+![02-09](images/02-09.png)
+
+![02-10](images/02-10.png)
+![02-11](images/02-11.png)
+![02-12](images/02-12.png)
+![02-13](images/02-13.png)
+
 ## Setting up Maven for use
+
+![02-14](images/02-14.png)
+![02-15](images/02-15.png)
+
 ## Summary
