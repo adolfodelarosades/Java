@@ -202,7 +202,7 @@ Veamos el archivo de compilación de Maven más simple, el archivo `pom`, que se
 
 Un archivo `pom` simple se verá como se muestra en el siguiente fragmento de código:
 
-```
+```xml
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.packt.mvneclipse</groupId>
@@ -234,7 +234,7 @@ Para descargar Maven, visite http://maven.apache.org/download.cgi. Haga clic en 
 
 ![01-02](images/01-02.png)
 
-Una vez descargado el archivo ZIP, extraiga los archivos a, digamos, [maven3]. Después de la extracción, el contenido de la carpeta [maven3] tendrá otra carpeta llamada [apache-maven-3.2.1] y el contenido de esa carpeta será como se muestra en la siguiente captura de pantalla:
+Una vez descargado el archivo ZIP, extraiga los archivos a, digamos, [maven3](). Después de la extracción, el contenido de la carpeta [maven3] tendrá otra carpeta llamada [apache-maven-3.2.1] y el contenido de esa carpeta será como se muestra en la siguiente captura de pantalla:
 
 ![01-03](images/01-03.png)
 
