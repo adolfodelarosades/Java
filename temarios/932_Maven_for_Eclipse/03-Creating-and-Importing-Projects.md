@@ -152,7 +152,7 @@ Las coordenadas de Maven definen un conjunto de identificadores que se pueden us
 
 * **project version**: Esto denota una versión específica de un proyecto. También se utiliza dentro del repositorio de un artefacto para separar versiones entre sí. Por ejemplo, [hello-project]() con la versión 1.0 reside en el directorio [$M2_REPO/com/packt/mvneclipse/hello-project/1.0/]().
 
-* **packaging**: Describe la salida empaquetada producida por un proyecto. Si no se declara ningún paquete, Maven asume que el artefacto es el archivo [jar]() predeterminado. Los valores de empaquetado principales disponibles en Maven son: **`pom`**, **`jar`**, **`maven-plugin`**, **`ejb`**, **`war`**, **`ear`**, **`rar`** y **`par`**. La siguiente figura ilustra un ejemplo de coordenadas de Maven:
+* **packaging**: Describe la salida empaquetada producida por un proyecto. Si no se declara ningún paquete, Maven asume que el artefacto es el archivo [jar]() predeterminado. Los valores de empaquetado principales disponibles en Maven son: [pom](), [jar](), [maven-plugin](), [ejb](), [war](), [ear](), [rar]() y [par](). La siguiente figura ilustra un ejemplo de coordenadas de Maven:
 
 ![03-01](images/03-01.png)
 
@@ -208,9 +208,180 @@ Un POM simple (como se muestra en el fragmento de código anterior) no es sufici
 
 ### A super POM
 
+Como Java, donde cada objeto hereda de [java.lang.Object](), cada POM hereda de un POM base conocido como **Super POM**. Implícitamente, cada POM hereda el valor predeterminado del POM base. Facilita el esfuerzo del desarrollador hacia una configuración mínima en su archivo `pom.xml`. Sin embargo, los valores predeterminados se pueden anular fácilmente cuando se especifican en el archivo `pom` correspondiente del proyecto. La configuración predeterminada del super POM puede estar disponible emitiendo el siguiente comando dentro del proyecto respectivo:
+
+```sh
+mvn help:effective-pom
+```
+
+El super POM es parte de la instalación de Maven y se puede encontrar en el archivo [maven-x.y.z-uber.jar]() o [maven-model-builder-x.y.z.jar]() en [$M2_HOME/lib](), donde [x.y.z]() denota la versión. En el archivo JAR correspondiente, hay un archivo llamado [pom-4.0.0.xml]() en el paquete [org.apache.maven.model]().
+
 ![03-03](images/03-03.png)
 
-## The Maven project build architecture
+La configuración predeterminada del super POM heredado en un proyecto de muestra se proporciona de la siguiente manera; En aras de la brevedad, solo se muestran algunos aspectos importantes:
+
+```xml
+<!--General project Information -->
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.packt.mvneclipse</groupId>
+   <artifactId>hello-project</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>hello-project</name>
+   <url>http://maven.apache.org</url>
+   <properties>1
+      <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+   </properties>
+
+   <repositories>
+      <repository>
+         <snapshots>
+            <enabled>false</enabled>
+         </snapshots>
+         <id>central</id>
+         <name>Maven Repository Switchboard</name>
+         <url>http://repo1.maven.org/maven2</url>
+      </repository>
+   </repositories>
+   <pluginRepositories>
+      <pluginRepository>
+         <releases>
+            <updatePolicy>never</updatePolicy>
+         </releases>
+         <snapshots>
+            <enabled>false</enabled>
+         </snapshots>
+         <id>central</id>
+         <name>Maven Plugin Repository</name>
+         <url>http://repo1.maven.org/maven2</url>
+      </pluginRepository>
+   </pluginRepositories>
+
+<!-- Build source directory and details -->
+   <build>
+…
+   <sourceDirectory> ...</sourceDirectory>
+   <scriptSourceDirectory>..</scriptSourceDirectory>
+   <testOutputDirectory>..</testOutputDirectory>
+   <outputDirectory>...<outputDirectory>
+…
+
+
+<finalName>hello-project-0.0.1-SNAPSHOT</finalName>
+   <pluginManagement>
+      <plugins>
+         <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.3</version>
+         </plugin>
+         <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.2-beta-5</version>
+         </plugin>
+         <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.1</version>
+         </plugin>
+         <plugin>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>2.0</version>
+         </plugin>
+      </plugins>
+   </pluginManagement>
+   <plugins>
+
+
+<!-- Plugins, phases and goals -->
+   <plugin>
+      <artifactId>maven-clean-plugin</artifactId>
+      <version>2.4.1</version>
+      <executions>
+         <execution>
+            <id>default-clean</id>
+            <phase>clean</phase>
+            <goals>
+               <goal>clean</goal>
+            </goals>
+         </execution>
+      </executions>
+   </plugin>
+   <plugin>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>2.7.2</version>
+      <executions>
+         <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <goals>
+               <goal>test</goal>
+            </goals>
+         </execution>
+      </executions>
+   </plugin>
+   <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>2.3.2</version>
+      <executions>
+         <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+               <goal>testCompile</goal>
+            </goals>
+         </execution>
+         <execution>
+            <id>default-compile</id>
+            <phase>compile</phase>
+            <goals>
+               <goal>compile</goal>
+            </goals>
+         </execution>
+      </executions>
+   </plugin>
+   <plugin>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>2.3.1</version>
+      <executions>
+         <execution>
+            <id>default-jar</id>
+            <phase>package</phase>
+            <goals>
+               <goal>jar</goal>
+            </goals>
+         </execution>
+      </executions>
+   </plugin>
+   <plugin>
+      <artifactId>maven-deploy-plugin</artifactId>
+      <version>2.5</version>
+      <executions>
+         <execution>
+            <id>default-deploy</id>
+            <phase>deploy</phase>
+            <goals>
+               <goal>deploy</goal>
+            </goals>
+         </execution>
+      </executions>
+   </plugin>
+   <plugin>
+      <artifactId>maven-site-plugin</artifactId>
+      <version>2.0.1</version>
+      <executions>
+         <execution>
+            <id>default-site</id>
+            <phase>site</phase>
+            <goals>
+               <goal>site</goal>
+            </goals>
+            <configuration>
+   </project>
+```
+
+## La arquitectura de construcción del proyecto Maven
+
+La siguiente figura muestra la arquitectura de compilación común para proyectos de Maven. Esencialmente, cada proyecto de Maven contiene un archivo POM que define todos los aspectos de los elementos esenciales del proyecto. Maven usa los detalles de POM para decidir sobre diferentes acciones y generación de artefactos. Las dependencias especificadas se buscan primero en el repositorio local y luego en el repositorio central. También existe la noción de que se busca en el repositorio remoto si se especifica en el POM. Hablaremos de repositorios en la siguiente sección. Además, POM define los detalles que se incluirán durante la generación del sitio.
+
+Eche un vistazo al siguiente diagrama:
 
 ![03-04](images/03-04.png)
 
