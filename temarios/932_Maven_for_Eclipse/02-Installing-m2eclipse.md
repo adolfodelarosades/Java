@@ -63,9 +63,9 @@ Elija un sistema operativo apropiado del menú desplegable y descargue el paquet
 
 ![02-06](images/02-06.png)
 
-![02-07](images/02-08.png)
+![02-07](images/02-07.png)
 
-![02-07](images/02-08.png)
+![02-08](images/02-08.png)
 
 #### Using Update Site
 
