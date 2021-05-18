@@ -234,12 +234,98 @@ Para descargar Maven, visite http://maven.apache.org/download.cgi. Haga clic en 
 
 ![01-02](images/01-02.png)
 
-Una vez descargado el archivo ZIP, extraiga los archivos a, digamos, [maven3](). Después de la extracción, el contenido de la carpeta [maven3] tendrá otra carpeta llamada [apache-maven-3.2.1] y el contenido de esa carpeta será como se muestra en la siguiente captura de pantalla:
+Una vez descargado el archivo ZIP, extraiga los archivos a, digamos, [maven3](). Después de la extracción, el contenido de la carpeta [maven3]() tendrá otra carpeta llamada [apache-maven-3.2.1]() y el contenido de esa carpeta será como se muestra en la siguiente captura de pantalla:
 
 ![01-03](images/01-03.png)
 
-## Installing Maven
-### Installing Maven on Windows
-### Installing Maven on Linux and Mac OS
-#### Verifying the installation of Maven
-### Summary
+## Instalación de Maven
+
+Antes de instalar Maven, necesitamos tener JDK instalado. Consulte la instalación de Java con el siguiente comando:
+
+```sh
+> javac -version
+```
+
+Para Windows, abra el símbolo del sistema y para Linux/Mac OS, abra la terminal y use el comando anterior para ver la versión del JDK que está instalada.
+
+Si JDK no está instalado, consulte el siguiente enlace e instálelo:
+
+http://www.oracle.com/technetwork/java/javase/index-137561.html
+
+Una vez que Java esté en su lugar, avancemos hacia la instalación de Maven.
+
+La instalación de Maven es un proceso simple de dos pasos:
+
+* Configurar Maven home, es decir, la variable [M2_HOME]()
+* Añadiendo Maven home a la variable [PATH]()
+
+### Instalación de Maven en Windows
+
+La instalación de Maven solo está configurando el Maven home en la carpeta de Maven extraída. Para mayor facilidad, supongamos que la carpeta [maven3]() reside en `C:\Program Files`. Ahora, configure Maven home con el siguiente comando en el símbolo del sistema:
+
+```sh
+set M2_HOME="c:\Program Files\maven3\apache-maven-3.2.1"
+```
+
+Actualice la variable [PATH]() de la siguiente manera:
+
+```sh
+set PATH =%PATH%;%M2_HOME%\bin
+```
+
+Alternativamente, las variables se pueden configurar permanentemente navegando a **Desktop | My Computer | Properties**. Visite http://www.computerhope.com/issues/ch000549.htm para obtener más información.
+
+### Instalación de Maven en Linux y Mac OS
+
+Supongamos que la carpeta [maven3]() reside en la carpeta [/opt](). Como Mac OS no tiene la carpeta [/opt](), creemos una carpeta [/opt]() in root, es decir, [/opt](). Ahora, supongamos que tenemos [maven3](), la carpeta extraída en él. Luego, configure el Maven home emitiendo el siguiente comando a través de la terminal:
+
+
+```sh
+export  M2_HOME=/opt/maven3/apache-maven-3.2.1
+```
+
+
+Agregue Maven a la variable [PATH]() de la siguiente manera:
+
+```sh
+export PATH=${M2_HOME}/bin:${PATH}
+```
+
+Para agregarlo permanentemente, agréguelo al archivo [bash]() de la siguiente manera:
+
+```sh
+cd $HOME
+vi .bash_profile
+```
+
+Agregue la variable anterior, es decir, dos líneas al archivo, guárdelo y ejecute el siguiente comando:
+
+```sh
+source  .bash_profile
+```
+
+#### VERIFICACIÓN DE LA INSTALACIÓN DE MAVEN
+
+Después de realizar los pasos anteriores, es hora de verificar la instalación de Maven. Para verificar la instalación, realice lo siguiente:
+
+* Para Windows, abra el símbolo del sistema y escriba lo siguiente:
+
+```sh
+mvn -version
+```
+
+* Para Linux y Mac OS, abra la terminal y escriba lo siguiente:
+
+```sh
+mvn -version
+```
+
+Debería mostrar la versión correspondiente de Maven instalada, como se muestra en la siguiente captura de pantalla:
+
+![01-04](images/01-04.png)
+
+![01-05](images/01-05.png)
+
+### Resumen
+
+¡Felicidades! Al final de este capítulo, se familiarizará con Maven y lo habrá instalado en su sistema. Ahora estás listo para correr hacia el viaje. En el siguiente capítulo, aprenderá a instalar y configurar el complemento m2eclipse para Eclipse.
