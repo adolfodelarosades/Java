@@ -1,2 +1,0 @@
-Prefacio
-Maven para Eclipse es una guía indispensable para ayudarlo a comprender y usar Maven desde el IDE de Eclipse utilizando el complemento m2eclipse. De ninguna manera es un recurso completo y profundo. Más bien, es una guía rápida y práctica para el desarrollo del proyecto Maven. Comienza con los conceptos básicos de Apache Maven; cubre conceptos básicos; y le muestra cómo crear, importar, construir, ejecutar, empaquetar y personalizar para generar artefactos de proyectos de proyectos de Maven utilizando el complemento m2eclipse dentro del IDE de Eclipse.
