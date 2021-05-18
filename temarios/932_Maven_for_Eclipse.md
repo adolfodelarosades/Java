@@ -48,7 +48,7 @@ Al final de este libro, tendrá un buen conocimiento de m2eclipse y podrá usarl
    * Why subscribe?
    * Free access for Packt account holders
 
-* Preface
+* [Preface](932_Maven_for_Eclipse/00-Preface.md)
    * What this book covers
    * What you need for this book
    * Who this book is for
