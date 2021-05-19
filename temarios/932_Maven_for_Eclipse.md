@@ -78,7 +78,7 @@ Al final de este libro, tendrá un buen conocimiento de m2eclipse y podrá usarl
          * Verifying the installation of Maven
    * Summary
 
-2. Installing m2eclipse
+2. [Installing m2eclipse](932_Maven_for_Eclipse/02-Installing-m2eclipse.md)
    * Introduction to m2eclipse
    * Downloading Eclipse
    * Installing and launching Eclipse
@@ -88,7 +88,7 @@ Al final de este libro, tendrá un buen conocimiento de m2eclipse y podrá usarl
    * Setting up Maven for use
    * Summary
 
-3. Creating and Importing Projects
+3. [Creating and Importing Projects](932_Maven_for_Eclipse/03-Creating-and-Importing-Projects.md)
    * The Maven project structure
    * POM (Project Object Model)
       * Maven coordinates
