@@ -156,30 +156,187 @@ Desarrollar complementos personalizados para Maven es muy sencillo. Como se menc
 Esta sección explica cómo desarrollar un SystemInfoPlugin que muestra información del sistema, como la versión de Java, el sistema operativo y similares, en la consola que ejecuta el comando Maven.
 Comencemos el desarrollo de este complemento creando un proyecto Java de Maven, llamado gswm-maven-plugin, como se muestra en la Figura 5-3.
 
+![image](https://user-images.githubusercontent.com/23094588/118943477-f3e18780-b953-11eb-8958-75cebd95e512.png)
 
+
+***Figura 5-3*** Proyecto Maven para desarrollo de complementos
+
+> **Nota:** En este capítulo, estamos creando manualmente el proyecto de plug-in. Maven proporciona un *mavan-archetype-mojo*, que impulsaría el desarrollo de complementos. Aprenderemos sobre los arquetipos de Maven en el Capítulo 6.
+
+El contenido del archivo `pom.xml` se muestra en el Listado 5-5. Tenga en cuenta que el tipo de paquete es `maven-plugin`. Agregamos las dependencias `maven-plugin-api` y `maven-plugin-annotations`, porque son necesarias para el desarrollo de complementos. Aprovecharemos Apache Commons Lang para obtener información del sistema. Por lo tanto, también hemos agregado la dependencia Apache Commons Lang 3.
 
 ```sh
-
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.apress.plugins</groupId>
+   <artifactId>gswm-maven-plugin</artifactId>
+   <version>1.0.0</version>
+   <packaging>maven-plugin</packaging>
+   <description>System Info Plugin</description>
+   
+   <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+   </properties>
+   <dependencies>
+      <dependency>
+         <groupId>org.apache.maven</groupId>
+         <artifactId>maven-plugin-api</artifactId>
+         <version>3.6.1</version>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.maven.plugin-tools</groupId>
+         <artifactId>maven-plugin-annotations</artifactId>
+         <version>3.6.0</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.commons</groupId>
+         <artifactId>commons-lang3</artifactId>
+         <version>3.9</version>
+      </dependency>
+   </dependencies>
+   <!-- Use the latest version of Plugin  -->
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-plugin-plugin</artifactId>
+            <version>3.6.0</version>
+         </plugin>
+      </plugins>
+   </build>
+</project>
 ```
+
+***Listado 5-5*** El `pom.xml` con dependencias
+
+El siguiente paso en el proceso de desarrollo es crear el MOJO. El Listado 5-6 muestra el código de `SystemInfoMojo`. La anotación `@Mojo` marca la clase `SystemInfoMojo` como un Mojo con `"systeminfo"` como el nombre del goal. El método `execute` contiene esa lógica de objetivo. En `SystemInfoMojo`, simplemente registramos varias piezas de información del sistema en la consola.
+
+
+```java
+package com.apress.plugins;
+
+import org.apache.commons.lang3.SystemUtils;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+
+@Mojo( name = "systeminfo")
+public class SystemInfoMojo extends AbstractMojo {
+
+   @Override
+   public void execute() throws MojoExecutionException, MojoFailureException {
+      getLog().info( "Java Home: " + SystemUtils.JAVA_HOME );
+      getLog().info( "Java Version: "+ SystemUtils.JAVA_VERSION);
+      getLog().info( "OS Name: " + SystemUtils.OS_NAME );
+      getLog().info( "OS Version: " + SystemUtils.OS_VERSION );
+      getLog().info( "User Name: " + SystemUtils.USER_NAME );
+   }
+   
+}
+```
+
+***Listado 5-6*** Clase Java `SystemInfoMojo`
+
+El último paso de este proceso es instalar el plug-in en el repositorio de Maven. Ejecute el comando `mvn install` en la raíz del directorio y debería obtener el resultado que se muestra en el Listado 5-7.
+
 ```sh
-
+C:\apress\gswm-book\chapter5\gswm-maven-plugin>mvn install
+[INFO] Scanning for projects...
+[INFO]
+[INFO] --------< com.apress.plugins:gswm-maven-plugin >--------
+[INFO] Building gswm-maven-plugin 1.0.0
+[INFO] -------------------[ maven-plugin ]---------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ gswm-maven-plugin
+[INFO] java-annotations mojo extractor found 1 mojo descriptor.
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ gswm-maven-plugin ---
+[INFO] Installing C:\apress\gswm-book\chapter5\gswm-maven-plugin\target\gswm-maven-plugin-1.0.0.jar to C:\Users\<<USER_NAME>>\.m2\repository\com\apress\plugins\gswm-plugin\1.0.0\gswm-maven-plugin-1.0.0.jar
+[INFO] Installing C:\apress\gswm-book\chapter5\gswm-maven-plugin\pom.xml to C:\Users\<<USER_NAME>>\.m2\repository\com\apress\plugins\gswm-maven-plugin\1.0.0\gswm-maven-plugin-1.0.0.pom
+[INFO] --------------------------------------------------------
+[INFO] BUILD SUCCESS
 ```
+
+***Listado 5-7*** Maven `install` Command
+
+Ahora está listo para comenzar a usar este plug-in. Recuerde que la sintaxis para ejecutar cualquier goal es `mvn pluginId:goal-name`. El Listado 5-8 muestra este plug-in en acción. Observe la información del sistema que se muestra en la consola.
+
 ```sh
-
+C:\apress\gswm-book\chapter5\gswm-plugin>mvn com.apress.plugins:gswm-maven-plugin:systeminfo
+[INFO] Scanning for projects...
+[INFO] --- gswm-maven-plugin:1.0.0:systeminfo (default-cli) @ gswm-maven-plugin ---
+[INFO] Java Home: C:\java\jdk-11
+[INFO] Java Version: 11.0.1
+[INFO] OS Name: Windows
+[INFO] OS Version: 10
+[INFO] User Name: Balaji
+[INFO] --------------------------------------------------------
 ```
+
+***Listado 5-8*** Ejecución del Plug-in `SystemInfoMojo`
+
+El plug-in recientemente desarrollado también está listo para usarse en otros proyectos de Maven. El Listado 5-9 muestra una parte del archivo POM que adjunta el systeminfo goal a la fase validate.
+
+```xml
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.apress.plugins</groupId>
+   <artifactId>gswm-plugin-test</artifactId>
+   <version>1.0.0</version>
+   <packaging>jar</packaging>
+   <description>Plugin Test</description>
+       
+   <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+   </properties>
+       
+   <dependencies />
+       
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>com.apress.plugins</groupId>
+            <artifactId>gswm-maven-plugin</artifactId>
+            <version>1.0.0</version>
+            <executions>
+               <execution>
+                  <phase>validate</phase>
+                  <goals>
+                     <goal>systeminfo</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+  
+</project>
+```
+
+***Listado 5-9*** Archivo POM usando el Goal systeminfo
+
+Cuando se invoca la fase de Maven, como compile o package, verá la salida del goal systeminfo como se muestra en el Listado 5-10.
+
 ```sh
-
+mvn compile
+[INFO] Scanning for projects...
+[INFO] Building gswm-plugin-test 1.0.0
+[INFO] Java Home: C:\java\jdk-11
+[INFO] Java Version: 11.0.1
+[INFO] OS Name: Windows
+[INFO] OS Version: 10
+[INFO] User Name: Balaji
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ gswm-plugin-test ---
 ```
-```sh
 
-```
-```sh
+***Listado 5-10*** Salida de fase de Compile
 
-```
+## Resumen
 
+Maven utiliza una arquitectura basada en plug-in que permite ampliar su funcionalidad fácilmente. Cada plug-in es una colección de uno o más goals que se pueden utilizar para ejecutar tareas, como compilar código fuente o ejecutar pruebas. Maven vincula los goals a las fases. Las fases se ejecutan normalmente en una secuencia como parte de un ciclo de vida de compilación. También aprendió los conceptos básicos para crear un plug-in.
 
-
-
-
-
-
+En el próximo capítulo, se le presentará a los arquetipos y aprenderá sobre proyectos de módulos múltiples.
