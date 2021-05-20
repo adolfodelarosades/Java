@@ -155,11 +155,198 @@ C:\apress\gswm-book\chapter4\gswm>mvn package
 
 ***Listado 4-3*** Salida del Maven Package Command para compilar la aplicación
 
-AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+> **Nota**: si es la primera vez que ejecuta Maven, descargará los complementos y las dependencias necesarias para su ejecución. Por lo tanto, su primera compilación puede demorar más de lo esperado.
+
+El sufijo `package` después del comando `mvn` es una fase de Maven que compila el código Java y lo empaqueta en el archivo `JAR`. El archivo `JAR` empaquetado termina en la carpeta `gswm\target`, como se muestra en la Figura 4-4.
+
+![image](https://user-images.githubusercontent.com/23094588/118929994-7f9fe780-b945-11eb-939b-73b6b5106084.png)
+
+***Figura 4-4*** Packaged `JAR` ubicado debajo de la carpeta de destino
+
+## Testing el Project
+
+Ahora que ha completado la compilación del proyecto, agreguemos un test `JUnit` que pruebe el método `sayHello()`. Comencemos este proceso agregando la dependencia `JUnit` al archivo `pom.xml`. Lo logra utilizando el elemento `dependencies`. El Listado 4-4 muestra el archivo `pom.xml` actualizado con dependencia `JUnit`.
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.apress.gswmbook</groupId>
+   <artifactId>gswm</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+   <packaging>jar</packaging>
+   <name>Getting Started with Maven</name>
+   <url>http://apress.com</url>
+   <developers>
+      <developer>
+         <id>balaji</id>
+         <name>Balaji Varanasi</name>
+         <email>balaji@inflinx.com</email>
+         <properties>
+            <active>true</active>
+         </properties>
+      </developer>
+      <developer>
+         <id>sudha</id>
+         <name>Sudha Belida</name>
+         <email>sudha@inflinx.com</email>
+         <properties>
+            <active>true</active>
+         </properties>
+      </developer>
+   </developers>
+   <dependencies>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.12</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+</project>
+```
+
+***Listado 4-4*** POM actualizado con dependencia `JUnit`
+
+Observe que ha utilizado el scope `test`, lo que indica que `JUnit .jar` es necesario solo durante la fase de prueba. Asegurémonos de que esta dependencia se haya agregado correctamente ejecutando `mvn dependency:tree` en la línea de comandos. El Listado 4-5 muestra el resultado de esta operación.
 
 
-## Testing the Project
-## Properties in pom.xml
-### Implicit Properties
-### User-Defined Properties
-## Summary
+```sh
+C:\apress\gswm-book\chapter4\gswm>mvn dependency:tree
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ gswm ---
+[INFO] com.apress.gswmbook:gswm:jar:1.0.0-SNAPSHOT
+[INFO] \- junit:junit:jar:4.12:test
+[INFO]    \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] --------------------------------------------------------
+[INFO] BUILD SUCCESS
+```
+
+***Listado 4-5*** Salida del comando Maven Tree
+
+El objetivo del árbol en el complemento de dependencia muestra las dependencias del proyecto como un `tree`. Observe que la dependencia `JUnit` generó una dependencia transitiva llamada `hamcrest`, que es un proyecto de código abierto que facilita la escritura de objetos de coincidencia.
+
+Ahora que tiene la dependencia `JUnit` en la ruta de clases, agreguemos una prueba unitaria(unit test) `HelloWorldTest.java` al proyecto. Cree las carpetas `test/java` en `src` y agregue `HelloWorldTest.java` debajo. La estructura del proyecto actualizada se muestra en la Figura 4-5.
+
+![image](https://user-images.githubusercontent.com/23094588/118931483-5ed89180-b947-11eb-97be-ac14d9020281.png)
+
+***Figura 4-5*** Estructura de Maven con clase de prueba
+
+El código fuente de `HelloWorldTest` se muestra en el Listado 4-6.
+
+```java
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+public class HelloWorldTest {
+
+   private final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+   
+   @Before
+   public void setUp() {
+      System.setOut(new PrintStream(outStream));
+   }
+   @Test
+   public void testSayHello() {
+      HelloWorld hw = new HelloWorld();
+      hw.sayHello();
+      Assert.assertEquals("Hello World", outStream.toString());
+   }
+   @After
+   public void cleanUp() {
+      System.setOut(null);
+   }
+}
+```
+
+***Listado 4-6*** Código para la clase Java `HelloWorldTest`
+
+Ahora tiene todo configurado en este proyecto, por lo que puede ejecutar `mvn package` una vez más. Después de ejecutarlo, verá una salida similar a la que se muestra en el Listado 4-7.
+
+```sh
+C:\apress\gswm-book\chapter4\gswm>mvn package
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ gswm ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ gswm ---
+---------------------------------------------------------------
+[INFO] Surefire report directory: C:\apress\gswm-book\chapter4\gswm\target\surefire-reports
+---------------------------------------------------------------
+ T E S T S
+---------------------------------------------------------------
+Running HelloWorldTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 sec
+Results :
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ gswm ---
+[INFO] Building jar: C:\apress\gswmbook\chapter4\gswm\target\gswm-1.0.0-SNAPSHOT.jar
+[INFO] --------------------------------------------------------
+[INFO] BUILD SUCCESS
+```
+
+***Listado 4-7*** Salida del comando Maven para la construcción del proyecto
+
+Tenga en cuenta la sección de Pruebas en el Listado 4-7. Muestra que Maven ha ejecutado la prueba y que se ha completado con éxito.
+La Figura 4-6 muestra la carpeta de destino actualizada. Puede ver que ahora tiene una carpeta de clases de prueba con sus informes asociados en esa carpeta.
+
+![image](https://user-images.githubusercontent.com/23094588/118932369-44eb7e80-b948-11eb-8c7f-b7d5b75df7ed.png)
+
+***Figura 4-6*** Carpeta de destino(target) con clases de prueba
+
+### Propiedades en `pom.xml`
+
+Maven proporciona propiedades AKA placeholders (también conocidas como marcadores de posición) que se pueden usar dentro del archivo `pom.xml`. Se hace referencia a las propiedades de Maven en el archivo `pom.xml` usando la notación `${property_name}`. Hay dos tipos de propiedades: implícitas y definidas por el usuario.
+
+
+#### PROPIEDADES IMPLÍCITAS
+
+Las propiedades implícitas son propiedades que están disponibles de forma predeterminada para cualquier proyecto de Maven. Por ejemplo, Maven expone sus propiedades del modelo de objetos del proyecto utilizando el prefijo ` “project.”`. Para acceder al valor `artifactId` dentro del archivo `pom.xml`, puede usar ` ${project. artifactId}` como se muestra a continuación:
+
+```xml
+<build>
+   <finalName>${project.artifactId}</finalName>
+</build>
+```
+
+De manera similar, para acceder a las propiedades desde el archivo `settings.xml`, puede usar el prefijo `“settings.” `. Finalmente, el prefijo `“env.”` se puede utilizar para acceder a los valores de las variables de entorno. Por ejemplo, `${env.PATH}` devolverá el valor de la variable de entorno PATH.
+
+#### PROPIEDADES DEFINIDAS POR EL USUARIO
+
+Maven le permite declarar propiedades personalizadas en el archivo `pom.xml` usando el elemento `<properties />`. Estas propiedades son muy útiles para declarar versiones de dependencia. El Listado 4-8 muestra el archivo `pom.xml` actualizado con la versión `JUnit` declarada como propiedad. Esto es especialmente útil cuando `pom.xml` tiene muchas dependencias y necesita conocer o cambiar una versión de una dependencia en particular.
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.apress.gswmbook</groupId>
+   <!-- Removed for brevity -->
+  
+   <properties>
+      <junit.version>4.12</junit.version>
+   </properties>
+   <developers>
+      <!-- Removed for brevity -->
+   </developers>
+   <dependencies>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>${junit.version}</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+</project>
+```
+
+***Listado 4-8*** Archivo `pom.xml` con propiedades
+
+## Resumen
+
+El CoC de Maven prescribe un diseño de directorio estándar para todos sus proyectos. Proporciona varios directorios sensibles como `src\main\java` y `src\test`, junto con recomendaciones sobre el contenido que se incluye en cada uno de ellos. Aprendió sobre el archivo `pom.xml` obligatorio y algunos de sus elementos, que se utilizan para configurar el comportamiento del proyecto Maven.
+
+En el próximo capítulo, verá el ciclo de vida de Maven, los complementos, las fases de compilación, los objetivos y cómo aprovecharlos de manera efectiva.
