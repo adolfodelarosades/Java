@@ -386,15 +386,50 @@ El paso final para crear el arquetipo es ejecutar lo siguiente en la línea de c
 ```sh
 mvn clean install
 ```
-AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-## Usando el arquetipo
 
-Una vez que el arquetipo está instalado, la forma más fácil de crear un proyecto a partir de él es ejecutar el siguiente comando en C: \ apress \ gswm-book \ chapter6:
-arquetipo mvn: generate -DarchetypeCatalog = local
-Ingrese los valores que se muestran en el Listado 6-10 para las solicitudes de Maven y verá un proyecto de prueba creado.
+## Usando el Archetype
+
+Una vez que el arquetipo está instalado, la forma más fácil de crear un proyecto a partir de él es ejecutar el siguiente comando en `C:\apress\gswm-book\chapter6`:
 
 ```sh
+mvn archetype:generate -DarchetypeCatalog=local
 ```
 
+Ingrese los valores que se muestran en el Listado 6-10 para los Maven prompts y verá `test-project` creado.
+
 ```sh
+C:\apress\gswm-book\chapter6>mvn archetype:generate -DarchetypeCatalog=local
+[INFO] Scanning for projects...
+[INFO]
+[INFO] --------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------------------------------
+[INFO] Generating project in Interactive mode
+[INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
+Choose archetype:1: local -> com.apress.gswmbook:gswm-web-archetype (gswm-web-archetype)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
+Define value for property 'groupId': : com.apress.gswmbook
+Define value for property 'artifactId': : test-project
+Define value for property 'version':  1.0-SNAPSHOT: :
+Define value for property 'package':  com.apress.gswmbook: :
+Confirm properties configuration:
+groupId: com.apress.gswmbook
+artifactId: test-project
+version: 1.0-SNAPSHOT
+package: com.apress.gswmbook
+ Y: :
+---------------------------------------------------------------
+project
+[INFO] --------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] --------------------------------------------------------
 ```
+
+***Listado 6-10*** Creando un nuevo proyecto usando Archetype
+
+Debido a que el archivo `pom.xml` para el `test-project` ya tiene el plug-in Jetty incorporado, ejecute `mvn jetty:run` en la línea de comando en la carpeta `C:\apress\gswm-book\chapter6\test-project` para iniciar el proyecto . Abra un navegador y navegue hasta `http://localhost:8080/status`. Verá que se muestra la cadena OK.
+
+## Resumen
+
+Los arquetipos de Maven son plantillas de proyectos que le permiten iniciar nuevos proyectos rápidamente. Este capítulo utilizó arquetipos incorporados para generar proyectos avanzados de Maven, como proyectos web y proyectos de varios módulos. También buscó crear y usar un arquetipo personalizado.
+En el próximo capítulo, aprenderá los conceptos básicos de la generación de sitios y la creación de documentación e informes utilizando Maven.
