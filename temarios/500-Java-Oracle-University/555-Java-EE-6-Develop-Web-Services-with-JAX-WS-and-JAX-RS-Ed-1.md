@@ -22,7 +22,7 @@ STUDENT GUIDES
 * 📕 Java EE 6 Develop Web Services with JAX-WS & JAX-RS Ed 1 Student Guide
 * 📕 Java EE 6 Develop Web Services with JAX-WS & JAX-RS Ed 1 Activity Guide
 
-## 1: Introduction to Web Services
+## [1: Introduction to Web Services](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/01-Introduction-to-Web-Services.md)
 
    * Introduction to Web Services: Part 1 40m
    * Introduction to Web Services: Part 2 12m
