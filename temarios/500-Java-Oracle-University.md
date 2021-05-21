@@ -85,7 +85,7 @@ This entry-level course is aimed at programmers who are new to Java and who need
 
 This is a second-level course for programmers learning the Java language. It rounds-out the topics that were taught in the
 
-## [Java EE 6: Develop Web Services with JAX-WS and JAX-RS](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/554-Java-EE-6-Develop-Web-Applications-with-JSF-Ed-1.md)
+## [Java EE 6: Develop Web Services with JAX-WS and JAX-RS](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1.md)
 
 This Java EE 6 programming course covers the design and creation of SOAP and RESTful web services and clients. You'll use the
 
@@ -265,7 +265,7 @@ The Java EE 7: Back-End Server Application Development training teaches you how 
 
 This Java EE 6 training teaches you how to build web applications suited to any Java EE 6 application server, using JSP and servlet technologies. Learn to use new features &
 
-## [Java EE 6: Develop Web Applications with JSF Ed 1]()
+## [Java EE 6: Develop Web Applications with JSF Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/554-Java-EE-6-Develop-Web-Applications-with-JSF-Ed-1.md)
 
 This course will be archived on 05/21/2021
 
