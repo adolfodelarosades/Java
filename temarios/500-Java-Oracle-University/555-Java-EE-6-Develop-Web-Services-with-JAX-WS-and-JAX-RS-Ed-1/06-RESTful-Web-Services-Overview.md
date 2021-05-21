@@ -11,7 +11,6 @@
 
 ## RESTful Web Services: Overview: Part 1 29m
 
- 
 Let's go ahead now and turn to RESTful web services. So far, what we've done is we just went through an overview of SOAP web services, and then we created a JAX-WS web service client. And I was using either the WS import engine, and of course, all the dispatch client.
 
 Now what we want to do is get into the RESTful web services. And we're going to take a look at an overview of these RESTful web services. So we're going to look at the RESTful web services architecture and how it can be applied to web services, and design RESTful web services, identify resources, navigate RESTful web service using hypermedia, select the correct HTTP method to use when duplicating-- of course, a request must be avoided-- and identify the web service result status-- and looking also at RESTful web service versions.
@@ -143,10 +142,93 @@ All right. And this is pretty much what we wanted to say, how to introduce these
 And that's pretty much-- and of course, we always give you some resources at the end of the lecture, just to do a little bit more reading if you want about the different topics that we discovered and that we covered in this particular lecture. And that's what we wanted to say about the introduction to RESTful web services.
 
 ## RESTful Web Services: Overview: Part 2 6m
+
+OK. After we looked at exploring RESTful web services, let's go ahead now and look at the practices for this lesson. So in this lesson, for practice 1, what we want to do is enable a RESTful web service of WebLogic. And of course in this case, we enable a REST web service within the WebLogic server that provides advanced monitoring capabilities because, of course, monitoring by its very nature does not change anything. So you will find that a REST web service explored here uses only GET operations. Later, of course, in the lessons, we'll leverage additional HTTP methods.
+
+Of course, the WebLogic server is not the only Java EE application server that supports REST interface. For information, you can go ahead and see in that link. So pretty much here they ask you to get into the admin console. And then from there, you go under the Configuration tab, General, and then you'll click [INAUDIBLE] Advanced. And you will see that there is a Enable RESTful WebService service box that you are going to enable. You save, and then of course you're good with that.
+
+The exercise, so practice 6-2, explores WebLogic RESTful WebService service in this case, or RESTful management services. And so in this case, what you do is you explore the RESTful management service provided by the WebLogic server using a cURL and RESTClient extension. So you go through these tasks. And at some point in time, by the way, they'll tell you using the RESTClient, attempt to determine the amount of heap memory for your server.
+
+The way you do that pretty much is straightforward. You can go ahead and just do an extension. And then in that, you can go ahead and look at, in this case, the URL, which is local host 7001 management tenant monitoring service, and then my server. If we click in this case, then obviously in this case you get the OK. And then their response, if you look in this case, you will see the size of the heap, the maximum size of the heap, the heap for the current in this case size and so forth. So you'll see some of here the heap size current in this case. So all these are sizes of the heap of your system for this one here.
+
+And then in practice 6-3, you're going to update the Jersey, in this case, JAX-RS. In this practice, we install the Jersey 1.17 as WebLogic server shared library. This Jersey is the reference implementation of JAX-RS. Shared library, library is a collection of classes and resources that any deployed application can use. These shared libraries even take preference over classes that are bounded with the WebLogic server in this case, or rather bundled with the WebService WebLogic server, thereby allowing deployed application to use different version of a library. WebLogic server 12.1.1.1 includes the Jersey 1.9 as the JAX-RS implementation.
+
+Of course, by deploying the Jersey 1.17 as a shared library, you enable any deployed application to select the version of the Jersey it will use at run time. And if you do this, by the way, on NetBeans it would look something like this. Under the Tools and Library, and then this is already installed here, this one here. So if you take a look at this, you will see it's Jersey 1.17. And you're going to add all these JAR files here under class path. And then you also go to the dock and add all these, in this case, folder for the documentation. So that's what you are going to do in this particular.
+
+So you start by doing that. So you go through all of these steps, in this case, by installing all of these steps. And then of course using the WebLogic, you're going to view the admin console. And then what you're going to do, through the admin console, by connecting through WebLogic and welcome1, you can go ahead and install this Jersey library WAR file. Go through all these steps.
+
+If you take a look here, you will see that I already did install this. And it shows here that it's installed, the Jersey 1.17 that you see here. That's what you guys are going to do for the lab. And of course after that, using the shared library in any Java EE web application requires the lines to be added to the WebLogic.xml, which are all these lines. You guys are going to add all these to the WebLogic.xml.
+
+In practice number 6-4, you're going to create a basic RESTful web service with JAX-RS. So just follow the steps step-by-step. Here, you're going to create a simple RESTful web service with JAX-RS. And then in a later lesson, we will cover the JAX-RS in depth. And that will be, of course, tomorrow.
+
+So follow the steps and create this RESTful web service called "Hello REST". And of course, do all the configuration necessary. And then of course after you do that, test your application.
+
+And this is just an optional type of practice where you explore the RESTful web service using cURL. Again, you're not required to do that. But if you're interested and you want to try it, go ahead and try that.
+
+This is pretty much what we have for practices for lesson six, which is the overview of RESTful web services. Thanks.
+
 ## Practice 6-1: Enabling RESTful Management Services for WebLogic 2m
+
+OK. Now that we're done with lecturing lesson six, let's go ahead and do its practices. In practice 6-1, we are going to enable RESTful management services for WebLogic. And to do that, what we are going to do is open the admin console, OK? And of course, under the admin console in this case, we'll go ahead in this case, and of course, let me go ahead and show you that in the browser.
+
+So we'll go ahead in this case, and get into to the-- first of all, click on My Domain, and then from there, get into the-- in the configuration general tab, and then expand the advanced section. And then, of course, a set. You know, in this case enable the web service, the enable RESTful web and management service, and then click on Save.
+
+And that's why we have this green message that says, you know, successfully done. And then, of course, after that we need to restart the WebLogic, which I already have done. And that would be what's needed to be done in practice 6-1. Thank you.
+
 ## Practice 6-2: Exploring WebLogic RESTful Management Services 3m
+
+In practice 6-2, we want to explore the WebLogic RESTful Management Service. Again, in this case we explore the RESTful Management Services provided by WebLogic server using, again, in this case, the REST Client extension. So in this case, we'll go ahead and first get into the URL local host 7001 management tenant monitoring. And that of course would be, in this case, on my, as you see here, it says name my server state running, health is OK.
+
+And after that, they want us to use the web browser and open server resources in this case. So that would be in my next, in this case, where we start the Firefox web browser and use REST Client in this case. And then enter, in this case, the URL, HTTP local host 7000 management to tenant monitoring servers. And that of course would give us, in this case-- and they want us by the way to set the header menu to be in this case on getting the accept application HTML. Which, by the way, we'll show you now in the next example.
+
+So it says that, in this case, of course the status code is 200. And then this is the body, the response body row. And this is the highlight, which is again my server which is running. And then of course after that they want us to use the REST Client extension to attempt to determine the amount of heap memory in this server. We've done this where we specified, in this case, first of all the header have to be accept in application.xml. And then we connect to the URL local host 7001 management tenant monitoring servers, and my server, because the server is my server.
+
+And this actually will attempt-- will give us the amount of heap memory used by the server. And if you take a look at the output here, you will see that we have, in this case, the server is my server running. The health is OK. And then down here we can see some of the memory, in this case, size. So we have the heap size current, which is this size here, and then we have the heap-free current. And we have the heap size max. And this is pretty much giving us, in this case, the heap memory used for the server. And that's pretty much what they want us to do in practice 6-2. Thank you.
+
 ## Practice 6-3: Updating Jersey (JAX-RS) 3m
+
+In practice 6-3 we're going to update the Jersey JAX-RS. So we installed the Jersey 1.17 as a WebLogic shared library. Again, Jersey is a reference implementation of the JAX-RS. A shared library is a collection of classes and resources that any deployed application can use.
+
+Again, these shared libraries can even take preference over classes that are bundled with WebLogic Server, thereby allowing deployed applications to use different versions of libraries. Of course, WebLogic server 12.1.1.1 includes Jersey 1.9 as the JAX-RS. Implementation. By deploying the Jersey 1.17 as a shared library, we enable any deployed application to select the version of a Jersey it will use at run time.
+
+Of course, the Jersey is really useful for the JAX-RS. web services that we are going to use later on. So in this case, pretty much go to NetBeans, and enter the-- of course, let me go ahead and just minimize this guy here. And so under the tools, and of course library, I already installed that, and that's called the Jersey 1.17, which is this one here.
+
+And I installed all these JAR files. Again, of course, I've entered the Java documentation. I also installed these different type of folders. That's pretty much what you're supposed to do. Then, after that, you are supposed to install the Jersey 1.17 shared library. In this case, the way you do it, of course, is this is all done. I'll just go ahead and cancel this one here, but then enter the admin console.
+
+That's where I went through the deployment, and then created an install, and then flowed the steps to install the shared library, which, by the way, here shows that it's already installed and active, Jersey 1.17 that you see here. So again, the steps are quite straightforward.
+
+Click on Install, and then following the steps step by step, and then, of course, it shows you how you get, you know, through the steps they showed you in this case on step six, where that allowed you, of course, to install all of that. That's pretty much what they want us to do in this particular case. And then that would be the practice, in this case, 6-3. Thank you.
+
 ## Practice 6-4: Creating a Basic RESTful Web Service with JAX-RS 5m
+
+ 
+In practice 6-4, we're going to create a basic RESTful web service with JAX-RS. Again, in this case, it would be-- later on we're going to, of course, cover in detail this JAX-RS API. But for now, we are going to, in this case, with a project called "Hello REST". And in this project "Hello REST", let me go ahead and-- I already opened it and created it in NetBeans. And of course, it is a project that is going to contain a class representing a RESTful web service. So it makes use of JDK 7, and it has the weblogic.xml under the configuration file here that makes use of the Jersey API that you see here again, and that we can show you here on the full screen, full editor.
+
+And of course, in this case, they want us to create a class called Greeting Resource, which is this one here under the Hello folder. This is actually a class that is going to represent a RESTful web service. The reason why it is a RESTful web service is because of this annotation @path, which by the way we are going to see in the future when we get into the JAX-RS API.
+
+So it has a text, which happens to be static. And then of course it has a context, in this case, get an instance of context. Here's a constructor. And then it has a bunch of methods. As you see here, the methods are also annotated. For example a Get, which returns a string, is annotated @Get. And then this [INAUDIBLE] of course produces the type of-- it would be text plain. And then it has a put, which takes, by the way, a string and that you pass from the client. That's why we have the @Put annotation here. And then of course the type of data it consumes is text plain. And that of course takes that content and initializes with it the text which is, in this case, a static field of the class called Greeting Resource. So this is a RESTful web service.
+
+And of course what they want us to do here is just to test it. So what I've done is first of all deployed this application by right-click, and then deploy is already done to save time. And then of course they want us to test it. So what I did in this case, just following what they have asked us to do in the activity guide, step eight of this practice, which is 6-4. And so they want us to create a RESTClient-- of course open, launch the RESTClient. That's what I did.
+
+And then of course they want us to use the URL local host 7000 hello REST web resources and forward slash greeting. And then when I click Send, I get the response, which is again, in this case, a response header would be a 200 OK, which is good. And then of course, the body would be hello. And that's what they want us, in this case, to do.
+
+And then of course if we change this now, in this case, we will change then this to Put. The method, instead of Send, is going to be Put. And we enter in this case the new message in the request body, which is Hello Dave.
+
+And then, of course, after that, they want us to click Send. And then of course we switch back to the GET method. And then we invoke in this case the Send. And then of course this, as you see, will return Hello Dave. And that's exactly what they want us to do in this case. And that's pretty much what we wanted to do in practice 6-4. Thank you.
+
 ## Practice 6-5: Exploring a REST Service with cURL 2m
+
+In practice 6-5 we explore a REST web service with cURL. Again, this is optional. You do not need, really, to do it unless you're done with all the labs, exactly like the ones that I mentioned to you before. And of course, we use the cURL command utility to explore WebLogic RESTful web services. All that you do here is pretty much go into the-- in this case the command, in this case a terminal.
+
+And of course, change it to the lab student resources. And then, of course, in this case use the cURL executable to request the list of applications running on the domain. Again, the response should be JSON formatted. Of course, we should but that in a large production environment, multiple WebLogic Server instances would be installed and grouped together to form a domain.
+
+Again, we can use WebLogic RESTful management services to check that a particular application is running correctly on every server. Again, that would be the target. That is, of course, installed in this case, too. So we could, by the way, design a shell script that alerts you when the application status changed. And again, in this case it would be JSON or XML.
+
+Or HTML would be easier to pass, again, with the command line tools, like, you know, set and AWK, and so forth. Or XCD. And that's pretty much what they want us to do in this practice 6-5, which happens to be optional. Which means, like I mentioned to you, we really do not need to do this practice, unless you're done with all the rest of the practices. Thank you.
+
 ## Skill Check: RESTful Web Services: Overview - Score 80% or higher to pass
+
+Skill Check: RESTful Web Services: Overview
+
+View Skill Check
 
