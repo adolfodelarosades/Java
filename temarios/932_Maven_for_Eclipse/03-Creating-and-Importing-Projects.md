@@ -385,17 +385,131 @@ Eche un vistazo al siguiente diagrama:
 
 ![03-04](images/03-04.png)
 
-## Other essential concepts
+## Otros conceptos esenciales
+
+Los otros conceptos esenciales de Maven se analizan en las siguientes secciones.
+
 ### Repository
-#### The local repository
-#### The central repository
-#### The remote repository
-#### Search sequence in repositories
+
+Los repositorios de Maven son ubicaciones accesibles diseñadas para almacenar los artefactos que produce Maven. Para ser más precisos, un repositorio es una ubicación para almacenar los artefactos de un proyecto que está diseñado para coincidir con las coordenadas de Maven.
+
+Un repositorio de Maven puede ser uno de los siguientes tipos:
+
+* Local
+* Central
+* Remote
+
+#### EL LOCAL REPOSITORY
+
+Un repositorio local es uno que reside en la misma máquina donde se ejecuta un Maven build. Es una carpeta [.m2]() ubicada en el directorio [$USER_HOME]() de la máquina del usuario. Se crea cuando se ejecuta el comando [mvn]() por primera vez. Sin embargo, para anular la ubicación predeterminada, abra el archivo [settings.xml]() si existe; de lo contrario, cree uno en la carpeta [$M2_HOME\conf]() (para Windows: [%M2_HOME%\conf]()) y la ubicación respectiva como en el siguiente código:
+
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+  http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository>/opt/m2repos</localRepository>
+</settings>
+```
+
+Cuando ejecutamos el comando Maven, Maven descargará las dependencias a una ruta personalizada.
+
+
+#### EL CENTRAL REPOSITORY
+
+El repositorio central es el repositorio proporcionado por la comunidad de Maven. Contiene un gran repositorio de libraries de uso común. Este repositorio entra en juego cuando Maven no encuentra libraries en el repositorio local. El repositorio central se puede encontrar en: http://search.maven.org/#browse.
+
+#### EL REMOTE REPOSITORY
+
+Las empresas suelen mantener sus propios repositorios para las libraries que se utilizan para el proyecto. Estos difieren del repositorio local; un repositorio se mantiene en un servidor separado, diferente de la máquina del desarrollador y es accesible dentro de la organización. Además, en ocasiones, se dan casos en los que la disponibilidad de las libraries en repositorios centrales no es segura, dando lugar a la necesidad de un repositorio remoto.
+
+Por ejemplo, el siguiente archivo POM menciona los repositorios remotos, donde la dependencia no está disponible en el repositorio central:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+  http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.packt.mvneclipse</groupId>
+  <artifactId>hello-project</artifactId>
+  <version>1.0</version>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.packt.commons</groupId>
+      <artifactId>utility-lib</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  <dependencies>
+  <repositories>
+    <repository>
+       <id>packt.ser1</id>
+       <url>http://download.packt.net/maven2/1</url>
+    </repository>
+    <repository>
+      <id>packt.ser2</id>
+      <url>http://download.packt.net/maven2/2</url>
+    </repository>
+  </repositories>
+</project>
+```
+
+
+#### SECUENCIA DE BÚSQUEDA EN REPOSITORIOS
+
+La siguiente figura ilustra la secuencia en la que se lleva a cabo la operación de búsqueda en los repositorios al ejecutar la compilación de Maven:
 
 ![03-05](images/03-05.png)
 
-### Project dependencies
-#### Dependency scopes
+Maven sigue la secuencia siguiente para buscar bibliotecas dependientes en repositorios, y la secuencia se explica a continuación:
+
+1. En el paso 1, Maven busca dependencias en el repositorio local; si se encuentra, continúa, de lo contrario, va al repositorio central.
+2. En el paso 2, la búsqueda continúa en el repositorio central; si se encuentra, procede a descargar las libraries dependientes al repositorio local y continúa el procesamiento. Si la búsqueda falla en el repositorio central y si se menciona un repositorio remoto en el archivo POM, continúa con el paso 3 o de lo contrario arroja un error y se detiene.
+3. En el paso 3, la búsqueda continúa en los repositorios remotos. Si las encuentra, procede a descargar las libraries dependientes al repositorio local y continúa procesando. Si la búsqueda encuentra un error, arroja un error y se detiene en ese punto.
+
+### Dependencias del proyecto
+
+La característica poderosa de Maven es su gestión de dependencias para cualquier proyecto. Las dependencias pueden ser libraries externas o libraries/proyectos internos. Las dependencias en POM se pueden indicar en las siguientes etiquetas con los siguientes atributos como se muestra:
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.testng </groupId>
+    <artifactId>testng</artifactId>
+    <version>6.1.1</version>
+    <type>jar</type>
+    <scope>test</scope>
+    <optional>true</optional>
+  </dependency>
+...
+</dependencies>
+```
+
+Los atributos utilizados en el fragmento de código anterior son los siguientes:
+
+* [groupId](), [artifactId]() y [version](): Estas son las coordenadas de Maven para la dependencia.
+
+* [type](): Este es un tipo de empaquetado de dependencia. El tipo predeterminado es JAR. Ya lo hemos discutido en una sección anterior.
+
+* [scope](): Proporciona un mecanismo de control sobre la inclusión de dependencias en la ruta de clases y con una aplicación. Hablaremos de este alcance en la siguiente sección.
+
+* [optional](): Esto indica la dependencia como opcional cuando el proyecto es una dependencia. Para poner esto en términos simples, considere que el proyecto A tiene la dependencia opcional, lo que significa que necesita esta library en el momento de la compilación. Ahora, el proyecto B tiene este proyecto A que tiene una dependencia definida, por lo que esto implica que B puede no necesitar la dependencia de A para su construcción y es parte de las dependencias transitivas.
+
+#### DEPENDENCY SCOPES
+
+Los ámbitos de dependencia controlan la disponibilidad de las dependencias en una ruta de clase y se empaquetan junto con una aplicación. Hay seis ámbitos de dependencia, que se describen en detalle a continuación:
+
+* [Compile](): Este es el alcance predeterminado si no se especifica. Las dependencias con este alcance están disponibles en todas las rutas de clase y están empaquetadas.
+
+* [Provided](): Similar al alcance de compilación, sin embargo, esto indica JDK o el contenedor para proporcionarlos. Solo está disponible en rutas de clases de compilación y prueba y no es transitivo.
+
+* [Runtime](): Este ámbito indica que la dependencia no es necesaria para la compilación, pero está disponible para la ejecución. Por ejemplo, solo se requiere un controlador JDBC en tiempo de ejecución, sin embargo, se requiere la API de JDBC durante el tiempo de compilación.
+
+* [Test](): este alcance indica que la dependencia no es necesaria para el uso normal de la aplicación y solo está disponible para las fases de compilación y ejecución de la prueba.
+
+* [System](): es similar al alcance proporcionado, pero se menciona la ruta explícita a los archivos JAR en el sistema de archivos local. La ruta debe ser absoluta, como $ JAVA_HOME / lib. Maven no comprobará los repositorios; en su lugar, comprobará la existencia del archivo.
+
 #### Transitive dependencies
 
 ![03-06](images/03-06.png)
