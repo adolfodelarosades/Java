@@ -32,7 +32,7 @@ STUDENT GUIDES
    * Practice 1-3: Web Service Testing 6m
    * Skill Check: Introduction to Web Services - Score 80% or higher to pass
 
-## 2: XML Document Structure
+## [2: XML Document Structure](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/02-XML-Document-Structure.md)
 
    * XML Document Structure: Part 1 23m
    * XML Document Structure: Part 2 13m
@@ -43,7 +43,7 @@ STUDENT GUIDES
    * Practice 2-4: Using XML Namespaces 3m
    * Skill Check: XML Document Structure - Score 80% or higher to pass
 
-## 3: XML Parsing with JAXB
+## [3: XML Parsing with JAXB](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/03-XML-Parsing-with-JAXB.md)
 
    * XML Parsing with JAXB: Part 1 23m
    * XML Parsing with JAXB: Part 2 14m
@@ -53,7 +53,7 @@ STUDENT GUIDES
    * Practice 3-3: Creating Java Classes from XML Schemas 5m
    * Skill Check: XML Parsing with JAXB - Score 80% or higher to pass
 
-## 4: SOAP Web Services: Overview
+## [4: SOAP Web Services: Overview](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/04-SOAP-Web-Services-Overview.md)
 
    * SOAP Web Services: Overview: Part 1 7m
    * SOAP Web Services: Overview: Part 2 26m
@@ -64,7 +64,7 @@ STUDENT GUIDES
    * Practice 4-3: Exploring SOAP and WSDL Documents with WS-* Extensions 6m
    * Skill Check: SOAP Web Services: Overview - Score 80% or higher to pass
 
-## 5: Creating JAX-WS Clients
+## [5: Creating JAX-WS Clients](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/05-Creating-JAX-WS-Clients.md)
 
    * Creating JAX-WS Clients: Part 1 26m
    * Creating JAX-WS Clients: Part 2 8m
@@ -77,7 +77,7 @@ STUDENT GUIDES
    * Practice 5-7: Using WS-MakeConnection with a JAX-WS Client 5m
    * Skill Check: Creating JAX-WS Clients - Score 80% or higher to pass
 
-## 6: RESTful Web Services: Overview
+## [6: RESTful Web Services: Overview](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/06-RESTful-Web-Services-Overview.md)
 
    * RESTful Web Services: Overview: Part 1 29m
    * RESTful Web Services: Overview: Part 2 6m
@@ -88,7 +88,7 @@ STUDENT GUIDES
    * Practice 6-5: Exploring a REST Service with cURL 2m
    * Skill Check: RESTful Web Services: Overview - Score 80% or higher to pass
 
-## 7: Creating RESTful Clients in Java
+## [7: Creating RESTful Clients in Java](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/07-Creating-RESTful-Clients-in-Java.md)
 
    * Creating RESTful Clients in Java, Part 1 - 24m
    * Creating RESTful Clients in Java, Part 2 - 14m
@@ -99,7 +99,7 @@ STUDENT GUIDES
    * Practice 7-4: Properties of a RESTful Web Service - 2m
    * Skill Check: Creating RESTful Clients in Java - Score 80% or higher to pass
 
-## 8: Bottom-Up JAX-WS Web Services
+## [8: Bottom-Up JAX-WS Web Services](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/08-Bottom-Up-JAX-WS-Web-Services.md)
 
    * Bottom-Up JAX-WS Web Services, Part 1 - 24m
    * Bottom-Up JAX-WS Web Services, Part 2 - 17m
@@ -109,7 +109,7 @@ STUDENT GUIDES
    * Practice 8-2: Publishing Endpoints Without an Application Server - 3m
    * Skill Check: Bottom-Up JAX-WS Web Services - Score 80% or higher to pass
 
-## 9: Top-Down JAX-WS Web Services
+## [9: Top-Down JAX-WS Web Services](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/09-Top-Down-JAX-WS-Web-Services.md)
 
    * Top-Down JAX-WS Web Services, Part 1 - 23m
    * Top-Down JAX-WS Web Services, Part 2 - 4m
@@ -117,7 +117,7 @@ STUDENT GUIDES
    * Practice 9-1: Creating the Player Management Service - 10m
    * Skill Check: Top-Down JAX-WS Web Services - Score 80% or higher to pass
 
-## 10: JAX-RS RESTful Web Services
+## [10: JAX-RS RESTful Web Services](555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1/10-JAX-RS-RESTful-Web-Services.md)
    
    * JAX-RS RESTful Web Services: Part 1 - 31m
    * JAX-RS RESTful Web Services: Part 2 - 31m
