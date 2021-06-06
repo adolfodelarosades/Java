@@ -89,11 +89,11 @@ This is a second-level course for programmers learning the Java language. It rou
 
 This Java EE 6 programming course covers the design and creation of SOAP and RESTful web services and clients. You'll use the
 
-## [XML Fundamentals Ed 1.1]()
+## [556 XML Fundamentals Ed 1.1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/556-XML-Fundamentals-Ed-1-1.md)
 
 This XML Fundamentals training introduces you to the basics of XML. In this 2 day hands on course, you will learn the central XML
 
-## [Java EE 7: Front-end Web Application Development Ed 1]()
+## [557 Java EE 7: Front-end Web Application Development Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/557-Java-EE-7-Front-end-Web-Application-Development-Ed-1.md)
 
 This Java EE 7: Front-end Web Application Development training helps you explore building and deploying enterprise
 
