@@ -12,60 +12,60 @@ Java Learning Subscription
 ![950-08](500-Java-Oracle-University/images/950-08.png)
 ![950-09](500-Java-Oracle-University/images/950-09.png)
 
-### [Java Explorer](500-Java-Oracle-University/505-Java-Explorer.md)
+### [505 Java Explorer](500-Java-Oracle-University/505-Java-Explorer.md)
 
 Java Explorer
 
 Learn Java programming basics such as variables, classes, objects, loops, arrays, and decision constructs. Get introduced to Java's
 
-### [Java SE 11 Developer](500-Java-Oracle-University/510_Java_SE_11_Developer.md)
+### [510 Java SE 11 Developer](500-Java-Oracle-University/510_Java_SE_11_Developer.md)
 
 Java SE 11 Developer
 
 NEW!   Get a complete view of Java SE 11 technology and prepare for the certification exam.
  
-### [Java SE on OCI](500-Java-Oracle-University/512-Java-SE-on-OCI.md)
+### [512 Java SE on OCI](500-Java-Oracle-University/512-Java-SE-on-OCI.md)
 
 Current version: Java 11
 
 NEW!   Craft custom Java solutions that leverage OCI DevOps, cloud-native services like functions, APIs and streaming, perform
 
-### [Beyond Java SE 11](500-Java-Oracle-University/514-Beyond-Java-SE-11.md)
+### [514 Beyond Java SE 11](500-Java-Oracle-University/514-Beyond-Java-SE-11.md)
 
 Beyond Java SE 11 with JDKs 12, 13, 14, 15, and 16
 
 NEW!   This learning path discusses the JDK release cycle and significant new features introduced in the latest short term support
 
-### [Java SE 11 Upgrade](500-Java-Oracle-University/516-Java-SE-11-Upgrade.md)
+### [516 Java SE 11 Upgrade](500-Java-Oracle-University/516-Java-SE-11-Upgrade.md)
 
 This path is for experienced Java SE 8 programmers who need to update their skills to Java SE 11, including features introduced in
 
-### [Java SE 8 Programmer - Associate](500-Java-Oracle-University/518-Java-SE-8-Programmer-Associate.md)
+### [518 Java SE 8 Programmer - Associate](500-Java-Oracle-University/518-Java-SE-8-Programmer-Associate.md)
 
 Programmers who will use Java SE 8 but are new to the Java language
 
-### [Java SE 8 Programmer - Professional](500-Java-Oracle-University/520-Java-SE-8-Programmer-Professional.md)
+### [520 Java SE 8 Programmer - Professional](500-Java-Oracle-University/520-Java-SE-8-Programmer-Professional.md)
 
 Programmers who have completed "Java SE 8 Fundamentals"
 
-### [Java SE 7 Programmer](500-Java-Oracle-University/522-Java-SE-7-Programmer.md)
+### [522 Java SE 7 Programmer](500-Java-Oracle-University/522-Java-SE-7-Programmer.md)
 
 The legacy courses included in this path teach you about the Java language for SE 7.
 
-### [Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
+### [524 Java SE Performance Tuning](500-Java-Oracle-University/524-Java-SE-Performance-Tuning.md)
 
 Learn how to monitor, profile and tune your Java applications.
 
 
-## [Enterprise Java Developer](500-Java-Oracle-University/526-Enterprise-Java-Developer.md)
+## [526 Enterprise Java Developer](500-Java-Oracle-University/526-Enterprise-Java-Developer.md)
 
 This path teaches Java EE and other technologies that enable you to develop enterprise-level applications. 
 
-## [JavaScript and HTML](500-Java-Oracle-University/528-JavaScript-and-HTML.md)
+## [528 JavaScript and HTML](500-Java-Oracle-University/528-JavaScript-and-HTML.md)
 
 This JavaScript and HTML5 learning path features the JavaScript language, from language fundamentals to dynamic
 
-## [Analysis, Design and Architecture](500-Java-Oracle-University/530-Analysis-Design-and-Architecture.md)
+## [530 Analysis, Design and Architecture](500-Java-Oracle-University/530-Analysis-Design-and-Architecture.md)
 
 This path teaches object-oriented analysis and design.
 
@@ -85,7 +85,7 @@ This entry-level course is aimed at programmers who are new to Java and who need
 
 This is a second-level course for programmers learning the Java language. It rounds-out the topics that were taught in the
 
-## [Java EE 6: Develop Web Services with JAX-WS and JAX-RS](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1.md)
+## [555 Java EE 6: Develop Web Services with JAX-WS and JAX-RS](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/555-Java-EE-6-Develop-Web-Services-with-JAX-WS-and-JAX-RS-Ed-1.md)
 
 This Java EE 6 programming course covers the design and creation of SOAP and RESTful web services and clients. You'll use the
 
@@ -221,7 +221,7 @@ This course will be archived on 05/21/2021
 
 The second of two courses on the Java Standard Edition 7 (Java SE 7) Platform, this course covers the core Application
 
-## :es: [Java SE 7 New Features Ed 2 (CS) TOD](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/553-Java-SE-7-New-Features-Ed-2-CS-TOD.md)
+## :es: [533 Java SE 7 New Features Ed 2 (CS) TOD](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/553-Java-SE-7-New-Features-Ed-2-CS-TOD.md)
 
 El curso Nuevas funciones de la plataforma Java SE 7 ofrece a los estudiantes información sobre la forma de programar aplicaciones con la tecnología Java utilizando
 
@@ -229,7 +229,7 @@ El curso Nuevas funciones de la plataforma Java SE 7 ofrece a los estudiantes in
 
 This new feature course delves into the major changes and enhancement in Oracle Java SE 7 release. This course is meant for the Java
 
-## :es: [Java SE 7 Fundamentals Ed 2 (CS) TOD](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/551-Java-SE-7-Fundamentals-Ed-2-CS-TOD.md)
+## :es: [551 Java SE 7 Fundamentals Ed 2 (CS) TOD](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/551-Java-SE-7-Fundamentals-Ed-2-CS-TOD.md)
 
 This course will be archived on 05/21/2021
 
@@ -265,7 +265,7 @@ The Java EE 7: Back-End Server Application Development training teaches you how 
 
 This Java EE 6 training teaches you how to build web applications suited to any Java EE 6 application server, using JSP and servlet technologies. Learn to use new features &
 
-## [Java EE 6: Develop Web Applications with JSF Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/554-Java-EE-6-Develop-Web-Applications-with-JSF-Ed-1.md)
+## [554 Java EE 6: Develop Web Applications with JSF Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/554-Java-EE-6-Develop-Web-Applications-with-JSF-Ed-1.md)
 
 This course will be archived on 05/21/2021
 
