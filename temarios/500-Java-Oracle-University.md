@@ -257,11 +257,11 @@ This includes What's New in Java EE 8, giving EE 7 developers a look at the next
 
 このコースでは、Java Platform, Enterprise Edition 7 Webプロファイルに準拠したエンタープライズ・アプリケーションの作成およびデプロイについて学習します。このコースで
 
-## [Java EE 7: Back-end Server Application Development Ed 1]()
+## [558 Java EE 7: Back-end Server Application Development Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/558-Java-EE-7-Back-end-Server-Application-Development-Ed-1.md)
 
 The Java EE 7: Back-End Server Application Development training teaches you how to build and deploy enterprise applications that comply with Java Platform, Enterprise Edition
 
-## [Java EE 6: Develop Web Components with Servlets and JSPs Ed 1]()
+## [559 Java EE 6: Develop Web Components with Servlets and JSPs Ed 1]()
 
 This Java EE 6 training teaches you how to build web applications suited to any Java EE 6 application server, using JSP and servlet technologies. Learn to use new features &
 
@@ -271,11 +271,11 @@ This course will be archived on 05/21/2021
 
 This Developing Web Applications Using JSF Technologies training provides an in-depth introduction to the JSF 2.0 technology. You'll perform hands-on lab exercises using the
 
-## [Java EE 6: Develop Business Components with JMS & EJBs Ed 1]()
+## [560 Java EE 6: Develop Business Components with JMS & EJBs Ed 1]()
 
 This Java EE 6 training gives you practical experience in developing business components for enterprise applications. Learn to do so using the EJB technology a
 
-## [Java Design Patterns Ed 1]()
+## [561 Java Design Patterns Ed 1]()
 
 This Java Design Patterns training reviews common patterns specific to Java SDK & EE development. Lab exercises teach you to identify, apply and re-factor these patterns
 
