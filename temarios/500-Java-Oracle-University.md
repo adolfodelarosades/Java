@@ -275,7 +275,7 @@ This Developing Web Applications Using JSF Technologies training provides an in-
 
 This Java EE 6 training gives you practical experience in developing business components for enterprise applications. Learn to do so using the EJB technology a
 
-## [561 Java Design Patterns Ed 1]()
+## [561 Java Design Patterns Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/561-Java-Design-Patterns-Ed-1.md)
 
 This Java Design Patterns training reviews common patterns specific to Java SDK & EE development. Lab exercises teach you to identify, apply and re-factor these patterns
 
