@@ -12,7 +12,10 @@ BOOKS
 * :closed_book: Java Design Patterns Ed 1(Student Guide)
 * :closed_book: Java Design Patterns Ed 1(Activity Guide)
 
-## Content
+
+
+## Content 
+(No hay transcripciones de las lecciones)
 
 ### 1: Reviewing Object-Oriented Principles in Java
 
