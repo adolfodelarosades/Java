@@ -6,5 +6,5 @@ This Java Design Patterns training reviews common patterns specific to Java SDK 
 
 BOOKS
 
-* :red_book: Java Design Patterns Ed 1(Student Guide)
-* :red_book: Java Design Patterns Ed 1(Activity Guide)
+* :closed_book: Java Design Patterns Ed 1(Student Guide)
+* :closed_book: Java Design Patterns Ed 1(Activity Guide)
