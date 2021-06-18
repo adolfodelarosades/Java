@@ -1,4 +1,4 @@
-# 562 Architect Enterprise Applications with JavaEE.md
+# 562 Architect Enterprise Applications with JavaEE
 
 DESCRIPTION
 
@@ -12,6 +12,12 @@ BENEFITS TO YOU
 
 You will learn the strategies needed to create application blueprints that work well when implementing Java EE technologies. These strategies include effective decision-making through the use of non-functional qualities (such as scalability and flexibility), Java EE technology blueprints and design patterns.
 
+BOOKS
+
+* 📕 Architect Enterprise Applications with Java EE (Student Guide Volume I)
+* 📕 Architect Enterprise Applications with Java EE (Student Guide Volume II)
+* 📕 Architect Enterprise Applications with Java EE (Activity Guide Volume I)
+* 📕 Architect Enterprise Applications with Java EE (Activity Guide Volume II)
 
 ## 1: Introducing Enterprise Architecture
 
