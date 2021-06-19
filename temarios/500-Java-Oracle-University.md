@@ -261,7 +261,7 @@ This includes What's New in Java EE 8, giving EE 7 developers a look at the next
 
 The Java EE 7: Back-End Server Application Development training teaches you how to build and deploy enterprise applications that comply with Java Platform, Enterprise Edition
 
-## [559 Java EE 6: Develop Web Components with Servlets and JSPs Ed 1]()
+## [559 Java EE 6: Develop Web Components with Servlets and JSPs Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/559-Java-EE-6-Develop-Web-Components-with-Servlets-and-JSPs-Ed-1.md)
 
 This Java EE 6 training teaches you how to build web applications suited to any Java EE 6 application server, using JSP and servlet technologies. Learn to use new features &
 
@@ -271,11 +271,11 @@ This course will be archived on 05/21/2021
 
 This Developing Web Applications Using JSF Technologies training provides an in-depth introduction to the JSF 2.0 technology. You'll perform hands-on lab exercises using the
 
-## [560 Java EE 6: Develop Business Components with JMS & EJBs Ed 1]()
+## [560 Java EE 6: Develop Business Components with JMS & EJBs Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/560-Java-EE-6-Develop-Business-Components-with-JMS-EJBs-Ed-1.md)
 
 This Java EE 6 training gives you practical experience in developing business components for enterprise applications. Learn to do so using the EJB technology a
 
-## [561 Java Design Patterns Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/561-Java-Design-Patterns-Ed-1.md)
+## [561 Java Design Patterns Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/561-Java-Design-Patterns-Ed-1.md)
 
 This Java Design Patterns training reviews common patterns specific to Java SDK & EE development. Lab exercises teach you to identify, apply and re-factor these patterns
 
@@ -298,7 +298,7 @@ Course from Java SE 8 Programmer - Professional (JP) Learning Path
 -データベースとアプリケーション・サーバーによるWeb3階層システムの全体像-
 現代のWebシステムは非常に複雑化しています。これらを理解し構築できるようになるた
 
-## [Developing Applications with Java EE 6 on WebLogic Server 12c Ed 3]()
+## [Developing Applications with Java EE 6 on WebLogic Server 12c Ed 3](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/564-Developing-Applications-with-Java-EE-6-on-WebLogic-Server-12c-Ed-3.md)
 
 undefined
 
@@ -334,7 +334,7 @@ Certification Exam Prep: Java SE 8 Programmer I (OCA) Ed 1
 
 This exam prep seminar helps you prepare to take the Java SE 8 Programmer I certification exam.
 
-## [Certification Exam Prep Seminar: Java EE 7 Application Developer Ed 1]()
+## [563 Certification Exam Prep Seminar: Java EE 7 Application Developer Ed 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/563-Certification-Exam-Prep-Seminar-Java-EE-7-Application-Developer-Ed-1.md)
 
 Certification Exam Prep Seminar: Java EE 7 Application Developer
 
@@ -342,6 +342,6 @@ Certification Exam Prep Seminar: Java EE 7 Application Developer
 
 この『Java EE エンタープライズ・アプリケーションの設計』コースでは、Java Platform, Enterprise Edition (Java EE)テクノロジを使用したエンタープライズJavaアプリケーション
 
-## [Architect Enterprise Applications with Java EE]()
+## [562 Architect Enterprise Applications with Java EE](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University/562-Architect-Enterprise-Applications-with-Java-EE.md)
 
 This course teaches you how to develop robust architectures for enterprise Java applications. You will learn the strategies needed to create application blueprints that work well when implementing Java EE
