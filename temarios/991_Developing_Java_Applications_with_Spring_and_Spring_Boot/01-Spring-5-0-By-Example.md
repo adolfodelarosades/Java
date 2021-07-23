@@ -358,3 +358,87 @@ El proyecto Spring Boot es un marco listo para producción con configuraciones o
 
 Podemos desarrollar aplicaciones codificando en los lenguajes Groovy y Java. Ambos son lenguajes JVM. En la versión 5.0, Spring Team anunció el soporte completo para Kotlin, el nuevo idioma para JVM. Nos permite desarrollar códigos coherentes y legibles. Examinaremos esta característica en profundidad en el Capítulo 7, *Airline Ticket System*.
 
+## Configurar nuestro entorno de desarrollo
+
+Antes de comenzar, debemos configurar nuestro entorno de desarrollo. Nuestro entorno de desarrollo consta de las siguientes cuatro herramientas:
+
+* JDK
+* Build tool
+* IDE 
+* Docker
+
+Instalaremos JDK versión 8.0. Esta versión es totalmente compatible con Spring Framework 5. Presentaremos los pasos para instalar Maven 3.3.9, la herramienta de compilación más famosa para el desarrollo de Java, y en la última parte, le mostraremos algunas instrucciones detalladas sobre cómo instalar IntelliJ IDEA Edición comunitaria. Usaremos Ubuntu 16.04, pero puede usar su sistema operativo favorito. Los pasos de instalación son sencillos.
+
+## Instalación de OpenJDK
+
+OpenJDK es un kit de desarrollo de Java estable, gratuito y de código abierto. Este paquete será necesario para todo lo relacionado con la compilación de código y los entornos de ejecución.
+
+Además, es posible utilizar un JDK de Oracle, pero debe prestar atención a la licencia y los acuerdos.
+
+Para instalar OpenJDK, abriremos una terminal y ejecutaremos el siguiente comando:
+
+```sh
+sudo apt-get install openjdk-8-jdk -y
+```
+
+> ℹ️ *Podemos encontrar más información sobre cómo instalar Java 8 JDK en la sección de instalación (http://openjdk.java.net/install/) de la página de OpenJDK.*
+
+Verifique la instalación usando el siguiente comando:
+
+```sh
+java -version
+```
+
+Debería ver la versión de OpenJDK y sus detalles relevantes mostrados de la siguiente manera:
+
+![image](https://user-images.githubusercontent.com/23094588/126779406-09fa38d1-bb73-451b-ad0c-85ab5796acbe.png)
+
+Ahora que hemos instalado el kit de desarrollo de Java, estamos listos para el siguiente paso. En el mundo real, debemos tener una herramienta de construcción para ayudar a los desarrolladores a compilar, empaquetar y probar las aplicaciones Java.
+
+Instalemos Maven en la siguiente sección.
+
+## Instalación de Maven
+
+Maven es una herramienta de compilación popular para el desarrollo de Java. Algunos proyectos importantes de código abierto se crearon con esta herramienta. Hay características que facilitan el proceso de construcción, estandarizan la estructura del proyecto y brindan algunas pautas para el desarrollo de mejores prácticas.
+
+Instalaremos Maven, pero el paso de instalación debe ejecutarse después de la instalación de OpenJDK.
+
+Abra una terminal y ejecute lo siguiente:
+
+```sh
+sudo apt-get install maven -y
+```
+
+Verifique la instalación usando este comando:
+
+```sh
+mvn -version
+```
+
+Debería ver el siguiente resultado, aunque la versión puede ser diferente para usted:
+
+![image](https://user-images.githubusercontent.com/23094588/126779623-c81d6c0b-7742-4c19-975b-d3f42d2b7887.png)
+
+Bien hecho. Ahora tenemos Maven instalado. Maven tiene una comunidad vibrante que produce muchos complementos para ayudar a los desarrolladores con tareas importantes. Hay complementos para ejecutar una prueba unitaria y complementos para preparar el proyecto para el evento de lanzamiento que se pueden integrar con el software SCM.
+
+Usaremos el plugin `spring boot maven` y el plugin `docker maven`. El primero convierte nuestra aplicación en un archivo JAR y el segundo nos permite integrarnos con Docker Engine para crear imágenes, ejecutar contenedores y mucho más. En los próximos capítulos, aprenderemos cómo configurar e interactuar con estos complementos.
+
+## Instalación de IDE
+
+El IDE es una herramienta importante para ayudar a los desarrolladores. En este libro, usaremos IntelliJ IDEA como una herramienta *oficial* para desarrollar nuestros proyectos. No hay restricciones para otros IDE porque el proyecto se desarrollará utilizando Maven como herramienta de construcción.
+
+El IDE es una elección personal para los desarrolladores y, en general, implica pasión; lo que algunas personas aman, otros desarrolladores odian. No dude en utilizar su favorito.
+
+## IntelliJ IDEA
+
+IntelliJ IDEA es un producto JetBrains. Usaremos Community Edition, que es de código abierto y una herramienta fantástica para codificar Java y Kotlin. La herramienta ofrece una fantástica función de autocompletar y también es totalmente compatible con las funciones de Java 8.
+
+Vaya a https://www.jetbrains.com/idea/download/#section=linux y descargue Community Edition. Podemos extraer tar.gz y ejecutarlo.
+
+## Spring Tools Suite
+
+Spring Tools Suite se basa en Eclipse IDE, proporcionado por Eclipse Foundation, por supuesto. El objetivo es brindar soporte para el ecosistema Spring y facilitar la vida del desarrollador. Esta herramienta admite características interesantes como Beans Explorer.
+
+Descarga la herramienta en el siguiente enlace:
+
+http://download.springsource.com/release/STS/3.6.4.RELEASE/dist/e4.4/groovy-grails-tool-suite-3.6.4.RELEASE-e4.4.2-linux-gtk-x86_64.tar.gz
