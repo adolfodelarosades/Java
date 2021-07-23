@@ -155,7 +155,8 @@ Las interfaces centrales son `CrudRepository` y `PagingAndSortingRepository`, y 
 
 > ℹ️ *Algunas anotaciones comunes son `@Query`, `@Id` y `@EnableJpaRepositories`.
 
-## Seguridad de primavera
+## Spring Security
+
 La seguridad para las aplicaciones Java siempre fue una molestia para los desarrolladores, especialmente en Java Enterprise Edition. Había una gran cantidad de código repetitivo para buscar objetos en los servidores de aplicaciones, y la capa de seguridad a menudo estaba muy personalizada para la aplicación.
 
 En ese escenario caótico, Spring Team decidió crear un proyecto Spring Security para ayudar a los desarrolladores a manejar la capa de seguridad en la aplicación Java.
@@ -166,44 +167,194 @@ Spring Security proporciona un modelo completo para agregar autorización y aute
 
 Es un proyecto general y se subdivide en estos módulos:
 
-núcleo de seguridad de primavera
-Spring-Security-Remoting
-primavera-seguridad-web
-configuración de seguridad de primavera
-primavera-seguridad-ldap
-primavera-seguridad-acl
-primavera-seguridad-cas
-spring-security-openid
-prueba de seguridad de primavera
+* `spring-security-core`
+* `spring-security-remoting`
+* `spring-security-web`
+* `spring-security-config`
+* `spring-security-ldap`
+* `spring-security-acl`
+* `spring-security-cas`
+* `spring-security-openid`
+* `spring-security-test`
+
 Estos son los módulos principales y hay muchos otros proyectos para admitir una amplia gama de tipos de autenticación. El módulo cubre los siguientes tipos de autenticación y autorización:
 
-LDAP
-HTTP básico
-OAuth
-OAuth2
-OpenID
-CAAS
-JAAS
-El módulo también ofrece un lenguaje específico de dominio (DSL) para proporcionar una configuración sencilla. Veamos un ejemplo sencillo:
+* LDAP
+* HTTP Basic
+* OAuth
+* OAuth2
+* OpenID
+* CAAS
+* JAAS
 
+El módulo también ofrece un **domain-specific language (DSL)** para proporcionar una configuración sencilla. Veamos un ejemplo sencillo:
+
+```yaml
 http
-  .formLogin ()
-    .loginPage ("/ iniciar sesión")
-     .failureUrl ("/ login? error")
-      .y()
-    .authorizeRequests ()
-      .antMatchers ("/ signup", "/ about"). permitAll ()
-      .antMatchers ("/ admin / **"). hasRole ("ADMIN")
-      .anyRequest (). authenticated ();
-El ejemplo se extrajo del blog spring.io. Para obtener más detalles, vaya a https://spring.io/blog/2013/07/11/spring-security-java-config-preview-readability/.
+  .formLogin()
+    .loginPage("/login")
+     .failureUrl("/login?error")
+      .and()
+    .authorizeRequests()
+      .antMatchers("/signup","/about").permitAll()
+      .antMatchers("/admin/**").hasRole("ADMIN")
+      .anyRequest().authenticated();
+```
+
+> ℹ️ *El ejemplo se extrajo del blog spring.io. Para obtener más detalles, vaya a https://spring.io/blog/2013/07/11/spring-security-java-config-preview-readability/.
+
 Como podemos ver, el DSL hace que la tarea de configuración sea extremadamente fácil y muy comprensible.
 
 Las principales características de Spring Security son las siguientes:
 
-Gestión de sesiones
-Protección contra ataques (CSRF, fijación de sesiones y otros)
-Integración de API de servlet
-Autenticacion y autorizacion
-Aprenderemos más sobre Spring Security en el Capítulo 8, Disyuntores y seguridad. También lo pondremos en práctica.
+* Gestión de sesiones
+* Protección contra ataques (CSRF, fijación de sesiones y otros)
+* Integración de API de servlet
+* Autenticacion y autorizacion
 
-@EnableWebSecurity es una anotación común.
+Aprenderemos más sobre Spring Security en el Capítulo 8, *Circuit Breakers and Security*. También lo pondremos en práctica.
+
+> ℹ️ *`@EnableWebSecurity` es una anotación común*.
+
+## Spring Cloud
+
+Spring Cloud es otro proyecto general. El objetivo principal de este proyecto es ayudar a los desarrolladores a crear sistemas distribuidos. Los sistemas distribuidos tienen algunos problemas comunes que resolver y, por supuesto, un conjunto de patrones que nos ayudan, como el descubrimiento de servicios, los disyuntores, la gestión de la configuración, los sistemas de rutas inteligentes y las sesiones distribuidas. Las herramientas de Spring Cloud tienen todas estas implementaciones y proyectos bien documentados.
+
+Los principales proyectos son los siguientes:
+
+* Spring Cloud Netflix
+* Spring Cloud Config
+* Spring Cloud Consul
+* Spring Cloud Security
+* Spring Cloud Bus
+* Spring Cloud Stream
+
+## Spring Cloud Netflix
+
+Spring Cloud Netflix es quizás el módulo Spring más popular en la actualidad. Este fantástico proyecto nos permite integrar el ecosistema Spring con Netflix OSS a través de las funciones de Spring Boot AutoConfiguration. Las bibliotecas OSS de Netflix compatibles son Eureka para el descubrimiento de servicios, Ribbon para permitir el equilibrio de carga del lado del cliente, disyuntor a través de Hystrix para proteger nuestra aplicación de interrupciones externas y hacer que el sistema sea resistente, el componente Zuul proporciona un enrutamiento inteligente y puede actuar como una ventaja Servicio. Finalmente, el componente Feign puede ayudar a los desarrolladores a crear clientes HTTP para API REST con un par de anotaciones.
+
+Veamos cada uno de estos:
+
+* **Spring Cloud Netflix Eureka**: el objetivo de este proyecto es proporcionar descubrimiento de servicios para aplicaciones mientras se ajustan a los estándares de Netflix. El descubrimiento de servicios es una característica importante y nos permite eliminar configuraciones codificadas para proporcionar un nombre de host y puertos; es más importante en entornos de nube porque la máquina es efímera y, por lo tanto, es difícil mantener los nombres y las direcciones IP. La funcionalidad es bastante simple, el servidor de Eureka proporciona un registro de servicios y los clientes de Eureka se comunicarán con sus registros ellos mismos.
+Algunas anotaciones comunes son @EnableEurekaServer y @EnableEurekaClient.
+Spring Cloud Feign: el equipo de Netflix creó el proyecto Feign. Es un gran proyecto que hace que la configuración de clientes HTTP para aplicaciones REST sea mucho más fácil que antes. Estas implementaciones se basan en anotaciones. El proyecto proporciona un par de anotaciones para rutas HTTP, encabezados HTTP y mucho más y, por supuesto, Spring Cloud Feign lo integra con el ecosistema Spring Cloud a través de las anotaciones y la configuración automática. Además, Spring Cloud Feign se puede combinar con el servidor Eureka.
+
+> ℹ️ *Algunas anotaciones comunes son `@EnableFeignClients` y `@FeignClient`*.
+
+* **Spring Cloud Ribbon**: Ribbon es un equilibrador de carga del lado del cliente. La configuración debe proporcionar principalmente una lista de servidores para el cliente específico. Debe ser nombrado. En términos de Ribbon, se denomina cliente nombrado. El proyecto también proporciona una gama de reglas de equilibrio de carga, como Round Robin y Filtrado de disponibilidad, entre otras. Por supuesto, el marco permite a los desarrolladores crear reglas personalizadas. Ribbon tiene una API que funciona, integrada con el servidor Eureka, para permitir el descubrimiento de servicios, que se incluye en el marco. Además, se admiten funciones esenciales como la tolerancia a fallos porque la API puede reconocer los servidores en ejecución en tiempo de ejecución.
+
+> ℹ️ *Algunas anotaciones comunes son `@RibbonClient` y `@LoadBalanced`*.
+
+* **Spring Cloud Hystrix**: un proyecto de Netflix aclamado, este proyecto proporciona una implementación de patrón circuit breaker. El concepto es similar a un interruptor de circuito eléctrico. El framework observará el método marcado con `@HystrixCommand` y observará las llamadas fallidas. Si el número de llamadas fallidas supera la cifra permitida en la configuración, el disyuntor se abrirá. Mientras el circuito está abierto, se llamará al método de reserva hasta que el circuito esté cerrado y funcione normalmente. Proporcionará características de resistencia y tolerancia a fallos para nuestros sistemas. El ecosistema Spring está completamente integrado con Hystrix, pero solo funciona en los beans `@Component` y `@Service`.
+
+> ℹ️ *Algunas anotaciones comunes son `@EnableCircuitBreaker` y `@HystrixCommand`*.
+
+## Spring Cloud Config
+
+Este interesante proyecto proporciona una manera fácil de administrar las configuraciones del sistema para sistemas distribuidos, y este es un problema crítico en los entornos de nube porque el sistema de archivos es efímero. También nos ayuda a mantener las diferentes etapas del proceso de implementación. Los perfiles de resorte están completamente integrados con este módulo.
+
+Necesitaremos una aplicación que proporcione la configuración para otras aplicaciones. Podemos entender su funcionamiento pensando en los conceptos de **servidor** y **cliente**, el servidor proporcionará algunas configuraciones a través de HTTP y el cliente buscará la configuración en el servidor. Además, es posible cifrar y descifrar valores de propiedad.
+
+Hay algunas implementaciones de almacenamiento para proporcionar estos archivos de propiedades y la implementación predeterminada es Git. Nos permite almacenar nuestros archivos de propiedades en Git, o también podemos usar el sistema de archivos. Lo importante aquí es que la fuente no importa.
+
+> ℹ️ *Git es un control de versiones distribuido. La herramienta se usa comúnmente con fines de desarrollo, especialmente en la comunidad de código abierto. La principal ventaja, cuando se compara con algunos actores del mercado, como SVN, es la arquitectura distribuida.*
+
+Existe una integración interesante entre **Spring Cloud Bus** y este módulo. Si están integrados, es posible difundir los cambios de configuración en el clúster. Esta es una característica importante si la configuración de la aplicación cambia con frecuencia. Hay dos anotaciones que le dicen a Spring que aplique cambios en tiempo de ejecución: `@RefreshScope` y `@ConfigurationProperties`.
+
+En el Capítulo 7, *Airline Ticket System*, implementaremos un servicio interesante para proporcionar configuraciones externas para nuestros microservicios usando este módulo. Los conceptos de servidor se explicarán con más detalle. También se presentarán los detalles del cliente.
+
+> ℹ️ *`@EnableConfigServer` es una anotación común*.
+
+## Spring Cloud Consul
+
+Spring Cloud Consul proporciona integraciones con Hashicorp's Consul. Esta herramienta aborda los problemas de la misma manera que el descubrimiento de servicios, una configuración distribuida y un bus de control. Este módulo nos permite configurar aplicaciones Spring y Consul con algunas anotaciones en un modelo de programación basado en Spring. También se admite la configuración automática. Lo sorprendente aquí es que este módulo se puede integrar con algunas bibliotecas OSS de Netflix, como Zuul y Ribbon, a través de Spring Cloud Zuul y Spring Cloud Ribbon respectivamente (por ejemplo).
+
+> ℹ️ *`@EnableDiscoveryClient` es una anotación común.
+
+## Spring Cloud Security
+
+Este módulo es como una extensión de Spring Security. Sin embargo, los sistemas distribuidos tienen diferentes requisitos de seguridad. Normalmente, tienen una gestión de identidad central, o la autenticación recae en los clientes en el caso de las API REST. Normalmente, en los sistemas distribuidos, tenemos microservicios, y estos servicios pueden tener más de una instancia en el entorno de ejecución cuyas características hacen que el módulo de autenticación sea ligeramente diferente de las aplicaciones monolíticas. El módulo se puede usar junto con las aplicaciones Spring Boot y hace que la implementación de OAuth2 sea muy fácil con un par de anotaciones y algunas configuraciones. Además, se admiten algunos patrones comunes, como el inicio de sesión único, la retransmisión de tokens y el intercambio de tokens.
+
+Para las aplicaciones de microservicio basadas en Spring Cloud Netflix, es particularmente interesante porque permite que la autenticación descendente funcione con un proxy Zuul y ofrece soporte de clientes Feign. Se utiliza un interceptor para buscar tokens.
+
+> ℹ️ *Algunas anotaciones comunes son `@EnableOAuth2Sso` y `@EnableResourceServer`*.
+
+## Spring Cloud Bus
+
+El objetivo principal de este proyecto es proporcionar una forma sencilla de difundir los cambios en todo el clúster. Las aplicaciones pueden conectar los nodos del sistema distribuido a través del message broker.
+
+Proporciona una manera fácil para que los desarrolladores creen un mecanismo de publicación y suscripción utilizando `ApplicationContext` proporcionado por Spring Container. Permite la posibilidad de crear aplicaciones utilizando el estilo de arquitectura impulsada por eventos con Spring Ecosystem.
+
+Para crear eventos personalizados, necesitamos crear una clase secundaria desde `RemoteApplicationEvent` y marcar la clase que se escaneará a través de `@RemoteApplicationEventScan`.
+
+Los proyectos admiten tres agentes de mensajes como capa de transporte:
+
+* AMQP
+* Apache Kafka
+* Redis
+
+> ℹ️ *`@RemoteApplicationEventScan` es una anotación común*.
+
+## Spring Cloud Stream
+
+La idea detrás de este módulo es proporcionar una forma sencilla de crear microservicios basados en mensajes. El módulo tiene una forma de configuración obstinada. Significa que debemos seguir algunas reglas para crear estas configuraciones. En general, la aplicación se configura mediante el archivo ` yaml|properties`.
+
+El módulo también admite anotaciones. Esto significa que un par de anotaciones son suficientes para crear consumidores, productores y vinculaciones; desacopla la aplicación y la hace fácil de entender. Proporciona algunas abstracciones en torno a los agentes y canales de mensajes, y también hace que la vida del desarrollador sea más cómoda y productiva.
+
+Spring Cloud Stream tiene implementaciones de Binder para RabbitMQ y Kafka.
+
+> ℹ️ *Algunas anotaciones comunes son `@EnableBinding`, `@Input` y `@Output`*.
+
+## Spring Integration
+
+Este módulo admite muchos patrones de aplicaciones empresariales y trae el modelo de programación Spring a este tema. El modelo de programación Spring permite un amplio soporte de inyección de dependencia y se centra en la programación de anotaciones. Las anotaciones nos instruyen sobre cómo se debe configurar el marco y define los comportamientos del marco.
+
+Se sugiere el modelo POJO porque es simple y ampliamente conocido en el mundo del desarrollo de Java.
+
+Este proyecto tiene algunas intersecciones con los otros módulos. Algunos otros proyectos utilizan estos conceptos de módulo para hacer su trabajo. Hay un proyecto llamado Spring Cloud Stream, por ejemplo.
+
+Los patrones de integración empresarial se basan en una amplia gama de canales, protocolos y patrones de comunicación. Este proyecto apoya algunos de estos.
+
+Los módulos admiten una variedad de características y canales, como los siguientes:
+
+* Aggregators
+* Filters
+* Transformers
+* JMS
+* RabbitMQ
+* TCP/UDP
+* Web services
+* Twitter
+* Email
+* Y mucho más
+
+Hay tres conceptos principales de integración de aplicaciones empresariales:
+
+* Messages
+* Message channel
+* Message endpoint
+
+Finalmente, el módulo Spring Integration ofrece una forma integral de crear integración de aplicaciones y permite a los desarrolladores hacerlo con un soporte increíble.
+
+> ℹ️ *Algunas anotaciones comunes son `@EnableIntegration`, `@IntegrationComponentScan` y `@EnablePublisher`*.
+
+## Spring Boot
+
+Spring Boot se lanzó en 2014. La idea detrás de este proyecto era presentar una forma de implementar la aplicación web fuera de cualquier contenedor, como Apache Tomcat, Jetty, etc. El beneficio de este tipo de implementación es la independencia de cualquier servicio externo. Nos permite ejecutar las aplicaciones web con un archivo JAR. Hoy en día, este es un enfoque excelente porque constituye la forma más natural de adoptar la cultura DevOps.
+
+Spring Boot proporciona contenedores de servlets integrados, como Apache Tomcat, Jetty y Undertow. Hace que el proceso de desarrollo sea más productivo y cómodo al probar nuestras aplicaciones web. Además, las personalizaciones durante la configuración se permiten mediante un archivo de configuración o proporcionando algunos beans.
+
+Hay algunas ventajas al adoptar el marco Spring Boot. El marco no requiere ningún XML para su configuración. Esto es fantástico porque encontraremos todas las dependencias en los archivos Java. Esto ayuda a los IDE a ayudar a los desarrolladores y mejora la trazabilidad del código. Otra ventaja importante es que el proyecto intenta mantener la configuración lo más automática posible. Algunas anotaciones hacen que suceda la magia. Lo interesante aquí es que Spring inyectará la implementación de cualquier código que se genere en tiempo de ejecución.
+
+El marco de Spring Boot también proporciona características interesantes para ayudar a los desarrolladores y operaciones, como verificaciones de estado, métricas, seguridad y configuración. Esto es indispensable para aplicaciones modernas donde los módulos se descomponen en una arquitectura de microservicios.
+
+Hay algunas otras características interesantes que pueden ayudar a los desarrolladores en cuanto a DevOps. Podemos usar los archivos `application-{profile}.properties` o `application.yaml` para configurar diferentes perfiles de tiempo de ejecución, como desarrollo, pruebas y producción. Es una función Spring Boot realmente útil.
+
+Además, el proyecto tiene soporte completo para las pruebas, desde la capa web hasta la capa de repositorio.
+
+El framework  proporciona una API de alto nivel para trabajar con pruebas unitarias y de integración. Además, el marco proporciona muchas anotaciones y clases de ayuda para los desarrolladores.
+
+El proyecto Spring Boot es un marco listo para producción con configuraciones optimizadas predeterminadas para los servidores web, métricas y funciones de monitoreo para ayudar al equipo de desarrollo a entregar software de alta calidad.
+
+Podemos desarrollar aplicaciones codificando en los lenguajes Groovy y Java. Ambos son lenguajes JVM. En la versión 5.0, Spring Team anunció el soporte completo para Kotlin, el nuevo idioma para JVM. Nos permite desarrollar códigos coherentes y legibles. Examinaremos esta característica en profundidad en el Capítulo 7, *Airline Ticket System*.
+
