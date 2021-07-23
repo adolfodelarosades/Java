@@ -1,0 +1,6 @@
+# Prefacio
+Con demandas crecientes, las organizaciones buscan sistemas que sean robustos y escalables. Por lo tanto, Spring Framework se ha convertido en el marco más popular para el desarrollo de Java. No solo simplifica el desarrollo de software, sino que también mejora la productividad del desarrollador. Además de ser flexible para el desarrollo de Java, también resulta en un tedioso trabajo de configuración. Spring Boot aborda las dificultades de configuración de Spring y facilita la creación de aplicaciones independientes basadas en Spring de grado de producción. No solo simplifica el desarrollo de software, sino que también mejora la productividad del desarrollador.
+
+Al centrarse en los desarrolladores, la comunidad y los clientes, Spring Boot ha aliviado incontables horas de tiempo que normalmente se dedican a la infraestructura de plomería. También ha alterado ese carrito de manzanas y ha demostrado que, de hecho, podemos centrarnos en crear características que nuestros clientes desean desde el primer día.
+
+Hoy en día, casi uno de cada dos desarrolladores de Java utiliza alguna parte del portafolio de Spring. Spring Boot está resolviendo problemas para legiones de clientes, y esta ruta de aprendizaje puede ayudarlo a cerrar la brecha en su comprensión.
