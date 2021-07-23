@@ -55,10 +55,10 @@ El contenedor Core (central )es la base de todo el ecosistema Spring y ***compre
 
 ***El core y los beans son responsables de proporcionar los fundamentos del framework y la inyección de dependencias***. Estos módulos son responsables de ***administrar el contenedor de IoC*** y ***las funciones principales son la creación de instancias, la configuración y la destrucción de los objeto residentes en el contenedor de Spring***.
 
-> ℹ️ *Los contextos Spring también se denominan contenedores Spring IoC, que son responsables de crear instancias, configurar y ensamblar beans mediante la lectura de metadatos de configuración de XML, anotaciones Java y/o código Java en los archivos de configuración.
+> ℹ️ *Los contextos Spring también se denominan contenedores Spring IoC, que son responsables de crear instancias, configurar y ensamblar beans mediante la lectura de metadatos de configuración de XML, anotaciones Java y/o código Java en los archivos de configuración*.
 
 ***Hay dos interfaces críticas dentro de estos módulos***: `BeanFactory` y `ApplicationContext`. ***`BeanFactory` se encarga del ciclo de vida del bean, instanciando, configurando, administrando y destruyendo, y `ApplicationContext` ayuda a los desarrolladores a trabajar con recursos de archivos de una manera genérica, habilitando la publicación de eventos para listeners registrados. Además, `ApplicationContext` admite la internacionalización y tiene la capacidad de trabajar con mensajes en diferentes Locales***.
 
 Estos módulos ayudan al componente de contexto a proporcionar una forma de acceder a los objetos dentro del contenedor. El componente de contexto tiene la interfaz `ApplicationContext` con la clase esencial para el contenedor.
 
-> ℹ️ Algunas anotaciones comunes son `@Service`, `@Component`, `@Bean` y `@Configuration`
+> ℹ️ *Algunas anotaciones comunes son `@Service`, `@Component`, `@Bean` y `@Configuration`*
