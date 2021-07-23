@@ -1,4 +1,4 @@
-# Spring 5.0 By Example
+# 01 Spring 5.0 By Example
 
 ## Viaje al mundo Spring
 
@@ -442,3 +442,185 @@ Spring Tools Suite se basa en Eclipse IDE, proporcionado por Eclipse Foundation,
 Descarga la herramienta en el siguiente enlace:
 
 http://download.springsource.com/release/STS/3.6.4.RELEASE/dist/e4.4/groovy-grails-tool-suite-3.6.4.RELEASE-e4.4.2-linux-gtk-x86_64.tar.gz
+
+## Instalación de Docker
+
+Docker es un proyecto de código abierto que ayuda a las personas a ejecutar y administrar contenedores. Para los desarrolladores, Docker ayuda en diferentes etapas del ciclo de vida del desarrollo.
+
+Durante la fase de desarrollo, Docker permite a los desarrolladores poner en marcha diferentes servicios de infraestructura como bases de datos y descubrimientos de servicios como Consul sin instalación en el sistema operativo actual. Ayuda a los desarrolladores porque los desarrolladores no necesitan instalar este tipo de sistemas en la capa del sistema operativo. Por lo general, esta tarea puede causar conflictos con las libraries durante el proceso de instalación y consume mucho tiempo.
+
+A veces, los desarrolladores necesitan instalar la versión exacta. En este caso, es necesario reinstalar toda la aplicación en la versión esperada. No es bueno porque la máquina de revelado durante este tiempo se vuelve lenta. La razón es bastante simple, hay muchas aplicaciones que se utilizan durante el desarrollo de software.
+
+Docker ayuda a los desarrolladores en esta etapa. Es bastante sencillo ejecutar un contenedor con MongoDB. No hay instalación y permite a los desarrolladores iniciar la base de datos con una línea. Docker admite la etiqueta de imagen. Esta característica ayuda a trabajar con diferentes versiones del software; esto es fantástico para los desarrolladores que necesitan cambiar la versión del software cada vez.
+
+Otra ventaja es que cuando los desarrolladores necesitan entregar los artefactos con fines de prueba o producción, Docker habilita estas tareas a través de imágenes de Docker.
+
+Docker ayuda a las personas a adoptar la cultura DevOps y ofrece funciones sorprendentes para mejorar el rendimiento de todo el proceso.
+
+Instalemos Docker.
+
+La forma más sencilla de instalar Docker es descargar el script que se encuentra en https://get.docker.com:
+
+```sh
+curl -fsSL get.docker.com -o get-docker.sh
+```
+
+Una vez completada la descarga, ejecutaremos el script de la siguiente manera:
+
+```sh
+sh get-docker.sh
+```
+
+Espere la ejecución del script y luego verifique la instalación de Docker usando el siguiente comando:
+
+```sh
+docker -v
+```
+
+La salida debe tener el siguiente aspecto:
+
+![image](https://user-images.githubusercontent.com/23094588/126827889-137a149d-005f-41da-9b84-2b2c7c8f236f.png)
+
+> ℹ️ *A veces, la versión de Docker se puede aumentar y la versión debe ser al menos 17.10.0-ce.*
+
+Finalmente, agregaremos el usuario actual al grupo de Docker, y esto nos permite usar la línea de comando de Docker sin la palabra clave sudo. Escriba el siguiente comando:
+
+```sh
+sudo usermod -aG docker $USER
+```
+
+Necesitamos cerrar la sesión para realizar estos cambios. Confirme si el comando funciona como se esperaba escribiendo lo siguiente. Asegúrese de que la palabra clave sudo no esté presente:
+
+```sh
+docker ps
+```
+
+La salida debe ser la siguiente:
+
+![image](https://user-images.githubusercontent.com/23094588/126828254-efe12c41-b36a-47dc-8f04-e0783912b1c0.png)
+
+## Introducción a los conceptos de Docker
+
+Ahora, presentaremos algunos conceptos de Docker. Este libro no trata sobre Docker, pero algunas instrucciones básicas sobre cómo usar Docker son necesarias para interactuar con nuestros contenedores durante los próximos capítulos. Docker es una herramienta de facto que se utiliza para administrar contenedores.
+
+### Docker images
+
+La imagen de Docker es como una plantilla para un contenedor de Docker. Contiene un conjunto de carpetas y archivos necesarios para iniciar el contenedor Docker. Nunca tendremos una imagen en modo ejecución. La imagen proporciona una plantilla para que **Docker Engine** inicie el contenedor. Podemos crear una analogía con la orientación a objetos para comprender mejor el proceso. ***La imagen es como una clase que proporciona una infraestructura para crear instancias de algunos objetos, y las instancias son como un contenedor***.
+
+Además, tenemos un registro de Docker para almacenar nuestras imágenes. Estos registros pueden ser públicos o privados. Algunos proveedores de nube proporcionan estos registros privados. El más famoso es **Docker Hub**. Puede ser gratis, pero si elige esta opción, la imagen debe ser pública. Por supuesto, Docker Hub admite imágenes privadas, pero en este caso, debe pagar por el servicio.
+
+### Containers
+
+Los contenedores Docker son una virtualización ligera. El término ligero significa que Docker usa las funcionalidades de SO para almacenar el proceso del sistema y administrar la memoria, los procesadores y las carpetas. Esto es diferente de la virtualización con máquinas virtuales porque, en este modo, la tecnología necesita simular todo el SO, los controladores y el almacenamiento. Esta tarea consume mucha potencia de cálculo y, en ocasiones, puede resultar ineficaz.
+
+### Docker Networks
+
+Una red Docker es una capa que proporciona aislamiento en tiempo de ejecución para contenedores. Es una especie de caja de arena en la que ejecutar contenedores que están aislados de otros contenedores. Cuando Docker está instalado, de forma predeterminada crea tres redes que no deben eliminarse. Estas tres redes son las siguientes:
+
+* `bridge`
+* `none`
+* `host`
+
+
+Además, Docker proporciona al usuario una forma sencilla de crear su red. Para este propósito, Docker ofrece dos controladores: **bridge** y **overlay**.
+
+**Bridge** se puede utilizar para el entorno local, lo que significa que este tipo de red está permitido en un solo host. Será útil para nuestras aplicaciones porque promueve el aislamiento entre contenedores en cuanto a seguridad. Ésta es una buena práctica. El nombre del contenedor adjunto a este tipo de red se puede utilizar como **DNS** para el contenedor. Internamente, Docker asociará el nombre del contenedor con la IP del contenedor.
+
+La overlay network ofrece la posibilidad de conectar contenedores a diferentes máquinas. **Docker Swarm** utiliza este tipo de red para administrar el contenedor en un entorno agrupado. En la versión más reciente, la herramienta **Docker Compose** es compatible de forma nativa con Docker Swarm.
+
+## Docker volumes
+
+Los volúmenes de Docker son la forma sugerida de conservar los datos fuera de un contenedor. Estos volúmenes están completamente administrados por Docker Engine, y estos volúmenes se pueden escribir y leer según la configuración cuando se usan con una línea de comandos de Docker. Los datos de estos volúmenes se conservan en una ruta de directorio en una máquina host.
+
+Existe una herramienta de línea de comandos para interactuar con los volúmenes. La base de esta herramienta es el comando **`docker volume`** el argumento **`--help`** al final muestra las instrucciones de ayuda.
+
+### Docker commands
+
+Ahora echaremos un vistazo a los comandos de Docker. Estos comandos se utilizan principalmente en el ciclo de vida del desarrollo, comandos como **`spin up container`**, **`stop containers`**, **`remove`** y **`inspect`**.
+
+### Docker run
+
+**`docker run`** es el comando de Docker más común. Este comando debe usarse para iniciar los contenedores. La estructura básica de un comando es la siguiente:
+
+```sh
+docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+```
+
+Los argumentos de opciones habilitan algunas configuraciones para el contenedor, por ejemplo, el argumento 
+**`--name`** le permite configurar un nombre para un contenedor. Es importante para DNS cuando el contenedor se ejecuta en un bridge network.
+
+La configuración de red también se puede configurar en el comando de ejecución, y el parámetro es **`--net`**. Esto nos permite configurar la red a la que se adjuntará el contenedor.
+
+Otra opción importante es **`detached`**. Indica si el contenedor se ejecutará en segundo plano. El parámetro **`-d`** indica a Docker que ejecute un contenedor en segundo plano.
+
+### Docker container
+
+El comando **`docker container`** le permite administrar los contenedores. Hay muchos comandos, como se muestra en la siguiente lista:
+
+* `docker container attach`
+* `docker container commit`
+* `docker container cp`
+* `docker container create`
+* `docker container diff`
+* `docker container exec`
+* `docker container export`
+* `docker container inspect`
+* `docker container kill`
+* `docker container logs`
+* `docker container ls`
+* `docker container pause`
+* `docker container port`
+* `docker container prune`
+* `docker container rename`
+* `docker container restart`
+* `docker container rm`
+* `docker container run`
+* `docker container start`
+* `docker container stats`
+* `docker container stop`
+* `docker container top`
+* `docker container unpause`
+* `docker container update`
+* `docker container wait`
+
+
+Aquí hay algunos comandos importantes. El **`docker container exec`** le permite ejecutar comandos en un contenedor en ejecución. Esta es una tarea importante para depurar o mirar dentro de los archivos contenedores. El **`docker container prune`** elimina los contenedores detenidos. Es útil en el ciclo de desarrollo. Hay algunos comandos conocidos, como **`docker container rm`**, **`docker container start`**, **`docker container stop`** y **`docker container restart`**. Estos comandos se explican por sí mismos y tienen comportamientos similares.
+
+### Docker network
+
+Los comandos **`docker network`** le permiten administrar las cosas de la Docker network a través de la línea de comandos. Hay seis comandos básicos y los comandos se explican por sí mismos:
+
+* `docker network create`
+* `docker network connect`
+* `docker network ls`
+* `docker network rm`
+* `docker network disconnect`
+* `docker network inspect`
+
+**`docker network create`**, **`docker network ls`** y **`docker network rm`** son los comandos principales. Es posible compararlos con los comandos de Linux, donde el comando **`rm`** se usa para eliminar cosas y el comando **`ls`** generalmente se usa para listar cosas como carpetas. El comando **`create`** debe usarse para crear redes.
+
+Los comandos **`docker network connect`** y **`docker network disconnect`** le permiten conectar el contenedor en ejecución a la red deseada. Pueden resultar útiles en algunos escenarios.
+
+Finalmente, el comando **`docker network inspect`** proporciona información detallada sobre la red solicitada.
+
+### Docker volume
+
+El comando **`docker volume`** le permite administrar los volúmenes de Docker a través de la interfaz de línea de comandos. Hay cinco comandos:
+
+* `docker volume create`
+* `docker volume inspect`
+* `docker volume ls`
+* `docker volume prune`
+* `docker volume rm`
+
+Los comandos **`docker volume create`**, **`docker volume rm`** y **`docker volume ls`** se utilizan eficazmente para gestionar el **`docker volume`** por el Docker Engine. Los comportamientos son bastante similares a los de las networks, pero por volúmenes. El comando **`create`** creará un nuevo volumen con algunas opciones permitidas. El comando **`ls`** enumera todos los volúmenes y el comando **`rm`** eliminará el volumen solicitado.
+
+## Resumen
+
+En este capítulo, analizamos los conceptos principales de Spring Framework. Entendimos los módulos principales del marco y cómo estos módulos pueden ayudar a los desarrolladores a crear aplicaciones en diferentes tipos de arquitectura, como aplicaciones de mensajería, API REST y portales web.
+
+También dedicamos un tiempo a preparar nuestro entorno de desarrollo instalando herramientas esenciales, como Java JDK, Maven e IDE. Este fue un paso fundamental antes de continuar con los siguientes capítulos.
+
+Usamos Docker para ayudarnos a configurar un entorno de desarrollo, como contenedores para bases de datos y entrega para nuestra aplicación en imágenes de Docker. Instalamos Docker y analizamos los comandos principales para administrar contenedores, redes y volúmenes.
+
+En el próximo capítulo, crearemos nuestra primera aplicación Spring y la pondremos en práctica.
