@@ -132,6 +132,7 @@ Serie de varios cursos Java.
 
 * [990 Spring Boot Persistence Best Practices: Optimize Java Persistence Performance in Spring Boot Applications](https://github.com/adolfodelarosades/Java/blob/master/temarios/990_Spring_Boot_Persistence_Best_Practices.md)
 
+* [991 Developing Java Applications with Spring and Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/991_Developing_Java_Applications_with_Spring_and_Spring_Boot.md)
 * [90001 Java EE 8 Development with Eclipse](https://github.com/adolfodelarosades/Java/blob/master/temarios/90001_Java_EE_8_Development_with_Eclipse.md)
 
 ### APLICACIONES
