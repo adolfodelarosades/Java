@@ -617,7 +617,7 @@ Los comandos **`docker volume create`**, **`docker volume rm`** y **`docker volu
 
 ## Resumen
 
-En este capítulo, analizamos los conceptos principales de Spring Framework. Entendimos los módulos principales del marco y cómo estos módulos pueden ayudar a los desarrolladores a crear aplicaciones en diferentes tipos de arquitectura, como aplicaciones de mensajería, API REST y portales web.
+En este capítulo, analizamos los conceptos principales de Spring Framework. Entendimos los módulos principales del framework y cómo estos módulos pueden ayudar a los desarrolladores a crear aplicaciones en diferentes tipos de arquitectura, como aplicaciones de mensajería, API REST y portales web.
 
 También dedicamos un tiempo a preparar nuestro entorno de desarrollo instalando herramientas esenciales, como Java JDK, Maven e IDE. Este fue un paso fundamental antes de continuar con los siguientes capítulos.
 
