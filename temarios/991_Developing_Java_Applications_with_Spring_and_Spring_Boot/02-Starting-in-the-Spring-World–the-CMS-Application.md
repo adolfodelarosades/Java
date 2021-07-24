@@ -296,5 +296,166 @@ Abrimos el Proyecto con IntelliJ
 
 ![image](https://user-images.githubusercontent.com/23094588/126880381-3a4047bf-c571-42a0-b61a-a1b369b3dcc7.png)
 
+## Creando los recursos REST
 
+Ahora, tenemos una aplicación en funcionamiento en esta sección, y agregaremos algunos endpoints REST y modelaremos algunas clases iniciales para la aplicación CMS, los endpoints REST serán útiles para la integración de AngularJS.
 
+Una de las características requeridas para las API es la documentación, y una herramienta popular para ayudarnos con estas tareas es **Swagger**. Spring Framework es compatible con Swagger, y podemos hacerlo con un par de anotaciones. **Spring Fox** del proyecto es la herramienta correcta para hacer esto, y veremos la herramienta en este capítulo.
+
+Hagámoslo.
+
+### Modelos
+
+Antes de comenzar a crear nuestra clase, agregaremos la dependencia de **`Lombok`** en nuestro proyecto. Es una library fantástica que proporciona algunas cosas interesantes como **`GET/SET`** en el momento de la compilación, la palabra clave **`Val`** para hacer que las variables sean finales, **`@Data`** para hacer una clase con algunos métodos predeterminados como **`getters/setters`**, **`equals`** y **`hashCode`**.
+
+### Agregar dependencia de Lombok
+
+Coloque la siguiente dependencia en un archivo **`pom.xml`**:
+
+```xml
+<dependency>
+  <groupId>org.projectlombok</groupId>
+  <artifactId>lombok</artifactId>
+  <version>1.16.16</version>
+  <scope>provided</scope>
+</dependency>
+```
+
+El alcance **`provided`** le indica a Maven que no incluya esta dependencia en el archivo JAR porque la necesitamos en el momento de la compilación. No lo necesitamos en tiempo de ejecución. Espere a que Maven descargue la dependencia, eso es todo por ahora.
+
+Además, podemos usar ***Reimport All Maven Projects*** proporcionados por IntelliJ IDEA, que se encuentra en la pestaña Proyectos de Maven, como se muestra aquí:
+
+![image](https://user-images.githubusercontent.com/23094588/126880604-398cc3cf-1300-4562-88b7-f770031af06c.png)
+
+### Creando los modelos
+
+Ahora, crearemos nuestros modelos, que son clases de Java anotadas con **`@Data`**.
+
+#### Tag
+
+Esta clase representa una etiqueta en nuestro sistema. No hay necesariamente un repositorio para él porque se conservará junto con nuestra entidad **`News`**:
+
+```java
+package springfive.cms.domain.models;
+
+import lombok.Data;
+
+@Data
+public class Tag {
+
+  String value;
+
+}
+```
+
+#### Category
+
+Se puede utilizar un modelo de categoría para nuestra aplicación CMS para agrupar las noticias. Además, la otra cosa importante es que esto hace que nuestras noticias estén categorizadas para facilitar la tarea de búsqueda. Eche un vistazo al siguiente código: 
+
+```java
+package springfive.cms.domain.models;
+
+import lombok.Data;
+
+@Data
+public class Category {
+
+  String id;
+
+  String name;
+
+}
+```
+
+#### User
+
+Representa a un usuario en nuestro modelo de dominio. Tenemos dos perfiles diferentes, el autor que actúa como redactor de noticias, y otro es revisor que debe revisar las noticias registradas en el portal. Eche un vistazo al siguiente ejemplo:
+
+```java
+package springfive.cms.domain.models;
+
+import lombok.Data;
+
+@Data
+public class User {
+
+  String id;
+
+  String identity;
+
+  String name;
+
+  Role role;
+
+}
+```
+
+#### News
+
+Esta clase representa noticias en nuestro dominio, por ahora, no tiene comportamientos. Solo se exponen las propiedades y los getters/setters; en el futuro, agregaremos algunos comportamientos:
+
+```java
+package springfive.cms.domain.models;
+
+import java.util.Set;
+import lombok.Data;
+
+@Data
+public class News {
+
+  String id;
+
+  String title;
+
+  String content;
+
+  User author;
+
+  Set<User> mandatoryReviewers;
+  
+  Set<Review> reviewers;
+
+  Set<Category> categories;
+
+  Set<Tag> tags;
+
+}
+```
+
+La clase **`Review`** se puede encontrar en GitHub: (https://github.com/PacktPublishing/Spring-5.0-By-Example/tree/master/Chapter02/src/main/java/springfive/cms/domain/models).
+
+Como podemos ver, son clases simples de Java que representan nuestro dominio de aplicación CMS. Es el corazón de nuestra aplicación y toda la lógica del dominio residirá en estas clases. Es una característica importante.
+
+#### Review
+
+```java
+package springfive.cms.domain.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Review {
+
+  String userId;
+
+  String status;
+
+}
+```
+
+### Hello REST resources
+
+Hemos creado los modelos y podemos empezar a pensar en nuestros recursos REST. Crearemos tres recursos principales:
+
+* **`CategoryResource`** que será responsable de la clase **`Category`**.
+
+* El segundo es **`UserResource`**. Gestionará las interacciones entre la clase **`User`** y las API REST.
+
+* El último, y más importante también, será el **`NewsResource`** que se encargará de gestionar las entidades informativas, como las reseñas.
