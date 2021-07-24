@@ -264,4 +264,37 @@ Abrimos el Proyecto con IntelliJ
 
 ![image](https://user-images.githubusercontent.com/23094588/126879418-adcde409-bb31-4791-9cb0-cd49d225dec8.png)
 
+#### Desde IntelliJ
+
+![image](https://user-images.githubusercontent.com/23094588/126880180-bac1ae98-ff31-4bbb-add2-b9790fcc7b62.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880168-67baa600-fd1a-40f6-a603-9d984a6f0b73.png)
+
+#### Desde Linea de Comandos via Maven goal
+
+![image](https://user-images.githubusercontent.com/23094588/126880257-43b97f28-c7d9-44d2-b768-5037b6554dce.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880272-ec68362b-9278-4520-b9a0-7952886aff2f.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880277-17f5c726-800a-493d-8458-d38773f19a5e.png)
+
+#### Desde Linea de Comandos via JAR file
+
+![image](https://user-images.githubusercontent.com/23094588/126880295-0e7ad4e5-e754-4e36-9a7f-a4dda5dfadee.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880303-661b899a-ba29-4e5d-9bc2-6184cbe55f76.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880312-63f336b1-10a6-4abe-8c58-850c4704fbcf.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880345-565a2625-3fb5-4ae2-a5e1-06f9f09eebfd.png)
+
+**`java -jar cms-0.0.1-SNAPSHOT.jar`**
+
+![image](https://user-images.githubusercontent.com/23094588/126880358-b6c9bedb-2006-4364-a469-22a834de857e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880374-97d45f99-5e72-4a6f-bc5e-774166a3ce07.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126880381-3a4047bf-c571-42a0-b61a-a1b369b3dcc7.png)
+
+
 
