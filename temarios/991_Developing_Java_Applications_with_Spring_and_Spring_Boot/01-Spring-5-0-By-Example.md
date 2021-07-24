@@ -81,7 +81,7 @@ Estos proyectos fomentan el uso extensivo de la inyección de dependencias propo
 
 Hoy en día, el RabbitMQ broker es la opción popular para las aplicaciones de mensajería, y Spring brinda soporte completo para las interacciones del cliente hasta el nivel de las tareas de administración.
 
-> ℹ️ *Algunas anotaciones comunes son `@Exchange` y `@QeueueBinding`.
+> ℹ️ *Algunas anotaciones comunes son `@Exchange` y `@QeueueBinding`.*
 
 ## Spring para Apache Kafka
 
@@ -107,7 +107,7 @@ El módulo también admite requisitos transaccionales. `JmsTransactionManager` e
 
 Spring elimina el código repetitivo con un par de anotaciones. El marco aumenta la legibilidad del código y también hace que el código sea más intuitivo.
 
-> ℹ️ *Algunas anotaciones comunes son ` @JmsListener` y `@EnableJms`.
+> ℹ️ *Algunas anotaciones comunes son ` @JmsListener` y `@EnableJms`*.
 
 ## Spring Web MVC
 
@@ -141,7 +141,7 @@ Este módulo cumple con los requisitos web modernos para manejar una gran cantid
 
 Aprenderemos sobre este módulo en el Capítulo 3, Agregar persistencia con Spring Data y ponerlo en moda reactiva e implementar una aplicación completamente reactiva basada en Reactive Streams.
 
-> ℹ️ *Algunas anotaciones comunes son ` @RequestMapping`, `@RestController` y `@RequestBody`.
+> ℹ️ *Algunas anotaciones comunes son ` @RequestMapping`, `@RestController` y `@RequestBody`*.
 
 ## Spring Data
 
@@ -153,7 +153,7 @@ Hay algunas interfaces centrales; son una especie de marcador para indicar al fr
 
 Las interfaces centrales son `CrudRepository` y `PagingAndSortingRepository`, y sus nombres se explican por sí mismos. `CrudRepository` implementa los comportamientos CRUD, como `create`, `retrieval`, `update` y `delete`. `PagingAndSortingRepository` es una extensión de `CrudRepository` y agrega algunas características como paginación y clasificación. Por lo general, encontraremos derivaciones de estas interfaces como `MongoRepository`, que interactúa con la tecnología de base de datos MongoDB.
 
-> ℹ️ *Algunas anotaciones comunes son `@Query`, `@Id` y `@EnableJpaRepositories`.
+> ℹ️ *Algunas anotaciones comunes son `@Query`, `@Id` y `@EnableJpaRepositories`*.
 
 ## Spring Security
 
@@ -201,7 +201,7 @@ http
       .anyRequest().authenticated();
 ```
 
-> ℹ️ *El ejemplo se extrajo del blog spring.io. Para obtener más detalles, vaya a https://spring.io/blog/2013/07/11/spring-security-java-config-preview-readability/.
+> ℹ️ *El ejemplo se extrajo del blog spring.io. Para obtener más detalles, vaya a https://spring.io/blog/2013/07/11/spring-security-java-config-preview-readability/*.
 
 Como podemos ver, el DSL hace que la tarea de configuración sea extremadamente fácil y muy comprensible.
 
@@ -269,7 +269,7 @@ En el Capítulo 7, *Airline Ticket System*, implementaremos un servicio interesa
 
 Spring Cloud Consul proporciona integraciones con Hashicorp's Consul. Esta herramienta aborda los problemas de la misma manera que el descubrimiento de servicios, una configuración distribuida y un bus de control. Este módulo nos permite configurar aplicaciones Spring y Consul con algunas anotaciones en un modelo de programación basado en Spring. También se admite la configuración automática. Lo sorprendente aquí es que este módulo se puede integrar con algunas bibliotecas OSS de Netflix, como Zuul y Ribbon, a través de Spring Cloud Zuul y Spring Cloud Ribbon respectivamente (por ejemplo).
 
-> ℹ️ *`@EnableDiscoveryClient` es una anotación común.
+> ℹ️ *`@EnableDiscoveryClient` es una anotación común*.
 
 ## Spring Cloud Security
 
