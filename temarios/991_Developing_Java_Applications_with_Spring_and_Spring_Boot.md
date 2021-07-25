@@ -4,6 +4,8 @@
 
 By Claudio Eduardo de Oliveira, Greg L. Turnquist, Alex Antonov
 
+https://github.com/PacktPublishing/Spring-5.0-By-Example
+
 TIME TO COMPLETE: **23h 29m**<br>
 TOPICS: **Spring**<br>
 PUBLISHED BY: **Packt Publishing**<br>
