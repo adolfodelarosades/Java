@@ -390,6 +390,23 @@ public class User {
 }
 ```
 
+#### Role
+
+```java
+package springfive.cms.domain.models;
+
+/**
+ * @author claudioed on 28/10/17. Project cms
+ */
+public enum Role {
+
+  AUTHOR,
+
+  REVIEWER
+
+}
+```
+
 #### News
 
 Esta clase representa noticias en nuestro dominio, por ahora, no tiene comportamientos. Solo se exponen las propiedades y los getters/setters; en el futuro, agregaremos algunos comportamientos:
@@ -450,7 +467,7 @@ public class Review {
 }
 ```
 
-### Hello REST resources
+## Hello REST resources
 
 Hemos creado los modelos y podemos empezar a pensar en nuestros recursos REST. Crearemos tres recursos principales:
 
@@ -459,3 +476,69 @@ Hemos creado los modelos y podemos empezar a pensar en nuestros recursos REST. C
 * El segundo es **`UserResource`**. Gestionará las interacciones entre la clase **`User`** y las API REST.
 
 * El último, y más importante también, será el **`NewsResource`** que se encargará de gestionar las entidades informativas, como las reseñas.
+
+### Creando la clase `CategoryResource`
+
+Crearemos nuestro primer recurso REST, comencemos con la clase **`CategoryResource`** que es responsable de administrar nuestra clase **`Category`**. La implementación de esta entidad será simple y crearemos puntos finales CRUD como crear, recuperar, actualizar y eliminar. Tenemos dos cosas importantes que debemos tener en cuenta cuando creamos las API. El primero es el verbo HTTP correcto, como **`POST`**, **`GET`**, **`PUT`** y **`DELETE`**. Es fundamental que las API REST tengan el verbo HTTP correcto, ya que nos proporciona un conocimiento intrínseco sobre la API. Es un patrón para cualquier cosa que interactúe con nuestras API. Otra cosa son los códigos de estado, y es el mismo que el primero que debemos seguir, este es el patrón que los desarrolladores reconocerán fácilmente. El ***Richardson Maturity Model*** puede ayudarnos a crear increíbles API REST, y este modelo introduce algunos niveles para medir las API REST, es una especie de termómetro.
+
+En primer lugar, crearemos el esqueleto de nuestras API. Piense en las funciones que necesita en su aplicación. En la siguiente sección, explicaremos cómo agregar una capa de servicio en nuestras API REST. Por ahora, creemos una clase **`CategoryResource`**, nuestra implementación podría verse así:
+
+```java
+package springfive.cms.domain.resources;
+
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import springfive.cms.domain.models.Category;
+import springfive.cms.domain.vo.CategoryRequest;
+
+@RestController
+@RequestMapping("/api/category")
+public class CategoryResource {
+
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<Category> findOne(@PathVariable("id") String id){
+    return ResponseEntity.ok(new Category());
+  }
+
+  @GetMapping
+  public ResponseEntity<List<Category>> findAll(){
+    return ResponseEntity.ok(Arrays.asList(new Category(),new Category()));
+  }
+
+  @PostMapping
+  public ResponseEntity<Category> newCategory(CategoryRequest category){
+    return new ResponseEntity<>(new Category(), HttpStatus.CREATED);
+  }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void removeCategory(@PathVariable("id") String id){
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Category> updateCategory(@PathVariable("id") String id,CategoryRequest category){
+    return new ResponseEntity<>(new Category(), HttpStatus.OK);
+  }
+
+}
+```
+
+La **`CategoryRequest`** se puede encontrar en GitHub: (https://github.com/PacktPublishing/Spring-5.0-By-Example/tree/master/Chapter02/src/main/java/springfive/cms/domain/vo).
+
+Tenemos algunos conceptos importantes aquí. El primero es @RestController. Indica a Spring Framework que la clase CategoryResource expondrá los puntos finales REST sobre el módulo Web-MVC. Esta anotación configurará algunas cosas en un marco, como HttpMessageConverters para manejar solicitudes y respuestas HTTP como XML o JSON. Por supuesto, necesitamos las bibliotecas correctas en la ruta de clases para manejar JSON y XML. Además, agregue algunos encabezados a la solicitud, como Aceptar y Tipo de contenido. Esta anotación se introdujo en la versión 4.0. Es una especie de anotación sintáctica de azúcar porque está anotada con @Controller y @ResponseBody.
+
+La segunda es la anotación @RequestMapping, y esta importante anotación es responsable de la solicitud y respuesta HTTP en nuestra clase. El uso es bastante simple en este código cuando lo usamos en el nivel de clase, se propagará para todos los métodos y los métodos lo usarán como relativo. La anotación @RequestMapping tiene diferentes casos de uso. Nos permite configurar el verbo HTTP, los parámetros y los encabezados.
+
+Finalmente, tenemos @GetMapping, @PostMapping, @DeleteMapping y @PutMapping, estas anotaciones son una especie de atajo para configurar el @RequestMapping con los verbos HTTP correctos; una ventaja es que estas anotaciones hacen que el código sea más legible.
+
+A excepción de removeCategory, todos los métodos devuelven la clase ResponseEntity que nos permite manejar los códigos de estado HTTP correctos en la siguiente sección.
