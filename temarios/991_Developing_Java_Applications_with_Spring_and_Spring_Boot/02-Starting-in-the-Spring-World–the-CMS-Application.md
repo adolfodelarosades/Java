@@ -632,6 +632,85 @@ public class NewsResource {
 
 }
 ```
+## Agregar capa de repositorio
+
+(No se menciona nada en el libro)
+
+### `AbstractRepository`
+
+```java
+package springfive.cms.domain.repository;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+public abstract class AbstractRepository<T> {
+
+  private final List<T> elements = new ArrayList<>();
+
+  public void delete(T entity){
+    final Iterator<T> iterator = elements.iterator();
+    while (iterator.hasNext()){
+      final T next = iterator.next();
+      if(next.equals(entity)){
+        iterator.remove();
+        break;
+      }
+    }
+  }
+
+  public List<T> findAll(){
+    return this.elements;
+  }
+
+  public T save(T entity){
+    this.elements.add(entity);
+    return entity;
+  }
+
+  public T findOne(String id){
+    return this.elements.stream().filter(el -> el.equals(id)).findFirst().get();
+  }
+
+
+}
+```
+
+
+### `CategoryRepository`
+
+```java
+package springfive.cms.domain.repository;
+
+import org.springframework.stereotype.Service;
+import springfive.cms.domain.models.Category;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+@Service
+public class CategoryRepository extends AbstractRepository<Category> {
+}
+```
+
+
+
+
+### `UserRepository`
+
+```java
+package springfive.cms.domain.repository;
+
+import org.springframework.stereotype.Service;
+import springfive.cms.domain.models.User;
+
+@Service
+public class UserRepository extends AbstractRepository<User>{}
+```
 
 ## Agregar capa de servicio
 
@@ -674,6 +753,115 @@ Nuestra aplicación debe tener un almacenamiento de persistencia donde se puedan
 
 ### `CategoryService`
 
-Comencemos con nuestro servicio más simple, la clase CategoryService, los comportamientos que se esperan de esta clase son operaciones CRUD. Entonces, necesitamos una representación de nuestro almacenamiento de persistencia o implementación de repositorio, por ahora, estamos usando el almacenamiento efímero y ArrayList con nuestras categorías. En el próximo capítulo, agregaremos la persistencia real para nuestra aplicación CMS.
+Comencemos con nuestro servicio más simple, la clase **`CategoryService`**, los comportamientos que se esperan de esta clase son operaciones CRUD. Entonces, necesitamos una representación de nuestro almacenamiento de persistencia o implementación de repositorio, por ahora, estamos usando el almacenamiento efímero y **`ArrayList`** con nuestras categorías. En el próximo capítulo, agregaremos la persistencia real para nuestra aplicación CMS.
 
 Creemos nuestro primer servicio Spring. La implementación se encuentra en el siguiente fragmento:
+
+```java
+package springfive.cms.domain.service;
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+import springfive.cms.domain.models.Category;
+import springfive.cms.domain.repository.CategoryRepository;
+
+@Service
+public class CategoryService {
+
+  private final CategoryRepository categoryRepository;
+
+  public CategoryService(CategoryRepository categoryRepository) {
+    this.categoryRepository = categoryRepository;
+  }
+
+  public Category update(Category category){
+    return this.categoryRepository.save(category);
+  }
+
+  public Category create(Category category){
+    return this.categoryRepository.save(category);
+  }
+
+  public void delete(String id){
+    final Category category = this.categoryRepository.findOne(id);
+    this.categoryRepository.delete(category);
+  }
+
+  public List<Category> findAll(){
+    return this.categoryRepository.findAll();
+  }
+
+  public Category findOne(String id){
+    return this.categoryRepository.findOne(id);
+  }
+
+}
+```
+
+Hay algunas cosas nuevas aquí. El contenedor Spring detectará y creará una instancia de esta clase porque tiene una anotación **`@Service`**. Como podemos ver, no hay nada especial en esa clase. No necesariamente extiende ninguna clase ni implementa una interfaz. Recibimos el **`CategoryRepository`** en un constructor, esta clase será proporcionada por el contenedor Spring porque le indicamos al contenedor que produzca esto, pero en Spring 5 ya no es necesario usar **`@Autowired`** en el constructor. Funciona porque teníamos el único constructor en esa clase y Spring lo detectará. Además, tenemos un par de métodos que representan los comportamientos CRUD y es simple de entender.
+
+### `UserService`
+
+La clase **`UserService`** es bastante similar a la **`CategoryService`**, pero las reglas son sobre la entidad **`User`**, para esta entidad no tenemos nada especial. Tenemos la anotación **`@Service`** y también recibimos el constructor **`UserRepository`**. Es bastante simple y fácil de entender. Mostraremos la implementación de **`UserService`**, y debe ser así:
+
+```java
+package springfive.cms.domain.service;
+
+import java.util.List;
+import java.util.UUID;
+import org.springframework.stereotype.Service;
+import springfive.cms.domain.models.User;
+import springfive.cms.domain.repository.UserRepository;
+import springfive.cms.domain.vo.UserRequest;
+
+@Service
+public class UserService {
+
+  private final UserRepository userRepository;
+
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
+  public User update(String id,UserRequest userRequest){
+    final User user = this.userRepository.findOne(id);
+    user.setIdentity(userRequest.getIdentity());
+    user.setName(userRequest.getName());
+    user.setRole(userRequest.getRole());
+    return this.userRepository.save(user);
+  }
+
+  public User create(UserRequest userRequest){
+    User user = new User();
+    user.setId(UUID.randomUUID().toString());
+    user.setIdentity(userRequest.getIdentity());
+    user.setName(userRequest.getName());
+    user.setRole(userRequest.getRole());
+    return this.userRepository.save(user);
+  }
+
+  public void delete(String id){
+    final User user = this.userRepository.findOne(id);
+    this.userRepository.delete(user);
+  }
+
+  public List<User> findAll(){
+    return this.userRepository.findAll();
+  }
+
+  public User findOne(String id){
+    return this.userRepository.findOne(id);
+  }
+
+}
+```
+
+Preste atención a la declaración de clase con la anotación **`@Service`**. Esta es una implementación muy común en el ecosistema Spring. Además, podemos encontrar anotaciones **`@Component`**, **`@Repository`**. **`@Service`** y **`@Component`** son comunes para la capa de servicio y no hay diferencia en los comportamientos. El **`**@Repository`** cambia un poco los comportamientos porque los frameworks traducirán algunas excepciones en la capa de acceso a datos.
+
+
+### NewsService
+
+Se trata de un interesante servicio que se encargará de gestionar el estado de nuestras novedades. Interactuará como un *pegamento* para llamar a los modelos de dominio, en este caso, la entidad **`News`**. El servicio es bastante similar a los demás. Recibimos la clase **`NewsRepository`**, una dependencia y mantuvimos el repositorio para mantener los estados, hagámoslo.
+
+La anotación **`@Service`** vuelve a estar presente. Esto es bastante estándar para las aplicaciones Spring. Además, podemos cambiar a la anotación **`@Component`**, pero no hace ninguna diferencia para nuestra aplicación.
+
