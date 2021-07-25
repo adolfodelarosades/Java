@@ -296,6 +296,12 @@ Abrimos el Proyecto con IntelliJ
 
 ![image](https://user-images.githubusercontent.com/23094588/126880381-3a4047bf-c571-42a0-b61a-a1b369b3dcc7.png)
 
+### Con Eclipse
+
+![image](https://user-images.githubusercontent.com/23094588/126909984-80ab42d7-408b-43ac-ac2d-447bc402be78.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126909998-a4f2f006-4498-4488-a7d1-21685851424b.png)
+
 ## Creando los recursos REST
 
 Ahora, tenemos una aplicación en funcionamiento en esta sección, y agregaremos algunos endpoints REST y modelaremos algunas clases iniciales para la aplicación CMS, los endpoints REST serán útiles para la integración de AngularJS.
