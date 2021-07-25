@@ -1323,3 +1323,106 @@ Siguiendo la **`ui-view`**, tenemos nuestros archivos JavaScript, el primero es 
 El segundo es el UI-Router que nos ayuda a gestionar nuestras rutas. Finalmente, tenemos nuestros archivos JavaScript que configuran la aplicación AngularJS, nuestros controladores y los servicios para interactuar con nuestras API CMS.
 
 Además, tenemos algunas clases de Bootstrap para alinear campos y facilitar el diseño.
+
+### Creación del Controlador Category
+
+Ahora, necesitamos crear nuestros controladores. Empezaremos por lo más sencillo para que el ejemplo sea más fácil de entender. El **`CategoryController`** tiene la responsabilidad de controlar los datos de la entidad **`Category`**. Hay dos controladores, uno nos permite crear una categoría y otro enumera todas las categorías almacenadas en la base de datos.
+
+El **`category-controller.js`** debería ser así:
+
+```js
+(function (angular) {
+  'use strict';
+
+  // Controllers
+  angular.module('cms.modules.category.controllers', []).
+
+  controller('CategoryCreateController',
+      ['$scope', 'CategoryService','$state',
+        function ($scope, CategoryService,$state) {
+
+          $scope.resetForm = function () {
+            $scope.category = null;
+          };
+
+          $scope.create = function (category) {
+            CategoryService.create(category).then(
+                function (data) {
+                  console.log("Success on create Category!!!")
+                  $state.go('categories')
+                }, function (err) {
+                  console.log("Error on create Category!!!")
+                });
+          };
+        }]).
+
+  controller('CategoryListController',
+      ['$scope', 'CategoryService',
+        function ($scope, CategoryService) {
+          CategoryService.find().then(function (data) {
+            $scope.categories = data.data;
+          }, function (err) {
+            console.log(err);
+          });
+        }]);
+})(angular);
+```
+
+Hemos creado un módulo AngularJS. Nos ayuda a mantener organizadas las funciones. Actúa como una especie de espacio de nombres para nosotros. La función **`.controller`** es un constructor para crear las instancias de nuestro controlador. Recibimos algunos parámetros, el framework AngularJS inyectará estos objetos por nosotros.
+
+### Creación del Category Service
+
+Los objetos **`CategoryService`** son un objeto singleton porque es un servicio AngularJS. El servicio interactuará con nuestras API de CMS impulsadas por la aplicación Spring Boot.
+
+Usaremos el servicio **`$http`**. Facilita las comunicaciones HTTP.
+
+Escribamos el **`CategoryService`**:
+
+```js
+(function (angular) {
+  'use strict';
+
+  /* Services */
+</span>  angular.module('cms.modules.category.services', []).
+  service('CategoryService', ['$http',
+    function ($http) {
+
+      var serviceAddress = 'http://localhost:8080';
+      var urlCollections = serviceAddress + '/api/category';
+      var urlBase = serviceAddress + '/api/category/';
+
+      this.find = function () {
+        return $http.get(urlCollections);
+      };
+
+      this.findOne = function (id) {
+        return $http.get(urlBase + id);
+      };
+
+      this.create = function (data) {
+        return $http.post(urlBase, data);
+      };
+
+      this.update = function (data) {
+        return $http.put(urlBase + '/id/' + data._id, data);
+      };
+
+      this.remove = function (data) {
+        return $http.delete(urlBase + '/id/' + data._id, data);
+      };
+    }
+  ]);
+})(angular);
+```
+
+Bien hecho, ahora hemos implementado el **`CategoryService`**.
+
+La función **`.service`** es un constructor para crear una instancia de servicio, el **`angular`** actúa bajo el capó. Hay una inyección en un constructor, para el servicio necesitamos un servicio **`$http`** para realizar llamadas HTTP contra nuestras API. Aquí hay un par de métodos HTTP. Preste atención al método correcto para mantener la semántica HTTP.
+
+### Resumen
+
+En este capítulo, creamos nuestra primera aplicación Spring. Vimos Spring Initializr, la increíble herramienta que ayuda a los desarrolladores a crear el esqueleto de la aplicación.
+
+Observamos cómo funciona Spring bajo el capó y cómo se configuró el marco con un par de anotaciones. Ahora, tenemos un conocimiento básico de las funciones de Spring Bootstrap y podemos comprender las funciones de inyección de dependencia y escaneo de componentes presentes en el marco.
+
+Este conocimiento es la base para los siguientes capítulos, y ahora estamos listos para comenzar a trabajar con funciones más avanzadas, como la persistencia. Aquí vamos. Nos vemos en el próximo capítulo.
