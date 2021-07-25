@@ -1185,13 +1185,141 @@ Sigamos creando nuestra aplicación CMS.
 
 ![image](https://user-images.githubusercontent.com/23094588/126911456-2d34b31e-27a7-466b-b140-f7721767c62b.png)
 
+![image](https://user-images.githubusercontent.com/23094588/126911557-392fc07f-5370-4b28-987a-9ab6e1654d61.png)
 
+## Integrar con AngularJS
 
+AngularJS Framework se ha convertido en tendencia desde hace unos años, la comunidad es súper activa, el proyecto fue creado por Google.
 
+La idea principal del marco es ayudar a los desarrolladores a manejar las complejidades de la capa frontend, especialmente en la parte HTML. El lenguaje de marcado HTML es estático. Es una gran herramienta para crear documentos estáticos, pero hoy en día no es un requisito para las aplicaciones web modernas. Estas aplicaciones deben ser dinámicas. Los equipos de UX de todo el mundo, trabajan duro para crear aplicaciones asombrosas, con diferentes efectos, estos chicos tratan de mantener las aplicaciones más cómodas para los usuarios.
 
+AngularJS agrega la posibilidad de extender el HTML con algunos atributos y etiquetas adicionales. En esta sección, agregaremos algunos comportamientos interesantes en la aplicación frontend. Vamos a hacerlo.
 
+### Conceptos de AngularJS
 
+En nuestra aplicación CMS, trabajaremos con algunos componentes de Angular. Usaremos **`Controllers`** que interactuarán con nuestro HTML y manejarán el comportamiento de algunas páginas, como las que muestran mensajes de error. Los **`Services`** son responsables de manejar el código de la infraestructura, como interactuar con nuestra API de CMS. Este libro no pretende ser una guía de AngularJS. Sin embargo, echaremos un vistazo a algunos conceptos interesantes para desarrollar nuestra aplicación.
 
+Las etiquetas comunes de AngularJS son:
 
+* **`ng-app`**
+* **`ng-controller`**
+* **`ng-click`**
+* **`ng-hide`**
+* **`ng-show`**
 
+Estas etiquetas están incluidas en AngularJS Framework. Hay muchas más etiquetas creadas y mantenidas por la comunidad. Existe, por ejemplo, una biblioteca para trabajar con formularios HTML, la usaremos para agregar comportamientos dinámicos en nuestro Portal CMS.
 
+### Controllers
+
+Los controladores son parte del marco para manejar la lógica empresarial de la aplicación. Deben usarse para controlar el flujo de datos en una aplicación. El controlador se adjunta al DOM a través de la directiva **`ng-controller`**.
+
+Para agregar algunas acciones a nuestra vista, necesitamos crear funciones en los controladores, la forma de hacerlo es creando funciones y agregándolas al objeto **`$scope`**.
+
+Los controladores no se pueden usar para realizar manipulaciones DOM, formatear datos y filtrar datos, se considera una mejor práctica en el mundo de AngularJS.
+
+Por lo general, los controladores inyectan los objetos de servicio para delegar el manejo de la lógica empresarial. Comprenderemos los servicios en la siguiente sección.
+
+### Services
+
+Los servicios son los objetos para manejar la lógica empresarial en nuestra aplicación. En algunos casos, se pueden usar para manejar el estado. Los objetos de servicios son un singleton, lo que significa que solo tenemos una instancia en toda nuestra aplicación.
+
+En nuestra aplicación, los servicios son responsables de interactuar con nuestras API de CMS creadas en Spring Boot. Vamos a hacer eso.
+
+### Crear el punto de entrada de la Aplicación
+
+Spring Boot Framework nos permite servir archivos estáticos. Estos archivos deben estar en la ruta de clases en una de estas carpetas **`/static`**, **`/public`**, **`/resources`** o **`/META-INF/resources`**
+
+Usaremos la carpeta **`/static`**, en esta carpeta pondremos nuestra aplicación AngularJS. Existen algunos estándares para modularizar la estructura de carpetas de la aplicación AngularJS que depende del tamaño y los requisitos de la aplicación. Usaremos el estilo más simple para mantener la atención en la integración de Spring. Mira la estructura del proyecto:
+
+![image](https://user-images.githubusercontent.com/23094588/126911759-1a7b58a7-eac9-42a6-933e-9f42dadbbc2f.png)
+
+Hay algunos activos para iniciar y ejecutar una aplicación AngularJS. Usaremos Content Delivery Network (CDN) para cargar AngularJS Framework, Angular UI-Router que ayuda a manejar el enrutamiento en nuestra aplicación web y Bootstrap Framework que ayuda a desarrollar nuestras páginas.
+
+> ℹ️ *Content Delivery Network son servidores proxy distribuidos en todo el mundo. Hace que el contenido tenga una mayor disponibilidad y mejora el rendimiento porque se alojará más cerca del usuario final. La explicación detallada se puede encontrar en la página de CloudFare (https://www.cloudflare.com/learning/cdn/what-is-a-cdn/).*
+
+Entonces podemos comenzar a configurar nuestra aplicación AngularJS. Comencemos con nuestro punto de entrada, **`index.html`**:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spring Boot Security</title>
+  <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body ng-app="cms">
+
+<!-- Header -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">CMS</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#users">Users</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#news">News</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Body -->
+<div class="container">
+  <div ui-view></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+
+<script type="text/javascript" src="app/app.js"></script>
+
+<script type="text/javascript" src="app/controllers.js"></script>
+<script type="text/javascript" src="app/services.js"></script>
+
+<script type="text/javascript" src="app/components/categories/category-controller.js"></script>
+<script type="text/javascript" src="app/components/categories/category-service.js"></script>
+
+<script type="text/javascript" src="app/components/news/news-controller.js"></script>
+<script type="text/javascript" src="app/components/news/news-service.js"></script>
+
+<script type="text/javascript" src="app/components/users/user-controller.js"></script>
+<script type="text/javascript" src="app/components/users/user-service.js"></script>
+
+</body>
+</html>
+```
+
+Aquí hay algunas cosas importantes. Vamos a entenderlos.
+
+La etiqueta **`ng-app`** es una directiva que se usa para arrancar la aplicación AngularJS. Esta etiqueta es el elemento raíz de la aplicación y generalmente se coloca en las etiquetas **`<body>`** o **`<html>`**.
+
+La etiqueta **`ui-view`** indica al Angular UI-Router sobre qué parte del documento HTML será manejada por los estados de la aplicación, en otras palabras, la parte designada tiene los comportamientos dinámicos y el cambio depende del sistema de enrutamiento. Mira el siguiente fragmento de código:
+
+```html
+<!-- Body -->
+<div class="container">
+  <div ui-view></div>
+</div>
+```
+
+Esta parte del código se puede encontrar en el archivo **`index.hml`**.
+
+Siguiendo la **`ui-view`**, tenemos nuestros archivos JavaScript, el primero es AngularJS Framework, en esta versión el archivo está minificado. Mire nuestros archivos JavaScript, los archivos se crearon en la carpeta **`/static/app/components`**. Eche un vistazo a la imagen aquí:
+
+![image](https://user-images.githubusercontent.com/23094588/126911862-781e5d85-c62f-485f-8a18-438c0b73a8f9.png)
+
+El segundo es el UI-Router que nos ayuda a gestionar nuestras rutas. Finalmente, tenemos nuestros archivos JavaScript que configuran la aplicación AngularJS, nuestros controladores y los servicios para interactuar con nuestras API CMS.
+
+Además, tenemos algunas clases de Bootstrap para alinear campos y facilitar el diseño.
