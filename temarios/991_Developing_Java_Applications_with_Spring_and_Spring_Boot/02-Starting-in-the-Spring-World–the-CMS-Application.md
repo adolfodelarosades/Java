@@ -473,6 +473,9 @@ public class Review {
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/126910217-593689e8-4b84-4687-a0ab-bb5be9db8514.png)
+
+
 ## Hello REST resources
 
 Hemos creado los modelos y podemos empezar a pensar en nuestros recursos REST. Crearemos tres recursos principales:
@@ -539,8 +542,6 @@ public class CategoryResource {
 }
 ```
 
-La **`CategoryRequest`** se puede encontrar en GitHub: (https://github.com/PacktPublishing/Spring-5.0-By-Example/tree/master/Chapter02/src/main/java/springfive/cms/domain/vo).
-
 Tenemos algunos conceptos importantes aquí. El primero es **`@RestController`**. Indica a Spring Framework que la clase **`CategoryResource`** expondrá los puntos finales REST sobre el módulo Web-MVC. Esta anotación configurará algunas cosas en un framework, como **`HttpMessageConverters`** para manejar solicitudes y respuestas HTTP como XML o JSON. Por supuesto, necesitamos las libraries correctas en la ruta de clases para manejar JSON y XML. Además, agregue algunos headers a la request, como **`Accept`** y **`Type`**. Esta anotación se introdujo en la versión 4.0. Es una especie de anotación sintáctica de azúcar porque está anotada con **`@Controller`** y **`@ResponseBody`**.
 
 La segunda es la anotación **`@RequestMapping`**, y esta importante anotación es responsable de la HTTP request y response  en nuestra clase. El uso es bastante simple en este código cuando lo usamos en el nivel de clase, se propagará para todos los métodos y los métodos lo usarán como relativo. La anotación **`@RequestMapping`** tiene diferentes casos de uso. Nos permite configurar el verbo HTTP, los parámetros y los headers.
@@ -549,9 +550,84 @@ Finalmente, tenemos **`@GetMapping`**, **`@PostMapping`**, **`@DeleteMapping`** 
 
 A excepción de **`removeCategory`**, todos los métodos devuelven la clase **`ResponseEntity`** que nos permite manejar los códigos de estado HTTP correctos en la siguiente sección.
 
+La **`CategoryRequest`** se puede encontrar en GitHub: (https://github.com/PacktPublishing/Spring-5.0-By-Example/tree/master/Chapter02/src/main/java/springfive/cms/domain/vo).
+
+```java
+package springfive.cms.domain.vo;
+
+import lombok.Data;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+@Data
+public class CategoryRequest {
+
+  String name;
+
+}
+```
+
 ### `UserResource`
 
 La clase **`UserResource`** es la misma que **`CategoryResource`**, excepto que usa la clase **`User`**. Podemos encontrar el código completo en GitHub (https://github.com/PacktPublishing/Spring-5.0-By-Example/tree/master/Chapter02).
+
+
+```java
+package springfive.cms.domain.resources;
+
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import springfive.cms.domain.models.User;
+import springfive.cms.domain.vo.NewsRequest;
+import springfive.cms.domain.vo.UserRequest;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+@RestController
+@RequestMapping("/api/user")
+public class UserResource {
+
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<User> findOne(@PathVariable("id") String id){
+    return ResponseEntity.ok(new User());
+  }
+
+  @GetMapping
+  public ResponseEntity<List<User>> findAll(){
+    return ResponseEntity.ok(Arrays.asList(new User(),new User()));
+  }
+
+  @PostMapping
+  public ResponseEntity<User> newUser(UserRequest userRequest){
+    return new ResponseEntity<>(new User(), HttpStatus.CREATED);
+  }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void removeUser(@PathVariable("id") String id){
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<User> updateUser(@PathVariable("id") String id,User userRequest){
+    return new ResponseEntity<>(new User(), HttpStatus.OK);
+  }
+
+}
+```
+
+**`UserRequest`**
 
 ```java
 package springfive.cms.domain.vo;
@@ -638,6 +714,37 @@ public class NewsResource {
 
 }
 ```
+
+**`NewsRequest`**
+
+```java
+package springfive.cms.domain.vo;
+
+import java.util.Set;
+import lombok.Data;
+import springfive.cms.domain.models.Category;
+import springfive.cms.domain.models.Tag;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+@Data
+public class NewsRequest {
+
+  String title;
+
+  String content;
+
+  Set<Category> categories;
+
+  Set<Tag> tags;
+
+}
+```
+
+![image](https://user-images.githubusercontent.com/23094588/126910697-69f4ceaa-9370-41bb-a5ff-5fd1d9953cce.png)
+
+
 ## Agregar capa de repositorio
 
 (No se menciona nada en el libro)
@@ -703,9 +810,6 @@ public class CategoryRepository extends AbstractRepository<Category> {
 }
 ```
 
-
-
-
 ### `UserRepository`
 
 ```java
@@ -717,6 +821,8 @@ import springfive.cms.domain.models.User;
 @Service
 public class UserRepository extends AbstractRepository<User>{}
 ```
+
+![image](https://user-images.githubusercontent.com/23094588/126910801-0174452e-8cb3-4485-824c-5bb9e6a4c7f3.png)
 
 ## Agregar capa de servicio
 
@@ -882,6 +988,9 @@ public class NewsService {
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/126910970-beffcf4d-7684-41fd-aa17-d4e0a03f01f7.png)
+
+
 ## Configuración de Swagger para nuestras API
 
 Swagger es la herramienta de facto para las API web de documentos, y la herramienta permite a los desarrolladores modelar las API, crear una forma interactiva de jugar con las API y también proporciona una manera fácil de generar la implementación del cliente en una amplia gama de idiomas.
@@ -896,12 +1005,6 @@ Las nuevas dependencias están en el archivo `pom.xml`:
 
 
 ```xml
-
-Adding dependencies to pom.xml
-Before we start the configuration, we need to add the required dependencies. These dependencies included Spring Fox in our project and offered many annotations to configure Swagger properly. Let's add these dependencies.
-
-The new dependencies are in the pom.xml file:
-
 <dependency>
   <groupId>io.springfox</groupId>
   <artifactId>springfox-swagger2</artifactId>
@@ -975,6 +1078,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -983,24 +1087,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import springfive.cms.domain.models.Category;
-import springfive.cms.domain.service.CategoryService;
 import springfive.cms.domain.vo.CategoryRequest;
 
 @RestController
 @RequestMapping("/api/category")
 @Api(tags = "category", description = "Category API")
 public class CategoryResource {
-
-  private final CategoryService categoryService;
-
-  public CategoryResource(CategoryService categoryService) {
-    this.categoryService = categoryService;
-  }
 
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "Find category",notes = "Find the Category by ID")
@@ -1019,7 +1115,7 @@ public class CategoryResource {
       @ApiResponse(code = 404,message = "Category not found")
   })
   public ResponseEntity<List<Category>> findAll(){
-    return ResponseEntity.ok(this.categoryService.findAll());
+    return ResponseEntity.ok(Arrays.asList(new Category(),new Category()));
   }
 
   @PostMapping
@@ -1028,8 +1124,8 @@ public class CategoryResource {
       @ApiResponse(code = 201,message = "Category created successfully"),
       @ApiResponse(code = 400,message = "Invalid request")
   })
-  public ResponseEntity<Category> newCategory(@RequestBody CategoryRequest category){
-    return new ResponseEntity<>(this.categoryService.create(category), HttpStatus.CREATED);
+  public ResponseEntity<Category> newCategory(CategoryRequest category){
+    return new ResponseEntity<>(new Category(), HttpStatus.CREATED);
   }
 
   @DeleteMapping("/{id}")
