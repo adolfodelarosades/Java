@@ -535,10 +535,145 @@ public class CategoryResource {
 
 La **`CategoryRequest`** se puede encontrar en GitHub: (https://github.com/PacktPublishing/Spring-5.0-By-Example/tree/master/Chapter02/src/main/java/springfive/cms/domain/vo).
 
-Tenemos algunos conceptos importantes aquí. El primero es @RestController. Indica a Spring Framework que la clase CategoryResource expondrá los puntos finales REST sobre el módulo Web-MVC. Esta anotación configurará algunas cosas en un marco, como HttpMessageConverters para manejar solicitudes y respuestas HTTP como XML o JSON. Por supuesto, necesitamos las bibliotecas correctas en la ruta de clases para manejar JSON y XML. Además, agregue algunos encabezados a la solicitud, como Aceptar y Tipo de contenido. Esta anotación se introdujo en la versión 4.0. Es una especie de anotación sintáctica de azúcar porque está anotada con @Controller y @ResponseBody.
+Tenemos algunos conceptos importantes aquí. El primero es **`@RestController`**. Indica a Spring Framework que la clase **`CategoryResource`** expondrá los puntos finales REST sobre el módulo Web-MVC. Esta anotación configurará algunas cosas en un framework, como **`HttpMessageConverters`** para manejar solicitudes y respuestas HTTP como XML o JSON. Por supuesto, necesitamos las libraries correctas en la ruta de clases para manejar JSON y XML. Además, agregue algunos headers a la request, como **`Accept`** y **`Type`**. Esta anotación se introdujo en la versión 4.0. Es una especie de anotación sintáctica de azúcar porque está anotada con **`@Controller`** y **`@ResponseBody`**.
 
-La segunda es la anotación @RequestMapping, y esta importante anotación es responsable de la solicitud y respuesta HTTP en nuestra clase. El uso es bastante simple en este código cuando lo usamos en el nivel de clase, se propagará para todos los métodos y los métodos lo usarán como relativo. La anotación @RequestMapping tiene diferentes casos de uso. Nos permite configurar el verbo HTTP, los parámetros y los encabezados.
+La segunda es la anotación **`@RequestMapping`**, y esta importante anotación es responsable de la HTTP request y response  en nuestra clase. El uso es bastante simple en este código cuando lo usamos en el nivel de clase, se propagará para todos los métodos y los métodos lo usarán como relativo. La anotación **`@RequestMapping`** tiene diferentes casos de uso. Nos permite configurar el verbo HTTP, los parámetros y los headers.
 
-Finalmente, tenemos @GetMapping, @PostMapping, @DeleteMapping y @PutMapping, estas anotaciones son una especie de atajo para configurar el @RequestMapping con los verbos HTTP correctos; una ventaja es que estas anotaciones hacen que el código sea más legible.
+Finalmente, tenemos **`@GetMapping`**, **`@PostMapping`**, **`@DeleteMapping`** y **`@PutMapping`**, estas anotaciones son una especie de atajo para configurar el **`@RequestMapping`** con los verbos HTTP correctos; una ventaja es que estas anotaciones hacen que el código sea más legible.
 
-A excepción de removeCategory, todos los métodos devuelven la clase ResponseEntity que nos permite manejar los códigos de estado HTTP correctos en la siguiente sección.
+A excepción de **`removeCategory`**, todos los métodos devuelven la clase **`ResponseEntity`** que nos permite manejar los códigos de estado HTTP correctos en la siguiente sección.
+
+### `UserResource`
+
+La clase **`UserResource`** es la misma que **`CategoryResource`**, excepto que usa la clase **`User`**. Podemos encontrar el código completo en GitHub (https://github.com/PacktPublishing/Spring-5.0-By-Example/tree/master/Chapter02).
+
+```java
+package springfive.cms.domain.vo;
+
+import lombok.Data;
+import springfive.cms.domain.models.Role;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+@Data
+public class UserRequest {
+
+    String identity;
+
+    String name;
+
+    Role role;
+
+}
+```
+
+### `NewsResource`
+
+La clase **`NewsResource`** es esencial, este endpoint permite a los usuarios revisar las noticias registradas previamente y también proporciona un endpoint para devolver las noticias actualizadas. Esta es una característica importante porque solo nos interesan las noticias relevantes. No se pueden mostrar noticias irrelevantes en el portal. La clase de recurso debería verse así:
+
+```java
+package springfive.cms.domain.resources;
+
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import springfive.cms.domain.models.News;
+import springfive.cms.domain.models.Review;
+import springfive.cms.domain.vo.NewsRequest;
+
+@RestController
+@RequestMapping("/api/news")
+public class NewsResource {
+
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<News> findOne(@PathVariable("id") String id){
+    return ResponseEntity.ok(new News());
+  }
+
+  @GetMapping
+  public ResponseEntity<List<News>> findAll(){
+    return ResponseEntity.ok(Arrays.asList(new News(),new News()));
+  }
+
+  @PostMapping
+  public ResponseEntity<News> newNews(NewsRequest news){
+    return new ResponseEntity<>(new News(), HttpStatus.CREATED);
+  }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void removeNews(@PathVariable("id") String id){
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<News> updateNews(@PathVariable("id") String id,NewsRequest news){
+    return new ResponseEntity<>(new News(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/{id}/review/{userId}")
+  public ResponseEntity<Review> review(@PathVariable("id") String id,@PathVariable("userId") String userId){
+    return ResponseEntity.ok(new Review());
+  }
+
+  @GetMapping(value = "/revised")
+  public ResponseEntity<List<News>> revisedNews(){
+    return ResponseEntity.ok(Arrays.asList(new News(),new News()));
+  }
+
+}
+```
+
+## Agregar capa de servicio
+
+Ahora, tenemos listo el esqueleto para la capa REST, y en esta sección, comenzaremos a crear una capa de servicio para nuestra aplicación. Mostraremos cómo funciona la inyección de dependencia bajo el capó, aprenderemos las anotaciones de estereotipos en Spring Framework y también comenzaremos a pensar en nuestro almacenamiento de persistencia, que se presentará en la siguiente sección.
+
+### Cambios en el modelo
+
+Necesitamos hacer algunos cambios en nuestro modelo, específicamente en la clase **`News`**. En nuestras reglas comerciales, debemos mantener nuestra información segura, luego debemos revisar todas las noticias. Agregaremos algunos métodos para agregar una nueva revisión realizada por un usuario, y también agregaremos un método para verificar si la noticia fue revisada por todos los revisores obligatorios.
+
+#### Agregar una nueva reseña
+
+Para esta función, necesitamos crear un método en nuestra clase **`News`**, el método devolverá una **`Review`** y debería verse así:
+
+```java
+public Review review(String userId,String status){
+  final Review review = new Review(userId, status);
+  this.reviewers.add(review);
+  return review;
+}
+```
+
+No es necesario que verifiquemos si el usuario, que realiza la acción de revisión, es un revisor obligatorio.
+
+#### Manteniendo las noticias seguras
+
+Además, debemos verificar si la noticia está completamente revisada por todos los revisores obligatorios. Es bastante simple, estamos usando Java 8 y proporciona la increíble interfaz Stream, que hace que las interacciones de las colecciones sean más fáciles que antes. Hagámoslo:
+
+```java
+public Boolean revised() {
+  return this.mandatoryReviewers.stream().allMatch(reviewer -> this.reviewers.stream()
+      .anyMatch(review -> reviewer.id.equals(review.userId) && "approved".equals(review.status)));
+}
+```
+
+Gracias, Java 8, lo agradecemos.
+
+#### Antes de comenzar la capa de servicio
+
+Nuestra aplicación debe tener un almacenamiento de persistencia donde se puedan cargar nuestros registros, incluso si la aplicación deja de funcionar. Crearemos la implementación falsa para nuestros repositorios. En el Capítulo 3, *Persistence with Spring Data and Reactive Fashion*, presentaremos los proyectos de **Spring Data** que ayudan a los desarrolladores a crear repositorios asombrosos con un DSL fantástico. Por ahora, crearemos algunos Spring beans para almacenar nuestros elementos en la memoria, hagámoslo.
+
+### `CategoryService`
+
+Comencemos con nuestro servicio más simple, la clase CategoryService, los comportamientos que se esperan de esta clase son operaciones CRUD. Entonces, necesitamos una representación de nuestro almacenamiento de persistencia o implementación de repositorio, por ahora, estamos usando el almacenamiento efímero y ArrayList con nuestras categorías. En el próximo capítulo, agregaremos la persistencia real para nuestra aplicación CMS.
+
+Creemos nuestro primer servicio Spring. La implementación se encuentra en el siguiente fragmento:
