@@ -859,9 +859,226 @@ public class UserService {
 Preste atención a la declaración de clase con la anotación **`@Service`**. Esta es una implementación muy común en el ecosistema Spring. Además, podemos encontrar anotaciones **`@Component`**, **`@Repository`**. **`@Service`** y **`@Component`** son comunes para la capa de servicio y no hay diferencia en los comportamientos. El **`**@Repository`** cambia un poco los comportamientos porque los frameworks traducirán algunas excepciones en la capa de acceso a datos.
 
 
-### NewsService
+### `NewsService`
 
 Se trata de un interesante servicio que se encargará de gestionar el estado de nuestras novedades. Interactuará como un *pegamento* para llamar a los modelos de dominio, en este caso, la entidad **`News`**. El servicio es bastante similar a los demás. Recibimos la clase **`NewsRepository`**, una dependencia y mantuvimos el repositorio para mantener los estados, hagámoslo.
 
 La anotación **`@Service`** vuelve a estar presente. Esto es bastante estándar para las aplicaciones Spring. Además, podemos cambiar a la anotación **`@Component`**, pero no hace ninguna diferencia para nuestra aplicación.
+
+```java
+package springfive.cms.domain.service;
+
+/**
+ * @author claudioed on 29/10/17. Project cms
+ */
+public class NewsService {
+
+}
+```
+
+## Configuración de Swagger para nuestras API
+
+Swagger es la herramienta de facto para las API web de documentos, y la herramienta permite a los desarrolladores modelar las API, crear una forma interactiva de jugar con las API y también proporciona una manera fácil de generar la implementación del cliente en una amplia gama de idiomas.
+
+La documentación de la API es una forma excelente de hacer que los desarrolladores utilicen nuestras API.
+
+### Agregar dependencias a `pom.xml`
+
+Antes de comenzar la configuración, debemos agregar las dependencias requeridas. Estas dependencias incluyeron **Spring Fox** en nuestro proyecto y ofrecieron muchas anotaciones para configurar Swagger correctamente. Agreguemos estas dependencias.
+
+Las nuevas dependencias están en el archivo `pom.xml`:
+
+
+```xml
+
+Adding dependencies to pom.xml
+Before we start the configuration, we need to add the required dependencies. These dependencies included Spring Fox in our project and offered many annotations to configure Swagger properly. Let's add these dependencies.
+
+The new dependencies are in the pom.xml file:
+
+<dependency>
+  <groupId>io.springfox</groupId>
+  <artifactId>springfox-swagger2</artifactId>
+  <version>2.7.0</version>
+</dependency>
+
+<dependency>
+  <groupId>io.springfox</groupId>
+  <artifactId>springfox-swagger-ui</artifactId>
+  <version>2.7.0</version>
+</dependency>
+```
+
+La primera dependencia es el núcleo de Swagger con anotaciones y tipos de cosas relacionadas. La dependencia de la interfaz de usuario de **Spring Fox Swagger UI**  proporciona una interfaz rica en HTML que permite a los desarrolladores interactuar con las API.
+
+### Configurando Swagger
+
+Se agregan las dependencias, ahora podemos configurar la infraestructura para Swagger. La configuración es bastante sencilla. Crearemos una clase con **`@Configuration`** para producir la configuración Swagger para el contenedor Spring. Vamos a hacerlo.
+
+Eche un vistazo a la siguiente configuración de Swagger:
+
+```java
+package springfive.cms.infra.swagger;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.builders.ParameterBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfiguration {
+
+  @Bean
+  public Docket documentation() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+        .paths(PathSelectors.any())
+        .build(); 
+  }
+
+}
+```
+
+**`@Configuration`** indica a Spring que genere una definición de bean para Swagger. La anotación, **`@EnableSwagger2`** agrega soporte para Swagger. **`@EnableSwagger2`** debe ir acompañado de **`@Configuration`**, es obligatorio.
+
+La clase **`Docket`** es un constructor para crear una definición de API y proporciona valores predeterminados sensibles y métodos convenientes para la configuración de **Spring Swagger MVC Framework**.
+
+La invocación del método **`.apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))`** indica al framework que maneje las clases anotadas con **`@RestController`**.
+
+Existen muchos métodos para personalizar la documentación de la API, por ejemplo, existe un método para agregar encabezados de autenticación.
+
+Esa es la configuración de Swagger, en la siguiente sección crearemos una primera API documentada.
+
+### Primera API documentada
+
+Comenzaremos con la clase **`CategoryResource`**, porque es fácil de entender y debemos centrarnos en la tecnología. Agregaremos un par de anotaciones y la magia sucederá, hagamos magia.
+
+La clase **`CategoryResource`** debería verse así:
+
+```java
+package springfive.cms.domain.resources;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import springfive.cms.domain.models.Category;
+import springfive.cms.domain.service.CategoryService;
+import springfive.cms.domain.vo.CategoryRequest;
+
+@RestController
+@RequestMapping("/api/category")
+@Api(tags = "category", description = "Category API")
+public class CategoryResource {
+
+  private final CategoryService categoryService;
+
+  public CategoryResource(CategoryService categoryService) {
+    this.categoryService = categoryService;
+  }
+
+  @GetMapping(value = "/{id}")
+  @ApiOperation(value = "Find category",notes = "Find the Category by ID")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200,message = "Category found"),
+      @ApiResponse(code = 404,message = "Category not found"),
+  })
+  public ResponseEntity<Category> findOne(@PathVariable("id") String id){
+    return ResponseEntity.ok(new Category());
+  }
+
+  @GetMapping
+  @ApiOperation(value = "List categories",notes = "List all categories")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200,message = "Categories found"),
+      @ApiResponse(code = 404,message = "Category not found")
+  })
+  public ResponseEntity<List<Category>> findAll(){
+    return ResponseEntity.ok(this.categoryService.findAll());
+  }
+
+  @PostMapping
+  @ApiOperation(value = "Create category",notes = "It permits to create a new category")
+  @ApiResponses(value = {
+      @ApiResponse(code = 201,message = "Category created successfully"),
+      @ApiResponse(code = 400,message = "Invalid request")
+  })
+  public ResponseEntity<Category> newCategory(@RequestBody CategoryRequest category){
+    return new ResponseEntity<>(this.categoryService.create(category), HttpStatus.CREATED);
+  }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @ApiOperation(value = "Remove category",notes = "It permits to remove a category")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200,message = "Category removed successfully"),
+      @ApiResponse(code = 404,message = "Category not found")
+  })
+  public void removeCategory(@PathVariable("id") String id){
+  }
+
+  @PutMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @ApiOperation(value = "Update category",notes = "It permits to update a category")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200,message = "Category update successfully"),
+      @ApiResponse(code = 404,message = "Category not found"),
+      @ApiResponse(code = 400,message = "Invalid request")
+  })
+  public ResponseEntity<Category> updateCategory(@PathVariable("id") String id,CategoryRequest category){
+    return new ResponseEntity<>(new Category(), HttpStatus.OK);
+  }
+
+}
+```
+
+Hay muchas anotaciones nuevas que comprender. **`@Api`** es la anotación raíz que configura esta clase como un recurso Swagger. Hay muchas configuraciones, pero usaremos las etiquetas y la descripción, ya que son suficientes.
+
+**`@ApiOperation`** describe una operación en nuestra API, en general contra la ruta solicitada. El atributo de valor se considera como el campo de resumen en Swagger, es un resumen de la operación y las notas son una descripción de una operación (contenido más detallado).
+
+El último es **`**@ApiResponse`**, que permite a los desarrolladores describir las respuestas de una operación. Por lo general, quieren configurar los códigos de estado y el mensaje para describir el resultado de una operación.
+
+> ℹ️ *Antes de ejecutar la aplicación, debemos compilar el código fuente. Se puede hacer usando la línea de comando de Maven usando **`mvn clean install`**, o vía IDE usando la aplicación Ejecutar.
+
+Ahora que hemos configurado la integración de Swagger, podemos consultar la documentación de la API en el navegador web. Para hacerlo, debemos navegar a http://localhost:8080/swagger-ui.html y se debe mostrar esta página:
+
+![image](https://user-images.githubusercontent.com/23094588/126908435-842a4db6-b941-4c86-ab91-2b7b6ac2b04a.png)
+
+Podemos ver los endpoints de las API configurados en nuestra aplicación CMS. Ahora, echaremos un vistazo a la categoría que hemos configurado previamente, pinchamos en el enlace Show/Hide. La salida debe ser:
+
+![image](https://user-images.githubusercontent.com/23094588/126908467-4b1fcd42-31f8-4166-933a-07f4eec17c8d.png)
+
+Como podemos ver, hay cinco operaciones en nuestra Category API, la operación tiene una ruta y un resumen para ayudar a comprender el propósito. Podemos hacer clic en la operación solicitada y ver información detallada sobre la operación. Hagámoslo, haga clic en Listar categorías para ver la documentación detallada. La página se ve así:
+
+![image](https://user-images.githubusercontent.com/23094588/126908517-04e369c8-a013-4b74-b0c6-53bffd6cc85d.png)
+
+Trabajo destacado. Ahora tenemos una API increíble con excelente documentación. Bien hecho.
+
+Sigamos creando nuestra aplicación CMS.
+
+
+
+
+
+
+
 
