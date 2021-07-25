@@ -1159,7 +1159,7 @@ Hay muchas anotaciones nuevas que comprender. **`@Api`** es la anotación raíz 
 
 El último es **`**@ApiResponse`**, que permite a los desarrolladores describir las respuestas de una operación. Por lo general, quieren configurar los códigos de estado y el mensaje para describir el resultado de una operación.
 
-> ℹ️ *Antes de ejecutar la aplicación, debemos compilar el código fuente. Se puede hacer usando la línea de comando de Maven usando **`mvn clean install`**, o vía IDE usando la aplicación Ejecutar.
+> ℹ️ *Antes de ejecutar la aplicación, debemos compilar el código fuente. Se puede hacer usando la línea de comando de Maven usando **`mvn clean install`**, o vía IDE usando la aplicación Ejecutar.*
 
 Ahora que hemos configurado la integración de Swagger, podemos consultar la documentación de la API en el navegador web. Para hacerlo, debemos navegar a http://localhost:8080/swagger-ui.html y se debe mostrar esta página:
 
@@ -1176,6 +1176,17 @@ Como podemos ver, hay cinco operaciones en nuestra Category API, la operación t
 Trabajo destacado. Ahora tenemos una API increíble con excelente documentación. Bien hecho.
 
 Sigamos creando nuestra aplicación CMS.
+
+### 💻 Probando la Api Documentation de la Aplicación 
+
+![image](https://user-images.githubusercontent.com/23094588/126911383-1d64127d-bfe6-41a2-80bb-c4a03ee1b0fb.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126911405-63d23503-91d4-4832-9265-bba073e0e952.png)
+
+![image](https://user-images.githubusercontent.com/23094588/126911456-2d34b31e-27a7-466b-b140-f7721767c62b.png)
+
+
+
 
 
 
