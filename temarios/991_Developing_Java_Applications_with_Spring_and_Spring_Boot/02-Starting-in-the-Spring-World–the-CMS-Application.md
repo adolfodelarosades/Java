@@ -1426,3 +1426,19 @@ En este capítulo, creamos nuestra primera aplicación Spring. Vimos Spring Init
 Observamos cómo funciona Spring bajo el capó y cómo se configuró el marco con un par de anotaciones. Ahora, tenemos un conocimiento básico de las funciones de Spring Bootstrap y podemos comprender las funciones de inyección de dependencia y escaneo de componentes presentes en el marco.
 
 Este conocimiento es la base para los siguientes capítulos, y ahora estamos listos para comenzar a trabajar con funciones más avanzadas, como la persistencia. Aquí vamos. Nos vemos en el próximo capítulo.
+
+### 💻 Prueba de la Salida 
+
+![image](https://user-images.githubusercontent.com/23094588/127042151-24efaee4-a84b-4529-91e2-e8239cc2f55f.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127042232-c6cfde57-bec5-49ad-817e-ae48a84f62dd.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127042291-ec3919f6-0818-4a56-b510-e8ed9eca148b.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127042373-f50449d1-d2d6-45a7-895c-ab60a64227fb.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127042151-24efaee4-a84b-4529-91e2-e8239cc2f55f.png)
+
+Realmente no marca ningún fallo pero tampoco hace nada revelante.
+
+
