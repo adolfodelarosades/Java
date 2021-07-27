@@ -72,8 +72,53 @@ Por ejemplo en Google si hay 50,000 busquedas las devuelve en páginas de 20 res
 
 ![image](https://user-images.githubusercontent.com/23094588/127199192-9544aa45-d4a6-4790-be6c-3661a06d0f2c.png)
 
-
 ## Persistencia de un Objeto 02:25
+
+
+¿Qué es persistencia de un objeto?.
+
+![image](https://user-images.githubusercontent.com/23094588/127199841-afba5087-2867-4ce3-88c5-20894dc5abbe.png)
+
+bien tengo aquí una clase administrador es una clase aullaba.
+
+Y como ves tiene algunas propiedades Leidi un nombre un cargo y una fecha de creación de tipo ta ta
+
+ta tiene sus juguetes y sus Cetes.
+
+Esto es modelar el objeto administrador pendiente en la clase.
+
+Cuando en un método principal crea una nueva instancia de administrador debido a que estamos ejecutando
+
+el programa en una máquina virtual de Java en in-memory que es una memoria volátil de Java se crea la
+
+instancia del administrador con los datos 1 con lo preferente 5 de mayo 2015 y es el mediodía
+
+pero yo necesito un método de almacenamiento porque en caso de que se pierda el estado del memorice
+
+reinicie la máquina el equipo etc yo voy a perder el estado de este administrador que yo deseo conservar
+
+entonces existen medios donde yo puedo hacer persistir el estado de este administrador y hacerlo dependiente
+
+de la máquina virtual de Java para poder almacenarlo y leerlo en cualquier momento.
+
+Estos pueden ser bases de datos pueden ser hojas de texto hojas de cálculo etc entonces cómo podríamos
+
+definir persistencia de un objeto simplemente como la capacidad de salvar el estado de un objeto en
+
+este caso un administrador en algún medio.
+
+Una base de datos o una hoja de texto o un simple archivo de texto una hoja de cálculo y restaurarlo
+
+en algún momento posteriormente nosotros trabajaremos con bases de datos esquivé en nuestra próxima
+
+elección abordaremos sistema de bases de datos relacionales y como dijo.
+
+Estas clases no me gustan porque son teóricas pero voy a tratar de hacerlas muy cortitas para que sean
+
+lo menos tedioso posible hasta la próxima.
+
+
+
 ## Bases de Datos Relacionales I 02:37
 ## Bases de Datos Relacionales II 02:35
 ## Bases de Datos Relacionales III 03:44
