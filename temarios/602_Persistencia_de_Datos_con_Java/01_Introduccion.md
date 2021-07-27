@@ -126,11 +126,9 @@ Y qué significa o qué es, a qué hace referencia este lenguaje SQL, es un leng
 
 ## Bases de Datos Relacionales II 02:35
 
-
 Cuál será el script SQL para crear la tabla con filas que me va a almacenar los datos del administrador.
 
 ![image](https://user-images.githubusercontent.com/23094588/127203634-bd94caac-1b28-49ed-85d9-063b87045c6d.png)
-
 
 Bien tenemos el script SQL, me dice crea la tabla **`ADMINISTRADOR`** y como ven aquí tenemos también tipos de datos así como hay Java aunque no son equivalentes. Más bien son equivalentes pero no son literalmente los mismos. Por ejemplo tenemos el tipo **`int`** en Java y aquí va a ser un **`INTEGER`** y al decirle que es **`AUTOINCREMENT`** quiere decir que cuando yo inserte un dato automáticamente el **`ID`** se va a incrementar por ejemplo de 100 a 101 y va a estar listo para obtener el próximo dato. 
 
@@ -142,7 +140,6 @@ Qué pasa cuando se ejecuta el script SQL este escrito. Se crea la tabla siguien
 
 ![image](https://user-images.githubusercontent.com/23094588/127204911-5c0bce0e-ae6e-4c8b-acba-10545bbf5e8b.png)
 
-
 Esta es una tabla donde yo puedo tener un número de administradores que va a tener un ID, un nombre, un cargo y una fecha de creación dependiendo del tipo de RDBMS algunos datos estarán disponibles por ejemplo en MySQL tenemos 20 mientras que en SQL-Lite, esto es usado en programación móvil Android ya no está disponible.
 
 ![image](https://user-images.githubusercontent.com/23094588/127205090-0a047a6f-3cd2-4a2f-bcbb-73deb33e0ed6.png)
@@ -150,4 +147,33 @@ Esta es una tabla donde yo puedo tener un número de administradores que va a te
 Deberá ser tu responsabilidad de investigar un poco acerca de que RDBMS estás usando para ver qué datos están disponibles y poder así hacer el script para generar una base de datos.
 
 ## Bases de Datos Relacionales III 03:44
+
+Me interesa que sepas dos reglas fundamentales en toda base de datos relacional.
+
+![image](https://user-images.githubusercontent.com/23094588/127205773-ff2c8e83-d082-4753-8279-0b03cbc36008.png)
+
+Tenemos aquí dos tablas, la primera es el **`Administrador`** que ya habíamos creado internamente tiene **`ID`** **`nombre`**, **`cargo`**, **`fecha_creacion`** y tiene un campo extra que es **`actividad_id`** 
+
+Por otra parte en esta base de datos tenemos la tabla **`Actividad`** ésta simplemente tiene un **`id_act`** y una **`actividad`**  como "Enviar correos", "Realizar declaración", "Preparar conferencias" o "Visitar clientes para seguimiento".
+
+Lo que yo deseo es asignarle a cada uno de estos administradores una actividad aunque por supuesto ellos pueden tener actividades nulas o actividades o no tener actividades en este momento.
+
+**La primera regla se llama Integridad de las Entidades** esa establece que toda tabla ***debe contar con una llave primaria*** como es el campo **`ID`** de la tabla **`Administrador`** y que **`NULL`** no es un valor válido para este campo. Por ejemplo la tabla administrador tiene valores válidos 1 2 3 pero aquí se repite el 3.
+
+![image](https://user-images.githubusercontent.com/23094588/127207027-a4100525-de6b-4290-b18c-8f9b62842363.png)
+
+Esto está violando la ley porque no puede haber más que un solo 3. Para María Pérez o Eduardo López aquí no puede existir el valor ya que es nuestra llave primaria es el valor único y no puede ser.
+
+Entonces aquí tenemos un error porque aquí debería ser mejor un 4 o 33 o 20 o 1000 o el que sea.**Eso se llama integridad de las entidades**.
+
+**La segunda regla es la Integridad Referencial**.
+
+![image](https://user-images.githubusercontent.com/23094588/127208002-4a72229b-a450-4c54-9edd-dc305c67decf.png)
+
+ésta establece que para relacionar dos tablas se usa una ***Llave Foránea*** en nuestro caso es **`actividad_id`** y hace referencia a una llave primaria de otra tabla. ***Esta regla marca que la llave foránea debe apuntar a la llave primaria de otra tabla***. La regla define que el valor **`Null`** es válido ,en este caso tengo actividad 45 y 67 que son existentes o válidas para la tabla actividad y tengo el valor **`Null`**, esto también es válido.
+
+Sin embargo lo que no es válido es poner en **`actividad_id`** por ejemplo 50, 50 no es válido porque no existe en la tabla **`Actividad`** la regla marca también que los valores puesto en **`actividad_id`** deben existir en  **`Actividad`**.
+
+Estas dos reglas **Integridad de las Entidades** e **Integridad Referencial** son dos reglas fundamentales.
+
 ## Frameworks de Persistencia de Datos 03:26
