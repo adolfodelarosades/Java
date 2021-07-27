@@ -9,6 +9,88 @@
 * Frameworks de Persistencia de Datos 03:26
 
 ## Presentación 06:13
+
+![image](https://user-images.githubusercontent.com/23094588/127149024-a6b5cd4c-fb24-449d-b0a1-dc730ed7b0ab.png)
+
+Hola bienvenido a este curso de persistencia de datos con Java.
+
+Este curso está enfocado en que aprendas dos tecnologías **Hibernate** y **Spring Data API** esto con el propósito que tengas un conocimiento comprensivo un conocimiento conciso que hayas realizado y ejemplos que funcionen realmente y puedas incluirlo en cualquier tecnología Java de desarrollo web que tú ya conozcas anteriormente y puedes evitar así hacer esa tediosa tarea de tirar código MySQL, Oracle, o SQL Server que cómo consume tiempo como desarrollador y puedas aprovechar al máximo estos dos frameworks de persistencia que son maravillosos.
+
+Vamos a abordar el contenido del curso, primero vamos a tratar Hibernate el framework que se ha tornado tan popular en los últimos años inclusive es ya requisito conocer Hibernate para cualquier empleo como desarrollador Java.
+
+![image](https://user-images.githubusercontent.com/23094588/127149909-36829712-2de3-41c6-9781-9253415a2d0c.png)
+
+Primero te voy a enseñar cómo configurar Hibernate 5 en el IDE Eclipse.
+
+![image](https://user-images.githubusercontent.com/23094588/127150176-60e7ccb0-c4b2-49e3-85fd-75c96e0cc582.png)
+
+Posteriormente vamos a hacer operaciones CRUD.
+
+![image](https://user-images.githubusercontent.com/23094588/127150375-7a56fd61-38e6-496f-9eb4-4183eed06e73.png)
+
+Posteriormente te voy a enseñar cómo hacer consultas anidadas consultas un poco complejas sin ningún código SQL.
+
+![image](https://user-images.githubusercontent.com/23094588/127150551-684f9b01-9609-4d8f-af49-5c029f868d4d.png)
+
+Ese es el propósito del curso ahorrar tiempo y aprovechar al máximo estos dos frameworks de persistencia.
+
+Una vez que hayamos hecho estas consultas anidadas te voy a mostrar cómo manejar relaciones qué es lo más solicitado. 
+
+![image](https://user-images.githubusercontent.com/23094588/127151003-b5ec1d13-6589-4dd6-bcc8-8cbd5667af97.png)
+
+Te voy a enseñar cómo manejar tablas que se relacionan **Uno a Uno**, **Uno a Muchos** y **Muchos a Muchos** también cómo hacer inserciones, cómo hacer actualizaciones, cómo hacer consultas, reuniones naturales, etcétera.
+
+Una vez que estés empapado, impregnado de Hibernate te voy a mostrar otra tecnología que todavía no es tan popular pero que es muy buena, yo la uso se llama **Spring Data API**.
+
+![image](https://user-images.githubusercontent.com/23094588/127151468-fd5fba49-a414-4dd1-9900-6b7e4fc74b4a.png)
+
+Es un proyecto de **Spring Framework** y nos va a ahorrar incluso más código que Hibernate inclusive las podemos combinar para hacer una capa de persistencia de datos increíble en cualquier proyecto empresarial.
+
+Primero vamos a ver cómo configurar Spring Data API, te voy a enseñar una forma muy sencilla de descargar dependencias, de descargar paquetes y demás cosas que necesitamos de Internet sin entrar a un navegador y copiar y pegar descargar añadir importar nada de eso lo vamos a hacer una forma de sencillita muy fácil y sobre todo práctico.
+
+![image](https://user-images.githubusercontent.com/23094588/127151839-b86bcb6d-2181-40e7-84d9-5c4e039edd0a.png)
+
+Una vez que te enseña a configurar Spring Data te voy a enseñar que es un **CRUD Repository**, que es una interfaz que implementa automáticamente la funcionalidad CRUD.
+
+![image](https://user-images.githubusercontent.com/23094588/127152128-873e142f-6952-4715-95e6-6800e61ca8d0.png)
+
+Esto es para ahorrarnos muchísimo código cuando lo veas no lo vas a creer, así te lo garantizo, una vez que abordemos cómo hacer operaciones de una forma más minimizada, una forma sin tanto código, inclusive ahorrando mucho más código que Hibernate, te voy a enseñar cómo hacer consultas optimizadas. 
+
+
+Aquí voy a incluir otra tecnología que se llama Query DSL y con ésta vamos a hacer también reuniones naturales, cómo hacer una consulta de una tabla que se relaciona Uno a Uno, Uno a Muchos y Muchos a Muchos.
+
+![image](https://user-images.githubusercontent.com/23094588/127152821-4ac6ad9a-571c-4397-92be-134309afc3af.png)
+
+
+
+
+ también lo vamos a hacer con otro enfoque y éste según yo es un poco
+
+más intuitivo que el enfoque que le damos en.
+
+Y finalmente te voy a enseñar algo súper útil que es indispensable que sepas que amigos programadores
+
+lo hacen una forma arcaica funcional pero arcaica y con esta tecnología lo haces rapidísimo paginación
+
+paginación.
+
+Es bueno ver que el puntero cuando busca sus resultados por ejemplo en Google si hay 50 000 Leonetti
+
+en páginas en páginas de 20 resultados por ejemplo y esto que tú ves aquí es paginación te voy a enseñar
+
+a hacer eso con Spring data de una forma sencillísima y sin ningún problema sin ningún dolor de cabeza
+
+y te voy a dar bonos te voy a dar otros temas que para mi punto de vista son indispensables en persistencia
+
+de datos y este es el contenido del curso.
+
+Espero que sea de tu agrado si tienes cualquier duda comentario queja puedes escribirme en esta plataforma
+
+o en mi correo personal Avram arroba nobeles puntocom y nuevamente bienvenido a este curso nos vemos
+
+en la próxima clase.
+
+
 ## Instalación de Herramientas de Desarrollo 08:13
 ## Persistencia de un Objeto 02:25
 ## Bases de Datos Relacionales I 02:37
