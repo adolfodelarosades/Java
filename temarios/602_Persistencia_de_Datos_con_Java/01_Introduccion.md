@@ -62,36 +62,17 @@ Aquí voy a incluir otra tecnología que se llama Query DSL y con ésta vamos a 
 ![image](https://user-images.githubusercontent.com/23094588/127152821-4ac6ad9a-571c-4397-92be-134309afc3af.png)
 
 
+Y finalmente te voy a enseñar algo súper útil que es indispensable que sepas, que amigos programadores lo hacen de una forma arcaica, funcional pero es arcaica y con esta tecnología lo haces rapidísimo hablamos de la ***paginación***.
 
+![image](https://user-images.githubusercontent.com/23094588/127198858-e0605e4d-f88e-4f6f-af37-41f67f50d4db.png)
 
- también lo vamos a hacer con otro enfoque y éste según yo es un poco
-
-más intuitivo que el enfoque que le damos en.
-
-Y finalmente te voy a enseñar algo súper útil que es indispensable que sepas que amigos programadores
-
-lo hacen una forma arcaica funcional pero arcaica y con esta tecnología lo haces rapidísimo paginación
-
-paginación.
-
-Es bueno ver que el puntero cuando busca sus resultados por ejemplo en Google si hay 50 000 Leonetti
-
-en páginas en páginas de 20 resultados por ejemplo y esto que tú ves aquí es paginación te voy a enseñar
-
-a hacer eso con Spring data de una forma sencillísima y sin ningún problema sin ningún dolor de cabeza
-
-y te voy a dar bonos te voy a dar otros temas que para mi punto de vista son indispensables en persistencia
-
-de datos y este es el contenido del curso.
-
-Espero que sea de tu agrado si tienes cualquier duda comentario queja puedes escribirme en esta plataforma
-
-o en mi correo personal Avram arroba nobeles puntocom y nuevamente bienvenido a este curso nos vemos
-
-en la próxima clase.
-
+Por ejemplo en Google si hay 50,000 busquedas las devuelve en páginas de 20 resultados por ejemplo, te voy a enseñar a hacer eso con Spring Data de una forma sencillísima.
 
 ## Instalación de Herramientas de Desarrollo 08:13
+
+![image](https://user-images.githubusercontent.com/23094588/127199192-9544aa45-d4a6-4790-be6c-3661a06d0f2c.png)
+
+
 ## Persistencia de un Objeto 02:25
 ## Bases de Datos Relacionales I 02:37
 ## Bases de Datos Relacionales II 02:35
