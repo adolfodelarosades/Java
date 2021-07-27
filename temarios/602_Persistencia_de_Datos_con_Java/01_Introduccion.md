@@ -124,7 +124,30 @@ Regresando a la clase **`Administrador`** está en lenguaje Java y yo debo trans
 
 Y qué significa o qué es, a qué hace referencia este lenguaje SQL, es un lenguaje usado para manipular datos dentro de un RDBMS. Lo que deseo hacer es trasladar esta información que está en lenguaje Java al lenguaje SQL.
 
-
 ## Bases de Datos Relacionales II 02:35
+
+
+Cuál será el script SQL para crear la tabla con filas que me va a almacenar los datos del administrador.
+
+![image](https://user-images.githubusercontent.com/23094588/127203634-bd94caac-1b28-49ed-85d9-063b87045c6d.png)
+
+
+Bien tenemos el script SQL, me dice crea la tabla **`ADMINISTRADOR`** y como ven aquí tenemos también tipos de datos así como hay Java aunque no son equivalentes. Más bien son equivalentes pero no son literalmente los mismos. Por ejemplo tenemos el tipo **`int`** en Java y aquí va a ser un **`INTEGER`** y al decirle que es **`AUTOINCREMENT`** quiere decir que cuando yo inserte un dato automáticamente el **`ID`** se va a incrementar por ejemplo de 100 a 101 y va a estar listo para obtener el próximo dato. 
+
+Tengo **`VARCHAR`** que sería el equivalente a **`String`** y el 100 es el número de caracteres.
+
+En vez de **`Timestamp`** estoy usando un **`DATETIME`**  para la fecha y tengo que decirle que la ***llave primaria PRIMARY KEY*** es el **`ID`**.
+
+Qué pasa cuando se ejecuta el script SQL este escrito. Se crea la tabla siguiente.
+
+![image](https://user-images.githubusercontent.com/23094588/127204911-5c0bce0e-ae6e-4c8b-acba-10545bbf5e8b.png)
+
+
+Esta es una tabla donde yo puedo tener un número de administradores que va a tener un ID, un nombre, un cargo y una fecha de creación dependiendo del tipo de RDBMS algunos datos estarán disponibles por ejemplo en MySQL tenemos 20 mientras que en SQL-Lite, esto es usado en programación móvil Android ya no está disponible.
+
+![image](https://user-images.githubusercontent.com/23094588/127205090-0a047a6f-3cd2-4a2f-bcbb-73deb33e0ed6.png)
+
+Deberá ser tu responsabilidad de investigar un poco acerca de que RDBMS estás usando para ver qué datos están disponibles y poder así hacer el script para generar una base de datos.
+
 ## Bases de Datos Relacionales III 03:44
 ## Frameworks de Persistencia de Datos 03:26
