@@ -77,49 +77,54 @@ Por ejemplo en Google si hay 50,000 busquedas las devuelve en páginas de 20 res
 
 ¿Qué es persistencia de un objeto?.
 
-![image](https://user-images.githubusercontent.com/23094588/127199841-afba5087-2867-4ce3-88c5-20894dc5abbe.png)
+![image](https://user-images.githubusercontent.com/23094588/127200061-27f18875-0f95-4550-979b-4b33af074d8d.png)
 
-bien tengo aquí una clase administrador es una clase aullaba.
+Tengo aquí una clase administrador es una clase Java, tiene algunas propiedades un **`idAd`**, un **`nombre`** un **`cargo`** y una **`fechaCreacion`** con sus respectivos tipos y con sis Getters y setters.
 
-Y como ves tiene algunas propiedades Leidi un nombre un cargo y una fecha de creación de tipo ta ta
+Esto es modelar el objeto **`Administrador`** mediante una clase Java.
 
-ta tiene sus juguetes y sus Cetes.
+![image](https://user-images.githubusercontent.com/23094588/127200513-5734a1e2-2811-418d-9ae6-87004d9f7643.png)
 
-Esto es modelar el objeto administrador pendiente en la clase.
+Cuando en un método principal creo una nueva instancia del objeto **`Administrador`**, debido a que estamos ejecutando el programa en una máquina virtual de Java en Heap memory que es una memoria volátil de Java.
 
-Cuando en un método principal crea una nueva instancia de administrador debido a que estamos ejecutando
+![image](https://user-images.githubusercontent.com/23094588/127200735-3813eab1-8f30-4f60-9b85-ea769d130021.png)
 
-el programa en una máquina virtual de Java en in-memory que es una memoria volátil de Java se crea la
+se crea la instancia del **`Administrador`** con los datos **`1`**, **`Juan López`**, **`Gerente`** y **`2015-05-05 12:00:00`**, 
+pero yo necesito un método de almacenamiento porque en caso de que se pierda el estado de la memoría, se reinicie la máquina, el equipo se apague, etc. voy a perder el estado de este **`Administrador`** que yo deseo conservar, entonces existen medios donde yo puedo hacer persistir el estado de este **`Administrador`**
 
-instancia del administrador con los datos 1 con lo preferente 5 de mayo 2015 y es el mediodía
+![image](https://user-images.githubusercontent.com/23094588/127201212-fa83d1d3-bb63-4ee2-80fe-4c9c37a08a39.png)
 
-pero yo necesito un método de almacenamiento porque en caso de que se pierda el estado del memorice
+para poder almacenarlo y leerlo en cualquier momento, estos pueden ser bases de datos, pueden ser hojas de texto, hojas de cálculo, etc. 
 
-reinicie la máquina el equipo etc yo voy a perder el estado de este administrador que yo deseo conservar
+¿Cómo podríamos definir persistencia de un objeto? simplemente como la ***capacidad de salvar el estado de un objeto en este caso un `Administrador` en algún medio***. Una base de datos o una hoja de texto o un simple archivo de texto, una hoja de cálculo y restaurarlo en algún momento. 
 
-entonces existen medios donde yo puedo hacer persistir el estado de este administrador y hacerlo dependiente
-
-de la máquina virtual de Java para poder almacenarlo y leerlo en cualquier momento.
-
-Estos pueden ser bases de datos pueden ser hojas de texto hojas de cálculo etc entonces cómo podríamos
-
-definir persistencia de un objeto simplemente como la capacidad de salvar el estado de un objeto en
-
-este caso un administrador en algún medio.
-
-Una base de datos o una hoja de texto o un simple archivo de texto una hoja de cálculo y restaurarlo
-
-en algún momento posteriormente nosotros trabajaremos con bases de datos esquivé en nuestra próxima
-
-elección abordaremos sistema de bases de datos relacionales y como dijo.
-
-Estas clases no me gustan porque son teóricas pero voy a tratar de hacerlas muy cortitas para que sean
-
-lo menos tedioso posible hasta la próxima.
-
-
+Posteriormente nosotros trabajaremos con bases de datos MySQL.
 
 ## Bases de Datos Relacionales I 02:37
+
+![image](https://user-images.githubusercontent.com/23094588/127201815-4b6465c6-73f3-4ecc-88d6-ff7318171785.png)
+
+En esta lección hblaré acerca de ***Bases de Datos Relacionales***. Es una base de datos simplemente que representa esa información en forma de tablas con filas y columnas.
+
+Aquí tengo nuevamente mi clase **`Administrador`** y yo lo que deseo hacer es presentar la información de este administrador en forma de una tabla con filas y columnas. ¿Qué necesito para hacer esto?. Lo primero que necesito es un **RDBMS** por sus siglas en inglés ***Relation Database Management System***. ¿Qué es esto?. Es simplemente un software diseñado para administrar bases de datos relacionales dentro de este software.
+
+![image](https://user-images.githubusercontent.com/23094588/127202323-bb763fc0-073c-4727-a547-b72d6b7d68b1.png)
+
+¿Qué necesito para hacer esto?. Yo puedo administrar esta base de datos de prueba que tiene tablas y que su información está representada en forma de filas y columnas obtengo esta otra que es mi base de datos donde hay tablas y tienen relaciones entre ellas cuando hablo de administrar me refiero a crear, eliminar, actualizar y realizar más operaciones con los datos de estas bases o colecciones de datos 
+
+¿Qué ejemplos tenemos de RDBMS?
+
+![image](https://user-images.githubusercontent.com/23094588/127202592-45eb1873-cd02-4fc9-8e0b-aba41142b118.png)
+
+
+Regresando a la clase **`Administrador`** está en lenguaje Java y yo debo transportar esto a otro lenguaje, un lenguaje especializado que se usa dentro de los RDBMS de los sistemas gestores de bases de datos relacionales y este lenguaje es el lenguaje **SQL** por sus siglas en inglés ***Structured Query Language***.
+
+![image](https://user-images.githubusercontent.com/23094588/127203007-be13b55d-b89c-4964-bef9-ac4deebc62e7.png)
+
+
+Y qué significa o qué es, a qué hace referencia este lenguaje SQL, es un lenguaje usado para manipular datos dentro de un RDBMS. Lo que deseo hacer es trasladar esta información que está en lenguaje Java al lenguaje SQL.
+
+
 ## Bases de Datos Relacionales II 02:35
 ## Bases de Datos Relacionales III 03:44
 ## Frameworks de Persistencia de Datos 03:26
