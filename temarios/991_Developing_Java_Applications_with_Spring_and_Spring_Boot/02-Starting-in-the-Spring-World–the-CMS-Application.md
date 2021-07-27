@@ -1441,4 +1441,5 @@ Este conocimiento es la base para los siguientes capítulos, y ahora estamos lis
 
 Realmente no marca ningún fallo pero tampoco hace nada revelante.
 
+![image](https://user-images.githubusercontent.com/23094588/127168328-bf6e8437-8f45-4f59-8d38-118eb4eaa366.png)
 
