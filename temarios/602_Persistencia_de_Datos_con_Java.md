@@ -32,7 +32,7 @@ No lo pienses más y aprende hoy mismo estas dos herramientas indispensables de 
 * Bases de Datos Relacionales III 03:44
 * Frameworks de Persistencia de Datos 03:26
 
-#### 2. [Hibernate]() 02:40:14
+#### 2. [Hibernate](602_Persistencia_de_Datos_con_Java/02_Hibernate.md) 02:40:14
 
 * Creación de la B.D. 06:25
 * Creación del Proyecto en Eclipse 04:39
