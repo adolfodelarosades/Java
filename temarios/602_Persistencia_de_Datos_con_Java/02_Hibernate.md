@@ -77,7 +77,6 @@ Va a tener los siguientes campos:
 
 Salvamos.
 
-
 Vamos a insertar una nueva tabla para esta primera versión, para empezar con las ***Relaciones Uno a Uno***, para esto vamos a crear otra tabla que es **`Avaluo`** que es un avalúo comercial, va a tener los siguientes campos:
 
 * **`idAvaluo`** de tipo **`INT`** es nuestra clave primaria
@@ -103,64 +102,182 @@ En **`Avaluo`** ya tenemos el **`idTramite`**, claro que este puede ser nulo en 
 
 Salvamos nuestro modelo.
 
-Hasta aquí ya tenemos el Modelo en su versión 1, vamos a generar las tablas a partir del Modelo, para lo cual nos vamos a ir a **Database / Reverse Engineer...**
+Hasta aquí ya tenemos el Modelo en su versión 1, vamos a generar las tablas a partir del Modelo, para lo cual nos vamos a ir a **Database / Forward Engineer...**
+
+![image](https://user-images.githubusercontent.com/23094588/127332265-b35bebd3-c8e8-43ce-971b-2f14b5dbb5b7.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127332349-2ba3fc1c-fb7d-45ef-ae09-ee1896393678.png)
+
+Se nos pide una conexión, como no hemos hecho la conexión cancelamos y nos vamos a Home.
+
+![image](https://user-images.githubusercontent.com/23094588/127332644-74573e5b-0854-4d48-8ce4-c09a30f7de51.png)
+
+Vamos a crear una nueva Conexión punsando en el "+".
+
+![image](https://user-images.githubusercontent.com/23094588/127332755-a98f16a5-3684-4d19-a472-7101b20c25ad.png)
+
+Vamos a darle el nombre de **`constructora`** y dejamos los demas datos como estan.
+
+![image](https://user-images.githubusercontent.com/23094588/127332917-c18ad228-a34f-4a85-873c-37bdcadfc9fd.png)
+
+Podemos dar click en **Text Connection** para probar la conexión.
+
+![image](https://user-images.githubusercontent.com/23094588/127333088-2127309a-4798-4a56-bc07-d6970976dd55.png)
+
+Una vez que comprobamos que la conexión es correta damos en **ok** y ya vemos la nueva conexión creada **`constructora`**.
+
+![image](https://user-images.githubusercontent.com/23094588/127333309-795fb719-7ffc-46f5-81d0-140db0feeafe.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127333860-db866e7b-abd6-44af-8c14-67fcc6be1219.png)
 
 
-entonces esto nos va a quedar así.
+Vamos a darle **Continue** sucesivamente.
 
-Yo tengo un trámite que tiene un tipo de trámite y fecha de creación un avalúo que tiene su Heydi el
+![image](https://user-images.githubusercontent.com/23094588/127334167-0c383017-be5c-448a-8430-590dd79753cd.png)
 
-lugar donde se hizo el avalúo opcionalmente un trámite Un trámite.
+![image](https://user-images.githubusercontent.com/23094588/127334439-0817be37-ecc9-42e7-ae0f-bfb06337ce43.png)
 
-Vamos a salvar nuestro modelo y lo que vamos a hacer ahora es irnos al menú
+![image](https://user-images.githubusercontent.com/23094588/127334482-81557df3-f8c2-46c5-8389-9b5d05629f18.png)
 
-ingenié aquí nos va a pedir una conexión si no tienes una conexión hacemos Losilla
+```sql
+-- MySQL Workbench Forward Engineering
 
-queremos una conexión y lo vas a poner por ejemplo conexión dejases total cual 33 06 127 001 Rut le
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-das ok desconexión para que te diga conexión.
+-- -----------------------------------------------------
+-- Schema test_bd
+-- -----------------------------------------------------
 
-Para mi chairs correct y ok entonces regreso aquí me voy otra vez a Junior y podría elegir test conexión
+-- -----------------------------------------------------
+-- Schema test_bd
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `test_bd` DEFAULT CHARACTER SET utf8 ;
+USE `test_bd` ;
 
-y ya tengo uno que se llama persistence precisamente para este curso.
+-- -----------------------------------------------------
+-- Table `test_bd`.`Tramite`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `test_bd`.`Tramite` (
+  `idTramite` INT NOT NULL,
+  `tipoTramite` VARCHAR(45) NULL,
+  `fhcTramite` DATETIME NULL,
+  PRIMARY KEY (`idTramite`))
+ENGINE = InnoDB;
 
-Otra cosa importante es que el esquema o la base de datos por defecto es bidi que es la que acabamos
 
-de crear.
+-- -----------------------------------------------------
+-- Table `test_bd`.`Avaluo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `test_bd`.`Avaluo` (
+  `idAvaluo` INT NOT NULL,
+  `lugarAvaluo` VARCHAR(100) NULL,
+  `Tramite_idTramite` INT NULL,
+  PRIMARY KEY (`idAvaluo`),
+  INDEX `fk_Avaluo_Tramite_idx` (`Tramite_idTramite` ASC) VISIBLE,
+  CONSTRAINT `fk_Avaluo_Tramite`
+    FOREIGN KEY (`Tramite_idTramite`)
+    REFERENCES `test_bd`.`Tramite` (`idTramite`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-Vamos a darle siguiente vamos a borrar la base antes de crearla porque vamos a ir modificando durante
 
-el curso
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+```
 
-y no existe despliegue porque apenas vamos a crear esta para generar el script que puedes copiar se
+![image](https://user-images.githubusercontent.com/23094588/127334556-64f776ae-a275-4a2d-a841-76cbe77b9be5.png)
 
-gustas si estás usando alguna otra tecnología también es válido y continúa
+Y con esto ya se ha creado la BD, para comprobarlo nos vamos a la conexión **constructora** deberíamos asignarle el esquema por default que es **test_db**
 
-No existe Vidia entonces simplemente vamos si y le quitamos defaults Kimba a ser el siguiente viente
+![image](https://user-images.githubusercontent.com/23094588/127335396-6c35d94e-e8da-4d5b-8593-c51c6d36ffd0.png)
+![image](https://user-images.githubusercontent.com/23094588/127335430-5fa6d0ab-664f-43f2-9759-fd96b1379730.png)
 
-siguiente y ya creó nuestra base de datos como comprobamos saberle closely a mi conexión que yo ya tenía
+(NO FUNCIONA, no acepta el esquema por default).
 
-Levada en este y de información si te das cuenta es lo mismo que tú tenías
+Simplemente abrimos la conexión **constructora** y buscamos la BD **test_db**, la abrimos.
 
-la batería nuevamente entonces esta conexión se llama aullaban persistes y el esquema por donde estés
+![image](https://user-images.githubusercontent.com/23094588/127336604-8c1e0d24-6f79-48b4-879c-d925ea813240.png)
 
-me deja
+Las tablas obviamente estan vacias.
 
-ok.
+![image](https://user-images.githubusercontent.com/23094588/127336647-44ae93fa-34ea-4481-af8b-b8bd1c6346c3.png)
 
-Si yo entro en Java persistent como ves aquí están tablas este caso claro que no tiene nada si lo de
-
-aquí Inquiry no hay nada pero está comprobado que la base de datos está creada con esta base de datos
-
-en las clases posteriores vamos a configurar Giverny que es el primer framework de persistencia de datos
-
-que estás usando y hacer algunas operaciones.
-
-Si tienes cualquier documentario puedes contactarme en esta plataforma en nuestro correo contacto arroba
-
-nóbeles puntocom o en mi correo personal Avram arroba nobeles puntocom hasta la próxima.
+![image](https://user-images.githubusercontent.com/23094588/127336707-44e6d512-a534-44d7-8eb8-289ceae5d43a.png)
 
 ## Creación del Proyecto en Eclipse 04:39
+
+Vamos a crear nuestro proyecto Eclipse.
+
+Entramos en el Workspace **`PROYECTOS-ECLIPSE/602_Persistencia_de_Datos_con_Java`** y vamos a crear un nuevo Proyecto Java.
+
+![image](https://user-images.githubusercontent.com/23094588/127343393-8ca46cd2-fa6b-4d8d-9325-d8e412a9f08b.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127343477-ee6004dc-1efb-4d83-b9dd-99799af6dad0.png)
+
+Le vamos a llamar **`JavaPersistence`** y vamos a usar Java 1.8
+
+![image](https://user-images.githubusercontent.com/23094588/127349150-aa4f13b3-cb0b-48b0-a0de-a823e6de146a.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127350311-17bee3fa-f9da-4178-b877-edd58261212f.png)
+
+Ahora un framework como Spring, Hibernate o cualquiera son simplemente un conjunto de clases, por lo tanto hay varias formas de importar estas librerías que vienen en forma de JARs que son archivos comprimidos y la que más usada es usar **Maiven** ya que es un repositorio bastante extenso, bastante completo y su uso es muy sencillo.
+
+Para usar Maiven simplemente hacemo click derecho en nuestro proyecto y vamos a decirle lo siguiente:
+
+![image](https://user-images.githubusercontent.com/23094588/127350500-0d4207cb-6618-4067-9e34-09558f0e622e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127350612-b7414598-284e-4f62-a440-f13d202919ba.png)
+
+Simplemente le damos **Finish**
+
+![image](https://user-images.githubusercontent.com/23094588/127350828-e56a8118-e300-45c1-b8d2-a579a45b16ad.png)
+
+Entre otras cosas lo que hace es agregar el archivo **`pom.xml`**, este archivo es el que nos va a servir para añadir las librerías necesarias, en este caso van a ser las de **Hibernate**.
+
+Vamos a abrir la vista de Maiven.
+
+![image](https://user-images.githubusercontent.com/23094588/127351733-0c8a00fb-ddba-47a7-9ea8-d9699a70a341.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127351845-b0eee3f4-f3f6-4ba9-a423-fd2b00cf63dd.png)
+
+En 
+
+![image](https://user-images.githubusercontent.com/23094588/127351957-b0ddb3c0-7fc6-4252-ac20-0b854f526667.png)
+
+Vamos a dar Click Derecho y seleccionamos **Rebuild Index**
+
+![image](https://user-images.githubusercontent.com/23094588/127352162-2e39d4f1-ea4b-45af-9255-f0101b0b0412.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127352222-44e23c88-051f-40fd-a52e-36dfbe8c0440.png)
+
+Esto es por si no hace las busquedas en los repositorios de Maven.
+
+Ahora si vamos a darle **`Add`** y la primer dependencia que vamos a añadir es **`hibernate-core`**.
+
+Como esto no va vamos a usar el repositorio de Maiven https://mvnrepository.com/
+
+![image](https://user-images.githubusercontent.com/23094588/127353369-de137e45-f9f2-4293-ab56-2f135075d2c0.png)
+
+Y aquí vamos a buscar **`hibernate-core`**
+
+
+
+
+s a dar Repilado índex esto es por si no te hace las búsquedas en los repositorios de la primera que vamos a usar es Hibernate Cord Hibernate aquí vamos a usar la versión 5 de Jaione y debe ser por Hibernate.
+
+Puede haber otras pero nosotros vamos a usar la versión oficial es por Hibernate.
+
+Vamos a darle la segunda va a ser Hibernate balita y otro Bernet y también va a ser en la versión 2.4 que es la estable también vamos a usar Bernet Entity manager igual de Android 5.1.1 y finalmente como vamos a trabajar con basaltos Esquivel y si usamos buscamos el conector de Maisí.
+
+Entonces este debe ser el que dice Aquí Java y te recomiendo la versión 5 porque en la realidad a nosotros nos ha dado un poco de problemas la versión 6 no está muy seguro si son bugs pero nos da un poco de problemas en las implementaciones así que yo te recomiendo ampliamente por lo pronto hasta que se estabilice un poco más o hasta que puedas subir un vídeo de algunas soluciones que hemos propuesto usar la versión 5 ahora le vamos a dar Fael SOIB y en este momento Fijate que acá se parece a una barrita.
+
+Yo ya las tengo descargadas pero esto es lo que va a hacer es descargar todas estas dependencias conector másico el conector y todas estas ya están en nuestro proyecto si ya están listas para usarse entonces con estas dependencias nosotros ya podemos ahora sí crear las clases para configurar Jailbreak en nuestras próximas elecciones.
+
+Vamos a continuar con la configuración de Giverny y hacer algo así hasta la próxima.
 ## Configuración previa de Hibernate 06:20
 ## Mapping Hibernate mediante XML 12:29
 ## Uso del método **`save`** 07:47
