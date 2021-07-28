@@ -267,27 +267,27 @@ Vamos a insertar las siguientes dependencias de **Hibernate** y **MySQL**
 
 ```xml
 <dependencies>
-  	<dependency>
-  		<groupId>org.hibernate</groupId>
-  		<artifactId>hibernate-core</artifactId>
-  		<version>5.2.1.Final</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.hibernate</groupId>
-  		<artifactId>hibernate-validator</artifactId>
-  		<version>5.2.4.Final</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.hibernate</groupId>
-  		<artifactId>hibernate-entitymanager</artifactId>
-  		<version>5.2.1.Final</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>mysql</groupId>
-  		<artifactId>mysql-connector-java</artifactId>
-  		<version>5.1.39</version>
-  	</dependency>
-  </dependencies>
+   <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.2.1.Final</version>
+   </dependency>
+   <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>5.2.4.Final</version>
+   </dependency>
+   <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.2.1.Final</version>
+   </dependency>
+   <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.39</version>
+   </dependency>
+</dependencies>
 ```
 
 Cuando se salva el archivo **`pom.xml`** se empiezan a descargar todas las librerías necesarias para su uso, las podemos ver en **Maven Dependencies**
@@ -295,6 +295,108 @@ Cuando se salva el archivo **`pom.xml`** se empiezan a descargar todas las libre
 ![image](https://user-images.githubusercontent.com/23094588/127368527-ae39a1b3-fee0-4cc1-9b0e-f1fdb7850e43.png)
 
 ## Configuración previa de Hibernate 06:20
+
+En esta lección vamos a crear dos archivos para ***configurar la sesión de Hibernate***, hasta el momento tenemos un proyecto Java que tiene todas las dependencias, todas las librerías que vamos a estar utilizando, con el propósito de implementar el framework de persistencia de datos Hibernate.
+
+Vamos a crear dos archivos un XML y una clase Java. Estos nos van a servir para realizar las operaciones para gestionar la base de datos.
+
+Dentro de **`src`** vamos a crear un nuevo archivo XML, este por convención se va a llamar **`hibernate.cfg.xml`**
+
+![image](https://user-images.githubusercontent.com/23094588/127369765-65459b6c-a847-4347-a2a7-d89ec46200cf.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127369866-ac839fdc-ac59-4e24-8c7f-88247b2531fb.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127370129-194033f7-efaa-4155-a7f6-8f084c12dbb0.png)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+   <session-factory>
+      <!-- Database connection settings -->
+      <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+      <!-- Ubicación de la B.D. -->
+      <property name="connection.url">jdbc:mysql://localhost:3306/test_bd</property>
+      <!-- Usuario de la B.D. -->
+      <property name="connection.username">root</property>
+      <!-- Contraseña de la B.D. -->
+      <property name="connection.password"></property>
+
+      <!-- Dialecto SQL -->
+      <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+      <!-- Mostrar en consola operaciones SQL -->
+      <property name="show_sql">true</property>
+
+   </session-factory>
+</hibernate-configuration>
+```
+
+Lo que estamos declarando en este archivo de configuración es:
+
+* Driver de la conexión a la BD.
+* Ubicación y nombre de la B.D.
+* Usuario de la B.D.
+* Contraseña de la B.D. (En este caso no tenemos contraseña)
+* Dialecto SQL
+* Mostrar en consola operaciones SQL
+
+El siguiente paso es crear la clase Java **`HibernateUtil`** en el paquete **`com.javaocio.util`**.
+
+![image](https://user-images.githubusercontent.com/23094588/127373764-30b1ca04-9fd8-4b2e-80b0-d4aebfdfb8cf.png)
+
+Y el contenido es el siguiente:
+
+```java
+package com.javaocio.util;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+	
+   private static final SessionFactory sessionFactory = buildSessionFactory();
+    
+   private static SessionFactory buildSessionFactory() {
+      try {        	
+         // Para Hibernate 4.3.x 
+         // Crear  SessionFactory desde hibernate.cfg.xml 
+         // Configuration configuration = new Configuration().configure("hibernate.cfg.xml");     
+         // return configuration.buildSessionFactory( new StandardServiceRegistryBuilder().applySettings( configuration.getProperties() ).build() );
+
+         // Para Hibernate 5.x 
+         // Crear SessionFactory desde hibernate.cfg.xml
+            
+         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+         Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
+         return metadata.getSessionFactoryBuilder().build();
+            
+      } catch (Throwable ex) {
+         // Make sure you log the exception, as it might be swallowed
+         System.err.println("*** Creación de SessionFactory falló." + ex);
+         throw new ExceptionInInitializerError(ex);
+      }
+   }
+
+   public static SessionFactory getSessionFactory() {
+      return sessionFactory;
+   }
+
+}
+```
+
+Esta clase ***tiene la función de aplicar las configuraciones del archivo XML que creamos antes, con el propósito de crear una sesión***. Hibernate y muchos frameworks de persistencia de datos trabaja con Sesiones, esto es, abren una sesión realicen toda la gestión, todas las operaciones y pueden realizar Rollback o Commit.
+
+Rollback es, si alguna de ellas falla se deshacen todas las anteriores y Commit es que cuando todas las operaciones tengan éxito se modifican los datos en la base de datos.
+
+La clase tiene el código comentado por si queremos usar Hibernate 4.X
+
+Con Hibernate 5.X tenemos que usa **`StandardServiceRegistryBuilder`** para recuperar lo definido en el archivo **`hibernate.cfg.xml`** y nos devuelve una instancia de **`StandardServiceRegistry`**, lo pasa por los Metadatos y finalmente lo que retorna es una **`SessionFactory`**. Si existe algún error se muestra el error en la Excepción.
+
+Con estos dos archivos estamos listos para insertar nuestros primeros valores usando el framework de persistencia de datos Hibernate.
+
 ## Mapping Hibernate mediante XML 12:29
 ## Uso del método **`save`** 07:47
 ## Uso de anotaciones JPA en Hibernate 04:01
