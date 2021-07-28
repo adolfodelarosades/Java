@@ -177,3 +177,26 @@ Sin embargo lo que no es válido es poner en **`actividad_id`** por ejemplo 50, 
 Estas dos reglas **Integridad de las Entidades** e **Integridad Referencial** son dos reglas fundamentales.
 
 ## Frameworks de Persistencia de Datos 03:26
+
+En esta lección vamos a ver a grandes rasgos que es un framework de persistencia de datos, en este caso van a ser el framework Java de persistencia de datos JPA.
+
+![image](https://user-images.githubusercontent.com/23094588/127277213-4952883c-4592-49f7-b052-87fbbcc103c5.png)
+
+A grandes rasgos cualquier framework sea web, sea móvil, sea de persistencia, es un conjunto de clases que están organizados, en este caso como un framework de persistencia de datos nos sirve porque es un conjunto de clases que colaboran para gestionar o administrar.
+
+Cuando yo hablo de gestionar o administrar me refiero a alterar un registro, insertar un nuevo registro en mi tabla, actualizarlo, eliminarlo y hacer un montón de operaciones más, tiene ciertas características como es:
+
+* Guardar y recuperar los datos de almacenamiento persistente. En este caso va a ser una base de datos MySQL
+* Manejo de transacciones COMMIT y ROLLBACK. Esto nos va a servir por lo siguiente si yo deseo hacer 20 operaciones en la base de datos que tienen lógica entre sí y una de ellas falla no puedo ejecutar las otras 19 porque habría problemas en mis datos. Entonces para eso hay COMMIT que es si todas ellas fueron exitosas entonces se actualiza, se cambia, se modifica la base de datos. En caso contrario son ROLLBACK se deshacen todos los cambios y como que nada pasó aquí.
+* Debe tener eso también facilidad de uso y transparencia. Nosotros no vamos a escribir ni una sola línea del lenguaje SQL aquí bueno algunas consultas pero no va a ser dentro de nuestro proyecto sino para esos extremos de persistencia porque va a ser transparente para nosotros el que salve, actualice o modifique un registro en nuestra tabla.
+* Y por supuesto código reutilizable.
+
+Veamos algunos ejemplos de frameworks de persistencia.
+
+![image](https://user-images.githubusercontent.com/23094588/127278094-a09fe77b-790d-452a-8446-d5232b181a85.png)
+
+**Hibernate** lo vamos a usar a fondo, tengo otro curso que es de Spring Framework donde me han solicitado que como hago operaciones ya más a fondo con Hibernate para incluirlo en el proyecto web este es el curso donde vamos a ver cómo hacer esas reuniones naturales y toda esa cuestión con Hibernate.
+
+Otro es por ejemplo **MyBatis**, no lo vamos a abordar en este curso.
+
+El que vamos a abordar es este curso es **Spring Data** que es un proyecto de Spring Framework y tienen especial una parte que se llama **Spring Data JPA** que es para mi gusto uno de los frameworks más facil y sencillos de utilizar y lo vamos a combinar con otra tecnología.
