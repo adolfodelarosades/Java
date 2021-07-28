@@ -130,7 +130,6 @@ Una vez que comprobamos que la conexión es correta damos en **ok** y ya vemos l
 
 ![image](https://user-images.githubusercontent.com/23094588/127333860-db866e7b-abd6-44af-8c14-67fcc6be1219.png)
 
-
 Vamos a darle **Continue** sucesivamente.
 
 ![image](https://user-images.githubusercontent.com/23094588/127334167-0c383017-be5c-448a-8430-590dd79753cd.png)
@@ -401,9 +400,43 @@ Con estos dos archivos estamos listos para insertar nuestros primeros valores us
 
 En esta clase vamos a revisar cómo implementar **ORM** un mapping entre el ámbito relacional y el ámbito Orientado a Objetos.
 
-En nuestra clase anteriores vimos que no es lo mismo decir tener un modelo en estos objetos que un modelo relacional porque en el modelo orientado a objetos tenemos que la información está en forma afectarlas que tienen campos pero en el modelo orientado a objetos tenemos clases u objetos entonces necesitamos traducir uno a otro asociar estas tablas con ciertas clases que previamente Hibernate es un freno de persistencia o R.M mapping.
+![image](https://user-images.githubusercontent.com/23094588/127377987-82b413fd-18e4-46f2-9380-5db03413a9f3.png)
 
-Entre el ámbito relacional y el paradigma orientado a objetos que es esto básicamente es asociar tablas clases Campos a propiedades de estas clases y Jay Barnett es especialista en esta cuestión y se apoya en términos JPA en las anotaciones JPA entonces lo que necesitamos nosotros es ir a nuestra base de datos abrir nuestro diagrama que es este donde tengo trámite y evaluar voy a crear dos clases una para tramité y una para evaluar.
+En nuestra clase anteriores vimos que no es lo mismo decir tener un *modelo de objetos* que un *modelo relacional*. 
+
+![image](https://user-images.githubusercontent.com/23094588/127378140-e870d55f-3215-4d54-ab26-4ceaf3c879ce.png)
+
+porque en el *modelo orientado a objetos* tenemos que la información está en ***clases u objetos*** mientras que en el *modelo relacional* tenemos ***tablas, filas y campos***, entonces necesitamos traducir uno a otro, asociar estas clases con ciertas tablas.
+
+Hibernate es un framework ORM de persistencia de datos. **ORM Object Relational Mapping**  básicamente es asociar tablas a clases, campos a propiedades, Hibernate es especialista en esta cuestión y se apoya en las anotaciones JPA.
+
+Si recordamos nuestra BD tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127379168-e9fb8b9e-2aa5-4b9c-b603-4835e6adc614.png)
+
+Partiendo de la BD vamos a crear dos clases una para **`Tramite`** y otra para **`Avaluo`**.
+
+Empecemos por la clase **`Tramite`** en el paquete **`com.javaocio.domain`**.
+
+Otros paquetes que se pueden usar ade,ás de **`domain`** pueden ser:
+
+* **`pojo`**
+* **`entity`**
+
+![image](https://user-images.githubusercontent.com/23094588/127379769-2d9306c1-a3bd-454d-a775-428ee230ae4b.png)
+
+AQUIIIIIIIIIIII
+
+
+
+
+
+
+
+
+
+
+entonces lo que necesitamos nosotros es ir a nuestra base de datos abrir nuestro diagrama que es este donde tengo trámite y evaluar voy a crear dos clases una para tramité y una para evaluar.
 
 Por el momento voy a crear solo tramité entonces vamos a irnos a nuestro paquete vamos a crear en un paquete todo ordenado con nobeles típicamente esto se le pone Domaine o a alguien he visto también que le pone pollo o le pone entity.
 
