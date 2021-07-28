@@ -57,53 +57,52 @@ Y vamos a darle en **File/Save Model**
 
 Nos pide salvar nuestro modelo vamos a ponerle **JavaPersistenceV1.mwb**
 
+![image](https://user-images.githubusercontent.com/23094588/127289347-0a3c545c-a637-44c4-877d-649fb73d3ab5.png)
+
+Ahora es momento de insertar nuestras tablas, para eso es vamos a hacer click en **Place a New Table** 
+
+![image](https://user-images.githubusercontent.com/23094588/127289871-a32e5f4c-0294-4909-b443-cd19fae6ae56.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127296943-9664b35c-5df4-400d-a213-afa7841ca052.png)
+
+y la primera tabla que nos pide el cliente se llama **`Tramite`**. Este es un trámite que está haciendo la persona que llega a la constructora, esto puede ser un avalúo, puede ser un crédito y muchos más.
+
+Va a tener los siguientes campos:
+
+* **`idTramite`**  es nuestra llave primaria por lo que no puede ser nula. (Aplicando reglas)
+* **`tipoTramite`** de tipo **`VARCHAR(45)`**
+* **`fhcTramite`**  de tipo **`DATETIME`**
+
+![image](https://user-images.githubusercontent.com/23094588/127298184-aaaf1c8c-623e-4916-8800-3b4f9247f76d.png)
+
+Salvamos.
 
 
-bajo vamos a dar Fáil Saif nos ha
+Vamos a insertar una nueva tabla para esta primera versión, para empezar con las ***Relaciones Uno a Uno***, para esto vamos a crear otra tabla que es **`Avaluo`** que es un avalúo comercial, va a tener los siguientes campos:
 
-pedido salvar nuestro modelo.
+* **`idAvaluo`** de tipo **`INT`** es nuestra clave primaria
+* **`lugarAvaluo`** de tipo **`VARCHAR(100)`**
 
-Yo le voy a poner aquí Java existence Versión 1.
+![image](https://user-images.githubusercontent.com/23094588/127299315-01f088ee-e7cd-470f-b6f9-cee9b6b18757.png)
 
-Esta va a estar disponible en la clase claro y vamos a hacer ver nuevamente ahora es momento de insertar
+Ahora vamos a crear una relación entre estas dos tablas, es decir quiero que en la tabla **`Avaluo`** aparezca el **`idTramite`** que corresponda.
 
-nuestras tablas para eso es hacer click aquí en Pleiss nuevo y la primera que nos pide el cliente se
+Para eso vamos a dar click en la relación **1:1** 
 
-llama trámite.
+![image](https://user-images.githubusercontent.com/23094588/127300082-aadac9eb-97dc-49bf-9305-65f50a72a286.png)
 
-Este es un trámite que está siendo persona que llega a la constructora.
+y vamos a dar click en **`Avaluo`** y arrastramos hasta **`Tramite`**
 
-Esto puede ser un avalúo puede ser un crédito y muchos más no nos vamos a poner en trámite.
+![image](https://user-images.githubusercontent.com/23094588/127300273-aa5d824b-c5a9-4109-9c89-5834957d4197.png)
 
-Le pusimos hoy esta va a ser no es nula y es nuestra llave primaria.
+![image](https://user-images.githubusercontent.com/23094588/127300479-a7beb281-73a1-4871-89fb-429e01233ea9.png)
 
-Recuerda que esto es las reglas esto empaten las reglas que vimos anteriormente en la teoría.
+En **`Avaluo`** ya tenemos el **`idTramite`**, claro que este puede ser nulo en base a las reglas que hemos visto, por default nos crea  **`idTramite`** como No Nulo, para modificar esto vamos a deseleccionar el check.
 
-No nos vamos a dejar dos campos tipo trámite marchar 45 y vamos a poner fecha y hora de creación de
+![image](https://user-images.githubusercontent.com/23094588/127300961-f61859cb-1a6d-42e0-9f72-39c32c706488.png)
 
-este trámite y este va a ser tipo de
 
-voy a dejar otra tabla que en esta primera versión para empezar con las relaciones uno a uno pero para
 
-esto vamos a crear otra tabla que es avaluar que este es un avalúo comercial vamos a ponerle Heydi aval
-
-y le decimos que no es Molo vamos a poner el lugar del avalúo.
-
-Este parchar va a ser 100 y listo.
-
-Ahora vamos a crear una relación entre estas dos tablas es decir yo quiero que quien avalúo aparezca
-
-en la ID del trámite que corresponda.
-
-Para eso vamos a dar click
-
-al revés perdón desde Belu como ves hay una relación de uno a uno donde evaluó Yo voy a tener el aire
-
-del trámite.
-
-Claro que este puede ser nulo en base a las reglas que hemos visto para modificar esto vamos a ponerlo
-
-aquí
 
 entonces esto nos va a quedar así.
 
