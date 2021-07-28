@@ -238,7 +238,7 @@ Simplemente le damos **Finish**
 
 Entre otras cosas lo que hace es agregar el archivo **`pom.xml`**, este archivo es el que nos va a servir para añadir las librerías necesarias, en este caso van a ser las de **Hibernate**.
 
-Vamos a abrir la vista de Maiven.
+Vamos a abrir la vista de Maven.
 
 ![image](https://user-images.githubusercontent.com/23094588/127351733-0c8a00fb-ddba-47a7-9ea8-d9699a70a341.png)
 
@@ -262,22 +262,38 @@ Como esto no va vamos a usar el repositorio de Maiven https://mvnrepository.com/
 
 ![image](https://user-images.githubusercontent.com/23094588/127353369-de137e45-f9f2-4293-ab56-2f135075d2c0.png)
 
-Y aquí vamos a buscar **`hibernate-core`**
+Vamos a insertar las siguientes dependencias de **Hibernate** y **MySQL**
 
 
+```xml
+<dependencies>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-core</artifactId>
+  		<version>5.2.1.Final</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-validator</artifactId>
+  		<version>5.2.4.Final</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-entitymanager</artifactId>
+  		<version>5.2.1.Final</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  		<version>5.1.39</version>
+  	</dependency>
+  </dependencies>
+```
 
+Cuando se salva el archivo **`pom.xml`** se empiezan a descargar todas las librerías necesarias para su uso, las podemos ver en **Maven Dependencies**
 
-s a dar Repilado índex esto es por si no te hace las búsquedas en los repositorios de la primera que vamos a usar es Hibernate Cord Hibernate aquí vamos a usar la versión 5 de Jaione y debe ser por Hibernate.
+![image](https://user-images.githubusercontent.com/23094588/127368527-ae39a1b3-fee0-4cc1-9b0e-f1fdb7850e43.png)
 
-Puede haber otras pero nosotros vamos a usar la versión oficial es por Hibernate.
-
-Vamos a darle la segunda va a ser Hibernate balita y otro Bernet y también va a ser en la versión 2.4 que es la estable también vamos a usar Bernet Entity manager igual de Android 5.1.1 y finalmente como vamos a trabajar con basaltos Esquivel y si usamos buscamos el conector de Maisí.
-
-Entonces este debe ser el que dice Aquí Java y te recomiendo la versión 5 porque en la realidad a nosotros nos ha dado un poco de problemas la versión 6 no está muy seguro si son bugs pero nos da un poco de problemas en las implementaciones así que yo te recomiendo ampliamente por lo pronto hasta que se estabilice un poco más o hasta que puedas subir un vídeo de algunas soluciones que hemos propuesto usar la versión 5 ahora le vamos a dar Fael SOIB y en este momento Fijate que acá se parece a una barrita.
-
-Yo ya las tengo descargadas pero esto es lo que va a hacer es descargar todas estas dependencias conector másico el conector y todas estas ya están en nuestro proyecto si ya están listas para usarse entonces con estas dependencias nosotros ya podemos ahora sí crear las clases para configurar Jailbreak en nuestras próximas elecciones.
-
-Vamos a continuar con la configuración de Giverny y hacer algo así hasta la próxima.
 ## Configuración previa de Hibernate 06:20
 ## Mapping Hibernate mediante XML 12:29
 ## Uso del método **`save`** 07:47
