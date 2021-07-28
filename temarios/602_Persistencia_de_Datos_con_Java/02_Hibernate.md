@@ -101,7 +101,9 @@ En **`Avaluo`** ya tenemos el **`idTramite`**, claro que este puede ser nulo en 
 
 ![image](https://user-images.githubusercontent.com/23094588/127300961-f61859cb-1a6d-42e0-9f72-39c32c706488.png)
 
+Salvamos nuestro modelo.
 
+Hasta aquí ya tenemos el Modelo en su versión 1, vamos a generar las tablas a partir del Modelo, para lo cual nos vamos a ir a **Database / Reverse Engineer...**
 
 
 entonces esto nos va a quedar así.
