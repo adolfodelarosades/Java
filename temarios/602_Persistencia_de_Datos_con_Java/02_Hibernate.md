@@ -521,6 +521,203 @@ En este archivo le vamos a decir a Hibernate como va a ser el Mapping.
 * Con el tag **`property`** definimos las demas propiedades que tenemos, si la propiedad y la columna se llaman igual se puede omitir el atributo **`column`**, hay que indicar el tipo de la propiedad.
 
 ## Uso del método **`save`** 07:47
+
+En esta lección vamos a insertar una fila en nuestra tabla **`Tramite`** mediante Hibernate usando un mapping mediante XML.
+
+Lo primero que tenemos que hacer es indicar en la configuración de Hibernate es decir en el archivo **`hibernate.cfg.xml`** que tipo de implementación vamos a usar en este primer caso XML.
+
+```xml
+   . . .   
+   <!-- Use mapping basado en XML-->	
+   <mapping resource="com/javaocio/domain/Tramite.hbm.xml"/>
+   . . .
+```
+
+Le estamos indicando a Hibernate que use el archivo **`Tramite.hbm.xml`** para hacer el Mapping, observece que el nombre del paquete se indica con diagonales en lugar de puntos.
+
+Con esto ya le indicamos que va a usar ese archivo XML para hacer el mapping entre la clase **`Tramite`** y la tabla **`Tramite`**.
+
+### Crear clase Test
+
+Ahora lo que vamos a hacer es crear una clase de prueba o Test para probar lo que hemos hecho hasta ahora.
+
+Creamos la clase **`Test`** dentro del paquete **`com.javaocio.test`**.
+
+![image](https://user-images.githubusercontent.com/23094588/127469963-615d2eaf-c043-4a70-86a0-8f9b29af7fba.png)
+
+Insertamos el siguiente código:
+
+```java
+package com.javaocio.test;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.hibernate.Session;
+
+import com.javaocio.domain.Tramite;
+import com.javaocio.util.HibernateUtil;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date date = new Date();
+		
+		// Crear una instancia de Tramite
+		Tramite tramite = new Tramite("Crédito", new Timestamp(date.getTime()));
+		
+		// Salvar el tramite 
+		session.save(tramite);	// insert into Tramite (tipoTram, fhcTram) values (?, ?)
+		
+		
+		
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
+}
+```
+
+* Primero creamos un objeto de tipo **`Session`** usando la clase **`HibernateUtil`** que habiamos creado anteriormente.
+* Abrimos una transacción con  **`session.beginTransaction()`** y lo cerramos con **`session.getTransaction().commit()`**
+* Cerramos la sesión con **`session.close()`**
+* Detro de la transacción lo primero que hacemos es crear una instancia de Tramite.
+* Con **`session.save(tramite)`** Hibernate hace la Magia y salva en la BD el registro (realmente se hace al llegar al **`session.getTransaction().commit()`**)
+
+Si vemos la definición de **`session.save(...)`**
+
+![image](https://user-images.githubusercontent.com/23094588/127472609-64bbfe1d-4c3d-4485-ac04-82540a2cfd1b.png)
+
+Lo que hace es persistir el objeto. Lo que realmente esta haciendo es un **`INSERT INTO`** en la BD, lo único que hay que pasarle es la instancia del Objeto "Mappeado"
+
+* Detro de la transacción lo primero que hacemos es crear una instancia de Tramite.
+
+
+De esto tenemos que irnos a nuestro Gemayel con fiqh XML y aquí vamos a poner algo interesante ya que
+
+si no le decimos Giverny que no lo vamos a usar puede arrojar una excepción.
+
+Entonces como yo usé ahorita el mapping basado en XML que es este trámite punto HMM XML entonces tengo
+
+que poner lo siguiente
+
+mapping
+
+y le ponemos Resource
+
+si que va quien se va el lugar donde se encuentra este archivo XML solo que en lugar de puntos le vamos
+
+a poner diagonales y al final le vamos a poner el nombre del archivo
+
+entonces le estoy diciendo que use este archivo para hacer el mapping el mapeo de esta tabla tramité
+
+con la clase con el paso del objeto plano aullaba trámite.
+
+Ahora voy a irme a text y dentro de él por este tipo Hotmail vamos a poner lo siguiente
+
+primero voy a crear un objeto tipo sesión y voy a importar mi librería jaiba útil en clase utilidades
+
+que sello Factory Open aquí me ha pedido obviamente importar la clase sesión de jailbreak lo vamos a
+
+poner punto de transacción.
+
+Aquí voy a empezar a hacer todas las operaciones de gestión de base de datos pero al final tengo que
+
+poner un punto de Transaction punto commit esto va a realizar los cambios ya propiamente en nuestro
+
+medio de persistencia que en este caso es una base de datos y finalmente un punto Claws qué voy a hacer
+
+aquí.
+
+Primero voy a crear una instancia de trámite entonces tramite trámite y aquí voy a usar ese constructor
+
+que veníamos viendo y claro que voy a importar trámites y recuerda que ahí no lo voy a usar pero si
+
+ser por ejemplo aquí el trámite que sea un crédito y aquí recuerda que ese tipo Stamp entonces para
+
+esto voy a hacer lo siguiente
+
+sin Postdata format
+
+es igual a Neo 5 de formato y aquí le voy a decir cómo quiero la fecha en este caso yo la quiero 4 para
+
+el año 2 para el mes 2 para el día quiero horas minutos y segundos y puede ser con milésimas de segundo
+
+y Día de la semana pero a mi no me interesa Ortez o así lo vamos a poner y también estamos un objeto
+
+de tipo Tayta
+
+y debe ser Djavan y outing
+
+entonces aquí más vamos a poner ni tan y punto
+
+esto nos Bertona a la hora actual del sistema y en crédito en el perdón en tipo de trámite lo vamos
+
+a poner que sea un crédito y el aire se va a incrementar.
+
+Ahora aquí viene la magia de jailbreak
+
+salvar el trámite en entrecomillas base de datos porque eso realmente se realiza aquí en el comité entonces
+
+mejor les podemos salvar el trámite simplemente vamos a poner un punto 6.
+
+Quiero enfocarme en este método en la documentación oficial aparecen o vamos a buscarlo en línea
+
+Saif de los documentos oficiales de preferencia
+
+y vamos a ver aquí están los métodos de sesión
+
+y vámonos con Saif fié todo bien lo que hace
+
+aquí dice que hace o que persiste hace que se persista el objeto o la distancia del objeto pero es un
+
+edificador y bla bla bla.
+
+Qué hace este método.
+
+Este método simplemente guarda hace una operación en nuestro caso INSERT INTO automáticamente.
+
+Yo nada más tengo que pasar una instancia
+
+del objeto mapeado por decir así o el objeto ya asociado y lo que va a hacer Bernet aquí es equivalente
+
+a lo que nosotros haríamos como INSERT INTO tramité.
+
+Bla bla bla.
+
+Pero ya no lo tenemos que hacer.
+
+Por qué.
+
+Porque ya se hizo un Matic.
+
+O sea el Jeunet ya sabe qué propiedad de nuestra clase IAVA está asociada a qué dato a qué fila de nuestra
+
+base de datos entonces con esto es suficiente vamos a ejecutar esta clase concederla aquí en ejecutar
+
+como ves lo que hizo fue ser tramité bla bla bla.
+
+Es más voy a pegar esto aquí
+
+de referencia.
+
+Y ahora simplemente vamos a ir a nuestra base de datos y voy a abrir mi conexión de Chava persistes
+
+y voy a buscar la tabla tramité y como ves se insertaron nuestros datos en la base de datos.
+
+Esta es la magia de Jaime no podemos simplificaron más con las anotaciones y eso es lo que precisamente
+
+haremos en nuestra próxima clase recuerda cualquier duda documentario.
+
+Puedes buscarme en esta plataforma en nuestro correo de contacto.
+
+Rubén nóveles puntocom y en mi correo Avram arroba en Nouvelles por lo cual hasta la próxima.
 ## Uso de anotaciones JPA en Hibernate 04:01
 ## Creación de una consulta personalizada con HQL 02:50
 ## Consultando todos los registros con HQL 04:49
