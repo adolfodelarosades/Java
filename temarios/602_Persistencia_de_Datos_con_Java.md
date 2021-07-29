@@ -1,5 +1,7 @@
 # 602 Persistencia de Datos con Java
 
+[Hibernate Oficial](https://docs.jboss.org/hibernate/)
+
 Aprende a implementar los Frameworks de Persistencia de Datos Hibernate 5 y Spring Data JPA.
 
 ### Descripción
