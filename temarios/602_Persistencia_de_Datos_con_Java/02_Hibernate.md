@@ -600,7 +600,6 @@ Debido a que existen problemas con la conexión a la BD se realizarón los sigui
 
 1) Cambiar en el **`pom.xml`** la dependencia de MySQL:
 
-
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -790,62 +789,30 @@ public class Tramite {
 * Simpre debe exisir un campo anotado con **`@Id`** para indicar el campo principal y con **`@GeneratedValue(strategy = GenerationType.IDENTITY)`** indicamos la forma en que se genera el valor de este campo.
 * Podemos usar la anotación **`@Column(name="tipoTramite")`** para mapear la propiedad con un campo de la BD, si los nombres son iguales podemos omitirla.
 
-**``**
-**``**
-**``**
-**``**
+### Probar la aplicación
 
+Vamos a ir a la clase **`Test`** y vamos a crear un trámite diferente.
 
+Ejecutamos la App y tenemos:
 
+![image](https://user-images.githubusercontent.com/23094588/127488716-26260882-e2b6-4d67-9e0b-506a395feaf1.png)
 
+Si vemos la BD tenemos:
 
-Anotaciones JPA en este caso es tramité os voy a copiar el nombre recalificado de la clase como resumen
+![image](https://user-images.githubusercontent.com/23094588/127488776-341b80f8-0b94-4ae2-a192-fbd561466149.png)
 
-transmite y me voy a ir a trámite y voy a anotar esta clase estas anotaciones van a ser exactamente
+Hemos logrado insertar un registro en la tabla **`Tramite`** pero ahora usando la técnica de las Anotaciones en lugar de los XML.
 
-lo mismo que el archivo XML.
-
-Entonces primero lo voy a decir que este es una entidad y es importante que uses el Java Persistence
-
-y no el Hibernate tetillas y vamos a poner también Taiwo y a quién le vamos a poner Namm y este es el
-
-nombre de la base de datos nuevamente si tu nombre en el esquema de la base de datos es diferente al
-
-de la clase aquí lo puedes poner para el Heydi siempre siempre tenemos que decirle que hay un Aydin
-
-y en este caso tenemos que poner que se genera automáticamente
-
-pero en general Balio y aquí le vamos a poner Strategy Generation type identity.
-
-Esto le dice que este genera solo si por ejemplo en la columna no fuera igual el nombre al de la propiedad
-
-ya tendremos que usar la notación Aldón y Namm y aquí por ejemplo si fuera tipo Traum y esto es lo que
-
-debería aparecer en nuestra base de datos entonces lo va comentado porque por el momento no es necesario
-
-y esto simplemente pongo Entity Taibo el nombre en la tabla y el Heydi que se genera automáticamente.
-
-Esto no es necesario notarlo porque las propiedades se llaman en forma idéntica a las filas de mi tabla
-
-de la base de datos entonces vamos a hacer esto ya comenté lo de XML pues si aquí lo de tramité
-
-que es la forma en la que nosotros ahora vamos a manejar las clases y vamos a
-
-ahora vamos a poner un avaluar y vamos a ejecutar
-
-como también hizo la operación y lo corroboramos simplemente
-
-ahí está ahí está el evalué fecha y hora esa es la otra técnica que ofrece jailbreak y otros frameworks
-
-de presidentes que vamos a trabajar y precisamente es mi favorita.
-
-A mi se me hace un poco más visual más entendible pero cualquiera de esos que deseas trabajar no hay
-
-ningún problema en adelante nosotros vamos trabajar con anotaciones en nuestras proximas elecciones
-
-vamos a utilizar más de las operaciones que ofrece hasta la próxima.
+![image](https://user-images.githubusercontent.com/23094588/127489248-a19ada12-c801-4a43-b266-6858b34c11a1.png)
 
 ## Creación de una consulta personalizada con HQL 02:50
+
+**``**
+**``**
+**``**
+**``**
+
+
 ## Consultando todos los registros con HQL 04:49
 ## Consulta de todos los registros con Criteria 06:34
 ## Consultas personalizadas con Criteria 04:52
