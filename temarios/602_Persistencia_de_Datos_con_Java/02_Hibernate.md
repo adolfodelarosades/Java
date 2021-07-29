@@ -4,7 +4,7 @@
 * Creación del Proyecto en Eclipse 04:39
 * Configuración previa de Hibernate 06:20
 * Mapping Hibernate mediante XML 12:29
-* Uso del método save 07:47
+* Uso del método **`save`** 07:47
 * Uso de anotaciones JPA en Hibernate 04:01
 * Creación de una consulta personalizada con HQL 02:50
 * Consultando todos los registros con HQL 04:49
@@ -13,16 +13,16 @@
 * Uso de los métodos update y saveOrUpdate 09:09
 * Consultas anidadas con Criteria 07:35
 * Consultando campos personalizados con Tuple 04:21
-* Uso de @OneToOne 09:11
-* Consulta de registros con clases anotadas con @OneToOne 04:16
-* Actualizaciones en clases anotadas con @OneToOne 06:36
+* Uso de **`@OneToOne`** 09:11
+* Consulta de registros con clases anotadas con **`@OneToOne`** 04:16
+* Actualizaciones en clases anotadas con **`@OneToOne`** 06:36
 * Actualización de la Base de Datos a V2 01:51
-* Uso @OneToMany y @ManyToOne 10:13
-* Creación de consultas para clases anotadas con @OneToMany 08:06
+* Uso **`@OneToMany`** y **`@ManyToOne`** 10:13
+* Creación de consultas para clases anotadas con **`@OneToMany`** 08:06
 * Actualización de la B.D. a la V3 03:13
-* Uso de @ManyToMany 13:19
-* Creación de consultas para clases anotadas con @ManyToMany 10:49
-* Actualizaciones en clases anotadas con @ManyToMany 10:49
+* Uso de **`@ManyToMany`** 13:19
+* Creación de consultas para clases anotadas con **`@ManyToMany`** 10:49
+* Actualizaciones en clases anotadas con **`@ManyToMany`** 10:49
 
 ## Creación de la B.D. 06:25
 
@@ -693,7 +693,158 @@ Y ahora simplemente vamos a ir a nuestra base de datos para ver el contenido de 
 
 como vemos se insertaron nuestros datos en la base de datos, esta es la magia de Hibernate.
 
+![image](https://user-images.githubusercontent.com/23094588/127484709-6a861746-6248-4495-819c-074c34780861.png)
+
 ## Uso de anotaciones JPA en Hibernate 04:01
+
+En esta lección vamos a hacer lo mismos que en la lección anterior solo que en vez de usar configuración de mapping a través de XML lo vamos a hacer mediante ***anotaciones JPA***.
+
+Entonces nos vamos a ir a showers y Cofiño entonces.
+
+Así es como nosotros vamos a usar el mapping basado en XML y para usar el mapping basado en anotaciones
+
+vamos a poner mapping Class y esta clase debe ser el nombre calificado de la clase que ya está anotada.
+
+### Cambiar la Configuración en `hibernate.cfg.xml`.
+
+Vamos a cambiar la configuración de XML a Anotaciones.
+
+```xml
+   . . .
+   <!-- Use mapping basado en XML-->	
+   <!-- <mapping resource="com/javaocio/domain/Tramite.hbm.xml"/>-->
+        
+   <!-- Usar mapping en base a anotaciones-->
+   <mapping class="com.javaocio.domain.Tramite" />
+```
+
+### Anotar la clase `Tramite`
+
+> 🔴 **NOTA** Para las anotaciones que vamos a insertar importarlas siempre del paquete **`javax.persistence`** y no de **`org.hibernate.annotation`**
+
+La clase **`Tramite`** con las anotaciones es la siguiente:
+
+```java
+package com.javaocio.domain;
+
+import java.sql.Timestamp;
+
+//import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Tramite")
+public class Tramite {
+
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int idTramite;
+	
+   //@Column(name="tipoTramite")
+   private String tipoTramite;
+   private Timestamp fhcTramite;
+	
+   public Tramite() {
+      super();
+   }
+
+   public Tramite(String tipoTramite, Timestamp fhcTramite) {
+      super();
+      this.tipoTramite = tipoTramite;
+      this.fhcTramite = fhcTramite;
+   }
+
+   public int getIdTramite() {
+      return idTramite;
+   }
+
+   public void setIdTramite(int idTramite) {
+      this.idTramite = idTramite;
+   }
+
+   public String getTipoTramite() {
+      return tipoTramite;
+   }
+
+   public void setTipoTramite(String tipoTramite) {
+      this.tipoTramite = tipoTramite;
+   }
+
+   public Timestamp getFhcTramite() {
+      return fhcTramite;
+   }
+
+   public void setFhcTramite(Timestamp fhcTramite) {
+      this.fhcTramite = fhcTramite;
+   }
+		
+}
+```
+
+* La clase la anotamos con **`@Entity`** para indicar que es una entidad.
+* La clase la anotamos con **`@Table(name ="Tramite")`** para indicar con que tabla se debe mapper. (Si los nombres son iguales se puede omitir)
+* Simpre debe exisir un campo anotado con **`@Id`** para indicar el campo principal y con **`@GeneratedValue(strategy = GenerationType.IDENTITY)`** indicamos la forma en que se genera el valor de este campo.
+* Podemos usar la anotación **`@Column(name="tipoTramite")`** para mapear la propiedad con un campo de la BD, si los nombres son iguales podemos omitirla.
+
+**``**
+**``**
+**``**
+**``**
+
+
+
+
+
+Anotaciones JPA en este caso es tramité os voy a copiar el nombre recalificado de la clase como resumen
+
+transmite y me voy a ir a trámite y voy a anotar esta clase estas anotaciones van a ser exactamente
+
+lo mismo que el archivo XML.
+
+Entonces primero lo voy a decir que este es una entidad y es importante que uses el Java Persistence
+
+y no el Hibernate tetillas y vamos a poner también Taiwo y a quién le vamos a poner Namm y este es el
+
+nombre de la base de datos nuevamente si tu nombre en el esquema de la base de datos es diferente al
+
+de la clase aquí lo puedes poner para el Heydi siempre siempre tenemos que decirle que hay un Aydin
+
+y en este caso tenemos que poner que se genera automáticamente
+
+pero en general Balio y aquí le vamos a poner Strategy Generation type identity.
+
+Esto le dice que este genera solo si por ejemplo en la columna no fuera igual el nombre al de la propiedad
+
+ya tendremos que usar la notación Aldón y Namm y aquí por ejemplo si fuera tipo Traum y esto es lo que
+
+debería aparecer en nuestra base de datos entonces lo va comentado porque por el momento no es necesario
+
+y esto simplemente pongo Entity Taibo el nombre en la tabla y el Heydi que se genera automáticamente.
+
+Esto no es necesario notarlo porque las propiedades se llaman en forma idéntica a las filas de mi tabla
+
+de la base de datos entonces vamos a hacer esto ya comenté lo de XML pues si aquí lo de tramité
+
+que es la forma en la que nosotros ahora vamos a manejar las clases y vamos a
+
+ahora vamos a poner un avaluar y vamos a ejecutar
+
+como también hizo la operación y lo corroboramos simplemente
+
+ahí está ahí está el evalué fecha y hora esa es la otra técnica que ofrece jailbreak y otros frameworks
+
+de presidentes que vamos a trabajar y precisamente es mi favorita.
+
+A mi se me hace un poco más visual más entendible pero cualquiera de esos que deseas trabajar no hay
+
+ningún problema en adelante nosotros vamos trabajar con anotaciones en nuestras proximas elecciones
+
+vamos a utilizar más de las operaciones que ofrece hasta la próxima.
+
 ## Creación de una consulta personalizada con HQL 02:50
 ## Consultando todos los registros con HQL 04:49
 ## Consulta de todos los registros con Criteria 06:34
