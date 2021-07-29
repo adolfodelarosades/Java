@@ -412,80 +412,113 @@ Hibernate es un framework ORM de persistencia de datos. **ORM Object Relational 
 
 Si recordamos nuestra BD tenemos:
 
-![image](https://user-images.githubusercontent.com/23094588/127379168-e9fb8b9e-2aa5-4b9c-b603-4835e6adc614.png)
+![image](https://user-images.githubusercontent.com/23094588/127457881-2ee13c6a-1c20-490f-934b-14126d57f26f.png)
 
 Partiendo de la BD vamos a crear dos clases una para **`Tramite`** y otra para **`Avaluo`**.
 
 Empecemos por la clase **`Tramite`** en el paquete **`com.javaocio.domain`**.
 
-Otros paquetes que se pueden usar ade,ás de **`domain`** pueden ser:
+Otros paquetes que se pueden usar además de **`domain`** pueden ser:
 
 * **`pojo`**
 * **`entity`**
 
 ![image](https://user-images.githubusercontent.com/23094588/127379769-2d9306c1-a3bd-454d-a775-428ee230ae4b.png)
 
-AQUIIIIIIIIIIII
+En esta clase **`Tramite`** vamos a meter el siguiente código:
+
+```java
+package com.javaocio.domain;
+
+import java.sql.Timestamp;
+
+public class Tramite {
+
+   private int idTramite;
+   private String tipoTramite;
+   private Timestamp fhcTramite;
+	
+   public Tramite() {
+      super();
+   }
+
+   public Tramite(String tipoTramite, Timestamp fhcTramite) {
+      super();
+      this.tipoTramite = tipoTramite;
+      this.fhcTramite = fhcTramite;
+   }
+
+   public int getIdTramite() {
+      return idTramite;
+   }
+
+   public void setIdTramite(int idTramite) {
+      this.idTramite = idTramite;
+   }
+
+   public String getTipoTramite() {
+      return tipoTramite;
+   }
+
+   public void setTipoTramite(String tipoTramite) {
+      this.tipoTramite = tipoTramite;
+   }
+
+   public Timestamp getFhcTramite() {
+      return fhcTramite;
+   }
+
+   public void setFhcTramite(Timestamp fhcTramite) {
+      this.fhcTramite = fhcTramite;
+   }
+		
+}
+```
+
+Hemos creado tres propiedades encapsuladas para la clase basado en lo que existe en nuestra tabla **Tramite**. Hemos creado un Constructor vacío y otro con dos propiedades sin incluir **`idTramite`** por que este es un valor autoincrementado.
+
+A esta clase usualmente se llama **POJO Plain Old Java Object** representa un dato de la tabla **Tramite** porque va a tener un **`idTramite`**, un **`tipoTramite`** y un **`fhcTramite`**.
 
 
+Ahora en este caso si te das cuenta los campos de la tabla se llaman idénticos a los de la clase, por que ha si lo hemos programado. Pero que tal y no se llaman de la misma forma, entonces ahí es donde entra el mapping de Hibernate, porque Hibernate no permitirá asociar cada una de esas propiedades a cada uno de los campos de la tabla.
 
+Existen dos formas de hacer el Mapping:
 
+* Mediante XML
+* Mediante Anotaciones
 
+El primer enfoque que vamos a usar es con XML.
 
+Vamos a crear un archivo XML dentro del paquete **`domain`** llamado **`hibernate.hbm.xml`**.
 
+![image](https://user-images.githubusercontent.com/23094588/127463189-b59af1a9-79ee-47b1-ad4f-07d02af1e1bf.png)
 
+En este archivo le vamos a decir a Hibernate como va a ser el Mapping.
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="com.novellius.domain">
+   <class name="Tramite" table="Tramite">
+      <!-- Mapping del id -->
+      <id name="idTram" column="idTram">
+         <generator class="native"/>
+      </id>
+		
+      <!-- Mapping del resto de las filas -->
+      <!-- <property name="tipoTram" type="string" column="tipoTram"/> -->
+      <property name="tipoTram" type="string" />
+      <property name="fhcTram" type="timestamp" />
+   </class>
+</hibernate-mapping>
+```
 
-entonces lo que necesitamos nosotros es ir a nuestra base de datos abrir nuestro diagrama que es este donde tengo trámite y evaluar voy a crear dos clases una para tramité y una para evaluar.
+* En el tag **`hibernate-mapping`** debemos indicar el package donde estan los archivos de configuración.
 
-Por el momento voy a crear solo tramité entonces vamos a irnos a nuestro paquete vamos a crear en un paquete todo ordenado con nobeles típicamente esto se le pone Domaine o a alguien he visto también que le pone pollo o le pone entity.
+* Con el tag **`class`** indicamos el nombre de la clase y el nombre de la tabla con el que lo queremos mapear, en este caso ambas se llaman **`Tramite`**.
 
-No sé yo le voy a poner aquí tomé dominio y le vamos a crear una nueva clase que se llame transmite esta clase tramité le voy a poner las propiedades que tiene mi tabla que es hoy detraen tipo de trámite y fecha de creación además que me estoy dando cuenta que le puse tramito Traum le voy a borrar y podré ser nuevamente ingeniero.
+* Con el tag **`id`** identificamos la propiedad que va a fungir como ID y con que columna de relaciona de la tabla, ademas indicamos como se va a generar su valor con el tag **`generator`**.
 
-Listo entonces tiene tres cosas tres tres tres filas a detrás el tipo y fecha hora de creación del trámite.  Entonces vamos a poner encapsuladas el aire del trámite. También me voy a poner el tipo de trámite fíjate que estoy poniendo por ejemplo aquí que es integer 
-aquí va a ser una charla le voy a poner un string y aquí voy a usar el TIMMS tanto que viene en el paquete va escribe el tema strings tipo trama y Private Stamm le lleva Ezekiel fecha de creación del trámite.
-
-Ahora vamos a crear los billetes ya que están encapsulados sours tres etiquetarse y también voy a crear dos contro constructores Innovació y voy a crear otro que no tenga el trámite porque este está auto incrementado es cierto.
-
-Vamos a poner el auto incrementarã se me olvidó esa cuestión ahí y nuevamente forward ingeniero ahora sí ahí está ya tenemos esta clase.
-
-Esta clase usualmente se llama pollo Plain hot Object son objeto plano en la clase llama y esto va a representar la tabla tramité porque va a tener un Heydi un tipo y una fecha y hora de creación.
-
-Ahora en este caso te das cuenta los campos de imitarlas se llaman idénticos a los de mi clase pero que tal y no se llaman de la misma forma entonces ahí es donde entra el mapping RGB porque Hibernate no permitirá asociar cada uno de estos campos a cada uno de estas propiedades de mi tabla vamos a quitar este Super que no lo estamos usando entonces el primer enfoque que vamos a usar es con XML.
-
-Hay dos formas de hacer el mapping como es XML y mi preferido son anotaciones.
-
-Ya tengo mi clase.
-
-También voy a crear otro paquete y lo vamos a poner texto y aquí voy a crear una clase llamada que se llame y le vamos a crear el método principal.
-
-Ahora voy a crear dentro de Domaine un nuevo archivo XML y le voy a poner de título tramité punto. HB M. Punto. XML Ekhi le voy a decir Geyperman.
-
-Cómo voy a hacer el mapping entonces vamos a poner Jeanneth pings GPN lapidadas y Takagi. Y aquí le voy a poner el paquete donde se encuentran estos archivos de configuración que en este caso es este click derecho copiarnos recalificado tallista como Novalis qué propiedades va a tener.
-
-La primera va a ser Class y este tiene la propiedad Namm. Aquí me está pidiendo el nombre de la clase que es tramité y luego le voy a decir qué tabla entonces ponértelo y el nombre casualmente es el mismo. 
-
-Esto es por supuesto adrede pero si tu tuviera su trámite otra pero no tratar otro nombre por ejemplo tramité 2 2 3 por si algo o alguna convención que se usa en tu organización o trabajo puedes poner el X sin problema yo voy a poner tramité ahora es aquí donde voy a hacer el mapping de las propiedades tengo que decir ajá Hibernate que este es el líder de la tabla y que este es una propiedad del tabla y que estas otras propiedad de la tabla como agua es más riqueza en relación a esa asociación le va a poner ahí Tim Namm también le va a poner el nombre de la columna de la propiedad entonces toda tabla debe tener un Heydi si te acuerdas en las reglas de el modelo relacional es una de las principales que podrás tener un Heydi que no puede ser nulo entonces aquí se llama Heydi trama.
-
-Entonces el nombre de la propiedad es arbitran este nombre se refiere a este de aquí y se refiere al de la base de datos que puede cambiar por ejemplo puede ser así pero en este caso yo lo voy a dejar igual.
-
-Y como esto es auto incrementado en nuestra base de datos que acabamos cambiar lo va a poner Generator class.
-
-Esto indica vamos a acordar esto.
-
-Esto indica que este Aydin se genera solo nosotros no tenemos que hacer nada entonces aquí lo que hicimos fue ser el más pinga del aire.
-
-Qué más tenemos que hacer. Bueno pues vamos a poner propiedades Property Name y opcionalmente podemos poner también ahora bivalvo algo algo hermoso de Jaibo vamos a poner por ejemplo que siguen tipo de trámite entonces es el nombre.
-
-Casualmente el tipo es el nombre y la columna y el tipo es esto va a funcionar pero para ahorrarnos código lo siguiente Voy a comentar este y si yo elimino esta columna lo que va a ser Gibernau Itoiz automáticamente asignar el nombre a la columna siempre y cuando la propiedad de aquí se llame exactamente igual a como está en la base de datos entonces eso realmente facilita mucho entonces tengo tipo de trámite que se extinga voy a tener otra propiedad que es fecha y hora de creación del trámite. Y ese es el tipo Timm entonces aquí lo que hice fue hacer el mapping del resto de las propiedades o de las filas con este archivo.
-
-Yo ya le he dicho Hibernate que el Heydi se llama hoy distraían en nuestra clase llama y que se genera automáticamente GPN no hacer nada absolutamente.
-
-También le he dicho que tengo otras dos filas emitirla que quiero asociar a otros dos campos de mi clase llama recuerda que si propiedad en tu clase llama esta diferente como está en la base de datos tendrás que usar forzosamente el atributo Colm para poner el identificador de la base de datos.
-
-Si no hay Bernet lo haré lo haría automáticamente una vez con esto yo ya puedo insertar un valor en base datos pero eso lo vamos a hacer en la próxima clase para que no es poco larga esta sesión.
-
-Entonces hasta el momento hemos hecho el Matic de una tabla que tiene su información en forma de filas y columnas a una clase Java que tiene propiedades que tiene encapsulamiento que tiene constructores que Nicetas a través de este archivo XML hasta la próxima.
+* Con el tag **`property`** definimos las demas propiedades que tenemos, si la propiedad y la columna se llaman igual se puede omitir el atributo **`column`**, hay que indicar el tipo de la propiedad.
 
 ## Uso del método **`save`** 07:47
 ## Uso de anotaciones JPA en Hibernate 04:01
