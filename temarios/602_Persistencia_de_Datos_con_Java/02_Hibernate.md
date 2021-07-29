@@ -497,17 +497,17 @@ En este archivo le vamos a decir a Hibernate como va a ser el Mapping.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<hibernate-mapping package="com.novellius.domain">
+<hibernate-mapping package="com.javaocio.domain">
    <class name="Tramite" table="Tramite">
-      <!-- Mapping del id -->
-      <id name="idTram" column="idTram">
+      <!-- 	Mapping del id -->
+      <id name="idTramite" column="idTramite">
          <generator class="native"/>
       </id>
-		
+
       <!-- Mapping del resto de las filas -->
       <!-- <property name="tipoTram" type="string" column="tipoTram"/> -->
-      <property name="tipoTram" type="string" />
-      <property name="fhcTram" type="timestamp" />
+      <property name="tipoTramite" type="string" />
+      <property name="fhcTramite" type="timestamp" />
    </class>
 </hibernate-mapping>
 ```
@@ -572,7 +572,7 @@ public class Test {
       Tramite tramite = new Tramite("Crédito", new Timestamp(date.getTime()));
 		
       // Salvar el tramite 
-      session.save(tramite);	// insert into Tramite (tipoTram, fhcTram) values (?, ?)
+      session.save(tramite);	// insert into Tramite (tipoTramite, fhcTramite) values (?, ?)
 				
       session.getTransaction().commit();
       session.close();
@@ -596,31 +596,103 @@ Lo que hace es persistir el objeto. Lo que realmente esta haciendo es un **`INSE
 
 Vamos a ejecutar la clase **`Test`**.
 
+Debido a que existen problemas con la conexión a la BD se realizarón los siguientes cambios:
+
+1) Cambiar en el **`pom.xml`** la dependencia de MySQL:
 
 
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>JavaPersistence</groupId>
+  <artifactId>JavaPersistence</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-core</artifactId>
+  		<version>5.2.1.Final</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-validator</artifactId>
+  		<version>5.2.4.Final</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-entitymanager</artifactId>
+  		<version>5.2.1.Final</version>
+  	</dependency>
+  	<!-- 
+  	<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  		<version>5.1.39</version>
+  	</dependency>
+  	-->
+  	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.19</version>
+	</dependency>
+  </dependencies>
+</project>
+```
 
+2) Cambios en la configuración de Hibernate en el archivo **`hibernate.cfg.xml`** para hacer referencia a los datos de la nueva dependencia de MySQL.
 
-O sea el Jeunet ya sabe qué propiedad de nuestra clase IAVA está asociada a qué dato a qué fila de nuestra
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <!-- Ubicación de la B.D. -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/test_bd?serverTimezone=UTC</property>
+        <!-- Usuario de la B.D. -->
+        <property name="connection.username">root</property>
+        <!-- Contraseña de la B.D. -->
+        <property name="connection.password">root</property>
 
-base de datos entonces con esto es suficiente vamos a ejecutar esta clase concederla aquí en ejecutar
+        <!-- Dialecto SQL -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
-como ves lo que hizo fue ser tramité bla bla bla.
+        <!-- Mostrar en consola operaciones SQL -->
+        <property name="show_sql">true</property>
+         
+        <!-- Use mapping basado en XML-->	
+        <mapping resource="com/javaocio/domain/Tramite.hbm.xml"/>
+        
+        <!-- Usar mapping en base a anotaciones-->
+        
+    </session-factory>
+</hibernate-configuration>
+```
 
-Es más voy a pegar esto aquí
+Con estos cambios al ejecutar la clase **`Test`** tenemos:
 
-de referencia.
+![image](https://user-images.githubusercontent.com/23094588/127483120-2bbe0e21-6ae7-40ae-86fd-02d574ed6008.png)
 
-Y ahora simplemente vamos a ir a nuestra base de datos y voy a abrir mi conexión de Chava persistes
+Y ahora simplemente vamos a ir a nuestra base de datos para ver el contenido de la tabla **`Tramite`**.
 
-y voy a buscar la tabla tramité y como ves se insertaron nuestros datos en la base de datos.
+![image](https://user-images.githubusercontent.com/23094588/127483528-074d03c7-7e33-475f-a5ab-774b230d56a7.png)
 
-Esta es la magia de Jaime no podemos simplificaron más con las anotaciones y eso es lo que precisamente
+como vemos se insertaron nuestros datos en la base de datos, esta es la magia de Hibernate.
 
-haremos en nuestra próxima clase recuerda cualquier duda documentario.
-
-Puedes buscarme en esta plataforma en nuestro correo de contacto.
-
-Rubén nóveles puntocom y en mi correo Avram arroba en Nouvelles por lo cual hasta la próxima.
 ## Uso de anotaciones JPA en Hibernate 04:01
 ## Creación de una consulta personalizada con HQL 02:50
 ## Consultando todos los registros con HQL 04:49
