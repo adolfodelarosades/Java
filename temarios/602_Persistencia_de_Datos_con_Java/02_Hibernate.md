@@ -561,25 +561,23 @@ import com.javaocio.util.HibernateUtil;
 
 public class Test {
 
-	public static void main(String[] args) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+      session.beginTransaction();
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		Date date = new Date();
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+      Date date = new Date();
 		
-		// Crear una instancia de Tramite
-		Tramite tramite = new Tramite("Crédito", new Timestamp(date.getTime()));
+      // Crear una instancia de Tramite
+      Tramite tramite = new Tramite("Crédito", new Timestamp(date.getTime()));
 		
-		// Salvar el tramite 
-		session.save(tramite);	// insert into Tramite (tipoTram, fhcTram) values (?, ?)
-		
-		
-		
-		session.getTransaction().commit();
-		session.close();
+      // Salvar el tramite 
+      session.save(tramite);	// insert into Tramite (tipoTram, fhcTram) values (?, ?)
+				
+      session.getTransaction().commit();
+      session.close();
 
-	}
+   }
 
 }
 ```
@@ -596,106 +594,11 @@ Si vemos la definición de **`session.save(...)`**
 
 Lo que hace es persistir el objeto. Lo que realmente esta haciendo es un **`INSERT INTO`** en la BD, lo único que hay que pasarle es la instancia del Objeto "Mappeado"
 
-* Detro de la transacción lo primero que hacemos es crear una instancia de Tramite.
+Vamos a ejecutar la clase **`Test`**.
 
 
-De esto tenemos que irnos a nuestro Gemayel con fiqh XML y aquí vamos a poner algo interesante ya que
 
-si no le decimos Giverny que no lo vamos a usar puede arrojar una excepción.
 
-Entonces como yo usé ahorita el mapping basado en XML que es este trámite punto HMM XML entonces tengo
-
-que poner lo siguiente
-
-mapping
-
-y le ponemos Resource
-
-si que va quien se va el lugar donde se encuentra este archivo XML solo que en lugar de puntos le vamos
-
-a poner diagonales y al final le vamos a poner el nombre del archivo
-
-entonces le estoy diciendo que use este archivo para hacer el mapping el mapeo de esta tabla tramité
-
-con la clase con el paso del objeto plano aullaba trámite.
-
-Ahora voy a irme a text y dentro de él por este tipo Hotmail vamos a poner lo siguiente
-
-primero voy a crear un objeto tipo sesión y voy a importar mi librería jaiba útil en clase utilidades
-
-que sello Factory Open aquí me ha pedido obviamente importar la clase sesión de jailbreak lo vamos a
-
-poner punto de transacción.
-
-Aquí voy a empezar a hacer todas las operaciones de gestión de base de datos pero al final tengo que
-
-poner un punto de Transaction punto commit esto va a realizar los cambios ya propiamente en nuestro
-
-medio de persistencia que en este caso es una base de datos y finalmente un punto Claws qué voy a hacer
-
-aquí.
-
-Primero voy a crear una instancia de trámite entonces tramite trámite y aquí voy a usar ese constructor
-
-que veníamos viendo y claro que voy a importar trámites y recuerda que ahí no lo voy a usar pero si
-
-ser por ejemplo aquí el trámite que sea un crédito y aquí recuerda que ese tipo Stamp entonces para
-
-esto voy a hacer lo siguiente
-
-sin Postdata format
-
-es igual a Neo 5 de formato y aquí le voy a decir cómo quiero la fecha en este caso yo la quiero 4 para
-
-el año 2 para el mes 2 para el día quiero horas minutos y segundos y puede ser con milésimas de segundo
-
-y Día de la semana pero a mi no me interesa Ortez o así lo vamos a poner y también estamos un objeto
-
-de tipo Tayta
-
-y debe ser Djavan y outing
-
-entonces aquí más vamos a poner ni tan y punto
-
-esto nos Bertona a la hora actual del sistema y en crédito en el perdón en tipo de trámite lo vamos
-
-a poner que sea un crédito y el aire se va a incrementar.
-
-Ahora aquí viene la magia de jailbreak
-
-salvar el trámite en entrecomillas base de datos porque eso realmente se realiza aquí en el comité entonces
-
-mejor les podemos salvar el trámite simplemente vamos a poner un punto 6.
-
-Quiero enfocarme en este método en la documentación oficial aparecen o vamos a buscarlo en línea
-
-Saif de los documentos oficiales de preferencia
-
-y vamos a ver aquí están los métodos de sesión
-
-y vámonos con Saif fié todo bien lo que hace
-
-aquí dice que hace o que persiste hace que se persista el objeto o la distancia del objeto pero es un
-
-edificador y bla bla bla.
-
-Qué hace este método.
-
-Este método simplemente guarda hace una operación en nuestro caso INSERT INTO automáticamente.
-
-Yo nada más tengo que pasar una instancia
-
-del objeto mapeado por decir así o el objeto ya asociado y lo que va a hacer Bernet aquí es equivalente
-
-a lo que nosotros haríamos como INSERT INTO tramité.
-
-Bla bla bla.
-
-Pero ya no lo tenemos que hacer.
-
-Por qué.
-
-Porque ya se hizo un Matic.
 
 O sea el Jeunet ya sabe qué propiedad de nuestra clase IAVA está asociada a qué dato a qué fila de nuestra
 
