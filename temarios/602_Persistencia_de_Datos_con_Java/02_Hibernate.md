@@ -1052,6 +1052,246 @@ Todo funciona igual pero aquí ya estamos usando las Metamodel Generator.
 
 ## Uso de los métodos **`update`** y **`saveOrUpdate`** 09:09
 
+Atualmente en nuestra tabla **`Tramite`** tenemos los dos registros siguientes:
+
+![image](https://user-images.githubusercontent.com/23094588/127772821-4b64b21b-92b2-427c-b59a-1b2ec9478fe9.png)
+
+Actualmente para probar nuestra APP hemos usado la clase **`Test`**, vamos a crear una segúnda clase **`Test2`** para hacer algunos cambios a como hemos trabajado actualmete añadiendo un **`try-catch`** para el posible control de errores si manejamos más de una operación de persistencia.
+
+```java
+package com.javaocio.test;
+
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.Tramite;
+import com.javaocio.domain.Tramite_;
+import com.javaocio.util.HibernateUtil;
+
+public class Test2 {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         //USO DE CRITERIA
+         // Definir la Fábrica para las piezas individuales del criterio
+         CriteriaBuilder builder = session.getCriteriaBuilder();
+         CriteriaQuery<Tramite> criteria = builder.createQuery( Tramite.class );
+
+         // Definir el tipo de entidad que retorna la consulta
+         Root<Tramite> root = criteria.from( Tramite.class );
+			
+         // Construyendo la consulta
+         criteria.select( root )
+                 .where(builder.equal(root.get(Tramite_.tipoTramite), "Crédito"));
+
+         List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+			
+         System.out.println(tramites.toString());
+
+         tx.commit();
+      
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+
+* Creamos un objeto **`Transaction`**
+* Añadimos bloque **`try-catch`**
+* Dentro del **`try`** vamos a iniciar la transacción y hacer el commit y en caso de que exista algún error hacemos un rollback, al final cerramos la sesión. De esta forma controlamos que si hacemos varias operaciones y alguna falla ninguna se reflejara en la BD.
+* Metemos la consulta anterior dentro del Try.
+
+Al probar la APP todo sigue funcionando igual.
+
+![image](https://user-images.githubusercontent.com/23094588/127773318-a43d3d1f-fad8-49c9-99be-f384ac6ceb8e.png)
+
+### Retornar solo un resultado con `getSingleResult()`
+
+Cuando estemos seguros que el resultado es solo uno podemos usar en lugar de:
+
+```java
+   . . .
+   List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+   . . .
+```
+
+usar:
+
+```java
+   . . .
+   //List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+   Tramite tramite = session.createQuery( criteria ).getSingleResult();
+   
+   System.out.println(tramite.toString());
+   . . .
+```
+
+La salida es:
+
+![image](https://user-images.githubusercontent.com/23094588/127773856-1f6dc64d-1758-4dd5-a52b-94651781b2c2.png)
+
+### Actualizar el Estado de un Trámite mediante el **`set`** y **`session.update(...)`**
+
+
+```java
+   . . .
+   Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         //USO DE CRITERIA
+         // Definir la Fábrica para las piezas individuales del criterio
+         CriteriaBuilder builder = session.getCriteriaBuilder();
+         CriteriaQuery<Tramite> criteria = builder.createQuery( Tramite.class );
+
+         // Definir el tipo de entidad que retorna la consulta
+         Root<Tramite> root = criteria.from( Tramite.class );
+			
+         // Construyendo la consulta
+         criteria.select( root )
+                 .where(builder.equal(root.get(Tramite_.tipoTramite), "Crédito"));
+
+	 //List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+         Tramite tramite = session.createQuery( criteria ).getSingleResult();
+			
+         System.out.println(tramite.toString());
+					
+         //Actualizar el estado del Trámite
+         tramite.setTipoTramite("Crédito Mensual");
+			
+         session.update(tramite);
+
+         tx.commit();
+      } catch (Exception e) {
+   . . .
+   
+```
+
+* Consultamos un registro
+* Lo recuperamos
+* Lo actualizamos
+* Lo persisto en la BD
+
+Ejecutando la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127774138-ef637d11-8403-441e-8655-3c267c230aa1.png)
+
+Nos indica que Hiberna ha realizado un **`update`**, vamos a revisar la BD.
+
+![image](https://user-images.githubusercontent.com/23094588/127774178-7fe1d44b-7039-4b89-a5c2-76425545762d.png)
+
+Como podemos observar a cambiado **`Crédito`** por **`Crédito Mensual`**. Vamos a regresar manualmente el valor a **`Crédito`**.
+
+![image](https://user-images.githubusercontent.com/23094588/127774394-10d8c2eb-cf8e-45e7-a6b4-fd24fefee3dd.png)
+
+
+Vamos ahora a realizar dos tareas, modificar el trámite igual que lo habíamos hecho y ademas crear un nuevo crédito, el código es el siguiente:
+
+```java
+   . . . 
+   // Construyendo la consulta
+   criteria.select( root )
+           .where(builder.equal(root.get(Tramite_.tipoTramite), "Crédito"));
+
+   //List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+   Tramite tramite = session.createQuery( criteria ).getSingleResult();
+			
+   //Actualizar el estado del Trámite
+   tramite.setTipoTramite("Crédito Mensual");
+			
+			
+   // Crear un nuevo trámite
+   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+   Date date = new Date();
+			
+   // Crear una instancia de Tramite
+   Tramite tramiteNew = new Tramite("Crédito Nuevo", new Timestamp(date.getTime()));
+			
+   // Salvar el tramite 
+   session.save(tramiteNew);
+   session.update(tramite);
+   . . .
+```
+
+Al ejecutar la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127774634-fb53c9a1-0330-44bc-b5d1-b0f3851700cd.png)
+
+Observamos como Hibernate a ejecutado un **`insert`** y un **`update`**, gracias a que hemos usado los métodos **session.save(tramiteNew);`** y **` session.update(tramite);`** de Hibernate.
+
+Si vemos lo que ha pasado en la BD tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127774703-72be745b-3cb4-436b-a43f-965dd217241c.png)
+
+Vamos a poner nuevamente **`Crédito`** en el primer registro para la siguiente prueba.
+
+![image](https://user-images.githubusercontent.com/23094588/127774729-18404e4c-869c-45ba-a331-6cf9b7902d44.png)
+
+### Uso del método **`saveOrUpdate`** en lugar de **`save`** y **`update`**.
+
+Podemos realizar la misma tarea pero usando el método **`saveOrUpdate`** en lugar de **`save`** y **`update`**, en caso de que el Objeto a persistir no exista lo insertara y si ya existe lo actualizara.
+
+```java
+   . . . 
+   // Construyendo la consulta
+   criteria.select( root )
+           .where(builder.equal(root.get(Tramite_.tipoTramite), "Crédito"));
+
+   //List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+   Tramite tramite = session.createQuery( criteria ).getSingleResult();
+			
+   //Actualizar el estado del Trámite
+   tramite.setTipoTramite("Crédito Mensual");
+			
+			
+   // Crear un nuevo trámite
+   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+   Date date = new Date();
+			
+   // Crear una instancia de Tramite
+   Tramite tramiteNew = new Tramite("Proyecto de Construcción", new Timestamp(date.getTime()));
+			
+   // Salvar el tramite 
+   session.saveOrUpdate(tramiteNew);
+   session.saveOrUpdate(tramite);
+   . . .
+```
+
+Al ejecutar la APP tenemos:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 **``**
 **``**
 **``**
