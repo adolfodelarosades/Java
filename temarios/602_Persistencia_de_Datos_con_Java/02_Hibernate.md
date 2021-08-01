@@ -1050,7 +1050,7 @@ Todo funciona igual pero aquí ya estamos usando las Metamodel Generator.
 
 ![image](https://user-images.githubusercontent.com/23094588/127772420-71bca02c-b8ed-4fb9-a09a-366dc8a2d7ba.png)
 
-## Uso de los métodos **`update`** y **`saveOrUpdate`** 09:09
+## Uso de los métodos **`update`** y **`saveOrUpdate`** y **`delte`** para hacer un CRUD 09:09
 
 Atualmente en nuestra tabla **`Tramite`** tenemos los dos registros siguientes:
 
@@ -1152,7 +1152,6 @@ La salida es:
 
 ### Actualizar el Estado de un Trámite mediante el **`set`** y **`session.update(...)`**
 
-
 ```java
    . . .
    Transaction tx = null;
@@ -1237,7 +1236,7 @@ Al ejecutar la APP tenemos:
 
 ![image](https://user-images.githubusercontent.com/23094588/127774634-fb53c9a1-0330-44bc-b5d1-b0f3851700cd.png)
 
-Observamos como Hibernate a ejecutado un **`insert`** y un **`update`**, gracias a que hemos usado los métodos **session.save(tramiteNew);`** y **` session.update(tramite);`** de Hibernate.
+Observamos como Hibernate a ejecutado un **`insert`** y un **`update`**, gracias a que hemos usado los métodos **`session.save(tramiteNew)`** y **`session.update(tramite)`** de Hibernate.
 
 Si vemos lo que ha pasado en la BD tenemos:
 
@@ -1279,27 +1278,52 @@ Podemos realizar la misma tarea pero usando el método **`saveOrUpdate`** en lug
 
 Al ejecutar la APP tenemos:
 
+![image](https://user-images.githubusercontent.com/23094588/127775108-5a4c1978-285a-457f-aab1-09573ae971dd.png)
 
+Hibernate sigue ejecutando un insert y un update pero en este caso nosotros hemos usado el método **`saveOrUpdate`** en lugar de **`save`** y **`update`** y Hibernate es tan inteligente de distinguir si debe insertar o actualizar.
 
+Y al ver la BD tenemos.
 
+![image](https://user-images.githubusercontent.com/23094588/127775128-23946598-301f-484f-b4b3-e4cd95308f2c.png)
 
+### Eliminar un registro con `session.delete(OBJ)`.
 
+Para eliminar un registro en la BD primero lo localizamos y después lo eliminamos con **`session.delete(OBJ)`**.
 
+Vamos a eliminar el último registro insertado **`Proyecto de Construcción`**.
 
+```java
+   . . .
+   // Construyendo la consulta
+   criteria.select( root )
+           .where(builder.equal(root.get(Tramite_.tipoTramite), "Proyecto de Construcción"));
 
+   Tramite tramite = session.createQuery( criteria ).getSingleResult();
+			
+   session.delete(tramite);
+   . . .			
+```
 
+Al ejecutar la APP tenemos:
 
+![image](https://user-images.githubusercontent.com/23094588/127775340-b087c53a-1182-41ba-b474-3519e845a53f.png)
 
+Y en la BD:
 
+![image](https://user-images.githubusercontent.com/23094588/127775370-817094c2-7afe-4d12-9352-10e1177f0da7.png)
 
-**``**
-**``**
-**``**
-**``**
-**``**
+Con esto ya hemos podido hacer un CRUD con Hibernate.
 
+![image](https://user-images.githubusercontent.com/23094588/127775516-f6440ad6-b481-46eb-85ec-2e68e6fe901b.png)
 
 ## Consultas anidadas con Criteria 07:35
+
+**``**
+**``**
+**``**
+**``**
+**``**
+
 ## Consultando campos personalizados con Tuple 04:21
 ## Uso de **`@OneToOne`** 09:11
 ## Consulta de registros con clases anotadas con **`@OneToOne`** 04:16
