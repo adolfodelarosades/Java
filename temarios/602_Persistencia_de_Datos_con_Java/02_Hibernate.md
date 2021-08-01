@@ -807,6 +807,96 @@ Hemos logrado insertar un registro en la tabla **`Tramite`** pero ahora usando l
 
 ## Creación de una consulta personalizada con HQL 02:50
 
+[Hibernate ORM 5.0 User Guide](https://docs.jboss.org/hibernate/orm/5.0/userguide/html_single/Hibernate_User_Guide.html)
+
+En esta clase quiero mostrarte como hacer una consulta con una restriccion, antes de entrar a **Criteria** que es donde me gustaría enfocarnos ya que hacer unas consultas con lenguaje SQL puede resultar familiar.
+
+Estoy en la página oficial de la documentación de Hibernate 5 en la parte de HQL
+
+![image](https://user-images.githubusercontent.com/23094588/127612490-1641c16c-1dc1-4d89-b031-651f7fc2f342.png)
+
+y aquí como ves hay algunos ejemplos de cómo usar todo lo que se usa en SQL pero con HQL, existe otra técnica diferente llamada **Criteria** que es la que vamos a tratar debido a que hace ***consultas seguras*** como lo llama la documentación, debido a que no usamos lenguaje SQL sino usamos interfaces y métodos de interfaces.
+
+### Ejemplo para recuperar todos los Trámites de la tabla `Tramite`
+
+Vamos a comenzar por realizar un ejemplo que recupere todos los Trámites de la tabla **`Tramite`**. La consulta necesaria para esto la vamos a poner en nuestro archivo de prueba **`Test`**, comentamos lo anterior para no ingresar más trámites.
+
+```java
+@SuppressWarnings("unchecked")
+Query<Tramite> query = session.createQuery("from Tramite"); 
+		
+List<Tramite> tramites = query.getResultList();
+System.out.println(tramites.toString());
+```
+
+* Estamos usando el metodo **`session.createQuery("from Tramite")`** para crear un objeto **`Query`**.
+* Recuperamos la lista de resultados en una lista.
+* Sacamos a la consola la lista de los tramites.
+
+Observemos que la sentencia HQL **`from Tramite`** no es exactamente como una SQL es más reducida, cabe hacer notar que **`Tramite`** hace referencia a la Entidad NO a la tabla.
+
+Probando la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127614582-db21b98c-f7b3-4d4b-947e-e9c4f99f5f61.png)
+
+La salida nos muestra la sentencia SQL y despúes nos muestra dos objetos **`Tramite`**
+
+#### Modificar Entidad `Tramite`
+
+Para que nos muestre mejor los trámites vamos a ir a la Entidad **`Tramite`** y vamos a sobreescribir el método **`toString`**.
+
+```java
+   . . .
+   @Override
+   public String toString() {
+      return "Tramite [idTramite=" + idTramite + ", tipoTramite=" + tipoTramite + ", fhcTram=" + fhcTramite + "]";
+   }
+```
+
+Si ejecutamos nuevamente la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127615968-f46f4bd2-56bb-4ad1-8d5a-1238e9b8e3b8.png)
+
+con esto ya vemos más claro cada trámite.
+
+### Ejemplo para recuperar los Trámites de un determinado Tipo.
+
+
+
+**``**
+**``**
+**``**
+**``**
+
+
+
+
+Entonces por ejemplo si yo quiero consultar
+
+el momento tengo esta consulta from tramité where
+
+tenía así un trámite que es igual a select todo el trámite.
+
+Si yo le quiero agregar una restricción igual que en México al simple mente pongo tipo Traum iguala
+
+y convencion se usan 2.8 tipo.
+
+Ahora este es un comodín cómo le doy cuerpo a ese comodín.
+
+Muy sencillo le voy a poner Quarry punto z para meter.
+
+Este es el identificador que tipo Tramp es este de aquí y el valor que sea crédito.
+
+Entonces estoy buscando todos los trámites pero donde el tipo de trámite se iguala crédito
+
+son créditos pues es uno que es el Leidi 2 y tiene esta fecha y hora de creación.
+
+Puedes realizar múltiples operaciones varias veces arriba HQ o L como Salute Select etc. Esto no me
+
+voy a entrar mucho debido a que pues si tú ya tienes conocimientos en Maisí cuál va a ser muy sencillo
+
+que Migros a Chicuelo pero en lugar de esto quiero enfocarme en otra técnica que se llama chirria que
+
 **``**
 **``**
 **``**
