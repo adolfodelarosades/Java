@@ -883,20 +883,79 @@ Con esto ya recuperamos solo los trámmites de tipo **`Crédito`**.
 
 ![image](https://user-images.githubusercontent.com/23094588/127763905-c9c6482e-3a55-4071-937d-a13db448d75f.png)
 
+![image](https://user-images.githubusercontent.com/23094588/127764363-8bcc8b45-0065-49fa-bb7e-ba901f914ade.png)
 
-
-
-
-**``**
-**``**
-**``**
-**``**
-**``**
-**``**
-**``**
-**``**
 ## Consulta de todos los registros con Criteria 06:34
+
+[Criteria](https://docs.jboss.org/hibernate/orm/5.0/userguide/html_single/Hibernate_User_Guide.html#criteria)
+
+![image](https://user-images.githubusercontent.com/23094588/127764450-111beb78-8cc4-48d9-b8af-a220bf51e25e.png)
+
+¿Qué es Criteria? son una alternativa a **HQL** para realizar consultas pero de tipo seguro, porque de tipo seguro, son de tipo seguro porque usan interfases y clases para representar varias partes de la estructura de la consulta, ¿Qué significa esto?  que aquí no vamos a usar lenguaje **HQL** si no vamos a usar interfaces y clases para representar operaciones, inclusive muy complejas como lo vamos a ver posteriormente cuando hagamos relaciones de tablas ***Uno a Uno***, ***Uno a Muchos*** y ***Muchos a Muchos***, **Criteria** nos vuelven la vida sumamente sencilla, aparentemente va a ser más difícil implementar, pero eso es sólo la primera impresión, la verdad es que es una opción muy cómoda para crear un desarrollo rápido.
+
+La documentación también dice que básicamente es un grafo que vamos a ir desglosando y precisamente así se construye una consulta, te recomiendo que le eches un vistazo a la documentación, yo me voy a basar en este ejemplo:
+
+![image](https://user-images.githubusercontent.com/23094588/127764647-59bba928-31c4-4b56-b997-83768f6edcdd.png)
+
+lo que hace básicamente es una consulta una entidad personal, le dice a la consulta que va a retornar **`Person`** a través de la clase **`Root`**, lo que está haciendo es un **`select`** donde (**`where`**) el nombre de la persona sea **`John Doe`** eso es lo que está haciendo, está usando en vez de un lenguaje **SQL**, está usando clases y métodos, esto es mucho más sencillo de leer si es que la consulta se torna muy compleja. Y después simplemente obtiene una lista con todos los resultados.
+
+Vamos a adaptar este ejemplo a nuestra APP.
+
+Aparentemente puedo decir que es más código y es más complejo pero no es así, porque cuando hagamos consultas más complejas verás que es mucho mucho más sencillo.
+
+```java
+. . .
+//USO DE CRITERIA
+		
+// Definir la Fábrica para las piezas individuales del criterio
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Tramite> criteria = builder.createQuery( Tramite.class );
+
+// Definir el tipo de entidad que retorna la consulta
+Root<Tramite> root = criteria.from( Tramite.class );
+		
+// Construyendo la consulta
+criteria.select( root ); //Hace un select *
+
+List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+		
+System.out.println(tramites.toString());
+. . .
+```
+
+* Primero vamos a importar **`CriteriaBuilder`** del paquete **`javax.persistence.criteria.CriteriaBuilder`**
+* Importar **`CriteriaQuery`** del paquete **`javax.persistence.criteria.CriteriaQuery`**
+* Importar **`Root`** del paquete **`javax.persistence.criteria.Root`**
+* Aquí usa **`entityManager`** que es nuestro equivalente a **`session`**
+* Nosotros usamos **`Tramite`** en lugar de **`Person`**
+
+Básicamente estamos haciendo los siguientes pasos:
+
+* Definir la Fábrica para las piezas individuales del criterio
+* Definir el tipo de entidad que retorna la consulta
+* Construir la consulta
+* Recuperar el rusultado 
+* Mostrarlo en pantalla
+
+Probando la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127765198-5f3913ea-64e6-4ddd-8b67-32d0667f29c1.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127765294-b41f83d0-a2d2-4399-b5b5-b52c6d2f79a5.png)
+
 ## Consultas personalizadas con Criteria 04:52
+
+
+**``**
+**``**
+**``**
+**``**
+**``**
+**``**
+**``**
+**``**
+
+
 ## Uso de los métodos **`update`** y **`saveOrUpdate`** 09:09
 ## Consultas anidadas con Criteria 07:35
 ## Consultando campos personalizados con Tuple 04:21
