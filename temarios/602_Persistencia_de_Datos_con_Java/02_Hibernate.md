@@ -945,18 +945,120 @@ Probando la APP tenemos:
 
 ## Consultas personalizadas con Criteria 04:52
 
+En esta lección vamos a añadir una restricción a nuestra consulta con Criteria. Esto se puede hacer de dos formas:
 
-**``**
-**``**
-**``**
-**``**
-**``**
-**``**
-**``**
-**``**
+### Usando el métod **`criteria.where(...)`**
 
+Basta con añadir la siguiente sentencia a nuestro código:
+
+```java
+// Construyendo la consulta
+criteria.select( root );
+criteria.where(builder.equal(root.get("tipoTramite"), "Crédito"));
+```
+
+Si probamos la aplicación tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127766723-a52c6175-7cc6-4c35-9a50-ada97ade0b81.png)
+
+La construcción de la consulta la podemos escribir de una forma diferente pero obteniendo los mismos resultados:
+
+```java
+// Construyendo la consulta
+criteria.select( root )
+        .where(builder.equal(root.get("tipoTramite"), "Crédito"));
+
+```
+
+El resultado es el mismo:
+
+![image](https://user-images.githubusercontent.com/23094588/127767268-3de71fc6-a788-4e51-b711-51cc46004d7e.png)
+
+Con esta última forma de trabajar podemos ir anidadando más criterios y es más facil de leer que un HQL.
+
+La única desventaja que vemos es que estamos poniendo *hardcodeados* los nombres de las propiedades involucrados en la búsqueda en este caso **`tipoTramite`**, en el ejemplo de la documentación veíamos la técnica usada que nos lo hacía automáticamente **`root.get( Person_.name )`** esto se conoce como **Hibernate JPA Metamodel Generator**, básicamente a partir de una clase Anotada con JPA(Entidad) nos va a generar un archivo como:
+
+![image](https://user-images.githubusercontent.com/23094588/127767465-ec13d35e-bfb1-48fa-81a2-3141015ca4ca.png)
+
+Donde podemos tener acceso a cada uno de los campos para usarlo en Criteria y así ya no tenemos que tener el dato *hardcodeado*.
+
+### Configurar el Hibernate JPA Metamodel Generator
+
+#### Modificar **`pom.xml`**
+
+Ir al archivo **`pom.xml`** y añadir la siguiente dependencia:
+
+```xml
+   . . .
+   <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-jpamodelgen</artifactId>
+      <version>5.2.1.Final</version>
+   </dependency>
+   . . .
+```
+
+#### Generar el archivo Metamodel Generator
+
+Vamos ir a las propiedades del Proyecto
+
+![image](https://user-images.githubusercontent.com/23094588/127768106-2058be5a-9dbb-437f-abef-8d2be96a42ae.png)
+
+Vamos a Maven y seleccionamos ***Annotation Processing***
+
+![image](https://user-images.githubusercontent.com/23094588/127768119-2ef23a76-5439-4720-a6cc-bd4209985719.png)
+
+Aquí vamos a marcar las siguientes dos opciones:
+
+* ***Enable project specific settings***
+* ***Automatically configure JDT APT (builds faster, but outcome may differ from Maven buils)****
+
+![image](https://user-images.githubusercontent.com/23094588/127768235-b44aa7ef-8c49-40b4-b098-141ea799d7a0.png)
+
+Vamos a presionar en ***Apply***
+
+![image](https://user-images.githubusercontent.com/23094588/127768255-69435b72-9e2b-43b0-af2a-940f5231680f.png)
+
+Damos en ***Yes*** y ***OK***, con esto nos crea la carpeta:
+
+![image](https://user-images.githubusercontent.com/23094588/127768501-23dfe6d1-b6bf-4b76-9e2c-e1e8f25721d6.png)
+
+SE SUPONE QUE DENTRO CREARÍA UN ARCHIVO GRACIAS A QUE TENEMOS ANOTADA NUESTA ENTIDAD CON JPA PERO NO LO HIZO, LA HE METIDO MANUALMENTE.
+
+![image](https://user-images.githubusercontent.com/23094588/127768809-d9edafae-554a-4a06-9385-e2821b3172bb.png)
+
+#### Modificar la propiedad *harcodeada*
+
+Vamos a camiar **`"tipoTramite"`** por **`Tramite_.tipoTramite`**, el código nos queda así:
+
+```java
+ . . .
+// Construyendo la consulta
+criteria.select( root )
+        .where(builder.equal(root.get(Tramite_.tipoTramite), "Crédito"));
+
+. . .
+```
+
+Si probamos la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127769018-5102db7a-c5c7-4953-a986-4ce50a01fda9.png)
+
+Todo funciona igual pero aquí ya estamos usando las Metamodel Generator.
+
+![image](https://user-images.githubusercontent.com/23094588/127772400-69d05523-8dd2-40c1-aa75-6b4efbb2d0ff.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127772420-71bca02c-b8ed-4fb9-a09a-366dc8a2d7ba.png)
 
 ## Uso de los métodos **`update`** y **`saveOrUpdate`** 09:09
+
+**``**
+**``**
+**``**
+**``**
+**``**
+
+
 ## Consultas anidadas con Criteria 07:35
 ## Consultando campos personalizados con Tuple 04:21
 ## Uso de **`@OneToOne`** 09:11
