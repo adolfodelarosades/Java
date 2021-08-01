@@ -805,7 +805,7 @@ Hemos logrado insertar un registro en la tabla **`Tramite`** pero ahora usando l
 
 ![image](https://user-images.githubusercontent.com/23094588/127489248-a19ada12-c801-4a43-b266-6858b34c11a1.png)
 
-## Creación de una consulta personalizada con HQL 02:50
+## Consulta con HQL 02:50
 
 [Hibernate ORM 5.0 User Guide](https://docs.jboss.org/hibernate/orm/5.0/userguide/html_single/Hibernate_User_Guide.html)
 
@@ -816,6 +816,8 @@ Estoy en la página oficial de la documentación de Hibernate 5 en la parte de H
 ![image](https://user-images.githubusercontent.com/23094588/127612490-1641c16c-1dc1-4d89-b031-651f7fc2f342.png)
 
 y aquí como ves hay algunos ejemplos de cómo usar todo lo que se usa en SQL pero con HQL, existe otra técnica diferente llamada **Criteria** que es la que vamos a tratar debido a que hace ***consultas seguras*** como lo llama la documentación, debido a que no usamos lenguaje SQL sino usamos interfaces y métodos de interfaces.
+
+## Consultando todos los registros con HQL 04:49
 
 ### Ejemplo para recuperar todos los Trámites de la tabla `Tramite`
 
@@ -829,6 +831,7 @@ List<Tramite> tramites = query.getResultList();
 System.out.println(tramites.toString());
 ```
 
+* El **`Query`** que hay que importar es el de **`org.hibernate.query.Query;`**
 * Estamos usando el metodo **`session.createQuery("from Tramite")`** para crear un objeto **`Query`**.
 * Recuperamos la lista de resultados en una lista.
 * Sacamos a la consola la lista de los tramites.
@@ -859,51 +862,39 @@ Si ejecutamos nuevamente la APP tenemos:
 
 con esto ya vemos más claro cada trámite.
 
+## Creación de una consulta personalizada con HQL 02:50
+
 ### Ejemplo para recuperar los Trámites de un determinado Tipo.
 
+```java
+. . .
+@SuppressWarnings("unchecked")
+Query<Tramite> queryTipo = session.createQuery("from Tramite where tipoTramite = :tipoTramite"); 
+queryTipo.setParameter("tipoTramite", "Crédito");
+		
+List<Tramite> tramitesTipo = queryTipo.getResultList();
+System.out.println(tramitesTipo.toString());
+```
+
+* Hemos tenido que añadir la clausula **`where`** con la propiedad que queremos buscar y no se asigna un valor fijo si no mediante **`= :tipoTramite`** se le indica que le vamos a pasar un valor.
+* Con **`queryTipo.setParameter("tipoTramite", "Crédito");`** indicamos el valor del parámetro que necesita nuestro Query.
+
+Con esto ya recuperamos solo los trámmites de tipo **`Crédito`**.
+
+![image](https://user-images.githubusercontent.com/23094588/127763905-c9c6482e-3a55-4071-937d-a13db448d75f.png)
 
 
-**``**
-**``**
-**``**
-**``**
 
 
-
-
-Entonces por ejemplo si yo quiero consultar
-
-el momento tengo esta consulta from tramité where
-
-tenía así un trámite que es igual a select todo el trámite.
-
-Si yo le quiero agregar una restricción igual que en México al simple mente pongo tipo Traum iguala
-
-y convencion se usan 2.8 tipo.
-
-Ahora este es un comodín cómo le doy cuerpo a ese comodín.
-
-Muy sencillo le voy a poner Quarry punto z para meter.
-
-Este es el identificador que tipo Tramp es este de aquí y el valor que sea crédito.
-
-Entonces estoy buscando todos los trámites pero donde el tipo de trámite se iguala crédito
-
-son créditos pues es uno que es el Leidi 2 y tiene esta fecha y hora de creación.
-
-Puedes realizar múltiples operaciones varias veces arriba HQ o L como Salute Select etc. Esto no me
-
-voy a entrar mucho debido a que pues si tú ya tienes conocimientos en Maisí cuál va a ser muy sencillo
-
-que Migros a Chicuelo pero en lugar de esto quiero enfocarme en otra técnica que se llama chirria que
 
 **``**
 **``**
 **``**
 **``**
-
-
-## Consultando todos los registros con HQL 04:49
+**``**
+**``**
+**``**
+**``**
 ## Consulta de todos los registros con Criteria 06:34
 ## Consultas personalizadas con Criteria 04:52
 ## Uso de los métodos **`update`** y **`saveOrUpdate`** 09:09
