@@ -1318,13 +1318,87 @@ Con esto ya hemos podido hacer un CRUD con Hibernate.
 
 ## Consultas anidadas con Criteria 07:35
 
+Es momento de ver un poco más a fondo Criteria, esto nos va a servir al momento de hacer las relaciones ***Uno a Uno***, ***Uno a Muchos*** etc. 
+
+Vamos a empezar por crear una clase **`Test3`** donde vamos a realizar nuestros nuevos ejercicios.
+
+### Hacer una consulta de todos los trámites que tengan el texto `Crédito` dentro del tipo de Crédito.
+
+![image](https://user-images.githubusercontent.com/23094588/127828578-fa7ae12e-180e-4a9a-8ad8-4c8e7d02cbda.png)
+
+Si quisieramos realizar esta operación en SQL estaríamos pensando en un **`like`**. Para realizarlo con Criteria se realiza dentro de la clausula **`where`** similar a como haciamos con **`equal`**.
+
+```java
+   . . . 
+   // Construyendo la consulta
+   criteria.select( root )
+           .where(builder.like(root.get(Tramite_.tipoTramite), "Crédito"));
+
+   List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+   System.out.println(tramites.toString());
+   . . .
+```
+
+Al probar la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127829851-61bebb9d-1389-4f0f-a829-3e6b64173fd1.png)
+
+### Más de una condición
+
+Si ademas de que tenga la palabra **`Crédito`** se haya creado antes de una fecha.
+
+```java
+   . . .
+   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+   Date parsedDate = dateFormat.parse("2021-08-01 14:26:25");
+			
+   // Construyendo la consulta
+   criteria.select( root )
+           .where(builder.and(
+                     builder.like(root.get(Tramite_.tipoTramite), "%Crédito%"),
+                     builder.lessThan(root.<Timestamp>get(Tramite_.fhcTramite), new Timestamp(parsedDate.getTime()))
+                     )       		
+            );
+
+   List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+   System.out.println(tramites.toString());
+   . . .   
+```
+
+* Para meter más de una condición usamos **`builder.and(`**
+* Para hacer una comparación menor que usamos **`builder.lessThan(`** 
+* Creamos una fecha de referencia para comparar tipo **`Timestamp`**.
+* Usamos **`root.<Timestamp>get`** para que no infiera el tipo de dato.
+* Observece como meto el dato **`String`** y lo convierto a un **`Timestamp`** para comparar.
+* La fecha comparada no se incluye por que no es menor que, es igual.
+
+Al ejecutar la APP tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/127838342-02a8e078-c779-4780-8192-4c885aea3db4.png)
+
+
+**`buider`** tiene inmensidad de métodos que podemos usar para construir nuestra consulta.
+
+![image](https://user-images.githubusercontent.com/23094588/127838796-563bb18c-35ff-4d43-a967-04b03324c77e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127838868-29781de7-a30d-4d70-b5c3-1bd4e90ce207.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127838957-ed226450-1bea-4185-9cbd-50ae48227d00.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127839118-9be9b1b9-4910-4b83-b571-f91750ffed23.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127839172-fefa7be3-39fe-4e5e-9ecc-eacd091b5372.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127840574-e60bc42e-aa9f-40f0-a9c9-892f365ecefd.png)
+
+## Consultando campos personalizados con Tuple 04:21
+
 **``**
 **``**
 **``**
 **``**
 **``**
 
-## Consultando campos personalizados con Tuple 04:21
 ## Uso de **`@OneToOne`** 09:11
 ## Consulta de registros con clases anotadas con **`@OneToOne`** 04:16
 ## Actualizaciones en clases anotadas con **`@OneToOne`** 06:36
