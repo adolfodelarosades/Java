@@ -1536,7 +1536,182 @@ public class Test4 {
 
 ## Uso de **`@OneToOne`** 09:11
 
+En esta lección vamos a ver cómo usar Hibernate para hacer la relación ***Uno a Uno*** entre dos tablas.
+
+Recordando nuestro diagrama de Modelo de la BD que tenemos es el siguiente:
+
+![image](https://user-images.githubusercontent.com/23094588/127916946-ac664961-426b-47e7-9efb-04ea166e8b76.png)
+
+Vamos a realizar un campo en la tabla **`Avaluo`** en concreto en el campo **`Tramite_idTramite`** actualmente puede ser nulo, pero vamos a marcarlo para que sea no nulo:
+
+![image](https://user-images.githubusercontent.com/23094588/127917165-2087964b-3af3-47f6-b712-99dddd13fdc9.png)
+
+Con este cambio hecho vamos a:
+
+![image](https://user-images.githubusercontent.com/23094588/127917307-619cd6c4-b32a-40aa-a525-3a7c6de57bda.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127917377-bdf60934-60b7-45a5-8630-0c5b4fdd2747.png)
+
+Presionamos **Continue**
+
+![image](https://user-images.githubusercontent.com/23094588/127917424-897b7319-89a3-43ef-a513-c97973886097.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127917458-dd112e25-acc3-4d2c-8df7-666b5641cab3.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127917498-34b659e4-6f8c-4947-b905-393a272d6475.png)
+
+![image](https://user-images.githubusercontent.com/23094588/127917519-2b6cbaf9-554e-43c9-9166-fc145095598c.png)
+
+Con esta acción nuestros datos se han eliminado, solo para tenerlo en cuenta.
+
+![image](https://user-images.githubusercontent.com/23094588/127917657-f69654a5-acd4-45e2-bf7d-6d8e468d7db8.png)
+
+
+### Relaciones Uno a Uno
+
+En Hibernate básicamente hay dos hay dos tipos de relaciones ***Uno a Uno*** una es **unidireccional** y la otra **bidireccional** 
+
+Basados en nuestro ejemplo básicamente lo que esto quiere decir es que el **Avalúo** va a saber a qué **Trámite** corresponde pero
+yo también puedo hacer que el **Trámite** sepa qué **Avalúos** son los que lo contienen. Básicamente es una relación bidireccional que no solo una de las tablas es dueña de la otra o de la relación sino que ambas son conscientes y esto lo hace con anotaciones y con este mapping.
+
+### Crear la Clase Avaluo
+
+en el paquete **`domain`** creamos la clase **`Avaluo`**
+
+```java
+```
+
+![image](https://user-images.githubusercontent.com/23094588/127918749-c8bbe9a4-7dad-469e-ba28-eb67fda2f06f.png)
+
+* La clase tiene dos propiedades principales de acuero a los capos de la tabla **`idAvaluo`** y **`lugarAvaluo`**
+* Anotamos la clase (**`@Entity`** y **`@Table(name = "Avaluo")`**) y el campo ID (**`@Id`** y **`@GeneratedValue(strategy = GenerationType.IDENTITY)`**) con sus anotaciones correspondientes.
+* Para realizar la relación ***Uno a Uno*** dentro de la clase **`Avaluo`** vamos a poner una propiedad de tipo **`Tramite`** y la vamos a anotar con **`@OneToOne`** y vamos a añadir la siguiente anotación para indicar la llave foranea **`@JoinColumn(name = "Tramite_idTramite")`** donde **`"Tramite_idTramite"`** es el nombre de la columna en la tabla **`Avaluo`** de la BD. ESTO HASE QUE SEA UNA RELACIÓN UNIDIRECCIONAL.
+
+
+
+
+Entonces en nuestro paquete Domaine vamos a crear una nueva clase para avalúo
 **``**
+avalúo tiene
+
+tiene una idea de avalúo y tiene un lugar de la evaluó como BSkyB la llave foránea la vamos a hacer
+
+de la siguiente forma.
+
+Bueno antes de esto nosotros tenemos que ir a trámite y vamos a copiar esto ya que el Eiriz se genera
+
+en forma automática.
+
+Estamos haciendo que se Leidi y que se genere en forma automática pero también tenemos que poner Entity
+
+y Tabo para decirle que se trata de una clase que está mapeada a una tarjeta.
+
+Cómo va a ser la relación 1:1 por la parte de avalúo.
+
+Voy a poner un objeto de tipo trámite y le voy a decir a en que esto está en una relación uno a uno
+
+y que la tabla más que la llave foránea se llama tramité y bajo esa debe ser exactamente como está aquí
+
+en la base de datos en nuestro caso es tramité en bajo detrás.
+
+Esto va a ser una relación unidireccional si yo la quiero bidireccional vengo a trámite
+
+y le voy a poner un avalúo y le voy a decir cuánto van
+
+Mapat voy y aquí le voy a poner el atributo que está haciendo posible la relación que en este caso es
+
+trámite.
+
+Esta anotación con este tributo la hace una relación bidireccional.
+
+Entonces tengo mi clase que modela o mapean mi tabla avalúo y tengo del otro lado un atributo valor.
+
+Esto es suficiente para decirle Hibernate lo que está plasmado aquí en nuestro modelo y ahora vamos
+
+a crear los setter y los QE3
+
+y también voy a crear
+
+un constructor con el hogar del avalúo
+
+y también un constructor vació
+
+y claro el método trenca
+
+ahora para la parte de testa que es nuestro cliente producir algo
+
+vamos a hacer lo siguiente Vamos a test antes de irnos a testo.
+
+Quisiera ir a Jeunet configuration y como tengo otra clase que ya está mapeada tengo que ponerla aquí
+
+si no nos va a dar una excepción avalúo cierro esto.
+
+Vamos a ver todo lo que tenemos aquí lo primero que voy a hacer es crear un trámite asociarlo a un avalúo
+
+y hacer que persistan estas dos objetos en mi base de datos hasta el momento mis tablas están vacías
+
+entonces vamos a hacer lo siguiente primero voy a crear un trámite
+
+y vamos a poner crédito rechazado equipará rápido.
+
+Newtype Stamp
+
+ni
+
+entonces lo que voy a hacer es salvar este trámite.
+
+Hasta aquí no hay nada pero ahora voy a crear una Bauluz
+
+este avalúo le voy a asociar el trámite.
+
+Claro que este valor lo vamos a poner una dirección por ejemplo Hidalgo número 200 y ahora salvo el
+
+avalúo.
+
+Entonces que estoy haciendo estoy creando el trámite lo estoy salvando pero ahora cuando ya haya creado
+
+ese trámite se lo asigno lo avalúo y lo saludo y estas líneas son suficientes para salvar estas dos
+
+instancias con el Heydi de esta llave foránea en Giverny.
+
+Vamos a ejecutarlo.
+
+Ok ahora vamos a ver.
+
+He creado el avalúo y como ves tiene la referencia del trámite 1 y el trámite 1 es crédito rechazaste
+
+Qué pasa si ahora yo quisiera ya teniendo un trámite creado añadirle un avalúo vamos a poner otro trámite
+
+por ejemplo pero
+
+proyecto de construcción voy a comentar esto y la voy a guardar
+
+entonces tengo otro trámite proyecto de construcción
+
+entonces ahora lo que voy a hacer es lo siguiente Vamos a comentar esto también
+
+tramitados y en sesión hay un método Lobb que me pide el nombre de la clase
+
+y el Heydi y el Aydin es 2 en este caso entonces aquí yo ya tengo a mi trámite y vamos a crearle un
+
+nuevo avalúo
+
+y en este le vamos a exponer por ejemplo norte. 2 número 500
+
+y le voy a decir avalúo 2 se tramite y le paso el trámite 2 y simplemente le doy sesión .6 avaluados.
+
+Ahora lo que estoy haciendo es cargar un trámite existente en este caso es el hayedos y le voy a crear
+
+este nuevo avalúo y lo voy a hacer.
+
+Entonces vamos a ver que ha creado un nuevo avalúo y asoció el trámite.
+
+2
+
+y así es como vamos a hacer el mapping de 1 a 1 para crear instancias en Jaimanitas en la próxima sesión
+
+vamos a ver cómo hacer consultas con datos que yo voy a meter antes a nuestras tareas hasta la próxima.
+
 **``**
 **``**
 
