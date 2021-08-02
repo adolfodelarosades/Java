@@ -1391,85 +1391,155 @@ Al ejecutar la APP tenemos:
 
 ![image](https://user-images.githubusercontent.com/23094588/127840574-e60bc42e-aa9f-40f0-a9c9-892f365ecefd.png)
 
-## Consultando campos personalizados con Tuple 04:21
-
-**``**
-**``**
+## Consultando campos personalizados con `Tuple` 04:21
 
 Qué tal si no queremos consultar un trámite entero, si no queremos obtener algunos de los campos de una consulta. Hibernate nos facilita esto mediante una clase que se llama **Tuple**.
 
 Vamos a crear la clase **`Test4`** para probar esto.
 
-Entonces lo que tenemos que hacer es lo siguiente Voy a modificar Kechiche Kairi pero aquí le voy a
+Entonces lo que tenemos que hacer es lo siguiente:
 
-poner Txopo o tupla aquí también.
+```java
+CriteriaQuery<Tramite> criteria = builder.createQuery( Tramite.class );
+```
 
-Y esta clase es ex persistence no lo voy a tomar y aquí no lo voy a poner Selectah le voy a poner un
+por
 
-multi Selectah y multi Select lo que va a hacer es hacer una consulta pero no me va a retornar objetos
+```java
+CriteriaQuery<Tramite> criteria = builder.createQuery( Tramite.class );
+```
 
-de tipo trámite si no me va a tomar objetos de tipo tupla donde yo adentro de este tupla puedo hacer
+Además vamos a cambiar el **`criteria.select`** por **`criteria.multiselect`** la cual ya no retorna objetos **`Tramite`** sino que va a retornar objetos **`Tuple`** del paquete **`javax.persistence.Tuple`** . Tenemos que crear los campos que queremos que nos localice mediante la clase **`Path`** del paquete **`javax.persistence.criteria.Path`** 
 
-las operaciones con estos elementos es cierto que si yo consulto los objetos tipo tramité adentro tendría
+```java
+   . . .
+   Path<Integer> idTramitePath = root.get(Tramite_.idTramite);
+   Path<Timestamp> fhcTramitePath = root.get(Tramite_.fhcTramite);
+   . . .
+```
 
-converters y Icetex pero creo que esto es una mejora interesante Giverny claro que sólo se usaría en
+Estos dos campos se los vamos a pasar al **`criteria.multiselect`** para indicar que quiero consultar estos dos campos:
 
-ciertos escenarios entonces me pareció interesante hacer una clase al respecto.
+```java
+   . . .
+   // Construyendo la consulta
+   criteria.multiselect( idTramitePath,  fhcTramitePath)
+               .where(builder.and(
+                         builder.like(root.get(Tramite_.tipoTramite), "%Crédito%"),
+                         builder.lessThan(root.<Timestamp>get(Tramite_.fhcTramite), new Timestamp(parsedDate.getTime()))
+                         )       		
+                     );
+   . . .
+```
 
-Lo que voy a hacer ahora es crear un paz y la voy a poner el tipo de dato en este caso yo quiero el
+Vamos a usar las mismas restriciones o condiciones. Debemos cambiar:
 
-Heydi entonces le voy a poner paz y robot Toret y como ya sabes aquí ya tengo una pings que me apunta
+```java
+   . . .
+   List<Tramite> tramites = session.createQuery( criteria ).getResultList();
+   System.out.println(tramites.toString());
+   . . .   
+```
 
-al string que denota este campo.
+por 
 
-También vamos a tener
+```java
+   . . .
+   List<Tuple> tuples = session.createQuery( criteria ).getResultList();
+   for(Tuple tuple : tuples) {
+      System.out.println("tupla: " + tuple.get(idTramitePath) + ", " + tuple.get(fhcTramitePath));
+   }
+   . . .			
+```
 
-entonces aquí vamos a poner el tema Stamp fecha de creación del trámite y aquí fecha y hora de creación.
+El código completo de **`Test4`** es:
 
-Estos son los campos que yo voy a pasarle ahora a este multi selecto.
+```java
+package com.javaocio.test;
 
-Te voy a decir Quiero retornar hoy hay trampas y fecha de caso en trámite paz.
+import java.sql.Timestamp;
+import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-Voy a consultar estos dos campos con estas restricciones.
+import javax.persistence.Tuple;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
 
-Ahora la lista no va a ser de trámites sino va a ser una lista de tuplas y lo que yo pueda hacer para
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-encontrar estos campos es un Fortich
+import com.javaocio.domain.Tramite;
+import com.javaocio.domain.Tramite_;
+import com.javaocio.util.HibernateUtil;
 
-todas las tuplas
+public class Test4 {
 
-y entonces lo que yo voy a tener es lo siguiente para imprimir solo agarro y digo tupla punto y aquí
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         //USO DE CRITERIA
+         // Definir la Fábrica para las piezas individuales del criterio
+         CriteriaBuilder builder = session.getCriteriaBuilder();
+         CriteriaQuery<Tuple> criteria = builder.createQuery( Tuple.class );
 
-lo puedo obtener por índice o por el alias y el alias es o no es otro que el Paz entonces vamos a poner
+         // Definir el tipo de entidad que retorna la consulta
+         Root<Tramite> root = criteria.from( Tramite.class );
+	
+	 // Crea campos a consultar
+         Path<Integer> idTramitePath = root.get(Tramite_.idTramite);
+         Path<Timestamp> fhcTramitePath = root.get(Tramite_.fhcTramite);
+				
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+         Date parsedDate = dateFormat.parse("2021-08-01 14:26:25");
+			
+         // Construyendo la consulta
+         criteria.multiselect( idTramitePath,  fhcTramitePath)
+                 .where(builder.and(
+                           builder.like(root.get(Tramite_.tipoTramite), "%Crédito%"),
+                           builder.lessThan(root.<Timestamp>get(Tramite_.fhcTramite), new Timestamp(parsedDate.getTime()))
+                           )       		
+                       );
 
-punto RET
+         List<Tuple> tuples = session.createQuery( criteria ).getResultList();
+         for(Tuple tuple : tuples) {
+            System.out.println("tupla: " + tuple.get(idTramitePath) + ", " + tuple.get(fhcTramitePath));
+         }
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+ 
+ Si ejecutamos la APP tenemos:
+ 
+![image](https://user-images.githubusercontent.com/23094588/127915741-a5927c1e-0d25-4a4e-a165-16cb2fc0458a.png)
 
-y aquí lo vamos a poner
-
-tupla y entonces esto me debe dar
-
-debe dar 5 y este valor y también el 7 y este valor vamos a realizar la consulta.
-
-Tengo los objetos gracias a la clase de con esto cerramos lo básico en regiría pero vamos a seguir luchando
-
-durante todo este curso.
-
-Para ahora realizar las asociaciones uno a uno uno a muchos y muchos a muchos dentro de nuestras tablas
-
-enMéxico.
-
-Recuerda que cualquier comentario puedes contactarme a través de esta plataforma en Avram arroba nóbeles
-
-puntocom o puedes visitar directamente nóbeles hasta la próxima.
-
-
-
-
-**``**
-**``**
-**``**
+![image](https://user-images.githubusercontent.com/23094588/127916021-64abb980-834a-40c9-b17f-9068d231d3bf.png)
 
 ## Uso de **`@OneToOne`** 09:11
+
+**``**
+**``**
+**``**
+
 ## Consulta de registros con clases anotadas con **`@OneToOne`** 04:16
 ## Actualizaciones en clases anotadas con **`@OneToOne`** 06:36
 ## Actualización de la Base de Datos a V2 01:51
