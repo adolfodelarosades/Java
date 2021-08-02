@@ -1395,6 +1395,76 @@ Al ejecutar la APP tenemos:
 
 **``**
 **``**
+
+Qué tal si no queremos consultar un trámite entero, si no queremos obtener algunos de los campos de una consulta. Hibernate nos facilita esto mediante una clase que se llama **Tuple**.
+
+Vamos a crear la clase **`Test4`** para probar esto.
+
+Entonces lo que tenemos que hacer es lo siguiente Voy a modificar Kechiche Kairi pero aquí le voy a
+
+poner Txopo o tupla aquí también.
+
+Y esta clase es ex persistence no lo voy a tomar y aquí no lo voy a poner Selectah le voy a poner un
+
+multi Selectah y multi Select lo que va a hacer es hacer una consulta pero no me va a retornar objetos
+
+de tipo trámite si no me va a tomar objetos de tipo tupla donde yo adentro de este tupla puedo hacer
+
+las operaciones con estos elementos es cierto que si yo consulto los objetos tipo tramité adentro tendría
+
+converters y Icetex pero creo que esto es una mejora interesante Giverny claro que sólo se usaría en
+
+ciertos escenarios entonces me pareció interesante hacer una clase al respecto.
+
+Lo que voy a hacer ahora es crear un paz y la voy a poner el tipo de dato en este caso yo quiero el
+
+Heydi entonces le voy a poner paz y robot Toret y como ya sabes aquí ya tengo una pings que me apunta
+
+al string que denota este campo.
+
+También vamos a tener
+
+entonces aquí vamos a poner el tema Stamp fecha de creación del trámite y aquí fecha y hora de creación.
+
+Estos son los campos que yo voy a pasarle ahora a este multi selecto.
+
+Te voy a decir Quiero retornar hoy hay trampas y fecha de caso en trámite paz.
+
+Voy a consultar estos dos campos con estas restricciones.
+
+Ahora la lista no va a ser de trámites sino va a ser una lista de tuplas y lo que yo pueda hacer para
+
+encontrar estos campos es un Fortich
+
+todas las tuplas
+
+y entonces lo que yo voy a tener es lo siguiente para imprimir solo agarro y digo tupla punto y aquí
+
+lo puedo obtener por índice o por el alias y el alias es o no es otro que el Paz entonces vamos a poner
+
+punto RET
+
+y aquí lo vamos a poner
+
+tupla y entonces esto me debe dar
+
+debe dar 5 y este valor y también el 7 y este valor vamos a realizar la consulta.
+
+Tengo los objetos gracias a la clase de con esto cerramos lo básico en regiría pero vamos a seguir luchando
+
+durante todo este curso.
+
+Para ahora realizar las asociaciones uno a uno uno a muchos y muchos a muchos dentro de nuestras tablas
+
+enMéxico.
+
+Recuerda que cualquier comentario puedes contactarme a través de esta plataforma en Avram arroba nóbeles
+
+puntocom o puedes visitar directamente nóbeles hasta la próxima.
+
+
+
+
 **``**
 **``**
 **``**
