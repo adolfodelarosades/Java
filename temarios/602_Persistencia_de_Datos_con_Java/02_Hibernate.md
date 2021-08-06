@@ -1576,69 +1576,98 @@ yo también puedo hacer que el **Trámite** sepa qué **Avalúos** son los que l
 
 ### Crear la Clase Avaluo
 
-en el paquete **`domain`** creamos la clase **`Avaluo`**
+En el paquete **`domain`** creamos la clase **`Avaluo`**
 
 ```java
+package com.javaocio.domain;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Avaluo")
+public class Avaluo {
+	
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
+   private int idAvaluo;
+   private String lugarAvaluo;
+	
+   @OneToOne
+   @JoinColumn(name = "Tramite_idTramite")
+   private Tramite tramite;
+
+   public Avaluo() {
+	
+   }
+
+   public Avaluo(String lugarAvaluo) {
+      this.lugarAvaluo = lugarAvaluo;
+   }
+
+   public int getIdAvaluo() {
+      return idAvaluo;
+   }
+
+   public void setIdAvaluo(int idAvaluo) {
+      this.idAvaluo = idAvaluo;
+   }
+
+   public String getLugarAvaluo() {
+      return lugarAvaluo;
+   }
+
+   public void setLugarAvaluo(String lugarAvaluo) {
+      this.lugarAvaluo = lugarAvaluo;
+   }
+
+   public Tramite getTramite() {
+      return tramite;
+   }
+
+   public void setTramite(Tramite tramite) {
+      this.tramite = tramite;
+   }
+
+   @Override
+   public String toString() {
+      return "Avaluo [idAvaluo=" + idAvaluo + ", lugarAvaluo=" + lugarAvaluo + ", tramite=" + tramite + "]";
+   }
+	
+}
 ```
 
 ![image](https://user-images.githubusercontent.com/23094588/127918749-c8bbe9a4-7dad-469e-ba28-eb67fda2f06f.png)
 
 * La clase tiene dos propiedades principales de acuero a los capos de la tabla **`idAvaluo`** y **`lugarAvaluo`**
 * Anotamos la clase (**`@Entity`** y **`@Table(name = "Avaluo")`**) y el campo ID (**`@Id`** y **`@GeneratedValue(strategy = GenerationType.IDENTITY)`**) con sus anotaciones correspondientes.
-* Para realizar la relación ***Uno a Uno*** dentro de la clase **`Avaluo`** vamos a poner una propiedad de tipo **`Tramite`** y la vamos a anotar con **`@OneToOne`** y vamos a añadir la siguiente anotación para indicar la llave foranea **`@JoinColumn(name = "Tramite_idTramite")`** donde **`"Tramite_idTramite"`** es el nombre de la columna en la tabla **`Avaluo`** de la BD. ESTO HASE QUE SEA UNA RELACIÓN UNIDIRECCIONAL.
+* Para realizar la relación ***Uno a Uno*** dentro de la clase **`Avaluo`** vamos a poner una propiedad de tipo **`Tramite`** y la vamos a anotar con **`@OneToOne`** y vamos a añadir la siguiente anotación para indicar la llave foranea **`@JoinColumn(name = "Tramite_idTramite")`** donde **`"Tramite_idTramite"`** es el nombre de la columna en la tabla **`Avaluo`** de la BD. **ESTO HACE QUE SEA UNA RELACIÓN UNIDIRECCIONAL**.
+* Crear un Constructor vacio.
+* Crear un Constructor con el lugar del Avalúo
+* Crear Setters y Getter
+* Crear método **`toString`**
 
+Para hacer la **RELACIÓN BIDIRECCIONAL** vamos a la Entidad **`Tramite`** y vamos añadir la siguiente propiedad:
 
+```java
+   . . .
+   @OneToOne(mappedBy = "tramite")
+   private Avaluo avaluo;
+   . . .
+```
 
+* Añado una propiedad del tipo de la Entidad, es decir **`Avaluo`** y la anoto con **`@OneToOne(mappedBy = "tramite")`** donde **`tramite`** es el atributo de la entidad **`Avaluo`** que esta sirviendo como relación.
 
-Entonces en nuestro paquete Domaine vamos a crear una nueva clase para avalúo
-**``**
-avalúo tiene
+Con esto ya tenemos una **RELACIÓN BIDIRECCIONAL**.
 
-tiene una idea de avalúo y tiene un lugar de la evaluó como BSkyB la llave foránea la vamos a hacer
+AQUIIIIIIIIIIIIII
 
-de la siguiente forma.
-
-Bueno antes de esto nosotros tenemos que ir a trámite y vamos a copiar esto ya que el Eiriz se genera
-
-en forma automática.
-
-Estamos haciendo que se Leidi y que se genere en forma automática pero también tenemos que poner Entity
-
-y Tabo para decirle que se trata de una clase que está mapeada a una tarjeta.
-
-Cómo va a ser la relación 1:1 por la parte de avalúo.
-
-Voy a poner un objeto de tipo trámite y le voy a decir a en que esto está en una relación uno a uno
-
-y que la tabla más que la llave foránea se llama tramité y bajo esa debe ser exactamente como está aquí
-
-en la base de datos en nuestro caso es tramité en bajo detrás.
-
-Esto va a ser una relación unidireccional si yo la quiero bidireccional vengo a trámite
-
-y le voy a poner un avalúo y le voy a decir cuánto van
-
-Mapat voy y aquí le voy a poner el atributo que está haciendo posible la relación que en este caso es
-
-trámite.
-
-Esta anotación con este tributo la hace una relación bidireccional.
-
-Entonces tengo mi clase que modela o mapean mi tabla avalúo y tengo del otro lado un atributo valor.
-
-Esto es suficiente para decirle Hibernate lo que está plasmado aquí en nuestro modelo y ahora vamos
-
-a crear los setter y los QE3
-
-y también voy a crear
-
-un constructor con el hogar del avalúo
-
-y también un constructor vació
-
-y claro el método trenca
-
-ahora para la parte de testa que es nuestro cliente producir algo
 
 vamos a hacer lo siguiente Vamos a test antes de irnos a testo.
 
