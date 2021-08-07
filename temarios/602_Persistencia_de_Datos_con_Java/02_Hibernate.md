@@ -1681,7 +1681,50 @@ Añadir en el archivo **`hibernate.cfg.xml`** la siguiente línea:
 Vamos crear un **`Tramite`** asociarlo a un **`Avaluo`** y hacer que persistan esos dos objetos en la BD.
 
 ```java
+package com.javaocio.test;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.Avaluo;
+import com.javaocio.domain.Tramite;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToOne {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         // Crear y persistir Trámite
+         Tramite tramite = new Tramite("Crédito rechazado", new Timestamp(new Date().getTime()) );
+         session.save(tramite);
+			
+         // Crear Avalúo, asignar Trámite y persistir Avalúo
+         Avaluo avaluo = new Avaluo("Hidalgo #102");
+         avaluo.setTramite(tramite);
+         session.save(avaluo);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
 ```
 
 ### Ejecutar la APP
@@ -1721,95 +1764,155 @@ Primero creamos el Trámite.
 
 ### Vamos a crear un Avalúo y asignarle el Trámite cargado.
 
+```java
+package com.javaocio.test;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import com.javaocio.domain.Avaluo;
+import com.javaocio.domain.Tramite;
+import com.javaocio.util.HibernateUtil;
 
+public class TestOneToOne2 {
 
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         // Crear y persistir Trámite
+//       Tramite tramite = new Tramite("Proyecto de Construcción", new Timestamp(new Date().getTime()) );
+//       session.save(tramite);
+			
+         // Cargo un trámite ya existente
+         Tramite tramite2 = session.load(Tramite.class, 2);
+			
+         // Crear Avalúo, asignar Trámite y persistir Avalúo
+         Avaluo avaluo2 = new Avaluo("Norte 2 #500");
+         avaluo2.setTramite(tramite2);
+         session.save(avaluo2);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
 
+### Ejecutar la APP
 
+![image](https://user-images.githubusercontent.com/23094588/128594227-623a2808-034c-4e12-8fb5-6686d75b28f6.png)
 
+### Ver la BD
 
+![image](https://user-images.githubusercontent.com/23094588/128594239-87927abc-72e2-49a4-ae45-bcc7fc98767c.png)
 
-AQUIIIIIIIIIIIIII
+### GIT
 
+![image](https://user-images.githubusercontent.com/23094588/128594432-dcdf605c-10cb-4481-8f14-ae68d401de39.png)
 
-vamos a hacer lo siguiente Vamos a test antes de irnos a testo.
+![image](https://user-images.githubusercontent.com/23094588/128594450-e3692b80-794b-4a5b-ab67-f7e5b28e50ca.png)
 
-Quisiera ir a Jeunet configuration y como tengo otra clase que ya está mapeada tengo que ponerla aquí
-
-si no nos va a dar una excepción avalúo cierro esto.
-
-Vamos a ver todo lo que tenemos aquí lo primero que voy a hacer es crear un trámite asociarlo a un avalúo
-
-y hacer que persistan estas dos objetos en mi base de datos hasta el momento mis tablas están vacías
-
-entonces vamos a hacer lo siguiente primero voy a crear un trámite
-
-y vamos a poner crédito rechazado equipará rápido.
-
-Newtype Stamp
-
-ni
-
-entonces lo que voy a hacer es salvar este trámite.
-
-Hasta aquí no hay nada pero ahora voy a crear una Bauluz
-
-este avalúo le voy a asociar el trámite.
-
-Claro que este valor lo vamos a poner una dirección por ejemplo Hidalgo número 200 y ahora salvo el
-
-avalúo.
-
-Entonces que estoy haciendo estoy creando el trámite lo estoy salvando pero ahora cuando ya haya creado
-
-ese trámite se lo asigno lo avalúo y lo saludo y estas líneas son suficientes para salvar estas dos
-
-instancias con el Heydi de esta llave foránea en Giverny.
-
-Vamos a ejecutarlo.
-
-Ok ahora vamos a ver.
-
-He creado el avalúo y como ves tiene la referencia del trámite 1 y el trámite 1 es crédito rechazaste
-
-Qué pasa si ahora yo quisiera ya teniendo un trámite creado añadirle un avalúo vamos a poner otro trámite
-
-por ejemplo pero
-
-proyecto de construcción voy a comentar esto y la voy a guardar
-
-entonces tengo otro trámite proyecto de construcción
-
-entonces ahora lo que voy a hacer es lo siguiente Vamos a comentar esto también
-
-tramitados y en sesión hay un método Lobb que me pide el nombre de la clase
-
-y el Heydi y el Aydin es 2 en este caso entonces aquí yo ya tengo a mi trámite y vamos a crearle un
-
-nuevo avalúo
-
-y en este le vamos a exponer por ejemplo norte. 2 número 500
-
-y le voy a decir avalúo 2 se tramite y le paso el trámite 2 y simplemente le doy sesión .6 avaluados.
-
-Ahora lo que estoy haciendo es cargar un trámite existente en este caso es el hayedos y le voy a crear
-
-este nuevo avalúo y lo voy a hacer.
-
-Entonces vamos a ver que ha creado un nuevo avalúo y asoció el trámite.
-
-2
-
-y así es como vamos a hacer el mapping de 1 a 1 para crear instancias en Jaimanitas en la próxima sesión
-
-vamos a ver cómo hacer consultas con datos que yo voy a meter antes a nuestras tareas hasta la próxima.
-
-**``**
-**``**
 
 ## Consulta de registros con clases anotadas con **`@OneToOne`** 04:16
+
+Vamos a realizar otro ejercicio en **`TestOneToOne3`** donde vamos a consultar el Trámite de un Avalúo, ¿Qué es lo que tenemos que hacer? 
+
+* Recuperar el Avalúo deseadp
+* Obtener el Trámite de ese avaluo
+* Mostrarlo en la consola
+
+El código sería el siguiente:
+
+```java
+package com.javaocio.test;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.Avaluo;
+import com.javaocio.domain.Tramite;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToOne3 {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         // Consulta del trámite de un avalúo
+         Avaluo avaluo = session.load(Avaluo.class, 2);
+         Tramite tramite = avaluo.getTramite();
+         System.out.println("Trámite del Avalúo 2: " + tramite);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+
+### Ejecución de la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128594970-a9d0ffa0-1429-415e-b45e-14c42cf28eee.png)
+
+### Segunda Consulta con Criteria
+
+Ahora vamos a añadir otra consulta, vamos a recuperar todos los trámites que existen en todos los Avalúos.
+
+```java
+   . . .
+   // Consulta de todos los trámites que aparecen en los avalúos
+   CriteriaBuilder builder = session.getCriteriaBuilder();
+   CriteriaQuery<Avaluo> criteria = builder.createQuery( Avaluo.class );
+   Root<Avaluo> root = criteria.from( Avaluo.class );
+   criteria.select( root );
+
+   List<Avaluo> avaluos = session.createQuery( criteria ).getResultList();
+   System.out.println("Todos los trámites contenidos en avalúos...");
+   for(Avaluo avaluo2: avaluos) {
+      System.out.println(avaluo2.getTramite());
+   }
+```
+
+### Ejecución de la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128595451-a74aa72a-8c38-43d8-8597-74d39d894149.png)
+
+### GIT
+
+![image](https://user-images.githubusercontent.com/23094588/128595486-218f9a7c-135d-4155-a3b6-8858d261c95f.png)
+
 ## Actualizaciones en clases anotadas con **`@OneToOne`** 06:36
+
+**``**
+**``**
+
+
 ## Actualización de la Base de Datos a V2 01:51
 ## Uso **`@OneToMany`** y **`@ManyToOne`** 10:13
 ## Creación de consultas para clases anotadas con **`@OneToMany`** 08:06
