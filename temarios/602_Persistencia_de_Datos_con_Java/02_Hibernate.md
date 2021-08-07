@@ -1909,11 +1909,198 @@ Ahora vamos a añadir otra consulta, vamos a recuperar todos los trámites que e
 
 ## Actualizaciones en clases anotadas con **`@OneToOne`** 06:36
 
-**``**
-**``**
+En esta lección vamos a hacer algunas operaciones en cascada y algunas actualizaciones con nuestras tablas que tenemos mapeados o asociadas en una relación ***Uno a Uno***.
 
+Recordemos lo que tenemos en BD.
+
+![image](https://user-images.githubusercontent.com/23094588/128595615-c134b4e1-5383-46c6-8d27-ca54bdc356a2.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128595627-66b8a1d4-4e9c-4f03-a496-73da29a9412d.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128595635-4af17890-3e55-4d95-ac95-9e00bdfa935a.png)
+
+Tenemos dos Trámites y dos Avalúos cada uno con su Trámite asociado.
+
+### Modificar un Avalúo
+
+Lo primero que vamos a hacer como ejemplo **`TestOneToOne4`** es modificar la dirección de un Avalúo. 
+
+```java
+package com.javaocio.test;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.Avaluo;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToOne4 {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         // Actualizar un avalúo
+         Avaluo avaluo = session.load(Avaluo.class, 2);
+         avaluo.setLugarAvaluo("Paseo de Reforma 255");
+         session.update(avaluo);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+
+### Ejecutar APP
+
+![image](https://user-images.githubusercontent.com/23094588/128596171-51e2aa38-f993-4d30-bc33-b0c1e00a4f85.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128596177-dd3b8549-71df-49d2-bb43-4cf9ac641e95.png)
+
+### Eliminar un Avalúo
+
+Lo que vamos a hacer ahora es eliminar el Avalúo 2. Otra operación del CRUD que ya habíamos visto, pero ahora lo estamos haciendo sobre Entidadas anotadas con **`@OneToOne`**.
+
+```java
+   . . .
+   Avaluo avaluo = session.load(Avaluo.class, 2);
+   session.delete(avaluo);
+   . . .
+```
+
+### Ejecutando la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128596307-b041ab05-325a-4cbf-9ea8-a9e094f1b2e4.png)
+
+### Revisando la BD
+
+![image](https://user-images.githubusercontent.com/23094588/128596315-a4c9dbf8-6105-4b20-aa6f-2b4e43a79e39.png)
+
+Ya no tenemos el Avalúo 2.
+
+Si revisamos los Trámites seguimos teniendo los dos que teniamos.
+
+![image](https://user-images.githubusercontent.com/23094588/128596333-ec46a53d-338a-4d10-a789-2ac1ad8881f7.png)
+
+
+## Eliminación en Cascada.
+
+Vamos a pensar que lo que queremos hacer es que cuando yo elimine un Trámite al mismo tiempo elimine su Avalúo asociado por ser una relación ***Uno a Uno***.
+
+### Añadir la Eliminación de Cascada a `Tramite`.
+
+Vamos a la Entidad **`Tramite`** y tenemos que añadir al código:
+
+```java
+   . . .
+   @OneToOne(mappedBy = "tramite")
+   private Avaluo avaluo;
+   . . .
+```
+
+Lo siguiente
+
+```java
+   . . .
+   @OneToOne(mappedBy = "tramite", cascade = CascadeType.REMOVE)
+   private Avaluo avaluo;
+   . . .
+```
+
+### Clase Test `TestOneToOne5`
+
+En la clase **`TestOneToOne5`** vamos a meter el siguiente código para eliminar un Trámite. Recordemos lo que tenemos en la BD:
+
+![image](https://user-images.githubusercontent.com/23094588/128596554-3be886b5-978b-4bfa-996a-3d824cdba7a7.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128596563-32ba3354-6b59-4653-a372-a706bb372a5c.png)
+
+Tenemos el Avalúo 1 asociado al Trámite 1, por lo que eliminaremos el Trámite 1 y con lo que realizamos anteriormente se eliminara tabién el Avalúo 1.
+
+El código es el siguiente:
+
+```java
+package com.javaocio.test;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.Tramite;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToOne5 {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         // Eliminar un Trámite y en cascada elimina el Avalúo correspondiente 
+         Tramite tramite = session.load(Tramite.class, 1);
+         session.delete(tramite);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+
+### Ejecutar la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128596912-96dc6868-164b-475f-829a-9c3aea2f964e.png)
+
+Hibernate a realizado dos **`deletes`** uno para Avalúo y otro para Trámite, lo que esperabamos.
+
+### Viendo la BD
+
+Si revizamos la BD tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/128596968-a7c10fb9-09de-40b2-a51c-5df02dc888cd.png)
+
+
+En Trámites se ha eliminado el Trámite 1.
+
+![image](https://user-images.githubusercontent.com/23094588/128596976-6753a683-47c2-439e-bc65-1d00a3a8533a.png)
+
+En Avalúos se ha eliminado el Avalúo 1 que era el asociado con el Trámite 1 y al aplicar la eliminación en Cascada se elimina automáticamente.
+
+### GIT
+
+![image](https://user-images.githubusercontent.com/23094588/128597043-a2747bfc-3e62-485e-a3c5-da7ca630d80c.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128597047-21a5ab22-08c1-43e3-a395-11427f297c9b.png)
 
 ## Actualización de la Base de Datos a V2 01:51
+
+**``**
+**``**
+
+
 ## Uso **`@OneToMany`** y **`@ManyToOne`** 10:13
 ## Creación de consultas para clases anotadas con **`@OneToMany`** 08:06
 ## Actualización de la B.D. a la V3 03:13
