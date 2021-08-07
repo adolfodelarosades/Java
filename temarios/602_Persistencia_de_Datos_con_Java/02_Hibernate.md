@@ -2166,12 +2166,329 @@ Vamos a generar la BD con esta nueva tabla y relación, damos en ***Database / F
 
 ## Uso **`@OneToMany`** y **`@ManyToOne`** 10:13
 
-**``**
-**``**
+### Crear la clase (Entidad) **`DiarioCliente`**
 
+Vamos a crear en el paquete **`com.javaocio.domain`** la nueva clase para mapear la nueva tabla **`DiarioCliente`** que llamaremos **`DiarioCliente`**.
+
+```java
+package com.javaocio.domain;
+
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "DiarioCliente")
+public class DiarioCliente {
+
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int idDiario;
+	
+   private String entradaDiario;
+   private Timestamp fhcDiario;
+	
+   @ManyToOne
+   @JoinColumn(name = "Tramite_idTramite")
+   private Tramite tramite;
+
+   public DiarioCliente() {
+
+   }
+
+   public DiarioCliente(String entradaDiario, Timestamp fhcDiario) {
+      this.entradaDiario = entradaDiario;
+      this.fhcDiario = fhcDiario;
+   }
+
+   public int getIdDiario() {
+      return idDiario;
+   }
+
+   public void setIdDiario(int idDiario) {
+      this.idDiario = idDiario;
+   }
+
+   public String getEntradaDiario() {
+      return entradaDiario;
+   }
+
+   public void setEntradaDiario(String entradaDiario) {
+      this.entradaDiario = entradaDiario;
+   }
+
+   public Timestamp getFhcDiario() {
+      return fhcDiario;
+   }
+
+   public void setFhcDiario(Timestamp fhcDiario) {
+      this.fhcDiario = fhcDiario;
+   }
+
+   public Tramite getTramite() {
+      return tramite;
+   }
+
+   public void setTramite(Tramite tramite) {
+      this.tramite = tramite;
+   }
+
+   @Override
+   public String toString() {
+      return "DiarioCliente [idDiario=" + idDiario + ", entradaDiario=" + entradaDiario + ", fhcDiario=" + fhcDiario
+				+ ", tramite=" + tramite + "]";
+   }
+	
+}
+```
+
+* Anotamos a la clase con las anotaciones **`@Entity`** y **`@Table(name = "DiarioCliente")`**
+* Contiene las propiedades **`idDiario`**, **`entradaDiario`** y **`fhcDiario`**
+* Anotamos la propiedad **`idDiario`** con **``** y **``** para indicar que es el ID y se genera automaticamente.
+* Añadimos la propiedad **`tramite`** para crear la relación ***Uno a Muchos*** con la tabla **`Tramite`**, la anotamos con **`@ManyToOne`** para indicar que en esta Entidad esta el lado ***Muchos*** de la relación y también la anotamos con **`@JoinColumn(name="Tramite_idTramite"`** para indicar la llave foranea que en este caso es **`Tramite_idTramite`** 
+* Generamos Construtor vacío
+* Generamos Constructor para **`entradaDiario`** y **`fhcDiario`**
+* Generamos los Getters y Setters para todas las propiedades
+* Generar método **`toString`**
+
+### Modificar `Tramite` para indicar la relación *Uno a Muchos*
+
+Modificamos la clase **`Tramite`** añadiendo la siguiente propiedad:
+
+```java
+   . . .
+   @OneToMany(mappedBy ="tramite")
+   private Set<DiarioCliente> diarioClienteSet;
+   . . .
+```
+
+* Añadimos una nueva propiedad **`diarioClienteSet`** la cual es un conjuto de objetos **`DiarioCliente`**
+* Anotamos a la propiedad con **`@OneToMany(mappedBy ="tramite")`** para indicar que en la tabla **`Tramite`** tenemos el lado ***Uno*** de la relación como lo indica nuestro Modelo de Datos.
+* ¿Tengo que crear su Getter y Setter y modificar el toString?
+![image](https://user-images.githubusercontent.com/23094588/128605181-c9f6a7bc-76de-44bb-8b07-ebf4f2827e9c.png)
+
+Con ambas anotaciones **`@OneToMany(mappedBy ="tramite")`** y **`@ManyToOne @JoinColumn(name = "Tramite_idTramite")`** logramos hacer el Mapping de las Tablas y tenemos una **RELACIÓN BIDIRECCIONAL**.
+
+### Añadir la nueva Entidad **`DiarioCliente`** en **`hibernate.cfg.xml`**
+
+Vamos a añadir la nueva Entidad en **`hibernate.cfg.xml`** añadiendo la siguiente línea de código:
+
+```xml
+   . . .
+   <mapping class="com.javaocio.domain.DiarioCliente" />
+   . . .
+```
+
+### Clase de Prueba `TestOneToMany` para probar la Relación Uno A Mucho 
+
+* Vamos a crear 2 Trámites y los persistimos
+* Creamos 3 Diarios del Cliente
+* A cada Diario del Cliente le asignamos un Trámite (habra dos Diarios de Cliente con el mismo Trámite)
+
+```java
+package com.javaocio.test;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.DiarioCliente;
+import com.javaocio.domain.Tramite;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToMany {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         Timestamp time = new Timestamp(new Date().getTime());
+			
+         // Crear 2 Trámites y persistirlos 
+         Tramite tramite1 = new Tramite("Ampliación 1", time);
+         Tramite tramite2 = new Tramite("Ampliación 2", time);
+         session.save(tramite1);
+         session.save(tramite2);
+			
+         // Crear 3 DiariosCliete, asignarle Trámites y persistirlos
+         DiarioCliente diarioCliente1 = new DiarioCliente("Entrada 1", time);
+         DiarioCliente diarioCliente2 = new DiarioCliente("Entrada 2", time);
+         DiarioCliente diarioCliente3 = new DiarioCliente("Entrada 3", time);
+			
+         diarioCliente1.setTramite(tramite1);
+         diarioCliente2.setTramite(tramite1);
+         diarioCliente3.setTramite(tramite2);
+			
+         session.save(diarioCliente1);
+         session.save(diarioCliente2);
+         session.save(diarioCliente3);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+
+### Ejecutar la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128606209-99a41c89-4e72-4c4e-af33-e96bc522f8e0.png)
+
+Ha hecho una serie de **`inserts`**
+
+### Ver la BD
+
+![image](https://user-images.githubusercontent.com/23094588/128606241-289107d1-378c-4bd0-96fc-3051034c56ac.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128606256-ba2b7654-c30f-44c5-9194-6c3c26e25647.png)
+
+Con esto estamos asociando a un mismo Trámite varios Diarios de Cliente.
+
+### Segundo Ejemplo `TestOneToMany2`
+
+Si yo ya tengo un Trámite y le quiero asignar un nuevo Diario.
+
+```java
+package com.javaocio.test;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.DiarioCliente;
+import com.javaocio.domain.Tramite;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToMany2 {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         Timestamp time = new Timestamp(new Date().getTime());
+			
+         // Recuperamos Trámite 
+         Tramite tramite = session.load(Tramite.class, 2);
+			
+         // Crear nuevo DiariosCliete, asignarle Trámite y persistirlos
+         DiarioCliente diarioCliente = new DiarioCliente("Entrada 4", time);
+         diarioCliente.setTramite(tramite);
+         session.save(diarioCliente);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+
+### Probar APP
+
+![image](https://user-images.githubusercontent.com/23094588/128606570-49d852ad-85d0-41e9-8708-126f464b7523.png)
+
+### Ver BD
+
+![image](https://user-images.githubusercontent.com/23094588/128606582-b625d45d-2531-4e1e-a3d0-ae354b18ebef.png)
+
+Se añadio un nuevo Diario de Cliente con un Trámie ya existente.
+
+### GIT
+
+![image](https://user-images.githubusercontent.com/23094588/128606718-27ae33d2-5a97-4a5a-b5e4-130600510e65.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128606752-65840b3d-64c2-4d68-be58-a72e7379bceb.png)
 
 ## Creación de consultas para clases anotadas con **`@OneToMany`** 08:06
+
+En esta lección vamos a realizar algunas consultas en nuestra tabla de trámites y diariamente me tomé la libertad de poner un nuevo trámite.
+
+Esto con el fin de que veas que las consultas realmente están funcionando y en Diario de cliente tenemos lo mismo de la clase anterior.
+
+Vamos a borrar todo esto para hacer nuestras consultas.
+
+Bueno no lo que tenemos que hacer aquí es una reunión natural y eso lo hacemos muy sencillo.
+
+Como mencioné antes no quisiera meterme en una cuestión de de ya que este curso es del uso de tecnologías de Java para la persistencia de datos no de bases de datos.
+
+Sin embargo aquí la documentación oficial tiene un ejemplo de Criteria con Join tal vez te resulta un poco complejo si es que no has trabajado antes con Criteria Hibernate. De hecho de la versión 4 a la versión 5 que es la que estamos trabajando cambió bastante el enfoque.
+
+Me parece interesante sin embargo un poco más difícil de implementar. Si tú estás trabajando con Hibernate 4 durante este curso por cualquier razón y deseas algún ejemplo de lo que estamos haciendo en este curso házmelo saber y con mucho gusto te voy a hacer llegar algunos ejemplos.
+
+Muy bien lo que vamos a hacer ahorita es primero vamos a consultar todos los trámites que se encuentran en Diario del cliente entonces voy a copiar estas tres líneas ya que son lo básico para hacer cualquier consulta con Koichiro ya y lo que quiero retornar ahorita son trámites entonces vamos a con el trámite tanto en ruta como en video ya que es el tipo de retorno y lo que voy a hacer ahora es un Join y aquí me va a aceptar dos parámetros que son las entidades que yo quiero hacer o yo quiero operar con este reino natural y en este caso voy a hacer trámites y Diario de cliente voy a llamar a esto Cheung y le voy a decir Root punto y aquí como ves el argumento que me está pidiendo es el objetivo para realizar esta operación.
+
+Y en este caso va a ser diario cliente CETC con esta línea yo ya he realizado una reunión. Así de sencillo ahora para obtener la consulta vamos a ser facherio apuntó Select. Y ahora aquí hay una opción interesante voy a dejarlo así por el momento y voy a crear una lista de trámites y vamos a darle Results y ya sabes si se Henriette Quarry y les paso como parámetro esta idea y obtengo la lista de resultados.
+
+Ahora voy a imprimir dos cosas que es el número de resultados esto es simplemente results .6 y propiamente ya como tal la impresión de la lista para esto recuerda que en tramité debe estar sobre el escrito el método tus Frink y en este caso en diario El cliente no está pero lo vamos a hacer dándole cuerpo al método Tuxtepec aquí cuánto me va a dar resultado.
+
+Bueno aquí me va a dar cuatro porque me dio cuatro porque realmente estoy haciendo la consulta de cada una de las filas pero aquí el problema es que yo ya tengo repetido los trámites. 
+
+Entonces simplemente lo que voy a hacer es una operación distinta para que me dé resultados distintos. Entonces vamos a ponerle distinto. Y ahora yo ya tengo el trámite 1 y el trámite dos que son realmente los que aparecen en toda la tabla de diario.
+
+Entonces desde aquí hicimos una consulta de todos los trámites que aparecen en la tabla diaria de clientes vamos a comentar esto por qué ahora vamos a consultar todos los diarios de un.
+
+Y voy a copiar esto también. Solo que ahora yo no voy a hacer trámites si no voy a querer diarios de quien te entonces vamos a cambiar.
+
+Ahora como va a ser el Jaime Bueno el Yeung ahora va a ser de diario cliente. Y el objetivo para estar en natural va a ser diario cliente pero ahora aquí hay algo importante.
+
+Yo necesito poner una restricción web donde el Leydi si hablamos de si se igual por ejemplo a uno o dos.
+
+Pero acuérdate que no hablamos de Ivis sino hablamos de objetos hablamos de Matins no hablamos de tablas con filas y columnas.
+
+Entonces lo que voy a hacer es lo siguiente chirria y lo voy a poner así para que lo puedas ver muy facilito y voy a poner punto.
+
+Y ahora qué voy a comprar aquí. Voy a comparar objetos entonces voy a poner punto Ogueta y en nombre del objeto es diario cliente punto trámite y aquí le tengo que pasar un objeto.
+
+Entonces simplemente puedo hacer por ejemplo en M.N datos tramité punto Clas y por ejemplo el Leidi que va a consultar es el 2 para que me dé entrada el 1 para que me entre 1 y 2 el 1 2 entonces qué estoy haciendo aquí.
+
+Le estoy diciendo quedar en la reunión natural pero que solo me arroje los trámites que estén asociados al trámite con Leidi una y obviamente aquí hablamos de Diario de cliente y listo vamos a ejecutar esta consulta me arrojó 2.
+
+El Diario UNO que se trata uno este es el trámite también lo imprime y por acá está el diario 2.
+
+Entonces me arrojó este y entre 1 y 2 y el método frustren también imprime el trámite el cual está asociado entonces con estas sentencias.
+
+Con este código es muy sencillo hacerle remedios naturales al principio es un poco más difícil de entender que las versiones anteriores.
+
+Pero ya cuando te acostumbras a saber que es muy sencillo para hacer estas reuniones naturales 
+
 ## Actualización de la B.D. a la V3 03:13
+
+**``**
+**``**
+
 ## Uso de **`@@ManyToMany`** 13:19
 ## Creación de consultas para clases anotadas con **`@@ManyToMany`** 10:49
 ## Actualizaciones en clases anotadas con **`@@ManyToMany`** 10:49
