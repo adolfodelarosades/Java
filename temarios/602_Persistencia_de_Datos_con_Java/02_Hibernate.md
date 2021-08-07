@@ -1666,6 +1666,70 @@ Para hacer la **RELACIÓN BIDIRECCIONAL** vamos a la Entidad **`Tramite`** y vam
 
 Con esto ya tenemos una **RELACIÓN BIDIRECCIONAL**.
 
+### Añadir la Entidad `Avaluo` en `hibernate.cfg.xml`.
+
+Añadir en el archivo **`hibernate.cfg.xml`** la siguiente línea:
+
+```xml
+   ...
+   <mapping class="com.javaocio.domain.Avaluo" />
+   ...
+```
+
+### Crear clase `TestOneToOne`
+
+Vamos crear un **`Tramite`** asociarlo a un **`Avaluo`** y hacer que persistan esos dos objetos en la BD.
+
+```java
+
+```
+
+### Ejecutar la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128538342-ec1a73c0-ed84-4db3-961d-2baf3d00c7c1.png)
+
+Me muestra los dos **`inserts`** que realiza.
+
+### Ver la BD
+
+![image](https://user-images.githubusercontent.com/23094588/128538554-1813ced7-4bc8-4bd0-b176-0e1a5f1cb17d.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128538653-b564e2a4-d701-4001-97f9-8092b1e687e3.png)
+
+Se a creado el **`Tramite`** y también el **`Avaluo`** con la referencia del **`Tramite`**, es decir el campo **`Tramite_idTramite`** contiene **`1`** que es el **`idTramite`** del **`Tramite`** que insertamos.
+
+## Segundo Ejemplo `TestOneToOne2`
+
+Ya con un Trámite creado añadirle un Avalúo.
+
+Primero creamos el Trámite.
+
+![image](https://user-images.githubusercontent.com/23094588/128539500-502bc382-e81f-487d-996a-a62fcc2c2a9d.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128539606-33e35b92-bb41-40ff-ae5d-3f9c15989648.png)
+
+### Cargar un `Tramite` con el método `session.load`
+
+**`session.load`** necesita el nombre de la clase que se quiera recuperar y el ID, para nuestro ejemplo es:
+
+```java
+   . . .
+   // Cargo un trámite ya existente
+   Tramite tramite2 = session.load(Tramite.class, 2);
+   . . .
+```
+
+### Vamos a crear un Avalúo y asignarle el Trámite cargado.
+
+
+
+
+
+
+
+
+
+
 AQUIIIIIIIIIIIIII
 
 
