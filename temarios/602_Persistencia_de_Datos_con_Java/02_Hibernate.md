@@ -2097,11 +2097,79 @@ En Avalúos se ha eliminado el Avalúo 1 que era el asociado con el Trámite 1 y
 
 ## Actualización de la Base de Datos a V2 01:51
 
-**``**
-**``**
+En esta lección vamos a actualizar nuestra base de datos y vamos a generar una nueva tabla para trabajar con las relaciones **Uno a Muchos***.
 
+Recuerda el modelo original de la BD de una constructora.
+
+![image](https://user-images.githubusercontent.com/23094588/128603862-d3ce50e6-fdb0-4b0a-a440-0ea121d4b0a5.png)
+
+### Añadir tabla **`DiarioCliente`**
+
+Vamos a añadir una tabla llamada **`DiarioCliente`**, tiene el propósito de poner el progreso de un proyecto y que el cliente los puede ver.
+
+![image](https://user-images.githubusercontent.com/23094588/128604027-4269dd13-4d79-4f56-bee6-b9c5572e480c.png)
+
+### Crear la relación Uno a Muchos de la tabla **`DiarioCliente`** con **`Tramite`**
+
+Seleccionamos la relación ***Uno a Muchos*** y pulsamos en **`DiarioCliente`** y luego en **`Tramite`**.
+
+![image](https://user-images.githubusercontent.com/23094588/128604129-c3cf71fa-8041-4dc0-99ae-377575dd6a89.png)
+
+Al hacer esto genera una llave foranea **FK** en la tabla **`DiarioCliente`** llamada **`Tramite_idTramite`**
+
+### Modificar la relación Uno a Muchos a Cero a Muchos
+
+Vamos a dar Click derecho sobre la relación y vamos a dar en **`Edit Relation...`**
+
+![image](https://user-images.githubusercontent.com/23094588/128604238-be6b0e1b-6912-4aef-b5d0-62bf560bd993.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604257-e51d407a-5755-4d94-9139-51db29422b83.png)
+
+Seleccionamos la pestaña **Foreing key** 
+
+![image](https://user-images.githubusercontent.com/23094588/128604300-f64d9e8c-c251-4770-9dbc-263478dadf5c.png)
+
+y vamos a desmarcar el Check **Mandatory**
+
+![image](https://user-images.githubusercontent.com/23094588/128604331-103484bd-f3d7-4dca-885f-ca38b1c2fb2c.png)
+
+Con esto la relación cambia a ***Cero o Muchos*** esto quiere decir que un Trámite tiene 0, 1 o Muchos Diarios de Clientes
+
+La BD nos queda así:
+
+![image](https://user-images.githubusercontent.com/23094588/128604415-a3be68f0-ab63-431d-b724-0559ffe2fa41.png)
+
+Vamos a generar la BD con esta nueva tabla y relación, damos en ***Database / Forward Engineer...***
+
+![image](https://user-images.githubusercontent.com/23094588/128604473-8771f263-91f2-4234-912d-dd83530236f0.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604480-1671dc1d-a6f7-4084-855d-f329c49941e8.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604503-e5b84266-18e7-47f4-bceb-9b4425716e85.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604514-14ec8dfe-ad41-49a9-b49b-d59c2b581041.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604523-647ced6c-af99-4b53-b19c-4a3666d7dcae.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604531-0d317c5c-0f67-437f-a391-d83cf8bf1c1e.png)
+
+
+### Revisando la BD
+
+![image](https://user-images.githubusercontent.com/23094588/128604587-0e98d0c6-29dc-415e-b497-632ecfb9853a.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604607-386e283e-5fdb-4ad4-b6f1-7874e06aeb7d.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604618-903b8e5b-39b1-462a-bafe-eadc044dc60f.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128604631-229ef865-63f9-433a-b9d3-fed3adbb0466.png)
 
 ## Uso **`@OneToMany`** y **`@ManyToOne`** 10:13
+
+**``**
+**``**
+
+
 ## Creación de consultas para clases anotadas con **`@OneToMany`** 08:06
 ## Actualización de la B.D. a la V3 03:13
 ## Uso de **`@@ManyToMany`** 13:19
