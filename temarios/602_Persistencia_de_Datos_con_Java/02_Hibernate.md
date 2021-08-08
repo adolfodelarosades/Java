@@ -976,6 +976,8 @@ El resultado es el mismo:
 
 Con esta última forma de trabajar podemos ir anidadando más criterios y es más facil de leer que un HQL.
 
+## Hibernate JPA Metamodel Generator
+
 La única desventaja que vemos es que estamos poniendo *hardcodeados* los nombres de las propiedades involucrados en la búsqueda en este caso **`tipoTramite`**, en el ejemplo de la documentación veíamos la técnica usada que nos lo hacía automáticamente **`root.get( Person_.name )`** esto se conoce como **Hibernate JPA Metamodel Generator**, básicamente a partir de una clase Anotada con JPA(Entidad) nos va a generar un archivo como:
 
 ![image](https://user-images.githubusercontent.com/23094588/127767465-ec13d35e-bfb1-48fa-81a2-3141015ca4ca.png)
