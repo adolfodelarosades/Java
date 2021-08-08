@@ -2820,8 +2820,8 @@ public class Inmueble {
    * Lo anotamos con **`@ManyToMany`**, lo de **`fetch = FetchType.EAGER`** se explicara después y ademas ponemos el atribute **`cascade = {CascadeType.ALL}`** para indicar que todas las relaciones se realizaran en cascada.
    * Aquí **no hay `@JoinColumn` lo que hay es `@JoinTable`** por que hay una tabla que hace la relación entre **`Inmueble`** e **`Imagen`**, tiene varios parámetros:
       *  **`name = "InmuebleImagenMap"`** para indicar el nombre físico de la tabla  
-      *  **`joinColumns = { @JoinColumn(name = "idInmueble")}`** donde **`idInmueble`** es el ID del Inmueble (DUEÑO DE LA RELACIÓN)
-      *  **`inverseJoinColumns = { @JoinColumn( name = "idImagen")}`** donde **`idImagen`** es el ID de la Imagen 
+      *  **`joinColumns = { @JoinColumn(name = "idInmueble")}`** donde **`idInmueble`** es el ID del Inmueble (DUEÑO DE LA RELACIÓN) (OPCIONAL)
+      *  **`inverseJoinColumns = { @JoinColumn( name = "idImagen")}`** donde **`idImagen`** es el ID de la Imagen (OPCIONAL)
       
       ![image](https://user-images.githubusercontent.com/23094588/128638714-6e33c922-c009-46a9-a333-aa1778925ebc.png)
 
@@ -2930,15 +2930,115 @@ public class Imagen {
 * Crear Setters y Getter
 * Crear método **`toString`**
 
+### Añadir las nuevas Entidades en `hibernate.cfg.xml`
+
+```xml
+<mapping class="com.javaocio.domain.Inmueble" />
+<mapping class="com.javaocio.domain.Imagen" />       
+```
+
 ### Claes JPA Metamodel Generator de las nuevas Entidades
+
+Vamos a añadir las dos clases Metamodel **`Inmueble_`** y  **`Imagen_`** para las nuevas Entidades:
+
+![image](https://user-images.githubusercontent.com/23094588/128639385-714072c7-5308-4346-8a5a-43a607047dc2.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128639497-9027e822-2771-4b74-a21b-8906229ab9f2.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128639507-2067ce05-8279-4bec-885f-edf8df019642.png)
 
 ### Creación de la clase de Prueba `TestOneToMany5` 
 
-Vamos a crear algunos inmuebles
+Vamos a crear algunos Inmuebles, algunas Imágenes, vamos a asignarle las Imágenes a los Inmuebles y a persistir los Inmuebles.
 
-**``**
-**``**
-**``**
+```java
+package com.javaocio.test;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.Imagen;
+import com.javaocio.domain.Inmueble;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToMany5 {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         Timestamp time = new Timestamp(new Date().getTime());
+			
+         // Creamos Inmuebles
+         Inmueble inmueble1 = new Inmueble("Terreno", "Morelos No. 100");
+         Inmueble inmueble2 = new Inmueble("Casa", "Hidalgo No. 700");
+			
+         // Creamos Imágenes
+         Imagen imagen1 = new Imagen("www.imageshack...", time);
+         Imagen imagen2 = new Imagen("www.drive...", time);
+         Imagen imagen3 = new Imagen("www.sega...", time);
+			
+         //Asignamos Imágenes a los Inmuebles
+         inmueble1.getImagenes().add(imagen1);
+         inmueble1.getImagenes().add(imagen2);
+			
+         inmueble2.getImagenes().add(imagen1);
+         inmueble2.getImagenes().add(imagen3);
+			
+         //Persistimos los cambios
+         session.save(inmueble1);
+         session.save(inmueble2);
+			
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
+```
+
+**OBSERVESE COMO SOLO SE PERSISTEN LOS INMUEBLES**
+
+### Ejecutar la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128639923-495db10f-8836-47a8-9485-59d4ee0c4582.png)
+
+
+### Ver la BD
+
+![image](https://user-images.githubusercontent.com/23094588/128639939-962cb99f-cc68-44b1-aa96-0100cf5a8fe2.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128639944-6d8b03c3-b0ea-48a1-9a39-b1eb35a2a509.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128639956-03e4e7fa-150b-45a4-8256-68f5532ed7c1.png)
+
+**A PESAR DE SOLO PERSISTIR LOS INMUEBLES, SE HAN INSERTADO DATOS EN LA TABLA `Imagen` y en `InmuebleImagenMap` GRACIAS A LAS ANOTACIONES PARA RELACIONES BIDIRECIONALES DE RELACIONES MUCHOS A MUCHOS.
+
+### GIT
+
+![image](https://user-images.githubusercontent.com/23094588/128640100-f12ef0fa-078a-4b93-a8b3-eaaa51b301a3.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128640126-8e28cff7-6b40-462f-a966-40f8add8cd5b.png)
 
 ## Creación de consultas para clases anotadas con **`@@ManyToMany`** 10:49
+
+**``**
+**``**
+**``**
+
+
 ## Actualizaciones en clases anotadas con **`@@ManyToMany`** 10:49
