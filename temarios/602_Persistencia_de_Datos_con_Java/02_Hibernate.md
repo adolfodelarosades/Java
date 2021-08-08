@@ -1825,7 +1825,6 @@ public class TestOneToOne2 {
 
 ![image](https://user-images.githubusercontent.com/23094588/128594450-e3692b80-794b-4a5b-ab67-f7e5b28e50ca.png)
 
-
 ## Consulta de registros con clases anotadas con **`@OneToOne`** 04:16
 
 Vamos a realizar otro ejercicio en **`TestOneToOne3`** donde vamos a consultar el Trámite de un Avalúo, ¿Qué es lo que tenemos que hacer? 
@@ -2434,21 +2433,41 @@ Se añadio un nuevo Diario de Cliente con un Trámie ya existente.
 
 ## Creación de consultas para clases anotadas con **`@OneToMany`** 08:06
 
-En esta lección vamos a realizar algunas consultas en nuestra tabla de trámites y diariamente me tomé la libertad de poner un nuevo trámite.
+En esta lección vamos a realizar algunas consultas en nuestras tabla **`Tramite`** y **`DiarioCliente`** me tomé la libertad de poner un nuevo trámite y cambiar los tipos de los Trámites como se ve en la tabla.
 
-Esto con el fin de que veas que las consultas realmente están funcionando y en Diario de cliente tenemos lo mismo de la clase anterior.
+![image](https://user-images.githubusercontent.com/23094588/128624043-9839dba8-4c08-44a6-847e-4ad0dc35a304.png)
 
-Vamos a borrar todo esto para hacer nuestras consultas.
+La tabla **`DiarioCliente`** contiene lo siguiente:
 
-Bueno no lo que tenemos que hacer aquí es una reunión natural y eso lo hacemos muy sencillo.
+![image](https://user-images.githubusercontent.com/23094588/128624064-b59a708a-8869-4862-a727-55dbc78bb2a5.png)
 
-Como mencioné antes no quisiera meterme en una cuestión de de ya que este curso es del uso de tecnologías de Java para la persistencia de datos no de bases de datos.
+### Realizar la Consulta en `TestOneToMany3`
 
-Sin embargo aquí la documentación oficial tiene un ejemplo de Criteria con Join tal vez te resulta un poco complejo si es que no has trabajado antes con Criteria Hibernate. De hecho de la versión 4 a la versión 5 que es la que estamos trabajando cambió bastante el enfoque.
+Vamos a realizar una Reunión Natural, eso lo hacemos muy sencillo con Criteria. En la documentación oficial hay un ejemplo de Criteria con **`Join`**
 
-Me parece interesante sin embargo un poco más difícil de implementar. Si tú estás trabajando con Hibernate 4 durante este curso por cualquier razón y deseas algún ejemplo de lo que estamos haciendo en este curso házmelo saber y con mucho gusto te voy a hacer llegar algunos ejemplos.
+![image](https://user-images.githubusercontent.com/23094588/128624188-5be0eed0-84af-4915-8d6d-fe8295d25e36.png)
 
-Muy bien lo que vamos a hacer ahorita es primero vamos a consultar todos los trámites que se encuentran en Diario del cliente entonces voy a copiar estas tres líneas ya que son lo básico para hacer cualquier consulta con Koichiro ya y lo que quiero retornar ahorita son trámites entonces vamos a con el trámite tanto en ruta como en video ya que es el tipo de retorno y lo que voy a hacer ahora es un Join y aquí me va a aceptar dos parámetros que son las entidades que yo quiero hacer o yo quiero operar con este reino natural y en este caso voy a hacer trámites y Diario de cliente voy a llamar a esto Cheung y le voy a decir Root punto y aquí como ves el argumento que me está pidiendo es el objetivo para realizar esta operación.
+tal vez te resulta un poco complejo si es que no has trabajado antes con Criteria Hibernate. De hecho de la versión 4 a la versión 5 que es la que estamos trabajando cambió bastante el enfoque, me parece interesante sin embargo un poco más difícil de implementar. 
+
+### Primera Consulta
+
+Lo primero que vamos a consultar son todos los trámites que se encuentran en Diario del Cliente.
+
+Del ejemplo copiamos las primeras 3 líneas y las adaptamos.
+
+```java
+```
+
+* Realizamos un **`Join`** el cual necesita dos parámetros que son las entidades necesarias para realizar esta "Reunión Natural" en este caso queda así **``**  el argumento **``** es el objetivo para realizar el Join
+* 
+* 
+* **``**
+
+
+
+
+
+entonces voy a copiar estas tres líneas ya que son lo básico para hacer cualquier consulta con Koichiro ya y lo que quiero retornar ahorita son trámites entonces vamos a con el trámite tanto en ruta como en video ya que es el tipo de retorno y lo que voy a hacer ahora es un Join y aquí me va a aceptar dos parámetros que son las entidades que yo quiero hacer o yo quiero operar con este reino natural y en este caso voy a hacer trámites y Diario de cliente voy a llamar a esto Cheung y le voy a decir Root punto y aquí como ves el argumento que me está pidiendo es el objetivo para realizar esta operación.
 
 Y en este caso va a ser diario cliente CETC con esta línea yo ya he realizado una reunión. Así de sencillo ahora para obtener la consulta vamos a ser facherio apuntó Select. Y ahora aquí hay una opción interesante voy a dejarlo así por el momento y voy a crear una lista de trámites y vamos a darle Results y ya sabes si se Henriette Quarry y les paso como parámetro esta idea y obtengo la lista de resultados.
 
