@@ -2646,14 +2646,79 @@ No Resultados: 2
 
 ![image](https://user-images.githubusercontent.com/23094588/128627201-f3af45db-6dcd-4573-9112-b44f55697c99.png)
 
-
-
 ## Actualización de la B.D. a la V3 03:13
 
+En esta lección vamos a actualizar nuevamente nuestra base de datos a la versión 3 esto con el propósito de crear una relación ***Muchos a Muchos***. Este tipo de relaciones se ocupan no tan frecuentemente como pensarías.
+
+En nuestro Modelo vamos a añadir una tabla llamada **`Inmueble`** con los siguientes campos:
+
+![image](https://user-images.githubusercontent.com/23094588/128627959-f3652a0f-0eee-485d-8c11-d1383bcebe0e.png)
+
+Y vamos a crear otra tabla llamada **`Imagen`** que contendra los links de las imágenes de los Inmuebles, los campos son los siguientes:
+
+![image](https://user-images.githubusercontent.com/23094588/128628051-677f8126-2dc5-4633-a28e-e34113898e4e.png)
+
+Ahora vamos a crear la Relación entre ambas tablas, seleccionamos la relación ***N M*** y damos Click en  **`Inmueble`** y luego en **`Imagen`** y lo que tenemos es:
+
+![image](https://user-images.githubusercontent.com/23094588/128628132-c7150d8b-2daf-462a-94df-a0225a84ae72.png)
+
+Se nos ha creado una tabla que ayuda a realizar la Relación ***Muchos a Muchos***, esta tabla se conoce como "Mapa" y lo que indica es que Inmuebles estan asociados a que Imágenes o que Imágenes a que Inmuebles.
+
+Vamos a cambiar el nombre que puso por default **`Inmueble_has_Imagen`** por **`InmuebleImagenMap`**.
+
+También vamos a cambiar los campos que se crearon por defecto **`Inmueble_idInmueble`** por **`idInmueble`** y **`Imagen_idImagen`** por **`idImagen`**
+
+![image](https://user-images.githubusercontent.com/23094588/128628298-8429027f-c166-443a-abd0-85c27f22d95b.png)
+
+Finalmente seleccionamos la relación de la tabla **`Inmueble`** con **`InmuebleImagenMap`** y damos botón derecho y seleccionamos ***Edit Relationsship...***
+
+![image](https://user-images.githubusercontent.com/23094588/128629273-ec88ad02-ff3b-4384-b010-f5b4fd2b8f9e.png)
+
+Seleccionamos la pestaña ***Foreing Key***
+
+![image](https://user-images.githubusercontent.com/23094588/128629294-789ba54e-8879-4ef4-aebd-f2513646f0c3.png)
+
+Vamos a quitar la opción ***Mandatory***
+
+![image](https://user-images.githubusercontent.com/23094588/128629331-86ca7b4c-ac0e-4a7f-800d-d9fb72d039b2.png)
+
+Hacemos lo mismo para la relación entre la tabla **`Imagen`** con **`InmuebleImagenMap`**.
+
+![image](https://user-images.githubusercontent.com/23094588/128629376-fd9341e1-1b44-4c18-a213-ae4070f20566.png)
+
+Nuestra Relación ***Mucho a Mucho*** es:
+
+![image](https://user-images.githubusercontent.com/23094588/128629427-8aa96d60-3293-47e4-a66c-1ebfacacf7f0.png)
+
+Nuestro Modelo final nos queda así:
+
+![image](https://user-images.githubusercontent.com/23094588/128629414-af607270-f712-4140-888e-1d47dfe5b002.png)
+
+Vamos a seleccionar ***Database / Forward Engineer ...***
+
+![image](https://user-images.githubusercontent.com/23094588/128629457-165affb0-5784-40ad-bf51-71936ce9a1ed.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128629494-c4810bd9-b25d-462b-9480-fd0cd994e354.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128629513-787e6e78-ec87-4c7c-9101-a3f3e6cef6f9.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128629521-18a07a17-dd6f-450b-a553-bd0833761830.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128629532-0046a0a5-1a51-4fa1-bc13-aaea2cf98594.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128629538-f4783ca5-2d92-4223-9591-1d00caef111f.png)
+
+Las tablas se han creado:
+
+![image](https://user-images.githubusercontent.com/23094588/128629563-30570101-8ae7-4fbb-b184-19f76d2adebb.png)
+
+Todos los datos de las tablas se han eliminado.
+
+## Uso de **`@@ManyToMany`** 13:19
+
 **``**
 **``**
 **``**
 
-## Uso de **`@@ManyToMany`** 13:19
 ## Creación de consultas para clases anotadas con **`@@ManyToMany`** 10:49
 ## Actualizaciones en clases anotadas con **`@@ManyToMany`** 10:49
