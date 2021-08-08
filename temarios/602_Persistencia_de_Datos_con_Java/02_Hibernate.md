@@ -2716,6 +2716,58 @@ Todos los datos de las tablas se han eliminado.
 
 ## Uso de **`@@ManyToMany`** 13:19
 
+### Crear la Entidad `Inmueble`
+
+```java
+```
+
+* Anotamos la clase (**`@Entity`** y **`@Table(name = "Inmueble")`**)
+* La clase tiene tres propiedades principales de acuero a los capos de la tabla **`idInmueble`**, **`tipoInmueble`** y **`domicilioInmueble`**
+* Anotamos el campo ID con **`@Id`** y **`@GeneratedValue(strategy = GenerationType.IDENTITY)`**.
+* Para realizar la relación ***Muchos a Muchos*** dentro de la clase **`Inmueble`** vamos a poner una propiedad **`imagenes`** como **`private List<Imagen> imagenes = new ArrayList<>();`** La vamos a anotar con:
+
+   ```java
+   
+   ```
+
+* 
+*     y la vamos a anotar con **`@OneToOne`** y vamos a añadir la siguiente anotación para indicar la llave foranea **`@JoinColumn(name = "Tramite_idTramite")`** donde **`"Tramite_idTramite"`** es el nombre de la columna en la tabla **`Avaluo`** de la BD. **ESTO HACE QUE SEA UNA RELACIÓN UNIDIRECCIONAL**.
+* Crear un Constructor vacio.
+* Crear un Constructor con el lugar del Avalúo
+* Crear Setters y Getter
+* Crear método **`toString`**
+
+### Crear la Entidad `Imagen`
+
+```java
+```
+
+* Anotamos la clase (**`@Entity`** y **`@Table(name = "Imagen")`**)
+* La clase tiene tres propiedades principales de acuero a los capos de la tabla **`idImagen`**, **`urlImagen`** y **`fhcImagen`**
+* Anotamos el campo ID con **`@Id`** y **`@GeneratedValue(strategy = GenerationType.IDENTITY)`**.
+* 
+* Para realizar la relación ***Uno a Uno*** dentro de la clase **`Avaluo`** vamos a poner una propiedad de tipo **`Tramite`** y la vamos a anotar con **`@OneToOne`** y vamos a añadir la siguiente anotación para indicar la llave foranea **`@JoinColumn(name = "Tramite_idTramite")`** donde **`"Tramite_idTramite"`** es el nombre de la columna en la tabla **`Avaluo`** de la BD. **ESTO HACE QUE SEA UNA RELACIÓN UNIDIRECCIONAL**.
+* Crear un Constructor vacio.
+* Crear un Constructor con el lugar del Avalúo
+* Crear Setters y Getter
+* Crear método **`toString`**
+
+
+
+
+
+----
+Para hacer la **RELACIÓN BIDIRECCIONAL** vamos a la Entidad **`Tramite`** y vamos añadir la siguiente propiedad:
+
+```java
+   . . .
+   @OneToOne(mappedBy = "tramite")
+   private Avaluo avaluo;
+   . . .
+```
+
+* Añado una propiedad del tipo de la Entidad, es decir **`Avaluo`** y la anoto con **`@OneToOne(mappedBy = "tramite")`** donde **`tramite`** es el atributo de la entidad **`Avaluo`** que esta sirviendo como relación.
+
 **``**
 **``**
 **``**
