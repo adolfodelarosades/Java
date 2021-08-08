@@ -2719,54 +2719,222 @@ Todos los datos de las tablas se han eliminado.
 ### Crear la Entidad `Inmueble`
 
 ```java
+package com.javaocio.domain;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Inmueble")
+public class Inmueble {
+	
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int idInmueble;
+	
+   private String tipoInmueble;
+   private String domicilioInmueble;
+	
+   @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+   @JoinTable(name = "InmuebleImagenMap",
+                  joinColumns = { @JoinColumn(name = "idInmueble")},
+                  inverseJoinColumns = { @JoinColumn( name = "idImagen")}
+             )
+   private List<Imagen> imagenes = new ArrayList<>();
+
+   public Inmueble() {
+
+   }
+
+   public Inmueble(String tipoInmueble, String domicilioInmueble) {
+      this.tipoInmueble = tipoInmueble;
+      this.domicilioInmueble = domicilioInmueble;
+   }
+
+   public int getIdInmueble() {
+      return idInmueble;
+   }
+
+   public void setIdInmueble(int idInmueble) {
+      this.idInmueble = idInmueble;
+   }
+
+   public String getTipoInmueble() {
+      return tipoInmueble;
+   }
+
+   public void setTipoInmueble(String tipoInmueble) {
+      this.tipoInmueble = tipoInmueble;
+   }
+
+   public String getDomicilioInmueble() {
+      return domicilioInmueble;
+   }
+
+   public void setDomicilioInmueble(String domicilioInmueble) {
+      this.domicilioInmueble = domicilioInmueble;
+   }
+
+   public List<Imagen> getImagenes() {
+      return imagenes;
+   }
+
+   public void setImagenes(List<Imagen> imagenes) {
+      this.imagenes = imagenes;
+   }
+
+   @Override
+   public String toString() {
+      return "Inmueble [idInmueble=" + idInmueble + ", tipoInmueble=" + tipoInmueble + ", domicilioInmueble="
+                           + domicilioInmueble + ", imagenes=" + imagenes + "]";
+   }
+
+}
 ```
 
 * Anotamos la clase (**`@Entity`** y **`@Table(name = "Inmueble")`**)
 * La clase tiene tres propiedades principales de acuero a los capos de la tabla **`idInmueble`**, **`tipoInmueble`** y **`domicilioInmueble`**
 * Anotamos el campo ID con **`@Id`** y **`@GeneratedValue(strategy = GenerationType.IDENTITY)`**.
-* Para realizar la relación ***Muchos a Muchos*** dentro de la clase **`Inmueble`** vamos a poner una propiedad **`imagenes`** como **`private List<Imagen> imagenes = new ArrayList<>();`** La vamos a anotar con:
+* Para realizar la relación ***Muchos a Muchos*** dentro de la clase **`Inmueble`** vamos a poner una propiedad **`imagenes`** como **`private List<Imagen> imagenes = new ArrayList<>();`** (EN HIBERNATE 4 SE TRABAJA CON UN **`Set`** en lugar de un **`List`**, pero si en Hibernate 5 usamos un **`Set`** nos da una **`Exception`**) La vamos a anotar con:
 
    ```java
-   
+   @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+   @JoinTable(name = "InmuebleImagenMap",
+               joinColumns = { @JoinColumn(name = "idInmueble")},
+               inverseJoinColumns = { @JoinColumn( name = "idImagen")}
+          )
+   private List<Imagen> imagenes = new ArrayList<>();
    ```
 
-* 
-*     y la vamos a anotar con **`@OneToOne`** y vamos a añadir la siguiente anotación para indicar la llave foranea **`@JoinColumn(name = "Tramite_idTramite")`** donde **`"Tramite_idTramite"`** es el nombre de la columna en la tabla **`Avaluo`** de la BD. **ESTO HACE QUE SEA UNA RELACIÓN UNIDIRECCIONAL**.
+   * Lo anotamos con **`@ManyToMany`**, lo de **`fetch = FetchType.EAGER`** se explicara después y ademas ponemos el atribute **`cascade = {CascadeType.ALL}`** para indicar que todas las relaciones se realizaran en cascada.
+   * Aquí **no hay `@JoinColumn` lo que hay es `@JoinTable`** por que hay una tabla que hace la relación entre **`Inmueble`** e **`Imagen`**, tiene varios parámetros:
+      *  **`name = "InmuebleImagenMap"`** para indicar el nombre físico de la tabla  
+      *  **`joinColumns = { @JoinColumn(name = "idInmueble")}`** donde **`idInmueble`** es el ID del Inmueble (DUEÑO DE LA RELACIÓN)
+      *  **`inverseJoinColumns = { @JoinColumn( name = "idImagen")}`** donde **`idImagen`** es el ID de la Imagen 
+      
+      ![image](https://user-images.githubusercontent.com/23094588/128638714-6e33c922-c009-46a9-a333-aa1778925ebc.png)
+
+      **ESTAMOS ESPECIFICANDO LOS DOS ID DE LA TABLA `InmuebleImagenMap`**
+      
 * Crear un Constructor vacio.
-* Crear un Constructor con el lugar del Avalúo
+* Crear un Constructor con **`tipoInmueble`** y **`domicilioInmueble`**
 * Crear Setters y Getter
 * Crear método **`toString`**
 
 ### Crear la Entidad `Imagen`
 
 ```java
+package com.javaocio.domain;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Imagen")
+public class Imagen {
+	
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int idImagen;
+	
+   private String urlImagen;
+   private Timestamp fhcImagen;
+	
+   @ManyToMany(mappedBy = "imagenes")
+   private List<Inmueble> inmuebles = new ArrayList<>(); //En Hibernate 4 se trabaja con un SET
+
+   public Imagen() {
+		
+   }
+
+   public Imagen(String urlImagen, Timestamp fhcImagen) {      
+      this.urlImagen = urlImagen;
+      this.fhcImagen = fhcImagen;
+   }
+
+   public int getIdImagen() {
+      return idImagen;
+   }
+
+   public void setIdImagen(int idImagen) {
+      this.idImagen = idImagen;
+   }
+
+   public String getUrlImagen() {
+      return urlImagen;
+   }
+
+   public void setUrlImagen(String urlImagen) {
+      this.urlImagen = urlImagen;
+   }
+
+   public Timestamp getFhcImagen() {
+      return fhcImagen;
+   }
+
+   public void setFhcImagen(Timestamp fhcImagen) {
+      this.fhcImagen = fhcImagen;
+   }
+
+   public List<Inmueble> getInmuebles() {
+      return inmuebles;
+   }
+
+   public void setInmuebles(List<Inmueble> inmuebles) {
+      this.inmuebles = inmuebles;
+   }
+
+   @Override
+   public String toString() {
+      return "Imagen [idImagen=" + idImagen + ", urlImagen=" + urlImagen + ", fhcImagen=" + fhcImagen + ", inmuebles="
+                        + inmuebles + "]";
+   }
+	
+}
 ```
 
 * Anotamos la clase (**`@Entity`** y **`@Table(name = "Imagen")`**)
 * La clase tiene tres propiedades principales de acuero a los capos de la tabla **`idImagen`**, **`urlImagen`** y **`fhcImagen`**
 * Anotamos el campo ID con **`@Id`** y **`@GeneratedValue(strategy = GenerationType.IDENTITY)`**.
-* 
-* Para realizar la relación ***Uno a Uno*** dentro de la clase **`Avaluo`** vamos a poner una propiedad de tipo **`Tramite`** y la vamos a anotar con **`@OneToOne`** y vamos a añadir la siguiente anotación para indicar la llave foranea **`@JoinColumn(name = "Tramite_idTramite")`** donde **`"Tramite_idTramite"`** es el nombre de la columna en la tabla **`Avaluo`** de la BD. **ESTO HACE QUE SEA UNA RELACIÓN UNIDIRECCIONAL**.
+* Para realizar la relación ***Muchos a Muchos*** y que la relación sea **BIDIRECIONAL** dentro de la clase **`Imagen`** vamos a poner una propiedad **`inmuebles`** como **`private List<Inmueble> inmuebles = new ArrayList<>();`** (EN HIBERNATE 4 SE TRABAJA CON UN **`Set`** en lugar de un **`List`**, pero si en Hibernate 5 usamos un **`Set`** nos da una **`Exception`**) La vamos a anotar con:
+
+   ```java
+   @ManyToMany(mappedBy = "imagenes")
+   private List<Inmueble> inmuebles = new ArrayList<>(); //En Hibernate 4 se trabaja con un SET
+
+   ```
+
+   * Lo anotamos con **`@ManyToMany(mappedBy = "imagenes")`**, con esto hacemos la relación **BIDIRECCIONAL**.
+   
 * Crear un Constructor vacio.
-* Crear un Constructor con el lugar del Avalúo
+* Crear un Constructor con **`urlImagen`** y **`fhcImagen`**
 * Crear Setters y Getter
 * Crear método **`toString`**
 
+### Claes JPA Metamodel Generator de las nuevas Entidades
 
+### Creación de la clase de Prueba `TestOneToMany5` 
 
-
-
-----
-Para hacer la **RELACIÓN BIDIRECCIONAL** vamos a la Entidad **`Tramite`** y vamos añadir la siguiente propiedad:
-
-```java
-   . . .
-   @OneToOne(mappedBy = "tramite")
-   private Avaluo avaluo;
-   . . .
-```
-
-* Añado una propiedad del tipo de la Entidad, es decir **`Avaluo`** y la anoto con **`@OneToOne(mappedBy = "tramite")`** donde **`tramite`** es el atributo de la entidad **`Avaluo`** que esta sirviendo como relación.
+Vamos a crear algunos inmuebles
 
 **``**
 **``**
