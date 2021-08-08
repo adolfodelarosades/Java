@@ -2443,6 +2443,42 @@ La tabla **`DiarioCliente`** contiene lo siguiente:
 
 ![image](https://user-images.githubusercontent.com/23094588/128624064-b59a708a-8869-4862-a727-55dbc78bb2a5.png)
 
+### Generar el archivo Metamodel Generator
+
+Vamos ir a las propiedades del Proyecto 
+
+![image](https://user-images.githubusercontent.com/23094588/128625535-389538e4-fccb-41e4-9c49-97a1b9d3870f.png)
+
+Vamos a Maven y seleccionamos ***Annotation Processing***
+
+![image](https://user-images.githubusercontent.com/23094588/128625562-3e278818-958e-4381-8d47-95c7f5a1fe12.png)
+
+Aquí vamos a marcar las siguientes dos opciones:
+
+* ***Enable project specific settings***
+* ***Automatically configure JDT APT (builds faster, but outcome may differ from Maven buils)***
+
+Vamos a presionar en ***Apply***
+
+![image](https://user-images.githubusercontent.com/23094588/128625635-d698ac96-5b7f-4eb2-b4bf-b7f4843147a8.png)
+
+Damos en ***Yes*** y ***OK***, con esto nos modifica la carpeta:
+
+![image](https://user-images.githubusercontent.com/23094588/128625699-98975a9b-0281-4f8c-910c-cfa819b99b3a.png)
+
+SE SUPONE QUE DENTRO CREARÍA UNOS ARCHIVOS GRACIAS A QUE TENEMOS ANOTADA NUESTA ENTIDAD CON JPA PERO NO LO HIZO, LAS HE METIDO MANUALMENTE.
+
+![image](https://user-images.githubusercontent.com/23094588/128625887-ff473391-ec61-452c-948c-b2ccf13a72e8.png)
+
+El contenido de los archivo son:
+
+![image](https://user-images.githubusercontent.com/23094588/128625898-abb55894-e801-4a27-86ea-bcd3aa3970bb.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128625907-2b1650f4-c0b2-4c66-81b2-9d10c0877e9f.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128625915-5b5231c1-0cc8-4d01-9ac8-ab8b18db223a.png)
+
+
 ### Realizar la Consulta en `TestOneToMany3`
 
 Vamos a realizar una Reunión Natural, eso lo hacemos muy sencillo con Criteria. En la documentación oficial hay un ejemplo de Criteria con **`Join`**
@@ -2458,55 +2494,163 @@ Lo primero que vamos a consultar son todos los trámites que se encuentran en Di
 Del ejemplo copiamos las primeras 3 líneas y las adaptamos.
 
 ```java
+package com.javaocio.test;
+
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.javaocio.domain.DiarioCliente;
+import com.javaocio.domain.Tramite;
+import com.javaocio.domain.Tramite_;
+import com.javaocio.util.HibernateUtil;
+
+public class TestOneToMany3 {
+
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+		
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+			
+         //Consultar todos los Trámites que se encuentran en DiarioCliente
+         CriteriaBuilder builder = session.getCriteriaBuilder();
+         CriteriaQuery<Tramite> criteria = builder.createQuery( Tramite.class );
+         Root<Tramite> root = criteria.from( Tramite.class );
+			
+         Join<Tramite, DiarioCliente> join = root.join(Tramite_.diarioClienteSet);
+			
+         criteria.select(root);
+			
+         List<Tramite> results = session.createQuery(criteria).getResultList();
+         System.out.println("No Resultados: " + results.size());
+         System.out.println(results);
+					
+         tx.commit();
+      } catch (Exception e) {
+         if(tx != null) {
+            tx.rollback();
+         }
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+}
 ```
 
-* Realizamos un **`Join`** el cual necesita dos parámetros que son las entidades necesarias para realizar esta "Reunión Natural" en este caso queda así **``**  el argumento **``** es el objetivo para realizar el Join
-* 
-* 
-* **``**
+* Realizamos un **`Join`** el cual necesita dos parámetros que son las entidades necesarias para realizar esta "Reunión Natural" en este caso queda así **`Join<Tramite, DiarioCliente> join = root.join(Tramite_.diarioClienteSet)`**  el argumento **`Tramite_.diarioClienteSet`** es el objetivo para realizar el Join, con esta línea hemos realizado una reunión natural.
+* Realizamos la consulta **`select`** de Criteria.
+* Obtenemos la lista de resultados
+* Imprimimos los resultados
+
+### Ejecutar la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128626242-a2927ac8-d4a3-468c-812a-605e9b147710.png)
+
+Simplemente sacamos el número de Trámites encontrados que son 4 y sus correspondientes valores:
+
+```sh
+No Resultados: 4
+[Tramite [idTramite=1, tipoTramite=Ampliación, fhcTram=2021-08-07 17:59:21.0], 
+ Tramite [idTramite=1, tipoTramite=Ampliación, fhcTram=2021-08-07 17:59:21.0], 
+ Tramite [idTramite=2, tipoTramite=Crédito, fhcTram=2021-08-07 17:59:21.0], 
+ Tramite [idTramite=2, tipoTramite=Crédito, fhcTram=2021-08-07 17:59:21.0]]
+```
+
+Me da 4 por que realmente esta haciendo una consulta de cada una de las filas de la tabla **`DiarioCliente`**
+
+![image](https://user-images.githubusercontent.com/23094588/128626459-3e48715b-f1da-4563-88e0-57dc306332aa.png)
+
+Si comentamos la sentencia **`Join`** solo me saca los 3 que existen en la tabla **`Tramite`**:
+
+![image](https://user-images.githubusercontent.com/23094588/128626511-ed35cdf6-7b36-493d-bb2e-98dc6fa1e542.png)
+
+```sh
+No Resultados: 3
+[Tramite [idTramite=1, tipoTramite=Ampliación, fhcTram=2021-08-07 17:59:21.0], 
+ Tramite [idTramite=2, tipoTramite=Crédito, fhcTram=2021-08-07 17:59:21.0], 
+ Tramite [idTramite=3, tipoTramite=Proyecto, fhcTram=2021-08-07 17:59:21.0]]
+```
+
+![image](https://user-images.githubusercontent.com/23094588/128626515-c7b8fa5f-caed-4cf2-b039-3d1b5255307d.png)
+
+Con esto vemos la influencia de la sentencia **`Join`**.
+
+### Evitar que los Trámites repetidos salgan
+
+Volviendo al ejemplo del Join vamos a evitar que salgan los Trámites repetidos, esto se logra añadiendo a nuestra consulta **`.distinct(true)`**, nos queda así:
+
+```java
+criteria.select(root).distinct(true);
+```
+
+### Ejecutando la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128626660-458f34d6-3086-4c7f-9725-9576bba5e519.png)
+
+Ya solo nos muestra los dos Trámites que aparecen en la tabla **`DiarioCliente`**.
+
+```sh
+No Resultados: 2
+[Tramite [idTramite=1, tipoTramite=Ampliación, fhcTram=2021-08-07 17:59:21.0], 
+ Tramite [idTramite=2, tipoTramite=Crédito, fhcTram=2021-08-07 17:59:21.0]]
+```
+
+### Consultar todos los Diarios de un Trámite en `TestOneToMany4`
+
+Vamos a consultar todos los Diarios de un Trámite.
+
+```java
+```
+
+* Ahora lo que vamos a consultar son **`DiarioCliente`**
+* El Join va de **`DiarioCliente`** a **`Tramite`** y el Join lo hacemos a través de **`DiarioCliente_.tramite`**, la sentencia nos queda así **`Join<DiarioCliente, Tramite> join = root.join(DiarioCliente_.tramite);`**
+* Aquí hay algo importante a considerar, necesitamos poner una clausula **`where`** donde el **`id`** sea al Trámite que deseamos ver en este caso 1 ó 2 que son los Trámites asociados a los Diarios de Clientes asociados. Pero recordar que en Hibernate no hablamos de columnas sino de objetos. La sentencia necesaria es:
+
+   ```sh
+      . . .
+      criteria.where(
+                   builder.equal(root.get(DiarioCliente_.tramite), session.load(Tramite.class, 1))
+              );
+      . . .	     
+   ```
+* Recuperamos el resultado 
+* Imprimimos el resultado
+
+### Ejecutar la APP
+
+![image](https://user-images.githubusercontent.com/23094588/128627100-64c4dd8e-0869-4434-b9ba-c62da6b0884e.png)
+
+En este caso obtenemos dos Diarios de Clientes cuyo Trámite asignado es el 1:
+
+```sh
+No Resultados: 2
+[DiarioCliente [idDiario=1, entradaDiario=Entrada 1, fhcDiario=2021-08-07 17:59:21.0, tramite=Tramite [idTramite=1, tipoTramite=Ampliación, fhcTram=2021-08-07 17:59:21.0]], 
+ DiarioCliente [idDiario=2, entradaDiario=Entrada 2, fhcDiario=2021-08-07 17:59:21.0, tramite=Tramite [idTramite=1, tipoTramite=Ampliación, fhcTram=2021-08-07 17:59:21.0]]]
+```
+
+### GIT
+
+![image](https://user-images.githubusercontent.com/23094588/128627177-5c6da9ae-35af-4578-b35c-be3656b57354.png)
+
+![image](https://user-images.githubusercontent.com/23094588/128627201-f3af45db-6dcd-4573-9112-b44f55697c99.png)
 
 
-
-
-
-entonces voy a copiar estas tres líneas ya que son lo básico para hacer cualquier consulta con Koichiro ya y lo que quiero retornar ahorita son trámites entonces vamos a con el trámite tanto en ruta como en video ya que es el tipo de retorno y lo que voy a hacer ahora es un Join y aquí me va a aceptar dos parámetros que son las entidades que yo quiero hacer o yo quiero operar con este reino natural y en este caso voy a hacer trámites y Diario de cliente voy a llamar a esto Cheung y le voy a decir Root punto y aquí como ves el argumento que me está pidiendo es el objetivo para realizar esta operación.
-
-Y en este caso va a ser diario cliente CETC con esta línea yo ya he realizado una reunión. Así de sencillo ahora para obtener la consulta vamos a ser facherio apuntó Select. Y ahora aquí hay una opción interesante voy a dejarlo así por el momento y voy a crear una lista de trámites y vamos a darle Results y ya sabes si se Henriette Quarry y les paso como parámetro esta idea y obtengo la lista de resultados.
-
-Ahora voy a imprimir dos cosas que es el número de resultados esto es simplemente results .6 y propiamente ya como tal la impresión de la lista para esto recuerda que en tramité debe estar sobre el escrito el método tus Frink y en este caso en diario El cliente no está pero lo vamos a hacer dándole cuerpo al método Tuxtepec aquí cuánto me va a dar resultado.
-
-Bueno aquí me va a dar cuatro porque me dio cuatro porque realmente estoy haciendo la consulta de cada una de las filas pero aquí el problema es que yo ya tengo repetido los trámites. 
-
-Entonces simplemente lo que voy a hacer es una operación distinta para que me dé resultados distintos. Entonces vamos a ponerle distinto. Y ahora yo ya tengo el trámite 1 y el trámite dos que son realmente los que aparecen en toda la tabla de diario.
-
-Entonces desde aquí hicimos una consulta de todos los trámites que aparecen en la tabla diaria de clientes vamos a comentar esto por qué ahora vamos a consultar todos los diarios de un.
-
-Y voy a copiar esto también. Solo que ahora yo no voy a hacer trámites si no voy a querer diarios de quien te entonces vamos a cambiar.
-
-Ahora como va a ser el Jaime Bueno el Yeung ahora va a ser de diario cliente. Y el objetivo para estar en natural va a ser diario cliente pero ahora aquí hay algo importante.
-
-Yo necesito poner una restricción web donde el Leydi si hablamos de si se igual por ejemplo a uno o dos.
-
-Pero acuérdate que no hablamos de Ivis sino hablamos de objetos hablamos de Matins no hablamos de tablas con filas y columnas.
-
-Entonces lo que voy a hacer es lo siguiente chirria y lo voy a poner así para que lo puedas ver muy facilito y voy a poner punto.
-
-Y ahora qué voy a comprar aquí. Voy a comparar objetos entonces voy a poner punto Ogueta y en nombre del objeto es diario cliente punto trámite y aquí le tengo que pasar un objeto.
-
-Entonces simplemente puedo hacer por ejemplo en M.N datos tramité punto Clas y por ejemplo el Leidi que va a consultar es el 2 para que me dé entrada el 1 para que me entre 1 y 2 el 1 2 entonces qué estoy haciendo aquí.
-
-Le estoy diciendo quedar en la reunión natural pero que solo me arroje los trámites que estén asociados al trámite con Leidi una y obviamente aquí hablamos de Diario de cliente y listo vamos a ejecutar esta consulta me arrojó 2.
-
-El Diario UNO que se trata uno este es el trámite también lo imprime y por acá está el diario 2.
-
-Entonces me arrojó este y entre 1 y 2 y el método frustren también imprime el trámite el cual está asociado entonces con estas sentencias.
-
-Con este código es muy sencillo hacerle remedios naturales al principio es un poco más difícil de entender que las versiones anteriores.
-
-Pero ya cuando te acostumbras a saber que es muy sencillo para hacer estas reuniones naturales 
 
 ## Actualización de la B.D. a la V3 03:13
 
+**``**
 **``**
 **``**
 
