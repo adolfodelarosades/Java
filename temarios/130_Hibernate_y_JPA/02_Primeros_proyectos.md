@@ -579,6 +579,9 @@ Vamos a ulilizar el arquetipo *quitstart*, un arquetipo no es más que un proyec
 
 <img src="images/4-20.png">
 
+↪️
+![image](https://user-images.githubusercontent.com/23094588/128746842-d4feca48-fe2e-4659-9091-1301604b034b.png)
+
 Recordar que Maven organiza sus proyectos mediante artefactos que vienen definidos por Id de Grupo y un Id de Artefacto.
 
 Lo primero que vamos hacer es cambiar la versión de Java 1.5 a Java 1.8
@@ -723,6 +726,10 @@ En la nueva carpeta vamos a crear un nuevo archivo de tipo `Hibernate Configurat
 
 <img src="images/4-45.png">
 
+↪️
+![image](https://user-images.githubusercontent.com/23094588/128748964-6166629b-0cab-4896-aa7d-a8da997edac1.png)
+
+
 No vamos a darle un nombre al `Session factory name`, esto es útil si le queremos definir más de uno.
 
 Y podemos usar un pequeño truco primero marcamos en `Database dialect` con `MySQL` y en `Driver class` seleccionamos `com.mysql.jdbc.Driver` y ya que lo tenemos volvemos a `Database dialect` y ponemos `MySQL 5 (InnoDB)` ya que si lo marcabamos desde el principio el driver que aparece no es el recomendado, por eso tenemos que hacer este apaño.
@@ -739,6 +746,9 @@ Al haber instalado Hibernate Tools nos aparce una consola con diferentes pestañ
 
 <img src="images/4-47.png">
 
+↪️
+![image](https://user-images.githubusercontent.com/23094588/128749511-ad0c76cb-f9a7-4bd2-88df-fe6046a7d2e3.png)
+
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
@@ -754,14 +764,13 @@ Al haber instalado Hibernate Tools nos aparce una consola con diferentes pestañ
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
     </session-factory>
 </hibernate-configuration>
-
 ```
 
 <img src="images/4-11.png">
 
 Vamos a continuar con las tareas, vamos a añadir una serie de propiedades que nos van a ser muy utiles como son *Show sql, Format sql y Hbm2ddl Auto*.
 
-Las dos primeras servirán para que Hibernate vaya mostrando por el log, las consultas SQL que va lanzando al sistema Gestor de Base de Datos la primera solo los muestra, la segunda hace una especie de función Pretty y nos muestra ese código SQL más entendible, la tercer propiedad *Hbm2ddl Auto* nos va a permiti que sea Hibernate el que se encargue de construir el esquema de la base de datos si nosotros lo queremosy de actualizar los cambios con respecto a versiones anteriores descargandonos a nosotros de esa tarea en particular. 
+Las dos primeras servirán para que Hibernate vaya mostrando por el log, las consultas SQL que va lanzando al sistema Gestor de Base de Datos la primera solo los muestra, la segunda hace una especie de función Pretty y nos muestra ese código SQL más entendible, la tercer propiedad *Hbm2ddl Auto* nos va a permiti que sea Hibernate el que se encargue de construir el esquema de la base de datos si nosotros lo queremosy  de actualizar los cambios con respecto a versiones anteriores descargandonos a nosotros de esa tarea en particular. 
 
 Nos vamos a la consola del archivo `hibernate.cfg.xml` en la pestaña `Hibernate` 
  
