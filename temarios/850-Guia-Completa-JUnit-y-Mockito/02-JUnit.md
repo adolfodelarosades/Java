@@ -192,7 +192,22 @@ Ahora el error nos lo manda en el **`assertTrue`**, vamos a modificar el código
 
 ![image](https://user-images.githubusercontent.com/23094588/130354719-a5dc322a-20c7-4a80-8f2f-61e0a1adfb3f.png)
 
+Pero realmente estamos modificando el valor que espera en el Test para que la pase, normalmente lo que vamos a corregir el código para que retorne lo que se espera, en este caso vamos a quitar el **`.toUpperCase()`** en la clase **`Cuenta`** y también vamos a modificar lo cambiado en el Test.
+
+![image](https://user-images.githubusercontent.com/23094588/130354890-62efa2e7-0975-4036-a5d3-412c0f9e5fc5.png)
+
 ## Escribiendo test para el saldo 11:44
+
+Ahora nos vamos a enfocar el **`saldo`**, para lo cual vamos a crear un nuevo método llamado **`testSaldoCuenta()`**
+
+![image](https://user-images.githubusercontent.com/23094588/130355165-5ea6b3c5-afb5-4576-8b68-717767ae9baa.png)
+
+Para que IJ nos cree la variable.
+
+![image](https://user-images.githubusercontent.com/23094588/130355208-74bcdc59-a45a-4d3d-ba44-f9a17ee03d86.png)
+
+
+
 ## Test driven development TDD con JUnit 10:13
 ## TDD para debito y crédito 11:12
 ## Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
