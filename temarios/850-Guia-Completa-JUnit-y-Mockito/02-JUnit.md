@@ -206,9 +206,98 @@ Para que IJ nos cree la variable.
 
 ![image](https://user-images.githubusercontent.com/23094588/130355208-74bcdc59-a45a-4d3d-ba44-f9a17ee03d86.png)
 
+El método nos queda así:
+
+![image](https://user-images.githubusercontent.com/23094588/130364731-2307c804-33b6-4db6-891a-b5ca209562e2.png)
+
+Con **`assertEquals`** estamos comparado un valor esperado y un valor actual, el valor esperado lo estamos poniendo como una literar double, el valor actual sabemos que es **`Bigdecimal`** y con **`.doubleValue()`** lo que hacemos es que lo trate como doble para evitar compatibilidad de tipos, vamos a ejecutar la Clase:
+
+Vamos a ejecutar solo el método **`testSaldoCuenta()`**:
+
+![image](https://user-images.githubusercontent.com/23094588/130364829-9cbf0556-2ceb-4933-ad47-d59aa4ad87bf.png)
+
+La prueba la ha pasado para el método **`testSaldoCuenta()`**, ahora lo que vamos a hacer es ejecutar toda la clase:
+
+![image](https://user-images.githubusercontent.com/23094588/130365761-d7893ebc-f00c-460d-840d-5824220b6da3.png)
+
+Los dos métodos pasan el Test. Observese el orden en que ejecuta los métodos no ha sido en el orden en que estan colocados esto lo determina el Motor de JUnit5 pero realmente para nuestras pruebas esto no debería tener ninguna importancia ya que nosotros estamos probando piezas de código independientes. ***No debería manejar staless*** en los diferentes métodos, no deben estar relacionados. En este caso se crea una instancia diferente de **`CuentaTest`** para cada método que tengamos.
+
+### `assertFalse`
+
+Con **`assertFalse`** va evaluar una expresión booleana y va a esperar que el resultado sea **`false`**. En este caso yo lo que quiero es confirmar que mi **`saldo`** nunca sea negativo. Recordemos que **`saldo`** es un **`BigDecimal`** por lo que no podemos comparar directamente con un **`0`**, vamos a utilizar el método **`compareTo(...)`** el cual puede ser **`1`**, **`-1`** ó **`0`**, ahora vemos que significa esto el código queda así:
+
+![image](https://user-images.githubusercontent.com/23094588/130366190-738db5ab-3fad-4bd7-a25a-6b4739341022.png)
+
+La expresión **`cuenta.getSaldo().compareTo(BigDecimal.ZERO)`** esta comparando el **`BigDecimal saldo`** con el **`BigDecimal.ZERO`**, como mencionamos antes esto me va a dar como resultado un **`1`**, **`-1`** ó **`0`**, cuando el resultado es **`-1`** significa que **`saldo`** es menor que **`BigDecimal.ZERO`** o dicho de otra forma que **`BigDecimal.ZERO`** es mayor que el saldo o sea que el saldo es NEGATIVO.
+
+![image](https://user-images.githubusercontent.com/23094588/130366294-3c217aee-3ba5-4f86-b1dd-fb94b6b90403.png)
+
+y preguntamos si el resultado que nos de (**`-1`**) es **`< 0`**. Esta condición va a devolver un **`true`** por lo que el **`assertFalse`** fallará y el Test no lo pasaremos. 
+
+Si el el **`saldo`** es positivo el **`compareTo`** devolverá un **`1`**, comparará **`1 < 0`** esto nos devolvera **`false` y el  **`assertFalse`** será correcto por lo que el Test lo pasaremos.
+
+Si el el **`saldo`** es **`0`** el **`compareTo`** devolverá un **`0`**, comparará **`0 < 0`** esto nos devolvera **`false` y el  **`assertFalse`** será correcto por lo que el Test lo pasaremos. 
+
+El Test será correcto mientras el **`saldo`** sea positivo o **`0`**.
+
+Vamos a probar la clase entera.
+
+![image](https://user-images.githubusercontent.com/23094588/130366593-226240c8-ae1b-4e1d-a8aa-fc37a49f4a1b.png)
+
+Paso la prueba, solo por probar vamos a poner el **`saldo`** negativo para que falle la prueba.
+
+![image](https://user-images.githubusercontent.com/23094588/130366640-e6718c44-805d-4210-bd43-43455940865c.png)
+
+La prueba falla por que el **`saldo`** es negativo en el segundo método. Un método paso la prueba pero el otro no. Por lo que el Test no pasa la prueba.
+
+Pero ¿Qué pasa si pongo el saldo negativo en el primer método?
+
+![image](https://user-images.githubusercontent.com/23094588/130366686-deb0716e-d8cd-461b-84bf-c97b17673ed0.png)
+
+El Test es aprobado por que en el primer método no estamos comparando el **`saldo`** y no importa su valor. Vamos a dejar ambos métodos con el saldo positivo.
+
+La sentencia:
+
+```java
+assertFalse(cuenta.getSaldo().compareTo(BigDecimal.ZERO) < 0);
+```
+
+es quivalente a 
+
+```java
+assertTrue(cuenta.getSaldo().compareTo(BigDecimal.ZERO) > 0);
+```
+
+Podemos ponerla de una o de otra forma:
+
+![image](https://user-images.githubusercontent.com/23094588/130366869-892e217c-e410-4acd-8643-afcc9d276b8a.png)
+
+Validamos lo mismo pero con la lógica inversa.
 
 
 ## Test driven development TDD con JUnit 10:13
+
+En esta lección vamos a ver el Desarrollo en Base a Pruebas Unitarias mejor conocido como **TDD Test-Driven Development**(Desarrollo Dirigido por Tests), esta técnica involucra dos partes:
+
+1. Escribir primero las Pruebas Unitarias
+2. Implemnentar el Código, mediante refactorización implementamos los métodos.
+
+Vamos a tener el método sin nada de código, al probar el Test obviamente fallará, empezaremos a meter toda la lógica de negocio en el método volvemos a probar hasta que supere el Test.
+
+El código se desarrollará siempre en base a las Pruebas Orientadas.
+
+### Primer Ejemplo TDD
+
+El ejemplo que vamos a querer implementar es la comparación de dos Objetos **`Cuenta`** para ver si son el mismo (las referencias deben ser las mismas). Cuando comparo dos objetos con el método **`equals`** estoy comparando las referencias. Pero puedo modificar este comportamiento y comparar por Valor en vez de por Referencia.
+
+AQUIIIIIII min 0:40
+
+
+
+
+
+
+
 ## TDD para debito y crédito 11:12
 ## Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
 ## Añadiendo la clase Banco y la realcion con las cuentas 09:55
