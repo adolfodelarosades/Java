@@ -290,7 +290,15 @@ El código se desarrollará siempre en base a las Pruebas Orientadas.
 
 El ejemplo que vamos a querer implementar es la comparación de dos Objetos **`Cuenta`** para ver si son el mismo (las referencias deben ser las mismas). Cuando comparo dos objetos con el método **`equals`** estoy comparando las referencias. Pero puedo modificar este comportamiento y comparar por Valor en vez de por Referencia, o comparar los Atributos de los objetos si estos son iguales puedo indicar que los Objetos sean considerados iguales aun que realmente sean objetos distintos(por las referencias).
 
-Como vamos a usar TDD primero agregagos el método en **`CuentaTest`** y después vez que debemos implementar en **`Cuenta`**. Vamos a añadir en **`CuentaTest`** el método **`testReferenciaCuenta`** con el siguiente código:
+CTRL + D (W + D) : Duplica una línea
+
+Como vamos a usar TDD primero agregagos el método en **`CuentaTest`** y después vez que debemos implementar en **`Cuenta`**. Vamos a añadir en **`CuentaTest`** el método **`testReferenciaCuenta`** con el siguiente código y ejecutamos el método:
+
+![image](https://user-images.githubusercontent.com/23094588/130745625-e058fea7-0391-477a-993a-19cb9af56f4e.png)
+
+Estamos creando dos Objetos cuenta con los mismos valores y el test pregunta si estos Objetos son diferentes, cosa que es afirmativa por que los métodos tienen diferentes referencias, el Test lo ha pasado.
+
+Pero que pasa si ***cambia la regla de negocio***, ahora quiero comparar 
 
 
 
