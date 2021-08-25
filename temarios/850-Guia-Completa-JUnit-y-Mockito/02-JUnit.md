@@ -288,7 +288,17 @@ El código se desarrollará siempre en base a las Pruebas Orientadas.
 
 ### Primer Ejemplo TDD
 
-El ejemplo que vamos a querer implementar es la comparación de dos Objetos **`Cuenta`** para ver si son el mismo (las referencias deben ser las mismas). Cuando comparo dos objetos con el método **`equals`** estoy comparando las referencias. Pero puedo modificar este comportamiento y comparar por Valor en vez de por Referencia.
+El ejemplo que vamos a querer implementar es la comparación de dos Objetos **`Cuenta`** para ver si son el mismo (las referencias deben ser las mismas). Cuando comparo dos objetos con el método **`equals`** estoy comparando las referencias. Pero puedo modificar este comportamiento y comparar por Valor en vez de por Referencia, o comparar los Atributos de los objetos si estos son iguales puedo indicar que los Objetos sean considerados iguales aun que realmente sean objetos distintos(por las referencias).
+
+Como vamos a usar TDD primero agregagos el método en **`CuentaTest`** y después vez que debemos implementar en **`Cuenta`**. Vamos a añadir en **`CuentaTest`** el método **`testReferenciaCuenta`** con el siguiente código:
+
+
+
+
+
+
+
+
 
 AQUIIIIIII min 0:40
 
