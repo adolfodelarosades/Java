@@ -39,4 +39,38 @@ Vamos a abrir los ***Plugings / spring-boot / spring-boot:run*** con esto se eje
 
 ![image](https://user-images.githubusercontent.com/23094588/132550728-4546e076-a772-4042-8aa2-9b6e998707f7.png)
 
+### Configurar Versiones de Java y Maven
+
+Si necesitamos hacer ajustes en la versión de Java podemos entrar a la opción:
+
+![image](https://user-images.githubusercontent.com/23094588/132553726-8cf3e76e-65b0-434a-a5fc-ce74db071d90.png)
+
+Y ponemos la versión de Java que necesitemos.
+
+![image](https://user-images.githubusercontent.com/23094588/132553872-98b491b9-476d-4e95-b469-72389a14be37.png)
+
+Y desde aquí mismo podemos instalar una versión de Java con la opción **`Add SDK / Donwload SDK`**, esta opción instala todo automáticamente, debemos indicar versión y el servidor de donde lo vamos a descargar.
+
+Detener el Servidor
+
+![image](https://user-images.githubusercontent.com/23094588/132554972-a870c513-5534-46a9-9571-d5764fe1500d.png)
+
+![image](https://user-images.githubusercontent.com/23094588/132555039-e6dbcbe7-5ca0-446f-a205-91f582b580e9.png)
+
+
+### Detener el Proceso que se Ejecute en el Puerto 8080
+
+Usar el comando en windows para ver que proceso se esta ejecutando en el puerto 8080:
+
+```sh
+>netstat -ano | findstr LISTENING | findstr 8080
+```
+
+Para matar el proceso es con:
+
+```sh
+>taskkill -PID 11808 -F
+```
+
+
 
