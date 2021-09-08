@@ -57,6 +57,9 @@ Serie de varios cursos Java.
 
 * [401 Curso Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/401_Curso_Java.md)
 
+# YOUTUBE
+* [451 Curso de Java Fullstack Completo (springboot, hibernate, JWT, API Rest)](https://github.com/adolfodelarosades/Java/blob/master/temarios/451_Curso_Java_Fullstack.md)
+
 # Oracle
 * [500 Java Oracle University](https://github.com/adolfodelarosades/Java/blob/master/temarios/500-Java-Oracle-University.md)
 * [501 Java Coding & Concepts with a Game: Java Puzzle Ball](https://github.com/adolfodelarosades/Java/blob/master/temarios/501_Java_Coding-Concepts_with_a_Game_Java_Puzzle_Ball.md)
