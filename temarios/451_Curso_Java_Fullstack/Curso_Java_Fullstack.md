@@ -72,5 +72,27 @@ Para matar el proceso es con:
 >taskkill -PID 11808 -F
 ```
 
+### Creación del Controlador
+
+Dentro del package **`com.cursojava.curso`** vamos a crear el paquete **`controllers`** y dentro de este paquete vamos a cerear la clase **`UsuarioController`**, esta clase la vamos a anotar con **`@RestController`** y dentro de ella vamos a crear un método 
+**`prueba`** que nos va a retornar un texto, este método va a estar anotado con **`@RequestMapping(value = "prueba")`** esta anotación indica el nombre del URL que debemos indicar para llamar a este método, el código nos queda así:
+
+![image](https://user-images.githubusercontent.com/23094588/133881276-c4112d26-501e-462c-9a44-433c736d45f1.png)
+
+Ejecutamos el Servidor.
+
+![image](https://user-images.githubusercontent.com/23094588/133881371-8650ebc9-11e6-4fe8-b2c6-671ff0eca39d.png)
+
+Si cargamos la URL http://localhost:8080/prueba nos muestra el mensaje que retorna el método **`prueba`**
+
+![image](https://user-images.githubusercontent.com/23094588/133881397-264bd427-efb3-4ff2-843c-0e2f7e9180bb.png)
 
 
+
+**``**
+**``**
+**``**
+**``**
+**``**
+**``**
+**``**
