@@ -238,11 +238,86 @@ Con **`await`** lo que hace es que espera al resultado del llamado del Servicio,
 
 ![image](https://user-images.githubusercontent.com/23094588/133886663-4db6b282-d4c5-4cf5-a048-99d0b9d6689c.png)
 
-Al recargar el navegador tenemos:
+Al recargar el navegador vemos la respuesta del servicio.:
 
 ![image](https://user-images.githubusercontent.com/23094588/133887111-0f9e3401-1598-4b2a-835c-4b985a5268ae.png)
 
-Vemos la respuesta del servicio.
+Si en lugar de la Consola cargamos la pestaña **Network - XHR** podemos ver todo el ***Request*** que hemos hecho, el URL al que invocamos, el tipo de método en este caso GET, y se nos regresa un **Status Code 200** que indica que todo ha ido bien. 
+
+![image](https://user-images.githubusercontent.com/23094588/133895653-45b04b1d-52a1-4367-bfa9-66c48888dbc9.png)
+
+Si cambiamos a la pestaña Preview o Response vemos la ***Response*** que nos esta enviando el Servidor.
+
+![image](https://user-images.githubusercontent.com/23094588/133895670-31366e3f-b26c-4fe7-a1af-70dee02073c0.png)
+
+Y si cambiamos a la pestaña Initiator vemos todo el camino que ha seguido la petición.
+
+![image](https://user-images.githubusercontent.com/23094588/133895873-76554cdc-6f02-4370-a9db-0ba11682a593.png)
+
+### Creación del método que retorna un listado de Usuarios
+
+Hasta el momento estamos retornando un usuario, vamos a hacer un método que retorne un listado de Usuarios.
+
+![image](https://user-images.githubusercontent.com/23094588/133896233-1e5c338a-fff7-4300-b8a2-15478b9ace59.png)
+
+Podemos cargar la URL http://localhost:8080/usuarios para ver lo que retorna el servicio.
+
+![image](https://user-images.githubusercontent.com/23094588/133896277-4ada3af0-09e5-4c9b-97ff-510e50a31dda.png)
+
+Y también podemos hacer que en la pagina **`usuarios.html`** se invoque a este servicio en lugar del que retorna un solo usuario por lo que tenemos que modificar el Script **`datatables-usuarios.js`**.
+
+![image](https://user-images.githubusercontent.com/23094588/133896377-1522f356-c00d-4259-8165-f245fc59a77a.png)
+
+Recargamos el servidor e invocamos la ruta http://localhost:8080/usuarios.html:
+
+![image](https://user-images.githubusercontent.com/23094588/133896464-389955b1-8f79-45f2-97db-11fcc7ad1e85.png)
+
+![image](https://user-images.githubusercontent.com/23094588/133896483-f2e3b217-365f-4299-bb90-177ec3e9f7c0.png)
+
+![image](https://user-images.githubusercontent.com/23094588/133896502-a380e049-cc03-445a-8faf-9d66c3582879.png)
+
+![image](https://user-images.githubusercontent.com/23094588/133896517-2f587e47-31fb-4082-a099-acc149682615.png)
+
+Vemos que en la Consola nos retorna el listado de los 3 Usuarios incluidos, pero en el HTML solo nos muestra un Usuario el que tenemos Harcodeado, debemos hacer cambios en **`Usuarios.html`** para que pinte los datos recuperados del Servicio.
+
+### Modificar el Script para Cargar los Datos de Usuarios Dinamicamente.
+
+Como mencionamos antes tenemos que modifar **`Usuarios.html`** para que pinte los datos recuperados del Servicio, pero más concretamente lo que tenemos que modificar es el Script **`datatables-usuarios.js`** asociado a **`Usuarios.html`**.
+
+Como primera prueba podemos modificar desde la Consola el valor de algún campo de la tabla esto lo hacemos así:
+
+![image](https://user-images.githubusercontent.com/23094588/133897003-129a88e8-3a2b-43e8-b231-baf9a7c74318.png)
+
+![image](https://user-images.githubusercontent.com/23094588/133897021-b0c0a5dd-eb35-4bde-b18a-7e3ce4dca1d0.png)
+
+Vemos como desde la consola hemos cambiado un elemento de la página, como hemos visto que esto funciona ya lo podemos hacer en el Script, primero vemos que en la Tabla de **`Usuarios.html`** tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/133897091-677f2c34-3600-43d4-bf26-e176b7483e34.png)
+
+Lo que esta dentro de **`<tbody>`** lo vamos a cortar 
+
+![image](https://user-images.githubusercontent.com/23094588/133897347-6d332df3-dadb-4df0-b9e0-d98976171974.png)
+
+Si en este momento recargamos el Servidor y la página nos va a mostrar lo siguiente:
+
+![image](https://user-images.githubusercontent.com/23094588/133897447-7d8be560-a558-44b1-8ee1-a360a1c4f75d.png)
+
+El pluging detecta que no hay datos y nos lo indica.
+
+En **`datatables-usuarios.js`** vamos a pegar lo copiado y a asignarselo a una variable **`filaUsuario`**, tenemos que hacer unas pequeñas modificaciones para no tener comillas dentro de las comillas, se cambian por comillas simples.
+
+![image](https://user-images.githubusercontent.com/23094588/133897597-f6706e54-3c97-413e-b115-05634b38a732.png)
+
+
+Y esa variable se lo asignaremos a su vez a **`document.querySelector('#dataTableUsuarios tbody').outerText`**.
+
+Si volvemos a recargar el Servidor y la página volveremos a tener lo mismo solo que ahora la carga la estamos haciendo dinámicamente en el Script.
+
+![image](https://user-images.githubusercontent.com/23094588/133897640-3f7d8bff-2a7d-4294-a003-0650dc580b2e.png)
+
+
+
+
 
 
 
