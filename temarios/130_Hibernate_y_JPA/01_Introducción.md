@@ -21,33 +21,33 @@ Curso de Hibernate 5, una tecnología de ORM de las más utilizadas en el mercad
 
 <img src="images/1-02.png">
 
-En el primer capítulo veremos una introducción a lo que es el concepto de ORM y los diferentes productos que podemos encontrar en el mercado.
+1) En el **primer capítulo** veremos una introducción a lo que es el concepto de ORM y los diferentes productos que podemos encontrar en el mercado.
 
-En el segundo iremos conociendo Hibernate y también los diferentes módulos que ofrece, lo compararemos con el estándar JPA.
+2) En el **segundo capítulo** iremos conociendo Hibernate y también los diferentes módulos que ofrece, lo compararemos con el estándar JPA.
 
-En el tercer capítulo realizaremos nuestro primer proyecto con Hibernate, nuestro primer proyecto con JPA y también marinaremos estás tecnologías con Spring Boot y Spring MVC.
+3) En el **tercer capítulo** realizaremos nuestro primer proyecto con Hibernate, nuestro primer proyecto con JPA y también marinaremos estás tecnologías con Spring Boot y Spring MVC.
 
-En el capítulo 4 vamos a saber cómo mapear nuestras entidades en la base de datos haciéndolo a través de anotaciones y a través de fichero de descriptores XML y también conoceremos el ciclo de vida de las entidades.
+4) En el **capítulo 4** vamos a saber cómo mapear nuestras entidades a tablas en la base de datos haciéndolo a través de anotaciones y a través de fichero de descriptores XML y también conoceremos el ciclo de vida de las entidades.
 
-En el capítulo 5 conoceremos cómo asociar unas entidades con otras y los diferentes tipos de asociaciones que existen.
+5) En el **capítulo 5** conoceremos cómo asociar unas entidades con otras y los diferentes tipos de asociaciones que existen.
 
 <img src="images/1-03.png">
 
-En el capítulo 6 hablaremos de algunos elementos avanzados como la herencia o los campos calculados.
+6) En el **capítulo 6** hablaremos de algunos elementos avanzados como la herencia o los campos calculados.
 
-En el siete veremos como Hibernate nos permite mapear colecciones de diferentes tipos y estas colecciones pueden ser de valores simples de valores algo más complejo y también puede ser ordenada de diferentes maneras.
+7) En el **capítulo 7** veremos como Hibernate nos permite mapear colecciones de diferentes tipos y estas colecciones pueden ser de valores simples de valores algo más complejo y también puede ser ordenada de diferentes maneras.
 
-En el capítulo 8 veremos cómo genera el esquema de nuestra base de datos y así lo deseamos o cómo podemos hacer el proceso inverso para un esquema dado de generación de la entidad.
+8) En el **capítulo 8** veremos cómo genera el esquema de nuestra base de datos y así lo deseamos o cómo podemos hacer el proceso inverso para un esquema dado de generación de la entidad.
 
-En el capítulo 9 hablaremos un poco sobre qué es eso de la unidad de persistencia, el contexto de persistencia y cómo se pueden almacenar, recuperar y borrarlo.
+9) En el **capítulo 9** hablaremos un poco sobre qué es eso de la unidad de persistencia, el contexto de persistencia y cómo se pueden almacenar, recuperar y borrarlo.
 
-En el capítulo 10 hablaremos de transacciones y control de concurrencia y veremos algunos patrones y antipatrones.
+10) En el **capítulo 10** hablaremos de transacciones y control de concurrencia y veremos algunos patrones y antipatrones.
 
 <img src="images/1-04.png">
 
-En el capítulo 11 veremos cómo podemos realizar consulta en lenguaje nativo de Hibernate y sobretodo utilizaremos el de JPA.
+11) En el **capítulo 11** veremos cómo podemos realizar consulta en lenguaje nativo de Hibernate y sobretodo utilizaremos el de JPA.
 
-Y por último en el capítulo 12 hablaremos de Hibernate Envers y cómo realizar la auditoría de entidades y cómo realizar la auditoría de entidades y un control de revisiones.
+12) Y por último en el **capítulo 12** hablaremos de Hibernate Envers y cómo realizar la auditoría de entidades y cómo realizar la auditoría de entidades y un control de revisiones.
 
 # 02 Introducción 18:52 
 
