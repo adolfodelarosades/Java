@@ -37,7 +37,7 @@ Curso de Hibernate 5, una tecnología de ORM de las más utilizadas en el mercad
 
 7) En el **capítulo 7** veremos como Hibernate nos permite mapear colecciones de diferentes tipos y estas colecciones pueden ser de valores simples de valores algo más complejo y también puede ser ordenada de diferentes maneras.
 
-8) En el **capítulo 8** veremos cómo genera el esquema de nuestra base de datos y así lo deseamos o cómo podemos hacer el proceso inverso para un esquema dado de generación de la entidad.
+8) En el **capítulo 8** veremos cómo Hibernate genera el esquema de nuestra base de datos y así lo deseamos o cómo podemos hacer el proceso inverso para un esquema dado de generación de la entidad.
 
 9) En el **capítulo 9** hablaremos un poco sobre qué es eso de la unidad de persistencia, el contexto de persistencia y cómo se pueden almacenar, recuperar y borrarlo.
 
