@@ -39,15 +39,15 @@ Curso de Hibernate 5, una tecnología de ORM de las más utilizadas en el mercad
 
 8) En el **capítulo 8** veremos cómo Hibernate genera el esquema de nuestra base de datos y así lo deseamos o cómo podemos hacer el proceso inverso para un esquema dado de generación de la entidad.
 
-9) En el **capítulo 9** hablaremos un poco sobre qué es eso de la unidad de persistencia, el contexto de persistencia y cómo se pueden almacenar, recuperar y borrarlo.
+9) En el **capítulo 9** hablaremos un poco sobre qué es eso de la unidad de persistencia, el contexto de persistencia y cómo se pueden almacenar, recuperar y borrar datos.
 
 10) En el **capítulo 10** hablaremos de transacciones y control de concurrencia y veremos algunos patrones y antipatrones.
 
 <img src="images/1-04.png">
 
-11) En el **capítulo 11** veremos cómo podemos realizar consulta en lenguaje nativo de Hibernate y sobretodo utilizaremos el de JPA.
+11) En el **capítulo 11** veremos cómo podemos realizar consultas en lenguaje nativo de Hibernate y sobretodo utilizaremos el de JPA.
 
-12) Y por último en el **capítulo 12** hablaremos de Hibernate Envers y cómo realizar la auditoría de entidades y cómo realizar la auditoría de entidades y un control de revisiones.
+12) Y por último en el **capítulo 12** hablaremos de ***Hibernate Envers*** y cómo realizar la auditoría de entidades y un control de revisiones.
 
 # 02 Introducción 18:52 
 
