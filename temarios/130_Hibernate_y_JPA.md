@@ -31,7 +31,7 @@ Para realizar persistencia de datos sin usar SQL directamente podremos hacer uso
 
 ## Contenido
 
-1. [Introducción](130_Hibernate_y_JPA/01_Introducción.md) 44m
+1. [Introducción](130_Hibernate_y_JPA/01_Introducción.md) 44m 👍
    * 01 Presentación del profesor y del curso 2:49 
    * 02 Introducción 18:52 
    * 03 Hibernate, más que un ORM 22:43 
