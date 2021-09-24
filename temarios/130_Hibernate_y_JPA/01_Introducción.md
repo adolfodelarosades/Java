@@ -387,14 +387,6 @@ Alguna de las que usaremos durante el curso es la siguiente:
 
 En cada uno de los proyectos de ejemplo indicaremos las librerías que necesitaremos.
 
-## Preguntas
-
-P= Mi consulta va respecto al último punto sobre Hibernate cuando dice "es algo difuso usar procedimientos almacenados". Qué pasaría si tengo un o varios procedimientos almacenados o funciones para "reportes especiales" a nivel de base de datos, en el cual se hacen varios "joins" con tablas o crea una tabla dinámica fruto de estas consultas. ¿Sería mejor invocar desde Hibernate o JPA al procedimiento almacenado o función? ¿Y si este cojunto de datos que retorna del procedimiento almacenado, corresponde mapearlo en un nuevo objeto? ¿Cómo Hibernate soluciona este escenario?.
-
-R= Con ello me refería a que, a diferencia de otros elementos del estándar SQL, los procedimientos almacenados están fuertemente acoplados al sistema gestor de base de datos concreto que se utilice. No es lo mismo programar en PLSQL (Oracle) o en T-SQL (SQL Server).
-Como premisa, cabe indicar que una función es un bloque de código que se puede usar en una sentencia SQL, y que recibe cero o más argumentos, devolviendo una salida. Frente a él, un procedimiento almacenado es un bloque de código que no se puede usar en una sentencia SQL y que recibe cero o más parámetros que pueden ser de entrada, de salida o de entrada-salida.
-JPA tiene la interfaz `StoredProcedureQuery` que nos permite invocar procedimientos almacenados. Se pueden utilizar parámetros de salida de tipo `REF_CURSOR`, permitiendo así obtener un listado de resultados como salida de dicho procedimiento. Si al crear el procedimiento, se indica el tipo sobre el que se realiza la consulta (por ejemplo, con el método `entityManager.createdStoredProcedure`) (ver https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createStoredProcedureQuery-java.lang.String-java.lang.Class...-), el conjunto de resultados puede ser un `List<Tipo>` siendo `Tipo` el tipo de dato de la entidad que queremos utilizar. En otro caso, lo habitual es que sea un `List<Object[]>`.
-
 ## Transcripción
 
 <img src="images/3-01.png">
