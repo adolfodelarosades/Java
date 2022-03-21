@@ -351,8 +351,6 @@ public class Employee {
 }
 ```
 
-````````
-
 ### ACCESO MIXTO
 
 También es posible combinar el acceso al campo con el acceso a la propiedad dentro de la misma jerarquía de entidad, o incluso dentro de la misma entidad. Esta no será una ocurrencia muy común, pero puede ser útil, por ejemplo, cuando se agrega una subclase de entidad a una jerarquía existente que usa un tipo de acceso diferente. Agregar una anotación `@Access` con un modo de acceso especificado en la entidad de subclase hará que el tipo de acceso predeterminado sea anulado para esa subclase de entidad.
