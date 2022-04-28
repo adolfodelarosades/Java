@@ -51,7 +51,7 @@ Curso de Hibernate 5, una tecnología de ORM de las más utilizadas en el mercad
 
 # 02 Introducción 18:52 
 
-[Introducción](pdfs/01_Introducción.pdf)
+[Introducción](https://github.com/adolfodelarosades/Java/blob/master/temarios/130_Hibernate_y_JPA/pdfs/01_Introduccio%CC%81n.pdf)
 
 ## Resumen Profesor
 
