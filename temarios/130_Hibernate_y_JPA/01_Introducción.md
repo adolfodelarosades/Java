@@ -179,7 +179,7 @@ Desde que el mundo es mundo el ser humano ha tenido necesidad de almacenar conoc
 
 <img src="images/2-03.png">
 
-Y a partir de ahí pues van surgiendo otros sistemas hasta que llegamos a ciertos sistemas mecánico, eléctrico, electrónico cómo son las cintas perforadas o el inicio de la computación, lo que conocemos como los discos duros, podemos ver en la imagen el primer disco duro, uno de los primeros discos duros que fabricó IBM en torno a los años 50, el IBM 305 y que tenía la friolera de 4MB y pesaba varias toneladas o los primeros discos duros primygeni de finales de los 70s y que valian cerca de 4000 dolares de la época y no llegaban a los 10 megas.
+Y a partir de ahí pues van surgiendo otros sistemas hasta que llegamos a ciertos sistemas mecánico, eléctrico, electrónico cómo son las cintas perforadas o el inicio de la computación, lo que conocemos como los discos duros, podemos ver en la imagen el primer disco duro, uno de los primeros discos duros que fabricó IBM en torno a los años 50, el IBM 305 y que tenía la friolera de 4MB y pesaba varias toneladas o los primeros discos duros primigenios de finales de los 70s y que valian cerca de 4000 dolares de la época y no llegaban a los 10 megas.
 
 <img src="images/2-04.png">
 
