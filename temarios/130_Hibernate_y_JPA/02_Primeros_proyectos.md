@@ -251,6 +251,10 @@ Vamos a ver fácilmente cómo se pueden instalar *JBoss Tools*, dentro de Help, 
 
 <img src="images/4-16.png">
 
+Actualmente yo tengo instalado en mi ECLIPSE la siguiente versión de las *JBoss Tools*.
+
+![image](https://user-images.githubusercontent.com/23094588/166119709-abc31d18-c137-40ab-8a05-e4d7c03528c4.png)
+
 <img src="images/4-05.png">
 
 Utilizaremos MySQL como sistema gestor de base de datos, si bien como tal ya no es software libre desde que Oracle de alguna manera compro a Sun el proyecto quedó dentro de paraguas de Oracle y aunque existe un Folk como MaríaDB, vamos a usar la versión Comunity de MySQL, además usaremos MySQL Workbench que nos permitira realizar algunas tareas de creación de esquemas de consulta de las tablas con un entorno gráfico bastante atractivo, es algo así como un IDE para MySQL y que será pues bastante  útil para nosotros.
