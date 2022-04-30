@@ -337,13 +337,13 @@ Observamos que efectivamente tenemos también la versión 14 de Java.
 
 ![image](https://user-images.githubusercontent.com/23094588/166121090-360a9726-ca8c-439f-9b10-6188c5448c5f.png)
 
-Como segundo paso vamos a añadir las dependencias necesarias a nuestro proyecto en el `pom.xml`.
+Como **segundo paso** vamos a **añadir las dependencias** necesarias a nuestro proyecto en el **`pom.xml`**.
 
 <img src="images/4-09.png">
 
-En nuestro caso van a ser dos, la primera es la dependencia Maven de Hibernate, las podemos localizar en el [mvnrepository](https://mvnrepository.com/) siempre tendrá publicada la última dependencia.
+En nuestro caso van a ser **dos**, **la primera es la dependencia Maven de Hibernate**, las podemos localizar en el [mvnrepository](https://mvnrepository.com/) siempre tendrá publicada la última dependencia.
 
-Y también nos hará falta el conector java para MySQL.
+Y también nos hará falta **el conector java para MySQL**.
 
 Hibernate no es más que una capa de abstracción sobre JDBC y JDBC necesita diferentes conectores en función del sistema Gestor de Bases de Datos que vayamos a usar de manera específica. 
 
@@ -375,13 +375,15 @@ Donde obtenemos:
 </dependency>
 ```
 
-Estas dos dependencias las vamos a incluir dentro de nuestro archivo `pom.xml`
+Estas dos dependencias las vamos a incluir dentro de nuestro archivo **`pom.xml`**, en el apartado de **dependencies** que actualmente luce así:
+
+![image](https://user-images.githubusercontent.com/23094588/166121243-70d6a470-b671-4e2c-9671-8f8cb689ebab.png)
 
 Al guardar el `pom.xml` todas las dependencias se descargan en nuestro proyecto dentro de la carpeta `Maven Dependencies`, como son varios archivos JARs que si lo tuvieramos que hacer manualmente sería muy complicado.
 
-<img src="images/4-30.png">
+![image](https://user-images.githubusercontent.com/23094588/166121338-acb0f36e-bb5f-4f95-812c-7a83d4d6f261.png)
 
-Como tercer paso vamos a crear el fichero de configuración de Hibernate `hibernate.cfg.xml`.
+Como **tercer paso** vamos a **crear el fichero de configuración de Hibernate `hibernate.cfg.xml`**.
 
 <img src="images/4-10.png">
 
@@ -443,48 +445,58 @@ Testeamos la conección.
 
 Y ya tenemos listo nuestro esquema con el usuario especifico.
 
-Una vez que tenemos creado ese esquema ya podemos hacer el paso 3.
-
-<img src="images/4-10-0.png">
+Una vez que tenemos creado ese esquema ya podemos regresar al paso 3.
 
 <img src="images/4-10.png">
 
-Para poder almacenar en un lugar adecuado ese fichero de configuración de Hibernate vamos a crear una nueva carpeta de código fuente con lo cual estará incluida dentro del classpath.
+Para poder almacenar en un lugar adecuado ese fichero de configuración de Hibernate vamos a crear una nueva carpeta , **`/src/main/resources`** de código fuente con lo cual estará incluida dentro del classpath.
 
-<img src="images/4-42.png">
+![image](https://user-images.githubusercontent.com/23094588/166121691-24ad6210-42e9-4596-9734-2e069dd011c2.png)
 
-Marcamos la opción de actualizar los filtros de exclusión para evitar que configurarlo nosotros a mano. 
+![image](https://user-images.githubusercontent.com/23094588/166121734-e696605d-b001-46df-9317-d4e3d3cc1b0f.png)
 
-En la nueva carpeta vamos a crear un nuevo archivo de tipo `Hibernate Configuration File (cfg.xml)`, las opciones nos aparecen gracias a que instalamos las JBoss Tools.
+**Marcamos la opción de actualizar los filtros de exclusión para evitar que configurarlo nosotros a mano.** 
 
-<img src="images/4-43.png">
+Damos a **Finish** y ya se nos crea el directorio.
 
-<img src="images/4-44.png">
+![image](https://user-images.githubusercontent.com/23094588/166121767-01149ccf-f093-419a-b540-c82887327fec.png)
 
-<img src="images/4-45.png">
+En la nueva carpeta vamos a crear un nuevo archivo de tipo **`Hibernate Configuration File (cfg.xml)`**, las opciones nos aparecen gracias a que instalamos las JBoss Tools.
 
-↪️
-![image](https://user-images.githubusercontent.com/23094588/128748964-6166629b-0cab-4896-aa7d-a8da997edac1.png)
+![image](https://user-images.githubusercontent.com/23094588/166121800-4ea13e84-6f15-4dff-ad6b-be3ea5a09d08.png)
 
+![image](https://user-images.githubusercontent.com/23094588/166121815-55aa9842-4f80-4a01-9f33-90ad78fadb55.png)
 
-No vamos a darle un nombre al `Session factory name`, esto es útil si le queremos definir más de uno.
+En la siguiente pantalla le indicamos que lo queremos en la carpeta **`resources`** 
 
-Y podemos usar un pequeño truco primero marcamos en `Database dialect` con `MySQL` y en `Driver class` seleccionamos `com.mysql.jdbc.Driver` y ya que lo tenemos volvemos a `Database dialect` y ponemos `MySQL 5 (InnoDB)` ya que si lo marcabamos desde el principio el driver que aparece no es el recomendado, por eso tenemos que hacer este apaño.
+![image](https://user-images.githubusercontent.com/23094588/166121866-d9050c05-be6f-463c-8931-9e4374532766.png)
+
+En la siguiente pantalla rellenamos los siguientes datos:
+
+![image](https://user-images.githubusercontent.com/23094588/166122043-d837cc3a-4fe2-4b8b-a6ef-e3ba9bafb34f.png)
+
+Presionamos en **Finish** y se nos crea el archivo:
+
+![image](https://user-images.githubusercontent.com/23094588/166122071-3dee1959-63c0-407b-b2a3-b41205b2b851.png)
+
+No vamos a darle un nombre al **`Session factory name`**, esto es útil si le queremos definir más de uno.
+
+Y podemos usar un pequeño truco primero marcamos en **`Database dialect`** con **`MySQL`** y en **`Driver class`** seleccionamos **`com.mysql.jdbc.Driver`** y ya que lo tenemos volvemos a **`Database dialect`** y ponemos **`MySQL 5 (InnoDB)`** ya que si lo marcabamos desde el principio el driver que aparece no es el recomendado, por eso tenemos que hacer este apaño.
 
 El dialecto no es más que la manera de decirle a Hibernate el sistema gestor de base de datos que vamos a utilizar. Si incluyen infinidad de dialectos donde tiene los elementos concretos de ese sistema gestor de base de datos, de cara a la gestión de esquemas, tablas, consultas, etc.
 
-La url de conexión no es más que una URL JDBC `jdbc:mysql://localhost/hibernate`, nuestro esquema por defecto será `hibernate`, el usuario `openwebinars` y la contraseña `12345678`.
+La url de conexión no es más que una URL JDBC **`jdbc:mysql://localhost/hibernate`**, nuestro esquema por defecto será **`hibernate`**, el usuario **`openwebinars`** y la contraseña **`12345678`**.
 
-Si marcamos la opción `Create a console configuration` nos van a salir muchos más apartados que ahora mismo no vamos a usar. Finalizamos en la creación del fichero.
+Si marcamos la opción **`Create a console configuration`** nos van a salir muchos más apartados que ahora mismo no vamos a usar. Finalizamos en la creación del fichero.
 
 Al haber instalado Hibernate Tools nos aparce una consola con diferentes pestañas para gestionar el archivo.
 
-<img src="images/4-46.png">
+![image](https://user-images.githubusercontent.com/23094588/166122177-578c41fb-f1e6-4208-b1b9-6367d39b09d0.png)
 
-<img src="images/4-47.png">
+O si lo preferimos podemos ver el código fuente del archivo **`hibarnate.cfg.xml`**.
 
-↪️
-![image](https://user-images.githubusercontent.com/23094588/128749511-ad0c76cb-f9a7-4bd2-88df-fe6046a7d2e3.png)
+![image](https://user-images.githubusercontent.com/23094588/166122200-787a334f-32dd-4eed-9d1d-7d58111ec559.png)
+
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
@@ -505,21 +517,21 @@ Al haber instalado Hibernate Tools nos aparce una consola con diferentes pestañ
 
 <img src="images/4-11.png">
 
-Vamos a continuar con las tareas, vamos a añadir una serie de propiedades que nos van a ser muy utiles como son *Show sql, Format sql y Hbm2ddl Auto*.
+Vamos a continuar con las tareas, vamos a añadir una serie de propiedades que nos van a ser muy utiles como son **Show sql**, **Format sql** y **Hbm2ddl Auto**.
 
-Las dos primeras servirán para que Hibernate vaya mostrando por el log, las consultas SQL que va lanzando al sistema Gestor de Base de Datos la primera solo los muestra, la segunda hace una especie de función Pretty y nos muestra ese código SQL más entendible, la tercer propiedad *Hbm2ddl Auto* nos va a permiti que sea Hibernate el que se encargue de construir el esquema de la base de datos si nosotros lo queremosy  de actualizar los cambios con respecto a versiones anteriores descargandonos a nosotros de esa tarea en particular. 
+Las dos primeras servirán para que Hibernate vaya mostrando por el log, las consultas SQL que va lanzando al sistema Gestor de Base de Datos la primera solo los muestra, la segunda hace una especie de función Pretty y nos muestra ese código SQL más entendible, la tercer propiedad **Hbm2ddl Auto** nos va a permiti que sea Hibernate el que se encargue de construir el esquema de la base de datos si nosotros lo queremos y  de actualizar los cambios con respecto a versiones anteriores descargandonos a nosotros de esa tarea en particular. 
 
-Nos vamos a la consola del archivo `hibernate.cfg.xml` en la pestaña `Hibernate` 
- 
-<img src="images/4-48.png">
+Nos vamos a la consola del archivo **`hibernate.cfg.xml`** en la pestaña **`Hibernate`** que se ubica dentro de **`Properties`** 
 
-Le vamos a decir que nos muestre SQL, que lo muestre formateado y que cree el esquema de la base de datos.
+![image](https://user-images.githubusercontent.com/23094588/166122348-77d0209d-134c-4141-a5dc-409971ffbeaf.png)
 
-<img src="images/4-49.png">
+Le vamos a decir que nos **muestre SQL**, que lo **muestre formateado** y que **cree el esquema de la base de datos**.
+
+![image](https://user-images.githubusercontent.com/23094588/166122392-d20476b3-0aaa-4ccf-bb5b-b3efc9cb436b.png)
 
 Podemos ver como en el código se insertan las propiedades que marcamos.
 
-<img src="images/4-50.png">
+![image](https://user-images.githubusercontent.com/23094588/166122499-b9a301bd-a4c4-4039-8855-5a294c412b13.png)
 
 <img src="images/4-12.png">
 
