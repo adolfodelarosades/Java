@@ -267,25 +267,31 @@ Vamos a ver qué pasos vamos a seguir para crear un nuevo proyecto en el que uti
 
 <img src="images/4-07.png">
 
-Los pasos lo tenemos definido aquí que van a hacer estos seis, lo primero hacer la creación y configuración inicial del proyecto, después gestionaremos las dependencias, crearemos el fichero de configuracion de Hibernate `hibernate.cfg.xml`, crearemos las clases de nuestro modelo, la clase de ejemplo de aplicación que va a manejar un poco este modelo y ejecutaremos el proyecto.
+Los pasos lo tenemos definido aquí que van a hacer estos **seis**, lo primero hacer la **creación y configuración inicial del proyecto**, después **gestionaremos las dependencias**, **crearemos el fichero de configuracion de Hibernate `hibernate.cfg.xml`**, **crearemos las clases de nuestro modelo**, **la clase de ejemplo de aplicación** que va a manejar un poco este modelo y **ejecutaremos el proyecto**.
 
 <img src="images/4-08.png">
 
-En primer lugar vamos a crear el proyecto, vamos a crear un proyecto de tipo Maven, vamos a escoger el arquetipo *quickstart* definiendo los datos iniciales y vamos a cambiar la versión de Java que trae el prototipo que por defecto es la 1.5 a la 1.8, por si queremos incorporar algún tipo de característica específica de Java 8 como podría ser el API Stream, las expresiones Lambda o algún otro tipo de elementos que quede incorporado dentro de Java 8.
+En primer lugar vamos a **crear el proyecto**, vamos a crear **un proyecto de tipo Maven**, vamos a **escoger el arquetipo *quickstart*** definiendo los datos iniciales y vamos a **cambiar la versión de Java** que trae el prototipo que por defecto es **la 1.5 a la 1.8**, por si queremos incorporar algún tipo de característica específica de Java 8 como podría ser el **API Stream**, las **expresiones Lambda** o algún otro tipo de elementos que quede incorporado dentro de Java 8.
 
 <img src="images/4-17.png">
 
 Creamos un nuevo Proyecto Maven
 
-<img src="images/4-18.png">
+![image](https://user-images.githubusercontent.com/23094588/166120136-d88e793e-334b-46cc-83ac-84917153c1a8.png)
 
-Dejamos los datos como aparecen por defecto.
+En la siguiente pantalla 
 
-<img src="images/4-19.png">
+![image](https://user-images.githubusercontent.com/23094588/166120177-0941be47-31b9-46d4-8e67-7bf563078f07.png)
 
-Vamos a ulilizar el arquetipo *quitstart*, un arquetipo no es más que un proyecto de plantilla, *quitstart* es el proyecto Maven más sencillo que podemos encontrar y que nos va a servir para desarrollar una aplicación de escritorio. 
+vamos a poner en el **Filter:** ***maven-archetype-quickstart*** y dejamos los datos como aparecen por defecto.
 
-<img src="images/4-20.png">
+![image](https://user-images.githubusercontent.com/23094588/166120227-73542b2c-9a31-4938-9fc8-d3eab5562ab3.png)
+
+Vamos a ulilizar el arquetipo **quitstart**, un arquetipo no es más que un proyecto de plantilla, **quitstart** es el proyecto Maven más sencillo que podemos encontrar y que nos va a servir para desarrollar una aplicación de escritorio. 
+
+En la siguiente pantanlla rellenamos el **Group Id**, **Artifact Id** y el **Package** que es una buena costubre ponerlo en minúsculas.
+
+![image](https://user-images.githubusercontent.com/23094588/166120489-6e9edbef-1d37-4fd6-a143-bc0f9009f97a.png)
 
 ↪️
 ![image](https://user-images.githubusercontent.com/23094588/128746842-d4feca48-fe2e-4659-9091-1301604b034b.png)
