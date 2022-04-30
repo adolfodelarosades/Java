@@ -293,26 +293,49 @@ En la siguiente pantanlla rellenamos el **Group Id**, **Artifact Id** y el **Pac
 
 ![image](https://user-images.githubusercontent.com/23094588/166120489-6e9edbef-1d37-4fd6-a143-bc0f9009f97a.png)
 
-↪️
-![image](https://user-images.githubusercontent.com/23094588/128746842-d4feca48-fe2e-4659-9091-1301604b034b.png)
+Recordar que Maven organiza sus proyectos mediante artefactos que vienen definidos por **Group Id** y un **Artifact Id**. Presionamos en **Finish**. Se nos crea la estructura del **Proyecto Maven**
 
-Recordar que Maven organiza sus proyectos mediante artefactos que vienen definidos por Id de Grupo y un Id de Artefacto.
+![image](https://user-images.githubusercontent.com/23094588/166120716-6c2c3878-5ab0-4c59-8c0a-dc91276c9e74.png)
 
-Lo primero que vamos hacer es cambiar la versión de Java 1.5 a Java 1.8
+Lo primero que vamos hacer es cambiar la versión de Java 1.7 a Java 1.8
 
-<img src="images/4-21.png">
+![image](https://user-images.githubusercontent.com/23094588/166120804-16c8fa20-ecc2-4f94-a3a3-7f62e2da58c7.png) 
 
-<img src="images/4-22.png">
+En la pestaña de **Libraries**
 
-<img src="images/4-23.png">
+![image](https://user-images.githubusercontent.com/23094588/166120828-d2470cc5-3af6-4a7d-bc06-4ff6a952f841.png)
 
-<img src="images/4-24.png">
+Vamos a seleccionar en el **Java-SE-1.7** y vamos a pulsar en el botón **Edit**
 
-<img src="images/4-25.png">
+![image](https://user-images.githubusercontent.com/23094588/166120852-0544bab1-714e-4923-89a0-b718b6723a29.png)
 
-<img src="images/4-26.png">
+Y nos aparece la siguiente pantalla
 
-<img src="images/4-27.png">
+![image](https://user-images.githubusercontent.com/23094588/166120862-2abff437-6585-4db4-a354-495860151c06.png)
+
+Como yo actualmente tengo instalada la versión de Java 14 será la que seleccione del listado que me aparece.
+
+![image](https://user-images.githubusercontent.com/23094588/166120954-659d32eb-718a-4352-b31a-7cbb1f4930d7.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166120967-44c352f2-b562-4717-a842-56c8e1ee4059.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166120974-1e16230c-d1ab-4332-bebe-0a5e05f8fc82.png)
+
+Y presionamos **Finish**
+
+![image](https://user-images.githubusercontent.com/23094588/166120987-c87bfd76-0b51-4ea9-8338-8c219f3f15c0.png)
+
+Aplicamos y cerramos los cambios, nuestro proyecto ya aparece con la versión de Java seleccionada.
+
+![image](https://user-images.githubusercontent.com/23094588/166120999-3d13c26b-2364-41c1-a9e4-0862093a7eeb.png)
+
+Ademas de esto vamos a verificar en las propiedades del Proyecto lo que tenemos en el **Java Compiler**
+
+![image](https://user-images.githubusercontent.com/23094588/166121071-5c326d91-f35a-48a3-b59d-a6567993e107.png)
+
+Observamos que efectivamente tenemos también la versión 14 de Java.
+
+![image](https://user-images.githubusercontent.com/23094588/166121090-360a9726-ca8c-439f-9b10-6188c5448c5f.png)
 
 Como segundo paso vamos a añadir las dependencias necesarias a nuestro proyecto en el `pom.xml`.
 
