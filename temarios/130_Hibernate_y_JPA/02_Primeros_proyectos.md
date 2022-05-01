@@ -1265,11 +1265,11 @@ A diferencia del proyecto anterior, en este caso tenemos que inicializar dos obj
 
 <img src="images/5-01.png">
 
-En esta lección vamos a seguir creando nuestro primer proyecto Hibernate pero en este caso lo vamos a hacer conjuntamente con JPA, vamos a ver qué pasó hay que seguir porque algunos son bastante distinto.
+En esta lección vamos a seguir creando nuestro primer proyecto Hibernate pero en este caso lo vamos a hacer conjuntamente con **JPA**, vamos a ver qué pasó hay que seguir porque algunos son bastante distinto.
 
 <img src="images/5-02.png">
 
-En primer lugar vamos a crear nuestro proyecto que también será un proyecto Maven, vamos añadir las características de JPA, Eclipse o Spring Tools tienen una perspectiva para JPA, vamos a añadir las clases Modelo o entidades en nuestro caso será la misma que en el ejemplo anterior, vamos a configurar la unidad de persistencia, podriamos decir que algo parecido al archivo de configuración de Hibernate, por lo menos en cuanto a contenido conceptualmente son dos cosas distintas, vamos a crear nuestra clase de aplicación y lo vamos a ejecutar.
+En primer lugar vamos a **crear nuestro proyecto** que también será **un proyecto Maven**, vamos **añadir las características de JPA**, ***Eclipse o Spring Tools tienen una perspectiva para JPA***, vamos a **añadir las clases Modelo o entidades** en nuestro caso será la misma que en el ejemplo anterior, vamos a **configurar la Unidad de Persistencia**, podriamos decir que ***algo parecido al archivo de configuración de Hibernate***, por lo menos en cuanto a contenido conceptualmente pero son dos cosas distintas, vamos a **crear nuestra Clase de Aplicación** y lo vamos a **ejecutar**.
 
 <img src="images/5-03.png">
 
@@ -1281,13 +1281,13 @@ Creamos de nuevo el mismo proyecto, nuevo proyecto de tipo Maven.
 
 <img src="images/5-11.png">
 
-<img src="images/5-12.png">
+![image](https://user-images.githubusercontent.com/23094588/166140859-e9665266-f322-4b5a-8ab6-4a788d46e3b1.png)
 
-<img src="images/5-13.png">
+![image](https://user-images.githubusercontent.com/23094588/166140881-2b0f5aee-0840-4321-a3b5-acb7e40b4fe1.png)
 
-Vamos a cambiar el build Path de 1.7 a 1.14
+Vamos a cambiar el build Path de 1.7 a 14 tanto en el **`Java Build Path`** como en el **`Java Compiler`**.
 
-<img src="images/5-14.png">
+![image](https://user-images.githubusercontent.com/23094588/166140943-070e4669-bf18-435c-9bd7-9f2a63d01eea.png)
 
 <img src="images/5-04.png">
 
@@ -1319,25 +1319,25 @@ Ya tenemos nuestro proyecto creado ya tenemos configurado Java 8 y las dependenc
 
 <img src="images/5-05.png">
 
-El siguiente paso será añadir las características de JPA a nuestro proyecto, eso lo vamos a hacer como sigue,pulsamos sobre el proyecto con el botón derecho y pulsamos  propiedades y vamos a seleccionar la opción `Project Facets`. 
+El siguiente paso será **añadir las características de JPA a nuestro proyecto**, eso lo vamos a hacer como sigue, ***pulsamos sobre el proyecto con el botón derecho y pulsamos propiedades y vamos a seleccionar la opción*** **`Project Facets`**. 
 
 <img src="images/5-15.png">
 
-Lo primero que tenemos que indicar es que este proyecto será usado con `Project Facets`. Pulsamos sobre el enlace para que se configure automáticamente.
+Lo primero que tenemos que indicar es que este proyecto será usado con **`Project Facets`**. Pulsamos sobre el enlace para que se configure automáticamente.
 
-<img src="images/5-16.png">
+![image](https://user-images.githubusercontent.com/23094588/166141233-7b4bfe7c-4177-4fd2-9e5c-ac657b69e5b5.png)
 
 Para aquellos que no lo hayáis hecho antes es posible que marque algún tipo de configuración en la que podéis elegir que seréis vosotros mismos los que vais a gestionar la configuración de la librería y los ficheros en lugar de marcar una serie de ficheros Jars que ya esten añadidos.
 
-Marcamos JPA y en la pestaña de Runtimes marcamos Java 8.
+Marcamos JPA y en la pestaña de Runtimes marcamos Java 8 (14).
 
-<img src="images/5-17.png">
+![image](https://user-images.githubusercontent.com/23094588/166141314-eb1fae6b-9f83-44d6-a2d2-1146acdbd952.png)
 
-Y pulsamos en el enlace `Further configuration required` 
+Y pulsamos en el enlace **`Further configuration required`**
 
-<img src="images/5-18.png">
+![image](https://user-images.githubusercontent.com/23094588/166141366-2cb35446-5a02-463b-8bb4-607645aaf00a.png)
 
-Como a mi no me sale pongo lo que hace el profesor.
+Como a mi no me sale en el combo la opción **`Hibernate`** pongo lo que hace el profesor.
 
 <img src="images/5-19.png">
 
@@ -1351,18 +1351,30 @@ Desabilitamos la configuración de las librerias.
 
 <img src="images/5-22.png">
 
-Con esto nuestro proyecto ya es un proyecto JPA, pero no lo parece porque seguimos en una perspectiva que no es la perspectiva de JPA, para abrir una perspectiva nos tenemos arriba en la esquina en la que seleccionamos una perspectiva JPA.
+Yo tube que desabilitar la **`Generic 2.2`** y se me mostro esta pantalla, no se si realmente aplica en este caso.
+
+![image](https://user-images.githubusercontent.com/23094588/166141508-dcf056fe-5ce9-44cd-b677-4235f8101198.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166141528-e3844596-5199-4d6b-b514-ae29816b76d0.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166141547-3d7dfa84-ea64-4abf-b77b-efcc44569fe2.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166141812-992a1dd2-9003-4429-91d5-f4aead42971b.png)
+
+Con esto nuestro proyecto ya es un **proyecto JPA**, pero no lo parece porque seguimos en una perspectiva que no es la perspectiva de JPA, para abrir una perspectiva nos vamos arriba en la esquina izquierda en la que seleccionamos una perspectiva JPA.
 
 <img src="images/5-23.png">
 
 Una perspectiva no es más que un conjunto de ventanas, de vistas Eclipse nos ofrece  cómo podéis comprobar las que tenemos disponible han cambiado.
+
+![image](https://user-images.githubusercontent.com/23094588/166141606-838348ea-56b1-48b2-8a7b-d39aef8bc873.png)
 
 <img src="images/5-06.png">
 
 A partir de ahora vamos a seguir los diferentes pasos, cómo es crear nuestras clases modelos y anotarla al igual que en el ejemplo anterior, lo que vamos a hacer es copiar la clase `User` porque su contenido va a ser exactamente el mismo.
 
 ```java
-package com.openwebinars.hibernate.primerproyectohibernatejpa;
+package com.javaocio.hibernate.primerproyectohibernatejpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -1407,47 +1419,63 @@ public class User {
 }
 ```
 
-Sin embargo ahora al añadirla nos da un error y es que nos dice la clase `User` es una entidad, es decir que va a ser manejada por JPA, pero no está listada en el fichero de persistencia y es que no lo hemos configurado aún.
+Sin embargo ahora al añadirla nos da un error **`Class "com.javaocio.hibernate.primerproyectohibernatejpa.User" is managed, but is not listed in the persistence.xml file`** y es que nos dice la clase **`User`** es una entidad, es decir que va a ser manejada por JPA, pero no está listada en el fichero de persistencia y es que no lo hemos configurado aún.
 
-<img src="images/5-24.png">
+![image](https://user-images.githubusercontent.com/23094588/166141712-a659b259-821c-48eb-be28-ac1bb97b898f.png)
 
-Al convertir nuestro proyecto a un proyecto JPA se nos a creado el JPA Context con el fichero `persistence.xml`
+Al convertir nuestro proyecto a un proyecto **JPA** se nos a creado el **JPA Context** con el fichero **`persistence.xml`**
 
 <img src="images/5-07.png">
 
-Está configuración tiene los pasos de de la imágen, vamos a añadir nuestra entidad como clases gestionada, vamos a crear la conexión y vamos a añadir las diferente opciones de Hibernate.
+Está configuración tiene los pasos que se muestran en la imágen anterior, vamos a **añadir nuestra entidad como clases gestionada**, vamos a **crear la conexión** y vamos a **añadir las diferente opciones de Hibernate**.
 
-<img src="images/5-25.png">
+![image](https://user-images.githubusercontent.com/23094588/166141859-0e758b8f-091c-4cb6-a201-5b0a861a9a6f.png)
 
-El nombre de aquí será el nombre del contexto de persistencia `PrimerProyectoHibernateJPA`. 
+El nombre de aquí, será el nombre del contexto de persistencia **`130-02-PrimerProyectoHibernateJPA`** vamos a dejarlo solo en **`PrimerProyectoHibernateJPA`**. 
 
-Vamos a ver la pestaña de Conexión entre los dos tipos de conexión que tenemos tenemos la conexión usando transacciones JTA o transacciones de recurso local,
+Vamos a ver la **pestaña de Conexión** entre los dos tipos de conexión que tenemos la **conexión usando transacciones JTA** o **Transacciones de Recurso Local**,
 
-<img src="images/5-26.png">
+![image](https://user-images.githubusercontent.com/23094588/166141956-d626eb0b-9b3f-4bc3-9851-5780c6ea2258.png)
 
-utilizaremos esta última, mediante este sistema del cual hablaremos en el capítulo 10, somos nosotros los encargados de gestionar las transacciones y no un sistema centralizado como ofrece JavaEE o Spring.
+utilizaremos la de **Transacciones de Recurso Local**, mediante este sistema del cual hablaremos en el capítulo 10, somos nosotros los encargados de gestionar las transacciones y no un sistema centralizado como ofrece JavaEE o Spring.
 
-<img src="images/5-27.png">
+![image](https://user-images.githubusercontent.com/23094588/166142012-03c8bde6-9814-4b21-8c28-c70a5241168d.png)
 
 Para insertar los datos de la conexión lo podemos hacer a través de una conexión ya generada que podemos construir aquí abajo, o través de una serie de datos.
 
-Vamos a configurar rápidamente la conexión en la vista `Data Source Explorer` pulsamos con el botón derecho sobre `Database Connection`, seleccionamos MySQL y ahora le tendríamos que proporcionar un driver y alguien se preguntará, no lo hemos descargado directamente mediante una dependencia Maven.
+Vamos a configurar rápidamente la conexión en la vista **`Data Source Explorer`** pulsamos con el botón derecho sobre **`Database Connection`**, 
 
-<img src="images/5-28.png">
+![image](https://user-images.githubusercontent.com/23094588/166142108-399fd25b-e8f3-4c8b-8da0-1cb9511c26b5.png)
 
-<img src="images/5-29.png">
+**seleccionamos MySQL** 
+
+![image](https://user-images.githubusercontent.com/23094588/166142128-4b81cf35-4fc8-41d5-a5a8-86d12a09a764.png)
+
+en la siguiente pantalla le tendríamos que **proporcionar un driver** 
+
+![image](https://user-images.githubusercontent.com/23094588/166142155-6d3578f5-076f-4086-a06f-57db51f2eea6.png)
+
+y alguien se preguntará, no lo hemos descargado directamente mediante una dependencia Maven.
+
+Sí sin embargo esta parte de **Eclipse necesita el JAR directamente**, con lo cual lo podemos agregar, 
 
 <img src="images/5-30.png">
 
-Sí sin embargo esta parte de Eclipse necesita el JAR directamente, con lo cual lo podemos agregar, no nos valdría de los que tenemos aquí 
+no nos valdría de los que tenemos aquí 
 
-<img src="images/5-31.png">
+![image](https://user-images.githubusercontent.com/23094588/166142248-45c8b8da-2598-420a-ad5c-182611ae3649.png)
 
-y lo que podemos añadir de una manera efectiva, tenemos nosotros el fichero JAR dentro de nuestro repositorio local de Maven que es accesible desde usuarios/adolfodelarosa/.m2/repository/mysql/mysql-connector y la versión que queramos usar.
+y lo que podemos añadir de una manera efectiva, tenemos nosotros el fichero JAR dentro de nuestro repositorio local de Maven que es accesible desde **`usuarios/adolfodelarosa/.m2/repository/mysql/mysql-connector`** y la versión que queramos usar.
+
+![image](https://user-images.githubusercontent.com/23094588/166142363-9c3d7eda-1c22-467f-a8f4-fc0b4ef4fe7b.png)
+
+y lo que podemos añadir de una manera efectiva, tenemos nosotros el fichero JAR dentro de nuestro repositorio local de Maven que es accesible desde **`usuarios/adolfodelarosa/.m2/repository/mysql/mysql-connector`** y la versión que queramos usar.
 
 <img src="images/5-32.png">
 
 <img src="images/5-33.png">
+
+![image](https://user-images.githubusercontent.com/23094588/166142429-86543a3f-3811-4253-af00-dcbce7e45cbf.png)
 
 (Todo esto en mi local no funciono, no me dejo añadir el JAR)
 
@@ -1497,13 +1525,13 @@ Con todo lo que hemos hecho, hemos pasado de tener el archivo `persistence.xml`
 </persistence>
 ```
 
-Y pasar a tenrlo así:
+Y pasar a tenrlo así (LO HE METIDO MANUALMENTE POR QUE NO ME DEJABA COMO SE DESCRIBIO ANTERIORMENTE):
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="PrimerEjemploHibernateJPA" transaction-type="RESOURCE_LOCAL">
-		<class>com.openwebinars.hibernate.PrimerEjemploHibernateJPA.User</class>
+		<class>com.javaocio.hibernate.primerproyectohibernatejpa.User</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
@@ -1522,31 +1550,35 @@ Y pasar a tenrlo así:
 
 Cómo podemos comprobar el error sobre nuestra clase `User` ya ha desaparecido.
 
-<img src="images/5-45.png">
+![image](https://user-images.githubusercontent.com/23094588/166142633-96353574-987c-414e-8569-f82f235ebcdb.png)
 
-Debemos recordar el nombre de nuestro contexto de persistencia `PrimerEjemploHibernateJPA`
+Debemos recordar el nombre de nuestro contexto de persistencia **`PrimerEjemploHibernateJPA`**
 
-<img src="images/5-46.png">
+![image](https://user-images.githubusercontent.com/23094588/166142671-ce39ca8a-ca06-42fe-9333-6ec03be5ff83.png)
 
 Porque lo vamos a necesitar para crear nuestra clase de aplicación.
 
 <img src="images/5-08.png">
 
-La inicialización de un proyecto JPA es diferente a la de un proyector de Hibernate nativo, porque aquí lo que necesitamos es un objeto llamado EntityManager que será el que haga las veces de SessionFactory en este caso se llama EntityManagerFactory y EntityManager y son un poco más faciles de crear. 
+***La inicialización de un proyecto JPA es diferente a la de un proyector de Hibernate nativo***, porque aquí lo que necesitamos es un objeto llamado **`EntityManager`** que será el que haga las veces de **`SessionFactory`** en este caso se llama **`EntityManagerFactory`** y **`EntityManager`** y son un poco más faciles de crear. 
 
-JPA proporciona un método llamado `createEntityManagerFactory` que solamente proporcionandole el nombre nos va a permitir cargar el fichero de configuración 
+JPA proporciona un método llamado **`createEntityManagerFactory`** que solamente proporcionandole el nombre nos va a permitir cargar el fichero de configuración 
 
-`EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerEjemploHibernateJPA");`.
+```java
+EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerEjemploHibernateJPA");
+```
 
-A partir de allí vamos a generar el `EntityManager` que es facíl de generar tan solo llamando al método de creación del mismo.
+A partir de allí vamos a generar el **`EntityManager`** que es facíl de generar tan solo llamando al método de creación del mismo.
 
-`EntityManager em = emf.createEntityManager();`
+```java
+EntityManager em = emf.createEntityManager();
+```
 
 Y al igual que antes vamos a incluir los métodos de cierre.
 
 ```java
-em.getTransaction().commit();
 em.close();
+emf.close();
 ```
 
 Nos faltaría incluir el código de aplicación, podemos utilizar igual que en el caso anterior.
@@ -1563,7 +1595,7 @@ user2.setUserName("Juan");
 user2.setUserMessage("Hello world from JPA with Juan");
 ```
 
-Y faltaría que definiéramos el inicio de la transacción, el almacenamiento de la información y el final de la transacción.
+Y faltaría que definiéramos **el inicio de la transacción**, **el almacenamiento de la información** y **el final de la transacción**.
 
 ```java
 em.getTransaction().begin();
@@ -1575,108 +1607,109 @@ em.getTransaction().commit();
 ```
 Y ya podemos ejecutar nuestra aplicación como una aplicación Java.
 
-<img src="images/5-47.png">
+![image](https://user-images.githubusercontent.com/23094588/166143112-c5ad68bd-5617-454a-b8d6-9633fb4ffe4d.png)
 
-Cómo podemos comprobar se ha borrado la tabla porque existia  del ejemplo anterior, se ha vuelto a crear con los mismos tipos de datos que antes y se han insertado los dos valores, de hechos vamos a consultar en MySQL Workbeanch, vamos a refrescar y podemos comprobar que se han insertado los nuevos valores.
+![image](https://user-images.githubusercontent.com/23094588/166143161-13be1bd8-9361-4b3d-9a60-8a1937452899.png)
 
-<img src="images/5-48.png">
+Cómo podemos comprobar **se ha borrado la tabla porque existia** del ejemplo anterior, **se ha vuelto a crear con los mismos tipos de datos** que antes y **se han insertado los dos valores**, de hechos vamos a consultar en MySQL Workbeanch, vamos a refrescar y podemos comprobar que se han insertado los nuevos valores.
 
-En la próxima lección que será la última en el capítulo haremos el mismo proyecto pero lo crearemos usando Spring Boot y Spring MVC.
+![image](https://user-images.githubusercontent.com/23094588/166143206-1b808ad3-b670-4125-a20f-859f8fa19f9a.png)
+
+La próxima lección que será la última en el capítulo haremos el mismo proyecto pero lo crearemos usando Spring Boot y Spring MVC.
 
 ### :computer: Código Completo - 130-02-PrimerProyectoHibernateJPA
 
-<img src="images/5-49.png">
+![image](https://user-images.githubusercontent.com/23094588/166143259-758b2ccc-bd9d-4ce4-9cfe-0d29d76be071.png)
 
 *`pom.xml`*
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.openwebinars.hibernate</groupId>
-	<artifactId>PrimerProyectoHibernateJPA</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+  <groupId>com.javaocio.hibernate</groupId>
+  <artifactId>130-02-PrimerProyectoHibernateJPA</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 
-	<name>PrimerProyectoHibernateJPA</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+  <name>130-02-PrimerProyectoHibernateJPA</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
-	</properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.4.17.Final</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.20</version>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+	<dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.4.17.Final</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.20</version>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
-				defaults (may be moved to parent pom) -->
-			<plugins>
-				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
-				</plugin>
-				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
-				</plugin>
-				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
 ```
 
@@ -1686,7 +1719,7 @@ En la próxima lección que será la última en el capítulo haremos el mismo pr
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="PrimerEjemploHibernateJPA" transaction-type="RESOURCE_LOCAL">
-		<class>com.openwebinars.hibernate.primerproyectohibernatejpa.User</class>
+		<class>com.javaocio.hibernate.primerproyectohibernatejpa.User</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
@@ -1706,23 +1739,25 @@ En la próxima lección que será la última en el capítulo haremos el mismo pr
 *`User.java`*
 
 ```java
-package com.openwebinars.hibernate.primerproyectohibernatejpa;
+package com.javaocio.hibernate.primerproyectohibernatejpa;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class User {
-
+	
 	@Id
 	private int id;
-
-	@Column
+	
 	private String userName;
-
-	@Column
+	
 	private String userMessage;
+
+	//Constructor sin parámetros
+	public User() {
+		
+	}
 
 	public int getId() {
 		return id;
@@ -1747,58 +1782,55 @@ public class User {
 	public void setUserMessage(String userMessage) {
 		this.userMessage = userMessage;
 	}
-
+	
 }
 ```
 
 *`App.java`*
 
 ```java
-package com.openwebinars.hibernate.primerproyectohibernatejpa;
+package com.javaocio.hibernate.primerproyectohibernatejpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
+ * Clase de Aplicación
  * Primer proyecto JPA con Hibernate 
- *
  */
-public class App {
-	public static void main(String[] args) {
-		
-		//Configuramos el EMF a través de la unidad de persistencia
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerEjemploHibernateJPA");
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerEjemploHibernateJPA");
+    	
+    	EntityManager em = emf.createEntityManager();
+    	
+    	User user1 = new User();
+    	user1.setId(1);
+    	user1.setUserName("Pepe");
+    	user1.setUserMessage("Hello world from JPA with Pepe");
 
-		//Generamos un EntityManager
-		EntityManager em = emf.createEntityManager();
+    	User user2 = new User();
+    	user2.setId(2);
+    	user2.setUserName("Juan");
+    	user2.setUserMessage("Hello world from JPA with Juan");
+    	
+    	//Inicio de la transacción
+    	em.getTransaction().begin();
 
-		//Iniciamos una transacción
-		em.getTransaction().begin();
+    	//Almacenamos los objetos
+    	em.persist(user1);
+    	em.persist(user2);
 
-		// Construimos un objeto de tipo User
-		User user1 = new User();
-		user1.setId(1);
-		user1.setUserName("Pepe");
-		user1.setUserMessage("Hello world from JPA with Pepe");
-
-		// Construimos otro objeto de tipo User
-		User user2 = new User();
-		user2.setId(2);
-		user2.setUserName("Juan");
-		user2.setUserMessage("Hello world from JPA with Juan");
-		
-		//Persistimos los objetos
-		em.persist(user1);
-		em.persist(user2);
-
-		//Commiteamos la transacción
-		em.getTransaction().commit();
-		
-		//Cerramos el EntityManager
-		em.close();
-
-	}
+    	//Commit de la transacción
+    	em.getTransaction().commit();
+    	
+    	//Cierre del EntityManager y EntityManagerFactory
+    	em.close();
+    	emf.close();
+    }
 }
 ```
 
