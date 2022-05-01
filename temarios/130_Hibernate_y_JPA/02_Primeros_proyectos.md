@@ -535,15 +535,19 @@ Podemos ver como en el código se insertan las propiedades que marcamos.
 
 <img src="images/4-12.png">
 
-Ahora es el momento de crear nuestra clase Modelo y añadir las anotaciones que seran las necesarias. En principio vamos a manejar muy pocas, para indicar en el mundo Hibernate y en el mundo JPA también que una clase tiene que ser manejada por el ORM, tan solo añadiremos la anotación `@Entity` y como obligación tan solo tenemos que añadir una anotación más, que es definir que propiedad definirá la clave primaria, es decir aquella que no podrá repetirse para dos instancias de una entidad con la anotación `@Id`. Hay una tercera anotación opcional `@Column` para el resto de propiedades que desemos indicar que son columnas, si bien no es obligatorio.
+Ahora es el momento de crear nuestra **clase Modelo y añadir las anotaciones** que seran las necesarias. En principio vamos a manejar muy pocas, ***para indicar en el mundo Hibernate y en el mundo JPA también que una clase tiene que ser manejada por el ORM***, tan solo añadiremos la **anotación `@Entity`** y como obligación tan solo tenemos que añadir una anotación más, que es ***definir que propiedad definirá la clave primaria***, es decir aquella que no podrá repetirse para dos instancias de una entidad **con la anotación `@Id`**. ***Hay una tercera anotación opcional `@Column` para el resto de propiedades que desemos indicar que son columnas***, si bien no es obligatorio.
 
 Vamos a crear una nueva clase Java normal en el paquete principal llamada `User`.
 
-<img src="images/4-51.png">
+![image](https://user-images.githubusercontent.com/23094588/166137825-4e1e102e-5154-4e51-90dc-45dc65bbf927.png)
 
-Como hemos dicho anotamos con `@Entity` la clase `User`. Creamos una primera propiedad llamada `id` y la anotamos con `@Id` para indicar que es la clave primaria de nuestra tabla, ya nos va sugiriendo el que nosotros vayamos añadiendo las anotaciones, aunque estamos trabajando con Hibernate nativo nos vamos ir acostubrando a ir trabajando con las anotaciones de JPA, por que es la tecnología que vamos a usar en los próximos proyectos.
+![image](https://user-images.githubusercontent.com/23094588/166137845-4f51d76e-5fea-49b3-b20a-fffa2e3ccbb7.png)
 
-Vamos a añadir otros dos atributos `userName` y `userMesagge` si bien ya hablaremos más adelante como elementos mínimos de una entidad deberíamos tener un constructor sin parámetros y los getter y setter de las propiedades que vamos a manejar, los podemos autogenerar con Eclipse. Pues ya tenemos nuestra primera entidad:
+Como hemos dicho ***anotamos con `@Entity` la clase `User`***. Creamos una primera ***propiedad llamada `id` y la anotamos con `@Id`*** para indicar que es la clave primaria de nuestra tabla, ya nos va sugiriendo el que nosotros vayamos añadiendo las anotaciones, aunque estamos trabajando con Hibernate nativo nos vamos ir acostubrando a ir trabajando con las anotaciones de JPA, por que es la tecnología que vamos a usar en los próximos proyectos.
+
+Vamos a añadir otros dos atributos **`userName` y `userMesagge`** si bien ya hablaremos más adelante ***como elementos mínimos de una entidad deberíamos tener un constructor sin parámetros y los getter y setter de las propiedades que vamos a manejar***, los podemos autogenerar con Eclipse. Pues ya tenemos nuestra primera entidad:
+
+![image](https://user-images.githubusercontent.com/23094588/166139094-eec76cb0-0b45-4c76-893c-ce821ce646cd.png)
 
 ```java
 package com.openwebinars.hibernate.primerproyectohbn;
@@ -560,7 +564,8 @@ public class User {
    private String userName;
 	
    private String userMessage;
- 	
+ 
+   //Constructor sin parámetros
    public User() {
 		
    }
@@ -602,15 +607,15 @@ Podemos añadir la clase
 
 Incluso podemos buscar la clase.
 
-<img src="images/4-54.png">
+![image](https://user-images.githubusercontent.com/23094588/166138174-d0eb679b-076c-4a9b-8cd3-d6d365531bd6.png)
 
-<img src="images/4-55.png">
+![image](https://user-images.githubusercontent.com/23094588/166138202-6e125ac3-f88d-4c79-a60c-84c5cc8a2b51.png)
 
-<img src="images/4-56.png">
+![image](https://user-images.githubusercontent.com/23094588/166138229-54d24f54-eee8-4459-b334-3ef87fba1fce.png)
 
 Si vemos en el código fuente, se ha añadido una nueva anotación mapping con la ruta completa con el nombre cualificado de nuestra clase. 
 
-<img src="images/4-57.png">
+![image](https://user-images.githubusercontent.com/23094588/166138255-7b028867-5602-40f6-891e-9ed10ee976dd.png)
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
@@ -627,43 +632,42 @@ Si vemos en el código fuente, se ha añadido una nueva anotación mapping con l
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>
   <property name="hibernate.hbm2ddl.auto">create</property>
-  <mapping class="com.openwebinars.hibernate.primerproyectohbn.User"/>
+  <mapping class="com.javaocio.hibernate.primerproyectohbn.User"/>
  </session-factory>
 </hibernate-configuration>
 ```
 
 <img src="images/4-13.png">
 
-Ya casi hemos terminado, tan solo nos quedaría crear la clase de aplicación. Hibernet va a descansar, si bien ya lo veremos con más detenimiento más adelante, va a descansar sobre un objeto que se llama 
-`Session` que no es más que una conexión a la base de datos, que mantiene las instancias de las entidades que estamos manejando en ese momento y esa sesión la vamos a obtener a partir de una factoría de sesiones, las sesiones de un objeto algo más liviano, la factoría es un objeto bastante pesado, su creación se lleva bastante tiempo y recursos, con lo cual solamente se suele crear una sola `SessionFactory` en toda la aplicación y la cantidad de sesiones que veamos necesaria aunque ya hablaremos del tema en los Patrones y Antipatrones del capítulo 10.
+Ya casi hemos terminado, tan solo nos quedaría crear la **clase de aplicación**. Hibernet va a descansar, si bien ya lo veremos con más detenimiento más adelante, va a descansar sobre un objeto que se llama **`Session`** ***que no es más que una conexión a la base de datos, que mantiene las instancias de las entidades que estamos manejando en ese momento y esa sesión la vamos a obtener a partir de una*** **Factoría de sesiones**, las sesiones de un objeto son algo más livianas, la Factoría es un objeto bastante más pesado, su creación se lleva bastante tiempo y recursos, con lo cual solamente se suele crear una sola **`SessionFactory`** en toda la aplicación y la cantidad de sesiones que veamos necesarias, aunque ya hablaremos del tema en los Patrones y Antipatrones del capítulo 10.
 
-Vamos a crear la `SessionFactory` que carge la configuración que hemos definido antes en el fichero XML, abriremos una sesión, crearemos las instancias, iniciaremos una transacción para que la persistencia de nuestro objeto queden marcadas dentro de esa transacción, haremos la persistencia real, commitearemos esa transacción es decir marcaremos el fin para que hagan de manera efectiva los cambios en la base de datos y cerraremos los diferentes objetos. Todo esto lo vamos hacer dentro de nuestra clase de aplicación `App.java`.
+***Vamos a crear la*** **`SessionFactory`** que carge la configuración que hemos definido antes en el fichero XML, ***abriremos una sesión***, ***crearemos las instancias***, ***iniciaremos una transacción para la persistencia de nuestro objeto*** queden marcadas dentro de esa transacción, ***haremos la persistencia real***, ***commitearemos esa transacción es decir marcaremos el fin***, para que hagan de manera efectiva los cambios en la base de datos y ***cerraremos los diferentes objetos***. Todo esto lo vamos hacer dentro de nuestra clase de aplicación **`App.java`**.
 
-Podemos cargar la configuración del `SessionFactory` con el fichero XML de dos maneras diferentes un código `Legazi` heredado de versiones anteriores, sería algo más fácil por la cantidad de líneas de código y sería algo así:
+Podemos cargar la configuración del **`SessionFactory`** con el fichero XML de dos maneras diferentes un **Código `Legacy`** heredado de versiones anteriores, sería algo más fácil por la cantidad de líneas de código y sería algo así:
 
 ```java
 SessionFactory sf = new Configuration().configure().buildSessionFactory();
 ```
 
-Para crear un `SessionFactory` solamente tendríamos que usar la clase `Configuration()` para que configurara el fichero XML, como el fichero tiene el nombre que por defecto espera Hibernate que es `hibernate.cfg.xml` y además se encuentra dentro de la carpeta donde espera encontrarlo que es la carpeta `source/main/resource` no tenemos que indicar ningún parámetro más.
+Para crear un **`SessionFactory`** solamente tendríamos que usar la clase **`Configuration()`** para que configurara el fichero XML, como el fichero tiene el nombre que por defecto espera Hibernate que es **`hibernate.cfg.xml`** y además se encuentra dentro de la carpeta donde espera encontrarlo que es la carpeta **`source/main/resource`** no tenemos que indicar ningún parámetro más.
 
-Sin embargo como decimos este código es `Legazi` es decir es antiguo, vamos a utilizar la forma que Hibernate propone en su documentación, para la versión 5, es algo más compleja pero tener en cuenta que se hace solamente en un sitio del proyecto y si seguimos los parámetros por defecto posiblemente no necesitemos nada más que copiarlo y pegarlo.
+Sin embargo como decimos este código es `Legacy` es decir es antiguo, ***vamos a utilizar la forma que Hibernate propone en su documentación***, para la versión 5, es algo más compleja pero tener en cuenta que se hace solamente en un sitio del proyecto y si seguimos los parámetros por defecto posiblemente no necesitemos nada más que copiarlo y pegarlo.
 
-Creamos un registro estándar de servicio a través de un builder, y ya podemos configurar en este caso tampoco debemos indicar nada con respecto al fichero de configuración y podemos construir este objeto directamente. 
+Creamos un registro estándar de servicio a través de un **`Builder`**, y ya podemos configurar en este caso tampoco debemos indicar nada con respecto al fichero de configuración y podemos construir este objeto directamente. 
 
 ```java
 StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
 ```
 
-Y ahora este objeto lo utilizamos para fabricar propiamente dicho el SessionFactory, que lo haríamos a través del `MetadataSources` vamos a construir todos los metadatos y el `SessionFactory`. 
+Y ahora ***este objeto lo utilizamos para fabricar propiamente dicho el `SessionFactory`***, que lo haríamos a través del **`MetadataSources`** para construir todos los metadatos y el **`SessionFactory`**. 
 
 ```java
 SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
 ```
 
-Ya tendríamos nuestro `SessionFactory` preparado. 
+Ya tendríamos nuestro **`SessionFactory`** preparado. 
 
-¿Qué tendríamos que hacer ahora?, tendríamos que abrir la sesión, lo hacemos de una manera sencilla mediante el comando `openSession()` nos inicia una nueva sesión, la sesión se cerrará mediante el comando `close()` y todo el código que desarrollemos va en medio y después de cerrar la sesión también cerraremos la factoría porque nuestro programa ya termina. 
+¿Qué tendríamos que hacer ahora?, tendríamos que **abrir la sesión**, lo hacemos de una manera sencilla mediante el comando **`openSession()`** nos inicia una nueva sesión, la sesión se cerrará mediante el comando **`close()`** y todo el código que desarrollemos va en medio y después de cerrar la sesión también cerraremos la factoría porque nuestro programa ya termina. 
 
 ```java
 //Apertura de una sesión (e inicio de una transacción)
@@ -676,9 +680,9 @@ session.close();
 sf.close();
 ```
 
-Es en medio donde vamos a generar el resto de nuestro código, va a ser muy sencillo crear una entidad no es más que crear un objeto Java. Como hemos definido un constructor sin parámetros hacemos uso de el, le asignamos un id, por ejemplo el número 1, le asignamos un nombre vamos a llamarlo Pepe, vamos a ponerle un mensaje de bienvenida. Si queremos podríamos crear otro objeto vamos a llamarle `user2` le asignamos el id 2, un hombre le vamos a llamar Juan, mensaje de bienvenida.
+Es en medio donde vamos a generar el resto de nuestro código, va a ser muy sencillo ***crear una entidad no es más que crear un objeto Java***. Como hemos definido un constructor sin parámetros hacemos uso de el, le asignamos un , por ejemplo el número 1, le asignamos un nombre vamos a llamarlo Pepe, vamos a ponerle un mensaje de bienvenida. Si queremos podríamos crear otro objeto vamos a llamarle **`user2`** le asignamos el **`id`** 2, un hombre le vamos a llamar Juan, mensaje de bienvenida.
 
-Muy bien ya tenemos dos objetos creados pero no persistidos para ello tendríamos comenzar una nueva transacción, vamos a marcar también el cierre de la misma, sobre transacciones ya hablaremos largo y tendido a lo largo del curso, pero podríamos entender una transacción como un lote de operaciones que vamos a realizar enfrentada a la base de datos. Vamos a almacenar los objetos utilizando el método `save(user)` del objeto `Session` y lo mismo para `user2`.
+Muy bien ***ya tenemos dos objetos creados pero no persistidos*** para ello tendríamos **comenzar una nueva transacción**, vamos a marcar también **el cierre de la misma**, sobre transacciones ya hablaremos largo y tendido a lo largo del curso, pero ***podríamos entender una transacción como un lote de operaciones que vamos a realizar enfrentada a la base de datos***. Vamos a almacenar los objetos utilizando el método **`save(user)`** del objeto **`Session`** y lo mismo para `user2`.
 
 ```java
 User user1 = new User();
@@ -707,74 +711,93 @@ El código completo de la clase queda así:
 *`App.java`*
 
 ```java
-package com.openwebinars.hibernate.primerproyectohbn;
+package com.javaocio.hibernate.primerproyectohbn;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+
 /**
- * Hello world!
+ * Clase de Aplicación
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        
+        //Código Legacy
+    	//SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    	
+    	//Código Documentación Hibernate 5
     	StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
     	
     	SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
     	
-    	//SessionFactory sf = new Configuration().configure().buildSessionFactory();
-    
     	//Apertura de una sesión (e inicio de una transacción)
     	Session session = sf.openSession();
-    	
+    	    	    	
     	User user1 = new User();
     	user1.setId(1);
     	user1.setUserName("Pepe");
     	user1.setUserMessage("Hello world from Pepe");
-    	
+    	    	
     	User user2 = new User();
     	user2.setId(2);
     	user2.setUserName("Juan");
     	user2.setUserMessage("Hello world from Juan");
-	
-	session.beginTransaction();
-    	
+
+    	//Inicio de la transacción
+    	session.beginTransaction();
+    	    	
     	//Almacenamos los objetos
     	session.save(user1);
     	session.save(user2);
-    			
+    	    			
     	//Commit de la transacción
     	session.getTransaction().commit();
-    	
-    	//Cierre de la sesión
+    	    	
+    	    	
+    	//Cierre de la sesión y de la Factoria
     	session.close();
     	sf.close();
-	
     }
 }
 ```
 
-Ya podemos ejecutar nuestra aplicacíon como una aplicación Java, da un primer error:
+Ya podemos ejecutar nuestra aplicacíon pulsando botón derecho y ejecutarla **como una aplicación Java**
 
-`ERROR: The server time zone value 'CEST' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.`
+![image](https://user-images.githubusercontent.com/23094588/166139371-cbcaae12-560b-422c-a175-b826c31eef54.png)
+
+, da un primer error:
+
+![image](https://user-images.githubusercontent.com/23094588/166139400-bf2b06c1-956e-4015-bd20-e549c15f76a4.png)
+
+
+**`ERROR: The server time zone value 'CEST' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.`**
 
 Este es un error por la configuración del tiempo en la base de datos que no tiene nada que ver con nuestro programa, para solucionar este problema tenemos el siguiente [link](https://es.stackoverflow.com/questions/48935/configurar-zona-horaria-jdbc-driver-java/48946), vamos a aplicar el siguiente comando en la base de datos hibernate `SET GLOBAL time_zone = '-3:00';`.
 
+![image](https://user-images.githubusercontent.com/23094588/166139508-9b79b36d-077f-438a-b76a-399e7a9f5e21.png)
+
 Vamos a volver a ejecutar la aplicación, ahora se nos presenta lo siguiente:
 
-<img src="images/4-58.png">
+![image](https://user-images.githubusercontent.com/23094588/166139723-6e3ac7ca-a566-4a67-8087-c0648a32c8ae.png)
 
-Este error lo solucionamos elimininando del archivo `hibernate.cfg.xml` de la línea `<session-factory name="">` el atributo `name` es decir que debe quedar así `<session-factory>` por que no le habiamos dado un nombre. Una vez hecho el cambio volvamos a intentarlo.
+Este error lo solucionamos elimininando del archivo **`hibernate.cfg.xml`** la línea **`<session-factory name="">`** el atributo **`name`** es decir que debe quedar así **`<session-factory>`** por que no le habiamos dado un nombre. 
 
-<img src="images/4-59.png">
+![image](https://user-images.githubusercontent.com/23094588/166139795-85a0ff54-33c6-4dc2-89da-5acdabb24e09.png)
 
-A parte de un monton de mensajes en rojo nos vamos a centrar solamente en aquellos que tuvieran en negro, Hibernate lo primero que hace cuando le marcamos la propiedad `hbm2ddl.auto` con valor `create` lo primero que hace es verificar si existe el modelo en la base de datos y lo borra, para generarlo de nuevo.
+![image](https://user-images.githubusercontent.com/23094588/166139807-4f2c3170-97b3-4bda-8351-6c55b18ecf3b.png)
+
+Una vez hecho el cambio volvamos a intentarlo.
+
+![image](https://user-images.githubusercontent.com/23094588/166140194-d0d7d441-8e21-432f-9e1b-f974f8b02105.png)
+
+A parte de un monton de mensajes en rojo nos vamos a centrar solamente en aquellos que tuvieran en blanco, Hibernate lo primero que hace cuando le marcamos la propiedad **`hbm2ddl.auto`** con valor **`create`** lo primero que hace es verificar si existe el modelo en la base de datos y lo borra, para generarlo de nuevo.
 
 ```sql
 Hibernate: 
@@ -782,7 +805,7 @@ Hibernate:
     drop table if exists User
 ```
 
-Posteriormente trata de lanzar la sentencia DDL, es decir de creación de la tabla que como podemos comprobar, es una sentencia que va a crear la tabla llamada `User` con un campo `id` y los tipos los ha optenido mapeando los tipos Java a MySQL qué es el sistema gestor que nosotros estamos utilizando y además añadido la restricción de clave primaria el campo que tenemos como `id`.
+Posteriormente trata de lanzar la **sentencia DDL**, es decir de **creación de la tabla** que como podemos comprobar, es una sentencia que va a crear la tabla llamada **`User`** con un campo **`id`** y los tipos los ha obtenido mapeando los tipos Java a MySQL qué es el sistema gestor que nosotros estamos utilizando y además añadido la restricción de clave primaria el campo que tenemos como **`id`**.
 
 ```sql
 Hibernate: 
@@ -822,101 +845,97 @@ Vamos entrar a través de MySQL Workbench y vamos a comprobar que está creació
 
 Vamos a poner la estructura y código de este proyecto.
 
-<img src="images/4-100.png">
-
-<img src="images/4-60.png">
+![image](https://user-images.githubusercontent.com/23094588/166140320-462c51bb-73b9-4262-ac3c-85be748d3c89.png)
 
 *`pom.xml`*
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.openwebinars.hibernate</groupId>
-	<artifactId>PrimerProyectoHbn</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+  <groupId>com.javaocio.hibernate</groupId>
+  <artifactId>130-01-PrimerProyectoHbn</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 
-	<name>PrimerProyectoHbn</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+  <name>130-01-PrimerProyectoHbn</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
-	</properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency> 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-agroal</artifactId>
-			<version>5.4.17.Final</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.20</version>
-		</dependency>
-		
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+	  <groupId>org.hibernate</groupId>
+	  <artifactId>hibernate-agroal</artifactId>
+	  <version>5.4.17.Final</version>
+	  <type>pom</type>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.20</version>
+	</dependency>
+  </dependencies>
 
-	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
-				defaults (may be moved to parent pom) -->
-			<plugins>
-				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
-				</plugin>
-				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
-				</plugin>
-				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
 ```
 
@@ -937,7 +956,7 @@ Vamos a poner la estructura y código de este proyecto.
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>
   <property name="hibernate.hbm2ddl.auto">create</property>
-  <mapping class="com.openwebinars.hibernate.primerproyectohbn.User"/>
+  <mapping class="com.javaocio.hibernate.primerproyectohbn.User"/>
  </session-factory>
 </hibernate-configuration>
 ```
@@ -945,22 +964,22 @@ Vamos a poner la estructura y código de este proyecto.
 *`User.java`*
 
 ```java
-package com.openwebinars.hibernate.primerproyectohbn;
+package com.javaocio.hibernate.primerproyectohbn;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class User {
-
+	
 	@Id
 	private int id;
 	
 	private String userName;
 	
 	private String userMessage;
-	
-	
+
+	//Constructor sin parámetros
 	public User() {
 		
 	}
@@ -995,56 +1014,58 @@ public class User {
 *`App.java`*
 
 ```java
-package com.openwebinars.hibernate.primerproyectohbn;
+package com.javaocio.hibernate.primerproyectohbn;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+
 /**
- * Hello world!
+ * Clase de Aplicación
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        
+        //Código Legacy
+    	//SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    	
+    	//Código Documentación Hibernate 5
     	StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
     	
     	SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
     	
-    	//SessionFactory sf = new Configuration().configure().buildSessionFactory();
-    
     	//Apertura de una sesión (e inicio de una transacción)
     	Session session = sf.openSession();
-    	
+    	    	
     	User user1 = new User();
     	user1.setId(1);
     	user1.setUserName("Pepe");
     	user1.setUserMessage("Hello world from Pepe");
-    	
+    	    	
     	User user2 = new User();
     	user2.setId(2);
     	user2.setUserName("Juan");
     	user2.setUserMessage("Hello world from Juan");
-    	
-    	
+
+    	//Inicio de la transacción
     	session.beginTransaction();
-    	
+    	    	
     	//Almacenamos los objetos
     	session.save(user1);
     	session.save(user2);
-    			
+    	    			
     	//Commit de la transacción
-    	session.getTransaction().commit();
-    	
-    	//Cierre de la sesión
+    	session.getTransaction().commit();  	    	
+    	    	
+    	//Cierre de la sesión y de la Factoria
     	session.close();
     	sf.close();
-
     }
 }
 ```
