@@ -2639,8 +2639,7 @@ public class DatabaseConfig {
 
 ![image](https://user-images.githubusercontent.com/23094588/166267877-229fdc8f-4930-4cb5-b675-9d98a07b2a40.png)
 
-![image](https://user-images.githubusercontent.com/23094588/166267942-edc3398d-802b-4d21-a4be-5274b44d396a.png)
-
+![image](https://user-images.githubusercontent.com/23094588/166268300-08bb4a53-6917-4134-b439-92dec2e97ef9.png)
 
 En la próxima lección vamos a ver el código de la clase DAO de las distintas entidades que vamos a manejar en particular una y del controlador para finalizar este proyecto de primer ejemplo con Spring JPA Hibernet.
 
@@ -2652,15 +2651,15 @@ Continuación de la creación de un primer proyecto con Spring Boot, Spring MVC 
 
 ## Transcripción
 
-Vamos a continuar con el ejemplo anterior de Spring Boot, Spring MVC, JPA y Hibernate configurando el fichero de properties. Si en el fichero `DatabaseConfig` indicabamos que íbamos a usar unsa seríe de properties tenemos que darle valor a esas propiedades, en el fichero de properties que tenemos dentro de la ruta `source/main/resource` podemos definir todas esas propiedades.
+Vamos a continuar con el ejemplo anterior de **Spring Boot**, **Spring MVC**, **JPA** y **Hibernate** ***configurando el fichero de properties***. En el fichero **`DatabaseConfig`** indicabamos que íbamos a usar unsa seríe de **`properties`** tenemos que darle valor a esas propiedades, en el fichero de properties **`application.properties`** que tenemos dentro de la ruta **`source/main/resource`** podemos definir todas esas propiedades.
 
-Primero vamos a definir sobre la conexión a la base de datos, el driver, la url, nombre de usuario y contraseña.
+**Primero vamos a definir sobre la conexión a la base de datos, el driver, la url, nombre de usuario y contraseña**.
 
-Nos quedan ahora algunas propiedades como la de busqueda de entidades, damos la ruta dónde vamos a incluir la entidad.
+Nos quedan ahora algunas **propiedades como la de busqueda de entidades**, damos la ruta dónde vamos a incluir la entidad.
 
-Y las propiedades propias de Hibernate cómo eran el dialecto, que nos muestre el SQL por pantalla y que cree la base de datos automaticamente.
+Y las **propiedades propias de Hibernate** cómo eran el dialecto, que nos muestre el SQL por pantalla y que cree la base de datos automaticamente.
 
-*`application.properties`*
+**`application.properties`**
 
 ```sh
 # Base de datos
@@ -2678,41 +2677,47 @@ hibernate.show_sql: true
 hibernate.hbm2ddl.auto: create
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/166269420-53630781-9c01-4b77-a899-fc8ac3a36597.png)
+
 Muy bien ya lo tenemos configurado.
 
 <img src="images/7-02.png">
 
-Ahora siguiendo los pasos de nuestro tutorial, tendríamos que crear la clase Entidad y la clase DAO.
+Ahora siguiendo los pasos de nuestro tutorial, tendríamos que **crear la Clase Entidad** y la **Clase DAO**.
 
 <img src="images/7-01.png">
 
-La clase DAO seguira el patron DAO, para aquellos que ya hayas hecho el curso de Spring les sonara. El patrón DAO no es más que un patrón de diseño en el que organizamos el acceso a datos mediante una clase que nos van a devolver objetos de nuestro modelo en lugar de acceder directamente al origen de los datos, eso nos permite el trabajar con diferentes bases de datos, diferentes sistemas de persistencia sin que nos tengamos que preocupar de cuál cogemos en particular y también nos ofrece una interfaz común con ese almacén de datos.
+**La clase DAO seguira el patron DAO**, para aquellos que ya hayas hecho el **Curso de Spring** les sonara. ***El patrón DAO no es más que un patrón de diseño en el que organizamos el acceso a datos mediante una clase que nos van a devolver objetos de nuestro modelo en lugar de acceder directamente al origen de los datos, eso nos permite el trabajar con diferentes bases de datos, diferentes sistemas de persistencia sin que nos tengamos que preocupar de cuál cogemos en particular y también nos ofrece una interfaz común con ese almacén de datos***.
 
 <img src="images/7-03.png">
 
-Vamos a encargarnos de crear esa clase entidad y la clase DAO que servirá para manejarla. En la clase DAO no olvidar anotarla con la anotación de `@Repository` eso nos permitirá indicar que se trata de un bean de acceso a datos y además con `@Transaccional`, eso va a indicar que dentro de cada uno de los métodos cuando lo llamemos, justo antes de empezar la llamada al método se comenzara una transacción y justo al terminar el código del método esa transacción será commitear sin que nosotros tenemos que encargarnos de hacerlo como en los proyectos anteriores. También tenemos que inyectar el contexto de persistencia y tendremos que implementar los diferentes métodos necesarios.
+Vamos a encargarnos de **crear esa Clase Entidad** y la **Clase DAO** que servirá para manejarla. 
+
+En la **Clase DAO** no olvidar anotarla con la anotación de **`@Repository`** ***eso nos permitirá indicar que se trata de un bean de acceso a datos*** y además con **`@Transaccional`**, ***eso va a indicar que dentro de cada uno de los métodos cuando lo llamemos, justo antes de empezar la llamada al método se comenzara una transacción y justo al terminar el código del método esa transacción será commiteada sin que nosotros tenemos que encargarnos de hacerlo como en los proyectos anteriores***. También tenemos que **inyectar el contexto de persistencia** y tendremos que **implementar los diferentes métodos necesarios**.
 
 
-Vamos a crear la clase `User` al igual que antes la podemos copiar.
+Vamos a crear la clase **`User`** al igual que antes la podemos copiar.
 
 ```java
-package com.openwebinars.hibernate.spring;
+package com.javaocio.hibernate.spring;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class User {
-
+	
 	@Id
 	private int id;
-
-	@Column
+	
 	private String userName;
-
-	@Column
+	
 	private String userMessage;
+
+	//Constructor sin parámetros
+	public User() {
+		
+	}
 
 	public int getId() {
 		return id;
@@ -2737,11 +2742,22 @@ public class User {
 	public void setUserMessage(String userMessage) {
 		this.userMessage = userMessage;
 	}
-
+	
 }
 ```
 
-Creamos una nueva clase que vamos a llamar `UserDao` y como decíamos antes esta clase tendremos que anotarla como un bean estereotipado como repositorio, que además va a ejecutarse dentro de un marco transaccional
+![image](https://user-images.githubusercontent.com/23094588/166274555-25e32099-0dc2-4277-afe5-10c614d3a35c.png)
+
+**Creamos una nueva clase que vamos a llamar `UserDao`** 
+
+![image](https://user-images.githubusercontent.com/23094588/166276454-6864fd76-9cf1-425e-9c68-c9d4e34948c0.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166277257-e9ccab56-aef5-48ed-9b51-d14c5181353e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166277614-537f429c-f7e8-4df9-89b0-e6c72bb14cb3.png)
+
+y como decíamos antes esta clase tendremos que anotarla como un bean estereotipado como repositorio, que además va a ejecutarse dentro de un marco transaccional
+
 ```java
 @Repository
 @Transactional
@@ -2750,9 +2766,11 @@ public class UserDao {
 }
 ```
 
-Los diferentes métodos que tendrá este bean son los lógicos de una clase que va a acceder a los datos, nos permitirá crear una nueva instancia, actualizar una existente, borrar una existente, obtener todas las que hay de un determinado tipo, de tipo `User` y obtener una en particular en base a a Id.
+![image](https://user-images.githubusercontent.com/23094588/166279678-73f3043c-0652-46aa-bf22-5a070ef39304.png)
 
-Lo primero que tenemos que hacer es obtener un EntityManager y eso lo vamos a hacer a través de una anotación `@PersistenceContext` esta anotación no es de Spring sino que esta definida en el standar Java y lo que va a hacer es buscar una factoria de EntityManager construir un EntityManager en particular e inyectarlo dentro de la variable que vamos a definir.
+Los diferentes métodos que tendrá este bean son los lógicos de una clase que va a acceder a los datos, nos permitirá **crear una nueva instancia**, **actualizar una existente**, **borrar una existente**, **obtener todas las que hay de un determinado tipo, de tipo `User`** y **obtener una en particular en base a a Id**.
+
+Lo primero que tenemos que hacer es obtener un **`EntityManager`** y eso lo vamos a hacer a través de una anotación **`@PersistenceContext`** esta anotación no es de Spring sino que esta definida en el standar Java y lo que va a hacer es buscar una **factoria de EntityManager** construir un **`EntityManager`** en particular e inyectarlo dentro de la variable que vamos a definir.
 
 ```java
 // A través de la anotación @PersistenceContext, se inyectará automáticamente
@@ -2763,11 +2781,13 @@ Lo primero que tenemos que hacer es obtener un EntityManager y eso lo vamos a ha
 private EntityManager entityManager;
 ```
 
-Ya tenemos nuestro EntityManager para poder usarlo a lo largo de los diferentes métodos.
+![image](https://user-images.githubusercontent.com/23094588/166284643-8878933e-4ca7-4e90-b015-637b16c35334.png)
 
-Vamos a crear los distintos métodos CRUD que podríamos llamar.
+Ya tenemos nuestro **`EntityManager`** para poder usarlo a lo largo de los diferentes métodos.
 
-El método `create(User user)` lo que hará es persistirlo, no tenemos que preocuparnos de la gestión de transacciones.
+Vamos a crear los distintos métodos **CRUD** que podríamos llamar.
+
+El método **`create(User user)`** ***lo que hará es persistirlo, no tenemos que preocuparnos de la gestión de transacciones***.
 
 ```java
 /**
@@ -2779,7 +2799,7 @@ public void create(User user) {
 }
 ```
 
-Vamos a eliminar un usuario, vamos a comprobar si el usuario esta contenido antes de eliminarlo, mediante el método `contains`. Si no lo contiene lo elimina pero antes hace una operación `merge` ya hablaremos de ella con más detenimiento.
+Vamos a **eliminar un usuario**, vamos a comprobar si el usuario esta contenido antes de eliminarlo, mediante el método **`contains`**. Si no lo contiene lo elimina pero antes hace una operación **`merge`** ya hablaremos de ella con más detenimiento.
 
 ```java
 /**
@@ -2794,7 +2814,7 @@ public void delete(User user) {
 }
 ```
 
-Nos quedaría la actualización.
+Nos quedaría **la actualización**.
 
 ```java
 /**
@@ -2806,7 +2826,7 @@ public void update(User user) {
 }
 ```
 
-Y por último los dos `getById()` que no va a devolver un usuario en base a su Id, usaremos el método de `entityManager` ya hablaremos sobre consulta, el método `find(...)` que nos va a devolver una instancia, recibe el tipo de dato y el valor id, un método muy sencillo de utilizar.
+Y por último los dos **`getById()`** que no va a devolver un usuario en base a su Id, usaremos el método de **`entityManager`** ya hablaremos sobre consulta, el método **`find(...)`** que nos va a devolver una instancia, recibe el tipo de dato y el valor **`id`**, un método muy sencillo de utilizar.
 
 ```java
 /**
@@ -2817,7 +2837,7 @@ public User getById(int id) {
 }
 ```
 
-Y el método que nos va a devolver todos devolverá una lista de usuarios, podemos llamarlo `getAll()` no necesita recibir ningún argumento usaremos una consulta de las que crearemos en los siguientes capítulos. Le hemos añadido el `@SuppressWarnings` del cual también hablaremos más adelante.  
+Y el **método que nos va a devolver todos devolverá una lista de usuarios**, podemos llamarlo **`getAll()`** no necesita recibir ningún argumento usaremos una consulta de las que crearemos en los siguientes capítulos. Le hemos añadido el **`@SuppressWarnings`** del cual también hablaremos más adelante.  
 
 ```java
 /**
@@ -2834,7 +2854,7 @@ Ya tendiamos nuestra clase DAO echa.
 *`UserDao.java`*
 
 ```java
-package com.openwebinars.hibernate.primerejemplospringjpahibernate;
+package com.javaocio.hibernate.spring;
 
 import java.util.List;
 
@@ -2844,18 +2864,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-/**
- * 
- * Esta es la clase que usaremos para acceder a los datos de las entidades User.
- * Al estar anotada con el estereotipo @Repository, será localizada rapidamente,
- * y usada para tal fin.
- * 
- * Al tener definido un motor de transacciones en DatabaseConfig, toda clase
- * anotada con @Transactional provocará que se invoquen los método begin()
- * y commit() de forma "mágica" en el inicio y el fin del método.
- * 
- * 
- */
 @Repository
 @Transactional
 public class UserDao {
@@ -2863,61 +2871,71 @@ public class UserDao {
 	// A través de la anotación @PersistenceContext, se inyectará automáticamente
 	// un EntityManager producido desde el entityManagerFactory definido en la clase
 	// DatabaseConfig.
-	
+		
 	@PersistenceContext
 	private EntityManager entityManager;
 
-
+	
 	/**
-	 * Almacena el usuario en la base de datos
-	 */
+	* Almacena el usuario en la base de datos
+	*/
 	public void create(User user) {
-		entityManager.persist(user);
-		return;
+	   entityManager.persist(user);
+	   return;
 	}
-
+	
 	/**
-	 * Elimina el usuario de la base de datos.
-	 */
+	* Elimina el usuario de la base de datos
+	*/
 	public void delete(User user) {
-		if (entityManager.contains(user))
-			entityManager.remove(user);
-		else
-			entityManager.remove(entityManager.merge(user));
-		return;
+	   if (entityManager.contains(user))
+	      entityManager.remove(user);
+	   else
+	      entityManager.remove(entityManager.merge(user));
+	   return;
 	}
-
+	
 	/**
-	 * Devuelve todos los usuarios de la base de datos.
-	 */
+	* Actualiza el usuario proporcionado
+	*/
+	public void update(User user) {
+	   entityManager.merge(user);
+	   return;
+	}
+	
+	/**
+	* Devuelve un usuario en base a su Id
+	*/
+	public User getById(int id) {
+	   return entityManager.find(User.class, 1);
+	}
+	
+	/**
+	* Devuelve todos los usuarios de la base de datos.
+	*/
 	@SuppressWarnings("unchecked")
 	public List<User> getAll() {
-		return entityManager.createQuery("from User").getResultList();
-	}
-
-	/**
-	 * Devuelve un usuario en base a su Id
-	 */
-	public User getById(int id) {
-		return entityManager.find(User.class, id);
-	}
-
-	/**
-	 * Actualiza el usuario proporcionado
-	 */
-	public void update(User user) {
-		entityManager.merge(user);
-		return;
+	   return entityManager.createQuery("select u from User").getResultList();
 	}
 	
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/166289166-37554859-2ac0-43b2-9c65-b0823bce0623.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166289251-f278ee58-0b84-4f0f-a63d-f2403083b4c0.png)
+
 <img src="images/7-04.png">
 
-Nos faltaría crear un controlador, dentro del controlador vamos a inyectar mediante `@Autowired` nuestro DAO para poder utilizarlo y en el controlador vamos a definir los métodos necesarios para manejar peticiones a la URL create, update, delete, etc.
+Nos faltaría crear un **Controlador**, dentro del controlador vamos a inyectar mediante **`@Autowired`** nuestro **DAO** para poder utilizarlo y en el controlador vamos a definir los métodos necesarios para manejar peticiones a la **URL create, update, delete**, etc.
 
-En nuestro proyecto crearíamos una nueva clase que la vamos a llamar `UserController` la vamos a anotar con `@Controller`.
+En nuestro proyecto crearíamos una nueva clase que la vamos a llamar **`UserController`**
+
+![image](https://user-images.githubusercontent.com/23094588/166289937-c8e70838-d6c0-4850-8f37-1b413bb1793b.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166289991-ead16bdc-3e7d-45f7-9b93-88b03bbb3f95.png)
+
+la vamos a anotar con **`@Controller`**.
 
 ```java
 @Controller
@@ -2926,7 +2944,9 @@ public class UserController {
 }
 ```
 
-Auto-cableamos el `UserDao` para tenerlo listo para utilizarlo.
+![image](https://user-images.githubusercontent.com/23094588/166290041-9ce889f4-33ca-4faa-8b65-e2c9dc43abb0.png)
+
+Auto-cableamos el **`UserDao`** para tenerlo listo para utilizarlo.
 
 ```java
 // Inyectamos el DAO dentro del Controller
@@ -2934,19 +2954,30 @@ Auto-cableamos el `UserDao` para tenerlo listo para utilizarlo.
 private UserDao userDao;
 ```
 
-Vamos a crear un bean a partir del nombre y el mensaje, le añadimos las anotaciones `@RequestMapping(value = "/create")` o incluso si queremos la anotación getmapping.
+![image](https://user-images.githubusercontent.com/23094588/166290170-dbe878f6-ab76-4c9e-a0df-00dcc1bac719.png)
+
+Vamos a **crear un bean a partir del nombre y el mensaje**, le añadimos las anotaciones **`@RequestMapping(value = "/create")`** o incluso si queremos la anotación **`getmapping`** (las derivadas).
 
 ```java
 @RequestMapping(value = "/create")
-@ResponseBody
 public String create(String name, String message) {
 
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/166290717-aba71efd-4ed8-41f3-98d2-75d11abd2a0c.png)
+
 Bueno no hemos declarado todavía un mecanismo automático de creación de Ids, podemos inventar uno sobre la marcha, para que lo haga de manera aleatoria y nos valga para el ejemplo y no tener que pasarle el Id como argumento, creamos un usuario, podemos crear un número aleatorio, asignamos los datos, asignamos el nombre y el mensaje, nos quedaría llamar al DAO para poder crear al usuario y devolver algún tipo de mensaje con respecto a la creación del usuario.
 
 ```java
+/**
+ * 
+ * Crea un nuevo usuario con un Id autogenerado, y con los datos recibidos
+ * por la URL 
+ * 
+ * /create?name=...&message=....
+ * 
+ */
 @RequestMapping(value = "/create")
 public String create(String name, String message) {
 
@@ -2954,17 +2985,22 @@ public String create(String name, String message) {
 
    Random r = new Random();
    int randomId = r.nextInt(Integer.MAX_VALUE);
+   
    // Asignamos los datos
    user.setId(randomId);
    user.setUserName(name);
    user.setUserMessage(message);
+   
    userDao.create(user);
    
    return "Usuario creado correctamente";
 }
 ```
 
-Para que podemos visualizar directamente este mensaje y no nos perdamos ahora en gestión del sistema de vistas, le vamos a añadir la anotación `@ResponseBody` que hara que lo que se devuelva como parte del método será el cuerpo de la respuesta y por lo tanto será el mensaje que nosotros podremos visualizar. Hay que tener en cuenta que esta creación puede dar alguna exepción aun que nosotros lo la hayamos capturado aquí, lo podríamos meter todo dentro de un bloque try catch de manera que quedara un poco más armado.
+![image](https://user-images.githubusercontent.com/23094588/166290965-9da74d50-bd64-403e-941d-b7cc52a8ada5.png)
+
+
+Para que podemos visualizar directamente este mensaje y no nos perdamos ahora en gestión del sistema de vistas, le vamos a añadir la anotación **`@ResponseBody`** que hara que lo que se devuelva como parte del método será el cuerpo de la respuesta y por lo tanto será el mensaje que nosotros podremos visualizar. Hay que tener en cuenta que esta creación puede dar alguna exepción aun que nosotros no la hayamos capturado aquí, lo podríamos meter todo dentro de un bloque try catch de manera que quedara un poco más armado.
 
 ```java
 /**
@@ -2998,7 +3034,9 @@ public String create(String name, String message) {
 }
 ```
 
-Las diferentes llamadas serían de una forma parecida. El método `delete(int id)` quedará así:
+![image](https://user-images.githubusercontent.com/23094588/166291335-55607b04-e065-4137-913c-76d0e794966f.png)
+
+Las diferentes llamadas serían de una forma parecida. El método **`delete(int id)`** quedará así:
 
 ```java
 /**
@@ -3052,7 +3090,7 @@ public String updateName(int id, String name, String message) {
 La clase completa queda así:
 
 ```java
-package com.openwebinars.hibernate.primerejemplospringjpahibernate;
+package com.javaocio.hibernate.spring;
 
 import java.util.Random;
 
@@ -3063,12 +3101,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
-
-
+	
 	// Inyectamos el DAO dentro del Controller
 	@Autowired
 	private UserDao userDao;
-
+	
 	/**
 	 * 
 	 * Crea un nuevo usuario con un Id autogenerado, y con los datos recibidos
@@ -3082,62 +3119,63 @@ public class UserController {
 	public String create(String name, String message) {
 		try {
 			User user = new User();
-			// Estas líneas de código generan un Id aleatorio.
-			// En las próximas lecciones veremos como delegar esto en la base de
-			// datos
+	
 			Random r = new Random();
 			int randomId = r.nextInt(Integer.MAX_VALUE);
+			
 			// Asignamos los datos
 			user.setId(randomId);
 			user.setUserName(name);
 			user.setUserMessage(message);
-
+			
 			userDao.create(user);
-		} catch (Exception ex) {
-			return "Error creando el usuario: " + ex.toString();
-		}
+		 } catch (Exception ex) {
+		      return "Error creando el usuario: " + ex.toString();
+		  }
+		   
 		return "Usuario creado correctamente";
-	}
 
+	}
+	
 	/**
-	 * 
-	 * Elimina un usuario, localizándolo por su Id
-	 * 
-	 * /delete?id=...
-	 * 
-	 */
+	* 
+	* Elimina un usuario, localizándolo por su Id
+	* 
+	* /delete?id=...
+	* 
+	*/
 	@RequestMapping(value = "/delete")
 	@ResponseBody
 	public String delete(int id) {
-		try {
-			User user = new User();
-			user.setId(id);
-			userDao.delete(user);
-		} catch (Exception ex) {
-			return "Error eliminando el usuario: " + ex.toString();
-		}
-		return "Usuario eliminado correctamente";
+	   try {
+	      User user = new User();
+	      user.setId(id);
+	      userDao.delete(user);
+	   } catch (Exception ex) {
+	      return "Error eliminando el usuario: " + ex.toString();
+	   }
+	   return "Usuario eliminado correctamente";
 	}
-
+	
 	/**
-	 * 
-	 * Actualiza el nombre y el mensaje de un usuario, localizándolo por su Id
-	 * 
-	 * /update?id=...&name=...&message=....
-	 * 
-	 */
+	* 
+	* Actualiza el nombre y el mensaje de un usuario, localizándolo por su Id
+	* 
+	* /update?id=...&name=...&message=....
+	* 
+	*/
 	@RequestMapping(value = "/update")
 	@ResponseBody
 	public String updateName(int id, String name, String message) {
-		try {
-			User user = userDao.getById(id);
-			user.setUserName(name);
-			user.setUserMessage(message);
-			userDao.update(user);
-		} catch (Exception ex) {
-			return "Error actualizando el usuario: " + ex.toString();
-		}
-		return "Usuario actualizado correctamente";
+	   try {
+	      User user = userDao.getById(id);
+	      user.setUserName(name);
+	      user.setUserMessage(message);
+	      userDao.update(user);
+	   } catch (Exception ex) {
+	      return "Error actualizando el usuario: " + ex.toString();
+	   }
+	   return "Usuario actualizado correctamente";
 	}
 
 }
@@ -3157,34 +3195,532 @@ Para poder crear un nuevo usuario, lo podemos comprobar.
 
 Vamos a añadir una nueva propiedad a nuestro fichero de properties para que no nos choque con ningún otro servidor que es
 
-`server.port: 9002`
+```java
+server.port: 9002
+```
 
-Y ya podriamos ejecutar nuestro proyecto como una Spring Boot App.
+![image](https://user-images.githubusercontent.com/23094588/166292121-c14de639-b460-45a8-ae69-52fb6b79718d.png)
 
 
-<img src="images/7-05.png">
+Y ya podriamos ejecutar nuestro proyecto como un **Spring Boot App**.
 
-<img src="images/7-06.png">
+![image](https://user-images.githubusercontent.com/23094588/166292479-54470bfd-a1a9-43f3-af26-29fdce78a44e.png)
 
-<img src="images/7-07.png">
+Al ejecutar mi proyecto me da este error
 
-<img src="images/7-08.png">
+![image](https://user-images.githubusercontent.com/23094588/166292882-90705d4c-a97e-4bb9-96c3-4dd872bfaa52.png)
 
-<img src="images/7-09.png">
+Un primer fallo lo encontramos en el archivo de propiedades **`application.properties`** ya que la línea 8 tenia mal el paquete, corregido es así:
 
-<img src="images/7-10.png">
+![image](https://user-images.githubusercontent.com/23094588/166293522-7c2d32ee-471f-4fd0-8722-e33eea9c4b86.png)
 
-<img src="images/7-11.png">
+Aun que el fallo sigue estando al ejecutar el proyecto.
 
-<img src="images/7-12.png">
+Después de revisar el proyecto en el archivo **`pom.xml`**, al crearlo se genero con la versión **`<version>2.6.7</version>`** de Spring Boots, revisando una versión anterior que si funcionaba que se había generado anteriormente **`<version>2.3.0.RELEASE</version>`** y probar con ella, el proyecto si levanta. **Observese que hemos abierto la Perpectiva de Spring**
 
-<img src="images/7-13.png">
+![image](https://user-images.githubusercontent.com/23094588/166297657-fe514c30-6a42-41ee-b38b-1a7d25acc888.png)
 
-<img src="images/7-14.png">
+![image](https://user-images.githubusercontent.com/23094588/166297725-09f0c5a5-7b6e-490b-800d-d77cc3605b79.png)
 
-<img src="images/7-16.png">
+Observamos la BD limpia por que se ha generado nuevamente.
+
+![image](https://user-images.githubusercontent.com/23094588/166297575-56e2c577-8613-420d-aa82-699375c652a5.png)
+
+
+Vamos a ejecutar la primer URL para crear un Usuario.
+
+```html
+http://localhost:9002/create?name=Pepe&message=Hola
+```
+
+![image](https://user-images.githubusercontent.com/23094588/166298112-32206f52-18a7-4cb2-ba9b-488a1c7cb2d0.png)
+
+Si refrescamos la BD tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/166298209-be7977e9-923c-40c0-a705-b205675de92d.png)
+
+Vamos a meter un segundo usuario
+
+```html
+http://localhost:9002/create?name=Juan&message=Soy Guay
+```
+
+![image](https://user-images.githubusercontent.com/23094588/166298437-0cbcfbdc-d4bb-43a8-a957-357db5add1a8.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166298530-83efee40-e2f5-47fb-9f19-91034a9216ec.png)
+
+Observese que en la consola va mostrando lo que va haciendo.
+
+![image](https://user-images.githubusercontent.com/23094588/166299199-f9116d5c-2a21-48e1-8a85-d4920f45a6b9.png)
+
+
+Vamos a actualizar este segundo registro:
+
+```html
+http://localhost:9002/update?id=399079114&name=JUAN&message=Soy%20buena%20onda
+```
+Al intentarlo hacer nos muestra este error:
+
+![image](https://user-images.githubusercontent.com/23094588/166299051-b58870f7-e0eb-4db5-bde5-a82a04a16994.png)
+
+Revisando el código observamos que tenemos un error en la clas **`UserDao`**
+
+![image](https://user-images.githubusercontent.com/23094588/166300764-fe153c8d-8c6b-4ee1-a69c-c377bf86e131.png)
+
+Siempre busca el usuario con ID = 1 y como no existe nos muestra el error, vamos a cambiarlo.
+
+![image](https://user-images.githubusercontent.com/23094588/166300883-2d9b9e37-f9b7-495f-a595-139712200c99.png)
+
+Hemos parado el Servidor y vuelto a arrancar, ejecutamos los dos URL para insertar los Usuarios, los datos han quedado así:
+
+![image](https://user-images.githubusercontent.com/23094588/166301286-9e2e6f75-c637-4f4e-8fc3-c7dcbd2b45ef.png)
+
+Vamos a cambiar el segundo registro
+
+```html
+http://localhost:9002/update?id=243362801&name=JUAN&message=Soy buena onda
+```
+
+Ahora si que a cambiado el registro.
+
+![image](https://user-images.githubusercontent.com/23094588/166301494-210ff201-38f3-4990-96f2-9ea7d776bc6c.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166301525-4d16685c-1d5a-4f56-930d-e7dc5e0bdbaa.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166301614-7f7d2fdf-3081-425c-826d-28484a19e535.png)
+
+Finalmente vamos a borrar este registro:
+
+```html
+http://localhost:9002/delete?id=243362801
+```
+
+![image](https://user-images.githubusercontent.com/23094588/166301772-8c5cc739-cd8d-456c-bd93-090be82dc57e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166301814-cadbaedb-20b6-4460-bfa2-4faf48d7a22b.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166301852-ea35a5a2-bd50-4ec7-bab6-116860bace85.png)
 
 ### :computer: Código Completo - 130-03-PrimerProyectoSpringHibernateJPA
+
+![image](https://user-images.githubusercontent.com/23094588/166302066-7aa9f57c-f3de-4eac-b06a-ecc5eff4f8cd.png)
+
+**`pom.xml`**
+
+```html
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.javaocio.hibernate</groupId>
+	<artifactId>130-03-PrimerProyectoSpringJPAHibernate</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>130-03-PrimerProyectoSpringJPAHibernate</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+```
+
+**`application.properties`**
+
+```properties
+# Base de datos
+db.driver: com.mysql.jdbc.Driver
+db.url: jdbc:mysql://localhost/hibernate
+db.username: openwebinars
+db.password: 12345678
+
+# Busqueda de entidades
+entitymanager.packagesToScan: com.javaocio.hibernate.spring
+
+# Hibernate
+hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+hibernate.show_sql: true
+hibernate.hbm2ddl.auto: create
+
+# Asignar Puerto
+server.port: 9002
+```
+
+**`DatabaseConfig`**
+
+```java
+package com.javaocio.hibernate.spring;
+
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@EnableTransactionManagement
+public class DatabaseConfig {
+	
+	/**
+	* Definición del DataSource para la conexión a nuestra base de datos. 
+	* Las propiedades son establecidas desde el fichero de properties, y 
+	* asignadas usando el objeto env.
+	* 
+	*/
+	@Bean
+	public DataSource dataSource() {
+	   DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	   dataSource.setDriverClassName(env.getProperty("db.driver"));
+	   dataSource.setUrl(env.getProperty("db.url"));
+	   dataSource.setUsername(env.getProperty("db.username"));
+	   dataSource.setPassword(env.getProperty("db.password"));
+	   return dataSource;
+	}
+	
+	/**
+	*
+	* Declaración del EntityManagerFactory de JPA
+	 */
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		
+		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		
+		//Le asignamos el dataSource que acabamos de definir.
+		entityManagerFactory.setDataSource(dataSource);
+		
+		// Le indicamos la ruta donde tiene que buscar las clases anotadas
+		entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+		
+		// Implementación de JPA a usar: Hibernate
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+		
+		// Propiedades de Hiberante
+		Properties additionalProperties = new Properties();
+		additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		entityManagerFactory.setJpaProperties(additionalProperties);
+		
+		return entityManagerFactory;
+	}
+	
+	/**
+	* Inicializa y declara el gestor de transacciones
+	*/
+	@Bean
+	public JpaTransactionManager transactionManager() {
+	   JpaTransactionManager transactionManager = new JpaTransactionManager();
+	   transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+	   return transactionManager;
+	}
+	
+	/**
+	*  
+	* Este bean es un postprocessor que ayuda a relanzar las excepciones específicas
+	* de cada plataforma en aquellas clases anotadas con @Repository
+	* 
+	*/
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+	   return new PersistenceExceptionTranslationPostProcessor();
+	}
+	
+	@Autowired
+	private Environment env;
+	
+	@Autowired
+	private DataSource dataSource;
+	
+	@Autowired
+	private LocalContainerEntityManagerFactoryBean entityManagerFactory;
+
+}
+```
+
+**`User`**
+
+```java
+package com.javaocio.hibernate.spring;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+	
+	@Id
+	private int id;
+	
+	private String userName;
+	
+	private String userMessage;
+
+	//Constructor sin parámetros
+	public User() {
+		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+	
+}
+```
+
+**`UserDao`**
+
+```java
+package com.javaocio.hibernate.spring;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+/**
+ * 
+ * Esta es la clase que usaremos para acceder a los datos de las entidades User.
+ * Al estar anotada con el estereotipo @Repository, será localizada rapidamente,
+ * y usada para tal fin.
+ * 
+ * Al tener definido un motor de transacciones en DatabaseConfig, toda clase
+ * anotada con @Transactional provocará que se invoquen los método begin()
+ * y commit() de forma "mágica" en el inicio y el fin del método.
+ * 
+ * 
+ */
+@Repository
+@Transactional
+public class UserDao {
+	
+	// A través de la anotación @PersistenceContext, se inyectará automáticamente
+	// un EntityManager producido desde el entityManagerFactory definido en la clase
+	// DatabaseConfig.
+		
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	
+	/**
+	* Almacena el usuario en la base de datos
+	*/
+	public void create(User user) {
+	   entityManager.persist(user);
+	   return;
+	}
+	
+	/**
+	* Elimina el usuario de la base de datos
+	*/
+	public void delete(User user) {
+	   if (entityManager.contains(user))
+	      entityManager.remove(user);
+	   else
+	      entityManager.remove(entityManager.merge(user));
+	   return;
+	}
+	
+	/**
+	* Actualiza el usuario proporcionado
+	*/
+	public void update(User user) {
+	   entityManager.merge(user);
+	   return;
+	}
+	
+	/**
+	* Devuelve un usuario en base a su Id
+	*/
+	public User getById(int id) {
+	   return entityManager.find(User.class, id);
+	}
+	
+	/**
+	* Devuelve todos los usuarios de la base de datos.
+	*/
+	@SuppressWarnings("unchecked")
+	public List<User> getAll() {
+	   return entityManager.createQuery("select u from User").getResultList();
+	}
+	
+}
+```
+
+**`UserController`**
+
+```java
+package com.javaocio.hibernate.spring;
+
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class UserController {
+	
+	// Inyectamos el DAO dentro del Controller
+	@Autowired
+	private UserDao userDao;
+	
+	/**
+	 * 
+	 * Crea un nuevo usuario con un Id autogenerado, y con los datos recibidos
+	 * por la URL 
+	 * 
+	 * /create?name=...&message=....
+	 * 
+	 */
+	@RequestMapping(value = "/create")
+	@ResponseBody
+	public String create(String name, String message) {
+		try {
+			User user = new User();
+	
+			Random r = new Random();
+			int randomId = r.nextInt(Integer.MAX_VALUE);
+			
+			// Asignamos los datos
+			user.setId(randomId);
+			user.setUserName(name);
+			user.setUserMessage(message);
+			
+			userDao.create(user);
+		 } catch (Exception ex) {
+		      return "Error creando el usuario: " + ex.toString();
+		  }
+		   
+		return "Usuario creado correctamente";
+
+	}
+	
+	/**
+	* 
+	* Elimina un usuario, localizándolo por su Id
+	* 
+	* /delete?id=...
+	* 
+	*/
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	public String delete(int id) {
+	   try {
+	      User user = new User();
+	      user.setId(id);
+	      userDao.delete(user);
+	   } catch (Exception ex) {
+	      return "Error eliminando el usuario: " + ex.toString();
+	   }
+	   return "Usuario eliminado correctamente";
+	}
+	
+	/**
+	* 
+	* Actualiza el nombre y el mensaje de un usuario, localizándolo por su Id
+	* 
+	* /update?id=...&name=...&message=....
+	* 
+	*/
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public String updateName(int id, String name, String message) {
+	   try {
+	      User user = userDao.getById(id);
+	      user.setUserName(name);
+	      user.setUserMessage(message);
+	      userDao.update(user);
+	   } catch (Exception ex) {
+	      return "Error actualizando el usuario: " + ex.toString();
+	   }
+	   return "Usuario actualizado correctamente";
+	}
+
+}
+```
+
+
+
+#### VERSION ANTERIOR Por si las FLY
+
+<img src="images/7-07.png">
+<img src="images/7-08.png">
+<img src="images/7-09.png">
+<img src="images/7-10.png">
+<img src="images/7-11.png">
+<img src="images/7-12.png">
+<img src="images/7-13.png">
+<img src="images/7-14.png">
 
 <img src="images/7-15.png">
 
@@ -3276,7 +3812,7 @@ server.port: 9002
 *`DatabaseConfig`*
 
 ```java
-package com.openwebinars.hibernate.spring;
+package com.javaocio.hibernate.spring;
 
 import java.util.Properties;
 import javax.sql.DataSource;
