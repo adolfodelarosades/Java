@@ -2226,37 +2226,64 @@ En esta lección vamos a aprender cómo poder trabajar con JPA y Hibernate pero 
 
 <img src="images/6-04.png">
 
-Vamos a ver los pasos que tendríamos que seguir para crear nuestro proyecto, el primer paso cómo pasó 0 os recomiendo que visitéis el curso de Spring sobre todo el apartado de en Spring MVC, allí se explica con detenimiento los pasos a seguir para utilizando la herramienta Spring Tool Suite poder crear proyectos de aplicaciones Web utilizando los distintos módulos que tiene Spring en particular el modulo web y también Spring Boot que nos va a facilitar mucho la configuración de proyectos, nosotros lo haremos a fondo en este ejemplo.
+Vamos a ver los pasos que tendríamos que seguir para crear nuestro proyecto, **el primer paso cómo pasó 0 os recomiendo que visitéis el curso de Spring sobre todo el apartado de en Spring MVC**, allí se explica con detenimiento los pasos a seguir para utilizando la herramienta **Spring Tool Suite** poder crear proyectos de aplicaciones Web utilizando los distintos módulos que tiene Spring en particular el **Módulo Web** y también Spring Boot que nos va a facilitar mucho la configuración de proyectos, nosotros lo haremos a fondo en este ejemplo.
 
 <img src="images/6-05.png">
 
-Primero lo que vamos a hacer es crear ese nuevo proyecto, vamos a crear como un proyecto starter.
+***Lo primero que vamos a hacer es crear un nuevo proyecto, vamos a crear como un proyecto*** **Spring Starter Project** ***de la sección*** **Spring Boots**.
+
+![image](https://user-images.githubusercontent.com/23094588/166215253-171a6675-7c20-47a1-94ab-e34bc34cb4db.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166215328-d9f9b102-fafd-47a0-9814-768d7f1dbedf.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166215777-a2a4f353-2377-458d-8b47-a305a56dcf8b.png)
+
 
 <img src="images/6-11.png">
 
 <img src="images/6-12.png">
 
-El nombre del proyecto va a ser `PrimerProyectoSpringHibernateJPA` será un proyecto Maven, para Java 8, empaquetado JAR, pondremos como Group `com.openwebinars.hibernate`, como nombre de proyecto `com.openwebinars.hibernate.spring`. 
+El nombre del proyecto va a ser **`130-03-PrimerProyectoSpringJPAHibernate`** será un **proyecto Maven**, para **Java 11**, **empaquetado JAR**, pondremos como **Group `com.javaocio.hibernate`**, como nombre del **Package `com.javaocio.hibernate.spring`**. 
 
-<img src="images/6-13.png">
+![image](https://user-images.githubusercontent.com/23094588/166216215-55a711fa-21f2-4b65-ad78-ef05af2d0e94.png)
 
-De entre todos los módulos posibles que podemos incluir con Spring Boot vamos a añadir algunos de ellos, el módulo Spring Web que nos añadira las dependencias necesarias para hacer una aplicación web, el módulo de JPA y el de MySQL, de esa manera nos desentenderemos de tener que añadir nosotros manualmente las dependencias en el fichero `pom.xml`. 
+De entre todos los módulos posibles que podemos incluir con Spring Boot vamos a añadir algunos de ellos, el **Módulo Spring Web** que nos añadira las dependencias necesarias para hacer una aplicación web, el **Módulo de JPA** y el de **MySQL**, de esa manera nos desentenderemos de tener que añadir nosotros manualmente las dependencias en el fichero **`pom.xml`**. 
 
-Spring Tool Suite descarga el proyecto, se trata de un proyecto especial porque es un proyecto Maven preparado especialmente para trabajar con Spring, la estructura del proyecto es un poco diferente ya viene directamente la carpeta resource, con el fichero de properties, la aplicación que carga por defecto es distinta es una aplicación Spring Boot. Trae las dependencias Maven nos hemos ahorrado de tener que escribirlas.
+Podemos buscar el módulo deseado en la barra
 
-<img src="images/6-14.png">
+![image](https://user-images.githubusercontent.com/23094588/166216391-159a4fb9-1853-4446-9c6a-de2d5af30dab.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166216467-2131b6ff-f1f8-4a01-94af-416301a6cd25.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166216530-d0b042ae-b49a-4bc5-9ee5-d0517b2f7a2b.png)
+
+Una vez añadidos todos los módulos deseados pulsamos en **Finish**.
+
+Spring Tool Suite descarga el proyecto, se trata de un proyecto especial porque es un proyecto Maven preparado especialmente para trabajar con Spring, la estructura del proyecto es un poco diferente ya viene directamente la **carpeta Resource**, con el fichero de properties, 
+
+![image](https://user-images.githubusercontent.com/23094588/166216940-cc2c775d-7d96-42f5-bfce-7ccb84b7ec78.png)
+
+la aplicación que carga por defecto es distinta es una aplicación Spring Boot. 
+
+![image](https://user-images.githubusercontent.com/23094588/166217468-f9fde98f-e5c5-4d68-b12b-08eb2e128681.png)
+
+Trae las dependencias Maven nos hemos ahorrado de tener que escribirlas.
+
+![image](https://user-images.githubusercontent.com/23094588/166217771-4efbbf1b-e4c6-4a2a-acd9-6affd726e57f.png)
 
 <img src="images/6-06.png">
 
-Como primer paso vamos a marcar la configuración que va a tener este proyecto JPA con Hibernate, en lugar de hacerlo mediante XML cosa que hemos hecho en los dos proyectos anteriores, vamos a aprovechar la tecnología Java Config que nos ofrece Spring para configurar el proyecto a través de una clase.
+**Como primer paso vamos a marcar la configuración que va a tener este proyecto JPA con Hibernate**, ***en lugar de hacerlo mediante*** **XML** ***cosa que hemos hecho en los dos proyectos anteriores, vamos a aprovechar la tecnología*** **Java Config** ***que nos ofrece Spring para configurar el proyecto a través de una clase***.
 
-Para ello creamos una nueva clase, la vamos a llamar `DatabaseConfig`.
+Para ello ***creamos una nueva clase***, la vamos a llamar **`DatabaseConfig`**.
 
-<img src="images/6-15.png">
+![image](https://user-images.githubusercontent.com/23094588/166217672-54fc0914-363c-4b94-abc0-81e502e61002.png)
 
-La vamos a anotar con `@Configuration` lo cual le va a indicar a Spring Boot que se trata de una clase de configuración y la ejecutará en el momento correspondiente y vamos a añadir la anotación de la habilitación de la gestión de transacciones para que podamos definir la gestión de transacciones también en esta clase `@EnableTransactionManagement`.
+![image](https://user-images.githubusercontent.com/23094588/166217873-323e71a8-a1d1-40e9-abc5-f7fccf20a4c4.png)
 
-```jav
+La vamos a anotar con **`@Configuration`** lo cual le va a indicar a Spring Boot que se trata de **una clase de configuración** y la ejecutará en el momento correspondiente y vamos a añadir la **anotación de la habilitación de la gestión de transacciones** para que podamos definir la gestión de transacciones también en esta clase **`@EnableTransactionManagement`**.
+
+```java
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {
@@ -2264,23 +2291,25 @@ public class DatabaseConfig {
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/166218190-256a89d2-bb8b-44c8-b30e-180f5d13b39a.png)
+
 <img src="images/6-07.png">
 
-Dentro tenemos que crear una serie de BEANs, en particular tenemos que crear una serie de beans dónde definamos el origen de los datos, en el haremos referencia al fichero de properties que es donde finalmente pondremos está configuración.
+Dentro **tenemos que crear una serie de BEANs**, en particular tenemos que crear una serie de beans dónde definamos el origen de los datos, en el haremos referencia al fichero de properties que es donde finalmente pondremos está configuración.
 
 <img src="images/6-08.png">
 
-Vamos a crear otro bean que será el que se encargue de crear el `entityManagerFactory` y cómo lo va a crear, a partir del DataSource que hemos definido indicándole las clases que va a manejar, indicándole la implementación que vamos a utilizar de JPA que en nuestro caso será Hibernate y las propiedades adicionales de Hibernate que hemos estado añadiendo hasta ahora en los diferentes proyectos de ejemplo.
+Vamos a **crear otro bean que será el que se encargue de crear el `entityManagerFactory`** y cómo lo va a crear, a partir del **DataSource** que hemos definido indicándole las clases que va a manejar, indicándole la implementación que vamos a utilizar de **JPA** que en nuestro caso será **Hibernate** y las **propiedades adicionales de Hibernate** que hemos estado añadiendo hasta ahora en los diferentes proyectos de ejemplo.
 
 <img src="images/6-09.png">
 
-Por último también definiremos quien se va a encargar de las transacciones, veremos que el manejo de las transacciones con Spring aquí será más sencillo y este `PostProcessor` se va a encargar de determinadas excepciones para que las podamos recoger de una manera efectiva. 
+Por último también **definiremos quien se va a encargar de las transacciones**, veremos que el manejo de las transacciones con Spring aquí será más sencillo y este **`PostProcessor`** se va a encargar de determinadas excepciones para que las podamos recoger de una manera efectiva. 
 
 <img src="images/6-10.png">
 
-Y por último dentro de esta clase de configuración autoinyectoremos los beans qué vamos a necesitar. 
+Y por último **dentro de esta clase de configuración autoinyectoremos los beans** qué vamos a necesitar. 
 
-Vamos a crear el código.
+Vamos a crear el código dentro de la clase **`DatabaseConfig`**.
 
 Vamos a generar un bean dónde cargaremos las propiedades.
 
