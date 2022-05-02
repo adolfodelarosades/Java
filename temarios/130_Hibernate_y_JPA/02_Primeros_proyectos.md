@@ -2320,7 +2320,7 @@ public DataSource dataSource() {
 }
 ```
 
-Para crear este bean vamos a necesitar de un elemento que esté auto-inyectado, auto-cableado que es `Environment`.
+Para crear este bean vamos a necesitar de un elemento que esté auto-inyectado, auto-cableado que es **`Environment`**.
 
 ```java
 @Autowired
@@ -2329,26 +2329,32 @@ private Environment env;
 
 Que nos va a permitir leer la configuración de las diferentes properties, que vamos a tener definidas.
 
-Ya dentro del método `dataSource()` lo que vamos a hacer es crear el `dataSource` a partir del `DriverManager` para los que ya habéis trabajado con JDBC y DataSource puede ser que este código resulte un poco conocido.
+Ya dentro del método **`dataSource()`** lo que vamos a hacer es crear el **`dataSource`** a partir del **`DriverManager`** para los que ya habéis trabajado con JDBC y DataSource puede ser que este código resulte un poco conocido.
 
-`DriverManagerDataSource dataSource = new DriverManagerDataSource();`
+```java
+DriverManagerDataSource dataSource = new DriverManagerDataSource();
+```
 
-Marcamos las propiedades del origen de datos, el driver que lo vamos a cargar desde una propiedad, la propiedad `db.driver` que definiremos en el fichero de properties.
+Marcamos las **propiedades del origen de datos**, el driver que lo vamos a cargar desde una propiedad, la propiedad **`db.driver`** que definiremos en el fichero de properties.
 
-`dataSource.setDriverClassName(env.getProperty("db.driver"));`
+```java
+dataSource.setDriverClassName(env.getProperty("db.driver"));
+```
 
-La URL de conexión que también la vamos a cargar desde la propiedad `db.url`
+La **URL de conexión** que también la vamos a cargar desde la propiedad **`db.url`**
 
-`dataSource.setUrl(env.getProperty("db.url"));`
+```java
+dataSource.setUrl(env.getProperty("db.url"));
+```java
 
-Y el nombre de usuario y contraseña 
+Y el **nombre de usuario y contraseña** 
 
 ```java
 dataSource.setUsername(env.getProperty("db.username"));
 dataSource.setPassword(env.getProperty("db.password"));
 ```
 
-Y finalmente retornamos el `dataSource`.
+Y finalmente retornamos el **`dataSource`**.
 
 ```java
 return dataSource;
@@ -2374,16 +2380,21 @@ public DataSource dataSource() {
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/166219913-469d8d87-3f89-4fb3-98b3-ce7ac3ff6541.png)
+
 Después añadiremos estos valores en el fichero de properties.
 
-Muy bien ya tenemos nuestro bean de origen de datos y lo vamos a auto-cablear también directamente aquí para que cuando se cargue el fichero de configuración se auto-inyecte.
+Muy bien ya tenemos nuestro bean de origen de datos y lo **vamos a auto-cablear también directamente aquí para que cuando se cargue el fichero de configuración se auto-inyecte**.
 
 ```java
 @Autowired
 private DataSource dataSource;
 ```
 
-Vamos a hacer la declaración del `EntityManagerFactory` este método es algo más largo. Spring nos va a permitir definir mediante un bean el `EntityManagerFactory` de forma local mediante el objeto que va a devolver este método.
+![image](https://user-images.githubusercontent.com/23094588/166220142-4b1ab399-3e0e-48a7-b21f-cf8db13bedd0.png)
+
+
+Vamos a hacer la declaración del **`EntityManagerFactory`** este método es algo más largo. Spring nos va a permitir definir mediante un bean el **`EntityManagerFactory`** de forma local mediante el objeto que va a devolver este método.
 
 ```java
 @Bean
@@ -2399,9 +2410,12 @@ Ya lo podemos auto-cablear.
 private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 ```
 
-Este objeto nos permitirá generar el EntityManager haya dónde lo vayamos a necesitar de una manera que veremos qué es batante interesante.
+![image](https://user-images.githubusercontent.com/23094588/166220751-2bd95e43-fa32-4c59-9fca-998632a844c8.png)
 
-Volviendo al método `entityManagerFactory()` creamos un nuevo objeto de este tipo, que será el que devolvamos.
+
+Este objeto nos permitirá generar el **EntityManager** haya dónde lo vayamos a necesitar de una manera que veremos qué es batante interesante.
+
+Volviendo al método **`entityManagerFactory()`** creamos un nuevo objeto de este tipo, que será el que devolvamos.
 
 ```java
 @Bean
@@ -2413,7 +2427,7 @@ public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 }
 ```
 
-Y ahora vamos a asignarle una serie de propiedades, en primer lugar le asignamos como origen de datos el DataSource que hemos creado a inyectado en esta clase.
+Y ahora vamos a **asignarle una serie de propiedades**, en primer lugar le asignamos como origen de datos el **DataSource** que hemos creado e inyectado en esta clase.
 
 
 ```java
@@ -2421,22 +2435,22 @@ Y ahora vamos a asignarle una serie de propiedades, en primer lugar le asignamos
 entityManagerFactory.setDataSource(dataSource);
 ```
 
-En segundo lugar le vamos a indicar cuál será los paquetes que tiene que escanear para buscar las clases anotadas, vendrá también como un property en el fichero de properties.
+En segundo lugar le vamos a **indicar cuál será los paquetes que tiene que escanear para buscar las clases anotadas**, vendrá también como un property en el fichero de properties.
 
 ```java
 // Le indicamos la ruta donde tiene que buscar las clases anotadas
-		entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
 
 ```
 
-En tercer lugar le vamos a decir que como implementación, como vendor de JPA  vamos a usar Hibernate, para eso usaremos las clases propias que nos da Hibernate para ellos, a través de `HibernateJpaVendorAdapter` y se lo asignaremos al `entityManagerFactory`.
+En tercer lugar **le vamos a decir que como implementación, como vendor de JPA  vamos a usar Hibernate**, para eso usaremos las clases propias que nos da Hibernate para ellos, a través de `HibernateJpaVendorAdapter` y se lo asignaremos al `entityManagerFactory`.
 
 ```java
 // Implementación de JPA a usar: Hibernate
 HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
 ````
-Y por último vamos añadirlos las propiedades de Hibernate que hemos arrastrado hasta antes, como son el dialecto, la propiedad show SQL y la generación del DDL, que también se cargará desde el fichero de properties.
+Y por último vamos **añadirlos las propiedades de Hibernate que hemos arrastrado hasta antes**, como son el dialecto, la propiedad show SQL y la generación del DDL, que también se cargará desde el fichero de properties.
 
 ```java
 // Propiedades de Hiberante
@@ -2483,9 +2497,14 @@ public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 }
 ```
 
-Nos faltaría definir el gestor de transacciones y el bean `PostProcessor` del que hablamos antes.
+![image](https://user-images.githubusercontent.com/23094588/166221522-4ecdb71c-2166-428a-924a-49da41edddec.png)
 
-El gestor de transacciones vendrá definido por un `JpaTransactionManager`. A este transaction manager le vamos a setear el `entityManagerFactory` que venimos manejando y lo retornamos, ya veremos qué fácil es manejar las transacciones.
+![image](https://user-images.githubusercontent.com/23094588/166221579-e08c928b-4c69-41fe-a5bd-c9de0d591430.png)
+
+
+Nos **faltaría definir el gestor de transacciones y el bean `PostProcessor`** del que hablamos antes.
+
+El gestor de transacciones vendrá definido por un **`JpaTransactionManager`**. A este **`transactionManager`** le vamos a setear el **`entityManagerFactory`** que venimos manejando y lo retornamos, ya veremos qué fácil es manejar las transacciones.
 
 
 ```java
@@ -2500,7 +2519,11 @@ public JpaTransactionManager transactionManager() {
 }
 ```
 
-Y por último el bean `PostProcessor` que nos permitira relanzar una serie de excepciones a nivel de base de datos a través de las distintas capas para que nosotros las podamos utilizar. 
+![image](https://user-images.githubusercontent.com/23094588/166221796-aca63d76-e20c-480b-a272-187aa5f08924.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166221829-e1830056-b0e0-4312-a452-c232f1490b0e.png)
+
+Y por último el bean **`PostProcessor`** que nos permitira relanzar una serie de excepciones a nivel de base de datos a través de las distintas capas para que nosotros las podamos utilizar. 
 
 ```java
 /**
@@ -2518,7 +2541,7 @@ public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 La clase completa a quedado así.
 
 ```java
-package com.openwebinars.hibernate.primerejemplospringjpahibernate;
+package com.javaocio.hibernate.spring;
 
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -2537,79 +2560,79 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class DatabaseConfig {
 
-	/**
-	 * Definición del DataSource para la conexión a nuestra base de datos. 
-	 * Las propiedades son establecidas desde el fichero de properties, y 
-	 * asignadas usando el objeto env.
-	 * 
-	 */
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(env.getProperty("db.driver"));
-		dataSource.setUrl(env.getProperty("db.url"));
-		dataSource.setUsername(env.getProperty("db.username"));
-		dataSource.setPassword(env.getProperty("db.password"));
-		return dataSource;
-	}
+   /**
+    * Definición del DataSource para la conexión a nuestra base de datos. 
+    * Las propiedades son establecidas desde el fichero de properties, y 
+    * asignadas usando el objeto env.
+    * 
+    */
+   @Bean
+   public DataSource dataSource() {
+      DriverManagerDataSource dataSource = new DriverManagerDataSource();
+      dataSource.setDriverClassName(env.getProperty("db.driver"));
+      dataSource.setUrl(env.getProperty("db.url"));
+      dataSource.setUsername(env.getProperty("db.username"));
+      dataSource.setPassword(env.getProperty("db.password"));
+      return dataSource;
+   }
 
-	/**
-	 *
-	 * Declaración del EntityManagerFactory de JPA
-	 */
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+   /**
+     *
+     * Declaración del EntityManagerFactory de JPA
+     */
+   @Bean
+   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+      LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 		
-		//Le asignamos el dataSource que acabamos de definir.
-		entityManagerFactory.setDataSource(dataSource);
+      //Le asignamos el dataSource que acabamos de definir.
+      entityManagerFactory.setDataSource(dataSource);
 
-		// Le indicamos la ruta donde tiene que buscar las clases anotadas
-		entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+      // Le indicamos la ruta donde tiene que buscar las clases anotadas
+      entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
 
-		// Implementación de JPA a usar: Hibernate
-		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+      // Implementación de JPA a usar: Hibernate
+      HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+      entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
 
-		// Propiedades de Hiberante
-		Properties additionalProperties = new Properties();
-		additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-		additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-		additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-		entityManagerFactory.setJpaProperties(additionalProperties);
+      // Propiedades de Hiberante
+      Properties additionalProperties = new Properties();
+      additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+      additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+      additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+      entityManagerFactory.setJpaProperties(additionalProperties);
 
-		return entityManagerFactory;
-	}
+      return entityManagerFactory;
+   }
 
-	/**
-	 * Inicializa y declara el gestor de transacciones
-	 */
-	@Bean
-	public JpaTransactionManager transactionManager() {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
-		return transactionManager;
-	}
+   /**
+    * Inicializa y declara el gestor de transacciones
+    */
+   @Bean
+   public JpaTransactionManager transactionManager() {
+      JpaTransactionManager transactionManager = new JpaTransactionManager();
+      transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+      return transactionManager;
+   }
 
-	/**
-	 *  
-	 * Este bean es un postprocessor que ayuda a relanzar las excepciones específicas
-	 * de cada plataforma en aquellas clases anotadas con @Repository
-	 * 
-	 */
-	@Bean
-	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-		return new PersistenceExceptionTranslationPostProcessor();
-	}
+   /**
+    *  
+    * Este bean es un postprocessor que ayuda a relanzar las excepciones específicas
+    * de cada plataforma en aquellas clases anotadas con @Repository
+    * 
+    */
+    @Bean
+   public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+      return new PersistenceExceptionTranslationPostProcessor();
+   }
 
-	@Autowired
-	private Environment env;
+   @Autowired
+   private Environment env;
 
-	@Autowired
-	private DataSource dataSource;
+   @Autowired
+   private DataSource dataSource;
 
-	@Autowired
-	private LocalContainerEntityManagerFactoryBean entityManagerFactory;
+   @Autowired
+   private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
 }
 ```
