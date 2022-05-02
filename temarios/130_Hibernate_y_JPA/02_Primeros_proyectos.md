@@ -2263,11 +2263,11 @@ Spring Tool Suite descarga el proyecto, se trata de un proyecto especial porque 
 
 ![image](https://user-images.githubusercontent.com/23094588/166216940-cc2c775d-7d96-42f5-bfce-7ccb84b7ec78.png)
 
-la aplicación que carga por defecto es distinta es una aplicación Spring Boot. 
+la aplicación que carga por defecto es distinta es una **aplicación Spring Boot**. 
 
 ![image](https://user-images.githubusercontent.com/23094588/166217468-f9fde98f-e5c5-4d68-b12b-08eb2e128681.png)
 
-Trae las dependencias Maven nos hemos ahorrado de tener que escribirlas.
+Trae las dependencias Maven, nos hemos ahorrado de tener que escribirlas.
 
 ![image](https://user-images.githubusercontent.com/23094588/166217771-4efbbf1b-e4c6-4a2a-acd9-6affd726e57f.png)
 
@@ -2345,7 +2345,7 @@ La **URL de conexión** que también la vamos a cargar desde la propiedad **`db.
 
 ```java
 dataSource.setUrl(env.getProperty("db.url"));
-```java
+```
 
 Y el **nombre de usuario y contraseña** 
 
@@ -2636,6 +2636,11 @@ public class DatabaseConfig {
 
 }
 ```
+
+![image](https://user-images.githubusercontent.com/23094588/166267877-229fdc8f-4930-4cb5-b675-9d98a07b2a40.png)
+
+![image](https://user-images.githubusercontent.com/23094588/166267942-edc3398d-802b-4d21-a4be-5274b44d396a.png)
+
 
 En la próxima lección vamos a ver el código de la clase DAO de las distintas entidades que vamos a manejar en particular una y del controlador para finalizar este proyecto de primer ejemplo con Spring JPA Hibernet.
 
