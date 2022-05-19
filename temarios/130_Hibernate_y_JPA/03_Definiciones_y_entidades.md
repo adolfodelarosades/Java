@@ -262,46 +262,11 @@ Si bien profundizaremos sobre este apartado en lecciones posteriores, no está d
 
 <img src="images/3-diagrama.jpg">
 
-## Preguntas
-
-P= Me salta este error al correr el la clase App
-
-```sh
-Exception in thread "main" javax.persistence.PersistenceException: [PersistenceUnit: HibernateJPAGeneracionId] Unable to build Hibernate SessionFactory
-at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1225)
-at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:119)
-```
-
-R= No he entendido bien en tu mensaje si has modificado el código o no. Si te puedo decir que no todos los dialectos (es decir, no todos los sistemas gestores de bases de datos) tienen porqué soportar todos los tipos de estrategias de generación de claves primarias. A no ser que queramos escoger una forma concreta por alguna cuestión de eficiencia o circunstancia del proyecto, se suele indicar la estrategia Auto; al hacerlo, Hibernate escoge, en función del dialecto, la mejor estrategia para ese sistema gestor.
-
-P= Al momento de modelar el dominio de la aplicación, he visto en varios tutoriales y sistemas que el atributo "Id" lo representan de varias formas: int, long, Integer, Long. Igualmente para valores como: edad, precio, importeTotal, o atributos contables algunos hacen uso del tipo de valor primitivo y otros invocan a un objeto (double o Double). Una vez tuve la oportunidad de preguntarle por qué lo definia de tal manera y me respondia que por ejemplo para un "Id" de tipo Integer lo pueden asignar como "null" en caso inicialice un objeto y eso no se puede hacer con el "int" Mi pregunta es:
-
-¿Cuál es la forma correcta de utilizar para el modelo del dominio definirlos con un tipo primitivo o con su equivalente en clases (Integer, Long, Double)?
-¿Definirlo de una u otra forma afecta el rendimiento o alguna buena práctica en el desarrollo del código?
-
-R= Tu pregunta es buena, y por desgracia no tiene una única respuesta, ya que en el fondo depende del problema a resolver. Podemos tener en cuenta algunas consideraciones:
-
-* El uso de los tipos primitivos es francamente cómodo, y posiblemente (esto tendría que estudiarlo con mayor detenimiento), a nivel de Java tenga mejor rendimiento.
-* El uso de un tipo primitivo y su correspondiente wrapper produce un DDL casi idéntico (en caso de que deleguemos en JPA/Hibernate la generación del esquema de base de datos). Así, que en ese sentido, el rendimiento es el mismo. Si es verdad que tendríamos severas diferencias si la columna que estamos mapeando soporta valores nulos o no.
-* El uso de tipos primitivos estaría indicado: cuando no queremos dar la posibilidad de valor nulo o cuando vamos a realizar una gran cantidad de operaciones matemáticas con esos valores (como te digo, en principio tienen mejor rendimiento, aunque tendría que estudiar con detenimiento el factor de comparación entre ambos).
-* El uso de los tipos envoltorio (wrappers) estaría indicado: si queremos permitir el uso de nulo, si vamos a utilizar colleciones, como tipo de retorno de métodos que, de vez en cuando, pueden devolver nulo, etc...
-
-Por tanto, la única conclusión que a mi modo de ver podríamos sacar, es que la si la columna no va a soportar nulos, no hay inconveniente en usar tipos primitivos; y si va a soportar nulos, sería bueno usar las clases envoltorio.
-
-P= Tengo algunas consultas para hibernate y el uso de algunos comando:
-1. la opcion que ponemos Hbm2ddl.auto: Create. En produccion que valor debe tener o si se debe de usar?.
-2. los campos Id s pueden generar con numeros y letras por ejemplo para el cliente seria: C00001
-
-R= Te respondo:
-
-1. En producción no usaría la opción Hbm2ddl.auto; vamos, la pondría a none. Aunque parezca mentira, lo ideal sería llevar esa gestión por nuestra cuenta, o bien a través de algún sistema como Flyway o Liquibase, que nos permiten que nuestra base de datos vaya "evolucionando", y replicar estos cambios en diferentes entornos (desarrollo, pruebas, preproducción, producción, ...). En todo caso, si se quiere usar, la opción sería update, que mantiene los datos que haya en la base de datos ya añade los cambios necesarios al DDL.
-2. Sí que se podría, pero tendrías que implementar tú el generador para hacerlo a nivel de base de datos, posiblemente a través de un procedimiento almacenado. La manera más fácil, creo yo, sería utilizar java.util.UUID como tipo de dato, y utilizar la generación automática de valores.
-
 ## Transcripción
 
 <img src="images/8-01.png">
 
-En este capítulo el número cuatro vamos a hablar sobre Modelo de Dominio, sobre las Entidades, sobre su Ciclo de Vida y dejaremos para la siguiente lección de este capítulo como definir las entidades, el mapeo a través XML. Por que en este capítulo lo haremos a través de anotaciones. 
+En este capítulo el número cuatro vamos a hablar sobre **Modelo de Dominio**, sobre las **Entidades**, sobre su **Ciclo de Vida** y dejaremos para la siguiente lección de este capítulo como definir las entidades, el mapeo a través XML. Por que en este capítulo lo haremos a través de anotaciones. 
 
 <img src="images/8-02.png">
 
@@ -309,11 +274,11 @@ Primero vamos a hablar de modelo de dominio a qué podemos llamar o que se conoc
 
 <img src="images/8-03.png">
 
-Bien pues el modelo de dominio en un sistema software representa el problema que estamos tratando de resolver, representa al sistema en si, aquí tenemos un ejemplo sacado de la wikipedia de modelo de dominio donde tendríamos un sistema de una empresa de seguros y dónde tendríamos la representación de todas las clases y las asociaciones, por facilidad, por limpiar un poco el diseño, no han incluido los atributos que intervienen en el mundo de los seguros, bien a esa representación normalmente en un diagrama de clase UML de las clases y de las asociaciones existentes entre ellas incluyendo los atributos se le conoce como el *Modelo de Dominio* son dos los objetos con los que nosotros trabajaremos dentro de nuestro sistema.
+Bien pues el **Modelo de Dominio** en un sistema software representa el problema que estamos tratando de resolver, representa al sistema en si, aquí tenemos un ejemplo sacado de la wikipedia de **Modelo de Dominio** donde tendríamos un sistema de una ***empresa de seguros*** y dónde tendríamos la representación de todas las clases y las asociaciones, por facilidad, por limpiar un poco el diseño, no han incluido los atributos que intervienen en el mundo de los seguros, bien a esa representación normalmente en un diagrama de clase UML de las clases y de las asociaciones existentes entre ellas incluyendo los atributos se le conoce como el **Modelo de Dominio** son dos los objetos con los que nosotros trabajaremos dentro de nuestro sistema.
 
 <img src="images/8-04.png">
 
-Normalmente dentro del desarrollo de software existen cuatro grandes fases en el desarrollo, las metodología Agiles vinieron a cambiar un poco este esquema más clasico pero para entender el Modelo de Dominio nos viene bien. 
+Normalmente dentro del desarrollo de software existen cuatro grandes fases en el desarrollo, las **Metodología Agiles** vinieron a cambiar un poco este esquema más clásico pero para entender el **Modelo de Dominio** nos viene bien. 
 
 Estas grande fases son:
 
@@ -322,44 +287,45 @@ Estas grande fases son:
 * Implementación
 * Mantenimiento
 
-En la fase de análisis normalmente intentamos buscar que problema es el que vamos a resolver haciendo la aplicación que estamos desarrollando.
+En la fase de **Análisis** normalmente intentamos buscar que problema es el que vamos a resolver haciendo la aplicación que estamos desarrollando.
 
-En la fase de diseño una vez que hemos entendido bien qué problema estamos resolviendo y la vez que lo hemos definido y acotado tratamos de buscar la mejor solución, la diseñamos y buscamos la mejor solución para este problema.
+En la fase de **Diseño** una vez que hemos entendido bien qué problema estamos resolviendo y a la vez que lo hemos definido y acotado tratamos de buscar la mejor solución, la diseñamos y buscamos la mejor solución para este problema.
 
-En la implementación lo que hacemos es la resolución directa de ese problema a través de un sistema informatico.
+En la **Implementación** lo que hacemos es la resolución directa de ese problema a través de un sistema informatico.
 
-Y en la de mantenimiento lo que nos dedicamos es a corregir posibles errores que surgen, a evolucionar el Software esto sucede muy a menudo a software que acompañan 
-elementos legislativos por ejemplo en gestión de empresas, en educación, sí nuestro software implementa algún determinado proceso marcado en la ley y la ley cambia al respecto tendremos que modificar nuestro sistema, no porque no funcione bien sino porque el cambio legal nos lo exige.
+Y en la de **Mantenimiento** lo que nos dedicamos es a corregir posibles errores que surgen, a evolucionar el Software esto sucede muy a menudo en software que acompañan elementos legislativos por ejemplo, en gestión de empresas, en educación, sí nuestro software implementa algún determinado proceso marcado en la ley y la ley cambia al respecto tendremos que modificar nuestro sistema, no porque no funcione bien sino porque el cambio legal nos lo exige.
 
-En la fase de análisis que es donde definimos qué problemas vamos a resolver es donde mediante, ya digo normalmente un diagrama de clases UML, tendremos que marcar nuestro modelo de dominio.
+En la fase de **Análisis** que es donde definimos qué problemas vamos a resolver es donde mediante, ya digo normalmente un diagrama de clases UML, tendremos que marcar nuestro modelo de dominio.
 
 <img src="images/8-05.png">
 
-Dentro de el vamos a hablar de dos elementos distintos, a la hora de construir nuestra identidad es con JPA y Hibernate tenemos que diferenciar entre lo que es un valor y una entidad, podríamos decir que una entidad será una cantidad de información que va a tener un ciclo de vida dentro de nuestro modelo de dominio, frente a un valor que normalmente pues sera un dato que por sí mismo no tenga ese ese ciclo de vida.
+Dentro de el vamos a hablar de dos elementos distintos, a la hora de construir nuestras **Entidades** con JPA y Hibernate tenemos que diferenciar entre lo que es un ***valor*** y una ***entidad***, podríamos decir que una ***entidad*** será una cantidad de información que va a tener un ciclo de vida dentro de nuestro modelo de dominio, frente a un ***valor*** que normalmente sera un dato que por sí mismo no tenga ese ciclo de vida.
 
 <img src="images/8-06.png">
 
-Normalmente lo solemos asociar a que las entidades pues se aparejarán de alguna manera, no tiene porqué ser esta asociación uno a uno, se aparejarán a las clases que incluyamos dentro de nuestro modelo de dominio, aunque ya digo luego veremos cómo podemos tratar algunas clases de una manera especial y Hibernate JPA mapearan esa entidad con normalmente una tabla, dentro de nuestra base de datos relacional y un valor normalmente será una propiedad de una clase aquella que hayamos marcado como entidad y que normalmente se transforma como una columna de esa tabla, para un objeto en particular, una instancia de la entidad sería una fila de la tabla y una propiedad de esa instancia sería el cruce de la fila y la columna correspondiente.
+Normalmente lo solemos asociar a que ***las entidades se aparejarán*** de alguna manera, no tiene porqué ser esta asociación uno a uno, se aparejarán ***a las clases*** que incluyamos dentro de nuestro **Modelo de Dominio**, aunque ya digo luego veremos cómo podemos tratar algunas clases de una manera especial. Hibernate y JPA ***mapearan esa entidad, con normalmente una tabla*** dentro de nuestra base de datos relaciona. ***Un valor normalmente será una propiedad de una clase***, aquella que hayamos ***marcado como entidad y que normalmente se transforma como una columna de esa tabla***, para un objeto en particular, ***una instancia de la entidad sería una fila de la tabla y una propiedad de esa instancia sería el cruce de la fila y la columna correspondiente***.
 
 <img src="images/8-07.png">
 
-Dentro de los valores encontramos valores de tipo básico, que serán los que trabajemos sobre todo en este tema, junto con los de tipo *embebido embeddable*  y dejaremos para más adelante los de tipo colección y como decimos con las entidades que vamos a trabajar ahora también ahora qué tienen un ciclo de vida en sí mismo a diferencia de los valores.
+Dentro de los **valores** encontramos ***valores de tipo básico***, que serán los que trabajemos sobre todo en este tema, junto con los de tipo ***embebido embeddable*** y dejaremos para más adelante los de ***tipo colección*** y como decimos con las entidades que vamos a trabajar ahora también qué tienen un ciclo de vida en sí mismo a diferencia de los valores.
 
 <img src="images/8-08.png">
 
-Como podemos nosotros mismos mapear una entidad para transformar una clase Java en una entidad de JPA y que por debajo Hibernate se haga cargo de confrontar esa entidad con la base de datos.
+Como podemos nosotros ***mapear una entidad para transformar una clase Java en una entidad de JPA*** y que por debajo Hibernate se haga cargo de confrontar esa entidad con la base de datos.
 
 <img src="images/8-09.png">
 
-Para empezar lo primero que es necesario antes de entrar en materia es diferencia entre *Identidad*, *Igualdad* e *Identidad a nivel de Base de Datos* porque va a ser necesario para que lo manejemos, una entidad va a tener que ser identificada por fuerza, esto viene por el modelo que estamos utilizando el modelo relacional en el que todas las tablas deberían tener una clave primaria, esa clave primaria no es más que un atributo, o conjunto de atributo que nos permiten diferenciar una fila de la otra y que de alguna manera lo identifica. 
+Para empezar, lo primero que es necesario antes de entrar en materia es diferencia entre **Identidad**, **Igualdad** e **Identidad a nivel de Base de Datos** porque va a ser necesario para que lo manejemos, una **Entidad** va a tener que ser identificada por fuerza, esto viene por el modelo que estamos utilizando, el **Modelo Relacional** en el que ***todas las tablas deberían tener una Clave Primaria***, esa *clave primaria no es más que un atributo, o conjunto de atributo que nos permiten diferenciar una fila de la otra y que de alguna manera lo identifica*. 
 
-En JPA todas las entidades van a tener un identificador y no es lo mismo identidad que igualdad incluso la identidad a nivel Java y a nivel de base de datos. La identidad en Java nos permite decir que dos objetos son el mismo cuando al compararlos con un "==" esa comparación nos devuelve `true` es decir son la misma representación en memoria de un objeto sin embargo, dos objetos que sean iguales no tienen porqué ser idénticos, la igualdad en Java esta asociada a la comparación con `equals()` también se suele llamar equivalencia y quiere decir que una a una todas sus propiedades son equivalentes es decir que tienen el mismo valor, sin embargo pueden ser objetos distintos en memoria.
+En **JPA** todas las entidades van a tener un identificador.
 
-A nivel de base de datos dos objetos es decir serán dos filas, serán idénticas utilizando su PRIMARY KEY su clave primaria porque será idéntico cuando estén en la misma tabla y tengan el mismo valor de clave primaria.
+No es lo mismo **Identidad** que **Igualdad** incluso la **Identidad a nivel Java** e **Identidad a nivel de Base de Datos**. ***La identidad en Java nos permite decir que dos objetos son el mismo cuando al compararlos con un "==" esa comparación nos devuelve `true`***, es decir son la misma representación en memoria de un objeto sin embargo, **dos objetos que sean iguales no tienen porqué ser idénticos**, ***la igualdad en Java esta asociada a la comparación con `equals()` también se suele llamar equivalencia y quiere decir que una a una todas sus propiedades son equivalentes es decir que tienen el mismo valor, sin embargo pueden ser objetos distintos en memoria***.
+
+*A nivel de Base de Datos dos objetos, es decir serán dos filas, serán idénticas utilizando su **PRIMARY KEY** su clave primaria, porque será idéntica cuando estén en la misma tabla y tengan el mismo valor de clave primaria*.
 
 <img src="images/8-10.png">
 
-Para definir una entidad como mínimo ya sabiendo que además la tenemos que identificar, si vamos a usar anotaciones, tenemos que usar como mínimo dos anotaciones la primera es `@Entity` sobre el nombre de la clase nos permitirá decir que esa clase será gestionada dentro del contexto de persistencia de nuestra aplicación, al menos uno de ellos, ya veremos que se pueden definir más de uno, pero por lo menos en el que tengamos definido. Al anotar la clase con `@Entity` nos obliga por fuerza a que tengamos una propiedad anotada con `@Id`, podemos hacer las anotaciones a nivel de propiedad o a nivel de método getter nunca de setter, allá donde anotemos con la anotación `@Id` marcará la tónica que vamos a seguir, si anotamos sobre una propiedad  Hibernate se encargará de trabajar con las propiedades y si marcamos `@Id` sobre un método getter trabajara con los métodos getter en lugar de las propiedades.
+Para definir una **Entidad** como mínimo, ya sabiendo que la tenemos que identificar, si vamos a usar anotaciones, tenemos que ***usar como mínimo dos anotaciones*** la primera es **`@Entity`** ***sobre el nombre de la Clase*** nos permitirá decir que esa clase será gestionada dentro del **Contexto de Persistencia** de nuestra aplicación, al menos uno de ellos, ya veremos que se pueden definir más de uno, pero por lo menos en el que tengamos definido. Al anotar la clase con **`@Entity`** ***nos obliga por fuerza a que tengamos una propiedad anotada con*** **`@Id`**, ***podemos hacer las anotaciones a nivel de propiedad o a nivel de método getter nunca de setter***, allá donde anotemos con la anotación **`@Id`** marcará la tónica que vamos a seguir, ***si anotamos sobre una propiedad, Hibernate se encargará de trabajar con las propiedades y si marcamos `@Id` sobre un método getter trabajara con los métodos getter en lugar de las propiedades***.
 
 Antes de continuar vamos a ver un ejemplo de Mapeo.
 
