@@ -329,7 +329,7 @@ Para definir una **Entidad** como mínimo, ya sabiendo que la tenemos que identi
 
 Antes de continuar vamos a ver un ejemplo de Mapeo.
 
-Aquí tenemos una Entidad User.
+Aquí tenemos la **Entidad `User`**.
 
 ```java
 package com.openwebinars.hibernate.mapeocolumnas;
@@ -349,66 +349,59 @@ import javax.persistence.TemporalType;
 @Table(name="ANOTHER_USER")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+   @Id
+   @GeneratedValue(strategy=GenerationType.AUTO)
+   private long id;
 
-	@Column(name="USERNAME")
-	private String name;
-	
-	
-	@Temporal(TemporalType.DATE)
-	private Date birthDate;
+   @Column(name="USERNAME")
+   private String name;
+		
+   @Temporal(TemporalType.DATE)
+   private Date birthDate;
 
-	
-	public long getId() {
-		return id;
-	}
+   public long getId() {
+      return id;
+   }
 
+   public String getName() {
+      return name;
+   }
 
-	public String getName() {
-		return name;
-	}
+   public void setName(String name) {
+      this.name = name;
+   }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+   public Date getBirthDate() {
+      return birthDate;
+   }
 
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
+   public void setBirthDate(Date birthDate) {
+      this.birthDate = birthDate;
+   }
 
 }
 ```
 
-Está mapeada y que tiene `@Entity` y `@Id` tiene también algunas anotaciones que vamos a ver en esta misma lección más adelante.
+Clase mapeada que tiene las anotaciones **`@Entity`** y **`@Id`** y tiene también algunas otras anotaciones que vamos a ver en esta misma lección más adelante.
 
 <img src="images/8-11.png">
 
-Sobre la elección del Identificador aquí existe siempre un debate, porque los diseñadores más clásicos de base de datos conocen metodología específica a través de las dependencias funcionales existentes dentro de una relación de una tabla y son capaces de aplicar métodos formales del calculo de clave candidata y de clave primaria sin embargo entre los desarrolladores es habitual el usar un campo artificial es decir uno que no está asociado al modelo que suele tener casi siempre el mismo nombre, se suele llamar *id* que suele ser de tipo entero un `long` y mediante un número que va a ser muy facil diferenciarlo de otro número es muy fácil identificar.
+Sobre la elección del **Identificador** existe siempre un debate, porque los diseñadores más clásicos de Base de Datos conocen metodología específica a través de las dependencias funcionales existentes dentro de una relación, de una tabla y son capaces de aplicar métodos formales del cálculo de **clave candidata** y de **clave primaria**, sin embargo entre los desarrolladores es habitual el usar un ***campo artificial*** es decir, uno que no está asociado al modelo que suele tener casi siempre el mismo nombre, se suele llamar **id** que suele ser de tipo entero, un **`long`** y mediante un número que va a ser muy facil diferenciarlo de otro número, es muy fácil identificar.
 
-JPA a través de la anotación `@GeneratedValue` nos permite generar automáticamente, descargando al programador, como hemos hecho nosotros en los proyectos anteriores que lo hemos asignado estaticamente o lo hemos inventado algún método aleatorio bueno pues JPA se puede encargar de generarlo utilizando alguna estrategia. En particular tenemos cuatro:
+**JPA** a través de la anotación **`@GeneratedValue`** nos ***permite generar automáticamente***, descargando al programador, como hemos hecho nosotros en los proyectos anteriores que lo hemos asignado estaticamente o lo hemos inventado algún método aleatorio, JPA se puede encargar de generarlo utilizando alguna estrategia. En particular tenemos cuatro:
 
 * AUTO 
 * SEQUENCE
 * IDENTITY
 * TABLE
 
-La estrategia SEQUENCE nos permite utilizar una secuencia que un objeto a nivel de base de datos que va devolviendo valores desde un valor inicial y con un incremento que nosotros marquemos.
+La estrategia **SEQUENCE** nos permite utilizar una secuencia, un objeto a nivel de base de datos que va devolviendo valores desde un valor inicial y con un incremento que nosotros marquemos.
 
+**IDENTITY** lo que hace es utilizar, para que ellas base de datos que permiten, un campo de tipo autonumerico.
 
-IDENTITY que lo que hace es utilizar para que ellas base de datos que permiten un campo de tipo autonumerico.
+Y la estrategia **TABLE** que se utiliza una tabla extra especial que normalmente tiene una sola columna y una fila por cada tabla o mejor dicho entidad que tengamos definida con generación de valor por tabla y que almacena en ese único valor el siguiente **`Id`** qué va a necesitar.
 
-Y la estrategia TABLE que se utiliza una tabla extra especial que normalmente tiene una sola columna y una fila por cada tabla o mejor dicho entidad que tengamos definida con generación de valor por tabla y que almacena en ese único valor el siguiente Id qué va a necesitar.
-
-La estrategia AUTO en función del dialecto que tengamos seleccionado escoge cuál es la mejor de ella para cada uno de los sistemas gestores de base de datos que Hibernate tiene posibilidad de manejar. 
+La estrategia **AUTO** en función del dialecto que tengamos seleccionado escoge cuál es la mejor de ellas para cada uno de los sistemas gestores de base de datos que Hibernate tiene posibilidad de manejar. 
 
 Todo a través de `@GeneratedValue`.
 
@@ -421,13 +414,13 @@ private long id;
 
 ```
 
-tenemos que el valor de `id` que es de tipo `long` será generado con la mejor estrategia según la marque el dialecto, en particular para MySQL5InnoDB suele utilizar la estrategia de TABLE.
+tenemos que el valor de **`id`** que es de tipo **`long`** será generado con la mejor estrategia según la marque el dialecto, en particular para **MySQL5InnoDB** suele utilizar la estrategia de **TABLE**.
 
 <img src="images/8-12.png">
 
-Sobre cómo controlar los nombres podemos cambiar el nombre que por defecto utiliza Hibernate para generar la tabla, si tenemos la propiedad h2ddl-auto en create o update  o alguno de los valores asociados Hibernate se encarga de crear la tabla si se llama `MyEntity` utilizara el mismo nombre sin embargo, con la anotación `@Table` y la propiedad `name` podemos cambiar nosotros el nombre de la tabla que se generará o la cual va a buscar en la base de datos a la hora de mapear esta entidad. 
+Sobre cómo ***Controlar los Nombres*** podemos cambiar el nombre que por defecto utiliza Hibernate para generar la tabla, si tenemos la propiedad **`h2ddl-auto`** en **`create`** o **`update`** o alguno de los valores asociados Hibernate se encarga de crear la tabla si se llama **`MyEntity`** utilizara el mismo nombre sin embargo, con la anotación **`@Table`** y la propiedad **`name`** podemos cambiar nosotros el nombre de la tabla que se generará o la cual va a buscar en la base de datos a la hora de mapear esta entidad. 
 
-Esa también la tenemos dentro del ejemplo, aunque la clase se llama `User` vamos a crear una nueva tabla que se llama `ANOTHER_USER`.
+Esa también la tenemos dentro del ejemplo, aunque la clase se llama **`User`** vamos a crear una nueva tabla que se llama **`ANOTHER_USER`**.
 
 ```java
 @Entity
@@ -440,18 +433,19 @@ public class User {
 
 <img src="images/8-14.png">
 
-A la hora de mapear valores hemos visto que no tenemos por qué anotar de ninguna manera los valores, solamente el `id` ya que Hibernate se va a encargar de buscar las distintas propiedades que tengan estos tipos que tenemos en pantalla para anotarlo.
-En principio buscara tipos básicos Java `int`, `long`, `double`, `float`, los envoltorios de esos tipos básicos con mayúsculas como se suelen conocer y alguna de las clases que tenemos en la diapositiva String, BigInteger, BigDecimal, etcétera.  También aquellas clases que implementen serializable si viene el comportamiento no será el que nosotros esperemos porque lo que almacenará seran las representaciones bytes y los tipos embebidos que hablaremos de ellos más tarde.
+A la hora de mapear valores, hemos visto que no tenemos por qué anotar de ninguna manera los valores, solamente el **`id`**, ya que Hibernate se va a encargar de buscar las distintas propiedades que tengan estos tipos que tenemos en pantalla para anotarlo.
 
-Si Hibernate encuentra algún tipo de dato que no es alguno de estos y no tiene la anotación adecuada generará un error a la hora de cargar ese contexto de persistencia con lo cual si queremos mapear algo como un valor lo tenemos que hacer a través de alguno de estos tipos que tenemos en la diapositiva.
+En principio buscara tipos básicos Java **`int`**, **`long`**, **`double`**, **`float`**, los envoltorios de esos tipos básicos con mayúsculas como se suelen conocer y alguna de las clases que tenemos en la diapositiva **`String`**, **`BigInteger`**, **`BigDecimal`**, etcétera.  También aquellas clases que implementen serializable si viene el comportamiento no será el que nosotros esperemos porque lo que almacenará seran las representaciones bytes y los tipos embebidos que hablaremos de ellos más tarde.
+
+Si Hibernate encuentra algún tipo de dato que no es alguno de estos y no tiene la anotación adecuada generará un error a la hora de cargar ese contexto de persistencia, con lo cual si queremos mapear algo como un valor lo tenemos que hacer a través de alguno de estos tipos que tenemos en la diapositiva.
 
 <img src="images/8-15.png">
 
-La anotacion `@Column` que ya hemos dicho que no es obligatoria pero si nos permite definir algunas propiedades en particular la más usual es la propiedad `name` nos permite cambiar el nombre que tendrá esa propiedad como columna en la base de datos. Pero también nos permite indicar el tamaño que será el que tenga el campo en la base de datos te viene bien para cadena de caracteres, para número, etcétera. La propiedad `nullable` que si es `true` permite almacenar nulos dentro de ese valor o la propiedad insertable y updatable que define si puede ser insertada o no o actualizada o no. Esto en determinados contextos ya veremos que resulta bastante util.
+La anotacion **`@Column`** que ya hemos dicho que no es obligatoria, pero si nos permite definir algunas propiedades en particular, la más usual es la propiedad **`name`** ***nos permite cambiar el nombre que tendrá esa propiedad como columna en la base de datos***. Pero también nos permite indicar el tamaño que será el que tenga el campo en la base de datos, viene bien para cadena de caracteres, para números, etcétera. La propiedad **`nullable`** que si es **`true`** permite almacenar nulos dentro de ese valor o las propiedades **`insertable`** y **`updatable`** que define si puede ser insertada o no, o actualizada o no. Esto en determinados contextos ya veremos que resulta bastante útil.
 
 <img src="images/8-16.png">
 
-Y con respecto a los tipos de datos temporales, decir que para las fechas Hibernate nos da un poco de soporte, ya que el tratamiento no es exactamente el mismo que con un atributo normal con la anotación `@Temporal` podemos indicar que un determinado atributo será un tipo de dato temporal, nos permite gestionar los clásicos `Date` tanto de `util` como de `sql`, `Timestamp`, `Time`, `Calendar` y también los tipos nuevos que hay dentro de la `java.time` de Java 8. Esta anotación nos permite almacenar en la base de datos los datos de tres maneras distintas como DATE, TIME y TIMESTAMP, que es lo que tenemos en el ejemplo.
+Y con respecto a los tipos de **Datos Temporales**, decir que para las **Fechas** Hibernate nos da un poco de soporte, ya que el tratamiento no es exactamente el mismo que con un atributo normal, con la anotación **`@Temporal`** ***podemos indicar que un determinado atributo será un tipo de dato temporal***, nos permite gestionar los clásicos **`Date`** tanto de **`util`** como de **`sql`**, **`Timestamp`**, **`Time`**, **`Calendar`** ***y también los tipos nuevos que hay dentro de la*** **`java.time`** ***de Java 8***. ***Esta anotación nos permite almacenar en la base de datos los datos de tres maneras distintas como*** **`DATE`**, **`TIME`** y **`TIMESTAMP`**, que es lo que tenemos en el ejemplo.
 
 ### :computer: Código Completo - 130-04-PrimerProyectoHibernateJPAMapeoColumnas
 
