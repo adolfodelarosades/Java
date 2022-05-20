@@ -529,7 +529,7 @@ Una perspectiva no es más que un conjunto de ventanas, de vistas Eclipse nos of
 
 ![image](https://user-images.githubusercontent.com/23094588/169501257-c0cde2ee-03fb-4584-a9f0-afeb565dcc53.png)
 
-Una vez hecho esto vamos a seguir con el siguiente paso, que es crear nuestra clase modelo **`User`**, anotandala en el ejemplo anterior, lo que vamos a hacer es copiar la clase User porque su contenido va a ser exactamente el mismo.
+Una vez hecho esto vamos a seguir con el siguiente paso, que es crear nuestra clase modelo **`User`** la cual a cambiado un poco con respecto a la del proyecto anterior, tiene un campo **`name`** pero en la base de datos se llamará **`USERNAME`**, le hemos añadido un dato temporal **`birthDate`** que es del tipo **`java.util.date`** pero que hemos anotado como **`@Temporal(TemporalType.DATE)`** y que se almacenará en la base de datos como **`DATE`**.
 
 ![image](https://user-images.githubusercontent.com/23094588/169503293-d6da4e22-4d89-4851-9309-0a8b4afa2cf1.png)
 
@@ -539,11 +539,11 @@ Una vez hecho esto vamos a seguir con el siguiente paso, que es crear nuestra cl
 
 En la clase **`User`** añadimos los atributos y anotaciones correspondientes.
 
-![image](https://user-images.githubusercontent.com/23094588/169505169-c83ccef2-efc9-4c3b-a226-bbcfa26ec97a.png)
+![image](https://user-images.githubusercontent.com/23094588/169532057-748ed654-6025-4f7b-b648-d679678972c9.png)
 
 Sin embargo la clase nos da un error **`Class "com.javaocio.hibernate.mapeocolumnas.User" is managed, but is not listed in the persistence.xml file`**, nos indica que la clase **`User`** es una entidad, es decir que va a ser manejada por JPA, pero no está listada en el fichero de persistencia y es que no lo hemos configurado aún.
 
-![image](https://user-images.githubusercontent.com/23094588/169520050-f6194b97-4770-46c4-a824-9dd95e687102.png)
+![image](https://user-images.githubusercontent.com/23094588/169532141-a9a693fe-b188-4014-944c-795c5ab36acb.png)
 
 Al convertir nuestro proyecto a un proyecto JPA se nos a creado el JPA Context con el fichero **`persistence.xml`**.
 
@@ -614,42 +614,86 @@ Con todo lo que hemos hecho, nuestro archivo **`persistence.xml`** queda así:
 
 Cómo podemos comprobar el error sobre nuestra clase **`User`** ya ha desaparecido.
 
-![image](https://user-images.githubusercontent.com/23094588/169525552-9a283697-1ef9-46d4-a35a-8f2c0480eb9b.png)
+![image](https://user-images.githubusercontent.com/23094588/169532364-46237e01-5315-4fa1-b2a3-9306e36eb443.png)
 
 Debemos recordar el nombre de nuestro contexto de persistencia **`PrimerProyectoHibernateJPAMapeoColumnas`**
 
 ![image](https://user-images.githubusercontent.com/23094588/169525795-569d7c9d-a007-4e6b-8e58-5cb13ac03b7a.png)
 
-Porque lo vamos a necesitar para crear nuestra **Clase de Aplicación**.
+Ya que lo vamos a necesitar para nuestra **Clase de Aplicación** que actualmente luce así:
+
+![image](https://user-images.githubusercontent.com/23094588/169533070-0518bbe3-1e5b-4969-931a-72cd1d86c435.png)
 
 La inicialización de un proyecto JPA la hacemos a través de un objeto llamado **`EntityManager`** y **`EntityManagerFactory`**.
 
 JPA proporciona un método llamado **`createEntityManagerFactory`** que solamente proporcionandole el nombre nos va a permitir cargar el fichero de configuración
 
 ```java
-EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerProyectoHibernateJPAMapeoColumnas");
+   //Configuramos el EMF a través de la unidad de persistencia
+   EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerProyectoHibernateJPAMapeoColumnas");
 ```
 
 A partir de allí vamos a generar el **`EntityManager`** que es facíl de generar tan solo llamando al método de creación del mismo.
 
 ```java
-EntityManager em = emf.createEntityManager();
+   //Generamos un EntityManager
+   EntityManager em = emf.createEntityManager();
 ```
 
 Y al igual que antes vamos a incluir los métodos de cierre.
 
 ```java
-em.close();
-emf.close();
+   //Cerramos el EntityManager y EntityManagerFactory
+   em.close();
+   emf.close();
 ```
 
 
-Nos faltaría incluir el código de aplicación, podemos utilizar igual que en el caso anterior.
+Después de crear el **`EntityManager`** vamos a Iniciar y Cerrar(**`commit`**) una transicción 
 
+```java
+   //Iniciamos una transacción
+   em.getTransaction().begin();
+   
+   
+   
+   //Commiteamos la transacción
+   em.getTransaction().commit();
+```
 
+Dentro de la transacción vamos a crear dos usuarios y a través de un **`Calendar`** vamos a obtener las fechas de nacimiento, una vez creados los dos usuarios los vamos a persistir.
 
+```java
+   //Iniciamos una transacción
+   em.getTransaction().begin();
+   
+   //Obtenemos el Calendar con el que gestionaremos las fechas
+   Calendar calendar = Calendar.getInstance();
 
+   // Construimos un objeto de tipo User
+   User user1 = new User();
+   user1.setName("Pepe");
+		
+   calendar.set(1982, 9, 18);
+   user1.setBirthDate(calendar.getTime());
 
+   // Construimos otro objeto de tipo User
+   User user2 = new User();
+   user2.setName("Juan");
+   calendar.set(1990, 5, 20);
+   user2.setBirthDate(calendar.getTime());
+		
+   //Persistimos los objetos
+   em.persist(user1);
+   em.persist(user2);
+   
+   //Commiteamos la transacción
+   em.getTransaction().commit();
+```
+
+Con esto ya podemos ejecutar la aplicación para ver su funcionamiento.
+
+AQUIIIIIIIIIIIIIIII
 
 
 
