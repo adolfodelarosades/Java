@@ -484,7 +484,7 @@ En nuestro archivo **`pom.xml`** vamos a añadir la dependencia **`hibernate-ent
 </dependency>
 ```
 
-también añadimos la dependencia de **MySQL** dentro del **`pom.xml`*.
+también añadimos la dependencia de **MySQL** dentro del **`pom.xml`**.
 
 ```xml
 <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -542,6 +542,116 @@ En la clase **`User`** añadimos los atributos y anotaciones correspondientes.
 ![image](https://user-images.githubusercontent.com/23094588/169505169-c83ccef2-efc9-4c3b-a226-bbcfa26ec97a.png)
 
 Sin embargo la clase nos da un error **`Class "com.javaocio.hibernate.mapeocolumnas.User" is managed, but is not listed in the persistence.xml file`**, nos indica que la clase **`User`** es una entidad, es decir que va a ser manejada por JPA, pero no está listada en el fichero de persistencia y es que no lo hemos configurado aún.
+
+![image](https://user-images.githubusercontent.com/23094588/169520050-f6194b97-4770-46c4-a824-9dd95e687102.png)
+
+Al convertir nuestro proyecto a un proyecto JPA se nos a creado el JPA Context con el fichero **`persistence.xml`**.
+
+Vamos a **Configurar la Unidad de Persistencia**, vamos a ***añadir nuestra entidad como clases gestionada***, vamos a ***crear la conexión*** y vamos a ***añadir las diferente opciones de Hibernate***.
+
+![image](https://user-images.githubusercontent.com/23094588/169520554-cf2a5e4c-4c47-4e6b-9502-11d02342c1df.png)
+
+El nombre de aquí, será el nombre del contexto de persistencia **`130-04-PrimerProyectoHibernateJPAMapeoColumnas`** vamos a dejarlo solo en **`PrimerProyectoHibernateJPAMapeoColumnas`**.
+
+![image](https://user-images.githubusercontent.com/23094588/169520813-dff41b61-4516-4af3-b040-3d659b098766.png)
+
+Vamos a ver la **pestaña de Conexión** entre los dos tipos de conexión que tenemos la conexión usando **transacciones JTA** o **Transacciones de Recurso Local**,
+
+![image](https://user-images.githubusercontent.com/23094588/169520930-8b13f690-a884-448d-8b52-bb6683f3ccb1.png)
+
+utilizaremos la de **Transacciones de Recurso Local**, mediante este sistema somos nosotros los encargados de gestionar las transacciones y no un sistema centralizado como ofrece JavaEE o Spring.
+
+![image](https://user-images.githubusercontent.com/23094588/169521164-71da2145-0f97-4342-b60f-fd44c4bf438f.png)
+
+Para insertar los datos de la conexión lo podemos hacer a través de una conexión ya generada que podemos construir abajo o través de una serie de datos.
+
+Como describimos en el proyecto **`130-02-PrimerProyectoHibernateJPA`** no nos fue posible crear la conexión por lo que vamos a meter manualmente los datos en **`persistence.xml`**, lo primero que vamos a hacer es añadir las propiedades de la conexión a la BD:
+
+![image](https://user-images.githubusercontent.com/23094588/169523404-60b8aad0-9b54-4198-a92a-bba65fdd21aa.png)
+
+Ademas de los datos meramente de la conexión de la BD vamos a añadir el dialecto de MySQL para Hibernate, el driver y podemos también añadir las propiedades para que se nos muestren las sentencias SQL formateadas **`hibernate.show_sql=true`**, **`hibernate.format_sql=true`** y también la propiedad para crear la BD cada que se arranque el servidor **`hibernate.hbm2ddl.auto=create`**.
+
+![image](https://user-images.githubusercontent.com/23094588/169524167-0b507beb-0354-45dd-806f-b39923735c35.png)
+
+Ya tenemos que estas opciones añadidas, solamente nos faltaría especificar que nuestra clase **`User`** es una entidad que será manejada por JPA y lo hacemos a través del asistente o metiendolo manualmene.
+
+![image](https://user-images.githubusercontent.com/23094588/169524465-e81fd13b-8b2a-4fda-a8c7-2f53699b21bd.png)
+
+![image](https://user-images.githubusercontent.com/23094588/169524515-f8333f12-ef80-41ac-8a31-e0ccd321ac5f.png)
+
+![image](https://user-images.githubusercontent.com/23094588/169524608-71d6b04a-fa9d-470d-ad68-344d0df0ab47.png)
+
+Vamos a marcar que excluya aquellas clases que no esten marcadas, clase que no estén listadas.
+
+![image](https://user-images.githubusercontent.com/23094588/169524835-60bd4cc8-ec85-4880-b692-e3173f64a63c.png)
+
+![image](https://user-images.githubusercontent.com/23094588/169524914-3493045d-7832-4e14-8771-8349ae34baec.png)
+
+Con todo lo que hemos hecho, nuestro archivo **`persistence.xml`** queda así:
+
+![image](https://user-images.githubusercontent.com/23094588/169525338-b3cc09f8-5f0e-420a-9799-14677f6547cd.png)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="PrimerProyectoHibernateJPAMapeoColumnas" transaction-type="RESOURCE_LOCAL">
+		<class>com.javaocio.hibernate.mapeocolumnas.User</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+	<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
+			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
+			<property name="javax.persistence.jdbc.password" value="12345678"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+```
+
+Cómo podemos comprobar el error sobre nuestra clase **`User`** ya ha desaparecido.
+
+![image](https://user-images.githubusercontent.com/23094588/169525552-9a283697-1ef9-46d4-a35a-8f2c0480eb9b.png)
+
+Debemos recordar el nombre de nuestro contexto de persistencia **`PrimerProyectoHibernateJPAMapeoColumnas`**
+
+![image](https://user-images.githubusercontent.com/23094588/169525795-569d7c9d-a007-4e6b-8e58-5cb13ac03b7a.png)
+
+Porque lo vamos a necesitar para crear nuestra **Clase de Aplicación**.
+
+La inicialización de un proyecto JPA la hacemos a través de un objeto llamado **`EntityManager`** y **`EntityManagerFactory`**.
+
+JPA proporciona un método llamado **`createEntityManagerFactory`** que solamente proporcionandole el nombre nos va a permitir cargar el fichero de configuración
+
+```java
+EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerProyectoHibernateJPAMapeoColumnas");
+```
+
+A partir de allí vamos a generar el **`EntityManager`** que es facíl de generar tan solo llamando al método de creación del mismo.
+
+```java
+EntityManager em = emf.createEntityManager();
+```
+
+Y al igual que antes vamos a incluir los métodos de cierre.
+
+```java
+em.close();
+emf.close();
+```
+
+
+Nos faltaría incluir el código de aplicación, podemos utilizar igual que en el caso anterior.
+
+
+
+
+
+
+
 
 
 Vamos a ver el ejemplo en funcionamiento.
