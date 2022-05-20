@@ -447,11 +447,101 @@ La anotacion **`@Column`** que ya hemos dicho que no es obligatoria, pero si nos
 
 Y con respecto a los tipos de **Datos Temporales**, decir que para las **Fechas** Hibernate nos da un poco de soporte, ya que el tratamiento no es exactamente el mismo que con un atributo normal, con la anotación **`@Temporal`** ***podemos indicar que un determinado atributo será un tipo de dato temporal***, nos permite gestionar los clásicos **`Date`** tanto de **`util`** como de **`sql`**, **`Timestamp`**, **`Time`**, **`Calendar`** ***y también los tipos nuevos que hay dentro de la*** **`java.time`** ***de Java 8***. ***Esta anotación nos permite almacenar en la base de datos los datos de tres maneras distintas como*** **`DATE`**, **`TIME`** y **`TIMESTAMP`**, que es lo que tenemos en el ejemplo.
 
-### :computer: Código Completo - 130-04-PrimerProyectoHibernateJPAMapeoColumnas
+### :computer: Código Completo - **`130-04-PrimerProyectoHibernateJPAMapeoColumnas`**
+
+Este proyecto es muy similar al proyecto **`130-02-PrimerProyectoHibernateJPA`**, por lo que podemos crearlo desde el inicio siguiendo todos los pasos o simplemente copiar este proyecto y cambiar todo lo necesario.
+
+Vamos a crear el proyecto desde cerom, crearemos nuestro un proyecto Hibernate conjuntamente con JPA.
+
+En primer lugar vamos a crear un **proyecto Maven**, vamos añadir las **características de JPA**, vamos a añadir las **clases Modelo o entidades** en nuestro caso será la misma que en el ejemplo anterior, vamos a **configurar la Unidad de Persistencia**, vamos a crear nuestra **Clase de Aplicación** y lo vamos a **ejecutar**.
+
+Creamos un nuevo proyecto de tipo Maven.
+
+![image](https://user-images.githubusercontent.com/23094588/169494823-6e6a3ce8-1aea-49fa-ad6f-dd8221e296ff.png)
+
+![image](https://user-images.githubusercontent.com/23094588/169494883-55f6a942-b1f4-4223-9a37-c3507dd8d286.png)
+
+![image](https://user-images.githubusercontent.com/23094588/169495252-ec011f37-8229-454d-bb2d-fe2b9dc5b186.png)
+
+![image](https://user-images.githubusercontent.com/23094588/169495769-6b93b5dc-bd24-40dd-ac7e-d7edc779241c.png)
+
+Se crea la siguiente estructura:
+
+![image](https://user-images.githubusercontent.com/23094588/169495979-1e75c14d-4be7-4977-a4ab-36ed3f56e861.png)
+
+Vamos a cambiar el build Path de 1.7 a 14 tanto en el **`Java Build Path`** como en el **`Java Compiler`**.
+
+![image](https://user-images.githubusercontent.com/23094588/169496912-46b7de5c-bfb9-4489-92bb-5a60894bb389.png)
+
+En nuestro archivo **`pom.xml`** vamos a añadir la dependencia **`hibernate-entitymanager`** va a incluir el nucleo y los elementos necesarios para poder trabajar con JPA.
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>5.4.17.Final</version>
+</dependency>
+```
+
+también añadimos la dependencia de **MySQL** dentro del **`pom.xml`*.
+
+```xml
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.20</version>
+</dependency>
+```
+
+Al incluir estas dos dependencias en el archivo **`pom.xml`** ya tendríamos nuestras dependencias organizadas.
+
+![image](https://user-images.githubusercontent.com/23094588/169498069-4c7c970c-20c6-4365-9d74-e378fa5c53ff.png)
+
+El siguiente paso será **añadir las características de JPA a nuestro proyecto**, eso lo vamos a hacer **pulsamos sobre el proyecto con el botón derecho y pulsamos propiedades y vamos a seleccionar la opción `Project Facets`**.
+
+![image](https://user-images.githubusercontent.com/23094588/169498670-ad1f8b46-28a0-4f31-b9cb-04536b2c0933.png)
+
+![image](https://user-images.githubusercontent.com/23094588/169498761-90e92d21-f8de-4b36-a4c5-f99a94a066cc.png)
+
+Lo primero que tenemos que indicar es que este proyecto será usado con **`Project Facets`**. Pulsamos sobre el enlace para que se configure automáticamente.
+
+![image](https://user-images.githubusercontent.com/23094588/169499047-f3c1d67c-0861-4ff7-bb0a-82c4fb8bdaeb.png)
+
+***Para aquellos que no lo hayáis hecho antes es posible que marque algún tipo de configuración en la que podéis elegir que seréis vosotros mismos los que vais a gestionar la configuración de la librería y los ficheros en lugar de marcar una serie de ficheros Jars que ya esten añadidos***.
+
+Marcamos JPA y en la pestaña de Runtimes marcamos Java 8 (14).
+
+![image](https://user-images.githubusercontent.com/23094588/169499324-5310d97a-1d94-48db-8b94-1de8dc6b9f78.png)
+
+Al realizar esto se nos crea el archivo **`persistence.xml`**
+
+![image](https://user-images.githubusercontent.com/23094588/169500062-412828f6-3a65-42e5-8706-60d2c688d4bf.png)
+
+Con esto nuestro proyecto ya es un **proyecto JPA**, pero no lo parece porque seguimos en una perspectiva que no es la **perspectiva JPA**, para abrir una perspectiva nos vamos arriba en la esquina superior derecha en la que seleccionamos la **perspectiva JPA**.
+
+![image](https://user-images.githubusercontent.com/23094588/169500757-fd9aece5-bc64-47ba-863a-4e7292a573c9.png)
+
+Con esto nuestro proyecto ya se muestra como un **proyecto JPA**.
+
+Una perspectiva no es más que un conjunto de ventanas, de vistas Eclipse nos ofrece cómo podéis comprobar las que tenemos disponible han cambiado.
+
+![image](https://user-images.githubusercontent.com/23094588/169501257-c0cde2ee-03fb-4584-a9f0-afeb565dcc53.png)
+
+Una vez hecho esto vamos a seguir con el siguiente paso, que es crear nuestra clase modelo **`User`**, anotandala en el ejemplo anterior, lo que vamos a hacer es copiar la clase User porque su contenido va a ser exactamente el mismo.
+![image](https://user-images.githubusercontent.com/23094588/169500955-bf26e630-a24f-4394-855f-2916d84b75bb.png)
+
+
+
+
+
+
+
 
 Vamos a ver el ejemplo en funcionamiento.
 
-Tenemos `persistence.xml`.
+Tenemos **`persistence.xml`**.
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
