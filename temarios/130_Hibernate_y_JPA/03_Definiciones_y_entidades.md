@@ -451,7 +451,7 @@ Y con respecto a los tipos de **Datos Temporales**, decir que para las **Fechas*
 
 Este proyecto es muy similar al proyecto **`130-02-PrimerProyectoHibernateJPA`**, por lo que podemos crearlo desde el inicio siguiendo todos los pasos o simplemente copiar este proyecto y cambiar todo lo necesario.
 
-Vamos a crear el proyecto desde cerom, crearemos nuestro un proyecto Hibernate conjuntamente con JPA.
+Vamos a crear el proyecto desde cero, crearemos nuestro un proyecto Hibernate conjuntamente con JPA.
 
 En primer lugar vamos a crear un **proyecto Maven**, vamos añadir las **características de JPA**, vamos a añadir las **clases Modelo o entidades** en nuestro caso será la misma que en el ejemplo anterior, vamos a **configurar la Unidad de Persistencia**, vamos a crear nuestra **Clase de Aplicación** y lo vamos a **ejecutar**.
 
@@ -509,7 +509,7 @@ Lo primero que tenemos que indicar es que este proyecto será usado con **`Proje
 
 ![image](https://user-images.githubusercontent.com/23094588/169499047-f3c1d67c-0861-4ff7-bb0a-82c4fb8bdaeb.png)
 
-***Para aquellos que no lo hayáis hecho antes es posible que marque algún tipo de configuración en la que podéis elegir que seréis vosotros mismos los que vais a gestionar la configuración de la librería y los ficheros en lugar de marcar una serie de ficheros Jars que ya esten añadidos***.
+***Para aquellos que no lo hayáis hecho antes es posible que marque algún tipo de configuración en la que podéis elegir que seréis vosotros mismos los que vais a gestionar la configuración de la librería y los ficheros en lugar de marcar una serie de ficheros Jars que ya esten añadidos***, en nuestro caso como ya es el segundo proyecto creado ya no es necesario hacer esto.
 
 Marcamos JPA y en la pestaña de Runtimes marcamos Java 8 (14).
 
@@ -530,13 +530,18 @@ Una perspectiva no es más que un conjunto de ventanas, de vistas Eclipse nos of
 ![image](https://user-images.githubusercontent.com/23094588/169501257-c0cde2ee-03fb-4584-a9f0-afeb565dcc53.png)
 
 Una vez hecho esto vamos a seguir con el siguiente paso, que es crear nuestra clase modelo **`User`**, anotandala en el ejemplo anterior, lo que vamos a hacer es copiar la clase User porque su contenido va a ser exactamente el mismo.
-![image](https://user-images.githubusercontent.com/23094588/169500955-bf26e630-a24f-4394-855f-2916d84b75bb.png)
 
+![image](https://user-images.githubusercontent.com/23094588/169503293-d6da4e22-4d89-4851-9309-0a8b4afa2cf1.png)
 
+![image](https://user-images.githubusercontent.com/23094588/169503436-f071dd95-d6cc-4582-acfc-cd5057b62f4a.png)
 
+![image](https://user-images.githubusercontent.com/23094588/169503533-091d947e-0656-4b98-bb50-d87dc2d4d16e.png)
 
+En la clase **`User`** añadimos los atributos y anotaciones correspondientes.
 
+![image](https://user-images.githubusercontent.com/23094588/169505169-c83ccef2-efc9-4c3b-a226-bbcfa26ec97a.png)
 
+Sin embargo la clase nos da un error **`Class "com.javaocio.hibernate.mapeocolumnas.User" is managed, but is not listed in the persistence.xml file`**, nos indica que la clase **`User`** es una entidad, es decir que va a ser manejada por JPA, pero no está listada en el fichero de persistencia y es que no lo hemos configurado aún.
 
 
 Vamos a ver el ejemplo en funcionamiento.
