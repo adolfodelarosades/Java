@@ -691,24 +691,51 @@ Dentro de la transacción vamos a crear dos usuarios y a través de un **`Calend
    em.getTransaction().commit();
 ```
 
-Con esto ya podemos ejecutar la aplicación para ver su funcionamiento.
+Con esto ya podemos ejecutar la aplicación para ver su funcionamiento, nos colocamos en el archivo de la clase **`App.java`** presionamos el botón derecho **`Run As`** y **`Java application`**.
 
-AQUIIIIIIIIIIIIIIII
+![image](https://user-images.githubusercontent.com/23094588/170507629-21f25e2b-2dca-4cef-8066-c418bc180e7f.png)
 
+![image](https://user-images.githubusercontent.com/23094588/170508267-6b9fc69c-b887-4a90-8e2d-af11c837d10d.png)
 
+![image](https://user-images.githubusercontent.com/23094588/170508471-eeb15fe1-7ace-4335-a749-4f3383bff7ba.png)
 
+![image](https://user-images.githubusercontent.com/23094588/170508567-5c1744da-d6f1-45b4-b260-190861fe9e60.png)
 
-Vamos a ver el ejemplo en funcionamiento.
+Hibernate ha hecho el trabajo duro, a borrado la tabla **`ANOTHER_USER`** en caso de que existiera, también elimina la tabla **`hibernate_sequence`** y posteriormente vuelve a crear nuevamente las tablas **`ANOTHER_USER`** y **`hibernate_sequence`** que es una tabla especial para obtener los siguientes valores de los IDs, inicializa la tabla **`hibernate_sequence`** con 1, y posteriormente inserta los registros en la tabla **`ANOTHER_USER`**, si vamos a la BD tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/170510096-d0305107-fac3-4620-88ca-860d0f162349.png)
+
+Observamos que tenemos las tablas **`ANOTHER_USER`** y **`hibernate_sequence`**, ademas tenemos la tabla  **`User`** creada con el proyecto anterior, si vemos el contenido de la tabla **`ANOTHER_USER`** tenemos los dos registros que mandamos insertar:
+
+![image](https://user-images.githubusercontent.com/23094588/170510456-98a9ef64-640a-4dcf-b834-5174b5fa7631.png)
+
+![image](https://user-images.githubusercontent.com/23094588/170514174-548b7acc-986e-4169-918c-f6477d54e78e.png)
+
+Observamos que las anotaciones usadas en la **`Entity`** surgen efecto en la creación de la tabla 
+
+![image](https://user-images.githubusercontent.com/23094588/170511563-21e9af39-a2fc-41d7-a537-81cd09b421cd.png)
+
+como por ejemplo el nombre de la tabla gracias a la anotación **`@Table(name="ANOTHER_USER")`**, la generación automatica del **`id`** gracias a la utilización de la anotación **`@GeneratedValue(strategy=GenerationType.AUTO)`** (crea la tabla **`hibernate_sequence`**), la columna se llama **`USERNAME`** gracias a que en  usamos la anotación **`@Column(name="USERNAME")`** para ponerle este nombre en lugar que el definido en el atributo.
+
+En la tabla **`hibernate_sequence`** tenemos el siguiente valor a usar para el **`id`** cuando insertemos un nuevo registro:
+
+![image](https://user-images.githubusercontent.com/23094588/170510651-dbdcc58f-8fbe-426d-8dfd-706bc12bc44e.png)
+
+Cabe observar que los meses insertados son diferentes a los que indicamos ya que **`Calendar`** empieza a contar en **`0`**, debemos tener en cuenta este detalle. Además vemos que el formato de la fecha es el que usa MySQL por defecto.
+
+![image](https://user-images.githubusercontent.com/23094588/170510456-98a9ef64-640a-4dcf-b834-5174b5fa7631.png)
+
+#### Código Completo de la APP.
 
 Tenemos **`persistence.xml`**.
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="MapeoColumnas" transaction-type="RESOURCE_LOCAL">
-		<class>com.openwebinars.hibernate.mapeocolumnas.User</class>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="PrimerProyectoHibernateJPAMapeoColumnas" transaction-type="RESOURCE_LOCAL">
+		<class>com.javaocio.hibernate.mapeocolumnas.User</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-		<properties>
+	<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate"/>
 			<property name="javax.persistence.jdbc.user" value="openwebinars"/>
 			<property name="javax.persistence.jdbc.password" value="12345678"/>
@@ -723,105 +750,102 @@ Tenemos **`persistence.xml`**.
 </persistence>
 ```
 
-Tenemos el `pom.xml`.
+Tenemos el **`pom.xml`**.
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.openwebinars.hibernate</groupId>
-	<artifactId>130-04-PrimerProyectoHibernateJPAMapeoColumnas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+  <groupId>com.javaocio.hibernate</groupId>
+  <artifactId>130-04-PrimerProyectoHibernateJPAMapeoColumnas</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 
-	<name>130-04-PrimerProyectoHibernateJPAMapeoColumnas</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+  <name>130-04-PrimerProyectoHibernateJPAMapeoColumnas</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
-	</properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.4.17.Final</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.20</version>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+	<dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.4.17.Final</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.20</version>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
-				defaults (may be moved to parent pom) -->
-			<plugins>
-				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
-				</plugin>
-				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
-				</plugin>
-				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
 ```
 
-Como ya hemos visto tenemos la clase `User`.
-
-*`User`*
+Como ya hemos visto tenemos la clase **`User`**
 
 ```java
-package com.openwebinars.hibernate.mapeocolumnas;
+package com.javaocio.hibernate.mapeocolumnas;
 
 import java.util.Date;
 
@@ -873,18 +897,17 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
-
 }
 ```
 
-Tiene un campo `name` pero en la base de datos se llamará `USERNAME`, le hemos añadido un dato temporal `birthDate` que es del tipo `java.util.date` pero que hemos anotado como `@Temporal(TemporalType.DATE)` y que se almacenará en la base de datos como `DATE`.
+Tiene un campo **`name`** pero en la base de datos se llamará **`USERNAME`**, le hemos añadido un dato temporal **`birthDate`** que es del tipo **`java.util.date`** pero que hemos anotado como **`@Temporal(TemporalType.DATE)`** y que se almacenará en la base de datos como **`DATE`**.
 
-Tenemos nuestra clase de aplicación `App` seguimos la línea que marcamos en el capitulo 3 en los proyectos de JPA.
+![image](https://user-images.githubusercontent.com/23094588/170514233-494b5b07-f813-49f4-aa9b-269984af0401.png)
 
-*`App.java`*
+Tenemos nuestra clase de aplicación **`App`** seguimos la línea que marcamos en el capitulo 3 en los proyectos de JPA.
 
 ```java
-package com.openwebinars.hibernate.mapeocolumnas;
+package com.javaocio.hibernate.mapeocolumnas;
 
 import java.util.Calendar;
 
@@ -894,74 +917,56 @@ import javax.persistence.Persistence;
 
 /**
  * Entidades y mapeo de atributos
- * www.openwebinars.net
- * @LuisMLopezMag
+ *
  */
-public class App {
-	public static void main(String[] args) {
-		
-		//Configuramos el EMF a través de la unidad de persistencia
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("MapeoColumnas");
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	//Configuramos el EMF a través de la unidad de persistencia
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrimerProyectoHibernateJPAMapeoColumnas");
 
-		//Generamos un EntityManager
-		EntityManager em = emf.createEntityManager();
+    	//Generamos un EntityManager
+    	EntityManager em = emf.createEntityManager();
+    	
+    	//Iniciamos una transacción
+    	em.getTransaction().begin();
+    	   
+    	//Obtenemos el Calendar con el que gestionaremos las fechas
+    	Calendar calendar = Calendar.getInstance();
 
-		//Iniciamos una transacción
-		em.getTransaction().begin();
+    	// Construimos un objeto de tipo User
+    	User user1 = new User();
+    	user1.setName("Pepe");
+    			
+    	calendar.set(1982, 9, 18);
+    	user1.setBirthDate(calendar.getTime());
 
-		//Obtenemos el Calendar con el que gestionaremos las fechas
-		Calendar calendar = Calendar.getInstance();
-
-		// Construimos un objeto de tipo User
-		User user1 = new User();
-		user1.setName("Pepe");
-		
-		calendar.set(1982, 9, 18);
-		user1.setBirthDate(calendar.getTime());
-
-		// Construimos otro objeto de tipo User
-		User user2 = new User();
-		user2.setName("Juan");
-		calendar.set(1990, 5, 20);
-		user2.setBirthDate(calendar.getTime());
-		
-		//Persistimos los objetos
-		em.persist(user1);
-		em.persist(user2);
-
-		//Commiteamos la transacción
-		em.getTransaction().commit();
-		
-		//Cerramos el EntityManager
-		em.close();
-
-	}
+    	// Construimos otro objeto de tipo User
+    	User user2 = new User();
+    	user2.setName("Juan");
+    	calendar.set(1990, 5, 20);
+    	user2.setBirthDate(calendar.getTime());
+    			
+    	//Persistimos los objetos
+    	em.persist(user1);
+    	em.persist(user2);
+    	   
+    	//Commiteamos la transacción
+    	em.getTransaction().commit();
+    	
+    	//Cerramos el EntityManager y EntityManagerFactory
+     	em.close();
+    	emf.close();
+    }
 }
 ```
 
-Creamos nuestro `EntityManagerFactory`, a partir de ahí creamos nuestro `EntityManager` iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe y Juan y a través de un calendar vamos a obtener las fechas de nacimiento, observemos que los meses comienzan en 0.
+Creamos nuestro **`EntityManagerFactory`**, a partir de ahí creamos nuestro **`EntityManager`** iniciamos una transacción y simplemente vamos a crear dos usuarios el primer usuario Pepe y Juan y a través de un calendar vamos a obtener las fechas de nacimiento, observemos que los meses comienzan en 0.
 
-Si ejecutamos vemos que Hibernate ha hecho algún trabajo duro, ha borrado la tabla si existe, también ha borrado una tabla que utiliza como hemos dicho antes para generar los valores, la vuelve a crear, ha vuelto a crear la tabla especial, a utilizado esa tabla para obtener los nuevos valores que tiene que insertar.
+AQUIIIIIII
 
-<img src="images/8-22.png">
-
-<img src="images/8-23.png">
-
-Y si miramos en Workbeanch podemos ver que tenemos las tablas `ANOTHER_USER` con los siguientes datos:
-
-<img src="images/8-24.png">
-
-los meses son distintos porque Calendar funciona de una manera diferente empezar a contar de cero. Podemos comprobar como se han almacenado Pepe y Juan con sus respectivas fechas usando el formato de fecha de MySQL y como se ha podido almacenar esta transacción almacenando los datos indicados en `App`.
-
-También se creo la tabla `hibernate_sequence`.
-
-<img src="images/8-25.png">
-
-Y seguimos conservando la tabla `User` de las aplicaciones anteriores.
-
-<img src="images/8-26.png">
-
-<img src="images/8-17.png">
+### Tipos Embebidos
 
 Ahora vamos a ver los tipos embebidos y los ciclos de vida de las entidades.
 
