@@ -15,7 +15,7 @@
 * Summary
 
 <hr />
-**MATERIAL SUPLEMENTARIO ELECTRÓNICO**
+MATERIAL SUPLEMENTARIO ELECTRÓNICO
 
 La versión en línea de este capítulo (https://doi.org/10.1007/978-1-4842-3420-4_1) contiene material complementario, que está disponible para usuarios autorizados.
 <hr />
