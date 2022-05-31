@@ -43,7 +43,7 @@ Cover
 
 Front Matter
 
-1. [Introduction](960_Pro_JPA_2_in_Java_EE_8/01_Introduction.md)
+1. [Introduction](960_Pro_JPA_2_in_Java_EE_8/01_Introduction.md) 👍
 
 2. [Getting Started](960_Pro_JPA_2_in_Java_EE_8/02_Getting_Started.md)
 
