@@ -230,7 +230,131 @@ Una vez instalado ya estaremos listos para crear nuestro promer programa.
 
 Eclipse y como decíamos gratuito lo tenemos disponible desde su cuenta de punto o era 
 
-# 03 Hola Mundo 10:49 
+# 03 Hola Mundo 10:49
+
+## Creación del Repositorio del Curso
+
+Creamos el nuevo repositorio para los programas del curso.
+
+![image](https://user-images.githubusercontent.com/23094588/192095720-8d5ee05f-b1e6-45b8-8a11-7d1c91067e11.png)
+
+Una vez que presionamos el botón de Crear el Repositorio nos muestra una pantalla con diferetes instrucciones de como poder usar este repositorio remoto.
+
+![image](https://user-images.githubusercontent.com/23094588/192095767-934f8252-82ff-4b5b-934d-be7c5564c551.png)
+
+Como en nuestro caso lo vamos a usar desde Eclipse lo más relevante para nosotros es la dirección: `https://github.com/adolfodelarosades/COD_101_Java_8_desde_Cero.git`
+
+Que como veremos más adelante nos servir para poder configurar desde Eclipse el uso de GitHub.
+
+Abrimos el Workspace de Eclipse.
+
+![image](https://user-images.githubusercontent.com/23094588/192096329-7efa76e7-3c67-4745-b291-de78a8a77d2a.png)
+
+## Configurar Eclipse para usar Git y GitHub
+
+1. Instalar EGit
+En Eclipse lo primero que tendríamos que hacer es instalar el Plugin EGit, pero como hemos mencionado antes en las últimas versiones de Eclipse ya viene instalado por default pero si no fuera el caso hay que instalarlo.
+
+2. Proporcionar datos de Identificación de Git y GitHub
+Lo que tenemos que hacer ahora es proporcinar unos datos de identificación que nos serviran para interactuar con Git y GitHub. Vamos a Preferences - Team - Git - Configuration, esto aparece por que tenemos instalado EGit.
+
+![image](https://user-images.githubusercontent.com/23094588/192096720-80e4a010-f018-42e4-91eb-c251c8a9352d.png)
+
+Lo que hemos hecho aquí es añadir un `user.name` y un `user.email` con sus respectivos valores. Estos datos simplemente son idenfificativos, no sirven para acceder a nada.
+
+3. Crear Repositorio Local
+Lo que nos falta es crear nuestro repositorio local, tenemos que tener un repositorio donde almacenar las versiones de nuestro proyecto. Para hacer esta gestión nos va a ser de utilidad abrir **la vista Git Repositories** esto lo hacemos con **Windows - Show Views - Others...** y de la lista de vistas nos vamos a **Git - Git Repositories**.
+
+![image](https://user-images.githubusercontent.com/23094588/192096815-3468bb18-d291-44db-b2ab-13ebf36dc247.png)
+
+![image](https://user-images.githubusercontent.com/23094588/192096838-d97d5793-ea38-42c2-94b0-42e0e3cf3b19.png)
+
+En la vista Git Repositories tenemos una serie de botonoes que nos permiten hacer diferentes tareas.
+
+![image](https://user-images.githubusercontent.com/23094588/192096887-23dc5713-77e0-436a-a21e-5057a9fdad0d.png)
+
+Entre ellos hay uno que es para `Create a new Git Repository and add it to this view` que es el que vamos a presionar.
+
+![image](https://user-images.githubusercontent.com/23094588/192096961-8223831a-b0a1-4ccd-b53e-74824374cf47.png)
+
+Tenemos que seleccionar la carpeta donde lo queremos tener, por defaul nos aparece el sitio que usa git por default para almacenar los repositorios, 
+
+![image](https://user-images.githubusercontent.com/23094588/192097041-11df1305-1254-4d41-897f-14d42f6563f3.png)
+
+vamos a usar esa carpeta solo vamos a poner un nombre a nuestro repositorio que será el mismo que usamos para el Workspace `101_Java_8_desde_Cero`
+
+![image](https://user-images.githubusercontent.com/23094588/192097165-8244438d-0755-48e5-9af1-295451a4f919.png)
+
+Y una vez que aceptamos ya nos aparece el nuevo repositorio local en la vista Git Repositories.
+
+![image](https://user-images.githubusercontent.com/23094588/192097180-55d6a0f7-1740-4bff-801d-e0b7e1cd977e.png)
+
+Y si nos vamos a la carpeta del repositorio dentro de ella se ha creado una carpeta oculta .git.
+
+![image](https://user-images.githubusercontent.com/23094588/192097300-f99d4c1d-9034-4d9b-ba85-ce35d8ad47d0.png)
+
+Que es donde se va ir almacenando toda la información del repositorio, las diferentes versiones,, cambios y demas.
+
+Con esto ya tenemos creado nuestro repositorio local, de nuestro equipo y donde queremos controlar las diferentes versiones del proyecto. Pero también quremos conectarlo con el repositorio remoto para compartir las versiones de los proyectos con otros miembros del equipo.
+
+4. Conectar Repositorio Local con el Repositorio Remoto
+Para hacer la conección del Repositorio Local con el Remoto lo que hacemos es expandir nuestro repositorio local.
+
+![image](https://user-images.githubusercontent.com/23094588/192097368-04f3b304-1843-4c57-950f-543a5407e76f.png)
+
+Sobre remote presionamos el botón derecho.
+
+![image](https://user-images.githubusercontent.com/23094588/192097444-f17de6a9-05b6-4748-9458-0bd7e88359e7.png)
+
+Y nos aparece `Create Remote...` lo pulsamos.
+
+![image](https://user-images.githubusercontent.com/23094588/192097492-253ec285-a0b6-4de9-b9bd-ce3b856ae370.png)
+
+
+Simplemente presionamos OK dejando `origin` y presionamos el botón **`Create`**
+
+![image](https://user-images.githubusercontent.com/23094588/192097544-7e6e2489-3c67-4b4f-8f8c-44add74ce3d0.png)
+
+Presionamos el botón **`Change...`**
+
+![image](https://user-images.githubusercontent.com/23094588/192097583-de20cb04-8abd-4361-9005-aea7fc5e56b5.png)
+
+En esta ventana es donde se me pide toda la información de conección con el repositorio Remoto es aquí donde debo meter la URI que me genero al crear el repositorio en GitHub junto con mis credenciales.
+
+![image](https://user-images.githubusercontent.com/23094588/192097667-c684b489-8682-4671-b61f-cc7d9f84dd36.png)
+
+
+Con esto tendríamos la conexión entre el repositorio Local y el remoto.
+
+![image](https://user-images.githubusercontent.com/23094588/192097692-a424b5a1-4d1e-4f95-b9da-1101f0b4a401.png)
+
+
+Salvamos la configuración con **`Save`**.
+
+![image](https://user-images.githubusercontent.com/23094588/192097749-76518343-8383-4251-85c1-00c47f061622.png)
+
+Ya tenemos todo listo para a partir de ahora empezar a crear proyectos, subirlos a GitHub, controlar versiones algo que vamos a ver en la próxima lección.
+
+## Creación de nuestro Primer Proyecto **`HolaMundo`**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Vamos a crear un nuevo proyecto *Java Project* de nombre `101-01-HolaMundo`, debemos seleccionar sobre que versión de Java se creara dicho proyecto y Finish.
 
