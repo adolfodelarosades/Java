@@ -337,33 +337,33 @@ Ya tenemos todo listo para a partir de ahora empezar a crear proyectos, subirlos
 
 ## Creación de nuestro Primer Proyecto **`HolaMundo`**
 
+Vamos a crear un nuevo proyecto **Java Project** de nombre **`101-01-HolaMundo`**, debemos seleccionar sobre que versión de Java se creara dicho proyecto y **`Finish`**.
 
+![image](https://user-images.githubusercontent.com/23094588/192098355-c4911cce-5c61-4934-b09e-a9f1cfec9a3c.png)
 
+![image](https://user-images.githubusercontent.com/23094588/192098385-51733454-ad79-4cc2-9109-fa2b114fd8cc.png)
 
+![image](https://user-images.githubusercontent.com/23094588/192098433-2cea7ed7-4292-41d3-959e-6da5713696f0.png)
 
+![image](https://user-images.githubusercontent.com/23094588/192098519-1c697d7b-c4af-469b-9b4b-32b574e3faed.png)
 
+Se ha creado nuestro proyecto:
 
+![image](https://user-images.githubusercontent.com/23094588/192098645-43bb3c3c-44a1-45eb-8916-2adc9c8b9dbf.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-Vamos a crear un nuevo proyecto *Java Project* de nombre `101-01-HolaMundo`, debemos seleccionar sobre que versión de Java se creara dicho proyecto y Finish.
-
-![03-01](images/03-01.png)
 
 Dentro del proyecto vamos a crear una nueva clase.
 
+![image](https://user-images.githubusercontent.com/23094588/192098738-c213a9aa-5fa5-4a1d-86c4-a9c0da093893.png)
 
-![03-02](images/03-02.png)
+![image](https://user-images.githubusercontent.com/23094588/192098773-ef6c3a59-d02f-4c9f-bbcc-c97bf4aae89c.png)
+
+![image](https://user-images.githubusercontent.com/23094588/192098834-2ee3aebd-68d9-4a4c-aca4-e1480b20eba2.png)
+
+![image](https://user-images.githubusercontent.com/23094588/192098919-a6b8db2c-3ece-4686-96c7-25f3317feb77.png)
+
+
+Dentro del método **`main`** vamos a mandar escribir en mensaje **`!Hola Mundo!`**
 
 *HolaMundo.java*
 
@@ -371,7 +371,7 @@ Dentro del proyecto vamos a crear una nueva clase.
 /**
  * 
  */
-package holamundo;
+package javaocio;
 
 /**
  * @author adolfodelarosa
@@ -379,23 +379,28 @@ package holamundo;
  */
 public class HolaMundo {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hola Mundo!!!");
-
-	}
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+      // TODO Auto-generated method stub
+      System.out.println("¡Hola Mundo!");
+   
+   }
 
 }
 ```
 
-Si ejecutamos el programa tenemos.
+Si ejecutamos el programa tenemos con:
 
-![03-03](images/03-03.png)
+![image](https://user-images.githubusercontent.com/23094588/192099569-62c8d781-d851-4192-ac68-a4dd4b38a48b.png)
 
-El resultado aparece en la consola.
+Veremos la salida en la consola.
+
+![image](https://user-images.githubusercontent.com/23094588/192099590-9003caaa-af1e-4986-a815-870b2b270a0a.png)
+
+![image](https://user-images.githubusercontent.com/23094588/192099617-2bbb2244-ef01-4989-9781-e5a746461be8.png)
+
 
 # 04 Algunos elementos de sintaxis 13:01 
 
