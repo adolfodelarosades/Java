@@ -30,7 +30,7 @@ Serie de varios cursos Java.
 * [150 Curso de Introducción a Thymeleaf](https://github.com/adolfodelarosades/Java/blob/master/temarios/150_Curso_de_Introduccion_a_Thymeleaf.md)
 * [151 Curso de Thymeleaf intermedio](https://github.com/adolfodelarosades/Java/blob/master/temarios/151_Curso_de_Thymeleaf_intermedio.md)
 
-* [201 Curso de Introducción a pruebas automáticas con JUnit 5](https://github.com/adolfodelarosades/Java/blob/master/temarios/201_Curso_de_Introduccion_a_pruebas_automaticas_con_JUnit_5.md)
+* [170 Curso de Introducción a pruebas automáticas con JUnit 5](https://github.com/adolfodelarosades/Java/blob/master/temarios/170_Curso_de_Introduccion_a_pruebas_automaticas_con_JUnit_5.md)
 
 # AEPI
 
