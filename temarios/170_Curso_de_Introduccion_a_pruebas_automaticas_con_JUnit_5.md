@@ -6,7 +6,7 @@ Iníciate en la automatización de pruebas con este curso, con el que aprenderá
 
 ## Instructor 
 
-Jesús del Castillo López
+Jesús.
 
 EXPERTO EN SELENIUM
 
