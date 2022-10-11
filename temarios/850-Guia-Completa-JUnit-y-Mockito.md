@@ -70,3 +70,190 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 * Desarolladores que manejan **Spring Boot** y necesitas aprender **JUnit5** y **Mockito** para ***servicios RESTful***
 * Personas que necesitan aprender pruebas unitarias desde cero sin **Spring Boot**
 * Personas que necesitan aprender pruebas unitarias con **Spring Boot**
+
+## Contenido del curso
+
+9 secciones • 103 clases • 15 h 14 m de duración total
+
+### 1. Introducción
+
+* Introducción al curso 06:05
+* Instalación JDK (opcional) 13:40
+* Instalación IntelliJ IDEA 04:39
+
+### 2. JUnit5
+
+* Introducción pruebas unitarias 09:14
+* Introducción 10:31
+* Actualización creando proyecto Maven en Intellij 01:31
+* Creando y configurando el proyecto con JUnit 5 08:48
+* Escribiendo y ejecutando primeras pruebas unitarias con Assertions 17:19
+* Escribiendo test para el saldo 11:44
+* Test driven development TDD con JUnit 10:13
+* TDD para debito y crédito 11:12
+* Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
+* Añadiendo la clase Banco y la realcion con las cuentas 09:55
+* Probando y afirmando las realaciones entre Banco y Cuenta 08:01
+* Usando el método **`assertAll`** 07:10
+* Agregando mensajes de falla en los métodos **`assertions`** 07:29
+* Usando anotaciones **`@DisplayName`** y **`@Disabled`** 08:02
+* Ciclo de vida anotaciones **`@AfterEach`** y **`@BeforeEach`** 11:12
+* Ciclo de vida anotaciones **`@AfterAll`** y **`@BeforeAll`** 07:25
+* Test condicionales **`@EnabledOnOs`**, **`@EnabledOnJre`**, **`@EnabledIfSystemProperty`** etc. 18:13
+* Ejecuciones de test condicionales con **`@EnabledIfEnvironmentVariable`** 08:45
+* Ejecución de test condicional con **`Assumptions`** programáticamente 10:17
+* Clases de test anidadas usando **`@Nested`** 11:03
+* Repitiendo pruebas con **`@RepeatedTest`** 08:36
+* Escribiendo pruebas parametrizadas con **`@ParameterizedTest`** 10:50
+* Pruebas parametrizadas con **`@ParameterizedTest`** parte 2 08:03
+* Pruebas parametrizadas con **`@ParameterizedTest`** parte 3 11:15
+* Tagging tests con anotación **`@Tag`** 06:47
+* Inyección de Dependencia & componentes **`testInfo`** y **`TestReporter`** 12:38
+* **`Timeout`** en JUnit 5 09:06
+* Maven surefire plugin 09:50
+* Descargar Código Fuente 00:03
+
+
+Vista previa
+08:42
+Actualización creando proyecto Maven en Intellij IDEA [Recordando]
+00:10
+Creando y configurando el proyecto con JUnit 5 y Mockito
+09:41
+Implementando la clase Service
+08:37
+Realizando primeras pruebas con mockito
+15:22
+Agregando nuevas dependencias mock
+11:09
+Probando nuevas dependencias mock
+11:43
+Probando con verify
+09:07
+Inyección de dependencia y anotaciones @Mock, @InjectMocks y @ExtendWith
+06:17
+Realizando más pruebas del repositorio con el metodo guardar
+11:37
+Test del id incremental en el método guardar usando Invocation Argument
+07:38
+Comprobaciones de excepciones usando when y thenThrow
+10:44
+Argument matchers
+08:59
+Argument matchers parte 2
+07:10
+Capturando argumentos de método con Argument capture
+05:39
+Usando doThrow para comprobar excepciones en métodos void
+06:04
+Usando doAnswer
+10:15
+Usando doCallRealMethod para la llamada real a un método mock
+11:51
+Implementando espías con Spy y doReturn
+19:50
+Verificando el orden de las invocaciones de los mock
+06:15
+Verificando el número de invocaciones de los mock
+10:36
+Descargar Código Fuente
+00:03
+Introducción y creando el proyecto Spring
+11:52
+Creando las clases del modelo
+10:31
+Creando los repositorios
+05:34
+Implementando la clase de servicio (Service)
+06:15
+Escribiendo nuestros tests con JUnit y mockito
+11:40
+Test verify
+05:31
+Escribiendo tests assertThrow para afirmar que la excepción lanzada sea correcta
+12:21
+Escribiendo tests con assertSame
+05:41
+Uso de anotaciones de spring @MockBean y @Autowired
+04:46
+Introducción a la inyección de dependencia en Spring (Opcional)
+10:09
+Deshabilitando la traza del logs de Spring en el contexto test
+04:10
+Descargar Código Fuente
+00:03
+Configurando el contexto de persistencia JPA y clases entities para test
+16:00
+Introducción a Repositories en Spring Data JPA (Opcional)
+06:16
+Modificando nuestros repositorios con Spring Data JPA
+11:22
+Modificando nuestros repositorios con Spring Data JPA parte 2
+06:36
+Escribiendo pruebas de integración con @DataJpaTest
+13:27
+Escribiendo pruebas para el save
+06:28
+Escribiendo pruebas para el update y el delete
+10:33
+Descargar Código Fuente
+00:03
+Creando controller
+09:51
+Creando controller parte 2
+11:52
+Configurando Swagger
+09:50
+Probando los endpoints con Swagger UI
+08:15
+Escribiendo pruebas unitarias para el controlador con @WebMvcTest y MockMvc
+14:11
+Escribiendo pruebas para el controlador parte 2
+10:48
+Ejecutando tests con Cobertura de código (Code Coverage)
+09:21
+Escribiendo más pruebas con MockMvc para el listar
+14:11
+Escribiendo más pruebas con MockMvc para el guardar
+10:29
+Escribiendo más pruebas para el Service en el método findAll()
+05:42
+Escribiendo más pruebas para el Service en el método save()
+06:00
+Descargar Código Fuente
+00:03
+Configuración y escribiendo las primeras pruebas de integración con WebClient
+22:40
+Escribiendo las primeras pruebas de integración parte 2
+11:51
+Escribiendo test de integración para el detalle
+11:57
+Escribiendo test de integración para el listar
+12:33
+Escribiendo test de integración para el guardar
+11:17
+Escribiendo test de integración para el eliminar
+09:26
+Escribiendo test de integración para el eliminar parte 2
+05:06
+Descargar Código Fuente
+00:03
+Configuración y escribiendo primeras pruebas de integración con TestRestTemplate
+13:46
+Escribiendo primeras pruebas de integración parte 2
+06:14
+Escribiendo test de integración para el detalle
+05:07
+Escribiendo test de integración para el listar
+07:37
+Escribiendo test de integración para el guardar
+03:52
+Escribiendo test de integración para el eliminar
+09:03
+Corriendo todos los tests
+12:22
+Descargar Código Fuente
+00:03
+Despedida del curso y agradecimientos
+02:12
+
