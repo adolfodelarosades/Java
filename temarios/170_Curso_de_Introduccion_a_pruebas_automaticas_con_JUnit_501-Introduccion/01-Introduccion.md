@@ -81,6 +81,16 @@ Debemos encontrar un equilibrio en cuanto al trabajo que invertimos, el esfuerzo
 Concluyendo aquí esta sección, a continuación, en la siguiente sección, vamos a hablar de la pirámide del testing, que no es solo relacionadas con el tema de automatización sino a la importancia o en donde encontramos el grueso de pruebas, a la hora de realizarla el testing de una aplicación.
 
 ## Pirámide del testing y JUnit 9:10 
+
+![image](https://user-images.githubusercontent.com/23094588/195127106-65167dec-f287-4eaf-a21a-444ede01e1f7.png)
+
+![image](https://user-images.githubusercontent.com/23094588/195127286-cdfd2906-1d87-4728-b546-8a556741902f.png)
+
+![image](https://user-images.githubusercontent.com/23094588/195127400-45fd2c6b-b7cf-4a06-8c14-571c3f7651fa.png)
+
+
+
+
 ## Contenido adicional 3
 
 
