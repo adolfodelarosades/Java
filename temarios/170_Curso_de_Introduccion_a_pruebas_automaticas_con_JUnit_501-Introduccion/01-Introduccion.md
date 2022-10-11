@@ -43,8 +43,23 @@ Si queremos agrupar una batería de pruebas ver como podemos hacer una seleccion
 
 ![image](https://user-images.githubusercontent.com/23094588/195107038-08f51c1e-adaa-4186-a46a-c14d0063833f.png)
 
+Estos son los objetivos que tenemos al finalizar el curso.
+
+Siempre que saquemos una nueva versión de nuestra aplicación debemos ser capaces de actualizar la batería de pruebas que siempre vamos a estar ejecutando.
+
+Diseñar una batería de pruebas para ser ejecutada en cada uno de esos planes de regresión que tengamos, cada nueva versión de la aplicación que obtengamos seremos capaces de prepar una batería de pruebas a corde a dicha versión.
+
 
 ## ¿Qué es el testing y por qué debemos hacerlo? 6:52 
+
+![image](https://user-images.githubusercontent.com/23094588/195109013-d332962e-109f-4159-b816-94a50a5e63d3.png)
+
+
+![image](https://user-images.githubusercontent.com/23094588/195109098-e6733f6a-c82f-4d29-85a4-0aa17c261ec5.png)
+
+
+![image](https://user-images.githubusercontent.com/23094588/195109184-817bc5de-0180-4d20-83e3-30c751acd2c3.png)
+
 ## Pirámide del testing y JUnit 9:10 
 ## Contenido adicional 3
 
