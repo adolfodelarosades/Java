@@ -101,15 +101,15 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 * Ciclo de vida anotaciones **`@AfterAll`** y **`@BeforeAll`** 07:25
 * Test condicionales **`@EnabledOnOs`**, **`@EnabledOnJre`**, **`@EnabledIfSystemProperty`** etc. 18:13
 * Ejecuciones de test condicionales con **`@EnabledIfEnvironmentVariable`** 08:45
-* Ejecución de test condicional con **`Assumptions`** programáticamente 10:17
+* Ejecución de test condicional con Assumptions programáticamente 10:17
 * Clases de test anidadas usando **`@Nested`** 11:03
 * Repitiendo pruebas con **`@RepeatedTest`** 08:36
 * Escribiendo pruebas parametrizadas con **`@ParameterizedTest`** 10:50
 * Pruebas parametrizadas con **`@ParameterizedTest`** parte 2 08:03
 * Pruebas parametrizadas con **`@ParameterizedTest`** parte 3 11:15
 * Tagging tests con anotación **`@Tag`** 06:47
-* Inyección de Dependencia & componentes **`testInfo`** y **`TestReporter`** 12:38
-* **`Timeout`** en JUnit 5 09:06
+* Inyección de Dependencia & componentes **testInfo** y **TestReporter** 12:38
+* **Timeout** en JUnit 5 09:06
 * Maven surefire plugin 09:50
 * Descargar Código Fuente 00:03
 
