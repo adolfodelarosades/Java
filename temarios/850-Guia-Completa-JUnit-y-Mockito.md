@@ -118,24 +118,24 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 * Introducción a Mockito 08:42
 * Actualización creando proyecto Maven en Intellij IDEA [Recordando] 00:10
 * Creando y configurando el proyecto con JUnit 5 y Mockito 09:41
-* Implementando la clase Service 08:37
+* Implementando la clase **`Service`** 08:37
 * Realizando primeras pruebas con mockito 15:22
-* Agregando nuevas dependencias mock 11:09
-* Probando nuevas dependencias mock 11:43
-* Probando con verify 09:07
+* Agregando nuevas dependencias **`mock`** 11:09
+* Probando nuevas dependencias **`mock`** 11:43
+* Probando con **`verify`** 09:07
 * Inyección de dependencia y anotaciones **`@Mock`**, **`@InjectMocks`** y **`@ExtendWith`** 06:17
-* Realizando más pruebas del repositorio con el metodo guardar 11:37
-* Test del id incremental en el método guardar usando **Invocation Argument** 07:38
-* Comprobaciones de excepciones usando **when** y **thenThrow** 10:44
-* Argument matchers 08:59
-* Argument matchers parte 2 07:10
-* Capturando argumentos de método con **Argument capture** 05:39
+* Realizando más pruebas del repositorio con el metodo **`guardar`** 11:37
+* Test del **`id`** incremental en el método **`guardar`** usando **`Invocation Argument`** 07:38
+* Comprobaciones de excepciones usando **`when`** y **`thenThrow`** 10:44
+* **`Argument matchers`** 08:59
+* **`Argument matchers`** parte 2 07:10
+* Capturando argumentos de método con **`Argument capture`** 05:39
 * Usando **`doThrow`** para comprobar excepciones en métodos **`void`** 06:04
 * Usando **`doAnswer`** 10:15
 * Usando **`doCallRealMethod`** para la llamada real a un método **`mock`** 11:51
-* Implementando espías con **Spy** y **`doReturn`** 19:50
-* Verificando el orden de las invocaciones de los mock 06:15
-* Verificando el número de invocaciones de los mock 10:36
+* Implementando espías con **`Spy`** y **`doReturn`** 19:50
+* Verificando el orden de las invocaciones de los **`mock`** 06:15
+* Verificando el número de invocaciones de los **`mock`** 10:36
 * Descargar Código Fuente 00:03
 
 ### 4. Spring Boot: Test de Servicios (Mockito) - 12 clases • 1 h 29 min
@@ -145,10 +145,10 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 * Creando los repositorios 05:34
 * Implementando la clase de servicio (Service) 06:15
 * Escribiendo nuestros tests con JUnit y mockito 11:40
-* Test verify 05:31
-* Escribiendo tests assertThrow para afirmar que la excepción lanzada sea correcta 12:21
-* Escribiendo tests con assertSame 05:41
-* Uso de anotaciones de spring @MockBean y @Autowired 04:46
+* Test **`verify`** 05:31
+* Escribiendo tests **`assertThrow`** para afirmar que la excepción lanzada sea correcta 12:21
+* Escribiendo tests con **`assertSame`** 05:41
+* Uso de anotaciones de spring **`@MockBean`** y **`@Autowired`** 04:46
 * Introducción a la inyección de dependencia en Spring (Opcional) 10:09
 * Deshabilitando la traza del logs de Spring en el contexto test 04:10
 * Descargar Código Fuente 00:03
@@ -159,9 +159,9 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 * Introducción a Repositories en Spring Data JPA (Opcional) 06:16
 * Modificando nuestros repositorios con Spring Data JPA 11:22
 * Modificando nuestros repositorios con Spring Data JPA parte 2 06:36
-* Escribiendo pruebas de integración con @DataJpaTest 13:27
-* Escribiendo pruebas para el save 06:28
-* Escribiendo pruebas para el update y el delete 10:33
+* Escribiendo pruebas de integración con **`@DataJpaTest`** 13:27
+* Escribiendo pruebas para el **`save`** 06:28
+* Escribiendo pruebas para el **`update`** y el **`delete`** 10:33
 * Descargar Código Fuente 00:03
 
 ### 6. Spring Boot: Test de Controladores con MockMvc (WebMvcTest) - 12 clases • 1 h 51 min
@@ -170,13 +170,13 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 * Creando controller parte 2 11:52
 * Configurando Swagger 09:50
 * Probando los endpoints con Swagger UI 08:15
-* Escribiendo pruebas unitarias para el controlador con @WebMvcTest y MockMvc 14:11
+* Escribiendo pruebas unitarias para el controlador con **`@WebMvcTest`** y **`MockMvc`** 14:11
 * Escribiendo pruebas para el controlador parte 2 10:48
 * Ejecutando tests con Cobertura de código (Code Coverage) 09:21
-*  Escribiendo más pruebas con MockMvc para el listar 14:11
+* Escribiendo más pruebas con MockMvc para el listar 14:11
 * Escribiendo más pruebas con MockMvc para el guardar 10:29
-* Escribiendo más pruebas para el Service en el método findAll() 05:42
-* Escribiendo más pruebas para el Service en el método save() 06:00
+* Escribiendo más pruebas para el Service en el método **`findAll()`** 05:42
+* Escribiendo más pruebas para el Service en el método **`save()`** 06:00
 * Descargar Código Fuente 00:03
 
 ### 7. Spring Boot: Test de integración de Servicios Rest con WebTestClient - 8 clases • 1 h 25 min
