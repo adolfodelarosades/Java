@@ -75,13 +75,13 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 
 9 secciones • 103 clases • 15 h 14 m de duración total
 
-### 1. Introducción - 3 clases • 24 min
+### [1. Introducción - 3 clases • 24 min](https://github.com/adolfodelarosades/Java/blob/master/temarios/850-Guia-Completa-JUnit-y-Mockito/01-Introduccion.md)
 
 * Introducción al curso 06:05
 * Instalación JDK (opcional) 13:40
 * Instalación IntelliJ IDEA 04:39
 
-### 2. JUnit5 - 29 clases • 4 h 37 min
+### [2. JUnit5 - 29 clases • 4 h 37 min](https://github.com/adolfodelarosades/Java/blob/master/temarios/850-Guia-Completa-JUnit-y-Mockito/02-JUnit.md)
 
 * Introducción pruebas unitarias 09:14
 * Introducción 10:31
