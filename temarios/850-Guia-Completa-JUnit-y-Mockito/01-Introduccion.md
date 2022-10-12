@@ -309,6 +309,41 @@ Recuerden el JDK es el Kit de Desarrollo de Java incluye todas las librerías y 
 El JRE es el Runtime para ejecutar nuestras aplicaciones en Java, en la máquina virtual de Java.
 
 
+#### Configurando las Variables de Entorno PATH y JAVA_HOME en mi Portatil Mac
+
+Hemos histalado el JDK 17 en el portatil como se puede ver en la siguiente imagen.
+
+<img width="897" alt="image" src="https://user-images.githubusercontent.com/23094588/195443723-73b038f6-90e7-4a2f-9919-c10230e7b8d1.png">
+
+Podemos ver el valor actual de las variables de entorno **`PATH`** y **`JAVA_HOME`**.
+
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/23094588/195444120-7c6df1f2-3ab4-4a39-84a9-c3873fc54a95.png">
+
+Podemos observar que la variable de entorno **`PATH`** existe y podemos ver su valor, sin embargo la variable **`JAVA_HOME`** ni si quiera existe.
+
+Vamos a proceder a seguir los pasos explicados anteriormente.
+
+Vamos a definir las variables de entorno a nivel de usuario por lo que vamos a usar el comando **`vim .bash_profile`**
+
+<img width="973" alt="image" src="https://user-images.githubusercontent.com/23094588/195445223-d0465f8a-d536-43d0-ade2-77e77b2a92f4.png">
+
+Nos aparece el editor **vim** con el archivo vacio, vamos a incluir las dos variables de entorno, debemos pulsar **`i`** para ponernos en modo de Insersión.
+
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/23094588/195447225-e8eb6b9a-c609-4fa9-a57e-0c78001fdd3c.png">
+
+Una vez añadidas las variables de entorno pulsamos **`ESC`** para salir del modo de Insersión y pulsamos **`:wq`** para salvar el archivo.
+
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/195448354-969d3c94-96ff-488c-b76b-8095ccb93809.png">
+
+Nos regresa a la consola ahora vamos a pulsar el comando **`source ~/.bash_profile`**.
+
+<img width="968" alt="image" src="https://user-images.githubusercontent.com/23094588/195448786-f1a6f707-aac6-4e90-95e4-1443d22285ab.png">
+
+Finalmente vamos a verificar el valor de las variables de entorno.
+
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/195449101-66028919-67c4-4d77-8f5c-9ae7012f47e1.png">
+
+
 ## Instalación IntelliJ IDEA 04:39
 
 Bien, continuamos con el ÍDE, nuestro entorno de desarrollo integrado para desarrollar, para crear
