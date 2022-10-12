@@ -79,53 +79,75 @@ También vamos a ver todo lo que es ***prueba de integración***, por ejemplo, p
 
 ## Instalación JDK (opcional) 13:40
 
-Bienvenidos.
+Continuamos con la descarga de la instalación del **JDK**, el JDK es el kit de desarrollo para Java, contiene todas las clases y librerías para poder escribir y desarrollar nuestras aplicaciones en **Java**.
 
-Continuamos con la descarga de la instalación del JDK, el JDK es el kit de desarrollo para Aullaban,
+Vamos a ir a la página [https://www.oracle.com/java/](https://www.oracle.com/java/) 
 
-contiene todas las clases y librerías para poder escribir y desarrollar nuestras aplicaciones en Yaba.
+![image](https://user-images.githubusercontent.com/23094588/195322014-2ea2faf6-0df3-40dd-84c6-0506322ef176.png)
 
-Entonces vamos a buscar por JDK y hacemos clic en cualquiera.
+Si damos en el botón Download Java vemos:
 
-Pero hay un detalle importante.
+![image](https://user-images.githubusercontent.com/23094588/195322517-b863d534-d369-4dcb-becd-32492d8ab331.png)
 
-Por ejemplo, si seleccionamos esta de acá, hacemos un clic, aparece una página más antigua, incluso
+Actualmente la versión más reciente de Java es la 19 la última disponible hasta el momento, como nueva política de Oracle va sacando versiones cada seis meses, en seis meses más la versión va a ser la 20, pero hasta el momento es la 19.
 
-tiene la versión 8 y hasta el momento de grabar este video, la última versión es la 14.
+Pero todas las aplicaciones que vamos a ver en el curso van a funcionar con la versión 19 en adelante, sin ningún problema. Es compatible con versiones posteriores, incluso también pueden usar versiones anteriores, por ejemplo la 12, la 11 y ningún problema.
 
-Entonces, bueno, nos vamos a horeca el puntocom.
+Actualmente las últimas versiones es decir, desde la 10 en adelante solamente se ejecutan y se pueden instalar máquinas de 64 bits.
 
-Quitamos todo esto ya.
+Pero ¿qué pasa si tengo un equipo en 32 bits?, en vez de utilizar la 14 tienen que descargar y configurar la 8.
 
-Entonces esta sería la página principal de Yaba en Oracle Oracle E.com: Llaba Enter y así que si en
+Para descargar el JDK de Java vamos a los enlaces de descarga según versión y sistema operativo que corresponda.
 
-la página actualizada actual de Yaba y en inglés la versión 14, la última disponible hasta el momento
+![image](https://user-images.githubusercontent.com/23094588/195324715-71fe3367-bf54-4061-bb8c-04da6759f1f9.png)
 
-de grabar este video.
+Si observamos el siguiente parrafo en la Web vemos que la versión más reciente es la 19 pero la LST es la 17, siempre será mejor instalar una versión LST ya que tiene más soporte a mediano plazo.
 
-Pero bueno, como nueva política de Oracle va sacando versiones cada seis meses en seis meses más la
+![image](https://user-images.githubusercontent.com/23094588/195328717-5d375923-e20e-41bc-99a1-2a770b644dc9.png)
 
-versión va a ser la 15, pues las 16 y así, pero hasta el momento es la 14.
+> **Nota**: Si deseamos desinstalar Java consultar el siguiente [enlace](https://www.javaprogramto.com/2021/11/uninstall-java-mac.html)
 
-Pero no se preocupen porque todas nuestras aplicaciones que vamos a ver en el curso va a funcionar desde
+Por lo que vamos a la zona de descargas de JDK 17 y al sistema correspondiente.
 
-la versión 14 en adelante, sin ningún problema.
+![image](https://user-images.githubusercontent.com/23094588/195331603-322a8195-3d1c-4970-8ccd-1e873b5f1eae.png)
 
-Es compatible con versiones posteriores, incluso también pueden usar versiones anteriores, por ejemplo
+Podemos observar dos versiones **Arm 64** y **x64** en el caso de la Mac si tienes el Chip M1 tendras que descargar la versión **Arm 64**. Además puedes descargar un archivo comprimido **`.gz`** o un **`.dmg`** que siempre es más comodo de instalar.
 
-las 12, la 11 y ningún problema.
+Después de todo lo anterior me descargo la versión:
 
-Actualmente las últimas versiones.
+![image](https://user-images.githubusercontent.com/23094588/195332731-399d1a45-cf72-4b30-a51a-a4fea73562e7.png)
 
-Es decir, desde las 10 en adelante.
+También podemos descargar la documentación asociada a esa versión la cual esta empaquetada en un archivo **`zip`**.
 
-Por lo tanto, la 14 solamente se ejecutan y se pueden instalar máquinas de 64 bits.
+Pero, hay otra cosa que debemos considerar tenemos dos tipos de versiones el **JDK** o el **OpenJDK**. 
 
-Pero qué pasa si tengo un equipo en 32 bits?
+La versión **JDK** es para Clientes de Oracle e ISV que apuntan a versiones de Oracle LTS. Oracle JDK es la versión Java SE compatible de Oracle para clientes y para desarrollar y probar aplicaciones Java
 
-Bueno, igual pueden hacer el curso, pero en vez de utilizar la 14 tienen que descargar y configurar
+La versión **OpenJDK** es para Usuarios finales y desarrolladores que buscan versiones gratuitas de JDK: Oracle OpenJDK ofrece las mismas funciones y rendimiento que Oracle JDK bajo la licencia GPL.
 
-la 8.
+En la página de descargas tenemos el botón **OpenJDK Early Access Builds**.
+
+![image](https://user-images.githubusercontent.com/23094588/195334009-a10e264d-33ee-4115-a1b5-aa57f2f60a44.png)
+
+Que al pulsarlo tenemos.
+
+![image](https://user-images.githubusercontent.com/23094588/195334171-aee17a2d-914d-460a-ad6d-9f6ba557c4f0.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Bueno, por ejemplo, vámonos acá hacemos un clic en gratis o descargar gratis.
 
