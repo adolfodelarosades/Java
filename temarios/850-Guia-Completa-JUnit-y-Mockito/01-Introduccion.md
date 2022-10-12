@@ -158,6 +158,81 @@ Sin embargo si colocamos nuestra aplicación en producción, para un tema comerc
 Mientras que si utilizamos **Open JDK** para producción lo podemos hacer sin casi ningún problema, sin pagar licencia total es Open Source JDK, no hay licencia, pero el problema es que no trae parches de seguridad para producción, no trae nuevas actualizaciones. Es un tema importante a toman en cuenta.
 
 
+### Instalando Java en Windows
+
+En el caso de Windows descargamos el archivo **`zip`**.
+
+IMAGEN
+
+Una vez que se descarga vamos a configurarlo, para el curso vamos a ocupar un directorio, por ejemplo en mi caso **`C:\Cursos\Java`**. Lo importante es que sea lo más simple posible, que no tenga caracteres especiales, que no tenga espacios en blanco, ni acentos, ni eñes, ningún carácter especial, solamente alfanumérico y todo juntos sin espacios, es muy importante porque después podríamos tener muchos errores y problemas cuando queramos ejecutar nuestras aplicaciones.
+
+Dentro de esta carpeta hemos colocado el archivo descargado, lo copiamos de descargas, lo pegan y lo descomprime utilizando cualquier herramienta, en mi caso **7-zip**. Una vez que se descomprime está el directorio **`jdk-14.0.1`**.
+
+IMAGEN
+
+Dentro tenemos la carpeta más importante **`bin`**, que contiene todos los ejecutables. Esto es lo que se tienen que configurar en nuestro sistema operativo.
+
+Entonces vamos a copiar la ruta **`C:\Cursos\Javajdk-14.0.1\bin`**. 
+
+En el caso que hayamos intalado la versión Instaler de Windos Java se ha instalado en **`C:\Archivos de Programas\Java\Javajdk-14.0.1\bin`** y este caso esta es la ruta que copiamos.
+
+#### Configurando las Variables de Entorno PATH y JAVA_HOME
+
+Entonces, tanto para Open JDK comprimido como para la versión de Oracle de Java, hay que configurar la variable ambiente, nos vamos a buscar en el sistema operativo. En el buscador colocan *variables* o *variables de entorno* o de *ambiente* y damos click, se abre esta ventana.
+
+IMAGEN
+
+Nos vamos en ***opciones avanzadas - variable entorno***.
+
+IMAGEN
+
+Y tenemos dos tipos de variables del usuario y del sistema, del sistema operativo de forma global. Lo vamos a configurar solamente para el ***usuario***, pero también lo pueden hacer para el ***sistema***, no hay ningún problema.
+
+Nos vamos a **PATH**.
+
+IMAGEN
+
+y con ***Doble clic*** o ***Editar*** nos aparece una nueva ventana
+
+IMAGEN
+
+Y con ***Doble clic*** o ***Nuevo*** pegamos la ruta, incluyendo el **`bin`** que contiene los ejecutables.
+
+IMAGEN
+
+Bien, y eso sería todo.
+
+Ahora, otro detalle importante, puede que tengan instalado una versión del JDK o del JRE que sea más antigua y puede que esté configurado en el **`PATH`**, entonces lo que tienen que hacer es eliminar cualquier versión de Java anterior y dejar la que hemos copiado. También revisamos si existe alguna versión anterior en las ***Variables del Sistema*** para eliminarla. Siempre una porque si no, si tenemos la 14 y la 1.8, por supuesto que vamos a tener conflicto.
+
+Damos en el botón ***Aceptar***.
+
+Lo siguiente es configurar la variable de entorno **`JAVA_HOME`** también en cualquiera de las dos Variables de Entorno la del Usuario o la del Sistea. Como nosotros estamos trabajando con las Variables de Entorno del Usuario lo vamos hacer aquí, pulsamos en el botón ***Nuevo***.
+
+IMAGEN
+
+Ponemos el ***Nombre*** y ***Valor*** de la variable, observe como la ruta que pegamos en ***Valor*** no lleva **`\bin`** el valor será **`C:\Cursos\Javajdk-14.0.1`**
+
+IMAGEN
+
+damos en el botón **Aceptar**.
+
+IMAGEN
+
+Ya tenemos la variable **`JAVA_HOME`**. Presionamos el botón **Aceptar** en nuestras ventanas.
+
+Vamos a la terminal a probar, por ejemplo a la **PowerSchell** o al **CMD**.
+
+Ejecuta el comando **`java -version`** o **`java --version`**.
+
+IMAGEN
+
+Si aparece la última versión, la 14 es porque quedó bien configurado en el **`PATH`**.
+
+También podemos probar el compilador Java con **`javac -version`**.
+
+IMAGEN
+
+
 ### Instalar JDK 17 DMG en Mac
 
 Voy a instalar la versión JDK 17 con el archivo **`.dmg`** que es una forma más sencilla.
@@ -182,181 +257,19 @@ Si abrimos consola y escribimos el comando **`java -version`** nos muestra la ve
 
 <img width="572" alt="image" src="https://user-images.githubusercontent.com/23094588/195357476-b0844106-6326-4556-8ebd-a5ec27e1c431.png">
 
-### Instalando Java en Windows
+#### Configurando las Variables de Entorno PATH y JAVA_HOME en Linux y Mac
 
-En el caso de Windows descargamos el archivo **`zip`**.
+Veamos ahora cómo configurar las Variables de Entorno en Linux y Mac.
 
+IMAGEN LINUX
 
+En el caso de Linux también es muy simple, vamos al archivo **`profile`** o **`environment`**, que son los archivos globales para configurar variables de ambiente o usar el archivo **`bashrc`** solamente para el usuario.
 
+Entonces, dependiendo de donde lo queramos hacer con un editor editamos alguno de los tres archivos anteriores y añadimos las dos variables de entorno como se muestra en la imagen.
 
 
 
-
-y por defecto me muestra la última versión en JDK de A Punto NET o en Open JDK.
-
-Pero si quiero ver las demás versiones, por ejemplo descargar la ONCE, me voy archivo acá o la ruta
-
-J de cada punto ya ASP.NET Larch Archivo y acá están todas las versiones.
-
-También la pueden descargar, pero como consejo para efector curso utilicen la última vez.
-
-Entonces vamos a descargar.
-
-En mi caso Windows hacen un clic.
-
-Comienza la descarga.
-
-Una que se carga.
-
-Lo vamos a configurar bien para el curso.
-
-Vamos a ocupar un directorio, por ejemplo en mi caso de dos punto cursos yaba, pero independiente
-
-el que utilicen.
-
-Lo importante es que sea lo más simple posible, que no tenga caracteres especiales, que no tenga espacio
-
-en blanco, ni acentos, ni eñes, ningún carácter especial, solamente alfanumérico y todo juntos tiene
-
-espacio.
-
-Es muy importante porque después podríamos tener muchos errores y problemas cuando queramos ejecutar
-
-nuestras aplicaciones.
-
-Acá tengo el Open JDK, lo copian de descarga, lo pegan acá y lo descomprime entonces utilizando cualquier
-
-herramienta.
-
-En mi caso 7 zip es traer acá.
-
-En el caso de Linux, de Making Touch, utilizan, por ejemplo, target zeta para comprimir mediante
-
-terminal.
-
-Acá está el directorio.
-
-El más importante, el fin que contiene todos los ejecutables por acá y eso es lo que tienen que configurar
-
-en nuestro sistema operativo.
-
-Entonces vamos a copiar esta ruta.
-
-La copian?
-
-Y otro tema importante en caso de que hayan instalado la versión instalar DJ de cambio, en el caso
-
-de Windows se instala en archivos de programas o program files en la carpeta YABA.
-
-Entonces se van a esa ruta directorio, entran al JDK y copian la ruta, incluyendo el VIM.
-
-Entonces, tanto para Open JDK comprimido como para la versión de Oracle de Java, hay que configurar
-
-la variable ambiente.
-
-Entonces nos vamos a buscar en el sistema operativo.
-
-En el buscador colocan variables variables o variables de entorno o de ambiente.
-
-Hacen un clic.
-
-Se abre esta ventana.
-
-Nos vamos en opciones avanzadas variable entorno.
-
-Perfecto.
-
-Y acá tenemos dos tipos del usuario y del sistema de sistema operativo de forma global.
-
-Lo vamos a configurar solamente para el usuario, pero también lo pueden hacer acá.
-
-No hay ningún problema.
-
-Nos vamos a Pat.
-
-Doble clic o editar.
-
-Y con doble clic o nuevo pegamos la ruta, incluyendo el pin que contiene los ejecutables.
-
-Bien, y eso sería todo.
-
-Ahora, otro detalle importante.
-
-Puede que tengan instalado una versión del JDK o del JRE que sea más antigua y puede que esté configurado
-
-en el PATH.
-
-Entonces lo que tienen que hacer es eliminar cualquier versión de Java que tengan, ya sea J.D, Cajo,
-
-Tarré o se dice por ahí Oracle.
-
-Ya Backpack o Yaba los seleccionan y eliminan.
-
-Dejan solamente la nueva instalación del JDK el 14.
-
-Nada más.
-
-Una sola.
-
-Aceptar y también revisan, por si acaso en variable el sistema, se van a paz y también revisan si
-
-tienen alguna otra instalación del JDK o J r, por ejemplo la 1 8, la 1 7 1 6.
-
-Alguna más antigua que diga, por ejemplo, alguna ruta con Oracle, con Java conlleva path o JRE,
-
-la seleccionan y la eliminan y listo.
-
-Siempre una porque si no, si tenemos la 14 y la 1 8, por supuesto que vamos a tener conflicto.
-
-Entonces una sola.
-
-Lo siguiente es configurar la variable de entorno ya bajón también en cualquiera de los dos en sistema
-
-o en el usuario nuevo en mayúscula.
-
-Ya bajó un todo mayúscula separado con que un bajo es una constante en YABA guión bajo jom todo mayúscula.
-
-Pegamos la ruta pero sin Elvin, quitamos el fin y quitamos el latch o diagonal.
-
-Dejamos solamente la ruta base JDK 14.
-
-La base aceptamos.
-
-Hoy la tenemos.
-
-Ya bajó.
-
-Perfecto.
-
-Aceptamos, aceptamos y vamos al terminal a probar, por ejemplo Empower Schell o en CMD o en el terminal
-
-de sistema operativo correspondiente en Linux Making Touch.
-
-Ejecuta el comando Yaba menos versión.
-
-Puedes ser menos versión o menos menos versión.
-
-Ya tenemos la 14.
-
-Si aparece la última versión, la 14 es porque quedó bien configurado en el Paz.
-
-Y también, como decía con Beno, menos versión también es lo mismo.
-
-También podemos probar ya va a compilar el compilador, ya va C, ya va C ya con Pilcher menos versión
-
-enter y también la 14A.
-
-Veamos ahora cómo configurar YABA en Linux y Mackintosh.
-
-Esta parte es opcional solamente para usuarios de Linux y Mackintosh.
-
-Explicar cómo se configura la variable path y ya bajó bien una vez que tengan instalado el JDK.
-
-En el caso de Linux también es muy simple se van al archivo profile o environment, que son los archivos
-
-globales para configurar variar el ambiente o solamente para el usuario batch.
-
-RC Entonces, por ejemplo, ya sea en profile o environment o en batch RC con algún editor, por ejemplo
+por ejemplo, ya sea en profile o environment o en batch RC con algún editor, por ejemplo
 
 con PY o con Pimm, agregan export de abajó y la ruta todo en mayúscula con guión bajo.
 
