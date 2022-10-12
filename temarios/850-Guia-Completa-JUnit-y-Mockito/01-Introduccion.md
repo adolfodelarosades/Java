@@ -43,8 +43,7 @@ Uso de etiquetas **`@Tag`** para categorizar, etiquetar nuestros métodos, nuest
 ***Independencia***, en fin y mucho más.
 
 
-
-
+![image](https://user-images.githubusercontent.com/23094588/195310958-3d4a7c6d-63f0-4bbb-a667-7a935ea9dfd7.png)
 
 tema que vamos a ver en foquito dependencias mock.
 
