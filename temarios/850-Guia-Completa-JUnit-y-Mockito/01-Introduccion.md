@@ -265,91 +265,48 @@ IMAGEN LINUX
 
 En el caso de Linux también es muy simple, vamos al archivo **`profile`** o **`environment`**, que son los archivos globales para configurar variables de ambiente o usar el archivo **`bashrc`** solamente para el usuario.
 
-Entonces, dependiendo de donde lo queramos hacer con un editor editamos alguno de los tres archivos anteriores y añadimos las dos variables de entorno como se muestra en la imagen.
+Entonces, dependiendo de si lo queremos hacer global o por usuario editamos el archivo correspondiente para añadir las dos variables de entorno como se muestra en la imagen, guardamos y cerramos el archivo.
 
+El siguiente paso es ejecutar el comando **`source ~/.bashrc`** o con el archivo editado.
 
+Y el ultimo paso es revisar los valores de las variables de entorno con los comandos:
 
-por ejemplo, ya sea en profile o environment o en batch RC con algún editor, por ejemplo
+```sh
+echo $PATH
+echo $JAVA_HOME
+```
 
-con PY o con Pimm, agregan export de abajó y la ruta todo en mayúscula con guión bajo.
+IMAGEN MAC OS X
 
-Igual la ruta luego es por Path y configuramos la variable del JDK en paz.
+Para el caso de **Mac OS X** es muy similar.
 
-Pero ya tenemos la ruta base ya bajó sino peso y ajó variable ambiente la estamos reutilizando.
+Se utiliza el archivo **`profile`** de forma global o **`bash_profile`** solamente para el usuario y 
+también con cualquier editor lo modificamos. Agregamos los **`export`** de las dos variables de entorno **`JAVA_HOME`** y **`PATH`** como se muestra en la imagen.
 
-Le agregamos le concatenados.
+Observemos que en **`export JAVA_HOME=$(/usr/libexec/java_home)`** donde **`/usr/libexec/java_home`** es la ubicación generica o base de Java en la Mac, incluso si lo instalamos con [Homebrew](https://brew.sh/index_es), si no colocamos la ruta que corresponda.
 
-El pin es el larch bin 2 punto si no peso path y con esto el 2.5 peso path.
+Una vez añadidas las dos variables de entorno en el archivo lo guardamos y cerramos.
 
-Agregamos o anexados toda la configuración que teníamos antes en el path, es decir, todas las demás
+El siguiente paso sería ejecutar el comando **`source ~/.bash_profile`** en caso de haber editado el archivo **`bash_profile`**.
 
-aplicaciones y rutas que teníamos configurada en path.
+Finalmente revisamos en el terminal los valores de las variables de entorno con los comandos:
 
-Perfecto.
+```sh
+echo $PATH
+echo $JA_VA_HOME
+```
 
-Guardamos, cerramos y ejecutamos en el terminal Source y el nombre del archivo su ubicación y revisamos
+Y para finalizar un tema importante que es solamente para la versión del JDK 8 no incluye el JRE. Por lo tanto tenemos que instalar el **JRE** para ejecutar las aplicaciones Java, lo tenemos que instalar de forma separada del JDK, mientras que en versiones posteriores la 11, la 12 hasta la 19, el JDK viene con el JRE todo junto, es decir, el JDK ya incluye el JRE. No se tiene que instalar a parte, de hecho no existe el JRE para instalar aparte en la versión 14, solo en la versión 8 e inferiores incluso eso lo podemos ver en la página.
 
-con eco.
+Si nos vamos a la pagina de Oracle y va a la 14 solamente existe el JDK porque ya incluye JRE, pero si bajamos a Java 8, donde tenemos JDK y JRE, ambos se descargan y se instalan de forma independiente.
 
-En el terminal Eco Path consigno peso variable.
+Pero esto solamente en caso de que tengan 32 bits y utilicen Java 8.
 
-El ambiente eco ya bajó con si no peso también la hora, el ambiente y debería mostrar la ruta y su
+IMAGEN DEL JAVA JDK uNico y JRE EN JAVA 8
 
-contenido.
+Recuerden el JDK es el Kit de Desarrollo de Java incluye todas las librerías y clases para desarrollar y escribir aplicaciones en Java.
 
-Para el caso Mackintosh es muy similar.
-
-Se utiliza el profile de forma global o batch profile para el usuario, solamente para el usuario y
-
-también con cualquier editor.
-
-Agregamos export ya ajó en mayúscula separÃ con guión bajo igual, sino peso, paréntesis y la ubicación.
-
-Esta es la ubicación genérica o base de Java es makin touch, por ejemplo si lo instalamos con Umbrío,
-
-pero si no coloca en la ruta que corresponda es Port Path igual reutilizando ya oum la variable ambiente
-
-sino peso y le agregamos el bit.
-
-La carpeta bin es el archivo bin 2 punto y anexados path toda la configuración que teníamos ante en
-
-área de paz.
-
-Todas las rutas y aplicaciones que teníamos.
-
-Guardamos ejecutamos en el terminal source el nombre del archivo y luego revisamos con eco pad, con
-
-eco y abajo.
-
-Y para finalizar un tema importante que es solamente para la versión del JDK 8 no incluye el JRE.
-
-Por lo tanto tenemos que instalar el J r el raiting que para ejecutar las aplicaciones hinchaban lo
-
-tenemos que instalar de forma separada del JDK, mientras que en versiones posteriores la once, las
-
-doce hasta la 14, el JDK con el J viene todo junto.
-
-Es decir, el JDK ya incluye el JRE.
-
-No se tiene que estar a la parte.
-
-De hecho no existe el JRE para instalar aparte en la versión 14, solo en la versión 8 y inferiores
-
-incluso eso lo podemos ver en la página.
-
-Si nos vamos a la pagina de Oracle ya va a 14 solamente JDK porque ya incluye JRE, pero si bajamos
-
-a 8 Java, 8 JDK y JRE, ambos se descargan y se instalan de forma independiente.
-
-Pero esto solamente en caso de que tengan 32 bits y utilicen Java 8 y recuerden el JDK es el.
-
-Kit desarrollo todas las librerías y clases para desarrollar y escribir aplicaciones en Java.
-
-El JRE es el RIETI para ejecutar nuestras aplicaciones en Java, en la máquina virtual de Java.
-
-Nada más.
-
-Nos vemos en la siguiente clase.
+El JRE es el Runtime para ejecutar nuestras aplicaciones en Java, en la máquina virtual de Java.
 
 
 ## Instalación IntelliJ IDEA 04:39
