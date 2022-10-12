@@ -18,7 +18,7 @@ Es recomendable tener conocimientos de POO, Java y sería deseable que tuviese e
 
 ## TEMARIO
 
-### INTRODUCCIÓN 20 M
+### [INTRODUCCIÓN](https://github.com/adolfodelarosades/Java/blob/master/temarios/170_Curso_de_Introduccion_a_pruebas_automaticas_con_JUnit_501-Introduccion/01-Introduccion.md) 20 M
 
 * Presentación 4 M
 * ¿Qué es el testing y por qué debemos hacerlo? 6 M
