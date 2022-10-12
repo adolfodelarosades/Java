@@ -12,53 +12,41 @@ Este curso está orientado a estudiantes que quieren aprender solamente **JUnit5
 
 Por lo tanto, vamos a ver dos grandes parte del curso partiendo desde la base, desde cero y después vamos a ver cómo se trabaja, como se integran también estas dos herramientas en **Spring Boots**.
 
-Bien, los componentes que vamos a ver son los siguientes por el lado de 
+![image](https://user-images.githubusercontent.com/23094588/195302668-c94ac9ec-215f-4fe4-b095-395d5f5b8456.png)
 
-Comenzando con un desarrollo guiado por pruebas unitarias que se le conoce como **TDD**, antes siquiera de haber comenzado a escribir el código, vamos a comenzar a realizar nuestra unitaria y a medida que vamos probando nuestro código que vamos escribiendo, vamos implementando los métodos, nuestro código, las clases y dando funcionalidad.
+Bien, los componentes que vamos a ver son los siguientes por el lado de **JUnit5**.  
 
-Vamos a ver todo lo que es hacer chón, la clase más importante de unit para las afirmaciones con diferentes tipos filmaciones por ejemplo hacer y cuales hacer thru hacer fols. Hacer nul. En fin, afirmar nuestro código.
+Comenzando con un ***desarrollo guiado por pruebas unitarias que se le conoce como TDD***, antes siquiera de haber comenzado a escribir el código, vamos a comenzar a realizar nuestras pruebas unitarias y a medida que vamos probando nuestro código que vamos escribiendo, vamos implementando los métodos, nuestro código, las clases y dando funcionalidad.
 
-Nuestras variables y objetos.
+Vamos a ver todo lo que es ***Assertions***, la clase más importante de **JUnit5** para las afirmaciones con diferentes tipos afirmaciones por ejemplo **`assertEquals`**, **`assertTrue`**, **`assertFalse`**, **`assertNull`** en fin, afirmar nuestro código, nuestras variables y objetos.
 
-Y también todo lo que manejo de errores con hacer 0u manejo excepciones.
+Y también todo lo el manejo de errores con **`assertThrows`**, manejo de excepciones. Afirmar, por ejemplo, que nuestro código lance una excepción esperada, validar que nuestro manejo de error sea el correcto.
 
-Afirmar, por ejemplo, que nuestro código lance una excepción esperada valida que nuestro manejo de
+**`assertAll`** ejecutar un grupo de ***Assertions*** de afirmaciones.
 
-error sea el correcto.
+***Anotaciones*** como ***`@DisplayName`*** y ***`@Disabled`***.
 
-Hacer o ejecutar un grupo de acecho de afirmaciones anotaciones como display NAICM Disable El ciclo
+El ***ciclo de vida de una clase*** de test de unit ***`@AfterEach`***, ***`@BeforeEach`***, ***`@AfterAll`*** y ***`@BeforeAll`***, lo vamos a ver en detalle en el curso.
 
-de vida de una clase de test de unit as perich for it after sol before ol.
+También tenemos los ***test condicionales*** utilizando anotaciones ***`@EnabledOnOs`***, ***`@EnabledOnJre`***, etc.
 
-En fin, que lo vamos a ver en detalle en el curso.
+También tenemos ***Assumptions***, que nos permite suponer que cierta condición se cumple, muy parecido a las anotaciones condicionales que tenemos arriba, pero esto es a nivel de código, un poco más programático.
 
-También tenemos los test condicionales utilizando anotaciones en Nabeel on o s?
+***Test anidados***, clases de tests que se anotan con **`@Nested`** para dar una jerarquía, una organización, una estructura a nuestras pruebas unitarias, utilizando clases anidadas que también se les conoce como ***Inner class***.
 
-Os de sistema operativo en Nabeel on jre.
+**`@RepeatedTest`** para crear ***tests repetidos***.
 
-De acuerdo a nuestra arzón brillaba infinitamente.
+También tenemos los ***tests parametrizados*** con la anotación **`@ParameterizedTest`**.
 
-Tenemos varias más.
+Uso de etiquetas **`@Tag`** para categorizar, etiquetar nuestros métodos, nuestras pruebas unitarias.
 
-También a Sanchos, que nos permite suponer que cierta condición se cumple muy parecido a las anotaciones
+***Independencia***, en fin y mucho más.
 
-condicionales que tenemos arriba.
 
-Pero esto es a nivel de código, un poco más programÃtico.
 
-Lo vamos a ver.
 
-Test anidadas, clases de tests que se marcan se anotan con nester para dar una jerarquía, una organización
 
-estructura a nuestras preguntarlas utilizando clases anidadas que también se le conoce como INDERT class.
-
-Repítete test para crear tests repetidos.
-
-También tenemos los tests Parametrizar con anotación, parametrizar test, uso de etiquetas tag para
-
-categorizar, etiquetar nuestros métodos, nuestras pruebas unitarias y independencia.
-
-En fin y mucho más tema que vamos a ver en foquito dependencias mock.
+tema que vamos a ver en foquito dependencias mock.
 
 Vamos a realizar un test a una clase.
 
