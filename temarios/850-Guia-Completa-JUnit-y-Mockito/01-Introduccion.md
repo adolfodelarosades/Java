@@ -158,7 +158,7 @@ Sin embargo si colocamos nuestra aplicación en producción, para un tema comerc
 Mientras que si utilizamos **Open JDK** para producción lo podemos hacer sin casi ningún problema, sin pagar licencia total es Open Source JDK, no hay licencia, pero el problema es que no trae parches de seguridad para producción, no trae nuevas actualizaciones. Es un tema importante a toman en cuenta.
 
 
-### Instalar JDK 17 DMG
+### Instalar JDK 17 DMG en Mac
 
 Voy a instalar la versión JDK 17 con el archivo **`.dmg`** que es una forma más sencilla.
 
@@ -167,6 +167,25 @@ Voy a instalar la versión JDK 17 con el archivo **`.dmg`** que es una forma má
 Vamos a dar doble click en el archivo **jdk-17_macos-aarch64_bin.dmg**.
 
 ![image](https://user-images.githubusercontent.com/23094588/195353892-d768bcef-65a6-4d9e-a04f-dbf7d2259127.png)
+
+Al dar doble click sobre el archivo nos sale el Instalador JDK 17.0.4.1
+
+![image](https://user-images.githubusercontent.com/23094588/195355860-06a990f6-d0d9-43e2-a361-df698e611c12.png)
+
+<img width="625" alt="image" src="https://user-images.githubusercontent.com/23094588/195356054-8ff089c6-5869-4363-92c2-1bd232d80791.png">
+
+<img width="622" alt="image" src="https://user-images.githubusercontent.com/23094588/195356269-c2e8c986-2d23-4bdb-955e-2523026c75ef.png">
+
+La parte de Destino no me la mostro así que no se en que lugar del ordenador lo instalo.
+
+Si abrimos consola y escribimos el comando **`java -version`** nos muestra la versión de Java instalada.
+
+<img width="572" alt="image" src="https://user-images.githubusercontent.com/23094588/195357476-b0844106-6326-4556-8ebd-a5ec27e1c431.png">
+
+### Instalando Java en Windows
+
+En el caso de Windows descargamos el archivo **`zip`**.
+
 
 
 
