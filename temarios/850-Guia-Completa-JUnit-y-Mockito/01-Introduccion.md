@@ -45,103 +45,37 @@ Uso de etiquetas **`@Tag`** para categorizar, etiquetar nuestros métodos, nuest
 
 ![image](https://user-images.githubusercontent.com/23094588/195310958-3d4a7c6d-63f0-4bbb-a667-7a935ea9dfd7.png)
 
-tema que vamos a ver en foquito dependencias mock.
+Temas que vamos a ver en **Mockito**.
 
-Vamos a realizar un test a una clase.
+***Dependencias mock***, vamos a realizar un test a una clase, podría ser un **`service`** que tiene dependencia, tiene otras instancias de objetos que se utilizan, pero estas dependencias las vamos a emular, porque lo que nos interesa realmente es probar la clase en cuestión, la clase por ejemplo **`service`** que contiene esta dependencia. La dependencias, simplemente las implementamos como un mock, la simulamos de una forma simple utilizando este framework. 
 
-Podría ser un service que tiene dependencia, tiene otras instancias de objeto que se utilizan, pero
+Vamos a utilizar los ***verify*** para ver qué métodos se están invocando, que se están llamando de estas dependencias.
 
-estas dependencia la vamos a emular porque lo que no interesa realmente probar la clase en cuestión.
+Anotacion como **`@Mock`**, **`@InjectMock`** y **`@Captor`**.
 
-La clase por ejemplo servis que contiene esta dependencia y la dependencia, simplemente las implementamos
+**`@ExtendWith`** para ejecutar una prueba unitaria con una extensión.
 
-como un mock, la simulamos de una forma simple.
+***Exepciones*** con **`thenThrow`**.
 
-Utilizando este framework vamos a utilizar los verifi para ver qué métodos se están invocando, que
+**`Argument matchers`** que nos permite validar que se están ejecutando los métodos con cierto tipo de argumento, con cierto patrón de argumento y si es que coinciden.
 
-se están llamando de estas dependencias.
+**`Argument capture`** tiene fondo para capturar un argumento.
 
-Anotacion como Mok Inyec, Mocks Captor estèn UIF para ejecutar una prueba unitaria con una extensión
+***Familias de métodos*** **`do`**...,  do algo por ejemplo **`doThrow`** para manejo de excepciones, **`doReturn`** en fin, para dar un comportamiento para simular los métodos mock cuando no devuelven nada, cuando son vacíos, son **`void`**.
 
-por ejemplo como Akito manejo de errores Exepciones con Ben Trou Argument Matters que nos permite validar
+También se utiliza mucho en conjunto con los espías, vienen a continuación los **`Spy`**, que es un híbrido entre un mock, un objeto simulado y el objeto real. Por lo tanto, también nos permite invocar los métodos reales, no necesariamente simular el comportamiento de un método, sino también hasta la llamada real a un método y mucho más.
 
-quienes están ejecutando los métodos con cierto tipo de argumento, con cierto patrón de argumento y
 
-cierto coinciden argument captor tiene fondo para capturar un argumento familas de métodos dú algo por
+![image](https://user-images.githubusercontent.com/23094588/195316482-7a524388-4151-4d74-b0ae-bc405d693867.png)
 
-ejemplo dú áncer du fru para manejo de excepciones du return en tipicamente para dar un comportamiento
+Por el lado de **Spring Boot Test**.
 
-para simular los métodos mock cuando no devuelven nada, cuando son vacíos son void y también se utiliza
+***Integración con JUnit 5 y Mockito***, este curso está orientado a personas que quieren aprender **JUnit 5** y **Mockito** desde cero, es decir sin **Spring Boot**, por lo tanto vamos a aprender desde cero, desde la base con estos dos Frameworks y después vamos a ir a una sección aparte de todo lo que hemos visto de **JUnit 5** y **Mockito** y lo vamos a integrar, lo vamos a trabajar en una aplicación con **Spring Boot**.
 
-mucho en conjunto con los espías.
+También se incluyen anotaciones como **`@MockBean`** y **`@Autowired`** que es para inyección de dependencia, **`@MockBean`** es para registrar un componente Spring, pero que es un Mock, no es objeto real, de una implementación por ejemplo, es un mock que está simulado. En realidad no queremos probar el objeto real de esa dependencia de terceros, lo que queremos realmente es probar en nuestro propio código, nuestra clase **`service`**, que depende de **`@MockBean`**.
 
-Vienen a continuación los Speight, que es un híbrido entre un mock, un objeto simulado y el objeto
+También vamos a ver todo lo que es ***prueba de integración***, por ejemplo, para trabajar con controladores con MockMVC usando la anotación **`@WebMvcTest`**, **`@DataJpaTest`**, también toda la integración con persistencia y mucho más, todo lo relacionado con **Spring Boot**.
 
-real.
-
-Por lo tanto, también nos permite invocar los métodos reales, no necesariamente simular el comportamiento
-
-de un método, sino también hasta la llamada real a un método y mucho más.
-
-Bueno, y todo por el lado de Springwood Primum Test Integración con Yuni 5 como Akito.
-
-Como ya mencioné al principio, este curso está orientado a personas que quieren aprender Yuni 5 y moquitos
-
-desde cero, es decir, sin Springwood.
-
-Por lo tanto, vamos a aprender desde cero, desde la base con Estodo Framework y después vamos a ir
-
-a una sección aparte de todo lo que hemos visto de Yuni 5 y poquito.
-
-Y lo vamos a integrar y lo vamos a trabajar en una aplicación con Spring Buto y vamos a aprender bien
-
-todo lo que experimentes utilizando estas dos herramientas y también mucho más, porque también se incluyen
-
-anotaciones como Mock Bin y Atto Willet, que para intución de dependencia Nok Bin es para registrar
-
-un componente Spring, pero que es un Mok no es el objeto real de una implementación.
-
-Por ejemplo, es un mock que está simulado.
-
-En realidad no queremos probar el objeto real de esa dependencia de terceros.
-
-Lo que queremos realmente probar en nuestra propio código matracas de servis, que depende de beans
-
-también.
-
-Vamos a ver.
-
-Lo que prueba de integración, por ejemplo, para trabajar con controladores con Mok MVC usando la anotación
-
-web MS Test Data JPA test también torque integración con persistencia mucho más.
-
-Todo lo relacionado con Springwood.
-
-Bueno, quién soy yo?
-
-Me llamo Andres Guzman, Instituto de Udemy.
-
-Hace bastante tiempo ya tengo más de 20 años de experiencia en desarrollo en Java.
-
-Ya tengo una gran cantidad de estudiantes más de 100 mil y con cursos de gran trayectoria en Udemy como
-
-el Master Completo de Java desde cero, uno de los más vendido en la plataforma Udemy y también el mejor
-
-calificado con cerca de ochenta y dos horas.
-
-También tengo un curso de Spring Framework desde cero y con una gran cantidad de alumnos, el de Java
-
-Master, cerca de cuarenta y dos mil, un poco más, el de Spring Framework más de 20000 con excelentes
-
-calificaciones 4,8 4,7 de Nigro servicio utilizando Spring Cloud Springwood 4,7.
-
-Es decir, la calificación a los cursos hablan por sí sola.
-
-Así que te invito a que te escribas este curso que va a estar muy completo y te hace vivir mucho en
-
-lo profesional.
-
-Apúntate y te espero adentro.
 
 ## Instalación JDK (opcional) 13:40
 
