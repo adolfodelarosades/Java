@@ -119,6 +119,8 @@ Después de todo lo anterior me descargo la versión:
 
 También podemos descargar la documentación asociada a esa versión la cual esta empaquetada en un archivo **`zip`**.
 
+### JDK vs OpenJDK
+
 Pero, hay otra cosa que debemos considerar tenemos dos tipos de versiones el **JDK** o el **OpenJDK**. 
 
 La versión **JDK** es para Clientes de Oracle e ISV que apuntan a versiones de Oracle LTS. Oracle JDK es la versión Java SE compatible de Oracle para clientes y para desarrollar y probar aplicaciones Java
@@ -133,119 +135,45 @@ Que al pulsarlo tenemos.
 
 ![image](https://user-images.githubusercontent.com/23094588/195334171-aee17a2d-914d-460a-ad6d-9f6ba557c4f0.png)
 
+Y si pulsamos en JDK 19 tenemos:
 
+![image](https://user-images.githubusercontent.com/23094588/195336962-61d69965-9b79-4e7c-b28d-e53ebff5dcb0.png)
 
+Para ver versiones anteriores podemos pulsar en **Archive**
 
+![image](https://user-images.githubusercontent.com/23094588/195352081-b5988e26-f708-40b4-91f4-aa56f12ae3e8.png)
 
+Pero en el caso de OpenJDK es recomendable descargarse la última versión la versión JDK 19. Vamos a seleccionar
 
+![image](https://user-images.githubusercontent.com/23094588/195337964-0933eb95-7252-4918-8063-2e2041014780.png)
 
+Por ahora hemos descargado tanto OpenJDK y JDK con la documentación correspondiente.
 
+¿Cual versión debemos instalar OpenJDK o JDK?
 
+Para desarrollar programas tanto OpenJDK como JDK son totalmente gratuitas no hay licencias. 
 
+Sin embargo si colocamos nuestra aplicación en producción, para un tema comercial y ha sido desarrollada con **JDK**, se recomienda utilizar la versión oficial, si que debemos pagar una licencia. A parte del soporte, incluye parte de seguridad y actualizaciones.
 
+Mientras que si utilizamos **Open JDK** para producción lo podemos hacer sin casi ningún problema, sin pagar licencia total es Open Source JDK, no hay licencia, pero el problema es que no trae parches de seguridad para producción, no trae nuevas actualizaciones. Es un tema importante a toman en cuenta.
 
 
+### Instalar JDK 17 DMG
 
+Voy a instalar la versión JDK 17 con el archivo **`.dmg`** que es una forma más sencilla.
 
+<img width="759" alt="image" src="https://user-images.githubusercontent.com/23094588/195353368-36b0fc76-2494-4efe-ab91-062bd7deed8a.png">
 
+Vamos a dar doble click en el archivo **jdk-17_macos-aarch64_bin.dmg**.
 
-Bueno, por ejemplo, vámonos acá hacemos un clic en gratis o descargar gratis.
+![image](https://user-images.githubusercontent.com/23094588/195353892-d768bcef-65a6-4d9e-a04f-dbf7d2259127.png)
 
-Ya tenemos la ruta, ya va a tecnologías yaba s downloads punto HTML.
 
-Bueno, recuerden que las páginas, lo menú y todo eso me campeando.
 
-Entonces puede que cuando estén viendo esta clase haya cambiado este botón y esté en otra parte, pero
 
-no importa, siempre pueden acceder a través de la ruta o RL, o tal vez se pueden ir.
 
-Por ejemplo por acá se van a downloads, buscan download en el menú, aunque también puede cambiar y
 
-acabo cachaba hacen un clic, se fija y JDK para desarrolladores.
-
-Entramos a la misma página, pero esta es la ruta más importante.
-
-Es lo que importa.
-
-Entonces tenemos la 14, que es la última, pero también tenemos la 11 que de soporte a largo plazo
-
-y la 8.
-
-La 8 la utilizan en caso que tengan 32 bits, es decir, un sistema operativo, un equipo en 32 bits.
-
-La gran mayoría de los ejemplo, el curso también va a funcionar sin problemas.
-
-La 8 van a ver algunas características nuevas de versiones posteriores que no van a funcionar, pero
-
-no se preocupen porque la gran mayoría de los ejemplos y de la características de Java van a funcionar
-
-en cualquier JDK desde la 8 en adelante no es una limitación.
-
-Ahora lo ideal utilizar la 14A que le vamos a utilizar en el curso para aprovechar todas las características
-
-y funcionalidades.
-
-Lo puede descargar de 2 página de la oficial de Oracle y también de la página Open JDK y la versión
-
-Open Source.
-
-Por ejemplo, en la versión oficial de Oracle se van Oracle y JDK descargar download por acá seleccionan
-
-el sistema operativo que corresponda hacia el Linux Mackintosh, Windows.
-
-En el caso Mackintosh y Windows tienen el taller, lo pueden descargar, pero también tienen el comprimido
-
-y también en caso que estén utilizando Linux, cualquier distribución, por ejemplo, use Ubuntu Debian.
-
-Pueden descargar también con el sistema de paquete que corresponda, ahí lo pueden buscar y descargar
-
-JDK la versión 14, la última o por lo menos la más actualizada posible desde la 11 hasta la 14.
-
-Ahora recuerden, si tienen un sistema operativo un 32 tienen que usarla un 8 o la 8.
-
-Entonces en el caso Windows por acá el instalar o el ZIP hacen un clic.
-
-Aceptan ya, pero vamos a utilizar Open JDK, así que voy a cancelar.
-
-Vamos a volver y acá aparece el link para usuarios finales y desarrolladores, está la versión de Oracle
-
-Open JDK.
-
-Hacemos un clic.
-
-J Decaía Tonet listo para utilizar J de K 14 hacen un clic o la última versión de Punilla, quizás en
-
-su momento aparezca la 15 o 16 bien, pero independiente descarga para Linux Mackintosh y Windows 64
-
-bueno siempre hacer el 64 y está en comprimido ya.
-
-Entonces la idea es que sea portable, se descarga zip, se descomprime en algún directorio y lo configuramos.
-
-Configuramos la variable de ambiente path y ya bajo respecto a licencias para desarrollar Open JDK,
-
-bueno, y también la versión de Oracle.
-
-Ambas versiones tanto Oracle como Open JDK para desarrollar es completamente gratis.
-
-No hay licencia.
-
-Ahora, si quiero colocar en producción nuestra aplicaciones con licencia comercial, ahí tengo que
-
-pagar licencias, pero solamente para producción para un tema comercial y se recomienda utilizar la
-
-versión de la oficial.
-
-Bueno, aparte el soporte incluye parches de seguridad y actualizaciones, mientras que si utilizamos
-
-Open JDK para producción lo podemos hacer sin ningún problema, sin pagar licencia total es Open Source
-
-Open JDK, no hay licencia, pero el problema es que no trae parche de seguridad para producción, no
-
-trae nuevas actualizaciones.
-
-Entonces es un tema importante.
-
-Toman en cuenta y por defecto me muestra la última versión en JDK de A Punto NET o en Open JDK.
+y por defecto me muestra la última versión en JDK de A Punto NET o en Open JDK.
 
 Pero si quiero ver las demás versiones, por ejemplo descargar la ONCE, me voy archivo acá o la ruta
 
