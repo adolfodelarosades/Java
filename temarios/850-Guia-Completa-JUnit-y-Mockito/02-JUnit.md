@@ -316,32 +316,74 @@ Aun que la versión más reciente que existe es la 5.9.0 vamos a usar la 5.6.3 q
 
 Por ahora la dependencia nos esta marcando un error vamos a dejarlo así por ahora, ya veremos.
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195717175-0960b051-5a81-4971-b132-c6af22dc061d.png">
+
+¿El siguiente paso?
+
+Bueno, tenemos que recargar o actualizar la dependencia en el proyecto para eso aparece un **Load Maven Changes** (pequeño botón de refresh) es decir, cargar los cambios de Maven, hacemos un clic y eso lo que hace es descargar la librería, la dependencia.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195717864-cb449c38-ad25-4bce-ad36-1bc58f7c0a4b.png">
+
+Al presionar el botón se han descargado las dependencias y han desaparecido los errores la dependecia.
+
+Teniamos un fallo en el **`artifactId`** el correcto es el siguiente:
+
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/23094588/195718749-a4a7081a-3593-4034-98e5-a8a8105757fa.png">
+
+Pulsamos nuevamente el botón **Load Maven Changes**. 
+
+Si revisamos en **External Libraries** vemos que las librerias se han descargado.
+
+<img width="442" alt="image" src="https://user-images.githubusercontent.com/23094588/195718498-5fead6d4-35c0-44d4-89a5-018c8746dd6e.png">
+
+Las librerias que necesitamos para trabajar con Pruebas Unitarias, estamos listo. Por ahora podríamos cerrar el **`pom.xml`**.
+
+<img width="1490" alt="image" src="https://user-images.githubusercontent.com/23094588/195720131-dc3becb4-6908-4f1f-8df3-9b7b5a8258ea.png">
 
 
+En nuestro proyecto tenemos la carpeta **`src`** la cual tiene la carpeta **`java`** donde tenemos nuestras clases Java del proyecto y otra carpeta **`test`**, que es el contexto de Pruebas Unitarias.
 
+Entonces cuando queramos crear una clase test para realizar nuestras pruebas.
 
+Bueno.
 
-JUnit Jupiter API
+Acá en test.
 
+Nuestro código.
 
+Acá vamos a partir.
 
+Acá en Java Main, java.
 
+Vamos a crear un package.
 
+Con click derecho new рамках.
 
+Y después, bueno, vamos a crear una clase, es una forma.
 
+Recuerden que también podemos hacer clic acá y con alt insert lo mismo un atajo pacato, es decir,
 
+alpacas de yaba por punto A Guzmán Punto UNIT AP.
 
+UNIT 5 AP.
 
+Ejemplos Ok.
 
-Entonces con al insert hacemos un clic al INSER.
+Y dentro vamos a tener nuestra clase.
 
-Dependencias.
+Nuestra clase de dominio un poco con algunos atributos y la idea de probar.
 
-Dependencias.
+Vamos a partir con un test simple.
 
-Hacemos un clic.
+Bueno, la idea no central no tanto en crear clase compleja o una gran aplicación, claro, porque si
 
-Y acá buscamos, por ejemplo, bueno, Yun
+no vamos a perder el foco de la proa unitaria.
+
+La idea es crear piezas de código simple y testear la propala.
+
+Entonces sobre pacato vamos a crear una clase, pero creo que me falta un pa'ca estupa y qué mejor ejemplos
+
+models o dominio overs de acá?
 
 
 ![image](https://user-images.githubusercontent.com/23094588/130349155-dda27d56-36e2-4fba-a3af-a0f39182adf2.png)
