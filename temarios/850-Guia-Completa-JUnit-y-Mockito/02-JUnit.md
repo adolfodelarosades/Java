@@ -30,6 +30,253 @@
 * Descargar Código Fuente 00:03
 
 ## Introducción pruebas unitarias 09:14
+
+<img width="787" alt="image" src="https://user-images.githubusercontent.com/23094588/195566540-8835b0ab-dc25-48b6-adff-fa00870b22d4.png">
+
+Cuando uno comienza a desarrollar una aplicación, hay tres paso importante que hay que seguir.
+
+<img width="685" alt="image" src="https://user-images.githubusercontent.com/23094588/195579300-67ef4a50-9792-4b87-9a61-baa80a871c85.png">
+
+Primero, ***el diseño***, antes ecribir cualquier línea de código tienes que tener algo, algún esquema, algún plano, igual que cuando se construye una casa necesitamos un plano de cómo hacer esta casa. La cantidad de piezas, dormitorio. En programación, en desarrollo de aplicación es lo mismo, tenemos que tener un diseño, un layout de que hacer. Por ejemplo, ***Diagramas de Casos de Uso*** para la toma requerimiento, ¿Cuáles van a ser los usos de nuestra aplicación? ¿Cuáles van a ser las funcionalidades? ¿Requerimientos? En fin.
+
+También tenemos que resolver la lógica de negocios, los datos, cuáles van a ser nuestras clases, cómo se van a relacionar una con otra. En fin, tenemos que tener algo, algún diseño, algún esquema y resolver algún problema según regla de negocio.
+
+Luego empezamos a escribir nuestro código, a implementar nuestra programación.
+
+Como tercera etapa, tenemos que **probar nuestro código** y tenemos muchas formas de probarlo, por ejemplo, utilizando herramienta de depuración del Ide o simplemente escribiendo alguna validación en nuestro código, una clase con el metodo **`main`**, instanciar una clase y probarla. Vamos a tener, por ejemplo, un dato de entrada, un dato de salida, un parámetro esperado y compararlo con el dato que retorno por ejemplo un método y comparar las expectativas vs la realidad, si se cumple, utilizando validación de nuestro código con sentencia de control, con un **`if`** por ejemplo, imprimir el resultado en la consola del navegador. Todo esto sería una forma de escribir nuestras pruebas de nuestro código. Probar el código es una etapa muy importante.
+
+También lo podemos probar en el navegador si estamos desarrollando una aplicación Web, si estamos trabajando con API Rest probarlo por ejemplo en **Postman**, que es una herramienta especial para testear una API Rest.
+
+Tenemos muchas alternativas y está perfecto, son excelentes cuando estamos desarrollando nuestra aplicación, pero cuando intentamos depurar cualquier error lógico, cualquier problema en caso de fallo, quizás estas formas son un poco más limitadas y necesitamos algo un poco más robusto. Requieren un juicio humano, analizar el problema de forma un poco más manual y aquí esta la limitación.
+
+Entonces necesitamos una herramienta que nos agiliza un poco más el proceso por ejemplo, automatización, un sistema de reportería donde falló,  como falló, ¿Cuáles son los métodos que fallaron?, que nos de la posibilidad de ejecutar varios casos de uso, escenarios posible y no solamente probar el ahora.
+
+En el proceso de desarrollando estamos probamos, pero ¿Qué pasa el día mañana? ¿Quién no asegura que nuestra aplicación va a seguir funcionando correctamente? No sé, en seis meses más, en un año podrían surgir nuevas actualizaciones, nuevas funcionalidades, esos cambios, quizá afecten.
+
+Entonces tenemos que tener un plan de continuidad, de realización, de test, de esa forma que nos asegure que siga funcionando hoy y mañana.
+
+Pero bien, entremos un poco más en detalle sobre la necesidad de realizar nuestras Pruebas Unitarias.
+
+<img width="754" alt="image" src="https://user-images.githubusercontent.com/23094588/195579520-1eee4304-42d7-48cb-b9d0-64a5269812aa.png">
+
+Por ejemplo, acá tenemos parámetro de entrada input, todo código, todo método Clausen necesita datos
+
+de entrada.
+
+Según estos datos se va a realizar algún tipo de algoritmo, un fragmento de código que resuelve algo
+
+y devuelve un resultado.
+
+Entonces acá tenemos la pieza código devuelve una salida, un output input output.
+
+Entonces podríamos querer probar nuestra salida.
+
+El output con un valor esperado llega.
+
+Tenemos la espectativa, un valor esperado muy importante.
+
+Siempre en pruebas unitarias.
+
+Vamos a tener un dato que nosotros queremos obtener, que esperamos como resultado de un algoritmo.
+
+Pero finalmente podría ser otro.
+
+O podría ser un valor nulo, un valor mal calculado.
+
+Se fijan?
+
+Entonces tendremos que probar nuestro código.
+
+Por poner un ejemplo, una clase matemática con un método sumar A más B y los suma de vuelta.
+
+Perfecto.
+
+Entonces hay B son datos de prueba.
+
+Datos input de entrada y al final.
+
+Bueno, nosotros sabemos quedó más 3 e igual a 5, pero bueno, hay que probar realmente sumar devuelve
+
+5 y lo probamos sumar nuestra variable resultado de la suma del método sumar y lo comparamos.
+
+Sumar es distinto de 5.
+
+Bueno, ojo, si se distinto 5.
+
+Acá hay un problema.
+
+Algo pasó porque nuestro valor esperado es 5 y no podría ser distinto.
+
+Entonces acá podríamos implementar nuestra prueba, pero no solamente para este caso.
+
+Para Dei 3 podríamos tener, no sé, sumar valor en negativo.
+
+Qué pasa cuando 0?
+
+Cuando es negativo, cuando su número extremadamente grande o muy pequeño, incluso decimales?
+
+Quizás podríamos tener un sumar con decimales, se fijan?
+
+Son diferentes escenarios que podríamos testear acá tenemos uno solo, se fijan entonces al final del
+
+día prueba nuestro código.
+
+No es tan simple.
+
+De forma manual tendríamos que crear múltiples escenarios.
+
+Es decir, eso significa mucha clase con el método main y validar con un if se distinto de null, se
+
+distinto de cincos y distinto a otro valor.
+
+Esperado y así por cada escenario, incluso si es igual, no se te quiero comprar un valor si es igual
+
+a otro.
+
+Bueno, ahí es cuando Yunnie como framework toma importancia de que no solamente nos permite escribir
+
+nuestras pruebas, sino también nos permite escribir nuestras pruebas de forma mucho más ágil.
+
+En una sola clase, por ejemplo, podríamos tener múltiples y varios escenarios, incluso en una sola
+
+ejecución de una prueba unitaria.
+
+Podríamos ejecutar muchos test, muchos, no solamente uno, sino muchos escenarios, mucha clase de
+
+test y cada clase de test con múltiple método.
+
+Y tú has organizado.
+
+Es decir, se ejecutan.
+
+Si falla, bueno, no va a mostrar un sistema de reportería, un sistema de alertas.
+
+Qué método falló?
+
+En qué clase?
+
+Por qué ese con información muy valiosa, muy importante al desarrollador?
+
+Si hacemos esto de forma manual con el 7.a out, punto, print line o punto.
+
+Error muy manual, podremos tener cientos de clase, cientos de líneas de código y todo eso se va a
+
+mostrar de forma poco amistosa en la consola.
+
+Difícil de dibujar, difícil de analizar, difícil de saber dónde ocurrió el problema.
+
+Se necesita automatizar, parametrizar y tamé, como explicado, ejecuciones de planetarias continuas
+
+en el tiempo, no solamente la hora.
+
+Esto asegura que ante cualquier cambio de nuestra aplicación siga funcionando correctamente.
+
+Por ejemplo, si otra persona, incluso un compañero de nuestro equipo de trabajo de la empresa, más
+
+adelante realiza algún cambio en otro código.
+
+Nueva funcionalidad, no?
+
+Cierto?
+
+Bueno, qué pasa?
+
+Hay que probarlo.
+
+Y si falla significa que es actualización o cambio en el código?
+
+Está rompiendo algo en la funcionalidad del código que ya existía de nuestro código?
+
+Y este test que había escrito nuestra base unitaria lo va a detectar si o si lo va a detectar ya la
+
+importancia.
+
+Es decir, no es algo que se pueda detectar en una prueba manual implementada por nosotros en el desarrollo,
+
+por ejemplo, o realizando con la herramienta de debug.
+
+No, esto se detecta en el tiempo.
+
+Ya están escrita simplemente después modificamos el código ejecutado las pruebas.
+
+Bueno, si falló, detectamos y corregimos entre paréntesis.
+
+Bueno, en realidad no es tanto modificar, porque como buena práctica no se recomienda tanto modificar
+
+el código que ya existe, sino más bien extender.
+
+De hecho, hay un principio en la programación orientada objeto open close.
+
+Abierto, cerrado.
+
+Abierto a la extensión.
+
+Heredar de clases.
+
+Extender, pero cerrado a la modificación.
+
+Claro, porque si modificamos 100 siempreviva alterar de forma directa el código que existe cuando modificamos
+
+algo.
+
+Porque ese código lo más probable que se está utilizando en algún lugar, al ser modificado de alguna
+
+forma podría alterar lo que ya existe.
+
+Podría romper otra cosa.
+
+Entonces siempre es bueno heredar, estender.
+
+Pero así todo, también podrían haber problemas.
+
+Y eso problema es lo que tenemos que también probar si ocurren y tomar alguna acción entonces muy importante,
+
+no solamente probar, ejecutar nuestros test cuando hayamos terminado de implementar o escribir nuestro
+
+código, no, sino también dar continuidad en la ejecución de test en el futuro.
+
+Y esto es lo que hace realmente fundamental para el éxito de nuestra aplicación.
+
+Pero bueno, vemos definiciones un poco más resumida qué son las pruebas unitarias?
+
+Es un proceso de examen para verificar que una pieza de código cumple con cierta regla negocios.
+
+Y eso es fundamental porque vamos a afirmar un resultado esperado.
+
+Comparamos algo esperado versus la realidad, versus el valor que realmente devolvió un método.
+
+Si falla, bueno, hay que revisar ese método, ver qué está pasando.
+
+Quizá hicimos mal un cálculo o devolvimos null.
+
+Nos olvidamos de hacer el retorno correcto.
+
+El ratón devolver la instancia, se fijan o el valor.
+
+Bueno, y qué es lo que unit?
+
+Porque acá tenemos pruebas unitarias en general.
+
+Pero Juny?
+
+Bueno, es un framework.
+
+Sellaba una librería que nos permite escribir y ejecutar pruebas.
+
+Es importante escribir y ejecutar, porque no solamente ejecutar, sino también escribirlas y de forma
+
+automatizada y también repetibles en el tiempo.
+
+Por eso ejecutar repetibles pruebas unitarias no solamente hoy, sino también mañana.
+
+Bien.
+
+Nada más.
+
+Por ahora.
+
+Y nos vemos en la siguiente clase.
+
 ## Introducción JUnit 5 10:31
 ## Creando y configurando el proyecto con JUnit 5 08:48
 
