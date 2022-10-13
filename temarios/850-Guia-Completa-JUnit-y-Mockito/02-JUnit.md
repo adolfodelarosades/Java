@@ -248,6 +248,102 @@ Esto solo es una actualización por que en los videos se ve una versión anterio
 
 ## Creando y configurando el proyecto con JUnit 5 08:48
 
+Vamos a crear una carpeta donde vamos a almacenar los proyectos del curso.
+
+<img width="804" alt="image" src="https://user-images.githubusercontent.com/23094588/195704259-773dd104-ac31-4507-a62d-2ac90d0ca4a7.png">
+
+Ahora en IntelliJ vamos a pulsar en **New Proyect** y vamos a rellenar la siguiente información.
+
+<img width="870" alt="image" src="https://user-images.githubusercontent.com/23094588/195705221-1d16f7dd-6d22-4ac1-b064-00d1acb92cd9.png">
+
+Vamos a pulsar en el botón **Create**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195705558-14cde848-303e-4b46-8452-329d551c618e.png">
+
+Se crea nuestro proyecto, en el cual se genera el archivo **`pom.xml`**, que es un archivo donde se configuran las dependencias de Maven, las librerías que vamos a incluir en el proyecto.
+
+Recuerden que JUnit 5 no es parte de Java, no forma parte del JDK, sino que es un framework externo que lo tenemos que incluir, como librería con una dependencia en nuestro proyecto. Justamente **`pom.xml`** nos permite agregar dependencias.
+
+De hecho, después, cuando trabajamos con Spring Framework, vamos a trabajar con un proyecto, que tenga su **`pom.xml`** y allí vamos a tener nuestra dependencia.
+
+Se automatiza mucho más las librerías, las versiones, además, permite construir el proyecto, generar el proyecto, el JAR, por ejemplo, para producción.
+
+Nuestro siguiente paso es agregar dependencias, librerías en el **`pom.xml`**.
+
+Podemos ayudarnos de las herramientas del IDE para generar las dependencia, vamos a dar un click derecho en la línea 16 después de **`</properties>`** y pulsamos en **Generate...**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195708555-2513b223-5ffc-40fe-846a-89d018d483c4.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195708707-ee80c96d-ce93-4578-bedc-7fd0483775fc.png">
+
+Vamos a pinchar en **Dependency Template**
+
+<img width="249" alt="image" src="https://user-images.githubusercontent.com/23094588/195709879-8ea6a5fe-f12d-418a-90ef-4096443368fb.png">
+
+Y nos inserta la sección **`<dependencies>`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195710361-9adc3ec7-d1b0-45e5-8ed8-51bc1108aaf4.png">
+
+```xml
+<dependencies>
+   <dependency>
+      <groupId></groupId>
+      <artifactId></artifactId>
+      <version></version>
+    </dependency>
+</dependencies>
+```
+
+Nesesitamos insertar la dependencia para **junit-jupiter**, pero necesitamos datos más concretos de la dependencia el **`groupId`**, **`artifactId`** y **`artifactId`**.
+
+Existe la página [Maven Repository](https://mvnrepository.com/) la cual es un repositorio de dependencias donde podemos buscar las dependencias que nos interesen.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195712318-ff73ebd7-eac4-4085-ba88-a7f362e17f49.png">
+
+Tiene una barra de busqueda donde vamos a insertar **junit-jupiter**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195712706-a5065544-8b91-43c8-9390-11de0de45f09.png">
+
+Como podemos observar existen varios tipos de dependencias con el nombre **junit-jupiter** como **JUnit Jupiter API**, **JUnit Jupiter Engine**, **JUnit Jupiter Params**, pero nos interesa la de **JUnit Jupiter** a secas (la cual no veo) ya que es la que incluye todo.
+
+Vamos a utilizar la que se esta usando en el curso, cuando empezamos a escribir en el IDE este nos ayuda suguiriendo información:
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195715107-6d2ae653-5931-45d3-bbfc-c18c3f7fe57d.png">
+
+Aun que la versión más reciente que existe es la 5.9.0 vamos a usar la 5.6.3 que es la que se usa en los ejemplos del curso.
+
+<img width="1114" alt="image" src="https://user-images.githubusercontent.com/23094588/195716499-0dc50943-0bf5-488f-bf6c-6f108f2432ea.png">
+
+Por ahora la dependencia nos esta marcando un error vamos a dejarlo así por ahora, ya veremos.
+
+
+
+
+
+
+JUnit Jupiter API
+
+
+
+
+
+
+
+
+
+
+
+Entonces con al insert hacemos un clic al INSER.
+
+Dependencias.
+
+Dependencias.
+
+Hacemos un clic.
+
+Y acá buscamos, por ejemplo, bueno, Yun
+
+
 ![image](https://user-images.githubusercontent.com/23094588/130349155-dda27d56-36e2-4fba-a3af-a0f39182adf2.png)
 
 ![image](https://user-images.githubusercontent.com/23094588/130349165-aba4c3f8-7671-4b6a-9bdc-db6f6d913687.png)
