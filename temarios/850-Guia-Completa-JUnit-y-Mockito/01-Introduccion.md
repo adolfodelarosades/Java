@@ -385,91 +385,15 @@ Arrastramos el icono a Aplicaciones para instalarlo.
 
 <img width="1357" alt="image" src="https://user-images.githubusercontent.com/23094588/195558779-7718a563-d55b-4bd4-bc73-c1574377ade3.png">
 
-Ya nos aparece dentro de nuestras aplicaciones, vamos a dar doble clic para abrir el IDE de IntelliJ IDEA CE.
+Ya nos aparece dentro de nuestras aplicaciones, vamos a dar doble clic para abrir el IDE de IntelliJ IDEA CE. Lo primero que nos sale es:
 
+<img width="602" alt="image" src="https://user-images.githubusercontent.com/23094588/195560589-3421b818-2a9a-476a-a872-de0577457735.png">
 
+<img width="604" alt="image" src="https://user-images.githubusercontent.com/23094588/195560722-b86a931f-b27e-4ba6-9a58-7cb7831c217e.png">
 
+Finalmente se abre el IDE.
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195560883-3b84906c-13ed-4f84-9d85-e14aa77742ab.png">
 
+Tenemos nuestra ventana principal por defecto, que nos permite crear un proyecto nuevo, abrir un proyecto, u obtener un proyecto desde el VCS (Sistema de Control de Versiones)
 
-También pueden seleccionar el sistema operativo, por ejemplo, se van a Mackintosh o a Linux y también,
-
-pero por defecto muestra el sistema operativo que detecta de forma automática.
-
-Pueden descargar la versión ejecutable, instalarle de puntuó exe o en zip que es portable.
-
-Vamos a descargar Download Puppets.
-
-Perfecto.
-
-Acá pide un registro.
-
-Pero bueno, no necesario registrar el mail.
-
-Simplemente hacen un clic en Descargar y de forma automática se comienza a descargar.
-
-También me pueden demorar un rato de que son cerca de 600 mega, así que puede morar un rato según la
-
-conexión y una vez que haya finalizado la carga, continuamos con la instalación.
-
-Pegamos la descarga de download, la pegamos en nuestro directorio del curso curso YABA con doble clic.
-
-Instalamos un Wistar bastante simple.
-
-Colocamos siguiente la ruta por defecto pueden escoger la que quieran siguiente.
-
-Acá seleccionamos que nos cree un atajo, ya sea en 64 o 32.
-
-Bueno, voy a colocar 64 y también opciones lo pueden marcar, por ejemplo, que de forma automática
-
-asocie este ensanchaba de Groovy de Kotlin para Android.
-
-Enfín, siguiente instalas.
-
-Esperamos un rato.
-
-Bueno, básicamente por defecto, toda la configuración es por defecto, que viene en el IDE.
-
-Bien, y al final da la opción para ejecutar, para correr, el IDE intelige la idea, lo seleccionamos
-
-y finalizar acá nos pregunta si queremos compartir datos, colocar que sí o que no puede poner, que
-
-no importar configuraciones de algún directorio o no importar por defecto.
-
-En caso de que hayamos tenido instalado otra versión, ponemos ok, bien y al principio nos pregunta
-
-qué tema o qué diseño queremos utilizar.
-
-Por ejemplo alguno oscuro darks hola o light.
-
-Bueno, light es como el diseño claro y por defecto que viene en el IDE, muy similar al que trae Eclipse
-
-por defecto.
-
-Bueno, para el curso voy a usar el oscuro, más que nada porque un poco más cómodo para la vista,
-
-un poco más agradable, pero al final es un tema de gusto.
-
-Pueden utilizar cualquiera todos siguiente acá pregunta sobre los plugins para customizar.
-
-Dejamos todo por defecto, dejamos habilitado lo que viene y lo demás todo por defecto.
-
-No tocamos nada.
-
-Siguiente Instalar algunas herramientas por ejemplo para soporte a lenguaje Scala y otra cosa también
-
-vamos a omitir.
-
-Nos vamos a instalar nada más.
-
-Solamente nuestro IDE y comenzar.
-
-Acá tenemos nuestra ventana principal por defecto, que nos permite crear un proyecto, abrir un proyecto,
-
-obtener desde versión de control, por ejemplo con IT, actualizar playing y configuraciones.
-
-Pero bien, vamos a quedar hasta acá porque la siguiente clase vamos a comenzar con el curso, vamos
-
-a comenzar con crear un proyecto.
-
-Acá nos vemos en la siguiente clase.
