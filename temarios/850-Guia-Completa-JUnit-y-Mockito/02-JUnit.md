@@ -59,149 +59,52 @@ Pero bien, entremos un poco más en detalle sobre la necesidad de realizar nuest
 
 <img width="754" alt="image" src="https://user-images.githubusercontent.com/23094588/195579520-1eee4304-42d7-48cb-b9d0-64a5269812aa.png">
 
-Por ejemplo, acá tenemos parámetro de entrada input, todo código, todo método Clausen necesita datos
+Por ejemplo, tenemos parámetro de entrada **`Input`**, todo código, todo método, toda clase necesita datos de entrada.
 
-de entrada.
+Según estos datos se va a realizar algún tipo de algoritmo, un fragmento de código que resuelve algo y devuelve un resultado.
 
-Según estos datos se va a realizar algún tipo de algoritmo, un fragmento de código que resuelve algo
+Tenemos la **Pieza de código** devuelve una salida, un **`Output`**.
 
-y devuelve un resultado.
+Podríamos querer probar nuestra salida, el **`Output`** con un valor esperado, la espectativa.
 
-Entonces acá tenemos la pieza código devuelve una salida, un output input output.
+Siempre en Pruebas Unitarias vamos a tener un dato que nosotros queremos obtener, que esperamos como resultado de un algoritmo, pero finalmente podría ser otro o podría ser un valor **`null`**, un valor mal calculado, por lo que tenemos que probar nuestro código.
 
-Entonces podríamos querer probar nuestra salida.
+En la imagen vemos el ejemplo de la clase **`Matematicas`** con un método **`sumar`** recibe los parámetros **`a`** y **`b`** y retorna su suma.
 
-El output con un valor esperado llega.
+<img width="865" alt="image" src="https://user-images.githubusercontent.com/23094588/195585626-241f83d3-9db0-4906-9fff-b498dc71101d.png">
 
-Tenemos la espectativa, un valor esperado muy importante.
+**`a`** y **`b`** son datos de prueba, datos input, de entrada si estos valores son **`2`** y **`3`** nosotros sabemos que el resultado es **`5`**, pero bueno, hay que probarlo.
 
-Siempre en pruebas unitarias.
+<img width="848" alt="image" src="https://user-images.githubusercontent.com/23094588/195585724-683db204-631b-449b-92cd-acfaf13ce9a8.png">
 
-Vamos a tener un dato que nosotros queremos obtener, que esperamos como resultado de un algoritmo.
+Si la suma es distinto de 5, ojo, hay un problema, algo pasó porque nuestro valor esperado es 5 y no podría ser distinto. Entonces acá podríamos implementar nuestra prueba, pero no solamente para este caso. no solo para **`2`** y **`3`** podríamos tener, no sé, sumar valores negativos, ¿Qué pasa cuando tenemos 0?, cuando su número es extremadamente grande o muy pequeño, incluso con  decimales.
 
-Pero finalmente podría ser otro.
+Son diferentes escenarios que podríamos testear, por ahora solo tenemos uno solo, se fijan entonces al final del día probar nuestro código no es tan simple.
 
-O podría ser un valor nulo, un valor mal calculado.
+De forma manual tendríamos que crear múltiples escenarios es decir, eso significa muchas clases con el método **`main`** y validar con un **`if`** si es distinto de **`null`**, si es distinto **`5`** y distinto a otro valor esperado y así por cada escenario, incluso si es igual, por si quiero compar si un valor es igual a otro.
 
-Se fijan?
+Bueno, ahí es cuando **JUnit** como framework toma importancia, de que no solamente nos permite escribir nuestras pruebas, sino también nos permite escribir nuestras pruebas de forma mucho más ágil. En una sola clase, por ejemplo, podríamos tener múltiples y varios escenarios, incluso en una sola ejecución de una prueba unitaria. Podríamos ejecutar muchos test, muchos, no solamente uno, sino muchos escenarios, mucha clase de test y cada clase de test con múltiple método. Y todo eso organizado es decir, se ejecutan si falla, nos va a mostrar un sistema de reportería, un sistema de alertas. Qué método falló, en qué clase, esta información es muy valiosa, muy importante al desarrollador.
 
-Entonces tendremos que probar nuestro código.
+Si hacemos esto de forma manual podemos usar el **`System.out.println`** o el **`System.err.println`** para mostrar el error.
 
-Por poner un ejemplo, una clase matemática con un método sumar A más B y los suma de vuelta.
+Podremos tener cientos de clase, cientos de líneas de código y todo eso se va a mostrar de forma poco amistosa en la consola. Difícil de dibujar, difícil de analizar, difícil de saber dónde ocurrió el problema.
 
-Perfecto.
+Se necesita automatizar, parametrizar.
 
-Entonces hay B son datos de prueba.
+<img width="1059" alt="image" src="https://user-images.githubusercontent.com/23094588/195588839-c18f6981-b58f-466b-b0a6-23eb9a101dfc.png">
 
-Datos input de entrada y al final.
+Como hemos explicado, necesitamos ejecuciones de Pruebas Unitarias Continuas en el tiempo, no solamente en el ahora.
 
-Bueno, nosotros sabemos quedó más 3 e igual a 5, pero bueno, hay que probar realmente sumar devuelve
+Esto asegura que ante cualquier cambio de nuestra aplicación siga funcionando correctamente. Por ejemplo, si otra persona, incluso un compañero de nuestro equipo de trabajo, de la empresa, más adelante realiza algún cambio en el código, nuevas funcionalidad, ¿Qué pasa? Hay que probarlo.
 
-5 y lo probamos sumar nuestra variable resultado de la suma del método sumar y lo comparamos.
+Y si falla significa que es actualización o cambio en el código está rompiendo algo en la funcionalidad del código, que ya existía de nuestro código y este test que habíamos escrito, nuestra, Pruebas Unitarias lo va a detectar, si o si lo va a detectar, y de ahí la importancia es decir, no es algo que se pueda detectar en una prueba manual, implementada por nosotros en el desarrollo, por ejemplo, o realizando con la herramienta de debug. No, esto se detecta en el tiempo, ya están escritas, simplemente después de modifir el código, ejecutamos las pruebas.
 
-Sumar es distinto de 5.
+Bueno, si falló, detectamos y corregimos, entre paréntesis. Bueno, en realidad no es tanto modificar, porque como buena práctica no se recomienda tanto modificar
 
-Bueno, ojo, si se distinto 5.
 
-Acá hay un problema.
 
-Algo pasó porque nuestro valor esperado es 5 y no podría ser distinto.
 
-Entonces acá podríamos implementar nuestra prueba, pero no solamente para este caso.
 
-Para Dei 3 podríamos tener, no sé, sumar valor en negativo.
-
-Qué pasa cuando 0?
-
-Cuando es negativo, cuando su número extremadamente grande o muy pequeño, incluso decimales?
-
-Quizás podríamos tener un sumar con decimales, se fijan?
-
-Son diferentes escenarios que podríamos testear acá tenemos uno solo, se fijan entonces al final del
-
-día prueba nuestro código.
-
-No es tan simple.
-
-De forma manual tendríamos que crear múltiples escenarios.
-
-Es decir, eso significa mucha clase con el método main y validar con un if se distinto de null, se
-
-distinto de cincos y distinto a otro valor.
-
-Esperado y así por cada escenario, incluso si es igual, no se te quiero comprar un valor si es igual
-
-a otro.
-
-Bueno, ahí es cuando Yunnie como framework toma importancia de que no solamente nos permite escribir
-
-nuestras pruebas, sino también nos permite escribir nuestras pruebas de forma mucho más ágil.
-
-En una sola clase, por ejemplo, podríamos tener múltiples y varios escenarios, incluso en una sola
-
-ejecución de una prueba unitaria.
-
-Podríamos ejecutar muchos test, muchos, no solamente uno, sino muchos escenarios, mucha clase de
-
-test y cada clase de test con múltiple método.
-
-Y tú has organizado.
-
-Es decir, se ejecutan.
-
-Si falla, bueno, no va a mostrar un sistema de reportería, un sistema de alertas.
-
-Qué método falló?
-
-En qué clase?
-
-Por qué ese con información muy valiosa, muy importante al desarrollador?
-
-Si hacemos esto de forma manual con el 7.a out, punto, print line o punto.
-
-Error muy manual, podremos tener cientos de clase, cientos de líneas de código y todo eso se va a
-
-mostrar de forma poco amistosa en la consola.
-
-Difícil de dibujar, difícil de analizar, difícil de saber dónde ocurrió el problema.
-
-Se necesita automatizar, parametrizar y tamé, como explicado, ejecuciones de planetarias continuas
-
-en el tiempo, no solamente la hora.
-
-Esto asegura que ante cualquier cambio de nuestra aplicación siga funcionando correctamente.
-
-Por ejemplo, si otra persona, incluso un compañero de nuestro equipo de trabajo de la empresa, más
-
-adelante realiza algún cambio en otro código.
-
-Nueva funcionalidad, no?
-
-Cierto?
-
-Bueno, qué pasa?
-
-Hay que probarlo.
-
-Y si falla significa que es actualización o cambio en el código?
-
-Está rompiendo algo en la funcionalidad del código que ya existía de nuestro código?
-
-Y este test que había escrito nuestra base unitaria lo va a detectar si o si lo va a detectar ya la
-
-importancia.
-
-Es decir, no es algo que se pueda detectar en una prueba manual implementada por nosotros en el desarrollo,
-
-por ejemplo, o realizando con la herramienta de debug.
-
-No, esto se detecta en el tiempo.
-
-Ya están escrita simplemente después modificamos el código ejecutado las pruebas.
-
-Bueno, si falló, detectamos y corregimos entre paréntesis.
-
-Bueno, en realidad no es tanto modificar, porque como buena práctica no se recomienda tanto modificar
 
 el código que ya existe, sino más bien extender.
 
