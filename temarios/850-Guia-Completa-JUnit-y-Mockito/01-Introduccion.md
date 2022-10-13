@@ -346,51 +346,38 @@ Finalmente vamos a verificar el valor de las variables de entorno.
 
 ## Instalación IntelliJ IDEA 04:39
 
-Bien, continuamos con el ÍDE, nuestro entorno de desarrollo integrado para desarrollar, para crear
+Continuamos con el **IDE**, nuestro **Entorno de Desarrollo Integrado** para desarrollar, para crear
+el código, vamos a utilizar **IntelliJ** hoy día uno de los más robustos que hay en el mercado, junto con **Eclipse** también uno de los dos más utilizados, pero **IntelliJ** es más utilizado aún. Se estima que el 60% de los desarrolladores en Java utilizan este IDE, muy flexible y robusto
 
-el código, vamos a utilizar inteligir hoy día uno de los más robustos que hay en el mercado.
+Vamos a la página [https://www.jetbrains.com/es-es/](https://www.jetbrains.com/es-es/)
 
-Bueno, junto con Eclipse también uno de los dos más utilizados, pero intelige es más utilizado aún.
+<img width="1509" alt="image" src="https://user-images.githubusercontent.com/23094588/195535417-37734b8f-9eef-4782-be0e-582372ad51c7.png">
 
-De Eclipse más o menos.
+Tenemos que buscar en los IDEs [IntelliJ IDEA](https://www.jetbrains.com/es-es/idea/)
 
-Se estima que el 60 por ciento de los desarrolladores en Java utilizan este IDE muy flexible y muy ruto,
+<img width="1511" alt="image" src="https://user-images.githubusercontent.com/23094588/195536099-d8c580ae-bd64-40cd-9af3-994c4981066e.png">
 
-cosa que vamos a ver en el curso.
+Esta es la página principal del IDE para Java de **JET Brains**, pulsamons en el botón ***descargar*** y descargamos.
 
-Nos vamos a la página Nyet Brains PuntoCom.
+<img width="1511" alt="image" src="https://user-images.githubusercontent.com/23094588/195536517-d9d682c1-1539-4dda-8371-ad360670167b.png">
 
-Acá tenemos la ruta Jet Brains PuntoCom.
+Tenemos dos versiones la **Ultimate**, que es la empresarial para desarrollar y que es de pago, solamente podemos descargar una versión de prueba limitada, y por otro lado tenemos la **Community** que es la que vamos a usar en el curso.
 
-Nos vamos a Tools en IDE.
+La **Community** tiene todo lo necesario y lo suficiente para el curso.
 
-Acá tenemos intelige hoy día.
+<img width="842" alt="image" src="https://user-images.githubusercontent.com/23094588/195551096-a7924b84-b377-4145-85cf-d32e9eeaec6a.png">
 
-Entonces hacemos un click.
+Aquí vemos todas las caracteríosticas de una y otra versión, lo que no se incluye en el Open Source, en la versión **Community** lo puedo manejar con otras herramientas Open Source o con Plugings.
 
-Esta es la página principal del IDE para Yaba de Nyet Brains y descargamos.
+Pero con la versión **Community** es más que suficiente para programar y trabajar en Java.
 
-Nos vamos a Download y tenemos dos versiones la Ultimate, que es como la empresarial para desarrollar
+Vamos a descargar la versión **Community** para nuestro sistema operativo.
 
-que es de pago, solamente podemos descargar una versión de prueba limitada, pero tenemos la comunity,
+<img width="1511" alt="image" src="https://user-images.githubusercontent.com/23094588/195553257-730c1e15-dc5a-4ce0-b3a4-c2be31314f69.png">
 
-que es la que vamos a usar en el curso.
 
-Bueno, la comunity tiene todo lo necesario y lo suficiente para el curso.
+<img width="1511" alt="image" src="https://user-images.githubusercontent.com/23094588/195553101-2987633f-2dd1-4787-90f2-df87ca4000b1.png">
 
-Acá tiene las ventajas, lo que incluye y lo que no se incluye en el Open Source, en la versión comunity
-
-versus la comercial.
-
-Pero todo lo demás, es decir, lo que no se incluya en el IDE, lo puedo manejar con otras herramientas
-
-open source, por supuesto, o con playing.
-
-En fin, hay alternativas, pero elide la base que se incluye en la versión de Comunida con mi Unity
-
-es más que suficiente para programar y trabajar en Java.
-
-Bien, entonces nos vamos a descargar acá.
 
 También pueden seleccionar el sistema operativo, por ejemplo, se van a Mackintosh o a Linux y también,
 
