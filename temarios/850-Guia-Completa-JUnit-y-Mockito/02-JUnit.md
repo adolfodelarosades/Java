@@ -246,7 +246,7 @@ Si no queremos tener un proyecto Maven dejamos donde dice IntelliJ, pero si es M
 
 Esto solo es una actualización por que en los videos se ve una versión anterior de IntelliJ.
 
-## Creando y configurando el proyecto con JUnit 5 08:48
+## 💻 Creando y configurando el proyecto con JUnit 5 08:48
 
 Vamos a crear una carpeta donde vamos a almacenar los proyectos del curso.
 
@@ -371,7 +371,7 @@ La diferencia cuando tratamos con **`float`** o con **`double`** todos los cómp
 
 No es tan preciso cuando queremos trabajar con dinero, como trabaja la industria financiera, por ejemplo, es mucho más eficiente y mejor, mucho más preciso trabajar con **`BigInteger`** o **`BigDecimal`**. Además que todos los computos y todos los cálculos se realizan de forma aritmética, pero con el cálculo humano y no con el cálculo de computadora binario, es una diferencia importante.
 
-
+### Imagenes de los Videos.
 
 ![image](https://user-images.githubusercontent.com/23094588/130349155-dda27d56-36e2-4fba-a3af-a0f39182adf2.png)
 
