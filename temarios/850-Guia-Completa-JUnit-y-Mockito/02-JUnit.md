@@ -173,145 +173,53 @@ Es decir, podríamos tener un proyecto que ya tiene Pruebas Unitarias con la ver
 
 <img width="873" alt="image" src="https://user-images.githubusercontent.com/23094588/195631713-a1d826b9-bd2a-4d49-8a4d-e6105074937f.png">
 
-Veamos un poco más detallado, por ejemplo, que tenemos Yuni plataforma que es el core.
+Veamoslo un poco más detallado, tenemos **JUnit Platform** que es el Core donde esta todo el test engine o el motor de ejecución de test es donde se lanzan nuestras Pruebas Unitarias, pero nos permite lanzar Pruebas Unitarias con **JUnit Platform**, que es la versión 5, pero también nos permite ejecutar Pruebas Unitarias de versiones más antiguas, la 3 y la 4, pero además nos permite ejecutar, lanzar otros test de otro framework, de terceros.
 
-Recuerden Hakata todo el test en jeune o el motor de ejecución de test.
+Incluso si no nos gusta utilizar Júpiter, ni tampoco JUnit 4, podrían utilizar un externo de otro proveedor de un tercero o incluso desarrollarlo nosotros. JUnit trae integración para ejecutar otro framework de testing. Nos provee un API para poder desarrollar nuestro propio framework de JUnit Test y puede lanzarlo en la plataforma, ejecútalo.
 
-Acá se lanza nuestra parasu unitarias, pero nos permite lanzar pruebas unitarias con Júpiter, con
+Y ¿Qué pasa con los IDEs? Por ejemplo, IntelliJ, Eclipse, con NetBeans, todos traen integración con **JUnit Platform**.
 
-Júpiter que la versión 5, pero también nos permite ejecutar obras unitarias de la versión más antigua,
+Si desarrollamos una aplicación en IntelliJ, podemos ejecutar las Pruebas Unitarias porque trae integración. Claro, entonces podemos ejecutar nuestro test con los diferentes IDEs, que tenga soporte a **JUnit Platform** y no solamente con IDEs, sino también con herramientas de construcción, de despliegue. Cuando generamos el JAR por ejemplo, con Gradle, con Maven, con Ant también o incluso desde consola y al fin y al cabo cada uno de esos componente corresponde a un JAR.
 
-la 3 y la 4, pero además nos permite ejecutar, lanzar otros test de otro framework de tercero.
+No es una librería, un framework monolítico, no está todo dentro de una misma librería, no, cada uno de los componentes tiene su propio JAR.
 
-Incluso si no nos gusta utilizar Júpiter ni tampoco Yuni 4 podrían utilizar un externo de otro proveedor
+Por ejemplo **JUnit Platform** es con la librería el JAR **`junitEngine`**.
 
-de un tercero o incluso desarrollarlo.
+Luego tenemos **JUnit Jupiter** que es el API. 
 
-Nosotros se fijan y hoy trae integración para ejecutar otro framework de texting.
+Luego tenemos **JUnit Vintage** para poder tener dentro de un mismo proyecto pruebas unitaria con versión 5, pero también con versiones antiguas.
 
-Entonces provee un API para poder desarrollar nuestro propio framework de unit test y puede lanzarlo
+<img width="757" alt="image" src="https://user-images.githubusercontent.com/23094588/195637821-262e21f8-ef9e-4067-92e9-2a4d2efab0fd.png">
 
-en la plataforma.
+Y para finalizar **JUnit Jupiter** es un API que nos permite escribir nuestros test. Nosotros como desarrolladores interactuamos de forma directa con esta API, agrega un nuevo modelo de programación nuevas características, todo lo de Java 8, todo lo de expresiones Lambda, todo lo de programación funcional, todo esto se incluye en esta nueva versión.
 
-Ejecútalo.
+Además, incorporan y se reescriben las anotaciones que ya venían de la versión 4. Se reescriben, se le cambian el nombre a algunas y también se agregan muchas anotaciones nuevas y estilo de testing de prueba. Y aparte también Júpiter trae un nuevo modelo de extensiones que nos permiten agregar o extender Júpiter, por ejemplo, para trabajar con Spring Framework no se refiere a implementar un nuevo framework, no, sino utilizando Júpiter lo extendemos para agregar mayor funcionalidad, mayor característica.
 
-Y qué pasa con los IDE?
+<img width="647" alt="image" src="https://user-images.githubusercontent.com/23094588/195639590-06503160-3e2c-4b2f-b8f7-2bac211ad6e8.png">
 
-Por ejemplo, intelige con Eclipse, con Nesbit, visto Alcott.
+Las anotaciones que se incluyen, **`@Test`** ya existía en versión 4.
 
-Bueno, todo traen integración con plataforma.
+**`@DisplayName`** tal como dice el nombre despliega o muestra el nombre del test, no existía en la versión anterior, entonces podemos incluir un nombre mucho más descriptivo del test.
 
-Si desarrollamos una aplicación en INTELIGE, podemos ejecutar las pruebas unitarias porque trae integración.
+También se incluye **`@Nested`**  para dar una jerarquía de nuestra prubas unitaria, es decir, tener una clase de prueba y dentro de la clase, otra clase y así, y dar un orden, una jerarquía.
 
-Claro, entonces podemos ejecutar nuestro test con los diferentes IDE, que tenga soporte a plataforma
+Etiquetar o categorizar con **`@Tag`** tampoco existía.
 
-y no solamente con IDE, sino también con herramientas de construcción de despliegue.
+**`@ExtendWith`** son nuevas características de este nuevo modelo que propone Jupiter.
 
-Cuando generamos el llear por ejemplo con Graiver, con Maven, con Aunt también o incluso desde consola
+**`@BeforeEach`** ejecutar antes de cada metodo de test.
 
-y al final cada uno ese componente corresponde a un llear.
+**`@AfterEach`** ejecutar después de cada método de test.
 
-No es una librería, un framework monolítico, está todo dentro de una misma librería, no?
+Estas dos anotaciones existían pero se llamaban distinto, sin el **`Each`**, con el **`Each`** es más descriptivo, Antes de cada y Después de cada método.
 
-Acá cada uno de los componentes tiene su propio jar.
+Después tenemos **`@BeforeAll`** que antes se llamaba **`@BeforeClass`**, que se ejecute antes de que se ejecute cualquier método, pero se ejecuta una sola vez. No es por cada método, sino una sola vez.
 
-Por ejemplo Yuni plataforma es con la librería el jar unit en Jeune.
+Todos estos métodos son del ciclo de vida de una clase de test.
 
-Luego tenemos Yuni, Júpiter o Jupiter que es el API.
+Lo mismo con **`@AfterAll`** al final, después de que se hayan ejecutado todos los métodos de prueba, se ejecuta este método, por ejemplo, para finalizar algo, para cerrar un recurso.
 
-Se fijan Julieth Happy.
-
-Luego tenemos el JAR de Yuni Vintage para poder tener dentro de un mismo proyecto pruebas unitaria conversión
-
-5, pero también conversiones antiguas.
-
-Y para finalizar y Yuni Júpiter es un API que nos permite escribir nuestros test.
-
-Nosotros como desarrolladores interactuamos de forma directa.
-
-Conecta API agrega un nuevo modelo de programación.
-
-No haga terísticas todo lo que lleva.
-
-8.
-
-Todo lo que presiona Landau.
-
-Todo lo que programación funcional.
-
-Todo esto se incluye en esta nueva versión.
-
-Además, incorporan y se reescriben las anotaciones que ya venían de la versión 4.
-
-Se reescriben, se le cambian el nombre alguna y también se agregan muchas anotaciones nuevas y estilo
-
-de testing de prueba.
-
-Y aparte también Júpiter trae un nuevo modelo de extensiones que nos permiten agregar o extender.
-
-Júpiter, por ejemplo, para traja con Spring Frankland no se refiere a implementar un nuevo framework,
-
-no, sino utilizando Júpiter.
-
-Lo extendemos para agregar mayor funcionalidad, mayor característica y las anotaciones que se incluyen.
-
-Bueno, test que ya existía en versión 4 display name está como dice nombre desplegar o mostrar el nombre
-
-del test.
-
-No existía en la versión anterior.
-
-Entonces, en vez de utilizar el nombre método acá, podemos incluir un nombre mucho más descriptivo
-
-del test.
-
-También se incluye Nester para dar una jerarquía de nuestra prubas unitaria, es decir, tener una clase
-
-de prueba y dentro de clase otra clase y así, y dar un orden, una jerarquía, etiquetar o categorizar
-
-contac.
-
-Tampoco existía extended uif estender con tampoco sonó a características de este nuevo modelo que propone
-
-Jupiter before it ejecutar antes de cada metodo de test after it ejecutar después de cada método de
-
-test.
-
-Estas connotacion existían pero se llamaban distintos.
-
-Se llamaba por ejemplo before en vez de before each y after en vez de after it.
-
-Ahora se le da el nombre it, que es un poco más descriptivo.
-
-Antes de cada y después de cada de cada método.
-
-Después tenemos Before al.
-
-Antes se llamaba Before class, que se ejecute antes de que se ejecute cualquier método, pero se ejecuta
-
-una sola vez.
-
-No es por camelos, sino una sola vez.
-
-Se fijan y estos métodos son del ciclo de vida de una clase.
-
-Detesto lo mismo con After Old.
-
-Al final, después de que se haya ejecutado todos los métodos de prueba, ejecutar este método, por
-
-ejemplo, para finalizar algo, para cerrar un recurso.
-
-Finalmente tenemos disable que para deshabilitar un método, una prueba unitaria también existía, pero
-
-antes se llamaba en la versión 4.
-
-Se llamaba Ignorar de ignorar.
-
-Ahora diseña un cambio nombre, pero al final es lo mismo de solita.
-
-Es bueno, nada más por ahora.
-
-Y nos vemos en la siguiente clase.
+Finalmente tenemos **`@Disable`** para deshabilitar un método, una prueba unitaria, también existía, pero antes se llamaba en la versión 4, se llamaba **`Ignor`** de ignorar, pero el resultado es el mismo.
 
 ## Creando y configurando el proyecto con JUnit 5 08:48
 
