@@ -395,5 +395,13 @@ Finalmente se abre el IDE.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195560883-3b84906c-13ed-4f84-9d85-e14aa77742ab.png">
 
-Tenemos nuestra ventana principal por defecto, que nos permite crear un proyecto nuevo, abrir un proyecto, u obtener un proyecto desde el VCS (Sistema de Control de Versiones)
+Tenemos nuestra ventana principal por defecto, que nos permite crear un proyecto nuevo, abrir un proyecto, u obtener un proyecto desde el VCS (Sistema de Control de Versiones).
+
+Tenemos un botón **Start Tour** al pulsarlo tenemos:
+
+<img width="265" alt="image" src="https://user-images.githubusercontent.com/23094588/195563289-898407ea-4e4d-49c3-bc5e-2437ab6dccba.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195563040-26cb0b12-ef99-41ba-8588-f24789c1d132.png">
+
+Cuando sea posible hacerlo.
 
