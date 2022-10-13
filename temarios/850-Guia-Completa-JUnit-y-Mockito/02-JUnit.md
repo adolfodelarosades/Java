@@ -125,129 +125,36 @@ Por eso ejecutar repetibles pruebas unitarias no solamente hoy, sino también ma
 
 ## Introducción JUnit 5 10:31
 
-Continuamos?
+En la sección anterior vimos Pruebas Unitarias, pero algo general. Ahora me voy a centrar en **JUnit 5** que es lo que vamos a utilizar en el curso.
 
-Bueno, la clase anterior vimos pro unitaria, pero algo general.
+¿Cuál es la arquitectura? ¿De qué se trata? Comparar un poco con la versión 4, la versión anterior.
 
-Ahora me voy a centrar en Yuni 5 calarse que vamos a utilizar en el curso.
+La versión 4 ya tenía mucho tiempo en la industria, por lo menos unos 10 años, o quizá un poco más de años. En un software es demasiado tiempo, porque han pasado muchos cambios, de hecho todo lo nuevo de Java 8 en **JUnit 4** no existe, por ejemplo, las expresiones labda, la programación funcional, el API Stream, todo eso se viene a implementar en la versión 5.
 
-Cuál es la arquitectura?
+**JUnit 4** más o menos fue lanzado desarrollado en 2006 por ahí, la versión 5 se lanza por ahí 2015/2016. Mucho tiempo sin actualizarse, sin nuevas característica, sin nuevos patrones de testing, sin nuevas características de Java, un montón de cosas que se incorporaron en la versión 5.
 
-Bueno, de qué se trata comprar un poco con la versión 4?
+Y no solamente eso, sino también muchos tipos, formas de realizar Pruebas Unitarias o estilos que se agregan en la versión 5. Es decir, un cambio bastante rotundo.
 
-La versión anterior?
+<img width="899" alt="image" src="https://user-images.githubusercontent.com/23094588/195619556-d627d778-3cbe-481e-84ae-4cd097dcd725.png">
 
-Bueno, de hecho podremos partir con eso.
+Pero comencemos con **JUnit 5**.
 
-Cuál es la diferencia entre la 4 y las 5?
+**JUnit 5** es una librería de Java, un framework que le permite escribir y ejecutar Pruebas Unitarias, repetibles, es decir, en el tiempo. Además de eso, **JUnit 5** trae un nuevo modelo de  programación mucho más robusto que la versión anterior. Programación funcional, expresiones lambda, es decir, todas las características de Java 8, incluye además varios estilos diferentes de pruebas que vamos a ver durante el curso. 
 
-Bueno, antes que nada, la 4 ya tenía mucho tiempo en la industria, por lo menos unos 10, o quizá
+Por ejemplo, ***Pruebas Unitarias Repetibles***. Podemos indicar la cantidad de veces que queremos repetir una misma prueba o bien podemos repetir una prueba con distintos tipos de parámetros, ***Pruebas Parametrizables*** es decir, por ejemplo una lista, un arreglo de varios parámetros de entrada o inputs con diferentes valores y probar cómo se comporta con estos diferentes valores, es importante, automatizada y parametrizar, se van a ejecutar esta mismas prueba pero con diferentes escenarios.
 
-un poco más de años.
+Otro estilo por ejemplo ***Manejo de Excepciones***, es decir, bajo ciertos parámetros de entrada debería fallar nuestra aplicación. Bueno, se está manejando correctamente. Realmente se está lanzando una excepción que nosotros deseamos o esperamos, si así se está ejecutando bien, a pesar de que estamos probando o estamos simulando un error, pero lo estamos simulando de forma controlada, estamos provocando el error para que ocurra tal como queremos que ocurra bajo ese contexto, ahora si se lanza por ejemplo otra opción distinta a la que esperamos y falla la prueba, no pasa, o bien si no se lanza ninguna excepción, significa que no estamos controlando o manejando el error. Y ahí tenemos un problema que tenemos que solucionar. Es un estilo de prueba distinto.
 
-Cuando salió la versión 5, es decir, mucho tiempo, diseño en una aplicación, en un software, demasiado.
+También todo lo que es ejecución de pruebas condicionales, es decir, que se ejecuten no siempre sino bajo cierto contexto, bajo cierto ambiente, cierta versión, por ejemplo, de JDK, si la versión es la 11, por ejemplo, que ejecute una cierta prueba única especial para probar un código o una características del JDK 11 o superior. Pero si estamos utilizando la 1.8, la 8 no.
 
-Por qué pasa mucho cambio?
+Pero también bajo ciertos ***parámetros de nuestro sistema***,  *variable de ambiente*, si tenemos configurada un área de ambiente o no, bueno, aquí ejecuta la prueba, sino que no la ejecute. O si estamos en *Linux* que la ejecute. Si tengo *Mac* o un *Windows* que no la ejecute.
 
-Bueno, de hecho todo lo que lleva 8 en Yuni 4 no existe.
+Un montón de cosas que veremos durante el curso, uso extensivo de ***anotaciones***, manejo de ***ciclo de vida*** en las clase de test.
 
-Por ejemplo, presiona el danda.
+<img width="817" alt="image" src="https://user-images.githubusercontent.com/23094588/195624868-8aea8ba0-8160-415c-8663-2e9fd3b888eb.png">
 
-Programación funcional, el API Stream.
 
-Todo eso se viene implementar en la versión 5.
 
-Yune 4 más o menos fue lanzado desarrollado en 2006 por ahí y bueno, la versión 5 se lanza por ahí
-
-2015/2016.
-
-Mucho tiempo sin actualizarse, sin una característica, sin unos patrones de testing, si no que artrítica
-
-el lenguaje de Java, un montón de cosas que se incorporaron en la versión 5.
-
-Y no solamente eso, sino también muchos tipos, formas de realizar pras unitarias o estilos que se
-
-agregan en la versión 5.
-
-Es decir, un cambio bastante rotundo.
-
-Pero comencemos con Yuni 5 tles que es.
-
-Ya vimos que Yuni es una librería de Java, un framework que le permite escribir y ejecutar puras unitarias
-
-repetibles, es decir, en el tiempo.
-
-Pero bueno, Yuni 5 además de eso, trae un nuevo modelo programación mucho más robusto que la versión
-
-anterior.
-
-Programación funcional, expresiones lambda.
-
-Es decir, toda la característica de ya 8 incluye además varios estilos diferentes de pruebas que vamos
-
-a ver durante el curso.
-
-Por ejemplo, pruebas unitarias repetibles.
-
-Podemos indicar la cantidad de veces que queremos repetir una misma prueba o bien podemos repetir una
-
-prueba con distintos tipos de parámetros.
-
-Prueba parametrizar ables.
-
-Es decir, por ejemplo una lista, un arreglo de varios parámetros de entrada o input con diferentes
-
-valores y probar cómo se comporta con estos diferentes valores.
-
-Es importante, automatizada y parametrizar.
-
-Ya se van a ejecutar esta misma prueba pero con diferentes scenario.
-
-Otro estilo por ejemplo manejo excepciones, es decir, bajo ciertos parámetros de entrada debería fallar
-
-nuestra aplicación.
-
-Bueno, se está manejando correctamente.
-
-Realmente se está lanzando una excepción que nosotros deseamos o esperamos?
-
-Bueno, si así se está ejecutando bien, a pesar de que estamos probando o estamos simulando un error,
-
-pero lo estamos simulando de forma controlada, estamos provocando el error para que ocurra tal como
-
-queremos que ocurra.
-
-Bajo ese contexto, ahora si se lanza, por ejemplo, otra opción distinta a la que esperamos, bueno,
-
-falla.
-
-La prueba no pasa.
-
-O bien, si no se lanza ninguna acepción significa que no estamos controlando o manejando el error.
-
-Y ahí tenemos un problema que tenemos que solucionar, se fijan.
-
-Es un estilo de prueba distinto también todo lo que es ejecución de pruebas condicionales, es decir,
-
-que se ejecuten no siempre sino bajo cierto contexto, bajo cierto ambiente, cierta versión, por ejemplo,
-
-de JDK, si la versión en la ONCE, por ejemplo, que ejecute una cierta prueba única especial para
-
-apurar un código o no a características del JDK 11 o superior.
-
-Pero si estamos utilizando la 1 8, la 8.
-
-No, pero también bajo ciertos parámetros de nuestro sistema variable de ambiente.
-
-Si tenemos configurada un área de ambiente o no, bueno, aquí ejecuta la prueba, sino que no la ejecute
-
-o si estamos en Linux que la ejecute.
-
-Si tengo makin touch o un Windows que no la ejecute.
-
-Bueno, ya hace un montón de cosa que veremos durante el curso uso extensivo de anotaciones, manejo
-
-ciclo de día en la clase de test.
 
 En fin, veámosla quitectura de Yuni 5 1 de la diferencia con Yune 4.
 
