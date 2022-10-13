@@ -2,6 +2,7 @@
 
 * Introducción pruebas unitarias 09:14
 * Introducción JUnit 5 10:31
+* Actualización creando proyecto Maven en IntelliJ 01:31
 * Creando y configurando el proyecto con JUnit 5 08:48
 * Escribiendo y ejecutando primeras pruebas unitarias con Assertions 17:19
 * Escribiendo test para el saldo 11:44
@@ -220,6 +221,28 @@ Todos estos métodos son del ciclo de vida de una clase de test.
 Lo mismo con **`@AfterAll`** al final, después de que se hayan ejecutado todos los métodos de prueba, se ejecuta este método, por ejemplo, para finalizar algo, para cerrar un recurso.
 
 Finalmente tenemos **`@Disable`** para deshabilitar un método, una prueba unitaria, también existía, pero antes se llamaba en la versión 4, se llamaba **`Ignor`** de ignorar, pero el resultado es el mismo.
+
+## Actualización creando proyecto Maven en IntelliJ 01:31
+
+Esta es una lección de actualización sobre IntellliJ de como crear un proyecto, pero con Maven, porque durante el curso vamos a crear algunos proyectos en Maven y es importante que veamos esta actualización porque cambió un poco.
+
+Necesito que solamente pongan atención, no es necesario que hagan nada, esto solamente para después, cuando creamos los proyectos en Maven, para que lo tengan en cuenta de como cambio un poco en IntelliJ.
+
+<img width="804" alt="image" src="https://user-images.githubusercontent.com/23094588/195646515-3714a48d-4395-4344-b3c2-c65ac3057189.png">
+
+Tengo la última versión de IntelliJ IDEA 2022.2.3 hasta la fecha, nos vamos a ir **New Project**.
+
+<img width="802" alt="image" src="https://user-images.githubusercontent.com/23094588/195647071-d2dde09d-dc43-4dc4-b002-3ae22e298f42.png">
+
+Aquí es donde cambia, se fijan, aparece una ventana un poco distinta a la del curso. A la izquierda dice ***Maven Archetype***, pero no, no tenemos que seleccionar ***Maven Archetype***, sino nos vamos a **New Project** y en **Name** le damos el nombre tal cual, según corresponda al curso, el **Location** indicamos la carpeta del curso en cuestión. Seleccionamos ***Java*** que el lenguaje que vamos a utiliza y en **Build system** seleccionamos **Maven**, en **JDK** tenemos la versión del JDK.
+
+En **Advanced Settings** configuramos el **GroupId** y el **ArtifactId** del proyecto maven que configuraremos mas adelante.
+
+Una vez llenado todos los datos presionamos el botón **Create**.
+
+<img width="801" alt="image" src="https://user-images.githubusercontent.com/23094588/195651645-792aad3f-caf8-4d75-a96b-268a4cd03a97.png">
+
+Esto solo es una actualización por que en los videos se ve una versión anterior de IntelliJ.
 
 ## Creando y configurando el proyecto con JUnit 5 08:48
 
