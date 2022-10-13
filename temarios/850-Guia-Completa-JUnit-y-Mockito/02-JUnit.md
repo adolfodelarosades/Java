@@ -340,50 +340,37 @@ Las librerias que necesitamos para trabajar con Pruebas Unitarias, estamos listo
 
 <img width="1490" alt="image" src="https://user-images.githubusercontent.com/23094588/195720131-dc3becb4-6908-4f1f-8df3-9b7b5a8258ea.png">
 
-
+En nuestro proyecto tenemos la carpeta **`src`** la cual tiene la carpeta **`java`** donde tenemos nuestras clases Java del proyecto y otra carpeta **`test`**, que es el contexto de Pruebas Unitarias, cuando queramos crear una clase test para realizar nuestras pruebas lo hacemos aquí
 En nuestro proyecto tenemos la carpeta **`src`** la cual tiene la carpeta **`java`** donde tenemos nuestras clases Java del proyecto y otra carpeta **`test`**, que es el contexto de Pruebas Unitarias.
 
-Entonces cuando queramos crear una clase test para realizar nuestras pruebas.
+En la sección de clases del proyecto vemos que se nos creo un paquete **`org.javaocio.junitapp.ejemplo`** y dentro de este se creo la clase **`Main`**.
 
-Bueno.
+<img width="750" alt="image" src="https://user-images.githubusercontent.com/23094588/195721787-8781be6a-8167-4ad9-a632-e8d58332158e.png">
 
-Acá en test.
+Esto paso por que a la hora de crear el proyecto teniamos un check marcado para que lo hiciera si esto no lo ubiera creado automáticamente lo creamos nosotros a mano.
 
-Nuestro código.
+Vamos a crear una clase POJO y esto lo haremos en un nuevo paquete llamado **`org.javaocio.junitapp.ejemplo.models`** y dentro la clase **`Cuenta`**.
 
-Acá vamos a partir.
+<img width="1493" alt="image" src="https://user-images.githubusercontent.com/23094588/195722263-9c64e681-e832-475a-82ea-6744cd7020ad.png">
 
-Acá en Java Main, java.
+A esta clase le vamos a insertar sus atributos y sus métodos getters y setters.
 
-Vamos a crear un package.
+<img width="463" alt="image" src="https://user-images.githubusercontent.com/23094588/195722936-c2e975fb-773f-42ab-b839-9658a06ba90b.png">
 
-Con click derecho new рамках.
+Esta clase si se fija en bastante simple, pero recuerden, después vamos a ir ampliandola y vamos a colocar algunos método un poco más sofisticados, por ejemplo, el método **`debito`** y **`credito`** para la transferencia.
 
-Y después, bueno, vamos a crear una clase, es una forma.
+El ***débito*** es cuando nosotros o la cuenta realiza una transferencia, por lo tanto tenemos que *restar del saldo* lo que vamos a transferir y el ***crédito*** al revés cuando nos transfieren a nosotros y tenemos que *sumar ese monto a nuestro saldo*, después vamos a tener la clase **`Banco`**, la que realiza la transferencia y tiene una asociación, una lista de cuentas bancarias y la cuenta, por supuesto, va a tener un atributo que apunta hacia el banco, pero la idea de probar de a poco.
 
-Recuerden que también podemos hacer clic acá y con alt insert lo mismo un atajo pacato, es decir,
+### BigDecimal
 
-alpacas de yaba por punto A Guzmán Punto UNIT AP.
+Hemos declarado al **`saldo`** como **`BigDecimal`**, podríamos haber usado un **`integer`** manejar al saldo como un entero, pero en realidad el saldo podría ser decimal, de hecho, podría ser un **`float`** o un **`double`** con punto flotante.
 
-UNIT 5 AP.
+Pero cuando trabajamos con Monedas, todo lo que es finanzas, con dinero es mucho mejor y mucho más preciso trabajar con la clase **`BigDecimal`** que pertenece al paqute **`java.math.BigDecimal`**, un **`BigDecimal`**, es un decimal de alta precisión y además inmutable. Es un punto importante, que está diseñado para trabajar con números decimales.
 
-Ejemplos Ok.
+La diferencia cuando tratamos con **`float`** o con **`double`** todos los cómputos o cálculos matemáticos en realidad se realizan a nivel binario, con ceros y uno. Y eso al final afecta la precisión.
 
-Y dentro vamos a tener nuestra clase.
+No es tan preciso cuando queremos trabajar con dinero, como trabaja la industria financiera, por ejemplo, es mucho más eficiente y mejor, mucho más preciso trabajar con **`BigInteger`** o **`BigDecimal`**. Además que todos los computos y todos los cálculos se realizan de forma aritmética, pero con el cálculo humano y no con el cálculo de computadora binario, es una diferencia importante.
 
-Nuestra clase de dominio un poco con algunos atributos y la idea de probar.
-
-Vamos a partir con un test simple.
-
-Bueno, la idea no central no tanto en crear clase compleja o una gran aplicación, claro, porque si
-
-no vamos a perder el foco de la proa unitaria.
-
-La idea es crear piezas de código simple y testear la propala.
-
-Entonces sobre pacato vamos a crear una clase, pero creo que me falta un pa'ca estupa y qué mejor ejemplos
-
-models o dominio overs de acá?
 
 
 ![image](https://user-images.githubusercontent.com/23094588/130349155-dda27d56-36e2-4fba-a3af-a0f39182adf2.png)
