@@ -99,88 +99,348 @@ Esto asegura que ante cualquier cambio de nuestra aplicación siga funcionando c
 
 Y si falla significa que es actualización o cambio en el código está rompiendo algo en la funcionalidad del código, que ya existía de nuestro código y este test que habíamos escrito, nuestra, Pruebas Unitarias lo va a detectar, si o si lo va a detectar, y de ahí la importancia es decir, no es algo que se pueda detectar en una prueba manual, implementada por nosotros en el desarrollo, por ejemplo, o realizando con la herramienta de debug. No, esto se detecta en el tiempo, ya están escritas, simplemente después de modifir el código, ejecutamos las pruebas.
 
-Bueno, si falló, detectamos y corregimos, entre paréntesis. Bueno, en realidad no es tanto modificar, porque como buena práctica no se recomienda tanto modificar
+Bueno, si falló, detectamos y corregimos, entre paréntesis. Bueno, en realidad no es tanto modificar, porque como buena práctica no se recomienda tanto modificar el código que ya existe, sino más bien extender. De hecho, hay un principio en la programación orientada objeto **Open Close - Abierto Cerrado**. Abierto a la extensión, heredar de clases, extender, pero cerrado a la modificación.
 
+Claro, porque si modificamos siempre vamos a alterar de forma directa el código que existe, cuando modificamos algo. Porque ese código lo más probable que se está utilizando en algún lugar, al ser modificado de alguna forma podría alterar lo que ya existe. Podría romper otra cosa. Entonces siempre es bueno heredar, extender.
 
+Pero así todo, también podrían haber problemas. Y esos problemas es lo que tenemos que también probar, si ocurren y tomar alguna acción, entonces muy importante, no solamente probar, ejecutar nuestros test cuando hayamos terminado de implementar o escribir nuestro código, no, sino también dar continuidad en la ejecución de test en el futuro. Y esto es lo fundamental para el éxito de nuestra aplicación.
 
+<img width="1255" alt="image" src="https://user-images.githubusercontent.com/23094588/195606979-57f9591f-edde-44b5-9014-0cf92567b97f.png">
 
+Vemos definiciones un poco más resumida ¿Qué son las pruebas unitarias?
 
+Es un proceso de examen para verificar que una pieza de código cumple con cierta regla de negocios.
 
-el código que ya existe, sino más bien extender.
+Y eso es fundamental porque vamos a ***afirmar*** un resultado esperado. Comparamos algo esperado VS la realidad, VS el valor que realmente devolvió un método. Si falla, bueno, hay que revisar ese método, ver qué está pasando. Quizá hicimos mal un cálculo o devolvimos **`null`**. Nos olvidamos de hacer el retorno correcto. El return, devolver la instancia o el valor.
 
-De hecho, hay un principio en la programación orientada objeto open close.
+<img width="1009" alt="image" src="https://user-images.githubusercontent.com/23094588/195607951-d63dfd19-4825-4b70-90b1-cf601edc1c15.png">
 
-Abierto, cerrado.
+¿Qué es JUnit?
 
-Abierto a la extensión.
+JUnit es un framework de Java, una librería que nos permite escribir y ejecutar Pruebas Unitarias.
 
-Heredar de clases.
-
-Extender, pero cerrado a la modificación.
-
-Claro, porque si modificamos 100 siempreviva alterar de forma directa el código que existe cuando modificamos
-
-algo.
-
-Porque ese código lo más probable que se está utilizando en algún lugar, al ser modificado de alguna
-
-forma podría alterar lo que ya existe.
-
-Podría romper otra cosa.
-
-Entonces siempre es bueno heredar, estender.
-
-Pero así todo, también podrían haber problemas.
-
-Y eso problema es lo que tenemos que también probar si ocurren y tomar alguna acción entonces muy importante,
-
-no solamente probar, ejecutar nuestros test cuando hayamos terminado de implementar o escribir nuestro
-
-código, no, sino también dar continuidad en la ejecución de test en el futuro.
-
-Y esto es lo que hace realmente fundamental para el éxito de nuestra aplicación.
-
-Pero bueno, vemos definiciones un poco más resumida qué son las pruebas unitarias?
-
-Es un proceso de examen para verificar que una pieza de código cumple con cierta regla negocios.
-
-Y eso es fundamental porque vamos a afirmar un resultado esperado.
-
-Comparamos algo esperado versus la realidad, versus el valor que realmente devolvió un método.
-
-Si falla, bueno, hay que revisar ese método, ver qué está pasando.
-
-Quizá hicimos mal un cálculo o devolvimos null.
-
-Nos olvidamos de hacer el retorno correcto.
-
-El ratón devolver la instancia, se fijan o el valor.
-
-Bueno, y qué es lo que unit?
-
-Porque acá tenemos pruebas unitarias en general.
-
-Pero Juny?
-
-Bueno, es un framework.
-
-Sellaba una librería que nos permite escribir y ejecutar pruebas.
-
-Es importante escribir y ejecutar, porque no solamente ejecutar, sino también escribirlas y de forma
-
-automatizada y también repetibles en el tiempo.
+Es importante, escribir y ejecutar, porque no solamente ejecutar, sino también escribirlas y de forma automatizada y también repetibles en el tiempo.
 
 Por eso ejecutar repetibles pruebas unitarias no solamente hoy, sino también mañana.
 
-Bien.
+## Introducción JUnit 5 10:31
 
-Nada más.
+Continuamos?
 
-Por ahora.
+Bueno, la clase anterior vimos pro unitaria, pero algo general.
+
+Ahora me voy a centrar en Yuni 5 calarse que vamos a utilizar en el curso.
+
+Cuál es la arquitectura?
+
+Bueno, de qué se trata comprar un poco con la versión 4?
+
+La versión anterior?
+
+Bueno, de hecho podremos partir con eso.
+
+Cuál es la diferencia entre la 4 y las 5?
+
+Bueno, antes que nada, la 4 ya tenía mucho tiempo en la industria, por lo menos unos 10, o quizá
+
+un poco más de años.
+
+Cuando salió la versión 5, es decir, mucho tiempo, diseño en una aplicación, en un software, demasiado.
+
+Por qué pasa mucho cambio?
+
+Bueno, de hecho todo lo que lleva 8 en Yuni 4 no existe.
+
+Por ejemplo, presiona el danda.
+
+Programación funcional, el API Stream.
+
+Todo eso se viene implementar en la versión 5.
+
+Yune 4 más o menos fue lanzado desarrollado en 2006 por ahí y bueno, la versión 5 se lanza por ahí
+
+2015/2016.
+
+Mucho tiempo sin actualizarse, sin una característica, sin unos patrones de testing, si no que artrítica
+
+el lenguaje de Java, un montón de cosas que se incorporaron en la versión 5.
+
+Y no solamente eso, sino también muchos tipos, formas de realizar pras unitarias o estilos que se
+
+agregan en la versión 5.
+
+Es decir, un cambio bastante rotundo.
+
+Pero comencemos con Yuni 5 tles que es.
+
+Ya vimos que Yuni es una librería de Java, un framework que le permite escribir y ejecutar puras unitarias
+
+repetibles, es decir, en el tiempo.
+
+Pero bueno, Yuni 5 además de eso, trae un nuevo modelo programación mucho más robusto que la versión
+
+anterior.
+
+Programación funcional, expresiones lambda.
+
+Es decir, toda la característica de ya 8 incluye además varios estilos diferentes de pruebas que vamos
+
+a ver durante el curso.
+
+Por ejemplo, pruebas unitarias repetibles.
+
+Podemos indicar la cantidad de veces que queremos repetir una misma prueba o bien podemos repetir una
+
+prueba con distintos tipos de parámetros.
+
+Prueba parametrizar ables.
+
+Es decir, por ejemplo una lista, un arreglo de varios parámetros de entrada o input con diferentes
+
+valores y probar cómo se comporta con estos diferentes valores.
+
+Es importante, automatizada y parametrizar.
+
+Ya se van a ejecutar esta misma prueba pero con diferentes scenario.
+
+Otro estilo por ejemplo manejo excepciones, es decir, bajo ciertos parámetros de entrada debería fallar
+
+nuestra aplicación.
+
+Bueno, se está manejando correctamente.
+
+Realmente se está lanzando una excepción que nosotros deseamos o esperamos?
+
+Bueno, si así se está ejecutando bien, a pesar de que estamos probando o estamos simulando un error,
+
+pero lo estamos simulando de forma controlada, estamos provocando el error para que ocurra tal como
+
+queremos que ocurra.
+
+Bajo ese contexto, ahora si se lanza, por ejemplo, otra opción distinta a la que esperamos, bueno,
+
+falla.
+
+La prueba no pasa.
+
+O bien, si no se lanza ninguna acepción significa que no estamos controlando o manejando el error.
+
+Y ahí tenemos un problema que tenemos que solucionar, se fijan.
+
+Es un estilo de prueba distinto también todo lo que es ejecución de pruebas condicionales, es decir,
+
+que se ejecuten no siempre sino bajo cierto contexto, bajo cierto ambiente, cierta versión, por ejemplo,
+
+de JDK, si la versión en la ONCE, por ejemplo, que ejecute una cierta prueba única especial para
+
+apurar un código o no a características del JDK 11 o superior.
+
+Pero si estamos utilizando la 1 8, la 8.
+
+No, pero también bajo ciertos parámetros de nuestro sistema variable de ambiente.
+
+Si tenemos configurada un área de ambiente o no, bueno, aquí ejecuta la prueba, sino que no la ejecute
+
+o si estamos en Linux que la ejecute.
+
+Si tengo makin touch o un Windows que no la ejecute.
+
+Bueno, ya hace un montón de cosa que veremos durante el curso uso extensivo de anotaciones, manejo
+
+ciclo de día en la clase de test.
+
+En fin, veámosla quitectura de Yuni 5 1 de la diferencia con Yune 4.
+
+La versión anterior es que era monolítica, es decir, había un solo gran componente que hacía todo
+
+y estaba todo dentro de ese mismo componente, por así decir UNIT 4 y finalmente era un solo JAR.
+
+Acá no, acá tenemos una arquitectura un poco más robusta, ya tenemos diferentes componentes, tenemos
+
+un core, tenemos el API o piei y también bueno, vamos a ver que tenemos componente llamado vintage.
+
+Pero para resumir, comencemos con Yuni plataforma.
+
+La plataforma de Yuni 5 bueno es el core.
+
+Es la librería principal que está enfocada al contexto de ejecución del test.
+
+Es como el framework de ejecución que lanza nuestras pruebas unitarias.
+
+Nuestras pruebas unitarias pueden estar crita utilizando UNIT, por ejemplo el API Júpiter, con el
+
+cual nosotros interactuamos como programadores desarrolladores.
+
+Siempre estamos escribiendo nuestros test con Júpiter o Júpiter, como le queremos decir, es el API.
+
+Por ejemplo, como desarrolladores nunca vamos a interactuar con la plataforma, la plataforma solamente
+
+para ejecutar.
+
+Es el framework de ejecución.
+
+Por ejemplo, los IDE como Eclipse NetBeans intelige se fijan visual có todo integran y Yuni 5.
+
+Y por supuesto, la ejecución de prueba unitaria a través de la plataforma.
+
+Por lo tanto, Elide sí que interactúa con la plataforma.
+
+Tienen una integración, pero como desarrollaré no, nosotros solamente escribimos nuestra prueba a
+
+través de Júpiter.
+
+Luego tenemos Píntate.
+
+Es un componente que nos permite integrar la versión 4 o versión 3 en un proyecto que conviva en conjunto
+
+con proas unitaria de la versión 5.
+
+Es decir, podríamos tener un proyecto que ya tiene pruebas unitarias con la versión antigua, pero
+
+además queremos implementar pruebas unitarias con Extend 5 que ya existían.
+
+La dejamos tal cual con la 4 y además 5 y no tener que escribir Toh Halverson 5.
+
+Veamos un poco más detallado, por ejemplo, que tenemos Yuni plataforma que es el core.
+
+Recuerden Hakata todo el test en jeune o el motor de ejecución de test.
+
+Acá se lanza nuestra parasu unitarias, pero nos permite lanzar pruebas unitarias con Júpiter, con
+
+Júpiter que la versión 5, pero también nos permite ejecutar obras unitarias de la versión más antigua,
+
+la 3 y la 4, pero además nos permite ejecutar, lanzar otros test de otro framework de tercero.
+
+Incluso si no nos gusta utilizar Júpiter ni tampoco Yuni 4 podrían utilizar un externo de otro proveedor
+
+de un tercero o incluso desarrollarlo.
+
+Nosotros se fijan y hoy trae integración para ejecutar otro framework de texting.
+
+Entonces provee un API para poder desarrollar nuestro propio framework de unit test y puede lanzarlo
+
+en la plataforma.
+
+Ejecútalo.
+
+Y qué pasa con los IDE?
+
+Por ejemplo, intelige con Eclipse, con Nesbit, visto Alcott.
+
+Bueno, todo traen integración con plataforma.
+
+Si desarrollamos una aplicación en INTELIGE, podemos ejecutar las pruebas unitarias porque trae integración.
+
+Claro, entonces podemos ejecutar nuestro test con los diferentes IDE, que tenga soporte a plataforma
+
+y no solamente con IDE, sino también con herramientas de construcción de despliegue.
+
+Cuando generamos el llear por ejemplo con Graiver, con Maven, con Aunt también o incluso desde consola
+
+y al final cada uno ese componente corresponde a un llear.
+
+No es una librería, un framework monolítico, está todo dentro de una misma librería, no?
+
+Acá cada uno de los componentes tiene su propio jar.
+
+Por ejemplo Yuni plataforma es con la librería el jar unit en Jeune.
+
+Luego tenemos Yuni, Júpiter o Jupiter que es el API.
+
+Se fijan Julieth Happy.
+
+Luego tenemos el JAR de Yuni Vintage para poder tener dentro de un mismo proyecto pruebas unitaria conversión
+
+5, pero también conversiones antiguas.
+
+Y para finalizar y Yuni Júpiter es un API que nos permite escribir nuestros test.
+
+Nosotros como desarrolladores interactuamos de forma directa.
+
+Conecta API agrega un nuevo modelo de programación.
+
+No haga terísticas todo lo que lleva.
+
+8.
+
+Todo lo que presiona Landau.
+
+Todo lo que programación funcional.
+
+Todo esto se incluye en esta nueva versión.
+
+Además, incorporan y se reescriben las anotaciones que ya venían de la versión 4.
+
+Se reescriben, se le cambian el nombre alguna y también se agregan muchas anotaciones nuevas y estilo
+
+de testing de prueba.
+
+Y aparte también Júpiter trae un nuevo modelo de extensiones que nos permiten agregar o extender.
+
+Júpiter, por ejemplo, para traja con Spring Frankland no se refiere a implementar un nuevo framework,
+
+no, sino utilizando Júpiter.
+
+Lo extendemos para agregar mayor funcionalidad, mayor característica y las anotaciones que se incluyen.
+
+Bueno, test que ya existía en versión 4 display name está como dice nombre desplegar o mostrar el nombre
+
+del test.
+
+No existía en la versión anterior.
+
+Entonces, en vez de utilizar el nombre método acá, podemos incluir un nombre mucho más descriptivo
+
+del test.
+
+También se incluye Nester para dar una jerarquía de nuestra prubas unitaria, es decir, tener una clase
+
+de prueba y dentro de clase otra clase y así, y dar un orden, una jerarquía, etiquetar o categorizar
+
+contac.
+
+Tampoco existía extended uif estender con tampoco sonó a características de este nuevo modelo que propone
+
+Jupiter before it ejecutar antes de cada metodo de test after it ejecutar después de cada método de
+
+test.
+
+Estas connotacion existían pero se llamaban distintos.
+
+Se llamaba por ejemplo before en vez de before each y after en vez de after it.
+
+Ahora se le da el nombre it, que es un poco más descriptivo.
+
+Antes de cada y después de cada de cada método.
+
+Después tenemos Before al.
+
+Antes se llamaba Before class, que se ejecute antes de que se ejecute cualquier método, pero se ejecuta
+
+una sola vez.
+
+No es por camelos, sino una sola vez.
+
+Se fijan y estos métodos son del ciclo de vida de una clase.
+
+Detesto lo mismo con After Old.
+
+Al final, después de que se haya ejecutado todos los métodos de prueba, ejecutar este método, por
+
+ejemplo, para finalizar algo, para cerrar un recurso.
+
+Finalmente tenemos disable que para deshabilitar un método, una prueba unitaria también existía, pero
+
+antes se llamaba en la versión 4.
+
+Se llamaba Ignorar de ignorar.
+
+Ahora diseña un cambio nombre, pero al final es lo mismo de solita.
+
+Es bueno, nada más por ahora.
 
 Y nos vemos en la siguiente clase.
 
-## Introducción JUnit 5 10:31
 ## Creando y configurando el proyecto con JUnit 5 08:48
 
 ![image](https://user-images.githubusercontent.com/23094588/130349155-dda27d56-36e2-4fba-a3af-a0f39182adf2.png)
