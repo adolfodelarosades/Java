@@ -375,8 +375,21 @@ Vamos a descargar la versión **Community** para nuestro sistema operativo.
 
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/23094588/195553257-730c1e15-dc5a-4ce0-b3a4-c2be31314f69.png">
 
-
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/23094588/195553101-2987633f-2dd1-4787-90f2-df87ca4000b1.png">
+
+Damos click en el archivo descargado para instalarlo.
+
+<img width="459" alt="image" src="https://user-images.githubusercontent.com/23094588/195557695-5186186a-a09b-4e2a-a671-27572c9d3f9f.png">
+
+Arrastramos el icono a Aplicaciones para instalarlo.
+
+<img width="1357" alt="image" src="https://user-images.githubusercontent.com/23094588/195558779-7718a563-d55b-4bd4-bc73-c1574377ade3.png">
+
+Ya nos aparece dentro de nuestras aplicaciones, vamos a dar doble clic para abrir el IDE de IntelliJ IDEA CE.
+
+
+
+
 
 
 También pueden seleccionar el sistema operativo, por ejemplo, se van a Mackintosh o a Linux y también,
