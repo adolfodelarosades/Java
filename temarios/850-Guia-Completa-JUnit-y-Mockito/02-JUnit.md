@@ -153,60 +153,25 @@ Un montón de cosas que veremos durante el curso, uso extensivo de ***anotacione
 
 <img width="817" alt="image" src="https://user-images.githubusercontent.com/23094588/195624868-8aea8ba0-8160-415c-8663-2e9fd3b888eb.png">
 
+Veámos la arquitectura de **JUnit 5**.
 
+Una diferencia con **JUnit 4** la versión anterior es que era monolítica, es decir, había un solo gran componente que hacía todo y estaba todo dentro de ese mismo componente, por así decir **JUnit 4** y finalmente era un solo JAR.
 
+Con **JUnit 5** tenemos una arquitectura un poco más robusta, ya tenemos diferentes componentes, tenemos un ***Core***, tenemos el ***API***, tenemos componente llamados ***Vintage***.
 
-En fin, veámosla quitectura de Yuni 5 1 de la diferencia con Yune 4.
+Comencemos con **JUnit Platform** la plataforma de **JUnit 5**, es el ***Core***, es la librería principal que está enfocada al contexto de ejecución del test. Es como el framework de ejecución que lanza nuestras Pruebas Unitarias.
 
-La versión anterior es que era monolítica, es decir, había un solo gran componente que hacía todo
+Nuestras Pruebas Unitarias pueden estar escritas utilizando **JUnit Jupiter**, por ejemplo el ***API Júpiter***, con el cual nosotros interactuamos como programadores, desarrolladores. Siempre estamos escribiendo nuestros test con Júpiter o Yúpiter, como le queremos decir, es el API.
 
-y estaba todo dentro de ese mismo componente, por así decir UNIT 4 y finalmente era un solo JAR.
+Por ejemplo, como desarrolladores nunca vamos a interactuar con la plataforma, la plataforma es solamente para ejecutar. Es el framework de ejecución.
 
-Acá no, acá tenemos una arquitectura un poco más robusta, ya tenemos diferentes componentes, tenemos
+Por ejemplo, los IDEs como Eclipse, NetBeans, IntelliJ, todos integran **JUnit 5** y por supuesto, la ejecución de Pruebas Unitarias a través de la plataforma. Por lo tanto, el IDE sí que interactúa con la plataforma. Tienen una integración, pero como desarrollaré no, nosotros solamente escribimos nuestra prueba a través de Júpiter.
 
-un core, tenemos el API o piei y también bueno, vamos a ver que tenemos componente llamado vintage.
+Luego tenemos **JUnit Vintage** es un componente que nos permite integrar la versión 4 o versión 3 en un proyecto que conviva en conjunto con Pruebas Unitarias de la versión 5.
 
-Pero para resumir, comencemos con Yuni plataforma.
+Es decir, podríamos tener un proyecto que ya tiene Pruebas Unitarias con la versión antigua, pero además queremos implementar Pruebas Unitarias con versión 5, las que ya existían las dejamos tal cual con la 4 y no tenemos que reescribir todo a la versión 5.
 
-La plataforma de Yuni 5 bueno es el core.
-
-Es la librería principal que está enfocada al contexto de ejecución del test.
-
-Es como el framework de ejecución que lanza nuestras pruebas unitarias.
-
-Nuestras pruebas unitarias pueden estar crita utilizando UNIT, por ejemplo el API Júpiter, con el
-
-cual nosotros interactuamos como programadores desarrolladores.
-
-Siempre estamos escribiendo nuestros test con Júpiter o Júpiter, como le queremos decir, es el API.
-
-Por ejemplo, como desarrolladores nunca vamos a interactuar con la plataforma, la plataforma solamente
-
-para ejecutar.
-
-Es el framework de ejecución.
-
-Por ejemplo, los IDE como Eclipse NetBeans intelige se fijan visual có todo integran y Yuni 5.
-
-Y por supuesto, la ejecución de prueba unitaria a través de la plataforma.
-
-Por lo tanto, Elide sí que interactúa con la plataforma.
-
-Tienen una integración, pero como desarrollaré no, nosotros solamente escribimos nuestra prueba a
-
-través de Júpiter.
-
-Luego tenemos Píntate.
-
-Es un componente que nos permite integrar la versión 4 o versión 3 en un proyecto que conviva en conjunto
-
-con proas unitaria de la versión 5.
-
-Es decir, podríamos tener un proyecto que ya tiene pruebas unitarias con la versión antigua, pero
-
-además queremos implementar pruebas unitarias con Extend 5 que ya existían.
-
-La dejamos tal cual con la 4 y además 5 y no tener que escribir Toh Halverson 5.
+<img width="873" alt="image" src="https://user-images.githubusercontent.com/23094588/195631713-a1d826b9-bd2a-4d49-8a4d-e6105074937f.png">
 
 Veamos un poco más detallado, por ejemplo, que tenemos Yuni plataforma que es el core.
 
