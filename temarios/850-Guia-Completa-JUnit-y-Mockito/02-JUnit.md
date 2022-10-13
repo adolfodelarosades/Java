@@ -242,6 +242,8 @@ Una vez llenado todos los datos presionamos el botón **Create**.
 
 <img width="801" alt="image" src="https://user-images.githubusercontent.com/23094588/195651645-792aad3f-caf8-4d75-a96b-268a4cd03a97.png">
 
+Si no queremos tener un proyecto Maven dejamos donde dice IntelliJ, pero si es Maven nunca seleccionamos en ***Maven Archetype***, sino como lo acabamos de explicar.
+
 Esto solo es una actualización por que en los videos se ve una versión anterior de IntelliJ.
 
 ## Creando y configurando el proyecto con JUnit 5 08:48
