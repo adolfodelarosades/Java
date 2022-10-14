@@ -1,13 +1,13 @@
 # 02 JUnit 5
 
-* Introducción pruebas unitarias 09:14
+* Introducción Pruebas Unitarias 09:14
 * Introducción JUnit 5 10:31
 * Actualización creando proyecto Maven en IntelliJ 01:31
 * Creando y configurando el proyecto con JUnit 5 08:48
-* Escribiendo y ejecutando primeras pruebas unitarias con Assertions 17:19
-* Escribiendo test para el saldo 11:44
+* Escribiendo y ejecutando primeras Pruebas Unitarias con Assertions 17:19
+* Escribiendo test para el **`saldo`** 11:44
 * Test driven development TDD con JUnit 10:13
-* TDD para debito y crédito 11:12
+* TDD para **`debito` y **`credito`** 11:12
 * Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
 * Añadiendo la clase Banco y la realcion con las cuentas 09:55
 * Probando y afirmando las realciones entre Banco y Cuenta 08:01
@@ -30,7 +30,7 @@
 * Maven surefire plugin 09:50
 * Descargar Código Fuente 00:03
 
-## Introducción pruebas unitarias 09:14
+## Introducción a Pruebas Unitarias 09:14
 
 <img width="787" alt="image" src="https://user-images.githubusercontent.com/23094588/195566540-8835b0ab-dc25-48b6-adff-fa00870b22d4.png">
 
@@ -413,7 +413,7 @@ Vamos a meter algunos atributos y sus métodos getters y setters:
 
 ![image](https://user-images.githubusercontent.com/23094588/130350457-b4368475-7bc6-42eb-871f-f882f72e3b35.png)
 
-## Escribiendo y ejecutando primeras pruebas unitarias con Assertions 17:19
+## Escribiendo y ejecutando primeras Pruebas Unitarias con Assertions 17:19
 
 En esta lección vamos a probar la clase **`Cuenta`**.
 
@@ -557,7 +557,7 @@ Pero realmente estamos modificando el valor que se espera en el Test para que lo
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195807794-cf8367e9-7c3f-4e51-b501-a6cdde3fdb22.png">
 
-## Escribiendo test para el `saldo 11:44
+## Escribiendo Test para el `saldo` 11:44
 
 Ahora nos vamos a enfocar al **`saldo`**, para lo cual vamos a crear un nuevo método llamado **`testSaldoCuenta()`**
 
@@ -714,7 +714,6 @@ Entonces podríamos hacer lo siguiente:
   }
   ```
   
-
 * Lo siguiente es hacer un Cast al **`Object`** que se esta pasando para recibirlo como un objeto de tipo **`Cuenta`**.
 
   ```java
@@ -782,7 +781,368 @@ Vamos a dejar los atributos iguales nuevamente y el Test vemos que lo pasa.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195945022-c739ff97-0990-4faf-b623-df580f74f68f.png">
 
-## TDD para debito y crédito 11:12
+## TDD para `debito` y `credito` 11:12
+
+Ahora vamos a crear dos métodos en la clase **`Cuenta`**. 
+
+Definiremos el método **`debito`**, que nos servira para restar un monto del **`saldo`**, por ejemplo cuando realizamos una transferencia.
+
+Definiremos el método **`credito`**, que nos servira para cuando otra cuenta nos realiza una transferencia y agregamos el monto al **`saldo`**, es como sumar y restar.
+
+<img width="331" alt="image" src="https://user-images.githubusercontent.com/23094588/195952977-ce1c4a7c-72fc-4072-9dd5-da36db37d7f1.png">
+
+Solamente los vamos a definir, pero sin implementar. Recuerden que la idea de desarrollar con TDD primero implementamos las pruebas y después implementamos todo nuestro código, pero debemos por lo menos definirlos para poderlos usar en la implementación de las pruebas.
+
+Con TDD primeros debemos escribir las pruebas antes de implementar los métodos en la clase **`Cuenta`**.
+
+En nuestra clase **`CuentaTest`** vamos a implementar el método **`testDebitoCuenta`*+ como sigue:
+
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/23094588/195954163-03d2dd17-9923-4d00-b437-845cca68a67b.png">
+
+Estamos creando una cuenta con un **`saldo = 1000.12345`** esto quiere decir que a nuestra cuenta corriente se le van a restar **`100`** de los **`1000`**, por lo tanto, debería tener **`900.12345`**, eso es lo que tenemos que probar.
+
+Lo primero que vamos a probar es que el **`saldo`** no sea **`null`** para esto usamos **`assertNotNull`**, esto es importante por que en métodos anteriores sobre el **`saldo`** aplicamos métodos como **`.equals`** o **`cuenta.getSaldo().doubleValue()`** y si **`saldo`** tiene un valor **`null`** esto nos lanza una excepción.
+
+La segunda prueba que
+
+### `assertNotNull`
+
+Verifica que el parámetro que se le pasa no sea **`null`**.
+
+
+
+
+
+Vamos a hacer dos pruebas, una con Ántero.
+
+Vamos a probar 900 Koma.
+
+Ese sería mi valor esperado como apetitiva y el valor actual.
+
+Débito, cuenta.
+
+Punto, inquiere.
+
+Saldo, ticket, saldo.
+
+Umpitas y Marsi.
+
+Punto int valeo.
+
+Se fijan entonces solamente no va a devolver la parte entera.
+
+Debiese ser 900, no?
+
+Cierto?
+
+Bien, ahí tenemos la primera prueba.
+
+Pero antes, claro.
+
+Qué pasa si el saldo acá pasaramos nul fuera null?
+
+También podríamos probar un cierto que no sea nulo alert not null actual.
+
+Entonces el actuar sería kuenta.
+
+Quetzal No, claro, porque si el nulo acá al tratar de invocar el método invadio, lanzarían no pointer
+
+exception.
+
+Bueno, de todas maneras, si lanza una excepción, también falla nuestra prueba.
+
+Un cierto porque no cumple, pero igual es mejor.
+
+Not null lo programa de forma ilícita y después ya estamos seguro de que no es nulo.
+
+Lo probamos invocando el método Get saldo.
+
+Y eso también lo podríamos hacer acá también se portan en Texas.
+
+Lo cuenta?
+
+Claro, porque el saldo también podría ser nulo acá, porque está invocando métodos, incluso compartid.
+
+Sería bueno comprar acá que el saldo no fuese null en saldo, cuenta.
+
+De hecho, podríamos copiar esto.
+
+Lo seleccionamos completamente acá Acerte no null control C y lo pegamos acá, por acá.
+
+Como está todo muy relacionado, puede ir en un mismo test, pero también lo podemos colocar en métodos
+
+separados.
+
+Necesito comprobar que no sea nulo, comprobar con el equals, con el folks, con el truco.
+
+En fin.
+
+Y acá también se fijan qué pasa.
+
+Acá están operando con el nombre.
+
+De hecho acá estamos invocando real punto y quarts.
+
+Qué pasa si real?
+
+Recuerden que real viene de cuenta a punto de que en nombre qué pasa si el nulo la serie también un
+
+pulpo intercepta?
+
+También lo podemos probar que no sea nulo acá, pero eso sería hilar un poco más fino.
+
+Lo ponemos pegar en vez de cuenta.
+
+Colocamos acá real no puede ser null real.
+
+Así nos aseguramos antes invocar el licorera.
+
+Continuemos.
+
+Estamos acá ya programa quien no puede ser nulo y quas, pero también podríamos tener otra prueba muy
+
+similar a ser iguales.
+
+Ahora, en vez de probar un entero, podríamos probar un string no 1000.
+
+Punto uno, dos, tres, cuatro, cinco.
+
+Un string se fijan.
+
+Este es el miedo a lo esperado.
+
+Perdón.
+
+Entre paréntesis debe ser el mismo valor del bit decimal.
+
+Esto el punto 1, 3, 4, 5, pero menos 100.
+
+Entonces bueno, acá me equivoqué de set €900.
+
+Punto 1 2 3.
+
+4 5.
+
+Bueno, de esta forma después lo revisamos, cierre paréntesis y continuamos.
+
+Coma cuenta ponto get saldo ponto to string.
+
+Pero sería tu plain string.
+
+Tu plan devuelve el string plano con el valor del saldo.
+
+Debes hacer lo mismo.
+
+Te dejan, pero acá lo estamos verificando como un entero y acá como un string pero completo, incluyendo
+
+los decimales.
+
+Esta es la prueba.
+
+Bueno, vamos a probar.
+
+Obviamente la falla no es cierto, porque el método débito no lo tenemos implementado.
+
+Veamos.
+
+Se fijan, espera Novecento, pero en realidad de mil, porque en realidad nunca se descontó.
+
+De hecho, vamos a ejecutar todos, todos los métodos acá afuera.
+
+Listo.
+
+Todos pasan.
+
+Todo está perfecto, menos de débito, cuenta.
+
+Bueno, y acá estamos empezando a sarrollar orientado o impulsado a pruebas unitarias, no?
+
+Cierto?
+
+Primero probamos y después tenemos que implementar este método.
+
+Y algo muy similar también sería con test crédito, cuenta.
+
+Lo podríamos dejar implementado también muy parecido, pero en vez de débito sería crédito.
+
+De hecho, lo podríamos copiar.
+
+En realidad es parecido.
+
+Así que vale la pena copiarlo contra el CD
+
+y lo modificamos.
+
+Entonces, lo primero, en vez de débito, que acá lo seleccionamos y sería crédito.
+
+Y acá también, en vez de cuenta, débito.
+
+Acá crédito el método a esta crédito y todo lo demás.
+
+Estaría bien, pero bueno, vamos a agregar o nos transfirieron, nos depositaron 100 a nuestra cuenta.
+
+Entonces acá en realidad debería ser 1000 más 100 un cierto porque tengo 1000.
+
+Punto 1, 3, 4, 5, 12.
+
+Sería eso más bien mil 100?
+
+Ese sería nuestro valor esperado.
+
+Y acá también.
+
+Ese debería ser 1000 100 puntos 1, 3, 4, 5.
+
+Bien, tenemos la prueba para ambos.
+
+Obviamente estos dos método van a fallar.
+
+De otra forma lo volvemos a ejecutar.
+
+Te dejan acá falla todo, Methos.
+
+Esperado 1100 actual 1000, esperado 900, actual 1000 porque no está implementado, entonces oral sí
+
+que lo amas implementar bien, nos damos a cuenta.
+
+Cómo sería débito primero acá?
+
+Bueno, si no conocemos el API de vida.Si me podría pensar.
+
+Bueno, es súper simple asalto, no?
+
+Cierto punto.
+
+Restar y para restar sería con el método substrato restar el monto.
+
+Por cierto, eso podríamos pensar ya, pero no está correcto.
+
+Y después lo vamos a ver, por qué?
+
+Recuerden que sĂłlo es el atributo.
+
+De hecho, vamos a colocar Tiz de forma explícita.
+
+Salto, punto sūtra y acá.
+
+Bueno, sería al revés.
+
+También podemos pensar punto saldo, punto AB de su mano septo agregar un monto.
+
+Podríamos pensar eso ya.
+
+Pero no, no va a funcionar de otra forma.
+
+Estamos desarrollando.
+
+Supongamos que no conocemos bien el API y no sabemos que el bit decimal es inmutable.
+
+Y ahí está la razón.
+
+Pero bien, vamos a volver con control TAB.
+
+Lo vamos a ejecutar.
+
+Debería fallar.
+
+Se fijan, falla.
+
+Actual mil y espera que sea mil cien, y el actual acá mil y espera que sea 900, no está realizando
+
+bien el trabajo.
+
+Este método no está ni sumando y restando.
+
+Volvamos porque como es inmutable, en realidad acá tenemos que asignar este valor de acá a salto a
+
+salto, porque cada que se cambia el estado interno de un PID decimal, lo que hace no es modificar,
+
+no es cambiar el valor del atributo, lo que hace es devolver una nueva instancia, un nuevo pitch decimal
+
+con ese cambio.
+
+Pero Disable se mantiene inalterable, inmutable.
+
+Entonces, para que esto funcione tenemos que colocar di salto o salto simplemente igual a esto.
+
+Saldo restamos el monto y devuelve una nueva instancia con ese cambio.
+
+Pero en realidad Saldo se mantiene tal cual como estaba la instancia original, lo que hace devolver
+
+otra instancia con ese cambio.
+
+Eso es todo.
+
+Y acá también ya lo tenemos.
+
+De Cambiá vamos a rezar.
+
+Entonces volvemos a cuenta y levantamos.
+
+Veamos qué pasó en crédito.
+
+Está bien en débito esperado.
+
+Bueno, Acán no hizo el cambio.
+
+Vamos a ver, creo que falló acá en débito, claro.
+
+Perdón, acá a cambio de que acá en €900 es cierto, claro, acá se resta 100.
+
+Por lo tanto no es cierto.
+
+Pero acá también hay obviamente 900 puntos, un total de cuatro o cinco ahí.
+
+Entonces volvemos a levantar.
+
+Y pasan Ptolomeos Trattoria.
+
+Cierto es lo que esperamos.
+
+Estás sumando los 100.
+
+Así que está perfecto.
+
+Y arriba en débito está restando los 100 900 y pasa la pulga.
+
+Ahora, cuál será el siguiente paso?
+
+Bueno, en cuenta podemos manejar excepciones, sobre todo acá en débito.
+
+Cuando nosotros realizamos una trasferencia.
+
+Porque claro, qué pasa si nuestra cuenta tiene menos cantidad de dinero de la que vamos a transferir?
+
+Finalmente nos van a arrestar.
+
+No van a restar un monto en nuestra cuenta.
+
+Nuestro saldo no puede llegar a cero si llega a cero, o incluso peor todavía, si llega a un valor
+
+negativo, estaría rompiendo una regla de negocio que sería importante para nuestra aplicación.
+
+Entonces tenemos que manejar.
+
+Tenemos que validar que una vez que hayamos restado, recuerden que esto es inmutable.
+
+Una vez que hayamos restado saldo antes de asignar el valor, poder comprobar que lo que está devolviendo
+
+siga siendo mayor que cero y no quedarnos con un monto negativo.
+
+Por ejemplo, y en caso de que quedemos con un monto negativo antes de asignar el valor, lanzar una
+
+excepción para quien no se realiza la transacción, lanzamos una excepción.
+
+No tiene suficiente dinero en la cuenta.
+
+Por ejemplo, exception y listo.
+
+Después mediante preguntaria.
+
+También podemos probar testear con hacer John's el manejo de error hacer John's Froot.
+
+Pero bueno, eso lo vemos en la siguiente clase.
+
 ## Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
 ## Añadiendo la clase Banco y la realcion con las cuentas 09:55
 ## Probando y afirmando las realciones entre Banco y Cuenta 08:01
