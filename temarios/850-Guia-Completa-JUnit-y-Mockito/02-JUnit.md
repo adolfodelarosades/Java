@@ -417,25 +417,35 @@ Vamos a meter algunos atributos y sus métodos getters y setters:
 
 En esta lección vamos a probar la clase **`Cuenta`**.
 
-![image](https://user-images.githubusercontent.com/23094588/130350566-3a542d42-86e5-42f5-b49e-2ff91562315f.png)
+<img width="421" alt="image" src="https://user-images.githubusercontent.com/23094588/195782760-eac3c455-1973-4c4b-b140-1b5aa80a9d68.png">
 
-En **`src/main/java`** vamos a tener el código Java y en **`src/test/java`** tendremos las clases de Test, podemos crear manualmente el paquete y la clase de Test o podemos usar las ventajas del IDE para crear la clase de Test, nos colocamos en el nombre de la Clase y pulsamos ALT + Insert en MAC (Windows + N) otra forma es con ALT + ENTER
+La clase **`Cuenta`**, una clase bastante simple con algunos atributos y metodos. La idea es probar lo simple que tenemos, no solamente los métodos **`get`**, también podría implementar un **`constructor`** o como se están pasando los parámetros.
 
-![image](https://user-images.githubusercontent.com/23094588/130350796-7ba64afd-e0ee-48cb-a84c-b2706ddabf57.png)
+Y así vamos complementando y probando estos métodos en nuestra clase **`Cuenta`**.
+
+Comencemos con ***verificar***, ***afirmar*** que esté funcionando bien.
+
+En **`src/main/java`** vamos a tener el código Java y en **`src/test/java`** tendremos las clases de Test, podemos crear manualmente el paquete y la clase de Test o podemos usar las ventajas del IDE para crear la clase de Test, nos colocamos en el nombre de la Clase y pulsamos botón derecho y GENERATE en MAC (Command + N) otra forma es con ALT + ENTER
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195785400-e059392e-7a77-4a83-aa70-498768f2945d.png">
 
 Y seleccionar **`Test...`**
 
-![image](https://user-images.githubusercontent.com/23094588/130350931-770bf2cf-2a38-422f-b8b9-e5fda87247e5.png)
+<img width="535" alt="image" src="https://user-images.githubusercontent.com/23094588/195785926-657e3d52-82d7-42f1-9ad2-79e2ce9c69b0.png">
 
 Aceptamos sin agregar nada.
 
-![image](https://user-images.githubusercontent.com/23094588/130350956-3e779e05-efc2-4828-9dac-889479d16cb2.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195786425-45924662-05ea-4d4e-91c2-c1fb4866ae0a.png">
+
+Por convensión la clase de Test lleva el mismo nombre de la clase original mas la palabra test en este caso el nombre es **`cuentaTest`**.
 
 Vamos a añadir un método **`test()`** y lo vamos a anotar con **`@Test`** del paquete **`org.junit.jupiter.api`** la cual indica que este método se debe ejecutar.
 
 ![image](https://user-images.githubusercontent.com/23094588/130351204-3fad0ea7-1347-4db6-9d21-54a85518cda4.png)
 
-La clase creada es una clase de paquete (No **`public`**) lo que significa que solo se puede ejecutar dentro de los paquetes de Test. Otra forma de insertar un método de Test es usar ALT + Insert 
+La clase creada tiene un modificador **`defaul`** (no hay modificador) como buena practica debe ser de este tipo también conocida como ***Clase de Paquete*** (No **`public`**) lo que significa que solo se puede ejecutar dentro de los paquetes de Test. 
+
+Otra forma de insertar un método de Test es usar en Mac COMMAND + N y en Windows ALT + Insert 
 
 ![image](https://user-images.githubusercontent.com/23094588/130351307-e29315e1-eb24-4f82-ac96-54fc6a0d69bf.png)
 
@@ -443,13 +453,15 @@ y seleccionar **`Test method`**
 
 ![image](https://user-images.githubusercontent.com/23094588/130351327-7154557e-afe2-4e2a-b342-7d8b263e8443.png)
 
-Ya solo le ponemos el nombre que queramos. En algunos casos los nombres se ponen así **`test_nombre_cuenta`** para que en los reportes sea más facíl saber que método se ejecuto aun que hay otra opción mejor, nosotros le pondremos **`testNombreCuenta`**, vamos a meter el siguiente código.
+Ya solo le ponemos el nombre que queramos. En algunos casos los nombres se ponen así **`test_nombre_cuenta`** para que en los reportes sea más facíl saber que método se ejecuto aun que hay otra opción mejor que es usar la anotación **`@DisplayName`** en la cual en lugar de usar el nombre del método podemos poner un texto más descriptivo, nosotros le pondremos por ahora **`testNombreCuenta`**, vamos a meter el siguiente código.
 
 ![image](https://user-images.githubusercontent.com/23094588/130351587-8814d66a-2fcf-4ea4-9077-475f24c9ff73.png)
 
- Vamos a ejecutar hay varias formas con la flecha verde del método ejecutará solo ese método, con las dos flechas en el nombre de la clase ejecutará todos los métodos de la clase o con la combinación de teclas CTRL + SHIFT + F10.
+Mientras que no afirmemos nada el Test va a ser correcto, es decir si no se utilizan las Assertions el Test va a ser correcto.
+
+Vamos a ejecutar hay varias formas con la flecha verde del método ejecutará solo ese método, con las dos flechas en el nombre de la clase ejecutará todos los métodos de la clase o con la combinación de teclas CTRL + SHIFT + R o CTRL + SHIFT + F10.
  
- ![image](https://user-images.githubusercontent.com/23094588/130351663-222279ea-7219-4bb2-be98-33047915d84d.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195791990-ab8745ed-d753-41de-af49-afa6c6c3d1a3.png">
 
 #### `assertEquals`
 
