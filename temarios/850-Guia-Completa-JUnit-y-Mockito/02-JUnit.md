@@ -559,7 +559,7 @@ Pero realmente estamos modificando el valor que se espera en el Test para que lo
 
 ## Escribiendo test para el saldo 11:44
 
-Ahora nos vamos a enfocar el **`saldo`**, para lo cual vamos a crear un nuevo método llamado **`testSaldoCuenta()`**
+Ahora nos vamos a enfocar al **`saldo`**, para lo cual vamos a crear un nuevo método llamado **`testSaldoCuenta()`**
 
 ![image](https://user-images.githubusercontent.com/23094588/130355165-5ea6b3c5-afb5-4576-8b68-717767ae9baa.png)
 
@@ -571,21 +571,23 @@ El método nos queda así:
 
 ![image](https://user-images.githubusercontent.com/23094588/130364731-2307c804-33b6-4db6-891a-b5ca209562e2.png)
 
-Con **`assertEquals`** estamos comparado un valor esperado y un valor actual, el valor esperado lo estamos poniendo como una literar double, el valor actual sabemos que es **`Bigdecimal`** y con **`.doubleValue()`** lo que hacemos es que lo trate como doble para evitar compatibilidad de tipos, vamos a ejecutar la Clase:
+Con **`assertEquals`** estamos comparado un valor esperado y un valor actual, el valor esperado lo estamos poniendo como una literar **`double`**, el valor actual sabemos que es **`Bigdecimal`** y con **`.doubleValue()`** lo que hacemos es que lo trate como **`double`** para evitar compatibilidad de tipos, vamos a ejecutar la Clase:
 
-Vamos a ejecutar solo el método **`testSaldoCuenta()`**:
+Vamos a ejecutar solo el método **`testSaldoCuenta()`** damos un click dentro del método y pulsamos CONTROL + SHIFT + R:
 
-![image](https://user-images.githubusercontent.com/23094588/130364829-9cbf0556-2ceb-4933-ad47-d59aa4ad87bf.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195821217-ab067dda-4cf0-4985-ad78-2056fb23e7e0.png">
 
-La prueba la ha pasado para el método **`testSaldoCuenta()`**, ahora lo que vamos a hacer es ejecutar toda la clase:
+La prueba la ha pasado para el método **`testSaldoCuenta()`**, ahora lo que vamos a hacer es ejecutar toda la clase para lo cual hacemos un click en la clase y damos CONTROL + SHIFT + R o el botón ejecutar:
 
-![image](https://user-images.githubusercontent.com/23094588/130365761-d7893ebc-f00c-460d-840d-5824220b6da3.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195822054-a5a374a9-f95c-49a0-93a4-2f0889bd61d6.png">
 
-Los dos métodos pasan el Test. Observese el orden en que ejecuta los métodos no ha sido en el orden en que estan colocados esto lo determina el Motor de JUnit5 pero realmente para nuestras pruebas esto no debería tener ninguna importancia ya que nosotros estamos probando piezas de código independientes. ***No debería manejar staless*** en los diferentes métodos, no deben estar relacionados. En este caso se crea una instancia diferente de **`CuentaTest`** para cada método que tengamos.
+Los dos métodos pasan el Test. Observese el orden en que ejecuta los métodos no ha sido en el orden en que estan colocados esto lo determina el Motor de JUnit5 pero realmente para nuestras pruebas esto no debería tener ninguna importancia ya que nosotros estamos probando piezas de código independientes. ***No debería manejar estados*** en los diferentes métodos, no deben estar relacionados. En este caso se crea una instancia diferente de **`CuentaTest`** para cada método que tengamos.
+
+Después vamos a ver cómo ordenar los métodos por ejemplo, si queremos organizar y que se vean visualmente ordenados, ya sea utilizando el nombre método y que ordene de forma alfabética o utilizando la anotación **`@Order`**, alfabética o con un número, le podemos dar un orden.
 
 ### `assertFalse`
 
-Con **`assertFalse`** va evaluar una expresión booleana y va a esperar que el resultado sea **`false`**. En este caso yo lo que quiero es confirmar que mi **`saldo`** nunca sea negativo. Recordemos que **`saldo`** es un **`BigDecimal`** por lo que no podemos comparar directamente con un **`0`**, vamos a utilizar el método **`compareTo(...)`** el cual puede ser **`1`**, **`-1`** ó **`0`**, ahora vemos que significa esto el código queda así:
+Con **`assertFalse`** va evaluar una expresión booleana y va a esperar que el resultado sea **`false`**. En este caso yo lo que quiero es confirmar que mi **`saldo`** nunca sea negativo. Recordemos que **`saldo`** es un **`BigDecimal`** por lo que no podemos comparar directamente con un **`0`**, vamos a utilizar el método **`compareTo(...)`** el cual devuelve un número que puede ser **`1`**, **`-1`** ó **`0`**, ahora vemos que significa esto el código queda así:
 
 ![image](https://user-images.githubusercontent.com/23094588/130366190-738db5ab-3fad-4bd7-a25a-6b4739341022.png)
 
@@ -593,9 +595,9 @@ La expresión **`cuenta.getSaldo().compareTo(BigDecimal.ZERO)`** esta comparando
 
 ![image](https://user-images.githubusercontent.com/23094588/130366294-3c217aee-3ba5-4f86-b1dd-fb94b6b90403.png)
 
-y preguntamos si el resultado que nos de (**`-1`**) es **`< 0`**. Esta condición va a devolver un **`true`** por lo que el **`assertFalse`** fallará y el Test no lo pasaremos. 
+y preguntamos si el resultado que nos devuelve, es decir (**`-1`**) es **`< 0`**. Esta condición va a devolver un **`true`** por lo que el **`assertFalse`** fallará y el Test no lo pasaremos. 
 
-Si el el **`saldo`** es positivo el **`compareTo`** devolverá un **`1`**, comparará **`1 < 0`** esto nos devolvera **`false` y el  **`assertFalse`** será correcto por lo que el Test lo pasaremos.
+Si el el **`saldo`** es positivo el **`compareTo`** devolverá un **`1`**, comparará **`1 < 0`** esto nos devolvera **`false`** y el **`assertFalse`** será correcto por lo que el Test lo pasaremos.
 
 Si el el **`saldo`** es **`0`** el **`compareTo`** devolverá un **`0`**, comparará **`0 < 0`** esto nos devolvera **`false` y el  **`assertFalse`** será correcto por lo que el Test lo pasaremos. 
 
@@ -603,11 +605,11 @@ El Test será correcto mientras el **`saldo`** sea positivo o **`0`**.
 
 Vamos a probar la clase entera.
 
-![image](https://user-images.githubusercontent.com/23094588/130366593-226240c8-ae1b-4e1d-a8aa-fc37a49f4a1b.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195825546-1833e2e2-8214-496a-8085-5004bd63a449.png">
 
 Paso la prueba, solo por probar vamos a poner el **`saldo`** negativo para que falle la prueba.
 
-![image](https://user-images.githubusercontent.com/23094588/130366640-e6718c44-805d-4210-bd43-43455940865c.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195825772-91703af6-c324-4ecd-9eda-933fcb310f75.png">
 
 La prueba falla por que el **`saldo`** es negativo en el segundo método. Un método paso la prueba pero el otro no. Por lo que el Test no pasa la prueba.
 
@@ -629,9 +631,9 @@ es quivalente a
 assertTrue(cuenta.getSaldo().compareTo(BigDecimal.ZERO) > 0);
 ```
 
-Podemos ponerla de una o de otra forma:
+Podemos ponerla de una o de otra forma, volvemos a poner el saldo positivo:
 
-![image](https://user-images.githubusercontent.com/23094588/130366869-892e217c-e410-4acd-8643-afcc9d276b8a.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195826824-45c48829-df0b-49ec-ac89-9ebb497fbac0.png">
 
 Validamos lo mismo pero con la lógica inversa.
 
