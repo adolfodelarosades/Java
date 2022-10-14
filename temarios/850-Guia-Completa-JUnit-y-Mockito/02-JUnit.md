@@ -463,6 +463,8 @@ Vamos a ejecutar hay varias formas con la flecha verde del método ejecutará so
  
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195791990-ab8745ed-d753-41de-af49-afa6c6c3d1a3.png">
 
+Esta todo correcto, no hay ninguna noticia de que ha pasado algo, pero en realidad no estamos probando nada. Tenemos que usar el API, los métodos estáticos de la clase **`Assertions`**, por eso cuando se creo la clase se importo de manera estática la clase **`Assertions`**, **`import static org.junit.jupiter.api.Assertions.*;`** y simplemente podemos acceder a los métodos de **`Assertions`** de una forma directa como si fueran parte de nuestra clase **`Cuenta`**
+
 #### `assertEquals`
 
 Se ejecuto la clase sin ningún error, hemos ejecutado la clase Test pero realmente no estamos probando nada, debemos usar el API y los métodos estáticos de la clase **`Assertions`** (comentamos la clase importada para usarla como clase estática).
@@ -471,19 +473,23 @@ Se ejecuto la clase sin ningún error, hemos ejecutado la clase Test pero realme
 
 Si ejecutamos nuevamente la Clase Test tenemos:
 
-![image](https://user-images.githubusercontent.com/23094588/130352830-4ad8ddc0-ba1b-4cb6-9d6b-9ae6a4aea7af.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195794530-88c32da2-4485-44b6-b2aa-dcc61b78143e.png">
 
 La ejecución ha ido bien, vamos a cambiar el código comentando el **`set`** y ejecutamos nuevamente:
 
-![image](https://user-images.githubusercontent.com/23094588/130352889-9645b0fc-e682-45e8-8655-5219be43e396.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195796098-00ca9b52-5f78-4adf-88bf-7212c9194b47.png">
 
 Aquí la cosa ya ha ido mal ya que el valor esperado (**`Expected :Adolfo`**) no es igual al valor real (**`Actual :null`**) es decir que comparamos **`Adolfo`** con **`null`** y como no son iguales no pasan la prueba de Test.
 
-Vamos a regresar a la clase **`Cuenta`** con CTRL + TAB y le vamos a crear un constructor con ALT + Insert (Windows + N) 
+Vamos a regresar a la clase **`Cuenta`** con CTRL + TAB y le vamos a crear un constructor con COMMAND + N o ALT + Insert.
 
 ![image](https://user-images.githubusercontent.com/23094588/130353058-a118c011-53c8-44ea-9918-f6186c73415c.png)
  
 Pero solo con el atributo **`saldo`**
+
+![image](https://user-images.githubusercontent.com/23094588/130353070-a61f26fe-970a-40fa-b08f-ec709caafd00.png)
+
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/23094588/195797240-9e508ea5-15f3-4b89-a2bd-e2ccfcf8fd66.png">
 
 ![image](https://user-images.githubusercontent.com/23094588/130353070-a61f26fe-970a-40fa-b08f-ec709caafd00.png)
 
@@ -495,9 +501,11 @@ Hemos olvidado asignar el parámetro **`persona`** al atributo **`persona`**(int
 
 ![image](https://user-images.githubusercontent.com/23094588/130353444-429100f2-2f79-42b9-9632-377ef31554cd.png)
 
+Observemos que el número que estamos poniendo dentro de **`BigDecimal`** lo estamos poniendo entre comillas, lo podemos poner sin las comillas, es una cosa de presición, al no poner las comillas lo que estamos pasando es un Punto Flotante un **`Double`** el cual tiene sus limitaciones en tamaño, en capacidad y también en presión, por esta razón es mejor el número como un **`String`** como una cadena.
+
 Vamos a ejecutar el Test.
 
-![image](https://user-images.githubusercontent.com/23094588/130353466-c4542eb5-035a-4085-b53e-765b7a2a44d5.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195799719-e8700f23-3676-4afd-be0c-6e2685ff5d34.png">
 
 Seguimos teniendo el mismo problema, pero en este caso es pq el código del Constructor de nuestr clase **`Cuenta`** no esta del todo bien, vamos a modificarlo.
 
@@ -505,16 +513,15 @@ Seguimos teniendo el mismo problema, pero en este caso es pq el código del Cons
 
 Y volvemos a ejecutar el Test.
 
-![image](https://user-images.githubusercontent.com/23094588/130353546-ad8c2afe-24cd-4f2c-acbe-abca067b94d8.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195800219-9ee01b1e-7507-4927-a3b6-f1c1a54e1e58.png">
 
 Ahora el Test a pasado la prueba.
 
-Antes habíamos probado el método **`set`** ahora lo que estamos probando es el Constructor.
+Ahora estamos probado el método **`set`** pero además estamos probando el **`constructor`**. Tuvimos un fallo y lo corregimos 
 
-Vamos a dejar de usar la clase estática **`Assertions`** y vamos a importala para solo usar `assertEquals`.
+Vamos a dejar de usar la clase estática **`Assertions`** y vamos a importala como estática para solo usar **`assertEquals`**.
 
-![image](https://user-images.githubusercontent.com/23094588/130353698-aaf7cd2d-8bd2-42ca-96dc-31b72c43ae49.png)
-
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195801291-5ae9b765-531d-48c5-a0b7-1fa8fb494ef9.png">
 
 #### `assertTrue`
 
