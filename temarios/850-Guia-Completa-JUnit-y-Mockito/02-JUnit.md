@@ -563,7 +563,7 @@ Ahora nos vamos a enfocar al **`saldo`**, para lo cual vamos a crear un nuevo m�
 
 ![image](https://user-images.githubusercontent.com/23094588/130355165-5ea6b3c5-afb5-4576-8b68-717767ae9baa.png)
 
-Para que IJ nos cree la variable.
+Para que IntelliJ nos cree la variable.
 
 ![image](https://user-images.githubusercontent.com/23094588/130355208-74bcdc59-a45a-4d3d-ba44-f9a17ee03d86.png)
 
@@ -687,213 +687,100 @@ Como podemos ver compara por defefecto por objeto, por instancias. Pero la idea 
 
 Entonces podríamos hacer lo siguiente:
 
-* Lo primero es hacer un Cast al **`Object`** que se esta pasando, que es de tipo **`Cuenta`**.
+* Lo primero que deberíamos hacer es validar que el objeto que nos llega no sea **`null`** en caso de serlo retornamos **`false`** que indica que no son iguales.
+  ```java
+  if (obj == null) {
+     return false;
+  }
+  ```
+  
+  También deberiamos validar que el objeto que recibimos es una instancia de **`Cuenta`** de no ser así retornamos **`false`**, esto lo hacemos con:
+  
+  ```java
+  if (obj == null || !(obj instanceof Cuenta)) {
+     return false;
+  }
+  ```
+  
+  pero si vemos lo que nos indica el IDE nos ide que la validación de **`null`** esta cubierta con el **`instanceof`**.
+  
+  <img width="771" alt="image" src="https://user-images.githubusercontent.com/23094588/195941756-09b15260-0dea-46de-8f09-3d3a0cb95f37.png">
+
+   por lo que finalmente la validación nos basta con lo siguiente:
+   
+   ```java
+  if (!(obj instanceof Cuenta)) {
+     return false;
+  }
+  ```
+  
+
+* Lo siguiente es hacer un Cast al **`Object`** que se esta pasando para recibirlo como un objeto de tipo **`Cuenta`**.
 
   ```java
+  if (!(obj instanceof Cuenta)) {
+     return false;
+  }
   Cuenta c = (Cuenta) obj;
   ```
-AQUUUUUUUIIIIIIII
-es el cual con el que comparamos.
+  
+* Lo siguiente que vamos a hacer es validar que los atributos no sean nulos, en caso de que alguno de los dos lo sea nulo devolveremos **`false`** que indica que no son iguales.
 
-Entonces lo primero acá hacer el cast.
+  ```java
+  // Validaciones
+  if (!(obj instanceof Cuenta)) {
+     return false;
+  }
+  Cuenta c = (Cuenta) obj;
+  if (this.persona == null || this.saldo == null) {
+     return false;
+  }
+  ```
 
-Ahora si el tipo cuenta le vamos a llamar se de cuenta igual objeto punto y coma bien, pero marca error
+* Una vez hechas las validaciones ya estamos en capacidad de hacer la comparación de los atributos del Objeto que llega y los atributos de la clase, todo esto lo podemos hacer en el **`retur`** del método.
 
-porque tenemos que hacer el cast.
+  ```java
+  // Validaciones
+  if (!(obj instanceof Cuenta)) {
+     return false;
+  }
+  Cuenta c = (Cuenta) obj;
+  if (this.persona == null || this.saldo == null) {
+     return false;
+  }
+  
+  return this.persona.equals(c.getPersona()) && this.saldo.equals(c.getSaldo());
+  ```
+  
+El método completo nos ha quedado así:
 
-Entonces acá con los paréntesis cerramos paréntesis y dentro cuenta se fijan, tenemos cuenta.
+<img width="681" alt="image" src="https://user-images.githubusercontent.com/23094588/195942754-f29ce9d8-f05f-460c-a066-d01ff9188794.png">
+  
+Ahora ya podemos retornar a nuestro Test para probarlo.
 
-Ahora comparamos a qué tengo que validar primero validar por ejemplo, que personas sea distinto null
+<img width="712" alt="image" src="https://user-images.githubusercontent.com/23094588/195942898-4533b189-5d86-4007-ace9-cd13a7b4d156.png">
 
-y que el saldo también sea distinto, nulo y luego compare con el lículas.
+Recordemos que con el **`assertEquals(cuenta2, cuenta);`** el Test fallaba ya que comparaba instancias de Objetos, referencias, pero una vez refactorizado el código implementando el método **`equals`** lo que estamos comparamos ahora son los atributos. Ahora el Test lo debería pasar, vamos a ejecutarlo.
 
-Entonces, por ejemplo, if this punto persona si es igual a null, si es igual a null or colocábamos
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195943981-2b9cf127-c60e-4c13-b128-f81e703d23ef.png">
 
-double pay saldo es igual a null.
+A pasado el Test.
 
-Entonces te devolvemos fols proton olds.
+Vamos a modificar el valor del atributo **`persona`** de uno de los objetos y ejecutamos de nuevo la prueba.
 
-No son iguales.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195944188-a9095bf4-b609-43d9-8878-8277d8b4cbc5.png">
 
-Tenemos que comprar siempre que los atributos primero si son null.
+El Test ya no lo pasa ya que los atributos no son iguales.
 
-Devolvemos fors.
+Ahora vamos a poner diferente el atributo **`saldo`** y ejecutamos el Test.
 
-Por lo tanto no son iguales.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195944560-623efd76-a2d4-4ec0-a34e-0eac19d4c906.png">
 
-Ah, y también tenemos que comparar que tu objeto acá, que se pasa por referencia en el método por
+El Test sigue sin pasarlo ya que los atributos siguen siendo diferentes.
 
-argumento.
+Vamos a dejar los atributos iguales nuevamente y el Test vemos que lo pasa.
 
-También tengo que comparar porque teme pudiera ser nulo y podríamos tener algún tipo de problema entonces.
-
-If.
-
-Objeto si es igual a Anul, bajamos, también devolvemos fols.
-
-Fols.
-
-Eso es primero validar que el objeto sea igual a null.
-
-Devolvemos fours, luego los atributos, pero de la misma clase en cuestión.
-
-Persona y lo que vamos a comparar.
-
-Bueno, hacemos el caso y ahora comparamos, ya que tenemos todo validado.
-
-Comparamos esto, lo quitamos, lo quitamos y lo vamos a cambiar por lo siguiente una prisión booleana
-
-no es cierto si persona o persona.
-
-Luego acabo con dispen que esté un poco más explícito.
-
-Persona.
-
-Punto igual.
-
-Si es igual al atributo del objeto con el cuerpo, vamos a comparar en el equals objeto o C en realidad.
-
-Porque en realidad es cuenta.
-
-Acá decimos el cast cuenta c punto quiete persona.
-
-Entonces compráramos persona con persona y el atributo persona de la clase con el atributo persona del
-
-otro objeto de la instancia.
-
-No sé si es igual esto perfecto, pero te temo que comparar con el saldo.
-
-Si ambos son iguales.
-
-Pensando lo mismo.
-
-Diez diez.
-
-Punto saldo.
-
-El atributo saldo del objeto en cuestión.
-
-Punto.
-
-Y con el saldo del otro objeto.
-
-C Punto.
-
-Get saldo.
-
-Get saldo.
-
-Entonces, si todo esto se cumple, perfecto, devolvemos true.
-
-Pero si llega a fallar cualquiera de estas validaciones va a devolver fols.
-
-Y no va a ser igual.
-
-Incluso también podríamos hacer otra validación que el objeto que se está pasando por instancia acá,
-
-sea del tipo cuenta y no de otro tipo de clase.
-
-Eso también lo podríamos hacer acá con un OR, por ejemplo.
-
-Bueno, si es igual a null or y si es distinto, así que lo voy a negar.
-
-Es decir, si no es tipo de paréntesis y acá objeto instanceof de cuenta en cuenta y listo.
-
-Esto de acá también valida que se anule.
-
-De hecho, calidá lo dice condición objeto igual a null también está cubierto o validado por esta condición.
-
-Entonces, de hecho, esto acá estaría.
-
-Además, lo podemos dejar, sí, pero también está demás.
-
-Entonces valíamos que el objeto se instancia aguanta no solamente un objeto nulo.
-
-Validar, por ejemplo, que no nos pasen un string, por ejemplo, o qué tipo de otra clase.
-
-Listo, ya tenemos el método equals y estamos comparando con salto y con personas que sean iguales.
-
-Bien, volvemos.
-
-Control dado cuenta test.
-
-Se acuerdan?
-
-Este fallaba porque no eran iguales.
-
-Pero ahora como modificamos nuestro código, hicimos una refactorización implementando el método equals.
-
-Ahora debería pasar la prueba.
-
-Veamos.
-
-La pausa de Vigen te correcto.
-
-Vamos a ejecutar todos los métodos.
-
-Pasan los Methos.
-
-Ahora, qué pasa si acá es John Doh, acá es John hГroe, en vez de té colocamos Rohe, pasará la prueba.
-
-Tenemos que probar.
-
-Falla la prueba?
-
-Claro, no son iguales.
-
-Por qué cambió acá el nombre?
-
-Incluso lo dejamos como estaba y probamos acá.
-
-9 9, 9 9 en vez de 7.
-
-Campear más acá debería ser distinto, quizá muy similar.
-
-Se fijan, pasan todo menos test, referencia, lo mismo porque cambiamos acá.
-
-2 Está bien, nuestro código ahora está valiendo bien afirmando mediante la instancia.
-
-Volvemos a ejecutar y debería pasar.
-
-Está bien con hacer y cuál es?
-
-Ahora, si comentamos este.
-
-Por supuesto que va a fallar porque va a esperar que no sean iguales.
-
-Y como son iguales, va a fallar.
-
-Pero lo dejamos así y continuamos en la siguiente clase con otro ejemplo.
-
-Pero ya vamos a empezar a ver el tema de transferencia.
-
-Vamos a implementar dos métodos el débito y crédito y ver qué pasa cuando nos transfieren un monto o
-
-cuando nuestra cuenta transfiere un monto a otra cuenta y hacer el test, probar ese código.
-
-Nos vemos en la siguiente clase.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-AQUIIIIIII min 0:40
-
-
-
-
-
-
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195945022-c739ff97-0990-4faf-b623-df580f74f68f.png">
 
 ## TDD para debito y crédito 11:12
 ## Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
