@@ -557,7 +557,7 @@ Pero realmente estamos modificando el valor que se espera en el Test para que lo
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195807794-cf8367e9-7c3f-4e51-b501-a6cdde3fdb22.png">
 
-## Escribiendo test para el saldo 11:44
+## Escribiendo test para el `saldo 11:44
 
 Ahora nos vamos a enfocar al **`saldo`**, para lo cual vamos a crear un nuevo método llamado **`testSaldoCuenta()`**
 
@@ -638,7 +638,7 @@ Podemos ponerla de una o de otra forma, volvemos a poner el saldo positivo:
 Validamos lo mismo pero con la lógica inversa.
 
 
-## Test driven development TDD con JUnit 10:13
+## Test Driven Development TDD con JUnit 10:13
 
 En esta lección vamos a ver el Desarrollo en Base a Pruebas Unitarias mejor conocido como **TDD Test-Driven Development**(Desarrollo Dirigido por Tests), esta técnica involucra dos partes:
 
@@ -653,15 +653,45 @@ El código se desarrollará siempre en base a las Pruebas Orientadas.
 
 El ejemplo que vamos a querer implementar es la comparación de dos Objetos **`Cuenta`** para ver si son el mismo (las referencias deben ser las mismas). Cuando comparo dos objetos con el método **`equals`** estoy comparando las referencias. Pero puedo modificar este comportamiento y comparar por Valor en vez de por Referencia, o comparar los Atributos de los objetos si estos son iguales puedo indicar que los Objetos sean considerados iguales aun que realmente sean objetos distintos(por las referencias).
 
-CTRL + D (W + D) : Duplica una línea
+COMMAND + D o CTRL + D: Duplica una línea
 
-Como vamos a usar TDD primero agregagos el método en **`CuentaTest`** y después vez que debemos implementar en **`Cuenta`**. Vamos a añadir en **`CuentaTest`** el método **`testReferenciaCuenta`** con el siguiente código y ejecutamos el método:
+Como vamos a usar TDD primero agregagos el método en **`CuentaTest`** y después debemos implementar en **`Cuenta`** el código necesario. 
 
-![image](https://user-images.githubusercontent.com/23094588/130745625-e058fea7-0391-477a-993a-19cb9af56f4e.png)
+Vamos a añadir en **`CuentaTest`** el método **`testReferenciaCuenta`** con el siguiente código y ejecutamos todos los método del Test:
 
-Estamos creando dos Objetos cuenta con los mismos valores y el test pregunta si estos Objetos son diferentes, cosa que es afirmativa por que los métodos tienen diferentes referencias, el Test lo ha pasado.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195829798-340e04d8-50da-4367-9016-ceb09a476564.png">
 
-Pero que pasa si ***cambia la regla de negocio***, ahora quiero comparar 
+En este nuevo método estamos creando dos Objetos **`cuenta`** con los mismos valores y el test pregunta si estos Objetos son diferentes, cosa que es afirmativa por que los métodos tienen diferentes referencias, el Test lo ha pasado.
+
+Pero que pasa si ***cambia la regla de negocio***, ahora no quiero comparar las instancias de los objetos, sus referencias, lo que queremos ahora es comparar por valor, a nivel de código vamos a comentar el **`assertNotEquals(cuenta2, cuenta);`** y vamos a poner un **`assertEquals(cuenta2, cuenta);`** y vamos a ejecutar el Test.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195831155-3a6781d8-23e8-4384-bf6a-53e13532dfc6.png">
+
+Logicamente la prueba falla por que esta comparando dos instancias, dos referencias distintas, a pesar de que tienen los mismos valores en sus atributos.
+
+Para comparar por valor debemos implementar código en la clase **`Cuenta`**, debemos sobreescribir el método **`equals`** comparando los atributos de la clase **`saldo`** y **`persona`**.
+
+Presionamos COMMAND + N o ALT + INSERT nos aparece el menú contextual
+
+<img width="219" alt="image" src="https://user-images.githubusercontent.com/23094588/195832359-45dd5653-ba8c-44ca-bf01-1b92c038c4ca.png">
+
+donde vamos a seleccionar **Override Methods..** y nos aparece lo siguiente:
+
+<img width="390" alt="image" src="https://user-images.githubusercontent.com/23094588/195833078-f38f269f-cdc7-495e-ab4f-8449c9a13010.png">
+
+Seleccionamos **`equals`** y nos inserta lo siguiente:
+
+<img width="299" alt="image" src="https://user-images.githubusercontent.com/23094588/195833255-c61fc502-402e-4887-80c4-0662bb15f25b.png">
+
+
+
+
+
+
+
+
+
+
 
 
 
