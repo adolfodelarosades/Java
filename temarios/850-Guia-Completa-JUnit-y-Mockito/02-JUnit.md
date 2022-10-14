@@ -469,6 +469,8 @@ Esta todo correcto, no hay ninguna noticia de que ha pasado algo, pero en realid
 
 Se ejecuto la clase sin ningún error, hemos ejecutado la clase Test pero realmente no estamos probando nada, debemos usar el API y los métodos estáticos de la clase **`Assertions`** (comentamos la clase importada para usarla como clase estática).
 
+**`assertEquals`** recibe dos parámetros el **`expected`** y **`actual`**.
+
 ![image](https://user-images.githubusercontent.com/23094588/130352791-a7b908af-4ca5-44a0-96bf-aa2eb0ff1189.png)
 
 Si ejecutamos nuevamente la Clase Test tenemos:
@@ -525,15 +527,15 @@ Vamos a dejar de usar la clase estática **`Assertions`** y vamos a importala co
 
 #### `assertTrue`
 
-Esto nos va a servir para evaluar una expresión booleana. 
+**`assertTrue`** recibe solo un parámetro que será una expresión booleana. Esto nos va a servir para evaluar una expresión booleana. 
 
-![image](https://user-images.githubusercontent.com/23094588/130353765-7e575521-9961-49ba-9a8a-fdbecef41481.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195804012-a027d396-2ae6-4d75-a31e-3aef2e66ac46.png">
 
 Todo ha ido bien, vamos a cambiar el valor para que falle.
 
-![image](https://user-images.githubusercontent.com/23094588/130353835-fa76b085-a2f2-4bab-827b-67c1ce8e9f9d.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195804282-f2bf2157-5d51-4175-83b9-acb797fb7155.png">
 
-Cuando tenemos varias Assertions todas ellas deben cumplirse para que pase el Test, en este caso el `assertTrue` falla ya que se esperaba verdadero(**`Expected :true`**) pero obtuvimos falso(**`Actual   :false`**).
+Cuando tenemos varias **Assertions** todas ellas deben cumplirse para que pase el Test, en este caso el **`assertTrue`** falla ya que se esperaba verdadero(**`Expected :true`**) pero obtuvimos falso(**`Actual   :false`**).
 
 Vamos a hacer una última modificación en la clase **`Cuenta`** para que regrese la **`persona`** siempre en mayúsculas.
 
@@ -541,19 +543,19 @@ Vamos a hacer una última modificación en la clase **`Cuenta`** para que regres
 
 Y en Test ponemos lo siguiente y lo ejecutamos:
 
-![image](https://user-images.githubusercontent.com/23094588/130354033-8a43b228-0221-4d50-bfe8-946710003231.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195804791-f6d37ee7-e99c-4ce3-9b4c-b24c381ee536.png">
 
-Aquí tenemos mal tanto el **`assertEquals`** y **`assertTrue`** pero solo nos esta marcando el primer fallo el de el **`assertEquals`** vamos a cambiar para comprobar esto.
+Aquí tenemos mal tanto el **`assertEquals`** y **`assertTrue`** pero solo nos esta marcando el primer fallo el de el **`assertEquals`** vamos a dejar el constructor como lo teniamos.
 
-![image](https://user-images.githubusercontent.com/23094588/130354099-71b07adb-6814-4467-8a9e-49adee40dbb9.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195805498-6839e672-f190-45e7-92f3-44607b9dc850.png">
 
 Ahora el error nos lo manda en el **`assertTrue`**, vamos a modificar el código para que pase la prueba
 
-![image](https://user-images.githubusercontent.com/23094588/130354719-a5dc322a-20c7-4a80-8f2f-61e0a1adfb3f.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195807369-4c6ab726-9eea-4222-8dd6-12889f9e97fc.png">
 
-Pero realmente estamos modificando el valor que espera en el Test para que la pase, normalmente lo que vamos a corregir el código para que retorne lo que se espera, en este caso vamos a quitar el **`.toUpperCase()`** en la clase **`Cuenta`** y también vamos a modificar lo cambiado en el Test.
+Pero realmente estamos modificando el valor que se espera en el Test para que lo pase, normalmente lo que vamos a corregir es el código para que retorne lo que se espera, en este caso vamos a quitar el **`.toUpperCase()`** en la clase **`Cuenta`** y también vamos a modificar lo cambiado en el Test.
 
-![image](https://user-images.githubusercontent.com/23094588/130354890-62efa2e7-0975-4036-a5d3-412c0f9e5fc5.png)
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195807794-cf8367e9-7c3f-4e51-b501-a6cdde3fdb22.png">
 
 ## Escribiendo test para el saldo 11:44
 
