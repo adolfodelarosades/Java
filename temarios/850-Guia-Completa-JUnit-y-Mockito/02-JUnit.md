@@ -929,91 +929,49 @@ Creamos la expresón lambda sin argumentos.
 
 Detro de las llaves vamos a invocar al método que va a lanzar a la excepción
 
-
 Bien Lleca, invocamos el método que va a lanzar esta acepción, es decir, que supuestamente debería la excepción **`DineroInsuficienteException`** en cierto escenario.
 
 <img width="708" alt="image" src="https://user-images.githubusercontent.com/23094588/196002830-c13063b3-1c45-4aaf-935b-5933e68095e7.png">
 
 
-En este caso llamamos al método **`debito`** con un **`monto`** superior al que tenemos.
+En este caso llamamos al método **`debito`** con un **`monto`** superior al que tenemos para que se produsca un error y se lance la excepción.
 
-Otro punto importante es que esté haced cruz.
+Un punto importante es que esté **`assertionThrow`** devuelve el elemento excepción que se lance por que lo debemos recojer en una variable de tipo **`Exception`**.
 
-En realidad también devuelve el objeto, excepción que se lanza.
+<img width="692" alt="image" src="https://user-images.githubusercontent.com/23094588/196003004-cc1f4737-7b61-4e6a-9d48-80b5dc17bea1.png">
 
-Por lo tanto, acá se captura internamente, sea capturar, sea manejar.
+Ya que tenemos el objeto **`Exception`** podemos obtener el mensaje que nos retorna y almacenarlo en la variable **`actual`** que es de tipo **`String`**. Podemos tener otra variable con el valor **`esperado`** y posteriormente comparar si estos valores son iguales con **`assertEquals(esperado, actual);`**.
 
-Y este método acá va a devolver el tipo, la instancia que del tipo dinero aceptó.
+<img width="697" alt="image" src="https://user-images.githubusercontent.com/23094588/196003190-ce2c818d-630b-409c-b615-f6074817df4d.png">
 
-Aquí lo podremos colocar del tipo más genérico, no lo mismo, porque la idea es obtener el mensaje
+Estamos haciendo dos Pruebas Unitarias que están muy relacionada. Primero evaluamos el lanzamiento de excepciones lo capturamos, si todo sale bien, vamos a evaluar el mensaje error que sea el correcto el que efectivamente se recupera cuando se lanza la excepción.
 
-error.
+El Test no lo pasa por ahora ya que no hemos implementado en el método **`debito`** el lanzamiento de la excepción.
 
-Y también podremos comparar el mensaje error y asegurarnos que el mensaje que se lanza sea a uno que
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/196003390-c2d2550e-3e90-4b2f-9df9-794927b98ea2.png">
 
-estemos esperando.
+Una vez realizadas las pruebas ya podemos implementar los métodos como lo indica TDD.
 
-Y lo mismo eso lo podemos comparar con el hacer y quarts con el valor esperado y compararlo con el valor
+Vamos a la clase **`Cuenta`** concretamente en el método **`debito`** que actualmente lo tenemos así:
 
-real o actual.
+<img width="377" alt="image" src="https://user-images.githubusercontent.com/23094588/196003732-3997336c-c68c-41af-8c67-14b93ddd2735.png">
 
-Vamos a colocar Exception Exception igual esto se fijan.
+Vamos a cambiarlo por:
 
-Este método devuelve el objeto escepción y un objeto cesion obtenemos el mensaje.
+<img width="623" alt="image" src="https://user-images.githubusercontent.com/23094588/196004323-f9b33022-6e8c-451b-bf2d-ecada7bcd4bc.png">
 
-Entonces del tipo string, por ejemplo string actual o real como le queramos llamar exception punto
+* Lo primero que hacemos es asignar el valor restado a una variable **`nuevoSaldo`** y no directamente al atributo **`saldo`**.
+* Vamos a comparar el valor de **`nuevoSaldo`** con **`BigDecimal.ZERO`** para ver si nos retorna un número negativo, esto lo hacemos con **`if (nuevoSaldo.compareTo(BigDecimal.ZERO) < 0) {`**. Recordemos que los **`BigDecimal`** se comparan con el método **`**.compareTo()`** si nos retorna un **`1`** el resultado es positivo, si nos retorna un **`0`** el resultado es **`0`** y si nos retorna un **`-1`** el resultado es negativo.  
+* En caso de que se obtenga un valor negativo se lanza la excepción.
+* Si no se lanza la excepción se asigna el valor obtenido a nuestro atributo **`saldo`**.
 
-get mensajea get me sacho
+Vamos a lanzar nuevamente el Test.
 
-es trenca, por ejemplo esperado.
+AQUIIIIIIIIII
 
-No sé, vamos a colocar que nuestro mensaje esperado va a ser dinero insuficiente.
 
-Hacer cuales esperado versus actuar?
 
-Vamos a comparar entonces final se fijan en el mismo método.
 
-Estamos haciendo dos pruebas unitarias que está muy relacionada.
-
-Primero evaluamos el lanzamiento escepcion que es el mismo.
-
-Luego lo capturamos perfecto.
-
-Si todo sale bien, vamos a evaluar.
-
-Vamos a probar el mensaje error que sea el correcto el que efectivamente se viviese de incluir a cocinar.
-
-Cuando se lanza la acepción.
-
-Pero ojo, todavía no hemos implementado ningún método en cuenta.
-
-Todavía no estamos implementando este código de manejo decepción en el método débito.
-
-Solamente estamos probando.
-
-Entonces ahora vamos a ejecutar como siempre.
-
-Y ver qué pasa.
-
-Obviamente la falla no es cierto.
-
-Primero dice que se esperaba dinero es suficiente Сервис John's, pero no devolvió nada.
-
-En realidad se fijan, no pasó nada y el otro error ni siquiera se ejecuta.
-
-Acá el assert y quĂŠ?
-
-Porque ni siquiera está lanzando la excepción.
-
-Entonces eso es lo que vamos a implementar ahora.
-
-Primero probamos, luego implementamos.
-
-Bien.
-
-Vamos a cerrar.
-
-Vamos a quitar esto.
 
 Ocultar.
 
