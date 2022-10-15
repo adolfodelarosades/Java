@@ -909,94 +909,35 @@ Bien, volvemos a **`CuentaTest`**, vamos a escribir un nuevo método llamado **`
 
 <img width="696" alt="image" src="https://user-images.githubusercontent.com/23094588/195989870-0bf034d3-7537-46c5-bb79-37b87cd59709.png">
 
-
 Al probar tenemos:
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195989944-e6fdd791-45b5-411e-846d-0d5b41ac694d.png">
 
-AQUIIIIIIIIIII VOY
+Lo que hemos hecho en el código del método es crear una instancia de datos con sus respectivos atributos.
 
-texto dinero insuficiente.
+Bien, entonces ahora lo tenemos que probar es que efectivamente, cuando invocamos el método **`debito`**, vamos a realizar una trasferencia y si colocamos un **`monto`** mayor al saldo que tenemos en la cuenta, debiese lanzar la excepción **`DineroInsuficienteException`**. Si no la lanza es porque algo está mal y no pasa la prueba.
 
-Exception
+Bien, para eso tienes que utilizar Assertions invocando el método **`assertionThrow`** que es para el manejo excepciones.
 
-cuenta.
+<img width="749" alt="image" src="https://user-images.githubusercontent.com/23094588/196001934-31a90c62-2311-4a68-945e-c2dbfde35c3b.png">
 
-Bajamos.
+La excepción recibe dos argumentos el primero ***el nombre de la clase Exception que esperamos*** cualquier clase del tipo **`Throwable`** (lanzable/arrojable), aquí ponemos nuestra clase **`DineroInsuficienteException.class`**, el **`.class`** es importante. Como segundo parámetro se espera un **`Executable`** en este caso es una expresión lambda, recordemos que JUnit ya soporta las expresión lambda, todo lo que sea manejo de excepción lo implementamos dentro de esta expresión lambda.
 
-Cuenta.
+<img width="679" alt="image" src="https://user-images.githubusercontent.com/23094588/196002855-b81a1905-b1f5-4cd7-9010-b21f165db9a2.png">
 
-Viven Cemal Bueno y pude mantener una misma línea con los mismos datos mil coma un dos tres cuatro cinco
+Creamos la expresón lambda sin argumentos.
 
-electo.
+Detro de las llaves vamos a invocar al método que va a lanzar a la excepción
 
-Hoy tenemos el dato de prueba.
 
-Bien, entonces ahora tenemos que probar que efectivamente, cuando invocamos el método débito, vamos
+Bien Lleca, invocamos el método que va a lanzar esta acepción, es decir, que supuestamente debería la excepción **`DineroInsuficienteException`** en cierto escenario.
 
-a realizar una trasferencia y si colocamos un monto mayor al saldo que tenemos en la cuenta, debiese
+<img width="708" alt="image" src="https://user-images.githubusercontent.com/23094588/196002830-c13063b3-1c45-4aaf-935b-5933e68095e7.png">
 
-lanzar esa excepción.
 
-Dinero es suficiente, septón?
+En este caso llamamos al método **`debito`** con un **`monto`** superior al que tenemos.
 
-Si no la lanza es porque algo está mal y no pasa la prueba.
-
-Bien, para eso tienes que utilizar hacer John's invocando el método hacer frus que para manejo acepcion.
-
-Entonces hacer por acá tenemos frus de lanzar una excepción.
-
-Perfecto.
-
-Lleca recibe dos argumentos primero en nombre de la clase Exception que esperamos se dejan cualquier
-
-clase que sea del tipo cero labelo.
-
-Ese lánzale cualquier objeto exepciones del tipo fuuu label lánzale está mareando de ranka excepto uno
-
-cierto?
-
-Nuestra clase escepción por lo tanto es una sala, así que estaría perfecto.
-
-Vamos a colocar el nombre de nuestra clase Deception, la cual esperamos que se lance dinero insuficiente.
-
-Ahí tenemos dinero suficiente excepto punto class coma y acá una pezon lanta.
-
-Se acuerdan que haya mencionado que Yunis 5 Júpiter?
-
-Una de las características versus la versión anterior es que soporta presiones lanta y después vamos
-
-a ver más ejemplos, pero por ahora todo lo que sea manejo de excepción lo implementamos dentro de esta
-
-expresión.
-
-Lanta una función de fecha.
-
-Entonces vamos a colocar los argumentos que en realidad es sin argumentos.
-
-Lo hagamos vacío flecha.
-
-Y acá las llaves de nuestra persona lanta punto y coma.
-
-Cerramos con punto y coma.
-
-Bien Lleca, invocamos el método que va a lanzar esta acepción, es decir, que supuestamente debería
-
-lanzar esta sección en cierto escenario.
-
-Entonces cuenta punto débito, no?
-
-Cierto.
-
-Vamos a transferir un monto new být décima.
-
-Tiene que ser un monto mayor al que tenemos en la cuenta.
-
-En la cuenta tenemos 1000 reseque, cuyo monto sobre 1000, por ejemplo 1001 mil dos mil quinientos,
-
-por ejemplo mil quinientos debiese lanzar esta sección.
-
-Punto y coma a otro punto importante es que esté haced cruz.
+Otro punto importante es que esté haced cruz.
 
 En realidad también devuelve el objeto, excepción que se lanza.
 
