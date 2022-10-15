@@ -933,7 +933,6 @@ Bien Lleca, invocamos el método que va a lanzar esta acepción, es decir, que s
 
 <img width="708" alt="image" src="https://user-images.githubusercontent.com/23094588/196002830-c13063b3-1c45-4aaf-935b-5933e68095e7.png">
 
-
 En este caso llamamos al método **`debito`** con un **`monto`** superior al que tenemos para que se produsca un error y se lance la excepción.
 
 Un punto importante es que esté **`assertionThrow`** devuelve el elemento excepción que se lance por que lo debemos recojer en una variable de tipo **`Exception`**.
@@ -958,233 +957,55 @@ Vamos a la clase **`Cuenta`** concretamente en el método **`debito`** que actua
 
 Vamos a cambiarlo por:
 
-<img width="623" alt="image" src="https://user-images.githubusercontent.com/23094588/196004323-f9b33022-6e8c-451b-bf2d-ecada7bcd4bc.png">
+<img width="657" alt="image" src="https://user-images.githubusercontent.com/23094588/196005113-e66c6cac-d916-415a-8f56-07e85ce52f63.png">
 
 * Lo primero que hacemos es asignar el valor restado a una variable **`nuevoSaldo`** y no directamente al atributo **`saldo`**.
 * Vamos a comparar el valor de **`nuevoSaldo`** con **`BigDecimal.ZERO`** para ver si nos retorna un número negativo, esto lo hacemos con **`if (nuevoSaldo.compareTo(BigDecimal.ZERO) < 0) {`**. Recordemos que los **`BigDecimal`** se comparan con el método **`**.compareTo()`** si nos retorna un **`1`** el resultado es positivo, si nos retorna un **`0`** el resultado es **`0`** y si nos retorna un **`-1`** el resultado es negativo.  
 * En caso de que se obtenga un valor negativo se lanza la excepción.
 * Si no se lanza la excepción se asigna el valor obtenido a nuestro atributo **`saldo`**.
 
-Vamos a lanzar nuevamente el Test.
+Vamos a lanzar nuevamente el Test del método.
 
-AQUIIIIIIIIII
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/196005146-4963d5eb-bfcc-443f-b629-28e79d680e2d.png">
 
+El Test lo pasa, hemos cargado un **`monto`** de **`1500`** y en la cuenta no hay tal **`saldo`** entonces se lanza la excepción, eso esta bien por que lo que estamos haciendo es simular el error, después lo que hacemos es comparar el mensaje esperado con el obtenido y todo correcto.
 
+Como ejercicio vamos a cambiar el mensaje **`esperado`** para ver que sucede.
 
+<img width="689" alt="image" src="https://user-images.githubusercontent.com/23094588/196005327-f5af7d12-2059-48b6-ba1f-ac96ded5a21f.png">
 
+Al lanzar el Test tenemos:
 
-Ocultar.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/196005353-a72e48bb-5166-47c5-a558-ea20b26abe95.png">
 
-Y continuamos.
+El **`assertThrows`** ha pasado pero no el **`assertEquals`** ya que los mensajes **`esperado`** y **`actual`** no son iguales, el Test respondio como esperaba, vamos a dejar el mensaje de **`esperado`** como estaba.
 
-No vamos a ir a cuenta por acá en débito.
+Ahora vamos a probar otra cosa vamos a cambiar la excepción que estamos llamando es decir **`DineroInsuficienteException`** por **`NumberFormatException`**.
 
-Bueno, lo primero antes de asignar acá vamos a modificar y vamos a asignar a una variable local del
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/196005512-4c00ab02-3bdc-449d-9e39-10eb13f74c18.png">
 
-método que vamos a colocar el tipo, porque es una variable local.
+Ahora lo que no esta pasando es **`assertThrows`** nos indica que tenemos una excepción inesperada se esta esperando un **`NumberFormatException`** pero se esta lanzando una **`DineroInsuficienteException`**.
 
-Bit decimal.
+Vamos a dejar todo como lo teniamos y vamos a lanzar toda la clase **`CuentaTest`**.
 
-Nombre variable.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/196005669-541fdcdb-c179-4ae2-88fd-211af39221f3.png">
 
-Nuevo saldo.
+Todo pasa correctamente.
 
-Bajamos y comparamos nuevo salto.
+Ahora por ultimo vamos al método **`testDebitoCuenta`** que actualmente esta así:
 
-Entonces con un NIF.
+<img width="701" alt="image" src="https://user-images.githubusercontent.com/23094588/196005710-b7ee4fbd-95dd-4922-8c8a-4f5d9025c5c2.png">
 
-Nuevo salto.
+Vamos a cambiar el **`100`** por un **`2000`** y vamos a lanzar el Test.
 
-Punto.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/196005764-6dd24bc9-21ea-4167-b8cf-232e50b8d2c8.png">
 
-Recuerden que es un bidé.
+Ahora este Test ya no pasa la Prueba Unitaria por que se lanza la excepción **`DineroInsuficienteException`** tendríamos que meter el **`assertThrows`** para este caso, por ahora simplemente vamos a dejarlo como estaba para que todas las pruebas se lancen correctamente.
 
-Si comparamos con él.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/196005855-c18c62a5-3eb6-4317-81fc-95edb5819c26.png">
 
-Comparto comparto.
-
-Lo comparamos con bit decimal cero bit decimal punto cero.
-
-Entonces, si esta expresión devuelve un valor negativo, es decir menos 1, significa que cero es mayor
-
-que nuevo saldo.
-
-Por lo tanto, la persona no tiene dinero suficiente para realizar la transacción y viviésemos de lanzar
-
-una excepción.
-
-Entonces acá comparamos.
-
-Entonces, si en menor o negativo, en menor que 0 perfecto, lanzamos la excepción throw new dinero
-
-insuficiente excepto por constructor.
-
-Recuerden que implementamos el constructor para pasar un mensaje personalizado.
-
-Vamos a colocar el mismo mensaje con el cual queremos probar.
-
-Dinero es suficiente.
-
-Dinero insuficiente.
-
-Perfecto.
-
-Pero si todo sale bien y no lanza ninguna excepción, entonces tenga que asignar 10 puntos.
-
-Saldo igual.
-
-Nuevo saldo.
-
-Perfecto.
-
-Importante asignar, cierto.
-
-Si no se cumple la regla negocio lanzar una sesión.
-
-Y esto no se realiza.
-
-No se realiza la transacción.
-
-No se le asigna el valor del nuevo saldo a saldo.
-
-No se resta.
-
-Se fijan.
-
-Simplemente no se lleva a cabo la transacción.
-
-Y estamos listos.
-
-Ahora tenemos implementado manejo acepcion.
-
-Bien.
-
-Volvamos entonces con control TAF.
-
-Volvemos a cuenta test y vamos a probar un clic afuera.
-
-Ejecutamos como siempre.
-
-De ahí pasó, pasó todas las pruebas.
-
-Dinero suficiente.
-
-Está perfecto, en realidad, claro, pusimos 1500.
-
-La persona no tiene dinero suficiente.
-
-Lanza excepcion, que está bien, porque acá estamos simulando el error.
-
-Lo queremos producir de forma intencional para ver cómo se está manejando el error.
-
-La acepción dinero suficiente se lanza y es la esperada.
-
-Así que está bien.
-
-Luego probamos el mensaje error.
-
-Ahora, qué pasa si cambiamos el dinero suficiente y le ponemos otro texto?
-
-Por ejemplo, dinero suficiente.
-
-En la cuenta se fijan este de acá va a pasar, pero este de acá no pasa.
-
-Se fijan porque no es igual, no va a ser igual a la esperada.
-
-Ejecutamos y la prueba falla.
-
-Esperado dinero suficiente en la cuenta actual dinero suficiente.
-
-Este es el mensaje real que se lanza en la acepción Yetta.
-
-Qué estamos esperando?
-
-No es igual.
-
-Así que está bien.
-
-Estamos probando correctamente.
-
-Lo dejamos como estaba.
-
-Ahora, qué pasa si en vez de dinero es suficiente?
-
-Exception?
-
-No sé.
-
-Vamos a colocar otro tipo de clase.
-
-Decepción, por poner un ejemplo, un number forma exception y ni siquiera necessary que lo hagan solamente
-
-para que lo tengan en cuenta y lo vean.
-
-Un Amper formato Exception.
-
-Acá lo tenemos.
-
-Triplican.
-
-Supongamos que esperábamos este error, pero en realidad se va a lanzar el dinero suficiente.
-
-Entonces esta prueba no se pasa.
-
-Veamos.
-
-Inesperada acepción del tipo.
-
-Bueno, se espera un ámber format exception, pero finalmente se lanza un dinero en suficiente septón.
-
-No coinciden los tipos.
-
-Entonces esta forma podemos evaluar, probar el manejo de error.
-
-Hará lo correcto en la prueba.
-
-Es como lo teníamos con el dinero suficiente.
-
-Eso es lo correcto.
-
-Ahora, bueno, va a pasar esta prueba.
-
-Pero qué pasaría si Test Débito está acá?
-
-Lo modificamos y en débito colocamos, no sé, 2000 por ejemplo, tampoco en esa serie que lo hagas
-
-solamente para que lo vean y lo tengan en cuenta.
-
-Voy a colocar dos mil.
-
-Obviamente va a fallar porque lanza la selección y ni siquiera va a pasar el test, ni siquiera se va
-
-a ejecutar esto de acá, porque primero se lanza la excepción en débito y falla.
-
-Lo demás ni siquiera se evalúa bien.
-
-Veamos un clic afuera.
-
-Ejecutamos todo.
-
-Se fijan, pasa dinero suficiente porque está bien, acepto, pero débito no pasa porque se lanza la
-
-excepción, dinero insuficiente, excepto se fijan, se lanza recesión, falla la prueba automáticamente.
-
-Entonces todo bien, lo están probando con nuestra regla negocio.
-
-Bien.
-
-Vamos a dejar como estaba Conscien.
-
-Volvemos a probar y está todo bien.
-
-Perfecto.
-
-Bueno, eso sería manejo decepciones co Cunit, pruebas unitarias.
-
-Lo dejamos hasta acá y nos vemos en la siguiente clase.
-
-## Añadiendo la clase Banco y la realcion con las cuentas 09:55
-## Probando y afirmando las realciones entre Banco y Cuenta 08:01
+## Añadiendo la clase `Banco` y la realcion con las cuentas 09:55
+## Probando y afirmando las relaciones entre `Banco` y `Cuenta` 08:01
 ## Usando el método **`assertAll`** 07:10
 ## Agregando mensajes de falla en los métodos **`assertions`** 07:29
 ## Usando anotaciones **`@DisplayName`** y **`@Disabled`** 08:02
