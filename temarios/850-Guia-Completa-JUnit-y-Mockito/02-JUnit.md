@@ -7,7 +7,7 @@
 * Escribiendo y ejecutando primeras Pruebas Unitarias con Assertions 17:19
 * Escribiendo test para el **`saldo`** 11:44
 * Test driven development TDD con JUnit 10:13
-* TDD para **`debito` y **`credito`** 11:12
+* TDD para **`debito`** y **`credito`** 11:12
 * Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
 * Añadiendo la clase Banco y la realcion con las cuentas 09:55
 * Probando y afirmando las realciones entre Banco y Cuenta 08:01
@@ -557,7 +557,7 @@ Pero realmente estamos modificando el valor que se espera en el Test para que lo
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195807794-cf8367e9-7c3f-4e51-b501-a6cdde3fdb22.png">
 
-## Escribiendo Test para el `saldo` 11:44
+## 💻 Escribiendo Test para el `saldo` 11:44
 
 Ahora nos vamos a enfocar al **`saldo`**, para lo cual vamos a crear un nuevo método llamado **`testSaldoCuenta()`**
 
@@ -638,7 +638,7 @@ Podemos ponerla de una o de otra forma, volvemos a poner el saldo positivo:
 Validamos lo mismo pero con la lógica inversa.
 
 
-## Test Driven Development TDD con JUnit 10:13
+## 💻 Test Driven Development TDD con JUnit 10:13
 
 En esta lección vamos a ver el Desarrollo en Base a Pruebas Unitarias mejor conocido como **TDD Test-Driven Development**(Desarrollo Dirigido por Tests), esta técnica involucra dos partes:
 
@@ -781,7 +781,7 @@ Vamos a dejar los atributos iguales nuevamente y el Test vemos que lo pasa.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195945022-c739ff97-0990-4faf-b623-df580f74f68f.png">
 
-## TDD para `debito` y `credito` 11:12
+## 💻 TDD para `debito` y `credito` 11:12
 
 Ahora vamos a crear dos métodos en la clase **`Cuenta`**. 
 
@@ -795,19 +795,52 @@ Solamente los vamos a definir, pero sin implementar. Recuerden que la idea de de
 
 Con TDD primeros debemos escribir las pruebas antes de implementar los métodos en la clase **`Cuenta`**.
 
-En nuestra clase **`CuentaTest`** vamos a implementar el método **`testDebitoCuenta`*+ como sigue:
-
-<img width="693" alt="image" src="https://user-images.githubusercontent.com/23094588/195954163-03d2dd17-9923-4d00-b437-845cca68a67b.png">
-
-Estamos creando una cuenta con un **`saldo = 1000.12345`** esto quiere decir que a nuestra cuenta corriente se le van a restar **`100`** de los **`1000`**, por lo tanto, debería tener **`900.12345`**, eso es lo que tenemos que probar.
-
-Lo primero que vamos a probar es que el **`saldo`** no sea **`null`** para esto usamos **`assertNotNull`**, esto es importante por que en métodos anteriores sobre el **`saldo`** aplicamos métodos como **`.equals`** o **`cuenta.getSaldo().doubleValue()`** y si **`saldo`** tiene un valor **`null`** esto nos lanza una excepción.
-
-La segunda prueba que
-
 ### `assertNotNull`
 
 Verifica que el parámetro que se le pasa no sea **`null`**.
+
+En nuestra clase **`CuentaTest`** vamos a implementar el método **`testDebitoCuenta`** como sigue:
+
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/23094588/195954163-03d2dd17-9923-4d00-b437-845cca68a67b.png">
+
+Estamos creando una cuenta para **`Adolfo`** con un **`saldo = 1000.12345`**. Después llamamos al método **`debito`** pasandole como parametro una cantidad **`cuenta.debito(new BigDecimal(100));`**, esto quiere decir que a nuestra cuenta corriente se le van a restar **`100`** de los **`1000.12345`**, por lo tanto, debería tener **`900.12345`**, eso es lo que tenemos que probar.
+
+Lo primero que vamos a probar es que el **`saldo`** no sea **`null`** para esto usamos **`assertNotNull`**, esto es importante por que en métodos anteriores sobre el **`saldo`** aplicamos métodos como **`.equals`** o **`cuenta.getSaldo().doubleValue()`** y si **`saldo`** tiene un valor **`null`** esto nos lanza una excepción. Esto también lo podemos poner en los métodos que ya habiamos codificado.
+
+La segunda prueba que hacemos es comparar solo la parte entera de nuestro saldo con el valor esperado que es **`900`**, los **`BigDecimal`** tienen el método **`.intValue()`** para tratarlo como un número sin sus decimales, un entero.
+
+Finalmente en la tercer prueba lo que estamos haciendo es comparar el valor espado **`"900.12345"`**, observemos que como valor esperado estamos poniendo un **`String`** por lo que en el valor real tenemos que poner también un valor **`String`**, recordemos que el saldo es un **`BigDecimal`**, los **`BigDecimal`** tienen el método **`.toPlainString()`** para tratarlo como texto plano por eso en el valor real estamos colocando **`cuenta.getSaldo().toPlainString()`**.
+
+Vamos a probar este método.
+
+<img width="1507" alt="image" src="https://user-images.githubusercontent.com/23094588/195981052-c1996a27-495f-4d8d-912e-33a1a6c23b32.png">
+
+El Test del método **`testDebitoCuenta()`** nos falla ya que realmente el método **`debito`** no esta implementado y no esta restando el **`monto`** del **`saldo`**, por lo que en **`saldo`** seguimos teniendo **`1000.12345`** y no el valor esperado.
+
+Si ejecutamos todos los métodos los pasa menos el de **`testDebitoCuenta()`**.
+
+<img width="1510" alt="image" src="https://user-images.githubusercontent.com/23094588/195981216-54c58cae-d271-4494-a04c-066a31c2b0cd.png">
+
+Vamos a escribir en nuestro Test el método **`testCreditoCuenta()`** que es muy parecido a **`testDebitoCuenta()`**.
+
+<img width="689" alt="image" src="https://user-images.githubusercontent.com/23094588/195981428-83758b30-ae38-4fc2-97c8-d9870a779a47.png">
+
+Si ejecutamos solo el método **`testCreditoCuenta()`** tenemos:
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195981480-af328b77-524b-4d3b-853d-a08bed0d0884.png">
+
+Vemos que no lo pasa por que esperamos un valor de **`1100`** y al valor actual es de **`1000`**, esto es por que el método **`credito`** no esta implementado y no esta sumando el **`monto`** al **`saldo`**.
+
+Si ejecutamos todos los métodos del Test tenemos que no pasan las pruebas los métodos **`testDebitoCuenta()`** y **`testCreditoCuenta()`** por que no hemos implementado los métodos **`debito`** y **`credito`**, pero recordemos que así trabaja TDD.
+
+Vamos a implemenar en la clase **`Cuenta`** los métodos **`debito`** y **`credito`**.
+
+
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195981643-fd38eaed-645f-4f5d-a920-ab1ca57e9f1f.png">
+
+
+
 
 
 
