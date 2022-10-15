@@ -833,278 +833,39 @@ Vemos que no lo pasa por que esperamos un valor de **`1100`** y al valor actual 
 
 Si ejecutamos todos los métodos del Test tenemos que no pasan las pruebas los métodos **`testDebitoCuenta()`** y **`testCreditoCuenta()`** por que no hemos implementado los métodos **`debito`** y **`credito`**, pero recordemos que así trabaja TDD.
 
-Vamos a implemenar en la clase **`Cuenta`** los métodos **`debito`** y **`credito`**.
-
-
-
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195981643-fd38eaed-645f-4f5d-a920-ab1ca57e9f1f.png">
 
+Vamos a implemenar en la clase **`Cuenta`** los métodos **`debito`** y **`credito`**.
 
+Si no conocemos el API de **`BigDecimal`** se podría pensar que es súper simple restando y sumando el monto de la siguiente forma:
 
+<img width="357" alt="image" src="https://user-images.githubusercontent.com/23094588/195982158-fcec9b3c-7bd0-4d6f-985e-f85501bb9bff.png">
 
+Ya hemos implementado los métodos vamos a ejecutar nuevamente el Test.
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195982256-a1f0f176-268f-4e25-81d3-383431a571bd.png">
 
+El Test sigue fallando en los métodos **`testDebitoCuenta()`** y **`testCreditoCuenta()`**. 
 
+¿Por qué? 
 
-Vamos a hacer dos pruebas, una con Ántero.
+Recordemos que **`BigDecimal`** es **INMUTABLE** esta es la razón de que siga fallando, cada que se cambia el estado interno de un **`BigDecimal`**, lo que hace no es modificar, no es cambiar el valor del atributo, lo que hace es devolver una nueva instancia, un nuevo **`BigDecimal`** con ese cambio.
 
-Vamos a probar 900 Koma.
+<img width="601" alt="image" src="https://user-images.githubusercontent.com/23094588/195982492-367a3db4-fc43-43ee-9fb6-ee7ba82096e0.png">
 
-Ese sería mi valor esperado como apetitiva y el valor actual.
+Pero **`this.saldo`** se mantiene inalterable, inmutable. Entonces, para que esto funcione tenemos que asignar ese valor de la nueva instancia a **`this.saldo`** eso es todo.
 
-Débito, cuenta.
+<img width="392" alt="image" src="https://user-images.githubusercontent.com/23094588/195982666-a6eb7a42-a658-492f-94e1-d749ad23d4de.png">
 
-Punto, inquiere.
+Volvemos a ejecutar el Test.
 
-Saldo, ticket, saldo.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/195982698-325bce7b-11f9-44b3-8e24-a488efa8d6d6.png">
 
-Umpitas y Marsi.
+Ahora si pasan todos los métodos del Test.
 
-Punto int valeo.
+## Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
 
-Se fijan entonces solamente no va a devolver la parte entera.
 
-Debiese ser 900, no?
-
-Cierto?
-
-Bien, ahí tenemos la primera prueba.
-
-Pero antes, claro.
-
-Qué pasa si el saldo acá pasaramos nul fuera null?
-
-También podríamos probar un cierto que no sea nulo alert not null actual.
-
-Entonces el actuar sería kuenta.
-
-Quetzal No, claro, porque si el nulo acá al tratar de invocar el método invadio, lanzarían no pointer
-
-exception.
-
-Bueno, de todas maneras, si lanza una excepción, también falla nuestra prueba.
-
-Un cierto porque no cumple, pero igual es mejor.
-
-Not null lo programa de forma ilícita y después ya estamos seguro de que no es nulo.
-
-Lo probamos invocando el método Get saldo.
-
-Y eso también lo podríamos hacer acá también se portan en Texas.
-
-Lo cuenta?
-
-Claro, porque el saldo también podría ser nulo acá, porque está invocando métodos, incluso compartid.
-
-Sería bueno comprar acá que el saldo no fuese null en saldo, cuenta.
-
-De hecho, podríamos copiar esto.
-
-Lo seleccionamos completamente acá Acerte no null control C y lo pegamos acá, por acá.
-
-Como está todo muy relacionado, puede ir en un mismo test, pero también lo podemos colocar en métodos
-
-separados.
-
-Necesito comprobar que no sea nulo, comprobar con el equals, con el folks, con el truco.
-
-En fin.
-
-Y acá también se fijan qué pasa.
-
-Acá están operando con el nombre.
-
-De hecho acá estamos invocando real punto y quarts.
-
-Qué pasa si real?
-
-Recuerden que real viene de cuenta a punto de que en nombre qué pasa si el nulo la serie también un
-
-pulpo intercepta?
-
-También lo podemos probar que no sea nulo acá, pero eso sería hilar un poco más fino.
-
-Lo ponemos pegar en vez de cuenta.
-
-Colocamos acá real no puede ser null real.
-
-Así nos aseguramos antes invocar el licorera.
-
-Continuemos.
-
-Estamos acá ya programa quien no puede ser nulo y quas, pero también podríamos tener otra prueba muy
-
-similar a ser iguales.
-
-Ahora, en vez de probar un entero, podríamos probar un string no 1000.
-
-Punto uno, dos, tres, cuatro, cinco.
-
-Un string se fijan.
-
-Este es el miedo a lo esperado.
-
-Perdón.
-
-Entre paréntesis debe ser el mismo valor del bit decimal.
-
-Esto el punto 1, 3, 4, 5, pero menos 100.
-
-Entonces bueno, acá me equivoqué de set €900.
-
-Punto 1 2 3.
-
-4 5.
-
-Bueno, de esta forma después lo revisamos, cierre paréntesis y continuamos.
-
-Coma cuenta ponto get saldo ponto to string.
-
-Pero sería tu plain string.
-
-Tu plan devuelve el string plano con el valor del saldo.
-
-Debes hacer lo mismo.
-
-Te dejan, pero acá lo estamos verificando como un entero y acá como un string pero completo, incluyendo
-
-los decimales.
-
-Esta es la prueba.
-
-Bueno, vamos a probar.
-
-Obviamente la falla no es cierto, porque el método débito no lo tenemos implementado.
-
-Veamos.
-
-Se fijan, espera Novecento, pero en realidad de mil, porque en realidad nunca se descontó.
-
-De hecho, vamos a ejecutar todos, todos los métodos acá afuera.
-
-Listo.
-
-Todos pasan.
-
-Todo está perfecto, menos de débito, cuenta.
-
-Bueno, y acá estamos empezando a sarrollar orientado o impulsado a pruebas unitarias, no?
-
-Cierto?
-
-Primero probamos y después tenemos que implementar este método.
-
-Y algo muy similar también sería con test crédito, cuenta.
-
-Lo podríamos dejar implementado también muy parecido, pero en vez de débito sería crédito.
-
-De hecho, lo podríamos copiar.
-
-En realidad es parecido.
-
-Así que vale la pena copiarlo contra el CD
-
-y lo modificamos.
-
-Entonces, lo primero, en vez de débito, que acá lo seleccionamos y sería crédito.
-
-Y acá también, en vez de cuenta, débito.
-
-Acá crédito el método a esta crédito y todo lo demás.
-
-Estaría bien, pero bueno, vamos a agregar o nos transfirieron, nos depositaron 100 a nuestra cuenta.
-
-Entonces acá en realidad debería ser 1000 más 100 un cierto porque tengo 1000.
-
-Punto 1, 3, 4, 5, 12.
-
-Sería eso más bien mil 100?
-
-Ese sería nuestro valor esperado.
-
-Y acá también.
-
-Ese debería ser 1000 100 puntos 1, 3, 4, 5.
-
-Bien, tenemos la prueba para ambos.
-
-Obviamente estos dos método van a fallar.
-
-De otra forma lo volvemos a ejecutar.
-
-Te dejan acá falla todo, Methos.
-
-Esperado 1100 actual 1000, esperado 900, actual 1000 porque no está implementado, entonces oral sí
-
-que lo amas implementar bien, nos damos a cuenta.
-
-Cómo sería débito primero acá?
-
-Bueno, si no conocemos el API de vida.Si me podría pensar.
-
-Bueno, es súper simple asalto, no?
-
-Cierto punto.
-
-Restar y para restar sería con el método substrato restar el monto.
-
-Por cierto, eso podríamos pensar ya, pero no está correcto.
-
-Y después lo vamos a ver, por qué?
-
-Recuerden que sĂłlo es el atributo.
-
-De hecho, vamos a colocar Tiz de forma explícita.
-
-Salto, punto sūtra y acá.
-
-Bueno, sería al revés.
-
-También podemos pensar punto saldo, punto AB de su mano septo agregar un monto.
-
-Podríamos pensar eso ya.
-
-Pero no, no va a funcionar de otra forma.
-
-Estamos desarrollando.
-
-Supongamos que no conocemos bien el API y no sabemos que el bit decimal es inmutable.
-
-Y ahí está la razón.
-
-Pero bien, vamos a volver con control TAB.
-
-Lo vamos a ejecutar.
-
-Debería fallar.
-
-Se fijan, falla.
-
-Actual mil y espera que sea mil cien, y el actual acá mil y espera que sea 900, no está realizando
-
-bien el trabajo.
-
-Este método no está ni sumando y restando.
-
-Volvamos porque como es inmutable, en realidad acá tenemos que asignar este valor de acá a salto a
-
-salto, porque cada que se cambia el estado interno de un PID decimal, lo que hace no es modificar,
-
-no es cambiar el valor del atributo, lo que hace es devolver una nueva instancia, un nuevo pitch decimal
-
-con ese cambio.
-
-Pero Disable se mantiene inalterable, inmutable.
-
-Entonces, para que esto funcione tenemos que colocar di salto o salto simplemente igual a esto.
-
-Saldo restamos el monto y devuelve una nueva instancia con ese cambio.
-
-Pero en realidad Saldo se mantiene tal cual como estaba la instancia original, lo que hace devolver
-
-otra instancia con ese cambio.
-
-Eso es todo.
 
 Y acá también ya lo tenemos.
 
@@ -1176,7 +937,6 @@ También podemos probar testear con hacer John's el manejo de error hacer John's
 
 Pero bueno, eso lo vemos en la siguiente clase.
 
-## Probando y afirmando excepciones con **`assertThrows`** en JUnit 5 12:14
 ## Añadiendo la clase Banco y la realcion con las cuentas 09:55
 ## Probando y afirmando las realciones entre Banco y Cuenta 08:01
 ## Usando el método **`assertAll`** 07:10
