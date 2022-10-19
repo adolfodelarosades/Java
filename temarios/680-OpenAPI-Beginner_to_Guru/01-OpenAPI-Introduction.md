@@ -67,15 +67,31 @@ So actually all automated in the background so you register and then some APIs i
 
 <hr>
 
-En este video, voy a hablar sobre cómo puedes aprovechar al máximo este curso. Te voy a dar algunos consejos sobre cómo maximizar tu aprendizaje en el curso. El consejo número uno que tengo para las personas es muy obvio: tómese el tiempo para completar este curso. Veo que las métricas del curso son que las personas comprarán este curso y en realidad nunca lo comenzarán. no sé por qué Sé que la gente está ocupada con otras cosas y se distrae, por lo que no obtendrá ningún beneficio de este curso si nunca comenzó. También veo a muchas personas que comenzarán un curso pero nunca terminaron el curso. Entonces, para aprovechar al máximo el curso, significa que yo soy el Capitán Obvio, tienes que tomar el curso.
+![image](https://user-images.githubusercontent.com/23094588/196725339-b0b4c13c-94b2-4cea-8580-ed63b189d034.png)
 
-Muchas veces todo se reduce a la gestión del tiempo, así que tengo un consejo profesional para ti: pon tiempo en tu calendario. Haz una reunión contigo mismo para potenciar tus habilidades. Así que siga adelante y haga esa reunión, bloquee ese tiempo y dedique su tiempo para completar este curso. Ahora un par de otros consejos que tengo, repase y haga los cuestionarios y también haga las tareas. Por lo tanto, obtendrá un gran beneficio al aprender haciendo los ejercicios de codificación y también aplicando su conocimiento a las pruebas. Esto se demuestra en la investigación educativa.
+En este video, voy a hablar sobre cómo puedes aprovechar al máximo este curso, te voy a dar algunos consejos sobre cómo maximizar tu aprendizaje en el curso. 
 
-No me estoy inventando esto porque en realidad tengo una maestría en educación, por lo que tener estos diferentes formatos refuerza lo que has aprendido. Así que ponte manos a la obra, tómate el tiempo y realiza los ejercicios de codificación, lo que sucederá es que vas a retener la información mucho mejor. Ahora un par de cosas de limpieza.
+![image](https://user-images.githubusercontent.com/23094588/196725846-76970910-ecf9-4892-ad56-a93d297b9907.png)
 
-Swagger Hub, usaremos Swagger Hub en el curso para editar las especificaciones de API abierta. Este es un producto comercial. Es gratis. Tienes que registrarte. Es de uso gratuito. No es el enfoque del curso. No voy a entrar mucho en Swagger Hub. Tiene muchas funciones realmente geniales, pero estoy enfocando el curso específicamente en OpenAPI. Ahora no necesita registrarse y usar Swagger Hub. Hay un par de alternativas.
+El consejo número uno que tengo para las personas es muy obvio: tómese el tiempo para completar este curso. Veo que las métricas del curso son que las personas comprarán este curso y en realidad nunca lo comenzarán no sé por qué´. Sé que la gente está ocupada con otras cosas y se distrae, por lo que no obtendrá ningún beneficio de este curso si nunca comenzó. También veo a muchas personas que comenzarán un curso pero nunca terminaron el curso. Entonces, para aprovechar al máximo el curso, significa que yo soy el Capitán Obvio, tienes que tomar el curso.
 
-Un código de Visual Studio es una aplicación realmente agradable. Es un IDE. Es gratis para descargar y usar. Hay algunos complementos de OpenAPI. Esto le ayudará con el esquema de OpenAPI. IntelliJ, también. Soy un gran admirador de IntelliJ. Lo uso casi todos los días en mi trabajo. Hay una Community Edition gratuita e IntelliJ también tiene algunos complementos de OpenAPI que puede utilizar para ayudarlo con el esquema que contiene.
+Muchas veces todo se reduce a la gestión del tiempo, así que tengo un consejo profesional para ti: pon tiempo en tu calendario. Haz una reunión contigo mismo para potenciar tus habilidades. Así que siga adelante y haga esa reunión, bloquee ese tiempo y dedique su tiempo para completar este curso. 
+
+![image](https://user-images.githubusercontent.com/23094588/196726657-8087c2b5-619f-4265-b443-140907d51802.png)
+
+Ahora un par de otros consejos que tengo, repase y haga los cuestionarios y también haga las tareas. Por lo tanto, obtendrá un gran beneficio al aprender haciendo los ejercicios de codificación y también aplicando su conocimiento a las pruebas. Esto se demuestra en la investigación educativa.
+
+No me estoy inventando esto porque en realidad tengo una maestría en educación, por lo que tener estos diferentes formatos refuerza lo que has aprendido. Así que ponte manos a la obra, tómate el tiempo y realiza ***los ejercicios de codificación***, lo que sucederá es que vas a retener la información mucho mejor. 
+
+![image](https://user-images.githubusercontent.com/23094588/196727261-9b9ffc8f-90d5-4ebc-8c42-3fc4ffeae3fa.png)
+
+Ahora un par de cosas de limpieza.
+
+Swagger Hub, usaremos Swagger Hub en el curso para editar las especificaciones del API. Este es un producto comercial. Es gratis. Tienes que registrarte. Es de uso gratuito. No es el enfoque del curso. No voy a entrar mucho en Swagger Hub. Tiene muchas funciones realmente geniales, pero estoy enfocando el curso específicamente en OpenAPI. Ahora no necesita registrarse y usar Swagger Hub. 
+
+
+
+Hay un par de alternativas, Un código de Visual Studio es una aplicación realmente agradable. Es un IDE. Es gratis para descargar y usar. Hay algunos complementos de OpenAPI. Esto le ayudará con el esquema de OpenAPI. IntelliJ, también. Soy un gran admirador de IntelliJ. Lo uso casi todos los días en mi trabajo. Hay una Community Edition gratuita e IntelliJ también tiene algunos complementos de OpenAPI que puede utilizar para ayudarlo con el esquema que contiene.
 
 Al final del día, cualquier editor de texto funcionará bien para trabajar con la especificación OpenAPI. Algunos populares son como Notepad, Text Wrangler, Sublime Text. Es posible que tenga su propio favorito personal. Es absolutamente válido saltarse Swagger Hub y usar uno de estos editores. No utilice Word ni ningún otro programa de procesamiento de textos. Lo que estos harán, lo crearán en un documento y no tendrás un verdadero yml. Entonces, no querrás estar haciendo eso, pero sigue adelante y usa cualquier editor de texto que te guste. Ahora, otra característica del curso es una comunidad exclusiva de Slack. Los animo a seguir adelante y unirse porque estaré en Slack y mis asistentes de maestros también estarán en Slack, también estudiantes. Entonces, si tiene un problema con el curso y tiene una pregunta, puede plantearla allí y obtener una respuesta rápida. Y en esta sección del curso, será una sección separada. Puedes continuar y registrarte en Slack. Te enviaré un email.
 
