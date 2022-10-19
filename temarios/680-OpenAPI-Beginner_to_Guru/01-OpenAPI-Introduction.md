@@ -177,57 +177,33 @@ Puedes usar Slack para:
 
 ## GitHub Workflow 12:20
 
-OK, now you guys are excited about getting to write some code with around spring framework, but first we're going to pause and take a look at our GitHub workflow.
+USING GITHUB
+GH Workflow
+Forking Repos
+Cloning Repos
+Compare to Branch
+Compare to Source
 
-Now, I've had a lot of students take this course.
 
-I think there's like over 40000 now that have enrolled through the course.
+OK, now you guys are excited about getting to write some code with around spring framework.
 
-And I get this question a lot about how should I be working with the GitHub repositories.
+GH WORKFLOW
 
+First we're going to pause and take a look at our GitHub workflow.
+
+Now, I've had a lot of students take this course. I think there's like over 40000 now that have enrolled through the course. And I get this question a lot about how should I be working with the GitHub repositories. 
 Now, I do have a process that is very helpful for you.
 
-GitHub is not a requirement for this course.
+GitHub is not a requirement for this course. It is something very helpful for you to have. If you are new to GitHub, check out Appendix A of the course. There's additional videos on that, links to videos. There's free content on GitHub. Other if you're not familiar with GitHub. But in this video, what I'm going to be doing is talking to you about the workflow. There's a specific workflow that can really help you out with the course. 
+So I'm going to jump over to a little video here to talk about the workflow. And you get to see my mad skills with Adobe after effects, my very first little info video that I've done with after effects.
 
-It is something very helpful for you to have.
+So I hope you enjoy this section and we will get you up to speed on how to use GitHub to your benefit while you're taking this course. 
 
-If you are new to GitHub, check out Appendix A of the course.
+All source code examples for the course are inside of GitHub. I use git branches for each lesson. Now you're going to get a starting branch, which is the state of the code. At the beginning of the lesson. Changes that I make inside the lesson are then safe to an ending branch. You'll find links to both branches in the course.
 
-There's additional videos on that, links to videos.
+Resources using branches like this has two big benefits. 
 
-There's free content on GitHub.
-
-Other if you're not familiar with GitHub.
-
-But in this video, what I'm going to be doing is talking to you about the workflow.
-
-There's a specific workflow that can really help you out with the course.
-
-So I'm going to jump over to a little video here to talk about the workflow.
-
-And you get to see my mad skills with Adobe after effects, my very first little info video that I've
-
-done with after effects.
-
-So I hope you enjoy this section and we will get you up to speed on how to use GitHub to your benefit
-
-while you're taking this course.
-
-All source code examples for the course are inside of GitHub.
-
-I use git branches for each lesson.
-
-Now you're going to get a starting branch, which is the state of the code.
-
-At the beginning of the lesson.
-
-Changes that I make inside the lesson are then safe to an ending branch.
-
-You'll find links to both branches in the course.
-
-Resources using branches like this has two big benefits.
-
-First, I can go back and update for any errors or new releases of spring.
+First, I can go back and update for any errors or new releases of spring. 
 
 Second, you can compare your work to my branches to make comparisons easier.
 
@@ -235,9 +211,7 @@ I recommend people use this workflow first for my repository here on GitHub acco
 
 GitHub is completely free to use.
 
-If you need help with GitHub, check out Appendix A of this course for a collection of videos about
-
-how to use GitHub once you have for my repository to your account.
+If you need help with GitHub, check out Appendix A of this course for a collection of videos about how to use GitHub once you have for my repository to your account.
 
 Check out your Falke from your GitHub account to your own local workspace.
 
@@ -258,6 +232,9 @@ need help, or you can also show this to future employers to show them your work.
 Now, if you're uncertain about these steps, don't worry.
 
 In the remainder of this video, I'm going to show you each step, step by step.
+
+
+FORKING REPOS
 
 So the first thing we want to do in our workflow process is to fork out my repository to your own GitHub
 
