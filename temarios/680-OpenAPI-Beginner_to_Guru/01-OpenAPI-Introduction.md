@@ -73,78 +73,111 @@ En este video, voy a hablar sobre cómo puedes aprovechar al máximo este curso,
 
 ![image](https://user-images.githubusercontent.com/23094588/196725846-76970910-ecf9-4892-ad56-a93d297b9907.png)
 
-El consejo número uno que tengo para las personas es muy obvio: tómese el tiempo para completar este curso. Veo que las métricas del curso son que las personas comprarán este curso y en realidad nunca lo comenzarán no sé por qué´. Sé que la gente está ocupada con otras cosas y se distrae, por lo que no obtendrá ningún beneficio de este curso si nunca comenzó. También veo a muchas personas que comenzarán un curso pero nunca terminaron el curso. Entonces, para aprovechar al máximo el curso, significa que yo soy el Capitán Obvio, tienes que tomar el curso.
+El consejo número uno que tengo para las personas es muy obvio: ***tómese el tiempo para completar este curso***. Veo que las métricas del curso son que las personas comprarán este curso y en realidad nunca lo comenzarán no sé por qué. Sé que la gente está ocupada con otras cosas y se distrae, por lo que no obtendrá ningún beneficio de este curso si nunca comenzó. 
+
+También veo a muchas personas que comenzarán un curso pero nunca terminaron el curso. Entonces, para aprovechar al máximo el curso, significa que yo soy el Capitán Obvio, ***tienes que hacer el curso***.
 
 Muchas veces todo se reduce a la gestión del tiempo, así que tengo un consejo profesional para ti: pon tiempo en tu calendario. Haz una reunión contigo mismo para potenciar tus habilidades. Así que siga adelante y haga esa reunión, bloquee ese tiempo y dedique su tiempo para completar este curso. 
 
 ![image](https://user-images.githubusercontent.com/23094588/196726657-8087c2b5-619f-4265-b443-140907d51802.png)
 
-Ahora un par de otros consejos que tengo, repase y haga los cuestionarios y también haga las tareas. Por lo tanto, obtendrá un gran beneficio al aprender haciendo los ejercicios de codificación y también aplicando su conocimiento a las pruebas. Esto se demuestra en la investigación educativa.
+Ahora un par de otros consejos que tengo, ***repase y haga los cuestionarios*** y también ***haga las tareas***. Por lo tanto, obtendrá un gran beneficio al ***aprender haciendo los ejercicios de codificación*** y también ***aplicando su conocimiento a las pruebas***. Esto se demuestra en la investigación educativa.
 
-No me estoy inventando esto porque en realidad tengo una maestría en educación, por lo que tener estos diferentes formatos refuerza lo que has aprendido. Así que ponte manos a la obra, tómate el tiempo y realiza ***los ejercicios de codificación***, lo que sucederá es que vas a retener la información mucho mejor. 
+No me estoy inventando esto porque en realidad tengo una maestría en educación, por lo que tener estos diferentes formatos refuerza lo que has aprendido. Así que ponte manos a la obra, ***tómate el tiempo y realiza los ejercicios de codificación***, lo que sucederá es que ***vas a retener la información mucho mejor***. 
 
 ![image](https://user-images.githubusercontent.com/23094588/196727261-9b9ffc8f-90d5-4ebc-8c42-3fc4ffeae3fa.png)
 
 Ahora un par de cosas de limpieza.
 
-Swagger Hub, usaremos Swagger Hub en el curso para editar las especificaciones del API. Este es un producto comercial. Es gratis. Tienes que registrarte. Es de uso gratuito. No es el enfoque del curso. No voy a entrar mucho en Swagger Hub. Tiene muchas funciones realmente geniales, pero estoy enfocando el curso específicamente en OpenAPI. Ahora no necesita registrarse y usar Swagger Hub. 
+Usaremos **Swagger Hub** en el curso para editar las Especificaciones del API. Este es un producto comercial. Tienes que registrarte. Es de uso gratuito. No es el enfoque del curso. No voy a entrar mucho en Swagger Hub. Tiene muchas funciones realmente geniales, pero estoy enfocando el curso específicamente en **OpenAPI**. Ahora no necesita registrarse y usar Swagger Hub. 
 
+![image](https://user-images.githubusercontent.com/23094588/196746893-a2d09299-e52a-4ca1-8202-eb5c1bbea7cc.png)
 
+Hay un par de alternativas, **Visual Studio Code** es una aplicación realmente agradable, es un IDE. Es gratis para descargar y usar. Hay algunos complementos de **OpenAPI**. Esto le ayudará con el esquema de OpenAPI. 
 
-Hay un par de alternativas, Un código de Visual Studio es una aplicación realmente agradable. Es un IDE. Es gratis para descargar y usar. Hay algunos complementos de OpenAPI. Esto le ayudará con el esquema de OpenAPI. IntelliJ, también. Soy un gran admirador de IntelliJ. Lo uso casi todos los días en mi trabajo. Hay una Community Edition gratuita e IntelliJ también tiene algunos complementos de OpenAPI que puede utilizar para ayudarlo con el esquema que contiene.
+**IntelliJ**, también. Soy un gran admirador de IntelliJ. Lo uso casi todos los días en mi trabajo. Hay una **Community Edition** gratuita de IntelliJ, también tiene algunos complementos de OpenAPI que puede utilizar para ayudarlo con el esquema que contiene.
 
-Al final del día, cualquier editor de texto funcionará bien para trabajar con la especificación OpenAPI. Algunos populares son como Notepad, Text Wrangler, Sublime Text. Es posible que tenga su propio favorito personal. Es absolutamente válido saltarse Swagger Hub y usar uno de estos editores. No utilice Word ni ningún otro programa de procesamiento de textos. Lo que estos harán, lo crearán en un documento y no tendrás un verdadero yml. Entonces, no querrás estar haciendo eso, pero sigue adelante y usa cualquier editor de texto que te guste. Ahora, otra característica del curso es una comunidad exclusiva de Slack. Los animo a seguir adelante y unirse porque estaré en Slack y mis asistentes de maestros también estarán en Slack, también estudiantes. Entonces, si tiene un problema con el curso y tiene una pregunta, puede plantearla allí y obtener una respuesta rápida. Y en esta sección del curso, será una sección separada. Puedes continuar y registrarte en Slack. Te enviaré un email.
+Al final del día, cualquier **Editor de Texto** funcionará bien para trabajar con la especificación OpenAPI. Algunos populares son **Notepad**, **Text Wrangler**, **Sublime Text**. Es posible que tenga su editor favorito. Es absolutamente válido saltarse **Swagger Hub** y usar uno de estos editores. 
 
-Entonces, en realidad, todo está automatizado en segundo plano para que te registres y luego algunas API en segundo plano se activarán y te inscribirán en Slack. Entonces, en resumen, el consejo número uno, haz el curso. Tómese un tiempo para usted y realmente trabaje durante el curso. Haz los ejercicios. Haz las tareas de codificación. Adopte el curso, revíselo y aprenda mucho. Y luego también, es su elección usar Swagger Hub o su editor de texto preferido. Cualquiera de los dos va a funcionar bien. Y, por último, te animo encarecidamente a que sigas adelante y te unas a la comunidad de Slack. Tendremos mucha gente allí y si se encuentra con un problema, tiene una pregunta, la comunidad, yo mismo o uno de los asistentes de mis maestros estaremos allí para ayudarlo.
+No utilice **Word** ni ningún otro programa de procesamiento de textos. Lo que estos harán, lo crearán en un documento y no tendrás un verdadero **yml**. Entonces, no querrás estar haciendo eso, pero sigue adelante y usa cualquier editor de texto que te guste. 
 
-## Slack Group for OpenAPI: Be
+![image](https://user-images.githubusercontent.com/23094588/196748129-d115787e-58b0-42e2-bc2a-00dab423868f.png)
 
-Slack Group for OpenAPI: Beginner to Guru
-Private Slack Channel Exclusive to this course!!
-Get the most out of this course by getting live help from myself and other students! I've setup a Slack Channel, private and exclusive to students enrolled this course!
+Ahora, otra característica del curso es una exclusiva **Comunidad de Slack**. Los animo a seguir adelante y unirse porque estaré en **Slack** y mis asistentes de maestros también estarán en Slack, también estudiantes. Entonces, si tiene un problema con el curso y tiene una pregunta, puede plantearla allí y obtener una respuesta rápida. Y en esta sección del curso, será una sección separada. Puedes continuar y registrarte en Slack. Te enviaré un email.
+
+Entonces, en realidad, todo está automatizado en segundo plano para que te registres y luego algunas API en segundo plano se activarán y te inscribirán en Slack. 
+
+![image](https://user-images.githubusercontent.com/23094588/196748723-dc0af1c8-1db0-4d82-ac15-eee6215474b5.png)
+
+Entonces, en resumen, el ***consejo número uno, haz el curso***. ***Tómese un tiempo para realmente trabajar en el curso***. ***Haz los ejercicios***. ***Haz las tareas de codificación***. Adopte el curso, revíselo y aprenda mucho. Y luego también, es su elección usar Swagger Hub o su editor de texto preferido. Cualquiera de los dos va a funcionar bien. Y, por último, te animo encarecidamente a que sigas adelante y te unas a la comunidad de Slack. Tendremos mucha gente allí y si se encuentra con un problema, tiene una pregunta, la comunidad, yo mismo o uno de los asistentes de mis maestros estaremos allí para ayudarlo.
+
+## Slack Group for OpenAPI: Beginner to Guru
+
+### Private Slack Channel Exclusive to this course!!
+
+**Get the most out of this course by getting live help from myself and other students!** I've setup a Slack Channel, private and exclusive to students enrolled this course!
 
 Slack is an awesome product to collaborate real time. I will be on Slack to answer your questions, and my teacher's assistants will also be there to help you with the course!
 
 You can use Slack to:
 
-Get help with the course.
+* Get help with the course.
+* Help others with problems they are having.
+* Share Spring Framework news, tips, and tricks.
+* See how others are using the Spring Framework.
+* Or just say hi!
 
-Help others with problems they are having.
+### To Get Your Invitation:
 
-Share Spring Framework news, tips, and tricks.
-
-See how others are using the Spring Framework.
-
-Or just say hi!
-
-To Get Your Invitation:
-Go to this link to request your invitation.
-
-Check your email from an invitation from Slack. 
-
-The email subject will be "John Thompson has invited you to join a Slack workspace"
-
-Open the email and click on the link to join Spring Framework Guru on Slack.
-
-Create your Slack account.
-
-Click on the openapi channel and introduce yourself to the community!!
-
-Once you've created your account, you can access the Slack Channel anytime here.
+1. Go to this [link](go.springframework.gur) to request your invitation.
+2. Check your email from an invitation from Slack. 
+3. The email subject will be "John Thompson has invited you to join a Slack workspace"
+4. Open the email and click on the link to join Spring Framework Guru on Slack.
+5. Create your Slack account.
+6. Click on the openapi channel and introduce yourself to the community!!
+7. Once you've created your account, you can access the Slack Channel anytime here.
 
 Using this Slack Channel you can interact with a whole community of Spring Framework Gurus!
 
-NOTE: If you are already a member of the Spring Framework Guru Slack workspace, you will be added to the channel automatically, BUT - you will not receive another email directly from Slack.
-
-
+**NOTE:** If you are already a member of the Spring Framework Guru Slack workspace, you will be added to the channel automatically, BUT - *you will not receive another email directly from Slack*.
 
 Sign up and join the Spring Framework Guru Slack community! 
 
+<hr>
+
+### ¡Canal privado de Slack exclusivo de este curso!
+
+**¡Aproveche al máximo este curso recibiendo ayuda en vivo de mí y de otros estudiantes!** ¡Configuré un canal de Slack, privado y exclusivo para los estudiantes inscritos en este curso!
+
+Slack es un producto increíble para colaborar en tiempo real. ¡Estaré en Slack para responder a sus preguntas, y mis maestros asistentes también estarán allí para ayudarlo con el curso!
+
+Puedes usar Slack para:
+
+* Obtenga ayuda con el curso.
+* Ayudar a otros con los problemas que están teniendo.
+* Comparta noticias, consejos y trucos de Spring Framework.
+* Vea cómo otros están usando Spring Framework.
+* O simplemente decir hola!
+
+### Para obtener su invitación:
+
+1. Accede a este enlace para solicitar tu invitación.
+2. Revisa tu correo electrónico desde una invitación de Slack.
+3. El asunto del correo electrónico será "John Thompson te ha invitado a unirte a un espacio de trabajo de Slack".
+4. Abra el correo electrónico y haga clic en el enlace para unirse a Spring Framework Guru en Slack.
+5. Crea tu cuenta de Slack.
+6. ¡Haz clic en el canal de openapi y preséntate a la comunidad!
+7. Una vez que haya creado su cuenta, puede acceder al canal de Slack en cualquier momento aquí.
+
+¡Usando este canal de Slack puedes interactuar con toda una comunidad de Spring Framework Gurus!
+
+**NOTA:** Si ya es miembro del espacio de trabajo Spring Framework Guru Slack, se le agregará al canal automáticamente, PERO, *no recibirá otro correo electrónico directamente de Slack*.
+
+¡Regístrese y únase a la comunidad Spring Framework Guru Slack!
+
 ## GitHub Workflow 12:20
 
-OK, now you guys are excited about getting to write some code with around spring framework, but first
-
-we're going to pause and take a look at our GitHub workflow.
+OK, now you guys are excited about getting to write some code with around spring framework, but first we're going to pause and take a look at our GitHub workflow.
 
 Now, I've had a lot of students take this course.
 
@@ -483,3 +516,5 @@ So this allows you to see any changes that I have made to the source code.
 Since you talk to your own repo, any changes I made are not going to be pushed a year or so now so
 
 I can see any changes that are made since you did the four.
+
+<hr>
