@@ -93,7 +93,7 @@ Analistas comerciales responsables de las especificaciones de API
 
 * 10 secciones • 54 clases • 5h 8m de duración total
 
-## OpenAPI Introduction 5 clases • 22 min
+## 1. OpenAPI Introduction 5 clases • 22 min
 
 * Welcome 01:11
 * Meet Your Instructor 03:48
@@ -101,7 +101,7 @@ Analistas comerciales responsables de las especificaciones de API
 * Slack Group for OpenAPI: Beginner to Guru 00:59
 * GitHub Workflow 12:20
 
-## OpenAPI Schema 8 clases • 44 min
+## 2. OpenAPI Schema 8 clases • 44 min
 
 * Introduction 01:55
 * What is an API? 07:05
@@ -113,7 +113,7 @@ Analistas comerciales responsables de las especificaciones de API
 * YAML Crash Course 07:28
 * OpenAPI Specification Quiz 10 preguntas
 
-### Defining a Microservice with OpenAPI 6 clases • 26 min
+### 3. Defining a Microservice with OpenAPI 6 clases • 26 min
 
 * Introduction 01:45
 * Swagger Hub 03:59
@@ -125,7 +125,7 @@ Analistas comerciales responsables de las especificaciones de API
 * Assignment - List Beers 1 preguntas
 * OpenAPI Quiz 6 preguntas
 
-### OpenAPI Schema 4 clases • 23 min
+### 4. OpenAPI Schema 4 clases • 23 min
 
 * Introduction 02:33
 * JSON Schema 09:10
@@ -134,7 +134,7 @@ Analistas comerciales responsables de las especificaciones de API
 * OpenAPI Enums 04:57
 * Assignment - Improve List Beer Response 1 preguntas
 
-### OpenAPI Components 5 clases • 34 min
+### 5. OpenAPI Components 5 clases • 34 min
 
 * Introduction  01:53
 * OpenAPI Components Object 08:10
@@ -143,7 +143,7 @@ Analistas comerciales responsables de las especificaciones de API
 * OpenAPI Object Inheritance 04:56
 * Assignment - Update Beer Object to use Inheritance 1 preguntas
 
-### OpenAPI Parameters 4 clases • 16 min
+### 6. OpenAPI Parameters 4 clases • 16 min
 
 * Introduction 01:45
 * OpenAPI Parameter Object 05:04
@@ -153,7 +153,7 @@ Analistas comerciales responsables de las especificaciones de API
 * Describing URL Parameters 05:57
 * Assignment - Add URL Parameters for Beer Operations 1 preguntas
 
-### OpenAPI Requests 11 clases • 48 min
+### 7. OpenAPI Requests 11 clases • 48 min
 
 * Introduction 01:05
 * OpenAPI Operation Summaries and Descriptions 04:41
@@ -171,7 +171,7 @@ Analistas comerciales responsables de las especificaciones de API
 * Assignment - Additional Responses 1 preguntas
 * OpenAPI Callbacks 08:44
 
-### OpenAPI Security Definitions 5 clases • 16 min
+### 8. OpenAPI Security Definitions 5 clases • 16 min
 
 * Introduction 01:11
 * OpenAPI Security Scheme 06:55
@@ -179,7 +179,7 @@ Analistas comerciales responsables de las especificaciones de API
 * JWT Bearer Token Auth 01:59
 * Anonymous Authentication with OpenAPI 03:08
 
-### OpenAPI Code Gen 5 clases • 16 min
+### 9. OpenAPI Code Gen 5 clases • 16 min
 
 * Introduction 03:44
 * OpenAPI Code Gen 03:08
@@ -187,6 +187,6 @@ Analistas comerciales responsables de las especificaciones de API
 * OpenAPI Generated Java Server 03:04
 * Conclusion 01:26
 
-### Appendix A - Using GitHub 1 clases • 1 min
+### 10. Appendix A - Using GitHub 1 clases • 1 min
 
 * Git and GitHub Basics - Start Here! 00:37
