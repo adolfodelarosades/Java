@@ -100,6 +100,27 @@ Serie de varios cursos Java.
 
 * [650 Curso de Java avanzado con Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/650_Curso_de_Java_Avanzado_con_Spring_Boot.md)
 
+# John Thompson
+
+* [670 Java Programming: Beginner to Guru]()
+* [671 SQL Beginner to Guru: MySQL Edition - Master SQL with MySQLSQL]
+* [672 Apache Maven: Beginner to Guru]
+* [673 Introduction to Spring Boot 2 and Spring Framework 5]
+* [674 Spring Framework 5]
+* [675 Hibernate and Spring Data JPA]
+* [676 Mastering Thymeleaf with Spring Boot]
+* [677 Spring Boot Microservices with Spring Cloud Beginner to Guru]
+* [678 Reactive Programming with Spring Framework 5]
+* [679 Spring Security Core]
+* [680 OpenAPI: Beginner to Guru(https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru.md)
+* [681 Testing Spring Boot
+* [682 Docker for Java Developers
+* [683 Spring Framework DevOps on AWS
+* [684 Ready for Production with Spring Boot Actuator
+* [685 Kube By Example - Building Spring Boot Docker Images
+* [686 Kube By Example - Spring Boot on Kubernetes
+* [687 Kube By Example - Spring Boot Microservices on Kubernetes
+
 # Cursos Madrid
 
 * [701 Desarrollo de aplicaciones con Java IFCT034PO](https://github.com/adolfodelarosades/Java/blob/master/temarios/701_Desarrollo_de_aplicaciones_con_Java_IFCT034PO.md)
