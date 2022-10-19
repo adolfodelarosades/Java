@@ -37,61 +37,47 @@ Podrá crear una especificación OpenAPI completa para un servicio web RESTful.
 
 Paso a paso, aprenderá a:
 
-Editar una especificación de OpenAPI en Swagger Hub
-
-Definir una especificación OpenAPI en YAML
-
-Agregar información del desarrollador
-
-Agregar información del servidor
-
-Definir una ruta de API
-
-Definir una operación de API
-
-Cree objetos robustos con restricciones de esquema JSON
-
-Mejore la calidad de su especificación con componentes reutilizables.
-
-Definir parámetros de consulta
-
-Definir parámetros de ruta
-
-Definir operaciones GET, PUT, POST y DELETE
-
-Crear esquemas de seguridad de API
-
-Genere código fuente con OpenAPI Code Gen
-
-Utilice ReDoc para generar una sólida documentación de la API
-
-Use Apache Maven para generar código con OpenAPI Code Gen
+* Editar una especificación de OpenAPI en Swagger Hub
+* Definir una especificación OpenAPI en YAML
+* Agregar información del desarrollador
+* Agregar información del servidor
+* Definir una ruta de API
+* Definir una operación de API
+* Cree objetos robustos con restricciones de esquema JSON
+* Mejore la calidad de su especificación con componentes reutilizables.
+* Definir parámetros de consulta
+* Definir parámetros de ruta
+* Definir operaciones GET, PUT, POST y DELETE
+* Crear esquemas de seguridad de API
+* Genere código fuente con OpenAPI Code Gen
+* Utilice ReDoc para generar una sólida documentación de la API
+* Use Apache Maven para generar código con OpenAPI Code Gen
 
 Este curso tiene numerosas tareas y ejemplos prácticos para que se sienta cómodo escribiendo las especificaciones de OpenAPI.
 
-Course Extra - Acceso a una comunidad privada de Slack
+**Course Extra - Acceso a una comunidad privada de Slack**
 
 No solo se está inscribiendo en un curso --> Se está uniendo a una comunidad aprendiendo sobre el uso de OpenAPI.
 
 Con tu inscripción al curso, puedes acceder a una comunidad exclusiva de Slack. Obtenga ayuda del instructor y otros gurús de todo el mundo, ¡en tiempo real! Esta comunidad solo está disponible para los estudiantes inscritos en este curso.
 
-¡Esta es una comunidad de Slack muy activa con casi 500 gurús!
+¡Esta es una comunidad de Slack muy ***activa*** con casi ***500*** gurús!
 
 ¡Con tu inscripción, puedes unirte a esta comunidad de increíbles gurús!
 
-Subtítulos / Subtítulos
+**Subtítulos**
 
 ¡Los subtítulos en inglés están disponibles para todos los videos del curso!
 
-Descargas en PDF
+**Descargas en PDF**
 
 Todas las presentaciones principales están disponibles para su descarga en formato PDF.
 
-Acceso de por vida
+**Acceso de por vida**
 
 Cuando compre este curso, ¡recibirá acceso de por vida! Puede iniciar sesión en cualquier momento desde cualquier lugar para acceder al contenido del curso.
 
-Sin riesgo - Garantía de devolución de dinero
+**Sin riesgo - Garantía de devolución de dinero**
 
 Puedes comprar este curso sin ningún riesgo. Si no está satisfecho con el curso, por cualquier motivo, puede obtener un reembolso completo. El curso tiene una garantía de devolución de dinero de 30 días.
 
@@ -99,7 +85,8 @@ Puedes comprar este curso sin ningún riesgo. Si no está satisfecho con el curs
 
 
 
-¿Para quién es este curso?
+### ¿Para quién es este curso?
+
 Cualquiera que necesite usar las especificaciones de OpenAPI para las API
 Desarrolladores que necesitan documentar sus API
 Analistas comerciales responsables de las especificaciones de API
