@@ -83,10 +83,110 @@ Puedes comprar este curso sin ningún riesgo. Si no está satisfecho con el curs
 
 ¡Regístrese hoy y vea lo fácil que es usar OpenAPI para sus API RESTFul!
 
-
-
 ### ¿Para quién es este curso?
 
 Cualquiera que necesite usar las especificaciones de OpenAPI para las API
 Desarrolladores que necesitan documentar sus API
 Analistas comerciales responsables de las especificaciones de API
+
+### Contenido del curso
+
+* 10 secciones • 54 clases • 5h 8m de duración total
+
+## OpenAPI Introduction 5 clases • 22 min
+
+* Welcome 01:11
+* Meet Your Instructor 03:48
+* Getting the Most out of your OpenAPI Course 03:52
+* Slack Group for OpenAPI: Beginner to Guru 00:59
+* GitHub Workflow 12:20
+
+## OpenAPI Schema 8 clases • 44 min
+
+* Introduction 01:55
+* What is an API? 07:05
+* HTTP Protocol 05:08
+* HTTP Request Methods 06:11
+* Why use OpenAPI? 07:06
+* Pet Clinic on Swagger Editor 06:09
+* OpenAPI 2.0 vs 3.0 03:12
+* YAML Crash Course 07:28
+* OpenAPI Specification Quiz 10 preguntas
+
+### Defining a Microservice with OpenAPI 6 clases • 26 min
+
+* Introduction 01:45
+* Swagger Hub 03:59
+* OpenAPI Specification 05:03
+* OpenAPI Info Object 05:14
+* OpenAPI Servers Object 03:37
+* Assignment - Add Servers 1 preguntas
+* OpenAPI Paths Object 06:26
+* Assignment - List Beers 1 preguntas
+* OpenAPI Quiz 6 preguntas
+
+### OpenAPI Schema 4 clases • 23 min
+
+* Introduction 02:33
+* JSON Schema 09:10
+* OpenAPI Data Types 09:49
+* OpenAPI Objects 07:37
+* OpenAPI Enums 04:57
+* Assignment - Improve List Beer Response 1 preguntas
+
+### OpenAPI Components 5 clases • 34 min
+
+* Introduction  01:53
+* OpenAPI Components Object 08:10
+* Creating Reusable Customer Object 08:11
+* Assignment - Create Reusable Beer Object 1 preguntas
+* OpenAPI Object Inheritance 04:56
+* Assignment - Update Beer Object to use Inheritance 1 preguntas
+
+### OpenAPI Parameters 4 clases • 16 min
+
+* Introduction 01:45
+* OpenAPI Parameter Object 05:04
+* Describing Query Parameters 03:37
+* Assignment - Add Query Parameters for Beer Operations 1 preguntas
+* Challenge - Parameter Components 1 preguntas
+* Describing URL Parameters 05:57
+* Assignment - Add URL Parameters for Beer Operations 1 preguntas
+
+### OpenAPI Requests 11 clases • 48 min
+
+* Introduction 01:05
+* OpenAPI Operation Summaries and Descriptions 04:41
+* OpenAPI Operation Tags 03:26
+* OpenAPI Operation Id 06:02
+* Describing RESTFul Create 04:16
+* Describing Response Headers 03:43
+* Read Only Properties 04:17
+* Assignment - Create Beer Resource 1 preguntas
+* Describing RESTFul Update 04:23
+* Assignment - Update Beer Resource 1 preguntas
+* Descibing RESTful Delete 03:21
+* Assignment - Delete Beer Resource 1 preguntas
+* Describing Additional Responses 04:23
+* Assignment - Additional Responses 1 preguntas
+* OpenAPI Callbacks 08:44
+
+### OpenAPI Security Definitions 5 clases • 16 min
+
+* Introduction 01:11
+* OpenAPI Security Scheme 06:55
+* Basic Auth with OpenAPI 02:35
+* JWT Bearer Token Auth 01:59
+* Anonymous Authentication with OpenAPI 03:08
+
+### OpenAPI Code Gen 5 clases • 16 min
+
+* Introduction 03:44
+* OpenAPI Code Gen 03:08
+* OpenAPI Generated Java Client 04:48
+* OpenAPI Generated Java Server 03:04
+* Conclusion 01:26
+
+### Appendix A - Using GitHub 1 clases • 1 min
+
+* Git and GitHub Basics - Start Here! 00:37
