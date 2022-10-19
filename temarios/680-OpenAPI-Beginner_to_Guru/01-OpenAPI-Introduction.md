@@ -9,243 +9,77 @@
 
 ## Welcome 01:11
 
-Hi, my name is John Thompson. I'd like to welcome you to my OpenAPI course. I'm 
+I'd like to welcome you to my OpenAPI course. I'm hoping this course will be a very comprehensive course on how to use OpenAPI because it's such a critical tool for defining specifications for your APIs.
 
-hoping this course will be a very comprehensive course on how to use OpenAPI
+Now in this section on the course, what we're gonna do is just go through some basic housekeeping, get you introduced to the course, get you introduced to me, give you some advice on how to effectively complete this course.
 
-because it's such a critical tool for defining specifications for your APIs.
+So, just basic housekeeping in this section. And then in the next section, we are going to start looking at OpenAPI itself, get you some history on OpenAPI and some information about how OpenAPI actually came to be and then following sections, we'll go into actually starting to define some services in OpenAPI, start utilizing that OpenAPI specification, and defining an API in it and then after that, one of the great features of OpenAPI is having a very strong schema. We'll start getting some hands-on in that. But first, let's go in and take care of the basic housekeeping and then the next section will actually start diving into OpenAPI.
 
-Now in this section on the course, what we're gonna do is just go through
+<hr>
 
-some basic housekeeping, get you introduced to the course, get you
+Me gustaría darle la bienvenida a mi curso OpenAPI. Espero que este curso sea muy completo sobre cómo usar OpenAPI porque es una herramienta fundamental para definir las especificaciones de sus API.
 
-introduced to me, give you some advice on how to effectively complete this course.
+![image](https://user-images.githubusercontent.com/23094588/196720276-4f3fc1ee-640c-4018-bdc2-30de7b00a202.png)
 
-So, just basic housekeeping in this section. And then in the next section, we
+Ahora, en esta sección del curso, lo que vamos a hacer es revisar algunas tareas básicas de limpieza, presentarles el curso, presentarme, darles algunos consejos sobre cómo completar este curso de manera efectiva.
 
-are going to start looking at OpenAPI itself, get you some history on OpenAPI
+Entonces, solo conceptos básicos en esta sección. Y luego, en la siguiente sección, comenzaremos a ver OpenAPI en sí, le daremos un poco de historia sobre OpenAPI y alguna información sobre cómo se creó realmente OpenAPI y luego, en las siguientes secciones, comenzaremos a definir algunos servicios en OpenAPI, comience a utilizar esa especificación de OpenAPI y defina una API en ella y luego, una de las mejores características de OpenAPI es tener un esquema muy sólido. Empezaremos a ponernos manos a la obra en eso. Pero primero, entremos y ocupémonos de los conceptos básicos y luego la siguiente sección comenzará a sumergirse en OpenAPI.
 
-and some information about how OpenAPI actually came to be and then
-
-following sections, we'll go into actually starting to define some services in
-
-OpenAPI, start utilizing that OpenAPI specification, and defining an API in it.
-
-And then after that, one of the great features of OpenAPI is having a
-
-very strong schema. We'll start getting some hands-on in that. But first, let's
-
-go in and take care of the basic housekeeping and then the next section
-
-will actually start diving into OpenAPI.
 
 ## Meet Your Instructor 03:48
 
-In this video, I thought I'd take a moment to introduce myself. So, my name is
+In this video, I thought I'd take a moment to introduce myself. I am the founder of Spring Framework Guru. This is a website I created way back in 2015, really dedicated to helping people learn Java and Spring technology. So Spring is a Java-based framework and using the enterprise quite a bit and within Java and Spring, it's very common language to be using to develop enterprise-grade web services and that's kind of what got me down on path of OpenAPI. I am working for a start-up. It's called the Velo payments. And as of November 2018, that is the name of the company. There's been some rumors that we might be rebranding. If you've ever lived in a start-up, it seems like about every six months or six to twelve months they like to rebrand. 
 
-John Thompson. I am the founder of Spring Framework Guru. This is a website I
+So, we've actually had the name for quite a while so we are officially overdue to rebrand. But right now, Velo Payments, I've led the effort to adopt OpenAPI within Velo payments. One of the hats that I wear the startup is I am on the integrations team and what this means is I have the responsibility for setting up our Developer Center and of the clients that we have that are gonna be integrating with our public facing APIs. I have the responsibility of not only onboarding them but working with them for their use of there APIs and supporting them as they use them 18 months ago or so, maybe not quite that long, we were using Spring REST Docs. Produced okay documentation. It had its limitations. It was not a standard. It would produce an HTML specification. It look nice on a web page but it was not a natural API specification. It did not nearly have 
+the benefits that OpenAPI does. In this course we will be looking at those benefits of what those are, what open API brings to the table. Like I said I've led that adoptation, so I've written those and a lot of OpenAPI specifications for different API endpoints. So I do have a lot of experience in working with OpenAPI through my role of using it to communicate public facing APIs. If you think about having a public facing API, you can have a number of different technologies coming at a number of different skill levels, a number of different shops, languages, the works. 
 
-created way back in 2015, really dedicated to helping people learn
+So, as an API consumer, if you turn the tables as an API consumer, it becomes very important to have proper API documentation. So that's really what led me down the path to create this course for OpenAPI because I did see the benefits. I have seen the benefits of being in a start-up where we are actually using that. A little bit more about me, I live in Saint Petersburg, Florida. I actually reside right downtown. I walk everywhere or I bike everywhere. I'm also a very avid cyclist. Actually at the time of recording, I will be leaving actually tomorrow afternoon to Fort Myers Beach and then Thursday morning I will be doing an annual bike ride called 72 hours Key West. 
 
-Java and Spring technology. So Spring is a Java-based framework and using the
+I'll be riding my bicycle 280 miles from Fort Myers Beach to Key West over a period of three days. But this is an annual fundraiser that I do. Raises some money for children in need and I also really enjoy the ride and the riders that I ride with. It's just a outstanding time. So coming up in the course, we are gonna cover a lot of ground on an OpenAPI. I'm really happy with how this course has turned out. And the information in this course, I'm really excited to present it to you. I think you're gonna have a lot of fun taking this course and learning about why you wanna be using OpenAPI in your organization.
 
-enterprise quite a bit and within Java and Spring, it's very common language to
+<hr>
 
-be using to develop enterprise-grade web services and that's kind of what got me
+En este video, pensé en tomarme un momento para presentarme. Soy el fundador de Spring Framework Guru. Este es un sitio web que creé en 2015, realmente dedicado a ayudar a las personas a aprender la tecnología Java y Spring. Entonces, Spring es un framework basado en Java y usa bastante la empresa y dentro de Java y Spring, es un lenguaje muy común para desarrollar servicios web de nivel empresarial y eso es lo que me puso en el camino de OpenAPI. Estoy trabajando para una start-up, se llama Velo Payments y a partir de noviembre de 2018, ese es el nombre de la empresa. Ha habido algunos rumores de que podríamos cambiar de marca. Si alguna vez ha vivido en una nueva empresa, parece que cada seis meses o seis a doce meses les gusta cambiar de marca.
 
-down on path of OpenAPI. I am working for a start-up. It's called the Velo
+Entonces, en realidad hemos tenido el nombre durante bastante tiempo, por lo que oficialmente estamos atrasados en cambiar la marca. Pero en este momento, Velo Payments, lideré el esfuerzo de adoptar OpenAPI dentro de los pagos de Velo. Uno de los sombreros que uso en la puesta en marcha es que estoy en el equipo de integraciones y lo que esto significa es que tengo la responsabilidad de configurar nuestro Centro de desarrolladores y de los clientes que tenemos que se integrarán con nuestras API públicas. Tengo la responsabilidad no solo de incorporarlos, sino también de trabajar con ellos para el uso de sus API y brindarles asistencia cuando los usan hace aproximadamente 18 meses, tal vez no tanto, estábamos usando Spring REST Docs. Documentación bien producida. Tenía sus limitaciones. No era un estándar. Produciría una especificación HTML. Se veía bien en una página web, pero no era una especificación de API natural casi no tenía los beneficios que hace OpenAPI. 
 
-payments. And as of November 2018, that is the name of the company. There's been
+En este curso, veremos esos beneficios de lo que son, lo que la API abierta trae a la mesa. Como dije, he liderado esa adopción, así que he escrito esas y muchas especificaciones de OpenAPI para diferentes puntos finales de API. Así que tengo mucha experiencia trabajando con OpenAPI a través de mi rol de usarlo para comunicar API públicas. Si piensa en tener una API de cara al público, puede tener varias tecnologías diferentes con diferentes niveles de habilidad, varias tiendas, idiomas, los trabajos.
 
-some rumors that we might be rebranding. If you've ever lived in a start-up, it
+Entonces, como consumidor de API, si cambia las tornas como consumidor de API, se vuelve muy importante tener la documentación de API adecuada. Eso es realmente lo que me guió por el camino para crear este curso para OpenAPI porque vi los beneficios. He visto los beneficios de estar en una empresa nueva donde realmente estamos usando eso.
 
-seems like about every six months or six to twelve months they like to rebrand. So,
-
-we've actually had the name for quite a while so we are officially overdue to
-
-rebrand. But right now, Velo Payments, I've led the effort to adopt
-
-OpenAPI within Velo payments. One of the hats that I wear the startup is I am
-
-on the integrations team and what this means is I have the responsibility for
-
-setting up our Developer Center and of the clients that we have that are gonna
-
-be integrating with our public facing APIs. I have the responsibility of not
-
-only onboarding them but working with them for their use of there APIs and
-
-supporting them as they use them. 18 months ago or so, maybe not quite that
-
-long, we were using Spring REST Docs. Produced okay documentation. It had its
-
-limitations. It was not a standard. It would produce an HTML specification. It look nice
-
-on a web page but it was not a natural API specification. It did not nearly have
-
-the benefits that OpenAPI does. In this course we will be looking at those
-
-benefits of what those are, what open API brings to the table. Like I said
-
-I've led that adoptation, so I've written those and a lot of OpenAPI
-
-specifications for different API endpoints. So I do have a lot of
-
-experience in working with OpenAPI through my role
-
-of using it to communicate public facing APIs. If you think about having a
-
-public facing API, you can have a number of different technologies coming at a
-
-number of different skill levels, a number of different shops, languages, the works.
-
-So, as an API consumer, if you turn the tables as an API consumer, it becomes
-
-very important to have proper API documentation. So that's really what led
-
-me down the path to create this course for OpenAPI because I did see the
-
-benefits. I have seen the benefits of being in a start-up where we are actually
-
-using that. A little bit more about me, I live in Saint Petersburg, Florida. I
-
-actually reside right downtown. I walk everywhere or I bike everywhere. I'm also
-
-a very avid cyclist. Actually at the time of recording, I will be leaving actually tomorrow
-
-afternoon to Fort Myers Beach and then Thursday morning I will be doing an
-
-annual bike ride called 72 hours Key West.
-
-I'll be riding my bicycle 280 miles from Fort Myers Beach to Key West over a
-
-period of three days. But this is an annual fundraiser that I do. Raises some
-
-money for children in need and I also really enjoy the ride and the riders
-
-that I ride with. It's just a outstanding time. So coming up in the course, we are
-
-gonna cover a lot of ground on an OpenAPI. I'm really happy with how this
-
-course has turned out. And the information in this course, I'm really
-
-excited to present it to you. I think you're gonna have a lot of fun taking
-
-this course and learning about why you wanna be using OpenAPI in your
-
-organization.
+Entonces, en el curso, vamos a cubrir mucho terreno en OpenAPI. Estoy muy contento de cómo ha quedado este curso. Y la información en este curso, estoy muy emocionada de presentársela. Creo que se divertirá mucho tomando este curso y aprendiendo por qué quiere usar OpenAPI en su organización.
 
 ## Getting the Most out of your OpenAPI Course 03:52
 
-In this video, I'm gonna talk about how you can get the most out of this
+In this video, I'm gonna talk about how you can get the most out of this course. I'm gonna give you some tips about how to maximize your learning in the course. The number one tip that I have for people is glaringly obvious, take time to complete this course. I see the metrics on the course is people will purchase this course and actually never start it. I don't know why. I know people get busy with other stuff and distracted, so you're not gonna get any benefit out of this course if you never started. I also see a lot of people that will start into a course but they never finished the course. So, to get the most out of course, it means me being Captain Obvious, you have to take the course.
 
-course. I'm gonna give you some tips about how to maximize your learning in
+A lot of times it boils down to time management, so a pro tip that I have for you, put time on your calendar. Make a meeting with yourself to enhance your skills. So just go ahead and make that meeting, block that time and dedicate your time to completing this course. Now a couple of other tips that I have, go through and do the quizzes and also do the assignments. So you're gonna get a lot of benefit from learning by doing the coding exercises and also by applying your knowledge to the quizzes. This is proven in educational research.
 
-the course. The number one tip that I have for people is glaringly obvious,
+I'm not just making this up because I actually do have a master's degree in education so having these different formats does reinforce what you've learned. So getting your hands on, taking the time and going through the coding exercises, what's gonna happen is you're going to retain the information a lot better. Now a couple housekeeping things. 
 
-take time to complete this course. I see the metrics on the course is people will
+Swagger Hub, we are gonna be using Swagger Hub in the course to edit Open API specifications. This is a commercial product. It's free. You do have to register. It is free to use. It is not the focus of the course. I'm not gonna get into Swagger Hub itself a lot. It's got a lot of really cool features but I'm focusing the course on OpenAPI specifically. Now you do not need to register and use Swagger Hub. There are a couple alternatives. 
 
-purchase this course and actually never start it. I don't know why. I know
+A Visual Studio Code is a really nice application. It's a IDE. It is free to download and use.  There are some OpenAPI plugins. This will help you with the OpenAPI schema. IntelliJ, also. I'm a big fan of IntelliJ. I use it almost every day in my work. There is a free Community Edition and IntelliJ also has some OpenAPI plugins that you can utilize to help you with the schema inside of it. 
 
-people get busy with other stuff and distracted, so you're not gonna get any
+At the end of the day, any text editor is gonna work just fine for working with the OpenAPI specification. Some popular ones are like Notepad, Text Wrangler, Sublime Text. You might have your own personal favorite. It's absolutely valid to skip over Swagger Hub and use one of these editors. Do not use Word or any other word processing program. What these will do, they'll create it into a document and you're not gonna have true yml. So, you do not wannao be doing that but go ahead and use any text editor that you like. Now another feature of the course is a exclusive Slack community. I encourage you to go ahead and join that because I will be on Slack and my teachers assistants will also be on Slack, also students. So, if you're having a problem with the course and you have a question, you can raise it there and get a prompt response. And in this section of the course, it's gonna be a separate section. You can go ahead and sign up for Slack. I'll send you an email.
 
-benefit out of this course if you never started. I also see a lot of people that
+So actually all automated in the background so you register and then some APIs in the background are gonna fire and get you enrolled in Slack. So in summary, number one tip, do the course. Make some time for yourself and actually work through the course. Do the exercises. Do the coding assignments. Embrace the course and go through it and learn a lot. And then also, it is your choice to use Swagger Hub or your preferred text editor. Either is gonna work just fine. And finally, I highly encourage you to go ahead and join the Slack community. We'll have a lot of people in there and if you run into a problem, have a question, the community, myself, or one of my teachers assistants will be there to help you out.
 
-will start into a course but they never finished the course. So, to get the most
+<hr>
 
-out of course, it means me being Captain Obvious, you have to take the course.
+En este video, voy a hablar sobre cómo puedes aprovechar al máximo este curso. Te voy a dar algunos consejos sobre cómo maximizar tu aprendizaje en el curso. El consejo número uno que tengo para las personas es muy obvio: tómese el tiempo para completar este curso. Veo que las métricas del curso son que las personas comprarán este curso y en realidad nunca lo comenzarán. no sé por qué Sé que la gente está ocupada con otras cosas y se distrae, por lo que no obtendrá ningún beneficio de este curso si nunca comenzó. También veo a muchas personas que comenzarán un curso pero nunca terminaron el curso. Entonces, para aprovechar al máximo el curso, significa que yo soy el Capitán Obvio, tienes que tomar el curso.
 
-A lot of times it boils down to time management, so a pro tip that I have for
+Muchas veces todo se reduce a la gestión del tiempo, así que tengo un consejo profesional para ti: pon tiempo en tu calendario. Haz una reunión contigo mismo para potenciar tus habilidades. Así que siga adelante y haga esa reunión, bloquee ese tiempo y dedique su tiempo para completar este curso. Ahora un par de otros consejos que tengo, repase y haga los cuestionarios y también haga las tareas. Por lo tanto, obtendrá un gran beneficio al aprender haciendo los ejercicios de codificación y también aplicando su conocimiento a las pruebas. Esto se demuestra en la investigación educativa.
 
-you, put time on your calendar. Make a meeting with yourself to enhance
+No me estoy inventando esto porque en realidad tengo una maestría en educación, por lo que tener estos diferentes formatos refuerza lo que has aprendido. Así que ponte manos a la obra, tómate el tiempo y realiza los ejercicios de codificación, lo que sucederá es que vas a retener la información mucho mejor. Ahora un par de cosas de limpieza.
 
-your skills. So just go ahead and make that meeting, block that time and
+Swagger Hub, usaremos Swagger Hub en el curso para editar las especificaciones de API abierta. Este es un producto comercial. Es gratis. Tienes que registrarte. Es de uso gratuito. No es el enfoque del curso. No voy a entrar mucho en Swagger Hub. Tiene muchas funciones realmente geniales, pero estoy enfocando el curso específicamente en OpenAPI. Ahora no necesita registrarse y usar Swagger Hub. Hay un par de alternativas.
 
-dedicate your time to completing this course. Now a couple of other tips that I
+Un código de Visual Studio es una aplicación realmente agradable. Es un IDE. Es gratis para descargar y usar. Hay algunos complementos de OpenAPI. Esto le ayudará con el esquema de OpenAPI. IntelliJ, también. Soy un gran admirador de IntelliJ. Lo uso casi todos los días en mi trabajo. Hay una Community Edition gratuita e IntelliJ también tiene algunos complementos de OpenAPI que puede utilizar para ayudarlo con el esquema que contiene.
 
-have, go through and do the quizzes and also do the assignments. So you're gonna
+Al final del día, cualquier editor de texto funcionará bien para trabajar con la especificación OpenAPI. Algunos populares son como Notepad, Text Wrangler, Sublime Text. Es posible que tenga su propio favorito personal. Es absolutamente válido saltarse Swagger Hub y usar uno de estos editores. No utilice Word ni ningún otro programa de procesamiento de textos. Lo que estos harán, lo crearán en un documento y no tendrás un verdadero yml. Entonces, no querrás estar haciendo eso, pero sigue adelante y usa cualquier editor de texto que te guste. Ahora, otra característica del curso es una comunidad exclusiva de Slack. Los animo a seguir adelante y unirse porque estaré en Slack y mis asistentes de maestros también estarán en Slack, también estudiantes. Entonces, si tiene un problema con el curso y tiene una pregunta, puede plantearla allí y obtener una respuesta rápida. Y en esta sección del curso, será una sección separada. Puedes continuar y registrarte en Slack. Te enviaré un email.
 
-get a lot of benefit from learning by doing the coding exercises and also by
-
-applying your knowledge to the quizzes. This is proven in educational research.
-
-I'm not just making this up because I actually do have a master's degree in
-
-education so having these different formats does reinforce what you've
-
-learned. So getting your hands on, taking the time and going through the
-
-coding exercises, what's gonna happen is you're going to retain the
-
-information a lot better. Now a couple housekeeping things.
-
-Swagger Hub, we are gonna be using Swagger Hub in the course to edit Open
-
-API specifications. This is a commercial product. It's free. You do have to
-
-register. It is free to use. It is not the focus of the course. I'm not gonna get
-
-into Swagger Hub itself a lot. It's got a lot of really cool features but I'm
-
-focusing the course on OpenAPI specifically. Now you do not need to
-
-register and use Swagger Hub. There are a couple alternatives. A Visual Studio
-
-Code is a really nice application. It's a IDE. It is free to download and use.
-
-There are some OpenAPI plugins. This will help you with the OpenAPI schema.
-
-IntelliJ, also. I'm a big fan of IntelliJ. I use it almost every day in my work.
-
-There is a free Community Edition and IntelliJ also has some
-
-OpenAPI plugins that you can utilize to help you with the schema inside of it.
-
-At the end of the day, any text editor is gonna work just fine for working
-
-with the OpenAPI specification. Some popular ones are like Notepad, Text
-
-Wrangler, Sublime Text. You might have your own personal favorite. It's
-
-absolutely valid to skip over Swagger Hub and use one of these editors. Do not
-
-use Word or any other word processing program. What these will do, they'll
-
-create it into a document and you're not gonna have true yml. So,
-
-you do not wannao be doing that but go ahead and use any text editor that you
-
-like. Now another feature of the course is a exclusive Slack community. I
-
-encourage you to go ahead and join that because I will be on Slack and my
-
-teachers assistants will also be on Slack, also students. So, if you're having
-
-a problem with the course and you have a question, you can raise it there and get
-
-a prompt response. And in this section of the course, it's gonna be a
-
-separate section. You can go ahead and sign up for Slack. I'll send you an email.
-
-So actually all automated in the background so you register and then some
-
-APIs in the background are gonna fire and get you enrolled in Slack. So in
-
-summary, number one tip, do the course. Make some time for yourself and actually work
-
-through the course. Do the exercises. Do the coding assignments. Embrace the
-
-course and go through it and learn a lot. And then also, it is your choice to use
-
-Swagger Hub or your preferred text editor. Either is gonna work just
-
-fine. And finally, I highly encourage you to go
-
-ahead and join the Slack community. We'll have a lot of people in there and if you
-
-run into a problem, have a question, the community, myself, or one of my teachers
-
-assistants will be there to help you out.
+Entonces, en realidad, todo está automatizado en segundo plano para que te registres y luego algunas API en segundo plano se activarán y te inscribirán en Slack. Entonces, en resumen, el consejo número uno, haz el curso. Tómese un tiempo para usted y realmente trabaje durante el curso. Haz los ejercicios. Haz las tareas de codificación. Adopte el curso, revíselo y aprenda mucho. Y luego también, es su elección usar Swagger Hub o su editor de texto preferido. Cualquiera de los dos va a funcionar bien. Y, por último, te animo encarecidamente a que sigas adelante y te unas a la comunidad de Slack. Tendremos mucha gente allí y si se encuentra con un problema, tiene una pregunta, la comunidad, yo mismo o uno de los asistentes de mis maestros estaremos allí para ayudarlo.
 
 ## Slack Group for OpenAPI: Be
 
