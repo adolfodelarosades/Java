@@ -189,7 +189,7 @@ Puedes usar Slack para:
 
 OK, now you guys are excited about getting to write some code with around spring framework.
 
-GH WORKFLOW
+### GH WORKFLOW
 
 First we're going to pause and take a look at our GitHub workflow.
 
@@ -236,7 +236,7 @@ Now, if you're uncertain about these steps, don't worry.
 In the remainder of this video, I'm going to show you each step, step by step.
 
 
-FORKING REPOS
+### FORKING REPOS
 
 So the first thing we want to do in our workflow process is to fork out my repository to your own GitHub
 
@@ -498,62 +498,79 @@ I can see any changes that are made since you did the four.
 
 <hr>
 
-Bien, ahora están emocionados de poder escribir algo de código con Spring Framework.
+Bien, ahora están emocionados de poder escribir algo de código con **Spring Framework**.
 
-GH WORKFLOW - FLUJO DE TRABAJO DE GH
+### GH WORKFLOW - FLUJO DE TRABAJO DE GitHub
 
-Primero vamos a hacer una pausa y echar un vistazo a nuestro flujo de trabajo de GitHub.
+Primero vamos a hacer una pausa y echar un vistazo a nuestro flujo de trabajo con GitHub.
 
-Ahora, muchos estudiantes han tomado este curso. Creo que ahora hay más de 40000 que se han inscrito en el curso. Y recibo muchas veces esta pregunta sobre cómo debería trabajar con los repositorios de GitHub. Ahora, tengo un proceso que es muy útil para usted.
+Ahora, muchos estudiantes han tomado este curso. Creo que ahora hay más de 40000 estudiantes que se han inscrito en el curso. Y recibo muchas veces la pregunta sobre cómo debería trabajar con los repositorios de GitHub. Ahora, tengo un proceso que es muy útil para usted.
 
-GitHub no es un requisito para este curso. Es algo muy útil para que usted tenga. Si es nuevo en GitHub, consulte el Apéndice A del curso. Hay videos adicionales sobre eso, enlaces a videos. Hay contenido gratuito en GitHub. Otro si no está familiarizado con GitHub. 
+**GitHub** no es un requisito para este curso pero es algo muy útil para usted. Si es nuevo en **GitHub**, consulte el ***Apéndice A*** del curso donde hay videos adicionales sobre eso, enlaces a videos. Hay contenido gratuito en GitHub si no está familiarizado con GitHub. 
 
-Pero en este video, lo que voy a hacer es hablarles sobre el flujo de trabajo. Hay un flujo de trabajo específico que realmente puede ayudarte con el curso. Así que voy a saltar a un pequeño video aquí para hablar sobre el flujo de trabajo. Y puedes ver mis locas habilidades con Adobe After Effects, mi primer pequeño video de información que he hecho con After Effects.
+Pero en este video, lo que voy a hacer es hablarles sobre el flujo de trabajo con GitHub. Hay un flujo de trabajo específico que realmente puede ayudarte con el curso. Así que voy a saltar a un pequeño video aquí para hablar sobre el flujo de trabajo. Y puedes ver mis locas habilidades con Adobe After Effects, mi primer pequeño video de información que he hecho con After Effects.
 
 Así que espero que disfrute esta sección y lo pondremos al día sobre cómo usar GitHub para su beneficio mientras toma este curso.
 
-Todos los ejemplos de código fuente del curso están dentro de GitHub. Uso ramas de Git para cada lección. Obtendrá una rama inicial, que es el estado del código al comienzo de la lección. Los cambios que hago dentro de la lección estan en la rama final. Encontrará enlaces a ambas ramas en el curso.
+<img width="339" alt="image" src="https://user-images.githubusercontent.com/23094588/197057254-f80c585d-e322-45d1-ad3d-3462ef86b129.png">
+
+Todos los ejemplos de código fuente del curso están dentro de GitHub. 
+
+Uso ramas de **Git** para cada lección, obtendrá una ***rama inicial***, que es el estado del código al comienzo de la lección. Los cambios que hago dentro de la lección estan en la ***rama final***.  Encontrará enlaces a ambas ramas en el curso.
 
 Los recursos que usan ramas como esta tienen dos grandes beneficios.
 
-* Primero, puedo regresar y actualizar por cualquier error o nuevos lanzamientos(releases) de Spring.
+* Primero, puedo regresar y modificar cualquier error detectado o cuando hemos realizado nuevos releases de Spring (lanzamientos).
 
 * En segundo lugar, puede comparar su trabajo con mis branches para facilitar las comparaciones.
 
-Recomiendo que las personas usen este flujo de trabajo primero mi repositorio en la cuenta de GitHub.
+Recomiendo que las personas usen este flujo de trabajo, primero mi repositorio en la cuenta de GitHub.
 
-GitHub es de uso completamente gratuito.
+GitHub es de uso completamente gratuito. Si necesita ayuda con GitHub, consulte el Apéndice A de este curso para ver una colección de videos sobre cómo usar GitHub una vez que tenga mi repositorio en su cuenta.
 
-Si necesita ayuda con GitHub, consulte el Apéndice A de este curso para ver una colección de videos sobre cómo usar GitHub una vez que tenga mi repositorio en su cuenta.
+Consulte (Check out) su **Folk** desde su cuenta de GitHub a su propio espacio de trabajo local.
 
-Consulte su Falke desde su cuenta de GitHub a su propio espacio de trabajo local.
-
-Comience con la rama Master y luego siga los ejercicios de codificación del curso.
+Comience con la **Master Branch** y luego siga los ejercicios de codificación del curso.
 
 La codificación práctica lo ayudará a aprender y absorber el material del curso.
 
-Si tiene algún problema, puede hacer una comparación desde su propio espacio de trabajo local con las branches correspondientes dentro de mi repositorio de GitHub, esto le ayudará a identificar cualquier diferencia. Además, al tener su propio repositorio, puede compartirlo con otros si tiene algún problema y necesita ayuda, o también puede mostrar esto a futuros empleadores para mostrarles su trabajo.
+Si tiene algún problema, puede hacer una comparación desde su propio espacio de trabajo local con las branches correspondientes dentro de mi repositorio de GitHub, esto le ayudará a identificar cualquier diferencia. 
+
+Además, al tener su propio repositorio, puede compartirlo con otros si tiene algún problema y necesita ayuda, o también puede mostrar esto a futuros empleadores para mostrarles su trabajo.
 
 Ahora, si no está seguro acerca de estos pasos, no se preocupe, en el resto de este video, le mostraré cada paso, paso a paso.
 
 
-FORKING REPOS
+### FORKING REPOS
 
-Entonces, lo primero que queremos hacer en nuestro proceso de flujo de trabajo es desembolsar mi repositorio en su propia cuenta de GitHub. Así que tu cuenta es completamente gratis si no tienes una solo toma un minuto registrarse.
+Entonces, lo primero que queremos hacer en nuestro proceso de flujo de trabajo(workflow) es hacer un **Fork** (desembolsar) de mi repositorio en su propia cuenta de GitHub. Así que tu cuenta es completamente gratis si no tienes una solo toma un minuto registrarse.
 
-Voy a saltar a Chrome y mostrarte exactamente cómo bifurcar mi repositorio en tu propia cuenta GitHub. OK, para un repositorio es muy simple de hacer.
+Voy a saltar a Chrome y mostrarte exactamente cómo bifurcar (fork) mi repositorio en tu propia cuenta GitHub. 
 
-Iniciá sesión en tu cuenta de GitHub diferente y esta es una cuenta muy antigua que tenía y simulando lo que harías. Así que estoy en Spring Framework, un repositorio, pero en una cuenta de GitHub diferente.
+El repositorio original esta en https://github.com/springframeworkguru/spring5webapp
 
-Así que esto es exactamente lo que tendrías que hacer para bifurcarlo. Tengo que subir aquí y hacer clic en Fork.
+OK, para un repositorio es muy simple de hacer, iniciá sesión en tu cuenta de GitHub y ve al URL anterior.
 
-Y me preguntaste ¿Adónde quiero ir?
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197063040-fdd31ca1-dcbe-47c7-afbb-247242f838e7.png">
 
-Voy a quedarme justo ahí.
+Así que estoy en Spring Framework, un repositorio, pero en mi cuenta de GitHub. Así que esto es exactamente lo que tendrías que hacer para bifurcarlo, subir y hacer clic en ***Fork***.
 
-Y solo toma unos segundos, puedes ver que está diciendo que se está bifurcando, obtenemos este pequeño icono aquí y ahora esto está bifurcado en mi repositorio de GitHub. Y pueden ver aquí que sabe que se ha peleado, así que dice que viene de aquí.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197066825-5ee8c2d0-b5a7-4645-9a8b-289210cb020e.png">
 
-Entonces, si alguna vez desea volver a mi repositorio desde su propio repositorio de GitHub, simplemente haga clic en en esto y verás que vuelve a la fuente original, que es mi repositorio.
+Pulsamos en el botón ***Create Fork***.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197067350-e9e29f5b-5ab6-49fa-9b36-db887a2933c0.png">
+
+Y solo toma unos segundos, puedes ver que está diciendo que se está bifurcando, obtenemos este pequeño icono aquí y ahora esto está bifurcado en mi repositorio de GitHub.
+
+Entonces, si alguna vez desea volver a mi repositorio desde su propio repositorio de GitHub, simplemente haga clic en el enlace y verás que vuelve al repositorio original.
+
+<img width="656" alt="image" src="https://user-images.githubusercontent.com/23094588/197068200-7511b642-0022-43c6-b8b9-d1f4ad97f8d7.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197068325-e10ef298-df92-4f18-a6d9-aba656d39fcf.png">
+
+
+### Cloning Repos |
 
 Pero aquí este es un repositorio que utilizará para el curso del próximo paso en el proceso es clonar el repositorio o extraerlo de GitHub.
 
@@ -599,6 +616,9 @@ Entonces, solo una de esas cosas raras, extravagantes y extravagantes que ves de
 
 Pero aquí ahora de nuevo, esto ahora está clonado en mi repositorio local y estoy listo para comenzar a desarrollar
 
+
+### Compare to Branch 
+### Compare to Source
 En contra.
 
 Entonces, la única razón por la que luchamos contra el repositorio y luego lo clonamos es para que puedas hacer una comparación.
