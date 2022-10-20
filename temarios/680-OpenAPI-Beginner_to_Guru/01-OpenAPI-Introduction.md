@@ -570,15 +570,59 @@ Entonces, si alguna vez desea volver a mi repositorio desde su propio repositori
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197068325-e10ef298-df92-4f18-a6d9-aba656d39fcf.png">
 
 
-### Cloning Repos |
+### Cloning Repos
 
-Pero aquí este es un repositorio que utilizará para el curso del próximo paso en el proceso es clonar el repositorio o extraerlo de GitHub.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197069492-1106efbb-28c8-4d98-a601-50cd3b9761d0.png">
 
-Así que voy a seguir y mostrarte exactamente cómo hacer esto ahora. Ahora bien, clonar el repositorio también es un proceso muy sencillo. Así que todavía estoy en mi otra cuenta de GitHub. Y aquí es donde hablo, voy a subir aquí y decir, clon, simplemente haciendo clic en esto a esto, copias de la URL en el portapapeles. Y tienes una opción de https o S.H.. Me gusta SSA en un entorno POSIX siendo Mac OS o Linux gratis en Windows https probablemente va a generalmente funcionan mejor para usted. Y voy a saltar sobre él.
+Una vez hecho el Fork este es el repositorio que utilizará para el curso, el próximo paso en el proceso es ***Clonar el repositorio o extraerlo de GitHub***. Así que voy a seguir y mostrarte exactamente cómo hacer esto ahora. 
 
-Voy a mostrarles dos formas diferentes en las que podemos clonar, la primera forma en que podemos pasar al comando línea y esto supone que lo tiene instalado en su máquina.
+Ahora bien, clonar el repositorio también es un proceso muy sencillo.  Subimos y pulsamos donde dice ***Code***.
 
-Así que cambie al directorio en el que desea trabajar para su espacio de trabajo.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197069950-6b2212cb-7636-4a3d-a18c-68f6b05a500f.png">
+
+y simplemente haciendo clic para copiar la URL en el portapapeles, esta es la opción que tenemos para hacerlo vía **HTTPS**, tenemos otra opción para hacerlo vía **SSH**.
+
+<img width="490" alt="image" src="https://user-images.githubusercontent.com/23094588/197070681-e7f1e6ec-3d5e-4be4-9a76-97941aed1408.png">
+
+Y otra para hacerlo vía **GitHub CLI**
+
+<img width="489" alt="image" src="https://user-images.githubusercontent.com/23094588/197070814-783384be-6896-480c-907f-3659c9db10df.png">
+
+
+**SSA** en un entorno POSIX siendo Mac OS o Linux es muy util, en Windows **HTTPS** probablemente va a generalmente funcionan mejor para usted. 
+
+Voy a mostrarles dos formas diferentes en las que podemos clonar el repositorio:
+
+* La primera forma en que podemos clonar el repositorio es mediante un comando línea por lo que asumimos que tenemos instalado GIT en su máquina.
+
+Por lo que tenemos que abrir una terminal y nos cambiamos al directorio en el que desea tener su espacio de trabajo.
+He creado la siguiente carpeta donde vamos a clonar el repositorio.
+
+<img width="801" alt="image" src="https://user-images.githubusercontent.com/23094588/197072247-bba79a09-fa90-477f-97a4-03c429289e1d.png">
+
+Abrimos la consola y nos cambiamos a la carpeta donde vamos a clonar el repositorio.
+
+**`/Users/adulfodelarosa/Documents/PROYECTOS/IntelliJ/680-OpenAPI-Beginner_to_Guru`**
+
+Aquí vamos a escribir el comando para clonar el repositorio.
+
+**`git clone https://github.com/adolfodelarosades/spring5webapp.git`**
+
+<img width="919" alt="image" src="https://user-images.githubusercontent.com/23094588/197072950-780104df-e4c4-48e1-95ed-13c138ada936.png">
+
+<img width="917" alt="image" src="https://user-images.githubusercontent.com/23094588/197073085-50e428c6-ed48-4f93-b62f-3a029ee261ca.png">
+
+
+
+
+
+<img width="917" alt="image" src="https://user-images.githubusercontent.com/23094588/197072571-ce74872e-3f5a-4179-825a-b0e1e75033af.png">
+
+
+<img width="1093" alt="image" src="https://user-images.githubusercontent.com/23094588/197073471-59b35fb3-dbc8-49fa-976d-64e5589d2e48.png">
+
+
+
 
 Y todo lo que tengo que hacer es emitir el comando **`git clone`** y luego pegar en esa URL headhunter y puedes vea que git se ha ido y clone ese repositorio.
 
