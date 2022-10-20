@@ -593,6 +593,8 @@ Y otra para hacerlo vía **GitHub CLI**
 
 Voy a mostrarles dos formas diferentes en las que podemos clonar el repositorio:
 
+#### Clonando con Línea de Comandos
+
 * La primera forma en que podemos clonar el repositorio es mediante un comando línea por lo que asumimos que tenemos instalado GIT en su máquina.
 
 Por lo que tenemos que abrir una terminal y nos cambiamos al directorio en el que desea tener su espacio de trabajo.
@@ -604,7 +606,9 @@ Abrimos la consola y nos cambiamos a la carpeta donde vamos a clonar el reposito
 
 **`/Users/adulfodelarosa/Documents/PROYECTOS/IntelliJ/680-OpenAPI-Beginner_to_Guru`**
 
-Aquí vamos a escribir el comando para clonar el repositorio.
+<img width="917" alt="image" src="https://user-images.githubusercontent.com/23094588/197072571-ce74872e-3f5a-4179-825a-b0e1e75033af.png">
+
+Aquí vamos a escribir el comando para clonar el repositorio, el comando **`git clone`** y luego pegar en esa URL, GIT clona el repositorio.
 
 **`git clone https://github.com/adolfodelarosades/spring5webapp.git`**
 
@@ -612,29 +616,33 @@ Aquí vamos a escribir el comando para clonar el repositorio.
 
 <img width="917" alt="image" src="https://user-images.githubusercontent.com/23094588/197073085-50e428c6-ed48-4f93-b62f-3a029ee261ca.png">
 
-
-
-
-
-<img width="917" alt="image" src="https://user-images.githubusercontent.com/23094588/197072571-ce74872e-3f5a-4179-825a-b0e1e75033af.png">
-
-
 <img width="1093" alt="image" src="https://user-images.githubusercontent.com/23094588/197073471-59b35fb3-dbc8-49fa-976d-64e5589d2e48.png">
 
+<img width="1373" alt="image" src="https://user-images.githubusercontent.com/23094588/197074218-6c4ffcc1-e243-4ec7-8f4d-8beb7d38031c.png">
+
+<img width="917" alt="image" src="https://user-images.githubusercontent.com/23094588/197074401-12ba4be8-d4d3-4057-b144-94d949e197e8.png">
+
+Vemos que en el directorio están los archivos de trabajo, así que ahora estamos listos para comenzar a desarrollar.
+
+#### Clonando con IntelliJ
+
+La segunda forma de clonar fuera de GitHub, la puede hacer directamente desde **IntelliJ**
+
+Abrimos IntelliJ y vamos a pulsar la opción de menú ***File -> New -> Project from Version Control***
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197075300-c41d100a-9c7f-4bf0-8c8d-68873a3f72c2.png">
+
+
+Llenamos el URL y el lugar donde vamos a clonar el repositorio.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197075561-99b372fb-08f9-491b-9d15-c63d3d7ea2e1.png">
 
 
 
-Y todo lo que tengo que hacer es emitir el comando **`git clone`** y luego pegar en esa URL headhunter y puedes vea que git se ha ido y clone ese repositorio.
 
-Si hago un directorio aquí, puede ver que surge y luego están los archivos de trabajo dentro de ella.
 
-Así que ahora estoy listo para comenzar a desarrollar esto.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197076136-3dcd4dfd-bd90-4905-94cd-289c99c27df1.png">
 
-La segunda forma de clonar fuera de GitHub, ya que puede hacerlo directamente desde la inteligencia.
-
-Solo cambie a ontología y muéstrelo ahora.
-
-Así que aquí estoy en inteligencia, solo vengo a presentar un nuevo proyecto desde Control de versiones. Y voy a seguir adelante y basar eso.
 
 Y llamemos a esos dos, creo que tengo uno en ese directorio temporal, así que sigamos adelante y clonémoslo. Y va a decir que sí.
 
