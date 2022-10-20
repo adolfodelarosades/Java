@@ -632,19 +632,19 @@ Abrimos IntelliJ y vamos a pulsar la opción de menú ***File -> New -> Project 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197075300-c41d100a-9c7f-4bf0-8c8d-68873a3f72c2.png">
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197075561-99b372fb-08f9-491b-9d15-c63d3d7ea2e1.png">
 
 Llenamos el URL y el lugar donde vamos a clonar el repositorio.
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197075561-99b372fb-08f9-491b-9d15-c63d3d7ea2e1.png">
-
-
-
-
-
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197076136-3dcd4dfd-bd90-4905-94cd-289c99c27df1.png">
 
+Presionamos el botón **Clone** 
 
-Y llamemos a esos dos, creo que tengo uno en ese directorio temporal, así que sigamos adelante y clonémoslo. Y va a decir que sí.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197077005-20f9239a-ee14-45f2-b410-770768d76819.png">
+
+Se nos abre una nuevo Visual Studio Code con en repositorio clonado.
+
+AQUIIIIIIIIIIIIIIIIIII
 
 Ahora, cuando lo abre por primera vez, es posible que no detecte que es un proyecto MAVEN y que la inteligencia es un poco inconsistente en esto.
 
