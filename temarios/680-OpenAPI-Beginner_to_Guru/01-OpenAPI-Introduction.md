@@ -497,3 +497,218 @@ Since you talk to your own repo, any changes I made are not going to be pushed a
 I can see any changes that are made since you did the four.
 
 <hr>
+
+Bien, ahora están emocionados de poder escribir algo de código con Spring Framework.
+
+GH WORKFLOW - FLUJO DE TRABAJO DE GH
+
+Primero vamos a hacer una pausa y echar un vistazo a nuestro flujo de trabajo de GitHub.
+
+Ahora, muchos estudiantes han tomado este curso. Creo que ahora hay más de 40000 que se han inscrito en el curso. Y recibo muchas veces esta pregunta sobre cómo debería trabajar con los repositorios de GitHub. Ahora, tengo un proceso que es muy útil para usted.
+
+GitHub no es un requisito para este curso. Es algo muy útil para que usted tenga. Si es nuevo en GitHub, consulte el Apéndice A del curso. Hay videos adicionales sobre eso, enlaces a videos. Hay contenido gratuito en GitHub. Otro si no está familiarizado con GitHub. 
+
+Pero en este video, lo que voy a hacer es hablarles sobre el flujo de trabajo. Hay un flujo de trabajo específico que realmente puede ayudarte con el curso. Así que voy a saltar a un pequeño video aquí para hablar sobre el flujo de trabajo. Y puedes ver mis locas habilidades con Adobe After Effects, mi primer pequeño video de información que he hecho con After Effects.
+
+Así que espero que disfrute esta sección y lo pondremos al día sobre cómo usar GitHub para su beneficio mientras toma este curso.
+
+Todos los ejemplos de código fuente del curso están dentro de GitHub. Uso ramas de Git para cada lección. Obtendrá una rama inicial, que es el estado del código al comienzo de la lección. Los cambios que hago dentro de la lección estan en la rama final. Encontrará enlaces a ambas ramas en el curso.
+
+Los recursos que usan ramas como esta tienen dos grandes beneficios.
+
+* Primero, puedo regresar y actualizar por cualquier error o nuevos lanzamientos(releases) de Spring.
+
+* En segundo lugar, puede comparar su trabajo con mis branches para facilitar las comparaciones.
+
+Recomiendo que las personas usen este flujo de trabajo primero mi repositorio en la cuenta de GitHub.
+
+GitHub es de uso completamente gratuito.
+
+Si necesita ayuda con GitHub, consulte el Apéndice A de este curso para ver una colección de videos sobre cómo usar GitHub una vez que tenga mi repositorio en su cuenta.
+
+Consulte su Falke desde su cuenta de GitHub a su propio espacio de trabajo local.
+
+Comience con la rama Master y luego siga los ejercicios de codificación del curso.
+
+La codificación práctica lo ayudará a aprender y absorber el material del curso.
+
+Si tiene algún problema, puede hacer una comparación desde su propio espacio de trabajo local con las branches correspondientes dentro de mi repositorio de GitHub, esto le ayudará a identificar cualquier diferencia. Además, al tener su propio repositorio, puede compartirlo con otros si tiene algún problema y necesita ayuda, o también puede mostrar esto a futuros empleadores para mostrarles su trabajo.
+
+Ahora, si no está seguro acerca de estos pasos, no se preocupe, en el resto de este video, le mostraré cada paso, paso a paso.
+
+
+FORKING REPOS
+
+Entonces, lo primero que queremos hacer en nuestro proceso de flujo de trabajo es desembolsar mi repositorio en su propia cuenta de GitHub. Así que tu cuenta es completamente gratis si no tienes una solo toma un minuto registrarse.
+
+Voy a saltar a Chrome y mostrarte exactamente cómo bifurcar mi repositorio en tu propia cuenta GitHub. OK, para un repositorio es muy simple de hacer.
+
+Iniciá sesión en tu cuenta de GitHub diferente y esta es una cuenta muy antigua que tenía y simulando lo que harías. Así que estoy en Spring Framework, un repositorio, pero en una cuenta de GitHub diferente.
+
+Así que esto es exactamente lo que tendrías que hacer para bifurcarlo. Tengo que subir aquí y hacer clic en Fork.
+
+Y me preguntaste ¿Adónde quiero ir?
+
+Voy a quedarme justo ahí.
+
+Y solo toma unos segundos, puedes ver que está diciendo que se está bifurcando, obtenemos este pequeño icono aquí y ahora esto está bifurcado en mi repositorio de GitHub. Y pueden ver aquí que sabe que se ha peleado, así que dice que viene de aquí.
+
+Entonces, si alguna vez desea volver a mi repositorio desde su propio repositorio de GitHub, simplemente haga clic en en esto y verás que vuelve a la fuente original, que es mi repositorio.
+
+Pero aquí este es un repositorio que utilizará para el curso del próximo paso en el proceso es clonar el repositorio o extraerlo de GitHub.
+
+Así que voy a seguir y mostrarte exactamente cómo hacer esto ahora. Ahora bien, clonar el repositorio también es un proceso muy sencillo. Así que todavía estoy en mi otra cuenta de GitHub. Y aquí es donde hablo, voy a subir aquí y decir, clon, simplemente haciendo clic en esto a esto, copias de la URL en el portapapeles. Y tienes una opción de https o S.H.. Me gusta SSA en un entorno POSIX siendo Mac OS o Linux gratis en Windows https probablemente va a generalmente funcionan mejor para usted. Y voy a saltar sobre él.
+
+Voy a mostrarles dos formas diferentes en las que podemos clonar, la primera forma en que podemos pasar al comando línea y esto supone que lo tiene instalado en su máquina.
+
+Así que cambie al directorio en el que desea trabajar para su espacio de trabajo.
+
+Y todo lo que tengo que hacer es emitir el comando **`git clone`** y luego pegar en esa URL headhunter y puedes vea que git se ha ido y clone ese repositorio.
+
+Si hago un directorio aquí, puede ver que surge y luego están los archivos de trabajo dentro de ella.
+
+Así que ahora estoy listo para comenzar a desarrollar esto.
+
+La segunda forma de clonar fuera de GitHub, ya que puede hacerlo directamente desde la inteligencia.
+
+Solo cambie a ontología y muéstrelo ahora.
+
+Así que aquí estoy en inteligencia, solo vengo a presentar un nuevo proyecto desde Control de versiones. Y voy a seguir adelante y basar eso.
+
+Y llamemos a esos dos, creo que tengo uno en ese directorio temporal, así que sigamos adelante y clonémoslo. Y va a decir que sí.
+
+Ahora, cuando lo abre por primera vez, es posible que no detecte que es un proyecto MAVEN y que la inteligencia es un poco inconsistente en esto.
+
+Así que a veces lo hace, a veces no.
+
+Podría deberse al tipo particular de inteligencia que estoy usando que no lo detecta, que parece como en este ejemplo.
+
+No lo ha hecho, así que se dio cuenta de que es un proyecto MAVEN si no es así. Como dije, que es un poco aleatorio.
+
+Si no es así, solo ingrese aquí, haga clic con el botón derecho y verá aquí una opción para agregarlo como un proyecto experto.
+
+Entonces, como dije, parece ser completamente aleatorio.
+
+A veces lo recoge como proyecto Maven.
+
+Cuando lo estaba probando, no lo hizo.
+
+Aquí lo hizo.
+
+Entonces, solo una de esas cosas raras, extravagantes y extravagantes que ves de vez en cuando.
+
+Pero aquí ahora de nuevo, esto ahora está clonado en mi repositorio local y estoy listo para comenzar a desarrollar
+
+En contra.
+
+Entonces, la única razón por la que luchamos contra el repositorio y luego lo clonamos es para que puedas hacer una comparación.
+
+Entonces, poder comparar el estado de su código con mis diferentes branches que van a ser encendido, hay una herramienta muy poderosa.
+
+Voy a ir a inteligencia ahora y mostrarles exactamente lo fácil que es hacerlo.
+
+Bueno.
+
+Hacerlo se compara realmente fácil solo con los propósitos aquí.
+
+Voy a seguir adelante y agregar una clase y siempre me gusta que estos paquetes intermedios compactos hagan que las cosas sean un poco más fácil para nosotros.
+
+Voy a entrar aquí.
+
+Solo voy a agregar una clase FU porque esto es solo temporal. Estoy agregando esto y solo como ejemplo.
+
+Así que vamos a seguir adelante y emitir comillas para que este sea un depósito desechable para mí solo por propósitos de esta clase.
+
+Entonces, ahora lo que quiero hacer para hacer una comparación con GitHub, entro aquí, haga clic con el botón derecho y la comparación se basará en la carpeta en la que está haciendo clic.
+
+Así que voy a subir aquí y voy a comparar todo el proyecto.
+
+Estoy haciendo clic en la raíz de la carpeta de origen.
+
+En realidad, también podría hacer la carpeta del proyecto de nivel superior, si quisiera.
+
+Simplemente baje aquí, haga clic en Comparar con sucursal y si tiene otras sucursales revisadas y los verías a ella e, origen significa que el origen dentro de GitHub.
+
+Así que sigamos adelante y echemos un vistazo a no, agregaremos una línea de tiempo.
+
+Eso debería darnos un montón de cambios.
+
+Entonces, lo que puedes ver aquí donde las cosas son Ingrey, eso significa que no está allí.
+
+Entonces simplemente vienen aquí y dicen, controlador de libros.
+
+Si hago clic en eso, podemos ver que no hay ningún recurso local para comparar y ecologizar la comida. trabajo fuera de eso.
+
+Y para mostrarles aquí, esto solo existe en mi repositorio localmente.
+
+Ahora aquí, este en azul, eso significa que hay diferencias.
+
+Así que tengo el archivo aquí y no se muestra.
+
+Entonces, si entro aquí y hago doble clic en esto ahora, podemos ver aquí que esto dice que ese es el versión remota y aquí está mi versión.
+
+Así que esta línea ha sido añadida.
+
+Así que estamos viendo la diferencia allí.
+
+Y Ontology hace un muy buen trabajo mostrándote las diferencias.
+
+Entonces, si tiene alguna diferencia, si tiene algo que no funciona ahora, puede ir y comparar su código fuente contra mi código fuente.
+
+Bien, puedes ver exactamente lo fácil que es hacer comparaciones con ramas dentro de GitHub, dentro de su propio repositorio.
+
+Pero, ¿qué pasa si hago cambios?
+
+Si hice algún tipo de parche mientras estás tomando el curso, ya que has trabajado muy simple para hacer lo que lo que podemos hacer es decirle que mire mi repositorio también.
+
+Comando muy simple para hacer eso.
+
+Y ahora, cuando hagamos esto a partir de la compilación de inteligencia, haga comparaciones con su propio repositorio y con mi repositorio también para ver si he cambiado algo, si he hecho alguna actualización a las versiones o si es posible corrección de errores.
+
+Así que voy a mostrar exactamente cómo configurar eso ahora mismo en lugar de complacerme.
+
+Bien, entonces lo que queremos hacer es agregar otro repositorio remoto a nuestra configuración de GitHub localmente.
+
+Así que aquí en la pantalla tengo donde golpeé el tenedor que hice.
+
+Ahora, lo que quiero hacer es agarrar a este tipo de aquí, ir al depósito original.
+
+Y ahora quiero copiar esta URL aquí.
+
+Ahora, voy a volver a la inteligencia.
+
+Y A.J., voy a entrar a la terminal.
+
+Ahora, esta ubicación de terminal, solo necesita hacer esto desde la línea de comando y desea emitir un comando muy, muy simple nuevamente, necesita tener instalado en su máquina solo para obtener.
+
+Anuncio remoto y luego pegue ese valor allí.
+
+Cometí un error allí, así que quería obtener un complemento remoto y aquí lo llamaré Sevgi Repo,
+
+Me perdí el nombre anteriormente.
+
+Y luego con sede en Nueva York, también, voy a llamar a eso un repositorio de Suchi por eso.
+
+Y ahora eso es feliz ahora si vengo aquí y quiero hacer una búsqueda.
+
+Entonces, lo que esto va a hacer es que parezca que se está cayendo de la pantalla allí.
+
+Lo lamento.
+
+Así que voy a salir y hacer un **`get furch`**, también podría hacerlo desde una línea de comando solo para obtener.
+
+Fetch y que Tull pueda ir a la parte superior del repositorio y extraer nueva información.
+
+Ahora, si entro aquí y lo consigo.
+
+Compare compare con Branch y vea, tengo origen y luego tengo SFP Rebozo, estos son todos los ramas dentro del repositorio original.
+
+Así que Asaji Repo será mi repositorio.
+
+Origin será tu repositorio dentro de GitHub.
+
+Así que esto le permite ver los cambios que he hecho en el código fuente.
+
+Dado que habla con su propio repositorio, los cambios que hice no se van a impulsar por un año más o menos ahora, así que
+
+Puedo ver los cambios que se han hecho desde que hiciste los cuatro.
