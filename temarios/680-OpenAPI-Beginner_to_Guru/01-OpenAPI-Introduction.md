@@ -177,12 +177,14 @@ Puedes usar Slack para:
 
 ## GitHub Workflow 12:20
 
-USING GITHUB
-GH Workflow
-Forking Repos
-Cloning Repos
-Compare to Branch
-Compare to Source
+
+| USING GITHUB |
+|--------------|
+| GH Workflow |
+| Forking Repos |
+| Cloning Repos |
+| Compare to Branch |
+| Compare to Source |
 
 
 OK, now you guys are excited about getting to write some code with around spring framework.
