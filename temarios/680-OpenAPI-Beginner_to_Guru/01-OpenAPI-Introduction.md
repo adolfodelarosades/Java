@@ -759,40 +759,56 @@ Ahora, voy a volver a la IntelliJ y voy a entrar a la terminal.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197330725-d7d7e738-b71a-4835-a5c3-b24200ed376d.png">
 
+Ahora, esta ubicación en la Terminal, donde vamos a escribir un comando muy simple nuevamente, necesita tener instalado GIT en su máquina. El comando es:
 
+```sh
+$ git remote add https://github.com/springframeworkguru/spring5webapp.git
+```
 
-Ahora, esta ubicación de terminal, solo necesita hacer esto desde la línea de comando y desea emitir un comando muy, muy simple nuevamente, necesita tener instalado en su máquina solo para obtener.
-
-Anuncio remoto y luego pegue ese valor allí.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197331056-7a3b943e-8d9e-4aaf-af78-8f3bc5984802.png">
 
 Cometí un error allí, así que quería obtener un complemento remoto y aquí lo llamaré Sevgi Repo,
 
-Me perdí el nombre anteriormente.
+```sh
+$ git remote add sfgRepo https://github.com/springframeworkguru/spring5webapp.git
+```
 
-Y luego con sede en Nueva York, también, voy a llamar a eso un repositorio de Suchi por eso.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197331326-4430e557-1d3d-4548-83e8-fdcef0720586.png">
 
-Y ahora eso es feliz ahora si vengo aquí y quiero hacer una búsqueda.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197331486-d170f1d3-9040-4c59-bbfc-6d5c84c73173.png">
 
-Entonces, lo que esto va a hacer es que parezca que se está cayendo de la pantalla allí.
 
-Lo lamento.
+Ahora si se ha ejecutado el comando sin problema. 
 
-Así que voy a salir y hacer un **`get furch`**, también podría hacerlo desde una línea de comando solo para obtener.
+Desde la terminal vamos a ejecutar un nuevo comando GIT.
 
-Fetch y que Tull pueda ir a la parte superior del repositorio y extraer nueva información.
+```sh
+$ git fetch
+```
 
-Ahora, si entro aquí y lo consigo.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197331706-a24ad722-5e23-475e-b329-9bda898518be.png">
 
-Compare compare con Branch y vea, tengo origen y luego tengo SFP Rebozo, estos son todos los ramas dentro del repositorio original.
+Un Fetch(buscar) va a la parte superior del repositorio y extraer(pull) nueva información.
 
-Así que Asaji Repo será mi repositorio.
+Ahora, si vamos nuevamente a posicionarnos en la carpeta **`src`** y haga clic con el botón derecho, en el menú contextual seleccionamos ***Git -> Compare with Branches...*** 
 
-Origin será tu repositorio dentro de GitHub.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197331921-cc93a377-6739-4791-83b7-644638c97efd.png">
 
-Así que esto le permite ver los cambios que he hecho en el código fuente.
+Nos aparece solo la rama **`origin\master`** pero en realidad debería aparecer también las ramas **`sfgRepo\*`**.
 
-Dado que habla con su propio repositorio, los cambios que hice no se van a impulsar por un año más o menos ahora, así que
+Como no lo hacía he ido a ***Git -> Fetch*** 
 
-Puedo ver los cambios que se han hecho desde que hiciste los cuatro.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197332328-e26c54ba-f71a-489d-876d-406e0937b93e.png">
 
+y luego nuevamente a ***Git -> Compare with Branches...*** y ya aparecen todas las ramas.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197332375-451c4a88-31b5-4e5e-83e5-7bbd7f6f60fa.png">
+
+estas son todas las ramas dentro del repositorio original.
+
+Así que **`sfgRepo`** es el repositorio original y **`origin\master`** será tu repositorio dentro de GitHub.
+
+Así que esto le permite ver los cambios que he hecho en el código fuente. 
+
+Desde que descargo su propio repositorio, ningún cambio se ha hecho en el repositorio original, los ultimos cambios que se hicierón se subieron (push) hace un año más o menos ahora, así que no veremos ninguna diferencia.
 
