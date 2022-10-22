@@ -730,28 +730,36 @@ Entonces, si tiene alguna diferencia, si tiene algo que no funciona ahora, puede
 Bien, puedes ver exactamente lo fácil que es hacer comparaciones con ramas dentro de GitHub, dentro de su propio repositorio.
 
 ### Compare to Source
-AQUIIIIIIIIIIIIIIIIIIIIII
-Pero, ¿qué pasa si hago cambios?
 
-Si hice algún tipo de parche mientras estás tomando el curso, ya que has trabajado muy simple para hacer lo que lo que podemos hacer es decirle que mire mi repositorio también.
+Pero, ¿qué pasa si se hacen cambios en el repositorio original? El repositorio que sirvio como base para hacer el Fork.
 
-Comando muy simple para hacer eso.
+Si hice algún tipo de parche mientras estás tomando el curso, ya que has trabajado, muy simple lo que lo que podemos hacer es decirle que mire el repositorio original también.
 
-Y ahora, cuando hagamos esto a partir de la compilación de IntelliJ, haga comparaciones con su propio repositorio y con mi repositorio también para ver si he cambiado algo, si he hecho alguna actualización a las versiones o si es posible corrección de errores.
-
-Así que voy a mostrar exactamente cómo configurar eso ahora mismo en lugar de complacerme.
+Existe un comando muy simple para hacer eso. Y ahora, cuando hagamos esto desde IntelliJ build, haga comparaciones con su propio repositorio y con el repositorio original también para ver si se ha cambiado algo, si se ha hecho alguna actualización a las versiones o si es posible corrección de errores. Así que voy a mostrar exactamente cómo configurar eso.
 
 Bien, entonces lo que queremos hacer es agregar otro repositorio remoto a nuestra configuración de GitHub localmente.
 
-Así que aquí en la pantalla tengo donde golpeé el tenedor que hice.
+Así que aquí en la pantalla tengo el Fork que hice.
 
-Ahora, lo que quiero hacer es agarrar a este tipo de aquí, ir al depósito original.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197330419-4295a013-f6dd-45fb-8220-b1793f90bca8.png">
 
-Y ahora quiero copiar esta URL aquí.
+Ahora, lo que quiero hacer es ir al repositorio original pero lo que vamos a pinchar en el link.
 
-Ahora, voy a volver a la inteligencia.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197330509-17912e39-74fd-4751-bb8d-fc3956192f3e.png">
 
-Y A.J., voy a entrar a la terminal.
+Y nos manda al repositorio original.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197330553-7208dfd3-232f-451d-aafb-61eef8007c2a.png">
+
+Y ahora quiero copiar esta URL.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197330592-33ed3d0b-9335-4226-8f90-41edac3ee8f4.png">
+
+Ahora, voy a volver a la IntelliJ y voy a entrar a la terminal.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197330725-d7d7e738-b71a-4835-a5c3-b24200ed376d.png">
+
+
 
 Ahora, esta ubicación de terminal, solo necesita hacer esto desde la línea de comando y desea emitir un comando muy, muy simple nuevamente, necesita tener instalado en su máquina solo para obtener.
 
