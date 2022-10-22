@@ -93,7 +93,7 @@ Analistas comerciales responsables de las especificaciones de API
 
 * 10 secciones • 54 clases • 5h 8m de duración total
 
-## [1. OpenAPI Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/01-OpenAPI-Introduction.md) 5 clases • 22 min
+## [1. OpenAPI Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/01-OpenAPI-Introduction.md) 5 clases • 22 min 👍
 
 * Welcome 01:11
 * Meet Your Instructor 03:48
@@ -101,7 +101,7 @@ Analistas comerciales responsables de las especificaciones de API
 * Slack Group for OpenAPI: Beginner to Guru 00:59
 * GitHub Workflow 12:20
 
-## 2. OpenAPI Schema 8 clases • 44 min
+## [2. OpenAPI Schema](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/02-OpenAPI-Schema.md) 8 clases • 44 min
 
 * Introduction 01:55
 * What is an API? 07:05
