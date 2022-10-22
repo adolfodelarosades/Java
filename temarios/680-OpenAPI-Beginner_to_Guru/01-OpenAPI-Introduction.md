@@ -688,7 +688,11 @@ Nos pregunta si deseamos añadir la clase a Git, la vamos a añadir porque esto 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307771-bfb16e71-b0ba-44be-88a7-a9919cf0b23b.png">
 
-Una vez creada la clase lo que vamos hacer una comparación con GitHub, vamos a posicionarnos en la carpeta **`src`** y haga clic con el botón derecho, en el menú contextual seleccionamos ***Git -> Compare with Branches...*** y nos aparece la lista de ramas que tengamos.
+Una vez creada la clase lo que vamos hacer una comparación con GitHub, vamos a posicionarnos en la carpeta **`src`** y haga clic con el botón derecho, en el menú contextual seleccionamos ***Git -> Compare with Branches...*** 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307918-c2e9fc30-5850-489c-9ea0-0f47a1073813.png">
+
+y nos aparece la lista de ramas que tengamos.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307996-dbc077ea-bffd-4c40-94e8-8cf173efbbf4.png">
 
@@ -696,55 +700,44 @@ como solo tenemos una al seleccionarla nos mostrara las diferencias de esa rama 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197308134-2ffa7c0a-e461-41e2-8e7d-751c3a837600.png">
 
+la comparación se basará en la carpeta en la que está haciendo clic en este caso **`src`** en realidad, también podría hacer clic en la carpeta del proyecto de nivel superior, si quisiera.
 
-la comparación se basará en la carpeta en la que está haciendo clic.
+Así que sigamos adelante y echemos un vistazo si pulsamos sobre el archivo **`Foo`** que esta en verde vemos los cambios existentes.
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307918-c2e9fc30-5850-489c-9ea0-0f47a1073813.png">
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197308559-dabfe6d1-af96-4bbd-9743-18ba2fe55093.png">
 
 
-Así que voy a subir aquí y voy a comparar todo el proyecto.
+Eso debería darnos un montón de cambios, lo  VERDE significa que esto solo existe en mi repositorio localmente.
 
-Estoy haciendo clic en la raíz de la carpeta de origen.
+Si aparecen archivos en AZUL significa que hay diferencias entre lo que hay en el Repositorio y en mi Local, por ejemlo vamos a hacer algúncambio en el archivo existente **`Spring5webappApplication`**.
 
-En realidad, también podría hacer la carpeta del proyecto de nivel superior, si quisiera.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197308816-e1d6da82-3b7f-4e9d-af7c-1f0bdb747dcf.png">
 
-Simplemente baje aquí, haga clic en Comparar con sucursal y si tiene otras sucursales revisadas y los verías a ella e, origen significa que el origen dentro de GitHub.
+Vemos como el nombre del archivo **`Spring5webappApplication`** ya aparece en color AZUL lo que indica que ha habido modificaciones en el.
 
-Así que sigamos adelante y echemos un vistazo a no, agregaremos una línea de tiempo.
+Vamos a repetir la comparación con la rama de GitHub.
 
-Eso debería darnos un montón de cambios.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197308950-4bd0da0c-7033-4307-b87d-98df40029776.png">
 
-Entonces, lo que puedes ver aquí donde las cosas son Ingrey, eso significa que no está allí.
+En el listado de la izquiera ya nos aparecen los dos archivos y **`Spring5webappApplication`** aparece en azul, si pulsamos en el nos mostrara las diferencias.
 
-Entonces simplemente vienen aquí y dicen, controlador de libros.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197309003-e122448b-0e0d-42a1-96fc-c4caf0229228.png">
 
-Si hago clic en eso, podemos ver que no hay ningún recurso local para comparar y ecologizar la comida. trabajo fuera de eso.
+Así que esta línea ha sido añadida, así que estamos viendo la diferencia allí e IntelliJ hace un muy buen trabajo mostrándote las diferencias.
 
-Y para mostrarles aquí, esto solo existe en mi repositorio localmente.
-
-Ahora aquí, este en azul, eso significa que hay diferencias.
-
-Así que tengo el archivo aquí y no se muestra.
-
-Entonces, si entro aquí y hago doble clic en esto ahora, podemos ver aquí que esto dice que ese es el versión remota y aquí está mi versión.
-
-Así que esta línea ha sido añadida.
-
-Así que estamos viendo la diferencia allí.
-
-Y Ontology hace un muy buen trabajo mostrándote las diferencias.
-
-Entonces, si tiene alguna diferencia, si tiene algo que no funciona ahora, puede ir y comparar su código fuente contra mi código fuente.
+Entonces, si tiene alguna diferencia, si tiene algo que no funciona ahora, puede ir y comparar su código fuente contra el código fuente del repositorio remoto.
 
 Bien, puedes ver exactamente lo fácil que es hacer comparaciones con ramas dentro de GitHub, dentro de su propio repositorio.
 
+### Compare to Source
+AQUIIIIIIIIIIIIIIIIIIIIII
 Pero, ¿qué pasa si hago cambios?
 
 Si hice algún tipo de parche mientras estás tomando el curso, ya que has trabajado muy simple para hacer lo que lo que podemos hacer es decirle que mire mi repositorio también.
 
 Comando muy simple para hacer eso.
 
-Y ahora, cuando hagamos esto a partir de la compilación de inteligencia, haga comparaciones con su propio repositorio y con mi repositorio también para ver si he cambiado algo, si he hecho alguna actualización a las versiones o si es posible corrección de errores.
+Y ahora, cuando hagamos esto a partir de la compilación de IntelliJ, haga comparaciones con su propio repositorio y con mi repositorio también para ver si he cambiado algo, si he hecho alguna actualización a las versiones o si es posible corrección de errores.
 
 Así que voy a mostrar exactamente cómo configurar eso ahora mismo en lugar de complacerme.
 
@@ -793,5 +786,5 @@ Así que esto le permite ver los cambios que he hecho en el código fuente.
 Dado que habla con su propio repositorio, los cambios que hice no se van a impulsar por un año más o menos ahora, así que
 
 Puedo ver los cambios que se han hecho desde que hiciste los cuatro.
-### Compare to Source
-En contra.
+
+
