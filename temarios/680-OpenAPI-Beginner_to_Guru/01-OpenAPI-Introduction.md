@@ -642,56 +642,65 @@ Presionamos el botón **Clone**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197077005-20f9239a-ee14-45f2-b410-770768d76819.png">
 
-Se nos abre una nuevo Visual Studio Code con en repositorio clonado.
+Se nos abre un nuevo Visual Studio Code con en repositorio clonado.
 
-AQUIIIIIIIIIIIIIIIIIII
+Podemos ver la carpeta creada.
 
-Ahora, cuando lo abre por primera vez, es posible que no detecte que es un proyecto MAVEN y que la inteligencia es un poco inconsistente en esto.
+<img width="988" alt="image" src="https://user-images.githubusercontent.com/23094588/197297242-d5d1079a-d6a5-4c22-a86b-f2ee9d54b1e9.png">
 
-Así que a veces lo hace, a veces no.
+Ahora, cuando lo abre por primera vez, es posible que no detecte que es un proyecto MAVEN, IntelliJ es un poco inconsistente en esto, así que a veces lo hace, a veces no. Podría deberse al tipo particular de IntelliJ que estoy usando que no lo detecta, que parece como en este ejemplo se dio cuenta de que es un proyecto MAVEN . Como dije, que es un poco aleatorio.
 
-Podría deberse al tipo particular de inteligencia que estoy usando que no lo detecta, que parece como en este ejemplo.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197298384-cb231a02-e56f-4de8-8699-90cb2edd24ce.png">
 
-No lo ha hecho, así que se dio cuenta de que es un proyecto MAVEN si no es así. Como dije, que es un poco aleatorio.
+Si no es así, haga clic con el botón derecho y verá aquí una opción para agregarlo como un proyecto Maven.
 
-Si no es así, solo ingrese aquí, haga clic con el botón derecho y verá aquí una opción para agregarlo como un proyecto experto.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197298947-212b00c8-a980-4d52-95ef-188d184a778a.png">
 
-Entonces, como dije, parece ser completamente aleatorio.
+Entonces, como dije, parece ser completamente aleatorio, a veces lo recoge como proyecto Maven, cuando lo estaba probando, no lo hizo, aquí lo hizo. Entonces, solo una de esas cosas raras, extravagantes y extravagantes que ves de vez en cuando.
 
-A veces lo recoge como proyecto Maven.
-
-Cuando lo estaba probando, no lo hizo.
-
-Aquí lo hizo.
-
-Entonces, solo una de esas cosas raras, extravagantes y extravagantes que ves de vez en cuando.
-
-Pero aquí ahora de nuevo, esto ahora está clonado en mi repositorio local y estoy listo para comenzar a desarrollar
-
+Esto ahora está clonado en mi repositorio local y estoy listo para comenzar a desarrollar
 
 ### Compare to Branch 
-### Compare to Source
-En contra.
 
-Entonces, la única razón por la que luchamos contra el repositorio y luego lo clonamos es para que puedas hacer una comparación.
+Entonces, la única razón por la que hicimos el Fork del repositorio y luego lo clonamos es para que puedas hacer una comparación. Entonces, poder comparar el estado de su código con mis diferentes branches es una herramienta muy poderosa.
 
-Entonces, poder comparar el estado de su código con mis diferentes branches que van a ser encendido, hay una herramienta muy poderosa.
+Voy a ir a IntelliJ ahora y mostrarles exactamente lo fácil que es hacerlo, se compara realmente fácil, vamos a agregar una **Clase**
 
-Voy a ir a inteligencia ahora y mostrarles exactamente lo fácil que es hacerlo.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197305941-8a885c43-a849-4a25-995a-d97c6b6a62ce.png">
 
-Bueno.
+y siempre me gusta que estos paquetes intermedios se compacten para que hagan que las cosas sean un poco más fácil para nosotros. Vamos a entrar a la siguiente opción para compactar la forma en que vemos los paquetes:
 
-Hacerlo se compara realmente fácil solo con los propósitos aquí.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197306062-995d7680-2b26-407f-a9ae-f423b9aed3ee.png">
 
-Voy a seguir adelante y agregar una clase y siempre me gusta que estos paquetes intermedios compactos hagan que las cosas sean un poco más fácil para nosotros.
+Al presionarlo podemos ver los paquetes de forma compacta:
 
-Voy a entrar aquí.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197306118-d045925d-aeb4-4c2b-8e31-0deb33cb20ac.png">
 
-Solo voy a agregar una clase FU porque esto es solo temporal. Estoy agregando esto y solo como ejemplo.
+Solo vamos a agregar una clase **`Foo`**.
 
-Así que vamos a seguir adelante y emitir comillas para que este sea un depósito desechable para mí solo por propósitos de esta clase.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197306298-d8dedaf0-619c-4eb2-8aef-89ba588d31d4.png">
 
-Entonces, ahora lo que quiero hacer para hacer una comparación con GitHub, entro aquí, haga clic con el botón derecho y la comparación se basará en la carpeta en la que está haciendo clic.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197306308-e306944a-db97-4af9-9f7d-0ef9813d6831.png">
+
+Nos pregunta si deseamos añadir la clase a Git, la vamos a añadir porque esto es solo temporal y solo como ejemplo.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307696-6f7a5c90-9c0c-43f0-b93f-1b8d1974b2db.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307771-bfb16e71-b0ba-44be-88a7-a9919cf0b23b.png">
+
+Una vez creada la clase lo que vamos hacer una comparación con GitHub, vamos a posicionarnos en la carpeta **`src`** y haga clic con el botón derecho, en el menú contextual seleccionamos ***Git -> Compare with Branches...*** y nos aparece la lista de ramas que tengamos.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307996-dbc077ea-bffd-4c40-94e8-8cf173efbbf4.png">
+
+como solo tenemos una al seleccionarla nos mostrara las diferencias de esa rama contra nuestro repositorio local.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197308134-2ffa7c0a-e461-41e2-8e7d-751c3a837600.png">
+
+
+la comparación se basará en la carpeta en la que está haciendo clic.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197307918-c2e9fc30-5850-489c-9ea0-0f47a1073813.png">
+
 
 Así que voy a subir aquí y voy a comparar todo el proyecto.
 
@@ -784,3 +793,5 @@ Así que esto le permite ver los cambios que he hecho en el código fuente.
 Dado que habla con su propio repositorio, los cambios que hice no se van a impulsar por un año más o menos ahora, así que
 
 Puedo ver los cambios que se han hecho desde que hiciste los cuatro.
+### Compare to Source
+En contra.
