@@ -73,7 +73,83 @@ Now let's look at some of the verbs. The HTTP - GET, this is gonna be used to re
 Now in HTTP - POST, this is going to be used to create a new object. This is non-idempotent because multiple posts are expected to create multiple objects. Again not a safe operation either because it does change the state of the resource on the server. So this is the only non-idempotent and non safe HTTP verb that we have to deal with. And then finally the last HTTP action we have to look at is HTTP - Delete. This is again gonna be idempotent so it's gonna have the same effect and behavior and this is also not a safe aberration because it does change the state of the resource.
 
 <hr>
+<img width="1013" alt="image" src="https://user-images.githubusercontent.com/23094588/197383112-a0f933f9-2189-4aff-a58e-c53bcc7fbc17.png">
 
+En este video vamos a hablar sobre lo que es una API. 
+
+<img width="888" alt="image" src="https://user-images.githubusercontent.com/23094588/197383135-7c85eb9d-32a7-4da1-82f8-9a21f3145400.png">
+
+Entonces, una **API** significa una ***Interfaz de Programación de Aplicaciones***. En realidad, este es un término muy amplio, por lo que se ve aplicado a varias cosas diferentes.
+
+La definición exacta es muy difícil de precisar, pero ***la API en sí es una aplicación***, por lo que estamos hablando de una aplicación informática. Esto podría ser un sitio web. Podría ser una aplicación móvil. Podría ser un programador de computadoras ejecutándose en su escritorio o algún tipo de servidor, es decir, algún tipo de programa de computadora. 
+
+Y luego ***programación***, serán instrucciones para completar una tarea. 
+
+Y luego la ***interfaz*** es donde los dos sistemas se encuentran e interactúan.
+
+Básicamente, ***una API es un método para que dos aplicaciones informáticas se comuniquen entre sí***, de modo que algún tipo de conversación invoque una acción como esa. Así que esa es una conclusión clave. Es lo que queremos decir que es una API. 
+
+<img width="898" alt="image" src="https://user-images.githubusercontent.com/23094588/197383175-2c9a8fe2-6b82-490d-8ec6-7f63a2888f71.png">
+
+Básicamente, ***una API es un método para que dos aplicaciones informáticas se comuniquen entre sí***, de modo que algún tipo de conversación invoque una acción como esa. Así que esa es una conclusión clave. Es lo que queremos decir que es una API. 
+
+<img width="890" alt="image" src="https://user-images.githubusercontent.com/23094588/197383208-eee1541c-cb6e-4ad5-ab16-14026dcceb73.png">
+
+Ahora, las propias API vienen en varios sabores diferentes. Por ejemplo, si hace clic en un enlace en un mensaje de correo electrónico, se trata de un tipo de API. Le dice a su dispositivo que abra el navegador web y vaya a este sitio web. Entonces, esto lo hará una API. 
+
+Y luego, algunos son muy específicos de la tecnología. Si tiene un iPhone o algún tipo de teléfono Android, muchas veces una aplicación puede abrir otra aplicación y esto se puede hacer a un nivel bajo que las API son muy específicas para ese sistema operativo del dispositivo.Estas se consideran API cerradas. 
+
+Y luego, otros tipos de API adoptan estándares ampliamente aceptados y estos se consideran lo que se denomina API abiertas. Porque las API web programables permiten que Internet funcione como lo conocemos. Entonces, si piensa en buscar en Google, lo que sucederá allí es su navegador web cuando escribe en ese cuadro de búsqueda y hace clic en Enviar, sus navegadores web debajo de las cubiertas están haciendo **HTTP POST** a uno de los servidores de Google que tendrá un campo en él con lo que estás buscando. Entonces, este es el idioma que Google puede entender para que escuchen esa solicitud y luego respondan a su navegador con un documento **HTML** con el contenido de su búsqueda. Así es como sucede esa comunicación.
+
+Así que estamos usando HTTP para hablar. Estamos utilizando la acción de publicación y luego su navegador obtiene un documento HTML que es lo que ve en la pantalla. Así es como funciona esa API. 
+
+<img width="911" alt="image" src="https://user-images.githubusercontent.com/23094588/197383298-87665363-5676-440b-9441-f00ccd48f9c0.png">
+
+En este curso, nos centraremos en las API que se utilizarán en los desarrollos web. Estas API siguen estándares abiertos y son ampliamente utilizadas. Ahora, estos tipos de API a menudo se denominan ***servicios web***.
+
+Hay dos tipos principales de servicios web: **SOAP** y **REST** o **RESTful**. Nos centraremos en los ***servicios web RESTful***.
+
+El SOAP es un estándar mucho más antiguo. Todavía se ve bastante, especialmente en la industria de seguros. Parece que en las finanzas. Pero la mayor parte de la web moderna, como cualquier cosa. Si está en Facebook, está utilizando los servicios web RESTful para los servidores de Facebook a través de su navegador o si está comprando en Amazon, le garantizo que está utilizando un montón de servicios web RESTful. Por lo tanto, estos son, con mucho, los más populares actualmente en este momento con la tecnología.
+
+<img width="893" alt="image" src="https://user-images.githubusercontent.com/23094588/197383406-4cebc4ab-929a-494f-9204-fca4164bd0ec.png">
+
+Los servicios web RESTful se han vuelto muy populares debido a su simplicidad y versatilidad. Son ahora mismo el estándar de facto para los servicios web. ***REST significa Transferencia de Estado Representable***. La representación normalmente será **JSON**. Todavía veo mucho XML por ahí también. Las transferencias estatales se van a hacer por **HTTP**. Todo este concepto fue establecido por un tipo llamado **Rory Fielding** en esta tesis doctoral del año 2000.
+
+<img width="892" alt="image" src="https://user-images.githubusercontent.com/23094588/197383428-ba6e753c-5918-4f00-bbc5-2fdfd05964d5.png">
+
+Entonces, dentro de la ***terminología REST***, estamos usando **HTTP**, estamos usando verbos para **GET**, **POST** y **DELETE**. Estos son mensajes que iban a funcionar con el servidor encendido. Entonces, los mensajes normalmente estarán en **JSON** o **XML**.
+
+Una **URI**, esto es muy importante. Este es un **Identificador Uniforme de Recursos**. Es una cadena única que identifica un recurso. 
+
+Y luego, **URL** es **Localizador Uniforme de Recursos**. Entonces, una URL es solo un URI con información de red. Entonces, www.example.com sería ese URI y luego agregamos el HTTP, esa será la red con la que hablaremos con ese recurso. 
+
+<img width="906" alt="image" src="https://user-images.githubusercontent.com/23094588/197383443-db214219-cb68-4bb2-829c-9183b1ed6e32.png">
+
+Ahora algunas cosas importantes, tenemos **idempotencia**. Esta es una palabra con e pero es idempotencia. **Esto significa que esta propiedad se puede aplicar varias veces y no cambiar el resultado**. Entonces, por ejemplo, cuando actualizamos una página web normalmente con una operación GET, no cambiaremos nada en el servidor. Al menos en teoría, aunque ese no siempre es el caso con todo el marketing y las cosas que están vigilando su navegador. Pero la operación GET se considera idempotente. 
+
+<img width="892" alt="image" src="https://user-images.githubusercontent.com/23094588/197383471-b57a7374-ded8-441c-9656-213dbaebec7d.png">
+
+Otra cosa sobre ***los servicios REST, no tiene estado***. Entonces, el servidor no mantendrá ningún tipo de estado para usted. Eso va a ser algo sin estado, por lo que no mantendremos el estado en ninguno de los lados. 
+
+Y luego **HATEOS** o **HATEOS**, algunas personas dicen que **Hypermedia** es el motor del estado de la aplicación. Por lo tanto, un cliente REST debería poder usar los enlaces proporcionados por el servidor para descubrir dinámicamente todos los recursos disponibles a los que necesita acceder. El servidor responde con text excluye los hipervínculos a otras acciones que están actualmente disponibles. Así que este es el mejor de una variedad de servicios REST. No ves esto siempre implementado. Por lo tanto, muchos servicios no implementan esto, pero algunos de vanguardia sí lo implementan y puede hacer muchas cosas interesantes con esto.
+
+Ahora veamos algunos de los verbos. 
+
+<img width="897" alt="image" src="https://user-images.githubusercontent.com/23094588/197383502-8bf69162-8089-46e8-a801-6d3a3e831a0b.png">
+
+**HTTP - GET**, se usará para leer datos de un recurso. Esto es de solo lectura y nuevamente esto es idempotente. Es seguro. No cambia el estado del recurso. 
+
+<img width="892" alt="image" src="https://user-images.githubusercontent.com/23094588/197383521-474b6993-b599-4509-97d5-090fd4169586.png">
+
+**HTTP - PUT**, esto se usará para insertar si no se encuentra o actualizar si se encuentra. Entonces, nuevamente, esto será idempotente, por lo que si los coloca varias veces, no cambiará el resultado. Es como guardar un archivo varias veces. Esta no es una operación segura porque cambia el estado del recurso.
+
+<img width="905" alt="image" src="https://user-images.githubusercontent.com/23094588/197383539-68423d31-6878-424f-9700-eb7b37a6ead9.png">
+
+**HTTP - POST**, esto se usará para crear un nuevo objeto. Esto ***no es idempotente*** porque se espera que múltiples publicaciones creen múltiples objetos. Nuevamente, tampoco es una operación segura porque cambia el estado del recurso en el servidor. Así que ***este es el único verbo HTTP no idempotente y no seguro con el que tenemos que lidiar***. 
+
+<img width="891" alt="image" src="https://user-images.githubusercontent.com/23094588/197383569-c12f514a-81f5-4f18-afa0-4d04cf1cdf0f.png">
+
+Y finalmente, la última acción HTTP que tenemos que ver es **HTTP - Delete**. Esto nuevamente será idempotente, por lo que tendrá el mismo efecto y comportamiento y tampoco es una aberración segura porque cambia el estado del recurso.
 
 
 
