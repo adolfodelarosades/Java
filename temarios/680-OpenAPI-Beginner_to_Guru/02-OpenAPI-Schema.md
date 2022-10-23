@@ -507,17 +507,15 @@ Ahora, aquí hay un buen cuadro, este es un buen gráfico para ver todo esto e i
 
 Y esto encajará en la documentación de cómo funciona nuestra API porque vamos a confiar en los códigos de estado en cuanto a cómo respondió el servidor.
 
-Deberían ser códigos de estado que nos llegarán después de que hayamos enviado una solicitud a la serie Service 100.
+Deberían ser **Status Codes - Códigos de Estado** que nos llegarán después de que hayamos enviado una petición.
 
-Nuestra serie Informational in Nature 200 significa que tuvo éxito.
+• Los 100 es de naturaleza informativa
+• Los 200 indica una solicitud exitosa
+• Los 300 son redirecciones
+• Los 400 son errores del cliente. Indican que hemos hecho algo mal el nuestro sitio.
+• Los 500 son errores del lado del servidor
 
-La serie 300 es redirección.
-
-Entonces, el servidor nos redirigirá a una serie de URL 400 diferente, nuestro sitio de error del cliente.
-
-Así que hemos hecho algo mal en nuestro sitio.
-
-La serie 500 indica que sucedió algo inesperado en el lado del servidor.
+<img width="993" alt="image" src="https://user-images.githubusercontent.com/23094588/197409056-59b3202e-619d-49a4-8ccf-177167630a56.png">
 
 Entonces, algunos códigos de estado comunes que veremos con bastante frecuencia, especialmente en el desarrollo de API, dos
 
