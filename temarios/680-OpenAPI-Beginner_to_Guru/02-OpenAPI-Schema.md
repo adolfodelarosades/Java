@@ -665,6 +665,19 @@ going to go through, we will get into each one in depth and explain things in a 
 
 En este video, veremos por primera vez una especificación de OpenAPI.
 
+URL Recursos: https://github.com/OAI/OpenAPI-Specification/blob/main/examples/v3.0/petstore.yaml
+
+URL: https://editor.swagger.io/
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197416506-9058ad5d-6ac5-41a9-8b4e-5a919601cc8c.png">
+
+Nos indica que existe un nuevo editor.
+
+URL: https://editor-next.swagger.io/
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197416547-2af60012-8e90-4b1c-9792-9dfa876add4e.png">
+
+
 Entonces, en la pantalla aquí, tengo Swagger Editor abierto. Así que swagger es el precursor de OpenAPI. La primera edición de lo que se convirtió en OpenAPI se conoció como Swagger. Finalmente, una empresa llamada **SmartBear** los compró o los adquirió de alguna manera. Olvidé exactamente cómo. Y luego a la versión 2.0 le cambiaron el nombre a OpenAPI y ahora estamos en la versión 3.0 de OpenAPI.
 
 Entonces, la gente de SmartBear tiene esta herramienta en línea y en el lado izquierdo de la pantalla está la especificación OpenAPI en YAML y luego en el lado derecho de la pantalla está la interfaz de usuario de Swagger.
