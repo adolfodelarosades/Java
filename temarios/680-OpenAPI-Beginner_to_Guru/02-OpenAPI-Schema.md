@@ -517,51 +517,27 @@ Deberían ser **Status Codes - Códigos de Estado** que nos llegarán después d
 
 <img width="993" alt="image" src="https://user-images.githubusercontent.com/23094588/197409056-59b3202e-619d-49a4-8ccf-177167630a56.png">
 
-Entonces, algunos códigos de estado comunes que veremos con bastante frecuencia, especialmente en el desarrollo de API, dos
+Entonces, algunos códigos de estado comunes que veremos con bastante frecuencia, especialmente en el desarrollo de API.
 
-cien un OK.
+• 200 Okay; 201 Created; 202 Accepted, 204 No Content
+• 301 Moved Permanently
+• 400 Bad Request; 401 Not Authorized; 404 Not Found
+• 500 Internal Server Error; 503 Service Unavailable
 
-Todo pasó, ¿de acuerdo?
+200 es un OK, todo pasó, ¿de acuerdo? Estamos contentos con todo el mundo. Hemos creado uno o dos recursos para que el servidor comprenda la solicitud y la acepte. A veces, esto se hace con un procesamiento asincrónico en el que el servidor acepta algo y luego hay antecedentes procesamiento que debe ocurrir y ningún servidor simplemente regresará, diciendo que aceptó.
 
-Estamos contentos con todo el mundo.
+301 Esto se mueve permanentemente. Entonces, este es un estado de la serie 300 donde el servidor dice, sí, entendí su solicitud, pero eso 
+El recurso ahora se ha movido a un URI.
 
-Hemos creado uno o dos recursos para que el servidor comprenda la solicitud y la acepte.
 
-A veces, esto se hace con un procesamiento asincrónico en el que el servidor acepta algo y luego hay antecedentes.
+400 Bad Request La solicitud incorrecta a menudo significa que tiene algún tipo, Los datos mal formados para uno significan que el recurso al que está intentando acceder y que no ha suministrado o no tiene las credenciales de seguridad para acceder o no encontró algo que probablemente hemos todo visto cuando estamos navegando por Internet. Y esto significa que solicitó un recurso del servidor y el servidor no pudo encontrar
 
-procesamiento que debe ocurrir y ningún servidor simplemente regresará, diciendo que aceptó tres uno.
-
-Esto se mueve permanentemente.
-
-Entonces, este es un estado de la serie 300 donde el servidor dice, sí, entendí su solicitud, pero eso
-
-El recurso ahora se ha movido a un URAI 400 diferente. La solicitud incorrecta a menudo significa que tiene algún tipo.
-
-Los datos mal formados para uno significan que el recurso al que está intentando acceder y que no ha suministrado
-
-d
-
-o no tiene las credenciales de seguridad para acceder o no encontró algo que probablemente hemos
-
-todo visto cuando estamos navegando por Internet.
-
-Y esto significa que solicitó un recurso del servidor y el servidor no pudo encontrar
-
-es 500.
-
-Y esto es algo que, con suerte, nunca verás.
-
-Pero estoy seguro de que todo el mundo ha visto un error de servidor interno de quinientos.
-
-Esto significa que ha ocurrido un error dentro del servidor, no relacionado con su solicitud,
-
-pero algo dentro del código del servidor hizo que no pudiera completar su solicitud y luego archivar
-
-tres medios principales que los servicios están temporalmente caídos y no están disponibles.
+500 Internal Server Error Y esto es algo que, con suerte, nunca verás. Pero estoy seguro de que todo el mundo ha visto un error de servidor interno de 500. Esto significa que ha ocurrido un error dentro del servidor, no relacionado con su solicitud, pero algo dentro del código del servidor hizo que no pudiera completar su solicitud y luego archivar tres medios principales que los servicios están temporalmente caídos y no están disponibles.
 
 Entonces, todos estos códigos de pasos se relacionan con la forma en que formamos las API y los verbos también.
 
 Estas son todas las herramientas que vamos a utilizar para desarrollar nuestras API.
+
 ##  Why use OpenAPI? 07:06
 ##  Pet Clinic on Swagger Editor 06:09
 ##  OpenAPI 2.0 vs 3.0 03:12
