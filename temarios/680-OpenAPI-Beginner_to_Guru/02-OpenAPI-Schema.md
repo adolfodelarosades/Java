@@ -539,7 +539,161 @@ Entonces, todos estos códigos de pasos se relacionan con la forma en que formam
 Estas son todas las herramientas que vamos a utilizar para desarrollar nuestras API.
 
 ##  Why use OpenAPI? 07:06
+
+In this video we're gonna take a look at why we actually wanna be using the OpenAPI. 
+
+So first off, OpenAPI ,the standard is to just use it all OpenAPI as one word, no space between Open or API, so it just says I have it there on the first line. This is often short for OpenAPI specification and you do see this often abbreviated as OA3 which stands for OpenAPI version 3. 
+
+Now OpenAPI is also a widely adopted standard for describing APIs. So very important to stress the strong industry support behind OpenAPI. Some of the major backers included Microsoft, Google, and IBM. There's actually a much larger consortium than that but these are the major players. 
+
+OpenAPI is also considered technology as agnostic. This is one things that I really like about it because it goes across multiple disciplines so developers using Java or .net or Ruby virtually any major language all can benefit from using OpenAPI, because it is such an open standard. 
+
+RESTful API, which we've been looking at, they are rather technology agnostic. You can implement them in any language. OpenAPI as well also technology agnostic, meaning that any type of developer using a major programming language can benefit from utilizing OpenAPI. Some important things to understand about OpenAPI. 
+
+The specification is defined in YAML or JSON. I personally prefer YAML because YAML is a little bit lighter and JSON is a little bit more structured. So, JSON is JavaScript Object Notation. We often see that used for payloads. But for anything with specification, I personally prefer YAML. You may prefer JSON and I'm not going to specify one or the other. That is really up to you. 
+
+Now the OpenAPI specification itself is backed by a formal schema. A schema is going to find how the document is laid out. So it's gonna find all the sections, all the properties, and the data type. So it becomes a very structured document. So we get an object model of that. Because it is structured, we can actually read it programmatically, and having this capability to actually read it in programmatically because it is a structured document. This opens it up to a lot of things. So OpenAPI tools, that there's a whole suite of open source, and in some cases closed source Converters, Validators GUI Editors.
+
+You can even stand up Mock Services, SDK Generators, Documentation generators, all driven from this OpenAPI specification. For example if you use Postman for exercising your API calls, you can actually take an OpenAPI specification and bring it into Postman and get full functionality and inside of Postman. That just takes just a few seconds. Another thing that's really nice about OpenAPI is OpenAPI CodeGen. You can generate server-side code for over 20 different languages or client-side code for over 40 different languages. So these are all templates that are going to develop libraries of code based on the OpenAPI specification, so that specification, having all that detail in a structured document allows us to do a number things with it.
+
+Now also why you wanna be using OpenAPI is have a single source of truth. With an OpenAPI specification, that really becomes the definition of what that API is supposed to do. So imagine if you're in a situation where you don't have an open API, what defines that API? What is it actually supposed to do? Is it the source code? Is that what's supposed to do? Does designed document on the corporate wiki, is that what is supposed to do? Is it the Unit tests? Email messages between developers? Or perhaps all the above or none of the above? 
+
+Without a formal specification, when you get into an organization, if the API is perceived to be misbehaving or incorrect, what is this the actual source of truth?
+
+What is that API supposed to do? This is where the OpenAPI specification really is a powerful tool because it defines what that API is supposed to do and you code to it. So you'd actually code to the specification if the source code implements this specification, you can assume that it is correct.
+
+Now one of the hats I worked at, I am personally working at a company called Velo Payments and I am on the integration team so I oversee our public facing API's. We've adopted OpenAPI within our organization to solve a lot of these problems and within Velo Payments, we take microservices, we define them against an OpenAPI specification, so that is our single source of truth. 
+
+Now with that OpenAPI specification in our Unit tests we have tooling that is going to validate every request and response. So, when our unit 
+tests are running against our controller code, we are validating that OpenAPI specification so it's built into our testing process and in our software development process of course we're gonna be running these unit tests as we develop our code. And then also in our CI/CD process of continuous integration continuous deployment, those processes also have hooks into doing OpenAPI specification. So in our built-in development process, if we do something that is not according to the OpenAPI specification, our test will fail. 
+
+So, we get notified right away if there's a delta. And then Consumer Driven Contracts, obviously, I am big on the Spring Framework. Spring Framework, within the Spring community, there is a Spring Cloud Contract. This allows Consumer Driven Contracts. This is definitely outside the scope of the course but I want to alert you to have the capability of doing Consumer Driven Contracts and we're defining those inside of OpenAPI extensions. So nice capability there. And then Velo itself, we've published over let's say over eight languages of SDKs using OpenAPI generated codes. 
+
+We're generating source code using OpenAPI CodeGen and then that is driving our SDK development for consumers of our API, our public API and then also our public facing documentation that go out to our website, Developer center. You can see a link to our API documentation. That 
+documentation is being developed and generated from our OpenAPI specification. So you can see here how central OpenAPI has become to our development process because we are looking at people consuming our APIs, it could be tens, thousands, or tens of thousands of people that are gonna be utilizing our APIs. We want those well documented and accurate. 
+
+So this tells us that our APIs are doing what the specification does and then through our testing and development process we have a high degree of confidence that the OpenAPI specification does accurately reflect our APIs.
+
+<hr>
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/197411914-6aefede5-8439-408b-bdf1-965d21098ae9.png">
+
+En este video, veremos por qué realmente queremos usar OpenAPI.
+
+<img width="999" alt="image" src="https://user-images.githubusercontent.com/23094588/197411950-2d69031d-38de-48f8-acd7-23f6d03a258a.png">
+
+Entonces, en primer lugar, OpenAPI, el estándar es usar todo OpenAPI como una sola palabra, sin espacio entre Open o API, por lo que solo dice que lo tengo allí en la primera línea. A menudo, esto es la abreviatura de la **especificación OpenAPI** y verá que a menudo se abrevia como **OA3**, que significa **OpenAPI versión 3**.
+
+Ahora OpenAPI también es un estándar ampliamente adoptado para describir las API. Es muy importante destacar el fuerte apoyo de la industria detrás de OpenAPI. Algunos de los principales patrocinadores incluyeron a Microsoft, Google e IBM. En realidad, hay un consorcio mucho más grande que ese, pero estos son los principales actores.
+
+OpenAPI también se considera tecnología como agnóstica. Esta es una de las cosas que realmente me gustan porque abarca múltiples disciplinas, por lo que los desarrolladores que usan Java o .net o Ruby prácticamente cualquier lenguaje principal pueden beneficiarse del uso de OpenAPI, porque es un estándar tan abierto.
+
+**API RESTful**, que hemos estado analizando, son bastante independientes de la tecnología. Puede implementarlos en cualquier lenguaje. **OpenAPI** también es independiente de la tecnología, lo que significa que cualquier tipo de desarrollador que use un lenguaje de programación importante puede beneficiarse de la utilización de **OpenAPI**. 
+
+<img width="997" alt="image" src="https://user-images.githubusercontent.com/23094588/197412075-a04b8f53-b54f-484f-9dde-aad3e4f9563b.png">
+
+Algunas cosas importantes para entender sobre OpenAPI.
+
+La especificación se define en **YAML** o **JSON**. Personalmente, prefiero **YAML** porque **YAML** es un poco más ligero y **JSON** está un poco más estructurado. Entonces, **JSON** es la notación de objetos de **JavaScript**. A menudo vemos que se usa para cargas útiles. Pero para cualquier cosa con especificación, personalmente prefiero **YAML**. Puede que prefieras **JSON** y no voy a especificar uno u otro. Eso realmente depende de ti.
+
+Ahora, la especificación de **OpenAPI** en sí misma está respaldada por un esquema formal. Un esquema va a encontrar cómo se presenta el documento. Así que encontrará todas las secciones, todas las propiedades y el tipo de datos. Entonces se convierte en un documento muy estructurado. Entonces obtenemos un modelo de objeto de eso. Debido a que está estructurado, podemos leerlo programáticamente y tener esta capacidad para leerlo programáticamente porque es un documento estructurado. Esto lo abre a muchas cosas. 
+
+Entonces, las herramientas OpenAPI, que hay un conjunto completo de convertidores de código abierto y, en algunos casos, de código cerrado, editores de GUI de validadores.
+
+Incluso puede implementar servicios simulados, generadores SDK, generadores de documentación, todos impulsados desde esta especificación OpenAPI.
+
+Por ejemplo, si usa Postman para ejercitar sus llamadas API, puede tomar una especificación OpenAPI e incorporarla a Postman y obtener la funcionalidad completa dentro de Postman. Eso solo toma unos segundos. 
+
+Otra cosa muy buena de OpenAPI es OpenAPI CodeGen. Puede generar código del lado del servidor para más de 20 lenguajes diferentes o código del lado del cliente para más de 40 lenguajes diferentes. Estas son todas las plantillas que van a desarrollar bibliotecas de código basadas en la especificación OpenAPI, por lo que esa especificación, tener todos esos detalles en un documento estructurado, nos permite hacer varias cosas con ella.
+
+<img width="991" alt="image" src="https://user-images.githubusercontent.com/23094588/197414285-3c7551c7-7608-4278-95e6-8352238b9866.png">
+
+Ahora también por qué quieres usar OpenAPI es tener una única fuente de verdad. Con una especificación OpenAPI, eso realmente se convierte en la definición de lo que se supone que debe hacer esa API. Así que imagina si estás en una situación en la que no tienes una API abierta, ¿qué define esa API? ¿Qué se supone que debe hacer en realidad? ¿Es el código fuente? ¿Es eso lo que se supone que debe hacer? ¿El documento diseñado en el wiki corporativo es eso lo que se supone que debe hacer? ¿Son las pruebas unitarias? ¿Mensajes de correo electrónico entre desarrolladores? ¿O quizás todo lo anterior o nada de lo anterior?
+
+Sin una especificación formal, cuando ingresa a una organización, si se percibe que la API se está comportando mal o es incorrecta, ¿cuál es esta la fuente real de la verdad?
+
+¿Qué se supone que debe hacer esa API? Aquí es donde la especificación OpenAPI realmente es una herramienta poderosa porque define lo que se supone que debe hacer esa API y usted codifica para ella. Entonces, en realidad codificaría según la especificación si el código fuente implementa esta especificación, puede suponer que es correcto.
+
+<img width="1003" alt="image" src="https://user-images.githubusercontent.com/23094588/197414371-e5956fa3-d07e-4e16-992e-51199c17de4e.png">
+
+Ahora, uno de los sombreros en los que trabajé, estoy trabajando personalmente en una empresa llamada Velo Payments y estoy en el equipo de integración, por lo que superviso nuestras API públicas. Adoptamos **OpenAPI** dentro de nuestra organización para resolver muchos de estos problemas y dentro de Velo Payments, tomamos microservicios, los definimos contra una especificación OpenAPI, por lo que esa es nuestra única fuente de verdad.
+
+Ahora, con esa especificación OpenAPI en nuestras pruebas unitarias, tenemos herramientas que validarán cada solicitud y respuesta. Entonces, cuando nuestra unidad las pruebas se ejecutan en nuestro código de controlador, estamos validando esa especificación OpenAPI para que esté integrada en nuestro proceso de prueba y en nuestro proceso de desarrollo de software, por supuesto, ejecutaremos estas pruebas unitarias a medida que desarrollamos nuestro código. Y luego, también en nuestro proceso de CI/CD de implementación continua de integración continua, esos procesos también tienen ganchos para hacer la especificación OpenAPI. Entonces, en nuestro proceso de desarrollo incorporado, si hacemos algo, Si algo no está de acuerdo con la especificación OpenAPI, nuestra prueba fallará.
+
+Entonces, nos notifican de inmediato si hay un delta. Y luego los Contratos impulsados por el consumidor, obviamente, me gusta Spring Framework. Spring Framework, dentro de la comunidad Spring, existe un Spring Cloud Contract. Esto permite los Contratos Impulsados por el Consumidor. Esto definitivamente está fuera del alcance del curso, pero quiero alertarlo para que tenga la capacidad de realizar contratos impulsados por el consumidor y estamos definiéndolos dentro de las extensiones de OpenAPI. Tan buena capacidad allí. Y luego Velo en sí, hemos publicado, digamos, más de ocho lenguajes de SDK utilizando códigos generados por OpenAPI.
+
+Estamos generando código fuente usando OpenAPI CodeGen y luego eso está impulsando nuestro desarrollo de SDK para los consumidores de nuestra API, nuestra API pública y luego también nuestra documentación pública que sale a nuestro sitio web, Centro de desarrolladores. Puede ver un enlace a nuestra documentación API.
+
+Que la documentación se está desarrollando y generando a partir de nuestra especificación OpenAPI. Así que pueden ver aquí cuán central se ha vuelto OpenAPI para nuestro proceso de desarrollo porque estamos viendo a las personas que consumen nuestras API, podrían ser decenas, miles o decenas de miles de personas que utilizarán nuestras API. Los queremos bien documentados y precisos.
+
+Entonces, esto nos dice que nuestras API están haciendo lo que hace la especificación y luego, a través de nuestro proceso de prueba y desarrollo, tenemos un alto grado de confianza en que la especificación OpenAPI refleja con precisión nuestras API.
+
 ##  Pet Clinic on Swagger Editor 06:09
+
+In this video we are gonna get our first look at an OpenAPI specification. 
+
+So up on the screen here, I have Swagger Editor open. So swagger is the precursor to OpenAPI. The first edition of what became OpenAPI was known as Swagger. Ultimately, a company called **SmartBear** bought them or acquired that somehow. I forget exactly how. And then the 2.0 version they renamed it to OpenAPI and now we are on version 3.0 of OpenAPI. 
+
+So the folks that SmartBear have this online tool and on the left-hand side of the screen this is the OpenAPI specification in YAML and then on the right hand side of the screen is Swagger UI.
+
+This is a UI program that is looking at the OpenAPI specification, provide you a functional website of that. So we are gonna be focusing on the left-hand side of the screen. Up here on the screen, this is YAML. This is a formal specification and we are gonna be going through this in a lot more detail. I just want to get our feet wet in this video of what's going on in here.
+
+So I'm gonna highlight lines 2 through 6 and this is an object. So the OpenAPI specification, the different sections are considered objects. So line 2, that is the start of the information object. You can see that the information object has a version property, a title property, a license property. 
+
+So these are all different properties that we have available for that. And don't worry too much right now. We are going to go through each of these objects in a lot more detail. I'm just going through a high-level overview of this. So that is an information object. And here, this is very important. This whole section here on line 10, this is an operation object. So, here on line 10, we are saying for pets. So again, we're looking at the pet store example, classic example of a REST API. On line 10 we are saying a get action against pets is going to give us a list of all pets in the system. I can see here this is an operation object. 
+
+Here, we have a parameter that specifies a query parameter that we can supply. And then down here, you can see this is a response. So when we do a get we are going to get a 200 response, and that's a description. We will see a link in the header and then also we can expect that this content is gonna be provided back. So let me scroll up a little bit here.
+
+I get to the line 56. Again, on line 56, now we are specifying a URL with a ID value that is in the path. We can see here petID, that is a path parameter. And now we can see that the parameter description is saying path. Again we are gonna look at each one of these in a lot more depth. So we can see how this document is structured. These are several operations that we have. And then down here, we can see the components that is making up this. So let's take a look at the Swagger UI that is being generated from this. You can see here this is a get all pets. I can actually extend that out, I believe, by clicking on it and we can see that this information here List all pets. You can see here where it says list all pets that's that summary that's coming from over here. 
+
+That is how this documentation is getting generated. Let's see here. This actually allows you to try it out.
+
+So I'm gonna click on Try it out here. Now I'm gonna say Execute.
+
+And let's see.
+
+I did try it out and you can see down here that we are getting a type error Failed to fetch. So what's happening here it is this shooting this command and unfortunately it looks like this Swagger.io v1/pets is not up right now. So I have tested this in the past, and you can actually invoke the API.
+
+It's actually quite nice. So I do clear if the backend server here, this petstore.swagger.io doesn't seem to be responding, but if it was clicking on this, I would get something back from it. But unfortunately, I am not at this particular point in time. It could just be because their server is going on.
+
+There's some maintenance. But this is a nice feature because what you can do here is you can actually specify more than one server and execute the API. So again, what's happening here, the key takeaway I want you to have is that you have on the left hand side of the screen, the OpenAPI specification and on the right hand side of the screen is Swagger UI that is using that specification. Not only is giving us a really nice look and feel for the website where we can see the various operations that we can utilize, we can actually click on Try it out. And if unfortunately that server is not responding. But if it was, this is all using Javascript and reflection against the API, the API specification that we would be able to utilize it. 
+
+So really nice functionality. Unfortunately it's not working for this example but we will find a example to utilize this coming up in the course. Again, don't be too concerned I just wanted to give you a very high-level overview. On the left-hand side of screen, this is the OpenAPI specification and is showing you an actual OpenAPI for the pet store example. And each one of these operations, the schema objects that we're 
+going to go through, we will get into each one in depth and explain things in a lot more detail. So a lot more detail to come. This is just a high-level overview. I wanted to get you an example using Swagger pet store to see what an actual OpenAPI specification looks like, so you can see that on the right hand side. And I will include a link to the OpenAPI specification in the course resources before you go ahead and examine that in more depth.
+
+<hr>
+
+En este video, veremos por primera vez una especificación de OpenAPI.
+
+Entonces, en la pantalla aquí, tengo Swagger Editor abierto. Así que swagger es el precursor de OpenAPI. La primera edición de lo que se convirtió en OpenAPI se conoció como Swagger. Finalmente, una empresa llamada **SmartBear** los compró o los adquirió de alguna manera. Olvidé exactamente cómo. Y luego a la versión 2.0 le cambiaron el nombre a OpenAPI y ahora estamos en la versión 3.0 de OpenAPI.
+
+Entonces, la gente de SmartBear tiene esta herramienta en línea y en el lado izquierdo de la pantalla está la especificación OpenAPI en YAML y luego en el lado derecho de la pantalla está la interfaz de usuario de Swagger.
+
+Este es un programa de interfaz de usuario que está analizando la especificación OpenAPI, le proporciona un sitio web funcional de eso. Así que vamos a centrarnos en el lado izquierdo de la pantalla. Aquí arriba en la pantalla, esto es YAML. Esta es una especificación formal y vamos a analizarla con mucho más detalle. Solo quiero mojarnos los pies en este video de lo que está pasando aquí.
+
+Voy a resaltar las líneas 2 a 6 y este es un objeto. Entonces, la especificación OpenAPI, las diferentes secciones se consideran objetos. Así que la línea 2, ese es el comienzo del objeto de información. Puede ver que el objeto de información tiene una propiedad de versión, una propiedad de título, una propiedad de licencia.
+
+Estas son todas las diferentes propiedades que tenemos disponibles para eso. Y no te preocupes demasiado ahora. Vamos a revisar cada uno de estos objetos con mucho más detalle. Solo estoy pasando por una descripción general de alto nivel de esto. Eso es un objeto de información. Y aquí, esto es muy importante. Toda esta sección aquí en la línea 10, este es un objeto de operación. Entonces, aquí en la línea 10, decimos para mascotas. Entonces, nuevamente, estamos viendo el ejemplo de la tienda de mascotas, un ejemplo clásico de una API REST. En la línea 10 decimos que una acción de obtener contra mascotas nos dará una lista de todas las mascotas en el sistema. Puedo ver aquí que este es un objeto de operación.
+
+Aquí tenemos un parámetro que especifica un parámetro de consulta que podemos proporcionar. Y luego aquí abajo, pueden ver que esto es una respuesta. Entonces, cuando hagamos un get, obtendremos una respuesta de 200, y esa es una descripción. Veremos un enlace en el encabezado y luego también podemos esperar que este contenido se devuelva. Así que permítanme desplazarme un poco hacia arriba aquí.
+
+Llego a la línea 56. Nuevamente, en la línea 56, ahora estamos especificando una URL con un valor de ID que está en la ruta. Podemos ver aquí petID, que es un parámetro de ruta. Y ahora podemos ver que la descripción del parámetro dice ruta. Una vez más, vamos a ver cada uno de estos con mucha más profundidad. Entonces podemos ver cómo está estructurado este documento. Estas son varias operaciones que tenemos. Y luego aquí abajo, podemos ver los componentes que componen esto. Entonces, echemos un vistazo a la interfaz de usuario de Swagger que se genera a partir de esto. Puede ver aquí que se trata de obtener todas las mascotas. De hecho, puedo ampliar eso, creo, haciendo clic en él y podemos ver que esta información aquí enumera todas las mascotas. Puede ver aquí donde dice enumerar todas las mascotas, ese es el resumen que viene de aquí.
+
+Así es como se genera esta documentación. Veamos aquí. Esto realmente te permite probarlo.
+
+Así que voy a hacer clic en Pruébalo aquí. Ahora voy a decir Ejecutar.
+
+Y veamos.
+
+Lo probé y puedes ver aquí abajo que estamos recibiendo un error de tipo Failed to fetch. Entonces, lo que está sucediendo aquí es disparar este comando y, lamentablemente, parece que este Swagger.io v1/pets no está activo en este momento. Así que probé esto en el pasado, y en realidad puedes invocar la API.
+
+En realidad es bastante agradable. Así que aclaro si el servidor back-end aquí, este petstore.swagger.io no parece estar respondiendo, pero si estuviera haciendo clic en esto, obtendría algo de él. Pero desafortunadamente, no estoy en este momento en particular. Podría ser simplemente porque su servidor está funcionando.
+
+Hay algo de mantenimiento. Pero esta es una buena característica porque lo que puede hacer aquí es especificar más de un servidor y ejecutar la API. Entonces, nuevamente, lo que está sucediendo aquí, la conclusión clave que quiero que tenga es que tiene en el lado izquierdo de la pantalla, la especificación OpenAPI y en el lado derecho de la pantalla está Swagger UI que está usando esa especificación. No solo nos brinda una apariencia realmente agradable para el sitio web donde podemos ver las diversas operaciones que podemos utilizar, sino que también podemos hacer clic en Pruébelo. Y si lamentablemente ese servidor no responde. Pero si lo fuera, todo esto es usando Javascript y la reflexión contra la API, la especificación de la API que podríamos utilizar.
+
+Muy buena funcionalidad. Lamentablemente, no funciona para este ejemplo, pero encontraremos un ejemplo para utilizarlo en el curso. Nuevamente, no se preocupe demasiado, solo quería darle una descripción general de muy alto nivel. En el lado izquierdo de la pantalla, esta es la especificación OpenAPI y le muestra una OpenAPI real para el ejemplo de la tienda de mascotas. y cada uno de estas operaciones, los objetos de esquema que estamos
+vamos a pasar, profundizaremos en cada uno y explicaremos las cosas con mucho más detalle. Así que muchos más detalles por venir. Esta es solo una descripción general de alto nivel. Quería darle un ejemplo usando la tienda de mascotas Swagger para ver cómo se ve una especificación OpenAPI real, para que pueda ver eso en el lado derecho. E incluiré un enlace a la especificación OpenAPI en los recursos del curso antes de que continúe y examine eso con más profundidad.
+
 ##  OpenAPI 2.0 vs 3.0 03:12
 ##  YAML Crash Course 07:28
 ##  OpenAPI Specification Quiz 10 preguntas
