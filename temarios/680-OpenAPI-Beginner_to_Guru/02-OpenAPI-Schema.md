@@ -253,6 +253,180 @@ Entonces, las principales conclusiones de que cuando saltemos a 2.0, el uso ser�
 Entonces, si estamos en 1.x o 2.0 completamente no importa para esto, pero quería abordarlo aquí en el curso para especificar en caso de que se entere, si hay cambios funcionales de los que debemos preocuparnos, no los hay.
 
 ##  HTTP Request Methods 06:11
+
+And this video, we're going to take a closer look at HDTV request methods, and again, if you are
+
+comfortable with this content, go ahead and skip over this video.
+
+This is for some background, because these methods become very important to developing API calls on
+
+using HTP.
+
+So a lot of things that were going to be talking about dovetail exactly into this.
+
+But again, if you are comfortable with this content, go and skip over it.
+
+Otherwise, I'm going to go for it and give you some additional information about how HTP is actually
+
+used.
+
+So request methods.
+
+We also call these verbs and these are used to indicate a desired action to be performed.
+
+So aGet is a request for a resource.
+
+So we're going to issue a command against the server for an HTML file or a JavaScript file, some type
+
+of image.
+
+It is used like when you go to visit a website, a command is being used to visit that website.
+
+Now there is a head command.
+
+Don't see that use too often, but it's similar to a git.
+
+But it only ask for meta information about that resource.
+
+But you do not get the actual body back.
+
+Now, some other request methods that we see post.
+
+This is used to post data to the service server.
+
+Typical use case is to post data to the server like a checkout form.
+
+So if you're checking out or even like a Google search form, you are going to post to that server.
+
+Noé Put is a request for the enclosed entity to be stored at the supplied URAI.
+
+So if that only exists as as expected to be updated.
+
+In contrast, a post is a create request.
+
+Aput is going to be a create or update request of these very important as to how these firms work.
+
+A delete is to tell the server to delete the specified resource now traces kind of use for troubleshooting,
+
+don't see it used too often.
+
+And this is just to echo the request and then also options.
+
+This is going to return the method supported by the server for the specified neural.
+
+Again, you see that one used too much either.
+
+Connect that tells the server to convert the request into a transparent TCP IP tunnel, typically for
+
+https through an unencrypted proxy.
+
+So these are some low level stuff that you don't use to often.
+
+Patch is an important one, and this is going to apply partial modifications to the specified resource.
+
+And you do see that used to some, but not terribly common either.
+
+Now, there's two types of methods that we talk about are safe methods, these are considered safe because
+
+they only fetch information and do not cause changes on the server.
+
+The safe methods are considered.
+
+Kit had options and trace.
+
+Item Potente, that's kind of a funny word, is item Partons, this is the action.
+
+If there's repetitions of that action, it's not going to have any additional effect.
+
+So put and delete our item.
+
+Potent methods, safe methods are also considered item potent.
+
+Do you want to specify, though, being truly item potent is not enforced by the protocol.
+
+It is expected to be enforced by the developers behind utilizing these methods.
+
+Now, nine item methods, posters, not item put, multiple posts are likely to create multiple resources.
+
+So if you can think of.
+
+I'm sure we've ever seen.
+
+Please click only wants to avoid duplicating things.
+
+We do see people do that on websites at times.
+
+So important thing to remember.
+
+Now, here's a nice chart, you will have an access to a PDF of these slides and of course, resources
+
+so you can download it and keep it up.
+
+So this is a good chart to see all this and interact as far as whether they're safe, i.e. impotent
+
+or cashable no status, because this is very important.
+
+And this is going to dovetail into documenting how our API works because we are going to be relying
+
+on status codes as to how the server responded.
+
+They should be status codes as coming back to us after we've issued a request to the Service 100 series.
+
+Our Informational in Nature 200 series means it was successful.
+
+300 series are redirection.
+
+So the server is going to redirect us to a different URL 400 series, our client site error.
+
+So we've done something wrong on our site.
+
+500 series are indicating that something unexpected happened on the server side.
+
+So some common status codes that we're going to see quite often, especially in API development, two
+
+hundred an OK.
+
+Everything happened, OK?
+
+We're happy with it to everyone.
+
+We've created a resource or two tool for means that the server understood the request and accepted it.
+
+Sometimes this is done with async processing where the server accepts something and then there's background
+
+processing that must occur and no server is just going to return back, saying it accepted three one.
+
+This is moved permanently.
+
+So this is a 300 series status where the server is saying, yes, I understood your request, but that
+
+resource has now been moved to a different URAI 400 bad request often means that you have some type.
+
+Malformed data for a one means that the resource that you are trying to access and you have not supplied
+
+or do not have the security credentials to access for or for not found something that we've probably
+
+all seen when we're browsing the Internet.
+
+And this means that you've requested a resource from the server and the server was not able to find
+
+it 500.
+
+And this is something that you hopefully never see.
+
+But I'm sure everybody has seen a five hundred internal server error.
+
+This means that there's been an error that happened inside the server, not related to your request,
+
+but something inside the server code caused it not to be able to complete their request and then file
+
+three main means that the services temporarily down and not available.
+
+So all these steps codes do go into how we form APIs and the verbs as well.
+
+So these are all tools that we're going to be utilizing to develop our APIs.
+
+
 ##  Why use OpenAPI? 07:06
 ##  Pet Clinic on Swagger Editor 06:09
 ##  OpenAPI 2.0 vs 3.0 03:12
