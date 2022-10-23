@@ -1082,3 +1082,26 @@ Y lo más difícil es que uno de los mayores problemas con los que se encontrar�
 Cuando tiene un espaciado que es inconsistente y eso puede causar algunos problemas muy extraños y cuando está intentando para validar su especificación OpenAPI, es muy fácil cometer un error en el espaciado.
 
 ##  OpenAPI Specification Quiz 10 preguntas
+
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/197420320-d75e585e-b0ce-44f9-9028-0f8fe37d2bee.png">
+
+<img width="854" alt="image" src="https://user-images.githubusercontent.com/23094588/197420348-58c9b837-dcfe-426a-9534-05af70132523.png">
+
+<img width="853" alt="image" src="https://user-images.githubusercontent.com/23094588/197420389-96ac634c-6609-40be-8716-95322379679e.png">
+
+<img width="854" alt="image" src="https://user-images.githubusercontent.com/23094588/197420425-4b3bfbf0-2310-495a-8960-1bac81e13e87.png">
+
+<img width="856" alt="image" src="https://user-images.githubusercontent.com/23094588/197420434-1325a56c-3ce7-49f6-bdd4-16d5fe869171.png">
+
+<img width="854" alt="image" src="https://user-images.githubusercontent.com/23094588/197420486-605eeb8c-5958-47aa-ab53-40f9bc1fc6b2.png">
+
+<img width="779" alt="image" src="https://user-images.githubusercontent.com/23094588/197420529-2dff2b7c-93fe-4f1c-9298-6a9f2847058c.png">
+
+<img width="776" alt="image" src="https://user-images.githubusercontent.com/23094588/197420694-af9c3976-5a70-414e-a841-6878e5cb338f.png">
+
+<img width="705" alt="image" src="https://user-images.githubusercontent.com/23094588/197420735-7e42ba21-b9d5-4e1c-89c5-624f8a7952b3.png">
+
+<img width="703" alt="image" src="https://user-images.githubusercontent.com/23094588/197420767-2fdbc627-725e-41b7-9fa1-d7ed09e96ea8.png">
+
+
+
