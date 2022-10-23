@@ -156,239 +156,102 @@ Y finalmente, la última acción HTTP que tenemos que ver es **HTTP - Delete**. 
 
 ## HTTP Protocol 05:08
 
-In this video, we're gonna be taking a closer look at the HTTP protocol. Now one
+In this video, we're gonna be taking a closer look at the HTTP protocol. 
 
-caveat here, if you're comfortable with HTTP already or some background that
+Now one caveat here, if you're comfortable with HTTP already or some background that we're gonna be using about how the API is are formed, go ahead and skip over this video if you're completely comfortable with HTTP. But if not, please continue on. 
 
-we're gonna be using about how the API is are formed, go ahead and skip over
+I'm gonna get into some details about HTTP and its history and how it is used. So a little history on HTTP development. It was originally started by Tim Berners-Lee of CERN back in 1989. 
 
-this video if you're completely comfortable with HTTP. But if not, please
+HTTP/0.9 is the original proposal that he put out and originally started off as a Telnet friendly protocol. You can see here this is a Telnet command. We don't see Telnet use that much anymore.
 
-continue on. I'm gonna get into some details about HTTP and its history and
+When I first started off in computers which was a bit ago, we saw Telnet use quite a bit actually. You can actually Telnet into port 80 at a server and issue HTTP commands and get requests and or do requests and responses. So it's actually kind of cool, so totally legitimate to this. 
 
-how it is used. So a little history on HTTP development. It was originally started
+If you find a Telnet client, you can actually do this to yourself and issue these commands manually because underneath the covers that's effectively what your web browser is gonna be doing. It was using this protocol. 
 
-by Tim Berners-Lee of CERN back in 1989. HTTP/0.9 is the original proposal that
+So HTTP/1.0 from 1991 to 1995. During this time frame the specifications really grew rapidly. There's a lot of interest in it and a lot of evolving. New software in this timeframe came out known as the web browser. 
 
-he put out and originally started off as a Telnet friendly protocol. You can
+So a very interesting time in history as far as technology goes. The standards for HTTP were developed by IETF - Internet Engineering Task Force and also W3C - World Wide Web Consortium.
 
-see here this is a Telnet command. We don't see Telnet use that much anymore.
+So these are the two bodies that really helped develop the standards that we still use today. So here in history this is HTTP/1.0. Again, we're using Telnet as an example here, going out connecting to a website, issuing a request there. 
 
-When I first started off in computers which was a bit ago, we saw Telnet use
+So this is a request and then a response that is being received there. Again, this is using Telnet. This is the exact same thing that things like web browsers are doing underneath the covers that we don't see every day. Now in 1997, that is when HTTP/1 was released or 1.1 I should say and this solved a lot of ambiguities from earlier versions so it added support for keep alive connections, chunked encoding transfers, byte-range request, and request pipelining so this is a very critical release. And then again, we also had another release of this in 1999 and this release was actually still in use today. 
 
-quite a bit actually. You can actually Telnet into port 80 at a
+So, there's been some evolution to this so we had in 1999 release and then RFC 7230 in 2014 and all this technology is still in use today and it's used by modern web browsers and components. So in 1.1 we added in a character encoding ,character set and cookies. So we can see here this is an example of where we are doing encoding and getting a cookie back down at the bottom of the screen. And again here is a example of encoding of the actual response and just snippets of the response. 
 
-server and issue HTTP commands and get requests and or do requests and
+So you can see there this is actually what's going across the wire in the HTTP protocol. Now in 2015, HTTP/2.0 came out. This is gonna be supported by most servers and browsers by the end of 2015. As of 2017, only 13% of the top 10 million sites supported HTTP 2.0. This does have a high degree of compatibility with HTTP 1.1 and the primary features of this is this was more on transport performance. It improves page load speed by lower latency, higher throughput. 
 
-responses. So it's actually kind of cool, so totally legitimate to this. If you
+The differences between the two for us as developers and developing APIs using this protocol are largely transparent. 
 
-find a Telnet client, you can actually do this to yourself and issue these
+So the biggest takeaways for that when we jump to 2.0 the usage is gonna be the same for us so we're not changing anything how we're doing. It's at a large degree of compatibility there, but it's more of a lower a wire. So, you get a lot more performance out of it through lower latency and higher throughput. 
 
-commands manually because underneath the covers that's effectively what your web
+So that's main takeaway. We are seeing more and more of this being adopted with the HTTP 2.0 capabilities. But primary takeaway for you going through this course, functionally in designing APIs using the HTTP protocol, there's really no difference. It's a completely transparent to everything that we're gonna be talking about in the course. 
 
-browser is gonna be doing. It was using this protocol. So HTTP/1.0 from 1991 to
-
-1995. During this time frame the specifications really grew rapidly.
-
-There's a lot of interest in it and a lot of evolving. New software in this
-
-timeframe came out known as the web browser. So a very interesting time in
-
-history as far as technology goes. The standards for HTTP were developed by
-
-IETF - Internet Engineering Task Force and also W3C - World Wide Web Consortium.
-
-So these are the two bodies that really helped develop the standards that we
-
-still use today. So here in history this is HTTP/1.0. Again, we're using Telnet as an
-
-example here, going out connecting to a website, issuing a request there. So this
-
-is a request and then a response that is being received there. Again, this is using
-
-Telnet. This is the exact same thing that things like web browsers
-
-are doing underneath the covers that we don't see every day. Now in 1997, that is
-
-when HTTP/1 was released or 1.1 I should say and this solved a lot of ambiguities
-
-from earlier versions so it added support for keep alive connections,
-
-chunked encoding transfers, byte-range request, and request pipelining so this
-
-is a very critical release. And then again, we also had another release of
-
-this in 1999 and this release was actually still in use today. So, there's
-
-been some evolution to this so we had in 1999 release and then RFC 7230 in 2014
-
-and all this technology is still in use today and it's used by modern web
-
-browsers and components. So in 1.1 we added in a character encoding ,character
-
-set and cookies. So we can see here this is an example of where we are doing
-
-encoding and getting a cookie back down at the bottom of the screen. And again
-
-here is a example of encoding of the actual response and just snippets of the
-
-response. So you can see there this is actually what's going across the wire
-
-in the HTTP protocol. Now in 2015, HTTP/2.0 came out. This is gonna be
-
-supported by most servers and browsers by the end of 2015. As of 2017, only 13%
-
-of the top 10 million sites supported HTTP 2.0. This does have a high degree of
-
-compatibility with HTTP 1.1 and the primary features of this is this was
-
-more on transport performance. It improves page load speed by lower
-
-latency, higher throughput. The differences between the two for us as
-
-developers and developing APIs using this protocol are largely transparent. So the
-
-biggest takeaways for that when we jump to 2.0 the usage is gonna be the same
-
-for us so we're not changing anything how we're doing. It's at a large degree
-
-of compatibility there, but it's more of a lower
-
-a wire. So, you get a lot more performance out of it through lower latency and
-
-higher throughput. So that's main takeaway. We are seeing more and more
-
-of this being adopted with the HTTP 2.0 capabilities. But primary takeaway for
-
-you going through this course, functionally in designing APIs using
-
-the HTTP protocol, there's really no difference. It's a completely transparent
-
-to everything that we're gonna be talking about in the course. So, whether
-
-we're on 1.x or 2.0 completely does not matter for this. But I wanted to
-
-address it here in the course to specify in case you hear about it, if
-
-there's a functional changes for us to worry about there, there are not.
+So, whether we're on 1.x or 2.0 completely does not matter for this. But I wanted to address it here in the course to specify in case you hear about it, if there's a functional changes for us to worry about there, there are not.
 
 <hr>
 
-En este video, veremos más de cerca el protocolo HTTP. Ahora uno
+<img width="1134" alt="image" src="https://user-images.githubusercontent.com/23094588/197403951-5c84887d-c549-4b07-9555-e3e91cc5fe18.png">
 
-advertencia aquí, si ya se siente cómodo con HTTP o algún fondo que
+En este video, veremos más de cerca el **protocolo HTTP**. 
 
-vamos a usar sobre cómo se forma la API, continúe y salte
+Ahora una advertencia aquí, si ya se siente cómodo con **HTTP** o algún background que vamos a usar sobre cómo se forma la **API**, continúe y salte este video si te sientes completamente cómodo con **HTTP**. Pero si no, por favor continúa viendolo. 
 
-este video si te sientes completamente cómodo con HTTP. Pero si no, por favor
+<img width="1002" alt="image" src="https://user-images.githubusercontent.com/23094588/197404075-032fe8a3-1435-4440-8941-74a7fb8645d2.png">
 
-continúa en. Voy a entrar en algunos detalles sobre HTTP y su historia y
+Voy a entrar en algunos detalles sobre **HTTP** y su historia y como se usa entonces, un poco de historia sobre el desarrollo de **HTTP**.
 
-como se usa Entonces, un poco de historia sobre el desarrollo de HTTP. Originalmente se inició
+Originalmente se inició por ***Tim Berners-Lee*** del CERN en 1989. 
 
-por Tim Berners-Lee del CERN en 1989. HTTP/0.9 es la propuesta original que
+HTTP/0.9 es la propuesta original que apagó y originalmente comenzó como un protocolo compatible con Telnet. 
 
-apagó y originalmente comenzó como un protocolo compatible con Telnet. Puedes
+<img width="997" alt="image" src="https://user-images.githubusercontent.com/23094588/197404192-e5245e03-975d-404e-9cc8-c1a15d8620c3.png">
 
-vea aquí este es un comando de Telnet. Ya no vemos tanto uso de Telnet.
+Puedes ver aquí un comando de Telnet. Ya no vemos tanto uso de Telnet. Cuando comencé con las computadoras, hace un poco, vimos el uso de Telnet bastante en realidad. De hecho, puede usar Telnet en el puerto 80 en un servidor y emitir comandos HTTP y obtener solicitudes o hacer solicitudes y respuestas, así que en realidad es genial, tan totalmente legítimo para esto. Si usted encontrar un cliente Telnet, puede hacerlo usted mismo y emitir estos comandos manualmente porque debajo de las cubiertas eso es efectivamente lo que su web navegador va a estar haciendo. 
 
-Cuando comencé con las computadoras, hace un poco, vimos el uso de Telnet
+<img width="1012" alt="image" src="https://user-images.githubusercontent.com/23094588/197404326-6500ac3c-2f2b-4282-ba0c-60693d8d311a.png">
 
-bastante en realidad. De hecho, puede usar Telnet en el puerto 80 en un
+Estaba usando este protocolo. **HTTP/1.0** desde 1991 hasta 1995. Durante este período de tiempo, las especificaciones realmente crecieron  rápidamente.
 
-servidor y emitir comandos HTTP y obtener solicitudes o hacer solicitudes y
+Hay mucho interés en él y mucha evolución. Nuevo software en este marco de tiempo salió conocido como el navegador web. Así que un momento muy interesante en historia en lo que respecta a la tecnología. 
 
-respuestas Así que en realidad es genial, tan totalmente legítimo para esto. Si usted
+Los estándares para HTTP fueron desarrollados por **IETF - Grupo de Trabajo de Ingeniería de Internet** y también **W3C - Consorcio World Wide Web**.
 
-encontrar un cliente Telnet, puede hacerlo usted mismo y emitir estos
+Estos son los dos organismos que realmente ayudaron a desarrollar los estándares que todavía uso hoy. Así que aquí en la historia esto es HTTP/1.0. 
 
-comandos manualmente porque debajo de las cubiertas eso es efectivamente lo que su web
+<img width="1026" alt="image" src="https://user-images.githubusercontent.com/23094588/197404449-47491b1f-88c6-43ea-b1da-1bc1984057ba.png">
 
-navegador va a estar haciendo. Estaba usando este protocolo. HTTP/1.0 desde 1991 hasta
+Nuevamente, estamos usando Telnet como un ejemplo aquí, salir conectándose a un sitio web, emitiendo una solicitud allí. Así que esto es una solicitud y luego una respuesta que se está recibiendo allí. De nuevo, esto es usar Telnet. Esto es exactamente lo mismo que cosas como los navegadores web están haciendo debajo de las sábanas que no vemos todos los días. 
 
-1995. Durante este período de tiempo, las especificaciones realmente crecieron rápidamente.
+<img width="1020" alt="image" src="https://user-images.githubusercontent.com/23094588/197404518-f4070152-7916-407b-9a7b-85d935be13ab.png">
 
-Hay mucho interés en él y mucha evolución. Nuevo software en este
+Ahora en 1997, eso es cuando se lanzó **HTTP/1 o 1.1** debería decir y esto resolvió muchas ambigüedades de versiones anteriores, por lo que agregó soporte para mantener conexiones vivas, transferencias de codificación fragmentadas, solicitud de rango de bytes y canalización de solicitud para que esto es una versión muy crítica. 
 
-marco de tiempo salió conocido como el navegador web. Así que un momento muy interesante en
+<img width="1009" alt="image" src="https://user-images.githubusercontent.com/23094588/197404650-2cc89244-d8a9-471e-b1df-8c97da2a34e4.png">
 
-historia en lo que respecta a la tecnología. Los estándares para HTTP fueron desarrollados por
+Y, de nuevo, también tuvimos otro lanzamiento de esto en 1999 y esta versión todavía estaba en uso hoy. 
 
-IETF - Grupo de Trabajo de Ingeniería de Internet y también W3C - Consorcio World Wide Web.
+Entonces, hay ha habido alguna evolución en esto, así que tuvimos el lanzamiento de 1999 y luego el RFC 7230 en 2014 y toda esta tecnología todavía está en uso hoy en día y es utilizada por la web moderna navegadores y componentes. 
 
-Estos son los dos organismos que realmente ayudaron a desarrollar los estándares que
+<img width="1004" alt="image" src="https://user-images.githubusercontent.com/23094588/197404730-53b52e3c-3460-4e04-8498-a61975e22a4b.png">
 
-todavía uso hoy. Así que aquí en la historia esto es HTTP/1.0. Nuevamente, estamos usando Telnet como un
+Así que en 1.1 agregamos encoding, charset y cookies. Así que podemos ver aquí que este es un ejemplo de lo que estamos haciendo codificación y obtener una cookie de nuevo en la parte inferior de la pantalla. 
 
-ejemplo aquí, salir conectándose a un sitio web, emitiendo una solicitud allí. Así que esto
+<img width="1009" alt="image" src="https://user-images.githubusercontent.com/23094588/197404853-0cb318b8-3634-4aba-9e72-2d17402af05e.png">
 
-es una solicitud y luego una respuesta que se está recibiendo allí. De nuevo, esto es usar
+Y otra vez aquí hay un ejemplo de codificación de la respuesta real y solo fragmentos de la respuesta.  Entonces pueden ver que esto es realmente lo que está pasando a través del cable en el protocolo HTTP. 
 
-Telnet. Esto es exactamente lo mismo que cosas como los navegadores web
+<img width="1008" alt="image" src="https://user-images.githubusercontent.com/23094588/197404917-0f2c7514-94fe-4dfa-a39a-ced974df96e9.png">
 
-están haciendo debajo de las sábanas que no vemos todos los días. Ahora en 1997, eso es
+Ahora, en 2015, salió HTTP/2.0. esto va a ser compatibles con la mayoría de los servidores y navegadores a fines de 2015. A partir de 2017, solo el 13 % de los 10 millones de sitios principales compatibles con HTTP 2.0. 
 
-cuando se lanzó HTTP/1 o 1.1 debería decir y esto resolvió muchas ambigüedades
+<img width="1021" alt="image" src="https://user-images.githubusercontent.com/23094588/197405028-933203d6-b0e4-43b2-97fd-9047b6a1b4bc.png">
 
-de versiones anteriores, por lo que agregó soporte para mantener conexiones vivas,
+Esto tiene un alto grado de compatibilidad con HTTP 1.1 y las características principales de esto es que esto fue más sobre el rendimiento del transporte. Mejora la velocidad de carga de la página en menor latencia, mayor rendimiento. Las diferencias entre los dos para nosotros como los desarrolladores y las API en desarrollo que utilizan este protocolo son en gran medida transparentes. 
 
-transferencias de codificación fragmentadas, solicitud de rango de bytes y canalización de solicitud para que esto
+Entonces, las principales conclusiones de que cuando saltemos a 2.0, el uso será el mismo para nosotros para que no cambiemos nada de lo que estamos haciendo, es en gran medida de compatibilidad allí, pero es más un nivel más bajo un alambre. Por lo tanto, obtiene mucho más rendimiento a través de una latencia más baja y mayor rendimiento. Así que esa es la comida para llevar principal. Estamos viendo más y más de que esto se adopte con las capacidades de HTTP 2.0. Pero la comida para llevar principal para está pasando por este curso, funcionalmente en el diseño de API usando el protocolo HTTP, realmente no hay diferencia. es completamente transparente a todo lo que vamos a estar hablando en el curso. 
 
-es una versión muy crítica. Y, de nuevo, también tuvimos otro lanzamiento de
+Entonces, si estamos en 1.x o 2.0 completamente no importa para esto, pero quería abordarlo aquí en el curso para especificar en caso de que se entere, si hay cambios funcionales de los que debemos preocuparnos, no los hay.
 
-esto en 1999 y esta versión todavía estaba en uso hoy. Entonces, hay
-
-ha habido alguna evolución en esto, así que tuvimos el lanzamiento de 1999 y luego el RFC 7230 en 2014
-
-y toda esta tecnología todavía está en uso hoy en día y es utilizada por la web moderna
-
-navegadores y componentes. Así que en 1.1 agregamos una codificación de caracteres, carácter
-
-juego y galletas. Así que podemos ver aquí que este es un ejemplo de lo que estamos haciendo
-
-codificación y obtener una cookie de nuevo en la parte inferior de la pantalla. Y otra vez
-
-aquí hay un ejemplo de codificación de la respuesta real y solo fragmentos de la
-
-respuesta. Entonces pueden ver que esto es realmente lo que está pasando a través del cable.
-
-en el protocolo HTTP. Ahora, en 2015, salió HTTP/2.0. esto va a ser
-
-compatibles con la mayoría de los servidores y navegadores a fines de 2015. A partir de 2017, solo el 13 %
-
-de los 10 millones de sitios principales compatibles con HTTP 2.0. Esto tiene un alto grado de
-
-compatibilidad con HTTP 1.1 y las características principales de esto es que esto fue
-
-más sobre el rendimiento del transporte. Mejora la velocidad de carga de la página en menor
-
-latencia, mayor rendimiento. Las diferencias entre los dos para nosotros como
-
-los desarrolladores y las API en desarrollo que utilizan este protocolo son en gran medida transparentes. Entonces el
-
-Las principales conclusiones de que cuando saltemos a 2.0, el uso será el mismo
-
-para nosotros para que no cambiemos nada de lo que estamos haciendo. es en gran medida
-
-de compatibilidad allí, pero es más un nivel más bajo
-
-un alambre. Por lo tanto, obtiene mucho más rendimiento a través de una latencia más baja y
-
-mayor rendimiento. Así que esa es la comida para llevar principal. Estamos viendo más y más
-
-de que esto se adopte con las capacidades de HTTP 2.0. Pero la comida para llevar principal para
-
-está pasando por este curso, funcionalmente en el diseño de API usando
-
-el protocolo HTTP, realmente no hay diferencia. es completamente transparente
-
-a todo lo que vamos a estar hablando en el curso. Entonces, si
-
-estamos en 1.xo 2.0 completamente no importa para esto. pero quería
-
-abordarlo aquí en el curso para especificar en caso de que se entere, si
-
-hay cambios funcionales de los que debemos preocuparnos, no los hay.
 ##  HTTP Request Methods 06:11
 ##  Why use OpenAPI? 07:06
 ##  Pet Clinic on Swagger Editor 06:09
