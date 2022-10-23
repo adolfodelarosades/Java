@@ -677,26 +677,47 @@ URL: https://editor-next.swagger.io/
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197416547-2af60012-8e90-4b1c-9792-9dfa876add4e.png">
 
+Vamos a basarnos en la siguiente pantalla.
 
-Entonces, en la pantalla aquí, tengo Swagger Editor abierto. Así que swagger es el precursor de OpenAPI. La primera edición de lo que se convirtió en OpenAPI se conoció como Swagger. Finalmente, una empresa llamada **SmartBear** los compró o los adquirió de alguna manera. Olvidé exactamente cómo. Y luego a la versión 2.0 le cambiaron el nombre a OpenAPI y ahora estamos en la versión 3.0 de OpenAPI.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197416506-9058ad5d-6ac5-41a9-8b4e-5a919601cc8c.png">
 
-Entonces, la gente de SmartBear tiene esta herramienta en línea y en el lado izquierdo de la pantalla está la especificación OpenAPI en YAML y luego en el lado derecho de la pantalla está la interfaz de usuario de Swagger.
+Entonces, en la pantalla aquí, tengo **Swagger Editor** abierto. Así que **Swagger** es el precursor de **OpenAPI**. La primera edición de lo que se convirtió en **OpenAPI** se conoció como **Swagger**. Finalmente, una empresa llamada **SmartBear** los compró o los adquirió de alguna manera. Olvidé exactamente cómo. Y luego a la versión 2.0 le cambiaron el nombre a **OpenAPI** y ahora estamos en **la versión 3.0 de OpenAPI**.
 
-Este es un programa de interfaz de usuario que está analizando la especificación OpenAPI, le proporciona un sitio web funcional de eso. Así que vamos a centrarnos en el lado izquierdo de la pantalla. Aquí arriba en la pantalla, esto es YAML. Esta es una especificación formal y vamos a analizarla con mucho más detalle. Solo quiero mojarnos los pies en este video de lo que está pasando aquí.
+Entonces, la gente de **SmartBear** tiene esta herramienta en línea y en el lado izquierdo de la pantalla está **la especificación OpenAPI** en **YAML**
 
-Voy a resaltar las líneas 2 a 6 y este es un objeto. Entonces, la especificación OpenAPI, las diferentes secciones se consideran objetos. Así que la línea 2, ese es el comienzo del objeto de información. Puede ver que el objeto de información tiene una propiedad de versión, una propiedad de título, una propiedad de licencia.
+<img width="754" alt="image" src="https://user-images.githubusercontent.com/23094588/197416890-2356be84-b601-47ea-831d-d0d286a29350.png">
 
-Estas son todas las diferentes propiedades que tenemos disponibles para eso. Y no te preocupes demasiado ahora. Vamos a revisar cada uno de estos objetos con mucho más detalle. Solo estoy pasando por una descripción general de alto nivel de esto. Eso es un objeto de información. Y aquí, esto es muy importante. Toda esta sección aquí en la línea 10, este es un objeto de operación. Entonces, aquí en la línea 10, decimos para mascotas. Entonces, nuevamente, estamos viendo el ejemplo de la tienda de mascotas, un ejemplo clásico de una API REST. En la línea 10 decimos que una acción de obtener contra mascotas nos dará una lista de todas las mascotas en el sistema. Puedo ver aquí que este es un objeto de operación.
+y luego en el lado derecho de la pantalla está la interfaz de usuario de Swagger.
 
-Aquí tenemos un parámetro que especifica un parámetro de consulta que podemos proporcionar. Y luego aquí abajo, pueden ver que esto es una respuesta. Entonces, cuando hagamos un get, obtendremos una respuesta de 200, y esa es una descripción. Veremos un enlace en el encabezado y luego también podemos esperar que este contenido se devuelva. Así que permítanme desplazarme un poco hacia arriba aquí.
+<img width="766" alt="image" src="https://user-images.githubusercontent.com/23094588/197416935-d780187e-f6fc-4aef-a36b-079c4a6f86c3.png">
 
-Llego a la línea 56. Nuevamente, en la línea 56, ahora estamos especificando una URL con un valor de ID que está en la ruta. Podemos ver aquí petID, que es un parámetro de ruta. Y ahora podemos ver que la descripción del parámetro dice ruta. Una vez más, vamos a ver cada uno de estos con mucha más profundidad. Entonces podemos ver cómo está estructurado este documento. Estas son varias operaciones que tenemos. Y luego aquí abajo, podemos ver los componentes que componen esto. Entonces, echemos un vistazo a la interfaz de usuario de Swagger que se genera a partir de esto. Puede ver aquí que se trata de obtener todas las mascotas. De hecho, puedo ampliar eso, creo, haciendo clic en él y podemos ver que esta información aquí enumera todas las mascotas. Puede ver aquí donde dice enumerar todas las mascotas, ese es el resumen que viene de aquí.
+Este es un programa de interfaz de usuario UI que está analizando la especificación **OpenAPI**, le proporciona un sitio web funcional. Así que vamos a centrarnos en el lado izquierdo de la pantalla. 
+
+<img width="754" alt="image" src="https://user-images.githubusercontent.com/23094588/197416890-2356be84-b601-47ea-831d-d0d286a29350.png">
+
+Aquí arriba en la pantalla, esto es **YAML**. Esta es una especificación formal y vamos a analizarla con mucho más detalle. Solo quiero mojarnos los pies en este video de lo que está pasando aquí.
+
+<img width="739" alt="image" src="https://user-images.githubusercontent.com/23094588/197417222-959e2df5-6517-459a-80ee-4f55cac45dfc.png">
+
+Tenemos la sección **`info`** este es un objeto. En la especificación OpenAPI, las diferentes secciones se consideran objetos. Así que en la línea 2 comienzo del objeto **`info`**. Puede ver que el objeto de información tiene una propiedad de versión, una propiedad de título, una propiedad de licencia, etc. Estas son todas las diferentes propiedades que tenemos disponibles para eso. Y no te preocupes demasiado ahora. Vamos a revisar cada uno de estos objetos con mucho más detalle. Solo estoy pasando por una descripción general de alto nivel de esto. 
+
+<img width="1511" alt="image" src="https://user-images.githubusercontent.com/23094588/197417458-b88ce89d-706e-4c64-8ed3-5d8806105982.png">
+
+Toda esta sección en la imagen es muy importante, este es un objeto de operación. En la línea 41, tenemos **`\pet`** para mascotas. Entonces, nuevamente, estamos viendo el ejemplo de la tienda de mascotas, un ejemplo clásico de una API REST. En la línea 41 decimos que una acción de obtener mascotas nos dará una lista de todas las mascotas en el sistema. Puedo ver aquí que este es un objeto de operación.
+
+Aquí tenemos un parámetro que especifica un parámetro de consulta que podemos proporcionar. Y luego aquí abajo, pueden ver que esto es una respuesta. Entonces, cuando hagamos un get, obtendremos una respuesta 200, y esa es una descripción. Veremos un enlace en el encabezado y luego también podemos esperar que este contenido se devuelva. Así que permítanme desplazarme un poco hacia arriba aquí.
+
+Llego a la línea 56. Nuevamente, en la línea 56, ahora estamos especificando una URL con un valor de ID que está en la ruta. Podemos ver aquí petID, que es un parámetro de ruta. Y ahora podemos ver que la descripción del parámetro dice ruta. Una vez más, vamos a ver cada uno de estos con mucha más profundidad. Entonces podemos ver cómo está estructurado este documento. Estas son varias operaciones que tenemos. Y luego aquí abajo, podemos ver los componentes que componen esto. 
+
+<img width="752" alt="image" src="https://user-images.githubusercontent.com/23094588/197417817-cab05902-26e7-47b3-a741-fcb3b693e6ef.png">
+
+Entonces, echemos un vistazo a la interfaz de usuario de **Swagger** que se genera a partir de esto. Puede ver aquí que se trata de obtener todas las mascotas. De hecho, puedo ampliar eso, creo, haciendo clic en él y podemos ver que esta información aquí enumera todas las mascotas. Puede ver aquí donde dice enumerar todas las mascotas, ese es el resumen que viene de aquí.
 
 Así es como se genera esta documentación. Veamos aquí. Esto realmente te permite probarlo.
 
-Así que voy a hacer clic en Pruébalo aquí. Ahora voy a decir Ejecutar.
+Así que voy a hacer clic en Pruébalo aquí. Ahora voy a decir Ejecutar y veamos.
 
-Y veamos.
+<img width="732" alt="image" src="https://user-images.githubusercontent.com/23094588/197417886-936f4869-f0e4-4482-ade8-041510fd558e.png">
 
 Lo probé y puedes ver aquí abajo que estamos recibiendo un error de tipo Failed to fetch. Entonces, lo que está sucediendo aquí es disparar este comando y, lamentablemente, parece que este Swagger.io v1/pets no está activo en este momento. Así que probé esto en el pasado, y en realidad puedes invocar la API.
 
@@ -704,9 +725,79 @@ En realidad es bastante agradable. Así que aclaro si el servidor back-end aquí
 
 Hay algo de mantenimiento. Pero esta es una buena característica porque lo que puede hacer aquí es especificar más de un servidor y ejecutar la API. Entonces, nuevamente, lo que está sucediendo aquí, la conclusión clave que quiero que tenga es que tiene en el lado izquierdo de la pantalla, la especificación OpenAPI y en el lado derecho de la pantalla está Swagger UI que está usando esa especificación. No solo nos brinda una apariencia realmente agradable para el sitio web donde podemos ver las diversas operaciones que podemos utilizar, sino que también podemos hacer clic en Pruébelo. Y si lamentablemente ese servidor no responde. Pero si lo fuera, todo esto es usando Javascript y la reflexión contra la API, la especificación de la API que podríamos utilizar.
 
-Muy buena funcionalidad. Lamentablemente, no funciona para este ejemplo, pero encontraremos un ejemplo para utilizarlo en el curso. Nuevamente, no se preocupe demasiado, solo quería darle una descripción general de muy alto nivel. En el lado izquierdo de la pantalla, esta es la especificación OpenAPI y le muestra una OpenAPI real para el ejemplo de la tienda de mascotas. y cada uno de estas operaciones, los objetos de esquema que estamos
-vamos a pasar, profundizaremos en cada uno y explicaremos las cosas con mucho más detalle. Así que muchos más detalles por venir. Esta es solo una descripción general de alto nivel. Quería darle un ejemplo usando la tienda de mascotas Swagger para ver cómo se ve una especificación OpenAPI real, para que pueda ver eso en el lado derecho. E incluiré un enlace a la especificación OpenAPI en los recursos del curso antes de que continúe y examine eso con más profundidad.
+Muy buena funcionalidad. Lamentablemente, no funciona para este ejemplo, pero encontraremos un ejemplo para utilizarlo en el curso. Nuevamente, no se preocupe demasiado, solo quería darle una descripción general de muy alto nivel. En el lado izquierdo de la pantalla, esta es la especificación OpenAPI y le muestra una OpenAPI real para el ejemplo de la tienda de mascotas. y cada uno de estas operaciones, los objetos de esquema que estamos vamos a pasar, profundizaremos en cada uno y explicaremos las cosas con mucho más detalle. Así que muchos más detalles por venir. Esta es solo una descripción general de alto nivel. Quería darle un ejemplo usando la tienda de mascotas Swagger para ver cómo se ve una especificación OpenAPI real, para que pueda ver eso en el lado derecho. E incluiré un enlace a la especificación OpenAPI en los recursos del curso antes de que continúe y examine eso con más profundidad.
 
 ##  OpenAPI 2.0 vs 3.0 03:12
+
+Here on the screen what I have is a comparison of OpenAPI 2.0 vs 3.0.
+
+So these are the top level objects that are defined in the specification.
+
+You can see that there is a lot of similarity but also some significant differences.
+
+The primary thing that they did transitioning from 2.0 to 3.0 was trying to make it the components more
+
+reusable and easier to define standardize components so they really did a nice job with this redefinition.
+
+I think from going from 1.0 swagger to OpenAPI 2.0, they learned quite a bit because of just how much
+
+the community accepted it and then basically they were able to reflect upon that and improve on it so
+
+the OpenAPI 3.0 is definitely going to be the way forward as we move forward in the industry with
+
+OpenAPI.
+
+So the rest of the course we will be focused on 3.0 because I expect the people using OpenAPI are gonna
+
+quickly move away from OpenAPI 2.0 so number of companies are already doing this that is underway.
+
+But I do want forewarn you if you're in the industry and at companies you may see 2.0 out there but
+
+I expect companies that will be upgrading to 3.0 quite quickly.
+
+So coming up in the course what we are gonna start doing is we will be looking at the OpenAPI specification
+
+and each one of these boxes here.
+
+This corresponds to an object an object being defined in the OpenAPI schema.
+
+So we looked briefly at the information object and in the previous video we will be looking at each
+
+section here.
+
+Not only the information server security want to talk about on paths.
+
+So as far as pass as to how the actual operations occur.
+
+So a lot of information to go forward with and what we will do is take a closer look at each one of
+
+these major components and the components that make up those.
+
+So there's a number of objects underpass that we have to work with so going forward in the course we
+
+will definitely be getting into this and getting a lot more hands on experience utilizing OpenAPI 3.0.
+
+<hr>
+
+Aquí en la imagen lo que tengo es una comparación de OpenAPI 2.0 vs 3.0.
+
+<img width="1371" alt="image" src="https://user-images.githubusercontent.com/23094588/197418126-8a36f9e2-f68b-4494-8d97-96a50a2c9b7d.png">
+
+Estos son los objetos de nivel superior que se definen en la especificación. Puedes ver que hay mucha similitud pero también algunas diferencias significativas.
+
+Lo principal que hicieron en la transición de 2.0 a 3.0 fue intentar que los componentes fueran más componentes estandarizados reutilizables y más fáciles de definir, por lo que realmente hicieron un buen trabajo con esta redefinición.
+
+Creo que al pasar de 1.0 swagger a OpenAPI 2.0, aprendieron bastante debido a cuánto la comunidad lo aceptó y luego, básicamente, pudieron reflexionar sobre eso y mejorarlo para que **OpenAPI 3.0** definitivamente será el camino a seguir a medida que avanzamos en la industria con API abierta.
+
+Entonces, el resto del curso nos enfocaremos en 3.0 porque espero que las personas que usan OpenAPI van a alejarse rápidamente de OpenAPI 2.0, por lo que varias empresas ya están haciendo esto que está en marcha.
+
+Pero quiero advertirle si está en la industria y en las empresas, puede ver 2.0 por ahí, pero espero que las empresas se actualicen a 3.0 con bastante rapidez.
+
+<img width="702" alt="image" src="https://user-images.githubusercontent.com/23094588/197418389-7e2eed3b-cb8e-4166-a2d5-e38f877abf11.png">
+
+Entonces, en el curso, lo que vamos a comenzar a hacer es ver la especificación OpenAPI y cada una de estas cajas aquí. Esto corresponde a un objeto que se define en el esquema de OpenAPI. Así que vimos brevemente el objeto de información **info** y en la sección anterior veremos cada sección aquí. No solo la seguridad del servidor de información quiere hablar sobre las rutas. En cuanto a cómo se producen las operaciones reales. Así que tenemos mucha información para seguir adelante y lo que haremos es echar un vistazo más de cerca a cada uno de estos componentes principales y los componentes que los componen.
+
+Así que hay una serie de objetos subterráneos con los que tenemos que trabajar, así que en el futuro en el curso definitivamente se involucrará en esto y obtendrá mucha más experiencia práctica utilizando OpenAPI 3.0.
+
 ##  YAML Crash Course 07:28
 ##  OpenAPI Specification Quiz 10 preguntas
