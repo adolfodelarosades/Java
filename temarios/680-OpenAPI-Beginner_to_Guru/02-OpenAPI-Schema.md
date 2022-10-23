@@ -795,9 +795,290 @@ Pero quiero advertirle si está en la industria y en las empresas, puede ver 2.0
 
 <img width="702" alt="image" src="https://user-images.githubusercontent.com/23094588/197418389-7e2eed3b-cb8e-4166-a2d5-e38f877abf11.png">
 
-Entonces, en el curso, lo que vamos a comenzar a hacer es ver la especificación OpenAPI y cada una de estas cajas aquí. Esto corresponde a un objeto que se define en el esquema de OpenAPI. Así que vimos brevemente el objeto de información **info** y en la sección anterior veremos cada sección aquí. No solo la seguridad del servidor de información quiere hablar sobre las rutas. En cuanto a cómo se producen las operaciones reales. Así que tenemos mucha información para seguir adelante y lo que haremos es echar un vistazo más de cerca a cada uno de estos componentes principales y los componentes que los componen.
+Entonces, en el curso, lo que vamos a comenzar a hacer es ver la especificación OpenAPI y cada una de estas cajas aquí. Esto corresponde a un objeto que se define en el esquema de OpenAPI. Así que vimos brevemente el objeto de información **info** y en la sección anterior veremos cada sección aquí. No solo la de la del servidor **servers**, la de seguridad **security**, quiero hablar sobre las rutas **paths**. En cuanto a cómo se producen las operaciones reales. Así que tenemos mucha información para seguir adelante y lo que haremos es echar un vistazo más de cerca a cada uno de estos componentes principales y los componentes que los componen **components**.
 
 Así que hay una serie de objetos subterráneos con los que tenemos que trabajar, así que en el futuro en el curso definitivamente se involucrará en esto y obtendrá mucha más experiencia práctica utilizando OpenAPI 3.0.
 
 ##  YAML Crash Course 07:28
+
+In this video we are going to go through a little crash course in YAML.
+
+Now if you're already comfortable writing the YAML go ahead skip over this video.
+
+I'm just gonna give you a very brief overview of how to utilize YAML.
+
+This is the language that we are going to be using to define our OpenAPI specifications so you can
+
+see here on the screen I'll put this link in the course resources so you can go to this website and
+
+I just wanna highlight a couple of things and we'll actually go ahead and then write some.
+
+So here YAML is basically just a simple text file.
+
+So use any text editor that you're comfortable with.
+
+Do not use something like Microsoft Word to edit it.
+
+You wanna use a true text editor such as TextWrangler, Notepad, VI.
+
+There's a number of different text editor such can use or 90 e,
+
+these are all valid ways to go ahead and edit.
+
+YAML you do not wanna be using a word processor like word that will add an additional characters
+
+that will cause you headaches down the road.
+
+So you can see here the three dashes that is a document start that is actually optional you do not need
+
+to add that in. Comments,
+
+you can see the pound sign or hashtag
+
+some people would like that is going to indicate the everything after that is going to be a comment and
+
+let you scroll up here just a little bit.
+
+Here is the biggest thing of YAML is you're gonna have a key colon and then a value so that the value
+
+can be a string.
+
+You do not need to quote the strings.
+
+It can be a a number ,scientific_notation.
+
+I've never need to use that within YAML but that is an option.
+
+And then here boolean that's true or false.
+
+You can actually have a null_value or you can even have keys with spaces.
+
+There's a lot of flexibility inside of YAML and let's see here and go down here a little bit.
+
+So you have a literal_block.
+
+This is a very important.
+
+You'll be seeing this in OpenAPI because you'll start off with that pipe character and you'll have
+
+multiple lines of text so that is how you do that.
+
+That's a very handy way.
+
+And then let's scroll up here.
+
+This here nesting this is a very important thing and you'll definitely be seeing this inside of
+
+OpenAPI.
+
+So here you are going to have a_nested_map.
+
+So here you have key: value, another_key
+
+and then another_nested_map.
+
+So this is effectively building an object and you are gonna be seeing a lot of this inside of
+
+OpenAPI inside the specification so you'll see a lot of syntax are very much like this.
+
+The other key thing that we are going to see is what this author's calling sequences.
+
+I think of them as a list of arrays.
+
+So here you have a property so that there's a_sequence and then dash an item.
+
+So it's very very important stuff here.
+
+And this is really all the primary features that you are gonna be using in terms of OpenAPI.
+
+These are the primary things. I will leave a link here.
+
+I'm gonna jump over and just create a YAML document on the fly here and show you how easy it is
+
+to write YAML syntax so we can jump over to IntelliJ and come up here and I'm just
+
+gonna come in here and this is IntelliJ editor and let's see we're going resources and up and say
+
+New File and I'm not gonna say this but the file extension you wanna use is yaml or yml
+
+so you can either do I prefer yaml. You can also do yml so that that is a convention that is widely
+
+accepted either or that is up to you.
+
+I'm gonna say OK there.
+
+So now I'm just gonna say This is a comment. Now I can come up with somekey: value so that's just
+
+a key and a value.
+
+Copy that.
+
+Call it somekey you can see intelligent it's smart enough to say that is an error because that key value
+
+does need to be unique to the document and I'll say
+
+so you can see here.
+
+Start off with comment on line one.
+
+And then this is an inline comment so after that hashtag or pound sign everything.
+
+After that it's going to be a comment.
+
+Now let's call it myObject.
+
+Now I can say I'm gonna say a stringProperty and then I can also do a numberProperty.
+
+So that's gonna be 123.
+
+And then I can also do a listProperty like I'm calling this a listProperty and now I'm just gonna
+
+go like this val 1, val 2, val 3.
+
+So this is just creating a essentially an object. You can see that this is actually a map. So this map has of
+
+different keys to it.
+
+And then finally this listProperty is just a list of three values.. space correct.
+
+And we could even do a nested map here of myObj2 and I can say this
+
+So you can see YAML does give you a lot of versatility primarily what you are gonna be doing is setting
+
+up objects that are gonna be in line with the OpenAPI schema and we will be going through that and
+
+a lot more detail coming up in the course but that's schema is gonna describe objects like this.
+
+And this is how the entire OpenAPI document where your specification is going to be developed by having a
+
+complex thing or complex key like this.
+
+This document can now be passed by a computer and read into that.
+
+So coming up in the course this was just kind of freeform.
+
+We will be going through looking at the OpenAPI schema specification specifically and applying that
+
+to YAML. So the biggest tricks to YAML remembering that you do need unique keys and then your objects
+
+minimum of two spaces.
+
+I personally prefer four spaces for the indentations but that is personal preference of mine.
+
+I think it's a little more readable in two spaces.
+
+And the hardest thing is one of the biggest problems beginners are gonna run into is having problems
+
+with their spacing and getting things off like that just does cosmetics.
+
+When you have spacing that is inconsistent and that can cause some very odd issues and when you're trying
+
+to validate your OpenAPI specification it's very easy to make a error in spacing.
+
+<hr>
+
+En este video, vamos a realizar un pequeño [curso intensivo en YAML](https://learnxinyminutes.com/docs/yaml/).
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197418892-82fcfe0c-5387-4f2b-88b0-0a0adfc19f09.png">
+
+Ahora, si ya te sientes cómodo escribiendo el **YAML**, salta este video.
+
+Solo le daré una breve descripción general de cómo utilizar **YAML**. Este es el lenguaje que vamos a utilizar para definir nuestras  especificaciones de OpenAPI para que pueda ver aquí en la pantalla y solo quiero resaltar un par de cosas y seguiremos adelante y luego escribiremos algunas.
+
+<img width="985" alt="image" src="https://user-images.githubusercontent.com/23094588/197419044-cb17e58b-a3c0-45a7-b9ee-4486a7177cb4.png">
+
+Así que aquí YAML es básicamente un simple archivo de texto. Así que use cualquier editor de texto con el que se sienta cómodo. No utilice algo como Microsoft Word para editarlo. Quiere usar un verdadero editor de texto como TextWrangler, Notepad, VI. Hay varios editores de texto diferentes que pueden usar, todas estas son formas válidas de seguir adelante y editar. **YAML**, no quieres usar un procesador de textos como Word que agregará caracteres adicionales eso te causará dolores de cabeza en el futuro.
+
+Entonces puede ver aquí los tres guiones que son un inicio de documento que en realidad es opcional que no necesita para agregar eso. Comentarios, puedes ver el signo de libra o el hashtag a algunas personas les gustaría que eso indique que todo lo que sigue será un comentario y déjate desplazarte hasta aquí solo un poco.
+
+<img width="846" alt="image" src="https://user-images.githubusercontent.com/23094588/197419232-5cdddd72-898e-4afd-a7fc-5794fb0fdaad.png">
+
+Lo más importante de YAML es que tendrá una ***clave dos puntos y luego un valor*** para que el valor puede ser una *cadena*. No es necesario citar las cadenas. Puede ser un *número*, *notación científica*. Nunca he necesitado usar eso dentro de **YAML**, pero esa es una opción. Y luego aquí *booleano* que es verdadero o falso. De hecho, puede tener un *valor nulo* o incluso puede tener *claves con espacios*. Hay mucha flexibilidad dentro de YAML y veamos aquí y bajemos un poco.
+
+<img width="938" alt="image" src="https://user-images.githubusercontent.com/23094588/197419382-de0347e6-9e9f-434a-a004-9af095bf4368.png">
+
+Entonces tienes un *literal_block*, esta es una muy importante. Verá esto en OpenAPI porque comenzará con ese carácter de canalización y tendrá 
+varias líneas de texto, así es como se hace eso. Esa es una forma muy práctica.
+
+Y luego vamos a desplazarnos hasta aquí.
+
+<img width="896" alt="image" src="https://user-images.githubusercontent.com/23094588/197419452-48bd539a-7d6e-4f56-8672-9271ef324d52.png">
+
+Esto aquí anidado es algo muy importante y definitivamente lo verás dentro de API abierta. Así que aquí vas a tener un_mapa_anidado. Así que aquí tienes la clave: valor, otra_clave y luego otro_mapa_anidado. Entonces, esto es efectivamente construir un objeto y verás mucho de esto dentro de OpenAPI dentro de la especificación, por lo que verá que mucha sintaxis es muy parecida a esta.
+
+La otra clave que vamos a ver es cómo llama este autor son las secuencias.
+
+<img width="722" alt="image" src="https://user-images.githubusercontent.com/23094588/197419509-d9aa4694-cfdc-4d8a-a420-1739feb57ce3.png">
+
+Pienso en ellos como una lista de matrices. Así que aquí tienes una propiedad para que haya una_secuencia y luego un elemento. Así que son cosas muy, muy importantes aquí. Y estas son realmente todas las funciones principales que utilizará en términos de OpenAPI. Estas son las cosas primarias. 
+
+
+Saltaré y simplemente crearé un documento YAML y le mostraré lo fácil que es para escribir la sintaxis YAML, vamos a IntelliJ y en el paquete  
+
+<img width="438" alt="image" src="https://user-images.githubusercontent.com/23094588/197419736-7ca393bc-2949-4148-b2ff-15a349924ec7.png">
+
+Vamos a crear un Nuevo archivo, pero la extensión de archivo que desea usar es yaml o yml así que puedes prefiero yaml. También puede hacer yml para que sea una convención ampliamente aceptado o eso depende de usted.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197419786-c34586bc-d45b-445c-9010-1ff568e909b0.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197419803-dcf07535-763d-4a47-b5eb-812038e3d1fd.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197419819-7836911b-5352-4bdd-8311-1baeda5e96a6.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197419827-3f989ade-7379-43f4-8d4d-726092b4227d.png">
+
+Voy a decir OK.
+
+Vamos a escribir el siguiente código:
+
+
+```yaml
+# This is a comment
+
+somekey: value
+
+somekey2: value # This is another comment
+
+myObject:
+    stringProperty: asdf asdf asdf
+    numberProperty: 123
+    listProperty:
+        - val 1
+        - val 2
+        - val 3
+        - myObj2:
+              val33: asdf
+              val44: asdfasdfadf
+```
+
+<img width="876" alt="image" src="https://user-images.githubusercontent.com/23094588/197420011-7814de2c-e7ee-407e-8744-92ff3e292a7c.png">
+
+Empezamos con un comentario. Ahora se me ocurre una clave: valor, así que eso es solo una clave y un valor.
+
+Llámalo alguna clave, puedes ver inteligente, es lo suficientemente inteligente como para decir que es un error porque ese valor clave necesita ser único para el documento y diré para que puedas ver aquí. Comience con un comentario en la línea uno.
+
+Y luego, este es un comentario en línea, así que después de ese hashtag o libra firme todo.
+
+Después de eso va a ser un comentario.
+
+Ahora llamémoslo **`myObject`**, ahora puedo decir que voy a decir una propiedad de cadena y luego también puedo hacer una propiedad de número, así que serán 123. Y luego también puedo hacer una **`listaPropiedad`** como si llamara a esto una listaPropiedad y ahora solo voy a ve así val 1, val 2, val 3.
+
+Así que esto es solo crear esencialmente un objeto. Puedes ver que esto es en realidad un mapa. Así que este mapa tiene de diferentes claves para ello.
+
+Y finalmente, esta propiedad de lista es solo una lista de tres valores... espacio correcto. E incluso podríamos hacer un mapa anidado aquí de myObj2 y puedo decir esto.
+
+Entonces puede ver que YAML le brinda mucha versatilidad, principalmente lo que va a hacer es configurar crear objetos que estarán en línea con el esquema OpenAPI y revisaremos eso y aparecerán muchos más detalles en el curso, pero ese esquema describirá objetos como este.
+
+Y así es como se va a desarrollar todo el documento OpenAPI donde se va a desarrollar su especificación al tener un cosa compleja o clave compleja como esta. Este documento ahora se puede pasar por una computadora y leerlo.
+
+Así que viene en el curso este wa Es solo una especie de forma libre.
+
+Examinaremos específicamente la especificación del esquema OpenAPI y la aplicaremos. a YAML. Entonces, los trucos más grandes para YAML recuerdan que necesita claves únicas y luego sus objetos mínimo de dos espacios.
+
+Personalmente, prefiero cuatro espacios para las sangrías, pero esa es mi preferencia personal. Creo que es un poco más legible en dos espacios.
+
+Y lo más difícil es que uno de los mayores problemas con los que se encontrarán los principiantes es tener problemas con su espaciamiento y quitarse las cosas así solo hace cosméticos.
+
+Cuando tiene un espaciado que es inconsistente y eso puede causar algunos problemas muy extraños y cuando está intentando para validar su especificación OpenAPI, es muy fácil cometer un error en el espaciado.
+
 ##  OpenAPI Specification Quiz 10 preguntas
