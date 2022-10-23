@@ -1103,5 +1103,6 @@ Cuando tiene un espaciado que es inconsistente y eso puede causar algunos proble
 
 <img width="703" alt="image" src="https://user-images.githubusercontent.com/23094588/197420767-2fdbc627-725e-41b7-9fa1-d7ed09e96ea8.png">
 
+<img width="660" alt="image" src="https://user-images.githubusercontent.com/23094588/197420862-0dabf98f-c9c2-41bb-ba5c-634576b165a1.png">
 
 
