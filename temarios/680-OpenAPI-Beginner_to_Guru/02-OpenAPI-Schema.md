@@ -456,67 +456,56 @@ Un **`put`** será una request/solicitud de creación o actualización y esto es
 
 #### DELETE
 
-Un **`delete`** sirve para decirle al servidor que elimine el recurso especificado, no veo que se use con demasiada frecuencia.
+Un **`delete`** sirve para decirle al servidor que elimine el recurso especificado.
 
-Y esto es solo para repetir la solicitud y luego también las opciones.
+#### TRACE
 
-Esto devolverá el método admitido por el servidor para la neural especificada.
+Un **`trace`** (rastrea) el tipo de uso para la resolución de problemas, no veo que se use con demasiada frecuencia.
 
-Nuevamente, ves que uno usó demasiado tampoco.
+#### OPTIONS
 
-Conexión que le dice al servidor que convierta la solicitud en un túnel IP TCP transparente, generalmente para
+**`options`** devolverá el método admitido por el servidor para la especificación neural, nuevamente su uso tampoco es demasiado.
 
-https a través de un proxy no cifrado.
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/23094588/197407454-ac12c6d9-919f-40e3-a698-5308d7ce4fca.png">
 
-Así que estas son algunas cosas de bajo nivel que no usas con frecuencia.
+#### CONNECT
 
-El parche es importante y aplicará modificaciones parciales al recurso especificado.
+**`connect`** le dice al servidor que convierta la solicitud en un túnel IP TCP transparente, generalmente para HTTPS a través de un proxy no cifrado. Así que estas son algunas cosas de bajo nivel que no usas con frecuencia.
 
-Y ves que solían hacerlo algunos, pero tampoco muy común.
+#### PATCH
 
-Ahora, hay dos tipos de métodos de los que hablamos que son métodos seguros, estos se consideran seguros porque
+**`patch`** es importante y aplicará modificaciones parciales al recurso especificado. Y ves que solían hacerlo algunos, pero tampoco muy común.
 
-solo obtienen información y no provocan cambios en el servidor.
+<img width="1001" alt="image" src="https://user-images.githubusercontent.com/23094588/197407671-af3835d1-1ad0-47f3-99c4-f295c7cae2e1.png">
 
-Se consideran los métodos seguros.
+Ahora, hay dos tipos de métodos de los que hablamos que son **Métodos Seguros**, ***estos se consideran seguros porque solo obtienen información y no provocan cambios en el servidor***.
 
-Kit tenía opciones y rastreo.
+Se consideran **Métodos Seguros** a **GET**, **HEAD**, **OPTIONS** y **TRACE**.
 
-Item Potente, esa es una palabra divertida, es item Partons, esta es la acción.
+<img width="1005" alt="image" src="https://user-images.githubusercontent.com/23094588/197407867-bd4dfd7d-5c03-412f-ae07-341eb76c5e22.png">
 
-Si hay repeticiones de esa acción, no tendrá ningún efecto adicional.
+**Idempotencia**, esa es una palabra divertida, es item Partons, esta es la acción. Si hay repeticiones de esa acción, no tendrá ningún efecto adicional. 
 
-Así que pon y borra nuestro artículo.
+Así que **PUT** y **DELETE*** son **Métodos Idempotentes**. 
 
-Los métodos potentes, los métodos seguros también se consideran elementos potentes.
+Los **Métodos Seguros** **GET**, **HEAD**, **OPTIONS** y **TRACE**. también se consideran **Métodos Idempotentes**. 
 
-Sin embargo, ¿desea especificar que el protocolo no exige que el elemento sea realmente potente?
+Sin embargo, no le especifica al protocolo que el item sea Idempotentes. Se espera que los desarrolladores lo apliquen detrás de la utilización de estos métodos.
 
-Se espera que los desarrolladores lo apliquen detrás de la utilización de estos métodos.
+<img width="1004" alt="image" src="https://user-images.githubusercontent.com/23094588/197408320-ff75c6bb-758f-4d16-8674-aa98547bc036.png">
 
-Ahora, los métodos de nueve elementos, los carteles, no los elementos puestos, es probable que varias publicaciones creen múltiples recursos.
+**POST** NO es idempotente
 
-Así que si puedes pensar en.
+Es probable que múltiples **`POST`** creen múltiples recursos. ¿Ha visto alguna vez sitios web que le pidan que haga clic en enviar solo una vez?
+Vemos que la gente hace eso en los sitios web a veces, algo importante para recordar.
 
-Estoy seguro de que alguna vez hemos visto.
+<img width="1045" alt="image" src="https://user-images.githubusercontent.com/23094588/197408514-a2170998-7cad-44ac-bb93-935943f7ab94.png">
 
-Por favor, haga clic sólo quiere evitar la duplicación de cosas.
+Ahora, aquí hay un buen cuadro, este es un buen gráfico para ver todo esto e interactuar en cuanto a las características de los Métodos, porque esto es muy importante.
 
-Vemos que la gente hace eso en los sitios web a veces.
+<img width="995" alt="image" src="https://user-images.githubusercontent.com/23094588/197408762-691ed3c4-de7b-4c18-86a8-d7a429b3b716.png">
 
-Algo tan importante para recordar.
-
-Ahora, aquí hay un buen cuadro, tendrá acceso a un PDF de estas diapositivas y, por supuesto, recursos.
-
-para que puedas descargarlo y seguir así.
-
-Así que este es un buen gráfico para ver todo esto e interactuar en cuanto a si son seguros, es decir, impotentes.
-
-o cobrable sin estado, porque esto es muy importante.
-
-Y esto encajará en la documentación de cómo funciona nuestra API porque vamos a confiar
-
-en los códigos de estado en cuanto a cómo respondió el servidor.
+Y esto encajará en la documentación de cómo funciona nuestra API porque vamos a confiar en los códigos de estado en cuanto a cómo respondió el servidor.
 
 Deberían ser códigos de estado que nos llegarán después de que hayamos enviado una solicitud a la serie Service 100.
 
