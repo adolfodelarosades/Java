@@ -254,31 +254,19 @@ Entonces, si estamos en 1.x o 2.0 completamente no importa para esto, pero quer�
 
 ##  HTTP Request Methods 06:11
 
-And this video, we're going to take a closer look at HDTV request methods, and again, if you are
+And this video, we're going to take a closer look at HDTV request methods, and again, if you are comfortable with this content, go ahead and skip over this video.
 
-comfortable with this content, go ahead and skip over this video.
+This is for some background, because these methods become very important to developing API calls on using HTP.
 
-This is for some background, because these methods become very important to developing API calls on
+So a lot of things that were going to be talking about dovetail exactly into this. But again, if you are comfortable with this content, go and skip over it.
 
-using HTP.
-
-So a lot of things that were going to be talking about dovetail exactly into this.
-
-But again, if you are comfortable with this content, go and skip over it.
-
-Otherwise, I'm going to go for it and give you some additional information about how HTP is actually
-
-used.
+Otherwise, I'm going to go for it and give you some additional information about how HTTP is actually used.
 
 So request methods.
 
-We also call these verbs and these are used to indicate a desired action to be performed.
+We also call these verbs and these are used to indicate a desired action to be performed. So a Get is a request for a resource.
 
-So aGet is a request for a resource.
-
-So we're going to issue a command against the server for an HTML file or a JavaScript file, some type
-
-of image.
+So we're going to issue a command against the server for an HTML file or a JavaScript file, some type of image.
 
 It is used like when you go to visit a website, a command is being used to visit that website.
 
@@ -426,7 +414,167 @@ So all these steps codes do go into how we form APIs and the verbs as well.
 
 So these are all tools that we're going to be utilizing to develop our APIs.
 
+<hr>
 
+<img width="1136" alt="image" src="https://user-images.githubusercontent.com/23094588/197405548-6dc45063-558d-425c-9174-7ab5bc1ece45.png">
+
+Y en este video, vamos a echar un vistazo más de cerca a los **HTTP Request Methods - Métodos de Solicitud HTTP**, y nuevamente, si está cómodo con este contenido, continúe y salte este video.
+
+Esto es para algunos antecedentes, porque estos métodos se vuelven muy importantes para desarrollar llamadas API en utilizando HTP. Entonces, muchas cosas de las que se iba a hablar encajan exactamente en esto. Pero, de nuevo, si se siente cómodo con este contenido, sáltelo. De lo contrario, lo haré y le daré información adicional sobre cómo funciona realmente HTTP.
+
+### Request Methods
+
+<img width="1021" alt="image" src="https://user-images.githubusercontent.com/23094588/197405748-584dd8a5-47ed-4140-939c-e9b4778d60ac.png">
+
+Los **Request Methods**, también los llamamos **verbs** y estos se usan para indicar una acción que deseada realizar.
+
+#### GET
+
+Entonces **`get`** sirve para hacer una solicitud de un recurso. Así que vamos a emitir un comando al servidor para obtener un archivo HTML o un archivo JavaScript, algún tipo de imagen. Se usa cuando vas a visitar un sitio web, se usa un comando para visitar ese sitio web.
+
+#### HEAD
+
+Ahora también existe un comando **`head`**. No veo su uso muy a menudo, pero es similar a **`get`**, pero solo solicita ***metainformación*** sobre ese recurso, pero no recuperas el body back.
+
+<img width="1003" alt="image" src="https://user-images.githubusercontent.com/23094588/197406228-0f77ba29-590e-4ace-a1c8-166a9f504b1e.png">
+
+Ahora, algunos otros  **Request Methods** métodos de peticiones - solicitud que vemos.
+
+#### POST
+
+**`post`** se utiliza para enviar datos al servidor. El caso de uso típico es un publicar un formulario de pago y enviar esos datos al servidor. Entonces, si está revisando o incluso usa el formulario de búsqueda de Google, envía datos al servidor.
+
+#### PUT
+
+**`put`** es una petición/solicitud para que la entidad adjunta se almacene en URI suministrada si que es nueva. Pero, si ya existe se espera que se actualice.
+
+Mientras que **`post`** crea un request, **`put`** crea o actualiza un request.
+
+Un **`put`** será una request/solicitud de creación o actualización y esto es muy importantes en cuanto a cómo funcionan.
+
+<img width="996" alt="image" src="https://user-images.githubusercontent.com/23094588/197406949-3c2bc29b-4ee5-4b17-a167-74865040f39d.png">
+
+#### DELETE
+
+Un **`delete`** sirve para decirle al servidor que elimine el recurso especificado, no veo que se use con demasiada frecuencia.
+
+Y esto es solo para repetir la solicitud y luego también las opciones.
+
+Esto devolverá el método admitido por el servidor para la neural especificada.
+
+Nuevamente, ves que uno usó demasiado tampoco.
+
+Conexión que le dice al servidor que convierta la solicitud en un túnel IP TCP transparente, generalmente para
+
+https a través de un proxy no cifrado.
+
+Así que estas son algunas cosas de bajo nivel que no usas con frecuencia.
+
+El parche es importante y aplicará modificaciones parciales al recurso especificado.
+
+Y ves que solían hacerlo algunos, pero tampoco muy común.
+
+Ahora, hay dos tipos de métodos de los que hablamos que son métodos seguros, estos se consideran seguros porque
+
+solo obtienen información y no provocan cambios en el servidor.
+
+Se consideran los métodos seguros.
+
+Kit tenía opciones y rastreo.
+
+Item Potente, esa es una palabra divertida, es item Partons, esta es la acción.
+
+Si hay repeticiones de esa acción, no tendrá ningún efecto adicional.
+
+Así que pon y borra nuestro artículo.
+
+Los métodos potentes, los métodos seguros también se consideran elementos potentes.
+
+Sin embargo, ¿desea especificar que el protocolo no exige que el elemento sea realmente potente?
+
+Se espera que los desarrolladores lo apliquen detrás de la utilización de estos métodos.
+
+Ahora, los métodos de nueve elementos, los carteles, no los elementos puestos, es probable que varias publicaciones creen múltiples recursos.
+
+Así que si puedes pensar en.
+
+Estoy seguro de que alguna vez hemos visto.
+
+Por favor, haga clic sólo quiere evitar la duplicación de cosas.
+
+Vemos que la gente hace eso en los sitios web a veces.
+
+Algo tan importante para recordar.
+
+Ahora, aquí hay un buen cuadro, tendrá acceso a un PDF de estas diapositivas y, por supuesto, recursos.
+
+para que puedas descargarlo y seguir así.
+
+Así que este es un buen gráfico para ver todo esto e interactuar en cuanto a si son seguros, es decir, impotentes.
+
+o cobrable sin estado, porque esto es muy importante.
+
+Y esto encajará en la documentación de cómo funciona nuestra API porque vamos a confiar
+
+en los códigos de estado en cuanto a cómo respondió el servidor.
+
+Deberían ser códigos de estado que nos llegarán después de que hayamos enviado una solicitud a la serie Service 100.
+
+Nuestra serie Informational in Nature 200 significa que tuvo éxito.
+
+La serie 300 es redirección.
+
+Entonces, el servidor nos redirigirá a una serie de URL 400 diferente, nuestro sitio de error del cliente.
+
+Así que hemos hecho algo mal en nuestro sitio.
+
+La serie 500 indica que sucedió algo inesperado en el lado del servidor.
+
+Entonces, algunos códigos de estado comunes que veremos con bastante frecuencia, especialmente en el desarrollo de API, dos
+
+cien un OK.
+
+Todo pasó, ¿de acuerdo?
+
+Estamos contentos con todo el mundo.
+
+Hemos creado uno o dos recursos para que el servidor comprenda la solicitud y la acepte.
+
+A veces, esto se hace con un procesamiento asincrónico en el que el servidor acepta algo y luego hay antecedentes.
+
+procesamiento que debe ocurrir y ningún servidor simplemente regresará, diciendo que aceptó tres uno.
+
+Esto se mueve permanentemente.
+
+Entonces, este es un estado de la serie 300 donde el servidor dice, sí, entendí su solicitud, pero eso
+
+El recurso ahora se ha movido a un URAI 400 diferente. La solicitud incorrecta a menudo significa que tiene algún tipo.
+
+Los datos mal formados para uno significan que el recurso al que está intentando acceder y que no ha suministrado
+
+d
+
+o no tiene las credenciales de seguridad para acceder o no encontró algo que probablemente hemos
+
+todo visto cuando estamos navegando por Internet.
+
+Y esto significa que solicitó un recurso del servidor y el servidor no pudo encontrar
+
+es 500.
+
+Y esto es algo que, con suerte, nunca verás.
+
+Pero estoy seguro de que todo el mundo ha visto un error de servidor interno de quinientos.
+
+Esto significa que ha ocurrido un error dentro del servidor, no relacionado con su solicitud,
+
+pero algo dentro del código del servidor hizo que no pudiera completar su solicitud y luego archivar
+
+tres medios principales que los servicios están temporalmente caídos y no están disponibles.
+
+Entonces, todos estos códigos de pasos se relacionan con la forma en que formamos las API y los verbos también.
+
+Estas son todas las herramientas que vamos a utilizar para desarrollar nuestras API.
 ##  Why use OpenAPI? 07:06
 ##  Pet Clinic on Swagger Editor 06:09
 ##  OpenAPI 2.0 vs 3.0 03:12
