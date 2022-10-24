@@ -101,7 +101,7 @@ Analistas comerciales responsables de las especificaciones de API
 * Slack Group for OpenAPI: Beginner to Guru 00:59
 * GitHub Workflow 12:20
 
-## [2. OpenAPI Schema](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/02-OpenAPI-Schema.md) 8 clases • 44 min
+## [2. OpenAPI Schema](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/02-OpenAPI-Schema.md) 8 clases • 44 min :+1:
 
 * Introduction 01:55
 * What is an API? 07:05
@@ -113,7 +113,7 @@ Analistas comerciales responsables de las especificaciones de API
 * YAML Crash Course 07:28
 * OpenAPI Specification Quiz 10 preguntas
 
-### 3. Defining a Microservice with OpenAPI 6 clases • 26 min
+### [3. Defining a Microservice with OpenAPI](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/03-Defining-a-Microservice-with-OpenAPI.md) 6 clases • 26 min
 
 * Introduction 01:45
 * Swagger Hub 03:59
