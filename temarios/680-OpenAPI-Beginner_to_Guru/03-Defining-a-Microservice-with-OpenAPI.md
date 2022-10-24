@@ -129,6 +129,182 @@ Así que me detendré aquí y comenzaremos a desarrollar la especificación de A
 
 
 ## OpenAPI Specification 05:03
+
+Okay, on the screen, I have the GitHub account for the [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification). 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197574010-2061580c-1cb6-4f12-ac1c-65afba41aa41.png">
+
+So this is where all the source code behind the OpenAPI lives. It lives inside of this GitHub repository. I will provide a link to this in the course resources so you can go right here. Now there's a few things I wanna point out in here specifically for the course that we are gonna be taking a look at. If you come in here and take a look at the examples directory inside a GitHub can see that we have version 2.0 and 3.0.
+
+Again I'm not focusing on 2.0 but I am gonna be looking at 3.0.
+
+Here are a number of different examples.
+
+Remember we looked at petstore so here's the petstore. YAML has the OpenAPI specification.
+
+You can see that there's several different implementations of the OpenAPI specification that we can
+
+look at.
+
+So some really good examples when you need to see how to do something you can go through and review
+
+these and let's go back over here. Then the next thing we wanna take a look here is this IMPLEMENTAIONS
+
+this markdown file here IMPLEMENTATIONS. These are known implementations for OpenAPI3.0.
+
+We can see that there's a number of tooling that's been set up in different programs that are available.
+
+This list is always growing. I highly recommend taking a look at it and there's different technologies
+
+that are available.
+
+I'm primarily a Java developer so you can see a number of Java tools there.
+
+I can barely spell Ruby but there are Ruby tools there, Node.js, Typescript, PHP. So a large number of
+
+tools that we have available.
+
+Remember I said that we are gonna be using the SwaggerHub editor.
+
+Here are some specific tools for working with OpenAPI.
+
+Some specific editors. A lot of people like Visual Studio.
+
+I've actually used this one here at the top Visual Studio Code extension is quite nice. So you might
+
+prefer to use Sisual Studio.
+
+It's a free tool that is an editorial that you can use.
+
+And I actually know of some that are not actually available here so this is not a complete list by any
+
+means, there is actually additional tooling that is not on this list.
+
+Then you can see here User Interfaces.
+
+So these are tools that we'll take in the OpenAPI specification and give you documentation.
+
+So we've already seen swagger-ui in action.
+
+And here are some additional options.
+
+So Widdershins that is a quite popular.
+
+As far as generating end user documentation from your OpenAPI specification, I personally like Redoc
+
+quite a bit.
+
+This is a very nice tool for generating and user documentation from your OpenAPI specification and
+
+now you can also see we have Server Implementations, Client Implementations, Code Generators.
+
+So there's a number of different code generators that you can utilize with the OpenAPI specification.
+
+Let's take it back over here.
+
+And remember I said that the OpenAPI specification is backed by a formal schema.
+
+Here is the JSON schema.
+
+If you wanna go through and see exactly,
+
+this is where you can really take a look at how the OpenAPI schema is defined this is the raw source
+
+code for that so to speak but we'll be looking at this through a different approach. I'm not gonna get
+
+too deep on that it's come back over here and then finally I highly recommend going through this documentation
+
+that there's a lot of documentation to this.
+
+You can see tools and libraries participation how it is licensed if you wanna contribute to this
+
+project it is an open source project.
+
+So they even have a technical steering committee developing guidelines so the lot here obviously I'm
+
+not gonna go through every single thing we're just talking about trying to get up to OpenAPI and
+
+you can see here that we are currently on 3.0.2.
+
+And if I click to this, this link is actually gonna take me in two versions.
+
+So but I'll just go ahead and click on this.
+
+This is the documentation for the OpenAPI schema and we will be getting very very familiar with this.
+
+Specifically we are gonna be looking at developing against the OpenAPI schema and we will be looking
+
+at the specific like the OpenAPI object. You can see here this is the top-level schema specification
+
+and we will be going through this in upcoming videos.
+
+This documentation here for OpenAPI is very rich it's very detailed and you should consider this document
+
+and the single source of truth for when you're working with OpenAPI documentation.
+
+<hr> 
+
+De acuerdo, en la pantalla, tengo la cuenta de GitHub para la [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification). 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197574010-2061580c-1cb6-4f12-ac1c-65afba41aa41.png">
+
+Así que aquí es donde vive todo el código fuente detrás de OpenAPI. Vive dentro de este repositorio de GitHub. Ahora, hay algunas cosas que quiero señalar aquí específicamente para el curso que vamos a estar echando un vistazo a. Si entra aquí y echa un vistazo al directorio de **examples** dentro de una lata de GitHub mira que tenemos la versión 2.0, 3.0 y 3.1.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197574947-4870e3be-f506-4c63-bed6-9d30433aba94.png">
+
+Nuevamente, no me estoy enfocando en 2.0, pero voy a mirar 3.0.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197575245-522d4991-8ae0-4a22-af1f-294b333b6062.png">
+
+Aquí hay varios ejemplos diferentes. Recuerda que miramos la tienda de mascotas, así que está en **`petstore.yaml`** la tienda de mascotas. El YAML tiene la especificación OpenAPI. Puede ver que hay varias implementaciones diferentes de la especificación OpenAPI que podemos mirar. Entonces, algunos ejemplos realmente buenos cuando necesita ver cómo hacer algo que puede revisar y revisar estos.
+
+
+Volvamos a la raíz. Luego, lo siguiente que queremos ver es **`IMPLEMENTATIONS.md`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197576154-0fa0de42-c963-4772-a03c-570cb9113b67.png">
+
+Estas son implementaciones conocidas para OpenAPI3.0. Podemos ver que hay una serie de herramientas que se han configurado en diferentes programas que están disponibles. Esta lista siempre está creciendo. Recomiendo encarecidamente echarle un vistazo y hay diferentes tecnologías que están disponibles. Soy principalmente un desarrollador de Java, por lo que puede ver una serie de herramientas de Java allí. Apenas puedo deletrear Ruby, pero hay herramientas de Ruby, Node.js, Typescript, PHP. Así que un gran número de herramientas que tenemos disponibles.
+
+Recuerde que dije que usaremos el editor SwaggerHub. Aquí hay algunas herramientas específicas para trabajar con OpenAPI. Algunos editores específicos. A mucha gente le gusta Visual Studio. De hecho, he usado este aquí en la parte superior. La extensión de código de Visual Studio es bastante agradable. Así que podrías Prefiero usar Visual Studio.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197576817-5ae78425-5aef-4fe1-b6f4-4ccef85fb629.png">
+
+Es una herramienta gratuita que es una editorial que puedes usar. Y en realidad sé de algunos que no están disponibles aquí, por lo que esta no es una lista completa de ninguna manera significa que en realidad hay herramientas adicionales que no están en esta lista.
+
+Entonces puedes ver aquí las User Interfaces.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197577136-459bdedc-1d5e-4e7d-9d47-8907779f4db8.png">
+
+Estas son herramientas que tomaremos en la especificación OpenAPI y les daremos documentación.  Así que ya hemos visto **swagger-ui** en acción. Y aquí hay algunas opciones adicionales como **Widdershins** es bastante popular, en cuanto a generar documentación de usuario final a partir de su especificación OpenAPI, personalmente me gusta **Redoc** bastante, esta es una muy buena herramienta para generar documentación de usuario a partir de su especificación OpenAPI.
+
+También puede ver que tenemos implementaciones de servidor **Server Implementations**, implementaciones de cliente **Client Implementations**, generadores de código **Code Generators**. Por lo tanto, hay varios generadores de código diferentes que puede utilizar con la especificación OpenAPI.
+
+Retomémoslo a la raíz y entremos en **schemas**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197578294-572e5471-a726-4b76-aab3-5ad7669b6ed8.png">
+
+Entramos a la v3.0
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197579342-1b8e312a-0d5f-4ba2-a8c8-ee0d4e66befe.png">
+
+
+Y recuerde que dije que la especificación OpenAPI está respaldada por un esquema formal, aquí está el **schema.json**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197579543-03143f5a-bb7e-49b2-8e5c-6d6be3ed6e1d.png">
+
+Si quieres pasar y ver exactamente, aquí es donde realmente puede echar un vistazo a cómo se define el esquema OpenAPI esta es la fuente sin procesar código para eso, por así decirlo, pero lo veremos a través de un enfoque diferente. no voy a conseguir demasiado profundo en que ha vuelto aquí.
+
+Y finalmente recomiendo revisar esta documentación que hay mucha documentación sobre esto **README.md**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197579953-5301e25f-f53c-4614-8ebd-aad2f9c5048a.png">
+
+Puede ver la participación de herramientas y bibliotecas, cómo se licencia si desea contribuir a esto proyecto es un proyecto de código abierto. Incluso tienen un comité directivo técnico que desarrolla pautas, por lo que obviamente estoy aquí.
+
+Puede ver la versión actualmente estamos en 3.0.2 y si hago clic en esto, este enlace me llevará en dos versiones. Así que seguiré adelante y haré clic en esto. Esta es la documentación para el esquema OpenAPI y nos familiarizaremos mucho con esto. Específicamente, vamos a buscar el desarrollo contra el esquema OpenAPI y buscaremos en el específico como el objeto OpenAPI. Puede ver aquí que esta es la especificación de esquema de nivel superior y revisaremos esto en próximos videos.
+
+**Esta documentación aquí para OpenAPI es muy rica, es muy detallada y debe considerar este documento y la única fuente de verdad para cuando esté trabajando con la documentación de OpenAPI.**
+
+
 ## OpenAPI Info Object 05:14
 ## OpenAPI Servers Object 03:37
 ## Assignment - Add Servers 1 preguntas
