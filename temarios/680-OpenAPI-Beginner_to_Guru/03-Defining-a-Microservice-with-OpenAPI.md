@@ -90,29 +90,42 @@ Ahora puede registrarse y crear un nombre de usuario, correo electrónico y cont
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197566363-f188aded-7db8-4efe-aac9-35fb887ca37e.png">
 
-
-Así que voy a hacer clic en el botón.
+Así que voy a hacer clic en el botón **Authorize SmartBear**. Github pide la autorización a SwaggerHub.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197566773-4370d5af-1de1-412c-b48e-a0a51c0cb594.png">
 
-Me pidemás datos para el registro, una vez rellenados me sale la siguiente pantalla.
+Me pide más datos para el registro, una vez rellenados me sale la siguiente pantalla.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197567181-3d805809-f4fd-461f-8c8e-9cc676e8f177.png">
 
 
-Ahora pueden ver que ya está en su **SwaggerHub**.
+Ahora ya está en su **SwaggerHub**.
 
-Github podría pedirle que permita la autorización a SwaggerHub. Creo que es un paso que completé hace mucho tiempo y pueden ver aquí Tengo una variedad de cosas con las que he estado experimentando en mi cuenta de SwaggerHub y lo que quiero hacer es venir aquí y decir Create New create a ew API. Y aquí tenemos 2.0, 3.0. Definitivamente quiero estar usando 3.0. Y voy a decir que no hay plantilla y llamaré a este openapicourse así.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197569291-56861fa4-d025-4a0a-994c-7d8637a77f72.png">
 
-Voy a decir 1.0 y este será OpenAPI Course y quiero que sea mi propietario y que sea público y no voy a hacer la simulación automática, esta es una característica de SwaggerHub en sí, no va a ser haciendo eso y esto va a ser un documento disponible públicamente.
+Vamos a ***Create New --> Create New API***
 
-Y ahora todo lo que tengo que hacer es venir aquí y decir crear API y ver que están creando magia en el fondo. Y ahora este es el editor de SwaggerHub que podemos ver aquí.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197569620-14b5edb7-cb28-4647-bdd8-48b7dfa8a867.png">
 
-Este es el YAML con el que tenemos que trabajar. Y por aquí tenemos el Curso OpenAPI. Así que este es un sabor de Swagger UI. Entonces podemos ver esta especificación en el lado derecho y luego en el lado izquierdo estará el YAML y pueden ver que SwaggerHub creó un código auxiliar muy pequeño usando la información que proporcioné.
+Vamos a rellenar la información con los sguientes datos:
 
-Recuerde que le di una versión 1.0 y luego le di un título de Curso OpenAPI. Y nuevamente estos son opcionales. Y aquí solo puedo decir que diré especificación para especificación para el curso OpenAPI.
+<img width="625" alt="image" src="https://user-images.githubusercontent.com/23094588/197570284-52db6053-5f6b-48a9-ba88-e3556a2cb49f.png">
 
-Puede ver que hay un breve retraso. Y esto aquí se proporcionó de inmediato. Así que me detendré aquí y comenzaremos a desarrollar la especificación de API abierta y veremos esto con más detalle en los próximos videos.
+Y ahora todo lo que tengo que hacer es pulsar en **Create API**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197570710-bf1b0116-7880-4c89-96c1-9cc81d8c8c04.png">
+
+Y ahora me aparece **el editor de SwaggerHub** que podemos ver en la imagen. En la parte izquierda tenemos nuestro **YAML** con el que tenemos que trabajar y en el lado derecho tenemos el resultado obtenido, vemos el título **OpenAPI Course**, la versión **1.0**, la versión del Open API **OAS3** ymás información. 
+
+Entonces podemos ver la especificación en el lado derecho y luego en el lado izquierdo estará el **YAML** y pueden ver que **SwaggerHub** creó un código auxiliar muy pequeño usando la información que proporcioné. Recuerde que le di una versión 1.0 y luego le di un título **OpenAPI Course**. 
+
+En nuestro YAML vamos a meter un valor a la **`description`** que actualmente esta vacia.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197572890-7b278426-62ae-4c28-8c20-50cd94538785.png">
+
+Puede ver que hay un breve retraso después de introducir el valor de **`description`** pero de inmediato el cambio se refleja en la parte derecha.
+
+Así que me detendré aquí y comenzaremos a desarrollar la especificación de API abierta y veremos esto con más detalle en los próximos videos.
 
 
 ## OpenAPI Specification 05:03
