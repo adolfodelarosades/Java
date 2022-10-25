@@ -891,4 +891,24 @@ Aquí es donde realmente están la carne y las papas de oOpenen API. En este vid
 
 
 ## Assignment - List Beers 1 preguntas
+
+<img width="548" alt="image" src="https://user-images.githubusercontent.com/23094588/197900688-540410f8-d3c0-48d3-845d-bd248206dc56.png">
+
+Agregue una operación OpenAPI para enumerar cervezas
+
+* Agregar nueva operación para url - /v1/beers
+* HTTP GET method
+* 200 response
+* 404 (Not Found) response
+
+Preguntas de esta tarea
+
+¿El objeto de operación de OpenAPI tiene una propiedad en desuso?
+
+Sí, hay una propiedad booleana en el objeto de operación que se usa para indicar si la operación está obsoleta.
+
+<img width="660" alt="image" src="https://user-images.githubusercontent.com/23094588/197901210-0c0f4dfe-b82e-4762-91bd-d7b5fbceed7f.png">
+
+<img width="1185" alt="image" src="https://user-images.githubusercontent.com/23094588/197901553-7e317624-de69-4c8f-9ec0-2e22ead87444.png">
+
 ## OpenAPI Quiz 6 preguntas
