@@ -531,7 +531,96 @@ Así que vea cómo son estos objetos, tenemos título, descripción y así suces
 
 <img width="1364" alt="image" src="https://user-images.githubusercontent.com/23094588/197887587-7e44aa0d-0733-4507-8094-b83ce9e1c3ff.png">
 
+**NOTA**: En nuestro Editor algunas propiedades las tengo entre apostrofes y otras no ¿Debe llevarlo siempre?
+
 ## OpenAPI Servers Object 03:37
+
+In this video, we're gonna take a look at the next major component inside The OpenAPI specification that is the servers object. So you can see here in the middle of the screen we have a field name called the servers and that takes in Server Object.
+
+So let's go ahead and take a look at the specification, you can see that servers.
+
+This is an optional property so we don't have to specify it but we can. And what this is is a way to give your end users information about where the API is available. So let's go ahead and take a look at the Server Object and you can see here that it is an object representing a server.
+
+And if we do specify we do need to give it a url that is required and then the other properties are optional. So let me scroll up here a little bit so you can see here is the servers property.
+
+This is in YAML in the center of the screen there and you can see how we have a development staging and an API production server. So very simple implementation.
+
+Now you do have an optional property here. Scroll up here, you can see that we have variables so let's take a quick look at that. I'm not gonna demonstrate this because I've never had a need to use the variables. So that is a feature where you can specify a variable and also give it an enumerated value something optional.
+
+I've never had a need to do that but it is a feature of the OpenAPI specification.
+
+But what I wanna do now is come over and what we wanna do is define the server block in our OpenAPI specification. So I'm gonna jump over to SwaggerHub.
+
+And I'm just gonna come here, hit enter and we can see that we get servers like so. So that there's url that is the required property.
+
+We're just gonna say https: and you'd see there I had that red warning until that was specified and now I can also come in here and say description and say Development Server and that's really all we need to do as far as defining that servers block.
+
+And then on the right hand side of the screen we can see now I have a Servers option and if I had more than one listed there, I would have this option to do use it.
+
+So some UI tools like this can actually reach out and call that Servers so anything to put it into your specification.
+
+If you have like a sandbox or development server running and this will help your OpenAPI specification when it is running inside of swagger-ui, it allow people to actually exercise the API and get feedback from it.
+
+So kind of handy to have.
+
+So again just review that real quick.
+
+Let's come back to the specification so the servers element and so the OpenAPI specification takes a list or an array of server objects and the url is a required property but the description and variables of those are optional properties.
+
+And I did not go through the variables but that is a element there that you can use.
+
+I've never personally had a need to use variables within the server properties.
+
+<hr>
+
+En este video, vamos a echar un vistazo al siguiente componente principal dentro de la especificación OpenAPI que es el objeto de los servidores **`servers`**. 
+
+<img width="1348" alt="image" src="https://user-images.githubusercontent.com/23094588/197889100-fad638b9-4fa4-40a8-9fcd-0960013ec868.png">
+
+Así que pueden ver aquí en el medio de la pantalla que tenemos un nombre de campo llamado servidores y que incluye el objeto del servidor. Así que avancemos y echemos un vistazo a la especificación, pueden ver esos servidores.
+
+Esta es una propiedad opcional, por lo que no tenemos que especificarla, pero podemos hacerlo. Y esto es una forma de dar a sus usuarios finales información sobre dónde está disponible la API. Así que sigamos adelante y echemos un vistazo al objeto del servidor **`[Server Object]`** y pueden ver aquí que es un objeto que representa un servidor.
+
+<img width="1308" alt="image" src="https://user-images.githubusercontent.com/23094588/197889519-59dd0530-6e33-4437-82f8-f7b2935cd9f3.png">
+
+<img width="1138" alt="image" src="https://user-images.githubusercontent.com/23094588/197889615-f67ab634-d5e2-4630-9b98-af66b6570cc3.png">
+
+Y si especificamos, necesitamos darle una URL que sea obligatoria y luego las otras propiedades son opcionales. 
+
+Permítanme desplazarme un poco hacia abajo para que puedan ver que aquí está la propiedad de los servidores.
+
+<img width="1032" alt="image" src="https://user-images.githubusercontent.com/23094588/197889898-e9d530d5-afac-44d8-a561-339a04ed8385.png">
+
+Esto está en YAML en el centro de la pantalla y puede ver cómo tenemos una etapa de desarrollo y un servidor de producción de API. Así que una implementación muy simple.
+
+<img width="1035" alt="image" src="https://user-images.githubusercontent.com/23094588/197890054-f2fb7951-1435-4ce7-bfb8-2ec53734ec95.png">
+
+<img width="1029" alt="image" src="https://user-images.githubusercontent.com/23094588/197890347-7fa93691-afbd-4f5b-8050-b79353edd623.png">
+
+
+Ahora tienes una propiedad opcional aquí. Desplácese hacia arriba aquí, puede ver que tenemos variables, así que echemos un vistazo rápido a eso. No voy a demostrar esto porque nunca tuve la necesidad de usar las variables. Esa es una característica en la que puede especificar una variable y también darle un valor enumerado algo opcional. Nunca tuve la necesidad de hacer eso, pero es una característica de la especificación OpenAPI.
+
+Pero lo que quiero hacer ahora es venir y lo que queremos hacer es definir el bloque del servidor en nuestra especificación OpenAPI. Así que voy a saltar a SwaggerHub y solo voy a venir aquí, presionar enter y podemos ver que tenemos servidores así. Para que haya una URL que sea la propiedad requerida. (EN MI CASO AL CREARLO SE HABIA INSERTADO LOS SERVIDORES).
+
+<img width="1129" alt="image" src="https://user-images.githubusercontent.com/23094588/197890691-ce8d6105-c616-4512-ae23-bd18fdfa6460.png">
+
+Solo diremos https: y verás que tenía esa advertencia roja hasta que se especificó y ahora también puedo entrar aquí y decir descripción y decir Servidor de desarrollo y eso es realmente todo lo que tenemos que hacer en cuanto a definir que bloquean los servidores.
+
+Y luego, en el lado derecho de la pantalla, podemos ver que ahora tengo una opción de Servidores y si tuviera más de uno en la lista, tendría esta opción para usarlo.
+
+Entonces, algunas herramientas de interfaz de usuario como esta pueden comunicarse y llamar a esos servidores, así que cualquier cosa para ponerlo en su especificación.
+
+Si tiene una sandbox o un servidor de desarrollo en ejecución y esto ayudará a su especificación OpenAPI cuando se ejecuta dentro de swagger-ui, permite que las personas realmente ejerzan la API y obtengan comentarios de ella.
+
+Tan útil para tener. Así que, de nuevo, revísalo muy rápido.
+
+Volvamos a la especificación, por lo que el elemento de servidores y la especificación OpenAPI toman una lista o una matriz de objetos de servidor y la URL es una propiedad requerida, pero la descripción y las variables de esas son propiedades opcionales.
+
+<img width="1027" alt="image" src="https://user-images.githubusercontent.com/23094588/197891318-c52cc1b4-b722-4cf9-8ef8-8668333c4c69.png">
+
+
+Y no revisé las variables, pero ese es un elemento que puedes usar. Personalmente, nunca tuve la necesidad de usar variables dentro de las propiedades del servidor.
+
 ## Assignment - Add Servers 1 preguntas
 ## OpenAPI Paths Object 06:26
 ## Assignment - List Beers 1 preguntas
