@@ -473,15 +473,23 @@ Ahora, si vuelvo aquí a **SwaggerHub**, podemos ver que se creó el código aux
 
 <img width="628" alt="image" src="https://user-images.githubusercontent.com/23094588/197746364-ef261b19-d0e1-4259-80db-ee9dedc6743f.png">
 
-Tenemos **openapi**, **info** y luego un objeto **path** vacío, estos son los mínimos requeridos, además tenemos **servers** que no es requerido pero que se creo al generar el código.
+Tenemos **openapi**, **info** y luego un objeto **path** vacío, estos son los mínimos requeridos, además tenemos **servers** que no es requerido pero que se creo al generar el código. Cuando creamos esto, el editor configuró las propiedades mínimas para nosotros.
 
-Entonces, cuando creamos eso, el editor configuró las propiedades mínimas para nosotros.
+Ahora puede ver en la documentación de la especificación de OpenAPI que estamos revisando es la 3.0.2. 
 
-Ahora puede ver aquí esta especificación de OpenAPI. Quiero decir que la versión debe ser una versión válida y estoy en 3.0.2. Entonces, lo primero que quiero hacer es venir aquí y cambiar esto a 2 y eso eso establece que la versión 2 es una versión muy secundaria, por lo que probablemente solo sea una corrección de pequeños problemas con documentación y algún tipo.
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/23094588/197750944-8ee9d25b-67ae-417b-90ed-70698ab568b4.png">
 
-Entonces, probablemente no sea una gran diferencia en la funcionalidad.
+Entonces, lo primero que vamos a hacer es que en **SwaggerHub** vamos a cambiar **openapi: 3.0.0**  por la **openapi: 3.0.2**, 
 
-Ahora, lo siguiente que queremos ver en este video es que tenemos este objeto de información.
+<img width="615" alt="image" src="https://user-images.githubusercontent.com/23094588/197751945-904aa34c-b254-4bc7-9f09-0539b6300a97.png">
+
+
+el **2** establece que la una versión muy secundaria, por lo que probablemente solo sea una corrección de pequeños problemas con documentación y algún tipo. Entonces, probablemente no sea una gran diferencia en la funcionalidad.
+
+Ahora, lo siguiente que queremos ver es que tenemos una sección **Info Object**.
+
+<img width="694" alt="image" src="https://user-images.githubusercontent.com/23094588/197752396-97dcfb35-ea79-41f6-bd8a-d2bc05d3901f.png">
+
 
 Así que permítanme desplazarme hacia abajo hasta eso.
 
