@@ -193,5 +193,6 @@ Analistas comerciales responsables de las especificaciones de API
 
 ### 11. Ejemplos Externos
 
-* [Spring Boot + Swagger2](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/ejemplos/SpringBoot-Swagger2.md)
+* [Spring Boot + Swagger2](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/ejemplos/01-SpringBoot-Swagger2.md)
+* * [Spring Boot + Swagger3 - OpenAPI3](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/ejemplos/02-SpringBoot-OpenAPI3.md)
 
