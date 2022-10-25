@@ -306,6 +306,247 @@ Puede ver la versión actualmente estamos en 3.0.2 y si hago clic en esto, este 
 
 
 ## OpenAPI Info Object 05:14
+
+This video we're gonna be taking a closer look at the OpenAPI information object.
+
+But first one step back. 
+
+You can see here I have the OpenAPI object and this is the definition of that object.
+
+And remember we looked at this image here.
+
+This is the image that we looked at previously in the course in the OpenAPI 3.0.
+
+You can see the different boxes here.
+
+I have info, servers, security, paths, tags, externalDocs and components.
+
+And if we look at this the different properties here you can see I have info, servers, paths, components,
+
+security, tags and externalDocs.
+
+So this table maps directly to this image that we had.
+
+So you can see how that that lines up.
+
+And these are all the major components inside of OpenAPI.
+
+Now you can see here that we are saying we have the bold REQUIRED. So for of valid OpenAPI specification
+
+at a minimum, we need the OpenAPI property, the info property and the path's property.
+
+So these are the minimum things that we can have for the OpenAPI specification.
+
+Now if I come back over here to SwaggerHub, we can see that the stub that was created. We have OpenAPI
+
+info object and then an empty paths object.
+
+So these are the minimum required.
+
+So the editor when we created that, it did set up the minimum properties for us.
+
+Now you can see here this OpenAPI specification I wanna say the version this must be a valid version
+
+and I am on 3.0.2. So the first thing I wanna do is come over here and change this to a 2 and that
+
+that sets up that version 2 is a very minor release so it's probably just a correcting small problems
+
+with documentation and some type.
+
+So probably not a major difference in functionality.
+
+Now the next thing we wanna be looking at in this video is we have this information object.
+
+So let me scroll down to that.
+
+This is the info objects so we can see here that actually has a number of properties for a title, description,
+
+termsOfService, contact, license and version.
+
+So we can see that only title and version are required and you can see here that to do title and version
+
+for us the description is optional but if I come in here to the editor and if I do control space and
+
+I'm just sitting the control space and it might be different on a Windows keyboard but for OSX, you
+
+can see this brings up the different properties and lets say I wanna do contact, I let in my contact information.
+
+This becomes another object and if I come up we can see these are the properties so name I'll put in
+
+my name, url
+
+and my email and this is my valid email.
+
+You email me I will read it.
+
+I can't guarantee you will respond because I do get a ton of email but now you can see as I update this
+
+over on the right hand side of the screen where the documentation as you can see this is also updating
+
+and let's take a look at the specification.
+
+I can also do a license so see the license object so this all information and I'll go ahead and follow
+
+the Apache 2.0 as well.
+
+So we'll just do the same license there.
+
+So come over here again.
+
+Remember your spacing gonna watch your spacing and see license and now you can see that I made a mistake
+
+and I'm getting an error there.
+
+So url and i'm pasting in that url
+
+Apache 2.0.
+
+So this sets up our information object.
+
+Let's double check there.
+
+So you can see here
+
+I put in contact.
+
+I didn't do termsOfService,
+
+that is an optional property.
+
+Let's go ahead and add that as well
+
+over here
+
+termsOfService
+
+like so.
+
+So now that is a fully completed information object and again these properties do have to match.
+
+So you see here how these objects are.
+
+So we have title, description and so on.
+
+These are all properties that I am providing to that.
+
+So again what's going on here this is the info object.
+
+These are properties of it and then that info object has a contact object and also a license object
+
+and we can see here this corresponds we have the info object and then these are the different properties
+
+you can see out the OpenAPI specification saying that contact is not just simply a string it is actually
+
+a structured object that is expecting inside the specification.
+
+<hr>
+
+En este video vamos a echar un vistazo más de cerca al objeto de información de OpenAPI.
+
+Pero primero un paso atrás. Puede ver aquí que tengo el **objeto OpenAPI** y esta es la definición de ese objeto.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/197742206-f7c5f316-b58e-4f84-ac1e-53196baca0d1.png">
+
+Y recuerda que vimos esta imagen. 
+
+<img width="921" alt="image" src="https://user-images.githubusercontent.com/23094588/197743043-31612866-66a5-44f0-9704-7b967bde7656.png">
+
+Esta es la imagen que vimos anteriormente en el curso en OpenAPI 3.0.
+
+Puedes ver las diferentes cajas aquí. 
+
+<img width="595" alt="image" src="https://user-images.githubusercontent.com/23094588/197743354-8596f831-44dc-4b9a-b730-edab26f8a242.png">
+
+Tengo información **info**, servidores **server**, seguridad **security**, rutas **paths**, etiquetas **tags**, documentos externos **externalDocs** y componentes **components**.
+
+Y si observamos las diferentes propiedades aquí, puede ver que tengo información, servidores, rutas, componentes, seguridad, etiquetas y documentos externos.
+
+<img width="930" alt="image" src="https://user-images.githubusercontent.com/23094588/197743957-5c393ed4-1c95-4e32-b214-f98875e69814.png">
+
+Así que esta tabla se asigna directamente a esta imagen que teníamos, puedes ver cómo eso se alinea. Estos son todos los componentes principales dentro de OpenAPI.
+
+<img width="936" alt="image" src="https://user-images.githubusercontent.com/23094588/197744977-a7a77045-ed05-4d08-bbf8-738b66561153.png">
+
+Ahora puede ver aquí que estamos diciendo que tenemos **REQUIRED**. Entonces, para una especificación OpenAPI válida como mínimo, necesitamos la propiedad **openapi**, la propiedad de información **info** y la propiedad de la ruta **path**. Estas son las cosas mínimas que podemos tener para la especificación OpenAPI.
+
+Ahora, si vuelvo aquí a **SwaggerHub**, podemos ver que se creó el código auxiliar. 
+
+<img width="628" alt="image" src="https://user-images.githubusercontent.com/23094588/197746364-ef261b19-d0e1-4259-80db-ee9dedc6743f.png">
+
+Tenemos **openapi**, **info** y luego un objeto **path** vacío, estos son los mínimos requeridos, además tenemos **servers** que no es requerido pero que se creo al generar el código.
+
+Entonces, cuando creamos eso, el editor configuró las propiedades mínimas para nosotros.
+
+Ahora puede ver aquí esta especificación de OpenAPI. Quiero decir que la versión debe ser una versión válida y estoy en 3.0.2. Entonces, lo primero que quiero hacer es venir aquí y cambiar esto a 2 y eso eso establece que la versión 2 es una versión muy secundaria, por lo que probablemente solo sea una corrección de pequeños problemas con documentación y algún tipo.
+
+Entonces, probablemente no sea una gran diferencia en la funcionalidad.
+
+Ahora, lo siguiente que queremos ver en este video es que tenemos este objeto de información.
+
+Así que permítanme desplazarme hacia abajo hasta eso.
+
+Estos son los objetos de información, por lo que podemos ver aquí que en realidad tiene una serie de propiedades para un título, descripción, TermsOfService, contacto, licencia y versión.
+
+Entonces podemos ver que solo se requieren el título y la versión y puede ver aquí que para hacer el título y la versión para nosotros la descripción es opcional pero si entro aquí al editor y si controlo el espacio y Solo estoy sentado en el espacio de control y podría ser diferente en un teclado de Windows, pero para OSX, usted Puedo ver que esto muestra las diferentes propiedades y digamos que quiero hacer contacto, dejo mi información de contacto.
+
+Esto se convierte en otro objeto y si aparezco podemos ver que estas son las propiedades, así que pondré el nombre mi nombre, URL y mi correo electrónico y este es mi correo electrónico válido.
+
+Envíame un correo electrónico y lo leeré.
+
+No puedo garantizar que responderá porque recibo un montón de correos electrónicos, pero ahora puede ver cómo actualizo esto.
+
+en el lado derecho de la pantalla donde la documentación, como puede ver, también se está actualizando y echemos un vistazo a la especificación.
+
+También puedo hacer una licencia, así que vea el objeto de la licencia, así que esta es toda la información y seguiré adelante.
+
+el Apache 2.0 también.
+
+Así que haremos la misma licencia allí.
+
+Así que ven aquí de nuevo.
+
+Recuerde que su espaciado observará su espaciado y verá la licencia y ahora puede ver que cometí un error y estoy recibiendo un error allí.
+
+Así que url y estoy pegando en esa url apache 2.0.
+
+Así que esto configura nuestro objeto de información.
+
+Comprobemos dos veces allí.
+
+Así que puedes ver aquí
+
+me pongo en contacto.
+
+No hice los términos de servicio,
+
+esa es una propiedad opcional.
+
+Sigamos adelante y añadamos eso también.
+
+aqui
+
+términos de servicio
+
+al igual que.
+
+Así que ahora es un objeto de información completamente completo y nuevamente estas propiedades tienen que coincidir.
+
+Así que ven aquí cómo son estos objetos.
+
+Así que tenemos título, descripción y así sucesivamente.
+
+Estas son todas las propiedades que estoy proporcionando a eso.
+
+De nuevo, lo que está pasando aquí es el objeto de información.
+
+Estas son sus propiedades y luego ese objeto de información tiene un objeto de contacto y también un objeto de licencia.
+
+y podemos ver aquí esto corresponde, tenemos el objeto de información y luego estas son las diferentes propiedades
+
+puede ver la especificación OpenAPI que dice que el contacto no es solo una cadena, en realidad es
+
+un objeto estructurado que espera dentro de la especificación.
+
 ## OpenAPI Servers Object 03:37
 ## Assignment - Add Servers 1 preguntas
 ## OpenAPI Paths Object 06:26
