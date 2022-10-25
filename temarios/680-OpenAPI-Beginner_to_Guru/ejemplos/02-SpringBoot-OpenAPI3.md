@@ -273,3 +273,20 @@ Además, si vamos a **`http://localhost:8080/v3/api-docs`**, la descripción de 
 
 <img width="641" alt="image" src="https://user-images.githubusercontent.com/23094588/197806996-e4d859c8-c6b5-44b9-9a1e-63516c9a5af5.png">
 
+Supongamos que queremos cambiar el título y otras propiedades para **Swagger**. Podemos hacerlo usando el siguiente:
+
+<img width="849" alt="image" src="https://user-images.githubusercontent.com/23094588/197807427-124aabe1-5d0a-4ebb-b228-385b1cf6587e.png">
+
+Si ahora vamos a **`localhost:8080/swagger-ui.html`** podemos ver la interfaz de usuario de **Swagger** de la siguiente manera:
+
+<img width="834" alt="image" src="https://user-images.githubusercontent.com/23094588/197807835-2361d16b-2191-464c-a3d2-038cf0cd1a72.png">
+
+Supongamos que queremos definir una ruta personalizada de nuestra documentación. Lo definimos en **`application.properties`** de nuestro proyecto **Spring Boot**:
+
+<img width="838" alt="image" src="https://user-images.githubusercontent.com/23094588/197808328-e83c188c-dbd1-469d-a0f8-7597302a9b7e.png">
+
+
+Si ahora vamos a **`http://localhost:8080/javainuse-openapi`** podemos ver la documentación
+
+<img width="834" alt="image" src="https://user-images.githubusercontent.com/23094588/197808765-4cff0f16-c046-433b-96a5-011c45a58113.png">
+
