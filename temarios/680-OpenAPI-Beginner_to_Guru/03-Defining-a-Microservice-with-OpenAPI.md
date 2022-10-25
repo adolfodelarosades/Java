@@ -490,70 +490,46 @@ Ahora, lo siguiente que queremos ver es que tenemos una sección **Info Object**
 
 <img width="694" alt="image" src="https://user-images.githubusercontent.com/23094588/197752396-97dcfb35-ea79-41f6-bd8a-d2bc05d3901f.png">
 
-
-Así que permítanme desplazarme hacia abajo hasta eso.
-
 Estos son los objetos de información, por lo que podemos ver aquí que en realidad tiene una serie de propiedades para un título, descripción, TermsOfService, contacto, licencia y versión.
 
-Entonces podemos ver que solo se requieren el título y la versión y puede ver aquí que para hacer el título y la versión para nosotros la descripción es opcional pero si entro aquí al editor y si controlo el espacio y Solo estoy sentado en el espacio de control y podría ser diferente en un teclado de Windows, pero para OSX, usted Puedo ver que esto muestra las diferentes propiedades y digamos que quiero hacer contacto, dejo mi información de contacto.
+Entonces podemos ver que solo se requieren el título y la versión y puede ver aquí que para hacer el título y la versión para nosotros la descripción es opcional pero si entro al editor
 
-Esto se convierte en otro objeto y si aparezco podemos ver que estas son las propiedades, así que pondré el nombre mi nombre, URL y mi correo electrónico y este es mi correo electrónico válido.
+<img width="591" alt="image" src="https://user-images.githubusercontent.com/23094588/197882828-abc2644c-fc95-4c0f-b458-575bf4876390.png">
 
-Envíame un correo electrónico y lo leeré.
+y si damos CTRL + SPACE puede ver que muestra las diferentes propiedades que podemos insertar en la sección **`info`**
 
-No puedo garantizar que responderá porque recibo un montón de correos electrónicos, pero ahora puede ver cómo actualizo esto.
+<img width="869" alt="image" src="https://user-images.githubusercontent.com/23094588/197883082-3ff20742-fab5-45d5-9317-fa7c10c1a2bd.png">
 
-en el lado derecho de la pantalla donde la documentación, como puede ver, también se está actualizando y echemos un vistazo a la especificación.
 
-También puedo hacer una licencia, así que vea el objeto de la licencia, así que esta es toda la información y seguiré adelante.
+y digamos que quiero hacer contacto, dejo mi información de contacto. Esto se convierte en otro objeto y si vemos la parte derecha podemos ver las propiedades insertadas, así que pondré el nombre mi nombre, URL y mi correo electrónico y este es mi correo electrónico válido.
 
-el Apache 2.0 también.
+<img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/197883831-1d891eed-ec5f-4bd0-81f4-4551a642a914.png">
 
-Así que haremos la misma licencia allí.
+en el lado derecho de la pantalla donde la documentación, como puede ver, también se está actualizando y podemos ver la información que metimos.
 
-Así que ven aquí de nuevo.
+Echemos un vistazo a la especificación.
 
-Recuerde que su espaciado observará su espaciado y verá la licencia y ahora puede ver que cometí un error y estoy recibiendo un error allí.
+<img width="1375" alt="image" src="https://user-images.githubusercontent.com/23094588/197884731-9a5065c0-7f3d-4109-a9bc-9119d74ac74a.png">
 
-Así que url y estoy pegando en esa url apache 2.0.
+También puedo tener una licencia, así que vea el objeto de la licencia, que tiene un **`name`** y **`url`** adelante.
+
+Así que haremos la misma licencia en nuestro editor, recuerde que con CTRL + SPACE vera los campos que puede insertar
+
+<img width="932" alt="image" src="https://user-images.githubusercontent.com/23094588/197885571-af34e9e0-2fc9-421a-bddf-3716af89d621.png">
+
+<img width="1197" alt="image" src="https://user-images.githubusercontent.com/23094588/197885761-b2d96f0e-c4ae-40bd-96d8-9eb735b9fba4.png">
 
 Así que esto configura nuestro objeto de información.
 
-Comprobemos dos veces allí.
+También tenemos una propiedad opcional **`termsOfService`**  añadamos eso también.
 
-Así que puedes ver aquí
-
-me pongo en contacto.
-
-No hice los términos de servicio,
-
-esa es una propiedad opcional.
-
-Sigamos adelante y añadamos eso también.
-
-aqui
-
-términos de servicio
-
-al igual que.
+<img width="1154" alt="image" src="https://user-images.githubusercontent.com/23094588/197886774-21942735-5690-48ac-aba3-f71838132bc6.png">
 
 Así que ahora es un objeto de información completamente completo y nuevamente estas propiedades tienen que coincidir.
 
-Así que ven aquí cómo son estos objetos.
+Así que vea cómo son estos objetos, tenemos título, descripción y así sucesivamente. Estas son todas las propiedades que estoy proporcionando. Dentro tenemos el objeto de información con son sus propiedades y luego ese objeto de información tiene un objeto de contacto y también un objeto de licencia y podemos ver que esto corresponde, tenemos el objeto de información y luego estas son las diferentes propiedades, puede ver la especificación OpenAPI que dice que el contacto no es solo una cadena, en realidad es un objeto estructurado.
 
-Así que tenemos título, descripción y así sucesivamente.
-
-Estas son todas las propiedades que estoy proporcionando a eso.
-
-De nuevo, lo que está pasando aquí es el objeto de información.
-
-Estas son sus propiedades y luego ese objeto de información tiene un objeto de contacto y también un objeto de licencia.
-
-y podemos ver aquí esto corresponde, tenemos el objeto de información y luego estas son las diferentes propiedades
-
-puede ver la especificación OpenAPI que dice que el contacto no es solo una cadena, en realidad es
-
-un objeto estructurado que espera dentro de la especificación.
+<img width="1364" alt="image" src="https://user-images.githubusercontent.com/23094588/197887587-7e44aa0d-0733-4507-8094-b83ce9e1c3ff.png">
 
 ## OpenAPI Servers Object 03:37
 ## Assignment - Add Servers 1 preguntas
