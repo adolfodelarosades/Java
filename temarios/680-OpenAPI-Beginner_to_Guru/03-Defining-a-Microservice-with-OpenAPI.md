@@ -622,6 +622,273 @@ Volvamos a la especificación, por lo que el elemento de servidores y la especif
 Y no revisé las variables, pero ese es un elemento que puedes usar. Personalmente, nunca tuve la necesidad de usar variables dentro de las propiedades del servidor.
 
 ## Assignment - Add Servers 1 preguntas
+
+Aprenda a agregar servidores en OpenAPI.
+
+<img width="572" alt="image" src="https://user-images.githubusercontent.com/23094588/197891799-a8c498da-8b78-49ed-9308-fd27e1ffc6b6.png">
+
+
+Agregar dos servidores adicionales a la especificación OA3: 
+
+* https://qa.example.com -  QA Control de calidad
+* https://prod.example.com - Producción
+
+Preguntas de esta tarea:
+
+¿Cuántos servidores puede agregar a una especificación OpenAPI?
+
+<img width="1190" alt="image" src="https://user-images.githubusercontent.com/23094588/197893014-40a6de76-60b8-4458-be3e-741586f9effb.png">
+
 ## OpenAPI Paths Object 06:26
+
+This video we're gonna start to take a look at the paths object.
+
+So this is the next major component within The OpenAPI specification. Remember we just looked at info servers and now we're taking a look at the paths object.
+
+This is a required object so toggle over here.
+
+Remember right now we do have this properly defined but it is defined as an empty array.
+
+So there's really nothing to it but that satisfies the OpenAPI schema because that is a required property but it can be empty which makes our current specification valid as far as being a valid OpenAPI specification.
+
+Let's take a little bit closer look at that.
+
+So the PathsObject. So lets click onto that and we can see here that it holds an array of path item objects.
+
+So it can be empty.
+
+But we want these path item objects here and you really need field pattern on this,
+
+this is important.
+
+This is gonna be the path for your API so that that path on the server so remember like here we're
+
+showing pets by id..
+
+Here's a pets/mine.
+
+So this one here I expect that would list my pets.
+
+That's kind of what that is implying.
+
+So there's a number of different paths that we can work against.
+
+So now for under that we are going to have a path item object.
+
+So let's take a closer look at the Path Item Object.
+
+And this here this is a path item object.
+
+And if you notice we have get, put, post, delete, options, head, patch, trace this ugly looks just like the
+
+http verb.
+
+So that's exactly what this is.
+
+And this is gonna be the verb operations.
+
+Now let's take a closer look at this.
+
+This is all the http operations that's how we specify that.
+
+And then that property gets an operation object.
+
+So let's take a closer look at a get and here's a number of parameters that are fields that we can specify
+
+on this object does get a little complex.
+
+And in this video we are gonna go through a very high level of this and then we'll start exploring out
+
+these other features so we're gonna provide a very minimal definition of an operation.
+
+So here what we wanna do is just do a very minimal and the only thing that we need to provide on this
+
+is the response object.
+
+So we need to provide a response and here we can provide a default.
+
+But I'm gonna do an HTTP Status Code.
+
+I'll show you exactly how to do that.
+
+And that is going to be a response object.
+
+And here you can see this is going to give us a description, headers, content and links.
+
+And the only property that is required is the description so we can do a very very simple implementation
+
+of this.
+
+So let me go through and show you how to do this.
+
+I'm gonna come back over to the editor now and I'm going to get rid of that empty array like so and
+
+now I can do.
+
+I'm gonna do v1 for version one of API and this is a convention.
+
+Let's do customers like so and you can see there the is now flashing red because it's not happy about that.
+
+Gonna come down and do a get. So I'm specifying a get operation and now I can do responses like so I can
+
+say 200 and I'm doing single quotes because I want that to be a string.
+
+Now I can do a description like so and we'll say that is a list of customers like so you could see there
+
+I took the web editor a second but it eventually resolved that and you can see here this is not we're
+
+getting a little funny on the syntax and I think Optionally you can make that a string like that note
+
+is something that you can do optionally but it is not required.
+
+Often defined the past just like that.
+
+So I'm saying /v1 for customers and for a get operation I'd have a response of 200
+
+and description and if I had additional operations, just gonna show you that real quick
+
+and I can say put.
+
+So if you developed a RESTful API's, you can see here. Now I got the get an output so that's how we define
+
+those multiple operations against this path.
+
+I do not wanna do that. I just wanted to demonstrate that for you.
+
+So you can see how this is coming together.
+
+So again in the paths we now have a path operation against this
+
+url v1/customers. I'm saying that is an HTTP get and I am expecting a response of 200 and
+
+the description of that response is going to be List of Customers. I'm gonna come over to the right-hand side of the
+
+screen to swagger UI. You can see now I have a default.
+
+So I'm not specifying anything there yet.
+
+I'm not sure where that property's coming from but we will get to that.
+
+But now I have a get operation.
+
+If I click on that we can see here that saying No parameters and other responses I have a 200
+
+of List of Customers.
+
+And if I had additional http codes that I wanted to list here I couldn't list them out and expand this
+
+out.
+
+But this is all stuff that we're gonna explore coming up in the course. The paths object is a very
+
+versatile, very complex.
+
+This is really where the meat and potatoes are of oOpenen API. In this video,
+
+I just wanna get you introduced to it and we will be learning a lot more about the features of the
+
+OpenAPI paths object.
+
+<hr>
+
+En este video, vamos a comenzar a echar un vistazo al objeto de rutas **`paths`**.
+
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/23094588/197893592-cefa97e5-4616-439b-9e41-74992681c487.png">
+
+
+Así que este es el próximo componente principal dentro de la especificación OpenAPI. Recuerde que acabamos de ver la información, servidores y ahora estamos echando un vistazo al objeto de rutas **`paths`**.
+
+Este es un objeto obligatorio.
+
+<img width="1035" alt="image" src="https://user-images.githubusercontent.com/23094588/197894026-dd5db122-141c-4104-a896-1b99ebec82e7.png">
+
+Recuerde que en este momento tenemos esto correctamente definido, pero está definido como un array vacío.
+
+<img width="602" alt="image" src="https://user-images.githubusercontent.com/23094588/197894249-27db69c3-1fff-4774-9c34-3bf5a4d373f8.png">
+
+Entonces, realmente no hay nada que no satisfaga el esquema OpenAPI porque esa es una propiedad requerida pero puede estar vacío, lo que hace que nuestra especificación actual sea válida en cuanto a ser una especificación OpenAPI válida.
+
+Echemos un vistazo un poco más de cerca a **Paths Object**, así que hagamos clic en eso y podemos ver aquí que contiene una matriz de objetos de elementos de ruta.
+
+<img width="1031" alt="image" src="https://user-images.githubusercontent.com/23094588/197894595-26159698-a784-4d09-b1cb-1e10f607191e.png">
+
+<img width="1039" alt="image" src="https://user-images.githubusercontent.com/23094588/197894871-997ec8cd-8e3b-4234-892d-88b3b8cfd453.png">
+
+<img width="1032" alt="image" src="https://user-images.githubusercontent.com/23094588/197894958-2aa594ed-9e06-49fd-9c42-fece21c35ff3.png">
+
+
+Entonces puede estar vacío, pero queremos estos objetos de elementos de ruta **`paths`** aquí y realmente necesita un patrón de campo (field pattern) en esto, esto es importante.
+
+Esta será la ruta para su API para que esa ruta en el servidor recuerde que aquí estamos mostrando mascotas por id. Aquí hay una mascota/la mía.
+
+<img width="1023" alt="image" src="https://user-images.githubusercontent.com/23094588/197895779-8d24e6d8-b04a-4991-a6a6-c66bd9149234.png">
+
+Así que este de aquí espero que enumere a mis mascotas. Eso es un poco lo que eso implica. Entonces, hay varios caminos diferentes contra los que podemos trabajar.
+
+Así que ahora vamos a tener un objeto de elemento de ruta.
+
+Así que echemos un vistazo más de cerca al objeto de elemento de ruta.
+
+<img width="793" alt="image" src="https://user-images.githubusercontent.com/23094588/197896272-2823b20f-0d30-4c35-8f2e-593d91d87218.png">
+
+Y esto aquí es un objeto de elemento de ruta y si nota que tenemos **`get`**, **`put`**, **`post`**, **`delete`**, **`options`**, **`head`**, **`patch`**, **`trace`** estos son verbos **http**. Así que eso es exactamente lo que es esto. Y estas van a ser las operaciones del verbo.
+
+Ahora echemos un vistazo más de cerca a esto. Estas son todas las operaciones http, así es como lo especificamos. Y luego esa propiedad obtiene un objeto de operación.
+
+Así que echemos un vistazo más de cerca a un **`get`** vamos a pulsar en
+
+<img width="1134" alt="image" src="https://user-images.githubusercontent.com/23094588/197896954-e46a0c04-c459-4a9f-b589-4bb4b614d721.png">
+
+
+y aquí hay una serie de parámetros que son campos que podemos especificar
+
+<img width="699" alt="image" src="https://user-images.githubusercontent.com/23094588/197897138-2944309d-c464-4caa-a449-bcdd05efa44d.png">
+
+este objeto se vuelve un poco complejo.
+
+Y en este video vamos a pasar por un nivel muy alto de esto y luego comenzaremos a explorar estas otras funciones, por lo que proporcionaremos una definición mínima de una operación. Así que aquí lo que queremos hacer es hacer un mínimo y lo único que tenemos que proporcionar en este 
+es el objeto de respuesta **`response`**.
+
+<img width="1032" alt="image" src="https://user-images.githubusercontent.com/23094588/197897444-f9b42980-368a-460e-959e-1991be885fd2.png">
+
+<img width="1050" alt="image" src="https://user-images.githubusercontent.com/23094588/197897642-409a6bf2-ec7b-416e-bbaa-d0a37363713a.png">
+
+Entonces, debemos proporcionar una respuesta y aquí podemos proporcionar un valor predeterminado. Pero voy a hacer un código de estado HTTP.
+
+Te mostraré exactamente cómo hacerlo. Y eso va a ser un objeto de respuesta.
+
+<img width="1056" alt="image" src="https://user-images.githubusercontent.com/23094588/197897894-2b0ebd14-0198-4c2f-b30b-58e4db7114fe.png">
+
+Y aquí puede ver que esto nos dará una descripción, encabezados, contenido y enlaces. Y la única propiedad que se requiere es la descripción para que podamos hacer una implementación muy simple de esta.
+
+Así que déjame pasar y mostrarte cómo hacer esto. Voy a volver al editor ahora y voy a deshacerme de esa matriz vacía así y ahora puedo hacer.
+
+<img width="1176" alt="image" src="https://user-images.githubusercontent.com/23094588/197899025-68ff1111-5806-4653-84cf-b164e4b958f5.png">
+
+Voy a hacer v1 para la versión uno de la API y esto es una convención. Hagamos que a los clientes les guste y pueden ver que ahora está parpadeando en rojo porque no está contento con eso. Voy a bajar y hacer un get. Así que estoy especificando una operación de obtención y ahora puedo hacer respuestas como para poder diga 200 y estoy entre comillas simples porque quiero que sea una cadena. Ahora puedo hacer una descripción como esta y diremos que es una lista de clientes como para que pueda ver allí
+
+Tomé el editor web por un segundo pero finalmente resolvió eso y puedes ver del lado derecho esto no es que estemos poniéndome un poco divertido con la sintaxis y creo que opcionalmente puedes hacer que una cadena como esa nota es algo que puede hacer opcionalmente pero no es obligatorio.
+
+A menudo define el pasado así. Así que estoy diciendo /v1 para clientes y para una operación de obtención tendría una respuesta de 200 y descripción y si tuviera operaciones adicionales, solo les mostraré eso muy rápido y puedo decir **`put`**.
+
+<img width="1216" alt="image" src="https://user-images.githubusercontent.com/23094588/197899565-3e5c6b18-e1c3-41df-aa04-d637eaccdb1c.png">
+
+Entonces, si desarrolló una **API RESTful**, puede ver aquí. Ahora obtuve una salida, así es como definimos esas múltiples operaciones contra este camino.
+
+No quiero hacer eso. Solo quería demostrarte eso. Así que quitamos el **`put`**.
+
+<img width="1180" alt="image" src="https://user-images.githubusercontent.com/23094588/197899946-c0f26468-80d2-400f-b66b-f56a6920092b.png">
+
+
+Así que puedes ver cómo se está uniendo esto. Entonces, de nuevo en las rutas, ahora tenemos una operación de ruta contra este url v1/clientes. Estoy diciendo que es un HTTP get y espero una respuesta de 200 y la descripción de esa respuesta será Lista de clientes. Voy a pasar al lado derecho de la 
+pantalla a swagger UI. Puedes ver que ahora tengo un valor predeterminado. Así que no estoy especificando nada allí todavía. No estoy seguro de dónde viene esa propiedad, pero llegaremos a eso.
+
+Pero ahora tengo una operación get. Si hago clic en eso, podemos ver aquí que dice Sin parámetros y otras respuestas Tengo un 200 de Lista de Clientes. Y si tuviera códigos http adicionales que quisiera enumerar aquí, no podría enumerarlos y expandir esto afuera.
+
+Pero esto es todo lo que vamos a explorar en el curso. El objeto paths es un objeto muy versátil, muy complejo.
+
+Aquí es donde realmente están la carne y las papas de oOpenen API. En este video, Solo quiero que te lo presenten y aprenderemos mucho más sobre las características del Objeto de rutas OpenAPI.
+
+
 ## Assignment - List Beers 1 preguntas
 ## OpenAPI Quiz 6 preguntas
