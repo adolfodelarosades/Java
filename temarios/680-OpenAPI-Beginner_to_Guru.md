@@ -190,3 +190,8 @@ Analistas comerciales responsables de las especificaciones de API
 ### 10. Appendix A - Using GitHub 1 clases • 1 min
 
 * Git and GitHub Basics - Start Here! 00:37
+
+### 11. Ejemplos Externos
+
+* [Spring Boot + Swagger2]([https://www.javainuse.com/spring/boot_swagger](https://github.com/adolfodelarosades/Java/blob/master/temarios/680-OpenAPI-Beginner_to_Guru/ejemplos/SpringBoot-Swagger2.md))
+
