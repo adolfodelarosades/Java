@@ -138,7 +138,7 @@ Si quieres ser un profesional en las tecnologías de Java y avanzar al siguiente
 * Verificando el número de invocaciones de los **`mock`** 10:36
 * Descargar Código Fuente 00:03
 
-### 4. Spring Boot: Test de Servicios (Mockito) - 12 clases • 1 h 29 min
+### [4. Spring Boot: Test de Servicios (Mockito) - 12 clases • 1 h 29 min](https://github.com/adolfodelarosades/Java/blob/master/temarios/850-Guia-Completa-JUnit-y-Mockito/04-Spring-Boot__TestdeServicios.md)
 
 * Introducción y creando el proyecto Spring 11:52
 * Creando las clases del modelo 10:31
