@@ -73,215 +73,343 @@ Y se descarga, una vez que lo descargan, nos vamos a la carpeta del curso y lo d
 
 <img width="1227" alt="image" src="https://user-images.githubusercontent.com/23094588/198376275-6e60c50a-1864-43eb-bd35-f42334161b46.png">
 
+Bien, lo siguiente nos vamos a **IntelliJ** y vamos a abrir el proyecto que acabamos de descomprimir.
 
-AQUIIIIIIIIIIII
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198395025-ceab3656-3fac-4e96-9a39-677bafaff886.png">
 
-Da lo mismo.
+Este proyecto Maven tiene el archivo **`pom.xml`** donde se encuentran todas las dependencias, la versiíon de Java que estamos usando, etc.
 
-Acá tengo otro proyecto, pero no importa.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198398247-d52305c9-d26a-4d66-a65b-43b585eeef2f.png">
 
-No se preocupen por eso.
+en este caso al crear el proyecto en **Spring Inizializer** solo añadimos una dependencia **Spring Web**
 
-Simplemente voy a pegar.
+<img width="498" alt="image" src="https://user-images.githubusercontent.com/23094588/198395588-783d846f-d7d4-487f-9dfc-9a3548bc7621.png">
 
-Esto es primum test y lo descomprimir.
+Pero como podemos ver en el **`pom.xml`** hay dos dependencias **`spring-boot-starter-web`** que es la que corresponde para **Spring Web**, pero también se ha incluido **`spring-boot-starter-test`** en esta dependecia se incluye **JUnit5** y **Mockito**
 
-Entonces con clic derecho y les comprime con cualquier herramienta que tengan extraer acá y acá.
 
-Tengo put test nuestro proyecto con Spring put para traja context como Akito.
+<img width="725" alt="image" src="https://user-images.githubusercontent.com/23094588/198399464-68bd76fc-dcef-4ac8-b9fa-44989071e187.png">
 
-De hecho ya se incluye todas las herramientas, librerías o framework de Yuni de Mosquito para traja
-
-con Springwood.
-
-No se preocupen como digo de este proyecto, estos son de otro curso, así que no se preocupen.
-
-Como que no existen.
-
-No lo tomen en cuenta, lo que importa es primm potest.
-
-Bien, lo siguiente nos vamos a intelige.
-
-Lo tenemos tal como lo teníamos en la última clase.
-
-Último video vamos a cerrar todo foil.
-
-Cerrar proyecto.
-
-Voy a expandir acá.
-
-Bien, Adaptemos, Yuni, tenemos a moquitos, vamos a crear.
-
-No, en realidad el proyecto ya lo tenemos creado, vamos a ADRID de proyecto, hacemos un clic en Open.
-
-Nos vamos a cursos yaba o la carpeta que tengan.
-
-Seleccionamos Plim but test proyecto OK.
-
-Llegarle Colocábamos que es un proyecto confiable tras proyecto OK.
-
-Se fijan y así simple, estamos trabajando Spring Put@ dentro de inteligir community.
-
-Es decir, es la forma.
-
-Creamos el proyecto de forma eterna en la página Start Spring.
-
-Punto IO Spring inicial Heisler y listo.
-
-Lo.
-
-Lo que si nos vamos al POM.
-
-Lo único que tengo que cambiar es la versión de Yaba.
-
-Se acuerdan que seleccioné el once, pero en realidad tengo la 14 o la 15, creo.
-
-Si la 15 no tengo, instala la última.
-
-Pero bueno, un detalle.
-
-Finalmente el curso funciona desde la 1 8 o la 8 hasta la 16 o la última del JDK.
-
-Entonces, este paso importante, si no aparece el JDK cuando crean el proyecto acá lo modifican, colocan
-
-la 15 o la que tengan instalada.
-
-Acá tienen la dependencia Trim Buds Tater Web para atacar con aplicaciones web.
-
-Después en el curso.
-
-En esta sección vamos a atajar también con otras herramientas otra librería para testing en Spring,
-
-pero hoy lo vamos a ver después adelante.
-
-Por ahora vamos a atacar con Yuni, como quito lo que hemos visto, pero integrado con Spring.
-
-De hecho, ni siquiera necesitamos agregar ninguna librería, ninguna dependencia, porque todo se incluye,
-
-todo está automatizado dentro de Spring Put@ es la gran ventaja que tiene lo siguiente importante hacer
-
-un clic acá para cargar los cambios de Maven.
-
-Como siempre, un clic.
-
-Para que se descargue todo lo que se tenga que cargar.
-
-Lo que no se descargó.
-
-Estamos listos.
-
-Acá tenemos esa receté main yaba.
-
-En fin, nuestra estructura del proyecto con Spring, como expliqué al principio, es recomendable que
-
-tengan una base de Spring.
-
-Sería lo ideal, sino, como digo, igual pueden hacer esta sección, van a aprender y después profundizan
-
-de esta forma rápidamente.
-
-Porque yo sé, me imagino que muchos ya lo saben.
 
 Vamos a ver la estructura del proyecto.
 
-Acá tenemos el POM.
+* Tenemos el **`pom.xml`**
+* **`mvnw`** **`mvnw.cmd`** Estos archivos sirven para traja con Maven. De hecho integra Maven de forma automática. Es un grapar para Maven.
+* **`src.main`** paquete para nuestro código
+* **`src.test`** contexto para hacer nuestras Pruebas Unitarias., de hecho, ya trae una clase testing para empezar a trabajar. De hecho, si ejecutamos con click derecho tenemos **Run...**.
 
-Ya lo vimos.
-
-Acá tenemos archivo para traja con Maven.
-
-De hecho integra Maven de forma automática.
-
-Es un grapar para Maven.
-
-Acá tenemos el S.
-
-Recé.
-
-Mayne y el contexto?
-
-Test Hakata Todo nuestro contexto, de hecho, ya trae una clase testing para empezar a trabajar.
-
-Se fijan spero input test.
-
-De hecho, si ejecutamos con click derecho tenemos rrán.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198400882-bf6d3e05-e140-4239-a055-d17dabc4c5eb.png">
 
 Va a ejecutar nuestra unitaria y le va a pasar porque en realidad no tiene nada.
 
-Se fijan todo bien.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198401046-f9389170-422a-4234-9663-311a1c6ea76f.png">
 
-Test result CONTEX Lott Bueno, no tiene nada, pero sólo pasa.
+Sprint Boot es para desarrollar aplicaciones empresariales con API, red, aplicaciones web o escritorio o de consola, lo que queramos, Integración también con persistencia, con JPA, con Internet, un montón de cosas.
 
-Llega hasta la consola y todo el log de sprint de sprint.
+En **`src.main`** está todo nuestro código fuente. Acá está la clase principal de Spring.
 
-Cuando arranca.
+<img width="1468" alt="image" src="https://user-images.githubusercontent.com/23094588/198401890-6919c594-fd52-4a04-9ef5-8cf0cdfe0bff.png">
 
-Bueno, Sprint es para desarrollar aplicaciones empresariales con API, red, aplicaciones web o escritorio
+Una clase con el método **`main`**. La clase se anota con **`@SpringBootApplication`**, que en el fondo configura todo. Toda la configuración de Spring Boot, maneja un contexto de inyección dependencia, podemos registrar beans, se pueden escanear componentes, scan de forma automática.
 
-o de consola, lo que queramos.
+Tenemos también la carpeta **`resource`**  acá tenemos **`template`** donde tendremos plantillas, vistas, HTML y containers. Tenemos también **`static`** para archivos estáticos, de contenido estático como una aplicación Web, por ejemplo hoja de estilos, JavaScript, html estático, imágenes, todo lo que es FrontEnd.
 
-Integración también con persistencia, con JPA, con Internet, un montón de cosas.
-
-Bueno, acá tiene todo lo que es test, pero en Main está todo nuestro código fuente.
-
-Acá está la clase principal de Spring Put@ es una clase con el método Main se fijan.
-
-Acá se configura todo y trae una anotación Springwood Ketcham, que en el fondo configura todo.
-
-Todo lo que auto configuración de Spring Boot maneja un contexto de inyección dependencia.
-
-Acá podemos registrar beans.
-
-De hecho, se pueden escanear componen scan de forma automática.
-
-Se van a leer.
-
-Va a buscar en nuestro proyecto cierta clase con ciertas anotaciones como los servis, como los controller,
-
-como los repository y los beans o component y lo va a registrar de forma automática en el contenedor
-
-y después lo podemos inyectar en otro componente.
-
-Inyección de dependencia en el fondo Spring Framework Spring Boot es muy amplio.
-
-Me es imposible ver todo esto en este curso, así que nos vamos a enfocar a todo lo que puedas.
-
-Unitaria a tste y en Resource acá tenemos.
-
-Bueno para plantillas vistas HTML y Trojan con Tinduf archivo estáticos de contenido estático como una
-
-aplicación web, por ejemplo hoja de estilos JavaScript, html estático, imágenes.
-
-Todo lo que es frontend llega.
-
-Tenemos el properties.
-
-Acá podemos configurar nuestra aplicación, por ejemplo conexión en esa base de datos y un montón de
-
-cosas.
-
-Creo que ya me pandeo mucho.
-
-Vamos a cerrar acá nuestra clase principal todo que auto configuración anotaciones el escán para registrar
-
-los beans.
-
-De hecho, en este curso también vamos a trabajar con eso, con inyección, dependencia o componente
-
-con service, claro, porque vamos a crear una aplicación y vamos a probar.
-
-Cerramos.
-
-Y esta es la que más abierta y el POM lo podemos cerrar por ahora.
-
-La siguiente clase vamos a comenzar con crear nuestra aplicación el models, el servis, los repositorios
-
-para cuenta, para banco.
-
-En fin, lo dejamos así y nos vemos en la siguiente clase.
-
+Y finalmente tenemos el archivo **`application.properties`** donde podemos configurar nuestra aplicación, por ejemplo conexión a la Base de Datos y un montón de cosas.
 
 ## Creando las clases del modelo 10:31
+
+Ok, continuamos creando nuestra aplicación de prueba en Sprint.
+
+Vamos a continuar con las clases de modelo que serían nuestros datos de la aplicación.
+
+Probablemente estén en la persistencia en alguna tabla de hace rato.
+
+Así que lo vamos a representar con la clase, cuenta y banco.
+
+Un ejemplo similar al que hemos visto, pero mucho más real, ya utilizando repositorio servis como
+
+Akihito y por supuesto integrado con el framework.
+
+Y después le vamos a agregar persistencia.
+
+Es decir, vamos a probar ya en un contexto de base dato con integración.
+
+Pero por ahora vamos a partir con lo que ya conocemos, con lo que manejábamos, con Yuni como Akito.
+
+Así que nos vamos a package importante en Main Yaba.
+
+Es importante que sea en Main y no en texto, porque acabamos de crear nuestro código en nuestra aplicación
+
+y acá vamos a probar.
+
+Entonces en nuestro package principal A y otro punto importante en Spring, me imagino que muchos ya
+
+lo saben, pero para los que no saben este tema es que acá tenemos la clase principal.
+
+Se acuerdan que esta anotada con Springwood?
+
+Apliqué Schon y está dentro de un package principal.
+
+Este sería el package raíz de nuestra aplicación y dentro сбербанк principal tenemos que tener todo
+
+nuestro código, todas nuestras clases o sub package.
+
+Es decir, todos los controladores, todos los servi, toda la clase models repositorio siempre tienen
+
+que estar dentro de este package principal y eso se respeta.
+
+No podemos crear una clase de Spring, una clase Java que esté fuera de este pacato, sino no lo va
+
+a reconocer bien.
+
+Un tema importante.
+
+Entonces dentro Estepa Cazzo vamos a crear otro Pacaya New Package Models también otro más con Alt Insert
+
+nos vamos a ir acá a package repositorios de repositorios.
+
+También le podríamos colocar datos de Data Access Object.
+
+Lo mismo vamos a crear otro más package.
+
+Voy a quitar repositorios y vamos a crear los servicios para la clase de servicios que en el fondo hace
+
+la clase.
+
+Quedamos a probar y los repositorios van a ser nuestros mock y los mails.
+
+Bueno, si de nuestras clases de TEÓ o Entity que representa los datos de la aplicación que probablemente
+
+estén mapeado a tablas de la base datos se fijan bien con estos pacato nos vamos a ir a Models al INSER,
+
+vamos a crear una clase, le vamos a llamar cuenta perfecto con atributos, vamos a tener el Heidy del
+
+tipo long private long Heidy pues el tipo long o del tipo integer, pero ojalas que sea del tipo de
+
+referencia de la clase rapper de Java con mayúscula.
+
+Por eso puse mayúscula ni no primitivo.
+
+El siguiente nombre la persona private string nombre o persona mejor
+
+privé también bi decimal.
+
+Saldo el saldo de la cuenta, lo siguiente vamos a crear constructores, entonces también con clic derecho
+
+o con al insert constructor primero sin campo, sin nada.
+
+Select nón.
+
+Se fijan un conductor vacío, pero después vamos a crear un constructor con parámetros, con el Heidy,
+
+con persona y con saldo.
+
+Bien, lo siguiente sería lo lletra ctes.
+
+Para todos seleccionamos los tres OK.
+
+Ya casi tenemos nuestra cuenta.
+
+Lo siguiente vamos a crear métodos especiales.
+
+El recuas y el Ascot.
+
+Y Quarts y gasco siguiente.
+
+Con los tres atributos.
+
+En el fondo, temeroso, muy importante para verificar, para validar si dos objetos son similares en
+
+sus atributos, son iguales en sus atributos.
+
+Típicamente cuando trabajamos con colecciones como listas, con los set, con los MAP y también con
+
+persistencia, después con IBEN, con JPA, son métodos requeridos.
+
+Importante siguiente.
+
+Lo mismo acá no es todo, acá no es importante que sea para el asco y parali cuesta la tremas, el método
+
+equals los 3 y el asco los 3.
+
+Siguiente y finalizar acá no colocamos nada.
+
+Vigen y ajja implementarlos equals y Alcott por nosotros.
+
+En el fondo, para comprar valores, atributos en nuestros objetos, cuenta este caso bien lo siguiente
+
+nos vamos a ir al Package Explorer, vamos a ir al Models, vamos a crear otro más ya class banco ok,
+
+lo mismo Leydi del tipo lo Heidy.
+
+Nombre del banco.
+
+Y qué más podríamos tener un atributo del tipo entero.
+
+Total transferencia que lleve una contabilidad de la cantidad.
+
+Transferencia que se realizó en el banco de Veidt del tipo Integer.
+
+Total transferencia.
+
+Lo mismo.
+
+Lo siguiente constructor.
+
+Vacío.
+
+Select nón después tenemos otro constructor con los campos los 3.
+
+Y lo que tras Etter bien, pero antes dije tras setter vuestro un cambio en el tipo.
+
+Total transferencia lo dejas de tipo primitivo solamente para que por defecto sea cero.
+
+Y tampoco no vamos a necesitar los métodos de la clase Rapper Integer solamente para a cero para que
+
+partan cero por defecto.
+
+Acá cambiamos también acá.
+
+Int.
+
+Aunque en detalle, y luego con este cambio de transceptor.
+
+Oden.
+
+Ya tenemos una clase y tem. podremos tener el Ascot y el equals para Vanko, aunque no lo vamos a utilizar.
+
+Pero bueno, para el ejemplo no es tan necesario, así que lo dejamos así.
+
+Qué más tenemos en cuenta?
+
+Vamos a crear un par de métodos control TAB.
+
+Nos vamos a ir a cuenta y por acá unos métodos.
+
+El método débito y el crédito débito es cuando nos restan cierta cantidad de dinero del saldo.
+
+Es decir, cuando realizamos una transferencia a otra cuenta.
+
+Y el crédito todo lo contrario.
+
+Es cuando recibimos dinero de otra cuenta de una transferencia que nos hacen a nosotros.
+
+Entonces.
+
+Public void débito y public void crédito.
+
+Partiríamos con débito.
+
+Viven mal el monto bien y crédito.
+
+Décima.
+
+También monto.
+
+Recuerden que V decimal e inmutable no es que tenga que invocar el método, por ejemplo, para sumar,
+
+que es el método AB o para restar el método substrato.
+
+No, porque lo que hace en cada operación aritmética o de cualquier tipo sobre este objeto, lo que
+
+hace devolver una instancia y esa es la que vale, la original se mantiene tal cual, no se cambia,
+
+no se modifica.
+
+Entonces, por eso tenemos que volver a asignar este cambio al atributo saldo.
+
+Entonces, por ejemplo, di saldo, punto, saldo, igual diez puntos, saldo también punto.
+
+Cuando débito restamos entonces substrato sobre el monto se fijan y acá en crédito similar diez punto
+
+saldo.
+
+Ser el saldo o saldo.
+
+Simplemente da lo mismo punto AB.
+
+Para sumar sumamos el monto de origen bien crédito perfecto.
+
+Solamente suma y no hay nada que validar.
+
+Pero cuando restamos, cuando realizamos un depósito o transferencia a otra cuenta, necesitamos balear.
+
+Claro, porque qué pasa si el monto es mayor a la cantidad de dinero que tenemos disponible en el saldo?
+
+Debo manejar algún tipo de excepción y eso ya lo vimos y vamos a hacer más o menos lo mismo.
+
+Entonces, bueno, lo primero es crear una excepción Exception personalizada en nuestro código.
+
+Nos vamos a ir al Package Explorer.
+
+Vamos a crear un nuevo pacatos solamente para organizar.
+
+No tiene por qué ser así, pero es para organizar.
+
+Vamos a crear un nuevo pacato que vamos a llamar except John's.
+
+Decepciones y acá vamos a crear una nueva clase, la clase le vamos a llamar dinero suficiente septón.
+
+Ok.
+
+Stents Reineta Ranta.
+
+Es hecho, vamos a implementar un constructor donce con al inser constructor que pase el mensaje.
+
+Un mensaje personalizado.
+
+Volvemos.
+
+Tab Nos vamos a cuenta de regreso y valíamos en débito.
+
+Nos vamos a débito.
+
+Acá vamos a cambiar.
+
+Vamos a quitar esto.
+
+Quitábamos vamos a colocar bien décima.
+
+Perfecto nuevo salvo validamos con un if nuevo saldo punto comparto.
+
+Convives y Mercero?
+
+Decimal punto cero.
+
+Esto no lo explica porque ya lo vimos.
+
+Pero básicamente, si quedamos con un saldo negativo menor que cero, entonces ahí lanzamos la acepción
+
+después de restar, después de la transferencia.
+
+Pero antes de realizar la transacción, es decir, el comit, por ejemplo, como si hicieran un commit
+
+enlace atto.
+
+Antes de eso, antes de asignar el nuevo saldo al salto a la cuenta valíamos.
+
+Entonces es cierto, es menor que 0.
+
+La samma la acepción con constru niu dineroy insuficiente exception.
+
+Ya.
+
+Y si todo está bien, hacemos el ComitÃ.
+
+Es decir, 10 punto saldo le asignamos en un saldo.
+
+Ya lo tenemos ahí tenemos nuestra lógica negocio en otros datos, la clase de modelo.
+
+Falta acá un punto y coma.
+
+Importante dinero insuficiente septón.
+
+Acá estamos listos.
+
+Bueno, lo dejamos así y continuamos en la siguiente clase con los repositorios, los servis, el resto
+
+de nuestra aplicación.
+
 ## Creando los repositorios 05:34
 ## Implementando la clase de servicio (Service) 06:15
 ## Escribiendo nuestros tests con JUnit y mockito 11:40
