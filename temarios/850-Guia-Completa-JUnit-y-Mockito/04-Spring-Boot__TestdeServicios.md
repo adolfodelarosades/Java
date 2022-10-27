@@ -118,17 +118,12 @@ Y finalmente tenemos el archivo **`application.properties`** donde podemos confi
 
 ## Creando las clases del modelo 10:31
 
-Ok, continuamos creando nuestra aplicación de prueba en Sprint.
+Ok, continuamos creando nuestra aplicación de prueba en Spring.
 
-Vamos a continuar con las clases de modelo que serían nuestros datos de la aplicación.
+Vamos a continuar con las **Clases de Modelo** que serían nuestros datos de la aplicación. Probablemente estén en la persistencia, en alguna tabla de la BD. Así que lo vamos a representar con las clases **`Cuenta`** y **`Banco`**. Un ejemplo similar al que hemos visto, pero mucho más real, utilizando Repositorios, Services, integrado con Mockito todo en el Framework de Spring
 
-Probablemente estén en la persistencia en alguna tabla de hace rato.
 
-Así que lo vamos a representar con la clase, cuenta y banco.
-
-Un ejemplo similar al que hemos visto, pero mucho más real, ya utilizando repositorio servis como
-
-Akihito y por supuesto integrado con el framework.
+AQQUUUIIIIIII
 
 Y después le vamos a agregar persistencia.
 
