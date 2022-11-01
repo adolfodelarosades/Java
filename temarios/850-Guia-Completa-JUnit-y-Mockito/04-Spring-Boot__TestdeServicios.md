@@ -21,7 +21,7 @@ Entonces, para esta parte del curso recomiendo que tengan cierta experiencia con
 
 Entonces, dicho esto, vamos a comenzar como estamos trabajando con **IntelliJ** la versión Comunity no integra todo **Spring Boot** no viene en forma nativa, solamente la versión de pago que es **IntelliJ Ultimate**, pero no la **IntelliJ Comunity**. Entonces estamos obligados a crear el proyecto por fuera. 
 
-Entonces nos vamos a ir a una página que es propia del equipo de Spring https://start.spring.io/. Esta página permite crear un proyecto vamos a hacer un clic.
+Entonces nos vamos a ir a una página que es propia del equipo de Spring https://start.spring.io/. Esta página permite crear un proyecto.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198337175-a2b0fda2-2bb8-4e18-bc58-cc405c16f5c5.png">
 
@@ -29,7 +29,7 @@ Esta página permite crear un proyecto Spring. Vamos a seleccionar las siguiente
 
 * Maven
 * Lenguaje Java
-* La última versión estable hasta la fecha 2.7.5. Seleccionamos esa o la última, que nos diga SNAPSHOP, ni tampoco RC1 porque son versiones que todavía están en desarrollo. Solamente versiones finales. Por ejemplo 2.6.13.
+* La última versión estable hasta la fecha 2.7.5. Seleccionamos esa o la última, que NO diga SNAPSHOP, ni tampoco RC1 porque son versiones que todavía están en desarrollo. Solamente versiones finales. Por ejemplo 2.6.13.
 * Como hemos seleccioonado un proyecto Maven tenemos que poner:
    * Group: **org.javaocio.test.springboot.app**
    * Artifict: **springboot_test**
@@ -45,13 +45,9 @@ Esta página permite crear un proyecto Spring. Vamos a seleccionar las siguiente
 
 <img width="696" alt="image" src="https://user-images.githubusercontent.com/23094588/198373795-f6b8c871-d8af-4816-88ca-a05c795bf822.png">
 
-Como cualquier proyecto Maven, el grupo Heidy, se acuerdan el que hemos estado trabajando Orth punto. En mi caso a Guzmán Test le veo colocar punto todo junto. Spring Boot Punto App de aplicación en nombre proyecto te vas a colocar Spring Boot Test.
+**Spring Boot** ya incluye un servidor Tomcat para Aplicaciones Web. Es decir, cuando trabajamos con Spring MVC, Spring Web, para aplicaciones Web con API REST, enfín lo que queramos ya se incluye un servidor Tomcat que para publicar nuestra aplicación HTTP en un puerto 8080 por defecto. Es decir, no necesitamos tener que instalar un servidor aparte, ya se incluye.
 
-Con guión bajo test se fijan el ati fact Heidy Rainbow Test, que corresponde también al nombre proyecto, alguna descripción importante que le queramos dar en nombre del package de Yaba? Esta importante or punto a Guzmán a.3 springwood app esto acá le quitamos lo dejamos solamente en espiritud app. Lo dejamos ahí mismo que el grupo ITÍ. Bueno, no tiene por qué ser el mismo, pero lo dejamos de esa forma.
-
-**Spring Boot** ya incluye un servidor Tomcat para aplicaciones web. Es decir, cuando trabajamos con Spring MVC, Spring Web, para aplicaciones Web con API REST, enfín lo que queramos ya se incluye un servidor Tomcat que para publicar nuestra aplicación HTTP en un puerto 8080 por defecto. Es decir, no necesitamos tener que instalar un servidor aparte, ya se incluye.
-
-La versión de Java 19, 17, 11 y 8 siempre hasta el 8, porque es la clásica y la mínima con la cual podemos trabajar en SpringBoot, todavía se utiliza mucho en producción y lo mismo la 11, la 11 también se utiliza mucho en producción y es una versión con soporte a largo plazo. Si quisiera trabajar con la 13 o la 14 que no aparece, puedo seleccionar cualquiera la 11 o las 17 y después modificamos el XML con la versión deseada. Eso para que lo tenga claro.
+La versión de Java 19, 17, 11 y 8 siempre hasta el 8, porque es la clásica y la mínima con la cual podemos trabajar en SpringBoot, todavía se utiliza mucho en producción y lo mismo la 11, la 11 también se utiliza mucho en producción y es una versión con soporte a largo plazo. Si quisiera trabajar con la 13 o la 14 que no aparece, puedo seleccionar cualquiera la 11 o las 17 y después modificamos el XML con la versión deseada, eso para que lo tenga claro.
 
 El siguiente paso sería **Dependencias**. 
 
@@ -89,7 +85,6 @@ Pero como podemos ver en el **`pom.xml`** hay dos dependencias **`spring-boot-st
 
 
 <img width="725" alt="image" src="https://user-images.githubusercontent.com/23094588/198399464-68bd76fc-dcef-4ac8-b9fa-44989071e187.png">
-
 
 Vamos a ver la estructura del proyecto.
 
