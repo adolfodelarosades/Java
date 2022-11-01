@@ -119,46 +119,25 @@ Y finalmente tenemos el archivo **`application.properties`** donde podemos confi
 
 Ok, continuamos creando nuestra aplicación de prueba en Spring.
 
-Vamos a continuar con las **Clases de Modelo** que serían nuestros datos de la aplicación. Probablemente estén en la persistencia, en alguna tabla de la BD. Así que lo vamos a representar con las clases **`Cuenta`** y **`Banco`**. Un ejemplo similar al que hemos visto, pero mucho más real, utilizando Repositorios, Services, integrado con Mockito todo en el Framework de Spring
+Vamos a continuar con las **Clases de Modelo** que serían nuestros datos de la aplicación. Probablemente estén en la persistencia, en alguna tabla de la BD. Así que lo vamos a representar con las clases **`Cuenta`** y **`Banco`**. Un ejemplo similar al que hemos visto, pero mucho más real, utilizando Repositorios, Services, integrado con Mockito todo en el Framework de Spring y después le vamos a agregar ***Persistencia*** es decir, vamos a probar ya en un contexto de Base Dato con integración.
 
+Pero por ahora vamos a partir con lo que ya conocemos, con lo que manejábamos, con JUnit con Mockito.
 
-AQQUUUIIIIIII
+Recordemos que tenemos el paquete principal **`org.javaocio.test.springboot.app`** el cual también se le conoce como **Paquete Raíz** y es donde tenemos ubicada nuestra clase principal **`SpringbootTestApplication`**. 
 
-Y después le vamos a agregar persistencia.
+***Dentro de este Package Principal tenemos que tener todo nuestro código, todas nuestras clases o sub packages, es decir, todos los controladores, todos los servicios, toda la clases de modelo, repositorio siempre tienen que estar dentro de este package principal y eso se respeta***. No podemos crear una clase de Spring, una clase Java que esté fuera de este package, sino no lo va a reconocer bien. Un tema importante.
 
-Es decir, vamos a probar ya en un contexto de base dato con integración.
+Entonces dentro del package **`org.javaocio.test.springboot.app`** vamos a crear los siguientes tres packages:
 
-Pero por ahora vamos a partir con lo que ya conocemos, con lo que manejábamos, con Yuni como Akito.
+* **`org.javaocio.test.springboot.app.models`**, Los **`models`** van a ser nuestras clases DTO o Entity que representan los datos de la aplicación, que probablemente esten mapeados a tablas de la BD.
+* **`org.javaocio.test.springboot.app.repositories`** para los Repositorios este package también lo podemos llamar **`org.javaocio.test.springboot.app.daos`** de Data Access Object. Los **`repositories`** van a ser nuestros MOCK.
+* **`org.javaocio.test.springboot.app.services`**, las clases que coloquemos aquí son las clases que en el fondo vamos a probar.
 
-Así que nos vamos a package importante en Main Yaba.
+<img width="374" alt="image" src="https://user-images.githubusercontent.com/23094588/199247093-318ede3d-a5eb-4b08-a5d6-dadcb4f59a7a.png">
 
-Es importante que sea en Main y no en texto, porque acabamos de crear nuestro código en nuestra aplicación
+### Crear clase **`Cuenta`**
 
-y acá vamos a probar.
-
-Entonces en nuestro package principal A y otro punto importante en Spring, me imagino que muchos ya
-
-lo saben, pero para los que no saben este tema es que acá tenemos la clase principal.
-
-Se acuerdan que esta anotada con Springwood?
-
-Apliqué Schon y está dentro de un package principal.
-
-Este sería el package raíz de nuestra aplicación y dentro сбербанк principal tenemos que tener todo
-
-nuestro código, todas nuestras clases o sub package.
-
-Es decir, todos los controladores, todos los servi, toda la clase models repositorio siempre tienen
-
-que estar dentro de este package principal y eso se respeta.
-
-No podemos crear una clase de Spring, una clase Java que esté fuera de este pacato, sino no lo va
-
-a reconocer bien.
-
-Un tema importante.
-
-Entonces dentro Estepa Cazzo vamos a crear otro Pacaya New Package Models también otro más con Alt Insert
+Dentro del package **`org.javaocio.test.springboot.app.models`** vamos a crear la clase **`Cuenta`**
 
 nos vamos a ir acá a package repositorios de repositorios.
 
