@@ -389,12 +389,102 @@ Y para que después se puedan inyectar de forma automática vía Mockito, vamos 
 
 <img width="1497" alt="image" src="https://user-images.githubusercontent.com/23094588/199322762-5a08fa3c-60f1-45b2-a999-8bb9cafd17bd.png">
 
-Una vez echo esto vamos a modificar el método **`findById`** quitamos el  **`null`** y lo dejamos que vamos es interactuar con **`cuentaRepository`** para recuperar una Cuenta por Id.
+Una vez hecho esto vamos a modificar el método **`findById`** quitamos el  **`null`** y lo dejamos que vamos es interactuar con **`cuentaRepository`** para recuperar una Cuenta por Id.
 
 <img width="608" alt="image" src="https://user-images.githubusercontent.com/23094588/199323413-71906aea-f6b5-4636-82f5-e3144ef7e170.png">
 
+Ahora vamos con el método **`revisarTotalTransferencias`**.
+
+Lo primero que vamos a hacer es recuperar el Banco por ID y una vez hecho esto retornamos el total de transferencias.
+
+<img width="762" alt="image" src="https://user-images.githubusercontent.com/23094588/199324523-9cd6811f-cb4e-4ff2-b0d0-18fa3565c758.png">
+
+Ahora vamos con el método **`revisarSaldo`**.
+
+La revisión del Saldo la vamos a hacer através de la **`Cuenta`**.
+
+<img width="787" alt="image" src="https://user-images.githubusercontent.com/23094588/199325183-5a342c66-bb8b-489d-a042-0193e5b24b48.png">
+
+Finalmente vamos a ver el método **`transferir`**.
+
+Y acá necesitamos diferentes cosas. Primero, cada que se realiza la transferencia tenemos que actualizar el total de transferencia. Por lo tanto tenemos que actualizar el objeto **`Banco`** con una nueva transferencia y lo primero que vamos hacer, entonces primero incrementamos el número total de transferencia del banco.
+
+Lo siguiente será realizar la trasferencia, es decir, a la Cuenta Origen restarle el Monto y actualizar la Cuenta Origen y la Cuenta Destino.
+
+<img width="1181" alt="image" src="https://user-images.githubusercontent.com/23094588/199327444-9c5a4de5-6b50-4679-aece-a9770d076e35.png">
+
+Viendo que estamos poniendo el **`Banco banco = bancoRepository.findById(1L);`**, es decir estamos HARDCODEANDO el valor del ID del Banco, realizaremos una pequeña modificación es decir, vamos a pasar ese valor como otro atributo del método.
+
+<img width="1094" alt="image" src="https://user-images.githubusercontent.com/23094588/199331079-1210b658-b2b6-4657-8079-974cc76eefe0.png">
+
+Como hemos modificado la firma del método, debemos modificar la Interfaz para añadir este mismo argumento.
+
+<img width="1304" alt="image" src="https://user-images.githubusercontent.com/23094588/199331485-58465881-19ed-4255-9232-9627165ec0e9.png">
 
 
+La clase completa **`CuentaServiceImpl`** es la siguiente:
+
+```java
+package org.javaocio.test.springboot.app.services;
+
+import org.javaocio.test.springboot.app.models.Banco;
+import org.javaocio.test.springboot.app.models.Cuenta;
+import org.javaocio.test.springboot.app.repositories.BancoRepository;
+import org.javaocio.test.springboot.app.repositories.CuentaRepository;
+
+import java.math.BigDecimal;
+
+public class CuentaServiceImpl implements CuentaService{
+
+    private CuentaRepository cuentaRepository;
+    private BancoRepository bancoRepository;
+
+    public CuentaServiceImpl(CuentaRepository cuentaRepository, BancoRepository bancoRepository) {
+        this.cuentaRepository = cuentaRepository;
+        this.bancoRepository = bancoRepository;
+    }
+
+    @Override
+    public Cuenta findById(Long id) {
+        return cuentaRepository.findById(id);
+    }
+
+    @Override
+    public int revisarTotalTransferencias(Long bancoId) {
+
+        Banco banco = bancoRepository.findById(bancoId);
+        return banco.getTotalTransferencia();
+
+    }
+
+    @Override
+    public BigDecimal revisarSaldo(Long cuentaId) {
+
+        Cuenta cuenta = cuentaRepository.findById(cuentaId);
+        return cuenta.getSaldo();
+
+    }
+
+    @Override
+    public void transferir(Long numCuentaOrigen, Long numCuentaDestino, BigDecimal monto,
+                           Long bancoId) {
+
+        Banco banco = bancoRepository.findById(bancoId);
+        int totalTransferencias = banco.getTotalTransferencia();
+        banco.setTotalTransferencia(++totalTransferencias);
+        bancoRepository.update(banco);
+
+        Cuenta cuentaOrigen = cuentaRepository.findById(numCuentaOrigen);
+        cuentaOrigen.debito(monto);
+        cuentaRepository.update(cuentaOrigen);
+
+        Cuenta cuentaDestino = cuentaRepository.findById(numCuentaDestino);
+        cuentaDestino.credito(monto);
+        cuentaRepository.update(cuentaDestino);
+        
+    }
+}
+```
 
 ## Escribiendo nuestros tests con JUnit y mockito 11:40
 ## Test **`verify`** 05:31
