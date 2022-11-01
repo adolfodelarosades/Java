@@ -341,7 +341,61 @@ Lo que hemos hecho es almacenar temporalmente el **`nuevoSaldo`** después de re
 Ya lo tenemos ahí tenemos nuestra lógica negocio en nuestros datos, la clase de modelo.
 
 ## Creando los repositorios 05:34
+
+Bien, continuamos con los repositorios de **`Cuenta`** y **`Banco`**, típicamente para implementar un CRUD, por ejemplo, leer, obtener por ID, obtener todos y también para guardar, modificar, eliminar.
+
+En el package de los repositorios vamos a crear una **Interfaz** que vamos a llamar **`CuentaRepository`** 
+
+<img width="337" alt="image" src="https://user-images.githubusercontent.com/23094588/199315892-4fe0b7b7-3bf8-4f6d-873c-07822a33abf0.png">
+
+con algún métodos el CRUD, por ejemplo, para obtener todas las cuentas. Vamos a utilizar nombres en inglés porque se utilizan por defecto y por convención en Spring Boot cuando implementamos nuestros repositorios mediante componentes Spring Data JPA.
+En el package de los repositorios vamos a crear una **Interfaz** que vamos a llamar **`CuentaRepository`** con algún métodos el CRUD, por ejemplo, para obtener todas las cuentas. Vamos a utilizar nombres en inglés porque se utilizan por defecto y por convención en Spring Boot cuando implementamos nuestros repositorios mediante componentes Spring Data JPA.
+
+También vamos a tener un método para obtener por ID. Otro método para actualizar **`update`**, típicamente se utiliza el método **`save`** tanto para insertar para crear un nuevo registro o también para actualizar. Entonces se utiliza **`save`** para ambos para insertar y actualizar. Pero para este ejemplo para que quede un poco más claro vamos a usar **`update`**.
+
+<img width="733" alt="image" src="https://user-images.githubusercontent.com/23094588/199316559-f6aea795-d339-4ddd-a717-57bdfe3ce95a.png">
+
+Ya tenemos el repositorio de **`Cuenta`**. Recuerden que después en nuestras Prueba Unitarias estos métodos van a ser Mock, los vamos a simular con datos de ejemplo, es decir, no se invoca, no van a realizar llamadas reales a una clase de un objeto, una instancia de repositorio que acceda y opere con los datos de una tabla. No solamente lo vamos a simular, lo dejamos así y continuamos con el siguiente repositorio.
+
+Entonces nos vamos al paquete, vamos a crear otro Interfaz **`BancoRepository`** usando la la misma mecánica. 
+
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/23094588/199317867-32c4e5ff-5ca8-42b6-b6e7-31d6826717f4.png">
+
 ## Implementando la clase de servicio (Service) 06:15
+
+Ahora vamos a crear las Interfaz del servicio **`Cuenta`** que llamaremos **`CuentaService`**.
+
+<img width="1146" alt="image" src="https://user-images.githubusercontent.com/23094588/199319149-b4f995e8-036e-41f1-93b2-46499b905d73.png">
+
+Ahora vamos a crear la clase que implemente la Interfaz **`CuentaService`** que llamaremos **`CuentaServiceImpl`**.
+
+<img width="338" alt="image" src="https://user-images.githubusercontent.com/23094588/199320348-35d77494-2351-4807-ab5a-4b925a907a60.png">
+
+<img width="1161" alt="image" src="https://user-images.githubusercontent.com/23094588/199320621-a334a450-6f55-4eee-b7ba-8b3285fcf863.png">
+
+Nos apoyamos de las ventajas del IDE para implementar los métodos pulsando ALT + ENTER.
+
+<img width="389" alt="image" src="https://user-images.githubusercontent.com/23094588/199320829-50363599-6a99-4a7d-916a-ea091a203867.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199320980-3995a5b8-548d-487e-8995-4c1fa61fcf08.png">
+
+Ya tenemos el esqueleto de los métodos pero falta que los implementemos según nuestras necesidades, para lo cual vamos a necesitamos Dependencias que serían nuestros Repositorios. Recuerden que el Service siempre trabaja, opera con otros objetos de la Lógica Negocio que son los que acceden a los datos, típicamente los Repositories y los DAOs con consultas de cualquier tipo.
+
+<img width="824" alt="image" src="https://user-images.githubusercontent.com/23094588/199322079-9a9a27c4-5cf8-45d0-876d-36c87cc3b009.png">
+
+Y para que después se puedan inyectar de forma automática vía Mockito, vamos a implementar el constructor para  ambas Dependencia.
+
+<img width="394" alt="image" src="https://user-images.githubusercontent.com/23094588/199322677-7e7eb75f-2654-40e7-9559-0209dc7a0b82.png">
+
+<img width="1497" alt="image" src="https://user-images.githubusercontent.com/23094588/199322762-5a08fa3c-60f1-45b2-a999-8bb9cafd17bd.png">
+
+Una vez echo esto vamos a modificar el método **`findById`** quitamos el  **`null`** y lo dejamos que vamos es interactuar con **`cuentaRepository`** para recuperar una Cuenta por Id.
+
+<img width="608" alt="image" src="https://user-images.githubusercontent.com/23094588/199323413-71906aea-f6b5-4636-82f5-e3144ef7e170.png">
+
+
+
+
 ## Escribiendo nuestros tests con JUnit y mockito 11:40
 ## Test **`verify`** 05:31
 ## Escribiendo tests **`assertThrow`** para afirmar que la excepción lanzada sea correcta 12:21
