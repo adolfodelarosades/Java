@@ -164,6 +164,66 @@ Estos métodos son muy importante para verificar, para validar si dos objetos so
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199252201-88cf31fa-ad37-4ab7-a0ee-a8d32940090e.png">
 
+
+```java
+package org.javaocio.test.springboot.app.models;
+
+import java.math.BigDecimal;
+import java.util.Objects;
+
+public class Cuenta {
+    private Long id;
+    private String persona;
+    private BigDecimal saldo;
+
+    public Cuenta() {
+    }
+
+    public Cuenta(Long id, String persona, BigDecimal saldo) {
+        this.id = id;
+        this.persona = persona;
+        this.saldo = saldo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPersona() {
+        return persona;
+    }
+
+    public void setPersona(String persona) {
+        this.persona = persona;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cuenta cuenta = (Cuenta) o;
+        return Objects.equals(id, cuenta.id) && Objects.equals(persona, cuenta.persona) && Objects.equals(saldo, cuenta.saldo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, persona, saldo);
+    }
+}
+```
+
 AQUUIIIIII
 
 
