@@ -83,7 +83,6 @@ en este caso al crear el proyecto en **Spring Inizializer** solo añadimos una d
 
 pero como podemos ver en el **`pom.xml`** hay dos dependencias **`spring-boot-starter-web`** que es la que corresponde para **Spring Web**, pero también se ha incluido **`spring-boot-starter-test`** en esta dependecia se incluye **JUnit5** y **Mockito**
 
-
 <img width="725" alt="image" src="https://user-images.githubusercontent.com/23094588/198399464-68bd76fc-dcef-4ac8-b9fa-44989071e187.png">
 
 Vamos a ver la estructura del proyecto.
@@ -137,79 +136,36 @@ Entonces dentro del package **`org.javaocio.test.springboot.app`** vamos a crear
 
 ### Crear clase **`Cuenta`**
 
-Dentro del package **`org.javaocio.test.springboot.app.models`** vamos a crear la clase **`Cuenta`**
+Dentro del package **`org.javaocio.test.springboot.app.models`** vamos a crear la clase **`Cuenta`**, la cual va a contener:
 
-nos vamos a ir acá a package repositorios de repositorios.
+* Atributos
+* Constructor vacio
+* Contructor con todos los atributos
+* Métodos Setters y Getters
+* Método Especiales
+   * Método **`equals()`** 
+   * Método **`hashCode()`**
 
-También le podríamos colocar datos de Data Access Object.
+   <img width="294" alt="image" src="https://user-images.githubusercontent.com/23094588/199249328-771fff3f-5ce3-4c64-bdb4-acd30cfc11d6.png">
 
-Lo mismo vamos a crear otro más package.
+   <img width="478" alt="image" src="https://user-images.githubusercontent.com/23094588/199249646-5e43dd0c-e8f1-4e69-af63-c97c0fe2be43.png">
 
-Voy a quitar repositorios y vamos a crear los servicios para la clase de servicios que en el fondo hace
+   <img width="471" alt="image" src="https://user-images.githubusercontent.com/23094588/199249985-4266154e-1697-41c9-a6f4-58546df2a762.png">
 
-la clase.
+   <img width="472" alt="image" src="https://user-images.githubusercontent.com/23094588/199250232-b2d20032-cdf5-4bd1-b7aa-e972f1d4884c.png">
 
-Quedamos a probar y los repositorios van a ser nuestros mock y los mails.
+  <img width="472" alt="image" src="https://user-images.githubusercontent.com/23094588/199250344-7910a1f3-626c-492f-bbd9-a717ff2fee07.png">
 
-Bueno, si de nuestras clases de TEÓ o Entity que representa los datos de la aplicación que probablemente
+Estos métodos son muy importante para verificar, para validar si dos objetos son similares en sus atributos, son iguales en sus atributos. Típicamente cuando trabajamos con colecciones como ***listas***, con los ***set***, con los ***map*** y también con ***persistencia***, después con ***Hibernate***, con ***JPA***, son métodos requeridos.
 
-estén mapeado a tablas de la base datos se fijan bien con estos pacato nos vamos a ir a Models al INSER,
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199251931-998a67f6-00f2-40f1-8820-4ea33e8ac939.png">
 
-vamos a crear una clase, le vamos a llamar cuenta perfecto con atributos, vamos a tener el Heidy del
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199252082-9651bee9-d9a2-43d7-86c6-b450c36c04be.png">
 
-tipo long private long Heidy pues el tipo long o del tipo integer, pero ojalas que sea del tipo de
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199252201-88cf31fa-ad37-4ab7-a0ee-a8d32940090e.png">
 
-referencia de la clase rapper de Java con mayúscula.
+AQUUIIIIII
 
-Por eso puse mayúscula ni no primitivo.
-
-El siguiente nombre la persona private string nombre o persona mejor
-
-privé también bi decimal.
-
-Saldo el saldo de la cuenta, lo siguiente vamos a crear constructores, entonces también con clic derecho
-
-o con al insert constructor primero sin campo, sin nada.
-
-Select nón.
-
-Se fijan un conductor vacío, pero después vamos a crear un constructor con parámetros, con el Heidy,
-
-con persona y con saldo.
-
-Bien, lo siguiente sería lo lletra ctes.
-
-Para todos seleccionamos los tres OK.
-
-Ya casi tenemos nuestra cuenta.
-
-Lo siguiente vamos a crear métodos especiales.
-
-El recuas y el Ascot.
-
-Y Quarts y gasco siguiente.
-
-Con los tres atributos.
-
-En el fondo, temeroso, muy importante para verificar, para validar si dos objetos son similares en
-
-sus atributos, son iguales en sus atributos.
-
-Típicamente cuando trabajamos con colecciones como listas, con los set, con los MAP y también con
-
-persistencia, después con IBEN, con JPA, son métodos requeridos.
-
-Importante siguiente.
-
-Lo mismo acá no es todo, acá no es importante que sea para el asco y parali cuesta la tremas, el método
-
-equals los 3 y el asco los 3.
-
-Siguiente y finalizar acá no colocamos nada.
-
-Vigen y ajja implementarlos equals y Alcott por nosotros.
-
-En el fondo, para comprar valores, atributos en nuestros objetos, cuenta este caso bien lo siguiente
 
 nos vamos a ir al Package Explorer, vamos a ir al Models, vamos a crear otro más ya class banco ok,
 
