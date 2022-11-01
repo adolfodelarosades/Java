@@ -224,180 +224,121 @@ public class Cuenta {
 }
 ```
 
-AQUUIIIIII
+### Crear clase **`Banco`**
 
+Dentro del package **`org.javaocio.test.springboot.app.models`** vamos a crear la clase **`Banco`**, la cual va a contener:
 
-nos vamos a ir al Package Explorer, vamos a ir al Models, vamos a crear otro más ya class banco ok,
+* Atributos
+* Constructor vacio
+* Contructor con todos los atributos
+* Métodos Setters y Getters
 
-lo mismo Leydi del tipo lo Heidy.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199300101-bf9f1807-1f2e-4b03-a18b-46403ea8929d.png">
 
-Nombre del banco.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199300204-40695854-af07-43d9-8182-cdee0220ef7b.png">
 
-Y qué más podríamos tener un atributo del tipo entero.
+```java
+package org.javaocio.test.springboot.app.models;
 
-Total transferencia que lleve una contabilidad de la cantidad.
+public class Banco {
+    private Long id;
+    private String nombre;
+    private int totalTransferencia;
 
-Transferencia que se realizó en el banco de Veidt del tipo Integer.
+    public Banco() {
+    }
 
-Total transferencia.
+    public Banco(Long id, String nombre, int totalTransferencia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.totalTransferencia = totalTransferencia;
+    }
 
-Lo mismo.
+    public Long getId() {
+        return id;
+    }
 
-Lo siguiente constructor.
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-Vacío.
+    public String getNombre() {
+        return nombre;
+    }
 
-Select nón después tenemos otro constructor con los campos los 3.
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-Y lo que tras Etter bien, pero antes dije tras setter vuestro un cambio en el tipo.
+    public int getTotalTransferencia() {
+        return totalTransferencia;
+    }
 
-Total transferencia lo dejas de tipo primitivo solamente para que por defecto sea cero.
+    public void setTotalTransferencia(int totalTransferencia) {
+        this.totalTransferencia = totalTransferencia;
+    }
+}
+```
 
-Y tampoco no vamos a necesitar los métodos de la clase Rapper Integer solamente para a cero para que
+El atributo **`totalTransferencias`** le hemos puesto de tipo **`int`**, de tipo primitivo solamente para que por defecto sea cero. 
 
-partan cero por defecto.
+En esta clase no vamos a necesitar los métodos **`equals()`**  y **`hashCode()`**, para el ejemplo no es tan necesario, así que lo dejamos así. 
 
-Acá cambiamos también acá.
+### Añadir métodos **`debito`** y **`credito`** en **`Cuenta`**
 
-Int.
+Vamos a crear un par de métodos en la clase **`Cuenta`** los métodos **`debito`** y **`credito`**. El método débito es cuando nos restan cierta cantidad de dinero del saldo. Es decir, cuando realizamos una transferencia a otra cuenta. Y el crédito todo lo contrario. Es cuando recibimos dinero de otra cuenta de una transferencia que nos hacen a nosotros.
 
-Aunque en detalle, y luego con este cambio de transceptor.
+Una primera versión de estos métodos puede ser la siguiente:
 
-Oden.
+```java
+    public void debito(BigDecimal monto) {
+        this.saldo = this.saldo.subtract(monto);
+    }
 
-Ya tenemos una clase y tem. podremos tener el Ascot y el equals para Vanko, aunque no lo vamos a utilizar.
+    public void credito(BigDecimal monto) {
+        this.saldo = this.saldo.add(monto);
+    }
+```
 
-Pero bueno, para el ejemplo no es tan necesario, así que lo dejamos así.
+Recuerden que **`BigDecimal`** es **inmutable**, porque lo que en cada operación aritmética o de cualquier tipo sobre este objeto, lo que hace devolver una instancia y esa es la que vale, la original se mantiene tal cual, no se cambia, no se modifica. Entonces, por eso tenemos que volver a asignar este cambio al atributo saldo.
 
-Qué más tenemos en cuenta?
+Pero cuando restamos, cuando realizamos un depósito o transferencia a otra cuenta necesitamos validar, porque ¿Qué pasa si el monto es mayor a la cantidad de dinero que tenemos disponible en el saldo?
 
-Vamos a crear un par de métodos control TAB.
+Debo manejar algún tipo de excepción y eso ya lo vimos y vamos a hacer más o menos lo mismo. Entonces, bueno, lo primero es crear una excepción personalizada en nuestro código.
 
-Nos vamos a ir a cuenta y por acá unos métodos.
+Vamos a crear un nuevo Package solamente para organizar. No tiene por qué ser así, pero es para organizar. Vamos a crear un nuevo Package que vamos a llamar **`org.javaocio.test.springboot.app.exceptions`** y vamos a crear una nueva clase, la clase la vamos a llamar **`DineroInsuficienteException`**. Esta clase extendera de **`RuntimeException`** y vamos a implementarle un **`constructor`** al que se le pase un mensaje personalizado.
 
-El método débito y el crédito débito es cuando nos restan cierta cantidad de dinero del saldo.
+<img width="773" alt="image" src="https://user-images.githubusercontent.com/23094588/199304596-7655015a-fb99-4308-bb4a-8d0ad2e7cb9c.png">
 
-Es decir, cuando realizamos una transferencia a otra cuenta.
+La clase nos queda así:
 
-Y el crédito todo lo contrario.
+<img width="1119" alt="image" src="https://user-images.githubusercontent.com/23094588/199304943-884676b8-6714-4de5-828a-ffb96f0dfb3a.png">
 
-Es cuando recibimos dinero de otra cuenta de una transferencia que nos hacen a nosotros.
 
-Entonces.
+```java
+package org.javaocio.test.springboot.app.exceptions;
 
-Public void débito y public void crédito.
+public class DineroInsuficienteException extends RuntimeException{
+    public DineroInsuficienteException(String message) {
+        super(message);
+    }
+}
+```
 
-Partiríamos con débito.
-
-Viven mal el monto bien y crédito.
-
-Décima.
-
-También monto.
-
-Recuerden que V decimal e inmutable no es que tenga que invocar el método, por ejemplo, para sumar,
-
-que es el método AB o para restar el método substrato.
-
-No, porque lo que hace en cada operación aritmética o de cualquier tipo sobre este objeto, lo que
-
-hace devolver una instancia y esa es la que vale, la original se mantiene tal cual, no se cambia,
-
-no se modifica.
-
-Entonces, por eso tenemos que volver a asignar este cambio al atributo saldo.
-
-Entonces, por ejemplo, di saldo, punto, saldo, igual diez puntos, saldo también punto.
-
-Cuando débito restamos entonces substrato sobre el monto se fijan y acá en crédito similar diez punto
-
-saldo.
-
-Ser el saldo o saldo.
-
-Simplemente da lo mismo punto AB.
-
-Para sumar sumamos el monto de origen bien crédito perfecto.
-
-Solamente suma y no hay nada que validar.
-
-Pero cuando restamos, cuando realizamos un depósito o transferencia a otra cuenta, necesitamos balear.
-
-Claro, porque qué pasa si el monto es mayor a la cantidad de dinero que tenemos disponible en el saldo?
-
-Debo manejar algún tipo de excepción y eso ya lo vimos y vamos a hacer más o menos lo mismo.
-
-Entonces, bueno, lo primero es crear una excepción Exception personalizada en nuestro código.
-
-Nos vamos a ir al Package Explorer.
-
-Vamos a crear un nuevo pacatos solamente para organizar.
-
-No tiene por qué ser así, pero es para organizar.
-
-Vamos a crear un nuevo pacato que vamos a llamar except John's.
-
-Decepciones y acá vamos a crear una nueva clase, la clase le vamos a llamar dinero suficiente septón.
-
-Ok.
-
-Stents Reineta Ranta.
-
-Es hecho, vamos a implementar un constructor donce con al inser constructor que pase el mensaje.
-
-Un mensaje personalizado.
-
-Volvemos.
-
-Tab Nos vamos a cuenta de regreso y valíamos en débito.
-
-Nos vamos a débito.
-
-Acá vamos a cambiar.
-
-Vamos a quitar esto.
-
-Quitábamos vamos a colocar bien décima.
-
-Perfecto nuevo salvo validamos con un if nuevo saldo punto comparto.
-
-Convives y Mercero?
-
-Decimal punto cero.
-
-Esto no lo explica porque ya lo vimos.
-
-Pero básicamente, si quedamos con un saldo negativo menor que cero, entonces ahí lanzamos la acepción
-
-después de restar, después de la transferencia.
-
-Pero antes de realizar la transacción, es decir, el comit, por ejemplo, como si hicieran un commit
-
-enlace atto.
-
-Antes de eso, antes de asignar el nuevo saldo al salto a la cuenta valíamos.
-
-Entonces es cierto, es menor que 0.
-
-La samma la acepción con constru niu dineroy insuficiente exception.
-
-Ya.
-
-Y si todo está bien, hacemos el ComitÃ.
-
-Es decir, 10 punto saldo le asignamos en un saldo.
-
-Ya lo tenemos ahí tenemos nuestra lógica negocio en otros datos, la clase de modelo.
-
-Falta acá un punto y coma.
-
-Importante dinero insuficiente septón.
-
-Acá estamos listos.
-
-Bueno, lo dejamos así y continuamos en la siguiente clase con los repositorios, los servis, el resto
-
-de nuestra aplicación.
+Nos vamos a **`Cuenta`** de regreso y vamos al método de débito donde vamos a hacer una modificación para que maneje la excepción en caso de que se obtenga un saldo negativo cuando intentamos hacer una transferencia.
+
+```java
+   public void debito(BigDecimal monto) {
+      BigDecimal nuevoSaldo = this.saldo.subtract(monto);
+      if (nuevoSaldo.compareTo(BigDecimal.ZERO) < 0){
+         throw new DineroInsuficienteException("Dinero insuficiente en la cuenta.");
+      }
+      this.saldo = nuevoSaldo;
+    }
+```
+Lo que hemos hecho es almacenar temporalmente el **`nuevoSaldo`** después de restar, pero antes de realizar la transacción, para poder saber si este es negativo, en tal caso lanzamos la excepción de lo contrario será nuestro nuevo saldo, por lo que hacemos una especie de "commit" asignando el **`nuevoSaldo`** al **`saldo`**.
+
+Ya lo tenemos ahí tenemos nuestra lógica negocio en nuestros datos, la clase de modelo.
 
 ## Creando los repositorios 05:34
 ## Implementando la clase de servicio (Service) 06:15
