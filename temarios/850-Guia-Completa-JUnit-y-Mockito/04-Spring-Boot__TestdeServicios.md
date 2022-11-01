@@ -65,15 +65,15 @@ Por ahora nada más vamos a crear el proyecto, lo generamos, hacemos un clic en 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198375603-25466f7f-bd2c-4bf4-aaf7-c4e6b19cc6c7.png">
 
-Y se descarga, una vez que lo descargan, nos vamos a la carpeta del curso y lo descomprimimos la carpeta.
+Y se descarga, una vez que lo descargan, nos vamos a la carpeta del curso y descomprimimos la carpeta.
 
 <img width="1227" alt="image" src="https://user-images.githubusercontent.com/23094588/198376275-6e60c50a-1864-43eb-bd35-f42334161b46.png">
 
-Bien, lo siguiente nos vamos a **IntelliJ** y vamos a abrir el proyecto que acabamos de descomprimir.
+Bien, lo siguiente nos vamos a **IntelliJ** y vamos a abrir el proyecto que acabamos de descomprimir, el proyecto ya esta creado por eso simplemente lo abrimos. Si nos pregunta indicamos que es un Proyecto Seguro **Trust Project**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198395025-ceab3656-3fac-4e96-9a39-677bafaff886.png">
 
-Este proyecto Maven tiene el archivo **`pom.xml`** donde se encuentran todas las dependencias, la versiíon de Java que estamos usando, etc.
+Este proyecto Maven tiene el archivo **`pom.xml`** donde se encuentran todas las dependencias, la versión de Java que estamos usando, etc. Recordemos que si la versión de Java no es la correcta aquí la podemos modificar, en este caso esta correcta la versión 17.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198398247-d52305c9-d26a-4d66-a65b-43b585eeef2f.png">
 
@@ -81,7 +81,7 @@ en este caso al crear el proyecto en **Spring Inizializer** solo añadimos una d
 
 <img width="498" alt="image" src="https://user-images.githubusercontent.com/23094588/198395588-783d846f-d7d4-487f-9dfc-9a3548bc7621.png">
 
-Pero como podemos ver en el **`pom.xml`** hay dos dependencias **`spring-boot-starter-web`** que es la que corresponde para **Spring Web**, pero también se ha incluido **`spring-boot-starter-test`** en esta dependecia se incluye **JUnit5** y **Mockito**
+pero como podemos ver en el **`pom.xml`** hay dos dependencias **`spring-boot-starter-web`** que es la que corresponde para **Spring Web**, pero también se ha incluido **`spring-boot-starter-test`** en esta dependecia se incluye **JUnit5** y **Mockito**
 
 
 <img width="725" alt="image" src="https://user-images.githubusercontent.com/23094588/198399464-68bd76fc-dcef-4ac8-b9fa-44989071e187.png">
@@ -89,7 +89,7 @@ Pero como podemos ver en el **`pom.xml`** hay dos dependencias **`spring-boot-st
 Vamos a ver la estructura del proyecto.
 
 * Tenemos el **`pom.xml`**
-* **`mvnw`** **`mvnw.cmd`** Estos archivos sirven para traja con Maven. De hecho integra Maven de forma automática. Es un grapar para Maven.
+* **`mvnw`** **`mvnw.cmd`** estos archivos sirven para traja con Maven, de hecho integra Maven de forma automática. Es un wrapper para Maven.
 * **`src.main`** paquete para nuestro código
 * **`src.test`** contexto para hacer nuestras Pruebas Unitarias., de hecho, ya trae una clase testing para empezar a trabajar. De hecho, si ejecutamos con click derecho tenemos **Run...**.
 
@@ -99,15 +99,19 @@ Va a ejecutar nuestra unitaria y le va a pasar porque en realidad no tiene nada.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/198401046-f9389170-422a-4234-9663-311a1c6ea76f.png">
 
-Sprint Boot es para desarrollar aplicaciones empresariales con API, red, aplicaciones web o escritorio o de consola, lo que queramos, Integración también con persistencia, con JPA, con Internet, un montón de cosas.
+Sprint Boot es para desarrollar aplicaciones empresariales con API, red, aplicaciones web o escritorio o de consola, lo que queramos, Integración también con persistencia, con JPA, con Hibernate, un montón de cosas.
 
-En **`src.main`** está todo nuestro código fuente. Acá está la clase principal de Spring.
+En **`src.main`** está todo nuestro código fuente. 
 
 <img width="1468" alt="image" src="https://user-images.githubusercontent.com/23094588/198401890-6919c594-fd52-4a04-9ef5-8cf0cdfe0bff.png">
 
-Una clase con el método **`main`**. La clase se anota con **`@SpringBootApplication`**, que en el fondo configura todo. Toda la configuración de Spring Boot, maneja un contexto de inyección dependencia, podemos registrar beans, se pueden escanear componentes, scan de forma automática.
+Tenemos nuestra clase principal de Spring **`SpringbootTestApplication`**. Una clase con el método **`main`**. La clase se anota con **`@SpringBootApplication`**, que en el fondo configura todo. 
 
-Tenemos también la carpeta **`resource`**  acá tenemos **`template`** donde tendremos plantillas, vistas, HTML y containers. Tenemos también **`static`** para archivos estáticos, de contenido estático como una aplicación Web, por ejemplo hoja de estilos, JavaScript, html estático, imágenes, todo lo que es FrontEnd.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199240638-855d971f-4d4b-488b-ab95-3310f496ff1a.png">
+
+Toda la configuración de Spring Boot, maneja un ***Contexto de Inyección Dependencia***, podemos registrar ***Beans***, se pueden ***escanear componentes*** con la anotación **`@ComponentScan`**, de forma automática va a buscar en nuestro proyecto ciertas clases con ciertas anotaciones como los **`Services`**, los **`Controllers`**, los **`Repository`** y los **`Beans`** o **`Components`** y los va a registrar de forma automática en el Contenedor y después los podemos *Inyectar* en otros otros Componentes, lo que se conoce como ***Inyección Dependencia***.
+
+Tenemos también la carpeta **`resource`**  tenemos **`template`** donde tendremos plantillas, vistas, HTML y containers. Tenemos también **`static`** para archivos estáticos, de contenido estático como una aplicación Web, por ejemplo hoja de estilos, JavaScript, html estático, imágenes, todo lo que es FrontEnd.
 
 Y finalmente tenemos el archivo **`application.properties`** donde podemos configurar nuestra aplicación, por ejemplo conexión a la Base de Datos y un montón de cosas.
 
