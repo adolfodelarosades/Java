@@ -569,18 +569,15 @@ Observemos que al ejecutar la prueba nos falla y eso es por que en ambos **`when
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199964663-1fe9c843-414b-41b6-a102-2b48856412c5.png">
 
+Debería pasar está todo bien, de momento, ningún problema. Continuamos.
 
-Debería pasar está todo bien, de momento, ningún problema.
+Ahora vamos a invocar otro método del service, que sería el de transferir. Ya probamos **`revisarSaldo(...)`** de cada cuenta.
 
-Continuamos pronto.
+Ahora realizamos transferencias en el service con el método **`transferir(...)`**.
 
-Ahora tengo que invocar otro me torcerle, que sería transferir.
 
-Ya probamos cuáles son los saltos de cada cuenta.
+<img width="1323" alt="image" src="https://user-images.githubusercontent.com/23094588/199966244-19050738-b7fb-4d42-9a12-3a28cc233660.png">
 
-Saldo actual.
-
-Ahora realizamos transferencias servis.
 
 Punto.
 
