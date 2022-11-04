@@ -488,251 +488,89 @@ public class CuentaServiceImpl implements CuentaService{
 
 ## Escribiendo nuestros tests con JUnit y Mockito 11:40
 
-El siguiente paso sería comenzar con las Pruebas Unitarias con JUnit, así que nos tenemos que ir a nuestra clase de test **`SpringbootTestApplicationTests`**.
+El siguiente paso sería comenzar con las Pruebas Unitarias con JUnit, así que nos tenemos que ir a nuestra clase de test **`SpringbootTestApplicationTests`** la cual se creo de forma automática. Recuerden que se encuentra dentro de **`test`** en lugar de **`main`**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199940576-559fd79e-3bd2-4594-8245-aab3145b423f.png">
 
 
+Antes que nada necesitamos datos de ejemplo por lo que en **`main`** vamos a crear una clase llamada **`Datos`**, con el siguiente código:
 
-Es preambulo test apliqué un test esta de acá se acuerda que le quería de forma automática.
+<img width="1489" alt="image" src="https://user-images.githubusercontent.com/23094588/199943406-e18ae02a-4e89-4b12-987f-33a43281863f.png">
 
-Recuerden que se encuentra dentro de ese reset test.
+<img width="1468" alt="image" src="https://user-images.githubusercontent.com/23094588/199945067-bc76d348-9797-4e27-82a9-069874ee2527.png">
 
-En vez de main.
+Ahora que tenemos los datos de ejemplo, continuamos con la clase **`SpringbootTestApplicationTests`**  para poder integrar JUnit.
 
-Entonces acá test.
+Entonces lo primero vamos a crear son dos atributos, nuestros mock y también nuestro service.
 
-Acá tenemos la clase.
+```java
+  CuentaRepository cuentaRepository;
+	BancoRepository bancoRepository;
+	
+	CuentaService service;
+```
 
-Vamos a abrir y vamos a comenzar.
+Ahí tenemos los atributos que vamos a utilizar.
 
-Pero bueno, de todas forma necesitamos datos de ejemplo que tenemos que crear una clase, datos con
+Vamos a crear otro método ademas del **`contextLoads()`** que se creo automáticamente.
 
-un par de atributos que sea constante.
+<img width="284" alt="image" src="https://user-images.githubusercontent.com/23094588/199946930-58407d9e-b2c5-48ff-95c8-9aaa2c958622.png">
 
-Por ejemplo, una cuenta número uno del banco cuenta dos y un banco de ejemplo.
+Nuestro método **`setUp()`**
 
-Eso es lo primero y lo podríamos crear, por ejemplo.
+<img width="188" alt="image" src="https://user-images.githubusercontent.com/23094588/199947312-1298be27-5895-4d85-93a2-a407fea34f37.png">
 
-Nos vamos acá a los Package, en Main, en Java y podría ser en la raíz o incluso podríamos crear un
+Por cada método vamos a definir nuestro mock y la instancia del service.
 
-package datos.
+<img width="409" alt="image" src="https://user-images.githubusercontent.com/23094588/199947880-1e7a9be8-d8b3-4766-b8e4-20865c5d4783.png">
 
-Pero da lo mismo.
+Al insertar lo anterior nos inserta **`import org.mockito.Mockito;`** pero esto lo queremos utilizar de manera estatica por lo que lo vamos a cambiar a **`import static org.mockito.Mockito.*;`** y por organización lo movemos arriba.
 
-Luego vamos a crear en la raíz datos una clase
+<img width="1021" alt="image" src="https://user-images.githubusercontent.com/23094588/199949476-f40468ed-b8c9-47e5-a83d-524ccc143cd5.png">
 
-del tipo cuenta.
+Continuamos, ahora lo correcto sería:
 
-Le vamos a llamar.
+<img width="731" alt="image" src="https://user-images.githubusercontent.com/23094588/199949664-e054463e-f6b8-49f9-8af3-d39eb613c96e.png">
 
-Recuerden, vamos a importar al enter.
+<img width="999" alt="image" src="https://user-images.githubusercontent.com/23094588/199950201-7c37e06e-117d-44e1-b706-0f7838c34268.png">
 
-No importa.
 
-Clase en mayúscula.
+Ya tenemos nuestros mocks y nuestro service que vamos a probar. Estamos listos, ahí podemos empezar a probar. Entonces lo primero con el **`when`** esto lo haremos en el método **`contextLoads()`**.
 
-Le vamos a llamar.
+<img width="999" alt="image" src="https://user-images.githubusercontent.com/23094588/199954309-8b8102f9-513a-48f2-8cc5-9003ffcc4b21.png">
 
-Cuenta guión bajo cero cero uno igual.
+Lo que le estamos diciendo es que si buscamos la **`Cuenta`** con **`Id=1`** nos debe retornar **`CUENTA_001`** y así con los demás **`when`**. Con esto ya tenemos todo nuestro contexto configurado que sería nuestro Given dado a algún contexto.
 
-New.
+Ahora lo que vamos a hacer es invocar el **`revisarSaldo(...)`** del servicio en cada cuenta, recordemos que **`revisarSaldo(...)`** regresa un **`BigDecimal`**.
 
-Cuenta con el ayuno.
+<img width="903" alt="image" src="https://user-images.githubusercontent.com/23094588/199957415-5830ff5c-69a0-42a1-b47d-48546887731c.png">
 
-Nombre de la persona.
+Vamos a probar cómo están los saldos con el **`assertEquals();`** el cual tenemos que importar de forma estática. Presionamos ALT + ENTER para importarlo.
 
-La cuenta a tres new decimal.
+<img width="1002" alt="image" src="https://user-images.githubusercontent.com/23094588/199958421-78cb1c90-3459-4394-b1ee-49c3a6e4567f.png">
 
-El monto, por ejemplo, 1000 controlde.
+<img width="1018" alt="image" src="https://user-images.githubusercontent.com/23094588/199958668-0b37392b-2c84-453b-b8d6-a0b3f1d4a6bf.png">
 
-Para duplicar vamos a colocar 0 0 2.
+Vamos a cambiar **`assertEquals`** por un **`*`** para que importe todos los métodos no solo el **`assertEquals`**.
 
-La cuenta 2 por acá el Heidy 2.
+<img width="1019" alt="image" src="https://user-images.githubusercontent.com/23094588/199958897-2416a540-a765-4a9e-a0cc-86dd6667fac0.png">
 
-John y Invit decimal el monto, le vamos a colocar dos mil.
+Vamos a probar también el saldo de la otra cuenta, el método completo queda así:
 
-Bajamos otra más
+<img width="923" alt="image" src="https://user-images.githubusercontent.com/23094588/199962943-fb857647-7610-425a-99b0-cbefcb471e87.png">
 
-banco.
+Vamos a ejecutar este método de prueba.
 
-Importamos banco.
+<img width="997" alt="image" src="https://user-images.githubusercontent.com/23094588/199963539-70021194-ad8f-456b-85ca-1039939d9dd7.png">
 
-Con el audio 1, el nombre, el banco financiero
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199964066-70b744cd-5609-4878-a70f-8d6f6a8c519b.png">
 
-y la cantidad de transferencia.
+Observemos que al ejecutar la prueba nos falla y eso es por que en ambos **`when`** de la cuenta hemos puesto **`CUENTA_001`** vamos a corregirlo y a ejecutar nuevamente.
 
-Comenzamos a cero el total de transferencia.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199964663-1fe9c843-414b-41b6-a102-2b48856412c5.png">
 
-Ahora que tenemos los datos de ejemplo, continuamos con la clase texto es Spring para poder integrar
 
-todo lo que juny.
-
-Todo lo que mi equipo usa esta anotación Spring Boot test que todos la auto configuración y el contexto
-
-de prueba acá utiliza estén width.
-
-Es decir, va a utilizar una extensión propia de Spring Spring extensión ventaja con Júpiter, con Jupiter
-
-y UNIT 5.
-
-Así que está todo prácticamente configurado.
-
-Solamente tenemos que implementar nuestros métodos.
-
-De hecho, creando por defecto con tex load no si tiene porque llamar así le colocasen nombre por defecto,
-
-pero lo podemos renombrar y podemos aplicar o utilizar todo lo que hemos visto durante el curso.
-
-Entonces lo primero vamos a crear dos cosas.
-
-Nuestros atributos los mock cuenta repositorio.
-
-También vamos a tener banco repositorio
-
-y por último, el servis cuenta cérvix, que incluso le vamos a llamar serving nomá service.
-
-Nada más que servis.
-
-Ahí tenemos los atributos que lo vamos a utilizar.
-
-Vamos a crear otro método al insert.
-
-Nuestro método Setup before it s.
-
-Por cada método vamos a definir nuestro mock y la instancia del servis secuente repositorio.
-
-Bueno, es lo mismo que ya hemos hecho.
-
-Por ahora vamos a utilizar la forma estática Mok este método Mock.
-
-Recuerden que viene de moquitos.
-
-Por lo tanto me quito.
-
-Lo tenemos que importar.
-
-Acá se guardan.
-
-Eso es lo que hemos hacer, pero de forma estática.
-
-Acá en el import de moquitos vamos a colocar static al final de cada punto asterisco y vamos a mover
-
-esto de que es estático.
-
-Lo dejamos acá arriba para que quede un poco más organizado.
-
-Nada más.
-
-Lo movemos por acá y bajamos bien.
-
-Continuamos.
-
-Ahora sería más concepto Mok cuenta Repository Punto Klauss.
-
-Y lo mismo para banco repositorio.
-
-Punto klas lo siguiente servis igual a New Kuenta cervix hayan empieza la implementación concreta y
-
-pasamos cuenta Repositorio Koma Banco Repositorio Hoy tenemos otro mock y nuestro cerve que vamos a
-
-aprobar.
-
-Estamos listos, ahí podemos empezar a probar.
-
-Entonces lo primero con el buen Huen se cuenta.
-
-Punto.
-
-Fin.
-
-Biaggi cuenta repositorios fanboy Zaidi entonces cuando se invoque el Heidy 1 es importante el Heidy
-
-1 y acá afuera entonces den Rodón datos datos punto cuenta 0 0 1.
-
-Bien, vamos a duplicar porque es muy parecido para Leydi 2 disolvemos 2 cuenta 2 cuando se llame con
-
-el parámetro 2 con el Heidy 2 bajamos y lo mismo para banco banco repository punto fanboy Heidy 1
-
-Den datos punto banco ya tenemos todo nuestro contexto configurado que sería nuestro Giffen dado algún
-
-contexto.
-
-Luego tenemos el cuando el when.
-
-Cuando invocamos los métodos de prueba del service, entonces realizamos la prueba.
-
-Vamos a invocar el revisar salto primero recuerden que rizas saldo de cada cuenta devuelve un bit decimal.
-
-Entonces comenzamos con el bit decimal sĂłlo origen.
-
-Esto es justo antes de hacer la transferencia.
-
-Entonces vamos a verificar que el saldo de cada cuenta sea el esperado antes de realizar la transferencia.
-
-Igual el servis punto revisar saldo y acá pasamos el Heidy 1 de la cuenta 1.
-
-Lo mismo para el saldo de la cuenta destino bit decimal.
-
-Saldo destino bueno saldo cuenta destino.
-
-Pero vamos a poner al destino servis punto rroristas al destino que sería para la cuenta 2.
-
-Entonces la cuenta 1 va transferir dinero a la cuenta 2.
-
-Vamos a probar cómo están los saldos hacer y cual es bueno.
-
-Tenemos que importar de forma estática el hacer chains entonces acerto y cualse acá vamos a colocar
-
-por ejemplo 1000.
-
-Vamos a verificar la cuenta uno que tiene 1000 sal de origen pero es el de origen del tipo bit decimal.
-
-Lo convertimos a un string.
-
-Entonces tu plain string.
-
-Perfecto, ahora tenemos que importar acá de forma estática.
-
-Entonces acá vamos a colocar alt enter y automáticamente lo vivió.
-
-Habrá importado acá.
-
-Impor static se fijan hacer John's y acá vamos a cambiar asterisco para que importe todos los métodos,
-
-no solamente lasser igual, sino cualquiera lo mismo de moquitos.
-
-Volvemos.
-
-Vamos a probar también la otra cuenta.
-
-El otro salto a ser iguales era 2000.
-
-Saldo de la cuenta destino punto tu plain string.
-
-Convertir a un string.
-
-Y así probamos.
-
-Eso es lo primero.
-
-Entonces vamos a levantar.
-
-Vamos a ejecutar este método.
-
-Prueba como siempre.
-
-Control Schiff F10.
-
-Debería pasar.
-
-Está todo bien?
-
-Perfecto.
-
-Está todo bien.
-
-De momento, ningún problema.
+Debería pasar está todo bien, de momento, ningún problema.
 
 Continuamos pronto.
 
