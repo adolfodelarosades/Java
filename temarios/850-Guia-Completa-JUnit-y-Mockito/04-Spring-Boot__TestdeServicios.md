@@ -486,7 +486,376 @@ public class CuentaServiceImpl implements CuentaService{
 }
 ```
 
-## Escribiendo nuestros tests con JUnit y mockito 11:40
+## Escribiendo nuestros tests con JUnit y Mockito 11:40
+
+El siguiente paso sería comenzar con las Pruebas Unitarias con JUnit, así que nos tenemos que ir a nuestra clase de test **`SpringbootTestApplicationTests`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/199940576-559fd79e-3bd2-4594-8245-aab3145b423f.png">
+
+
+
+Es preambulo test apliqué un test esta de acá se acuerda que le quería de forma automática.
+
+Recuerden que se encuentra dentro de ese reset test.
+
+En vez de main.
+
+Entonces acá test.
+
+Acá tenemos la clase.
+
+Vamos a abrir y vamos a comenzar.
+
+Pero bueno, de todas forma necesitamos datos de ejemplo que tenemos que crear una clase, datos con
+
+un par de atributos que sea constante.
+
+Por ejemplo, una cuenta número uno del banco cuenta dos y un banco de ejemplo.
+
+Eso es lo primero y lo podríamos crear, por ejemplo.
+
+Nos vamos acá a los Package, en Main, en Java y podría ser en la raíz o incluso podríamos crear un
+
+package datos.
+
+Pero da lo mismo.
+
+Luego vamos a crear en la raíz datos una clase
+
+del tipo cuenta.
+
+Le vamos a llamar.
+
+Recuerden, vamos a importar al enter.
+
+No importa.
+
+Clase en mayúscula.
+
+Le vamos a llamar.
+
+Cuenta guión bajo cero cero uno igual.
+
+New.
+
+Cuenta con el ayuno.
+
+Nombre de la persona.
+
+La cuenta a tres new decimal.
+
+El monto, por ejemplo, 1000 controlde.
+
+Para duplicar vamos a colocar 0 0 2.
+
+La cuenta 2 por acá el Heidy 2.
+
+John y Invit decimal el monto, le vamos a colocar dos mil.
+
+Bajamos otra más
+
+banco.
+
+Importamos banco.
+
+Con el audio 1, el nombre, el banco financiero
+
+y la cantidad de transferencia.
+
+Comenzamos a cero el total de transferencia.
+
+Ahora que tenemos los datos de ejemplo, continuamos con la clase texto es Spring para poder integrar
+
+todo lo que juny.
+
+Todo lo que mi equipo usa esta anotación Spring Boot test que todos la auto configuración y el contexto
+
+de prueba acá utiliza estén width.
+
+Es decir, va a utilizar una extensión propia de Spring Spring extensión ventaja con Júpiter, con Jupiter
+
+y UNIT 5.
+
+Así que está todo prácticamente configurado.
+
+Solamente tenemos que implementar nuestros métodos.
+
+De hecho, creando por defecto con tex load no si tiene porque llamar así le colocasen nombre por defecto,
+
+pero lo podemos renombrar y podemos aplicar o utilizar todo lo que hemos visto durante el curso.
+
+Entonces lo primero vamos a crear dos cosas.
+
+Nuestros atributos los mock cuenta repositorio.
+
+También vamos a tener banco repositorio
+
+y por último, el servis cuenta cérvix, que incluso le vamos a llamar serving nomá service.
+
+Nada más que servis.
+
+Ahí tenemos los atributos que lo vamos a utilizar.
+
+Vamos a crear otro método al insert.
+
+Nuestro método Setup before it s.
+
+Por cada método vamos a definir nuestro mock y la instancia del servis secuente repositorio.
+
+Bueno, es lo mismo que ya hemos hecho.
+
+Por ahora vamos a utilizar la forma estática Mok este método Mock.
+
+Recuerden que viene de moquitos.
+
+Por lo tanto me quito.
+
+Lo tenemos que importar.
+
+Acá se guardan.
+
+Eso es lo que hemos hacer, pero de forma estática.
+
+Acá en el import de moquitos vamos a colocar static al final de cada punto asterisco y vamos a mover
+
+esto de que es estático.
+
+Lo dejamos acá arriba para que quede un poco más organizado.
+
+Nada más.
+
+Lo movemos por acá y bajamos bien.
+
+Continuamos.
+
+Ahora sería más concepto Mok cuenta Repository Punto Klauss.
+
+Y lo mismo para banco repositorio.
+
+Punto klas lo siguiente servis igual a New Kuenta cervix hayan empieza la implementación concreta y
+
+pasamos cuenta Repositorio Koma Banco Repositorio Hoy tenemos otro mock y nuestro cerve que vamos a
+
+aprobar.
+
+Estamos listos, ahí podemos empezar a probar.
+
+Entonces lo primero con el buen Huen se cuenta.
+
+Punto.
+
+Fin.
+
+Biaggi cuenta repositorios fanboy Zaidi entonces cuando se invoque el Heidy 1 es importante el Heidy
+
+1 y acá afuera entonces den Rodón datos datos punto cuenta 0 0 1.
+
+Bien, vamos a duplicar porque es muy parecido para Leydi 2 disolvemos 2 cuenta 2 cuando se llame con
+
+el parámetro 2 con el Heidy 2 bajamos y lo mismo para banco banco repository punto fanboy Heidy 1
+
+Den datos punto banco ya tenemos todo nuestro contexto configurado que sería nuestro Giffen dado algún
+
+contexto.
+
+Luego tenemos el cuando el when.
+
+Cuando invocamos los métodos de prueba del service, entonces realizamos la prueba.
+
+Vamos a invocar el revisar salto primero recuerden que rizas saldo de cada cuenta devuelve un bit decimal.
+
+Entonces comenzamos con el bit decimal sĂłlo origen.
+
+Esto es justo antes de hacer la transferencia.
+
+Entonces vamos a verificar que el saldo de cada cuenta sea el esperado antes de realizar la transferencia.
+
+Igual el servis punto revisar saldo y acá pasamos el Heidy 1 de la cuenta 1.
+
+Lo mismo para el saldo de la cuenta destino bit decimal.
+
+Saldo destino bueno saldo cuenta destino.
+
+Pero vamos a poner al destino servis punto rroristas al destino que sería para la cuenta 2.
+
+Entonces la cuenta 1 va transferir dinero a la cuenta 2.
+
+Vamos a probar cómo están los saldos hacer y cual es bueno.
+
+Tenemos que importar de forma estática el hacer chains entonces acerto y cualse acá vamos a colocar
+
+por ejemplo 1000.
+
+Vamos a verificar la cuenta uno que tiene 1000 sal de origen pero es el de origen del tipo bit decimal.
+
+Lo convertimos a un string.
+
+Entonces tu plain string.
+
+Perfecto, ahora tenemos que importar acá de forma estática.
+
+Entonces acá vamos a colocar alt enter y automáticamente lo vivió.
+
+Habrá importado acá.
+
+Impor static se fijan hacer John's y acá vamos a cambiar asterisco para que importe todos los métodos,
+
+no solamente lasser igual, sino cualquiera lo mismo de moquitos.
+
+Volvemos.
+
+Vamos a probar también la otra cuenta.
+
+El otro salto a ser iguales era 2000.
+
+Saldo de la cuenta destino punto tu plain string.
+
+Convertir a un string.
+
+Y así probamos.
+
+Eso es lo primero.
+
+Entonces vamos a levantar.
+
+Vamos a ejecutar este método.
+
+Prueba como siempre.
+
+Control Schiff F10.
+
+Debería pasar.
+
+Está todo bien?
+
+Perfecto.
+
+Está todo bien.
+
+De momento, ningún problema.
+
+Continuamos pronto.
+
+Ahora tengo que invocar otro me torcerle, que sería transferir.
+
+Ya probamos cuáles son los saltos de cada cuenta.
+
+Saldo actual.
+
+Ahora realizamos transferencias servis.
+
+Punto.
+
+Transferir acá número cuenta orijen l 1 l cierto número cuenta destino 2 l que corresponden a Leidy.
+
+El monto que vamos a transferir un bit decimal new bit decimal vamos a transferir 100 y le agregamos
+
+también acá como parámetro el Eddi del banco 1.
+
+Entonces para resumir acá tenemos el Heidy 1 que corresponde a cuenta cero cero uno.
+
+Acá tenemos el Heidy 2 que corresponde a la cuenta 0 0 2.
+
+Destino.
+
+Esta es la de origen destino.
+
+El monto que va a transferir y el banco.
+
+Eso sería.
+
+Ahora tengo que volver a revisar el saldo y volver a probar.
+
+De hecho, sería esto mismo.
+
+Incluso podríamos subir acá.
+
+Los seleccionamos, lo copiamos, bajamos y pegamos, pero quitamos esto, quitamos los tipos de acá.
+
+También quitamos el tipo.
+
+Entonces tenemos al origen y el destino.
+
+Vamos a bajar y volvemos a probar con hacer equals.
+
+En cuanto quedó el saldo en cada cuenta.
+
+Después de realizar esa transferencia, entonces a ser iguales.
+
+Vamos a decir que en la cuenta Orijen quedó €900, justamente porque le restamos 100.
+
+Entonces mil ahora debiese ser 900.
+
+Es el esperado 900 y el real.
+
+Vamos a ver.
+
+Saldo.
+
+Origen, punto.
+
+Plain string.
+
+Perdón.
+
+Acá puse saldo destinÃ y es saldo Orijen ese saldo origen.
+
+Ahora vamos a duplicar controlde.
+
+Acá sería saldo destino y acá debiese ser mil 100.
+
+Perdón, 2100 2100.
+
+Claro, porque 2000.
+
+Si revisamos los datos nos vamos a datos.
+
+Acá Andrés tiene 1000, le restamos 100.
+
+Diría que el 900.
+
+John tiene dos mil.
+
+Le sumamos 100.
+
+Debería quedar en 2100.
+
+Eso es lo que vamos a probar.
+
+Volvemos.
+
+Y levantamos.
+
+Esta fusión no bien nuestra aplicación ya está pasando las pruebas bien por ahora quedamos hasta acá
+
+y en la próxima clase vamos a probar qué pasa si transferimos más del saldo que tienen la cuenta, por
+
+ejemplo, la cuenta uno, la cuenta de origen obviamente se va a quedar sin saldo, va a ser negativo,
+
+debería la acepcion se acuerdan?
+
+Dinero insuficiente septón y podríamos probar si efectivamente se lanza o no se lanza esa sesión con
+
+Azeroth.
+
+FRU Si se lanza, perfecto, pasa la prueba.
+
+Es decir, estarían probando en caso de que falle.
+
+En caso de que falle la transferencia y por supuesto, también probar los saldos que nos haya modificado,
+
+que nos haya realizado el ComitÃ que lanza la excepción.
+
+Perfecto.
+
+Y además, que los saldo se han quedado como están antes, porque la transferencia no se debiese haber
+
+realizado.
+
+Pero lo vemos a la siguiente clase.
+
+Nos vemos.
+
 ## Test **`verify`** 05:31
 ## Escribiendo tests **`assertThrow`** para afirmar que la excepción lanzada sea correcta 12:21
 ## Escribiendo tests con **`assertSame`** 05:41
