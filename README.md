@@ -131,6 +131,10 @@ Serie de varios cursos Java.
 
 * [850 Guía Completa JUnit y Mockito incluye Spring Boot Test 2021](https://github.com/adolfodelarosades/Java/blob/master/temarios/850-Guia-Completa-JUnit-y-Mockito.md)
 
+# Test Unitarios
+
+* [851 Test unitario con junit y mockito en Spring Java 8 - 2022](https://github.com/adolfodelarosades/Java/blob/master/temarios/851-Test-Unitario-JUnit-y-Mockito-Spring.md)
+
 # O Reilly
 
 * [801 Spring and Spring Boot Fundamentals]()
