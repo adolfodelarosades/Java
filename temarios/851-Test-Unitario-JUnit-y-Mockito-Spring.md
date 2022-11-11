@@ -45,21 +45,21 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 
 9 secciones • 59 clases • 4 h 46 m de duración total
 
-### Introducción • 4 clases • 0 h 3 m 
+### 01 Introducción • 4 clases • 0 h 3 m 
 
 * Introducción al curso 01:43
 * ¡¡ Notas Importantes !! 00:30
 * Objetivos del curso 00:19
 * Recomendaciones para el curso 00:19
 
-### Tipos de Pruebas en la programación • 3 clases • 14m 
+### 02 Tipos de Pruebas en la programación • 3 clases • 14m 
 
 * Tipos de prueba en el desarrollo web 05:48
 * Test unitario  -  3 preguntas
 * Pruebas unitarias 03:35
 * Descargar e instalar jdk-8 de Java y Spring Tool Suit 4 04:54
 
-### Spring Boot y sus dependencias de Junit y Mockito • 6 clases • 19m 
+### [03 Spring Boot y sus dependencias de Junit y Mockito • 6 clases • 19m](https://github.com/adolfodelarosades/Java/blob/master/temarios/851-Test-Unitario-JUnit-y-Mockito-Spring/03-Spring-Boot-y-sus-dependencias-de-Junit-y-Mockito.md) 
 
 * Creacion de proyectos en Spring 00:12
 * Creando nuestro primer proyecto Maven con Spring Booot 06:33
@@ -69,7 +69,7 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 * Instalando el Plugin de Coverage en nuestro IDE 01:13
 * Maven 1 preguntas
 
-### Test Unitario con el Framework Junit • 8 clases • 28m 
+### 04 Test Unitario con el Framework Junit • 8 clases • 28m 
 
 * ¿Que es Junit? 01:57
 * Nuestro primer test unitario con Junit 05:46
@@ -82,7 +82,7 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 * Test con Junit - 1 preguntas
 * Anotaciones para ejecutar tests de error con Junit 01:30
 
-### Test Unitario con el Framework Mockito • 6 clases • 25m 
+### 05 Test Unitario con el Framework Mockito • 6 clases • 25m 
 
 * ¿Que es Mockito? 03:45
 * ¿Para que necesitamos Mockito? 02:46
@@ -93,7 +93,7 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 * Metodos de Mockito para simular Servicios (métodos) que terminan en error 01:49
 * Test unitario con Mockito - 2 preguntas
 
-### Diferencias entre Junit y Mockito en el testing • 9 clases • 46m 
+### 06 Diferencias entre Junit y Mockito en el testing • 9 clases • 46m 
 
 * ¿Las grandes diferencias que hay entre Junit y Mockito? 01:12
 * Recomendaciones para los proyectos a testear a partir de aquí 00:10
@@ -105,11 +105,11 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 * Testeando el tercer metodo de nuestra clase BookController - createBook 06:39
 * Testeando el ultimo metodo de nuestra clase BookController - deleteBook 06:51
 
-### Test Unitario en proyectos reales • 1 clases • 1m 
+### 07 Test Unitario en proyectos reales • 1 clases • 1m 
 
 * A partir de aquí pondremos en practica todo lo aprendido de Junit y Mockito 00:10
 
-### P1 - Test unitario de una Api de Reserva de Restaurantes • 21 clases • 2h 30m 
+### 08 P1 - Test unitario de una Api de Reserva de Restaurantes • 21 clases • 2h 30m 
 
 * Entendiendo la API para crear test unitario 04:55
 * Debugeando para entender la API a realizar el Test Unitario 11:34
@@ -133,7 +133,7 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 * Test Unitario de nuestro Servicio de Cancelar Reserva 09:11
 * Test unitario del caso de prueba error en el Metodo Cancel reservation 07:35
 
-### Despedida y review para mejorar en las próximas secciones • 1 clases • 1m 
+### 09 Despedida y review para mejorar en las próximas secciones • 1 clases • 1m 
 
 * Despedida 00:41
 
