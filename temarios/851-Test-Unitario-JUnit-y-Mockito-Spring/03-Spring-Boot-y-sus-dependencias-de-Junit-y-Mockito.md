@@ -159,10 +159,29 @@ Se levanta la aplicación Spring.
 
 <img width="1288" alt="image" src="https://user-images.githubusercontent.com/23094588/201429179-6118951d-1564-4e67-af24-301ed3d18e36.png">
 
+<img width="1268" alt="image" src="https://user-images.githubusercontent.com/23094588/201429793-05eee728-8c39-49fe-8049-a295535af8b1.png">
 
+<img width="1218" alt="image" src="https://user-images.githubusercontent.com/23094588/201429900-e9e42672-187d-4b6b-93e8-f3e1a5a512df.png">
 
+<img width="1214" alt="image" src="https://user-images.githubusercontent.com/23094588/201430044-f5592722-7743-4a6c-b368-a4f381716b63.png">
 
+<img width="1314" alt="image" src="https://user-images.githubusercontent.com/23094588/201430105-301e0845-a9f2-4aa4-9c65-ef748b429d1c.png">
+
+En el proyecto creado con Inizializer la pone pero si necesitamos insertarla manualmente es esta 
+
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/23094588/201430363-894b69a2-149c-4973-86a1-10158c69ebc0.png">
 
 
 ## Instalando el Plugin de Coverage en nuestro IDE 01:13
+
+<img width="1506" alt="image" src="https://user-images.githubusercontent.com/23094588/201430617-224428a8-33f4-4d31-ad95-4adf0e6bdc6e.png">
+
+<img width="1510" alt="image" src="https://user-images.githubusercontent.com/23094588/201430729-d103121b-4bc9-42cc-9ede-4b8b41a12fd9.png">
+
+
+
 ## Maven 1 preguntas
+
+<img width="726" alt="image" src="https://user-images.githubusercontent.com/23094588/201430921-958d9694-1c56-4cb8-b5ef-7fb2a8ee2c16.png">
+
+
