@@ -144,6 +144,25 @@ Vamos a ejecutar la aplicación.
 Se levanta la aplicación Spring.
 
 ## ¿Diferencias entre Maven y Spring Boot? 02:22
+
+<img width="1503" alt="image" src="https://user-images.githubusercontent.com/23094588/201428661-6d401e44-da96-4b49-9d8b-65cfbfe95270.png">
+
 ## Dependencias de Junit y Mockito 02:43
+
+<img width="1452" alt="image" src="https://user-images.githubusercontent.com/23094588/201429333-c541807c-5352-4fab-87b5-840cf3c60146.png">
+
+<img width="1492" alt="image" src="https://user-images.githubusercontent.com/23094588/201429409-7c2e6506-71b2-45ea-865d-93c10f24857a.png">
+
+<img width="1496" alt="image" src="https://user-images.githubusercontent.com/23094588/201429002-4b2afb7d-3104-455f-873b-d8f9166c3e6c.png">
+
+<img width="1338" alt="image" src="https://user-images.githubusercontent.com/23094588/201429126-e137dcca-14a3-4650-9557-591507bc08af.png">
+
+<img width="1288" alt="image" src="https://user-images.githubusercontent.com/23094588/201429179-6118951d-1564-4e67-af24-301ed3d18e36.png">
+
+
+
+
+
+
 ## Instalando el Plugin de Coverage en nuestro IDE 01:13
 ## Maven 1 preguntas
