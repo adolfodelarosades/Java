@@ -105,7 +105,7 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 * Testeando el tercer metodo de nuestra clase BookController - createBook 06:39
 * Testeando el ultimo metodo de nuestra clase BookController - deleteBook 06:51
 
-### ----- Test Unitario en proyectos reales ----- • 1 clases • 1m 
+### Test Unitario en proyectos reales • 1 clases • 1m 
 
 * A partir de aquí pondremos en practica todo lo aprendido de Junit y Mockito 00:10
 
