@@ -69,7 +69,7 @@ En este curso aprenderás los principios para realizar test unitario y es el com
 * Instalando el Plugin de Coverage en nuestro IDE 01:13
 * Maven 1 preguntas
 
-### 04 Test Unitario con el Framework Junit • 8 clases • 28m 
+### [04 Test Unitario con el Framework Junit • 8 clases • 28m](https://github.com/adolfodelarosades/Java/blob/master/temarios/851-Test-Unitario-JUnit-y-Mockito-Spring/04-Test-Unitario-con-el-Framework-Junit.md) 
 
 * ¿Que es Junit? 01:57
 * Nuestro primer test unitario con Junit 05:46
