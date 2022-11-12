@@ -210,6 +210,10 @@ Serie de varios cursos Java.
 
 ## MySQL
 
+### Instalación en Mac
+
+[Video](https://www.youtube.com/watch?v=RbDsxRI35wY) Instalación hecha en la MAC (password: 123456789)
+
 ### Descargar MySQL
 
 [Descarga MySQL 5.1.72](http://mysql.linux.cz/Downloads/MySQL-5.1/?C=M;O=A)
