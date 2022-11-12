@@ -57,6 +57,16 @@ En esta lección vamos a ver las anotaciones **`@Before`** y **`@After`**.
 
 ![image](https://user-images.githubusercontent.com/23094588/201472572-29ad3e6f-e469-476b-8d4d-0d51851a3655.png)
 
+En el curso se estan usando las dependencias de JUnit y Mockito no las de Spring-Test, es decir se ha cambiado la dependencia.
+
+![image](https://user-images.githubusercontent.com/23094588/201473992-1118173e-4bf5-4b67-be94-f2c1945d20d5.png)
+
+Por las siguientes
+
+![image](https://user-images.githubusercontent.com/23094588/201474017-f8bb0d1b-6112-4e62-aba7-444b177dd822.png)
+
+De esta manera se usan las de **JUnit** y **Moquito** originales.
+
 ### **`@Before`** o **`@BeforeAll`** 
 
 **`@Before`** nos sirve para crear un método que se va a ejecutar antes de nuestro Test, normalmente sirve para inicializar variables o datos de entrada a los métodos usados en nuestro Test.
@@ -95,6 +105,11 @@ Por claridad en el código vamos a ponerlas en el orden de ejecución.
 ## Test unitario con Junit - 1 preguntas
 
 ![image](https://user-images.githubusercontent.com/23094588/201473480-f5357e85-4594-4e99-9e2a-004cbfc215b1.png)
+
+<img width="658" alt="image" src="https://user-images.githubusercontent.com/23094588/201473781-071f8043-bc25-4b6a-a6a3-4ebe202cf4c3.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201473797-51b2f15e-d1d6-4267-848a-2b03ee7132d3.png">
+
 
 ## Creando un Controlador Real para poder testearlo 05:23
 ## Testeando un Controlador o endpoind con Junit 05:39
