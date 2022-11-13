@@ -207,6 +207,95 @@ Si ejecutamos hasta aquí el Test (comentando la última línea) tenemos:
 
 ## Mockeando nuestro Servicio de restaurante que trae un restaurante por id 07:26
 
+Lo que toca ahora es dar valor a **`RESTAURANTE_REST`** la cual es de tipo **`RestaurantRest`** que si lo revisamos es una especie de DTO pero en en este caso es realmente un JSON, el código es el siguiente:
+
+<img width="559" alt="image" src="https://user-images.githubusercontent.com/23094588/201542943-0cc5f0fd-e9ac-4550-8783-9da8ec61c684.png">
+
+<img width="815" alt="image" src="https://user-images.githubusercontent.com/23094588/201542976-df630ca0-eef8-4f86-b54c-027bfb5ab848.png">
+
+En nuestro Test vamos a crear una variable de tipo **`RestaurantRest`** con el nombre **`RESTAURANTE_REST`**
+**`private static final RestaurantRest RESTAURANTE_REST = new RestaurantRest();`**. Una vez hecho esto tenemos que settear los valores a este **`RESTAURANTE_REST`**, esto lo haremos en el método **`@Before`**. 
+
+Como hemos visto la clase **`RestaurantRest`** tiene los siguientes campos:
+
+```java
+    @JsonProperty("id")
+	private Long id;
+
+	@JsonProperty("name")
+	private String name;
+
+	@JsonProperty("address")
+	private String address;
+
+	@JsonProperty("description")
+	private String description;
+
+	@JsonProperty("image")
+	private String image;
+
+	@JsonProperty("turns")
+	private List<TurnRest> turns;
+```
+
+Por lo que son los campos que tenemos que settear a **`RESTAURANTE_REST`**, vamos a necesitar los valores que vamos a settear por lo que primero vamos a definir los valores.
+
+<img width="667" alt="image" src="https://user-images.githubusercontent.com/23094588/201543979-a76e81ad-cdb4-4366-8c36-5249dfe61c40.png">
+
+Ahora ya definidos los valores vamos a proceder a settearlos en **`RESTAURANTE_REST`** como ya dijimos esto lo vamos a hacer en el método **`@Before`**.
+
+<img width="528" alt="image" src="https://user-images.githubusercontent.com/23094588/201544142-dfc29c4b-5da2-4132-bb06-db94d16c8df6.png">
+
+Una vez hecho esto ya podemos descomentar la línea en el Test y ejecutarlo.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201544201-c72c3c3a-f3a7-469a-9afa-528ebf3e522b.png">
+
+El Test no lo esta pasando, no coinciden los valores.
+
+Si ejecutamos el Test en modo Debug podemos ir viendo lo que va pasanso.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201544505-b1aa9123-810f-49e1-a1ec-2fd91b4d6d0a.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201544676-1d82b7ec-5f8f-41a0-b511-5180e7629024.png">
+
+Vemos que los 3 primeros valores si coinciden pero el cuarto ya no.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201544547-dea32572-4a87-4193-a95d-73e283c174ef.png">
+
+Porque al ejecutar:
+
+```java
+final BookingResponse<RestaurantRest> response = restaurantController.getRestaurantById(RESTAURANT_ID);
+```
+ 
+recupera un valor **`null`** para el **`data`**.
+
+**Esto es por que no tenemos el Servicio funcionando, nos queda añadir el Servicio con Mockito para que esto funcione correctamente**.
+
+Después de Settear los datos vamos a simular la llamada a un Servicio con Mockito usando el método **`when`** donde indicamos el método del servicio que vamos a simular que vamos a llamar, en este caso **`restaurantService.getRestaurantById(RESTAURANT_ID)`** y entonces indicamos que datos queremos retornar en este caso será **`RESTAURANTE_REST`**.
+
+
+```java
+Mockito.when(restaurantService.getRestaurantById(RESTAURANT_ID)).thenReturn(RESTAURANTE_REST);
+```
+
+<img width="895" alt="image" src="https://user-images.githubusercontent.com/23094588/201545440-899e59c7-1ccc-40dc-8146-41b7a23b1f4d.png">
+
+Una vez hecho esto vamos a ejecutar nuevamente el Test.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201545566-d93de7f6-0da9-404b-8c73-18fb8b4b792e.png">
+
+Esta vez el Test a pasado.
+
+Ahora vamos a ejecutar el coverage.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201545642-ad94778c-6e33-497e-8fe9-9eac5e8f2428.png">
+
+Como podemos obaservar hemos cubierto uno de los dos métodos existentes.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201545712-7836aedb-2f42-412c-8e15-2ed43d9151d9.png">
+
+El Test Unitario para nuestro primer método esta funcionando correctamente ya que hemos probado lo que entra al método y comprobado lo que retorna. En este caso esta retornado un STATUS, un CODIGO, un MENSAJE y una DATA donde tenemos los datos del Restaurante.
 
 ## Test unitario de Controlador de traer todos los Restaurantes 04:48
 ## Test Unitario de nuestro Servicio de traer Restaurante por Id 13:47
