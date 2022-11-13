@@ -202,6 +202,8 @@ Si ejecutamos hasta aquí el Test (comentando la última línea) tenemos:
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201529934-ea7d18e9-0acb-4446-9679-0f1d369c368d.png">
 
+EL TEST FUNCIONA YA QUE LOS VALORES COINCIDEN, PERO EL TEST ESTA MAL PORQUE LA PRUEBA REALMENTE VALIDA ES LA QUE TENEMOS COMENTADA Y ES DONDE COMPARAMOS LOS VALORES QUE SE RECUPERAN.
+
 
 ## Mockeando nuestro Servicio de restaurante que trae un restaurante por id 07:26
 
