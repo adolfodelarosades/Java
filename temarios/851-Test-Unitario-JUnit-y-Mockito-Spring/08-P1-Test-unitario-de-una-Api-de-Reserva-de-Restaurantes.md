@@ -66,7 +66,14 @@ La API tiene:
 
 #### Base de Datos
 
-![image](https://user-images.githubusercontent.com/23094588/201517141-c36dd973-4e2a-447d-9422-4321eb92e999.png)
+![image](https://user-images.githubusercontent.com/23094588/201520658-e2c1ca25-9fde-4c33-be43-a20a6313f2f8.png)
+
+![image](https://user-images.githubusercontent.com/23094588/201520820-33d1613f-1768-4ee2-adc2-7968591d3eb5.png)
+
+
+<img width="1133" alt="image" src="https://user-images.githubusercontent.com/23094588/201520703-78daba42-d232-4a23-901c-17c95e4da9a4.png">
+
+<img width="764" alt="image" src="https://user-images.githubusercontent.com/23094588/201520742-41e72125-d91b-4459-a708-09d88bac6eb7.png">
 
 
 
