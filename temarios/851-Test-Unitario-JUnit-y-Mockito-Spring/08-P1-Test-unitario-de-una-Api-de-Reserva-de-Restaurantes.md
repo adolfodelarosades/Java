@@ -244,6 +244,9 @@ Esta retornando el Status, Código, Mensaje y los Datos que en este caso es lo q
 
 En resumen retorna un **`RestaurantRest`**
 
+### Creación del Test Unitario
+
+Una vez analizado lo que hace el método vamos a crear el Test para este método:
 
 <img width="1241" alt="image" src="https://user-images.githubusercontent.com/23094588/201526968-3e5e20e1-ebe4-4ecb-9500-ad0da5776989.png">
 <img width="1245" alt="image" src="https://user-images.githubusercontent.com/23094588/201526990-4c129e5d-cf11-4641-8e3a-e4c615255308.png">
