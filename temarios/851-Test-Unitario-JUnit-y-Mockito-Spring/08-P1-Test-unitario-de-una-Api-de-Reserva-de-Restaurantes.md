@@ -244,7 +244,7 @@ Esta retornando el Status, Código, Mensaje y los Datos que en este caso es lo q
 
 En resumen retorna un **`RestaurantRest`**
 
-Una vez analizado el método podemos continuar con el Test Unitario, donde añadiremos las propiedades que se tienen que retornar.
+Una vez analizado el método podemos continuar con el Test Unitario, donde añadiremos el párametro de entrada que recibe y las propiedades que se tienen que retornar.
 
 <img width="1241" alt="image" src="https://user-images.githubusercontent.com/23094588/201526968-3e5e20e1-ebe4-4ecb-9500-ad0da5776989.png">
 <img width="1245" alt="image" src="https://user-images.githubusercontent.com/23094588/201526990-4c129e5d-cf11-4641-8e3a-e4c615255308.png">
