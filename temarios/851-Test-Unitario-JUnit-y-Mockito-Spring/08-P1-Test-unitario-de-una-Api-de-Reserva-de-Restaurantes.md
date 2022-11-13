@@ -150,7 +150,7 @@ Esto se hace siempre para los Test Unitarios de Servicios o Controladores.
 <img width="1241" alt="image" src="https://user-images.githubusercontent.com/23094588/201526968-3e5e20e1-ebe4-4ecb-9500-ad0da5776989.png">
 <img width="1245" alt="image" src="https://user-images.githubusercontent.com/23094588/201526990-4c129e5d-cf11-4641-8e3a-e4c615255308.png">
 
-Tenía varias diferencias en cuanto al código de la pantalla y el que finalmente se ejecuta:
+Tenía varias diferencias en cuanto al código de la pantalla y el que finalmente se ejecuto, **uno de los errores que marcaba es que el nombre del método era getRestaurantById() y por alguna razón no aceptaba ese nombre lo tube que cambaiar a testRestaurantById()**, a continuación se muestra el código que funciona.
 
 ```java
 package com.boot.bookingrestaurantapi.controllers;
@@ -202,7 +202,7 @@ Si ejecutamos hasta aquí el Test (comentando la última línea) tenemos:
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201529934-ea7d18e9-0acb-4446-9679-0f1d369c368d.png">
 
-EL TEST FUNCIONA YA QUE LOS VALORES COINCIDEN, PERO EL TEST ESTA MAL PORQUE LA PRUEBA REALMENTE VALIDA ES LA QUE TENEMOS COMENTADA Y ES DONDE COMPARAMOS LOS VALORES QUE SE RECUPERAN.
+**EL TEST FUNCIONA YA QUE LOS VALORES COINCIDEN, PERO EL TEST ESTA MAL PORQUE LA PRUEBA REALMENTE VALIDA ES LA QUE TENEMOS COMENTADA Y ES DONDE COMPARAMOS LOS VALORES QUE SE RECUPERAN**.
 
 
 ## Mockeando nuestro Servicio de restaurante que trae un restaurante por id 07:26
