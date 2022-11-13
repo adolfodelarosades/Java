@@ -70,17 +70,84 @@ La API tiene:
 
 ![image](https://user-images.githubusercontent.com/23094588/201520820-33d1613f-1768-4ee2-adc2-7968591d3eb5.png)
 
-
 <img width="1133" alt="image" src="https://user-images.githubusercontent.com/23094588/201520703-78daba42-d232-4a23-901c-17c95e4da9a4.png">
 
 <img width="764" alt="image" src="https://user-images.githubusercontent.com/23094588/201520742-41e72125-d91b-4459-a708-09d88bac6eb7.png">
 
+#### Funcionamiento de la API
+
+Restaurantes
+
+![image](https://user-images.githubusercontent.com/23094588/201521188-040a36e2-8a8d-4bb9-874b-c9245364b1b2.png)
+
+Recuperar todos los Restaurantes.
+
+![image](https://user-images.githubusercontent.com/23094588/201520964-666c71d4-689e-42e0-bc8e-de2c5ce9cb9a.png)
+
+Recuperar Restaurante por ID
+
+![image](https://user-images.githubusercontent.com/23094588/201521004-f5afaa13-f8b4-4e5a-88f4-173120182189.png)
+
+Reservas
+
+![image](https://user-images.githubusercontent.com/23094588/201521226-c01bbeb6-56fc-4fc8-a2e8-cac7657c4740.png)
 
 
+Recuperar Reservas por ID
+
+![image](https://user-images.githubusercontent.com/23094588/201521135-32efa38e-86b4-44a6-9cc6-c68532d15513.png)
+
+Crear una Reserva
+
+![image](https://user-images.githubusercontent.com/23094588/201521374-baf3bd35-98bb-49b0-bbf2-4dea995bdc67.png)
+
+Teniamos 3 reservas al crear esta será la 4.
+
+![image](https://user-images.githubusercontent.com/23094588/201521425-1cc979b1-d8ca-4276-a338-e76a6a4e1e32.png)
+
+Y la podemos ver con Recuperar Reservas por ID
+
+![image](https://user-images.githubusercontent.com/23094588/201521459-52456c26-8f73-44ca-83af-b44c8b908e5f.png)
+
+Finalmente tenemos la opción de Cancelar una Reserva
+
+![image](https://user-images.githubusercontent.com/23094588/201521535-8d8762ff-1d58-4755-9257-e47dfae56c59.png)
+
+Tenemos que ingresar el Locator para localizarla, en el caso de la que añadimos es **`Calamar y Sazon3`**
+
+![image](https://user-images.githubusercontent.com/23094588/201521572-ca8a043b-1841-4eb6-b6bc-aa70410105b1.png)
+
+Al ejecutar el DELETE con **`Calamar y Sazon3`** la elimina.
+
+![image](https://user-images.githubusercontent.com/23094588/201521605-23addae4-afed-4e04-bbdd-303628718f84.png)
+
+![image](https://user-images.githubusercontent.com/23094588/201521659-56a32c7d-0c6a-4886-9800-8ee5fb7d0c42.png)
 
 ## Debugeando para entender la API a realizar el Test Unitario 11:34
+
 ## Test unitario de controlador de Restaurantes 05:16
+
+Vamos a comenzar por testear **`RestaurantController`** por lo que vamos a crear **`RestaurantControllerTest`**
+
+<img width="686" alt="image" src="https://user-images.githubusercontent.com/23094588/201525385-06e0039d-c7bd-4dd8-9d33-9317a42072c8.png">
+
+Si vemos **`RestaurantController`** tenemos:
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201516761-663388ae-c36d-4666-a051-c5d86ab87f83.png">
+
+Como podemos observar este controlador depende de **`RestaurantService restaurantService;`** para su funcionamiento, por lo que en el Test vamos tener que Mockear este Servicio para su simulación, además de inyectar nuestro Controlador.
+
+<img width="729" alt="image" src="https://user-images.githubusercontent.com/23094588/201525770-4c2d8471-c0dd-49af-93cb-cf7763aeae16.png">
+
+Posteriormente vamos a añadir el método **`before`** que se ejecuta antes del Test. Donde vamos a añadir los datos que queremos se ejecuten o inicialicen antes de ejecutar los Test. Vamos a inicializar las anotaciones del Test con Mockito.
+
+<img width="811" alt="image" src="https://user-images.githubusercontent.com/23094588/201526247-1476fac5-40ea-4f89-97dd-a79c5d211c7b.png">
+
+Esto se hace siempre para los Test Unitarios de Servicios o Controladores.
+
 ## Creando el test del metodo buscar restaurantes por el id 05:33
+
+
 ## Mockeando nuestro Servicio de restaurante que trae un restaurante por id 07:26
 ## Test unitario de Controlador de traer todos los Restaurantes 04:48
 ## Test Unitario de nuestro Servicio de traer Restaurante por Id 13:47
