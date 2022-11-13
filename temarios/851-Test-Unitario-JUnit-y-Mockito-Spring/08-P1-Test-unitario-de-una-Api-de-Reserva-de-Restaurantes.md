@@ -147,6 +147,104 @@ Esto se hace siempre para los Test Unitarios de Servicios o Controladores.
 
 ## Creando el test del metodo buscar restaurantes por el id 05:33
 
+Si vemos el método que busca Restaurantes por ID tenemos:
+
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/23094588/201546646-3f0371d2-e404-4963-9527-cee3352ca22a.png">
+
+Observamos que el método **`getRestaurantById(@PathVariable Long restaurantId)`** recibe como parámetro el ID y lo que retorna es **`BookingResponse<RestaurantRest>`**, si obsevamos la clase **`BookingResponse`** tenemos lo siguiente:
+
+```java
+package com.boot.bookingrestaurantapi.responses;
+
+import java.io.Serializable;
+
+public class BookingResponse<T> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	private String status;
+	private String code;
+	private String message;
+	private T data;
+	
+	public BookingResponse(String status, String code, String message) {
+		this.status = status;
+		this.code = code;
+		this.message = message;
+	}
+	
+	public BookingResponse(String status, String code, String message, T data) {
+		this.status = status;
+		this.code = code;
+		this.message = message;
+		this.data = data;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+	
+	
+	
+
+}
+```
+
+Es una clase generica con 4 campos:
+
+```java
+   private String status;
+   private String code;
+   private String message;
+   private T data;
+```
+
+Si volvemos a ver el método que busca Restaurantes por ID tenemos:
+
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/23094588/201546646-3f0371d2-e404-4963-9527-cee3352ca22a.png">
+
+Observamos que retorna:
+
+```java
+   return new BookingResponse<>("Succes", String.valueOf(HttpStatus.OK), "OK",
+				restaurantService.getRestaurantById(restaurantId));
+```
+
+Esta retornando el Status, Código, Mensaje y los Datos que en este caso es lo que retorna el servicio:
+
+<img width="783" alt="image" src="https://user-images.githubusercontent.com/23094588/201547149-2a7fdb00-980e-4c91-a589-073550e72f4d.png">
+
+En resumen retorna un **`RestaurantRest`**
+
+
 <img width="1241" alt="image" src="https://user-images.githubusercontent.com/23094588/201526968-3e5e20e1-ebe4-4ecb-9500-ad0da5776989.png">
 <img width="1245" alt="image" src="https://user-images.githubusercontent.com/23094588/201526990-4c129e5d-cf11-4641-8e3a-e4c615255308.png">
 
