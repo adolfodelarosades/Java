@@ -131,6 +131,22 @@ Vamos a comenzar por testear **`RestaurantController`** por lo que vamos a crear
 
 <img width="686" alt="image" src="https://user-images.githubusercontent.com/23094588/201525385-06e0039d-c7bd-4dd8-9d33-9317a42072c8.png">
 
+Si vemos **`RestaurantController`** tenemos:
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201516761-663388ae-c36d-4666-a051-c5d86ab87f83.png">
+
+Como podemos observar este controlador depende de **`RestaurantService restaurantService;`** para su funcionamiento, por lo que en el Test vamos tener que Mockear este Servicio para su simulación, además de inyectar nuestro Controlador.
+
+<img width="729" alt="image" src="https://user-images.githubusercontent.com/23094588/201525770-4c2d8471-c0dd-49af-93cb-cf7763aeae16.png">
+
+Posteriormente vamos a añadir el método **`before`** que se ejecuta antes del Test. Donde vamos a añadir los datos que queremos se ejecuten o inicialicen antes de ejecutar los Test. Vamos a inicializar las anotaciones del Test con Mockito.
+
+<img width="811" alt="image" src="https://user-images.githubusercontent.com/23094588/201526247-1476fac5-40ea-4f89-97dd-a79c5d211c7b.png">
+
+Esto se hace siempre para los Test Unitarios de Servicios o Controladores.
+
+## Creando el test del metodo buscar restaurantes por el id 05:33
+
 Si vemos el método que busca Restaurantes por ID tenemos:
 
 <img width="970" alt="image" src="https://user-images.githubusercontent.com/23094588/201546646-3f0371d2-e404-4963-9527-cee3352ca22a.png">
@@ -228,21 +244,7 @@ Esta retornando el Status, Código, Mensaje y los Datos que en este caso es lo q
 
 En resumen retorna un **`RestaurantRest`**
 
-Si vemos **`RestaurantController`** tenemos:
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201516761-663388ae-c36d-4666-a051-c5d86ab87f83.png">
-
-Como podemos observar este controlador depende de **`RestaurantService restaurantService;`** para su funcionamiento, por lo que en el Test vamos tener que Mockear este Servicio para su simulación, además de inyectar nuestro Controlador.
-
-<img width="729" alt="image" src="https://user-images.githubusercontent.com/23094588/201525770-4c2d8471-c0dd-49af-93cb-cf7763aeae16.png">
-
-Posteriormente vamos a añadir el método **`before`** que se ejecuta antes del Test. Donde vamos a añadir los datos que queremos se ejecuten o inicialicen antes de ejecutar los Test. Vamos a inicializar las anotaciones del Test con Mockito.
-
-<img width="811" alt="image" src="https://user-images.githubusercontent.com/23094588/201526247-1476fac5-40ea-4f89-97dd-a79c5d211c7b.png">
-
-Esto se hace siempre para los Test Unitarios de Servicios o Controladores.
-
-## Creando el test del metodo buscar restaurantes por el id 05:33
+Una vez analizado el método podemos continuar con el Test Unitario, donde añadiremos las propiedades que se tienen que retornar.
 
 <img width="1241" alt="image" src="https://user-images.githubusercontent.com/23094588/201526968-3e5e20e1-ebe4-4ecb-9500-ad0da5776989.png">
 <img width="1245" alt="image" src="https://user-images.githubusercontent.com/23094588/201526990-4c129e5d-cf11-4641-8e3a-e4c615255308.png">
