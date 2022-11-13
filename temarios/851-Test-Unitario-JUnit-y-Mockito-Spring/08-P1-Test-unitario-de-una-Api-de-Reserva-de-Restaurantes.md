@@ -147,8 +147,65 @@ Esto se hace siempre para los Test Unitarios de Servicios o Controladores.
 
 ## Creando el test del metodo buscar restaurantes por el id 05:33
 
+<img width="1241" alt="image" src="https://user-images.githubusercontent.com/23094588/201526968-3e5e20e1-ebe4-4ecb-9500-ad0da5776989.png">
+<img width="1245" alt="image" src="https://user-images.githubusercontent.com/23094588/201526990-4c129e5d-cf11-4641-8e3a-e4c615255308.png">
+
+Tenía varias diferencias en cuanto al código de la pantalla y el que finalmente se ejecuta:
+
+```java
+package com.boot.bookingrestaurantapi.controllers;
+
+import com.boot.bookingrestaurantapi.exceptions.BookingException;
+import com.boot.bookingrestaurantapi.jsons.RestaurantRest;
+import com.boot.bookingrestaurantapi.responses.BookingResponse;
+import com.boot.bookingrestaurantapi.services.RestaurantService;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+public class RestaurantControllerTest {
+
+    private static final Long RESTAURANT_ID = 1L;
+    private static final String SUCCESS_STATUS = "Succes";
+    private static final String SUCCESS_CODE = "200 OK";
+    private static final String OK = "OK";
+
+
+    @Mock
+    RestaurantService restaurantService;
+
+    @InjectMocks
+    RestaurantController  restaurantController;
+
+    @Before
+    public void init() throws BookingException {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void testRestaurantById() throws BookingException {
+        final BookingResponse<RestaurantRest> response = restaurantController.getRestaurantById(RESTAURANT_ID);
+
+        //Expected , Actual
+        assertEquals(SUCCESS_STATUS, response.getStatus());
+        assertEquals(SUCCESS_CODE, response.getCode());
+        assertEquals(OK, response.getMessage());
+        //assertEquals(RESTAURANTE_REST, response.getData());
+    }
+}
+```
+
+Si ejecutamos hasta aquí el Test (comentando la última línea) tenemos:
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/201529934-ea7d18e9-0acb-4446-9679-0f1d369c368d.png">
+
 
 ## Mockeando nuestro Servicio de restaurante que trae un restaurante por id 07:26
+
+
 ## Test unitario de Controlador de traer todos los Restaurantes 04:48
 ## Test Unitario de nuestro Servicio de traer Restaurante por Id 13:47
 ## Revisando el Coverage y Testeando toda la funcionalidad del Servicio 04:35
