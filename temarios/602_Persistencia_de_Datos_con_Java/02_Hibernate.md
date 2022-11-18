@@ -336,6 +336,16 @@ Cuando se salva el archivo **`pom.xml`** se empiezan a descargar todas las libre
 
 ![image](https://user-images.githubusercontent.com/23094588/127368527-ae39a1b3-fee0-4cc1-9b0e-f1fdb7850e43.png)
 
+## Creación del Proyecto en IntelliJ(Maquina Nueva) 04:39
+
+Vamos a crear nuestro proyecto IntelliJ.
+
+Entramos en el Workspace PROYECTOS-ECLIPSE/602_Persistencia_de_Datos_con_Java y vamos a crear un nuevo Proyecto Java.
+
+<img width="1203" alt="image" src="https://user-images.githubusercontent.com/23094588/202804592-7e90a08c-3bf3-486c-b94f-6cc42eed9282.png">
+
+![image](https://user-images.githubusercontent.com/23094588/127368527-ae39a1b3-fee0-4cc1-9b0e-f1fdb7850e43.png)
+
 ## Configuración previa de Hibernate 06:20
 
 En esta lección vamos a crear dos archivos para ***configurar la sesión de Hibernate***, hasta el momento tenemos un proyecto Java que tiene todas las dependencias, todas las librerías que vamos a estar utilizando, con el propósito de implementar el framework de persistencia de datos Hibernate.
