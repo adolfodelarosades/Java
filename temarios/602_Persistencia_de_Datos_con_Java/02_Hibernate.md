@@ -75,6 +75,15 @@ Va a tener los siguientes campos:
 
 ![image](https://user-images.githubusercontent.com/23094588/127298184-aaaf1c8c-623e-4916-8800-3b4f9247f76d.png)
 
+**NOTA de Actualización**: Ultimamente en los proyectos he visto más que para los campos se usa más la siguiente notación.
+
+* **`id_tramite`**  es nuestra llave primaria por lo que no puede ser nula. (Aplicando reglas)
+* **`tipo_tramite`** de tipo **`VARCHAR(45)`**
+* **`fhc_ramite`**  de tipo **`DATETIME`**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202797998-031c6632-da34-405a-be48-f9afe0ec6f84.png">
+
+
 Salvamos.
 
 Vamos a insertar una nueva tabla para esta primera versión, para empezar con las ***Relaciones Uno a Uno***, para esto vamos a crear otra tabla que es **`Avaluo`** que es un avalúo comercial, va a tener los siguientes campos:
