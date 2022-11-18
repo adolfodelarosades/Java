@@ -121,6 +121,10 @@ Se nos pide una conexión, como no hemos hecho la conexión cancelamos y nos vam
 
 ![image](https://user-images.githubusercontent.com/23094588/127332644-74573e5b-0854-4d48-8ce4-c09a30f7de51.png)
 
+Maquina Nueva
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202800782-64d8e329-f223-4cc9-95b1-471a2a776fea.png">
+
+
 Vamos a crear una nueva Conexión punsando en el "+".
 
 ![image](https://user-images.githubusercontent.com/23094588/127332755-a98f16a5-3684-4d19-a472-7101b20c25ad.png)
@@ -129,15 +133,31 @@ Vamos a darle el nombre de **`constructora`** y dejamos los demas datos como est
 
 ![image](https://user-images.githubusercontent.com/23094588/127332917-c18ad228-a34f-4a85-873c-37bdcadfc9fd.png)
 
+Maquina Nueva
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202801184-dfc29b45-f79c-45a0-a67f-aafb78238b9c.png">
+
 Podemos dar click en **Text Connection** para probar la conexión.
 
 ![image](https://user-images.githubusercontent.com/23094588/127333088-2127309a-4798-4a56-bc07-d6970976dd55.png)
+
+Maquina Nueva
+Me pide un Password:123456789
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202801512-f06b5c3e-9eb7-4849-82b2-ecf5e637a2ae.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202801578-d1ca1f7d-3f54-4917-b76a-a9264695f043.png">
 
 Una vez que comprobamos que la conexión es correta damos en **ok** y ya vemos la nueva conexión creada **`constructora`**.
 
 ![image](https://user-images.githubusercontent.com/23094588/127333309-795fb719-7ffc-46f5-81d0-140db0feeafe.png)
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202801738-3910d07b-5933-4eca-adea-dbf024ddd5bd.png">
+
+Ahora ya podemos volve al Modelo y dar en la opción  a **Database / Forward Engineer...** y seleccionar la conexión recien creeada.
+
 ![image](https://user-images.githubusercontent.com/23094588/127333860-db866e7b-abd6-44af-8c14-67fcc6be1219.png)
+
+Maquina Nueva
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202802210-eb67aaa8-afa1-4c1a-b5f6-89b97364a0f5.png">
 
 Vamos a darle **Continue** sucesivamente.
 
@@ -146,6 +166,12 @@ Vamos a darle **Continue** sucesivamente.
 ![image](https://user-images.githubusercontent.com/23094588/127334439-0817be37-ecc9-42e7-ae0f-bfb06337ce43.png)
 
 ![image](https://user-images.githubusercontent.com/23094588/127334482-81557df3-f8c2-46c5-8389-9b5d05629f18.png)
+
+Maquina Nueva
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202802339-09fff69d-6dcd-48f6-8e44-5ff74c3c4ce6.png">
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202802434-02705abf-f733-4e15-914a-bf17e59b009c.png">
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202802480-486580b3-f30a-43c3-8734-a0335c13421c.png">
+
 
 ```sql
 -- MySQL Workbench Forward Engineering
@@ -199,12 +225,20 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 ![image](https://user-images.githubusercontent.com/23094588/127334556-64f776ae-a275-4a2d-a841-76cbe77b9be5.png)
 
+Maquina Nueva
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202802594-0a337434-e9f9-433b-8aff-0f8695307219.png">
+
+
 Y con esto ya se ha creado la BD, para comprobarlo nos vamos a la conexión **constructora** deberíamos asignarle el esquema por default que es **test_db**
 
 ![image](https://user-images.githubusercontent.com/23094588/127335396-6c35d94e-e8da-4d5b-8593-c51c6d36ffd0.png)
 ![image](https://user-images.githubusercontent.com/23094588/127335430-5fa6d0ab-664f-43f2-9759-fd96b1379730.png)
 
 (NO FUNCIONA, no acepta el esquema por default).
+
+Maquina Nueva
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202803127-6a96de30-103d-49de-9611-25dec6dc23be.png">
+
 
 Simplemente abrimos la conexión **constructora** y buscamos la BD **test_db**, la abrimos.
 
