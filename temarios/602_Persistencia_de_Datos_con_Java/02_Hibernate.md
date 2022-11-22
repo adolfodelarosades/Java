@@ -344,7 +344,19 @@ Entramos en el Workspace PROYECTOS-ECLIPSE/602_Persistencia_de_Datos_con_Java y 
 
 <img width="1203" alt="image" src="https://user-images.githubusercontent.com/23094588/202804592-7e90a08c-3bf3-486c-b94f-6cc42eed9282.png">
 
-![image](https://user-images.githubusercontent.com/23094588/127368527-ae39a1b3-fee0-4cc1-9b0e-f1fdb7850e43.png)
+Creo un Proyecto Maven con los siguientes datos:
+
+* He descargado una versión Java 1.8 desde aquí mismo
+* He seleccionado ese arquetipo un poco al asar.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202806666-0d159e99-ebcd-4e38-88c3-7071709859dc.png">
+
+El proyecto se creo como sigue:
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202807130-55244124-f099-406c-a569-8d89a62333d2.png">
+
+He cambiado el **`pom.xml`** inicial para que quede similar al que se creo con Eclipse.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/202808803-0f8d70aa-f7d4-4ed5-8cf4-9b69c7547751.png">
+
 
 ## Configuración previa de Hibernate 06:20
 
