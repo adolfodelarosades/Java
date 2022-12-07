@@ -220,4 +220,41 @@ public class Message {
 
 
 ## Persisting an Object
+
+En aras de la exhaustividad, este es el método utilizado para escribir un **`Message`** en la base de datos con Hibernate. (La versión JDBC de este código está presente en los ejemplos descargables, pero no agrega nada al conocimiento de cómo usar Hibernate).
+
+**Listado 1-6. Guardar un objeto de mensaje en Hibernate**
+
+```java
+@Test
+public void saveMessage() {
+    Message message = new Message("Hello, world");
+    try (Session session = factory.openSession()) {
+        Transaction tx = session.beginTransaction();
+        session.persist(message);
+        tx.commit();
+    }
+}
+```
+
 ## Summary
+
+En este capítulo, hemos considerado los problemas y requisitos que han impulsado el desarrollo de Hibernate. Hemos visto algunos de los detalles de una aplicación de ejemplo trivial escrita con y sin la ayuda de Hibernate. Hemos pasado por alto algunos de los detalles de implementación, pero los discutiremos en profundidad en el Capítulo 3.
+
+En el próximo capítulo, veremos la arquitectura de Hibernate y cómo se integra en sus aplicaciones.
+
+### Footnotes
+
+1 Una base de datos relacional es una colección de conjuntos de elementos de datos, cada uno de los cuales se describe y organiza formalmente. Se pueden establecer reglas para los datos de modo que se puedan validar, y se pueden crear índices para que los datos se puedan consultar y actualizar de forma rápida y segura.
+
+2 Bueno, tal vez un mundo ideal en el que se utilice un ORM para el acceso a datos. Pero en este libro se puede suponer que este es el caso.
+
+3 Consulte http://docs.jboss.org/hibernate/orm/5.2/quickstart/html_single/#hibernate-gsg-tutorialbasic-entity para obtener más detalles. Forma abreviada: Hibernate usa la reflexión para construir un objeto antes de la población de datos. El camino más corto (y más rápido) para hacerlo es con un constructor sin argumentos.
+
+4 Para obtener más información sobre la gestión automática de recursos, introducida en Java 7, consulte la referencia del tutorial de Java: http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html.
+
+5 Por cierto, si está interesado, "inconmensurablemente" equivale a treinta y dos líneas. La forma antigua, sin ARM, tenía treinta y dos líneas de código dedicadas a la limpieza segura. No sé ustedes, pero a mí me gusta más este código. No solo es más corto, sino que es más difícil estropearlo.
+
+6 Una crítica común a Java es que una aplicación "Hello, World" puede tardar unos segundos en ejecutarse, porque el inicio de la VM es parte del tiempo de ejecución. Sin embargo, el inicio de la VM en sí mismo es una ocurrencia rara para la mayoría de las aplicaciones; después de todo, solo ocurre una vez por ejecución, y en una aplicación que se ejecuta durante horas, días o meses, el tiempo que tarda la VM en iniciarse no es relevante. La crítica está fuera de lugar, a menos que el objetivo de su negocio sea ejecutar "Hello, World" en el menor tiempo posible.
+
+7 Imagínese; ¿Quién sabía que a los codificadores les gusta que las cosas sean código? (Además de los codificadores, quiero decir).
