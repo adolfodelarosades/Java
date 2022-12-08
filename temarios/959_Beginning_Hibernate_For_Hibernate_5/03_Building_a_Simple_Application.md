@@ -638,4 +638,345 @@ private void addRanking(Session session, String subjectName,
 }
 ```
 
+Esto deja nuestro método **`getRankingFor()`** sin implementar; sin embargo, así como **`addRanking()`** se eliminó casi por completo de **`RankingTest`**, podemos copiar el código para **`getAverage()`** y cambiar la forma en que se adquiere la Session, como se muestra en el Listado 3-18.
+
+**Listado 3-18. Recuperación de un `Ranking` para un tema - Subject**
+
+```java
+@Override
+public int getRankingFor(String subject, String skill) {
+
+    try (Session session = SessionUtil.getSession()) {
+        Transaction tx = session.beginTransaction();
+
+        int average = getRankingFor(session, subject, skill);
+        tx.commit();
+        return average;
+    }
+}
+
+private int getRankingFor(Session session, String subject,
+                          String skill) {
+                          
+    Query<Ranking> query = session.createQuery("from Ranking r "
+            + "where r.subject.name=:name "
+            + "and r.skill.name=:skill", Ranking.class);
+    query.setParameter("name", subject);
+    query.setParameter("skill", skill);
+
+    IntSummaryStatistics stats = query
+            .list()
+            .stream()
+            .collect(Collectors.summarizingInt(Ranking::getRanking));
+
+    return (int) stats.getAverage();
+}
+```
+
+Al igual que con el método **`addRanking()`**, el método visible públicamente asigna una sesión y luego la delega a un método interno, y es por la misma razón: es posible que queramos calcular el promedio en una **`Session`** existente. (Veremos esto en acción en la siguiente sección, cuando queramos actualizar una clasificación).
+
+Para que conste, este método interno sigue siendo horrible. Funciona, pero podemos optimizarlo bastante. Sin embargo, nuestros conjuntos de datos han sido tan pequeños que no ha tenido sentido. Vamos a llegar.
+
+Ahora, cuando ejecutamos la prueba (con **`mvn package`** en el directorio de nivel superior, o a través de su IDE, si está usando uno), **`AddRankingTest`** pasa, sin drama, que es exactamente lo que queremos. Aún más satisfactorio, si queremos jugar con las partes internas de **`HibernateRankingService`**, podemos; podremos saber tan pronto como algo se rompa porque nuestras pruebas requieren que las cosas funcionen.
+
+Además, si miras con mucho cuidado, bueno, no tanto, porque es bastante obvio, verás que también hemos logrado seguir el camino de cumplir con otro de nuestros requisitos: determinar el promedio de **`Ranking`** para la **`Skill`** de un sujeto determinado. Sin embargo, dicho esto, aún no tenemos una prueba rigurosa. Llegaremos allí también.
+
+### Actualizar un `Ranking`
+
+A continuación, nos ocupamos de la (poco probable) situación de actualizar un **`Ranking`**. Esto es potencialmente muy simple, pero debemos pensar en lo que sucede si no existe un **`Ranking`** preexistente. Imagine a Drew Lombardo tratando de cambiar el dominio de Mule de J. C. Smell a 8, cuando aún no se ha molestado en ofrecer ningun **`Ranking`** previa para J. C. y Mule.
+
+Probablemente no necesitemos pensar demasiado en ello, porque en esta situación es probable que solo añadamos el **`Ranking`**, pero otras aplicaciones más críticas pueden querer dedicar más tiempo a pensar.
+
+Tal como están las cosas, creemos dos pruebas: una que use un **`Ranking`** existente y otra que use un **`Ranking`** inexistente; consulte el Listado 3-19.
+
+**Listado 3-19. Tests para actualizar `Ranking`**
+
+```java
+@Test
+public void updateExistingRanking() {
+    service.addRanking("Gene Showrama", "Scottball Most", "Ceylon", 6);
+    assertEquals(service.getRankingFor("Gene Showrama", "Ceylon"), 6);
+    service.updateRanking("Gene Showrama", "Scottball Most", "Ceylon", 7);
+    assertEquals(service.getRankingFor("Gene Showrama", "Ceylon"), 7);
+}
+
+@Test
+public void updateNonexistentRanking() {
+    assertEquals(service.getRankingFor("Scottball Most", "Ceylon"), 0);
+    service.updateRanking("Scottball Most", "Gene Showrama", "Ceylon", 7);
+    assertEquals(service.getRankingFor("Scottball Most", "Ceylon"), 7);
+}
+```
+
+Estas dos pruebas son muy simples.
+
+**`updateExistingRanking()`** primero agrega un **`Ranking`**, luego verifica que se haya agregado correctamente; actualiza ese mismo **`Ranking`**, luego determina si el promedio ha cambiado. Dado que esta es la única **`Ranking`** para esta materia y esta **`Skill`**, el promedio debe coincidir con la **`Ranking`** modificada.
+
+**`updateNonExistentRanking()`** hace casi lo mismo: se asegura de que no tengamos nada para este tema y **`Skill`** (es decir, busca 0, nuestro valor de señal para "no existen rankings"), luego "actualiza" ese **`Ranking`** (que, de acuerdo con nuestros requisitos, debe agregar el **`Ranking`**), y luego verifica el promedio resultante.
+
+Ahora veamos el código del servicio utilizado para poner esto en práctica, como se muestra en el Listado 3-20.
+
+**Listado 3-20. El código para actualizar un `Ranking`**
+
+```java
+@Override
+public void updateRanking(String subject, String observer, String skill, int rank) {
+    try (Session session = SessionUtil.getSession()) {
+        Transaction tx = session.beginTransaction();
+
+        Ranking ranking = findRanking(session, subject, observer, skill);
+        if (ranking == null) {
+            addRanking(session, subject, observer, skill, rank);
+        } else {
+            ranking.setRanking(rank);
+        }
+        tx.commit();
+    }
+}
+
+private Ranking findRanking(Session session, String subject,
+                            String observer, String skill) {
+    Query<Ranking> query = session.createQuery("from Ranking r where "
+            + "r.subject.name=:subject and "
+            + "r.observer.name=:observer and "
+            + "r.skill.name=:skill", Ranking.class);
+    query.setParameter("subject", subject);
+    query.setParameter("observer", observer);
+    query.setParameter("skill", skill);
+    Ranking ranking = query.uniqueResult();
+    return ranking;
+}
+```
+
+Vale la pena considerar que este código podría ser más eficiente para lo que hace. Dado que no hay ningún estado que preservar del registro que se modificó, es factible eliminar el registro por completo si existe, y luego agregar un nuevo registro.
+
+Sin embargo, si las clasificaciones tuvieran una especie de marca de tiempo, tal vez los atributos **`createTimestamp`** y **`lastUpdatedTimestamp`**, entonces, en este escenario, una actualización (como lo hacemos aquí) tiene más sentido. Nuestro modelo de datos aún no está completo; deberíamos anticipar la adición de campos como estos en algún momento.
+
+### Eliminar un `Ranking`
+
+Eliminar un **`Ranking`** tiene dos condiciones a considerar: una es que el **`Ranking`** exista (¡por supuesto!) y la otra es que no exista. Puede ser que nuestros requisitos arquitectónicos exijan que la eliminación de un **`Ranking`** que no está realmente presente sea un error; pero para este caso, asumiremos que la eliminación simplemente intenta validar que el **`Ranking`** no existe.
+
+Aquí está nuestro código de prueba, que se muestra en el Listado 3-21:
+
+**Listado 3-21. Tests que validan la eliminación de un `Ranking`
+
+```java
+@Test
+public void removeRanking() {
+    service.addRanking("R1", "R2", "RS1", 8);
+    assertEquals(service.getRankingFor("R1", "RS1"), 8);
+    service.removeRanking("R1", "R2", "RS1");
+    assertEquals(service.getRankingFor("R1", "RS1"), 0);
+}
+
+@Test
+public void removeNonexistentRanking() {
+    service.removeRanking("R3", "R4", "RS2");
+}
+```
+
+Las pruebas deben ser bastante fáciles de realizar.
+
+La primera prueba (**`removeRanking()`**) crea un **`Ranking`** y valida que nos da un promedio conocido, luego lo elimina, lo que debería cambiar el promedio nuevamente a **`0`** (lo que indica que no existen datos para ese **`Ranking`**, como ya se indicó).
+
+La segunda prueba llama a **`removeRanking()`** que no debería existir (porque no lo creamos en ninguna parte); no debería cambiar nada sobre el tema.
+
+Vale la pena señalar que nuestras pruebas son bastante completas, pero no tan completas como podrían ser. Por ejemplo, algunas de nuestras pruebas podrían estar agregando datos a la base de datos sin darse cuenta, dependiendo de cómo se escriban los servicios. Si bien eso no es muy importante para esta aplicación, vale la pena pensar en cómo validar el estado completo de la base de datos después de ejecutar una prueba.
+
+### Encuentre el Average Ranking para la Skill de un sujeto
+
+Nos acercamos al punto en el que comenzamos a agotar el código base escrito para probar nuestro modelo de datos. Es hora de verificar el código que calcula el **`Ranking`** promedio para una habilidad determinada para un tema determinado. Ya hemos usado este código para verificar algunos de nuestros otros requisitos (de hecho, todos hasta ahora), pero lo hemos hecho con datos limitados. Lancemos más datos al método **`getRankingFor()`** para validar que realmente está haciendo lo que se supone que debe hacer.
+
+Aquí está nuestro código de prueba, que se muestra en el Listado 3-22:
+
+**Listado 3-22. Un Test que valida nuestro mecanismo de Ranking **
+
+```java
+@Test
+public void validateRankingAverage() {
+    service.addRanking("A", "B", "C", 4);
+    service.addRanking("A", "B", "C", 5);
+    service.addRanking("A", "B", "C", 6);
+    assertEquals(service.getRankingFor("A", "C"), 5);
+    service.addRanking("A", "B", "C", 7);
+    service.addRanking("A", "B", "C", 8);
+    assertEquals(service.getRankingFor("A", "C"), 6);
+}
+```
+
+En realidad, no tenemos ningún cambio para el servicio; está usando el método **`getRankingFor()`** que ya hemos visto.
+
+### Buscar todos los Rankings de un tema
+
+Lo que estamos buscando aquí es una lista de **`Skills`**, con sus promedios, para un tema determinado.
+
+Tenemos algunas opciones sobre cómo podemos representar estos datos; ¿Queremos un **`Map`**, para que podamos localizar fácilmente qué nivel de **`Skill`** corresponde a una **`Skill`**? ¿Queremos una cola **`queue`**, para que los niveles de habilidad se clasifiquen en orden?
+
+Esto dependerá de los requisitos arquitectónicos para la interacción. En este nivel (y para este diseño de aplicación en particular), usaremos un **`Map`**; nos da los datos que necesitamos (un conjunto de **`Skills`** con sus **`Rankings`** promedio) con una estructura de datos simple. Eventualmente, revisaremos este requisito y lo cumpliremos de manera más eficiente.
+
+Como de costumbre, escribamos nuestro código de prueba y luego hagamos que se ejecute correctamente; vea el Listado 3-23.
+
+**Listado 3-23. Código de prueba para los `Rankings` de `Skills` de una `Person`**
+
+```java
+@Test
+public void findAllRankingsEmptySet() {
+    assertEquals(service.getRankingFor("Nobody", "Java"),0);
+    assertEquals(service.getRankingFor("Nobody", "Python"),0);
+    Map<String, Integer> rankings=service.findRankingsFor("Nobody");
+
+    // make sure our dataset size is what we expect: empty
+    assertEquals(rankings.size(), 0);
+}
+
+@Test
+public void findAllRankings() {
+    assertEquals(service.getRankingFor("Somebody", "Java"),0);
+    assertEquals(service.getRankingFor("Somebody", "Python"),0);
+    service.addRanking("Somebody", "Nobody", "Java", 9);
+    service.addRanking("Somebody", "Nobody", "Java", 7);
+    service.addRanking("Somebody", "Nobody", "Python", 7);
+    service.addRanking("Somebody", "Nobody", "Python", 5);
+    Map<String, Integer> rankings=service.findRankingsFor("Somebody");
+
+    assertEquals(rankings.size(), 2);
+    assertNotNull(rankings.get("Java"));
+    assertEquals(rankings.get("Java"), new Integer(8));
+    assertNotNull(rankings.get("Python"));
+    assertEquals(rankings.get("Python"), new Integer(6));                                                                                                               
+}
+```
+
+Tenemos dos pruebas aquí, por supuesto: la primera busca un sujeto para el que no debería haber datos, y valida que obtuvimos un conjunto de datos vacío a cambio.
+
+El segundo valida que no tenemos datos para el tema, completa algunos datos y luego busca el conjunto de promedios de **`Ranking`**. Luego se asegura de que tengamos el recuento de promedios que esperamos y valida que las **`Rankings`** en sí sean lo que esperamos.
+
+Nuevamente, es factible escribir pruebas más completas, quizás, pero estas pruebas validan si se cumplen nuestros requisitos simples. Todavía no estamos comprobando los efectos secundarios, pero eso está fuera del alcance de este capítulo.<sup>11</sup>
+
+Así que veamos el código de **`findAllRankings()`**. Como de costumbre, tendremos un método público y luego un método interno que participa en una **`Session`** existente, como se muestra en el Listado 3-24:
+
+**Listado 3-24. Métodos de servicio para encontrar Rankings**
+
+```java
+@Override
+public Map<String, Integer> findRankingsFor(String subject) {
+    Map<String, Integer> results;
+    Session session = SessionUtil.getSession();
+    Transaction tx = session.beginTransaction();
+
+    results=findRankingsFor(session, subject);
+
+    tx.commit();
+    session.close();
+
+    return results;
+}
+
+private Map<String, Integer> findRankingsFor(Session session, String subject) {
+    Map<String, Integer> results=new HashMap<>();
+
+    Query query = session.createQuery("from Ranking r where "
+            + "r.subject.name=:subject order by r.skill.name");
+    query.setParameter("subject", subject);
+    List<Ranking> rankings=query.list();
+    String lastSkillName="";
+    int sum=0;
+    int count=0;
+    for(Ranking r:rankings) {
+        if(!lastSkillName.equals(r.getSkill().getName())) {
+            sum=0;
+            count=0;
+            lastSkillName=r.getSkill().getName();
+        }
+        sum+=r.getRanking();
+        count++;
+        results.put(lastSkillName, sum/count);
+    }
+    return results;
+}
+```
+
+El método interno **`findRankingsFor()`** (al igual que todos nuestros métodos que calculan promedios) no es realmente muy atractivo. Utiliza un mecanismo de ruptura de control para calcular los promedios a medida que iteramos a través de los **`Rankingss`**.<sup>12</sup>
+
+De acuerdo con la página de Wikipedia sobre ruptura de control ( http://en.wikipedia.org/wiki/Control_break ), “con lenguajes de cuarta generación como SQL, el lenguaje de programación debería manejar la mayoría de los detalles de las rupturas de control automáticamente. ” Eso es absolutamente correcto, y también es por eso que he estado señalando la ineficiencia de todas estas rutinas. Estamos haciendo manualmente algo que la base de datos (e Hibernate) debería poder hacer por nosotros, y puede hacerlo. Simplemente no estamos usando esa capacidad todavía. Finalmente llegaremos allí cuando veamos el próximo requisito de solicitud.
+
+Es posible usar la Streams API en Java para convertir la lista de **`Rankings`** en un mapa de **`Skill`** y el promedio de esa **`Skill`**. Sin embargo, es casi tan artificial como el corte de control que se usa aquí, y es más difícil de leer para la mayoría de las personas. Al final, dado que la base de datos debe calcular el promedio de todos modos, usar la API Streams para esto es una exageración.
+
+En cualquier caso, las nuevas pruebas deberían poder pasar (quizás no con gran éxito, porque los servicios subyacentes reales no se realizan teniendo en cuenta la eficiencia), lo que nos permite pasar al último requisito (y probablemente el más complicado).
+
+### Encuentre el tema mejor calificado para una habilidad
+
+Con este requisito, queremos averiguar quién ocupa el puesto más alto en una **`Skill`** determinada; si tenemos tres personas clasificadas para Java, queremos la que tenga la mejor puntuación media. Si no hay clasificaciones para esta habilidad, queremos una respuesta nula como valor de señal. A las pruebas; veamos el Listado 3-25:
+
+**Listado 3-25. Las pruebas para encontrar a la mejor Persona para una determinada Habilidad**
+
+```java
+@Test
+public void findBestForNonexistentSkill() {
+    Person p = service.findBestPersonFor("no skill");
+    assertNull(p);
+}
+
+@Test
+public void findBestForSkill() {
+    service.addRanking("S1", "O1", "Sk1", 6);
+    service.addRanking("S1", "O2", "Sk1", 8);
+    service.addRanking("S2", "O1", "Sk1", 5);
+    service.addRanking("S2", "O2", "Sk1", 7);
+    service.addRanking("S3", "O1", "Sk1", 7);
+    service.addRanking("S3", "O2", "Sk1", 9);
+    // data that should not factor in!
+    service.addRanking("S3", "O1", "Sk2", 2);
+    Person p = service.findBestPersonFor("Sk1");
+    assertEquals(p.getName(), "S3");
+}
+```
+
+Nuestra primera prueba debería ser obvia: dada una **`Skill`** inexistente, no deberíamos recuperar a una **`Person`**. (Esto sigue nuestra convención establecida que sugiere el uso de un valor de señal en lugar de una excepción).
+
+Nuestra segunda prueba crea tres sujetos, cada uno con Skills en "Sk1", sea lo que sea. (Es "capacidad para servir como datos de prueba".) S1 tiene un promedio de 7, S2 tiene un promedio de 6 y S3 tiene un promedio de 8. Por lo tanto, debemos esperar que S3 sea el propietario de la mejor clasificación. Estamos agregando algunos datos atípicos solo para asegurarnos de que nuestro servicio se limite a los datos reales que está tratando de encontrar.
+
+¡Tenga en cuenta que en realidad no estamos devolviendo el promedio de la Habilidad! Para una aplicación real, es muy probable que sea un requisito; podría cumplirse fácilmente llamando inmediatamente a **`getRankingFor()`**, pero tal como está diseñado, es una operación muy costosa (que implica la creación de una nueva **`Session`** y una serie de viajes de ida y vuelta a la base de datos). Volveremos a visitar esto en poco tiempo; aquí, estamos usando la menor cantidad de tipos de objetos que podemos.
+
+Así que veamos un poco de código en el Listado 3-26. Y finalmente entraremos en una consulta más capaz (y veremos cómo podríamos haber estado escribiendo algunas de nuestras otras consultas de manera más eficiente).
+
+**Listado 3-26. Código para encontrar el promedio más alto para una habilidad dada**
+
+```java
+@Override
+public Person findBestPersonFor(String skill) {
+    Person person = null;
+    try (Session session = SessionUtil.getSession()) {
+        Transaction tx = session.beginTransaction();
+
+        person = findBestPersonFor(session, skill);
+
+        tx.commit();
+    }
+    return person;
+}
+
+private Person findBestPersonFor(Session session, String skill) {
+    Query<Object[]> query = session.createQuery("select r.subject.name, avg(r.ranking)"
+            + " from Ranking r where "
+            + "r.skill.name=:skill "
+            + "group by r.subject.name "
+            + "order by avg(r.ranking) desc", Object[].class);
+    query.setParameter("skill", skill);
+    List<Object[]> result = query.list();
+    if (result.size() > 0) {
+        return findPerson(session, (String) result.get(0)[0]);
+    }
+    return null;
+}
+```
+
+Nuestro método público sigue la convención que hemos establecido hasta ahora: crear una sesión y luego delegar a un método interno.
+
+Sin embargo, el método interno hace algunas cosas que no hemos visto hasta ahora, comenzando con un tipo diferente de consulta.
+
+La mayoría de nuestras consultas han sido del formulario "FROM class alias WHERE condition", que es bastante simple. Hibernate está generando SQL que usa un nombre de tabla y puede hacer uniones automáticamente para iterar sobre un árbol de datos ("r.skillname", por ejemplo), pero la forma general es muy simple.
+
+Aquí, tenemos una cláusula SELECT real. Aquí está la consulta completa tal como está escrita en el código:
+
 ## Summary
