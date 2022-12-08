@@ -413,17 +413,229 @@ Hay algunas advertencias para esto (con soluciones alternativas, naturalmente). 
 
 ## Persistence Contexts
 
-Hay cuatro estados para un objeto en relación con una sesión: persistente, transitorio, desconectado o eliminado.
+**Hay cuatro estados para un objeto en relación con una sesión**: ***persistent***, ***transient***, ***detached***, o ***removed***.
 
-Cuando creamos un nuevo objeto, es transitorio, es decir, Hibernate no le ha asignado ningún identificador y la base de datos no tiene conocimiento del objeto. Eso no significa que la base de datos no tenga los datos. Imagínese si hubiéramos creado un Ranking manualmente para J. C. Smell, de Gene Showrama, en Java. El nuevo Ranking tendría un análogo en la base de datos, pero Hibernate no sabría que el objeto en la memoria era equivalente a la representación del objeto en la base de datos.
+Cuando creamos un nuevo objeto, es ***transient***(transitorio), es decir, Hibernate no le ha asignado ningún identificador y la base de datos no tiene conocimiento del objeto. Eso no significa que la base de datos no tenga los datos. Imagínese si hubiéramos creado un **`Ranking`** manualmente para J. C. Smell, de Gene Showrama, en Java. El nuevo **`Ranking`** tendría un análogo en la base de datos, pero Hibernate no sabría que el objeto en la *memoria* era equivalente a la representación del objeto *en la base de datos*.
 
-Cuando llamamos a save() en un nuevo objeto, lo marcamos como "persistente", y cuando consultamos la sesión por un objeto, también está en estado persistente. Los cambios se reflejan en la transacción actual y se escriben cuando se confirma la transacción. Podemos convertir un objeto transitorio en un objeto persistente usando Session.merge(), que aún no hemos visto (pero lo haremos).
+Cuando llamamos a **`save()`** en un nuevo objeto, lo marcamos como ***persistent***(persistente), y cuando consultamos la sesión por un objeto, también está en estado ***persistent***(persistente). Los cambios se reflejan en la transacción actual y se escriben cuando se confirma la transacción. Podemos convertir un objeto ***transient***(transitorio) en un objeto ***persistent***(persistente) usando **`Session.merge()`**, que aún no hemos visto (pero lo haremos).
 
-Un objeto separado es un objeto persistente cuya sesión se ha cerrado o se ha desalojado de una sesión. En nuestro ejemplo de cambio de clasificación, cuando se cierra la sesión, el objeto de clasificación que cambiamos está en estado independiente para la llamada findRanking() aunque lo cargamos desde la base de datos y solía estar en estado persistente.
+Un objeto ***detached***(separado) es un objeto ***persistent***(persistente) cuya **`Session`** se ha cerrado o se ha desalojado de una **`Session`**. En nuestro ejemplo de cambio de **`Ranking`**, cuando se cierra la sesión, el objeto de **`Ranking`** que cambiamos está en estado ***detached*** para la llamada **`findRanking()`** aunque lo cargamos desde la base de datos y solía estar en estado ***persistent***.
 
-Un objeto eliminado es uno que se ha marcado para su eliminación en la transacción actual. Un objeto cambia al estado eliminado cuando se llama a Session.delete() para esa referencia de objeto. Tenga en cuenta que un objeto en estado eliminado se elimina en la base de datos pero no en la memoria, al igual que un objeto puede existir en la base de datos sin una representación en memoria.
+Un objeto ***removed***(eliminado) es uno que se ha marcado para su eliminación en la transacción actual. Un objeto cambia al estado ***removed***(eliminado) cuando se llama a **`Session.delete()`** para esa referencia de objeto. Tenga en cuenta que un objeto en estado ***removed***(eliminado) se elimina en la base de datos pero no en la memoria, al igual que un objeto puede existir en la base de datos sin una representación en memoria.
 
 ## Removing Data
+
+Lo último que queremos ver es cómo eliminar datos o, más bien, cómo moverlos al estado ***removed***(eliminado) con respecto al contexto de persistencia, que casi equivale a lo mismo. (En realidad, no se "elimina" hasta que se confirma la transacción, e incluso entonces la representación en memoria está disponible hasta que queda fuera del scope, como describimos en el párrafo sobre "estado removed").
+
+Digamos, a modo de ejemplo, que Gene Showrama se ha dado cuenta de que realmente no tiene suficiente información para ofrecer una clasificación válida para J. C. Smell en Java, por lo que desea eliminarla. El código para esto es muy similar a nuestra actualización: buscaremos el **`Ranking`** y luego llamaremos a **`Session.delete()`**.
+
+Podemos refactorizar nuestro mecanismo para encontrar un **`Ranking`** (a partir de la prueba **`changeRanking()`**), lo que nos dará un **`Ranking`** en estado ***persistent***(persistente). Luego lo eliminamos a través de la **`session`** y confirmamos el cambio; luego podemos solicitar el nuevo promedio para ver si nuestros cambios se reflejan en la base de datos.
+
+Aquí está nuestro código, que se muestra en el Listado 3-12:
+
+**Listado 3-12. Eliminar un `Ranking`**
+
+```java
+@Test
+public void removeRanking() {
+
+    populateRankingData();
+    
+    try (Session session = factory.openSession()) {
+        Transaction tx = session.beginTransaction();
+        Ranking ranking = findRanking(session, "J. C. Smell",
+                "Gene Showrama", "Java");
+        assertNotNull(ranking, "Ranking not found");
+        session.delete(ranking);
+        tx.commit();
+    }
+    assertEquals(getAverage("J. C. Smell", "Java"), 7);
+}
+```
+
+Es como magia, excepto que no lo es: es solo Hibernate administrando la base de datos para reflejar los cambios que le mostramos.
+
 ## A Note on Transactions
+
+También hemos mencionado bastante las "transacciones", usándolas con cada referencia de sesión. Entonces, ¿qué son?
+
+**Una transacción es una “unidad de trabajo agrupada” para una base de datos**.<sup>6</sup>
+
+Cuando inicia una transacción, está diciendo que desea ver la base de datos tal como existe en un momento determinado ("ahora"), y cualquier modificación afecta solo a la base de datos tal como existe desde ese punto de partida.
+
+Los cambios se confirman como un todo, de modo que ninguna otra transacción pueda verlos hasta que se complete la transacción. Esto significa que las transacciones permiten que la aplicación defina unidades discretas de trabajo, y el usuario solo tiene que decidir los límites de cuándo comienza o finaliza una transacción. Si se abandona la transacción, es decir, no se llama explícitamente a **`commit()`**, los cambios de la transacción se abandonan y la base de datos no se modifica.
+
+Las transacciones se pueden anular ("revertir"(“rolled back,”), con el método **`Transaction.rollback()`**) de modo que se descarten todos los cambios que hayan tenido lugar como parte de esa transacción. Esto le permite garantizar la consistencia en su modelo de datos.
+
+Por ejemplo, imagine que está creando un sistema de entrada de pedidos, con un pedido que consta de un objeto **`Order`**(Pedido), objetos **`LineItem`**(Línea de pedido) y un objeto **`Customer`**(Cliente). Si estaba escribiendo un pedido con siete elementos de línea y el sexto elemento de línea falló debido a datos no válidos,<sup>7</sup> no desearía que un pedido incompleto permaneciera en la base de datos. Le gustaría revertir los cambios y ofrecerle al usuario la oportunidad de volver a intentarlo, con los datos correctos.
+
+Naturalmente, hay excepciones a las definiciones de transacciones, e Hibernate proporciona varios tipos de transacciones (por ejemplo, puede tener una transacción que permita lecturas de datos no confirmados, una "lectura sucia - dirty read"). Además, diferentes bases de datos pueden definir límites transaccionales a su manera. Afortunadamente, esta es una preocupación bastante importante para las bases de datos, por lo que cada una tiende a documentar cómo se definen las transacciones. (Consulte http://www.h2database.com/html/advanced.html#transaction_isolation para ver la documentación de las transacciones de H2, por ejemplo).
+
 ## Writing Our Sample Application
+
+¿Qué hemos visto hasta ahora? Hemos visto lo siguiente:
+
+1. La creación de un modelo de objetos.
+2. La asignación de ese modelo de objetos a un modelo de datos.
+3. La escritura de datos de un modelo de objeto en una base de datos.
+4. La lectura de datos de la base de datos en un modelo de objetos.
+5. La actualización de datos en la base de datos a través de nuestro modelo de objetos.
+6. La eliminación de datos de la base de datos a través de nuestro modelo de objetos.
+
+Con todo esto, estamos listos para comenzar a diseñar nuestra aplicación real, sabiendo que nuestro modelo de objetos funciona (aunque aún no se ha considerado la eficiencia) y con un código de ejemplo para realizar la mayoría de nuestras tareas según lo especifiquen nuestros requisitos.
+
+Vamos a diseñar nuestra aplicación tal como escribimos nuestro código de ejemplo; es decir, vamos a definir una capa de aplicación (servicios) y llamar a esa aplicación desde las pruebas. En el mundo real, escribiríamos una capa de interfaz de usuario que usaría los servicios, tal como lo hacen las pruebas.
+
+Para que quede claro, nuestras interacciones con los usuarios son:
+
+1. Agregue un **`Ranking`** para un sujeto por un observador.
+2. Actualice un **`Ranking`** para un sujeto por un observador.
+3. Eliminar un **`Ranking`** de un sujeto por un observador.
+4. Encuentre el **`Ranking`** promedio para una habilidad en particular para un tema.
+5. Encuentra todos los **`Rankings`** de un tema.
+6. Encuentre el tema mejor calificado para una habilidad en particular.
+
+Parece mucho, pero ya hemos escrito gran parte de este código; solo necesitamos refactorizarlo en una capa de servicio para facilitar su uso.
+
+Vamos a poner estos métodos en una interfaz, comenzando con el Listado 3-16, pero antes de hacerlo, queremos resumir algunos servicios básicos, principalmente, la adquisición de una **`Session`**. Para hacer esto, agregaremos un nuevo módulo a nuestro proyecto principal, el módulo "util", con una sola clase, **`SessionUtil`**.
+
+En un servidor de aplicaciones (como Wildfly, Glassfish o Geronimo), se accede a la API de persistencia a través de la inyección de recursos; el implementador de la aplicación configura un contexto para la arquitectura de persistencia de Java y la aplicación adquiere automáticamente un **`EntityManager`** (el JPA equivalente a la **`session`**). Es completamente posible (y posiblemente preferible) configurar Hibernate como el proveedor de JPA; luego puede usar las API de Hibernate con una conversión a **`Session`**.<sup>8</sup>
+
+También puede obtener este mismo tipo de inyección de recursos a través de libraries como Spring o Guice. Con Spring, por ejemplo, configuraría un proveedor de persistencia, tal como lo haría en un servidor de aplicaciones Java EE, y Spring proporcionaría automáticamente un recurso a través del cual podría adquirir Sesiones.
+
+Sin embargo, aunque cada una de estas plataformas (Spring, Java EE y otras) son extremadamente útiles y prácticas (y probablemente necesarias, en el caso de Java EE), las evitaremos en su mayor parte porque queremos limitar el alcance de lo que le estamos haciendo a Hibernate y no entrar en una discusión sobre varias opciones de arquitectura en competencia.
+
+En el código fuente, hay un módulo "util", además de los módulos de capítulos. La clase **`com.autumncode.hibernate.util.SessionUtil`** es un singleton que brinda acceso a **`SessionFactory`**, algo que hemos estado poniendo en nuestro código de inicialización de prueba hasta ahora. Se parece a lo que ve en el Listado 3-13:
+
+**Listado 3-13. Una clase Utility para recuperar una `Session`**
+
+```java
+package com.autumncode.hibernate.util;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.jboss.logging.Logger;
+
+public class SessionUtil {
+    private static final SessionUtil instance = new SessionUtil();
+    private final SessionFactory factory;
+    private static final String CONFIG_NAME = "/configuration.properties";
+
+    Logger logger = Logger.getLogger(this.getClass());
+
+    private SessionUtil() {
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure()
+                .build();
+        factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    }
+
+    public static Session getSession() {
+        return getInstance().factory.openSession();
+    }
+
+    private static SessionUtil getInstance() {
+        return instance;
+    }
+}
+```
+
+La forma en que se usa esta clase es muy simple y se puede ver en el test de **`SessionUtil`**, como se muestra en el Listado 3-14:
+
+**Listado 3-14. Un Test para la clase `SessionUtil`**
+
+```java
+@Test
+public void testSessionFactory() {
+    try(Session session=SessionUtil.getSession()) {
+        assertNotNull(session);
+    }
+}
+```
+
+Como puede ver, esta clase no hace nada que no hayamos hecho hasta ahora; simplemente lo hace en una clase con visibilidad general. Podemos agregar una dependencia de este módulo a otros proyectos e inmediatamente tener una forma limpia de adquirir una sesión y, si es necesario, podemos usar esta clase como una abstracción para adquirir sesiones a través del mecanismo de persistencia de Java EE o a través de Spring.<sup>9</sup>
+
+### Agregar un `Ranking`
+
+Lo primero que queremos poder hacer es agregar un **`Ranking`**. Hagamos esto primero creando nuestro código de cliente, que nos dará una idea de lo que necesitamos escribir. Consulte el Listado 3-15.
+
+**Listado 3-15. Un Test para agregar un `Ranking`**
+
+```java
+public class AddRankingTest {
+
+    RankingService service=new HibernateRankingService();
+    
+    @Test
+    public void addRanking() {
+        service.addRanking("J. C. Smell", "Drew Lombardo", "Mule", 8);
+        assertEquals(service.getRankingFor("J. C. Smell", "Mule"), 8);
+    }
+}
+```
+
+Todavía no hemos escrito la interfaz o su implementación, lo cual rectificaremos en la siguiente lista. Aquí, solo estamos probando la API para ver cómo se ve y si parece ajustarse a lo que necesitamos hacer.
+
+Mirando este código en el Listado 3-15, podemos decir fácilmente que **`addRanking()`** agrega lógicamente una clasificación a J. C. Smell, como lo observó Drew Lombardo, sobre Mule, con un nivel de habilidad de 8. Sería fácil confundirse los parametros; tendremos que asegurarnos de nombrarlos claramente, pero incluso con nombres claros existe la posibilidad de confusión.
+
+Del mismo modo, podemos decir que **`getRankingFor()`** recupera con bastante claridad una clasificación de la habilidad de J. C. Smell en Mule. De nuevo, acecha la posibilidad de una confusión de tipos; el compilador no sería capaz de decirnos de antemano si llamamos a **`getRankingFor("Mule", "J. C. Smell")`**; y aunque podríamos mitigar esto en el código, con esta estructura siempre existirá la posibilidad de confusión.<sup>10</sup>
+
+Es justo decir que este aspecto de la API es lo suficientemente claro y fácil de probar; empecemos a escribir algo de código.
+
+El código de prueba que se muestra en el Listado 3-16 nos da la estructura de **`RankingService`**, con estos dos métodos:
+
+**Listado 3-16. La Interfaz de `RankingService`**
+
+```java
+package chapter03.application;
+
+public interface RankingService {
+
+    int getRankingFor(String subject, String skill);
+
+    void addRanking(String subject, String observer, String skill, int ranking);
+}
+```
+
+Ahora veamos **`HibernateRankingService`**, que reutilizará gran parte del código que hemos escrito para probar nuestro modelo de datos.
+
+Lo que estamos haciendo en esta clase es bastante simple: tenemos un método de nivel superior (el que está visible públicamente) que adquiere una **`Session`**, luego delega la **`Session`** junto con el resto de los datos a un método de trabajo. El método de trabajo maneja la manipulación de datos, y es en su mayor parte una copia del método **`createData()`** de **`RankingTest`**, y también usa los otros métodos de utilidad que habíamos escrito para **`RankingTest`**.
+
+¿Por qué estamos haciendo esto? Principalmente, estamos anticipando otros métodos que podrían necesitar usar **`addRanking()`** de tal manera que participe con una **`session`** existente. Consulte el Listado 3-17.
+
+**Listado 3-17. Mecanismos Public y Private para Agregar un `Ranking`**
+
+```java
+@Override
+public void addRanking(String subjectName, String observerName,
+                       String skillName, int rank) {
+                       
+    try (Session session = SessionUtil.getSession()) {
+        Transaction tx = session.beginTransaction();
+
+        addRanking(session, subjectName, observerName, skillName, rank);
+
+        tx.commit();
+    }
+}
+
+private void addRanking(Session session, String subjectName,
+                        String observerName, String skillName, int rank) {
+                        
+    Person subject = savePerson(session, subjectName);
+    Person observer = savePerson(session, observerName);
+    Skill skill = saveSkill(session, skillName);
+
+    Ranking ranking = new Ranking();
+    ranking.setSubject(subject);
+    ranking.setObserver(observer);
+    ranking.setSkill(skill);
+    ranking.setRanking(rank);
+    session.save(ranking);
+}
+```
+
 ## Summary
