@@ -375,10 +375,54 @@ Por cierto, este no es un uso particularmente bueno de la función de consulta; 
 
 ¿Y si queremos cambiar datos? Supongamos que Gene Showrama, quien en nuestro código de ejemplo clasificó a J. C. Smell como un 6 en Java, se da cuenta de que ha cambiado de opinión. Veamos qué tenemos que hacer para actualizar los datos.
 
-Primero, tomemos nuestra rutina de cálculo de clasificación promedio y refactorícela en un método reutilizable. (El código de prueba tiene el método refactorizado y la prueba original como se muestra aquí). A continuación, escribiremos nuestra prueba para actualizar los datos y luego volveremos a calcular el promedio, probándolo para asegurarnos de que nuestros datos se conserven correctamente. Consulte el Listado 3-11.
+Primero, tomemos nuestra rutina de cálculo de promedio de **`Ranking`** y refactorícela en un método reutilizable. (El código de prueba tiene el método refactorizado y la prueba original como se muestra aquí). A continuación, escribiremos nuestra prueba para actualizar los datos y luego volveremos a calcular el promedio, probándolo para asegurarnos de que nuestros datos se conserven correctamente. Consulte el Listado 3-11.
 
-Listado 3-11. Una prueba que demuestra las actualizaciones
+**Listado 3-11. Un test que demuestra las actualizaciones**
+
+```java
+@Test
+public void changeRanking() {
+
+    populateRankingData();
+    
+    try (Session session = factory.openSession()) {
+        Transaction tx = session.beginTransaction();
+        Query<Ranking> query = session.createQuery("from Ranking r "
+                + "where r.subject.name=:subject and "
+                + "r.observer.name=:observer and "
+                + "r.skill.name=:skill", Ranking.class);
+        query.setParameter("subject", "J. C. Smell");
+        query.setParameter("observer", "Gene Showrama");
+        query.setParameter("skill", "Java");
+        Ranking ranking = query.uniqueResult();
+        assertNotNull(ranking, "Could not find matching ranking");
+        ranking.setRanking(9);
+        tx.commit();
+    }
+    assertEquals(getAverage("J. C. Smell", "Java"), 8);
+}
+```
+
+¿Qué estamos haciendo aquí? Después de completar los datos con valores conocidos, creamos una consulta para ubicar el **`Ranking`** específico que queremos cambiar (un **`Ranking`** en Java para "J. C. Smell", escrita por "Gene Showrama"). Verificamos para asegurarnos de tener un **`Ranking`** válido, lo cual deberíamos, ya que los datos fueron creados por nuestro método **`populateRankingData()`**, y luego hacemos algo muy curioso.
+
+Establecemos un nuevo **`Ranking`**, con **`ranking.setRanking(9)`**; ... y eso es. Confirmamos la transacción actual y dejamos que la sesión se cierre porque hemos terminado.
+
+Hibernate observa el modelo de datos y, cuando algo cambia, actualiza automáticamente la base de datos para reflejar los cambios.<sup>4</sup> La transacción envía la actualización a la base de datos para que otras sesiones, tal como se incluye en el método **`findRanking()`**, puedan verla.
+
+Hay algunas advertencias para esto (con soluciones alternativas, naturalmente). Cuando Hibernate carga un objeto por usted, es un "objeto administrado", es decir, es administrado por esa sesión. Las mutaciones (cambios) y los accesos pasan por un proceso especial para escribir datos en la base de datos o extraer datos de la base de datos si la sesión aún no los ha cargado. Nos referimos a este objeto como si estuviera en “estado persistente”, lo que nos lleva a un concepto que será importante para nosotros a medida que usemos la persistencia en Java.<sup>5</sup>
+
 ## Persistence Contexts
+
+Hay cuatro estados para un objeto en relación con una sesión: persistente, transitorio, desconectado o eliminado.
+
+Cuando creamos un nuevo objeto, es transitorio, es decir, Hibernate no le ha asignado ningún identificador y la base de datos no tiene conocimiento del objeto. Eso no significa que la base de datos no tenga los datos. Imagínese si hubiéramos creado un Ranking manualmente para J. C. Smell, de Gene Showrama, en Java. El nuevo Ranking tendría un análogo en la base de datos, pero Hibernate no sabría que el objeto en la memoria era equivalente a la representación del objeto en la base de datos.
+
+Cuando llamamos a save() en un nuevo objeto, lo marcamos como "persistente", y cuando consultamos la sesión por un objeto, también está en estado persistente. Los cambios se reflejan en la transacción actual y se escriben cuando se confirma la transacción. Podemos convertir un objeto transitorio en un objeto persistente usando Session.merge(), que aún no hemos visto (pero lo haremos).
+
+Un objeto separado es un objeto persistente cuya sesión se ha cerrado o se ha desalojado de una sesión. En nuestro ejemplo de cambio de clasificación, cuando se cierra la sesión, el objeto de clasificación que cambiamos está en estado independiente para la llamada findRanking() aunque lo cargamos desde la base de datos y solía estar en estado persistente.
+
+Un objeto eliminado es uno que se ha marcado para su eliminación en la transacción actual. Un objeto cambia al estado eliminado cuando se llama a Session.delete() para esa referencia de objeto. Tenga en cuenta que un objeto en estado eliminado se elimina en la base de datos pero no en la memoria, al igual que un objeto puede existir en la base de datos sin una representación en memoria.
+
 ## Removing Data
 ## A Note on Transactions
 ## Writing Our Sample Application
