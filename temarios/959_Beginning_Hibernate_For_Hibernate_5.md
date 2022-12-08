@@ -47,7 +47,7 @@ Desarrolladores de Java experimentados interesados en aprender a usar y aplicar 
 * Connection Pooling
 * Summary
 
-### Chapter 3: Building a Simple Application
+### [Chapter 3: Building a Simple Application](https://github.com/adolfodelarosades/Java/blob/master/temarios/959_Beginning_Hibernate_For_Hibernate_5/03_Building_a_Simple_Application.md)
 * A Simple Application
 * A First Attempt
 * Writing Data
