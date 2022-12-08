@@ -352,30 +352,30 @@ En el próximo capítulo, vamos a construir algunos modelos de objetos un poco m
 
 ### Footnotes
 
-1 Eso significa que si tiene una versión anterior de JVM, tendrá que ceñirse a las versiones anteriores de Hibernate. Eso no debería ser una gran molestia; Java 7 ha llegado al final de su vida útil desde abril de 2015. Es hora de avanzar si aún no lo ha hecho, gracias a las preocupaciones de seguridad y, por supuesto, al hecho de que Java 8 es bueno.
+<sup>1</sup> Eso significa que si tiene una versión anterior de JVM, tendrá que ceñirse a las versiones anteriores de Hibernate. Eso no debería ser una gran molestia; Java 7 ha llegado al final de su vida útil desde abril de 2015. Es hora de avanzar si aún no lo ha hecho, gracias a las preocupaciones de seguridad y, por supuesto, al hecho de que Java 8 es bueno.
 
-2 La edición anterior de este libro en realidad usaba HSQLDB. No hubo una razón concreta para el cambio, pero la investigación entre la comunidad mostró una preferencia por H2 sobre HSQLDB, por varias razones (principalmente centradas en el hecho de que H2 está escrito por el autor original de HSQL). Sus autores escuchan a la gente.
+<sup>2</sup> La edición anterior de este libro en realidad usaba HSQLDB. No hubo una razón concreta para el cambio, pero la investigación entre la comunidad mostró una preferencia por H2 sobre HSQLDB, por varias razones (principalmente centradas en el hecho de que H2 está escrito por el autor original de HSQL). Sus autores escuchan a la gente.
 
-3 También vale la pena señalar que existen complementos para Maven que pueden incorporar bases de datos externas como MariaDB (una variante de MySQL); consulte MariaDB4J en https://​github.​com/​vorburger/​MariaDB4j si está interesado. Pero H2 es más pequeño y más rápido para nuestros propósitos, y dado que Hibernate es independiente de la base de datos, la base de datos real que use debería ser irrelevante en gran medida.
+<sup>3</sup> También vale la pena señalar que existen complementos para Maven que pueden incorporar bases de datos externas como MariaDB (una variante de MySQL); consulte MariaDB4J en https://github.com/vorburger/MariaDB4j si está interesado. Pero H2 es más pequeño y más rápido para nuestros propósitos, y dado que Hibernate es independiente de la base de datos, la base de datos real que use debería ser irrelevante en gran medida.
 
-4 Los argumentos sobre “cuál herramienta de compilación es la mejor” se parecen mucho a los argumentos sobre los méritos relativos de IDEA, Emacs, Netbeans, Eclipse y otros. Todo el mundo tiene una opinión, y esa opinión es perfectamente válida para quien la sostiene; sin embargo, generalmente se acepta que Maven no es la "mejor herramienta de compilación", al igual que Eclipse no es el "mejor editor". Son populares. Son comunes. Eso es todo.
+<sup>4</sup> Los argumentos sobre “cuál herramienta de compilación es la mejor” se parecen mucho a los argumentos sobre los méritos relativos de IDEA, Emacs, Netbeans, Eclipse y otros. Todo el mundo tiene una opinión, y esa opinión es perfectamente válida para quien la sostiene; sin embargo, generalmente se acepta que Maven no es la "mejor herramienta de compilación", al igual que Eclipse no es el "mejor editor". Son populares. Son comunes. Eso es todo.
 
-5 Si no utiliza una herramienta de compilación, consulte las instrucciones de su IDE para agregar bibliotecas a los proyectos. Sin embargo, vale la pena señalar que usar una herramienta de compilación es inteligente; significa que sus compilaciones se duplican fácilmente. Por ejemplo, si desea mostrar su código a otra persona, sin una herramienta de compilación, deberá asegurarse de que su entorno coincida con el suyo; pero con una herramienta de compilación, todo lo que tiene que hacer es asegurarse de que tengan la herramienta instalada. Puedes ver esto en este libro; Describo la compilación con Maven, y los lectores pueden usar cualquier editor o IDE que deseen sin afectar el contenido en absoluto.
+<sup>5</sup> Si no utiliza una herramienta de compilación, consulte las instrucciones de su IDE para agregar bibliotecas a los proyectos. Sin embargo, vale la pena señalar que usar una herramienta de compilación es inteligente; significa que sus compilaciones se duplican fácilmente. Por ejemplo, si desea mostrar su código a otra persona, sin una herramienta de compilación, deberá asegurarse de que su entorno coincida con el suyo; pero con una herramienta de compilación, todo lo que tiene que hacer es asegurarse de que tengan la herramienta instalada. Puedes ver esto en este libro; Describo la compilación con Maven, y los lectores pueden usar cualquier editor o IDE que deseen sin afectar el contenido en absoluto.
 
-6 TestNG ( http://testng.org/ ) es un marco de pruebas unitarias. Es una alternativa popular a JUnit (http://junit.org), y tiene algunas características bastante deseables en comparación.
+<sup>6</sup> TestNG ( http://testng.org/ ) es un marco de pruebas unitarias. Es una alternativa popular a JUnit (http://junit.org), y tiene algunas características bastante deseables en comparación.
 
-7 Java 7 llegó al final de su vida útil en abril de 2015. Es hora de seguir adelante si puede hacerlo. Consulte https://java.com/en/download/faq/java_7.xml para obtener más detalles.
+<sup>7</sup> Java 7 llegó al final de su vida útil en abril de 2015. Es hora de seguir adelante si puede hacerlo. Consulte https://java.com/en/download/faq/java_7.xml para obtener más detalles.
 
-8 Hay otras clases en el árbol, pero ya no nos preocupamos por JDBC en este capítulo; están aquí porque te prometieron que el árbol del capítulo 02 era el mismo que el del capítulo 01. Todas las cosas de JDBC serán ignoradas.
+<sup>8</sup> Hay otras clases en el árbol, pero ya no nos preocupamos por JDBC en este capítulo; están aquí porque te prometieron que el árbol del capítulo 02 era el mismo que el del capítulo 01. Todas las cosas de JDBC serán ignoradas.
 
-9 Hmm, prometimos que no íbamos a mencionar más el código JDBC. ¡Vaya!
+<sup>9</sup> Hmm, prometimos que no íbamos a mencionar más el código JDBC. ¡Vaya!
 
-10 La importación de assertEquals() de forma estática significa que se puede llamar directamente sin una referencia a la clase org.testng.Assert. Las importaciones estáticas normalmente no son algo muy bueno, pero este es un ejemplo idiomático y muy útil de ellas.
+<sup>10</sup> La importación de **`assertEquals()`** de forma estática significa que se puede llamar directamente sin una referencia a la clase **`org.testng.Assert`**. Las importaciones estáticas normalmente no son algo muy bueno, pero este es un ejemplo idiomático y muy útil de ellas.
 
-11 Hibernate implementa la arquitectura de persistencia de Java como una API alternativa. Es un poco más genérica que la API nativa y está configurada de forma ligeramente diferente, aunque la mayoría de los conceptos son idénticos.
+<sup>11</sup> Hibernate implementa la arquitectura de persistencia de Java como una API alternativa. Es un poco más genérica que la API nativa y está configurada de forma ligeramente diferente, aunque la mayoría de los conceptos son idénticos.
 
-12 Maldita sea, seguimos encontrándonos con ese código JDBC que se supone que no debe mencionarse.
+<sup>12</sup> Maldita sea, seguimos encontrándonos con ese código JDBC que se supone que no debe mencionarse.
 
-13 “Schemata” es el plural de “schema”. Consulte http://www.merriam-webster.com/dictionary/schema.
+<sup>13</sup> “Schemata” es el plural de “schema”. Consulte http://www.merriam-webster.com/dictionary/schema.
 
-14 Consulte http://www.ibm.com/developerworks/library/j-jndi/?ca=dnt-62 para obtener un artículo que analiza este concepto con cierto detalle, aunque los detalles de implementación están un poco anticuados.
+<sup>14</sup> Consulte http://www.ibm.com/developerworks/library/j-jndi/?ca=dnt-62 para obtener un artículo que analiza este concepto con cierto detalle, aunque los detalles de implementación están un poco anticuados.
