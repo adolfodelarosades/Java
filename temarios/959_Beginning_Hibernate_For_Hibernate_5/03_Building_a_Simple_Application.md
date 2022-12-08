@@ -975,8 +975,62 @@ Nuestro método público sigue la convención que hemos establecido hasta ahora:
 
 Sin embargo, el método interno hace algunas cosas que no hemos visto hasta ahora, comenzando con un tipo diferente de consulta.
 
-La mayoría de nuestras consultas han sido del formulario "FROM class alias WHERE condition", que es bastante simple. Hibernate está generando SQL que usa un nombre de tabla y puede hacer uniones automáticamente para iterar sobre un árbol de datos ("r.skillname", por ejemplo), pero la forma general es muy simple.
+La mayoría de nuestras consultas han sido de la forma “**`FROM class alias WHERE condition`**”, que es bastante simple. Hibernate está generando SQL que usa un nombre de tabla y puede hacer uniones automáticamente para iterar sobre un árbol de datos ("r.skillname", por ejemplo), pero la forma general es muy simple.
 
 Aquí, tenemos una cláusula SELECT real. Aquí está la consulta completa tal como está escrita en el código:
 
+```sql
+select r.subject.name, avg(r.ranking) 
+  from Ranking r 
+ where r.skill.name=:skill 
+ group by r.subject.name 
+ order by avg(r.ranking) desc
+```
+
+Esto en realidad devuelve **tuplas**, que son conjuntos de matrices de **`objects`**.
+
+Nuestra cláusula “**`select`**” especifica que la tupla tendrá dos valores: extraído del nombre del sujeto asociado con el **`Ranking`** y un valor calculado que, en este caso, es el promedio de todos los **`Rankings`** en un grupo en particular.
+
+La cláusula “**`where`**” limita el conjunto de datos general a aquellos **`Rankings`** donde el nombre de la habilidad coincide con el parámetro.
+
+La cláusula “**`group by`**” significa que los conjuntos de valores se manejan juntos, lo que a su vez significa que el **`Ranking`** promedio (el segundo valor de la tupla que devuelve la consulta) se limitará a cada tema.
+
+La cláusula “**`order by`**” significa que Hibernate nos dará los temas mejor clasificados antes que los temas clasificados más bajos.
+
+¿Podríamos hacer esto programáticamente? Por supuesto; eso es más o menos lo que hemos visto en la mayor parte de nuestro código, donde calculamos valores como la **`Skill`** promedio manualmente. Sin embargo, esto ahorra tiempo de datos de ida y vuelta; la base de datos realmente realiza los cálculos y devuelve un conjunto de datos que es lo suficientemente grande para cumplir su función. Las bases de datos normalmente se ajustan para ser eficientes en este tipo de cálculo, por lo que probablemente también estemos ahorrando tiempo, siempre que no estemos usando una base de datos integrada como lo hacemos en este ejemplo.<sup>13</sup>
+
 ## Summary
+
+En este capítulo, hemos visto cómo pasar de la definición de un problema a un modelo de objetos, junto con un ejemplo de diseño basado en pruebas para probar el modelo. También hemos cubierto ligeramente los conceptos de estado del objeto con respecto a la persistencia y las transacciones.
+
+Luego nos enfocamos en los requisitos de la aplicación, construyendo una serie de acciones a través de las cuales esos requisitos podrían cumplirse. Cubrimos cómo crear, leer, actualizar y eliminar datos, junto con el uso del lenguaje de consulta de Hibernate para realizar una consulta bastante compleja con datos calculados.
+
+En el próximo capítulo, veremos la arquitectura de Hibernate y el ciclo de vida de una aplicación basada en Hibernate.
+
+### Footnotes
+
+<sup>1</sup> Esto parece casi lógico.
+
+<sup>2</sup> Esta es una característica nueva para Hibernate 5 y es muy apreciada.
+
+<sup>3</sup> Podemos dejar que la base de datos genere el promedio, en lugar de dejar que la función de flujo de Java 8 lo calcule por nosotros, lo que también es bastante fácil. Sin embargo, hacerlo en la base de datos evita la transferencia de datos de la base de datos a nuestro código, lo que puede ahorrar mucho tiempo y, potencialmente, tráfico de red. En general, hacerlo con la base de datos es mejor y, como veremos, también es bastante fácil.
+
+<sup>4</sup> Por lo general, hace esto mediante el uso de un objeto proxy. Cuando cambia los valores de datos en el objeto, el proxy registra el cambio para que la transacción sepa escribir los datos en la base de datos en la confirmación de la transacción. Si esto suena como magia, no lo es, pero tampoco es trivial hacerlo. Aprecie a los autores de Hibernate.
+
+<sup>5</sup> Volveremos a examinar este tema con más detalle en el Capítulo 4.
+
+<sup>6</sup> Vamos a revisar un poco las transacciones en el Capítulo 4.
+
+<sup>7</sup> Tenga en cuenta que Hibernate tiene funciones de validación que hacen que este tipo de cosas sea muy fácil de hacer; la forma en que esto se describe aquí es bastante poco glamorosa.
+
+<sup>8</sup> Por supuesto, también podría usar la interfaz JPA sin formato. Sin embargo, es mucho más limitado que la API de Hibernate.
+
+<sup>9</sup> Tenga en cuenta que Spring tiene sus propias formas de administrar las referencias de sesión de Hibernate; usar esto en una aplicación Spring sería desaconsejable.
+
+<sup>10</sup> ¿Cómo podríamos abordarlo? No muy fácilmente, así es como. Podríamos intentar agregar funciones semánticas a cada atributo; por ejemplo, podríamos marcar a Drew Lombardo como observador y a J. C. Smell como sujeto. Si usáramos un sujeto en el que se esperaba un observador, entonces podríamos indicar mediante programación una condición de error. Sin embargo, eso no ayuda si Drew es un observador y un sujeto, lo que probablemente sea un caso normal.
+
+<sup>11</sup> Una posibilidad para verificar los efectos secundarios podría ser borrar todo el conjunto de datos (como hicimos en el código de **`RankingTest`**, al cerrar **`SessionFactory`** en cada prueba), luego borrar los datos que esperábamos escribir y buscar cualquier dato extraño. Ciertamente hay otras posibilidades, pero todas ellas están fuera de nuestro alcance aquí.
+
+<sup>12</sup> Casi todos los que conocen SQL moderadamente bien probablemente han estado molestos por la forma en que extraemos datos de la base de datos. Está bien, la forma en que se está haciendo aquí es bastante pobre.
+
+<sup>1</sup> Sin embargo, incluso con una base de datos integrada, puede ser más rápido; una base de datos incrustada puede usar el acceso interno a los datos a los que nuestro código de aplicación normalmente no tiene acceso, incluso antes de que consideremos la posibilidad de consultas eficientes mediante el uso de índices.
