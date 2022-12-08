@@ -29,7 +29,7 @@ El libro mantiene su enfoque en Hibernate sin perder tiempo en herramientas de t
 Desarrolladores de Java experimentados interesados en aprender a usar y aplicar la persistencia relacional de objetos en Java y que son nuevos en el marco de persistencia de Hibernate.
 
 ## Contents
-### Introduction
+### [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/959_Beginning_Hibernate_For_Hibernate_5/00_Introduction.md)
 ### [Chapter 1: An Introduction to Hibernate 5](https://github.com/adolfodelarosades/Java/blob/master/temarios/959_Beginning_Hibernate_For_Hibernate_5/01_An_Introduction_to_Hibernate_5.md)
 * Plain Old Java Objects (POJOs)
 * Origins of Hibernate and Object/Relational Mapping
@@ -39,7 +39,7 @@ Desarrolladores de Java experimentados interesados en aprender a usar y aplicar 
 * Persisting an Object
 * Summary
 
-### Chapter 2: Integrating and Configuring Hibernate
+### [Chapter 2: Integrating and Configuring Hibernate](https://github.com/adolfodelarosades/Java/blob/master/temarios/959_Beginning_Hibernate_For_Hibernate_5/02_Integrating_and_Configuring_Hibernate.md)
 * The Steps Needed to Integrate and Configure Hibernate
 * Understanding Where Hibernate Fits into Your Java Application
 * Deploying Hibernate
