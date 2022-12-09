@@ -134,6 +134,7 @@ Serie de varios cursos Java.
 # Test Unitarios
 
 * [851 Test unitario con junit y mockito en Spring Java 8 - 2022](https://github.com/adolfodelarosades/Java/blob/master/temarios/851-Test-Unitario-JUnit-y-Mockito-Spring.md)
+* [852 Learn Java Unit Testing with JUnit 5 in 20 Steps](https://github.com/adolfodelarosades/Java/blob/master/temarios/852-Learn-Java-Unit-Testing-with-JUnit-5-in-20-Steps.md)
 
 # O Reilly
 
