@@ -120,139 +120,85 @@ Juntos, podremos hacer un trabajo de detective de Git realmente interesante. ¡V
 * “Diffing commits”
 * “What does the diff for a new file look like?”
 
-Chapter 4
+### Chapter 4
 
-We all make mistakes, right? Humans have been making mistakes since time immemorial, and for a long time, making mistakes was pretty expensive (with punch cards and typewriters, we had to redo the whole thing). The reason was simple—we didn’t have a version control system. But now we do! Git gives you ample opportunities to undo your mistakes, easily and painlessly. Whether you’ve accidentally added a file to the index, made a typo in a commit message, or made a badly formed commit, Git gives you plenty of levers to pull and buttons to push so that no one will ever know about that little, ahem, “slip-up.”
+***Todos cometemos errores, ¿verdad?*** Los seres humanos han estado cometiendo errores desde tiempos inmemoriales y, durante mucho tiempo, cometer errores era bastante caro (con las tarjetas perforadas y las máquinas de escribir, teníamos que rehacerlo todo). La razón era simple: no teníamos un sistema de control de versiones. ¡Pero ahora lo hacemos! Git te brinda amplias oportunidades para deshacer tus errores, fácilmente y sin dolor. Ya sea que haya agregado accidentalmente un archivo al índice, haya cometido un error tipográfico en un mensaje de confirmación o haya realizado una confirmación mal formada, Git le brinda muchas palancas para tirar y botones para presionar para que nadie sepa nunca sobre ese pequeño, ejem, "resbalón".
 
-After this chapter, if you trip up, it won’t matter what kind of mistake you’ve made, you’ll know exactly what to do. So let’s go make some mistakes—and learn how to fix ’em.
+Después de este capítulo, si te tropiezas, no importará qué tipo de error hayas cometido, sabrás exactamente qué hacer. Entonces, cometamos algunos errores y aprendamos a solucionarlos.
 
-“Planning an engagement party”
+* “Planning an engagement party”
+* “An error in judgment”
+* “Undoing changes to the working directory”
+* “Undoing changes in the index”
+* “Deleting files from Git repositories”
+* “Committing to delete”
+* “Renaming (or moving) files”
+* “Editing commit messages”
+* “Renaming branches”
+* “Making alternative plans”
+* “The role of HEAD”
+* “Referencing commits using HEAD”
+* “Traversing merge commits”
+* “Undoing commits”
+* “Removing commits with reset”
+* “The three types of reset”
+* “Another way to undo commits”
+* “Reverting commits”
+* “Aaaaand that’s a wrap!”
 
-“An error in judgment”
-
-“Undoing changes to the working directory”
-
-“Undoing changes in the index”
-
-“Deleting files from Git repositories”
-
-“Committing to delete”
-
-“Renaming (or moving) files”
-
-“Editing commit messages”
-
-“Renaming branches”
-
-“Making alternative plans”
-
-“The role of HEAD”
-
-“Referencing commits using HEAD”
-
-“Traversing merge commits”
-
-“Undoing commits”
-
-“Removing commits with reset”
-
-“The three types of reset”
-
-“Another way to undo commits”
-
-“Reverting commits”
-
-“Aaaaand that’s a wrap!”
-
-Chapter 5
+### Chapter 5
 
 Working by yourself can get dull quickly. So far in this book, we have learned a lot about how Git works, and how to work with Git repositories. The repositories we used are ones that we initialized locally using the git init command. Despite that, we’ve managed to get a lot done—we created branches, merged them, and used Git utilities like the git log and git diff commands to see how our repository evolved over time. But most projects aren’t like that. We often work in teams or with friends or colleagues. Git offers a very powerful collaboration model—one in which we can all share our work using a single repository. It all starts by making our repository “publicly available,” which makes the commit history of the project a “shared” history. In a public repository we can do everything we’ve learned so far, just as we’ve always done (with a few exceptions). We can create branches and commits and add to the commit history, and so can others; everyone can see and add to that history. That’s how we collaborate with Git.
 
 But before we start collaborating, let’s spend some time together to understand how public repositories work and how to get started with them. Go team!
 
-“Another way to a Git repository: cloning”
+* “Another way to a Git repository: cloning”
+* “Ready, set, clone!”
+* “What happens when you clone?”
+* “Git is distributed”
+* “Pushing changes”
+* “Knowing where to push: remotes”
+* “Public versus private commits (continued)”
+* “Standard operating procedure: branches”
+* “Merging branches: option 1 (local merges)”
+* “Pushing local branches”
+* “Merging branches: option 2 (pull requests)”
+* “Creating pull requests”
+* “Pull requests or merge requests?”
+* “Merging a pull request”
+* “What’s next?”
 
-“Ready, set, clone!”
-
-“What happens when you clone?”
-
-“Git is distributed”
-
-“Pushing changes”
-
-“Knowing where to push: remotes”
-
-“Public versus private commits (continued)”
-
-“Standard operating procedure: branches”
-
-“Merging branches: option 1 (local merges)”
-
-“Pushing local branches”
-
-“Merging branches: option 2 (pull requests)”
-
-“Creating pull requests”
-
-“Pull requests or merge requests?”
-
-“Merging a pull request”
-
-“What’s next?”
-
-Chapter 6
+### Chapter 6
 
 Ready to bring in the team? Git is a fantastic tool for collaboration, and we’ve come up with a brilliant idea to teach you all about it—you are going to pair up with someone else in this chapter! You’ll be building on what you learned in the last chapter. You know that working with a distributed system like Git involves a lot of moving parts. So what does Git offer us to make this easier, and what do you need to keep in mind as you go about collaborating with others? Are there any workflows that can make it easier to work together? Prepare to find out.
 
 Ready. Set. Clone!
 
-“Working in parallel”
+* “Working in parallel”
+* “Working in parallel...in Gitland”
+* “Collaborating, Git style”
+* “The setup for two collaborators on GitHub”
+* “Falling behind the remote”
+* “Catching up with the remote (git pull)”
+* “Introducing the middlemen, aka remote tracking branches”
+* “Reason 1 for remote tracking branches: knowing where to push”
+* “Pushing to the remote: summary”
+* “Fetching remote tracking branches”
+* “Reason 2 for remote tracking branches: getting (all) updates from the remote”
+* “Collaborating with others”
+* “Collaborating with others: summary”
+* “Reason 3 for remote tracking branches: knowing you need to push”
+* “Reason 4 for remote tracking branches: getting ready to push”
+* “git pull is git fetch + git merge!”
+* “Use git fetch + git merge. Avoid git pull.”
+* “The ideal scenario”
+* “A typical workflow: getting started”
+* “A typical workflow: getting ready to merge”
+* “A typical workflow: merge locally, or issue pull requests?”
+* “A typical workflow visualized”
+* “Cleaning up remote branches”
 
-“Working in parallel...in Gitland”
-
-“Collaborating, Git style”
-
-“The setup for two collaborators on GitHub”
-
-“Falling behind the remote”
-
-“Catching up with the remote (git pull)”
-
-“Introducing the middlemen, aka remote tracking branches”
-
-“Reason 1 for remote tracking branches: knowing where to push”
-
-“Pushing to the remote: summary”
-
-“Fetching remote tracking branches”
-
-“Reason 2 for remote tracking branches: getting (all) updates from the remote”
-
-“Collaborating with others”
-
-“Collaborating with others: summary”
-
-“Reason 3 for remote tracking branches: knowing you need to push”
-
-“Reason 4 for remote tracking branches: getting ready to push”
-
-“git pull is git fetch + git merge!”
-
-“Use git fetch + git merge. Avoid git pull.”
-
-“The ideal scenario”
-
-“A typical workflow: getting started”
-
-“A typical workflow: getting ready to merge”
-
-“A typical workflow: merge locally, or issue pull requests?”
-
-“A typical workflow visualized”
-
-“Cleaning up remote branches”
-
-Chapter 7
+### Chapter 7
 
 The truth is, your project and its commit history are going to grow over time. Every so often, you will need to search your files for a particular piece of text. Or perhaps you’ll want to see who changed a file, when it was changed, and the commit that changed it. Git can help you with all of that.
 
@@ -260,113 +206,62 @@ And then there is your commit history. Each commit represents a change. Git allo
 
 What are we waiting for? Let’s go search some Git repositories, shall we?
 
-“Taking things to the next level”
+* “Taking things to the next level”
+* “A walk through the commit history”
+* “Using git blame”
+* “git blame using Git repository managers”
+* “Searching Git repositories”
+* “Searching Git repositories with grep”
+* “git grep options”
+* “The git grep flags combo”
+* “Where git blame falls short”
+* “git log’s “pickaxe” capability (-S)”
+* “git log -S versus blame”
+* “Using the “patch” flag with git log”
+* “git log’s other “pickaxe” flag (-G)”
+* “Searching commit messages”
+* “Checking out commits”
+* “Detached HEAD state”
+* “The moral of the detached HEAD state”
+* “Searching for commits using git bisect”
+* “Using git bisect”
+* “Finishing git bisect”
 
-“A walk through the commit history”
-
-“Using git blame”
-
-“git blame using Git repository managers”
-
-“Searching Git repositories”
-
-“Searching Git repositories with grep”
-
-“git grep options”
-
-“The git grep flags combo”
-
-“Where git blame falls short”
-
-“git log’s “pickaxe” capability (-S)”
-
-“git log -S versus blame”
-
-“Using the “patch” flag with git log”
-
-“git log’s other “pickaxe” flag (-G)”
-
-“Searching commit messages”
-
-“Checking out commits”
-
-“Detached HEAD state”
-
-“The moral of the detached HEAD state”
-
-“Searching for commits using git bisect”
-
-“Using git bisect”
-
-“Finishing git bisect”
-
-Chapter 8
+### Chapter 8
 
 So far in this book, you’ve learned how to use Git. But you can also bend Git to your will. That’s where the ability to configure Git plays a vital role. You’ve already seen how to configure Git in previous chapters—in this chapter we’ll be exploring a lot more of what you can configure to make your life easier. The configuration can also help you define shortcuts: long-winded Git commands begone!
 
 There’s a lot more you can do to make your interaction with Git easier. We’ll show how you can tell Git to ignore certain types of files so that you don’t accidentally commit them. We’ll give you our recommended ways of writing commit messages and tell you how we like to name our branches. And to top it off, we’ll even explore how a graphical user interface to Git can play an important role in your workflow. #letsgo #cantwait
 
-“Configuring Git”
+* “Configuring Git”
+* “The global .gitconfig file”
+* “Project-specific Git configuration”
+* “Listing your Git configuration”
+* “Git aliases, aka your personal Git shortcuts”
+* “Tweaking the behavior of Git aliases”
+* “Telling Git to ignore certain files and folders”
+* “The effects of a .gitignore file”
+* “Managing the .gitignore file”
+* “A sample .gitignore file”
+* “Commit early, commit often”
+* “Write meaningful commit messages”
+* “The anatomy of a good commit message”
+* “The anatomy of a good commit message: headers”
+* “The anatomy of a good commit message: bodies”
+* “Fussy much?”
+* “Create helpful branch names”
+* “Integrate a graphical user interface into your workflow”
 
-“The global .gitconfig file”
-
-“Project-specific Git configuration”
-
-“Listing your Git configuration”
-
-“Git aliases, aka your personal Git shortcuts”
-
-“Tweaking the behavior of Git aliases”
-
-“Telling Git to ignore certain files and folders”
-
-“The effects of a .gitignore file”
-
-“Managing the .gitignore file”
-
-“A sample .gitignore file”
-
-“Commit early, commit often”
-
-“Write meaningful commit messages”
-
-“The anatomy of a good commit message”
-
-“The anatomy of a good commit message: headers”
-
-“The anatomy of a good commit message: bodies”
-
-“Fussy much?”
-
-“Create helpful branch names”
-
-“Integrate a graphical user interface into your workflow”
-
-Appendix A
+### Appendix A
 
 We’ve covered a lot of ground, and you’re almost finished with this book. We’ll miss you, but before we let you go, we wouldn’t feel right about sending you out into the world without a little more preparation. Git offers a lot of functionality, and we couldn’t possibly fit all of it in one book. We saved some really juicy bits for this appendix.
 
-“#1 Tags (remember me forever)”
-
-“#2 Cherry-pick (copying commits)”
-
-“#3 Stashes (pseudo-commits)”
-
-“#4 reflog (reference log)”
-
-“#5 rebase (another way to merge)”
+* “#1 Tags (remember me forever)”
+* “#2 Cherry-pick (copying commits)”
+* “#3 Stashes (pseudo-commits)”
+* “#4 reflog (reference log)”
+* “#5 rebase (another way to merge)”
 
 
-Copy
-copy
-
-Highlight
-highlight
-
-Add Note
-note
-
-Get Link
-link
 
 
