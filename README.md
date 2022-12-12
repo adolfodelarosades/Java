@@ -152,6 +152,7 @@ Serie de varios cursos Java.
 
 * [932 Maven for Eclipse](https://github.com/adolfodelarosades/Java/blob/master/temarios/932_Maven_for_Eclipse.md)
 
+* [940 Head First Git](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git.md)
 * [950 Professional Java for Web Applications](https://github.com/adolfodelarosades/Java/blob/master/temarios/950_Professional_Java_for_Web_Applications.md)
 
 * [951 Core Java Volume I—Fundamentals, Eleventh Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/951_Core_Java_Volume_I.md)
