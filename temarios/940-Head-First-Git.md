@@ -148,9 +148,9 @@ Después de este capítulo, si te tropiezas, no importará qué tipo de error ha
 
 ### Chapter 5
 
-Working by yourself can get dull quickly. So far in this book, we have learned a lot about how Git works, and how to work with Git repositories. The repositories we used are ones that we initialized locally using the git init command. Despite that, we’ve managed to get a lot done—we created branches, merged them, and used Git utilities like the git log and git diff commands to see how our repository evolved over time. But most projects aren’t like that. We often work in teams or with friends or colleagues. Git offers a very powerful collaboration model—one in which we can all share our work using a single repository. It all starts by making our repository “publicly available,” which makes the commit history of the project a “shared” history. In a public repository we can do everything we’ve learned so far, just as we’ve always done (with a few exceptions). We can create branches and commits and add to the commit history, and so can others; everyone can see and add to that history. That’s how we collaborate with Git.
+**Trabajar solo puede volverse aburrido rápidamente**. Hasta ahora, en este libro, hemos aprendido mucho sobre cómo funciona Git y cómo trabajar con los repositorios de Git. Los repositorios que usamos son los que inicializamos localmente usando el comando git init. A pesar de eso, logramos hacer muchas cosas: creamos ramas, las fusionamos y usamos utilidades de Git como **`git log`** y **`git diff`** Comandos para ver cómo evolucionó nuestro repositorio con el tiempo. Pero la mayoría de los proyectos no son así. A menudo trabajamos en equipos o con amigos o colegas. Git ofrece un modelo de colaboración muy potente, uno en el que todos podemos compartir nuestro trabajo utilizando un único repositorio. Todo comienza haciendo que nuestro repositorio esté "disponible públicamente", lo que hace que el historial de confirmaciones del proyecto sea un historial "compartido". En un repositorio público podemos hacer todo lo que hemos aprendido hasta ahora, tal como lo hemos hecho siempre (con algunas excepciones). Podemos crear ramas y confirmaciones y agregarlas al historial de confirmaciones, al igual que otros; todos pueden ver y agregar a ese historial. Así es como colaboramos con Git.
 
-But before we start collaborating, let’s spend some time together to understand how public repositories work and how to get started with them. Go team!
+**Pero antes de comenzar a colaborar**, pasemos un tiempo juntos para comprender cómo funcionan los repositorios públicos y cómo comenzar a usarlos. ¡Vamos equipo!
 
 * “Another way to a Git repository: cloning”
 * “Ready, set, clone!”
@@ -170,9 +170,9 @@ But before we start collaborating, let’s spend some time together to understan
 
 ### Chapter 6
 
-Ready to bring in the team? Git is a fantastic tool for collaboration, and we’ve come up with a brilliant idea to teach you all about it—you are going to pair up with someone else in this chapter! You’ll be building on what you learned in the last chapter. You know that working with a distributed system like Git involves a lot of moving parts. So what does Git offer us to make this easier, and what do you need to keep in mind as you go about collaborating with others? Are there any workflows that can make it easier to work together? Prepare to find out.
+**¿Listo para traer al equipo?** Git es una herramienta fantástica para la colaboración, y se nos ocurrió una idea brillante para enseñarte todo sobre ella: ¡te emparejarás con otra persona en este capítulo! Construirá sobre lo que aprendió en el último capítulo. Sabes que trabajar con un sistema distribuido como Git involucra muchas partes móviles. Entonces, ¿qué nos ofrece Git para hacer esto más fácil y qué debe tener en cuenta a medida que colabora con otros? ¿Existen flujos de trabajo que puedan facilitar el trabajo conjunto? Prepárate para averiguarlo.
 
-Ready. Set. Clone!
+Listo. Establecer. ¡Clon!
 
 * “Working in parallel”
 * “Working in parallel...in Gitland”
@@ -200,11 +200,11 @@ Ready. Set. Clone!
 
 ### Chapter 7
 
-The truth is, your project and its commit history are going to grow over time. Every so often, you will need to search your files for a particular piece of text. Or perhaps you’ll want to see who changed a file, when it was changed, and the commit that changed it. Git can help you with all of that.
+**La verdad es que su proyecto y su historial de confirmaciones van a crecer con el tiempo**. De vez en cuando, deberá buscar en sus archivos un fragmento de texto en particular. O tal vez quiera ver quién cambió un archivo, cuándo se cambió y la confirmación que lo cambió. Git puede ayudarte con todo eso.
 
-And then there is your commit history. Each commit represents a change. Git allows you to search not only for every instance of a piece of text in your project, but also for when it was added (or removed). It can help you search your commit messages. To top it off, sometimes you want to find the commit that introduced a bug or a typo. Git offers a special facility that allows you to quickly zero in on that commit.
+Y luego está tu historial de confirmaciones. Cada compromiso representa un cambio. Git le permite buscar no solo cada instancia de un fragmento de texto en su proyecto, sino también cuándo se agregó (o eliminó). Puede ayudarte a buscar tus mensajes de confirmación. Para colmo, a veces desea encontrar la confirmación que introdujo un error o un error tipográfico. Git ofrece una función especial que le permite concentrarse rápidamente en ese compromiso.
 
-What are we waiting for? Let’s go search some Git repositories, shall we?
+¿Qué estamos esperando? Vamos a buscar algunos repositorios de Git, ¿de acuerdo?
 
 * “Taking things to the next level”
 * “A walk through the commit history”
@@ -229,9 +229,9 @@ What are we waiting for? Let’s go search some Git repositories, shall we?
 
 ### Chapter 8
 
-So far in this book, you’ve learned how to use Git. But you can also bend Git to your will. That’s where the ability to configure Git plays a vital role. You’ve already seen how to configure Git in previous chapters—in this chapter we’ll be exploring a lot more of what you can configure to make your life easier. The configuration can also help you define shortcuts: long-winded Git commands begone!
+**Hasta ahora, en este libro, ha aprendido a usar Git**. Pero también puedes doblar a Git a tu voluntad. Ahí es donde la capacidad de configurar Git juega un papel vital. Ya ha visto cómo configurar Git en capítulos anteriores; en este capítulo exploraremos mucho más de lo que puede configurar para hacer su vida más fácil. La configuración también puede ayudarlo a definir accesos directos: ¡se acabaron los comandos Git de largo aliento!
 
-There’s a lot more you can do to make your interaction with Git easier. We’ll show how you can tell Git to ignore certain types of files so that you don’t accidentally commit them. We’ll give you our recommended ways of writing commit messages and tell you how we like to name our branches. And to top it off, we’ll even explore how a graphical user interface to Git can play an important role in your workflow. #letsgo #cantwait
+Hay mucho más que puede hacer para facilitar su interacción con Git. Le mostraremos cómo puede decirle a Git que ignore ciertos tipos de archivos para que no los confirme accidentalmente. Le daremos nuestras formas recomendadas de escribir mensajes de confirmación y le diremos cómo nos gusta nombrar nuestras sucursales. Y para colmo, incluso exploraremos cómo una interfaz gráfica de usuario para Git puede desempeñar un papel importante en su flujo de trabajo. #vamos #no puedo esperar
 
 * “Configuring Git”
 * “The global .gitconfig file”
@@ -254,7 +254,7 @@ There’s a lot more you can do to make your interaction with Git easier. We’l
 
 ### Appendix A
 
-We’ve covered a lot of ground, and you’re almost finished with this book. We’ll miss you, but before we let you go, we wouldn’t feel right about sending you out into the world without a little more preparation. Git offers a lot of functionality, and we couldn’t possibly fit all of it in one book. We saved some really juicy bits for this appendix.
+Hemos cubierto mucho terreno y ya casi ha terminado con este libro. Te extrañaremos, pero antes de dejarte ir, no nos sentiríamos bien al enviarte al mundo sin un poco más de preparación. Git ofrece una gran cantidad de funciones, y no podríamos incluirlas todas en un solo libro. Guardamos algunas partes realmente jugosas para este apéndice.
 
 * “#1 Tags (remember me forever)”
 * “#2 Cherry-pick (copying commits)”
