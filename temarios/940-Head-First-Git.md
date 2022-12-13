@@ -23,7 +23,7 @@ Si ha leído un libro Head First, sabe qué esperar: un formato visualmente rico
 
 ## Table of Contents (the real thing)
 
-### 0. How to use this Book: Intro
+### [0. How to use this Book: Intro](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git/00-Intro.md)
 
 Tu cerebro en Git . Aquí estás tratando de aprender algo, mientras que tu cerebro te está haciendo un favor al asegurarse de que el aprendizaje no se quede estancado. Tu cerebro está pensando: "Mejor deja espacio para cosas más importantes, como qué animales salvajes evitar y si hacer snowboard desnudo es una mala idea". Entonces, ¿cómo engañas a tu cerebro para que piense que tu vida depende de conocer Git?
 
