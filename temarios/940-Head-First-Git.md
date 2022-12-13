@@ -99,9 +99,9 @@ Y queremos todo esto en una herramienta que se mantiene fuera de nuestro camino,
 
 ### Chapter 3
 
-**¿Estás listo para investigar un poco, Sherlock?** A medida que continúe trabajando en Git, creará ramas, realizará confirmaciones y fusionará su trabajo nuevamente en las ramas de integración. Cada confirmación representa un paso adelante, y el historial de confirmación representa cómo llegó allí. De vez en cuando, es posible que desee mirar hacia atrás para ver cómo llegó a donde está, o tal vez si dos ramas se han separado una de la otra. Comenzaremos este capítulo mostrándote cómo Git puede ayudarte a visualizar tu historial de confirmaciones.
+**¿Estás listo para investigar un poco, Sherlock?** A medida que continúe trabajando en Git, creará branches, realizará commits y fusionará(merge) su trabajo nuevamente en las ramas de integración. Cada commit representa un paso adelante, y el historial de commits representa cómo llegó allí. De vez en cuando, es posible que desee mirar hacia atrás para ver cómo llegó a donde está, o tal vez si dos ramas se han separado una de la otra. Comenzaremos este capítulo mostrándote cómo Git puede ayudarte a visualizar tu historial de commits.
 
-Ver tu historial de confirmaciones es una cosa, pero Git también puede ayudarte a ver cómo cambió tu repositorio. Recuerde que las confirmaciones representan cambios y las ramas representan una serie de cambios. ¿Cómo sabe qué ha cambiado, entre confirmaciones, entre ramas o incluso entre su directorio de trabajo, el índice y la base de datos de objetos? Ese es el otro tema de este capítulo.
+Ver tu historial de commits es una cosa, pero Git también puede ayudarte a ver cómo cambió tu repositorio. Recuerde que los commits representan cambios y las ramas representan una serie de cambios. ¿Cómo sabe qué ha cambiado, entre commits, entre ramas o incluso entre su directorio de trabajo, el índice y la base de datos de objetos? Ese es el otro tema de este capítulo.
 
 Juntos, podremos hacer un trabajo de detective de Git realmente interesante. ¡Vamos, subamos de nivel esas habilidades de investigación!
 
@@ -122,7 +122,7 @@ Juntos, podremos hacer un trabajo de detective de Git realmente interesante. ¡V
 
 ### Chapter 4
 
-***Todos cometemos errores, ¿verdad?*** Los seres humanos han estado cometiendo errores desde tiempos inmemoriales y, durante mucho tiempo, cometer errores era bastante caro (con las tarjetas perforadas y las máquinas de escribir, teníamos que rehacerlo todo). La razón era simple: no teníamos un sistema de control de versiones. ¡Pero ahora lo hacemos! Git te brinda amplias oportunidades para deshacer tus errores, fácilmente y sin dolor. Ya sea que haya agregado accidentalmente un archivo al índice, haya cometido un error tipográfico en un mensaje de confirmación o haya realizado una confirmación mal formada, Git le brinda muchas palancas para tirar y botones para presionar para que nadie sepa nunca sobre ese pequeño, ejem, "resbalón".
+***Todos cometemos errores, ¿verdad?*** Los seres humanos han estado cometiendo errores desde tiempos inmemoriales y, durante mucho tiempo, cometer errores era bastante caro (con las tarjetas perforadas y las máquinas de escribir, teníamos que rehacerlo todo). La razón era simple: no teníamos un sistema de control de versiones. ¡Pero ahora lo hacemos! Git te brinda amplias oportunidades para deshacer tus errores, fácilmente y sin dolor. Ya sea que haya agregado accidentalmente un archivo al índice, haya cometido un error tipográfico en un mensaje de confirmación o haya realizado un commit mal formada, Git le brinda muchas palancas para tirar y botones para presionar para que nadie sepa nunca sobre ese pequeño, ejem, "resbalón".
 
 Después de este capítulo, si te tropiezas, no importará qué tipo de error hayas cometido, sabrás exactamente qué hacer. Entonces, cometamos algunos errores y aprendamos a solucionarlos.
 
@@ -148,7 +148,7 @@ Después de este capítulo, si te tropiezas, no importará qué tipo de error ha
 
 ### Chapter 5
 
-**Trabajar solo puede volverse aburrido rápidamente**. Hasta ahora, en este libro, hemos aprendido mucho sobre cómo funciona Git y cómo trabajar con los repositorios de Git. Los repositorios que usamos son los que inicializamos localmente usando el comando git init. A pesar de eso, logramos hacer muchas cosas: creamos ramas, las fusionamos y usamos utilidades de Git como **`git log`** y **`git diff`** Comandos para ver cómo evolucionó nuestro repositorio con el tiempo. Pero la mayoría de los proyectos no son así. A menudo trabajamos en equipos o con amigos o colegas. Git ofrece un modelo de colaboración muy potente, uno en el que todos podemos compartir nuestro trabajo utilizando un único repositorio. Todo comienza haciendo que nuestro repositorio esté "disponible públicamente", lo que hace que el historial de confirmaciones del proyecto sea un historial "compartido". En un repositorio público podemos hacer todo lo que hemos aprendido hasta ahora, tal como lo hemos hecho siempre (con algunas excepciones). Podemos crear ramas y confirmaciones y agregarlas al historial de confirmaciones, al igual que otros; todos pueden ver y agregar a ese historial. Así es como colaboramos con Git.
+**Trabajar solo puede volverse aburrido rápidamente**. Hasta ahora, en este libro, hemos aprendido mucho sobre cómo funciona(merge) Git y cómo trabajar con los repositorios de Git. Los repositorios que usamos son los que inicializamos localmente usando el comando **`git init`**. A pesar de eso, logramos hacer muchas cosas: creamos ramas, las fusionamos(merge) y usamos utilidades de Git como **`git log`** y **`git diff`** Comandos para ver cómo evolucionó nuestro repositorio con el tiempo. Pero la mayoría de los proyectos no son así. A menudo trabajamos en equipos o con amigos o colegas. Git ofrece un modelo de colaboración muy potente, uno en el que todos podemos compartir nuestro trabajo utilizando un único repositorio. Todo comienza haciendo que nuestro repositorio esté "disponible públicamente", lo que hace que el historial de confirmaciones del proyecto sea un historial "compartido". En un repositorio público podemos hacer todo lo que hemos aprendido hasta ahora, tal como lo hemos hecho siempre (con algunas excepciones). Podemos crear ramas y confirmaciones y agregarlas al historial de confirmaciones, al igual que otros; todos pueden ver y agregar a ese historial. Así es como colaboramos con Git.
 
 **Pero antes de comenzar a colaborar**, pasemos un tiempo juntos para comprender cómo funcionan los repositorios públicos y cómo comenzar a usarlos. ¡Vamos equipo!
 
@@ -202,7 +202,7 @@ Listo. Establecer. ¡Clon!
 
 **La verdad es que su proyecto y su historial de confirmaciones van a crecer con el tiempo**. De vez en cuando, deberá buscar en sus archivos un fragmento de texto en particular. O tal vez quiera ver quién cambió un archivo, cuándo se cambió y la confirmación que lo cambió. Git puede ayudarte con todo eso.
 
-Y luego está tu historial de confirmaciones. Cada compromiso representa un cambio. Git le permite buscar no solo cada instancia de un fragmento de texto en su proyecto, sino también cuándo se agregó (o eliminó). Puede ayudarte a buscar tus mensajes de confirmación. Para colmo, a veces desea encontrar la confirmación que introdujo un error o un error tipográfico. Git ofrece una función especial que le permite concentrarse rápidamente en ese compromiso.
+Y luego está tu historial de commits. Cada commit representa un cambio. Git le permite buscar no solo cada instancia de un fragmento de texto en su proyecto, sino también cuándo se agregó (o eliminó). Puede ayudarte a buscar tus mensajes de commit. Para colmo, a veces desea encontrar el commit que introdujo un error o un error tipográfico. Git ofrece una función especial que le permite concentrarse rápidamente en ese commit.
 
 ¿Qué estamos esperando? Vamos a buscar algunos repositorios de Git, ¿de acuerdo?
 
@@ -231,7 +231,7 @@ Y luego está tu historial de confirmaciones. Cada compromiso representa un camb
 
 **Hasta ahora, en este libro, ha aprendido a usar Git**. Pero también puedes doblar a Git a tu voluntad. Ahí es donde la capacidad de configurar Git juega un papel vital. Ya ha visto cómo configurar Git en capítulos anteriores; en este capítulo exploraremos mucho más de lo que puede configurar para hacer su vida más fácil. La configuración también puede ayudarlo a definir accesos directos: ¡se acabaron los comandos Git de largo aliento!
 
-Hay mucho más que puede hacer para facilitar su interacción con Git. Le mostraremos cómo puede decirle a Git que ignore ciertos tipos de archivos para que no los confirme accidentalmente. Le daremos nuestras formas recomendadas de escribir mensajes de confirmación y le diremos cómo nos gusta nombrar nuestras sucursales. Y para colmo, incluso exploraremos cómo una interfaz gráfica de usuario para Git puede desempeñar un papel importante en su flujo de trabajo. #vamos #no puedo esperar
+Hay mucho más que puede hacer para facilitar su interacción con Git. Le mostraremos cómo puede decirle a Git que ignore ciertos tipos de archivos para que no los commite accidentalmente. Le daremos nuestras formas recomendadas de escribir mensajes de commit y le diremos cómo nos gusta nombrar nuestras branches. Y para colmo, incluso exploraremos cómo una interfaz gráfica de usuario para Git puede desempeñar un papel importante en su flujo de trabajo. #letsgo #cantwait
 
 * “Configuring Git”
 * “The global .gitconfig file”
