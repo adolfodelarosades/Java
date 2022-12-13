@@ -16,6 +16,8 @@ Tu cerebro en Git . Aquí estás tratando de aprender algo, mientras que tu cere
 * “The technical review team”
 * “Acknowledgments”
 
+<img width="634" alt="image" src="https://user-images.githubusercontent.com/23094588/207461219-f5dfa0c8-816e-492f-bad1-296acfb66279.png">
+
 ## "¿Para quién es este libro?"
 ## “Sabemos lo que estás pensando”
 ## “Metacognición: pensar sobre pensar”
