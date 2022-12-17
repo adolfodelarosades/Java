@@ -41,7 +41,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 
 • 12 secciones • 47 clases • 2 h 40 m de duración total
 
-### `01 Introducción • 1 clases • 4m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/01-Introduccion.md)
+### [01 Introducción • 1 clases • 4m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/01-Introduccion.md)
 
 * Introducción 04:26
 
