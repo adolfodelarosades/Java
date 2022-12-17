@@ -41,15 +41,15 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 
 • 12 secciones • 47 clases • 2 h 40 m de duración total
 
-### 01 Introducción • 1 clases • 4m
+### `01 Introducción • 1 clases • 4m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/01-Introduccion.md)
 
 * Introducción 04:26
 
-### 02 Temario y Objetivos • 1 clases • 4m
+### [02 Temario y Objetivos • 1 clases • 4m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/02-Temario-y-Objetivos.md)
 
 * Temario y Objetivos 03:42
 
-### 03 Que le pido a un control de versiones • 11 clases • 17m
+### [03 Que le pido a un control de versiones • 11 clases • 17m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/03-Que-le-pido-a-un-control-de-versiones.md)
 
 * Que le pido a un control de versiones 00:51
 * Trabajo sin conexión 01:31
@@ -63,19 +63,19 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Proyectos completos 01:37
 * Sencillez 01:33
 
-### 04 Instalación • 2 clases • 2m
+### [04 Instalación • 2 clases • 2m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/04-Instalacion.md)
 
 * Instalación 01:47
 * Generación de claves SSH 00:23
 
-### 05 Uso de Git con Eclipse • 4 clases • 20m
+### [05 Uso de Git con Eclipse • 4 clases • 20m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/05-Uso-de-Git-con-Eclipse.md)
 
 * Añadir contenido 05:35
 * Añadir contenido parcialmente 03:52
 * Preferencias 04:26
 * Stash guardar trabajos a medias 05:40
 
-### 06 Trabajo con Ramas • 8 clases • 33m
+### [06 Trabajo con Ramas • 8 clases • 33m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/06-Trabajo-con-Ramas.md)
 
 * Crear ramas 05:18
 * Mergeo de ramas 01:50
@@ -86,7 +86,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Modificar commit 02:30
 * Peligro de las ramas 03:38
 
-### 07 Trabajo con Repositorios • 5 clases • 25m
+### [07 Trabajo con Repositorios • 5 clases • 25m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/07-Trabajo-con-Repositorios.md)
 
 * Repositorios remotos 09:21
 * Repositorios remotos con GitHub 03:22
@@ -94,16 +94,16 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Clonar repositorios 04:28
 * Bajar cambios 03:21
 
-### 08 Conflictos • 2 clases • 10m
+### [08 Conflictos • 2 clases • 10m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/08-Conflictos.md)
 
 * Resolver conflictos automáticamente 04:37
 * Resolver conflitos manualmente 05:37
 
-### 09 Búsquedas • 1 clases • 2m
+### [09 Búsquedas • 1 clases • 2m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/09-Busquedas.md)
 
 * Búsquedas 01:43
 
-### 10 Flujos de Trabajo con Git • 5 clases • 16m
+### [10 Flujos de Trabajo con Git • 5 clases • 16m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/10-Flujos-de-Trabajo-con-Git.md)
 
 * Tipos de flujos 01:09
 * Rama única 01:52
@@ -111,7 +111,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Fork 03:45
 * GitFlow 05:27
 
-### 11 GitFlow • 6 clases • 25m
+### [11 GitFlow • 6 clases • 25m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/11-GitFlow.md)
 
 * Configuración de GitFlow 05:00
 * Features 05:52
@@ -120,6 +120,6 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Etiquetas 03:16
 * Conclusiones 02:54
 
-### 12 Despedida • 1 clases • 3m
+### [12 Despedida • 1 clases • 3m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/12-Despedida.md)
 
 * Despedida 03:23
