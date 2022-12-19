@@ -84,56 +84,39 @@ Y eso es un extra que no es que sea una de las cosas más importantes pero es un
 
 ## Múltiples servidores 02:20
 
-Otra de las características que a mí más me gusta es la posibilidad de tener más de un más de un repositorio.
+Otra de las características que a mí más me gusta es la posibilidad de tener más de un repositorio.
 
-Eso es algo que en principio puede parecer un poco como innecesario porque yo estoy en mi empresa y
+Eso es algo que en principio puede parecer un poco como innecesario porque yo estoy en mi empresa y trabajo contra el repositorio de mi empresa, pero no siempre hay buena conectividad no siempre. A veces puedes tener buena conectividad si estás trabajando sólo para tu empresa pero muchas veces si tú estás trabajando para un cliente externo eres un subcontratista que tú estás desarrollando una aplicación y luego se la entrega al cliente. No siempre hay buena conectividad o a veces ni siquiera hay conectividad así como quien dice con el cliente y se tiene que andar tirando de VPN que a veces no funcionan del todo bien.
 
-trabajo contra el repositorio de mi empresa pero no siempre hay buena conectividad no siempre.
+Entonces el poder tener un repositorio en tus instalaciones con los que tengas buena conectividad y 
+luego simplemente con un botón con un botón hizo pasar toda esa información con todos sus históricos cambios.
 
-A veces puedes tener buena conectividad si estás trabajando sólo para tu empresa pero muchas veces si
+Toda la información al cliente a mí me parece que es algo muy interesante porque a veces hay unas ciertas peleas, a mí me ha pasado estar en algunas reuniones sobre todo con Subversion que no tiene esa posibilidad. Hablo de subversión porque la verdad es que es como el más típico antes de Git por lo menos en esta zona en la que yo me muevo y a veces había discusiones no de utilizar el Subversion del proveedor sin utilizar el Subversion del cliente.
 
-tú estás trabajando para un cliente externo eres un subcontratista que tú estás desarrollando una aplicación
-
-y luego se la entrega al cliente.
-
-No siempre hay buena conectividad o a veces ni siquiera hay conectividad así como quien dice con el
-
-cliente y se tiene que andar tirando de VPN que a veces no funcionan del todo bien.
-
-Entonces el poder tener un repositorio en tus instalaciones con los que tengas buena conectividad y
-
-luego simplemente con un botón con un botón hizo pasar toda esa información con todos sus históricos
-
-cambios.
-
-Toda la información al cliente a mí me parece que es algo muy muy interesante porque a veces hay unas
-
-ciertas peleas a mí me ha pasado estar en algunas reuniones sobre todo con Subversion que no tiene esa
-
-posibilidad.
-
-Hablo de subversión porque la verdad es que es como el más típico antes de por lo menos en esta zona
-
-en la que yo me muevo y a veces había discusiones no de utilizar el Subversion del proveedor sin utilizar
-
-el Subversion del cliente.
-
-El cliente quería que es el suyo pero el suyo no funcionaba bien la gente del cliente prefería utilizar
-
-el suyo que lo tenía controlado etcétera etcétera y eso acaba generando una serie de cosas que convites
-
-muy sencillos a utilizar los dos puedes dejar las cosas en uno y en otro no. Sobre todo porque a veces
-
-también hay problemas o puede haber ciertos problemas legales en el sentido de que claro si tú no tienes
-
-el código fuente de lo que has entregado te pueden decir que un defecto que hay en el software que tú
-
-has creado es por culpa tuya cuando has sido el cliente el que ha metido mano o un tercero el que ha
-
-metido mano hoy y lo ha fastidiado entonces tener tu código en tus instalaciones en algo bajo tu control
-
-es bastante y bastante interesante.
-
+El cliente quería que es el suyo pero el suyo no funcionaba bien la gente del cliente prefería utilizar 
+el suyo que lo tenía controlado etcétera etcétera y eso acaba generando una serie de cosas que convites 
+muy sencillos a utilizar los dos puedes dejar las cosas en uno y en otro no. Sobre todo porque a veces también hay problemas o puede haber ciertos problemas legales en el sentido de que claro si tú no tienes el código fuente de lo que has entregado te pueden decir que un defecto que hay en el software que tú has creado es por culpa tuya cuando has sido el cliente el que ha metido mano o un tercero el que ha metido mano hoy y lo ha fastidiado entonces tener tu código en tus instalaciones en algo bajo tu control es bastante y bastante interesante.
 
 ## Proyectos completos 01:37
+
+Hemos hablado de los workflow y a los flujos de trabajo como una de las características deseables y una de las cosas que sí que le veo a Git es que cuanto más complejo es el proyecto que bien porque hay mucha gente bien porque hay muchos muchas cosas que se están trabajando en paralelo que esa facilidad que tiene para hacer ramas lo que permite es que un proyecto grande pueda funcionar mejor. 
+
+Con Subversion todos estos problemas de las ramas que aunque las tienen, no las gestiona del todo bien hace que a veces sea más complicado el trabajar en diferentes cosas en paralelo cosa que con Git podías funcionar con ramas, cada uno estaba haciendo lo suyo y se daban los cambios tranquilamente
+
+y con su Subversión eso era bastante más complicado y no estoy hablando de un equipo excesivamente grande. Cuando te vas a equipos a equipos más grandes todos esos problemas con las ramas pueden ser problemáticos.
+
+Entonces esa facilidad de utilizar, de tener ramas lo que nos permite es que cuanto más complejo sea el proyecto o workflow que más se decante hacia hacia un Git con contra otros repositorios que puedan ser un poco más viejos y no manejen estas cosas tan tan bien.
+
 ## Sencillez 01:33
+
+Una de las cosas que se le suele achacar a Git y tiene su parte de razón es que es muy potente. Pero claro esa potencia le hace que sea bastante complejo. Y es cierto se pueden hacer muchas cosas y si no te andas con cuidado vas a lo loco puedes liarla bastante gorda.
+
+Lo que sí que es cierto es que yo creo que a día de hoy hay herramientas sobre todo estoy pensando en el **Sourcetree** que hacen que el uso de Git sea bastante sencillo porque son herramientas gráficas muy bien trabajadas en las que las cosas quedan bastante claras.
+
+Yo por ejemplo entre el **Sourcetree** el típico **Tortoise**, **Sourcetree** me parece que es mucho más claro, está mejor la interfaz está mejor diseñada.
+
+Sí que es cierto que lo que es propiamente de Git en sí mismo es de línea de comandos, con lo cual la sencillez más bien brilla por su ausencia. Pero sí que es cierto que cuando aquí hablamos de Git hablamos del Git más todo su ecosistema y en ese aspecto yo creo que sí que es una herramienta que debido al éxito que ha tenido ha habido muchas otras herramientas, muchas otras empresas que lo han complementado y han hecho que una herramienta ya de por sí buena sea todavía todavía mejor.
+
+Pero sí que es cierto que se pueden hacer cosas y la puedes liar bastante bastante gorda si no sabes lo que estás haciendo y te metes a enredar demasiado.
+
+
