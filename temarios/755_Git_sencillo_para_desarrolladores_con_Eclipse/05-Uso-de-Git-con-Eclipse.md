@@ -86,6 +86,40 @@ Con esta vista ya va a ser posible realizar los commits, en esta vista tenemos b
 
 **Commit Message** donde indicaremos un mensaje que acompañara al commit.
 
+En la sección **Unstaged Changes** vemos a **`fichero1.txt`** que es el fichero que añadimos, si damos doble click en el vemos lo siguiente:
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208685908-99191c39-dec6-4e54-826b-b5364608c089.png">
+
+Se nos abre una ventana donde podemos ver los cambios que hemos hecho en el archivo para que nos sirva como referencia para ver lo que podamos subir.
+
+Además de este archivo hay dos más que son añadidos por el IDE al crear el proyecto.
+
+Vamos a marcar nuestro archivo
+
+<img width="1307" alt="image" src="https://user-images.githubusercontent.com/23094588/208686771-0297177a-b65b-4c64-a55e-ad94eec5e54f.png">
+
+y vamos a presionar el signo de más para añadirlo en la zona **Staged Changes**.
+
+<img width="1311" alt="image" src="https://user-images.githubusercontent.com/23094588/208686992-146d4bb4-1802-4615-b788-5d090781b6ec.png">
+
+La zona **Staged Changes** es una zona intermedia que nos permite ir seleccionando los archivos que vamos ir commiteando y cuales no, en este caso de los 3 archivos que tenemos solo hemos por ahora añadido el que nos otros creamos, vamos a añadir los otros 2 archivos para añadirlos en nuestro primer commit.
+
+<img width="1317" alt="image" src="https://user-images.githubusercontent.com/23094588/208692771-559e9aa6-af55-4f6b-96de-aa5c986748e7.png">
+
+En **Commit Message** vamos a poner el siguiente mensaje:
+
+<img width="1322" alt="image" src="https://user-images.githubusercontent.com/23094588/208693081-c217f723-2f17-4a55-bfcd-43a6ef2b26d8.png">
+
+Como por el momento no tenemos un repositorio remoto sino solo un repositorio local vamos a presionar el botón **Commit**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208693672-a4699f95-6485-4b41-88b4-f213a8daeae0.png">
+
+Vemos que ya no tenemos los archivos y el aspecto en el Explorador a cambiado. El iconito naranja indica que ya esta bajo el control de un repositorio de versiones. Nos aparece un archivo **`.DS_Store`** que vamos a hacer como que no estuviera.
+
+Hemos realizado nuestro primer Commit.
+
+
+
 
 
 
