@@ -226,3 +226,97 @@ Y de repente llega nuestro jefe y nos indica que dejemos lo que estamos haciendo
 Lógicamente el cambio en el cual estamos trabajando actualmente no lo podemos subir.
 
 En condiciones normales que se hace, es cojer el fichero o los ficheros cambiados, los copiamos en una carpeta por allí temporal, dejar todo el código limpio sin nuestros cambios para poder hacer los nuevos cambios que nos han pedido, subirlos y luego ir a la carpeta temporal para recupoerar lo que llevabamos y volverlo a poner en nuestro código para proceder con nuestra tarea inicial.
+
+Con Git todo lo anterior lo podemos hacer de una manera más elegante. 
+
+Para iniciar vemos los cambios que tenemos actualmente y que no debemos subir.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208733236-48b65f30-3247-4d05-8074-4b0c3562e5de.png">
+
+Vamos a presionar **click derecho sobre el nombre del archivo > Team > Stashes > Stash Changes...**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208733517-e7d25c66-60b5-4bda-b801-229f181606e4.png">
+
+Nos pide un nombre para el **Stash**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208733722-ee506cf6-289a-45b3-b17a-239514fd9175.png">
+
+vamos a darle el nombre **`mis cambios no terminados`**
+
+<img width="553" alt="image" src="https://user-images.githubusercontent.com/23094588/208733880-b2512966-6599-489a-b231-64e9acbf7c85.png">
+
+Incluso nos permite añadir archivos que no hayamos subido al control de versiones si marcamos el check **`Include untracked files`** esto nos serviria para ficheros nuevos que en este ejemplo no aplica.
+
+Simplemente presionamos el botón **`Stash`**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208734560-14a22652-2c42-4670-95be-7bdfaba6fe89.png">
+
+Al hacer esto vemos que desaparecen todos los cambios que habíamos realizado. Realmente solo era un cambio en este ejemplo el cual ha desaparecido. Nos ha dejado una versión limpia.
+
+<img width="1189" alt="image" src="https://user-images.githubusercontent.com/23094588/208734867-b7dbc943-9b5f-4b16-aee8-f63e2a12a983.png">
+
+En este escenario que estamos contando deberíamos resolver la incidencia que nos han pedido, por ejemplo pensemos que es añadir un texto en el archivo **`fichero1.txt`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208735503-e1878b62-70df-4224-a9d8-aa4760d80960.png">
+
+Una vez resuelta la incidencia la subimos en la zona **Git Staging**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208735833-88754617-7f04-4a06-8ab1-6124c699a102.png">
+
+Y hacemos el Commit, con esto ya hemos terminado de resolver la incidencia.
+
+Ahora vamos a continuar con nuestro trabajo inicial, tenemos que recuperar el trabajo que teniamos a medias y que guardamos en el **Stashes**.
+
+Vamos a presionar **click derecho sobre el nombre del archivo > Team > Stashes > 0:mis cambios no terminados**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208736447-f23dbb9b-53d9-45c7-8dc4-96554c5495ba.png">
+
+Nos va a salir una ventana con el mensaje que le pusimos al **Stashe** y la lista de los archivos cambiados que en este caso es uno **elquijote.txt**.
+
+<img width="1187" alt="image" src="https://user-images.githubusercontent.com/23094588/208736845-8acfff59-882b-4dc5-b690-fad4dea39765.png">
+
+Incluso si pulsamos en la pestaña **Diff** nos da las diferencias al estilo Git.
+
+<img width="1183" alt="image" src="https://user-images.githubusercontent.com/23094588/208737127-d5186b32-0121-4b6c-b835-6056391761bc.png">
+
+En la parte superior derecha junto al nombre **`cursoegit`** hay un icono con una flecha verde que nos sirve para indicar que **Apply Stashed**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208737708-0ddf9b0d-ab53-4ce2-94e0-87fc1f458e2d.png">
+
+Y con esto lo que hemos hecho es recuperar nuestros cambios, podemos ver que en la zona de **Unstaged Changes** nos aparece el archivo **elquijote.txt** que es el que habíamos guardado en el **Stashe**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208738169-b8453174-a559-4788-a91f-986507730196.png">
+
+Podemos ver lo que habíamos añadido.
+
+<img width="1183" alt="image" src="https://user-images.githubusercontent.com/23094588/208738609-67ea7ea6-8d69-4c7e-9d84-db13b040b9ed.png">
+
+<img width="1391" alt="image" src="https://user-images.githubusercontent.com/23094588/208738732-1ae5229d-ca55-4583-a425-b8ab66b564ad.png">
+
+Continuamos con nuestro trabajo y lo terminamos.
+
+<img width="1311" alt="image" src="https://user-images.githubusercontent.com/23094588/208738934-8be7d21e-bd24-4b3a-80a7-9ab3f33ab937.png">
+
+Y ahora si ya podemos realizar el commit de este trabajo.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208739253-d91f337b-38fb-4f70-bbcb-7a46ff5600f7.png">
+
+Hasta aquí ya tenemos todo nuestro proyecto subido en nuestro repositorio local.
+
+<img width="204" alt="image" src="https://user-images.githubusercontent.com/23094588/208739544-598fa232-9b48-4b53-a770-990d82404285.png">
+
+Lo que si que tenemos que tener claro es que el **Stashe** lo seguimos teniendo, para verlo lo que vamos a hacer es abrir la vista **Git Repositorie** y si abrimos **Stashed Commits** vemos que tenemos nuestro **stash: mis cambios no terminados**.
+
+<img width="1312" alt="image" src="https://user-images.githubusercontent.com/23094588/208740108-1d6e92cb-c81b-4de5-b1c9-9d0c2ed6b1e5.png">
+
+Y como ya no lo necesitamos podemos presionar botón derecho sobre el y borrarlo.
+
+<img width="1315" alt="image" src="https://user-images.githubusercontent.com/23094588/208740633-b8003bb6-2619-47fd-b6d4-377e42b4a892.png">
+
+<img width="553" alt="image" src="https://user-images.githubusercontent.com/23094588/208740727-3ad9c7e4-3584-4a21-b88a-d626bbf51a2c.png">
+
+Y si observamos ya no tenemos la zona **Stashed Commits**
+
+<img width="1312" alt="image" src="https://user-images.githubusercontent.com/23094588/208740886-35975746-277a-4ec7-9dee-cbccf7a43453.png">
+
+Esto es lo que tendríamos que hacer para resolver Incidencias HOTFIX mientras trabajamos en otras tareas.
