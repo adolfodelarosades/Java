@@ -33,6 +33,59 @@ Vamos a meter algo de contenido en este nuevo archivo **`fichero1.txt`**.
 
 <img width="1185" alt="image" src="https://user-images.githubusercontent.com/23094588/208666819-e669db0b-a36e-4720-9cdd-122239903579.png">
 
+Una vez que tenemos el nuevo archivo con su respectivo contenido ahora lo que queremos es meterlo dentro del control de versiones de Git.
+
+Esto lo vamos a hacer con un **click derecho sobre el nombre del proyecto > Team > Share Project...**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208668668-e6abf454-74cb-4b2c-a8bb-4d154c9690cf.png">
+
+Nos presenta la siguiente pantalla.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208669168-a5508358-1e72-43ac-905b-1a2cfce2c63d.png">
+
+Lo vamos a hacer de la manera más sencilla. Vamos a marcar el **check - Use or create repository in parent folder of project**, esta opción le indica que cree el repositorio en la carpeta padre del proyecto.
+
+<img width="774" alt="image" src="https://user-images.githubusercontent.com/23094588/208669741-b26591d7-f00c-4898-9ecd-5f75447995c2.png">
+
+Presionamos el botón **Create Repository**.
+
+<img width="769" alt="image" src="https://user-images.githubusercontent.com/23094588/208669968-fea9b3f2-7b91-4a72-845a-d2236c44523a.png">
+
+Presionamos en **Finish**.
+
+Una vez echo esto vemos que el proyecto se presenta un poco diferente en el IDE.
+
+<img width="381" alt="image" src="https://user-images.githubusercontent.com/23094588/208670211-6274d297-ab35-48ba-93c4-2ab6b0f59343.png">
+
+Una vez echo esto vemos que el proyecto se presenta un poco diferente en el IDE.
+
+Hasta aquí lo que tenemos es un repositorio en LOCAL, si abrimos en el Explorador de Archivos la carpeta del proyecto vemos que se a creado la carpeta **`.git`**. No es lo más recomendable tener la carpeta **`.git`** dentro del mismo proyecto, pero para este primer ejemplo nos vale. 
+
+<img width="553" alt="image" src="https://user-images.githubusercontent.com/23094588/208670609-74770d5d-2585-4ab1-b30b-27b0c9142839.png">
+
+<img width="794" alt="image" src="https://user-images.githubusercontent.com/23094588/208670888-842c451e-66f9-4c67-8546-1ca87f019093.png">
+
+
+### Vista Git
+
+Vamos a abrir la Vista Git con la opción **Windows > Other... > Git > Git Staging**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208672763-5a93f738-0d0a-4d45-8524-89e01e61bace.png">
+
+<img width="325" alt="image" src="https://user-images.githubusercontent.com/23094588/208672901-0695a841-03e6-4b2c-85c2-40b11c0a0622.png">
+
+Esto nos abre en el IDE la siguiente vista.
+
+<img width="1142" alt="image" src="https://user-images.githubusercontent.com/23094588/208673075-be45b770-74bf-443b-869e-2fe9dcced8a4.png">
+
+Con esta vista ya va a ser posible realizar los commits, en esta vista tenemos básicamente 3 áreas, **Unstaged Changes**, **Staged Changes** y **Commit Message**.
+
+**Unstaged Changes** nos indica los cambios que no estan subidos en el repositorio.
+
+**Staged Changes** a esta zona también se le conoce como Index.
+
+**Commit Message** donde indicaremos un mensaje que acompañara al commit.
+
 
 
 
