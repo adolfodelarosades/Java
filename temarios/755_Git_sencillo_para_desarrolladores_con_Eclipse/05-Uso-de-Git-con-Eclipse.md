@@ -118,14 +118,78 @@ Vemos que ya no tenemos los archivos y el aspecto en el Explorador a cambiado. E
 
 Hemos realizado nuestro primer Commit.
 
-
-
-
-
-
-
-
-
 ## Añadir contenido parcialmente 03:52
+
+Vamos a añadir el archivo **`elquijote.txt`** con un contenido "amplio".
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208716630-cbeec340-779b-4f6e-bb71-c89ff6ff3503.png">
+
+Vamos a commitear el archivo **`elquijote.txt`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208717974-cce0575b-a728-4b1c-98f9-e8a5fcb9b113.png">
+
+Hemos pulsado **`Ignore`** en **`.DS_Store`** para no subir este archivo.
+
+<img width="201" alt="image" src="https://user-images.githubusercontent.com/23094588/208718108-184f15b8-9fc6-4f16-a305-2fcbdf2687c6.png">
+
+Ahora en **`elquijote.txt`** vamos a añadir el siguiente texto en el inicio y en el fin del texto.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208718890-6e37e389-234a-463b-9ff2-25d8ec62b836.png">
+
+Si doy doble clicks en el archivo **`elquijote.txt`**.
+
+<img width="1183" alt="image" src="https://user-images.githubusercontent.com/23094588/208719235-e233eed4-5c59-4f8b-a424-0ad64994ca55.png">
+
+Si vemos esta última imagen en el lado izquierdo tenemos el archivo **`elquijote.txt`** modificado y del lado derecho tenemos el **`index: elquijote.txt(editable)`**.
+
+Con Git tenemos la posibilidad de subir cambios con contenido parcial, aquí el cambio superior NO lo vamos a subir y el cambio inferior si lo vamos a subir, para lo cual en el cambio inferior nos colocamos en la línea que indica el cambio y nos aparecen los simbolos **`>`** y **`<`** que nos permiten pasar código de un lado a otro, en este caso vamos a poner el cambio que si queremos subir en el Indice y lo guardamos.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208720926-5aafe59e-2397-4a0c-b81d-230ccbe4a527.png">
+
+Observe como ahora el archivo **`elquijote.txt`** aparece tanto en la zona **Unstaged Changes** como en **Staged Changes** 
+
+Si pulsamos en **`elquijote.txt`** que se encuentra en **Unstaged Changes** tenemos.
+
+<img width="1188" alt="image" src="https://user-images.githubusercontent.com/23094588/208721506-f461b54d-f6c8-4d66-a4d2-4f6d4f2907e6.png">
+
+Y si pulsamos en **`elquijote.txt`** que se encuentra en **Staged Changes** tenemos.
+
+<img width="1191" alt="image" src="https://user-images.githubusercontent.com/23094588/208721741-61e2cf6a-71d9-4739-aa1d-f7a8a124f4d7.png">
+
+Podemos observar los cambios parciales que hemos realizado, vamos a hacer el commit.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208722107-7b2c8242-f987-488c-b378-700938268e34.png">
+
+El que estaba en **Staged Changes** ha desaparecido por que ya se ha commiteado.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208722309-6182c76e-0fe5-46a4-9add-fda2753ba20d.png">
+
+Y lógicamente en **Unstaged Changes** sigue estando lo que no subimos.
+
+<img width="1187" alt="image" src="https://user-images.githubusercontent.com/23094588/208722624-86343e88-7ed6-4b51-9dd0-b142b1ffdf4e.png">
+
+Con esta funcionalidad lo que hemos hecho es subir parcialmente los cambios que realmente nos interesan subir y los que no los podemos desechar con la siguiente opción, pulsando boton derecho y pulsando en **`Replace with HEAD Revision`** que básicamente es como decirle que descarte los cambios.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208723210-29003788-77b7-4572-b68d-2ddb5a76944b.png">
+
+Nos pide que confirmemos que realmente queremos descartar los cambios.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208723295-44d1655e-f624-41ff-a77a-82fb7125b525.png">
+
+Pulsamos en el botón **`Discard Changes`**.
+
+Ya no tenemos el archivo **`elquijote.txt`** en **Unstaged Changes** y por supuesto ya no existe ningún cambio en **`elquijote.txt`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208723889-71af9898-c40e-4061-a403-87ac0f6cf232.png">
+
+
+
+
+
+
+
+
+
+
 ## Preferencias 04:26
 ## Stash guardar trabajos a medias 05:40
