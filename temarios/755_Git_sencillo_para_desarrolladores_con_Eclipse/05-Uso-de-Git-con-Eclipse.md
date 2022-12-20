@@ -214,3 +214,15 @@ El resto de opciones generalmente no se tocan.
 
 
 ## Stash guardar trabajos a medias 05:40
+
+Otra de las características bastante interesantes que tiene Git es el hecho de guardar trabajos que estan a medias.
+
+Supongamos que estoy trabajando en cambios en el archivo **`elquijote.txt`** añadiendo cierto texto.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208731773-0141b442-199b-45b7-abc7-68589c79dce7.png">
+
+Y de repente llega nuestro jefe y nos indica que dejemos lo que estamos haciendo por que se ha reportado una incidencia y hay que arreglarla.
+
+Lógicamente el cambio en el cual estamos trabajando actualmente no lo podemos subir.
+
+En condiciones normales que se hace, es cojer el fichero o los ficheros cambiados, los copiamos en una carpeta por allí temporal, dejar todo el código limpio sin nuestros cambios para poder hacer los nuevos cambios que nos han pedido, subirlos y luego ir a la carpeta temporal para recupoerar lo que llevabamos y volverlo a poner en nuestro código para proceder con nuestra tarea inicial.
