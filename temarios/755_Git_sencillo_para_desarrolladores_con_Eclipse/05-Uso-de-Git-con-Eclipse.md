@@ -182,14 +182,35 @@ Ya no tenemos el archivo **`elquijote.txt`** en **Unstaged Changes** y por supue
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208723889-71af9898-c40e-4061-a403-87ac0f6cf232.png">
 
+Solo tenemos los cambios comiteados.
 
-
-
-
-
-
-
-
+<img width="1192" alt="image" src="https://user-images.githubusercontent.com/23094588/208724527-24a18623-a29a-443c-9ff6-a05834b95edf.png">
 
 ## Preferencias 04:26
+
+En esta lección vamos a ver un poco la configuración de Git. El pluging integrado en Eclipse para trabajar con Git se llama **egit** y ya viene integrado sin necesidad de realizar ninguna instalación.
+
+Para ver la configuración entramos en **Preferences > Team > Git** 
+
+<img width="767" alt="image" src="https://user-images.githubusercontent.com/23094588/208725896-2417b4ff-f10a-4f33-9d1b-c2478b1d3ae7.png">
+
+y dentro de esto hay varias opciones que podemos ver siendo la **Configuration** una de ellas.
+
+<img width="768" alt="image" src="https://user-images.githubusercontent.com/23094588/208726086-82e406ac-4016-42e5-a96a-6740e46c1c19.png">
+
+Esta presentación es un poco de bajo nivel comparada con otras herramientas, nos pone la configuración de Git dentro de Eclipse.
+
+Aquí podemos configurar el **user** tanto el **email** como el **name** que son los que aparecen en los commits.
+
+Otra cosa importante que podemos configuración son las claves SSH en caso de que las usemos en **GitHub** o **GitLab**. 
+
+En el buscador escribimos **ssh** ya que no es parte de Git sino de Eclipse.
+
+<img width="868" alt="image" src="https://user-images.githubusercontent.com/23094588/208727334-6df3a9b9-c5ca-4d73-a619-da2406d0232b.png">
+
+Es aquí donde le tenemos que indicar donde esta el certificado, la clave privada. Si trabajamos en Mac estará en el **`.shh`** y le indicamos las claves privadas **Private keys** que queremos utilizar, si tenemos una diferente tendríamos que añadirla con el botón **`Add Private Key...`** y con esto el solo cuando necesite una conexión SSH ya nos pedira la contraseña y luego el se la guarda. Ya lo retomaremos cuando hagamos una conexión con los servidores.
+
+El resto de opciones generalmente no se tocan.
+
+
 ## Stash guardar trabajos a medias 05:40
