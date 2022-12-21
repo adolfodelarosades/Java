@@ -55,9 +55,47 @@ Graficamente nos muestra los cambios que hemos realizado hasta hoy y con color v
 
 Como esta marcando el último commit que hicimos en la parte de abajo nos informa los datos del commit **commit, Author, Committer, Parent, Branches** y el fichero que se ha modificado en dicho commit. 
 
+Podemos marcar cualquier commit para ver su información.
 
+<img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/208859718-278637d6-d6d7-4568-9286-917383bf692d.png">
+
+<img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/208859808-9c4056f1-0aae-4348-ada3-1e127a2859df.png">
 
 ## Mergeo de ramas 01:50
+
+En la lección anterior trabajamos sobre una nueva característica de nuestro proyecto para lo cual creamos una nueva rama, ahora lo que queremos es incorporar todos eso cambios en nuestra rama principal **master** a este proceso se le conoce como **Merge o Mergeo**.
+
+Para realizar el **Merge** lo primero que tenemos que hacer es cambiar a la rama **master** de la siguiente manera.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208860868-f2ac0d3c-0b16-4037-afa9-235145496456.png">
+
+Observemos lo siguiente, en el explorador ya nos indica que estamos en la rama **master**. Observemos que aquí no aparece el nuevo archivo **caracteristica_1.txt**
+
+<img width="292" alt="image" src="https://user-images.githubusercontent.com/23094588/208861216-0aace34a-4426-4443-9970-0ec6b2fd17d4.png">
+
+
+Y en el **History** observamos como **HEAD** se a colocado a la altura de **master** para indicar que es la posición donde estamos ubicados actualmente.
+
+<img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/208861356-059c7503-dbd9-489d-b676-190ea04364ee.png">
+
+Una vez colocados en la rama donde queremos colocar los cambios vamos a realizar el **Merge** dando **click derecho en el nombre del proyecto > Team > Merge**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208862228-35582cd6-3aaf-4e55-9d12-6405efcbe02c.png">
+
+Nos pide que le indiquemos con que rama vamos a realizar el Mergeo, vamos a marcar **caracteristica_1**, dejamos todas las opciones por defecto.
+
+<img width="592" alt="image" src="https://user-images.githubusercontent.com/23094588/208862746-751232b0-1143-45ef-95dc-b5c348a540f0.png">
+
+Presionamos el botón **Merge**. Nos muestra cual ha sido el resultado del Mergeo, nos indica que ha sido un **Fast-forward**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208862966-c403c9fc-4284-43dc-9703-c139e227cb71.png">
+
+Y ya esta, observemos varias cosas, estamos colocados en la rama **master** y ya tenemos integrado el archivo **caracteristica_1.txt**, por otro lado en el **History** tenemos a la misma altura a **caracteristica_1**, **master** y **HEAD**. Antes teniamos a **master** uno por detrás, ahora ya estan todos a la misma altura.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208863607-79bfba43-56db-40fa-b1d4-42ecd0575778.png">
+
+
+
 ## Borrar ramas 01:17
 ## Varias ramas 06:18
 ## Fastforward 07:03
