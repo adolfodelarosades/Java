@@ -94,9 +94,31 @@ Y ya esta, observemos varias cosas, estamos colocados en la rama **master** y ya
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208863607-79bfba43-56db-40fa-b1d4-42ecd0575778.png">
 
+Con todo lo que hemos logrado es realizar una nueva funcionalidad en nuestra propia rama y cuando la terminamos incorporamos todos los cambios dentro de nuestra rama principal **master**. Para ver las ramas actuales podemos entrar en **Git Repositorie > Branches > Local**.
+
+<img width="1221" alt="image" src="https://user-images.githubusercontent.com/23094588/208870290-1db09295-5a36-475c-8ab9-c87060f83aac.png">
+
+Podemos obtar por conservar todas las ramas por si nos interesa saber que fuimos haciendo en cada nueva funcionalidad y poder volver a ellas o podemos optar a borrarla una vez que ya hemos incorporado los cambios a la rama principal. En este caso vamos a eliminar la rama **caracteristica_1** pulsando botón derecho en ella y seleccionar **Delete Branch**.
+
+<img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/208871082-ab254934-f30b-482b-9e92-53ad12d4d6a6.png">
+
+Con esto la rama se elimino.
+
+<img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/208871288-c58166fa-d6dd-4b7d-9c62-f1d92fa2af8e.png">
+
+Si revisamos el **History** ya no queda rastro de la que alguna vez tuvimos la rama **caracteristica_1**. Con esto no seriamos capaces de saber que en ese sitio existio una rama, da la impresión de que hicimos commits continuos sobre la rama **master**. No queda ninguna referencia salvo el comentario.
+
+
+
+<img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/208871482-6ceddd11-b31b-4c84-a8c2-2188959aa542.png">
+
 
 
 ## Borrar ramas 01:17
+
+Cuando trabajamos con ramas puede llegar el momento en que podemos llegar a tener muchas ramas. 
+
+
 ## Varias ramas 06:18
 ## Fastforward 07:03
 ## Rebase 04:50
