@@ -77,9 +77,11 @@ Pero imagina que estás en casa o en una biblioteca. Es una zona segura, cálida
 Solo un problema. Tu cerebro está tratando de hacerte un gran favor. Está tratando de asegurarse de que este contenido *obviamente* sin importancia no abarrote los recursos escasos. Recursos que se gastan mejor almacenando las cosas realmente *grandes*, como tigres, como el peligro de incendio. Me gusta cómo nunca deberías haber publicado esas fotos de "fiesta" en tu página de Facebook. Y no hay una forma sencilla de decirle a tu cerebro: "Oye, cerebro, muchas gracias, pero no importa lo aburrido que sea este libro y lo poco que esté registrando en la escala emocional de Richter en este momento, realmente *quiero* que sigan" estas cosas alrededor.
 
 <hr>
+
 **PENSAMOS EN UN LECTOR DE "HEAD FIRST" COMO UN APRENDIZ.**
 
 **Entonces, ¿qué se necesita para aprender algo? Primero tienes que conseguirlo, luego asegúrate de no olvidarlo. No se trata de meterte hechos en la cabeza. Según las últimas investigaciones en ciencia cognitiva, neurobiología y psicología educativa, el aprendizaje requiere mucho más que texto en una página. Sabemos lo que enciende tu cerebro.**
+
 <hr>
 
 #### Algunos de los principios de aprendizaje de Head First:
