@@ -77,13 +77,13 @@ Atentamente,
 
 **Marge**: Comenzar con Git es súper fácil. Simplemente crea un repositorio de Git y estás listo para las carreras.
 
-**Sangita**: ¿Creo un qué ahora?
+**Sangita**: ¿Creo uno ahora?
 
 **Marge**: Un repositorio de Git es una carpeta administrada por Git. Déjame dar un paso atrás. Necesitará almacenar todos los archivos para este proyecto en algún lugar de su computadora, ¿verdad?
 
-**Sangita**: Prefiero mantener todos los archivos relevantes relacionados con mi proyecto, incluida la fuente, la compilación y la documentación, en una carpeta. De esa manera, son fáciles de encontrar.
+**Sangita**: Prefiero mantener todos los archivos relevantes relacionados con mi proyecto, incluida el código fuente, la compilación y la documentación, en una carpeta. De esa manera, son fáciles de encontrar.
 
-**Marge**: genial! Una vez que crea esa carpeta, usa Git para inicializar un repositorio dentro de la carpeta. Es así de simple.
+**Marge**: Genial! Una vez que crees esa carpeta, usa Git para inicializar un repositorio dentro de la carpeta. Es así de simple.
 
 **Sangita**: ¿Y eso qué hace?
 
@@ -91,19 +91,40 @@ Atentamente,
 
 **Sanguita**: Hmm. DE ACUERDO...
 
-Marge: Es solo un comando, y ahora su carpeta está "habilitada para Git". Al igual que poner en marcha su motor, ahora puede poner su proyecto en marcha.
+**Marge**: Es solo un comando, y ahora tu carpeta está "habilitada para Git". Al igual que poner en marcha su motor, ahora puedes poner tu proyecto en marcha.
 
-Sanguita: ¡Ah! Eso tiene sentido.
+**Sanguita**: ¡Ah! Eso tiene sentido.
 
-Marge: Contáctame si necesitas algo. Estaré aquí si me necesitas.
+**Marge**: Contáctame si necesitas algo. Estaré aquí si me necesitas.
 
 #### ¿Tienes Git?
 
 ![image](https://user-images.githubusercontent.com/23094588/209468620-167d4c2d-979f-499e-81f0-35060f94b49f.png)
 
+**No avanzaremos mucho si aún no ha instalado Git**. Si no te has tomado el tiempo de instalar Git, ahora es el momento. Regrese a la sección titulada "Va a tener que instalar Git" en la introducción para comenzar.
+
+Incluso si tiene Git instalado, será útil ponerse al día con una nueva versión de Git solo para asegurarse de que todo lo que discutimos en este libro funcione como se espera.
+
+### Enciendan sus motores...
+
+![image](https://user-images.githubusercontent.com/23094588/209468817-7ad065bb-b532-46e1-9af2-9c575c2dacd0.png)
+
+Considere cualquier proyecto en el que haya trabajado; por lo general, involucra uno o más archivos; estos pueden ser archivos de código fuente, archivos de documentación, scripts de compilación, lo que sea. Si queremos gestionar estos archivos con Git, el primer paso es crear un repositorio Git.
+
+Entonces, ¿qué es exactamente un repositorio de Git? Recuerde que una de las razones para usar un sistema de control de versiones es que podemos guardar las instantáneas de nuestro trabajo periódicamente. Por supuesto, Git necesita un lugar para almacenar estas instantáneas. Ese lugar estaría en el repositorio de Git.
+
+La siguiente pregunta es: ¿dónde vive este repositorio? Por lo general, tendemos a guardar todos los archivos de un proyecto en una carpeta. Si vamos a usar Git como nuestro sistema de control de versiones para ese proyecto, primero creamos un repositorio *dentro de* esa carpeta para que Git tenga un lugar para almacenar nuestras instantáneas. La creación de un repositorio de Git implica ejecutar el comando **`git init`** dentro de la carpeta superior de su proyecto.
+
+Profundizaremos en los detalles pronto, pero por ahora, todo lo que necesita saber es que, sin crear un repositorio de Git, realmente no puede hacer mucho con Git.
+
+No importa cuán grande sea su proyecto (en otras palabras, no importa cuántos archivos o subdirectorios tenga su proyecto), la carpeta **superior** (o raíz) de ese proyecto debe haberse ejecutado **`git init`** para comenzar con Git.
+
+![image](https://user-images.githubusercontent.com/23094588/209468959-896cef2e-363b-4673-95d9-8e9fa9068ab0.png)
 
 
-## “Un recorrido rápido por la línea de comandos: saber dónde estás con pwd”
+## “Un recorrido rápido por la línea de comandos: saber dónde estás con `pwd`”
+
+
 ## “Más sobre la línea de comandos: creando nuevos directorios con mkdir”
 ## “(Incluso) Más en la línea de comando: listado de archivos con ls”
 ## “Más en la línea de comandos (casi ahí): cambiando directorios con cd”
