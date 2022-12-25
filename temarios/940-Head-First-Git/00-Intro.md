@@ -142,7 +142,9 @@ Usábamos ***personas***. En historias, ejemplos, visuales, etc., porque, bueno,
 
 ## "Esto es lo que TÚ puedes hacer para someter tu cerebro"
 
-<img width="231" alt="image" src="https://user-images.githubusercontent.com/23094588/209459367-d3ee8976-19b2-47d1-b88b-ec9061e15ab8.png">
+<center><img width="231" alt="image" src="https://user-images.githubusercontent.com/23094588/209459367-d3ee8976-19b2-47d1-b88b-ec9061e15ab8.png"></center>
+
+Entonces, hicimos nuestra parte. El resto depende de usted. Estos consejos son un punto de partida; escucha a tu cerebro y averigua qué funciona para ti y qué no. Probar cosas nuevas.
 
 ## “Vas a tener que instalar Git (macOS)”
 ## “Vas a tener que instalar Git (Windows)”
