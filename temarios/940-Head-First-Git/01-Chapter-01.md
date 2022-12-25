@@ -246,12 +246,118 @@ El resultado de **`mkdir`** no es muy alentador, por decir lo menos. Pero mientr
 
 ![image](https://user-images.githubusercontent.com/23094588/209477516-8750587f-18cc-406b-b5b5-fdda84cf3a6c.png)
 
-<img width="1380" alt="image" src="https://user-images.githubusercontent.com/23094588/209477189-25d97ab6-f2cb-4cbe-b56e-3593a5cdc7bd.png">
+<hr>
 
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
 
-## “Más en la línea de comandos (casi ahí): cambiando directorios con `cd”
+Use la terminal para enumerar todos los archivos en el directorio actual. Vea si puede encontrar su archivo **`my-first-commandline-directory`**.
+
+Luego use la bandera **`-A`** y vea si hay carpetas ocultas en el directorio actual.
+
+<img width="1390" alt="image" src="https://user-images.githubusercontent.com/23094588/209477682-d94ea450-1e6b-42b5-a28f-2ea22ad096c0.png">
+
+-------> Respuestas en “Sharpen your pencil Solution”.
+
+## “Más en la línea de comandos (casi ahí): cambiando directorios con `cd`”
+
+![image](https://user-images.githubusercontent.com/23094588/209477713-8e859b40-bd46-4c71-84a1-2fd6efff966f.png)
+
+A continuación, ¡muévete! Creamos un nuevo directorio, pero ¿cómo navegamos hasta él? Para eso, tenemos el comando **`cd`**, que significa "change directory". Una vez que cambiamos de directorio, podemos usar **`pwd`** para asegurarnos de que efectivamente cambiamos de ubicación.
+
+![image](https://user-images.githubusercontent.com/23094588/209477779-f4557491-9446-463a-b559-c173b9af4c6e.png)
+
+**`cd`** navega a un subdirectorio bajo el directorio actual. Para volver al directorio principal, también podemos usar **`cd`**, así:
+
+![image](https://user-images.githubusercontent.com/23094588/209477795-89bea294-f592-4b54-8467-ef7cbfb0ba53.png)
+
+**Mantenga siempre un registro de su directorio de trabajo (usando **`pwd`**)**; la mayoría de las operaciones en la línea de comando son *relativas* a este directorio**.
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209477846-6e827ce1-1b85-47d2-917d-8b892a283ab0.png)
+
+Adelante, prueba el cambio de directorios. Use **`cd`** para saltar a su carpeta **`my-first-commandline-director`** recién creada, luego use **`pwd`** para asegurarse de que cambió de directorio y luego use **`cd ..`** para volver a la carpeta principal. Use este espacio como un bloc de notas para practicar los comandos a medida que los usa.
+
+<img width="1394" alt="image" src="https://user-images.githubusercontent.com/23094588/209477968-4289a3ae-6cc5-48f7-99fd-a225f87d9004.png">
+
+-------> Respuestas en “Exercise Solution”.
+
+<hr>
+
+### No hay argumento allí
+
+Las funciones de línea de comandos como **`pwd`** y **`mkdir`** son los "comandos" que estamos invocando. Algunos comandos, como **`mkdir`** y **`cd`**, esperan que les digas qué quieres crear o adónde ir. La forma en que los proporcionamos es mediante el uso de "argumentos".
+
+![image](https://user-images.githubusercontent.com/23094588/209478039-258baf76-d354-4b0e-a052-fd90d4238d62.png)
+
+Quizás se pregunte por qué elegimos usar guiones en lugar de espacios. Resulta que usar espacios en los argumentos puede ser bastante complicado. Verá, la línea de comando usa esto para separar el comando de sus argumentos. Por lo tanto, puede ser muy confuso para la línea de comando si sus argumentos también tienen espacios.
+
+![image](https://user-images.githubusercontent.com/23094588/209478072-2ef2af7a-8ecd-415b-bfbe-74efd2d89c1a.png)
+
+Para la línea de comando, el espacio en blanco actúa como separador. Pero si ponemos espacios en los argumentos, es difícil para la línea de comando discernir si está pasando varios argumentos o un argumento con varias palabras.
+
+Por lo tanto, cada vez que tenga un espacio en blanco en un argumento y desee tratarlo como un solo argumento, debe usar comillas.
+
+![image](https://user-images.githubusercontent.com/23094588/209478109-f43b526f-8a53-4c71-8ce7-e3d486666daf.png)
+
+**Como puede ver, es fácil equivocarse cuando usa espacios en blanco en los argumentos. ¿Nuestro consejo? Intente evitar los espacios en blanco en los nombres de archivo y las rutas.**
+
+<hr>
+
+**NOTA**
+
+Por ejemplo, es mejor tener **`C:\my-projects\`** que **`C:\my projects\`** como ruta.
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209478170-7d01d699-6f5a-4699-995f-ad85dafbdd9e.png)
+
+**Gran pregunta**. A la línea de comando realmente no le importa si usa comillas dobles o simples. Lo que hay que recordar es que hay que ser constante. Si comienza el nombre del argumento con comillas simples, termínelo con una comilla simple. Lo mismo para las comillas dobles.
+
+Por lo general, la mayoría de las personas que usan la línea de comando tienden a preferir las comillas dobles y nosotros también; sin embargo, hay una situación en la que se verá obligado a usar comillas dobles, y es si su argumento tiene una comilla simple.
+
+Tenga en cuenta que en este caso estamos usando una comilla simple en la palabra **`sangita’s`**:
+
+![image](https://user-images.githubusercontent.com/23094588/209478216-91ea8721-ea35-477d-8d03-6cdc7ab7cdc1.png)
+
+Lo contrario también es cierto si necesita usar comillas dobles en su argumento, en cuyo caso deberá rodear su argumento con comillas simples.
+
+Sin embargo, a esto aludimos; es mejor si evitamos los espacios en blanco en nuestros argumentos, particularmente en los nombres de directorios y archivos. **Cada vez que necesite un espacio, simplemente use un guión o un guión bajo**. Esto le ayuda a evitar el uso de comillas (de cualquier tipo) al proporcionar argumentos.
+
+<hr>
+
+**¿QUIEN HACE QUE?**
+
+Con la línea de comandos, hay muchos comandos y banderas ondeando. En este juego de quién hace qué, relaciona cada comando con su descripción.
+
+![image](https://user-images.githubusercontent.com/23094588/209478279-4ca0d0cd-3bee-4e96-b12b-e3ab2bc09f7f.png)
+
+**Solución:** **`pwd`**, **`mkdir`**, **`cd ..`**, **`cd`**, **`ls`** y **`ls -A`**
+
 ## "Limpiar"
+
+![image](https://user-images.githubusercontent.com/23094588/209478365-496b1869-e280-40a5-91fb-7fd25e784c56.png)
+
+Ahora que ha terminado con esta sección, le sugerimos que limpie las carpetas que creó como **`my-first-commandline-directory`** y cualquier otra. Para esto, simplemente use el Explorador o la ventana del Finder y elimínelos. Si bien la línea de comandos le ofrece formas de hacer esto, la eliminación de archivos mediante la línea de comandos generalmente pasa por alto la papelera. En otras palabras, es difícil de recuperar si elimina accidentalmente la carpeta incorrecta.
+
+En el futuro, cuando se familiarice más con la línea de comandos, tal vez pueda usar el comando apropiado para eliminar archivos, pero por ahora, vayamos a lo seguro.
+
 ## “Creando tu primer repositorio”
+
+Dediquemos un poco de tiempo a familiarizarnos con Git. Ya tiene Git instalado, por lo que esto nos dará la oportunidad de asegurarnos de que todo esté configurado y tener una idea de lo que se necesita para crear un repositorio de Git. Para hacer eso, necesitará una ventana de terminal. ¡Eso es!
+
+Comience abriendo una ventana de terminal como hicimos en el ejercicio anterior. Solo para que las cosas sean más fáciles de administrar, le sugerimos que cree una carpeta **`my-headfirst-git-samples`** para albergar **todos** los ejemplos de este libro. Dentro, continúe y cree una nueva carpeta para nuestro primer ejercicio del **Capítulo 1**, llamada **`ch01_01`**.
+
+![image](https://user-images.githubusercontent.com/23094588/209478506-840dabb4-e844-4761-be28-d4a603c0be38.png)
+
+<img width="1396" alt="image" src="https://user-images.githubusercontent.com/23094588/209478551-7cbd119b-10c1-4816-8599-679fb18a06ae.png">
+
+Ahora que estamos en un directorio completamente nuevo, creemos nuestro primer repositorio de Git. Para hacer esto, simplemente ejecutamos **`git init`** dentro de nuestra carpeta recién creada.
+
+![image](https://user-images.githubusercontent.com/23094588/209478588-d67d5696-3c8e-49cd-846d-283cc5043e6f.png)
+
+
+
 ## “Dentro del comando init”
 ## “Preséntate a Git”
 ## "Poniendo Git a trabajar"
@@ -265,3 +371,11 @@ El resultado de **`mkdir`** no es muy alentador, por decir lo menos. Pero mientr
 ## “El índice es un “bloc de notas””
 ## “¡Computadora, informe de estado!”
 ## “¡Has hecho historia!”
+
+Lapiz
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
+
+Exercice
+![image](https://user-images.githubusercontent.com/23094588/209477852-56e84a65-5e83-4ce3-a3eb-ebd2e27a797d.png)
+
