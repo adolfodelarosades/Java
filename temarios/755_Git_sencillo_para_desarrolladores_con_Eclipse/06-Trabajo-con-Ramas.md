@@ -73,7 +73,6 @@ Observemos lo siguiente, en el explorador ya nos indica que estamos en la rama *
 
 <img width="292" alt="image" src="https://user-images.githubusercontent.com/23094588/208861216-0aace34a-4426-4443-9970-0ec6b2fd17d4.png">
 
-
 Y en el **History** observamos como **HEAD** se a colocado a la altura de **master** para indicar que es la posición donde estamos ubicados actualmente.
 
 <img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/208861356-059c7503-dbd9-489d-b676-190ea04364ee.png">
@@ -94,15 +93,19 @@ Y ya esta, observemos varias cosas, estamos colocados en la rama **master** y ya
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208863607-79bfba43-56db-40fa-b1d4-42ecd0575778.png">
 
-Con todo lo que hemos logrado es realizar una nueva funcionalidad en nuestra propia rama y cuando la terminamos incorporamos todos los cambios dentro de nuestra rama principal **master**. Para ver las ramas actuales podemos entrar en **Git Repositorie > Branches > Local**.
-
-<img width="1221" alt="image" src="https://user-images.githubusercontent.com/23094588/208870290-1db09295-5a36-475c-8ab9-c87060f83aac.png">
+Con todo lo que hemos logrado es realizar una nueva funcionalidad en nuestra propia rama y cuando la terminamos incorporamos todos los cambios dentro de nuestra rama principal **master**. 
 
 ## Borrar ramas 01:17
 
 Cuando trabajamos con ramas puede llegar el momento en que podemos llegar a tener muchas ramas.
 
-Podemos obtar por conservar todas las ramas por si nos interesa saber que fuimos haciendo en cada nueva funcionalidad y poder volver a ellas o podemos optar a borrarla una vez que ya hemos incorporado los cambios a la rama principal. En este caso vamos a eliminar la rama **caracteristica_1** pulsando botón derecho en ella y seleccionar **Delete Branch**.
+Para ver las ramas actuales podemos entrar en **Git Repositorie > Branches > Local**.
+
+<img width="1221" alt="image" src="https://user-images.githubusercontent.com/23094588/208870290-1db09295-5a36-475c-8ab9-c87060f83aac.png">
+
+Podemos optar por conservar todas las ramas, por si nos interesa saber que fuimos haciendo en cada nueva funcionalidad y poder volver a ellas o podemos optar a borrarla una vez que ya hemos incorporado los cambios a la rama principal. 
+
+En este caso vamos a eliminar la rama **caracteristica_1** pulsando botón derecho en ella y seleccionar **Delete Branch**.
 
 <img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/208871082-ab254934-f30b-482b-9e92-53ad12d4d6a6.png">
 
@@ -114,8 +117,112 @@ Si revisamos el **History** ya no queda rastro de la que alguna vez tuvimos la r
 
 <img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/208871482-6ceddd11-b31b-4c84-a8c2-2188959aa542.png">
 
-
 ## Varias ramas 06:18
+
+Una vez que hemos visto con una rama, vamos a ver como se trabaja con varias ramas a la vez, para ello vamos a crear una nueva rama llamada **`rama_1`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208882883-a28cbae4-3013-4e74-ade3-ed6b2ef88ea1.png">
+
+<img width="591" alt="image" src="https://user-images.githubusercontent.com/23094588/208883089-5a4d614d-6039-4468-91c9-64a742834751.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208883158-38ef312d-d461-4994-9f00-490f4e6050e9.png">
+
+Ya tenemos la nueva rama **`rama_1`** y estamos colocados en ella.
+
+Vamos a crear una segunda rama llamada **`rama_2`**.
+
+<img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208883638-855e39d8-5a66-44a0-92c6-c72f202e8866.png">
+
+**Aquí debemos tener cuidado por que debemos partir de master y no de rama_1 que es la rama en la que estamos** vamos a cambiarla.
+
+<img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208884000-65700c27-c7ae-4d60-ae60-ee97928d7889.png">
+
+Ya tenemos creadas las dos ramas nuevas y actualmente estamos colocados en **`rama_2`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208884160-d02b133e-8f06-4002-8d94-f3a602800022.png">
+
+En el **History** vemos que todo **master**, **rama_1**, **rama_2** y **HEAD** esta a la misma altura ya que hemos creado las dos nuevas ramas pero no hemos realizado ningún commit.
+
+<img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/208884710-eb78d7e5-36bc-498d-8d7b-11fd112c1977.png">
+
+La primera tarea que vamos a hacer es en la **rama_1** sobre el archivo **fichero_1.txt** y realizamos el commit.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208885804-5cc9b54e-8c9b-4dd9-b0ce-37b887c0288e.png">
+
+Si vamos a **History** vemos el commit que hemos realizado.
+
+<img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/208886060-147054b4-d539-4f3f-8ade-ba2348c964f1.png">
+
+Aquí vemos claramente que la **rama_1** junto con **HEAD** se ha ido por delante de **master** y **rama_2**.
+
+Ahora lo que vamos a hacer es irnos a la **rama_2** y vamos a ver el contenido del archivo **fichero_1.txt**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208888365-89d2bf88-641e-4640-939f-a4a48c176f9e.png">
+
+Observamos que los cambios que habíamos realizado en **fichero_1.txt** han desaparecido. Además de que 
+**HEAD** se ha movido junto a **master** y **rama_2**.
+
+Vamos a cambiar un archivo diferente **caracteristica_1.txt** para evitar problemas de conflictos y lo vamos a commitear.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208889126-a7df40b9-da18-464c-974d-2d8a37a1cf0b.png">
+
+Si vamos a **History** vemos las diferentes ramas.
+
+<img width="1228" alt="image" src="https://user-images.githubusercontent.com/23094588/208889415-008a1d1b-90ff-4981-b668-5fb1d346c7f2.png">
+
+Lo que nos dice que a partir de la rama **master** hemos creado la **rama_1** y le hemos hecho un commit y tambien vemos que a partir de la rama **master** hemos creado la **rama_2** hemos hecho un commit y que es la rama donde estamos actualmente.
+
+Hemos hecho dos nuevas funcionalidades en paralelo, ahora lo que vamos a hacer es integrarlas en nuestra rama principal, para lo cual vamos a cambiarnos a la rama **master**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208891044-54bc88c6-e836-4868-9ae4-992b74f951fc.png">
+
+Observemos que el cambio hecho en tanto en **fichero_1.txt** como en **caracteristica_1.txt** han desaparecido y ahora **HEAD** esta a la altura de **master**.
+
+Entonces vamos a empezar con el Mergeo.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208891665-cedc569d-5b02-416e-952f-d2fe39de7a69.png">
+
+Vamos a comenzar por mergear la rama **rama_2**.
+
+<img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208891849-1c79add9-8569-4387-811d-fe68785e93bc.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208891902-03e94131-f1f0-481d-a15d-cda6432f3661.png">
+
+En **History** podemos apreciar que **master** y **HEAD** se han colocado a la altura de **rama_2**.
+
+Ahora vamos a mergear la rama **rama_1**.
+
+<img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208892652-289b37db-e628-442e-a8ca-6288e3db69f2.png">
+
+En **History** nuestro dibujo a cambiado.
+
+<img width="1225" alt="image" src="https://user-images.githubusercontent.com/23094588/208892806-4446e719-3040-4530-91fb-923aeafe5734.png">
+
+Lo que nos dice es que tanto la **rama_1** y la **rama_2** las ha incorporado a **master**. La **rama_1** la pinta realmente como una rama que salio de **master**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Fastforward 07:03
 ## Rebase 04:50
 ## Modificar commit 02:30
