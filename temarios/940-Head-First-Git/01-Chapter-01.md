@@ -356,9 +356,58 @@ Ahora que estamos en un directorio completamente nuevo, creemos nuestro primer r
 
 ![image](https://user-images.githubusercontent.com/23094588/209478588-d67d5696-3c8e-49cd-846d-283cc5043e6f.png)
 
+<img width="1384" alt="image" src="https://user-images.githubusercontent.com/23094588/209478653-f034a4c9-5174-4d4f-a786-5fef3b03c09a.png">
+
+Eso fue bastante indoloro, ¿no? Y ahí lo tienes: tu primer repositorio de Git.
+
+## “Dentro del comando `init`”
+
+![image](https://user-images.githubusercontent.com/23094588/209478704-67a25317-6381-4340-9f56-9fbf6609dfe3.png)
+
+Entonces, ¿qué acabamos de lograr exactamente? Puede que el comando **`git init`** no parezca gran cosa, pero seguro que tiene un gran impacto. Quitemos las tapas para ver lo que realmente hizo.
+
+Para empezar, comenzamos con un directorio nuevo y vacío.
+
+![image](https://user-images.githubusercontent.com/23094588/209478739-57cd9618-1f1f-446d-bc95-b1acd0d13e09.png)
+
+Usando la terminal, navegamos a la ubicación de la carpeta e invocamos las palabras mágicas **`git init`**, donde **`init`** es la abreviatura de inicializar. Git se da cuenta de que le estamos pidiendo que cree un repositorio en esta ubicación y responde creando una carpeta oculta llamada **`.git`** y la rellena con algunos archivos de configuración y una subcarpeta donde almacenará nuestras instantáneas cuando se lo solicitemos.
+
+![image](https://user-images.githubusercontent.com/23094588/209478780-7b92bd16-3d4d-4880-bf28-78bac8982bc2.png)
+
+Una forma de confirmar que esto sucedió es hacer una lista de todos los archivos usando nuestra terminal, así.
+
+![image](https://user-images.githubusercontent.com/23094588/209478799-e8c9c9b0-114f-4f4c-872d-7194776219eb.png)
+
+Esta carpeta oculta representa el repositorio de Git. Su trabajo es almacenar todo lo relacionado con su proyecto, incluidas todas las confirmaciones, el historial del proyecto, los archivos de configuración, lo que tenga. También almacena cualquier configuración y configuración específica de Git que haya habilitado para este proyecto en particular.
+
+<img width="1390" alt="image" src="https://user-images.githubusercontent.com/23094588/209478845-f3ed45b5-5401-4fa5-bd4b-d00770cc7c4d.png">
+
+<img width="758" alt="image" src="https://user-images.githubusercontent.com/23094588/209478865-52b8c5c3-b3e8-457f-b081-1947a11045aa.png">
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: Prefiero usar mi explorador de sistema de archivos cuando navego por mi computadora. ¿Puedo usar eso para ver la .git carpeta?**
+
+**R**: ¡Por supuesto! De forma predeterminada, la mayoría de los sistemas operativos no revelan archivos y carpetas ocultos en el explorador. Asegúrese de mirar sus preferencias y asegúrese de que puede ver los archivos y carpetas ocultos.
+
+**P: ¿Qué sucede si alguien elimina accidentalmente este directorio?**
+
+**R**: En primer lugar, no hagamos eso. En segundo lugar, este directorio es la "bóveda" en la que Git almacena toda su información, incluido el historial completo de su proyecto y un montón de otros archivos que Git necesita para el mantenimiento y algunos archivos de configuración que podemos usar para personalizar nuestra experiencia con Git. Esto significa que si elimina esta carpeta, perderá todo el historial del proyecto. Sin embargo, todos los demás archivos en la carpeta de su proyecto no se verán afectados.
+
+**P: ¿Qué sucede si accidentalmente ejecuto git init más de una vez en la misma carpeta?**
+
+**R**: Buena pregunta. Esto es completamente seguro. Git simplemente te dirá que está reiniciando el repositorio de Git, pero no perderás ningún dato ni dañarás nada. De hecho, deberías probarlo en ch01_01. Estamos al principio de nuestro viaje, y la mejor manera de aprender es experimentar. ¿Qué tienes que perder?
+
+**P: Otros sistemas de control de versiones que he usado tienen un componente de servidor. ¿No necesitamos eso aquí?**
+
+**R**: Comenzar con Git es muy fácil. git initcrea un repositorio de Git y puede ponerse a trabajar. Eventualmente, necesitará un mecanismo para compartir su trabajo con sus compañeros de equipo, y le prometemos que lo lograremos lo suficientemente pronto. Pero por ahora, ya está todo listo.
+
+<hr>
 
 
-## “Dentro del comando init”
+
 ## “Preséntate a Git”
 ## "Poniendo Git a trabajar"
 ## “Trabajando con el repositorio HawtDawg Git”
