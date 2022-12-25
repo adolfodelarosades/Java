@@ -122,12 +122,134 @@ No importa cuán grande sea su proyecto (en otras palabras, no importa cuántos 
 ![image](https://user-images.githubusercontent.com/23094588/209468959-896cef2e-363b-4673-95d9-8e9fa9068ab0.png)
 
 
-## “Un recorrido rápido por la línea de comandos: saber dónde estás con `pwd`”
+### “Un recorrido rápido por la línea de comandos: saber dónde estás con `pwd`”
+
+Una cosa que va a utilizar mucho mientras trabaja en los ejercicios de este libro es la línea de comandos, así que dediquemos un poco de tiempo a familiarizarnos con ella. Comience abriendo una ventana de terminal como hicimos en la introducción y navegue hasta una ubicación en su disco duro. Como recordatorio, en la Mac encontrarás la aplicación **`Terminal.app`** en la carpeta **`Applications > Utilities`**. En Windows, navegue con el botón Inicio y debería ver Git Bash en la opción de menú Git. Será recibido con un mensaje, y esa es su señal de que el terminal está listo para aceptar comandos.
+
+<hr>
+
+**NOTA**
+
+Si esto no te suena familiar, asegúrate de volver a la introducción. Hemos enumerado algunas instrucciones para usted en la sección "Va a tener que instalar Git".
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209476460-f34dabd6-4b39-477e-96b4-cbc711304308.png)
+
+Comencemos con algo fácil. Escriba **`pwd`** y presione return; **`pwd`** significa "print working directory" y muestra la ruta del directorio en el que se está ejecutando actualmente el terminal. En otras palabras, si tuviera que crear un nuevo archivo o un nuevo directorio, aparecerían en este directorio.
+
+![image](https://user-images.githubusercontent.com/23094588/209476505-108abc23-4bcb-44e1-9938-1031d54eea36.png)
+
+<img width="1071" alt="image" src="https://user-images.githubusercontent.com/23094588/209476579-b02bafdc-8923-43fc-add9-60eb49517630.png">
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
+
+<hr>
+
+**NOTA**
+
+Encontrará las respuestas a los ejercicios de Sharpen Your Pencil al final de cada capítulo.
+
+Usuarios de Windows: cuando decimos terminal, dicen... ¡¡Git Bash!!
+
+<hr>
+
+¡Es hora de ponerse a trabajar! Inicie la terminal y use el comando **`pwd`**. Anote el resultado que ve aquí: **`/Users/adulfodelarosa`**
+
+¡Estupendo! Si es la primera vez que usa el terminal o no está muy familiarizado con él, entonces puede ser un poco desalentador. Pero sepa esto: lo guiaremos en cada paso del camino, no solo para este ejercicio, sino para todos los ejercicios de este libro.
 
 
-## “Más sobre la línea de comandos: creando nuevos directorios con mkdir”
-## “(Incluso) Más en la línea de comando: listado de archivos con ls”
-## “Más en la línea de comandos (casi ahí): cambiando directorios con cd”
+-------> Respuestas en “Sharpen your pencil Solution”.
+
+<hr>
+
+## “Más sobre la línea de comandos: creando nuevos directorios con `mkdir`”
+
+![image](https://user-images.githubusercontent.com/23094588/209476747-53443692-bc55-4e62-906c-e2864ab9428d.png)
+
+Conocer la ubicación del directorio actual en el terminal usando **`pwd`** es muy útil porque casi todo lo que hace es relativo al directorio actual, lo que incluye la creación de nuevas carpetas. Hablando de nuevas carpetas, el comando para crear nuevas carpetas es **`mkdir`**, que significa "make directory".
+
+A diferencia de **`pwd`**, que simplemente te dice la ruta del directorio actual, **`mkdir`** toma un *argumento*, que es el nombre del directorio que deseas crear:
+
+![image](https://user-images.githubusercontent.com/23094588/209476863-39cf0660-e160-4041-a529-990abbf1e37c.png)
+
+A diferencia de **`pwd`**, que simplemente te dice la ruta del directorio actual, **`mkdir`** toma un *argumento*, que es el nombre del directorio que deseas crear:
+
+**`mkdir`, se producirá un error si intenta crear un directorio con un nombre que ya existe.** 
+
+*Si intenta crear un nuevo directorio con el mismo nombre que uno que ya existe en el directorio actual,* **`mkdir`** *simplemente informará* **`File exists`** *y no hará nada. Además, no deje que el "file" en "File exists" lo confunda; en este caso, simplemente significa carpeta*.
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
+
+<hr>
+
+**NOTA**
+
+Asegúrese de verificar su respuesta con nuestra solución al final del capítulo.
+
+En mi caso trabajare dentro de la carpeta **`/Users/adulfodelarosa/Documents/PROYECTOS/VSC/940-Head-First-Git`** así que lo primero será cambiarme a esa carpeta.
+
+<img width="1380" alt="image" src="https://user-images.githubusercontent.com/23094588/209477189-25d97ab6-f2cb-4cbe-b56e-3593a5cdc7bd.png">
+
+<hr>
+
+Tu turno. En la ventana de terminal que tiene abierta, continúe y use **`mkdir`** para crear un nuevo directorio llamado my-**`my-first-commandline-directory`**.
+
+<hr>
+
+**NOTA**
+
+Recuerde, para Windows, terminal es igual a Git Bash.
+
+<hr>
+
+<hr>
+
+**NOTA**
+
+Escribe el comando y el argumento que usaste aquí. 
+
+**`mkdir my-first-commandline-directory`**
+
+<hr>
+
+<img width="1384" alt="image" src="https://user-images.githubusercontent.com/23094588/209477221-7216e5c7-7f4a-433e-b074-3de69f1f0f8b.png">
+
+
+A continuación, ejecute el mismo comando nuevamente, en el mismo directorio. Anota el error que ves aquí:
+
+<hr>
+
+**NOTA**
+
+El error va aquí.
+
+**`mkdir: my-first-commandline-directory: File exists`**
+
+<hr>
+
+<img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209477256-a79d9f5d-5e08-46e4-9c41-db37d3746b9d.png">
+
+-------> Respuestas en “Sharpen your pencil Solution”.
+
+<hr>
+
+## “(Incluso) Más en la línea de comando: listado de archivos con `ls`”
+
+El resultado de **`mkdir`** no es muy alentador, por decir lo menos. Pero mientras no obtuviera ningún error, hizo su trabajo. Para confirmar si sucedió algo, puede enumerar todos los archivos en el directorio actual. El comando de listado se llama **`ls`** (abreviatura de lista).
+
+![image](https://user-images.githubusercontent.com/23094588/209477427-ccc6d454-d619-418f-8fb3-b79b2a66b777.png)
+
+**`ls`** de forma predeterminada, solo enumera archivos y carpetas normales. De vez en cuando (y vamos a necesitar esto lo suficientemente pronto) querrás ver también los archivos y carpetas ocultos. Para hacer eso, puede proporcionar **`ls`** con una *bandera*. Los ***indicadores***, a diferencia de los ***argumentos***, tienen un *prefijo con un guión* (para diferenciarlos de los argumentos). Para ver "all(todos)" los archivos y carpetas (incluidos los ocultos) podemos usar el indicador "A" (¡Sí! Mayúscula "A"), así:
+
+![image](https://user-images.githubusercontent.com/23094588/209477516-8750587f-18cc-406b-b5b5-fdda84cf3a6c.png)
+
+<img width="1380" alt="image" src="https://user-images.githubusercontent.com/23094588/209477189-25d97ab6-f2cb-4cbe-b56e-3593a5cdc7bd.png">
+
+
+## “Más en la línea de comandos (casi ahí): cambiando directorios con `cd”
 ## "Limpiar"
 ## “Creando tu primer repositorio”
 ## “Dentro del comando init”
