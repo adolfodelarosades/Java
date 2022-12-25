@@ -436,9 +436,83 @@ Comenzaremos con nuestro viejo amigo de confianza, la terminal, y seguiremos ade
 
 <img width="1148" alt="image" src="https://user-images.githubusercontent.com/23094588/209479214-814cc9e5-3667-4621-a5a0-06dc445782df.png">
 
+### Cómo usarás Git
+
+Veamos cómo es una interacción típica con Git. ¿Recuerdas que hablamos sobre los videojuegos que te permiten guardar tu progreso? Bueno, pedirle a Git que "guarde su progreso" implica "enviar" su trabajo a Git. Básicamente, esto significa que Git almacena una revisión de su trabajo. Una vez que haga eso, puede continuar trabajando alegremente hasta que sienta que es hora de almacenar otra revisión, y el ciclo continúa. Veamos cómo funciona esto.
+
+![image](https://user-images.githubusercontent.com/23094588/209479285-bf67b980-de8e-4ce1-8eab-a7e7f7becfaf.png)
 
 ## "Poniendo Git a trabajar"
+
+Estamos seguros de que tienes muchas ganas de empezar (¡sabemos que lo estamos!). Hasta ahora, hemos inicializado un repositorio de Git, le hemos dicho a Git nuestro nombre y correo electrónico, y tenemos una idea de cómo solemos trabajar con Git. Entonces, ¿qué tal si realmente ponemos Git a trabajar? Comenzaremos poco a poco y simplemente pondremos a Git a prueba: veremos cómo "tomar una instantánea" en Git creando un "commit(confirmación)".
+
+Por el bien de este ejercicio, supongamos que comenzamos a trabajar en un nuevo proyecto. Por lo general, comenzamos con una lista de verificación para que podamos realizar un seguimiento de todo lo que tenemos que hacer. A medida que avanzamos con el proyecto, seguimos marcando cosas (¡tenemos que mantener esa dopamina fluyendo!), y a medida que aprendemos más sobre el proyecto, seguimos agregando cosas. Naturalmente, este archivo tiene una versión controlada con el resto de los archivos del proyecto, para lo cual usaremos Git.
+
+Analicemos lo que vamos a hacer, paso a paso.
+
+**Paso uno**:
+
+Cree una nueva carpeta de proyecto.
+
+<hr>
+
+**NOTA**
+
+Estos dos pasos deberían ser bastante familiares para usted.
+
+<hr>
+
+**Segundo paso**:
+
+Inicialice un repositorio de Git dentro de esa carpeta.
+
+<hr>
+
+**NOTA**
+
+Estos dos pasos deberían ser bastante familiares para usted.
+
+<hr>
+
+**Paso tres**:
+
+Cree nuestra lista de verificación(***checklist***) con algunos elementos para comenzar.
+
+**Paso cuatro**:
+
+Almacene una instantánea(***snapshot***) de nuestra lista de verificación en Git al confirmar(***committing***) el archivo.
+
+<hr>
+
+**NOTA**
+
+Ahora eso es lo que hemos estado esperando!
+
+<hr>
+
 ## “Trabajando con el repositorio HawtDawg Git”
+
+![image](https://user-images.githubusercontent.com/23094588/209479465-51df594b-bf40-4b14-8990-30656c7db7ae.png)
+
+<img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209479581-8406fd47-1922-450b-a0ea-4e965a96d05e.png">
+
+### Trabajando con el repositorio HawtDawg Git
+
+A continuación, cree un nuevo documento en su editor de texto favorito y escriba las siguientes líneas de texto. Si siguió las instrucciones en la introducción para instalar Visual Studio Code, al igual que el terminal, lo encontrará **`Visual Studio Code.app`** dentro de la carpeta **`Applications`**. En Windows, simplemente haga clic en el menú Inicio y debería ver Visual Studio Code en la lista de todas las aplicaciones instaladas en su máquina.
+
+<hr>
+
+**NOTA**
+
+Para crear un nuevo archivo, simplemente haga clic en el elemento del menú Archivo en la parte superior y seleccione "Nuevo archivo".
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209479646-e24af375-9fde-4a97-93d8-5c67358cf7d6.png)
+
+[Guía Markdown](https://www.markdownguide.org/)
+ 
+
 ## “¿Qué significa exactamente cometer?”
 ## "Mira antes de saltar"
 ## “Las tres etapas de Git”
