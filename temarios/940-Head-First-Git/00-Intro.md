@@ -118,27 +118,30 @@ Pero las imágenes y el estilo conversacional son solo el comienzo...
 
 ## "Esto es lo que hicimos NOSOTROS"
 
-Usamos imágenes , porque tu cerebro está sintonizado para imágenes, no para texto. En lo que respecta a su cerebro, una imagen realmente vale más que mil palabras. Y cuando el texto y las imágenes funcionan juntos, incrustamos el texto en las imágenes porque su cerebro funciona de manera más efectiva cuando el texto está dentro de la cosa a la que se refiere, a diferencia de un pie de foto o enterrado en un párrafo en alguna parte.
+Usamos ***imágenes***, porque tu cerebro está sintonizado para imágenes, no para texto. En lo que respecta a su cerebro, una imagen realmente *vale* más que mil palabras. Y cuando el texto y las imágenes funcionan juntos, incrustamos el texto *en* las imágenes porque su cerebro funciona de manera más efectiva cuando el texto está *dentro de* la cosa a la que se refiere, a diferencia de un pie de foto o enterrado en un párrafo en alguna parte.
 
-Usamos la redundancia , decir lo mismo de diferentes maneras y con diferentes tipos de medios y múltiples sentidos , para aumentar la posibilidad de que el contenido se codifique en más de un área de su cerebro.
+Usamos la ***redundancia***, decir lo mismo de *diferentes* maneras y con diferentes tipos de medios y múltiples *sentidos*, para aumentar la posibilidad de que el contenido se codifique en más de un área de su cerebro.
 
-Usamos conceptos e imágenes de maneras inesperadas porque tu cerebro está sintonizado para la novedad, y usamos imágenes e ideas con al menos algo de contenido emocional , porque tu cerebro está sintonizado para prestar atención a la bioquímica de las emociones. Lo que te hace sentir algo tiene más probabilidades de ser recordado, incluso si ese sentimiento no es más que un poco de humor , sorpresa o interés .
+Usamos conceptos e imágenes de maneras ***inesperadas*** porque tu cerebro está sintonizado para la novedad, y usamos imágenes e ideas con al menos *algo de contenido **emocional*** , porque tu cerebro está sintonizado para prestar atención a la bioquímica de las emociones. Lo que te hace *sentir* algo tiene más probabilidades de ser recordado, incluso si ese sentimiento no es más que un poco de ***humor***, ***sorpresa*** o ***interés***.
 
-Usamos un estilo conversacional personalizado , porque su cerebro está sintonizado para prestar más atención cuando cree que está en una conversación que si cree que está escuchando pasivamente una presentación. Tu cerebro hace esto incluso cuando estás leyendo .
+Usamos un ***estilo conversacional*** personalizado , porque su cerebro está sintonizado para prestar más atención cuando cree que está en una conversación que si cree que está escuchando pasivamente una presentación. Tu cerebro hace esto incluso cuando estás *leyendo*.
 
-Incluimos docenas de actividades , porque tu cerebro está sintonizado para aprender y recordar más cuando haces cosas que cuando lees sobre cosas. E hicimos los ejercicios desafiantes pero factibles, porque eso es lo que la mayoría de la gente prefiere.
+Incluimos docenas de ***actividades***, porque tu cerebro está sintonizado para aprender y recordar más cuando ***haces*** cosas que cuando *lees* sobre cosas. E hicimos los ejercicios desafiantes pero factibles, porque eso es lo que la mayoría de la gente prefiere.
 
-Usamos múltiples estilos de aprendizaje , porque es posible que prefiera procedimientos paso a paso, mientras que otra persona quiere comprender primero el panorama general y otra persona solo quiere ver un ejemplo. Pero independientemente de su propia preferencia de aprendizaje, todos se benefician al ver el mismo contenido representado de múltiples maneras.
+Usamos ***múltiples estilos de aprendizaje***, porque *es* posible que prefiera procedimientos paso a paso, mientras que otra persona quiere comprender primero el panorama general y otra persona solo quiere ver un ejemplo. Pero independientemente de su propia preferencia de aprendizaje, *todos* se benefician al ver el mismo contenido representado de múltiples maneras.
 
-Incluimos contenido para ambos lados de su cerebro , porque cuanto más se involucre su cerebro, más probable será que aprenda y recuerde, y más tiempo podrá concentrarse. Dado que trabajar un lado del cerebro a menudo significa darle al otro lado la oportunidad de descansar, puede ser más productivo en el aprendizaje durante un período de tiempo más largo.
+Incluimos contenido para ***ambos lados de su cerebro***, porque cuanto más se involucre su cerebro, más probable será que aprenda y recuerde, y más tiempo podrá concentrarse. Dado que trabajar un lado del cerebro a menudo significa darle al otro lado la oportunidad de descansar, puede ser más productivo en el aprendizaje durante un período de tiempo más largo.
 
-E incluimos historias y ejercicios que presentan más de un punto de vista , porque tu cerebro está sintonizado para aprender más profundamente cuando se ve obligado a hacer evaluaciones y juicios.
+E incluimos ***historias*** y ejercicios que presentan ***más de un punto de vista***, porque tu cerebro está sintonizado para aprender más profundamente cuando se ve obligado a hacer evaluaciones y juicios.
 
-Incluimos desafíos , con ejercicios, e hicimos preguntas que no siempre tienen una respuesta directa, porque tu cerebro está sintonizado para aprender y recordar cuando tiene que trabajar en algo. Piénsalo: no puedes poner tu cuerpo en forma simplemente mirando a la gente en el gimnasio. Pero hicimos todo lo posible para asegurarnos de que cuando estás trabajando duro, sea en las cosas correctas . Que no está gastando una dendrita extra procesando un ejemplo difícil de entender, o analizando texto difícil, cargado de jerga o demasiado conciso.
+Incluimos ***desafíos*** , con ejercicios, *e* hicimos ***preguntas*** que no siempre tienen una respuesta directa, porque tu cerebro está sintonizado para aprender y recordar cuando tiene que *trabajar* en algo. Piénsalo: no puedes poner tu *cuerpo* en forma simplemente *mirando* a la gente en el gimnasio. Pero hicimos todo lo posible para asegurarnos de que cuando estás trabajando duro, sea en las cosas *correctas*. Que ***no está gastando una dendrita extra*** procesando un ejemplo difícil de entender, o analizando texto difícil, cargado de jerga o demasiado conciso.
 
-Usábamos personas . En historias, ejemplos, visuales, etc., porque, bueno, porque eres una persona. Y tu cerebro presta más atención a las personas que a las cosas .
+Usábamos ***personas***. En historias, ejemplos, visuales, etc., porque, bueno, porque *eres* una persona. Y tu cerebro presta más atención a las *personas que a las cosas*.
 
 ## "Esto es lo que TÚ puedes hacer para someter tu cerebro"
+
+<img width="231" alt="image" src="https://user-images.githubusercontent.com/23094588/209459367-d3ee8976-19b2-47d1-b88b-ec9061e15ab8.png">
+
 ## “Vas a tener que instalar Git (macOS)”
 ## “Vas a tener que instalar Git (Windows)”
 ## “Vas a necesitar un editor de texto (macOS)”
