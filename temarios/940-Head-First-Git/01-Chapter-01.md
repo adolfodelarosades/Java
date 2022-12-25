@@ -388,7 +388,7 @@ Esta carpeta oculta representa el repositorio de Git. Su trabajo es almacenar to
 
 **NO HAY PREGUNTAS TONTAS**
 
-**P: Prefiero usar mi explorador de sistema de archivos cuando navego por mi computadora. ¿Puedo usar eso para ver la .git carpeta?**
+**P: Prefiero usar mi explorador de sistema de archivos cuando navego por mi computadora. ¿Puedo usar eso para ver la `.git` carpeta?**
 
 **R**: ¡Por supuesto! De forma predeterminada, la mayoría de los sistemas operativos no revelan archivos y carpetas ocultos en el explorador. Asegúrese de mirar sus preferencias y asegúrese de que puede ver los archivos y carpetas ocultos.
 
@@ -396,19 +396,47 @@ Esta carpeta oculta representa el repositorio de Git. Su trabajo es almacenar to
 
 **R**: En primer lugar, no hagamos eso. En segundo lugar, este directorio es la "bóveda" en la que Git almacena toda su información, incluido el historial completo de su proyecto y un montón de otros archivos que Git necesita para el mantenimiento y algunos archivos de configuración que podemos usar para personalizar nuestra experiencia con Git. Esto significa que si elimina esta carpeta, perderá todo el historial del proyecto. Sin embargo, todos los demás archivos en la carpeta de su proyecto no se verán afectados.
 
-**P: ¿Qué sucede si accidentalmente ejecuto git init más de una vez en la misma carpeta?**
+**P: ¿Qué sucede si accidentalmente ejecuto `git init` más de una vez en la misma carpeta?**
 
-**R**: Buena pregunta. Esto es completamente seguro. Git simplemente te dirá que está reiniciando el repositorio de Git, pero no perderás ningún dato ni dañarás nada. De hecho, deberías probarlo en ch01_01. Estamos al principio de nuestro viaje, y la mejor manera de aprender es experimentar. ¿Qué tienes que perder?
+**R**: Buena pregunta. Esto es completamente seguro. Git simplemente te dirá que está reiniciando el repositorio de Git, pero no perderás ningún dato ni dañarás nada. De hecho, deberías probarlo en **`ch01_01`**. Estamos al principio de nuestro viaje, y la mejor manera de aprender es experimentar. ¿Qué tienes que perder?
+
+<img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209478980-56a71487-b174-4615-ae75-e74e41057abc.png">
 
 **P: Otros sistemas de control de versiones que he usado tienen un componente de servidor. ¿No necesitamos eso aquí?**
 
-**R**: Comenzar con Git es muy fácil. git initcrea un repositorio de Git y puede ponerse a trabajar. Eventualmente, necesitará un mecanismo para compartir su trabajo con sus compañeros de equipo, y le prometemos que lo lograremos lo suficientemente pronto. Pero por ahora, ya está todo listo.
+**R**: Comenzar con Git es *muy* fácil. **`git init`** crea un repositorio de Git y puede ponerse a trabajar. Eventualmente, necesitará un mecanismo para compartir su trabajo con sus compañeros de equipo, y le prometemos que lo lograremos lo suficientemente pronto. Pero por ahora, ya está todo listo.
 
 <hr>
 
+### Imanes de código
 
+![image](https://user-images.githubusercontent.com/23094588/209478993-4680e2c5-f522-4835-aa96-0361f40221c7.png)
+
+Tenemos todos los pasos enumerados para crear una nueva carpeta, cambiarla e inicializar para crear un nuevo repositorio de Git. Al ser desarrolladores diligentes, a menudo comprobamos que estamos en el directorio correcto. Para ayudar a nuestros colegas, teníamos el código muy bien colocado en nuestra nevera con imanes, pero se cayeron al suelo. Tu trabajo es volver a armarlos. Tenga en cuenta que algunos imanes pueden usarse más de una vez.
+
+![image](https://user-images.githubusercontent.com/23094588/209479028-17d8c810-400f-418f-b230-6739563407b5.png)
+
+**Solución**: 
+
+```sh
+pwd
+mkdir new-repository
+cd new-repository
+git init
+ls -A
+```
 
 ## “Preséntate a Git”
+
+Hay un paso más antes de comenzar a trabajar con Git y los repositorios de Git. Git espera que le des algunos detalles sobre ti. De esta forma, cuando creas una "instantánea", Git sabe quién la creó. Y estamos a punto de comenzar a hablar sobre la creación de instantáneas, así que terminemos con esto ahora mismo. Solo tiene que hacer esto una vez, y esto se aplicará a todos y cada uno de los proyectos con los que trabaje en su máquina.
+
+Comenzaremos con nuestro viejo amigo de confianza, la terminal, y seguiremos adelante. **¡Asegúrese de usar su nombre y correo electrónico en lugar de los nuestros!** (Sabemos que nos ama, ¡pero no nos gustaría atribuirnos el mérito de su trabajo!) Comience abriendo una nueva ventana de terminal. No se preocupe por cambiar de directorio; para esta parte de nuestra configuración, no importa dónde lo ejecute.
+
+![image](https://user-images.githubusercontent.com/23094588/209479151-4b7439f6-1c60-4b37-8064-fbd3c00fa317.png)
+
+<img width="1148" alt="image" src="https://user-images.githubusercontent.com/23094588/209479214-814cc9e5-3667-4621-a5a0-06dc445782df.png">
+
+
 ## "Poniendo Git a trabajar"
 ## “Trabajando con el repositorio HawtDawg Git”
 ## “¿Qué significa exactamente cometer?”
