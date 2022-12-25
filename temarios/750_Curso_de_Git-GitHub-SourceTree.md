@@ -1,11 +1,11 @@
 # 750 Curso de Git, GitHub & SourceTree 
 
-## [Sección 1 - Introducción al curso](https://github.com/adolfodelarosades/GIT/blob/main/001-CursoGit-GitHub-SourceTree/Seccion-01.md)
+## [Sección 1 - Introducción al curso](https://github.com/adolfodelarosades/Java/blob/master/temarios/750_Curso_de_Git-GitHub-SourceTree/Seccion-01.md)
 
 ### Clase 1: Introducción (1:14) 
 
 
-## [Sección 2 - Instalando las herramientas](https://github.com/adolfodelarosades/GIT/blob/main/001-CursoGit-GitHub-SourceTree/Seccion-02.md)
+## [Sección 2 - Instalando las herramientas](https://github.com/adolfodelarosades/Java/blob/master/temarios/750_Curso_de_Git-GitHub-SourceTree/Seccion-02.md)
 
 ### Clase 2: Git en Windows (0:32) 
 ### Clase 2b: Instalar git en Windows (5:23) 
