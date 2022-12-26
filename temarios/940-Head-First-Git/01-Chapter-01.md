@@ -511,9 +511,154 @@ Para crear un nuevo archivo, simplemente haga clic en el elemento del menú Arch
 ![image](https://user-images.githubusercontent.com/23094588/209479646-e24af375-9fde-4a97-93d8-5c67358cf7d6.png)
 
 [Guía Markdown](https://www.markdownguide.org/)
- 
 
-## “¿Qué significa exactamente cometer?”
+Guarde el archivo como **`Checklist.md`** en el directorio **`HawtDawg`**.
+
+<hr>
+
+**NOTA**
+
+Para guardar el archivo, seleccione Archivo en el menú superior, seleccione Guardar y luego navegue hasta donde creó el directorio **`HawtDawg`**.
+
+<hr>
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209489850-30159e8d-624f-443a-b49d-87a48224e7d4.png">
+
+Ahora estamos listos para commit nuestro trabajo. Esto involucra dos comandos de Git, a saber **`git add`** y **`git commit`**.
+
+<img width="1111" alt="image" src="https://user-images.githubusercontent.com/23094588/209490116-eb69c5c9-e7b0-4144-b4f7-66c466c0916e.png">
+
+Observe que el comando **`git add`** toma como argumento el nombre del archivo que desea agregar a Git. Y el comando **`git commit`** tiene una bandera **`-m`**, seguida del mensaje de confirmación. La **`-m`** significa "message" y es un mecanismo para que proporcione un recordatorio significativo de por qué realizó este cambio.
+
+<hr>
+
+**NOTA**
+
+También puede usar la versión larga de **`-m`**, así: **`git commit --message`** seguido del mensaje. Sin embargo, nos gusta la versión más corta.
+
+<hr>
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209490481-524a4091-9dd1-41a8-904a-703740596f4e.png">
+ 
+### Hablando de...
+
+¡Felicitaciones por tu primer compromiso!
+
+<img width="368" alt="image" src="https://user-images.githubusercontent.com/23094588/209490557-69cd7e63-ca78-4f20-b459-baaf142bc511.png">
+
+Has completado un recorrido relámpago por Git. Instaló Git, inicializó un repositorio de Git y envió un archivo a la memoria de Git. Esto nos brinda un excelente punto de partida y deberíamos estar listos para profundizar más en Git.
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: ¿Necesito usar archivos Markdown? Pensé que Git era una herramienta de control de versiones de propósito general.**
+
+**R**: ¡Ay, no! Solo usamos archivos Markdown para facilitar las cosas. Los equipos usan Git para versionar todo tipo de archivos diferentes, incluido el código fuente, diarios, listas de tareas pendientes, publicaciones de blog, lo que sea. Verá, Git es excepcionalmente bueno para trabajar con archivos de texto sin formato, como Markdown, HTML, código fuente para lenguajes de programación como Python, a diferencia del texto enriquecido (como lo haría con Microsoft Word o Apple Pages). Solo sé que Git es extremadamente flexible y puede acomodar muchos tipos diferentes de archivos.
+
+<hr>
+
+**¡MÍRALO!**
+
+<img width="275" alt="image" src="https://user-images.githubusercontent.com/23094588/209490747-763128c0-ee25-42c2-ad1f-746edd3fd2df.png">
+
+**¿Obtuviste alguna salida diferente a la que te mostramos en el ejercicio anterior?**
+
+*La línea de comando puede ser bastante implacable cuando se trata de errores tipográficos, espacios en blanco y mayúsculas y minúsculas. Si no obtuvo el mismo resultado que el nuestro, aquí hay algunas cosas que puede probar:*
+
+* *Si ve un error como fatal: **`not a git repository`**, asegúrese de estar en el directorio **`HawtDawg`***.
+
+* *Si recibe un error como este, **`command not found`**, asegúrese de verificar que las mayúsculas y minúsculas y la ortografía sean correctas. Por lo general, la línea de comando le dice qué comando no reconoció*.
+
+* *Si ve un error similar a **`fatal: pathspec checklist.md did not match any files`** cuando probó un **`git add`**, sepa que el nombre de archivo que proporciona debe coincidir exactamente con el nombre de archivo, que en nuestro caso sería **`Checklist.md`** ("c" en mayúsculas)*.
+
+* Si obtiene error: **`pathspec ‘-’ did not match any file(s) known to git`** al intentar **`git commit`**, asegúrese de que no haya espacio entre **`-`** y **`m`**.
+
+* *Si la línea de comando informa un error como error: **`pathspec ‘first’ did not match any file(s) known to git`**, asegúrese de envolver el mensaje de commit "My first commit" entre comillas dobles*.
+
+* Si obtiene un error como **`nothing added to commit but untracked files present`**, intente ejecutarlo **`git add Checklist.md`** nuevamente, esta vez asegurándose de obtener el nombre de archivo correcto, incluida el casing.
+
+## “¿Qué significa exactamente commit?”
+
+<img width="525" alt="image" src="https://user-images.githubusercontent.com/23094588/209491444-952604aa-4aa6-4c8b-9b40-abcd57482d77.png">
+
+Aprendimos que committing con Git es un proceso de dos pasos. Primero **`add`** (añadimos) los archivos y luego **`commit`**.
+
+Lo primero que debe saber es que solo se committed los archivos que agrega. Digamos que tiene dos archivos **`Checklist.md`** y **`README.md`**, pero solo agregó **`Checklist.md`**. Cuando crea un commit, Git solo almacenará los cambios realizados en **`Checklist.md`**.
+
+Ahora, cuando commit (nos comprometemos), Git usa un algoritmo especializado para guardar de manera segura todo lo que agregamos a su memoria. Cuando decimos que "committed(commitimos)" nuestros cambios en Git, eso se traduce en que Git crea un **commit object(objeto de confirmación)** que almacena dentro de la carpeta **`.git`**. Este objeto de confirmación está "sellado(stamped)" por un identificador único. Tal vez recuerdes lo que obtuvimos **`513141d`** cuando hicimos nuestro commit en nuestro último ejercicio (ciertamente viste algo diferente): en realidad, esta es una cadena mucho más larga que contiene números y letras que se parece a esto:
+
+<img width="798" alt="image" src="https://user-images.githubusercontent.com/23094588/209491999-baf17e5e-f3da-446d-98be-cd1ea83ead79.png">
+
+**Este identificador se calcula utilizando una serie de metadatos**, incluido su nombre completo, la hora en que realizó la confirmación, el mensaje de confirmación que proporcionó y la información derivada de los cambios que realizó.
+
+Exploremos un poco más lo que sucede en un commit.
+
+<hr>
+
+<img width="794" alt="image" src="https://user-images.githubusercontent.com/23094588/209492158-f639c8b3-9b0e-474e-8e73-01b9fd3c42f6.png">
+
+Sorprendentemente, las posibilidades de que dos confirmaciones **alguna vez** tengan la mismo **ID** (y sí, eso es en todos los repositorios Git del mundo, los que existen y los que aún no se han creado) es menos de 1 en 10<sup>48</sup>. ¡Sí, eso es 10 seguido de 48 ceros!
+
+<img width="783" alt="image" src="https://user-images.githubusercontent.com/23094588/209492287-8450552a-b56e-46fe-a19e-2b24715ea41e.png">
+
+<hr>
+
+El commit object(objeto de confirmación) en realidad **no** almacena sus cambios, bueno, no directamente, de todos modos. En su lugar, Git almacena sus cambios en una ubicación diferente en el repositorio de Git y simplemente registra (en el commit) dónde se han almacenado sus cambios. Además de registrar dónde almacenó sus cambios, el commit registra muchos otros detalles:
+
+**Un puntero a la ubicación dentro de la carpeta `.git` donde Git ha almacenado sus cambios, llamado `tree`**.
+
+Este es otro conjunto de caracteres alfanuméricos, cuyos detalles son un tema para otro libro.
+
+<img width="814" alt="image" src="https://user-images.githubusercontent.com/23094588/209492561-d8d2dee0-59a5-4d49-a467-2da11ee92635.png">
+
+Este es otro conjunto de caracteres alfanuméricos, cuyos detalles son un tema para otro libro.
+
+**La información del "autor", es decir, su nombre y dirección de correo electrónico**.
+
+En un ejercicio anterior le proporcionamos a Git nuestro nombre completo y nuestro correo electrónico. Esto también se registra en el Git para que pueda reclamar todo el crédito por el maravilloso trabajo que realizó.
+
+<hr>
+
+**NOTA**
+
+Por eso es importante que te presentes a Git.
+
+<hr>
+
+**La hora en que se realizó el commit, representada en segundos transcurridos desde el 1 de enero de 1970**.
+
+Git también registra la hora en que realizó el commit, junto con la zona horaria en la que se encuentra su máquina.
+
+**El commit message que proporcionó cuando invocó `git commit -m`**.
+
+<hr>
+
+**NOTA**
+
+Hay un poco más de lo que enumeramos aquí, pero podemos dejar eso de lado por ahora.
+
+<hr>
+
+**Los Commit objects son almacenados por Git en formato binario, lo que los hace muy difíciles de leer para los humanos, pero súper seguros y eficientes para Git.**
+
+### Mira antes de saltar
+
+<img width="651" alt="image" src="https://user-images.githubusercontent.com/23094588/209493024-74b065d4-edce-463b-8306-651382f439ca.png">
+
+Acabas de hacer tu primer commit. Hacer un commit implica dos comandos separados, **`git add`** seguido de **`git commit`**. Probablemente se esté preguntando por qué se necesitan dos comandos para realizar un commit en Git. ¿Por qué Git nos hace pasar por todos estos aros para que podamos almacenar una revisión de nuestro trabajo en Git?
+
+La respuesta está en el diseño del repositorio Git. Recuerde que el repositorio de Git se encuentra en la carpeta **`.git`** que se crea cuando ejecuta **`git init`**.
+
+El repositorio de Git en sí está dividido en dos partes: la primera parte se denomina **"index"** y la segunda parte es a lo que nos referiremos como **"object database"**.
+
+Cuando ejecutamos **`git add <filename>`**, Git hace una copia del archivo y lo coloca en el índice. Podemos pensar en el índice como el **"staging area(área de ensayo)"**, en el que podemos poner las cosas hasta que estemos seguros de que queremos comprometernos(commit) con ellas.
+
+Ahora, cuando ejecutamos el comando **`git commit`**, toma el contenido del staging area(área de preparación) y lo almacena en la base de datos de objetos(object database), también conocida como banco de memoria de Git(**Git’s memory bank**). Dicho de otro modo, el índice es un lugar para albergar temporalmente los cambios. Por lo general, realiza algunos cambios, los agrega al índice y luego decide si está listo para confirmar; en caso afirmativo, realiza un commit. De lo contrario, puede continuar haciendo cambios, agregar más cambios al área de preparación(staging area) y luego, cuando sienta que está en un buen lugar, commit(comprométase).
+
+<img width="837" alt="image" src="https://user-images.githubusercontent.com/23094588/209493738-5c53bd2e-4140-4eab-ae2e-8e5f7101df24.png">
+
+
 ## "Mira antes de saltar"
 ## “Las tres etapas de Git”
 ## "Git en la línea de comando"
