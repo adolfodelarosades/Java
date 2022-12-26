@@ -141,11 +141,30 @@ No hay nada especial sobre la rama por defecto o el nombre **`master`**. Esta ra
 
 Sin embargo, Git aún tiene como valor predeterminado **`master`**, y para evitar confusiones, continuaremos usando el nombre **`master`** de la rama predeterminada a lo largo de este libro.
 
-### Elecciones... ¡tantas opciones!
-
-
+<hr>
 
 ## “Opciones... ¡Tantas opciones!”
+
+<img width="810" alt="image" src="https://user-images.githubusercontent.com/23094588/209588226-9971656c-1d3f-42c9-806f-b877ab5a8e8b.png">
+
+Administrar branches en Git usa otro comando, apropiadamente llamado **`branch`**. Puede usar el comando **`branch`** para crear una nueva rama, enumerar todas las ramas en su repositorio e incluso eliminar ramas. Y, como todo lo que has hecho hasta ahora, todo esto sucede en la terminal dentro de tu directorio de trabajo.
+
+Comencemos por crear una nueva rama. Puede usar el comando **`branch`**, dándole el nombre de la rama que desea crear como argumento.
+
+<img width="952" alt="image" src="https://user-images.githubusercontent.com/23094588/209588274-4c866592-60d1-4ac6-955b-ba7fa196a844.png">
+
+Git no informa sobre el éxito o el fracaso, pero puede enumerar todas sus ramas usando el mismo comando **`branch`**, excepto que no tiene argumentos.
+
+<img width="961" alt="image" src="https://user-images.githubusercontent.com/23094588/209588305-4b4ffdff-08f6-4eb4-92bf-8f1188d219e3.png">
+
+El resultado del comando **`git branch`** es una lista de todas las ramas en el repositorio actual. Git amablemente coloca un asterisco al lado de la rama que estamos usando actualmente.
+
+Crear una nueva branch no significa que pueda comenzar a usarla de inmediato. Tienes que cambiar a élla primero.
+
+<hr>
+
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/23094588/209588029-ec1d2f5b-0d40-4f2b-8775-37ea47551cba.png">
+
 ## "Cambio de pistas"
 ## "¡Devuelvelo!"
 ## “Visualización de sucursales”
