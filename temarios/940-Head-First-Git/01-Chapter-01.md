@@ -642,7 +642,7 @@ Hay un poco más de lo que enumeramos aquí, pero podemos dejar eso de lado por 
 
 **Los Commit objects son almacenados por Git en formato binario, lo que los hace muy difíciles de leer para los humanos, pero súper seguros y eficientes para Git.**
 
-### Mira antes de saltar
+## "Mira antes de saltar"
 
 <img width="651" alt="image" src="https://user-images.githubusercontent.com/23094588/209493024-74b065d4-edce-463b-8306-651382f439ca.png">
 
@@ -658,10 +658,54 @@ Ahora, cuando ejecutamos el comando **`git commit`**, toma el contenido del stag
 
 <img width="837" alt="image" src="https://user-images.githubusercontent.com/23094588/209493738-5c53bd2e-4140-4eab-ae2e-8e5f7101df24.png">
 
-
-## "Mira antes de saltar"
 ## “Las tres etapas de Git”
+
+1. Empecemos por arriba. Tenemos un directorio de trabajo con un solo archivo.
+
+   <img width="792" alt="image" src="https://user-images.githubusercontent.com/23094588/209493907-9f04efa3-9216-481a-ab38-1bd025d18390.png">
+
+2. Cuando pulsamos **`git add Checklist.md`**, Git almacena una copia de ese archivo en el index.
+
+   <hr>
+
+   **NOTA**
+   
+   Aférrate a este pensamiento; volveremos a él en las páginas siguientes.
+    
+   <hr> 
+   
+   <img width="767" alt="image" src="https://user-images.githubusercontent.com/23094588/209494104-2f591234-6d07-49a3-94d8-1ec60ffdadf2.png">
+
+3. Finalmente, cuando hacemos commit, Git crea un objeto de commit que registra el estado del índice en su memoria.
+
+   <img width="782" alt="image" src="https://user-images.githubusercontent.com/23094588/209494237-7ba083b0-d1d2-4ed6-a534-91ca21362fa8.png">
+
+<img width="424" alt="image" src="https://user-images.githubusercontent.com/23094588/209494288-c20e1d35-d0ef-4fce-9ce8-cd7d7fb863c1.png">
+
+### ¡Gran pregunta!
+
+Mencionamos anteriormente que el índice puede considerarse como un área de preparación. Le brinda una manera de recopilar todo lo que necesita para la próximo commit, porque Git solo crea una instantánea de los cambios que ha agregado al índice.
+
+Considere un escenario en el que está trabajando en una nueva función o corrigiendo un error. Mientras navega por el proyecto, nota un error tipográfico en un archivo de documentación y, siendo el buen compañero de equipo que es, lo corrige. Sin embargo, esta solución no tiene ninguna relación con su tarea original. Entonces, ¿cómo separa la corrección de la documentación de su tarea original?
+
+Simple.
+
+Termina la tarea en la que estaba trabajando y ***solo*** agrega los archivos que se vieron afectados por ese cambio al índice. Y luego commit, dándole un mensaje apropiado. Recuerde, Git solo commit los archivos que se agregaron al índice.
+
+A continuación, **`git add`** el archivo en el que corrigió el error tipográfico y realiza otro commit, esta vez proporcionando un mensaje que describe su corrección.
+
+¡Ves cómo esto te permite hacer un montón de cambios, algunos relacionados y otros no relacionados, y aún así elegir qué cambios componen el próximo commit!
+
+Una analogía que podría ayudar sería la de cocinar. Estás invitando a amigos y estás preparando febrilmente un montón de platos deliciosos. Puede comenzar cortando todo lo que sabe que necesitará. Sin embargo, una vez que comience a poner cosas en la estufa, puede optar por recolectar todo lo que necesita para ese plato en particular para que esté allí cuando lo necesite. Dejas todo lo demás junto a la tabla de cortar. Los chefs se refieren a esto como ***mise en place***.
+
+El índice es tu ***mise en place***.
+
+<img width="1135" alt="image" src="https://user-images.githubusercontent.com/23094588/209494740-0e86ef58-e32f-497b-956b-0a84b37d3d55.png">
+
 ## "Git en la línea de comando"
+
+<img width="630" alt="image" src="https://user-images.githubusercontent.com/23094588/209495025-f933fee8-8155-40ec-b839-014e534ff500.png">
+
 ## “Un vistazo detrás de la cortina”
 ## “Los múltiples estados de archivos en un repositorio Git”
 ## “El índice es un “bloc de notas””
