@@ -1052,6 +1052,71 @@ Realice cada uno de los pasos a continuación, anotando cada vez la salida de **
 
 ## “¡Has hecho historia!”
 
+En el último ejercicio, realizó dos confirmaciones separadas a medida que hizo que los archivos **`README.md`** y **`Checklist.md`** pasaran de no ser **untracked(rastreados)** a ser **staged(preparados)** y finalmente **committed(comprometidos)** en la **Git’s object database(base de datos de objetos de Git)**. Al final de todo, su repositorio tiene dos commits.
+
+Sabemos que los commits de Git registran los cambios que realizó y agregó al índice, junto con algunos metadatos, como información sobre el autor(usted), así como el mensaje de commit. Hay un último detalle sobre los commits que debe conocer. Para cada commit que realice (que no sea la primera vez en un repositorio), el commit también registra el **ID** de commit del commit que vino justo antes.
+
+<img width="793" alt="image" src="https://user-images.githubusercontent.com/23094588/209578721-9935c340-094e-430a-a9b0-0ed9f75543bd.png">
+
+Es decir, los commits forman una cadena, como la rama de un árbol o una cadena de luces navideñas. Esto significa que, dada una ID de commit, Git puede rastrear su linaje simplemente siguiendo el puntero "parent". Esto se conoce como **el historial de commits** y es una pieza integral de cómo funciona Git.
+
+<hr>
+
+**NOTA**
+
+En caso de que se esté preguntando si esto es un presagio de lo que está por venir, ¡bueno, sí! ¡Qué astuto de tu parte!
+
+<hr>
+
+<img width="817" alt="image" src="https://user-images.githubusercontent.com/23094588/209578964-66872e8e-2367-442e-b061-37f75b2d3b10.png">
+
+Solo sepa que los **child commits** se refieren a sus parents, pero los padres no se refieren a sus hijos. En otras palabras, **los punteros son unidireccionales**. Sin embargo, no hay nada que impida que un commit tenga varios hijos o un commit tenga varios padres, como veremos en el próximo capítulo.
+
+<hr>
+
+<img width="798" alt="image" src="https://user-images.githubusercontent.com/23094588/209577165-c9aad7e7-d089-44fe-923f-3d67f32f7e84.png">
+
+El historial de confirmación(**commit history**) de Git a menudo se denomina gráfico acíclico dirigido , o DAG (**directed acyclic graph, or DAG**) para abreviar, en el que los commits forman los "nodos" y los punteros al padre forman los "bordes(edges)". Son ***dirigidos*** porque los children señalan a los parent y acíclicos porque los parent no señalan a sus children.
+
+<hr>
+
+**VIÑETAS**
+
+* Un sistema de control de versiones como Git le permite almacenar instantáneas(**snapshots**) de su trabajo.
+* Git es mucho más que una herramienta que te permite grabar instantáneas(**snapshots**). Git nos permite colaborar con confianza con otros miembros del equipo.
+* El uso efectivo de Git requiere que te sientas cómodo con la línea de comandos.
+* La línea de comandos ofrece una gran cantidad de otras capacidades, incluida la creación y navegación de directorios y listados de archivos.
+* Git está disponible como ejecutable, que usted instala, y hace que Git esté disponible para usar en la línea de comandos con el nombre **`git`**.
+* Una vez que instale Git, debe decirle a Git su nombre completo y su dirección de correo electrónico. Git usará esto cada vez que use Git para tomar una instantánea de su trabajo.
+* Si desea que Git administre los archivos de cualquier proyecto, debemos inicializar un repositorio de Git en el nivel raíz del proyecto.
+* Para inicializar Git, usa el comando **`init`**, así:**`git init`**
+* El resultado de inicializar un nuevo repositorio de Git es que Git creará una carpeta oculta llamada **`.git`** en el directorio donde ejecutó el comando **`git init`**. Git utiliza esta carpeta oculta para almacenar sus instantáneas, así como algunas configuraciones para el mismo Git.
+* Cualquier directorio administrado por Git se denomina directorio de trabajo.
+* Git, por diseño, tiene un índice que actúa como un **"staging area(área de ensayo)"**. Para agregar archivos al índice, usa el comando **`git add <filename>`**.
+* Committing en Git se traduce en tomar una instantánea de los cambios que se almacenaron en el índice. El comando para crear un commit es **`git commit`**, que requiere que le proporciones un mensaje de confirmación para describir los cambios que estás commiteando, usando el indicador **`-m`** o **`--message`**: **`git commit -m “some message”`**
+* A cada archivo en el directorio de trabajo se le asigna uno o más estados.
+* Un archivo completamente nuevo agregado al directorio de trabajo está marcado como **"untracked(sin seguimiento)"**, lo que sugiere que Git no conoce este archivo.
+* Agregar un nuevo archivo al índice de Git hace dos cosas: marca el archivo como **"tracked(seguido)"** y crea una copia de ese archivo en el índice.
+* Cuando realiza un commit, Git crea una copia de los archivos en el índice y los almacena en la base de datos de objetos. También crea un **commit object(objeto de confirmación)** que registra metadatos sobre el commit, incluido un puntero a los archivos que se acaban de almacenar, el nombre del autor y el correo electrónico, y la hora en que se realizó el commit, así como el mensaje de commit.
+* Cada commit en Git se identifica mediante un identificador único, denominado **ID de commit**.
+* En cualquier momento puedes preguntar a Git por el estado de los archivos en el directorio de trabajo y el repositorio de Git, usando el comando **`git status`**.
+* Cada commit, excepto el commit inicial en Git, almacena el ID de commit del commit que apareció justo antes, creando así una cadena de commits, como hojas en una rama.
+* Esta cadena de commits se denomina **commit history**.
+
+### Inicio de crucigrama
+
+¡Has hecho mucho en un capítulo! Felicitaciones por comenzar con Git. Es hora de relajarse con un crucigrama: encontrará todas las respuestas en algún lugar de este capítulo.
+
+<img width="226" alt="image" src="https://user-images.githubusercontent.com/23094588/209580236-071182ad-e005-4d02-a229-ae0a4bf20c19.png">
+
+
+
+
+
+
+
+
+
 
 
 
