@@ -768,9 +768,162 @@ En todo momento, tenga en cuenta que Git está moviendo *copias* de su archivo d
 
 <img width="740" alt="image" src="https://user-images.githubusercontent.com/23094588/209496445-fc1306c2-3b34-4621-a11a-7ec6f9475d42.png">
 
-## “El índice es un “bloc de notas””
+**Pero hay más. Un archivo puede pasar por todas las etapas, ¡pero podría estar en más de un estado simultáneamente!**
+
+### Un día típico en la vida de un archivo nuevo
+
+Cuando agregamos un nuevo archivo a un repositorio de Git, Git ve el archivo pero también elige **no** hacer nada hasta que se lo indiquemos explícitamente. Un archivo que Git nunca ha visto antes (es decir, un archivo que nunca se ha agregado al índice) se marca como **"untracked(sin seguimiento)"**. Agregar el archivo al índice es nuestra forma de decirle a Git: “¡Oye! Realmente nos gustaría que vigiles este archivo por nosotros”. Cualquier archivo que Git esté vigilando por nosotros se denomina archivo **"tracked(seguido)"**.
+
+<img width="587" alt="image" src="https://user-images.githubusercontent.com/23094588/209570476-c7149af3-65f0-44e3-8c1c-4af599805d0a.png">
+
+### La object database(base de datos de objetos) es la “fuente de la verdad”
+
+Esta vez, considere agregar un archivo al índice y luego realizar un commit de inmediato. Git almacena el contenido del índice en su base de datos de objetos y luego marca el archivo como **"unmodified(sin modificar)".
+
+¿Por qué unmodified(sin modificar), preguntas? Bueno, Git compara la copia que tiene en su base de datos de objetos con la del índice y ve que son iguales. También compara la copia en el índice con la del directorio de trabajo y ve que son iguales. Por lo tanto, el archivo no se ha modificado (o no se ha modificado) desde el último commit.
+
+<img width="708" alt="image" src="https://user-images.githubusercontent.com/23094588/209570785-d1028a85-c8a8-411b-a321-19f8bc14b9e3.png">
+
+Por supuesto, se deduce que si hiciéramos un cambio en un archivo que habíamos commiteado previamente, Git ve una diferencia entre el archivo en el directorio de trabajo y el índice, pero **ninguna diferencia** entre el index y la object database. Entonces, Git marca el archivo como **"modified"**, pero también lo marca como **"not staged(no preparado)"** porque aún no lo hemos agregado al index.
+
+<img width="714" alt="image" src="https://user-images.githubusercontent.com/23094588/209571893-7413fc02-a081-4543-a43a-9d20e3f3589c.png">
+
+Luego, si tuviéramos que agregar el archivo *modificado* nuevamente al índice, Git ve que el índice y el directorio de trabajo son los mismos, por lo que el archivo se marca como **"staged(preparado)"** o, en otras palabras, está **modified** y **staged**.
+
+Y completamos el círculo: si hacemos commit, el contenido del índice se confirmará y el archivo se marcará como **"unmodified(sin modificar)"**.
+
+<img width="624" alt="image" src="https://user-images.githubusercontent.com/23094588/209572119-498a7f00-e336-4ffb-976c-12203c9eff63.png">
+
+<img width="801" alt="image" src="https://user-images.githubusercontent.com/23094588/209572169-64218fd4-068c-4e65-8c43-e893fb1dc79f.png">
+
+**Recuerde que cualquier archivo en su directorio de trabajo puede ser untracked o tracked. Además, un archivo tracked puede ser staged, unmodified o modified.
+
+**En este ejercicio, suponga que acaba de crear un nuevo repositorio. ¿Puede identificar el estado de los archivos para cada uno de los siguientes pasos?
+
+----------> Respuestas en “BE Git Solution” .
+
+**Creas un nuevo archivo en el repositorio llamado `Hello.txt`**.
+
+<img width="684" alt="image" src="https://user-images.githubusercontent.com/23094588/209572454-a45a7b76-a210-441f-aef3-e0a9fb2f6c68.png">
+
+**Untracked**
+
+**Usted agrega `Hello.txt` al índice (usando `git add`)**.
+
+<img width="684" alt="image" src="https://user-images.githubusercontent.com/23094588/209572454-a45a7b76-a210-441f-aef3-e0a9fb2f6c68.png">
+
+**Tracked** y **Staged**
+
+**Confirma todos los cambios que realizó (usando `git commit`)**.
+
+<img width="684" alt="image" src="https://user-images.githubusercontent.com/23094588/209572454-a45a7b76-a210-441f-aef3-e0a9fb2f6c68.png">
+
+**Tracked** y **Unmodified**
+
+**Editas `Hello.txt` con algún contenido nuevo**.
+
+<img width="684" alt="image" src="https://user-images.githubusercontent.com/23094588/209572454-a45a7b76-a210-441f-aef3-e0a9fb2f6c68.png">
+
+**Tracked** y **Modified**
+
+## “El index es un “bloc de notas””
+
+Repasemos el papel del índice. Sabemos que a medida que editamos archivos en nuestro directorio de trabajo, podemos colocarlos en el índice con **`add`**, lo que marca el archivo como **"staged(preparado)"**.
+
+<img width="702" alt="image" src="https://user-images.githubusercontent.com/23094588/209574445-0f9a8580-6c4a-4353-b488-0fa20185d03e.png">
+
+Por supuesto, podemos continuar editando el archivo incluso después de agregarlo al índice. Ahora, tenemos dos versiones del archivo: una en el directorio de trabajo y otra en el índice.
+
+<img width="707" alt="image" src="https://user-images.githubusercontent.com/23094588/209574533-3a937b7d-1ce8-4efb-bb7e-3fa3868f46ed.png">
+
+Ahora, si agrega el archivo nuevamente, Git ***sobrescribe*** el índice con los últimos cambios reflejados en ese archivo. En otras palabras, el índice es un bloc de notas temporal, uno que puede usar para agregar ediciones hasta que esté seguro de que desea confirmar.
+
+<hr>
+
+**NOTA**
+
+Estos son puntos importantes. Tómese un momento para que captar antes de continuar.
+
+<hr>
+
+Hay otro aspecto sutil del índice: **no hay ningún comando para "vaciar" el índice**. Cada vez que agrega un archivo, Git copia el archivo en el índice y, cuando confirma, Git vuelve a copiar los cambios. Lo que significa que, a medida que continúa agregando archivos al índice, está anulando una copia anterior de un archivo (si ya estaba allí) o está agregando nuevos archivos al índice. ¡Así que el índice sigue creciendo! Ahora, esto no es algo de lo que deba preocuparse, pero una vez que hablemos sobre el comando **`diff`** en el Capítulo 3, es algo que debe tener en cuenta.
+
+<hr>
+
+**NOTA**
+
+Estos son puntos importantes. Tómese un momento para que captar antes de continuar.
+
+
+<hr>
+
+Para darle una idea de cómo tendemos a trabajar, generalmente agregamos los archivos que deseamos enviar al índice cuando creemos que estamos listos. Luego nos aseguramos de que todo se vea bien, y si es así, hacemos un commit. Por otro lado, si detectamos algo (como un error tipográfico o si nos perdimos un detalle menor), hacemos nuestras ediciones, agregamos esos archivos nuevamente al índice y luego commiteamos los archivos. Lave, enjuague, repita.
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
+
+
 ## “¡Computadora, informe de estado!”
 ## “¡Has hecho historia!”
+
+
+
+
+
+<hr>
+
+<img width="793" alt="image" src="https://user-images.githubusercontent.com/23094588/209572978-0f22d201-12db-4334-b22f-3c1420c5dcc0.png">
+
+Hora de experimentar. Navegue hasta el directorio **`headfirst-git-samples`**, cree un nuevo directorio llamado **`play-with-index`** y luego con **`cd`** entre en este directorio. Continúe e inicialice un nuevo repositorio usando **`git init`**. Usando su editor de texto, cree un nuevo archivo llamado **`multiple-add.txt`** el el directorio **`play-with-index`**. Después de cada paso, dibuje cómo se ven el directorio de trabajo y el índice:
+
+1. El contenido inicial de **`multiple-add.txt`** debe ser **“`This is my first edit`”**. ¡Asegúrese de guardar el archivo!
+
+   <img width="736" alt="image" src="https://user-images.githubusercontent.com/23094588/209573537-ebab6744-4500-4740-81f9-e2dadc9c68dd.png">
+
+2. Vuelva al terminal y use **`git add multiple-add.txt`** para añadirlo al índice.
+
+   <img width="750" alt="image" src="https://user-images.githubusercontent.com/23094588/209573622-9a445790-25ea-4b3b-98af-14a215155f03.png">
+
+3. De vuelta en el editor, cambie el texto del archivo a **“`This is my second edit`”**. Nuevamente, asegúrese de guardar.
+
+   <img width="752" alt="image" src="https://user-images.githubusercontent.com/23094588/209573683-1bef531f-f00a-4d96-9ebb-efe7d916d5aa.png">
+
+4. De vuelta en la terminal, agregue el archivo al índice nuevamente.
+
+   <img width="778" alt="image" src="https://user-images.githubusercontent.com/23094588/209573731-d78594f0-54d1-4add-91ff-3e6cd687824b.png">
+
+<hr>
+
+<img width="811" alt="image" src="https://user-images.githubusercontent.com/23094588/209573785-d80491a3-f1f2-4215-bf26-21a8cc449d33.png">
+
+El repositorio **`ch01_03`** todavía tiene un archivo sin seguimiento, a saber, **`Checklist.md`**. Edítalo para que se vea así.
+
+<img width="807" alt="image" src="https://user-images.githubusercontent.com/23094588/209573953-d0b1fd30-1b1b-4317-bced-3c27e8dc6e40.png">
+
+Realice cada uno de los pasos a continuación, anotando cada vez la salida de **`git status`**.
+
+1. Agregue **`Checklist.md`** al índice.
+
+   <img width="747" alt="image" src="https://user-images.githubusercontent.com/23094588/209574068-814befa6-9cfa-4d77-80d2-4fcdd718405c.png">
+
+2. Haz una commit con el mensaje de confirmación **“`my second commit`”**.
+
+   <img width="743" alt="image" src="https://user-images.githubusercontent.com/23094588/209574139-73d2c3aa-f135-4a32-8eb1-4b575554df4c.png">
+
+<hr>
+
+## Solución de inicialización de crucigramas
+
+
+
+
+
+
+
+
+
+
 
 Lapiz
 
