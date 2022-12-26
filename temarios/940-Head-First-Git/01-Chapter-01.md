@@ -901,7 +901,155 @@ Si se queda atascado, recuerde que nuestras soluciones se encuentran al final de
 
 ----------> Respuestas en “Sharpen your pencil Solution”.
 
+### 💻
+
+<img width="1383" alt="image" src="https://user-images.githubusercontent.com/23094588/209575810-f8d34938-536e-4fed-85d0-fcfd3905dde4.png">
+
+<img width="1023" alt="image" src="https://user-images.githubusercontent.com/23094588/209575961-e4a8decb-5c49-4df0-be9b-8d48b97130a1.png">
+
+<img width="1028" alt="image" src="https://user-images.githubusercontent.com/23094588/209576005-cf05a674-5403-43ef-8ac7-1409ba40c61f.png">
+
+<img width="1378" alt="image" src="https://user-images.githubusercontent.com/23094588/209576080-c53ede67-3b42-4fc9-b8f4-a0b49d4d73a9.png">
+
+<img width="1029" alt="image" src="https://user-images.githubusercontent.com/23094588/209576103-9c5271f5-f2b9-4742-bd73-fc2915acf14f.png">
+
+<img width="1380" alt="image" src="https://user-images.githubusercontent.com/23094588/209576132-088bb1b5-eb3f-4c05-a2ec-fb95b92532ae.png">
+
+<img width="1382" alt="image" src="https://user-images.githubusercontent.com/23094588/209576199-2f143470-c798-4e63-8a7b-feac417e0271.png">
+
 ## “¡Computadora, informe de estado!”
+
+A medida que continúa trabajando con Git, a menudo es útil verificar el estado de los archivos en su directorio de trabajo. Uno de los comandos más útiles en tu arsenal de Git es el comando **`git status`**. Este comando es particularmente útil a medida que su proyecto crece en tamaño, con múltiples archivos.
+
+<hr>
+
+**NOTA**
+
+Recuerde que el directorio de trabajo es el directorio que contiene la carpeta oculta **`.git`**.
+
+<hr>
+
+Entonces, exploremos cómo usar el comando de status: creará otro Git Repository, excepto que esta vez creará varios archivos en su repositorio. Esto le dará la oportunidad de ver qué informes proporciona **`git status`** y obtener una idea intuitiva de cómo funciona Git.
+
+Como lo ha hecho antes, creará una nueva carpeta dentro de la carpeta **`headfirst-git-samples`** llamada **`ch01_03`** e inicializará un repositorio Git dentro de esa carpeta.
+
+<hr>
+
+**NOTA**
+
+Dado que nuestro último ejercicio fue el segundo ejercicio, este es el número 3.
+
+<hr>
+
+<img width="955" alt="image" src="https://user-images.githubusercontent.com/23094588/209576492-d462ac5f-173c-4f3b-a0f0-70f10ed3c023.png">
+
+A pesar de no haber hecho nada, aún puedes consultar el estado de nuestro repositorio. El comando, como otros que hemos usado, es un comando de Git, llamado **`status`**. Usemos eso.
+
+<img width="973" alt="image" src="https://user-images.githubusercontent.com/23094588/209576547-a78aab12-42b2-40ae-9f59-e22c2b229787.png">
+
+Su primer uso de **`git status`** puede parecer un poco decepcionante, pero le da la oportunidad de acostumbrarse a leer su salida. Git te dice amablemente que aún no has hecho confirmaciones y nos da una pista útil sobre lo que debes hacer a continuación.
+
+A continuación, creará el primero de dos archivos. Abra un nuevo documento en su editor de texto y escriba las siguientes líneas de texto.
+
+<hr>
+
+**NOTA**
+
+Hemos proporcionado todos los archivos que necesita en la carpeta **`chapter01`** en el código fuente que descargó para este libro. Asegúrese de revisar allí si no tiene ganas de escribir todo esto.
+
+<hr>
+
+<img width="951" alt="image" src="https://user-images.githubusercontent.com/23094588/209576663-ee8c8e0e-8d9c-499f-bb34-5840b41f2172.png">
+
+Asegúrese de guardar el archivo como **`README.md`** en el directorio **`ch01_03`**.
+
+Haga lo mismo para crear otro archivo llamado **`Checklist.md`** con el siguiente texto.
+
+<img width="991" alt="image" src="https://user-images.githubusercontent.com/23094588/209576769-bee6e62e-962c-49f3-921a-0a0dcc2b4fb2.png">
+
+### ¡Guau, tigre fácil!
+
+<img width="258" alt="image" src="https://user-images.githubusercontent.com/23094588/209576817-3c370e21-ff85-48b8-bb1b-51d4fad124d2.png">
+
+***Lo hemos hecho bastante rápido***. Recapitulemos lo que has hecho hasta ahora. Creaste una nueva carpeta e inicializaste un nuevo repositorio de Git dentro de esa carpeta. A continuación, creó dos nuevos archivos.
+
+Ahora guiaremos a Git a través de sus pasos y, en cada paso, le preguntaremos a Git cuál cree que es el estado de los archivos. ¿Listo?
+
+Ha configurado todo para empezar. Vamos a ver qué **`git status`** tiene que informar.
+
+<img width="789" alt="image" src="https://user-images.githubusercontent.com/23094588/209576928-f04b6e31-320b-471b-a094-b6204bd7de7a.png">
+
+**Que tenemos:**
+
+<img width="784" alt="image" src="https://user-images.githubusercontent.com/23094588/209576971-36aba9fb-1df9-495c-aeff-988c7a87e649.png">
+
+Recuerda que cuando le pides a Git el estado del repositorio, te dice el estado de todos los archivos en tu directorio de trabajo. En este caso, Git ve dos archivos nuevos que nunca antes había visto. Por lo tanto, los marca como **"untracked(sin seguimiento)"**; en otras palabras, Git no se ha introducido en estos archivos, por lo que aún no los está viendo. El índice está vacío ya que no hemos agregado ninguno de los archivos al índice y la base de datos de objetos no tiene commits, bueno, ya que aún no hemos confirmado. ¡Cambiemos eso!
+
+<hr>
+
+<img width="798" alt="image" src="https://user-images.githubusercontent.com/23094588/209577148-bd189c51-f659-46df-82bb-d7dcc10ed3ac.png">
+
+El comando **`git status`** a menudo se conoce como un comando **"safe(seguro)"**, ya que simplemente le pide al repositorio información para mostrar y de ninguna manera afecta al repositorio (como, por ejemplo, crear un commit). Esto significa que puede y debe correr **`git status`** con frecuencia. Recomendamos ejecutarlo antes de ejecutar cualquier otro comando de Git.
+
+<hr>
+
+Comenzaremos presentando Git a uno de nuestros archivos. **Continúe y agregue `README.md` a Git**, y luego verifique el estado nuevamente.
+
+<hr>
+
+**NOTA**
+
+Deje **`Checklist.md`** ser por ahora. Llegaremos a ello en breve.
+
+<hr>
+
+<img width="762" alt="image" src="https://user-images.githubusercontent.com/23094588/209577498-c24331d0-196d-4103-bfcb-ad094f8825b4.png">
+
+Agregar el archivo **`README.md`** al índice de Git significa que ahora Git conoce este archivo. Dos cosas cambiaron: el archivo **`README.md`** ahora está siendo **tracked(rastreado)** por Git y está en el índice, lo que significa que también está **staged(preparado)**.
+
+**Que tenemos**:
+
+<img width="803" alt="image" src="https://user-images.githubusercontent.com/23094588/209577639-ae546208-5f8b-486c-8139-671174f59569.png">
+
+El status de Git nos dice que si realiza un commit en este momento, solo **`README.md`** se confirmará(commit). Lo cual tiene sentido porque solo los cambios que estan en **staged** pueden participar en el próximo commit.
+
+¡Así que commitemos!
+
+<hr>
+
+<img width="817" alt="image" src="https://user-images.githubusercontent.com/23094588/209577805-f5f6731c-9526-4b02-ae8f-1f8ef9a78644.png">
+
+Antes de continuar, ¿puede visualizar qué cambiaría si hiciéramos un commit ahora mismo? Recuerde, hay dos archivos y solo uno está en el índice.
+
+Los commits de Git requieren que pasemos un mensaje. Mantengámoslo simple y usemos **“`my first commit`”**. ¡Vuelve a la terminal, tú!
+
+<img width="774" alt="image" src="https://user-images.githubusercontent.com/23094588/209577937-7be71a2d-009d-4761-b965-55baea92cd0a.png">
+
+**Que tenemos:**
+
+<img width="828" alt="image" src="https://user-images.githubusercontent.com/23094588/209577967-bb033fe4-4047-487a-9494-620480f82bb8.png">
+
+<hr>
+
+<img width="821" alt="image" src="https://user-images.githubusercontent.com/23094588/209578081-fe21f4c9-4da7-4366-8c46-816c913c626c.png">
+
+El repositorio **`ch01_03`** todavía tiene un archivo sin seguimiento, a saber, **`Checklist.md`**. Edítalo para que se vea así.
+
+<img width="806" alt="image" src="https://user-images.githubusercontent.com/23094588/209578151-454b6634-d95d-4a5e-9d17-ef5a38ac581c.png">
+
+Realice cada uno de los pasos a continuación, anotando cada vez la salida de **`git status`**.
+
+1. Agregar **`Checklist.md`** al índice (usando **`git add`**).
+
+   <img width="759" alt="image" src="https://user-images.githubusercontent.com/23094588/209578227-6cbe5983-25be-4b4f-ab3a-e3a30d8b8a52.png">
+
+2. Haz una confirmación con el mensaje de confirmación **“`my second commit`”**
+
+   <img width="744" alt="image" src="https://user-images.githubusercontent.com/23094588/209578306-8dc736e7-5d8d-4d03-9418-9de1f108e14f.png">
+
+**----------> Respuestas en “Test Drive Solution”.**
+
+
 ## “¡Has hecho historia!”
 
 
@@ -950,6 +1098,9 @@ Realice cada uno de los pasos a continuación, anotando cada vez la salida de **
 
 <hr>
 
+<img width="821" alt="image" src="https://user-images.githubusercontent.com/23094588/209578031-b07ee6ba-033e-477e-bee5-68dde4df50a2.png">
+
+
 ## Solución de inicialización de crucigramas
 
 
@@ -968,4 +1119,20 @@ Lapiz
 
 Exercice
 ![image](https://user-images.githubusercontent.com/23094588/209477852-56e84a65-5e83-4ce3-a3eb-ebd2e27a797d.png)
+
+Gorra
+
+<img width="798" alt="image" src="https://user-images.githubusercontent.com/23094588/209577165-c9aad7e7-d089-44fe-923f-3d67f32f7e84.png">
+
+![image](https://user-images.githubusercontent.com/23094588/209477852-56e84a65-5e83-4ce3-a3eb-ebd2e27a797d.png)
+
+
+Cerebro
+
+<img width="817" alt="image" src="https://user-images.githubusercontent.com/23094588/209577818-67e2bb86-50f9-4350-9235-edbccea8b7db.png">
+
+Coche
+
+<img width="821" alt="image" src="https://user-images.githubusercontent.com/23094588/209578042-06521d42-74b1-4222-aead-bf7e716587d7.png">
+
 
