@@ -706,8 +706,68 @@ El índice es tu ***mise en place***.
 
 <img width="630" alt="image" src="https://user-images.githubusercontent.com/23094588/209495025-f933fee8-8155-40ec-b839-014e534ff500.png">
 
+Cubrimos algunas de las idiosincrasias de la línea de comandos anteriormente. Esta vez, asegurémonos de entender cómo usamos Git en la línea de comando. Como ha visto, Git usa el comando **`git`**, generalmente seguido de un "subcomando", como **`add`** o **`commit`**, y finalmente seguido de argumentos para el *subcomando*.
+
+<img width="943" alt="image" src="https://user-images.githubusercontent.com/23094588/209495239-b1289765-6259-4664-842c-42f2d13894c7.png">
+
+Como estamos usando la línea de comando, se aplican las mismas reglas que discutimos anteriormente. Cada vez que tenga un espacio en blanco en un argumento y desee tratarlo como *un solo* argumento, debe usar comillas. Considere un escenario muy diferente en el que llamamos a nuestro archivo "This is our Checklist.md". En este caso, tendremos que usar comillas al invocar **`git add`**, así:
+
+<img width="952" alt="image" src="https://user-images.githubusercontent.com/23094588/209495399-15e35181-0a29-4b6f-bc82-3e5e2639b766.png">
+
+Finalmente, **`git commit`** toma una bandera, **`-m`** y un mensaje. **`-m`** es una bandera, y aquí, no debemos poner un espacio entre el guión y **`m`**.
+
+<hr>
+
+**NOTA**
+
+Como muchas banderas,**`-m`** es la abreviatura de **`--message`**. Puede usar cualquiera, pero somos flojos, así que preferimos la versión más corta.
+
+<hr>
+
+<img width="954" alt="image" src="https://user-images.githubusercontent.com/23094588/209495667-963f0a89-c846-4886-bc77-89b10636f630.png">
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: ¿Qué pasa si edité varios archivos? ¿Hay alguna manera de agregar varios archivos al índice?**
+
+**R**: Puede proporcionar varios nombres de archivo separados por espacios en blanco al comando **`git add`**, así: **`git add file1 file2`**
+
+**P: ¿Qué sucede si olvido agregar antes de commit?**
+
+**R**: Git confirmará todo lo que ya se ha puesto en el índice. Sin embargo, si no ha agregado nada al índice, Git informará un error **`nothing added to commit but untracked files present (use “git add” to track)`**. Así que ahora sabes que necesitas agregar.
+
+<hr>
+
 ## “Un vistazo detrás de la cortina”
+
+Te vamos a contar el pequeño secreto de Git. Cuando agrega (uno o más archivos) al índice de Git, Git no toca ninguno de los archivos en su directorio de trabajo. En su lugar, copia el contenido de esos archivos en el índice. Este es un punto importante porque es crucial para la forma en que Git rastrea el contenido de nuestros archivos.
+
+<hr>
+
+**NOTA**
+
+A esto aludimos en las páginas anteriores.
+
+<hr>
+
+<img width="965" alt="image" src="https://user-images.githubusercontent.com/23094588/209496029-19d41ca8-534f-4a99-8cf7-1fadc5725e19.png">
+
+Entonces, ¿qué sucede cuando nos comprometemos(commit)? Bueno, como sabemos, Git toma el contenido del índice, lo coloca de manera segura en su banco de memoria y representa esa versión con un objeto de confirmación. ¡Esto significa que ahora Git tiene una tercera copia del contenido de sus archivos en su base de datos de objetos!
+
+<img width="1002" alt="image" src="https://user-images.githubusercontent.com/23094588/209496138-94e94beb-3454-4dc2-880c-cafbca9d2edc.png">
+
+**Puede haber hasta tres copias de cualquier archivo en su directorio de trabajo.**
+
 ## “Los múltiples estados de archivos en un repositorio Git”
+
+Así es como se ve una interacción típica con Git: realiza algunas ediciones en uno o más archivos, luego los agrega al índice y, cuando está listo, los committed. Ahora, mientras realiza este flujo de trabajo, Git intenta rastrear el estado de sus archivos para saber qué archivos son parte de su directorio de trabajo, qué archivos se agregaron al índice y qué archivos ya se committed en su object store.
+
+En todo momento, tenga en cuenta que Git está moviendo *copias* de su archivo desde el directorio de trabajo, al índice, a su object database(base de datos de objetos).
+
+<img width="740" alt="image" src="https://user-images.githubusercontent.com/23094588/209496445-fc1306c2-3b34-4621-a11a-7ec6f9475d42.png">
+
 ## “El índice es un “bloc de notas””
 ## “¡Computadora, informe de estado!”
 ## “¡Has hecho historia!”
