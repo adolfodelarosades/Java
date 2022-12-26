@@ -800,7 +800,7 @@ Y completamos el círculo: si hacemos commit, el contenido del índice se confir
 
 **En este ejercicio, suponga que acaba de crear un nuevo repositorio. ¿Puede identificar el estado de los archivos para cada uno de los siguientes pasos?
 
-----------> Respuestas en “BE Git Solution” .
+----------> Respuestas en “BE Git Solution”.
 
 **Creas un nuevo archivo en el repositorio llamado `Hello.txt`**.
 
@@ -863,6 +863,43 @@ Para darle una idea de cómo tendemos a trabajar, generalmente agregamos los arc
 
 ![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
 
+Hora de experimentar. Navegue hasta el directorio **`headfirst-git-samples`** y cree un nuevo directorio llamado **`play-with-index`**, y luego entre en este directorio con **`cd`**. Continúe e inicialice un nuevo repositorio usando **`git init`**. Usando su editor de texto, cree un nuevo archivo en el directorio **`play-with-index`** llamado **`multiple-add.txt`**. **Después de cada paso, dibuje cómo se ven el directorio de trabajo y el índice**:
+
+1. El contenido inicial de **`multiple-add.txt`** debe ser **“`This is my first edit`”**. ¡Asegúrese de guardar el archivo!
+
+   <img width="947" alt="image" src="https://user-images.githubusercontent.com/23094588/209575385-0299cc9b-a6a8-4e91-9b74-e16dace48554.png">
+
+2. Vuelva a la terminal y use **`git add multiple-add.txt`** para añadirlo al índice.
+
+<hr>
+
+**NOTA**
+
+Utilice este espacio para sus dibujos.
+
+<hr>
+
+3. De vuelta en el editor, cambie el texto del archivo a **“`This is my second edit`”**. Nuevamente, asegúrese de guardar.
+
+<hr>
+
+**NOTA**
+
+Utilice este espacio para sus dibujos.
+
+<hr>
+
+4. De vuelta en la terminal, agregue el archivo al índice nuevamente.
+
+<hr>
+
+**NOTA**
+
+Si se queda atascado, recuerde que nuestras soluciones se encuentran al final del capítulo.
+
+<hr>
+
+----------> Respuestas en “Sharpen your pencil Solution”.
 
 ## “¡Computadora, informe de estado!”
 ## “¡Has hecho historia!”
