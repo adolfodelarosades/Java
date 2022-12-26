@@ -1109,17 +1109,135 @@ El historial de confirmación(**commit history**) de Git a menudo se denomina gr
 
 <img width="226" alt="image" src="https://user-images.githubusercontent.com/23094588/209580236-071182ad-e005-4d02-a229-ae0a4bf20c19.png">
 
+<img width="684" alt="image" src="https://user-images.githubusercontent.com/23094588/209580294-d3176216-576e-4cdf-878c-4b1581eb5afc.png">
 
+**Across**
 
+1 What this book is all about
 
+5 Git stores your commit message and other data in a commit _____
 
+7 Command to list files
 
+8 Marge is teaching her how to use Git
 
+10 Where Git stores your files
 
+11 Use a hyphen (or two) when you add it to a command
 
+16 Command that tells Git to start tracking your file (2 words)
 
+17 This is where your changes show up when you add them to Git
 
+18 If Git isn’t watching it, your file is _____
 
+**Down**
+
+2 To get started, initialize a repository with the git _____ command
+
+3 Take a “snapshot” of your work using the git ____ command
+
+4 Git is a ___ control system
+
+6 Every dog’s favorite dating app
+
+9 Some commands need you to supply these
+
+12 You can work with Git from the ____ line
+
+13 Use the git ____ command to find out what’s going on
+
+14 Terminal command to make a directory
+
+15 Use this to find out where you are in the terminal
+
+----------> Answers in “Crossword Init Solution”.
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
+
+¡Es hora de ponerse a trabajar! Inicie la terminal y use el comando **`pwd`**. Anote el resultado que ve aquí:
+
+<img width="555" alt="image" src="https://user-images.githubusercontent.com/23094588/209580434-116b0d9a-e716-4ecb-b82a-057de8179679.png">
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
+
+Tu turno. En la ventana de terminal que tiene abierta, continúe y use **`mkdir`** para crear un nuevo directorio llamado **`my-first-commandline-directory`**.
+
+<img width="956" alt="image" src="https://user-images.githubusercontent.com/23094588/209580518-e9d42908-ecd5-4fe4-8fd7-db444754dea2.png">
+
+A continuación, ejecute el mismo comando nuevamente, en el mismo directorio. Anota el error que ves aquí:
+
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/23094588/209580561-107cbe1a-8653-40ad-9066-4498394852ca.png">
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
+
+Use la terminal para enumerar todos los archivos en el directorio actual. Vea si puede encontrar su archivo **`my-first-commandline-directory`**.
+
+<img width="952" alt="image" src="https://user-images.githubusercontent.com/23094588/209580658-ed20f8c6-6600-42a1-bc13-a8463dc91cb5.png">
+
+Luego use la bandera **`-A`** y vea si hay carpetas ocultas en el directorio actual.
+
+<img width="919" alt="image" src="https://user-images.githubusercontent.com/23094588/209580706-25e108c8-2974-4a14-8646-442a0c4d48d9.png">
+
+<hr>
+
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/209580760-bfadbbc2-55db-477c-8d47-ce4cd6548187.png">
+
+Adelante, prueba el cambio de directorios. Juegue con **`cd`** para entrat a su carpeta **`my-first-commandline-directory`** recién creada, luego use **`pwd`** para asegurarse de que cambió los directorios y luego use **`cd ..`** para volver a la carpeta principal. Use este espacio como un bloc de notas para practicar los comandos a medida que los usa.
+
+<img width="981" alt="image" src="https://user-images.githubusercontent.com/23094588/209580885-8c40d69d-c4bd-4f5e-85fc-634f8b5d479d.png">
+
+<hr>
+
+**¿QUIÉN HACE QUÉ SOLUCIÓN?**
+
+De "¿Quién hace qué?" .
+
+Con la línea de comandos, hay muchos comandos y banderas ondeando. En este juego de quién hace qué, relaciona cada comando con su descripción.
+
+<img width="952" alt="image" src="https://user-images.githubusercontent.com/23094588/209580939-5510464c-d54b-4750-b4ec-9cf868e50bad.png">
+
+<hr>
+
+### Solución de imanes de código
+
+<img width="223" alt="image" src="https://user-images.githubusercontent.com/23094588/209580965-a999ac4b-6b96-4e42-87ff-6cc758b4ecce.png">
+
+Tenemos todos los pasos enumerados para crear una nueva carpeta, cambiarla e inicializar para crear un nuevo repositorio de Git. Al ser desarrolladores diligentes, a menudo comprobamos que estamos en el directorio correcto. Para ayudar a nuestros colegas, teníamos el código bien colocado en nuestro refrigerador usando imanes de refrigerador, pero se cayeron al suelo. Tu trabajo es volver a armarlos. Tenga en cuenta que algunos imanes pueden usarse más de una vez.
+
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/209581028-a925fcf0-4c90-4056-ac65-19ae0da31878.png">
+
+<img width="1008" alt="image" src="https://user-images.githubusercontent.com/23094588/209581043-3bb756e8-4dae-440a-9217-cc089b0fc31a.png">
+
+**Recuerde que cualquier archivo en su directorio de trabajo puede ser untracked o tracked. Además, un archivo tracked puede ser staged, unmodified o modified.
+
+**En este ejercicio, suponga que acaba de crear un nuevo repositorio. ¿Puede identificar el estado de los archivos para cada uno de los siguientes pasos?**
+
+**De "SER Git".**
+
+**Creas un nuevo archivo en el repositorio llamado `Hello.txt`.**
+
+<img width="930" alt="image" src="https://user-images.githubusercontent.com/23094588/209581256-79913d4d-cd63-4ece-b08f-e5ba052ec6d2.png">
+
+**Usted agrega `Hello.txt` al índice (usando `git add`).**
+
+<img width="916" alt="image" src="https://user-images.githubusercontent.com/23094588/209581305-2d3319de-6545-48e2-aa7e-62380bdb881a.png">
+
+**Confirma todos los cambios que realizó (usando `git commit`).**
+
+<img width="920" alt="image" src="https://user-images.githubusercontent.com/23094588/209581357-aa047746-1462-4488-831d-a41188931b81.png">
+
+**Editas `Hello.txt` con algún contenido nuevo.**
+
+<img width="931" alt="image" src="https://user-images.githubusercontent.com/23094588/209581426-67a23398-68b4-4a6d-912e-bc43576e450e.png">
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
 
 <hr>
 
@@ -1166,7 +1284,15 @@ Realice cada uno de los pasos a continuación, anotando cada vez la salida de **
 <img width="821" alt="image" src="https://user-images.githubusercontent.com/23094588/209578031-b07ee6ba-033e-477e-bee5-68dde4df50a2.png">
 
 
-## Solución de inicialización de crucigramas
+### Solución de inicialización de crucigramas
+
+<img width="273" alt="image" src="https://user-images.githubusercontent.com/23094588/209581518-cd9788a9-77e5-4404-8044-ddcdce364fd0.png">
+
+¡Has hecho mucho en un capítulo! Felicitaciones por comenzar con Git. Es hora de relajarse con un crucigrama: encontrará todas las respuestas en algún lugar de este capítulo.
+
+<img width="614" alt="image" src="https://user-images.githubusercontent.com/23094588/209581582-fe229214-3c06-494e-8b7e-6a05f533f2ea.png">
+
+
 
 
 
@@ -1199,5 +1325,10 @@ Cerebro
 Coche
 
 <img width="821" alt="image" src="https://user-images.githubusercontent.com/23094588/209578042-06521d42-74b1-4222-aead-bf7e716587d7.png">
+
+Tenis
+
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/209580770-4020a2f7-c1ee-4038-8d2c-bc072faea156.png">
+
 
 
