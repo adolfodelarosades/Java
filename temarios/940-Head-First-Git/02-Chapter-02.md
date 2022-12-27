@@ -165,9 +165,127 @@ Crear una nueva branch no significa que pueda comenzar a usarla de inmediato. Ti
 
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/23094588/209588029-ec1d2f5b-0d40-4f2b-8775-37ea47551cba.png">
 
+El comando Git **`branch`**, sin argumentos, es como el comando **`git status`**, en el sentido de que es un comando "safe(seguro)". Simplemente enumera todas las ramas en su repositorio sin cambiar nada. Puede ejecutarlo tantas veces como lo considere necesario.
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: ¿Puedo tener espacios en blanco en el nombre de mi branch?**
+
+**R**: No. Si desea un nombre de rama de varias palabras, use guiones o guiones bajos. Si intenta poner un espacio en el nombre de su branch, Git informará un **`"is not a valid name"`** error. ¡Sin embargo, se permiten las barras diagonales (**`/`**)!
+
+Hablaremos más sobre los nombres de las branches al final de este libro, así que esté atento.
+
+**P: ¿Qué sucede si intento crear una branch con un nombre que ya existe?**
+
+**R**: Al igual que con un nombre de rama no válido, Git generará un error y le indicará que ya existe una rama con ese nombre. Es bueno adquirir el hábito de ejecutar **`git branch`** para ver una lista de todas las ramas en su repositorio antes de crear una nueva.
+
+**P: ¿Cuántas branch puedo tener en mi repositorio de Git?**
+
+**R**: ¡Tantos como quieras! Pero como veremos pronto, por lo general usará una rama para trabajar en un cambio pequeño y aislado, luego lo combinará(merge) en una rama de "integración" cuando haya terminado, y luego eliminará la rama. Nos sumergiremos en las ramas de integración y la eliminación de ramas pronto. Esto le ayuda a mantener un buen repositorio ordenado.
+
+<hr>
+
 ## "Cambio de pistas"
+
+Ahora sabe cómo crear branch, pero también acaba de aprender que crear una nueva branch no significa que pueda comenzar a usarla. Para cambiar a otra rama, usará otro comando de Git, acertadamente llamado **`switch`**, que toma un argumento, a saber, el nombre de la rama a la que desea cambiar:
+
+<img width="1006" alt="image" src="https://user-images.githubusercontent.com/23094588/209588568-9400d5c5-c0e0-49d2-9cf8-8812510347e3.png">
+
+Puede usar **`git branch`** para enumerar todas las branches nuevamente:
+
+<img width="940" alt="image" src="https://user-images.githubusercontent.com/23094588/209588613-170252c3-eddd-4bca-9b73-9586663ca4a9.png">
+
+<hr>
+
+<img width="968" alt="image" src="https://user-images.githubusercontent.com/23094588/209588629-0f84426f-e964-4ff0-b83d-c716a634cfac.png">
+
+**`git switch` es un comando relativamente nuevo.**
+
+*Si obtiene un error como **`"switch is not a git command"`**, asegúrese de verificar la versión de Git que ha instalado con **`git version`**. Necesitas tener una versión superior a **`2.23.0`***.
+
+*Las versiones anteriores de Git usaban el comando **`git checkout`** para cambiar de rama. Si bien eso aún funciona, preferimos mostrarle la forma más reciente (y ahora correcta) de hacer las cosas*.
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: ¿Qué sucede si escribo mal el nombre de la branch?**
+
+**R**: No te preocupes. Git simplemente reportará un error como **“`fatal: invalid reference`”**. Preferimos copiar y pegar el nombre que deseamos usar desde la salida del comando **`git branch`**. ¡Se acabaron los errores tipográficos!
+
+<hr>
+
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/23094588/209588029-ec1d2f5b-0d40-4f2b-8775-37ea47551cba.png">
+
+Si te gusta realizar hazañas notables en la línea de comandos, entonces te alegrará saber que el comando **`git switch`** te permite crear una nueva rama y cambiar a ella de una sola vez. Puede invocar el comando **`git switch`** con el indicador **`-c`**(o **`--create`**), dándole el nombre de la rama que desea crear, así:
+
+```sh
+git switch -c my-first-branch
+```
+
+Esto le pedirá a Git que cree la rama llamada **`my-first-branch`** y cambie a ella de inmediato. Sin embargo, dado que esta es su primera incursión en Git, continuaremos usando el comando **`git branch`** para crear nuevas ramas durante el resto de este libro.
+
+### De vuelta en el restaurante de los 80
+
+Te sientes bien. El menú de '80s Diner ahora se administra en un repositorio de Git. Y tiene una nueva solicitud: la gerencia planea introducir un menú especial de otoño, y su tarea es inventar algunos espeluznantes especiales con temas de Halloween. Te encargas de ver películas de terror de los años 80 para entrar en el estado de ánimo adecuado, y entras al trabajo rebosante de ideas para recetas.
+
+Seamos diligentes y creemos una rama para que pueda iterar sobre las ideas del menú. Comenzaremos en la terminal:
+
+<img width="954" alt="image" src="https://user-images.githubusercontent.com/23094588/209588922-b932e007-5eef-4113-942d-ae2170a344a6.png">
+
+A continuación, cree una nueva rama llamada **`add-fall-menu`** y cambie a ella.
+
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/23094588/209588953-e54a3301-c054-4a7f-922d-0b6b4ce8f452.png">
+
+Ya sabes que hacer. Aquí está su lista de verificación:
+
+<img width="994" alt="image" src="https://user-images.githubusercontent.com/23094588/209589000-2aa5c909-760e-48d4-9cf7-f279bddb7783.png">
+
 ## "¡Devuelvelo!"
-## “Visualización de sucursales”
+
+<img width="669" alt="image" src="https://user-images.githubusercontent.com/23094588/209589028-c7e87a49-871e-4dfa-8ff3-a42867252324.png">
+
+¡UH oh! Le mostraste al personal de cocina tu menú de otoño recién creado, pero no están encantados con el tibio título del nuevo menú. Necesitan que sea un poco más emocionante, por lo que le piden que cambie el encabezado de "Fall Menu" a "The Graveyard Shift".
+
+También podríamos hacer ese cambio. Regrese a su editor de texto y cambie la primera línea del archivo **`fall-menu.md`** de "Fall Menu" a "The Graveyard Shift". Asegúrese de guardar el archivo antes de continuar.
+
+Comenzaremos comprobando nuestro estado de Git. Como editamos el archivo **`fall-menu.md`**, debería aparecer como "modified".
+
+<img width="987" alt="image" src="https://user-images.githubusercontent.com/23094588/209589141-15c6c007-b1ea-4471-9239-d80e66112f77.png">
+
+<img width="651" alt="image" src="https://user-images.githubusercontent.com/23094588/209589155-dc2792f0-7605-462a-9d15-ba12060ec8bf.png">
+
+Eso se ve bien, así que sigamos adelante y commitemoslo. Comenzaremos agregando el archivo al índice y luego commitearlo. Usemos el mensaje "update heading(actualizar encabezado)":
+
+<img width="965" alt="image" src="https://user-images.githubusercontent.com/23094588/209589203-c8c8a990-0015-49a4-8636-d231d8597ae0.png">
+
+### Imanes de código
+
+<img width="254" alt="image" src="https://user-images.githubusercontent.com/23094588/209589235-288c51cd-1de4-4a80-b519-d590b934dc1f.png">
+
+¡Oh querido! Para ayudar a nuestros compañeros desarrolladores, hemos diseñado cuidadosamente todos los comandos necesarios para enumerar todas las ramas en su repositorio (existente), crear una nueva rama, cambiar a ella y verificar que todo esté bien. ¡Pobre de mí! Los imanes cayeron al suelo. Es tu trabajo volver a armarlos. Ten cuidado; se mezclaron algunos imanes adicionales y algunos se usaron más de una vez.
+
+<img width="1002" alt="image" src="https://user-images.githubusercontent.com/23094588/209589271-aa020bd4-0f40-45ed-aec4-758b68f23ab1.png">
+
+**----------> Respuestas en “Code Magnets Solution”.**
+
+<img width="601" alt="image" src="https://user-images.githubusercontent.com/23094588/209589310-e065fbd7-01d8-4ddf-b72e-fafdfd392ebd.png">
+
+**¡Gran pregunta!** Puede que no lo parezca en este momento, pero las branches le ofrecen mucha flexibilidad a medida que comienza a trabajar con múltiples requisitos.
+
+En este momento, tienes dos ramas: **`master`** y **`add-fall-menu`**. Inicializaste el repositorio, lo que te colocó en la rama **`master`**. Agregó y commiteo el menú existente en la rama **`master`**.
+
+Cuando obtuviste los requisitos para el menú de otoño, elegiste hacer todo ese trabajo en una rama separada: a saber, la rama **`add-fall-menu`**.
+
+Estas dos ramas representan dos requisitos completamente separados. Recuerde, las ramas le permiten aislar partes del trabajo entre sí. Si mañana la gerencia viniera y te pidiera que trabajes en algo que no tiene ninguna relación (¡y seguramente lo harán!), simplemente creas una nueva rama **`master`** y te pones a trabajar. Todo el trabajo que hizo en la rama **`add-fall-menu`** permanece intacto hasta que tenga la oportunidad de volver a él.
+
+La buena noticia aquí es que trabajar en una branch no es nuevo para usted: ¡ha estado trabajando con branches todo el tiempo! Además de tener que crear y cambiar ramas, su flujo de trabajo sigue siendo el mismo: agrega o edita archivos, los agrega al índice y luego los commitea.
+
+## “Visualización de branches”
+
+
 ## "Ramas, confirmaciones y los archivos contenidos dentro"
 ## “Trabajando en paralelo”
 ## “¿Qué es una rama, realmente?”
@@ -193,4 +311,7 @@ SERIOUS CODING - Gorra
 
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/23094588/209588029-ec1d2f5b-0d40-4f2b-8775-37ea47551cba.png">
 
+WATCH IT!
+
+<img width="968" alt="image" src="https://user-images.githubusercontent.com/23094588/209588631-39069271-94a0-46f5-8f77-601389e0f170.png">
 
