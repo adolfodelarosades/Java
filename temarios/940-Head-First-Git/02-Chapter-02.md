@@ -467,11 +467,95 @@ Volvamos al gráfico de commits que creaste para el ’80s Diner. Te lo hemos an
 
 Como puedes ver, cada vez que cambias de rama, estás cambiando potencialmente de commit (a menos que las dos ramas en cuestión apunten al mismo commit). Y un commit registra el estado del index cuando realizó el commit. Lo que significa...
 
-   **Cada vez que cambias de rama, Git reescribe tu directorio de trabajo para que luzca como cuando hiciste el commit más reciente en la rama a la que acabas de cambiar.**
+**Cada vez que cambias de rama, Git reescribe tu directorio de trabajo para que luzca como cuando hiciste el commit más reciente en la rama a la que acabas de cambiar.**
 
+<hr>
 
+**NOTA**
+
+Es muy importante entender esto. Así que tómate un descanso, aléjate, piénsalo y luego regresa a este libro.
+
+<hr>
+
+<hr>
+
+**NOTA**
+
+Esto es particularmente importante si tiene archivos abiertos en su editor. Es una buena idea actualizar los archivos en su editor o simplemente volver a abrir el proyecto después de cambiar de rama para ver el último conjunto de archivos.
+
+<hr>
+
+<img width="903" alt="image" src="https://user-images.githubusercontent.com/23094588/209856961-bd69434b-d843-43ea-b643-95a715263d76.png">
+
+**¡Sí!** Piensa en tu película o programa de televisión favorito. Casi cualquier historia deslumbrante tiene una serie de argumentos más pequeños que apoyan el arco principal, y lo que hace que el final sea verdaderamente satisfactorio es que todas las tramas secundarias finalmente atan la narrativa principal con un lazo.
+
+<hr>
+
+**NOTA**
+
+Sí, a menudo también nos han decepcionado. Pero no agonicemos por todas esas horas “Perdidas”.
+
+<hr>
+
+Puede pensar en las ramas que crea para trabajar en una tarea o historia en particular como tramas secundarias que eventualmente deben vincularse con la historia principal. Piense en el trabajo que ha realizado hasta ahora en el '80s Diner: tiene ideas para diferentes menús, pero una vez que todos los involucrados firman, desea que los tres menús estén en la misma rama. Es decir, desea fusionar las tres ramas en una sola.
+
+### Algunas ramas son más iguales que otras
+
+Sabemos que tener menús separados viviendo en branches separadas no es lo que queremos. Eso plantea la pregunta : ¿en qué rama debería vivir todo?
+
+Recuerde que cuando inicializa un nuevo repositorio de Git, siempre comienza con una rama llamada **`master`**. Dado que esta rama se crea de forma predeterminada, ¡siempre está ahí! Muchos equipos simplemente usan la rama **`master`** como la rama que albergará la historia principal de su proyecto.
+
+Esto a menudo se conoce como una **rama de "integración"**, ya que aquí es donde reúne todas las diferentes tareas en las que trabajó en otras ramas.
+
+Elegir **`master`** es a menudo sólo una cuestión de conveniencia. Puede optar por convertir cualquier rama en la rama de integración. Mientras usted y sus colegas estén de acuerdo, todo está bien.
+
+Mientras elige los nombres de las branches, también puede elegir un buen nombre. Una opción popular es **"`main`"** en lugar de **`master`**.
+
+Entonces, ***las ramas de integración son donde las cosas se unen***. ¿Qué significa eso para todo lo demás? Otras ramas a menudo se denominan ramas **"feature(características)"**, esencialmente ramas que sirven para presentar una cosa. Estas ramas servirían para agregar una nueva función, corregir un error o agregar y mejorar la documentación. Esencialmente, son una y están listas: para cada tarea separada, habría una rama de función diferente.
+
+<hr>
+
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/23094588/209588029-ec1d2f5b-0d40-4f2b-8775-37ea47551cba.png">
+
+Las ramas de **"feature(características)"** a menudo se denominan ramas de **"topic(tema)"**. Son esencialmente lo mismo.
+
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+Mencionamos que muchos equipos usan nombres como **`main`** en lugar de **`master`** para ramas de integración. ¿Se te ocurre algún otro nombre? Enumere algunos aquí (siéntase libre de usar su motor de búsqueda favorito para obtener algunas ideas):
+
+**----------> Ideas en “Sharpen your pencil Solution”.**
+
+<hr>
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
+
+Digamos que tiene un montón de imágenes en una carpeta en su computadora y otras en alguna otra carpeta. Además, hay algunos duplicados entre los dos. ¿Puede pensar en algún problema que podría enfrentar si intentara combinar todos los archivos de ambas carpetas?
+
+<hr>
 
 ## "¡Tráelo dentro!"
+
+Las ramas de integración juegan un papel fundamental en su repositorio de Git. Recuerde, lo que hace que una rama de integración sea especial es solo una convención; cualquier rama se puede convertir en una rama de integración que sirve como el lugar donde todo, grande y pequeño, funciones y correcciones de errores, se une.
+
+Reunir el trabajo que se realizó en ramas separadas se llama ***fusionar(merging)***, y Git tiene un comando específicamente integrado para hacer precisamente eso: **`merge`**. El comando **`git merge`** le permite combinar el trabajo realizado en diferentes ramas.
+
+La fusión en Git generalmente involucra dos ramas: ***la rama en la que se encuentra***(nos referiremos a esto como el **"proposer(proponente)"**) y ***la rama en la que desea fusionar o "mezclar"***(la llamaremos **"proposee(propuesto)"**) .
+
+Como estamos tan obsesionados con la comida, ¡vamos a duplicarlo! Piensa en hornear un pastel. Puedes empezar a preparar el glaseado ya que el bizcocho tiene que enfriarse al salir del horno. En algún momento, desea "fusionar" los dos juntos. Aquí, el pastel sería el proponente y el glaseado sería el propuesto.
+
+Continuemos con esa analogía (oh, sí, ¡la estamos duplicando!): digamos que tiene dos ramas en su repositorio **`bake-cake`**, y **`prepare-icing`**.
+
+<img width="933" alt="image" src="https://user-images.githubusercontent.com/23094588/209858878-47bbdcfb-0cb8-4ff2-900a-ed8317370f27.png">
+
+Luego, simplemente le decimos a Git que fusione la rama **`prepare-icing`** con la rama **`bake-cake`**, así:
+
+<img width="953" alt="image" src="https://user-images.githubusercontent.com/23094588/209859114-02cf2ea7-b9ad-485d-aebe-7ab127dee52e.png">
+
+
+
+
 ## "Lea el manual #&$!@ (edición de git branch)"
 ## "Algunas fusiones son de avance rápido"
 ## "No funciona del todo de la otra manera"
