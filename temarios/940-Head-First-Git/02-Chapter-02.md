@@ -327,10 +327,6 @@ Dado que la rama **`add-fall-menu`** comenzó con el commit que incluía el arch
 
 <img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850337-09d538e2-5da1-41ee-bf3f-9c0fafb09a59.png">
 
-BE Git
-
-<img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850368-57d82652-76aa-43cb-b2eb-27a73c6f6e70.png">
-
 **Dedique un poco de tiempo a comprender cómo cambia Git su directorio de trabajo cuando cambia de rama.**
 
 Comience con su terminal: asegúrese de estar en el directorio **`80s-diner`** y utilíce **`git branch`** para asegurarse de que está en la branch **`add-fall-menu`**.
@@ -401,11 +397,80 @@ Antes de continuar, vea si puede visualizar cómo se ve su historial de commits.
 
 <hr>
 
+<img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850368-57d82652-76aa-43cb-b2eb-27a73c6f6e70.png">
 
+Repitamos nuestro ejercicio anterior de visitar todas las branches en nuestro repositorio y enumerar los archivos que están presentes en cada branch, excepto que esta vez tenemos tres branches. Para cada una de las ventanas que se muestran a continuación, anote el resultado de la invocación **`git branch`** y luego enumere todos los archivos en cada rama:
 
+<img width="1165" alt="image" src="https://user-images.githubusercontent.com/23094588/209853943-c2fdb783-c7d5-472d-96bc-3aef8d1d6381.png">
+
+**---------->  Respuestas en “BE Git Solution”.**
+
+<hr>
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854126-73eb8d40-c36b-40fb-807c-ddfd68d0dc6d.png">
+
+Imagina que hubiera una manera de combinar las tres ramas diferentes en una sola rama. ¿Cómo sería su directorio de trabajo? ¿Cuántos archivos habría como resultado de integrar las tres ramas en una?
+
+<hr>
 
 ## “¿Qué es una rama, realmente?”
-## "¿Cambiar de sucursal o cambiar de directorio?"
+
+Dígalo con nosotros: **una rama es simplemente una referencia a un commit**. Entonces, ¿qué hace que una rama sea una rama? Comencemos con la función de un commit: **un commit es una instantánea del contenido que preparó (es decir, los archivos que agregó al índice)**. Si está trabajando en una tarea en la que ha realizado dos o más commits, entonces los commits se **"encadenan(strung)"**. Es decir, cada commit subsiguiente registra el ID del commit anterior.
+
+<hr>
+
+**NOTA**
+
+Hablamos de esto en el Capítulo 1 .
+
+<hr>
+
+<img width="1118" alt="image" src="https://user-images.githubusercontent.com/23094588/209854685-fa11a411-32a7-47bb-bd2d-e65a677f3724.png">
+
+Imagina que tienes una nota separada para cada rama en tu repositorio. Cada nota tiene el nombre de la rama y el ID del último commit en esa rama. Cuando realizas un commit en una rama, Git primero crea el commit. Luego toma la "nota adhesiva" que representa esa rama, borra el **ID del commit** que estaba en ella y escribe el del nuevo commit:
+
+<img width="1121" alt="image" src="https://user-images.githubusercontent.com/23094588/209855026-e6048cb3-48aa-4e53-98be-518e612dcbe2.png">
+
+Una rama siempre apunta al último commit de esa rama, y cada commit, a su vez, apunta a otro commit(su commit "parent"), y así sucesivamente.
+
+**Una rama es simplemente una referencia a un commit a través de su ID. Esta referencia se actualiza cada vez que realiza otro commit en esa rama.**
+
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+Mire el gráfico de commits hipotético a continuación y complete las notas adhesivas con la información necesaria para asociar un nombre de rama con el ID de commit al que apunta. Tenga en cuenta que puede haber más notas adhesivas de las que realmente necesita.
+
+<img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209855496-45ed5cd7-91bb-47e4-947b-80bbe09dbaee.png">
+
+Ahora supongamos que cambiamos a la rama **`fix-header`**, hacemos algunas ediciones y hacemos otro commit, a la que se le asignó la ID "G". ¿Puedes visualizar qué cambiaría en el diagrama de arriba?
+
+<hr>
+
+**NOTA**
+
+Dibuje el historial de commits y la nota adhesiva actualizada aquí.
+
+<hr>
+
+**----------> Respuestas en “Sharpen your pencil Solution”.**
+
+## "¿Cambiar de rama o cambiar de directorio?"
+
+¿Recuerda todos esos ejercicios que le hicimos hacer en los que cambiaba de rama y enumeraba los archivos en su directorio de trabajo? Bueno, todo ese trabajo duro está a punto de dar sus frutos. Estás a punto de entender lo que significa cambiar de rama.
+
+Recuerde, las ramas son solo punteros a commits. Y un commit es simplemente una instantánea de todo lo que agregó al index, junto con algunos metadatos, incluido el mensaje de confirmación que proporcionó cuando creó el commit. En otras palabras, el commit recuerda el estado del index en el momento en que realizó el commit.
+
+Volvamos al gráfico de commits que creaste para el ’80s Diner. Te lo hemos anotado, mostrándote los archivos que encontrarás en cada rama:
+
+<img width="1155" alt="image" src="https://user-images.githubusercontent.com/23094588/209856333-3f865d1f-212c-4b3c-9ddd-f027777509d2.png">
+
+Como puedes ver, cada vez que cambias de rama, estás cambiando potencialmente de commit (a menos que las dos ramas en cuestión apunten al mismo commit). Y un commit registra el estado del index cuando realizó el commit. Lo que significa...
+
+   **Cada vez que cambias de rama, Git reescribe tu directorio de trabajo para que luzca como cuando hiciste el commit más reciente en la rama a la que acabas de cambiar.**
+
+
+
 ## "¡Tráelo dentro!"
 ## "Lea el manual #&$!@ (edición de git branch)"
 ## "Algunas fusiones son de avance rápido"
@@ -436,4 +501,10 @@ SHARPEN YOUR PENCIL - Lapiz
 
 <img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
+BE Git
 
+<img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850368-57d82652-76aa-43cb-b2eb-27a73c6f6e70.png">
+
+BRAIN POWER - Cerebro
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
