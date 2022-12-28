@@ -417,7 +417,9 @@ Esta carpeta oculta representa el repositorio de Git. Su trabajo es almacenar to
 
 **R**: Buena pregunta. Esto es completamente seguro. Git simplemente te dirá que está reiniciando el repositorio de Git, pero no perderás ningún dato ni dañarás nada. De hecho, deberías probarlo en **`ch01_01`**. Estamos al principio de nuestro viaje, y la mejor manera de aprender es experimentar. ¿Qué tienes que perder?
 
-<img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209478980-56a71487-b174-4615-ae75-e74e41057abc.png">
+### 💻
+
+<img width="1136" alt="image" src="https://user-images.githubusercontent.com/23094588/209802312-71d3f990-2aaf-44fa-87c1-62f50cde69b3.png">
 
 **P: Otros sistemas de control de versiones que he usado tienen un componente de servidor. ¿No necesitamos eso aquí?**
 
@@ -425,7 +427,7 @@ Esta carpeta oculta representa el repositorio de Git. Su trabajo es almacenar to
 
 <hr>
 
-### Imanes de código
+### Imanes de código 📝
 
 ![image](https://user-images.githubusercontent.com/23094588/209478993-4680e2c5-f522-4835-aa96-0361f40221c7.png)
 
@@ -443,6 +445,8 @@ git init
 ls -A
 ```
 
+**----------> Respuestas en “Code Magnets Solution”.**
+
 ## “Preséntate a Git”
 
 Hay un paso más antes de comenzar a trabajar con Git y los repositorios de Git. Git espera que le des algunos detalles sobre ti. De esta forma, cuando creas una "instantánea", Git sabe quién la creó. Y estamos a punto de comenzar a hablar sobre la creación de instantáneas, así que terminemos con esto ahora mismo. Solo tiene que hacer esto una vez, y esto se aplicará a todos y cada uno de los proyectos con los que trabaje en su máquina.
@@ -450,6 +454,8 @@ Hay un paso más antes de comenzar a trabajar con Git y los repositorios de Git.
 Comenzaremos con nuestro viejo amigo de confianza, la terminal, y seguiremos adelante. **¡Asegúrese de usar su nombre y correo electrónico en lugar de los nuestros!** (Sabemos que nos ama, ¡pero no nos gustaría atribuirnos el mérito de su trabajo!) Comience abriendo una nueva ventana de terminal. No se preocupe por cambiar de directorio; para esta parte de nuestra configuración, no importa dónde lo ejecute.
 
 ![image](https://user-images.githubusercontent.com/23094588/209479151-4b7439f6-1c60-4b37-8064-fbd3c00fa317.png)
+
+### 💻
 
 <img width="1148" alt="image" src="https://user-images.githubusercontent.com/23094588/209479214-814cc9e5-3667-4621-a5a0-06dc445782df.png">
 
@@ -470,14 +476,6 @@ Analicemos lo que vamos a hacer, paso a paso.
 **Paso uno**:
 
 Cree una nueva carpeta de proyecto.
-
-<hr>
-
-**NOTA**
-
-Estos dos pasos deberían ser bastante familiares para usted.
-
-<hr>
 
 **Segundo paso**:
 
@@ -507,11 +505,12 @@ Ahora eso es lo que hemos estado esperando!
 
 <hr>
 
-## “Trabajando con el repositorio HawtDawg Git”
+## Mientras tanto, de vuelta en HawtDog Dating Service...
 
 ![image](https://user-images.githubusercontent.com/23094588/209479465-51df594b-bf40-4b14-8990-30656c7db7ae.png)
 
-<img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209479581-8406fd47-1922-450b-a0ea-4e965a96d05e.png">
+![image](https://user-images.githubusercontent.com/23094588/209805292-01d99a29-1f6e-4bea-87e3-222f01f1b620.png)
+
 
 ### Trabajando con el repositorio HawtDawg Git
 
