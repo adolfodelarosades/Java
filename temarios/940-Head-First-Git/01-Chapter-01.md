@@ -246,7 +246,7 @@ El resultado de **`mkdir`** no es muy alentador, por decir lo menos. Pero mientr
 
 ![image](https://user-images.githubusercontent.com/23094588/209477427-ccc6d454-d619-418f-8fb3-b79b2a66b777.png)
 
-**`ls`** de forma predeterminada, solo enumera archivos y carpetas normales. De vez en cuando (y vamos a necesitar esto lo suficientemente pronto) querrás ver también los archivos y carpetas ocultos. Para hacer eso, puede proporcionar **`ls`** con una *bandera*. Los ***indicadores***, a diferencia de los ***argumentos***, tienen un *prefijo con un guión* (para diferenciarlos de los argumentos). Para ver "all(todos)" los archivos y carpetas (incluidos los ocultos) podemos usar el indicador "A" (¡Sí! Mayúscula "A"), así:
+**`ls`** de forma predeterminada, solo enumera archivos y carpetas normales. De vez en cuando (y vamos a necesitar esto lo suficientemente pronto) querrás ver también los archivos y carpetas ocultos. Para hacer eso, puede proporcionar a **`ls`** una ***bandera***. Los ***indicadores***, a diferencia de los ***argumentos***, tienen un ***prefijo con un guión*** (para diferenciarlos de los argumentos). Para ver **"all(todos)"** los archivos y carpetas (incluidos los ocultos) podemos usar el **indicador "A"** (¡Sí! "A" Mayúscula), así:
 
 ![image](https://user-images.githubusercontent.com/23094588/209477516-8750587f-18cc-406b-b5b5-fdda84cf3a6c.png)
 
@@ -254,13 +254,15 @@ El resultado de **`mkdir`** no es muy alentador, por decir lo menos. Pero mientr
 
 ![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
 
+### 💻
+
 Use la terminal para enumerar todos los archivos en el directorio actual. Vea si puede encontrar su archivo **`my-first-commandline-directory`**.
 
 Luego use la bandera **`-A`** y vea si hay carpetas ocultas en el directorio actual.
 
 <img width="1390" alt="image" src="https://user-images.githubusercontent.com/23094588/209477682-d94ea450-1e6b-42b5-a28f-2ea22ad096c0.png">
 
--------> Respuestas en “Sharpen your pencil Solution”.
+**----------> Respuestas en “Sharpen your pencil Solution”.**
 
 ## “Más en la línea de comandos (casi ahí): cambiando directorios con `cd`”
 
