@@ -719,9 +719,71 @@ Finalmente, enumere los archivos en cada rama. Comience con la rama **`master`**
 
 ## "Algunas merges(fusiones) son fast-forward(de avance rápido)"
 
+Cuando fusiona dos ramas, está combinando el trabajo realizado en las ramas individuales: es decir, está reuniendo dos historiales de commits separados. Es posible que también haya notado el "fast-forward(avance rápido)" que apareció en la salida de su terminal cuando realizó la combinación entre **`master`** y la rama **`add-fall-menu`**. Entonces, ¿qué hizo realmente Git?
+
+Comencemos con el historial de commits, centrándonos solo en **`master`** y **`add-fall-menu`**. Para simplificar, usaremos letras en orden alfabético para representar los ID de commit. Se parece a esto.
+
+<img width="947" alt="image" src="https://user-images.githubusercontent.com/23094588/209866737-d99ae34c-1a89-408c-9a27-be486a4f0c8a.png">
+
+En este escenario, tenemos dos notas adhesivas para representar las dos ramas, cada una de las cuales apunta al último commit en esa rama. Lo que hay que notar aquí es que la rama **`add-fall-menu`** se basa en el último commit de la rama **`master`**. La rama **`master`** no ha cambiado (no hay nuevos commits en ella) desde el inicio de la rama **`add-fall-menu`**. En otras palabras, ¡la rama **`add-fall-menu`** tiene todo lo que hace la rama **`master`**! Lo que significa que, para que Git haga que **`master`**(el proponente) se vea como **`add-fall-menu`**, Git podría simplemente pasar **`master`** el mismo commit que el último commit en la rama **`add-fall-menu`**.
+
+Eso es exactamente lo que hace Git. Git vuelve a escribir la nota adhesiva para **`master`** que apunte al mismo commit al que apunta la nota adhesiva de **`add-fall-menu`**. Esto se conoce como “fast-forward” merge, donde una rama, en este caso **`master`**, simplemente salta hacia adelante(forward).
+
+<img width="990" alt="image" src="https://user-images.githubusercontent.com/23094588/209867818-cea95eb6-8935-4dea-ba1b-6303fe2166fb.png">
+
+Al fusionarse(merging), la fast-forward merge(fusión de avance rápido) es el mejor de los casos, ya que técnicamente no es una fusión en absoluto. Es simplemente una rama que "se pone al día" con otra.
+
+Mire hacia atrás y estudie los **ID de commit** que enumeró en la página anterior. Observe que tanto la rama **`add-fall-menu`** como la rama **`master`** apuntan al mismo commit después de la fusión(merge).
+
+<hr>
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
+
+¿Puedes pensar en una analogía que pueda explicar una fast-forward merge(fusión de avance rápido)? Piensa en **“merging(fusionar)”** el color naranja (compuesto por amarillo y rojo) y el color amarillo. ¿Qué significa **“merging(fusionar)”** el amarillo con el naranja?
+
+<hr>
 
 ## "No funciona del todo de la otra manera"
+
+<img width="952" alt="image" src="https://user-images.githubusercontent.com/23094588/209868448-ae433521-876a-4a08-adca-587f1e58768b.png">
+
+Pensemos en un hipotético: ¿qué pasaría si, en lugar de fusionarnos con la rama **`add-fall-menu`** en **`master`**, intentáramos fusionarnos **`master`** con la rama **`add-fall-menu`**? Resulta que, si bien esto puede no ser obvio, es absolutamente importante cómo realizamos la fusión.
+
+Primero, un resumen de cómo se vería la configuración. Esta vez, **`add-fall-menu`** es el proponente(proposer) y **`master`** es el propuesto(proposee). Así que comenzaríamos por cambiar a **`add-fall-menu`**, luego fusionaríamos la rama **`master`** en **`add-fall-menu`**.
+
+Así es como se desarrollaría esto:
+
+<img width="932" alt="image" src="https://user-images.githubusercontent.com/23094588/209868885-0a1dda51-914f-4cb5-a037-94a4082dc7ec.png">
+
+Womp Womp. No es exactamente lo que esperabas, ¿eh? Para comprender lo que sucedió aquí, volvamos al historial de commits. Así es como se veía el historial de commits antes de fusionar **`add-fall-menu`** con **`master`**.
+
+<img width="984" alt="image" src="https://user-images.githubusercontent.com/23094588/209869083-d8395aca-1565-46e7-accb-791ebbd801b6.png">
+
+Fusionar(Merging) **`master`** en **`add-fall-menu`** es solo otra forma de  decir "Oye, Git, **`add-fall-menu`** debería ser la combinación de **`add-fall-menu`** y **`master`**". Bueno, **`add-fall-menu`** se basa en **`master`**, lo que significa que ya *tiene* todo lo que **`master`** tiene para ofrecer.
+
+<hr>
+
+**NOTA**
+
+Recuerde, **`master`** no tiene nuevos commits desde que creamos la rama **`add-fall-menu`**.
+
+<hr>
+
+
+Entonces Git nos dice que **`add-fall-menu`** "Already up to date.(Ya está actualizado)". Es decir, **`add-fall-menu`** ya es la combinación de **`add-fall-menu`** y **`master`**. Para decirlo en términos del historial de commits, nada cambió ya que no había nada que hacer.
+
+Lógicamente, la "dirección" de la combinación siempre da como resultado que dos archivos (**`menu.md`** y **`add-fall-menu.md`**) estén presentes en el directorio de trabajo. Recuerde: la rama **`add-fall-menu`**, al estar basada en **`master`**, ya tiene el archivo **`menu.md`** porque comenzó con él. Pero el orden de la fusión tiene un gran impacto en su historial de commits, como acabamos de ver. En un caso, **`master`** fast-forwarded(avance rápido) al commit al que apunta **`add-fall-menu`**; en el otro caso, nada cambió.
+
 ## "Un poco más de configuración de Git"
+
+Antes de continuar con el resto del capítulo, debemos realizar una actualización de configuración más en Git. Tal vez recuerde que nosotros, en el Capítulo 1 , configuramos nuestro nombre y dirección de correo electrónico, que se registra en cada compromiso que hacemos. Sin embargo, hay momentos en los que es Git el que necesita realizar una confirmación (veremos este escenario en las próximas páginas). Pero para hacerlo, Git necesita un mensaje de confirmación. Hasta ahora, solo ha sido usted quien ha creado confirmaciones, y cada vez que lo hizo, proporcionó un mensaje de confirmación utilizando el -mindicador proporcionado al commitcomando. Sin embargo, si Git alguna vez necesita crear una confirmación, Git le presentará un editor de texto para escribir su mensaje de confirmación. La pregunta es: ¿qué editor debería usar?
+
+Git está configurado para usar un editor predeterminado, que es Vim. Si está familiarizado con el uso de Vim, no dude en omitir esta página y pasar a la siguiente. Sin embargo, si desea cambiar a un editor con el que está más familiarizado, siga leyendo.
+
+En la introducción de este libro, le recomendamos que instale Visual Studio Code. Si está utilizando Visual Studio Code, encienda su terminal y ejecute este pequeño fragmento de código.
+
+
+
 ## "¡Esperar! ¿Te moviste?"
 ## "Es una confirmación de fusión"
 ## “Las cosas no siempre van tan bien”
