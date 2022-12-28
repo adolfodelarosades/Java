@@ -41,7 +41,7 @@ Tu cerebro en Git . Aquí estás tratando de aprender algo, mientras que tu cere
 * “The technical review team”
 * “Acknowledgments”
 
-### [1. Chapter 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git/01-Chapter-01.md)
+### [1. Chapter 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git/01-Chapter-01.md) :+1:
 
 **Necesitas control de versiones**. Todo proyecto de software comienza con una idea, implementada en código fuente. Estos archivos son la magia que impulsa nuestras aplicaciones, por lo que debemos tratarlos con cuidado. Queremos asegurarnos de mantenerlos seguros, conservar un historial de cambios y atribuir el crédito (¡o la culpa!) a los autores legítimos. También queremos permitir una colaboración fluida entre varios miembros del equipo.
 
