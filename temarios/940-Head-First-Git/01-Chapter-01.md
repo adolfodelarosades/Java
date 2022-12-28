@@ -394,9 +394,12 @@ Una forma de confirmar que esto sucedió es hacer una lista de todos los archivo
 
 Esta carpeta oculta representa el repositorio de Git. Su trabajo es almacenar todo lo relacionado con su proyecto, incluidas todas las confirmaciones, el historial del proyecto, los archivos de configuración, lo que tenga. También almacena cualquier configuración y configuración específica de Git que haya habilitado para este proyecto en particular.
 
-<img width="1390" alt="image" src="https://user-images.githubusercontent.com/23094588/209478845-f3ed45b5-5401-4fa5-bd4b-d00770cc7c4d.png">
+### 💻
 
-<img width="758" alt="image" src="https://user-images.githubusercontent.com/23094588/209478865-52b8c5c3-b3e8-457f-b081-1947a11045aa.png">
+<img width="1140" alt="image" src="https://user-images.githubusercontent.com/23094588/209801760-e2962771-0c8a-4ca8-9885-fe049b7046e1.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209801895-89a4f266-8969-4dd8-89c9-ccfed542f069.png">
+
 
 <hr>
 
