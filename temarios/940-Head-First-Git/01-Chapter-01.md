@@ -276,17 +276,19 @@ A continuación, ¡muévete! Creamos un nuevo directorio, pero ¿cómo navegamos
 
 ![image](https://user-images.githubusercontent.com/23094588/209477795-89bea294-f592-4b54-8467-ef7cbfb0ba53.png)
 
-**Mantenga siempre un registro de su directorio de trabajo (usando **`pwd`**)**; la mayoría de las operaciones en la línea de comando son *relativas* a este directorio**.
+**Mantenga siempre un registro de su directorio de trabajo (usando `pwd`); la mayoría de las operaciones en la línea de comando son *relativas* a este directorio**.
 
 <hr>
 
 ![image](https://user-images.githubusercontent.com/23094588/209477846-6e827ce1-1b85-47d2-917d-8b892a283ab0.png)
 
+### 💻
+
 Adelante, prueba el cambio de directorios. Use **`cd`** para saltar a su carpeta **`my-first-commandline-director`** recién creada, luego use **`pwd`** para asegurarse de que cambió de directorio y luego use **`cd ..`** para volver a la carpeta principal. Use este espacio como un bloc de notas para practicar los comandos a medida que los usa.
 
 <img width="1394" alt="image" src="https://user-images.githubusercontent.com/23094588/209477968-4289a3ae-6cc5-48f7-99fd-a225f87d9004.png">
 
--------> Respuestas en “Exercise Solution”.
+**----------> Respuestas en “Exercise Solution”.**
 
 <hr>
 
@@ -332,6 +334,8 @@ Sin embargo, a esto aludimos; es mejor si evitamos los espacios en blanco en nue
 
 <hr>
 
+### 📝
+
 **¿QUIEN HACE QUE?**
 
 Con la línea de comandos, hay muchos comandos y banderas ondeando. En este juego de quién hace qué, relaciona cada comando con su descripción.
@@ -339,6 +343,10 @@ Con la línea de comandos, hay muchos comandos y banderas ondeando. En este jueg
 ![image](https://user-images.githubusercontent.com/23094588/209478279-4ca0d0cd-3bee-4e96-b12b-e3ab2bc09f7f.png)
 
 **Solución:** **`pwd`**, **`mkdir`**, **`cd ..`**, **`cd`**, **`ls`** y **`ls -A`**
+
+**----------> Respuestas en “Who Does What Solution?”.**
+
+<hr>
 
 ## "Limpiar"
 
