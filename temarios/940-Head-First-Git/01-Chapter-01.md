@@ -534,10 +534,6 @@ Guarde el archivo como **`Checklist.md`** en el directorio **`HawtDawg`**.
 
 ### 💻
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209806975-7b5cecc3-fd42-4abc-9c05-b0aa4e675a02.png">
-
-<img width="1056" alt="image" src="https://user-images.githubusercontent.com/23094588/209807309-5656cf4a-3a6b-4d5d-9243-0bb0be72e54e.png">
-
 <hr>
 
 **NOTA**
@@ -545,6 +541,10 @@ Guarde el archivo como **`Checklist.md`** en el directorio **`HawtDawg`**.
 Para guardar el archivo, seleccione Archivo en el menú superior, seleccione Guardar y luego navegue hasta donde creó el directorio **`HawtDawg`**.
 
 <hr>
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209806975-7b5cecc3-fd42-4abc-9c05-b0aa4e675a02.png">
+
+<img width="1056" alt="image" src="https://user-images.githubusercontent.com/23094588/209807309-5656cf4a-3a6b-4d5d-9243-0bb0be72e54e.png">
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209489850-30159e8d-624f-443a-b49d-87a48224e7d4.png">
 
