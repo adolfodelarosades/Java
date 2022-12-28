@@ -389,6 +389,19 @@ Los siguientes pasos son todos suyos. Cree un nuevo archivo llamado **`thursdays
 
 <img width="484" alt="image" src="https://user-images.githubusercontent.com/23094588/209853095-3bb71bdf-f56f-4a50-af31-4c9183f72edc.png">
 
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+Antes de continuar, vea si puede visualizar cómo se ve su historial de commits. Fuimos lo suficientemente amables para que comenzaras, pero necesitas terminarlo.
+
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/23094588/209853417-580f736c-ee63-458e-9de5-bc643ad71dc3.png">
+
+**----------> Respuestas en “Sharpen your pencil Solution”.**
+
+<hr>
+
+
 
 
 ## “¿Qué es una rama, realmente?”
