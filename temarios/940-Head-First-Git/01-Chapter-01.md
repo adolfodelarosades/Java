@@ -534,7 +534,7 @@ Guarde el archivo como **`Checklist.md`** en el directorio **`HawtDawg`**.
 
 ### 💻
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209806555-962e7769-74b4-4eac-9623-330f478019c0.png">
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209806975-7b5cecc3-fd42-4abc-9c05-b0aa4e675a02.png">
 
 <hr>
 
