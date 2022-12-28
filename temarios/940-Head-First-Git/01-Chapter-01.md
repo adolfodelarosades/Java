@@ -1062,9 +1062,13 @@ El status de Git nos dice que si realiza un commit en este momento, solo **`READ
 
 Antes de continuar, ¿puede visualizar qué cambiaría si hiciéramos un commit ahora mismo? Recuerde, hay dos archivos y solo uno está en el índice.
 
-Los commits de Git requieren que pasemos un mensaje. Mantengámoslo simple y usemos **“`my first commit`”**. ¡Vuelve a la terminal, tú!
+Los commits de Git requieren que pasemos un mensaje. Mantengámoslo simple y usemos **“`my first commit`”**. ¡Vuelve a la terminal!
 
 <img width="774" alt="image" src="https://user-images.githubusercontent.com/23094588/209577937-7be71a2d-009d-4761-b965-55baea92cd0a.png">
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209820712-06632eb0-8e22-4c36-af55-bda3747dfcc1.png)
 
 **Que tenemos:**
 
@@ -1087,6 +1091,14 @@ Realice cada uno de los pasos a continuación, anotando cada vez la salida de **
 2. Haz una confirmación con el mensaje de confirmación **“`my second commit`”**
 
    <img width="744" alt="image" src="https://user-images.githubusercontent.com/23094588/209578306-8dc736e7-5d8d-4d03-9418-9de1f108e14f.png">
+   
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209821105-3f7fbd0e-10d3-45f9-b7d4-b719c6c16e05.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209821378-2ce8c391-8df1-4a94-8c4d-70dbf60d8b1e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209821491-dd3d5715-560f-4f8f-907d-8c34ea0acbf8.png)
 
 **----------> Respuestas en “Test Drive Solution”.**
 
