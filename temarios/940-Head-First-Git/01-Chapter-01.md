@@ -887,7 +887,7 @@ Para darle una idea de cómo tendemos a trabajar, generalmente agregamos los arc
 
 ![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
 
-Hora de experimentar. Navegue hasta el directorio **`headfirst-git-samples`** y cree un nuevo directorio llamado **`play-with-index`**, y luego entre en este directorio con **`cd`**. Continúe e inicialice un nuevo repositorio usando **`git init`**. Usando su editor de texto, cree un nuevo archivo en el directorio **`play-with-index`** llamado **`multiple-add.txt`**. **Después de cada paso, dibuje cómo se ven el directorio de trabajo y el índice**:
+Hora de experimentar. Navegue hasta el directorio **`my-headfirst-git-samples`** y cree un nuevo directorio llamado **`play-with-index`**, y luego entre en este directorio con **`cd`**. Continúe e inicialice un nuevo repositorio usando **`git init`**. Usando su editor de texto, cree un nuevo archivo en el directorio **`play-with-index`** llamado **`multiple-add.txt`**. **Después de cada paso, dibuje cómo se ven el directorio de trabajo y el índice**:
 
 1. El contenido inicial de **`multiple-add.txt`** debe ser **“`This is my first edit`”**. ¡Asegúrese de guardar el archivo!
 
@@ -923,9 +923,25 @@ Si se queda atascado, recuerde que nuestras soluciones se encuentran al final de
 
 <hr>
 
-----------> Respuestas en “Sharpen your pencil Solution”.
+**----------> Respuestas en “Sharpen your pencil Solution”.**
 
 ### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209815146-4fd75cd5-fa6f-4f0d-92ab-9a64159b1243.png)
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209815437-1a80cf52-a240-4ee6-aa21-7e36784b60ee.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209815568-1bb55527-1ddb-47a1-8db8-875ebbeeea86.png">
+
+
+
+
+
+
+
+
+
+
 
 <img width="1383" alt="image" src="https://user-images.githubusercontent.com/23094588/209575810-f8d34938-536e-4fed-85d0-fcfd3905dde4.png">
 
