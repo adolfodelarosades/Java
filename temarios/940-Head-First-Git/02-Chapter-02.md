@@ -776,11 +776,49 @@ Lógicamente, la "dirección" de la combinación siempre da como resultado que d
 
 ## "Un poco más de configuración de Git"
 
-Antes de continuar con el resto del capítulo, debemos realizar una actualización de configuración más en Git. Tal vez recuerde que nosotros, en el Capítulo 1 , configuramos nuestro nombre y dirección de correo electrónico, que se registra en cada compromiso que hacemos. Sin embargo, hay momentos en los que es Git el que necesita realizar una confirmación (veremos este escenario en las próximas páginas). Pero para hacerlo, Git necesita un mensaje de confirmación. Hasta ahora, solo ha sido usted quien ha creado confirmaciones, y cada vez que lo hizo, proporcionó un mensaje de confirmación utilizando el -mindicador proporcionado al commitcomando. Sin embargo, si Git alguna vez necesita crear una confirmación, Git le presentará un editor de texto para escribir su mensaje de confirmación. La pregunta es: ¿qué editor debería usar?
+Antes de continuar con el resto del capítulo, debemos realizar una actualización de configuración más en Git. Tal vez recuerde que nosotros, en el Capítulo 1 , configuramos nuestro nombre y dirección de correo electrónico, que se registra en cada commit que hacemos. Sin embargo, hay momentos en los que es Git el que necesita realizar un commit(veremos este escenario en las próximas páginas). Pero para hacerlo, Git necesita un mensaje de commit. Hasta ahora, solo ha sido usted quien ha creado commits, y cada vez que lo hizo, proporcionó un mensaje de commit utilizando el indicador **`-m`** proporcionado al comando **`commit`**. Sin embargo, si Git alguna vez necesita crear un commit, Git le presentará un editor de texto para escribir su mensaje de commit. La pregunta es: ¿qué editor debería usar?
 
-Git está configurado para usar un editor predeterminado, que es Vim. Si está familiarizado con el uso de Vim, no dude en omitir esta página y pasar a la siguiente. Sin embargo, si desea cambiar a un editor con el que está más familiarizado, siga leyendo.
+Git está configurado para usar un editor predeterminado, que es **Vim**. Si está familiarizado con el uso de **Vim**, no dude en omitir esta página y pasar a la siguiente. Sin embargo, si desea cambiar a un editor con el que está más familiarizado, siga leyendo.
 
 En la introducción de este libro, le recomendamos que instale Visual Studio Code. Si está utilizando Visual Studio Code, encienda su terminal y ejecute este pequeño fragmento de código.
+
+<img width="1130" alt="image" src="https://user-images.githubusercontent.com/23094588/209870781-f3d9c8d4-329d-4cd9-a1e6-a28bf1a911d6.png">
+
+Dado que Git no ofrece confirmación de que algo, cualquier cosa, sucedió, sigamos adelante y confirmemos que nuestra configuración se mantuvo:
+
+<img width="1140" alt="image" src="https://user-images.githubusercontent.com/23094588/209870878-34951e6d-4427-440d-9318-0a7fd193f613.png">
+
+Por supuesto, no tiene que usar Visual Studio Code. Siéntase libre de apegarse al editor de su elección: **Notepad++**, **Emacs**, **Sublime Text**, o lo que sea que le guste. Dado que hay demasiados para enumerarlos aquí, lo alentamos a que inicie su motor de búsqueda favorito y busque **"`how do I set up <insert text editor name here> as my Git editor(cómo configuro <inserte el nombre del editor de texto aquí> como mi editor de Git)`"**. Lo único que debería cambiar es el argumento que proporciona en lugar de **"`code -w`"**.
+
+<hr>
+
+**NOTA**
+
+Bueno, está bien, mentimos: le pedimos que no use el **Bloc de notas**, que es el editor predeterminado que se incluye con Windows. Tiene suficientes pequeñas molestias que es mejor que uses otra cosa.
+
+<hr>
+
+<img width="554" alt="image" src="https://user-images.githubusercontent.com/23094588/209871246-a24262cf-0725-488e-95a6-c596e0a30baf.png">
+
+**¡Gran pregunta!** Los últimos ejercicios le han mostrado lo importante que es poder visualizar el historial de commits para que pueda comprender por qué Git se comporta de la forma en que lo hace.
+
+Todo lo que hemos hecho hasta ahora, incluida la creación de commits y ramas y la fusión de ramas, ha implicado interactuar con el historial de commits. Los nuevos commits se encadenan junto con sus commits padres en la misma rama; las ramas son notas adhesivas que apuntan a commits; y las fusiones sirven para unir dos ramas (dos historias de commits separadas).
+
+**¡En verdad, la iluminación de Git radica en comprender el historial de commits!**
+
+Además, casi todos los temas que tratamos en este libro girarán en torno a este gráfico.
+
+Hay una gran cantidad de herramientas de interfaz gráfica de usuario (GUI) que le permiten trabajar con Git. Hasta ahora, solo hemos usado las herramientas de línea de comandos de Git, pero una vez que haya avanzado lo suficiente en su viaje con Git, también puede comenzar a usar las herramientas de GUI. ¿Y adivina qué? ¡Todos te muestran el mismo gráfico de historial de confirmaciones! Estás justo por delante de la clase en ese sentido. ¿No estás contento de haber comprado este libro?
+
+<img width="1003" alt="image" src="https://user-images.githubusercontent.com/23094588/209871707-5c74c313-078c-416b-9383-0df67dd83ac0.png">
+
+### ¡Ya casi es jueves!
+
+El menú de otoño recién bautizado es un éxito. The '80s Diner nunca ha visto tanto tráfico peatonal, y el negocio está en auge. La gerencia quiere capitalizar todo el alboroto iniciando Throwback Thursdays *ahora*.
+
+Hemos decidido utilizar la rama **`master`** como la rama de integración. Ahora que el menú del jueves ha recibido la aprobación, vamos a fusionar la branch **`add-thurs-menu`** en la branch **`master`**. Pero antes de comenzar, recuerde: la rama **`add-thurs-menu`** se creó a partir de la rama **`master`**. Fusionar la rama **`add-thurs-menu`** en **`master`** resultó en una  fast-forward merge(fusión de avance rápido); en otras palabras, **`master`** simplemente avanzó hasta el último commit en **`add-thurs-menu`**.
+
+<img width="1179" alt="image" src="https://user-images.githubusercontent.com/23094588/209872318-4654bb3b-812d-443b-aec5-ba755fa15432.png">
 
 
 
