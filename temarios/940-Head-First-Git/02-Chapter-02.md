@@ -559,10 +559,58 @@ Luego, simplemente le decimos a Git que fusione la rama **`prepare-icing`** con 
 
 <img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859334-284bc68e-5061-4e40-a464-a4f8c70f0635.png">
 
+*Las rosas son rojas, las violetas son azules, mantienen* **las ramas** *específicas para lo* **único** *que hacen.*
+
+*Las rosas son tuyas, las violetas son mías, usa* **las ramas de integración** *cuando sea el momento de combinar.*
+
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+Digamos que asististe a la boda de un amigo. Tomaste algunas fotos con tu teléfono y, unos días después, el fotógrafo de la boda te pide que les envíes las fotos que tomaste. Haces una copia de las fotos de la boda en tu teléfono y les envías la copia para que puedan combinarlas con las que tomaron.
+
+Ahora tómese unos minutos para pensar en las siguientes preguntas:
+
+* ¿Quién tiene el conjunto “completo” de imágenes?
+
+<hr>
+
+**NOTA**
+
+Complete sus respuestas aquí.
+
+<hr>
+
+* ¿Alguno de ustedes perdió alguna foto?
+
+<hr>
+
+**NOTA**
+
+Complete sus respuestas aquí.
+
+<hr>
+
+* ¿Cuál de ustedes es la rama de “integración” en este escenario?
+
+<hr>
+
+**NOTA**
+
+Complete sus respuestas aquí.
+
+<hr>
+
+**----------> Respuestas en “Sharpen your pencil Solution”.**
+
+<hr>
+
+<img width="915" alt="image" src="https://user-images.githubusercontent.com/23094588/209860101-33998cb8-89ab-4b01-a305-cbaa04e92e03.png">
 
 
+## "Lea el manual #&$!@ (git branch edition)"
 
-## "Lea el manual #&$!@ (edición de git branch)"
+
 ## "Algunas fusiones son de avance rápido"
 ## "No funciona del todo de la otra manera"
 ## "Un poco más de configuración de Git"
@@ -603,4 +651,3 @@ MAKE IT STICK
 
 <img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859350-656c580f-cd14-4123-b3fc-3b6901fd405f.png">
 
-<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
