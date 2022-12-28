@@ -703,8 +703,23 @@ La respuesta a su pregunta radica en la eliminación de ramas, de lo que hablare
 
 <img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
 
+Reforcemos un poco más nuestras habilidades de línea de comandos. Vas a repetir nuestro ejercicio anterior de enumerar los últimos ID de commit en cada rama. Recuerda que puedes usar **`git branch -v`** y ver información de cada una de tus branches. Adelante, hazlo de nuevo:
 
-## "Algunas fusiones son de avance rápido"
+<img width="958" alt="image" src="https://user-images.githubusercontent.com/23094588/209865963-2e85ec8d-98e3-41ce-8bbe-c0a24ced10aa.png">
+
+Compáralas con las que hiciste la última vez. ¿Qué cambió?
+
+Finalmente, enumere los archivos en cada rama. Comience con la rama **`master`**, luego **`switch`** a la rama **`add-fall-menu`** y finalmente a la rama **`add-thurs-menu`**, usando **`ls`** para enumerar los archivos que ve en cada rama:
+
+<img width="951" alt="image" src="https://user-images.githubusercontent.com/23094588/209866207-f6aee6fb-ee2d-45d3-8554-201daaef0824.png">
+
+**---------->  Respuestas en “Exercise Solution”.**
+
+<hr>
+
+## "Algunas merges(fusiones) son fast-forward(de avance rápido)"
+
+
 ## "No funciona del todo de la otra manera"
 ## "Un poco más de configuración de Git"
 ## "¡Esperar! ¿Te moviste?"
