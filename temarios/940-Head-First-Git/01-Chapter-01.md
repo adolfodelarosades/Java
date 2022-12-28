@@ -224,6 +224,8 @@ Escribe el comando y el argumento que usaste aquí.
 
 A continuación, ejecute el mismo comando nuevamente, en el mismo directorio. Anota el error que ves aquí:
 
+<img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209477256-a79d9f5d-5e08-46e4-9c41-db37d3746b9d.png">
+
 <hr>
 
 **NOTA**
@@ -233,8 +235,6 @@ El error va aquí.
 **`mkdir: my-first-commandline-directory: File exists`**
 
 <hr>
-
-<img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209477256-a79d9f5d-5e08-46e4-9c41-db37d3746b9d.png">
 
 **----------> Respuestas en “Sharpen your pencil Solution”.**
 
