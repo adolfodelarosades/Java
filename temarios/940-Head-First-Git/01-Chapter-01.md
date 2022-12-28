@@ -364,13 +364,9 @@ Comience abriendo una ventana de terminal como hicimos en el ejercicio anterior.
 
 ![image](https://user-images.githubusercontent.com/23094588/209478506-840dabb4-e844-4761-be28-d4a603c0be38.png)
 
-<img width="1396" alt="image" src="https://user-images.githubusercontent.com/23094588/209478551-7cbd119b-10c1-4816-8599-679fb18a06ae.png">
-
 Ahora que estamos en un directorio completamente nuevo, creemos nuestro primer repositorio de Git. Para hacer esto, simplemente ejecutamos **`git init`** dentro de nuestra carpeta recién creada.
 
 ![image](https://user-images.githubusercontent.com/23094588/209478588-d67d5696-3c8e-49cd-846d-283cc5043e6f.png)
-
-<img width="1384" alt="image" src="https://user-images.githubusercontent.com/23094588/209478653-f034a4c9-5174-4d4f-a786-5fef3b03c09a.png">
 
 Eso fue bastante indoloro, ¿no? Y ahí lo tienes: tu primer repositorio de Git.
 
