@@ -6,7 +6,7 @@
 
 Y queremos todo esto en una herramienta que se mantiene fuera de nuestro camino, entrando en acción solo en el momento de nuestra elección.
 
-¿Existe tal **herramienta mágica**? Si estás leyendo esto, es posible que hayas adivinado la respuesta. Su nombre es **Git**! A los desarrolladores y organizaciones de todo el mundo les encanta Git. Entonces, ¿qué es lo que hace que Git sea tan popular?
+¿Existe tal ***herramienta mágica***? Si estás leyendo esto, es posible que hayas adivinado la respuesta. Su nombre es **Git**! A los desarrolladores y organizaciones de todo el mundo les encanta Git. Entonces, ¿qué es lo que hace que Git sea tan popular?
 
 * “Why we need version control”
 * “A quick tour of the command line: knowing where you are with pwd”
@@ -41,7 +41,7 @@ El control de versiones le permite hacer lo mismo con su trabajo: le brinda una 
 
 Lo que significa que si comete un error o quizás no está satisfecho con la táctica actual, puede volver a su instantánea anterior. Por otro lado, si está contento, simplemente crea otra instantánea y sigue avanzando.
 
-Y hay más Un sistema de control de versiones como Git le permite colaborar con confianza con sus compañeros desarrolladores sobre el mismo conjunto de archivos, sin pisar los dedos de los demás. Entraremos en detalles sobre esto en capítulos posteriores, pero por ahora debería ser suficiente saber esto.
+Y hay más. Un sistema de control de versiones como Git le permite colaborar con confianza con sus compañeros desarrolladores sobre el mismo conjunto de archivos, sin pisar los dedos de los demás. Entraremos en detalles sobre esto en capítulos posteriores, pero por ahora debería ser suficiente saber esto.
 
 ¡Puede pensar en Git como su banco de memoria, red de seguridad y plataforma de colaboración, todo integrado en uno!
 
@@ -79,15 +79,15 @@ Atentamente,
 
 **Sangita**: ¿Creo uno ahora?
 
-**Marge**: Un repositorio de Git es una carpeta administrada por Git. Déjame dar un paso atrás. Necesitará almacenar todos los archivos para este proyecto en algún lugar de su computadora, ¿verdad?
+**Marge**: Un repositorio de Git es una carpeta administrada por Git. Déjame dar un paso atrás. Necesitarás almacenar todos los archivos para este proyecto en algún lugar de su computadora, ¿verdad?
 
-**Sangita**: Prefiero mantener todos los archivos relevantes relacionados con mi proyecto, incluida el código fuente, la compilación y la documentación, en una carpeta. De esa manera, son fáciles de encontrar.
+**Sangita**: Prefiero mantener todos los archivos relevantes relacionados con mi proyecto, incluido el código fuente, la compilación y la documentación, en una carpeta. De esa manera, son fáciles de encontrar.
 
 **Marge**: Genial! Una vez que crees esa carpeta, usa Git para inicializar un repositorio dentro de la carpeta. Es así de simple.
 
 **Sangita**: ¿Y eso qué hace?
 
-**Marge**: Bueno, cada vez que inicia un nuevo proyecto que desea administrar con Git, ejecuta un comando de Git que prepara la carpeta para que pueda comenzar a usar otros comandos de Git dentro de esa carpeta. Piense en ello como girar la llave de su automóvil para arrancar el motor. Es el primer paso para que ya puedas empezar a utilizar tu coche.
+**Marge**: Bueno, cada vez que inicias un nuevo proyecto que deseas administrar con Git, ejecuta un comando de Git que prepara la carpeta para que pueda comenzar a usar otros comandos de Git dentro de esa carpeta. Piensa en ello como girar la llave de su automóvil para arrancar el motor. Es el primer paso para que ya puedas empezar a utilizar tu coche.
 
 **Sanguita**: Hmm. DE ACUERDO...
 
@@ -109,11 +109,11 @@ Incluso si tiene Git instalado, será útil ponerse al día con una nueva versi�
 
 ![image](https://user-images.githubusercontent.com/23094588/209468817-7ad065bb-b532-46e1-9af2-9c575c2dacd0.png)
 
-Considere cualquier proyecto en el que haya trabajado; por lo general, involucra uno o más archivos; estos pueden ser archivos de código fuente, archivos de documentación, scripts de compilación, lo que sea. Si queremos gestionar estos archivos con Git, el primer paso es crear un repositorio Git.
+Considere cualquier proyecto en el que haya trabajado; por lo general, involucra uno o más archivos; estos pueden ser archivos de código fuente, archivos de documentación, scripts de compilación, lo que sea. Si queremos gestionar estos archivos con Git, ***el primer paso es crear un repositorio Git***.
 
-Entonces, ¿qué es exactamente un repositorio de Git? Recuerde que una de las razones para usar un sistema de control de versiones es que podemos guardar las instantáneas de nuestro trabajo periódicamente. Por supuesto, Git necesita un lugar para almacenar estas instantáneas. Ese lugar estaría en el repositorio de Git.
+Entonces, ***¿qué es exactamente un repositorio de Git?*** Recuerde que una de las razones para usar un sistema de control de versiones es que podemos guardar las instantáneas de nuestro trabajo periódicamente. Por supuesto, Git necesita un lugar para almacenar estas instantáneas. Ese lugar estaría en el repositorio de Git.
 
-La siguiente pregunta es: ¿dónde vive este repositorio? Por lo general, tendemos a guardar todos los archivos de un proyecto en una carpeta. Si vamos a usar Git como nuestro sistema de control de versiones para ese proyecto, primero creamos un repositorio *dentro de* esa carpeta para que Git tenga un lugar para almacenar nuestras instantáneas. La creación de un repositorio de Git implica ejecutar el comando **`git init`** dentro de la carpeta superior de su proyecto.
+La siguiente pregunta es: ***¿dónde vive este repositorio?*** Por lo general, tendemos a guardar todos los archivos de un proyecto en una carpeta. Si vamos a usar Git como nuestro sistema de control de versiones para ese proyecto, primero creamos un repositorio *dentro de* esa carpeta para que Git tenga un lugar para almacenar nuestras instantáneas. La creación de un repositorio de Git implica ejecutar el comando **`git init`** dentro de la carpeta superior de su proyecto.
 
 Profundizaremos en los detalles pronto, pero por ahora, todo lo que necesita saber es que, sin crear un repositorio de Git, realmente no puede hacer mucho con Git.
 
@@ -124,7 +124,7 @@ No importa cuán grande sea su proyecto (en otras palabras, no importa cuántos 
 
 ### “Un recorrido rápido por la línea de comandos: saber dónde estás con `pwd`”
 
-Una cosa que va a utilizar mucho mientras trabaja en los ejercicios de este libro es la línea de comandos, así que dediquemos un poco de tiempo a familiarizarnos con ella. Comience abriendo una ventana de terminal como hicimos en la introducción y navegue hasta una ubicación en su disco duro. Como recordatorio, en la Mac encontrarás la aplicación **`Terminal.app`** en la carpeta **`Applications > Utilities`**. En Windows, navegue con el botón Inicio y debería ver Git Bash en la opción de menú Git. Será recibido con un mensaje, y esa es su señal de que el terminal está listo para aceptar comandos.
+Una cosa que va a utilizar mucho mientras trabaja en los ejercicios de este libro es **la línea de comandos**, así que dediquemos un poco de tiempo a familiarizarnos con ella. Comience abriendo una ventana de terminal como hicimos en la introducción y navegue hasta una ubicación en su disco duro. Como recordatorio, en la Mac encontrarás la aplicación **`Terminal.app`** en la carpeta **`Applications > Utilities`**. En Windows, navegue con el botón Inicio y debería ver Git Bash en la opción de menú Git. Será recibido con un mensaje, y esa es su señal de que el terminal está listo para aceptar comandos.
 
 <hr>
 
@@ -140,8 +140,6 @@ Comencemos con algo fácil. Escriba **`pwd`** y presione return; **`pwd`** signi
 
 ![image](https://user-images.githubusercontent.com/23094588/209476505-108abc23-4bcb-44e1-9938-1031d54eea36.png)
 
-<img width="1071" alt="image" src="https://user-images.githubusercontent.com/23094588/209476579-b02bafdc-8923-43fc-add9-60eb49517630.png">
-
 <hr>
 
 ![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
@@ -156,7 +154,11 @@ Usuarios de Windows: cuando decimos terminal, dicen... ¡¡Git Bash!!
 
 <hr>
 
-¡Es hora de ponerse a trabajar! Inicie la terminal y use el comando **`pwd`**. Anote el resultado que ve aquí: **`/Users/adulfodelarosa`**
+¡Es hora de ponerse a trabajar! 
+
+<img width="1071" alt="image" src="https://user-images.githubusercontent.com/23094588/209476579-b02bafdc-8923-43fc-add9-60eb49517630.png">
+
+Inicie la terminal y use el comando **`pwd`**. Anote el resultado que ve aquí: **`/Users/adulfodelarosa`**
 
 ¡Estupendo! Si es la primera vez que usa el terminal o no está muy familiarizado con él, entonces puede ser un poco desalentador. Pero sepa esto: lo guiaremos en cada paso del camino, no solo para este ejercicio, sino para todos los ejercicios de este libro.
 
