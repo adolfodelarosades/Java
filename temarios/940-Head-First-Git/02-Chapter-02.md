@@ -553,6 +553,12 @@ Luego, simplemente le decimos a Git que fusione la rama **`prepare-icing`** con 
 
 <img width="953" alt="image" src="https://user-images.githubusercontent.com/23094588/209859114-02cf2ea7-b9ad-485d-aebe-7ab127dee52e.png">
 
+¿Suena complejo? No se preocupe, lo haremos con calma, un pequeño paso a la vez.
+
+<hr>
+
+<img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859334-284bc68e-5061-4e40-a464-a4f8c70f0635.png">
+
 
 
 
@@ -590,5 +596,11 @@ BE Git
 <img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850368-57d82652-76aa-43cb-b2eb-27a73c6f6e70.png">
 
 BRAIN POWER - Cerebro
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
+
+MAKE IT STICK
+
+<img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859350-656c580f-cd14-4123-b3fc-3b6901fd405f.png">
 
 <img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
