@@ -929,11 +929,20 @@ Si se queda atascado, recuerde que nuestras soluciones se encuentran al final de
 
 ![image](https://user-images.githubusercontent.com/23094588/209815146-4fd75cd5-fa6f-4f0d-92ab-9a64159b1243.png)
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209815437-1a80cf52-a240-4ee6-aa21-7e36784b60ee.png">
+<img width="1147" alt="image" src="https://user-images.githubusercontent.com/23094588/209815758-fa00439a-c74c-40ea-95e5-9f9e0b334dcf.png">
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209815568-1bb55527-1ddb-47a1-8db8-875ebbeeea86.png">
+![image](https://user-images.githubusercontent.com/23094588/209815837-de19ab35-9ef9-411d-9913-3ff2fe0697be.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209816041-ce7681e8-8574-405a-98eb-f424c062cf2e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209816235-ffc6e5a9-1a59-459c-96ec-2c3b66098dbf.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209816406-769d0c58-e51f-4fc0-bea4-e76bd6eb64e0.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209816457-996a1faf-9f91-4d4b-b94f-54941bd266c3.png)
 
 
+ESTO NO
 
 
 
