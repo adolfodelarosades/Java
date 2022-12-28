@@ -820,9 +820,30 @@ Hemos decidido utilizar la rama **`master`** como la rama de integración. Ahora
 
 <img width="1179" alt="image" src="https://user-images.githubusercontent.com/23094588/209872318-4654bb3b-812d-443b-aec5-ba755fa15432.png">
 
+Ya deberías estar en la rama **`master`** si dejaste las cosas como estaban después de tu último ejercicio, pero para estar seguro:
 
+<img width="1113" alt="image" src="https://user-images.githubusercontent.com/23094588/209872678-a2fd6839-9417-481f-8cc8-0ed9450f55b7.png">
+
+<hr>
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
+
+Dejando de lado los tecnicismos de la fusión, ¿puede enumerar los archivos que resultarían si fusionara la rama **`add-thurs-menu`** con la rama **`master`**? ¿Cuántos archivos vería en el directorio de trabajo?
+
+<hr>
 
 ## "¡Esperar! ¿Te moviste?"
+
+Puede ser un poco sorprendente que, aunque **`add-thurs-menu`** se basó en la rama **`master`**, la rama **`master`** se ha movido desde entonces a un nuevo commit. Aquí es donde es importante darse cuenta de que cada vez que ramificas(you branch), en realidad estás creando una rama que apunta a un commit, no a otra rama. Las ramas, al ser simples punteros a los commits, ofrecen una manera fácil de llegar a los commits. Recuerde, la "base" de la rama es siempre un commit.
+
+<hr>
+
+**NOTA**
+
+A menudo escuchará a otros desarrolladores decir “Go ahead. Branch off master.(Adelante. Rama maestro.)” Lo que realmente están diciendo es crear una nueva rama que apunte al mismo commit al que apunta el maestro en ese momento.
+
+Entonces, ¿qué significa fusionar **`add-thurs-menu`** en la rama **`master`**? La respuesta está, por supuesto, en el historial de commits.
+
 ## "Es una confirmación de fusión"
 ## “Las cosas no siempre van tan bien”
 ## "¡Estoy tan en conflicto!"
