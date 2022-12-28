@@ -610,6 +610,99 @@ Complete sus respuestas aquí.
 
 ## "Lea el manual #&$!@ (git branch edition)"
 
+Git intenta ser muy útil y viene cargado con un manual completo. La buena noticia es que no tiene que recordar todos los matices de cada comando de Git (y hay **muchos** comandos), simplemente puede pedirle a Git que lo ayude. Si usted es el tipo de persona que lee documentación técnica por placer, querrá ejecutar **“`git <command> --help`”**, por ejemplo, **`git branch --help`**. Esta es la enchilada completa: todo lo que necesita saber sobre el comando **`branch`** se enumera aquí, ¡incluidos ejemplos de uso! Esta es una página a la que querrá volver una vez que tenga experiencia práctica con Git.
+
+<hr>
+
+**NOTA**
+
+Disculpas por el intermedio, pero esta digresión nos ayudará en unos minutos.
+
+<hr>
+
+<hr>
+
+**NOTA**
+
+También puede usar **"`git help <comando>`"**, que es un alias para **"`git <comando> --help`"**.
+
+<hr>
+
+Si tiene prisa, o simplemente es una persona de CliffsNotes, entonces la versión que desea es **"`git <command> -h`"** así: **`git branch -h`**. Esta es una versión mucho más corta de la página de ayuda. Por supuesto, si algo te llama la atención pero no entiendes qué hace o cómo usarlo, siempre puedes usar la versión más larga (**`--help`**) para obtener más detalles.
+
+<hr>
+
+**NOTA**
+
+Aquí está su truco de memoria del día: **"`--help`"** tiene más caracteres que **"`-h`"**, al igual que la página **`--help`** tiene más caracteres y detalles que la página **`-h`**.
+
+<hr>
+
+Git por defecto usa un **"pager(localizador)"** cuando muestra salidas largas, ya sabes, como páginas de ayuda. Un ***pager*** es simplemente un programa que solo muestra una página de texto a la vez. Puede usar las teclas del cursor para navegar hacia arriba y hacia abajo en la página, una línea a la vez. Una vez que haya terminado, presione la letra **"`q`"**, que significa **"quit(salir)"**, y su terminal volverá al prompt.
+
+<img width="944" alt="image" src="https://user-images.githubusercontent.com/23094588/209863240-70e15c07-9b83-4896-b5af-da3c480e2545.png">
+
+<hr>
+
+<img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
+
+En el directorio **`80s-diner`**, continúe y ejecute **`git branch --help`** (o **`git help branch`** use cualquiera de los dos), y busque la sección relacionada con el indicador **`-v`** o la bandera **`--verbose`**. **Lea sobre lo que hace**.
+
+A continuación, ejecute **`git branch -v`** y registre aquí el nombre de la rama y el ID de commit más reciente. (Los necesitará para las próximas secciones de este capítulo).
+
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/209863800-825f9358-d89e-4f67-9313-2f76e491da1d.png">
+
+
+**---------->  Respuestas en “Exercise Solution”.**
+
+<hr>
+
+### Oficialización del menú de otoño
+
+<img width="742" alt="image" src="https://user-images.githubusercontent.com/23094588/209864332-583db1cb-89d7-40bd-ad01-a8cc542cf748.png">
+
+De vuelta en el '80s Diner, después de semanas de espera, los chefs aprobaron su propuesta para el menú de otoño. Les encantan los platos nuevos que has creado y se están preparando para la noche del lanzamiento. Parece que ha terminado con su trabajo en esa característica. ¿Y ahora que?
+
+Nos apegaremos a la convención estándar de usar la rama **`master`** como la rama de integración. Eso significa que todo el trabajo debe fusionarse en la rama **`master`**. Así que hagamos eso.
+
+De vuelta en la terminal, cd en el directorio **`80s-diner`**. Primero, un chequeo de cordura para asegurarnos de que estás en un buen lugar: **`git status`**.
+
+<img width="983" alt="image" src="https://user-images.githubusercontent.com/23094588/209864588-6d57026b-3fb9-438b-933d-15fa42c09951.png">
+
+Dado que la rama **`master`** es la rama de integración, debe fusionar la rama **`add-fall-menu`** en la rama **`master`**. Primero tendrá que cambiar a la rama **`master`** y luego fusionar la rama **`add-fall-menu`**.
+
+<img width="984" alt="image" src="https://user-images.githubusercontent.com/23094588/209864833-26677099-d67a-492c-83cc-75a71497a434.png">
+
+Ahora, si tuviera que enumerar todos los archivos que forman parte de la rama **`master`**, verá que la rama **`master`** tiene dos archivos: **`menu.md`** y **`fall-menu.md`**! Es decir, la rama **`master`** refleja el trabajo que se hizo en las dos ramas por separado.
+
+<img width="942" alt="image" src="https://user-images.githubusercontent.com/23094588/209865073-a147809d-8be3-4ada-9eaa-a4b51dcf8979.png">
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: ¿Por qué no fusionamos la branch `master` en la branch `add-fall-menu`?**
+
+**R**: Tienes toda la razón al hacer esa pregunta. Hay dos cuestiones separadas aquí.
+
+Primero, considere la intención: si la rama **`master`** es la rama de integración, entonces todo debería fusionarse en la rama **`master`**.
+
+En segundo lugar, fusionar significa reunir varias líneas de trabajo diferentes, lo que tiene un efecto en el historial de commits de su proyecto. Lo que se fusiona con lo que tiene implicaciones profundas sobre cómo se producirá la fusión y cómo será el resultado final. Sí, eso suena confuso, así que vamos a pasar mucho tiempo en este capítulo hablando exactamente de eso. Más en unas pocas páginas.
+
+**P: Bien, entonces me está diciendo que el trabajo que hicimos en la branch `add-fall-menu` ahora se fusionó con la branch `master`. Entonces, ¿qué pasa con la rama `add-fall-menu`?**
+
+**R**: Por ahora, puedes dejarlo estar. Si recibe otra solicitud para realizar cambios adicionales en el menú de otoño, debe crear una nueva rama basada en **`master`**, realizar sus cambios y, cuando termine, simplemente fusionarse nuevamente en master.
+
+La respuesta a su pregunta radica en la eliminación de ramas, de lo que hablaremos al final de este capítulo.
+
+**P: Tengo un error `merge: not something we can merge`. ¡Ayuda!**
+
+**R**: ¡Asegúrese de obtener el nombre correcto de la branch! Recomendamos encarecidamente enumerar todas sus branches y copiar y pegar el nombre para evitar tales errores.
+
+<hr>
+
+<img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
+
 
 ## "Algunas fusiones son de avance rápido"
 ## "No funciona del todo de la otra manera"
