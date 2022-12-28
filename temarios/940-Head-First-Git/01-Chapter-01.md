@@ -1111,7 +1111,7 @@ Sabemos que los commits de Git registran los cambios que realizó y agregó al �
 
 <img width="793" alt="image" src="https://user-images.githubusercontent.com/23094588/209578721-9935c340-094e-430a-a9b0-0ed9f75543bd.png">
 
-Es decir, los commits forman una cadena, como la rama de un árbol o una cadena de luces navideñas. Esto significa que, dada una ID de commit, Git puede rastrear su linaje simplemente siguiendo el puntero "parent". Esto se conoce como **el historial de commits** y es una pieza integral de cómo funciona Git.
+Es decir, los commits forman una cadena, como la rama de un árbol o una cadena de luces navideñas. Esto significa que, dado un **ID de commit**, Git puede rastrear su linaje simplemente siguiendo el **puntero "parent"**. Esto se conoce como **el historial de commits** y es una pieza integral de cómo funciona Git.
 
 <hr>
 
@@ -1129,7 +1129,7 @@ Solo sepa que los **child commits** se refieren a sus parents, pero los padres n
 
 <img width="798" alt="image" src="https://user-images.githubusercontent.com/23094588/209577165-c9aad7e7-d089-44fe-923f-3d67f32f7e84.png">
 
-El historial de confirmación(**commit history**) de Git a menudo se denomina gráfico acíclico dirigido , o DAG (**directed acyclic graph, or DAG**) para abreviar, en el que los commits forman los "nodos" y los punteros al padre forman los "bordes(edges)". Son ***dirigidos*** porque los children señalan a los parent y acíclicos porque los parent no señalan a sus children.
+El historial de commits(**commit history**) de Git a menudo se denomina **Gráfico Acíclico Dirigido** , o **DAG(Directed Acyclic Graph)** para abreviar, en el que los commits forman los **"nodos"** y los punteros al padre forman los **"bordes(edges)"**. Son ***dirigidos*** porque los children señalan a los parent y **acíclicos** porque los parent no señalan a sus children.
 
 <hr>
 
@@ -1145,15 +1145,15 @@ El historial de confirmación(**commit history**) de Git a menudo se denomina gr
 * Para inicializar Git, usa el comando **`init`**, así:**`git init`**
 * El resultado de inicializar un nuevo repositorio de Git es que Git creará una carpeta oculta llamada **`.git`** en el directorio donde ejecutó el comando **`git init`**. Git utiliza esta carpeta oculta para almacenar sus instantáneas, así como algunas configuraciones para el mismo Git.
 * Cualquier directorio administrado por Git se denomina directorio de trabajo.
-* Git, por diseño, tiene un índice que actúa como un **"staging area(área de ensayo)"**. Para agregar archivos al índice, usa el comando **`git add <filename>`**.
-* Committing en Git se traduce en tomar una instantánea de los cambios que se almacenaron en el índice. El comando para crear un commit es **`git commit`**, que requiere que le proporciones un mensaje de confirmación para describir los cambios que estás commiteando, usando el indicador **`-m`** o **`--message`**: **`git commit -m “some message”`**
+* Git, por diseño, tiene un **index** que actúa como un **"staging area(área de ensayo)"**. Para agregar archivos al índice, usa el comando **`git add <filename>`**.
+* **Commitear(Committing)** en Git se traduce en tomar una instantánea de los cambios que se almacenaron en el índice. El comando para crear un commit es **`git commit`**, que requiere que le proporciones un mensaje de confirmación para describir los cambios que estás commiteando, usando el indicador **`-m`** o **`--message`**: **`git commit -m “some message”`**
 * A cada archivo en el directorio de trabajo se le asigna uno o más estados.
 * Un archivo completamente nuevo agregado al directorio de trabajo está marcado como **"untracked(sin seguimiento)"**, lo que sugiere que Git no conoce este archivo.
 * Agregar un nuevo archivo al índice de Git hace dos cosas: marca el archivo como **"tracked(seguido)"** y crea una copia de ese archivo en el índice.
 * Cuando realiza un commit, Git crea una copia de los archivos en el índice y los almacena en la base de datos de objetos. También crea un **commit object(objeto de confirmación)** que registra metadatos sobre el commit, incluido un puntero a los archivos que se acaban de almacenar, el nombre del autor y el correo electrónico, y la hora en que se realizó el commit, así como el mensaje de commit.
 * Cada commit en Git se identifica mediante un identificador único, denominado **ID de commit**.
 * En cualquier momento puedes preguntar a Git por el estado de los archivos en el directorio de trabajo y el repositorio de Git, usando el comando **`git status`**.
-* Cada commit, excepto el commit inicial en Git, almacena el ID de commit del commit que apareció justo antes, creando así una cadena de commits, como hojas en una rama.
+* Cada commit, excepto el commit inicial en Git, almacena el **ID de commit** del commit que apareció justo antes, creando así una cadena de commits, como hojas en una rama.
 * Esta cadena de commits se denomina **commit history**.
 
 ### Inicio de crucigrama
@@ -1266,7 +1266,7 @@ Tenemos todos los pasos enumerados para crear una nueva carpeta, cambiarla e ini
 
 <img width="1008" alt="image" src="https://user-images.githubusercontent.com/23094588/209581043-3bb756e8-4dae-440a-9217-cc089b0fc31a.png">
 
-**Recuerde que cualquier archivo en su directorio de trabajo puede ser untracked o tracked. Además, un archivo tracked puede ser staged, unmodified o modified.
+**Recuerde que cualquier archivo en su directorio de trabajo puede ser untracked o tracked. Además, un archivo tracked puede ser staged, unmodified o modified.**
 
 **En este ejercicio, suponga que acaba de crear un nuevo repositorio. ¿Puede identificar el estado de los archivos para cada uno de los siguientes pasos?**
 
@@ -1287,10 +1287,6 @@ Tenemos todos los pasos enumerados para crear una nueva carpeta, cambiarla e ini
 **Editas `Hello.txt` con algún contenido nuevo.**
 
 <img width="931" alt="image" src="https://user-images.githubusercontent.com/23094588/209581426-67a23398-68b4-4a6d-912e-bc43576e450e.png">
-
-<hr>
-
-![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
 
 <hr>
 
@@ -1334,54 +1330,13 @@ Realice cada uno de los pasos a continuación, anotando cada vez la salida de **
 
 <hr>
 
-<img width="821" alt="image" src="https://user-images.githubusercontent.com/23094588/209578031-b07ee6ba-033e-477e-bee5-68dde4df50a2.png">
-
-
 ### Solución de inicialización de crucigramas
 
 <img width="273" alt="image" src="https://user-images.githubusercontent.com/23094588/209581518-cd9788a9-77e5-4404-8044-ddcdce364fd0.png">
 
 ¡Has hecho mucho en un capítulo! Felicitaciones por comenzar con Git. Es hora de relajarse con un crucigrama: encontrará todas las respuestas en algún lugar de este capítulo.
 
+![image](https://user-images.githubusercontent.com/23094588/209823914-a43308ba-cc57-4b59-b7fd-0b91a9af5b4d.png)
+
 <img width="614" alt="image" src="https://user-images.githubusercontent.com/23094588/209581582-fe229214-3c06-494e-8b7e-6a05f533f2ea.png">
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lapiz
-
-![image](https://user-images.githubusercontent.com/23094588/209476616-33b37f9d-02db-4825-b5c3-344274c9a323.png)
-
-Exercice
-![image](https://user-images.githubusercontent.com/23094588/209477852-56e84a65-5e83-4ce3-a3eb-ebd2e27a797d.png)
-
-Gorra
-
-<img width="798" alt="image" src="https://user-images.githubusercontent.com/23094588/209577165-c9aad7e7-d089-44fe-923f-3d67f32f7e84.png">
-
-![image](https://user-images.githubusercontent.com/23094588/209477852-56e84a65-5e83-4ce3-a3eb-ebd2e27a797d.png)
-
-
-Cerebro
-
-<img width="817" alt="image" src="https://user-images.githubusercontent.com/23094588/209577818-67e2bb86-50f9-4350-9235-edbccea8b7db.png">
-
-Coche
-
-<img width="821" alt="image" src="https://user-images.githubusercontent.com/23094588/209578042-06521d42-74b1-4222-aead-bf7e716587d7.png">
-
-Tenis
-
-<img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/209580770-4020a2f7-c1ee-4038-8d2c-bc072faea156.png">
-
-
 
