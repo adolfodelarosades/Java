@@ -285,9 +285,112 @@ La buena noticia aquí es que trabajar en una branch no es nuevo para usted: ¡h
 
 ## “Visualización de branches”
 
+Entonces, ¿qué sucede cuando haces un commit en una rama? Quizás ayude recapitular lo que hemos hecho hasta ahora, *después de* inicializar un repositorio en la carpeta **`80s-diner`**:
+
+* Agregamos el archivo **`menu.md`** y lo commiteamos. Recuerde que este commit está en el valor predeterminado, es decir, la rama **`master`**.
+* Luego creamos la rama **`add-fall-menu`**.
+* Introdujimos el archivo **`fall-menu.md`** y lo commiteamos.
+* Tuvimos que corregir el encabezado, así que hicimos un cambio en el archivo **`fall-menu.md`** e hicimos un segundo commit.
+
+<img width="1002" alt="image" src="https://user-images.githubusercontent.com/23094588/209847759-4a73e802-439c-4d53-b2eb-597b64ca89a3.png">
+
+Como puede ver, hicimos algunos trabajos en la branch **`master`** y ahora tenemos trabajo en la branch **`add-fall-menu`**.
+
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848106-d0b45bd3-1e48-4f6e-b009-90722df38d7a.png">
+
+¿Qué cambiaría en la visualización si permanecieras en la rama **`add-fall-menu`** y tuvieras que hacer otro commit?
+
+**----------> Respuestas en “Sharpen your pencil Solution”.**
+
+<hr>
+
 
 ## "Ramas, confirmaciones y los archivos contenidos dentro"
+
+Sabemos que los commits en una rama están **"sequenced(secuenciadas)"**, es decir, son como los brotes en la rama de un árbol: uno viene después del siguiente. ¿Qué significa eso para los archivos que conoce cada commit? Recuerde que los repositorios de Git están predeterminados en la rama **`master`**. Entonces, nuestro primer commit, que introdujo el archivo **`menu.md`**, estaba en la branch **`master`**.
+
+<img width="1097" alt="image" src="https://user-images.githubusercontent.com/23094588/209849057-3bf23431-9530-4dc1-9e12-f75c1c81daed.png">
+
+En este punto, teníamos un commit en la rama **`master`**. Cuando creamos la rama **`add-fall-menu`**, Git usó este commit como punto de partida para la nueva rama. En otras palabras, tanto la branch **`master`** como la branch **`add-fall-menu`** comparten este commit.
+
+<img width="1101" alt="image" src="https://user-images.githubusercontent.com/23094588/209849424-ad0bbbe5-5bc4-4ba7-92b1-cc2ea0403b11.png">
+
+Hasta ahora, solo hemos commiteado el archivo **`menu.md`**. Dado que tanto la rama **`master`** como la rama **`add-fall-menu`** apuntan al mismo commit, ambos conocen el mismo archivo **`menu.md`**.
+
+Luego introdujimos el archivo **`all-menu.md`** en la rama **`add-fall-menu`** y lo commiteamos.
+
+<img width="1141" alt="image" src="https://user-images.githubusercontent.com/23094588/209849934-13a41d27-c86e-4f5b-b5b9-919a10a8819f.png">
+
+Dado que la rama **`add-fall-menu`** comenzó con el commit que incluía el archivo **`menu.md`** y luego introdujo el archivo **`fall-menu.md`**, ahora tiene ambos archivos. Pero la rama **`master`** solo tiene el commit con el archivo **`menu.md`**, por lo que la rama **`master`** solo tiene el archivo **`menu.md`**.
+
+<img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850337-09d538e2-5da1-41ee-bf3f-9c0fafb09a59.png">
+
+BE Git
+
+<img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850368-57d82652-76aa-43cb-b2eb-27a73c6f6e70.png">
+
+**Dedique un poco de tiempo a comprender cómo cambia Git su directorio de trabajo cuando cambia de rama.**
+
+Comience con su terminal: asegúrese de estar en el directorio **`80s-diner`** y utilíce **`git branch`** para asegurarse de que está en la branch **`add-fall-menu`**.
+
+<img width="733" alt="image" src="https://user-images.githubusercontent.com/23094588/209850722-1dc8b39b-9dd3-4102-9a66-55b8291d3b7b.png">
+
+Finalmente, vea si puede explicar lo que está viendo aquí.
+
+<hr>
+
+**NOTA**
+
+La explicación va aquí.
+
+<hr>
+
+**----------> Respuestas en “BE Git Solution”.**
+
+### Conversación de cubículo
+
+<img width="781" alt="image" src="https://user-images.githubusercontent.com/23094588/209851034-593b8c7d-3cb3-44f4-b1af-db4c2119d005.png">
+
+**Maddie**: Sé que estás esperando la aprobación final del menú de otoño, pero tengo algo más que necesito que te encargues por mí.
+
+**Ginebra**: Espera, ¿es este un nuevo menú?
+
+**Maddie**: Sí. Hemos decidido hacer un menú especial para las noches de los jueves. El tema son las películas de los 80, por lo que se mantiene en la marca, y lo llamamos... espérelo... ¡Throwback Thursdays!
+
+**Guinevere**: Está bien... pero todavía estamos en medio de terminar el menú de otoño.
+
+**Armando**: Está bien, Ginebra. Crearé un nuevo archivo en nuestro repositorio, trabajaré en el nuevo menú y lo commitare.
+
+**Ginebra**: ¡Vaya! Esperar. Si se commitea ahora, lo hará en la rama **`add-fall-menu`**. Queremos mantener estos cambios independientes entre sí. Aquí, déjame mostrarte lo que sucederá si haces un commit ahora mismo:
+
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/23094588/209851456-03103778-2ce9-48c6-9405-8984c284d665.png">
+
+**Armando**: Entonces usaré el comando **`branch`** para crear una nueva rama. Ese debería ser el truco, ¿verdad?
+
+**Guinevere**: Bueno, queremos asegurarnos de no incluir ninguno de los cambios en el menú de otoño. Actualmente estamos en la branch **`add-fall-menu`**. Si creas una nueva rama, se basará en la rama **`add-fall-menu`**. Queremos que la nueva rama se base en la rama **`master`**.
+
+<img width="982" alt="image" src="https://user-images.githubusercontent.com/23094588/209851953-0da467e7-172f-4ab5-9e01-4e1ec0a9302f.png">
+
+**Armando**: ¡Ay! ESTÁ BIEN. Entonces, primero, cambio a la rama **`master`**, luego uso el comando **branch** para crear una nueva rama. De esa manera, mantenemos los cambios en el menú de otoño completamente independientes de los cambios en el menú del jueves. ¡Entendido!
+
 ## “Trabajando en paralelo”
+
+Veamos qué se necesita para empezar a trabajar en el menú de Throwback Thursdays. Asegúrese de que estás en el directorio **`80s-diner`** y que los informes están bien con **`git status`**.
+
+<img width="994" alt="image" src="https://user-images.githubusercontent.com/23094588/209852477-53118c05-d9c5-4186-b572-a62c25d0a937.png">
+
+Si no está en la branch **`master`**, su primer acción es cambiar a la branch **`master`**. Esto asegura que la nueva rama se basará en la rama **`master`**. Luego podemos crear nuestra nueva branch y agregar el nuevo menú **Throwback Thursday**. Llamemos a nuestra nueva branch **`add-thurs-menu`**.
+
+<img width="941" alt="image" src="https://user-images.githubusercontent.com/23094588/209852747-4741e77d-d55e-4db2-b081-b10271e02743.png">
+
+Los siguientes pasos son todos suyos. Cree un nuevo archivo llamado **`thursdays-menu.md`** en el directorio **`80s-diner`** con el menú como se muestra a la derecha, agréguelo al index y commitelo con el mensaje **"`add thursdays menu`"**. ¡Asegúrate de comprobar con **`git status`** cuando hayas terminado!
+
+<img width="484" alt="image" src="https://user-images.githubusercontent.com/23094588/209853095-3bb71bdf-f56f-4a50-af31-4c9183f72edc.png">
+
+
+
 ## “¿Qué es una rama, realmente?”
 ## "¿Cambiar de sucursal o cambiar de directorio?"
 ## "¡Tráelo dentro!"
@@ -314,4 +417,10 @@ SERIOUS CODING - Gorra
 WATCH IT!
 
 <img width="968" alt="image" src="https://user-images.githubusercontent.com/23094588/209588631-39069271-94a0-46f5-8f77-601389e0f170.png">
+
+
+SHARPEN YOUR PENCIL - Lapiz
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
 
