@@ -165,7 +165,7 @@ Inicie la terminal y use el comando **`pwd`**. Anote el resultado que ve aquí: 
 ¡Estupendo! Si es la primera vez que usa el terminal o no está muy familiarizado con él, entonces puede ser un poco desalentador. Pero sepa esto: lo guiaremos en cada paso del camino, no solo para este ejercicio, sino para todos los ejercicios de este libro.
 
 
--------> Respuestas en “Sharpen your pencil Solution”.
+**----------> Respuestas en “Sharpen your pencil Solution”.**
 
 <hr>
 
@@ -179,8 +179,6 @@ A diferencia de **`pwd`**, que simplemente te dice la ruta del directorio actual
 
 ![image](https://user-images.githubusercontent.com/23094588/209476863-39cf0660-e160-4041-a529-990abbf1e37c.png)
 
-A diferencia de **`pwd`**, que simplemente te dice la ruta del directorio actual, **`mkdir`** toma un *argumento*, que es el nombre del directorio que deseas crear:
-
 **`mkdir`, se producirá un error si intenta crear un directorio con un nombre que ya existe.** 
 
 *Si intenta crear un nuevo directorio con el mismo nombre que uno que ya existe en el directorio actual,* **`mkdir`** *simplemente informará* **`File exists`** *y no hará nada. Además, no deje que el "file" en "File exists" lo confunda; en este caso, simplemente significa carpeta*.
@@ -193,13 +191,15 @@ A diferencia de **`pwd`**, que simplemente te dice la ruta del directorio actual
 
 Asegúrese de verificar su respuesta con nuestra solución al final del capítulo.
 
+<hr>
+
+### 💻
+
+Tu turno. En la ventana de terminal que tiene abierta, continúe y use **`mkdir`** para crear un nuevo directorio llamado my-**`my-first-commandline-directory`**.
+
 En mi caso trabajare dentro de la carpeta **`/Users/adulfodelarosa/Documents/PROYECTOS/VSC/940-Head-First-Git`** así que lo primero será cambiarme a esa carpeta.
 
 <img width="1380" alt="image" src="https://user-images.githubusercontent.com/23094588/209477189-25d97ab6-f2cb-4cbe-b56e-3593a5cdc7bd.png">
-
-<hr>
-
-Tu turno. En la ventana de terminal que tiene abierta, continúe y use **`mkdir`** para crear un nuevo directorio llamado my-**`my-first-commandline-directory`**.
 
 <hr>
 
@@ -236,7 +236,7 @@ El error va aquí.
 
 <img width="1388" alt="image" src="https://user-images.githubusercontent.com/23094588/209477256-a79d9f5d-5e08-46e4-9c41-db37d3746b9d.png">
 
--------> Respuestas en “Sharpen your pencil Solution”.
+**----------> Respuestas en “Sharpen your pencil Solution”.**
 
 <hr>
 
