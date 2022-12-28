@@ -562,7 +562,9 @@ También puede usar la versión larga de **`-m`**, así: **`git commit --message
 
 <hr>
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209490481-524a4091-9dd1-41a8-904a-703740596f4e.png">
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209808732-4a86c971-d20a-4ecc-8580-96ac4c98914b.png)
  
 ### Hablando de...
 
