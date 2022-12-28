@@ -878,7 +878,6 @@ Hay otro aspecto sutil del índice: **no hay ningún comando para "vaciar" el í
 
 Estos son puntos importantes. Tómese un momento para que captar antes de continuar.
 
-
 <hr>
 
 Para darle una idea de cómo tendemos a trabajar, generalmente agregamos los archivos que deseamos enviar al índice cuando creemos que estamos listos. Luego nos aseguramos de que todo se vea bien, y si es así, hacemos un commit. Por otro lado, si detectamos algo (como un error tipográfico o si nos perdimos un detalle menor), hacemos nuestras ediciones, agregamos esos archivos nuevamente al índice y luego commiteamos los archivos. Lave, enjuague, repita.
@@ -942,30 +941,6 @@ Si se queda atascado, recuerde que nuestras soluciones se encuentran al final de
 ![image](https://user-images.githubusercontent.com/23094588/209816457-996a1faf-9f91-4d4b-b94f-54941bd266c3.png)
 
 
-ESTO NO
-
-
-
-
-
-
-
-
-
-<img width="1383" alt="image" src="https://user-images.githubusercontent.com/23094588/209575810-f8d34938-536e-4fed-85d0-fcfd3905dde4.png">
-
-<img width="1023" alt="image" src="https://user-images.githubusercontent.com/23094588/209575961-e4a8decb-5c49-4df0-be9b-8d48b97130a1.png">
-
-<img width="1028" alt="image" src="https://user-images.githubusercontent.com/23094588/209576005-cf05a674-5403-43ef-8ac7-1409ba40c61f.png">
-
-<img width="1378" alt="image" src="https://user-images.githubusercontent.com/23094588/209576080-c53ede67-3b42-4fc9-b8f4-a0b49d4d73a9.png">
-
-<img width="1029" alt="image" src="https://user-images.githubusercontent.com/23094588/209576103-9c5271f5-f2b9-4742-bd73-fc2915acf14f.png">
-
-<img width="1380" alt="image" src="https://user-images.githubusercontent.com/23094588/209576132-088bb1b5-eb3f-4c05-a2ec-fb95b92532ae.png">
-
-<img width="1382" alt="image" src="https://user-images.githubusercontent.com/23094588/209576199-2f143470-c798-4e63-8a7b-feac417e0271.png">
-
 ## “¡Computadora, informe de estado!”
 
 A medida que continúa trabajando con Git, a menudo es útil verificar el estado de los archivos en su directorio de trabajo. Uno de los comandos más útiles en tu arsenal de Git es el comando **`git status`**. Este comando es particularmente útil a medida que su proyecto crece en tamaño, con múltiples archivos.
@@ -980,7 +955,7 @@ Recuerde que el directorio de trabajo es el directorio que contiene la carpeta o
 
 Entonces, exploremos cómo usar el comando de status: creará otro Git Repository, excepto que esta vez creará varios archivos en su repositorio. Esto le dará la oportunidad de ver qué informes proporciona **`git status`** y obtener una idea intuitiva de cómo funciona Git.
 
-Como lo ha hecho antes, creará una nueva carpeta dentro de la carpeta **`headfirst-git-samples`** llamada **`ch01_03`** e inicializará un repositorio Git dentro de esa carpeta.
+Como lo ha hecho antes, creará una nueva carpeta dentro de la carpeta **`my-headfirst-git-samples`** llamada **`ch01_03`** e inicializará un repositorio Git dentro de esa carpeta.
 
 <hr>
 
@@ -1015,6 +990,16 @@ Asegúrese de guardar el archivo como **`README.md`** en el directorio **`ch01_0
 Haga lo mismo para crear otro archivo llamado **`Checklist.md`** con el siguiente texto.
 
 <img width="991" alt="image" src="https://user-images.githubusercontent.com/23094588/209576769-bee6e62e-962c-49f3-921a-0a0dcc2b4fb2.png">
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209817848-abd739ed-fd88-4edd-92a4-11b1cbb0176a.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209818435-b43bc3a4-6690-42b8-bae2-41eba171c9bb.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209818711-96881b8d-e471-4456-ad63-bbfaeba926b0.png)
+
+
 
 ### ¡Guau, tigre fácil!
 
