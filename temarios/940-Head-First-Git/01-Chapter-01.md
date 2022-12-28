@@ -584,9 +584,7 @@ Has completado un recorrido relámpago por Git. Instaló Git, inicializó un rep
 
 <hr>
 
-**¡MÍRALO!**
-
-<img width="275" alt="image" src="https://user-images.githubusercontent.com/23094588/209490747-763128c0-ee25-42c2-ad1f-746edd3fd2df.png">
+![image](https://user-images.githubusercontent.com/23094588/209809141-d6d05761-0ddb-4761-84c6-8bd1ce729375.png)
 
 **¿Obtuviste alguna salida diferente a la que te mostramos en el ejercicio anterior?**
 
@@ -598,11 +596,11 @@ Has completado un recorrido relámpago por Git. Instaló Git, inicializó un rep
 
 * *Si ve un error similar a **`fatal: pathspec checklist.md did not match any files`** cuando probó un **`git add`**, sepa que el nombre de archivo que proporciona debe coincidir exactamente con el nombre de archivo, que en nuestro caso sería **`Checklist.md`** ("c" en mayúsculas)*.
 
-* Si obtiene error: **`pathspec ‘-’ did not match any file(s) known to git`** al intentar **`git commit`**, asegúrese de que no haya espacio entre **`-`** y **`m`**.
+* *Si obtiene error: **`pathspec ‘-’ did not match any file(s) known to git`** al intentar **`git commit`**, asegúrese de que no haya espacio entre **`-`** y **`m`***.
 
 * *Si la línea de comando informa un error como error: **`pathspec ‘first’ did not match any file(s) known to git`**, asegúrese de envolver el mensaje de commit "My first commit" entre comillas dobles*.
 
-* Si obtiene un error como **`nothing added to commit but untracked files present`**, intente ejecutarlo **`git add Checklist.md`** nuevamente, esta vez asegurándose de obtener el nombre de archivo correcto, incluida el casing.
+* *Si obtiene un error como **`nothing added to commit but untracked files present`**, intente ejecutarlo **`git add Checklist.md`** nuevamente, esta vez asegurándose de obtener el nombre de archivo correcto, incluida el casing*.
 
 ## “¿Qué significa exactamente commit?”
 
@@ -610,13 +608,13 @@ Has completado un recorrido relámpago por Git. Instaló Git, inicializó un rep
 
 Aprendimos que committing con Git es un proceso de dos pasos. Primero **`add`** (añadimos) los archivos y luego **`commit`**.
 
-Lo primero que debe saber es que solo se committed los archivos que agrega. Digamos que tiene dos archivos **`Checklist.md`** y **`README.md`**, pero solo agregó **`Checklist.md`**. Cuando crea un commit, Git solo almacenará los cambios realizados en **`Checklist.md`**.
+Lo primero que debe saber es que solo se committed los archivos que agrega. Digamos que tiene dos archivos **`Checklist.md`** y **`README.md`**, pero solo agregó **`Checklist.md`**. Cuando crea un commit, Git **solo** almacenará los cambios realizados en **`Checklist.md`**.
 
-Ahora, cuando commit (nos comprometemos), Git usa un algoritmo especializado para guardar de manera segura todo lo que agregamos a su memoria. Cuando decimos que "committed(commitimos)" nuestros cambios en Git, eso se traduce en que Git crea un **commit object(objeto de confirmación)** que almacena dentro de la carpeta **`.git`**. Este objeto de confirmación está "sellado(stamped)" por un identificador único. Tal vez recuerdes lo que obtuvimos **`513141d`** cuando hicimos nuestro commit en nuestro último ejercicio (ciertamente viste algo diferente): en realidad, esta es una cadena mucho más larga que contiene números y letras que se parece a esto:
+Ahora, cuando commiteamos (nos comprometemos), Git usa un algoritmo especializado para guardar de manera segura todo lo que agregamos a su memoria. Cuando decimos que "committed(commiteamos)" nuestros cambios en Git, eso se traduce en que Git crea un **commit object(objeto commit)** que almacena dentro de la carpeta **`.git`**. Este commit object está "sellado(stamped)" por un **identificador único**. Tal vez recuerdes lo que obtuvimos **`513141d`** cuando hicimos nuestro commit en nuestro último ejercicio (ciertamente viste algo diferente): en realidad, esta es una cadena mucho más larga que contiene números y letras que se parece a esto:
 
 <img width="798" alt="image" src="https://user-images.githubusercontent.com/23094588/209491999-baf17e5e-f3da-446d-98be-cd1ea83ead79.png">
 
-**Este identificador se calcula utilizando una serie de metadatos**, incluido su nombre completo, la hora en que realizó la confirmación, el mensaje de confirmación que proporcionó y la información derivada de los cambios que realizó.
+**Este identificador se calcula utilizando una serie de metadatos**, incluido su nombre completo, la hora en que realizó el commit, el mensaje de confirmación que proporcionó y la información derivada de los cambios que realizó.
 
 Exploremos un poco más lo que sucede en un commit.
 
@@ -624,7 +622,7 @@ Exploremos un poco más lo que sucede en un commit.
 
 <img width="794" alt="image" src="https://user-images.githubusercontent.com/23094588/209492158-f639c8b3-9b0e-474e-8e73-01b9fd3c42f6.png">
 
-Sorprendentemente, las posibilidades de que dos confirmaciones **alguna vez** tengan la mismo **ID** (y sí, eso es en todos los repositorios Git del mundo, los que existen y los que aún no se han creado) es menos de 1 en 10<sup>48</sup>. ¡Sí, eso es 10 seguido de 48 ceros!
+Sorprendentemente, las posibilidades de que dos commits **alguna vez** tengan el mismo **ID** (y sí, eso es en todos los repositorios Git del mundo, los que existen y los que aún no se han creado) es menos de 1 en 10<sup>48</sup>. ¡Sí, eso es 10 seguido de 48 ceros!
 
 <img width="783" alt="image" src="https://user-images.githubusercontent.com/23094588/209492287-8450552a-b56e-46fe-a19e-2b24715ea41e.png">
 
@@ -638,11 +636,9 @@ Este es otro conjunto de caracteres alfanuméricos, cuyos detalles son un tema p
 
 <img width="814" alt="image" src="https://user-images.githubusercontent.com/23094588/209492561-d8d2dee0-59a5-4d49-a467-2da11ee92635.png">
 
-Este es otro conjunto de caracteres alfanuméricos, cuyos detalles son un tema para otro libro.
-
 **La información del "autor", es decir, su nombre y dirección de correo electrónico**.
 
-En un ejercicio anterior le proporcionamos a Git nuestro nombre completo y nuestro correo electrónico. Esto también se registra en el Git para que pueda reclamar todo el crédito por el maravilloso trabajo que realizó.
+En un ejercicio anterior le proporcionamos a Git nuestro nombre completo y nuestro correo electrónico. Esto también se registra en Git para que pueda reclamar todo el crédito por el maravilloso trabajo que realizó.
 
 <hr>
 
@@ -680,7 +676,7 @@ El repositorio de Git en sí está dividido en dos partes: la primera parte se d
 
 Cuando ejecutamos **`git add <filename>`**, Git hace una copia del archivo y lo coloca en el índice. Podemos pensar en el índice como el **"staging area(área de ensayo)"**, en el que podemos poner las cosas hasta que estemos seguros de que queremos comprometernos(commit) con ellas.
 
-Ahora, cuando ejecutamos el comando **`git commit`**, toma el contenido del staging area(área de preparación) y lo almacena en la base de datos de objetos(object database), también conocida como banco de memoria de Git(**Git’s memory bank**). Dicho de otro modo, el índice es un lugar para albergar temporalmente los cambios. Por lo general, realiza algunos cambios, los agrega al índice y luego decide si está listo para confirmar; en caso afirmativo, realiza un commit. De lo contrario, puede continuar haciendo cambios, agregar más cambios al área de preparación(staging area) y luego, cuando sienta que está en un buen lugar, commit(comprométase).
+Ahora, cuando ejecutamos el comando **`git commit`**, toma el contenido del **staging area(área de preparación)** y lo almacena en la **base de datos de objetos(object database)**, también conocida como banco de memoria de Git(**Git’s memory bank**). Dicho de otro modo, el **índice** es un lugar para albergar temporalmente los cambios. Por lo general, realiza algunos cambios, los agrega al **índice** y luego decide si está listo para commitearlos; en caso afirmativo, realiza un commit. De lo contrario, puede continuar haciendo cambios, agregar más cambios al **área de preparación(staging area)** y luego, cuando sienta que está en un buen lugar, **commitearlo(comprométase)**.
 
 <img width="837" alt="image" src="https://user-images.githubusercontent.com/23094588/209493738-5c53bd2e-4140-4eab-ae2e-8e5f7101df24.png">
 
@@ -780,7 +776,7 @@ A esto aludimos en las páginas anteriores.
 
 <img width="965" alt="image" src="https://user-images.githubusercontent.com/23094588/209496029-19d41ca8-534f-4a99-8cf7-1fadc5725e19.png">
 
-Entonces, ¿qué sucede cuando nos comprometemos(commit)? Bueno, como sabemos, Git toma el contenido del índice, lo coloca de manera segura en su banco de memoria y representa esa versión con un objeto de confirmación. ¡Esto significa que ahora Git tiene una tercera copia del contenido de sus archivos en su base de datos de objetos!
+Entonces, ¿qué sucede cuando nos hacemos commit? Bueno, como sabemos, Git toma el contenido del index, lo coloca de manera segura en su banco de memoria y representa esa versión con un objeto commit. ¡Esto significa que ahora Git tiene una tercera copia del contenido de sus archivos en su base de datos de objetos!
 
 <img width="1002" alt="image" src="https://user-images.githubusercontent.com/23094588/209496138-94e94beb-3454-4dc2-880c-cafbca9d2edc.png">
 
@@ -788,7 +784,7 @@ Entonces, ¿qué sucede cuando nos comprometemos(commit)? Bueno, como sabemos, G
 
 ## “Los múltiples estados de archivos en un repositorio Git”
 
-Así es como se ve una interacción típica con Git: realiza algunas ediciones en uno o más archivos, luego los agrega al índice y, cuando está listo, los committed. Ahora, mientras realiza este flujo de trabajo, Git intenta rastrear el estado de sus archivos para saber qué archivos son parte de su directorio de trabajo, qué archivos se agregaron al índice y qué archivos ya se committed en su object store.
+Así es como se ve una interacción típica con Git: realiza algunas ediciones en uno o más archivos, luego los agrega al **index** y, cuando está listo, los commitea(committed). Ahora, mientras realiza este flujo de trabajo, ***Git intenta rastrear el estado de sus archivos para saber qué archivos son parte de su directorio de trabajo, qué archivos se agregaron al índice y qué archivos ya se committed en su object store***.
 
 En todo momento, tenga en cuenta que Git está moviendo *copias* de su archivo desde el directorio de trabajo, al índice, a su object database(base de datos de objetos).
 
@@ -804,9 +800,9 @@ Cuando agregamos un nuevo archivo a un repositorio de Git, Git ve el archivo per
 
 ### La object database(base de datos de objetos) es la “fuente de la verdad”
 
-Esta vez, considere agregar un archivo al índice y luego realizar un commit de inmediato. Git almacena el contenido del índice en su base de datos de objetos y luego marca el archivo como **"unmodified(sin modificar)".
+Esta vez, considere agregar un archivo al índice y luego realizar un commit de inmediato. Git almacena el contenido del índice en su base de datos de objetos y luego marca el archivo como **"unmodified(sin modificar)"**.
 
-¿Por qué unmodified(sin modificar), preguntas? Bueno, Git compara la copia que tiene en su base de datos de objetos con la del índice y ve que son iguales. También compara la copia en el índice con la del directorio de trabajo y ve que son iguales. Por lo tanto, el archivo no se ha modificado (o no se ha modificado) desde el último commit.
+¿Por qué **unmodified(sin modificar)**, preguntas? Bueno, Git compara la copia que tiene en su base de datos de objetos con la del índice y ve que son iguales. También compara la copia en el índice con la del directorio de trabajo y ve que son iguales. Por lo tanto, el archivo no se ha modificado (o no se ha modificado) ***desde el último commit***.
 
 <img width="708" alt="image" src="https://user-images.githubusercontent.com/23094588/209570785-d1028a85-c8a8-411b-a321-19f8bc14b9e3.png">
 
@@ -814,19 +810,21 @@ Por supuesto, se deduce que si hiciéramos un cambio en un archivo que habíamos
 
 <img width="714" alt="image" src="https://user-images.githubusercontent.com/23094588/209571893-7413fc02-a081-4543-a43a-9d20e3f3589c.png">
 
-Luego, si tuviéramos que agregar el archivo *modificado* nuevamente al índice, Git ve que el índice y el directorio de trabajo son los mismos, por lo que el archivo se marca como **"staged(preparado)"** o, en otras palabras, está **modified** y **staged**.
+Luego, si tuviéramos que agregar el archivo ***modificado*** nuevamente al índice, Git ve que el índice y el directorio de trabajo son los mismos, por lo que el archivo se marca como **"staged(preparado)"** o, en otras palabras, está **modified** y **staged**.
 
 Y completamos el círculo: si hacemos commit, el contenido del índice se confirmará y el archivo se marcará como **"unmodified(sin modificar)"**.
 
 <img width="624" alt="image" src="https://user-images.githubusercontent.com/23094588/209572119-498a7f00-e336-4ffb-976c-12203c9eff63.png">
 
+### 📝
+
 <img width="801" alt="image" src="https://user-images.githubusercontent.com/23094588/209572169-64218fd4-068c-4e65-8c43-e893fb1dc79f.png">
 
-**Recuerde que cualquier archivo en su directorio de trabajo puede ser untracked o tracked. Además, un archivo tracked puede ser staged, unmodified o modified.
+**Recuerde que cualquier archivo en su directorio de trabajo puede ser untracked o tracked. Además, un archivo tracked puede ser staged, unmodified o modified.**
 
 **En este ejercicio, suponga que acaba de crear un nuevo repositorio. ¿Puede identificar el estado de los archivos para cada uno de los siguientes pasos?
 
-----------> Respuestas en “BE Git Solution”.
+**----------> Respuestas en “BE Git Solution”.**
 
 **Creas un nuevo archivo en el repositorio llamado `Hello.txt`**.
 
