@@ -509,6 +509,8 @@ Ahora eso es lo que hemos estado esperando!
 
 ![image](https://user-images.githubusercontent.com/23094588/209479465-51df594b-bf40-4b14-8990-30656c7db7ae.png)
 
+### 💻
+
 ![image](https://user-images.githubusercontent.com/23094588/209805292-01d99a29-1f6e-4bea-87e3-222f01f1b620.png)
 
 
@@ -529,6 +531,10 @@ Para crear un nuevo archivo, simplemente haga clic en el elemento del menú Arch
 [Guía Markdown](https://www.markdownguide.org/)
 
 Guarde el archivo como **`Checklist.md`** en el directorio **`HawtDawg`**.
+
+### 💻
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/209806555-962e7769-74b4-4eac-9623-330f478019c0.png">
 
 <hr>
 
