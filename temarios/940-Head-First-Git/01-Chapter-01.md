@@ -370,6 +370,10 @@ Ahora que estamos en un directorio completamente nuevo, creemos nuestro primer r
 
 Eso fue bastante indoloro, ¿no? Y ahí lo tienes: tu primer repositorio de Git.
 
+### 💻
+
+<img width="1135" alt="image" src="https://user-images.githubusercontent.com/23094588/209801078-ef8e2e2a-ead5-42ce-9972-dd699ae7fedb.png">
+
 ## “Dentro del comando `init`”
 
 ![image](https://user-images.githubusercontent.com/23094588/209478704-67a25317-6381-4340-9f56-9fbf6609dfe3.png)
