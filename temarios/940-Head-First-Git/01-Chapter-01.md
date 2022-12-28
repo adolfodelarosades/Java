@@ -154,6 +154,8 @@ Usuarios de Windows: cuando decimos terminal, dicen... ¡¡Git Bash!!
 
 <hr>
 
+### 💻
+
 ¡Es hora de ponerse a trabajar! 
 
 <img width="1071" alt="image" src="https://user-images.githubusercontent.com/23094588/209476579-b02bafdc-8923-43fc-add9-60eb49517630.png">
