@@ -1000,7 +1000,6 @@ Haga lo mismo para crear otro archivo llamado **`Checklist.md`** con el siguient
 ![image](https://user-images.githubusercontent.com/23094588/209818711-96881b8d-e471-4456-ad63-bbfaeba926b0.png)
 
 
-
 ### ¡Guau, tigre fácil!
 
 <img width="258" alt="image" src="https://user-images.githubusercontent.com/23094588/209576817-3c370e21-ff85-48b8-bb1b-51d4fad124d2.png">
@@ -1013,11 +1012,15 @@ Ha configurado todo para empezar. Vamos a ver qué **`git status`** tiene que in
 
 <img width="789" alt="image" src="https://user-images.githubusercontent.com/23094588/209576928-f04b6e31-320b-471b-a094-b6204bd7de7a.png">
 
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209819442-19851659-0cc2-4a39-8ce6-4acabe393ffa.png)
+
 **Que tenemos:**
 
 <img width="784" alt="image" src="https://user-images.githubusercontent.com/23094588/209576971-36aba9fb-1df9-495c-aeff-988c7a87e649.png">
 
-Recuerda que cuando le pides a Git el estado del repositorio, te dice el estado de todos los archivos en tu directorio de trabajo. En este caso, Git ve dos archivos nuevos que nunca antes había visto. Por lo tanto, los marca como **"untracked(sin seguimiento)"**; en otras palabras, Git no se ha introducido en estos archivos, por lo que aún no los está viendo. El índice está vacío ya que no hemos agregado ninguno de los archivos al índice y la base de datos de objetos no tiene commits, bueno, ya que aún no hemos confirmado. ¡Cambiemos eso!
+Recuerda que cuando le pides a Git el estado del repositorio, te dice el estado de todos los archivos en tu directorio de trabajo. En este caso, Git ve dos archivos **nuevos** que nunca antes había visto. Por lo tanto, los marca como **"untracked(sin seguimiento)"**; en otras palabras, Git no se ha introducido en estos archivos, por lo que aún no los está viendo. El índice está vacío ya que no hemos agregado ninguno de los archivos al índice y la base de datos de objetos no tiene commits, bueno, ya que aún no hemos confirmado. ¡Cambiemos eso!
 
 <hr>
 
@@ -1040,6 +1043,10 @@ Deje **`Checklist.md`** ser por ahora. Llegaremos a ello en breve.
 <img width="762" alt="image" src="https://user-images.githubusercontent.com/23094588/209577498-c24331d0-196d-4103-bfcb-ad094f8825b4.png">
 
 Agregar el archivo **`README.md`** al índice de Git significa que ahora Git conoce este archivo. Dos cosas cambiaron: el archivo **`README.md`** ahora está siendo **tracked(rastreado)** por Git y está en el índice, lo que significa que también está **staged(preparado)**.
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209820050-72519052-1821-4578-bae6-300ba12bc871.png)
 
 **Que tenemos**:
 
