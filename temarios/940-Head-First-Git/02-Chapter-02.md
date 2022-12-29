@@ -631,6 +631,8 @@ Las ramas de **"feature(características)"** a menudo se denominan ramas de **"t
 
 Mencionamos que muchos equipos usan nombres como **`main`** en lugar de **`master`** para ramas de integración. ¿Se te ocurre algún otro nombre? Enumere algunos aquí (siéntase libre de usar su motor de búsqueda favorito para obtener algunas ideas):
 
+**MAIN, INITIAL, DEVELOP, PRINCIPAL.**
+
 **----------> Ideas en “Sharpen your pencil Solution”.**
 
 <hr>
@@ -639,15 +641,17 @@ Mencionamos que muchos equipos usan nombres como **`main`** en lugar de **`maste
 
 Digamos que tiene un montón de imágenes en una carpeta en su computadora y otras en alguna otra carpeta. Además, hay algunos duplicados entre los dos. ¿Puede pensar en algún problema que podría enfrentar si intentara combinar todos los archivos de ambas carpetas?
 
+**SE PUEDEN SOBREESCRIBIR FOTOS QUE TENGAN EL MISMO NOMBRE PERO SU CONTENIDO SEA DIFERENTE.**
+
 <hr>
 
 ## "¡Tráelo dentro!"
 
-Las ramas de integración juegan un papel fundamental en su repositorio de Git. Recuerde, lo que hace que una rama de integración sea especial es solo una convención; cualquier rama se puede convertir en una rama de integración que sirve como el lugar donde todo, grande y pequeño, funciones y correcciones de errores, se une.
+Las **ramas de integración** juegan un papel fundamental en su repositorio de Git. Recuerde, lo que hace que una rama de integración sea especial es solo una convención; cualquier rama se puede convertir en ***una rama de integración sirve como el lugar donde todo, grande y pequeño, funciones y correcciones de errores, se une**.
 
 Reunir el trabajo que se realizó en ramas separadas se llama ***fusionar(merging)***, y Git tiene un comando específicamente integrado para hacer precisamente eso: **`merge`**. El comando **`git merge`** le permite combinar el trabajo realizado en diferentes ramas.
 
-La fusión en Git generalmente involucra dos ramas: ***la rama en la que se encuentra***(nos referiremos a esto como el **"proposer(proponente)"**) y ***la rama en la que desea fusionar o "mezclar"***(la llamaremos **"proposee(propuesto)"**) .
+La fusión en Git generalmente involucra dos ramas: ***la rama en la que se encuentra***(nos referiremos a esto como el **"proposer(proponente)"**) y ***la rama que desea fusionar o "mezclar"***(la llamaremos **"proposee(propuesto)"**) .
 
 Como estamos tan obsesionados con la comida, ¡vamos a duplicarlo! Piensa en hornear un pastel. Puedes empezar a preparar el glaseado ya que el bizcocho tiene que enfriarse al salir del horno. En algún momento, desea "fusionar" los dos juntos. Aquí, el pastel sería el proponente y el glaseado sería el propuesto.
 
@@ -665,7 +669,7 @@ Luego, simplemente le decimos a Git que fusione la rama **`prepare-icing`** con 
 
 <img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859334-284bc68e-5061-4e40-a464-a4f8c70f0635.png">
 
-*Las rosas son rojas, las violetas son azules, mantienen* **las ramas** *específicas para lo* **único** *que hacen.*
+*Las rosas son rojas, las violetas son azules, mantienen* **las feature branches** para lo* **único** *que hacen.*
 
 *Las rosas son tuyas, las violetas son mías, usa* **las ramas de integración** *cuando sea el momento de combinar.*
 
@@ -683,7 +687,9 @@ Ahora tómese unos minutos para pensar en las siguientes preguntas:
 
 **NOTA**
 
-Complete sus respuestas aquí.
+Complete sus respuestas aquí. 
+
+**el fotógrafo de la boda**
 
 <hr>
 
@@ -695,9 +701,13 @@ Complete sus respuestas aquí.
 
 Complete sus respuestas aquí.
 
+**No**
+
 <hr>
 
 * ¿Cuál de ustedes es la rama de “integración” en este escenario?
+
+**el fotógrafo de la boda**
 
 <hr>
 
@@ -718,6 +728,15 @@ Complete sus respuestas aquí.
 
 Git intenta ser muy útil y viene cargado con un manual completo. La buena noticia es que no tiene que recordar todos los matices de cada comando de Git (y hay **muchos** comandos), simplemente puede pedirle a Git que lo ayude. Si usted es el tipo de persona que lee documentación técnica por placer, querrá ejecutar **“`git <command> --help`”**, por ejemplo, **`git branch --help`**. Esta es la enchilada completa: todo lo que necesita saber sobre el comando **`branch`** se enumera aquí, ¡incluidos ejemplos de uso! Esta es una página a la que querrá volver una vez que tenga experiencia práctica con Git.
 
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209977387-213de556-4f47-4307-b865-14a771eb3da3.png)
+
+Use las fechas de arriba y abajo para desplazarse.
+
+![image](https://user-images.githubusercontent.com/23094588/209977464-1f48e3f9-b224-4b41-bf80-5b78e96b29b5.png)
+
+
 <hr>
 
 **NOTA**
@@ -735,6 +754,10 @@ También puede usar **"`git help <comando>`"**, que es un alias para **"`git <co
 <hr>
 
 Si tiene prisa, o simplemente es una persona de CliffsNotes, entonces la versión que desea es **"`git <command> -h`"** así: **`git branch -h`**. Esta es una versión mucho más corta de la página de ayuda. Por supuesto, si algo te llama la atención pero no entiendes qué hace o cómo usarlo, siempre puedes usar la versión más larga (**`--help`**) para obtener más detalles.
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209977788-637de87b-bc8b-4f01-9fca-47dab8289021.png)
 
 <hr>
 
@@ -757,6 +780,12 @@ En el directorio **`80s-diner`**, continúe y ejecute **`git branch --help`** (o
 A continuación, ejecute **`git branch -v`** y registre aquí el nombre de la rama y el ID de commit más reciente. (Los necesitará para las próximas secciones de este capítulo).
 
 <img width="972" alt="image" src="https://user-images.githubusercontent.com/23094588/209863800-825f9358-d89e-4f67-9313-2f76e491da1d.png">
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209978272-0e4d94d8-3d25-4324-af85-4885087b2bb9.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209978419-a3443230-e3d9-43c3-961a-214cd3a32b3f.png)
 
 
 **---------->  Respuestas en “Exercise Solution”.**
