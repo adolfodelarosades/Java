@@ -1015,24 +1015,178 @@ DEBERÍAN ESTAR LOS 3 ARCHIVOS CREADOS: **`menu.md`**, **`fall-menu.md`** y **`t
 
 <hr>
 
-## "¡Esperar! ¿Te moviste?"
+## "¡Espera! ¿Te moviste?"
 
-Puede ser un poco sorprendente que, aunque **`add-thurs-menu`** se basó en la rama **`master`**, la rama **`master`** se ha movido desde entonces a un nuevo commit. **Aquí es donde es importante darse cuenta de que cada vez que ramificas(you branch), en realidad estás creando una rama que apunta a un commit, no a otra rama**. Las ramas, al ser simples punteros a los commits, ofrecen una manera fácil de llegar a los commits. Recuerda, **la "base" de la rama es siempre un commit**.
+Puede ser un poco sorprendente que, aunque **`add-thurs-menu`** se basó en la rama **`master`**, la rama **`master`** se ha movido desde entonces a un nuevo commit. **Aquí es donde es importante darse cuenta de que cada vez que ramificas(you branch), en realidad estás creando una rama que apunta a un commit, no a otra rama**. Las ramas, al ser simples punteros a los commits, ofrecen una manera fácil de llegar a los commits. Recuerda, **la "base" de la rama es *siempre* un commit**.
 
 <hr>
 
 **NOTA**
 
-A menudo escuchará a otros desarrolladores decir “Go ahead. Branch off master.(Adelante. Rama maestro.)” Lo que realmente están diciendo es crear una nueva rama que apunte al mismo commit al que apunta el maestro en ese momento.
+A menudo escuchará a otros desarrolladores decir “Go ahead. Branch off master.(Avanzar. Maestro de ramificación.)” Lo que realmente están diciendo es crear una nueva rama que apunte al mismo **commit** al que apunta la rama **`master`** en ese momento.
+
+<hr>
 
 Entonces, ¿qué significa fusionar **`add-thurs-menu`** en la rama **`master`**? La respuesta está, por supuesto, en el historial de commits.
 
-## "Es una confirmación de fusión"
-## “Las cosas no siempre van tan bien”
-## "¡Estoy tan en conflicto!"
-## "Limpieza de sucursales (fusionadas)"
-## "Eliminar ramas no fusionadas"
-## "Un flujo de trabajo típico"
+![image](https://user-images.githubusercontent.com/23094588/209987184-02a8005a-ccda-4a44-8dc9-775bd89a6d31.png)
+
+Tenga en cuenta que tanto la rama **`master`** como la rama **`add-thurs-menu`** comparten un ancestro común (en este caso, la confirmación con ID "A"). Cuando fusionamos las dos ramas juntas, estamos intentando combinar el trabajo realizado ***después de*** ese commit.
+
+<hr>
+
+**NOTA**
+
+Queremos combinar los cambios realizados en B y C con los de D.
+
+<hr>
+
+Este escenario en particular es un gran ejemplo de ramas que divergen entre sí después de comenzar en un punto común en el tiempo. Piense en ello como si fueran dos trenes que parten de una estación, siguen sus rutas individuales, recogen pasajeros y luego convergen(fusionan) en otra estación.
+
+![image](https://user-images.githubusercontent.com/23094588/209987814-83ddfb23-76d1-4870-9977-97cee2e6e445.png)
+
+AQUII
+### ¡Ya casi es jueves! (continuado)
+
+Ya está todo configurado y listo para fusionar **`add-thurs-menu`** con **`master`**. Cambiaste a la rama **`master`**, así que sigamos y fusionemos la rama **`add-thurs-menu`** en ella:
+
+![image](https://user-images.githubusercontent.com/23094588/209988410-6e2098cb-47bb-46bb-b3d1-0facf0e26d1c.png)
+
+¿Qué sucedió? Git está tratando de crear un **"merge commit"**(más sobre esto en un minuto). Dado que se trata de un nuevo commit, Git necesita un mensaje de commit. Entonces, Git intentará abrir su editor predeterminado (el mismo que configuramos hace unas páginas) y le pedirá que escriba un mensaje de commit, así:
+
+![image](https://user-images.githubusercontent.com/23094588/209988937-c846dd75-2354-459a-bffa-f062a3d27dfe.png)
+
+<hr>
+
+<img width="968" alt="image" src="https://user-images.githubusercontent.com/23094588/209588631-39069271-94a0-46f5-8f77-601389e0f170.png">
+
+#### Su editor no siempre está visible.
+
+*De vez en cuando, su editor puede estar oculto detrás de otras ventanas en su escritorio, especialmente si tiene muchas aplicaciones abiertas. Si no lo ve, mire a su alrededor, está ahí, se lo prometemos.*
+
+<hr>
+
+Git completa fácilmente un mensaje de commit predeterminado y, por lo general, preferimos mantenerlo así. Eres libre de escribir cualquier mensaje de commit aquí. Cuando haya terminado, guarde y luego **cierre** esa ventana. Su terminal debería informar de una fusión exitosa.
+
+<hr>
+
+**NOTA**
+
+Si lee el texto que presenta Git, sabrá que todo lo que esté precedido por una almohadilla (#) es un comentario y se ignorará.
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209989477-bcee279f-c6e2-4656-84c5-15cde8a40ad2.png)
+
+¡Hurra! Otra fusión exitosa. Ahora todo el trabajo que está en la rama **`add-thurs-menu`** se ha fusionado en la rama **`master`**. Una lista rápida de los archivos muestra que este es el caso.
+
+![image](https://user-images.githubusercontent.com/23094588/209989628-62b2877a-7d51-4f07-9e6a-285de803599d.png)
+
+¡Es hora de finalmente disfrutar de una buena comida y bailar toda la noche!
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: ¿El mensaje de confirmación que proporcioné en VS Code es diferente de los mensajes de confirmación que proporcionamos cuando confirmamos con el indicador "`-m`" ?**
+
+**R**: No. Son exactamente iguales. De hecho, incluso podría haberse fusionado **`add-thurs-menu`** con la rama **`master`** usando algo como: **`git merge add-thurs-menu -m "Merge branch 'add-thurs-menu'"`**. Queríamos mostrarle un escenario en el que Git le pide que proporcione un mensaje de commit utilizando su editor predeterminado.
+
+En cuanto a por qué se comportó de esta manera, bueno, lo veremos en solo un segundo.
+
+**P: Recibí un error al intentar completar esto. ¿Qué hice mal?**
+
+**R**: Si recibió un error como **"`error: Empty commit message`"**, significa que es posible que haya borrado accidentalmente todo el texto en la ventana del editor de combinación y luego la haya cerrado. Esto proporciona un mensaje vacío y Git genera errores. Git le informará qué hacer, pero la forma más fácil es escribir **`git commit`** y presionar Enter en la ventana de la consola. Esto abrirá su editor una vez más. Esta vez, escriba su mensaje, guarde el archivo y luego ciérrelo. Deberías estar listo para irte ahora.
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209990407-3dfd7837-d080-4c17-9967-5742b46f82dc.png)
+
+¡UH oh! Por alguna razón, la configuración de su editor de Git no funcionó del todo. Entonces, Git está usando su editor predeterminado, Vim, que es un poco complicado. Esto es lo que debe hacer para salir de Vim. Comience presionando la tecla Escape en su teclado, seguido de esta secuencia de caracteres :**`wq`**.
+
+<hr>
+
+**NOTA**
+
+Una vez que superes esto, asegúrate de regresar algunas páginas y configurar tu editor predeterminado.
+
+<hr>
+
+<hr>
+
+**NOTA**
+
+Es esto o aprender Vim. :)
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/209990685-f5b5652f-8276-4d11-ae1a-352fd0725345.png)
+
+## Es un merge commit
+
+¡Lo sabemos, estás lleno de preguntas! ¿Es esta fusión diferente de nuestra última fusión? Si es así, ¿por qué? Nunca antes habíamos visto aparecer un editor para solicitar un mensaje de commit, entonces, ¿qué es diferente ahora?
+
+Volvamos a nuestra analogía de mezcla de colores. (Hiciste ese ejercicio de Brain Power, ¿verdad?) Cuando mezclas amarillo con naranja, terminas con naranja. Eso es porque el naranja ya contiene amarillo. Esto, en el mundo de Git, sería análogo a un fast-forward merge. Esto es lo que vimos cuando nos mergeamos **`add-fall-menu`** con **`master`**.
+
+<hr>
+
+**NOTA**
+
+Bueno, técnicamente terminas con un naranja más claro, pero, de nuevo, todas las analogías eventualmente se rompen.
+
+<hr>
+
+Pero, ¿qué pasa si intentas mezclar dos colores primarios como el rojo y el azul? Bueno, obtienes un color completamente **nuevo**: ¡morado!
+
+¿Qué tiene esto que ver con nuestro último ejercicio de fusión? Recuerde que antes de que mergeamos  la rama **`add-thurs-menu`** y **`master`**, **`master`** se había separado **`add-thurs-menu`** porque **`master`** se había movido (fast-forwarded) al commit a la que apuntaba **`add-fall-menu`**. Cuando tratamos de fusionar **`add-thurs-menu`** con **`master`**, Git tiene que reconciliar dos conjuntos diferentes de cambios en uno. Así que Git saca uno rápido: crea un nuevo commit para nosotros que representa el trabajo combinado de ambas ramas. Así es como se ve su historial de commits antes y después de la fusión:
+
+![image](https://user-images.githubusercontent.com/23094588/209991873-3a75e1c3-c46d-47ca-b540-d9d108229d3c.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209992015-442a3a2f-ec57-4bfd-9e0b-150c4cdc12f5.png)
+
+Observe que **`master`** se mueve para apuntar al último commit, identificada por "E". Esto es lo esperado: la nota adhesiva de **`master`** se actualiza para reflejar el nuevo commit en esa rama, mientras **`add-thurs-menu`** permanece fija. Esto se denomina **merge commit** y se compone de todos los cambios que se introdujeron en las dos ramas separadas.
+
+Sin embargo, cada commit que hacemos en Git necesita un mensaje de commit que describa lo que contiene ese commit. Por lo general, hacemos esto explícitamente con el indicador **"`-m`"**. Dado que no proporcionamos a Git un mensaje de commit cuando realizamos la fusión, ¡Git abre nuestro editor para brindarnos un lugar para hacer precisamente eso!
+
+<hr>
+
+<img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
+
+Otro historial hipotético de compromisos para su placer visual. Para explicar cómo llegamos aquí:
+
+* Comenzamos haciendo el commit **`A`** en la rama **`master`**.
+* Luego creamos la rama **`add-chat`** e hicimos otro commit, **`B`**.
+* Creamos la rama **`add-emojis`** a partir del commit **`B`** y procedimos a realizar dos commits más en esa rama, **`C`** y **`D`**.
+* Luego regresamos con **`switch`** a la rama **`add-chat`**(al commit **`B`**) e hicimos otro commit, **`E`**.
+
+Así es como se ve el gráfico de commits:
+
+![image](https://user-images.githubusercontent.com/23094588/209993183-d0d8c2ec-e859-40cb-88bf-f60839552f39.png)
+
+Ahora, intentaremos fusionar la add-emojisrama en la add-chatrama. En otras palabras, la add-chatrama es el proponente y add-emojises el propuesto. ¿Resultará esto en una fusión de avance rápido, o formará una confirmación de fusión?
+
+Finalmente, dibuje aquí el gráfico de confirmación resultante.
+
+NOTA
+Dibuje el historial de confirmaciones actualizado aquí.
+
+Pista: ¿Se ha add-chatdesviado de add-emojis?
+
+ Respuestas en “Solución de ejercicios” .
+
+Las confirmaciones de fusión son un poco especiales
+Una confirmación de combinación es como cualquier otra confirmación que haya creado hasta ahora. Registra el trabajo que resultó de unir dos ramas, junto con algunos metadatos. Los metadatos incluyen su nombre y correo electrónico, la hora en que se creó la confirmación y el mensaje de confirmación que proporcionó cuando realizamos la combinación. Además, cada confirmación (aparte de la primera en un repositorio) registra la ID de la confirmación que la precedió.
+
+Sin embargo, las confirmaciones de fusión tienen algunas características interesantes. Por un lado, recuerda que no creaste esta confirmación explícitamente; más bien, Git lo hizo cuando fusionó dos ramas que se habían separado una de la otra.
+
+Por otra parte, una confirmación de fusión tiene dos padres: el primer padre es la última confirmación en la rama que propone, y el segundo padre es la última confirmación de la rama propuesta que se fusionó. Mirando hacia atrás en el 80s-dinerhistorial de confirmación:
+
+
+## Las cosas no siempre van tan bien
+## ¡Estoy tan en conflicto!
+## Limpieza de sucursales (fusionadas)
+## Eliminar ramas no fusionadas
+## Un flujo de trabajo típico
 
 EXCERSICE - Tenis
 
