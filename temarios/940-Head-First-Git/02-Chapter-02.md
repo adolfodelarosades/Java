@@ -442,6 +442,21 @@ Los siguientes pasos son todos suyos. Cree un nuevo archivo llamado **`thursdays
 
 <img width="484" alt="image" src="https://user-images.githubusercontent.com/23094588/209853095-3bb71bdf-f56f-4a50-af31-4c9183f72edc.png">
 
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209955060-21e2602a-efcc-421c-a91a-97d8c6cd4b3f.png)
+
+Observe como en VSC no nos aparece el archivo **`fall-menu.md`** el cual se encuentra en otra rama a la actual.
+
+![image](https://user-images.githubusercontent.com/23094588/209955449-6ed48359-8a8c-4881-b69b-2df15d84bb04.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209955686-f9bdc7f6-20a5-40e2-a736-effdafd9dadb.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209955733-5ad01ef1-0a91-4160-9044-ebe10fa7fedc.png)
+
+<img width="1050" alt="image" src="https://user-images.githubusercontent.com/23094588/209955831-46e9bad4-e90a-4d52-ad0c-2c86307c67d9.png">
+
+
 <hr>
 
 <img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
