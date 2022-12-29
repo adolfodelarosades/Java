@@ -1267,8 +1267,91 @@ Una vez que elija, este es el aspecto que debería tener el archivo:
 
 ![image](https://user-images.githubusercontent.com/23094588/210004125-f4ce455c-2c35-4b8b-9070-67625cb1151f.png)
 
+Por supuesto, es posible que no siempre pueda seleccionar ambos cambios, especialmente si el resultado final no es sintácticamente válido. Esto es particularmente cierto para el código fuente, y luego se vería obligado a elegir uno u otro, o simplemente ignorar los cambios en ambos lados y escribir algo completamente nuevo.
 
+Una vez que haga su elección y termine de editar el archivo en su editor de texto, guarde el archivo.
 
+A continuación, simplemente seguimos las instrucciones que **`git status`** nos ofrece. Usamos **`git add`** para agregar el resultado final al staging area(área de preparación), luego continuamos con **`git commit`**.
+
+<hr>
+
+**NOTA**
+
+Vuelva a leer el resultado del **`git status`** que le mostramos hace un par de páginas si necesita refrescar su memoria.
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/210004794-de6856ab-4149-4965-993c-76d5ada77b42.png)
+
+¡Hurra! ¡Felicitaciones por resolver su primer conflicto(merge conflict)!
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: ¿Qué pasa si tengo conflictos en más de un archivo?**
+
+**R**: Como es de esperar, **`git merge`** se detendrá a mitad de camino y enumerará todos los archivos que tienen conflictos. Puede usar su editor para resolver los conflictos, tal como lo hicimos nosotros, y luego usar **`git add`** para todos los archivos que tenían un merge conflict. Por último, ejecuta **`git commit`**.
+
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+¿Puedes visualizar cómo se vería el historial de commits después de fusionar la rama **`feat-a`** en la rama **`master`**? Te ayudamos a empezar aquí: tu misión es terminar el gráfico.
+
+![image](https://user-images.githubusercontent.com/23094588/210005204-a2419210-5a15-4bb5-b5de-97f796ae97e0.png)
+
+Pista: B y C han divergido el uno del otro.
+
+**----------> Respuestas en “Sharpen your pencil Solution”.**
+
+<hr>
+
+![image](https://user-images.githubusercontent.com/23094588/210005301-7348ca3c-fc58-47f5-8d07-3916bcb16b13.png)
+
+**Suena improbable, ¿verdad?** Resulta que, no tanto. La mayoría de los proyectos comprenden docenas, si no cientos, de archivos. No es raro trabajar en varias tareas al mismo tiempo. Y podría terminar tocando sin darse cuenta el mismo archivo en dos ramas separadas. Cuando llegas a fusionar esas ramas separadas, existe la posibilidad de conflicto.
+
+El otro escenario es cuando varias personas comienzan a usar Git como herramienta de colaboración. Todavía no hemos llegado a hablar de eso, pero involucra a diferentes personas que trabajan en diferentes ramas. Cuando dos personas diferentes, trabajando en dos tareas diferentes en dos ramas diferentes en el mismo repositorio, afectan el mismo archivo, es probable que creen un conflicto al mergear.
+
+Los conflictos(merge conflict) ocurren más de lo que piensas, así que siéntete cómodo con ellos. Pero no se preocupe, el siguiente ejercicio lo convertirá en un experto en resolución de conflictos.
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+Vuelva al directorio **`my-headfirst-git-samples`** (o donde sea que haya estado creando repositorios de muestra) y siga:
+
+1. Cree una nueva carpeta llamada **`loving-git`**.
+
+2. Cambie al directorio **`loving-git`** e inicialice un nuevo repositorio de Git.
+
+3. Cree un nuevo archivo llamado **`tribute.md`** (usando un editor de texto) con el siguiente contenido:
+
+![image](https://user-images.githubusercontent.com/23094588/210005778-80eead04-51d4-478e-a99c-aa12cde16d64.png)
+
+4. Agregue el archivo al index y luego commitelo. Utilice el mensaje de commit **"`A`"**.
+
+5. Cree una rama llamada **`improvisation`**, **`switch`** en ella y luego edite el archivo **`tribute.md`** para que se vea así:
+
+![image](https://user-images.githubusercontent.com/23094588/210006006-421fffaa-7bd3-4008-9b22-c03f6e3a2fba.png)
+
+6. Nuevamente, agregue y commite el archivo. Proporcione el mensaje de commmit **"`B`"**.
+
+7. Vuelva a la rama **`master`** nuevamente y edite el archivo para que se vea así:
+
+8. Una vez más, agregue y commite el archivo. Esta vez usa el mensaje de confirmación **"`C`"**.
+
+9. Merge la rama **`improvisation`** en la rama **`master`**. Resuelve cualquier conflicto como mejor te parezca. **Asegúrese de leer qué información proporciona Git cuando abre su editor para proporcionar un mensaje de commit**.
+
+**¿Cómo se ve el historial de commits después de la fusión?**
+
+<hr>
+
+**NOTA**
+
+Dibuje el gráfico de commits aquí.
+
+<hr>
+
+** ----------> Respuestas en “Sharpen your pencil Solution”.**
 
 
 ## Limpieza de sucursales (fusionadas)
