@@ -785,6 +785,12 @@ A continuación, ejecute **`git branch -v`** y registre aquí el nombre de la ra
 
 ![image](https://user-images.githubusercontent.com/23094588/209978272-0e4d94d8-3d25-4324-af85-4885087b2bb9.png)
 
+```sh
+-v, -vv, --verbose
+   
+   Cuando esté en el modo lista, muestre sha1 y commit la línea de asunto para cada head, junto con la relación con la rama ascendente(si corresponde). Si se da dos veces, imprima la ruta del el árbol de trabajo vinculado(si lo hay) y el nombre de la rama ascendente también(ver también git remote show <remote>). Tenga en cuenta que el HEAD del árbol de trabajo actual no tendrá su ruta impresa(siempre será su directorio actual).
+```
+
 ![image](https://user-images.githubusercontent.com/23094588/209978419-a3443230-e3d9-43c3-961a-214cd3a32b3f.png)
 
 
@@ -798,7 +804,7 @@ A continuación, ejecute **`git branch -v`** y registre aquí el nombre de la ra
 
 De vuelta en el '80s Diner, después de semanas de espera, los chefs aprobaron su propuesta para el menú de otoño. Les encantan los platos nuevos que has creado y se están preparando para la noche del lanzamiento. Parece que ha terminado con su trabajo en esa característica. ¿Y ahora que?
 
-Nos apegaremos a la convención estándar de usar la rama **`master`** como la rama de integración. Eso significa que todo el trabajo debe fusionarse en la rama **`master`**. Así que hagamos eso.
+Nos apegaremos a **la convención estándar de usar la rama `master` como la rama de integración**. Eso significa que todo el trabajo debe fusionarse en la rama **`master`**. Así que hagamos eso.
 
 De vuelta en la terminal, cd en el directorio **`80s-diner`**. Primero, un chequeo de cordura para asegurarnos de que estás en un buen lugar: **`git status`**.
 
@@ -811,6 +817,12 @@ Dado que la rama **`master`** es la rama de integración, debe fusionar la rama 
 Ahora, si tuviera que enumerar todos los archivos que forman parte de la rama **`master`**, verá que la rama **`master`** tiene dos archivos: **`menu.md`** y **`fall-menu.md`**! Es decir, la rama **`master`** refleja el trabajo que se hizo en las dos ramas por separado.
 
 <img width="942" alt="image" src="https://user-images.githubusercontent.com/23094588/209865073-a147809d-8be3-4ada-9eaa-a4b51dcf8979.png">
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209979825-d46bd94e-2ed3-4857-a789-50fd2329c26e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209979957-f1f3a3c6-748f-4b5c-8d3e-14d1312f381a.png)
 
 <hr>
 
@@ -842,11 +854,38 @@ Reforcemos un poco más nuestras habilidades de línea de comandos. Vas a repeti
 
 <img width="958" alt="image" src="https://user-images.githubusercontent.com/23094588/209865963-2e85ec8d-98e3-41ce-8bbe-c0a24ced10aa.png">
 
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209980340-141bec62-f147-4c75-baa0-0621ef09a561.png)
+
 Compáralas con las que hiciste la última vez. ¿Qué cambió?
+
+**TANTO LA RAMA `master`COMO LA RAMA `add-fall-menu`AHORA APUNTAN AL MISMO COMMIT**
 
 Finalmente, enumere los archivos en cada rama. Comience con la rama **`master`**, luego **`switch`** a la rama **`add-fall-menu`** y finalmente a la rama **`add-thurs-menu`**, usando **`ls`** para enumerar los archivos que ve en cada rama:
 
 <img width="951" alt="image" src="https://user-images.githubusercontent.com/23094588/209866207-f6aee6fb-ee2d-45d3-8554-201daaef0824.png">
+
+### 💻
+
+1. **`master`**
+ 
+   ![image](https://user-images.githubusercontent.com/23094588/209980866-186c4859-11d0-4bde-9a94-e1eecb56804c.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/209980933-27acf95d-99e2-43a0-b71d-6faed80573c7.png)
+
+
+2. **`add-fall-menu`**
+
+   ![image](https://user-images.githubusercontent.com/23094588/209981063-e0f48c08-b473-4700-9035-4a91a8dd19f3.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/209981166-29dac1d4-ac80-40b2-b26e-ed86cd7bb1f9.png)
+
+3. **`add-thurs-menu`**
+
+   ![image](https://user-images.githubusercontent.com/23094588/209981320-bb6bf673-f4f4-4f5b-8486-c0f63e5339e1.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/209981374-aae3ddc5-acfe-4f15-9e62-cfa326a11737.png)
 
 **---------->  Respuestas en “Exercise Solution”.**
 
@@ -860,13 +899,13 @@ Comencemos con el historial de commits, centrándonos solo en **`master`** y **`
 
 <img width="947" alt="image" src="https://user-images.githubusercontent.com/23094588/209866737-d99ae34c-1a89-408c-9a27-be486a4f0c8a.png">
 
-En este escenario, tenemos dos notas adhesivas para representar las dos ramas, cada una de las cuales apunta al último commit en esa rama. Lo que hay que notar aquí es que la rama **`add-fall-menu`** se basa en el último commit de la rama **`master`**. La rama **`master`** no ha cambiado (no hay nuevos commits en ella) desde el inicio de la rama **`add-fall-menu`**. En otras palabras, ¡la rama **`add-fall-menu`** tiene todo lo que hace la rama **`master`**! Lo que significa que, para que Git haga que **`master`**(el proponente) se vea como **`add-fall-menu`**, Git podría simplemente pasar **`master`** el mismo commit que el último commit en la rama **`add-fall-menu`**.
+En este escenario, tenemos dos notas adhesivas para representar las dos ramas, cada una de las cuales apunta al último commit en su rama. Lo que hay que notar aquí es que la rama **`add-fall-menu`** se baso en el último commit de la rama **`master`**. La rama **`master`** no ha cambiado (no hay nuevos commits en ella) desde el inicio de la rama **`add-fall-menu`**. En otras palabras, ¡la rama **`add-fall-menu`** tiene todo lo que hace la rama **`master`**! Lo que significa que, para que Git haga que **`master`**(el proponente) se vea como **`add-fall-menu`**, Git simplemente podría mover **`master`** para que apunte al último commit en la rama **`add-fall-menu`**.
 
-Eso es exactamente lo que hace Git. Git vuelve a escribir la nota adhesiva para **`master`** que apunte al mismo commit al que apunta la nota adhesiva de **`add-fall-menu`**. Esto se conoce como “fast-forward” merge, donde una rama, en este caso **`master`**, simplemente salta hacia adelante(forward).
+Eso es exactamente lo que hace Git. Git vuelve a escribir la nota adhesiva para **`master`** que apunte al mismo commit al que apunta la nota adhesiva de **`add-fall-menu`**. Esto se conoce como **“fast-forward” merge**, donde una rama, en este caso **`master`**, ***simplemente salta hacia adelante(forward)***.
 
 <img width="990" alt="image" src="https://user-images.githubusercontent.com/23094588/209867818-cea95eb6-8935-4dea-ba1b-6303fe2166fb.png">
 
-Al fusionarse(merging), la fast-forward merge(fusión de avance rápido) es el mejor de los casos, ya que técnicamente no es una fusión en absoluto. Es simplemente una rama que "se pone al día" con otra.
+Cuando mergea, la fast-forward merge(fusión de avance rápido) es el mejor de los escenarios, ya que técnicamente no es una fusión en absoluto. **Es simplemente una rama que "se pone al día" con otra**.
 
 Mire hacia atrás y estudie los **ID de commit** que enumeró en la página anterior. Observe que tanto la rama **`add-fall-menu`** como la rama **`master`** apuntan al mismo commit después de la fusión(merge).
 
@@ -874,7 +913,7 @@ Mire hacia atrás y estudie los **ID de commit** que enumeró en la página ante
 
 <img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
 
-¿Puedes pensar en una analogía que pueda explicar una fast-forward merge(fusión de avance rápido)? Piensa en **“merging(fusionar)”** el color naranja (compuesto por amarillo y rojo) y el color amarillo. ¿Qué significa **“merging(fusionar)”** el amarillo con el naranja?
+¿Puedes pensar en una analogía que pueda explicar una fast-forward merge? Piensa en **“merging(fusionar)”** el color naranja (compuesto por amarillo y rojo) y el color amarillo. ¿Qué significa **“merging(fusionar)”** el amarillo con el naranja?
 
 <hr>
 
@@ -907,7 +946,7 @@ Recuerde, **`master`** no tiene nuevos commits desde que creamos la rama **`add-
 
 Entonces Git nos dice que **`add-fall-menu`** "Already up to date.(Ya está actualizado)". Es decir, **`add-fall-menu`** ya es la combinación de **`add-fall-menu`** y **`master`**. Para decirlo en términos del historial de commits, nada cambió ya que no había nada que hacer.
 
-Lógicamente, la "dirección" de la combinación siempre da como resultado que dos archivos (**`menu.md`** y **`add-fall-menu.md`**) estén presentes en el directorio de trabajo. Recuerde: la rama **`add-fall-menu`**, al estar basada en **`master`**, ya tiene el archivo **`menu.md`** porque comenzó con él. Pero el orden de la fusión tiene un gran impacto en su historial de commits, como acabamos de ver. En un caso, **`master`** fast-forwarded(avance rápido) al commit al que apunta **`add-fall-menu`**; en el otro caso, nada cambió.
+Lógicamente, la "dirección" de la combinación siempre da como resultado que dos archivos (**`menu.md`** y **`add-fall-menu.md`**) estén presentes en el directorio de trabajo. Recuerde: la rama **`add-fall-menu`**, al estar basada en **`master`**, ya tiene el archivo **`menu.md`** porque comenzó con él. Pero el orden de la fusión tiene un gran impacto en su historial de commits, como acabamos de ver. En un caso, **`master`** hizo un fast-forwarded(avance rápido) y avanzo al commit al que apunta **`add-fall-menu`**; en el otro caso, nada cambió, **`master`** se queda apuntando al primer commit.
 
 ## "Un poco más de configuración de Git"
 
@@ -922,6 +961,11 @@ En la introducción de este libro, le recomendamos que instale Visual Studio Cod
 Dado que Git no ofrece confirmación de que algo, cualquier cosa, sucedió, sigamos adelante y confirmemos que nuestra configuración se mantuvo:
 
 <img width="1140" alt="image" src="https://user-images.githubusercontent.com/23094588/209870878-34951e6d-4427-440d-9318-0a7fd193f613.png">
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209983768-e592dfa9-d0ef-4be0-b40d-d300da02161c.png)
+
 
 Por supuesto, no tiene que usar Visual Studio Code. Siéntase libre de apegarse al editor de su elección: **Notepad++**, **Emacs**, **Sublime Text**, o lo que sea que le guste. Dado que hay demasiados para enumerarlos aquí, lo alentamos a que inicie su motor de búsqueda favorito y busque **"`how do I set up <insert text editor name here> as my Git editor(cómo configuro <inserte el nombre del editor de texto aquí> como mi editor de Git)`"**. Lo único que debería cambiar es el argumento que proporciona en lugar de **"`code -w`"**.
 
@@ -943,7 +987,7 @@ Todo lo que hemos hecho hasta ahora, incluida la creación de commits y ramas y 
 
 Además, casi todos los temas que tratamos en este libro girarán en torno a este gráfico.
 
-Hay una gran cantidad de herramientas de interfaz gráfica de usuario (GUI) que le permiten trabajar con Git. Hasta ahora, solo hemos usado las herramientas de línea de comandos de Git, pero una vez que haya avanzado lo suficiente en su viaje con Git, también puede comenzar a usar las herramientas de GUI. ¿Y adivina qué? ¡Todos te muestran el mismo gráfico de historial de confirmaciones! Estás justo por delante de la clase en ese sentido. ¿No estás contento de haber comprado este libro?
+Hay una gran cantidad de herramientas de interfaz gráfica de usuario (GUI) que le permiten trabajar con Git. Hasta ahora, solo hemos usado las herramientas de línea de comandos de Git, pero una vez que haya avanzado lo suficiente en su viaje con Git, también puede comenzar a usar las herramientas de GUI. ¿Y adivina qué? ¡Todos te muestran el mismo gráfico de historial de commits! Estás justo por delante de la clase en ese sentido. ¿No estás contento de haber comprado este libro?
 
 <img width="1003" alt="image" src="https://user-images.githubusercontent.com/23094588/209871707-5c74c313-078c-416b-9383-0df67dd83ac0.png">
 
