@@ -543,9 +543,7 @@ Mire el gráfico de commits hipotético a continuación y complete las notas adh
 
 **MI SOLUCIÓN:**
 
-master       update-icon     fix-header
-
-  A               C              F
+master - A,      update-icon - C,     fix-header - F
 
 Ahora supongamos que cambiamos a la rama **`fix-header`**, hacemos algunas ediciones y hacemos otro commit, a la que se le asignó la ID "G". ¿Puedes visualizar qué cambiaría en el diagrama de arriba?
 
