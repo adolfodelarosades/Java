@@ -1163,23 +1163,36 @@ Así es como se ve el gráfico de commits:
 
 ![image](https://user-images.githubusercontent.com/23094588/209993183-d0d8c2ec-e859-40cb-88bf-f60839552f39.png)
 
-Ahora, intentaremos fusionar la add-emojisrama en la add-chatrama. En otras palabras, la add-chatrama es el proponente y add-emojises el propuesto. ¿Resultará esto en una fusión de avance rápido, o formará una confirmación de fusión?
+Ahora, intentaremos fusionar la rama **`add-emojis`** en la rama **`add-chat`**. En otras palabras, la rama **`add-chat`** es el **proponente** y **`add-emojis`** es el **propuesto**. ¿Resultará esto en un **fast-forward merge**, o formará un **merge commit**?
 
 Finalmente, dibuje aquí el gráfico de confirmación resultante.
 
-NOTA
-Dibuje el historial de confirmaciones actualizado aquí.
+<hr>
 
-Pista: ¿Se ha add-chatdesviado de add-emojis?
+**NOTA**
 
- Respuestas en “Solución de ejercicios” .
+Dibuje el historial de commits actualizado aquí.
 
-Las confirmaciones de fusión son un poco especiales
-Una confirmación de combinación es como cualquier otra confirmación que haya creado hasta ahora. Registra el trabajo que resultó de unir dos ramas, junto con algunos metadatos. Los metadatos incluyen su nombre y correo electrónico, la hora en que se creó la confirmación y el mensaje de confirmación que proporcionó cuando realizamos la combinación. Además, cada confirmación (aparte de la primera en un repositorio) registra la ID de la confirmación que la precedió.
+<hr>
 
-Sin embargo, las confirmaciones de fusión tienen algunas características interesantes. Por un lado, recuerda que no creaste esta confirmación explícitamente; más bien, Git lo hizo cuando fusionó dos ramas que se habían separado una de la otra.
+Pista: ¿Se ha desviado **`add-chat`** de **`add-emojis`**?
 
-Por otra parte, una confirmación de fusión tiene dos padres: el primer padre es la última confirmación en la rama que propone, y el segundo padre es la última confirmación de la rama propuesta que se fusionó. Mirando hacia atrás en el 80s-dinerhistorial de confirmación:
+**----------> Respuestas en “Exercise Solution”.**
+
+### Los Merge commits son un poco especiales
+
+Un merge commit es como cualquier otro commit que haya creado hasta ahora. Registra el trabajo que resultó de unir dos ramas, junto con algunos metadatos. Los metadatos incluyen su nombre y correo electrónico, la hora en que se creó el commit y el mensaje de commit que proporcionó cuando realizamos el mergeo. Además, cada commit(cualquier otro que no sea el primer commit en un repositorio) registra la ID del commit que le precede.
+
+Sin embargo, los merge commit tienen algunas características interesantes. Por un lado, recuerda que no creaste este commit explícitamente; más bien, Git lo hizo cuando fusionó dos ramas que se habían separado una de la otra.
+
+Por otra parte, ***un merge commit tiene dos padres***: el ***primer padre*** es el último commit en la rama que propone, y el ***segundo padre*** es el último commit de la rama propuesta que se fusionó. Mirando hacia atrás en el historial de commits de **`80s-diner`**:
+
+![image](https://user-images.githubusercontent.com/23094588/209994638-3f9a6eb9-6b4b-4f01-9783-7297e9730de4.png)
+
+El aspecto más importante de los merge commit es su efecto en su historial de commits. Hasta ahora, has visto cómo las ramas divergen unas de otras. Esto es evidente cuando dibujas el historial de commits. Los merge commit son la otra cara de la misma moneda: presentan un punto en su historial de commits donde las ramas divergentes se unen.
+
+![image](https://user-images.githubusercontent.com/23094588/209994865-b7ee58c0-b619-47a2-bafd-1b05b9a23676.png)
+
 
 
 ## Las cosas no siempre van tan bien
