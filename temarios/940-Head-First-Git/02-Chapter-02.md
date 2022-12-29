@@ -1194,9 +1194,83 @@ El aspecto más importante de los merge commit es su efecto en su historial de c
 ![image](https://user-images.githubusercontent.com/23094588/209994865-b7ee58c0-b619-47a2-bafd-1b05b9a23676.png)
 
 
-
 ## Las cosas no siempre van tan bien
-## ¡Estoy tan en conflicto!
+
+Imagina el multiverso: existes en múltiples universos al mismo tiempo, viviendo vidas diferentes. En un universo, podrías ser un humanitario, con la intención de resolver todo el sufrimiento humano. En otro, eres un villano, enfocado con láser en la dominación mundial. Ahora supongamos que estos dos universos chocan entre sí. ¿Lo que pasa? Solo puede haber uno de ustedes, entonces, ¿cuál será? ¿El humanitario o el villano? ¿O podrías ser ambos de alguna manera?
+
+En el repositorio ’80s Diner, hasta ahora no hemos necesitado trabajar con el mismo archivo en varias ramas. Teníamos tres ramas, todas las cuales introdujeron nuevos archivos. Pero, ¿y si las tres ramas trabajaran con el mismo archivo, modificándolo de diferentes maneras? Tal vez editó un archivo en una rama y luego editó exactamente la misma línea en el mismo archivo en otra rama. Es decir, en una rama el archivo se ve diferente al mismo archivo en otra rama.
+
+Considere un repositorio con dos ramas: **`master`** y **`feat-a`**. La rama **`master`** tiene un commit, que introduce el archivo **`notice.md`** (commit **`A`**), que solo tiene una línea de texto. Luego creamos la rama **`feat-a`**, cambiamos a ella, editamos el archivo y hacemos commit **`B`**. Finalmente, volvemos a la rama **`master`**, editamos el archivo *nuevamente* y hacemos un commit final, **`C`**.
+
+![image](https://user-images.githubusercontent.com/23094588/209997170-bd87b845-4521-49ab-8002-74ee693bdeca.png)
+
+**¿Qué sucede cuando fusionamos estas dos ramas?**
+
+
+## ¡Estoy en conflicto!
+
+![image](https://user-images.githubusercontent.com/23094588/209997284-99319a69-481c-4c15-92ee-5685eb981b13.png)
+
+Los **Merge conflicts** se producen cuando intentamos reunir commits que afectan a los mismos archivos de diferentes maneras. Esto es similar a nuestros universos alternativos chocando entre sí; cuando eso suceda, ¿cómo reconciliarás tu ser humanitario y el de villano?
+
+Uno de esos escenarios es el que acabamos de describir: tenemos el mismo archivo en dos ramas diferentes, continuamos tratando la rama **`master`** como la rama de integración y mergeamos la rama **`feat-a`** en la rama **`master`**. ¿Lo que pasa?
+
+¡Git levanta las manos en señal de rendición! Git no tiene absolutamente ninguna forma de determinar qué versión mantener, por lo que **detiene** la fusión a mitad de camino e informa un merge conflict.
+
+![image](https://user-images.githubusercontent.com/23094588/209998927-701bea77-fd7f-4170-903c-42c2af555e21.png)
+
+Git **`status`** puede parecer aterrador, pero si lo leemos detenidamente, Git está haciendo todo lo posible para ayudarnos. Vamos a ver:
+
+![image](https://user-images.githubusercontent.com/23094588/209999565-52ab9c92-ee7c-40fe-ae31-4f878ab7f390.png)
+
+Git **`merge`** falla de inmediato, pero trata de ser útil al indicarle qué archivos tienen un merge conflict.
+
+Git **`status`**, al igual que el comando **`merge`**, también nos dice que Git no pudo completar la combinación de algunos archivos y los enumera. También nos dice que arreglemos los conflictos y luego ejecutemos el comando **`git commit`**.
+
+Puede resultar confuso cuando Git dice "both modified", lo que significa que ambas ramas modificaron el mismo archivo.
+
+Estás en medio del proceso de fusión y Git te pide ayuda.
+
+La forma más fácil de resolver los merge conflicts es abrir los archivos que tienen merge conflicts en su editor. Si tuviera que abrir **`notice.md`** en su editor de texto, esto es lo que vería:
+
+![image](https://user-images.githubusercontent.com/23094588/210003150-51f3ac5e-6254-4379-8d9c-c8988b3c48ca.png)
+
+**Linus Torvalds, quien creó Git, lo describió como "el estúpido rastreador de contenido(the stupid content tracker)". En otras palabras, Git no pretende ser inteligente. Si no sabe qué hacer, simplemente se detendrá y le entregará el control.**
+
+Se ve bastante retorcido, ¿eh? No se preocupe, lo guiaremos paso a paso. Solo recuerde, hay dos ramas que se están fusionando y cada una está introduciendo su propio cambio en el mismo archivo. Esto es lo que significan esos marcadores de aspecto divertido:
+
+![image](https://user-images.githubusercontent.com/23094588/210003447-545ad05f-e8c2-4981-94a7-f8ac1a69f23b.png)
+
+Ahora que lo sabe, aquí está el mismo archivo que se muestra en su gloria completamente anotada:
+
+![image](https://user-images.githubusercontent.com/23094588/210003623-f2c6fc0d-f2f8-407e-b898-d79d0b953a28.png)
+
+Ahora solo es cuestión de editar los archivos que tienen merge conflicts. Tienes cuatro opciones....
+
+<img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859350-656c580f-cd14-4123-b3fc-3b6901fd405f.png">
+
+*Las violetas son azules*
+
+*Las rosas son rojas*
+
+*El compromiso en el que estás*
+
+*Se denomina CABEZA.*
+
+### ¡Estoy en conflicto! (¡Uf! Ya casi llegamos)
+
+Cuando tiene un merge conflict, tiene **cuatro opciones**. Puede elegir los cambios introducidos en la rama **`master`**, los cambios en la rama **`feat-a`**, elegir ambos (en este caso particular) o ignorar ambos y escribir algo completamente nuevo. Recuerde que los marcadores que Git colocó allí son solo para resaltar los conflictos, solo están ahí para ayudarlo.
+
+Una vez que elija, este es el aspecto que debería tener el archivo:
+
+**Sus opciones:**
+
+![image](https://user-images.githubusercontent.com/23094588/210004125-f4ce455c-2c35-4b8b-9070-67625cb1151f.png)
+
+
+
+
+
 ## Limpieza de sucursales (fusionadas)
 ## Eliminar ramas no fusionadas
 ## Un flujo de trabajo típico
