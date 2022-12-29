@@ -132,6 +132,7 @@ Llevemos el **'80s Diner** al siglo XXI. Comenzaremos colocando su menú existen
    ![image](https://user-images.githubusercontent.com/23094588/209945286-ba982899-37ac-412a-af4f-9f4559fe6796.png)
 
 3.
+
    ![image](https://user-images.githubusercontent.com/23094588/209945594-e0e99a33-95eb-46cd-bdfc-a0e76d62b22e.png)
 
 4.
@@ -164,7 +165,7 @@ Sin embargo, Git aún tiene como valor predeterminado **`master`**, y para evita
 
 <img width="810" alt="image" src="https://user-images.githubusercontent.com/23094588/209588226-9971656c-1d3f-42c9-806f-b877ab5a8e8b.png">
 
-Administrar branches en Git usa otro comando, apropiadamente llamado **`branch`**. Puede usar el comando **`branch`** para crear una nueva rama, enumerar todas las ramas en su repositorio e incluso eliminar ramas. Y, como todo lo que has hecho hasta ahora, todo esto sucede en la terminal dentro de tu directorio de trabajo.
+Para administrar branches en Git se usa otro comando llamado **`branch`**. Puede usar el comando **`branch`** para crear una nueva rama, enumerar todas las ramas en su repositorio e incluso eliminar ramas. Y, como todo lo que has hecho hasta ahora, todo esto sucede en la terminal dentro de tu directorio de trabajo.
 
 Comencemos por crear una nueva rama. Puede usar el comando **`branch`**, dándole el nombre de la rama que desea crear como argumento.
 
@@ -190,7 +191,7 @@ El comando Git **`branch`**, sin argumentos, es como el comando **`git status`**
 
 **P: ¿Puedo tener espacios en blanco en el nombre de mi branch?**
 
-**R**: No. Si desea un nombre de rama de varias palabras, use guiones o guiones bajos. Si intenta poner un espacio en el nombre de su branch, Git informará un **`"is not a valid name"`** error. ¡Sin embargo, se permiten las barras diagonales (**`/`**)!
+**R**: No. Si desea un nombre de rama de varias palabras, use guiones o guiones bajos. Si intenta poner un espacio en el nombre de su branch, Git informará un error **`"is not a valid name"`**. ¡Sin embargo, se permiten las barras diagonales (**`/`**)!
 
 Hablaremos más sobre los nombres de las branches al final de este libro, así que esté atento.
 
@@ -200,13 +201,13 @@ Hablaremos más sobre los nombres de las branches al final de este libro, así q
 
 **P: ¿Cuántas branch puedo tener en mi repositorio de Git?**
 
-**R**: ¡Tantos como quieras! Pero como veremos pronto, por lo general usará una rama para trabajar en un cambio pequeño y aislado, luego lo combinará(merge) en una rama de "integración" cuando haya terminado, y luego eliminará la rama. Nos sumergiremos en las ramas de integración y la eliminación de ramas pronto. Esto le ayuda a mantener un buen repositorio ordenado.
+**R**: ¡Tantos como quieras! Pero como veremos pronto, por lo general usará una rama para trabajar en un cambio pequeño y aislado, luego la **combinará(merge)* en una **rama de "integración"** cuando haya terminado, y luego eliminará la rama. Nos sumergiremos en las ramas de integración y la eliminación de ramas pronto. Esto le ayuda a mantener un buen repositorio ordenado.
 
 <hr>
 
 ## "Cambio de pistas"
 
-Ahora sabe cómo crear branch, pero también acaba de aprender que crear una nueva branch no significa que pueda comenzar a usarla. Para cambiar a otra rama, usará otro comando de Git, acertadamente llamado **`switch`**, que toma un argumento, a saber, el nombre de la rama a la que desea cambiar:
+Ahora sabe cómo crear branch, pero también acaba de aprender que crear una nueva branch no significa que pueda comenzar a usarla. Para cambiar a otra rama, usará otro comando de Git llamado **`switch`**, que toma un argumento, a saber, el nombre de la rama a la que desea cambiar:
 
 <img width="1006" alt="image" src="https://user-images.githubusercontent.com/23094588/209588568-9400d5c5-c0e0-49d2-9cf8-8812510347e3.png">
 
@@ -246,7 +247,7 @@ Esto le pedirá a Git que cree la rama llamada **`my-first-branch`** y cambie a 
 
 ### De vuelta en el restaurante de los 80
 
-Te sientes bien. El menú de '80s Diner ahora se administra en un repositorio de Git. Y tiene una nueva solicitud: la gerencia planea introducir un menú especial de otoño, y su tarea es inventar algunos espeluznantes especiales con temas de Halloween. Te encargas de ver películas de terror de los años 80 para entrar en el estado de ánimo adecuado, y entras al trabajo rebosante de ideas para recetas.
+Te sientes bien. El menú de '80s Diner ahora se administra en un repositorio de Git. Y tienes una nueva solicitud: la gerencia planea introducir un menú especial de otoño, y su tarea es inventar algunos platos especiales y sobretodo espeluznantes con temas de Halloween. Te encargas de ver películas de terror de los años 80 para entrar en el estado de ánimo adecuado, y entras al trabajo rebosante de ideas para recetas.
 
 Seamos diligentes y creemos una rama para que pueda iterar sobre las ideas del menú. Comenzaremos en la terminal:
 
@@ -259,6 +260,19 @@ A continuación, cree una nueva rama llamada **`add-fall-menu`** y cambie a ella
 Ya sabes que hacer. Aquí está su lista de verificación:
 
 <img width="994" alt="image" src="https://user-images.githubusercontent.com/23094588/209589000-2aa5c909-760e-48d4-9cf7-f279bddb7783.png">
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209949733-3eb46f86-429f-4d84-beac-2da4f99bd4a2.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209949985-e48ba0f7-b1b4-4cde-b8aa-9e6bb849a578.png)
+
+<img width="1051" alt="image" src="https://user-images.githubusercontent.com/23094588/209950077-20bacf36-c67c-4d04-8fe1-a6d1db1a660b.png">
+
+![image](https://user-images.githubusercontent.com/23094588/209950249-642ae6c8-f8c9-47a7-8537-8ecead9c7b51.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209950309-a224bde7-e63a-4d98-a12b-0d679b0a8bf9.png)
+
 
 ## "¡Devuelvelo!"
 
@@ -278,6 +292,15 @@ Eso se ve bien, así que sigamos adelante y commitemoslo. Comenzaremos agregando
 
 <img width="965" alt="image" src="https://user-images.githubusercontent.com/23094588/209589203-c8c8a990-0015-49a4-8636-d231d8597ae0.png">
 
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209950667-bf8a473b-be17-459a-a729-bbc57a455193.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209950957-0cb83bdc-a91e-4b06-95ec-c1dc54f76a8b.png)
+
+![image](https://user-images.githubusercontent.com/23094588/209950999-9c8d0ba0-474b-4e3e-8220-4781d7cb8803.png)
+
+
 ### Imanes de código
 
 <img width="254" alt="image" src="https://user-images.githubusercontent.com/23094588/209589235-288c51cd-1de4-4a80-b519-d590b934dc1f.png">
@@ -285,6 +308,15 @@ Eso se ve bien, así que sigamos adelante y commitemoslo. Comenzaremos agregando
 ¡Oh querido! Para ayudar a nuestros compañeros desarrolladores, hemos diseñado cuidadosamente todos los comandos necesarios para enumerar todas las ramas en su repositorio (existente), crear una nueva rama, cambiar a ella y verificar que todo esté bien. ¡Pobre de mí! Los imanes cayeron al suelo. Es tu trabajo volver a armarlos. Ten cuidado; se mezclaron algunos imanes adicionales y algunos se usaron más de una vez.
 
 <img width="1002" alt="image" src="https://user-images.githubusercontent.com/23094588/209589271-aa020bd4-0f40-45ed-aec4-758b68f23ab1.png">
+
+**Mi Solución:**
+
+```sh
+git branch
+git branch my-new-branch
+git switch my-new-branch
+git branch
+```
 
 **----------> Respuestas en “Code Magnets Solution”.**
 
@@ -296,7 +328,7 @@ En este momento, tienes dos ramas: **`master`** y **`add-fall-menu`**. Inicializ
 
 Cuando obtuviste los requisitos para el menú de otoño, elegiste hacer todo ese trabajo en una rama separada: a saber, la rama **`add-fall-menu`**.
 
-Estas dos ramas representan dos requisitos completamente separados. Recuerde, las ramas le permiten aislar partes del trabajo entre sí. Si mañana la gerencia viniera y te pidiera que trabajes en algo que no tiene ninguna relación (¡y seguramente lo harán!), simplemente creas una nueva rama **`master`** y te pones a trabajar. Todo el trabajo que hizo en la rama **`add-fall-menu`** permanece intacto hasta que tenga la oportunidad de volver a él.
+Estas dos ramas representan dos requisitos completamente separados. Recuerde, las ramas le permiten aislar partes del trabajo entre sí. Si mañana la gerencia viniera y te pidiera que trabajes en algo que no tiene ninguna relación (¡y seguramente lo harán!), simplemente creas una nueva rama desde **`master`** y te pones a trabajar. Todo el trabajo que hizo en la rama **`add-fall-menu`** permanece intacto hasta que tenga la oportunidad de volver a él.
 
 La buena noticia aquí es que trabajar en una branch no es nuevo para usted: ¡ha estado trabajando con branches todo el tiempo! Además de tener que crear y cambiar ramas, su flujo de trabajo sigue siendo el mismo: agrega o edita archivos, los agrega al índice y luego los commitea.
 
@@ -319,14 +351,16 @@ Como puede ver, hicimos algunos trabajos en la branch **`master`** y ahora tenem
 
 ¿Qué cambiaría en la visualización si permanecieras en la rama **`add-fall-menu`** y tuvieras que hacer otro commit?
 
+SE AÑADIRA OTRO NODO PARA REPRESENTAR AL NUEVO COMMIT.
+
 **----------> Respuestas en “Sharpen your pencil Solution”.**
 
 <hr>
 
 
-## "Ramas, confirmaciones y los archivos contenidos dentro"
+## Branches, commits y los archivos contenidos dentro
 
-Sabemos que los commits en una rama están **"sequenced(secuenciadas)"**, es decir, son como los brotes en la rama de un árbol: uno viene después del siguiente. ¿Qué significa eso para los archivos que conoce cada commit? Recuerde que los repositorios de Git están predeterminados en la rama **`master`**. Entonces, nuestro primer commit, que introdujo el archivo **`menu.md`**, estaba en la branch **`master`**.
+Sabemos que los commits en una rama están **"sequenced(secuenciados)"**, es decir, son como los brotes en la rama de un árbol: uno viene después del siguiente. ¿Qué significa eso para los archivos, que conoce cada commit? Recuerde que los repositorios de Git están predeterminados en la rama **`master`**. Entonces, nuestro primer commit, que introdujo el archivo **`menu.md`**, estaba en la branch **`master`**.
 
 <img width="1097" alt="image" src="https://user-images.githubusercontent.com/23094588/209849057-3bf23431-9530-4dc1-9e12-f75c1c81daed.png">
 
@@ -344,7 +378,7 @@ Dado que la rama **`add-fall-menu`** comenzó con el commit que incluía el arch
 
 <img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850337-09d538e2-5da1-41ee-bf3f-9c0fafb09a59.png">
 
-**Dedique un poco de tiempo a comprender cómo cambia Git su directorio de trabajo cuando cambia de rama.**
+**Dedique un poco de tiempo a comprender cómo Git cambia su directorio de trabajo cuando cambia de rama.**
 
 Comience con su terminal: asegúrese de estar en el directorio **`80s-diner`** y utilíce **`git branch`** para asegurarse de que está en la branch **`add-fall-menu`**.
 
@@ -352,11 +386,17 @@ Comience con su terminal: asegúrese de estar en el directorio **`80s-diner`** y
 
 Finalmente, vea si puede explicar lo que está viendo aquí.
 
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/209953278-98227a27-d5d0-4f1b-b762-b51940f20211.png)
+
 <hr>
 
 **NOTA**
 
 La explicación va aquí.
+
+EN LA RAMA **`master`** TENEMOS UN SOLO ARCHIVOS **`menu.md`**, EL CUAL FUE EL PRIMER ARCHIVO QUE CREAMOS Y COMMITEAMOS EN DICHA RAMA, UNA VEZ HECHO ESTO CREAMOS LA RAMA **`add-fall-menu`** A PARTIR DE LA RAMA **`master`** POR LO CUAL LA RAMA **`add-fall-menu`** CONOCE Y MANEJA EL ARCHIVOS **`menu.md`**, DESPUÉS SOBRE LA RAMA **`add-fall-menu`** CREAMOS EL ARCHIVO **`fall-menu.md`** EL CUAL COMMITEAMOS, LO MODIFICAMOS Y LO VOLVIMOS A COMMITEAR, COMO TODO ESTO LO HICIMOS EN LA RAMA **`add-fall-menu`**, QUEDA FUERA DEL ALCANCE DE LA RAMA **`master`**, **`master`** NO VE A EL ARCHIVO **`fall-menu.md`**. POR ESO CUANDO CAMBIAMOS DE RAMA, SE MUESTRAN DIFERENTES ARCHIVOS EN EL DIRECTORIO DE TRABAJO.   
 
 <hr>
 
