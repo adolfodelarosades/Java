@@ -507,6 +507,8 @@ Repitamos nuestro ejercicio anterior de visitar todas las branches en nuestro re
 
 Imagina que hubiera una manera de combinar las tres ramas diferentes en una sola rama. ¿Cómo sería su directorio de trabajo? ¿Cuántos archivos habría como resultado de integrar las tres ramas en una?
 
+SI INTEGRARAMOS LAS 3 RAMAS EN UNA SOLA EXISTIRIAN 3 ARCHIVOS EN ELLA: **`menu.md`**, **`fall-menu.md`** y **`thursdays-menu.md`**
+
 <hr>
 
 ## “¿Qué es una rama, realmente?”
@@ -539,7 +541,16 @@ Mire el gráfico de commits hipotético a continuación y complete las notas adh
 
 <img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209855496-45ed5cd7-91bb-47e4-947b-80bbe09dbaee.png">
 
+**MI SOLUCIÓN:**
+
+master       update-icon     fix-header
+  A               C              F
+
 Ahora supongamos que cambiamos a la rama **`fix-header`**, hacemos algunas ediciones y hacemos otro commit, a la que se le asignó la ID "G". ¿Puedes visualizar qué cambiaría en el diagrama de arriba?
+
+**MI SOLUCIÓN:**
+
+En la rama **`fix-header`** se añade un nuevo nodo **G**
 
 <hr>
 
