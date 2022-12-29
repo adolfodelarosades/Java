@@ -1354,7 +1354,420 @@ Dibuje el gráfico de commits aquí.
 ** ----------> Respuestas en “Sharpen your pencil Solution”.**
 
 
-## Limpieza de sucursales (fusionadas)
+## Limpieza de branches(mergeadas)
+
+![image](https://user-images.githubusercontent.com/23094588/210006686-0d4d04d3-17ba-4209-aca3-170aea8fbff7.png)
+
+Hemos visto cómo se ve un flujo de trabajo de bifurcación típico: recibe una solicitud de una nueva función o un correo electrónico discordante sobre un error que debe corregirse de inmediato. Crea una rama, comienza su trabajo, commitea cuando sea necesario y, cuando esté listo, vuelve a fusionarse con la rama de integración.
+
+Pero después de un tiempo, tiene todas estas ramas sentadas en su repositorio de Git, por lo que es hora de una limpieza. Git te permite eliminar ramas, usando el comando **`git branch`**. Lo primero es lo primero: **¡no puedes eliminar la rama en la que te encuentras!** Entonces, si se encuentra en la rama que está a punto de eliminar, debe cambiar a otra rama.
+
+Tome este repositorio hipotético como ejemplo. Tiene dos ramas, **`master`** siendo la rama de integración, y una rama de características, llamada **`feat-home-screen`**. **`feat-home-screen`** se fusionó con **`master`**, por lo que podemos eliminarla de forma segura.
+
+![image](https://user-images.githubusercontent.com/23094588/210007147-0d9704d9-726f-4aa8-ab9a-f9a8e5a88f81.png)
+
+Para eliminar una rama, proporcionamos el indicador **`-d`**(o **`--delete`**) con el comando **`git branch`** junto con el nombre de la rama que deseamos eliminar, así:
+
+![image](https://user-images.githubusercontent.com/23094588/210007463-1d91b058-0077-41a2-93e2-d426ccc3f081.png)
+
+Git responderá con un mensaje de éxito, como este:
+
+![image](https://user-images.githubusercontent.com/23094588/210007583-c80f8060-bbc1-443d-995e-2c8bce83c53c.png)
+
+Git siempre intenta ser lo más útil posible. Esta vez no solo le dice que eliminó la rama, sino que lo sigue con la ID de commit del último commit en esa rama. Esto es muy útil en caso de que borre accidentalmente la rama equivocada. Si de repente se da cuenta de que eliminó la rama incorrecta, puede usar una variación del comando **`git branch`** que le permite proporcionar el ID de commit en el que se debe basar la rama, así: **`git branch <branch-name> <base-commit-id>`**. Esto le permitirá deshacer una eliminación accidental.
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+¡Tu turno! Navegue hasta el repositorio **`80s-diner`** en su terminal y haga lo siguiente:
+
+1. Enumere las branches que tiene:
+
+2. Eliminar todas las branches excepto **`master`**. Pero primero, enumere los pasos que debe seguir:
+
+**----------> Respuestas en “Sharpen your pencil”.**
+
+<hr>
+
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
+
+Hemos comparado ramas con notas adhesivas. ¿Qué crees que sucede con estas notas adhesivas cuando eliminas ramas en Git?
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+**P: Parece que puedo eliminar mi rama tan pronto como termine de integrar mi trabajo. ¿Debería esperar un poco más?**
+
+**R**: ¡No! Lo hiciste bien la primera vez. Una vez que fusiona su rama con la rama de integración, no hay razón para mantener esa rama. ¡Avanzar! Bórralo.
+
+**P: Recibí un error al eliminar mi rama.**
+
+**R**: Si recibió un error que se parece a **`error: branch not found`**, entonces escribió mal el nombre de la rama o está tratando de eliminar una rama que ya eliminó. Puede usar **`git branch`** para enumerar todas sus ramas, verificar que la rama existe y asegurarse de obtener el nombre correcto.
+
+**P: ¿Por qué necesito eliminar estas ramas? ¿Por qué no mantenerlos cerca?**
+
+**R**: Las ramas se utilizan para trabajar en una sola cosa, lejos de otras tareas que pueda tener en vuelo. Piense en ellos como recipientes de un solo uso, como una taza de café de un autoservicio: una vez que obtiene su dosis de cafeína, simplemente tira el recipiente.
+
+Finalmente, si no elimina las ramas que ya no necesita, su **`git branch`** lista se vuelve más y más larga con el tiempo y se vuelve más difícil determinar qué ramas están "activas" y cuáles se han fusionado y ya no son necesarias. ¿Y a quién no le gusta un repositorio agradable y limpio?
+
+![image](https://user-images.githubusercontent.com/23094588/210008665-8a820ae1-c36e-4086-87e9-f0db3faec803.png)
+
+La respuesta a su pregunta se encuentra en el historial de confirmaciones.
+Cuando hablamos de eliminar ramas, hablamos específicamente de eliminar ramas que ya se han fusionado. Suponga que trabajó en una rama de características llamada feat-a, que acaba de fusionar en la masterrama. Tómese un momento para pensar en cómo se ve su historial de confirmaciones después de que termine de fusionarse:
+
+
+Cuando eliminas la feat-arama, todo lo que hace Git es tirar la nota adhesiva que representa la feat-arama. En cuanto a la confirmación "B": tenga en cuenta que la confirmación de combinación "D" tiene dos padres, "C" y "B", y la masternota adhesiva de la rama apunta a la confirmación "D". Entonces "B" se queda porque su historial de confirmaciones lo necesita. (Recuerde, actúa como el segundo padre de la confirmación "D").
+
+
+Lo que debe recordar es que siempre que una confirmación sea "accesible", es decir, haya una referencia a ella (como una rama) u otra confirmación que la apunte como padre, permanecerá en su historial de confirmación. En este caso, la masterrama apunta a cometer "D" y "D" apunta a "B". Así que la confirmación "B" se mantiene. También puede extender esta lógica a "A", porque tiene dos confirmaciones que hacen referencia a ella: "B" y "C".
+
+Eliminar ramas no fusionadas
+Ahora comprende el impacto de eliminar ramas. Es decir, si la rama que está eliminando se ha fusionado, ¡entonces su historial de confirmaciones no cambia! Solo desaparece la nota adhesiva que representa la rama. Pero, ¿qué sucede si intenta eliminar una rama que aún no se ha fusionado? Veamos otro historial hipotético de confirmaciones en el que tenemos dos ramas, mastery feat-b, pero aún no las hemos fusionado.
+
+
+Observe que hay una confirmación "B" en la feat-brama. Ahora, si intentáramos eliminar la feat-brama, esto es lo que verías:
+
+
+Git advierte que si eliminara la feat-brama, no se podría acceder a la confirmación "B". En otras palabras, no hay nada (una nota adhesiva u otra confirmación) que lo haga referencia. ¡Y por eso se niega!
+
+Ahora existe la posibilidad de que haya creado una rama solo para probar una idea o abordar un problema usando una táctica diferente, y ya no le interesa. Puede proporcionar el comando de rama con el -Dindicador (sí, D mayúscula) para forzar su eliminación.
+
+NOTA
+Git mostrará la ID de la última confirmación de la rama que forzaste a eliminar, para que siempre puedas recuperarla como te mostramos hace unas páginas.
+
+¡MÍRALO!
+
+Use el indicador de forzar eliminación con cuidado.
+
+A menudo es tentador ejecutar el comando o usar la opción que te ofrece Git, especialmente si estás en medio de algo. Pero es importante prestar atención a lo que Git intenta decirte; en este caso, te dice que perderás el trabajo que hiciste en una o más confirmaciones .
+
+Entonces, la próxima vez que Git no haga lo que le pides, haz una pausa por un segundo, respira y lee los mensajes de Git cuidadosamente. A continuación, proceda únicamente si está seguro de que sabe exactamente lo que quiere que haga Git .
+
+Un flujo de trabajo típico
+Hasta ahora, hemos creado ramas para trabajar en tareas individuales y las hemos vuelto a fusionar en la rama de integración. Estas son algunas de las prácticas a las que se adhieren muchos desarrolladores cuando ramifican y fusionan:
+
+Por lo general, base sus nuevas sucursales en confirmaciones en las sucursales de integración.
+
+Las ramas de integración reflejan el trabajo de todas las ramas. Esto significa que su nueva sucursal tendrá todo lo que se ha completado hasta el momento, por lo que puede trabajar sabiendo que tiene un buen punto de partida.
+
+
+Vuelva a fusionarse con la rama de integración una vez que haya terminado.
+
+Es tentador retrasar la fusión de nuevo en la rama de integración, pero una vez que crea que ha terminado con la tarea en cuestión, entonces fusione. Si se olvida de algo, siempre puede crear otra rama basada en la rama de integración (que ahora reflejará los cambios que fusionó anteriormente).
+
+
+No reutilices las ramas.
+
+Un flujo de trabajo típico implica crear una nueva rama, realizar su trabajo, fusionarse con la rama de integración y luego eliminar la rama de características. Una vez más, recuerda que siempre puedes crear una nueva rama si lo necesitas.
+
+
+NO HAY PREGUNTAS TONTAS
+P: ¿Cómo sé cuándo crear una nueva sucursal y cuándo fusionarla?
+
+R: Por lo general, cree una nueva rama para cualquier nueva "tarea". Supongamos que se le asigna un ticket para agregar una nueva función o corregir un error: esa es su señal para crear una nueva sucursal. Una vez que su trabajo cumpla con la "definición de hecho" en el ticket, debe fusionar su trabajo en la rama de integración.
+
+P: No lo entiendo. ¿Por qué no debería reutilizar ramas?
+
+R: Cuando comienza a trabajar en una nueva tarea, siempre desea el conjunto más reciente de cambios en ese proyecto, que siempre se refleja en la rama de integración. Las ramas, por otro lado, pueden volverse "obsoletas".
+
+En segundo lugar, las sucursales son baratas en Git. Son simplemente referencias a compromisos en el gráfico acíclico dirigido. Úselos, y una vez que haya terminado con la tarea en cuestión, ¡bórrelos!
+
+VIÑETAS
+Las ramas son una de las mejores características de Git. Las sucursales le permiten trabajar en múltiples tareas al mismo tiempo.
+
+Cuando trabajas en Git, siempre estás trabajando en una rama. Cada repositorio comienza con una rama y el nombre predeterminado es master.
+
+La masterrama no es especial de ninguna manera. No es diferente a cualquier otra rama que cree. Puede cambiar el nombre o incluso eliminar la masterrama.
+
+El comando principal para trabajar con ramas es git branch. Puede usar git branchpara crear, enumerar y eliminar sucursales.
+
+Para crear una rama llamada update-profile, proporcione el nombre git branchasí:git branch update-profile
+
+git branchle permite crear ramas, pero para comenzar a usar la nueva rama, use el git switchcomando. Proporcione el nombre de la sucursal que desea comenzar a usar, así:git switch update-profile
+
+Piense en una rama como una nota adhesiva que contiene el nombre de la rama y el ID de confirmación de la última confirmación en esa rama.
+
+Cada vez que realiza una confirmación en una rama, Git actualiza la nota adhesiva que representa esa rama y le otorga la nueva ID de confirmación. Así se “mueve” una rama.
+
+Dado que las ramas siempre apuntan a compromisos, ofrecen una manera fácil de crear otras ramas.
+
+Cada vez que se switchbifurca, Git reescribe el directorio de trabajo para reflejar el estado capturado en la última confirmación en esa rama.
+
+En un flujo de trabajo típico, algunas ramas (por convención) se tratan como ramas de "integración" para recopilar el trabajo realizado en otras ramas.
+
+Por el contrario, el trabajo diario se realiza en las sucursales "características". Cada rama de función se debe usar para una cosa y solo para una cosa: por ejemplo, para introducir una nueva función o corregir un error.
+
+Para combinar el trabajo que ha realizado en una rama de integración, combine la rama de funciones en la rama de integración.
+
+El tipo de fusión más fácil se denomina "fusión de avance rápido", en la que una rama simplemente "se pone al día" con otra rama.
+
+El otro tipo de fusión es cuando fusionas dos ramas que han divergido entre sí, en cuyo caso Git creará una confirmación de fusión.
+
+Una confirmación de combinación es como cualquier otra confirmación, excepto que la crea Git y no tiene uno sino dos padres: el primer padre es la última confirmación en la rama de integración y el segundo padre es la última confirmación en la rama de características.
+
+Ocasionalmente, la misma línea en el mismo archivo se ha modificado en las dos ramas que se fusionan, lo que provoca un conflicto de fusión. Git depende de ti para resolver el conflicto de fusión.
+
+Puede eliminar una rama usando el git branchcomando, junto con la bandera -d(o ).--delete
+
+Si intenta eliminar una rama que aún no se ha fusionado, Git generará un error. Si está absolutamente seguro de que desea eliminar una rama no fusionada, deberá usar el -Dindicador (D mayúscula) con el git branchcomando.
+
+Una rama siempre se basa en una confirmación. Si conoce el ID de la confirmación que desea usar como base para una rama, puede proporcionarlo al git branchcomando:
+
+git branch branch-name commit-ID
+
+Git rama "crucigrama"
+
+Después de todas esas ramificaciones y fusiones, ¿te sientes en conflicto? Tómate un descanso, ramifícate y prueba este crucigrama.
+
+
+A través de
+
+1 Puedes ver un gráfico de tus ramas en tu commit ____
+
+3 _____ Código de estudio
+
+5 Esto sucede si fusionas dos ramas que cambian la misma línea en el mismo archivo
+
+8 Una rama ____ es donde todo se une
+
+10 Une las ramas usando el comando git ___
+
+11 La confirmación en la que estás ahora mismo
+
+12 Cuando necesite trabajar en algo por separado, cree uno de estos
+
+13 Información registrada en su compromiso, como la identificación y la marca de tiempo
+
+14 Una palabra aterradora que no te matará
+
+15 Prueba la nostalgia de los años 80 ____
+
+Abajo
+
+2 El comando git ___ te permite saltar de una rama a otra
+
+4 Cada rama apunta a uno de estos identificadores (2 palabras)
+
+6 Un tipo de fusión que “salta adelante” (2 palabras)
+
+7 En octubre, el '80s Diner le servirá una "Masacre de Texas ____"
+
+9 Linus creador de Git _____
+
+11 Esta bandera le brinda mucha información sobre los comandos
+
+13 Nombre predeterminado de Git para tu primera rama
+
+ Respuestas en "Git branch"crucigrama"Solución" .
+
+SOLUCIÓN DE EJERCICIO
+
+De “Ejercicio” .
+
+Piensa en el historial de confirmaciones. A ver si puedes averiguar en qué se equivocó Norm. Anota tus notas aquí:
+
+NOTA
+Debido a que Norm realizó un trabajo incompleto antes de trabajar en el error, ¡ahora el código en la última confirmación incluye todos sus cambios a medias!
+
+Solución de imanes de código
+
+De “Imanes de código” .
+
+¡Oh querido! Para ayudar a nuestros compañeros desarrolladores, hemos diseñado cuidadosamente todos los comandos necesarios para enumerar todas las ramas en su repositorio (existente), luego crear una nueva rama, cambiar a ella y verificar que todo esté bien. ¡Pobre de mí! Los imanes cayeron al suelo. Es tu trabajo volver a armarlos. Ten cuidado; se mezclaron algunos imanes adicionales y algunos se usaron más de una vez.
+
+
+SACA PUNTA A TU LÁPIZ SOLUCIÓN
+
+De “Afila tu lápiz” .
+
+¿Qué cambiaría en la visualización si permanecieras en la add-fall-menurama y tuvieras que hacer otra confirmación?
+
+
+Solución BE Git
+
+De "SER Git" .
+
+Dedique un poco de tiempo a comprender cómo cambia Git su directorio de trabajo cuando cambia de rama.
+
+Comience con su terminal: asegúrese de estar en el 80s-dinerdirectorio y utilícelo git branchpara asegurarse de que está en la add-fall-menusucursal.
+
+
+
+Finalmente, vea si puede explicar lo que está viendo aquí.
+
+NOTA
+La última confirmación en la rama add-fall-menu confirmó el archivo fall-menu.md, pero esta rama comenzó desde la rama maestra, que ya tenía el archivo menu.md. Entonces, el menú add-fall tiene ambos archivos: menu.md y fall-menu.md. Pero la rama maestra solo tiene una confirmación, con el archivo menu.md.
+
+SACA PUNTA A TU LÁPIZ SOLUCIÓN
+
+De “Afila tu lápiz” .
+
+Antes de continuar, vea si puede visualizar cómo se ve su historial de confirmaciones. Fuimos lo suficientemente amables para que comenzaras, pero necesitas terminarlo.
+
+
+Solución BE Git
+
+Repitamos nuestro ejercicio anterior de visitar todas las sucursales en nuestro repositorio y enumerar los archivos que están presentes en cada sucursal, excepto que esta vez tenemos tres sucursales. Para cada una de las ventanas que se muestran a continuación, escriba lo que cree que será el resultado de invocar git branchy qué archivos se enumerarán en cada rama:
+
+De "SER Git" .
+
+
+SACA PUNTA A TU LÁPIZ SOLUCIÓN
+
+De “Afila tu lápiz” .
+
+Mire el gráfico de confirmación hipotético a continuación y complete las notas adhesivas con la información necesaria para asociar un nombre de rama con el ID de confirmación al que apunta. Tenga en cuenta que puede haber más notas adhesivas de las que realmente necesita.
+
+
+Ahora supongamos que cambiamos a la fix-headerrama, hacemos algunas ediciones y hacemos otra confirmación, a la que se le asignó la ID "G". ¿Puedes visualizar qué cambios en el diagrama de arriba?
+
+
+SACA PUNTA A TU LÁPIZ SOLUCIÓN
+
+De “Afila tu lápiz” .
+
+Mencionamos que muchos equipos usan nombres como mainen lugar de masterpara indicar ramas de integración. ¿Se te ocurre algún otro nombre? Enumere algunos aquí (siéntase libre de usar su motor de búsqueda favorito para obtener algunas ideas):
+
+NOTA
+desarrollar
+
+el último
+
+trompa
+
+SACA PUNTA A TU LÁPIZ SOLUCIÓN
+
+De “Afila tu lápiz” .
+
+Digamos que asistes a la boda de un amigo. Tomaste algunas fotos con tu teléfono y, unos días después, el fotógrafo de la boda te pide que les envíes las fotos que tomaste. Haces una copia de las fotos de la boda en tu teléfono y les envías la copia para que puedan combinarlas con las que tomaron.
+
+Ahora tómese unos minutos para pensar en las siguientes preguntas:
+
+¿Quién tiene el conjunto “completo” de imágenes?
+
+NOTA
+El fotógrafo tiene el set completo de fotos, ya que tiene su propio set, y tú le enviaste una copia del tuyo.
+
+¿Alguno de ustedes perdió alguna foto?
+
+NOTA
+No. Recuerda, le enviaste al fotógrafo una copia de las fotos que tomaste.
+
+¿Cuál de ustedes es la rama de “integración” en este escenario?
+
+NOTA
+Ese sería el fotógrafo, ya que está “fusionando” su copia con la tuya.
+
+SOLUCIÓN DE EJERCICIO
+
+En el 80s-dinerdirectorio, continúe y ejecute git branch --help(o git help branchuse cualquiera de los dos), y busque la sección relacionada con el indicador -vo . Lea sobre lo que hace--verbose.
+
+A continuación, ejecute git branch -vy registre aquí el nombre de la rama y el ID de confirmación más reciente. (Los necesitará para las próximas secciones de este capítulo).
+
+
+De “Ejercicio” .
+
+SOLUCIÓN DE EJERCICIO
+
+Flexionemos un poco más nuestras habilidades de línea de comandos. Vas a repetir nuestro ejercicio anterior de enumerar las últimas ID de confirmación en cada rama. Recuerda que puedes usar git branch -vy ver información de cada una de tus sucursales. Adelante, hazlo de nuevo:
+
+
+Compáralas con las que hiciste la última vez. ¿Qué cambió?
+
+NOTA
+Dado que fusionamos add-fall-menu y master, apuntan a la misma confirmación. add-thurs-menu permanece sin cambios.
+
+Finalmente, enumere los archivos en cada rama. Comience con la masterrama, luego switcha la add-fall-menurama y finalmente a la add-thurs-menurama, usando lspara enumerar los archivos que ve en cada rama:
+
+
+De “Ejercicio” .
+
+SOLUCIÓN DE EJERCICIO
+
+De “Ejercicio” .
+
+Otro historial hipotético de compromisos para su placer visual. Para explicar cómo llegamos aquí:
+
+Comenzamos haciendo commit Aen la masterrama.
+
+Luego creamos la add-chatrama e hicimos otra confirmación, B.
+
+Creamos la add-emojisrama en función de la confirmación By procedimos a realizar dos confirmaciones más en esa rama, Cy D​​.
+
+Luego switchregresamos a la add-chatrama e hicimos otra confirmación, E.
+
+Así es como se ve el gráfico de confirmación:
+
+
+Ahora, intentaremos fusionar la add-emojisrama en la add-chatrama. En otras palabras, la add-chatrama es el proponente y add-emojises el propuesto. ¿Resultará esto en una fusión de avance rápido, o formará una confirmación de fusión?
+
+NOTA
+Al observar el gráfico de confirmaciones, vemos que tanto add-chat como add-emojis comparten una confirmación común (B), pero han divergido entre sí (ya que ambas tienen confirmaciones desde B). Entonces esto resultará en una confirmación de fusión.
+
+Finalmente, dibuje aquí el gráfico de confirmación resultante.
+
+
+SACA PUNTA A TU LÁPIZ SOLUCIÓN
+
+De “Afila tu lápiz” .
+
+¿Puedes visualizar cómo se vería el historial de confirmaciones después de fusionar la feat-arama en la masterrama? Te ayudamos a empezar aquí: tu misión es terminar el gráfico.
+
+
+SACA PUNTA A TU LÁPIZ SOLUCIÓN
+
+De “Afila tu lápiz” .
+
+Vuelva al headfirst-git-samplesdirectorio (o donde sea que haya estado creando repositorios de muestra) y siga:
+
+Cree una nueva carpeta llamada loving-git.
+
+Cambie los directorios a loving-gite inicialice un nuevo repositorio de Git.
+
+Cree un nuevo archivo llamado tribute.md(usando un editor de texto) con el siguiente contenido:
+
+
+Agregue el archivo al índice y luego confirme. Utilice el mensaje de confirmación "A".
+
+Cree una rama llamada improvisation, switchy luego edite el tribute.mdarchivo para que se vea así:
+
+
+Nuevamente, agregue y confirme el archivo. Proporcione el mensaje de compromiso "B".
+
+Vuelva a la masterrama nuevamente y edite el archivo para que se vea así:
+
+Una vez más, agregue y confirme el archivo. Esta vez usa el mensaje de confirmación "C".
+
+Combinar la improvisationrama en la masterrama. Resuelve cualquier conflicto como mejor te parezca. Asegúrese de leer qué información proporciona Git cuando abre su editor para proporcionar un mensaje de confirmación.
+
+¿Cómo se ve el historial de confirmaciones después de la fusión?
+
+
+SACA PUNTA A TU LÁPIZ
+
+De “Afila tu lápiz” .
+
+¡Tu turno! Navegue hasta el 80s-dinerrepositorio en su terminal y haga lo siguiente:
+
+Enumere las sucursales que tiene:
+
+
+Eliminar todas las sucursales excepto master. Pero primero, enumere los pasos que debe seguir:
+
+NOTA
+git branch -d add-fall-menú
+
+git branch -d add-jueves-menú
+
+Solución de "crucigrama" de la rama de Git
+
+Después de todas esas ramificaciones y fusiones, ¿te sientes en conflicto? Tómate un descanso, ramifícate y prueba este crucigrama.
+
+De “Rama de Git “crucigrama”” .
+
+
+
+
 ## Eliminar ramas no fusionadas
 ## Un flujo de trabajo típico
 
