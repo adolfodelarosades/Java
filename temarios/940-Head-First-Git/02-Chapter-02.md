@@ -2,7 +2,7 @@
 
 <img width="658" alt="image" src="https://user-images.githubusercontent.com/23094588/209586986-6bd25aea-9406-4444-b3ba-2c9c94771562.png">
 
-**Puede caminar y mascar chicle al mismo tiempo**. Los veteranos de Git le dirán, mientras se reclinan en sus sillas de jardín (sorbiendo su té verde hecho a mano), que uno de los mayores puntos de venta de Git es la facilidad con la que puede crear ramas. Tal vez le hayan asignado una nueva función y, mientras trabaja en ella, su gerente le pide que corrija un error en producción. O tal vez acaba de dar los últimos toques a su último cambio, pero se le ha ocurrido la inspiración y acaba de pensar en una forma mejor de implementarlo. Las ramas le permiten trabajar en múltiples piezas de trabajo completamente desconectadas en la misma base de código al mismo tiempo, independientemente unas de otras. ¡Veamos cómo!
+**Puede caminar y mascar chicle al mismo tiempo**. Los veteranos de Git le dirán, mientras se reclinan en sus sillas de jardín (sorbiendo su té verde hecho a mano), que una de las mayores ventajas de Git es la facilidad con la que puede crear ramas. Tal vez le hayan asignado una nueva función y, mientras trabaja en ella, su gerente le pide que corrija un error en producción. O tal vez acaba de dar los últimos toques a su último cambio, pero se le ha ocurrido la inspiración y acaba de pensar en una forma mejor de implementarlo. Las ramas le permiten trabajar en múltiples piezas de trabajo completamente desconectadas en la misma base de código al mismo tiempo, independientemente unas de otras. ¡Veamos cómo!
 
 * “It all started with an email”
 * “Updating the restaurant menu”
@@ -33,7 +33,7 @@ Norm estaba completamente inmerso: sus dedos volaban frenéticamente por todo el
 
 <img width="806" alt="image" src="https://user-images.githubusercontent.com/23094588/209587042-993f5c33-2a40-4026-b03c-d711faaced7a.png">
 
-Norm sabía que aún no había terminado. Pero committed su código de todos modos y comenzó a abordar el error. Al final de un largo día, cuando supo que había solucionado ese error de una vez por todas, se committed su trabajo. Así es como se veía su commit history ahora:
+Norm sabía que aún no había terminado. Pero committeo su código de todos modos y comenzó a abordar el error. Al final de un largo día, cuando supo que había solucionado ese error de una vez por todas, committeo su trabajo. Así es como se veía su commit history ahora:
 
 <img width="787" alt="image" src="https://user-images.githubusercontent.com/23094588/209587111-cb6a4fdc-4a2b-461b-8769-aaadf23fd18a.png">
 
@@ -43,9 +43,7 @@ Norm sabía que aún no había terminado. Pero committed su código de todos mod
 
 Piensa en el historial de commits. A ver si puedes averiguar en qué se equivocó Norm. Anota tus notas aquí:
 
-PIENSO QUE SUBIO SU TRABAJO A MEDIAS, NO ES TAN ADECUADO.
-
-<hr>
+**PIENSO QUE SUBIO SU TRABAJO A MEDIAS, NO ES TAN ADECUADO**.
 
  **----------> Respuestas en “Exercise Solution”.**
  
@@ -61,9 +59,9 @@ Norm no tuvo en cuenta el hecho de que los commits de Git se basan en commits an
 
 **¿Qué harías si fueras Norm?**
 
-¿Cuáles eran las opciones de Norm aquí? Bueno, podría haber tomado notas minuciosamente de todos los cambios que hizo en todos sus archivos y luego deshacer todos los cambios. Luego podría corregir el error, confirmar la solución y volver atrás y volver a aplicar todo su trabajo anterior, con la esperanza de no perderse nada. Parece doloroso, ¿verdad?
+¿Cuáles eran las opciones de Norm aquí? Bueno, podría haber tomado notas minuciosamente de todos los cambios que hizo en todos sus archivos y luego deshacer todos los cambios. Luego podría corregir el error, conmmitear la solución y volver atrás y volver a aplicar todo su trabajo anterior, con la esperanza de no perderse nada. Parece doloroso, ¿verdad?
 
-En este punto, probablemente te estés preguntando si Git vendrá y salvará el día. ¡Va a! Git te permite "cambiar de pista" usando una función llamada **branches**. Las ramas le permiten mantener sus cambios completamente independientes entre sí.
+En este punto, probablemente te estés preguntando si Git vendrá y salvará el día. ¡Vamos! Git te permite "cambiar de pista" usando una función llamada **branches**. Las ramas le permiten mantener sus cambios completamente independientes entre sí.
 
 <hr>
 
@@ -77,11 +75,11 @@ Una forma de pensar en su commit history es visualizar sus commits como brotes e
 
 <img width="938" alt="image" src="https://user-images.githubusercontent.com/23094588/209587505-e5cef634-4cd9-4597-8c9d-c9d03f013e3d.png">
 
-Sin embargo, las ramas de los árboles pueden bifurcarse y crecer en paralelo. Lo mismo pueden hacer las ramas de Git. Lo que esto significa es que puedes trabajar en diferentes cosas simultáneamente sin incluir accidentalmente cosas que no tenías la intención (como hizo Norm).
+Sin embargo, las ramas de los árboles pueden bifurcarse y crecer en paralelo. Lo mismo pueden hacer las ramas de Git. Lo que esto significa es que puedes trabajar en diferentes cosas simultáneamente sin incluir accidentalmente cosas que no tenías la intención de incluir(como hizo Norm).
 
 <img width="739" alt="image" src="https://user-images.githubusercontent.com/23094588/209587545-2ac79d7f-7552-4460-96d8-deb773276cd6.png">
 
-Un commit representa un punto en el tiempo y una rama representa una serie de commits. Recuerde que una serie de commits es también el historial de commits. Entonces, las ramas son diferentes historiales de commits, ¡todos en el mismo repositorio! En cualquier momento, puede optar por crear una nueva rama, cambiar entre ramas, descartar una rama (es decir, decidir abandonar todo el trabajo que le ha dedicado) e incluso fusionar ramas.
+**Un commit representa un punto en el tiempo y una rama representa una serie de commits**. Recuerde que una serie de commits es también el **commit history(historial de commits)**. Entonces, ***las ramas son diferentes historiales de commits***, ¡todos en el mismo repositorio! En cualquier momento, puede optar por crear una nueva rama, cambiar entre ramas, descartar una rama (es decir, decidir abandonar todo el trabajo que le ha dedicado) e incluso fusionar ramas.
 
 ## “Actualización del menú del restaurante”
 
@@ -89,15 +87,15 @@ Hablando de tomar decisiones, felicitaciones por su nuevo trabajo: administrar e
 
 Su función es preparar platos emocionantes y nutritivos para la temporada de otoño. Sin embargo, debe obtener la aprobación del chef y el equipo de cocina para asegurarse de que realmente puedan preparar sus deliciosos brebajes.
 
-Ya está familiarizado con el uso de Git y repositorios de Git, por lo que se encarga de llevar el sistema de publicación de menús a la era moderna. (Sí, no se llaman a sí mismos el Diner de los 80 sin ningún motivo). Primero decide tomar su menú existente y ponerlo en un repositorio de Git antes de comenzar con cualquier trabajo nuevo.
+Ya está familiarizado con el uso de Git y repositorios de Git, por lo que se encarga de llevar el sistema de publicación de menús a la era moderna. (Sí, no se llaman a sí mismos el **'80s Diner** sin ningún motivo). Primero decide tomar su menú existente y ponerlo en un repositorio de Git antes de comenzar con cualquier trabajo nuevo.
 
 <img width="748" alt="image" src="https://user-images.githubusercontent.com/23094588/209587636-8c1d5a5d-fb6b-4348-84c9-1f343ca07599.png">
 
 ### Lo primero es lo primero
 
-Llevemos el Diner de los 80 al siglo XXI. Comenzaremos colocando su menú existente en un repositorio de Git. Esto nos dará la oportunidad de practicar algunas de nuestras habilidades de Git recientemente adquiridas.
+Llevemos el **'80s Diner** al siglo XXI. Comenzaremos colocando su menú existente en un repositorio de Git. Esto nos dará la oportunidad de practicar algunas de nuestras habilidades de Git recientemente adquiridas.
 
-1. Cree un nuevo directorio llamado **`80s-diner`** dentro del paraguas **`headfirst-git-samples`** y cambie a él usando el comando **`cd`**. Continúe e inicialice un nuevo repositorio de Git usando **`git init`**.
+1. Cree un nuevo directorio llamado **`80s-diner`** dentro del paraguas **`my-headfirst-git-samples`** y cambie a él usando el comando **`cd`**. Continúe e inicialice un nuevo repositorio de Git usando **`git init`**.
 
    <hr>
 
@@ -120,6 +118,25 @@ Llevemos el Diner de los 80 al siglo XXI. Comenzaremos colocando su menú existe
 4. Finalmente, asegurémonos que todo está bien con **`git status`**.
 
    <img width="920" alt="image" src="https://user-images.githubusercontent.com/23094588/209587893-c9af9daa-942f-4217-8180-a8eccb1d752b.png">
+
+### 💻
+
+1.
+
+   ![image](https://user-images.githubusercontent.com/23094588/209944767-092e69f2-40dd-4a8c-8948-e828647599bb.png)
+
+2.
+
+   <img width="1207" alt="image" src="https://user-images.githubusercontent.com/23094588/209945037-b0780633-d28f-4f46-8fab-53d499db2edf.png">
+
+   ![image](https://user-images.githubusercontent.com/23094588/209945286-ba982899-37ac-412a-af4f-9f4559fe6796.png)
+
+3.
+   ![image](https://user-images.githubusercontent.com/23094588/209945594-e0e99a33-95eb-46cd-bdfc-a0e76d62b22e.png)
+
+4.
+
+   ![image](https://user-images.githubusercontent.com/23094588/209945651-b3bc4b1e-b761-440e-8bc4-5a2232f6d3d7.png)
 
 <img width="698" alt="image" src="https://user-images.githubusercontent.com/23094588/209587922-6d37b4d2-1fe4-4231-8eab-213d00ac119c.png">
 
