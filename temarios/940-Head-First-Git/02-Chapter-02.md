@@ -465,6 +465,8 @@ Antes de continuar, vea si puede visualizar cómo se ve su historial de commits.
 
 <img width="1022" alt="image" src="https://user-images.githubusercontent.com/23094588/209853417-580f736c-ee63-458e-9de5-bc643ad71dc3.png">
 
+EL DIBUJO DEBERÍA TENER UNA RAMA EN LA PARTE DE ABAJO CON UN COMMIT QUE REPRESENTA LA SUNIDA DEL ARCHIVO **`thursdays-menu.md`**
+
 **----------> Respuestas en “Sharpen your pencil Solution”.**
 
 <hr>
@@ -474,6 +476,28 @@ Antes de continuar, vea si puede visualizar cómo se ve su historial de commits.
 Repitamos nuestro ejercicio anterior de visitar todas las branches en nuestro repositorio y enumerar los archivos que están presentes en cada branch, excepto que esta vez tenemos tres branches. Para cada una de las ventanas que se muestran a continuación, anote el resultado de la invocación **`git branch`** y luego enumere todos los archivos en cada rama:
 
 <img width="1165" alt="image" src="https://user-images.githubusercontent.com/23094588/209853943-c2fdb783-c7d5-472d-96bc-3aef8d1d6381.png">
+
+### 💻
+
+1. **`master`**
+ 
+   ![image](https://user-images.githubusercontent.com/23094588/209957613-e5b1e7d6-5093-40e1-a04c-df8a1ad3a966.png)
+   
+   ![image](https://user-images.githubusercontent.com/23094588/209958473-891b7215-1b7f-4922-ae37-c3a93f0221c4.png)
+
+
+2. **`add-fall-menu`**
+
+   ![image](https://user-images.githubusercontent.com/23094588/209958713-5aa9bc9a-b33f-4425-8e36-986a93fd9e2a.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/209958819-b974880a-cf59-4132-9db6-268594112e2d.png)
+
+
+3. **`add-thurs-menu`**
+
+   ![image](https://user-images.githubusercontent.com/23094588/209958972-33401b08-8b99-4264-96a4-d39d00549553.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/209959080-a7613f6c-a3fb-4410-a0ab-c99946a359b0.png)
 
 **---------->  Respuestas en “BE Git Solution”.**
 
