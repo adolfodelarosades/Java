@@ -946,7 +946,7 @@ Recuerde, **`master`** no tiene nuevos commits desde que creamos la rama **`add-
 
 Entonces Git nos dice que **`add-fall-menu`** "Already up to date.(Ya está actualizado)". Es decir, **`add-fall-menu`** ya es la combinación de **`add-fall-menu`** y **`master`**. Para decirlo en términos del historial de commits, nada cambió ya que no había nada que hacer.
 
-Lógicamente, la "dirección" de la combinación siempre da como resultado que dos archivos (**`menu.md`** y **`add-fall-menu.md`**) estén presentes en el directorio de trabajo. Recuerde: la rama **`add-fall-menu`**, al estar basada en **`master`**, ya tiene el archivo **`menu.md`** porque comenzó con él. Pero el orden de la fusión tiene un gran impacto en su historial de commits, como acabamos de ver. En un caso, **`master`** hizo un fast-forwarded(avance rápido) y avanzo al commit al que apunta **`add-fall-menu`**; en el otro caso, nada cambió, **`master`** se queda apuntando al primer commit.
+Lógicamente, la "dirección" de la combinación siempre da como resultado que dos archivos (**`menu.md`** y **`fall-menu.md`**) estén presentes en el directorio de trabajo. Recuerde: la rama **`add-fall-menu`**, al estar basada en **`master`**, ya tiene el archivo **`menu.md`** porque comenzó con él. Pero el orden de la fusión tiene un gran impacto en su historial de commits, como acabamos de ver. En un caso, **`master`** hizo un fast-forwarded(avance rápido) y avanzo al commit al que apunta **`add-fall-menu`**; en el otro caso, nada cambió, **`master`** se queda apuntando al primer commit.
 
 ## "Un poco más de configuración de Git"
 
@@ -995,7 +995,7 @@ Hay una gran cantidad de herramientas de interfaz gráfica de usuario (GUI) que 
 
 El menú de otoño recién bautizado es un éxito. The '80s Diner nunca ha visto tanto tráfico peatonal, y el negocio está en auge. La gerencia quiere capitalizar todo el alboroto iniciando Throwback Thursdays *ahora*.
 
-Hemos decidido utilizar la rama **`master`** como la rama de integración. Ahora que el menú del jueves ha recibido la aprobación, vamos a fusionar la branch **`add-thurs-menu`** en la branch **`master`**. Pero antes de comenzar, recuerde: la rama **`add-thurs-menu`** se creó a partir de la rama **`master`**. Fusionar la rama **`add-thurs-menu`** en **`master`** resultó en una  fast-forward merge(fusión de avance rápido); en otras palabras, **`master`** simplemente avanzó hasta el último commit en **`add-thurs-menu`**.
+Hemos decidido utilizar la rama **`master`** como la rama de integración. Ahora que el menú del jueves ha recibido la aprobación, vamos a fusionar la branch **`add-thurs-menu`** en la branch **`master`**. Pero antes de comenzar, recuerde: la rama **`add-thurs-menu`** se creó a partir de la rama **`master`**. Fusionar la rama **`add-fall-menu`** en **`master`** resultó en un **fast-forward**; en otras palabras, **`master`** simplemente avanzó hasta el último commit de **`add-fall-menu`**.
 
 <img width="1179" alt="image" src="https://user-images.githubusercontent.com/23094588/209872318-4654bb3b-812d-443b-aec5-ba755fa15432.png">
 
@@ -1003,17 +1003,21 @@ Ya deberías estar en la rama **`master`** si dejaste las cosas como estaban des
 
 <img width="1113" alt="image" src="https://user-images.githubusercontent.com/23094588/209872678-a2fd6839-9417-481f-8cc8-0ed9450f55b7.png">
 
+Estás listo para mergear.
+
 <hr>
 
 <img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
 
 Dejando de lado los tecnicismos de la fusión, ¿puede enumerar los archivos que resultarían si fusionara la rama **`add-thurs-menu`** con la rama **`master`**? ¿Cuántos archivos vería en el directorio de trabajo?
 
+DEBERÍAN ESTAR LOS 3 ARCHIVOS CREADOS: **`menu.md`**, **`fall-menu.md`** y **`thursdays-menu.md`**
+
 <hr>
 
 ## "¡Esperar! ¿Te moviste?"
 
-Puede ser un poco sorprendente que, aunque **`add-thurs-menu`** se basó en la rama **`master`**, la rama **`master`** se ha movido desde entonces a un nuevo commit. Aquí es donde es importante darse cuenta de que cada vez que ramificas(you branch), en realidad estás creando una rama que apunta a un commit, no a otra rama. Las ramas, al ser simples punteros a los commits, ofrecen una manera fácil de llegar a los commits. Recuerde, la "base" de la rama es siempre un commit.
+Puede ser un poco sorprendente que, aunque **`add-thurs-menu`** se basó en la rama **`master`**, la rama **`master`** se ha movido desde entonces a un nuevo commit. **Aquí es donde es importante darse cuenta de que cada vez que ramificas(you branch), en realidad estás creando una rama que apunta a un commit, no a otra rama**. Las ramas, al ser simples punteros a los commits, ofrecen una manera fácil de llegar a los commits. Recuerda, **la "base" de la rama es siempre un commit**.
 
 <hr>
 
