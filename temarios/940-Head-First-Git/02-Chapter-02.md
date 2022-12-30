@@ -1621,7 +1621,6 @@ Comience con su terminal: asegúrese de estar en el directorio **`80s-diner`** y
 
 ![image](https://user-images.githubusercontent.com/23094588/210068982-bec24922-acd3-45ee-b193-a5b584a7f9e0.png)
 
-
 Finalmente, vea si puede explicar lo que está viendo aquí.
 
 <hr>
@@ -1630,89 +1629,137 @@ Finalmente, vea si puede explicar lo que está viendo aquí.
 
 El último commit en la rama **`add-fall-menu`** commiteo el archivo **`fall-menu.md`**, pero esta rama comenzó desde la rama **`master`**, que ya tenía el archivo **`menu.md`**. Entonces, **`add-fall-menu`** tiene ambos archivos: **`menu.md`** y **`fall-menu.md`**. Pero la rama **`master`** solo tiene un commit, con el archivo **`menu.md.`**
 
-SACA PUNTA A TU LÁPIZ SOLUCIÓN
+<hr>
 
-De “Afila tu lápiz” .
-
-Antes de continuar, vea si puede visualizar cómo se ve su historial de confirmaciones. Fuimos lo suficientemente amables para que comenzaras, pero necesitas terminarlo.
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
 
-Solución BE Git
+**De “Sharpen your pencil”.**
 
-Repitamos nuestro ejercicio anterior de visitar todas las sucursales en nuestro repositorio y enumerar los archivos que están presentes en cada sucursal, excepto que esta vez tenemos tres sucursales. Para cada una de las ventanas que se muestran a continuación, escriba lo que cree que será el resultado de invocar git branchy qué archivos se enumerarán en cada rama:
+Antes de continuar, vea si puede visualizar cómo se ve su historial de commits. Fuimos lo suficientemente amables para que comenzaras, pero necesitas terminarlo.
 
-De "SER Git" .
+![image](https://user-images.githubusercontent.com/23094588/210069394-e726af43-1e66-45dd-a50e-7d9fcb5740d4.png)
 
+<hr>
 
-SACA PUNTA A TU LÁPIZ SOLUCIÓN
+<img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850368-57d82652-76aa-43cb-b2eb-27a73c6f6e70.png">
 
-De “Afila tu lápiz” .
+Repitamos nuestro ejercicio anterior de visitar todas las ramas en nuestro repositorio y enumerar los archivos que están presentes en cada rama, excepto que esta vez tenemos tres ramas. Para cada una de las ventanas que se muestran a continuación, escriba lo que cree que será el resultado de invocar **`git branch`** y qué archivos se enumerarán en cada rama:
 
-Mire el gráfico de confirmación hipotético a continuación y complete las notas adhesivas con la información necesaria para asociar un nombre de rama con el ID de confirmación al que apunta. Tenga en cuenta que puede haber más notas adhesivas de las que realmente necesita.
+**De “BE Git”.**
 
+![image](https://user-images.githubusercontent.com/23094588/210069721-42da3164-024e-49f0-8596-69d87819ad0d.png)
 
-Ahora supongamos que cambiamos a la fix-headerrama, hacemos algunas ediciones y hacemos otra confirmación, a la que se le asignó la ID "G". ¿Puedes visualizar qué cambios en el diagrama de arriba?
+<hr>
 
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
-SACA PUNTA A TU LÁPIZ SOLUCIÓN
+**De “Sharpen your pencil”.**
 
-De “Afila tu lápiz” .
+Mire el gráfico de commits hipotético a continuación y complete las notas adhesivas con la información necesaria para asociar un nombre de rama con el ID de commit al que apunta. Tenga en cuenta que puede haber más notas adhesivas de las que realmente necesita.
 
-Mencionamos que muchos equipos usan nombres como mainen lugar de masterpara indicar ramas de integración. ¿Se te ocurre algún otro nombre? Enumere algunos aquí (siéntase libre de usar su motor de búsqueda favorito para obtener algunas ideas):
+![image](https://user-images.githubusercontent.com/23094588/210069860-8afed8a4-03d2-49af-8c91-9ef8f3303983.png)
 
-NOTA
-desarrollar
+Ahora supongamos que cambiamos a la rama **`fix-header`**, hacemos algunas ediciones y hacemos otro commit, a la que se le asignó el ID **"G"**. ¿Puedes visualizar qué cambios en el diagrama de arriba?
 
-el último
+![image](https://user-images.githubusercontent.com/23094588/210070021-eed74971-3623-4fae-a09a-058d2305a3f3.png)
 
-trompa
+<hr>
 
-SACA PUNTA A TU LÁPIZ SOLUCIÓN
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
-De “Afila tu lápiz” .
+**De “Sharpen your pencil”.**
+
+Mencionamos que muchos equipos usan nombres como **`main`** en lugar de **`master`** para indicar ramas de integración. ¿Se te ocurre algún otro nombre? Enumere algunos aquí (siéntase libre de usar su motor de búsqueda favorito para obtener algunas ideas):
+
+<hr>
+
+**NOTA**
+
+develop
+
+latest
+
+trunk
+
+<hr>
+
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+**De “Sharpen your pencil”.**
 
 Digamos que asistes a la boda de un amigo. Tomaste algunas fotos con tu teléfono y, unos días después, el fotógrafo de la boda te pide que les envíes las fotos que tomaste. Haces una copia de las fotos de la boda en tu teléfono y les envías la copia para que puedan combinarlas con las que tomaron.
 
 Ahora tómese unos minutos para pensar en las siguientes preguntas:
 
-¿Quién tiene el conjunto “completo” de imágenes?
+* ¿Quién tiene el conjunto “completo” de imágenes?
 
-NOTA
-El fotógrafo tiene el set completo de fotos, ya que tiene su propio set, y tú le enviaste una copia del tuyo.
+   <hr>
+   
+   **NOTA**
+   
+   El fotógrafo tiene el set completo de fotos, ya que tiene su propio set, y tú le enviaste una copia del tuyo.
 
-¿Alguno de ustedes perdió alguna foto?
+* ¿Alguno de ustedes perdió alguna foto?
 
-NOTA
-No. Recuerda, le enviaste al fotógrafo una copia de las fotos que tomaste.
+   
+   <hr>
+   
+   **NOTA**
+   
+   No. Recuerda, le enviaste al fotógrafo una copia de las fotos que tomaste.
+   
+   <hr>
 
-¿Cuál de ustedes es la rama de “integración” en este escenario?
+* ¿Cuál de ustedes es la rama de “integración” en este escenario?
 
-NOTA
-Ese sería el fotógrafo, ya que está “fusionando” su copia con la tuya.
+   <hr>
+   
+   **NOTA**
+   
+   Ese sería el fotógrafo, ya que está “fusionando” su copia con la tuya.
+   
+   <hr>
+   
+<hr>
 
-SOLUCIÓN DE EJERCICIO
+<img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
 
-En el 80s-dinerdirectorio, continúe y ejecute git branch --help(o git help branchuse cualquiera de los dos), y busque la sección relacionada con el indicador -vo . Lea sobre lo que hace--verbose.
+En el directorio **`80s-diner`**, continúe y ejecute **`git branch --help`** (o **`git help branch`** use cualquiera de los dos), y busque la sección relacionada con el indicador **`-v`** o **`--verbose`**. **Lea sobre lo que hace**.
 
-A continuación, ejecute git branch -vy registre aquí el nombre de la rama y el ID de confirmación más reciente. (Los necesitará para las próximas secciones de este capítulo).
+A continuación, ejecute **`git branch -v`** y registre aquí el nombre de la rama y el ID de commit más reciente. (Los necesitará para las próximas secciones de este capítulo).
+
+![image](https://user-images.githubusercontent.com/23094588/210070651-36d2ea2f-a5fa-4965-ac59-c429b6d0f469.png)
 
 
-De “Ejercicio” .
+**De “Exercise”.**
 
-SOLUCIÓN DE EJERCICIO
+<hr>
 
-Flexionemos un poco más nuestras habilidades de línea de comandos. Vas a repetir nuestro ejercicio anterior de enumerar las últimas ID de confirmación en cada rama. Recuerda que puedes usar git branch -vy ver información de cada una de tus sucursales. Adelante, hazlo de nuevo:
+<img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
 
+Flexionemos un poco más nuestras habilidades de línea de comandos. Vas a repetir nuestro ejercicio anterior de enumerar las últimas ID de commit en cada rama. Recuerda que puedes usar **`git branch -v`** y ver información de cada una de tus ramas. Adelante, hazlo de nuevo:
+
+![image](https://user-images.githubusercontent.com/23094588/210070886-0de2b749-2cfb-4052-a46b-3f798b2ac0fd.png)
 
 Compáralas con las que hiciste la última vez. ¿Qué cambió?
 
-NOTA
-Dado que fusionamos add-fall-menu y master, apuntan a la misma confirmación. add-thurs-menu permanece sin cambios.
+<hr>
 
-Finalmente, enumere los archivos en cada rama. Comience con la masterrama, luego switcha la add-fall-menurama y finalmente a la add-thurs-menurama, usando lspara enumerar los archivos que ve en cada rama:
+**NOTA**
 
+Dado que fusionamos **`add-fall-menu`** y **`master`**, apuntan al mismo commit. **`add-thurs-menu`** permanece sin cambios.
 
-De “Ejercicio” .
+<hr>
+
+Finalmente, enumere los archivos en cada rama. Comience con la rama **`master`**, luego **`switch`** a la rama **`add-fall-menu`** y finalmente a la rama **`add-thurs-menu`**, usando **`ls`** para enumerar los archivos que ve en cada rama:
+
+![image](https://user-images.githubusercontent.com/23094588/210071134-55939249-d62d-42b7-b120-a26c1ad2d389.png)
+
+**De “Exercise”.**
+
 
 SOLUCIÓN DE EJERCICIO
 
