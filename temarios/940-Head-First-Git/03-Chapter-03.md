@@ -1,4 +1,25 @@
+# Capítulo 3. Mirando alrededor: *investigando su repositorio Git*
 
+**¿Estás listo para investigar un poco, Sherlock?** A medida que continúe trabajando en Git, creará branches, realizará commits y fusionará(merge) su trabajo nuevamente en las ramas de integración. Cada commit representa un paso adelante, y el historial de commits representa cómo llegó allí. De vez en cuando, es posible que desee mirar hacia atrás para ver cómo llegó a donde está, o tal vez si dos ramas se han separado una de la otra. Comenzaremos este capítulo mostrándote cómo Git puede ayudarte a visualizar tu historial de commits.
+
+Ver tu historial de commits es una cosa, pero Git también puede ayudarte a ver cómo cambió tu repositorio. Recuerde que los commits representan cambios y las ramas representan una serie de cambios. ¿Cómo sabe qué ha cambiado, entre commits, entre ramas o incluso entre su directorio de trabajo, el índice y la base de datos de objetos? Ese es el otro tema de este capítulo.
+
+Juntos, podremos hacer un trabajo de detective de Git realmente interesante. ¡Vamos, subamos de nivel esas habilidades de investigación!
+
+* “Brigitte’s on a mission”
+* “Commits aren’t enough”
+* “Mirror, mirror on the wall: who is the prettiest log of all?”
+* “How does git log work?”
+* “Making git log do all the work”
+* “What diff-erence does it make?”
+* “Visualizing file differences”
+* “Visualizing file differences: one file at a time”
+* “Visualizing file differences: one hunk at a time”
+* “Making diffs easier on the eyes”
+* “Diffing staged changes”
+* “Diffing branches”
+* “Diffing commits”
+* “What does the diff for a new file look like?”
 
 
 
