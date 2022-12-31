@@ -1133,7 +1133,7 @@ El historial de commits(**commit history**) de Git a menudo se denomina **Gráfi
 
 <hr>
 
-**VIÑETAS**
+**RESUMEN**
 
 * Un sistema de control de versiones como Git le permite almacenar instantáneas(**snapshots**) de su trabajo.
 * Git es mucho más que una herramienta que te permite grabar instantáneas(**snapshots**). Git nos permite colaborar con confianza con otros miembros del equipo.
