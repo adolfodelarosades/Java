@@ -13,8 +13,6 @@ www.inigoserrano.com
 https://www.youtube.com/@inigoserrano1
 
 
-Iñigo Serrano soy el instructor de este curso sobre Git soy un consultor técnico especializado en la optimización de equipos de desarrollo.
-
 Git es un control de versiones con línea de comandos y alrededor de esa línea de comandos ha ido surgiendo un montón de herramientas que lo complementan.
 
 Hay gente que prefiere trabajar con la línea de comandos porque le resulta más cómodo dicen que son más productivos.
