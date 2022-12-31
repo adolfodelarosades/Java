@@ -1604,7 +1604,7 @@ En segundo lugar, las ramas son baratas en Git. Son simplemente referencias a co
 * Las ramas son una de las mejores características de Git. Las ramas le permiten trabajar en múltiples tareas al mismo tiempo.
 * Cuando trabajas en Git, siempre estás trabajando en una rama. Cada repositorio comienza con una rama y el nombre predeterminado es **`master`**.
 * La rama **`master`** no es especial de ninguna manera. No es diferente a cualquier otra rama que cree. Puede cambiar el nombre o incluso eliminar la rama **`master`**.
-* El comando principal para trabajar con ramas es **`git branch`**. Puede usar **`git branch`** para crear, enumerar y eliminar ramas.
+* El comando principal para trabajar con ramas es **`git branch`**. Puede usar **`git branch`** para crear, listar y eliminar ramas.
 * Para crear una rama llamada **`update-profile`**, proporcione el comando **`git branch`** así: **`git branch update-profile`**
 * **`git branch`** le permite crear ramas, pero para comenzar a usar la nueva rama, use el comando **`git switch`**. Proporcione el nombre de la rama que desea comenzar a usar, así: **`git switch update-profile`**
 * Piense en una rama como una nota adhesiva que contiene el nombre de la rama y el ID de commit del último commit en esa rama.
@@ -1612,15 +1612,15 @@ En segundo lugar, las ramas son baratas en Git. Son simplemente referencias a co
 * Dado que las ramas siempre apuntan a commmits, ofrecen una manera fácil de crear otras ramas.
 * Cada vez que hace un **`switch`** a una rama, Git reescribe el directorio de trabajo para reflejar el estado capturado en el último commit en esa rama.
 * En un flujo de trabajo típico, algunas ramas (por convención) se tratan como ramas de "integración" para recopilar el trabajo realizado en otras ramas.
-* Por el contrario, el trabajo diario se realiza en las ramas "feature(características)". Cada feature branch se debe usar para una cosa y solo para una cosa: por ejemplo, para introducir una nueva función o corregir un error.
-* Para combinar el trabajo que ha realizado en una rama de integración, combine la feature branch en la rama de integración.
-* El tipo de fusión más fácil se denomina "fast-forward merge", en la que una rama simplemente "se pone al día" con otra rama.
-* El otro tipo de fusión es cuando fusionas dos ramas que han *divergido* entre sí, en cuyo caso Git creará un merge commit.
-* Un merge commit es como cualquier otro commit, excepto que lo crea Git y no tiene uno sino dos padres: el primer padre es el últimao commit en la rama de integración y el segundo padre es el último commit en la feature branch.
-* Ocasionalmente, la misma línea en el mismo archivo se ha modificado en las dos ramas que se fusionan, lo que provoca un conflicto(merge conflict). Git depende de ti para resolver el conflicto(merge conflict).
+* Por el contrario, el trabajo diario se realiza en las **feature branch(ramas de características)"**. Cada **feature branch** se debe usar para una cosa y solo para una cosa: por ejemplo, para introducir una nueva función o corregir un error.
+* Para combinar el trabajo que ha realizado en una rama de integración, combine la **feature branch** en la rama de integración.
+* El tipo de fusión más fácil se denomina **"fast-forward merge"**, en la que una rama simplemente "se pone al día" con otra rama.
+* El otro tipo de fusión es cuando fusionas dos ramas que han *divergido* entre sí, en cuyo caso Git creará un **merge commit**.
+* Un **merge commit** es como cualquier otro commit, excepto que lo crea Git y no tiene uno sino ***dos padres: el primer padre es el últimao commit en la rama de integración y el segundo padre es el último commit en la feature branch***.
+* Ocasionalmente, la misma línea en el mismo archivo se ha modificado en las dos ramas que se fusionan, lo que provoca un **conflicto(merge conflict)**. Git depende de ti para resolver el conflicto(merge conflict).
 * Puede eliminar una rama usando el comando **`git branch`**, junto con la bandera **`-d`**(o **`--delete`**).
 * Si intenta eliminar una rama que aún no se ha fusionado, Git generará un error. Si está absolutamente seguro de que desea eliminar una rama no fusionada, deberá usar el indicador **`-D`** (D mayúscula) con el comando **`git branch`**.
-* Una rama siempre se basa en un commit. Si conoce el ID del commit que desea usar como base para una rama, puede proporcionarlo al comando **`git branch`**:
+* Una ***rama siempre se basa en un commit***. Si conoce el ID del commit que desea usar como base para una rama, puede proporcionarlo al comando **`git branch`**:
 
    **`git branch branch-name commit-ID`**
 
