@@ -1761,131 +1761,103 @@ Finalmente, enumere los archivos en cada rama. Comience con la rama **`master`**
 **De “Exercise”.**
 
 
-SOLUCIÓN DE EJERCICIO
+Otro hipotético historial de commits para su placer visual. Para explicar cómo llegamos aquí:
 
-De “Ejercicio” .
+* Comenzamos haciendo el commit **A** en la rama **`master`**.
+* Luego creamos la rama **`add-chat`** e hicimos otro commit, **B**.
+* Creamos la rama **`add-emojis`** en base al commit **B** y procedimos a realizar dos commits más en esa rama, **C** y **D**.
+* Luego regresamos a la rama **`add-chat`** con **`switch`** e hicimos otro commit, **E**.
 
-Otro historial hipotético de compromisos para su placer visual. Para explicar cómo llegamos aquí:
+Así es como se ve el gráfico de commits:
 
-Comenzamos haciendo commit Aen la masterrama.
+![image](https://user-images.githubusercontent.com/23094588/210133954-4ad8caa0-b49d-449e-85c7-83097f26e4e9.png)
 
-Luego creamos la add-chatrama e hicimos otra confirmación, B.
+Ahora, intentaremos fusionar la rama **`add-emojis`** en la rama **`add-chat`**. En otras palabras, la rama **`add-chat`** es el **proponente** y **`add-emojis`** es el propuesto. ¿Resultará esto en un **fast-forward merge**, o formará un **merge commit**?
 
-Creamos la add-emojisrama en función de la confirmación By procedimos a realizar dos confirmaciones más en esa rama, Cy D​​.
+<hr>
 
-Luego switchregresamos a la add-chatrama e hicimos otra confirmación, E.
+**NOTA**
 
-Así es como se ve el gráfico de confirmación:
+Al observar el gráfico de commits, vemos que tanto **`add-chat`** como **`add-emojis`** comparten un commit común (**B**), pero han divergido entre sí (ya que ambas tienen commits desde **B**). Entonces esto resultará en un **merge commit**.
 
+<hr>
 
-Ahora, intentaremos fusionar la add-emojisrama en la add-chatrama. En otras palabras, la add-chatrama es el proponente y add-emojises el propuesto. ¿Resultará esto en una fusión de avance rápido, o formará una confirmación de fusión?
+Finalmente, dibuje aquí el gráfico de commits resultante.
 
-NOTA
-Al observar el gráfico de confirmaciones, vemos que tanto add-chat como add-emojis comparten una confirmación común (B), pero han divergido entre sí (ya que ambas tienen confirmaciones desde B). Entonces esto resultará en una confirmación de fusión.
+![image](https://user-images.githubusercontent.com/23094588/210134031-53ce29ac-5d78-49e8-a671-9bc4da29142d.png)
 
-Finalmente, dibuje aquí el gráfico de confirmación resultante.
-
-
-SACA PUNTA A TU LÁPIZ SOLUCIÓN
-
-De “Afila tu lápiz” .
-
-¿Puedes visualizar cómo se vería el historial de confirmaciones después de fusionar la feat-arama en la masterrama? Te ayudamos a empezar aquí: tu misión es terminar el gráfico.
-
-
-SACA PUNTA A TU LÁPIZ SOLUCIÓN
-
-De “Afila tu lápiz” .
-
-Vuelva al headfirst-git-samplesdirectorio (o donde sea que haya estado creando repositorios de muestra) y siga:
-
-Cree una nueva carpeta llamada loving-git.
-
-Cambie los directorios a loving-gite inicialice un nuevo repositorio de Git.
-
-Cree un nuevo archivo llamado tribute.md(usando un editor de texto) con el siguiente contenido:
-
-
-Agregue el archivo al índice y luego confirme. Utilice el mensaje de confirmación "A".
-
-Cree una rama llamada improvisation, switchy luego edite el tribute.mdarchivo para que se vea así:
-
-
-Nuevamente, agregue y confirme el archivo. Proporcione el mensaje de compromiso "B".
-
-Vuelva a la masterrama nuevamente y edite el archivo para que se vea así:
-
-Una vez más, agregue y confirme el archivo. Esta vez usa el mensaje de confirmación "C".
-
-Combinar la improvisationrama en la masterrama. Resuelve cualquier conflicto como mejor te parezca. Asegúrese de leer qué información proporciona Git cuando abre su editor para proporcionar un mensaje de confirmación.
-
-¿Cómo se ve el historial de confirmaciones después de la fusión?
-
-
-SACA PUNTA A TU LÁPIZ
-
-De “Afila tu lápiz” .
-
-¡Tu turno! Navegue hasta el 80s-dinerrepositorio en su terminal y haga lo siguiente:
-
-Enumere las sucursales que tiene:
-
-
-Eliminar todas las sucursales excepto master. Pero primero, enumere los pasos que debe seguir:
-
-NOTA
-git branch -d add-fall-menú
-
-git branch -d add-jueves-menú
-
-Solución de "crucigrama" de la rama de Git
-
-Después de todas esas ramificaciones y fusiones, ¿te sientes en conflicto? Tómate un descanso, ramifícate y prueba este crucigrama.
-
-De “Rama de Git “crucigrama”” .
-
-
-
-
-
-
-
-
-
-
-
-EXCERSICE - Tenis
-
-<img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
-
-SERIOUS CODING - Gorra
-
-<img width="960" alt="image" src="https://user-images.githubusercontent.com/23094588/209588029-ec1d2f5b-0d40-4f2b-8775-37ea47551cba.png">
-
-WATCH IT!
-
-<img width="968" alt="image" src="https://user-images.githubusercontent.com/23094588/209588631-39069271-94a0-46f5-8f77-601389e0f170.png">
-
-
-SHARPEN YOUR PENCIL - Lapiz
+<hr>
 
 <img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
-BE Git
+**De “Sharpen your pencil”.**
 
-<img width="1070" alt="image" src="https://user-images.githubusercontent.com/23094588/209850368-57d82652-76aa-43cb-b2eb-27a73c6f6e70.png">
+¿Puedes visualizar cómo se vería el historial de commits después de fusionar la rama **`feat-a`** en la rama **`master`**? Te ayudamos a empezar aquí: tu misión es terminar el gráfico.
 
-BRAIN POWER - Cerebro
+![image](https://user-images.githubusercontent.com/23094588/210134174-48bf1fd1-bb97-4b4a-82bf-5c5df26c7171.png)
 
-<img width="1131" alt="image" src="https://user-images.githubusercontent.com/23094588/209854142-2fe06b71-7804-41e5-9269-2194713417c3.png">
+<hr>
 
-MAKE IT STICK
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
-<img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859350-656c580f-cd14-4123-b3fc-3b6901fd405f.png">
+**De “Sharpen your pencil”.**
 
-Code Magnets Solution - Refregerador
+Vuelva al directorio **`my-headfirst-git-samples`** (o donde sea que haya estado creando repositorios de muestra) y haga:
 
-![image](https://user-images.githubusercontent.com/23094588/210068520-0236eda7-645b-4d5a-9793-bc61a9ba9aff.png)
+1. Cree una nueva carpeta llamada **`loving-git`**.
+2. Cambie al directorio **`loving-git`** e inicialice un nuevo repositorio de Git.
+3. Cree un nuevo archivo llamado **`tribute.md`** (usando un editor de texto) con el siguiente contenido:
 
+![image](https://user-images.githubusercontent.com/23094588/210134276-e5a42eea-e889-4017-90db-7ddaa4e63a9a.png)
+
+4. Agregue el archivo al índice y luego commitelo. Utilice el mensaje de commit **"`A`"**.
+5. Cree una rama llamada **`improvisation`**, cambiese a ella con **`switch`** y luego edite el archivo **`tribute.md`** para que se vea así:
+
+![image](https://user-images.githubusercontent.com/23094588/210134336-d16def68-8dce-4938-9a1a-5ab92ebcf5e7.png)
+
+6. Nuevamente, agregue y commite el archivo. Proporcione el mensaje de commmit **"`B`"**.
+7. Vuelva a la rama **`master`** nuevamente y edite el archivo para que se vea así:
+8. Una vez más, agregue y commite el archivo. Esta vez usa el mensaje de commit **"`C`"**.
+9. Mergear la rama **`improvisation`** en la rama **`master`**. Resuelve cualquier conflicto como mejor te parezca. **Asegúrese de leer qué información proporciona Git cuando abre su editor para proporcionar un mensaje de commit**.
+
+**¿Cómo se ve el commit history después de la fusión?**
+
+![image](https://user-images.githubusercontent.com/23094588/210134457-cd5511df-832b-4ea8-af21-c4c464a67f14.png)
+
+<hr>
+
+<img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
+
+**De “Sharpen your pencil”.**
+
+¡Tu turno! Navegue hasta el repositorio **`80s-diner`** en su terminal y haga lo siguiente:
+
+1. Enumere las ramas que tiene:
+
+   ![image](https://user-images.githubusercontent.com/23094588/210134485-adb33671-865e-40b0-8597-2e54240947b2.png)
+
+2. Eliminar todas las ramas excepto **`master`**. Pero primero, enumere los pasos que debe seguir:
+
+   <hr>
+   
+   **NOTA**
+   
+   ```sh
+   git branch -d add-fall-menu
+
+   git branch -d add-thurs-menu
+   ```
+   
+   <hr>
+   
+<hr>
+   
+![image](https://user-images.githubusercontent.com/23094588/210134555-7d1ef50e-4272-4f58-a2c0-5df8bae705be.png)
+
+Después de todas esas ramificaciones y fusiones, ¿te sientes en conflicto? Tómate un descanso, ramifícate y prueba este crucigrama.
+
+**De “Git branch “crossword puzzle””.**
+
+![image](https://user-images.githubusercontent.com/23094588/210134577-9b096a4c-81f9-45c9-bb64-e77f1917e633.png)
 
 
