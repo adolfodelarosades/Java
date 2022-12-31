@@ -220,9 +220,17 @@ Intente poner el comando **`git log`** a través de algunos pasos en el reposito
 Veamos cómo podemos hacer eso. Tenemos la sensación de que va a estar muy satisfecho con los resultados.
 
 
-## ¿Cómo funciona el registro de git `git log`?
+## ¿Cómo trabaja `git log`?
 
+¿Qué sucede cuando Brigitte mira el registro de su repositorio? Considere un hipotético historial de commits, que se compone de tres ramas: **`master`**, **`feat-a`**, y **`feat-b`**. Supongamos que Brigitte está en la rama **`feat-a`** y ejecuta el comando **`git log`**:
 
+<img width="1067" alt="image" src="https://user-images.githubusercontent.com/23094588/210154143-51f18ec4-8f88-4281-9126-a3b326abe0a4.png">
+
+Dado que Brigitte está en la rama **`feat-a`**, que apunta al commit **"C"**, la salida del comando **`git log`** comienza con **C**. Luego lee y muestra los detalles de ese commit. Ve que **"B"** es el padre de **C**, por lo que hace lo mismo para **"B"**.
+
+Después de mostrar los detalles del commit **"B"**, Git procede a mostrar el commit **"A"**, ya que es el commit parent de **"B"**. Sin embargo, **"A"** es el primer commit realizado en este repositorio y no tiene padre, por lo que se detiene.
+
+<img width="1204" alt="image" src="https://user-images.githubusercontent.com/23094588/210154281-cbfd5589-3ba0-4d77-bb5c-1f64f2c77127.png">
 
 
 ## Hacer que `git log` haga todo el trabajo
