@@ -966,6 +966,18 @@ Dado que Git no ofrece confirmación de que algo, cualquier cosa, sucedió, siga
 
 ![image](https://user-images.githubusercontent.com/23094588/209983768-e592dfa9-d0ef-4be0-b40d-d300da02161c.png)
 
+**NOTA**
+
+Como en un ejercicio futuro vimos que no funciono abrir el editor VSC, he vuelto a poner el editor por default VIM con el siguiente comando.
+
+![image](https://user-images.githubusercontent.com/23094588/210135775-8dd7bf6a-4d17-494e-836f-252998986e0f.png)
+
+el último comando nos abre la configuración de Git en el editor por default, en este caso VIM.
+
+![image](https://user-images.githubusercontent.com/23094588/210135798-a65d6676-a3b7-498a-a5f8-e5ad9a82c7e6.png)
+
+Para salir de el presionamos **ESC + : + q**.
+
 
 Por supuesto, no tiene que usar Visual Studio Code. Siéntase libre de apegarse al editor de su elección: **Notepad++**, **Emacs**, **Sublime Text**, o lo que sea que le guste. Dado que hay demasiados para enumerarlos aquí, lo alentamos a que inicie su motor de búsqueda favorito y busque **"`how do I set up <insert text editor name here> as my Git editor(cómo configuro <inserte el nombre del editor de texto aquí> como mi editor de Git)`"**. Lo único que debería cambiar es el argumento que proporciona en lugar de **"`code -w`"**.
 
