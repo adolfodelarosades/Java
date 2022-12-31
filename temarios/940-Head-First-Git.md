@@ -70,7 +70,7 @@ Y queremos todo esto en una herramienta que se mantiene fuera de nuestro camino,
 * “Computer, status report!”
 * “You’ve made history!”
 
-### [Chapter 2](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git/02-Chapter-02.md)
+### [Chapter 2](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git/02-Chapter-02.md) :+1:
 
 **Puede caminar y mascar chicle al mismo tiempo**. Los veteranos de Git le dirán, mientras se reclinan en sus sillas de jardín (sorbiendo su té verde hecho a mano), que uno de los mayores puntos de venta de Git es la facilidad con la que puede crear ramas. Tal vez le hayan asignado una nueva función y, mientras trabaja en ella, su gerente le pide que corrija un error en producción. O tal vez acaba de dar los últimos toques a su último cambio, pero se le ha ocurrido la inspiración y acaba de pensar en una forma mejor de implementarlo. Las ramas le permiten trabajar en múltiples piezas de trabajo completamente desconectadas en la misma base de código al mismo tiempo, independientemente unas de otras. ¡Veamos cómo!
 
@@ -97,7 +97,7 @@ Y queremos todo esto en una herramienta que se mantiene fuera de nuestro camino,
 * “Deleting unmerged branches”
 * “A typical workflow”
 
-### Chapter 3
+### [Chapter 3](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git/03-Chapter-03.md)
 
 **¿Estás listo para investigar un poco, Sherlock?** A medida que continúe trabajando en Git, creará branches, realizará commits y fusionará(merge) su trabajo nuevamente en las ramas de integración. Cada commit representa un paso adelante, y el historial de commits representa cómo llegó allí. De vez en cuando, es posible que desee mirar hacia atrás para ver cómo llegó a donde está, o tal vez si dos ramas se han separado una de la otra. Comenzaremos este capítulo mostrándote cómo Git puede ayudarte a visualizar tu historial de commits.
 
