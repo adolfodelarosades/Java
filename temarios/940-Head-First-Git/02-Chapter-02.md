@@ -1450,7 +1450,7 @@ Dibuje el gráfico de commits aquí.
 
 <hr>
 
-** ----------> Respuestas en “Sharpen your pencil Solution”.**
+**----------> Respuestas en “Sharpen your pencil Solution”.**
 
 
 ## Limpieza de branches(mergeadas)
@@ -1459,9 +1459,9 @@ Dibuje el gráfico de commits aquí.
 
 Hemos visto cómo se ve un flujo de trabajo de bifurcación típico: recibe una solicitud de una nueva función o un correo electrónico discordante sobre un error que debe corregirse de inmediato. Crea una rama, comienza su trabajo, commitea cuando sea necesario y, cuando esté listo, vuelve a fusionarse con la rama de integración.
 
-Pero después de un tiempo, tiene todas estas ramas sentadas en su repositorio de Git, por lo que es hora de una limpieza. Git te permite eliminar ramas, usando el comando **`git branch`**. Lo primero es lo primero: **¡no puedes eliminar la rama en la que te encuentras!** Entonces, si se encuentra en la rama que está a punto de eliminar, debe cambiar a otra rama.
+Pero después de un tiempo, tiene todas estas ramas creadas en su repositorio de Git, por lo que es hora de una limpieza. Git te permite eliminar ramas, usando el comando **`git branch`**. Lo primero es lo primero: **¡no puedes eliminar la rama en la que te encuentras!** Entonces, si se encuentra en la rama que está a punto de eliminar, debe cambiar a otra rama.
 
-Tome este repositorio hipotético como ejemplo. Tiene dos ramas, **`master`** siendo la rama de integración, y una rama de características, llamada **`feat-home-screen`**. **`feat-home-screen`** se fusionó con **`master`**, por lo que podemos eliminarla de forma segura.
+Tome este repositorio hipotético como ejemplo. Tiene dos ramas, **`master`** siendo la rama de integración, y una rama feature, llamada **`feat-home-screen`**. **`feat-home-screen`** se fusionó con **`master`**, por lo que podemos eliminarla de forma segura.
 
 ![image](https://user-images.githubusercontent.com/23094588/210007147-0d9704d9-726f-4aa8-ab9a-f9a8e5a88f81.png)
 
@@ -1469,11 +1469,11 @@ Para eliminar una rama, proporcionamos el indicador **`-d`**(o **`--delete`**) c
 
 ![image](https://user-images.githubusercontent.com/23094588/210007463-1d91b058-0077-41a2-93e2-d426ccc3f081.png)
 
-Git responderá con un mensaje de éxito, como este:
+Git responderá con un mensaje de confirmación, como este:
 
 ![image](https://user-images.githubusercontent.com/23094588/210007583-c80f8060-bbc1-443d-995e-2c8bce83c53c.png)
 
-Git siempre intenta ser lo más útil posible. Esta vez no solo le dice que eliminó la rama, sino que lo sigue con la ID de commit del último commit en esa rama. Esto es muy útil en caso de que borre accidentalmente la rama equivocada. Si de repente se da cuenta de que eliminó la rama incorrecta, puede usar una variación del comando **`git branch`** que le permite proporcionar el ID de commit en el que se debe basar la rama, así: **`git branch <branch-name> <base-commit-id>`**. Esto le permitirá deshacer una eliminación accidental.
+Git siempre intenta ser lo más útil posible. Esta vez no solo le dice que eliminó la rama, sino que sigue en el ID del commit, del último commit en esa rama. Esto es muy útil en caso de que borre accidentalmente la rama equivocada. Si de repente se da cuenta de que eliminó la rama incorrecta, puede usar una variación del comando **`git branch`** que le permite proporcionar el ID de commit en el que se debe basar la rama, así: **`git branch <branch-name> <base-commit-id>`**. **Esto le permitirá deshacer una eliminación accidental**.
 
 <img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
@@ -1482,6 +1482,10 @@ Git siempre intenta ser lo más útil posible. Esta vez no solo le dice que elim
 1. Enumere las branches que tiene:
 
 2. Eliminar todas las branches excepto **`master`**. Pero primero, enumere los pasos que debe seguir:
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/210140391-0817fd2a-8fbb-45ad-90a6-2436abf6c81b.png)
 
 **----------> Respuestas en “Sharpen your pencil”.**
 
@@ -1513,7 +1517,7 @@ Finalmente, si no elimina las ramas que ya no necesita, su **`git branch`** list
 
 **La respuesta a su pregunta se encuentra en el historial de confirmaciones.**
 
-Cuando hablamos de eliminar ramas, hablamos específicamente de eliminar ramas que ya se han fusionado. Suponga que trabajó en una rama de características llamada **`feat-a`**, que acaba de fusionar en la rama **`master`**. Tómese un momento para pensar en cómo se ve su historial de commits después de que termine de fusionarse:
+Cuando hablamos de eliminar ramas, hablamos específicamente de eliminar ramas que ya se han fusionado. Suponga que trabajó en una rama feature llamada **`feat-a`**, que acaba de fusionar en la rama **`master`**. Tómese un momento para pensar en cómo se ve su historial de commits después de que termine de fusionarse:
 
 ![image](https://user-images.githubusercontent.com/23094588/210062488-06391c5e-a3c5-4704-aace-9c116a903f6c.png)
 
@@ -1563,7 +1567,7 @@ Git mostrará el ID del último commit de la rama que forzaste a eliminar, para 
 
 Hasta ahora, hemos creado ramas para trabajar en tareas individuales y las hemos vuelto a fusionar en la rama de integración. Estas son algunas de las prácticas a las que se adhieren muchos desarrolladores cuando ramifican y fusionan:
 
-1. **Por lo general, base sus nuevas ramas en commits en las ramas de integración.***
+1. **Por lo general, base sus nuevas ramas en commits de las ramas de integración.**
    Las ramas de integración reflejan el trabajo de todas las ramas. Esto significa que su nueva rama tendrá todo lo que se ha completado hasta el momento, por lo que puede trabajar sabiendo que tiene un buen punto de partida.
    
    ![image](https://user-images.githubusercontent.com/23094588/210064500-5c905497-4a8d-42f6-b56b-4a3cb40a0d4f.png)
@@ -1595,7 +1599,7 @@ En segundo lugar, las ramas son baratas en Git. Son simplemente referencias a co
 
 <hr>
 
-**VIÑETAS**
+**RESUMEN**
 
 * Las ramas son una de las mejores características de Git. Las ramas le permiten trabajar en múltiples tareas al mismo tiempo.
 * Cuando trabajas en Git, siempre estás trabajando en una rama. Cada repositorio comienza con una rama y el nombre predeterminado es **`master`**.
