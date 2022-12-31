@@ -1,5 +1,7 @@
 # Capítulo 3. Mirando alrededor: *investigando su repositorio Git*
 
+<img width="963" alt="image" src="https://user-images.githubusercontent.com/23094588/210149211-123ea548-77b1-45b2-91df-78c5673d1161.png">
+
 **¿Estás listo para investigar un poco, Sherlock?** A medida que continúe trabajando en Git, creará branches, realizará commits y fusionará(merge) su trabajo nuevamente en las ramas de integración. Cada commit representa un paso adelante, y el historial de commits representa cómo llegó allí. De vez en cuando, es posible que desee mirar hacia atrás para ver cómo llegó a donde está, o tal vez si dos ramas se han separado una de la otra. Comenzaremos este capítulo mostrándote cómo Git puede ayudarte a visualizar tu historial de commits.
 
 Ver tu historial de commits es una cosa, pero Git también puede ayudarte a ver cómo cambió tu repositorio. Recuerde que los commits representan cambios y las ramas representan una serie de cambios. ¿Cómo sabe qué ha cambiado, entre commits, entre ramas o incluso entre su directorio de trabajo, el índice y la base de datos de objetos? Ese es el otro tema de este capítulo.
@@ -20,6 +22,28 @@ Juntos, podremos hacer un trabajo de detective de Git realmente interesante. ¡V
 * “Diffing branches”
 * “Diffing commits”
 * “What does the diff for a new file look like?”
+
+## Brigitte tiene una misión
+
+<img width="966" alt="image" src="https://user-images.githubusercontent.com/23094588/210149233-7c4a8257-beae-4393-ad9b-f8c9b1865309.png">
+
+Permítanos presentarle a Brigitte. Brigitte, después de unas vacaciones muy necesarias, busca un nuevo trabajo en el mercado. Necesita un currículum y, sabiendo que probablemente pasará por algunas iteraciones, creó un repositorio para trabajar, comenzó a trabajar en un borrador de su currículum y lo commiteo.
+
+Envió el borrador de su currículum a algunos amigos de su trabajo anterior, quienes sugirieron algunos cambios. Brigitte tomó en serio el consejo de sus amigos y, por cada edición sugerida, hizo una nuevo commit. A continuación se muestra su historial de commits. Hemos anotado cada commit con el ID de commit y el mensaje de commit que usó Brigitte cuando realizó el commit. Tenga en cuenta que tiene tres ramas: **`master`**, **`add-skills`**, y **`edit-per-scotty`**.
+
+## Los Commits no son suficientes
+## “Espejo, espejo en la pared: ¿quién es el log más bonito de todos?”
+## ¿Cómo funciona el registro de git `git log`?
+## Hacer que `git log` haga todo el trabajo
+## ¿Qué diferencia hace?
+## Visualización de diferencias de archivos
+## Visualización de diferencias de archivos: un archivo a la vez
+## Visualización de diferencias de archivos: un trozo(hunk) a la vez
+## Hacer las diferencias más agradables a la vista
+## Diferenciando cambios por etapas(staged)
+## Diferenciando branches
+## Diferenciando commits
+## ¿Qué aspecto tiene la `diff` para un nuevo archivo?
 
 
 
