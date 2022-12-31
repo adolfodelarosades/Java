@@ -1017,7 +1017,7 @@ DEBERÍAN ESTAR LOS 3 ARCHIVOS CREADOS: **`menu.md`**, **`fall-menu.md`** y **`t
 
 ## "¡Espera! ¿Te moviste?"
 
-Puede ser un poco sorprendente que, aunque **`add-thurs-menu`** se basó en la rama **`master`**, la rama **`master`** se ha movido desde entonces a un nuevo commit. **Aquí es donde es importante darse cuenta de que cada vez que ramificas(you branch), en realidad estás creando una rama que apunta a un commit, no a otra rama**. Las ramas, al ser simples punteros a los commits, ofrecen una manera fácil de llegar a los commits. Recuerda, **la "base" de la rama es *siempre* un commit**.
+Puede ser un poco sorprendente que, aunque **`add-thurs-menu`** se basó en la rama **`master`**, la rama **`master`** se ha movido desde entonces a un nuevo commit. **Aquí es donde es importante darse cuenta de que cada vez que ramificas(you branch), en realidad estás creando una rama que apunta a un commit, no a otra rama**. **Las ramas, al ser simples punteros a los commits**, ofrecen una manera fácil de llegar a los commits. Recuerda, **la "base" de la rama es *siempre* un commit**.
 
 <hr>
 
@@ -1031,13 +1031,13 @@ Entonces, ¿qué significa fusionar **`add-thurs-menu`** en la rama **`master`**
 
 ![image](https://user-images.githubusercontent.com/23094588/209987184-02a8005a-ccda-4a44-8dc9-775bd89a6d31.png)
 
-Tenga en cuenta que tanto la rama **`master`** como la rama **`add-thurs-menu`** comparten un ancestro común (en este caso, la confirmación con ID "A"). Cuando fusionamos las dos ramas juntas, estamos intentando combinar el trabajo realizado ***después de*** ese commit.
+Tenga en cuenta que tanto la rama **`master`** como la rama **`add-thurs-menu`** comparten un ancestro común (en este caso, el commit con ID **"A"**). Cuando fusionamos las dos ramas juntas, estamos intentando combinar el trabajo realizado ***después de*** ese commit.
 
 <hr>
 
 **NOTA**
 
-Queremos combinar los cambios realizados en B y C con los de D.
+Queremos combinar los cambios realizados en **B** y **C** con los de **D**.
 
 <hr>
 
@@ -1045,7 +1045,7 @@ Este escenario en particular es un gran ejemplo de ramas que divergen entre sí 
 
 ![image](https://user-images.githubusercontent.com/23094588/209987814-83ddfb23-76d1-4870-9977-97cee2e6e445.png)
 
-AQUII
+
 ### ¡Ya casi es jueves! (continuado)
 
 Ya está todo configurado y listo para fusionar **`add-thurs-menu`** con **`master`**. Cambiaste a la rama **`master`**, así que sigamos y fusionemos la rama **`add-thurs-menu`** en ella:
@@ -1083,6 +1083,18 @@ Si lee el texto que presenta Git, sabrá que todo lo que esté precedido por una
 ![image](https://user-images.githubusercontent.com/23094588/209989628-62b2877a-7d51-4f07-9e6a-285de803599d.png)
 
 ¡Es hora de finalmente disfrutar de una buena comida y bailar toda la noche!
+
+### 💻
+
+![image](https://user-images.githubusercontent.com/23094588/210135069-9db53fa2-30f8-40a5-8f37-e8cd2b0d024c.png)
+
+Aquí hemos tratado de seguir los pasos pero hubo un problema ya que no se abrío el editor de texto en este caso VSC, por lo que si observamos lo que nos dice Git **`No se realiza commit de fusión; usa 'git commit' para completar la fusión.`** para completar el merge ya que como dijimos hubo un problema con el editor.
+
+Vamos ha hacer dicho commit.
+
+![image](https://user-images.githubusercontent.com/23094588/210135285-4dc2f0a7-e4bd-4f96-92c0-03e5d3de7455.png)
+
+Ahora si se ha terminado de hacer el **commit merge** y podemos observar que en la rama **`master`** ya tenemos integrados los 3 archivos.
 
 <hr>
 
