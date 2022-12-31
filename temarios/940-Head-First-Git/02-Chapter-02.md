@@ -1168,7 +1168,7 @@ Pero, ¿qué pasa si intentas mezclar dos colores primarios como el rojo y el az
 
 ![image](https://user-images.githubusercontent.com/23094588/209992015-442a3a2f-ec57-4bfd-9e0b-150c4cdc12f5.png)
 
-Observe que **`master`** se mueve para apuntar al último commit, identificada por "E". Esto es lo esperado: la nota adhesiva de **`master`** se actualiza para reflejar el nuevo commit en esa rama, mientras **`add-thurs-menu`** permanece fija. Esto se denomina **merge commit** y se compone de todos los cambios que se introdujeron en las dos ramas separadas.
+Observe que **`master`** se mueve para apuntar al último commit, identificada por **"E"**. Esto es lo esperado: la nota adhesiva de **`master`** se actualiza para reflejar el nuevo commit en esa rama, mientras **`add-thurs-menu`** permanece fija. Esto se denomina **merge commit** y se compone de todos los cambios que se introdujeron en las dos ramas separadas.
 
 Sin embargo, cada commit que hacemos en Git necesita un mensaje de commit que describa lo que contiene ese commit. Por lo general, hacemos esto explícitamente con el indicador **"`-m`"**. Dado que no proporcionamos a Git un mensaje de commit cuando realizamos la fusión, ¡Git abre nuestro editor para brindarnos un lugar para hacer precisamente eso!
 
@@ -1176,7 +1176,7 @@ Sin embargo, cada commit que hacemos en Git necesita un mensaje de commit que de
 
 <img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
 
-Otro historial hipotético de compromisos para su placer visual. Para explicar cómo llegamos aquí:
+Otro hipotético historial de commmits para su placer visual. Para explicar cómo llegamos aquí:
 
 * Comenzamos haciendo el commit **`A`** en la rama **`master`**.
 * Luego creamos la rama **`add-chat`** e hicimos otro commit, **`B`**.
@@ -1190,6 +1190,10 @@ Así es como se ve el gráfico de commits:
 Ahora, intentaremos fusionar la rama **`add-emojis`** en la rama **`add-chat`**. En otras palabras, la rama **`add-chat`** es el **proponente** y **`add-emojis`** es el **propuesto**. ¿Resultará esto en un **fast-forward merge**, o formará un **merge commit**?
 
 Finalmente, dibuje aquí el gráfico de confirmación resultante.
+
+**MI SOLUCIÓN**
+
+Se va a crear un **merge commit** con un nuevo commit **F**, la rama **`add-chat`** apunta a este commit **F** por ser el **proponente**, **`add-emojis`** se queda en el mismo sitio.
 
 <hr>
 
@@ -1205,15 +1209,15 @@ Pista: ¿Se ha desviado **`add-chat`** de **`add-emojis`**?
 
 ### Los Merge commits son un poco especiales
 
-Un merge commit es como cualquier otro commit que haya creado hasta ahora. Registra el trabajo que resultó de unir dos ramas, junto con algunos metadatos. Los metadatos incluyen su nombre y correo electrónico, la hora en que se creó el commit y el mensaje de commit que proporcionó cuando realizamos el mergeo. Además, cada commit(cualquier otro que no sea el primer commit en un repositorio) registra la ID del commit que le precede.
+Un **merge commit** es como cualquier otro commit que haya creado hasta ahora. Registra el trabajo que resultó de unir dos ramas, junto con algunos metadatos. Los metadatos incluyen su nombre y correo electrónico, la hora en que se creó el commit y el mensaje de commit que proporcionó cuando realizamos el mergeo. Además, cada commit(cualquier otro que no sea el primer commit en un repositorio) registra la ID del commit que le precede.
 
-Sin embargo, los merge commit tienen algunas características interesantes. Por un lado, recuerda que no creaste este commit explícitamente; más bien, Git lo hizo cuando fusionó dos ramas que se habían separado una de la otra.
+Sin embargo, los **merge commit** tienen ***algunas características interesantes***. Por un lado, recuerda que **no creaste este commit explícitamente; más bien, Git lo hizo cuando fusionó dos ramas que se habían separado una de la otra**.
 
-Por otra parte, ***un merge commit tiene dos padres***: el ***primer padre*** es el último commit en la rama que propone, y el ***segundo padre*** es el último commit de la rama propuesta que se fusionó. Mirando hacia atrás en el historial de commits de **`80s-diner`**:
+Por otra parte, **un merge commit tiene dos padres**: el **primer padre** es el último commit en la rama que propone, y el **segundo padre** es el último commit de la rama propuesta que se fusionó. Mirando hacia atrás en el historial de commits de **`80s-diner`**:
 
 ![image](https://user-images.githubusercontent.com/23094588/209994638-3f9a6eb9-6b4b-4f01-9783-7297e9730de4.png)
 
-El aspecto más importante de los merge commit es su efecto en su historial de commits. Hasta ahora, has visto cómo las ramas divergen unas de otras. Esto es evidente cuando dibujas el historial de commits. Los merge commit son la otra cara de la misma moneda: presentan un punto en su historial de commits donde las ramas divergentes se unen.
+El aspecto más importante de los **merge commit** es el efecto en el historial de commits. Hasta ahora, has visto cómo ***las ramas divergen unas de otras***. Esto es evidente cuando dibujas el historial de commits. Los **merge commit** son la otra cara de la misma moneda: presentan un punto en su historial de commits donde ***las ramas divergentes se unen***.
 
 ![image](https://user-images.githubusercontent.com/23094588/209994865-b7ee58c0-b619-47a2-bafd-1b05b9a23676.png)
 
@@ -1222,7 +1226,7 @@ El aspecto más importante de los merge commit es su efecto en su historial de c
 
 Imagina el multiverso: existes en múltiples universos al mismo tiempo, viviendo vidas diferentes. En un universo, podrías ser un humanitario, con la intención de resolver todo el sufrimiento humano. En otro, eres un villano, enfocado con láser en la dominación mundial. Ahora supongamos que estos dos universos chocan entre sí. ¿Lo que pasa? Solo puede haber uno de ustedes, entonces, ¿cuál será? ¿El humanitario o el villano? ¿O podrías ser ambos de alguna manera?
 
-En el repositorio ’80s Diner, hasta ahora no hemos necesitado trabajar con el mismo archivo en varias ramas. Teníamos tres ramas, todas las cuales introdujeron nuevos archivos. Pero, ¿y si las tres ramas trabajaran con el mismo archivo, modificándolo de diferentes maneras? Tal vez editó un archivo en una rama y luego editó exactamente la misma línea en el mismo archivo en otra rama. Es decir, en una rama el archivo se ve diferente al mismo archivo en otra rama.
+En el repositorio **`’80s Diner`**, hasta ahora no hemos necesitado trabajar con el mismo archivo en varias ramas. Teníamos tres ramas, todas las cuales introdujeron nuevos archivos. Pero, ¿y si las tres ramas trabajaran con el mismo archivo, modificándolo de diferentes maneras? Tal vez editó un archivo en una rama y luego editó exactamente la misma línea en el mismo archivo en otra rama. Es decir, en una rama el archivo se ve diferente al mismo archivo en otra rama.
 
 Considere un repositorio con dos ramas: **`master`** y **`feat-a`**. La rama **`master`** tiene un commit, que introduce el archivo **`notice.md`** (commit **`A`**), que solo tiene una línea de texto. Luego creamos la rama **`feat-a`**, cambiamos a ella, editamos el archivo y hacemos commit **`B`**. Finalmente, volvemos a la rama **`master`**, editamos el archivo *nuevamente* y hacemos un commit final, **`C`**.
 
@@ -1235,27 +1239,27 @@ Considere un repositorio con dos ramas: **`master`** y **`feat-a`**. La rama **`
 
 ![image](https://user-images.githubusercontent.com/23094588/209997284-99319a69-481c-4c15-92ee-5685eb981b13.png)
 
-Los **Merge conflicts** se producen cuando intentamos reunir commits que afectan a los mismos archivos de diferentes maneras. Esto es similar a nuestros universos alternativos chocando entre sí; cuando eso suceda, ¿cómo reconciliarás tu ser humanitario y el de villano?
+Los Conflictos(**Merge conflicts**) se producen cuando intentamos reunir commits que afectan a los mismos archivos de diferentes maneras. Esto es similar a nuestros universos alternativos chocando entre sí; cuando eso suceda, ¿cómo reconciliarás tu ser humanitario y el de villano?
 
-Uno de esos escenarios es el que acabamos de describir: tenemos el mismo archivo en dos ramas diferentes, continuamos tratando la rama **`master`** como la rama de integración y mergeamos la rama **`feat-a`** en la rama **`master`**. ¿Lo que pasa?
+Uno de esos escenarios es el que acabamos de describir: tenemos el mismo archivo en dos ramas diferentes, continuamos tratando en la rama **`master`** como la rama de integración y mergeamos la rama **`feat-a`** en la rama **`master`**. ¿Qué pasa?
 
-¡Git levanta las manos en señal de rendición! Git no tiene absolutamente ninguna forma de determinar qué versión mantener, por lo que **detiene** la fusión a mitad de camino e informa un merge conflict.
+¡Git levanta las manos en señal de rendición! Git no tiene absolutamente ninguna forma de determinar qué versión mantener, por lo que se **detiene** la fusión a mitad de camino e informa de un Conflicto(**merge conflict**).
 
 ![image](https://user-images.githubusercontent.com/23094588/209998927-701bea77-fd7f-4170-903c-42c2af555e21.png)
 
-Git **`status`** puede parecer aterrador, pero si lo leemos detenidamente, Git está haciendo todo lo posible para ayudarnos. Vamos a ver:
+Si hacemos un Git **`status`** puede parecer aterrador, pero si lo leemos detenidamente, Git está haciendo todo lo posible para ayudarnos. Vamos a ver:
 
 ![image](https://user-images.githubusercontent.com/23094588/209999565-52ab9c92-ee7c-40fe-ae31-4f878ab7f390.png)
 
-Git **`merge`** falla de inmediato, pero trata de ser útil al indicarle qué archivos tienen un merge conflict.
+Git **`merge`** falla de inmediato, pero trata de ser útil al indicarle qué archivos tienen un Conflicto(**merge conflict**).
 
 Git **`status`**, al igual que el comando **`merge`**, también nos dice que Git no pudo completar la combinación de algunos archivos y los enumera. También nos dice que arreglemos los conflictos y luego ejecutemos el comando **`git commit`**.
 
-Puede resultar confuso cuando Git dice "both modified", lo que significa que ambas ramas modificaron el mismo archivo.
+Puede resultar confuso cuando Git dice **"both modified"**, lo que significa que ambas ramas modificaron el mismo archivo.
 
 Estás en medio del proceso de fusión y Git te pide ayuda.
 
-La forma más fácil de resolver los merge conflicts es abrir los archivos que tienen merge conflicts en su editor. Si tuviera que abrir **`notice.md`** en su editor de texto, esto es lo que vería:
+La forma más fácil de resolver los conflictos(**merge conflicts**) es abrir los archivos que tienen conflictos(**merge conflicts**) en su editor. Si tuviera que abrir **`notice.md`** en su editor de texto, esto es lo que vería:
 
 ![image](https://user-images.githubusercontent.com/23094588/210003150-51f3ac5e-6254-4379-8d9c-c8988b3c48ca.png)
 
@@ -1265,11 +1269,11 @@ Se ve bastante retorcido, ¿eh? No se preocupe, lo guiaremos paso a paso. Solo r
 
 ![image](https://user-images.githubusercontent.com/23094588/210003447-545ad05f-e8c2-4981-94a7-f8ac1a69f23b.png)
 
-Ahora que lo sabe, aquí está el mismo archivo que se muestra en su gloria completamente anotada:
+Ahora que lo sabe, aquí está el mismo archivo completamente descrito con notas:
 
 ![image](https://user-images.githubusercontent.com/23094588/210003623-f2c6fc0d-f2f8-407e-b898-d79d0b953a28.png)
 
-Ahora solo es cuestión de editar los archivos que tienen merge conflicts. Tienes cuatro opciones....
+Ahora solo es cuestión de editar los archivos que tienen merge conflicts. **Tienes cuatro opciones...**
 
 <img width="1156" alt="image" src="https://user-images.githubusercontent.com/23094588/209859350-656c580f-cd14-4123-b3fc-3b6901fd405f.png">
 
@@ -1283,7 +1287,7 @@ Ahora solo es cuestión de editar los archivos que tienen merge conflicts. Tiene
 
 ### ¡Estoy en conflicto! (¡Uf! Ya casi llegamos)
 
-Cuando tiene un merge conflict, tiene **cuatro opciones**. Puede elegir los cambios introducidos en la rama **`master`**, los cambios en la rama **`feat-a`**, elegir ambos (en este caso particular) o ignorar ambos y escribir algo completamente nuevo. Recuerde que los marcadores que Git colocó allí son solo para resaltar los conflictos, solo están ahí para ayudarlo.
+Cuando tiene un conflicto(**merge conflict**), tiene **cuatro opciones**. Puede ***elegir los cambios introducidos en la rama **`master`***, ***los cambios en la rama **`feat-a`***, elegir ***ambos*** (en este caso particular) o ***ignorar ambos y escribir algo completamente nuevo***. Recuerde que los marcadores que Git colocó allí son solo para resaltar los conflictos, solo están ahí para ayudarlo.
 
 Una vez que elija, este es el aspecto que debería tener el archivo:
 
@@ -1295,7 +1299,7 @@ Por supuesto, es posible que no siempre pueda seleccionar ambos cambios, especia
 
 Una vez que haga su elección y termine de editar el archivo en su editor de texto, guarde el archivo.
 
-A continuación, simplemente seguimos las instrucciones que **`git status`** nos ofrece. Usamos **`git add`** para agregar el resultado final al staging area(área de preparación), luego continuamos con **`git commit`**.
+A continuación, simplemente seguimos las instrucciones que **`git status`** nos ofrece. Usamos **`git add`** para agregar el resultado final al **staging area(área de preparación)**, luego continuamos con **`git commit`**.
 
 <hr>
 
@@ -1315,7 +1319,7 @@ Vuelva a leer el resultado del **`git status`** que le mostramos hace un par de 
 
 **P: ¿Qué pasa si tengo conflictos en más de un archivo?**
 
-**R**: Como es de esperar, **`git merge`** se detendrá a mitad de camino y enumerará todos los archivos que tienen conflictos. Puede usar su editor para resolver los conflictos, tal como lo hicimos nosotros, y luego usar **`git add`** para todos los archivos que tenían un merge conflict. Por último, ejecuta **`git commit`**.
+**R**: Como es de esperar, **`git merge`** se detendrá a mitad de camino y enumerará todos los archivos que tienen conflictos. Puede usar su editor para resolver los conflictos, tal como lo hicimos nosotros, y luego usar **`git add`** para todos los archivos que tenían un conflicto(**merge conflict**). Por último, ejecuta **`git commit`**.
 
 <hr>
 
@@ -1337,7 +1341,9 @@ Pista: B y C han divergido el uno del otro.
 
 El otro escenario es cuando varias personas comienzan a usar Git como herramienta de colaboración. Todavía no hemos llegado a hablar de eso, pero involucra a diferentes personas que trabajan en diferentes ramas. Cuando dos personas diferentes, trabajando en dos tareas diferentes en dos ramas diferentes en el mismo repositorio, afectan el mismo archivo, es probable que creen un conflicto al mergear.
 
-Los conflictos(merge conflict) ocurren más de lo que piensas, así que siéntete cómodo con ellos. Pero no se preocupe, el siguiente ejercicio lo convertirá en un experto en resolución de conflictos.
+Los conflictos(**merge conflict**) ocurren más de lo que piensas, así que siéntete cómodo con ellos. Pero no se preocupe, el siguiente ejercicio lo convertirá en un experto en resolución de conflictos.
+
+<hr>
 
 <img width="1139" alt="image" src="https://user-images.githubusercontent.com/23094588/209848120-e8fe83f6-95f0-4aa4-82e9-eb4f09f0cefc.png">
 
@@ -1366,6 +1372,59 @@ Vuelva al directorio **`my-headfirst-git-samples`** (o donde sea que haya estado
 9. Merge la rama **`improvisation`** en la rama **`master`**. Resuelve cualquier conflicto como mejor te parezca. **Asegúrese de leer qué información proporciona Git cuando abre su editor para proporcionar un mensaje de commit**.
 
 **¿Cómo se ve el historial de commits después de la fusión?**
+
+
+### 💻
+
+1. y 2.
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137263-51f6848e-61a5-4669-9080-d8ec57de7e03.png)
+
+3. 
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137373-33a51387-3215-456b-997a-c5c1233a9e30.png)
+
+4. 
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137436-dd758efa-45b3-4a21-9b1d-7c3b561037e9.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137449-6a9004dc-3332-4f40-97a2-aff42efed735.png)
+
+5.
+
+  ![image](https://user-images.githubusercontent.com/23094588/210137493-47df8c87-1332-4282-a8d5-97478ae6c5b6.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137542-65fa7dfa-f020-4775-834e-91ac3ea027ca.png)
+
+6.
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137594-7e39f403-b489-42f0-bf6d-d43a5a73a216.png)
+
+7.
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137637-74186085-561f-4a3b-9fa8-d6f16b10bdb8.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137710-eb87f4e0-bd2e-40b0-9126-114ace514a11.png)
+
+8.
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137761-4ed3b0ca-1e3f-4b6c-b3a4-53fa51b198dd.png)
+
+9.
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137838-0bfb8c2e-35bd-4b19-a5bc-7243542aee2b.png)
+
+   ![image](https://user-images.githubusercontent.com/23094588/210137885-ae8cfe07-4a45-4544-a07d-d3994daf15e0.png)
+
+   VSC nos permite abrir un **Merge Editor** para facilitar la edición. Podemos ver lo existente en la rama **`improvisation`** y **`master`** y el resultado con el que nos vamos a quedar.
+   
+   ![image](https://user-images.githubusercontent.com/23094588/210138013-7b0e2a13-0914-4e3c-b99b-f862e452eedc.png)
+
+
+
+
+
+
 
 <hr>
 
