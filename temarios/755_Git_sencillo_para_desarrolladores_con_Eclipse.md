@@ -45,7 +45,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 
 * Introducción 04:26
 
-### [02 Temario y Objetivos • 1 clases • 4m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/02-Temario-y-Objetivos.md)
+### [02 Temario y Objetivos • 1 clases • 4m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/02-Temario-y-Objetivos.md) 👍
 
 * Temario y Objetivos 03:42
 
