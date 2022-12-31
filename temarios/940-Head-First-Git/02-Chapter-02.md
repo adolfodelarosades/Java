@@ -1404,7 +1404,7 @@ Vuelva al directorio **`my-headfirst-git-samples`** (o donde sea que haya estado
 
    ![image](https://user-images.githubusercontent.com/23094588/210137637-74186085-561f-4a3b-9fa8-d6f16b10bdb8.png)
 
-   ![image](https://user-images.githubusercontent.com/23094588/210137710-eb87f4e0-bd2e-40b0-9126-114ace514a11.png)
+   ![image](https://user-images.githubusercontent.com/23094588/210139403-4cfb8604-36c6-4430-904c-68b8b3eace43.png)
 
 8.
 
@@ -1414,23 +1414,39 @@ Vuelva al directorio **`my-headfirst-git-samples`** (o donde sea que haya estado
 
    ![image](https://user-images.githubusercontent.com/23094588/210137838-0bfb8c2e-35bd-4b19-a5bc-7243542aee2b.png)
 
-   ![image](https://user-images.githubusercontent.com/23094588/210137885-ae8cfe07-4a45-4544-a07d-d3994daf15e0.png)
+   ![image](https://user-images.githubusercontent.com/23094588/210139535-39455cd2-16cb-4c93-80b5-b42b5f0b4d41.png)
 
    VSC nos permite abrir un **Merge Editor** para facilitar la edición. Podemos ver lo existente en la rama **`improvisation`** y **`master`** y el resultado con el que nos vamos a quedar.
    
-   ![image](https://user-images.githubusercontent.com/23094588/210138013-7b0e2a13-0914-4e3c-b99b-f862e452eedc.png)
+   ![image](https://user-images.githubusercontent.com/23094588/210139562-72478b19-b11d-44bc-b26a-b2e6e8281884.png)
+   
+   Para resolver este conflicto vamos a seleccionar ambos primero lo que pusimos en la rama **`improvisation`** y luego en la rama **`master`** de la siguiente manera.
+   
+   
+   ![image](https://user-images.githubusercontent.com/23094588/210139739-d697306f-196f-4954-8cd4-00f00601b808.png)
+   
+   y pulsamos el botón **Accept Merge**.
+   
+   ![image](https://user-images.githubusercontent.com/23094588/210139776-f2f03285-c2b4-4377-81e7-23036fbac0c3.png)
 
-
-
-
-
-
+   si volvemos a la terminal y pulsamos **`git status`** Git nos indicara que los conflictos se han resuelto pero seguimos fusionando, nos falta realizar el commit.
+   
+   ![image](https://user-images.githubusercontent.com/23094588/210139813-4ba922b5-226e-4ce5-9c9c-56b887b7c933.png)
+   
+   Vamos a realizar el commit para concluir el merge.
+   
+   ![image](https://user-images.githubusercontent.com/23094588/210139916-ba87ed14-f7df-43cf-a348-8fcf510f03a1.png)
+   
+   **(EN EL MENSAJE SIMPLEMENTE TENIA QUE PONER "D" PARA SEGUIR CON LA NOTACIÓN USADA PREVIAMENTE)**.
 
 <hr>
 
 **NOTA**
 
 Dibuje el gráfico de commits aquí.
+
+<img width="1325" alt="image" src="https://user-images.githubusercontent.com/23094588/210139978-1ba62660-8b2e-4e10-9033-16be43cb673a.png">
+
 
 <hr>
 
