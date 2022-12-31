@@ -234,7 +234,82 @@ Después de mostrar los detalles del commit **"B"**, Git procede a mostrar el co
 
 
 ## Hacer que `git log` haga todo el trabajo
+
+<img width="1275" alt="image" src="https://user-images.githubusercontent.com/23094588/210154298-cd8cbbad-4aab-497b-825e-82b9fa378905.png">
+
+¡Basta de suspenso! Veamos lo que necesita Brigitte para ver todos sus commits en todas las ramas de su repositorio. Si adivinaste más banderas, entonces ding, ding, ding, ¡tú ganas el premio! Sabemos que nos gusta la bandera **`--oneline`**; esta vez vamos a agregar dos banderas más, a saber, **`--all`** y **`--graph`**. La bandera **`--all`** hace exactamente lo que dice en la lata: muestra todas las ramas en el repositorio. La bandera **`--graph`** le pide al comando **`git log`** que muestre los commits como un gráfico. Así es como lo usamos:
+
+<hr>
+
+**NOTA**
+
+Este gráfico es el “gráfico acíclico dirigido” que mencionamos en el **Capítulo 1**. ¡Hemos cerrado el círculo!
+
+<hr>
+
+<img width="1181" alt="image" src="https://user-images.githubusercontent.com/23094588/210154402-6c53d6f6-802b-4cd1-9257-1e97b5f6175b.png">
+
+El resultado esta vez es bonito, pero conciso. Git muestra los ID de commits abreviados, junto con los nombres de las ramas cuando corresponde. El orden sigue siendo de abajo hacia arriba, con los commits más nuevas apareciendo primero. Comparemos esto con el formato que hemos estado usando hasta ahora para que pueda ver cómo alinear los dos.
+
+<img width="1071" alt="image" src="https://user-images.githubusercontent.com/23094588/210154444-3d1268be-0be7-473a-b702-656ab8d5594a.png">
+
+**Tome un respiro aquí, tal vez tome una taza de su bebida favorita mientras reflexiona sobre esto por un momento. Este libro no va a ninguna parte.**
+
+<hr>
+
+<img width="791" alt="image" src="https://user-images.githubusercontent.com/23094588/209587134-ab168c9f-f1c7-4780-9a4a-fc84ef03d078.png">
+
+Has visto suficientes gráficos de commits de Git en este libro. Ahora es tu turno de esbozar el historial de commits del repositorio **`recipes`**. Usando la terminal, navegue a la carpeta **`recipes`**. Asegúrate de estar en la rama **`spicy-version`**. Usa nuestra combinación favorita **`git log`** de banderas:
+
+**`git log --oneline --all --graph`**
+
+* Aquí hay una ventana de la consola para que grabe la salida, para que no tenga que seguir revoloteando de un lado a otro.
+
+   <img width="903" alt="image" src="https://user-images.githubusercontent.com/23094588/210154530-b2cf3c2d-20cf-4bdc-988b-f9401265270e.png">
+
+* A continuación, dibuje el historial de commits de Git utilizando nuestro formato habitual. Te ayudamos a empezar: tu misión es completar el resto:
+
+   <img width="1183" alt="image" src="https://user-images.githubusercontent.com/23094588/210154548-2ba1126e-5491-483e-8910-e275b23406e0.png">
+   
+   
+### 💻
+
+
+**---------> Respuestas en “Exercise Solution”.**
+
+<hr>
+
+<img width="902" alt="image" src="https://user-images.githubusercontent.com/23094588/210154589-e2092cce-db27-4fe4-9992-925a598abd17.png">
+
+**¡Ay! Gran pregunta**. El historial de commits de nuestro repositorio refleja cómo ha evolucionado el repositorio con el tiempo. A medida que avancemos en nuestro trabajo, realizaremos commmits continuamente. Estos commits, en secuencia, representarán el historial de commits de la rama en la que estamos trabajando. Tal vez tengamos múltiples ramas de este tipo en vuelo. Con el tiempo, crearemos muchas de estas ramas y luego las fusionaremos en la rama de integración. Para los proyectos que duran un tiempo, es fácil olvidar qué sucedió y cuándo. Aquí es donde el comando **`git log`** es útil; considérelo como una toma de notas automática para nuestro proyecto.
+
+<hr>
+
+**NOTA**
+
+En capítulos futuros, veremos cómo podemos usar Git para colaborar con otros. El comando **`git log`** es particularmente útil aquí para que podamos ver cómo otros también se han agregado al historial del proyecto.
+
+<hr>
+
+Además, podemos responder fácilmente a preguntas como "¿Se ha separado mi rama de la rama de integración?" o "¿Será esta un **fast-forward merge**?" mirando el historial de commits de nuestra rama y la rama en la que pretendemos fusionarnos.
+
+Finalmente, recuerde que cada commit que hacemos refleja un conjunto de cambios que agregamos a la memoria de Git en forma de commits. Es decir, cada commit difiere de otro commit de alguna manera. Y de vez en cuando es posible que queramos saber la diferencia entre dos commits, o incluso dos ramas. Entonces, ¿cómo haríamos eso? Bueno, para comparar dos commits, necesitaremos:
+
+1. Una forma de identificar las cosas que deseamos comparar, a saber, los ID de commit. Sabemos que con **`git log`** podemos ayudar con esto.
+
+2. Una forma de comparar los dos, ¡que es exactamente el tema de nuestra próxima discusión!
+
+La búsqueda de empleo de Brigitte no va tan bien, por lo que decide trabajar con un asesor profesional independiente (también conocido como reclutador). Después de una conversación muy personal con el entrenador, recibe algunos cambios.
+
+<img width="1013" alt="image" src="https://user-images.githubusercontent.com/23094588/210154745-d0ceb755-05e7-4183-a235-7e02912ff912.png">
+
+Brigitte toma las notas manuscritas de su reclutador y las aplica al archivo **`resume.md`** en su repositorio. Veamos cómo puede usar Git para descubrir las diferencias entre su versión y las ediciones que le envió el reclutador.
+
 ## ¿Qué diferencia hace?
+
+
+AQUIIIII
+
 ## Visualización de diferencias de archivos
 ## Visualización de diferencias de archivos: un archivo a la vez
 ## Visualización de diferencias de archivos: un trozo(hunk) a la vez
