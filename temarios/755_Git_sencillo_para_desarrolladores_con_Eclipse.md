@@ -49,7 +49,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 
 * Temario y Objetivos 03:42
 
-### [03 Que le pido a un control de versiones • 11 clases • 17m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/03-Que-le-pido-a-un-control-de-versiones.md)
+### [03 Que le pido a un control de versiones • 11 clases • 17m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/03-Que-le-pido-a-un-control-de-versiones.md) 👍
 
 * Que le pido a un control de versiones 00:51
 * Trabajo sin conexión 01:31
