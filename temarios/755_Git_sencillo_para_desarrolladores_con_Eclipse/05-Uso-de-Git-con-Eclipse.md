@@ -225,7 +225,7 @@ Y de repente llega nuestro jefe y nos indica que dejemos lo que estamos haciendo
 
 Lógicamente el cambio en el cual estamos trabajando actualmente no lo podemos subir.
 
-En condiciones normales que se hace, es cojer el fichero o los ficheros cambiados, los copiamos en una carpeta por allí temporal, dejar todo el código limpio sin nuestros cambios para poder hacer los nuevos cambios que nos han pedido, subirlos y luego ir a la carpeta temporal para recupoerar lo que llevabamos y volverlo a poner en nuestro código para proceder con nuestra tarea inicial.
+En condiciones normales que se hace, es cojer el fichero o los ficheros cambiados, los copiamos en una carpeta por allí temporal, dejar todo el código limpio sin nuestros cambios para poder hacer los nuevos cambios que nos han pedido, subirlos y luego ir a la carpeta temporal para recuperar lo que llevabamos y volverlo a poner en nuestro código para proceder con nuestra tarea inicial.
 
 Con Git todo lo anterior lo podemos hacer de una manera más elegante. 
 
@@ -233,7 +233,7 @@ Para iniciar vemos los cambios que tenemos actualmente y que no debemos subir.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208733236-48b65f30-3247-4d05-8074-4b0c3562e5de.png">
 
-Vamos a presionar **click derecho sobre el nombre del archivo > Team > Stashes > Stash Changes...**
+Vamos a presionar **click derecho sobre el nombre del proyecto > Team > Stashes > Stash Changes...**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208733517-e7d25c66-60b5-4bda-b801-229f181606e4.png">
 
@@ -267,7 +267,7 @@ Y hacemos el Commit, con esto ya hemos terminado de resolver la incidencia.
 
 Ahora vamos a continuar con nuestro trabajo inicial, tenemos que recuperar el trabajo que teniamos a medias y que guardamos en el **Stashes**.
 
-Vamos a presionar **click derecho sobre el nombre del archivo > Team > Stashes > 0:mis cambios no terminados**
+Vamos a presionar **click derecho sobre el nombre del proyecto > Team > Stashes > 0:mis cambios no terminados**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208736447-f23dbb9b-53d9-45c7-8dc4-96554c5495ba.png">
 
