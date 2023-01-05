@@ -63,7 +63,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Proyectos completos 01:37
 * Sencillez 01:33
 
-### [04 Instalación • 2 clases • 2m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/04-Instalacion.md)
+### [04 Instalación • 2 clases • 2m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/04-Instalacion.md) 👍
 
 * Instalación 01:47
 * Generación de claves SSH 00:23
