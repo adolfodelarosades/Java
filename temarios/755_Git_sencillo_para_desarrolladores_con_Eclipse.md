@@ -68,7 +68,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Instalación 01:47
 * Generación de claves SSH 00:23
 
-### [05 Uso de Git con Eclipse • 4 clases • 20m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/05-Uso-de-Git-con-Eclipse.md)
+### [05 Uso de Git con Eclipse • 4 clases • 20m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/05-Uso-de-Git-con-Eclipse.md) 👍
 
 * Añadir contenido 05:35
 * Añadir contenido parcialmente 03:52
