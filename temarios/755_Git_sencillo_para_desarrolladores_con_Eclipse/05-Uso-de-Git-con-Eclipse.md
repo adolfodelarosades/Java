@@ -208,7 +208,7 @@ En el buscador escribimos **ssh** ya que no es parte de Git sino de Eclipse.
 
 <img width="868" alt="image" src="https://user-images.githubusercontent.com/23094588/208727334-6df3a9b9-c5ca-4d73-a619-da2406d0232b.png">
 
-Es aquí donde le tenemos que indicar donde esta el certificado, la clave privada. Si trabajamos en Mac estará en el **`.shh`** y le indicamos las claves privadas **Private keys** que queremos utilizar, si tenemos una diferente tendríamos que añadirla con el botón **`Add Private Key...`** y con esto el solo cuando necesite una conexión SSH ya nos pedira la contraseña y luego el se la guarda. Ya lo retomaremos cuando hagamos una conexión con los servidores.
+Es aquí donde le tenemos que indicar donde esta el certificado, la clave privada. Si trabajamos en Mac estará en el **`.ssh`** y le indicamos las claves privadas **Private keys** que queremos utilizar, si tenemos una diferente tendríamos que añadirla con el botón **`Add Private Key...`** y con esto el solo cuando necesite una conexión SSH ya nos pedira la contraseña y luego el se la guarda. Ya lo retomaremos cuando hagamos una conexión con los servidores.
 
 El resto de opciones generalmente no se tocan.
 
