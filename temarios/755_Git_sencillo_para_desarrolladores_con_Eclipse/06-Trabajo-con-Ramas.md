@@ -248,18 +248,29 @@ Observe como al cambiarnos a la rama **master** en el **History** desaparece la 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211055682-435ff436-354c-48ca-ae55-bb0f50043e8c.png">
 
-**History** tiene varias vistas dependiendo de la rama en que estemos y sobre todo como este presionado el botón **Show Branches and Tags**.
+**History** tiene varias vistas dependiendo de la rama en que estemos y sobre todo como este presionado el botón **Show Branches and Tags**. Aquí nos dice que solo se muestran los commits a partir de **HEAD** y sus parents.
 
 <img width="286" alt="image" src="https://user-images.githubusercontent.com/23094588/211056955-63986092-1f8a-4e6c-b4d1-ad92e3fb9c16.png">
 
-Si lo pulsamos vamos a ver como cambia el mensaje que nos muestra 
+Si lo pulsamos vamos a ver como cambia, ahora dice que se muestran todas las ramasque coinciden con los filtros configurados, en pocas palabras, todas las ramas. 
 
 <img width="292" alt="image" src="https://user-images.githubusercontent.com/23094588/211058699-7cba4edd-cb61-4ed0-8297-5bfd7b1ced7f.png">
-
 
 Y sobre todo los cambios los vemos en la vista en el **History**.
 
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211057231-75522cc6-e216-438b-86ed-02e21a6471ef.png">
+
+Ademas tenemos al lado otro botón que muestra el mensaje **`Show first parent only`**(mostrar solo el primer padre) que si lo pulsamos por lo menos en esta posición lo que hace es mostrar o no el fichero cambiado.
+
+<img width="170" alt="image" src="https://user-images.githubusercontent.com/23094588/211060177-6e5c539c-1eda-4a7a-9412-e26094806972.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211060629-f4b76bf7-b49e-4313-93dd-8fe45c78cdee.png">
+
+Vamos a dejarlo como estaba inicialmente(mostrando el archivo).
+
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211060113-9b4049c4-9b7d-4c9d-942a-c20165013cc3.png">
+
 
 Al pulsar el botón **Show Branches and Tags** ya vemos que estamos actualmente en la rama **master** la cual tiene al lado **HEAD** que indica nuestra posición actual, y por delante ya vemos el commit realizado en la rama **fastforward**.
 
