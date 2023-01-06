@@ -69,11 +69,11 @@ Podemos marcar cualquier commit para ver su información.
 
 En la lección anterior trabajamos sobre una nueva característica de nuestro proyecto para lo cual creamos una nueva rama, ahora lo que queremos es incorporar todos eso cambios en nuestra rama principal **master** a este proceso se le conoce como **Merge o Mergeo**.
 
-Para realizar el **Merge** lo primero que tenemos que hacer es cambiar a la rama **master** de la siguiente manera.
+Para realizar el **Merge** lo primero que tenemos que hacer es cambiar a la rama **master**, la cual es la rama donde queremos integrar los cambios, para cambiarnos damos **click derecho en el nombre del proyecto > Team > Switch To > master**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208860868-f2ac0d3c-0b16-4037-afa9-235145496456.png">
 
-Observemos lo siguiente, en el explorador ya nos indica que estamos en la rama **master**. Observemos que aquí no aparece el nuevo archivo **caracteristica_1.txt**
+Observemos lo siguiente, en el explorador ya nos indica que estamos en la rama **master**. ***Observemos que aquí no aparece el nuevo archivo*** **caracteristica_1.txt**
 
 <img width="292" alt="image" src="https://user-images.githubusercontent.com/23094588/208861216-0aace34a-4426-4443-9970-0ec6b2fd17d4.png">
 
@@ -93,11 +93,11 @@ Presionamos el botón **Merge**. Nos muestra cual ha sido el resultado del Merge
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208862966-c403c9fc-4284-43dc-9703-c139e227cb71.png">
 
-Y ya esta, observemos varias cosas, estamos colocados en la rama **master** y ya tenemos integrado el archivo **caracteristica_1.txt**, por otro lado en el **History** tenemos a la misma altura a **caracteristica_1**, **master** y **HEAD**. Antes teniamos a **master** uno por detrás, ahora ya estan todos a la misma altura.
+Y ya esta, observemos varias cosas, estamos colocados en la rama **master** y ya tenemos integrado el archivo **caracteristica_1.txt**, por otro lado en el **History** tenemos a la misma altura a **caracteristica_1**, **master** y **HEAD**. Antes teniamos a **master** un coomit por detrás, ahora ya estan todos a la misma altura.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208863607-79bfba43-56db-40fa-b1d4-42ecd0575778.png">
 
-Con todo lo que hemos logrado es realizar una nueva funcionalidad en nuestra propia rama y cuando la terminamos incorporamos todos los cambios dentro de nuestra rama principal **master**. 
+Con todo esto lo que hemos logrado es realizar una nueva funcionalidad en nuestra propia rama y cuando la terminamos incorporamos todos los cambios dentro de nuestra rama principal **master**. 
 
 ## Borrar ramas 01:17
 
