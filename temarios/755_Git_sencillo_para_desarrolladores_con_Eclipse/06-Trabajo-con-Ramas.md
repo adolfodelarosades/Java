@@ -366,6 +366,8 @@ Existe un tercer caso donde no queda de otra más que hacer el **Merge Commit** 
 
 Si recordamos cuando mergemos estas dos ramas siempre usamos la opción por default. Primero mergueamos la **`rama_2`** y se creo un **Fast Forward** y cuando megueamos la **`rama_1`** ***con la opción por default*** se creo un **Merge Commit** por que en este caso ya se habían realizado tareas en paralelo diferentes a las realizadas en la **`rama_1`** y en ese caso si o si se crea el **Merge Commit**.
 
+### Eliminar Ramas
+
 Por cierto como hemos visto ya tenemos en este momento varias ramas, hasta 5 sino me equivoco, vamos a proceder a borrar las ramas **`rama_1`** y **`rama_2`**. Para ver las ramas actuales podemos entrar en **Git Repositorie > Branches > Local**.
 
 <img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/211093365-d07668c7-fc42-4b2b-baf1-aa441c5e2344.png">
@@ -380,9 +382,12 @@ Repetimos el proceso para ambas ramas y ya no las tenemos en **Local**
 
 Si vemos como se veía el **History** antes de borrarlas tenemos:
 
-<img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/211093365-d07668c7-fc42-4b2b-baf1-aa441c5e2344.png">
+<img width="385" alt="image" src="https://user-images.githubusercontent.com/23094588/211091851-e1b45242-3ded-4fc4-86a7-4b16d3053f2a.png">
 
 y después de borrarlas tenemos:
+
+<img width="377" alt="image" src="https://user-images.githubusercontent.com/23094588/211094592-d1d04200-49f1-40a8-89d5-e8bc628f917f.png">
+
 
 <img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/211094147-aba21dd9-c252-46a9-9047-554daa19850c.png">
 
