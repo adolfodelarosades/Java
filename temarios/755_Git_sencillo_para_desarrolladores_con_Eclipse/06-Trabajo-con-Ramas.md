@@ -366,7 +366,7 @@ Existe un tercer caso donde no queda de otra más que hacer el **Merge Commit** 
 
 Si recordamos cuando mergemos estas dos ramas siempre usamos la opción por default. Primero mergueamos la **`rama_2`** y se creo un **Fast Forward** y cuando megueamos la **`rama_1`** ***con la opción por default*** se creo un **Merge Commit** por que en este caso ya se habían realizado tareas en paralelo diferentes a las realizadas en la **`rama_1`** y en ese caso si o si se crea el **Merge Commit**.
 
-### Eliminar Ramas
+### Eliminar Ramas Obsoletas
 
 Por cierto como hemos visto ya tenemos en este momento varias ramas, hasta 5 sino me equivoco, vamos a proceder a borrar las ramas **`rama_1`** y **`rama_2`**. Para ver las ramas actuales podemos entrar en **Git Repositorie > Branches > Local**.
 
