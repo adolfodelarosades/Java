@@ -252,7 +252,12 @@ Observe como al cambiarnos a la rama **master** en el **History** desaparece la 
 
 <img width="286" alt="image" src="https://user-images.githubusercontent.com/23094588/211056955-63986092-1f8a-4e6c-b4d1-ad92e3fb9c16.png">
 
-Si lo pulsamos vamos a ver como cambia la vista en el **History**.
+Si lo pulsamos vamos a ver como cambia el mensaje que nos muestra 
+
+<img width="292" alt="image" src="https://user-images.githubusercontent.com/23094588/211058699-7cba4edd-cb61-4ed0-8297-5bfd7b1ced7f.png">
+
+
+Y sobre todo los cambios los vemos en la vista en el **History**.
 
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211057231-75522cc6-e216-438b-86ed-02e21a6471ef.png">
 
