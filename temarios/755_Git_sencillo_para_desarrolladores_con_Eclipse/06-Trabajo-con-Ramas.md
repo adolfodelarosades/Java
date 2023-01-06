@@ -232,7 +232,6 @@ Nos cambia a la nueva rama **fastforward**, vamos a editar el archivo **caracter
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211053225-c689d113-60b7-4616-8cc2-a1f5e70a5751.png">
 
-<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/211052581-10a8d991-5d53-48c4-8ea6-d89fdbba7c4c.png">
 
 
 
