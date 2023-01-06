@@ -389,14 +389,19 @@ y después de borrarlas tenemos:
 <img width="377" alt="image" src="https://user-images.githubusercontent.com/23094588/211094592-d1d04200-49f1-40a8-89d5-e8bc628f917f.png">
 
 
-<img width="1223" alt="image" src="https://user-images.githubusercontent.com/23094588/211094147-aba21dd9-c252-46a9-9047-554daa19850c.png">
+Si observamos hemos perdido un Commit el del mensaje **`CAMBIO DE RAMA 1`**
 
+<img width="1220" alt="image" src="https://user-images.githubusercontent.com/23094588/211095921-20f26e16-5d16-4c61-9ffb-29bad1aced86.png">
 
+Cosa que realmente no me esperaba por que teniamos un **Merge Commit**. Pero realmente no se ve por que temos pulsado el botón **Show first parent only(mostrar solo el primer padre)**, el cual solo pinta el primer padre por lo que se se ve así:
 
+<img width="1220" alt="image" src="https://user-images.githubusercontent.com/23094588/211096139-e4c690da-15a3-4dfa-add8-7870c9475b7d.png">
 
+Si presionamos nuevamente el botón **Show first parent only(mostrar solo el primer padre)**, observaremos el árbol del **History** como esperabamos.
 
+<img width="1221" alt="image" src="https://user-images.githubusercontent.com/23094588/211096547-3f315a49-2423-478d-995e-7664f3ea2db1.png">
 
-
+Ya no aparecen las ramas **`rama_1`** y **`rama_2`** y todos los commits que se hicierón en su momento, además queda constacía de que existio una rama aun que sino fueramos nosotros los que hemos hecho todo el flujo no sabríamos cual era su nombre.
 
 ## Rebase 04:50
 ## Modificar commit 02:30
