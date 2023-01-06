@@ -23,11 +23,11 @@ La manera de crear ramas se hace de la siguiente manera, **dando click derecho e
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208853811-9e8657db-01fb-4044-b495-66a00f3c24e9.png">
 
-Nos pide un nombre para la rama.
+Nos pide un nombre para la rama. Además y muy importante nos pide que le indiquemos de que rama queremos partir **`Source: master`**, en este caso solo podemos partir de **Master** ya que no tenemos más ramas por ahora.
 
 <img width="591" alt="image" src="https://user-images.githubusercontent.com/23094588/208853986-0d2df803-f2b1-4beb-aab3-f08c3875ae15.png">
 
-Nos pide que le indiquemos de que rama queremos partir **`Source: master`**, en este caso solo podemos partir de **Master** ya que no tenemos más ramas por ahora, nos pide el nombre de la rama, la llamaremos **`caracteristica_1`** y el check que esta marcado **`Check out new branch`** lo que nos indica que cree la rama y a la vez nos cambiemos a ella, por ahora eso es lo que vamos a poner.
+La llamaremos **`caracteristica_1`** y el check que esta marcado **`Check out new branch`** lo que nos indica es que cree la rama y a la vez nos cambiemos a ella, por ahora eso es lo que vamos a poner.
 
 <img width="595" alt="image" src="https://user-images.githubusercontent.com/23094588/208854991-94aef580-c270-452d-ab23-c4eb3722e767.png">
 
@@ -45,7 +45,7 @@ Vamos a commitearlo.
 
 ### Mostrar la History
 
-Ya hemos realizado un commit en la rama **`caracteristica_1`**, para apreciar esto tenemos la vista **Hiostory** que vamos a abrir.
+Ya hemos realizado un commit en la rama **`caracteristica_1`**, para apreciar esto tenemos la vista **Hiostory** que vamos a abrir con **click derecho en el nombre del proyecto > Team > Show in History**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208857098-310a31b8-ce4d-4db7-b31f-00ee88770923.png">
 
