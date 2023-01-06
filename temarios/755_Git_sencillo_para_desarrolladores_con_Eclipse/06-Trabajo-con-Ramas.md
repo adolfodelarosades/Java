@@ -202,11 +202,19 @@ Ahora vamos a mergear la rama **rama_1** dando **click derecho en el nombre del 
 
 <img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208892652-289b37db-e628-442e-a8ca-6288e3db69f2.png">
 
+Aquí vemos que no genera un **Fast-Forward**, sino un **Merged**.
+
+![image](https://user-images.githubusercontent.com/23094588/211008322-baea395d-638f-4fff-ad07-7553e76c9673.png)
+
 En **History** nuestro dibujo a cambiado. **Observe como se creo un nuevo commit(Merge commit) al cual automáticamente se le ha puesto el nombre `Merge branch 'rama1'`, y tanto `master` como `HEAD`se han posicionado a esta altura**.
+
+Vemos que **master** ya no esta a la altura del commit **`Cambios de caracteristica 1`** donde se encontraba originalmente por que ha ído avanzando con cada mergeo.
 
 <img width="1225" alt="image" src="https://user-images.githubusercontent.com/23094588/208892806-4446e719-3040-4530-91fb-923aeafe5734.png">
 
-En resumen tanto **rama_1** como **rama_2** las ha incorporado a **master**. Pero **rama_1** la pinta realmente como una rama que salio de **master**.
+En resumen tanto **rama_1** como **rama_2** las ha incorporado a **master**. La **rama_1** la pinta realmente como una rama que salio de **master**, pero la **rama_2** la pinta como si fuera un commit secuencial sobre **master**, es decir si borraramos **rama_2** no sabriamos que en ese punto existio una rama. Eso es lo que se conoce como un **FastForward** que se detalla en la seguiente sección.
+
+De esta manera hemos visto como trabajar paralelamente en dos tareas y posteriormente integrarlas a nuestra rama principal **master**.
 
 ## Fastforward 07:03
 ## Rebase 04:50
