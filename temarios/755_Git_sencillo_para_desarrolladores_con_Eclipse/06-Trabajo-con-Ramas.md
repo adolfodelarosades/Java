@@ -256,7 +256,7 @@ Si lo pulsamos vamos a ver como cambia, ahora dice que se muestran todas las ram
 
 <img width="292" alt="image" src="https://user-images.githubusercontent.com/23094588/211058699-7cba4edd-cb61-4ed0-8297-5bfd7b1ced7f.png">
 
-Y sobre todo los cambios los vemos en la vista en el **History**.
+Y sobre todo los cambios los vemos en la vista en el **History**. Al pulsar el botón **Show Branches and Tags** ya vemos que estamos actualmente en la rama **master** la cual tiene al lado **HEAD** que indica nuestra posición actual, y por delante ya vemos el commit realizado en la rama **fastforward**.
 
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211057231-75522cc6-e216-438b-86ed-02e21a6471ef.png">
 
@@ -271,10 +271,7 @@ Vamos a dejarlo como estaba inicialmente(mostrando el archivo).
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211060113-9b4049c4-9b7d-4c9d-942a-c20165013cc3.png">
 
-
-Al pulsar el botón **Show Branches and Tags** ya vemos que estamos actualmente en la rama **master** la cual tiene al lado **HEAD** que indica nuestra posición actual, y por delante ya vemos el commit realizado en la rama **fastforward**.
-
-Vamos a realizar el mergeo una vez colocados en **master**, pulsamos **click derecho en el nombre del proyecto > Team > Merge**
+Una ves visto esto vamos a realizar el mergeo una vez colocados en **master**, pulsamos **click derecho en el nombre del proyecto > Team > Merge**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211057980-a8d0df5c-215a-4f79-8a7a-6f7b296661b5.png">
 
