@@ -401,7 +401,7 @@ Si presionamos nuevamente el botón **Show first parent only(mostrar solo el pri
 
 <img width="1221" alt="image" src="https://user-images.githubusercontent.com/23094588/211096547-3f315a49-2423-478d-995e-7664f3ea2db1.png">
 
-Ya no aparecen las ramas **`rama_1`** y **`rama_2`**, pero si vemos todos los commits que se hicierón en su momento, además queda constacía de que existio una rama, aunque sino fueramos porque nosotros hemos hecho todo el flujo no sabríamos cual era el nombre de dicha rama(Shhhh **`rama_1`**).
+Ya no aparecen las ramas **`rama_1`** y **`rama_2`**, pero si vemos todos los commits que se hicierón en su momento, además queda constacía de que existio una rama, aunque sino fueramos porque nosotros hemos hecho todo el flujo no sabríamos cual era el nombre de dicha rama(Shhhh **`rama_1`**!!!).
 
 ## Rebase 04:50
 ## Modificar commit 02:30
