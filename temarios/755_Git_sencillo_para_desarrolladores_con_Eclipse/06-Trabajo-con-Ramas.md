@@ -248,23 +248,25 @@ Observe como al cambiarnos a la rama **master** en el **History** desaparece la 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211055682-435ff436-354c-48ca-ae55-bb0f50043e8c.png">
 
-**History** tiene varias vistas dependiendo de la rama en que estemos y sobre todo como este presionado el botón **Show Branches and Tags**. Aquí nos dice que solo se muestran los commits a partir de **HEAD** y sus parents.
+**History** tiene varias vistas dependiendo de la rama en que estemos y sobre todo como este presionado el botón **Show Branches and Tags**. Aquí nos dice *que solo se muestran los commits a partir de **HEAD** y sus parents*.
 
 <img width="286" alt="image" src="https://user-images.githubusercontent.com/23094588/211056955-63986092-1f8a-4e6c-b4d1-ad92e3fb9c16.png">
 
-Si lo pulsamos vamos a ver como cambia, ahora dice que se muestran todas las ramasque coinciden con los filtros configurados, en pocas palabras, todas las ramas. 
+Si lo pulsamos vamos a ver como cambia, ahora dice *que se muestran todas las ramas que coinciden con los filtros configurados*, en pocas palabras, todas las ramas. 
 
 <img width="292" alt="image" src="https://user-images.githubusercontent.com/23094588/211058699-7cba4edd-cb61-4ed0-8297-5bfd7b1ced7f.png">
 
-Y sobre todo los cambios los vemos en la vista en el **History**. Al pulsar el botón **Show Branches and Tags** ya vemos que estamos actualmente en la rama **master** la cual tiene al lado **HEAD** que indica nuestra posición actual, y por delante ya vemos el commit realizado en la rama **fastforward**.
+Y sobre todo los cambios los vemos en la vista de **History**. Al pulsar el botón **Show Branches and Tags** ya vemos que estamos actualmente en la rama **master** la cual tiene al lado **HEAD** que indica nuestra posición actual, y por delante ya vemos el commit realizado en la rama **fastforward**.
 
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211057231-75522cc6-e216-438b-86ed-02e21a6471ef.png">
 
-Ademas tenemos al lado otro botón que muestra el mensaje **`Show first parent only`**(mostrar solo el primer padre), presisamente en el commit que estamos posicionados tiene dos commits padres. El primero de ellos es el de la **rama_2** y el segundo es el de la **rama_1** ya que los mergeos los hicimos en ese orden.
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211062558-850ecb06-6127-4cf4-81d1-6a30c32f4820.png">
+Ademas tenemos al lado otro botón que muestra el mensaje **`Show first parent only`**(*mostrar solo el primer padre*). 
 
 <img width="170" alt="image" src="https://user-images.githubusercontent.com/23094588/211060177-6e5c539c-1eda-4a7a-9412-e26094806972.png">
+
+Presisamente el commit en el que estamos posicionados tiene dos commits padres. El primero de ellos es el de la **rama_2** y el segundo es el de la **rama_1** ya que los mergeos los hicimos en ese orden.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211062558-850ecb06-6127-4cf4-81d1-6a30c32f4820.png">
 
 Así que si pulsamos el botón **`Show first parent only`** deja de mostrar el archivo cambiado **`fichero1.txt`** que fue cambiado en la **rama_1**, es decir el padre 2.
 
@@ -275,18 +277,18 @@ Pero observe que en la información que muestra sobre el commit sigue mostrando 
 Vamos a dejarlo como estaba inicialmente(mostrando todos los parents).
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211063119-8cbfaf59-85d6-4576-af6f-c6252b430368.png">
-AAAAAQQUUUII
-
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211060113-9b4049c4-9b7d-4c9d-942a-c20165013cc3.png">
 
-Una ves visto esto vamos a realizar el mergeo una vez colocados en **master**, pulsamos **click derecho en el nombre del proyecto > Team > Merge**
+Una vez visto esto del **History**, vamos a realizar el mergeo que para eso nos hemos cambiado a la rama **master**, pulsamos **click derecho en el nombre del proyecto > Team > Merge**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211057980-a8d0df5c-215a-4f79-8a7a-6f7b296661b5.png">
 
-Y vamos a indicar la rama que queremos Mergear que es **fastforward**, observe como ya vamos teniendo varias ramas en nuestro proyecto.
+Y vamos a indicar la rama que queremos Mergear que es **fastforward**, observe como ya vamos teniendo varias ramas en nuestro proyecto, de las cuales vamos a marcar **fastforward**.
 
 <img width="597" alt="image" src="https://user-images.githubusercontent.com/23094588/211058353-a161bc94-5a73-4eab-ae06-27e792f4097a.png">
+
+Observe como abajo de donde marcamos la rama tenemos varias opciones que hasta el momento no le habíamos puesto ninguna ateción.
 
 
 
