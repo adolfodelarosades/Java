@@ -4,7 +4,7 @@
 * Mergeo de ramas 01:50
 * Borrar ramas 01:17
 * Varias ramas 06:18
-* Fastforward 07:03
+* Fast Forward Commit y Merge Commit 07:03
 * Rebase 04:50
 * Modificar commit 02:30
 * Peligro de las ramas 03:38
@@ -216,9 +216,11 @@ En resumen tanto **rama_1** como **rama_2** las ha incorporado a **master**. La 
 
 De esta manera hemos visto como trabajar paralelamente en dos tareas y posteriormente integrarlas a nuestra rama principal **master**.
 
-## Fastforward 07:03
+## Fast Forward Commit y Merge Commit 07:03
 
-Vamos a ver lo que es el **FastForward**(avance rápido). Cuando mergea, un **FastForward** es el mejor de los escenarios, ya que técnicamente no es una fusión en absoluto. **Es simplemente que una rama "se pone al día" con otra**.
+### Fast Forward Commit
+
+Vamos a ver lo que es el **FastForward**(avance rápido). Cuando mergea, un **FastForward** es el mejor de los escenarios, ya que técnicamente no es una fusión en absoluto. **Es simplemente una rama que "se pone al día" con otra**.
 
 Vamos a ver un ejemplo. Vamos a crear una nueva ramo con **click derecho en el nombre del proyecto > Team > Switch To > New Branch**
 
@@ -288,7 +290,7 @@ Y vamos a indicar la rama que queremos Mergear que es **fastforward**, observe c
 
 <img width="597" alt="image" src="https://user-images.githubusercontent.com/23094588/211058353-a161bc94-5a73-4eab-ae06-27e792f4097a.png">
 
-Observe como abajo de donde marcamos la rama tenemos varias opciones que hasta el momento no le habíamos puesto ninguna ateción. Estan agrupadas en dos secciones **`Merge options`** y **`Fast Forward options`**, vamos a centrarnos por ahora en **`Fast Forward options`**, cuya primera opción marcada por default es **`if a fast-forward, only update the branch poiter`**(si es un fast-forward, solo actualice el apuntador de la rama). Vamos a usar esta opción para crear el mergeo por lo que simplemente pulsamos en el botón **Merge**.
+Observe como abajo de donde marcamos la rama tenemos varias opciones que hasta el momento no les habíamos puesto ninguna ateción. Estan agrupadas en dos secciones **`Merge options`** y **`Fast Forward options`**, vamos a centrarnos por ahora en **`Fast Forward options`**, cuya primera opción marcada por default es **`if a fast-forward, only update the branch poiter`**(si es un fast-forward, solo actualice el apuntador de la rama). Vamos a usar esta opción para crear el mergeo por lo que simplemente pulsamos en el botón **Merge**.
 
 Nos aparece información indicando que se ha realizado un **Fast-forward**.
 
@@ -298,7 +300,39 @@ Y si observamos en el **History** lo único que ha sucedido al realizar un **Fas
 
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211068261-ab47d855-4b00-4466-a19a-c9a8d9e95904.png">
 
-Por eso al inicio de esta lección deciamos que **Un Fast Forward es simplemente que una rama "se pone al día" con otra**.
+Por eso al inicio de esta lección deciamos que **Un Fast Forward es simplemente una rama que "se pone al día" con otra** y esto lo hace simplemente moviendo el apuntador a la rama con la cual se esta mergeando.
+
+### Merge Commit
+
+Vamos a ver ahora lo que es el **Merge Commit**(Commit de fusión). Vamos a crear otra rama con **click derecho en el nombre del proyecto > Team > Switch To > New Branch**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211071624-557aa15b-a8c3-4bdc-a1ab-e9c470f8a0b3.png">
+
+Vamos a ponerle de nombre a la rama **merge-commit**.
+
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/211071839-38856ba3-9dd7-4a4e-9cb1-d7a49d932e79.png">
+
+Vamos a añadir un texto en el archivo **`caracteristicas_1.txt`** y lo vamos a commitear.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211072147-f18e73cc-9dc9-4ec2-9423-b66bfd1f4ed5.png">
+
+Si vemos el **History** después de commitear el archivo tenemos:
+
+<img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211072289-7c2fdfa4-1674-42c0-8bf7-bacfb21507bc.png">
+
+Se ha creado el commit en la rama **merge-commit** y estamos actualmente en el como lo indica **HEAD**.
+
+Vamos a Mergear la rama **merge-commit** en la rama **master** por lo cual nos debemos cambiar a la rama **master** con **click derecho en el nombre del proyecto > Team > Switch to > master**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211072554-76b84172-649e-41ba-9846-2cd7ea665191.png">
+
+En el **History** observamos que ya estamos en **master** como lo indica **HEAD**.
+
+<img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/211073253-977a5e99-7e29-414d-9330-0acc5ffb5662.png">
+
+
+
+
 
 
 
