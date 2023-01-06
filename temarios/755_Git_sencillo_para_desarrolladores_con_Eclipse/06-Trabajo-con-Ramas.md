@@ -260,13 +260,22 @@ Y sobre todo los cambios los vemos en la vista en el **History**. Al pulsar el b
 
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211057231-75522cc6-e216-438b-86ed-02e21a6471ef.png">
 
-Ademas tenemos al lado otro botón que muestra el mensaje **`Show first parent only`**(mostrar solo el primer padre) que si lo pulsamos por lo menos en esta posición lo que hace es mostrar o no el fichero cambiado.
+Ademas tenemos al lado otro botón que muestra el mensaje **`Show first parent only`**(mostrar solo el primer padre), presisamente en el commit que estamos posicionados tiene dos commits padres. El primero de ellos es el de la **rama_2** y el segundo es el de la **rama_1** ya que los mergeos los hicimos en ese orden.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211062558-850ecb06-6127-4cf4-81d1-6a30c32f4820.png">
 
 <img width="170" alt="image" src="https://user-images.githubusercontent.com/23094588/211060177-6e5c539c-1eda-4a7a-9412-e26094806972.png">
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211060629-f4b76bf7-b49e-4313-93dd-8fe45c78cdee.png">
+Así que si pulsamos el botón **`Show first parent only`** deja de mostrar el archivo cambiado **`fichero1.txt`** que fue cambiado en la **rama_1**, es decir el padre 2.
 
-Vamos a dejarlo como estaba inicialmente(mostrando el archivo).
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211062835-755b703d-98ea-4245-839d-36f81f768b46.png">
+
+Pero observe que en la información que muestra sobre el commit sigue mostrando la referencia a ambos parents.
+
+Vamos a dejarlo como estaba inicialmente(mostrando todos los parents).
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211063119-8cbfaf59-85d6-4576-af6f-c6252b430368.png">
+AAAAAQQUUUII
 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211060113-9b4049c4-9b7d-4c9d-942a-c20165013cc3.png">
