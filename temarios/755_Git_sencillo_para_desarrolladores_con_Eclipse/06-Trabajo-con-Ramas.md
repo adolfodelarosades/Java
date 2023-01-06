@@ -220,7 +220,20 @@ De esta manera hemos visto como trabajar paralelamente en dos tareas y posterior
 
 Vamos a ver lo que es el **FastForward**(avance rápido). Cuando mergea, un **FastForward** es el mejor de los escenarios, ya que técnicamente no es una fusión en absoluto. **Es simplemente que una rama "se pone al día" con otra**.
 
-Vamos a ver un ejemplo.
+Vamos a ver un ejemplo. Vamos a crear una nueva ramo con **click derecho en el nombre del proyecto > Team > Switch To > New Branch**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211052094-675a9185-8623-402a-aee2-f3e45febe058.png">
+
+Vamos a ponerle de nombre a la rama **fastforward**
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/211052581-10a8d991-5d53-48c4-8ea6-d89fdbba7c4c.png">
+
+Nos cambia a la nueva rama **fastforward**, vamos a editar el archivo **caracteristica_1** para añadir el siguiente texto.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211053225-c689d113-60b7-4616-8cc2-a1f5e70a5751.png">
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/211052581-10a8d991-5d53-48c4-8ea6-d89fdbba7c4c.png">
+
 
 
 
