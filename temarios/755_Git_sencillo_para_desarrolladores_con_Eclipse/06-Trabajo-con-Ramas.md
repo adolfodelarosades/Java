@@ -244,13 +244,27 @@ Ahora lo que queremos es Mergear la rama **fastforward** con rama **master** por
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211055370-ea9c848b-b89a-4e3f-8fed-0ee4d4097cc7.png">
 
-
-
-Observe como al cam desaparece la rama 
+Observe como al cambiarnos a la rama **master** en el **History** desaparece la rama **fastforward**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211055682-435ff436-354c-48ca-ae55-bb0f50043e8c.png">
 
+**History** tiene varias vistas dependiendo de la rama en que estemos y sobre todo como este presionado el botón **Show Branches and Tags**.
 
+<img width="286" alt="image" src="https://user-images.githubusercontent.com/23094588/211056955-63986092-1f8a-4e6c-b4d1-ad92e3fb9c16.png">
+
+Si lo pulsamos vamos a ver como cambia la vista en el **History**.
+
+<img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211057231-75522cc6-e216-438b-86ed-02e21a6471ef.png">
+
+Al pulsar el botón **Show Branches and Tags** ya vemos que estamos actualmente en la rama **master** la cual tiene al lado **HEAD** que indica nuestra posición actual, y por delante ya vemos el commit realizado en la rama **fastforward**.
+
+Vamos a realizar el mergeo una vez colocados en **master**, pulsamos **click derecho en el nombre del proyecto > Team > Merge**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211057980-a8d0df5c-215a-4f79-8a7a-6f7b296661b5.png">
+
+Y vamos a indicar la rama que queremos Mergear que es **fastforward**, observe como ya vamos teniendo varias ramas en nuestro proyecto.
+
+<img width="597" alt="image" src="https://user-images.githubusercontent.com/23094588/211058353-a161bc94-5a73-4eab-ae06-27e792f4097a.png">
 
 
 
