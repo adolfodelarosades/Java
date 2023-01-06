@@ -69,7 +69,7 @@ Podemos marcar cualquier commit para ver su información.
 
 En la lección anterior trabajamos sobre una nueva característica de nuestro proyecto para lo cual creamos una nueva rama, ahora lo que queremos es incorporar todos eso cambios en nuestra rama principal **master** a este proceso se le conoce como **Merge o Mergeo**.
 
-Para realizar el **Merge** lo primero que tenemos que hacer es cambiar a la rama **master**, la cual es la rama donde queremos integrar los cambios, para cambiarnos damos **click derecho en el nombre del proyecto > Team > Switch To > master**
+Para realizar el **Merge** lo primero que tenemos que hacer es cambiar a la rama **master**, la cual es la rama donde queremos integrar los cambios, para cambiarnos damos **click derecho en el nombre del proyecto > Team > Switch To > master**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208860868-f2ac0d3c-0b16-4037-afa9-235145496456.png">
 
@@ -117,35 +117,37 @@ Con esto la rama se elimino.
 
 <img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/208871288-c58166fa-d6dd-4b7d-9c62-f1d92fa2af8e.png">
 
-Si revisamos el **History** ya no queda rastro de la que alguna vez tuvimos la rama **caracteristica_1**. Con esto no seriamos capaces de saber que en ese sitio existio una rama, da la impresión de que hicimos commits continuos sobre la rama **master**. No queda ninguna referencia salvo el comentario.
+Si revisamos el **History** ya no queda rastro de que alguna vez tuvimos la rama **caracteristica_1**. Con esto no seriamos capaces de saber que en ese sitio existio una rama, da la impresión de que hicimos commits continuos sobre la rama **master**. No queda ninguna referencia salvo el comentario.
 
 <img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/208871482-6ceddd11-b31b-4c84-a8c2-2188959aa542.png">
 
 ## Varias ramas 06:18
 
-Una vez que hemos visto con una rama, vamos a ver como se trabaja con varias ramas a la vez, para ello vamos a crear una nueva rama llamada **`rama_1`**.
+Una vez que hemos visto como trabajar con una rama adicional, vamos a ver como se trabaja con varias ramas a la vez, para ello vamos a crear una nueva rama con **click derecho en el nombre del proyecto > Branches > New Branch...** llamada **`rama_1`**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208882883-a28cbae4-3013-4e74-ade3-ed6b2ef88ea1.png">
 
 <img width="591" alt="image" src="https://user-images.githubusercontent.com/23094588/208883089-5a4d614d-6039-4468-91c9-64a742834751.png">
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208883158-38ef312d-d461-4994-9f00-490f4e6050e9.png">
+Podemos ver en el **History** que ya tenemos la nueva rama **`rama_1`** y si vemos en el nombre de proyecto observamos que ya estamos colocados en ella.
 
-Ya tenemos la nueva rama **`rama_1`** y estamos colocados en ella.
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208883158-38ef312d-d461-4994-9f00-490f4e6050e9.png">
 
 Vamos a crear una segunda rama llamada **`rama_2`**.
 
 <img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208883638-855e39d8-5a66-44a0-92c6-c72f202e8866.png">
 
-**Aquí debemos tener cuidado por que debemos partir de master y no de rama_1 que es la rama en la que estamos** vamos a cambiarla.
+**Aquí debemos tener cuidado por que debemos partir de master y no de rama_1 que es la rama en la que estamos** vamos a cambiarla seleccionandola con el botón **Select...**
 
 <img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208884000-65700c27-c7ae-4d60-ae60-ee97928d7889.png">
+
+Presionamos en **Finish**.
 
 Ya tenemos creadas las dos ramas nuevas y actualmente estamos colocados en **`rama_2`**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208884160-d02b133e-8f06-4002-8d94-f3a602800022.png">
 
-En el **History** vemos que todo **master**, **rama_1**, **rama_2** y **HEAD** esta a la misma altura ya que hemos creado las dos nuevas ramas pero no hemos realizado ningún commit.
+En el **History** vemos que las ramas **master**, **rama_1**, **rama_2** y **HEAD** esta a la misma altura, ya que hemos creado las dos nuevas ramas pero no hemos realizado ningún commit en ellas.
 
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/208884710-eb78d7e5-36bc-498d-8d7b-11fd112c1977.png">
 
@@ -176,13 +178,13 @@ Si vamos a **History** vemos las diferentes ramas.
 
 Lo que nos dice que a partir de la rama **master** hemos creado la **rama_1** y le hemos hecho un commit y tambien vemos que a partir de la rama **master** hemos creado la **rama_2** hemos hecho un commit y que es la rama donde estamos actualmente.
 
-Hemos hecho dos nuevas funcionalidades en paralelo, ahora lo que vamos a hacer es integrarlas en nuestra rama principal, para lo cual vamos a cambiarnos a la rama **master**.
+Hemos hecho dos nuevas funcionalidades en paralelo, ahora lo que vamos a hacer es integrarlas en nuestra rama principal **master**, para lo cual vamos a cambiarnos a la rama **master** con **click derecho en el nombre del proyecto > Team > Switch To > master**.
+
+Observemos que el cambio hecho tanto en el **fichero_1.txt** como en **caracteristica_1.txt** han desaparecido y ahora **HEAD** esta a la altura de **master**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208891044-54bc88c6-e836-4868-9ae4-992b74f951fc.png">
 
-Observemos que el cambio hecho en tanto en **fichero_1.txt** como en **caracteristica_1.txt** han desaparecido y ahora **HEAD** esta a la altura de **master**.
-
-Entonces vamos a empezar con el Mergeo.
+Entonces vamos a empezar con el Mergeo dando **click derecho en el nombre del proyecto > Team > Merge**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208891665-cedc569d-5b02-416e-952f-d2fe39de7a69.png">
 
@@ -190,42 +192,21 @@ Vamos a comenzar por mergear la rama **rama_2**.
 
 <img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208891849-1c79add9-8569-4387-811d-fe68785e93bc.png">
 
+Nos indica que es un **Fast-Forward**
+
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208891902-03e94131-f1f0-481d-a15d-cda6432f3661.png">
 
-En **History** podemos apreciar que **master** y **HEAD** se han colocado a la altura de **rama_2**.
+En **History** podemos apreciar que **master** y **HEAD** se han colocado a la altura de **rama_2**, simplemente avanzarón su posición.
 
-Ahora vamos a mergear la rama **rama_1**.
+Ahora vamos a mergear la rama **rama_1** dando **click derecho en el nombre del proyecto > Team > Merge** y seleccionando la rama **rama_1**.
 
 <img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/208892652-289b37db-e628-442e-a8ca-6288e3db69f2.png">
 
-En **History** nuestro dibujo a cambiado.
+En **History** nuestro dibujo a cambiado. **Observe como se creo un nuevo commit(Merge commit) al cual automáticamente se le ha puesto el nombre `Merge branch 'rama1'`, y tanto `master` como `HEAD`se han posicionado a esta altura**.
 
 <img width="1225" alt="image" src="https://user-images.githubusercontent.com/23094588/208892806-4446e719-3040-4530-91fb-923aeafe5734.png">
 
-Lo que nos dice es que tanto la **rama_1** y la **rama_2** las ha incorporado a **master**. La **rama_1** la pinta realmente como una rama que salio de **master**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+En resumen tanto **rama_1** como **rama_2** las ha incorporado a **master**. Pero **rama_1** la pinta realmente como una rama que salio de **master**.
 
 ## Fastforward 07:03
 ## Rebase 04:50
