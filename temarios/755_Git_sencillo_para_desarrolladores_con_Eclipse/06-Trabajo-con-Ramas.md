@@ -352,6 +352,23 @@ Hasta este momento nosotros eramos los responsables de crear los commits y asign
 
 A difernecia del **Fast Forward** donde simplemente el apuntador de **master** avanzaba a la altura de la rama **`fastforward`**, en el **Merge Commit** se crea un nuevo commit por delante del creado en la rama **`master-commit`** y hasta allí avanza la rama **master** quedando por delante de la rama fusionada, no a la misma altura como pasaba con el **Fast Forward**. Además de esto se conserva la rama **`master-commit`** como una rama separada de la **master**.
 
+Con **Fast Forward** simulamos que no ha habido rama en cambio con un **Merge Commit** dejamos constancia de que existio una rama.
+
+Ya dependerá de lo que queramos dejar como constancia en el historial de nuestro repositorio, en este último caso de cierta manera complica un poco el flujo, no era del todo necesario obligar a crear un **Merge Commit**.
+
+Si la política de la empresa es crear una rama para cada nueva funcionalidad y luego reintegramos esa funcionalidad a la rama principal, y nadie ha hecho ningún cambio adicional sobre esa rama principal, podríamos ahorrarnos tener una rama de más deliveradamente, mejor dejarlo como sino hubiera echo rama y nadie se entera, esto sería un **Fast Forward**. 
+
+Pero de lo contrario si queremos dejar constancia de que para cada funcionalidad ha existido una rama la forma es usando deliveradamente un **Merge Commit** en lugar del **Fast Forward**.
+
+Existe un tercer caso donde no queda de otra más que hacer el **Merge Commit** esto pasa cuando trabajamos en tareas paralelas como las que hicimos en las ramas **`rama_1`** y **`rama_2`**. 
+
+<img width="385" alt="image" src="https://user-images.githubusercontent.com/23094588/211091851-e1b45242-3ded-4fc4-86a7-4b16d3053f2a.png">
+
+Si recordamos cuando mergemos estas dos ramas siempre usamos la opción por default. Primero mergueamos la **`rama_2`** y se creo un **Fast Forward** y cuando megueamos la **`rama_1`** ***con la opción por default*** se creo un **Merge Commit** por que en este caso ya se habían realizado tareas en paralelo diferntes a las realizadas en la **`rama_1`** y en ese caso si o si se crea el **Merge Commit**.
+
+Por cierto como hemos visto ya tenemos en este momento varias, hasta 5 sino me equivoco, vamos a proceder a borrar las ramas **`rama_1`** y **`rama_2`** con la opción que ya habíamos visto.
+
+
 
 
 
