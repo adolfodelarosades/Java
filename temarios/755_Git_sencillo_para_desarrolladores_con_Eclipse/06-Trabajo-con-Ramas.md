@@ -284,13 +284,21 @@ Una vez visto esto del **History**, vamos a realizar el mergeo que para eso nos 
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211057980-a8d0df5c-215a-4f79-8a7a-6f7b296661b5.png">
 
-Y vamos a indicar la rama que queremos Mergear que es **fastforward**, observe como ya vamos teniendo varias ramas en nuestro proyecto, de las cuales vamos a marcar **fastforward**.
+Y vamos a indicar la rama que queremos Mergear que es **fastforward**, observe como ya vamos teniendo varias ramas en nuestro **Local**, de las cuales vamos a marcar **fastforward**.
 
 <img width="597" alt="image" src="https://user-images.githubusercontent.com/23094588/211058353-a161bc94-5a73-4eab-ae06-27e792f4097a.png">
 
-Observe como abajo de donde marcamos la rama tenemos varias opciones que hasta el momento no le habíamos puesto ninguna ateción.
+Observe como abajo de donde marcamos la rama tenemos varias opciones que hasta el momento no le habíamos puesto ninguna ateción. Estan agrupadas en dos secciones **`Merge options`** y **`Fast Forward options`**, vamos a centrarnos por ahora en **`Fast Forward options`**, cuya primera opción marcada por default es **`if a fast-forward, only update the branch poiter`**(si es un fast-forward, solo actualice el apuntador de la rama). Vamos a usar esta opción para crear el mergeo por lo que simplemente pulsamos en el botón **Merge**.
 
+Nos aparece información indicando que se ha realizado un **Fast-forward**.
 
+<img width="635" alt="image" src="https://user-images.githubusercontent.com/23094588/211067944-a81a378a-a736-4931-a4ff-675766832757.png">
+
+Y si observamos en el **History** lo único que ha sucedido al realizar un **Fast Forward** es que la rama **master** junto con **HEAD** se han movido para apuntar al commit realizado en la rama **fastforward**, es decir ahora **master**, **fastforward** y **HEAD** apuntan al mismo commit.   
+
+<img width="1222" alt="image" src="https://user-images.githubusercontent.com/23094588/211068261-ab47d855-4b00-4466-a19a-c9a8d9e95904.png">
+
+Por eso al inicio de esta lección deciamos que **Un Fast Forward es simplemente que una rama "se pone al día" con otra**.
 
 
 
