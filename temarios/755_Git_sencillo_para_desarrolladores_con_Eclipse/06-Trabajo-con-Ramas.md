@@ -217,6 +217,14 @@ En resumen tanto **rama_1** como **rama_2** las ha incorporado a **master**. La 
 De esta manera hemos visto como trabajar paralelamente en dos tareas y posteriormente integrarlas a nuestra rama principal **master**.
 
 ## Fastforward 07:03
+
+Vamos a ver lo que es el **FastForward**(avance rápido). Cuando mergea, un **FastForward** es el mejor de los escenarios, ya que técnicamente no es una fusión en absoluto. **Es simplemente que una rama "se pone al día" con otra**.
+
+Vamos a ver un ejemplo.
+
+
+
+
 ## Rebase 04:50
 ## Modificar commit 02:30
 ## Peligro de las ramas 03:38
