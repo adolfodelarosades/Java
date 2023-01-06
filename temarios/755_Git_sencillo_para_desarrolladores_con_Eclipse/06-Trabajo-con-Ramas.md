@@ -238,11 +238,13 @@ Vamos a hacer commit de este cambio.
 
 Si vemos el **History** tenemos el nuevo commit en la rama **fastforward** el cual esta por delante de la rama **master** y como estamos posicionados en la rama **fastforward** nuestro **HEAD** aparece junto a ella.
 
+<img width="1220" alt="image" src="https://user-images.githubusercontent.com/23094588/211054147-959734a2-c89f-4d88-93b1-759b8ad50456.png">
+
 Ahora lo que queremos es Mergear la rama **fastforward** con rama **master** por lo que nos debemos cambiar a **master** pulsando **click derecho en el nombre del proyecto > Team > Switch to > master**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211055370-ea9c848b-b89a-4e3f-8fed-0ee4d4097cc7.png">
 
-<img width="1220" alt="image" src="https://user-images.githubusercontent.com/23094588/211054147-959734a2-c89f-4d88-93b1-759b8ad50456.png">
+
 
 Observe como al cam desaparece la rama 
 
