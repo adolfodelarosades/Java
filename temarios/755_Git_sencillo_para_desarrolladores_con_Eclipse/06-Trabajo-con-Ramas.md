@@ -49,11 +49,15 @@ Ya hemos realizado un commit en la rama **`caracteristica_1`**, para apreciar es
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/208857098-310a31b8-ce4d-4db7-b31f-00ee88770923.png">
 
-<img width="1220" alt="image" src="https://user-images.githubusercontent.com/23094588/208857264-df6c4ae3-222b-4da1-be51-416c2c136159.png">
-
 Graficamente nos muestra los cambios que hemos realizado hasta hoy y con color verde tenemos las dos ramas creadas hasta el momento **master** y **caracteristica_1** la cual esta un commit por delante. Además junto a **caracteristica_1** tenemos **HEAD** que nos indica donde estamos actualmente. 
 
-Como esta marcando el último commit que hicimos en la parte de abajo nos informa los datos del commit **commit, Author, Committer, Parent, Branches** y el fichero que se ha modificado en dicho commit. 
+<img width="1220" alt="image" src="https://user-images.githubusercontent.com/23094588/208857264-df6c4ae3-222b-4da1-be51-416c2c136159.png">
+
+Tenemos que tener marcado el botón **Show All Branch and Tags** para ver toda esta información.
+
+![image](https://user-images.githubusercontent.com/23094588/210998528-2c90a052-d157-4a1e-ab11-5bca2fffab34.png)
+
+Como esta marcando el último commit que hicimos en la parte de abajo nos informa los datos del commit **commit, Author, Committer, Parent, Child, Branches y Message** y en este caso el fichero que se ha modificado en dicho commit, si se hubieran modificado más aparecerían aquí también. 
 
 Podemos marcar cualquier commit para ver su información.
 
