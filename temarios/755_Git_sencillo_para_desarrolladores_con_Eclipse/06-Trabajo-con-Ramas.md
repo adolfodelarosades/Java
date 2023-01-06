@@ -282,7 +282,7 @@ Vamos a dejarlo como estaba inicialmente(mostrando todos los parents).
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211060113-9b4049c4-9b7d-4c9d-942a-c20165013cc3.png">
 
-Una vez visto esto del **History**, vamos a realizar el mergeo que para eso nos hemos cambiado a la rama **master**, pulsamos **click derecho en el nombre del proyecto > Team > Merge**
+Una vez visto esto del **History**, vamos a realizar el mergeo que para eso nos hemos cambiado a la rama **master**, pulsamos **click derecho en el nombre del proyecto > Team > Merge**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211057980-a8d0df5c-215a-4f79-8a7a-6f7b296661b5.png">
 
@@ -330,8 +330,27 @@ En el **History** observamos que ya estamos en **master** como lo indica **HEAD*
 
 <img width="1224" alt="image" src="https://user-images.githubusercontent.com/23094588/211073253-977a5e99-7e29-414d-9330-0acc5ffb5662.png">
 
+Vamos a Mergear con **click derecho en el nombre del proyecto > Team > Merge**.
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/211083201-01baf8c0-8d7e-4f51-ba7f-630e3ed0d503.png">
 
+Vamos a seleccionar la rama **merge-commit** y además vamos a seleccionar la segunda opción dentro de **`Fast forward options`**, la que dice **`if a fast-forward, create a merge commit`**(si es un fast-forward, crea un merge commit).
+
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/211083391-1e5faef2-35b6-4d1f-86c2-d00ae018eacb.png">
+
+Pulsamos el botón **Merge** y como resultado obtenemos un **Merged**.
+
+<img width="623" alt="image" src="https://user-images.githubusercontent.com/23094588/211084250-f87a0ff3-550f-4f5f-bca7-ca6d4b2c6194.png">
+
+Si observamos que pinta en el **History** tenemos:
+
+<img width="381" alt="image" src="https://user-images.githubusercontent.com/23094588/211084524-6fe6e7ed-cc80-42c6-a894-d354b1f65a9e.png">
+
+Vamos a ver la difernecia de haber cambiado la opción por default **`if a fast-forward, only update the branch poiter`**(si es un fast-forward, solo actualice el apuntador de la rama) por **`if a fast-forward, create a merge commit`**(si es un fast-forward, crea un merge commit). El mismo nombre lo dice, Git creo automáticamente un commit, para ser más exactos creo un **merge commit**, al cual le asigno el mensaje **`Merge branch 'merge-commit'`**.
+
+Hasta este momento nosotros eramos los responsables de crear los commits y asignarles un nombre, pero al seleccionar que hiciera un **merge commit** Git lo hizo automáticamente.
+
+A difernecia del **Fast Forward** donde simplemente el apuntador de **master** avanzaba a la altura de la rama **`fastforward`**, en el **Merge Commit** se crea un nuevo commit por delante del creado en la rama **`master-commit`** y hasta allí avanza la rama **master** quedando por delante de la rama fusionada, no a la misma altura como pasaba con el **Fast Forward**. Además de esto se conserva la rama **`master-commit`** como una rama separada de la **master**.
 
 
 
