@@ -91,7 +91,7 @@ También proporcionamos un archivo PDF que tiene imágenes en color de las captu
 
 Hay una serie de convenciones de texto utilizadas a lo largo de este libro.
 
-CodeInText: Indica palabras de código en texto, nombres de tablas de bases de datos, nombres de carpetas, nombres de archivos, extensiones de archivos, nombres de rutas, direcciones URL ficticias, entrada de usuario y identificadores de Twitter. Por ejemplo; "La clase de prueba PersistenceTests, declara un método, setupDb()anotado con @BeforeEach, que se ejecuta antes de cada método de prueba".
+**`CodeInText`**: Indica palabras de código en texto, nombres de tablas de bases de datos, nombres de carpetas, nombres de archivos, extensiones de archivos, nombres de rutas, direcciones URL ficticias, entrada de usuario y identificadores de Twitter. Por ejemplo; "La clase de prueba **`PersistenceTests`**, declara un método **`setupDb()`** anotado con **`@BeforeEach`**, que se ejecuta antes de cada método de prueba".
 
 Un bloque de código se establece de la siguiente manera:
 
@@ -111,12 +111,20 @@ public interface ReviewRepository extends CrudRepository<ReviewEntity, Integer> 
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23094588/211625138-b592c287-eac9-443e-9418-680804c12fa0.png)
+
+
 Cualquier entrada o salida de la línea de comandos se escribe de la siguiente manera:
 
+```sh
 kubectl config get-contexts
-Negrita : Indica un término nuevo, una palabra importante, o palabras que ves en pantalla, por ejemplo, en menús o cuadros de diálogo, también aparecen en el texto así. Por ejemplo: "Los dos conceptos centrales del modelo de programación en Spring Data son entidades y repositorios ".
+```
+
+**Negrita**: Indica un término nuevo, una palabra importante, o palabras que ves en pantalla, por ejemplo, en menús o cuadros de diálogo, también aparecen en el texto así. Por ejemplo: "Los dos conceptos centrales del modelo de programación en Spring Data son **entidades** y **repositorios**".
 
 Las advertencias o notas importantes aparecen así.
+
+![image](https://user-images.githubusercontent.com/23094588/211625509-cc4de8d8-c58e-495b-9c1a-2ebd4cee24a8.png)
 
 Los consejos y trucos aparecen así.
 
@@ -124,16 +132,16 @@ Los consejos y trucos aparecen así.
     
 Los comentarios de nuestros lectores es siempre bienvenido.
 
-Comentarios generales : envíe un correo electrónico feedback@packtpub.comy mencione el título del libro en el asunto de su mensaje. Si tiene preguntas sobre cualquier aspecto de este libro, envíenos un correo electrónico a questions@packtpub.com.
+**Comentarios generales**: envíe un correo electrónico **`feedback@packtpub.com`** y mencione el título del libro en el asunto de su mensaje. Si tiene preguntas sobre cualquier aspecto de este libro, envíenos un correo electrónico a **`questions@packtpub.com`**.
 
 **Errata**: Aunque hemos tomado todas las precauciones para garantizar la precisión de nuestro contenido, los errores ocurren. Si ha encontrado un error en este libro, le agradeceríamos que nos lo informara. Visite http://www.packtpub.com/submit-errata , seleccione su libro, haga clic en el enlace Formulario de envío de errata e ingrese los detalles.
 
-**Piratería**: si encuentra copias ilegales de nuestros trabajos en cualquier forma en Internet, le agradeceríamos que nos proporcionara la dirección de la ubicación o el nombre del sitio web. Póngase en contacto con nosotros en copyright@packtpub.comcon un enlace al material.
+**Piratería**: si encuentra copias ilegales de nuestros trabajos en cualquier forma en Internet, le agradeceríamos que nos proporcionara la dirección de la ubicación o el nombre del sitio web. Póngase en contacto con nosotros en **`copyright@packtpub.com`** con un enlace al material.
 
-Si está interesado en convertirse en autor : si hay un tema en el que tiene experiencia y está interesado en escribir o contribuir a un libro, visite http://authors.packtpub.com .
+**Si está interesado en convertirse en autor**: si hay un tema en el que tiene experiencia y está interesado en escribir o contribuir a un libro, visite http://authors.packtpub.com .
 
 ### Comparte tus pensamientos
 
-Una vez que haya leído Microservicios con Spring Boot y Spring Cloud, segunda edición , ¡nos encantaría escuchar sus opiniones! Haga clic aquí para ir directamente a la página de reseñas de Amazon de este libro y compartir sus comentarios.
+Una vez que haya leído **Microservicios con Spring Boot y Spring Cloud, segunda edición**, ¡nos encantaría escuchar sus opiniones! Haga clic aquí para ir directamente a la página de reseñas de Amazon de este libro y compartir sus comentarios.
 
 Su revisión es importante para nosotros y la comunidad tecnológica y nos ayudará a asegurarnos de que ofrecemos contenido de excelente calidad.
