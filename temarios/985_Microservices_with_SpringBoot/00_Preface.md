@@ -15,10 +15,12 @@ Este libro cubre principalmente Spring Boot, Spring Cloud, Docker, Kubernetes, I
 
 Este es un libro práctico que describe paso a paso cómo utilizar juntas estas herramientas de código abierto. Este es el libro que estaba buscando hace ocho años cuando comencé a aprender sobre microservicios, pero con versiones actualizadas de las herramientas de código abierto que cubre.
 
-para quien es este libro
+## Para quien es este libro
+
 Este libro es para desarrolladores y arquitectos de Java y Spring que desean aprender a crear entornos de microservicios desde cero e implementarlos en las instalaciones o en la nube, utilizando Kubernetes como orquestador de contenedores e Istio como malla de servicios. No se requiere estar familiarizado con la arquitectura de microservicios para comenzar con este libro.
 
-Lo que cubre este libro
+## Lo que cubre este libro
+
 El Capítulo 1 , Introducción a los microservicios , lo ayudará a comprender la premisa básica del libro, los microservicios, junto con los conceptos esenciales y los patrones de diseño que los acompañan.
 
 El Capítulo 2 , Introducción a Spring Boot , le presentará Spring Boot y los otros proyectos de código abierto que se utilizarán en la primera parte del libro: Spring WebFlux para desarrollar API RESTful, springdoc-openapi para producir documentación basada en OpenAPI para las API, Spring Data para almacenar datos en bases de datos SQL y NoSQL, Spring Cloud Stream para microservicios basados ​​en mensajes y Docker para ejecutar los microservicios como contenedores.
@@ -69,36 +71,46 @@ El Capítulo 23 , Microservicios de Java compilados nativos , le mostrará cómo
 
 Al final de cada capítulo, encontrará algunas preguntas sencillas que lo ayudarán a resumir parte del contenido cubierto en el capítulo. Evaluaciones es un archivo que se puede encontrar en el repositorio de GitHub que contiene las respuestas a estas preguntas.
 
-Para aprovechar al máximo este libro
+### Para aprovechar al máximo este libro
+
 Se recomienda una comprensión básica de Java y Spring.
 
 Para poder ejecutar todo el contenido del libro, debe tener una Mac o PC con al menos 16 GB de memoria, aunque se recomienda tener al menos 24 GB, ya que el panorama de los microservicios se vuelve más complejo y demanda recursos. hacia el final del libro.
 
 Para obtener una lista completa de los requisitos de software e instrucciones detalladas para configurar su entorno y poder seguir este libro, diríjase al Capítulo 21 (para macOS) y al Capítulo 22 (para Windows).
 
-Descargue los archivos de código de ejemplo
+### Descargue los archivos de código de ejemplo
+
 El paquete de código para el libro está alojado en GitHub en https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-2E . También tenemos otros paquetes de códigos de nuestro rico catálogo de libros y videos disponibles en https://github.com/PacktPublishing/ . ¡Échales un vistazo!
 
-Descarga las imágenes a color
+#### Descarga las imágenes a color
+
 También proporcionamos un archivo PDF que tiene imágenes en color de las capturas de pantalla/diagramas utilizados en este libro. Puede descargarlo aquí: https://static.packt-cdn.com/downloads/9781801072977_ColorImages.pdf .
 
-Convenciones utilizadas
+#### Convenciones utilizadas
+
 Hay una serie de convenciones de texto utilizadas a lo largo de este libro.
 
 CodeInText: Indica palabras de código en texto, nombres de tablas de bases de datos, nombres de carpetas, nombres de archivos, extensiones de archivos, nombres de rutas, direcciones URL ficticias, entrada de usuario y identificadores de Twitter. Por ejemplo; "La clase de prueba PersistenceTests, declara un método, setupDb()anotado con @BeforeEach, que se ejecuta antes de cada método de prueba".
 
 Un bloque de código se establece de la siguiente manera:
 
+```java
 public interface ReviewRepository extends CrudRepository<ReviewEntity, Integer> {
     @Transactional(readOnly = true)
     List<ReviewEntity> findByProductId(int productId);
 }
+```
+
 Cuando deseamos llamar su atención sobre una parte particular de un bloque de código, las líneas o elementos relevantes se resaltan:
 
+```java
 public interface ReviewRepository extends CrudRepository<ReviewEntity, Integer> {
     @Transactional(readOnly = true)
     List<ReviewEntity> findByProductId(int productId);
 }
+```
+
 Cualquier entrada o salida de la línea de comandos se escribe de la siguiente manera:
 
 kubectl config get-contexts
@@ -108,18 +120,20 @@ Las advertencias o notas importantes aparecen así.
 
 Los consejos y trucos aparecen así.
 
-Ponerse en contacto
+### Ponerse en contacto
+    
 Los comentarios de nuestros lectores es siempre bienvenido.
 
 Comentarios generales : envíe un correo electrónico feedback@packtpub.comy mencione el título del libro en el asunto de su mensaje. Si tiene preguntas sobre cualquier aspecto de este libro, envíenos un correo electrónico a questions@packtpub.com.
 
-Errata : Aunque hemos tomado todas las precauciones para garantizar la precisión de nuestro contenido, los errores ocurren. Si ha encontrado un error en este libro, le agradeceríamos que nos lo informara. Visite http://www.packtpub.com/submit-errata , seleccione su libro, haga clic en el enlace Formulario de envío de errata e ingrese los detalles.
+**Errata**: Aunque hemos tomado todas las precauciones para garantizar la precisión de nuestro contenido, los errores ocurren. Si ha encontrado un error en este libro, le agradeceríamos que nos lo informara. Visite http://www.packtpub.com/submit-errata , seleccione su libro, haga clic en el enlace Formulario de envío de errata e ingrese los detalles.
 
-Piratería : si encuentra copias ilegales de nuestros trabajos en cualquier forma en Internet, le agradeceríamos que nos proporcionara la dirección de la ubicación o el nombre del sitio web. Póngase en contacto con nosotros en copyright@packtpub.comcon un enlace al material.
+**Piratería**: si encuentra copias ilegales de nuestros trabajos en cualquier forma en Internet, le agradeceríamos que nos proporcionara la dirección de la ubicación o el nombre del sitio web. Póngase en contacto con nosotros en copyright@packtpub.comcon un enlace al material.
 
 Si está interesado en convertirse en autor : si hay un tema en el que tiene experiencia y está interesado en escribir o contribuir a un libro, visite http://authors.packtpub.com .
 
-Comparte tus pensamientos
+### Comparte tus pensamientos
+
 Una vez que haya leído Microservicios con Spring Boot y Spring Cloud, segunda edición , ¡nos encantaría escuchar sus opiniones! Haga clic aquí para ir directamente a la página de reseñas de Amazon de este libro y compartir sus comentarios.
 
 Su revisión es importante para nosotros y la comunidad tecnológica y nos ayudará a asegurarnos de que ofrecemos contenido de excelente calidad.
