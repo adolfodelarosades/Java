@@ -140,174 +140,182 @@ Más sobre Packt Publishing
 * Questions
 
 ### 3. Creating a Set of Cooperating Microservices
-Technical requirements
-Introducing the microservice landscape
-Information handled by the microservices
-Product service
-Review service
-Recommendation service
-Product composite service
-Infrastructure-related information
-Temporarily replacing service discovery
-Generating skeleton microservices
-Using Spring Initializr to generate skeleton code
-Setting up multi-project builds in Gradle
-Adding RESTful APIs
-Adding an API and a util project
-The API project
-The util project
-Implementing our API
-Adding a composite microservice
-API classes
-Properties
-Integration component
-Composite API implementation
-Adding error handling
-The global REST controller exception handler
-Error handling in API implementations
-Error handling in the API client
-Testing APIs manually
-Adding automated microservice tests in isolation
-Adding semi-automated tests of a microservice landscape
-Trying out the test script
-Summary
-Questions
-Deploying Our Microservices Using Docker
-Technical requirements
-Introduction to Docker
-Running our first Docker commands
-Challenges with running Java in Docker
-Limiting available CPUs
-Limiting available memory
-Using Docker with one microservice
-Changes in source code
-Building a Docker image
-Starting up the service
-Running the container detached
-Managing a landscape of microservices using Docker Compose
-Changes in the source code
-Starting up the microservice landscape
-Automating tests of cooperating microservices
-Troubleshooting a test run
-Summary
-Questions
-Adding an API Description Using OpenAPI
-Technical requirements
-Introduction to using springdoc-openapi
-Adding springdoc-openapi to the source code
-Adding dependencies to the Gradle build files
-Adding OpenAPI configuration and general API documentation to the ProductCompositeService
-Adding API-specific documentation to the ProductCompositeService interface
-Building and starting the microservice landscape
-Trying out the OpenAPI documentation
-Summary
-Questions
-Adding Persistence
-Technical requirements
-Chapter objectives
-Adding a persistence layer to the core microservices
-Adding dependencies
-Storing data with entity classes
-Defining repositories in Spring Data
-Writing automated tests that focus on persistence
-Using Testcontainers
-Writing persistence tests
-Using the persistence layer in the service layer
-Logging the database connection URL
-Adding new APIs
-Calling the persistence layer from the service layer
-Declaring a Java bean mapper
-Updating the service tests
-Extending the composite service API
-Adding new operations in the composite service API
-Adding methods in the integration layer
-Implementing the new composite API operations
-Updating the composite service tests
-Adding databases to the Docker Compose landscape
-The Docker Compose configuration
-Database connection configuration
-The MongoDB and MySQL CLI tools
-Manual tests of the new APIs and the persistence layer
-Updating the automated tests of the microservice landscape
-Summary
-Questions
-Developing Reactive Microservices
-Technical requirements
-Choosing between non-blocking synchronous APIs and event-driven asynchronous services
-Developing non-blocking synchronous REST APIs
-An introduction to Project Reactor
-Non-blocking persistence using Spring Data for MongoDB
-Changes in the test code
-Non-blocking REST APIs in the core services
-Changes in the APIs
-Changes in the service implementations
-Changes in the test code
-Dealing with blocking code
-Non-blocking REST APIs in the composite services
-Changes in the API
-Changes in the service implementation
-Changes in the integration layer
-Changes in the test code
-Developing event-driven asynchronous services
-Handling challenges with messaging
-Consumer groups
-Retries and dead-letter queues
-Guaranteed order and partitions
-Defining topics and events
-Changes in the Gradle build files
-Consuming events in the core services
-Declaring message processors
-Changes in the service implementations
-Adding configuration for consuming events
-Changes in the test code
-Publishing events in the composite service
-Publishing events in the integration layer
-Adding configuration for publishing events
-Changes in the test code
-Running manual tests of the reactive microservice landscape
-Saving events
-Adding a health API
-Using RabbitMQ without using partitions
-Using RabbitMQ with partitions
-Using Kafka with two partitions per topic
-Running automated tests of the reactive microservice landscape
-Summary
-Questions
-Part II: Leveraging Spring Cloud to Manage Microservices
-Introduction to Spring Cloud
-Technical requirements
-The evolution of Spring Cloud
-Using Netflix Eureka for service discovery
-Using Spring Cloud Gateway as an edge server
-Using Spring Cloud Config for centralized configuration
-Using Resilience4j for improved resilience
-Sample usage of the circuit breaker in Resilience4j
-Using Spring Cloud Sleuth and Zipkin for distributed tracing
-Summary
-Questions
-Adding Service Discovery Using Netflix Eureka
-Technical requirements
-Introducing service discovery
-The problem with DNS-based service discovery
-Challenges with service discovery
-Service discovery with Netflix Eureka in Spring Cloud
-Setting up a Netflix Eureka server
-Connecting microservices to a Netflix Eureka server
-Setting up the configuration for development use
-Eureka configuration parameters
-Configuring the Eureka server
-Configuring clients to the Eureka server
-Trying out the discovery service
-Scaling up
-Scaling down
-Disruptive tests with the Eureka server
-Stopping the Eureka server
-Stopping a review instance
-Starting up an extra instance of the product service
-Starting up the Eureka server again
-Summary
-Questions
-Using Spring Cloud Gateway to Hide Microservices behind an Edge Server
+* Technical requirements
+* Introducing the microservice landscape
+   * Information handled by the microservices
+      * Product service
+      * Review service
+      * Recommendation service
+      * Product composite service
+      * Infrastructure-related information
+   * Temporarily replacing service discovery
+* Generating skeleton microservices
+   * Using Spring Initializr to generate skeleton code
+   * Setting up multi-project builds in Gradle
+* Adding RESTful APIs
+   * Adding an API and a util project
+      * The API project
+      * The util project
+   * Implementing our API
+* Adding a composite microservice
+   * API classes
+   * Properties
+   * Integration component
+   * Composite API implementation
+* Adding error handling
+   * The global REST controller exception handler
+   * Error handling in API implementations
+   * Error handling in the API client
+* Testing APIs manually
+* Adding automated microservice tests in isolation
+* Adding semi-automated tests of a microservice landscape
+   * Trying out the test script
+* Summary
+* Questions
+
+### 4. Deploying Our Microservices Using Docker
+* Technical requirements
+* Introduction to Docker
+   * Running our first Docker commands
+* Challenges with running Java in Docker
+   * Limiting available CPUs
+   * Limiting available memory
+* Using Docker with one microservice
+   * Changes in source code
+   * Building a Docker image
+   * Starting up the service
+   * Running the container detached
+* Managing a landscape of microservices using Docker Compose
+   * Changes in the source code
+   * Starting up the microservice landscape
+* Automating tests of cooperating microservices
+   * Troubleshooting a test run
+* Summary
+* Questions
+
+### 5. Adding an API Description Using OpenAPI
+* Technical requirements
+* Introduction to using springdoc-openapi
+* Adding springdoc-openapi to the source code
+   * Adding dependencies to the Gradle build files
+   * Adding OpenAPI configuration and general API documentation to the ProductCompositeService
+   * Adding API-specific documentation to the ProductCompositeService interface
+* Building and starting the microservice landscape
+* Trying out the OpenAPI documentation
+* Summary
+* Questions
+
+### 6. Adding Persistence
+* Technical requirements
+* Chapter objectives
+* Adding a persistence layer to the core microservices
+   * Adding dependencies
+   * Storing data with entity classes
+   * Defining repositories in Spring Data
+* Writing automated tests that focus on persistence
+   * Using Testcontainers
+   * Writing persistence tests
+* Using the persistence layer in the service layer
+   * Logging the database connection URL
+   * Adding new APIs
+   * Calling the persistence layer from the service layer
+   * Declaring a Java bean mapper
+   * Updating the service tests
+* Extending the composite service API
+   * Adding new operations in the composite service API
+   * Adding methods in the integration layer
+   * Implementing the new composite API operations
+   * Updating the composite service tests
+* Adding databases to the Docker Compose landscape
+   * The Docker Compose configuration
+   * Database connection configuration
+   * The MongoDB and MySQL CLI tools
+* Manual tests of the new APIs and the persistence layer
+* Updating the automated tests of the microservice landscape
+* Summary
+* Questions
+
+### 7. Developing Reactive Microservices
+* Technical requirements
+* Choosing between non-blocking synchronous APIs and event-driven asynchronous services
+* Developing non-blocking synchronous REST APIs
+   * An introduction to Project Reactor
+   * Non-blocking persistence using Spring Data for MongoDB
+      * Changes in the test code
+   * Non-blocking REST APIs in the core services
+      * Changes in the APIs
+      * Changes in the service implementations
+      * Changes in the test code
+      * Dealing with blocking code
+   * Non-blocking REST APIs in the composite services
+      * Changes in the API
+      * Changes in the service implementation
+      * Changes in the integration layer
+      * Changes in the test code
+* Developing event-driven asynchronous services
+   * Handling challenges with messaging
+      * Consumer groups
+      * Retries and dead-letter queues
+      * Guaranteed order and partitions
+   * Defining topics and events
+   * Changes in the Gradle build files
+   * Consuming events in the core services
+      * Declaring message processors
+      * Changes in the service implementations
+      * Adding configuration for consuming events
+      * Changes in the test code
+   * Publishing events in the composite service
+      * Publishing events in the integration layer
+      * Adding configuration for publishing events
+      * Changes in the test code
+* Running manual tests of the reactive microservice landscape
+   * Saving events
+   * Adding a health API
+   * Using RabbitMQ without using partitions
+   * Using RabbitMQ with partitions
+   * Using Kafka with two partitions per topic
+* Running automated tests of the reactive microservice landscape
+* Summary
+* Questions
+
+### Part II: Leveraging Spring Cloud to Manage Microservices
+
+### 8. Introduction to Spring Cloud
+* Technical requirements
+* The evolution of Spring Cloud
+* Using Netflix Eureka for service discovery
+* Using Spring Cloud Gateway as an edge server
+* Using Spring Cloud Config for centralized configuration
+* Using Resilience4j for improved resilience
+   * Sample usage of the circuit breaker in Resilience4j
+* Using Spring Cloud Sleuth and Zipkin for distributed tracing
+* Summary
+* Questions
+
+### 9. Adding Service Discovery Using Netflix Eureka
+* Technical requirements
+* Introducing service discovery
+   * The problem with DNS-based service discovery
+   * Challenges with service discovery
+   * Service discovery with Netflix Eureka in Spring Cloud
+* Setting up a Netflix Eureka server
+* Connecting microservices to a Netflix Eureka server
+* Setting up the configuration for development use
+   * Eureka configuration parameters
+   * Configuring the Eureka server
+   * Configuring clients to the Eureka server
+* Trying out the discovery service
+   * Scaling up
+   * Scaling down
+   * Disruptive tests with the Eureka server
+      * Stopping the Eureka server 
+      * Stopping a review instance
+      * Starting up an extra instance of the product service
+* Starting up the Eureka server again
+* Summary
+* Questions
+
+### 10. Using Spring Cloud Gateway to Hide Microservices behind an Edge Server
 Technical requirements
 Adding an edge server to our system landscape
 Setting up Spring Cloud Gateway
