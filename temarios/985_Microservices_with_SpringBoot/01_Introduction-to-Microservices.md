@@ -136,9 +136,7 @@ Por ahora, piense en un contenedor como un proceso aislado. Aprenderemos más so
 <hr>
 
 * Un motor de contenedores(container engine), como Docker, no es suficiente para poder utilizar contenedores en un entorno de producción. Se necesita algo que pueda garantizar que todos los contenedores estén en funcionamiento y que pueda escalar los contenedores en una cantidad de servidores, proporcionando así una alta disponibilidad y mayores recursos informáticos.
-* Este tipo de productos es conocidos como **orquestadores de contenedores(container orchestrators)**. Varios productos han evolucionado en los últimos años, como **Apache Mesos**, **Docker en modo Swarm**, **Amazon ECS**, **HashiCorp Nomad** y **Kubernetes**. **Kubernetes** fue desarrollado inicialmente por Google. Cuando Google lanzó v1.0 en 2015, también donó Kubernetes a **CNCF**( https://www.cncf.io/ ). Durante 2018, **Kubernetes** se convirtió en una especie de estándar de facto, disponible tanto preempaquetado para uso local como un servicio de la mayoría de los principales proveedores de nube.
-
-<hr>
+* Este tipo de productos es conocidos como **orquestadores de contenedores(container orchestrators)**. Varios productos han evolucionado en los últimos años, como **Apache Mesos**, **Docker en modo Swarm**, **Amazon ECS**, **HashiCorp Nomad** y **Kubernetes**. **Kubernetes** fue desarrollado inicialmente por Google. Cuando Google lanzó v1.0 en 2015, también donó Kubernetes a **CNCF**( https://www.cncf.io/ ). Durante 2018, **Kubernetes** se convirtió en una especie de estándar de facto, disponible tanto como un preempaquetado(pre-packaged) para uso local como un servicio de la mayoría de los principales proveedores de nube(cloud providers).
 
 ## 📖 
 
