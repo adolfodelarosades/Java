@@ -2,11 +2,11 @@
 
 ![image](https://user-images.githubusercontent.com/23094588/211580816-d05b62b4-29d8-4417-8b70-63bdbf5e15d8.png)
 
-**TIME TO COMPLETE**: 16h 47m
-**TOPICS**: Spring
-**PUBLISHED BY**: Packt Publishing
-**PUBLICATION DATE**: July 2021
-**PRINT LENGTH**: 774 pages
+* **TIME TO COMPLETE**: 16h 47m
+* **TOPICS**: Spring
+* **PUBLISHED BY**: Packt Publishing
+* **PUBLICATION DATE**: July 2021
+* **PRINT LENGTH**: 774 pages
 
 **Cree e implemente aplicaciones basadas en microservicios con calidad de producción: nueva edición actualizada para el buen funcionamiento de Spring, Java, Kubernetes e Istio, con una introducción a Helm 3 y soporte para Mac y Windows con WSL2**
 
