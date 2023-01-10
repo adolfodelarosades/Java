@@ -127,22 +127,20 @@ En 2014, también aprendí sobre una serie de nuevos proyectos de código abiert
 * Pivotal lanzó **Spring Cloud**, que envuelve partes de **Netflix OSS** para proporcionar capacidades como el descubrimiento de servicios dinámicos, la gestión de la configuración, el seguimiento distribuido, la ruptura de circuitos y más.
 * También aprendí sobre **Docker** y la revolución de contenedores, que es excelente para minimizar la brecha entre el desarrollo y la producción. Ser capaz de empaquetar un componente no solo como un artefacto de tiempo de ejecución desplegable(por ejemplo, un archivo Java **`war`** o un **`jar`**), sino como una imagen completa, lista para lanzarse como un contenedor en un servidor que ejecuta Docker, fue un gran paso adelante para el desarrollo y las pruebas.
 
-<hr>
+   ## 💡 
 
-## 💡 
+   Por ahora, piense en un contenedor como un proceso aislado. Aprenderemos más sobre los contenedores en el Capítulo 4, Implementación de nuestros microservicios mediante Docker.
 
-Por ahora, piense en un contenedor como un proceso aislado. Aprenderemos más sobre los contenedores en el Capítulo 4, Implementación de nuestros microservicios mediante Docker.
-
-<hr>
+   <hr>
 
 * Un motor de contenedores(container engine), como Docker, no es suficiente para poder utilizar contenedores en un entorno de producción. Se necesita algo que pueda garantizar que todos los contenedores estén en funcionamiento y que pueda escalar los contenedores en una cantidad de servidores, proporcionando así una alta disponibilidad y mayores recursos informáticos.
 * Este tipo de productos es conocidos como **orquestadores de contenedores(container orchestrators)**. Varios productos han evolucionado en los últimos años, como **Apache Mesos**, **Docker en modo Swarm**, **Amazon ECS**, **HashiCorp Nomad** y **Kubernetes**. **Kubernetes** fue desarrollado inicialmente por Google. Cuando Google lanzó v1.0 en 2015, también donó Kubernetes a **CNCF**( https://www.cncf.io/ ). Durante 2018, **Kubernetes** se convirtió en una especie de estándar de facto, disponible tanto como un preempaquetado(pre-packaged) para uso local como un servicio de la mayoría de los principales proveedores de nube(cloud providers).
 
-## 📖 
+   ## 📖 
 
-Como se explica en https://kubernetes.io/blog/2015/04/borg-predecessor-to-kubernetes/, Kubernetes es en realidad una reescritura basada en código abierto de un orquestador de contenedores interno, llamado **Borg**, utilizado por Google durante más de una década antes de que se fundara el proyecto Kubernetes.
+   Como se explica en https://kubernetes.io/blog/2015/04/borg-predecessor-to-kubernetes/, Kubernetes es en realidad una reescritura basada en código abierto de un orquestador de contenedores interno, llamado **Borg**, utilizado por Google durante más de una década antes de que se fundara el proyecto Kubernetes.
 
-<hr>
+   <hr>
 
 * En 2018 comencé a aprender sobre el concepto de **malla de servicios(service mesh)** y cómo una malla de servicios puede complementar un orquestador de contenedores para descargar aún más los microservicios de las responsabilidades para hacerlos manejables y resistentes.
 
