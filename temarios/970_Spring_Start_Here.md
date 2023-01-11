@@ -17,7 +17,7 @@
 
 ## Contenido
 
-### [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/00_Introduction.md)
+### [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/00_Introduction.md) 👍
 
 * foreword
 * preface
@@ -26,9 +26,9 @@
 * about the author
 * about the cover illustration
 
-### Part 1 Fundamentals
+### [Part 1 Fundamentals](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/001_Part1.md) 👍
 
-* 1 Spring in the real world
+* [1 Spring in the real world](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/01_Spring-in-the-real-world.md)
    * 1.1 Why should we use frameworks?
    * 1.2 The Spring ecosystem
       * Discovering Spring Core: The foundation of Spring
@@ -36,7 +36,6 @@
       * The Spring MVC capabilities for developing web apps
       * The Spring testing feature
       * Projects from the Spring ecosystem
-
    * 1.3 Spring in real-world scenarios
       * Using Spring in the development of a backend app
       * Using Spring in a test automation app
