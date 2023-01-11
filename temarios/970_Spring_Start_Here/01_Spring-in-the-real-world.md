@@ -1,3 +1,5 @@
+# 1 Spring en el mundo real
+
 * 1 Spring in the real world
    * 1.1 Why should we use frameworks?
    * 1.2 The Spring ecosystem
@@ -18,14 +20,16 @@
       * You won’t benefit from switching to a framework
    * 1.5 What will you learn in this book
 
-1 primavera en el mundo real
+
+
 Este capítulo cubre
 
-que es un marco
-Cuándo usar y cuándo evitar el uso de marcos
-Qué es el marco Spring
-Uso de Spring en escenarios del mundo real
-Spring Framework (en breve, Spring) es un marco de aplicación que forma parte del ecosistema de Java. Un marco de aplicaciónes un conjunto de funcionalidades comunes de software que proporciona una estructura básica para desarrollar una aplicación. Un marco de aplicación facilita el esfuerzo de escribir una aplicación al eliminar el esfuerzo de escribir todo el código del programa desde cero.
+* Que es un framework
+* Cuándo usar y cuándo evitar el uso de frameworks
+* Qué es el Spring framework
+* Uso de Spring en escenarios del mundo real
+
+**Spring Framework** (en breve, **Spring**) es un framework de aplicación que forma parte del ecosistema de Java. Un marco de aplicaciónes un conjunto de funcionalidades comunes de software que proporciona una estructura básica para desarrollar una aplicación. Un marco de aplicación facilita el esfuerzo de escribir una aplicación al eliminar el esfuerzo de escribir todo el código del programa desde cero.
 
 Usamos Spring en el desarrollo de muchos tipos de aplicaciones hoy en día, desde grandes soluciones de back-end hasta aplicaciones de prueba de automatización. Según muchos informes de encuestas sobre tecnologías Java (como este de JRebel de 2020: http://mng.bz/N4V7 ; o este de JAXEnter: http://mng.bz/DK9a ), Spring es el Java más utilizado. marco hoy.
 
