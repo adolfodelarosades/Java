@@ -70,18 +70,57 @@ Incluso si el primer propósito de este libro no es prepararlo para una certific
 
 ### Quién debería leer este libro
 
-Este libro es para desarrolladores que comprenden la programación básica orientada a objetos y los conceptos de Java y desean aprender Spring o refrescar sus conocimientos básicos de Spring. No necesita tener experiencia previa con ningún marco, pero debe comprender Java porque este es el lenguaje que usamos a lo largo de los ejemplos del libro.
+Este libro es para desarrolladores que comprenden la programación básica orientada a objetos y los conceptos de **Java** y desean aprender **Spring** o refrescar sus conocimientos básicos de **Spring**. No necesita tener experiencia previa con ningún framework, pero debe comprender **Java** porque este es el lenguaje que usamos a lo largo de los ejemplos del libro.
 
-Spring es una de las tecnologías más encontradas en las aplicaciones de Java y probablemente se usará aún más en el futuro. Para un desarrollador de Java, esto hace que Spring sea un elemento imprescindible hoy en día. Aprender lo que le enseño en este libro lo ayudará a mejorar sus habilidades, le brindará los conocimientos básicos de Spring y las habilidades que necesita para aprobar con éxito una entrevista de Java y trabajar en una aplicación que utilice tecnologías de Spring. El libro también abre puertas para profundizar en el estudio de los detalles de Spring que son más complejos.
+**Spring** es una de las tecnologías más encontradas en las aplicaciones de **Java** y probablemente se usará aún más en el futuro. Para un desarrollador de **Java**, esto hace que **Spring** sea un elemento imprescindible hoy en día. Aprender lo que le enseño en este libro lo ayudará a mejorar sus habilidades, le brindará los conocimientos básicos de **Spring** y las habilidades que necesita para aprobar con éxito una entrevista de **Java** y trabajar en una aplicación que utilice tecnologías de **Spring**. El libro también abre puertas para profundizar en el estudio de los detalles de **Spring** que son más complejos.
 
-### Cómo está organizado este libro: una hoja de ruta
+### Cómo está organizado este libro: una hoja de ruta(roadmap)
 
-Este libro está dividido en dos partes que abarcan 15 capítulos. Comenzaremos nuestra discusión (en la primera parte del libro) con ejemplos sencillos para mostrarle cómo hacer que Spring conozca su aplicación. Luego, crearemos ejemplos que le permitan comprender el núcleo de cualquier aplicación Spring del mundo real. Una vez que terminemos con los conceptos básicos de Spring Core, analizaremos los conceptos básicos de Spring Data y Spring Boot.
+Este libro está dividido en dos partes que abarcan 15 capítulos. Comenzaremos nuestra discusión (en la primera parte del libro) con ejemplos sencillos para mostrarle cómo hacer que **Spring** conozca su aplicación. Luego, crearemos ejemplos que le permitan comprender el núcleo de cualquier aplicación **Spring** del mundo real. Una vez que terminemos con los conceptos básicos de **Spring Core**, analizaremos los conceptos básicos de **Spring Data** y **Spring Boot**.
 
 Desde el capítulo 2 hasta el final de este libro, encontrará que los aspectos teóricos van acompañados de proyectos en los que aplicamos las nociones que discutimos. Explico el código en estos ejemplos fragmento por fragmento. Mi recomendación es que construyas estos ejemplos conmigo mientras lees. Luego, puedes comparar tu resultado con mi solución.
 
-Como se presenta en la siguiente figura, diseñé los capítulos del libro para leerlos en el orden indicado. En los capítulos 2 a 5, donde analizamos el contexto de Spring, es posible que encuentre ejemplos predominantemente teóricos. Para cualquier persona con poca o ninguna experiencia con Spring, es esencial comenzar de esta manera. ¡No te preocupes! Presento los fundamentos de la manera más sencilla posible, y luego nuestros ejemplos y discusiones se vuelven gradualmente más sofisticados para reflejar el código listo para producción del mundo real.
+Como se presenta en la siguiente figura, diseñé los capítulos del libro para leerlos en el orden indicado. En los capítulos 2 a 5, donde analizamos el contexto de **Spring**, es posible que encuentre ejemplos predominantemente teóricos. Para cualquier persona con poca o ninguna experiencia con **Spring**, es esencial comenzar de esta manera. ¡No te preocupes! Presento los fundamentos de la manera más sencilla posible, y luego nuestros ejemplos y discusiones se vuelven gradualmente más sofisticados para reflejar el código listo para producción del mundo real.
 
-## about the author
-## about the cover illustration
+<img width="931" alt="image" src="https://user-images.githubusercontent.com/23094588/211935540-e155f0d2-ad5b-4349-80eb-4e899561ffae.png">
+
+**Figura 1** Si comienza con ningún (o muy poco) conocimiento sobre **Spring**, la mejor manera de leer el libro es comenzar con el primer capítulo y leer todo en orden.
+
+Si ya comprende bien el ***contexto de Spring*** y ***Spring AOP***, puede omitir la parte 1 e ir directamente a la parte 2, "Implementación" (capítulos 7-15), como se presenta en la siguiente figura.
+
+<img width="869" alt="image" src="https://user-images.githubusercontent.com/23094588/211935868-b6bde8b3-3d0e-4b6f-a71d-4d53dd29328f.png">
+
+**Figura 2.** Si ya comprende la base del ***Spring framework*** y sabe cómo usar el ***contexto de Spring(Spring context)** y los ***aspectos de diseño(design aspects)***, puede comenzar con la parte 2, donde usamos las capacidades de Spring para implementar escenarios de duplicación de aplicaciones(apps mirroring scenarios) que enfrenta en sistemas del mundo real.
+
+Una vez que termine de leer este libro, habrá aprendido muchas habilidades para desarrollar aplicaciones como un profesional. Aprenderá a conectarse a bases de datos utilizando las técnicas más comunes en la actualidad y aprenderá cómo hacer que las aplicaciones se comuniquen entre sí. Terminaremos el libro enseñando un tema crítico: las pruebas. Sazonaré el texto aquí y allá agregando historias de mi experiencia y notas con valiosos consejos.
+
+Recuerda que **Spring** es un vasto universo, y un libro no te enseñará todo sobre él. Con este libro, comienza con el framework y aprende las habilidades fundamentales del uso de los valiosos componentes de **Spring**. A lo largo del libro, hago referencia, cuando corresponde, a otros recursos y libros que detallan los temas que discutimos. Le recomiendo encarecidamente que lea esos recursos y libros adicionales para ampliar su perspectiva sobre los temas discutidos.
+
+### Sobre el código
+
+El libro proporciona alrededor de 70 proyectos, en los que trabajaremos en los capítulos 2 al 14. Cuando trabajo en un ejemplo específico, menciono el nombre del proyecto, que implementa ese ejemplo. Mi recomendación es tratar de escribir su ejemplo desde cero y luego usar el proyecto provisto solo para comparar su solución con la mía. Este enfoque lo ayudará a comprender mejor los conceptos que está aprendiendo.
+
+Cada uno de los proyectos está construido con **Maven**, lo que facilita la importación a cualquier IDE. Usé **IntelliJ IDEA** para escribir los proyectos, pero puede optar por ejecutarlos en **Eclipse**, **Netbeans** o cualquier otra herramienta de su elección. El ***Apéndice F*** le brinda una descripción general de las herramientas recomendadas.
+
+Este libro contiene muchos ejemplos de código fuente, tanto en listados numerados como en línea con el texto normal. En ambos casos, el código fuente se formatea en una fuente de ancho fijo como esta para separarlo del texto ordinario. A veces, el código también está en negrita para resaltar el código que ha cambiado con respecto a los pasos anteriores del capítulo, como cuando se agrega una nueva función a una línea de código existente. En muchos casos, se ha reformateado el código fuente original; hemos agregado saltos de línea y rediseñado la sangría para acomodar el espacio de página disponible en el libro. En casos raros, incluso esto no fue suficiente, y los listados incluyen marcadores de continuación de línea ( ➥). Además, los comentarios en el código fuente a menudo se eliminan de las listas cuando el código se describe en el texto. Las anotaciones de código acompañan a muchos de los listados, destacando conceptos importantes.
+
+### Foro de discusión liveBook
+
+La compra de *Spring Start Here* incluye acceso gratuito a un foro web privado administrado por Manning Publications donde puede hacer comentarios sobre el libro, hacer preguntas técnicas y recibir ayuda del autor y de otros usuarios. Para acceder al foro, vaya a https://livebook.manning.com/#!/book/spring-start-here/discussion . También puede obtener más información sobre los foros de Manning y las reglas de conducta en https://livebook.manning.com/#!/discussion .
+
+El compromiso de Manning con nuestros lectores es proporcionar un lugar donde pueda tener lugar un diálogo significativo entre lectores individuales y entre lectores y el autor. No es un compromiso de participación específica por parte del autor, cuya contribución al foro es voluntaria (y no remunerada). ¡Le sugerimos que intente hacerle algunas preguntas desafiantes al autor para que su interés no se desvíe! El foro y los archivos de debates anteriores estarán accesibles desde el sitio web de la editorial mientras el libro esté impreso.
+
+
+## Sobre el Autor - About the author
+
+Laurenţiu Spilcă es líder de desarrollo dedicado y capacitador en Endava, donde lidera el desarrollo de proyectos en el mercado financiero con usuarios en Europa, EE.UU. y Asia. Tiene más de 10 años de experiencia. Laurenţiu cree que es importante no solo ofrecer software de alta calidad, sino también compartir conocimientos y ayudar a otros a mejorar. Estas creencias lo han llevado a diseñar e impartir cursos relacionados con las tecnologías **Java** y realizar presentaciones y talleres. Su cuenta de Twitter es @laurspilca.
+
+
+## Sobre la ilustración de la portada - About the cover illustration
+
+La figura de la portada de *Spring Start Here* se titula “Femme d'ajaccio isle de Corse”, o una mujer de Ajaccio en la isla de Córcega. La ilustración está tomada de una colección de trajes de gala de varios países de Jacques Grasset de Saint-Sauveur (1757-1810), titulada Trajes de Différents Pays , publicada en Francia en 1797. Cada ilustración está finamente dibujada y coloreada a mano. La rica variedad de la colección de Grasset de Saint-Sauveur nos recuerda vívidamente cuán diferentes culturalmente eran las ciudades y regiones del mundo hace apenas 200 años. Aislados unos de otros, las personas hablaban diferentes dialectos e idiomas. En las calles o en el campo, era fácil identificar dónde vivían y cuál era su oficio o posición en la vida solo por su vestimenta.
+
+La forma de vestir ha cambiado desde entonces y la diversidad por regiones, tan rica en la época, se ha desvanecido. Ahora es difícil distinguir a los habitantes de los diferentes continentes, y mucho menos a los diferentes pueblos, regiones o países. Quizás hemos cambiado la diversidad cultural por una vida personal más variada, ciertamente por una vida tecnológica más variada y acelerada.
+
+En una época en la que es difícil distinguir un libro informático de otro, Manning celebra la inventiva y la iniciativa del negocio informático con portadas de libros basadas en la rica diversidad de la vida regional de hace dos siglos, revivida por Grasset de Saint- Los cuadros de Sauveur.
 
