@@ -14,7 +14,7 @@
 
 ![image](https://user-images.githubusercontent.com/23094588/211879763-1eb27535-e07c-45d4-8565-bc8cdd001452.png)
 
-## Foreword - Prefacio
+## Prefacio - Foreword
 
 Nacido como una alternativa a los **EJB** a principios de la década de 2000, **Spring Framework** superó rápidamente a su oponente con la simplicidad de su modelo de programación, la variedad de sus funciones y sus integraciones de bibliotecas de terceros. El ecosistema **Spring** creció a lo largo de los años hasta convertirse en el framework de desarrollo más amplio y maduro disponible en cualquier lenguaje de programación. Su principal competidor abandonó la carrera cuando **Oracle** detuvo la evolución de **Java EE 8** y la comunidad se hizo cargo de su mantenimiento a través de **Jakarta EE**.
 
@@ -31,7 +31,7 @@ Este libro se destaca porque al lector también se le presentan preocupaciones f
 Les deseo una agradable lectura, y nunca duden en ensuciarse las manos con algún código cada vez que crean que las cosas se complican.
 
 
-## Preface - Prefacio
+## Prefacio - Preface
 
 Compartir conocimientos y crear material de aprendizaje es un pasatiempo para mí. Además de ser desarrollador de software, también soy docente. Como capacitador de **Java** desde 2009, he enseñado **Java** a miles de desarrolladores con varios niveles de experiencia, desde estudiantes universitarios hasta desarrolladores experimentados en grandes corporaciones. En los últimos años, he llegado a considerar que **Spring** es algo que los principiantes deben aprender. Las aplicaciones de hoy en día ya no se implementan con lenguajes básicos: casi todo se basa en framworks. Dado que **Spring** es el framworks de aplicaciones más popular en el mundo de **Java** hoy en día, **Spring** es algo que un desarrollador debe aprender en sus primeros pasos de desarrollo de software.
 
@@ -41,11 +41,11 @@ La tecnología cambia rápidamente. Pero no solo está cambiando la tecnología.
 
 Diseñé *Spring Start Here* para que sea el libro con el que desea comenzar a aprender el **Spring Framework**. Este libro lo guía paso a paso, brindándole todo el conocimiento teórico esencial, acompañado de ejemplos que aplican en la práctica los temas discutidos. Espero que este libro le brinde un valor significativo a usted, el lector, y lo ayude a aumentar rápidamente su conocimiento de **Spring** y le abra las puertas para un mayor aprendizaje.
 
-## Acknowledgments - Agradecimientos
+## Agradecimientos - Acknowledgments
 
 Este libro no sería posible sin la gran cantidad de personas inteligentes, profesionales y amigables que me ayudaron durante todo el proceso de desarrollo.
 
-## About this book - Sobre este libro
+## Sobre este libro - About this book
 
 Dado que abrió este libro, asumo que es un desarrollador de software en el ecosistema de **Java** que descubrió que es útil aprender **Spring**. Este libro le enseña los fundamentos de **Spring**, asumiendo que no sabe nada sobre frameworks y, por supuesto, sobre **Spring**.
 
