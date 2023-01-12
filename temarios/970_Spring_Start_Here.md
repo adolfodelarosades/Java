@@ -28,7 +28,7 @@
 
 ### [Part 1 Fundamentals](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/001_Part1.md) 👍
 
-* [1 Spring in the real world](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/01_Spring-in-the-real-world.md)
+* [1 Spring in the real world](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/01_Spring-in-the-real-world.md) 👍
    * 1.1 Why should we use frameworks?
    * 1.2 The Spring ecosystem
       * Discovering Spring Core: The foundation of Spring
@@ -48,7 +48,7 @@
       * You won’t benefit from switching to a framework
    * 1.5 What will you learn in this book
 
-* 2 The Spring context: Defining beans
+* [2 The Spring context: Defining beans](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/02_Spring-context.md)
    * 2.1 Creating a Maven project
    * 2.2 Adding new beans to the Spring context
       * Using the @Bean annotation to add beans into the Spring context
