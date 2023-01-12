@@ -212,164 +212,180 @@ Ahora es el momento de agregar las dependencias necesarias a nuestro proyecto. D
 </project>
 ```
 
+Una cosa crítica a observar es que Spring está diseñado para ser modular. Por modular, me refiero a que no necesita agregar todo Spring a su aplicación cuando usa algo fuera del ecosistema Spring. Solo necesita agregar las partes que usa. Por esta razón, en el listado 2.5, verá que solo agregué la dependencia **`spring-context`**, que le indica a **Maven** que extraiga las dependencias necesarias para que podamos usar el **contexto Spring**. A lo largo del libro, agregaremos varias dependencias a nuestros proyectos de acuerdo con lo que implementemos, pero siempre agregaremos solo lo que necesitamos.
 
-Una cosa crítica a observar es que Spring está diseñado para ser modular. Por modular, me refiero a que no necesita agregar todo Spring a su aplicación cuando usa algo fuera del ecosistema Spring. Solo necesita agregar las partes que usa. Por esta razón, en el listado 2.5, verá que solo agregué la dependencia del contexto de primavera, que le indica a Maven que extraiga las dependencias necesarias para que podamos usar el contexto Spring. A lo largo del libro, agregaremos varias dependencias a nuestros proyectos de acuerdo con lo que implementemos, pero siempre agregaremos solo lo que necesitamos.
+**NOTA** Quizás se pregunte cómo supe qué dependencia de **Maven** debería agregar. La verdad es que los he usado tantas veces que me los sé de memoria. Sin embargo, no es necesario memorizarlos. Siempre que trabaje con un nuevo proyecto de Spring, puede buscar las dependencias que necesita agregar directamente en la referencia de Spring ( https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core .html ). Generalmente, las dependencias de Spring son parte del ID de grupo(group ID) **`org.springframework`**.
 
-NOTA Quizás se pregunte cómo supe qué dependencia de Maven debería agregar. La verdad es que los he usado tantas veces que me los sé de memoria. Sin embargo, no es necesario memorizarlos. Siempre que trabaje con un nuevo proyecto de Spring, puede buscar las dependencias que necesita agregar directamente en la referencia de Spring ( https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core .html ). Generalmente, las dependencias de Spring son parte del ID de grupo org.springframework.
+Con la dependencia agregada a nuestro proyecto, podemos crear una instancia del **contexto Spring**. En la siguiente lista, puede ver cómo cambié el método **`main`** para crear la instancia de **contexto de Spring**.
 
-Con la dependencia agregada a nuestro proyecto, podemos crear una instancia del contexto Spring. En la siguiente lista, puede ver cómo cambié el método principal para crear la instancia de contexto de Spring.
+**Listado 2.6** Creando la instancia del **contexto Spring**
 
-Listado 2.6 Creando la instancia del contexto Spring
-
-public class Main { 
+```java
+public class Main {
  
-  public static void main(String[] args) { 
+  public static void main(String[] args) {
     var context = 
        new AnnotationConfigApplicationContext();     ❶
-  
-    Loro p = new Loro(); 
-  }
-}
-❶ Crea una instancia del contexto Spring
-
-NOTA Usamos la clase AnnotationConfigApplicationContext para crear la instancia de contexto Spring. Spring ofrece múltiples implementaciones. Debido a que en la mayoría de los casos utilizará la clase AnnotationConfigApplicationContext (la implementación que utiliza el enfoque más utilizado hoy en día: anotaciones), nos centraremos en esta en este libro. Además, solo te digo lo que necesitas saber para la discusión actual. Si recién está comenzando con Spring, mi recomendación es evitar entrar en detalles con las implementaciones de contexto y las cadenas de herencia de estas clases. Lo más probable es que, si lo hace, se pierda con detalles sin importancia en lugar de concentrarse en las cosas esenciales.
-
-Como se muestra en la figura 2.8, creó una instancia de Parrot , agregó las dependencias del contexto Spring a su proyecto y creó una instancia del contexto Spring. Su objetivo es agregar el objeto Parrot al contexto, que es el siguiente paso.
-
-
-
-Figura 2.8 Ha creado la instancia de contexto de Spring y una instancia de Parrot . Ahora, desea agregar la instancia de Parrot dentro del contexto de Spring para que Spring sea consciente de esta instancia.
-
-Acabamos de terminar de crear el proyecto de requisitos previos (esqueleto), que usaremos en las siguientes secciones para comprender cómo agregar beans al contexto de Spring. En la sección 2.2.1, continuamos aprendiendo cómo agregar la instancia al contexto Spring usando la anotación @Bean . Además, en las secciones 2.2.2 y 2.2.3, también aprenderá las alternativas de agregar la instancia usando anotaciones de estereotipo y hacerlo mediante programación. Después de discutir los tres enfoques, los compararemos y aprenderá las mejores circunstancias para usar cada uno.
-
-2.2.1 Usando la anotación @Bean para agregar beans al contexto Spring
-EnEn esta sección, discutiremos cómo agregar una instancia de objeto al contexto de Spring usando la anotación @Bean . Esto le permite agregar las instancias de las clases definidas en su proyecto (como Parrot en nuestro caso), así como las clases que no creó usted mismo pero que usa en su aplicación. Creo que este enfoque es el más fácil de entender al empezar. Recuerde que la razón por la que aprende a agregar beans al contexto de Spring es que Spring solo puede administrar los objetos que forman parte de él. Primero, le daré un ejemplo directo de cómo agregar un bean al contexto Spring usando la anotación @Bean . Luego, le mostraré cómo agregar varios frijoles del mismo tipo o de otro tipo.
-
-Los pasos que debe seguir para agregar un bean al contexto Spring usando la anotación @Bean son los siguientes (figura 2.9):
-
-Defina una clase de configuración (anotada con @Configuration ) para su proyecto, que, como veremos más adelante, usamos para configurar el contexto de Spring.
-
-Agregue un método a la clase de configuración que devuelva la instancia del objeto que desea agregar al contexto y anote el método con la anotación @Bean .
-
-Haga que Spring use la clase de configuración definida en el paso 1. Como aprenderá más adelante, usamos clases de configuración para escribir diferentes configuraciones para el marco.
-
-
-
-Figura 2.9 Pasos para agregar el bean al contexto usando la anotación @Bean . Al agregar la instancia al contexto de Spring, hace que el marco sea consciente del objeto, lo que le permite administrar la instancia.
-
-Sigamos estos pasos y apliquémoslos en el proyecto llamado "sq-c2-ex2". Para mantener separados todos los pasos que discutimos, le recomiendo que cree nuevos proyectos para cada ejemplo.
-
-NOTA Recuerda que puedes encontrar los proyectos del libro en la sección "Recursos" del libro vivo.
-
-NOTA Una clase de configuración es una clase especial en las aplicaciones de Spring que usamos para indicarle a Spring que realice acciones específicas. Por ejemplo, podemos decirle a Spring que cree beans o que habilite ciertas funcionalidades. Aprenderá diferentes cosas que puede definir en las clases de configuración a lo largo del resto del libro.
-
-PASO 1: DEFINICIÓN DE UNA CLASE DE CONFIGURACIÓN EN SU PROYECTO
-
-ÉlEl primer paso es crear una clase de configuración en el proyecto. Una clase de configuración de Spring se caracteriza por el hecho de que está anotada con la anotación @Configuration. Usamos las clases de configuración para definir varias configuraciones relacionadas con Spring para el proyecto. A lo largo del libro, aprenderá diferentes cosas que puede configurar usando las clases de configuración. Por el momento nos enfocamos solo en agregar nuevas instancias al contexto Spring. La siguiente lista le muestra cómo definir la clase de configuración. Llamé a esta clase de configuraciónConfiguración del proyecto .
-
-Listado 2.7 Definiendo una clase de configuración para el proyecto
-
-@Configuración                     ❶ 
-clase pública ProjectConfig {
-}
-❶ Usamos la anotación @Configuration para definir esta clase como una clase de configuración Spring.
-
-NOTA Separo las clases en diferentes paquetes para que el código sea más fácil de entender. Por ejemplo, creo las clases de configuración en un paquete llamado config y la clase principal en un paquete llamado main . Organizar las clases en paquetes es una buena práctica; Le recomiendo que lo siga en sus implementaciones del mundo real también.
-
-PASO 2: CREE UN MÉTODO QUE DEVUELVA EL BEAN Y ANOTE EL MÉTODO CON @BEAN
-
-Unode las cosas que puede hacer con una clase de configuración es agregar beans al contexto Spring. Para hacer esto, necesitamos definir un método que devuelva la instancia del objeto que deseamos agregar al contexto y anotar ese método con la anotación @Bean , lo que le permite a Spring saber que necesita llamar a este método cuando inicializa su contexto y agrega el valor devuelto al contexto. La siguiente lista muestra los cambios en la clase de configuración para implementar el paso actual.
-
-NOTA Para los proyectos de este libro, utilizo Java 11: la última versión de Java compatible a largo plazo. Cada vez más proyectos están adoptando esta versión. Generalmente, la única característica específica que uso en los fragmentos de código que no funciona con una versión anterior de Java es el nombre de tipo reservado var . Uso var aquí y allá para hacer el código más corto y más fácil de leer, pero si desea usar una versión anterior de Java (por ejemplo, Java 8), puede reemplazar varcon el tipo inferido. De esta manera, hará que los proyectos funcionen también con Java 8.
-
-Listado 2.8 Definiendo el método @Bean
-
-@Configuration 
-public class ProjectConfig { 
  
-  @Bean                         ❶ 
-  Parrot parrot() { 
-    var p = new Parrot(); 
-    p.setName("Koko");         ❷ 
-    devolver p;                  ❸ 
+    Parrot p = new Parrot();
   }
 }
-❶ Al agregar la anotación @Bean, le indicamos a Spring que llame a este método cuando esté en la inicialización del contexto y agregue el valor devuelto al contexto.
+```
+
+❶ Crea una instancia del **Spring context**
+
+**NOTA** Usamos la clase **`AnnotationConfigApplicationContext`** para crear la instancia de **contexto Spring**. Spring ofrece múltiples implementaciones. Debido a que en la mayoría de los casos utilizará la clase **`AnnotationConfigApplicationContext`**(la implementación que utiliza el enfoque más utilizado hoy en día: **anotaciones**), nos centraremos en esta en este libro. Además, solo te digo lo que necesitas saber para la discusión actual. Si recién está comenzando con Spring, mi recomendación es evitar entrar en detalles con las implementaciones de contexto y las cadenas de herencia de estas clases. Lo más probable es que, si lo hace, se pierda con detalles sin importancia en lugar de concentrarse en las cosas esenciales.
+
+Como se muestra en la figura 2.8, creó una instancia de **`Parrot`**, agregó las dependencias del **contexto Spring** a su proyecto y creó una instancia del **contexto Spring**. Su objetivo es agregar el objeto **`Parrot`** al **contexto**, que es el siguiente paso.
+
+![image](https://user-images.githubusercontent.com/23094588/212127693-5516a6b1-4a97-4080-b8d2-560e8a183f00.png)
+
+**Figura 2.8** Ha creado la instancia de **contexto de Spring** y una instancia de **`Parrot`**. Ahora, desea agregar la instancia de **`Parrot`** dentro del **contexto de Spring** para que Spring sea consciente de esta instancia.
+
+Acabamos de terminar de crear el proyecto de requisitos previos (esqueleto), que usaremos en las siguientes secciones para comprender cómo agregar **beans** al **contexto de Spring**. En la sección 2.2.1, continuamos aprendiendo cómo agregar la instancia al **contexto Spring** usando la anotación **`@Bean`**. Además, en las secciones 2.2.2 y 2.2.3, también aprenderá las alternativas de agregar la instancia usando anotaciones de estereotipo y hacerlo mediante programación. Después de discutir los tres enfoques, los compararemos y aprenderá las mejores circunstancias para usar cada uno.
+
+#### 2.2.1 Usando la anotación **`@Bean`** para agregar beans al contexto Spring
+
+En esta sección, discutiremos cómo agregar una instancia de objeto al **contexto de Spring** usando la anotación **`@Bean`**. Esto le permite agregar las instancias de las clases definidas en su proyecto (como **`Parrot`** en nuestro caso), así como las clases que no creó usted mismo pero que usa en su aplicación. Creo que este enfoque es el más fácil de entender al empezar. Recuerde que la razón por la que aprende a agregar **beans** al **contexto de Spring** es que Spring solo puede administrar los objetos que forman parte de él. Primero, le daré un ejemplo directo de cómo agregar un **bean** al **contexto Spring** usando la anotación **`@Bean`**. Luego, le mostraré cómo agregar varios **beans** del mismo tipo o de otro tipo.
+
+Los pasos que debe seguir para agregar un **bean** al **contexto Spring** usando la anotación **`@Bean`** son los siguientes (figura 2.9):
+
+1. Defina una clase de configuración (anotada con **`@Configuration`**) para su proyecto, que, como veremos más adelante, usamos para configurar el **contexto de Spring**.
+2. Agregue un método a la clase de configuración que devuelva la instancia del objeto que desea agregar al contexto y anote el método con la anotación **`@Bean`**.
+3. Haga que Spring use la clase de configuración definida en el paso 1. Como aprenderá más adelante, usamos clases de configuración para escribir diferentes configuraciones para el framework.
+
+![image](https://user-images.githubusercontent.com/23094588/212130229-9baa090e-9368-4189-aea5-aaf3e66f4422.png)
+
+**Figura 2.9** Pasos para agregar el **bean** al **contexto** usando la anotación **`@Bean`**. Al agregar la instancia al contexto de Spring, hace que el framework sea consciente del objeto, lo que le permite administrar la instancia.
+
+Sigamos estos pasos y apliquémoslos en el proyecto llamado **"sq-c2-ex2"**. Para mantener separados todos los pasos que discutimos, le recomiendo que cree nuevos proyectos para cada ejemplo.
+
+**NOTA** Recuerda que puedes encontrar los proyectos del libro en la sección "Recursos".
+
+**NOTA** Una clase de configuración es una clase especial en las aplicaciones de Spring que usamos para indicarle a Spring que realice acciones específicas. Por ejemplo, podemos decirle a Spring que cree **beans** o que habilite ciertas funcionalidades. Aprenderá diferentes cosas que puede definir en las clases de configuración a lo largo del resto del libro.
+
+**PASO 1: DEFINICIÓN DE UNA CLASE DE CONFIGURACIÓN EN SU PROYECTO**
+
+El primer paso es crear una clase de configuración en el proyecto. Una clase de configuración de Spring se caracteriza por el hecho de que está anotada con la anotación **`@Configuration`**. Usamos las clases de configuración para definir varias configuraciones relacionadas con Spring para el proyecto. A lo largo del libro, aprenderá diferentes cosas que puede configurar usando las clases de configuración. Por el momento nos enfocamos solo en agregar nuevas instancias al **contexto Spring**. La siguiente lista le muestra cómo definir la clase de configuración. Llamé a esta clase de configuraciónConfiguración del proyecto .
+
+**Listado 2.7** Definiendo una clase de configuración para el proyecto
+
+```java
+@Configuration                    ❶
+public class ProjectConfig {
+}
+```
+
+❶ Usamos la anotación **`@Configuration`** para definir esta clase como una clase de configuración Spring.
+
+**NOTA** Separo las clases en diferentes paquetes para que el código sea más fácil de entender. Por ejemplo, creo las clases de configuración en un paquete llamado **`config`** y la clase principal en un paquete llamado **`main`**. Organizar las clases en paquetes es una buena práctica; Le recomiendo que lo siga en sus implementaciones del mundo real también.
+
+**PASO 2: CREE UN MÉTODO QUE DEVUELVA EL BEAN Y ANOTE EL MÉTODO CON `@BEAN`**
+
+Una de las cosas que puede hacer con una clase de configuración es agregar **beans** al **contexto Spring**. Para hacer esto, necesitamos definir un método que devuelva la instancia del objeto que deseamos agregar al contexto y anotar ese método con la anotación **`@Bean`**, lo que le permite a Spring saber que necesita llamar a este método cuando inicializa su contexto y agrega el valor devuelto al contexto. La siguiente lista muestra los cambios en la clase de configuración para implementar el paso actual.
+
+**NOTA** Para los proyectos de este libro, utilizo **Java 11**: la última versión de Java compatible a largo plazo. Cada vez más proyectos están adoptando esta versión. Generalmente, la única característica específica que uso en los fragmentos de código que no funciona con una versión anterior de Java es el nombre de tipo reservado **`var`**. Uso **`var`** aquí y allá para hacer el código más corto y más fácil de leer, pero si desea usar una versión anterior de Java (por ejemplo, Java 8), puede reemplazar **`var`** con el tipo inferido. De esta manera, hará que los proyectos funcionen también con Java 8.
+
+**Listado 2.8** Definiendo el método **`@Bean`**
+
+```java
+@Configuration
+public class ProjectConfig {
+ 
+  @Bean                        ❶
+  Parrot parrot() {
+    var p = new Parrot();
+    p.setName("Koko");         ❷
+    return p;                  ❸
+  }
+}
+```
+
+❶ Al agregar la anotación **`@Bean`**, le indicamos a Spring que llame a este método cuando esté en la inicialización del **contexto** y agregue el valor devuelto al **contexto**.
 
 ❷ Establezca un nombre para el loro que usaremos más adelante cuando probemos la aplicación.
 
-❸ Spring agrega a su contexto la instancia de Parrot devuelta por el método.
+❸ Spring agrega a su **contexto** la instancia de **`Parrot`** devuelta por el método.
 
-Observe que el nombre que usé para el método no contiene un verbo. Probablemente aprendió que una mejor práctica de Java es poner verbos en los nombres de los métodos porque los métodos generalmente representan acciones. Pero para los métodos que usamos para agregar beans en el contexto de Spring, no seguimos esta convención. Dichos métodos representan las instancias de objetos que devuelven y que ahora serán parte del contexto de Spring. El nombre del método también se convierte en el nombre del bean (como en el listado 2.8, el nombre del bean ahora es “parrot”). Por convención, puede usar sustantivos, y la mayoría de las veces tienen el mismo nombre que elclase.
+Observe que el nombre que usé para el método no contiene un verbo. Probablemente aprendió que ***una mejor práctica de Java es poner verbos en los nombres de los métodos porque los métodos generalmente representan acciones***. Pero para los métodos que usamos para agregar **beans** en el **contexto de Spring**, no seguimos esta convención. Dichos métodos representan las instancias de objetos que devuelven y que ahora serán parte del **contexto de Spring**. ***El nombre del método también se convierte en el nombre del bean***(como en el listado 2.8, ***el nombre del bean ahora es “parrot”***). Por convención, puede usar sustantivos, y la mayoría de las veces tienen el mismo nombre que la clase.
 
-PASO 3: HAGA QUE SPRING INICIALICE SU CONTEXTO USANDO LA CLASE DE CONFIGURACIÓN RECIÉN CREADA
+**PASO 3: HAGA QUE SPRING INICIALICE SU CONTEXTO USANDO LA CLASE DE CONFIGURACIÓN RECIÉN CREADA**
 
-hemosimplementó una clase de configuración en la que le decimos a Spring la instancia del objeto que necesita convertirse en un bean. Ahora debemos asegurarnos de que Spring use esta clase de configuración al inicializar su contexto. La siguiente lista muestra cómo cambiar la creación de instancias del contexto Spring en la clase principal para usar la clase de configuración que implementamos en los dos primeros pasos.
+Hemos implementado una clase de configuración en la que le decimos a Spring la instancia del objeto que necesita convertirse en un **bean**. Ahora debemos asegurarnos de que Spring use esta clase de configuración al inicializar su contexto. La siguiente lista muestra cómo cambiar la creación de instancias del **contexto Spring** en la clase principal para usar la clase de configuración que implementamos en los dos primeros pasos.
 
-Listado 2.9 Inicializando el contexto Spring basado en la clase de configuración definida
+**Listado 2.9** Inicializando el **contexto Spring** basado en la clase de configuración definida
 
-public class Main { 
+```java
+public class Main {
  
-  public static void main(String[] args) { 
+  public static void main(String[] args) {
     var context = 
-      new AnnotationConfigApplicationContext( 
-            ProjectConfig.class);                ❶ 
+      new AnnotationConfigApplicationContext(
+            ProjectConfig.class);                ❶
   }
 }
-❶ Al crear la instancia de contexto de Spring, envíe la clase de configuración como un parámetro para indicarle a Spring que la use.
+```
 
-Para verificar que la instancia de Parrot sea parte del contexto ahora, puede referirse a la instancia e imprimir su nombre en la consola, como se presenta en la siguiente lista.
+❶ Al crear la instancia de **contexto de Spring**, envíe la clase de configuración como un parámetro para indicarle a Spring que la use.
 
-Listado 2.10 Haciendo referencia a la instancia de Parrot desde el contexto
+Para verificar que la instancia de **`Parrot`** sea parte del **contexto** ahora, puede referirse a la instancia e imprimir su nombre en la consola, como se presenta en la siguiente lista.
 
-public class Main { 
+**Listado 2.10** Haciendo referencia a la instancia de **`Parrot`** desde el **contexto**
+
+```java
+public class Main {
  
-  public static void main(String[] args) { 
+  public static void main(String[] args) {
     var context = 
-      new AnnotationConfigApplicationContext( 
-        ProjectConfig.class); 
+      new AnnotationConfigApplicationContext(
+        ProjectConfig.class);
  
     Parrot p = context.getBean(Parrot.class);    ❶
-  
-    System.out.println(p.getName()); 
+ 
+    System.out.println(p.getName());
   }
 }
-❶ Obtiene una referencia de un bean de tipo Parrot del contexto Spring
+```
 
-Ahora verás el nombre que le diste al loro que agregaste en el contexto en la consola, en mi caso Koko .
+❶ Obtiene una referencia de un **bean** de tipo **`Parrot`** del **contexto Spring**
 
-NOTA En escenarios del mundo real, usamos pruebas unitarias y de integración para validar que nuestras implementaciones funcionan como se desea. Los proyectos en este libro implementan pruebas unitarias para validar el comportamiento discutido. Debido a que este es un libro de "inicio", es posible que aún no esté al tanto de las pruebas unitarias. Para evitar crear confusión y permitirle concentrarse en el tema discutido, no discutiremos las pruebas unitarias hasta el capítulo 15. Sin embargo, si ya sabe cómo escribir pruebas unitarias y leerlas lo ayuda a comprender mejor el tema, puede encontrar todas las pruebas unitarias implementadas en la carpeta de prueba de cada uno de nuestros proyectos Maven. Si aún no sabe cómo funcionan las pruebas unitarias, le recomiendo centrarse solo en el tema discutido.
+Ahora verás el nombre que le diste al loro que agregaste en el contexto en la consola, en mi caso **`Koko`**.
 
-Como en el ejemplo anterior, puede agregar cualquier tipo de objeto al contexto Spring (figura 2.10). Agreguemos también una Cadena y un Entero y veamos que funciona.
+**NOTA** En escenarios del mundo real, usamos pruebas unitarias y de integración para validar que nuestras implementaciones funcionan como se desea. Los proyectos en este libro implementan pruebas unitarias para validar el comportamiento discutido. Debido a que este es un libro de "inicio", es posible que aún no esté al tanto de las pruebas unitarias. Para evitar crear confusión y permitirle concentrarse en el tema discutido, no discutiremos las pruebas unitarias hasta el capítulo 15. Sin embargo, si ya sabe cómo escribir pruebas unitarias y leerlas lo ayuda a comprender mejor el tema, *puede encontrar todas las pruebas unitarias implementadas en la carpeta de prueba de cada uno de nuestros proyectos **Maven***. Si aún no sabe cómo funcionan las pruebas unitarias, le recomiendo centrarse solo en el tema discutido.
 
+Como en el ejemplo anterior, puede agregar cualquier tipo de objeto al **contexto Spring**(figura 2.10). Agreguemos también un **`String`** y un **`Integer`** y veamos que funciona.
 
+![image](https://user-images.githubusercontent.com/23094588/212135724-b7e6fc46-463e-435c-a730-f7713f40d3cb.png)
 
-Figura 2.10 Puede agregar cualquier objeto al contexto de Spring para que Spring lo sepa.
+**Figura 2.10** Puede agregar cualquier objeto al **contexto de Spring** para que Spring lo sepa.
 
-La siguiente lista muestra cómo cambié la clase de configuración para agregar también un bean de tipo Stringy un bean de tipo Integer.
+La siguiente lista muestra cómo cambié la clase de configuración para agregar también un **bean** de tipo **`String`** y un **bean** de tipo **`Integer`**.
 
-Listado 2.11 Agregando dos beans más al contexto
+**Listado 2.11** Agregando dos **beans** más al **contexto**
 
-@Configuration 
-public class ProjectConfig { 
+```java
+@Configuration
+public class ProjectConfig {
  
-  @Bean 
-  Parrot loro() { 
-    var p = new Parrot(); 
-    p.setName("Koko"); 
-    devolver p; 
-  } 
+  @Bean
+  Parrot parrot() {
+    var p = new Parrot();
+    p.setName("Koko");
+    return p;
+  }
  
-  @Bean                   ❶ 
-  String hola() { 
-    return "Hola"; 
-  } 
+  @Bean                  ❶
+  String hello() {
+    return "Hello";
+  }
  
-  @Bean                   ❷ 
-  Entero diez() { 
-    return 10; 
+  @Bean                  ❷
+  Integer ten() {
+    return 10;
   }
 }
+```
+AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 ❶ Agrega la cadena "Hola" al contexto de Spring
 
 ❷ Agrega el entero 10 al contexto Spring
@@ -379,6 +395,10 @@ NOTA Recuerde el propósito del contexto de Spring: agregamos las instancias que
 Ahora puedes referirte a estos dos nuevos frijoles de la misma manera que hicimos con el loro. La siguiente lista le muestra cómo cambiar el método principal para imprimir los valores de los nuevos beans.
 
 Listado 2.12 Imprimiendo los dos beans nuevos en la consola
+
+
+```java
+```
 
 public class Main { 
  
