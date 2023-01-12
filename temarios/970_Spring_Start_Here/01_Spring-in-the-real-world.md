@@ -159,37 +159,145 @@ Alternativas para usar Spring
 
 Realmente no podemos discutir alternativas a **Spring** porque alguien podría malinterpretarlos como alternativas a todo el ecosistema. Pero para muchos de los componentes y proyectos individuales que crean el ecosistema **Spring**, puede encontrar otras opciones, como otros frameworks o bibliotecas comerciales o de código abierto.
 
+Por ejemplo, tomemos el contenedor **Spring IoC**. Hace años, la especificación **Java EE** era una solución muy apreciada por los desarrolladores. Con una filosofía ligeramente diferente, **Java EE**(que en 2017 fue de código abierto y rehecho en **Jakarta EE**, https://jakarta.ee/) ofreció especificaciones como contexto e inyección de dependencia(**CDI**) o **Enterprise Java Beans(EJB)**. Puede usar **CDI** o **EJB** para administrar un contexto de instancias de objetos e ***implementar aspectos(llamados "interceptores" en la terminología de EE)***. Además, a lo largo de la historia, **Google Guice**( https://github.com/google/guice ) fue un marco apreciado para la gestión de instancias de objetos en un contenedor.
 
+Para algunos de los proyectos tomados individualmente, podría encontrar una o más alternativas. Por ejemplo, puede elegir usar **Apache Shiro**( https://shiro.apache.org/ ) en lugar de **Spring Security**. O podría decidir implementar su aplicación web usando el framwork **Play** ( https://www.playframework.com/ ) en lugar de **Spring MVC** y tecnologías relacionadas con **Spring**.
 
-Por ejemplo, tomemos el contenedor Spring IoC. Hace años, la especificación Java EE era una solución muy apreciada por los desarrolladores. Con una filosofía ligeramente diferente, Java EE (que en 2017 fue de código abierto y rehecho en Jakarta EE, https://jakarta.ee/ ) ofreció especificaciones como contexto e inyección de dependencia.(CDI) o Enterprise Java Beans(EJB). Puede usar CDI o EJB para administrar un contexto de instancias de objetos e implementar aspectos (llamados "interceptores" en la terminología de EE). Además, a lo largo de la historia, Google Guice ( https://github.com/google/guice ) fue un marco apreciado para la gestión de instancias de objetos en un contenedor.
-
-
-
-Para algunos de los proyectos tomados individualmente, podría encontrar una o más alternativas. Por ejemplo, puede elegir usar Apache Shiro ( https://shiro.apache.org/ ) en lugar de Spring Security. O podría decidir implementar su aplicación web usando el marco Play ( https://www.playframework.com/ ) en lugar de Spring MVC y tecnologías relacionadas con Spring.
-
-
-
-Un proyecto más reciente que parece prometedor es Red Hat Quarkus. Quarkus está diseñado para implementaciones nativas en la nube y se vuelve cada vez más maduro con pasos rápidos. No me sorprendería verlo como uno de los proyectos líderes en el desarrollo de aplicaciones empresariales en el ecosistema de Java en el futuro ( https://quarkus.io/ ).
-
-
+Un proyecto más reciente que parece prometedor es **Red Hat Quarkus**. **Quarkus** está diseñado para implementaciones nativas en la nube y se vuelve cada vez más maduro con pasos rápidos. No me sorprendería verlo como uno de los proyectos líderes en el desarrollo de aplicaciones empresariales en el ecosistema de **Java*** en el futuro ( https://quarkus.io/ ).
 
 Mi consejo para ti es que siempre tengas en cuenta tus alternativas. En el desarrollo de software, debe tener la mente abierta y nunca confiar en una solución como "la única". Siempre encontrará escenarios en los que una tecnología específica funciona mejor que otra.
 
-1.3 Primavera en escenarios del mundo real
-Ahoraque tiene una visión general de Spring, sabe cuándo y por qué debe usar un marco. En esta sección, le daré algunos escenarios de aplicación en los que el uso del marco Spring podría ser una excelente opción. Con demasiada frecuencia, he visto que los desarrolladores solo se refieren a las aplicaciones de back-end para usar un marco como Spring. Incluso he visto una tendencia de restringir, aún más, el escenario a las aplicaciones web de back-end. Si bien es cierto que en muchos casos vemos que Spring se usa de esta manera, es importante recordar que el marco no se limita a este escenario. He visto equipos que usan Spring con éxito en diferentes tipos de aplicaciones, como el desarrollo de una aplicación de prueba de automatización o incluso en escenarios de escritorio independientes.
+### 1.3 Spring en escenarios del mundo real
 
-Le describiré con más detalle algunos escenarios comunes del mundo real en los que he visto que Spring se usa con éxito. Estos no son los únicos escenarios posibles, y Spring podría no funcionar todo el tiempo en estos casos. Recuerde lo que discutimos en la sección 1.2: un marco no siempre es una buena opción. Pero estos son casos comunes en los que, por lo general, Spring encaja bien:
+Ahora que tiene una visión general de **Spring**, sabe cuándo y por qué debe usar un framework. En esta sección, le daré algunos escenarios de aplicación en los que el uso del framework **Spring** podría ser una excelente opción. Con demasiada frecuencia, he visto que los desarrolladores solo se refieren a las aplicaciones de back-end para usar un framework como **Spring**. Incluso he visto una tendencia de restringir, aún más, el escenario a las aplicaciones web de back-end. Si bien es cierto que en muchos casos vemos que **Spring** se usa de esta manera, es importante recordar que el framework no se limita a este escenario. He visto equipos que usan **Spring** con éxito en diferentes tipos de aplicaciones, como el desarrollo de una aplicación de prueba de automatización o incluso en escenarios de escritorio independientes.
 
-El desarrollo de una aplicación backend
+Le describiré con más detalle algunos escenarios comunes del mundo real en los que he visto que **Spring** se usa con éxito. Estos no son los únicos escenarios posibles, y **Spring** podría no funcionar todo el tiempo en estos casos. Recuerde lo que discutimos en la sección 1.2: un framework no siempre es una buena opción. Pero estos son casos comunes en los que, por lo general, **Spring** encaja bien:
 
-El desarrollo de un marco de pruebas de automatización.
+1. El desarrollo de una aplicación backend
+2. El desarrollo de un framework de pruebas de automatización.
+3. El desarrollo de una aplicación de escritorio.
+4. El desarrollo de una aplicación móvil.
 
-El desarrollo de una aplicación de escritorio.
+#### 1.3.1 Uso de Spring en el desarrollo de una aplicación de backend
 
-El desarrollo de una aplicación móvil.
-
-1.3.1 Uso de Spring en el desarrollo de una aplicación de backend
-ALa aplicación backend es la parte de un sistema que se ejecuta en el lado del servidor y tiene la responsabilidad de administrar los datos y atender las solicitudes de las aplicaciones de los clientes. Los usuarios acceden a las funcionalidades utilizando directamente las aplicaciones cliente. Además, las aplicaciones cliente realizan solicitudes a la aplicación backend para trabajar con los datos de los usuarios. La aplicación de back-end puede usar bases de datos para almacenar datos o comunicarse con otras aplicaciones de back-end de diferentes maneras.
+La aplicación backend es la parte de un sistema que se ejecuta en el lado del servidor y tiene la responsabilidad de administrar los datos y atender las solicitudes de las aplicaciones de los clientes. Los usuarios acceden a las funcionalidades utilizando directamente las aplicaciones cliente. Además, las aplicaciones cliente realizan solicitudes a la aplicación backend para trabajar con los datos de los usuarios. La aplicación de back-end puede usar bases de datos para almacenar datos o comunicarse con otras aplicaciones de back-end de diferentes maneras.
 
 Puede imaginar, en un escenario del mundo real, que la aplicación sería la aplicación de back-end que administra las transacciones en sus cuentas bancarias. Los usuarios pueden acceder a sus cuentas y administrarlas a través de una aplicación web (banca en línea) o una aplicación móvil. Tanto las aplicaciones móviles como las aplicaciones web representan clientes para la aplicación de back-end. Para administrar las transacciones de los usuarios, la aplicación de back-end debe comunicarse con otras soluciones de back-end, y parte de los datos que administra deben conservarse en una base de datos. En la figura 1.5, puede visualizar la arquitectura de dicho sistema.
 
+![image](https://user-images.githubusercontent.com/23094588/212056860-eae9ab42-eeef-4a16-a6fd-d8da410fa5c8.png)
+
+**Figura 1.5** Una aplicación de back-end interactúa de varias maneras con otras aplicaciones y utiliza bases de datos para administrar datos. Por lo general, una aplicación de back-end es compleja y puede requerir el uso de varias tecnologías. Los frameworks simplifican la implementación al proporcionar herramientas que puede usar para implementar la solución de back-end más rápido.
+
+**NOTA** No se preocupe si no comprende todos los detalles de la figura 1.5. No espero que sepas qué es un intermediario de mensajes y ni siquiera cómo establecer el intercambio de datos entre los componentes. Lo que quiero que vea es que un sistema de este tipo puede volverse complejo en el mundo real y luego comprender que los proyectos del ecosistema **Spring** se crearon para ayudarlo a eliminar esta complejidad tanto como sea posible.
+
+**Spring** ofrece un excelente conjunto de herramientas para implementar aplicaciones de back-end. Le facilita la vida con las diferentes funcionalidades que generalmente implementa en una solución de back-end, desde la integración con otras aplicaciones hasta la persistencia en varias tecnologías de base de datos. No es de extrañar que los desarrolladores a menudo usen **Spring** para tales aplicaciones. Básicamente, el framework le ofrece todo lo que necesita en tales implementaciones y se adapta perfectamente a cualquier tipo de estilo arquitectónico. La Figura 1.6 indica las posibilidades de usar Spring para una aplicación backend.
+
+![image](https://user-images.githubusercontent.com/23094588/212057829-a70c7e0f-82e9-444c-8ccd-f45d4f124b89.png)
+
+**Figura 1.6** Las posibilidades de usar **Spring** en una aplicación backend son infinitas, desde exponer funcionalidades que otras aplicaciones pueden llamar hasta administrar el acceso a la base de datos y desde asegurar la aplicación hasta administrar la integración a través de intermediarios de mensajes de terceros.
+
+#### 1.3.2 Usando Spring en una automation test app(automatización de aplicación de test)
+
+Hoy en día,a menudo usamos pruebas de automatización para pruebas de extremo a extremo de los sistemas que implementamos. Las pruebas de automatización se refieren a la implementación de software que utilizan los equipos de desarrollo para asegurarse de que una aplicación se comporte como se espera. Un equipo de desarrollo puede programar la implementación de pruebas de automatización para probar la aplicación con frecuencia y notificar a los desarrolladores si algo anda mal. Tener dicha funcionalidad brinda confianza a los desarrolladores porque saben que recibirán una notificación si rompen algo en las capacidades existentes de la aplicación mientras desarrollan nuevas funciones.
+
+Si bien con sistemas pequeños puede realizar las pruebas manualmente, siempre es una buena idea automatizar los casos de prueba. Para sistemas más complejos, probar manualmente todos los flujos ni siquiera es una opción. Debido a que los flujos son tan numerosos, se requeriría una gran cantidad de horas y demasiada energía para cubrirlos por completo.
+
+Resulta que la solución más eficiente es tener un equipo separado que implemente una aplicación que tenga la responsabilidad de validar todos los flujos del sistema probado. Si bien los desarrolladores agregan nuevas funcionalidades al sistema, esta aplicación de prueba también se mejora para cubrir las novedades, y los equipos la usan para validar que todo sigue funcionando como se desea. Los desarrolladores eventualmente usan una herramienta de integración y programan la aplicación para que se ejecute regularmente para recibir comentarios lo antes posible sobre sus cambios (figura 1.7).
+
+![image](https://user-images.githubusercontent.com/23094588/212060797-d241c2ce-2798-429c-8576-00d16d50aaed.png)
+
+**Figura 1.7** El equipo implementa la aplicación de prueba en un entorno de prueba. Una herramienta de integración continua como **Jenkins** ejecuta la aplicación regularmente y envía comentarios al equipo. De esta manera, el equipo siempre está al tanto del estado del sistema y saben si se rompe algo durante el desarrollo.
+
+Una aplicación de este tipo podría volverse tan compleja como una aplicación de back-end. Para validar los flujos, la aplicación necesita comunicarse con los componentes del sistema e incluso conectarse a bases de datos. A veces, la aplicación se burla de las dependencias externas para simular diferentes escenarios de ejecución. Para escribir los escenarios de prueba, los desarrolladores usan frameworks como **Selenium**, **Cucumber**, **Gauge** y otros. Pero, junto con estos frameworks, la aplicación aún podría beneficiarse de varias maneras de las herramientas de **Spring**. Por ejemplo, la aplicación podría administrar las instancias de objetos para hacer que el código sea más fácil de mantener utilizando el contenedor **Spring IoC**. Podría usar **Spring Data** para conectarse a las bases de datos donde necesita validar los datos. Podría enviar mensajes a colas o temas de un sistema de intermediario para simular escenarios específicos o simplemente usar **Spring** para llamar a algunos REST endpoints (figura 1.8). (Recordar, está bien si esto parece demasiado avanzado; el significado se aclarará a medida que avance a través del libro).
+
+![image](https://user-images.githubusercontent.com/23094588/212061625-a4c33ae4-938a-4622-befa-eed0fb797863.png)
+
+**Figura 1.8** Es posible que una aplicación de prueba necesite conectarse a bases de datos o comunicarse con otros sistemas o con el sistema probado. Los desarrolladores pueden usar componentes del ecosistema **Spring** para simplificar las implementaciones de estas funcionalidades.
+
+#### 1.3.3 Uso de Spring para el desarrollo de una aplicación de escritorio
+
+Las aplicaciones de escritorio no se desarrollan con tanta frecuencia, ya que las aplicaciones web o móviles han tomado el rol de interactuar con el usuario. Sin embargo, todavía hay una pequeña cantidad de aplicaciones de escritorio y los componentes del ecosistema **Spring** podrían ser una buena opción en el desarrollo de sus funciones. Una aplicación de escritorio podría usar con éxito el contenedor **Spring IoC** para administrar las instancias de objetos. De esta forma, la implementación de la aplicación es más limpia y mejora su mantenibilidad. Además, la aplicación podría usar las herramientas de **Spring** para implementar diferentes funciones, por ejemplo, para comunicarse con un backend u otros componentes (llamar a servicios web o usar otras técnicas para llamadas remotas) o implementar una solución de almacenamiento en caché.
+
+#### 1.3.4 Uso de Spring en aplicaciones móviles
+
+Con su proyecto **Spring para Android** ( https://spring.io/projects/spring-android ), la comunidad **Spring** intenta ayudar al desarrollo de aplicaciones móviles. Aunque probablemente rara vez te encuentres con esta situación, vale la pena mencionar que puedes usar las herramientas de **Spring** para desarrollar aplicaciones de **Android**. Este proyecto **Spring** proporciona un cliente REST para **Android** y soporte de autenticación para acceder a APIs de seguridad.
+
+### 1.4 Cuándo no usar frameworks
+
+En esta sección, analizamos por qué a veces debe evitar el uso de frameworks. Es esencial que sepa cuándo usar un framework y cuándo evitar usarlo. A veces, usar una herramienta que es demasiado para el trabajo puede consumir más energía y también obtener un resultado peor. Imagina usar una motosierra para cortar pan. Si bien podría intentar e incluso lograr un resultado final, sería más difícil y consumiría más energía que usar un cuchillo normal (y podría terminar con nada más que pan rallado en lugar de pan rebanado). Discutiremos algunos escenarios en los que usar un framework no es una buena idea y luego les contaré una historia sobre un equipo del que formé parte que falló en la implementación de una aplicación debido al uso de un framework.
+
+Resulta que, como todo lo demás en el desarrollo de software, no debe aplicar un framework en todos los casos. Encontrará situaciones en las que un framework no encaja bien, o tal vez un framework encaja bien, pero no **Spring Framework**. ¿En cuál de los siguientes escenarios debería considerar no usar un framework?
+
+1. Necesita implementar una funcionalidad particular con una huella lo más pequeña posible. Por huella, me refiero a la memoria de almacenamiento ocupada por los archivos de la aplicación.
+2. Los requisitos de seguridad específicos lo obligan a implementar solo código personalizado en su aplicación sin utilizar ningún framework de código abierto.
+3. Tendría que hacer tantas personalizaciones en el framework que escribiría más código que si simplemente no lo hubiera usado en absoluto.
+4. Ya tiene una aplicación funcional y, al cambiarla para usar un framework, no obtiene ningún beneficio.
+
+Vamos a discutir estos puntos con más detalle.
+
+#### 1.4.1 Necesita tener una huella pequeña
+
+Para el punto uno, me refiero a situaciones en las que necesitas hacer tu aplicación pequeña. En los sistemas actuales, encontramos cada vez más casos en los que los servicios se entregan en contenedores. Es probable que haya oído hablar de contenedores, como **Docker**, **Kubernetes** u otros términos relacionados con este tema (si no, de nuevo, está bien).
+
+Los contenedores en su totalidad son un tema que está más allá del alcance de este libro, por lo que, por ahora, lo único que necesito que sepa es que cuando utiliza una forma de implementación de este tipo, desea que su aplicación sea lo más pequeña posible. Un contenedor es como una caja en la que vive su aplicación. Un principio crucial con respecto a la implementación de aplicaciones en contenedores es que los contenedores deben ser fácilmente desechables: se pueden destruir y recrear lo más rápido posible. El tamaño de la aplicación (huella) importa mucho aquí. Puede ahorrar segundos desde la inicialización de la aplicación haciéndola más pequeña. Eso no significa que no usará frameworks para todas las aplicaciones implementadas en contenedores.
+
+Pero para algunas aplicaciones, que también suelen ser bastante pequeñas, tiene más sentido mejorar su inicialización y reducir su huella en lugar de agregar dependencias a diferentes frameworks. Tal caso es un tipo de aplicación llamada ***server-less function(función sin servidor)***. Estas server-less function son pequeñas aplicaciones implementadas en contenedores. Debido a que no tiene demasiado acceso a la forma en que se implementan, parece que se ejecutan sin un servidor (de ahí su nombre). Estas aplicaciones deben ser pequeñas, y es por eso que, para este caso específico de aplicaciones, querrá evitar agregar un framework tanto como sea posible. Debido a su tamaño, también es posible que no necesite un framework de todos modos.
+
+#### 1.4.2 Las necesidades de seguridad dictan un código personalizado
+
+Ya dije en el punto dos que en situaciones específicas, las aplicaciones no podían usar frameworks debido a requisitos de seguridad. Este escenario suele ocurrir con aplicaciones en el campo de la defensa o de organizaciones gubernamentales. Una vez más, no significa que todas las aplicaciones utilizadas en organizaciones gubernamentales tengan prohibido el uso de frameworks, pero para algunas se aplican restricciones. Usted puede preguntarse por qué. Bueno, digamos que se usa un marco de código abierto como **Spring**. Si alguien encuentra una vulnerabilidad específica, se dará a conocer y un hacker podría usar este conocimiento para explotarla. A veces, las partes interesadas de tales aplicaciones quieren asegurarse de que las posibilidades de que alguien piratee su sistema sean lo más cercanas a cero posible. Esto podría llevar incluso a reconstruir una funcionalidad en lugar de usar la fuente de un tercero..
+
+**NOTA** ¡Espera! Anteriormente dije que es más seguro usar un framework de código abierto porque si existe una vulnerabilidad, es probable que alguien la descubra. Bueno, si inviertes suficiente tiempo y dinero, probablemente también puedas lograrlo tú mismo. En general, es más barato usar un framework, por supuesto. Y si no quiere ser demasiado cauteloso, tiene más sentido usar un framework. Pero en algunos proyectos, las partes interesadas realmente quieren asegurarse de que ninguna información se haga pública.
+
+#### 1.4.3 Las numerosas personalizaciones existentes hacen que un framework no sea práctico
+
+El caso (punto tres) en el que quizás desee evitar el uso de un framework es cuando tendría que personalizar tanto sus componentes que terminaría escribiendo más código que si no lo hubiera utilizado. Como especifiqué en la sección 1.1, un framework le proporciona partes que ensambla con su código comercial para obtener una aplicación. Estos componentes, proporcionados por el framework, no encajan perfectamente y es necesario personalizarlos de diferentes maneras. Es perfectamente normal personalizar los componentes del framework y el estilo en el que se ensamblan que si hubiera desarrollado la funcionalidad desde cero. Si te encuentras en una situación así, probablemente hayas elegido el framework equivocado (busca alternativas) o no deberías usar un framework entodas.
+
+#### 1.4.4 No se beneficiará de cambiar a un framework
+
+En el punto cuatro, mencioné que un posible error podría ser tratar de usar un framework para reemplazar algo que ya existe y funciona en una aplicación. A veces tenemos la tentación de reemplazar una arquitectura existente con algo nuevo. Aparece un nuevo framework, y es popular, y todos lo usan, entonces, ¿por qué no deberíamos cambiar nuestra aplicación también para usar este framework? Puede, pero debe analizar con atención lo que quiere lograr cambiando algo que funciona. En algunos casos, como mi historia de la sección 1.1, podría ser útil cambiar su aplicación y hacer que dependa de un framework específico. Mientras este cambio traiga un beneficio, ¡hazlo! Una razón podría ser que desee que la aplicación sea más mantenible, más eficaz o más segura. Pero si este cambio no te trae ningún beneficio, y a veces incluso puede traer incertidumbre, entonces, al final, es posible que descubra que invirtió tiempo y dinero para obtener un resultado peor. Déjame contarte lo aprendido en base a mi propia experiencia.
+
+## 1.5 Qué aprenderás en este libro
+
+Desde que abrió este libro, asumo que probablemente sea un desarrollador de software en el ecosistema de **Java** que descubrió que es útil aprender **Spring**. El propósito de este libro es enseñarle los fundamentos de **Spring**, suponiendo que no sepa nada sobre frameworks y, por supuesto, sobre **Spring**. Cuando digo **Spring**, me refiero al ecosistema de **Spring**, no solo a la parte central del framework.
+
+Cuando termine el libro, habrá aprendido a hacer lo siguiente:
+
+* Utilice el ***contexto de Spring*** e implemente ***aspectos*** en torno a los objetos administrados por el framework.
+* Implemente el mecanismo de una aplicación **Spring** para conectarse a una base de datos y trabajar con los datos persistentes.
+* Establezca el intercambio de datos entre aplicaciones utilizando las API REST implementadas con **Spring**.
+* Cree aplicaciones básicas que utilicen el enfoque de convención sobre configuración(convention-over-configuration).
+* Use las mejores prácticas en el diseño de clase estándar de una aplicación **Spring**.
+* Pruebe correctamente sus implementaciones de Spring.
+
+Un error evitable
+
+El uso de frameworks no siempre es la mejor opción, y tuve que aprender eso de la manera más difícil. Años antes, estábamos trabajando en el backend de una aplicación web. Los tiempos influyen en muchas cosas, incluidas las arquitecturas de software. La aplicación usaba **JDBC** para conectarse directamente a una base de datos de **Oracle**. El código era bastante feo. En todas partes, la aplicación necesitaba ejecutar una consulta en la base de datos, abría una declaración y luego enviaba una consulta que a veces se escribía en varias filas. Es posible que sea lo suficientemente joven como para no haber encontrado el uso directo de **JDBC** en las aplicaciones, pero créame, es un código largo y feo.
+
+En ese momento, algunos frameworks que usaban otra metodología para trabajar con la base de datos se estaban volviendo cada vez más populares. Recuerdo cuando me encontré por primera vez con **Hibernate**. Este es un frameworks ORM, que le permite tratar las tablas y sus relaciones en una base de datos como objetos y relaciones entre objetos. Cuando se usa correctamente, le permite escribir menos código y una funcionalidad más intuitiva. Cuando se usa incorrectamente, puede ralentizar su aplicación, hacer que el código sea menos intuitivo e incluso introducir errores.
+
+La aplicación que estábamos desarrollando necesitaba un cambio. Sabíamos que podíamos mejorar ese feo código **JDBC**. En mi opinión, al menos podríamos minimizar el número de líneas. Este cambio habría traído grandes beneficios a la mantenibilidad. Junto con otros desarrolladores, sugerimos usar una herramienta proporcionada por **Spring** llamada **JdbcTemplate**(aprenderás esta herramienta en el capítulo 12). Pero otros impulsaron fuertemente la decisión de usar **Hibernate**. Era bastante popular, así que ¿por qué no usarlo? (En realidad, sigue siendo uno de los frameworks de trabajo más populares de su tipo, y aprenderá a integrarlo con **Spring** en el capítulo 13). Me di cuenta de que cambiar ese código a una metodología completamente nueva sería un desafío. Además, no pude ver ningún beneficio. El cambio también implicó un mayor riesgo de introducir errores.
+
+Afortunadamente, el cambio comenzó con una prueba de concepto. Después de un par de meses, mucho esfuerzo y estrés, el equipo decidió retirarse.
+
+Después de analizar nuestras opciones, terminamos la implementación usando **JdbcTemplate**. Logramos escribir un código más limpio eliminando una gran cantidad de líneas de código y no necesitábamos introducir ningún frameworks nuevo para este cambio.
+
+### Resumen
+
+* Un framework de aplicación es un conjunto de funcionalidades de software comunes que proporciona una estructura fundamental para desarrollar una aplicación. Un framework actúa como el soporte esquelético para construir una aplicación.
+
+* Un framework lo ayuda a crear una aplicación de manera más eficiente al proporcionar la funcionalidad que ensambla en su implementación en lugar de desarrollarla usted mismo. El uso de un framework le ahorra tiempo y ayuda a garantizar que haya menos posibilidades de implementar funciones con errores.
+
+* El uso de un framework ampliamente conocido como **Spring** abre una puerta a una gran comunidad, lo que hace que sea más probable que otros enfrenten problemas similares. Entonces tiene una excelente oportunidad de aprender cómo otros resolvieron algo similar a un problema que necesita abordar, lo que le ahorrará el tiempo de la investigación individual.
+
+* Al implementar una aplicación, siempre piense en todas las posibilidades, incluida la de no usar un framework. Si decide utilizar uno o más frameworks, tenga en cuenta todas sus alternativas. Debe pensar en el propósito del framework, quién más lo está usando (qué tan grande es la comunidad) y cuánto tiempo ha estado en el mercado (madurez).
+
+* **Spring** no es solo un framework. A menudo nos referimos a **Spring** como "Spring framework" para indicar las funcionalidades principales, pero **Spring** ofrece un ecosistema completo formado por muchos proyectos utilizados en el desarrollo de aplicaciones. Cada proyecto está dedicado a un dominio específico y, al implementar una aplicación, puede usar más de estos proyectos para implementar la funcionalidad que desea. Los proyectos del ecosistema **Spring** que usaremos en este libro son los siguientes:
+
+   * **Spring Core**, que construye la base de **Spring** y proporciona funciones como el ***contexto***, los ***aspectos*** y el ***acceso básico a los datos***.
+
+   * **Spring Data**, que proporciona un conjunto de herramientas de alto nivel y fácil de usar para implementar la capa de persistencia de sus aplicaciones. Descubrirá lo fácil que es usar **Spring Data** para trabajar con bases de datos **SQL** y **NoSQL**.
+
+   * **Spring Boot**, que es un proyecto del ecosistema **Spring** que lo ayuda a aplicar un enfoque de "convención sobre configuración(convention-over-configuration)".
+
+* Muy a menudo, los materiales de aprendizaje (como libros, artículos o tutoriales en video) ofrecen ejemplos con **Spring** solo para aplicaciones de back-end. Si bien es cierto que está muy extendido el uso de **Spring** con aplicaciones de back-end, también puede usar **Spring** con otros tipos de aplicaciones, incluso en aplicaciones de escritorio y aplicaciones de automatización de pruebas.
