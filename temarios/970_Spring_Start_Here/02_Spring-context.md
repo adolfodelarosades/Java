@@ -137,73 +137,82 @@ La siguiente lista le muestra cómo agregar dependencias externas a su proyecto.
 
 ❷ Una dependencia está representada por un grupo de etiquetas **`<dependency> </dependency>`**.
 
-Una vez que haya agregado la dependencia en el archivo **`pom.xml`**, como se presenta en la lista anterior, el IDE las descarga y ahora encontrará estas dependencias en la carpeta "External Libraries" (figura 2.6).
+Una vez que haya agregado la dependencia en el archivo **`pom.xml`**, como se presenta en la lista anterior, el IDE las descarga y ahora encontrará estas dependencias en la carpeta "**`External Libraries`**" (figura 2.6).
 
 ![image](https://user-images.githubusercontent.com/23094588/212109065-ee27cb61-459a-4ab0-b878-d49714b67fb7.png)
 
-Figura 2.6 Cuando agrega una nueva dependencia al archivo pom.xml, Maven descarga los archivos jar que representan esa dependencia. Puede encontrar estos archivos jar en la carpeta Bibliotecas externas del proyecto.
+**Figura 2.6** Cuando agrega una nueva dependencia al archivo **`pom.xml`**, **Maven** descarga los archivos **`jar`** que representan esa dependencia. Puede encontrar estos archivos **`jar`** en la carpeta **`External Libraries`** del proyecto.
 
-Ahora podemos pasar a la siguiente sección, donde discutimos los conceptos básicos del contexto Spring. Creará proyectos de Maven y aprenderá a usar una dependencia de Spring llamada spring-context para administrar Springcontexto.
+Ahora podemos pasar a la siguiente sección, donde discutimos los conceptos básicos del **contexto Spring**. Creará proyectos de **Maven** y aprenderá a usar una dependencia de **Spring** llamada **`spring-context`** para administrar Spring context.
 
-2.2 Agregar nuevos beans al contexto Spring
-EnEn esta sección, aprenderá cómo agregar nuevas instancias de objetos (es decir, beans) al contexto de Spring. Descubrirá que tiene varias formas de agregar beans en el contexto de Spring, de modo que Spring pueda administrarlos y conectar las funciones que proporciona en su aplicación. Dependiendo de la acción, elegirá una forma específica de agregar el bean; discutiremos cuándo seleccionar uno u otro. Puede agregar beans en el contexto de las siguientes maneras (que describiremos más adelante en este capítulo):
+### 2.2 Agregar nuevos beans al Spring context
 
-Usando la anotación @Bean
+En esta sección, aprenderá cómo agregar nuevas instancias de objetos (es decir, **beans**) al **contexto de Spring**. Descubrirá que tiene varias formas de agregar **beans** en el **contexto de Spring**, de modo que Spring pueda administrarlos y conectar las funciones que proporciona en su aplicación. Dependiendo de la acción, elegirá una forma específica de agregar el **beans**; discutiremos cuándo seleccionar uno u otro. Puede agregar **beans** en el **contexto** de las siguientes maneras (que describiremos más adelante en este capítulo):
 
-Uso de anotaciones de estereotipos
+* Usando la anotación **`@Bean`**
+* Uso de anotaciones de estereotipos
+* Programáticamente
 
-Programáticamente
+Primero vamos a crear un proyecto sin referencia a ningún framewok, ni siquiera a Spring. Luego agregaremos las dependencias necesarias para usar el **contexto Spring** y crearlo (figura 2.7). Este ejemplo servirá como requisito previo para agregar **beans** a los ejemplos de **contexto de Spring** en los que vamos a trabajar en las secciones 2.2.1 a 2.2.3.
 
-Primero vamos a crear un proyecto sin referencia a ningún marco, ni siquiera a Spring. Luego agregaremos las dependencias necesarias para usar el contexto Spring y crearlo (figura 2.7). Este ejemplo servirá como requisito previo para agregar beans a los ejemplos de contexto de Spring en los que vamos a trabajar en las secciones 2.2.1 a 2.2.3.
+![image](https://user-images.githubusercontent.com/23094588/212112386-82918827-4937-4c98-a6b2-c6a6e8a55886.png)
 
+**Figura 2.7** Para comenzar, creamos una instancia de objeto y el **contexto Spring** vacío.
 
+Creamos un proyecto **Maven** y definimos una clase. Como es gracioso imaginarlo, consideraré una clase llamada **`Parrot`** con solo un atributo **`String`** que represente el nombre del loro(listado 2.3). Recuerde, en este capítulo, solo nos enfocamos en agregar **beans** al **contexto de Spring**, por lo que está bien usar cualquier objeto que lo ayude a recordar mejor las sintaxis. Encontrará el código para este ejemplo en el proyecto **"sq-ch2-ex1"** (puede descargar los proyectos desde la sección "Recursos" del libro). Para su proyecto, puede usar el mismo nombre o elegir el que prefiera.
 
-Figura 2.7 Para comenzar, creamos una instancia de objeto y el contexto Spring vacío.
+**Listado 2.3** La clase **`Parrot`**
 
-Creamos un proyecto Maven y definimos una clase. Como es gracioso imaginarlo, consideraré una clase llamada Parrot con solo un atributo String que represente el nombre del loro (listado 2.3). Recuerde, en este capítulo, solo nos enfocamos en agregar beans al contexto de Spring, por lo que está bien usar cualquier objeto que lo ayude a recordar mejor las sintaxis. Encontrará el código para este ejemplo en el proyecto "sq-ch2-ex1" (puede descargar los proyectos desde la sección "Recursos" del libro en vivo). Para su proyecto, puede usar el mismo nombre o elegir el que prefiera.
-
-Listado 2.3 La clase Parrot
-
-Loro de clase pública { 
+```java
+public class Parrot {
  
-  Nombre de cadena privado; 
+  private String name;
  
-  // captadores y definidores omitidos
+  // Omitted getters and setters
 }
-Ahora puede definir una clase que contenga el método principal y crear una instancia de la clase Parrot , como se presenta en la siguiente lista. Normalmente llamo a esta clase Main .
+```
 
-Listado 2.4 Creando una instancia de la clase Parrot
+Ahora puede definir una clase que contenga el método **`main`** y crear una instancia de la clase **`Parrot`**, como se presenta en la siguiente lista. Normalmente llamo a esta clase **`Main`** .
 
-public class Main { 
+**Listado 2.4** Creando una instancia de la clase **`Parrot`**
+
+```java
+public class Main {
  
-  public static void main(String[] args) { 
-    Parrot p = new Parrot(); 
+  public static void main(String[] args) {
+    Parrot p = new Parrot();
   }
 }
-Ahora es el momento de agregar las dependencias necesarias a nuestro proyecto. Debido a que estamos usando Maven, agregaré las dependencias en el archivo pom.xml, como se presenta en la siguiente lista.
+```
 
-Listado 2.5 Agregando la dependencia para el contexto de Spring
+Ahora es el momento de agregar las dependencias necesarias a nuestro proyecto. Debido a que estamos usando **Maven**, agregaré las dependencias en el archivo **`pom.xml`**, como se presenta en la siguiente lista.
 
-<proyecto xmlns="http://maven.apache.org/POM/4.0.0" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http:/ /maven.apache.org/POM/4.0.0      
-  http://maven.apache.org/xsd/maven-4.0.0.xsd"> 
+**Listado 2.5** Agregando la dependencia para el **contexto de Spring**
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0     
+  http://maven.apache.org/xsd/maven-4.0.0.xsd">
  
-  <versión del modelo>4.0.0</versión del modelo> 
+  <modelVersion>4.0.0</modelVersion>
  
-  <id de grupo>org.example< /groupId> 
-  <artifactId>sq-ch2-ex1</artifactId> 
-  <version>1.0-SNAPSHOT</version> 
+  <groupId>org.example</groupId>
+  <artifactId>sq-ch2-ex1</artifactId>
+  <version>1.0-SNAPSHOT</version>
  
-  <dependencies> 
-     <dependency> 
-        <groupId>org.springframework</groupId> 
-        <artifactId>spring-context</artifactId > 
-        <versión>5.2.6.LIBERAR</versión> 
-     </dependencia> 
-  </dependencias>
+  <dependencies>
+     <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>5.2.6.RELEASE</version>
+     </dependency>
+  </dependencies>
     
-</proyecto>
+</project>
+```
+
+
 Una cosa crítica a observar es que Spring está diseñado para ser modular. Por modular, me refiero a que no necesita agregar todo Spring a su aplicación cuando usa algo fuera del ecosistema Spring. Solo necesita agregar las partes que usa. Por esta razón, en el listado 2.5, verá que solo agregué la dependencia del contexto de primavera, que le indica a Maven que extraiga las dependencias necesarias para que podamos usar el contexto Spring. A lo largo del libro, agregaremos varias dependencias a nuestros proyectos de acuerdo con lo que implementemos, pero siempre agregaremos solo lo que necesitamos.
 
 NOTA Quizás se pregunte cómo supe qué dependencia de Maven debería agregar. La verdad es que los he usado tantas veces que me los sé de memoria. Sin embargo, no es necesario memorizarlos. Siempre que trabaje con un nuevo proyecto de Spring, puede buscar las dependencias que necesita agregar directamente en la referencia de Spring ( https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core .html ). Generalmente, las dependencias de Spring son parte del ID de grupo org.springframework.
