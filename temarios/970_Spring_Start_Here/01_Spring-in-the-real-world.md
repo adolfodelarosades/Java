@@ -117,3 +117,79 @@ Inicialmente, puede imaginar el framework **Spring** como un sistema solar, dond
 
 ![image](https://user-images.githubusercontent.com/23094588/212045935-5fd00264-f02b-4140-86e7-0317949d139f.png)
 
+**Figura 1.4** ***Inversión de control***. En lugar de ejecutar su propio código, que hace uso de varias otras dependencias, en el caso de un escenario de IoC, la ejecución de la aplicación está controlada por la dependencia. El framework **Spring** controla una aplicación durante su ejecución. Por lo tanto, implementa un escenario IoC de ejecución.
+
+**NOTA** En este contexto, el término "controles" se refiere a acciones como "crear una instancia" o "llamar a un método". Un framework puede crear objetos de las clases que defina en su aplicación. Según las configuraciones que escriba, **Spring** intercepta el método para aumentarlo con varias características. Por ejemplo, **Spring** puede interceptar un método específico para registrar cualquier error que pueda aparecer durante la ejecución del método.
+
+Comenzará a aprender **Spring** con **Spring Core** discutiendo la funcionalidad ***Spring IoC*** en los capítulos 2 a 5. El contenedor IoC une los componentes **Spring** y los componentes de su aplicación al framework. Usando el ***contenedor IoC***, al que a menudo se refiere como el ***contexto de Spring***, le da a conocer ciertos objetos a **Spring**, lo que permite que el framework los use en la forma en que los configuró.
+
+En el capítulo 6, continuaremos nuestra discusión con la ***programación orientada a aspectos de Spring(AOP)***. **Spring** puede controlar instancias agregadas a su contenedor IoC, y una de las cosas que puede hacer es interceptar métodos que representan el comportamiento de estas instancias. Esta capacidad se llama *aspecting the method*. **Spring AOP** es una de las formas más comunes en que el framework interactúa con lo que hace su aplicación. Este rasgo hace que **Spring AOP** también sea parte de los elementos esenciales. Parte del **Spring Core**, también encontramos *gestión de recursos*, *internacionalización(i18n)*, *conversión de tipo* y *SpEL*. Encontraremos aspectos de estas características en ejemplos a lo largo del libro.
+
+#### 1.2.2 Uso de la función Spring Data Access para implementar la persistencia de la aplicación
+
+Para la mayoría de las aplicaciones, es fundamental conservar parte de los datos que procesan. Trabajar con bases de datos es un tema fundamental y, en **Spring**, es el módulo de acceso a datos el que utilizará para cuidar la persistencia de los datos en muchos casos. **Spring Data Access** incluye el uso de **JDBC**, la integración con **object-relational mapping (ORM)** como **Hibernate** (no se preocupe si aún no sabe qué es un framework ORM o no ha oído hablar de **Hibernate**; discutiremos estos aspectos más adelante en el libro) y la gestión de transacciones. En los capítulos 12 a 14, cubriremos todo lo necesario para que pueda comenzar con **Spring DataAcceso**.
+
+#### 1.2.3 Las capacidades de Spring MVC para desarrollar aplicaciones web
+
+Las aplicaciones más comunes desarrolladas con **Spring** son aplicaciones web y, dentro del ecosistema **Spring**, encontrará un gran conjunto de herramientas que le permiten escribir aplicaciones web y servicios web de diferentes maneras. Puede usar **Spring MVC** para desarrollar aplicaciones utilizando una forma de servlet estándar, que es común en una gran cantidad de aplicaciones en la actualidad. En el capítulo 7, entraremos en más detalles sobre el uso de **SpringMVC**.
+
+#### 1.2.4 La función de Spring testing
+
+El módulo **Spring testing** nos ofrece un gran conjunto de herramientas que usaremos para escribir pruebas unitarias y de integración. Se han escrito muchas páginas sobre el tema de las pruebas, pero discutiremos todo lo que es esencial para comenzar con las pruebas de Spring en el capítulo 15. También me referiré a algunos recursos valiosos que necesita leer para obtener todos los detalles de este tema. Mi regla general es que no eres un desarrollador maduro si no entiendes las pruebas, por lo que este tema es uno que deberías preocuparte.
+
+#### 1.2.5 Proyectos del ecosistema Spring
+
+El ecosistema de **Spring** es mucho más que las capacidades discutidas anteriormente en esta sección. Incluye una gran colección de otros fraeworks que se integran bien y forman un universo más grande. Aquí tenemos proyectos como **Spring Data**, **Spring Security**, **Spring Cloud**, **Spring Batch**, **Spring Boot**, etc. Cuando desarrolla una aplicación, puede usar más de estos proyectos juntos. Por ejemplo, puede crear una aplicación utilizando todo **Spring Boot**, **Spring Security** y **Spring Data**. En los próximos capítulos, trabajaremos en proyectos más pequeños que hacen uso de varios proyectos del ecosistema **Spring**. Cuando digo proyecto, me refiero a una parte del ecosistema **Spring** que se desarrolla de forma independiente. Cada uno de estos proyectos tiene un equipo separado que trabaja para ampliar sus capacidades. Puede encontrar mayor información en la página oficial de **Spring** https://spring.io/projects.
+
+De este vasto universo creado por **Spring**, también nos referiremos a **Spring Data** y **Spring Boot**. Estos proyectos se encuentran a menudo en las aplicaciones, por lo que es importante conocerlos desde el principio.
+
+**EXTENDIENDO LAS CAPACIDADES DE PERSISTENCIA CON SPRING DATA**
+
+El proyecto **Spring Data** implementa una parte del ecosistema **Spring** que le permite conectarse fácilmente a bases de datos y utilizar la capa de persistencia con un número mínimo de líneas de código escritas. El proyecto hace referencia a las tecnologías **SQL** y **NoSQL** y crea una capa de alto nivel que simplifica la forma en que trabaja con los datos de persistencia.
+
+**NOTA** Tenemos **Spring Data Access**, que es un módulo de **Spring Core**, y también tenemos un proyecto independiente en el ecosistema de **Spring** llamado **Spring Data**. **Spring Data Access** contiene implementaciones fundamentales de acceso a datos como el mecanismo de transacción y las herramientas **JDBC**. **Spring Data** mejora el acceso a las bases de datos y ofrece un conjunto más amplio de herramientas, lo que hace que el desarrollo sea más accesible y permite que su aplicación se conecte a diferentes tipos de fuentes de datos. Hablaremos de este tema en el capítulo 14.
+
+**SPRING BOOT**
+
+**Spring Boot** es un proyecto que forma parte del ecosistema **Spring** que introduce el concepto de "convención sobre configuración". La idea principal de este concepto es que, en lugar de configurar usted mismo todas las configuraciones de un framework,**Spring Boot** le ofrece una configuración predeterminada que puede personalizar según sea necesario. El resultado, en general, es que escribe menos código porque sigue convenciones conocidas y su aplicación se diferencia de otras en pocas o pequeñas formas. Entonces, en lugar de escribir todas las configuraciones para todas y cada una de las aplicaciones, es más eficiente comenzar con una configuración predeterminada y solo cambiar lo que es diferente de la convención. Hablaremos más sobre **Spring Boot** a partir del capítulo 7.
+
+El ecosistema de **Spring** es vasto y contiene muchos proyectos. Algunos de ellos se encuentran con más frecuencia que otros, y es posible que algunos no los use en absoluto si está creando una aplicación sin una necesidad particular. En este libro, nos referimos solo a los proyectos que son esenciales para comenzar: **Spring Core**, **Spring Data** y **Spring Boot**. Puede encontrar una lista completa de proyectos que forman parte del ecosistema **Spring**. Puede encontrar mayor información en la página oficial de **Spring**: https://spring.io/proyectos/.
+
+Alternativas para usar Spring
+
+Realmente no podemos discutir alternativas a **Spring** porque alguien podría malinterpretarlos como alternativas a todo el ecosistema. Pero para muchos de los componentes y proyectos individuales que crean el ecosistema **Spring**, puede encontrar otras opciones, como otros frameworks o bibliotecas comerciales o de código abierto.
+
+
+
+Por ejemplo, tomemos el contenedor Spring IoC. Hace años, la especificación Java EE era una solución muy apreciada por los desarrolladores. Con una filosofía ligeramente diferente, Java EE (que en 2017 fue de código abierto y rehecho en Jakarta EE, https://jakarta.ee/ ) ofreció especificaciones como contexto e inyección de dependencia.(CDI) o Enterprise Java Beans(EJB). Puede usar CDI o EJB para administrar un contexto de instancias de objetos e implementar aspectos (llamados "interceptores" en la terminología de EE). Además, a lo largo de la historia, Google Guice ( https://github.com/google/guice ) fue un marco apreciado para la gestión de instancias de objetos en un contenedor.
+
+
+
+Para algunos de los proyectos tomados individualmente, podría encontrar una o más alternativas. Por ejemplo, puede elegir usar Apache Shiro ( https://shiro.apache.org/ ) en lugar de Spring Security. O podría decidir implementar su aplicación web usando el marco Play ( https://www.playframework.com/ ) en lugar de Spring MVC y tecnologías relacionadas con Spring.
+
+
+
+Un proyecto más reciente que parece prometedor es Red Hat Quarkus. Quarkus está diseñado para implementaciones nativas en la nube y se vuelve cada vez más maduro con pasos rápidos. No me sorprendería verlo como uno de los proyectos líderes en el desarrollo de aplicaciones empresariales en el ecosistema de Java en el futuro ( https://quarkus.io/ ).
+
+
+
+Mi consejo para ti es que siempre tengas en cuenta tus alternativas. En el desarrollo de software, debe tener la mente abierta y nunca confiar en una solución como "la única". Siempre encontrará escenarios en los que una tecnología específica funciona mejor que otra.
+
+1.3 Primavera en escenarios del mundo real
+Ahoraque tiene una visión general de Spring, sabe cuándo y por qué debe usar un marco. En esta sección, le daré algunos escenarios de aplicación en los que el uso del marco Spring podría ser una excelente opción. Con demasiada frecuencia, he visto que los desarrolladores solo se refieren a las aplicaciones de back-end para usar un marco como Spring. Incluso he visto una tendencia de restringir, aún más, el escenario a las aplicaciones web de back-end. Si bien es cierto que en muchos casos vemos que Spring se usa de esta manera, es importante recordar que el marco no se limita a este escenario. He visto equipos que usan Spring con éxito en diferentes tipos de aplicaciones, como el desarrollo de una aplicación de prueba de automatización o incluso en escenarios de escritorio independientes.
+
+Le describiré con más detalle algunos escenarios comunes del mundo real en los que he visto que Spring se usa con éxito. Estos no son los únicos escenarios posibles, y Spring podría no funcionar todo el tiempo en estos casos. Recuerde lo que discutimos en la sección 1.2: un marco no siempre es una buena opción. Pero estos son casos comunes en los que, por lo general, Spring encaja bien:
+
+El desarrollo de una aplicación backend
+
+El desarrollo de un marco de pruebas de automatización.
+
+El desarrollo de una aplicación de escritorio.
+
+El desarrollo de una aplicación móvil.
+
+1.3.1 Uso de Spring en el desarrollo de una aplicación de backend
+ALa aplicación backend es la parte de un sistema que se ejecuta en el lado del servidor y tiene la responsabilidad de administrar los datos y atender las solicitudes de las aplicaciones de los clientes. Los usuarios acceden a las funcionalidades utilizando directamente las aplicaciones cliente. Además, las aplicaciones cliente realizan solicitudes a la aplicación backend para trabajar con los datos de los usuarios. La aplicación de back-end puede usar bases de datos para almacenar datos o comunicarse con otras aplicaciones de back-end de diferentes maneras.
+
+Puede imaginar, en un escenario del mundo real, que la aplicación sería la aplicación de back-end que administra las transacciones en sus cuentas bancarias. Los usuarios pueden acceder a sus cuentas y administrarlas a través de una aplicación web (banca en línea) o una aplicación móvil. Tanto las aplicaciones móviles como las aplicaciones web representan clientes para la aplicación de back-end. Para administrar las transacciones de los usuarios, la aplicación de back-end debe comunicarse con otras soluciones de back-end, y parte de los datos que administra deben conservarse en una base de datos. En la figura 1.5, puede visualizar la arquitectura de dicho sistema.
+
