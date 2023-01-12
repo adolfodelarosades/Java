@@ -58,15 +58,15 @@ Más sobre Packt Publishing
 
 ## Contents
 
-### [Preface](https://github.com/adolfodelarosades/Java/blob/master/temarios/985_Microservices_with_SpringBoot/00_Preface.md) 👍
+### Preface
 * Who this book is for
 * What this book covers
 * To get the most out of this book
 * Get in touch
 
-### [Part I: Getting Started with Microservice Development Using Spring Boot](https://github.com/adolfodelarosades/Java/blob/master/temarios/985_Microservices_with_SpringBoot/001_Part01.md) 👍
+### Part I: Getting Started with Microservice Development Using Spring Boot
 
-### [1. Introduction to Microservices](https://github.com/adolfodelarosades/Java/blob/master/temarios/985_Microservices_with_SpringBoot/01_Introduction-to-Microservices.md)
+### 1. Introduction to Microservices
 * Technical requirements
 * My way into microservices
    * Benefits of autonomous software components
@@ -316,311 +316,327 @@ Más sobre Packt Publishing
 * Questions
 
 ### 10. Using Spring Cloud Gateway to Hide Microservices behind an Edge Server
-Technical requirements
-Adding an edge server to our system landscape
-Setting up Spring Cloud Gateway
-Adding a composite health check
-Configuring a Spring Cloud Gateway
-Routing rules
-Trying out the edge server
-Examining what is exposed outside the Docker engine
-Trying out the routing rules
-Calling the product composite API through the edge server
-Calling the Swagger UI through the edge server
-Calling Eureka through the edge server
-Routing based on the host header
-Summary
-Questions
-Securing Access to APIs
-Technical requirements
-Introduction to OAuth 2.0 and OpenID Connect
-Introducing OAuth 2.0
-Introducing OpenID Connect
-Securing the system landscape
-Protecting external communication with HTTPS
-Replacing a self-signed certificate at runtime
-Securing access to the discovery server
-Changes in the Eureka server
-Changes in Eureka clients
-Adding a local authorization server
-Protecting APIs using OAuth 2.0 and OpenID Connect
-Changes in both the edge server and the product-composite service
-Changes in the product-composite service only
-Changes to allow Swagger UI to acquire access tokens
-Changes in the test script
-Testing with the local authorization server
-Building and running the automated tests
-Testing the protected discovery server
-Acquiring access tokens
-Acquiring access tokens using the client credentials grant flow
-Acquiring access tokens using the authorization code grant flow
-Calling protected APIs using access tokens
-Testing Swagger UI with OAuth 2.0
-Testing with an external OpenID Connect provider
-Setting up and configuring an account in Auth0
-Applying the required changes to use Auth0 as an OpenID provider
-Changing the configuration in the OAuth resource servers
-Changing the test script so it acquires access tokens from Auth0
-Running the test script with Auth0 as the OpenID Connect provider
-Acquiring access tokens using the client credentials grant flow
-Acquiring access tokens using the authorization code grant flow
-Calling protected APIs using the Auth0 access tokens
-Getting extra information about the user
-Summary
-Questions
-Centralized Configuration
-Technical requirements
-Introduction to the Spring Cloud Configuration server
-Selecting the storage type of the configuration repository
-Deciding on the initial client connection
-Securing the configuration
-Securing the configuration in transit
-Securing the configuration at rest
-Introducing the config server API
-Setting up a config server
-Setting up a routing rule in the edge server
-Configuring the config server for use with Docker
-Configuring clients of a config server
-Configuring connection information
-Structuring the configuration repository
-Trying out the Spring Cloud Configuration server
-Building and running automated tests
-Getting the configuration using the config server API
-Encrypting and decrypting sensitive information
-Summary
-Questions
-Improving Resilience Using Resilience4j
-Technical requirements
-Introducing the Resilience4j resilience mechanisms
-Introducing the circuit breaker
-Introducing the time limiter
-Introducing the retry mechanism
-Adding the resilience mechanisms to the source code
-Adding programmable delays and random errors
-Changes in the API definitions
-Changes in the product-composite microservice
-Changes in the product microservice
-Adding a circuit breaker and a time limiter
-Adding dependencies to the build file
-Adding annotations in the source code
-Adding fail-fast fallback logic
-Adding configuration
-Adding a retry mechanism
-Adding the retry annotation
-Adding configuration
-Adding automated tests
-Trying out the circuit breaker and retry mechanism
-Building and running the automated tests
-Verifying that the circuit is closed under normal operations
-Forcing the circuit breaker to open when things go wrong
-Closing the circuit breaker again
-Trying out retries caused by random errors
-Summary
-Questions
-Understanding Distributed Tracing
-Technical requirements
-Introducing distributed tracing with Spring Cloud Sleuth and Zipkin
-Adding distributed tracing to the source code
-Adding dependencies to build files
-Adding configuration for Spring Cloud Sleuth and Zipkin
-Adding Zipkin to the Docker Compose files
-Trying out distributed tracing
-Starting up the system landscape with RabbitMQ as the queue manager
-Sending a successful API request
-Sending an unsuccessful API request
-Sending an API request that triggers asynchronous processing
-Monitoring trace information passed to Zipkin in RabbitMQ
-Using Kafka as a message broker
-Summary
-Questions
-Part III: Developing Lightweight Microservices Using Kubernetes
-Introduction to Kubernetes
-Technical requirements
-Introducing Kubernetes concepts
-Introducing Kubernetes API objects
-Introducing Kubernetes runtime components
-Creating a Kubernetes cluster using Minikube
-Working with Minikube profiles
-Working with the Kubernetes CLI, kubectl
-Working with kubectl contexts
-Creating a Kubernetes cluster
-Trying out a sample deployment
-Managing a local Kubernetes cluster
-Hibernating and resuming a Kubernetes cluster
-Terminating a Kubernetes cluster
-Summary
-Questions
-Deploying Our Microservices to Kubernetes
-Technical requirements
-Replacing Netflix Eureka with Kubernetes Services
-Introducing how Kubernetes will be used
-Using Spring Boot's support for graceful shutdown and probes for liveness and readiness
-Introducing Helm
-Running Helm commands
-Looking into a Helm chart
-Helm templates and values
-The common library chart
-The ConfigMap template
-The Secrets template
-The Service template
-The Deployment template
-The components charts
-The environment charts
-Deploying to Kubernetes for development and test
-Building Docker images
-Resolving Helm chart dependencies
-Deploying to Kubernetes
-Changes in the test script for use with Kubernetes
-Testing the deployment
-Testing Spring Boot's support for graceful shutdown and probes for liveness and readiness
-Deploying to Kubernetes for staging and production
-Changes in the source code
-Deploying to Kubernetes
-Cleaning up
-Summary
-Questions
-Implementing Kubernetes Features to Simplify the System Landscape
-Technical requirements
-Replacing the Spring Cloud Config Server
-Changes required to replace the Spring Cloud Config Server
-Replacing the Spring Cloud Gateway
-Changes required to replace the Spring Cloud Gateway
-Automating certificate provisioning
-Testing with Kubernetes ConfigMaps, Secrets, Ingress, and the cert-manager
-Rotating certificates
-Deploying to Kubernetes for staging and production
-Verifying that the microservices work without Kubernetes
-Changes in the Docker Compose files
-Testing with Docker Compose
-Summary
-Questions
-Using a Service Mesh to Improve Observability and Management
-Technical requirements
-Introducing service meshes using Istio
-Introducing Istio
-Injecting Istio proxies into microservices
-Introducing Istio API objects
-Simplifying the microservice landscape
-Replacing Kubernetes Ingress controller with Istio ingress gateway
-Replacing the Zipkin server with Istio's Jaeger component
-Deploying Istio in a Kubernetes cluster
-Setting up access to Istio services
-Creating the service mesh
-Source code changes
-Content in the _istio_base.yaml template
-Content in the _istio_dr_mutual_tls.yaml template
-Running commands to create the service mesh
-Observing the service mesh
-Securing a service mesh
-Protecting external endpoints with HTTPS and certificates
-Authenticating external requests using OAuth 2.0/OIDC access tokens
-Protecting internal communication using mutual authentication (mTLS)
-Ensuring that a service mesh is resilient
-Testing resilience by injecting faults
-Testing resilience by injecting delays
-Performing zero-downtime updates
-Source code changes
-Virtual services and destination rules
-Deployments and services
-Tying things together in the prod-env Helm chart
-Deploying v1 and v2 versions of the microservices with routing to the v1 version
-Verifying that all traffic initially goes to the v1 version of the microservices
-Running canary tests
-Running blue/green deployment
-A short introduction to the kubectl patch command
-Performing the blue/green deployment
-Running tests with Docker Compose
-Summary
-Questions
-Centralized Logging with the EFK Stack
-Technical requirements
-Introducing Fluentd
-Overview of Fluentd
-Configuring Fluentd
-Deploying the EFK stack on Kubernetes
-Building and deploying our microservices
-Deploying Elasticsearch and Kibana
-A walkthrough of the manifest files
-Running the deploy commands
-Deploying Fluentd
-A walkthrough of the manifest files
-Running the deploy commands
-Trying out the EFK stack
-Initializing Kibana
-Analyzing the log records
-Discovering the log records from microservices
-Performing root cause analyses
-Summary
-Questions
-Monitoring Microservices
-Technical requirements
-Introduction to performance monitoring using Prometheus and Grafana
-Changes in source code for collecting application metrics
-Building and deploying the microservices
-Monitoring microservices using Grafana dashboards
-Installing a local mail server for tests
-Starting up the load test
-Using Kiali's built-in dashboards
-Importing existing Grafana dashboards
-Developing your own Grafana dashboards
-Examining Prometheus metrics
-Creating the dashboard
-Trying out the new dashboard
-Exporting and importing Grafana dashboards
-Setting up alarms in Grafana
-Setting up a mail-based notification channel
-Setting up an alarm on the circuit breaker
-Trying out the circuit breaker alarm
-Summary
-Questions
-Installation Instructions for macOS
-Technical requirements
-Installing tools
-Installing Homebrew
-Using Homebrew to install tools
-Install tools without Homebrew
-Post-installation actions
-Verifying the installations
-Accessing the source code
-Using an IDE
-The structure of the code
-Installation Instructions for Microsoft Windows with WSL 2 and Ubuntu
-Technical requirements
-Installing tools
-Installing tools on Windows
-Installing WSL 2 – Windows Subsystem for Linux v2
-Installing Ubuntu 20.04 on WSL 2
-Installing Windows Terminal
-Installing Docker Desktop for Windows
-Installing Visual Studio Code and its extension for Remote WSL
-Installing tools on the Linux server in WSL 2
-Installing tools using apt install
-Installing the Spring Boot CLI using sdk install
-Installing the remaining tools using curl and install
-Verifying the installations
-Accessing the source code
-The structure of the code
-Native Compiled Java Microservices
-Technical requirements
-When to native compile Java source code
-Introducing the GraalVM project
-Introducing the Spring Native project
-Compiling source code to a native image
-Changes in the source code
-Updates to the Gradle build files
-Providing native hints as annotations
-When underlying frameworks and libraries don't support native compilation
-Installing the tracing agent
-Installing the tracing agent on macOS
-Installing the tracing agent on Ubuntu under WSL 2 in Microsoft Windows
-Running the tracing agent
-Creating the native images
-Testing with Docker Compose
-Testing with Kubernetes
-Summary
-Questions
+* Technical requirements
+* Adding an edge server to our system landscape
+* Setting up Spring Cloud Gateway
+   * Adding a composite health check
+   * Configuring a Spring Cloud Gateway
+      * Routing rules
+* Trying out the edge server
+   * Examining what is exposed outside the Docker engine
+   * Trying out the routing rules
+      * Calling the product composite API through the edge server
+      * Calling the Swagger UI through the edge server
+      * Calling Eureka through the edge server
+      * Routing based on the host header
+* Summary
+* Questions
+
+### 11. Securing Access to APIs
+* Technical requirements
+* Introduction to OAuth 2.0 and OpenID Connect
+   * Introducing OAuth 2.0
+   * Introducing OpenID Connect
+* Securing the system landscape
+* Protecting external communication with HTTPS
+   * Replacing a self-signed certificate at runtime
+* Securing access to the discovery server
+   * Changes in the Eureka server
+   * Changes in Eureka clients
+* Adding a local authorization server
+* Protecting APIs using OAuth 2.0 and OpenID Connect
+   * Changes in both the edge server and the product-composite service
+   * Changes in the product-composite service only
+      * Changes to allow Swagger UI to acquire access tokens
+   * Changes in the test script
+* Testing with the local authorization server
+   * Building and running the automated tests
+   * Testing the protected discovery server
+   * Acquiring access tokens
+      * Acquiring access tokens using the client credentials grant flow
+      * Acquiring access tokens using the authorization code grant flow
+   * Calling protected APIs using access tokens
+   * Testing Swagger UI with OAuth 2.0
+* Testing with an external OpenID Connect provider
+   * Setting up and configuring an account in Auth0
+   * Applying the required changes to use Auth0 as an OpenID provider
+      * Changing the configuration in the OAuth resource servers
+      * Changing the test script so it acquires access tokens from Auth0
+   * Running the test script with Auth0 as the OpenID Connect provider
+   * Acquiring access tokens using the client credentials grant flow
+   * Acquiring access tokens using the authorization code grant flow
+   * Calling protected APIs using the Auth0 access tokens
+   * Getting extra information about the user
+* Summary
+* Questions
+
+### 12. Centralized Configuration
+* Technical requirements
+* Introduction to the Spring Cloud Configuration server
+   * Selecting the storage type of the configuration repository
+   * Deciding on the initial client connection
+   * Securing the configuration
+      * Securing the configuration in transit
+      * Securing the configuration at rest
+   * Introducing the config server API
+* Setting up a config server
+   * Setting up a routing rule in the edge server
+   * Configuring the config server for use with Docker
+* Configuring clients of a config server
+   * Configuring connection information
+* Structuring the configuration repository
+* Trying out the Spring Cloud Configuration server
+   * Building and running automated tests
+   * Getting the configuration using the config server API
+   * Encrypting and decrypting sensitive information
+* Summary
+* Questions
+
+### 13. Improving Resilience Using Resilience4j
+* Technical requirements
+* Introducing the Resilience4j resilience mechanisms
+   * Introducing the circuit breaker
+   * Introducing the time limiter
+   * Introducing the retry mechanism
+* Adding the resilience mechanisms to the source code
+   * Adding programmable delays and random errors
+      * Changes in the API definitions
+      * Changes in the product-composite microservice
+      * Changes in the product microservice
+   * Adding a circuit breaker and a time limiter
+      * Adding dependencies to the build file
+      * Adding annotations in the source code
+      * Adding fail-fast fallback logic
+      * Adding configuration
+   * Adding a retry mechanism
+      * Adding the retry annotation
+      * Adding configuration
+   * Adding automated tests
+* Trying out the circuit breaker and retry mechanism
+   * Building and running the automated tests
+   * Verifying that the circuit is closed under normal operations
+   * Forcing the circuit breaker to open when things go wrong
+   * Closing the circuit breaker again
+   * Trying out retries caused by random errors
+* Summary
+* Questions
+
+### 14. Understanding Distributed Tracing
+* Technical requirements
+* Introducing distributed tracing with Spring Cloud Sleuth and Zipkin
+* Adding distributed tracing to the source code
+   * Adding dependencies to build files
+   * Adding configuration for Spring Cloud Sleuth and Zipkin
+   * Adding Zipkin to the Docker Compose files
+*  Trying out distributed tracing
+   * Starting up the system landscape with RabbitMQ as the queue manager
+   * Sending a successful API request
+   * Sending an unsuccessful API request
+   * Sending an API request that triggers asynchronous processing
+   * Monitoring trace information passed to Zipkin in RabbitMQ
+   * Using Kafka as a message broker
+* Summary
+* Questions
+
+### Part III: Developing Lightweight Microservices Using Kubernetes
+
+### 15. Introduction to Kubernetes
+* Technical requirements
+* Introducing Kubernetes concepts
+* Introducing Kubernetes API objects
+* Introducing Kubernetes runtime components
+* Creating a Kubernetes cluster using Minikube
+   * Working with Minikube profiles
+   * Working with the Kubernetes CLI, kubectl
+   * Working with kubectl contexts
+   * Creating a Kubernetes cluster
+* Trying out a sample deployment
+* Managing a local Kubernetes cluster
+   * Hibernating and resuming a Kubernetes cluster
+   * Terminating a Kubernetes cluster
+* Summary
+* Questions
+
+### 16. Deploying Our Microservices to Kubernetes
+* Technical requirements
+* Replacing Netflix Eureka with Kubernetes Services
+* Introducing how Kubernetes will be used
+* Using Spring Boot's support for graceful shutdown and probes for liveness and readiness
+* Introducing Helm
+   * Running Helm commands
+   * Looking into a Helm chart
+   * Helm templates and values
+   * The common library chart
+      * The ConfigMap template
+      * The Secrets template
+      * The Service template
+      * The Deployment template
+   * The components charts
+   * The environment charts
+* Deploying to Kubernetes for development and test
+   * Building Docker images
+   * Resolving Helm chart dependencies
+   * Deploying to Kubernetes
+   * Changes in the test script for use with Kubernetes
+   * Testing the deployment
+      * Testing Spring Boot's support for graceful shutdown and probes for liveness and readiness
+   * Deploying to Kubernetes for staging and production
+      * Changes in the source code
+      * Deploying to Kubernetes
+      * Cleaning up
+* Summary
+* Questions
+
+### 17. Implementing Kubernetes Features to Simplify the System Landscape
+* Technical requirements
+* Replacing the Spring Cloud Config Server
+   * Changes required to replace the Spring Cloud Config Server
+* Replacing the Spring Cloud Gateway
+   * Changes required to replace the Spring Cloud Gateway
+* Automating certificate provisioning
+* Testing with Kubernetes ConfigMaps, Secrets, Ingress, and the cert-manager
+   * Rotating certificates
+   * Deploying to Kubernetes for staging and production
+* Verifying that the microservices work without Kubernetes
+   * Changes in the Docker Compose files
+   * Testing with Docker Compose
+* Summary
+* Questions
+
+18. Using a Service Mesh to Improve Observability and Management
+* Technical requirements
+* Introducing service meshes using Istio
+   * Introducing Istio
+   * Injecting Istio proxies into microservices
+   * Introducing Istio API objects
+* Simplifying the microservice landscape
+   * Replacing Kubernetes Ingress controller with Istio ingress gateway
+   * Replacing the Zipkin server with Istio's Jaeger component
+* Deploying Istio in a Kubernetes cluster
+   * Setting up access to Istio services
+* Creating the service mesh
+   * Source code changes
+      * Content in the _istio_base.yaml template
+      * Content in the _istio_dr_mutual_tls.yaml template
+   * Running commands to create the service mesh
+* Observing the service mesh
+* Securing a service mesh
+   * Protecting external endpoints with HTTPS and certificates
+   * Authenticating external requests using OAuth 2.0/OIDC access tokens
+   * Protecting internal communication using mutual authentication (mTLS)
+* Ensuring that a service mesh is resilient
+   * Testing resilience by injecting faults
+   * Testing resilience by injecting delays
+* Performing zero-downtime updates
+   * Source code changes
+      * Virtual services and destination rules
+      * Deployments and services
+      * Tying things together in the prod-env Helm chart
+   * Deploying v1 and v2 versions of the microservices with routing to the v1 version
+   * Verifying that all traffic initially goes to the v1 version of the microservices
+   * Running canary tests
+   * Running blue/green deployment
+      * A short introduction to the kubectl patch command
+      * Performing the blue/green deployment
+* Running tests with Docker Compose
+* Summary
+* Questions
+
+### 19. Centralized Logging with the EFK Stack
+* Technical requirements
+* Introducing Fluentd
+   * Overview of Fluentd
+   * Configuring Fluentd
+* Deploying the EFK stack on Kubernetes
+   * Building and deploying our microservices
+   * Deploying Elasticsearch and Kibana
+      * A walkthrough of the manifest files
+      * Running the deploy commands
+   * Deploying Fluentd
+      * A walkthrough of the manifest files
+      * Running the deploy commands
+* Trying out the EFK stack
+   * Initializing Kibana
+   * Analyzing the log records
+   * Discovering the log records from microservices
+   * Performing root cause analyses
+* Summary
+* Questions
+
+### 20. Monitoring Microservices
+* Technical requirements
+* Introduction to performance monitoring using Prometheus and Grafana
+* Changes in source code for collecting application metrics
+* Building and deploying the microservices
+* Monitoring microservices using Grafana dashboards
+   * Installing a local mail server for tests
+   * Starting up the load test
+   * Using Kiali's built-in dashboards
+   * Importing existing Grafana dashboards
+   * Developing your own Grafana dashboards
+      * Examining Prometheus metrics
+      * Creating the dashboard
+      * Trying out the new dashboard
+   * Exporting and importing Grafana dashboards
+* Setting up alarms in Grafana
+   * Setting up a mail-based notification channel
+   * Setting up an alarm on the circuit breaker
+   * Trying out the circuit breaker alarm
+* Summary
+* Questions
+
+### 21. Installation Instructions for macOS
+* Technical requirements
+* Installing tools
+   * Installing Homebrew
+   * Using Homebrew to install tools
+   * Install tools without Homebrew
+   * Post-installation actions
+   * Verifying the installations
+* Accessing the source code
+   * Using an IDE
+   * The structure of the code
+
+### 22. Installation Instructions for Microsoft Windows with WSL 2 and Ubuntu
+* Technical requirements
+* Installing tools
+   * Installing tools on Windows
+      * Installing WSL 2 – Windows Subsystem for Linux v2
+      * Installing Ubuntu 20.04 on WSL 2
+      * Installing Windows Terminal
+      * Installing Docker Desktop for Windows
+      * Installing Visual Studio Code and its extension for Remote WSL
+   * Installing tools on the Linux server in WSL 2
+      * Installing tools using apt install
+      * Installing the Spring Boot CLI using sdk install
+      * Installing the remaining tools using curl and install
+      * Verifying the installations
+* Accessing the source code
+   * The structure of the code
+
+### 23. Native Compiled Java Microservices
+* Technical requirements
+* When to native compile Java source code
+* Introducing the GraalVM project
+* Introducing the Spring Native project
+* Compiling source code to a native image
+   * Changes in the source code
+      * Updates to the Gradle build files
+      * Providing native hints as annotations
+      * When underlying frameworks and libraries don't support native compilation
+   * Installing the tracing agent
+      * Installing the tracing agent on macOS
+      * Installing the tracing agent on Ubuntu under WSL 2 in Microsoft Windows
+   * Running the tracing agent
+   * Creating the native images
+* Testing with Docker Compose
+* Testing with Kubernetes
+* Summary
+* Questions
+
 Other Books You May Enjoy
 Index
-Landmarks
+
+### Landmarks
 Cover
 Index
