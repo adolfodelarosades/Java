@@ -385,141 +385,158 @@ public class ProjectConfig {
   }
 }
 ```
-AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-❶ Agrega la cadena "Hola" al contexto de Spring
 
-❷ Agrega el entero 10 al contexto Spring
+❶ Agrega la cadena **“`Hello`”** al **contexto de Spring**
 
-NOTA Recuerde el propósito del contexto de Spring: agregamos las instancias que esperamos que Spring necesite administrar. (De esta manera, conectamos las funcionalidades que ofrece el marco). En una aplicación del mundo real, no agregaremos todos los objetos al contexto de Spring. Comenzando con el capítulo 4, cuando nuestros ejemplos se acerquen más al código en una aplicación lista para producción, también nos enfocaremos más en los objetos que Spring necesita administrar. Por el momento, concéntrese en los enfoques que puede usar para agregar beans al contexto de Spring.
+❷ Agrega el **`integer 10`** al **contexto de Spring**
 
-Ahora puedes referirte a estos dos nuevos frijoles de la misma manera que hicimos con el loro. La siguiente lista le muestra cómo cambiar el método principal para imprimir los valores de los nuevos beans.
+**NOTA** Recuerde el propósito del **contexto de Spring**: agregamos las instancias que esperamos que Spring necesite administrar. (De esta manera, conectamos las funcionalidades que ofrece el framework). En una aplicación del mundo real, no agregaremos todos los objetos al **contexto de Spring**. Comenzando con el capítulo 4, cuando nuestros ejemplos se acerquen más al código en una aplicación lista para producción, también nos enfocaremos más en los objetos que Spring necesita administrar. Por el momento, concéntrese en los enfoques que puede usar para agregar **beans** al **contexto de Spring**.
 
-Listado 2.12 Imprimiendo los dos beans nuevos en la consola
+Ahora puedes referirte a estos dos nuevos **beans** de la misma manera que hicimos con el parrot. La siguiente lista le muestra cómo cambiar el método **`main`** para imprimir los valores de los nuevos **beans**.
+
+**Listado 2.12** Imprimiendo los dos nuevos **beans** en la consola
 
 
 ```java
-```
-
-public class Main { 
+public class Main {
  
-  public static void main(String[] args) { 
-    var context = new AnnotationConfigApplicationContext( 
-                   ProjectConfig.class); 
+  public static void main(String[] args) {
+    var context = new AnnotationConfigApplicationContext(
+                   ProjectConfig.class);
  
-    Parrot p = context.getBean(Parrot.class);    ❶ 
-    System.out.println(p.getName()); 
+    Parrot p = context.getBean(Parrot.class);    ❶
+    System.out.println(p.getName());
  
-    Cadena s = context.getBean(String.class); 
-    System.out.println(s); 
+    String s = context.getBean(String.class);
+    System.out.println(s);
  
-    Entero n = context.getBean(Integer.class); 
-    Sistema.salida.println(n); 
+    Integer n = context.getBean(Integer.class);
+    System.out.println(n);
   }
 }
-❶ No necesitas hacer ningún casting explícito. Spring busca un bean del tipo que solicitó en su contexto. Si tal frijol no existe, Spring lanzará una excepción.
+```
+
+❶ No necesitas hacer ningún casting explícito. Spring busca un **bean** del tipo que solicitó en su contexto. Si tal **bean** no existe, Spring lanzará una excepción.
 
 Al ejecutar la aplicación ahora, los valores de los tres beans se imprimirán en la consola, como se muestra en el siguiente fragmento de código.
 
-koko 
-hola
+```sh
+Koko
+Hello
 10
-Hasta ahora, agregamos uno o más beans de diferentes tipos al contexto Spring. Pero, ¿podríamos agregar más de un objeto del mismo tipo (figura 2.11)? En caso afirmativo, ¿cómo podemos referirnos individualmente a estos objetos? Vamos a crear un nuevo proyecto, "sq-ch2-ex3", para demostrar cómo puede agregar varios beans del mismo tipo al contexto de Spring y cómo puede hacer referencia a ellos después.
+```
 
+Hasta ahora, agregamos uno o más **beans** de diferentes tipos al **contexto Spring**. Pero, ***¿podríamos agregar más de un objeto del mismo tipo (figura 2.11)?*** En caso afirmativo, ***¿cómo podemos referirnos individualmente a estos objetos?*** Vamos a crear un nuevo proyecto, **"`sq-ch2-ex3`"**, para demostrar cómo puede agregar varios **beans** del mismo tipo al **contexto de Spring** y cómo puede hacer referencia a ellos después.
 
+<img width="965" alt="image" src="https://user-images.githubusercontent.com/23094588/212411857-9c3c1834-a8fb-42a4-948c-d3a2091b7f61.png">
 
-Figura 2.11 Puede agregar más beans del mismo tipo al contexto de Spring usando múltiples métodos anotados con @Bean . Cada instancia tendrá un identificador único. Para referirse a ellos posteriormente, deberá usar los identificadores de los beans.
+**Figura 2.11** Puede agregar más **beans** del mismo tipo al **contexto de Spring** usando múltiples métodos anotados con **`@Bean`**. Cada instancia tendrá un identificador único. Para referirse a ellos posteriormente, deberá usar los identificadores de los **beans**.
 
-NOTA No confundas el nombre del frijol con el nombre del loro. En nuestro ejemplo, los nombres (o identificadores) de los beans en el contexto Spring son loro1 , loro2 y loro3 (como el nombre de los métodos @Bean que los definen). Los nombres que les di a los loros son Koko , Miki y Riki . El nombre del loro es solo un atributo del objeto Parrot y no significa nada para Spring.
+**NOTA** No confundas el nombre del **bean** con el nombre del parrot. En nuestro ejemplo, los nombres (o identificadores) de los **beans** en el **contexto Spring** son **`parrot1`**, **`parrot2`** y **`parrot3`** (como el nombre de los métodos **`@Bean`** que los definen). Los nombres que les di a los loros son **`Koko`**, **`Miki`** y **`Riki`**. El nombre del loro es solo un atributo del objeto **`Parrot`** y no significa nada para Spring.
 
-Puede declarar tantas instancias del mismo tipo como desee simplemente declarando más métodos anotados con la anotación @Bean . La siguiente lista muestra cómo he declarado tres beans de tipo Parrot en la clase de configuración. Encuentra este ejemplo con el proyecto "sq-ch2-ex3".
+Puede declarar tantas instancias del mismo tipo como desee simplemente declarando más métodos anotados con la anotación **`@Bean`**. La siguiente lista muestra cómo he declarado tres **beans** de tipo **`Parrot`** en la clase de configuración. Encuentra este ejemplo con el proyecto **"`sq-ch2-ex3`"**.
 
-Listado 2.13 Agregando múltiples beans del mismo tipo al contexto Spring
+**Listado 2.13** Agregando múltiples **beans** del mismo tipo al **contexto Spring**
 
-@Configuration 
-public class ProjectConfig { 
+```java
+@Configuration
+public class ProjectConfig {
  
-  @Bean 
-  Parrot parrot1() { 
-    var p = new Parrot(); 
-    p.setName("Koko"); 
-    devolver p; 
-  } 
+  @Bean
+  Parrot parrot1() {
+    var p = new Parrot();
+    p.setName("Koko");
+    return p;
+  }
  
-  @Bean 
-  Parrot loro2() { 
-    var p = new Parrot(); 
-    p.setName("Miki"); 
-    devolver p; 
-  } 
+  @Bean
+  Parrot parrot2() {
+    var p = new Parrot();
+    p.setName("Miki");
+    return p;
+  }
  
-  @Bean 
-  Parrot loro3() { 
-    var p = new Parrot(); 
-    p.setName("Riki"); 
-    devolver p; 
+  @Bean
+  Parrot parrot3() {
+    var p = new Parrot();
+    p.setName("Riki");
+    return p;
   }
 }
-Por supuesto, ya no puede obtener los beans del contexto especificando solo el tipo. Si lo hace, obtendrá una excepción porque Spring no puede adivinar a qué instancia ha declarado que se refiere. Mira el siguiente listado. La ejecución de dicho código arroja una excepción en la que Spring le dice que debe ser preciso, cuál es la instancia que desea usar.
+```
 
-Listado 2.14 Refiriéndose a una instancia de Parrot por tipo
+Por supuesto, ya no puede obtener los **beans** del **contexto** especificando solo el tipo. Si lo hace, obtendrá una excepción porque Spring no puede adivinar a qué instancia ha declarado que se refiere. Mira el siguiente listado. La ejecución de dicho código arroja una excepción en la que Spring le dice que debe ser preciso, cuál es la instancia que desea usar.
 
-public class Main { 
+**Listado 2.14** Refiriéndose a una instancia de **`Parrot`** por tipo
+
+```java
+public class Main {
  
-  public static void main(String[] args) { 
+  public static void main(String[] args) {
     var context = new 
-      AnnotationConfigApplicationContext(ProjectConfig.class); 
+      AnnotationConfigApplicationContext(ProjectConfig.class);
  
     Parrot p = context.getBean(Parrot.class);    ❶
-  
-    System.out.println(p.getName()); 
+ 
+    System.out.println(p.getName());
  
   }
 }
-❶ Obtendrá una excepción en esta línea porque Spring no puede adivinar a cuál de las tres instancias de Parrot se refiere.
+```
+
+❶ Obtendrá una excepción en esta línea porque Spring no puede adivinar a cuál de las tres instancias de **`Parrot`** se refiere.
 
 Al ejecutar su aplicación, obtendrá una excepción similar a la que se presenta en el siguiente fragmento de código.
 
-Excepción en el subproceso "principal" org.springframework.beans.factory.NoUniqueBeanDefinitionException: No hay bean calificador del tipo 'main.Parrot' disponible: se esperaba un bean coincidente único pero se encontraron 3: 
-     loro1, loro2, loro3     ❶
-     a ...
-❶ Nombres de los Frijoles Parrot en el contexto
+```sh
+Exception in thread "main" org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'main.Parrot' available: expected single matching bean but found 3: 
+     parrot1,parrot2,parrot3    ❶
+     at ...
+```
 
-Para resolver este problema de ambigüedad, debe referirse precisamente a una de las instancias utilizando el nombre del bean. De forma predeterminada, Spring usa los nombres de los métodos anotados con @Bean como los nombres de los mismos beans. Recuerde que es por eso que no nombramos los métodos @Bean usando verbos. En nuestro caso, los frijoles tienen los nombres loro1 , loro2 y loro3 (recuerde, el método representa el frijol). Puede encontrar estos nombres en el fragmento de código anterior en el mensaje de la excepción. ¿Los localizaste? Cambiemos el método principal para referirnos a uno de estos beans explícitamente usando su nombre. Observe cómo me refiero al frijol loro2 en el siguiente listado.
+❶ Nombres de los **Parrot beans** en el **contexto**
 
-Listado 2.15 Refiriéndose a un bean por su identificador
+Para resolver este problema de ambigüedad, debe referirse precisamente a una de las instancias utilizando el nombre del **bean**. De forma predeterminada, Spring usa los nombres de los métodos anotados con **`@Bean`** como los nombres de los mismos **beans**. Recuerde que es por eso que no nombramos los métodos **`@Bean`** usando verbos. En nuestro caso, los **beans** tienen los nombres **`parrot1`**, **`parrot2`** y **`parrot3`** (recuerde, el método representa al **bean**). Puede encontrar estos nombres en el fragmento de código anterior en el mensaje de la excepción. ¿Los localizaste? Cambiemos el método **`main`** para referirnos a uno de estos **beans** explícitamente usando su nombre. Observe cómo me refiero al **bean `parrot2`** en el siguiente listado.
 
-public class Main { 
+**Listado 2.15** Refiriéndose a un **bean** por su identificador
+
+```java
+public class Main {
  
-  public static void main(String[] args) { 
+  public static void main(String[] args) {
     var context = new 
-      AnnotationConfigApplicationContext(ProjectConfig.class); 
+      AnnotationConfigApplicationContext(ProjectConfig.class);
     
-    Parrot p = context.getBean("parrot2", Parrot.class);    ❶ 
-    System.out.println(p.getName()); 
+    Parrot p = context.getBean("parrot2", Parrot.class);    ❶
+    System.out.println(p.getName());
  
   }
 }
+```
+
 ❶ El primer parámetro es el nombre de la instancia a la que nos referimos
 
-Al ejecutar la aplicación ahora, ya no obtendrá una excepción. En su lugar, verás en la consola el nombre del segundo loro, Miki .
+Al ejecutar la aplicación ahora, ya no obtendrá una excepción. En su lugar, verás en la consola el nombre del segundo loro, **`Miki`**.
 
-Si desea dar otro nombre al bean, puede usar uno de los atributos de nombre o valor de la anotación @Bean . Cualquiera de las siguientes sintaxis cambiará el nombre del bean en "miki" :
+Si desea dar otro nombre al **bean**, puede usar uno de los atributos **`name`** o **`value`** de la anotación **`@Bean`**. Cualquiera de las siguientes sintaxis cambiará el nombre del **bean** a **"`miki`"**:
 
-@Bean(nombre = " miki " )
+* **`@Bean(name = "miki")`**
+* **`@Bean(value = "miki")`**
+* **`@Bean("miki")`**
 
-@Bean(valor = " miki " )
 
-@Bean( " miki " )
+En el siguiente fragmento de código, puede observar el cambio tal como aparece en el código y, si desea ejecutar este ejemplo, lo encontrará en el proyecto llamado **“`sq-ch2-ex4`”**:
 
-En el siguiente fragmento de código, puede observar el cambio tal como aparece en el código y, si desea ejecutar este ejemplo, lo encontrará en el proyecto.llamado“sq-ch2-ex4”:
-
-@Bean(nombre = "miki")     ❶ 
-Loro loro2() { 
-  var p = new Loro(); 
-  p.setName("Miki");    ❷ 
-  devolver p;
+```java
+@Bean(name = "miki")    ❶
+Parrot parrot2() {
+  var p = new Parrot();
+  p.setName("Miki");    ❷
+  return p;
 }
-❶ Establece el nombre del bean
+```
+
+❶ Establece el nombre del **bean**
 
 ❷ Establece el nombre del loro
 
