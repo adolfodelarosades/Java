@@ -544,7 +544,7 @@ Parrot parrot2() {
 
 En esta sección, aprenderá un enfoque diferente para agregar **beans** al **contexto de Spring** (más adelante en este capítulo, también comparamos los enfoques y discutimos cuándo elegir uno u otro). Recuerde, agregar **beans** al **contexto de Spring** es esencial porque es la forma en que hace que Spring conozca las instancias de objetos de su aplicación, que deben ser administradas por el framework. Spring le ofrece más formas de agregar **beans** a su **contexto**. En diferentes escenarios, encontrará que usar uno de estos enfoques es más cómodo que otro. Por ejemplo, con las **anotaciones de estereotipos**, observará que escribe menos código para indicarle a Spring que agregue un **bean** a su **contexto**.
 
-Definiendo un bean como primario
+Definiendo un **bean** como **primario**
 
 Anteriormente en esta sección, discutimos que podría tener varios **beans** del mismo tipo en el **contexto de Spring**, pero debe referirse a ellos usando sus nombres. Hay otra opción cuando se refiere a **beans** en el **contexto** cuando tiene más del mismo tipo.
 
@@ -626,17 +626,39 @@ Puede continuar escribiendo el método **`main`** como se presenta en la siguien
 
 **Listado 2.18** Definición del método **`main`** para probar la configuración de Spring
 
-
 ```java
+public class Main {
+ 
+  public static void main(String[] args) {
+    var context = new 
+      AnnotationConfigApplicationContext(ProjectConfig.class);
+ 
+      Parrot p = context.getBean(Parrot.class);
+ 
+      System.out.println(p);             ❶
+      System.out.println(p.getName());   ❷
+  }
+}
 ```
 
-❶ Imprime la representación String predeterminada de la instancia tomada del contexto Spring
+❶ Imprime la representación String predeterminada de la instancia tomada del **contexto Spring**
 
-❷ Imprime nulo porque no asignamos ningún nombre a la instancia de loro agregada por Spring en su contexto
+❷ Imprime **`null`** porque no asignamos ningún nombre a la instancia de loro agregada por Spring en su contexto
 
-Al ejecutar esta aplicación, observará que Spring agregó una instancia de Parrot a su contexto porque el primer valor impreso es la representación de cadena predeterminada de esta instancia. Sin embargo, el segundo valor impreso es nulo porque no le asignamos ningún nombre a este loro. Spring solo crea la instancia de la clase, pero sigue siendo nuestro deber si queremos cambiar esta instancia de alguna manera después (como asignarle un nombre).
+Al ejecutar esta aplicación, observará que Spring agregó una instancia de **`Parrot`** a su **contexto** porque el primer valor impreso es la representación de cadena predeterminada de esta instancia. Sin embargo, el segundo valor impreso es **`null`** porque no le asignamos ningún nombre a este loro. Spring solo crea la instancia de la clase, pero sigue siendo nuestro deber si queremos cambiar esta instancia de alguna manera después (como asignarle un nombre).
 
-Ahora que hemos cubierto las dos formas más frecuentes de agregar beans al contexto de Spring, hagamos una breve comparación de ellas (tabla 2.1).
+Ahora que hemos cubierto las dos formas más frecuentes de agregar **beans** al **contexto de Spring**, hagamos una breve comparación de ellas (tabla 2.1).
+
+Usando la anotación **`@Bean`**              
+---------------------------------------------------------------------------------
+1. Tiene control total sobre la creación de instancias que agrega al **contexto de Spring**. Es su responsabilidad crear y configurar la instancia en el cuerpo del método anotado con **`@Bean`**. Spring solo toma esa instancia y la agrega al contexto tal cual. |
+2. Puede usar este método para agregar más instancias del mismo tipo al **contexto Spring**. Recuerde, en la sección 2.1.1 agregamos tres instancias de **`Parrot`** en el **contexto de Spring**. |
+3. Puede usar la anotación **`@Bean`** para agregar al **contexto Spring** cualquier instancia de objeto. No es necesario definir la clase que define la instancia en su aplicación. Recuerde, anteriormente agregamos un **`String`** y un **`Integer`** al **contexto de Spring**.
+4. Debe escribir un método separado para cada **bean** que cree, lo que agrega código repetitivo a su aplicación. Por esta razón, preferimos usar **`@Bean`** como segunda opción para estereotipar anotaciones en nuestros proyectos.
+
+
+Uso de anotaciones de estereotipos
+---------------------------------------------------------------------------------
 
 Tabla 2.1 Ventajas y desventajas: una comparación de las dos formas de agregar beans al contexto de Spring, que le indica cuándo usaría cualquiera de ellos
 
