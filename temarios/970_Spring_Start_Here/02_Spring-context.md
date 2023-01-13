@@ -649,11 +649,9 @@ Al ejecutar esta aplicación, observará que Spring agregó una instancia de **`
 
 Ahora que hemos cubierto las dos formas más frecuentes de agregar **beans** al **contexto de Spring**, hagamos una breve comparación de ellas (tabla 2.1).
 
-Usando la anotación **`@Bean`**              
----------------------------------------------------------------------------------
-1. Tiene control total sobre la creación de instancias que agrega al **contexto de Spring**. Es su responsabilidad crear y configurar la instancia en el cuerpo del método anotado con **`@Bean`**. Spring solo toma esa instancia y la agrega al contexto tal cual. |
-2. Puede usar este método para agregar más instancias del mismo tipo al **contexto Spring**. Recuerde, en la sección 2.1.1 agregamos tres instancias de **`Parrot`** en el **contexto de Spring**. |
-3. Puede usar la anotación **`@Bean`** para agregar al **contexto Spring** cualquier instancia de objeto. No es necesario definir la clase que define la instancia en su aplicación. Recuerde, anteriormente agregamos un **`String`** y un **`Integer`** al **contexto de Spring**.
+Usando la anotación **`@Bean`**             dddd 
+-------------------------------------- |-------------------------------------------
+1. Tiene control total sobre la creación de instancias que agrega al **contexto de Spring**. Es su responsabilidad crear y configurar la instancia en el cuerpo del método anotado con **`@Bean`**. Spring solo toma esa instancia y la agrega al contexto tal cual. | 2. Puede usar este método para agregar más instancias del mismo tipo al **contexto Spring**. Recuerde, en la sección 2.1.1 agregamos tres instancias de **`Parrot`** en el **contexto de Spring**. | 3. Puede usar la anotación **`@Bean`** para agregar al **contexto Spring** cualquier instancia de objeto. No es necesario definir la clase que define la instancia en su aplicación. Recuerde, anteriormente agregamos un **`String`** y un **`Integer`** al **contexto de Spring**.
 4. Debe escribir un método separado para cada **bean** que cree, lo que agrega código repetitivo a su aplicación. Por esta razón, preferimos usar **`@Bean`** como segunda opción para estereotipar anotaciones en nuestros proyectos.
 
 
