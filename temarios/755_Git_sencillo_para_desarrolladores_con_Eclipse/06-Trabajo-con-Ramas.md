@@ -483,7 +483,18 @@ Como queremos evitar la creación de la nueva rama vamos a utilizar el **Rebase*
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212480781-ce97a67a-7a15-4942-9f52-761ed6f00906.png">
 
-Debemos indicar que rama deseamos mergear.
+Debemos indicar que rama deseamos mergear, en este caso la rama **`rebase_1`**.
+
+<img width="595" alt="image" src="https://user-images.githubusercontent.com/23094588/212480987-5ecca76f-d371-4a3a-97d8-813026b73912.png">
+
+Si vemos el **History**, observamos que en el commit correspondiente al **`rebase_1`** no se creo ninguna rama, simplemente se integro en la rama **`master`**.
+
+<img width="368" alt="image" src="https://user-images.githubusercontent.com/23094588/212481299-1d187cc6-576d-438a-8d9a-95dacf3142c8.png">
+
+Lo que confunde un poco es como sale una especie de rama del **`rebase_2`**
+
+
+
 
 
 
