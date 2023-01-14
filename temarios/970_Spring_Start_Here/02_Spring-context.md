@@ -652,20 +652,32 @@ Ahora que hemos cubierto las dos formas más frecuentes de agregar **beans** al 
 **Tabla 2.1** Ventajas y desventajas: una comparación de las dos formas de agregar **beans** al **contexto de Spring**, que le indica cuándo usaría cualquiera de ellos
 
 <hr>
+
 **Usando la anotación `@Bean`**             
+
 <hr>
+
 1. Tiene control total sobre la creación de instancias que agrega al **contexto de Spring**. Es su responsabilidad crear y configurar la instancia en el cuerpo del método anotado con **`@Bean`**. Spring solo toma esa instancia y la agrega al contexto tal cual.
+
 2. Puede usar este método para agregar más instancias del mismo tipo al **contexto Spring**. Recuerde, en la sección 2.1.1 agregamos tres instancias de **`Parrot`** en el **contexto de Spring**.
+
 3. Puede usar la anotación **`@Bean`** para agregar al **contexto Spring** cualquier instancia de objeto. No es necesario definir la clase que define la instancia en su aplicación. Recuerde, anteriormente agregamos un **`String`** y un **`Integer`** al **contexto de Spring**.
+
 4. Debe escribir un método separado para cada **bean** que cree, lo que agrega código repetitivo a su aplicación. Por esta razón, preferimos usar **`@Bean`** como segunda opción para estereotipar anotaciones en nuestros proyectos.
 
 <hr>
+
 **Uso de anotaciones de estereotipos**
+
 <hr>
 1. Solo tiene control sobre la instancia después de que el framework la crea.
+
 2. De esta manera, solo puede agregar una instancia de la clase al **contexto**.
+
 3. Puede usar **anotaciones de estereotipo** solo para crear **beans** de las clases que posee su aplicación. Por ejemplo, no podría agregar un **bean** de tipo **`String`** o **`Integer`** como hicimos en la sección 2.1.1 con la anotación **`@Bean`** porque no posee estas clases para cambiarlas agregando una **anotación de estereotipo**.
+
 4. El uso de **anotaciones de estereotipos** para agregar **beans** al **contexto de Spring** no agrega código repetitivo a su aplicación. Preferirá este enfoque en general para las clases que pertenecen a su aplicación.
+
 <hr>
 
 Lo que observará es que en escenarios del mundo real usará **anotaciones de estereotipo** tanto como sea posible (porque este enfoque implica escribir menos código), y solo usará el **`@Bean`** cuando no pueda agregar el bean de otra manera (por ejemplo, crea el **bean** para una clase que es parte de una biblioteca, por lo que no puede modificar esa clase para agregar la **anotaciones de estereotipo**).
