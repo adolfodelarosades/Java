@@ -649,75 +649,71 @@ Al ejecutar esta aplicación, observará que Spring agregó una instancia de **`
 
 Ahora que hemos cubierto las dos formas más frecuentes de agregar **beans** al **contexto de Spring**, hagamos una breve comparación de ellas (tabla 2.1).
 
-Usando la anotación **`@Bean`**             dddd 
--------------------------------------- |-------------------------------------------
-1. Tiene control total sobre la creación de instancias que agrega al **contexto de Spring**. Es su responsabilidad crear y configurar la instancia en el cuerpo del método anotado con **`@Bean`**. Spring solo toma esa instancia y la agrega al contexto tal cual. | 2. Puede usar este método para agregar más instancias del mismo tipo al **contexto Spring**. Recuerde, en la sección 2.1.1 agregamos tres instancias de **`Parrot`** en el **contexto de Spring**. | 3. Puede usar la anotación **`@Bean`** para agregar al **contexto Spring** cualquier instancia de objeto. No es necesario definir la clase que define la instancia en su aplicación. Recuerde, anteriormente agregamos un **`String`** y un **`Integer`** al **contexto de Spring**.
+**Tabla 2.1** Ventajas y desventajas: una comparación de las dos formas de agregar **beans** al **contexto de Spring**, que le indica cuándo usaría cualquiera de ellos
+
+<hr>
+**Usando la anotación `@Bean`**             
+<hr>
+1. Tiene control total sobre la creación de instancias que agrega al **contexto de Spring**. Es su responsabilidad crear y configurar la instancia en el cuerpo del método anotado con **`@Bean`**. Spring solo toma esa instancia y la agrega al contexto tal cual.
+2. Puede usar este método para agregar más instancias del mismo tipo al **contexto Spring**. Recuerde, en la sección 2.1.1 agregamos tres instancias de **`Parrot`** en el **contexto de Spring**.
+3. Puede usar la anotación **`@Bean`** para agregar al **contexto Spring** cualquier instancia de objeto. No es necesario definir la clase que define la instancia en su aplicación. Recuerde, anteriormente agregamos un **`String`** y un **`Integer`** al **contexto de Spring**.
 4. Debe escribir un método separado para cada **bean** que cree, lo que agrega código repetitivo a su aplicación. Por esta razón, preferimos usar **`@Bean`** como segunda opción para estereotipar anotaciones en nuestros proyectos.
 
+<hr>
+**Uso de anotaciones de estereotipos**
+<hr>
+1. Solo tiene control sobre la instancia después de que el framework la crea.
+2. De esta manera, solo puede agregar una instancia de la clase al **contexto**.
+3. Puede usar **anotaciones de estereotipo** solo para crear **beans** de las clases que posee su aplicación. Por ejemplo, no podría agregar un **bean** de tipo **`String`** o **`Integer`** como hicimos en la sección 2.1.1 con la anotación **`@Bean`** porque no posee estas clases para cambiarlas agregando una **anotación de estereotipo**.
+4. El uso de **anotaciones de estereotipos** para agregar **beans** al **contexto de Spring** no agrega código repetitivo a su aplicación. Preferirá este enfoque en general para las clases que pertenecen a su aplicación.
+<hr>
 
-Uso de anotaciones de estereotipos
----------------------------------------------------------------------------------
+Lo que observará es que en escenarios del mundo real usará **anotaciones de estereotipo** tanto como sea posible (porque este enfoque implica escribir menos código), y solo usará el **`@Bean`** cuando no pueda agregar el bean de otra manera (por ejemplo, crea el **bean** para una clase que es parte de una biblioteca, por lo que no puede modificar esa clase para agregar la **anotaciones de estereotipo**).
 
-Tabla 2.1 Ventajas y desventajas: una comparación de las dos formas de agregar beans al contexto de Spring, que le indica cuándo usaría cualquiera de ellos
+Uso de **`@PostConstruct`** para administrar la instancia después de su creación
 
-Usando la anotación @Bean
+Como hemos discutido en esta sección, al usar **anotaciones de estereotipos**, le indica a Spring que cree un **bean** y lo agregue a su **contexto**. Pero, a diferencia de usar la anotación **`@Bean`**, no tiene control total sobre la creación de la instancia. Usando **`@Bean`**, pudimos definir un nombre para cada una de las instancias de **`Parrot`** que agregamos al **contexto de Spring**, pero usando **`@Component`**, no tuvimos la oportunidad de hacer nada después de que Spring llamara al constructor de la clase **`Parrot`**. ¿Qué sucede si queremos ejecutar algunas instrucciones justo después de que Spring cree el **bean**? Podemos usar la anotación **`@PostConstruct`**.
 
-Uso de anotaciones de estereotipos
+Spring toma prestada la anotación **`@PostConstruct`** de **Java EE**. También podemos usar esta anotación con **Spring beans** para especificar un conjunto de instrucciones que Spring ejecuta después de la creación del **bean**. Solo necesita definir un método en la clase de componente y anotar ese método con **`@PostConstruct`**, que le indica a Spring que llame a ese método después de que el constructor finalice su ejecución.
 
-Tiene control total sobre la creación de instancias que agrega al contexto de Spring. Es su responsabilidad crear y configurar la instancia en el cuerpo del método anotado con @Bean . Spring solo toma esa instancia y la agrega al contexto tal cual.
-
-Puede usar este método para agregar más instancias del mismo tipo al contexto Spring. Recuerde, en la sección 2.1.1 agregamos tres instancias de Parrot en el contexto de Spring.
-
-Puede usar la anotación @Bean para agregar al contexto Spring cualquier instancia de objeto. No es necesario definir la clase que define la instancia en su aplicación. Recuerde, anteriormente agregamos un String y un Integer al contexto de Spring.
-
-Debe escribir un método separado para cada bean que cree, lo que agrega código repetitivo a su aplicación. Por esta razón, preferimos usar @Bean como segunda opción para estereotipar anotaciones en nuestros proyectos.
-
-Solo tiene control sobre la instancia después de que el marco la crea.
-
-De esta manera, solo puede agregar una instancia de la clase al contexto.
-
-Puede usar anotaciones de estereotipo solo para crear beans de las clases que posee su aplicación. Por ejemplo, no podría agregar un bean de tipo String o Integer como hicimos en la sección 2.1.1 con la anotación @Bean porque no posee estas clases para cambiarlas agregando una anotación de estereotipo.
-
-El uso de anotaciones de estereotipos para agregar beans al contexto de Spring no agrega código repetitivo a su aplicación. Preferirá este enfoque en general para las clases que pertenecen a su aplicación.
-
-Lo que observará es que en escenarios del mundo real usará anotaciones de estereotipo tanto como sea posible (porque este enfoque implica escribir menos código), y solo usará el @Bean cuando no pueda agregar el bean de otra manera (por ejemplo, crea el bean para una clase que es parte de una biblioteca, por lo que no puede modificar esa clase para agregar el estereotipoanotación).
-
-Uso de @PostConstruct para administrar la instancia después de su creación
-
-Como hemos discutido en esta sección, al usar anotaciones de estereotipos, le indica a Spring que cree un bean y lo agregue a su contexto. Pero, a diferencia de usar la anotación @Bean , no tiene control total sobre la creación de la instancia. Usando @Bean , pudimos definir un nombre para cada una de las instancias de Parrot que agregamos al contexto de Spring, pero usando @Component , no tuvimos la oportunidad de hacer nada después de que Spring llamara al constructor de la clase Parrot . ¿Qué sucede si queremos ejecutar algunas instrucciones justo después de que Spring cree el bean? Podemos usar la anotación @PostConstruct .
-
-
-
-Spring toma prestada la anotación @PostConstruct de Java EE. También podemos usar esta anotación con Spring beans para especificar un conjunto de instrucciones que Spring ejecuta después de la creación del bean. Solo necesita definir un método en la clase de componente y anotar ese método con @PostConstruct , que le indica a Spring que llame a ese método después de que el constructor finalice su ejecución.
-
-
-
-Agreguemos a pom.xml la dependencia de Maven necesaria para usar la anotación @PostConstruct :
+Agreguemos a **`pom.xml`** la dependencia de **Maven** necesaria para usar la anotación **`@PostConstruct`**:
 
 ```xml
+<dependency>
+   <groupId>javax.annotation</groupId>
+   <artifactId>javax.annotation-api</artifactId>
+   <version>1.3.2</version>
+</dependency>
 ```
 
-<dependencia> 
-   <groupId>javax.annotation</groupId> 
-   <artifactId>javax.annotation-api</artifactId> 
-   <version>1.3.2</version> 
-</dependency>
-No necesita agregar esta dependencia si usa una versión de Java más pequeña que Java 11. Antes de Java 11, las dependencias de Java EE eran parte del JDK. Con Java 11, el JDK se limpió de las API no relacionadas con SE, incluidas las dependencias de Java EE.
+No necesita agregar esta dependencia si usa una versión de **Java** más pequeña que ***Java 11***. Antes de ***Java 11***, las dependencias de **Java EE** eran parte del **JDK**. Con **Java 11**, el **JDK** se limpió de las **API** no relacionadas con **SE**, incluidas las dependencias de **Java EE**.
 
+Si desea utilizar funcionalidades que formaban parte de las **API** eliminadas (como **`@PostConstruct`**), ahora debe agregar explícitamente la dependencia en su aplicación.
 
-
-Si desea utilizar funcionalidades que formaban parte de las API eliminadas (como @PostConstruct ), ahora debe agregar explícitamente la dependencia en su aplicación.
-
-Ahora puede definir un método en la clase Parrot , como se presenta en el siguiente fragmento de código:
+Ahora puede definir un método en la clase **`Parrot`**, como se presenta en el siguiente fragmento de código:
 
 ```java
+@Component
+public class Parrot {
+ 
+  private String name;
+ 
+  @PostConstruct
+  public void init() {
+    this.name = "Kiki";
+  }
+ 
+  // Omitted code
+}
 ```
 
-Encontrará este ejemplo en el proyecto "sq-ch2-ex7". Si ahora imprime el nombre del loro en la consola, observará que la aplicación imprime el valor Kiki en la consola.
+Encontrará este ejemplo en el proyecto **"`sq-ch2-ex7`"**. Si ahora imprime el nombre del loro en la consola, observará que la aplicación imprime el valor **`Kiki`** en la consola.
+
+De manera muy similar, pero menos encontrada en aplicaciones del mundo real, puede usar una anotación llamada **`@PreDestroy`**. Con esta anotación, define un método que Spring llama inmediatamente antes de cerrar y borrar el **contexto**. La anotación **`@PreDestroy`** también se describe en **JSR-250** y Spring lo tomó prestado. Pero, en general, recomiendo a los desarrolladores que eviten usarlo y busquen un enfoque diferente para ejecutar algo antes de que Spring borre el **contexto**, principalmente porque puede esperar que Spring no borre el contexto. Digamos que definió algo confidencial (como cerrar una conexión de base de datos) en el método @PreDestroy ; si Spring no llama al método, puede tener grandes problemas.
 
 
+AQUIIIIIIIIIII
 
-De manera muy similar, pero menos encontrada en aplicaciones del mundo real, puede usar una anotación llamada @PreDestroy. Con esta anotación, define un método que Spring llama inmediatamente antes de cerrar y borrar el contexto. La anotación @PreDestroytambién se describe en JSR-250 y Spring lo tomó prestado. Pero, en general, recomiendo a los desarrolladores que eviten usarlo y busquen un enfoque diferente para ejecutar algo antes de que Spring borre el contexto, principalmente porque puede esperar que Spring no borre el contexto. Digamos que definió algo confidencial (como cerrar una conexión de base de datos) en el método @PreDestroy ; si Spring no llama al método, puede tener grandes problemas.
 
 #### 2.2.3 Agregar beans programáticamente al contexto de Spring
 
