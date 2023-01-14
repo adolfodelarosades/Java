@@ -491,22 +491,15 @@ Si vemos el **History**, observamos que en el commit correspondiente al **`rebas
 
 <img width="368" alt="image" src="https://user-images.githubusercontent.com/23094588/212481299-1d187cc6-576d-438a-8d9a-95dacf3142c8.png">
 
-Lo que confunde un poco es como sale una especie de rama del **`rebase_2`**
+Lo que confunde un poco es ver como sale una especie de rama del **`rebase_2`**, pero los cambios de esta rama ya se habían integrado previamente, como podemos ver en el contenido actual de la rama **`master`**.
 
+<img width="1396" alt="image" src="https://user-images.githubusercontent.com/23094588/212482089-979644e8-80c0-413c-b9b5-1d49d2905511.png">
 
+Tenemos a ambos archivos **`rebase_1.txt`** y **`rebase_2.txt`** en la rama **`master`**.
 
+### Resumen
 
-
-
-
-
-
-
-
-
-
-
-
+Resuniendo el **Rebase** lo que hace es evitar crear ramas, básicamente en el mergeo de la rama **`rebase_1`** no queda constancia de la creación de una rama. Pero que es lo que pasa, si Git necesita hacer una rama por que no ha podido realizar un **FastForward**, yo creo mejor que quede constancia de la rama por que sino luego no vas a saber lo que ha pasado, yo creo que el funcionamiento normal es decir un **Merge commit** es más claro que un **Rebase**, pero existen ambas posibilidades. El **Rebase** es lo contrario que el **Merge commit**, ingresa el commit directamente en **`master`** sin constancia de que haya existido una rama, hasta ahora tenemos constancia por que tenemos la etiqueta de la rama **`rebase_1`** pero en cuanto la eliminemos ya no hay constancia de nada.
 
 
 ## Modificar commit 02:30
