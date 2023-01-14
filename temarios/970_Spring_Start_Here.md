@@ -48,14 +48,14 @@
       * You won’t benefit from switching to a framework
    * 1.5 What will you learn in this book
 
-* [2 The Spring context: Defining beans](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/02_Spring-context.md)
+* [2 The Spring context: Defining beans](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/02_Spring-context.md) 👍
    * 2.1 Creating a Maven project
    * 2.2 Adding new beans to the Spring context
       * Using the @Bean annotation to add beans into the Spring context
       * Using stereotype annotations to add beans to the Spring context
       * Programmatically adding beans to the Spring context
 
-* 3 The Spring context: Wiring beans
+* [3 The Spring context: Wiring beans](https://github.com/adolfodelarosades/Java/blob/master/temarios/970_Spring_Start_Here/03-The-Spring-context_Wiring-beans.md)
    * 3.1 Implementing relationships among beans defined in the configuration file
       * Wiring the beans using a direct method call between the @Bean methods
       * Wiring the beans using the @Bean annotated method’s parameters
