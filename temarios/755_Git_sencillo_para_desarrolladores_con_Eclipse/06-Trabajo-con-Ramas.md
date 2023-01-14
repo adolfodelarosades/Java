@@ -546,3 +546,7 @@ Esto es el **Amend de un Commit**, ojo con esto por que se puede hacer mientras 
 
 
 ## Peligro de las ramas 03:38
+
+Git como hemos visto nos permite varias cosas, pero si no te andas con ojo puede liarla bastante gorda.
+
+No debemos usar todas las cosas por que sí, sino por que sabemos como funcionan y lo que hacen.
