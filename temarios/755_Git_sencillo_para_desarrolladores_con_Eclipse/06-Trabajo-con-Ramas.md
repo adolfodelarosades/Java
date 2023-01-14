@@ -405,7 +405,9 @@ Ya no aparecen las ramas **`rama_1`** y **`rama_2`**, pero si vemos todos los co
 
 ## Rebase 04:50
 
-El **Rebase** es el concepto contrario al **Merge Commit** ya sea cuando forzamos una rama aunque pudieramos realizar un **FastForward** o cuando no queda más remedio que crear la rama, el **Rebase** en estos casos lo que va a hacer es NO crear la rama y simplemente lo que hara es integrar el commit que necesite añadir directamente en la rama **`master`**, sin haber podido usar directamente un **FastForward** obviamente.
+El **Rebase** es el concepto contrario al **Merge Commit** ya sea cuando forzamos una rama aunque pudieramos realizar un **FastForward** o cuando no queda más remedio que crear la rama.
+
+El **Rebase** en estos casos lo que va a hacer es NO crear la rama(aun que no quedará más remedio que crear la rama) y simplemente lo que hara es integrar el commit directamente en la rama **`master`**, esto se parecería a un un **FastForward**, sin serlo.  
 
 Vamos a ver un ejemplo.
 
@@ -413,13 +415,23 @@ Vamos a crear una nueva rama con **click derecho en el nombre del proyecto > Tea
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212171573-e0cb7682-436f-4174-8aa1-ce1ab26294e0.png">
 
-llamada **`rebase_1`**
+Llamada **`rebase_1`**
 
 <img width="595" alt="image" src="https://user-images.githubusercontent.com/23094588/212171747-e97f9a58-d2bd-475e-977f-a62b2735cbb5.png">
 
 En esta nueva rama vamos a añadir un nuevo archivo **`rebase_1.txt`**.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212172207-93518269-3229-4766-b1f0-a2221a34f478.png">
+
+Y vamos a commitear el archivo.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212478726-eaadd0b0-6aa6-4b13-a3cf-e4142acd66df.png">
+
+Vamos a crear una segunda rama con **click derecho en el nombre del proyecto > Team > Switch To > New Branch**. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212478850-aa661edf-8a68-4752-b610-a577888bd6f5.png">
+
+
 
 
 
