@@ -670,6 +670,7 @@ Ahora que hemos cubierto las dos formas más frecuentes de agregar **beans** al 
 **Uso de anotaciones de estereotipos**
 
 <hr>
+
 1. Solo tiene control sobre la instancia después de que el framework la crea.
 
 2. De esta manera, solo puede agregar una instancia de la clase al **contexto**.
