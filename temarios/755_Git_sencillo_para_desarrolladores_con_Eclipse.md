@@ -75,7 +75,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Preferencias 04:26
 * Stash guardar trabajos a medias 05:40
 
-### [06 Trabajo con Ramas • 8 clases • 33m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/06-Trabajo-con-Ramas.md)
+### [06 Trabajo con Ramas • 8 clases • 33m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/06-Trabajo-con-Ramas.md) 👍
 
 * Crear ramas 05:18
 * Mergeo de ramas 01:50
