@@ -722,83 +722,130 @@ public class Parrot {
 
 Encontrará este ejemplo en el proyecto **"`sq-ch2-ex7`"**. Si ahora imprime el nombre del loro en la consola, observará que la aplicación imprime el valor **`Kiki`** en la consola.
 
-De manera muy similar, pero menos encontrada en aplicaciones del mundo real, puede usar una anotación llamada **`@PreDestroy`**. Con esta anotación, define un método que Spring llama inmediatamente antes de cerrar y borrar el **contexto**. La anotación **`@PreDestroy`** también se describe en **JSR-250** y Spring lo tomó prestado. Pero, en general, recomiendo a los desarrolladores que eviten usarlo y busquen un enfoque diferente para ejecutar algo antes de que Spring borre el **contexto**, principalmente porque puede esperar que Spring no borre el contexto. Digamos que definió algo confidencial (como cerrar una conexión de base de datos) en el método @PreDestroy ; si Spring no llama al método, puede tener grandes problemas.
-
-
-AQUIIIIIIIIIII
+De manera muy similar, pero menos encontrada en aplicaciones del mundo real, puede usar una anotación llamada **`@PreDestroy`**. Con esta anotación, define un método que Spring llama inmediatamente antes de cerrar y borrar el **contexto**. La anotación **`@PreDestroy`** también se describe en **JSR-250** y Spring lo tomó prestado. Pero, en general, recomiendo a los desarrolladores que eviten usarlo y busquen un enfoque diferente para ejecutar algo antes de que Spring borre el **contexto**, principalmente porque puede esperar que Spring no borre el **contexto**. Digamos que definió algo confidencial (como cerrar una conexión de base de datos) en el método **`@PreDestroy`**; si Spring no llama al método, puede tener grandes problemas.
 
 
 #### 2.2.3 Agregar beans programáticamente al contexto de Spring
 
-EnEn esta sección, analizamos la adición de beans mediante programación al contexto de Spring. Hemos tenido la opción de agregar beans mediante programación al contexto de Spring con Spring 5, que ofrece una gran flexibilidad porque le permite agregar nuevas instancias en el contexto directamente llamando a un método de la instancia de contexto. Usaría este enfoque cuando desee implementar una forma personalizada de agregar beans al contexto y las anotaciones @Bean o estereotipo no son suficientes para sus necesidades. Digamos que necesita registrar beans específicos en el contexto de Spring dependiendo de las configuraciones específicas de su aplicación. Con @Bean y las anotaciones de estereotipos, puede implementar la mayoría de los escenarios, pero no puede hacer algo como el código que se presenta en el siguiente fragmento:
+En esta sección, ***analizamos la adición de beans mediante programación al contexto de Spring***. Hemos tenido la opción de agregar **beans** mediante programación al **contexto de Spring** con **Spring 5**, que ofrece una gran flexibilidad porque le permite agregar nuevas instancias en el **contexto** directamente llamando a un método de la instancia de **contexto**. Usaría este enfoque cuando desee implementar una forma personalizada de agregar **beans** al **contexto** y las anotaciones **`@Bean`** o estereotipo no son suficientes para sus necesidades. Digamos que necesita registrar **beans** específicos en el **contexto de Spring** dependiendo de las configuraciones específicas de su aplicación. Con **`@Bean`** y las anotaciones de estereotipos, puede implementar la mayoría de los escenarios, pero no puede hacer algo como el código que se presenta en el siguiente fragmento:
 
 ```java
+if (condition) {  
+   registerBean(b1);    ❶
+  
+} else {
+ 
+   registerBean(b2);    ❷
+ 
+}
 ```
 
-❶ Si la condición es verdadera, agregue un bean específico al contexto Spring.
+❶ Si la condición es verdadera, agregue un **bean** específico al **contexto Spring**.
 
-❷ De lo contrario, agregue otro bean al contexto Spring.
+❷ De lo contrario, agregue otro **bean** al **contexto Spring**.
 
-Para seguir usando nuestro ejemplo de loros, el escenario es el siguiente: La aplicación lee una colección de loros. Algunos de ellos son verdes; otros son de color naranja. Desea que la aplicación agregue al contexto Spring solo los loros que son verdes (figura 2.13).
+Para seguir usando nuestro ejemplo de loros, el escenario es el siguiente: La aplicación lee una colección de loros. Algunos de ellos son verdes; otros son de color naranja. Desea que la aplicación agregue al **contexto Spring** solo los loros que son verdes (figura 2.13).
 
+<img width="1008" alt="image" src="https://user-images.githubusercontent.com/23094588/212468823-1902d035-f22b-4df9-be85-4d8106e3cdd0.png">
 
+**Figura 2.13** Uso del método **`registerBean()`** para agregar instancias de objetos específicos al **contexto de Spring**
 
-Figura 2.13 Uso del método registerBean() para agregar instancias de objetos específicos al contexto de Spring
-
-Veamos cómo funciona este método. Para agregar un bean al contexto de Spring usando un enfoque programático, solo necesita llamar al método registerBean() de la instancia de ApplicationContext. registerBean() tiene cuatro parámetros, como se presenta en el siguiente fragmento de código:
+Veamos cómo funciona este método. Para agregar un **bean** al **contexto de Spring* usando un enfoque programático, solo necesita llamar al método **`registerBean()`** de la instancia de **`ApplicationContext`**. **`registerBean()`** tiene cuatro parámetros, como se presenta en el siguiente fragmento de código:
 
 ```java
+<T> void registerBean(
+  String beanName, 
+  Class<T> beanClass, 
+  Supplier<T> supplier, 
+  BeanDefinitionCustomizer... customizers);
 ```
 
-Use el primer parámetro beanName para definir un nombre para el bean que agrega en el contexto de Spring. Si no necesita dar un nombre al bean que está agregando, puede usar nulo como valor cuando llame al método.
+Use el primer parámetro **`beanName`** para definir un nombre para el **bean** que agrega en el **contexto de Spring**. Si no necesita dar un nombre al **bean** que está agregando, puede usar **`null`** como valor cuando llame al método.
 
-El segundo parámetro es la clase que define el bean que agrega al contexto. Digamos que desea agregar una instancia de la clase Parrot ; el valor que le das a este parámetro es Parrot.class.
+El segundo parámetro es la clase que define el **bean** que agrega al **contexto**. Digamos que desea agregar una instancia de la clase **`Parrot`** ; el valor que le das a este parámetro es **`Parrot.class`**.
 
-El tercer parámetro es una instancia de Proveedor . La implementación de este proveedor debe devolver el valor de la instancia que agrega al contexto. Recuerde, Proveedor es una interfaz funcional que encontrará en el paquete java.util .function . El propósito de la implementación de un proveedor es devolver un valor que defina sin tomar parámetros.
+El tercer parámetro es una instancia de **`Supplier`**(Proveedor). La implementación de este **`Supplier`** debe devolver el valor de la instancia que agrega al **contexto**. Recuerde, **`Supplier`** es una interfaz funcional que encontrará en el paquete **`java.util.function`**. El propósito de la implementación de un **`Supplier`** es devolver un valor que defina sin tomar parámetros.
 
-El cuarto y último parámetro es un varargs de BeanDefinitionCustomizer. (Si esto no le suena familiar, está bien; BeanDefinitionCustomizer es solo una interfaz que implementa para configurar diferentes características del bean; por ejemplo, convertirlo en primario ) . Al estar definido como un tipo varargs, puede omitir este parámetro por completo, o puede darle más valores de tipo BeanDefinitionCustomizer .
+El cuarto y último parámetro es un **`varargs`** de **`BeanDefinitionCustomizer`**. (Si esto no le suena familiar, está bien; **`BeanDefinitionCustomizer`** es solo una interfaz que implementa para configurar diferentes características del **bean**; por ejemplo, convertirlo en primario). Al estar definido como un tipo **`varargs`**, puede omitir este parámetro por completo, o puede darle más valores de tipo **`BeanDefinitionCustomizer`**.
 
-En el proyecto "sq-ch2-ex8", encontrará un ejemplo del uso del método registerBean() . Observa que la clase de configuración de este proyecto está vacía, y la clase Parrot que usamos para nuestro ejemplo de definición de bean es simplemente un objeto Java antiguo.(POYO); no usamos ninguna anotación con él. En el siguiente fragmento de código, encontrará la clase de configuración tal como la definí para este ejemplo:
+En el proyecto **"`sq-ch2-ex8`"**, encontrará un ejemplo del uso del método **`registerBean()`**. Observa que la clase de configuración de este proyecto está vacía, y la clase **`Parrot`** que usamos para nuestro ejemplo de definición de **bean** es simplemente un ***plain old Java object (POJO)***; no usamos ninguna anotación con él. En el siguiente fragmento de código, encontrará la clase de configuración tal como la definí para este ejemplo:
 
 ```java
+@Configuration
+public class ProjectConfig {
+}
 ```
-
-En el método principal del proyecto, he usado el método registerBean() para agregar una instancia de tipo Parrot al contexto de Spring. El siguiente listado presenta el código del método principal. La figura 2.14 se centra en la sintaxis para llamar al método registerBean() .
-
-
-
-Figura 2.14 Llamar al método registerBean() para agregar un bean al contexto Spring programáticamente
-
-Listado 2.19 Usando el método registerBean() para agregar un bean al contexto Spring
+Definí la clase **`Parrot`** que usamos para crear el **bean**:
 
 ```java
+public class Parrot {
+ 
+  private String name;
+ 
+  // Omitted getters and setters
+}
 ```
 
-❶ Creamos la instancia que queremos agregar al contexto Spring.
+En el método **`main`** del proyecto, he usado el método **`registerBean()`** para agregar una instancia de tipo **`Parrot`** al **contexto de Spring**. El siguiente listado presenta el código del método **`main`**. La figura 2.14 se centra en la sintaxis para llamar al método **`registerBean()`**.
 
-❷ Definimos un Proveedor para devolver esta instancia.
+![image](https://user-images.githubusercontent.com/23094588/212469497-a213896f-4a38-4c76-bd36-6f89839fe826.png)
 
-❸ Llamamos al método registerBean() para agregar la instancia al contexto Spring.
 
-❹ Para verificar que el bean está ahora en el contexto, nos referimos al frijol loro e imprimimos su nombre en la consola.
+**Figura 2.14** Llamar al método **`registerBean()`** para agregar un **bean** al **contexto Spring** programáticamente
 
-Utilice una o más instancias del configurador de beans como los últimos parámetros para establecer diferentes características de los beans que agrega. Por ejemplo, puede hacer que el bean sea el principal cambiando la llamada al método registerBean() , como se muestra en el siguiente fragmento de código. Un bean principal define la instancia que Spring selecciona de forma predeterminada si tiene varios beans del mismo tipo en el contexto:
+**Listado 2.19** Usando el método **`registerBean()`** para agregar un **bean** al **contexto Spring**
 
 ```java
+public class Main {
+ 
+  public static void main(String[] args) {
+    var context = 
+      new AnnotationConfigApplicationContext(
+          ProjectConfig.class);
+ 
+      Parrot x = new Parrot();                     ❶
+      x.setName("Kiki");
+ 
+      Supplier<Parrot> parrotSupplier = () -> x;   ❷
+ 
+      context.registerBean("parrot1", 
+        Parrot.class, parrotSupplier);             ❸
+ 
+      Parrot p = context.getBean(Parrot.class);    ❹
+      System.out.println(p.getName());             ❹
+  }
+}
 ```
 
-Acabas de dar un primer gran paso en el mundo de Spring. Aprender a agregar beans al contexto de Spring puede no parecer mucho, pero es más importante de lo que parece. Con esta habilidad, ahora puede proceder a referirse a los beans en el contexto de Spring, que discutimosenCapítulo 3.
+❶ Creamos la instancia que queremos agregar al **contexto Spring**.
 
-**NOTA** En este libro, solo utilizamos enfoques de configuración modernos. Sin embargo, me parece esencial que también esté al tanto de cómo los desarrolladores configuraron el marco en los primeros días de la primavera. En ese momento, usábamos XML para escribir estas configuraciones. En el apéndice B, se proporciona un breve ejemplo para darle una idea de cómo usaría XML para agregar un bean al contexto de Spring.
+❷ Definimos un **`Supplier`** para devolver esta instancia.
+
+❸ Llamamos al método **`registerBean()`** para agregar la instancia al **contexto Spring**.
+
+❹ Para verificar que el **bean** está ahora en el **contexto**, nos referimos al **`bean parrot`** e imprimimos su nombre en la consola.
+
+Utilice una o más instancias del configurador de **beans** como los últimos parámetros para establecer diferentes características de los **beans** que agrega. Por ejemplo, puede hacer que el **bean** sea el principal cambiando la llamada al método **`registerBean()`**, como se muestra en el siguiente fragmento de código. Un **bean** principal define la instancia que Spring selecciona de forma predeterminada si tiene varios **beans** del mismo tipo en el contexto:
+
+```java
+context.registerBean("parrot1", 
+                Parrot.class, 
+                parrotSupplier, 
+                bc -> bc.setPrimary(true));
+```
+
+Acabas de dar un primer gran paso en el mundo de Spring. Aprender a agregar **beans** al **contexto de Spring** puede no parecer mucho, pero es más importante de lo que parece. Con esta habilidad, ahora puede proceder a referirse a los **beans** en el **contexto de Spring**, que discutimos en el Capítulo 3.
+
+**NOTA** En este libro, solo utilizamos enfoques de configuración modernos. Sin embargo, me parece esencial que también esté al tanto de cómo los desarrolladores configuraron el framework en los primeros días de Spring. En ese momento, usábamos **XML** para escribir estas configuraciones. En el ***apéndice B***, se proporciona un breve ejemplo para darle una idea de cómo usaría **XML** para agregar un **bean** al **contexto de Spring**.
 
 ### Resumen
 
-Lo primero que debe aprender en Spring es agregar instancias de objetos (que llamamos beans) al contexto de Spring. Puede imaginar el contexto de Spring como un depósito en el que agrega las instancias que espera que Spring pueda administrar. Spring solo puede ver las instancias que agrega a su contexto.
+Lo primero que debe aprender en Spring es agregar instancias de objetos (que llamamos **beans**) al **contexto de Spring**. Puede imaginar el **contexto de Spring** como un depósito en el que agrega las instancias que espera que Spring pueda administrar. Spring solo puede ver las instancias que agrega a su contexto.
 
-Puede agregar beans al contexto Spring de tres maneras: usando la anotación @Bean , usando anotaciones estereotipadas y haciéndolo mediante programación.
+Puede agregar **beans** al **contexto Spring** de ***tres maneras***: usando la anotación **`@Bean`**, usando anotaciones estereotipadas y haciéndolo mediante programación.
 
-El uso de la anotación @Bean para agregar instancias al contexto de Spring le permite agregar cualquier tipo de instancia de objeto como un bean e incluso varias instancias del mismo tipo al contexto de Spring. Desde este punto de vista, este enfoque es más flexible que el uso de anotaciones estereotipadas. Aún así, requiere que escriba más código porque necesita escribir un método separado en la clase de configuración para cada instancia independiente agregada al contexto.
+El uso de la anotación **`@Bean`** para agregar instancias al **contexto de Spring** le permite agregar cualquier tipo de instancia de objeto como un **bean** e incluso varias instancias del mismo tipo al **contexto de Spring**. Desde este punto de vista, este enfoque es más flexible que el uso de **anotaciones estereotipadas**. Aún así, requiere que escriba más código porque necesita escribir un método separado en la clase de configuración para cada instancia independiente agregada al **contexto**.
 
-Usando anotaciones de estereotipo, puede crear beans solo para las clases de aplicación con una anotación específica (por ejemplo, @Component ). Este enfoque de configuración requiere escribir menos código, lo que hace que su configuración sea más cómoda de leer. Preferirá este enfoque sobre la anotación @Bean para las clases que defina y pueda anotar.
+Usando **anotaciones de estereotipo**, puede crear **beans** solo para las clases de aplicación con una anotación específica (por ejemplo, **`@Component`**). Este enfoque de configuración requiere escribir menos código, lo que hace que su configuración sea más cómoda de leer. Preferirá este enfoque sobre la anotación **`@Bean`** para las clases que defina y pueda anotar.
 
-El uso del método registerBean() le permite implementar una lógica personalizada para agregar beans al contexto de Spring. Recuerde, puede usar este enfoque solo con Spring 5 yluego.
+El uso del método **`registerBean()`** le permite implementar una lógica personalizada para agregar **beans** al **contexto de Spring**. Recuerde, puede usar este enfoque solo con **Spring 5** y posteriores.
