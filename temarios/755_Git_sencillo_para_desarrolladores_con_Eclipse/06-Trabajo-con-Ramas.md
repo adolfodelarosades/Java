@@ -431,6 +431,68 @@ Vamos a crear una segunda rama con **click derecho en el nombre del proyecto > T
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212478850-aa661edf-8a68-4752-b610-a577888bd6f5.png">
 
+Debemos tener cuidado al crear esta segunda rama ya que actualmente estamos posicionados en la rama **`rebase_1`** 
+
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/23094588/212479032-2469192b-d7dc-4fc6-b5d0-fb272e462601.png">
+
+y deberíamos partir de la rama **`master`** poe lo que debemos seleccionarla con el botón **Select...**
+
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/212479193-319545f8-b3f0-42bf-8c03-4ccdf5d871c7.png">
+
+<img width="601" alt="image" src="https://user-images.githubusercontent.com/23094588/212479254-4ccfb32d-e6e6-4c93-9820-13a1118a86f7.png">
+
+Una vez cambiada presionamos el botón **Finish**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212479346-d89c1f42-2f61-404f-978d-afc7b8092210.png">
+
+Ya estamos posicionados en la rama **`rebase_2`**, vamos a crear el archivo **`rebase_2.txt`** 
+
+<img width="594" alt="image" src="https://user-images.githubusercontent.com/23094588/212479484-4d6bc28a-9aba-44d6-a22b-7394e3c91f64.png">
+
+Vamos a añadir contenido en el archivo **`rebase_2.txt`** y lo vamos a commitear.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212479622-60195a46-bb2c-4840-b92f-2b084b2f70c6.png">
+
+Vamos a cambiarnos a la rama **`master`** con **click derecho en el nombre del proyecto > Team > Switch To > master**. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212479742-ce5e031a-b2a1-419a-b507-29d6d79a1e16.png">
+
+Si vemos el **History** tenemos lo siguiente:
+
+<img width="1471" alt="image" src="https://user-images.githubusercontent.com/23094588/212479889-e7d5ea3f-5a45-4793-b3c4-555657da0b8e.png">
+
+Ahora vamos a proceder a realizar los mergeos, empezaremos con la rama **`rebase_2`**. Vamos a dar **click derecho en el nombre del proyecto > Team > Merge...**. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212480049-5e45951c-b42a-48a7-b286-f4ecdbbf63b0.png">
+
+Seleccionamos la rama **`rebase_2`**
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/212480098-cc23e721-2820-4fef-b864-a8c74141ec23.png">
+
+Aceptamos la opción por default, como lo hemos realizado hasta ahora.
+
+<img width="627" alt="image" src="https://user-images.githubusercontent.com/23094588/212480206-6b2fc94f-8d78-492d-99c6-4bffcba571f9.png">
+
+Vemos como va quedando el **History**, simplemente se realizo un **FastForward**.
+
+<img width="397" alt="image" src="https://user-images.githubusercontent.com/23094588/212480254-9da34be7-95af-449e-b06d-2b29bd2d8cdd.png">
+
+Ahora pensemos un poco, si ahora simplemente mergeamos la rama **`rebase_1`** lo que vamos a tener al final de hacerlo será un **Merge Commit** con lo que se va a crear una rama si o si, por que se ha trabajado en dos actividades en paralelo. Esto ya lo hemos visto con ejemplos anteriores.
+
+Como queremos evitar la creación de la nueva rama vamos a utilizar el **Rebase** para merger la rama **`rebase_1`**. Vamos a dar **click derecho en el nombre del proyecto > Team > Rebase...**. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212480781-ce97a67a-7a15-4942-9f52-761ed6f00906.png">
+
+Debemos indicar que rama deseamos mergear.
+
+
+
+
+
+
+
+
+
 
 
 
