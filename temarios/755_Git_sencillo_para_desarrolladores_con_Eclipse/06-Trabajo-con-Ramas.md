@@ -503,4 +503,46 @@ Resuniendo el **Rebase** lo que hace es evitar crear ramas, básicamente en el m
 
 
 ## Modificar commit 02:30
+
+En esta sección vamos a ver lo que es el **Amend de un Commit**, es decir añadir cosas a un commit que ya hayas hecho, lo típico de cuando se nos olvida meter algo en un commit. 
+
+Vamos a ver un ejemplo.
+
+Vamos a crear un nuevo fichero **`anadir.txt`**.
+
+<img width="601" alt="image" src="https://user-images.githubusercontent.com/23094588/212492360-2e6cdaff-d33a-4966-9e4e-a4902e424129.png">
+
+Vamos a agregar contenido al archivo y a commitearlo.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212492465-e87fa203-7f53-4bd7-8ed5-9456f64590fc.png">
+
+Si vemos en el **History** tenemos.
+
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/23094588/212492569-bf07ac81-6f6a-4c6f-aaba-bfe3e3882bca.png">
+
+Vemos nuestro nuevo commit.
+
+Pero de repente recordamos que ademas de crear el nuevo archivo **`anadir.txt`** teniamos que hacer un cambio en el archivo **`caracteristica_1.txt`**.
+
+<img width="1057" alt="image" src="https://user-images.githubusercontent.com/23094588/212492791-daa3297c-639b-4e87-80ee-4ca327933bbd.png">
+
+Y este cambio debía ser parte del commit donde subimos el archivo  **`anadir.txt`**, si realizamos un commit normal tendríamos dos commits en lugar de solo uno.
+
+Por lo cual vamos a realizar un **Amend** en el commit, lo cual se hace como sigue. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212492908-611a1661-0a6e-46da-a3f3-1b4bc6b6ed3a.png">
+
+Tenemos el botón **Amend (Edit Previous Commit)** que al presionarnos nos aparece el mensaje que habáimos dado al commit previo.
+
+<img width="1173" alt="image" src="https://user-images.githubusercontent.com/23094588/212493015-d42f14d2-d5a4-4d79-8d9b-5714a600f390.png">
+
+Ya simplemente presionamos el botón **Commit**.
+
+Si vemos el **History** apreciamos que ambos cambios han quedado en el mismo commit **`Añadir contenido`**, aunque realmente lo hicimos con dos commits.
+
+<img width="1175" alt="image" src="https://user-images.githubusercontent.com/23094588/212493168-7050b404-6c0f-4acc-8a7e-951121773f89.png">
+
+Esto es el **Amend de un Commit**, ojo con esto por que se puede hacer mientras estes trabajando en local, en cuanto este cambio se suba a un servidor eso ya empieza a hacer problematico, por que ese cambio el primer cambio lo pudo haber cogido algún otro elemento de los usuarios del repositorio. Mientras que si solo esta trabajando en local todo queda en casa.
+
+
 ## Peligro de las ramas 03:38
