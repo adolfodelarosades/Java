@@ -132,6 +132,46 @@ Pero realmente a mi se me ve así:
 
 <img width="588" alt="image" src="https://user-images.githubusercontent.com/23094588/212539128-ced4d8cb-7755-4148-b6a0-12052d621501.png">
 
+Lo que indica **master ↑1** indica que la **master** esta una posición por delante que **`origin/master`**. como ya hemos podido apreciar en el **history**.
+
+Para subir el cambio en **`origin/master`** vamos a usar la opción **click derecho en el nombre del proyecto > Team > Push origi**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212541440-2031e098-1c9a-4d40-b974-8aa087c55f55.png">
+
+Nos presenta una ventana
+
+<img width="716" alt="image" src="https://user-images.githubusercontent.com/23094588/212541604-44798e0b-d099-4061-b7c6-25cd197dc5ea.png">
+
+Al presionar el botón **Push** nos muestra el resultado de lo que ha hecho.
+
+<img width="663" alt="image" src="https://user-images.githubusercontent.com/23094588/212541714-d8382aa2-edc8-4436-995e-b37f0319bd5e.png">
+
+Subir el commit al repositorio remoto.
+
+Si abrimos nuevamente el **History** vamos a ver como nuestro repositorio remoto se ha actualizado ya que **`master`** **`origin/master`** y **`HEAD`** estan a la misma altura. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212541799-2adfb72b-8b84-4fba-a789-6a62581d1042.png">
+
+Para realizar la subida de este commit al Servidor remoto lo hemos hecho en dos pasos, primero el commit y después el push, pero pudimos haberlo realizado en un solo paso, vamos a modificar nuevamente el archivo **`caracteristicas_1.txt`** y vamos acommitearlo solo que en este caso vamos a presionar el botón **Commit and Push**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542018-a94799b9-d822-4293-b5d3-176c361603df.png">
+
+Nos informa del resultado.
+
+<img width="671" alt="image" src="https://user-images.githubusercontent.com/23094588/212542097-00ffb171-c351-4247-bf24-16c414dbe388.png">
+
+Y en el **History** avanzarón todas las etiquetas **`master`** **`origin/master`** y **`HEAD`**. Hemos realizado el commit y push en un mismo paso. Tanto nuestro repositorio Local como el "Remoto" estan en el mismo commit.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
