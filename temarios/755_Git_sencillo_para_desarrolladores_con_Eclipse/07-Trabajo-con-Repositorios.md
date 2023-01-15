@@ -24,7 +24,7 @@ Lo primero que vamos a hacer es abrir la consola en la carpeta personal.
 
 Me voy a ir a la carpeta donde tengo el proyecto **`cursoegit`** es decir **`Documents/PROYECTOS/Eclipse/755_Git_con_Eclipse`**.
 
-<img width="1260" alt="image" src="https://user-images.githubusercontent.com/23094588/212535484-313db830-0a83-4660-a7ba-873693089b01.png">
+![image](https://user-images.githubusercontent.com/23094588/212536983-70af131a-d60e-4cea-8216-9870294a6f67.png)
 
 Ahora lo que vamos a hacer es un clone  sin la copia de trabajo de nuestro proyecto, esto lo hacemos con la instrucción:
 
