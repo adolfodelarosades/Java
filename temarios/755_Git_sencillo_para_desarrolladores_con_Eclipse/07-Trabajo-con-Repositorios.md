@@ -309,7 +309,11 @@ Nos aparece la ventana
 
 <img width="594" alt="image" src="https://user-images.githubusercontent.com/23094588/212547417-dbdfc30c-ee0b-45b9-b3e0-fbd96330d3f3.png">
 
-Lo vamos a llamar **`GitHub`** y vamos a usar la opción por defecto **Configure push** ya que nuestro Repositorio Remoton GitHub no tiene nada, al contrario de que cuando hicimos el Repositorio Remoto Local donde si lo habíamos inicializado con el repositorio de nuestro Local. Presionamos el botón **Create**.
+Lo vamos a llamar **`GitHub`** y vamos a usar la opción por defecto **Configure push** ya que nuestro Repositorio Remoton GitHub no tiene nada, al contrario de que cuando hicimos el Repositorio Remoto Local donde si lo habíamos inicializado con el repositorio de nuestro Local. 
+
+<img width="602" alt="image" src="https://user-images.githubusercontent.com/23094588/212563425-c9650b3d-0f46-44f2-91d5-d6be95c25643.png">
+
+Presionamos el botón **Create**.
 
 <img width="616" alt="image" src="https://user-images.githubusercontent.com/23094588/212547942-0b464b72-abd3-4b3a-aae9-d9f69b0e801c.png">
 
@@ -333,6 +337,12 @@ Donde me indica que no se ha podido conectar, acepto la condición y doy **OK** 
 
 <img width="405" alt="image" src="https://user-images.githubusercontent.com/23094588/212548512-75be5040-b691-42df-af73-c5c996cc41e2.png">
 
+
+Finalmente sale la ventana donde me pide el **password** que usamos cuando creamos las claves que si recordamos es **`1234`**
+
+<img width="544" alt="image" src="https://user-images.githubusercontent.com/23094588/212563646-a9fb3365-e64d-40e8-a9a1-7ebb5c95a569.png">
+
+<img width="543" alt="image" src="https://user-images.githubusercontent.com/23094588/212563669-7226f59e-8243-4d71-accf-db5bfbcb55b9.png">
 
 
 
