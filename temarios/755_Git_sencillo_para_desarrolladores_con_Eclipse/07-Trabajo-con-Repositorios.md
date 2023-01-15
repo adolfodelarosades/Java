@@ -108,6 +108,11 @@ Y si abrimos el **History** tenemos:
 
 <img width="748" alt="image" src="https://user-images.githubusercontent.com/23094588/212538226-f30858f2-ef6f-4dff-8083-7c3a10dcfcb9.png">
 
+Como podemos apreciar ademas de tener las etiquetas **`master`** y **`HEAD`** ahora nos aparece una tercer etiqueta llamada **`origin/master`**.
+
+<img width="368" alt="image" src="https://user-images.githubusercontent.com/23094588/212538420-04bb7559-0933-431b-83be-197116d37612.png">
+
+
 
 
 
