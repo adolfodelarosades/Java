@@ -112,25 +112,27 @@ Como podemos apreciar ademas de tener las etiquetas **`master`** y **`HEAD`** ah
 
 <img width="368" alt="image" src="https://user-images.githubusercontent.com/23094588/212538420-04bb7559-0933-431b-83be-197116d37612.png">
 
+Lo que nos esta diciendo esta nueva etiqueta es donde esta posicionado actualmente nuestro servidor, en este momento todo esta en la misma posición **`master`** **`origin/master`** y **`HEAD`**.
+
+Vamos a realizar un cambio para alterar esto, en el archivo **`caracteristicas_1.txt`** vamos a añadir un contenido y lo vamos a commitear.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212538664-71b1f3d7-6164-4ea4-9243-d3418e0cf258.png">
+
+Vamos a presionar el botón **Commit** como hemos estado haciendo hasta ahora.
+
+Si abrimos el **History** vemos que algo ha pasado, tanto **`master`** como **`HEAD`** avanzarón al nuevo commit, pero **`origin/master`** se ha quedado un commit por atrás. es decir que nuestro repositorio remoto no contiene este ultimo cambio.
+
+<img width="747" alt="image" src="https://user-images.githubusercontent.com/23094588/212538777-d7233d35-b8ad-4199-ba07-d2c29b9fd948.png">
+
+En teoría si vamos a la pestaña **Git Staging** se me debería mostrar así
+ 
+![image](https://user-images.githubusercontent.com/23094588/212539101-c96a4039-73d9-42cf-bde3-863b3c6af6b5.png)
+
+Pero realmente a mi se me ve así:
+
+<img width="588" alt="image" src="https://user-images.githubusercontent.com/23094588/212539128-ced4d8cb-7755-4148-b6a0-12052d621501.png">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lo que vamos a configurar el el **Fetch** 
 
 
 
