@@ -277,7 +277,27 @@ Nos indica tanto la ruta para **HTTPS** **`https://github.com/adolfodelarosades/
 
 Como para **SSH** **`git@github.com:adolfodelarosades/755_Git_con_Eclipse.git`**
 
-Vamos a copiar esta ultima URI y vamos a regresar a Eclipse, en la pestaña **Git Repositories**, en **Remotes**.
+### Configurar Eclipse para usar SSH
+
+Para indicarle a Eclipse la ubicación de las claves SSH en nuestra máquina tenemos que entrar a las **Preferencias de Eclipse** y buscamos **SSH**.
+Las claves SSH no pertenecen a Git, es algo generico que podemos usar en Eclipse.
+
+<img width="883" alt="image" src="https://user-images.githubusercontent.com/23094588/212562710-3e769e75-415f-4a49-bc5c-c3880b24d367.png">
+
+Actualmente nos muestra unas **Primaries Keys** pero debemos añadir la que nosotros hemos creado para GitHub presionando el botón **Add Private Keys...** para buscar la clave privada.
+
+<img width="1415" alt="image" src="https://user-images.githubusercontent.com/23094588/212562911-a70edb1c-5f6a-4856-adc9-f2e72f1c5786.png">
+
+Una vez seleccionada nos queda así:
+
+<img width="881" alt="image" src="https://user-images.githubusercontent.com/23094588/212562970-efdb8806-bc72-4ebe-80e9-d6a68759572b.png">
+
+Presionamos el botón **Apply and Close**.
+
+
+### Configurar Servidor Remoto en nuestro proyecto Eclipse.
+
+Vamos a copiar el URI para **SSH** **`git@github.com:adolfodelarosades/755_Git_con_Eclipse.git`** del Repositorio creado en GitHub y vamos a la pestaña **Git Repositories**, en **Remotes**.
 
 <img width="589" alt="image" src="https://user-images.githubusercontent.com/23094588/212547148-c8a07e52-5764-4d1a-b0ab-47f83d168dcb.png">
 
