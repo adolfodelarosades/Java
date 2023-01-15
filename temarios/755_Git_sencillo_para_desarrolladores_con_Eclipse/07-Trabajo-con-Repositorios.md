@@ -44,7 +44,99 @@ Recordemos que dentro de la carpeta **`cursoegit`** tenemos nuestro repositorio 
 
 Realmente lo que hemos hecho con el comando **`git clone --bare cursoegit`** es copiar el contenido de la carpeta **.git** a la carpeta **`cursoegit.git`**.
 
-Vamos a mover a mover la carpeta **`cursoegit.git`** dentro de la carpeta **`Repositorios-GIT`**, que es donde vamos a colocar realmente nuestro Servidor "remoto" simulado.
+Vamos a mover la carpeta **`cursoegit.git`** dentro de la carpeta **`Repositorios-GIT`**, que es donde vamos a colocar realmente nuestro Servidor "remoto" simulado.
+
+Por lo que nuestras carpetas quedan así.
+
+Carpeta del repositorio remoto.
+
+<img width="740" alt="image" src="https://user-images.githubusercontent.com/23094588/212537135-4a8d88ac-48ff-4e26-9ec5-c79da782f69b.png">
+
+Carpeta de trabajo localmente.
+
+<img width="1298" alt="image" src="https://user-images.githubusercontent.com/23094588/212537165-e71742c6-5c95-4f2a-9798-c37049240dee.png">
+
+### Enlazar Repositorio Remoto.
+
+Vamos a Eclipse en la pestaña **Git Repositorie** y **remotes**.
+
+<img width="589" alt="image" src="https://user-images.githubusercontent.com/23094588/212537293-79f5383c-86ad-4b13-bbf9-2979d741f6a2.png">
+
+Damos ***click derecho > Create remote***.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212537326-3d7ba8a6-fde9-43c3-91dd-73724307e9a1.png">
+
+Nos muestra una ventana para configurar el Servidor Remoto.
+
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/23094588/212537371-5c31747d-aa7a-4f81-82d8-6cad4e73ebf7.png">
+
+Por defecto el Servidor Remoto principal se llama **`origin`** es una convención que existe, le podemos dar el nombre que queramos pero por defecto se llama **`origin`**. 
+
+Tenemos dos opciones **Configure push** y **Configure fetch**, **push** nos permite subir nuestros cambios al servidor y **fetch** descargar del servidor todos los cambios existentes a nuestro local.
+
+Lo que nosotros vamos a hacer es configurar el **fetch** seleccionamos la opción **Configure fetch**.
+
+<img width="596" alt="image" src="https://user-images.githubusercontent.com/23094588/212537612-a86c925d-ed3d-45a9-b320-81dacfa48759.png">
+
+Presionamos el botón **Create**.
+
+<img width="639" alt="image" src="https://user-images.githubusercontent.com/23094588/212537636-c33f149d-c9ed-4dd8-bcfa-e9b4eb1e7fdb.png">
+
+Nos muestra las referencias, vamos a indicar el URI donde tenemos el servidor remoto, pulsamos el botón **Change...**.
+
+<img width="593" alt="image" src="https://user-images.githubusercontent.com/23094588/212537719-53e02217-d094-4193-ba49-1b4e63870e41.png">
+
+Con el botón **Local Folder...** vamos a indicar la ruta del repositorio remoto.
+
+<img width="1048" alt="image" src="https://user-images.githubusercontent.com/23094588/212537767-d8764d2a-7234-40ed-9d7a-92bcf3fc9dbf.png">
+
+<img width="594" alt="image" src="https://user-images.githubusercontent.com/23094588/212537780-eca1ab0d-583f-4bb8-a54c-287f7c18dc59.png">
+
+Pulsamos el botón **Finish**.
+
+<img width="638" alt="image" src="https://user-images.githubusercontent.com/23094588/212537815-42ff3a2f-0913-47f0-bd37-344395d76c5d.png">
+
+En la parte de los mapeos **Ref mappings** que tiene la cadena **`+refs/heads/*:refs/remotes/origin/*`** lo que le esta diciendo es que en nuestro local todos los **heads** que es la posición más avanzada me lo mapeas en el servidor con el **origin**. Vamos a presionar el botón **Save and Fetch**.
+
+<img width="609" alt="image" src="https://user-images.githubusercontent.com/23094588/212538036-5b876cd8-3e73-4a1c-a8fa-ebceae0756da.png">
+
+Nos muestra todo lo que se actualizara, preionamos en **Close**. Si vemos en **Git Repositories** como se ve **Remotes** tenemos:
+
+<img width="1172" alt="image" src="https://user-images.githubusercontent.com/23094588/212538168-355158f9-821d-4b40-8abd-52ccf5810174.png">
+
+Y si abrimos el **History** tenemos:
+
+<img width="748" alt="image" src="https://user-images.githubusercontent.com/23094588/212538226-f30858f2-ef6f-4dff-8083-7c3a10dcfcb9.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lo que vamos a configurar el el **Fetch** 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
