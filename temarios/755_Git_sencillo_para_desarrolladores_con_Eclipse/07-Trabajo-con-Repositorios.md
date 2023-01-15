@@ -28,6 +28,30 @@ Vamos a crear inicialmente una carpeta para todos los posibles repositorios que 
 
 Ahora si vamos a crear la carpeta para nuestro repositorio que llamaremos **`cursoegit.git`** lo terminamos en **`.git`** por que hay una convención en la cual los repositorio de Git que no tienen una copia de trabajo, que no hay una persona trabajando sobre ellos por defecto terminan con **`.git`** para diferenciar unos de otros.
 
+Ahora me voy a ir a la carpeta donde tengo el proyecto **`cursoegit`** es decir **`Documents/PROYECTOS/Eclipse/755_Git_con_Eclipse`**.
+
+<img width="1260" alt="image" src="https://user-images.githubusercontent.com/23094588/212535484-313db830-0a83-4660-a7ba-873693089b01.png">
+
+Ahora lo que vamos a hacer es un clone  sin la copia de trabajo de nuestro proyecto, esto lo hacemos con la instrucción:
+
+```sh
+git clone --bare cursoegit
+```
+
+<img width="1252" alt="image" src="https://user-images.githubusercontent.com/23094588/212535641-3851eb13-b2b3-472a-9e2a-55e32dd854b6.png">
+
+Por un lado tengo mi carpeta de trabajo **`cursoegit`** con el contenido del proyecto y por otro lado tengo la carpeta del repositorio **`cursoegit.git`** con todo lo que corresponde a las carpetas de un repositorio Git.
+
+<img width="1262" alt="image" src="https://user-images.githubusercontent.com/23094588/212535724-9befc692-eb49-41d7-aaa5-2ac0933b2a01.png">
+
+Recordemos que dentro de la carpeta **`cursoegit`** tenemos nuestro repositorio representado con la carpeta **.git** y podemos ver su contenido.
+
+<img width="1265" alt="image" src="https://user-images.githubusercontent.com/23094588/212535892-dff66a5c-3a7e-47f8-b437-69b8c1eaab52.png">
+
+
+
+
+
 
 
 
