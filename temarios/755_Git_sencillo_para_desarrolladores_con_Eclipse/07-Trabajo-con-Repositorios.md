@@ -165,38 +165,7 @@ Y en el **History** avanzarón todas las etiquetas **`master`** **`origin/master
 
 ## Repositorios remotos con GitHub 03:22
 
-YA que vimos como trabajar con un "repositorio remoto local", vamos a ver como trabajar con un verdadero repositorio remoto en **GitHub**.
-
-Vamos a ir a nuestra cuenta de GitHub.
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542463-b19b0f7c-6aba-48bf-b586-53dc3107723e.png">
-
-
-Entramos en **Repositories**.
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542513-a069bf13-f7b0-41e7-b165-c906e378afdc.png">
-
-Vamos a presionar el botón verde **New**.
-
-Nos va a pedir cierta información para poder crear el repositorio.
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542572-32ef77fb-1f7d-44a6-8178-ffe37b9f5241.png">
-
-Nos pide un nombre, descripción, indicar si el repositorio va a ser **Public** o **Private** si queremos añadir un archivo **`README`**, si queremos añadir un archivo **`.gitignore`** y finalmente el tipo de licencia.
-
-En nuestro caso solo vamos a indicar el nombre del repositorio **`755_Git_con_Eclipse`**.
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542885-90f6f53c-69b7-4f68-a7ff-83943957bb08.png">
-
-Presionamos el botón **Create repository**.
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542959-c1c14316-0b65-48ad-aa54-1ffbbbd6afa2.png">
-
-Nos indica tanto la ruta para **HTTPS** **`https://github.com/adolfodelarosades/755_Git_con_Eclipse.git`** 
-
-Como para **SSH** **`git@github.com:adolfodelarosades/755_Git_con_Eclipse.git`**
-
-Como nosotros vamos a trabajar mediante SSH vamos a ver como se generan estas credenciales en nuestra cuenta de GitHub.
+Ya que vimos como trabajar con un "repositorio remoto local", vamos a ver como trabajar con un verdadero repositorio remoto en **GitHub**. Pero previo a esto necesitamos hacer unos pasos previos.
 
 ### Generar SSH Key
 
@@ -233,7 +202,7 @@ Primero pulsamos el comando **`ssh-keygen -t ed25519 -C "adolfodelarosadesarroll
 
 Una vez hecho esto nos pide el nombre del archivo, lo hemos puesto con todo y ruta para que lo cree donde nosotros queremos, **`/Users/adulfodelarosa/.ssh/id_ssh_github`**.
 
-Nos pide un password, hemops puesto **`1234`**.
+Nos pide un password, hemos puesto **`1234`**.
 
 y listo.
 
@@ -251,6 +220,10 @@ o abriendo el archivo con algún editor.
 
 
 ### Añadir clave pública SSH en GitHub
+
+Vamos a ir a nuestra cuenta de GitHub.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542463-b19b0f7c-6aba-48bf-b586-53dc3107723e.png">
 
 Vamos a entrar al **settings** de nuestra cuenta en GitHub.
 
@@ -278,6 +251,34 @@ Una vez ingresado el password ya me muestra la **Authentication Keys** dentro de
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212546378-85ff2042-4d28-4ed7-893a-c1020cff29f6.png">
 
+
+### Crear repositorio Remoto
+
+Entramos en **Repositories**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542513-a069bf13-f7b0-41e7-b165-c906e378afdc.png">
+
+Vamos a presionar el botón verde **New**.
+
+Nos va a pedir cierta información para poder crear el repositorio.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542572-32ef77fb-1f7d-44a6-8178-ffe37b9f5241.png">
+
+Nos pide un nombre, descripción, indicar si el repositorio va a ser **Public** o **Private** si queremos añadir un archivo **`README`**, si queremos añadir un archivo **`.gitignore`** y finalmente el tipo de licencia.
+
+En nuestro caso solo vamos a indicar el nombre del repositorio **`755_Git_con_Eclipse`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542885-90f6f53c-69b7-4f68-a7ff-83943957bb08.png">
+
+Presionamos el botón **Create repository**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542959-c1c14316-0b65-48ad-aa54-1ffbbbd6afa2.png">
+
+Nos indica tanto la ruta para **HTTPS** **`https://github.com/adolfodelarosades/755_Git_con_Eclipse.git`** 
+
+Como para **SSH** **`git@github.com:adolfodelarosades/755_Git_con_Eclipse.git`**
+
+Como nosotros vamos a trabajar mediante SSH vamos a ver como se generan estas credenciales en nuestra cuenta de GitHub.
 
 
 
