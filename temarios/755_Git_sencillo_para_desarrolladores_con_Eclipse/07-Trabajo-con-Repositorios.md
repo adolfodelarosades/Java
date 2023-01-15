@@ -163,36 +163,135 @@ Nos informa del resultado.
 Y en el **History** avanzarón todas las etiquetas **`master`** **`origin/master`** y **`HEAD`**. Hemos realizado el commit y push en un mismo paso. Tanto nuestro repositorio Local como el "Remoto" estan en el mismo commit.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Repositorios remotos con GitHub 03:22
+
+YA que vimos como trabajar con un "repositorio remoto local", vamos a ver como trabajar con un verdadero repositorio remoto en **GitHub**.
+
+Vamos a ir a nuestra cuenta de GitHub.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542463-b19b0f7c-6aba-48bf-b586-53dc3107723e.png">
+
+
+Entramos en **Repositories**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542513-a069bf13-f7b0-41e7-b165-c906e378afdc.png">
+
+Vamos a presionar el botón verde **New**.
+
+Nos va a pedir cierta información para poder crear el repositorio.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542572-32ef77fb-1f7d-44a6-8178-ffe37b9f5241.png">
+
+Nos pide un nombre, descripción, indicar si el repositorio va a ser **Public** o **Private** si queremos añadir un archivo **`README`**, si queremos añadir un archivo **`.gitignore`** y finalmente el tipo de licencia.
+
+En nuestro caso solo vamos a indicar el nombre del repositorio **`755_Git_con_Eclipse`**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542885-90f6f53c-69b7-4f68-a7ff-83943957bb08.png">
+
+Presionamos el botón **Create repository**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212542959-c1c14316-0b65-48ad-aa54-1ffbbbd6afa2.png">
+
+Nos indica tanto la ruta para **HTTPS** **`https://github.com/adolfodelarosades/755_Git_con_Eclipse.git`** 
+
+Como para **SSH** **`git@github.com:adolfodelarosades/755_Git_con_Eclipse.git`**
+
+Como nosotros vamos a trabajar mediante SSH vamos a ver como se generan estas credenciales en nuestra cuenta de GitHub.
+
+### Generar SSH Key
+
+Las claves **SSH** se componen de una **parte pública** y de otra **parte privada**. La **parte privada** no se le debe proporcionar a nadie y tenerla bien guardada. La **parte pública** es la que le damos a quien quiera tener comunicación con nosotros, permite comprobar que nosotros somos quien decimos ser.
+
+Para generar las claves SSH tenemos la siguiente información oficial [Generación de una nueva clave SSH y adición al agente SSH](https://docs.github.com/es/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+Generalmente las claves SSH deben guardarse en una carpeta llamada **`~/.ssh`**, la he buscado en mi mac pero no la encuentro, por lo que la voy a crear con el comando:
+
+```sh
+mkdir ~/.ssh; chmod 700 ~/.ssh
+```
+
+Se ha creado en la ruta **`/Users/adulfodelarosa/.ssh`**
+
+<img width="1206" alt="image" src="https://user-images.githubusercontent.com/23094588/212545109-83e69b2e-e923-4397-91bb-5e582684a4f0.png">
+
+Si tenemos duda donde creo dicha carpeta la podemos bucar con el explorador de archivos pulsando **`Shift-Cmd-G`**.
+
+<img width="1454" alt="image" src="https://user-images.githubusercontent.com/23094588/212545185-cfec8b9e-fb95-493c-96dd-a2dde120a6bb.png">
+
+Ahora si vamos a proceder a crear las claves SSH.
+
+Básicamente los pasos son los siguientes:
+
+![image](https://user-images.githubusercontent.com/23094588/212544519-71a91dbb-09b2-4780-b1da-9c83ca38d3bf.png)
+
+
+Por lo tanto en nuestra consola pulsamos.
+
+<img width="1094" alt="image" src="https://user-images.githubusercontent.com/23094588/212545488-5a982db2-1cb5-449e-99fe-1b920e765ef9.png">
+
+Primero pulsamos el comando **`ssh-keygen -t ed25519 -C "adolfodelarosadesarrollo@gmail.com"`**.
+
+Una vez hecho esto nos pide el nombre del archivo, lo hemos puesto con todo y ruta para que lo cree donde nosotros queremos, **`/Users/adulfodelarosa/.ssh/id_ssh_github`**.
+
+Nos pide un password, hemops puesto **`1234`**.
+
+y listo.
+
+Si revisamos el contenido de la carpeta **`/Users/adulfodelarosa/.ssh`** tenemos:
+
+<img width="914" alt="image" src="https://user-images.githubusercontent.com/23094588/212545691-810fe7e2-4975-43d7-b9ee-544b1f41ea35.png">
+
+Tenemos los archivos para la clave privada y para la clave pública. Podemos ver el contenido de la clave pública con el comando **`cat`**.
+
+<img width="904" alt="image" src="https://user-images.githubusercontent.com/23094588/212545818-e982f13f-8a08-4715-9bff-9dae23e1d9d4.png">
+
+o abriendo el archivo con algún editor.
+
+<img width="759" alt="image" src="https://user-images.githubusercontent.com/23094588/212545938-e24d133d-32e7-4b2b-9a1b-6f8ce395ef07.png">
+
+
+### Añadir clave pública SSH en GitHub
+
+Vamos a entrar al **settings** de nuestra cuenta en GitHub.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212543891-36f7f3d2-3ec7-4450-88e8-1e83010e0aba.png">
+
+Vamos a pulsar en **SSH and GPG keys**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212543950-4d195077-9068-4e53-9730-39ba53892229.png">
+
+Vamos a pulsar en el botón **New SSH key**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212543995-a4fc792b-d629-4dc8-b1a8-d56b0212c040.png">
+
+Aquí lo que nos pide es que ingresemos nuestra clave pública, como ya la hemos generado la copiamos y la pegamos en el recuadro **Key**, añadimos un título.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212546258-21e8f702-97d8-4504-8c3d-32730d8cefef.png">
+
+Presionamos en el botón **Add SSH key**.
+
+Me pide que confirme mi password por seguridad.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212546325-091a7752-3622-4faf-9621-e96b858f5b01.png">
+
+Una vez ingresado el password ya me muestra la **Authentication Keys** dentro de la sección **SSH keys**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212546378-85ff2042-4d28-4ed7-893a-c1020cff29f6.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Publicar cambios 04:38
 ## Clonar repositorios 04:28
 ## Bajar cambios 03:21
