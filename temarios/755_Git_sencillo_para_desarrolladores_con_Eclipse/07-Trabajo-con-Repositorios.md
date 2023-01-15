@@ -202,9 +202,7 @@ Primero pulsamos el comando **`ssh-keygen -t ed25519 -C "adolfodelarosadesarroll
 
 Una vez hecho esto nos pide el nombre del archivo, lo hemos puesto con todo y ruta para que lo cree donde nosotros queremos, **`/Users/adulfodelarosa/.ssh/id_ssh_github`**.
 
-Nos pide un password, hemos puesto **`1234`**.
-
-y listo.
+Nos pide un password, hemos puesto **`1234`** y listo.
 
 Si revisamos el contenido de la carpeta **`/Users/adulfodelarosa/.ssh`** tenemos:
 
@@ -218,6 +216,7 @@ o abriendo el archivo con algún editor.
 
 <img width="759" alt="image" src="https://user-images.githubusercontent.com/23094588/212545938-e24d133d-32e7-4b2b-9a1b-6f8ce395ef07.png">
 
+El contenido de la clave privada no lo muestro por que como hemos dicho esto no se le debe pasar a nadie por que podría hacerse pasar por mí.
 
 ### Añadir clave pública SSH en GitHub
 
@@ -278,10 +277,41 @@ Nos indica tanto la ruta para **HTTPS** **`https://github.com/adolfodelarosades/
 
 Como para **SSH** **`git@github.com:adolfodelarosades/755_Git_con_Eclipse.git`**
 
-Como nosotros vamos a trabajar mediante SSH vamos a ver como se generan estas credenciales en nuestra cuenta de GitHub.
+Vamos a copiar esta ultima URI y vamos a regresar a Eclipse, en la pestaña **Git Repositories**, en **Remotes**.
 
+<img width="589" alt="image" src="https://user-images.githubusercontent.com/23094588/212547148-c8a07e52-5764-4d1a-b0ab-47f83d168dcb.png">
 
+y vamos a pulsar ***click derecho > Create remote***
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212547391-a1155c6a-35b7-4fb4-b48c-05757d6cc392.png">
+
+Nos aparece la ventana 
+
+<img width="594" alt="image" src="https://user-images.githubusercontent.com/23094588/212547417-dbdfc30c-ee0b-45b9-b3e0-fbd96330d3f3.png">
+
+Lo vamos a llamar **`GitHub`** y vamos a usar la opción por defecto **Configure push** ya que nuestro Repositorio Remoton GitHub no tiene nada, al contrario de que cuando hicimos el Repositorio Remoto Local donde si lo habíamos inicializado con el repositorio de nuestro Local. Presionamos el botón **Create**.
+
+<img width="616" alt="image" src="https://user-images.githubusercontent.com/23094588/212547942-0b464b72-abd3-4b3a-aae9-d9f69b0e801c.png">
+
+Nos pide la URI del repositorio Remoto vamos a pulsar el botón **Change...**
+
+<img width="733" alt="image" src="https://user-images.githubusercontent.com/23094588/212548132-f54eff6e-b642-407d-bb9b-f0565bf4c1b5.png">
+
+Como habíamos copiado la dirección para el SSH se ha llenado automáticamente, presionamos **Finish**.
+
+<img width="619" alt="image" src="https://user-images.githubusercontent.com/23094588/212548210-81244361-05e1-40e5-bc2c-3853a006a584.png">
+
+Y ahora presionamos **Save and Push**.
+
+Me sale la siguiente ventana.
+
+<img width="387" alt="image" src="https://user-images.githubusercontent.com/23094588/212548315-1320033d-bd3c-45f7-94af-15a34c5a9300.png">
+
+Donde me indica que no se ha podido conectar, acepto la condición y doy **OK** y aparece
+
+<img width="375" alt="image" src="https://user-images.githubusercontent.com/23094588/212548431-1df46d12-603b-4c6b-87de-4d9738d7418d.png">
+
+<img width="405" alt="image" src="https://user-images.githubusercontent.com/23094588/212548512-75be5040-b691-42df-af73-c5c996cc41e2.png">
 
 
 
