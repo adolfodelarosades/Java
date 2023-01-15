@@ -22,10 +22,6 @@ La forma más sencilla de crear un repositirio que no sea un **GitHub** o **GitL
 
 Lo primero que vamos a hacer es abrir la consola en la carpeta personal.
 
-Vamos a crear inicialmente una carpeta para todos los posibles repositorios que podamos tener llamado **`Repositorios-GIT`** y entramos en el.
-
-<img width="1254" alt="image" src="https://user-images.githubusercontent.com/23094588/212494935-273d2d4a-19ae-4756-b81c-aca0fa6b1eed.png">
-
 Ahora si vamos a crear la carpeta para nuestro repositorio que llamaremos **`cursoegit.git`** lo terminamos en **`.git`** por que hay una convención en la cual los repositorio de Git que no tienen una copia de trabajo, que no hay una persona trabajando sobre ellos por defecto terminan con **`.git`** para diferenciar unos de otros.
 
 Ahora me voy a ir a la carpeta donde tengo el proyecto **`cursoegit`** es decir **`Documents/PROYECTOS/Eclipse/755_Git_con_Eclipse`**.
