@@ -700,9 +700,22 @@ Los archivos los vemos abajo pero no es exactamente lo que queremos.
 
 Vamos a crear una nueva carpeta llamada **`755_Git_con_Eclipse_Clone`** y la vamos a abrir desde Eclipse.
 
-<img width="1008" alt="image" src="https://user-images.githubusercontent.com/23094588/212882433-d41ec989-f302-4ee1-877d-98436fa156bf.png">
+<img width="977" alt="image" src="https://user-images.githubusercontent.com/23094588/212967933-705a6ff4-1be1-4402-9e9f-b7475fb0c345.png">
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212882282-f418ddd6-4646-40a0-8f74-d7e673ff6034.png">
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212968244-037c1451-7720-4878-b856-8d3ba3f9d4d0.png">
+
+Observe como al abrir el proyecto desde Eclipse se crea la carpeta **`.metadata`**
+
+<img width="995" alt="image" src="https://user-images.githubusercontent.com/23094588/212968413-e0561bfc-a254-429e-84c2-160b824c3e05.png">
+
+
+### Configurar clave privada SSH
+
+Añadimos la clave privada creada para GitHub en las preferencias de Eclipse.
+
+<img width="870" alt="image" src="https://user-images.githubusercontent.com/23094588/212969049-06080092-b45d-4426-a481-c4dc3a5ba8ff.png">
+
+### Importar Proyecto GitHub
 
 Para importar el proyecto desde GitHub vamos a ir al proyecto dentro de GitHub
 
