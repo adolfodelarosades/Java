@@ -690,6 +690,16 @@ Presionamos **Add Spec**
 Nos dice que apunta a lo mismo lo voy a **Cancelar**
 
 
+Si vemos el contenido del Repositorio que creamos si que tiene contenido.
+
+<img width="1196" alt="image" src="https://user-images.githubusercontent.com/23094588/212896726-85a9128f-18bd-4497-882a-5cfae931444d.png">
+
+Los archivos los vemos abajo pero no es exactamente lo que queremos.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212897257-b5540b76-a95b-4ded-8b3e-314900f5179e.png">
+
+### Otro intento
+
 
 
 
