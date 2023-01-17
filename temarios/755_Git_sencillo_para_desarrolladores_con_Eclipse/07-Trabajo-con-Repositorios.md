@@ -456,6 +456,7 @@ Si volvemos a el repositorio remoto veremos que ya esta subido el cambio.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212869166-044472b7-a880-44f7-b382-a66efbd5b4f9.png">
 
+### Otros ejemplos
 
 Vamos a realizar otro ejercicio para apreciar que pasa una vez que ya tenemos bien configurados los mapeos del Fetch y Push en el Servidor Remoto.
 
@@ -483,13 +484,65 @@ Vamos a revisar el Repositorio Remoto.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212871349-8cadf84a-e310-44c7-bc94-930a236d91dc.png">
 
-
-No estan los cambios vamos a 
+No estan los cambios vamos a **click derecho en el nombre del proyecto > Team > Push branch 'master'...**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212871729-201a06ba-8ad8-4ccc-a38e-90fe3696f93c.png">
 
+Y podemos ver que por default se sube al Servidor Remoto Local, para forzar a que sea al Servidor Remoto GitHub podemos seleccionarlo en el combo.
+
+<img width="684" alt="image" src="https://user-images.githubusercontent.com/23094588/212872405-65b43c60-65cf-4387-8ae8-e98e38ac6307.png">
+
+Cambiamos el repositorio
+
+<img width="689" alt="image" src="https://user-images.githubusercontent.com/23094588/212872551-1ad88e3e-4298-469e-87ec-867ddecb220a.png">
+
+Presionamos **Push**. Nos muestra la ventana que nos indica que el Push se ha realizado.
+
+<img width="663" alt="image" src="https://user-images.githubusercontent.com/23094588/212872761-68bc66be-41b7-4cad-90d4-95dbfcb6d928.png">
+
+Vamos a ver el repositorio Remoto GitHub.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212873089-36955d3e-0061-4c7f-a85d-590eee7b366e.png">
+
+Ahora si que se ha subido el cambio.
 
 
+Vamos a hacer un tercer ejemplo donde hagamos el Commit and Push en un solo paso para ver que pasa, volvemos a hacer cambios en **`anadir.txt`**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212874456-e3d021f5-5fe4-4360-92ca-eb5a6af95a5e.png">
+
+Nos indica que se ha hecho el Push en el Servidor Remoto GitHub.
+
+<img width="665" alt="image" src="https://user-images.githubusercontent.com/23094588/212874792-280f83eb-4d70-4be7-bae8-7ed73d89a210.png">
+
+
+Vamos a revisar GitHub, el cambio esta subido.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212874888-8b0e3504-c20b-4b4e-9f34-9e176b6af547.png">
+
+¿Pero que ha pasado con el Repositorio Remoto Local? Si vemos el **History** tendremos la respuesta.
+
+<img width="1173" alt="image" src="https://user-images.githubusercontent.com/23094588/212875381-46857342-a37a-40f3-b389-d236fa845392.png">
+
+Realmente ya tenemos dos etiquetas para los Servidores Remotos **origin/master** y **GitHub2/master** actualmete **GitHub2/master** esta alineado pero no **origin/master**, vamos a alinearlo con **click derecho en el nombre del proyecto > Team > Push branch 'master'...**
+
+<img width="690" alt="image" src="https://user-images.githubusercontent.com/23094588/212875952-a7a2dc9d-56c5-4fc2-9a7a-da1aac30bb95.png">
+
+Como podemos ver la rama por default ahora es la de **GitHub2** por eso se subio el cambio cuando hicimos el **Commit and Push**, ahora vamos a hacer el **Push** a la rama **origin/master**.
+
+<img width="688" alt="image" src="https://user-images.githubusercontent.com/23094588/212876360-0ac9ca62-f619-48dc-948a-3369a9651309.png">
+
+Presionamos el **Push** y nos indica que se ha subido el cambio en el Repositorio Local.
+
+<img width="656" alt="image" src="https://user-images.githubusercontent.com/23094588/212876501-60e51830-d153-498f-8c12-78d26fe38f64.png">
+
+Si vemos el **History** todas las ramas estan a la misma altura.
+
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/23094588/212877050-c94de84a-eb78-450a-902f-08512a3ab3ef.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212876847-3b02ccd4-42b5-4453-8a6f-2fa7cbc8cefb.png">
+
+En resumen como tenemos dos ramas hay que hacer el Push en ambas ramas para que esten actualizadas, no es común tener dos servidores remotos como en este ejemplo.
 
 
 ## Clonar repositorios 04:28
