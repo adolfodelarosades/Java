@@ -817,3 +817,40 @@ Finalmente vamos a ver el **History** vemos los diferentes commits.
 
 
 ## Bajar cambios 03:21
+
+Hasta ahora todos los cambios hechos han sido desde nuestro Local hacia el Repositorio Remoto, pero existen situaciones que sea necesario descargar los nuevos cambios hechos por otros compañeros que esten subidos en el repositorio Remoto a nuestro repositorio Local. Vamos a simular esta acción para descargar cambios desde GitHub.
+
+Vamos a la Web de GitHub y vamos a modificar directamente desde allí el archivo **anadir.txt** simulando que fue subido por un compañero y realizamos el commit desde el mismo archivo. Presionamos el botón del lapíz para Editar el archivo.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213005393-ff267367-c76f-40ec-abef-43ea1231ef76.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213005471-fba573f2-d4af-4b92-9f57-f154ef7912f3.png">
+
+
+Y añadimos algún texto.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213005594-57e8f51f-958b-4710-9868-ab312d7c6f89.png">
+
+Si bajamos tendremos un botón para Commitear los cambios y meter un título. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213005785-8b005bb1-dc71-40be-b368-ed6d01b8ee85.png">
+
+Al presionar el botón **Commit changes** la modificación se guarda.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213006050-ada2d11d-b3a0-4c5e-bea9-3195ce31b75b.png">
+
+Ahora vamos a Eclipse para descargarnos dicho cambio. Vamos a dar **click derecho en el nombre del proyecto > Team > Fetch origin**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213006500-23b8a6cd-145b-406f-a27b-f3c5dc34145a.png">
+
+Se nos presenta el resultado del **Fetch origin**
+
+<img width="616" alt="image" src="https://user-images.githubusercontent.com/23094588/213006810-395d7578-4173-44d0-82d9-ad218a861333.png">
+
+
+
+
+
+
+
+
