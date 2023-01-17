@@ -765,7 +765,55 @@ Ya nos aparecen los archivos en el proyecto.
 
 <img width="494" alt="image" src="https://user-images.githubusercontent.com/23094588/212973127-2dbd43ec-58c0-465e-a4e6-c5ceec3b4a49.png">
 
+Si vemos el contenido de algún archivo vemos toda la información como la tenemos en GitHub.
 
+<img width="1339" alt="image" src="https://user-images.githubusercontent.com/23094588/212974784-a96364c1-9de7-4e37-aca2-0d4a28167754.png">
+
+Vamos a abrir la vista **Git Repositories**.
+
+<img width="1014" alt="image" src="https://user-images.githubusercontent.com/23094588/212975782-23eff07f-a656-4419-88b2-9a86b33f7bbc.png">
+
+Observemos que solo tenemos un Repositorio Remoto el de GitHub, en este proyecto no tenemos el Repositorio Remoto Local. Vamos a revisar la configuración del Fetch y del Push.
+
+Como podemos ver el Fetch ya esta configurado.
+
+<img width="634" alt="image" src="https://user-images.githubusercontent.com/23094588/212976762-6cddcd01-a87b-41b1-a4c3-4484d2cd9e7c.png">
+
+En cambio Push no lo esta.
+
+<img width="620" alt="image" src="https://user-images.githubusercontent.com/23094588/212976960-c46ef794-0843-4675-8b75-063ed5105d8f.png">
+
+Vamos a añadir el mappeo con **Advanced...**
+
+Añadimos el mapeo como ya sabemos.
+
+<img width="617" alt="image" src="https://user-images.githubusercontent.com/23094588/212977310-80a244b7-f5b3-45b7-b1c4-78c7569c3862.png">
+
+Presionamos **Finish**
+
+<img width="619" alt="image" src="https://user-images.githubusercontent.com/23094588/212977455-160b760c-415d-4b81-a7e2-f9e19682b0d1.png">
+
+Presionamos **Save and Push**. Nos muestra la ventana como si hiciera un Push pero no hay nada que subir, pero ya nos muestra la ruta del servidor Remoto que se usará al hacer Push.
+
+<img width="664" alt="image" src="https://user-images.githubusercontent.com/23094588/212977643-d278db56-e202-4f15-b2d6-bdf1efb8650b.png">
+
+Vamos a hacer un cambio en un archivo y subirlo al repositorio remoto para comprobar que todo va bien.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212979765-d7fc241c-b0f1-4376-8e4a-ad203960ab0d.png">
+
+Podemos presionar **Commit and Push** y como tenemos un solo Repositorio Remoto se subiera el cambio allí.
+
+Nos muestra el resultado.
+
+<img width="657" alt="image" src="https://user-images.githubusercontent.com/23094588/212980720-b00f3d9b-4eac-41df-9b1e-55a7e2cd7907.png">
+
+Si vemos en GitHub tenemos el cambio.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212980995-92725b37-96ca-4b6e-9404-b5f1d9b552b3.png">
+
+Finalmente vamos a ver el **History** vemos los diferentes commits. 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212981717-3c251fe4-0e7c-47c9-acfb-615859e52916.png">
 
 
 ## Bajar cambios 03:21
