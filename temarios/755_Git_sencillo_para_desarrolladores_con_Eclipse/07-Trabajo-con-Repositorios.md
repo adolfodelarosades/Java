@@ -569,9 +569,23 @@ En Eclipse vamos a presionar la opción **Import project...**
 
 Nos aparece la ventana siguiente donde debemos ir a **Git** y seleccionar la opción **Project from Git**.
 
-<img width="378" alt="image" src="https://user-images.githubusercontent.com/23094588/212883522-30e7f9e7-a279-4b7e-9f9b-643a2494fddb.png">
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/212883739-82faac5c-941c-40f4-8f98-2d8debacd53f.png">
 
+Presionamos **Next** y seleccionamos **Clone URI**.
 
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/212883917-95600bff-e6f5-4621-a0da-ee1cf72a312d.png">
+
+Presionamos **Next**. La información se rellena por haber copiardo la URL desde GitHub en el portapapeles.
+
+<img width="596" alt="image" src="https://user-images.githubusercontent.com/23094588/212884113-28f26d88-5ca9-4185-bf12-f9e0789f2c32.png">
+
+Presionamos **Next**. Y nos manda el siguiente error.
+
+<img width="629" alt="image" src="https://user-images.githubusercontent.com/23094588/212884498-7cdd53ea-c7ce-4fc5-81d7-d3dadbd033e6.png">
+
+Parece que existen problemas con la clave pública o la primaria.
+
+<img width="614" alt="image" src="https://user-images.githubusercontent.com/23094588/212884957-e965baa3-db05-4cc4-a559-c5aac24cf799.png">
 
 
 
