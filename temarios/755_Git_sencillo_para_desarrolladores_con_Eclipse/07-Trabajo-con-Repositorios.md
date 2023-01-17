@@ -620,6 +620,77 @@ Como ya existe un proyecto con ese nombre vamos a cambiarlo por:
 <img width="606" alt="image" src="https://user-images.githubusercontent.com/23094588/212888782-7954c34c-53b1-4652-bc37-9e5afaa45790.png">
 
 
+Como con esta forma no pude siempre me marcaba el error de que existia ya el repositorio.
+
+### Otra Forma de hacerlo
+
+Primero verificar que existen la clave privada en SSH.
+
+<img width="883" alt="image" src="https://user-images.githubusercontent.com/23094588/212893487-fcb25f93-1545-40b8-b47c-9169f23b1cf6.png">
+
+Segundo abrimos la vista **GIT Repositories** y vemos que tenemos la opción **Clone Git Repository**.
+
+<img width="1136" alt="image" src="https://user-images.githubusercontent.com/23094588/212893731-95b36e2d-85ac-49a4-aea9-d15dc83f562e.png">
+
+Al presionar  **Clone Git Repository**
+
+<img width="595" alt="image" src="https://user-images.githubusercontent.com/23094588/212894022-2ecee9e0-29a2-4556-9327-0f5aa50da7eb.png">
+
+Presionamos **Next**.
+
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/212894112-b154d6a7-3741-4f62-8b99-1e3eca95e8b3.png">
+
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/212894158-7a306eec-9902-4d0d-a717-b95a6b7d96a1.png">
+
+Me indica que el repositorio ya tiene contenido.
+
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/212894308-51198f98-9ff1-4358-bb86-eaaf86912ce3.png">
+
+Voy aponer otro nombre.
+
+<img width="595" alt="image" src="https://user-images.githubusercontent.com/23094588/212894435-baf1d8c6-e198-497e-8003-480e1a878511.png">
+
+Y presionar **Finish**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212894659-f44c7188-92ad-4f54-af5f-ba3714558f86.png">
+
+Aun no vemos los archivos pero vemos que ya esta configurado el Repositorio Remoto.
+
+<img width="1136" alt="image" src="https://user-images.githubusercontent.com/23094588/212895186-dab25a60-3741-4b0a-802f-ad221d1cf2f2.png">
+
+Aun que la configuración no esta del todo bien  en el Fetch como en el Push.
+
+<img width="636" alt="image" src="https://user-images.githubusercontent.com/23094588/212895374-e678d22e-4b7d-4a6d-b6b9-3758a78b2589.png">
+
+
+<img width="615" alt="image" src="https://user-images.githubusercontent.com/23094588/212895483-2d9bb249-424f-4b97-bf49-e1d9f7797ce5.png">
+
+
+Vamos a intentar hacer un Fetch para ver si descarga del repositorio los archivos.
+
+<img width="1140" alt="image" src="https://user-images.githubusercontent.com/23094588/212895820-b6b6a009-50ea-4803-8d95-16ffa8c68baf.png">
+
+Nos indica que no hay nada que descargar.
+
+<img width="611" alt="image" src="https://user-images.githubusercontent.com/23094588/212895914-39fcd7f9-c5cf-4ea3-8186-f50ab61f2769.png">
+
+Vamos a dar en **Confuration...**
+
+<img width="641" alt="image" src="https://user-images.githubusercontent.com/23094588/212896014-dd6f64bb-a683-45ed-b0d3-a6647452d133.png">
+
+Vamos a presionar **Advanced...**
+
+<img width="753" alt="image" src="https://user-images.githubusercontent.com/23094588/212896166-72e4fc72-16c2-424c-954d-9a0372db5e1a.png">
+
+
+Presionamos **Add Spec**
+
+<img width="749" alt="image" src="https://user-images.githubusercontent.com/23094588/212896297-8cc204bb-a024-4227-9259-054bf38bb9fb.png">
+
+Nos dice que apunta a lo mismo lo voy a **Cancelar**
+
+
+
 
 
 
