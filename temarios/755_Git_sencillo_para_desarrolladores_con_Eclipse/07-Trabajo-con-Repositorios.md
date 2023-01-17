@@ -587,6 +587,40 @@ Parece que existen problemas con la clave pública o la primaria.
 
 <img width="614" alt="image" src="https://user-images.githubusercontent.com/23094588/212884957-e965baa3-db05-4cc4-a559-c5aac24cf799.png">
 
+Damos a **Cancel**.
+
+Vamos a revisar las propiedades de SSH en Eclipse.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212885363-b3ce19d6-5a1d-4aab-8f2c-b0d196bcd11f.png">
+
+Como podemos ver se ha perdido la clave privada de GitHub, vamos a añadirla nuevamente.
+
+<img width="867" alt="image" src="https://user-images.githubusercontent.com/23094588/212885611-b0c6f0bd-145a-403f-8c8a-71e64a6f740b.png">
+
+Ahora si repetimos todo lo que habíamos hecho anteriormente hasta que nos marco el error tenemos:
+
+<img width="602" alt="image" src="https://user-images.githubusercontent.com/23094588/212885931-5e8ce1a0-76a6-4bd4-8676-35940f2b131d.png">
+
+Nos muestra toda las ramas que podemos descargar en este caso solo tenemos **master** porque cuando lo publicamos solo publicamos esta rama.
+
+Al presionar **Next**, nos pide que le indiquemos donde ubicara el repositorio en nuestro ordenador.
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/212887362-5032e03b-b42e-4455-8cbf-a354f258009a.png">
+
+Vamos a dejar el mismo que aparece y presionamos **Next**. Aquí vamos a seleccionar la opción **Import as general project**. En otros casos se usan las otras opciones por ejemplo para proyectos de Eclipse cuando se sube toda la información del proyecto de Eclipse. Como aquí solo es texto se usa esa opción.
+
+<img width="602" alt="image" src="https://user-images.githubusercontent.com/23094588/212887558-ad406f3c-9ed9-4634-82c2-4c815e4cfbf2.png">
+
+Presionamos **Next**.
+
+<img width="605" alt="image" src="https://user-images.githubusercontent.com/23094588/212888257-70106a36-8596-407c-b005-ad8458569ac7.png">
+
+Como ya existe un proyecto con ese nombre vamos a cambiarlo por:
+
+<img width="606" alt="image" src="https://user-images.githubusercontent.com/23094588/212888782-7954c34c-53b1-4652-bc37-9e5afaa45790.png">
+
+
+
 
 
 
