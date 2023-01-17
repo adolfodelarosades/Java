@@ -874,3 +874,8 @@ Y si revisamos el **History** ya vemos como a avanzado **master** y **HEAD** a l
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213009525-17fee104-f088-47b9-8d8e-c4e01c71ccea.png">
 
 Observemos que el **History** muestra la lista de commits aunque a primera vista no son todos los que hay ***que alguien me explique***.
+
+Era cuestión de este botón, parece como un Filtro.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213011134-86b4e87c-58ec-4dd7-8fb2-7c110acf9914.png">
+
