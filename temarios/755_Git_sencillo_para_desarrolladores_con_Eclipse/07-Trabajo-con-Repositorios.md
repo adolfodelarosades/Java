@@ -847,10 +847,30 @@ Se nos presenta el resultado del **Fetch origin**
 
 <img width="616" alt="image" src="https://user-images.githubusercontent.com/23094588/213006810-395d7578-4173-44d0-82d9-ad218a861333.png">
 
+Esto baja los cambios pero no los incorpora. 
 
+Si observamos ahora tenemos **master ↓1** lo que indica que estamos un commit por debajo en comparación al Repositorio Remoto.
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213007499-24b630bb-8de2-476b-a8be-136b1cfdb727.png">
 
+Si vemos el **History** apreciamos mejor esto que estamos diciendo.
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213008027-437a595c-5bcb-4599-9c2c-62c7dd1ee2aa.png">
 
+Para incorporar los cambios descargador por el **Fetch origin** vamos a dar **click derecho en el nombre del proyecto > Team > Pull**
 
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213008449-20f332df-e981-4d39-a195-2250c855c237.png">
 
+Nos muestra el resultado del **Pull**.
+
+<img width="782" alt="image" src="https://user-images.githubusercontent.com/23094588/213008638-ec9b5110-e938-4622-aea0-0247a0515185.png">
+
+Y podemos ver como ahora si se han descargado los cambios.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213008796-3c872108-d1d0-4440-9a14-feb56af11899.png">
+
+Y si revisamos el **History** ya vemos como a avanzado **master** y **HEAD** a la altura de **origin/master**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/213009525-17fee104-f088-47b9-8d8e-c4e01c71ccea.png">
+
+Observemos que el **History** muestra la lista de commits aunque a primera vista no son todos los que hay ***que alguien me explique***.
