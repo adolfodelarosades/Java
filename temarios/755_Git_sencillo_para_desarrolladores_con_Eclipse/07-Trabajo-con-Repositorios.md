@@ -358,11 +358,39 @@ Y si consultamos nuestro repositorio en GitHub tenemos el repositorio con todo e
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212564187-fc323f45-2292-441e-bd1c-99b3f5b95874.png">
 
 
-
-
-
-
-
 ## Publicar cambios 04:38
+
+Vamos a ver como subir los nuevos cambios que realicemos en nuestro Servidor Remoto, vamos a añadir cambios en el archivo **`anadir.txt`** y vamos a dar un commit normal.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212859322-bee6dc83-6752-42c0-adda-664e79e2f729.png">
+
+Si vemos el **History** vemos como ha avanzado **master** y **HEAD** por delante de **origin/master**.
+
+<img width="1475" alt="image" src="https://user-images.githubusercontent.com/23094588/212859661-26ce74f7-3dd1-41fa-b6cd-6294ce7b3604.png">
+
+De hecho ya nos aparece **`master ↑1`** que nos indica que estamos un commit por delante con respecto a **origin/master**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212860352-ee25aab6-6a1a-4d35-9686-c8410bcdec84.png">
+
+
+Vamos a subir el cambio en el Servidor Remoto o más bien en **los Servidores Remotos** que tenemos dos. Vamos a dar **click derecho en el nombre del proyecto > Team > Push to origin**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212861719-3057321b-8156-4923-aab3-3510592c563d.png">
+
+Al presionarlo nos indica que se ha realizado.
+
+<img width="667" alt="image" src="https://user-images.githubusercontent.com/23094588/212862132-1fa4db77-9b34-4708-90ae-9120ebe38164.png">
+
+Si vemos el **History** vemos que **origin/master** avanza a la misma altura de **master** y **HEAD**.
+
+<img width="1174" alt="image" src="https://user-images.githubusercontent.com/23094588/212862387-8f9b024d-df29-4c50-8b33-b2a40d5ff2fb.png">
+
+Si revisamos el Servidor Remoto no vemos el cambio realizado, realmente no se ha subido el cambio.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212862787-510eca60-bda8-41f2-8c6c-f69e40933ba0.png">
+
+
+
+
 ## Clonar repositorios 04:28
 ## Bajar cambios 03:21
