@@ -345,7 +345,17 @@ Finalmente sale la ventana donde me pide el **password** que usamos cuando cream
 <img width="543" alt="image" src="https://user-images.githubusercontent.com/23094588/212563669-7226f59e-8243-4d71-accf-db5bfbcb55b9.png">
 
 
+**NOTA**: Repeti varias veces este proceso pero no lograba subir el proyecto. Cambien el nombre del repositorio a **GitHub2** y posteriormente hice check en las siguientes 2 ventanas que aparecian y finalmente me aparecio.
 
+<img width="662" alt="image" src="https://user-images.githubusercontent.com/23094588/212564100-9acd070d-238e-441d-ab13-e4d06db2bfab.png">
+
+Si abrimos la pestaña **Git Repositories** y **Remotes** vemos el nuevo repositorio remoto **GitHub2**.
+
+<img width="1176" alt="image" src="https://user-images.githubusercontent.com/23094588/212564128-4c8197fd-e17c-49ba-aa72-49eef4de1e98.png">
+
+Y si consultamos nuestro repositorio en GitHub tenemos el repositorio con todo el contenido de nuestro proyecto.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212564187-fc323f45-2292-441e-bd1c-99b3f5b95874.png">
 
 
 
