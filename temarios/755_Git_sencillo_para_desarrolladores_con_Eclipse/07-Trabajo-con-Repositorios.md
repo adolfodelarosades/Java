@@ -546,4 +546,35 @@ En resumen como tenemos dos ramas hay que hacer el Push en ambas ramas para que 
 
 
 ## Clonar repositorios 04:28
+
+En esta lección vamos a ver como descargarnos un proyecto desde GitHub. Pensemos que entramos a trabajar en una nueva empresa y que debemos montarnos todo el entorno de trabajo para poder trabajar con el, como nuevos vamos a partir de un proyecto Eclipse totalmente vacío. Mi proyecto actual esta en esta carpeta.
+
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/23094588/212881343-6a40b021-2c3e-4a6a-9e15-1d9217558dce.png">
+
+Vamos a crear una nueva carpeta llamada **`755_Git_con_Eclipse_Clone`** y la vamos a abrir desde Eclipse.
+
+<img width="1008" alt="image" src="https://user-images.githubusercontent.com/23094588/212882433-d41ec989-f302-4ee1-877d-98436fa156bf.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212882282-f418ddd6-4646-40a0-8f74-d7e673ff6034.png">
+
+Para importar el proyecto desde GitHub vamos a ir al proyecto dentro de GitHub
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212882755-dfd80a03-e50e-4739-ab7d-c1e8cac82791.png">
+
+Donde vamos a copiar la URL: **`git@github.com:adolfodelarosades/755_Git_con_Eclipse.git`**
+
+En Eclipse vamos a presionar la opción **Import project...**
+
+<img width="378" alt="image" src="https://user-images.githubusercontent.com/23094588/212883253-e261bdbc-90e9-4433-b37d-81a14d842ad2.png">
+
+Nos aparece la ventana siguiente donde debemos ir a **Git** y seleccionar la opción **Project from Git**.
+
+<img width="378" alt="image" src="https://user-images.githubusercontent.com/23094588/212883522-30e7f9e7-a279-4b7e-9f9b-643a2494fddb.png">
+
+
+
+
+
+
+
 ## Bajar cambios 03:21
