@@ -696,7 +696,7 @@ Los archivos los vemos abajo pero no es exactamente lo que queremos.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212897257-b5540b76-a95b-4ded-8b3e-314900f5179e.png">
 
-### Otro intento
+### INTENTO CORRECTO
 
 Vamos a crear una nueva carpeta llamada **`755_Git_con_Eclipse_Clone`** y la vamos a abrir desde Eclipse.
 
@@ -731,6 +731,39 @@ Nos aparece la ventana siguiente donde debemos ir a **Git** y seleccionar la opc
 
 <img width="598" alt="image" src="https://user-images.githubusercontent.com/23094588/212883739-82faac5c-941c-40f4-8f98-2d8debacd53f.png">
 
+Presionamos **Next**, en la nueva ventana seleccionamos **Clone Uri**.
+
+<img width="601" alt="image" src="https://user-images.githubusercontent.com/23094588/212970571-4a753ed6-eb7e-4b0b-81a5-75006e2f20a8.png">
+
+Presionamos **Next**, como teniamos en el portapapeles copiado el URI del repositorio, aparece ya en la ventana con toda la información necesaría.
+
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/23094588/212970796-486bdd79-079a-4946-bdcb-78b7aa35ea42.png">
+
+Presionamos **Next**, en esta ventana nos aparecen todas las ramas que nos podemos descargar, en este caso solo tenemos **master** que fue la unica que se publico al hacer el Push.
+
+<img width="604" alt="image" src="https://user-images.githubusercontent.com/23094588/212971236-30a3e279-8f3c-4d3c-ad01-536573259d89.png">
+
+Presionamos **Next**, en la siguiente ventana nos muestra una URL de un repositorio que ya tiene contenido.
+
+<img width="601" alt="image" src="https://user-images.githubusercontent.com/23094588/212971688-e1787fea-8b19-4d8b-8372-0a7802dfadbb.png">
+
+Vamos a poner otro nombre para tener un repositorio exclusivo de este proyecto en nuestro ordenador.
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/212972171-a584a22f-064f-4d44-8ec0-3720e9db66a5.png">
+
+Presionamos **Next**, Aquí es donde posiblemente fallabamos anteriormente, vamos a dejar la opción marcada.
+
+<img width="603" alt="image" src="https://user-images.githubusercontent.com/23094588/212972341-4d1cc0f0-75c5-4bdf-aa40-522b76837938.png">
+
+Presionamos **Next**, y ya nos permite descargar el proyecto.
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/23094588/212972613-a1a2dab4-bc41-4c2f-9584-caacf02e9957.png">
+
+Presionamos **Finish**.
+
+Ya nos aparecen los archivos en el proyecto.
+
+<img width="494" alt="image" src="https://user-images.githubusercontent.com/23094588/212973127-2dbd43ec-58c0-465e-a4e6-c5ceec3b4a49.png">
 
 
 
