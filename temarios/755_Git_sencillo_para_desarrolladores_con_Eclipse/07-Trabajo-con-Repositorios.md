@@ -372,7 +372,6 @@ De hecho ya nos aparece **`master ↑1`** que nos indica que estamos un commit p
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212860352-ee25aab6-6a1a-4d35-9686-c8410bcdec84.png">
 
-
 Vamos a subir el cambio en el Servidor Remoto o más bien en **los Servidores Remotos** que tenemos dos. Vamos a dar **click derecho en el nombre del proyecto > Team > Push to origin**
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212861719-3057321b-8156-4923-aab3-3510592c563d.png">
@@ -381,6 +380,8 @@ Al presionarlo nos indica que se ha realizado.
 
 <img width="667" alt="image" src="https://user-images.githubusercontent.com/23094588/212862132-1fa4db77-9b34-4708-90ae-9120ebe38164.png">
 
+Pero observemos **Message Details** observamos que solo aparece la ubicación del Repositorio Remoto Local, pero no aparece el de GitHub.
+
 Si vemos el **History** vemos que **origin/master** avanza a la misma altura de **master** y **HEAD**.
 
 <img width="1174" alt="image" src="https://user-images.githubusercontent.com/23094588/212862387-8f9b024d-df29-4c50-8b33-b2a40d5ff2fb.png">
@@ -388,6 +389,105 @@ Si vemos el **History** vemos que **origin/master** avanza a la misma altura de 
 Si revisamos el Servidor Remoto no vemos el cambio realizado, realmente no se ha subido el cambio.
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212862787-510eca60-bda8-41f2-8c6c-f69e40933ba0.png">
+
+Esto ha pasado por que realmente no tenemos configurado bien nuestro Repositorio Remoto.
+
+### Configuración del Repositorio Remoto.
+
+<img width="1173" alt="image" src="https://user-images.githubusercontent.com/23094588/212863980-ff3a57ab-7df2-484b-89db-8a0394e69fa0.png">
+
+Vemos que **GitHub2** tiene dos partes la del Fetch y la del Push.
+
+<img width="1174" alt="image" src="https://user-images.githubusercontent.com/23094588/212864290-5166e8d9-4a6a-4e04-ac45-b82ef4b0e6eb.png">
+
+Vamos a seleccionar **Config Fetch...**. Nos a parece la ventana para la configuracción del Fetch y efectivamente vemos que no esta configurada.
+
+<img width="639" alt="image" src="https://user-images.githubusercontent.com/23094588/212864468-fab38e88-7a25-4167-b1f8-88f9fd5f66d6.png">
+
+Lo que tenemos que añadir son los mapeos entre las ramas del Local y el Remoto, presionamos en el botón **Advanced...**
+
+<img width="746" alt="image" src="https://user-images.githubusercontent.com/23094588/212865412-57d80a38-40ee-470c-bf73-c261b81728c2.png">
+
+Aquí es donde debemos hacer los mapeos, presionamos en el primer combo para seleccionar **Source ref** y se llena **Destination ref**, le decimos que a que equivale el **master** de Local en el Servidor Remoto.
+
+<img width="743" alt="image" src="https://user-images.githubusercontent.com/23094588/212865762-92e3b9cd-2836-4282-8e32-c4749084b3c3.png">
+
+Presionamos el botón **Add Spec**.
+
+<img width="747" alt="image" src="https://user-images.githubusercontent.com/23094588/212866196-aa316241-38ca-472c-adf5-f52d992d6dd1.png">
+
+Presionamos en el botón **Finish**.
+
+<img width="640" alt="image" src="https://user-images.githubusercontent.com/23094588/212866665-bf492f57-e546-413b-99ca-72c10877934d.png">
+
+Presionamos en el botón **Save and Fetch**. Nos sale la siguiente ventana.
+
+<img width="612" alt="image" src="https://user-images.githubusercontent.com/23094588/212866859-9c9d5cb7-060a-4046-8b10-1cc9d7db2e40.png">
+
+Ahora vamos a configurar el Push. Vamos a seleccionar **Config Push...**. 
+
+<img width="1173" alt="image" src="https://user-images.githubusercontent.com/23094588/212867238-4dd605f0-2099-4f4f-b3b6-bb9ae17a322d.png">
+
+Nos a parece la ventana para la configuracción del Push y efectivamente vemos que no esta configurada.
+
+<img width="621" alt="image" src="https://user-images.githubusercontent.com/23094588/212867360-f981acd7-24a1-4cff-8ada-4adff7777eed.png">
+
+Lo que tenemos que añadir son los mapeos entre las ramas del Local y el Remoto, presionamos en el botón **Advanced...**
+
+<img width="744" alt="image" src="https://user-images.githubusercontent.com/23094588/212867744-8ba6f975-8cf3-452b-832e-7b6afb7cac89.png">
+
+Aquí es donde debemos hacer los mapeos, presionamos en el primer combo para seleccionar **Source ref** y se llena **Destination ref**, le decimos que a que equivale el **master** de Local en el Servidor Remoto.
+
+<img width="740" alt="image" src="https://user-images.githubusercontent.com/23094588/212867998-8b363372-9bde-4276-9b6e-fb5e4995a2cf.png">
+
+Presionamos el botón **Add Spec**.
+
+<img width="745" alt="image" src="https://user-images.githubusercontent.com/23094588/212868120-38a1f6c8-af63-4c80-ba01-6e96d58aca28.png">
+
+Presionamos en el botón **Finish**.
+
+<img width="619" alt="image" src="https://user-images.githubusercontent.com/23094588/212868619-49f9c327-6241-4846-8128-c9a65983c0e2.png">
+
+Presionamos en el botón **Save and Fetch**. Nos sale la siguiente ventana donde se nos indica que se ha realizado el PUSH.
+
+<img width="663" alt="image" src="https://user-images.githubusercontent.com/23094588/212868837-63826fda-5035-4e06-a920-0938f68547da.png">
+
+Si volvemos a el repositorio remoto veremos que ya esta subido el cambio.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212869166-044472b7-a880-44f7-b382-a66efbd5b4f9.png">
+
+
+Vamos a realizar otro ejercicio para apreciar que pasa una vez que ya tenemos bien configurados los mapeos del Fetch y Push en el Servidor Remoto.
+
+Vamos a añadir cambios en el archivo **`anadir.txt`** y vamos a dar un commit normal.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212870077-2cc8a2df-df11-42f8-a809-45769d88abab.png">
+
+Si vemos el **History** vemos como ha avanzado **master** y **HEAD** por delante de **origin/master**.
+
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/23094588/212870379-d6108449-5e97-4649-a2d6-001e7fe5c4c1.png">
+
+De hecho ya nos aparece **`master ↑1`** que nos indica que estamos un commit por delante con respecto a **origin/master**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212870585-7e147883-4946-417e-b037-8f900ab68dc7.png">
+
+Vamos a subir el cambio en el Servidor Remoto o más bien en **los Servidores Remotos** que tenemos dos. Vamos a dar **click derecho en el nombre del proyecto > Team > Push to origin**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212870939-d20c0228-5ea3-4b9b-a595-e966e40e2095.png">
+
+Al presionarlo nos indica que se ha realizado. Pero observemos **Message Details** observamos que solo aparece la ubicación del Repositorio Remoto Local, pero no aparece el de GitHub.
+
+<img width="658" alt="image" src="https://user-images.githubusercontent.com/23094588/212871168-5d2fdc93-0cba-4443-a323-e8dbbaddcc63.png">
+
+Vamos a revisar el Repositorio Remoto.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212871349-8cadf84a-e310-44c7-bc94-930a236d91dc.png">
+
+
+No estan los cambios vamos a 
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/212871729-201a06ba-8ad8-4ccc-a38e-90fe3696f93c.png">
+
 
 
 
