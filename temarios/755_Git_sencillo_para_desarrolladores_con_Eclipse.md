@@ -86,7 +86,7 @@ En este curso usaremos el entorno de desarrollo Eclipse, líder en su segmento, 
 * Modificar commit 02:30
 * Peligro de las ramas 03:38
 
-### [07 Trabajo con Repositorios • 5 clases • 25m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/07-Trabajo-con-Repositorios.md)
+### [07 Trabajo con Repositorios • 5 clases • 25m](https://github.com/adolfodelarosades/Java/blob/master/temarios/755_Git_sencillo_para_desarrolladores_con_Eclipse/07-Trabajo-con-Repositorios.md) 👍
 
 * Repositorios remotos 09:21
 * Repositorios remotos con GitHub 03:22
