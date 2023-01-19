@@ -13,45 +13,50 @@
 
 Este capítulo cubre
 
-Estableciendo relaciones entre frijoles
-Usando la inyección de dependencia
-Accediendo a los beans desde el contexto de Spring a través de la inyección de dependencia
+* Estableciendo relaciones entre beans
+* Usando la inyección de dependencia
+* Accediendo a los beans desde el contexto de Spring a través de la inyección de dependencia
+
+
 En el capítulo 2, discutimos el contexto de Spring: el lugar en la memoria de la aplicación donde agregamos las instancias de objetos que queremos que Spring administre. Debido a que Spring usa el principio IoC, como discutimos en el capítulo 1, debemos decirle a Spring qué objetos de nuestra aplicación necesita controlar. Spring necesita controlar algunos de los objetos de nuestra aplicación para aumentarlos con las capacidades que proporciona. En el capítulo 2, aprendió varias formas de agregar instancias de objetos al contexto de Spring. También aprendió que agregamos estas instancias (beans) en el contexto de Spring para que Spring las reconozca.
 
-En este capítulo, discutimos cómo acceder a los beans, que hemos agregado al contexto de Spring. En el capítulo 2, usamos el método getBean() de la instancia de contexto directamente para acceder a los beans. Pero en las aplicaciones, necesitamos referirnos de un bean a otro de manera sencilla, diciéndole a Spring que proporcione una referencia a una instancia desde su contexto donde la necesitamos. De esta forma establecemos relaciones entre los beans (un bean tendrá una referencia a otro para delegar llamadas cuando lo necesite). Como probablemente ya sepa, a menudo en cualquier lenguaje de programación orientado a objetos, un objeto necesita delegar responsabilidades específicas a otros al implementar su comportamiento, por lo que también necesita saber cómo establecer tales relaciones entre objetos cuando usa Spring como marco. .
+En este capítulo, discutimos ***cómo acceder a los beans***, que hemos agregado al contexto de Spring. En el capítulo 2, usamos el método **`getBean()`** de la instancia de contexto directamente para acceder a los beans. Pero en las aplicaciones, necesitamos referirnos a un bean de otro de manera más sencilla, diciéndole a Spring que proporcione una referencia a una instancia desde su contexto donde la necesitamos. De esta forma establecemos relaciones entre los beans (un bean tendrá una referencia a otro para delegar llamadas cuando lo necesite). Como probablemente ya sepa, a menudo en cualquier lenguaje de programación orientado a objetos, un objeto necesita delegar responsabilidades específicas a otros al implementar su comportamiento, por lo que también necesita saber cómo establecer tales relaciones entre objetos cuando usa Spring como framework.
 
-Aprenderá que tiene más formas de acceder a los objetos que agregó al contexto de Spring y estudiaremos cada uno con ejemplos, imágenes y, por supuesto, fragmentos de código. Al final de este capítulo, tendrá las habilidades necesarias para usar el contexto de Spring y configurar beans y relaciones entre ellos. Esta habilidad es la base del uso de Spring; no encontrará ninguna aplicación de Spring en la que no aplicaría los enfoques que discutimos en este capítulo. Por esta razón, todo lo que se incluye en este libro (y todo lo que aprenderá de cualquier otro libro, artículo o videotutorial) se basa en la comprensión adecuada de los enfoques que analizamos en los capítulos 2 a 5.
+Aprenderá que tiene más formas de acceder a los objetos que agregó al contexto de Spring y estudiaremos cada uno con ejemplos, imágenes y, por supuesto, fragmentos de código. ***Al final de este capítulo, tendrá las habilidades necesarias para usar el contexto de Spring y configurar beans y relaciones entre ellos***. **Esta habilidad es la base del uso de Spring**; no encontrará ninguna aplicación de Spring en la que no aplicaría los enfoques que discutimos en este capítulo. Por esta razón, todo lo que se incluye en este libro (y todo lo que aprenderá de cualquier otro libro, artículo o videotutorial) se basa en la comprensión adecuada de los enfoques que analizamos en los capítulos 2 a 5.
 
-En el capítulo 2, aprendió a usar la anotación @Bean para agregar beans en el contexto de Spring. En la sección 3.1, comenzamos implementando una relación entre dos beans que definirá en la clase de configuración usando la anotación @Bean . Aquí discutimos dos formas de establecer las relaciones entre beans:
+En el capítulo 2, aprendió a usar la anotación **`@Bean`** para agregar beans en el contexto de Spring. En la sección 3.1, comenzamos implementando una relación entre dos beans que definirá en la clase de configuración usando la anotación **`@Bean`**. Aquí discutimos dos formas de establecer las relaciones entre beans:
 
-Vincule los beans llamando directamente a los métodos que los crean (a los que llamaremos cableado ).
+* Vincule los beans llamando directamente a los métodos que los crean (a los que llamaremos **wiring(cableado)** ).
 
-Permita que Spring nos proporcione un valor usando un parámetro de método (que llamaremos cableado automático ).
+* Permita que Spring nos proporcione un valor usando un parámetro de método (que llamaremos **auto-wiring(cableado automático)** ).
 
-Luego, en la sección 3.2, discutimos un tercer enfoque, que es una técnica respaldada por el principio IoC: inyección de dependencia(DI). Discutiremos cómo usar DI en Spring, aplicando la anotación @Autowiredpara implementar la relación entre dos beans (que también es un ejemplo de cableado automático). Usará estos dos enfoques juntos en proyectos del mundo real.
+Luego, en la sección 3.2, discutimos ***un tercer enfoque***, que es una técnica respaldada por el **principio IoC**: **inyección de dependencia(DI)**. Discutiremos cómo usar DI en Spring, aplicando la anotación **`@Autowired`** para implementar la relación entre dos beans (que también es un ejemplo de **auto-wiring**). Usará estos dos enfoques juntos en proyectos del mundo real.
 
-NOTA Puede pensar que los ejemplos de los capítulos 2 y 3 no se acercan lo suficiente al código de producción. ¡Al final, las aplicaciones reales no manejan loros y personas! Pero quiero comenzar sin problemas con los ejemplos más sencillos y asegurarme de que se concentre en estas sintaxis esenciales, que usará en prácticamente todas las aplicaciones de Spring. De esta manera, me aseguro de que comprenda correctamente cómo funcionan los enfoques discutidos y se concentre solo en ellos. A partir del capítulo 4, el diseño de nuestra clase se acercará más a lo que encontrará en los proyectos del mundo real.
+**NOTA** Puede pensar que los ejemplos de los capítulos 2 y 3 no se acercan lo suficiente al código de producción. ¡Al final, las aplicaciones reales no manejan loros y personas! Pero quiero comenzar sin problemas con los ejemplos más sencillos y asegurarme de que se concentre en estas sintaxis esenciales, que usará en prácticamente todas las aplicaciones de Spring. De esta manera, me aseguro de que comprenda correctamente cómo funcionan los enfoques discutidos y se concentre solo en ellos. A partir del capítulo 4, el diseño de nuestra clase se acercará más a lo que encontrará en los proyectos del mundo real.
 
-3.1 Implementando relaciones entre beans definidos en el archivo de configuración
-EnEn esta sección, aprenderá a implementar la relación entre dos beans definidos en los métodos de anotación de la clase de configuración con la anotación @Bean. A menudo encontrará este enfoque para establecer las relaciones entre beans utilizando la configuración de Spring. En el capítulo 2, discutimos que usamos la anotación @Bean para agregar beans al contexto Spring en los casos en los que no podemos cambiar la clase para la que queremos agregar el bean, por ejemplo, si la clase es parte del JDK. u otra dependencia. Y para establecer relaciones entre estos frijoles, debe aprender los enfoques que discutimos en esta sección. Discutiremos cómo funcionan estos enfoques, le daré los pasos que necesita para implementar las relaciones entre beans y luego aplicaremos estos pasos con proyectos de código pequeños.
+## 3.1 Implementando relaciones entre beans definidos en el archivo de configuración
 
-Digamos que tenemos dos instancias en el contexto de Spring: un loro y una persona. Crearemos y agregaremos estas instancias al contexto. Queremos que la persona sea dueña del loro. En otras palabras, necesitamos vincular las dos instancias. Este sencillo ejemplo nos ayuda a analizar los dos enfoques para vincular los beans en el contexto de Spring sin agregar una complejidad innecesaria y le permite concentrarse únicamente en las configuraciones de Spring.
+En esta sección, aprenderá a implementar la ***relación entre dos beans*** definidos en los métodos de anotación de la clase de configuración con la anotación **`@Bean`**. A menudo encontrará este enfoque para establecer las relaciones entre beans utilizando la configuración de Spring. En el capítulo 2, discutimos que usamos la anotación **`@Bean`** para agregar beans al contexto Spring en los casos en los que no podemos cambiar la clase para la que queremos agregar el bean, por ejemplo, si la clase es parte del JDK u otra dependencia. Y para establecer relaciones entre estos beans, debe aprender los enfoques que discutimos en esta sección. Discutiremos cómo funcionan estos enfoques, le daré los pasos que necesita para implementar las relaciones entre beans y luego aplicaremos estos pasos con proyectos de código pequeños.
 
-Entonces, para cada uno de los dos enfoques (cableado y cableado automático), tenemos dos pasos (figura 3.1):
+Digamos que tenemos dos instancias en el contexto de Spring: un **`parrot`** y una **`person`**. Crearemos y agregaremos estas instancias al contexto. Queremos que la persona sea dueña del loro. En otras palabras, necesitamos vincular las dos instancias. Este sencillo ejemplo nos ayuda a analizar los dos enfoques para vincular los beans en el contexto de Spring sin agregar una complejidad innecesaria y le permite concentrarse únicamente en las configuraciones de Spring.
 
-Agregue la persona y los frijoles loro al contexto de primavera (como aprendió en el capítulo 2).
+Entonces, para cada uno de los dos enfoques (**wiring** y **auto-wiring**), tenemos dos pasos (figura 3.1):
 
-Establecer una relación entre la persona y el loro.
+* Agregue los beans de **`person`** y **`parrot`** al contexto de Spring (como aprendió en el capítulo 2).
 
+* Establecer una relación entre la **`person`** y **`parrot`**.
 
+<img width="1016" alt="image" src="https://user-images.githubusercontent.com/23094588/213574272-262d9ab8-2811-4cf2-91ec-6b291d069a70.png">
 
-Figura 3.1 Teniendo dos beans en el contexto Spring, queremos establecer una relación entre ellos. Hacemos esto para que un objeto pueda delegar en el otro la implementación de sus responsabilidades. Puede hacerlo utilizando un enfoque de cableado, lo que implica llamar directamente a los métodos que declaran los beans para establecer el vínculo entre ellos, o mediante el cableado automático. Utiliza las capacidades de inyección de dependencia del marco.
+**Figura 3.1** Teniendo dos beans en el contexto Spring, queremos establecer una relación entre ellos. Hacemos esto para que un objeto pueda delegar en el otro la implementación de sus responsabilidades. Puede hacerlo utilizando un enfoque de cableado(**wiring**), lo que implica llamar directamente a los métodos que declaran los beans para establecer el vínculo entre ellos, o mediante el cableado automático(**auto-wiring**). Utiliza las capacidades de inyección de dependencia del framework.
 
-La figura 3.2 presenta la relación "tiene-A" entre la persona y el objeto loro de una manera más técnica que la figura 3.1.
+La figura 3.2 presenta la relación **"has-A(tiene-A)"** entre la **`person`** y el objeto **`parrot`** de una manera más técnica que la figura 3.1.
 
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/23094588/213575186-b7b8e267-6368-4cb7-ab7e-f3689dc4f139.png">
 
+**Figura 3.2** Implementando la relación entre los beans. Este es un diagrama simplificado que representa la relación **"has-A(tiene-A)"** entre los objetos **`Person`** y **`Parrot`**. Implementaremos esta relación a través del **wiring**(cableado) y el **auto-wiring**(cableado automático).
 
-Figura 3.2 Implementando la relación entre los beans. Este es un diagrama simplificado que representa la relación "tiene-A" entre los objetos Person y Parrot . Implementaremos esta relación a través del cableado y el cableado automático.
+AQUIIIIIIIIIIIIIII
 
 Antes de profundizar en cualquiera de los enfoques, comencemos con el primer ejemplo de este capítulo ("sq-ch3-ex1") para recordar cómo agregar los beans al contexto de Spring usando métodos anotados con @Bean en la clase de configuración, como discutido en la sección 2.2.1 (paso 1). Agregaremos una instancia de loro y una instancia de persona. Una vez que tenemos este proyecto listo, lo cambiamos para establecer la relación entre las dos instancias (paso 2). En la sección 3.1.1, implementamos el cableado, y en la sección 3.1.2, implementamos el cableado automático para los métodos anotados de @Bean . En el archivo pom.xml del proyecto Maven, agregamos la dependencia para el contexto de Spring tal como lo encuentra en el siguiente fragmento de código:
 
