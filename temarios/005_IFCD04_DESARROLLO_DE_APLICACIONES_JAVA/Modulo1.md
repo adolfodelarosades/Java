@@ -1,29 +1,27 @@
-# Módulo 1: Arquitectura y Diseño de Aplicaciones Java Enterprise.
+# Módulo 1
 
-Denominación: Arquitectura y Diseño de Aplicaciones Java Enterprise.
+**Denominación**: ARQUITECTURA Y DISEÑO DE APLICACIONES JAVA ENTERPRISE
 
-Objetivo: Al finalizar este Módulo los Alumnos podrán Desarrollar Aplicaciones en la
+**Objetivo**: Al finalizar este módulo los alumnos podrán desarrollar aplicaciones en la plataforma Java EE 7.
 
-Plataforma Java EE.
+**Duración**: 50 horas
 
-Duración: 50 horas.
+**Contenidos teórico- prácticos**:
 
-Contenidos teórico- prácticos:
-
-* Lenguaje de Programación Java.
-* Plataforma Java EE.
-* Persistencia con Entidades JPA.
-* Implementación de Lógica Empresarial con EJBs.
-* Uso del Java Message Service API.
-* Implementar Servicios SOAP con JAX-WS.
-* Crear Aplicaciones Web Java con Servlets.
-* Crear Aplicaciones Web Java con JSPs.
-* Implementación de Servicios REST utilizando la API JAX-RS-.
-* Creación de Aplicaciones Java con WebSocket.
-* Desarrollo de Aplicaciones Web utilizando JavaServer Faces.
-* Securizar Aplicaciones Java EE.
-* Logs de Java.
-* Beans de CDI.
-* BeanValidation y la API JPA.
-* API JAXB.
-* Ejemplos de Servlets Pre-CDI.
+* Lenguaje de programación Java
+* Plataforma Java EE
+* Persistencia con entidades JPA
+* Implementación de lógica empresarial con EJBs
+* Uso del Java Message Service API
+* Implementar Servicios SOAP con JAX-WS
+* Crear aplicaciones web Java con Servlets
+* Crear aplicaciones web Java con JSPs
+* Implementación de Servicios REST utilizando la API JAX-RS-
+* Creación de Aplicaciones Java con WebSocket
+* Desarrollo de Aplicaciones Web utilizando JavaServer Faces
+* Securizar aplicaciones Java EE
+* Logs de Java
+* Beans de CDI
+* BeanValidation y la API JPA
+* API JAXB
+* Ejemplos de Servlets Pre-CDI
