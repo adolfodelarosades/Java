@@ -1,12 +1,12 @@
 # IFCD04 DESARROLLO DE APLICACIONES JAVA: COMPONENTES WEB Y APLICACIONES DE BASE DE DATOS (JSP Y JPA)
 
-* [Temario](https://github.com/adolfodelarosades/Java/blob/master/temarios/005_IFCD04_DESARROLLO_DE_APLICACIONES_JAVA/Curso%20de%20Curso%20Desarrollo%20de%20aplicaciones%20Java_%20Componentes%20Web%20y%20aplicaciones%20de%20base%20de%20datos%20(JSP%20y%20JPA)%20IFCD04.pdf)
+## [Temario](https://github.com/adolfodelarosades/Java/blob/master/temarios/005_IFCD04_DESARROLLO_DE_APLICACIONES_JAVA/Curso%20de%20Curso%20Desarrollo%20de%20aplicaciones%20Java_%20Componentes%20Web%20y%20aplicaciones%20de%20base%20de%20datos%20(JSP%20y%20JPA)%20IFCD04.pdf)
 
-** Módulo 1: Arquitectura y Diseño de Aplicaciones Java Enterprise.
-** Módulo 2: Desarrollo de Componentes Web con Servlets y JSP.
-** Módulo 3: MySQL para Desarrolladores. 
-** Módulo 4: Desarrollo de Aplicaciones sobre Bases de Datos con JPA.
-** Módulo 5: Frameworks para el Desarrollo Java.
+* Módulo 1: Arquitectura y Diseño de Aplicaciones Java Enterprise.
+* Módulo 2: Desarrollo de Componentes Web con Servlets y JSP.
+* Módulo 3: MySQL para Desarrolladores. 
+* Módulo 4: Desarrollo de Aplicaciones sobre Bases de Datos con JPA.
+* Módulo 5: Frameworks para el Desarrollo Java.
 
 ## Módulo nº 1
 
