@@ -8,7 +8,7 @@
 * Módulo 4: Desarrollo de Aplicaciones sobre Bases de Datos con JPA.
 * Módulo 5: Frameworks para el Desarrollo Java.
 
-## Módulo 1
+## Módulo 1: Arquitectura y Diseño de Aplicaciones Java Enterprise.
 
 Denominación: Arquitectura y Diseño de Aplicaciones Java Enterprise.
 
@@ -38,7 +38,7 @@ Contenidos teórico- prácticos:
 * API JAXB.
 * Ejemplos de Servlets Pre-CDI.
 
-## Módulo 2
+## Módulo 2: Desarrollo de Componentes Web con Servlets y JSP.
 
 Denominación: Desarrollo de Componentes Web con Servlets y JSP.
 
@@ -56,7 +56,7 @@ Contenidos teórico- prácticos:
 * Procesamiento WebSocket y Java API para JSO.
 * Implementar una Política de Seguridad.
 
-## Módulo 3
+## Módulo 3: MySQL para Desarrolladores.
 
 Denominación: MySQL para Desarrolladores.
 
