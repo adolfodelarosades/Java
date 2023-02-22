@@ -19,7 +19,7 @@ La **API Java JDBC** proporciona una interfaz estándar para interactuar con cua
 
 <img width="825" alt="image" src="https://user-images.githubusercontent.com/23094588/220705422-5b60f94d-57ba-4978-9c96-66f3c7e857a6.png">
 
-* [Introducción a JDBC](): en este tutorial, le daremos una breve descripción general de **JDBC** para que pueda usarlo para interactuar con bases de datos **MySQL**.
+* [Introducción a JDBC](https://github.com/adolfodelarosades/Java/blob/master/temarios/211_MySQL_JDBC_Tutorial/01-Introduction-to-JDBC.md): en este tutorial, le daremos una breve descripción general de **JDBC** para que pueda usarlo para interactuar con bases de datos **MySQL**.
 
 * [Configuración del entorno de desarrollo MySQL JDBC]: este tutorial le muestra cómo configurar un entorno de desarrollo que le ayude a trabajar con **MySQL** y **JDBC**. También ilustra cómo cargar una base de datos de muestra en **MySQL** para practicar en los tutoriales posteriores.
 
