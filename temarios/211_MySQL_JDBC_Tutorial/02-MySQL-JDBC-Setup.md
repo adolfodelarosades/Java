@@ -67,7 +67,7 @@ Ingrese el nombre del esquema, **`mysqljdbc`**, y haga clic en el botón Aplicar
 
 ![image](https://user-images.githubusercontent.com/23094588/221354580-15327e3d-2b2c-4dd1-8f42-aa78b2879ace.png)
 
-MySQL Workbench abrirá un cuadro de diálogo para mostrarle la declaración DDL para crear un nuevo esquema, simplemente haga clic en el botón Aplicar.
+**MySQL Workbench** abrirá un cuadro de diálogo para mostrarle la DDL statement para crear un nuevo esquema, simplemente haga clic en el botón **Apply**.
 
 ![image](https://user-images.githubusercontent.com/23094588/221354603-965c4c24-ca39-4441-a8f2-69bbce7dc6c5.png)
 
@@ -87,11 +87,11 @@ Busque la ubicación donde descargó el archivo de base de datos de muestra  **`
 
 ![image](https://user-images.githubusercontent.com/23094588/221354747-242c0799-c7eb-47fc-9d01-f60ec6aa5881.png)
 
-MySQL Workbench mostrará un cuadro de diálogo como el siguiente, simplemente haga clic en el botón Run para ejecutar el script.
+**MySQL Workbench** mostrará un cuadro de diálogo como el siguiente, simplemente haga clic en el botón Run para ejecutar el script.
 
 ![image](https://user-images.githubusercontent.com/23094588/221354774-596522eb-bdb2-4c89-bf44-115545388b04.png)
 
-Una vez que el script se haya ejecutado correctamente, haga clic en el botón Cerrar.
+Una vez que el script se haya ejecutado correctamente, haga clic en el botón **Close**.
 
 ![image](https://user-images.githubusercontent.com/23094588/221354792-f65ef90f-0262-4a48-ada4-ba51ac710c68.png)
 
@@ -101,3 +101,40 @@ Para ver el resultado, haga clic en  **`mysqljdbc`** y haga clic en el botón Re
 
 En este tutorial, le mostramos cómo configurar el entorno de desarrollo para trabajar con **JDBC** y **MySQL** y cargar la base de datos **`mysqljdbc`** 
 de muestra.
+
+## 💻 Cargue la base de datos de ejemplo MySQL JDBC en mi Ordenador.
+
+Abrir **Workbeanch**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355056-23c967fc-1a98-4901-a3d5-eedb0388de0c.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355093-38b492af-3ef2-461c-bfac-8d0bb6e7a2fc.png">
+
+Haga clic en el ***icono Create a new schema*** en la **toolbar** barra de herramientas.
+
+![image](https://user-images.githubusercontent.com/23094588/221355123-a4158f77-4d1d-4f6e-aacc-3045b953d938.png)
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355181-dcab8d02-6749-472b-aeca-55953d1fd89f.png">
+
+Ingrese el nombre del schema, **`mysqljdbc`**, y haga clic en el botón **Apply**
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355240-d85c0652-a3f5-424a-bbdf-dbee02f74c0b.png">
+
+MySQL Workbench will popup a dialog, to show you the DDL statement to create a new schema, just click Apply button.
+
+**MySQL Workbench** abrirá un cuadro de diálogo para mostrarle la DDL statement para crear un nuevo esquema, simplemente haga clic en el botón **Apply**.
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355273-6f32f3ab-4305-480f-a886-7417cf4e2e04.png">
+
+![image](https://user-images.githubusercontent.com/23094588/221355395-e6b4b388-3151-4f24-9880-8ec82bccc8a8.png)
+
+
+Una vez que el script se haya ejecutado correctamente, haga clic en el botón **Close**.
+
+![image](https://user-images.githubusercontent.com/23094588/221355417-4823f3da-5d76-4771-882b-7ce800338f83.png)
+
+Para ver el resultado, haga clic en  **`mysqljdbc`** y haga clic en el botón **Refresh**. Verá que todas las tablas se cargaron correctamente.
+
+
+
+
