@@ -214,3 +214,61 @@ public class Main {
 ```
 
 En este tutorial, le mostramos paso a paso cómo conectarse a MySQL usando el objeto de conexión JDBC y usar el archivo de propiedades para almacenar parámetros de la base de datos. Al final del tutorial, desarrollamos una clase de utilidad que puede reutilizar cada vez que crea una conexión a la base de datos.
+
+
+## Creación Proyecto
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221359527-df73cf44-75fe-42a3-b3d3-b56e1af8a458.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221359606-2a16b303-cf99-4d48-a1cd-be9c8beea356.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221359624-07cd90f2-2208-45e0-8c70-dc911c380fb9.png">
+
+Se ha creado el proyecto **211_MySQL_JDBC_Tutorial**.
+
+<img width="731" alt="image" src="https://user-images.githubusercontent.com/23094588/221359688-6c3b4288-4521-4c0f-ba3f-c19819b4a496.png">
+
+
+### Añadiendo Conector
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221359742-64df4cb7-1731-42be-81ea-541b3140ffc6.png">
+
+<img width="1051" alt="image" src="https://user-images.githubusercontent.com/23094588/221359787-f9134184-e90c-43a0-b0af-d81861a03afd.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221360113-4566bf71-e7c1-499d-802a-5ecf661f1b20.png">
+
+<img width="1049" alt="image" src="https://user-images.githubusercontent.com/23094588/221360151-8e128a17-5a4f-446b-90de-0fb0338d3748.png">
+
+<img width="727" alt="image" src="https://user-images.githubusercontent.com/23094588/221360190-fae7c38c-12e2-4bea-ac3a-b24176c52411.png">
+
+### Creación Paquete `org.mysqltutorial`
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221360523-e0a6c2f1-ec29-42ce-891a-88768f776703.png">
+
+<img width="731" alt="image" src="https://user-images.githubusercontent.com/23094588/221360559-d95593e2-c3ed-4994-a3d6-d20969710097.png">
+
+### Creación Clase `MySQLJDBCUtil`
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221360598-afef9a6f-c288-4798-bf7f-2be3ff7b6284.png">
+
+<img width="594" alt="image" src="https://user-images.githubusercontent.com/23094588/221360671-be6d86c6-a290-49e2-a114-d89e24b20dda.png">
+
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221360689-84d21446-4bb1-4d5c-a5da-439d265ebda7.png">
+
+Copiar el código.
+
+![image](https://user-images.githubusercontent.com/23094588/221360815-ef7c3f86-0c01-4abb-b173-1386207eafc0.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
