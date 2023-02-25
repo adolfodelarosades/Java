@@ -259,6 +259,32 @@ Copiar el código.
 
 ![image](https://user-images.githubusercontent.com/23094588/221360815-ef7c3f86-0c01-4abb-b173-1386207eafc0.png)
 
+### Creación archivo `db.properties`
+
+![image](https://user-images.githubusercontent.com/23094588/221361116-90c2fb72-6b30-4c34-a897-eaf3d86dcd93.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221361173-0541dc9b-08c8-4536-857a-75771a0d2a24.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221361196-bc6c332a-e693-452c-8e28-75871f64d324.png)
+
+Metemos su contenido
+
+![image](https://user-images.githubusercontent.com/23094588/221361268-0a2a9c86-ef5e-49dc-a762-6afe28340f5b.png)
+
+### Creación de la clase `Main`
+
+![image](https://user-images.githubusercontent.com/23094588/221361308-690deee9-e56c-4316-a2b1-455cc183ea4e.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221361344-7fe2ec86-126f-42a8-9d33-16365fd66c30.png)
+
+Copiamos el contenido.
+
+### Ejecución.
+
+![image](https://user-images.githubusercontent.com/23094588/221361461-d4eee2a6-6134-4ee8-95d3-2c33b2786b8a.png)
+
+
+
 
 
 
