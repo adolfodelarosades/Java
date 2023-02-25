@@ -79,15 +79,15 @@ Para cargar la estructura y los datos de la tabla, elija la base de datos **`mys
 
 ![image](https://user-images.githubusercontent.com/23094588/221354666-b4c76184-ded1-4ca5-8a68-1517d5da8076.png)
 
-En el menú Archivo, seleccione el elemento de menú Run SQL Script….
+En el menú **File**, seleccione el elemento de menú **Run SQL Script…**.
 
 ![image](https://user-images.githubusercontent.com/23094588/221354710-5ef13dff-8f62-496a-be74-b747da263f52.png)
 
-Busque la ubicación donde descargó el archivo de base de datos de muestra  **`mysqljdbc.sql`**, seleccione el archivo y haga clic en el botón Abrir.
+Busque la ubicación donde descargó el archivo de base de datos de muestra  **`mysqljdbc.sql`**, seleccione el archivo y haga clic en el botón **Open**.
 
 ![image](https://user-images.githubusercontent.com/23094588/221354747-242c0799-c7eb-47fc-9d01-f60ec6aa5881.png)
 
-**MySQL Workbench** mostrará un cuadro de diálogo como el siguiente, simplemente haga clic en el botón Run para ejecutar el script.
+**MySQL Workbench** mostrará un cuadro de diálogo como el siguiente, simplemente haga clic en el botón **Run** para ejecutar el script.
 
 ![image](https://user-images.githubusercontent.com/23094588/221354774-596522eb-bdb2-4c89-bf44-115545388b04.png)
 
@@ -106,40 +106,69 @@ de muestra.
 
 Abrir **Workbeanch**.
 
-
 ![image](https://user-images.githubusercontent.com/23094588/221355671-3e0911df-7c97-427e-b611-81ae05257342.png)
-
 
 Entro en **Local Instances**.
 
 ![image](https://user-images.githubusercontent.com/23094588/221355794-32229f47-6574-42c5-aae9-69b9b69df102.png)
 
-
 Haga clic en el ***icono Create a new schema*** en la **toolbar** barra de herramientas.
 
 ![image](https://user-images.githubusercontent.com/23094588/221355123-a4158f77-4d1d-4f6e-aacc-3045b953d938.png)
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355181-dcab8d02-6749-472b-aeca-55953d1fd89f.png">
+![image](https://user-images.githubusercontent.com/23094588/221355902-2651aea7-5226-4760-9cb1-a441bdc3faa8.png)
 
 Ingrese el nombre del schema, **`mysqljdbc`**, y haga clic en el botón **Apply**
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355240-d85c0652-a3f5-424a-bbdf-dbee02f74c0b.png">
-
-MySQL Workbench will popup a dialog, to show you the DDL statement to create a new schema, just click Apply button.
+![image](https://user-images.githubusercontent.com/23094588/221355936-c1927451-49d0-453a-b6bd-1c4f503c44bf.png)
 
 **MySQL Workbench** abrirá un cuadro de diálogo para mostrarle la DDL statement para crear un nuevo esquema, simplemente haga clic en el botón **Apply**.
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355273-6f32f3ab-4305-480f-a886-7417cf4e2e04.png">
-
-![image](https://user-images.githubusercontent.com/23094588/221355395-e6b4b388-3151-4f24-9880-8ec82bccc8a8.png)
-
+![image](https://user-images.githubusercontent.com/23094588/221355972-128591fa-9b54-449e-a421-71ac51cf955a.png)
 
 Una vez que el script se haya ejecutado correctamente, haga clic en el botón **Close**.
 
-![image](https://user-images.githubusercontent.com/23094588/221355417-4823f3da-5d76-4771-882b-7ce800338f83.png)
+![image](https://user-images.githubusercontent.com/23094588/221355999-4111c037-9159-4941-bb8e-ebb28960f33a.png)
+
+Para cargar la estructura y los datos de la tabla, elija la base de datos **`mysqljdbc`**, haga clic con el botón derecho y elija **Set as Default Schema**(Establecer como esquema predeterminado).
+
+![image](https://user-images.githubusercontent.com/23094588/221356042-90a6d9df-361e-45b8-97c8-458a9c61d263.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221356146-68cf7bce-5676-430e-9b2a-831a854860d7.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221356187-97700a85-ebfb-4f94-97b7-47394edcfae5.png)
+
+En el menú **File**, seleccione el elemento de menú **Run SQL Script…**.
+
+![image](https://user-images.githubusercontent.com/23094588/221356251-19e0d09e-ee00-43eb-989f-a5bff231571c.png)
+
+Busque la ubicación donde descargó el archivo de base de datos de muestra  **`mysqljdbc.sql`**, seleccione el archivo y haga clic en el botón **Open**.
+
+![image](https://user-images.githubusercontent.com/23094588/221356336-f6d58be3-2f70-42e4-bf37-c05ae8467a7a.png)
+
+**MySQL Workbench** mostrará un cuadro de diálogo como el siguiente, simplemente haga clic en el botón **Run** para ejecutar el script.
+
+![image](https://user-images.githubusercontent.com/23094588/221356355-8210d870-0a53-49a3-844d-5c926c03c482.png)
+
+Una vez que el script se haya ejecutado correctamente, haga clic en el botón **Close**.
+
+**NOTA:** En el Script hay un pequeño fallo en el orden de la creación de las tablas.
 
 Para ver el resultado, haga clic en  **`mysqljdbc`** y haga clic en el botón **Refresh**. Verá que todas las tablas se cargaron correctamente.
 
+![image](https://user-images.githubusercontent.com/23094588/221356801-db0c0a19-dc65-450e-b015-f755afc8bec8.png)
+
+Tabla **candidates**
+
+![image](https://user-images.githubusercontent.com/23094588/221356868-f9031c80-346d-49b7-af50-8858eb35afdf.png)
+
+Tabla **skills**
+
+![image](https://user-images.githubusercontent.com/23094588/221356964-fe3876a9-4c69-4857-9b60-d6708a76b6e9.png)
+
+Tabla **candidate_skills**
+
+![image](https://user-images.githubusercontent.com/23094588/221357011-5f2ffcce-7ad0-48b1-ad11-6d18c99e941a.png)
 
 
 
