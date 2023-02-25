@@ -109,3 +109,32 @@ La salida del programa es la siguiente:
 
 En este tutorial, le mostramos cómo consultar datos de MySQL usando JDBC con una declaración SQL simple.
 
+## 💻 Consulta de datos de MySQL usando JDBC
+
+Vamos a añadir una Clase **`Main02_Consulta`** para probar esta parte del código.
+
+![image](https://user-images.githubusercontent.com/23094588/221362648-34a32c1e-2d25-4e18-bf8a-8a53d7516fe6.png)
+
+Copiamos el contenido.
+
+![image](https://user-images.githubusercontent.com/23094588/221362739-58f68666-74bb-4cbd-8394-d10e0f585981.png)
+
+### Ejecutamos **`Main02_Consulta`**.
+
+![image](https://user-images.githubusercontent.com/23094588/221363127-fe38ee2f-8b98-4ae4-b803-a334abb86e82.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221362801-b909a929-bb98-4bd5-a4a6-156e1173c42f.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221362834-7cf199ef-89d5-4d32-af0d-bc8025d73ddc.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221362859-8e061dfc-6fbd-489e-8e9f-ed30099845bb.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221362892-20af45e4-c90a-4fcc-91ee-6c0814846a83.png)
+
+Si consultamos la BD tenemos:
+
+![image](https://user-images.githubusercontent.com/23094588/221362998-200e44d0-98e7-40f0-b303-836d022d3b43.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221363037-dd8aaee1-fdd2-4a4f-bbb2-e9f7aef9a6f0.png)
+
+![image](https://user-images.githubusercontent.com/23094588/221363077-adb0f4e8-485e-4ecb-a232-dfae710071e3.png)
