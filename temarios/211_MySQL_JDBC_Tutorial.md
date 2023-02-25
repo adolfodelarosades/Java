@@ -21,11 +21,11 @@ La **API Java JDBC** proporciona una interfaz estándar para interactuar con cua
 
 * [Introducción a JDBC](https://github.com/adolfodelarosades/Java/blob/master/temarios/211_MySQL_JDBC_Tutorial/01-Introduction-to-JDBC.md): en este tutorial, le daremos una breve descripción general de **JDBC** para que pueda usarlo para interactuar con bases de datos **MySQL**.
 
-* [Configuración del entorno de desarrollo MySQL JDBC]: este tutorial le muestra cómo configurar un entorno de desarrollo que le ayude a trabajar con **MySQL** y **JDBC**. También ilustra cómo cargar una base de datos de muestra en **MySQL** para practicar en los tutoriales posteriores.
+* [Configuración del entorno de desarrollo MySQL JDBC](https://github.com/adolfodelarosades/Java/blob/master/temarios/211_MySQL_JDBC_Tutorial/02-MySQL-JDBC-Setup.md): este tutorial le muestra cómo configurar un entorno de desarrollo que le ayude a trabajar con **MySQL** y **JDBC**. También ilustra cómo cargar una base de datos de muestra en **MySQL** para practicar en los tutoriales posteriores.
 
-* [Conexión a MySQL usando el controlador JDBC]: en este tutorial, aprenderá cómo conectarse a la base de datos **MySQL** usando el objeto de conexión **JDBC**.
+* [Conexión a MySQL usando el controlador JDBC](https://github.com/adolfodelarosades/Java/blob/master/temarios/211_MySQL_JDBC_Tutorial/03-Connecting-to-MySQL-Using-JDBC-Driver.md): en este tutorial, aprenderá cómo conectarse a la base de datos **MySQL** usando el objeto de conexión **JDBC**.
 
-* [Consulta de datos de MySQL usando JDBC]: en este tutorial, le mostraremos cómo consultar datos de **MySQL** usando **JDBC Statement** y **objetos ResultSet**.
+* [Consulta de datos de MySQL usando JDBC](https://github.com/adolfodelarosades/Java/blob/master/temarios/211_MySQL_JDBC_Tutorial/04-Querying-Data-From-MySQL-Using-JDBC.md): en este tutorial, le mostraremos cómo consultar datos de **MySQL** usando **JDBC Statement** y **objetos ResultSet**.
 
 * [Actualización de datos en MySQL usando JDBC PreparedStatement]: en este tutorial, aprenderá cómo actualizar datos en la base de datos MySQL usando la **interfaz JDBC PreparedStatement**.
 
