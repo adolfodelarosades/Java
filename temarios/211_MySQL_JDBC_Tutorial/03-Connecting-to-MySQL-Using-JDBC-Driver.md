@@ -261,11 +261,11 @@ Copiar el código.
 
 ### Creación archivo `db.properties`
 
-![image](https://user-images.githubusercontent.com/23094588/221361116-90c2fb72-6b30-4c34-a897-eaf3d86dcd93.png)
+![image](https://user-images.githubusercontent.com/23094588/221361708-6ca65763-9ec1-483a-946c-17416b64e211.png)
 
-![image](https://user-images.githubusercontent.com/23094588/221361173-0541dc9b-08c8-4536-857a-75771a0d2a24.png)
+![image](https://user-images.githubusercontent.com/23094588/221361792-d875cca1-b8bb-4aa4-acbb-f1daf7782be4.png)
 
-![image](https://user-images.githubusercontent.com/23094588/221361196-bc6c332a-e693-452c-8e28-75871f64d324.png)
+![image](https://user-images.githubusercontent.com/23094588/221361821-ebbf3d23-d4d7-4bd8-a557-72be5f66d2e4.png)
 
 Metemos su contenido
 
@@ -282,6 +282,8 @@ Copiamos el contenido.
 ### Ejecución.
 
 ![image](https://user-images.githubusercontent.com/23094588/221361461-d4eee2a6-6134-4ee8-95d3-2c33b2786b8a.png)
+
+
 
 
 
