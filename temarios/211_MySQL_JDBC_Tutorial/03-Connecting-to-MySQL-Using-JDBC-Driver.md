@@ -269,7 +269,7 @@ Copiar el código.
 
 Metemos su contenido
 
-![image](https://user-images.githubusercontent.com/23094588/221361268-0a2a9c86-ef5e-49dc-a762-6afe28340f5b.png)
+![image](https://user-images.githubusercontent.com/23094588/221362144-4660471b-9a2a-4bf8-a6ff-ba8f38ecf301.png)
 
 ### Creación de la clase `Main`
 
@@ -279,7 +279,7 @@ Metemos su contenido
 
 Copiamos el contenido.
 
-![image](https://user-images.githubusercontent.com/23094588/221362144-4660471b-9a2a-4bf8-a6ff-ba8f38ecf301.png)
+![image](https://user-images.githubusercontent.com/23094588/221362354-c027ffc1-9c50-471b-a0e0-1b650711d697.png)
 
 ### Ejecución.
 
