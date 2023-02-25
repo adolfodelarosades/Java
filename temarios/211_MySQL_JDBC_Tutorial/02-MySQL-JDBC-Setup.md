@@ -106,9 +106,14 @@ de muestra.
 
 Abrir **Workbeanch**.
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355056-23c967fc-1a98-4901-a3d5-eedb0388de0c.png">
 
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221355093-38b492af-3ef2-461c-bfac-8d0bb6e7a2fc.png">
+![image](https://user-images.githubusercontent.com/23094588/221355671-3e0911df-7c97-427e-b611-81ae05257342.png)
+
+
+Entro en **Local Instances**.
+
+![image](https://user-images.githubusercontent.com/23094588/221355794-32229f47-6574-42c5-aae9-69b9b69df102.png)
+
 
 Haga clic en el ***icono Create a new schema*** en la **toolbar** barra de herramientas.
 
