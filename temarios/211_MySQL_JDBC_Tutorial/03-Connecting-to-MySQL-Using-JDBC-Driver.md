@@ -216,7 +216,7 @@ public class Main {
 En este tutorial, le mostramos paso a paso cómo conectarse a MySQL usando el objeto de conexión JDBC y usar el archivo de propiedades para almacenar parámetros de la base de datos. Al final del tutorial, desarrollamos una clase de utilidad que puede reutilizar cada vez que crea una conexión a la base de datos.
 
 
-## Creación Proyecto
+## 💻 Creación Proyecto `211_MySQL_JDBC_Tutorial`
 
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/23094588/221359527-df73cf44-75fe-42a3-b3d3-b56e1af8a458.png">
 
@@ -279,24 +279,12 @@ Metemos su contenido
 
 Copiamos el contenido.
 
+![image](https://user-images.githubusercontent.com/23094588/221362144-4660471b-9a2a-4bf8-a6ff-ba8f38ecf301.png)
+
 ### Ejecución.
 
 ![image](https://user-images.githubusercontent.com/23094588/221361461-d4eee2a6-6134-4ee8-95d3-2c33b2786b8a.png)
 
+![image](https://user-images.githubusercontent.com/23094588/221362185-25729079-8010-4024-90f3-81501dceda1b.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+La conexión se ha realizado con exito.
