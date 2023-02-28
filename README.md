@@ -40,6 +40,15 @@ Serie de varios cursos Java.
 
 # Java & MySql
 * [211 MySQL JDBC Tutorial](https://github.com/adolfodelarosades/Java/blob/master/temarios/211_MySQL_JDBC_Tutorial.md)
+* [Learning SQL, 3rd Edition](https://learning.oreilly.com/library/view/learning-sql-3rd/9781492057604/)
+* [MySQL Sandbox](https://learning.oreilly.com/scenarios/mysql-sandbox/9781492079705/)
+* [The MySQL Workshop](https://learning.oreilly.com/library/view/the-mysql-workshop/9781839214905/)
+* [MySQL and JSON: A Practical Programming Guide](https://learning.oreilly.com/library/view/mysql-and-json/9781260135459/)
+* [MySQL for the Internet of Things](https://learning.oreilly.com/library/view/mysql-for-the/9781484212936/)
+* [MySQL Concurrency](https://learning.oreilly.com/library/view/mysql-concurrency-locking/9781484266526/)
+* [Learning MySQL, 2nd Edition](https://learning.oreilly.com/library/view/learning-mysql-2nd/9781492085911/)
+* [High Performance MySQL, 4th Edition](https://learning.oreilly.com/library/view/high-performance-mysql/9781492080503/)
+
 
 # Spring Guru
 
