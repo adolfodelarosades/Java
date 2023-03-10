@@ -137,4 +137,5 @@ ADF para el desarrollo de aplicaciones basadas en Java.
 ## Clases
 
 * [20230206 - Lunes](https://github.com/adolfodelarosades/Java/blob/master/temarios/005_IFCD04_DESARROLLO_DE_APLICACIONES_JAVA/20230206-Lunes.md)
+* * [20230306 - Lunes - Maven - JPA](https://github.com/adolfodelarosades/Java/blob/master/temarios/005_IFCD04_DESARROLLO_DE_APLICACIONES_JAVA/20230306-Lunes.md)
 
