@@ -12,17 +12,17 @@ Brief Table of Contents
 
 Table of Contents
 
-Praise for the First Edition
+[Praise for the First Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-1.md)
 
-Foreword to the First Edition
+[Foreword to the First Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-2.md)
 
-Preface
+[Preface](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-3.md)
 
-Acknowledgments
+[Acknowledgments](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-4.md)
 
-About this Book
+[About this Book](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-5.md)
 
-About the Cover Illustration
+[About the Cover Illustration](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-6.md)
 
 ### 1. Getting started with ORM
 
