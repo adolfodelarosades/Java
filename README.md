@@ -176,6 +176,8 @@ Serie de varios cursos Java.
 * [951 Core Java Volume I—Fundamentals, Eleventh Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/951_Core_Java_Volume_I.md)
 
 * [952 Core Java Volume II-Advanced Features](https://github.com/adolfodelarosades/Java/blob/master/temarios/952_Core_Java_Volume_II.md)
+
+* [958 Java Persistence with Hibernate, Second Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate.md)
 * [959 Beginning Hibernate: For Hibernate 5](https://github.com/adolfodelarosades/Java/blob/master/temarios/959_Beginning_Hibernate_For_Hibernate_5.md)
 * [960 Pro JPA 2 in Java EE 8](https://github.com/adolfodelarosades/Java/blob/master/temarios/960_Pro_JPA_2_in_Java_EE_8.md)
 
