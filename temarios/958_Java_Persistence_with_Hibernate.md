@@ -24,7 +24,7 @@ Table of Contents
 
 [About the Cover Illustration](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-6.md)
 
-### 1. Getting started with ORM
+### [1. Getting started with ORM](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/P1.md)
 
 * Chapter 1. Understanding object/relational persistence
 
