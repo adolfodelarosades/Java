@@ -12,23 +12,23 @@ Brief Table of Contents
 
 Table of Contents
 
-[Praise for the First Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-1.md)
+[Praise for the First Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-1.md):+1:
 
-[Foreword to the First Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-2.md)
+[Foreword to the First Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-2.md):+1:
 
-[Preface](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-3.md)
+[Preface](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-3.md):+1:
 
 [Acknowledgments](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-4.md)
 
-[About this Book](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-5.md)
+[About this Book](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-5.md):+1:
 
-[About the Cover Illustration](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-6.md)
+[About the Cover Illustration](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/0000-6.md):+1:
 
-### [1. Getting started with ORM](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/P1.md)
+### [1. Getting started with ORM](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/P1.md):+1:
 
-* [Chapter 1. Understanding object/relational persistence](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/P1C1.md)
+* [Chapter 1. Understanding object/relational persistence](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/P1C1.md) :+1:
 
-* Chapter 2. Starting a project
+* [Chapter 2. Starting a project](https://github.com/adolfodelarosades/Java/blob/master/temarios/958_Java_Persistence_with_Hibernate/P1C2.md)
 
 * Chapter 3. Domain models and metadata
 
