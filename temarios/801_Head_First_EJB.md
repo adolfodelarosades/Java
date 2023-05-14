@@ -1,0 +1,32 @@
+# Head First EJB
+
+Head First EJB
+By Kathy Sierra, Bert Bates
+
+<img width="326" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/829baffc-52fa-4b10-9156-eedd45e29373">
+
+* **TIME TO COMPLETE**: 16h 56m
+* **TOPICS**: Jakarta EE
+* **PUBLISHED BY**: O'Reilly Media, Inc.
+* **PUBLICATION DATE**: October 2003
+* **PRINT LENGTH**: 734 pages
+
+¿Qué tienen en común Ford Financial, IBM y Victoria's Secret? Enterprise JavaBeans (EJB). Como estándar de la industria para componentes empresariales reutilizables independientes de la plataforma, EJB acaba de convertirse en la última certificación para desarrolladores de Sun Microsystem. Ya sea que quiera ser certificable o simplemente quiera aprender la tecnología por dentro y por fuera, Head First EJB lo llevará allí de la manera menos dolorosa. Y con la mayor comprensión. Aprenderá no solo qué es la tecnología , sino, lo que es más importante, por quées, y para qué sirve y para qué no sirve. Aprenderá trucos y sugerencias para el desarrollo de EJB, junto con trucos y sugerencias para aprobar este último y desafiante examen de desarrollador de componentes empresariales certificado por Sun (SCBCD). Aprenderá a pensar como un servidor. Aprenderás a pensar como un frijol. Y debido a que este es un libro de Head First, aprenderá cómo pensar sobre el pensamiento. La coautora Kathy Sierra fue una de las primeras empleadas de Sun en enseñar a los clientes valientes y pioneros cómo usar EJB. Ella tiene las cicatrices. Pero además de sumergirlo profundamente en la tecnología EJB, Kathy y Bert lo acompañarán durante su examen de certificación, si decide hacerlo. Y nadie conoce la certificación como ellos: ¡son co-desarrolladores del examen real de Sun! Como el segundo libro de la serie Head First, Head First EJBsigue al libro de Java número uno más vendido en los EE. UU., Head First Java . Descubra por qué los revisores lo llaman una revolución en el aprendizaje de temas técnicos difíciles y por qué el presidente y director ejecutivo de Sun, Scott McNealy, dice: "La tecnología Java está en todas partes... si desarrolla software y no ha aprendido Java, definitivamente es hora de sumergirse en "Head First". Y con el libro Head First, ni siquiera tienes que sentirte culpable por divertirte mientras aprendes; todo es parte de la teoría del aprendizaje. Si las últimas investigaciones en ciencias cognitivas, educación y neurobiología sugieren que aburrido, seco e insoportablemente doloroso era la mejor manera de aprender, lo habríamos hecho. Afortunadamente, se ha demostrado que tu cerebro tiene sentido del estilo, sentido del humor,Head First EJB , aprenderá todo sobre:
+
+Desarrollo basado en componentes y basado en roles
+La arquitectura de EJB, programación distribuida con RMI
+Desarrollo e implementación de una aplicación EJB
+La vista del cliente de un bean de sesión y de entidad
+El ciclo de vida del bean de sesión y el contrato de componente
+El ciclo de vida del bean de entidad y el contrato de componente
+Persistencia administrada por contenedor (CMP)
+Relaciones administradas por contenedores (CMR)
+EJB-QL
+Actas
+Seguridad
+Excepciones EJB
+El descriptor de implementación
+El entorno Enterprise Bean en JNDI
+Restricciones de programación y portabilidad
+El libro incluye más de 200 preguntas de exámenes simulados que coinciden con el tono, el estilo, la dificultad y los temas del examen SCBCD real. Vea por qué Kathy y Bert son responsables de miles de personas que aprobaron con éxito el examen: "El examen de certificación de Sun ciertamente no fue nada fácil, pero el material de Kathy me permitió no solo aprobar el examen, ¡sino obtener un sobresaliente!"--Mary Whetsel , especialista sénior en tecnología, estrategia e integración de aplicaciones, The St. Paul Companies"Kathy Sierra y Bert Bates son dos de las pocas personas en el mundo que pueden hacer que las cosas complicadas parezcan muy simples y, como si eso no fuera suficiente, puede hacer que las cosas aburridas parezcan interesantes".--Paul Wheaton, The Trail Boss, javaranch.com"¿Quién mejor para escribir una guía de estudio de Java que Kathy Sierra, la reina reinante de la instrucción en Java? Kathy Sierra lo ha vuelto a hacer.
+
