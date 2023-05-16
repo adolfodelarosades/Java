@@ -38,3 +38,41 @@ Fred ensambla una aplicación de compras en línea utilizando dos componentes qu
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/454729b6-5a24-4d1b-8ee2-fc73a73c57ef)
 
 Bill ensambla una aplicación de soporte técnico utilizando dos componentes que compró de Beans-R-Us, más dos componentes que desarrolló él mismo.
+
+## ¿Qué me da realmente EJB?
+
+**EJB le permite concentrarse en la lógica comercial de su negocio y dejar los servicios subyacentes (transacciones, redes, seguridad, etc.) al proveedor del servidor EJB.**
+
+AQUIIIIIIIIIIIII!!!!!
+
+Imagina que trabajas para Guitar Land, una empresa que vende equipos de músicos en línea. Tiene mejores cosas que hacer que trabajar 90 horas a la semana, entonces, ¿dónde le gustaría pasar su tiempo? ¿No preferiría concentrarse en cómo Guitar Land hace negocios en línea, en lugar de escribir su propio servidor de administración de transacciones seguro y en red? ¿Por qué no trabajar en lo que mejor conoce (lógica comercial para su negocio en particular) y dejar el trabajo pesado (es decir, los grandes servicios de infraestructura que obtiene del servidor) a otra persona?
+
+El modelo EJB permite que todos hagan lo que mejor saben hacer: los proveedores de servidores se concentran en la infraestructura que necesitan la mayoría de las aplicaciones empresariales, mientras que los desarrolladores comerciales se concentran en su propia lógica comercial.
+
+imagen sin título
+¡EJB le permite personalizar y configurar componentes reutilizables en el momento de la implementación, sin tocar el código fuente!
+
+Puede cambiar la forma en que un bean usa los servicios subyacentes simplemente modificando un documento XMl en el momento de la implementación. Por ejemplo, puede definir completamente el control de acceso de seguridad para los métodos de un bean dentro de XML (declarativamente) en lugar de hacerlo dentro del código fuente del bean (mediante programación). Y puede personalizar la forma en que se ejecutan los métodos de un bean en las transacciones, todo dentro del descriptor de implementación, sin tener que codificar los límites y comportamientos de la transacción. Eso simplemente mola.
+
+Los servidores EJB le brindan un montón de servicios, para que no tenga que escribirlos usted mismo:
+
+Gestión de transacciones
+
+Seguridad
+
+concurrencia
+
+Redes
+
+Administracion de recursos
+
+Persistencia
+
+Mensajería
+
+Personalización del tiempo de implementación
+
+NOTA
+Alguien ya escribió y probó todo esto, así que no tienes que hacerlo tú.
+
+
