@@ -41,4 +41,8 @@ Los archivos complementarios y los ejemplos de este libro se pueden encontrar en
 
 Todos los archivos de código o ejemplos a los que se hace referencia en el libro estarán disponibles en línea. Para los libros físicos que se envían con un disco adjunto, siempre que sea posible, hemos publicado todo el contenido de CD/DVD. Tenga en cuenta que, si bien proporcionamos la mayor cantidad de contenido multimedia posible a través de descargas gratuitas, a veces estamos limitados por restricciones de licencia. Dirija cualquier pregunta o inquietud a booktech@oreilly.com.
 
+## Lo que necesitas para este libro.
+
+Además de tu cerebro y un lápiz, necesitas Java, J2EE y una computadora. No necesita ninguna otra herramienta de desarrollo, como un entorno de desarrollo integrado (IDE).
+
 
