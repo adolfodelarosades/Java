@@ -145,7 +145,7 @@ Serie de varios cursos Java.
 
 # EJB
 
-* [781_Head First EJB](https://github.com/adolfodelarosades/Java/blob/master/temarios/781_Head_First_EJB.md)
+* [780_Head First EJB](https://github.com/adolfodelarosades/Java/blob/master/temarios/780_Head_First_EJB.md)
 
 # Andrés José Guzmán
 
