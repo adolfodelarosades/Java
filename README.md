@@ -12,6 +12,10 @@ Serie de varios cursos Java.
 * [004 Java SE 7 Develop Rich Client Applications]()
 * [005 IFCD04 DESARROLLO DE APLICACIONES JAVA: COMPONENTES WEB Y APLICACIONES DE BASE DE DATOS (JSP Y JPA)](https://github.com/adolfodelarosades/Java/blob/master/temarios/005_IFCD04_DESARROLLO_DE_APLICACIONES_JAVA.md)
 
+# JAVA
+
+* [020 Head First Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/020_Head_First_Java.md)
+
 
 # OPENWEBINARS
 
