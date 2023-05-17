@@ -69,166 +69,103 @@ Me dijeron que habría objetos. En el Capítulo 1, colocamos todo nuestro códig
 **Las variables vienen en dos sabores: primitivas y de referencia**. Tiene que haber más en la vida que integers, Strings y arrays. ¿Qué sucede si tiene un objeto PetOwner con una variable de instancia Dog? ¿O un coche con motor? En este capítulo, desenvolveremos los misterios de los tipos de Java y veremos qué puede declarar como variable, qué puede poner en una variable y qué puede hacer con una variable. Y finalmente veremos cómo es realmente la vida en el garbage-collectible heap.
 
 1. “Declarar una variable”
-
-“Me gustaría un moka doble, no, que sea un int.”
-
-“¡Aléjate de esa palabra clave!”
-
-“Controlando tu objeto Perro”
-
-“Una referencia de objeto es solo otro valor de variable”
-
-“La vida en el montón de basura recolectada”
-
-“Un arreglo es como una bandeja de tazas”
-
-“Un ejemplo de perro”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+2. “Me gustaría un moka doble, no, que sea un **`int`**.”
+3. “¡Aléjate de esa palabra clave!”
+4. “Controlando tu objeto Dog”
+5. “Una referencia de objeto es solo otro valor de variable”
+6. “La vida en el garbage-collectible heap”
+7. “Un array es como una bandeja de tazas”
+8. “Un ejemplo Dog”
+9. "Ejercicio"
+10. “Soluciones de ejercicio”
 
 ### 4. Capítulo 4
 
-El estado afecta el comportamiento, el comportamiento afecta el estado. Sabemos que los objetos tienen estado y comportamiento , representados por variables de instancia y métodos . Ahora veremos cómo se relacionan el estado y el comportamiento . El comportamiento de un objeto utiliza el estado único de un objeto. En otras palabras, los métodos usan valores de variables de instancia. Como, "si el perro pesa menos de 14 libras, haz un sonido de yippy, de lo contrario..." ¡ Vamos a cambiar de estado!
+**El estado afecta el comportamiento, el comportamiento afecta el estado**. Sabemos que los objetos tienen **estado(state)** y **comportamiento(behavior)**, representados por **variables de instancia** y **métodos**. Ahora veremos cómo se *relacionan* el estado y el comportamiento. El comportamiento de un objeto utiliza el estado único de un objeto. En otras palabras, ***los métodos usan valores de variables de instancia***. Como, "si el perro pesa menos de 14 libras, haz un sonido de yippy, de lo contrario..." ***¡Vamos a cambiar de estado!***
 
-“Recuerda: una clase describe lo que un objeto sabe y lo que hace un objeto ”
-
-“El tamaño afecta a la corteza”
-
-“Puedes enviar cosas a un método”
-
-“Puedes recuperar cosas con un método”
-
-“Puedes enviar más de una cosa a un método”
-
-“Cosas interesantes que puede hacer con parámetros y tipos de devolución”
-
-“Encapsulación”
-
-"¿Cómo se comportan los objetos en una matriz?"
-
-“Declaración e inicialización de variables de instancia”
-
-“Comparación de variables (primitivas o referencias)”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “Recuerda: una clase describe lo que un objeto sabe y lo que hace un objeto ”
+2. “El tamaño afecta a la corteza”
+3. “Puedes enviar cosas a un método”
+4. “Puedes recuperar cosas con un método”
+5. “Puedes enviar más de una cosa a un método”
+6. “Cosas interesantes que puede hacer con parámetros y tipos de devolución”
+7. “Encapsulación”
+8. "¿Cómo se comportan los objetos en un array?"
+9. “Declaración e inicialización de variables de instancia”
+10. “Comparación de variables (primitivas o referencias)”
+11. "Ejercicio"
+12. “Soluciones de ejercicio”
 
 ### 5. Capítulo 5
 
-Pongamos algo de fuerza en nuestros métodos. Experimentaste con variables, jugaste con algunos objetos y escribiste un pequeño código. Pero necesitas más herramientas. Como operadores. Y bucles. Puede ser útil para generar números aleatorios. Y convertir un String en un int , sí, eso sería genial. ¿Y por qué no lo aprendemos todo construyendo algo real, para ver cómo es escribir (y probar) un programa desde cero? Tal vez un juego , como Sink a Startup (similar a Battleship).
+**Pongamos algo de fuerza en nuestros métodos**. Experimentaste con variables, jugaste con algunos objetos y escribiste un pequeño código. Pero necesitas más herramientas. Como **operadores**. Y **bucles**. Puede ser útil para generar **números aleatorios**. Y convertir **un String en un int**, sí, eso sería genial. ¿Y por qué no lo aprendemos todo construyendo algo real, para ver cómo es escribir (y probar) un programa desde cero? Tal vez un juego , como Sink a Startup (similar a Battleship).
 
-“Construyamos un juego estilo Battleship: “Sink a Startup””
-
-“Desarrollo de una clase”
-
-“Escribiendo las implementaciones del método”
-
-“Escribir código de prueba para la clase SimpleStartup”
-
-“El método checkYourself()”
-
-“Código de preparación para la clase SimpleStartupGame Todo sucede en main()”
-
-“El método main() del juego”
-
-"Vamos a jugar"
-
-“Más sobre bucles for ”
-
-“El bucle for mejorado ”
-
-“Lanzamiento de primitivas”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “Construyamos un juego estilo Battleship: “Sink a Startup””
+2. “Desarrollo de una clase”
+3. “Escribiendo las implementaciones del método”
+4. “Escribir código de prueba para la clase SimpleStartup”
+5. “El método checkYourself()”
+6. “Código de preparación para la clase SimpleStartupGame Todo sucede en main()”
+7. “El método main() del juego”
+8. "Vamos a jugar"
+9. “Más sobre bucles for ”
+10. “El bucle for mejorado ”
+11. “Casting primitives”
+12. "Ejercicio"
+13. “Soluciones de ejercicio”
 
 ### 6. Capítulo 6
 
-Java se envía con cientos de clases preconstruidas. No tiene que reinventar la rueda si sabe cómo encontrar lo que necesita en la biblioteca de Java, comúnmente conocida como la API de Java. Tienes mejores cosas que hacer. Si va a escribir código, también puede escribir solo las partes que son personalizadas para su aplicación. La biblioteca central de Java es una pila gigante de clases esperando a que las uses como bloques de construcción.
+**Java se envía con cientos de clases preconstruidas**. No tiene que reinventar la rueda si sabe cómo encontrar lo que necesita en la biblioteca de Java, comúnmente conocida como la **API de Java**. *Tienes mejores cosas que hacer*. Si va a escribir código, también puede escribir solo las partes que son personalizadas para su aplicación. La Core Java Library es una pila gigante de clases esperando a que las uses como bloques de construcción.
 
-“En nuestro último capítulo, los dejamos con el suspenso: un error”
-
-“Despierta y huele la biblioteca”
-
-“Algunas cosas que puedes hacer con ArrayList ”
-
-"Comparando ArrayList con una matriz normal"
-
-“Construyamos el juego REAL: “Sink a Startup””
-
-“Código de preparación para la clase StartupBust real ”
-
-“La versión final de la clase Startup”
-
-"Expresiones booleanas súper poderosas"
-
-“Uso de la biblioteca (la API de Java)”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “En nuestro último capítulo, los dejamos con el suspenso: un error”
+2. “Despierta y huele la biblioteca”
+3. “Algunas cosas que puedes hacer con ArrayList ”
+4. "Comparando ArrayList con una matriz normal"
+5. “Construyamos el juego REAL: “Sink a Startup””
+6. “Código de preparación para la clase StartupBust real ”
+7. “La versión final de la clase Startup”
+8. "Expresiones booleanas súper poderosas"
+9. “Uso de la biblioteca (la API de Java)”
+10. "Ejercicio"
+11. “Soluciones de ejercicio”
 
 ### 7. Capítulo 7
 
-Planifique sus programas pensando en el futuro. ¿ Qué pasaría si pudieras escribir código que alguien más pudiera extender fácilmente? ¿Qué pasaría si pudiera escribir un código que fuera flexible, para esos molestos cambios de especificación de última hora? Cuando ingrese al Plan de polimorfismo, aprenderá los 5 pasos para un mejor diseño de clase, los 3 trucos para el polimorfismo, las 8 formas de hacer código flexible y, si actúa ahora, una lección adicional sobre los 4 consejos para explotar la herencia. .
+**Planifique sus programas pensando en el futuro**. ¿Qué pasaría si pudieras escribir código que alguien más pudiera extender **fácilmente**? ¿Qué pasaría si pudiera escribir un código que fuera flexible, para esos molestos cambios de especificación de última hora? Cuando ingrese al Plan de polimorfismo, aprenderá los 5 pasos para un mejor diseño de clase, los 3 trucos para el polimorfismo, las 8 formas de hacer código flexible y, si actúa ahora, una lección adicional sobre los 4 consejos para explotar la herencia. .
 
-“La guerra de las sillas revisada...”
-
-“Entender la herencia”
-
-“Diseñemos el árbol de herencia para un programa de simulación Animal”
-
-“Buscando más oportunidades de herencia”
-
-“Uso de IS-A y HAS-A”
-
-“¿Cómo sabes si tienes tu herencia correcta?”
-
-“Al diseñar con herencia, ¿estás usando o abusando?”
-
-“Cumplimiento del contrato: reglas de anulación”
-
-“Sobrecargando un método”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “La guerra de las sillas revisada...”
+2. “Entender la herencia”
+3. “Diseñemos el árbol de herencia para un programa de simulación Animal”
+4. “Buscando más oportunidades de herencia”
+5. “Uso de IS-A y HAS-A”
+6. “¿Cómo sabes si tienes tu herencia correcta?”
+7. “Al diseñar con herencia, ¿estás usando o abusando?”
+10. “Cumplimiento del contrato: reglas de anulación”
+11. “Sobrecargando un método”
+12. "Ejercicio"
+13. “Soluciones de ejercicio”
 
 ### 8. Capítulo 8
 
-La herencia es sólo el comienzo. Para explotar el polimorfismo, necesitamos interfaces. Necesitamos ir más allá de la simple herencia a la flexibilidad que solo puede obtener mediante el diseño y la codificación de las interfaces. ¿Qué es una interfaz? Una clase 100% abstracta. ¿Qué es una clase abstracta? Una clase que no puede ser instanciada. ¿Para qué sirve eso? Lee el capitulo...
+**La herencia es sólo el comienzo**. Para explotar el polimorfismo, necesitamos interfaces. Necesitamos ir más allá de la simple herencia a la flexibilidad que solo puede obtener mediante el diseño y la codificación de las interfaces. ¿Qué es una interfaz? Una clase 100% abstracta. ¿Qué es una clase abstracta? Una clase que no puede ser instanciada. ¿Para qué sirve eso? Lee el capitulo...
 
-"¿Nos olvidamos de algo cuando diseñamos esto?"
-
-“El compilador no te permitirá instanciar una clase abstracta”
-
-“Abstracto vs Concreto”
-
-“DEBES implementar todos los métodos abstractos”
-
-“Polimorfismo en acción”
-
-“¿Qué pasa con los no animales? ¿Por qué no hacer una clase lo suficientemente genérica para tomar cualquier cosa? ”
-
-“Cuando un perro no actúa como un perro”
-
-“Exploremos algunas opciones de diseño para reutilizar algunas de nuestras clases existentes en un programa de PetShop”
-
-“Creación e implementación de la interfaz Pet”
-
-“Invocar la versión de la superclase de un método”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. "¿Nos olvidamos de algo cuando diseñamos esto?"
+2. “El compilador no te permitirá instanciar una clase abstracta”
+3. “Abstracto vs Concreto”
+4. “DEBES implementar todos los métodos abstractos”
+5. “Polimorfismo en acción”
+6. “¿Qué pasa con los no animales? ¿Por qué no hacer una clase lo suficientemente genérica para tomar cualquier cosa? ”
+7. “Cuando un perro no actúa como un perro”
+8. “Exploremos algunas opciones de diseño para reutilizar algunas de nuestras clases existentes en un programa de PetShop”
+9. “Creación e implementación de la interfaz Pet”
+10. “Invocar la versión de la superclase de un método”
+11. "Ejercicio"
+12. “Soluciones de ejercicio”
 
 ### 9. Capítulo 9
 
-Los objetos nacen y los objetos mueren. Estás a cargo. Tú decides cuándo y cómo construirlos . Tú decides cuándo abandonarlos . El recolector de basura (gc) recupera la memoria. Veremos cómo se crean los objetos, dónde viven y cómo mantenerlos o abandonarlos de manera eficiente. Eso significa que hablaremos sobre el montón, la pila, el alcance, los constructores, los superconstructores, las referencias nulas y la elegibilidad de gc.
+**Los objetos nacen y los objetos mueren**. Estás a cargo. Tú decides cuándo y cómo construirlos . Tú decides cuándo abandonarlos . El recolector de basura (gc) recupera la memoria. Veremos cómo se crean los objetos, dónde viven y cómo mantenerlos o abandonarlos de manera eficiente. Eso significa que hablaremos sobre el montón, la pila, el alcance, los constructores, los superconstructores, las referencias nulas y la elegibilidad de gc.
 
 “La pila y el montón: donde viven las cosas”
 
