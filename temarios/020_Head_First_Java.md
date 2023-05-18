@@ -165,299 +165,186 @@ Me dijeron que habría objetos. En el Capítulo 1, colocamos todo nuestro códig
 
 ### 9. Capítulo 9
 
-**Los objetos nacen y los objetos mueren**. Estás a cargo. Tú decides cuándo y cómo construirlos . Tú decides cuándo abandonarlos . El recolector de basura (gc) recupera la memoria. Veremos cómo se crean los objetos, dónde viven y cómo mantenerlos o abandonarlos de manera eficiente. Eso significa que hablaremos sobre el montón, la pila, el alcance, los constructores, los superconstructores, las referencias nulas y la elegibilidad de gc.
+**Los objetos nacen y los objetos mueren**. Estás a cargo. Tú decides cuándo y cómo construirlos. Tú decides cuándo abandonarlos. El **recolector de basura Garbage Collector (gc)** recupera la memoria. Veremos cómo se crean los objetos, dónde viven y cómo mantenerlos o abandonarlos de manera eficiente. Eso significa que hablaremos sobre el heap, la stack, el scope, constructors, super constructors, null references y gc eligibility.
 
-“La pila y el montón: donde viven las cosas”
-
-“Los métodos están apilados”
-
-“¿Qué pasa con las variables locales que son objetos? ”
-
-“El milagro de la creación de objetos”
-
-“Construye un Pato”
-
-“¿No hace el compilador siempre un constructor sin argumentos para ti? ¡No! ”
-
-“Nanorevisión: cuatro cosas para recordar sobre los constructores”
-
-“El papel de los constructores de superclases en la vida de un objeto”
-
-“¿Puede el niño existir antes que los padres?”
-
-"¿Qué pasa con las variables de referencia?"
-
-Cifra 
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “El Stack y el Heap: donde viven las cosas”
+2. “Los métodos están apilados”
+3. “¿Qué pasa con las variables locales que son objetos?”
+4. “El milagro de la creación de objetos”
+5. “Construye un Pato(Duck)”
+6. “¿No hace el compilador siempre un constructor sin argumentos para ti? ¡No!”
+7. “Nanorevisión: cuatro cosas para recordar sobre los constructores”
+8. “El papel de los constructores de superclases en la vida de un objeto”
+9. “¿Puede el niño existir antes que los padres?”
+10. "¿Qué pasa con las variables de referencia?"
+11. Figure
+12. "Ejercicio"
+13. “Soluciones de ejercicio”
 
 ### 10. Capítulo 10
 
-Haz las matematicas. La API de Java tiene métodos para valor absoluto, redondeo, mínimo/máximo, etc. Pero, ¿qué pasa con el formateo? Es posible que desee que los números se impriman exactamente con dos puntos decimales o con comas en todos los lugares correctos. Y es posible que también desee imprimir y manipular fechas. ¿Y qué hay de analizar una cadena en un número? ¿O convertir un número en una cadena? Comenzaremos aprendiendo lo que significa que una variable o método sea estático.
+**Haz las matematicas**. La API de Java tiene métodos para valor absoluto, redondeo, mínimo/máximo, etc. Pero, ¿qué pasa con el formateo? Es posible que desee que los números se impriman exactamente con dos puntos decimales o con comas en todos los lugares correctos. Y es posible que también desee imprimir y manipular fechas. ¿Y qué hay de analizar una cadena en un número? ¿O convertir un número en una cadena? Comenzaremos aprendiendo lo que significa que una variable o método sea estático.
 
-“Métodos MATEMÁTICOS: lo más cerca que jamás llegará a un método global ”
-
-“La diferencia entre métodos regulares (no estáticos) y estáticos”
-
-“Inicializar una variable estática”
-
-“Métodos matemáticos”
-
-“Envolviendo una primitiva”
-
-“El autoboxing funciona en casi todas partes”
-
-“Y ahora al revés...convirtiendo un número primitivo en una Cadena”
-
-“Formato de números”
-
-“El especificador de formato”
-
-"Ejercicio"
-
-“Solución de ejercicios”
+1. “Métodos Math: lo más cerca que jamás llegará a un método global”
+2. “La diferencia entre métodos regulares (no estáticos) y estáticos” 
+3. “Inicializar una variable estática”
+4. “Métodos Math”
+5. “Wrapping a primitive”
+6. “El autoboxing funciona en casi todas partes”
+7. “Y ahora al revés...convirtiendo un número primitivo en una Cadena”
+8. “Formato de números”
+9. “El format specifier”
+10. "Ejercicio"
+11. “Solución de ejercicios”
 
 ### 11. Capítulo 11
 
-Ordenar es muy fácil en Java. Tiene todas las herramientas para recopilar y manipular sus datos sin tener que escribir sus propios algoritmos de clasificación. Java Collections Framework tiene una estructura de datos que debería funcionar para prácticamente cualquier cosa que necesite hacer. ¿Quiere mantener una lista a la que pueda seguir agregando fácilmente? ¿Quieres encontrar algo por nombre? ¿Quieres crear una lista que elimine automáticamente todos los duplicados? ¿Ordenar a tus compañeros de trabajo por el número de veces que te han apuñalado por la espalda?
+**Ordenar es muy fácil en Java**. Tiene todas las herramientas para recopilar y manipular sus datos sin tener que escribir sus propios algoritmos de clasificación. **Java Collections Framework** tiene una estructura de datos que debería funcionar para prácticamente cualquier cosa que necesite hacer. ¿Quiere mantener una lista a la que pueda seguir agregando fácilmente? ¿Quieres encontrar algo por nombre? ¿Quieres crear una lista que elimine automáticamente todos los duplicados? ¿Ordenar a tus compañeros de trabajo por el número de veces que te han apuñalado por la espalda?
 
-“Exploración de la API, la lista y las colecciones de java.util”
-
-“Genéricos significa más seguridad tipográfica”
-
-“Revisando el método sort()”
-
-“La clase Song nueva, mejorada y comparable”
-
-“Clasificación usando solo Comparadores”
-
-“Actualización del código de Jukebox con lambdas”
-
-"Usando un HashSet en lugar de ArrayList"
-
-“Lo que DEBE saber sobre TreeSet...”
-
-“Ya vimos Listas y Conjuntos, ahora usaremos un Mapa”
-
-“Finalmente, de vuelta a los genéricos”
-
-“Solución de ejercicios”
+1. “Exploración de la java.util API, List y Collections”
+2. “Generics significa más seguridad tipográfica”
+3. “Revisando el método `sort()`”
+4. “La new, improved, comparable Song class”
+5. “Ordenando usando solo Comparators”
+6. “Actualización del código de Jukebox con lambdas”
+7. "Usando un HashSet en lugar de ArrayList"
+8. “Lo que DEBE saber sobre TreeSet...”
+9. “Ya vimos List y Sets, ahora usaremos un Map”
+10. “Finalmente, de vuelta a los Generics”
+11. “Solución de ejercicios”
 
 ### 12. Capítulo 12
 
-¿Qué pasaría si... no necesitaras decirle a la computadora CÓMO hacer algo? En este capítulo veremos la API de Streams. Verá lo útiles que pueden ser las expresiones lambda cuando utilice secuencias y aprenderá a utilizar la API de secuencias para consultar y transformar los datos de una colección.
+**¿Qué pasaría si... no necesitaras decirle a la computadora CÓMO hacer algo?** En este capítulo veremos la **API de Streams**. Verá lo útiles que pueden ser las expresiones lambda cuando utilice streams y aprenderá a utilizar la API de Streams para consultar y transformar los datos de una colección.
 
-“Dile a la computadora QUÉ quieres”
-
-“Cuando los bucles for van mal”
-
-“Presentamos la API de secuencias”
-
-"Obtener un resultado de un Stream"
-
-“Directrices para trabajar con flujos”
-
-“Hola Lambda, mi (no tan) vieja amiga”
-
-“Detección de interfaces funcionales”
-
-“Desafío de Lou #1: Encuentra todas las canciones de “rock””
-
-“Desafío de Lou #2: Enumerar todos los géneros”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “Dile a la computadora QUÉ quieres”
+2. “Cuando los bucles for van mal”
+3. “Presentamos la API de Streams”
+4. "Obtener un resultado de un Stream"
+5. “Directrices para trabajar con Streams”
+6. “Hola Lambda, mi (no tan) vieja amiga”
+7. “Detección de interfaces funcionales”
+8. “Desafío de Lou #1: Encuentra todas las canciones de “rock””
+9. “Desafío de Lou #2: Enumerar todos los géneros”
+10. "Ejercicio"
+11. “Soluciones de ejercicio”
 
 ### 13. Capítulo 13
 
-Estas cosas pasan. El archivo no está allí. El servidor está caído. Por muy buen programador que seas, no puedes controlarlo todo. Cuando escribe un método arriesgado, necesita un código para manejar las cosas malas que pueden suceder. Pero, ¿cómo saber cuándo un método es riesgoso? ¿Dónde pones el código para manejar la situación excepcional ? En este capítulo, vamos a construir un reproductor de música MIDI que use la arriesgada API de JavaSound, así que será mejor que lo averigüemos.
+**Estas cosas pasan**. El archivo no está allí. El servidor está caído. Por muy buen programador que seas, no puedes controlarlo todo. Cuando escribe un método arriesgado, necesita un código para manejar las cosas malas que pueden suceder. Pero, ¿cómo saber cuándo un método es riesgoso? ¿Dónde pones el código para manejar la situación excepcional? En este capítulo, vamos a construir un reproductor de música MIDI que use la arriesgada API de JavaSound, así que será mejor que lo averigüemos.
 
-“Hagamos una máquina de música”
-
-“Primero necesitamos un Secuenciador”
-
-“Una excepción es un objeto... de tipo Excepción”
-
-“Control de flujo en bloques try/catch”
-
-"¿Mencionamos que un método puede lanzar más de una excepción?"
-
-"Múltiples bloques de captura deben ordenarse de menor a mayor"
-
-“Agacharse (declarando) solo retrasa lo inevitable”
-
-“Cocina de código”
-
-“Versión 1: Tu primera aplicación de reproductor de sonido”
-
-"Versión 2: uso de argumentos de línea de comandos para experimentar con sonidos"
-
-"Ejercicio"
-
-“Solución de ejercicios”
+1. “Hagamos una máquina de música”
+2. “Primero necesitamos un Secuenciador”
+3. “Una excepción es un objeto... de tipo Excepción”
+4. “Control de flujo en bloques try/catch”
+5. "¿Mencionamos que un método puede lanzar más de una excepción?"
+6. "Múltiples bloques de captura deben ordenarse de menor a mayor"
+7. “Ducking (by declaring) solo retrasa lo inevitable”
+8. “Code Kitchen”
+9. “Versión 1: Tu primera aplicación de reproductor de sonido”
+10. "Versión 2: uso de argumentos de línea de comandos para experimentar con sonidos"
+11. "Ejercicio"
+12. “Solución de ejercicios”
 
 ### 14. capitulo 14
 
-Acéptalo, necesitas hacer GUI. Incluso si cree que por el resto de su vida escribirá solo código del lado del servidor, tarde o temprano necesitará escribir herramientas y querrá una interfaz gráfica. Dedicaremos dos capítulos a las GUI y aprenderemos más características del lenguaje, incluido el manejo de eventos y las clases internas. Pondremos un botón en la pantalla, pintaremos en la pantalla, mostraremos una imagen JPEG e incluso haremos algo de animación.
+**Acéptalo, necesitas hacer GUI**. Incluso si cree que por el resto de su vida escribirá solo código del lado del servidor, tarde o temprano necesitará escribir herramientas y querrá una interfaz gráfica. Dedicaremos dos capítulos a las GUI y aprenderemos más características del lenguaje, incluido el manejo de eventos y las clases internas. Pondremos un botón en la pantalla, pintaremos en la pantalla, mostraremos una imagen JPEG e incluso haremos algo de animación.
 
-“Todo comienza con una ventana”
-
-"Obtener un evento de usuario"
-
-“Oyentes, fuentes y eventos”
-
-"Haz tu propio widget de dibujo"
-
-“Cosas divertidas para hacer en paintComponent()”
-
-“Diseños GUI: poner más de un widget en un marco”
-
-“¡La clase interna al rescate!”
-
-“¡Lambdas al rescate! (de nuevo)"
-
-“Usando una clase interna para la animación”
-
-“Una forma más fácil de hacer mensajes/eventos”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “Todo comienza con una ventana”
+2. "Obtener un evento de usuario"
+3. “Listeners, Sources y Events”
+4. "Haz tu propio widget de dibujo"
+5. “Cosas divertidas para hacer en paintComponent()”
+6. “Diseños GUI: poner más de un widget en un marco”
+7. “Inner class al rescate!”
+8. “¡Lambdas al rescate! (de nuevo)"
+9. “Usando una Inner class para la animación”
+10. “Una forma más fácil de hacer messages/events”
+11. "Ejercicio"
+12. “Soluciones de ejercicio”
 
 ### 15. Capítulo 15
 
-Columpiarse es fácil. A menos que realmente te importe dónde va todo. El código swing parece fácil, pero luego compílelo, ejecútelo, mírelo y piense: "Oye, se supone que eso no debe ir allí". Lo que facilita la codificación es lo que dificulta su control : el Administrador de diseño. Pero con un poco de trabajo, puede hacer que los administradores de diseño se sometan a su voluntad. En este capítulo, trabajaremos en nuestro Swing y aprenderemos más sobre los widgets.
+**Swing es fácil**. A menos que realmente te importe dónde va todo. El código swing parece fácil, pero luego compílelo, ejecútelo, mírelo y piense: "Oye, se supone que eso no debe ir allí". Lo que facilita la codificación es lo que dificulta su control: el **Layout Manager**. Pero con un poco de trabajo, puede hacer que los administradores de diseño se sometan a su voluntad. En este capítulo, trabajaremos en nuestro Swing y aprenderemos más sobre los widgets.
 
-“Componentes de columpio”
-
-“Administradores de diseño”
-
-“Los tres grandes administradores de diseño: borde, flujo y cuadro”
-
-“Jugando con componentes Swing”
-
-“Cocina de código”
-
-“Haciendo el BeatBox”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “Swing components”
+2. “Layout Managers”
+3. “Los tres grandes layout managers: border, flow y box”
+4. “Jugando con Swing components”
+5. “Code Kitchen”
+6. “Haciendo the BeatBox”
+7. "Ejercicio"
+8. “Soluciones de ejercicio”
 
 ### 16. capitulo 16
 
-Los objetos se pueden aplanar e inflar. Los objetos tienen estado y comportamiento. El comportamiento vive en la clase, pero el estado vive dentro de cada objeto individual. Si su programa necesita guardar el estado, puede hacerlo de la manera difícil , interrogando a cada objeto, escribiendo minuciosamente el valor de cada variable de instancia. O bien, puede hacerlo de la manera fácil OO : simplemente liofiliza el objeto (lo serializa) y lo reconstituye (deserializa) para recuperarlo.
+**Los objetos se pueden aplanar e inflar**. Los objetos tienen estado y comportamiento. ***El comportamiento vive en la clase, pero el estado vive dentro de cada objeto individual***. Si su programa necesita guardar el estado, puede hacerlo de la manera difícil, interrogando a cada objeto, escribiendo minuciosamente el valor de cada variable de instancia. O bien, **puede hacerlo de la manera fácil OO**: simplemente liofiliza(freeze-dry) el objeto (lo serializa) y lo reconstituye (deserializa) para recuperarlo.
 
-“Escribir un objeto serializado en un archivo”
-
-“Si quieres que tu clase sea serializable, implementa Serializable ”
-
-“Deserialización: restauración de un objeto”
-
-"ID de versión: un gran problema de serialización"
-
-“Escribir una cadena en un archivo de texto”
-
-“Lectura de un archivo de texto”
-
-"Quiz Card Player (esquema del código)"
-
-"Ruta, rutas y archivos (jugando con directorios)"
-
-“Finalmente, una mirada más cercana a finally”
-
-“Guardar un patrón de BeatBox”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “Escribir un objeto serializado en un archivo”
+2. “Si quieres que tu clase sea serializable, implementa Serializable”
+3. “Deserialization: restauración de un objeto”
+4. “Version ID: un gran problema de serialización"
+5. “Escribir una cadena en un archivo de texto”
+6. “Lectura de un archivo de texto”
+7. "Quiz Card Player (esquema del código)"
+8. “Path, Paths, and Files(jugando con directorios)"
+9. “Finalmente, una mirada más cercana a `finally`”
+10. “Guardar un patrón de BeatBox”
+11. "Ejercicio"
+12. “Soluciones de ejercicio”
 
 ### 17. capitulo 17
 
-Conéctate con el mundo exterior. Es fácil. Todos los detalles de red de bajo nivel están a cargo de las clases en la biblioteca java.net. Una de las mejores características de Java es que el envío y la recepción de datos a través de una red es realmente solo E/S con un flujo de conexión ligeramente diferente al final de la cadena. En este capítulo crearemos sockets de cliente. Haremos sockets de servidor. Haremos clientes y servidores. Antes de terminar el capítulo, tendrá un cliente de chat multiproceso completamente funcional. ¿ Acabamos de decir multihilo?
+**Conéctate con el mundo exterior**. Es fácil. Todos los detalles de red de bajo nivel están a cargo de las clases en la java.net library. Una de las mejores características de Java es que el envío y la recepción de datos a través de una red es realmente solo E/S con un flujo de conexión ligeramente diferente al final de la cadena. En este capítulo crearemos sockets de cliente. Haremos sockets de servidor. Haremos clientes y servidores. Antes de terminar el capítulo, tendrá un cliente de chat multiproceso completamente funcional. ¿Acabamos de decir multihilo?
 
-“Conectar, enviar y recibir”
-
-“El cliente de consejos diarios”
-
-"Escribir una aplicación de servidor simple"
-
-"Java tiene múltiples subprocesos pero solo una clase de subproceso"
-
-“Los tres estados de un hilo nuevo”
-
-“Poniendo un hilo a dormir”
-
-“Haciendo y comenzando dos hilos (¡o más!)”
-
-“Hora de cierre en el grupo de hilos”
-
-“Nuevo y mejorado SimpleChatClient”
-
-"Ejercicio"
-
-“Soluciones de ejercicio”
+1. “Conectar, enviar y recibir”
+2. “El DailyAdviceClient”
+3. "Escribir una aplicación de servidor simple"
+4. "Java tiene múltiples threads pero solo una clase Thread"
+5. “Los three states de un new thread”
+6. “Poniendo un thread a dormir”
+7. “Haciendo y comenzando dos hilos (¡o más!)”
+8. “Hora de cierre en el grupo de hilos”
+9. “New y improved SimpleChatClient”
+10. "Ejercicio"
+11. “Soluciones de ejercicio”
 
 ### 18. capitulo 18
 
-Hacer dos o más cosas a la vez es difícil. Escribir código multiproceso es fácil. Escribir código multiproceso que funcione de la manera esperada puede ser mucho más difícil. En este capítulo final, le mostraremos algunas de las cosas que pueden salir mal cuando dos o más subprocesos funcionan al mismo tiempo. Aprenderá acerca de algunas de las herramientas en java.util.concurrent que pueden ayudarlo a escribir código multiproceso que funcione correctamente. Aprenderá a crear objetos inmutables (objetos que no cambian) que son seguros para que los usen varios subprocesos. Al final del capítulo, tendrá muchas herramientas diferentes en su conjunto de herramientas para trabajar con concurrencia.
+**Hacer dos o más cosas a la vez es difícil**. Escribir código multiproceso es fácil. Escribir código multiproceso que funcione de la manera esperada puede ser mucho más difícil. En este capítulo final, le mostraremos algunas de las cosas que pueden salir mal cuando dos o más subprocesos funcionan al mismo tiempo. Aprenderá acerca de algunas de las herramientas en java.util.concurrent que pueden ayudarlo a escribir código multiproceso que funcione correctamente. Aprenderá a crear objetos inmutables (objetos que no cambian) que son seguros para que los usen varios subprocesos. Al final del capítulo, tendrá muchas herramientas diferentes en su conjunto de herramientas para trabajar con concurrencia.
 
-“El problema de Ryan y Monica, en código”
-
-“Usando el candado de un objeto”
-
-“El temido problema de “Actualización Perdida””
-
-“Haz que el método increment() sea atómico. ¡Sincronízalo!”
-
-“Deadlock, un lado mortal de la sincronización”
-
-“Comparar e intercambiar con variables atómicas”
-
-“Usando objetos inmutables”
-
-“Más problemas con los datos compartidos”
-
-"Usar una estructura de datos segura para subprocesos"
-
-"Ejercicio"
-
-“Solución de ejercicios”
+1. “El problema de Ryan y Monica, en código”
+2. “Usando el object’s lock”
+3. “El temido problema “Lost Update” ”
+4. “Haz que el método increment() sea atómico. ¡Sincronízalo!”
+5. “Deadlock, un lado mortal de la sincronización”
+6. “Comparar e intercambiar con variables atómicas”
+7. “Usando objetos inmutables”
+8. “Más problemas con los datos compartidos”
+9. "Usar una estructura de datos segura para subprocesos"
+10. "Ejercicio"
+11. “Solución de ejercicios”
 
 ### 19. Apéndice A
 
-Código Final Cocina. Todo el código para el beat box de chat cliente-servidor completo. Tu oportunidad de ser una estrella de rock.
+**Final Code Kitchen.** Todo el código para el beat box de chat cliente-servidor completo. Tu oportunidad de ser una estrella de rock.
 
-“Programa cliente final de BeatBox”
-
-“Programa de servidor BeatBox final”
+1. “Programa cliente final de BeatBox”
+2. “Programa de servidor BeatBox final”
 
 ### 20. apéndice B
 
 Los diez temas principales que no llegaron al resto del libro. Todavía no podemos enviarte al mundo. Tenemos algunas cosas más para ti, pero este es el final del libro. Y esta vez lo decimos en serio.
 
-“N.º 11 JShell (reemplazo de Java)”
-
-“Paquetes #10”
-
-“#9 Inmutabilidad en cadenas y envoltorios”
-
-“#8 Niveles de acceso y modificadores de acceso (quién ve qué)”
-
-“#7 Varargs”
-
-“#6 Anotaciones”
-
-“#5 Lambdas y Mapas”
-
-“#4 corrientes paralelas”
-
-“#3 Enumeraciones (también llamadas tipos enumerados o enumeraciones)”
-
-“#2 Inferencia de tipo de variable local (var)”
-
-“Registros #1”
+1. “#11 JShell (Java REPL)”
+2. “#10 Packages”
+3. “#9 Immutability in Strings and Wrappers”
+4. “#8 Access levels and access modifiers (who sees what)”
+5. “#7 Varargs”
+6. “#6 Annotations”
+7. “#5 Lambdas and Maps”
+8. “#4 Parallel Streams”
+9. “#3 Enumerations (also called enumerated types or enums)”
+10. “#2 Local Variable Type Inference (var)”
+11. “#1 Records”
 
