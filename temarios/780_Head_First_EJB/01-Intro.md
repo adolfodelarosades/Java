@@ -125,6 +125,29 @@ Enterprise javabeans también son componentes reutilizables, pero ahí es donde 
 Para el resto del libro, cuando decimos bean, nos referimos al bean empresarial.
 <hr>
 
+### ¿Cómo funciona todo?
+
+**Sus beans se ejecutan bajo el control (y protección) del servidor EJB.**
+
+**El servidor interviene en medio de cada llamada de método de un cliente a un bean e inserta los "servicios" como seguridad, transacciones y persistencia.**
+
+Sus beans viven y se ejecutan en el servidor, y el servidor hace prácticamente todo para administrar transacciones, seguridad, persistencia e incluso la vida o muerte de sus objetos. Y hace todo esto interviniendo cada vez que un cliente realiza una solicitud (es decir, llama a un método comercial en el bean). El servidor salta y comienza a hacer preguntas como:
+
+*"¿Este cliente tiene autorización de seguridad para llamar a este método?"* o
+
+*"¿Es necesario que este bean se ejecute como parte de una transacción más grande?"* o
+
+*"¿Este bean necesita actualizarse con datos de la base de datos antes de ejecutar ese método para el cliente?"*
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ff31ceda-0629-4cbb-80e0-dad966f92da5)
+
+### Detras de Escena...
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bbfbc533-88bd-4d59-807c-f7bc4f509ed8)
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/8df29ecd-898d-4e25-9c8e-b5f46e7d458d)
+
+
 
 
 
