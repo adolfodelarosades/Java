@@ -65,6 +65,7 @@ Puede cambiar la forma en que un bean usa los servicios subyacentes simplemente 
 * *Personalización del tiempo de implementación*
 
 <hr>
+
 **NOTA**
 
 Alguien ya escribió y probó todo esto, así que no tienes que hacerlo tú.
@@ -87,6 +88,7 @@ En los viejos tiempos, cada proveedor de servidores de aplicaciones tenía su pr
 Uno de los beneficios cruciales de EJB es WODA. Y ahora los vendedores tienen que competir no solo para venderte en primer lugar, sino para *mantenerte*. Porque como todo el mundo sabe, puedes empacar tus beans e irte a otra parte.
 
 <hr>
+
 **NO HAY PREGUNTAS TONTAS**
 
 ***P: ¿Cuál es la diferencia entre EJB y J2EE?***
