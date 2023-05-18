@@ -147,6 +147,207 @@ Sus beans viven y se ejecutan en el servidor, y el servidor hace prácticamente 
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/8df29ecd-898d-4e25-9c8e-b5f46e7d458d)
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a068415e-88ed-41bb-ad75-d1a31e80bbf9)
+
+### Los Beans vienen en tres sabores.
+
+**Entity(Entidad)**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/aa03533c-7040-4421-84de-3c3a8c6c0f3b)
+
+Utilice un **entity bean** para representar una *cosa* en un almacén persistente. Eso casi siempre significa algo en una base de datos, donde una instancia de un bean de entidad representa **una fila en una tabla** (aunque si la base de datos está normalizada, el bean podría extraerse de filas en varias tablas). Un ejemplo típico de entidad es Customer, donde una entidad podría representar a **Bo Olean (ID# 343)** y otra entidad podría representar a **Trixia Lin (ID# 870)**.
+
+**Message-driven(Impulsado por mensajes)**
+
+Utilice un **message-driven bean(bean controlado por mensajes)** solo cuando necesite un JMS consumer. En otras palabras, un bean que **puede escuchar mensajes de un servicio de mensajería JMS(JMS messaging service)**. Los clientes nunca llaman directamente a beans controlados por mensajes; para que un bean controlado por mensajes haga algo, un cliente debe enviar un mensaje a un servicio de mensajería. Eso significa que un bean controlado por mensajes no tiene EJBObject porque el servidor recibe las solicitudes del cliente directamente de un servicio de mensajería en lugar de una llamada del cliente al bean. Un bean controlado por mensajes típico podría ser un suscriptor NewCustomerNotification.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/720ba6b5-ecae-45ca-8195-068ca6b1e7d4)
+
+**Session(Sesión)**
+
+Use un bean de sesión para... todo lo demás. Casi cualquier tipo de servicio de back-end puede (y a menudo debe) comenzar con un bean de sesión. Donde un bean de entidad representa una cosa, un bean de sesión típicamente representa un proceso. Para decirlo de otra manera, cuando piense en beans de entidad, piense en sustantivo, y cuando piense en beans de sesión, piense en verbo. Una sesión de compras es un ejemplo típico de un bean de sesión, mientras que un sistema de procesamiento de tarjetas de crédito podría ser otro bean de sesión.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/4e9107ad-d29c-4692-914e-59158a7af68c)
+
+### Los beans de sesión pueden ser sin estado o con estado
+
+AQUIIIIIIIIIIIIIII!!!!!
+
+
+Repasaremos todo esto en detalle en el capítulo Session Bean. Por ahora, debe saber que los beans de sesión se pueden marcar (en el momento de la implementación) como stateless o stateful .
+
+Un bean con estado puede recordar el estado conversacional entre llamadas a métodos, mientras que un bean sin estado no recordará nada sobre el cliente entre invocaciones a métodos.
+
+La frase "estado conversacional" en realidad significa "estado específico del cliente", y un ejemplo típico es un carrito de compras. No sería divertido si usted (el comprador) tiene un carrito, pone algo, pero cuando va a poner la segunda cosa, la primera desaparece del carrito. No demasiado fácil de usar. Por lo tanto, un buen carrito de compras mantendrá el estado de comprador del cliente (es decir, los artículos en el carrito) mientras la sesión de compras esté activa . (Explicaremos lo que queremos decir con vivo en el capítulo Session Bean).
+
+Los beans sin estado simplemente se olvidan del cliente una vez que se completa la llamada al método. Entonces, los beans sin estado son para servicios que no requieren una conversación continua entre el cliente y el servicio. Eso no significa que el cliente no seguirá llamando a métodos en el bean sin estado, pero sí significa que el cliente no puede depender de que el bean recuerde nada sobre las llamadas a métodos anteriores.
+
+¡MÍRALO!
+¡Los beans sin estado PUEDEN tener estado! (Simplemente no es un estado específico del cliente).
+
+Algunas personas piensan que “sin estado” significa “sin estado”. Un bean sin estado puede tener variables de instancia como cualquier otro objeto; simplemente no puede usarlos para mantener valores específicos para un cliente en particular.
+
+NO HAY PREGUNTAS TONTAS
+
+P:
+
+P: Escuché que solo los beans de sesión sin estado son escalables y que nadie debería usar beans de sesión completos . ¿Es eso cierto?
+
+A:
+
+R: No, no completamente. Escierto que los beans de sesión sin estado generalmente son más escalables que los beans de sesión con estado debido a la forma en que el contenedor administra los beans sin estado . Verá las razones de esto en el capítulo Session Bean.
+
+Pero... eso no significa que nunca debas usar beans con estado. Debe considerar beans con estado cuando necesite un estado conversacional, y cuando las alternativas para guardar ese estado (como usar el cliente para almacenar el estado, o usar un servlet para almacenar el estado, o usar una base de datos para almacenar el estado entre cada llamada de método del cliente ) afectan más el rendimiento que la naturaleza menos escalable de los beans de sesión con estado.
+
+HAZ QUE SE PEGUE
+Un bean de entidad ES algo. Un bean de sesión HACE algo.
+
+SACA PUNTA A TU LÁPIZ
+
+Conozca sus tipos de frijol.
+
+Mire la descripción del problema a la izquierda y coloque una marca de verificación para el tipo de bean que mejor se adapte al problema. No hay una respuesta correcta perfecta para esto... puede decidir que un tipo de bean funcionará si lo aborda de una manera, pero otro bean funcionará si resuelve el problema de una manera diferente.
+
+ 	
+Entidad
+
+Impulsado por mensajes
+
+frijol de sesión
+
+(encierre en un círculo sin estado, con estado o ambos)
+
+Reservar una entrada para un concierto de rock
+
+
+
+
+
+
+
+con estado
+
+apátrida
+
+Una cuenta bancaria
+
+
+
+
+
+
+
+con estado
+
+apátrida
+
+Búsqueda de una base de datos de productos
+
+
+
+
+
+
+
+con estado
+
+apátrida
+
+emparejamientos de servicios de citas
+
+
+
+
+
+
+
+con estado
+
+apátrida
+
+Recibir los informes de gastos presentados y enviarlos para su aprobación
+
+
+
+
+
+
+
+con estado
+
+apátrida
+
+Diagnóstico experto en línea: usted describe un síntoma y el sistema lo ayuda a determinar la causa
+
+
+
+
+
+
+
+con estado
+
+apátrida
+
+Los libros en una biblioteca
+
+
+
+
+
+
+
+con estado
+
+apátrida
+
+ESCUCHADO EN EL TIKUIBEAN LOUNGE
+
+FRIJOL DE SESIÓN: Estoy tan cansada de hacer todo el trabajo y no obtener nada de la gloria.
+
+CANTINERO:  ¿Qué quiere decir con "nada de la gloria"? ¿No eres el único bean que ha requerido la especificación desde el principio? ¿Desde EJB 1.0?
+
+BEAN DE SESIÓN:  ESO me hace mucho bien. De lo único que todos quieren hablar ahora es de beans de entidad. Beans de entidad, beans de entidad, beans de entidad. No es que no me gusten, algunos de mis mejores amigos son frijoles de entidad, pero me gustaría que la gente hablara sobre lo que hago.
+
+CANTINERO:  Ahora que lo menciona, los beans de entidad son principalmente de lo que habla la gente aquí en el bar, con las grandes mejoras de CMP en EJB 2.0.
+
+SESSION BEAN:  Y eso es otra cosa... ¿Cuál es el Gran Trato con CMP? ¡Simplemente va a una base de datos! En serio, dime ¿QUÉ tiene eso de especial? “¡Ooohhh mira! ¡Actualizó un registro!” Por favor.
+
+CANTINERO:  Sí, pero a los programadores de aquí parece gustarles no tener que hacer todo el código de la base de datos ahora. Y hay algo acerca de las relaciones persistentes, simplemente no puedo recordar...
+
+FRIJOL DE SESIÓN: CMR. Relaciones gestionadas por contenedores. Vale, incluso yo tengo que admitir que CMR facilita mucho las cosas a los desarrolladores. Pero eso no es lo que me molesta: SÉ que a todos les gustan los beans de entidad, pero ¿qué hay de MÍ? ¿Qué pasa con todo lo que hago? Los beans de entidad representan cosas en el sistema, pero sin mí, esas cosas no sirven de mucho. Tal vez una entidad tenga algunos getters y setters y algunas consultas, seguro, pero no mucha lógica empresarial. Para usar beans de entidad en una aplicación, TIENE que usar beans de sesión para realizar el procesamiento comercial. Por ejemplo, un bean de entidad podría representar las bebidas que vende aquí y los clientes individuales, pero ¿de qué sirven las bebidas y los clientes sin un cantinero? ¡Necesitas a alguien que realmente reúna las entidades (las bebidas y los clientes) de una manera significativa! Y eso es lo que hacen los beans de sesión. Hacemos los tratos. Trabajamos con el cliente para hacer algo, mientras que las entidades simplemente se sientan allí esperando que los beans de sesión los usen. Oye, ¿puedo conseguir otro de esos? Y ni siquiera me hagas empezar con beans controlados por mensajes...
+
+[Continuará.]
+
+PUNTA DE BALA
+
+EJB es un modelo de desarrollo basado en componentes.
+
+Los componentes son fragmentos reutilizables de funcionalidad que puede modificar para diferentes aplicaciones sin tocar el código fuente de Java.
+
+Un beneficio de EJB es WODA—Write-Once-Deploy-Anywhere. Puede implementar sus componentes EJB 2.0 en cualquier servidor de aplicaciones que sea compatible con EJB 2.0.
+
+WODA significa que debe aprender solo una API estándar en lugar de las API específicas del proveedor.
+
+La arquitectura EJB usa un EJBObject para interceptar llamadas de clientes a un bean. Esto le da al servidor/contenedor la oportunidad de intervenir y agregar servicios.
+
+Los servicios EJB incluyen transacciones, seguridad, gestión de recursos, redes y persistencia.
+
+Los beans vienen en tres sabores: Entidad, Sesión y Mensaje.
+
+Los beans de entidad representan una cosa identificable de forma única en un almacén persistente; por lo general, eso significa una fila en una tabla de base de datos.
+
+Los beans controlados por mensajes son consumidores de servicios de mensajería JMS.
+
+Los beans de sesión son... todo lo demás .
+
+Los beans de sesión pueden ser con estado o sin estado.
+
+Los beans con estado pueden recordar el "estado conversacional" con un cliente, mientras que los beans sin estado no pueden.
+
+
+
+
 
 
 
