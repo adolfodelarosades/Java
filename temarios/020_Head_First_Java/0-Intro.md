@@ -164,43 +164,43 @@ Recorta esto y pégalo en tu refrigerador.
 
 <hr>
 
-* 1. Desacelerar. Cuanto más entiendas, menos tendrás que memorizar.
+1. Desacelerar. Cuanto más entiendas, menos tendrás que memorizar.
 
    No se limite a leer. Para y piensa. Cuando el libro te haga una pregunta, no saltes a la respuesta. Imagina que alguien realmente está haciendo la pregunta. Cuanto más profundamente obligues a tu cerebro a pensar, más posibilidades tendrás de aprender y recordar.
 
-* 2. Haz los ejercicios. Escriba sus propias notas.
+2. Haz los ejercicios. Escriba sus propias notas.
 
    Nosotros los pusimos, pero si los hiciéramos por ti, sería como tener a otra persona haciendo tus entrenamientos por ti. Y no se limite a mirar los ejercicios. Usa un lápiz. ***Hay mucha evidencia de que la actividad física durante el aprendizaje puede aumentar el aprendizaje***.
 
-* 3. Lea el "No hay preguntas tontas"
+3. Lea el "No hay preguntas tontas"
 
    Eso significa que todos ellos. No son barras laterales opcionales, ¡son parte del contenido central! A veces las preguntas son más útiles que las respuestas.
 
-* 4. No haga toda su lectura en un solo lugar.
+4. No haga toda su lectura en un solo lugar.
 
    Levántate, estírate, muévete, cambia de silla, cambia de habitación. Ayudará a tu cerebro a sentir algo y evitará que tu aprendizaje esté demasiado conectado a un lugar en particular.
 
-* 5. Haz que esto sea lo último que leas antes de acostarte. O al menos la última cosa desafiante .
+5. Haz que esto sea lo último que leas antes de acostarte. O al menos la última cosa desafiante .
 
    Parte del aprendizaje (especialmente la transferencia a la memoria a largo plazo) ocurre después de dejar el libro. Tu cerebro necesita tiempo para hacer más procesamiento. Si agrega algo nuevo durante ese tiempo de procesamiento, parte de lo que acaba de aprender se perderá.
 
-* 6. Beber agua. Montones.
+6. Beber agua. Montones.
 
    Tu cerebro funciona mejor en un buen baño de líquido. La deshidratación (que puede ocurrir antes de sentir sed) disminuye la función cognitiva.
 
-* 7. Hable al respecto. En voz alta.
+7. Hable al respecto. En voz alta.
 
    Hablar activa una parte diferente del cerebro. Si está tratando de entender algo o aumentar sus posibilidades de recordarlo más tarde, dígalo en voz alta. Mejor aún, trata de explicárselo en voz alta a otra persona. Aprenderá más rápidamente y es posible que descubra ideas que no sabía que existían cuando estaba leyendo al respecto.
 
-* 8. Escucha a tu cerebro.
+8. Escucha a tu cerebro.
 
    Presta atención a si tu cerebro se está sobrecargando. Si comienza a rozar la superficie u olvida lo que acaba de leer, es hora de un descanso. Una vez que pase un cierto punto, no aprenderá más rápido tratando de empujar más, e incluso podría dañar el proceso.
 
-* 9. ¡Sentir algo!
+9. ¡Sentir algo!
 
    Su cerebro necesita saber que esto importa. Involúcrese con las historias. Inventa tus propios pies de foto para las fotos. Quejarse por un mal chiste sigue siendo mejor que no sentir nada.
 
-* 10. Escriba y ejecute el código.
+10. Escriba y ejecute el código.
 
    Escriba y ejecute los ejemplos de código. Luego puede experimentar cambiando y mejorando el código (o rompiéndolo, que a veces es la mejor manera de descubrir qué está sucediendo realmente). La mayor parte del código, especialmente los ejemplos largos y Ready-Bake Code, están en https://oreil.ly/hfJava_3e_examples .
 
