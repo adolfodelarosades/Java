@@ -24,7 +24,7 @@ Si ha leído un libro Head First, sabe qué esperar: un formato visualmente rico
 
 ## Tabla de contenido (lo real)
 
-### 0. Cómo usar este libro: Introducción
+### [0. Cómo usar este libro: Introducción](https://github.com/adolfodelarosades/Java/blob/master/temarios/020_Head_First_Java/0-Intro.md)
 
 **Tu cerebro en Java**. Aquí estás tratando de aprender algo, mientras que aquí tu cerebro te está haciendo un favor al asegurarse de que el aprendizaje no se quede estancado. Tu cerebro está pensando: "Mejor deja espacio para cosas más importantes, como qué animales salvajes evitar y si hacer snowboard desnudo es una mala idea". Entonces, ¿cómo engañas a tu cerebro para que piense que tu vida depende de conocer Java?
 
@@ -36,7 +36,7 @@ Si ha leído un libro Head First, sabe qué esperar: un formato visualmente rico
 6. “Lo que necesitas para este libro:”
 7. “Cosas de última hora que debes saber:”
 
-### 1. Capítulo 1
+### [1. Capítulo 1](https://github.com/adolfodelarosades/Java/blob/master/temarios/020_Head_First_Java/01.md)
 
 **Java te lleva a nuevos lugares**. Desde su humilde lanzamiento al público como la (débil) versión 1.02, Java sedujo a los programadores con su sintaxis amigable, funciones orientadas a objetos, administración de memoria y, lo mejor de todo, la promesa de portabilidad. Nos sumergiremos rápidamente y escribiremos un código, lo compilaremos y lo ejecutaremos. Estamos hablando de sintaxis, bucles, bifurcaciones y lo que hace que Java sea tan genial. Buceo en.
 
