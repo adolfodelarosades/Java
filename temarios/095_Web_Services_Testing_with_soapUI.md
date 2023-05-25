@@ -50,13 +50,14 @@ Al final, habrá aprendido a probar los aspectos funcionales y no funcionales de
       * Piracy
       * Questions
 ### 1. Web Services Testing and soapUI
-   * SOA and web services
-      * Service-oriented solutions
-         * Case study
-         * Building blocks of SOA
-            * Web services
-            * Mediation
-            * Composition
+
+* SOA and web services
+   * Service-oriented solutions
+      * Case study
+      * Building blocks of SOA
+         * Web services
+         * Mediation
+         * Composition
 * Simple Object Access Protocol
 * Alternatives to SOAP
    * REST
@@ -106,104 +107,114 @@ Al final, habrá aprendido a probar los aspectos funcionales y no funcionales de
 ## 3. First Steps with soapUI and Projects
 
 * Understanding the web services definition
-Schema
-portType
-binding
-Service
-Creating a soapUI project
-Invoking the guest management web service
-A detailed look at SOAP requests and responses
-Generating SOAP Faults
-Summary
-4. Working with Your First TestSuite
-A sample test scenario
-Creating a TestSuite
-Adding TestCases
-addRoom TestCase
-getRoomDetails TestCase
-deleteRoom TestCase
-Running the first TestSuite
-Adding test assertions
-Not SOAP Fault assertion
-XPath Match assertion
-The Contains assertion
-Adding properties to soapUI tests
-Reading property values from a file
-Transferring property values between TestSteps
-Summary
-5. Load and Performance Testing with soapUI
-Non-functional testing of web services
-Performance testing
-Planning for web service performance testing
-Using soapUI for performance testing
-Working with load tests in soapUI
-Limit of a load test
-Threads in a soapUI load test
-Load test strategies of soapUI
-Simple load strategy
-Burst load strategy
-Thread load strategy
-Variance strategy
-A closer look at the load test report and statistics of soapUI
-Using load test assertions in soapUI
-The Max Errors assertion
-The Step Average assertion
-Step TPS assertion
-The Step Maximum assertion
-The Step Status assertion
-LoadTest options
-Summary
-6. Web Service Simulation with soapUI
-Mocking in software testing
-Mocking in web services testing
-Mock services and contract-first web service development
-Simulating services that are not accessible
-Dealing with test environmental restrictions
-Mock services with soapUI
-The structure of soapUI MockService
-MockService details
-MockOperation details
-Dispatching styles of MockOperation
-MockResponse details
-soapUI mock services in action
-Static responses – the basic scenario
-Service chaining
-Content-based routing
-Message transformation
-Using dynamic responses
-Summary
-7. Advanced Functional Testing with soapUI
-Introduction to web services extensions
-What is WS-Addressing
-Endpoint references
-Message addressing properties
-What is WS-Security
-WS-Policy
-WS-SecurityPolicy
-WS-Trust
-WS-SecureConversation
-Configuring Apache Axis2 for WS-Addressing and WS-Security
-WS-Addressing in Apache Axis2
-WS-Security in Apache Axis2
-Testing the WS-Addressing with soapUI
+   * Schema
+   * portType
+   * binding
+   * Service
+* Creating a soapUI project
+* Invoking the guest management web service
+* A detailed look at SOAP requests and responses
+* Generating SOAP Faults
+* Summary
+
+## 4. Working with Your First TestSuite
+
+* A sample test scenario
+* Creating a TestSuite
+   * Adding TestCases
+      * addRoom TestCase
+      * getRoomDetails TestCase
+      * deleteRoom TestCase
+* Running the first TestSuite
+   * Adding test assertions
+      * Not SOAP Fault assertion
+      * XPath Match assertion
+      * The Contains assertion
+* Adding properties to soapUI tests
+   * Reading property values from a file
+   * Transferring property values between TestSteps
+* Summary
+
+## 5. Load and Performance Testing with soapUI
+
+* Non-functional testing of web services
+   * Performance testing
+* Planning for web service performance testing
+* Using soapUI for performance testing
+* Working with load tests in soapUI
+   * Limit of a load test
+   * Threads in a soapUI load test
+   * Load test strategies of soapUI
+      * Simple load strategy
+      * Burst load strategy
+      * Thread load strategy
+      * Variance strategy
+   * A closer look at the load test report and statistics of soapUI
+   * Using load test assertions in soapUI
+      * The Max Errors assertion
+      * The Step Average assertion
+      * Step TPS assertion
+      * The Step Maximum assertion
+      * The Step Status assertion
+      * LoadTest options
+* Summary
+
+## 6. Web Service Simulation with soapUI
+
+* Mocking in software testing
+* Mocking in web services testing
+   * Mock services and contract-first web service development
+   * Simulating services that are not accessible
+   * Dealing with test environmental restrictions
+* Mock services with soapUI
+   * The structure of soapUI MockService
+      * MockService details
+      * MockOperation details
+      * Dispatching styles of MockOperation
+      * MockResponse details
+* soapUI mock services in action
+   * Static responses – the basic scenario
+      * Service chaining
+      * Content-based routing
+      * Message transformation
+   * Using dynamic responses
+* Summary
+
+## 7. Advanced Functional Testing with soapUI
+
+* Introduction to web services extensions
+   * What is WS-Addressing
+      * Endpoint references
+      * Message addressing properties
+   * What is WS-Security
+      * WS-Policy
+      * WS-SecurityPolicy
+      * WS-Trust
+      * WS-SecureConversation
+* Configuring Apache Axis2 for WS-Addressing and WS-Security
+   * WS-Addressing in Apache Axis2
+   * WS-Security in Apache Axis2
+   * Testing the WS-Addressing with soapUI
 Validating the WS-Addressing responses
-Testing WS-Security with soapUI
-Web service authentication
-Securing GuestManagementService
-Testing the secured GuestManagementService with soapUI
-Project level WS-Security configurations in soapUI
-Testing asymmetric binding policy with soapUI
-Asymmetric binding
-Signing SOAP messages
-Securing RoomManagementService
-Testing secured RoomManagementService with soapUI
-Outgoing WS-Security configurations
-Incoming WS-Security configurations
-Applying WS-Security configurations to the SOAP request
-Validating WS-Security responses
-Summary
-8. Getting Started with REST Testing
-Introduction to REST
+   * Testing WS-Security with soapUI
+   * Web service authentication
+      * Securing GuestManagementService
+      * Testing the secured GuestManagementService with soapUI
+   * Project level WS-Security configurations in soapUI
+* Testing asymmetric binding policy with soapUI
+   * Asymmetric binding
+      * Signing SOAP messages
+      * Securing RoomManagementService
+      * Testing secured RoomManagementService with soapUI
+         * Outgoing WS-Security configurations
+         * Incoming WS-Security configurations
+         * Applying WS-Security configurations to the SOAP request
+* Validating WS-Security responses
+* Summary
+
+## 8. Getting Started with REST Testing
+
+* Introduction to REST
 Represent everything with URIs
 Using standard HTTP methods
 Linking resources together
@@ -222,18 +233,22 @@ Matrix parameters
 Header parameters
 Functional testing of REST services
 WADL
-Summary
-9. Testing Databases with soapUI
-Testing data in isolation
+* Summary
+
+## 9. Testing Databases with soapUI
+
+* Testing data in isolation
 Setting up soapUI to connect to the database
 JDBC Request TestStep
 JDBC Request properties
 JDBC test assertions
 Stored procedures with JDBC Request TestStep
 Accessing soapUI properties from SQL query
-Summary
-10. JMS Testing with soapUI
-Introduction to JMS
+* Summary
+
+## 10. JMS Testing with soapUI
+
+* Introduction to JMS
 Setting up Apache ActiveMQ
 JMS integration in soapUI
 Working with JMS messaging in soapUI
@@ -242,8 +257,10 @@ Verifying end-to-end JMS message delivery using the sample project
 Configuring JMS in Apache Axis2
 Configuring a session in HermesJMS
 Adding a JMS endpoint in soapUI
-Summary
-11. Extending soapUI with Scripting
+* Summary
+
+## 11. Extending soapUI with Scripting
+
 Introduction to Groovy scripting language
 What is Groovy?
 HelloWorld with Groovy
@@ -259,8 +276,10 @@ Load Script at soapUI project level
 Request and response handling using Scripts
 Script assertion
 Summary
-12. Automated Testing with soapUI
-Test automation
+
+## 12. Automated Testing with soapUI
+ 
+* Test automation
 Why is test automation essential in SOA?
 Continuous Integration (CI)
 soapUI JUnit integration
@@ -268,9 +287,11 @@ soapUI command line executions
 Invoking a soapUI command line functional test runner
 Invoking test runners from the soapUI graphical user interface
 Maven soapUI plugin
-Summary
-13. Miscellaneous Topics
-soapUI IDE plugins
+* Summary
+
+## 13. Miscellaneous Topics
+
+* soapUI IDE plugins
 soapUI Eclipse plugin
 soapUI IntelliJ IDEA plug-in
 WS-I validation using soapUI
@@ -278,5 +299,6 @@ soapUI integration with external web services' frameworks
 Sending attachments with SOAP messages using soapUI
 Deploying an MTOM-enabled web service
 Using soapUI to send an attachment to the web service
-Summary
-Index
+* Summary
+
+## Index
