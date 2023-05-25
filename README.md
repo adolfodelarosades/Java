@@ -16,6 +16,10 @@ Serie de varios cursos Java.
 
 * [020 Head First Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/020_Head_First_Java.md)
 
+# Web Services
+
+* [090 Understanding Web Services: XML, WSDL, SOAP, and UDDI](https://github.com/adolfodelarosades/Java/blob/master/temarios/090_Understanding_Web_Services.md)
+
 
 # OPENWEBINARS
 
