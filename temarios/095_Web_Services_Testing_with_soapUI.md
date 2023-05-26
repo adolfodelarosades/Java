@@ -215,90 +215,90 @@ Validating the WS-Addressing responses
 ## 8. Getting Started with REST Testing
 
 * Introduction to REST
-Represent everything with URIs
-Using standard HTTP methods
-Linking resources together
-Multiple representations of resources
-Stateless communication
-Testing RESTful APIs using soapUI
-REST Services in soapUI
-Request and response representation
-Using POST or PUT requests in soapUI REST services
-Reading POST message content from a file
-Inserting the HTTP Basic Authentication header to requests
-REST parameters
-Query parameters
-Template parameters
-Matrix parameters
-Header parameters
-Functional testing of REST services
-WADL
+   * Represent everything with URIs
+   * Using standard HTTP methods
+   * Linking resources together
+   * Multiple representations of resources
+   * Stateless communication
+* Testing RESTful APIs using soapUI
+* REST Services in soapUI
+   * Request and response representation
+   * Using POST or PUT requests in soapUI REST services
+   * Reading POST message content from a file
+   * Inserting the HTTP Basic Authentication header to requests
+* REST parameters
+   * Query parameters
+   * Template parameters
+   * Matrix parameters
+   * Header parameters
+* Functional testing of REST services
+* WADL
 * Summary
 
 ## 9. Testing Databases with soapUI
 
 * Testing data in isolation
-Setting up soapUI to connect to the database
-JDBC Request TestStep
-JDBC Request properties
-JDBC test assertions
-Stored procedures with JDBC Request TestStep
-Accessing soapUI properties from SQL query
+* Setting up soapUI to connect to the database
+* JDBC Request TestStep
+   * JDBC Request properties
+* JDBC test assertions
+   * Stored procedures with JDBC Request TestStep
+   * Accessing soapUI properties from SQL query
 * Summary
 
 ## 10. JMS Testing with soapUI
 
 * Introduction to JMS
-Setting up Apache ActiveMQ
-JMS integration in soapUI
-Working with JMS messaging in soapUI
-Validating JMS responses
-Verifying end-to-end JMS message delivery using the sample project
-Configuring JMS in Apache Axis2
-Configuring a session in HermesJMS
-Adding a JMS endpoint in soapUI
+   * Setting up Apache ActiveMQ
+* JMS integration in soapUI
+   * Working with JMS messaging in soapUI
+   * Validating JMS responses
+   * Verifying end-to-end JMS message delivery using the sample project
+      * Configuring JMS in Apache Axis2
+   * Configuring a session in HermesJMS
+   * Adding a JMS endpoint in soapUI
 * Summary
 
 ## 11. Extending soapUI with Scripting
 
-Introduction to Groovy scripting language
-What is Groovy?
-HelloWorld with Groovy
-Variable and object declaration in Groovy
-Control structures in Groovy
-Class and method declarations in Groovy
-Groovy scripting in soapUI
-The context object
-The testRunner variable
-soapUI ModelItems
-Setup and TearDown scripts in soapUI
-Load Script at soapUI project level
-Request and response handling using Scripts
-Script assertion
-Summary
+* Introduction to Groovy scripting language
+   * What is Groovy?
+   * HelloWorld with Groovy
+   * Variable and object declaration in Groovy
+   * Control structures in Groovy
+   * Class and method declarations in Groovy
+* Groovy scripting in soapUI
+   * The context object
+   * The testRunner variable
+* soapUI ModelItems
+   * Setup and TearDown scripts in soapUI
+   * Load Script at soapUI project level
+* Request and response handling using Scripts
+   * Script assertion
+* Summary
 
 ## 12. Automated Testing with soapUI
  
 * Test automation
-Why is test automation essential in SOA?
-Continuous Integration (CI)
-soapUI JUnit integration
-soapUI command line executions
-Invoking a soapUI command line functional test runner
-Invoking test runners from the soapUI graphical user interface
-Maven soapUI plugin
+   * Why is test automation essential in SOA?
+   * Continuous Integration (CI)
+* soapUI JUnit integration
+* soapUI command line executions
+   * Invoking a soapUI command line functional test runner
+   * Invoking test runners from the soapUI graphical user interface
+* Maven soapUI plugin
 * Summary
 
 ## 13. Miscellaneous Topics
 
 * soapUI IDE plugins
-soapUI Eclipse plugin
-soapUI IntelliJ IDEA plug-in
-WS-I validation using soapUI
-soapUI integration with external web services' frameworks
-Sending attachments with SOAP messages using soapUI
-Deploying an MTOM-enabled web service
-Using soapUI to send an attachment to the web service
+   * soapUI Eclipse plugin
+   * soapUI IntelliJ IDEA plug-in
+* WS-I validation using soapUI
+* soapUI integration with external web services' frameworks
+* Sending attachments with SOAP messages using soapUI
+   * Deploying an MTOM-enabled web service
+   * Using soapUI to send an attachment to the web service
 * Summary
 
 ## Index
