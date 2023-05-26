@@ -28,3 +28,18 @@ El **Capítulo 5**, Pruebas de carga y rendimiento con SOAPUI, cubre los pasos q
 El **Capítulo 12**, ***Automated Testing with soapUI - Pruebas automatizadas con soapUI***, demuestra varios enfoques de pruebas automatizadas con **soapUI**. En este capítulo, analizaremos la integración de las pruebas de **soapUI** con herramientas de compilación como **Apache Maven**.
 
 El **Capítulo 13**, ***Miscellaneous Topics - Temas varios***, presenta algunas herramientas útiles integradas con **soapUI**, como la herramienta de validación **WS-I** y las utilidades proporcionadas por el framework de servicios web externos, como **Apache Axis2**. Este capítulo también demuestra el uso de **soapUI** al probar servicios mediante el envío de archivos adjuntos.
+
+## Lo que necesitas para este libro.
+
+Haremos uso de una gran cantidad de software de código abierto para ejecutar los ejemplos de código de este libro. En primer lugar, debe instalar **soapUI 4.0.1** o una versión posterior como se explica en el ***Capítulo 1, Web Services Testing and soapUI - Pruebas de servicios web y soapUI***. Necesitará **MySQL** y **Apache Axis2-1.6.1** o una versión posterior para ejecutar los servicios web de muestra. También necesitará **Apache Ant** para compilar el proyecto de servicios web de muestra. Se requieren las bibliotecas de código abierto **Apache Rampart**, **Apache Maven**, **Apache ActiveMQ** y **Apache Wink** para algunas demostraciones, como se explica en los capítulos respectivos.
+
+
+## Pra quien es este libro
+
+Si forma parte de un equipo que crea soluciones orientadas a servicios o utiliza servicios web en su proyecto, y su participación principal es probar dicha solución, entonces este libro es la referencia ideal para usted. Este libro lo ayudará a comprender los desafíos comunes de las pruebas **SOA** y cómo se puede utilizar **soapUI** de manera efectiva para probar sus aplicaciones.
+
+Este libro también sería una buena referencia para desarrolladores e ingenieros de control de calidad que investigan y evalúan varias herramientas de prueba de servicios web comerciales y de código abierto. Si es un profesional de software experimentado o un probador novato, podrá aprender rápidamente las características más importantes de **soapUI** siguiendo las sencillas instrucciones paso a paso que se proporcionan en este libro.
+
+## Descargando el código de ejemplo
+
+Puede descargar los archivos de código de ejemplo para todos los libros de Packt que haya comprado desde su cuenta en http://www.PacktPub.com . Si compró este libro en otro lugar, puede visitar http://www.PacktPub.com/support y registrarse para recibir los archivos directamente por correo electrónico.
